@@ -1,0 +1,493 @@
+19.9 (ws)
+      * moved to subversion repository
+      * moved buildsystem to CMake
+15.9 (ws)
+      * remove new Element(&Element)
+      * remove Element->clone()
+      * remove Element->_type  (type is const static)
+      * use QRegion when redrawing canvas; this results in much better
+        performance when dragging the note sheet around
+      * remove generated file "libtool" from repository
+03.09 (lv)
+      * prevent crash when first voice does not contain note, but second does
+01.09 (lv)
+      * prevent trailing newline in work-title, number and creator
+3.8 (ws)
+      * emmentaler font is now internal part of mscore: no need to 
+        install anymore
+      * switched to qt4.2
+13.4 (ws)
+      * add missing layout() after MusicXml import
+12.4 (ws)
+      * make drag/drop of barlines undoable
+      * after first call of linePalette, bracketPalette was not 
+        visible anymore
+5.4 (ws)
+      * new configuration switch "antialiased drawing". Disabling this
+        switch speeds up drawing.
+      * fixed "-disable-fluid" configure option
+29.3 (ws)
+      * barlines can now be changed by dragging from palette to
+        measure
+      * barLine fixes (begin repeat)
+      * normal barlines are not written into *.msc files anymore
+28.3 (ws)
+      * fixed writing of ~/.mscorePrj (job history)
+      * more Xml class cleanups
+27.3 (ws)
+      * show symbols for forced system break and page break
+      * force system/page break by dragging a system break or
+        page break sybol from "layout break" palette to measure
+22.3 (ws)
+      * renamed class Bar to BarLine as suggested by Luis Garrido
+13.3 (ws)
+      * structured text: allow for musical symbols in instrument names
+6.2  (ws)
+      * first code for structured text
+4.3  (lv)
+      * fixed minor exportxml bugs related to simplified Xml class
+3.3  (ws)
+      * fixed "without-alsa" configuration
+      * simple triplets
+2.3  (ws)
+      * fix support for translated instruments.xml files.
+27.2 (ws)
+      * added toolbar button to switch "play notes when editing"
+      * more fixes to instrument dialog and undo/redo instruments add/remove
+      * "current score" was not switched for instruments dialog
+      * changed "New Score" logic:
+            - "New Score" always created "untitled" score from template
+            - saving "untitled" score calls "save as"
+            - if current score is unmodified "untitled", "New Score"
+              overwrites current template, otherwise creates new Tab
+26.2 (ws)
+      * fixes for slur editing
+      * drag clef from palette -> drop to clef
+25.2 (ws)
+      * show numbers in 8va 15va etc. clefs; base class for Clef changed
+        from Symbol to Compound
+      * now double click on tab removes score from list
+      * trying to enter note enter mode without a note or rest selected
+        had some fancy results
+      * fixed a crash when removing a staff from a piano system in 
+        instruments dialog
+      * removed staff in instrument dialog was still visible in list
+      * added updated/extended instruments.xml file from Luis Garrido
+      * fixed position of whole rest
+24.2 (ws)
+      * fix "delete key" crash
+      * fix autobeamer which did not find start of possible beam
+      * when entering the "note enter" mode by pressing "N" reset
+        "rest" flag
+      * in "note enter" mode now always reset the "rest" flag if a
+        note is clicked
+      * added button to transport panel to enable/disable midi input
+      * fix: cursor disappeared when edited text was empty
+      * enhance layout for note/rest attributes (tenuto, staccato, 
+        fermata etc)
+23.2 (ws)
+      * implement fermata for rests
+22.2 (ws)
+      * fixed cursor function while text editing. Added Pos and End function
+        (patch from Jens Reimann)
+      * more keypad fixes
+21.2   (ws)
+      * keypad fixes
+      * replace FILE with QFile
+      * simplified Xml class
+      * fix staff names in instrument dialog
+20.2   (ws)
+      * try to get realtime priviledges for ALSA audio thread
+      * install emmentaler font locally in */.fonts with "make install"
+17.2.  (ws)
+      * added ALSA audio driver as alternative to JACK driver
+16.2.  (ws)
+      * pad window now always stays on top (if window manager can handle this)
+14.2.  (ws)
+	* fix edit mode of system brackets
+	* fix drag&drop from palettes
+	* fix add tie/undo/redo
+	* in list editor chord helplines were shown in note attributes list
+	* searchSelectedElements() did not find selected note attributes
+	* update list editor on every invocation
+13.2.  (ws)
+	* new demo file inv10.msc (J.S.Bach Inventio 10, BWV 781)
+	* click tie button ("+") to create tie to next note
+	* fix domError() so that xml parsing continues after unknown tag
+	* fix bug: changing pitch of tied notes
+      * use mouse wheel to scroll canvas
+12.2.  (ws)
+	* extend list of note attributes
+	* add beams and tuplets to list editor
+11.2.  (ws)
+	* fixes for midi import, changing from "totally unusable"
+        to "unusable"
+10.2.  (ws)
+      * removed generated files from cvs
+	* added simple installer framework
+	* small midi import fixes
+15.1.  (ws)
+	* added 9/8 to time menu
+	* added new dialog Create->Measures
+	* fix global share directory; broken while preparing for autopackage
+14.1. (lv)
+      * MusicXML fermata import/export
+9.1.	 (ws)
+	* fix instruments dialog: make groups expandable
+	* fix navigator refresh for qt4.1
+	* cleanup of allqt.h
+	* fix qt4 detection
+7.1. (lv)
+      * MusicXML fixes
+        - import/export of volta's (a.k.a. endings)
+        - fixed divisions in first measure
+5.1.   (ws)
+	* preparations for autopackage (http://autopackage.org)
+30.12. (lv)
+      * fixed keypad key 5 handling
+      * MusicXML fixes
+        - import/export of implicit measures
+        - export of <print> element
+        - removed export of spurious keysig at start of every system
+18.12. (lv)
+      * MusicXML offset import/export (but no editing yet)
+10.12. (lv)
+      * MusicXML export fixes
+        - fixed stem direction on chord
+        - rearranged order of elements to better match Finale's order
+          (simplifies comparing with Recordare's samples)
+      * temporarily removed offset handling from MusicXML import
+5.12. (ws)
+      * fixed a seg fault when entering lyrincs and hitting TAB
+3.12. (lv)
+      * MusicXML lyric export
+27.11. (lv)
+      * MusicXML export fixes
+        - added placement to directions
+	- fixed direction on first chord
+26.11. (lv)
+      * MusicXML export fixes
+        - support for directions in the middle of notes
+        - always forward to end of measure
+        - code cleanup
+26.11 (ws)
+	* fixed some compiler warnings
+	* added missing painter.end() in navigator.cpp
+25,11 (ws)
+	* small fixes for compilation on ia64 systems
+20.11. (lv)
+      * MusicXML export fixes
+        - barline left / repeat start
+        - directions in multiple staves
+        - support for dynamic and symbol
+      * fixed spelling errors "haipin"
+13.11. (lv)
+      * infrastructure for MusicXML <direction> export
+6.11. (lv)
+      * limited support for MusicXML <words> export
+23.10. (ws)
+      * added "ChordRest" properties to list editor
+      * removed setStyleStrategy(PreferMatch) in test for "Emmentaler" font to
+        prevent "no exact match" error
+      * remove generated "obj/moc_*.c" files on "make clean"
+23.10. (lv)
+      * MusicXML fixes
+        - fixed import/export of repeat start
+        - moved fingering to notations / technical
+        - corrected midi-channel and midi-program
+        - minor change to midi-instrument and score-instrument
+22.10. (lv)
+      * added microhelp for clefs
+      * minor updates in clefTable
+      * MusicXML clef-octave-change
+18.10. (lv)
+      * fixed stem direction dialog
+      * implemented stem direction handling
+8.10. (lv)
+      * MusicXML slur export
+24.09 (ws)
+      ======== Version 0.2 released =============
+      * small fixes for gcc4
+3.9. (lv)
+      * MusicXML export now also writes <tied> element, which fixes ties
+        on import of MScore's MusicXML files
+25.8. (ws)
+      * changed spacing algorithm to be handle upbeat measures; measures now get
+        space depending on their duration
+21.8. (lv)
+      * fixed segfault when manually adding notes to chord
+20.8. (ws)
+      * removed handling of *.msc.bz2 *.msc.gz etc. files
+      * misc changes for MinGW port
+12.8.
+      * added new testfile "J.S.Bach, WTC I, Praeludium I"
+      * added trill and pedal lines
+11.8.
+      * added ottava (8va) lines
+10.8.
+      * added volta brackets
+7.8.
+      * drag&drop brackets
+      * more bracket editing
+3.8.
+      * bracket editing
+2.8.
+      * misc fixes for file operations
+30.7.
+      * make playPanel, keyPad and navigator konfigurable in
+        preferences
+29.7.
+      * fix tempo slider
+28.7.
+      * misc fixes
+      * qt4 snapshot of today works with original Lilypond
+        emmentaler font so we can remove the modified version.
+25.7.
+      * removed qt3 compat libs
+      * more qt4 porting code
+23.7.
+      * fixed some play bugs
+      * fix JACK port handling
+      * fix misc gui issues in Display pulldown menu
+22.7.
+      * make line width for selections and cursor 2 pixel width
+        independent from magnification
+21.7.
+      * check for "Cancel" in color dialog
+      * fixes for palette code
+      * redraw navigator panel when layout changed
+      * fix style editor
+20.7.
+      * replaced element->context (properties) by listEdit
+      * ported listEdit classes to qt4
+      * fixed bounding boxes of Bar() and SStaff()
+      * changed line cap style to FlatCap
+6.7.
+      * fixed in place text editing
+5.7.
+      * ported "edit style" dialog to qt4
+      * "show navigator" is now a preferences option
+      * ported pagUp/pageDown/firstPage/lastPage commands
+4.7.
+      * fix fluidsynth and ALSA detection
+      * "Quit" now removes current file from tab, quits app on removing last
+         file
+      * moved global var "showInvisible" to Score
+      * fixed cursor on/off/blinking
+2.7.
+      * ported instrument dialog to qt4
+1.7.
+      * fix ghostnote, lasso select, cursor
+30.6.
+      * implemented "navigator" window
+29.6.
+      * implemented page settings preview
+      * ported pagesettings dialog to qt4
+28.6.
+      * more object ported to qt4: prefsdialog
+22.6.
+      * slur fixes
+20.6.
+      * changed symbols to use Lilypond "emmentaler" font. Unfortunately
+        i had to move some glyphs qt otherwise could not render. So we
+        have to use a modified emmentaler instead of the real one :-(
+
+      * ported to qt4-rc1
+        - replaced classes Pos, Rect, Transformation, Painter with
+          Qt4 classes
+        - simplified drawing code
+        - many changes all over the codebase
+        - we now have antialiasing for beams
+
+16.4 (ws)
+      * updates for MD
+15.4 (ws)
+      * code restructured to allow for several scores
+        (tabbed multiple documents)
+      * renamed Score -> MuseScore
+      * renamed Project -> Score
+      * renamed global cp -> cs
+
+13.4 (ws)
+      * Version 0.1 released
+6.4 (ws)
+      * internal reoganization of data structures
+      * instrument add/remove/move, insert/remove additional staff to part
+22.3 (ws)
+      * lyrics entry/edit
+      * fixes to slur editing
+20.3 (lv)
+      * fixed compile error on Fedora Core 3
+19.3 (ws)
+      * pageBreak
+      * new demo demos/inv1.msc (J.S.Bach invention No. 1)
+17.3 (ws)
+      * add color to elements
+16.3 (ws)
+      * tempo menu
+      * "create" menu cleanup
+      * better slur layout
+      * fix remove text
+      * color voice buttons
+15.3 (ws)
+      * fix regression: flip stem direction
+      * import musicXml: changed voice allocation, support crossbeaming
+      * crossbeaming: move a note up/down a staff with shift+ctrl+up and
+        shift+ctrl+down
+13.3 (lv)
+      * infrastructure for preference stem direction
+13.3 (ws)
+      * changed object hierarchie: "ChordRest" has now "Segment" parent
+      * changed "voice" to "thread" in preparation for better voice
+        handling
+      * changed segment to be a subclass of element
+      * measure list in project is handled with prev/next pointer
+        instead of STL list
+6.3 (lv)
+      * added pitch offset and size to clef context
+3.3 (ws)
+      * fix clefs: insert/remove/undo/redo
+      * catch NaN double values (not a number)
+      * removed PElement class, its now all Element
+      * new debugging function: Edit->PageList shows object tree
+        and properties
+28.02 (ws)
+      * added fingering palette
+22.02 (ws)
+      * add "begin repeat bar"
+      * change bar: use palette
+      * play note when clicked
+      * process tied notes in midi export
+19.02 (ws)
+      * more fixes
+17.02 (ws)
+      * fix crash in sequencer when changing tempo
+      * collect tied notes and play as one event in sequencer
+      * modify note entry with keys (cdefgab): pitch depends on current key
+16.02 (w)
+      * MusicXml: export simple beams
+15.02 (ws)
+      * removed demos/bouree.msc, added new score demos/inv6.msc
+        (j.s.bach invention No. 6)
+      * fixed integer truncation of saved atrribute positions
+      * fixed crash when entering "fingering"
+      * fixed cursor keys
+      * export/import of ties to/from MusicXml
+      * fixes for note entry & tied notes
+14.02 (ws)
+      * fixed compilation issues with jack+sequencer
+      * use xml lib for music xml export
+      * fix reading of ties
+      * fixed editing of first instrument name
+      * hack for auto beaming and 3/8 time signature
+      * fixed alignment of whole rests
+      * fixed entry of time signatures
+------------
+      * fixed crash, when selecting nonexistant palette entry
+      * fixed missing initialisation of InstrumentTemplate::midiProgram
+      * added two new configuration options:
+         --enable-alsa (enables alsa midi input)
+         --enable-fluid (enables fluid sofware synthesizer (which also needs JACK))
+      * other bug fixes
+      * fix printing; now print generates a temp file and then
+        calls configured print command, replacing "%s" in print
+        command with actual temp file name
+      * implemented xml reading with Qt-dom routines
+      * add/remove instruments
+      * rearranged the doc directory; new make target: "make doc"
+      * new cmd line option "-m" to disable midi (alsa initialisation)
+      * added 12/8 to time signatures
+      * added more names to symbol table (used for qt tool tip)
+0.1.0pre2:
+      * implemented play panel
+      * implemented: basic play functions
+      * implemented: remove fingering
+      * fixed fingering text
+      * some fixes for lyrics entry
+      * JACK interface and fluid software synthesizer integrated
+      * export misc text to midi as META events
+      * midi export/import key signature
+      * end bar alignment fixed
+      * midi export
+0.1.0pre1:
+      * implemented alsa midi for note entry
+      * note entry: new cmds: add intervall, add pitch, enter note entry
+      * added tooltips to palettes
+      * misc fixes (time signature etc.)
+      * fix undo/redo of title/composer etc. changes
+      * fix save/restore of title/subtitle/componist; fix demo
+        sonata16.msc
+      * don't save style
+      * compilation/makesystem fixes
+      - moved project to SourceForge
+      - musicXml import/export (actually only a subset is currently
+        supported)
+      - numerous changes i cannot remember
+0.0.7:
+      - slurs, hairpins can now span systems
+      - new text type: Fingerings
+      - Escape deselects all
+      - implemented staff/system selections
+      - huge internal code reorganization
+0.0.6:
+      - implemented instrument names in score
+      - more inplace string editing functions:
+           left, right, up, down, delete, undo/redo
+      - removed obsolete page format setting "other"
+        (i dont know how to implement arbitrary page sizes with the
+        qt printing system)
+      - implement page size for printing
+      - canvas popup menu: duplicate entries from "Create" menu
+      - release keyboard grab in EDIT mode on receiving "focus out"
+0.0.5:
+      - now use native qt printing mechanism
+      - new: delete measure
+      - prepared for internationalization (translations)
+      - new: text style dialog
+      - new: style menu
+      - new: simple Lyrics
+      - new: you can now insert/delete Instruments
+      - new: crescendo/decrescendo symbols (hair pins)
+0.0.4:
+      - new: page layout: vertical space is now automatically inserted
+             between systems to fill entire page
+      - new: staffs and systems can now be dragged vertically
+      - new: invisible flag for drawing objects; toggle function in context
+             menu (click object with right mouse button (clef...))
+      - text: make draggable
+      - fixed dynamics menu (bad font number for symbols -> crash)
+      - removed cached pixel bounding box in drawing objects
+      - notesheet and background color/wallpaper are now configurable
+      - new: page symbols: delete/undo/redo
+      - fixed dragging of symbols
+      - some layout enhancements:
+            - better positioning of clefs followed by accidental + notes
+      - adjust stem len
+      - fixed: abort button in "save current project" exit dialog
+      - new function: delete clef + undo + redo
+      - fixed: insert clef
+0.0.3:
+      - more undo/redo:
+            - add slur
+      - incompatible changes to ".msc" fileformat:
+            - changed "Akkord" to "Chord"
+      - fixed calculation of beam distance
+      - changed name of tt-font
+      - implemented dragging of symbols form symbol palette
+      - changed font/font handling. Works now with newest devel tools/sw:
+        gcc 3.1.1, qt 3.1.0, glibc 2.3.1, XFree86 4.2 with Freetype 6.3.2
+        antialiased screen fonts
+      - new: mouse entry of notes
+      - entry of note accidentals: staccato etc.
+
+0.0.2
+      - new: dragging of notes with mouse
+      - reorganized and cleaned up sources
+      - added some missing system #includes
+
+0.0.1
+      - initial release
+        auto toolified
+
+0.0.0
+

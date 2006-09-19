@@ -1,0 +1,11 @@
+base referer
+rect $undo_8h.html 78,92 126,118
+rect $edit_8cpp.html 6,17 62,44
+rect $project_8cpp.html 86,17 161,44
+rect $undo_8cpp.html 185,17 249,44
+rect $canvas_8cpp.html 252,92 329,118
+rect $file_8cpp.html 353,92 404,118
+rect $keyb_8cpp.html 428,92 492,118
+rect $layout_8cpp.html 516,92 585,118
+rect $navigate_8cpp.html 609,92 694,118
+rect $select_8cpp.html 718,92 788,118

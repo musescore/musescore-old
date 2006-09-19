@@ -1,0 +1,4 @@
+base referer
+rect $classInstrumentsBase.html 16,167 125,193
+rect $classUi__InstrumentsBase.html 7,17 135,44
+rect $classInstrumentsDialog.html 13,241 128,268

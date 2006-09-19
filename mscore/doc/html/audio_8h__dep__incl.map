@@ -1,0 +1,8 @@
+base referer
+rect $alsa_8h.html 208,92 253,118
+rect $alsa_8cpp.html 6,17 68,44
+rect $mscore_8cpp.html 92,17 169,44
+rect $project_8cpp.html 193,17 268,44
+rect $seq_8cpp.html 292,17 350,44
+rect $jackaudio_8h.html 282,92 360,118
+rect $jackaudio_8cpp.html 374,17 468,44

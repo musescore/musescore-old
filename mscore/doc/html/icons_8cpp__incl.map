@@ -1,0 +1,16 @@
+base referer
+rect $icons_8h.html 156,391 207,417
+rect $project_8h.html 231,391 289,417
+rect $system_8h.html 228,167 289,193
+rect $element_8h.html 109,92 176,119
+rect $select_8h.html 8,241 61,268
+rect $measure_8h.html 85,241 157,268
+rect $bar_8h.html 96,167 133,193
+rect $plist_8h.html 177,17 220,44
+rect $symbols_8h.html 7,17 76,44
+rect $spatium_8h.html 244,17 311,44
+rect $style_8h.html 304,316 349,343
+rect $mtime_8h.html 100,17 153,44
+rect $undo_8h.html 137,316 185,343
+rect $input_8h.html 181,241 227,268
+rect $painter_8h.html 364,391 423,417

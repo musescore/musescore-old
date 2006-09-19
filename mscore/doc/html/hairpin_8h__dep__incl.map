@@ -1,0 +1,6 @@
+base referer
+rect $edit_8cpp.html 7,17 63,44
+rect $hairpin_8cpp.html 87,17 161,44
+rect $importxml_8cpp.html 185,17 276,44
+rect $measure_8cpp.html 300,17 388,44
+rect $menus_8cpp.html 412,17 487,44

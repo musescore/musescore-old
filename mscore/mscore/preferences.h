@@ -1,0 +1,104 @@
+//=============================================================================
+//  MusE Score
+//  Linux Music Score Editor
+//  $Id: preferences.h,v 1.20 2006/04/06 13:03:11 wschweer Exp $
+//
+//  Copyright (C) 2002-2006 Werner Schweer (ws@seh.de)
+//
+//  This program is free software; you can redistribute it and/or modify
+//  it under the terms of the GNU General Public License version 2.
+//
+//  This program is distributed in the hope that it will be useful,
+//  but WITHOUT ANY WARRANTY; without even the implied warranty of
+//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+//  GNU General Public License for more details.
+//
+//  You should have received a copy of the GNU General Public License
+//  along with this program; if not, write to the Free Software
+//  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+//=============================================================================
+
+#ifndef __PREFERENCES_H__
+#define __PREFERENCES_H__
+
+#include "ui_prefsdialog.h"
+#include "globals.h"
+
+//---------------------------------------------------------
+//   Preferences
+//---------------------------------------------------------
+
+struct Preferences {
+      QString printCmd;
+      QString browseCmd;
+      bool cursorBlink;
+      bool bgUseColor;
+      bool fgUseColor;
+      QString bgWallpaper;
+      QString fgWallpaper;
+      QColor fgColor;
+      QColor bgColor;
+      QColor selectColor[VOICES];
+      QColor dropColor;
+      bool enableMidiInput;
+      bool playNotes;         // play notes on click
+      QString soundFont;      // sound font used by synthesizer
+      QString lPort;          // audio port left
+      QString rPort;          // audio port right
+      Direction stemDir[VOICES];
+      bool showNavigator;
+      bool showPad;
+      bool showPlayPanel;
+      QPoint padPos;
+      QPoint playPanelPos;
+      bool useAlsaAudio;
+      bool useJackAudio;
+      QString alsaDevice;
+      int alsaSampleRate;
+      int alsaPeriodSize;
+      int alsaFragments;
+      QColor layoutBreakColor;
+      bool antialiasedDrawing;
+
+      Preferences();
+      void write();
+      void read();
+      };
+
+//---------------------------------------------------------
+//   PreferenceDialog
+//---------------------------------------------------------
+
+class PreferenceDialog : public QDialog, private Ui::PrefsDialogBase {
+      Q_OBJECT
+
+      void apply();
+
+      bool sfChanged;
+
+   private slots:
+      void ok();
+      void cancel();
+      void bgClicked(bool);
+      void fgClicked(bool);
+      void selectFgColor();
+      void selectBgColor();
+      void selectSelectColor1();
+      void selectSelectColor2();
+      void selectSelectColor3();
+      void selectSelectColor4();
+      void selectFgWallpaper();
+      void selectBgWallpaper();
+      void selectSoundFont();
+      void playPanelCurClicked();
+      void padCurClicked();
+
+   signals:
+      void preferencesChanged();
+
+   public:
+      PreferenceDialog(QWidget* parent);
+      };
+
+extern Preferences preferences;
+#endif

@@ -1,0 +1,4 @@
+base referer
+rect $classEditTempo.html 32,241 104,268
+rect $classUi_1_1EditTempoBase.html 7,92 129,119
+rect $classUi__EditTempoBase.html 7,17 129,44

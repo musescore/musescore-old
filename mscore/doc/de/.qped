@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<Ped version="1.0">
+  <Status>
+    <geometry x="839" y="0" w="800" h="990" />
+    <Editor1>
+      <KontextList>
+        <Kontext>
+          <path>/home/ws/mscore/mscore/doc/de/man.tex</path>
+          <column>20</column>
+          <line>172</line>
+          <xoff>0</xoff>
+          <yoff>8</yoff>
+          </Kontext>
+        <cur>1</cur>
+        </KontextList>
+      </Editor1>
+    <search>index</search>
+    <colorify>0</colorify>
+    <brackets>1</brackets>
+    </Status>
+  </Ped>

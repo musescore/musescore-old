@@ -1,0 +1,29 @@
+Release 0.3:
+      - Instrument Names can contain musical symbols
+      - added ALSA audio driver in addition to JACK driver
+      - many MusicXML fixes and enhancements
+      - enhanced midi import
+
+Release 0.2:
+      Release 0.2 of MuseScore is a major feature release. Its based on
+      the brand new Qt4 gui library using its features like antialiased
+      screen drawings.
+
+      * new elements: volta brackets, ottava lines (8va---)
+        system brackets, pedal lines, trill lines
+      * drag & drop from symbol panels
+      * navigator panel
+      * page layout preview
+      * tabbed multiple document interface
+      * Mscore now uses the unmodified project lilypond "emmentaler" font.
+
+Release 0.1:
+      * integrated fluid software synthesizer for play function;
+        plays with JACK audio server
+      * Mscore now supports musicXml import/export. Only a subset is
+        currently supported.
+      * simple midi import/export
+      * midi input (step recording)
+      * some support for multiple voices in a staff
+      * new demo files
+      * numerous fixes and enhancements

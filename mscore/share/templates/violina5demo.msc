@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<museScore version="1.0">
+  <Geometry x="0" y="0" w="950" h="500"></Geometry>
+  <Spatium>2</Spatium>
+  <Mag>1.0</Mag>
+  <xoff>29</xoff>
+  <yoff>24</yoff>
+  <showInvisible>0</showInvisible>
+  <page-layout>
+    <pageFormat>A5</pageFormat>
+    <landscape>1</landscape>
+    <page-margins type="both">
+      <left-margin>10</left-margin>
+      <right-margin>10</right-margin>
+      <top-margin>10</top-margin>
+      <bottom-margin>10</bottom-margin>
+      </page-margins>
+    </page-layout>
+  <siglist>
+    <sig tick="0">
+      <nom>4</nom>
+      <denom>4</denom>
+      </sig>
+    </siglist>
+  <keylist>
+    <key tick="0" idx="0"/>
+    </keylist>
+  <tempolist fix="500000">
+    <tempo at="21474836">
+      <tick>0</tick>
+      <val>500000</val>
+      </tempo>
+    </tempolist>
+  <Part>
+    <Staff>
+      <cleflist>
+        <clef tick="0" idx="0"/>
+        </cleflist>
+      </Staff>
+    <trackName>Violine</trackName>
+    <name>Violine</name>
+    <shortName>V1.</shortName>
+    <Instrument>
+      <midiChannel>0</midiChannel>
+      <midiProgram>0</midiProgram>
+      <volume>100</volume>
+      <chorus>30</chorus>
+      <reverb>30</reverb>
+      </Instrument>
+    </Part>
+  <Staff id="1">
+    <Measure number="1" tick="0">
+      <Bar/>
+      <Rest>
+        <ticklen>1536</ticklen>
+        <BeamMode>4</BeamMode>
+        </Rest>
+      </Measure>
+    <Measure number="2" tick="1536">
+      <Bar/>
+      <Rest>
+        <tick>1536</tick>
+        <ticklen>1536</ticklen>
+        <BeamMode>4</BeamMode>
+        </Rest>
+      </Measure>
+    <Measure number="3" tick="3072">
+      <Bar/>
+      <Rest>
+        <tick>3072</tick>
+        <ticklen>1536</ticklen>
+        <BeamMode>4</BeamMode>
+        </Rest>
+      </Measure>
+    <Measure number="4" tick="4608">
+      <Bar/>
+      <Rest>
+        <tick>4608</tick>
+        <ticklen>1536</ticklen>
+        <BeamMode>4</BeamMode>
+        </Rest>
+      </Measure>
+    </Staff>
+  <cursorStaff>0</cursorStaff>
+  <cursorVoice>0</cursorVoice>
+  </museScore>

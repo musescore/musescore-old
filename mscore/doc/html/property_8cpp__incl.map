@@ -1,0 +1,11 @@
+base referer
+rect $project_8h.html 57,92 116,118
+rect $undo_8h.html 29,17 77,44
+rect $mscore_8h.html 140,92 201,118
+rect $canvas_8h.html 225,92 287,118
+rect $property_8h.html 311,92 377,118
+rect $element_8h.html 440,17 507,44
+rect $note_8h.html 452,92 495,118
+rect $segment_8h.html 519,92 588,118
+rect $sig_8h.html 612,92 649,118
+rect $clef_8h.html 673,92 713,118

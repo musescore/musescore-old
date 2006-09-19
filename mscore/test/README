@@ -1,0 +1,19 @@
+Testfiles
+
+test1.msc	
+      single staff, single voice, c-scale
+
+test7.msc
+      - piano and trumpet staff
+      - flat symbol in instrument name
+      - title with bold and sharp symbol
+      - start repeat / end repeat
+      - prima volta / seconda volta
+
+test8.msc   simple tuplets: triplet
+
+midi1.mid	single track, single voice
+midi2.mid	single track, simple chords
+midi3.mid   single track, rests
+midi4.mid   single track, overlapping notes
+

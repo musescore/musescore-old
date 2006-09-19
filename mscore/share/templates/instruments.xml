@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<museScore version="1.0">
+   <instrument-group name="Woodwinds">
+      <instrument>
+         <name>Piccolo</name>
+         <short-name>Picc.</short-name>
+         <clef>0</clef>
+         </instrument>
+      <instrument>
+         <name>Flute</name>
+         <short-name>Fl.</short-name>
+         </instrument>
+      <instrument>
+         <name>Alto Flute</name>
+         <short-name>Alt. Fl.</short-name>
+         </instrument>
+      <instrument>
+         <name>Bass Flute</name>
+         <short-name>Bs. Fl.</short-name>
+         </instrument>
+      <instrument>
+         <name>Pan Flute</name>
+         <short-name>Pan Fl.</short-name>
+         </instrument>
+      <instrument>
+         <name>Oboe</name>
+         <short-name>Ob.</short-name>
+         </instrument>
+      <instrument>
+         <name>English Horn</name>
+         <short-name>Eng. Hn.</short-name>
+         </instrument>
+      <instrument>
+         <name>B<symbol name="flat"/> Clarinet</name>
+         <short-name>B<symbol name="flat"/> Cl.</short-name>
+         </instrument>
+      <instrument>
+         <name>E<symbol name="flat"/> Clarinet</name>
+         <short-name>E<symbol name="flat"/> Cl.</short-name>
+         </instrument>
+      <instrument>
+         <name>A Clarinet</name>
+         <short-name>A Cl.</short-name>
+         </instrument>
+      <instrument>
+         <name>Bass Clarinet</name>
+         <short-name>Bs. Cl.</short-name>
+         </instrument>
+      <instrument>
+         <name>Bassoon</name>
+         <short-name>Bsn.</short-name>
+         </instrument>
+      <instrument>
+         <name>Contrabassoon</name>
+         <short-name>Cbsn.</short-name>
+         </instrument>
+      <instrument>
+         <name>Saxophone</name>
+         <short-name>Sax.</short-name>
+         </instrument>
+      <instrument>
+         <name>Soprano Saxophone</name>
+         <short-name>Sop. Sax.</short-name>
+         </instrument>
+      <instrument>
+         <name>Alto Saxophone</name>
+         <short-name>Alt. Sax.</short-name>
+         </instrument>
+      <instrument>
+         <name>Tenor Saxophone</name>
+         <short-name>Ten. Sax.</short-name>
+         </instrument>
+      <instrument>
+         <name>Baritone Saxophone</name>
+         <short-name>Bar. Sax.</short-name>
+         </instrument>
+      <instrument>
+         <name>Bass Saxophone</name>
+         <short-name>Bs. Sax.</short-name>
+         </instrument>
+      </instrument-group>
+
+   <instrument-group name="Brass">
+      <instrument>
+         <name>Horn</name>
+         <short-name>F Hn.</short-name>
+         </instrument>
+      <instrument>
+         <name>B<symbol name="flat"/> Trumpet</name>
+         <short-name>B<symbol name="flat"/> Tpt.</short-name>
+         </instrument>
+      <instrument>
+         <name>D Trumpet</name>
+         <short-name>D Tpt.</short-name>
+         </instrument>
+      <instrument>
+         <name>C Trumpet</name>
+         <short-name>C Tpt.</short-name>
+         </instrument>
+      <instrument>
+         <name>E<symbol name="flat"/> Trumpet</name>
+         <short-name>E<symbol name="flat"/> Tpt.</short-name>
+         </instrument>
+      <instrument>
+         <name>Trombone</name>
+         <short-name>Trb.</short-name>
+         </instrument>
+      <instrument>
+         <name>Tenor Trombone</name>
+         <short-name>Ten. Trb.</short-name>
+         </instrument>
+      <instrument>
+         <name>Bass Trombone</name>
+         <short-name>Bs. Trb.</short-name>
+         </instrument>
+      <instrument>
+         <name>Tuba</name>
+         <short-name>Tba.</short-name>
+         </instrument>
+      <instrument>
+         <name>Euphonium</name>
+         <short-name>Euph.</short-name>
+         </instrument>
+      </instrument-group>
+
+   <instrument-group name="Schlaginstrumente">
+      </instrument-group>
+
+   <instrument-group name="Blasorchester">
+      </instrument-group>
+
+   <instrument-group name="Percussion">
+      </instrument-group>
+
+   <instrument-group name="Guitars">
+      <instrument>
+         <name>Guitar</name>
+         <short-name>Guit.</short-name>
+         </instrument>
+      <instrument>
+         <name>Electric Guitar</name>
+         <short-name>El. Guit.</short-name>
+         </instrument>
+      <instrument>
+         <name>Bass Guitar</name>
+         <short-name>B. Guit.</short-name>
+         </instrument>
+      </instrument-group>
+
+   <instrument-group name="Vocals">
+      <instrument>
+         <name>Voice</name>
+         </instrument>
+      <instrument>
+         <name>Soprano</name>
+         </instrument>
+      <instrument>
+         <name>Mezzo-soprano</name>
+         </instrument>
+      <instrument>
+         <name>Contralto</name>
+         </instrument>
+      <instrument>
+         <name>Countertenor</name>
+         </instrument>
+      <instrument>
+         <name>Tenor</name>
+         </instrument>
+      <instrument>
+         <name>Baritone</name>
+         </instrument>
+      <instrument>
+         <name>Bass</name>
+         </instrument>
+      </instrument-group>
+
+   <instrument-group name="Keyboards">
+      <instrument>
+         <name>Piano</name>
+         <short-name>Pno.</short-name>
+         <staves>2</staves>
+         <clef id="1">0</clef>
+         <clef id="2">4</clef>
+         <bracket>1</bracket>
+         </instrument>
+      </instrument-group>
+
+   <instrument-group name="Strings">
+      <instrument>
+         <name>Violin</name>
+         <short-name>V1n.</short-name>
+         </instrument>
+      <instrument>
+         <name>Violin 1</name>
+         <short-name>V1n. 1</short-name>
+         </instrument>
+      <instrument>
+         <name>Violin 2</name>
+         <short-name>V1n. 2</short-name>
+         </instrument>
+      <instrument>
+         <name>Viola</name>
+         <short-name>V1a.</short-name>
+         </instrument>
+      <instrument>
+         <name>Violoncello</name>
+         <short-name>Vlc.</short-name>
+         </instrument>
+      <instrument>
+         <name>Double Bass</name>
+         <short-name>D.B.</short-name>
+         </instrument>
+      <instrument>
+         <name>Contrabass</name>
+         <short-name>C.B.</short-name>
+         </instrument>
+      </instrument-group>
+
+   </museScore>
+
+

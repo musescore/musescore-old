@@ -1,0 +1,4 @@
+base referer
+rect $preferences_8h.html 6,17 97,44
+rect $moc__prefsdialogbase_8cpp.html 121,17 286,44
+rect $prefsdialogbase_8cpp.html 310,17 444,44

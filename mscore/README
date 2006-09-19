@@ -1,0 +1,116 @@
+=================================================================
+      MuseScore Score Typesetter
+=================================================================
+
+This is an early version of the Linux MusE Score Typesetter
+"MuseScore".
+
+MuseScore is distributed under the GNU General Public License (GPL).
+Please check out the file COPYING in this directory for more
+details.
+
+Features:
+      - WYSIWYG Design, notes are entered on a "virtual notepaper"
+      - TrueType font(s) for printing & display allows for high quality
+        scaling to all sizes
+      - easy & fast note entry
+      - MusicXML import/export
+      - Midi (SMF) import/export
+      - Midi input for note entry
+      - integrated Fluid software synthesizer to play notes
+      - direct print into pdf or postscript files
+
+Requirements:
+      - qt4 gui lib version qt4.1.x
+
+        Note that many linux distributions split packages into a user
+        and developer package and that you need to install both.
+
+      - ALSA Version 1.0 or newer (midi input)
+      - JACK audio server (audio output)
+      - fluidsynth-1.0.0 and a decent sound font
+      - gcc 3.4 or gcc 4.0
+      - recommended: kde (MuseScore calls kprinter per default)
+        If you dont have kde, please change the print command in
+        "preferences".
+
+Credits:
+      MuseScore uses the "Emmentaler" font from the lilypond project.
+
+Installation:
+      - unpack source distribution
+            tar xvofz mscore-x.x.x.tar.gz
+
+      - configure
+            (this only works if you are starting the next commands from X
+             graphical user interface)
+
+                  cd mscore-x.x.x
+                  export QTDIR={path to your qt4 installation}
+                  configure --prefix=/usr
+
+            (if configure does not find the qt libraries you can enter something
+            like:  configure --with-qt-prefix=/usr/lib/qt3
+            which is reported to work with Mandrake)
+            If you use gcc 3.4 compilation time can be reduced by a
+            factor of three by using precompiled headers. For this
+            configure with
+
+                  configure --enable-pch
+                  cd mscore
+                  make allqt.h.gch
+
+            (of course this should be autodetected by autoconf/automake but
+             it unfortunately requires to be an expert for this tools)
+
+      - make
+            make
+
+      - install as root user
+            su -c "make install"
+
+User Documentation:
+      Currently there is not much documentation.
+      I did some work on the framework which can be seen in the
+      "de" (german) directory.
+
+      Requirements:
+            - tex with ConTeXt macro package
+              (as part of tetex 3.0 distribution)
+
+      Type "make doc" to generate man-de.pdf in doc/de.
+
+Program Documentation:
+      can be generated from source with DoxyGen;
+      enter
+
+            make dox
+
+      Browse the documentation with your favourite html browser
+      at:
+            doc/html/index.html
+
+
+Test:
+      Enter
+          mscore demos/promenade
+      to see the demo file (Modeste Moussorgsky: Pictures of an
+      exhibition: Promenade)
+
+=================================================================
+      Status
+=================================================================
+
+      MuseScore is in early alpha state. That means you should not use
+      it for any real work. It is incomplete and probably buggy.
+      The save format (*.msc) will most likely change in future
+      versions.
+
+
+=================================================================
+      Contact
+=================================================================
+
+      Werner Schweer; ws@seh.de
+      http://mscore.sourceforge.net/
+

@@ -1,0 +1,3 @@
+base referer
+rect $config_8h.html 7,17 60,44
+rect $audio_8h.html 84,17 135,44

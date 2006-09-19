@@ -1,0 +1,4 @@
+base referer
+rect $classPrefsDialogBase.html 16,167 128,193
+rect $classUi_1_1PrefsDialogBase.html 7,92 137,119
+rect $classUi__PrefsDialogBase.html 7,17 137,44

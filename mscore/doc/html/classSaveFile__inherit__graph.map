@@ -1,0 +1,4 @@
+base referer
+rect $classExportMidi.html 6,92 76,119
+rect $classExportMusicXml.html 100,92 204,119
+rect $classSaveStyle.html 228,92 300,119

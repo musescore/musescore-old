@@ -1,0 +1,4 @@
+base referer
+rect $mscore_8cpp.html 7,17 84,44
+rect $moc__pagesettings_8cpp.html 108,17 255,44
+rect $pagesettings_8cpp.html 279,17 391,44

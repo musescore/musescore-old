@@ -1,0 +1,210 @@
+<ui version="4.0" >
+ <author></author>
+ <comment></comment>
+ <exportmacro></exportmacro>
+ <class>MeasureBase</class>
+ <widget class="QWidget" name="MeasureBase" >
+  <property name="geometry" >
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>547</width>
+    <height>293</height>
+   </rect>
+  </property>
+  <property name="windowTitle" >
+   <string>Form</string>
+  </property>
+  <layout class="QVBoxLayout" >
+   <property name="margin" >
+    <number>9</number>
+   </property>
+   <property name="spacing" >
+    <number>6</number>
+   </property>
+   <item>
+    <widget class="QGroupBox" name="MeasureBase_2" >
+     <property name="title" >
+      <string>Measure</string>
+     </property>
+     <property name="flat" >
+      <bool>true</bool>
+     </property>
+     <layout class="QGridLayout" >
+      <property name="margin" >
+       <number>9</number>
+      </property>
+      <property name="spacing" >
+       <number>6</number>
+      </property>
+      <item row="4" column="0" colspan="6" >
+       <layout class="QHBoxLayout" >
+        <property name="margin" >
+         <number>0</number>
+        </property>
+        <property name="spacing" >
+         <number>6</number>
+        </property>
+        <item>
+         <widget class="QCheckBox" name="lineBreak" >
+          <property name="text" >
+           <string>Line Break</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QCheckBox" name="pageBreak" >
+          <property name="text" >
+           <string>Page Break</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QCheckBox" name="irregular" >
+          <property name="text" >
+           <string>Irregular</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QCheckBox" name="startRepeat" >
+          <property name="text" >
+           <string>StartRepeat</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item row="3" column="4" >
+       <widget class="QLabel" name="label_10" >
+        <property name="text" >
+         <string>Ending:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="5" >
+       <widget class="QSpinBox" name="ending" />
+      </item>
+      <item row="1" column="5" >
+       <widget class="QSpinBox" name="measureNo" />
+      </item>
+      <item row="1" column="4" >
+       <widget class="QLabel" name="label_8" >
+        <property name="text" >
+         <string>No.:</string>
+        </property>
+        <property name="textFormat" >
+         <enum>Qt::PlainText</enum>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="4" >
+       <widget class="QLabel" name="label_7" >
+        <property name="text" >
+         <string>Beams:</string>
+        </property>
+        <property name="textFormat" >
+         <enum>Qt::PlainText</enum>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="5" >
+       <widget class="QSpinBox" name="beams" />
+      </item>
+      <item row="2" column="3" >
+       <widget class="QDoubleSpinBox" name="stretch" />
+      </item>
+      <item row="1" column="3" >
+       <widget class="QSpinBox" name="pageElements" />
+      </item>
+      <item row="2" column="2" >
+       <widget class="QLabel" name="label_6" >
+        <property name="text" >
+         <string>Stretch:</string>
+        </property>
+        <property name="textFormat" >
+         <enum>Qt::PlainText</enum>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="3" >
+       <widget class="QSpinBox" name="staves" />
+      </item>
+      <item row="1" column="2" >
+       <widget class="QLabel" name="label_5" >
+        <property name="text" >
+         <string>PageElem:</string>
+        </property>
+        <property name="textFormat" >
+         <enum>Qt::PlainText</enum>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="2" >
+       <widget class="QLabel" name="label_4" >
+        <property name="text" >
+         <string>Staves:</string>
+        </property>
+        <property name="textFormat" >
+         <enum>Qt::PlainText</enum>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="1" >
+       <widget class="QSpinBox" name="noOffset" />
+      </item>
+      <item row="1" column="1" >
+       <widget class="QSpinBox" name="tuplets" />
+      </item>
+      <item row="2" column="0" >
+       <widget class="QLabel" name="label_3" >
+        <property name="text" >
+         <string>NoOffset:</string>
+        </property>
+        <property name="textFormat" >
+         <enum>Qt::PlainText</enum>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="0" >
+       <widget class="QLabel" name="label_2" >
+        <property name="text" >
+         <string>Tuplets:</string>
+        </property>
+        <property name="textFormat" >
+         <enum>Qt::PlainText</enum>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1" >
+       <widget class="QSpinBox" name="segments" />
+      </item>
+      <item row="0" column="0" >
+       <widget class="QLabel" name="label" >
+        <property name="text" >
+         <string>Segments:</string>
+        </property>
+        <property name="textFormat" >
+         <enum>Qt::PlainText</enum>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="5" >
+       <widget class="QSpinBox" name="endRepeat" />
+      </item>
+      <item row="2" column="4" >
+       <widget class="QLabel" name="label_9" >
+        <property name="text" >
+         <string>EndRep:</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <pixmapfunction></pixmapfunction>
+ <resources/>
+ <connections/>
+</ui>

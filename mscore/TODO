@@ -1,0 +1,53 @@
+Todo:
+	- don't save Time values as enum values. Thats not portable/expandable
+        and will break compatibility of xml files. Reuse code with musicXml save
+
+	* better automatic beaming; grouping of notes should depend on time type
+        (test example inv10.msc which has 9/8 time and should be grouped 3/8)
+        (untested; only implemented for some types; breaks some demos)
+
+Features:
+      - allow for special musical symbols in text
+            - palette popup in text edit mode to allow for
+              selection of musical symbols
+      - dotted rests
+      - akkumulated empty measures
+      - "Faulenzer Zeichen" (repeat symbols)
+      - tuplets
+      - rehearsal marks
+      + system brackets
+      + trill lines
+      + octave lines
+            - shift pitch of bracketed notes while play
+      - implement voice detection algorithm for midi import
+      - allow insertion of arbitrary images
+            - scale images
+            - select anchor point
+      - allow insertion of scalable vector graphics
+      ...
+
+Instruments
+      - add General Midi program numbers to instruments
+      - add usable/maximal pitch range
+      - transposing instruments
+
+Misc:
+      - better handling of multi voice parts
+      - optimize layouter, to speed up rendering
+      - more drag/drop cut/paste operations
+
+Page Preview in Page Settings:
+      - add next/prev buttons for page selection
+
+Navigation Panel:
+      - handle case when score does not fit into
+        panel (move panel content horizontally)
+      - make panel resizable, or make size
+        configurable
+
+Player:
+      - interpret tempo
+      - interpret velocity; map velocity to musical symbols 
+        (pp-p-f-ff etc.)
+      - interpret gate time (staccato etc.)
+

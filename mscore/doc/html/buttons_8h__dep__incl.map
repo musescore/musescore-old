@@ -1,0 +1,4 @@
+base referer
+rect $buttons_8cpp.html 7,17 84,44
+rect $mscore_8cpp.html 108,17 185,44
+rect $moc__buttons_8cpp.html 209,17 319,44
