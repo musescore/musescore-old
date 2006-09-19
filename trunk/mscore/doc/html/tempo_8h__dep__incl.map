@@ -1,8 +1,0 @@
-base referer
-rect $file_8cpp.html 7,17 57,44
-rect $menus_8cpp.html 81,17 156,44
-rect $midi_8cpp.html 180,17 239,44
-rect $playpanel_8cpp.html 263,17 356,44
-rect $project_8cpp.html 380,17 455,44
-rect $seq_8cpp.html 479,17 537,44
-rect $tempo_8cpp.html 561,17 633,44

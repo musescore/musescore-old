@@ -1,6 +1,0 @@
-base referer
-rect $beam_8cpp.html 7,17 76,44
-rect $edit_8cpp.html 100,17 156,44
-rect $exportxml_8cpp.html 180,17 273,44
-rect $measure_8cpp.html 297,17 385,44
-rect $segment_8cpp.html 409,17 495,44

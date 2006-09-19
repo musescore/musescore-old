@@ -1,6 +1,0 @@
-base referer
-rect $plist_8h.html 7,17 49,44
-rect $element_8h.html 99,92 165,118
-rect $symbols_8h.html 73,17 143,44
-rect $spatium_8h.html 244,17 311,44
-rect $mtime_8h.html 167,17 220,44

@@ -1,5 +1,0 @@
-base referer
-rect $classClef.html 7,166 44,193
-rect $classFlag.html 68,166 105,193
-rect $classNoteAttribute.html 129,166 215,193
-rect $classElement.html 57,17 116,44

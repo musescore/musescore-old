@@ -1,8 +1,0 @@
-base referer
-rect $element_8h.html 179,92 245,118
-rect $note_8h.html 7,17 49,44
-rect $beam_8h.html 73,17 127,44
-rect $segment_8h.html 151,17 220,44
-rect $hairpin_8h.html 244,17 303,44
-rect $tuplet_8h.html 327,17 377,44
-rect $part_8h.html 371,92 413,118

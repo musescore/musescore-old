@@ -1,7 +1,0 @@
-base referer
-rect $dynamics_8cpp.html 6,17 100,44
-rect $edit_8cpp.html 124,17 180,44
-rect $file_8cpp.html 204,17 254,44
-rect $importxml_8cpp.html 278,17 369,44
-rect $measure_8cpp.html 393,17 481,44
-rect $menus_8cpp.html 505,17 580,44
