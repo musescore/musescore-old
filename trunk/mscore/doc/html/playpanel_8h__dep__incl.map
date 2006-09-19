@@ -1,0 +1,5 @@
+base referer
+rect $file_8cpp.html 7,17 57,44
+rect $moc__playpanel_8cpp.html 81,17 209,44
+rect $playpanel_8cpp.html 233,17 327,44
+rect $seq_8cpp.html 351,17 409,44

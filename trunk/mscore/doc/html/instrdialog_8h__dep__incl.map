@@ -1,0 +1,5 @@
+base referer
+rect $file_8cpp.html 7,17 57,44
+rect $instrdialog_8cpp.html 81,17 177,44
+rect $mscore_8cpp.html 201,17 279,44
+rect $moc__instrdialog_8cpp.html 303,17 431,44

@@ -1,0 +1,5 @@
+base referer
+rect $classKeySig.html 7,166 60,193
+rect $classPrefix.html 84,166 127,193
+rect $classTimeSig.html 151,166 209,193
+rect $classElement.html 76,17 135,44

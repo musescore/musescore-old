@@ -1,0 +1,4 @@
+base referer
+rect $classLoadMidi.html 6,92 70,119
+rect $classLoadMusicXml.html 94,92 190,119
+rect $classLoadStyle.html 214,92 284,119

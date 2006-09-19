@@ -1,0 +1,1526 @@
+//=============================================================================
+//  MusE Score
+//  Linux Music Score Editor
+//  $Id: importxml.cpp,v 1.81 2006/04/13 07:36:48 wschweer Exp $
+//
+//  Copyright (C) 2002-2006 Werner Schweer (ws@seh.de)
+//
+//  This program is free software; you can redistribute it and/or modify
+//  it under the terms of the GNU General Public License version 2.
+//
+//  This program is distributed in the hope that it will be useful,
+//  but WITHOUT ANY WARRANTY; without even the implied warranty of
+//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+//  GNU General Public License for more details.
+//
+//  You should have received a copy of the GNU General Public License
+//  along with this program; if not, write to the Free Software
+//  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+//=============================================================================
+
+#include "config.h"
+#include "mscore.h"
+#include "musicxml.h"
+#include "file.h"
+#include "score.h"
+#include "rest.h"
+#include "chord.h"
+#include "sig.h"
+#include "key.h"
+#include "clef.h"
+#include "note.h"
+#include "element.h"
+#include "text.h"
+#include "symbols.h"
+#include "slur.h"
+#include "hairpin.h"
+#include "tuplet.h"
+#include "segment.h"
+#include "dynamics.h"
+#include "page.h"
+#include "staff.h"
+#include "part.h"
+#include "measure.h"
+#include "style.h"
+#include "bracket.h"
+#include "layout.h"
+#include "timesig.h"
+#include "xml.h"
+#include "barline.h"
+
+//---------------------------------------------------------
+//   xmlSetPitch
+//    convert to midi pitch
+//---------------------------------------------------------
+
+static void xmlSetPitch(Note* n, int tick, char st, int alter, int octave, int accidental)
+      {
+      int step = st - 'A';
+      //                       a  b   c  d  e  f  g
+      static int table[7]  = { 9, 11, 0, 2, 4, 5, 7 };
+      if (step < 0 || step > 6) {
+            printf("xml2pitch: illegal pitch %d, <%c>\n", step, step+'A');
+            return;
+            }
+      int pitch = table[step] + alter + (octave+1) * 12;
+
+      if (pitch < 0)
+            pitch = 0;
+      if (pitch > 127)
+            pitch = 127;
+      n->setPitch(pitch);
+      static int table1[7]  = { 40, 39, 45, 44, 43, 42, 41 };
+      int line  = table1[step] - (octave+1) * 7;
+      int clef  = n->staff()->clef()->clef(tick);
+      line     += clefTable[clef].yOffset;
+      n->setLine(line);
+      n->setUserAccidental(accidental);
+      }
+
+//---------------------------------------------------------
+//   xml2voltaType
+//    convert MusicXML ending number to volta subtype
+//    returns subtype (1..3) or 0 on failure
+//---------------------------------------------------------
+
+static int xml2voltaType(QString en)
+      {
+      int res = 0;
+      if (en == "1")
+            res = 1;
+      else if (en == "2")
+            res = 2;
+      else if (en == "3")
+            res = 3;
+      return res;
+      }
+
+//---------------------------------------------------------
+//   MusicXml
+//---------------------------------------------------------
+
+MusicXml::MusicXml(QDomDocument* d)
+      {
+      doc = d;
+      maxLyrics = 0;
+      }
+
+//---------------------------------------------------------
+//   LoadMusicXml
+//---------------------------------------------------------
+
+class LoadMusicXml : public LoadFile {
+      QDomDocument* _doc;
+
+   public:
+      LoadMusicXml() {
+            _doc = new QDomDocument();
+            }
+      ~LoadMusicXml() {
+            delete _doc;
+            }
+      virtual bool loader(QFile* f);
+      QDomDocument* doc() const { return _doc; }
+      };
+
+//---------------------------------------------------------
+//   loader
+//    return true on error
+//---------------------------------------------------------
+
+bool LoadMusicXml::loader(QFile* qf)
+      {
+      int line, column;
+      QString err;
+      if (!_doc->setContent(qf, false, &err, &line, &column)) {
+            QString col, ln;
+            col.setNum(column);
+            ln.setNum(line);
+            error = err + "\n at line " + ln + " column " + col;
+            printf("error: %s\n", error.toLatin1().data());
+            return true;
+            }
+      return false;
+      }
+
+//---------------------------------------------------------
+//   importMusicXml
+//---------------------------------------------------------
+
+void Score::importMusicXml(const QString& name)
+      {
+      LoadMusicXml lx;
+      lx.load(name);
+      setSaved(false);
+      MusicXml musicxml(lx.doc());
+      musicxml.import(this);
+      connectTies();
+      layout();
+      }
+
+//---------------------------------------------------------
+//   import
+//      scorePartwise
+//        part-list
+//        part
+//        work
+//        identification
+//---------------------------------------------------------
+
+void MusicXml::import(Score* s)
+      {
+      score  = s;
+      tie    = 0;
+      for (int i = 0; i < MAX_SLURS; ++i)
+            slur[i] = 0;
+      tuplet = 0;
+      QDomNode node = doc->documentElement();
+
+      for (QDomNode node = doc->documentElement(); !node.isNull(); node = node.nextSibling()) {
+            QDomElement e = node.toElement();
+            if (e.isNull())
+                  continue;
+            if (e.tagName() == "score-partwise")
+                  scorePartwise(node.firstChild());
+            else
+                  domError(node);
+            }
+      }
+
+//---------------------------------------------------------
+//   scorePartwise
+//---------------------------------------------------------
+
+void MusicXml::scorePartwise(QDomNode node)
+      {
+      for (;!node.isNull(); node = node.nextSibling()) {
+            QDomElement e = node.toElement();
+            if (e.isNull())
+                  continue;
+            QString tag(e.tagName());
+            if (tag == "part-list")
+                  xmlPartList(node.firstChild());
+            else if (tag == "part")
+                  xmlPart(node.firstChild(), e.attribute(QString("id")));
+            else if (tag == "work") {
+                  QDomNode n = node.firstChild();
+                  while (!n.isNull()) {
+                        QDomElement e = n.toElement();
+                        if (e.isNull()) {
+                              n = n.nextSibling();
+                              continue;
+                              }
+                        if (e.tagName() == "work-number") {
+                              subTitle = e.text();
+                              }
+                        else if (e.tagName() == "work-title") {
+                              title = e.text();
+                              }
+                        else
+                              domError(n);
+                        n = n.nextSibling();
+                        }
+                  }
+            else if (tag == "identification") {
+                  QDomNode n = node.firstChild();
+                  while (!n.isNull()) {
+                        QDomElement e = n.toElement();
+                        if (e.isNull()) {
+                              n = n.nextSibling();
+                              continue;
+                              }
+                        if (e.tagName() == "creator") {
+                              // type is an arbitrary label
+                              QString type = e.attribute(QString("type"));
+                              QString str = e.text();
+                              if (type == "composer")
+                                    composer = str;
+                              else if (type == "poet")
+                                    poet = str;
+                              else if (type == "translator")
+                                    translator = str;
+                              else
+                                    domError(n);
+                              }
+                        else if (e.tagName() == "rights")
+                              score->rights = e.text();
+                        else if (e.tagName() == "encoding")
+                              ;
+                        else if (e.tagName() == "source")
+                              ;
+                        else
+                              domError(n);
+                        n = n.nextSibling();
+                        }
+                  }
+            else if (tag == "defaults") {
+                  for (QDomNode n = node.firstChild(); !n.isNull(); n = n.nextSibling()) {
+                        QDomElement e = n.toElement();
+                        if (e.isNull())
+                              continue;
+                        QString tag(e.tagName());
+                        if (tag == "scaling") {
+                              double millimeter = _spatium/10.0;
+                              double tenths = 1.0;
+                              for (QDomNode node = n.firstChild(); !node.isNull(); node = node.nextSibling()) {
+                                    QDomElement e = node.toElement();
+                                    if (e.isNull())
+                                          continue;
+                                    QString tag(e.tagName());
+                                    if (tag == "millimeters")
+                                          millimeter = e.text().toDouble();
+                                    else if (tag == "tenths")
+                                          tenths = e.text().toDouble();
+                                    else
+                                          domError(n);
+                                    }
+                              _spatium = DPMM * (millimeter * 10.0 / tenths);
+                              }
+                        else if (tag == "page-layout")
+                              score->pageFormat()->read(n);
+                        else if (tag == "system-layout") {
+                              for (QDomNode node = n.firstChild(); !node.isNull(); node = node.nextSibling()) {
+                                    QDomElement e = node.toElement();
+                                    if (e.isNull())
+                                          continue;
+                                    QString tag(e.tagName());
+                                    Spatium val(e.text().toDouble() / 10.0);
+                                    if (tag == "system-margins")
+                                          ;
+                                    else if (tag == "system-distance") {
+                                          style->systemDistance = val;
+                                          printf("system distance %f\n", val.val());
+                                          }
+                                    else if (tag == "top-system-distance")
+                                          ;
+                                    else
+                                          domError(node);
+                                    }
+                              }
+                        else if (tag == "staff-layout") {
+                              for (QDomNode node = n.firstChild(); !node.isNull(); node = node.nextSibling()) {
+                                    QDomElement e = node.toElement();
+                                    if (e.isNull())
+                                          continue;
+                                    QString tag(e.tagName());
+                                    Spatium val(e.text().toDouble() / 10.0);
+                                    if (tag == "staff-distance")
+                                          style->staffDistance = val;
+                                    else
+                                          domError(node);
+                                    }
+                              }
+                        else if (tag == "music-font") {
+                              printf("ImportXml:: music-font not supported\n");
+                              }
+                        else if (tag == "word-font") {
+                              printf("ImportXml:: word-font not supported\n");
+                              }
+                        else if (tag == "lyric-font") {
+                              printf("ImportXml:: lyric-font not supported\n");
+                              }
+                        else
+                              printf("Import MusicXml:defaults: <%s> not supported\n", tag.toLatin1().data());
+                        }
+                  }
+            else if (tag == "movement-number") {
+                  score->movementNumber = e.text();
+                  }
+            else if (tag == "movement-title") {
+                  score->movementTitle = e.text();
+                  }
+            else
+                  domError(node);
+            }
+      }
+
+//---------------------------------------------------------
+//   xmlPartList
+//---------------------------------------------------------
+
+void MusicXml::xmlPartList(QDomNode node)
+      {
+      for (;!node.isNull(); node = node.nextSibling()) {
+            QDomElement e = node.toElement();
+            if (e.isNull())
+                  continue;
+            if (e.tagName() == "score-part")
+                  xmlScorePart(node.firstChild(), e.attribute(QString("id")));
+            else if (e.tagName() == "part-group")
+                  ;
+            else
+                  domError(node);
+            }
+      }
+
+//---------------------------------------------------------
+//   xmlScorePart
+//---------------------------------------------------------
+
+void MusicXml::xmlScorePart(QDomNode node, QString id)
+      {
+      Part* part = new Part(score);
+      part->setId(id);
+
+// printf("create track id:<%s>\n", id.toLatin1().data());
+
+      for (;!node.isNull(); node = node.nextSibling()) {
+            QDomElement e = node.toElement();
+            if (e.isNull())
+                  continue;
+            if (e.tagName() == "part-name") {
+                  part->setLongName(Text(e.text(), TEXT_STYLE_INSTRUMENT_LONG));
+                  part->setTrackName(e.text());
+                  }
+            else if (e.tagName() == "part-abbreviation")
+                  ;
+            else if (e.tagName() == "score-instrument") {
+                  for (QDomNode n = node.firstChild(); !n.isNull(); n = n.nextSibling()) {
+                        QDomElement e = n.toElement();
+                        if (e.isNull())
+                              continue;
+                        if (e.tagName() == "instrument-name") {
+                              // part-name or instrument-name?
+                              if (part->longName().isEmpty())
+                                    part->setLongName(Text(e.text(), TEXT_STYLE_INSTRUMENT_LONG));
+                              }
+                        else
+                              domError(n);
+                        }
+                  }
+            else if (e.tagName() == "midi-instrument") {
+                  for (QDomNode n = node.firstChild(); !n.isNull(); n = n.nextSibling()) {
+                        QDomElement e = n.toElement();
+                        if (e.isNull())
+                              continue;
+                        if (e.tagName() == "midi-channel")
+                              part->setMidiChannel(e.text().toInt() - 1);
+                        else if (e.tagName() == "midi-program")
+                              part->setMidiProgram(e.text().toInt() - 1);
+                        else
+                              domError(n);
+                        }
+                  }
+            else
+                  domError(node);
+            }
+      score->parts()->push_back(part);
+      Staff* staff = new Staff(score, part, 0);
+      part->staves()->push_back(staff);
+      score->staves()->push_back(staff);
+      }
+
+//---------------------------------------------------------
+//   xmlPart
+//---------------------------------------------------------
+
+void MusicXml::xmlPart(QDomNode node, QString id)
+      {
+      PartList* pl = score->parts();
+      iPart i;
+      for (i = pl->begin(); i != pl->end(); ++i) {
+            if ((*i)->id() == id)
+                  break;
+            }
+      if (i == pl->end()) {
+            printf("Import MusicXml:xmlPart: cannot find part %s\n", id.toLatin1().data());
+            exit(-1);
+            }
+      Part* part = *i;
+      tick = 0;
+      maxtick = 0;
+      lastMeasureLen = 0;
+
+      int staves = score->nstaves();
+      if (!score->scoreLayout()->first()) {
+            Measure* measure  = new Measure(score);
+            measure->setTick(tick);
+
+            for (int staff = 0; staff < staves; ++staff) {
+                  Staff* instr = score->staff(staff);
+                  if (instr->isTop()) {
+                        BarLine* bar = new BarLine(score);
+                        bar->setStaff(instr);
+                        measure->add(bar);
+                        }
+                  }
+            score->scoreLayout()->push_back(measure);
+            if (!title.isEmpty()) {
+                  TextElement* text = new TextElement(score, TEXT_STYLE_TITLE);
+                  text->setText(title);
+                  measure->add(text);
+                  }
+            else if (!score->movementTitle.isEmpty()) {
+                  TextElement* text = new TextElement(score, TEXT_STYLE_TITLE);
+                  text->setText(score->movementTitle);
+                  measure->add(text);
+                  }
+            if (!subTitle.isEmpty()) {
+                  TextElement* text = new TextElement(score, TEXT_STYLE_SUBTITLE);
+                  text->setText(subTitle);
+                  measure->add(text);
+                  }
+            else if (!score->movementNumber.isEmpty()) {
+                  TextElement* text = new TextElement(score, TEXT_STYLE_SUBTITLE);
+                  text->setText(score->movementNumber);
+                  measure->add(text);
+                  }
+            if (!composer.isEmpty()) {
+                  TextElement* text = new TextElement(score, TEXT_STYLE_COMPOSER);
+                  text->setText(composer);
+                  measure->add(text);
+                  }
+            if (!poet.isEmpty()) {
+                  TextElement* text = new TextElement(score, TEXT_STYLE_POET);
+                  text->setText(poet);
+                  measure->add(text);
+                  }
+            if (!translator.isEmpty()) {
+                  TextElement* text = new TextElement(score, TEXT_STYLE_TRANSLATOR);
+                  text->setText(translator);
+                  measure->add(text);
+                  }
+            }
+
+      for (; !node.isNull(); node = node.nextSibling()) {
+            QDomElement e = node.toElement();
+            if (e.isNull())
+                  continue;
+            if (e.tagName() == "measure")
+                  xmlMeasure(part, node, e.attribute(QString("number")).toInt()-1);
+
+            else
+                  domError(node);
+            }
+      }
+
+//---------------------------------------------------------
+//   xmlMeasure
+//---------------------------------------------------------
+
+void MusicXml::xmlMeasure(Part* part, QDomNode node, int number)
+      {
+      int staves = score->nstaves();
+      if (staves == 0) {
+            printf("no staves!\n");
+            return;
+            }
+
+      // search measure for tick
+      Measure* measure = 0;
+      for (Measure* m = score->scoreLayout()->first(); m; m = m->next()) {
+            if (m->tick() == tick) {
+                  measure = m;
+                  break;
+                  }
+            }
+      if (!measure) {
+            measure  = new Measure(score);
+            measure->setTick(tick);
+            measure->setNo(number);
+
+            for (int staff = 0; staff < staves; ++staff) {
+                  Staff* staffp = score->staff(staff);
+                  if (staffp->isTop()) {
+                        BarLine* bar = new BarLine(score);
+                        bar->setStaff(staffp);
+                        measure->add(bar);
+                        }
+                  }
+            score->scoreLayout()->push_back(measure);
+            }
+
+      // initialize voice list
+      // for (int i = 0; i < part->nstaves(); ++i) {
+      for (int i = 0; i < MAX_STAVES; ++i)
+            voicelist[i].clear();
+
+      // must remember volta to handle <ending type="discontinue">
+      Volta* lastVolta = 0;
+
+      QDomElement e = node.toElement();
+      QString implicit = e.attribute("implicit", "no");
+      if (implicit == "yes")
+            measure->setIrregular(true);
+
+      int staff = score->staff(part);
+      for (node = node.firstChild(); !node.isNull(); node = node.nextSibling()) {
+            QDomElement e = node.toElement();
+            if (e.isNull())
+                  continue;
+            if (e.tagName() == "attributes")
+                  xmlAttributes(measure, staff, node.firstChild());
+            else if (e.tagName() == "note")
+                  xmlNote(measure, staff, node.firstChild());
+            else if (e.tagName() == "backup") {
+                  for (QDomNode n = node.firstChild(); !n.isNull(); n = n.nextSibling()) {
+                        QDomElement e = n.toElement();
+                        if (e.isNull())
+                              continue;
+                        if (e.tagName() == "duration") {
+                              int val = e.text().toInt();
+                              if (val == 0)     // neuratron scanner produces sometimes 0 !?
+                                    val = 1;
+                              val = (val * ::division) / divisions;
+                              tick -= val;
+                              lastLen = val;    // ?
+                              }
+                        else
+                              domError(n);
+                        }
+                  }
+            else if (e.tagName() == "direction") {
+                  direction(measure, staff, node);
+                  }
+            else if (e.tagName() == "print") {
+                  QString newSystem = e.attribute("new-system", "no");
+                  QString newPage   = e.attribute("new-page", "no");
+                  //
+                  // in MScore the break happens _after_ the marked measure:
+                  //
+                  Measure* pm = measure->prev();
+                  if (pm == 0)
+                        printf("ImportXml: warning: break on first measure\n");
+                  else {
+                        if (newSystem == "yes")
+                              pm->setLineBreak(true);
+                        if (newPage == "yes")
+                              pm->prev()->setPageBreak(true);
+                        }
+                  for (QDomNode n = node.firstChild(); !n.isNull(); n = n.nextSibling()) {
+                        QDomElement e = n.toElement();
+                        if (e.isNull())
+                              continue;
+                        if (e.tagName() == "system-layout") {
+                              }
+                        else if (e.tagName() == "staff-layout") {
+                              }
+                        else
+                              domError(n);
+                        }
+                  }
+            else if (e.tagName() == "forward") {
+                  for (QDomNode n = node.firstChild(); !n.isNull(); n = n.nextSibling()) {
+                        QDomElement e = n.toElement();
+                        if (e.isNull())
+                              continue;
+                        if (e.tagName() == "duration") {
+                              int val = (e.text().toInt() * ::division)/divisions;
+                              tick += val;
+                              lastLen = val;    // ?
+                              }
+                        else if (e.tagName() == "voice")
+                              ;
+                        else if (e.tagName() == "staff")
+                              ;
+                        else
+                              domError(n);
+                        }
+                  }
+            else if (e.tagName() == "barline") {
+                  QString loc = e.attribute("location", "right");
+                  QString barStyle;
+                  QString endingNumber;
+                  QString endingType;
+                  QString repeat;
+                  for (QDomNode n = node.firstChild(); !n.isNull(); n = n.nextSibling()) {
+                        QDomElement e = n.toElement();
+                        if (e.isNull())
+                              continue;
+                        if (e.tagName() == "bar-style")
+                              barStyle = e.text();
+                        else if (e.tagName() == "ending") {
+                              endingNumber = e.attribute("number");
+                              endingType = e.attribute("type");
+                              }
+                        else if (e.tagName() == "repeat")
+                              repeat = e.attribute("direction");
+                        else
+                              domError(n);
+                        }
+                  if ((barStyle != "") || (repeat != "")) {
+                        BarLine* barLine = new BarLine(score);
+                        if (barStyle == "light-heavy" && repeat == "backward") {
+                              barLine->setSubtype(END_REPEAT);
+                              }
+                        else if (barStyle == "heavy-light" && repeat == "forward") {
+                              barLine->setSubtype(START_REPEAT);
+                              }
+                        else if (barStyle == "light-heavy" && repeat.isEmpty())
+                              barLine->setSubtype(END_BAR);
+                        else if (barStyle == "regular")
+                              barLine->setSubtype(NORMAL_BAR);
+                        else if (barStyle == "dotted")
+                              barLine->setSubtype(BROKEN_BAR);
+                        else if (barStyle == "light-light")
+                              barLine->setSubtype(DOUBLE_BAR);
+      /*                  else if (barStyle == "heavy-light")
+                              ;
+                        else if (barStyle == "heavy-heavy")
+                              ;
+      */
+                        else if (barStyle == "none")
+                              barLine->setSubtype(NORMAL_BAR);
+                        else if (barStyle == "") {
+                              if (repeat == "backward")
+                                    barLine->setSubtype(END_REPEAT);
+                              else if (repeat == "forward")
+                                    barLine->setSubtype(START_REPEAT);
+                              else
+                                    printf("ImportXml: warning: empty bar type\n");
+                              }
+                        else
+                              printf("unsupported bar type <%s>\n", barStyle.toLatin1().data());
+                        barLine->setStaff(score->staff(staff));
+                        measure->add(barLine);
+                        }
+                  if (!(endingNumber.isEmpty() && endingType.isEmpty())) {
+                        if (endingNumber.isEmpty())
+                              printf("ImportXml: warning: empty ending number\n");
+                        else if (endingType.isEmpty())
+                              printf("ImportXml: warning: empty ending type\n");
+                        else {
+                              int subtype = xml2voltaType(endingNumber);
+                              if (!subtype)
+                                    printf("ImportXml: warning: unsupported ending type <%s>\n",
+                                            endingType.toLatin1().data());
+                              else {
+                                    if (endingType == "start") {
+                                          Volta* volta = new Volta(score);
+                                          volta->setStaff(score->staff(staff));
+                                          volta->setSubtype(subtype);
+                                          measure->add(volta);
+                                          lastVolta = volta;
+                                          }
+                                    else if (endingType == "stop") {
+                                          lastVolta = 0;
+                                          }
+                                    else if (endingType == "discontinue") {
+                                          if ((subtype == 2) && lastVolta && (lastVolta->subtype() == 2))
+                                                lastVolta->setSubtype(4);
+                                          lastVolta = 0;
+                                          }
+                                    else
+                                          printf("ImportXml: warning: unsupported ending type <%s>\n",
+                                                  endingType.toLatin1().data());
+                                    }
+                              }
+                        }
+                  }
+            else
+                  domError(node);
+            }
+      staves = part->nstaves();
+      for (int rstaff = 0; rstaff < staves; ++rstaff)
+            measure->layoutNoteHeads(staff + rstaff);
+      int measureLen = maxtick - measure->tick();
+#if 1
+      if (lastMeasureLen != measureLen) {
+            int z, n;
+            score->sigmap->timesig(measure->tick(), z, n);
+            int tm = ticks_measure(z, n);
+            if (measureLen != score->sigmap->ticksMeasure(measure->tick())) {
+                  score->sigmap->add(measure->tick(), measureLen, z, n);
+                  if (tm != measureLen) {
+                        if (!measure->irregular()) {
+                            /* MusicXML's implicit means "don't print measure number",
+                              set it only if explicitly requested, not when the measure length
+                              is not what is expected. See MozartTrio.xml measures 12..13.
+                              measure->setIrregular(true);
+                              */
+                              printf("irregular Measure %d Len at %d(%d)   last: %d -> should be: %d (tm=%d)\n",
+                                 number, measure->tick(), maxtick, lastMeasureLen, measureLen, tm);
+                              }
+                        }
+                  }
+            }
+#endif
+      lastMeasureLen = measureLen;
+      tick = maxtick;
+      }
+
+//---------------------------------------------------------
+//   direction
+//---------------------------------------------------------
+
+// LVI FIXME: introduce offset concept to mscore.
+// offset changes only the print position (not the tick), but unlike relative-x
+// it is expressed in terms of divisions (MusicXML direction.dtd)
+// even though the DTD does not mention it, practically speaking
+// offset and relative-x are mutually exclusive
+
+void MusicXml::direction(Measure* measure, int staff, QDomNode node)
+      {
+      QDomElement e = node.toElement();
+      QString placement = e.attribute("placement");
+
+      QString dirType;
+      QString type;
+      QString txt;
+      QString lang;
+      QString weight;
+      int offset = 0;
+      int rstaff = 0;
+      QStringList dynamics;
+      int spread = 0;
+      qreal rx = 0.0;
+      qreal ry = 0.0;
+      qreal yoffset = 0.0;
+      qreal xoffset = 0.0;
+      qreal size = textStyles[TEXT_STYLE_TECHNIK].size;
+
+      for (node = node.firstChild(); !node.isNull(); node = node.nextSibling()) {
+            QDomElement e = node.toElement();
+            if (e.isNull())
+                  continue;
+            if (e.tagName() == "direction-type") {
+                  for (QDomNode n = node.firstChild(); !n.isNull(); n = n.nextSibling()) {
+                        QDomElement e = n.toElement();
+                        if (e.isNull())
+                              continue;
+                        dirType = e.tagName();
+                        //
+                        // TODO: whats the difference between relative-x and default-x
+                        //       in handling?
+                        //
+                        ry      = e.attribute(QString("relative-y"), "0").toDouble() * -.1;
+                        rx      = e.attribute(QString("relative-x"), "0").toDouble() * .1;
+                        yoffset = e.attribute("default-y", "0.0").toDouble() * -0.1;
+                        xoffset = e.attribute("default-x", "0.0").toDouble() * 0.1;
+                        if (dirType == "words") {
+                              txt    = e.text();
+                              lang   = e.attribute(QString("xml:lang"), "it");
+                              weight = e.attribute(QString("font-weight"));
+                              if (e.hasAttribute("font-size"))
+                                    size = e.attribute("font-size").toDouble();
+                              }
+                        else if (dirType == "pedal") {
+                              type = e.attribute(QString("type"));
+                              }
+                        else if (dirType == "dynamics") {
+                              QDomNode nn = n.firstChild();
+                              if (!nn.isNull()) {
+                                    QDomElement e = nn.toElement();
+                                    if (!e.isNull()) {
+                                          dynamics.push_back(e.tagName());
+                                          }
+                                    }
+                              }
+                        else if (dirType == "wedge") {
+                              type   = e.attribute(QString("type"));
+                              spread = e.attribute(QString("spread"), "0").toInt();
+                              }
+                        else if (dirType == "dashes") {
+                              }
+                        else
+                              domError(n);
+                        }
+                  }
+            else if (e.tagName() == "sound") {
+                  // attr: dynamics, tempo
+                  }
+            else if (e.tagName() == "offset")
+                  offset = (e.text().toInt() * ::division)/divisions;
+            else if (e.tagName() == "staff")
+                  rstaff = e.text().toInt() - 1;
+            else
+                  domError(node);
+            }
+      if (placement == "below")
+            ry += 6.0;
+
+      if (dirType == "words") {
+            TextElement* t = new TextElement(score);
+            t->setTick(tick);
+            t->setStyle(TEXT_STYLE_TECHNIK);
+            if (weight == "bold") {
+                  Text text(txt, TEXT_STYLE_TECHNIK, true, size);
+                  t->setText(text);
+                  }
+            else
+                  t->setText(txt);
+            if (placement == "above")
+                  ry -= 1.0;
+
+            t->setUserOff(QPointF(rx + xoffset, ry + yoffset));
+            t->setMxmlOff(offset);
+            t->setStaff(score->staff(staff + rstaff));
+            measure->add(t);
+            }
+      else if (dirType == "pedal") {
+            Symbol* s = new Symbol(score);
+            s->setTick(tick);
+            if (type == "start")
+                  s->setSym(pedalPedSym);
+            else if (type == "stop")
+                  s->setSym(pedalasteriskSym);
+            else
+                  printf("unknown pedal %s\n", type.toLatin1().data());
+            s->setUserOff(QPointF(rx + xoffset, ry + yoffset));
+            s->setMxmlOff(offset);
+            s->setStaff(score->staff(staff + rstaff));
+            measure->add(s);
+            }
+      else if (dirType == "dynamics") {
+            // more than one dynamic ???
+            for (QStringList::Iterator it = dynamics.begin(); it != dynamics.end(); ++it ) {
+                  DynVal val = Dynamic::tag2val(*it);
+                  Dynamic* dyn = new Dynamic(score, val);
+                  if (placement == "above")
+                        ry -= 12;
+                  dyn->setUserOff(QPointF(rx + xoffset, ry + yoffset));
+                  dyn->setMxmlOff(offset);
+                  dyn->setStaff(score->staff(staff + rstaff));
+                  dyn->setTick(tick);
+                  measure->add(dyn);
+                  }
+            }
+      else if (dirType == "wedge") {
+            //
+            // mscore places wedges automatically below staves, so
+            // undo the y +60 offset
+            //
+            if (type == "crescendo")
+                  addWedge(0, tick, rx, ry - 6.0, spread);
+            else if (type == "stop")
+                  genWedge(0, tick, measure, staff+rstaff, rx, ry - 6.0, spread);
+            else if (type == "diminuendo")
+                  addWedge(0, tick, rx, ry - 6.0, spread);
+            else
+                  printf("unknown wedge type: %s\n", type.toLatin1().data());
+            }
+      }
+
+//---------------------------------------------------------
+//   xmlAttributes
+//---------------------------------------------------------
+
+void MusicXml::xmlAttributes(Measure* measure, int staff, QDomNode node)
+      {
+      for (;!node.isNull(); node = node.nextSibling()) {
+            QDomElement e = node.toElement();
+            if (e.isNull())
+                  continue;
+            if (e.tagName() == "divisions")
+                  divisions = e.text().toInt();
+            else if (e.tagName() == "key") {
+                  int key = 0;
+                  for (QDomNode n = node.firstChild(); !n.isNull(); n = n.nextSibling()) {
+                        QDomElement e = n.toElement();
+                        if (e.isNull())
+                              continue;
+                        if (e.tagName() == "fifths")
+                              key = e.text().toInt();
+                        else if (e.tagName() == "mode")
+                              ;
+                        else
+                              domError(n);
+                        }
+                  int oldkey = score->keymap->key(tick);
+                  if (oldkey != key)
+                        (*score->keymap)[tick] = key;
+
+                  if (tick && oldkey != key) {
+                        // dont generate symbol for tick 0
+                        Part* part = score->part(staff);
+                        int staves = part->nstaves();
+                        for (int i = 0; i < staves; ++i) {
+                              int clef = score->staff(staff)->clef()->clef(tick);
+                              int clefOffset = clefTable[clef].yOffset;
+                              KeySig* keysig = new KeySig(score, key, clefOffset);
+                              keysig->setTick(tick);
+                              keysig->setStaff(score->staff(staff + i));
+                              measure->add(keysig);
+                              }
+                        }
+                  }
+            else if (e.tagName() == "time") {
+                  for (QDomNode n = node.firstChild(); !n.isNull(); n = n.nextSibling()) {
+                        QDomElement e = n.toElement();
+                        if (e.isNull())
+                              continue;
+                        if (e.tagName() == "beats")
+                              beats = e.text().toInt();
+                        else if (e.tagName() == "beat-type") {
+                              beatType = e.text().toInt();
+                              }
+                        else
+                              domError(n);
+                        }
+                  score->sigmap->add(tick, beats, beatType);
+                  if (tick) {
+                        // dont generate symbol for tick 0
+                        Part* part = score->part(staff);
+                        int staves = part->nstaves();
+                        for (int i = 0; i < staves; ++i) {
+                              TimeSig* timesig = new TimeSig(score);
+                              timesig->setTick(tick);
+                              timesig->setSig(beats, beatType);
+                              timesig->setStaff(score->staff(staff + i));
+                              measure->add(timesig);
+                              }
+                        }
+                  }
+            else if (e.tagName() == "clef") {
+                  int clef   = 0;
+                  int clefno = e.attribute(QString("number"), "1").toInt() - 1;
+                  QString c;
+                  int i = 0;
+                  int line = -1;
+                  for (QDomNode n = node.firstChild(); !n.isNull(); n = n.nextSibling()) {
+                        QDomElement e = n.toElement();
+                        if (e.isNull())
+                              continue;
+                        if (e.tagName() == "sign")
+                              c = e.text();
+                        else if (e.tagName() == "line")
+                              line = e.text().toInt();
+                        else if (e.tagName() == "clef-octave-change") {
+                              i = e.text().toInt();
+                              if (i && !(c == "F" || c == "G"))
+                                    printf("clef-octave-change only implemented for F and G key\n");
+                              }
+                        else
+                              domError(n);
+                        }
+                  if (c == "G" && i == 0)
+                        clef = 0;
+                  else if (c == "G" && i == 1)
+                        clef = 1;
+                  else if (c == "G" && i == 2)
+                        clef = 2;
+                  else if (c == "G" && i == -1)
+                        clef = 3;
+                  else if (c == "F" && i == 0)
+                        clef = 4;
+                  else if (c == "F" && i == -1)
+                        clef = 5;
+                  else if (c == "F" && i == -2)
+                        clef = 6;
+                  else if (c == "C") {
+                        if (line == 3)
+                              clef = 10;
+                        else if (line == 2)
+                              clef = 11;
+                        else if (line == 1)
+                              clef = 12;
+                        }
+                  Staff* part = score->staff(staff + clefno);
+                  ClefList* ct = part->clef();
+                  (*ct)[tick] = clef;
+                  if (tick) {
+                        // dont generate symbol for tick 0
+                        Clef* clefs = new Clef(score, clef | clefSmallBit);
+                        clefs->setTick(tick);
+                        clefs->setStaff(part);
+                        measure->add(clefs);
+                        ++clefno;
+                        }
+                  }
+            else if (e.tagName() == "staves") {
+                  int staves = e.text().toInt();
+                  Part* part = score->part(staff);
+                  part->setStaves(staves);
+                  Staff* staff = part->staff(0);
+                  if (staff && staves == 2) {
+                        staff->setBracket(BRACKET_AKKOLADE);
+                        staff->setBracketSpan(2);
+                        }
+                  }
+            else
+                  domError(node);
+            }
+      }
+
+//---------------------------------------------------------
+//   xmlNote
+//---------------------------------------------------------
+
+void MusicXml::xmlNote(Measure* measure, int staff, QDomNode node)
+      {
+      voice = 0;
+      move  = 0;
+
+      int duration = 0;
+      bool rest    = false;
+      int relStaff = 0;
+      QString lyric[MAX_LYRICS];
+      QString syllabic[MAX_LYRICS];
+      BeamMode bm  = BEAM_NO;
+      Direction sd = AUTO;
+      int dots     = 0;
+      bool grace   = false;
+      QString fermataType;
+      QString tupletType;
+      QString tupletPlacement;
+      QString tupletBracket;
+      QString step;
+      QString fingering;
+      QString graceSlash;
+      int alter  = 0;
+      int octave = 4;
+      int accidental = 0;
+      DurationType durationType = D_QUARTER;
+
+      for (; !node.isNull(); node = node.nextSibling()) {
+            QDomElement e = node.toElement();
+            if (e.isNull())
+                  continue;
+            QString tag(e.tagName());
+            QString txt(e.text());
+
+            if (tag == "pitch") {
+                  step   = "C";
+                  alter  = 0;
+                  octave = 4;
+                  for (QDomNode n = node.firstChild(); !n.isNull(); n = n.nextSibling()) {
+                        QDomElement e = n.toElement();
+                        if (e.isNull())
+                              continue;
+                        if (e.tagName() == "step")          // A-G
+                              step = e.text();
+                        else if (e.tagName() == "alter")    // -1=flat 1=sharp (0.5=quarter sharp)
+                              alter = e.text().toInt();
+                        else if (e.tagName() == "octave")   // 0-9 4=middle C
+                              octave = e.text().toInt();
+                        else
+                              domError(n);
+                        }
+                  }
+            else if (tag == "duration")
+                  duration = e.text().toInt();
+            else if (tag == "type") {
+                  QString s = e.text();
+                  if (s == "quarter")
+                        durationType = D_QUARTER;
+                  else if (s == "eighth")
+                        durationType = D_EIGHT;
+                  else if (s == "256th")
+                        durationType = D_256TH;
+                  else if (s == "128th")
+                        durationType = D_128TH;
+                  else if (s == "64th")
+                        durationType = D_64TH;
+                  else if (s == "32nd")
+                        durationType = D_32ND;
+                  else if (s == "16th")
+                        durationType = D_16TH;
+                  else if (s == "half")
+                        durationType = D_HALF;
+                  else if (s == "whole")
+                        durationType = D_WHOLE;
+                  else if (s == "breve")
+                        durationType = D_BREVE;
+                  else if (s == "long")
+                        durationType = D_LONG;
+                  else
+                        printf("unknown note type <%s>\n", s.toLatin1().data());
+                  }
+            else if (tag == "chord")
+                  tick -= lastLen;
+            else if (tag == "voice") {
+                  voice = e.text().toInt() - 1;
+                  }
+            else if (tag == "stem") {
+                  if (e.text() == "up")
+                        sd = UP;
+                  else if (e.text() == "down")
+                        sd = DOWN;
+                  else
+                        printf("unknown stem direction %s\n", e.text().toLatin1().data());
+                  }
+            else if (tag == "staff") {
+                  relStaff = e.text().toInt() - 1;
+                  //
+                  // Musicxml voices are counted for all staffs of an
+                  // instrument. They are not limited. In mscore voices are associated
+                  // with a staff. Every staff can have at most VOICES voices.
+                  // The following lines map musicXml voices to mscore voices.
+                  // If a voice crosses two staffs, this is expressed with the
+                  // "move" parameter in mscore.
+                  //
+
+                  int found = false;
+                  for (int s = 0; s < MAX_STAVES; ++s) {
+                        int v = 0;
+                        for (std::vector<int>::iterator i = voicelist[s].begin(); i != voicelist[s].end(); ++i, ++v) {
+                              if (*i == voice) {
+                                    int d = relStaff + staff - s;
+                                    relStaff -= d;
+                                    move += d;
+                                    voice = v;
+                                    found = true;
+                                    break;
+                                    }
+                              }
+                        }
+                  if (!found) {
+                        if (voicelist[staff+relStaff].size() >= unsigned(VOICES))
+                              printf("ImportMusicXml: too many voices (> %d)\n", VOICES);
+                        else {
+                              voicelist[staff+relStaff].push_back(voice);
+                              voice = voicelist[staff+relStaff].size() -1;
+                              }
+                        }
+                  }
+            else if (tag == "beam") {
+                  QString s = e.text();
+                  if (s == "begin") {
+                        bm = BEAM_BEGIN;
+                        }
+                  else if (s == "end") {
+                        bm = BEAM_END;
+                        }
+                  else if (s == "continue")
+                        bm = BEAM_MID;
+                  else if (s == "backward hook")
+                        ;
+                  else if (s == "forward hook")
+                        ;
+                  else
+                        printf("unknown beam keyword <%s>\n", s.toLatin1().data());
+                  }
+            else if (tag == "rest")
+                  rest = true;
+            else if (tag == "lyric") {
+                  int lyricNo = e.attribute(QString("number"), "1").toInt() - 1;
+                  if (maxLyrics <= lyricNo)
+                        maxLyrics = lyricNo + 1;
+                  if (lyricNo > MAX_LYRICS)
+                        printf("too much lyrics (>%d)\n", MAX_LYRICS);
+                  for (QDomNode n = node.firstChild(); !n.isNull(); n = n.nextSibling()) {
+                        QDomElement e = n.toElement();
+                        if (e.isNull())
+                              continue;
+                        if (e.tagName() == "syllabic")
+                              syllabic[lyricNo] = e.text();
+                        else if (e.tagName() == "text")
+                              lyric[lyricNo] = e.text();
+                        else if (e.tagName() == "extend")
+                              ;
+                        else if (e.tagName() == "end-line")
+                              ;
+                        else if (e.tagName() == "end-paragraph")
+                              ;
+                        else
+                              domError(n);
+                        }
+                  }
+            else if (tag == "dot")
+                  ++dots;
+            else if (tag == "accidental") {
+                  QString s = e.text();
+                  if (s == "natural")
+                        accidental = 5;
+                  else if (s == "flat")
+                        accidental = 2;
+                  else if (s == "sharp")
+                        accidental = 1;
+                  else if (s == "double-sharp")
+                        accidental = 3;
+                  else if (s == "sharp-sharp")
+                        accidental = 3;
+                  else if (s == "natural-flat")
+                        ;
+                  else if (s == "quarter-flat")
+                        ;
+                  else if (s == "quarter-sharp")
+                        ;
+                  else if (s == "three-quarters-flat")
+                        ;
+                  else if (s == "three-quarters-sharp")
+                        ;
+                  else if (s == "flat-flat")
+                        accidental = 4;
+                  else if (s == "natural-sharp")
+                        ;
+                  else
+                        printf("unknown accidental %s\n", s.toLatin1().data());
+                  }
+            else if (tag == "notations") {
+                  for (QDomNode n = node.firstChild(); !n.isNull(); n = n.nextSibling()) {
+                        QDomElement e = n.toElement();
+                        if (e.isNull())
+                              continue;
+                        if (e.tagName() == "slur") {
+                              int slurNo   = e.attribute(QString("number"), "1").toInt() - 1;
+                              QString slurType = e.attribute(QString("type"));
+                              if (slurType == "start") {
+                                    bool endSlur = false;
+                                    if (slur[slurNo] == 0)
+                                          slur[slurNo] = new Slur(score);
+                                    else
+                                          endSlur = true;
+                                    QString pl = e.attribute(QString("placement"));
+                                    if (pl == "above")
+                                          slur[slurNo]->setSlurDirection(UP);
+                                    else if (pl == "below")
+                                          slur[slurNo]->setSlurDirection(DOWN);
+                                    Staff* stf = score->staff(staff + relStaff);
+                                    slur[slurNo]->setStart(tick, stf, voice);
+                                    slur[slurNo]->setStaff(stf);
+                                    slur[slurNo]->setParent(measure);
+                                    score->addObject(slur[slurNo]);
+                                    if (endSlur)
+                                          slur[slurNo] = 0;
+                                    }
+                              else if (slurType == "stop") {
+                                    Staff* stf = score->staff(staff + relStaff);
+                                    if (slur[slurNo] == 0) {
+                                          slur[slurNo] = new Slur(score);
+                                          slur[slurNo]->setEnd(tick, stf, voice);
+                                          }
+                                    else {
+                                          slur[slurNo]->setEnd(tick, stf, voice);
+                                          slur[slurNo] = 0;
+                                          }
+                                    }
+                              else
+                                    printf("unknown slur type %s\n", slurType.toLatin1().data());
+                              }
+                        else if (e.tagName() == "tied") {
+                              QString tiedType = e.attribute(QString("type"));
+                              if (tiedType == "start") {
+                                    if (tie) {
+                                          printf("Tie already active\n");
+                                          }
+                                    else {
+                                          tie = new Tie(score);
+                                          }
+                                    QString tiedOrientation = e.attribute("orientation", "auto");
+                                    if (tiedOrientation == "over")
+                                          tie->setSlurDirection(UP);
+                                    else if (tiedOrientation == "under")
+                                          tie->setSlurDirection(DOWN);
+                                    else if (tiedOrientation == "auto")
+                                          ;
+                                    else
+                                          printf("unknown tied orientation: %s\n", tiedOrientation.toLatin1().data());
+                                          ;
+                                    }
+                              else if (tiedType == "stop")
+                                    ;
+                              else
+                                    printf("unknown tied type %s\n", tiedType.toLatin1().data());
+                              }
+                        else if (e.tagName() == "tuplet") {
+                              tupletType      = e.attribute(QString("type"));
+                              tupletPlacement = e.attribute("placement");
+                              tupletBracket   = e.attribute("bracket");
+                              }
+                        else if (e.tagName() == "dynamics") {
+                              // int rx            = e.attribute("relative-x").toInt();
+                              QString placement = e.attribute("placement");
+                              }
+                        else if (e.tagName() == "articulations") {
+                              }
+                        else if (e.tagName() == "fermata") {
+                              fermataType = e.attribute(QString("type"));
+                              }
+                        else if (e.tagName() == "ornaments") {
+					//	<trill-mark placement="above"/>
+                              }
+                        else if (e.tagName() == "technical") {
+                              for (QDomNode n2 = n.firstChild(); !n2.isNull(); n2 = n2.nextSibling()) {
+                                    QDomElement e = n2.toElement();
+                                    if (e.isNull())
+                                          continue;
+                                    if (e.tagName() == "fingering")
+                                          fingering = e.text();
+                                    else if (e.tagName() == "fret")
+                                          ;
+                                    else if (e.tagName() == "string")
+                                          ;
+                                    else
+                                          domError(n2);
+                                    }
+                              }
+                        else
+                              domError(n);
+                        }
+                  }
+            else if (tag == "tie") {
+                  QString tieType = e.attribute(QString("type"));
+                  if (tieType == "start")
+                        ;
+                  else if (tieType == "stop")
+                        ;
+                  else
+                        printf("unknown tie type %s\n", tieType.toLatin1().data());
+                  }
+            else if (tag == "grace") {
+                  grace = true;
+                  graceSlash = e.attribute(QString("slash"));
+                  }
+            else if (tag == "time-modification")  // tuplets
+                  ;
+            else if (tag == "notehead")
+                  ;
+            else
+                  domError(node);
+            }
+      int ticks = (::division * duration) / divisions;
+
+      if (tick + ticks > maxtick)
+            maxtick = tick + ticks;
+
+//      printf("%s at %d voice %d dur = %d, beat %d/%d div %d pitch %d ticks %d\n",
+//         rest ? "Rest" : "Note", tick, voice, duration, beats, beatType,
+//         divisions, pitch, ticks);
+
+      ChordRest* cr = 0;
+
+      if (rest) {
+            cr = new Rest(score, tick, ticks);
+            // TODO: try to find out if this rest is part of a beam
+            cr->setBeamMode(BEAM_NO);
+//            cr->setBeamMode(BEAM_AUTO);
+            cr->setVoice(voice);
+            cr->setStaff(score->staff(staff + relStaff));
+            ((Rest*)cr)->setMove(move);
+            measure->add(cr);
+            }
+      else {
+            char c     = step[0].toLatin1();
+            Note* note = new Note(score);
+            note->setGrace(grace);
+
+            // xmlSetPitch(note, tick, c, alter, octave, accidental);
+
+            note->setType(durationType);
+            note->setDots(dots);
+            note->setVoice(voice);
+            note->setMove(move);
+
+            if (!fingering.isEmpty()) {
+                  Fingering* f = new Fingering(score);
+                  f->setText(fingering);
+                  note->add(f);
+                  }
+
+            if (tie) {
+                  note->setTieFor(tie);
+                  tie->setStartNote(note);
+                  tie->setStaff(score->staff(staff + relStaff));
+                  tie = 0;
+                  }
+
+            cr = measure->findChord(tick, staff + relStaff, voice, grace);
+            if (cr == 0) {
+                  cr = new Chord(score, tick);
+                  cr->setVoice(voice);
+                  cr->setTickLen(ticks);
+                  ((Chord*)cr)->setGrace(grace);
+                  cr->setBeamMode(bm);
+                  cr->setStaff(score->staff(staff + relStaff));
+                  measure->add(cr);
+                  }
+            cr->add(note);
+            xmlSetPitch(note, tick, c, alter, octave, accidental);
+
+            for (int i = 0; i < MAX_LYRICS; ++i) {
+                  if (!lyric[i].isEmpty()) {
+                        Lyrics* l = new Lyrics(score);
+                        l->setText(lyric[i]);
+                        l->setTick(tick);
+                        l->setNo(i);
+                        Lyrics::Syllabic s = Lyrics::SINGLE;
+                        if (syllabic[i] == "single")
+                              ;
+                        else if (syllabic[i] == "begin")
+                              s = Lyrics::BEGIN;
+                        else if (syllabic[i] == "end")
+                              s = Lyrics::END;
+                        else if (syllabic[i] == "middle")
+                              s = Lyrics::MIDDLE;
+                        else
+                              printf("unknown syllabic %s\n", syllabic[i].toLatin1().data());
+                        l->setSyllabic(s);
+                        l->setStaff(score->staff(staff + relStaff));
+                        Segment* segment = measure->tick2segment(tick);
+                        segment->add(l);
+                        }
+                  }
+            if (cr->beamMode() == BEAM_NO)
+                  cr->setBeamMode(bm);
+            ((Chord*)cr)->setStemDirection(sd);
+            }
+      if (!fermataType.isEmpty()) {
+            NoteAttribute* f = new NoteAttribute(score);
+            if (fermataType == "upright") {
+                  f->setSubtype(UfermataSym);
+                  cr->add(f);
+                  }
+            else if (fermataType == "inverted") {
+                  f->setSubtype(DfermataSym);
+                  f->setUserYoffset(5.3); // force below note (albeit by brute force)
+                  cr->add(f);
+                  }
+            else {
+                  printf("unknown fermata type %s\n", fermataType.toLatin1().data());
+                  delete f;
+                  }
+            }
+      if (!tupletType.isEmpty()) {
+            if (tupletType == "start") {
+                  tuplet = new Tuplet(score);
+                  // type, placement
+
+                  measure->addTuplet(tuplet);
+                  cr->setTuplet(tuplet);
+                  tuplet->add(cr);
+                  }
+            else if (tupletType == "stop") {
+                  cr->setTuplet(tuplet);
+                  tuplet->add(cr);
+                  tuplet = 0;
+                  }
+            else
+                  printf("unknown tuplet type %s\n", tupletType.toLatin1().data());
+            }
+      if (tuplet) {
+            cr->setTuplet(tuplet);
+            tuplet->add(cr);
+            }
+
+      lastLen = ticks;
+      tick += ticks;
+      }
+
+//---------------------------------------------------------
+//   addWedge
+//---------------------------------------------------------
+
+void MusicXml::addWedge(int no, int tick, qreal rx, qreal ry, int spread)
+      {
+      MusicXmlWedge wedge;
+      wedge.number = no;
+      wedge.startTick = tick;
+      wedge.rx = rx;
+      wedge.ry = ry;
+      wedge.spread = spread;
+
+      if (int(wedgeList.size()) > no)
+            wedgeList[no] = wedge;
+      else
+            wedgeList.push_back(wedge);
+      }
+
+//---------------------------------------------------------
+//   genWedge
+//---------------------------------------------------------
+
+void MusicXml::genWedge(int no, int endTick, Measure* measure, int staff,
+   qreal /*rx*/, qreal /*ry*/, int spread)
+      {
+      Hairpin* hp = new Hairpin(score);
+
+printf("gen wedge staff %d\n", staff);
+      hp->setTick1(wedgeList[no].startTick);
+      hp->setTick2(endTick);
+      hp->setSubtype(spread < wedgeList[no].spread ? 1 : 0);
+      hp->setUserOff(QPointF(wedgeList[no].rx, wedgeList[no].ry + 1.0));
+      hp->setStaff(score->staff(staff));
+      measure->add(hp);
+      }
+

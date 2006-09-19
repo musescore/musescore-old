@@ -1,0 +1,4 @@
+base referer
+rect $classPageSettingsBase.html 16,167 138,193
+rect $classUi__PageSettingsBase.html 6,17 148,44
+rect $classPageSettings.html 32,241 122,268

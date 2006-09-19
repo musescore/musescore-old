@@ -1,0 +1,5 @@
+base referer
+rect $classUi__RestPropertyBase.html 17,7 156,33
+rect $classUi_1_1RestPropertyBase.html 205,7 341,33
+rect $classRestPropertyBase.html 392,7 509,33
+rect $classRestPropertyEdit.html 560,7 669,33

@@ -1,0 +1,13 @@
+<!DOCTYPE RCC>
+<RCC version="1.0">
+   <qresource>
+      <file>data/paper2.png</file>
+      <file>data/text_bold.png</file>
+      <file>data/text_italic.png</file>
+      <file>data/text_left.png</file>
+      <file>data/text_right.png</file>
+      <file>data/text_center.png</file>
+      <file alias="fonts/emmentaler_20.otf">fonts/emmentaler_20.otf</file>
+   </qresource>
+</RCC>
+

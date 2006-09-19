@@ -1,0 +1,5 @@
+base referer
+rect $classUi__ClefPropertyBase.html 17,7 153,33
+rect $classUi_1_1ClefPropertyBase.html 202,7 336,33
+rect $classClefPropertyBase.html 386,7 501,33
+rect $classClefPropertyEdit.html 550,7 657,33

@@ -1,0 +1,71 @@
+Internationalisation
+
+Currently MuseScore contains a mix of german and english.
+My english is not too good so its likely that MuseScore contains
+some bad/wrong musical terms. To fix this i need your help.
+
+If you want to contribute a translation the following hints
+may be of help to you:
+
+
+Step 1:
+      enter the MuseScore directory and edit the
+      file "mscore.pro"
+
+      Append a new target file name at "TRANSLATIONS"
+      e.g. change
+            TRANSLATIONS = mscore_de.ts
+      into
+            TRANSLATIONS = mscore_de.ts mscore_fr.ts
+      if you want to generate a french MuseScore version.
+
+Step 2:
+      start the Qt-Program "lupdate"
+
+            lupdate mscore.pro
+
+      Maybe "lupdate" is not in your PATH and you must
+      specify the complete pathname "lupdate"
+      Example:
+            /usr/qt3-2/bin/lupdate mscore.pro
+
+      This generates the file "locale/mscore_fr.ts".
+
+Step 3:
+      Edit "locale/mscore_fr.ts" manually or use the Qt "linguist" tool:
+
+            linguist mscore_fr.ts
+
+Step 4:
+     Save the edited file "mscore_fr.ts" from linguist and
+     start File->Release. This generates the file "locale/mscore_fr.qm"
+
+      or
+
+      start the Qt program "lrelease"
+
+            lrelease mscore.pro
+
+      This generates all *.qm files.
+
+Step 5:
+      install the *.qm files: as superuser start "make install"
+
+
+Step 6:
+      Test:
+            set the environment variable LC_ALL to the desired
+            Language:
+                  export LC_ALL=fr
+
+            Start mscore:
+                  mscore sonata16.msc
+
+
+share/templates/instruments.xml:
+      The instruments definition file can be localized by
+      supplying a translated instruments_xx.xml file,
+      where xx is a two-letter ISO 3166 country code.
+      
+
+

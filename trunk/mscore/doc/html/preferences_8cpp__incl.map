@@ -1,0 +1,12 @@
+base referer
+rect $xml_8h.html 25,167 65,193
+rect $project_8h.html 89,167 148,193
+rect $system_8h.html 7,92 68,119
+rect $undo_8h.html 92,92 140,119
+rect $mscore_8h.html 164,92 225,119
+rect $globals_8h.html 201,17 263,44
+rect $note_8h.html 249,92 292,119
+rect $preferences_8h.html 279,167 369,193
+rect $prefsdialogbase_8h.html 316,92 433,119
+rect $synti_8h.html 393,167 439,193
+rect $seq_8h.html 463,167 505,193

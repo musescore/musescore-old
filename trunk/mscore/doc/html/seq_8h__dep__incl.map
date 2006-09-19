@@ -1,0 +1,9 @@
+base referer
+rect $canvas_8cpp.html 7,17 84,44
+rect $jackaudio_8cpp.html 108,17 201,44
+rect $mscore_8cpp.html 225,17 303,44
+rect $moc__seq_8cpp.html 327,17 417,44
+rect $playpanel_8cpp.html 441,17 535,44
+rect $preferences_8cpp.html 559,17 665,44
+rect $project_8cpp.html 689,17 764,44
+rect $seq_8cpp.html 788,17 847,44

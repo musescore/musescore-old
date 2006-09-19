@@ -1,0 +1,13 @@
+base referer
+rect $project_8h.html 161,260 220,287
+rect $dynamics_8cpp.html 19,8 112,35
+rect $edit_8cpp.html 37,61 93,88
+rect $hairpin_8cpp.html 28,119 103,145
+rect $instrdialog_8cpp.html 17,181 113,208
+rect $measure_8cpp.html 21,257 109,284
+rect $navigate_8cpp.html 23,309 108,336
+rect $project_8cpp.html 28,361 103,388
+rect $select_8cpp.html 31,412 100,439
+rect $slur_8cpp.html 39,463 92,489
+rect $system_8cpp.html 27,513 104,540
+rect $undo_8cpp.html 33,564 97,591

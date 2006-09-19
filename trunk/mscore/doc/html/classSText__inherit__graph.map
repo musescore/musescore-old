@@ -1,0 +1,8 @@
+base referer
+rect $classDynamic.html 7,166 68,193
+rect $classFingering.html 92,166 156,193
+rect $classInstrumentName1.html 180,166 289,193
+rect $classInstrumentName2.html 313,166 425,193
+rect $classLyrics.html 449,166 492,193
+rect $classTempoText.html 516,166 591,193
+rect $classElement.html 272,17 331,44

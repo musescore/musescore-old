@@ -1,0 +1,1379 @@
+//=============================================================================
+//  MusE Score
+//  Linux Music Score Editor
+//  $Id: exportxml.cpp,v 1.71 2006/03/28 14:58:58 wschweer Exp $
+//
+//  Copyright (C) 2002-2006 Werner Schweer (ws@seh.de)
+//
+//  This program is free software; you can redistribute it and/or modify
+//  it under the terms of the GNU General Public License version 2.
+//
+//  This program is distributed in the hope that it will be useful,
+//  but WITHOUT ANY WARRANTY; without even the implied warranty of
+//  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+//  GNU General Public License for more details.
+//
+//  You should have received a copy of the GNU General Public License
+//  along with this program; if not, write to the Free Software
+//  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+//=============================================================================
+
+//=========================================================
+//  LVI FIXME
+//
+//  Evaluate paramenter handling between the various classes, could be simplified
+//=========================================================
+
+#include "config.h"
+#include "mscore.h"
+#include "file.h"
+#include "score.h"
+#include "rest.h"
+#include "chord.h"
+#include "sig.h"
+#include "key.h"
+#include "clef.h"
+#include "note.h"
+#include "segment.h"
+#include "text.h"
+#include "xml.h"
+#include "beam.h"
+#include "staff.h"
+#include "part.h"
+#include "measure.h"
+#include "style.h"
+#include "layout.h"
+#include "musicxml.h"
+#include "slur.h"
+#include "hairpin.h"
+#include "dynamics.h"
+#include "barline.h"
+
+//---------------------------------------------------------
+//   attributes -- prints <attributes> tag when necessary
+//---------------------------------------------------------
+
+class Attributes {
+      bool inAttributes;
+
+   public:
+      Attributes() { start(); }
+      void doAttr(Xml& xml, bool attr);
+      void start();
+      void stop(Xml& xml);
+      };
+
+//---------------------------------------------------------
+//   doAttr - when necessary change state and print <attributes> tag
+//---------------------------------------------------------
+
+void Attributes::doAttr(Xml& xml, bool attr)
+      {
+      if (!inAttributes && attr) {
+            xml.stag("attributes");
+            inAttributes = true;
+            }
+      else if (inAttributes && !attr) {
+            xml.etag("attributes");
+            inAttributes = false;
+            }
+      }
+
+//---------------------------------------------------------
+//   start -- initialize
+//---------------------------------------------------------
+
+void Attributes::start()
+      {
+      inAttributes = false;
+      }
+
+//---------------------------------------------------------
+//   stop -- print </attributes> tag when necessary
+//---------------------------------------------------------
+
+void Attributes::stop(Xml& xml)
+      {
+      if (inAttributes) {
+            xml.etag("attributes");
+            inAttributes = false;
+            }
+      }
+
+//---------------------------------------------------------
+//   notations -- prints <notations> tag when necessary
+//---------------------------------------------------------
+
+class Notations {
+      bool notationsPrinted;
+
+   public:
+      Notations() { notationsPrinted = false; }
+      void tag(Xml& xml);
+      void etag(Xml& xml);
+      };
+
+//---------------------------------------------------------
+//   slur handler -- prints <slur> tags
+//---------------------------------------------------------
+
+class SlurHandler {
+      Slur* slur[MAX_SLURS];
+      bool started[MAX_SLURS];
+      int findSlur(Slur* s);
+
+   public:
+      SlurHandler();
+      void doSlurStart(Chord* chord, Notations& notations, Xml& xml);
+      void doSlurStop(Chord* chord, Notations& notations, Xml& xml);
+      };
+
+//---------------------------------------------------------
+//   exportMusicXml
+//---------------------------------------------------------
+
+class ExportMusicXml : public SaveFile {
+      Score* score;
+      Xml xml;
+      SlurHandler sh;
+      int tick;
+      Attributes attr;
+      void chord(Chord* chord, int staff, const LyricsList* ll);
+      void rest(Rest* chord, int staff);
+      void clef(int staff, int clef);
+      void timesig(int z, int n);
+      void keysig(int key);
+      void bar(const BarLine* bar, const Volta* volta=0, const QString& dir="");
+      void barlineLeft(Measure* m, int strack, int etrack, Volta* volta);
+      void pitch2xml(Note* note, char& c, int& alter, int& octave);
+      void lyrics(const LyricsList* ll);
+
+   public:
+      ExportMusicXml(Score* s) { score = s; tick = 0; }
+      virtual bool saver();
+      void moveToTick(int t);
+      void words(TextElement* text, int staff);
+      void hairpin(Hairpin* hp, int staff, int tick);
+      void dynamic(Dynamic* dyn, int staff);
+      void symbol(Symbol * sym, int staff);
+      };
+
+//---------------------------------------------------------
+//   tag
+//---------------------------------------------------------
+
+void Notations::tag(Xml& xml)
+      {
+      if (!notationsPrinted)
+            xml.stag("notations");
+      notationsPrinted = true;
+      }
+
+//---------------------------------------------------------
+//   etag
+//---------------------------------------------------------
+
+void Notations::etag(Xml& xml)
+      {
+      if (notationsPrinted)
+            xml.etag("notations");
+      notationsPrinted = false;
+      }
+
+//---------------------------------------------------------
+//   slurHandler
+//---------------------------------------------------------
+
+SlurHandler::SlurHandler()
+      {
+      for (int i = 0; i < MAX_SLURS; ++i) {
+            slur[i] = 0;
+            started[i] = false;
+            }
+      }
+
+//---------------------------------------------------------
+//   findSlur -- get index of slur in slur table
+//   return -1 if not found
+//---------------------------------------------------------
+
+int SlurHandler::findSlur(Slur* s)
+      {
+      for (int i = 0; i < MAX_SLURS; ++i)
+            if (slur[i] == s) return i;
+      return -1;
+      }
+
+//---------------------------------------------------------
+//   doSlurStart
+//---------------------------------------------------------
+
+void SlurHandler::doSlurStart(Chord* chord, Notations& notations, Xml& xml)
+      {
+      // search measure for slur(s) starting at this chord
+      Measure* m = (Measure*) chord->parent()->parent();
+      for (ciElement ci = m->el()->begin(); ci != m->el()->end(); ++ci) {
+            if ((*ci)->type() == SLUR) {
+                  Slur* s = (Slur*) (*ci);
+                  if (s->startsAt(chord->tick(), chord->staff(), chord->voice())) {
+                        // check if on slur list (i.e. stop already seen)
+                        int i = findSlur(s);
+                        if (i >= 0) {
+                              // remove from list and print start
+                              slur[i] = 0;
+                              started[i] = false;
+                              notations.tag(xml);
+                              xml.tagE("slur type=\"start\"%s number=\"%d\"", s->slurDirection() == UP ? " placement=\"above\"" : "", i + 1);
+                              }
+                        else {
+                              // find free slot to store it
+                              i = findSlur(0);
+                              if (i >= 0) {
+                                    slur[i] = s;
+                                    started[i] = true;
+                                    notations.tag(xml);
+                                    xml.tagE("slur type=\"start\" number=\"%d\"", i + 1);
+                                    }
+                              else
+                                    printf("no free slur slot");
+                              }
+                        }
+                  }
+            }
+      }
+
+//---------------------------------------------------------
+//   doSlurStop
+//---------------------------------------------------------
+
+// Note: a slur may start in a higher voice in the same measure.
+// In that case it is not yet started (i.e. on the active slur list)
+// when doSlurStop() is executed. Handle this slur as follows:
+// - generate stop anyway and put it on the slur list
+// - doSlurStart() starts slur but doesn't store it
+
+void SlurHandler::doSlurStop(Chord* chord, Notations& notations, Xml& xml)
+      {
+      // search measure for slur(s) stopping at this chord but not on slur list yet
+      Measure* m = (Measure*) chord->parent()->parent();
+      for (ciElement ci = m->el()->begin(); ci != m->el()->end(); ++ci) {
+            if ((*ci)->type() == SLUR) {
+                  Slur* s = (Slur*) (*ci);
+                  if (s->endsAt(chord->tick(), chord->staff(), chord->voice())) {
+                        // check if on slur list
+                        int i = findSlur(s);
+                        if (i < 0) {
+                              // if not, find free slot to store it
+                              i = findSlur(0);
+                              if (i >= 0) {
+                                    slur[i] = s;
+                                    started[i] = false;
+                                    notations.tag(xml);
+                                    xml.tagE("slur type=\"stop\" number=\"%d\"", i + 1);
+                                    }
+                              else
+                                    printf("no free slur slot");
+                              }
+                        }
+                  }
+            }
+      // search slur list for already started slur(s) stopping at this chord
+      for (int i = 0; i < MAX_SLURS; ++i) {
+            if (slur[i] && slur[i]->endsAt(chord->tick(),
+                                           chord->staff(), chord->voice())) {
+                  if (started[i]) {
+                        slur[i] = 0;
+                        started[i] = false;
+                        notations.tag(xml);
+                        xml.tagE("slur type=\"stop\" number=\"%d\"", i + 1);
+                        }
+                  }
+            }
+      }
+
+//---------------------------------------------------------
+//   directions anchor -- anchor directions at another element or a specific tick
+//---------------------------------------------------------
+
+class DirectionsAnchor {
+      Element* direct;        // the element containing the direction
+      Element* anchor;        // the element it is attached to
+      bool     start;         // whether it is attached to start or end
+      int      tick;          // the timestamp
+
+   public:
+      DirectionsAnchor(Element* a, bool s, int t) { direct = 0; anchor = a; start = s; tick = t; }
+      DirectionsAnchor(int t)                     { direct = 0; anchor = 0; start = true; tick = t; }
+      Element* getDirect()                        { return direct; }
+      Element* getAnchor()                        { return anchor; }
+      bool getStart()                             { return start; }
+      int getTick()                               { return tick; }
+      void setDirect(Element* d)                  { direct = d; }
+      };
+
+//---------------------------------------------------------
+//   directions handler -- builds list of directives (measure relative elements)
+//     associated with elements in segments to enable writing at the correct position
+//     in the output stream
+//     Note that runtime behaviour is essentially O(n2), as it requires searching
+//     through all elements for directions, for every directions followed by searching
+//     through all elements for an element with matching start or end time
+//     To minimize this, limit the search to the current measure where possible
+//---------------------------------------------------------
+
+//---------------------------------------------------------
+//   LVI FIXME:
+//   - replace fixe sized anchors[] by something dynamically sized
+//---------------------------------------------------------
+
+class DirectionsHandler {
+      Score *cs;
+      static const int MAX_ANCHORS = 50;
+      int nextAnchor;
+      DirectionsAnchor* anchors[MAX_ANCHORS];
+      void storeAnchor(DirectionsAnchor* a);
+
+   public:
+      DirectionsHandler(Score* s);
+      void buildDirectionsList(Part* p, int strack, int etrack);
+      void buildDirectionsList(Measure* m, bool dopart, Part* p, int strack, int etrack);
+      void handleElement(ExportMusicXml* exp, Element* el, int sstaff, bool start);
+      void handleElements(ExportMusicXml* exp, Staff* staff, int mstart, int mend, int sstaff);
+      };
+
+//---------------------------------------------------------
+//   DirectionsHandler
+//---------------------------------------------------------
+
+DirectionsHandler::DirectionsHandler(Score* s)
+      {
+      cs = s;
+      nextAnchor = 0;
+      for (int i = 0; i < MAX_ANCHORS; i++) anchors[i] = 0;
+      }
+
+//---------------------------------------------------------
+//   storeAnchor
+//---------------------------------------------------------
+
+void DirectionsHandler::storeAnchor(DirectionsAnchor* a)
+      {
+      if (nextAnchor < MAX_ANCHORS) anchors[nextAnchor++] = a;
+      else printf("DirectionsHandler: too many directions");
+      }
+
+//---------------------------------------------------------
+//   handleElement -- handle all directions attached to a specific element
+//---------------------------------------------------------
+
+void DirectionsHandler::handleElement(ExportMusicXml* exp, Element* el, int sstaff, bool start)
+      {
+      for (int i = 0; i < MAX_ANCHORS; i++)
+            if (DirectionsAnchor* da = anchors[i])
+                  if (da->getAnchor() && da->getAnchor() == el && da->getStart() == start) {
+                        Element* dir = da->getDirect();
+                        switch(dir->type()) {
+                              case SYMBOL:
+                                    exp->symbol((Symbol *) dir, sstaff);
+                                    break;
+                              case TEXT:
+                                    exp->words((TextElement*) dir, sstaff);
+                                    break;
+                              case DYNAMIC:
+                                    exp->dynamic((Dynamic*) dir, sstaff);
+                                    break;
+                              case HAIRPIN:
+                                    exp->hairpin((Hairpin*) dir, sstaff, da->getTick());
+                                    break;
+                              default:
+                                    printf("DirectionsHandler::handleElement: direction type %s at tick %d not implemented\n",
+                                            elementNames[dir->type()], da->getTick());
+                                    break;
+                              }
+                        delete anchors[i];
+                        anchors[i] = 0;
+                        }
+      }
+
+//---------------------------------------------------------
+//   handleElements -- handle all directions at tick between mstart and mend
+//---------------------------------------------------------
+
+void DirectionsHandler::handleElements(ExportMusicXml* exp, Staff* staff, int mstart, int mend, int sstaff)
+      {
+      for (int i = 0; i < MAX_ANCHORS; i++)
+            if (DirectionsAnchor* da = anchors[i]) {
+                  Element* dir = da->getDirect();
+                  if (dir && dir->staff() == staff && mstart <= da->getTick() && da->getTick() < mend) {
+                        exp->moveToTick(da->getTick());
+                        switch(dir->type()) {
+                              case SYMBOL:
+                                    exp->symbol((Symbol *) dir, sstaff);
+                                    break;
+                              case TEXT:
+                                    exp->words((TextElement*) dir, sstaff);
+                                    break;
+                              case DYNAMIC:
+                                    exp->dynamic((Dynamic*) dir, sstaff);
+                                    break;
+                              case HAIRPIN:
+                                    exp->hairpin((Hairpin*) dir, sstaff, da->getTick());
+                                    break;
+                              default:
+                                    printf("DirectionsHandler::handleElements: direction type %s at tick %d not implemented\n",
+                                            elementNames[dir->type()], da->getTick());
+                                    break;
+                              }
+                        delete anchors[i];
+                        anchors[i] = 0;
+                        }
+                  }
+      }
+
+//---------------------------------------------------------
+//   findSpecificMatchInMeasure -- find chord or rest in measure
+//     starting or ending at tick
+//---------------------------------------------------------
+
+static DirectionsAnchor* findSpecificMatchInMeasure(int tick, Staff* stf, bool start, Measure* m, int strack, int etrack)
+      {
+      for (int st = strack; st < etrack; ++st) {
+            for (Segment* seg = m->first(); seg; seg = seg->next()) {
+                  Element* el = seg->element(st);
+                  if (!el)
+                        continue;
+                  if (el->isChordRest() && el->staff() == stf)
+                        if (   ( start && el->tick() == tick)
+                            || (!start && (el->tick() + el->tickLen()) == tick)) {
+                              return new DirectionsAnchor(el, start, tick);
+                              }
+                  }
+            }
+            return 0;
+      }
+
+//---------------------------------------------------------
+//   findMatchInMeasure -- find chord or rest in measure
+//---------------------------------------------------------
+
+static DirectionsAnchor* findMatchInMeasure(int tick, Staff* st, Measure* m, Part* p, int strack, int etrack)
+      {
+      DirectionsAnchor* da;
+      da = findSpecificMatchInMeasure(tick, st, true, m, strack, etrack);
+      if (da)
+            return da;
+      da = findSpecificMatchInMeasure(tick, st, false, m, strack, etrack);
+      if (da)
+            return da;
+      if (st->part() == p)
+            return new DirectionsAnchor(tick);
+      else return 0;
+      }
+
+//---------------------------------------------------------
+//   findSpecificMatchInPart -- find chord or rest in part
+//     starting or ending at tick
+//---------------------------------------------------------
+
+static DirectionsAnchor* findSpecificMatchInPart(int tick, Staff* st, bool start, Score* sc, int strack, int etrack)
+      {
+      for (Measure* m = sc->scoreLayout()->first(); m; m = m->next()) {
+            DirectionsAnchor* da = findSpecificMatchInMeasure(tick, st, start, m, strack, etrack);
+            if (da)
+                  return da;
+            }
+      return 0;
+      }
+
+//---------------------------------------------------------
+//   findMatchInPart -- find chord or rest in part
+//---------------------------------------------------------
+
+static DirectionsAnchor* findMatchInPart(int tick, Staff* st, Score* sc, Part* p, int strack, int etrack)
+      {
+      DirectionsAnchor* da;
+      da = findSpecificMatchInPart(tick, st, true, sc, strack, etrack);
+      if (da)
+            return da;
+      da = findSpecificMatchInPart(tick, st, false, sc, strack, etrack);
+      if (da)
+            return da;
+      return (st->part() == p) ? new DirectionsAnchor(tick) : 0;
+      }
+
+//---------------------------------------------------------
+//   buildDirectionsList -- associate directions (measure relative elements)
+//     with elements in segments to enable writing at the correct position
+//     in the output stream. Called once for every part to handle all part-level elements.
+//---------------------------------------------------------
+
+void DirectionsHandler::buildDirectionsList(Part* p, int strack, int etrack)
+      {
+      for (Measure* m = cs->scoreLayout()->first(); m; m = m->next())
+            buildDirectionsList(m, true, p, strack, etrack);
+      }
+
+//---------------------------------------------------------
+//   buildDirectionsList -- associate directions (measure relative elements)
+//     with elements in segments to enable writing at the correct position
+//     in the output stream. Called once for every measure to handle either
+//     part-level or measure-level elements.
+//---------------------------------------------------------
+
+void DirectionsHandler::buildDirectionsList(Measure* m, bool dopart, Part* p, int strack, int etrack)
+      {
+      // loop over all measure relative elements in this measure
+      for (ciElement ci = m->el()->begin(); ci != m->el()->end(); ++ci) {
+            DirectionsAnchor* da = 0;
+            Element* dir = *ci;
+            switch(dir->type()) {
+                  case SYMBOL:
+                  case TEXT:
+                  case DYNAMIC:
+                        if (!dopart) {
+                              da = findMatchInMeasure(dir->tick(), dir->staff(), m, p, strack, etrack);
+                              if (da) {
+                                    da->setDirect(dir);
+                                    storeAnchor(da);
+                                    }
+                        }
+                        break;
+                  case HAIRPIN:
+                        if (dopart) {
+                              Hairpin* hp = (Hairpin*) dir;
+                              da = findMatchInPart(hp->tick1(), hp->staff(), cs, p, strack, etrack);
+                              if (da) {
+                                    da->setDirect(dir);
+                                    storeAnchor(da);
+                                    }
+                              da = findMatchInPart(hp->tick2(), hp->staff(), cs, p, strack, etrack);
+                              if (da) {
+                                    da->setDirect(dir);
+                                    storeAnchor(da);
+                                    }
+                        }
+                        break;
+                  default:
+                        // all others silently ignored
+                        break;
+                  }
+            }
+      }
+
+//---------------------------------------------------------
+//   pitch2xml
+//---------------------------------------------------------
+
+void ExportMusicXml::pitch2xml(Note* note, char& c, int& alter, int& octave)
+      {
+      static char* table1  = "FEDCBAG";
+
+      int tick   = note->chord()->tick();
+      Staff* i   = note->staff();
+      int offset = clefTable[i->clef()->clef(tick)].yOffset;
+
+      int step   = (note->line() - offset + 700) % 7;
+      c          = table1[step];
+
+      int pitch  = note->pitch() - 12;
+      octave     = pitch / 12;
+
+      static int table2[7] = { 5, 4, 2, 0, 11, 9, 7 };
+      int npitch = table2[step] + (octave + 1) * 12;
+      alter      = note->pitch() - npitch;
+      }
+
+//---------------------------------------------------------
+//   tick2xml
+//    set type + dots depending on tick len
+//---------------------------------------------------------
+
+static QString tick2xml(const int ticks, int& dots)
+      {
+      QString type("");
+      dots = 0;
+      switch (ticks) {
+            case 16*division:       // 4/1
+                  type = "long";
+                  break;
+            case 8*division:        // 2/1
+                  type = "breve";
+                  break;
+            case 6*division:        // 1/1 + 1/2  (gibt's das???)
+                  type = "whole";
+                  dots  = 1;
+                  break;
+            case 5*division:        // HACK
+                  type = "whole";
+                  break;
+            case 4*division:        // 1/1
+                  type = "whole";
+                  break;
+            case 3*division:        // 1/2
+                  dots = 1;
+            case 2*division:        // 1/2
+                  type = "half";
+                  break;
+            case division + division/2:
+                  dots = 1;
+            case division:          // quarternote
+                  type = "quarter";
+                  break;
+            case division/2 + division/4:
+                  dots = 1;
+            case division/2:        // 1/8
+                  type = "eighth";
+                  break;
+            case division/4 + division/8:
+                  dots = 1;
+            case division/4:        // 1/16
+                  type = "16th";
+                  break;
+            case division/8 + division/16:
+                  dots = 1;
+            case division/8:        // 1/32
+                  type = "32nd";
+                  break;
+            case division/16 + division/32:
+                  dots = 1;
+            case division/16:       // 1/64
+                  type = "64th";
+                  break;
+            case division/32 + division/64:
+                  dots = 1;
+            case division/32:       // 1/128
+                  type = "128th";
+                  break;
+            case division/64 + division/128:
+                  dots = 1;
+            case division/64:       // 1/128
+                  type = "256th";
+                  break;
+            default:
+                  fprintf(stderr, "tick2xml: invalid note len %d (%d, %d)\n",
+                     ticks, ticks/division, ticks%division);
+                  break;
+            }
+      return type;
+      }
+
+//---------------------------------------------------------
+//   exportMusicXml::export
+//---------------------------------------------------------
+
+void MuseScore::exportMusicXml()
+      {
+      ExportMusicXml em(cs);
+      em.save(this, QString("."), QString(".xml"), tr("MuseScore: Export as MusicXml"));
+      }
+
+//---------------------------------------------------------
+//   bar
+//---------------------------------------------------------
+
+void ExportMusicXml::bar(const BarLine* bar, const Volta* volta, const QString& dir)
+      {
+      if (!bar && !volta)
+            return;
+      if (bar && (bar->subtype() == NORMAL_BAR) && !volta)
+            return;
+      attr.doAttr(xml, false);
+      xml.stag("barline location=\"%s\"", dir.toLatin1().data());
+      if (bar && (bar->subtype() != NORMAL_BAR)) {
+            switch(bar->subtype()) {
+                  case DOUBLE_BAR:
+                        xml.tag("bar-style", "light-light");
+                        break;
+                  case START_REPEAT:
+                        xml.tag("bar-style", "heavy-light");
+                        xml.tagE("repeat direction=\"forward\"");
+                        break;
+                  case END_REPEAT:
+                        xml.tag("bar-style", "light-heavy");
+                        xml.tagE("repeat direction=\"backward\"");
+                        break;
+                  case BROKEN_BAR:
+                        xml.tag("bar-style", "dotted");
+                        break;
+                  case END_BAR:
+                        xml.tag("bar-style", "light-heavy");
+                        break;
+                  case INVISIBLE_BAR:
+                        xml.tag("bar-style", "none");
+                        break;
+                  default:
+                        printf("ExportMusicXml::bar(): bar subtype %d not supported\n", bar->subtype());
+                        break;
+                  }
+            }
+      if (volta && (dir == "left")) {
+            switch(volta->subtype()) {
+                  case 1:
+                        xml.tagE("ending type=\"start\" number=\"1\"");
+                        break;
+                  case 2:
+                  case 4:
+                        xml.tagE("ending type=\"start\" number=\"2\"");
+                        break;
+                  case 3:
+                        xml.tagE("ending type=\"start\" number=\"3\"");
+                        break;
+                  default:
+                        printf("ExportMusicXml::bar(): volta subtype %d not supported\n", volta->subtype());
+                        break;
+                  }
+            }
+      if (volta && (dir == "right")) {
+            switch(volta->subtype()) {
+                  case 1:
+                        xml.tagE("ending type=\"stop\" number=\"1\"");
+                        break;
+                  case 2:
+                        xml.tagE("ending type=\"stop\" number=\"2\"");
+                        break;
+                  case 3:
+                        xml.tagE("ending type=\"stop\" number=\"3\"");
+                        break;
+                  case 4:
+                        xml.tagE("ending type=\"discontinue\" number=\"2\"");
+                        break;
+                  default:
+                        printf("ExportMusicXml::bar(): volta subtype %d not supported\n", volta->subtype());
+                        break;
+                  }
+            }
+      xml.etag("barline");
+      }
+
+//---------------------------------------------------------
+//   barlineLeft -- search for and handle barline left
+//---------------------------------------------------------
+
+void ExportMusicXml::barlineLeft(Measure* m, int strack, int etrack, Volta* volta)
+      {
+      for (int st = strack; st < etrack; ++st)
+            for (Segment* seg = m->first(); seg; seg = seg->next()) {
+                  Element* el = seg->element(st);
+                  if (!el)
+                        continue;
+                  if (el->type() == BAR_LINE)
+                        if (el->subtype() == START_REPEAT) {
+                              bar((BarLine*) el, volta, "left");
+                              return;   // assume only one start repeat
+                              }
+                  }
+      // if no barline found, volta still needs to be handled
+      bar(0, volta, "left");
+      }
+
+//---------------------------------------------------------
+//   findVolta -- find volta in measure m
+//---------------------------------------------------------
+
+static Volta* findVolta(Measure* m)
+      {
+      // loop over all measure relative elements in this measure
+      for (ciElement ci = m->el()->begin(); ci != m->el()->end(); ++ci) {
+            Element* dir = *ci;
+            if (dir->type() == VOLTA) {
+                  return (Volta*) dir;
+                  }
+            }
+      return 0;
+      }
+
+//---------------------------------------------------------
+//  saver
+//    export midi file
+//    return true on error
+//---------------------------------------------------------
+
+bool ExportMusicXml::saver()
+      {
+      xml.setDevice(&f);
+      xml << "<?xml version=\"1.0\" encoding=\"ISO-8859-1\"?>\n";
+      xml << "<!DOCTYPE score-partwise PUBLIC \"-//Recordare//DTD MusicXML 1.0 Partwise//EN\" \"http://www.musicxml.org/dtds/partwise.dtd\">\n";
+      xml.stag("score-partwise");
+      xml.stag("work");
+
+      Measure* measure = score->scoreLayout()->first();
+      ElementList* el = measure->pel();
+      for (iElement ie = el->begin(); ie != el->end(); ++ie) {
+            if ((*ie)->type() == TEXT) {
+                  TextElement* text = (TextElement*)(*ie);
+                  switch (text->style()) {
+                        case TEXT_STYLE_TITLE:
+                              xml.tag("work-title", text->getText());
+                              break;
+                        case TEXT_STYLE_SUBTITLE:
+                              xml.tag("work-number", text->getText());
+                              break;
+                        }
+                  }
+            }
+      xml.etag("work");
+
+      xml.stag("identification");
+      for (iElement ie = el->begin(); ie != el->end(); ++ie) {
+            if ((*ie)->type() == TEXT) {
+                  TextElement* text = (TextElement*)(*ie);
+                  switch (text->style()) {
+                        case TEXT_STYLE_COMPOSER:
+                              xml.tag("creator", "type=\"composer\"", text->getText());
+                              break;
+                        case TEXT_STYLE_POET:
+                              xml.tag("creator", "type=\"poet\"", text->getText());
+                              break;
+                        case TEXT_STYLE_TRANSLATOR:
+                              xml.tag("creator", "type=\"creator\"", text->getText());
+                              break;
+                        }
+                  }
+            }
+
+      if (!score->rights.isEmpty())
+            xml.tag("rights", score->rights);
+      xml.stag("encoding");
+      xml.tag("software", QString("MuseScore ") + QString(VERSION));
+      xml.tag("encoding-date", QDate::currentDate().toString(Qt::ISODate));
+      xml.etag("encoding");
+      xml.etag("identification");
+
+      xml.stag("part-list");
+      int idx = 1;
+      PartList* il = score->parts();
+      for (iPart i = il->begin(); i != il->end(); ++i, ++idx) {
+            xml.stag("score-part id=\"P%d\"", idx);
+            xml.tag("part-name", (*i)->longName().text());
+
+            xml.stag("score-instrument id=\"P%d-I%d\"", idx, 3);
+            xml.tag("instrument-name", (*i)->longName().text());
+            xml.etag("score-instrument");
+
+            xml.stag("midi-instrument id=\"P%d-I%d\"", idx, 3);
+            xml.tag("midi-channel", (*i)->midiChannel() + 1);
+            xml.tag("midi-program", (*i)->midiProgram() + 1);
+            xml.etag("midi-instrument");
+
+            xml.etag("score-part");
+            }
+      xml.etag("part-list");
+
+      idx = 1;
+      il = score->parts();
+      for (iPart i = il->begin(); i != il->end(); ++i, ++idx) {
+            tick = 0;
+            xml.stag("part id=\"P%d\"", idx);
+
+            int staves = (*i)->nstaves();
+            int strack = score->staff(*i) * VOICES;
+            int etrack = strack + staves * VOICES;
+            
+            DirectionsHandler dh(score);
+            dh.buildDirectionsList(*i, strack, etrack);
+
+            int measureNo = 1;          // number of next regular measure
+            int irregularMeasureNo = 1; // number of next irregular measure
+            int pickupMeasureNo = 1;    // number of next pickup measure
+            Volta* volta = 0;           // volta in current measure(s)
+            for (Measure* m = score->scoreLayout()->first(); m; m = m->next()) {
+                  // pickup and other irregular measures need special care
+                  if ((irregularMeasureNo + measureNo) == 2 && m->irregular()) {
+                        xml.stag("measure number=\"0\" implicit=\"yes\"");
+                        pickupMeasureNo++;
+                        }
+                  else if (m->irregular()) {
+                        xml.stag("measure number=\"X%d\" implicit=\"yes\"", irregularMeasureNo++);
+                        }
+                  else {
+                        xml.stag("measure number=\"%d\"", measureNo++);
+                        }
+
+                  if (m->lineBreak())
+                        xml.tagE("print new-system=\"yes\"");
+                  if (measureNo > 2 && m->prev()->pageBreak())
+                        xml.tagE("print new-page=\"yes\"");
+
+                  attr.start();
+                  dh.buildDirectionsList(m, false, *i, strack, etrack);
+
+                  // barline left must be the first element in a measure
+                  volta = findVolta(m);
+                  barlineLeft(m, strack, etrack, volta);
+
+                  // output attributes with the first actual measure (pickup or regular)
+                  if ((irregularMeasureNo + measureNo + pickupMeasureNo) == 4) {
+                        attr.doAttr(xml, true);
+                        xml.tag("divisions", division);
+                        if (staves)
+                              xml.tag("staves", staves);
+                        }
+                  for (int st = strack; st < etrack; ++st) {
+                        // sstaff - xml staff number, counting from 1 for this
+                        // instrument
+                        // special number 0 -> dont show staff number in
+                        // xml output (because there is only one staff)
+
+                        int sstaff = (staves > 1) ? st - strack + VOICES : VOICES;
+                        sstaff /= VOICES;
+
+                        for (Segment* seg = m->first(); seg; seg = seg->next()) {
+                              Element* el = seg->element(st);
+                              if (!el)
+                                    continue;
+                              // must ignore start repeat to prevent spurious backup/forward
+                              if (el->type() == BAR_LINE && el->subtype() == START_REPEAT)
+                                    continue;
+                              if (tick != el->tick()) {
+                                    attr.doAttr(xml, false);
+                                    moveToTick(el->tick());
+                                    }
+                              tick += el->tickLen();
+                              dh.handleElement(this, el, sstaff, true);
+                              switch (el->type()) {
+                                    case CLEF:
+                                          {
+                                          // output only clef changes, not generated clefs
+                                          // at line beginning
+                                          int ti = el->tick();
+                                          int ct = ((Clef*)el)->subtype();
+                                          ClefList* cl = score->staff(st/VOICES)->clef();
+                                          ciClefEvent ci = cl->find(ti);
+                                          if (ci != cl->end()) {
+                                                clef(sstaff, ct);
+                                                }
+                                          }
+                                          break;
+                                    case KEYSIG:
+                                          {
+                                          // output only keysig changes, not generated keysigs
+                                          // at line beginning
+                                          int ti = el->tick();
+                                          int key = score->keymap->key(el->tick());
+                                          KeyList* kl = score->keymap;
+                                          ciKeyEvent ci = kl->find(ti);
+                                          if (ci != kl->end()) {
+                                                keysig(key);
+                                                }
+                                          }
+                                          break;
+                                    case TIMESIG:
+                                          {
+                                          // output only for staff 0
+                                          if (st == 0) {
+                                                int z, n;
+                                                score->sigmap->timesig(el->tick(), z, n);
+                                                timesig(z, n);
+                                                }
+                                          }
+                                          break;
+                                    case CHORD:
+                                          {
+                                          // note: in MuseScore there is one lyricslist for each staff
+                                          // MusicXML associates lyrics with notes in a specific voice
+                                          // (too) simple solution: output lyrics only for the first voice
+                                          const LyricsList* ll = 0;
+                                          if ((st % VOICES) == 0) ll = seg->lyricsList(st / VOICES);
+                                          chord((Chord*)el, sstaff, ll);
+                                          break;
+                                          }
+                                    case REST:
+                                          rest((Rest*)el, sstaff);
+                                          break;
+                                    case BAR_LINE:
+                                          // Following must be enforced (ref MusicXML barline.dtd):
+                                          // If location is left, it should be the first element in the measure;
+                                          // if location is right, it should be the last element.
+                                          // implementation note: START_REPEAT already written by barlineLeft()
+                                          // any bars left should be "middle"
+                                          if (el->subtype() != START_REPEAT)
+                                                bar((BarLine*) el);
+                                          break;
+
+                                    default:
+                                          printf("unknown type %s\n", el->name());
+                                          break;
+                                    }
+                              dh.handleElement(this, el, sstaff, false);
+                              }
+                        attr.stop(xml);
+                        if (!((st + 1) % VOICES)) {
+                              dh.handleElements(this, (*i)->staff(sstaff - 1), m->tick(), m->tick() + m->tickLen(), sstaff);
+                              }
+                        }
+                  // move to end of measure (in case of incomplete last voice)
+                  moveToTick(m->tick() + m->tickLen());
+                  BarLine * b = m->barLine(score->staff(*i));
+                  bar(b, volta, "right");
+                  xml.etag("measure");
+                  }
+            xml.etag("part");
+            }
+
+      xml.etag("score-partwise");
+
+      return f.error() != QFile::NoError;
+      }
+
+//---------------------------------------------------------
+//   moveToTick
+//---------------------------------------------------------
+
+void ExportMusicXml::moveToTick(int t)
+      {
+      if (t < tick) {
+            attr.doAttr(xml, false);
+            xml.stag("backup");
+            xml.tag("duration", tick - t);
+            xml.etag("backup");
+            }
+      else if (t > tick) {
+            attr.doAttr(xml, false);
+            xml.stag("forward");
+            xml.tag("duration", t - tick);
+            xml.etag("forward");
+            }
+      tick = t;
+      }
+
+//---------------------------------------------------------
+//   timesig
+//---------------------------------------------------------
+
+void ExportMusicXml::timesig(int z, int n)
+      {
+      attr.doAttr(xml, true);
+      xml.stag("time");
+      xml.tag("beats", z);
+      xml.tag("beat-type", n);
+      xml.etag("time");
+      }
+
+//---------------------------------------------------------
+//   keysig
+//---------------------------------------------------------
+
+void ExportMusicXml::keysig(int key)
+      {
+      attr.doAttr(xml, true);
+      xml.stag("key");
+      xml.tag("fifths", key);
+      xml.tag("mode", "major");
+      xml.etag("key");
+      }
+
+//---------------------------------------------------------
+//   clef
+//---------------------------------------------------------
+
+void ExportMusicXml::clef(int staff, int clef)
+      {
+      attr.doAttr(xml, true);
+      if (staff)
+            xml.stag("clef number=\"%d\"", staff);
+      else
+            xml.stag("clef");
+      char* sign = clefTable[clef].sign;
+      int line   = clefTable[clef].line;
+      xml.tag("sign", sign);
+      xml.tag("line", line);
+      if (clefTable[clef].octChng)
+            xml.tag("clef-octave-change", clefTable[clef].octChng);
+      xml.etag("clef");
+      }
+
+//---------------------------------------------------------
+//   chordAttributes
+//---------------------------------------------------------
+
+static void chordAttributes(Chord* chord, Notations& notations, Xml& xml)
+      {
+      pstl::plist<NoteAttribute*>* na = chord->getAttributes();
+      // first output the fermatas
+      for (ciAttribute ia = chord->getAttributes()->begin(); ia != chord->getAttributes()->end(); ++ia) {
+            if ((*ia)->subtype() == UfermataSym) {
+                  notations.tag(xml);
+                  xml.tagE("fermata type=\"upright\"");
+                  }
+            else if ((*ia)->subtype() == DfermataSym) {
+                  notations.tag(xml);
+                  xml.tagE("fermata type=\"inverted\"");
+                  }
+            }
+      // then the attributes whose elements are children of <articulations>
+      for (ciAttribute ia = na->begin(); ia != na->end(); ++ia) {
+            switch ((*ia)->subtype()) {
+                  case UfermataSym:
+                  case DfermataSym:
+                        // ignore, already handled
+                        break;
+                  case TenutoSym:
+                        {
+                        // TODO
+                        }
+                        break;
+                  default:
+                        printf("unknown chord attribute %s\n", (*ia)->name().toLatin1().data());
+                        break;
+                  }
+            }
+      }
+
+//---------------------------------------------------------
+//   chord
+//---------------------------------------------------------
+
+void ExportMusicXml::chord(Chord* chord, int staff, const LyricsList* ll)
+      {
+      NoteList* nl = chord->noteList();
+
+      for (iNote i = nl->begin(); i != nl->end(); ++i) {
+            QString val;
+            Note* note = i->second;
+
+            attr.doAttr(xml, false);
+            xml.stag("note");
+
+            if (i != nl->begin())
+                  xml.tagE("chord");
+            char c;
+            int alter;
+            int octave;
+            pitch2xml(note, c, alter, octave);
+
+            xml.stag("pitch");
+            char buffer[2];
+            buffer[0] = c;
+            buffer[1] = 0;
+            xml.tag("step", QString(buffer));
+            if (alter)
+                  xml.tag("alter", alter);
+            xml.tag("octave", octave);
+            xml.etag("pitch");
+
+            int acc = ACC_NONE;
+            if (note->userAccidental() != -1)
+                  acc = note->userAccidental();
+            else
+                  acc = note->accidentalIdx();
+            if (acc != ACC_NONE) {
+                  QString s;
+                  switch(acc) {
+                        case ACC_SHARP:   s = "sharp";        break;
+                        case ACC_FLAT:    s = "flat";         break;
+                        case ACC_SHARP2:  s = "double-sharp"; break;
+                        case ACC_FLAT2:   s = "double-flat";  break;
+                        case ACC_NATURAL: s = "natural";      break;
+                        default:
+                              printf("unknown accidental %d\n", acc);
+                        }
+                  xml.tag("accidental", s);
+                  }
+
+            xml.tag("duration", note->chord()->tickLen());
+
+            if (note->tieBack())
+                  xml.tagE("tie type=\"stop\"");
+            if (note->tieFor())
+                  xml.tagE("tie type=\"start\"");
+            
+            xml.tag("voice", (staff-1) * VOICES + note->chord()->voice() + 1);
+
+            int dots = 0;
+            QString s = tick2xml(note->chord()->tickLen(), dots);
+            if (s.isEmpty()) {
+                  printf("no note type found for ticks %d\n",
+                     note->chord()->tickLen());
+                  }
+            xml.tag("type", s);
+            for (int ni = dots; ni > 0; ni--)
+                  xml.tagE("dot");
+
+            xml.tag("stem", note->chord()->isUp() ? "up" : "down");
+            if ((staff-1) + note->move())
+                  xml.tag("staff", staff + note->move());
+
+            //  beaming
+            //    <beam number="1">start</beam>
+            //    <beam number="1">end</beam>
+            //    <beam number="1">continue</beam>
+            //    <beam number="1">backward hook</beam>
+            //    <beam number="1">forward hook</beam>
+
+            if (i == nl->begin() && chord->beam()) {
+                  QString s = chord->beam()->xmlType(chord);
+                  xml.tag("beam", "number=\"1\"", s);
+                  }
+
+            Notations notations;
+            if (note->tieBack()) {
+                  notations.tag(xml);
+                  xml.tagE("tied type=\"stop\"");
+                  }
+            if (note->tieFor()) {
+                  notations.tag(xml);
+                  xml.tagE("tied type=\"start\"");
+                  }
+            if (i == nl->begin()) {
+                  sh.doSlurStop(chord, notations, xml);
+                  sh.doSlurStart(chord, notations, xml);
+                  }
+            if (i == nl->begin()) {
+                  chordAttributes(chord, notations, xml);
+                  }
+            if (note->fingering()) {
+                  notations.tag(xml);
+                  xml.stag("technical");
+                  xml.tag("fingering", note->fingering()->getText());
+                  xml.etag("technical");
+                  }
+            notations.etag(xml);
+            // write lyrics (only for first note)
+            if ((i == nl->begin()) && ll) lyrics(ll);
+            xml.etag("note");
+            }
+      }
+
+//---------------------------------------------------------
+//   rest
+//---------------------------------------------------------
+
+void ExportMusicXml::rest(Rest* rest, int staff)
+      {
+      attr.doAttr(xml, false);
+      xml.stag("note");
+      xml.tagE("rest");
+
+      xml.tag("duration", rest->tickLen());
+//      xml.tag("voice", rest->voice() + 1);
+      xml.tag("voice", (staff-1) * VOICES + rest->voice() + 1);
+      int dots = 0;
+      QString s = tick2xml(rest->tickLen(), dots);
+      if (s.isEmpty()) {
+            printf("no rest type found for ticks %d\n",
+               rest->tickLen());
+            }
+      xml.tag("type", s);
+
+      for (int i = dots; i > 0; i--)
+            xml.tagE("dot");
+      if (staff-1)
+            xml.tag("staff", staff);
+      xml.etag("note");
+      }
+
+//---------------------------------------------------------
+//   directionTag
+//---------------------------------------------------------
+
+static void directionTag(Xml& xml, Attributes& attr, Element* el = 0)
+      {
+      attr.doAttr(xml, false);
+      if (el)
+            xml.stag("direction placement=\"%s\"", (el->userOff().y() > 2.0) ? "below" : "above");
+      else
+            xml.stag("direction");
+      xml.stag("direction-type");
+      }
+
+//---------------------------------------------------------
+//   directionETag
+//---------------------------------------------------------
+
+static void directionETag(Xml& xml, int staff, int offs = 0)
+      {
+      xml.etag("direction-type");
+      if (offs)
+            xml.tag("offset", offs);
+      if (staff-1)
+            xml.tag("staff", staff);
+      xml.etag("direction");
+      }
+
+//---------------------------------------------------------
+//   words
+//---------------------------------------------------------
+
+void ExportMusicXml::words(TextElement* text, int staff)
+      {
+      directionTag(xml, attr, text);
+      xml.tag("words", text->getText());
+      directionETag(xml, staff, text->mxmlOff());
+      }
+
+//---------------------------------------------------------
+//   hairpin
+//---------------------------------------------------------
+
+void ExportMusicXml::hairpin(Hairpin* hp, int staff, int tick)
+      {
+      directionTag(xml, attr, hp);
+      if (hp->tick1() == tick)
+            xml.tagE("wedge type=\"%s\"", hp->subtype() ? "diminuendo" : "crescendo");
+      else
+            xml.tagE("wedge type=\"stop\"");
+      directionETag(xml, staff);
+      }
+
+//---------------------------------------------------------
+//   dynamic
+//---------------------------------------------------------
+
+void ExportMusicXml::dynamic(Dynamic* dyn, int staff)
+      {
+      QString text = dyn->getText();
+      // check for dynamics currently not supported
+      // MusicXML does not have dynamics m, r, s and z.
+      // LVI FIXME: write as other-dynamics ?
+      if (text == "m" || text == "r" || text == "s" || text == "z" || text == "other-dynamics") return;
+      directionTag(xml, attr, dyn);
+      xml.stag("dynamics");
+      xml.tagE(text.toLatin1().data());
+      xml.etag("dynamics");
+      directionETag(xml, staff, dyn->mxmlOff());
+      }
+
+//---------------------------------------------------------
+//   symbol
+//---------------------------------------------------------
+
+void ExportMusicXml::symbol(Symbol * sym, int staff)
+      {
+      QString name = sym->sym().name();
+      char* mxmlName = "";
+      if (name == "pedal ped") mxmlName = "pedal type=\"start\"";
+      else if (name == "pedalasterisk") mxmlName = "pedal type=\"stop\"";
+      if (mxmlName == "") {
+            printf("ExportMusicXml::symbol(): %s not supported", name.toLatin1().data());
+            return;
+      }
+      directionTag(xml, attr, sym);
+      xml.tagE(mxmlName);
+      directionETag(xml, staff, sym->mxmlOff());
+      }
+
+//---------------------------------------------------------
+//   lyrics
+//---------------------------------------------------------
+
+void ExportMusicXml::lyrics(const LyricsList* ll)
+      {
+      for (ciLyrics i = ll->begin(); i != ll->end(); ++i) {
+            if (*i) {
+                  xml.stag("lyric number=\"%d\"", (*i)->no() + 1);
+                  int syl   = (*i)->syllabic();
+                  QString s = "";
+                  switch(syl) {
+                        case Lyrics::SINGLE: s = "single"; break;
+                        case Lyrics::BEGIN:  s = "begin";  break;
+                        case Lyrics::END:    s = "end";    break;
+                        case Lyrics::MIDDLE: s = "middle"; break;
+                        default:
+                              printf("unknown syllabic %d\n", syl);
+                        }
+                  xml.tag("syllabic", s);
+                  xml.tag("text", (*i)->getText());
+                  xml.etag("lyric");
+                  }
+            }
+      }

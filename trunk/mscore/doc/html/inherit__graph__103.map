@@ -1,0 +1,5 @@
+base referer
+rect $classUi__TextStyleBase.html 18,7 133,33
+rect $classUi_1_1TextStyleBase.html 182,7 297,33
+rect $classTextStyleBase.html 345,7 441,33
+rect $classTextStyleDialog.html 490,7 592,33

@@ -1,0 +1,4 @@
+base referer
+rect $classHelpLine.html 6,166 68,193
+rect $classStem.html 92,166 132,193
+rect $classElement.html 45,17 104,44

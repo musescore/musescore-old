@@ -1,0 +1,1200 @@
+%====================================================================
+%
+%     MuseScore Manual
+%     this is the MuseScore manual
+%
+% (C) 2005 Copyright: Werner Schweer
+%====================================================================
+
+%----------------------------------------------------------
+%     Setup
+%----------------------------------------------------------
+
+%\showframe
+%\showsetups
+\usemodule[chart]
+\setupcolors[state=start]
+\setupbodyfont[Palatino]
+\language[en]
+\enableregime[il1]
+
+\startuseMPgraphic{FunnyFrame}
+      picture p; numeric o; path a, b; pair c;
+      p := textext.rt(\MPstring{FunnyFrame});
+      o := BodyFontSize;
+      a := unitsquare xyscaled(OverlayWidth,OverlayHeight);
+      p := p shifted (20, OverlayHeight-ypart center p);
+      drawoptions (withpen pencircle scaled 1pt withcolor .625red);
+      b := a superellipsed .95;
+      fill b withcolor .85white; draw b;
+      b := (boundingbox p) superellipsed .95;
+      fill b withcolor .85white; draw b;
+      draw p withcolor black;
+      setbounds currentpicture to a;
+    \stopuseMPgraphic
+
+\defineoverlay[FunnyFrame][\useMPgraphic{FunnyFrame}]
+\defineframedtext[FunnyText][frame=off,background=FunnyFrame]
+\def\StartFrame{\startFunnyText}
+\def\StopFrame{\stopFunnyText}
+\def\FrameTitle#1%
+ {\setMPtext{FunnyFrame}{\hbox spread 1em{\hss\strut#1\hss}}}
+\setMPtext{FunnyFrame}{}
+
+
+\define\M{MuseScore}
+\define[1]\Index{{\it #1}\marginpar{#1}\index{#1}}
+
+\defineindenting[Cmdi][text=,separator=,width=fit,distance=1em]
+
+\define[1]\Cmd{
+  \Cmdi
+  \framed[
+     background=color,
+     width=fit,
+     align=right,
+     backgroundcolor=lightgray,
+     framecolor=blue]
+     {\tt\space #1}}
+
+\define[2]\CCmd{
+  \Cmdi
+  \framed[
+     background=color,
+     width=broad,
+     align=right,
+     backgroundcolor=lightgray,
+     framecolor=blue]
+     {\vbox{\hbox{\tt\space #1}\hbox{\tt\space #2}}}}
+
+
+%\define\startdescription{\startpacked}
+\define\startdescription{}
+%\define\stopdescription{\stoppacked}
+\define\stopdescription{}
+
+\define[1]\Fig{\hbox{\externalfigure[pics/#1]}}
+
+\define[2]\Screen{
+      \placefigure[here][fig:#1]{#2}{\externalfigure[pics/#1][scale=1600]}
+      }
+\define[1]\Noten{
+      \blank[line]
+      {\externalfigure[pics/#1][scale=700]}
+      \blank[line]
+      }
+
+\definedescription[Option][
+      location=left,
+      headstyle=bold,
+      width=4em,
+      before={\startnarrower[left]\setupblank[0pt]},
+      after={\stopnarrower\setupblank}]
+
+\definedescription[Sc][
+      location=left,
+      headstyle=bold,
+      width=4em,
+      before={\startnarrower[left]\setupblank[0pt]},
+      after={\stopnarrower\setupblank}]
+
+\definedescription[Filetype][
+      location=left,
+      headstyle=bold,
+      width=4em,
+      before={\startnarrower[left]\setupblank[0pt]},
+      after={\stopnarrower\setupblank}]
+
+\definedescription[FileList][
+      location=left,
+      headstyle=bold,
+      width=7em,
+      before={\startnarrower[left]\setupblank[0pt]},
+      after={\stopnarrower\setupblank}]
+
+\definedescription[Input][
+      location=left,
+      headstyle=bold,
+      width=9em,
+      before={\startnarrower[left]\setupblank[0pt]},
+      after={\stopnarrower\setupblank}]
+
+\definedescription[InputN][
+      location=left,
+      headstyle=bold,
+      width=6em,
+      before={\startnarrower[left]\setupblank[0pt]},
+      after={\stopnarrower\setupblank}]
+
+\define[2]\Figure{
+      \placefigure
+         [#1][fig:#2]{}
+         {\externalfigure[pics/#2]}
+         }
+
+\define[1]\Menu{
+      \placefigure[right][fig:#1]{}
+         {\externalfigure[pics/#1][scale=2000]}
+         }
+
+\definedescription[Opt][location=hanging,headstyle=bold,width=broad]
+
+%----------------------------------------------------------
+%     Body
+%----------------------------------------------------------
+
+\starttext
+   \language[en]
+   \mainlanguage[en]
+   \startstandardmakeup[doublesided=no]
+      \definebodyfont[10pt,11pt,12pt][rm][tfe=Regular at 48pt]
+      \tfe\setupinterlinespace
+      \hfill \color[red]{\M}\par
+      \hfill \color[blue]{Manual}\par
+      \vfill
+      \hfill \color[blue]{EN}\par
+      \definebodyfont[10pt,11pt,12pt][rm][tfb=Regular at 24pt]
+      \tfb\setupinterlinespace
+      \hfill Version 0.1\par
+      \stopstandardmakeup
+
+   \startstandardmakeup[page=no]
+      \vfill
+      \M\ is hosted on SourceForge:\par
+      \type{http://mscore.sourceforge.net/}
+      \blank[line]
+      \M\ uses the Lilypond Typesetter fonts.\par
+      This document was created using \pdfTeX\ and the macro package
+      \ConTeXt\.
+      \blank[line]
+      \copyright 2005 Werner Schweer
+      \stopstandardmakeup
+
+   \completecontent
+
+\chapter{Introduction}
+   \section{What is \M?}
+      \M\ is a WYSIWYG (What You See Is What You Get)
+      program to create printed score.
+
+      \M\ is "open source" and published under the GNU General
+      Public License (GPL) (see Appendix).
+
+      Some highlights:
+
+      \startitemize[packed]
+            \item WYSIWYG Design, notes are entered on a "virtual notesheet"
+            \item \M\ uses TrueType fonts for printing and screen display.
+                  This allows for high quality renderings on all magnification steps.
+            \item Notes can be entered fast and simply by only using the keyboard.
+            \item MusicXML import/export
+            \item Midi import/export
+            \item Midi input for note entry
+            \item integrated Fluid software synthesizer
+      \stopitemize
+
+   \section{Short Guide}
+      \subsection{Program Start}
+
+      \Screen{main1}{Empty main window}
+
+      After entering
+
+      \Cmd{mscore}
+
+      the last project will be displayed. Starting \M\ the first time an empty
+      main window will be displayed.
+      (Abb. \in[fig:main1]).
+
+   The window has three areas:
+
+   \startitemize[packed]
+      \item menu bar
+      \item tool bar
+      \item empty note canvas
+   \stopitemize
+
+  \subsection{Create a new score}
+
+      To create a new note sheet enter \type{Strg+N}.
+      A dialog containing a list of templates to select from appears.
+      (Abb. \in[fig:template]).
+      \index{Templates}
+
+      \Screen{template}{Template selection}
+
+      After selecting \type{a4piano.msc.bz2} we leave the dialog by entering
+      \type{OK}.
+
+      On the main window canvas a worksheet with the selected template will be
+      displayed, in our example two note lines connected with a brace.
+      A clef is displayed and the time signature is set to $4/4$ on default.
+      The note lines are populated with some measures filled with rests.
+
+      \Screen{emptypiano}{Empty piano system}
+
+\subsection{Note Entry}
+
+      Now we want to enter some notes. For this we select the first rest by
+      clicking at it. Then we enter "note entry mode" by entering
+      \type{N}. The cursor changes to show the entry mode.
+      An insert cursor also appears.
+
+      To populate the empty measures with notes we simply type
+      ''c d e'' on the keyboard.
+
+      \Noten{noten1.pdf}
+
+\subsection{Edit}
+   Some actions:
+   \startitemize[packed]
+      \item you can move the note sheet on the canvas with pressed left mouse key
+      \item pressing \type{Strg+M} appends a new empty measure to the score
+      \item the magnify glass tool magnifies the canvas
+   \stopitemize
+
+\subsection{Print}
+
+      Pressing the print button starts the KDE print dialog. \M\ creates
+      postscript printer data which KDE sends to the printer or which
+      can be redirected into a file. This also allows for direct creation
+      of pdf files.
+
+      \FrameTitle{Tip:}
+      \StartFrame
+      To create score examples for a book, create a partitur page with
+      a small page format as A5 and rotate the page (landscape option).
+      After exporting the score to PDF, the empty margins can be removed
+      with the utility \type{pdfcrop}. The result can be easily integrated
+      in a  \ConTeXt\ document. This is how the score examples in this manual
+      are  created.
+      \StopFrame
+
+%----------------------------------------------------------
+%
+%     Referenz
+%
+%----------------------------------------------------------
+
+\chapter{Reference}
+   \section{Program Start}
+
+      \M\ can be started from the commandline with
+      \index{commandline}
+
+            \Cmd{mscore <options> <file name>}
+
+      \type{options} und \type{file name} are optional.
+
+      \index{Comman line options}\index{options}\index{version number}
+      \index{debug mode}
+
+      There are the following command line options:
+            \blank[medium]
+            \Option{ -v} displays the \M\ version number\par
+            \Option{ -d} start \M\ in debug mode\par
+            \Option{ -s} disable the integrated software synthesizer\par
+            \Option{ -m} disable midi input support\par
+            \Option{ -h} help: show available options\par
+            \blank[big]
+
+      \blank[line]
+
+      \M\ accepts the following file types:
+            \blank[medium]
+            \Filetype{*.msc}  \M\ partitur file\par
+            \Filetype{*.mss}  \M\ style file\par
+            \Filetype{*.xml}  MusicXML file\par
+            \Filetype{*.mid}  midi file\par
+            \blank[big]
+      \index{file types}
+
+      Starting \M\ without file name loads the last edited partitur.
+
+      \M\ writes/reads two additional files in the backgrounde:
+            \blank[medium]
+            \FileList{\textasciitilde/.mscore} \M\ configuration data
+            \FileList{\textasciitilde/.mscorePrj} contains the last edited scores
+            \blank[big]
+
+   \section{Menus}
+      Many menu options are also available as buttons in a toolbox.
+
+      Menus and keyboard shortcuts:
+
+            \blank[medium]
+            \Option{Alt+F} File\par
+            \Option{Alt+E} Edit\par
+            \Option{Alt+C} Create\par
+            \Option{Alt+N} Notes\par
+            \Option{Alt+L} Layout\par
+            \Option{Alt+S} Style\par
+            \Option{Alt+D} Display\par
+            \Option{Alt+H} Help\par
+            \blank[big]
+
+
+      \subsection{File Menu}
+
+      \Menu{menu1}
+
+      \startpacked
+      \Opt{New (Ctrl+N)} creates a new note sheet. You have next to create
+            instruments and some empty measures.\par
+      \Opt{Open} opens a saved score\par
+      \Opt{Open Recent} shows a list of last edited scores. Click on a score
+            to open it.\par
+      \Opt{Save} save the current score to disc.\par
+      \Opt{Save As} saves the current score to disc with a selectable different name.\par
+      \Opt{Export Midi} export the current score as MIDI file.
+            \index{Midi-Datei}\par
+
+      \Opt{Export MusicXML} export the current score as
+        MusicXML file. \index{MusicXML}
+
+      \Opt{Import Midi} import a midi file and display as score.
+
+      \Opt{Import MusicXML} import MusicXML file
+
+      \Opt{Print (Ctrl+P)} print the current score
+        \index{printing}
+
+      \Opt{Quit} quits \M.\par
+        \index{quit}
+
+      \stoppacked
+
+
+      \subsection{Edit Menu}
+
+      \Menu{menu2}
+
+      \startpacked
+      \Opt{Undo}  undo the last edit. There are unlimited undos.
+
+      \Opt{Redo}  ''Undo'' the last undo command.
+
+      \Opt{Cut}
+
+      \Opt{Copy}
+
+      \Opt{Paste}
+
+      \Opt{Instrument List}   shows the instrument list.
+
+      \Opt{Page List}   shows the page list. This is a debug options useful for debugging.
+            The page list is a \M\ internal data structure.
+
+      \Opt{Preferences} shows the preference dialog.\par
+
+      \stoppacked
+
+
+      \subsection{Create Menu}
+
+            \Menu{menu3}
+
+      \startpacked
+            \Opt{Instruments}
+                  opens the instrument dialog. You can add/remove/move
+                  instruments of your score in the instrument dialog.
+                  You can also add addtional note lines to an instrument.
+                  \par
+            \Opt{Measure}
+                  appends an empty measure to the score. The measure is filled
+                  with a rest.\par
+            \Opt{Clef}
+                  shows the clefs palette\par
+            \Opt{Key}
+                  shows the keys palette.\par
+            \Opt{Time}
+                  shows the time signature palette.\par
+            \Opt{Lines}
+                  shows the lines palette(crescendo etc.)\par
+            \Opt{Note Attributes}
+                  shows the note attributes palette\par
+            \Opt{Dynamics}
+                  shows the dynamics palette\par
+            \Opt{Text}
+                  shows the text submenu\par
+            \Opt{Symbols}
+                  shows the symbol palette\par
+            \stoppacked
+
+      \subsection{Notes Menu}
+
+            \Menu{menu4}
+
+         \startpacked
+
+            \Opt{Input}
+                  switches to note entry mode
+                  \index{note entry mode}\par
+            \Opt{Add Pitch}
+                  shows another submenu with note values to enter
+                  \par
+            \Opt{Add Intervall}
+                  shows a list of intervalls to select from to
+                  create chords\par
+            \Opt{N-Tole}
+                  shows a submenu to create irregular note values
+                  (trioles pentoles etc.)\par
+            \stoppacked
+
+         \startcombination[3*1]
+            {\externalfigure[pics/menu41][scale=1200]}{}
+            {\externalfigure[pics/menu42][scale=1200]}{}
+            {\externalfigure[pics/menu43][scale=1200]}{}
+            \stopcombination
+
+      \subsection{Layout Menu}
+
+            \Menu{menu5}
+
+      \startpacked
+            \Opt{PageSettings}
+                  shows the page settings dialog.\par
+            \Opt{Reset Positions}
+                  resets all marked objects to there standard positions.
+                  This undos all manuell moving of objects.
+                  This also flips note stem direction back to
+                  default.\par
+            \Opt{Set Normal Staff Distances}
+                  resets modified note line distances back to there
+                  standard values.\par
+            \Opt{Reset Stretch}
+                  resets stretched measures back to there normal width\par
+            \Opt{System Break}
+                  creates a line break after the marked measure\par
+            \Opt{Page Break}
+                  creates a page break after the marked measure\par
+            \stoppacked
+
+
+      \subsection{Style Menu}
+
+            \Menu{menu6}
+
+      \startpacked
+            \Opt{Edit Style}
+                  shows the style editor\par
+            \Opt{Edit Text Style}
+                  shows the text style editor\par
+            \Opt{Load Style}
+                  load a new style from file.\par
+            \Opt{Save Style}
+                  writes the current style to disc\par
+            \stoppacked
+
+
+      \subsection{Display Menu}
+
+            \Menu{menu7}
+
+      \startpacked
+            \Opt{Pad}
+                  show the input pad\par
+            \Opt{Play Panel}
+                  show the play panel\par
+             \Opt{Transport Toolbar}
+                  show the transport toolbar\par
+            \Opt{Show Invisible}
+                  If you switch this option on, invisible note elements are
+                  displayed in gray. Dies enables editing.\par
+            \stoppacked
+
+      \subsection{Help Menu}
+
+            \Menu{menu8}
+
+      \startpacked
+            \Opt{Browser}
+                  starts the configured online help browser\par
+            \Opt{About}
+                  show the about panel\par
+             \Opt{About Qt}
+                  show infos about the Trolltech Qt GUI-Tookit.\par
+            \Opt{Whats This}
+                  after clicking the ''whats this'' cursor appears.
+                  Clicking on any GUI-Element shows a help text for this
+                  element (if any help text is assigned to this element).
+                  \par
+            \stoppacked
+
+%----------------------------------------------------------
+%     Note Entry
+%----------------------------------------------------------
+
+   \section{Note Entry}
+
+      \M\ is always in one of two modes:
+
+      \startitemize[packed]
+            \item {\bf edit mode}, (normal) shows a normal arrow cursor
+            \item {\bf input mode}, shows an up arrow cursor
+      \stopitemize
+
+            \blank[medium]
+            \Input{N} begin note input mode\par
+            \Input{Esc} end note input mode\par
+            \blank[big]
+
+      \FrameTitle{Hint:}
+      \StartFrame
+      In input mode all pad or toolbar settings are for the next note to enter.
+      In normal mode changing pad or toolbar settings directly modify the
+      selected note.
+      \StopFrame
+
+      Entry mode is activated by clicking a note in the pad or by
+      typing \type{N}.
+
+      \subsection{Keyboard entry}
+
+      Note can be entered by typing
+            \blank[medium]
+            \Input{a b c d e f g}\par
+            \blank[big]
+
+      Notes are entered at the current position. The current position
+      ca be set by clicking at a note or rest is is displayed by a
+      blinking cursor. The cursor position is always in front of the
+      current position. The len of the current note and other properties
+      can be set in the pad or the toolbar. The pad simulates the keys
+      of the numeric keypad of a normal keyboard.
+
+      When a note is selected, the next command can create chords. Every
+      input switches into the note entry mode:
+
+            \blank[medium]
+            \InputN{Shift+A} add note A to akkord\par
+            \InputN{Shift+B} add note B to akkord\par
+            \InputN{Shift+C} add note C to akkord\par
+            \InputN{Shift+D} add note D to akkord\par
+            \InputN{Shift+E} add note E to akkord\par
+            \InputN{Shift+F} add note F to akkord\par
+            \InputN{Shift+G} add note G to akkord\par
+            \blank[big]
+
+      For entering intervalls there are the following
+      commands:
+
+      \blank[medium]
+      \startcolumns[n=2]
+            \InputN{1}       Prime up\par
+            \InputN{2}       Sekunde up\par
+            \InputN{3}       Terz up\par
+            \InputN{4}       Quarte up\par
+            \InputN{5}       Quinte up\par
+            \InputN{6}       Septe up\par
+            \InputN{7}       Septime up\par
+            \InputN{8}       Oktave up\par
+            \InputN{9}       None up\par
+
+            \InputN{Shift+1} Prime down\par
+            \InputN{Shift+2} Sekunde down\par
+            \InputN{Shift+3} Terz down\par
+            \InputN{Shift+4} Quarte down\par
+            \InputN{Shift+5} Quinte down\par
+            \InputN{Shift+6} Septe down\par
+            \InputN{Shift+7} Septime down\par
+            \InputN{Shift+8} Oktave down\par
+            \InputN{Shift+9} None down\par
+      \stopcolumns
+            \blank[big]
+
+      More note entry commands:
+
+            \blank[medium]
+            \InputN{x}   flip note stem direction\par
+            \blank[big]
+
+      \subsection{Note entry with mouse}
+
+      In note entry mode a gray note head shows the position 
+      a click whould insert a note. Setting a note replaces a
+      rest or note. Shift+Click adds a note, building a chord.
+
+      \subsection{Note entry with midi keyboard}
+      \subsection{Select}
+
+      \startpacked
+            \Input{Note}       click on note head\par
+            \Input{Akkord}     double click on note head\par
+            \Input{+-Note}     Shift + Click on note head\par
+      \stoppacked
+
+
+      \subsection{Accidentals}
+
+      \M\ sets accidentals depending on pitch, signature
+      and already set accidentals in current measure.
+      If you select a notehead and change pitch with cursor up/down
+      \M\ sets accidentals automatically.
+
+      Another way is to select a note and to select an accidental from
+      the toolbox. The selected note gets the selected accidental and
+      \M\ changes the pitch automatically. This is the way to edit
+      enharmonic exchange (??) or to add a security accidental.
+
+      \Noten{noten2.pdf}
+
+      \subsection{Modify}
+
+      The pitch of an selected mode can be changed by:
+
+      \startpacked
+            \Input{Up}
+                  increase pitch a half tone\par
+            \Input{Ctrl+Up}
+                  increase pitch one octave\par
+            \Input{Down}
+                  decrease pitch a half tone\par
+            \Input{Ctrl+Down}
+                  decrease pitch one octave\par
+            \stoppacked
+
+\section{Slurs}
+
+      Slurs are connected top notes or rest. If a note moves, the
+      associated slur moves to. If a slur spans a line or page,
+      it is automatically splittet into segments.
+
+      To create a slur, you have to first select a start note.
+      Entering ''S'' creates a slur to the next note.
+      Double click the slur to enter edit mode. In edit mode
+      four control points are shown, which can be moved with
+      mouse or keyboard commands.
+
+      \Screen{slur1}{Slur with control points}
+
+            \blank[medium]
+            \Input{s}   create a slur to the next note and enter edit mode\par
+            \Input{Tab} switch to next control point\par
+            \Input{right} move the current control point one space to the right\par
+            \Input{left}  move the current control point one space to the left\par
+            \Input{up}  move the current control point one space up\par
+            \Input{down} move the current control point one space down\par
+            \Input{Ctrl+right} move control point $\pm 1/10$ space to the right\par
+            \Input{Ctrl+left}  move control point $\pm 1/10$ space to the left\par
+            \Input{Ctrl+up}    move control point $\pm 1/10$ space up\par
+            \Input{Ctrl+down}  move control point $\pm 1/10$ space down\par
+            \Input{Shift+right} move control point to the next note or rest\par
+            \Input{Shift+left} move control point to previous note or rest\par
+            \Input{x}  flip slur orientation\par
+            \Input{ESC} leave edit mode\par
+            \Input{Doppelclick} start edit mode\par
+            \blank[big]
+
+
+\section{Instruments}
+
+      \Screen{instruments}{Instrument Dialog}
+
+\section{Text}
+      \section{Fingering}
+
+            - open fingering palette create->text->fingering
+            - click on "finger" and then on note head to put finger number
+              to note
+
+            - doubleclick to edit number
+
+      \subsection{Liedtext}
+
+            First select a note or rest were you want to start lyrics entry.
+
+            Ctrl+L      start lyrics entry; a blinking text cursor
+                        appears beneath the not
+
+            Tab         positions the cursor to the next note
+
+            Return      creates another lyrics line
+
+            ESC         exit lyrics entry
+
+
+\section{Beams}
+
+            Staff Crossing Beams
+
+            Shift+Ctrl+Down  move note/chord a staff down in a multi staff
+                  Instrument (piano)
+
+            Shift+Ctrl+Up  move note/chord a staff up in a multi staff
+                  Instrument (piano)
+
+            x  flips beam orientation above, below; this overrides automatic
+
+\section{Symbols}
+
+      \Screen{symbols}{Feta-Symbols}
+
+\section{Attributes}
+      \subsection{Unvisible}
+            Most objects on the canvas can have the ''invisible'' attribute.
+            Invisible objects use space in the layout but are invisible on
+            screen and on printout.
+            To be able to switch them back to ''visible'',there is a global
+            mode ''show invisible''. In this mode all invisible objects are
+            shown grayed out. They are still not visible in printout.
+
+      \subsection{Color}
+            For most objects on the canvas you can select a color. The
+            objects are shown and printed in this color.
+
+\section{Navigation}
+
+      \startpacked
+            \Input{Right}
+                  go to next note\par
+            \Input{Left}
+                  go to previous note\par
+            \Input{Alt+Up}
+                  go to next higher note in chord or lowest note in
+                  higer line\par
+            \Input{Alt+Down}
+                  select next lower note in chord or highest note in 
+                  lower line\par
+            \Input{Alt+Ctrl+Up}
+                  select highest note in chord\par
+            \Input{Alt+Ctrl+Down}
+                  slect lowest note in chord\par
+            \Input{Drag Canvas}
+                  move note sheet on canvas\par
+      \stoppacked
+
+      \subsection{Zoom}
+
+      The note sheet can be resized with this methods:
+
+      \startitemize[packed]
+            \item after selecting the zoom tool (magnifying glass), the
+                  note sheet can be zoomed in with the left mouse key and
+                  zoomed out with the right mouse key. 
+                  When you hold the keyboard shift key while clicking
+                  in zoom mode, the zoom tool stays selected.
+            \item in the zoom pulldown menu you can select a zoom factor
+      \stopitemize
+
+
+\section{Palettes}
+      To insert a palette object:
+
+       \startitemize[packed]
+            \item click on the palette object to select it. The cursor changes
+               (arrow up).
+            \item click on the note sheet to insert the palette object.
+       \stopitemize
+
+
+   \subsection{Copy + Paste}
+      A fast method to copy objects:
+
+      \startitemize[packed]
+            \item select an object
+            \item click with middle mouse key on the destination location to
+               insert a object copy.
+      \stopitemize
+
+\section{Layout}
+      \subsection{Page layout}
+      \subsubsection{Page settings}
+
+            \Screen{pagesettings}{Page settings}
+
+
+      \subsection{Layout}
+      \subsection{Spacing}
+
+\section{Styles}
+
+      \Screen{style1}{Style Editor}
+      \Screen{textstyle}{Text Style Editor: Styles}
+      \Screen{textstyle1}{Text Style Editor: Positions}
+
+\section{\M\ File format}
+
+      \M\ saves a score in file with suffix
+      \type{*.msc}. This is an normal text file in XML format.
+      The file can be edited with a normal text editor.
+      There is no formal description of the \M\ file format
+      (i.e. a DTD). The file format will change in the future
+      (until there is a 1.0 release) and you should use
+      MusicXML to archive scores.
+
+
+\chapter{Installation}
+
+      \section{Download}
+            The latest \M\ Version is available at
+            \type{http://mscore.sourceforge.net}
+
+            \M\ is distributed as a compressed TAR file. After download it can
+            be expanded with:\par
+
+            \Cmd{tar xvofj mscore-1.0.0.tar.bz2}
+
+            This command creates a subdirectory
+            mscore-1.0.0, with the expanded \M\ source.
+
+   \section{Requirements}
+      Several linux distributions are splitting packets in an user and an
+      developer part. To create \M\ you need both parts.
+
+            \startitemize[packed]
+                  \item qt4 gui library in der Version $\ge$ 4.0.0
+                  \item ALSA version 0.9.0 or newer for midi input
+                  \item JACK audio server
+                  \item fluidsynth-1.0.0 and a suitable sound font
+                  \item gcc 3.4 or newer
+                  \item recommended: kde3 (\M\ uses the KDE printer by default.
+                        Without KDE you have to configure your own print command.
+            \stopitemize
+
+   \section{Compile}
+      Compiliation of \M\ is done the standard way with \type{configure}, then
+      \type{make} followed by \type{make install}. For last command you usually
+      need to be super user.
+
+   \subsection{Configure}
+      Hint: configure works only from a X11 console.
+
+      \CCmd{cd mscore-x.x.x}{./configure --prefix=/usr}
+
+      (if configure does not find the qt libraries you can enter something
+      like:  configure --with-qt-prefix=/usr/lib/qt3
+      which is reported to work with Mandrake)
+
+      If you have installed GNU Compiler $\ge$ 3.4, then the translatin can be
+      speed up by using precompiled headers. For this you have to configure
+      like:
+
+      \Cmd{./configure --enable-pch}
+
+   \subsection{Make}
+
+      \Cmd{make}
+
+      compiles the sources and produces the executable file
+      \type{mscore}.
+
+      \FrameTitle{Hint}
+      \StartFrame
+      between different C++ Compiler there are small differences in the
+      ABI (Application Binary Interface) which may lead to trouble.
+      \M\ should be compiled with the same compiler as your Qt-Library.
+      \StopFrame
+
+   \section{Installation}
+
+      \Cmd{su -c make install}
+
+      this installs \M.
+
+      Unfortunately the needed score font is not automatically installed.
+      You have to do it by hand.
+
+      You dont need to install the score font for printing. \M\ embedds the
+      font data into the printer data stream.
+
+\chapter{Keyboard Shortcuts}
+      \Sc{\Uparrow} Shift
+      \blank[line]
+
+      \startcolumns[n=2,rule=on]
+      \Sc{Alt+F} File Menu\par
+      \Sc{Alt+E} Edit Menu\par
+      \Sc{Alt+C} Create Menu\par
+      \Sc{Alt+N} Notes Menu\par
+      \Sc{Alt+L} Layout Menu\par
+      \Sc{Alt+S} Style Menu\par
+      \Sc{Alt+D} Display Menu\par
+      \Sc{Alt+H} Help Menu\par
+      \blank[small]
+      \hrule
+      \blank[small]
+      \Sc{A}     Note a\par
+      \Sc{B}     Note b\par
+      \Sc{C}     Note c\par
+      \Sc{D}     Note d\par
+      \Sc{E}     Note e\par
+      \Sc{F}     Note f\par
+      \Sc{G}     Note g\par
+      \blank[small]
+      \hrule
+      \blank[small]
+      \Sc{\Uparrow A} add note a\par
+      \Sc{\Uparrow B} add note b\par
+      \Sc{\Uparrow C} add note c\par
+      \Sc{\Uparrow D} add note d\par
+      \Sc{\Uparrow E} add note e\par
+      \Sc{\Uparrow F} add note f\par
+      \Sc{\Uparrow G} add note g\par
+      \blank[small]
+      \hrule
+      \blank[small]
+      \Sc{1}  Prime up\par
+      \Sc{2}  Sekunde up\par
+      \Sc{3}  Terz up\par
+      \Sc{4}  Quarte up\par
+      \Sc{5}  Quinte up\par
+      \Sc{6}  Septe up\par
+      \Sc{7}  Septime up\par
+      \Sc{8}  Oktave up\par
+      \Sc{9}  None up\par
+      \blank[small]
+      \hrule
+      \blank[small]
+      \Sc{\Uparrow 1} Prime down\par
+      \Sc{\Uparrow 2} Sekunde dwon\par
+      \Sc{\Uparrow 3} Terz down\par
+      \Sc{\Uparrow 4} Quarte down\par
+      \Sc{\Uparrow 5} Quinte down\par
+      \Sc{\Uparrow 6} Septe down\par
+      \Sc{\Uparrow 7} Septime down\par
+      \Sc{\Uparrow 8} Oktave down\par
+      \Sc{\Uparrow 9} None down\par
+      \blank[small]
+      \hrule
+      \blank[small]
+      \Sc{Right}  next note\par
+      \Sc{Left}   previous note\par
+      \Sc{Alt+Up} select higher note in chord\par
+      \Sc{Alt+Down} select lower note in chord\par
+      \Sc{Alt+Ctrl+Up}  select highest nost in chord\par
+      \Sc{Alt+Ctrl+Down} select lowest note in chord\par
+
+      \stopcolumns
+
+\chapter{Design \& Implementation}
+
+   \section{Main Structure}
+
+      \M\ handles multiple documents (scores). The documents can
+      selected with a tab bar. A global pointer points to the current
+      selected score (\type{cs}).
+
+      A \type{Score} contains data read from an \type{*.msc} or \type{*.xml}
+      file. Think of it as a simple list of measures. The \type{layout()}
+      procedure breaks this list into lines ans pages producing a
+      \type{Layout} structure. The \type{Layout} can be viewed by a
+      \type{Viewer} providing a magnification and horizontal und
+      vertical offsets.
+
+      \setupFLOWcharts
+        [dx=2\bodyfontsize,
+         dy=2\bodyfontsize,
+         width=7\bodyfontsize,
+         height=3\bodyfontsize,
+         maxwidth=\textwidth]
+
+      \startFLOWchart[mops1]
+
+        \startFLOWcell
+          \name{MuseScore}
+          \location{1,1}
+          \shape{procedure}
+          \text{MuseScore}
+          \connect[bl]{Project1}
+          \connect[bl]{Project2}
+          \stopFLOWcell
+
+        \startFLOWcell
+          \name{Project1}
+          \location{1,2}
+          \shape{32}
+          \text{Score\\A}
+          \connect[rl]{Layout1}
+          \connect[rl]{Layout2}
+          \stopFLOWcell
+
+        \startFLOWcell
+          \name{Layout1}
+          \location{2,2}
+          \shape{34}
+          \text{Layout}
+          \connect[rl]{View1}
+          \stopFLOWcell
+
+        \startFLOWcell
+          \name{View1}
+          \location{3,2}
+          \shape{17}
+          \text{View PagePreView}
+          \stopFLOWcell
+
+        \startFLOWcell
+          \name{Layout2}
+          \location{2,3}
+          \shape{34}
+          \text{Layout}
+          \connect[rl]{View2}
+          \connect[rl]{View3}
+          \stopFLOWcell
+
+        \startFLOWcell
+          \name{View2}
+          \location{3,3}
+          \shape{17}
+          \text{View\\Canvas}
+          \stopFLOWcell
+
+        \startFLOWcell
+          \name{View3}
+          \location{3,4}
+          \shape{17}
+          \text{View Navigator}
+          \stopFLOWcell
+
+        \startFLOWcell
+          \name{Project2}
+          \location{1,3}
+          \shape{32}
+          \text{Score\\B}
+          \stopFLOWcell
+
+      \stopFLOWchart
+      \FLOWchart[mops1]
+
+      A \type{Score} can have more than one \type{Layout}. This is used in
+      the \type{Page Settings} dialog for a page preview.
+
+      A \type{Layout} can have more than one \type{View}. The main view
+      is called \type{Canvas} and can be used to view and edit the score.
+      A second smaller \type{View} ist used by the \type{Navigator} widget.
+
+   \section{Layout Object Hierarchy}
+
+      \setupFLOWcharts
+        [dx=1.5\bodyfontsize,
+         dy=1.5\bodyfontsize,
+         width=8\bodyfontsize,
+         height=4\bodyfontsize,
+         maxwidth=\textwidth]
+
+      \startFLOWchart[mops2]
+
+        \startFLOWcell
+          \name{Page}
+          \location{1,1}
+          \shape{procedure}
+          \text{Page}
+          \connect[rl]{System}
+          \stopFLOWcell
+
+        \startFLOWcell
+          \name{System}
+          \location{2,2}
+          \shape{procedure}
+          \text{System}
+          \connect[rl]{Measure}
+          \stopFLOWcell
+
+        \startFLOWcell
+          \name{Measure}
+          \location{3,3}
+          \shape{procedure}
+          \text{Measure}
+          \connect[rl]{Slur}
+          \connect[rl]{SlurSegment}
+          \connect[rl]{Segment}
+          \stopFLOWcell
+
+        \startFLOWcell
+          \name{Slur}
+          \location{4,4}
+          \shape{procedure}
+          \text{Slur}
+          \stopFLOWcell
+
+        \startFLOWcell
+          \name{SlurSegment}
+          \location{4,5}
+          \shape{procedure}
+          \text{SlurSegment}
+          \stopFLOWcell
+
+        \startFLOWcell
+          \name{Segment}
+          \location{4,6}
+          \shape{procedure}
+          \text{Segment}
+          \connect[rl]{Chord}
+          \connect[rl]{Rest}
+          \connect[rl]{Lyric}
+          \stopFLOWcell
+
+          \startFLOWcell
+            \name{Chord}
+            \location{5,7}
+            \shape{procedure}
+            \text{Chord}
+            \connect[rl]{Note}
+            \stopFLOWcell
+
+            \startFLOWcell
+              \name{Note}
+              \location{6,8}
+              \shape{procedure}
+              \text{Note}
+              \connect[rl]{Accidental}
+              \stopFLOWcell
+
+              \startFLOWcell
+                \name{Accidental}
+                \location{7,9}
+                \shape{procedure}
+                \text{Accidental}
+                \stopFLOWcell
+
+          \startFLOWcell
+            \name{Rest}
+            \location{5,10}
+            \shape{procedure}
+            \text{Rest}
+            \stopFLOWcell
+
+          \startFLOWcell
+            \name{Lyric}
+            \location{5,11}
+            \shape{procedure}
+            \text{Lyric}
+            \stopFLOWcell
+
+      \stopFLOWchart
+      \FLOWchart[mops2]
+
+\chapter{Examples}
+      \vbox{\placecontent}
+      \setuphead[section][placehead=no]
+
+      \definemakeup[examples][
+         doublesided=yes,page=yes,pagestate=start
+         ]
+
+      \startexamplesmakeup
+      \section{Bilder einer Ausstellung -- Promenade, Modeste Mussorgsky}
+      \externalfigure[pics/promenade.pdf][width=1.1\textwidth]
+      \stopexamplesmakeup
+
+      \startexamplesmakeup
+      \section{Invention No1, J.S.Bach}
+      \externalfigure[pics/inv1-1.pdf][width=1.1\textwidth]
+      \stopexamplesmakeup
+
+      \startexamplesmakeup
+      \externalfigure[pics/inv1-2.pdf][width=1.1\textwidth]
+      \stopexamplesmakeup
+
+      \startexamplesmakeup
+      \section{Invention No6, J.S.Bach}
+      \externalfigure[pics/inv6-1.pdf][width=1.1\textwidth]
+      \stopexamplesmakeup
+
+      \startexamplesmakeup
+      \externalfigure[pics/inv6-2.pdf][width=1.1\textwidth]
+      \stopexamplesmakeup
+
+\completeindex
+\stoptext

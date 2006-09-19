@@ -1,0 +1,7 @@
+base referer
+rect $edittempo_8h.html 123,92 200,118
+rect $edittempo_8cpp.html 7,17 100,44
+rect $menus_8cpp.html 124,17 199,44
+rect $moc__edittempo_8cpp.html 223,17 348,44
+rect $edittempobase_8cpp.html 224,92 349,118
+rect $moc__edittempobase_8cpp.html 373,92 531,118

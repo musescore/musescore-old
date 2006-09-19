@@ -1,0 +1,9 @@
+base referer
+rect $project_8h.html 300,92 359,118
+rect $edit_8cpp.html 7,17 63,44
+rect $instrdialog_8cpp.html 87,17 183,44
+rect $measure_8cpp.html 207,17 295,44
+rect $menus_8cpp.html 319,17 393,44
+rect $project_8cpp.html 417,17 492,44
+rect $property_8cpp.html 516,17 599,44
+rect $undo_8cpp.html 623,17 687,44

@@ -1,0 +1,4 @@
+base referer
+rect $classSlur.html 7,166 44,193
+rect $classTie.html 68,166 105,193
+rect $classElement.html 27,17 85,44

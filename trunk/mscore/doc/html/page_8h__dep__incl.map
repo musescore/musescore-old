@@ -1,0 +1,10 @@
+base referer
+rect $canvas_8h.html 57,92 119,119
+rect $file_8cpp.html 19,17 69,44
+rect $project_8cpp.html 105,17 180,44
+rect $importxml_8cpp.html 193,92 284,119
+rect $listedit_8cpp.html 308,92 380,119
+rect $page_8cpp.html 404,92 471,119
+rect $pagesettings_8cpp.html 495,92 607,119
+rect $system_8cpp.html 631,92 708,119
+rect $utils_8cpp.html 732,92 791,119
