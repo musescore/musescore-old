@@ -27,7 +27,6 @@
 #include "note.h"
 #include "playpanel.h"
 #include "pad.h"
-#include "compat.h"
 
 //---------------------------------------------------------
 //   buttons2stemDir
