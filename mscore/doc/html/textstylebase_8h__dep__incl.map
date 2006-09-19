@@ -1,7 +1,0 @@
-base referer
-rect $textstyle_8h.html 133,92 200,118
-rect $mscore_8cpp.html 7,17 84,44
-rect $moc__textstyle_8cpp.html 108,17 225,44
-rect $textstyle_8cpp.html 249,17 332,44
-rect $moc__textstylebase_8cpp.html 224,92 371,118
-rect $textstylebase_8cpp.html 395,92 509,118

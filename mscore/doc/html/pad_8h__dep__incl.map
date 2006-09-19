@@ -1,5 +1,0 @@
-base referer
-rect $canvas_8cpp.html 7,17 84,44
-rect $keyb_8cpp.html 108,17 172,44
-rect $moc__pad_8cpp.html 196,17 287,44
-rect $pad_8cpp.html 311,17 369,44

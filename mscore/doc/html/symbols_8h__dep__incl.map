@@ -1,8 +1,0 @@
-base referer
-rect $element_8h.html 57,92 124,118
-rect $importxml_8cpp.html 9,17 100,44
-rect $keyb_8cpp.html 148,92 212,118
-rect $menus_8cpp.html 236,92 311,118
-rect $note_8cpp.html 335,92 393,118
-rect $pad_8cpp.html 417,92 476,118
-rect $symbols_8cpp.html 500,92 585,118

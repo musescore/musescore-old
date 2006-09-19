@@ -1,5 +1,0 @@
-base referer
-rect $pad_8h.html 7,17 49,44
-rect $padids_8h.html 73,17 135,44
-rect $symbols_8h.html 159,17 228,44
-rect $icons_8h.html 799,17 849,44

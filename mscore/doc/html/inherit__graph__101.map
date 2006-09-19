@@ -1,5 +1,0 @@
-base referer
-rect $classUi__PrefsDialogBase.html 19,7 149,33
-rect $classUi_1_1PrefsDialogBase.html 199,7 329,33
-rect $classPrefsDialogBase.html 377,7 489,33
-rect $classPreferenceDialog.html 537,7 652,33

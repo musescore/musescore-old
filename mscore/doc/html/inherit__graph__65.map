@@ -1,5 +1,0 @@
-base referer
-rect $classSaveFile.html 17,57 81,84
-rect $classExportMidi.html 146,7 216,33
-rect $classExportMusicXml.html 129,57 233,84
-rect $classSaveStyle.html 145,108 217,135

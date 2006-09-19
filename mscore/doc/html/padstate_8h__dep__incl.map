@@ -1,9 +1,0 @@
-base referer
-rect $canvas_8cpp.html 7,17 84,44
-rect $cmd_8cpp.html 108,17 169,44
-rect $edit_8cpp.html 193,17 249,44
-rect $file_8cpp.html 273,17 324,44
-rect $keyb_8cpp.html 348,17 412,44
-rect $note_8cpp.html 436,17 495,44
-rect $project_8cpp.html 519,17 593,44
-rect $select_8cpp.html 617,17 687,44
