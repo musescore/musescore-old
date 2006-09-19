@@ -37,7 +37,6 @@
 #include "tempo.h"
 #include "padstate.h"
 #include "pad.h"
-#include "compat.h"
 
 #include "data/fileprint.xpm"
 #include "data/filenew.xpm"
@@ -104,6 +103,15 @@ ProjectList projectList[PROJECT_LIST_LEN];
 
 int appDpiX = 75;
 int appDpiY = 75;
+
+//---------------------------------------------------------
+//   getSharePath
+//---------------------------------------------------------
+
+static QString getSharePath()
+      {
+      return QString("");            
+      }
 
 //---------------------------------------------------------
 //   printVersion
@@ -1164,7 +1172,7 @@ int main(int argc, char* argv[])
             }
       mscoreGlobalShare = getSharePath();
       if (debugMode) {
-            printf("global share: <%s>\n", mscoreGlobalShare.toLatin1().data());
+            printf("global share: <%s>\n", mscoreGlobalShare.toLocal8Bit().data());
             }
 
       QTranslator translator;

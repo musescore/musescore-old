@@ -126,7 +126,6 @@ add_executable ( mscore
       chordrest.cpp
       clef.cpp
       cmd.cpp
-      compat.cpp
       dynamics.cpp
       edit.cpp
       editinstrument.cpp
