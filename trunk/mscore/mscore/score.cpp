@@ -992,7 +992,7 @@ void Score::endEdit()
 //    paste element el at position pos
 //---------------------------------------------------------
 
-void Score::paste(const Element* e, const QPointF& pos)
+void Score::paste(const Element* /*e*/, const QPointF& /*pos*/)
       {
 #if 0       //TODO
       Element* obj = e->clone();

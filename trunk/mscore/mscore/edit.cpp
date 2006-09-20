@@ -373,7 +373,8 @@ void Score::addBar(BarLine* barLine, Measure* measure)
             BarLine* obarLine = measure->barLine(staffIdx);
             if (obarLine) {
                   Staff* staffp = staff(staffIdx);
-                  BarLine* nbarLine = new BarLine(*obarLine);
+                  BarLine* nbarLine = new BarLine(barLine->score());
+                  nbarLine->setParent(barLine->parent());
                   nbarLine->setStaff(staffp);
                   nbarLine->setSubtype(barLine->subtype());
                   cmdRemove(obarLine);
@@ -721,6 +722,8 @@ void Score::cmdFlipStemDirection()
       {
       Element* el = sel->element();
       if (el && el->type() == NOTE) {
+#if 0
+// TODO
             int pitch = ((Note*)el)->pitch();
             Chord* chord = ((Note*)el)->chord();
             Chord* nChord = new Chord(*chord);
@@ -734,6 +737,7 @@ void Score::cmdFlipStemDirection()
             nChord->segment()->measure()->layoutNoteHeads(nChord->staffIdx());
             undoOp(UndoOp::RemoveObject, chord);
             undoOp(UndoOp::AddObject, nChord);
+#endif
             }
       else if (el && el->type() == SLUR_SEGMENT) {
             SlurTie* slur = ((SlurSegment*) el)->slurTie();
@@ -1067,7 +1071,7 @@ void Score::cmdTuplet(int n)
             return;
       Chord* chord = note->chord();
 
-      int normalNotes, actualNotes, baseLen;
+      int normalNotes=2, actualNotes=3;
       switch (n) {
             case 2:
                   // normalNotes = 3;
@@ -1083,7 +1087,7 @@ void Score::cmdTuplet(int n)
                   actualNotes = 5;
                   break;
             }
-      baseLen = chord->tickLen() / normalNotes;
+      int baseLen = chord->tickLen() / normalNotes;
 
       //---------------------------------------------------
       //    - remove rest/note
@@ -1160,7 +1164,6 @@ void Score::changeVoice(int voice)
 
 void Score::colorItem(Element* element)
       {
-#if 0 //TODO
       QColor sc(element->color());
       QColor c = QColorDialog::getColor(sc);
       if (!c.isValid())
@@ -1171,21 +1174,14 @@ void Score::colorItem(Element* element)
       for (iElement ie = el->begin(); ie != el->end(); ++ie) {
             Element* e = *ie;
             if (e->color() != c) {
-                  Element* ne = e->clone();
-                  if (ne == 0)
-                        return;
-                  ne->setColor(c);
-                  removeObject(e);
-                  addObject(ne);
-                  dl.push_back(ne);
-                  undoOp(UndoOp::RemoveObject, e);
-                  undoOp(UndoOp::AddObject, ne);
-                  refresh |= ne->abbox();
+                  QColor color = e->color();
+                  e->setColor(c);
+                  undoOp(UndoOp::ChangeColor, e, color);
+                  refresh |= e->abbox();
                   }
             }
       sel->deselectAll(this);
       sel->add(dl);
-#endif
       }
 
 //---------------------------------------------------------
@@ -1200,7 +1196,6 @@ void Score::pageBreak()
             }
       Measure* m = tick2measure(sel->tickStart);
       m->setPageBreak(!m->pageBreak());
-printf("page break %d\n", m->pageBreak());
       layout();
       }
 

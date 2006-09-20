@@ -56,6 +56,9 @@ class TextElement : public Element {
       TextElement(Score*);
       TextElement(Score*, int style);
       virtual ~TextElement();
+      TextElement(const TextElement&);
+      TextElement &operator=(const TextElement&);
+
       virtual ElementType type() const { return TEXT; }
 
 
@@ -98,7 +101,6 @@ class Lyrics : public TextElement {
 
    public:
       Lyrics(Score*);
-      Lyrics(const Lyrics& l);
       virtual ElementType type() const { return LYRICS; }
 
       virtual void write(Xml& xml) const;
@@ -116,7 +118,6 @@ class Lyrics : public TextElement {
 class Fingering : public TextElement {
    public:
       Fingering(Score*);
-      Fingering(const Fingering& l) : TextElement(l) {}
       virtual ElementType type() const { return FINGERING; }
 
       virtual void write(Xml& xml) const;

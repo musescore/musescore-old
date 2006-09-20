@@ -167,7 +167,6 @@ class Score : public QObject {
       Element* moveDown(Note*);
 	void convertTrack(MidiTrack*, int);
 	void preprocessTrack(MidiTrack*);
-      Note* modifyNote(Note*);
 
    public:
       //---------------------------------------------------
@@ -277,6 +276,7 @@ class Score : public QObject {
       void undoOp(UndoOp::UndoType type, Part* part, int idx);
       void undoOp(UndoOp::UndoType type, Segment* seg, int staff);
       void undoOp(UndoOp::UndoType type, Element* object);
+      void undoOp(UndoOp::UndoType type, Element*, const QColor&);
 
       void keyPressEvent(QKeyEvent*);
       void setNote(int tick, Staff* staff, int voice, int pitch, int len);
@@ -300,7 +300,8 @@ class Score : public QObject {
 
       // undo/redo ops
       void endUndoRedo(Undo*);
-      void addObjectToSelected(Element*);
+      void addAttribute(int);
+      void addAccidental(int);
 
       void addObject(Element*);
       void removeObject(Element*);

@@ -407,14 +407,14 @@ bool Bracket::acceptDrop(int type, int) const
 void Bracket::drop(const QPointF&, int type, int subtype)
       {
       if (ElementType(type) == BRACKET) {
-#if 0 // TODO
-            Bracket* b = clone();
-            b->setSubtype(subtype);
-            b->layout();
+            Bracket* b = new Bracket(score(), subtype);
+            b->setParent(parent());
+            b->setStaff(staff());
+            b->setSpan(span());
             score()->cmdRemove(this);
             score()->cmdAdd(b);
+            b->layout();
             score()->layout();
-#endif
             }
       }
 

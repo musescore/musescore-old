@@ -144,8 +144,8 @@ void Canvas::objectPopup(const QPoint& pos, Element* obj)
       {
       QMenu* popup = new QMenu(this);
 
-      QAction* cutAction = popup->addAction(tr("Cut"));
-      QAction* copyAction = popup->addAction(tr("Copy"));
+      QAction* cutAction    = popup->addAction(tr("Cut"));
+      QAction* copyAction   = popup->addAction(tr("Copy"));
       QAction* deleteAction = popup->addAction(tr("Delete"));
       popup->addSeparator();
       QAction* invisibleAction;
@@ -779,7 +779,7 @@ QRectF Canvas::moveCursor()
       if (measure) {
             Segment* segment;
             for (segment = measure->first(); segment; segment = segment->next()) {
-                  if (segment->type() != Segment::SegChordRest)
+                  if (segment->segmentType() != Segment::SegChordRest)
                         continue;
                   if (segment->tick() == tick)
                         break;

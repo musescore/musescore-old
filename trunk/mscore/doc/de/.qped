@@ -5,11 +5,11 @@
     <Editor1>
       <KontextList>
         <Kontext>
-          <path>/home/ws/mscore/mscore/doc/de/man.tex</path>
-          <column>20</column>
-          <line>172</line>
+          <path>/home/ws/mscore/mscore/trunk/mscore/doc/de/man.tex</path>
+          <column>6</column>
+          <line>981</line>
           <xoff>0</xoff>
-          <yoff>8</yoff>
+          <yoff>9</yoff>
           </Kontext>
         <cur>1</cur>
         </KontextList>

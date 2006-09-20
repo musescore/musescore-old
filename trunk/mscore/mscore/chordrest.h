@@ -97,6 +97,10 @@ class NoteAttribute : public Symbol {
 
    public:
       NoteAttribute(Score*);
+      NoteAttribute(Score*, int);
+      NoteAttribute(const NoteAttribute&);
+      NoteAttribute &operator=(const NoteAttribute&);
+
       virtual ElementType type() const { return ATTRIBUTE; }
 
       virtual void setSubtype(int);
@@ -129,6 +133,8 @@ class ChordRest : public Element {
 
    public:
       ChordRest(Score*);
+      ChordRest(const ChordRest&);
+      ChordRest &operator=(const ChordRest&);
       virtual ElementType type() const = 0;
 
       void writeProperties(Xml& xml) const;

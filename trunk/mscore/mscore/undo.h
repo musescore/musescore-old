@@ -47,7 +47,11 @@ struct UndoOp {
             InsertSegStaff, RemoveSegStaff,
             InsertMStaff, RemoveMStaff,
             InsertMeasure, RemoveMeasure,
-            SortStaves
+            SortStaves,
+            ToggleInvisible,
+            ChangeColor,
+            ChangePitch,
+            ChangeAccidental,
             };
       UndoType type;
       Element* obj;
@@ -59,8 +63,9 @@ struct UndoOp {
       Segment* segment;
       std::list<int> si;
       std::list<int> di;
-
       int idx;
+      QColor color;
+
       const char* name() const;
       };
 

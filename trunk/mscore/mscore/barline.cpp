@@ -231,7 +231,7 @@ bool BarLine::acceptDrop(int type, int) const
 //   drop
 //---------------------------------------------------------
 
-void BarLine::drop(const QPointF& pos, int type, int st)
+void BarLine::drop(const QPointF& /*pos*/, int type, int st)
       {
       if (type != BAR_LINE)
             return;
@@ -239,8 +239,10 @@ void BarLine::drop(const QPointF& pos, int type, int st)
             return;
       score()->cmdRemove(this);
 
-      BarLine* bl = new BarLine(*this);
+      BarLine* bl = new BarLine(score());
       bl->setSubtype(st);
+      bl->setParent(parent());
+      bl->setStaff(staff());
 
       if (subtype() == START_REPEAT) {
             Measure* m = (Measure*)(parent()->parent());

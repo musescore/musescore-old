@@ -38,6 +38,9 @@ class BarLine : public Element {
 
    public:
       BarLine(Score*);
+      BarLine(const BarLine&);
+      BarLine &operator=(const BarLine&);
+
       virtual ElementType type() const { return BAR_LINE; }
       virtual void write(Xml& xml) const;
       virtual void read(QDomNode);
