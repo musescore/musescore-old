@@ -45,6 +45,10 @@ static const char* undoName[] = {
       "InsertMStaff", "RemoveMStaff",
       "InsertMeasure", "RemoveMeasure",
       "SortStaves",
+      "ToggleInvisible",
+      "ChangeColor",
+      "ChangePitch",
+      "AddAccidental",
       };
 
 //---------------------------------------------------------
@@ -183,6 +187,32 @@ void Score::doUndo()
                   case UndoOp::SortStaves:
                         sortStaves(i->di, i->si);
                         break;
+                  case UndoOp::ToggleInvisible:
+                        i->obj->setVisible(!i->obj->visible());
+                        break;
+                  case UndoOp::ChangeColor:
+                        {
+                        QColor color = i->obj->color();
+                        i->obj->setColor(i->color);
+                        i->color = color;
+                        }
+                        break;
+                  case UndoOp::ChangePitch:
+                        {
+                        Note* note = (Note*)(i->obj);
+                        int pitch  = note->pitch();
+                        note->changePitch(i->idx);
+                        i->idx = pitch;
+                        }
+                        break;
+                  case UndoOp::ChangeAccidental:
+                        {
+                        Note* note = (Note*)(i->obj);
+                        int accidental  = note->userAccidental();
+                        note->changeAccidental(i->idx);
+                        i->idx = accidental;
+                        }
+                        break;
                   }
             }
       redoList.push_back(u); // put item on redo list
@@ -248,6 +278,32 @@ void Score::doRedo()
                   case UndoOp::SortStaves:
                         sortStaves(i->si, i->di);
                         break;
+                  case UndoOp::ToggleInvisible:
+                        i->obj->setVisible(!i->obj->visible());
+                        break;
+                  case UndoOp::ChangeColor:
+                        {
+                        QColor color = i->obj->color();
+                        i->obj->setColor(i->color);
+                        i->color = color;
+                        }
+                        break;
+                  case UndoOp::ChangePitch:
+                        {
+                        Note* note = (Note*)(i->obj);
+                        int pitch  = note->pitch();
+                        note->changePitch(i->idx);
+                        i->idx = pitch;
+                        }
+                        break;
+                  case UndoOp::ChangeAccidental:
+                        {
+                        Note* note = (Note*)(i->obj);
+                        int accidental  = note->userAccidental();
+                        note->changeAccidental(i->idx);
+                        i->idx = accidental;
+                        }
+                        break;
                   }
             }
       undoList.push_back(u); // put item on undo list
@@ -289,6 +345,24 @@ void Score::undoOp(UndoOp::UndoType type, Element* object)
       UndoOp i;
       i.type = type;
       i.obj  = object;
+      undoList.back()->push_back(i);
+      }
+
+//---------------------------------------------------------
+//   undoOp
+//---------------------------------------------------------
+
+void Score::undoOp(UndoOp::UndoType type, Element* object, const QColor& color)
+      {
+      if (!undoActive) {
+            fprintf(stderr, "undoOp: undo not started\n");
+            abort();
+            }
+      assert(type == UndoOp::RemoveObject || type == UndoOp::AddObject);
+      UndoOp i;
+      i.type  = type;
+      i.obj   = object;
+      i.color = color;
       undoList.back()->push_back(i);
       }
 

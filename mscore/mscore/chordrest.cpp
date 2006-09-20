@@ -83,6 +83,16 @@ NoteAttribute::NoteAttribute(Score* s)
       }
 
 //---------------------------------------------------------
+//   NoteAttribute
+//---------------------------------------------------------
+
+NoteAttribute::NoteAttribute(Score* s, int idx)
+   : Symbol(s)
+      {
+      setSubtype(idx);
+      }
+
+//---------------------------------------------------------
 //   drag
 //    return update Rect relative to canvas
 //---------------------------------------------------------

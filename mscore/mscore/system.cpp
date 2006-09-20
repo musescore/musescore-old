@@ -511,7 +511,7 @@ int System::y2staff(qreal y) const
 double System::distance(int n) const
       {
       if ((unsigned)n >= _staves.size()) {
-            printf("System::distance(): bad stave index %d >= %ld\n", n, _staves.size());
+            printf("System::distance(): bad stave index %d >= %zd\n", n, _staves.size());
             return 0;
             }
       return _staves[n]->distance();

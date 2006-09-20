@@ -592,7 +592,7 @@ void MuseScore::editInstrList()
             }
 
       if (sl.size() != dl.size())
-            printf("cannot happen: sl(%ld) != dl(%ld)\n", sl.size(), dl.size());
+            printf("cannot happen: sl(%zd) != dl(%zd)\n", sl.size(), dl.size());
       bool sort = false;
       std::list<int>::iterator isl = sl.begin();
       std::list<int>::iterator dsl = dl.begin();

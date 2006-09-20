@@ -96,6 +96,8 @@ class Element {
    public:
       Element(Score*);
       virtual ~Element() {}
+      Element(const Element&);
+      Element &operator=(const Element&);
 
       Score* score() const                    { return _score;  }
       void setScore(Score* s)                 { _score = s;     }
@@ -248,8 +250,10 @@ class Symbol : public Element {
    public:
       Symbol(Score*);
       virtual ~Symbol() {}
-      virtual ElementType type() const { return SYMBOL; }
+      Symbol(const Symbol&);
+      Symbol &operator=(const Symbol&);
 
+      virtual ElementType type() const { return SYMBOL; }
       virtual void setSym(const Sym& s);
       const Sym& sym() const { return _sym;  }
       Sym& sym() { return _sym;  }
@@ -359,6 +363,9 @@ class Line : public Element {
    public:
       Line(Score*);
       Line(Score*, bool vertical);
+      Line(const Line&);
+      Line &operator=(const Line&);
+
       virtual ElementType type() const { return LINE; }
 
       virtual void draw1(Painter&) const;

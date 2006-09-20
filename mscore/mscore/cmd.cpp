@@ -463,7 +463,6 @@ void Score::cmdAddPoet()
 
 void Score::cmdUpDown(bool up, bool octave)
       {
-      ElementList ns;
       ElementList el;
 
       for (iElement i = sel->elements()->begin(); i != sel->elements()->end(); ++i) {
@@ -498,43 +497,18 @@ void Score::cmdUpDown(bool up, bool octave)
                   newPitch = 0;
             if (newPitch > 127)
                   newPitch = 127;
-            Note* nNote = modifyNote(oNote);
-            nNote->changePitch(newPitch);
-            ns.push_back(nNote);
+
+            UndoOp i;
+            i.type  = UndoOp::ChangePitch;
+            i.obj   = oNote;
+            i.idx   = oNote->pitch();
+            undoList.back()->push_back(i);
+
+            oNote->changePitch(newPitch);
             }
 
       padState.pitch = newPitch;
-      if (!ns.empty()) {
-            sel->clear();
-            sel->add(ns);
-            layout();
-            }
-      }
-
-//---------------------------------------------------------
-//   modifyNote
-//	- clone old note
-//	- remove old note
-//	- insert new note
-//	- return new note
-//---------------------------------------------------------
-
-Note* Score::modifyNote(Note* oNote)
-      {
-      Tie* tb = oNote->tieBack();
-      Tie* tv = oNote->tieFor();
-	Note* nNote = new Note(*oNote);
-      if (tb) {
-            nNote->setTieBack(tb);
-      	tb->setEndNote(nNote);
-      	}
-      if (tv) {
-            nNote->setTieFor(tv);
-            tv->setStartNote(nNote);
-            }
-      cmdRemove(oNote);
-      cmdAdd(nNote);
-      return nNote;
+      layout();
       }
 
 //---------------------------------------------------------
@@ -590,13 +564,13 @@ void Score::cmdAppendMeasures(int n)
       }
 
 //---------------------------------------------------------
-//   addObject
-//    add object to selected objects
+//   addAttribute
+//    add attribute to all selected notes/rests
 //
 //    called from padToggle() to add note prefix/accent
 //---------------------------------------------------------
 
-void Score::addObjectToSelected(Element* o)
+void Score::addAttribute(int attr)
       {
       //
       // we need a local copy of sel->elements()
@@ -606,12 +580,30 @@ void Score::addObjectToSelected(Element* o)
 
       for (iElement ie = el.begin(); ie != el.end(); ++ie) {
             Element* el = *ie;
-            if (o->type() == ATTRIBUTE && (el->type() == NOTE || el->type() == REST))
-                  addAttribute(el, new NoteAttribute(*(NoteAttribute*)o));
-            else if (o->type() == ACCIDENTAL && el->type() == NOTE)
-                  addAccidental((Note*)el, ((Accidental*)o)->idx());
+            if (el->type() != NOTE && el->type() != REST)
+                  continue;
+            addAttribute(el, new NoteAttribute(this, attr));
             }
-      delete o;
+      }
+
+//---------------------------------------------------------
+//   addAccidental
+//    add accidental to all selected notes
+//---------------------------------------------------------
+
+void Score::addAccidental(int idx)
+      {
+      //
+      // we need a local copy of sel->elements()
+      // because "addAccidental()" modifies sel->elements()
+      //
+      ElementList el(*sel->elements());
+
+      for (iElement ie = el.begin(); ie != el.end(); ++ie) {
+            Element* el = *ie;
+            if (el->type() == NOTE)
+                  addAccidental((Note*)el, idx);
+            }
       }
 
 //---------------------------------------------------------
@@ -620,16 +612,12 @@ void Score::addObjectToSelected(Element* o)
 
 void Score::addAccidental(Note* oNote, int accidental)
       {
-      Note* nNote = new Note(*oNote);
-
-      cmdRemove(oNote);
-      cmdAdd(nNote);
-
-      // changeObject(nNote, oNote);
-      nNote->changeAccidental(this, accidental);
-
-      if (oNote->selected())
-            select(nNote, 0, 0);
+      UndoOp i;
+      i.type  = UndoOp::ChangeAccidental;
+      i.obj   = oNote;
+      i.idx   = oNote->userAccidental();
+      undoList.back()->push_back(i);
+      oNote->changeAccidental(accidental);
       }
 
 //---------------------------------------------------------
@@ -662,16 +650,9 @@ void Score::addAttribute(Element* el, NoteAttribute* atr)
 
 void Score::toggleInvisible(Element* obj)
       {
-#if 0 // TODO
-      sel->deselectAll(this);
-      Element* ne = obj->clone();
-      ne->setGenerated(false);
-      ne->setVisible(!ne->visible());
-      cmdRemove(obj);
-      cmdAdd(ne);
-      select(ne, 0, ne->staff()->idx());
-      refresh |= ne->abbox();
-#endif
+      obj->setVisible(!obj->visible());
+      undoOp(UndoOp::ToggleInvisible, obj);
+      refresh |= obj->abbox();
       }
 
 //---------------------------------------------------------

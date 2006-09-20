@@ -130,7 +130,7 @@ void Note::changePitch(int n)
 //    this recomputes _pitch
 //---------------------------------------------------------
 
-void Note::changeAccidental(Score* cs, int pre)
+void Note::changeAccidental(int pre)
       {
       _userAccidental = pre;
 
@@ -158,7 +158,7 @@ void Note::changeAccidental(Score* cs, int pre)
                               Note* note  = in->second;
                               int nPrefix = note->accidentalIdx();
                               if (nPrefix) {
-                                    int offset   = cs->clefOffset(tick, staffIdx());
+                                    int offset   = score()->clefOffset(tick, staffIdx());
                                     int line     = note->line();
                                     int l1       = 45 - line + offset;
                                     tversatz[l1] = nPrefix;
@@ -204,12 +204,12 @@ void Note::changeAccidental(Score* cs, int pre)
           };
 
       int tick   = chord()->tick();
-      int offset = cs->clefOffset(tick, staffIdx());
+      int offset = score()->clefOffset(tick, staffIdx());
       int l1     = 45 - _line + offset;
 
       int curPre = tversatz[l1];
 
-      int key    = cs->keymap->key(tick);
+      int key    = score()->keymap->key(tick);
       int keyPre = tab3[key+7][l1 % 7];
 
       int pitchOffset;

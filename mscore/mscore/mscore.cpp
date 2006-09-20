@@ -110,7 +110,7 @@ int appDpiY = 75;
 
 static QString getSharePath()
       {
-      return QString("");            
+      return QString( INSTPREFIX "/share/" INSTALL_NAME);
       }
 
 //---------------------------------------------------------
@@ -1177,6 +1177,8 @@ int main(int argc, char* argv[])
 
       QTranslator translator;
       language = QLocale::system().name();
+      if (debugMode)
+            printf("Language: <%s>\n", language.toLocal8Bit().data());
 
       if (language != "C") {
             QString loc("mscore_");
@@ -1185,11 +1187,11 @@ int main(int argc, char* argv[])
                   QString lp(mscoreGlobalShare);
                   lp += QString("/locale");
                   if (translator.load(loc, lp) == false) {
-                        printf("no locale <%s> in <%s>\n", loc.toLatin1().data(), lp.toLatin1().data());
+                        printf("no locale <%s> in <%s>\n", loc.toLocal8Bit().data(), lp.toLatin1().data());
                         }
                   else if (debugMode)
                         printf("locale %s from %s loaded\n",
-                           loc.toLatin1().data(), lp.toLatin1().data());
+                           loc.toLatin1().data(), lp.toLocal8Bit().data());
                   }
             qApp->installTranslator(&translator);
             }

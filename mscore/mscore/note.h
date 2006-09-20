@@ -66,6 +66,9 @@ class Note : public Element {
    public:
       Note(Score*);
       Note(Score*, int pitch, bool grace = false);
+      Note(const Note&);
+      Note &operator=(const Note&);
+
       ~Note();
       virtual ElementType type() const { return NOTE; }
 
@@ -93,7 +96,7 @@ class Note : public Element {
       int accidentalIdx() const       { return _accidental ? _accidental->idx() : ACC_NONE; }
       Accidental* accidental() const  { return _accidental; }
       void setAccidental(int);
-      void changeAccidental(Score*, int);
+      void changeAccidental(int);
 
       int line() const                { return _line + _lineOffset;   }
       void setLine(int n)             { _line = n;      }

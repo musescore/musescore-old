@@ -121,7 +121,7 @@ void TextElement::layout()
       //
       double py = 0.0;
       for (int k = 0; k < nn; ++k) {
-            double x;
+            double x = 0.0;
             if (s->align & ALIGN_LEFT)
                   x = 0.0;
             else if (s->align & ALIGN_RIGHT)
@@ -730,13 +730,6 @@ Lyrics::Lyrics(Score* s)
    : TextElement(s, TEXT_STYLE_LYRIC)
       {
       _no = 0;
-      }
-
-Lyrics::Lyrics(const Lyrics& l)
-   : TextElement(l)
-      {
-      _no       = l._no;
-      _syllabic = l._syllabic;
       }
 
 //---------------------------------------------------------

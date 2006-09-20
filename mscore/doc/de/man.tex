@@ -979,55 +979,6 @@ su -c make install
 
       installiert \M.
 
-      Unglücklicherweise wird der benötigte Notensatzfont nicht automatisch
-      installiert.
-
-      Unter KDE gehen sie dazu wie folgt vor:
-
-      \startitemize[packed]
-            \item Starte das KDE Kontrollcenter
-            \item gehe nach "System Administration"
-            \item start "Font Installer"
-            \item wähle den "Aministrator Mode"
-            \item wähle das Installationsverzeichnis (\type{TTF})
-            \item drücke "Add" und wähle den Font \type{mscore20.ttf} aus
-            \item drücke "Apply"
-            \stopitemize
-
-      Für Mandrake Benutzer gibt es das Programm \type{drakfont} zur
-      Fontinstallation.
-
-      Die "harte" Tour zur Installation von Fonts auf X11-Systemen geht
-      wie folgt:
-
-      \startitemize[packed]
-            \item Erzeuge das Verzeichnis \type{/usr/share/fonts/truetype}
-            \item Kopiere \type{mscore20.ttf} nach \type{/usr/share/fonts/truetype}
-            \item Verwende \type{ttmkfdir} um die Datei \type{fonts.scale}
-                  zu erzeugen:
-\starttyping
-ttmkfdir > fonts.scale
-\stoptyping
-
-            \item use mkfontdir to create fonts.dir
-\starttyping
-mkfontdir
-\stoptyping
-
-            \item tell the x11 server your new font
-\starttyping
-xset fp rehash
-\stoptyping
-
-            \item Ergänze den Font-Suchpfad des X11-Servers um
-                  \type{/usr/share/fonts/truetype} so das er den Font auch
-                  nach dem nächsten Reboot wiederfindet.
-            \stopitemize
-
-      Übrigens muß der Font zum Drucken nicht nocht einmal installiert werden,
-      da \M\ die Fontdaten in den erzeugten Druckdatenstrom
-      einbettet.
-
 \chapter{Tastaturabkürzungen}
       \Sc{\Uparrow} Großbuchstabenumschaltung (Shift)
       \blank[line]

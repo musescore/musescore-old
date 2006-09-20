@@ -471,7 +471,7 @@ void Score::keyPressEvent(QKeyEvent* ev)
             else {
                   if (cr->tuplet()) {
                         len = cr->tuplet()->noteLen();
-                        printf("current ist tuplet länge %d\n", len);
+                        printf("current ist tuplet läe %d\n", len);
                         }
                   setNote(cis->pos, staff(cis->staff), cis->voice, padState.pitch, len);
                   }
@@ -556,25 +556,13 @@ void Score::padToggle(int n)
                   canvas()->setState(Canvas::NORMAL);
                   break;
             case PAD_TENUTO:
-                  {
-                  NoteAttribute* a = new NoteAttribute(this);
-                  a->setSubtype(TenutoSym);
-                  addObjectToSelected(a);
-                  }
+                  addAttribute(TenutoSym);
                   break;
             case PAD_AKZENT:
-                  {
-                  NoteAttribute* a = new NoteAttribute(this);
-                  a->setSubtype(SforzatoaccentSym);
-                  addObjectToSelected(a);
-                  }
+                  addAttribute(SforzatoaccentSym);
                   break;
             case PAD_STACCATO:
-                  {
-                  NoteAttribute* a = new NoteAttribute(this);
-                  a->setSubtype(StaccatoSym);
-                  addObjectToSelected(a);
-                  }
+                  addAttribute(StaccatoSym);
                   break;
             case PAD_BEAM_START:
                   cmdSetBeamMode(BEAM_BEGIN);
@@ -630,7 +618,7 @@ void Score::padToggle(int n)
                   }
             }
       else if (n >= PAD_SHARP2 && n <= PAD_FLAT2)
-            addObjectToSelected(new Accidental(this, padState.prefix, false));
+            addAccidental(padState.prefix);
       else if (n >= PAD_VOICE0 && n <= PAD_VOICE3)
             changeVoice(padState.voice);
       else if (n == PAD_TIE) {
