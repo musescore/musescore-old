@@ -30,6 +30,7 @@ class Chord;
 class Fingering;
 class Score;
 class Painter;
+class Sym;
 
 //---------------------------------------------------------
 //   Note
@@ -47,10 +48,10 @@ class Note : public Element {
       int _move;              // -1, 0, +1
       Accidental* _accidental;
 
-      Sym _sym;         // note head
+      int _head;              // note head
       DurationType _durationType;
       bool _grace;
-      bool _mirror;     // note is mirrored at stem
+      bool _mirror;           // note is mirrored at stem
       int _dots;
       Fingering* _fingering;
 
@@ -82,8 +83,8 @@ class Note : public Element {
       void setDots(int n)           { _dots = n; }
       int dots() const              { return _dots; }
 
-      double headWidth() const      { return _sym.width(); }
-      Sym* noteHead()               { return &_sym;  }
+      double headWidth() const;
+      int noteHead()                { return _head;  }
 
       int pitch() const             { return _pitch; }
       void setPitch(int val)        { _pitch = val; }
@@ -132,11 +133,12 @@ class Note : public Element {
 //---------------------------------------------------------
 
 class ShadowNote : public Element {
-      Sym _sym;         // note head
+      Sym* _sym;         // note head
       int _line;
 
    public:
       ShadowNote(Score*);
+      ~ShadowNote();
       virtual ElementType type() const  { return SHADOW_NOTE; }
       int line() const                  { return _line;   }
       void setLine(int n)               { _line = n;      }

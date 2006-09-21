@@ -21,6 +21,8 @@
 #include "clef.h"
 #include "xml.h"
 #include "utils.h"
+#include "sym.h"
+#include "symbol.h"
 
 //---------------------------------------------------------
 //   Clef

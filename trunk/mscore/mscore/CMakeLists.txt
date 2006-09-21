@@ -174,7 +174,9 @@ add_executable ( mscore
       slur.cpp
       staff.cpp
       style.cpp
-      symbols.cpp
+      sym.cpp sym.h
+      symbol.cpp symbol.h
+      hook.cpp hook.h
       system.cpp
       tempo.cpp
       text.cpp

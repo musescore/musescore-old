@@ -1,7 +1,7 @@
 //=============================================================================
 //  MusE Score
 //  Linux Music Score Editor
-//  $Id: palette.h,v 1.10 2006/03/02 17:08:40 wschweer Exp $
+//  $Id: element.h,v 1.58 2006/04/12 14:58:10 wschweer Exp $
 //
 //  Copyright (C) 2002-2006 Werner Schweer (ws@seh.de)
 //
@@ -18,44 +18,25 @@
 //  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //=============================================================================
 
-#ifndef __PALETTE_H__
-#define __PALETTE_H__
+#ifndef __HOOK_H__
+#define __HOOK_H__
 
-class Element;
-class Sym;
+#include "symbol.h"
 
 //---------------------------------------------------------
-//   SymbolPalette
+//   Hook
 //---------------------------------------------------------
 
-class SymbolPalette : public QWidget {
-      Q_OBJECT
-
-      Element** symbols;
-      QString* names;
-      int rows, columns;
-      int hgrid, vgrid;
-      int currentSymbol;
-      QPoint dragStartPosition;
-
-      bool staff;
-
-      void redraw(const QRect&);
-      virtual void paintEvent(QPaintEvent*);
-      virtual void mousePressEvent(QMouseEvent*);
-      virtual void mouseMoveEvent(QMouseEvent*);
-      virtual bool event(QEvent*);
-
-   signals:
-      void paletteSelected(Element*);
+class Hook : public Symbol {
+      int val;
+      bool _small;
 
    public:
-      SymbolPalette(int rows, int columns, QWidget* parent);
-      ~SymbolPalette();
-      void addObject(int idx, Element*, const QString& name);
-      void addObject(int idx, int sym);
-      void setGrid(int, int);
-      void showStaff(bool);
+      Hook(Score*);
+      virtual ElementType type() const { return HOOK; }
+      int idx() const             { return val; }
+      void setIdx(int v, bool);
       };
 
 #endif
+

@@ -20,7 +20,7 @@
 
 #include "pad.h"
 #include "padids.h"
-#include "symbols.h"
+#include "sym.h"
 #include "mscore.h"
 
 #include "data/sbeam.xpm"

@@ -25,6 +25,7 @@
 #include "measure.h"
 #include "xml.h"
 #include "utils.h"
+#include "sym.h"
 
 static const QChar TC(0xe161);
 static const QChar TLC(0xe16f);
@@ -54,7 +55,7 @@ void Trill::setSubtype(int val)
 
 void Trill::bboxUpdate()
       {
-      QRectF rr(trillSym.bbox());
+      QRectF rr(symbols[trillSym].bbox());
 
       QRectF r(0, 0, 0, 0);
       for (iLineSegment i = segments.begin(); i != segments.end(); ++i) {
@@ -102,14 +103,14 @@ void Trill::draw1(Painter& p) const
             if (i == segments.begin()) {
                   qreal x  = pp1.x();
                   qreal y  = pp1.y();
-                  QRectF b = trillSym.bbox();
-                  trillSym.draw(p, x - b.x(), pp1.y());
+                  QRectF b = symbols[trillSym].bbox();
+                  symbols[trillSym].draw(p, x - b.x(), pp1.y());
 
                   x += b.width();
 
-                  QRectF b1 = trillelementSym.bbox();
-                  int n     = lrint((pp2.x() - x) / trillelementSym.width());
-                  trillelementSym.draw(p, x + b1.x(), y + b1.y(), n);
+                  QRectF b1 = symbols[trillelementSym].bbox();
+                  int n     = lrint((pp2.x() - x) / symbols[trillelementSym].width());
+                  symbols[trillelementSym].draw(p, x + b1.x(), y + b1.y(), n);
                   }
             else {
                   printf("Trill::draw1(): ===not impl. segments %zd\n",

@@ -473,8 +473,8 @@ void SStaff::read(QDomNode node)
 void Symbol::write(Xml& xml) const
       {
       xml.stag("Symbol");
-      xml.tag("code", _sym.code());
-      xml.tag("style", _sym.textStyle);
+      xml.tag("name", symbols[_sym].name());
+//      xml.tag("style", _sym->textStyle());
       xml.tag("x", pos().x());
       xml.tag("y", pos().y());
       Element::writeProperties(xml);
@@ -488,7 +488,7 @@ void Symbol::write(Xml& xml) const
 void Symbol::read(QDomNode node)
       {
       QPointF pos;
-      Sym s;
+      int s = -1;
 
       for (node = node.firstChild(); !node.isNull(); node = node.nextSibling()) {
             QDomElement e = node.toElement();
@@ -496,13 +496,20 @@ void Symbol::read(QDomNode node)
                   continue;
             QString tag(e.tagName());
             QString val(e.text());
-            int i = val.toInt();
-            if (tag == "code")
-                  s._code = i;
+            if (tag == "name") {
+                  for (int i = 0; i < symbols.size(); ++i) {
+                        if (val == symbols[i].name()) {
+                              s = i;
+                              break;
+                              }
+                        }
+                  if (s == -1) {
+                        printf("unknown symbol <%s>\n", val.toLocal8Bit().data());
+                        s = 0;
+                        }
+                  }
             else if (Element::readProperties(node))
                   ;
-            else if (tag == "style")
-                  s.textStyle = i;
             else if (tag == "x")
                   pos.setX(val.toDouble());
             else if (tag == "y")

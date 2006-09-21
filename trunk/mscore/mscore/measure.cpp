@@ -862,7 +862,7 @@ void Measure::layout(double width)
                         if (lyrics == 0)
                               continue;
                         // center to middle of notehead:
-                        double noteHeadWidth = quartheadSym.width();
+                        double noteHeadWidth = symbols[quartheadSym].width();
                         double lh = lyrics->lineSpacing();
                         double y = lh * line;
                         // lyrics->setPos(segment->x() + noteHeadWidth/2, y);

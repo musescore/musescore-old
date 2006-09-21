@@ -22,6 +22,8 @@
 #include "xml.h"
 #include "painter.h"
 #include "style.h"
+#include "sym.h"
+#include "symbol.h"
 
 //---------------------------------------------------------
 //   HBox
@@ -58,8 +60,8 @@ void HBoxElement::write(Xml& xml, int) const
             return;
             }
       Symbol* s = (Symbol*)element;
-      xml << "<symbol name=\"" << s->sym().name() << "\"";
-      QPointF offset = s->sym().offset();
+      xml << "<symbol name=\"" << symbols[s->sym()].name() << "\"";
+      QPointF offset = symbols[s->sym()].offset();
       if (offset.x() != 0.0)
             xml << " xoffset=\"" << offset.x() << "\"";
       if (offset.y() != 0.0)
@@ -393,8 +395,8 @@ void Text::parseData(VBox& vb, QDomNode node)
                         qreal xoffset = e.attribute("xoffset", "0.0").toDouble();
                         qreal yoffset = e.attribute("yoffset", "0.0").toDouble();
                         QPointF off(xoffset, yoffset);
-                        s->sym().setOffset(off);
-                        s->sym().setSize(_fontSize);
+                        symbols[s->sym()].setOffset(off);
+//TODO                        s->sym()->setSize(_fontSize);
                         HBoxElement* box = new HBoxElement(s);
                         vb.hlist.append(box);
                         vb.w += box->width();

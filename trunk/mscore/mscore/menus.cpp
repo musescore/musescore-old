@@ -24,7 +24,7 @@
 #include "chordrest.h"
 #include "dynamics.h"
 #include "slur.h"
-#include "symbols.h"
+#include "sym.h"
 #include "hairpin.h"
 #include "canvas.h"
 #include "mscore.h"

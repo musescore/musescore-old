@@ -50,7 +50,7 @@ Rest::Rest(Score* s, int tick, int len)
 
 void Rest::draw1(Painter& p) const
       {
-      _sym.draw(p);
+      symbols[_sym].draw(p);
       for (ciAttribute l = attributes.begin(); l != attributes.end(); ++l)
             (*l)->draw(p);
       }
@@ -59,7 +59,7 @@ void Rest::draw1(Painter& p) const
 //   setSym
 //---------------------------------------------------------
 
-void Rest::setSym(const Sym& s)
+void Rest::setSym(int s)
       {
       _sym = s;
       bboxUpdate();
@@ -267,7 +267,7 @@ void Rest::layout()
 
 void Rest::bboxUpdate()
       {
-      setbbox(_sym.bbox());
+      setbbox(symbols[_sym].bbox());
       for (ciAttribute i = attributes.begin(); i != attributes.end(); ++i)
             orBbox((*i)->bbox().translated((*i)->pos()));
       }
@@ -278,7 +278,7 @@ void Rest::bboxUpdate()
 
 qreal Rest::centerX() const
       {
-      return _sym.bbox().width()/2.0;
+      return symbols[_sym].bbox().width()/2.0;
       }
 
 //---------------------------------------------------------
@@ -287,7 +287,7 @@ qreal Rest::centerX() const
 
 qreal Rest::upPos() const
       {
-      return _sym.bbox().y();
+      return symbols[_sym].bbox().y();
       }
 
 //---------------------------------------------------------
@@ -296,7 +296,7 @@ qreal Rest::upPos() const
 
 qreal Rest::downPos() const
       {
-      return _sym.bbox().y() + _sym.bbox().height();
+      return symbols[_sym].bbox().y() + symbols[_sym].bbox().height();
       }
 
 

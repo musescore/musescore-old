@@ -37,6 +37,7 @@
 #include "tempo.h"
 #include "padstate.h"
 #include "pad.h"
+#include "sym.h"
 
 #include "data/fileprint.xpm"
 #include "data/filenew.xpm"
@@ -1080,7 +1081,7 @@ void MuseScore::setCurrentScore(int idx)
             cs->setMag(canvas->mag());
             cs->setXoffset(canvas->xoffset());
             cs->setYoffset(canvas->yoffset());
-            cs->setSpatium(_spatium);
+//            cs->setSpatium(_spatium);
             }
 
       cs = scoreList[idx];
@@ -1105,6 +1106,7 @@ void MuseScore::setCurrentScore(int idx)
       cs->endCmd(false);
 
       connect(cs, SIGNAL(selectionChanged(int)), SLOT(selectionChanged(int)));
+//      initSymbols();
       }
 
 //---------------------------------------------------------
@@ -1277,6 +1279,7 @@ int main(int argc, char* argv[])
       //  load scores
       //-------------------------------
 
+      initSymbols();
       genIcons();
       mscore = new MuseScore();
 

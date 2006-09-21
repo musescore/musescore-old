@@ -33,9 +33,7 @@ double _spatium = 1.5 * DPMM;
 
 TextStyleList textStyles;
 
-// static const QString ff("Arial");
 static const QString ff("Times New Roman");
-// static const QString ff("Utopia");
 
 static const TextStyle defaultTextStyles[] = {
       TextStyle(QString("Symbols1"), QString("Emmentaler"), 20, false, false, false,

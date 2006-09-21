@@ -86,6 +86,7 @@ void Score::setSpatium(double v)
       {
       _layout->setSpatium(v);
       ::_spatium = v;
+      initSymbols();
       }
 
 //---------------------------------------------------------

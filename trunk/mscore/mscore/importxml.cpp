@@ -31,7 +31,7 @@
 #include "note.h"
 #include "element.h"
 #include "text.h"
-#include "symbols.h"
+#include "sym.h"
 #include "slur.h"
 #include "hairpin.h"
 #include "tuplet.h"

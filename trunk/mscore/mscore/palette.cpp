@@ -25,6 +25,8 @@
 #include "spatium.h"
 #include "globals.h"
 #include "text.h"
+#include "sym.h"
+#include "symbol.h"
 
 //---------------------------------------------------------
 //   SymbolPalette
@@ -175,14 +177,14 @@ void SymbolPalette::addObject(int idx, Element* s, const QString& name)
 //   addObject
 //---------------------------------------------------------
 
-void SymbolPalette::addObject(int idx, const Sym& sym)
+void SymbolPalette::addObject(int idx, int symIdx)
       {
       qreal oSpatium = _spatium;
       _spatium = PALETTE_SPATIUM;
 
       Symbol* s = new Symbol(0);
-      s->setSym(sym);
-      addObject(idx, s, sym.name());
+      s->setSym(symIdx);
+      addObject(idx, s, ::symbols[symIdx].name());
       _spatium = oSpatium;
       }
 

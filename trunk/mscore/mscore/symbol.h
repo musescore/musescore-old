@@ -1,7 +1,7 @@
 //=============================================================================
 //  MusE Score
 //  Linux Music Score Editor
-//  $Id: rest.h,v 1.3 2006/03/02 17:08:41 wschweer Exp $
+//  $Id: element.h,v 1.58 2006/04/12 14:58:10 wschweer Exp $
 //
 //  Copyright (C) 2002-2006 Werner Schweer (ws@seh.de)
 //
@@ -18,50 +18,39 @@
 //  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //=============================================================================
 
-#ifndef __REST_H__
-#define __REST_H__
+#ifndef __SYMBOL_H__
+#define __SYMBOL_H__
 
-#include "chordrest.h"
+#include "element.h"
 
 //---------------------------------------------------------
-//   Rest
+//   Symbol
+//    score symbol
 //---------------------------------------------------------
 
-class Rest : public ChordRest {
+class Symbol : public Element {
+   protected:
       int _sym;
-      int _move;              // -1, 0, +1
-
-      virtual bool startDrag(const QPointF&);
-      virtual QRectF drag(const QPointF& s);
-      virtual void endDrag();
-      virtual qreal upPos()   const;
-      virtual qreal downPos() const;
-      virtual qreal centerX() const;
 
    public:
-      Rest(Score*);
-      Rest(Score*, int tick, int len);
-      virtual ElementType type() const { return REST; }
+      Symbol(Score*);
+      Symbol(const Symbol&);
+      Symbol &operator=(const Symbol&);
 
-      virtual void setTickLen(int l);
-      virtual void dump() const;
+      virtual ElementType type() const { return SYMBOL; }
+      void setSym(int);
+      int sym() const { return _sym;  }
+
       virtual void draw1(Painter&) const;
       virtual void write(Xml& xml) const;
       virtual void read(QDomNode);
-      virtual void add(Element*);
-      virtual void remove(Element*);
-
-      virtual int move() const      { return _move; }
-      void setMove(int val)         { _move = val; }
-
-      void setSym(int);
-      virtual void space(double& min, double& extra) const;
-      virtual bool acceptDrop(int, int) const;
-      virtual void drop(const QPointF&, int, int);
-      virtual Element* findSelectableElement(QPointF p) const;
-      virtual void layout();
-      virtual void bboxUpdate();
+      virtual bool startDrag(const QPointF&) { return true; }
+      virtual const QRectF& bbox() const;
       };
+
+typedef pstl::plist<Symbol*> SymbolList;
+typedef SymbolList::iterator iSymbol;
+typedef SymbolList::const_iterator ciSymbol;
 
 #endif
 

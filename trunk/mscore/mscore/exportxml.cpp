@@ -1337,9 +1337,9 @@ void ExportMusicXml::dynamic(Dynamic* dyn, int staff)
 //   symbol
 //---------------------------------------------------------
 
-void ExportMusicXml::symbol(Symbol * sym, int staff)
+void ExportMusicXml::symbol(Symbol* sym, int staff)
       {
-      QString name = sym->sym().name();
+      QString name = symbols[sym->sym()].name();
       char* mxmlName = "";
       if (name == "pedal ped") mxmlName = "pedal type=\"start\"";
       else if (name == "pedalasterisk") mxmlName = "pedal type=\"stop\"";
