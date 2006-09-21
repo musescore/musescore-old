@@ -36,8 +36,8 @@ HBoxElement::HBoxElement()
 
 HBoxElement::~HBoxElement()
       {
-      if (element)
-            delete element;
+//TODO      if (element)
+//            delete element;
       }
 
 HBoxElement::HBoxElement(const HBoxElement& e)
