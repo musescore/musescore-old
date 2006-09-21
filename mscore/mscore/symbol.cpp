@@ -1,7 +1,7 @@
 //=============================================================================
-//  MusE Score
+//  MuseScore
 //  Linux Music Score Editor
-//  $Id: textpalette.cpp,v 1.2 2006/03/22 12:04:14 wschweer Exp $
+//  $Id: element.cpp,v 1.79 2006/04/12 14:58:10 wschweer Exp $
 //
 //  Copyright (C) 2002-2006 Werner Schweer (ws@seh.de)
 //
@@ -18,71 +18,43 @@
 //  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //=============================================================================
 
-#include "textpalette.h"
-#include "icons.h"
-#include "textelement.h"
+#include "symbol.h"
 #include "sym.h"
 
 //---------------------------------------------------------
-//   TextPalette
+//   Symbol
 //---------------------------------------------------------
 
-TextPalette::TextPalette(QWidget* parent)
-   : QWidget(parent)
+Symbol::Symbol(Score* s)
+   : Element(s)
       {
-      setupUi(this);
-      QButtonGroup* sg = new QButtonGroup(this);
-      symSharp->setIcon(sharpIcon);
-      sg->addButton(symSharp, symbols[sharpSym].code().unicode());
-      symFlat->setIcon(flatIcon);
-      sg->addButton(symFlat, symbols[flatSym].code().unicode());
-
-      connect(sg, SIGNAL(buttonClicked(int)), SLOT(symbolClicked(int)));
-      setFocusPolicy(Qt::NoFocus);
+      _sym = 0;
       }
 
 //---------------------------------------------------------
-//   symbolClicked
+//   setSym
 //---------------------------------------------------------
 
-void TextPalette::symbolClicked(int n)
+void Symbol::setSym(int s)
       {
-      _textElement->addSymbol(n);
+      _sym  = s;
       }
 
 //---------------------------------------------------------
-//   setFontFamily
+//   Symbol::draw
 //---------------------------------------------------------
 
-void TextPalette::setFontFamily(const QString& s)
+void Symbol::draw1(Painter& p) const
       {
-      typefaceFamily->addItem(s);
+      symbols[_sym].draw(p);
       }
 
 //---------------------------------------------------------
-//   setBold
+//   bbox
 //---------------------------------------------------------
 
-void TextPalette::setBold(bool val)
-      {
-      typefaceBold->setChecked(val);
-      }
-
-//---------------------------------------------------------
-//   setItalic
-//---------------------------------------------------------
-
-void TextPalette::setItalic(bool val)
-      {
-      typefaceItalic->setChecked(val);
-      }
-
-//---------------------------------------------------------
-//   setFontSize
-//---------------------------------------------------------
-
-void TextPalette::setFontSize(int val)
-      {
-      typefaceSize->setValue(val);
+const QRectF& Symbol::bbox() const      
+      { 
+      return symbols[_sym].bbox();
       }
 

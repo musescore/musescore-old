@@ -36,6 +36,7 @@
 #include "globals.h"
 #include "clef.h"
 #include "barline.h"
+#include "hook.h"
 
 //---------------------------------------------------------
 //   ElementItem

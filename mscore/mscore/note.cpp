@@ -22,7 +22,7 @@
 #include "key.h"
 #include "note.h"
 #include "chord.h"
-#include "symbols.h"
+#include "sym.h"
 #include "xml.h"
 #include "slur.h"
 #include "navigate.h"
@@ -62,6 +62,7 @@ Note::Note(Score* s)
       _tieFor         = 0;
       _tieBack        = 0;
       _fingering      = 0;
+      _head           = 0;
       }
 
 Note::Note(Score* s, int p, bool g)
@@ -80,6 +81,7 @@ Note::Note(Score* s, int p, bool g)
       _tieBack        = 0;
       _fingering      = 0;
       _pitch          = p;
+      _head           = 0;
       }
 
 //---------------------------------------------------------
@@ -92,6 +94,15 @@ Note::~Note()
             delete _fingering;
       if (_accidental)
             delete _accidental;
+      }
+
+//---------------------------------------------------------
+//   headWidth
+//---------------------------------------------------------
+
+double Note::headWidth() const      
+      { 
+      return symbols[_head].width(); 
       }
 
 //---------------------------------------------------------
@@ -301,9 +312,9 @@ QPointF Note::stemPos(bool upFlag) const
 
       if (_mirror)
             upFlag = !upFlag;
-      qreal xo = _sym.bbox().x();
+      qreal xo = symbols[_head].bbox().x();
       if (upFlag) {
-            x += _sym.width() - sw2;
+            x += symbols[_head].width() - sw2;
             y -= _spatium * .2;
             }
       else {
@@ -348,17 +359,17 @@ void Note::setHead(int ticks)
       {
       switch (ticks) {
             case 0:     // grace note?
-                  _sym = _grace ? s_quartheadSym : quartheadSym;
+                  _head = _grace ? s_quartheadSym : quartheadSym;
                   break;
             case 6*division:        // 1/1 + 1/2  (gibt's das???)
                   _dots  = 1;
             case 4*division:        // 1/1
-                  _sym = _grace ? s_wholeheadSym : wholeheadSym;
+                  _head = _grace ? s_wholeheadSym : wholeheadSym;
                   break;
             case 3*division:        // 1/2
                   _dots = 1;
             case 2*division:        // 1/2
-                  _sym = _grace ? s_halfheadSym : halfheadSym;
+                  _head = _grace ? s_halfheadSym : halfheadSym;
                   break;
             case division + division/2:         // dotted values
             case division/2 + division/4:
@@ -373,12 +384,12 @@ void Note::setHead(int ticks)
             case division/8:        // 1/32
             case division/16:       // 1/64
             case division/32:       // 1/128
-                  _sym = _grace ? s_quartheadSym : quartheadSym;
+                  _head = _grace ? s_quartheadSym : quartheadSym;
                   break;
             default:
 //                  fprintf(stderr, "invalid note len %d\n", l);
-                  _sym = _grace ? s_quartheadSym : quartheadSym;
-                  return;
+                  _head = _grace ? s_quartheadSym : quartheadSym;
+                  break;
             }
       bboxUpdate();
       }
@@ -397,17 +408,17 @@ void Note::setType(DurationType t)
             case D_16TH:
             case D_EIGHT:
             case D_QUARTER:
-                  _sym = _grace ? s_quartheadSym : quartheadSym;
+                  _head = _grace ? s_quartheadSym : quartheadSym;
                   break;
             case D_HALF:
-                  _sym = _grace ? s_halfheadSym : halfheadSym;
+                  _head = _grace ? s_halfheadSym : halfheadSym;
                   break;
             case D_WHOLE:
-                  _sym = _grace ? s_wholeheadSym : wholeheadSym;
+                  _head = _grace ? s_wholeheadSym : wholeheadSym;
                   break;
             case D_BREVE:
             case D_LONG:      // not impl.
-                  _sym = _grace ? s_brevisheadSym : brevisheadSym;
+                  _head = _grace ? s_brevisheadSym : brevisheadSym;
                   break;
             }
       }
@@ -418,7 +429,7 @@ void Note::setType(DurationType t)
 
 void Note::draw1(Painter& p) const
       {
-      _sym.draw(p);
+      symbols[_head].draw(p);
 
       if (_dots) {
             double y = 0;
@@ -430,7 +441,7 @@ void Note::draw1(Painter& p) const
                         y = _spatium * .5;
                   }
             for (int i = 1; i <= _dots; ++i)
-                  dotSym.draw(p, _sym.width() + point(style->dotNoteDistance) * i, y);
+                  symbols[dotSym].draw(p, symbols[_head].width() + point(style->dotNoteDistance) * i, y);
             }
       if (_tieFor)
             _tieFor->draw(p);
@@ -446,7 +457,7 @@ void Note::draw1(Painter& p) const
 
 void Note::bboxUpdate()
       {
-      setbbox(_sym.bbox());
+      setbbox(symbols[_head].bbox());
 
       if (_tieFor)
             orBbox(_tieFor->bbox().translated(_tieFor->pos()));
@@ -463,8 +474,8 @@ void Note::bboxUpdate()
                         y = _spatium * .5;
                   }
             for (int i = 1; i <= _dots; ++i) {
-                  QRectF dot = dotSym.bbox();
-                  double xoff = _sym.width() + point(style->dotNoteDistance) * i;
+                  QRectF dot = symbols[dotSym].bbox();
+                  double xoff = symbols[_head].width() + point(style->dotNoteDistance) * i;
                   dot.translate(xoff, y);
                   orBbox(dot);
                   }
@@ -592,7 +603,7 @@ Element* Note::findSelectableElement(QPointF p) const
             return accidental();
       if (fingering() && fingering()->contains(p))
             return fingering();
-      if (_sym.bbox().contains(p))
+      if (symbols[_head].bbox().contains(p))
             return (Element*)this;
       return 0;
       }
@@ -643,9 +654,18 @@ void Note::endDrag()
 ShadowNote::ShadowNote(Score* s)
    : Element(s)
       {
-      _sym  = quartheadSym;
-      setbbox(_sym.bbox());
+      _sym  = new Sym(symbols[quartheadSym]);
+      setbbox(_sym->bbox());
       _line = 1000;
+      }
+
+//---------------------------------------------------------
+//   ShadowNote
+//---------------------------------------------------------
+
+ShadowNote::~ShadowNote()
+      {
+      delete _sym;      
       }
 
 //---------------------------------------------------------
@@ -670,9 +690,9 @@ void ShadowNote::draw(Painter& p) const
             pen.setWidthF(lw);
             p.setPen(pen);
 
-            _sym.draw(p);
+            _sym->draw(p);
 
-            double x1 = _sym.width()/2 - _spatium;
+            double x1 = _sym->width()/2 - _spatium;
             double x2 = x1 + 2 * _spatium;
 
             for (int i = -2; i >= _line; i -= 2) {
@@ -693,8 +713,8 @@ void ShadowNote::draw(Painter& p) const
 
 void ShadowNote::layout()
       {
-      setbbox(_sym.bbox());
-      double x  = _sym.width()/2 - _spatium;
+      setbbox(_sym->bbox());
+      double x  = _sym->width()/2 - _spatium;
       double lw = point(style->helpLineWidth);
 
       QRectF r(0, -lw/2.0, 2 * _spatium, lw);

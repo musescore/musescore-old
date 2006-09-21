@@ -28,6 +28,7 @@
 #include "measure.h"
 #include "system.h"
 #include "tuplet.h"
+#include "hook.h"
 
 //---------------------------------------------------------
 //   Stem
@@ -266,7 +267,7 @@ void Chord::bboxUpdate()
 //---------------------------------------------------------
 //   layoutStem
 //    layout chord stem and hook
-//    (Notenhals & Fächen)
+//    (Notenhals & Fähen)
 //---------------------------------------------------------
 
 void Chord::layoutStem()
@@ -338,7 +339,7 @@ void Chord::layoutStem()
       _stem->setPos(npos);
 
       //-----------------------------------------
-      //  process hook (Fächen)
+      //  process hook (Fähen)
       //-----------------------------------------
 
       if (hookIdx) {

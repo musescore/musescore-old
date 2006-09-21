@@ -24,7 +24,7 @@
 #include "painter.h"
 #include "style.h"
 #include "preferences.h"
-
+#include "sym.h"
 #include "data/flip.xpm"
 
 QIcon noteIcon;
@@ -162,9 +162,9 @@ static QPixmap symPixmap(const Sym& sym, int width, int height)
 //   symIcon
 //---------------------------------------------------------
 
-static QIcon symIcon(const Sym& sym)
+static QIcon symIcon(int idx)
       {
-      return QIcon(symPixmap(sym, ICON_WIDTH, ICON_HEIGHT));
+      return QIcon(symPixmap(symbols[idx], ICON_WIDTH, ICON_HEIGHT));
       }
 
 //---------------------------------------------------------

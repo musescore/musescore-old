@@ -22,7 +22,6 @@
 #define __ELEMENT_H__
 
 #include "plist.h"
-#include "symbols.h"
 #include "spatium.h"
 #include "mtime.h"
 
@@ -32,6 +31,7 @@ class Measure;
 class Staff;
 class Score;
 class Painter;
+class Sym;
 
 enum ElementType {
       SYMBOL, TEXT, STAFF, SLUR_SEGMENT, NOTE, BAR_LINE,
@@ -239,37 +239,6 @@ typedef ElementList::const_iterator ciElement;
 typedef ElementList::reverse_iterator riElement;
 
 //---------------------------------------------------------
-//   Symbol
-//    score symbol
-//---------------------------------------------------------
-
-class Symbol : public Element {
-   protected:
-      Sym _sym;
-
-   public:
-      Symbol(Score*);
-      virtual ~Symbol() {}
-      Symbol(const Symbol&);
-      Symbol &operator=(const Symbol&);
-
-      virtual ElementType type() const { return SYMBOL; }
-      virtual void setSym(const Sym& s);
-      const Sym& sym() const { return _sym;  }
-      Sym& sym() { return _sym;  }
-
-      virtual void draw1(Painter&) const;
-      virtual void write(Xml& xml) const;
-      virtual void read(QDomNode);
-      virtual bool startDrag(const QPointF&) { return true; }
-      virtual void bboxUpdate();
-      };
-
-typedef pstl::plist<Symbol*> SymbolList;
-typedef SymbolList::iterator iSymbol;
-typedef SymbolList::const_iterator ciSymbol;
-
-//---------------------------------------------------------
 //   SStaff
 //    graphic representation of a staff
 //---------------------------------------------------------
@@ -285,21 +254,6 @@ class SStaff : public Element {
       virtual void draw1(Painter&) const;
       virtual void write(Xml& xml) const;
       virtual void read(QDomNode);
-      };
-
-//---------------------------------------------------------
-//   Hook
-//---------------------------------------------------------
-
-class Hook : public Symbol {
-      int val;
-      bool _small;
-
-   public:
-      Hook(Score*);
-      virtual ElementType type() const { return HOOK; }
-      int idx() const             { return val; }
-      void setIdx(int v, bool);
       };
 
 //---------------------------------------------------------

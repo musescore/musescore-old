@@ -27,6 +27,8 @@
 #include "staff.h"
 #include "utils.h"
 #include "painter.h"
+#include "sym.h"
+#include "symbol.h"
 
 extern bool debugMode;
 extern bool showInvisible;
@@ -322,43 +324,6 @@ void ElementList::add(Element* e)
       }
 
 //---------------------------------------------------------
-//   Symbol
-//---------------------------------------------------------
-
-Symbol::Symbol(Score* s)
-   : Element(s)
-      {
-      }
-
-//---------------------------------------------------------
-//   setSym
-//---------------------------------------------------------
-
-void Symbol::setSym(const Sym& s)
-      {
-      _sym  = s;
-      bboxUpdate();
-      }
-
-//---------------------------------------------------------
-//   Symbol::draw
-//---------------------------------------------------------
-
-void Symbol::draw1(Painter& p) const
-      {
-      _sym.draw(p);
-      }
-
-//---------------------------------------------------------
-//   bboxUpdate
-//---------------------------------------------------------
-
-void Symbol::bboxUpdate()
-      {
-      setbbox(_sym.bbox());
-      }
-
-//---------------------------------------------------------
 //   SStaff
 //---------------------------------------------------------
 
@@ -465,7 +430,7 @@ void Accidental::setIdx(int i)
                         {
                         s->setSym(leftparenSym);
                         addElement(s, 0.0, 0.0);
-                        double x = leftparenSym.width() / _spatium;
+                        double x = symbols[leftparenSym].width() / _spatium;
 
                         s = new Symbol(score());
                         switch(i) {
@@ -491,56 +456,6 @@ void Accidental::setIdx(int i)
                   case 15: s->setSym(naturalSym);    break;
                   }
             addElement(s, 0.0, 0.0);
-            }
-      }
-
-//---------------------------------------------------------
-//   Hook
-//---------------------------------------------------------
-
-Hook::Hook(Score* s)
-  : Symbol(s)
-      {
-      }
-
-//---------------------------------------------------------
-//   setIdx
-//---------------------------------------------------------
-
-void Hook::setIdx(int i, bool s)
-      {
-      val = i;
-      _small = s;
-
-      if (_small) {
-            switch(i) {
-                  case 0:    break;
-                  case 1:    setSym(s_eighthflagSym); break;
-                  case 2:    setSym(s_sixteenthflagSym); break;
-                  case 3:    setSym(s_thirtysecondflagSym); break;
-                  case 4:    setSym(s_sixtyfourthflagSym); break;
-                  case 5:    break;
-                  case -1:   setSym(s_deighthflagSym); break;
-                  case -2:   setSym(s_dsixteenthflagSym); break;
-                  case -3:   setSym(s_dthirtysecondflagSym); break;
-                  case -4:   setSym(s_dsixtyfourthflagSym); break;
-                  case -5:   break;
-                  }
-            }
-      else {
-            switch(i) {
-                  case 0:    break;
-                  case 1:    setSym(eighthflagSym); break;
-                  case 2:    setSym(sixteenthflagSym); break;
-                  case 3:    setSym(thirtysecondflagSym); break;
-                  case 4:    setSym(sixtyfourthflagSym); break;
-                  case 5:    break;
-                  case -1:   setSym(deighthflagSym); break;
-                  case -2:   setSym(dsixteenthflagSym); break;
-                  case -3:   setSym(dthirtysecondflagSym); break;
-                  case -4:   setSym(dsixtyfourthflagSym); break;
-                  case -5:   break;
-                  }
             }
       }
 

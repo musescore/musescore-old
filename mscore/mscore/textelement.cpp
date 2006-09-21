@@ -29,6 +29,8 @@
 #include "utils.h"
 #include "page.h"
 #include "textpalette.h"
+#include "sym.h"
+#include "symbol.h"
 
 TextPalette* palette;
 
@@ -612,8 +614,8 @@ void TextElement::addSymbol(int code)
       if (!editMode)
             return;
       Symbol* s = new Symbol(0);
-      s->setSym(Sym(QString("mops"), 0, code, QPointF()));
-      s->sym().setSize(text.fontSize());
+//TODO      s->setSym(Sym(QString("mops"), 0, code, QPointF()));
+//      s->sym()->setSize(text.fontSize());
 
       VBox& vbox = text[cursorLine];
       int boxes = vbox.hlist.size();

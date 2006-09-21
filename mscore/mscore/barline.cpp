@@ -25,6 +25,7 @@
 #include "style.h"
 #include "utils.h"
 #include "score.h"
+#include "sym.h"
 
 //---------------------------------------------------------
 //   BarLine
@@ -92,16 +93,16 @@ void BarLine::draw1(Painter& p) const
                   qreal lw2  = point(style->endBarWidth);
                   qreal lw22 = point(style->endBarWidth) / 2.0;
                   qreal d1   = point(style->endBarDistance);
-                  qreal dotw = dotSym.width();
+                  qreal dotw = symbols[dotSym].width();
                   qreal x2   =  dotw/2;
                   qreal x1   =  dotw + d1 + lw/2;
                   qreal x0   =  dotw + d1 + lw + d1 + lw22;
 
-                  dotSym.draw(p, x0, 1.5 * _spatium);
-                  dotSym.draw(p, x0, 2.5 * _spatium);
+                  symbols[dotSym].draw(p, x0, 1.5 * _spatium);
+                  symbols[dotSym].draw(p, x0, 2.5 * _spatium);
                   if (split) {
-                        dotSym.draw(p, x0, h - 1.5 * _spatium);
-                        dotSym.draw(p, x0, h - 2.5 * _spatium);
+                        symbols[dotSym].draw(p, x0, h - 1.5 * _spatium);
+                        symbols[dotSym].draw(p, x0, h - 2.5 * _spatium);
                         }
 
                   p.drawLine(QLineF(x1, 0.0, x1, h));
@@ -117,16 +118,16 @@ void BarLine::draw1(Painter& p) const
                   qreal lw22 = point(style->endBarWidth) / 2.0;
                   qreal d1   = point(style->endBarDistance);
 
-                  qreal dotw = dotSym.width();
+                  qreal dotw = symbols[dotSym].width();
                   qreal x0   =  dotw/2;
                   qreal x1   =  dotw + d1 + lw/2;
                   qreal x2   =  dotw + d1 + lw + d1 + lw22;
 
-                  dotSym.draw(p, x0, 1.5 * _spatium);
-                  dotSym.draw(p, x0, 2.5 * _spatium);
+                  symbols[dotSym].draw(p, x0, 1.5 * _spatium);
+                  symbols[dotSym].draw(p, x0, 2.5 * _spatium);
                   if (split) {
-                        dotSym.draw(p, x0, h - 1.5 * _spatium);
-                        dotSym.draw(p, x0, h - 2.5 * _spatium);
+                        symbols[dotSym].draw(p, x0, h - 1.5 * _spatium);
+                        symbols[dotSym].draw(p, x0, h - 2.5 * _spatium);
                         }
 
                   p.drawLine(QLineF(x1, 0.0, x1, h));
@@ -200,7 +201,7 @@ void BarLine::setSubtype(int t)
             case START_REPEAT:
             case END_REPEAT:
                   w  += style->endBarWidth + 2 * style->endBarDistance;
-                  dw = point(w) + dotSym.width();
+                  dw = point(w) + symbols[dotSym].width();
                   break;
             case END_BAR:
                   w += style->endBarWidth + style->endBarDistance;

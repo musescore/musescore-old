@@ -22,7 +22,7 @@
 #include "note.h"
 #include "pad.h"
 #include "padids.h"
-#include "symbols.h"
+#include "sym.h"
 #include "padstate.h"
 #include "note.h"
 #include "score.h"
@@ -471,7 +471,7 @@ void Score::keyPressEvent(QKeyEvent* ev)
             else {
                   if (cr->tuplet()) {
                         len = cr->tuplet()->noteLen();
-                        printf("current ist tuplet läe %d\n", len);
+                        printf("current ist tuplet lä %d\n", len);
                         }
                   setNote(cis->pos, staff(cis->staff), cis->voice, padState.pitch, len);
                   }

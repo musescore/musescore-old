@@ -23,6 +23,8 @@
 #include "xml.h"
 #include "score.h"
 #include "style.h"
+#include "sym.h"
+#include "symbol.h"
 
 //---------------------------------------------------------
 //   TimeSig
@@ -99,18 +101,18 @@ void TimeSig::setSig(int z, int n)
       _n = n;
       Symbol* s  = new Symbol(score());
       if (z >= 10) {
-            s->setSym(Sym("", TEXT_STYLE_SYMBOL1, (z/10) + 0x030));
+            s->setSym(zeroSym + z/10);
             addElement(s, 0, 2.0);
             s  = new Symbol(score());
-            s->setSym(Sym("", TEXT_STYLE_SYMBOL1, (z%10) + 0x030));
+            s->setSym(zeroSym + (z%10));
             addElement(s, 1.5, 2.0);
             }
       else {
-            s->setSym(Sym("", TEXT_STYLE_SYMBOL1, z + 0x030));
+            s->setSym(zeroSym + z);
             addElement(s, 0, 2.0);
             }
       s  = new Symbol(score());
-      s->setSym(Sym("", TEXT_STYLE_SYMBOL1, n + 0x030));
+      s->setSym(zeroSym + n);
       addElement(s, z >= 10 ? 0.75 : 0, 4.0);
       }
 
