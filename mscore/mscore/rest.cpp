@@ -73,7 +73,7 @@ void Rest::setTickLen(int i)
       {
       Element::setTickLen(i);
       // if rest spans measure:
-#if 0 // TODO
+#if 0 // TODO: whole rest symbol
       Measure* m = measure();
       int ticksMeasure = m->score()->sigmap->ticksMeasure(tick());
       if (ticksMeasure == tickLen()) {
@@ -105,16 +105,6 @@ void Rest::setTickLen(int i)
 void Rest::dump() const
       {
       printf("Rest tick %d  len %d\n", tick(), tickLen());
-      }
-
-//---------------------------------------------------------
-//   startDrag
-//---------------------------------------------------------
-
-bool Rest::startDrag(const QPointF&)
-      {
-//      _userOff = Pos(0, _userOff.y);
-      return true;
       }
 
 //---------------------------------------------------------

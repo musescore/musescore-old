@@ -877,7 +877,7 @@ int Measure::snap(int tick, const QPointF p) const
 void Score::startEdit(Element* element)
       {
       if (element->type() == SLUR_SEGMENT) {
-#if 0 //TODO
+#if 0 //TODO: edit slur
             //
             // we must clone the whole slur with all segments
             //
@@ -916,19 +916,19 @@ void Score::startEdit(Element* element)
 #endif
             }
       else {
-#if 0 //TODO
+
+//TODO: undo edit mode
             origEditObject = element;
-            editObject     = element->clone();
+            editObject     = element;   // element->clone();
 
             select(editObject, 0, 0);
 
-            removeObject(element);
-            element->resetMode();
-            addObject(editObject);
+//            removeObject(element);
+//            element->resetMode();
+//            addObject(editObject);
 
-            undoOp(UndoOp::RemoveObject, origEditObject);
-            undoOp(UndoOp::AddObject, editObject);
-#endif
+//            undoOp(UndoOp::RemoveObject, origEditObject);
+//            undoOp(UndoOp::AddObject, editObject);
             }
 
       updateAll = true;
@@ -995,7 +995,8 @@ void Score::endEdit()
 
 void Score::paste(const Element* /*e*/, const QPointF& /*pos*/)
       {
-#if 0       //TODO
+      printf("TODO: Score::paste()\n");
+#if 0       //TODO: paste arbitrary element
       Element* obj = e->clone();
 
       Staff* staff = 0;
@@ -1119,7 +1120,7 @@ void Score::paste(const Element* /*e*/, const QPointF& /*pos*/)
 
 void Score::startDrag()
       {
-#if 0 //TODO
+#if 0 //TODO: start drag
       sel->clear();
       Element* el    = _dragObject->clone();
       origDragObject = _dragObject;

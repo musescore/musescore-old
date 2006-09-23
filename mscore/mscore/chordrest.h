@@ -95,7 +95,7 @@ class NoteAttribute : public Symbol {
    public:
 
    protected:
-      virtual bool startDrag(const QPointF&) { return true; }
+      virtual bool isMovable() const { return true; }
 
    public:
       NoteAttribute(Score*);

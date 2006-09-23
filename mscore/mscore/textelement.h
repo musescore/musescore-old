@@ -79,7 +79,7 @@ class TextElement : public Element {
       virtual bool edit(QKeyEvent*);
       void addSymbol(int);
       virtual void endEdit();
-      virtual bool startDrag(const QPointF&) { return true; }
+      virtual bool isMovable() const { return true; }
       virtual void write(Xml& xml) const;
       void write(Xml& xml, const char*) const;
       virtual void read(QDomNode);

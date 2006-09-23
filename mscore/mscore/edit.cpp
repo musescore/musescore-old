@@ -403,13 +403,21 @@ Element* Score::addTimeSig(TimeSig* sig, const QPointF& pos)
 
       int z, n;
       sig->zn(z, n);
+      changeTimeSig(tick, z, n);
+      delete sig;
+      return 0;
+      }
+
+//---------------------------------------------------------
+//   changeTimeSig
+//---------------------------------------------------------
+
+void Score::changeTimeSig(int tick, int z, int n)
+      {
       int oz, on;
       sigmap->timesig(tick, oz, on);
-      if (oz == z && on == n) {
-            // no change
-            delete sig;
-            return 0;
-            }
+      if (oz == z && on == n)
+            return;                 // no change
       sigmap->add(tick, z, n);
 
 //      printf("tick %d staff %d  z %d n %d,  idx %d\n",
@@ -493,15 +501,14 @@ printf("  remove timesig\n");
       if (tick != 0) {
             Measure* measure = tick2measure(tick);
             for (int staffIdx = 0; staffIdx < staves; ++staffIdx) {
-                  TimeSig* nsig = new TimeSig(this, sig->subtype());
+                  TimeSig* nsig = new TimeSig(this);
+                  nsig->setSig(z, n);
                   nsig->setStaff(staff(staffIdx));
                   nsig->setTick(tick);
                   measure->add(nsig);
                   }
             }
       layout();
-      delete sig;
-      return 0;
       }
 
 //---------------------------------------------------------
@@ -722,26 +729,16 @@ void Score::cmdFlipStemDirection()
       {
       Element* el = sel->element();
       if (el && el->type() == NOTE) {
-#if 0
-// TODO
             int pitch = ((Note*)el)->pitch();
             Chord* chord = ((Note*)el)->chord();
-            Chord* nChord = new Chord(*chord);
-            nChord->setStemDirection(chord->isUp() ? DOWN : UP);
-            removeObject(chord);
-            addObject(nChord);
-            NoteList* nl = nChord->noteList();
-            Note* sn = nl->find(pitch);
-            if (sn)
-                  select(sn, 0, 0);
-            nChord->segment()->measure()->layoutNoteHeads(nChord->staffIdx());
-            undoOp(UndoOp::RemoveObject, chord);
-            undoOp(UndoOp::AddObject, nChord);
-#endif
+
+            chord->setStemDirection(chord->isUp() ? DOWN : UP);
+            undoOp(UndoOp::FlipStemDirection, chord);
             }
       else if (el && el->type() == SLUR_SEGMENT) {
             SlurTie* slur = ((SlurSegment*) el)->slurTie();
             slur->setSlurDirection(slur->isUp() ? DOWN : UP);
+            undoOp(UndoOp::FlipSlurDirection, slur);
             }
       else {
             selectNoteSlurMessage();

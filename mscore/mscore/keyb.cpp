@@ -385,7 +385,7 @@ void Score::keyPressEvent(QKeyEvent* ev)
                   break;
 
             case Qt::Key_Escape:
-                  if (cis->pos != -1 || canvas()->getState() == Canvas::PALETTE) {
+                  if (cis->pos != -1) {
                         setNoteEntry(false, false);
                         break;
                         }
@@ -471,7 +471,7 @@ void Score::keyPressEvent(QKeyEvent* ev)
             else {
                   if (cr->tuplet()) {
                         len = cr->tuplet()->noteLen();
-                        printf("current ist tuplet lä %d\n", len);
+                        printf("current ist tuplet lä%d\n", len);
                         }
                   setNote(cis->pos, staff(cis->staff), cis->voice, padState.pitch, len);
                   }

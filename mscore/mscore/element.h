@@ -169,7 +169,7 @@ class Element {
       virtual void write(Xml&) const  {}
       virtual void read(QDomNode) {}
 
-      virtual bool startDrag(const QPointF&)      { return false; }
+      virtual bool isMovable() const          { return false; }
       virtual QRectF drag(const QPointF& s);
       virtual void endDrag()                  {}
 

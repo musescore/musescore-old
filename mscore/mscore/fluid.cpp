@@ -187,4 +187,3 @@ const MidiPatch* ISynth::getPatchInfo(int ch, const MidiPatch* p) const
 
 #endif
 
-

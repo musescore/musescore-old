@@ -59,7 +59,7 @@ class Dynamic : public TextElement {
 
       void setVal(DynVal val);
 
-      virtual bool startDrag(const QPointF&) { return true; }
+      virtual bool isMovable() const { return true; }
       virtual void endDrag();
 
       virtual void write(Xml& xml) const;

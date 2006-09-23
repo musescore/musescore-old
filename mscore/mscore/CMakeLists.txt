@@ -199,6 +199,7 @@ target_link_libraries(mscore
       ${QT_LIBRARIES}
       ${ALSA_LIB}
       ${JACK_LIB}
+      ${FLUID_LIB}
       )
 
 install_targets ( /bin mscore )

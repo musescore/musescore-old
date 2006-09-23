@@ -594,13 +594,12 @@ AlsaAudio::~AlsaAudio()
 
 bool AlsaAudio::init()
       {
+printf("AlsaAudio init\n");
       alsa = new AlsaDriver(
          preferences.alsaDevice,
          preferences.alsaSampleRate,
          preferences.alsaPeriodSize,
          preferences.alsaFragments);
-      if (alsa == 0)
-            return true;
       if (!alsa->init()) {
             delete alsa;
             alsa = 0;

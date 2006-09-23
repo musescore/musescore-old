@@ -26,6 +26,7 @@
 #define __ALSA_H
 
 #include "audio.h"
+#include "config.h"
 
 #ifdef USE_ALSA
 

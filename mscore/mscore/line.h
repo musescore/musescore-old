@@ -56,7 +56,7 @@ class SLine : public Element {
 
       virtual QPointF  dragOff() const;
       virtual bool contains(const QPointF& p) const;
-      virtual bool startDrag(const QPointF&) { return true; }
+      virtual bool isMovable() const { return true; }
       virtual void endDrag();
       virtual bool startEdit(QMatrix&);
       virtual bool startEditDrag(const QPointF&);

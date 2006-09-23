@@ -259,8 +259,6 @@ void MuseScore::symbolMenu1()
             pw->addObject(163, letterrSym);
             pw->addObject(164, lettersSym);
             pw->addObject(165, letterzSym);
-            connect(pw, SIGNAL(paletteSelected(Element*)),
-               cs, SLOT(paletteSelected(Element*)));
             }
       symbolPalette1->show();
       symbolPalette1->raise();
@@ -287,8 +285,6 @@ void MuseScore::clefMenu()
                   Clef* k = new ::Clef(0, i);
                   sp->addObject(i,  k, tr(clefTable[i].name));
                   }
-            connect(sp, SIGNAL(paletteSelected(Element*)),
-               cs, SLOT(paletteSelected(Element*)));
             }
       clefPalette->show();
       clefPalette->raise();
@@ -333,7 +329,6 @@ void MuseScore::keyMenu()
             sp->addObject(14,  k, keyNames[14]);
             k = new KeySig(cs, 0, 0);
             sp->addObject(15,  k, keyNames[14]);
-            connect(sp, SIGNAL(paletteSelected(Element*)), cs, SLOT(paletteSelected(Element*)));
             }
       keyPalette->show();
       keyPalette->raise();
@@ -370,8 +365,6 @@ void MuseScore::timeMenu()
 		sp->addObject(10,  new TimeSig(cs, TSIG_44), "");
 		sp->addObject(11,  new TimeSig(cs, TSIG_34), "");
 
-            connect(sp, SIGNAL(paletteSelected(Element*)),
-               cs, SLOT(paletteSelected(Element*)));
             }
       timePalette->show();
       timePalette->raise();
@@ -454,8 +447,6 @@ void MuseScore::lineMenu()
             trill->setLen(l);
             sp->addObject(13, trill, tr("trill line"));
 
-            connect(sp, SIGNAL(paletteSelected(Element*)),
-               cs, SLOT(paletteSelected(Element*)));
             }
       linePalette->show();
       linePalette->raise();
@@ -486,8 +477,6 @@ void MuseScore::bracketMenu()
             sp->addObject(0, b1, "Bracket");
             sp->addObject(1, b2, "Akkolade");
 
-            connect(sp, SIGNAL(paletteSelected(Element*)),
-               cs, SLOT(paletteSelected(Element*)));
             }
       bracketPalette->show();
       bracketPalette->raise();
@@ -514,8 +503,6 @@ void MuseScore::noteAttributesMenu()
                   s->setSubtype(i);
                   sp->addObject(i, s, s->name());
 
-                  connect(sp, SIGNAL(paletteSelected(Element*)),
-                     cs, SLOT(paletteSelected(Element*)));
                   }
             }
       noteAttributesPalette->show();
@@ -542,8 +529,6 @@ void MuseScore::accidentalsMenu()
                   Accidental* s = new Accidental(cs, i, false);
                   sp->addObject(i, s, s->name());
 
-                  connect(sp, SIGNAL(paletteSelected(Element*)),
-                     cs, SLOT(paletteSelected(Element*)));
                   }
             }
       accidentalsPalette->show();
@@ -608,8 +593,6 @@ void MuseScore::dynamicsMenu()
 //            sp->addObject(36, new Dynamic(cs, "morendo"),  "morendo");
 //            sp->addObject(37, new Dynamic(cs, "calando"),  "calando");
 
-            connect(sp, SIGNAL(paletteSelected(Element*)),
-               cs, SLOT(paletteSelected(Element*)));
             }
       dynamicsPalette->show();
       dynamicsPalette->raise();
@@ -652,8 +635,6 @@ void MuseScore::barMenu()
                   sp->addObject(i,  b, t[i].name);
                   }
 
-            connect(sp, SIGNAL(paletteSelected(Element*)),
-               cs, SLOT(paletteSelected(Element*)));
             }
       barPalette->show();
       barPalette->raise();
@@ -694,23 +675,11 @@ void MuseScore::fingeringMenu()
             k->setSubtype(5);
             sp->addObject(4, k, tr("fingering 5"));
 
-            connect(sp, SIGNAL(paletteSelected(Element*)),
-               cs, SLOT(paletteSelected(Element*)));
             }
       fingeringPalette->show();
       fingeringPalette->raise();
 
       _spatium = oSpatium;
-      }
-
-//---------------------------------------------------------
-//   paletteSelected
-//---------------------------------------------------------
-
-void Score::paletteSelected(Element* obj)
-      {
-      canvas()->setState(Canvas::PALETTE);
-      _paletteObject = obj;
       }
 
 //---------------------------------------------------------
@@ -780,8 +749,6 @@ void MuseScore::showLayoutBreakPalette()
             sp->addObject(0, lb, tr("break line"));
             lb = new LayoutBreak(cs, LAYOUT_BREAK_PAGE);
             sp->addObject(1, lb, tr("break page"));
-            connect(sp, SIGNAL(paletteSelected(Element*)),
-               cs, SLOT(paletteSelected(Element*)));
             }
       layoutBreakPalette->show();
       layoutBreakPalette->raise();

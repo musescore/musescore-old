@@ -43,7 +43,7 @@ class Canvas : public QWidget, public Viewer {
       Q_OBJECT
 
    public:
-      enum State { NORMAL, DRAG_OBJ, DRAG_STAFF, PALETTE,
+      enum State { NORMAL, DRAG_OBJ, DRAG_STAFF,
          EDIT, DRAG_EDIT, LASSO, NOTE_ENTRY, MAG };
 
    private:
