@@ -167,6 +167,7 @@ class Score : public QObject {
       Element* moveDown(Note*);
 	void convertTrack(MidiTrack*, int);
 	void preprocessTrack(MidiTrack*);
+      void checkUndoOp();
 
    public:
       //---------------------------------------------------
@@ -206,6 +207,7 @@ class Score : public QObject {
       void padToggle(int n);
       void doUndo();
       void doRedo();
+      void processUndoOp(UndoOp*, bool);
 
       void addLyrics();
       void addTempo();
@@ -223,7 +225,6 @@ class Score : public QObject {
 
       void pageBreak();
       void systemBreak();
-      void paletteSelected(Element* obj);
       void textStyleChanged();
 
    signals:
@@ -415,6 +416,7 @@ class Score : public QObject {
       bool saved() const    { return _saved; }
       void setSaved(bool v) { _saved = v; }
       bool playlistDirty();
+      void changeTimeSig(int tick, int z, int n);
       };
 
 extern void setPadState(Element*);

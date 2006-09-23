@@ -251,11 +251,6 @@ void Canvas::mousePressEvent(QMouseEvent* ev)
                         _score->putNote(startMove, keyState & Qt::ShiftModifier);
                   break;
 
-            case PALETTE:
-                  _score->paste(_score->paletteObject(), startMove);
-                  setState(NORMAL);
-                  break;
-
             case NORMAL:
                   //-----------------------------------------
                   //  paste operation
@@ -373,7 +368,7 @@ void Canvas::mouseMoveEvent1(QMouseEvent* ev)
                         return;
                   if (sqrt(pow(delta.x(),2)+pow(delta.y(),2))*matrix.m11() <= 2.0)
                         return;
-                  if (_score->dragObject() && _score->dragObject()->startDrag(p)) {
+                  if (_score->dragObject() && _score->dragObject()->isMovable()) {
                         QPointF o;
                         if (_score->sel->state == SEL_STAFF || _score->sel->state == SEL_SYSTEM) {
                               double s(_score->dragSystem->distance(_score->dragStaff));
@@ -424,7 +419,6 @@ void Canvas::mouseMoveEvent1(QMouseEvent* ev)
                   _score->drag(delta);
                   break;
 
-            case PALETTE:
             case NOTE_ENTRY:
             case MAG:
                   break;
@@ -505,7 +499,6 @@ void Canvas::mouseReleaseEvent1(QMouseEvent* /*ev*/)
                   setState(NORMAL);
 
             case NOTE_ENTRY:
-            case PALETTE:
                   break;
 
             case NORMAL:
@@ -616,7 +609,6 @@ void Canvas::setState(State s)
       {
       switch(s) {
             case NOTE_ENTRY:
-            case PALETTE:
                   setCursor(QCursor(Qt::UpArrowCursor));
                   break;
             case MAG:

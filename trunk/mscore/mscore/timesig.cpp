@@ -129,14 +129,17 @@ bool TimeSig::acceptDrop(int type, int) const
 //   drop
 //---------------------------------------------------------
 
-void TimeSig::drop(const QPointF&, int type, int subtype)
+void TimeSig::drop(const QPointF&, int type, int stype)
       {
       if (type == TIMESIG) {
-            TimeSig* ts = new TimeSig(score());
-            ts->setGenerated(false);
-            ts->setSubtype(subtype);
-            score()->cmdRemove(this);
-            score()->cmdAdd(ts);
+            int st = subtype();
+            if (st == stype)
+                  return;
+            setSubtype(stype);
+            int z, n;
+            zn(z, n);
+            score()->undoOp(UndoOp::ChangeSubtype, this, st);
+            score()->changeTimeSig(tick(), z, n);
             }
       }
 

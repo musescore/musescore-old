@@ -31,7 +31,7 @@ class Rest : public ChordRest {
       int _sym;
       int _move;              // -1, 0, +1
 
-      virtual bool startDrag(const QPointF&);
+      virtual bool isMovable() const { return true; }
       virtual QRectF drag(const QPointF& s);
       virtual void endDrag();
       virtual qreal upPos()   const;

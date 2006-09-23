@@ -44,7 +44,7 @@ class Symbol : public Element {
       virtual void draw1(Painter&) const;
       virtual void write(Xml& xml) const;
       virtual void read(QDomNode);
-      virtual bool startDrag(const QPointF&) { return true; }
+      virtual bool isMovable() const { return true; }
       virtual const QRectF& bbox() const;
       };
 

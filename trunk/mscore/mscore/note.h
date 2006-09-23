@@ -60,7 +60,7 @@ class Note : public Element {
 
       int _lineOffset;  // used during mouse dragging
 
-      virtual bool startDrag(const QPointF&);
+      virtual bool isMovable() const { return true; }
       virtual QRectF drag(const QPointF& s);
       virtual void endDrag();
 

@@ -121,7 +121,7 @@ class Measure : public Element {
       virtual void draw(Painter&) const;
       virtual void read(QDomNode, int idx);
       virtual void write(Xml&, int, int) const;
-      virtual bool startDrag(const QPointF&) { return true; }
+      virtual bool isMovable() const { return true; }
       virtual void add(Element*);
       virtual void remove(Element*);
 

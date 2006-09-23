@@ -101,11 +101,6 @@ void SymbolPalette::mousePressEvent(QMouseEvent* ev)
       currentSymbol = idx;
       symbols[currentSymbol]->setSelected(true);
 
-// QRectF rr(symbols[currentSymbol]->bbox());
-// QPointF p(symbols[currentSymbol]->pos());
-// printf("%f %f   bbox: %f %f  %f %f\n", p.x(), p.y(), rr.x(), rr.y(), rr.width(), rr.height());
-
-      emit paletteSelected(symbols[currentSymbol]);
       cc = currentSymbol % columns;
       cr = currentSymbol / columns;
       r |= QRect(cc * hgrid, cr * vgrid, hgrid, vgrid);
@@ -139,14 +134,14 @@ void SymbolPalette::mouseMoveEvent(QMouseEvent* ev)
 
 void SymbolPalette::addObject(int idx, Element* s, const QString& name)
       {
-      qreal oSpatium = _spatium;
-      _spatium = PALETTE_SPATIUM;
-
+      s->setSelected(false);
       symbols[idx] = s;
       names[idx]   = name;
+
+
+      qreal mag = PALETTE_SPATIUM / _spatium;
       int row      = idx / columns;
       int column   = idx % columns;
-      s->setSelected(false);
 
 
       double gx = column * hgrid;
@@ -154,15 +149,15 @@ void SymbolPalette::addObject(int idx, Element* s, const QString& name)
       double gw = hgrid;
       double gh = vgrid;
 
-      double sw = s->width();
-      double sh = s->height();
+      double sw = s->width() * mag;
+      double sh = s->height() * mag;
       double sx, sy;
 
       if (staff)
-            sy = gy + gh * .5 - 2 * _spatium;
+            sy = gy + gh * .5 - 2 * PALETTE_SPATIUM;
       else
-            sy  = gy + (gh - sh) * .5 - s->bbox().y();
-      sx  = gx + (gw - sw) * .5 - s->bbox().x();
+            sy  = gy + (gh - sh) * .5 - s->bbox().y() * mag;
+      sx  = gx + (gw - sw) * .5 - s->bbox().x() * mag;
 
 //      if (s->type() == TEXT || s->type() == DYNAMIC) {
 //            sx -= ((SText*)s)->styleOffset().x();
@@ -170,7 +165,6 @@ void SymbolPalette::addObject(int idx, Element* s, const QString& name)
 //            }
       s->setPos(sx, sy);
       update();
-      _spatium = oSpatium;
       }
 
 //---------------------------------------------------------
@@ -179,13 +173,9 @@ void SymbolPalette::addObject(int idx, Element* s, const QString& name)
 
 void SymbolPalette::addObject(int idx, int symIdx)
       {
-      qreal oSpatium = _spatium;
-      _spatium = PALETTE_SPATIUM;
-
       Symbol* s = new Symbol(0);
       s->setSym(symIdx);
       addObject(idx, s, ::symbols[symIdx].name());
-      _spatium = oSpatium;
       }
 
 //---------------------------------------------------------
@@ -194,8 +184,7 @@ void SymbolPalette::addObject(int idx, int symIdx)
 
 void SymbolPalette::paintEvent(QPaintEvent* e)
       {
-      qreal oSpatium = _spatium;
-      _spatium = PALETTE_SPATIUM;
+      qreal mag = PALETTE_SPATIUM / _spatium;
 
       Painter p(this);
       p.setRenderHint(QPainter::Antialiasing, true);
@@ -212,14 +201,14 @@ void SymbolPalette::paintEvent(QPaintEvent* e)
       for (int column = 1; column < columns; ++column)
             p.drawLine(hgrid*column, 0, hgrid*column, rows*vgrid);
 
-      qreal dy = lrint(2 * _spatium);
+      qreal dy = lrint(2 * PALETTE_SPATIUM);
 
       //
       // draw symbols
       //
 
       QPen pen(QColor(Qt::black));
-      pen.setWidthF(point(::style->staffLineWidth));
+      pen.setWidthF(::style->staffLineWidth.val() * PALETTE_SPATIUM);
 
       for (int row = 0; row < rows; ++row) {
             for (int column = 0; column < columns; ++column) {
@@ -228,8 +217,8 @@ void SymbolPalette::paintEvent(QPaintEvent* e)
                   if (el == 0)
                         continue;
                   QRect r(column*hgrid, row*vgrid, hgrid, vgrid);
-                  if (!p.clipRegion().boundingRect().intersects(r))
-                        continue;
+//TODO                  if (!p.clipRegion().boundingRect().intersects(r))
+//                        continue;
                   p.setPen(pen);
                   if (el->selected())
                         p.fillRect(r, Qt::yellow);
@@ -238,14 +227,37 @@ void SymbolPalette::paintEvent(QPaintEvent* e)
                         qreal x = r.x() + 7;
                         qreal w = hgrid - 14;
                         for (int i = 0; i < 5; ++i) {
-                              qreal yy = y + _spatium * i;
+                              qreal yy = y + PALETTE_SPATIUM * i;
                               p.drawLine(QLineF(x, yy, x + w, yy));
                               }
                         }
+                  p.save();
+                  p.scale(mag, mag);
+
+                  double gx = column * hgrid;
+                  double gy = row    * vgrid;
+                  double gw = hgrid;
+                  double gh = vgrid;
+
+                  double sw = el->width() * mag;
+                  double sh = el->height() * mag;
+                  double sx, sy;
+
+                  if (staff)
+                        sy = gy + gh * .5 - 2 * PALETTE_SPATIUM;
+                  else
+                        sy  = gy + (gh - sh) * .5 - el->bbox().y() * mag;
+                  sx  = gx + (gw - sw) * .5 - el->bbox().x() * mag;
+
+//                if (el->type() == TEXT || el->type() == DYNAMIC) {
+//                      sx -= ((SText*)s)->styleOffset().x();
+//                      sy -= ((SText*)s)->styleOffset().y();
+//                      }
+                  el->setPos(sx/mag, sy/mag);
                   el->draw(p);
+                  p.restore();
                   }
             }
-      _spatium = oSpatium;
       }
 
 //---------------------------------------------------------

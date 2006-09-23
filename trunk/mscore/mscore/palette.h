@@ -46,9 +46,6 @@ class SymbolPalette : public QWidget {
       virtual void mouseMoveEvent(QMouseEvent*);
       virtual bool event(QEvent*);
 
-   signals:
-      void paletteSelected(Element*);
-
    public:
       SymbolPalette(int rows, int columns, QWidget* parent);
       ~SymbolPalette();

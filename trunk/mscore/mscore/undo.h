@@ -51,7 +51,10 @@ struct UndoOp {
             ToggleInvisible,
             ChangeColor,
             ChangePitch,
+            ChangeSubtype,
             ChangeAccidental,
+            FlipStemDirection,
+            FlipSlurDirection,
             };
       UndoType type;
       Element* obj;
@@ -80,7 +83,6 @@ struct Undo : public std::list<UndoOp> {
 
    public:
       Undo(const InputState&, const Selection&);
-      ~Undo();
       };
 
 typedef Undo::iterator iUndoOp;

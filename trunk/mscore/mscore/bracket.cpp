@@ -35,9 +35,9 @@ Bracket::Bracket(Score* s, int t)
    : Element(s)
       {
       setSubtype(t);
-      path = 0;
-      h2   = 0.0;
-      mode = 0;
+      path  = 0;
+      h2    = 0.0;
+      mode  = 0;
       _span = 1;
       }
 
