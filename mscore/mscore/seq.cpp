@@ -389,8 +389,10 @@ void Seq::seqMessage(int fd)
 void Seq::stopTransport()
       {
       // send note off events
-      for (iEvent i = _activeNotes.begin(); i != _activeNotes.end(); ++i)
+      for (iEvent i = _activeNotes.begin(); i != _activeNotes.end(); ++i) {
+//            printf("stop note %d\n", i->second.val1);
             synti->playNote(i->second.channel, i->second.val1, 0);
+            }
       toGui('0');
       state = STOP;
       }
@@ -494,22 +496,25 @@ void Seq::process(unsigned frames, float* lbuffer, float* rbuffer)
                         r += n;
                         cpos = f;
                         }
-                  int key = (i->second.channel << 8) | i->second.val1;
-                  if (i->second.val2) {
-                        // note on:
-                        _activeNotes.insert(std::pair<const int, Event> (key, i->second));
-                        }
-                  else {
-                        // note off; dont "play" note off until a note on was send
-                        aEvent ia = _activeNotes.find(key);
-                        if (ia == _activeNotes.end())
-                              continue;
-                        _activeNotes.erase(ia);
-                        }
                   int channel = i->second.channel;
                   int type    = i->second.type;
-                  if (type == 0x90)
+                  if (type == 0x90) {
+                        int key     = (channel << 8) | i->second.val1;
+                        if (i->second.val2) {
+                              // note on:
+                              _activeNotes.insert(std::pair<const int, Event> (key, i->second));
+                              }
+                        else {
+                              // note off; dont "play" note off until a note on was send
+                              aEvent ia = _activeNotes.find(key);
+                              if (ia == _activeNotes.end()) {
+                                    printf("note %d not found\n", key & 0xff);
+                                    continue;
+                                    }
+                              _activeNotes.erase(ia);
+                              }
                         synti->playNote(channel, i->second.val1, i->second.val2);
+                        }
                   else if (type == 0xb0)
                         synti->setController(channel, i->second.val1, i->second.val2);
                   else

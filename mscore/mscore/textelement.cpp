@@ -609,13 +609,12 @@ bool TextElement::edit(QKeyEvent* ev)
 //   addSymbol
 //---------------------------------------------------------
 
-void TextElement::addSymbol(int code)
+void TextElement::addSymbol(int symbolIndex)
       {
       if (!editMode)
             return;
       Symbol* s = new Symbol(0);
-//TODO      s->setSym(Sym(QString("mops"), 0, code, QPointF()));
-//      s->sym()->setSize(text.fontSize());
+      s->setSym(symbolIndex);
 
       VBox& vbox = text[cursorLine];
       int boxes = vbox.hlist.size();
