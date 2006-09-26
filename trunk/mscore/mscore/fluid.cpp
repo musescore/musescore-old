@@ -98,7 +98,7 @@ void ISynth::process(unsigned n, float* l, float* r)
 
 void ISynth::playNote(int channel, int pitch, int velo)
       {
-//      printf("note %d %d %d\n", channel, pitch, velo);
+// printf("note %d %d %d\n", channel, pitch, velo);
 
       int err;
       if (velo) {

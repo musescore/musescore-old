@@ -33,9 +33,9 @@ TextPalette::TextPalette(QWidget* parent)
       setupUi(this);
       QButtonGroup* sg = new QButtonGroup(this);
       symSharp->setIcon(sharpIcon);
-      sg->addButton(symSharp, symbols[sharpSym].code().unicode());
+      sg->addButton(symSharp, sharpSym);
       symFlat->setIcon(flatIcon);
-      sg->addButton(symFlat, symbols[flatSym].code().unicode());
+      sg->addButton(symFlat, flatSym);
 
       connect(sg, SIGNAL(buttonClicked(int)), SLOT(symbolClicked(int)));
       setFocusPolicy(Qt::NoFocus);
