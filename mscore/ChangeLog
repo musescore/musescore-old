@@ -1,3 +1,7 @@
+04.10 (lv)
+      * fixed note insertion immediately after non-note or -rest
+        (bug resulted in first a-g key being ignored)
+      * fixed crash on startup when .mscorePrj does not contain any loaded file
 20.9 (ws)
       * more cleanups
 19.9 (ws)
