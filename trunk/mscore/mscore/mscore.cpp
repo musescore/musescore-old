@@ -1285,17 +1285,14 @@ int main(int argc, char* argv[])
 
       int currentScore = 0;
       int idx = 0;
+      bool scoreCreated = false;
       if (argc < 2) {
             for (int i = 0; i < PROJECT_LIST_LEN; ++i) {
-                  if (projectList[i].name.isEmpty()) {
-                        if (i == 0) {
-                              // start with empty score:
-                              mscore->appendScore(new Score());
-                              }
+                  if (projectList[i].name.isEmpty())
                         break;
-                        }
                   if (projectList[i].loaded) {
                         Score* score = new Score();
+                        scoreCreated = true;
                         score->read(projectList[i].name);
                         if (projectList[i].current)
                               currentScore = idx;
@@ -1310,11 +1307,16 @@ int main(int argc, char* argv[])
                   --argc;
                   if (!name.isEmpty()) {
                         Score* score = new Score();
+                        scoreCreated = true;
                         score->read(name);
                         mscore->appendScore(score);
                         }
                   }
             }
+
+      if (!scoreCreated)
+            // start with empty score:
+            mscore->appendScore(new Score());
 
       mscore->resize(scoreSize);
       mscore->move(scorePos);
