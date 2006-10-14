@@ -17,3 +17,8 @@ midi2.mid	single track, simple chords
 midi3.mid   single track, rests
 midi4.mid   single track, overlapping notes
 
+MusicXML testfiles
+
+testDynamics1.xml	the "dynamics" directions from ppp to fff
+testNotesRests1.xml     all note and rest types, including some dotted
+testWords1.xml          the "words" direction
