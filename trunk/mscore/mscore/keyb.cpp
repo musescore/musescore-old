@@ -401,7 +401,7 @@ void Score::keyPressEvent(QKeyEvent* ev)
                   return;
             }
       if (note != -1) {
-            // c d e f g a b   entered
+            // c d e f g a b entered: insert note or add note to chord
             int octave = padState.pitch / 12;
             static int ptab[15][7] = {
               //    c  d  e  f  g  a  b
@@ -455,13 +455,14 @@ void Score::keyPressEvent(QKeyEvent* ev)
                   // look for next note position
                   //
                   cr = (ChordRest*)searchNote(cis->pos, cis->staff);
-                  if (!cr->isChordRest()) {
+                  if (!cr || !cr->isChordRest()) {
                         cis->pos = -1;
                         endCmd(true);
                         return;
                         }
                   }
             if (ev->modifiers() & Qt::ShiftModifier) {
+                  // add note to chord
                   Note* on = getSelectedNote();
                   if (on) {
                         Note* n = addNote(on->chord(), padState.pitch);
@@ -469,13 +470,14 @@ void Score::keyPressEvent(QKeyEvent* ev)
                         }
                   }
             else {
+                  // insert note
                   if (cr->tuplet()) {
                         len = cr->tuplet()->noteLen();
                         printf("current ist tuplet lä%d\n", len);
                         }
                   setNote(cis->pos, staff(cis->staff), cis->voice, padState.pitch, len);
+                  cis->pos += len;
                   }
-            cis->pos += len;
             moveCursor();
             }
       endCmd(true);
