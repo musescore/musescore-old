@@ -1,3 +1,10 @@
+15.10 (lv)
+      * implemented true delete for TextElement
+      * fixed cursor position after inserting chord
+      * fixed crash when trying to insert notes beyond end of score
+      * fixed crash when deleting last character of a TextElement (e.g. title)
+14.10 (lv)
+      * added MusicXML regression testfiles
 04.10 (lv)
       * fixed note insertion immediately after non-note or -rest
         (bug resulted in first a-g key being ignored)

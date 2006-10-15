@@ -324,12 +324,14 @@ void TextElement::setCursor()
                   }
             col += n;
             }
-      QFont* f = box->font();
-      if (box && palette && f) {
-            palette->setFontFamily(f->family());
-            palette->setBold(f->bold());
-            palette->setItalic(f->italic());
-            palette->setFontSize(f->pixelSize());
+      if (box && palette) {
+            QFont* f = box->font();
+            if (f) {
+                  palette->setFontFamily(f->family());
+                  palette->setBold(f->bold());
+                  palette->setItalic(f->italic());
+                  palette->setFontSize(f->pixelSize());
+                  }
             }
       cursor.setY(vbox.bbox.y());
       cursor.setHeight(vbox.bbox.height());
@@ -537,7 +539,6 @@ bool TextElement::edit(QKeyEvent* ev)
                   break;
 
             case Qt::Key_Backspace:
-            case Qt::Key_Delete:
                   if (cursorColumn == 0) {
                         if (cursorLine == 0)
                               break;
@@ -546,6 +547,18 @@ bool TextElement::edit(QKeyEvent* ev)
                         concatLine();
                         break;
                         }
+                  removeChar();
+                  --cursorColumn;
+                  break;
+
+            case Qt::Key_Delete:
+                  if (cursorColumn == columns()) {
+                        if (cursorLine == (lines-1))
+                              break;
+                        concatLine();
+                        break;
+                        }
+                  ++cursorColumn;
                   removeChar();
                   --cursorColumn;
                   break;
