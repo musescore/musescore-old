@@ -1,3 +1,8 @@
+22.10 (lv)
+      * more MusicXML regression testfiles
+      * fixed keypad-. with numlock on for US keyboard
+      * fixed MusicXML wedge import (some diminuendo's imported incorrectly)
+      * tweaked direction placement
 15.10 (lv)
       * implemented true delete for TextElement
       * fixed cursor position after inserting chord

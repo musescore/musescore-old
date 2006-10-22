@@ -35,8 +35,8 @@ class Note;
 struct MusicXmlWedge {
       int number;
       int startTick;
+      int subType;
       qreal rx, ry;
-      int spread;
       };
 
 const int MAX_LYRICS = 8;
@@ -79,8 +79,8 @@ class MusicXml {
 
       //-----------------------------
 
-      void addWedge(int no, int startPos, qreal rx, qreal ry, int spread);
-      void genWedge(int no, int endPos, Measure*, int staff, qreal rx, qreal ry, int spread);
+      void addWedge(int no, int startPos, qreal rx, qreal ry, int subType);
+      void genWedge(int no, int endPos, Measure*, int staff);
 
       void direction(Measure* measure, int staff, QDomNode node);
       void scorePartwise(QDomNode);

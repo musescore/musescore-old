@@ -1270,7 +1270,7 @@ static void directionTag(Xml& xml, Attributes& attr, Element* el = 0)
       {
       attr.doAttr(xml, false);
       if (el)
-            xml.stag("direction placement=\"%s\"", (el->userOff().y() > 2.0) ? "below" : "above");
+            xml.stag("direction placement=\"%s\"", (el->userOff().y() > 0.0) ? "below" : "above");
       else
             xml.stag("direction");
       xml.stag("direction-type");
