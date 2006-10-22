@@ -840,8 +840,9 @@ void MusicXml::direction(Measure* measure, int staff, QDomNode node)
             else
                   t->setText(txt);
             if (placement == "above")
-                  ry -= 1.0;
-
+                  ry -= 2;
+            else
+                  ry += 2;
             t->setUserOff(QPointF(rx + xoffset, ry + yoffset));
             t->setMxmlOff(offset);
             t->setStaff(score->staff(staff + rstaff));
@@ -856,6 +857,10 @@ void MusicXml::direction(Measure* measure, int staff, QDomNode node)
                   s->setSym(pedalasteriskSym);
             else
                   printf("unknown pedal %s\n", type.toLatin1().data());
+            if (placement == "above")
+                  ry -= 2;
+            else
+                  ry += 2;
             s->setUserOff(QPointF(rx + xoffset, ry + yoffset));
             s->setMxmlOff(offset);
             s->setStaff(score->staff(staff + rstaff));
@@ -867,7 +872,9 @@ void MusicXml::direction(Measure* measure, int staff, QDomNode node)
                   DynVal val = Dynamic::tag2val(*it);
                   Dynamic* dyn = new Dynamic(score, val);
                   if (placement == "above")
-                        ry -= 12;
+                        ry -= 2.5;
+                  else
+                        ry += 2;
                   dyn->setUserOff(QPointF(rx + xoffset, ry + yoffset));
                   dyn->setMxmlOff(offset);
                   dyn->setStaff(score->staff(staff + rstaff));
@@ -876,16 +883,16 @@ void MusicXml::direction(Measure* measure, int staff, QDomNode node)
                   }
             }
       else if (dirType == "wedge") {
-            //
-            // mscore places wedges automatically below staves, so
-            // undo the y +60 offset
-            //
+            if (placement == "above")
+                  ry -= 9;
+            else
+                  ry -= 5;
             if (type == "crescendo")
-                  addWedge(0, tick, rx, ry - 6.0, spread);
+                  addWedge(0, tick, rx, ry, 0);
             else if (type == "stop")
-                  genWedge(0, tick, measure, staff+rstaff, rx, ry - 6.0, spread);
+                  genWedge(0, tick, measure, staff+rstaff);
             else if (type == "diminuendo")
-                  addWedge(0, tick, rx, ry - 6.0, spread);
+                  addWedge(0, tick, rx, ry, 1);
             else
                   printf("unknown wedge type: %s\n", type.toLatin1().data());
             }
@@ -1491,14 +1498,14 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomNode node)
 //   addWedge
 //---------------------------------------------------------
 
-void MusicXml::addWedge(int no, int tick, qreal rx, qreal ry, int spread)
+void MusicXml::addWedge(int no, int startTick, qreal rx, qreal ry, int subType)
       {
       MusicXmlWedge wedge;
       wedge.number = no;
-      wedge.startTick = tick;
+      wedge.startTick = startTick;
       wedge.rx = rx;
       wedge.ry = ry;
-      wedge.spread = spread;
+      wedge.subType = subType;
 
       if (int(wedgeList.size()) > no)
             wedgeList[no] = wedge;
@@ -1510,17 +1517,16 @@ void MusicXml::addWedge(int no, int tick, qreal rx, qreal ry, int spread)
 //   genWedge
 //---------------------------------------------------------
 
-void MusicXml::genWedge(int no, int endTick, Measure* measure, int staff,
-   qreal /*rx*/, qreal /*ry*/, int spread)
+void MusicXml::genWedge(int no, int endTick, Measure* measure, int staff)
       {
       Hairpin* hp = new Hairpin(score);
 
-printf("gen wedge staff %d\n", staff);
       hp->setTick1(wedgeList[no].startTick);
       hp->setTick2(endTick);
-      hp->setSubtype(spread < wedgeList[no].spread ? 1 : 0);
-      hp->setUserOff(QPointF(wedgeList[no].rx, wedgeList[no].ry + 1.0));
+      hp->setSubtype(wedgeList[no].subType);
+      hp->setUserOff(QPointF(wedgeList[no].rx, wedgeList[no].ry));
       hp->setStaff(score->staff(staff));
       measure->add(hp);
+      printf("gen wedge staff %d\n", staff);
       }
 

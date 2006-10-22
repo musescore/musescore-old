@@ -173,7 +173,9 @@ void Score::keyPressEvent(QKeyEvent* ev)
                         mscore->keyPadToggled(PAD_0);
                         break;
                   case Qt::Key_Delete:
+                  case '.':
                   case ',':
+                        // US keyboard has "Del/." instead of "Del/,"
                         mscore->keyPadToggled(PAD_COMMA);
                         break;
                   case Qt::Key_NumLock:
