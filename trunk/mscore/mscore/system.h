@@ -108,7 +108,7 @@ class System : public Element {
       void insertSysStaff(SysStaff*, int);
       SysStaff* removeStaff(int);
 
-      virtual void draw(Painter&) const;
+      virtual void draw(Painter&);
 
       BarLine* getBarLine() const         { return barLine; }
       bool pos2tick(const QPointF&, int* tick, Staff** staff, int* pitch) const;

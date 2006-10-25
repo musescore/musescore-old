@@ -23,7 +23,6 @@
 
 #include "ui_instrdialog.h"
 #include "globals.h"
-#include "text.h"
 
 class InstrumentTemplate;
 class Instrument;
@@ -37,8 +36,8 @@ class Score;
 
 struct InstrumentTemplate {
       QString group;
-      Text name;           // also used for track name
-      Text shortName;
+      QString name;           // also used for track name
+      QString shortName;
       int staves;             // 1 <= MAX_STAVES
       int clefIdx[MAX_STAVES];
       int bracket;            // bracket type (NO_BRACKET)
@@ -48,8 +47,8 @@ struct InstrumentTemplate {
 
       InstrumentTemplate(
          const QString& group, 
-         const Text& name, 
-         const Text& sn,
+         const QString& name, 
+         const QString& sn,
          int, 
          const int*,
          int                  // bracket

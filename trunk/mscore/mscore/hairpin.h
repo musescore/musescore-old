@@ -37,7 +37,7 @@ class Hairpin : public SLine {
       virtual ElementType type() const { return HAIRPIN; }
 
       void setLen(double);
-      virtual void draw1(Painter&) const;
+      virtual void draw1(Painter&);
       virtual void layout();
       virtual void write(Xml& xml) const;
       virtual void read(QDomNode);

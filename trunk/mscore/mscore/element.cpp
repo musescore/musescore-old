@@ -23,7 +23,6 @@
 #include "xml.h"
 #include "score.h"
 #include "preferences.h"
-#include "text.h"
 #include "staff.h"
 #include "utils.h"
 #include "painter.h"
@@ -220,7 +219,7 @@ bool Element::readProperties(QDomNode node)
 //   Element::draw
 //---------------------------------------------------------
 
-void Element::draw(Painter& p) const
+void Element::draw(Painter& p)
       {
       if (!visible() && (p.print() || !(_score && _score->showInvisible())))
             return;
@@ -254,7 +253,7 @@ void Element::draw(Painter& p) const
 //   draw
 //---------------------------------------------------------
 
-void ElementList::draw(Painter& p) const
+void ElementList::draw(Painter& p)
       {
       for (ciElement i = begin(); i != end(); ++i)
             (*i)->draw(p);
@@ -340,7 +339,7 @@ SStaff::SStaff(Score* s)
 //   draw
 //---------------------------------------------------------
 
-void SStaff::draw1(Painter& p) const
+void SStaff::draw1(Painter& p)
       {
       QPointF _pos(0.0, 0.0);
 
@@ -517,7 +516,7 @@ void Line::bboxUpdate()
 //   draw
 //---------------------------------------------------------
 
-void Line::draw1(Painter& p) const
+void Line::draw1(Painter& p)
       {
       QPen pen(p.pen());
       pen.setWidthF(point(_width));
@@ -576,7 +575,7 @@ Compound::Compound(Score* s)
 //   draw
 //---------------------------------------------------------
 
-void Compound::draw1(Painter& p) const
+void Compound::draw1(Painter& p)
       {
       for (ciSymbol i = elemente.begin(); i != elemente.end(); ++i)
             (*i)->draw(p);
@@ -735,7 +734,7 @@ Cursor::Cursor(Score* s, double l)
 //   draw
 //---------------------------------------------------------
 
-void Cursor::draw1(Painter& p) const
+void Cursor::draw1(Painter& p)
       {
       if (!(_on && _blink))
             return;
@@ -761,7 +760,7 @@ Lasso::Lasso(Score* s)
 //   draw
 //---------------------------------------------------------
 
-void Lasso::draw1(Painter& p) const
+void Lasso::draw1(Painter& p)
       {
       p.setBrush(Qt::NoBrush);
       QPen pen(QColor(preferences.selectColor[0]));
@@ -792,7 +791,7 @@ void Element::dump() const
 //   RubberBand::draw
 //---------------------------------------------------------
 
-void RubberBand::draw(Painter& p) const
+void RubberBand::draw(Painter& p)
       {
       if (!showRubberBand)
             return;
@@ -816,7 +815,7 @@ VSpacer::VSpacer(Score* s, double h)
 //   draw
 //---------------------------------------------------------
 
-void VSpacer::draw1(Painter&) const
+void VSpacer::draw1(Painter&)
       {
 //      int lw       = lrint(.5 * tf->mag() * _spatium);
 //      int len      = lrint(height * tf->mag() * _spatium);
@@ -851,7 +850,7 @@ QByteArray Element::mimeData() const
 //   draw
 //---------------------------------------------------------
 
-void Volta::draw1(Painter& p) const
+void Volta::draw1(Painter& p)
       {
       qreal voltaLineWidth = _spatium * .18;
       qreal h              = _spatium * 1.8;

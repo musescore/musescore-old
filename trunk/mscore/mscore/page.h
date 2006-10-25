@@ -113,7 +113,7 @@ class Page : public Element {
       void drawBorder(Painter& p) const;
       void layout();
 
-      virtual void draw(Painter&p) const;
+      virtual void draw(Painter&p);
       };
 
 //---------------------------------------------------------

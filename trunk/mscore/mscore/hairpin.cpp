@@ -102,7 +102,7 @@ void Hairpin::bboxUpdate()
 //   draw
 //---------------------------------------------------------
 
-void Hairpin::draw1(Painter& p) const
+void Hairpin::draw1(Painter& p)
       {
       double h1 = point(style->hairpinHeight) * .5;
       double h2 = point(style->hairpinContHeight) * .5;

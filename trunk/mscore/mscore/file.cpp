@@ -30,7 +30,6 @@
 #include "key.h"
 #include "instrdialog.h"
 #include "score.h"
-#include "text.h"
 #include "page.h"
 #include "dynamics.h"
 #include "file.h"
@@ -58,8 +57,8 @@ static void readInstrument(const QString& group, QDomNode node)
       int clef[MAX_STAVES];
       for (int i = 0; i < MAX_STAVES; ++i)
             clef[i] = 0;
-      Text name(TEXT_STYLE_INSTRUMENT_LONG);
-      Text shortName(TEXT_STYLE_INSTRUMENT_SHORT);
+      QString name;
+      QString shortName;
       int staves = 1;
       int clefIdx = 0;
       int bracket = -1;
@@ -72,9 +71,9 @@ static void readInstrument(const QString& group, QDomNode node)
             QString val(e.text());
             int i = val.toInt();
             if (tag == "name")
-                  name.read(node);
+                  name = val;
             else if (tag == "short-name")
-                  shortName.read(node);
+                  shortName = val;
             else if (tag == "staves")
                   staves = i;
             else if (tag == "clef") {

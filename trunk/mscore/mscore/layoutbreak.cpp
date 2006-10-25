@@ -39,7 +39,7 @@ LayoutBreak::LayoutBreak(Score* score, int st)
 //   draw1
 //---------------------------------------------------------
 
-void LayoutBreak::draw1(Painter& p) const
+void LayoutBreak::draw1(Painter& p)
       {
       QPen pen;
       if (selected())

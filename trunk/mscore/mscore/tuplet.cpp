@@ -235,7 +235,7 @@ void Tuplet::layout()
 //   draw
 //---------------------------------------------------------
 
-void Tuplet::draw1(Painter& p) const
+void Tuplet::draw1(Painter& p)
       {
       if (_number) {
             p.setPen(QPen(Qt::NoPen));

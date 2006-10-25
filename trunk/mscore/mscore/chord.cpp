@@ -44,7 +44,7 @@ Stem::Stem(Score* s)
 //   draw1
 //---------------------------------------------------------
 
-void Stem::draw1(Painter& p) const
+void Stem::draw1(Painter& p)
       {
       qreal lw = point(::style->stemWidth);
       QPen pen(p.pen());
@@ -229,7 +229,7 @@ void drawPosMark(Painter& painter, const QPointF& p)
 //    draw chord and calculate bounding region
 //---------------------------------------------------------
 
-void Chord::draw1(Painter& p) const
+void Chord::draw1(Painter& p)
       {
       for (ciNote i = notes.begin(); i != notes.end(); ++i)
             i->second->draw(p);
@@ -267,7 +267,7 @@ void Chord::bboxUpdate()
 //---------------------------------------------------------
 //   layoutStem
 //    layout chord stem and hook
-//    (Notenhals & Fähen)
+//    (Notenhals & Fäen)
 //---------------------------------------------------------
 
 void Chord::layoutStem()
@@ -339,7 +339,7 @@ void Chord::layoutStem()
       _stem->setPos(npos);
 
       //-----------------------------------------
-      //  process hook (Fähen)
+      //  process hook (Fäen)
       //-----------------------------------------
 
       if (hookIdx) {

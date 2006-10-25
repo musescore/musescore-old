@@ -67,8 +67,8 @@ void PartEdit::setPart(Part* p)
       chorus->setValue(i->chorus);
       pan->setValue(i->pan);
       patch->setCurrentIndex(i->midiProgram);   // TODO!
-      shortName->setText(part->shortName().text());
-      longName->setText(part->longName().text());
+      shortName->setText(part->shortName());
+      longName->setText(part->longName());
       minPitch->setValue(i->minPitch);
       maxPitch->setValue(i->maxPitch);
       }

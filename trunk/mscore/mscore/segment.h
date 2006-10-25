@@ -84,7 +84,7 @@ class Segment : public Element {
       virtual void add(Element*);
       virtual void remove(Element*);
 
-      virtual void draw(Painter& p) const;
+      virtual void draw(Painter& p);
       void sortStaves(std::list<int>& src, std::list<int>& dst);
       const char* name() const { return segmentTypeNames[_type]; }
       };

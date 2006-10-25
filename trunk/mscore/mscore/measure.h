@@ -118,7 +118,7 @@ class Measure : public Element {
       ~Measure();
       virtual ElementType type() const { return MEASURE; }
 
-      virtual void draw(Painter&) const;
+      virtual void draw(Painter&);
       virtual void read(QDomNode, int idx);
       virtual void write(Xml&, int, int) const;
       virtual bool isMovable() const { return true; }

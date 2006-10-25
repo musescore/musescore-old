@@ -119,7 +119,7 @@ void Bracket::layout()
 //   draw
 //---------------------------------------------------------
 
-void Bracket::draw1(Painter& p) const
+void Bracket::draw1(Painter& p)
       {
       if (path == 0)
             return;

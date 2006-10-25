@@ -49,7 +49,7 @@ void Pedal::setSubtype(int val)
 //   draw
 //---------------------------------------------------------
 
-void Pedal::draw1(Painter& p) const
+void Pedal::draw1(Painter& p)
       {
       qreal ottavaLineWidth    = _spatium * .18;
       qreal ottavaTextDistance = _spatium * .5;

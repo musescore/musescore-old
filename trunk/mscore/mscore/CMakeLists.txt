@@ -179,7 +179,6 @@ add_executable ( mscore
       hook.cpp hook.h
       system.cpp
       tempo.cpp
-      text.cpp
       textelement.cpp
       textpalette.cpp
       textstyle.cpp

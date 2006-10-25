@@ -32,8 +32,8 @@
 Part::Part(Score* s)
       {
       cs = s;
-      _longName.setStyle(TEXT_STYLE_INSTRUMENT_LONG);
-      _shortName.setStyle(TEXT_STYLE_INSTRUMENT_SHORT);
+//      _longName.setStyle(TEXT_STYLE_INSTRUMENT_LONG);
+//      _shortName.setStyle(TEXT_STYLE_INSTRUMENT_SHORT);
       _staves = new StaffList;
       }
 
@@ -78,13 +78,15 @@ void Part::read(Score* score, QDomNode node)
             else if (tag == "Instrument")
                   _instrument.read(node);
             else if (tag == "name")
-                  _longName.read(node);
+                  _longName = val; // .read(node);
             else if (tag == "shortName")
-                  _shortName.read(node);
-            else if (tag == "trackName")
+                  _shortName = val; // .read(node);
+            else if (tag == "trackName") {
                   _trackName = val;
+printf("trackName <%s>\n", val.toLocal8Bit().data());
+                  }
             else
-                  printf("Mscore:Part: unknown tag %s\n", tag.toLatin1().data());
+                  printf("Mscore:Part: unknown tag %s\n", tag.toLocal8Bit().data());
             }
       }
 
@@ -100,9 +102,9 @@ void Part::write(Xml& xml) const
       if (!_trackName.isEmpty())
             xml.tag("trackName", _trackName);
       if (!_longName.isEmpty())
-            _longName.write(xml, "name");
+            xml.tag("name", _longName); // .write(xml, "name");
       if (!_shortName.isEmpty())
-            _shortName.write(xml, "shortName");
+            xml.tag("shortName", _shortName); // .write(xml, "shortName");
       _instrument.write(xml);
       xml.etag("Part");
       }

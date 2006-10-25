@@ -65,7 +65,7 @@ class SlurSegment : public Element {
 
       virtual QPointF dragOff() const;
 
-      virtual void draw1(Painter&) const;
+      virtual void draw1(Painter&);
       virtual bool startEdit(QMatrix&);
       virtual void endEdit();
       virtual bool startEditDrag(const QPointF&);

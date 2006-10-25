@@ -47,7 +47,7 @@ QString Staff::trackName() const
 //   longName
 //---------------------------------------------------------
 
-Text Staff::longName() const
+QString Staff::longName() const
       {
       return _part->longName();
       }
@@ -56,7 +56,7 @@ Text Staff::longName() const
 //   shortName
 //---------------------------------------------------------
 
-Text Staff::shortName() const
+QString Staff::shortName() const
       {
       return _part->shortName();
       }

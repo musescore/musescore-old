@@ -164,7 +164,7 @@ void Segment::removeStaff(int staff)
 //   draw
 //---------------------------------------------------------
 
-void Segment::draw(Painter& p) const
+void Segment::draw(Painter& p)
       {
       p.translate(pos());
 

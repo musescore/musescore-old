@@ -269,7 +269,7 @@ void Page::drawBorder(Painter& p) const
 //    bounding rectange fr is relative to page QPointF
 //---------------------------------------------------------
 
-void Page::draw(Painter& p) const
+void Page::draw(Painter& p)
       {
       if (!p.print())
             drawBorder(p);

@@ -22,7 +22,6 @@
 #define __TEXTELEMENT_H__
 
 #include "element.h"
-#include "text.h"
 
 class TextPalette;
 extern TextPalette* palette;
@@ -32,21 +31,11 @@ extern TextPalette* palette;
 //---------------------------------------------------------
 
 class TextElement : public Element {
-      Text text;         // two dimensional array of HBox text elements
+      QTextDocument doc;
+      QTextCursor* cursor;
       bool editMode;
 
-      int cursorLine;
-      int cursorColumn;
-
-      QRectF cursor;
-
       void init();
-      void setCursor();
-      int columns() const;
-      void insertChar(const QString&);
-      void removeChar();
-      void splitLine();
-      void concatLine();
 
    protected:
       int textStyle;
@@ -63,17 +52,16 @@ class TextElement : public Element {
 
 
       void setText(const QString& s);
-      void setText(const Text& v);
+      QString getText() const;
 
       double lineSpacing() const;
-      virtual void resetMode()    { editMode = 0; bboxUpdate(); }
+      virtual void resetMode();
 
-      QString getText() const;
       bool isEmpty() const;
       void setStyle(int n);
       int style() const           { return textStyle; }
 
-      virtual void draw1(Painter&) const;
+      virtual void draw1(Painter&);
 
       virtual bool startEdit(QMatrix&);
       virtual bool edit(QKeyEvent*);
@@ -84,8 +72,8 @@ class TextElement : public Element {
       void write(Xml& xml, const char*) const;
       virtual void read(QDomNode);
       virtual void layout();
-      virtual void bboxUpdate();
       virtual void setSelected(bool f);
+      virtual const QRectF& bbox() const;
       };
 
 //---------------------------------------------------------

@@ -21,8 +21,6 @@
 #ifndef __STAFF_H__
 #define __STAFF_H__
 
-#include "text.h"
-
 class Instrument;
 class ClefList;
 class Xml;
@@ -49,8 +47,8 @@ class Staff {
       bool isTop() const             { return _rstaff == 0; }
       bool isTopSplit() const;
       QString trackName() const;
-      Text longName() const;
-      Text shortName() const;
+      QString longName() const;
+      QString shortName() const;
       int midiChannel() const;
       int midiProgram() const;
       int volume() const;

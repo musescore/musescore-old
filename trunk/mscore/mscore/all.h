@@ -67,5 +67,8 @@
 #include <QtGui/QToolTip>
 #include <QtCore/QProcess>
 #include <QtGui/QDesktopServices>
+#include <QtGui/QTextDocument>
+#include <QtGui/QTextCursor>
+#include <QtGui/QAbstractTextDocumentLayout>
 #endif
 

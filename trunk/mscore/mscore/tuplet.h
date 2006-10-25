@@ -76,7 +76,7 @@ class Tuplet : public Element {
       void write(Xml&, int) const;
 
       virtual void move(double, double);
-      virtual void draw1(Painter&) const;
+      virtual void draw1(Painter&);
       };
 
 #endif

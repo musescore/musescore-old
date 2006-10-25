@@ -44,7 +44,7 @@ void Symbol::setSym(int s)
 //   Symbol::draw
 //---------------------------------------------------------
 
-void Symbol::draw1(Painter& p) const
+void Symbol::draw1(Painter& p)
       {
       symbols[_sym].draw(p);
       }

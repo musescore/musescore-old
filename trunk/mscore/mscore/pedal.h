@@ -34,7 +34,7 @@ class Pedal : public SLine {
       Pedal(Score* s);
       virtual ElementType type() const { return PEDAL; }
 
-      virtual void draw1(Painter&) const;
+      virtual void draw1(Painter&);
       virtual void layout();
       void setLen(qreal);
       virtual void setSubtype(int val);

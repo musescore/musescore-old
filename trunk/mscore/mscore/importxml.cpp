@@ -30,7 +30,6 @@
 #include "clef.h"
 #include "note.h"
 #include "element.h"
-#include "text.h"
 #include "sym.h"
 #include "slur.h"
 #include "hairpin.h"
@@ -369,7 +368,7 @@ void MusicXml::xmlScorePart(QDomNode node, QString id)
             if (e.isNull())
                   continue;
             if (e.tagName() == "part-name") {
-                  part->setLongName(Text(e.text(), TEXT_STYLE_INSTRUMENT_LONG));
+                  part->setLongName(e.text());
                   part->setTrackName(e.text());
                   }
             else if (e.tagName() == "part-abbreviation")
@@ -382,7 +381,7 @@ void MusicXml::xmlScorePart(QDomNode node, QString id)
                         if (e.tagName() == "instrument-name") {
                               // part-name or instrument-name?
                               if (part->longName().isEmpty())
-                                    part->setLongName(Text(e.text(), TEXT_STYLE_INSTRUMENT_LONG));
+                                    part->setLongName(e.text());
                               }
                         else
                               domError(n);
@@ -834,8 +833,8 @@ void MusicXml::direction(Measure* measure, int staff, QDomNode node)
             t->setTick(tick);
             t->setStyle(TEXT_STYLE_TECHNIK);
             if (weight == "bold") {
-                  Text text(txt, TEXT_STYLE_TECHNIK, true, size);
-                  t->setText(text);
+                  // Text text(txt, TEXT_STYLE_TECHNIK, true, size);
+                  t->setText(txt);
                   }
             else
                   t->setText(txt);

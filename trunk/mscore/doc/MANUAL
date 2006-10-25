@@ -11,7 +11,7 @@ sorry, this is not a real user manual :-(
 
       Create new:
             * click New
-            * click Cancel
+            * click Cancel in template dialog
             * enter "I"  (start instrument menu)
             * select instrument(s) and add to partitur
             * click Ok
@@ -126,10 +126,9 @@ sorry, this is not a real user manual :-(
 ---------------------------------------
 
       - open fingering palette create->text->fingering
-      - click on "finger" and then on note head to put finger number
-        to note
+      - drag numbers to note heads
 
-      - doubleclick to edit number
+      - doubleclick number to edit
 
 ---------------------------------------
       Beams
