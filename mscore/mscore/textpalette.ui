@@ -1,15 +1,12 @@
 <ui version="4.0" >
- <author></author>
- <comment></comment>
- <exportmacro></exportmacro>
  <class>TextPaletteBase</class>
  <widget class="QWidget" name="TextPaletteBase" >
   <property name="geometry" >
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>759</width>
-    <height>300</height>
+    <width>478</width>
+    <height>207</height>
    </rect>
   </property>
   <property name="windowTitle" >
@@ -238,7 +235,6 @@
    </item>
   </layout>
  </widget>
- <pixmapfunction></pixmapfunction>
  <resources>
   <include location="mscore.qrc" />
  </resources>

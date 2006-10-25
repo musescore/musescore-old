@@ -32,6 +32,7 @@ Xml::Xml()
 Xml::Xml(QIODevice* device)
    : QTextStream(device)
       {
+      setCodec("utf8");
       level = 0;
       }
 
@@ -51,7 +52,7 @@ void Xml::putLevel()
 
 void Xml::header(const QString& /*type*/)
       {
-      *this << "<?xml version=\"1.0\" encoding=\"ISO-8859-1\"?>\n";
+      *this << "<?xml version=\"1.0\" encoding=\"utf8\"?>\n";
       }
 
 //---------------------------------------------------------

@@ -77,8 +77,6 @@ class Element {
       MTime _time;
       QColor _color;
 
-      QRectF _bbox;     // bounding box relative to _pos + _userOff
-
       void init();
 
    protected:
@@ -91,6 +89,7 @@ class Element {
       int _mxmlOff;     // MusicXML offset in ticks
                         // note: interacts with userXoffset
 
+      mutable QRectF _bbox;     // bounding box relative to _pos + _userOff
       mutable MTime _duration;  // lazy evaluation
 
    public:
@@ -160,8 +159,8 @@ class Element {
             return type() == REST || type() == CHORD;
             }
 
-      virtual void draw(Painter&p) const;
-      virtual void draw1(Painter&) const {}
+      virtual void draw(Painter&p);
+      virtual void draw1(Painter&) {}
 
       void writeProperties(Xml& xml) const;
       bool readProperties(QDomNode);
@@ -226,7 +225,7 @@ class ElementList : public pstl::plist<Element*> {
       bool remove(Element*);
       void replace(Element* old, Element* n);
       void write(Xml&) const;
-      void draw(Painter& p) const;
+      void draw(Painter& p);
 
       void add(Element*);
       void move(Element* el, int tick);
@@ -251,7 +250,7 @@ class SStaff : public Element {
       SStaff(Score*);
       virtual ElementType type() const { return STAFF; }
 
-      virtual void draw1(Painter&) const;
+      virtual void draw1(Painter&);
       virtual void write(Xml& xml) const;
       virtual void read(QDomNode);
       };
@@ -271,7 +270,7 @@ class Cursor : public Element {
       Cursor(Score*, double l);
       virtual ElementType type() const { return CURSOR; }
 
-      virtual void draw1(Painter&) const;
+      virtual void draw1(Painter&);
       void setOn(bool f)  { _on = f; }
       bool isOn() const   { return _on; }
       void blink()        { _blink = !_blink; }
@@ -289,7 +288,7 @@ class VSpacer : public Element {
    public:
       VSpacer(Score*, double h);
       virtual ElementType type() const { return VSPACER; }
-      virtual void draw1(Painter&) const;
+      virtual void draw1(Painter&);
       };
 
 //---------------------------------------------------------
@@ -300,7 +299,7 @@ class Lasso : public Element {
    public:
       Lasso(Score*);
       virtual ElementType type() const   { return LASSO; }
-      virtual void draw1(Painter&) const;
+      virtual void draw1(Painter&);
       };
 
 //---------------------------------------------------------
@@ -322,7 +321,7 @@ class Line : public Element {
 
       virtual ElementType type() const { return LINE; }
 
-      virtual void draw1(Painter&) const;
+      virtual void draw1(Painter&);
       void writeProperties(Xml& xml) const;
       bool readProperties(QDomNode);
       void dump() const;
@@ -345,7 +344,7 @@ class Compound : public Element {
       Compound(Score*);
       virtual ElementType type() const = 0;
 
-      virtual void draw1(Painter&) const;
+      virtual void draw1(Painter&);
       virtual void addElement(Element*, double x, double y);
       void clear();
       virtual void setSelected(bool f);
@@ -396,7 +395,7 @@ class RubberBand : public Element {
    public:
       RubberBand(Score* s) : Element(s) {}
       virtual ElementType type() const { return RUBBERBAND; }
-      virtual void draw(Painter&) const;
+      virtual void draw(Painter&);
 
       void set(const QPointF& p1, const QPointF& p2) { _p1 = p1; _p2 = p2; }
       QPointF p1() const { return _p1; }
@@ -418,7 +417,7 @@ class Volta : public Element {
    public:
       Volta(Score* s) : Element(s) {}
       virtual ElementType type() const { return VOLTA; }
-      virtual void draw1(Painter&) const;
+      virtual void draw1(Painter&);
       virtual void layout();
       void setLen(qreal);
       virtual void write(Xml&) const;

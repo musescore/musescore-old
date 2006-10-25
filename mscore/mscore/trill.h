@@ -34,7 +34,7 @@ class Trill : public SLine {
       Trill(Score* s);
       virtual ElementType type() const { return TRILL; }
 
-      virtual void draw1(Painter&) const;
+      virtual void draw1(Painter&);
       virtual void layout();
       void setLen(qreal);
       virtual void setSubtype(int val);

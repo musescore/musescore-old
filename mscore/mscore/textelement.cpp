@@ -42,20 +42,45 @@ TextElement::TextElement(Score* s)
    : Element(s)
       {
       textStyle = TEXT_STYLE_LYRIC;
-      text.setStyle(textStyle);
+      doc.setDefaultFont(font());
       editMode = false;
+      cursor = new QTextCursor(&doc);
+      cursor->setPosition(0);
       }
 
 TextElement::TextElement(Score* s, int style)
    : Element(s)
       {
       textStyle = style;
-      text.setStyle(textStyle);
+      doc.setDefaultFont(font());
       editMode = false;
+      cursor = new QTextCursor(&doc);
+      cursor->setPosition(0);
       }
 
 TextElement::~TextElement()
       {
+      delete cursor;
+      }
+
+//---------------------------------------------------------
+//   bbox
+//---------------------------------------------------------
+
+const QRectF& TextElement::bbox() const
+      {
+      _bbox = QRectF(0.0, 0.0, doc.size().width(), doc.size().height());
+// printf("TextElement::bbox %f %f\n", _bbox.width(), _bbox.height());
+      return _bbox;
+      }
+
+//---------------------------------------------------------
+//   resetMode
+//---------------------------------------------------------
+
+void TextElement::resetMode()    
+      { 
+      editMode = 0; 
       }
 
 //---------------------------------------------------------
@@ -65,9 +90,6 @@ TextElement::~TextElement()
 void TextElement::setSelected(bool val)
       {
       Element::setSelected(val);
-      foreach (const VBox& vbox, text)
-            foreach (HBox* box, vbox.hlist)
-                  box->setSelected(val);
       }
 
 //---------------------------------------------------------
@@ -76,7 +98,7 @@ void TextElement::setSelected(bool val)
 
 bool TextElement::isEmpty() const
       {
-      return text.isEmpty();
+      return doc.isEmpty();
       }
 
 //---------------------------------------------------------
@@ -85,7 +107,7 @@ bool TextElement::isEmpty() const
 
 QString TextElement::getText() const
       {
-      return text.text();
+      return doc.toPlainText();
       }
 
 //---------------------------------------------------------
@@ -94,55 +116,12 @@ QString TextElement::getText() const
 
 void TextElement::layout()
       {
-      if (parent() == 0) {
-            // printf("TextElement::layout: %p no parent\n", this);
+      if (parent() == 0)
             return;
-            }
-      if (text.isEmpty())
-            return;
-
-      //
-      // search for widest line
-      //
-      double tw = 0.0;        // width of text
-      int nn = text.size();
-      for (int k = 0; k < nn; ++k) {
-            VBox& vbox = text[k];
-            vbox.w = 0.0;
-            int boxes = vbox.hlist.size();
-            for (int i = 0; i < boxes; ++i)
-                  vbox.w += vbox.hlist[i]->width();
-            if (vbox.w > tw)
-                  tw = vbox.w;
-            }
-
       TextStyle* s = &textStyles[textStyle];
 
-      //
-      // align individual lines horizontally
-      //
-      double py = 0.0;
-      for (int k = 0; k < nn; ++k) {
-            double x = 0.0;
-            if (s->align & ALIGN_LEFT)
-                  x = 0.0;
-            else if (s->align & ALIGN_RIGHT)
-                  x  = tw - text[k].w;
-            else if (s->align & ALIGN_HCENTER)
-                  x  = (tw - text[k].w) * .5;
-            QList<HBox*> hlist = text[k].hlist;
-            int n = hlist.size();
-            // double lineSpacing = 0.0;
-            text[k].bbox = QRectF();
-            for (int i = 0; i < n; ++i) {
-                  QPointF p(x, py);
-                  hlist[i]->setPos(p);
-                  text[k].bbox |= hlist[i]->bbox().translated(p);
-                  x += hlist[i]->width();
-                  }
-            py += text[k].lineSpacing;
-            }
-      double height = py;
+      double tw = bbox().width();
+      double th = bbox().height();
 
       QPointF _off(QPointF(s->xoff, s->yoff));
       if (s->offsetType == OFFSET_SPATIUM)
@@ -172,9 +151,7 @@ void TextElement::layout()
             else if (s->align & ALIGN_BOTTOM)
                   y = page->tm() + h;
             else if (s->align & ALIGN_VCENTER)
-                  y = page->tm() + h * .5 - bbox().height() * .5;
-            x += _off.x();
-            y += _off.y();
+                  y = page->tm() + h * .5 - th * .5;
             }
       else {
             if (s->align & ALIGN_LEFT)
@@ -186,27 +163,12 @@ void TextElement::layout()
             if (s->align & ALIGN_TOP)
                   ;
             else if (s->align & ALIGN_BOTTOM)
-                  y = -height;
+                  y = -th;
             else if (s->align & ALIGN_VCENTER) {
-                  bboxUpdate();
-                  y = -(bbox().height() * .5) - bbox().y();
-                  }
-            x += _off.x();
-            y += _off.y();
-            int nn = text.size();
-            for (int k = 0; k < nn; ++k) {
-                  QList<HBox*> hlist = text[k].hlist;
-                  QPointF p(x, y);
-                  text[k].bbox.translate(p);
-                  int n = hlist.size();
-                  for (int i = 0; i < n; ++i) {
-                        QPointF p(x, y);
-                        hlist[i]->setPos(hlist[i]->pos() + p);
-                        }
+                  y = -(th * .5) - bbox().y();
                   }
             }
-      setPos(x, y);
-      bboxUpdate();
+      setPos(x + _off.x(), y + _off.y());
       }
 
 //---------------------------------------------------------
@@ -215,20 +177,7 @@ void TextElement::layout()
 
 void TextElement::setText(const QString& s)
       {
-      text.clear();
-      if (!s.isEmpty()) {
-            VBox vb;
-            HBoxText* hb = new HBoxText(s, font());
-            vb.w    = hb->width();
-            vb.append(hb);
-            text.append(vb);
-            }
-      layout();
-      }
-
-void TextElement::setText(const Text& v) 
-      { 
-      text = v; 
+      doc.setPlainText(s);
       layout();
       }
 
@@ -240,7 +189,7 @@ void TextElement::setStyle(int n)
       {
       if (textStyle != n) {
             textStyle = n;
-            text.setStyle(textStyle);
+            doc.setDefaultFont(font());
             layout();
             }
       }
@@ -260,17 +209,14 @@ void TextElement::write(Xml& xml) const
 
 void TextElement::write(Xml& xml, const char* name) const
       {
-      if (text.isEmpty())
+      if (doc.isEmpty())
             return;
       xml.stag(name);
       xml.tag("style", textStyle);
 
-      foreach (const VBox& vbox, text) {
-            xml.ntag("data");
-            foreach (HBox* box, vbox.hlist)
-                  box->write(xml, textStyle);
-            xml.netag("data");
-            }
+      QString s = doc.toHtml("utf8");
+      xml.tag("data", s);
+// printf("TextElement: write<%s>\n", s.toLocal8Bit().data());
       Element::writeProperties(xml);
       xml.etag(name);
       }
@@ -287,12 +233,12 @@ void TextElement::read(QDomNode node)
             QDomElement e = node.toElement();
             QString tag(e.tagName());
             QString val(e.text());
-            int i = val.toInt();
-            if (tag == "data")
-                  text.read(node);
+            if (tag == "data") {
+// printf("setHtml <%s>\n", val.toLocal8Bit().data());
+                  doc.setHtml(val);
+                  }
             else if (tag == "style") {
-                  text.setStyle(i);
-                  textStyle = i;
+                  textStyle = val.toInt();
                   }
             else if (Element::readProperties(node))
                   ;
@@ -303,210 +249,12 @@ void TextElement::read(QDomNode node)
       }
 
 //---------------------------------------------------------
-//   setCursor
-//---------------------------------------------------------
-
-void TextElement::setCursor()
-      {
-      VBox& vbox = text[cursorLine];
-      QPointF cp;
-      int col  = 0;
-      int boxes = vbox.hlist.size();
-      HBox* box = 0;
-      for (int i = 0; i < boxes; ++i) {
-            box = vbox.hlist[i];
-            int n = box->size();
-            if (i == (boxes-1) || (cursorColumn >= col && cursorColumn < col+n)) {
-                  cursor = box->cursor(cursorColumn - col);
-//                  if (i == (boxes-1) && cursorColumn >= (n+col))
-//                        printf("at end\n");
-                  break;
-                  }
-            col += n;
-            }
-      if (box && palette) {
-            QFont* f = box->font();
-            if (f) {
-                  palette->setFontFamily(f->family());
-                  palette->setBold(f->bold());
-                  palette->setItalic(f->italic());
-                  palette->setFontSize(f->pixelSize());
-                  }
-            }
-      cursor.setY(vbox.bbox.y());
-      cursor.setHeight(vbox.bbox.height());
-      bboxUpdate();
-      }
-
-//---------------------------------------------------------
-//   columns
-//    return number of columns in current line
-//---------------------------------------------------------
-
-int TextElement::columns() const
-      {
-      const VBox& vbox = text[cursorLine];
-      int col = 0;
-      foreach(HBox* hb, vbox.hlist)
-            col += hb->size();
-      return col;
-      }
-
-//---------------------------------------------------------
-//   insertChar
-//    insert character at current cursor position
-//---------------------------------------------------------
-
-void TextElement::insertChar(const QString& s)
-      {
-      VBox& vbox = text[cursorLine];
-      int boxes = vbox.hlist.size();
-      int col = 0;
-      for (int i = 0; i < boxes; ++i) {
-            HBox* box = vbox.hlist[i];
-            int n = box->size();
-            if (i == (boxes-1) || (cursorColumn >= col && cursorColumn < col+n)) {
-                  int rx = cursorColumn - col;
-                  if (!box->insertChar(rx, s)) {
-                        //
-                        // we cannot insert into HBoxElement
-                        //
-                        if (i) {
-                              // append char to previous box
-                              box = vbox.hlist[i];
-                              if (!box->insertChar(rx+1, s)) {
-                                    // create new box
-                                    HBoxText* nb = new HBoxText(s, font());
-                                    vbox.insert(i, nb);
-                                    }
-                              }
-                        else {
-                              printf("TODO: create newbox\n");
-                              // create new box
-                              }
-                        }
-                  break;
-                  }
-            col += n;
-            }
-      if (boxes == 0) {
-            HBoxText* nb = new HBoxText(s, font());
-            vbox.insert(0, nb);
-            }
-      layout();
-      }
-
-//---------------------------------------------------------
-//   removeChar
-//---------------------------------------------------------
-
-void TextElement::removeChar()
-      {
-      VBox& vbox = text[cursorLine];
-      int boxes = vbox.hlist.size();
-      int col = 0;
-      for (int i = 0; i < boxes; ++i) {
-            HBox* box = vbox.hlist[i];
-            int n = box->size();
-            if (i == (boxes-1) || (cursorColumn >= col && cursorColumn <= col+n)) {
-                  int rx = cursorColumn - col;
-                  if (rx == 0)
-                        break;
-                  if (box->size() == 1) {
-                        vbox.hlist.removeAt(i);
-                        delete box;
-                        }
-                  else
-                        box->removeChar(rx);
-                  break;
-                  }
-            col += n;
-            }
-      layout();
-      }
-
-//---------------------------------------------------------
-//   splitLine
-//---------------------------------------------------------
-
-void TextElement::splitLine()
-      {
-      VBox& vbox = text[cursorLine];
-      int boxes  = vbox.hlist.size();
-      int col = 0;
-      for (int i = 0; i < boxes; ++i) {
-            HBox* box = vbox.hlist[i];
-            int n = box->size();
-            if (i == (boxes-1) || (cursorColumn >= col && cursorColumn < col+n)) {
-                  VBox nVbox;
-                  // HBox nHbox;
-                  // nHbox.font = box.font;
-
-                  int rx = cursorColumn - col;
-                  if (rx == n) {
-                        HBoxText* nHbox = new HBoxText(QString(""), *box->font());
-                        nVbox.append(nHbox);
-                        }
-                  else if (rx == 0) {
-                        HBoxText* nHbox = new HBoxText(QString(""), *box->font());
-                        nVbox.append(nHbox);
-                        int k = i;
-                        for (; i < boxes; ++i) {
-                              nVbox.append(vbox.hlist[k]);
-                              vbox.hlist.removeAt(k);
-                              }
-                        }
-                  else {
-                        HBox* nHbox = box->split(rx);
-                        nVbox.append(nHbox);
-                        int k = ++i;
-                        for (; i < boxes; ++i) {
-                              nVbox.append(vbox.hlist[k]);
-                              vbox.hlist.removeAt(k);
-                              }
-                        }
-                  text.insert(cursorLine+1, nVbox);
-                  break;
-                  }
-            col += n;
-            }
-      layout();
-      }
-
-//---------------------------------------------------------
-//   concatLine
-//---------------------------------------------------------
-
-void TextElement::concatLine()
-      {
-      VBox& dbox = text[cursorLine];
-      VBox& sbox = text[cursorLine+1];
-      foreach(HBox* hb, sbox.hlist)
-            dbox.hlist.append(hb->clone());
-      text.removeAt(cursorLine+1);
-      layout();
-      }
-
-//---------------------------------------------------------
 //   startEdit
 //---------------------------------------------------------
 
 bool TextElement::startEdit(QMatrix&)
       {
-      editMode   = true;
-      cursorLine = text.size() - 1;
-
-      //
-      // set cursor to last column in last line
-      //      
-      int columns = 0;
-      VBox& vbox = text[cursorLine];
-      foreach(HBox* box, vbox.hlist)
-            columns += box->size();
-      cursorColumn  = columns;
-      setCursor();
-
-      bboxUpdate();
+      editMode = true;
       return true;
       }
 
@@ -516,8 +264,6 @@ bool TextElement::startEdit(QMatrix&)
 
 bool TextElement::edit(QKeyEvent* ev)
       {
-      int lines  = text.size();
-
       if (ev->key() == Qt::Key_F2) {
             if (palette == 0)
                   palette = new TextPalette(0);
@@ -526,143 +272,52 @@ bool TextElement::edit(QKeyEvent* ev)
             else {
                   palette->setTextElement(this);
                   palette->show();
-                  setCursor();
                   mscore->activateWindow();
                   }
             return false;
             }
       switch (ev->key()) {
             case Qt::Key_Return:
-                  splitLine();
-                  ++cursorLine;
-                  cursorColumn = 0;
+                  cursor->insertText(QString("\n"));
                   break;
 
             case Qt::Key_Backspace:
-                  if (cursorColumn == 0) {
-                        if (cursorLine == 0)
-                              break;
-                        --cursorLine;
-                        cursorColumn = columns();
-                        concatLine();
-                        break;
-                        }
-                  removeChar();
-                  --cursorColumn;
+                  cursor->deletePreviousChar();
                   break;
 
             case Qt::Key_Delete:
-                  if (cursorColumn == columns()) {
-                        if (cursorLine == (lines-1))
-                              break;
-                        concatLine();
-                        break;
-                        }
-                  ++cursorColumn;
-                  removeChar();
-                  --cursorColumn;
+                  //TODO
                   break;
 
             case Qt::Key_Left:
-                  if (cursorColumn == 0) {
-                        if (cursorLine == 0)
-                              break;
-                        --cursorLine;
-                        cursorColumn = columns();
-                        }
-                  else
-                        --cursorColumn;
+                  cursor->movePosition(QTextCursor::Left);
                   break;
 
             case Qt::Key_Right:
-                  if (cursorColumn == columns()) {
-                        if (cursorLine == (lines-1))
-                              break;
-                        ++cursorLine;
-                        cursorColumn = 0;
-                        }
-                  else
-                        ++cursorColumn;
+                  cursor->movePosition(QTextCursor::Right);
                   break;
 
             case Qt::Key_Up:
-                  if (--cursorLine < 0)
-                        cursorLine = 0;
-                  if (cursorColumn > columns())
-                        cursorColumn = columns();
+                  cursor->movePosition(QTextCursor::Up);
                   break;
 
             case Qt::Key_Down:
-                  if (++cursorLine >= lines)
-                        cursorLine = lines-1;
-                  if (cursorColumn > columns())
-                        cursorColumn = columns();
+                  cursor->movePosition(QTextCursor::Down);
                   break;
 
             case Qt::Key_Home:
-                  cursorColumn = 0;
+                  cursor->movePosition(QTextCursor::Start);
                   break;
 
             case Qt::Key_End:
-                  cursorColumn = columns();
+                  cursor->movePosition(QTextCursor::End);
                   break;
 
             default:
-                  if (ev->text()[0].isPrint()) {
-                        insertChar(ev->text());
-                        ++cursorColumn;
-                        }
+                  cursor->insertText(ev->text());
                   break;
             }
-      setCursor();
       return false;
-      }
-
-//---------------------------------------------------------
-//   addSymbol
-//---------------------------------------------------------
-
-void TextElement::addSymbol(int symbolIndex)
-      {
-      if (!editMode)
-            return;
-      Symbol* s = new Symbol(0);
-      s->setSym(symbolIndex);
-
-      VBox& vbox = text[cursorLine];
-      int boxes = vbox.hlist.size();
-      int col = 0;
-
-      HBoxElement* nb = new HBoxElement(s);
-
-      nb->setSelected(true);
-      for (int i = 0; i < boxes; ++i) {
-            HBox* box = vbox.hlist[i];
-            int n = box->size();
-            if (i == (boxes-1) || (cursorColumn >= col && cursorColumn < col+n)) {
-                  int rx = cursorColumn - col;
-                  if (rx == 0) {
-                        vbox.insert(i, nb);
-                        }
-                  else if (rx == n) {
-                        vbox.insert(i+1, nb);
-                        }
-                  else {
-                        HBox* hb = box->split(rx);
-                        vbox.insert(i+1, nb);
-                        vbox.insert(i+2, hb);
-                        }
-                  break;
-                  }
-            col += n;
-            }
-      if (boxes == 0) {
-            vbox.insert(0, nb);
-            }
-      ++cursorColumn;
-      layout();
-      setCursor();
-      mscore->activateWindow();
       }
 
 //---------------------------------------------------------
@@ -674,7 +329,6 @@ void TextElement::endEdit()
       if (palette)
             palette->hide();
       editMode = false;
-      bboxUpdate();
       }
 
 //---------------------------------------------------------
@@ -694,46 +348,44 @@ QFont TextElement::font() const
       }
 
 //---------------------------------------------------------
+//   TextElement::draw
+//---------------------------------------------------------
+
+void TextElement::draw1(Painter& p)
+      {
+      p.save();
+      p.setRenderHint(QPainter::Antialiasing, false);
+#if 1
+      QAbstractTextDocumentLayout::PaintContext c;
+      c.cursorPosition = editMode ? cursor->position() : -1;
+      
+      QAbstractTextDocumentLayout* layout = doc.documentLayout();
+
+      doc.documentLayout()->draw(&p, c);
+#endif
+      p.restore();
+      }
+
+//---------------------------------------------------------
 //   lineSpacing
 //---------------------------------------------------------
 
 double TextElement::lineSpacing() const
       {
-      QFontMetricsF fm(font());
+      QFontMetrics fm(doc.defaultFont());
       return fm.lineSpacing();
       }
 
 //---------------------------------------------------------
-//   bboxUpdate
+//   addSymbol
 //---------------------------------------------------------
 
-void TextElement::bboxUpdate()
+void TextElement::addSymbol(int n)
       {
-      QRectF b;
-      foreach (const VBox& vbox, text)
-            b |= vbox.bbox;
-      if (editMode)
-            b |= cursor;
-      setbbox(b);
-      }
-
-//---------------------------------------------------------
-//   TextElement::draw
-//---------------------------------------------------------
-
-void TextElement::draw1(Painter& p) const
-      {
-      foreach (const VBox& vbox, text) {
-            foreach (HBox* box, vbox.hlist) {
-                  p.save();
-                  box->draw(p);
-                  p.restore();
-                  }
-            }
-      if (editMode) {
-            p.setBrush(Qt::blue);
-            p.drawRect(cursor);
-            }
+printf("TextElement: addSymbol(%x)\n", n);
+      QTextCharFormat format;
+      format.setFont(symbols[n].font());
+      cursor->insertText(QString(symbols[n].code()), format);
       }
 
 //---------------------------------------------------------

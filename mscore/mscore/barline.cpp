@@ -42,7 +42,7 @@ BarLine::BarLine(Score* s)
 //   draw
 //---------------------------------------------------------
 
-void BarLine::draw1(Painter& p) const
+void BarLine::draw1(Painter& p)
       {
       qreal lw    = point(style->barWidth);
       qreal h     = height();

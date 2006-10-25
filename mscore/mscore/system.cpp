@@ -411,7 +411,7 @@ void System::setInstrumentName(int idx)
 //    f - System relative
 //---------------------------------------------------------
 
-void System::draw(Painter& p) const
+void System::draw(Painter& p)
       {
       p.translate(pos());
 

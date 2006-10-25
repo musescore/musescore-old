@@ -28,7 +28,6 @@
 #include "staff.h"
 #include "part.h"
 #include "segment.h"
-#include "text.h"
 #include "layout.h"
 #include "style.h"
 
@@ -98,14 +97,14 @@ PartListItem::PartListItem(const InstrumentTemplate* i, QTreeWidget* lv)
       part = 0;
       it   = i;
       op   = ITEM_ADD;
-      setText(0, it->name.text());
+      setText(0, it->name);
       }
 
 //---------------------------------------------------------
 //   InstrumentTemplate
 //---------------------------------------------------------
 
-InstrumentTemplate::InstrumentTemplate(const QString& grp, const Text& n, const Text& sn,
+InstrumentTemplate::InstrumentTemplate(const QString& grp, const QString& n, const QString& sn,
    int noSystems, const int* ci, int br) : group(grp), name(n), shortName(sn)
       {
       midiProgram = 0;
@@ -132,14 +131,14 @@ InstrumentTemplateListItem::InstrumentTemplateListItem(const InstrumentTemplate*
    : QTreeWidgetItem(item) {
       _instrumentTemplate = i;
       _group = _instrumentTemplate->group;
-      setText(0, i->name.text());
+      setText(0, i->name);
       }
 
 InstrumentTemplateListItem::InstrumentTemplateListItem(const InstrumentTemplate* i, QTreeWidget* parent)
    : QTreeWidgetItem(parent) {
       _instrumentTemplate = i;
       _group = _instrumentTemplate->group;
-      setText(0, i->name.text());
+      setText(0, i->name);
       }
 
 //---------------------------------------------------------
@@ -151,7 +150,7 @@ QString InstrumentTemplateListItem::text(int col) const
       switch (col) {
             case 0:
                   return _instrumentTemplate ?
-                     _instrumentTemplate->name.text() : _group;
+                     _instrumentTemplate->name : _group;
             default:
                   return QString("");
             }
@@ -498,7 +497,7 @@ void MuseScore::editInstrList()
                   part->setMinPitch(t->minPitch);
                   part->setMaxPitch(t->maxPitch);
                   part->setShortName(t->shortName);
-                  part->setTrackName(t->name.text());
+                  part->setTrackName(t->name);
                   part->setLongName(t->name);
 
                   pli->part = part;

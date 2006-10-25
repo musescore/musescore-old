@@ -18,6 +18,10 @@
 //  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //=============================================================================
 
+#cmakedefine USE_ALSA
+#cmakedefine USE_JACK
+#cmakedefine USE_FLUID
+
 #define INSTALL_NAME     "${Mscore_INSTALL_NAME}"
 #define INSTPREFIX       "${CMAKE_INSTALL_PREFIX}"
 #define VERSION          "${Mscore_VERSION_FULL}"

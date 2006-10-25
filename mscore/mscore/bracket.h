@@ -51,7 +51,7 @@ class Bracket : public Element {
       virtual void setHeight(qreal);
       virtual double width() const;
 
-      virtual void draw1(Painter&) const;
+      virtual void draw1(Painter&);
       virtual void write(Xml& xml) const;
       virtual void read(QDomNode);
       virtual void layout();

@@ -41,7 +41,7 @@ class Stem : public Element {
       Stem &operator=(const Stem&);
 
       virtual ElementType type() const { return STEM; }
-      virtual void draw1(Painter& p) const;
+      virtual void draw1(Painter& p);
       void setLen(const Spatium&);
       virtual void bboxUpdate();
       };
@@ -106,7 +106,7 @@ class Chord : public ChordRest {
 
       virtual ElementType type() const { return CHORD; }
 
-      virtual void draw1(Painter&) const;
+      virtual void draw1(Painter&);
       virtual void write(Xml& xml) const;
       virtual void read(QDomNode, int staff);
       virtual void setSelected(bool f);

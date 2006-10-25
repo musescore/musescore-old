@@ -1357,7 +1357,7 @@ void Measure::moveTicks(int diff)
 //   draw
 //---------------------------------------------------------
 
-void Measure::draw(Painter& p) const
+void Measure::draw(Painter& p)
       {
       p.translate(pos());
 

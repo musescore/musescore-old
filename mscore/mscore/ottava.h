@@ -36,7 +36,7 @@ class Ottava : public SLine {
             setSubtype(0);
             }
       virtual ElementType type() const { return OTTAVA; }
-      virtual void draw1(Painter&) const;
+      virtual void draw1(Painter&);
       virtual void layout();
       void setLen(qreal);
       virtual void setSubtype(int val);

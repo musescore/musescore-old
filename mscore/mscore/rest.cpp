@@ -48,7 +48,7 @@ Rest::Rest(Score* s, int tick, int len)
 //   Rest::draw
 //---------------------------------------------------------
 
-void Rest::draw1(Painter& p) const
+void Rest::draw1(Painter& p)
       {
       symbols[_sym].draw(p);
       for (ciAttribute l = attributes.begin(); l != attributes.end(); ++l)

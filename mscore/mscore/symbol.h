@@ -41,7 +41,7 @@ class Symbol : public Element {
       void setSym(int);
       int sym() const { return _sym;  }
 
-      virtual void draw1(Painter&) const;
+      virtual void draw1(Painter&);
       virtual void write(Xml& xml) const;
       virtual void read(QDomNode);
       virtual bool isMovable() const { return true; }

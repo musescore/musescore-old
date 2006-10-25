@@ -99,7 +99,7 @@ void SlurSegment::move(const QPointF& s)
 //   draw
 //---------------------------------------------------------
 
-void SlurSegment::draw1(Painter& p) const
+void SlurSegment::draw1(Painter& p)
       {
       if (path == 0)
             return;

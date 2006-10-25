@@ -35,7 +35,6 @@
 #include "clef.h"
 #include "note.h"
 #include "segment.h"
-#include "text.h"
 #include "xml.h"
 #include "beam.h"
 #include "staff.h"
@@ -844,10 +843,10 @@ bool ExportMusicXml::saver()
       PartList* il = score->parts();
       for (iPart i = il->begin(); i != il->end(); ++i, ++idx) {
             xml.stag("score-part id=\"P%d\"", idx);
-            xml.tag("part-name", (*i)->longName().text());
+            xml.tag("part-name", (*i)->longName());
 
             xml.stag("score-instrument id=\"P%d-I%d\"", idx, 3);
-            xml.tag("instrument-name", (*i)->longName().text());
+            xml.tag("instrument-name", (*i)->longName());
             xml.etag("score-instrument");
 
             xml.stag("midi-instrument id=\"P%d-I%d\"", idx, 3);

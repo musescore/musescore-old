@@ -85,7 +85,7 @@ void Trill::bboxUpdate()
 //   draw
 //---------------------------------------------------------
 
-void Trill::draw1(Painter& p) const
+void Trill::draw1(Painter& p)
       {
       for (ciLineSegment i = segments.begin(); i != segments.end(); ++i) {
             const LineSegment* s = &*i;

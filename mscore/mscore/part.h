@@ -22,7 +22,6 @@
 #define __PART_H__
 
 #include "plist.h"
-#include "text.h"
 
 class Instrument;
 class Xml;
@@ -59,8 +58,8 @@ struct Instrument {
 class Part {
       Score* cs;
       QString _trackName;           // used in tracklist
-      Text _longName;              // shown on first system
-      Text _shortName;             // shown on followup systems
+      QString _longName;              // shown on first system
+      QString _shortName;             // shown on followup systems
       Instrument _instrument;
       StaffList* _staves;
       QString _id;                  // used for MusicXml import
@@ -75,11 +74,11 @@ class Part {
       Staff* staff(int idx) const;
       void setId(const QString& s)        { _id = s; }
       QString id() const                  { return _id; }
-      Text shortName() const              { return _shortName; }
-      Text longName() const               { return _longName;  }
+      QString shortName() const           { return _shortName; }
+      QString longName() const            { return _longName;  }
       QString trackName() const           { return _trackName; }
-      void setLongName(const Text& s)     { _longName = s;  }
-      void setShortName(const Text& s)    { _shortName = s; }
+      void setLongName(const QString& s)  { _longName = s;  }
+      void setShortName(const QString& s) { _shortName = s; }
       void setTrackName(const QString& s) { _trackName = s; }
       void setStaves(int);
       void setMidiChannel(int val)        { _instrument.midiChannel = val;  }

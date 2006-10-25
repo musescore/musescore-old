@@ -24,7 +24,6 @@
 #include "painter.h"
 #include "spatium.h"
 #include "globals.h"
-#include "text.h"
 #include "sym.h"
 #include "symbol.h"
 

@@ -53,7 +53,7 @@ void Ottava::setSubtype(int val)
 //   draw
 //---------------------------------------------------------
 
-void Ottava::draw1(Painter& p) const
+void Ottava::draw1(Painter& p)
       {
       qreal ottavaLineWidth    = _spatium * .18;
       qreal ottavaTextDistance = _spatium * .5;

@@ -427,7 +427,7 @@ void Note::setType(DurationType t)
 //   draw
 //---------------------------------------------------------
 
-void Note::draw1(Painter& p) const
+void Note::draw1(Painter& p)
       {
       symbols[_head].draw(p);
 
@@ -663,7 +663,7 @@ ShadowNote::~ShadowNote()
 //   draw
 //---------------------------------------------------------
 
-void ShadowNote::draw(Painter& p) const
+void ShadowNote::draw(Painter& p)
       {
       if (!visible())
             return;

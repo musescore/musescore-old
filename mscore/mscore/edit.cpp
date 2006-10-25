@@ -899,7 +899,7 @@ void Score::deleteItem(Element* el)
                   break;
 
             case INSTRUMENT_NAME1:
-                  el->staff()->part()->setLongName(Text());
+                  el->staff()->part()->setLongName(QString());
                   setInstrumentNames();
                   layout();
                   break;
@@ -907,7 +907,7 @@ void Score::deleteItem(Element* el)
             case INSTRUMENT_NAME2:
                   {
                   Part* part = el->staff()->part();
-                  part->setShortName(Text());
+                  part->setShortName(QString());
                   setInstrumentNames();
                   layout();
                   }
