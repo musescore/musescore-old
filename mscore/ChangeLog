@@ -1,3 +1,6 @@
+29.10 (lv)
+      * MusicXML keysig regression testfile
+      * added KeySig->acceptDrop() and KeySig->drop, not yet completed
 22.10 (lv)
       * more MusicXML regression testfiles
       * fixed keypad-. with numlock on for US keyboard
