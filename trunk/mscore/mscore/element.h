@@ -383,6 +383,8 @@ class KeySig : public Compound {
       int idx() const { return val; }
       virtual void write(Xml& xml) const;
       virtual void read(QDomNode);
+      virtual bool acceptDrop(int, int) const;
+      virtual void drop(const QPointF&, int, int);
       };
 
 //---------------------------------------------------------

@@ -716,6 +716,37 @@ void KeySig::setIdx(int v, int offset)
       }
 
 //---------------------------------------------------------
+//   acceptDrop
+//---------------------------------------------------------
+
+bool KeySig::acceptDrop(int type, int) const
+      {
+      return type == KEYSIG;
+      }
+
+//---------------------------------------------------------
+//   drop
+//---------------------------------------------------------
+
+void KeySig::drop(const QPointF&, int type, int stype)
+      {
+      printf("drop keysig %d %d\n", type, stype);
+      return;
+#if 0
+      if (type == TIMESIG) {
+            int st = subtype();
+            if (st == stype)
+                  return;
+            setSubtype(stype);
+            int z, n;
+            zn(z, n);
+            score()->undoOp(UndoOp::ChangeSubtype, this, st);
+            score()->changeTimeSig(tick(), z, n);
+            }
+#endif
+      }
+
+//---------------------------------------------------------
 //   Cursor
 //---------------------------------------------------------
 
