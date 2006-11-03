@@ -230,7 +230,7 @@ Element* Score::addKeySig(KeySig* sig, const QPointF& pos)
             delete sig;
             return 0;
             }
-      (*keymap)[tick] = sig->idx();
+      (*keymap)[tick] = sig->subtype();
 
       if (tick != 0) {
             sig->setTick(tick);
