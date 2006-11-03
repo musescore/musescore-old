@@ -649,22 +649,22 @@ KeySig::KeySig(Score* s)
 KeySig::KeySig(Score* s, int i, int yoffset)
   : Compound(s)
       {
-      setIdx(i, yoffset);
+      setSubtype(i);
+      set(yoffset);
       }
 
 //---------------------------------------------------------
-//   setIdx
+//   set
 //---------------------------------------------------------
 
-void KeySig::setIdx(int v, int offset)
+void KeySig::set(int offset)
       {
       clear();
-      val = v;
       off = offset % 10;
 
       Accidental* p;
       double yoff = -(off / 2.0);
-      switch(v) {
+      switch(subtype()) {
             case 7:
                   p = new Accidental(score(), 1, false);
                   addElement(p, 6.0, yoff + 2);

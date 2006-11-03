@@ -1,3 +1,5 @@
+03.11 (lv)
+      * replaced KeySig->idx() by subtype() and setIdx() by setSubtype()
 29.10 (lv)
       * MusicXML keysig regression testfile
       * added KeySig->acceptDrop() and KeySig->drop, not yet completed

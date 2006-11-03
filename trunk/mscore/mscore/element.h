@@ -372,15 +372,13 @@ class Accidental : public Compound {
 //---------------------------------------------------------
 
 class KeySig : public Compound {
-      int val;
       int off;
+      void set(int);
 
    public:
       KeySig(Score*);
       KeySig(Score*, int, int);
       virtual ElementType type() const { return KEYSIG; }
-      void setIdx(int v, int yoffset);
-      int idx() const { return val; }
       virtual void write(Xml& xml) const;
       virtual void read(QDomNode);
       virtual bool acceptDrop(int, int) const;
