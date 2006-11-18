@@ -23,6 +23,7 @@
 #include "utils.h"
 #include "sym.h"
 #include "symbol.h"
+#include "score.h"
 
 //---------------------------------------------------------
 //   Clef
@@ -177,11 +178,16 @@ bool Clef::acceptDrop(int type, int) const
 //   drop
 //---------------------------------------------------------
 
-void Clef::drop(const QPointF&, int t, int st)
+void Clef::drop(const QPointF&, int type, int stype)
       {
-      if (t != CLEF)
+      if (type != CLEF)
             return;
-      printf("drop clef %d %d\n", t, st);
+      printf("drop clef %d %d staffidx %d\n", type, stype, staffIdx());
+      int st = subtype();
+      if (st == stype)
+            return;
+      score()->undoOp(UndoOp::ChangeSubtype, this, st);
+      score()->changeClef(tick(), staffIdx(), stype);
       }
 
 //---------------------------------------------------------
