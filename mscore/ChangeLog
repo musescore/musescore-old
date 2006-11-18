@@ -1,3 +1,5 @@
+18.11 (lv)
+      * Clef and KeySig drag and drop
 03.11 (lv)
       * replaced KeySig->idx() by subtype() and setIdx() by setSubtype()
 29.10 (lv)

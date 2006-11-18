@@ -417,6 +417,8 @@ class Score : public QObject {
       void setSaved(bool v) { _saved = v; }
       bool playlistDirty();
       void changeTimeSig(int tick, int z, int n);
+      void changeKeySig(int tick, int st);
+      void changeClef(int tick, int si, int idx);
       };
 
 extern void setPadState(Element*);

@@ -731,19 +731,15 @@ bool KeySig::acceptDrop(int type, int) const
 void KeySig::drop(const QPointF&, int type, int stype)
       {
       printf("drop keysig %d %d\n", type, stype);
-      return;
-#if 0
-      if (type == TIMESIG) {
+      if (type == KEYSIG) {
             int st = subtype();
             if (st == stype)
                   return;
             setSubtype(stype);
-            int z, n;
-            zn(z, n);
+            set(off);
             score()->undoOp(UndoOp::ChangeSubtype, this, st);
-            score()->changeTimeSig(tick(), z, n);
+            score()->changeKeySig(tick(), stype);
             }
-#endif
       }
 
 //---------------------------------------------------------
