@@ -161,6 +161,7 @@ void Score::doRedo()
 
 void Score::processUndoOp(UndoOp* i, bool undo)
       {
+      printf("Score::processUndoOp(i->type=%s, undo=%d)\n", i->name(), undo);
       switch(i->type) {
             case UndoOp::RemoveObject:
                   if (undo)
@@ -281,7 +282,14 @@ void Score::processUndoOp(UndoOp* i, bool undo)
             case UndoOp::ChangeSubtype:
                   {
                   int st = i->obj->subtype();
+                  int t = i->obj->type();
+                  printf("obj=%p t=%d curst=%d newst=%d\n",
+                         i->obj, t, st, i->idx);
                   i->obj->setSubtype(i->idx);
+                  if (t == CLEF)
+                        changeClef(i->obj->tick(), i->obj->staffIdx(), i->idx);
+                  else if (t == KEYSIG)
+                        changeKeySig(i->obj->tick(), i->idx);
                   i->idx = st;
                   }
                   break;
@@ -316,6 +324,21 @@ void Score::checkUndoOp()
             fprintf(stderr, "undoOp: undo not started\n");
             abort();
             }
+      }
+
+//---------------------------------------------------------
+//   undoOp
+//---------------------------------------------------------
+
+void Score::undoOp(UndoOp::UndoType type, Element* object, int idx)
+      {
+      printf("Score::undoOp(type=%d, el=%p, idx=%d)\n", type, object, idx);
+      checkUndoOp();
+      UndoOp i;
+      i.type = type;
+      i.obj  = object;
+      i.idx  = idx;
+      undoList.back()->push_back(i);
       }
 
 //---------------------------------------------------------

@@ -182,10 +182,11 @@ void Clef::drop(const QPointF&, int type, int stype)
       {
       if (type != CLEF)
             return;
-      printf("drop clef %d %d staffidx %d\n", type, stype, staffIdx());
       int st = subtype();
+      printf("drop clef %p t=%d ost=%d nst=%d staffidx=%d\n", this, type, st, stype, staffIdx());
       if (st == stype)
             return;
+      setSubtype(stype);
       score()->undoOp(UndoOp::ChangeSubtype, this, st);
       score()->changeClef(tick(), staffIdx(), stype);
       }

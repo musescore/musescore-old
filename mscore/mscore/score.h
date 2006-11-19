@@ -278,6 +278,7 @@ class Score : public QObject {
       void undoOp(UndoOp::UndoType type, Segment* seg, int staff);
       void undoOp(UndoOp::UndoType type, Element* object);
       void undoOp(UndoOp::UndoType type, Element*, const QColor&);
+      void undoOp(UndoOp::UndoType type, Element*, int idx);
 
       void keyPressEvent(QKeyEvent*);
       void setNote(int tick, Staff* staff, int voice, int pitch, int len);
