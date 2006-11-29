@@ -1237,7 +1237,7 @@ void Measure::remove(Element* el)
       {
       int staff = _score->staff(el->staff());
 
-// printf("measure %p: remove %s %p, staff %d\n", this, el->name(), el, staff);
+ // printf("measure %p: remove el %s %p, staff %d\n", this, el->name(), el, staff);
 
       switch(el->type()) {
             case LAYOUT_BREAK:
@@ -1578,6 +1578,13 @@ MeasureWidth Measure::layoutX(double stretch)
       //-----------------------------------------------------------------------
       //    remove empty segments
       //-----------------------------------------------------------------------
+/**/
+
+// LVIFIX: removing empty segments prevents redo of actions on elements stored in segments
+// (e.g. CLEF, CHORD, REST, TIMESIG).
+// Cause: redo restores the pointer from the segment to the element, but not does not
+// undo segment removal from the measure
+
 again:
       for (Segment* s = first(); s; s = s->next()) {
             bool empty = true;
@@ -1592,7 +1599,7 @@ again:
                   goto again;
                   }
             }
-
+/**/
       //-----------------------------------------------------------------------
       //    fill array of Spaces for all segments and staves
       //    spaces[0]      - left margin
@@ -2072,6 +2079,9 @@ bool Measure::acceptDrop(int type, int) const
             case PEDAL:
             case LAYOUT_BREAK:
             case BAR_LINE:
+            case CLEF:
+            case KEYSIG:
+            case TIMESIG:
                   return true;
             default:
                   return false;
@@ -2102,6 +2112,36 @@ void Measure::drop(const QPointF& pos, int type, int subtype)
                         staff->setBracketSpan(1);
                         score()->layout();
                         }
+                  break;
+            case CLEF:
+                  // LVIFIX: handle clefSmallBit
+                  {
+                  Clef* clef = new Clef(score(), subtype);
+                  clef->setStaff(staff);
+                  clef->setTick(tick());
+                  clef->setParent(this);
+                  score()->cmdAdd(clef);
+                  }
+                  break;
+            case KEYSIG:
+                  {
+                  int clef = score()->staff(idx)->clef()->clef(tick());
+                  int clefOffset = clefTable[clef].yOffset;
+                  KeySig* keysig = new KeySig(score(), subtype, clefOffset);
+                  keysig->setStaff(staff);
+                  keysig->setTick(tick());
+                  keysig->setParent(this);
+                  score()->cmdAdd(keysig);
+                  }
+                  break;
+            case TIMESIG:
+                  {
+                  TimeSig* timesig = new TimeSig(score(), subtype);
+                  timesig->setStaff(staff);
+                  timesig->setTick(tick());
+                  timesig->setParent(this);
+                  score()->cmdAdd(timesig);
+                  }
                   break;
             case VOLTA:
                   {
