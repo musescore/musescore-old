@@ -254,13 +254,18 @@ Element* Score::addKeySig(KeySig* sig, const QPointF& pos)
 
 //---------------------------------------------------------
 //   changeKeySig
+//
+// change key signature at tick into subtype st for all staves
+// in response to gui command (drop keysig on measure or keysig)
+//
+// FIXME: redo does not work
 //---------------------------------------------------------
 
 void Score::changeKeySig(int tick, int st)
       {
       int ot = keymap->key(tick);
-      printf("changeKeySig tick %d st %d ot %d\n",
-         tick, st, ot);
+//      printf("changeKeySig tick %d st %d ot %d\n",
+//         tick, st, ot);
       if (ot == st)
             return;                 // no change
       (*keymap)[tick] = st;
@@ -271,101 +276,48 @@ void Score::changeKeySig(int tick, int st)
             return;
             }
 
-      // update all notes accidentals
-      for (; m; m = m->next()) {
-            // lvifix: fill-in correct staff
-            m->layoutNoteHeads(0);
-            }
-
-#if 0 //TODOx
-
       //---------------------------------------------
-      // remove unnessesary timesig symbols
+      // remove unnessesary keysig symbols
       //---------------------------------------------
 
-      for (Measure* m = _layout->first(); m; m = m->next()) {
-again:
-            for (Segment* segment = m->first(); segment; segment = segment->next()) {
-                  if (segment->segmentType() == Segment::SegTimeSig) {
-                        int etick = segment->tick();
-                        if (etick >= tick) {
-                              iSigEvent ic = sigmap->find(etick);
-                              if (ic == sigmap->end() || (ic->first == tick && ic->second.z != z && ic->second.n == n)) {
-printf("  remove timesig\n");
-                                    // el->remove(e);
-                                    m->remove(segment);
-                                    goto again;
-                                    }
-                              else if (etick > tick)
-                                    break;
-                              }
-                        }
-                  }
-            }
-
-      //---------------------------------------------
-      // modify measures
-      //---------------------------------------------
-
-      int mtick = 0;
       int staves = nstaves();
-      for (Measure* m = _layout->first(); m; m = m->next()) {
-            int tickdiff = mtick - m->tick();
-            if (tickdiff) {
-                  m->moveTicks(tickdiff);
-                  }
-            int mtickLen = sigmap->ticksMeasure(mtick);
-            int lendiff  = mtickLen - m->tickLen();
-            m->setTickLen(mtickLen);
-
-            mtick += mtickLen;
-            if (lendiff == 0)
-                  continue;
-
+      for (; m; m = m->next()) {
+again:
             for (int staffIdx = 0; staffIdx < staves; ++staffIdx) {
-                  Staff* staffp = staff(staffIdx);
-                  int rests  = 0;
-                  Rest* rest = 0;
                   for (Segment* segment = m->first(); segment; segment = segment->next()) {
                         for (int rstaff = 0; rstaff < VOICES; ++rstaff) {
-                              Element* e = segment->element(staffIdx * VOICES + rstaff);
-                              if (e && e->type() == REST) {
-                                    ++rests;
-                                    rest = (Rest*)e;
+                              int track = staffIdx * VOICES + rstaff;
+                              Element* e = segment->element(track);
+
+                              if (e == 0 || e->type() != KEYSIG)
+                                    continue;
+                              int etick = segment->tick();
+                              if (etick == tick) {
+                                    undoOp(UndoOp::RemoveObject, e);
+                                    segment->setElement(track, 0);
+                                    goto again;
                                     }
-                              }
-                        }
-                  if (rests == 1) {
-                        rest->setTickLen(rest->tickLen() + lendiff);
-                        }
-                  else {
-                        if (lendiff < 0) {
-                              printf("shrinking of measure not supported yet\n");
-                              continue;
-                              }
-                        else {
-                              // add rest to measure
-                              int rtick = mtick - lendiff;
-                              rest = new Rest(this, rtick, lendiff);
-                              rest->setStaff(staffp);
-                              m->add(rest);
                               }
                         }
                   }
             }
 
+      //---------------------------------------------
+      // insert new keysig symbols
+      //---------------------------------------------
+
       if (tick != 0) {
-            Measure* measure = tick2measure(tick);
-            for (int staffIdx = 0; staffIdx < staves; ++staffIdx) {
-                  TimeSig* nsig = new TimeSig(this);
-                  nsig->setSig(z, n);
-                  nsig->setStaff(staff(staffIdx));
-                  nsig->setTick(tick);
-                  measure->add(nsig);
+            m = tick2measure(tick);
+            for (int staffIdx = 0; staffIdx < nstaves(); ++staffIdx) {
+                  int clef = staff(staffIdx)->clef()->clef(tick);
+                  int clefOffset = clefTable[clef].yOffset;
+                  KeySig* keysig = new KeySig(this, st, clefOffset);
+                  keysig->setStaff(staff(staffIdx));
+                  keysig->setTick(tick);
+                  keysig->setParent(m);
+                  cmdAdd(keysig);
                   }
             }
-#endif
-      layout();
       }
 
 //---------------------------------------------------------
@@ -495,98 +447,6 @@ void Score::changeClef(int tick, int si, int idx)
       for (; m; m = m->next()) {
             m->layoutNoteHeads(si);
             }
-
-#if 0 //TODOx
-
-//      printf("tick %d staff %d  z %d n %d,  idx %d\n",
-//         tick, staff, z, n, sig->idx());
-
-      //---------------------------------------------
-      // remove unnessesary timesig symbols
-      //---------------------------------------------
-
-      for (Measure* m = _layout->first(); m; m = m->next()) {
-again:
-            for (Segment* segment = m->first(); segment; segment = segment->next()) {
-                  if (segment->segmentType() == Segment::SegTimeSig) {
-                        int etick = segment->tick();
-                        if (etick >= tick) {
-                              iSigEvent ic = sigmap->find(etick);
-                              if (ic == sigmap->end() || (ic->first == tick && ic->second.z != z && ic->second.n == n)) {
-printf("  remove timesig\n");
-                                    // el->remove(e);
-                                    m->remove(segment);
-                                    goto again;
-                                    }
-                              else if (etick > tick)
-                                    break;
-                              }
-                        }
-                  }
-            }
-
-      //---------------------------------------------
-      // modify measures
-      //---------------------------------------------
-
-      int mtick = 0;
-      int staves = nstaves();
-      for (Measure* m = _layout->first(); m; m = m->next()) {
-            int tickdiff = mtick - m->tick();
-            if (tickdiff) {
-                  m->moveTicks(tickdiff);
-                  }
-            int mtickLen = sigmap->ticksMeasure(mtick);
-            int lendiff  = mtickLen - m->tickLen();
-            m->setTickLen(mtickLen);
-
-            mtick += mtickLen;
-            if (lendiff == 0)
-                  continue;
-
-            for (int staffIdx = 0; staffIdx < staves; ++staffIdx) {
-                  Staff* staffp = staff(staffIdx);
-                  int rests  = 0;
-                  Rest* rest = 0;
-                  for (Segment* segment = m->first(); segment; segment = segment->next()) {
-                        for (int rstaff = 0; rstaff < VOICES; ++rstaff) {
-                              Element* e = segment->element(staffIdx * VOICES + rstaff);
-                              if (e && e->type() == REST) {
-                                    ++rests;
-                                    rest = (Rest*)e;
-                                    }
-                              }
-                        }
-                  if (rests == 1) {
-                        rest->setTickLen(rest->tickLen() + lendiff);
-                        }
-                  else {
-                        if (lendiff < 0) {
-                              printf("shrinking of measure not supported yet\n");
-                              continue;
-                              }
-                        else {
-                              // add rest to measure
-                              int rtick = mtick - lendiff;
-                              rest = new Rest(this, rtick, lendiff);
-                              rest->setStaff(staffp);
-                              m->add(rest);
-                              }
-                        }
-                  }
-            }
-
-      if (tick != 0) {
-            Measure* measure = tick2measure(tick);
-            for (int staffIdx = 0; staffIdx < staves; ++staffIdx) {
-                  TimeSig* nsig = new TimeSig(this);
-                  nsig->setSig(z, n);
-                  nsig->setStaff(staff(staffIdx));
-                  nsig->setTick(tick);
-                  measure->add(nsig);
-                  }
-            }
-#endif
       layout();
       }
 
@@ -635,25 +495,36 @@ Element* Score::addTimeSig(TimeSig* sig, const QPointF& pos)
 
       int z, n;
       sig->zn(z, n);
-      changeTimeSig(tick, z, n);
+      changeTimeSig(tick, sig->subtype());
       delete sig;
       return 0;
       }
 
 //---------------------------------------------------------
 //   changeTimeSig
+//
+// change time signature at tick into subtype st for all staves
+// in response to gui command (drop timesig on measure or timesig)
+//
+// note: use subtupe instead of z/n to enable use of "c" and "c|" symbols
+//
+// FIXME: undo/redo does not work
 //---------------------------------------------------------
 
-void Score::changeTimeSig(int tick, int z, int n)
+void Score::changeTimeSig(int tick, int st)
       {
       int oz, on;
       sigmap->timesig(tick, oz, on);
+      TimeSig* sig = new TimeSig(this, st);
+      int z, n;
+      sig->zn(z, n);
+      delete sig;
       if (oz == z && on == n)
             return;                 // no change
       sigmap->add(tick, z, n);
 
-//      printf("tick %d staff %d  z %d n %d,  idx %d\n",
-//         tick, staff, z, n, sig->idx());
+//      printf("Score::changeTimeSig tick %d z %d n %d\n",
+//         tick, z, n);
 
       //---------------------------------------------
       // remove unnessesary timesig symbols
@@ -666,7 +537,9 @@ again:
                         int etick = segment->tick();
                         if (etick >= tick) {
                               iSigEvent ic = sigmap->find(etick);
-                              if (ic == sigmap->end() || (ic->first == tick && ic->second.z != z && ic->second.n == n)) {
+                              if (etick == tick
+                                  || ic == sigmap->end()
+                                  || (ic->first == tick && ic->second.z != z && ic->second.n == n)) {
 printf("  remove timesig\n");
                                     // el->remove(e);
                                     m->remove(segment);
@@ -688,6 +561,7 @@ printf("  remove timesig\n");
       for (Measure* m = _layout->first(); m; m = m->next()) {
             int tickdiff = mtick - m->tick();
             if (tickdiff) {
+                  // printf("move %d ticks\n", tickdiff);
                   m->moveTicks(tickdiff);
                   }
             int mtickLen = sigmap->ticksMeasure(mtick);
@@ -711,7 +585,9 @@ printf("  remove timesig\n");
                                     }
                               }
                         }
+                  // printf("rests = %d\n", rests);
                   if (rests == 1) {
+                        // printf("rest set ticklen %d\n", rest->tickLen() + lendiff);
                         rest->setTickLen(rest->tickLen() + lendiff);
                         }
                   else {
@@ -724,6 +600,7 @@ printf("  remove timesig\n");
                               int rtick = mtick - lendiff;
                               rest = new Rest(this, rtick, lendiff);
                               rest->setStaff(staffp);
+                              // printf("add rest\n");
                               m->add(rest);
                               }
                         }
@@ -733,8 +610,7 @@ printf("  remove timesig\n");
       if (tick != 0) {
             Measure* measure = tick2measure(tick);
             for (int staffIdx = 0; staffIdx < staves; ++staffIdx) {
-                  TimeSig* nsig = new TimeSig(this);
-                  nsig->setSig(z, n);
+                  TimeSig* nsig = new TimeSig(this, st);
                   nsig->setStaff(staff(staffIdx));
                   nsig->setTick(tick);
                   measure->add(nsig);
