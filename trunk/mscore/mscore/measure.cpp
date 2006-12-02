@@ -277,6 +277,7 @@ int Measure::tickLen() const
 
 void Measure::remove(Segment* el)
       {
+// printf("measure %p: remove seg %p\n", this, el);
       --_size;
       if (el == _first) {
             _first = _first->next();
@@ -696,6 +697,7 @@ void Measure::read(QDomNode node, int idx)
 
 void Measure::layoutNoteHeads(int staff)
       {
+// printf("Measure::layoutNoteHeads(this=%p staff=%d)\n", this, staff);
       char tversatz[75];
       memset(tversatz, 0, sizeof(tversatz));
       for (Segment* segment = first(); segment; segment = segment->next()) {
@@ -712,6 +714,7 @@ void Measure::layoutNoteHeads(int staff)
                   int ll         = -1000;    // make sure top head is not mirrored
                   int move1      = nl->front()->move();
                   Tuplet* tuplet = chord->tuplet();
+                  // printf("tick=%d key=%d\n", tick, _score->keymap->key(tick));
 
                   for (riNote in = nl->rbegin(); in != nl->rend(); ++in) {
                         Note* note  = in->second;
@@ -760,6 +763,8 @@ void Measure::layoutNoteHeads(int staff)
                         note->setMirror(mirror);
                         note->setAccidental(userAcc == -1 ? prefix : userAcc);
                         ll = line;
+//                        printf("tick=%d key=%d pitch=%d line=%d ua=%d pref=%d\n",
+//                                tick, key, pitch, line, userAcc, prefix);
                         }
                   }
             }
@@ -1088,7 +1093,7 @@ void Measure::add(Element* el)
       int t = el->tick();
       ElementType type = el->type();
 
-// printf("measure %p: add %s %p, staff %d\n", this, el->name(), el, staffIdx);
+ // printf("measure %p: add %s %p, staff %d\n", this, el->name(), el, staffIdx);
 
       switch(type) {
             case LAYOUT_BREAK:
@@ -1237,7 +1242,7 @@ void Measure::remove(Element* el)
       {
       int staff = _score->staff(el->staff());
 
- // printf("measure %p: remove el %s %p, staff %d\n", this, el->name(), el, staff);
+// printf("measure %p: remove el %s %p, staff %d\n", this, el->name(), el, staff);
 
       switch(el->type()) {
             case LAYOUT_BREAK:
@@ -1361,6 +1366,7 @@ void Measure::draw(Painter& p)
       {
       p.translate(pos());
 
+      // printf("measure %p ::draw\n", this);
       for (Segment* segment = first(); segment; segment = segment->next())
             segment->draw(p);
       for (ciBeam i = _beamList.begin(); i != _beamList.end(); ++i)
@@ -1595,6 +1601,7 @@ again:
                         }
                   }
             if (empty) {
+//                  printf("Measure::layoutX remove empty segment %p\n", s);
                   remove(s);
                   goto again;
                   }
@@ -2067,6 +2074,9 @@ void Measure::insertStaff1(Staff* staff, int staffIdx)
 
 //---------------------------------------------------------
 //   acceptDrop
+//
+// determine if an element can be dropped here
+// FIXME: KEYSIG and TIMESIG should only be accepted at the leftmost side
 //---------------------------------------------------------
 
 bool Measure::acceptDrop(int type, int) const
@@ -2090,6 +2100,8 @@ bool Measure::acceptDrop(int type, int) const
 
 //---------------------------------------------------------
 //   drop
+//
+// handle a dropped element
 //---------------------------------------------------------
 
 void Measure::drop(const QPointF& pos, int type, int subtype)
@@ -2125,22 +2137,12 @@ void Measure::drop(const QPointF& pos, int type, int subtype)
                   break;
             case KEYSIG:
                   {
-                  int clef = score()->staff(idx)->clef()->clef(tick());
-                  int clefOffset = clefTable[clef].yOffset;
-                  KeySig* keysig = new KeySig(score(), subtype, clefOffset);
-                  keysig->setStaff(staff);
-                  keysig->setTick(tick());
-                  keysig->setParent(this);
-                  score()->cmdAdd(keysig);
+                  score()->changeKeySig(tick(), subtype);
                   }
                   break;
             case TIMESIG:
                   {
-                  TimeSig* timesig = new TimeSig(score(), subtype);
-                  timesig->setStaff(staff);
-                  timesig->setTick(tick());
-                  timesig->setParent(this);
-                  score()->cmdAdd(timesig);
+                  score()->changeTimeSig(tick(), subtype);
                   }
                   break;
             case VOLTA:

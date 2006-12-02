@@ -135,11 +135,9 @@ void TimeSig::drop(const QPointF&, int type, int stype)
             int st = subtype();
             if (st == stype)
                   return;
-            setSubtype(stype);
-            int z, n;
-            zn(z, n);
-            score()->undoOp(UndoOp::ChangeSubtype, this, st);
-            score()->changeTimeSig(tick(), z, n);
+            // change timesig applies to all staves, can't simply set subtype
+            // for this one only
+            score()->changeTimeSig(tick(), stype);
             }
       }
 

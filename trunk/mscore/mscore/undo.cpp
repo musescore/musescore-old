@@ -32,6 +32,8 @@
 #include "staff.h"
 #include "layout.h"
 #include "chord.h"
+#include "sig.h"
+#include "key.h"
 
 extern Measure* tick2measure(int tick);
 
@@ -161,7 +163,7 @@ void Score::doRedo()
 
 void Score::processUndoOp(UndoOp* i, bool undo)
       {
-      printf("Score::processUndoOp(i->type=%s, undo=%d)\n", i->name(), undo);
+//      printf("Score::processUndoOp(i->type=%s, undo=%d)\n", i->name(), undo);
       switch(i->type) {
             case UndoOp::RemoveObject:
                   if (undo)
@@ -283,8 +285,8 @@ void Score::processUndoOp(UndoOp* i, bool undo)
                   {
                   int st = i->obj->subtype();
                   int t = i->obj->type();
-                  printf("obj=%p t=%d curst=%d newst=%d\n",
-                         i->obj, t, st, i->idx);
+//                  printf("obj=%p t=%d curst=%d newst=%d\n",
+//                         i->obj, t, st, i->idx);
                   i->obj->setSubtype(i->idx);
                   if (t == CLEF)
                         changeClef(i->obj->tick(), i->obj->staffIdx(), i->idx);
@@ -332,7 +334,7 @@ void Score::checkUndoOp()
 
 void Score::undoOp(UndoOp::UndoType type, Element* object, int idx)
       {
-      printf("Score::undoOp(type=%d, el=%p, idx=%d)\n", type, object, idx);
+//      printf("Score::undoOp(type=%d, el=%p, idx=%d)\n", type, object, idx);
       checkUndoOp();
       UndoOp i;
       i.type = type;
@@ -472,6 +474,18 @@ void Score::addObject(Element* element)
                         break;
                   }
             }
+      else if (element->type() == KEYSIG) {
+            // FIXME: update keymap here (and remove that from Score::changeKeySig)
+            // but only after fixing redo for elements contained in segments
+
+            // fixup all accidentals
+            for (Measure* m = _layout->first(); m; m = m->next()) {
+                  for (int staffIdx = 0; staffIdx < nstaves(); ++staffIdx) {
+                              m->layoutNoteHeads(staffIdx);
+                        }
+                  }
+            layout();
+            }
 /*      else if (element->type() == SLUR_SEGMENT) {
             SlurSegment* ss = (SlurSegment*)element;
             SlurTie* slur = ss->slurTie();
@@ -524,6 +538,21 @@ void Score::removeObject(Element* element)
                   if (endFound)
                         break;
                   }
+            }
+      else if (element->type() == TIMESIG) {
+            // remove entry from siglist
+            sigmap->del(element->tick());
+            }
+      else if (element->type() == KEYSIG) {
+            // remove entry from keymap
+            keymap->erase(element->tick());
+            // fixup all accidentals
+            for (Measure* m = _layout->first(); m; m = m->next()) {
+                  for (int staffIdx = 0; staffIdx < nstaves(); ++staffIdx) {
+                              m->layoutNoteHeads(staffIdx);
+                        }
+                  }
+            layout();
             }
 /*      else if (element->type() == SLUR_SEGMENT) {
             SlurSegment* ss = (SlurSegment*)element;

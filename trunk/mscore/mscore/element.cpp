@@ -735,9 +735,8 @@ void KeySig::drop(const QPointF&, int type, int stype)
             int st = subtype();
             if (st == stype)
                   return;
-            setSubtype(stype);
-            set(off);
-            score()->undoOp(UndoOp::ChangeSubtype, this, st);
+            // change keysig applies to all staves, can't simply set subtype
+            // for this one only
             score()->changeKeySig(tick(), stype);
             }
       }
