@@ -37,6 +37,7 @@ SET(Mscore_VERSION_FULL  "0.4.0")
 SET(Mscore_INSTALL_NAME  "mscore-0.4")
 
 include ( ${PROJECT_SOURCE_DIR}/cmake/UsePkgConfig1.cmake )
+include ( ${PROJECT_SOURCE_DIR}/cmake/TargetDoc.cmake)
 
 option ( ENABLE_FLUID  "enable fluidsynth softsynth plugins"    ON)
 

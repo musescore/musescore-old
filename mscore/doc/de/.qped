@@ -6,15 +6,15 @@
       <KontextList>
         <Kontext>
           <path>/home/ws/mscore/mscore/trunk/mscore/doc/de/man.tex</path>
-          <column>6</column>
-          <line>981</line>
+          <column>40</column>
+          <line>0</line>
           <xoff>0</xoff>
-          <yoff>9</yoff>
+          <yoff>0</yoff>
           </Kontext>
         <cur>1</cur>
         </KontextList>
       </Editor1>
-    <search>index</search>
+    <search>eps</search>
     <colorify>0</colorify>
     <brackets>1</brackets>
     </Status>
