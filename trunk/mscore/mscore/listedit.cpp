@@ -103,7 +103,7 @@ void ElementItem::init()
 PageListEditor::PageListEditor(Score* s)
    : QWidget()
       {
-      setWindowTitle(QString("MuseScore: List Edit"));
+      setWindowTitle(tr("MuseScore: List Edit"));
       cs = s;
       QHBoxLayout* hbox = new QHBoxLayout;
       setLayout(hbox);
