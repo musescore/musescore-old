@@ -18,6 +18,11 @@
 //  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //=============================================================================
 
+/**
+ \file
+ Implementation of Element, ElementList, SStaff
+*/
+
 #include "element.h"
 #include "style.h"
 #include "xml.h"
@@ -106,8 +111,11 @@ int Element::staffIdx() const
 
 //---------------------------------------------------------
 //   drag
-//    return update Rect relative to canvas
 //---------------------------------------------------------
+
+/**
+ Return update Rect relative to canvas.
+*/
 
 QRectF Element::drag(const QPointF& s)
       {
@@ -130,9 +138,13 @@ QPointF Element::aref() const
 
 //---------------------------------------------------------
 //   contains
-//    return true if p is inside of bounding box of object
-//    p is relative to the coordinate system of parent()
 //---------------------------------------------------------
+
+/**
+ Return true if \a p is inside of bounding box of object.
+
+ Note: \a p is relative to the coordinate system of parent().
+*/
 
 bool Element::contains(const QPointF& p) const
       {
@@ -140,10 +152,14 @@ bool Element::contains(const QPointF& p) const
       }
 
 //---------------------------------------------------------
-//   intersects
-//    return true if r intersects bounding box of object
-//    r is relative to the coordinate system of parent()
+//  intersects
 //---------------------------------------------------------
+
+/**
+ Return true if \a rr intersects bounding box of object.
+
+ Note: \a rr is relative to the coordinate system of parent().
+*/
 
 bool Element::intersects(const QRectF& rr) const
       {
@@ -261,8 +277,11 @@ void ElementList::draw(Painter& p)
 
 //---------------------------------------------------------
 //   remove
-//    return true on success
 //---------------------------------------------------------
+
+/**
+ Remove \a el from the list. Return true on success.
+*/
 
 bool ElementList::remove(Element* el)
       {

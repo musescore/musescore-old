@@ -21,6 +21,11 @@
 #ifndef __ELEMENT_H__
 #define __ELEMENT_H__
 
+/**
+ \file
+ Definition of Element, ElementList, SStaff
+*/
+
 #include "plist.h"
 #include "spatium.h"
 #include "mtime.h"
@@ -56,8 +61,13 @@ extern const char* elementNames[];  // for debugging
 
 //---------------------------------------------------------
 //   Element
-//    virtual base class of score layout element
 //---------------------------------------------------------
+
+/**
+ The Element class is the virtual base class of all score layout elements.
+
+ More details: TBD
+*/
 
 class Element {
       Element* _next;
@@ -67,12 +77,12 @@ class Element {
 
       bool _selected;
       bool _dropTarget;
-      bool _generated;  // automatically generated Element
-      bool _visible;    // visibility attribute
+      bool _generated;  ///< automatically generated Element
+      bool _visible;    ///< visibility attribute
 
       int _subtype;
 
-      int _voice;       // 0 - VOICES
+      int _voice;       ///< 0 - VOICES
       Staff* _staff;
       MTime _time;
       QColor _color;
@@ -81,16 +91,16 @@ class Element {
 
    protected:
       Score* _score;
-      QPointF _pos;     // point: reference position, relative to _parent
-                        // usually set from layout()
-      QPointF _userOff; // offset from normal layout position
-                        // user dragged object this amount
-                        // in Spatium ("space") units!
-      int _mxmlOff;     // MusicXML offset in ticks
-                        // note: interacts with userXoffset
+      QPointF _pos;     ///< Reference position, relative to _parent.
+                        ///< Usually set from layout().
+      QPointF _userOff; ///< Offset from normal layout position:
+                        ///< user dragged object this amount.
+                        ///< In Spatium ("space") units!
+      int _mxmlOff;     ///< MusicXML offset in ticks.
+                        ///< Note: interacts with userXoffset.
 
-      mutable QRectF _bbox;     // bounding box relative to _pos + _userOff
-      mutable MTime _duration;  // lazy evaluation
+      mutable QRectF _bbox;     ///< Bounding box relative to _pos + _userOff
+      mutable MTime _duration;  ///< Note: lazy evaluation
 
    public:
       Element(Score*);
@@ -128,7 +138,7 @@ class Element {
       virtual void move(double xd, double yd) { _pos += QPointF(xd, yd); }
       virtual void move(const QPointF& s)     { _pos += s;               }
 
-      QPointF aref() const;     // canvas reference pos
+      QPointF aref() const;     ///< Canvas reference pos
       const QPointF& userOff() const          { return _userOff;  }
       void setUserOff(const QPointF& o)       { _userOff = o;     }
       void setUserXoffset(qreal v)            { _userOff.setX(v); }
@@ -136,8 +146,8 @@ class Element {
       int mxmlOff() const                     { return _mxmlOff;  }
       void setMxmlOff(int o)                  { _mxmlOff = o;     }
 
-      virtual bool contains(const QPointF& p) const;  // p relative to parent()
-      bool intersects(const QRectF& r) const;       // r relative to parent()
+      virtual bool contains(const QPointF& p) const;
+      bool intersects(const QRectF& r) const;
 
       QRectF abbox() const                    { return bbox().translated(aref()); }
       QPointF apos() const                    { return aref();          }
@@ -239,8 +249,11 @@ typedef ElementList::reverse_iterator riElement;
 
 //---------------------------------------------------------
 //   SStaff
-//    graphic representation of a staff
 //---------------------------------------------------------
+
+/**
+ The SStaff class is the graphic representation of a staff.
+*/
 
 class SStaff : public Element {
       Spatium lineWidth;
@@ -368,8 +381,11 @@ class Accidental : public Compound {
 
 //---------------------------------------------------------
 //   KeySig
-//    Key Signature
 //---------------------------------------------------------
+
+/**
+ The KeySig class represents a Key Signature on a staff
+*/
 
 class KeySig : public Compound {
       int off;

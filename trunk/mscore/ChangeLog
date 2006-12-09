@@ -1,3 +1,5 @@
+9.12 (lv)
+      * added (some) doxygen tags to element and undo .cpp and .h
 8.12 (ws)
       * added doxygen target "doxy" to CMake scripts
 02.12 (lv)
