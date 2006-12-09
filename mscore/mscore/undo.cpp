@@ -18,6 +18,11 @@
 //  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //=============================================================================
 
+/**
+ \file
+ Implementation of undo functions
+*/
+
 #include "undo.h"
 #include "element.h"
 #include "note.h"
@@ -59,8 +64,11 @@ static const char* undoName[] = {
 
 //---------------------------------------------------------
 //   name
-//    for debugging only
 //---------------------------------------------------------
+
+/**
+ Return the UndoOp's name. For debugging only.
+*/
 
 const char* UndoOp::name() const
       {
@@ -158,8 +166,11 @@ void Score::doRedo()
 
 //---------------------------------------------------------
 //   processUndoOp
-//    process undo/redo operations
 //---------------------------------------------------------
+
+/**
+ Process undo/redo operations
+*/
 
 void Score::processUndoOp(UndoOp* i, bool undo)
       {

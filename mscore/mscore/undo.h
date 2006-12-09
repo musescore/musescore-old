@@ -21,6 +21,11 @@
 #ifndef __UNDO_H__
 #define __UNDO_H__
 
+/**
+ \file
+ Definition of undo-releated classes and structs.
+*/
+
 #include "select.h"
 #include "measure.h"
 #include "input.h"
