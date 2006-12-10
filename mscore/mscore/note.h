@@ -21,6 +21,11 @@
 #ifndef __NOTE_H__
 #define __NOTE_H__
 
+/**
+ \file
+ Definition of classes Note and ShadowNote.
+*/
+
 #include "globals.h"
 #include "plist.h"
 #include "element.h"
@@ -34,31 +39,30 @@ class Sym;
 
 //---------------------------------------------------------
 //   Note
-//    changePitch()         computes _line and _accidental
-//                          resets _userAccidental
-//    changeAccidental()    computes _pitch
-//
-//    setPitch()/setAccidental() do what the name says
 //---------------------------------------------------------
 
+/**
+ Graphic representation of a note.
+*/
+
 class Note : public Element {
-      int _pitch;             // note pitch as midi value
-      int _userAccidental;    // -1 - automatic accidental
-      int _line;              // y-Position; 0 - top line
-      int _move;              // -1, 0, +1
+      int _pitch;             ///< Note pitch as midi value (0 - 127).
+      int _userAccidental;    ///< -1 - automatic accidental.
+      int _line;              ///< y-Position; 0 - top line.
+      int _move;              ///< -1, 0, +1.
       Accidental* _accidental;
 
-      int _head;              // note head
+      int _head;              ///< Note head.
       DurationType _durationType;
       bool _grace;
-      bool _mirror;           // note is mirrored at stem
+      bool _mirror;           ///< True if note is mirrored at stem.
       int _dots;
       Fingering* _fingering;
 
       Tie* _tieFor;
       Tie* _tieBack;
 
-      int _lineOffset;  // used during mouse dragging
+      int _lineOffset;  ///< Used during mouse dragging.
 
       virtual bool isMovable() const { return true; }
       virtual QRectF drag(const QPointF& s);
@@ -121,7 +125,7 @@ class Note : public Element {
       virtual void draw1(Painter&);
       virtual void read(QDomNode);
       virtual void write(Xml& xml) const;
-      QPointF stemPos(bool upFlag) const;    // point to connect stem
+      QPointF stemPos(bool upFlag) const;    ///< Point to connect stem.
       Element* findSelectableElement(QPointF p) const;
       virtual bool acceptDrop(int, int) const;
       virtual void drop(const QPointF&, int, int);
@@ -129,11 +133,15 @@ class Note : public Element {
 
 //---------------------------------------------------------
 //   ShadowNote
-//    shows the note insert position in note entry mode
 //---------------------------------------------------------
 
+/**
+ Graphic representation of a shadow note,
+ which shows the note insert position in note entry mode.
+*/
+
 class ShadowNote : public Element {
-      Sym* _sym;         // note head
+      Sym* _sym;         ///< Note head.
       int _line;
 
    public:

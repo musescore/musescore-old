@@ -41,8 +41,11 @@ class Part;
 
 //---------------------------------------------------------
 //   UndoOp
-//    spicifies a single low level undo operation
 //---------------------------------------------------------
+
+/**
+ Specifies a single low level undo operation.
+*/
 
 struct UndoOp {
       enum UndoType {
@@ -79,8 +82,11 @@ struct UndoOp {
 
 //---------------------------------------------------------
 //   Undo
-//    single unser visible undo
 //---------------------------------------------------------
+
+/**
+ A single user visible undo.
+*/
 
 struct Undo : public std::list<UndoOp> {
       InputState inputState;
@@ -96,6 +102,11 @@ typedef Undo::reverse_iterator riUndoOp;
 //---------------------------------------------------------
 //   UndoList
 //---------------------------------------------------------
+
+/**
+ An undo list: a list user visible undo actions, each of which is
+ a list of low level undo operations.
+*/
 
 class UndoList : public pstl::plist<Undo*> {
    public:

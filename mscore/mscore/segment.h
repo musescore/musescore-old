@@ -18,6 +18,11 @@
 //  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //=============================================================================
 
+/**
+ \file
+ Definition of class Segment.
+*/
+
 #ifndef __SEGMENT_H__
 #define __SEGMENT_H__
 
@@ -38,6 +43,17 @@ typedef LyricsList::const_iterator ciLyrics;
 //   Segment
 //---------------------------------------------------------
 
+/**
+ The Segment class stores all elements inside a staff.
+
+ A Segment is typed, i.e. all Elements in a Segment are of the same type.
+ All Elements also start at the same tick. The Segment can store one Element for
+ each voice in each staff in the score. It also stores the lyrics for each staff.
+
+ Segments are children of Measures and store Clefs, KeySigs, TimeSigs,
+ BarLines and ChordRests.
+*/
+
 class Segment : public Element {
    public:
       enum SegmentType {
@@ -47,8 +63,8 @@ class Segment : public Element {
 
    private:
       SegmentType _type;
-      std::vector<Element*> _elist;      // size = staves * VOICES;
-      std::vector<LyricsList> _lyrics;   // size = staves
+      std::vector<Element*> _elist;      ///< Element storage, size = staves * VOICES.
+      std::vector<LyricsList> _lyrics;   ///< Lyrics storage, size = staves.
 
       void init();
 

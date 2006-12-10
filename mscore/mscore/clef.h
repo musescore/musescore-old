@@ -21,6 +21,11 @@
 #ifndef __CLEF_H__
 #define __CLEF_H__
 
+/**
+ \file
+ Definition of classes Clef and ClefList.
+*/
+
 #include "element.h"
 
 class Xml;
@@ -30,6 +35,10 @@ static const int clefSmallBit = 0x1000;
 //---------------------------------------------------------
 //   Clef
 //---------------------------------------------------------
+
+/**
+ Graphic representation of a clef.
+*/
 
 class Clef : public Compound {
 
@@ -51,12 +60,16 @@ class Clef : public Compound {
 //   ClefInfo
 //---------------------------------------------------------
 
+/**
+ Info about a clef.
+*/
+
 struct ClefInfo {
-      char* sign;             // name for musicXml
-      int line;               // line for musicXml
-      int octChng;            // octave change for musicXml
+      char* sign;             ///< Name for musicXml.
+      int line;               ///< Line for musicXml.
+      int octChng;            ///< Octave change for musicXml.
       int yOffset;
-      int pitchOffset;        // pitch offset for line 0
+      int pitchOffset;        ///< Pitch offset for line 0.
       const char* name;
       ClefInfo(char* s, int l, int oc, int yo, int po, const char* n)
          : sign(s), line(l), octChng(oc), yOffset(yo), pitchOffset(po), name(n)
@@ -92,12 +105,17 @@ const ClefInfo clefTable[] = {
 
 //---------------------------------------------------------
 //   ClefList
-//    this list is instantiated for every Instrument
-//    to keep track of clef changes
 //---------------------------------------------------------
 
 typedef std::map<const int, int>::iterator iClefEvent;
 typedef std::map<const int, int>::const_iterator ciClefEvent;
+
+/**
+ List of Clefs during time.
+
+ This list is instantiated for every Instrument
+ to keep track of clef changes.
+*/
 
 class ClefList : public std::map<const int, int> {
    public:

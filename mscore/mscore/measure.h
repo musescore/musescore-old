@@ -21,6 +21,11 @@
 #ifndef __MEASURE_H__
 #define __MEASURE_H__
 
+/**
+ \file
+ Definition of classes MStaff, Measure and MeasureList.
+*/
+
 #include "plist.h"
 #include "element.h"
 
@@ -48,8 +53,11 @@ typedef QList<Tuplet*> TupletList;
 
 //---------------------------------------------------------
 //   MeasureWidth
-//    return value for layoutX()
 //---------------------------------------------------------
+
+/**
+ Return value for layoutX().
+*/
 
 struct MeasureWidth {
       double stretchable;
@@ -64,8 +72,11 @@ struct MeasureWidth {
 
 //---------------------------------------------------------
 //   MStaff
-//    per staff values of measure
 //---------------------------------------------------------
+
+/**
+ Per staff values of measure.
+*/
 
 struct MStaff {
       BarLine* endBarLine;
@@ -83,13 +94,16 @@ typedef MStaffList::const_iterator ciMStaff;
 
 //---------------------------------------------------------
 //   Measure
-//    one measure in a system
 //---------------------------------------------------------
 
+/**
+ One measure in a system.
+*/
+
 class Measure : public Element {
-      Segment* _first;        // segment list
-      Segment* _last;
-      int _size;              // number of segments
+      Segment* _first;        ///< First item of segment list
+      Segment* _last;         ///< Last item of segment list
+      int _size;              ///< Number of items on segment list
 
       bool _startRepeat;
       int _endRepeat;
@@ -98,17 +112,18 @@ class Measure : public Element {
       MStaffList  staves;
       BeamList    _beamList;
       TupletList  _tuplets;
-      ElementList _pel;       // page relative elements (text)
-      ElementList _sel;       // measure(/tick) relative elements
+      ElementList _pel;       ///< Page relative elements (i.e. text)
+      ElementList _sel;       ///< Measure(/tick) relative elements: with defined start time
+                              ///< but outside the staff
 
-      int    _no;             // measure number, counting from zero
-      int    _noOffset;       // offset to measure number
-      TextElement* _noText;   // measure number text object
+      int    _no;             ///< Measure number, counting from zero
+      int    _noOffset;       ///< Offset to measure number
+      TextElement* _noText;   ///< Measure number text object
 
       double _userStretch;
-      bool _lineBreak;        // forced line break
-      bool _pageBreak;        // forced page break;
-      bool _irregular;        // irregular measure, do not count
+      bool _lineBreak;        ///< Forced line break
+      bool _pageBreak;        ///< Forced page break
+      bool _irregular;        ///< Irregular measure, do not count
 
       void push_back(Segment* e);
       void push_front(Segment* e);
@@ -216,8 +231,11 @@ class Measure : public Element {
 
 //---------------------------------------------------------
 //   MeasureList
-//    list of measures
 //---------------------------------------------------------
+
+/**
+ List of measures.
+*/
 
 class MeasureList : public pstl::plist<Measure*> {
    public:

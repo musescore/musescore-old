@@ -18,6 +18,11 @@
 //  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //=============================================================================
 
+/**
+ \file
+ Implementation of classes Clef (partial) and ClefList (complete).
+*/
+
 #include "clef.h"
 #include "xml.h"
 #include "utils.h"

@@ -21,6 +21,11 @@
 #ifndef __CHORD_H__
 #define __CHORD_H__
 
+/**
+ \file
+ Definition of classes Chord, HelpLine, NoteList and Stem.
+*/
+
 #include "globals.h"
 #include "chordrest.h"
 
@@ -31,6 +36,10 @@ class Hook;
 //   Stem
 //    Notenhals
 //---------------------------------------------------------
+
+/**
+ Graphic representation of a note stem.
+*/
 
 class Stem : public Element {
       Spatium _len;
@@ -50,6 +59,12 @@ class Stem : public Element {
 //   NoteList
 //---------------------------------------------------------
 
+/**
+ List of notes.
+
+ Used by Chord to store its notes.
+*/
+
 class NoteList : public std::multimap <const int, Note*> {
    public:
       NoteList::iterator add(Note* n);
@@ -67,6 +82,10 @@ typedef NoteList::const_reverse_iterator criNote;
 //   HelpLine
 //---------------------------------------------------------
 
+/**
+ Graphic representation of a helpline.
+*/
+
 class HelpLine : public Line {
    public:
       HelpLine(Score*);
@@ -80,8 +99,13 @@ typedef pstl::plist<HelpLine*>::const_iterator ciHelpLine;
 
 //---------------------------------------------------------
 //   Chord
-//    single notes are handled as degenerated chords
 //---------------------------------------------------------
+
+/**
+ Graphic representation of a chord.
+
+ Single notes are handled as degenerated chords.
+*/
 
 class Chord : public ChordRest {
       NoteList notes;

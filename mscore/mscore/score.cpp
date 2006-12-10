@@ -18,6 +18,11 @@
 //  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //=============================================================================
 
+/**
+ \file
+ Implementation of classes ElemList (complete) and Score (partial).
+*/
+
 #include "alsa.h"
 #include "score.h"
 #include "key.h"
@@ -48,7 +53,7 @@
 #include "tuplet.h"
 
 InputState inputState;
-InputState* cis;              //  = &inputState;
+InputState* cis;              ///<  = &inputState;
 
 QPoint scorePos(0,0);
 QSize  scoreSize(950, 500);
@@ -475,10 +480,14 @@ void Score::removeMeasure(int tick)
 
 //---------------------------------------------------------
 //   fixTicks
-//    Recalculate all ticks and measure numbers.
-//    This is needed after inserting or removing a
-//    measure.
 //---------------------------------------------------------
+
+/**
+ Recalculate all ticks and measure numbers.
+
+ This is needed after inserting or removing a
+ measure.
+*/
 
 void Score::fixTicks()
       {
@@ -512,9 +521,13 @@ void Score::fixTicks()
 
 //---------------------------------------------------------
 //   pos2measure
-//    p - canvas relative position
-//    if *rst != 0, then staff is fixed
 //---------------------------------------------------------
+
+/**
+ Return measure for canvas relative position \a p.
+
+ If *rst != 0, then staff is fixed.
+*/
 
 Measure* Score::pos2measure(const QPointF& p, int* tick, Staff** rst, int* pitch,
    Segment** seg, QPointF* offset) const
@@ -641,6 +654,10 @@ Measure* Score::pos2measure(const QPointF& p, int* tick, Staff** rst, int* pitch
 //   pos2measure2
 //    p - canvas relative position
 //---------------------------------------------------------
+
+/**
+ Return measure for canvas relative position \a p.
+*/
 
 Measure* Score::pos2measure2(const QPointF& p, int* tick, Staff** rst, int* line,
    Segment** seg) const
@@ -937,8 +954,11 @@ void Score::startEdit(Element* element)
 
 //---------------------------------------------------------
 //   edit
-//    return true if end edit
 //---------------------------------------------------------
+
+/**
+ Return true if end edit.
+*/
 
 bool Score::edit(QKeyEvent* ev)
       {
@@ -990,8 +1010,11 @@ void Score::endEdit()
 
 //---------------------------------------------------------
 //   paste
-//    paste element el at position pos
 //---------------------------------------------------------
+
+/**
+ Paste element \a el at position \a pos.
+*/
 
 void Score::paste(const Element* /*e*/, const QPointF& /*pos*/)
       {
@@ -1171,8 +1194,11 @@ void Score::dragEdit(QMatrix& matrix, QPointF* startMove, const QPointF& fdelta)
 
 //---------------------------------------------------------
 //   setNoteEntry
-//    switch note entry mode
 //---------------------------------------------------------
+
+/**
+ Switch note entry mode
+*/
 
 ChordRest* Score::setNoteEntry(bool val, bool step)
       {
@@ -1292,8 +1318,11 @@ Note* Score::searchTieNote(Note* note, Segment* segment, int track)
 
 //---------------------------------------------------------
 //   connectTies
-//    rebuild tie connections
 //---------------------------------------------------------
+
+/**
+ Rebuild tie connections.
+*/
 
 void Score::connectTies()
       {
