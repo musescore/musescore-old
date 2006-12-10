@@ -23,7 +23,7 @@
 
 /**
  \file
- Definition of Element, ElementList, SStaff
+ Definition of classes Element, ElementList, SStaff.
 */
 
 #include "plist.h"
@@ -221,7 +221,18 @@ class Element {
       void setColor(const QColor& c)  { _color = c;    }
       virtual void bboxUpdate()       {}
       virtual QByteArray mimeData() const;
+/**
+ Return true if this element accepts a drop of given element type and subtype.
+
+ Reimplemented by elements that accept drops. Used to change cursor shape while
+ dragging to indicate drop targets.
+*/
       virtual bool acceptDrop(int, int) const { return false; }
+/**
+ Handle a dropped element at position of given element type and subtype.
+
+ Reimplemented by elements that accept drops.
+*/
       virtual void drop(const QPointF&, int, int) {}
       };
 

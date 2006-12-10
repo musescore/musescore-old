@@ -21,6 +21,11 @@
 #ifndef __SCORE_H__
 #define __SCORE_H__
 
+/**
+ \file
+ Definition of ElemList and Score classes.
+*/
+
 #include "system.h"
 #include "undo.h"
 
@@ -61,8 +66,8 @@ extern QPoint scorePos;
 extern QSize scoreSize;
 extern bool debugMode;
 extern bool layoutDebug;
-extern bool noSeq;            // dont use sequencer; cmd line option
-extern bool noMidi;           // dont use midi; cmd line option
+extern bool noSeq;            ///< Dont use sequencer; cmd line option.
+extern bool noMidi;           ///< Dont use midi; cmd line option.
 extern bool showRubberBand;
 
 class PartList;
@@ -121,7 +126,7 @@ class Score : public QObject {
       std::list<Viewer*> viewer;
 
       ScoreView scoreView;
-      ScoreLayout* _layout;      // main layout
+      ScoreLayout* _layout;      ///< Main layout.
 
       bool _showInvisible;
 
@@ -140,10 +145,10 @@ class Score : public QObject {
       bool undoActive;
 
       bool _playlistDirty;
-      bool _dirty;      // score data was modified
-      bool _saved;      // true if project was already saved; only on first
-                        // save a backup file will be created, subsequent
-                        // saves will not overwrite the backup file
+      bool _dirty;      ///< Score data was modified.
+      bool _saved;      ///< True if project was already saved; only on first
+                        ///< save a backup file will be created, subsequent
+                        ///< saves will not overwrite the backup file.
 
       ChordRest* nextChordRest(ChordRest*);
       ChordRest* prevChordRest(ChordRest*);
@@ -165,8 +170,8 @@ class Score : public QObject {
       Note* downAltCtrl(Note*) const;
       Element* moveUp(Note*);
       Element* moveDown(Note*);
-	void convertTrack(MidiTrack*, int);
-	void preprocessTrack(MidiTrack*);
+      void convertTrack(MidiTrack*, int);
+      void preprocessTrack(MidiTrack*);
       void checkUndoOp();
 
    public:
@@ -178,7 +183,7 @@ class Score : public QObject {
       QString movementTitle;
       QString rights;
 
-      int _pageOffset;              // offset for page numbers
+      int _pageOffset;              ///< Offset for page numbers.
 
       SigList*   sigmap;
       KeyList*   keymap;
@@ -193,7 +198,7 @@ class Score : public QObject {
       Element* origEditObject;
       Element* editObject;
 
-      System* dragSystem;     // valid if DRAG_STAFF
+      System* dragSystem;     ///< Valid if DRAG_STAFF.
       int dragStaff;
 
    public slots:

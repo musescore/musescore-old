@@ -18,6 +18,11 @@
 //  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //=============================================================================
 
+/**
+ \file
+ Implementation of classes Note and ShadowNote.
+*/
+
 #include "score.h"
 #include "key.h"
 #include "note.h"
@@ -41,9 +46,6 @@
 
 //---------------------------------------------------------
 //   Note
-//    pitch - midi pitch 0 - 127
-//    len   - midi ticks (1/division) quarternote
-//    stem/flag
 //---------------------------------------------------------
 
 Note::Note(Score* s)
@@ -100,15 +102,18 @@ Note::~Note()
 //   headWidth
 //---------------------------------------------------------
 
-double Note::headWidth() const      
-      { 
-      return symbols[_head].width(); 
+double Note::headWidth() const
+      {
+      return symbols[_head].width();
       }
 
 //---------------------------------------------------------
 //   totalTicks
-//    give total tick len of tied notes
 //---------------------------------------------------------
+
+/**
+ Return total tick len of tied notes
+*/
 
 int Note::totalTicks() const
       {
@@ -128,6 +133,11 @@ int Note::totalTicks() const
 //   changePitch
 //---------------------------------------------------------
 
+/**
+ Computes _line and _accidental,
+ resets _userAccidental.
+*/
+
 void Note::changePitch(int n)
       {
       setPitch(n);
@@ -137,9 +147,12 @@ void Note::changePitch(int n)
 
 //---------------------------------------------------------
 //   changeAccidental
-//    sets a "user selected" accidental
-//    this recomputes _pitch
 //---------------------------------------------------------
+
+/**
+ Sets a "user selected" accidental.
+ This recomputes _pitch.
+*/
 
 void Note::changeAccidental(int pre)
       {
@@ -326,9 +339,6 @@ QPointF Note::stemPos(bool upFlag) const
 
 //---------------------------------------------------------
 //   setAccidental
-//    called from
-//       Measure::layoutNoteHeads()
-//       Note::changeAccidental()
 //---------------------------------------------------------
 
 void Note::setAccidental(int pre)
@@ -352,8 +362,11 @@ void Note::setAccidental(int pre)
 
 //---------------------------------------------------------
 //   setHead
-//    set note head + dots depending on tick len
 //---------------------------------------------------------
+
+/**
+ Set note head and dots depending on \a ticks.
+*/
 
 void Note::setHead(int ticks)
       {
@@ -591,8 +604,13 @@ void Note::read(QDomNode node)
 
 //---------------------------------------------------------
 //   findSelectableElement
-//    p is Chord relative
 //---------------------------------------------------------
+
+/**
+ Find selectable element nearest to \a p.
+
+ Note: \a p is Chord relative.
+*/
 
 Element* Note::findSelectableElement(QPointF p) const
       {

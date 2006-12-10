@@ -18,6 +18,11 @@
 //  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //=============================================================================
 
+/**
+ \file
+ Handling of several GUI commands.
+*/
+
 #include "score.h"
 #include "utils.h"
 #include "key.h"
@@ -47,6 +52,10 @@
 //   start
 //---------------------------------------------------------
 
+/**
+ Clear the area to be redrawn.
+*/
+
 void Score::start()
       {
       refresh.setRect(0.0,0.0,0.0,0.0);
@@ -57,8 +66,14 @@ void Score::start()
 //   startCmd
 //---------------------------------------------------------
 
+/**
+ Start a GUI command by clearing the redraw area
+ and starting a user-visble undo.
+*/
+
 void Score::startCmd()
       {
+      printf("startCmd()\n");
       start();
       startUndo();
       }
@@ -99,6 +114,9 @@ void Score::update(const QRectF& r)
 //   end
 //---------------------------------------------------------
 
+/**
+ Update the redraw area.
+*/
 void Score::end()
       {
       if (updateAll) {
@@ -115,8 +133,14 @@ void Score::end()
 //   endCmd
 //---------------------------------------------------------
 
+/**
+ End a GUI command by (if \a undo) ending a user-visble undo
+ and (always) updating the redraw area.
+*/
+
 void Score::endCmd(bool undo)
       {
+      printf("endCmd()\n");
       if (undo)
             endUndo();
       end();
@@ -205,8 +229,11 @@ void Score::cmdAddIntervall(int val)
 
 //---------------------------------------------------------
 //   setNote
-//    set note (pitch, len) at position tick/staff/voice
 //---------------------------------------------------------
+
+/**
+ Set note (\a pitch, \a len) at position \a tick / \a staff / \a voice.
+*/
 
 void Score::setNote(int tick, Staff* staff, int voice, int pitch, int len)
       {
@@ -321,8 +348,11 @@ void Score::setNote(int tick, Staff* staff, int voice, int pitch, int len)
 
 //---------------------------------------------------------
 //   setRest
-//    set rest(len) at position tick/staff
 //---------------------------------------------------------
+
+/**
+ Set rest(\a len) at position \a tick / \a staff / \a voice.
+*/
 
 void Score::setRest(int tick, Staff* st, int voice, int len)
       {
@@ -458,11 +488,15 @@ void Score::cmdAddPoet()
 
 //---------------------------------------------------------
 //   upDown
-//    increment/decrement pitch of note
 //---------------------------------------------------------
+
+/**
+ Increment/decrement pitch of note by one or by an octave.
+*/
 
 void Score::cmdUpDown(bool up, bool octave)
       {
+printf("cmdUpDown(up=%d, octave=%d)\n", up, octave);
       ElementList el;
 
       for (iElement i = sel->elements()->begin(); i != sel->elements()->end(); ++i) {
@@ -504,18 +538,25 @@ void Score::cmdUpDown(bool up, bool octave)
             i.idx   = oNote->pitch();
             undoList.back()->push_back(i);
 
+printf("cmdUpDown calling changePitch()\n");
             oNote->changePitch(newPitch);
             }
 
       padState.pitch = newPitch;
+printf("cmdUpDown calling layout()\n");
       layout();
+printf("cmdUpDown end\n");
       }
 
 //---------------------------------------------------------
 //   cmdAppendMeasure
-//    - keyboard callback
-//    - called from pulldown menu
 //---------------------------------------------------------
+
+/**
+ Append one measure.
+
+ Keyboard callback, called from pulldown menu.
+*/
 
 void Score::cmdAppendMeasure()
       {
@@ -527,6 +568,12 @@ void Score::cmdAppendMeasure()
 //    - keyboard callback
 //    - called from pulldown menu
 //---------------------------------------------------------
+
+/**
+ Append \a n measures.
+
+ Keyboard callback, called from pulldown menu.
+*/
 
 void Score::cmdAppendMeasures(int n)
       {
@@ -565,10 +612,13 @@ void Score::cmdAppendMeasures(int n)
 
 //---------------------------------------------------------
 //   addAttribute
-//    add attribute to all selected notes/rests
-//
-//    called from padToggle() to add note prefix/accent
 //---------------------------------------------------------
+
+/**
+ Add attribute \a attr to all selected notes/rests.
+
+ Called from padToggle() to add note prefix/accent.
+*/
 
 void Score::addAttribute(int attr)
       {
@@ -588,8 +638,11 @@ void Score::addAttribute(int attr)
 
 //---------------------------------------------------------
 //   addAccidental
-//    add accidental to all selected notes
 //---------------------------------------------------------
+
+/**
+ Add accidental of subtype \a idx to all selected notes.
+*/
 
 void Score::addAccidental(int idx)
       {
@@ -609,6 +662,10 @@ void Score::addAccidental(int idx)
 //---------------------------------------------------------
 //   addAccidental
 //---------------------------------------------------------
+
+/**
+ Add accidental of subtype \a idx to note \a oNote.
+*/
 
 void Score::addAccidental(Note* oNote, int accidental)
       {
@@ -657,8 +714,13 @@ void Score::toggleInvisible(Element* obj)
 
 //---------------------------------------------------------
 //   resetUserOffsets
-//    called from pulldown menu
 //---------------------------------------------------------
+
+/**
+ Reset user offset for all selected notes.
+
+ Called from pulldown menu.
+*/
 
 void Score::resetUserOffsets()
       {

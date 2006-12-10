@@ -18,6 +18,11 @@
 //  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //=============================================================================
 
+/**
+ \file
+ Implementation of classes Chord, HelpLine, NoteList and Stem.
+*/
+
 #include "chord.h"
 #include "note.h"
 #include "xml.h"
@@ -226,8 +231,11 @@ void drawPosMark(Painter& painter, const QPointF& p)
 
 //---------------------------------------------------------
 //   draw
-//    draw chord and calculate bounding region
 //---------------------------------------------------------
+
+/**
+ Draw chord and calculate bounding region.
+*/
 
 void Chord::draw1(Painter& p)
       {
@@ -269,6 +277,10 @@ void Chord::bboxUpdate()
 //    layout chord stem and hook
 //    (Notenhals & Fäen)
 //---------------------------------------------------------
+
+/**
+ Layout chord stem and hook.
+*/
 
 void Chord::layoutStem()
       {
@@ -657,8 +669,13 @@ Note* Chord::selectedNote() const
 
 //---------------------------------------------------------
 //   findSelectableElement
-//    p is Measure relative
 //---------------------------------------------------------
+
+/**
+ Find selectable element nearest to \a p.
+
+ Note: \a p is Measure relative.
+*/
 
 Element* Chord::findSelectableElement(QPointF p) const
       {

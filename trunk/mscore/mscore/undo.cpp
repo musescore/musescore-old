@@ -20,7 +20,14 @@
 
 /**
  \file
- Implementation of undo functions
+ Implementation of undo functions.
+
+ The undo system requires calling startUndo() when starting a GUI command
+ and calling endUndo() when ending the command. All changes to a score
+ in response to a GUI command must be undoable/redoable by executing
+ a sequence of low-level undo operations. This sequence is built by the code
+ handling the command, by calling one or more undoOp()'s
+ between startUndo() and endUndo().
 */
 
 #include "undo.h"
@@ -89,6 +96,12 @@ Undo::Undo(const InputState& is, const Selection& s)
 //    startUndo
 //---------------------------------------------------------
 
+/**
+ Start collecting low-level undo operations for a user-visible undo action.
+
+ Called at the start of a GUI command.
+*/
+
 void Score::startUndo()
       {
       if (undoActive) {
@@ -102,6 +115,12 @@ void Score::startUndo()
 //---------------------------------------------------------
 //   endUndo
 //---------------------------------------------------------
+
+/**
+ Stop collecting low-level undo operations for a user-visible undo action.
+
+ Called at the end of a GUI command.
+*/
 
 void Score::endUndo()
       {
@@ -130,6 +149,10 @@ void Score::endUndo()
 //   doUndo
 //---------------------------------------------------------
 
+/**
+ Undo a user-visible undo action, containing one or more UndoOp's.
+*/
+
 void Score::doUndo()
       {
       Selection oSel(*sel);
@@ -148,6 +171,10 @@ void Score::doUndo()
 //---------------------------------------------------------
 //   doRedo
 //---------------------------------------------------------
+
+/**
+ Redo a user-visible undo action, containing one or more UndoOp's.
+*/
 
 void Score::doRedo()
       {
@@ -169,7 +196,7 @@ void Score::doRedo()
 //---------------------------------------------------------
 
 /**
- Process undo/redo operations
+ Process a single low-level undo/redo operation.
 */
 
 void Score::processUndoOp(UndoOp* i, bool undo)
@@ -313,6 +340,10 @@ void Score::processUndoOp(UndoOp* i, bool undo)
 //   endUndoRedo
 //---------------------------------------------------------
 
+/**
+ Common handling for ending undo or redo
+*/
+
 void Score::endUndoRedo(Undo* undo)
       {
       undoAction->setEnabled(!undoList.empty());
@@ -330,6 +361,10 @@ void Score::endUndoRedo(Undo* undo)
 //---------------------------------------------------------
 //   checkUndoOp
 //---------------------------------------------------------
+
+/**
+ Abort with error message if not in undo handling
+*/
 
 void Score::checkUndoOp()
       {
@@ -449,6 +484,13 @@ void Score::undoOp(std::list<int> si, std::list<int> di)
 //   addObject
 //---------------------------------------------------------
 
+/**
+ Add \a element to its parent.
+
+ Several elements (clef, keysig, timesig) need special handling, as they may cause
+ changes throughout the score.
+*/
+
 void Score::addObject(Element* element)
       {
 // printf("Score::addObject %p %s parent %s\n", element, element->name(), element->parent()->name());
@@ -508,6 +550,13 @@ void Score::addObject(Element* element)
 //---------------------------------------------------------
 //   removeObject
 //---------------------------------------------------------
+
+/**
+ Remove \a element from its parent.
+
+ Several elements (clef, keysig, timesig) need special handling, as they may cause
+ changes throughout the score.
+*/
 
 void Score::removeObject(Element* element)
       {

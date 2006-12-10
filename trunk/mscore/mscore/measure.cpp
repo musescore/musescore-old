@@ -18,6 +18,11 @@
 //  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //=============================================================================
 
+/**
+ \file
+ Implementation of most part of class Measure.
+*/
+
 #include "measure.h"
 #include "segment.h"
 #include "note.h"
@@ -229,8 +234,11 @@ Measure::~Measure()
 
 //---------------------------------------------------------
 //   insert
-//    insert e before el
 //---------------------------------------------------------
+
+/**
+ Insert Segment \a e before Segment \a el.
+*/
 
 void Measure::insert(Segment* e, Segment* el)
       {
@@ -252,8 +260,11 @@ void Measure::insert(Segment* e, Segment* el)
 
 //---------------------------------------------------------
 //   dump
-//    debug only
 //---------------------------------------------------------
+
+/**
+ Debug only.
+*/
 
 void Measure::dump() const
       {
@@ -367,8 +378,13 @@ void Measure::moveAll(double x, double y)
 
 //---------------------------------------------------------
 //   findSelectableElement
-//    p is System relative
 //---------------------------------------------------------
+
+/**
+ Find selectable element nearest to \a p.
+
+ Note: \a p is System relative.
+*/
 
 Element* Measure::findSelectableElement(QPointF p) const
       {
@@ -505,8 +521,11 @@ void Measure::write(Xml& xml, int no, int staff) const
 
 //---------------------------------------------------------
 //   Measure::read
-//    read Measure
 //---------------------------------------------------------
+
+/**
+ Read Measure.
+*/
 
 void Measure::read(QDomNode node, int idx)
       {
@@ -691,9 +710,12 @@ void Measure::read(QDomNode node, int idx)
 
 //---------------------------------------------------------
 //   layoutNoteHeads
-//    set line & accidental & mirror for notes depending
-//    on context
 //---------------------------------------------------------
+
+/**
+ For \a staff set line & accidental & mirror for notes depending
+ on context.
+*/
 
 void Measure::layoutNoteHeads(int staff)
       {
@@ -772,9 +794,13 @@ void Measure::layoutNoteHeads(int staff)
 
 //---------------------------------------------------------
 //   Measure::layout
-//    layout measure; must fit into "width"
-//    minWidth = width - stretch;
 //---------------------------------------------------------
+
+/**
+ Layout measure; must fit into  \a width.
+
+ Note: minWidth = width - stretch
+*/
 
 void Measure::layout(double width)
       {
@@ -1020,8 +1046,11 @@ void Measure::layout2()
 
 //---------------------------------------------------------
 //   findChord
-//    search for chord at tick position
 //---------------------------------------------------------
+
+/**
+ Search for chord at position \a tick at \a staff in \a voice.
+*/
 
 Chord* Measure::findChord(int tick, int staff, int voice, bool /*grace*/)
       {
@@ -1040,8 +1069,11 @@ Chord* Measure::findChord(int tick, int staff, int voice, bool /*grace*/)
 
 //---------------------------------------------------------
 //   findChordRest
-//    search for chord/Rest at tick position
 //---------------------------------------------------------
+
+/**
+ Search for chord or rest at position \a tick at \a staff in \a voice.
+*/
 
 ChordRest* Measure::findChordRest(int tick, Staff* staff, int voice, bool /*grace*/)
       {
@@ -1073,8 +1105,11 @@ Segment* Measure::tick2segment(int tick) const
 
 //---------------------------------------------------------
 //   add
-//    add new Element to Measure
 //---------------------------------------------------------
+
+/**
+ Add new Element \a el to Measure.
+*/
 
 void Measure::add(Element* el)
       {
@@ -1237,6 +1272,10 @@ void Measure::add(Element* el)
 //---------------------------------------------------------
 //   remove
 //---------------------------------------------------------
+
+/**
+ Remove Element \a el from Measure.
+*/
 
 void Measure::remove(Element* el)
       {
@@ -1495,8 +1534,11 @@ void Measure::addTuplet(Tuplet* b)
 
 //---------------------------------------------------------
 //   Space
-//    - unit of horizontal measure
 //---------------------------------------------------------
+
+/**
+ Unit of horizontal measure.
+*/
 
 class Space {
       double _min;      // minimum width
@@ -1569,8 +1611,11 @@ static double sff(double x, double xMin)
 
 //---------------------------------------------------------
 //   Measure::layoutX
-//    returns width of measure
 //---------------------------------------------------------
+
+/**
+ Return width of measure, taking into account \a stretch.
+*/
 
 MeasureWidth Measure::layoutX(double stretch)
       {
@@ -2075,9 +2120,12 @@ void Measure::insertStaff1(Staff* staff, int staffIdx)
 //---------------------------------------------------------
 //   acceptDrop
 //
-// determine if an element can be dropped here
 // FIXME: KEYSIG and TIMESIG should only be accepted at the leftmost side
 //---------------------------------------------------------
+
+/**
+ Return true if an Element of type \a type can be dropped on a Measure.
+*/
 
 bool Measure::acceptDrop(int type, int) const
       {
@@ -2100,9 +2148,11 @@ bool Measure::acceptDrop(int type, int) const
 
 //---------------------------------------------------------
 //   drop
-//
-// handle a dropped element
 //---------------------------------------------------------
+
+/**
+ Handle a dropped element at position \a pos of given element \a type and \a subtype.
+*/
 
 void Measure::drop(const QPointF& pos, int type, int subtype)
       {

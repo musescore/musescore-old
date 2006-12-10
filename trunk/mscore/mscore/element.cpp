@@ -20,7 +20,7 @@
 
 /**
  \file
- Implementation of Element, ElementList, SStaff
+ Implementation of Element, ElementList, SStaff.
 */
 
 #include "element.h"
