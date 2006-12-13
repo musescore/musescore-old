@@ -174,7 +174,7 @@ void Clef::space(double& min, double& extra) const
 //   acceptDrop
 //---------------------------------------------------------
 
-bool Clef::acceptDrop(int type, int) const
+bool Clef::acceptDrop(const QPointF&, int type, int) const
       {
       return (type == CLEF);
       }

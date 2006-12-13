@@ -21,6 +21,11 @@
 #ifndef __SYSTEM_H__
 #define __SYSTEM_H__
 
+/**
+ \file
+ Definition of classes SysStaff, System and SystemList.
+*/
+
 #include "element.h"
 #include "spatium.h"
 
@@ -36,11 +41,14 @@ class Bracket;
 
 //---------------------------------------------------------
 //   SysStaff
-//    one staff of a system
 //---------------------------------------------------------
 
+/**
+ One staff of a System.
+*/
+
 class SysStaff {
-      QRectF _bbox;   // bbox of SStaff
+      QRectF _bbox;   ///< Bbox of SStaff.
       Spatium _distance;
 
    public:
@@ -67,14 +75,17 @@ typedef SysStaffList::const_iterator ciSysStaff;
 
 //---------------------------------------------------------
 //   System
-//    one row of measures for all instruments;
-//    a complete piece of the timeline
 //---------------------------------------------------------
+
+/**
+ One row of measures for all instruments;
+ a complete piece of the timeline.
+*/
 
 class System : public Element {
       MeasureList* ml;
       SysStaffList _staves;
-      BarLine* barLine;               // left hand bar; connects staves in system
+      BarLine* barLine;               ///< Left hand bar, connects staves in system.
       bool _pageBreak;
 
       void setInstrumentName(int staff);
@@ -90,8 +101,8 @@ class System : public Element {
       Page* page() const                 { return (Page*)parent(); }
 
       double layout(const QPointF&, double);
-      void layout2();                     // called after Measure layout
-      void clear();                       // clear measure list
+      void layout2();                     ///< Called after Measure layout.
+      void clear();                       ///< Clear measure list.
 
       MeasureList* measures() const { return ml; }
 

@@ -222,14 +222,16 @@ class Element {
       virtual void bboxUpdate()       {}
       virtual QByteArray mimeData() const;
 /**
- Return true if this element accepts a drop of given element type and subtype.
+ Return true if this element accepts a drop at canvas relative \a pos
+ of given element \a type and \a subtype.
 
  Reimplemented by elements that accept drops. Used to change cursor shape while
  dragging to indicate drop targets.
 */
-      virtual bool acceptDrop(int, int) const { return false; }
+      virtual bool acceptDrop(const QPointF&, int, int) const { return false; }
 /**
- Handle a dropped element at position of given element type and subtype.
+ Handle a dropped element at canvas relative \a pos of given element
+ \a type and \a subtype.
 
  Reimplemented by elements that accept drops.
 */
@@ -263,7 +265,8 @@ typedef ElementList::reverse_iterator riElement;
 //---------------------------------------------------------
 
 /**
- The SStaff class is the graphic representation of a staff.
+ The SStaff class is the graphic representation of a staff,
+ it draws the horizontal staff lines.
 */
 
 class SStaff : public Element {
@@ -408,7 +411,7 @@ class KeySig : public Compound {
       virtual ElementType type() const { return KEYSIG; }
       virtual void write(Xml& xml) const;
       virtual void read(QDomNode);
-      virtual bool acceptDrop(int, int) const;
+      virtual bool acceptDrop(const QPointF&, int, int) const;
       virtual void drop(const QPointF&, int, int);
       };
 

@@ -2127,7 +2127,7 @@ void Measure::insertStaff1(Staff* staff, int staffIdx)
  Return true if an Element of type \a type can be dropped on a Measure.
 */
 
-bool Measure::acceptDrop(int type, int) const
+bool Measure::acceptDrop(const QPointF&, int type, int) const
       {
       switch(ElementType(type)) {
             case BRACKET:

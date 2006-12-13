@@ -738,7 +738,7 @@ void KeySig::set(int offset)
 //   acceptDrop
 //---------------------------------------------------------
 
-bool KeySig::acceptDrop(int type, int) const
+bool KeySig::acceptDrop(const QPointF&, int type, int) const
       {
       return type == KEYSIG;
       }

@@ -47,7 +47,7 @@ class TimeSig : public Compound {
       virtual void setSubtype(int val);
       void zn(int&, int&) const;
       void setSig(int z, int n);
-      virtual bool acceptDrop(int, int) const;
+      virtual bool acceptDrop(const QPointF&, int, int) const;
       virtual void drop(const QPointF&, int, int);
       };
 

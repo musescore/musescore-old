@@ -1,3 +1,6 @@
+13.12 (lv)
+      * added position parameter to Measure::acceptDrop, to enable drag and drop
+        based on the exact position in the measure
 10.12 (lv)
       * more doxygen tags
 09.12 (lv)

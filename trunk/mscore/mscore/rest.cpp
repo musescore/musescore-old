@@ -140,7 +140,7 @@ void Rest::space(double& min, double& extra) const
 //   acceptDrop
 //---------------------------------------------------------
 
-bool Rest::acceptDrop(int type, int subtype) const
+bool Rest::acceptDrop(const QPointF&, int type, int subtype) const
       {
       return (type == ATTRIBUTE && (subtype == UfermataSym || subtype == DfermataSym));
       }
