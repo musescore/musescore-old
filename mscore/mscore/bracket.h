@@ -65,7 +65,7 @@ class Bracket : public Element {
       virtual void bboxUpdate();
       virtual QPointF dragOff() const;
 
-      virtual bool acceptDrop(int, int) const;
+      virtual bool acceptDrop(const QPointF&, int, int) const;
       virtual void drop(const QPointF&, int, int);
       };
 

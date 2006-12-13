@@ -973,7 +973,7 @@ void Canvas::dragMoveEvent(QDragMoveEvent* event)
             const char* p = event->mimeData()->data("application/mscore/symbol").data();
             int type, subtype;
             sscanf(p, "%d/%d", &type, &subtype);
-            bool val = el->acceptDrop(type, subtype);
+            bool val = el->acceptDrop(pos, type, subtype);
             if (val)
                   event->accept();
             else {

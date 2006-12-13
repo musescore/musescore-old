@@ -223,7 +223,7 @@ void BarLine::setSubtype(int t)
 //   acceptDrop
 //---------------------------------------------------------
 
-bool BarLine::acceptDrop(int type, int) const
+bool BarLine::acceptDrop(const QPointF&, int type, int) const
       {
       return type == BAR_LINE;
       }

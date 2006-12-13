@@ -21,6 +21,11 @@
 #ifndef __STAFF_H__
 #define __STAFF_H__
 
+/**
+ \file
+ Definition of classes Staff and StaffList.
+*/
+
 class Instrument;
 class ClefList;
 class Xml;
@@ -31,13 +36,19 @@ class Score;
 //   Staff
 //---------------------------------------------------------
 
+/**
+ Global staff data not directly related to drawing.
+
+ Most functions actually return data of the part the staff is associated with.
+*/
+
 class Staff {
       Score* _score;
       Part* _part;
-      int _rstaff;                  // index in Part
+      int _rstaff;                  ///< Index in Part.
       ClefList* _clef;
       int _bracket;
-      int _bracketSpan;             // bracket this number of staves
+      int _bracketSpan;             ///< Bracket this number of staves.
 
    public:
       Staff(Score*, Part*, int);
@@ -70,6 +81,10 @@ class Staff {
 //---------------------------------------------------------
 //   StaffList
 //---------------------------------------------------------
+
+/**
+ List of staves.
+*/
 
 class StaffList : public std::vector<Staff*> {
    public:

@@ -390,7 +390,7 @@ bool Bracket::endEditDrag()
 //   acceptDrop
 //---------------------------------------------------------
 
-bool Bracket::acceptDrop(int type, int) const
+bool Bracket::acceptDrop(const QPointF&, int type, int) const
       {
       switch(ElementType(type)) {
             case BRACKET:

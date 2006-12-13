@@ -52,7 +52,7 @@ class Clef : public Compound {
       virtual void write(Xml& xml) const;
       virtual void read(QDomNode);
       virtual void space(double& min, double& extra) const;
-      virtual bool acceptDrop(int, int) const;
+      virtual bool acceptDrop(const QPointF&, int, int) const;
       virtual void drop(const QPointF&, int, int);
       };
 

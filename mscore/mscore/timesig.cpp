@@ -120,7 +120,7 @@ void TimeSig::setSig(int z, int n)
 //   acceptDrop
 //---------------------------------------------------------
 
-bool TimeSig::acceptDrop(int type, int) const
+bool TimeSig::acceptDrop(const QPointF&, int type, int) const
       {
       return type == TIMESIG;
       }

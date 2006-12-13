@@ -738,7 +738,7 @@ void ShadowNote::layout()
 //   acceptDrop
 //---------------------------------------------------------
 
-bool Note::acceptDrop(int type, int) const
+bool Note::acceptDrop(const QPointF&, int type, int) const
       {
       return (type == ATTRIBUTE
         || type == FINGERING);
