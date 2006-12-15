@@ -1,3 +1,5 @@
+15.12 (lv)
+      * drag and drop of clef in mid-measure
 13.12 (lv)
       * added position parameter to Measure::acceptDrop, to enable drag and drop
         based on the exact position in the measure

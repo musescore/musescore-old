@@ -53,6 +53,7 @@
 #include "timesig.h"
 #include "barline.h"
 #include "layoutbreak.h"
+#include "page.h"
 
 //---------------------------------------------------------
 //   y2pitch
@@ -2119,16 +2120,21 @@ void Measure::insertStaff1(Staff* staff, int staffIdx)
 
 //---------------------------------------------------------
 //   acceptDrop
-//
-// FIXME: KEYSIG and TIMESIG should only be accepted at the leftmost side
 //---------------------------------------------------------
 
 /**
- Return true if an Element of type \a type can be dropped on a Measure.
+ Return true if an Element of type \a type can be dropped on a Measure
+ at canvas relative position \a p.
+
+ Note special handling for clefs (allow drop if left of rightmost chord or rest in this staff)
+ and key- and timesig (allow drop if left of first chord or rest).
 */
 
-bool Measure::acceptDrop(const QPointF&, int type, int) const
+bool Measure::acceptDrop(const QPointF& p, int type, int) const
       {
+      // convert p from canvas to measure relative position and take x coordinate
+      QPointF mrp = p - pos() - system()->pos() - system()->page()->pos();
+      double mrpx = mrp.x();
       switch(ElementType(type)) {
             case BRACKET:
             case VOLTA:
@@ -2137,10 +2143,33 @@ bool Measure::acceptDrop(const QPointF&, int type, int) const
             case PEDAL:
             case LAYOUT_BREAK:
             case BAR_LINE:
+                  return true;
             case CLEF:
+                  {
+                  System* s = system();
+                  int idx = s->y2staff(p.y());
+                  if (idx == -1)
+                        return false;      // staff not found
+                  // search segment list backwards for segchordrest
+                  for (Segment* seg = _last; seg; seg = seg->prev()) {
+                        if (seg->segmentType() != Segment::SegChordRest)
+                              continue;
+                        // SegChordRest found, check if it contains anything in this staff
+                        for (int track = idx * VOICES; track < idx * VOICES + VOICES; ++track)
+                              if (seg->element(track)) {
+                                    // LVIFIX: for the rest in newly created empty measures,
+                                    // seg->pos().x() is incorrect
+                                    return mrpx < seg->pos().x();
+                                    }
+                        }
+                  }
+                  return false;
             case KEYSIG:
             case TIMESIG:
-                  return true;
+                  for (Segment* seg = _first; seg; seg = seg->next())
+                        if (seg->segmentType() == Segment::SegChordRest)
+                              return (mrpx < seg->pos().x());
+                  // fall through if no chordrest segment found
             default:
                   return false;
             }
@@ -2154,20 +2183,24 @@ bool Measure::acceptDrop(const QPointF&, int type, int) const
  Handle a dropped element at position \a pos of given element \a type and \a subtype.
 */
 
-void Measure::drop(const QPointF& pos, int type, int subtype)
+void Measure::drop(const QPointF& p, int type, int subtype)
       {
+      // determine staff
       System* s = system();
-      int idx = s->y2staff(pos.y());
+      int idx = s->y2staff(p.y());
       if (idx == -1)
             return;
       SysStaff* ss = s->staff(idx);
       Staff* staff = score()->staff(idx);
 
+      // convert p from canvas to measure relative position and take x coordinate
+      QPointF mrp = p - pos() - system()->pos() - system()->page()->pos();
+      double mrpx = mrp.x();
 
       switch(ElementType(type)) {
             case BRACKET:
                   if (ss->bracket) {
-                        ss->bracket->drop(pos, type, subtype);
+                        ss->bracket->drop(p, type, subtype);
                         }
                   else {
                         staff->setBracket(subtype);
@@ -2178,11 +2211,27 @@ void Measure::drop(const QPointF& pos, int type, int subtype)
             case CLEF:
                   // LVIFIX: handle clefSmallBit
                   {
-                  Clef* clef = new Clef(score(), subtype);
-                  clef->setStaff(staff);
-                  clef->setTick(tick());
-                  clef->setParent(this);
-                  score()->cmdAdd(clef);
+                  // find tick of of first note or rest to the right of position p in this staff
+                  for (Segment* seg = _first; seg; seg = seg->next()) {
+                        if (seg->segmentType() != Segment::SegChordRest)
+                              continue;
+                        // SegChordRest found, check if it contains anything in this staff
+                        for (int track = idx * VOICES; track < idx * VOICES + VOICES; ++track)
+                              if (seg->element(track)) {
+                                    if (mrpx >= seg->pos().x())
+                                          // seg is left of p
+                                          continue;
+                                    // LVIFIX: check rest in newly created empty measures,
+                                    printf("segtick=%d track=%d idx=%d\n",
+                                            seg->tick(), track, idx);
+                                    Clef* clef = new Clef(score(), subtype);
+                                    clef->setStaff(staff);
+                                    clef->setTick(seg->tick());
+                                    clef->setParent(this);
+                                    score()->cmdAdd(clef);
+                                    return;
+                                    }
+                        }
                   }
                   break;
             case KEYSIG:

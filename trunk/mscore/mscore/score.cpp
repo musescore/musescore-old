@@ -657,6 +657,10 @@ Measure* Score::pos2measure(const QPointF& p, int* tick, Staff** rst, int* pitch
 
 /**
  Return measure for canvas relative position \a p.
+
+ Sets \a *tick to the nearest notes tick,
+ \a *rst to the nearest staff,
+ \a *line to the nearest staff line.
 */
 
 Measure* Score::pos2measure2(const QPointF& p, int* tick, Staff** rst, int* line,
@@ -743,6 +747,10 @@ Measure* Score::pos2measure2(const QPointF& p, int* tick, Staff** rst, int* line
 //   staff
 //---------------------------------------------------------
 
+/**
+ Return index for the first staff of \a part.
+*/
+
 int Score::staff(const Part* part) const
       {
       int staff = 0;
@@ -757,6 +765,10 @@ int Score::staff(const Part* part) const
 //---------------------------------------------------------
 //   staff
 //---------------------------------------------------------
+
+/**
+ Return index for staff \a p in the staff list.
+*/
 
 int Score::staff(const Staff* p) const
       {
@@ -781,6 +793,10 @@ void Score::setInstrumentNames()
 //---------------------------------------------------------
 //   part
 //---------------------------------------------------------
+
+/**
+ Return staff \a n in the staff list.
+*/
 
 Staff* Score::staff(int n) const
       {
@@ -1422,6 +1438,10 @@ int Measure::snapNote(int /*tick*/, const QPointF p, int staff) const
 //   nstaves
 //---------------------------------------------------------
 
+/**
+ Return number of staves in the staff list.
+*/
+
 int Score::nstaves() const
       {
       return _staves->size();
@@ -1430,6 +1450,10 @@ int Score::nstaves() const
 //---------------------------------------------------------
 //   noStaves
 //---------------------------------------------------------
+
+/**
+ Return true if the staff list is empty.
+*/
 
 bool Score::noStaves() const
       {
