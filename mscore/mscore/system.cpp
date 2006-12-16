@@ -18,6 +18,11 @@
 //  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //=============================================================================
 
+/**
+ \file
+ Implementation of classes SysStaff and System.
+*/
+
 #include "system.h"
 #include "measure.h"
 #include "segment.h"
@@ -156,6 +161,10 @@ SysStaff* System::removeStaff(int idx)
 //---------------------------------------------------------
 //   layout
 //---------------------------------------------------------
+
+/**
+ Layout the System.
+*/
 
 double System::layout(const QPointF& p, double w)
       {
@@ -316,8 +325,11 @@ void SysStaff::move(double x, double y)
 
 //---------------------------------------------------------
 //   clear
-//    clear layout of System
 //---------------------------------------------------------
+
+/**
+ Clear layout of System.
+*/
 
 void System::clear()
       {
@@ -326,8 +338,11 @@ void System::clear()
 
 //---------------------------------------------------------
 //   findSelectableElement
-//    p is Page relative
 //---------------------------------------------------------
+
+/**
+ If found, return selectable Element in this System near Page relative point \a p.
+*/
 
 Element* System::findSelectableElement(QPointF p) const
       {
@@ -493,13 +508,27 @@ bool System::pos2tick(const QPointF& fp, int* tick, Staff** staff, int* pitch) c
 //   y2staff
 //---------------------------------------------------------
 
+/**
+ Return staff number for canvas relative y position \a y
+ or -1 if not found.
+
+ To allow drag and drop above and below the staff, the actual y range
+ considered "inside" the staff is increased a bit.
+ TODO: replace magic number "0.6" by something more appropriate.
+*/
+
 int System::y2staff(qreal y) const
       {
       y -= pos().y();
       int idx = 0;
       for (ciSysStaff i = _staves.begin(); i != _staves.end(); ++i, ++idx) {
-            if (y >= (*i)->bbox().top() && y < (*i)->bbox().bottom())
+            qreal t = (*i)->bbox().top();
+            qreal b = (*i)->bbox().bottom();
+            qreal y1 = t - 0.6 * (b - t);
+            qreal y2 = b + 0.6 * (b - t);
+            if (y >= y1 && y < y2) {
                   return idx;
+                  }
             }
       return -1;
       }

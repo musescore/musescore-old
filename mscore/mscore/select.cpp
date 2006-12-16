@@ -18,6 +18,11 @@
 //  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //=============================================================================
 
+/**
+ \file
+ Implementation of class Selection plus other selection related functions.
+*/
+
 #include "globals.h"
 #include "canvas.h"
 #include "note.h"
@@ -275,8 +280,11 @@ void Score::select(Element* obj, int state, int staff)
 
 //---------------------------------------------------------
 //   findSelectableElement
-//    p - canvas relative
 //---------------------------------------------------------
+
+/**
+ If found, return selectable Element in this Score near Canvas relative point \a pp.
+*/
 
 Element* Score::findSelectableElement(const QPointF& pp)
       {
@@ -316,15 +324,12 @@ Element* Score::findSelectableElement(const QPointF& pp)
                               }
                         QPointF pppp = ppp - m->pos();  // measure relative
 
-                        for (int i = 0; i < nstaves(); ++i) {
-                              double x = m->bbox().x();
-                              double w = m->bbox().width();
-                              double y = (*s)->staff(i)->bbox().y();
-                              double h = (*s)->staff(i)->bbox().height();
-                              QRectF r(x, y, w, h);
-                              if (r.contains(pppp))
-                                    return m;
-                              }
+                        // if on a staff in a measure, select the measure
+                        int idx  = (*s)->y2staff(p.y());
+                        double x = m->bbox().x();
+                        double w = m->bbox().width();
+                        if (idx >= 0 && pppp.x() > x && pppp.x() < (x + w))
+                              return m;
                         }
                   }
             }
@@ -403,9 +408,12 @@ QRegion Canvas::lassoSelect()
 
 //---------------------------------------------------------
 //   searchSelectedElements
-//    rebuild list of selected Elements
 //    "ElementList selected"
 //---------------------------------------------------------
+
+/**
+ Rebuild list of selected Elements.
+*/
 
 void Score::searchSelectedElements()
       {
@@ -435,21 +443,21 @@ void Score::searchSelectedElements()
                                           el->push_back(note->fingering());
 
                                     }
-      				pstl::plist<NoteAttribute*>* al = chord->getAttributes();
-      				for (ciAttribute i = al->begin(); i != al->end(); ++i) {
+                                pstl::plist<NoteAttribute*>* al = chord->getAttributes();
+                                for (ciAttribute i = al->begin(); i != al->end(); ++i) {
                                     NoteAttribute* a = *i;
-                              	if (a->selected())
-                                    	el->push_back(a);
-                              	}
+                                if (a->selected())
+                                      el->push_back(a);
+                                }
                               }
                         else if (e->type() == REST) {
                               Rest* rest = (Rest*)e;
-      				pstl::plist<NoteAttribute*>* al = rest->getAttributes();
-      				for (ciAttribute i = al->begin(); i != al->end(); ++i) {
-                                    NoteAttribute* a = *i;
-                              	if (a->selected())
-                                    	el->push_back(a);
-                              	}
+                                pstl::plist<NoteAttribute*>* al = rest->getAttributes();
+                                for (ciAttribute i = al->begin(); i != al->end(); ++i) {
+                                      NoteAttribute* a = *i;
+                                if (a->selected())
+                                      el->push_back(a);
+                                }
                               }
                         }
                   }
@@ -470,8 +478,11 @@ void Score::searchSelectedElements()
 
 //---------------------------------------------------------
 //   update
-//    set select flag for all Elements in select list
 //---------------------------------------------------------
+
+/**
+ Set select flag for all Elements in select list.
+*/
 
 void Selection::update()
       {
@@ -501,8 +512,11 @@ void Selection::dump()
 
 //---------------------------------------------------------
 //   updateState
-//    update cis & padState
 //---------------------------------------------------------
+
+/**
+ Update cis and padState.
+*/
 
 void Selection::updateState()
       {

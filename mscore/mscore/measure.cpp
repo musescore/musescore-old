@@ -382,9 +382,10 @@ void Measure::moveAll(double x, double y)
 //---------------------------------------------------------
 
 /**
- Find selectable element nearest to \a p.
+ If found, return selectable Element in this Measure near System relative point \a p.
 
- Note: \a p is System relative.
+ May return any Element in the Measure including measure relative elements (stored in _sel),
+ but excluding page relative elements (stored in _pel) and the Measure itself.
 */
 
 Element* Measure::findSelectableElement(QPointF p) const
@@ -2132,24 +2133,44 @@ void Measure::insertStaff1(Staff* staff, int staffIdx)
 
 bool Measure::acceptDrop(const QPointF& p, int type, int) const
       {
-      // convert p from canvas to measure relative position and take x coordinate
+      // convert p from canvas to measure relative position and take x and y coordinates
       QPointF mrp = p - pos() - system()->pos() - system()->page()->pos();
       double mrpx = mrp.x();
+      double mrpy = mrp.y();
+
+      System* s = system();
+      int idx = s->y2staff(p.y());
+      if (idx == -1)
+            return false;                       // staff not found
+      qreal t = s->staff(idx)->bbox().top();    // top of staff
+      qreal b = s->staff(idx)->bbox().bottom(); // bottom of staff
+
       switch(ElementType(type)) {
-            case BRACKET:
             case VOLTA:
             case OTTAVA:
             case TRILL:
+                  // accept drop only above staff
+                  if (mrpy < t)
+                        return true;
+                  return false;
             case PEDAL:
+                  // accept drop only below staff
+                  if (mrpy > b)
+                        return true;
+                  return false;
+            case BRACKET:
             case LAYOUT_BREAK:
+                  return true;
             case BAR_LINE:
+                  // accept drop only inside staff
+                  if (mrpy < t || mrpy > b)
+                        return false;
                   return true;
             case CLEF:
                   {
-                  System* s = system();
-                  int idx = s->y2staff(p.y());
-                  if (idx == -1)
-                        return false;      // staff not found
+                  // accept drop only inside staff
+                  if (mrpy < t || mrpy > b)
+                        return false;
                   // search segment list backwards for segchordrest
                   for (Segment* seg = _last; seg; seg = seg->prev()) {
                         if (seg->segmentType() != Segment::SegChordRest)
@@ -2166,6 +2187,9 @@ bool Measure::acceptDrop(const QPointF& p, int type, int) const
                   return false;
             case KEYSIG:
             case TIMESIG:
+                  // accept drop only inside staff
+                  if (mrpy < t || mrpy > b)
+                        return false;
                   for (Segment* seg = _first; seg; seg = seg->next())
                         if (seg->segmentType() == Segment::SegChordRest)
                               return (mrpx < seg->pos().x());
