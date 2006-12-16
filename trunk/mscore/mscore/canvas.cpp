@@ -18,6 +18,11 @@
 //  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //=============================================================================
 
+/**
+ \file
+ Implementation of most part of class Canvas.
+*/
+
 #include "canvas.h"
 #include "score.h"
 #include "preferences.h"
@@ -271,7 +276,14 @@ void Canvas::mousePressEvent(QMouseEvent* ev)
                               _score->dragSystem = (System*)(_score->dragObject()->parent());
                               _score->dragStaff  = getStaff(_score->dragSystem, startMove);
                               }
-                        _score->select(_score->dragObject(), keyState, _score->dragStaff);
+                        // As findSelectableElement may return a measure
+                        // when clicked "a little bit" above or below it, getStaff
+                        // may not find the staff and return -1, which would cause
+                        // select() to crash
+                        if (_score->dragStaff >= 0)
+                              _score->select(_score->dragObject(), keyState, _score->dragStaff);
+                        else
+                              _score->setDragObject(0);
                         }
                   break;
 
@@ -967,6 +979,7 @@ void Canvas::dragMoveEvent(QDragMoveEvent* event)
       {
       if (!event->mimeData()->hasFormat("application/mscore/symbol"))
             return;
+      // convert window to canvas position
       QPointF pos(imatrix.map(QPointF(event->pos())));
       Element* el = _score->findSelectableElement(pos);
       if (el) {
