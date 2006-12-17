@@ -1,4 +1,5 @@
 16.12 (lv)
+      * added missing layout() to Score::changeKeySig()
       * allow drag and drop of above and below the staff
 15.12 (lv)
       * drag and drop of clef in mid-measure
