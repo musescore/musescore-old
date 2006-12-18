@@ -1,3 +1,10 @@
+18.12 (ws)
+      * extend size of key palette cell
+      * removed object geometry calculation from SymbolPalette::setObject()
+        (its already done in paintEvent())
+      * Changed KeySig base class from Compound to Element. Layout of
+        accidentals is now done dynamically in paint event. This fixes
+        layout of KeySig in key palette.
 16.12 (lv)
       * added missing layout() to Score::changeKeySig()
       * allow drag and drop of above and below the staff
@@ -61,14 +68,14 @@
 01.09 (lv)
       * prevent trailing newline in work-title, number and creator
 3.8 (ws)
-      * emmentaler font is now internal part of mscore: no need to 
+      * emmentaler font is now internal part of mscore: no need to
         install anymore
       * switched to qt4.2
 13.4 (ws)
       * add missing layout() after MusicXml import
 12.4 (ws)
       * make drag/drop of barlines undoable
-      * after first call of linePalette, bracketPalette was not 
+      * after first call of linePalette, bracketPalette was not
         visible anymore
 5.4 (ws)
       * new configuration switch "antialiased drawing". Disabling this
@@ -117,7 +124,7 @@
       * now double click on tab removes score from list
       * trying to enter note enter mode without a note or rest selected
         had some fancy results
-      * fixed a crash when removing a staff from a piano system in 
+      * fixed a crash when removing a staff from a piano system in
         instruments dialog
       * removed staff in instrument dialog was still visible in list
       * added updated/extended instruments.xml file from Luis Garrido
@@ -131,7 +138,7 @@
         note is clicked
       * added button to transport panel to enable/disable midi input
       * fix: cursor disappeared when edited text was empty
-      * enhance layout for note/rest attributes (tenuto, staccato, 
+      * enhance layout for note/rest attributes (tenuto, staccato,
         fermata etc)
 23.2 (ws)
       * implement fermata for rests

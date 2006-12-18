@@ -297,9 +297,6 @@ void MuseScore::clefMenu()
 
 void MuseScore::keyMenu()
       {
-      qreal oSpatium = _spatium;
-      _spatium = PALETTE_SPATIUM;
-
       static const char* keyNames[] = {
             "g-major, e-minor",     "ces",
             "d-major, h-minor",     "ges-major, es-minor",
@@ -315,6 +312,7 @@ void MuseScore::keyMenu()
             keyPalette = new QScrollArea;
             keyPalette->setWindowTitle(tr("MuseScore: Key Signature"));
             SymbolPalette* sp = new SymbolPalette(4, 4, 0);
+            sp->setGrid(80, 60);
             ((QScrollArea*)keyPalette)->setWidget(sp);
             sp->showStaff(true);
             for (int i = 0; i < 7; ++i) {
@@ -332,7 +330,6 @@ void MuseScore::keyMenu()
             }
       keyPalette->show();
       keyPalette->raise();
-      _spatium = oSpatium;
       }
 
 //---------------------------------------------------------

@@ -63,14 +63,14 @@ void TimeSig::setSubtype(int v)
             case TSIG_44:
                   s = new Symbol(score());
                   s->setSym(fourfourmeterSym);
-                  addElement(s, 0, 2);
+                  addElement(s, 0, 2 * _spatium);
                   _z = 4;
                   _n = 4;
                   break;
             case TSIG_34:
                   s = new Symbol(score());
                   s->setSym(allabreveSym);
-                  addElement(s, 0, 2);
+                  addElement(s, 0, 2 * _spatium);
                   _z = 3;
                   _n = 4;
                   break;
@@ -102,18 +102,18 @@ void TimeSig::setSig(int z, int n)
       Symbol* s  = new Symbol(score());
       if (z >= 10) {
             s->setSym(zeroSym + z/10);
-            addElement(s, 0, 2.0);
+            addElement(s, 0, 2.0 * _spatium);
             s  = new Symbol(score());
             s->setSym(zeroSym + (z%10));
-            addElement(s, 1.5, 2.0);
+            addElement(s, 1.5 * _spatium, 2.0 * _spatium);
             }
       else {
             s->setSym(zeroSym + z);
-            addElement(s, 0, 2.0);
+            addElement(s, 0, 2.0 * _spatium);
             }
       s  = new Symbol(score());
       s->setSym(zeroSym + n);
-      addElement(s, z >= 10 ? 0.75 : 0, 4.0);
+      addElement(s, z >= 10 ? 0.75*_spatium : 0, 4.0*_spatium);
       }
 
 //---------------------------------------------------------

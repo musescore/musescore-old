@@ -448,7 +448,7 @@ void Accidental::setIdx(int i)
                         {
                         s->setSym(leftparenSym);
                         addElement(s, 0.0, 0.0);
-                        double x = symbols[leftparenSym].width() / _spatium;
+                        double x = symbols[leftparenSym].width();
 
                         s = new Symbol(score());
                         switch(i) {
@@ -459,8 +459,7 @@ void Accidental::setIdx(int i)
                               case 10: s->setSym(naturalSym);    break;
                               }
                         addElement(s, x, 0.0);
-                        x += (s->width() / _spatium);
-
+                        x += s->width();
                         s = new Symbol(score());
                         s->setSym(rightparenSym);
                         addElement(s, x, 0.0);
@@ -599,14 +598,16 @@ void Compound::draw1(Painter& p)
       for (ciSymbol i = elemente.begin(); i != elemente.end(); ++i)
             (*i)->draw(p);
 
-      if (!(visible() || _score->showInvisible()) && debugMode && selected()) {
+//      if (debugMode && selected()) {
+//      if ((type() == KEYSIG) && selected()) {
+      if ((type() == KEYSIG)) {
             //
             //  draw bounding box rectangle for all
             //  selected Elements
             //
-            p.setPen(QColor(Qt::green));
             p.setBrush(Qt::NoBrush);
-            p.drawRect(abbox());
+            p.setPen(QPen(Qt::red, 8, Qt::SolidLine));
+            p.drawRect(_bbox);
             }
       }
 
@@ -614,12 +615,16 @@ void Compound::draw1(Painter& p)
 //   addElement
 //---------------------------------------------------------
 
+/**
+ offset \a x and \a y are in Point units
+*/
+
 void Compound::addElement(Element* e, double x, double y)
       {
-      e->setUserOff(QPointF(x, y));
+      e->setPos(x, y);
       e->setParent(this);
       elemente.push_back(e);
-      orBbox(e->bbox().translated(e->pos()));
+      _bbox |= e->bbox().translated(e->pos());
       }
 
 //---------------------------------------------------------
@@ -661,75 +666,91 @@ void Compound::clear()
 //---------------------------------------------------------
 
 KeySig::KeySig(Score* s)
-  : Compound(s)
+  : Element(s)
       {
       }
 
 KeySig::KeySig(Score* s, int i, int yoffset)
-  : Compound(s)
+  : Element(s)
       {
       setSubtype(i);
-      set(yoffset);
+      yoff = double(-((yoffset % 10) / 2.0));
+      layout();
+      }
+
+//---------------------------------------------------------
+//   add
+//---------------------------------------------------------
+
+void KeySig::addLayout(bool flat, double x, double y)
+      {
+      _bbox |= symbols[flat ? flatSym : sharpSym].bbox().translated(x*_spatium, y * _spatium);
+      }
+
+//---------------------------------------------------------
+//   layout
+//---------------------------------------------------------
+
+void KeySig::layout()
+      {
+      _bbox = QRectF(0, 0, 0, 0);
+      switch(subtype()) {
+            case 7:     addLayout(false, 6.0, yoff + 2);
+            case 6:     addLayout(false, 5.0, yoff + .5);
+            case 5:     addLayout(false, 4.0, yoff + 2.5);
+            case 4:     addLayout(false, 3.0, yoff + 1);
+            case 3:     addLayout(false, 2.0, yoff - .5);
+            case 2:     addLayout(false, 1.0, yoff + 1.5);
+            case 1:     addLayout(false, 0.0, yoff);
+                        break;
+            case -7:    addLayout(true, 6, yoff + 3.5);
+            case -6:    addLayout(true, 5, yoff + 1.5);
+            case -5:    addLayout(true, 4, yoff + 3);
+            case -4:    addLayout(true, 3, yoff + 1);
+            case -3:    addLayout(true, 2, yoff + 2.5);
+            case -2:    addLayout(true, 1, yoff + .5);
+            case -1:    addLayout(true, 0, yoff + 2);
+            case 0:
+            default:
+                  break;
+            }
+      }
+
+//---------------------------------------------------------
+//   add
+//---------------------------------------------------------
+
+void KeySig::add(Painter& p, bool flat, double x, double y)
+      {
+      symbols[flat ? flatSym : sharpSym].draw(p, x * _spatium, y * _spatium);
       }
 
 //---------------------------------------------------------
 //   set
 //---------------------------------------------------------
 
-void KeySig::set(int offset)
+void KeySig::draw1(Painter& p)
       {
-      clear();
-      off = offset % 10;
-
-      Accidental* p;
-      double yoff = -(off / 2.0);
       switch(subtype()) {
-            case 7:
-                  p = new Accidental(score(), 1, false);
-                  addElement(p, 6.0, yoff + 2);
-            case 6:
-                  p = new Accidental(score(), 1, false);
-                  addElement(p, 5.0, yoff + .5);
-            case 5:
-                  p = new Accidental(score(), 1, false);
-                  addElement(p, 4.0, yoff + 2.5);
-            case 4:
-                  p = new Accidental(score(), 1, false);
-                  addElement(p, 3.0, yoff + 1);
-            case 3:
-                  p = new Accidental(score(), 1, false);
-                  addElement(p, 2.0, yoff - .5);
-            case 2:
-                  p = new Accidental(score(), 1, false);
-                  addElement(p, 1.0, yoff + 1.5);
-            case 1:
-                  p = new Accidental(score(), 1, false);
-                  addElement(p, 0.0, yoff);
-                  break;
+            case 7:     add(p, false, 6.0, yoff + 2);
+            case 6:     add(p, false, 5.0, yoff + .5);
+            case 5:     add(p, false, 4.0, yoff + 2.5);
+            case 4:     add(p, false, 3.0, yoff + 1);
+            case 3:     add(p, false, 2.0, yoff - .5);
+            case 2:     add(p, false, 1.0, yoff + 1.5);
+            case 1:     add(p, false, 0.0, yoff);
+                        break;
             default:
             case 0:
                   return;
-            case -7:
-                  p = new Accidental(score(), 2, false);
-                  addElement(p, 6, yoff + 3.5);
-            case -6:
-                  p = new Accidental(score(), 2, false);
-                  addElement(p, 5, yoff + 1.5);
-            case -5:
-                  p = new Accidental(score(), 2, false);
-                  addElement(p, 4, yoff + 3);
-            case -4:
-                  p = new Accidental(score(), 2, false);
-                  addElement(p, 3, yoff + 1);
-            case -3:
-                  p = new Accidental(score(), 2, false);
-                  addElement(p, 2, yoff + 2.5);
-            case -2:
-                  p = new Accidental(score(), 2, false);
-                  addElement(p, 1, yoff + .5);
-            case -1:
-                  p = new Accidental(score(), 2, false);
-                  addElement(p, 0, yoff + 2);
+
+            case -7:    add(p, true, 6, yoff + 3.5);
+            case -6:    add(p, true, 5, yoff + 1.5);
+            case -5:    add(p, true, 4, yoff + 3);
+            case -4:    add(p, true, 3, yoff + 1);
+            case -3:    add(p, true, 2, yoff + 2.5);
+            case -2:    add(p, true, 1, yoff + .5);
+            case -1:    add(p, true, 0, yoff + 2);
                   break;
             }
       }

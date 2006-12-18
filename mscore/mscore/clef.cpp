@@ -64,13 +64,13 @@ void Clef::setSubtype(int st)
                   symbol->setSym(_small ? ctrebleclefSym : trebleclefSym);
                   yoff = 3.0;
                   break;
-            case CLEF_G1: 
+            case CLEF_G1:
                   {
                   symbol->setSym(_small ? ctrebleclefSym : trebleclefSym);
                   yoff = 3.0;
                   Symbol* number = new Symbol(score());
                   number->setSym(clefEightSym);
-                  addElement(number, 1.0, -5.0);
+                  addElement(number, 1.0 * _spatium, -5.0 * _spatium);
                   }
                   break;
             case CLEF_G2:
@@ -79,10 +79,10 @@ void Clef::setSubtype(int st)
                   yoff = 3.0;
                   Symbol* number = new Symbol(score());
                   number->setSym(clefOneSym);
-                  addElement(number, .6, -5.0);
+                  addElement(number, .6 * _spatium, -5.0 * _spatium);
                   number = new Symbol(score());
                   number->setSym(clefFiveSym);
-                  addElement(number, 1.4, -5.0);
+                  addElement(number, 1.4 * _spatium, -5.0 * _spatium);
                   }
                   break;
             case CLEF_G3:
@@ -91,7 +91,7 @@ void Clef::setSubtype(int st)
                   yoff = 3.0;
                   Symbol* number = new Symbol(score());
                   number->setSym(clefEightSym);
-                  addElement(number, 1.0, 4.0);
+                  addElement(number, 1.0*_spatium, 4.0 * _spatium);
                   }
                   break;
             case CLEF_F:
@@ -104,7 +104,7 @@ void Clef::setSubtype(int st)
                   yoff = 1.0;
                   Symbol* number = new Symbol(score());
                   number->setSym(clefEightSym);
-                  addElement(number, .0, 3.5);
+                  addElement(number, .0, 3.5*_spatium);
                   }
                   break;
             case 6:
@@ -113,10 +113,10 @@ void Clef::setSubtype(int st)
                   yoff = 1.0;
                   Symbol* number = new Symbol(score());
                   number->setSym(clefOneSym);
-                  addElement(number, .0, 3.5);
+                  addElement(number, .0, 3.5 * _spatium);
                   number = new Symbol(score());
                   number->setSym(clefFiveSym);
-                  addElement(number, .8, 3.5);
+                  addElement(number, .8 * _spatium, 3.5 * _spatium);
                   }
                   break;
             case 7:
