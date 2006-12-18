@@ -130,9 +130,9 @@ class Element {
       void setDropTarget(bool f)              { _dropTarget = f;    }
 
       virtual QPointF ipos() const            { return _pos;       }
-      virtual QPointF pos() const             { return _pos + _userOff * _spatium;         }
-      virtual double x() const                { return _pos.x() + _userOff.x() * _spatium; }
-      virtual double y() const                { return _pos.y() + _userOff.y() * _spatium; }
+      virtual QPointF pos() const             { return _pos + (_userOff * _spatium);         }
+      virtual double x() const                { return _pos.x() + (_userOff.x() * _spatium); }
+      virtual double y() const                { return _pos.y() + (_userOff.y() * _spatium); }
       virtual void setPos(const QPointF& p)   { _pos = p;                }
       virtual void setPos(double x, double y) { _pos = QPointF(x, y);    }
       virtual void move(double xd, double yd) { _pos += QPointF(xd, yd); }
@@ -401,18 +401,21 @@ class Accidental : public Compound {
  The KeySig class represents a Key Signature on a staff
 */
 
-class KeySig : public Compound {
-      int off;
-      void set(int);
+class KeySig : public Element {
+      double yoff;
+      void add(Painter&, bool, double x, double y);
+      void addLayout(bool flat, double x, double y);
 
    public:
       KeySig(Score*);
       KeySig(Score*, int, int);
+      virtual void draw1(Painter&);
       virtual ElementType type() const { return KEYSIG; }
       virtual void write(Xml& xml) const;
       virtual void read(QDomNode);
       virtual bool acceptDrop(const QPointF&, int, int) const;
       virtual void drop(const QPointF&, int, int);
+      virtual void layout();
       };
 
 //---------------------------------------------------------

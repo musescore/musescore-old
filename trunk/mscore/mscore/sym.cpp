@@ -37,14 +37,14 @@ Sym::Sym(const QString& name, const QChar& c, const QFont& f, const QPointF& o)
       updateBoundingRect();
       }
 
-Sym::Sym() 
-      { 
+Sym::Sym()
+      {
       _code = 0;
       }
 
-void Sym::setOffset(QPointF& p) 
-      { 
-      _offset = p;  
+void Sym::setOffset(QPointF& p)
+      {
+      _offset = p;
       updateBoundingRect();
       }
 
@@ -114,12 +114,12 @@ int Sym::buildin(const QString& name)
 void initSymbols()
       {
       QFont f1("emmentaler");
-      f1.setPixelSize(lrint(20 * _spatium * .2));
+      f1.setPixelSize(lrint(20.0 * .2 * _spatium));
       QFont f3("emmentaler");
-      f3.setPixelSize(lrint(14 * _spatium * .2));
+      f3.setPixelSize(lrint(14.0 * .2 * _spatium));
 
       QFont f4("Times New Roman");
-      f4.setPixelSize(lrint(8 * _spatium * .2));
+      f4.setPixelSize(lrint(8.0 * .2 * _spatium));
 
       symbols[clefEightSym] = Sym("clef eight", 0x38, f4);
       symbols[clefOneSym]   = Sym("clef one",   0x31, f4);
@@ -218,7 +218,7 @@ void initSymbols()
       symbols[dpedalheelSym]              = Sym("dpedalheel",               0xe163, f1);
       symbols[upedaltoeSym]               = Sym("upedal toe",               0xe164, f1);
       symbols[dpedaltoeSym]               = Sym("dpedal toe",               0xe165, f1);
-                                                                                  
+
       symbols[flageoletSym]               = Sym("flageolet",                0xe166, f1);
       symbols[segnoSym]                   = Sym("segno",                    0xe167, f1);
       symbols[codaSym]                    = Sym("coda",                     0xe168, f1);
@@ -269,7 +269,7 @@ void initSymbols()
       symbols[pedalasteriskSym]           = Sym("pedalasterisk",            0xe195, f1);
       symbols[pedaldashSym]               = Sym("pedaldash",                0xe196, f1);
       symbols[pedaldotSym]                = Sym("pedaldot",                 0xe197, f1);
-                                                                                  
+
       symbols[pedalPSym]                  = Sym("pedalP",                   0xe198, f1);
       symbols[pedaldSym]                  = Sym("pedald",                   0xe199, f1);
       symbols[pedaleSym]                  = Sym("pedale",                   0xe19a, f1);

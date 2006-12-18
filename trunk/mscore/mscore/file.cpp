@@ -427,8 +427,8 @@ void Clef::write(Xml& xml) const
 void KeySig::write(Xml& xml) const
       {
       xml.stag("KeySig");
-      if (off)
-            xml.tag("offset", off);
+      if (yoff)
+            xml.tag("offset", yoff);
       Element::writeProperties(xml);
       xml.etag("KeySig");
       }
@@ -553,8 +553,7 @@ void Clef::read(QDomNode node)
 
 void KeySig::read(QDomNode node)
       {
-      int yoffset = 0;
-
+      yoff = 0;
       for (node = node.firstChild(); !node.isNull(); node = node.nextSibling()) {
             QDomElement e = node.toElement();
             if (e.isNull())
@@ -563,13 +562,12 @@ void KeySig::read(QDomNode node)
             QString val(e.text());
             int i = val.toInt();
             if (tag == "offset")
-                  yoffset = i;
+                  yoff = i;
             else if (Element::readProperties(node))
                   ;
             else
                   domError(node);
             }
-      set(yoffset);
       }
 
 //---------------------------------------------------------

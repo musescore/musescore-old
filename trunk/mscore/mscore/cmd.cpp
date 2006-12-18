@@ -140,7 +140,7 @@ void Score::end()
 
 void Score::endCmd(bool undo)
       {
-      printf("endCmd()\n");
+//      printf("endCmd()\n");
       if (undo)
             endUndo();
       end();

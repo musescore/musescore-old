@@ -31,6 +31,10 @@
 //   SymbolPalette
 //---------------------------------------------------------
 
+/**
+ Create Symbol palette with \a r rows and \a c columns
+*/
+
 SymbolPalette::SymbolPalette(int r, int c, QWidget* parent)
    : QWidget(parent)
       {
@@ -54,6 +58,10 @@ SymbolPalette::~SymbolPalette()
 //---------------------------------------------------------
 //   setGrid
 //---------------------------------------------------------
+
+/**
+ Set size of one element in palette
+*/
 
 void SymbolPalette::setGrid(int hh, int vv)
       {
@@ -136,33 +144,6 @@ void SymbolPalette::addObject(int idx, Element* s, const QString& name)
       s->setSelected(false);
       symbols[idx] = s;
       names[idx]   = name;
-
-
-      qreal mag = PALETTE_SPATIUM / _spatium;
-      int row      = idx / columns;
-      int column   = idx % columns;
-
-
-      double gx = column * hgrid;
-      double gy = row    * vgrid;
-      double gw = hgrid;
-      double gh = vgrid;
-
-      double sw = s->width() * mag;
-      double sh = s->height() * mag;
-      double sx, sy;
-
-      if (staff)
-            sy = gy + gh * .5 - 2 * PALETTE_SPATIUM;
-      else
-            sy  = gy + (gh - sh) * .5 - s->bbox().y() * mag;
-      sx  = gx + (gw - sw) * .5 - s->bbox().x() * mag;
-
-//      if (s->type() == TEXT || s->type() == DYNAMIC) {
-//            sx -= ((SText*)s)->styleOffset().x();
-//            sy -= ((SText*)s)->styleOffset().y();
-//            }
-      s->setPos(sx, sy);
       update();
       }
 
@@ -183,6 +164,8 @@ void SymbolPalette::addObject(int idx, int symIdx)
 
 void SymbolPalette::paintEvent(QPaintEvent* e)
       {
+      double oSpatium = _spatium;
+//      _spatium = PALETTE_SPATIUM;
       qreal mag = PALETTE_SPATIUM / _spatium;
 
       Painter p(this);
@@ -215,6 +198,7 @@ void SymbolPalette::paintEvent(QPaintEvent* e)
                   Element* el = symbols[idx];
                   if (el == 0)
                         continue;
+                  el->layout();
                   QRect r(column*hgrid, row*vgrid, hgrid, vgrid);
 //TODO                  if (!p.clipRegion().boundingRect().intersects(r))
 //                        continue;
@@ -233,30 +217,32 @@ void SymbolPalette::paintEvent(QPaintEvent* e)
                   p.save();
                   p.scale(mag, mag);
 
-                  double gx = column * hgrid;
-                  double gy = row    * vgrid;
-                  double gw = hgrid;
-                  double gh = vgrid;
+                  double gw = hgrid / mag;
+                  double gh = vgrid / mag;
+                  double gx = column * gw;
+                  double gy = row    * gh;
 
-                  double sw = el->width() * mag;
-                  double sh = el->height() * mag;
-                  double sx, sy;
+                  double sw = el->width();
+                  double sh = el->height();
+                  double sy;
 
                   if (staff)
-                        sy = gy + gh * .5 - 2 * PALETTE_SPATIUM;
+                        sy = gy + gh - 6 * _spatium;
                   else
-                        sy  = gy + (gh - sh) * .5 - el->bbox().y() * mag;
-                  sx  = gx + (gw - sw) * .5 - el->bbox().x() * mag;
+                        sy  = gy + (gh - sh) * .5 - el->bbox().y();
+                  double sx  = gx + (gw - sw) * .5 - el->bbox().x();
 
 //                if (el->type() == TEXT || el->type() == DYNAMIC) {
 //                      sx -= ((SText*)s)->styleOffset().x();
 //                      sy -= ((SText*)s)->styleOffset().y();
 //                      }
-                  el->setPos(sx/mag, sy/mag);
+
+                  el->setPos(sx, sy);
                   el->draw(p);
                   p.restore();
                   }
             }
+      _spatium = oSpatium;
       }
 
 //---------------------------------------------------------
