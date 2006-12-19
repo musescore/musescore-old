@@ -49,13 +49,31 @@ TimeSig::TimeSig(Score* s, int n, int z1, int z2, int z3, int z4)
       }
 
 //---------------------------------------------------------
+//   setSubtype
+//---------------------------------------------------------
+
+void TimeSig::setSubtype(int val)
+      {
+      Element::setSubtype(val);
+      layout();
+      }
+
+//---------------------------------------------------------
 //   setSig
 //---------------------------------------------------------
 
 void TimeSig::setSig(int n, int z1, int z2, int z3, int z4)
       {
       setSubtype((z4 << 24) + (z3 << 18) + (z2 << 12) + (z1 << 6) + n);
-      layout();
+      }
+
+//---------------------------------------------------------
+//   getSig
+//---------------------------------------------------------
+
+void TimeSig::getSig(int* n, int* z) const
+      {
+      getSig(subtype(), n, z);
       }
 
 //---------------------------------------------------------
@@ -94,9 +112,26 @@ void TimeSig::drop(const QPointF&, int type, int stype)
             int st = subtype();
             if (st == stype)
                   return;
-            // change timesig applies to all staves, can't simply set subtype
-            // for this one only
-            score()->changeTimeSig(tick(), stype);
+
+            int z1, n1, z2, n2;
+            getSig(st, &n1, &z1);
+            getSig(stype, &n2, &z2);
+
+            if (z1 == z2 && n1 == n2) {
+                  // only symbol changed
+                  //
+                  // TODO: does not work for first timesig in score
+                  //    (its a "generated" one)
+                  //
+                  setSubtype(stype);
+                  score()->layout();
+                  // TODO: undo/redo
+                  }
+            else {
+                  // change timesig applies to all staves, can't simply set subtype
+                  // for this one only
+                  score()->changeTimeSig(tick(), stype);
+                  }
             }
       }
 
