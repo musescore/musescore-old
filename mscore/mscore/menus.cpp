@@ -338,9 +338,6 @@ void MuseScore::keyMenu()
 
 void MuseScore::timeMenu()
       {
-      qreal oSpatium = _spatium;
-      _spatium = PALETTE_SPATIUM;
-
       if (timePalette == 0) {
             timePalette = new QScrollArea;
             timePalette->setWindowTitle(tr("MuseScore: TimeSignature"));
@@ -349,23 +346,21 @@ void MuseScore::timeMenu()
             sp->setGrid(60, 60);
             sp->showStaff(true);
 
-		sp->addObject(0,  new TimeSig(cs, TSIG_2_2), "");
-		sp->addObject(1,  new TimeSig(cs, TSIG_2_4), "");
-		sp->addObject(2,  new TimeSig(cs, TSIG_3_4), "");
-		sp->addObject(3,  new TimeSig(cs, TSIG_4_4), "");
-		sp->addObject(4,  new TimeSig(cs, TSIG_5_4), "");
-		sp->addObject(5,  new TimeSig(cs, TSIG_6_4), "");
-		sp->addObject(6,  new TimeSig(cs, TSIG_3_8), "");
-		sp->addObject(7,  new TimeSig(cs, TSIG_6_8), "");
-		sp->addObject(8,  new TimeSig(cs, TSIG_9_8), "");
-		sp->addObject(9,  new TimeSig(cs, TSIG_12_8), "");
-		sp->addObject(10,  new TimeSig(cs, TSIG_44), "");
-		sp->addObject(11,  new TimeSig(cs, TSIG_34), "");
-
+		sp->addObject(0,   new TimeSig(cs, 2, 2), "2/2");
+		sp->addObject(1,   new TimeSig(cs, 4, 2), "2/4");
+		sp->addObject(2,   new TimeSig(cs, 4, 3), "3/4");
+		sp->addObject(3,   new TimeSig(cs, 4, 4), "4/4");
+		sp->addObject(4,   new TimeSig(cs, 4, 5), "5/4");
+		sp->addObject(5,   new TimeSig(cs, 4, 6), "6/4");
+		sp->addObject(6,   new TimeSig(cs, 5, 3), "3/8");
+		sp->addObject(7,   new TimeSig(cs, 8, 6), "6/8");
+		sp->addObject(8,   new TimeSig(cs, 8, 9), "9/8");
+		sp->addObject(9,   new TimeSig(cs, 8, 12), "12/8");
+		sp->addObject(10,  new TimeSig(cs, TSIG_FOUR_FOUR), "4/4");
+		sp->addObject(11,  new TimeSig(cs, TSIG_ALLA_BREVE), "3/4 alla breve");
             }
       timePalette->show();
       timePalette->raise();
-      _spatium = oSpatium;
       }
 
 //---------------------------------------------------------

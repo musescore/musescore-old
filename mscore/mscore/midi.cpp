@@ -1088,7 +1088,7 @@ bool MidiFile::readTrack(bool mergeChannels)
       int len       = readLong();       // len
       int endPos    = curPos + len;
       status        = -1;
-      sstatus       = -1;  // running status, der nicht bei meta oder sysex zurüesetzt wird
+      sstatus       = -1;  // running status, der nicht bei meta oder sysex zurüsetzt wird
       lastchan      = -1;
       lastport      = -1;
       channelprefix = -1;
@@ -1549,7 +1549,7 @@ MidiEvent* MidiFile::readEvent(MidiTrack* track)
                               delete[] buffer;
                               delete event;
                               }
-                              return (MidiEvent*)-1;  // DEBUG: eigentlich näten Event lesen
+                              return (MidiEvent*)-1;  // DEBUG: eigentlich näen Event lesen
                         case META_TRACK_COMMENT:
                               {
                               QString s((char*)buffer);
@@ -1557,7 +1557,7 @@ MidiEvent* MidiFile::readEvent(MidiTrack* track)
                               delete[] buffer;
                               delete event;
                               }
-                              return (MidiEvent*)-1;  // DEBUG: eigentlich näten Event lesen
+                              return (MidiEvent*)-1;  // DEBUG: eigentlich näen Event lesen
                         case META_CHANNEL_PREFIX:
                               if (len == 1) {
                                     channelprefix = buffer[0];
@@ -1584,7 +1584,7 @@ printf("Port Change %d\n", buffer[0]);
                               delete[] buffer;
                               delete event;
                               }
-                              return (MidiEvent*)-1;  // DEBUG: eigentlich näten Event lesen
+                              return (MidiEvent*)-1;  // DEBUG: eigentlich näen Event lesen
                         case META_TIME_SIGNATURE:
                               {
                               timesig_z = buffer[0];
@@ -1596,7 +1596,7 @@ printf("Port Change %d\n", buffer[0]);
                               delete event;
                               delete[] buffer;
                               }
-                              return (MidiEvent*)-1;  // DEBUG: eigentlich näten Event lesen
+                              return (MidiEvent*)-1;  // DEBUG: eigentlich näen Event lesen
                         case META_KEY_SIGNATURE:
                               {
                               (*cs->keymap)[t] = (signed char)(buffer[0]);
@@ -1605,12 +1605,12 @@ printf("Port Change %d\n", buffer[0]);
                               delete event;
                               delete[] buffer;
                               }
-                              return (MidiEvent*)-1;  // DEBUG: eigentlich näten Event lesen
+                              return (MidiEvent*)-1;  // DEBUG: eigentlich näen Event lesen
                         case META_MARKER:
 //                              song->addMarker(QString((const char*)(buffer)), event->posTick(), false);
                               delete event;
                               delete[] buffer;
-                              return (MidiEvent*)-1;  // DEBUG: eigentlich näten Event lesen
+                              return (MidiEvent*)-1;  // DEBUG: eigentlich näen Event lesen
                         case META_TITLE:
                               title = (char*)buffer;
                               delete event;
@@ -1945,12 +1945,12 @@ QString MidiTrack::instrName(int type) const
 //      Instrumentennamen verwendet werden?
 //    - Instrumente feststellen
 //          - Name (kommentar?)
-//          - Schlül
+//          - Schlü
 //          - Split System?
 //    * Takte feststellen
 //    - Schlagzeugtrack markieren
 //    - Quantisierung festlegen:
-//       - küste Note feststellen
+//       - küte Note feststellen
 //    - songtitle
 
 // process:
@@ -2150,7 +2150,7 @@ void Score::convertMidi(MidiFile* mf)
                   for (int staffIdx = 0; staffIdx < nstaves(); ++staffIdx) {
                         TimeSig* ts = new TimeSig(this);
                         ts->setTick(tick);
-                        ts->setSig(se.z, se.n);
+                        ts->setSig(se.n, se.z);
                         ts->setStaff(staff(staffIdx));
                         m->add(ts);
                         }

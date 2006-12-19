@@ -1,3 +1,7 @@
+19.12 (ws)
+      * Changed TimeSig base class from Compound to Element.
+        Extend TimeSig to constructs like 3+2/8 etc. This changes xml file
+        format.
 18.12 (ws)
       * extend size of key palette cell
       * removed object geometry calculation from SymbolPalette::setObject()

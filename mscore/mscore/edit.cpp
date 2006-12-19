@@ -495,7 +495,7 @@ Element* Score::addTimeSig(TimeSig* sig, const QPointF& pos)
             }
 
       int z, n;
-      sig->zn(z, n);
+      sig->getSig(&z, &n);
       changeTimeSig(tick, sig->subtype());
       delete sig;
       return 0;
@@ -518,7 +518,7 @@ void Score::changeTimeSig(int tick, int st)
       sigmap->timesig(tick, oz, on);
       TimeSig* sig = new TimeSig(this, st);
       int z, n;
-      sig->zn(z, n);
+      sig->getSig(&z, &n);
       delete sig;
       if (oz == z && on == n)
             return;                 // no change

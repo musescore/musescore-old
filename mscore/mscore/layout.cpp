@@ -207,7 +207,7 @@ void ScoreLayout::processSystemHeader(Measure* m)
                   TimeSig* ts = new TimeSig(_score);
                   ts->setStaff(staff);
                   ts->setTick(tick);
-                  ts->setSig(z, n);
+                  ts->setSig(n, z);
                   ts->setGenerated(true);
                   m->add(ts);
                   }
