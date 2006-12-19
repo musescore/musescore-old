@@ -23,32 +23,41 @@
 
 #include "element.h"
 
+enum {
+      TSIG_FOUR_FOUR  = 0x40000104,
+      TSIG_ALLA_BREVE = 0x40000103
+      };
+
 //---------------------------------------------------------
 //   TimeSig
 //    Time Signature
 //---------------------------------------------------------
 
-enum { TSIG_2_2, TSIG_2_4, TSIG_3_4, TSIG_4_4, TSIG_5_4, TSIG_6_4,
-       TSIG_3_8, TSIG_6_8, TSIG_12_8, TSIG_44, TSIG_34,
-       TSIG_9_8,
-       TSIG_N
-      };
-
-class TimeSig : public Compound {
-      int _z, _n;
+/**
+ \a subtype() is coded as:
+      bit 0-5     denominator (n)
+      bit 6-11    nominator1 (z1)
+      bit 12-17   nominator2
+      bit 18-23   nominator3
+      bit 24-29   nominator4
+      bit 30      variation (alla breve etc.)
+*/
+class TimeSig : public Element {
 
    public:
       TimeSig(Score*);
-      TimeSig(Score*, int);
+      TimeSig(Score*, int st);
+      TimeSig(Score*, int n, int z1, int z2=0, int z3=0, int z4=0);
       virtual ElementType type() const { return TIMESIG; }
 
+      virtual void draw1(Painter&);
       virtual void write(Xml& xml) const;
       virtual void read(QDomNode);
-      virtual void setSubtype(int val);
-      void zn(int&, int&) const;
-      void setSig(int z, int n);
+      void getSig(int* n, int* z1, int* z2=0, int*z3=0, int*z4=0) const;
+      void setSig(int n, int z1, int z2=0, int z3=0, int z4=0);
       virtual bool acceptDrop(const QPointF&, int, int) const;
       virtual void drop(const QPointF&, int, int);
+      virtual void layout();
       };
 
 #endif

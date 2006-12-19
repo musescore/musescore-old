@@ -174,7 +174,7 @@ bool Element::intersects(const QRectF& rr) const
 
 void Element::writeProperties(Xml& xml) const
       {
-      if (_subtype)
+      if (_subtype && !(type() == TIMESIG))
             xml.tag("subtype", _subtype);
       if (!_userOff.isNull())
             xml.tag("offset", _userOff);

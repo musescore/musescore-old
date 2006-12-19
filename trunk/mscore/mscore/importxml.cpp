@@ -961,7 +961,7 @@ void MusicXml::xmlAttributes(Measure* measure, int staff, QDomNode node)
                         for (int i = 0; i < staves; ++i) {
                               TimeSig* timesig = new TimeSig(score);
                               timesig->setTick(tick);
-                              timesig->setSig(beats, beatType);
+                              timesig->setSig(beatType, beats);
                               timesig->setStaff(score->staff(staff + i));
                               measure->add(timesig);
                               }
