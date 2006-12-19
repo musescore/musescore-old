@@ -494,8 +494,6 @@ Element* Score::addTimeSig(TimeSig* sig, const QPointF& pos)
             return 0;
             }
 
-      int z, n;
-      sig->getSig(&z, &n);
       changeTimeSig(tick, sig->subtype());
       delete sig;
       return 0;
@@ -512,19 +510,19 @@ Element* Score::addTimeSig(TimeSig* sig, const QPointF& pos)
 // FIXME: undo/redo does not work
 //---------------------------------------------------------
 
-void Score::changeTimeSig(int tick, int st)
+void Score::changeTimeSig(int tick, int keySigSubtype)
       {
       int oz, on;
       sigmap->timesig(tick, oz, on);
-      TimeSig* sig = new TimeSig(this, st);
+
       int z, n;
-      sig->getSig(&z, &n);
-      delete sig;
+      TimeSig::getSig(keySigSubtype, &n, &z);
       if (oz == z && on == n)
             return;                 // no change
+
       sigmap->add(tick, z, n);
 
-//      printf("Score::changeTimeSig tick %d z %d n %d\n",
+// printf("Score::changeTimeSig tick %d z %d n %d\n",
 //         tick, z, n);
 
       //---------------------------------------------
@@ -541,7 +539,7 @@ again:
                               if (etick == tick
                                   || ic == sigmap->end()
                                   || (ic->first == tick && ic->second.z != z && ic->second.n == n)) {
-printf("  remove timesig\n");
+// printf("  remove timesig\n");
                                     // el->remove(e);
                                     m->remove(segment);
                                     goto again;
@@ -611,7 +609,8 @@ printf("  remove timesig\n");
       if (tick != 0) {
             Measure* measure = tick2measure(tick);
             for (int staffIdx = 0; staffIdx < staves; ++staffIdx) {
-                  TimeSig* nsig = new TimeSig(this, st);
+// printf("add timesig\n");
+                  TimeSig* nsig = new TimeSig(this, keySigSubtype);
                   nsig->setStaff(staff(staffIdx));
                   nsig->setTick(tick);
                   measure->add(nsig);

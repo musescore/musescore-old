@@ -49,11 +49,19 @@ class TimeSig : public Element {
       TimeSig(Score*, int st);
       TimeSig(Score*, int n, int z1, int z2=0, int z3=0, int z4=0);
       virtual ElementType type() const { return TIMESIG; }
-
+      virtual void setSubtype(int val);
       virtual void draw1(Painter&);
       virtual void write(Xml& xml) const;
       virtual void read(QDomNode);
-      void getSig(int* n, int* z1, int* z2=0, int*z3=0, int*z4=0) const;
+      void getSig(int* n, int* z1) const;
+      static void getSig(int st, int* n, int* z) {
+            *n = st & 0x3f;
+            *z =    ((st>>24)& 0x3f)
+                  + ((st>>18)& 0x3f)
+                  + ((st>>12)& 0x3f)
+                  + ((st>>6) & 0x3f);
+            }
+      void getSig(int* n, int* z1, int* z2, int*z3=0, int*z4=0) const;
       void setSig(int n, int z1, int z2=0, int z3=0, int z4=0);
       virtual bool acceptDrop(const QPointF&, int, int) const;
       virtual void drop(const QPointF&, int, int);
