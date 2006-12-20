@@ -1,6 +1,6 @@
 Testfiles
 
-test1.msc	
+test1.msc
       single staff, single voice, c-scale
 
 test7.msc
@@ -11,6 +11,8 @@ test7.msc
       - prima volta / seconda volta
 
 test8.msc   simple tuplets: triplet
+testKeysig2.msc
+testTimesig2.msc
 
 midi1.mid	single track, single voice
 midi2.mid	single track, simple chords
