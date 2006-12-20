@@ -2,6 +2,7 @@
 <museScore version="1.0">
   <Geometry x="422" y="0" w="1061" h="931" />
   <Spatium>1.62</Spatium>
+  <Division>384</Division>
   <Mag>1</Mag>
   <xoff>12.37</xoff>
   <yoff>26.125</yoff>
@@ -135,7 +136,7 @@
         <offset x="-0.132126" y="-0.924885"/>
         </work-title>
       <work-number>
-        <data>Köchel No. 545</data>
+        <data>Köhel No. 545</data>
         <style>3</style>
         </work-number>
       <creator-composer>

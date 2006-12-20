@@ -21,7 +21,7 @@
 add_custom_target(all.h.pch
    ALL
    COMMAND cp ${PROJECT_SOURCE_DIR}/mscore/all.h ${PROJECT_BINARY_DIR}/mscore/all.h
-   COMMAND ${CMAKE_CXX_COMPILER} 
+   COMMAND ${CMAKE_CXX_COMPILER}
      -g -Wextra -fno-exceptions -Wall
      -I${QT_INCLUDE_DIR}
      -I${QT_QTCORE_INCLUDE_DIR}
@@ -31,7 +31,7 @@ add_custom_target(all.h.pch
    WORKING_DIRECTORY ${PROJECT_BINARY_DIR}/mscore
    )
 
-set(CMAKE_CXX_FLAGS 
+set(CMAKE_CXX_FLAGS
    "-g -Wall -Wextra -Winvalid-pch -fno-exceptions"
    )
 
@@ -62,6 +62,7 @@ QT4_WRAP_UI (ui_headers
       text.ui
       textpalette.ui
       textstyle.ui
+      timedialog.ui
       )
 
 QT4_WRAP_CPP (mocs
@@ -84,6 +85,7 @@ QT4_WRAP_CPP (mocs
       seq.h
       textpalette.h
       textstyle.h
+      timedialog.h
       )
 
 QT4_ADD_RESOURCES (qrc_files mscore.qrc)
@@ -182,6 +184,7 @@ add_executable ( mscore
       textelement.cpp
       textpalette.cpp
       textstyle.cpp
+      timedialog.cpp
       trill.cpp
       tuplet.cpp
       undo.cpp

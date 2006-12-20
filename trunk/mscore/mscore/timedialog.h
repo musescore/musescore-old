@@ -1,7 +1,7 @@
 //=============================================================================
 //  MusE Score
 //  Linux Music Score Editor
-//  $Id: mtime.h,v 1.2 2006/03/02 17:08:36 wschweer Exp $
+//  $Id: mscore.h,v 1.54 2006/04/12 14:58:10 wschweer Exp $
 //
 //  Copyright (C) 2002-2006 Werner Schweer (ws@seh.de)
 //
@@ -18,33 +18,27 @@
 //  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //=============================================================================
 
-#ifndef __MTIME_H__
-#define __MTIME_H__
+#ifndef __TIMEDIALOG_H__
+#define __TIMEDIALOG_H__
 
-extern int division;    // midi ticks per quarter note
+#include "ui_timedialog.h"
+
+class SymbolPalette;
 
 //---------------------------------------------------------
-//   MTime
-//    "Musical Time"
-//    Type 0:  expressed as fraction nominator/denominator
-//    Type 1:  midi ticks with resolution of 'division'
-//             ticks per quarter note
+//   TimeDialog
 //---------------------------------------------------------
 
-class MTime {
-      int _nominator;
-      int _denominator;
-      int _tick;
-      bool tickTime;
+class TimeDialog : public QWidget, Ui::TimeDialogBase {
+      Q_OBJECT
+
+      SymbolPalette* sp;
+
+   private slots:
+      void addClicked();
 
    public:
-      MTime();
-      MTime(int z, int n);
-      MTime(int t);
-      int tick() const { return _tick; }
-      void setTick(int t);
-      void setFrac(int z, int n);
+      TimeDialog(QWidget* parent = 0);
       };
 
 #endif
-

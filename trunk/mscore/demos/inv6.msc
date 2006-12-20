@@ -2,6 +2,7 @@
 <museScore version="1.0">
   <Geometry x="445" y="0" w="1111" h="931" />
   <Spatium>1.625</Spatium>
+  <Division>384</Division>
   <Mag>1</Mag>
   <xoff>57</xoff>
   <yoff>58</yoff>

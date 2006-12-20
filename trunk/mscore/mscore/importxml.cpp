@@ -826,7 +826,9 @@ void MusicXml::direction(Measure* measure, int staff, QDomNode node)
                   domError(node);
             }
       if (placement == "below")
-            ry += 6.0;
+            ry += 2;    // ry += 6.0;
+      else
+            ry -= 1;
 
       if (dirType == "words") {
             TextElement* t = new TextElement(score);
@@ -857,9 +859,9 @@ void MusicXml::direction(Measure* measure, int staff, QDomNode node)
             else
                   printf("unknown pedal %s\n", type.toLatin1().data());
             if (placement == "above")
-                  ry -= 2;
+                  ry -= 0;    // ry -= 2;
             else
-                  ry += 2;
+                  ry += 5;    // ry += 2;
             s->setUserOff(QPointF(rx + xoffset, ry + yoffset));
             s->setMxmlOff(offset);
             s->setStaff(score->staff(staff + rstaff));
@@ -871,9 +873,9 @@ void MusicXml::direction(Measure* measure, int staff, QDomNode node)
                   DynVal val = Dynamic::tag2val(*it);
                   Dynamic* dyn = new Dynamic(score, val);
                   if (placement == "above")
-                        ry -= 2.5;
+                        ry -= 5.5;  // ry -= 2.5;
                   else
-                        ry += 2;
+                        ry += 1;    // ry += 2;
                   dyn->setUserOff(QPointF(rx + xoffset, ry + yoffset));
                   dyn->setMxmlOff(offset);
                   dyn->setStaff(score->staff(staff + rstaff));
@@ -883,9 +885,9 @@ void MusicXml::direction(Measure* measure, int staff, QDomNode node)
             }
       else if (dirType == "wedge") {
             if (placement == "above")
-                  ry -= 9;
+                  ry -= 8;    // ry -= 9;
             else
-                  ry -= 5;
+                  ry -= 2;    // ry -= 5;
             if (type == "crescendo")
                   addWedge(0, tick, rx, ry, 0);
             else if (type == "stop")

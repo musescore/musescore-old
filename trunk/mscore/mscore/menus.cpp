@@ -42,6 +42,7 @@
 #include "timesig.h"
 #include "barline.h"
 #include "layoutbreak.h"
+#include "timedialog.h"
 
 //---------------------------------------------------------
 //   genCreateMenu
@@ -338,27 +339,8 @@ void MuseScore::keyMenu()
 
 void MuseScore::timeMenu()
       {
-      if (timePalette == 0) {
-            timePalette = new QScrollArea;
-            timePalette->setWindowTitle(tr("MuseScore: TimeSignature"));
-            SymbolPalette* sp = new SymbolPalette(4, 4, 0);
-            ((QScrollArea*)timePalette)->setWidget(sp);
-            sp->setGrid(60, 60);
-            sp->showStaff(true);
-
-		sp->addObject(0,   new TimeSig(cs, 2, 2), "2/2");
-		sp->addObject(1,   new TimeSig(cs, 4, 2), "2/4");
-		sp->addObject(2,   new TimeSig(cs, 4, 3), "3/4");
-		sp->addObject(3,   new TimeSig(cs, 4, 4), "4/4");
-		sp->addObject(4,   new TimeSig(cs, 4, 5), "5/4");
-		sp->addObject(5,   new TimeSig(cs, 4, 6), "6/4");
-		sp->addObject(6,   new TimeSig(cs, 5, 3), "3/8");
-		sp->addObject(7,   new TimeSig(cs, 8, 6), "6/8");
-		sp->addObject(8,   new TimeSig(cs, 8, 9), "9/8");
-		sp->addObject(9,   new TimeSig(cs, 8, 12), "12/8");
-		sp->addObject(10,  new TimeSig(cs, TSIG_FOUR_FOUR), "4/4");
-		sp->addObject(11,  new TimeSig(cs, TSIG_ALLA_BREVE), "3/4 alla breve");
-            }
+      if (timePalette == 0)
+            timePalette = new TimeDialog(this);
       timePalette->show();
       timePalette->raise();
       }

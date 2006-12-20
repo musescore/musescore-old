@@ -157,8 +157,8 @@ void Measure::layoutBeams()
                         bool styleBreak = (cr->tick() % group) == 0;
                         bool hintBreak  = bm == BEAM_BEGIN || bm == BEAM_NO;
 
-                        bool mustBreak = (bm != BEAM_MID) 
-                                      && (bm != BEAM_END) 
+                        bool mustBreak = (bm != BEAM_MID)
+                                      && (bm != BEAM_END)
                                       && (styleBreak || tooLong || hintBreak);
                         if (mustBreak) {
                               beam->layout();
@@ -481,30 +481,22 @@ void Beam::layout()
       bs->p1  = p1;
       bs->p2  = p2;
 
-      switch (maxTickLen) {
-            case division/16:       // 1/64     24
+      if (maxTickLen > division/2 + division/4) {
+            if (maxTickLen <= division/16) {       // 1/64     24
                   bs = new BeamSegment(p1, p2);
                   bs->move(0, beamDist * 3);
                   beamSegments.push_back(bs);
-
-            case division/8:        // 1/32   48
+                  }
+            if (maxTickLen <= division/8) {        // 1/32   48
                   bs = new BeamSegment(p1, p2);
                   bs->move(0, beamDist * 2);
                   beamSegments.push_back(bs);
-
-            case division/4:              // 1/16  96
-            case division/4+division/8:   //       144
+                  }
+            if (maxTickLen <= division/4+division/8) {   //       144
                   bs = new BeamSegment(p1, p2);
                   bs->move(0, beamDist);
                   beamSegments.push_back(bs);
-                  break;
-
-            case division/2:              // 192
-            case division/2+division/4:
-                  break;
-            default:
-                  printf("beam error(1): %d\n", maxTickLen);
-                  break;
+                  }
             }
 
             //---------------------------------------------
@@ -523,11 +515,10 @@ void Beam::layout()
 
       for (;l >= division/16; l = l/2) {
             int n = 1;
-            switch (l) {
-                  case division/4:  n = 1; break;
-                  case division/8:  n = 2; break;
-                  case division/16: n = 3; break;
-                  }
+            if (l == division/8)
+                  n = 2;
+            else if (l == division/16)
+                  n = 3;
 
             double y1 = p1.y() + beamDist * n;
 

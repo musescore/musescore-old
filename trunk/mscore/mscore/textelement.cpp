@@ -70,7 +70,8 @@ TextElement::~TextElement()
 const QRectF& TextElement::bbox() const
       {
       _bbox = QRectF(0.0, 0.0, doc.size().width(), doc.size().height());
-// printf("TextElement::bbox %f %f\n", _bbox.width(), _bbox.height());
+// printf("TextElement<%s>: bbox %f %f\n", doc.toPlainText().toLocal8Bit().data(),
+//   _bbox.width(), _bbox.height());
       return _bbox;
       }
 
@@ -78,9 +79,9 @@ const QRectF& TextElement::bbox() const
 //   resetMode
 //---------------------------------------------------------
 
-void TextElement::resetMode()    
-      { 
-      editMode = 0; 
+void TextElement::resetMode()
+      {
+      editMode = 0;
       }
 
 //---------------------------------------------------------
@@ -358,7 +359,7 @@ void TextElement::draw1(Painter& p)
 #if 1
       QAbstractTextDocumentLayout::PaintContext c;
       c.cursorPosition = editMode ? cursor->position() : -1;
-      
+
       QAbstractTextDocumentLayout* layout = doc.documentLayout();
 
       doc.documentLayout()->draw(&p, c);

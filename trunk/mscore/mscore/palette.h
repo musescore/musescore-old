@@ -53,6 +53,10 @@ class SymbolPalette : public QWidget {
       void addObject(int idx, int sym);
       void setGrid(int, int);
       void showStaff(bool);
+      int getRows() const { return rows; }
+      int getColumns() const { return columns; }
+      void setRowsColumns(int r, int c);
+      Element* element(int idx) { return symbols[idx]; }
       };
 
 #endif

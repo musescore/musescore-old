@@ -370,39 +370,24 @@ void Note::setAccidental(int pre)
 
 void Note::setHead(int ticks)
       {
-      switch (ticks) {
-            case 0:     // grace note?
-                  _head = _grace ? s_quartheadSym : quartheadSym;
-                  break;
-            case 6*division:        // 1/1 + 1/2  (gibt's das???)
-                  _dots  = 1;
-            case 4*division:        // 1/1
-                  _head = _grace ? s_wholeheadSym : wholeheadSym;
-                  break;
-            case 3*division:        // 1/2
+      if (ticks <= division) {
+            _head = _grace ? s_quartheadSym : quartheadSym;
+            if (ticks) {
+                  int n    = division / ticks;
+                  int rest = division % (n * ticks);
+                  if (rest)
+                        _dots = 1;
+                  }
+            }
+      else if (ticks >= 4 * division) {
+            if (ticks % (4 * division))
                   _dots = 1;
-            case 2*division:        // 1/2
-                  _head = _grace ? s_halfheadSym : halfheadSym;
-                  break;
-            case division + division/2:         // dotted values
-            case division/2 + division/4:
-            case division/4 + division/8:
-            case division/8 + division/16:
-            case division/16 + division/32:
-            case division/32 + division/64:
-                  _dots  = 1;
-            case division:          // quarternote
-            case division/2:        // 1/8
-            case division/4:        // 1/16
-            case division/8:        // 1/32
-            case division/16:       // 1/64
-            case division/32:       // 1/128
-                  _head = _grace ? s_quartheadSym : quartheadSym;
-                  break;
-            default:
-//                  fprintf(stderr, "invalid note len %d\n", l);
-                  _head = _grace ? s_quartheadSym : quartheadSym;
-                  break;
+            _head = _grace ? s_wholeheadSym : wholeheadSym;
+            }
+      else if (ticks >= 2 * division) {
+            if (ticks % (2 * division))
+                  _dots = 1;
+            _head = _grace ? s_halfheadSym : halfheadSym;
             }
       bboxUpdate();
       }
@@ -674,7 +659,7 @@ ShadowNote::ShadowNote(Score* s)
 
 ShadowNote::~ShadowNote()
       {
-      delete _sym;      
+      delete _sym;
       }
 
 //---------------------------------------------------------

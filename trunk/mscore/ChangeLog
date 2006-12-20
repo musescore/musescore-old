@@ -1,7 +1,10 @@
 20.12 (ws)
+      _ extend time signature palette for custom time signatures
+      - fix layout of instrument names
       - changed midi "divisor" from 384 ticks/quarter note to 480 to avoid
         problems with some time signatures. In the long run we may have to
-        deal with real fractions (numerator+denominator).
+        deal with real fractions (numerator+denominator). "divisor" changed
+        from constant to variable is is now saved in the *.msc file.
       - Don't add a "generated" time signature to first staff in a score.
         Time signatures must always be explicit added. This allows for different
         symbols (example: "alla breve") for first time signature (or for no
