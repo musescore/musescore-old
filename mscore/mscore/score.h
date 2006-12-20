@@ -314,7 +314,8 @@ class Score : public QObject {
       void removeObject(Element*);
 
       Element* addClef(Clef*);
-      Element* addTimeSig(TimeSig*, const QPointF&);
+//      Element* addTimeSig(TimeSig*, const QPointF&);
+      void addTimeSig(int tick, int keySigSubtype);
       Element* addKeySig(KeySig*, const QPointF&);
       Element* addDynamic(Dynamic* atr, const QPointF& pos);
       Element* cmdAddHairpin(Hairpin* atr, const QPointF& pos);

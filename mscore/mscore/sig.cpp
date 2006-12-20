@@ -20,29 +20,18 @@
 
 #include "sig.h"
 #include "xml.h"
-
-const int division = 384;
+#include "mtime.h"
 
 //---------------------------------------------------------
 //   ticks_beat
 //---------------------------------------------------------
 
-static int ticks_beat(int N)
+static int ticks_beat(int n)
       {
-      int m = division;
-      switch (N) {
-            case  1:  m <<= 2; break;           // 1536
-            case  2:  m <<= 1; break;           // 768
-            case  4:  break;                    // 384
-            case  8:  m >>= 1; break;           // 192
-            case 16:  m >>= 2; break;           // 96
-            case 32:  m >>= 3; break;           // 48
-            case 64:  m >>= 4; break;           // 24
-            case 128: m >>= 5; break;           // 12
-            default:
-                  fprintf(stderr, "bad divisor %d\n", N);
-                  assert(false);
-                  break;
+      int m = (division * 4) / n;
+      if ((division * 4) % n) {
+            fprintf(stderr, "Mscore: ticks_beat(): bad divisor %d\n", n);
+            assert(false);
             }
       return m;
       }
@@ -51,9 +40,14 @@ static int ticks_beat(int N)
 //   ticks_measure
 //---------------------------------------------------------
 
-int ticks_measure(int Z, int N)
+int ticks_measure(int z, int n)
       {
-      return ticks_beat(N) * Z;
+      int m = (division * 4 * z) / n;
+      if ((division * 4 * z) % n) {
+            fprintf(stderr, "Mscore: ticks_measure(): bad divisor %d\n", n);
+            assert(false);
+            }
+      return m;
       }
 
 //---------------------------------------------------------
