@@ -1,0 +1,703 @@
+<?xml version="1.0" encoding="utf8"?>
+<museScore version="1.0">
+  <Geometry x="613" y="0" w="950" h="500" />
+  <Spatium>1.5</Spatium>
+  <Mag>1</Mag>
+  <xoff>0</xoff>
+  <yoff>0</yoff>
+  <Style>
+    <staffUpperBorder>8</staffUpperBorder>
+    <staffLowerBorder>4</staffLowerBorder>
+    <staffDistance>6.5</staffDistance>
+    <akkoladeDistance>5.5</akkoladeDistance>
+    <systemDistance>9.25</systemDistance>
+    <minMeasureWidth>4</minMeasureWidth>
+    <barWidth>0.16</barWidth>
+    <doubleBarWidth>0.16</doubleBarWidth>
+    <endBarWidth>0.3</endBarWidth>
+    <doubleBarDistance>0.3</doubleBarDistance>
+    <endBarDistance>0.3</endBarDistance>
+    <bracketWidth>0.35</bracketWidth>
+    <bracketDistance>0.3</bracketDistance>
+    <clefLeftMargin>0.5</clefLeftMargin>
+    <keysigLeftMargin>0.5</keysigLeftMargin>
+    <timesigLeftMargin>0.5</timesigLeftMargin>
+    <clefKeyRightMargin>1.75</clefKeyRightMargin>
+    <stemWidth>0.13</stemWidth>
+    <minNoteDistance>0.5</minNoteDistance>
+    <spacing16>1</spacing16>
+    <spacing8>1.4</spacing8>
+    <spacing4>1.8</spacing4>
+    <spacing2>2.2</spacing2>
+    <measureSpacing>1.5</measureSpacing>
+    <barNoteDistance>1.5</barNoteDistance>
+    <noteBarDistance>1</noteBarDistance>
+    <staffLineWidth>0.08</staffLineWidth>
+    <helpLineWidth>0.16</helpLineWidth>
+    <akkoladeWidth>1.6</akkoladeWidth>
+    <prefixDistance>0.13</prefixDistance>
+    <prefixNoteDistance>0.22</prefixNoteDistance>
+    <beamWidth>0.48</beamWidth>
+    <beamDistance>0.5</beamDistance>
+    <beamMinLen>1.25</beamMinLen>
+    <beamMinSlope>0.1</beamMinSlope>
+    <beamMaxSlope>0.5</beamMaxSlope>
+    <maxBeamTicks>384</maxBeamTicks>
+    <dotNoteDistance>0.5</dotNoteDistance>
+    <dotRestDistance>0.25</dotRestDistance>
+    <dotDotDistance>0.5</dotDotDistance>
+    <propertyDistanceHead>0.5</propertyDistanceHead>
+    <propertyDistanceStem>0.5</propertyDistanceStem>
+    <propertyDistance>0.25</propertyDistance>
+    <ticklen2Width>0.5</ticklen2Width>
+    <pageFillLimit>0.3</pageFillLimit>
+    <hairpinHeight>1.2</hairpinHeight>
+    <hairpinContHeight>0.5</hairpinContHeight>
+    <hairpinWidth>0.13</hairpinWidth>
+    <showPageNumber>1</showPageNumber>
+    <showPageNumberOne>0</showPageNumberOne>
+    <pageNumberOddEven>1</pageNumberOddEven>
+    <showMeasureNumber>1</showMeasureNumber>
+    <showMeasureNumberOne>0</showMeasureNumberOne>
+    <measureNumberInterval>5</measureNumberInterval>
+    <measureNumberAllStaffs>0</measureNumberAllStaffs>
+    <measureNumberSystem>1</measureNumberSystem>
+    </Style>
+  <showInvisible>1</showInvisible>
+  <page-layout>
+    <pageFormat>A4</pageFormat>
+    <page-margins type="both">
+      <left-margin>66.6667</left-margin>
+      <right-margin>66.6667</right-margin>
+      <top-margin>66.6667</top-margin>
+      <bottom-margin>133.333</bottom-margin>
+      </page-margins>
+    </page-layout>
+  <siglist>
+    <sig tick="0">
+      <nom>4</nom>
+      <denom>4</denom>
+      </sig>
+    <sig tick="1536">
+      <nom>2</nom>
+      <denom>2</denom>
+      </sig>
+    <sig tick="3072">
+      <nom>2</nom>
+      <denom>4</denom>
+      </sig>
+    <sig tick="3840">
+      <nom>4</nom>
+      <denom>4</denom>
+      </sig>
+    <sig tick="5376">
+      <nom>3</nom>
+      <denom>4</denom>
+      </sig>
+    </siglist>
+  <keylist>
+    <key tick="0" idx="0"/>
+    </keylist>
+  <tempolist fix="500000">
+    <tempo at="0">
+      <tick>0</tick>
+      <val>500000</val>
+      </tempo>
+    <tempo at="21474836">
+      <tick>0</tick>
+      <val>500000</val>
+      </tempo>
+    </tempolist>
+  <Part>
+    <Staff>
+      <cleflist>
+        <clef tick="0" idx="0"/>
+        </cleflist>
+      <bracket type="1" span="2"/>
+      </Staff>
+    <Staff>
+      <cleflist>
+        <clef tick="0" idx="4"/>
+        </cleflist>
+      </Staff>
+    <trackName>Piano</trackName>
+    <name>Piano</name>
+    <shortName>Pno.</shortName>
+    <Instrument>
+      <midiChannel>0</midiChannel>
+      <midiProgram>0</midiProgram>
+      <volume>100</volume>
+      <chorus>30</chorus>
+      <reverb>30</reverb>
+      </Instrument>
+    </Part>
+  <Staff id="1">
+    <Measure number="1" tick="0">
+      <BarLine>
+        </BarLine>
+      <TimeSig>
+        <subtype>260</subtype>
+        <den>4</den>
+        <nom1>4</nom1>
+        </TimeSig>
+      <Rest>
+        <ticklen>1536</ticklen>
+        <BeamMode>4</BeamMode>
+        </Rest>
+      </Measure>
+    <Measure number="2" tick="1536">
+      <BarLine>
+        </BarLine>
+      <TimeSig>
+        <subtype>130</subtype>
+        <tick>1536</tick>
+        <den>2</den>
+        <nom1>2</nom1>
+        </TimeSig>
+      <Rest>
+        <tick>1536</tick>
+        <ticklen>1536</ticklen>
+        <BeamMode>4</BeamMode>
+        </Rest>
+      </Measure>
+    <Measure number="3" tick="3072">
+      <BarLine>
+        </BarLine>
+      <TimeSig>
+        <subtype>132</subtype>
+        <tick>3072</tick>
+        <den>4</den>
+        <nom1>2</nom1>
+        </TimeSig>
+      <Rest>
+        <tick>3072</tick>
+        <ticklen>768</ticklen>
+        <BeamMode>4</BeamMode>
+        </Rest>
+      </Measure>
+    <Measure number="4" tick="3840">
+      <BarLine>
+        <tick>-768</tick>
+        </BarLine>
+      <TimeSig>
+        <subtype>1073742084</subtype>
+        <tick>3840</tick>
+        <den>4</den>
+        <nom1>4</nom1>
+        </TimeSig>
+      <Rest>
+        <tick>3840</tick>
+        <ticklen>1536</ticklen>
+        <BeamMode>4</BeamMode>
+        </Rest>
+      </Measure>
+    <Measure number="5" tick="5376">
+      <BarLine>
+        <tick>-768</tick>
+        </BarLine>
+      <TimeSig>
+        <subtype>196</subtype>
+        <tick>5376</tick>
+        <den>4</den>
+        <nom1>3</nom1>
+        </TimeSig>
+      <Rest>
+        <tick>5376</tick>
+        <ticklen>1152</ticklen>
+        <BeamMode>4</BeamMode>
+        </Rest>
+      </Measure>
+    <Measure number="6" tick="6528">
+      <BarLine>
+        <tick>-1152</tick>
+        </BarLine>
+      <Rest>
+        <tick>6528</tick>
+        <ticklen>1152</ticklen>
+        <BeamMode>4</BeamMode>
+        </Rest>
+      </Measure>
+    <Measure number="7" tick="7680">
+      <BarLine>
+        <tick>-1536</tick>
+        </BarLine>
+      <Rest>
+        <tick>7680</tick>
+        <ticklen>1152</ticklen>
+        <BeamMode>4</BeamMode>
+        </Rest>
+      </Measure>
+    <Measure number="8" tick="8832">
+      <BarLine>
+        <tick>-1920</tick>
+        </BarLine>
+      <Rest>
+        <tick>8832</tick>
+        <ticklen>1152</ticklen>
+        <BeamMode>4</BeamMode>
+        </Rest>
+      </Measure>
+    <Measure number="9" tick="9984">
+      <BarLine>
+        <tick>-2304</tick>
+        </BarLine>
+      <Rest>
+        <tick>9984</tick>
+        <ticklen>1152</ticklen>
+        <BeamMode>4</BeamMode>
+        </Rest>
+      </Measure>
+    <Measure number="10" tick="11136">
+      <BarLine>
+        <tick>-2688</tick>
+        </BarLine>
+      <Rest>
+        <tick>11136</tick>
+        <ticklen>1152</ticklen>
+        <BeamMode>4</BeamMode>
+        </Rest>
+      </Measure>
+    <Measure number="11" tick="12288">
+      <BarLine>
+        <tick>-3072</tick>
+        </BarLine>
+      <Rest>
+        <tick>12288</tick>
+        <ticklen>1152</ticklen>
+        <BeamMode>4</BeamMode>
+        </Rest>
+      </Measure>
+    <Measure number="12" tick="13440">
+      <BarLine>
+        <tick>-3456</tick>
+        </BarLine>
+      <Rest>
+        <tick>13440</tick>
+        <ticklen>1152</ticklen>
+        <BeamMode>4</BeamMode>
+        </Rest>
+      </Measure>
+    <Measure number="13" tick="14592">
+      <BarLine>
+        <tick>-3840</tick>
+        </BarLine>
+      <Rest>
+        <tick>14592</tick>
+        <ticklen>1152</ticklen>
+        <BeamMode>4</BeamMode>
+        </Rest>
+      </Measure>
+    <Measure number="14" tick="15744">
+      <BarLine>
+        <tick>-4224</tick>
+        </BarLine>
+      <Rest>
+        <tick>15744</tick>
+        <ticklen>1152</ticklen>
+        <BeamMode>4</BeamMode>
+        </Rest>
+      </Measure>
+    <Measure number="15" tick="16896">
+      <BarLine>
+        <tick>-4608</tick>
+        </BarLine>
+      <Rest>
+        <tick>16896</tick>
+        <ticklen>1152</ticklen>
+        <BeamMode>4</BeamMode>
+        </Rest>
+      </Measure>
+    <Measure number="16" tick="18048">
+      <BarLine>
+        <tick>-4992</tick>
+        </BarLine>
+      <Rest>
+        <tick>18048</tick>
+        <ticklen>1152</ticklen>
+        <BeamMode>4</BeamMode>
+        </Rest>
+      </Measure>
+    <Measure number="17" tick="19200">
+      <BarLine>
+        <tick>-5376</tick>
+        </BarLine>
+      <Rest>
+        <tick>19200</tick>
+        <ticklen>1152</ticklen>
+        <BeamMode>4</BeamMode>
+        </Rest>
+      </Measure>
+    <Measure number="18" tick="20352">
+      <BarLine>
+        <tick>-5760</tick>
+        </BarLine>
+      <Rest>
+        <tick>20352</tick>
+        <ticklen>1152</ticklen>
+        <BeamMode>4</BeamMode>
+        </Rest>
+      </Measure>
+    <Measure number="19" tick="21504">
+      <BarLine>
+        <tick>-6144</tick>
+        </BarLine>
+      <Rest>
+        <tick>21504</tick>
+        <ticklen>1152</ticklen>
+        <BeamMode>4</BeamMode>
+        </Rest>
+      </Measure>
+    <Measure number="20" tick="22656">
+      <BarLine>
+        <tick>-6528</tick>
+        </BarLine>
+      <Rest>
+        <tick>22656</tick>
+        <ticklen>1152</ticklen>
+        <BeamMode>4</BeamMode>
+        </Rest>
+      </Measure>
+    <Measure number="21" tick="23808">
+      <BarLine>
+        <tick>-6912</tick>
+        </BarLine>
+      <Rest>
+        <tick>23808</tick>
+        <ticklen>1152</ticklen>
+        <BeamMode>4</BeamMode>
+        </Rest>
+      </Measure>
+    <Measure number="22" tick="24960">
+      <BarLine>
+        <tick>-7296</tick>
+        </BarLine>
+      <Rest>
+        <tick>24960</tick>
+        <ticklen>1152</ticklen>
+        <BeamMode>4</BeamMode>
+        </Rest>
+      </Measure>
+    <Measure number="23" tick="26112">
+      <BarLine>
+        <tick>-7680</tick>
+        </BarLine>
+      <Rest>
+        <tick>26112</tick>
+        <ticklen>1152</ticklen>
+        <BeamMode>4</BeamMode>
+        </Rest>
+      </Measure>
+    <Measure number="24" tick="27264">
+      <BarLine>
+        <tick>-8064</tick>
+        </BarLine>
+      <Rest>
+        <tick>27264</tick>
+        <ticklen>1152</ticklen>
+        <BeamMode>4</BeamMode>
+        </Rest>
+      </Measure>
+    <Measure number="25" tick="28416">
+      <BarLine>
+        <tick>-8448</tick>
+        </BarLine>
+      <Rest>
+        <tick>28416</tick>
+        <ticklen>1152</ticklen>
+        <BeamMode>4</BeamMode>
+        </Rest>
+      </Measure>
+    <Measure number="26" tick="29568">
+      <BarLine>
+        <tick>-8832</tick>
+        </BarLine>
+      <Rest>
+        <tick>29568</tick>
+        <ticklen>1152</ticklen>
+        <BeamMode>4</BeamMode>
+        </Rest>
+      </Measure>
+    <Measure number="27" tick="30720">
+      <BarLine>
+        <tick>-9216</tick>
+        </BarLine>
+      <Rest>
+        <tick>30720</tick>
+        <ticklen>1152</ticklen>
+        <BeamMode>4</BeamMode>
+        </Rest>
+      </Measure>
+    <Measure number="28" tick="31872">
+      <BarLine>
+        <tick>-9600</tick>
+        </BarLine>
+      <Rest>
+        <tick>31872</tick>
+        <ticklen>1152</ticklen>
+        <BeamMode>4</BeamMode>
+        </Rest>
+      </Measure>
+    <Measure number="29" tick="33024">
+      <BarLine>
+        <tick>-9984</tick>
+        </BarLine>
+      <Rest>
+        <tick>33024</tick>
+        <ticklen>1152</ticklen>
+        <BeamMode>4</BeamMode>
+        </Rest>
+      </Measure>
+    <Measure number="30" tick="34176">
+      <BarLine>
+        <tick>-10368</tick>
+        </BarLine>
+      <Rest>
+        <tick>34176</tick>
+        <ticklen>1152</ticklen>
+        <BeamMode>4</BeamMode>
+        </Rest>
+      </Measure>
+    </Staff>
+  <Staff id="2">
+    <Measure number="1" tick="0">
+      <TimeSig>
+        <subtype>260</subtype>
+        <den>4</den>
+        <nom1>4</nom1>
+        </TimeSig>
+      <Rest>
+        <ticklen>1536</ticklen>
+        <BeamMode>4</BeamMode>
+        </Rest>
+      </Measure>
+    <Measure number="2" tick="1536">
+      <TimeSig>
+        <subtype>130</subtype>
+        <tick>1536</tick>
+        <den>2</den>
+        <nom1>2</nom1>
+        </TimeSig>
+      <Rest>
+        <tick>1536</tick>
+        <ticklen>1536</ticklen>
+        <BeamMode>4</BeamMode>
+        </Rest>
+      </Measure>
+    <Measure number="3" tick="3072">
+      <TimeSig>
+        <subtype>132</subtype>
+        <tick>3072</tick>
+        <den>4</den>
+        <nom1>2</nom1>
+        </TimeSig>
+      <Rest>
+        <tick>3072</tick>
+        <ticklen>768</ticklen>
+        <BeamMode>4</BeamMode>
+        </Rest>
+      </Measure>
+    <Measure number="4" tick="3840">
+      <TimeSig>
+        <subtype>1073742084</subtype>
+        <tick>3840</tick>
+        <den>4</den>
+        <nom1>4</nom1>
+        </TimeSig>
+      <Rest>
+        <tick>3840</tick>
+        <ticklen>1536</ticklen>
+        <BeamMode>4</BeamMode>
+        </Rest>
+      </Measure>
+    <Measure number="5" tick="5376">
+      <TimeSig>
+        <subtype>196</subtype>
+        <tick>5376</tick>
+        <den>4</den>
+        <nom1>3</nom1>
+        </TimeSig>
+      <Rest>
+        <tick>5376</tick>
+        <ticklen>1152</ticklen>
+        <BeamMode>4</BeamMode>
+        </Rest>
+      </Measure>
+    <Measure number="6" tick="6528">
+      <Rest>
+        <tick>6528</tick>
+        <ticklen>1152</ticklen>
+        <BeamMode>4</BeamMode>
+        </Rest>
+      </Measure>
+    <Measure number="7" tick="7680">
+      <Rest>
+        <tick>7680</tick>
+        <ticklen>1152</ticklen>
+        <BeamMode>4</BeamMode>
+        </Rest>
+      </Measure>
+    <Measure number="8" tick="8832">
+      <Rest>
+        <tick>8832</tick>
+        <ticklen>1152</ticklen>
+        <BeamMode>4</BeamMode>
+        </Rest>
+      </Measure>
+    <Measure number="9" tick="9984">
+      <Rest>
+        <tick>9984</tick>
+        <ticklen>1152</ticklen>
+        <BeamMode>4</BeamMode>
+        </Rest>
+      </Measure>
+    <Measure number="10" tick="11136">
+      <Rest>
+        <tick>11136</tick>
+        <ticklen>1152</ticklen>
+        <BeamMode>4</BeamMode>
+        </Rest>
+      </Measure>
+    <Measure number="11" tick="12288">
+      <Rest>
+        <tick>12288</tick>
+        <ticklen>1152</ticklen>
+        <BeamMode>4</BeamMode>
+        </Rest>
+      </Measure>
+    <Measure number="12" tick="13440">
+      <Rest>
+        <tick>13440</tick>
+        <ticklen>1152</ticklen>
+        <BeamMode>4</BeamMode>
+        </Rest>
+      </Measure>
+    <Measure number="13" tick="14592">
+      <Rest>
+        <tick>14592</tick>
+        <ticklen>1152</ticklen>
+        <BeamMode>4</BeamMode>
+        </Rest>
+      </Measure>
+    <Measure number="14" tick="15744">
+      <Rest>
+        <tick>15744</tick>
+        <ticklen>1152</ticklen>
+        <BeamMode>4</BeamMode>
+        </Rest>
+      </Measure>
+    <Measure number="15" tick="16896">
+      <Rest>
+        <tick>16896</tick>
+        <ticklen>1152</ticklen>
+        <BeamMode>4</BeamMode>
+        </Rest>
+      </Measure>
+    <Measure number="16" tick="18048">
+      <Rest>
+        <tick>18048</tick>
+        <ticklen>1152</ticklen>
+        <BeamMode>4</BeamMode>
+        </Rest>
+      </Measure>
+    <Measure number="17" tick="19200">
+      <Rest>
+        <tick>19200</tick>
+        <ticklen>1152</ticklen>
+        <BeamMode>4</BeamMode>
+        </Rest>
+      </Measure>
+    <Measure number="18" tick="20352">
+      <Rest>
+        <tick>20352</tick>
+        <ticklen>1152</ticklen>
+        <BeamMode>4</BeamMode>
+        </Rest>
+      </Measure>
+    <Measure number="19" tick="21504">
+      <Rest>
+        <tick>21504</tick>
+        <ticklen>1152</ticklen>
+        <BeamMode>4</BeamMode>
+        </Rest>
+      </Measure>
+    <Measure number="20" tick="22656">
+      <Rest>
+        <tick>22656</tick>
+        <ticklen>1152</ticklen>
+        <BeamMode>4</BeamMode>
+        </Rest>
+      </Measure>
+    <Measure number="21" tick="23808">
+      <Rest>
+        <tick>23808</tick>
+        <ticklen>1152</ticklen>
+        <BeamMode>4</BeamMode>
+        </Rest>
+      </Measure>
+    <Measure number="22" tick="24960">
+      <Rest>
+        <tick>24960</tick>
+        <ticklen>1152</ticklen>
+        <BeamMode>4</BeamMode>
+        </Rest>
+      </Measure>
+    <Measure number="23" tick="26112">
+      <Rest>
+        <tick>26112</tick>
+        <ticklen>1152</ticklen>
+        <BeamMode>4</BeamMode>
+        </Rest>
+      </Measure>
+    <Measure number="24" tick="27264">
+      <Rest>
+        <tick>27264</tick>
+        <ticklen>1152</ticklen>
+        <BeamMode>4</BeamMode>
+        </Rest>
+      </Measure>
+    <Measure number="25" tick="28416">
+      <Rest>
+        <tick>28416</tick>
+        <ticklen>1152</ticklen>
+        <BeamMode>4</BeamMode>
+        </Rest>
+      </Measure>
+    <Measure number="26" tick="29568">
+      <Rest>
+        <tick>29568</tick>
+        <ticklen>1152</ticklen>
+        <BeamMode>4</BeamMode>
+        </Rest>
+      </Measure>
+    <Measure number="27" tick="30720">
+      <Rest>
+        <tick>30720</tick>
+        <ticklen>1152</ticklen>
+        <BeamMode>4</BeamMode>
+        </Rest>
+      </Measure>
+    <Measure number="28" tick="31872">
+      <Rest>
+        <tick>31872</tick>
+        <ticklen>1152</ticklen>
+        <BeamMode>4</BeamMode>
+        </Rest>
+      </Measure>
+    <Measure number="29" tick="33024">
+      <Rest>
+        <tick>33024</tick>
+        <ticklen>1152</ticklen>
+        <BeamMode>4</BeamMode>
+        </Rest>
+      </Measure>
+    <Measure number="30" tick="34176">
+      <Rest>
+        <tick>34176</tick>
+        <ticklen>1152</ticklen>
+        <BeamMode>4</BeamMode>
+        </Rest>
+      </Measure>
+    </Staff>
+  <cursorStaff>0</cursorStaff>
+  <cursorVoice>0</cursorVoice>
+  </museScore>
