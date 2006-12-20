@@ -680,6 +680,7 @@ bool MuseScore::saveFile(QFile* f)
 
       xml.tag("Geometry", mscore);
       xml.tag("Spatium", _spatium / DPMM);
+      xml.tag("Division", division);
       xml.tag("Mag",  canvas->mag());
       xml.tag("xoff", canvas->xoffset());
       xml.tag("yoff", canvas->yoffset());
@@ -723,6 +724,8 @@ bool Score::loadFile(QFile* qf)
             return true;
             }
 
+      division = 384;   // for compatibility with old mscore files
+
       for (QDomNode node = doc.documentElement(); !node.isNull(); node = node.nextSibling()) {
             QDomElement e = node.toElement();
             if (e.isNull())
@@ -757,6 +760,8 @@ bool Score::loadFile(QFile* qf)
                               setYoffset(val.toDouble());
                         else if (tag == "Spatium")
                               setSpatium (val.toDouble() * DPMM);
+                        else if (tag == "Division")
+                              division = i;
                         else if (tag == "showInvisible")
                               _showInvisible = i;
                         else if (tag == "Style")

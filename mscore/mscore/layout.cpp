@@ -172,7 +172,7 @@ void ScoreLayout::processSystemHeader(Measure* m)
 
       for (int i = 0; i < nstaves; ++i) {
             Staff* staff   = _score->staff(i);
-            bool hasTimesig = false;
+//            bool hasTimesig = false;
             bool hasKeysig  = false;
             bool hasClef    = false;
             int strack      = i * VOICES;
@@ -186,9 +186,9 @@ void ScoreLayout::processSystemHeader(Measure* m)
                         if (!el)
                               continue;
                         switch (el->type()) {
-                              case TIMESIG:
-                                    hasTimesig = true;
-                                    break;
+//                              case TIMESIG:
+//                                    hasTimesig = true;
+//                                    break;
                               case KEYSIG:
                                     hasKeysig = true;
                                     break;

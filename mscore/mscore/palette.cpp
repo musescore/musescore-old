@@ -71,6 +71,33 @@ void SymbolPalette::setGrid(int hh, int vv)
       }
 
 //---------------------------------------------------------
+//   setRowsColumns
+//---------------------------------------------------------
+
+void SymbolPalette::setRowsColumns(int r, int c)
+      {
+      int n = rows * columns;
+      rows = r;
+      columns = c;
+      setFixedSize(columns * hgrid, rows * vgrid);
+
+      Element** nsymbols = new Element*[rows*columns];
+      QString* nnames    = new QString[rows*columns];
+      for (int i = 0; i < r*c; ++i)
+            nsymbols[i] = 0;
+
+      for (int i = 0; i < n; ++i) {
+            nsymbols[i] = symbols[i];
+            nnames[i] = names[i];
+            }
+      // TODO: delete symbols
+      delete[] symbols;
+      delete[] names;
+      symbols = nsymbols;
+      names = nnames;
+      }
+
+//---------------------------------------------------------
 //   showStaff
 //---------------------------------------------------------
 

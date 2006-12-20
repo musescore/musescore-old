@@ -268,8 +268,9 @@ double System::layout(const QPointF& p, double w)
             if (s->instrumentName) {
                   double y1 = s->bbox().top();
                   double y2 = staff(idx + nstaves - 1)->bbox().bottom();
-                  double d  = instrumentNameOffset * _spatium;
-                  s->instrumentName->setPos(xoff2 - d, y1 + (y2 - y1) * .5);
+                  double y  = y1 + (y2 - y1) * .5 - s->instrumentName->bbox().height() * .5;
+                  double d  = instrumentNameOffset * _spatium + s->instrumentName->bbox().width();
+                  s->instrumentName->setPos(xoff2 - d, y);
                   }
             idx += nstaves;
             }

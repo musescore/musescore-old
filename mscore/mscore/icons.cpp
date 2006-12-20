@@ -75,17 +75,12 @@ static QPixmap notePixmap(int ticks, const QColor& fg, int width, int height)
       painter.setPen(pen);
 
       QChar code;
-      switch(ticks) {
-            case division*4:
-                  code = 0xe11b;
-                  break;
-            case division*2:
-                  code = 0xe11c;
-                  break;
-            default:
-                  code = 0xe11d;
-                  break;
-            }
+      if (ticks == division*4)
+            code = 0xe11b;
+      else if (ticks == division*2)
+            code = 0xe11c;
+      else
+            code = 0xe11d;
       QFontMetricsF fm(f);
       QRectF bb(fm.boundingRect(code));
 
@@ -101,20 +96,14 @@ static QPixmap notePixmap(int ticks, const QColor& fg, int width, int height)
             QPointF p(x, 0.0);
             painter.drawLine(QLineF(x, y-1, x, 0));
             y = 0;
-            switch (ticks) {
-                  case division/16:
-                        painter.drawText(p, QString(0xe182));
-                        break;
-                  case division/8:
-                        painter.drawText(p, QString(0xe181));
-                        break;
-                  case division/4:
-                        painter.drawText(p, QString(0xe180));
-                        break;
-                  case division/2:
-                        painter.drawText(p, QString(0xe17f));
-                        break;
-                  }
+            if (ticks == division/16)
+                  painter.drawText(p, QString(0xe182));
+            else if (ticks == division/8)
+                  painter.drawText(p, QString(0xe181));
+            else if (ticks == division/4)
+                  painter.drawText(p, QString(0xe180));
+            else if (ticks == division/2)
+                  painter.drawText(p, QString(0xe17f));
             }
       painter.end();
       pm.setMask(pm.createHeuristicMask());

@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf8"?>
 <museScore version="1.0">
-  <Geometry x="613" y="0" w="950" h="500" />
+  <Geometry x="484" y="0" w="1159" h="816" />
   <Spatium>1.5</Spatium>
-  <Mag>1</Mag>
+  <Division>480</Division>
+  <Mag>1.5</Mag>
   <xoff>0</xoff>
   <yoff>0</yoff>
   <Style>
@@ -391,6 +392,7 @@
         <tick>192</tick>
         </BarLine>
       <TimeSig>
+        <subtype>8323</subtype>
         <tick>21696</tick>
         <den>3</den>
         <nom1>2</nom1>
@@ -736,6 +738,7 @@
       </Measure>
     <Measure number="15" tick="21696">
       <TimeSig>
+        <subtype>8323</subtype>
         <tick>21696</tick>
         <den>3</den>
         <nom1>2</nom1>

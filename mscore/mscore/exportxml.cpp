@@ -591,67 +591,69 @@ static QString tick2xml(const int ticks, int& dots)
       {
       QString type("");
       dots = 0;
-      switch (ticks) {
-            case 16*division:       // 4/1
-                  type = "long";
-                  break;
-            case 8*division:        // 2/1
-                  type = "breve";
-                  break;
-            case 6*division:        // 1/1 + 1/2  (gibt's das???)
-                  type = "whole";
-                  dots  = 1;
-                  break;
-            case 5*division:        // HACK
-                  type = "whole";
-                  break;
-            case 4*division:        // 1/1
-                  type = "whole";
-                  break;
-            case 3*division:        // 1/2
-                  dots = 1;
-            case 2*division:        // 1/2
-                  type = "half";
-                  break;
-            case division + division/2:
-                  dots = 1;
-            case division:          // quarternote
-                  type = "quarter";
-                  break;
-            case division/2 + division/4:
-                  dots = 1;
-            case division/2:        // 1/8
-                  type = "eighth";
-                  break;
-            case division/4 + division/8:
-                  dots = 1;
-            case division/4:        // 1/16
-                  type = "16th";
-                  break;
-            case division/8 + division/16:
-                  dots = 1;
-            case division/8:        // 1/32
-                  type = "32nd";
-                  break;
-            case division/16 + division/32:
-                  dots = 1;
-            case division/16:       // 1/64
-                  type = "64th";
-                  break;
-            case division/32 + division/64:
-                  dots = 1;
-            case division/32:       // 1/128
-                  type = "128th";
-                  break;
-            case division/64 + division/128:
-                  dots = 1;
-            case division/64:       // 1/128
-                  type = "256th";
-                  break;
-            default:
-                  fprintf(stderr, "tick2xml: invalid note len %d (%d, %d)\n",
-                     ticks, ticks/division, ticks%division);
-                  break;
+      if (ticks == 16*division)       // 4/1
+            type = "long";
+      else if (ticks == 8*division)        // 2/1
+            type = "breve";
+      else if (ticks == 6*division) {        // 1/1 + 1/2  (gibt's das???)
+            type = "whole";
+            dots  = 1;
+            }
+      else if (ticks == 5*division)        // HACK
+            type = "whole";
+      else if (ticks == 4*division)        // 1/1
+            type = "whole";
+      else if (ticks == 3*division) {        // 1/2
+            dots = 1;
+            type = "half";
+            }
+      else if (ticks == 2*division)        // 1/2
+            type = "half";
+      else if (ticks == division + division/2) {
+            dots = 1;
+            type = "quarter";
+            }
+      else if (ticks == division)          // quarternote
+            type = "quarter";
+      else if (ticks == division/2 + division/4) {
+            dots = 1;
+            type = "eighth";
+            }
+      else if (ticks == division/2)        // 1/8
+            type = "eighth";
+      else if (ticks == division/4 + division/8) {
+            dots = 1;
+            type = "16th";
+            }
+      else if (ticks == division/4)        // 1/16
+            type = "16th";
+      else if (ticks == division/8 + division/16) {
+            dots = 1;
+            type = "32nd";
+            }
+      else if (ticks == division/8)        // 1/32
+            type = "32nd";
+      else if (ticks == division/16 + division/32) {
+            dots = 1;
+            type = "64th";
+            }
+      else if (ticks == division/16)       // 1/64
+            type = "64th";
+      else if (ticks == division/32 + division/64) {
+            dots = 1;
+            type = "128th";
+            }
+      else if (ticks == division/32)       // 1/128
+            type = "128th";
+      else if (ticks == division/64 + division/128) {
+            dots = 1;
+            type = "256th";
+            }
+      else if (ticks == division/64)       // 1/128
+            type = "256th";
+      else {
+            fprintf(stderr, "tick2xml: invalid note len %d (%d, %d)\n",
+               ticks, ticks/division, ticks%division);
             }
       return type;
       }
@@ -867,7 +869,7 @@ bool ExportMusicXml::saver()
             int staves = (*i)->nstaves();
             int strack = score->staff(*i) * VOICES;
             int etrack = strack + staves * VOICES;
-            
+
             DirectionsHandler dh(score);
             dh.buildDirectionsList(*i, strack, etrack);
 
@@ -1175,7 +1177,7 @@ void ExportMusicXml::chord(Chord* chord, int staff, const LyricsList* ll)
                   xml.tagE("tie type=\"stop\"");
             if (note->tieFor())
                   xml.tagE("tie type=\"start\"");
-            
+
             xml.tag("voice", (staff-1) * VOICES + note->chord()->voice() + 1);
 
             int dots = 0;
