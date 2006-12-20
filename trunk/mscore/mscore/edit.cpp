@@ -481,6 +481,7 @@ void Score::addBar(BarLine* barLine, Measure* measure)
 //   addTimeSig
 //---------------------------------------------------------
 
+#if 0
 Element* Score::addTimeSig(TimeSig* sig, const QPointF& pos)
       {
       int tick, pitch;
@@ -498,6 +499,7 @@ Element* Score::addTimeSig(TimeSig* sig, const QPointF& pos)
       delete sig;
       return 0;
       }
+#endif
 
 //---------------------------------------------------------
 //   changeTimeSig
@@ -510,15 +512,45 @@ Element* Score::addTimeSig(TimeSig* sig, const QPointF& pos)
 // FIXME: undo/redo does not work
 //---------------------------------------------------------
 
-void Score::changeTimeSig(int tick, int keySigSubtype)
+void Score::changeTimeSig(int tick, int timeSigSubtype)
       {
       int oz, on;
       sigmap->timesig(tick, oz, on);
 
       int z, n;
-      TimeSig::getSig(keySigSubtype, &n, &z);
-      if (oz == z && on == n)
-            return;                 // no change
+      TimeSig::getSig(timeSigSubtype, &n, &z);
+      if (oz == z && on == n) {
+            // search for time signature symbol
+            Segment* ts = 0;
+            for (Measure* m = _layout->first(); m; m = m->next()) {
+                  for (Segment* segment = m->first(); segment; segment = segment->next()) {
+                        if (segment->segmentType() != Segment::SegTimeSig)
+                              continue;
+                        int etick = segment->tick();
+                        if (etick == tick) {
+                              ts = segment;
+                              break;
+                              }
+                        }
+                  if (ts)
+                        break;
+                  }
+            if (ts) {
+                  // modify time signature symbol
+                  for (int staffIdx = 0; staffIdx < nstaves(); ++staffIdx) {
+                        int track = staffIdx * VOICES;
+                        TimeSig* sig = (TimeSig*)ts->element(track);
+                        sig->setSubtype(timeSigSubtype);
+                        }
+                  layout();
+                  }
+            else {
+                  // add symbol
+                  addTimeSig(tick, timeSigSubtype);
+                  }
+            return;
+            }
+
 
       sigmap->add(tick, z, n);
 
@@ -532,21 +564,19 @@ void Score::changeTimeSig(int tick, int keySigSubtype)
       for (Measure* m = _layout->first(); m; m = m->next()) {
 again:
             for (Segment* segment = m->first(); segment; segment = segment->next()) {
-                  if (segment->segmentType() == Segment::SegTimeSig) {
-                        int etick = segment->tick();
-                        if (etick >= tick) {
-                              iSigEvent ic = sigmap->find(etick);
-                              if (etick == tick
-                                  || ic == sigmap->end()
-                                  || (ic->first == tick && ic->second.z != z && ic->second.n == n)) {
-// printf("  remove timesig\n");
-                                    // el->remove(e);
-                                    m->remove(segment);
-                                    goto again;
-                                    }
-                              else if (etick > tick)
-                                    break;
+                  if (segment->segmentType() != Segment::SegTimeSig)
+                        continue;
+                  int etick = segment->tick();
+                  if (etick >= tick) {
+                        iSigEvent ic = sigmap->find(etick);
+                        if (etick == tick
+                            || ic == sigmap->end()
+                            || (ic->first == tick && ic->second.z != z && ic->second.n == n)) {
+                              m->remove(segment);
+                              goto again;
                               }
+                        else if (etick > tick)
+                              break;
                         }
                   }
             }
@@ -605,16 +635,21 @@ again:
                         }
                   }
             }
+      addTimeSig(tick, timeSigSubtype);
+      }
 
-      if (tick != 0) {
-            Measure* measure = tick2measure(tick);
-            for (int staffIdx = 0; staffIdx < staves; ++staffIdx) {
-// printf("add timesig\n");
-                  TimeSig* nsig = new TimeSig(this, keySigSubtype);
-                  nsig->setStaff(staff(staffIdx));
-                  nsig->setTick(tick);
-                  measure->add(nsig);
-                  }
+//---------------------------------------------------------
+//   addTimeSig
+//---------------------------------------------------------
+
+void Score::addTimeSig(int tick, int timeSigSubtype)
+      {
+      Measure* measure = tick2measure(tick);
+      for (int staffIdx = 0; staffIdx < nstaves(); ++staffIdx) {
+            TimeSig* nsig = new TimeSig(this, timeSigSubtype);
+            nsig->setStaff(staff(staffIdx));
+            nsig->setTick(tick);
+            measure->add(nsig);
             }
       layout();
       }

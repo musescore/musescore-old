@@ -112,26 +112,9 @@ void TimeSig::drop(const QPointF&, int type, int stype)
             int st = subtype();
             if (st == stype)
                   return;
-
-            int z1, n1, z2, n2;
-            getSig(st, &n1, &z1);
-            getSig(stype, &n2, &z2);
-
-            if (z1 == z2 && n1 == n2) {
-                  // only symbol changed
-                  //
-                  // TODO: does not work for first timesig in score
-                  //    (its a "generated" one)
-                  //
-                  setSubtype(stype);
-                  score()->layout();
-                  // TODO: undo/redo
-                  }
-            else {
-                  // change timesig applies to all staves, can't simply set subtype
-                  // for this one only
-                  score()->changeTimeSig(tick(), stype);
-                  }
+            // change timesig applies to all staves, can't simply set subtype
+            // for this one only
+            score()->changeTimeSig(tick(), stype);
             }
       }
 

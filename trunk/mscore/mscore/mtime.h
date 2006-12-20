@@ -21,7 +21,8 @@
 #ifndef __MTIME_H__
 #define __MTIME_H__
 
-const int division = 384;     // 384 ticks, represent a quarter note
+// const int division = 384;     // 384 ticks, represent a quarter note
+const int division = 480;     // 384 ticks, represent a quarter note
 
 //---------------------------------------------------------
 //   MTime

@@ -1,3 +1,11 @@
+20.12 (ws)
+      - changed midi "divisor" from 384 ticks/quarter note to 480 to avoid
+        problems with some time signatures. In the long run we may have to
+        deal with real fractions (numerator+denominator).
+      - Don't add a "generated" time signature to first staff in a score.
+        Time signatures must always be explicit added. This allows for different
+        symbols (example: "alla breve") for first time signature (or for no
+        symbol at all)
 19.12 (ws)
       * Changed TimeSig base class from Compound to Element.
         Extend TimeSig to constructs like 3+2/8 etc. This changes xml file

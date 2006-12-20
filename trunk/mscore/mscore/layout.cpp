@@ -201,6 +201,7 @@ void ScoreLayout::processSystemHeader(Measure* m)
                               }
                         }
                   }
+#if 0
             if (tick == 0 && !hasTimesig) {
                   int z, n;
                   _score->sigmap->timesig(tick, z, n);
@@ -211,6 +212,7 @@ void ScoreLayout::processSystemHeader(Measure* m)
                   ts->setGenerated(true);
                   m->add(ts);
                   }
+#endif
             if (!hasKeysig) {
                   int clef = staff->clef()->clef(tick);
                   int clefOffset = clefTable[clef].yOffset;
