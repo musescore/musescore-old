@@ -49,7 +49,7 @@ class Part;
 
 struct UndoOp {
       enum UndoType {
-            RemoveObject, AddObject,
+            RemoveElement, AddElement,
             InsertPart, RemovePart,
             InsertStaff, RemoveStaff,
             InsertSegStaff, RemoveSegStaff,
@@ -63,6 +63,7 @@ struct UndoOp {
             ChangeAccidental,
             FlipStemDirection,
             FlipSlurDirection,
+            ChangeTimeSig,
             };
       UndoType type;
       Element* obj;
@@ -74,7 +75,8 @@ struct UndoOp {
       Segment* segment;
       std::list<int> si;
       std::list<int> di;
-      int idx;
+      int val1;
+      int val2;
       QColor color;
 
       const char* name() const;

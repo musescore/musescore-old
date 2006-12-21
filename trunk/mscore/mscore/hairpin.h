@@ -34,6 +34,7 @@ class Painter;
 class Hairpin : public SLine {
    public:
       Hairpin(Score*);
+      virtual Element* clone() const { return new Hairpin(*this); }
       virtual ElementType type() const { return HAIRPIN; }
 
       void setLen(double);

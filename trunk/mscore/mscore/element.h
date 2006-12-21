@@ -105,8 +105,8 @@ class Element {
    public:
       Element(Score*);
       virtual ~Element() {}
-      Element(const Element&);
       Element &operator=(const Element&);
+      virtual Element* clone() const = 0;
 
       Score* score() const                    { return _score;  }
       void setScore(Score* s)                 { _score = s;     }
@@ -275,6 +275,7 @@ class SStaff : public Element {
 
    public:
       SStaff(Score*);
+      virtual Element* clone() const { return new SStaff(*this); }
       virtual ElementType type() const { return STAFF; }
 
       virtual void draw1(Painter&);
@@ -295,6 +296,7 @@ class Cursor : public Element {
 
    public:
       Cursor(Score*, double l);
+      virtual Element* clone() const { return new Cursor(*this); }
       virtual ElementType type() const { return CURSOR; }
 
       virtual void draw1(Painter&);
@@ -314,6 +316,7 @@ class VSpacer : public Element {
 
    public:
       VSpacer(Score*, double h);
+      virtual Element* clone() const { return new VSpacer(*this); }
       virtual ElementType type() const { return VSPACER; }
       virtual void draw1(Painter&);
       };
@@ -325,6 +328,7 @@ class VSpacer : public Element {
 class Lasso : public Element {
    public:
       Lasso(Score*);
+      virtual Element* clone() const { return new Lasso(*this); }
       virtual ElementType type() const   { return LASSO; }
       virtual void draw1(Painter&);
       };
@@ -343,9 +347,9 @@ class Line : public Element {
    public:
       Line(Score*);
       Line(Score*, bool vertical);
-      Line(const Line&);
       Line &operator=(const Line&);
 
+      virtual Element* clone() const { return new Line(*this); }
       virtual ElementType type() const { return LINE; }
 
       virtual void draw1(Painter&);
@@ -388,6 +392,7 @@ class Accidental : public Compound {
 
    public:
       Accidental(Score*, int i, bool small);
+      virtual Element* clone() const { return new Accidental(*this); }
       virtual ElementType type() const { return ACCIDENTAL; }
       int idx() const                  { return val; }
       void setIdx(int v);
@@ -409,6 +414,7 @@ class KeySig : public Element {
    public:
       KeySig(Score*);
       KeySig(Score*, int, int);
+      virtual Element* clone() const { return new KeySig(*this); }
       virtual void draw1(Painter&);
       virtual ElementType type() const { return KEYSIG; }
       virtual void write(Xml& xml) const;
@@ -427,6 +433,7 @@ class RubberBand : public Element {
 
    public:
       RubberBand(Score* s) : Element(s) {}
+      virtual Element* clone() const { return new RubberBand(*this); }
       virtual ElementType type() const { return RUBBERBAND; }
       virtual void draw(Painter&);
 
@@ -449,6 +456,7 @@ class Volta : public Element {
 
    public:
       Volta(Score* s) : Element(s) {}
+      virtual Element* clone() const { return new Volta(*this); }
       virtual ElementType type() const { return VOLTA; }
       virtual void draw1(Painter&);
       virtual void layout();

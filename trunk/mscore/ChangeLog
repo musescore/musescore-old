@@ -1,3 +1,6 @@
+21.12 (ws)
+      - make dragging of objects undoable again using the Element::clone() method
+      - reintroduce Element::clone() method
 20.12 (ws)
       _ extend time signature palette for custom time signatures
       - fix layout of instrument names

@@ -40,6 +40,7 @@ class LayoutBreak : public Element {
 
    public:
       LayoutBreak(Score*, int subtype);
+      virtual Element* clone() const { return new LayoutBreak(*this); }
       virtual ElementType type() const { return LAYOUT_BREAK; }
       };
 

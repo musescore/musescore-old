@@ -27,7 +27,7 @@ class Painter;
 
 enum BarType {
       NORMAL_BAR, DOUBLE_BAR, START_REPEAT, END_REPEAT,
-      BROKEN_BAR, END_BAR, INVISIBLE_BAR 
+      BROKEN_BAR, END_BAR, INVISIBLE_BAR
       };
 
 //---------------------------------------------------------
@@ -38,9 +38,9 @@ class BarLine : public Element {
 
    public:
       BarLine(Score*);
-      BarLine(const BarLine&);
       BarLine &operator=(const BarLine&);
 
+      virtual Element* clone() const { return new BarLine(*this); }
       virtual ElementType type() const { return BAR_LINE; }
       virtual void write(Xml& xml) const;
       virtual void read(QDomNode);

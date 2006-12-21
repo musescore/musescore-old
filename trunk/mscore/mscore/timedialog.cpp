@@ -48,7 +48,7 @@ TimeDialog::TimeDialog(QWidget* parent)
 	sp->addObject(3,   new TimeSig(cs, 4, 4), "4/4");
 	sp->addObject(4,   new TimeSig(cs, 4, 5), "5/4");
 	sp->addObject(5,   new TimeSig(cs, 4, 6), "6/4");
-	sp->addObject(6,   new TimeSig(cs, 5, 3), "3/8");
+	sp->addObject(6,   new TimeSig(cs, 8, 3), "3/8");
 	sp->addObject(7,   new TimeSig(cs, 8, 6), "6/8");
 	sp->addObject(8,   new TimeSig(cs, 8, 9), "9/8");
 	sp->addObject(9,   new TimeSig(cs, 8, 12), "12/8");
