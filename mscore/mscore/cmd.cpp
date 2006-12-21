@@ -84,8 +84,7 @@ void Score::startCmd()
 
 void Score::cmdAdd(Element* e)
       {
-      addObject(e);
-      undoOp(UndoOp::AddObject, e);
+      undoOp(UndoOp::AddElement, e);
       layout();
       }
 
@@ -95,8 +94,8 @@ void Score::cmdAdd(Element* e)
 
 void Score::cmdRemove(Element* e)
       {
-      removeObject(e);
-      undoOp(UndoOp::RemoveObject, e);
+      removeElement(e);
+      undoOp(UndoOp::RemoveElement, e);
       layout();
       }
 
@@ -140,7 +139,7 @@ void Score::end()
 
 void Score::endCmd(bool undo)
       {
-//      printf("endCmd()\n");
+      printf("endCmd() undo %d\n", undo);
       if (undo)
             endUndo();
       end();
@@ -273,7 +272,7 @@ void Score::setNote(int tick, Staff* staff, int voice, int pitch, int len)
                         if (tuplet)
                               tuplet->remove(cr);
                         segment->setElement(track, 0);
-                        undoOp(UndoOp::RemoveObject, element);
+                        undoOp(UndoOp::RemoveElement, element);
                         }
                   segment = segment->next();
                   if (l == 0) {
@@ -385,7 +384,7 @@ void Score::setRest(int tick, Staff* st, int voice, int len)
                         tuplet->remove(cr);
                   l = cr->tickLen();
                   segment->setElement(track, 0);
-                  undoOp(UndoOp::RemoveObject, element);
+                  undoOp(UndoOp::RemoveElement, element);
                   }
             segment = segment->next();
             if (l == 0) {
@@ -441,9 +440,9 @@ void Score::cmdAddText(int style)
       s->setText(textStyles[style].name);
 
       startCmd();
-      undoOp(UndoOp::AddObject, s);
       s->setAnchor(measure);
-      page->add(s);
+      s->setParent(page);
+      undoOp(UndoOp::AddElement, s);
       layout();
 
       select(s, 0, 0);
@@ -535,7 +534,7 @@ printf("cmdUpDown(up=%d, octave=%d)\n", up, octave);
             UndoOp i;
             i.type  = UndoOp::ChangePitch;
             i.obj   = oNote;
-            i.idx   = oNote->pitch();
+            i.val1  = oNote->pitch();
             undoList.back()->push_back(i);
 
 printf("cmdUpDown calling changePitch()\n");
@@ -672,7 +671,7 @@ void Score::addAccidental(Note* oNote, int accidental)
       UndoOp i;
       i.type  = UndoOp::ChangeAccidental;
       i.obj   = oNote;
-      i.idx   = oNote->userAccidental();
+      i.val1  = oNote->userAccidental();
       undoList.back()->push_back(i);
       oNote->changeAccidental(accidental);
       }

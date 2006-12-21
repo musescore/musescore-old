@@ -499,7 +499,7 @@ void Measure::write(Xml& xml, int no, int staff) const
             }
 
       int id = 0;
-      foreach(Tuplet* tuplet, _tuplets) { 
+      foreach(Tuplet* tuplet, _tuplets) {
             if (staff == tuplet->staffIdx())
                   tuplet->write(xml, id++);
             }
@@ -872,7 +872,7 @@ void Measure::layout(double width)
                   else if (e->type() == BAR_LINE) {
                         //
                         // must be begin repeat bar
-                        // TODO: _no_ can also be a dotted bar in the middle 
+                        // TODO: _no_ can also be a dotted bar in the middle
                         //       of the measure
                         //
                         BarLine* barLine = (BarLine*)e;
@@ -1296,7 +1296,7 @@ void Measure::remove(Element* el)
                               break;
                         }
                   if (!_sel.remove(el))
-                        printf("Measure(%p)::remove(%s,%p) not found\n", 
+                        printf("Measure(%p)::remove(%s,%p) not found\n",
                            this, el->name(), el);
                   break;
             case SLUR:
@@ -1311,7 +1311,7 @@ void Measure::remove(Element* el)
             case VOLTA:
                   _ending = 0;
                   if (!_sel.remove(el))
-                        printf("Measure(%p)::remove(%s,%p) not found\n", 
+                        printf("Measure(%p)::remove(%s,%p) not found\n",
                            this, el->name(), el);
                   break;
             case DYNAMIC:
@@ -1325,7 +1325,7 @@ void Measure::remove(Element* el)
             case SLUR_SEGMENT:
                   if (!_sel.remove(el)) {
                         if (!_pel.remove(el))
-                              printf("Measure(%p)::remove(%s,%p) not found\n", 
+                              printf("Measure(%p)::remove(%s,%p) not found\n",
                                  this, el->name(), el);
                         }
                   break;
@@ -2021,7 +2021,7 @@ void Measure::cmdRemoveStaves(int sStaff, int eStaff)
             for (int track = eTrack - 1; track >= sTrack; --track) {
                   Element* el = s->element(track);
                   if (el && !el->generated()) {
-                        _score->undoOp(UndoOp::RemoveObject, el);
+                        _score->undoOp(UndoOp::RemoveElement, el);
                         }
                   }
             for (int staff = eStaff-1; staff >= sStaff; --staff) {

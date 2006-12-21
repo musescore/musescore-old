@@ -41,25 +41,39 @@ TextPalette* palette;
 TextElement::TextElement(Score* s)
    : Element(s)
       {
+      doc = new QTextDocument(0);
       textStyle = TEXT_STYLE_LYRIC;
-      doc.setDefaultFont(font());
+      doc->setDefaultFont(font());
       editMode = false;
-      cursor = new QTextCursor(&doc);
+      cursor = new QTextCursor(doc);
       cursor->setPosition(0);
       }
 
 TextElement::TextElement(Score* s, int style)
    : Element(s)
       {
+      doc = new QTextDocument(0);
       textStyle = style;
-      doc.setDefaultFont(font());
+      doc->setDefaultFont(font());
       editMode = false;
-      cursor = new QTextCursor(&doc);
+      cursor = new QTextCursor(doc);
       cursor->setPosition(0);
+      }
+
+TextElement::TextElement(const TextElement& e)
+   : Element(e)
+      {
+      doc       = e.doc->clone(0);
+      cursor    = 0;
+      editMode  = e.editMode;
+      textStyle = e.textStyle;
+      cursor    = new QTextCursor(doc);
+      cursor->setPosition(e.cursor->position());
       }
 
 TextElement::~TextElement()
       {
+      delete doc;
       delete cursor;
       }
 
@@ -69,8 +83,8 @@ TextElement::~TextElement()
 
 const QRectF& TextElement::bbox() const
       {
-      _bbox = QRectF(0.0, 0.0, doc.size().width(), doc.size().height());
-// printf("TextElement<%s>: bbox %f %f\n", doc.toPlainText().toLocal8Bit().data(),
+      _bbox = QRectF(0.0, 0.0, doc->size().width(), doc->size().height());
+// printf("TextElement<%s>: bbox %f %f\n", doc->toPlainText().toLocal8Bit().data(),
 //   _bbox.width(), _bbox.height());
       return _bbox;
       }
@@ -99,7 +113,7 @@ void TextElement::setSelected(bool val)
 
 bool TextElement::isEmpty() const
       {
-      return doc.isEmpty();
+      return doc->isEmpty();
       }
 
 //---------------------------------------------------------
@@ -108,7 +122,7 @@ bool TextElement::isEmpty() const
 
 QString TextElement::getText() const
       {
-      return doc.toPlainText();
+      return doc->toPlainText();
       }
 
 //---------------------------------------------------------
@@ -178,7 +192,7 @@ void TextElement::layout()
 
 void TextElement::setText(const QString& s)
       {
-      doc.setPlainText(s);
+      doc->setPlainText(s);
       layout();
       }
 
@@ -190,7 +204,7 @@ void TextElement::setStyle(int n)
       {
       if (textStyle != n) {
             textStyle = n;
-            doc.setDefaultFont(font());
+            doc->setDefaultFont(font());
             layout();
             }
       }
@@ -210,12 +224,12 @@ void TextElement::write(Xml& xml) const
 
 void TextElement::write(Xml& xml, const char* name) const
       {
-      if (doc.isEmpty())
+      if (doc->isEmpty())
             return;
       xml.stag(name);
       xml.tag("style", textStyle);
 
-      QString s = doc.toHtml("utf8");
+      QString s = doc->toHtml("utf8");
       xml.tag("data", s);
 // printf("TextElement: write<%s>\n", s.toLocal8Bit().data());
       Element::writeProperties(xml);
@@ -236,7 +250,7 @@ void TextElement::read(QDomNode node)
             QString val(e.text());
             if (tag == "data") {
 // printf("setHtml <%s>\n", val.toLocal8Bit().data());
-                  doc.setHtml(val);
+                  doc->setHtml(val);
                   }
             else if (tag == "style") {
                   textStyle = val.toInt();
@@ -359,10 +373,12 @@ void TextElement::draw1(Painter& p)
 #if 1
       QAbstractTextDocumentLayout::PaintContext c;
       c.cursorPosition = editMode ? cursor->position() : -1;
+      QColor color = p.pen().color();
+      c.palette.setColor(QPalette::Text, color);
 
-      QAbstractTextDocumentLayout* layout = doc.documentLayout();
+//      QAbstractTextDocumentLayout* layout = doc->documentLayout();
 
-      doc.documentLayout()->draw(&p, c);
+      doc->documentLayout()->draw(&p, c);
 #endif
       p.restore();
       }
@@ -373,7 +389,7 @@ void TextElement::draw1(Painter& p)
 
 double TextElement::lineSpacing() const
       {
-      QFontMetrics fm(doc.defaultFont());
+      QFontMetrics fm(doc->defaultFont());
       return fm.lineSpacing();
       }
 

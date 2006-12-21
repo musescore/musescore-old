@@ -293,7 +293,7 @@ again:
                                     continue;
                               int etick = segment->tick();
                               if (etick == tick) {
-                                    undoOp(UndoOp::RemoveObject, e);
+                                    undoOp(UndoOp::RemoveElement, e);
                                     segment->setElement(track, 0);
                                     goto again;
                                     }
@@ -356,7 +356,7 @@ void Score::removeClef(Clef* clef)
                         int cidx = ((Clef*)e)->subtype();
                         if (cidx == oidx) {
                               // this clef is can be removed:
-                              undoOp(UndoOp::RemoveObject, e);
+                              undoOp(UndoOp::RemoveElement, e);
                               segment->setElement(track, 0);
                               }
                         break;
@@ -364,7 +364,7 @@ void Score::removeClef(Clef* clef)
                   }
             }
 
-      removeObject(clef);
+      removeElement(clef);
       layout();
       }
 
@@ -402,13 +402,13 @@ Element* Score::addClef(Clef* clef)
                               continue;
                         iClefEvent ic = ct->find(etick);
                         if (ic == ct->end() || (ic->first == tick)) {
-                              undoOp(UndoOp::RemoveObject, e);
+                              undoOp(UndoOp::RemoveElement, e);
                               segment->setElement(track, 0);
                               // printf("remove Clef at %d\n", tick);
                               }
                         int cidx = ((Clef*)e)->subtype();
                         if (etick > tick &&  idx == cidx) {
-                              undoOp(UndoOp::RemoveObject, e);
+                              undoOp(UndoOp::RemoveElement, e);
                               segment->setElement(track, 0);
                               // printf("remove Clef at %d\n", tick);
                               break;
@@ -422,7 +422,7 @@ Element* Score::addClef(Clef* clef)
             return 0;
             }
       clef->setParent(measure);
-      addObject(clef);
+      addElement(clef);
       layout();
       return clef;
       }
@@ -478,30 +478,6 @@ void Score::addBar(BarLine* barLine, Measure* measure)
       }
 
 //---------------------------------------------------------
-//   addTimeSig
-//---------------------------------------------------------
-
-#if 0
-Element* Score::addTimeSig(TimeSig* sig, const QPointF& pos)
-      {
-      int tick, pitch;
-      Staff* staffp = 0;
-      Element* dragObject = sel->element();
-
-      if (dragObject && dragObject->type() == TIMESIG) {
-            }
-      else if (!pos2measure(pos, &tick, &staffp, &pitch, 0, 0)) {
-            printf("TimeSig: no tick position found\n");
-            return 0;
-            }
-
-      changeTimeSig(tick, sig->subtype());
-      delete sig;
-      return 0;
-      }
-#endif
-
-//---------------------------------------------------------
 //   changeTimeSig
 //
 // change time signature at tick into subtype st for all staves
@@ -538,9 +514,15 @@ void Score::changeTimeSig(int tick, int timeSigSubtype)
             if (ts) {
                   // modify time signature symbol
                   for (int staffIdx = 0; staffIdx < nstaves(); ++staffIdx) {
-                        int track = staffIdx * VOICES;
+                        int track    = staffIdx * VOICES;
                         TimeSig* sig = (TimeSig*)ts->element(track);
-                        sig->setSubtype(timeSigSubtype);
+                        TimeSig* nsig = new TimeSig(this, timeSigSubtype);
+                        nsig->setParent(sig->parent());
+                        nsig->setTick(sig->tick());
+                        nsig->setStaff(sig->staff());
+                        undoOp(UndoOp::RemoveElement, sig);
+                        removeElement(sig);
+                        undoOp(UndoOp::AddElement, nsig);
                         }
                   layout();
                   }
@@ -550,7 +532,6 @@ void Score::changeTimeSig(int tick, int timeSigSubtype)
                   }
             return;
             }
-
 
       sigmap->add(tick, z, n);
 
@@ -645,11 +626,12 @@ again:
 void Score::addTimeSig(int tick, int timeSigSubtype)
       {
       Measure* measure = tick2measure(tick);
-      for (int staffIdx = 0; staffIdx < nstaves(); ++staffIdx) {
+      for (iStaff i = _staves->begin(); i != _staves->end(); ++i) {
             TimeSig* nsig = new TimeSig(this, timeSigSubtype);
-            nsig->setStaff(staff(staffIdx));
+            nsig->setStaff(*i);
             nsig->setTick(tick);
-            measure->add(nsig);
+            nsig->setParent(measure);
+            undoOp(UndoOp::AddElement, nsig);
             }
       layout();
       }
@@ -974,7 +956,7 @@ void Score::deleteItem(Element* el)
                   {
                   SlurTie* s = ((SlurSegment*)el)->slurTie();
                   s->parent()->remove(s);
-                  undoOp(UndoOp::RemoveObject, s);
+                  undoOp(UndoOp::RemoveElement, s);
                   updateAll = true;
                   }
                   break;
@@ -993,13 +975,13 @@ void Score::deleteItem(Element* el)
             case OTTAVA:
             case LAYOUT_BREAK:
                   el->parent()->remove(el);
-                  undoOp(UndoOp::RemoveObject, el);
+                  undoOp(UndoOp::RemoveElement, el);
                   updateAll = true;
                   break;
 
             case CLEF:
                   removeClef((Clef*) el);
-                  undoOp(UndoOp::RemoveObject, el);
+                  undoOp(UndoOp::RemoveElement, el);
                   break;
 
             case NOTE:
@@ -1008,7 +990,7 @@ void Score::deleteItem(Element* el)
                   int notes = chord->noteList()->size();
                   if (notes > 1) {
                         chord->remove((Note*) el);
-                        undoOp(UndoOp::RemoveObject, el);
+                        undoOp(UndoOp::RemoveElement, el);
                         break;
                         }
                   // else fall through
@@ -1021,10 +1003,9 @@ void Score::deleteItem(Element* el)
                   Rest* rest   = new Rest(this, chord->tick(), chord->tickLen());
                   rest->setStaff(el->staff());
                   rest->setParent(el->parent());
-                  removeObject(chord);
-                  addObject(rest);
-                  undoOp(UndoOp::RemoveObject, chord);
-                  undoOp(UndoOp::AddObject, rest);
+                  removeElement(chord);
+                  undoOp(UndoOp::RemoveElement, chord);
+                  undoOp(UndoOp::AddElement, rest);
                   }
                   break;
 
@@ -1137,8 +1118,7 @@ void Score::lyricsTab()
             lyrics->setTick(segment->tick());
             lyrics->setStaff(editObject->staff());
             lyrics->setParent(segment);
-            addObject(lyrics);
-            undoOp(UndoOp::AddObject, lyrics);
+            undoOp(UndoOp::AddElement, lyrics);
             }
       select(lyrics, 0, 0);
       canvas()->startEdit(lyrics);
@@ -1173,8 +1153,7 @@ void Score::addLyrics()
             lyrics->setTick(tick);
             lyrics->setStaff(chord->staff());
             lyrics->setParent(segment);
-            addObject(lyrics);
-            undoOp(UndoOp::AddObject, lyrics);
+            undoOp(UndoOp::AddElement, lyrics);
             }
       select(lyrics, 0, 0);
       canvas()->startEdit(lyrics);
@@ -1244,7 +1223,7 @@ void Score::cmdTuplet(int n)
 
       Segment* segment = chord->segment();
       segment->setElement(track, 0);
-      undoOp(UndoOp::RemoveObject, chord);
+      undoOp(UndoOp::RemoveElement, chord);
 
       Tuplet* tuplet = new Tuplet(this);
       tuplet->setNormalNotes(normalNotes);
@@ -1266,8 +1245,9 @@ void Score::cmdTuplet(int n)
       chord->setTickLen(ticks);
       measure->add(chord);
       measure->layoutNoteHeads(staffIdx);
-      tuplet->add(chord);
-      undoOp(UndoOp::AddObject, chord);
+      chord->setParent(tuplet);
+      // tuplet->add(chord);
+      undoOp(UndoOp::AddElement, chord);
 
       for (int i = 0; i < (actualNotes-1); ++i) {
             tick += ticks;
@@ -1278,8 +1258,9 @@ void Score::cmdTuplet(int n)
             rest->setStaff(staff);
             rest->setTickLen(ticks);
             measure->add(rest);
-            tuplet->add(rest);
-            undoOp(UndoOp::AddObject, rest);
+            // tuplet->add(rest);
+            rest->setParent(tuplet);
+            undoOp(UndoOp::AddElement, rest);
             }
       layout();
       endCmd(true);

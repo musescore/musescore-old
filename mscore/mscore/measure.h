@@ -131,6 +131,7 @@ class Measure : public Element {
    public:
       Measure(Score*);
       ~Measure();
+      virtual Element* clone() const { return new Measure(*this); }
       virtual ElementType type() const { return MEASURE; }
 
       virtual void draw(Painter&);

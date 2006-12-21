@@ -39,7 +39,7 @@ struct SigEvent {
       void write(Xml&, int) const;
 
       SigEvent() { }
-      SigEvent(int Z, int N);
+      SigEvent(int z, int n);
       SigEvent(int, int, int);
       };
 

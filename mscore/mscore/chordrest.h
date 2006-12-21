@@ -73,8 +73,8 @@ enum NoteAttributeIdx {
 //---------------------------------------------------------
 
 enum AttrAnchor {
-      A_TOP_STAFF, 
-      A_BOTTOM_STAFF, 
+      A_TOP_STAFF,
+      A_BOTTOM_STAFF,
       A_CHORD,          // anchor depends on chord direction
       A_TOP_CHORD,      // attribute is alway placed at top of chord
       A_BOTTOM_CHORD,   // attribute is placed at bottom of chord
@@ -100,9 +100,9 @@ class NoteAttribute : public Symbol {
    public:
       NoteAttribute(Score*);
       NoteAttribute(Score*, int);
-      NoteAttribute(const NoteAttribute&);
       NoteAttribute &operator=(const NoteAttribute&);
 
+      virtual Element* clone() const { return new NoteAttribute(*this); }
       virtual ElementType type() const { return ATTRIBUTE; }
 
       virtual void setSubtype(int);
@@ -135,7 +135,6 @@ class ChordRest : public Element {
 
    public:
       ChordRest(Score*);
-      ChordRest(const ChordRest&);
       ChordRest &operator=(const ChordRest&);
       virtual ElementType type() const = 0;
 

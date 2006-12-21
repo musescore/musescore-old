@@ -1268,7 +1268,7 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomNode node)
                                     slur[slurNo]->setStart(tick, stf, voice);
                                     slur[slurNo]->setStaff(stf);
                                     slur[slurNo]->setParent(measure);
-                                    score->addObject(slur[slurNo]);
+                                    score->addElement(slur[slurNo]);
                                     if (endSlur)
                                           slur[slurNo] = 0;
                                     }

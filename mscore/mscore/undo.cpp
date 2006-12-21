@@ -55,9 +55,9 @@ extern QAction* redoAction;
 //
 // for debugging:
 //    keep in sync with enum UndoOp::UndoType
-// 
+//
 static const char* undoName[] = {
-      "RemoveObject",      "AddObject",
+      "RemoveElement",      "AddElement",
       "InsertPart",        "RemovePart",
       "InsertStaff",       "RemoveStaff",
       "InsertSegStaff",    "RemoveSegStaff",
@@ -67,6 +67,7 @@ static const char* undoName[] = {
       "ChangeColor",       "ChangePitch",
       "ChangeSubtype",     "AddAccidental",
       "FlipStemDirection", "FlipSlurDirection",
+      "ChangeTimeSig",
       };
 
 //---------------------------------------------------------
@@ -128,7 +129,7 @@ void Score::endUndo()
             fprintf(stderr, "endUndo: not active\n");
             abort();
             }
-
+      printf("end undo: %d actions\n", undoList.back()->size());
       if (undoList.back()->empty()) {
             // nothing to undo
             delete undoList.back();
@@ -203,27 +204,27 @@ void Score::processUndoOp(UndoOp* i, bool undo)
       {
 //      printf("Score::processUndoOp(i->type=%s, undo=%d)\n", i->name(), undo);
       switch(i->type) {
-            case UndoOp::RemoveObject:
+            case UndoOp::RemoveElement:
                   if (undo)
-                        addObject(i->obj);
+                        addElement(i->obj);
                   else
-                        removeObject(i->obj);
+                        removeElement(i->obj);
                   break;
-            case UndoOp::AddObject:
+            case UndoOp::AddElement:
                   if (undo)
-                        removeObject(i->obj);
+                        removeElement(i->obj);
                   else
-                        addObject(i->obj);
+                        addElement(i->obj);
                   break;
             case UndoOp::InsertPart:
                   if (undo)
                         removePart(i->part);
                   else
-                        insertPart(i->part, i->idx);
+                        insertPart(i->part, i->val1);
                   break;
             case UndoOp::RemovePart:
                   if (undo)
-                        insertPart(i->part, i->idx);
+                        insertPart(i->part, i->val1);
                   else
                         removePart(i->part);
                   break;
@@ -231,37 +232,37 @@ void Score::processUndoOp(UndoOp* i, bool undo)
                   if (undo)
                         removeStaff(i->staff);
                   else
-                        insertStaff(i->staff, i->idx);
+                        insertStaff(i->staff, i->val1);
                   break;
             case UndoOp::RemoveStaff:
                   if (undo)
-                        insertStaff(i->staff, i->idx);
+                        insertStaff(i->staff, i->val1);
                   else
                         removeStaff(i->staff);
                   break;
             case UndoOp::InsertSegStaff:
                   if (undo)
-                        i->segment->removeStaff(i->idx);
+                        i->segment->removeStaff(i->val1);
                   else
-                        i->segment->insertStaff(i->idx);
+                        i->segment->insertStaff(i->val1);
                   break;
             case UndoOp::RemoveSegStaff:
                   if (undo)
-                        i->segment->insertStaff(i->idx);
+                        i->segment->insertStaff(i->val1);
                   else
-                        i->segment->removeStaff(i->idx);
+                        i->segment->removeStaff(i->val1);
                   break;
             case UndoOp::InsertMStaff:
                   if (undo)
-                        i->measure->removeMStaff(i->mstaff, i->idx);
+                        i->measure->removeMStaff(i->mstaff, i->val1);
                   else
-                        i->measure->insertMStaff(i->mstaff, i->idx);
+                        i->measure->insertMStaff(i->mstaff, i->val1);
                   break;
             case UndoOp::RemoveMStaff:
                   if (undo)
-                        i->measure->insertMStaff(i->mstaff, i->idx);
+                        i->measure->insertMStaff(i->mstaff, i->val1);
                   else
-                        i->measure->removeMStaff(i->mstaff, i->idx);
+                        i->measure->removeMStaff(i->mstaff, i->val1);
                   break;
             case UndoOp::InsertMeasure:
                   if (undo)
@@ -295,16 +296,16 @@ void Score::processUndoOp(UndoOp* i, bool undo)
                   {
                   Note* note = (Note*)(i->obj);
                   int pitch  = note->pitch();
-                  note->changePitch(i->idx);
-                  i->idx = pitch;
+                  note->changePitch(i->val1);
+                  i->val1 = pitch;
                   }
                   break;
             case UndoOp::ChangeAccidental:
                   {
                   Note* note = (Note*)(i->obj);
                   int accidental  = note->userAccidental();
-                  note->changeAccidental(i->idx);
-                  i->idx = accidental;
+                  note->changeAccidental(i->val1);
+                  i->val1 = accidental;
                   }
                   break;
             case UndoOp::FlipStemDirection:
@@ -324,14 +325,17 @@ void Score::processUndoOp(UndoOp* i, bool undo)
                   int st = i->obj->subtype();
                   int t = i->obj->type();
 //                  printf("obj=%p t=%d curst=%d newst=%d\n",
-//                         i->obj, t, st, i->idx);
-                  i->obj->setSubtype(i->idx);
+//                         i->obj, t, st, i->val1);
+                  i->obj->setSubtype(i->val1);
                   if (t == CLEF)
-                        changeClef(i->obj->tick(), i->obj->staffIdx(), i->idx);
+                        changeClef(i->obj->tick(), i->obj->staffIdx(), i->val1);
                   else if (t == KEYSIG)
-                        changeKeySig(i->obj->tick(), i->idx);
-                  i->idx = st;
+                        changeKeySig(i->obj->tick(), i->val1);
+                  i->val1 = st;
                   }
+                  break;
+            case UndoOp::ChangeTimeSig:
+                  printf("UndoOp::ChangeTimeSig: todo\n");
                   break;
             }
       }
@@ -385,7 +389,7 @@ void Score::undoOp(UndoOp::UndoType type, Element* object, int idx)
       UndoOp i;
       i.type = type;
       i.obj  = object;
-      i.idx  = idx;
+      i.val1 = idx;
       undoList.back()->push_back(i);
       }
 
@@ -400,6 +404,13 @@ void Score::undoOp(UndoOp::UndoType type, Element* object)
       i.type = type;
       i.obj  = object;
       undoList.back()->push_back(i);
+      //
+      // TEST: process REDO
+      // TODO: all undoOp's should be extended to do the
+      //    appropriate "undo" action
+      //
+      if (type == UndoOp::AddElement)
+            processUndoOp(&i,false);
       }
 
 //---------------------------------------------------------
@@ -426,7 +437,7 @@ void Score::undoOp(UndoOp::UndoType type, Segment* seg, int staff)
       UndoOp i;
       i.type    = type;
       i.segment = seg;
-      i.idx     = staff;
+      i.val1     = staff;
       undoList.back()->push_back(i);
       }
 
@@ -436,7 +447,7 @@ void Score::undoOp(UndoOp::UndoType type, Part* part, int idx)
       UndoOp i;
       i.type = type;
       i.part = part;
-      i.idx  = idx;
+      i.val1  = idx;
       undoList.back()->push_back(i);
       }
 
@@ -446,7 +457,7 @@ void Score::undoOp(UndoOp::UndoType type, Staff* staff, int idx)
       UndoOp i;
       i.type  = type;
       i.staff = staff;
-      i.idx   = idx;
+      i.val1   = idx;
       undoList.back()->push_back(i);
       }
 
@@ -457,7 +468,7 @@ void Score::undoOp(UndoOp::UndoType type, Measure* m, MStaff s, int staff)
       i.type    = type;
       i.measure = m;
       i.mstaff  = s;
-      i.idx     = staff;
+      i.val1     = staff;
       undoList.back()->push_back(i);
       }
 
@@ -480,8 +491,18 @@ void Score::undoOp(std::list<int> si, std::list<int> di)
       undoList.back()->push_back(i);
       }
 
+void Score::undoOp(UndoOp::UndoType type, int a, int b)
+      {
+      checkUndoOp();
+      UndoOp i;
+      i.type = type;
+      i.val1 = a;
+      i.val2 = b;
+      undoList.back()->push_back(i);
+      }
+
 //---------------------------------------------------------
-//   addObject
+//   addElement
 //---------------------------------------------------------
 
 /**
@@ -491,7 +512,7 @@ void Score::undoOp(std::list<int> si, std::list<int> di)
  changes throughout the score.
 */
 
-void Score::addObject(Element* element)
+void Score::addElement(Element* element)
       {
 // printf("Score::addObject %p %s parent %s\n", element, element->name(), element->parent()->name());
       element->parent()->add(element);
@@ -548,7 +569,7 @@ void Score::addObject(Element* element)
       }
 
 //---------------------------------------------------------
-//   removeObject
+//   removeElement
 //---------------------------------------------------------
 
 /**
@@ -558,11 +579,11 @@ void Score::addObject(Element* element)
  changes throughout the score.
 */
 
-void Score::removeObject(Element* element)
+void Score::removeElement(Element* element)
       {
       Element* parent = element->parent();
 
-// printf("Score::removeObject %p %s parent %p %s\n", 
+// printf("Score::removeElement %p %s parent %p %s\n",
 //   element, element->name(), parent, parent->name());
 
       parent->remove(element);

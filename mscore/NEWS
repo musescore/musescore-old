@@ -1,5 +1,5 @@
 Release 0.3:
-      - Instrument Names can contain musical symbols
+      ? Instrument Names can contain musical symbols
       - added ALSA audio driver in addition to JACK driver
       - many MusicXML fixes and enhancements
       - enhanced midi import

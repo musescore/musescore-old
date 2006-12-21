@@ -32,9 +32,8 @@ class Ottava : public SLine {
       QString text;
 
    public:
-      Ottava(Score* s) : SLine(s) {
-            setSubtype(0);
-            }
+      Ottava(Score* s) : SLine(s) {}
+      virtual Element* clone() const { return new Ottava(*this); }
       virtual ElementType type() const { return OTTAVA; }
       virtual void draw1(Painter&);
       virtual void layout();

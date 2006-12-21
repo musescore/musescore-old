@@ -1159,15 +1159,14 @@ void Score::paste(const Element* /*e*/, const QPointF& /*pos*/)
 
 void Score::startDrag()
       {
-#if 0 //TODO: start drag
+      origDragObject  = _dragObject;
+      _dragObject     = _dragObject->clone();
+      undoOp(UndoOp::RemoveElement, origDragObject);
+      removeElement(origDragObject);
+
+      undoOp(UndoOp::AddElement, _dragObject);
       sel->clear();
-      Element* el    = _dragObject->clone();
-      origDragObject = _dragObject;
-      _dragObject     = el;
-      removeObject(origDragObject);
-      addObject(_dragObject);
-      sel->add(el);
-#endif
+      sel->add(_dragObject);
       }
 
 //---------------------------------------------------------
@@ -1188,8 +1187,6 @@ void Score::endDrag()
       {
       _dragObject->endDrag();
       if (origDragObject) {
-            undoOp(UndoOp::RemoveObject, origDragObject);
-            undoOp(UndoOp::AddObject, _dragObject);
             sel->clear();
             sel->add(_dragObject);
             origDragObject = 0;

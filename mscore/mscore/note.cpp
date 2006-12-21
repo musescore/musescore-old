@@ -305,7 +305,7 @@ void Note::remove(Element* el)
                   tie->endNote()->setTieBack(0);
       	ElementList* el = tie->elements();
             for (iElement i = el->begin(); i != el->end(); ++i) {
-	            score()->removeObject(*i);
+	            score()->removeElement(*i);
                   }
             el->clear();
             }
@@ -747,9 +747,9 @@ void Note::drop(const QPointF&, int t, int st)
                   {
                   Fingering* f = new Fingering(score());
                   f->setSubtype(st);
-                  add(f);
+                  f->setParent(this);
                   score()->select(f, 0, 0);
-                  score()->undoOp(UndoOp::AddObject, f);
+                  score()->undoOp(UndoOp::AddElement, f);
                   chord()->layout();
                   }
                   break;

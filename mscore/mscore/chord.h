@@ -46,9 +46,9 @@ class Stem : public Element {
 
    public:
       Stem(Score*);
-      Stem(const Stem&);
       Stem &operator=(const Stem&);
 
+      virtual Element* clone() const { return new Stem(*this); }
       virtual ElementType type() const { return STEM; }
       virtual void draw1(Painter& p);
       void setLen(const Spatium&);
@@ -89,8 +89,8 @@ typedef NoteList::const_reverse_iterator criNote;
 class HelpLine : public Line {
    public:
       HelpLine(Score*);
-      HelpLine(const HelpLine&);
       HelpLine &operator=(const HelpLine&);
+      virtual Element* clone() const { return new HelpLine(*this); }
       virtual ElementType type() const { return HELP_LINE; }
       };
 
@@ -125,9 +125,9 @@ class Chord : public ChordRest {
    public:
       Chord(Score*);
       Chord(Score*, int tick);
-      Chord(const Chord&);
       Chord &operator=(const Chord&);
 
+      virtual Element* clone() const { return new Chord(*this); }
       virtual ElementType type() const { return CHORD; }
 
       virtual void draw1(Painter&);

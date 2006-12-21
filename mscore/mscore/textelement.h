@@ -31,11 +31,9 @@ extern TextPalette* palette;
 //---------------------------------------------------------
 
 class TextElement : public Element {
-      QTextDocument doc;
+      QTextDocument* doc;
       QTextCursor* cursor;
       bool editMode;
-
-      void init();
 
    protected:
       int textStyle;
@@ -44,10 +42,12 @@ class TextElement : public Element {
    public:
       TextElement(Score*);
       TextElement(Score*, int style);
-      virtual ~TextElement();
       TextElement(const TextElement&);
+
+      virtual ~TextElement();
       TextElement &operator=(const TextElement&);
 
+      virtual Element* clone() const { return new TextElement(*this); }
       virtual ElementType type() const { return TEXT; }
 
 
@@ -89,6 +89,7 @@ class Lyrics : public TextElement {
 
    public:
       Lyrics(Score*);
+      virtual Element* clone() const { return new Lyrics(*this); }
       virtual ElementType type() const { return LYRICS; }
 
       virtual void write(Xml& xml) const;
@@ -106,6 +107,7 @@ class Lyrics : public TextElement {
 class Fingering : public TextElement {
    public:
       Fingering(Score*);
+      virtual Element* clone() const { return new Fingering(*this); }
       virtual ElementType type() const { return FINGERING; }
 
       virtual void write(Xml& xml) const;
@@ -120,6 +122,7 @@ class Fingering : public TextElement {
 class InstrumentName1 : public TextElement {
    public:
       InstrumentName1(Score*);
+      virtual Element* clone() const { return new InstrumentName1(*this); }
       virtual ElementType type() const { return INSTRUMENT_NAME1; }
       };
 
@@ -131,6 +134,7 @@ class InstrumentName1 : public TextElement {
 class InstrumentName2 : public TextElement {
    public:
       InstrumentName2(Score*);
+      virtual Element* clone() const { return new InstrumentName2(*this); }
       virtual ElementType type() const { return INSTRUMENT_NAME2; }
       };
 
@@ -141,6 +145,7 @@ class InstrumentName2 : public TextElement {
 class TempoText : public TextElement {
    public:
       TempoText(Score*);
+      virtual Element* clone() const { return new TempoText(*this); }
       virtual ElementType type() const { return TEMPO_TEXT; }
       };
 
