@@ -16,7 +16,7 @@
 \setupcolors[state=start]
 \setupbodyfont[Palatino]
 \language[en]
-\enableregime[il1]
+\enableregime[utf]
 
 \startuseMPgraphic{FunnyFrame}
       picture p; numeric o; path a, b; pair c;
@@ -73,14 +73,14 @@
 %\define\stopdescription{\stoppacked}
 \define\stopdescription{}
 
-\define[1]\Fig{\hbox{\externalfigure[pics/#1]}}
+\define[1]\Fig{\hbox{\externalfigure[#1]}}
 
 \define[2]\Screen{
-      \placefigure[here][fig:#1]{#2}{\externalfigure[pics/#1][scale=1600]}
+      \placefigure[here][fig:#1]{#2}{\externalfigure[#1][scale=1600]}
       }
 \define[1]\Noten{
       \blank[line]
-      {\externalfigure[pics/#1][scale=700]}
+      {\externalfigure[#1][scale=700]}
       \blank[line]
       }
 
@@ -129,15 +129,17 @@
 \define[2]\Figure{
       \placefigure
          [#1][fig:#2]{}
-         {\externalfigure[pics/#2]}
+         {\externalfigure[#2]}
          }
 
 \define[1]\Menu{
       \placefigure[right][fig:#1]{}
-         {\externalfigure[pics/#1][scale=2000]}
+         {\externalfigure[#1][scale=2000]}
          }
 
 \definedescription[Opt][location=hanging,headstyle=bold,width=broad]
+\setuptyping[before=\blank\startbackground, after=\stopbackground\blank] % source code with background
+\component figurepath.tex
 
 %----------------------------------------------------------
 %     Body
@@ -442,9 +444,9 @@
             \stoppacked
 
          \startcombination[3*1]
-            {\externalfigure[pics/menu41][scale=1200]}{}
-            {\externalfigure[pics/menu42][scale=1200]}{}
-            {\externalfigure[pics/menu43][scale=1200]}{}
+            {\externalfigure[menu41][scale=1200]}{}
+            {\externalfigure[menu42][scale=1200]}{}
+            {\externalfigure[menu43][scale=1200]}{}
             \stopcombination
 
       \subsection{Layout Menu}
@@ -611,7 +613,7 @@
 
       \subsection{Note entry with mouse}
 
-      In note entry mode a gray note head shows the position 
+      In note entry mode a gray note head shows the position
       a click whould insert a note. Setting a note replaces a
       rest or note. Shift+Click adds a note, building a chord.
 
@@ -754,7 +756,7 @@
                   go to next higher note in chord or lowest note in
                   higer line\par
             \Input{Alt+Down}
-                  select next lower note in chord or highest note in 
+                  select next lower note in chord or highest note in
                   lower line\par
             \Input{Alt+Ctrl+Up}
                   select highest note in chord\par
@@ -771,7 +773,7 @@
       \startitemize[packed]
             \item after selecting the zoom tool (magnifying glass), the
                   note sheet can be zoomed in with the left mouse key and
-                  zoomed out with the right mouse key. 
+                  zoomed out with the right mouse key.
                   When you hold the keyboard shift key while clicking
                   in zoom mode, the zoom tool stays selected.
             \item in the zoom pulldown menu you can select a zoom factor
@@ -1169,25 +1171,25 @@
 
       \startexamplesmakeup
       \section{Bilder einer Ausstellung -- Promenade, Modeste Mussorgsky}
-      \externalfigure[pics/promenade.pdf][width=1.1\textwidth]
+      \externalfigure[promenade.pdf][width=1.1\textwidth]
       \stopexamplesmakeup
 
       \startexamplesmakeup
       \section{Invention No1, J.S.Bach}
-      \externalfigure[pics/inv1-1.pdf][width=1.1\textwidth]
+      \externalfigure[inv1-1.pdf][width=1.1\textwidth]
       \stopexamplesmakeup
 
       \startexamplesmakeup
-      \externalfigure[pics/inv1-2.pdf][width=1.1\textwidth]
+      \externalfigure[inv1-2.pdf][width=1.1\textwidth]
       \stopexamplesmakeup
 
       \startexamplesmakeup
       \section{Invention No6, J.S.Bach}
-      \externalfigure[pics/inv6-1.pdf][width=1.1\textwidth]
+      \externalfigure[inv6-1.pdf][width=1.1\textwidth]
       \stopexamplesmakeup
 
       \startexamplesmakeup
-      \externalfigure[pics/inv6-2.pdf][width=1.1\textwidth]
+      \externalfigure[inv6-2.pdf][width=1.1\textwidth]
       \stopexamplesmakeup
 
 \completeindex

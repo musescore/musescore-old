@@ -120,6 +120,8 @@
 \definedescription[Opt][location=hanging,headstyle=bold,width=broad]
 \setuptyping[before=\blank\startbackground, after=\stopbackground\blank] % source code with background
 
+\component figurepath.tex
+
 %----------------------------------------------------------
 %     Body
 %----------------------------------------------------------
@@ -313,8 +315,7 @@ mscore <Optionen> <Dateiname>
             \blank[medium]
             \starttabulate
             \NC \type{~/.mscore}    \NC \M\ Konfigurationsdaten \NC\NR
-            \NC \type{~/.mscorePrj} \NC enth�ie zuletzt
-              bearbeiteten Partituren\NC\NR
+            \NC \type{~/.mscorePrj} \NC enth�        bearbeiteten Partituren\NC\NR
             \stoptabulate
             \blank[big]
 
@@ -435,6 +436,7 @@ mscore <Optionen> <Dateiname>
                   Öffnet das Text Submenü
             \Opt{Symbols}
                   Öffnet die Symbol Palette.\par
+
             \stoppacked
 
 
@@ -581,7 +583,7 @@ mscore <Optionen> <Dateiname>
 
       \subsection{Tastatureingaben}
 
-      Noten k� mit
+      Noten können mit
             \blank[medium]
             \Input{a b c d e f g} eingegeben werden\par
             \blank[big]
@@ -609,7 +611,7 @@ mscore <Optionen> <Dateiname>
             \InputN{Shift+G} fügt Note G zum Akkord hinzu\par
             \blank[big]
 
-      F�e Eingabe von Intervallen gibt es folgende
+      Für die Eingabe von Intervallen gibt es folgende
       Kommandos:
 
       \blank[medium]
@@ -691,8 +693,7 @@ mscore <Optionen> <Dateiname>
                   erniedrigt den Ton um eine Oktave\par
             \stoppacked
 
-\section{Bindeb�
-
+\section{Bindebögen}
       Bindebögen sind mit Noten oder Pausen verbunden. Wenn sich also
       eine Note verschiebt, dann wird auch der zugehörige Bogen
       mitverschoben. Wenn ein Bogen über eine Zeilengrenze oder
@@ -921,12 +922,12 @@ tar xvofj mscore-1.0.0.tar.bz2
                   \item JACK Audio Server
                   \item fluidsynth-1.0.0 und einen geeigneten SoundFont
                   \item einen aktuellen X11 Server mit freetype2 Support
-                        und Render Extension (f�tialiased Bildschirmfonts).
+                        und Render Extension (für Bildschirmfonts).
             \stopitemize
 
    \section{Compilieren}
 
-   \subsection{configure}
+   \subsection{Konfigurieren}
 
    \subsection{make}
 
@@ -942,7 +943,7 @@ make
       Zwischen verschiedenen C++ Compilern gibt es kleine Unterschiede im
       ABI (Application Binary Interface), die zu Inkompatibilitäten führen
       können. Deshalb sollte \M\ mit dem gleichen Compiler compiliert werden,
-      mit dem die Qt-Library compilert wurden.
+      mit dem die Qt-Library compiliert wurde.
       \StopFrame
 
    \section{Installieren}
@@ -954,6 +955,7 @@ su -c make install
       installiert \M.
 
 \chapter{Tastaturabkürzungen}
+
       \Sc{\Uparrow} Großbuchstabenumschaltung (Shift)
       \blank[line]
 
@@ -1014,17 +1016,16 @@ su -c make install
       \hrule
       \blank[small]
       \Sc{Right}  nächste Note\par
-      \Sc{Left}   Note zurpar
-      \Sc{Alt+Up}\crlf selektiert h� Note im Akkord oder niedrigste
-                  Note der h�n Notenzeile\par
-      \Sc{Alt+Down}\crlf selektiert niedrigere Note im Akkord oder die h�e
-                    Note der n�en Notenzeile.\par
-      \Sc{Alt+Ctrl+Up}  \crlf selektiert die h�e Note im Akkord\par
+      \Sc{Left}   Note zurück\par
+      \Sc{Alt+Up}\crlf selektiert höhere im Akkord oder niedrigste
+                  Note der höheren Zeile\par
+      \Sc{Alt+Down}\crlf selektiert niedrigere Note im Akkord oder die höhere
+                Note der nächsten Zeile.\par
+      \Sc{Alt+Ctrl+Up}  \crlf selektiert die höhere Note im Akkord\par
       \Sc{Alt+Ctrl+Down} \crlf selektiert die niedrigste Note im Akkord\par
-
       \stopcolumns
 
-\chapter{Design \& Implementation}
+\chapter{Design and Implementation}
 
    \section{Main Structure}
 

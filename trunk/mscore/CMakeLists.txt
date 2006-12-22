@@ -21,6 +21,17 @@
 project(mscore)
 CMAKE_MINIMUM_REQUIRED(VERSION 2.4.1)
 
+# support for mingw32 cross compiling
+#  (incomplete, does not work now)
+#
+OPTION(CROSS_MINGW32 "Cross compile Win32 using mingw32" OFF)
+IF (UNIX)
+      IF(CROSS_MINGW32)
+            set(CMAKE_CXX_COMPILER i586-mingw32msvc-g++)
+            set(CMAKE_CXX_LINK_EXECUTABLE i586-mingw32msvc-ld)
+      ENDIF(CROSS_MINGW32)
+ENDIF (UNIX)
+
 set(CMAKE_BUILD_TYPE Debug)
 # set(CMAKE_BUILD_TYPE Release)
 
