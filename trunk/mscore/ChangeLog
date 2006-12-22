@@ -1,3 +1,5 @@
+22.12 (ws)
+      - added CMake scrips for doc/de doc/en
 21.12 (ws)
       - make dragging of objects undoable again using the Element::clone() method
       - reintroduce Element::clone() method
