@@ -138,7 +138,7 @@ configure_file (
       ${PROJECT_BINARY_DIR}/config.h
       )
 
-subdirs(mscore share)
+subdirs(mscore share doc)
 
 include_directories(
    ${PROJECT_SOURCE_DIR}/mscore
