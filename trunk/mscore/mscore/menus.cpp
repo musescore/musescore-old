@@ -48,9 +48,9 @@
 //   genCreateMenu
 //---------------------------------------------------------
 
-QMenu* MuseScore::genCreateMenu(QWidget* parent)
+QMenu* MuseScore::genCreateMenu()
       {
-      QMenu* popup = new QMenu(tr("&Create"), parent);
+      QMenu* popup = new QMenu(tr("&Create"));
       popup->addAction(tr("&Instruments...\tI"), this, SLOT(editInstrList()));
       popup->addAction(tr("Measure"),            this, SLOT(cmdAppendMeasure()), Qt::CTRL+Qt::Key_B);
       popup->addAction(tr("Measures..."),        this, SLOT(cmdAppendMeasures()));

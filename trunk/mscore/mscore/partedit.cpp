@@ -256,11 +256,11 @@ void PartEdit::partNameChanged(const QString& s)
 
 void PartEdit::shortNameChanged(const QString& s)
       {
-//TODO      part->setShortName(s);
+      part->setShortName(s);
       }
 
 void PartEdit::longNameChanged(const QString& s)
       {
-//TODO      part->setLongName(s);
+      part->setLongName(s);
       }
 
