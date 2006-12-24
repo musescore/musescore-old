@@ -9,5 +9,15 @@
       <file>data/text_center.png</file>
       <file alias="fonts/emmentaler_20.otf">fonts/emmentaler_20.otf</file>
    </qresource>
+
+   <qresource lang="de">
+      <file alias="mscore.qm">../share/locale/mscore_de.qm</file>
+   </qresource>
+
+   <qresource lang="ru">
+      <file alias="mscore.qm">../share/locale/mscore_ru.qm</file>
+   </qresource>
+
+
 </RCC>
 

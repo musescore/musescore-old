@@ -249,7 +249,7 @@ class MuseScore : public QMainWindow {
       bool saveFile(QFile*);
       PlayPanel* getPlayPanel() const { return playPanel; }
       Pad* getKeyPad() const          { return pad; }
-      QMenu* genCreateMenu(QWidget* parent);
+      QMenu* genCreateMenu();
       void appendScore(Score*);
       QString getScore(int idx) const;
       void midiNoteReceived(int pitch, bool chord);

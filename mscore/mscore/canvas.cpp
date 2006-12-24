@@ -137,7 +137,7 @@ Canvas::~Canvas()
 
 void Canvas::canvasPopup(const QPoint& pos)
       {
-      QMenu* popup = mscore->genCreateMenu(this);
+      QMenu* popup = mscore->genCreateMenu();
       popup->popup(pos);
       }
 

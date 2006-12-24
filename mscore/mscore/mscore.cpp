@@ -96,7 +96,7 @@ const char* eventRecordFile;
 static bool haveMidi;
 
 struct ProjectList {
-      QString name;     
+      QString name;
       bool loaded;
       bool current;
       };
@@ -264,13 +264,13 @@ MuseScore::MuseScore()
       //    Transport Action
       //---------------------------------------------------
 
-      midiinAction = new QAction(QIcon(midiinIcon), tr("Enable Midi Input"), this); 
+      midiinAction = new QAction(QIcon(midiinIcon), tr("Enable Midi Input"), this);
       midiinAction->setCheckable(true);
       midiinAction->setEnabled(preferences.enableMidiInput);
       midiinAction->setChecked(_midiinEnabled);
       connect(midiinAction, SIGNAL(triggered(bool)), SLOT(midiinToggled(bool)));
 
-      speakerAction = new QAction(QIcon(speakerIcon), tr("Enable Sound while editing"), this); 
+      speakerAction = new QAction(QIcon(speakerIcon), tr("Enable Sound while editing"), this);
       speakerAction->setCheckable(true);
       speakerAction->setEnabled(preferences.playNotes);
       speakerAction->setChecked(_speakerEnabled);
@@ -334,7 +334,7 @@ MuseScore::MuseScore()
       //    Tool Bar
       //---------------------
 
-      fileTools = new QToolBar(tr("File Operations"), this);
+      fileTools = new QToolBar(tr("File Operations"));
       addToolBar(fileTools);
 
       fileTools->addAction(fileNewAction);
@@ -347,7 +347,7 @@ MuseScore::MuseScore()
       fileTools->addAction(redoAction);
       fileTools->addSeparator();
 
-      transportTools = new QToolBar(tr("Transport Tools"), this);
+      transportTools = new QToolBar(tr("Transport Tools"));
       addToolBar(transportTools);
       transportTools->addAction(speakerAction);
       transportTools->addAction(midiinAction);
@@ -404,7 +404,7 @@ MuseScore::MuseScore()
             { PAD_FLIP,   false, &flipIcon,      QT_TR_NOOP("flip stem") },
             };
 
-      entryTools = new QToolBar(tr("Note Entry"), this);
+      entryTools = new QToolBar(tr("Note Entry"));
       entryTools->setIconSize(QSize(ICON_WIDTH, ICON_HEIGHT));
       addToolBar(entryTools);
 
@@ -436,8 +436,7 @@ MuseScore::MuseScore()
       //    Menus
       //---------------------
 
-      QMenuBar* mb = new QMenuBar(this);
-      setMenuBar(mb);
+      QMenuBar* mb = menuBar();
 
       //---------------------
       //    Menu File
@@ -446,10 +445,9 @@ MuseScore::MuseScore()
       QMenu* menuFile = new QMenu(tr("&File"));
       mb->addMenu(menuFile);
 
-      menuBar()->addMenu(menuFile);
       menuFile->addAction(fileNewAction);
       menuFile->addAction(fileOpenAction);
-      openRecent = new QMenu(tr("Open &Recent"), this);
+      openRecent = new QMenu(tr("Open &Recent"));
       connect(openRecent, SIGNAL(aboutToShow()), SLOT(openRecentMenu()));
       connect(openRecent, SIGNAL(triggered(QAction*)), SLOT(selectScore(QAction*)));
       menuFile->addMenu(openRecent);
@@ -470,7 +468,7 @@ MuseScore::MuseScore()
       //    Menu Edit
       //---------------------
 
-      menuEdit = new QMenu(tr("&Edit"), this);
+      menuEdit = new QMenu(tr("&Edit"));
       mb->addMenu(menuEdit);
 
       //menuEdit->addAction(undoRedo);
@@ -478,7 +476,6 @@ MuseScore::MuseScore()
       menuEdit->addAction(redoAction);
 
       menuEdit->addSeparator();
-      menuBar()->addMenu(menuEdit);
 
       cutId = menuEdit->addAction(QIcon(QPixmap(editcut_xpm)), tr("C&ut"),  canvas, SLOT(cmdCut()));
       cutId->setShortcut(Qt::CTRL + Qt::Key_X);
@@ -498,23 +495,20 @@ MuseScore::MuseScore()
       //    Menu Create
       //---------------------
 
-      QMenu* menuCreate = genCreateMenu(this);
+      QMenu* menuCreate = genCreateMenu();
       mb->addMenu(menuCreate);
-
-      menuBar()->addMenu(menuCreate);
 
       //---------------------
       //    Menu Notes
       //---------------------
 
-      QMenu* menuNotes = new QMenu(tr("Notes"), this);
+      QMenu* menuNotes = new QMenu(tr("Notes"));
       mb->addMenu(menuNotes);
 
-      menuBar()->addMenu(menuNotes);
       menuNotes->addAction(tr("Input\tN"), this, SLOT(startNoteEntry()));
       menuNotes->addSeparator();
 
-      QMenu* menuAddPitch = new QMenu(tr("Add Pitch"), this);
+      QMenu* menuAddPitch = new QMenu(tr("Add Pitch"));
       QAction* a;
       a = menuAddPitch->addAction("A");
       a->setData(0);;
@@ -535,7 +529,7 @@ MuseScore::MuseScore()
 
       connect(menuAddPitch, SIGNAL(triggered(QAction*)), SLOT(cmdAddPitch(QAction*)));
 
-      QMenu* menuAddIntervall = new QMenu(tr("Add Intervall"), this);
+      QMenu* menuAddIntervall = new QMenu(tr("Add Intervall"));
 
       a = menuAddIntervall->addAction(tr("Prime\t1"));
       a->setData(1);
@@ -576,7 +570,7 @@ MuseScore::MuseScore()
       menuNotes->addMenu(menuAddIntervall);
       connect(menuAddIntervall, SIGNAL(triggered(QAction*)), SLOT(cmdAddIntervall(QAction*)));
 
-      QMenu* menuNtole = new QMenu(tr("N-Tole"), this);
+      QMenu* menuNtole = new QMenu(tr("N-Tole"));
 
       a = menuNtole->addAction("duole");
       a->setData(2);
@@ -595,10 +589,9 @@ MuseScore::MuseScore()
       //    Menu Layout
       //---------------------
 
-      QMenu* menuLayout = new QMenu(tr("&Layout"), this);
+      QMenu* menuLayout = new QMenu(tr("&Layout"));
       mb->addMenu(menuLayout);
 
-      menuBar()->addMenu(menuLayout);
       menuLayout->addAction(tr("Page Settings..."), this, SLOT(showPageSettings()));
       menuLayout->addAction(tr("Reset Positions"),  this, SLOT(resetUserOffsets()));
       menuLayout->addAction(tr("Set Normal Staff Distances"),  canvas, SLOT(resetStaffOffsets()));
@@ -609,10 +602,9 @@ MuseScore::MuseScore()
       //    Menu Style
       //---------------------
 
-      QMenu* menuStyle = new QMenu(tr("&Style"), this);
+      QMenu* menuStyle = new QMenu(tr("&Style"));
       mb->addMenu(menuStyle);
 
-      menuBar()->addMenu(menuStyle);
       menuStyle->addAction(tr("Edit Style..."), this, SLOT(editStyle()));
       menuStyle->addAction(tr("Edit Text Style..."), this, SLOT(editTextStyle()));
       menuStyle->addSeparator();
@@ -623,10 +615,8 @@ MuseScore::MuseScore()
       //    Menu Display
       //---------------------
 
-      menuDisplay = new QMenu(tr("&Display"), this);
+      menuDisplay = new QMenu(tr("&Display"));
       mb->addMenu(menuDisplay);
-
-      menuBar()->addMenu(menuDisplay);
 
       padId = new QAction(tr("Pad"), this);
       padId->setShortcut(Qt::Key_F10);
@@ -676,11 +666,9 @@ MuseScore::MuseScore()
       //    Menu Help
       //---------------------
 
-      menuBar()->addSeparator();
-      QMenu* menuHelp = new QMenu(tr("&Help"), this);
+      mb->addSeparator();
+      QMenu* menuHelp = new QMenu(tr("&Help"));
       mb->addMenu(menuHelp);
-
-      menuBar()->addMenu(menuHelp);
 
       menuHelp->addAction(tr("Browser"),  this, SLOT(helpBrowser()), Qt::Key_F1);
       menuHelp->addAction(tr("&About"),   this, SLOT(about()));
@@ -813,17 +801,18 @@ void MuseScore::navigatorVisible(bool flag)
 void MuseScore::helpBrowser()
       {
       QString lang(getenv("LANG"));
-      QString mscoreHelp = mscoreGlobalShare + QString("/html/") + lang + QString("/index.html");
-      if (access(mscoreHelp.toLatin1().data(), R_OK)) {
-    	      mscoreHelp = mscoreGlobalShare + QString("/html/index.html");
-            if (access(mscoreHelp.toLatin1().data(), R_OK) != 0) {
-                  QString info(tr("no help found at: "));
-                  info += mscoreHelp;
+      QFileInfo mscoreHelp(mscoreGlobalShare + QString("/doc/man-") + lang + QString(".pdf"));
+      if (!mscoreHelp.isReadable()) {
+            mscoreHelp.setFile(mscoreGlobalShare + QString("/doc/man-en.pdf"));
+            if (!mscoreHelp.isReadable()) {
+                  QString info(tr("MuseScore manual not found at: "));
+                  info += mscoreHelp.filePath();
                   QMessageBox::critical(this, tr("MuseScore: Open Help"), info);
                   return;
                   }
             }
-      QDesktopServices::openUrl(QString("file://") + mscoreHelp);
+      QString url("file://" + mscoreHelp.filePath());
+      QDesktopServices::openUrl(url);
       }
 
 //---------------------------------------------------------
@@ -1120,225 +1109,6 @@ static void signalHandler(int)
       abort();
       }
 #endif
-
-//---------------------------------------------------------
-//   main
-//---------------------------------------------------------
-
-int main(int argc, char* argv[])
-      {
-//      feenableexcept(FE_DIVBYZERO | FE_INVALID | FE_OVERFLOW);
-      signal(SIGFPE, signalHandler);
-
-      padState.pitch = 60;
-      setDefaultStyle();
-      new QApplication(argc, argv);
-
-#ifndef MINGW32
-      appDpiX = QX11Info::appDpiX();
-      appDpiY = QX11Info::appDpiY();
-#endif
-
-      int c;
-      while ((c = getopt(argc, argv, "vdLsm")) != EOF) {
-            switch (c) {
-                  case 'v':
-                        printVersion(argv[0]);
-                        return 0;
-                  case 'd':
-                        debugMode = true;
-                        break;
-                  case 'L':
-                        layoutDebug = true;
-                        break;
-                  case 's':
-                        noSeq = true;
-                        break;
-                  case 'm':
-                        noMidi = true;
-                        break;
-                  default:
-                        usage(argv[0], "bad argument");
-                        return -1;
-                  }
-            }
-      argc -= optind;
-      ++argc;
-
-      haveMidi = !initMidi();
-      preferences.read();
-
-      if (debugMode) {
-            if (haveMidi)
-                  printf("midi devices found\n");
-            }
-      mscoreGlobalShare = getSharePath();
-      if (debugMode) {
-            printf("global share: <%s>\n", mscoreGlobalShare.toLocal8Bit().data());
-            }
-
-      QTranslator translator;
-      language = QLocale::system().name();
-      if (debugMode)
-            printf("Language: <%s>\n", language.toLocal8Bit().data());
-
-      if (language != "C") {
-            QString loc("mscore_");
-            loc += language;
-            if (translator.load(loc, QString(".")) == false) {
-                  QString lp(mscoreGlobalShare);
-                  lp += QString("/locale");
-                  if (translator.load(loc, lp) == false) {
-                        printf("no locale <%s> in <%s>\n", loc.toLocal8Bit().data(), lp.toLatin1().data());
-                        }
-                  else if (debugMode)
-                        printf("locale %s from %s loaded\n",
-                           loc.toLatin1().data(), lp.toLocal8Bit().data());
-                  }
-            qApp->installTranslator(&translator);
-            }
-      int fontId = QFontDatabase::addApplicationFont(":/fonts/emmentaler_20.otf");
-      if (fontId == -1) {
-            fprintf(stderr, "Mscore: fatal error: cannot load internal font\n");
-            exit(-1);
-            }
-      seq = new Seq();
-      if (!noSeq) {
-            if (seq->init()) {
-                  printf("sequencer init failed\n");
-                  noSeq = true;
-                  }
-            }
-      //
-      // avoid font problems by overriding the environment
-      //    fall back to "C" locale
-      // 
-      setenv("LANG", "mops", 1);
-      QLocale::setDefault(QLocale(QLocale::C));
-
-      //-----------------------------------------
-      //  sanity check
-      //  check for score font
-      //-----------------------------------------
-
-#if 1
-      QFont f;
-      f.setFamily("Emmentaler");
-      f.setPixelSize(20);
-      QFontInfo fi(f);
-
-      if (!fi.exactMatch()) {
-            //
-            // sometimes i do not get an exact match, but the
-            // Emmentaler font is found in the font database.
-            // I cannot find out why the font did not match. This
-            // happens for example with current cvs version of fontconfig.
-            //
-            // produce some debugging output:
-            //
-            printf("Emmentaler not found (<%s><%d>)\n", fi.family().toLatin1().data(), fi.style());
-            QFontDatabase fdb;
-            QStringList families = fdb.families();
-            foreach (QString family, families) {
-                  if (family == "Emmentaler") {
-                        printf("  found <%s>\n", family.toLatin1().data());
-                        QStringList styles = fdb.styles(family);
-                        foreach (QString style, styles) {
-                              printf("    Style <%s>\n", style.toLatin1().data());
-
-                              int w = fdb.weight(family, style);
-                              printf("      weight %d\n", w);
-
-                              bool b = fdb.isSmoothlyScalable(family, style);
-                              printf("      smooth scalable %d\n", b);
-
-                              b = fdb.isBitmapScalable(family, style);
-                              printf("      bitmap scalable %d\n", b);
-
-                              b = fdb.isScalable(family, style);
-                              printf("      scalable %d\n", b);
-
-                              b = fdb.isFixedPitch(family, style);
-                              printf("      fixedPitch %d\n", b);
-
-                              b = fdb.bold(family, style);
-                              printf("      bold %d\n", b);
-
-                              QList<int> sizes = fdb.smoothSizes(family, style);
-                              printf("      sizes: ");
-                              foreach (int s, sizes)
-                                    printf("%d ", s);
-                              printf("\n");
-                              }
-                        }
-                  }
-            }
-#endif
-
-      //-------------------------------
-      //  load scores
-      //-------------------------------
-
-      initSymbols();
-      genIcons();
-      mscore = new MuseScore();
-
-      int currentScore = 0;
-      int idx = 0;
-      bool scoreCreated = false;
-      if (argc < 2) {
-            for (int i = 0; i < PROJECT_LIST_LEN; ++i) {
-                  if (projectList[i].name.isEmpty())
-                        break;
-                  if (projectList[i].loaded) {
-                        Score* score = new Score();
-                        scoreCreated = true;
-                        score->read(projectList[i].name);
-                        if (projectList[i].current)
-                              currentScore = idx;
-                        mscore->appendScore(score);
-                        ++idx;
-                        }
-                  }
-            }
-      else {
-            while (argc > 1) {
-                  QString name = argv[optind++];
-                  --argc;
-                  if (!name.isEmpty()) {
-                        Score* score = new Score();
-                        scoreCreated = true;
-                        score->read(name);
-                        mscore->appendScore(score);
-                        }
-                  }
-            }
-
-      if (!scoreCreated)
-            // start with empty score:
-            mscore->appendScore(new Score());
-
-      mscore->resize(scoreSize);
-      mscore->move(scorePos);
-      mscore->setCurrentScore(currentScore);
-      mscore->showNavigator(preferences.showNavigator);
-      mscore->showPad(preferences.showPad);
-      if (mscore->getKeyPad())
-            mscore->getKeyPad()->move(preferences.padPos);
-      mscore->showPlayPanel(preferences.showPlayPanel);
-      if (mscore->getPlayPanel())
-            mscore->getPlayPanel()->move(preferences.playPanelPos);
-
-      int rfd = getMidiReadFd();
-      if (rfd != -1) {
-            QSocketNotifier* sn = new QSocketNotifier(rfd,
-               QSocketNotifier::Read,  mscore);
-            sn->connect(sn, SIGNAL(activated(int)), mscore, SLOT(midiReceived()));
-            }
-
-      mscore->show();
-      return qApp->exec();
-      }
 
 //---------------------------------------------------------
 //   doRedo
@@ -1866,4 +1636,223 @@ void MuseScore::removeTab(int i)
             i = 0;
       setCurrentScore(i);
       }
+
+//---------------------------------------------------------
+//   main
+//---------------------------------------------------------
+
+int main(int argc, char* argv[])
+      {
+//      feenableexcept(FE_DIVBYZERO | FE_INVALID | FE_OVERFLOW);
+      signal(SIGFPE, signalHandler);
+
+      padState.pitch = 60;
+      setDefaultStyle();
+      new QApplication(argc, argv);
+
+#ifndef MINGW32
+      appDpiX = QX11Info::appDpiX();
+      appDpiY = QX11Info::appDpiY();
+#endif
+
+      int c;
+      while ((c = getopt(argc, argv, "vdLsm")) != EOF) {
+            switch (c) {
+                  case 'v':
+                        printVersion(argv[0]);
+                        return 0;
+                  case 'd':
+                        debugMode = true;
+                        break;
+                  case 'L':
+                        layoutDebug = true;
+                        break;
+                  case 's':
+                        noSeq = true;
+                        break;
+                  case 'm':
+                        noMidi = true;
+                        break;
+                  default:
+                        usage(argv[0], "bad argument");
+                        return -1;
+                  }
+            }
+      argc -= optind;
+      ++argc;
+
+      haveMidi = !initMidi();
+      preferences.read();
+
+      if (debugMode) {
+            if (haveMidi)
+                  printf("midi devices found\n");
+            }
+      mscoreGlobalShare = getSharePath();
+      if (debugMode) {
+            printf("global share: <%s>\n", mscoreGlobalShare.toLocal8Bit().data());
+            }
+
+      static QTranslator translator;
+      QFile ft(":mscore.qm");
+      if (ft.exists()) {
+            if (debugMode)
+                  printf("locale file found\n");
+            if (translator.load(":/mscore.qm")) {
+                  if (debugMode)
+                        printf("locale file loaded\n");
+                  }
+            qApp->installTranslator(&translator);
+            }
+      else {
+            if (debugMode) {
+                  printf("locale file not found for locale <%s>\n",
+                     QLocale::system().name().toLatin1().data());
+                  }
+            }
+
+      int fontId = QFontDatabase::addApplicationFont(":/fonts/emmentaler_20.otf");
+      if (fontId == -1) {
+            fprintf(stderr, "Mscore: fatal error: cannot load internal font\n");
+            exit(-1);
+            }
+
+      seq = new Seq();
+      if (!noSeq) {
+            if (seq->init()) {
+                  printf("sequencer init failed\n");
+                  noSeq = true;
+                  }
+            }
+      //
+      // avoid font problems by overriding the environment
+      //    fall back to "C" locale
+      //
+      setenv("LANG", "mops", 1);
+      QLocale::setDefault(QLocale(QLocale::C));
+
+      //-----------------------------------------
+      //  sanity check
+      //  check for score font
+      //-----------------------------------------
+
+#if 1
+      QFont f;
+      f.setFamily("Emmentaler");
+      f.setPixelSize(20);
+      QFontInfo fi(f);
+
+      if (!fi.exactMatch()) {
+            //
+            // sometimes i do not get an exact match, but the
+            // Emmentaler font is found in the font database.
+            // I cannot find out why the font did not match. This
+            // happens for example with current cvs version of fontconfig.
+            //
+            // produce some debugging output:
+            //
+            printf("Emmentaler not found (<%s><%d>)\n", fi.family().toLatin1().data(), fi.style());
+            QFontDatabase fdb;
+            QStringList families = fdb.families();
+            foreach (QString family, families) {
+                  if (family == "Emmentaler") {
+                        printf("  found <%s>\n", family.toLatin1().data());
+                        QStringList styles = fdb.styles(family);
+                        foreach (QString style, styles) {
+                              printf("    Style <%s>\n", style.toLatin1().data());
+
+                              int w = fdb.weight(family, style);
+                              printf("      weight %d\n", w);
+
+                              bool b = fdb.isSmoothlyScalable(family, style);
+                              printf("      smooth scalable %d\n", b);
+
+                              b = fdb.isBitmapScalable(family, style);
+                              printf("      bitmap scalable %d\n", b);
+
+                              b = fdb.isScalable(family, style);
+                              printf("      scalable %d\n", b);
+
+                              b = fdb.isFixedPitch(family, style);
+                              printf("      fixedPitch %d\n", b);
+
+                              b = fdb.bold(family, style);
+                              printf("      bold %d\n", b);
+
+                              QList<int> sizes = fdb.smoothSizes(family, style);
+                              printf("      sizes: ");
+                              foreach (int s, sizes)
+                                    printf("%d ", s);
+                              printf("\n");
+                              }
+                        }
+                  }
+            }
+#endif
+
+      //-------------------------------
+      //  load scores
+      //-------------------------------
+
+      initSymbols();
+      genIcons();
+      mscore = new MuseScore();
+
+      int currentScore = 0;
+      int idx = 0;
+      bool scoreCreated = false;
+      if (argc < 2) {
+            for (int i = 0; i < PROJECT_LIST_LEN; ++i) {
+                  if (projectList[i].name.isEmpty())
+                        break;
+                  if (projectList[i].loaded) {
+                        Score* score = new Score();
+                        scoreCreated = true;
+                        score->read(projectList[i].name);
+                        if (projectList[i].current)
+                              currentScore = idx;
+                        mscore->appendScore(score);
+                        ++idx;
+                        }
+                  }
+            }
+      else {
+            while (argc > 1) {
+                  QString name = argv[optind++];
+                  --argc;
+                  if (!name.isEmpty()) {
+                        Score* score = new Score();
+                        scoreCreated = true;
+                        score->read(name);
+                        mscore->appendScore(score);
+                        }
+                  }
+            }
+
+      if (!scoreCreated)
+            // start with empty score:
+            mscore->appendScore(new Score());
+
+      mscore->resize(scoreSize);
+      mscore->move(scorePos);
+      mscore->setCurrentScore(currentScore);
+      mscore->showNavigator(preferences.showNavigator);
+      mscore->showPad(preferences.showPad);
+      if (mscore->getKeyPad())
+            mscore->getKeyPad()->move(preferences.padPos);
+      mscore->showPlayPanel(preferences.showPlayPanel);
+      if (mscore->getPlayPanel())
+            mscore->getPlayPanel()->move(preferences.playPanelPos);
+
+      int rfd = getMidiReadFd();
+      if (rfd != -1) {
+            QSocketNotifier* sn = new QSocketNotifier(rfd,
+               QSocketNotifier::Read,  mscore);
+            sn->connect(sn, SIGNAL(activated(int)), mscore, SLOT(midiReceived()));
+            }
+
+      mscore->show();
+      return qApp->exec();
+      }
+
 
