@@ -149,7 +149,7 @@
       \M\ verwendet die Fonts des Lilypond Typesetter Projekts.\par
       Dieses Dokument wurde mit \pdfTeX\ und dem Macropaket \ConTeXt\ gesetzt.
       \blank[line]
-      \copyright 2005 Werner Schweer
+      \copyright 2005-2006 Werner Schweer
       \stopstandardmakeup
 
    \completecontent
@@ -194,7 +194,7 @@ mscore
 
    Das Fenster besteht aus drei Bereichen:
    \startitemize[packed]
-      \item einer Leiste mit pulldown Menü
+      \item einer Leiste mit Pulldownmenü
       \item eine Leiste mit Werkzeugsymbolen
       \item einem leeren Canvas
    \stopitemize
@@ -202,9 +202,9 @@ mscore
   \subsection{Neue Partitur erzeugen}
 
       Um ein Notenblatt zu erzeugen geben Sie \type{Strg+N} ein.
-      Es erscheint ein Dialog mit einer Liste von Templates zur Auswahl
+      Es erscheint ein Dialog mit einer Liste von Vorlagen (''Templates'') zur Auswahl
       (Abb. \in[fig:template]).
-      \index{Templates}
+      \index{Vorlagen}\index{Templates}
 
       \Screen{template}{Template Auswahl}
 
@@ -215,7 +215,7 @@ mscore
       mit dem gewünschten Template angezeigt, in unserem Fall also zwei
       Notenzeilen, die mit einer Klammer verbunden sind. Die Noteschlüssel
       sind gesetzt, die Taktart ist mit $4/4$ vorgegeben und die Notenzeilen
-      sind bereits mit ein paar Takten mit Pausen bevölkert.
+      sind bereits mit ein paar Pausentakten bevölkert.
 
       \Screen{emptypiano}{Leeres Pianosystem}
 
@@ -224,7 +224,7 @@ mscore
       Nun wollen wir ein paar Noten eingeben. Dazu clicken wir zunächst die
       erste Pause an um sie zu selektieren und starten dann
       den Noteneingabemode durch Eingabe von \type{N}.
-      Der Cursor verößert sich, um den Eingabemodus anzuzeigen.
+      Der Cursor verändert sich, um den Eingabemodus anzuzeigen.
       Ebenso erscheint eine Einfügemarke.
 
       Um die leeren Takte mit Noten zu bevölkern, tippen wir nun
@@ -246,7 +246,7 @@ mscore
 
 \subsection{Drucken}
 
-      Durch anclicken des Drucker-Knopfes wird der Druck-Dialog
+      Durch anclicken des Druckerknopfes wird der Druckdialog
       gestartet. \M\ erzeugt PostScript oder PDF Druckerdaten,
       die zum Drucker geschickt oder in eine Datei umgeleitet werden
       können.
@@ -254,10 +254,10 @@ mscore
       \FrameTitle{Tip:}
       \StartFrame
       Um Notenbeispiele für ein Buch zu erzeugen, erstellen sie mit
-      \M\ eine Partiturseite in einem kleinen Format wie A5, drehen
-      sie die Seite (Landscape Option). Nach Ausgabe in eine PDF-Datei
+      \M\ eine kleine Partiturseite im A5 Querformat (Landscape Option).
+      Nach Ausgabe in eine PDF-Datei
       wird dann überflüssiger Rand mit dem Zeilenkommando \type{pdfcrop}
-      abgeschnitten und das Resultat kann dann in ein \ConTeXt\ Dokument
+      abgeschnitten. Das Resultat kann in ein \ConTeXt\ Dokument
       integriert werden. Die Beispiele in diesem Handbuch wurden auf
       diese Weise erstellt.
       \StopFrame
@@ -294,7 +294,7 @@ mscore <Optionen> <Dateiname>
             \blank[big]
 
       Die Optionen der aktuellen Version können durch Eingabe der
-      Option \type{-h} erfragt werden.
+      Option \type{-h} (''Hilfe'') erfragt werden.
       \blank[line]
 
       Als Datei akzeptiert \M\ folgenden Typen:
@@ -315,7 +315,7 @@ mscore <Optionen> <Dateiname>
             \blank[medium]
             \starttabulate
             \NC \type{~/.mscore}    \NC \M\ Konfigurationsdaten \NC\NR
-            \NC \type{~/.mscorePrj} \NC enth�        bearbeiteten Partituren\NC\NR
+            \NC \type{~/.mscorePrj} \NC enthält die zuletzt bearbeiteten Partituren\NC\NR
             \stoptabulate
             \blank[big]
 
@@ -960,14 +960,14 @@ su -c make install
       \blank[line]
 
       \startcolumns[n=2,rule=on]
-      \Sc{Alt+F} File Menü
-      \Sc{Alt+E} Edit Menü
-      \Sc{Alt+C} Create Menü
-      \Sc{Alt+N} Notes Menü
-      \Sc{Alt+L} Layout Menü
-      \Sc{Alt+S} Style Menü
-      \Sc{Alt+D} Display Menü
-      \Sc{Alt+H} Hilfe Menü
+      \Sc{Alt+F} File Menü\par
+      \Sc{Alt+E} Edit Menü\par
+      \Sc{Alt+C} Create Menü\par
+      \Sc{Alt+N} Notes Menü\par
+      \Sc{Alt+L} Layout Menü\par
+      \Sc{Alt+S} Style Menü\par
+      \Sc{Alt+D} Display Menü\par
+      \Sc{Alt+H} Hilfe Menü\par
       \blank[small]
       \hrule
       \blank[small]
