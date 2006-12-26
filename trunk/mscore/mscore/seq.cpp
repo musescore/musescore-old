@@ -96,8 +96,8 @@ Seq::Seq()
 
 Seq::~Seq()
       {
-      delete synti;
-      delete audio;
+//      delete synti;
+//      delete audio;
       }
 
 //---------------------------------------------------------

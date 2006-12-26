@@ -1,4 +1,6 @@
-26.12 (lv)
+26.12 (ws)
+      - misc fixes to palettes etc.
+      (lv)
       * MusicXML updates
         - changed order of attribute output
         - don't output staff number for single-staff parts

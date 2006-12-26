@@ -111,7 +111,7 @@ class AlsaDriver {
 class AlsaAudio : public Audio {
       pthread_t thread;
       AlsaDriver* alsa;
-      bool runAlsa;
+      volatile int runAlsa;
       int state;
       bool seekflag;
       unsigned pos;

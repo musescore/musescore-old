@@ -974,20 +974,24 @@ void Volta::setLen(qreal l)
 
 void Volta::layout()
       {
+      if (!parent())
+            return;
       qreal voltaHeight   = _spatium * 1.8;
       qreal voltaDistance = _spatium * .7;
 
       Measure* measure = (Measure*)parent();
       System* system   = measure->system();
       SysStaff* sstaff = system->staff(staffIdx());
+      qreal y  = sstaff->bbox().top();
+      qreal x2 = measure->width() - _spatium * .5;
 
       _p1.setX(0.0);
       _p1.setY(0.0);
-      _p2.setX(measure->width() - _spatium * .5);
+      _p2.setX(x2);
       _p2.setY(0.0);
 
       setbbox(QRectF(0.0, 0.0, _p2.x() - _p1.x(), voltaHeight));
-      setPos(0.0, sstaff->bbox().top() - (voltaHeight + voltaDistance));
+      setPos(0.0, y - (voltaHeight + voltaDistance));
       }
 
 //---------------------------------------------------------

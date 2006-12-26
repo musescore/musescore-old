@@ -223,8 +223,9 @@ MuseScore::MuseScore()
       _midiinEnabled        = true;
       _speakerEnabled       = true;
 
-      QWidget* mainWindow = new QWidget(this);
-      layout = new QVBoxLayout(mainWindow);
+      QWidget* mainWindow = new QWidget;
+      layout = new QVBoxLayout;
+      mainWindow->setLayout(layout);
       layout->setMargin(0);
       layout->setSpacing(0);
       tab    = new TabBar(mainWindow);
@@ -442,8 +443,7 @@ MuseScore::MuseScore()
       //    Menu File
       //---------------------
 
-      QMenu* menuFile = new QMenu(tr("&File"));
-      mb->addMenu(menuFile);
+      QMenu* menuFile = mb->addMenu(tr("&File"));
 
       menuFile->addAction(fileNewAction);
       menuFile->addAction(fileOpenAction);
@@ -468,8 +468,7 @@ MuseScore::MuseScore()
       //    Menu Edit
       //---------------------
 
-      menuEdit = new QMenu(tr("&Edit"));
-      mb->addMenu(menuEdit);
+      menuEdit = mb->addMenu(tr("&Edit"));
 
       //menuEdit->addAction(undoRedo);
       menuEdit->addAction(undoAction);
@@ -502,8 +501,7 @@ MuseScore::MuseScore()
       //    Menu Notes
       //---------------------
 
-      QMenu* menuNotes = new QMenu(tr("Notes"));
-      mb->addMenu(menuNotes);
+      QMenu* menuNotes = mb->addMenu(tr("Notes"));
 
       menuNotes->addAction(tr("Input\tN"), this, SLOT(startNoteEntry()));
       menuNotes->addSeparator();
@@ -589,8 +587,7 @@ MuseScore::MuseScore()
       //    Menu Layout
       //---------------------
 
-      QMenu* menuLayout = new QMenu(tr("&Layout"));
-      mb->addMenu(menuLayout);
+      QMenu* menuLayout = mb->addMenu(tr("&Layout"));
 
       menuLayout->addAction(tr("Page Settings..."), this, SLOT(showPageSettings()));
       menuLayout->addAction(tr("Reset Positions"),  this, SLOT(resetUserOffsets()));
@@ -602,9 +599,7 @@ MuseScore::MuseScore()
       //    Menu Style
       //---------------------
 
-      QMenu* menuStyle = new QMenu(tr("&Style"));
-      mb->addMenu(menuStyle);
-
+      QMenu* menuStyle = mb->addMenu(tr("&Style"));
       menuStyle->addAction(tr("Edit Style..."), this, SLOT(editStyle()));
       menuStyle->addAction(tr("Edit Text Style..."), this, SLOT(editTextStyle()));
       menuStyle->addSeparator();
@@ -615,8 +610,7 @@ MuseScore::MuseScore()
       //    Menu Display
       //---------------------
 
-      menuDisplay = new QMenu(tr("&Display"));
-      mb->addMenu(menuDisplay);
+      menuDisplay = mb->addMenu(tr("&Display"));
 
       padId = new QAction(tr("Pad"), this);
       padId->setShortcut(Qt::Key_F10);
@@ -667,8 +661,7 @@ MuseScore::MuseScore()
       //---------------------
 
       mb->addSeparator();
-      QMenu* menuHelp = new QMenu(tr("&Help"));
-      mb->addMenu(menuHelp);
+      QMenu* menuHelp = mb->addMenu(tr("&Help"));
 
       menuHelp->addAction(tr("Browser"),  this, SLOT(helpBrowser()), Qt::Key_F1);
       menuHelp->addAction(tr("&About"),   this, SLOT(about()));
@@ -1436,6 +1429,7 @@ void MuseScore::showPlayPanel(bool visible)
       {
       if (noSeq)
             return;
+
       if (playPanel == 0) {
             playPanel = new PlayPanel();
             connect(playPanel, SIGNAL(volChange(float)),    seq, SLOT(setVolume(float)));
@@ -1648,7 +1642,7 @@ int main(int argc, char* argv[])
 
       padState.pitch = 60;
       setDefaultStyle();
-      new QApplication(argc, argv);
+      QApplication app(argc, argv);
 
 #ifndef MINGW32
       appDpiX = QX11Info::appDpiX();
@@ -1683,6 +1677,8 @@ int main(int argc, char* argv[])
 
       haveMidi = !initMidi();
       preferences.read();
+
+      QApplication::setFont(QFont(QString("helvetica"), 11, QFont::Normal));
 
       if (debugMode) {
             if (haveMidi)

@@ -1,11 +1,11 @@
-<?xml version="1.0" encoding="ISO-8859-1"?>
+<?xml version="1.0" encoding="utf8"?>
 <museScore version="1.0">
   <Geometry x="422" y="0" w="1061" h="931" />
   <Spatium>1.625</Spatium>
   <Division>384</Division>
-  <Mag>1.5</Mag>
-  <xoff>13.5</xoff>
-  <yoff>21.5</yoff>
+  <Mag>2</Mag>
+  <xoff>18</xoff>
+  <yoff>28.6667</yoff>
   <Style>
     <staffUpperBorder>8</staffUpperBorder>
     <staffLowerBorder>4</staffLowerBorder>
@@ -155,17 +155,26 @@
   <Staff id="1">
     <Measure number="1" tick="0">
       <work-title>
-        <data>Bilder einer Ausstellung</data>
         <style>2</style>
+        <data>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-weight:400; font-style:normal; text-decoration:none;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Bilder einer Ausstellung&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
         </work-title>
       <creator-composer>
-        <data>Modeste Moussorgsky</data>
         <style>4</style>
+        <data>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-weight:400; font-style:normal; text-decoration:none;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Modeste Moussorgsky&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
         <offset x="-0.109388" y="0.771701"/>
         </creator-composer>
       <work-number>
-        <data>Promenade</data>
         <style>3</style>
+        <data>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-weight:400; font-style:normal; text-decoration:none;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Promenade&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
         <offset x="-0.437554" y="0.771701"/>
         </work-number>
       <BarLine type="1">
@@ -175,10 +184,6 @@
         <startTick>1152</startTick>
         <endTick>1536</endTick>
         </Slur>
-      <Dynamic>
-        <mf/>
-        <offset x="-1" y="6.96"/>
-        </Dynamic>
       <Chord>
         <ticklen>384</ticklen>
         <Attribute>
@@ -251,8 +256,10 @@
         <endTick>2304</endTick>
         </Slur>
       <TimeSig>
-        <subtype>5</subtype>
+        <subtype>388</subtype>
         <tick>1920</tick>
+        <den>4</den>
+        <nom1>6</nom1>
         </TimeSig>
       <Chord>
         <tick>1920</tick>
@@ -341,8 +348,10 @@
         <up>1</up>
         </Slur>
       <TimeSig>
-        <subtype>4</subtype>
+        <subtype>324</subtype>
         <tick>4224</tick>
+        <den>4</den>
+        <nom1>5</nom1>
         </TimeSig>
       <Chord>
         <tick>4224</tick>
@@ -448,8 +457,10 @@
         <up>1</up>
         </Slur>
       <TimeSig>
-        <subtype>5</subtype>
+        <subtype>388</subtype>
         <tick>6144</tick>
+        <den>4</den>
+        <nom1>6</nom1>
         </TimeSig>
       <Chord>
         <tick>6144</tick>
@@ -563,8 +574,10 @@
         <subtype>1</subtype>
         </BarLine>
       <TimeSig>
-        <subtype>4</subtype>
+        <subtype>324</subtype>
         <tick>8448</tick>
+        <den>4</den>
+        <nom1>5</nom1>
         </TimeSig>
       <Chord>
         <tick>8448</tick>
@@ -634,8 +647,10 @@
         <subtype>1</subtype>
         </BarLine>
       <TimeSig>
-        <subtype>5</subtype>
+        <subtype>388</subtype>
         <tick>10368</tick>
+        <den>4</den>
+        <nom1>6</nom1>
         </TimeSig>
       <Chord>
         <tick>10368</tick>
@@ -730,8 +745,10 @@
         <endTick>14208</endTick>
         </Slur>
       <TimeSig>
-        <subtype>4</subtype>
+        <subtype>324</subtype>
         <tick>12672</tick>
+        <den>4</den>
+        <nom1>5</nom1>
         </TimeSig>
       <Chord>
         <tick>12672</tick>
@@ -800,8 +817,10 @@
       <BarLine>
         </BarLine>
       <TimeSig>
-        <subtype>5</subtype>
+        <subtype>388</subtype>
         <tick>14592</tick>
+        <den>4</den>
+        <nom1>6</nom1>
         </TimeSig>
       <Chord>
         <tick>14592</tick>
@@ -1165,8 +1184,10 @@
         <subtype>1</subtype>
         </BarLine>
       <TimeSig>
-        <subtype>4</subtype>
+        <subtype>324</subtype>
         <tick>21504</tick>
+        <den>4</den>
+        <nom1>5</nom1>
         </TimeSig>
       <Chord>
         <tick>21504</tick>
@@ -1265,8 +1286,10 @@
       <BarLine>
         </BarLine>
       <TimeSig>
-        <subtype>5</subtype>
+        <subtype>388</subtype>
         <tick>23424</tick>
+        <den>4</den>
+        <nom1>6</nom1>
         </TimeSig>
       <Chord>
         <tick>23424</tick>
@@ -2691,8 +2714,10 @@
       </Measure>
     <Measure number="2" tick="1920">
       <TimeSig>
-        <subtype>5</subtype>
+        <subtype>388</subtype>
         <tick>1920</tick>
+        <den>4</den>
+        <nom1>6</nom1>
         </TimeSig>
       <Rest>
         <tick>1920</tick>
@@ -2703,8 +2728,10 @@
     <Measure number="3" tick="4224">
       <stretch>1.3</stretch>
       <TimeSig>
-        <subtype>4</subtype>
+        <subtype>324</subtype>
         <tick>4224</tick>
+        <den>4</den>
+        <nom1>5</nom1>
         </TimeSig>
       <Chord>
         <tick>4224</tick>
@@ -2760,8 +2787,10 @@
     <Measure number="4" tick="6144">
       <stretch>1.1</stretch>
       <TimeSig>
-        <subtype>5</subtype>
+        <subtype>388</subtype>
         <tick>6144</tick>
+        <den>4</den>
+        <nom1>6</nom1>
         </TimeSig>
       <Chord>
         <tick>6144</tick>
@@ -2828,8 +2857,10 @@
       </Measure>
     <Measure number="5" tick="8448">
       <TimeSig>
-        <subtype>4</subtype>
+        <subtype>324</subtype>
         <tick>8448</tick>
+        <den>4</den>
+        <nom1>5</nom1>
         </TimeSig>
       <Rest>
         <tick>8448</tick>
@@ -2839,8 +2870,10 @@
       </Measure>
     <Measure number="6" tick="10368">
       <TimeSig>
-        <subtype>5</subtype>
+        <subtype>388</subtype>
         <tick>10368</tick>
+        <den>4</den>
+        <nom1>6</nom1>
         </TimeSig>
       <Rest>
         <tick>10368</tick>
@@ -2895,8 +2928,10 @@
       </Measure>
     <Measure number="7" tick="12672">
       <TimeSig>
-        <subtype>4</subtype>
+        <subtype>324</subtype>
         <tick>12672</tick>
+        <den>4</den>
+        <nom1>5</nom1>
         </TimeSig>
       <Rest>
         <tick>12672</tick>
@@ -2906,8 +2941,10 @@
       </Measure>
     <Measure number="8" tick="14592">
       <TimeSig>
-        <subtype>5</subtype>
+        <subtype>388</subtype>
         <tick>14592</tick>
+        <den>4</den>
+        <nom1>6</nom1>
         </TimeSig>
       <Rest>
         <tick>14592</tick>
@@ -3114,8 +3151,10 @@
       </Measure>
     <Measure number="11" tick="21504">
       <TimeSig>
-        <subtype>4</subtype>
+        <subtype>324</subtype>
         <tick>21504</tick>
+        <den>4</den>
+        <nom1>5</nom1>
         </TimeSig>
       <Chord>
         <tick>21504</tick>
@@ -3177,8 +3216,10 @@
       </Measure>
     <Measure number="12" tick="23424">
       <TimeSig>
-        <subtype>5</subtype>
+        <subtype>388</subtype>
         <tick>23424</tick>
+        <den>4</den>
+        <nom1>6</nom1>
         </TimeSig>
       <Chord>
         <tick>23424</tick>
@@ -4009,12 +4050,11 @@
           <pitch>46</pitch>
           </Note>
         <Note>
-          <selected>1</selected>
           <pitch>58</pitch>
           </Note>
         </Chord>
       </Measure>
     </Staff>
-  <cursorStaff>1</cursorStaff>
+  <cursorStaff>0</cursorStaff>
   <cursorVoice>0</cursorVoice>
   </museScore>

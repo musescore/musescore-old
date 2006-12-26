@@ -91,7 +91,7 @@ void MuseScore::symbolMenu1()
             QScrollArea* sa = new QScrollArea;
             sa->setWindowTitle(tr("MuseScore: Symbols 1"));
             symbolPalette1 = sa;
-            SymbolPalette* pw = new SymbolPalette(11, 16, 0);
+            SymbolPalette* pw = new SymbolPalette(11, 16);
             sa->setWidget(pw);
 
             pw->addObject(0, wholerestSym);
@@ -271,14 +271,11 @@ void MuseScore::symbolMenu1()
 
 void MuseScore::clefMenu()
       {
-      qreal oSpatium = _spatium;
-      _spatium = PALETTE_SPATIUM;
-
       if (clefPalette == 0) {
             QScrollArea* sa = new QScrollArea;
             sa->setWindowTitle(tr("MuseScore: Clefs"));
             clefPalette = sa;
-            SymbolPalette* sp = new SymbolPalette(4, 4, 0);
+            SymbolPalette* sp = new SymbolPalette(4, 4);
             sa->setWidget(sp);
             sp->setGrid(60, 80);
             sp->showStaff(true);
@@ -289,7 +286,6 @@ void MuseScore::clefMenu()
             }
       clefPalette->show();
       clefPalette->raise();
-      _spatium = oSpatium;
       }
 
 //---------------------------------------------------------
@@ -312,7 +308,7 @@ void MuseScore::keyMenu()
       if (keyPalette == 0) {
             keyPalette = new QScrollArea;
             keyPalette->setWindowTitle(tr("MuseScore: Key Signature"));
-            SymbolPalette* sp = new SymbolPalette(4, 4, 0);
+            SymbolPalette* sp = new SymbolPalette(4, 4);
             sp->setGrid(80, 60);
             ((QScrollArea*)keyPalette)->setWidget(sp);
             sp->showStaff(true);
@@ -351,13 +347,10 @@ void MuseScore::timeMenu()
 
 void MuseScore::lineMenu()
       {
-      qreal oSpatium = _spatium;
-      _spatium = PALETTE_SPATIUM;
-
       if (linePalette == 0) {
             linePalette = new QScrollArea;
             linePalette->setWindowTitle(tr("MuseScore: Lines"));
-            SymbolPalette* sp = new SymbolPalette(4, 4, 0);
+            SymbolPalette* sp = new SymbolPalette(4, 4);
             ((QScrollArea*)linePalette)->setWidget(sp);
             sp->setGrid(100, 30);
 
@@ -365,66 +358,65 @@ void MuseScore::lineMenu()
 
             Hairpin* gabel0 = new Hairpin(cs);
             gabel0->setSubtype(0);
-            gabel0->setLen(_spatium * 8);
+            gabel0->setLen(l);
             sp->addObject(0, gabel0, tr("crescendo"));
 
             Hairpin* gabel1 = new Hairpin(cs);
             gabel1->setSubtype(1);
-            gabel1->setLen(_spatium * 8);
+            gabel1->setLen(l);
             sp->addObject(1, gabel1, tr("diminuendo"));
 
             Volta* volta1 = new Volta(cs);
-            volta1->setLen(_spatium * 8);
+            volta1->setLen(l);
             volta1->setSubtype(PRIMA_VOLTA);
             sp->addObject(4, volta1, tr("prima volta"));
 
             Volta* volta2 = new Volta(cs);
-            volta2->setLen(_spatium * 8);
+            volta2->setLen(l);
             volta2->setSubtype(SECONDA_VOLTA);
             sp->addObject(5, volta2, tr("seconda volta"));
 
             Volta* volta3 = new Volta(cs);
-            volta3->setLen(_spatium * 8);
+            volta3->setLen(l);
             volta3->setSubtype(TERZA_VOLTA);
             sp->addObject(6, volta3, tr("terza volta"));
 
             Volta* volta4 = new Volta(cs);
-            volta4->setLen(_spatium * 8);
+            volta4->setLen(l);
             volta4->setSubtype(SECONDA_VOLTA2);
             sp->addObject(7, volta4, tr("seconda volta"));
 
             Ottava* ottava1 = new Ottava(cs);
             ottava1->setSubtype(0);
-            ottava1->setLen(_spatium * 8);
+            ottava1->setLen(l);
             sp->addObject(8, ottava1, tr("8va"));
 
             Ottava* ottava2 = new Ottava(cs);
             ottava2->setSubtype(1);
-            ottava2->setLen(_spatium * 8);
+            ottava2->setLen(l);
             sp->addObject(9, ottava2, tr("15va"));
 
             Ottava* ottava3 = new Ottava(cs);
             ottava3->setSubtype(2);
-            ottava3->setLen(_spatium * 8);
+            ottava3->setLen(l);
             sp->addObject(10, ottava3, tr("8vb"));
 
             Ottava* ottava4 = new Ottava(cs);
             ottava4->setSubtype(3);
-            ottava4->setLen(_spatium * 8);
+            ottava4->setLen(l);
             sp->addObject(11, ottava4, tr("15vb"));
 
             Pedal* pedal = new Pedal(cs);
             pedal->setLen(l);
             sp->addObject(12, pedal, tr("pedal"));
 
-            Trill* trill = new Trill(cs);
+            Trill* trill = new Trill(0);
             trill->setLen(l);
             sp->addObject(13, trill, tr("trill line"));
 
             }
       linePalette->show();
       linePalette->raise();
-      _spatium = oSpatium;
       }
 
 //---------------------------------------------------------
@@ -433,13 +425,10 @@ void MuseScore::lineMenu()
 
 void MuseScore::bracketMenu()
       {
-      qreal oSpatium = _spatium;
-      _spatium = PALETTE_SPATIUM;
-
       if (bracketPalette == 0) {
             bracketPalette = new QScrollArea;
             bracketPalette->setWindowTitle(tr("MuseScore: System Brackets"));
-            SymbolPalette* sp = new SymbolPalette(1, 4, 0);
+            SymbolPalette* sp = new SymbolPalette(1, 4);
             ((QScrollArea*)bracketPalette)->setWidget(sp);
             sp->setGrid(40, 80);
 
@@ -454,7 +443,6 @@ void MuseScore::bracketMenu()
             }
       bracketPalette->show();
       bracketPalette->raise();
-      _spatium = oSpatium;
       }
 
 //---------------------------------------------------------
@@ -463,12 +451,10 @@ void MuseScore::bracketMenu()
 
 void MuseScore::noteAttributesMenu()
       {
-      qreal oSpatium = _spatium;
-      _spatium = PALETTE_SPATIUM;
       if (noteAttributesPalette == 0) {
             noteAttributesPalette = new QScrollArea;
             noteAttributesPalette->setWindowTitle(tr("MuseScore: Note Attributes"));
-            SymbolPalette* sp = new SymbolPalette(3, 10, 0);
+            SymbolPalette* sp = new SymbolPalette(3, 10);
             ((QScrollArea*)noteAttributesPalette)->setWidget(sp);
             sp->setGrid(60, 60);
 
@@ -481,7 +467,6 @@ void MuseScore::noteAttributesMenu()
             }
       noteAttributesPalette->show();
       noteAttributesPalette->raise();
-      _spatium = oSpatium;
       }
 
 //---------------------------------------------------------
@@ -490,12 +475,10 @@ void MuseScore::noteAttributesMenu()
 
 void MuseScore::accidentalsMenu()
       {
-      qreal oSpatium = _spatium;
-      _spatium = PALETTE_SPATIUM;
       if (accidentalsPalette == 0) {
             accidentalsPalette = new QScrollArea;
             accidentalsPalette->setWindowTitle(tr("MuseScore: Accidentals"));
-            SymbolPalette* sp = new SymbolPalette(2, 8, 0);
+            SymbolPalette* sp = new SymbolPalette(2, 8);
             ((QScrollArea*)accidentalsPalette)->setWidget(sp);
             sp->setGrid(60, 60);
 
@@ -507,7 +490,6 @@ void MuseScore::accidentalsMenu()
             }
       accidentalsPalette->show();
       accidentalsPalette->raise();
-      _spatium = oSpatium;
       }
 
 //---------------------------------------------------------
@@ -516,12 +498,10 @@ void MuseScore::accidentalsMenu()
 
 void MuseScore::dynamicsMenu()
       {
-      qreal oSpatium = _spatium;
-      _spatium = PALETTE_SPATIUM;
       if (dynamicsPalette == 0) {
             dynamicsPalette = new QScrollArea;
             dynamicsPalette->setWindowTitle(tr("MuseScore: Dynamics"));
-            SymbolPalette* sp = new SymbolPalette(6, 6, 0);
+            SymbolPalette* sp = new SymbolPalette(6, 6);
             ((QScrollArea*)dynamicsPalette)->setWidget(sp);
             sp->setGrid(90, 40);
 
@@ -570,7 +550,6 @@ void MuseScore::dynamicsMenu()
             }
       dynamicsPalette->show();
       dynamicsPalette->raise();
-      _spatium = oSpatium;
       }
 
 //---------------------------------------------------------
@@ -579,13 +558,10 @@ void MuseScore::dynamicsMenu()
 
 void MuseScore::barMenu()
       {
-      qreal oSpatium = _spatium;
-      _spatium = PALETTE_SPATIUM;
-
       if (barPalette == 0) {
             barPalette = new QScrollArea;
             barPalette->setWindowTitle(tr("MuseScore: Barlines"));
-            SymbolPalette* sp = new SymbolPalette(2, 4, 0);
+            SymbolPalette* sp = new SymbolPalette(2, 4);
             ((QScrollArea*)barPalette)->setWidget(sp);
             sp->setGrid(60, 60);
             sp->showStaff(true);
@@ -612,7 +588,6 @@ void MuseScore::barMenu()
             }
       barPalette->show();
       barPalette->raise();
-      _spatium = oSpatium;
       }
 
 //---------------------------------------------------------
@@ -621,14 +596,11 @@ void MuseScore::barMenu()
 
 void MuseScore::fingeringMenu()
       {
-      qreal oSpatium = _spatium;
-      _spatium = PALETTE_SPATIUM;
-
       if (fingeringPalette == 0) {
             QScrollArea* sa = new QScrollArea;
             sa->setWindowTitle(tr("MuseScore: Fingering"));
             fingeringPalette = sa;
-            SymbolPalette* sp = new SymbolPalette(1, 5, 0);
+            SymbolPalette* sp = new SymbolPalette(1, 5);
             sa->setWidget(sp);
             sp->setGrid(50, 50);
 
@@ -652,8 +624,6 @@ void MuseScore::fingeringMenu()
             }
       fingeringPalette->show();
       fingeringPalette->raise();
-
-      _spatium = oSpatium;
       }
 
 //---------------------------------------------------------
@@ -709,14 +679,11 @@ void Score::addMetronome()
 
 void MuseScore::showLayoutBreakPalette()
       {
-      qreal oSpatium = _spatium;
-      _spatium = PALETTE_SPATIUM;
-
       if (layoutBreakPalette == 0) {
             QScrollArea* sa = new QScrollArea;
             sa->setWindowTitle(tr("MuseScore: Layout Breaks"));
             layoutBreakPalette = sa;
-            SymbolPalette* sp = new SymbolPalette(1, 3, 0);
+            SymbolPalette* sp = new SymbolPalette(1, 3);
             sa->setWidget(sp);
             sp->setGrid(80, 80);
             LayoutBreak* lb = new LayoutBreak(cs, LAYOUT_BREAK_LINE);
@@ -726,7 +693,6 @@ void MuseScore::showLayoutBreakPalette()
             }
       layoutBreakPalette->show();
       layoutBreakPalette->raise();
-      _spatium = oSpatium;
       }
 
 
