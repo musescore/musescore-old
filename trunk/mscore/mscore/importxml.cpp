@@ -18,6 +18,10 @@
 //  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //=============================================================================
 
+/**
+ MusicXML import.
+ */
+
 #include "config.h"
 #include "mscore.h"
 #include "musicxml.h"
@@ -903,8 +907,20 @@ void MusicXml::direction(Measure* measure, int staff, QDomNode node)
 //   xmlAttributes
 //---------------------------------------------------------
 
+/**
+ Read MusicXML attributes.
+ */
+
+// Standard order of attributes as written by Dolet for Finale is divisions,
+// key, time, staves and clef(s). For the first measure this means number of
+// staves is unknown when the time attributes is read. As this translates
+// into a time signature that must be inserted into every staff of the
+// part, delay insertion of time signatures until after all attributes
+// have been read.
+
 void MusicXml::xmlAttributes(Measure* measure, int staff, QDomNode node)
       {
+      bool foundTime = false;
       for (;!node.isNull(); node = node.nextSibling()) {
             QDomElement e = node.toElement();
             if (e.isNull())
@@ -955,19 +971,8 @@ void MusicXml::xmlAttributes(Measure* measure, int staff, QDomNode node)
                         else
                               domError(n);
                         }
-                  score->sigmap->add(tick, beats, beatType);
-                  if (tick) {
-                        // dont generate symbol for tick 0
-                        Part* part = score->part(staff);
-                        int staves = part->nstaves();
-                        for (int i = 0; i < staves; ++i) {
-                              TimeSig* timesig = new TimeSig(score);
-                              timesig->setTick(tick);
-                              timesig->setSig(beatType, beats);
-                              timesig->setStaff(score->staff(staff + i));
-                              measure->add(timesig);
-                              }
-                        }
+                  if (beats != 0 && beatType != 0)
+                        foundTime = true;
                   }
             else if (e.tagName() == "clef") {
                   int clef   = 0;
@@ -1038,7 +1043,19 @@ void MusicXml::xmlAttributes(Measure* measure, int staff, QDomNode node)
             else
                   domError(node);
             }
-      }
+      if (foundTime) {
+            score->sigmap->add(tick, beats, beatType);
+            Part* part = score->part(staff);
+            int staves = part->nstaves();
+            for (int i = 0; i < staves; ++i) {
+                  TimeSig* timesig = new TimeSig(score);
+                  timesig->setTick(tick);
+                  timesig->setSig(beatType, beats);
+                  timesig->setStaff(score->staff(staff + i));
+                  measure->add(timesig);
+                  }
+            }
+}
 
 //---------------------------------------------------------
 //   xmlNote

@@ -18,6 +18,10 @@
 //  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //=============================================================================
 
+/**
+ MusicXML export.
+ */
+
 //=========================================================
 //  LVI FIXME
 //
@@ -785,9 +789,13 @@ static Volta* findVolta(Measure* m)
 
 //---------------------------------------------------------
 //  saver
-//    export midi file
-//    return true on error
 //---------------------------------------------------------
+
+/**
+ Export MusicXML file.
+
+ Return true on error.
+ */
 
 bool ExportMusicXml::saver()
       {
@@ -906,17 +914,79 @@ bool ExportMusicXml::saver()
                   if ((irregularMeasureNo + measureNo + pickupMeasureNo) == 4) {
                         attr.doAttr(xml, true);
                         xml.tag("divisions", division);
-                        if (staves)
+                        }
+                  // output attributes at start of measure: key, time
+                  for (Segment* seg = m->first(); seg; seg = seg->next()) {
+                        if (seg->tick() > m->tick())
+                              break;
+                        Element* el = seg->element(strack);
+                        if (!el)
+                              continue;
+                        if (el->type() == KEYSIG)
+                                          {
+                                          // output only keysig changes, not generated keysigs
+                                          // at line beginning
+                                          int ti = el->tick();
+                                          int key = score->keymap->key(el->tick());
+                                          KeyList* kl = score->keymap;
+                                          ciKeyEvent ci = kl->find(ti);
+                                          if (ci != kl->end()) {
+                                                keysig(key);
+                                                }
+                                          }
+                        else if (el->type() == TIMESIG)
+                                          {
+                                                int z, n;
+                                                score->sigmap->timesig(el->tick(), z, n);
+                                                timesig(z, n);
+                                          }
+                        }
+                  // output attributes with the first actual measure (pickup or regular) only
+                  if ((irregularMeasureNo + measureNo + pickupMeasureNo) == 4) {
+                        if (staves > 1)
                               xml.tag("staves", staves);
                         }
+                  // output attribute at start of measure: clef
+                  for (Segment* seg = m->first(); seg; seg = seg->next()) {
+                        if (seg->tick() > m->tick())
+                              break;
+                        Element* el = seg->element(strack);
+                        if (!el)
+                              continue;
+                        if (el->type() == CLEF)
+                              for (int st = strack; st < etrack; st += VOICES) {
+                                    // sstaff - xml staff number, counting from 1 for this
+                                    // instrument
+                                    // special number 0 -> dont show staff number in
+                                    // xml output (because there is only one staff)
+
+                                    int sstaff = (staves > 1) ? st - strack + VOICES : 0;
+                                    sstaff /= VOICES;
+                                    // printf("strack=%d etrack=%d st=%d sstaff=%d\n", strack, etrack, st, sstaff);
+                                    el = seg->element(st);
+                                    if (el && el->type() == CLEF) {
+                                          // output only clef changes, not generated clefs
+                                          // at line beginning
+                                          int ti = el->tick();
+                                          int ct = ((Clef*)el)->subtype();
+                                          ClefList* cl = score->staff(st/VOICES)->clef();
+                                          ciClefEvent ci = cl->find(ti);
+                                          if (ci != cl->end()) {
+                                                clef(sstaff, ct);
+                                                }
+                                          }
+                                    }
+                        }
+
                   for (int st = strack; st < etrack; ++st) {
                         // sstaff - xml staff number, counting from 1 for this
                         // instrument
                         // special number 0 -> dont show staff number in
                         // xml output (because there is only one staff)
 
-                        int sstaff = (staves > 1) ? st - strack + VOICES : VOICES;
+                        int sstaff = (staves > 1) ? st - strack + VOICES : 0;
                         sstaff /= VOICES;
+                        // printf("strack=%d etrack=%d st=%d sstaff=%d\n", strack, etrack, st, sstaff);
 
                         for (Segment* seg = m->first(); seg; seg = seg->next()) {
                               Element* el = seg->element(st);
@@ -936,17 +1006,20 @@ bool ExportMusicXml::saver()
                                           {
                                           // output only clef changes, not generated clefs
                                           // at line beginning
+                                          // also ignore clefs at the start o a measure,
+                                          // these have already been output
                                           int ti = el->tick();
                                           int ct = ((Clef*)el)->subtype();
                                           ClefList* cl = score->staff(st/VOICES)->clef();
                                           ciClefEvent ci = cl->find(ti);
-                                          if (ci != cl->end()) {
+                                          if (ci != cl->end() && el->tick() != m->tick()) {
                                                 clef(sstaff, ct);
                                                 }
                                           }
                                           break;
                                     case KEYSIG:
                                           {
+                                          /* ignore
                                           // output only keysig changes, not generated keysigs
                                           // at line beginning
                                           int ti = el->tick();
@@ -956,16 +1029,19 @@ bool ExportMusicXml::saver()
                                           if (ci != kl->end()) {
                                                 keysig(key);
                                                 }
+                                          */
                                           }
                                           break;
                                     case TIMESIG:
                                           {
+                                          /* ignore
                                           // output only for staff 0
                                           if (st == 0) {
                                                 int z, n;
                                                 score->sigmap->timesig(el->tick(), z, n);
                                                 timesig(z, n);
                                                 }
+                                          */
                                           }
                                           break;
                                     case CHORD:
@@ -1124,6 +1200,12 @@ static void chordAttributes(Chord* chord, Notations& notations, Xml& xml)
 //   chord
 //---------------------------------------------------------
 
+/**
+ Write \a chord on \a staff with lyriclist \a ll.
+
+ For a single-staff part, \a staff equals zero, suppressing the <staff> element.
+ */
+
 void ExportMusicXml::chord(Chord* chord, int staff, const LyricsList* ll)
       {
       NoteList* nl = chord->noteList();
@@ -1178,7 +1260,12 @@ void ExportMusicXml::chord(Chord* chord, int staff, const LyricsList* ll)
             if (note->tieFor())
                   xml.tagE("tie type=\"start\"");
 
-            xml.tag("voice", (staff-1) * VOICES + note->chord()->voice() + 1);
+            // for a single-staff part, staff is 0, which needs to be corrected
+            // to calculate the correct voice number
+            int voice = (staff-1) * VOICES + note->chord()->voice() + 1;
+            if (staff == 0)
+                  voice += VOICES;
+            xml.tag("voice", voice);
 
             int dots = 0;
             QString s = tick2xml(note->chord()->tickLen(), dots);
@@ -1190,8 +1277,11 @@ void ExportMusicXml::chord(Chord* chord, int staff, const LyricsList* ll)
             for (int ni = dots; ni > 0; ni--)
                   xml.tagE("dot");
 
-            xml.tag("stem", note->chord()->isUp() ? "up" : "down");
-            if ((staff-1) + note->move())
+            // no stem for whole notes and beyond
+            if (note->chord()->tickLen() < 4*division)
+                  xml.tag("stem", note->chord()->isUp() ? "up" : "down");
+            // LVIFIX: check move() handling
+            if (staff)
                   xml.tag("staff", staff + note->move());
 
             //  beaming
@@ -1239,6 +1329,12 @@ void ExportMusicXml::chord(Chord* chord, int staff, const LyricsList* ll)
 //   rest
 //---------------------------------------------------------
 
+/**
+ Write \a rest on \a staff.
+
+ For a single-staff part, \a staff equals zero, suppressing the <staff> element.
+ */
+
 void ExportMusicXml::rest(Rest* rest, int staff)
       {
       attr.doAttr(xml, false);
@@ -1246,8 +1342,12 @@ void ExportMusicXml::rest(Rest* rest, int staff)
       xml.tagE("rest");
 
       xml.tag("duration", rest->tickLen());
-//      xml.tag("voice", rest->voice() + 1);
-      xml.tag("voice", (staff-1) * VOICES + rest->voice() + 1);
+      // for a single-staff part, staff is 0, which needs to be corrected
+      // to calculate the correct voice number
+      int voice = (staff-1) * VOICES + rest->voice() + 1;
+      if (staff == 0)
+            voice += VOICES;
+      xml.tag("voice", voice);
       int dots = 0;
       QString s = tick2xml(rest->tickLen(), dots);
       if (s.isEmpty()) {
@@ -1258,7 +1358,7 @@ void ExportMusicXml::rest(Rest* rest, int staff)
 
       for (int i = dots; i > 0; i--)
             xml.tagE("dot");
-      if (staff-1)
+      if (staff)
             xml.tag("staff", staff);
       xml.etag("note");
       }
