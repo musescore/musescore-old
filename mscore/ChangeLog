@@ -1,3 +1,9 @@
+26.12 (lv)
+      * MusicXML updates
+        - changed order of attribute output
+        - don't output staff number for single-staff parts
+        - don't output stem for whole notes and beyond
+        - import of time attribute for multi-staff parts fixed
 22.12 (ws)
       - added CMake scrips for doc/de doc/en
 21.12 (ws)
