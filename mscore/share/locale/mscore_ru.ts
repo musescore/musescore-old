@@ -70,6 +70,21 @@
     </message>
 </context>
 <context>
+    <name>BarLineBase</name>
+    <message>
+        <source>Form</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>BarLine</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>SubType:</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>Canvas</name>
     <message>
         <source>Measure</source>
@@ -145,6 +160,68 @@
     </message>
     <message>
         <source>Color...</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>ChordBase</name>
+    <message>
+        <source>Form</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Chord</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Stem</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Hook</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Grace Note</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;/head&gt;&lt;body style=&quot; white-space: pre-wrap; font-family:Arial; font-weight:400; font-style:normal; text-decoration:none;&quot;&gt;&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Stem Direction&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;/head&gt;&lt;body style=&quot; white-space: pre-wrap; font-family:Arial; font-weight:400; font-style:normal; text-decoration:none;&quot;&gt;&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Note Attributes:&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;/head&gt;&lt;body style=&quot; white-space: pre-wrap; font-family:Arial; font-weight:400; font-style:normal; text-decoration:none;&quot;&gt;&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Help Lines:&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>ChordRestBase</name>
+    <message>
+        <source>Form</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>ChordRest</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Beam</source>
+        <translation type="unfinished">Группировать</translation>
+    </message>
+    <message>
+        <source>Tuplet</source>
+        <translation type="unfinished">Группа</translation>
+    </message>
+    <message>
+        <source>Up</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;/head&gt;&lt;body style=&quot; white-space: pre-wrap; font-family:Arial; font-weight:400; font-style:normal; text-decoration:none;&quot;&gt;&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Beam Mode:&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -486,6 +563,29 @@
         <source> sp</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;/head&gt;&lt;body style=&quot; white-space: pre-wrap; font-family:Arial; font-weight:400; font-style:normal; text-decoration:none;&quot;&gt;&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Subtype&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>HairpinBase</name>
+    <message>
+        <source>Form</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Hairpin</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tick1:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Tick2:</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>InstrumentDialogBase</name>
@@ -625,6 +725,18 @@
         <source>Segments:</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>StartRepeat</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Ending:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>EndRep:</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>MeasurePropertyBase</name>
@@ -647,6 +759,29 @@
     <message>
         <source>Position</source>
         <translation type="obsolete">Позиция</translation>
+    </message>
+</context>
+<context>
+    <name>MeasuresDialogBase</name>
+    <message>
+        <source>Mscore: Append Measures</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;/head&gt;&lt;body style=&quot; white-space: pre-wrap; font-family:Arial; font-size:12pt; font-weight:400; font-style:normal; text-decoration:none;&quot;&gt;&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-weight:600;&quot;&gt;Append empty measures:&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Number of measures to append</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>OK</source>
+        <translation type="unfinished">ОК</translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation type="unfinished">Отменить</translation>
     </message>
 </context>
 <context>
@@ -707,25 +842,25 @@ failed: </source>
     <message>
         <source>File
 </source>
-        <translation type="unfinished">Файл
+        <translation type="obsolete">Файл
 </translation>
     </message>
     <message>
         <source>
 exists</source>
-        <translation type="unfinished">уже существует</translation>
+        <translation type="obsolete">уже существует</translation>
     </message>
     <message>
         <source>MuseScore: write</source>
-        <translation type="unfinished">MuseScore: Записать</translation>
+        <translation type="obsolete">MuseScore: Записать</translation>
     </message>
     <message>
         <source>Overwrite</source>
-        <translation type="unfinished">Перезаписать</translation>
+        <translation type="obsolete">Перезаписать</translation>
     </message>
     <message>
         <source>Quit</source>
-        <translation type="unfinished">Выйти</translation>
+        <translation type="obsolete">Выйти</translation>
     </message>
     <message>
         <source>Open File
@@ -756,10 +891,6 @@ exists</source>
     <message>
         <source>Measure</source>
         <translation type="unfinished">Размер</translation>
-    </message>
-    <message>
-        <source>Bars...</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Clef...<byte value="x9"/>Y</source>
@@ -828,14 +959,6 @@ exists</source>
     <message>
         <source>Metronome</source>
         <translation type="unfinished">Метроном</translation>
-    </message>
-    <message>
-        <source>clef</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>fingering</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Rewind</source>
@@ -1102,14 +1225,6 @@ exists</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>System Break</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Page Break</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>&amp;Style</source>
         <translation type="unfinished">&amp;Стиль</translation>
     </message>
@@ -1174,10 +1289,6 @@ exists</source>
         <translation type="unfinished">&amp;О Qt</translation>
     </message>
     <message>
-        <source>no help found at: </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>MuseScore: Open Help</source>
         <translation type="unfinished">MusE Score: Открыть файл справки</translation>
     </message>
@@ -1238,10 +1349,6 @@ exists</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>MuseScore: TimeSignature</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>MuseScore: Lines</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1258,11 +1365,127 @@ exists</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>MuseScore: Bars</source>
+        <source>MuseScore: Import Midi File</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>MuseScore: Import Midi File</source>
+        <source>untitled</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Measures...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Barlines...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>System Brackets...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>crescendo</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>diminuendo</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>prima volta</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>seconda volta</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>terza volta</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>8va</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>15va</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>8vb</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>15vb</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>pedal</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>trill line</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>MuseScore: System Brackets</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>MuseScore: Barlines</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>MuseScore: Fingering</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>fingering 1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>fingering 2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>fingering 3</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>fingering 4</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>fingering 5</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>MuseScore: Layout Breaks</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>break line</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>break page</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enable Midi Input</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enable Sound while editing</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Breaks...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>MuseScore manual not found at: </source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1593,6 +1816,13 @@ exists</source>
     </message>
 </context>
 <context>
+    <name>PageListEditor</name>
+    <message>
+        <source>MuseScore: List Edit</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>PageSettingsBase</name>
     <message>
         <source>MusE Score: Page Settings</source>
@@ -1916,7 +2146,7 @@ exists</source>
     </message>
     <message>
         <source>Audio/Midi</source>
-        <translation>Звук/MIDI</translation>
+        <translation type="obsolete">Звук/MIDI</translation>
     </message>
     <message>
         <source>enable Midi Input</source>
@@ -1991,10 +2221,6 @@ exists</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>play note on click</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>enable midi input</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2052,6 +2278,98 @@ exists</source>
     </message>
     <message>
         <source>Navigator</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Misc.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>disable antialiased drawing</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>uncheck this to speed up drawing</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Draw Antialiased</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Midi</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Play Notes when editing</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Audio</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>JACK Audio Server</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>ALSA Audio</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>default</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>48000</source>
+        <translation type="unfinished">48000</translation>
+    </message>
+    <message>
+        <source>44500</source>
+        <translation type="unfinished">44500</translation>
+    </message>
+    <message>
+        <source>4096</source>
+        <translation type="unfinished">4096</translation>
+    </message>
+    <message>
+        <source>2048</source>
+        <translation type="unfinished">2048</translation>
+    </message>
+    <message>
+        <source>1024</source>
+        <translation type="unfinished">1024</translation>
+    </message>
+    <message>
+        <source>512</source>
+        <translation type="unfinished">512</translation>
+    </message>
+    <message>
+        <source>256</source>
+        <translation type="unfinished">256</translation>
+    </message>
+    <message>
+        <source>128</source>
+        <translation type="unfinished">128</translation>
+    </message>
+    <message>
+        <source>64</source>
+        <translation type="unfinished">64</translation>
+    </message>
+    <message>
+        <source>Fragments:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Period Size:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Sample Rate:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Device:</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -2647,7 +2965,19 @@ exists</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>First select a single note or rest and then try again</source>
+        <source>No staves found:
+please use the instruments dialog to
+first create some staves</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>untitled.msc</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>No note or rest selected:
+please select a note or rest were you want to
+start note entry</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -2693,7 +3023,39 @@ exists</source>
 <context>
     <name>ShowChordWidget</name>
     <message>
-        <source>Segment:</source>
+        <source>auto</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>beam begin</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>beam mid</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>beam end</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>no beam</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>begin 1/32</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Auto</source>
+        <translation type="unfinished">Авто</translation>
+    </message>
+    <message>
+        <source>Up</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Down</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -2706,50 +3068,6 @@ exists</source>
 </context>
 <context>
     <name>ShowMeasureWidget</name>
-    <message>
-        <source>LineBreak</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>PageBreak</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Irregular</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Segments:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Staves:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Beams:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Tuplets:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>PageElem:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>MeasureNo:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>NoOffset:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>U-Stretch:</source>
-        <translation type="unfinished"></translation>
-    </message>
 </context>
 <context>
     <name>ShowRestWidget</name>
@@ -2779,6 +3097,25 @@ exists</source>
     <message>
         <source>Style:</source>
         <translation type="unfinished">Стиль:</translation>
+    </message>
+</context>
+<context>
+    <name>TextPaletteBase</name>
+    <message>
+        <source>MuseScore: Special Text Symbols</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Size:</source>
+        <translation type="unfinished">Кегль:</translation>
+    </message>
+    <message>
+        <source>Family:</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -2952,6 +3289,36 @@ exists</source>
     <name>TextStyleDialog</name>
     <message>
         <source>Ich und du, M&#xfc;llers Kuh</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>TimeDialog</name>
+    <message>
+        <source>MuseScore: TimeSignature</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>TimeDialogBase</name>
+    <message>
+        <source>Form</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Create TimeSignature</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>+</source>
+        <translation type="unfinished">+</translation>
+    </message>
+    <message>
+        <source>add time signature to palette</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Add</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

@@ -35,8 +35,8 @@
  Create Symbol palette with \a r rows and \a c columns
 */
 
-SymbolPalette::SymbolPalette(int r, int c, QWidget* parent)
-   : QWidget(parent)
+SymbolPalette::SymbolPalette(int r, int c)
+   : QWidget(0)
       {
       staff         = false;
       rows          = r;
@@ -191,8 +191,6 @@ void SymbolPalette::addObject(int idx, int symIdx)
 
 void SymbolPalette::paintEvent(QPaintEvent* e)
       {
-      double oSpatium = _spatium;
-//      _spatium = PALETTE_SPATIUM;
       qreal mag = PALETTE_SPATIUM / _spatium;
 
       Painter p(this);
@@ -254,7 +252,7 @@ void SymbolPalette::paintEvent(QPaintEvent* e)
                   double sy;
 
                   if (staff)
-                        sy = gy + gh - 6 * _spatium;
+                        sy = gy + gh * .5 - 2.0 * _spatium;
                   else
                         sy  = gy + (gh - sh) * .5 - el->bbox().y();
                   double sx  = gx + (gw - sw) * .5 - el->bbox().x();
@@ -269,7 +267,6 @@ void SymbolPalette::paintEvent(QPaintEvent* e)
                   p.restore();
                   }
             }
-      _spatium = oSpatium;
       }
 
 //---------------------------------------------------------

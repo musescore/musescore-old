@@ -28,7 +28,7 @@
 //---------------------------------------------------------
 
 class Pedal : public SLine {
-      QString text;
+      int symbol;
 
    public:
       Pedal(Score* s);

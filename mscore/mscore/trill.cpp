@@ -158,14 +158,15 @@ void Trill::setLen(qreal l)
 
 void Trill::layout()
       {
+      if (!parent())
+            return;
       SLine::layout();
       qreal trillDistance = _spatium * 2.5;
-
       Measure* measure = (Measure*)parent();
       System* system   = measure->system();
       SysStaff* sstaff = system->staff(staffIdx());
-
-      setPos(0.0, sstaff->bbox().top() - trillDistance);
+      qreal y = sstaff->bbox().top() - trillDistance;
+      setPos(0.0, y);
       bboxUpdate();
       }
 

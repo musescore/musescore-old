@@ -641,7 +641,8 @@ void AlsaAudio::alsaLoop()
       snd_pcm_uframes_t size = alsa->fsize();
       float lbuffer[size];
       float rbuffer[size];
-      while (runAlsa) {
+      while (runAlsa == 2) {
+            write(1, ".", 1);
             snd_pcm_sframes_t k = alsa->pcmWait();
             while (k >= int(size)) {
                   alsa->playInit(size);
@@ -653,6 +654,7 @@ void AlsaAudio::alsaLoop()
                   }
             }
       alsa->pcmStop();
+      runAlsa = 0;
       }
 
 //---------------------------------------------------------
@@ -661,7 +663,7 @@ void AlsaAudio::alsaLoop()
 
 bool AlsaAudio::start()
       {
-      runAlsa = true;
+      runAlsa = 2;
       pthread_attr_t* attributes = (pthread_attr_t*) malloc(sizeof(pthread_attr_t));
       pthread_attr_init(attributes);
       if (pthread_create(&thread, attributes, ::alsaLoop, this))
@@ -676,10 +678,13 @@ bool AlsaAudio::start()
 
 bool AlsaAudio::stop()
       {
-      runAlsa = false;
-      sleep(1);
-      pthread_cancel(thread);
-      pthread_join(thread, 0);
+      if (runAlsa == 2) {
+            runAlsa = 1;
+            while (runAlsa != 0)
+                  sleep(1);
+            pthread_cancel(thread);
+            pthread_join(thread, 0);
+            }
       return false;
       }
 

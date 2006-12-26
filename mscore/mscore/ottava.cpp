@@ -134,12 +134,15 @@ void Ottava::layout()
       {
       SLine::layout();
       qreal ottavaDistance = _spatium * 2.5;
+      qreal y = 0.0;
+      if (parent()) {
+            Measure* measure = (Measure*)parent();
+            System* system   = measure->system();
+            SysStaff* sstaff = system->staff(staffIdx());
+            y = sstaff->bbox().top() - ottavaDistance;
+            }
 
-      Measure* measure = (Measure*)parent();
-      System* system   = measure->system();
-      SysStaff* sstaff = system->staff(staffIdx());
-
-      setPos(0.0, sstaff->bbox().top() - ottavaDistance);
+      setPos(0.0, y);
       bboxUpdate();
       }
 
@@ -198,3 +201,4 @@ void Ottava::read(QDomNode node)
                   domError(node);
             }
       }
+

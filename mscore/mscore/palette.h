@@ -47,7 +47,7 @@ class SymbolPalette : public QWidget {
       virtual bool event(QEvent*);
 
    public:
-      SymbolPalette(int rows, int columns, QWidget* parent);
+      SymbolPalette(int rows, int columns);
       ~SymbolPalette();
       void addObject(int idx, Element*, const QString& name);
       void addObject(int idx, int sym);

@@ -28,7 +28,7 @@
 //   SLine
 //---------------------------------------------------------
 
-SLine::SLine(Score* s) 
+SLine::SLine(Score* s)
    : Element(s)
       {
       mode  = NORMAL;
@@ -43,6 +43,8 @@ SLine::SLine(Score* s)
 
 void SLine::layout()
       {
+      if (!parent())
+            return;
       segments.clear();
       Segment* seg1 = _score->tick2segment(_tick1);
       Segment* seg2 = _score->tick2segment(_tick2);
@@ -55,7 +57,7 @@ void SLine::layout()
       System* system1   = measure1->system();
       System* system2   = measure2->system();
 
-      QPointF ppos(parent()->apos());
+      QPointF ppos(parent() ? parent()->apos() : QPointF());
       QPointF p1 = QPointF(seg1->x(), 0) + measure1->apos() - ppos;
       QPointF p2 = QPointF(seg2->x(), 0) + measure2->apos() - ppos;
 

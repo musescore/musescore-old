@@ -25,6 +25,7 @@
 #include "measure.h"
 #include "xml.h"
 #include "utils.h"
+#include "sym.h"
 
 //---------------------------------------------------------
 //   Pedal
@@ -33,7 +34,7 @@
 Pedal::Pedal(Score* s)
    : SLine(s)
       {
-      text = QChar(0xe19b);
+      symbol = pedalPedSym;
       }
 
 //---------------------------------------------------------
@@ -68,12 +69,10 @@ void Pedal::draw1(Painter& p)
                   pp2 += off2 * _spatium;
 
             if (i == segments.begin()) {
-                  QFont f(textStyles[TEXT_STYLE_SYMBOL1].font());
-                  p.setFont(f);
-                  QFontMetricsF fm(f);
-                  QRectF bb(fm.boundingRect(text));
+                  const QRectF& bb = symbols[symbol].bbox();
+
                   qreal h = bb.height() * .5;
-                  p.drawText(pp1 + 	QPointF(0.0, h), text);
+                  symbols[symbol].draw(p, 0.0, h);
                   pp1 += QPointF(bb.width() + ottavaTextDistance, 0.0);
 
                   QPen pen(p.pen());
@@ -127,15 +126,17 @@ void Pedal::setLen(qreal l)
 
 void Pedal::layout()
       {
+      if (!parent())
+            return;
+
       qreal pedalDistance = _spatium * 6;
 
       SLine::layout();
-
       Measure* measure = (Measure*)parent();
       System* system   = measure->system();
       SysStaff* sstaff = system->staff(staffIdx());
-
-      setPos(0.0, sstaff->bbox().top() + pedalDistance);
+      qreal y = sstaff->bbox().top() + pedalDistance;
+      setPos(0.0, y);
       bboxUpdate();
       }
 
@@ -145,7 +146,7 @@ void Pedal::layout()
 
 void Pedal::bboxUpdate()
       {
-      QRectF rr(textStyles[TEXT_STYLE_DYNAMICS].bbox(text));
+      const QRectF& rr = symbols[symbol].bbox();
       double h1 = rr.height() * .5;
 
       QRectF r(0, 0, 0, 0);
