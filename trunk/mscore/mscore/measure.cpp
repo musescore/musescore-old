@@ -137,6 +137,7 @@ static int tab3[15][8] = {
 //
 //    key: -7 - +7  (C==0)
 //    userPrefix = -1   no user defined prefix
+//    return line and prefix
 //---------------------------------------------------------
 
 static int pitch2y(int pitch, int userPrefix, int clef, int key, int& prefix, const char* tversatz)
@@ -765,7 +766,7 @@ void Measure::layoutNoteHeads(int staff)
                                     case 1:    prefix = 1; break;
                                     case 2:    prefix = 3; break;
                                     default:
-                                          printf("pitch2y: internal error2: tick %d bad offset %d(%d-%d), line %d clef %d\n",
+                                          printf("line2pitch: internal error2: tick %d bad offset %d(%d-%d), line %d clef %d\n",
                                              tick, offset, pitch, np, line, clef);
                                           //abort();
                                           break;

@@ -1,3 +1,9 @@
+28.12 (lv)
+      * MusicXML updates
+        - changed order of attribute output (first keysig, then timesig)
+        - always write a keysig at tick = 0 (even if it is C major)
+        - fixed keysig import for multi-part scores in the second measure and up
+      * MusicXML regression testfiles (mostly) updated
 26.12 (ws)
       - misc fixes to palettes etc.
       (lv)

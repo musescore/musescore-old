@@ -51,6 +51,7 @@
 #include "hairpin.h"
 #include "dynamics.h"
 #include "barline.h"
+#include "timesig.h"
 
 //---------------------------------------------------------
 //   attributes -- prints <attributes> tag when necessary
@@ -916,6 +917,8 @@ bool ExportMusicXml::saver()
                         xml.tag("divisions", division);
                         }
                   // output attributes at start of measure: key, time
+                  KeySig* ksig = 0;
+                  TimeSig* tsig = 0;
                   for (Segment* seg = m->first(); seg; seg = seg->next()) {
                         if (seg->tick() > m->tick())
                               break;
@@ -923,23 +926,28 @@ bool ExportMusicXml::saver()
                         if (!el)
                               continue;
                         if (el->type() == KEYSIG)
-                                          {
-                                          // output only keysig changes, not generated keysigs
-                                          // at line beginning
-                                          int ti = el->tick();
-                                          int key = score->keymap->key(el->tick());
-                                          KeyList* kl = score->keymap;
-                                          ciKeyEvent ci = kl->find(ti);
-                                          if (ci != kl->end()) {
-                                                keysig(key);
-                                                }
-                                          }
+                              ksig = (KeySig*) el;
                         else if (el->type() == TIMESIG)
-                                          {
-                                                int z, n;
-                                                score->sigmap->timesig(el->tick(), z, n);
-                                                timesig(z, n);
-                                          }
+                              tsig = (TimeSig*) el;
+                        }
+                  if (ksig) {
+                        // output only keysig changes, not generated keysigs
+                        // at line beginning
+                        int ti = ksig->tick();
+                        int key = score->keymap->key(ti);
+                        KeyList* kl = score->keymap;
+                        ciKeyEvent ci = kl->find(ti);
+                        if (ci != kl->end()) {
+                              keysig(key);
+                              }
+                        }
+                  else if (tick == 0)
+                        // always write a keysig at tick = 0
+                        keysig(0);
+                  if (tsig) {
+                        int z, n;
+                        score->sigmap->timesig(tsig->tick(), z, n);
+                        timesig(z, n);
                         }
                   // output attributes with the first actual measure (pickup or regular) only
                   if ((irregularMeasureNo + measureNo + pickupMeasureNo) == 4) {
