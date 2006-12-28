@@ -9,7 +9,7 @@
     <creator type="composer">Leon Vinken</creator>
     <encoding>
       <software>MuseScore 0.4.0</software>
-      <encoding-date>2006-10-29</encoding-date>
+      <encoding-date>2006-12-28</encoding-date>
       </encoding>
     </identification>
   <part-list>
@@ -28,15 +28,18 @@
     <measure number="1">
       <attributes>
         <divisions>384</divisions>
-        <staves>1</staves>
-        <clef number="1">
-          <sign>G</sign>
-          <line>2</line>
-          </clef>
+        <key>
+          <fifths>0</fifths>
+          <mode>major</mode>
+          </key>
         <time>
           <beats>3</beats>
           <beat-type>4</beat-type>
           </time>
+        <clef>
+          <sign>G</sign>
+          <line>2</line>
+          </clef>
         </attributes>
       <note>
         <pitch>

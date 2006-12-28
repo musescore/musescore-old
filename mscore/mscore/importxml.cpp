@@ -53,19 +53,25 @@
 
 //---------------------------------------------------------
 //   xmlSetPitch
-//    convert to midi pitch
 //---------------------------------------------------------
 
-static void xmlSetPitch(Note* n, int tick, char st, int alter, int octave, int accidental)
+/**
+ Convert MusicXML \a step / \a alter / \a octave to midi pitch,
+ set line and user accidental.
+ */
+
+static void xmlSetPitch(Note* n, int tick, char step, int alter, int octave, int accidental)
       {
-      int step = st - 'A';
+//      printf("xmlSetPitch(n=%p, tick=%d, st=%c, alter=%d, octave=%d, accidental=%d)",
+//             n, tick, step, alter, octave, accidental);
+      int istep = step - 'A';
       //                       a  b   c  d  e  f  g
       static int table[7]  = { 9, 11, 0, 2, 4, 5, 7 };
-      if (step < 0 || step > 6) {
-            printf("xml2pitch: illegal pitch %d, <%c>\n", step, step+'A');
+      if (istep < 0 || istep > 6) {
+            printf("xmlSetPitch: illegal pitch %d, <%c>\n", istep, step);
             return;
             }
-      int pitch = table[step] + alter + (octave+1) * 12;
+      int pitch = table[istep] + alter + (octave+1) * 12;
 
       if (pitch < 0)
             pitch = 0;
@@ -73,18 +79,22 @@ static void xmlSetPitch(Note* n, int tick, char st, int alter, int octave, int a
             pitch = 127;
       n->setPitch(pitch);
       static int table1[7]  = { 40, 39, 45, 44, 43, 42, 41 };
-      int line  = table1[step] - (octave+1) * 7;
+      int line  = table1[istep] - (octave+1) * 7;
       int clef  = n->staff()->clef()->clef(tick);
       line     += clefTable[clef].yOffset;
+//      printf(" n->staff=%p clef=%d line=%d\n", n->staff(), clef, line);
       n->setLine(line);
       n->setUserAccidental(accidental);
       }
 
 //---------------------------------------------------------
 //   xml2voltaType
-//    convert MusicXML ending number to volta subtype
-//    returns subtype (1..3) or 0 on failure
 //---------------------------------------------------------
+
+/**
+ Convert MusicXML ending number to volta subtype
+ and return subtype (1..3) or 0 on failure
+ */
 
 static int xml2voltaType(QString en)
       {
@@ -102,6 +112,10 @@ static int xml2voltaType(QString en)
 //   MusicXml
 //---------------------------------------------------------
 
+/**
+ MusicXml constructor.
+ */
+
 MusicXml::MusicXml(QDomDocument* d)
       {
       doc = d;
@@ -111,6 +125,10 @@ MusicXml::MusicXml(QDomDocument* d)
 //---------------------------------------------------------
 //   LoadMusicXml
 //---------------------------------------------------------
+
+/**
+ LoadMusicXml constructor.
+ */
 
 class LoadMusicXml : public LoadFile {
       QDomDocument* _doc;
@@ -128,8 +146,11 @@ class LoadMusicXml : public LoadFile {
 
 //---------------------------------------------------------
 //   loader
-//    return true on error
 //---------------------------------------------------------
+
+/**
+ Load MusicXML file \a qf, return false if OK and true on error.
+ */
 
 bool LoadMusicXml::loader(QFile* qf)
       {
@@ -150,6 +171,10 @@ bool LoadMusicXml::loader(QFile* qf)
 //   importMusicXml
 //---------------------------------------------------------
 
+/**
+ Import MusicXML file \a name into the Score.
+ */
+
 void Score::importMusicXml(const QString& name)
       {
       LoadMusicXml lx;
@@ -169,6 +194,10 @@ void Score::importMusicXml(const QString& name)
 //        work
 //        identification
 //---------------------------------------------------------
+
+/**
+ Parse the MusicXML file, which must be in score-partwise format.
+ */
 
 void MusicXml::import(Score* s)
       {
@@ -193,6 +222,10 @@ void MusicXml::import(Score* s)
 //---------------------------------------------------------
 //   scorePartwise
 //---------------------------------------------------------
+
+/**
+ Read the MusicXML score-partwise element.
+ */
 
 void MusicXml::scorePartwise(QDomNode node)
       {
@@ -341,6 +374,10 @@ void MusicXml::scorePartwise(QDomNode node)
 //   xmlPartList
 //---------------------------------------------------------
 
+/**
+ Read the MusicXML part-list element.
+ */
+
 void MusicXml::xmlPartList(QDomNode node)
       {
       for (;!node.isNull(); node = node.nextSibling()) {
@@ -359,6 +396,10 @@ void MusicXml::xmlPartList(QDomNode node)
 //---------------------------------------------------------
 //   xmlScorePart
 //---------------------------------------------------------
+
+/**
+ Read the MusicXML score-part element.
+ */
 
 void MusicXml::xmlScorePart(QDomNode node, QString id)
       {
@@ -416,6 +457,10 @@ void MusicXml::xmlScorePart(QDomNode node, QString id)
 //---------------------------------------------------------
 //   xmlPart
 //---------------------------------------------------------
+
+/**
+ Read the MusicXML part element.
+ */
 
 void MusicXml::xmlPart(QDomNode node, QString id)
       {
@@ -500,6 +545,10 @@ void MusicXml::xmlPart(QDomNode node, QString id)
 //---------------------------------------------------------
 //   xmlMeasure
 //---------------------------------------------------------
+
+/**
+ Read the MusicXML measure element.
+ */
 
 void MusicXml::xmlMeasure(Part* part, QDomNode node, int number)
       {
@@ -746,6 +795,10 @@ void MusicXml::xmlMeasure(Part* part, QDomNode node, int number)
 //   direction
 //---------------------------------------------------------
 
+/**
+ Read the MusicXML direction element.
+ */
+
 // LVI FIXME: introduce offset concept to mscore.
 // offset changes only the print position (not the tick), but unlike relative-x
 // it is expressed in terms of divisions (MusicXML direction.dtd)
@@ -908,7 +961,7 @@ void MusicXml::direction(Measure* measure, int staff, QDomNode node)
 //---------------------------------------------------------
 
 /**
- Read MusicXML attributes.
+ Read the MusicXML attributes element.
  */
 
 // Standard order of attributes as written by Dolet for Finale is divisions,
@@ -940,12 +993,32 @@ void MusicXml::xmlAttributes(Measure* measure, int staff, QDomNode node)
                         else
                               domError(n);
                         }
+                  bool needKey = false;
                   int oldkey = score->keymap->key(tick);
-                  if (oldkey != key)
+                  if (oldkey != key) {
+                        // new key differs from key in effect at this tick
                         (*score->keymap)[tick] = key;
+                        needKey = true;
+                        }
+                  else {
+                        ciKeyEvent i = score->keymap->find(tick);
+                        if (i != score->keymap->end())
+                              if (i->second == key)
+                                    // Keymap already contains a keychange to key at tick,
+                                    // assume this was done by another part.
+                                    // Must insert keysig in all staves of this part too.
+                                    needKey = true;
+                              else {
+                                    // MusicXML associates keys with parts and thus may have
+                                    // a different key for each part, which is not supported
+                                    // MuseScore.
+                                    printf("Key already changes at tick %d to %d,", tick, i->second);
+                                    printf("ignoring change to %d", key);
+                                    }
+                        }
 
-                  if (tick && oldkey != key) {
-                        // dont generate symbol for tick 0
+                  // dont generate symbol for tick 0
+                  if (tick && needKey) {
                         Part* part = score->part(staff);
                         int staves = part->nstaves();
                         for (int i = 0; i < staves; ++i) {
@@ -1061,6 +1134,12 @@ void MusicXml::xmlAttributes(Measure* measure, int staff, QDomNode node)
 //   xmlNote
 //---------------------------------------------------------
 
+/**
+ Read a MusicXML note.
+
+ \a Staff is the number of first staff of the part this note belongs to.
+ */
+
 void MusicXml::xmlNote(Measure* measure, int staff, QDomNode node)
       {
       voice = 0;
@@ -1164,7 +1243,11 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomNode node)
                   // If a voice crosses two staffs, this is expressed with the
                   // "move" parameter in mscore.
                   //
+                  // Musicxml voices are unique within a part, but not across parts.
+                  // LVIFIX: check: Thus the search for a given MusicXML voice number should be restricted
+                  // the the staves of the part it belongs to.
 
+//                  printf("voice mapper before: relStaff=%d voice=%d", relStaff, voice);
                   int found = false;
                   for (int s = 0; s < MAX_STAVES; ++s) {
                         int v = 0;
@@ -1174,6 +1257,7 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomNode node)
                                     relStaff -= d;
                                     move += d;
                                     voice = v;
+//                                    printf(" found at s=%d", s);
                                     found = true;
                                     break;
                                     }
@@ -1184,9 +1268,11 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomNode node)
                               printf("ImportMusicXml: too many voices (> %d)\n", VOICES);
                         else {
                               voicelist[staff+relStaff].push_back(voice);
+//                              printf(" append %d to voicelist[%d]", voice, staff+relStaff);
                               voice = voicelist[staff+relStaff].size() -1;
                               }
                         }
+//                  printf(" after: relStaff=%d move=%d voice=%d\n", relStaff, move, voice);
                   }
             else if (tag == "beam") {
                   QString s = e.text();
@@ -1391,7 +1477,7 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomNode node)
 
 //      printf("%s at %d voice %d dur = %d, beat %d/%d div %d pitch %d ticks %d\n",
 //         rest ? "Rest" : "Note", tick, voice, duration, beats, beatType,
-//         divisions, pitch, ticks);
+//         divisions, 0 /* pitch */, ticks);
 
       ChordRest* cr = 0;
 
@@ -1441,6 +1527,8 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomNode node)
                   measure->add(cr);
                   }
             cr->add(note);
+//            printf("staff for new note: %p (staff=%d, relStaff=%d)\n",
+//                   score->staff(staff + relStaff), staff, relStaff);
             xmlSetPitch(note, tick, c, alter, octave, accidental);
 
             for (int i = 0; i < MAX_LYRICS; ++i) {
@@ -1516,6 +1604,12 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomNode node)
 //   addWedge
 //---------------------------------------------------------
 
+/**
+ Add a MusicXML wedge to the wedge list.
+
+ Called when the wedge start is read. Stores all wedge parameters known at this time.
+ */
+
 void MusicXml::addWedge(int no, int startTick, qreal rx, qreal ry, int subType)
       {
       MusicXmlWedge wedge;
@@ -1534,6 +1628,12 @@ void MusicXml::addWedge(int no, int startTick, qreal rx, qreal ry, int subType)
 //---------------------------------------------------------
 //   genWedge
 //---------------------------------------------------------
+
+/**
+ Add a MusicXML wedge to the score.
+
+ Called when the wedge stop is read. Wedge stop tick was unknown until this time.
+ */
 
 void MusicXml::genWedge(int no, int endTick, Measure* measure, int staff)
       {

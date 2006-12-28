@@ -26,5 +26,6 @@ testDynamics1.xml	the "dynamics" directions from ppp to fff
 testKeysig1.xml         change keysig from none to G major
 testNotesRests1.xml     all note and rest types, including some dotted
 testTimesig1.xml        all supported time signatures
+testVoicePiano1.xml     score with both a voice and a piano part
 testWedge1.xml          crescendo and diminuendo wedges
 testWords1.xml          the "words" direction
