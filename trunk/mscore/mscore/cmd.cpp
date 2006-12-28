@@ -619,7 +619,7 @@ void Score::addAttribute(int attr)
       {
       //
       // we need a local copy of sel->elements()
-      // because "addAccidental()" modifies sel->elements()
+      // because "addAttribute()" modifies sel->elements()
       //
       ElementList el(*sel->elements());
 
