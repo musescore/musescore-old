@@ -160,8 +160,16 @@ void Score::doUndo()
       InputState oIs(*cis);
       sel->deselectAll(this);
       Undo* u = undoList.back();
-      for (riUndoOp i = u->rbegin(); i != u->rend(); ++i)
+      for (riUndoOp i = u->rbegin(); i != u->rend(); ++i) {
             processUndoOp(&*i, true);
+            if (i->type == UndoOp::ChangeAccidental) {
+                  // HACK:
+                  // selection is not valid anymore because changeAccidental()
+                  // changes the selected Accidental element
+                  // u->selection.clear();
+                  oSel.clear();
+                  }
+            }
       redoList.push_back(u); // put item on redo list
       undoList.pop_back();
       endUndoRedo(u);
@@ -183,8 +191,15 @@ void Score::doRedo()
       InputState oIs(*cis);
       sel->deselectAll(this);
       Undo* u = redoList.back();
-      for (iUndoOp i = u->begin(); i != u->end(); ++i)
+      for (iUndoOp i = u->begin(); i != u->end(); ++i) {
             processUndoOp(&*i, false);
+            if (i->type == UndoOp::ChangeAccidental) {
+                  // HACK:
+                  // selection is not valid anymore because changeAccidental()
+                  // changes the selected Accidental element
+                  u->selection.clear();
+                  }
+            }
       undoList.push_back(u); // put item on undo list
       redoList.pop_back();
       endUndoRedo(u);
@@ -514,7 +529,7 @@ void Score::undoOp(UndoOp::UndoType type, int a, int b)
 
 void Score::addElement(Element* element)
       {
-// printf("Score::addObject %p %s parent %s\n", element, element->name(), element->parent()->name());
+printf("Score::addObject %p %s parent %s\n", element, element->name(), element->parent()->name());
       element->parent()->add(element);
 
       if (element->type() == CLEF) {

@@ -1,6 +1,8 @@
 28.12 (ws)
-      - fix entering accidentals
+      - fixed crash on undo "delete accidental"
+      - fixed crash when deleting selected accidentals
       - update accidental tool button state after cmdUpDown()
+      - fix entering accidentals
 28.12 (lv)
       * MusicXML updates
         - changed order of attribute output (first keysig, then timesig)

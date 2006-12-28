@@ -1076,8 +1076,12 @@ void Score::cmdDeleteSelection()
                   } while (ie != is);
             }
       else {
-            for (iElement i = sel->elements()->begin(); i != sel->elements()->end(); ++i)
+            // deleteItem modifies sel->elements() list,
+            // so we need a local copy:
+            ElementList l = *(sel->elements());
+            for (iElement i = l.begin(); i != l.end(); ++i)
                   deleteItem(*i);
+            sel->elements()->clear();
             }
       sel->clear();
       layout();
