@@ -159,7 +159,6 @@ class Score : public QObject {
       void moveCursor();
       Note* getSelectedNote();
       Note* searchTieNote(Note* note, Segment* segment, int track);
-      void addAccidental(Note* oNote, int prefix);
       void pageNext();
       void pagePrev();
       void pageTop();
@@ -310,6 +309,7 @@ class Score : public QObject {
       void endUndoRedo(Undo*);
       void addAttribute(int);
       void addAccidental(int);
+      void addAccidental(Note* oNote, int prefix);
 
       void addElement(Element*);
       void removeElement(Element*);

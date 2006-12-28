@@ -203,6 +203,8 @@ void Note::changeAccidental(int pre)
             2,  // ACC_SHARP2
             -2, // ACC_FLAT2
             0,  // ACC_NAT
+            1, -1, 2, -2, 0,  // () brackets
+            1, -1, 2, -2, 0,  // [] brackets
             };
 
      static int tab3[15][8] = {
@@ -240,14 +242,14 @@ void Note::changeAccidental(int pre)
 
       if (pre == ACC_NONE) {
             if (curPre == ACC_NONE)
-                  pitchOffset = preTab[keyPre];
+                  pitchOffset = preTab[keyPre % 100];
             else
-                  pitchOffset = preTab[curPre];
+                  pitchOffset = preTab[curPre % 100];
             }
       else if (pre == ACC_NATURAL)
             pitchOffset = 0;
       else {
-            pitchOffset = preTab[pre]; //  + preTab[keyPre];
+            pitchOffset = preTab[pre % 100]; //  + preTab[keyPre % 100];
             }
 
       int clef = staff()->clef()->clef(tick);
@@ -345,10 +347,11 @@ void Note::setAccidental(int pre)
       {
       if (pre && !_tieBack) {
             if (_accidental) {
-                  _accidental->setIdx(pre);
+                  _accidental->setSubtype(pre);
                   }
             else {
-                  _accidental = new Accidental(score(), pre, _grace);
+                  _accidental = new Accidental(score());
+                  _accidental->setSubtype(_grace ? 100 + pre : pre);
                   _accidental->setParent(this);
                   _accidental->setVoice(voice());
                   }
@@ -725,8 +728,7 @@ void ShadowNote::layout()
 
 bool Note::acceptDrop(const QPointF&, int type, const QDomNode&) const
       {
-      return (type == ATTRIBUTE
-        || type == FINGERING);
+      return (type == ATTRIBUTE || type == FINGERING || type == ACCIDENTAL);
       }
 
 //---------------------------------------------------------
@@ -751,6 +753,15 @@ void Note::drop(const QPointF&, int t, const QDomNode& node)
                   score()->select(f, 0, 0);
                   score()->undoOp(UndoOp::AddElement, f);
                   chord()->layout();
+                  }
+                  break;
+            case ACCIDENTAL:
+                  {
+                  Accidental* a = new Accidental(0);
+                  a->read(node);
+                  int subtype = a->subtype();
+                  delete a;
+                  score()->addAccidental(this, subtype);
                   }
                   break;
 

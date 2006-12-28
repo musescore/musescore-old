@@ -10,9 +10,11 @@ test7.msc
       - start repeat / end repeat
       - prima volta / seconda volta
 
-test8.msc   simple tuplets: triplet
+test8.msc         simple tuplets: triplet
 testKeysig2.msc
 testTimesig2.msc
+
+accidental1.msc   accidental symbols
 
 midi1.mid	single track, single voice
 midi2.mid	single track, simple chords

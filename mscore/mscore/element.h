@@ -397,22 +397,6 @@ class Compound : public Element {
       };
 
 //---------------------------------------------------------
-//   Accidental
-//---------------------------------------------------------
-
-class Accidental : public Compound {
-      int val;
-      bool small;
-
-   public:
-      Accidental(Score*, int i, bool small);
-      virtual Element* clone() const { return new Accidental(*this); }
-      virtual ElementType type() const { return ACCIDENTAL; }
-      int idx() const                  { return val; }
-      void setIdx(int v);
-      };
-
-//---------------------------------------------------------
 //   KeySig
 //---------------------------------------------------------
 

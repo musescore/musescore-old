@@ -29,6 +29,7 @@
 #include "globals.h"
 #include "plist.h"
 #include "element.h"
+#include "accidental.h"
 
 class Tie;
 class Chord;
@@ -97,7 +98,7 @@ class Note : public Element {
 
       int userAccidental() const      { return _userAccidental; }
       void setUserAccidental(int i)   { _userAccidental = i; }
-      int accidentalIdx() const       { return _accidental ? _accidental->idx() : ACC_NONE; }
+      int accidentalIdx() const       { return _accidental ? _accidental->subtype() : ACC_NONE; }
       Accidental* accidental() const  { return _accidental; }
       void setAccidental(int);
       void changeAccidental(int);
