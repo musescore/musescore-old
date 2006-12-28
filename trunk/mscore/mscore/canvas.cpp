@@ -1027,9 +1027,9 @@ static int readType(QDomNode& node)
                         type = ACCIDENTAL;
                   else if (e.tagName() == "Clef")
                         type = CLEF;
-                  else if (e.tagName() == "Keysig")
+                  else if (e.tagName() == "KeySig")
                         type = KEYSIG;
-                  else if (e.tagName() == "Timesig")
+                  else if (e.tagName() == "TimeSig")
                         type = TIMESIG;
                   else if (e.tagName() == "Chord")
                         type = CHORD;
@@ -1059,7 +1059,7 @@ static int readType(QDomNode& node)
                         type = FINGERING;
                   else if (e.tagName() == "System")
                         type = SYSTEM;
-                  else if (e.tagName() == "Hairpin")
+                  else if (e.tagName() == "HairPin")
                         type = HAIRPIN;
                   else if (e.tagName() == "Tuplet")
                         type = TUPLET;
