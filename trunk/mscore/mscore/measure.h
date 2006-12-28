@@ -218,8 +218,8 @@ class Measure : public Element {
       void sortStaves(std::list<int>& src, std::list<int>& dst);
 
       void dump() const;
-      virtual bool acceptDrop(const QPointF&, int, int) const;
-      virtual void drop(const QPointF&, int, int);
+      virtual bool acceptDrop(const QPointF&, int, const QDomNode&) const;
+      virtual void drop(const QPointF&, int, const QDomNode&);
 
       bool startRepeat() const      { return _startRepeat; }
       void setStartRepeat(bool val) { _startRepeat = val; }

@@ -41,9 +41,9 @@ TextPalette* palette;
 TextElement::TextElement(Score* s)
    : Element(s)
       {
+      textStyle = -1;
       doc = new QTextDocument(0);
-      textStyle = TEXT_STYLE_LYRIC;
-      doc->setDefaultFont(font());
+      setStyle(TEXT_STYLE_LYRIC);
       editMode = false;
       cursor = new QTextCursor(doc);
       cursor->setPosition(0);
@@ -52,9 +52,9 @@ TextElement::TextElement(Score* s)
 TextElement::TextElement(Score* s, int style)
    : Element(s)
       {
+      textStyle = -1;
       doc = new QTextDocument(0);
-      textStyle = style;
-      doc->setDefaultFont(font());
+      setStyle(style);
       editMode = false;
       cursor = new QTextCursor(doc);
       cursor->setPosition(0);
@@ -204,7 +204,7 @@ void TextElement::setStyle(int n)
       {
       if (textStyle != n) {
             textStyle = n;
-            doc->setDefaultFont(font());
+            doc->setDefaultFont(textStyles[textStyle].font());
             layout();
             }
       }
@@ -231,7 +231,7 @@ void TextElement::write(Xml& xml, const char* name) const
 
       QString s = doc->toHtml("utf8");
       xml.tag("data", s);
-// printf("TextElement: write<%s>\n", s.toLocal8Bit().data());
+
       Element::writeProperties(xml);
       xml.etag(name);
       }
@@ -249,7 +249,6 @@ void TextElement::read(QDomNode node)
             QString tag(e.tagName());
             QString val(e.text());
             if (tag == "data") {
-// printf("setHtml <%s>\n", val.toLocal8Bit().data());
                   doc->setHtml(val);
                   }
             else if (tag == "style") {

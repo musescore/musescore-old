@@ -65,8 +65,8 @@ class TimeSig : public Element {
             }
       void getSig(int* n, int* z1, int* z2, int*z3=0, int*z4=0) const;
       void setSig(int n, int z1, int z2=0, int z3=0, int z4=0);
-      virtual bool acceptDrop(const QPointF&, int, int) const;
-      virtual void drop(const QPointF&, int, int);
+      virtual bool acceptDrop(const QPointF&, int, const QDomNode&) const;
+      virtual void drop(const QPointF&, int, const QDomNode&);
       virtual void layout();
       };
 

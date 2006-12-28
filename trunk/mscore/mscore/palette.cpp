@@ -156,6 +156,8 @@ void SymbolPalette::mouseMoveEvent(QMouseEvent* ev)
       QMimeData* mimeData = new QMimeData;
       Element* el = symbols[currentSymbol];
 
+printf("drag %d %d\n", el->type(), el->subtype());
+
       mimeData->setData("application/mscore/symbol", el->mimeData());
       drag->setMimeData(mimeData);
 

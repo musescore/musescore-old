@@ -432,8 +432,10 @@ void MuseScore::bracketMenu()
             ((QScrollArea*)bracketPalette)->setWidget(sp);
             sp->setGrid(40, 80);
 
-            Bracket* b1 = new Bracket(cs, BRACKET_NORMAL);
-            Bracket* b2 = new Bracket(cs, BRACKET_AKKOLADE);
+            Bracket* b1 = new Bracket(cs);
+            b1->setSubtype(BRACKET_NORMAL);
+            Bracket* b2 = new Bracket(cs);
+            b2->setSubtype(BRACKET_AKKOLADE);
             b1->setHeight(_spatium * 7);
             b2->setHeight(_spatium * 7);
 
@@ -505,34 +507,10 @@ void MuseScore::dynamicsMenu()
             ((QScrollArea*)dynamicsPalette)->setWidget(sp);
             sp->setGrid(90, 40);
 
-            sp->addObject( 0, new Dynamic(cs, DynPPPPPP),   "pppppp");
-            sp->addObject( 1, new Dynamic(cs, DynPPPPP),    "ppppp");
-            sp->addObject( 2, new Dynamic(cs, DynPPPP),     "pppp");
-            sp->addObject( 3, new Dynamic(cs, DynPPP),      "ppp");
-            sp->addObject( 4, new Dynamic(cs, DynPP),       "pianissimo");
-            sp->addObject( 5, new Dynamic(cs, DynP),        "piano");
-            sp->addObject( 6, new Dynamic(cs, DynMP),       "mezzopiano");
-            sp->addObject( 7, new Dynamic(cs, DynMF),       "mezzoforte");
-            sp->addObject( 8, new Dynamic(cs, DynF),        "forte");
-            sp->addObject( 9, new Dynamic(cs, DynFF),       "fortissimo");
-            sp->addObject(10, new Dynamic(cs, DynFFF),      "fff");
-            sp->addObject(11, new Dynamic(cs, DynFFFF),     "ffff");
-            sp->addObject(12, new Dynamic(cs, DynFFFFF),    "fffff");
-            sp->addObject(13, new Dynamic(cs, DynFFFFFF),   "ffffff");
-            sp->addObject(14, new Dynamic(cs, DynFP),       "fp");
-            sp->addObject(15, new Dynamic(cs, DynSF),       "sforzando");
-            sp->addObject(16, new Dynamic(cs, DynSFZ),      "sforzando");
-            sp->addObject(17, new Dynamic(cs, DynSFFZ),     "sffz");
-            sp->addObject(18, new Dynamic(cs, DynSFP),      "sfp");
-            sp->addObject(19, new Dynamic(cs, DynSFPP),     "sfpp");
-            sp->addObject(20, new Dynamic(cs, DynRFZ),      "rfz");
-            sp->addObject(21, new Dynamic(cs, DynRF),       "rf");
-            sp->addObject(22, new Dynamic(cs, DynFZ),       "fz");
-            sp->addObject(23, new Dynamic(cs, DynM),        "m");
-            sp->addObject(24, new Dynamic(cs, DynR),        "r");
-            sp->addObject(25, new Dynamic(cs, DynS),        "s");
-            sp->addObject(26, new Dynamic(cs, DynZ),        "z");
-
+            for (int i = 0; i < 27; ++i) {
+                  Dynamic* dynamic = new Dynamic(cs, i+1);
+                  sp->addObject(i, dynamic, dynamic->subtypeName());
+                  }
             Dynamic* d = new Dynamic(cs, "crescendo");
             sp->addObject(27, d,  "crescendo");
 
@@ -686,9 +664,11 @@ void MuseScore::showLayoutBreakPalette()
             SymbolPalette* sp = new SymbolPalette(1, 3);
             sa->setWidget(sp);
             sp->setGrid(80, 80);
-            LayoutBreak* lb = new LayoutBreak(cs, LAYOUT_BREAK_LINE);
+            LayoutBreak* lb = new LayoutBreak(cs);
+            lb->setSubtype(LAYOUT_BREAK_LINE);
             sp->addObject(0, lb, tr("break line"));
-            lb = new LayoutBreak(cs, LAYOUT_BREAK_PAGE);
+            lb = new LayoutBreak(cs);
+            lb->setSubtype(LAYOUT_BREAK_PAGE);
             sp->addObject(1, lb, tr("break page"));
             }
       layoutBreakPalette->show();

@@ -927,8 +927,8 @@ void MusicXml::direction(Measure* measure, int staff, QDomNode node)
       else if (dirType == "dynamics") {
             // more than one dynamic ???
             for (QStringList::Iterator it = dynamics.begin(); it != dynamics.end(); ++it ) {
-                  DynVal val = Dynamic::tag2val(*it);
-                  Dynamic* dyn = new Dynamic(score, val);
+                  Dynamic* dyn = new Dynamic(score);
+                  dyn->setSubtype(*it);
                   if (placement == "above")
                         ry -= 5.5;  // ry -= 2.5;
                   else

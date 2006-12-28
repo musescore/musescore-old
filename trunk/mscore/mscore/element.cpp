@@ -175,7 +175,7 @@ bool Element::intersects(const QRectF& rr) const
 void Element::writeProperties(Xml& xml) const
       {
       if (_subtype)
-            xml.tag("subtype", _subtype);
+            xml.tag("subtype", subtypeName());
       if (!_userOff.isNull())
             xml.tag("offset", _userOff);
       if (voice())
@@ -209,7 +209,7 @@ bool Element::readProperties(QDomNode node)
       if (tag == "tick")
             _time.setTick(i);
       else if (tag == "subtype")
-            setSubtype(i);
+            setSubtype(val);
       else if (tag == "ticklen")
             setTickLen(i);
       else if (tag == "offset")
@@ -229,6 +229,29 @@ bool Element::readProperties(QDomNode node)
       else
             return false;
       return true;
+      }
+
+//---------------------------------------------------------
+//   write
+//---------------------------------------------------------
+
+void Element::write(Xml& xml) const
+      {
+      xml.stag(name());
+      Element::writeProperties(xml);
+      xml.etag(name());
+      }
+
+//---------------------------------------------------------
+//   read
+//---------------------------------------------------------
+
+void Element::read(QDomNode node)
+      {
+      for (node = node.firstChild(); !node.isNull(); node = node.nextSibling()) {
+            if (!Element::readProperties(node))
+                  domError(node);
+            }
       }
 
 //---------------------------------------------------------
@@ -759,7 +782,7 @@ void KeySig::draw1(Painter& p)
 //   acceptDrop
 //---------------------------------------------------------
 
-bool KeySig::acceptDrop(const QPointF&, int type, int) const
+bool KeySig::acceptDrop(const QPointF&, int type, const QDomNode&) const
       {
       return type == KEYSIG;
       }
@@ -768,10 +791,13 @@ bool KeySig::acceptDrop(const QPointF&, int type, int) const
 //   drop
 //---------------------------------------------------------
 
-void KeySig::drop(const QPointF&, int type, int stype)
+void KeySig::drop(const QPointF&, int type, const QDomNode& node)
       {
-      printf("drop keysig %d %d\n", type, stype);
       if (type == KEYSIG) {
+            KeySig* k = new KeySig(0);
+            k->read(node);
+            int stype = k->subtype();
+            delete k;
             int st = subtype();
             if (st == stype)
                   return;
@@ -907,9 +933,12 @@ void Element::space(double& min, double& extra) const
 
 QByteArray Element::mimeData() const
       {
-      char buffer[32];
-      sprintf(buffer, "%d/%d", int(type()), subtype());
-      return QByteArray(buffer);
+      QBuffer buffer;
+      buffer.open(QIODevice::WriteOnly);
+      Xml xml(&buffer);
+      write(xml);
+      buffer.close();
+      return buffer.buffer();
       }
 
 //---------------------------------------------------------
