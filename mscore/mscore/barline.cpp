@@ -223,7 +223,7 @@ void BarLine::setSubtype(int t)
 //   acceptDrop
 //---------------------------------------------------------
 
-bool BarLine::acceptDrop(const QPointF&, int type, int) const
+bool BarLine::acceptDrop(const QPointF&, int type, const QDomNode&) const
       {
       return type == BAR_LINE;
       }
@@ -232,18 +232,20 @@ bool BarLine::acceptDrop(const QPointF&, int type, int) const
 //   drop
 //---------------------------------------------------------
 
-void BarLine::drop(const QPointF& /*pos*/, int type, int st)
+void BarLine::drop(const QPointF& /*pos*/, int type, const QDomNode& node)
       {
       if (type != BAR_LINE)
-            return;
-      if (subtype() == st)
             return;
       score()->cmdRemove(this);
 
       BarLine* bl = new BarLine(score());
-      bl->setSubtype(st);
+      bl->read(node);
       bl->setParent(parent());
       bl->setStaff(staff());
+      if (subtype() == bl->subtype()) {
+            delete bl;
+            return;
+            }
 
       if (subtype() == START_REPEAT) {
             Measure* m = (Measure*)(parent()->parent());
@@ -251,7 +253,7 @@ void BarLine::drop(const QPointF& /*pos*/, int type, int st)
             if (pm)
                   bl->setParent(pm);
             }
-      if (st == START_REPEAT){
+      if (subtype() == START_REPEAT){
             Measure* m  = (Measure*)(parent());
             Measure* nm = m->system()->nextMeasure(m);
             if (nm)

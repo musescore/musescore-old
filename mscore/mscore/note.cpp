@@ -723,7 +723,7 @@ void ShadowNote::layout()
 //   acceptDrop
 //---------------------------------------------------------
 
-bool Note::acceptDrop(const QPointF&, int type, int) const
+bool Note::acceptDrop(const QPointF&, int type, const QDomNode&) const
       {
       return (type == ATTRIBUTE
         || type == FINGERING);
@@ -733,20 +733,20 @@ bool Note::acceptDrop(const QPointF&, int type, int) const
 //   drop
 //---------------------------------------------------------
 
-void Note::drop(const QPointF&, int t, int st)
+void Note::drop(const QPointF&, int t, const QDomNode& node)
       {
       switch(t) {
             case ATTRIBUTE:
                   {
                   NoteAttribute* atr = new NoteAttribute(score());
-                  atr->setSubtype(st);
+                  atr->read(node);
                   score()->addAttribute(this, atr);
                   }
                   break;
             case FINGERING:
                   {
                   Fingering* f = new Fingering(score());
-                  f->setSubtype(st);
+                  f->read(node);
                   f->setParent(this);
                   score()->select(f, 0, 0);
                   score()->undoOp(UndoOp::AddElement, f);

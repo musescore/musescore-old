@@ -31,10 +31,9 @@
 //   Bracket
 //---------------------------------------------------------
 
-Bracket::Bracket(Score* s, int t)
+Bracket::Bracket(Score* s)
    : Element(s)
       {
-      setSubtype(t);
       path  = 0;
       h2    = 0.0;
       mode  = 0;
@@ -390,7 +389,7 @@ bool Bracket::endEditDrag()
 //   acceptDrop
 //---------------------------------------------------------
 
-bool Bracket::acceptDrop(const QPointF&, int type, int) const
+bool Bracket::acceptDrop(const QPointF&, int type, const QDomNode&) const
       {
       switch(ElementType(type)) {
             case BRACKET:
@@ -404,10 +403,11 @@ bool Bracket::acceptDrop(const QPointF&, int type, int) const
 //   drop
 //---------------------------------------------------------
 
-void Bracket::drop(const QPointF&, int type, int subtype)
+void Bracket::drop(const QPointF&, int type, const QDomNode& node)
       {
       if (ElementType(type) == BRACKET) {
-            Bracket* b = new Bracket(score(), subtype);
+            Bracket* b = new Bracket(score());
+            b->read(node);
             b->setParent(parent());
             b->setStaff(staff());
             b->setSpan(span());

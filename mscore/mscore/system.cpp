@@ -195,7 +195,8 @@ double System::layout(const QPointF& p, double w)
                   }
             else {
                   if (b == 0) {
-                        ss->bracket = b = new Bracket(score(), s->bracket());
+                        ss->bracket = b = new Bracket(score());
+                        b->setSubtype(s->bracket());
                         b->setParent(this);
                         b->setStaff(s);
                         }

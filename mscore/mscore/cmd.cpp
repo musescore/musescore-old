@@ -495,7 +495,6 @@ void Score::cmdAddPoet()
 
 void Score::cmdUpDown(bool up, bool octave)
       {
-printf("cmdUpDown(up=%d, octave=%d)\n", up, octave);
       ElementList el;
 
       for (iElement i = sel->elements()->begin(); i != sel->elements()->end(); ++i) {
@@ -537,14 +536,11 @@ printf("cmdUpDown(up=%d, octave=%d)\n", up, octave);
             i.val1  = oNote->pitch();
             undoList.back()->push_back(i);
 
-printf("cmdUpDown calling changePitch()\n");
             oNote->changePitch(newPitch);
             }
-
       padState.pitch = newPitch;
-printf("cmdUpDown calling layout()\n");
+      sel->updateState();     // accidentals may have changed
       layout();
-printf("cmdUpDown end\n");
       }
 
 //---------------------------------------------------------
@@ -674,6 +670,7 @@ void Score::addAccidental(Note* oNote, int accidental)
       i.val1  = oNote->userAccidental();
       undoList.back()->push_back(i);
       oNote->changeAccidental(accidental);
+      layout();
       }
 
 //---------------------------------------------------------

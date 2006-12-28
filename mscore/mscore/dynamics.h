@@ -23,25 +23,13 @@
 
 #include "textelement.h"
 
-enum DynVal {
-      DynPPPPPP, DynPPPPP, DynPPPP, DynPPP, DynPP, DynP,
-      DynMP, DynMF,
-      DynF, DynFF, DynFFF, DynFFFF, DynFFFFF, DynFFFFFF,
-      DynFP, DynSF, DynSFZ, DynSFFZ, DynSFP, DynSFPP,
-      DynRFZ, DynRF, DynFZ,
-      DynM, DynR, DynS, DynZ,
-      DynOTHER,
-      DynINVALID
-      };
-
 struct Dyn {
-      int val;
       int textStyle;
       const QString str;
       const char* tag;
 
-      Dyn(int v, int style, const char* t, const QString& s)
-         : val(v), textStyle(style), str(s), tag(t) {}
+      Dyn(int style, const char* t, const QString& s)
+         : textStyle(style), str(s), tag(t) {}
       };
 
 //---------------------------------------------------------
@@ -49,23 +37,23 @@ struct Dyn {
 //---------------------------------------------------------
 
 class Dynamic : public TextElement {
-      DynVal val;
 
    public:
       Dynamic(Score*);
-      Dynamic(Score*, DynVal val);
+      Dynamic(Score*, int val);
       Dynamic(Score*, const QString&);
+      virtual Element* clone() const { return new Dynamic(*this); }
       virtual ElementType type() const { return DYNAMIC; }
 
-      void setVal(DynVal val);
+      virtual void setSubtype(int val);
+      virtual void setSubtype(const QString&);
+      virtual const QString subtypeName() const;
 
       virtual bool isMovable() const { return true; }
       virtual void endDrag();
 
       virtual void write(Xml& xml) const;
       virtual void read(QDomNode);
-
-      static DynVal tag2val(const QString& tag);
       };
 
 #endif

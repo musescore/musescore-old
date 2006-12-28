@@ -656,12 +656,14 @@ void Measure::read(QDomNode node, int idx)
             else if (tag == "stretch")
                   _userStretch = val.toDouble();
             else if (tag == "lineBreak") {
-                  LayoutBreak* lb = new LayoutBreak(score(), LAYOUT_BREAK_LINE);
+                  LayoutBreak* lb = new LayoutBreak(score());
+                  setSubtype(LAYOUT_BREAK_LINE);
                   lb->setStaff(staff);
                   add(lb);
                   }
             else if (tag == "pageBreak") {
-                  LayoutBreak* lb = new LayoutBreak(score(), LAYOUT_BREAK_PAGE);
+                  LayoutBreak* lb = new LayoutBreak(score());
+                  setSubtype(LAYOUT_BREAK_PAGE);
                   lb->setStaff(staff);
                   add(lb);
                   }
@@ -2132,7 +2134,7 @@ void Measure::insertStaff1(Staff* staff, int staffIdx)
  and key- and timesig (allow drop if left of first chord or rest).
 */
 
-bool Measure::acceptDrop(const QPointF& p, int type, int) const
+bool Measure::acceptDrop(const QPointF& p, int type, const QDomNode&) const
       {
       // convert p from canvas to measure relative position and take x and y coordinates
       QPointF mrp = p - pos() - system()->pos() - system()->page()->pos();
@@ -2155,6 +2157,7 @@ bool Measure::acceptDrop(const QPointF& p, int type, int) const
                         return true;
                   return false;
             case PEDAL:
+            case DYNAMIC:
                   // accept drop only below staff
                   if (mrpy > b)
                         return true;
@@ -2208,7 +2211,7 @@ bool Measure::acceptDrop(const QPointF& p, int type, int) const
  Handle a dropped element at position \a pos of given element \a type and \a subtype.
 */
 
-void Measure::drop(const QPointF& p, int type, int subtype)
+void Measure::drop(const QPointF& p, int type, const QDomNode& node)
       {
       // determine staff
       System* s = system();
@@ -2224,14 +2227,20 @@ void Measure::drop(const QPointF& p, int type, int subtype)
 
       switch(ElementType(type)) {
             case BRACKET:
+                  {
+                  Bracket* bracket = new Bracket(0);
+                  bracket->read(node);
+                  int subtype = bracket->subtype();
+                  delete bracket;
                   if (ss->bracket) {
-                        ss->bracket->drop(p, type, subtype);
+                        ss->bracket->drop(p, type, node);
                         }
                   else {
                         staff->setBracket(subtype);
                         staff->setBracketSpan(1);
                         score()->layout();
                         }
+                  }
                   break;
             case CLEF:
                   // LVIFIX: handle clefSmallBit
@@ -2249,7 +2258,8 @@ void Measure::drop(const QPointF& p, int type, int subtype)
                                     // LVIFIX: check rest in newly created empty measures,
                                     printf("segtick=%d track=%d idx=%d\n",
                                             seg->tick(), track, idx);
-                                    Clef* clef = new Clef(score(), subtype);
+                                    Clef* clef = new Clef(score());
+                                    clef->read(node);
                                     clef->setStaff(staff);
                                     clef->setTick(seg->tick());
                                     clef->setParent(this);
@@ -2261,18 +2271,24 @@ void Measure::drop(const QPointF& p, int type, int subtype)
                   break;
             case KEYSIG:
                   {
-                  score()->changeKeySig(tick(), subtype);
+                  KeySig* ks = new KeySig(0);
+                  ks->read(node);
+                  score()->changeKeySig(tick(), ks->subtype());
+                  delete ks;
                   }
                   break;
             case TIMESIG:
                   {
-                  score()->changeTimeSig(tick(), subtype);
+                  TimeSig* ts = new TimeSig(0);
+                  ts->read(node);
+                  score()->changeTimeSig(tick(), ts->subtype());
+                  delete ts;
                   }
                   break;
             case VOLTA:
                   {
                   Volta* volta = new Volta(score());
-                  volta->setSubtype(subtype);
+                  volta->read(node);
                   volta->setStaff(staff);
                   volta->setParent(this);
                   score()->cmdAdd(volta);
@@ -2281,12 +2297,20 @@ void Measure::drop(const QPointF& p, int type, int subtype)
             case OTTAVA:
                   {
                   Ottava* ottava = new Ottava(score());
-                  ottava->setSubtype(subtype);
+                  ottava->read(node);
                   ottava->setStaff(staff);
                   ottava->setTick1(tick());
                   ottava->setTick2(tick() + tickLen());
                   ottava->setParent(this);
                   score()->cmdAdd(ottava);
+                  }
+                  break;
+            case DYNAMIC:
+                  {
+                  Dynamic* dynamic = new Dynamic(score());
+                  dynamic->read(node);
+                  printf("add dynamic subtype %d\n", dynamic->subtype());
+                  score()->addDynamic(dynamic, p);
                   }
                   break;
             case TRILL:
@@ -2312,7 +2336,8 @@ void Measure::drop(const QPointF& p, int type, int subtype)
                   break;
             case LAYOUT_BREAK:
                   {
-                  LayoutBreak* lb = new LayoutBreak(score(), subtype);
+                  LayoutBreak* lb = new LayoutBreak(score());
+                  lb->read(node);
                   lb->setStaff(staff);
                   lb->setParent(this);
                   score()->cmdAdd(lb);
@@ -2320,6 +2345,12 @@ void Measure::drop(const QPointF& p, int type, int subtype)
                   break;
 
             case BAR_LINE:
+                  {
+                  BarLine* barLine = new BarLine(score());
+                  barLine->read(node);
+                  int subtype = barLine->subtype();
+                  delete barLine;
+
                   for (int i = 0; i < staves.size(); ++i) {
                         MStaff& s = staves[i];
                         Staff* staff = score()->staff(i);
@@ -2339,6 +2370,7 @@ void Measure::drop(const QPointF& p, int type, int subtype)
                               bl->setStaff(staff);
                               bl->setParent(this);
                               score()->cmdAdd(bl);
+                              bl = 0;
                               Measure* m = system()->prevMeasure(this);
                               if (m) {
                                     MStaffList* sl = m->staffList();
@@ -2387,6 +2419,7 @@ printf("remove start repeat %p %p\n", e, e->parent());
 #endif
                               }
                         }
+                  }
                   break;
 
             default:

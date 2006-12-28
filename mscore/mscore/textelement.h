@@ -31,11 +31,11 @@ extern TextPalette* palette;
 //---------------------------------------------------------
 
 class TextElement : public Element {
-      QTextDocument* doc;
       QTextCursor* cursor;
       bool editMode;
 
    protected:
+      QTextDocument* doc;
       int textStyle;
       QFont font() const;
 

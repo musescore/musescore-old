@@ -28,10 +28,9 @@
 //   LayoutBreak
 //---------------------------------------------------------
 
-LayoutBreak::LayoutBreak(Score* score, int st)
+LayoutBreak::LayoutBreak(Score* score)
    : Element(score)
       {
-      setSubtype(st);
       layout();
       }
 
@@ -46,7 +45,7 @@ void LayoutBreak::draw1(Painter& p)
             pen.setColor(preferences.selectColor[0]);
       else
             pen.setColor(preferences.layoutBreakColor);
-      
+
       qreal lw = _spatium * 0.3;
       pen.setWidthF(lw);
       p.setPen(pen);

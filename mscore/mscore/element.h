@@ -175,8 +175,8 @@ class Element {
       void writeProperties(Xml& xml) const;
       bool readProperties(QDomNode);
 
-      virtual void write(Xml&) const  {}
-      virtual void read(QDomNode) {}
+      virtual void write(Xml&) const;
+      virtual void read(QDomNode);
 
       virtual bool isMovable() const          { return false; }
       virtual QRectF drag(const QPointF& s);
@@ -228,14 +228,28 @@ class Element {
  Reimplemented by elements that accept drops. Used to change cursor shape while
  dragging to indicate drop targets.
 */
-      virtual bool acceptDrop(const QPointF&, int, int) const { return false; }
+      virtual bool acceptDrop(const QPointF&, int, const QDomNode&) const { return false; }
+
 /**
  Handle a dropped element at canvas relative \a pos of given element
  \a type and \a subtype.
 
  Reimplemented by elements that accept drops.
 */
-      virtual void drop(const QPointF&, int, int) {}
+      virtual void drop(const QPointF&, int, const QDomNode&) {}
+
+/**
+ Return a name for a \a subtype. Used for outputting xml data.
+ Reimplemented by elements with subtype names.
+ */
+      virtual const QString subtypeName() const { return QString("%1").arg(_subtype); }
+
+/**
+ Set subtype by name
+ Used for reading xml data.
+ Reimplemented by elements with subtype names.
+ */
+      virtual void setSubtype(const QString& s) { _subtype = s.toInt(); }
       };
 
 //---------------------------------------------------------
@@ -419,8 +433,8 @@ class KeySig : public Element {
       virtual ElementType type() const { return KEYSIG; }
       virtual void write(Xml& xml) const;
       virtual void read(QDomNode);
-      virtual bool acceptDrop(const QPointF&, int, int) const;
-      virtual void drop(const QPointF&, int, int);
+      virtual bool acceptDrop(const QPointF&, int, const QDomNode&) const;
+      virtual void drop(const QPointF&, int, const QDomNode&);
       virtual void layout();
       };
 

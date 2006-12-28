@@ -36,6 +36,7 @@
 #include "chord.h"
 #include "page.h"
 #include "note.h"
+#include "xml.h"
 
 //---------------------------------------------------------
 //   Canvas
@@ -972,6 +973,122 @@ void Canvas::setViewRect(const QRectF& r)
       }
 
 //---------------------------------------------------------
+//   readSubtype
+//---------------------------------------------------------
+
+#if 0
+static QString readSubtype(QDomNode node)
+      {
+      for (node = node.firstChild(); !node.isNull(); node = node.nextSibling()) {
+            QDomElement e = node.toElement();
+            if (e.isNull())
+                  continue;
+            if (e.tagName() == "subtype")
+                  return e.text();
+            }
+      return QString();
+      }
+#endif
+
+//---------------------------------------------------------
+//   readType
+//---------------------------------------------------------
+
+static int readType(QDomNode& node)
+      {
+      int type = 0;
+      for (; !node.isNull(); node = node.nextSibling()) {
+            QDomElement e = node.toElement();
+            if (e.isNull())
+                  continue;
+                  //
+                  // DEBUG:
+                  // check names; remove non needed elements
+                  //
+                  if (e.tagName() == "Dynamic")
+                        type = DYNAMIC;
+                  else if (e.tagName() == "Symbol")
+                        type = SYMBOL;
+                  else if (e.tagName() == "Text")
+                        type = TEXT;
+                  else if (e.tagName() == "Staff")
+                        type = STAFF;
+                  else if (e.tagName() == "Slur")
+                        type = SLUR_SEGMENT;
+                  else if (e.tagName() == "Note")
+                        type = NOTE;
+                  else if (e.tagName() == "BarLine")
+                        type = BAR_LINE;
+                  else if (e.tagName() == "Stem")
+                        type = STEM;
+                  else if (e.tagName() == "Bracket")
+                        type = BRACKET;
+                  else if (e.tagName() == "Accidental")
+                        type = ACCIDENTAL;
+                  else if (e.tagName() == "Clef")
+                        type = CLEF;
+                  else if (e.tagName() == "Keysig")
+                        type = KEYSIG;
+                  else if (e.tagName() == "Timesig")
+                        type = TIMESIG;
+                  else if (e.tagName() == "Chord")
+                        type = CHORD;
+                  else if (e.tagName() == "Rest")
+                        type = REST;
+                  else if (e.tagName() == "Tie")
+                        type = TIE;
+                  else if (e.tagName() == "Slur")
+                        type = SLUR;
+                  else if (e.tagName() == "Measure")
+                        type = MEASURE;
+                  else if (e.tagName() == "Attribute")
+                        type = ATTRIBUTE;
+                  else if (e.tagName() == "Page")
+                        type = PAGE;
+                  else if (e.tagName() == "Beam")
+                        type = BEAM;
+                  else if (e.tagName() == "Hook")
+                        type = HOOK;
+                  else if (e.tagName() == "Lyric")
+                        type = LYRICS;
+                  else if (e.tagName() == "Instrument1")
+                        type = INSTRUMENT_NAME1;
+                  else if (e.tagName() == "Instrument2")
+                        type = INSTRUMENT_NAME2;
+                  else if (e.tagName() == "Fingering")
+                        type = FINGERING;
+                  else if (e.tagName() == "System")
+                        type = SYSTEM;
+                  else if (e.tagName() == "Hairpin")
+                        type = HAIRPIN;
+                  else if (e.tagName() == "Tuplet")
+                        type = TUPLET;
+                  else if (e.tagName() == "VSpacer")
+                        type = VSPACER;
+                  else if (e.tagName() == "Segment")
+                        type = SEGMENT;
+                  else if (e.tagName() == "TempoText")
+                        type = TEMPO_TEXT;
+                  else if (e.tagName() == "Volta")
+                        type = VOLTA;
+                  else if (e.tagName() == "Ottava")
+                        type = OTTAVA;
+                  else if (e.tagName() == "Pedal")
+                        type = PEDAL;
+                  else if (e.tagName() == "Trill")
+                        type = TRILL;
+                  else if (e.tagName() == "Break")
+                        type = LAYOUT_BREAK;
+                  else if (e.tagName() == "HelpLine")
+                        type = HELP_LINE;
+                  else
+                        domError(node);
+                  break;
+                  }
+      return type;
+      }
+
+//---------------------------------------------------------
 //   dragMoveEvent
 //---------------------------------------------------------
 
@@ -983,10 +1100,19 @@ void Canvas::dragMoveEvent(QDragMoveEvent* event)
       QPointF pos(imatrix.map(QPointF(event->pos())));
       Element* el = _score->findSelectableElement(pos);
       if (el) {
-            const char* p = event->mimeData()->data("application/mscore/symbol").data();
-            int type, subtype;
-            sscanf(p, "%d/%d", &type, &subtype);
-            bool val = el->acceptDrop(pos, type, subtype);
+            QByteArray data(event->mimeData()->data("application/mscore/symbol"));
+            QDomDocument doc;
+            int line, column;
+            QString err;
+            if (!doc.setContent(data, &err, &line, &column)) {
+                  printf("error reading drag data\n");
+                  return;
+                  }
+
+            QDomNode node = doc.documentElement();
+            int type      = readType(node);
+
+            bool val = el->acceptDrop(pos, type, node);
             if (val)
                   event->accept();
             else {
@@ -1030,12 +1156,20 @@ void Canvas::dropEvent(QDropEvent* event)
       QPointF pos(imatrix.map(QPointF(event->pos())));
       Element* el = _score->findSelectableElement(pos);
       if (el) {
-            const char* p = event->mimeData()->data("application/mscore/symbol").data();
-            int type, subtype;
-            sscanf(p, "%d/%d", &type, &subtype);
+            QByteArray data(event->mimeData()->data("application/mscore/symbol"));
+            QDomDocument doc;
+            int line, column;
+            QString err;
+            if (!doc.setContent(data, &err, &line, &column)) {
+                  printf("error reading drag data\n");
+                  return;
+                  }
+            QDomNode node = doc.documentElement();
+            int type      = readType(node);
+
             _score->startCmd();
             _score->addRefresh(el->abbox());
-            el->drop(pos, type, subtype);
+            el->drop(pos, type, node);
             _score->addRefresh(el->abbox());
             }
       if (dropTarget) {

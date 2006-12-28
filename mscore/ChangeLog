@@ -1,9 +1,19 @@
+28.12 (ws)
+      - fix entering accidentals
+      - update accidental tool button state after cmdUpDown()
 28.12 (lv)
       * MusicXML updates
         - changed order of attribute output (first keysig, then timesig)
         - always write a keysig at tick = 0 (even if it is C major)
         - fixed keysig import for multi-part scores in the second measure and up
       * MusicXML regression testfiles (mostly) updated
+27.12 (ws)
+      - drag&drop fo dynamics to measure
+      - change Dynamics to use subtype()
+      - output Element::subtype() as string to xml file
+      - extended drag&drop from palettes: instead of type/subtype the
+        whole xml description of an element is transfered. Type/subtype
+        is not always sufficient to construct an element.
 26.12 (ws)
       - misc fixes to palettes etc.
       (lv)

@@ -475,7 +475,7 @@ void Score::keyPressEvent(QKeyEvent* ev)
                   // insert note
                   if (cr->tuplet()) {
                         len = cr->tuplet()->noteLen();
-                        printf("current ist tuplet lä%d\n", len);
+                        printf("current is tuplet len %d\n", len);
                         }
                   setNote(cis->pos, staff(cis->staff), cis->voice, padState.pitch, len);
                   cis->pos += len;
@@ -597,7 +597,7 @@ void Score::padToggle(int n)
                   break;
             }
       setPadState();
-      if (n >= PAD_NOTE1 && n < PAD_TIE) {
+      if (n >= PAD_NOTE1 && n <= PAD_DOT) {
             if (n >= PAD_NOTE1 && n <= PAD_NOTE64) {
                   padState.dot = false;
                   //

@@ -42,7 +42,7 @@ class Bracket : public Element {
       void updateGrips(QMatrix& matrix);
 
    public:
-      Bracket(Score*, int);
+      Bracket(Score*);
       virtual Element* clone() const { return new Bracket(*this); }
       virtual ElementType type() const { return BRACKET; }
 
@@ -66,8 +66,8 @@ class Bracket : public Element {
       virtual void bboxUpdate();
       virtual QPointF dragOff() const;
 
-      virtual bool acceptDrop(const QPointF&, int, int) const;
-      virtual void drop(const QPointF&, int, int);
+      virtual bool acceptDrop(const QPointF&, int, const QDomNode&) const;
+      virtual void drop(const QPointF&, int, const QDomNode&);
       };
 
 #endif
