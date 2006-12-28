@@ -95,29 +95,7 @@ add_executable ( mscore
       ${ui_headers}
       ${mocs}
 
-#      barlinebase.cpp
-#      chordbase.cpp
-#      chordrestbase.cpp
-#      editinstrumentbase.cpp
-#      editstylebase.cpp
-#      edittempobase.cpp
-#      elementbase.cpp
-#      hairpinbase.cpp
-#      instrdialogbase.cpp
-#      measurebase.cpp
-#      measuresdialogbase.cpp
-#      notebase.cpp
-#      padbase.cpp
-#      pagebase.cpp
-#      pagesettingsbase.cpp
-#      parteditbase.cpp
-#      playpanelbase.cpp
-#      prefsdialogbase.cpp
-#      segmentbase.cpp
-#      textbase.cpp
-#      textpalettebase.cpp
-#      textstylebase.cpp
-
+      accidental.cpp
       alsa.cpp
       barline.cpp
       beam.cpp

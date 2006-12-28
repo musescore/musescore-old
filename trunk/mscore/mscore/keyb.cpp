@@ -656,7 +656,7 @@ void setPadState(Element* obj)
             Tuplet* tuplet = chord->tuplet();
             len = tuplet ? tuplet->baseLen() : chord->tickLen();
             Accidental* prefix  = ((Note*)obj)->accidental();
-            padState.prefix = prefix ? prefix->idx() : 0;
+            padState.prefix = prefix ? prefix->subtype() : 0;
             padState.rest   = false;
             padState.voice  = obj->voice();
             padState.pitch  = ((Note*)obj)->pitch();

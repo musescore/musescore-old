@@ -485,9 +485,9 @@ void MuseScore::accidentalsMenu()
             sp->setGrid(60, 60);
 
             for (int i = 0; i < 16; ++i) {
-                  Accidental* s = new Accidental(cs, i, false);
+                  Accidental* s = new Accidental(cs);
+                  s->setSubtype(i);
                   sp->addObject(i, s, s->name());
-
                   }
             }
       accidentalsPalette->show();

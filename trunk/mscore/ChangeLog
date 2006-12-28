@@ -1,4 +1,7 @@
 28.12 (ws)
+      - add new testfile accidental1.msc
+      - implement drag&drop from accidental palette to note
+      - use Element()->subtype() for Accidental
       - fixed crash on undo "delete accidental"
       - fixed crash when deleting selected accidentals
       - update accidental tool button state after cmdUpDown()
