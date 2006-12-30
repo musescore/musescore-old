@@ -72,7 +72,6 @@ class TextElement : public Element {
       void write(Xml& xml, const char*) const;
       virtual void read(QDomNode);
       virtual void layout();
-      virtual void setSelected(bool f);
       virtual const QRectF& bbox() const;
       };
 

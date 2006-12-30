@@ -73,7 +73,7 @@ void Score::start()
 
 void Score::startCmd()
       {
-      printf("startCmd()\n");
+//      printf("startCmd()\n");
       start();
       startUndo();
       }
@@ -139,7 +139,7 @@ void Score::end()
 
 void Score::endCmd(bool undo)
       {
-      printf("endCmd() undo %d\n", undo);
+//      printf("endCmd() undo %d\n", undo);
       if (undo)
             endUndo();
       end();

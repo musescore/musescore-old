@@ -64,7 +64,6 @@ TextElement::TextElement(const TextElement& e)
    : Element(e)
       {
       doc       = e.doc->clone(0);
-      cursor    = 0;
       editMode  = e.editMode;
       textStyle = e.textStyle;
       cursor    = new QTextCursor(doc);
@@ -84,8 +83,6 @@ TextElement::~TextElement()
 const QRectF& TextElement::bbox() const
       {
       _bbox = QRectF(0.0, 0.0, doc->size().width(), doc->size().height());
-// printf("TextElement<%s>: bbox %f %f\n", doc->toPlainText().toLocal8Bit().data(),
-//   _bbox.width(), _bbox.height());
       return _bbox;
       }
 
@@ -96,15 +93,6 @@ const QRectF& TextElement::bbox() const
 void TextElement::resetMode()
       {
       editMode = 0;
-      }
-
-//---------------------------------------------------------
-//   setSelected
-//---------------------------------------------------------
-
-void TextElement::setSelected(bool val)
-      {
-      Element::setSelected(val);
       }
 
 //---------------------------------------------------------
@@ -192,7 +180,11 @@ void TextElement::layout()
 
 void TextElement::setText(const QString& s)
       {
-      doc->setPlainText(s);
+      doc->clear();
+      QTextCharFormat format;
+      format.setFont(textStyles[textStyle].font());
+      cursor->setPosition(0);
+      cursor->insertText(s, format);
       layout();
       }
 
@@ -248,12 +240,10 @@ void TextElement::read(QDomNode node)
             QDomElement e = node.toElement();
             QString tag(e.tagName());
             QString val(e.text());
-            if (tag == "data") {
+            if (tag == "data")
                   doc->setHtml(val);
-                  }
-            else if (tag == "style") {
+            else if (tag == "style")
                   textStyle = val.toInt();
-                  }
             else if (Element::readProperties(node))
                   ;
             else
@@ -351,14 +341,7 @@ void TextElement::endEdit()
 
 QFont TextElement::font() const
       {
-      TextStyle* s = &textStyles[textStyle];
-      QFont f;
-      f.setFamily(s->family);
-      f.setItalic(s->italic);
-      f.setUnderline(s->underline);
-      f.setBold(s->bold);
-      f.setPixelSize(lrint(s->size * _spatium * .2));
-      return f;
+      return textStyles[textStyle].font();
       }
 
 //---------------------------------------------------------
@@ -369,6 +352,7 @@ void TextElement::draw1(Painter& p)
       {
       p.save();
       p.setRenderHint(QPainter::Antialiasing, false);
+      p.setFont(font());
 #if 1
       QAbstractTextDocumentLayout::PaintContext c;
       c.cursorPosition = editMode ? cursor->position() : -1;

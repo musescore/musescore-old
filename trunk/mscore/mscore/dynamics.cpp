@@ -41,33 +41,33 @@ static const QChar z[]      = { 0x7a };                     // z
 
 Dyn dynList[] = {
       Dyn(TEXT_STYLE_DYNAMICS, "other-dynamics", QString("")),
-      Dyn(TEXT_STYLE_SYMBOL1,  "pppppp", QString(pp, 6)),
-      Dyn(TEXT_STYLE_SYMBOL1,  "ppppp",  QString(pp, 5)),
-      Dyn(TEXT_STYLE_SYMBOL1,  "pppp",   QString(pp, 4)),
-      Dyn(TEXT_STYLE_SYMBOL1,  "ppp",    QString(pp, 3)),
-      Dyn(TEXT_STYLE_SYMBOL1,  "pp",     QString(pp, 2)),
-      Dyn(TEXT_STYLE_SYMBOL1,  "p",      QString(pp, 1)),
-      Dyn(TEXT_STYLE_SYMBOL1,  "mp",     QString(mp,  2)),
-      Dyn(TEXT_STYLE_SYMBOL1,  "mf",     QString(mf,  2)),
-      Dyn(TEXT_STYLE_SYMBOL1,  "f",      QString(ff,  1)),
-      Dyn(TEXT_STYLE_SYMBOL1,  "ff",     QString(ff,  2)),
-      Dyn(TEXT_STYLE_SYMBOL1,  "fff",    QString(ff,  3)),
-      Dyn(TEXT_STYLE_SYMBOL1,  "ffff",   QString(ff,  4)),
-      Dyn(TEXT_STYLE_SYMBOL1,  "fffff",  QString(ff,  5)),
-      Dyn(TEXT_STYLE_SYMBOL1,  "ffffff", QString(ff,  6)),
-      Dyn(TEXT_STYLE_SYMBOL1,  "fp",     QString(fp,  2)),
-      Dyn(TEXT_STYLE_SYMBOL1,  "sf",     QString(sfz, 2)),
-      Dyn(TEXT_STYLE_SYMBOL1,  "sfz",    QString(sfz, 3)),
-      Dyn(TEXT_STYLE_SYMBOL1,  "sffz",   QString(sffz, 4)),
-      Dyn(TEXT_STYLE_SYMBOL1,  "sfp",    QString(sfp, 3)),
-      Dyn(TEXT_STYLE_SYMBOL1,  "sfpp",   QString(sfp, 4)),
-      Dyn(TEXT_STYLE_SYMBOL1,  "rfz",    QString(rfz, 3)),
-      Dyn(TEXT_STYLE_SYMBOL1,  "rf",     QString(rfz, 2)),
-      Dyn(TEXT_STYLE_SYMBOL1,  "fz",     QString(fz,  2)),
-      Dyn(TEXT_STYLE_SYMBOL1,  "m",      QString(mp,  1)),
-      Dyn(TEXT_STYLE_SYMBOL1,  "rfz",    QString(rfz, 1)),
-      Dyn(TEXT_STYLE_SYMBOL1,  "sfz",    QString(sfz, 1)),
-      Dyn(TEXT_STYLE_SYMBOL1,  "z",      QString(z,   1)),
+      Dyn(TEXT_STYLE_DYNAMICS1,  "pppppp", QString(pp, 6)),
+      Dyn(TEXT_STYLE_DYNAMICS1,  "ppppp",  QString(pp, 5)),
+      Dyn(TEXT_STYLE_DYNAMICS1,  "pppp",   QString(pp, 4)),
+      Dyn(TEXT_STYLE_DYNAMICS1,  "ppp",    QString(pp, 3)),
+      Dyn(TEXT_STYLE_DYNAMICS1,  "pp",     QString(pp, 2)),
+      Dyn(TEXT_STYLE_DYNAMICS1,  "p",      QString(pp, 1)),
+      Dyn(TEXT_STYLE_DYNAMICS1,  "mp",     QString(mp,  2)),
+      Dyn(TEXT_STYLE_DYNAMICS1,  "mf",     QString(mf,  2)),
+      Dyn(TEXT_STYLE_DYNAMICS1,  "f",      QString(ff,  1)),
+      Dyn(TEXT_STYLE_DYNAMICS1,  "ff",     QString(ff,  2)),
+      Dyn(TEXT_STYLE_DYNAMICS1,  "fff",    QString(ff,  3)),
+      Dyn(TEXT_STYLE_DYNAMICS1,  "ffff",   QString(ff,  4)),
+      Dyn(TEXT_STYLE_DYNAMICS1,  "fffff",  QString(ff,  5)),
+      Dyn(TEXT_STYLE_DYNAMICS1,  "ffffff", QString(ff,  6)),
+      Dyn(TEXT_STYLE_DYNAMICS1,  "fp",     QString(fp,  2)),
+      Dyn(TEXT_STYLE_DYNAMICS1,  "sf",     QString(sfz, 2)),
+      Dyn(TEXT_STYLE_DYNAMICS1,  "sfz",    QString(sfz, 3)),
+      Dyn(TEXT_STYLE_DYNAMICS1,  "sffz",   QString(sffz, 4)),
+      Dyn(TEXT_STYLE_DYNAMICS1,  "sfp",    QString(sfp, 3)),
+      Dyn(TEXT_STYLE_DYNAMICS1,  "sfpp",   QString(sfp, 4)),
+      Dyn(TEXT_STYLE_DYNAMICS1,  "rfz",    QString(rfz, 3)),
+      Dyn(TEXT_STYLE_DYNAMICS1,  "rf",     QString(rfz, 2)),
+      Dyn(TEXT_STYLE_DYNAMICS1,  "fz",     QString(fz,  2)),
+      Dyn(TEXT_STYLE_DYNAMICS1,  "m",      QString(mp,  1)),
+      Dyn(TEXT_STYLE_DYNAMICS1,  "rfz",    QString(rfz, 1)),
+      Dyn(TEXT_STYLE_DYNAMICS1,  "sfz",    QString(sfz, 1)),
+      Dyn(TEXT_STYLE_DYNAMICS1,  "z",      QString(z,   1)),
       };
 
 //---------------------------------------------------------
@@ -75,21 +75,27 @@ Dyn dynList[] = {
 //---------------------------------------------------------
 
 Dynamic::Dynamic(Score* s)
-   : TextElement(s, TEXT_STYLE_SYMBOL1)
+   : TextElement(s)
       {
       }
 
 Dynamic::Dynamic(Score* s, int st)
-   : TextElement(s, TEXT_STYLE_SYMBOL1)
+   : TextElement(s)
       {
       setSubtype(st);
       }
 
 Dynamic::Dynamic(Score* s, const QString& t)
-   : TextElement(s, TEXT_STYLE_DYNAMICS)
+   : TextElement(s)
       {
       setSubtype(0);
       setText(t);
+      }
+
+Dynamic::Dynamic(const Dynamic& d)
+   : TextElement(d)
+      {
+      setSubtype(subtype());
       }
 
 //---------------------------------------------------------
@@ -137,11 +143,8 @@ void Dynamic::endDrag()
 void Dynamic::write(Xml& xml) const
       {
       xml.stag("Dynamic");
-      if (subtype() == 0) {
-            xml.tag("style", textStyle);
-            QString s = doc->toHtml("utf8");
-            xml.tag("data", s);
-            }
+      if (subtype() == 0)
+            xml.tag("data", doc->toHtml("utf8"));
       Element::writeProperties(xml);
       xml.etag("Dynamic");
       }
@@ -152,21 +155,19 @@ void Dynamic::write(Xml& xml) const
 
 void Dynamic::read(QDomNode node)
       {
+      int ts = 0;
       for (node = node.firstChild(); !node.isNull(); node = node.nextSibling()) {
             QDomElement e = node.toElement();
             if (e.isNull())
                   continue;
-            QString tag(e.tagName());
-            QString val(e.text());
-            if (tag == "data")
-                  doc->setHtml(val);
-            else if (tag == "style")
-                  textStyle = val.toInt();
+            if (e.tagName() == "data")
+                  doc->setHtml(e.text());
             else if (Element::readProperties(node))
                   ;
             else
                   domError(node);
             }
+      setSubtype(subtype());
       }
 
 //---------------------------------------------------------
@@ -183,6 +184,7 @@ void Dynamic::setSubtype(const QString& tag)
                   }
             }
       setSubtype(0);
+      setText(tag);
       }
 
 //---------------------------------------------------------
@@ -192,5 +194,14 @@ void Dynamic::setSubtype(const QString& tag)
 const QString Dynamic::subtypeName() const
       {
       return dynList[subtype()].tag;
+      }
+
+//---------------------------------------------------------
+//   layout
+//    override TextElement()->layout()
+//---------------------------------------------------------
+
+void Dynamic::layout()
+      {
       }
 

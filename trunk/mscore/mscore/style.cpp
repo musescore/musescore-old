@@ -73,7 +73,9 @@ static const TextStyle defaultTextStyles[] = {
       TextStyle(QString("Page Number Even"), ff, 12, false, false, false,
          ALIGN_LEFT | ALIGN_TOP, ANCHOR_PAGE, 0, 0, OFFSET_ABS),
       TextStyle(QString("Translator"),      ff, 11, false, false, false,
-         ALIGN_HCENTER | ALIGN_TOP,    ANCHOR_TICK, 0, 6, OFFSET_SPATIUM)
+         ALIGN_HCENTER | ALIGN_TOP,    ANCHOR_TICK, 0, 6, OFFSET_SPATIUM),
+      TextStyle(QString("Dynamics1"), QString("MScore1"), 20, false, false, false,
+         ALIGN_LEFT,    ANCHOR_TICK, 0, 0, OFFSET_SPATIUM),
       };
 
 //---------------------------------------------------------

@@ -8,6 +8,7 @@
       <file>data/text_right.png</file>
       <file>data/text_center.png</file>
       <file alias="fonts/emmentaler_20.otf">fonts/emmentaler_20.otf</file>
+      <file alias="fonts/mscore1_20.otf">fonts/mscore1_20.otf</file>
    </qresource>
 
    <qresource lang="de">

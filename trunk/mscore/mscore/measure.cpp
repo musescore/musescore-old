@@ -982,7 +982,9 @@ void Measure::layout2()
       for (ciElement pe = _sel.begin(); pe != _sel.end(); ++pe) {
             Element* pel = *pe;
             int staff = _score->staff(pel->staff());
-            double y  = staff * point(Spatium(4) + style->staffDistance);
+
+            // double y  = staff * point(Spatium(4) + style->staffDistance);
+            double y = system()->staff(staff)->bbox().y();
 
             pel->layout();
             switch(pel->type()) {
@@ -2309,8 +2311,13 @@ void Measure::drop(const QPointF& p, int type, const QDomNode& node)
                   {
                   Dynamic* dynamic = new Dynamic(score());
                   dynamic->read(node);
-                  printf("add dynamic subtype %d\n", dynamic->subtype());
-                  score()->addDynamic(dynamic, p);
+                  dynamic->setSelected(false);
+                  Dynamic* nd = new Dynamic(score());
+                  nd->setSubtype(dynamic->subtype());
+                  if (dynamic->subtype() == 0)
+                        nd->setText(dynamic->getText());
+printf("add dynamic subtype %d style %d\n", dynamic->subtype(), dynamic->style());
+                  score()->addDynamic(nd, p);
                   }
                   break;
             case TRILL:

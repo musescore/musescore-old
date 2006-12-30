@@ -352,6 +352,7 @@ void Canvas::mouseMoveEvent1(QMouseEvent* ev)
             }
 
       QPointF delta = p - startMove;
+
       if (dragCanvasState) {
             QPoint d = ev->pos() - matrix.map(startMove).toPoint();
             int dx   = d.x();

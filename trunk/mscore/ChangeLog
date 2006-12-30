@@ -1,3 +1,9 @@
+30.12 (ws)
+      - fix dragging of dynamics
+29.12 (ws)
+      - fixed font for text dynamics
+      - moved some characters from emmentaler20 into a separate font
+        to get usable metrics
 28.12 (ws)
       - add new testfile accidental1.msc
       - implement drag&drop from accidental palette to note

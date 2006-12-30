@@ -31,6 +31,7 @@
 #include "ui_chordrest.h"
 #include "ui_hairpin.h"
 #include "ui_barline.h"
+#include "ui_dynamic.h"
 
 class ShowElementBase;
 class Element;
@@ -64,6 +65,7 @@ class PageListEditor : public QWidget {
       ShowElementBase* elementView;
       ShowElementBase* hairpinView;
       ShowElementBase* barLineView;
+      ShowElementBase* dynamicView;
 
       bool searchElement(QTreeWidgetItem* pi, Element* el);
 
@@ -321,6 +323,21 @@ class BarLineView : public ShowElementBase {
 
    public:
       BarLineView();
+      virtual void setElement(Element*);
+      };
+
+//---------------------------------------------------------
+//   DynamicView
+//---------------------------------------------------------
+
+class DynamicView : public ShowElementBase {
+      Q_OBJECT;
+
+      Ui::TextBase tb;
+      Ui::DynamicBase bl;
+
+   public:
+      DynamicView();
       virtual void setElement(Element*);
       };
 
