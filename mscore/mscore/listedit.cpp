@@ -37,6 +37,7 @@
 #include "clef.h"
 #include "barline.h"
 #include "hook.h"
+#include "dynamics.h"
 
 //---------------------------------------------------------
 //   ElementItem
@@ -141,6 +142,7 @@ PageListEditor::PageListEditor(Score* s)
       elementView  = new ElementView;
       hairpinView  = new HairpinView;
       barLineView  = new BarLineView;
+      dynamicView  = new DynamicView;
 
       stack->addWidget(pagePanel);
       stack->addWidget(systemPanel);
@@ -156,6 +158,7 @@ PageListEditor::PageListEditor(Score* s)
       stack->addWidget(elementView);
       stack->addWidget(hairpinView);
       stack->addWidget(barLineView);
+      stack->addWidget(dynamicView);
 
       connect(pagePanel,    SIGNAL(elementChanged(Element*)), SLOT(setElement(Element*)));
       connect(systemPanel,  SIGNAL(elementChanged(Element*)), SLOT(setElement(Element*)));
@@ -171,6 +174,7 @@ PageListEditor::PageListEditor(Score* s)
       connect(elementView,  SIGNAL(elementChanged(Element*)), SLOT(setElement(Element*)));
       connect(hairpinView,  SIGNAL(elementChanged(Element*)), SLOT(setElement(Element*)));
       connect(barLineView,  SIGNAL(elementChanged(Element*)), SLOT(setElement(Element*)));
+      connect(dynamicView,  SIGNAL(elementChanged(Element*)), SLOT(setElement(Element*)));
 
       connect(list, SIGNAL(currentItemChanged(QTreeWidgetItem*, QTreeWidgetItem*)),
          SLOT(itemChanged(QTreeWidgetItem*,QTreeWidgetItem*)));
@@ -361,6 +365,7 @@ void PageListEditor::itemChanged(QTreeWidgetItem* i, QTreeWidgetItem*)
             case SEGMENT: ew = segmentView;  break;
             case HAIRPIN: ew = hairpinView;  break;
             case BAR_LINE: ew = barLineView; break;
+            case DYNAMIC:  ew = dynamicView; break;
             case FINGERING:
             case TEXT:
                   ew = textView;
@@ -906,6 +911,45 @@ void BarLineView::setElement(Element* e)
       BarLine* barline = (BarLine*)e;
       ShowElementBase::setElement(e);
       bl.subType->setValue(barline->subtype());
+      }
+
+//---------------------------------------------------------
+//   DynamicView
+//---------------------------------------------------------
+
+DynamicView::DynamicView()
+   : ShowElementBase()
+      {
+      QWidget* tw = new QWidget;
+      tb.setupUi(tw);
+      layout->addWidget(tw);
+
+      QWidget* dynamic = new QWidget;
+      bl.setupUi(dynamic);
+      layout->addWidget(dynamic);
+      layout->addStretch(10);
+      }
+
+//---------------------------------------------------------
+//   setElement
+//---------------------------------------------------------
+
+void DynamicView::setElement(Element* e)
+      {
+      Dynamic* dynamic = (Dynamic*)e;
+
+      tb.style->clear();
+      for (iTextStyle i = textStyles.begin(); i != textStyles.end(); ++i) {
+            TextStyle* s = &*i;
+            tb.style->addItem(s->name);
+            }
+      tb.style->setCurrentIndex(dynamic->style());
+      tb.text->setText(dynamic->getText());
+//      tb.xoffset->setValue(dynamic->styleOffset().x());
+//      tb.yoffset->setValue(dynamic->styleOffset().y());
+
+      ShowElementBase::setElement(e);
+      bl.subType->setValue(dynamic->subtype());
       }
 
 //---------------------------------------------------------

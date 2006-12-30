@@ -51,7 +51,8 @@ enum TEXT_STYLE {
       TEXT_STYLE_MEASURE_NUMBER,
       TEXT_STYLE_PAGE_NUMBER_ODD,
       TEXT_STYLE_PAGE_NUMBER_EVEN,
-      TEXT_STYLE_TRANSLATOR
+      TEXT_STYLE_TRANSLATOR,
+      TEXT_STYLE_DYNAMICS1
       };
 
 //---------------------------------------------------------

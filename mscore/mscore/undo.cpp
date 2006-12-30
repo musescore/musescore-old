@@ -129,7 +129,7 @@ void Score::endUndo()
             fprintf(stderr, "endUndo: not active\n");
             abort();
             }
-      printf("end undo: %d actions\n", undoList.back()->size());
+//      printf("end undo: %d actions\n", undoList.back()->size());
       if (undoList.back()->empty()) {
             // nothing to undo
             delete undoList.back();
@@ -529,7 +529,7 @@ void Score::undoOp(UndoOp::UndoType type, int a, int b)
 
 void Score::addElement(Element* element)
       {
-printf("Score::addObject %p %s parent %s\n", element, element->name(), element->parent()->name());
+// printf("Score::addObject %p %s parent %s\n", element, element->name(), element->parent()->name());
       element->parent()->add(element);
 
       if (element->type() == CLEF) {

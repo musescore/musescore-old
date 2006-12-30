@@ -1707,7 +1707,15 @@ int main(int argc, char* argv[])
                   }
             }
 
+      //
+      //  load internal fonts
+      //
       int fontId = QFontDatabase::addApplicationFont(":/fonts/emmentaler_20.otf");
+      if (fontId == -1) {
+            fprintf(stderr, "Mscore: fatal error: cannot load internal font\n");
+            exit(-1);
+            }
+      fontId = QFontDatabase::addApplicationFont(":/fonts/mscore1_20.otf");
       if (fontId == -1) {
             fprintf(stderr, "Mscore: fatal error: cannot load internal font\n");
             exit(-1);
