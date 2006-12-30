@@ -1,4 +1,5 @@
 30.12 (ws)
+      - fix accidental position for compound accidentals "(#)"
       - fix dragging of dynamics
 29.12 (ws)
       - fixed font for text dynamics

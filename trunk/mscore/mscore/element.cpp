@@ -520,15 +520,13 @@ void Compound::draw1(Painter& p)
       for (ciSymbol i = elemente.begin(); i != elemente.end(); ++i)
             (*i)->draw(p);
 
-//      if (debugMode && selected()) {
-//      if ((type() == KEYSIG) && selected()) {
-      if ((type() == KEYSIG)) {
+      if (debugMode && selected()) {
             //
             //  draw bounding box rectangle for all
             //  selected Elements
             //
             p.setBrush(Qt::NoBrush);
-            p.setPen(QPen(Qt::red, 8, Qt::SolidLine));
+            p.setPen(QPen(Qt::red, 4, Qt::SolidLine));
             p.drawRect(_bbox);
             }
       }
@@ -546,7 +544,12 @@ void Compound::addElement(Element* e, double x, double y)
       e->setPos(x, y);
       e->setParent(this);
       elemente.push_back(e);
-      _bbox |= e->bbox().translated(e->pos());
+
+      QRectF r = e->bbox().translated(e->pos());
+//      printf("Compound add %f %f %f %f\n", e->bbox().x(), e->bbox().y(), e->bbox().width(), e->bbox().height());
+//      printf("         add %f %f %f %f\n", r.x(), r.y(), r.width(), r.height());
+      _bbox |= r;
+//      printf("  -> %f %f %f %f\n", _bbox.x(), _bbox.y(), _bbox.width(), _bbox.height());
       }
 
 //---------------------------------------------------------

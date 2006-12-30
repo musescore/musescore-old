@@ -97,18 +97,18 @@ void Chord::init()
 //   upLine
 //---------------------------------------------------------
 
-int Chord::upLine() const      
-      { 
-      return upNote()->line(); 
+int Chord::upLine() const
+      {
+      return upNote()->line();
       }
 
 //---------------------------------------------------------
 //   downLine
 //---------------------------------------------------------
 
-int Chord::downLine() const    
-      { 
-      return downNote()->line(); 
+int Chord::downLine() const
+      {
+      return downNote()->line();
       }
 
 Chord::Chord(Score* s)
@@ -274,8 +274,6 @@ void Chord::bboxUpdate()
 
 //---------------------------------------------------------
 //   layoutStem
-//    layout chord stem and hook
-//    (Notenhals & Fäen)
 //---------------------------------------------------------
 
 /**
@@ -351,8 +349,7 @@ void Chord::layoutStem()
       _stem->setPos(npos);
 
       //-----------------------------------------
-      //  process hook (Fäen)
-      //-----------------------------------------
+      //  process hook (Fä     //-----------------------------------------
 
       if (hookIdx) {
             if (!up)
@@ -413,7 +410,8 @@ void Chord::layout()
                   double x = point(style->prefixNoteDistance);
                   if (_grace)
                         x /= 2;
-                  accidental->setPos(- x - accidental->width(), 0);
+                  // accidental->setPos(- x - accidental->width(), 0);
+                  accidental->setPos(- x - accidental->width() - accidental->bbox().x(), 0);
                   }
             }
 
@@ -822,7 +820,7 @@ Note* NoteList::find(int pitch) const
 //   add
 //---------------------------------------------------------
 
-NoteList::iterator NoteList::add(Note* n) 
+NoteList::iterator NoteList::add(Note* n)
       {
       return std::multimap<const int, Note*>::insert(std::pair<const int, Note*> (n->pitch(), n));
       }
