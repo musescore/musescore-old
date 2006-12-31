@@ -1,3 +1,7 @@
+31.12 (lv)
+      * MusicXML updates
+        - don't output staff number for single-staff parts: also fixed for <direction>s
+      * related MusicXML regression testfiles updated
 30.12 (ws)
       - fix accidental position for compound accidentals "(#)"
       - fix dragging of dynamics
