@@ -1394,7 +1394,7 @@ static void directionETag(Xml& xml, int staff, int offs = 0)
       xml.etag("direction-type");
       if (offs)
             xml.tag("offset", offs);
-      if (staff-1)
+      if (staff)
             xml.tag("staff", staff);
       xml.etag("direction");
       }

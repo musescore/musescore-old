@@ -10,11 +10,9 @@ test7.msc
       - start repeat / end repeat
       - prima volta / seconda volta
 
-test8.msc         simple tuplets: triplet
+test8.msc   simple tuplets: triplet
 testKeysig2.msc
 testTimesig2.msc
-
-accidental1.msc   accidental symbols
 
 midi1.mid	single track, single voice
 midi2.mid	single track, simple chords
@@ -24,7 +22,8 @@ midi4.mid   single track, overlapping notes
 MusicXML testfiles
 
 testDirections1.xml     all supported direction types
-testDynamics1.xml	the "dynamics" directions from ppp to fff
+testDynamics1.xml       the "dynamics" directions from ppp to fff
+testDynamics2.xml       dynamics in a multi-part (voice and a piano) score
 testKeysig1.xml         change keysig from none to G major
 testNotesRests1.xml     all note and rest types, including some dotted
 testTimesig1.xml        all supported time signatures
