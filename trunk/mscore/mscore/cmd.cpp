@@ -295,7 +295,7 @@ void Score::setNote(int tick, Staff* staff, int voice, int pitch, int len)
 
             if (seq && mscore->playEnabled()) {
                   Staff* staff = note->staff();
-                  seq->playNote(staff->midiChannel(), note->pitch(), 64);
+                  seq->startNote(staff->midiChannel(), note->pitch(), 64);
                   }
 
             if (tie) {

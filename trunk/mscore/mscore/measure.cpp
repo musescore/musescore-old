@@ -1122,7 +1122,6 @@ void Measure::add(Element* el)
       {
       Staff* staffp = el->staff();
       int staffIdx  = staffp ? staffp->idx() : -1;
-
       if (staffp == 0) {
             _pel.push_back(el);
             el->setAnchor(this);

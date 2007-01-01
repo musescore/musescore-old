@@ -877,15 +877,19 @@ void MusicXml::direction(Measure* measure, int staff, QDomNode node)
                   }
             else if (e.tagName() == "offset")
                   offset = (e.text().toInt() * ::division)/divisions;
-            else if (e.tagName() == "staff")
+            else if (e.tagName() == "staff") {
+                  // DEBUG: <staff>0</staff>
                   rstaff = e.text().toInt() - 1;
+                  if (rstaff < 0)         // ???
+                        rstaff = 0;
+                  }
             else
                   domError(node);
             }
       if (placement == "below")
-            ry += 2;    // ry += 6.0;
+            ry += 2;
       else
-            ry -= 1;
+            ry -= 2;
 
       if (dirType == "words") {
             TextElement* t = new TextElement(score);
@@ -897,10 +901,11 @@ void MusicXml::direction(Measure* measure, int staff, QDomNode node)
                   }
             else
                   t->setText(txt);
-            if (placement == "above")
-                  ry -= 2;
+            if (placement == "below")
+                  ry += t->bbox().height()/_spatium;
             else
-                  ry += 2;
+                  ry -= 1;
+
             t->setUserOff(QPointF(rx + xoffset, ry + yoffset));
             t->setMxmlOff(offset);
             t->setStaff(score->staff(staff + rstaff));
@@ -930,11 +935,12 @@ void MusicXml::direction(Measure* measure, int staff, QDomNode node)
                   Dynamic* dyn = new Dynamic(score);
                   dyn->setSubtype(*it);
                   if (placement == "above")
-                        ry -= 5.5;  // ry -= 2.5;
+                        ry -= 1.5;  // ry -= 2.5;
                   else
-                        ry += 1;    // ry += 2;
+                        ry += dyn->bbox().height() / _spatium;  // ry += 2;
                   dyn->setUserOff(QPointF(rx + xoffset, ry + yoffset));
                   dyn->setMxmlOff(offset);
+
                   dyn->setStaff(score->staff(staff + rstaff));
                   dyn->setTick(tick);
                   measure->add(dyn);

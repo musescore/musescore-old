@@ -73,7 +73,7 @@ class TabBar : public QTabBar {
       void doubleClick(int);
 
    public:
-      TabBar(QWidget* parent) : QTabBar(parent) {}
+      TabBar() : QTabBar() {}
       };
 
 //---------------------------------------------------------

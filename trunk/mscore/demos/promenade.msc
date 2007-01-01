@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf8"?>
 <museScore version="1.0">
-  <Geometry x="422" y="0" w="1061" h="931" />
+  <Geometry x="208" y="0" w="1607" h="1090" />
   <Spatium>1.625</Spatium>
   <Division>384</Division>
   <Mag>2</Mag>
   <xoff>48</xoff>
-  <yoff>-55.3333</yoff>
+  <yoff>16.67</yoff>
   <Style>
     <staffUpperBorder>8</staffUpperBorder>
     <staffLowerBorder>4</staffLowerBorder>
@@ -185,12 +185,26 @@ p, li { white-space: pre-wrap; }
         <endTick>1536</endTick>
         </Slur>
       <Dynamic>
-        <subtype>ff</subtype>
-        <offset x="-0.441824" y="3.17402"/>
-        <selected>1</selected>
+        <data>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-weight:400; font-style:italic; text-decoration:none;&quot;&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
+        <offset x="0.453688" y="5.77915"/>
         </Dynamic>
+      <SlurSegment>
+        </SlurSegment>
+      <TimeSig>
+        <subtype>324</subtype>
+        <den>4</den>
+        <nom1>5</nom1>
+        </TimeSig>
       <Chord>
         <ticklen>384</ticklen>
+        <Attribute>
+          <idx>8</idx>
+          <subtype>8</subtype>
+          <offset x="0.196899" y="0.0992187"/>
+          </Attribute>
         <Note>
           <pitch>67</pitch>
           </Note>
@@ -255,16 +269,8 @@ p, li { white-space: pre-wrap; }
         <startTick>1920</startTick>
         <endTick>2304</endTick>
         </Slur>
-      <Dynamic>
-        <style>10</style>
-        <data>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
-p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Emmentaler&apos;; font-weight:400; font-style:normal; text-decoration:none;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Times New Roman&apos;; font-style:italic;&quot;&gt;&lt;span style=&quot; font-style:normal;&quot;&gt;dolce&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
-        <offset x="-2.04299" y="6.10479"/>
-        <selected>1</selected>
-        <tick>1920</tick>
-        </Dynamic>
+      <SlurSegment>
+        </SlurSegment>
       <TimeSig>
         <subtype>388</subtype>
         <tick>1920</tick>
@@ -357,6 +363,8 @@ p, li { white-space: pre-wrap; }
         <endVoice>1</endVoice>
         <up>1</up>
         </Slur>
+      <SlurSegment>
+        </SlurSegment>
       <TimeSig>
         <subtype>324</subtype>
         <tick>4224</tick>
@@ -466,6 +474,8 @@ p, li { white-space: pre-wrap; }
         <endVoice>1</endVoice>
         <up>1</up>
         </Slur>
+      <SlurSegment>
+        </SlurSegment>
       <TimeSig>
         <subtype>388</subtype>
         <tick>6144</tick>
@@ -754,6 +764,8 @@ p, li { white-space: pre-wrap; }
         <startTick>13824</startTick>
         <endTick>14208</endTick>
         </Slur>
+      <SlurSegment>
+        </SlurSegment>
       <TimeSig>
         <subtype>324</subtype>
         <tick>12672</tick>
@@ -1866,7 +1878,9 @@ p, li { white-space: pre-wrap; }
         <StemDirection>2</StemDirection>
         <Note>
           <voice>1</voice>
-          <pitch>61</pitch>
+          <pitch>63</pitch>
+          <prefix>2</prefix>
+          <line>8</line>
           </Note>
         </Chord>
       <Chord>
@@ -2717,6 +2731,11 @@ p, li { white-space: pre-wrap; }
     </Staff>
   <Staff id="2">
     <Measure number="1" tick="0">
+      <TimeSig>
+        <subtype>324</subtype>
+        <den>4</den>
+        <nom1>5</nom1>
+        </TimeSig>
       <Rest>
         <ticklen>1920</ticklen>
         <BeamMode>4</BeamMode>
@@ -4060,11 +4079,12 @@ p, li { white-space: pre-wrap; }
           <pitch>46</pitch>
           </Note>
         <Note>
+          <selected>1</selected>
           <pitch>58</pitch>
           </Note>
         </Chord>
       </Measure>
     </Staff>
-  <cursorStaff>0</cursorStaff>
+  <cursorStaff>1</cursorStaff>
   <cursorVoice>0</cursorVoice>
   </museScore>
