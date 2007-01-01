@@ -52,8 +52,8 @@ TimeDialog::TimeDialog(QWidget* parent)
 	sp->addObject(7,   new TimeSig(cs, 8, 6), "6/8");
 	sp->addObject(8,   new TimeSig(cs, 8, 9), "9/8");
 	sp->addObject(9,   new TimeSig(cs, 8, 12), "12/8");
-	sp->addObject(10,  new TimeSig(cs, TSIG_FOUR_FOUR), "4/4");
-	sp->addObject(11,  new TimeSig(cs, TSIG_ALLA_BREVE), "3/4 alla breve");
+	sp->addObject(10,  new TimeSig(cs, TSIG_FOUR_FOUR), "4/4 common time");
+	sp->addObject(11,  new TimeSig(cs, TSIG_ALLA_BREVE), "(2+2)/4 alla breve");
 
       connect(addButton, SIGNAL(clicked()), SLOT(addClicked()));
       }

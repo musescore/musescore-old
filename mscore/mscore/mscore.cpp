@@ -228,8 +228,8 @@ MuseScore::MuseScore()
       mainWindow->setLayout(layout);
       layout->setMargin(0);
       layout->setSpacing(0);
-      tab    = new TabBar(mainWindow);
-      canvas = new Canvas(mainWindow);
+      tab    = new TabBar;
+      canvas = new Canvas;
       layout->addWidget(tab);
       layout->addWidget(canvas);
 

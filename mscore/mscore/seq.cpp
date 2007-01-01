@@ -37,6 +37,24 @@
 #include "layout.h"
 #include "preferences.h"
 
+enum {
+      ME_NOTEOFF    = 0x80,
+      ME_NOTEON     = 0x90,
+      ME_POLYAFTER  = 0xa0,
+      ME_CONTROLLER = 0xb0,
+      ME_PROGRAM    = 0xc0,
+      ME_AFTERTOUCH = 0xd0,
+      ME_PITCHBEND  = 0xe0,
+      ME_SYSEX      = 0xf0,
+      ME_META       = 0xff,
+      ME_SONGPOS    = 0xf2,
+      ME_CLOCK      = 0xf8,
+      ME_START      = 0xfa,
+      ME_CONTINUE   = 0xfb,
+      ME_STOP       = 0xfc,
+      };
+
+
 Seq* seq;
 
 //---------------------------------------------------------
@@ -703,10 +721,10 @@ void Seq::sendMessage(SeqMsg& msg) const
       }
 
 //---------------------------------------------------------
-//   playNote
+//   startNote
 //---------------------------------------------------------
 
-void Seq::playNote(int channel, int pitch, int velo) const
+void Seq::startNote(int channel, int pitch, int velo)
       {
       if (state != STOP)
             return;
@@ -716,6 +734,31 @@ void Seq::playNote(int channel, int pitch, int velo) const
       msg.data2 = pitch;
       msg.data3 = velo;
       sendMessage(msg);
+      Event event;
+      event.type = ME_NOTEON;
+      event.channel = channel;
+      event.val1 = pitch;
+      event.val2 = velo;
+      eventList.append(event);
+      }
+
+//---------------------------------------------------------
+//   stopNotes
+//---------------------------------------------------------
+
+void Seq::stopNotes()
+      {
+      foreach(const Event& event, eventList) {
+            if (event.type == ME_NOTEON) {
+                  SeqMsg msg;
+                  msg.id    = SEQ_PLAY;
+                  msg.data1 = event.type | event.channel;
+                  msg.data2 = event.val1;
+                  msg.data3 = 0;
+                  sendMessage(msg);
+                  }
+            }
+      eventList.clear();
       }
 
 //---------------------------------------------------------

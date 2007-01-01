@@ -92,6 +92,8 @@ class Seq : public QObject {
 
       QTimer* heartBeatTimer;
 
+      QList<Event> eventList;
+
       int toGui(char c) { return write(sigFd, &c, 1); }
       void collectEvents();
       void stopTransport();
@@ -134,7 +136,8 @@ class Seq : public QObject {
       float volume() const      {  return _volume; }
       bool isRealtime() const;
       void sendMessage(SeqMsg&) const;
-      void playNote(int, int, int) const;
+      void startNote(int, int, int);
+      void stopNotes();
       void setController(int, int, int) const;
       void setScore(Score* s);
       Synth* synth() const  { return synti; }

@@ -229,12 +229,13 @@ void Canvas::mousePressEvent(QMouseEvent* ev)
       buttonState = ev->button();
       startMove   = imatrix.map(QPointF(ev->pos()));
 
-      _score->setDragObject(_score->findSelectableElement(startMove));
+      Element* element = _score->findSelectableElement(startMove);
+      _score->setDragObject(element);
 
       if (seq && mscore->playEnabled() && _score->dragObject() && _score->dragObject()->type() == NOTE) {
             Note* note = (Note*)(_score->dragObject());
             Staff* staff = note->staff();
-            seq->playNote(staff->midiChannel(), note->pitch(), 100);
+            seq->startNote(staff->midiChannel(), note->pitch(), 60);
             }
 
       //-----------------------------------------
@@ -273,6 +274,7 @@ void Canvas::mousePressEvent(QMouseEvent* ev)
 
                   if (_score->dragObject()) {
                         ElementType type = _score->dragObject()->type();
+                        _score->dragStaff = 0;  // WS
                         if (type == MEASURE) {
                               _score->dragSystem = (System*)(_score->dragObject()->parent());
                               _score->dragStaff  = getStaff(_score->dragSystem, startMove);
@@ -445,11 +447,7 @@ void Canvas::mouseMoveEvent1(QMouseEvent* ev)
 
 void Canvas::mouseReleaseEvent(QMouseEvent* ev)
       {
-      if (seq && mscore->playEnabled() && _score->dragObject() && _score->dragObject()->type() == NOTE) {
-            Note* note = (Note*)(_score->dragObject());
-            Staff* staff = note->staff();
-            seq->playNote(staff->midiChannel(), note->pitch(), 0);
-            }
+      seq->stopNotes();
       if (state == EDIT)
             return;
       mouseReleaseEvent1(ev);

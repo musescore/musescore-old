@@ -642,7 +642,6 @@ void AlsaAudio::alsaLoop()
       float lbuffer[size];
       float rbuffer[size];
       while (runAlsa == 2) {
-            write(1, ".", 1);
             snd_pcm_sframes_t k = alsa->pcmWait();
             while (k >= int(size)) {
                   alsa->playInit(size);
