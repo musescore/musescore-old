@@ -49,7 +49,6 @@ class ShowNoteWidget;
 class PageListEditor : public QWidget {
       Q_OBJECT;
 
-      Score* cs;
       QStackedWidget* stack;
       QTreeWidget* list;
       ShowElementBase* pagePanel;
@@ -71,9 +70,13 @@ class PageListEditor : public QWidget {
 
       bool searchElement(QTreeWidgetItem* pi, Element* el);
 
+   protected:
+      Score* cs;
+
    private slots:
       void itemChanged(QTreeWidgetItem*, QTreeWidgetItem*);
       void itemExpanded(QTreeWidgetItem*);
+      void layoutScore();
 
    public slots:
       void setElement(Element*);
@@ -354,10 +357,13 @@ class TupletView : public ShowElementBase {
 
    signals:
       void itemClicked(Element*);
+      void scoreChanged();
 
    private slots:
       void numberClicked();
       void elementClicked(QListWidgetItem*);
+      void hasNumberToggled(bool);
+      void hasLineToggled(bool);
 
    public:
       TupletView();

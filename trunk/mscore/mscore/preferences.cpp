@@ -109,8 +109,8 @@ Preferences::Preferences()
       playPanelPos = QPoint(100, 300);
       useAlsaAudio = true;
       useJackAudio = true;
-      // alsaDevice   = "default";
-      alsaDevice   = "hw:0";
+      alsaDevice   = "default";
+      // alsaDevice   = "hw:0";
       alsaSampleRate = 48000;
       alsaPeriodSize = 1024;
       alsaFragments  = 2;
