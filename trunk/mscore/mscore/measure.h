@@ -37,7 +37,7 @@ class Tuplet;
 class Staff;
 class Chord;
 class BarLine;
-class TextElement;
+class Text;
 class ChordRest;
 class Score;
 class Painter;
@@ -118,7 +118,7 @@ class Measure : public Element {
 
       int    _no;             ///< Measure number, counting from zero
       int    _noOffset;       ///< Offset to measure number
-      TextElement* _noText;   ///< Measure number text object
+      Text* _noText;   ///< Measure number text object
 
       double _userStretch;
       bool _lineBreak;        ///< Forced line break
@@ -152,7 +152,7 @@ class Measure : public Element {
       bool   irregular() const         { return _irregular;   }
       void   setIrregular(bool val)    { _irregular = val;    }
       int    noOffset() const          { return _noOffset;    }
-      TextElement* noText() const            { return _noText;      }
+      Text* noText() const            { return _noText;      }
       void   setNoText(const QString& s);
       void   setNo(int n)              { _no = n;             }
       void   setNoOffset(int n)        { _noOffset = n;       }

@@ -27,10 +27,10 @@ class TextPalette;
 extern TextPalette* palette;
 
 //---------------------------------------------------------
-//   TextElement
+//   Text
 //---------------------------------------------------------
 
-class TextElement : public Element {
+class Text : public Element {
       QTextCursor* cursor;
       bool editMode;
 
@@ -40,14 +40,14 @@ class TextElement : public Element {
       QFont font() const;
 
    public:
-      TextElement(Score*);
-      TextElement(Score*, int style);
-      TextElement(const TextElement&);
+      Text(Score*);
+      Text(Score*, int style);
+      Text(const Text&);
 
-      virtual ~TextElement();
-      TextElement &operator=(const TextElement&);
+      virtual ~Text();
+      Text &operator=(const Text&);
 
-      virtual Element* clone() const { return new TextElement(*this); }
+      virtual Element* clone() const { return new Text(*this); }
       virtual ElementType type() const { return TEXT; }
 
 
@@ -79,7 +79,7 @@ class TextElement : public Element {
 //   Lyrics
 //---------------------------------------------------------
 
-class Lyrics : public TextElement {
+class Lyrics : public Text {
    public:
       enum Syllabic { SINGLE, BEGIN, END, MIDDLE };
    private:
@@ -103,7 +103,7 @@ class Lyrics : public TextElement {
 //   Fingering
 //---------------------------------------------------------
 
-class Fingering : public TextElement {
+class Fingering : public Text {
    public:
       Fingering(Score*);
       virtual Element* clone() const { return new Fingering(*this); }
@@ -118,7 +118,7 @@ class Fingering : public TextElement {
 //    long name
 //---------------------------------------------------------
 
-class InstrumentName1 : public TextElement {
+class InstrumentName1 : public Text {
    public:
       InstrumentName1(Score*);
       virtual Element* clone() const { return new InstrumentName1(*this); }
@@ -130,7 +130,7 @@ class InstrumentName1 : public TextElement {
 //    short name, repeated on ervery staff except first
 //---------------------------------------------------------
 
-class InstrumentName2 : public TextElement {
+class InstrumentName2 : public Text {
    public:
       InstrumentName2(Score*);
       virtual Element* clone() const { return new InstrumentName2(*this); }
@@ -141,7 +141,7 @@ class InstrumentName2 : public TextElement {
 //   TempoText
 //---------------------------------------------------------
 
-class TempoText : public TextElement {
+class TempoText : public Text  {
    public:
       TempoText(Score*);
       virtual Element* clone() const { return new TempoText(*this); }

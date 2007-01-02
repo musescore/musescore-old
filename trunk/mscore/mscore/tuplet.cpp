@@ -77,7 +77,7 @@ void Tuplet::layout()
       {
       if (_hasNumber) {
             if (_number == 0) {
-                  _number = new TextElement(score(), TEXT_STYLE_FINGERING);
+                  _number = new Text(score(), TEXT_STYLE_FINGERING);
                   _number->setParent(this);
                   _number->setText(QString("%1").arg(_actualNotes));
                   }
@@ -300,7 +300,7 @@ void Tuplet::read(QDomNode node)
             else if (tag == "actualNotes")
                   _actualNotes = i;
             else if (tag == "Number") {
-                  _number = new TextElement(score());
+                  _number = new Text(score());
                   _number->setParent(this);
                   _number->read(node);
                   }
@@ -315,7 +315,7 @@ void Tuplet::add(Element* e)
       {
       if (e->type() != TEXT)
             return;
-      _number = (TextElement*)e;
+      _number = (Text*)e;
       }
 
 void Tuplet::remove(Element* e)

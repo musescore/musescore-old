@@ -858,7 +858,7 @@ TextView::TextView()
 
 void TextView::setElement(Element* e)
       {
-      TextElement* te = (TextElement*)e;
+      Text* te = (Text*)e;
       ShowElementBase::setElement(e);
       tb.style->clear();
       for (iTextStyle i = textStyles.begin(); i != textStyles.end(); ++i) {

@@ -25,7 +25,7 @@
 
 class SystemList;
 class System;
-class TextElement;
+class Text;
 class Measure;
 class Xml;
 class Score;
@@ -78,8 +78,8 @@ class Page : public Element {
       ScoreLayout* _layout;
       SystemList* _systems;
       int _no;                            // page number
-      TextElement* _pageNo;
-      TextElement* _copyright;
+      Text* _pageNo;
+      Text* _copyright;
       ElementList _elements;
 
    public:
@@ -105,8 +105,8 @@ class Page : public Element {
 
       ElementList* pel()                 { return &_elements; }
       const ElementList* pel() const     { return &_elements; }
-      TextElement* pageNo() const              { return _pageNo;    }
-      TextElement* copyright() const           { return _copyright; }
+      Text* pageNo() const              { return _pageNo;    }
+      Text* copyright() const           { return _copyright; }
 
       virtual void add(Element*);
       virtual void remove(Element* el);

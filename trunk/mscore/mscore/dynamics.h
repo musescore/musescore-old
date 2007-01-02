@@ -36,7 +36,7 @@ struct Dyn {
 //   Dynamic
 //---------------------------------------------------------
 
-class Dynamic : public TextElement {
+class Dynamic : public Text {
 
    public:
       Dynamic(Score*);

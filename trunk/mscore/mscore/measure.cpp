@@ -221,7 +221,7 @@ Measure::Measure(Score* s)
       _endRepeat   = 0;
       _ending      = 0;
       _noOffset    = 0;
-      _noText      = new TextElement(score(), TEXT_STYLE_MEASURE_NUMBER);
+      _noText      = new Text(score(), TEXT_STYLE_MEASURE_NUMBER);
       _noText->setParent(this);
       }
 
@@ -455,7 +455,7 @@ void Measure::write(Xml& xml, int no, int staff) const
             for (ciElement ie = _pel.begin(); ie != _pel.end(); ++ie) {
                   Element* e = *ie;
                   if (e->type() == TEXT) {
-                        TextElement* t = (TextElement*)e;
+                        Text* t = (Text*)e;
                         switch(t->style()) {
                               case TEXT_STYLE_TITLE:
                                     t->write(xml, "work-title");
@@ -622,7 +622,7 @@ void Measure::read(QDomNode node, int idx)
                   segment->add(lyrics);
                   }
             else if (tag == "Text") {
-                  TextElement* t = new TextElement(score());
+                  Text* t = new Text(score());
                   t->setStaff(staff);
                   t->read(node);
                   add(t);
@@ -674,27 +674,27 @@ void Measure::read(QDomNode node, int idx)
             else if (tag == "irregular")
                   _irregular = true;
             else if (tag == "work-title") {
-                  TextElement* text = new TextElement(score(), TEXT_STYLE_TITLE);
+                  Text* text = new Text(score(), TEXT_STYLE_TITLE);
                   text->read(node);
                   add(text);
                   }
             else if (tag == "work-number") {
-                  TextElement* text = new TextElement(score(), TEXT_STYLE_SUBTITLE);
+                  Text* text = new Text(score(), TEXT_STYLE_SUBTITLE);
                   text->read(node);
                   add(text);
                   }
             else if (tag == "creator-composer") {
-                  TextElement* text = new TextElement(score(), TEXT_STYLE_COMPOSER);
+                  Text* text = new Text(score(), TEXT_STYLE_COMPOSER);
                   text->read(node);
                   add(text);
                   }
             else if (tag == "creator-poet") {
-                  TextElement* text = new TextElement(score(), TEXT_STYLE_POET);
+                  Text* text = new Text(score(), TEXT_STYLE_POET);
                   text->read(node);
                   add(text);
                   }
             else if (tag == "creator-translator") {
-                  TextElement* text = new TextElement(score(), TEXT_STYLE_TRANSLATOR);
+                  Text* text = new Text(score(), TEXT_STYLE_TRANSLATOR);
                   text->read(node);
                   add(text);
                   }

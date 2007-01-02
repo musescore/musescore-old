@@ -35,10 +35,10 @@
 TextPalette* palette;
 
 //---------------------------------------------------------
-//   TextElement
+//   Text
 //---------------------------------------------------------
 
-TextElement::TextElement(Score* s)
+Text::Text(Score* s)
    : Element(s)
       {
       textStyle = -1;
@@ -49,7 +49,7 @@ TextElement::TextElement(Score* s)
       cursor->setPosition(0);
       }
 
-TextElement::TextElement(Score* s, int style)
+Text::Text(Score* s, int style)
    : Element(s)
       {
       textStyle = -1;
@@ -60,7 +60,7 @@ TextElement::TextElement(Score* s, int style)
       cursor->setPosition(0);
       }
 
-TextElement::TextElement(const TextElement& e)
+Text::Text(const Text& e)
    : Element(e)
       {
       doc       = e.doc->clone(0);
@@ -70,7 +70,7 @@ TextElement::TextElement(const TextElement& e)
       cursor->setPosition(e.cursor->position());
       }
 
-TextElement::~TextElement()
+Text::~Text()
       {
       delete doc;
       delete cursor;
@@ -80,7 +80,7 @@ TextElement::~TextElement()
 //   bbox
 //---------------------------------------------------------
 
-const QRectF& TextElement::bbox() const
+const QRectF& Text::bbox() const
       {
       _bbox = QRectF(0.0, 0.0, doc->size().width(), doc->size().height());
       return _bbox;
@@ -90,7 +90,7 @@ const QRectF& TextElement::bbox() const
 //   resetMode
 //---------------------------------------------------------
 
-void TextElement::resetMode()
+void Text::resetMode()
       {
       editMode = 0;
       }
@@ -99,7 +99,7 @@ void TextElement::resetMode()
 //   isEmpty
 //---------------------------------------------------------
 
-bool TextElement::isEmpty() const
+bool Text::isEmpty() const
       {
       return doc->isEmpty();
       }
@@ -108,7 +108,7 @@ bool TextElement::isEmpty() const
 //   text
 //---------------------------------------------------------
 
-QString TextElement::getText() const
+QString Text::getText() const
       {
       return doc->toPlainText();
       }
@@ -117,7 +117,7 @@ QString TextElement::getText() const
 //   layout
 //---------------------------------------------------------
 
-void TextElement::layout()
+void Text::layout()
       {
       if (parent() == 0)
             return;
@@ -178,7 +178,7 @@ void TextElement::layout()
 //   setText
 //---------------------------------------------------------
 
-void TextElement::setText(const QString& s)
+void Text::setText(const QString& s)
       {
       doc->clear();
       QTextCharFormat format;
@@ -192,7 +192,7 @@ void TextElement::setText(const QString& s)
 //   setStyle
 //---------------------------------------------------------
 
-void TextElement::setStyle(int n)
+void Text::setStyle(int n)
       {
       if (textStyle != n) {
             textStyle = n;
@@ -202,19 +202,19 @@ void TextElement::setStyle(int n)
       }
 
 //---------------------------------------------------------
-//   TextElement::write
+//   Text::write
 //---------------------------------------------------------
 
-void TextElement::write(Xml& xml) const
+void Text::write(Xml& xml) const
       {
       write(xml, "Text");
       }
 
 //---------------------------------------------------------
-//   TextElement::write
+//   Text::write
 //---------------------------------------------------------
 
-void TextElement::write(Xml& xml, const char* name) const
+void Text::write(Xml& xml, const char* name) const
       {
       if (doc->isEmpty())
             return;
@@ -229,10 +229,10 @@ void TextElement::write(Xml& xml, const char* name) const
       }
 
 //---------------------------------------------------------
-//   TextElement::read
+//   Text::read
 //---------------------------------------------------------
 
-void TextElement::read(QDomNode node)
+void Text::read(QDomNode node)
       {
       for (node = node.firstChild(); !node.isNull(); node = node.nextSibling()) {
             if (!node.isElement())
@@ -256,7 +256,7 @@ void TextElement::read(QDomNode node)
 //   startEdit
 //---------------------------------------------------------
 
-bool TextElement::startEdit(QMatrix&)
+bool Text::startEdit(QMatrix&)
       {
       editMode = true;
       return true;
@@ -266,7 +266,7 @@ bool TextElement::startEdit(QMatrix&)
 //   edit
 //---------------------------------------------------------
 
-bool TextElement::edit(QKeyEvent* ev)
+bool Text::edit(QKeyEvent* ev)
       {
       if (ev->key() == Qt::Key_F2) {
             if (palette == 0)
@@ -274,7 +274,7 @@ bool TextElement::edit(QKeyEvent* ev)
             if (palette->isVisible())
                   palette->hide();
             else {
-                  palette->setTextElement(this);
+                  palette->setText(this);
                   palette->show();
                   mscore->activateWindow();
                   }
@@ -328,7 +328,7 @@ bool TextElement::edit(QKeyEvent* ev)
 //   endEdit
 //---------------------------------------------------------
 
-void TextElement::endEdit()
+void Text::endEdit()
       {
       if (palette)
             palette->hide();
@@ -339,16 +339,16 @@ void TextElement::endEdit()
 //   font
 //---------------------------------------------------------
 
-QFont TextElement::font() const
+QFont Text::font() const
       {
       return textStyles[textStyle].font();
       }
 
 //---------------------------------------------------------
-//   TextElement::draw
+//   Text::draw
 //---------------------------------------------------------
 
-void TextElement::draw1(Painter& p)
+void Text::draw1(Painter& p)
       {
       p.save();
       p.setRenderHint(QPainter::Antialiasing, false);
@@ -370,7 +370,7 @@ void TextElement::draw1(Painter& p)
 //   lineSpacing
 //---------------------------------------------------------
 
-double TextElement::lineSpacing() const
+double Text::lineSpacing() const
       {
       QFontMetrics fm(doc->defaultFont());
       return fm.lineSpacing();
@@ -380,9 +380,9 @@ double TextElement::lineSpacing() const
 //   addSymbol
 //---------------------------------------------------------
 
-void TextElement::addSymbol(int n)
+void Text::addSymbol(int n)
       {
-printf("TextElement: addSymbol(%x)\n", n);
+printf("Text: addSymbol(%x)\n", n);
       QTextCharFormat format;
       format.setFont(symbols[n].font());
       cursor->insertText(QString(symbols[n].code()), format);
@@ -393,7 +393,7 @@ printf("TextElement: addSymbol(%x)\n", n);
 //---------------------------------------------------------
 
 Lyrics::Lyrics(Score* s)
-   : TextElement(s, TEXT_STYLE_LYRIC)
+   : Text(s, TEXT_STYLE_LYRIC)
       {
       _no = 0;
       }
@@ -441,7 +441,7 @@ void Lyrics::read(QDomNode node)
 //---------------------------------------------------------
 
 Fingering::Fingering(Score* s)
-   : TextElement(s, TEXT_STYLE_FINGERING)
+   : Text(s, TEXT_STYLE_FINGERING)
       {
       }
 
@@ -451,7 +451,7 @@ Fingering::Fingering(Score* s)
 
 void Fingering::write(Xml& xml) const
       {
-      TextElement::write(xml, "Fingering");
+      Text::write(xml, "Fingering");
       }
 
 //---------------------------------------------------------
@@ -475,7 +475,7 @@ void Fingering::setSubtype(int n)
 //---------------------------------------------------------
 
 InstrumentName1::InstrumentName1(Score* s)
-   : TextElement(s, TEXT_STYLE_INSTRUMENT_LONG)
+   : Text(s, TEXT_STYLE_INSTRUMENT_LONG)
       {
       }
 
@@ -484,7 +484,7 @@ InstrumentName1::InstrumentName1(Score* s)
 //---------------------------------------------------------
 
 InstrumentName2::InstrumentName2(Score* s)
-   : TextElement(s, TEXT_STYLE_INSTRUMENT_SHORT)
+   : Text(s, TEXT_STYLE_INSTRUMENT_SHORT)
       {
       }
 
@@ -493,7 +493,7 @@ InstrumentName2::InstrumentName2(Score* s)
 //---------------------------------------------------------
 
 TempoText::TempoText(Score* s)
-   : TextElement(s, TEXT_STYLE_TEMPO)
+   : Text(s, TEXT_STYLE_TEMPO)
       {
       }
 

@@ -147,7 +147,7 @@ void Page::layout()
             TEXT_STYLE style = (n & 1) ? TEXT_STYLE_PAGE_NUMBER_ODD : TEXT_STYLE_PAGE_NUMBER_EVEN;
             if (n || ::style->showPageNumberOne) {
                   if (_pageNo == 0) {
-                        _pageNo = new TextElement(score(), style);
+                        _pageNo = new Text(score(), style);
                         _pageNo->setParent(this);
                         }
                   QString txt("%1");
@@ -168,7 +168,7 @@ void Page::layout()
       // add copyright to page
       if (!_score->rights.isEmpty()) {
             if (_copyright == 0) {
-                  _copyright = new TextElement(score(), TEXT_STYLE_COPYRIGHT);
+                  _copyright = new Text(score(), TEXT_STYLE_COPYRIGHT);
                   _copyright->setParent(this);
                   }
             _copyright->setText(_score->rights);
@@ -344,7 +344,7 @@ double PageFormat::height() const
 //         <bottom-margin>56.6929</bottom-margin>
 //         </page-margins>
 //      </page-layout>
-//    
+//
 //    sizes are given in units of 1/10 spatium; this allows
 //    to reuse this code with MusicXml routines
 //---------------------------------------------------------
