@@ -39,7 +39,7 @@
 #include "segment.h"
 #include "xml.h"
 #include "input.h"
-#include "textelement.h"
+#include "text.h"
 #include "note.h"
 #include "chord.h"
 #include "rest.h"

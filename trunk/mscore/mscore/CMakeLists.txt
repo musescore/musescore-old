@@ -161,7 +161,8 @@ add_executable ( mscore
       hook.cpp hook.h
       system.cpp
       tempo.cpp
-      textelement.cpp
+      text.cpp
+      textline.cpp
       textpalette.cpp
       textstyle.cpp
       timedialog.cpp

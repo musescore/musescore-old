@@ -25,7 +25,7 @@
 #include "score.h"
 #include "beam.h"
 #include "tuplet.h"
-#include "textelement.h"
+#include "text.h"
 #include "measure.h"
 #include "painter.h"
 #include "barline.h"

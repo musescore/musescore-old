@@ -1,7 +1,7 @@
 //=============================================================================
 //  MusE Score
 //  Linux Music Score Editor
-//  $Id: textelement.h,v 1.4 2006/03/22 12:04:14 wschweer Exp $
+//  $Id:$
 //
 //  Copyright (C) 2002-2006 Werner Schweer (ws@seh.de)
 //
@@ -18,8 +18,8 @@
 //  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //=============================================================================
 
-#ifndef __TEXTELEMENT_H__
-#define __TEXTELEMENT_H__
+#ifndef __TEXT_H__
+#define __TEXT_H__
 
 #include "element.h"
 

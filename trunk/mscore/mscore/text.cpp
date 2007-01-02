@@ -1,7 +1,7 @@
 //=============================================================================
 //  MuseScore
 //  Linux Music Score Editor
-//  $Id: textelement.cpp,v 1.6 2006/04/05 08:15:12 wschweer Exp $
+//  $Id:$
 //
 //  Copyright (C) 2002-2006 Werner Schweer (ws@seh.de)
 //
@@ -19,7 +19,7 @@
 //=============================================================================
 
 #include "globals.h"
-#include "textelement.h"
+#include "text.h"
 #include "xml.h"
 #include "style.h"
 #include "mscore.h"

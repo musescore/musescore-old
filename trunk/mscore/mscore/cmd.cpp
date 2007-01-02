@@ -34,7 +34,7 @@
 #include "rest.h"
 #include "chord.h"
 #include "segment.h"
-#include "textelement.h"
+#include "text.h"
 #include "sig.h"
 #include "padstate.h"
 #include "staff.h"
