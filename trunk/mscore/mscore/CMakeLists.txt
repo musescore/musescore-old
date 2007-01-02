@@ -64,6 +64,7 @@ QT4_WRAP_UI (ui_headers
       textstyle.ui
       timedialog.ui
       dynamic.ui
+      tuplet.ui
       )
 
 QT4_WRAP_CPP (mocs

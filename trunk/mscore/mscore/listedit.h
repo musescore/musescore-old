@@ -32,6 +32,7 @@
 #include "ui_hairpin.h"
 #include "ui_barline.h"
 #include "ui_dynamic.h"
+#include "ui_tuplet.h"
 
 class ShowElementBase;
 class Element;
@@ -66,6 +67,7 @@ class PageListEditor : public QWidget {
       ShowElementBase* hairpinView;
       ShowElementBase* barLineView;
       ShowElementBase* dynamicView;
+      ShowElementBase* tupletView;
 
       bool searchElement(QTreeWidgetItem* pi, Element* el);
 
@@ -338,6 +340,27 @@ class DynamicView : public ShowElementBase {
 
    public:
       DynamicView();
+      virtual void setElement(Element*);
+      };
+
+//---------------------------------------------------------
+//   TupletView
+//---------------------------------------------------------
+
+class TupletView : public ShowElementBase {
+      Q_OBJECT;
+
+      Ui::TupletBase tb;
+
+   signals:
+      void itemClicked(Element*);
+
+   private slots:
+      void numberClicked();
+      void elementClicked(QListWidgetItem*);
+
+   public:
+      TupletView();
       virtual void setElement(Element*);
       };
 

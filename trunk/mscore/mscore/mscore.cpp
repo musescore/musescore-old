@@ -1854,7 +1854,7 @@ int main(int argc, char* argv[])
                QSocketNotifier::Read,  mscore);
             sn->connect(sn, SIGNAL(activated(int)), mscore, SLOT(midiReceived()));
             }
-
+      mscore->getCanvas()->setFocus(Qt::OtherFocusReason);
       mscore->show();
       return qApp->exec();
       }

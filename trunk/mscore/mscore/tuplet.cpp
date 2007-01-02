@@ -49,7 +49,7 @@ Tuplet::~Tuplet()
       //
       // delete all references
       //
-      for (iChordRest i = elements.begin(); i != elements.end(); ++i) {
+      for (iChordRest i = _elements.begin(); i != _elements.end(); ++i) {
             ChordRest* cr = i->second;
             cr->setTuplet(0);
             }
@@ -61,9 +61,9 @@ Tuplet::~Tuplet()
 
 void Tuplet::remove(ChordRest* a)
       {
-      for (iChordRest i = elements.begin(); i != elements.end(); ++i) {
+      for (iChordRest i = _elements.begin(); i != _elements.end(); ++i) {
             if (i->second == a) {
-                  elements.erase(i);
+                  _elements.erase(i);
                   return;
                   }
             }
@@ -76,9 +76,11 @@ void Tuplet::remove(ChordRest* a)
 void Tuplet::layout()
       {
       if (_hasNumber) {
-            if (_number == 0)
+            if (_number == 0) {
                   _number = new TextElement(score(), TEXT_STYLE_FINGERING);
-            _number->setText(QString("%1").arg(_actualNotes));
+                  _number->setParent(this);
+                  _number->setText(QString("%1").arg(_actualNotes));
+                  }
             }
       else {
             if (_number) {
@@ -91,7 +93,7 @@ void Tuplet::layout()
       qreal l1 = _spatium;          // bracket tip height
       qreal l2 = _spatium * .5;     // bracket distance to note
 
-      if (elements.empty()) {
+      if (_elements.empty()) {
             printf("layout: not tuplet members\n");
             return;
             }
@@ -100,7 +102,7 @@ void Tuplet::layout()
       // find out main direction
       //
       int up = 1;
-      for (iChordRest i = elements.begin(); i != elements.end(); ++i) {
+      for (iChordRest i = _elements.begin(); i != _elements.end(); ++i) {
             ChordRest* cr = i->second;
             if (cr->type() == CHORD)
                   up += (cr->isUp() ? +1 : -1);
@@ -110,11 +112,11 @@ void Tuplet::layout()
       //
       // set all elements to main direction
       //
-      for (iChordRest i = elements.begin(); i != elements.end(); ++i)
+      for (iChordRest i = _elements.begin(); i != _elements.end(); ++i)
             i->second->setUp(up);
 
-      const ChordRest* cr1 = elements.front();
-      const ChordRest* cr2 = elements.back();
+      const ChordRest* cr1 = _elements.front();
+      const ChordRest* cr2 = _elements.back();
       Measure* measure = cr1->measure();
       if (cr1->beam())
             _hasLine = false;
@@ -148,7 +150,7 @@ void Tuplet::layout()
                   p2y = p.y();
                   if (p1y < p2y)
                         p2y = p1y;
-                  else 
+                  else
                         p1y = p2y;
                   }
             }
@@ -179,7 +181,7 @@ void Tuplet::layout()
                   p2y = p.y();
                   if (p1y > p2y)
                         p2y = p1y;
-                  else 
+                  else
                         p1y = p2y;
                   }
             }
@@ -191,9 +193,9 @@ void Tuplet::layout()
 
       // center number
       qreal x3 = p1x + (p2x - p1x) * .5;
-      qreal y3 = p1y + (p2y - p1y) * .5 - (l1 + l2) * (isUp ? 1.0 : -1.0);
-      _number->setPos(QPointF(x3, y3));
+      qreal y3 = p1y + (p2y - p1y) * .5 - _number->bbox().height(); // - (l1 + l2) * (isUp ? 1.0 : -1.0);
       qreal numberWidth = _number->bbox().width();
+      _number->setPos(QPointF(x3 - numberWidth * .5, y3));
 
       if (_hasLine) {
             qreal slope = (p2y - p1y) / (p2x - p1x);
@@ -225,10 +227,10 @@ void Tuplet::layout()
                   bracketR[2] = QPointF(p2x, p2y + l2);
                   }
 
-            setbbox(bracketL.boundingRect() | bracketR.boundingRect() | _number->bbox());
+            setbbox(bracketL.boundingRect() | bracketR.boundingRect() | _number->bbox().translated(_number->pos()));
             }
       else
-            setbbox(_number->bbox());
+            setbbox(_number->bbox().translated(_number->pos()));
       }
 
 //---------------------------------------------------------
@@ -238,8 +240,8 @@ void Tuplet::layout()
 void Tuplet::draw1(Painter& p)
       {
       if (_number) {
-            p.setPen(QPen(Qt::NoPen));
-            p.setBrush(selected() ? preferences.selectColor[0] : Qt::black);
+            // ? p.setPen(QPen(Qt::NoPen));
+            p.setBrush(_number->selected() ? preferences.selectColor[0] : Qt::black);
             _number->draw(p);
             if (_hasLine) {
                   p.setPen(QPen(Qt::black, 5));
@@ -270,7 +272,9 @@ void Tuplet::write(Xml& xml, int id) const
       xml.tag("baseLen", _baseLen);
       xml.tag("normalNotes", _normalNotes);
       xml.tag("actualNotes", _actualNotes);
-      xml.etag("Tuplet");      
+      if (_number)
+            _number->write(xml, "Number");
+      xml.etag("Tuplet");
       }
 
 //---------------------------------------------------------
@@ -295,9 +299,28 @@ void Tuplet::read(QDomNode node)
                   _normalNotes = i;
             else if (tag == "actualNotes")
                   _actualNotes = i;
+            else if (tag == "Number") {
+                  _number = new TextElement(score());
+                  _number->setParent(this);
+                  _number->read(node);
+                  }
             else if (Element::readProperties(node))
                   ;
             else
                   domError(node);
             }
       }
+
+void Tuplet::add(Element* e)
+      {
+      if (e->type() != TEXT)
+            return;
+      _number = (TextElement*)e;
+      }
+
+void Tuplet::remove(Element* e)
+      {
+      if (e == _number)
+            _number = 0;
+      }
+
