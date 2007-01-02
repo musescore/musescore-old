@@ -143,6 +143,7 @@ PageListEditor::PageListEditor(Score* s)
       hairpinView  = new HairpinView;
       barLineView  = new BarLineView;
       dynamicView  = new DynamicView;
+      tupletView   = new TupletView;
 
       stack->addWidget(pagePanel);
       stack->addWidget(systemPanel);
@@ -159,6 +160,7 @@ PageListEditor::PageListEditor(Score* s)
       stack->addWidget(hairpinView);
       stack->addWidget(barLineView);
       stack->addWidget(dynamicView);
+      stack->addWidget(tupletView);
 
       connect(pagePanel,    SIGNAL(elementChanged(Element*)), SLOT(setElement(Element*)));
       connect(systemPanel,  SIGNAL(elementChanged(Element*)), SLOT(setElement(Element*)));
@@ -175,6 +177,7 @@ PageListEditor::PageListEditor(Score* s)
       connect(hairpinView,  SIGNAL(elementChanged(Element*)), SLOT(setElement(Element*)));
       connect(barLineView,  SIGNAL(elementChanged(Element*)), SLOT(setElement(Element*)));
       connect(dynamicView,  SIGNAL(elementChanged(Element*)), SLOT(setElement(Element*)));
+      connect(tupletView,   SIGNAL(elementChanged(Element*)), SLOT(setElement(Element*)));
 
       connect(list, SIGNAL(currentItemChanged(QTreeWidgetItem*, QTreeWidgetItem*)),
          SLOT(itemChanged(QTreeWidgetItem*,QTreeWidgetItem*)));
@@ -272,8 +275,11 @@ void PageListEditor::updateList()
                         for (iBeam ibl = bl->begin(); ibl != bl->end(); ++ibl) {
 					new ElementItem(mi, *ibl);
                               }
-                        foreach(Tuplet* tuplet, *(measure->tuplets()))
-					new ElementItem(mi, tuplet);
+                        foreach(Tuplet* tuplet, *(measure->tuplets())) {
+					ElementItem* item = new ElementItem(mi, tuplet);
+                              if (tuplet->number())
+                                    new ElementItem(item, tuplet->number());
+                              }
                         }
                   }
             }
@@ -353,19 +359,20 @@ void PageListEditor::itemChanged(QTreeWidgetItem* i, QTreeWidgetItem*)
       setWindowTitle(QString("MuseScore: List Edit: ") + el->name());
       ShowElementBase* ew = 0;
       switch (el->type()) {
-            case PAGE:    ew = pagePanel;    break;
-            case SYSTEM:  ew = systemPanel;  break;
-            case MEASURE: ew = measurePanel; break;
-            case CHORD:   ew = chordPanel;   break;
-            case NOTE:    ew = notePanel;    break;
-            case REST:    ew = restPanel;    break;
-            case CLEF:    ew = clefPanel;    break;
-            case TIMESIG: ew = timesigPanel; break;
-            case KEYSIG:  ew = keysigPanel;  break;
-            case SEGMENT: ew = segmentView;  break;
-            case HAIRPIN: ew = hairpinView;  break;
-            case BAR_LINE: ew = barLineView; break;
-            case DYNAMIC:  ew = dynamicView; break;
+            case PAGE:     ew = pagePanel;    break;
+            case SYSTEM:   ew = systemPanel;  break;
+            case MEASURE:  ew = measurePanel; break;
+            case CHORD:    ew = chordPanel;   break;
+            case NOTE:     ew = notePanel;    break;
+            case REST:     ew = restPanel;    break;
+            case CLEF:     ew = clefPanel;    break;
+            case TIMESIG:  ew = timesigPanel; break;
+            case KEYSIG:   ew = keysigPanel;  break;
+            case SEGMENT:  ew = segmentView;  break;
+            case HAIRPIN:  ew = hairpinView;  break;
+            case BAR_LINE: ew = barLineView;  break;
+            case DYNAMIC:  ew = dynamicView;  break;
+            case TUPLET:   ew = tupletView;   break;
             case FINGERING:
             case TEXT:
                   ew = textView;
@@ -950,6 +957,64 @@ void DynamicView::setElement(Element* e)
 
       ShowElementBase::setElement(e);
       bl.subType->setValue(dynamic->subtype());
+      }
+
+//---------------------------------------------------------
+//   TupletView
+//---------------------------------------------------------
+
+TupletView::TupletView()
+   : ShowElementBase()
+      {
+      QWidget* tw = new QWidget;
+      tb.setupUi(tw);
+      layout->addWidget(tw);
+      layout->addStretch(10);
+
+      connect(tb.number, SIGNAL(clicked()), SLOT(numberClicked()));
+      connect(tb.elements, SIGNAL(itemClicked(QListWidgetItem*)), SLOT(elementClicked(QListWidgetItem*)));
+      }
+
+//---------------------------------------------------------
+//   numberClicked
+//---------------------------------------------------------
+
+void TupletView::numberClicked()
+      {
+      emit elementChanged(((Tuplet*)element())->number());
+      }
+
+//---------------------------------------------------------
+//   elementClicked
+//---------------------------------------------------------
+
+void TupletView::elementClicked(QListWidgetItem* item)
+      {
+      Element* e = (Element*)item->data(Qt::UserRole).value<void*>();
+      emit elementChanged(e);
+      }
+
+//---------------------------------------------------------
+//   setElement
+//---------------------------------------------------------
+
+void TupletView::setElement(Element* e)
+      {
+      Tuplet* tuplet = (Tuplet*)e;
+      tb.hasNumber->setChecked(tuplet->hasNumber());
+      tb.hasLine->setChecked(tuplet->hasLine());
+      tb.baseLen->setValue(tuplet->baseLen());
+      tb.normalNotes->setValue(tuplet->normalNotes());
+      tb.actualNotes->setValue(tuplet->actualNotes());
+      tb.number->setEnabled(tuplet->number());
+      ShowElementBase::setElement(e);
+      ChordRestList* el = tuplet->elements();
+      for (iChordRest i = el->begin(); i != el->end(); ++i) {
+            QListWidgetItem* item = new QListWidgetItem(tb.elements);
+            item->setText(i->second->name());
+            void* p = (void*) i->second;
+            item->setData(Qt::UserRole, QVariant::fromValue<void*>(p));
+            }
       }
 
 //---------------------------------------------------------

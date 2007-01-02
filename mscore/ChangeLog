@@ -1,3 +1,6 @@
+2.1.7 (ws)
+      - make Tuplet numbers draggable
+      - extent context view of Tuplet()
 31.12 (ws)
       - now send proper note off events when entering notes
 31.12 (lv)

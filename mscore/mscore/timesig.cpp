@@ -190,13 +190,16 @@ void TimeSig::read(QDomNode node)
             case 9:   setSubtype(TSIG_FOUR_FOUR); break;
             case 10:  setSubtype(TSIG_ALLA_BREVE); break;
             case 11:  setSig(8, 9); break;
+
             case TSIG_FOUR_FOUR:    // special cases
             case TSIG_ALLA_BREVE:
+                  layout();
                   break;
             default:
                   setSig(n, z1, z2, z3, z4);
                   break;
             }
+      layout();
       }
 
 //---------------------------------------------------------

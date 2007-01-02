@@ -436,6 +436,10 @@ Element* Measure::findSelectableElement(QPointF p) const
             }
       if (_noText->contains(p))
             return _noText;
+      foreach (const Tuplet* tuplet, _tuplets) {
+            if (tuplet->number() && tuplet->number()->contains(p))
+                  return tuplet->number();
+            }
       return 0;
       }
 

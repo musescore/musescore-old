@@ -40,7 +40,7 @@ class TextElement;
 //------------------------------------------------------------------------
 
 class Tuplet : public Element {
-      ChordRestList elements;
+      ChordRestList _elements;
       bool _hasNumber;
       bool _hasLine;
       int _baseLen;     // tick len of a "normal note"
@@ -56,6 +56,8 @@ class Tuplet : public Element {
       ~Tuplet();
       virtual Element* clone() const { return new Tuplet(*this); }
       virtual ElementType type() const { return TUPLET; }
+      virtual void add(Element*);
+      virtual void remove(Element*);
 
       bool hasNumber() const       { return _hasNumber;   }
       bool hasLine() const         { return _hasLine;     }
@@ -68,10 +70,12 @@ class Tuplet : public Element {
       int normalNotes() const      { return _normalNotes; }
       int actualNotes() const      { return _actualNotes; }
       int noteLen() const { return _baseLen * _normalNotes / _actualNotes; }
+      ChordRestList* elements()    { return &_elements; }
 
       virtual void layout();
-      void add(ChordRest* a)      { elements.add(a);   }
+      void add(ChordRest* a)      { _elements.add(a);   }
       void remove(ChordRest* a);
+      TextElement* number() const { return _number; }
 
       virtual void read(QDomNode);
       void write(Xml&, int) const;
