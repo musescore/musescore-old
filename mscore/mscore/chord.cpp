@@ -29,7 +29,7 @@
 #include "style.h"
 #include "painter.h"
 #include "segment.h"
-#include "textelement.h"
+#include "text.h"
 #include "measure.h"
 #include "system.h"
 #include "tuplet.h"
@@ -349,7 +349,7 @@ void Chord::layoutStem()
       _stem->setPos(npos);
 
       //-----------------------------------------
-      //  process hook (Fä     //-----------------------------------------
+      //  process hook (Fä    //-----------------------------------------
 
       if (hookIdx) {
             if (!up)

@@ -32,7 +32,7 @@
 #include "slur.h"
 #include "navigate.h"
 #include "measure.h"
-#include "textelement.h"
+#include "text.h"
 #include "sig.h"
 #include "clef.h"
 #include "globals.h"

@@ -20,7 +20,7 @@
 
 #include "page.h"
 #include "score.h"
-#include "textelement.h"
+#include "text.h"
 #include "xml.h"
 #include "mscore.h"
 #include "painter.h"

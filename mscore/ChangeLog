@@ -1,4 +1,6 @@
 2.1.7 (ws)
+      - rename TextSegment() to Text(); add a more lightweight TextLine()
+        class which can hold at most one text line.
       - make Tuplet numbers draggable
       - extent context view of Tuplet()
 31.12 (ws)

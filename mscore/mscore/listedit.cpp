@@ -28,7 +28,7 @@
 #include "note.h"
 #include "chord.h"
 #include "measure.h"
-#include "textelement.h"
+#include "text.h"
 #include "textstyle.h"
 #include "hairpin.h"
 #include "beam.h"

@@ -35,7 +35,7 @@
 #include "select.h"
 #include "sig.h"
 #include "utils.h"
-#include "textelement.h"
+#include "text.h"
 #include "segment.h"
 #include "input.h"
 #include "measure.h"

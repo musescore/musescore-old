@@ -32,7 +32,7 @@
 #include "rest.h"
 #include "segment.h"
 #include "utils.h"
-#include "textelement.h"
+#include "text.h"
 #include "slur.h"
 #include "staff.h"
 #include "measure.h"
@@ -1088,7 +1088,7 @@ bool MidiFile::readTrack(bool mergeChannels)
       int len       = readLong();       // len
       int endPos    = curPos + len;
       status        = -1;
-      sstatus       = -1;  // running status, der nicht bei meta oder sysex zurüetzt wird
+      sstatus       = -1;  // running status, der nicht bei meta oder sysex zurützt wird
       lastchan      = -1;
       lastport      = -1;
       channelprefix = -1;
@@ -1549,7 +1549,7 @@ MidiEvent* MidiFile::readEvent(MidiTrack* track)
                               delete[] buffer;
                               delete event;
                               }
-                              return (MidiEvent*)-1;  // DEBUG: eigentlich nän Event lesen
+                              return (MidiEvent*)-1;  // DEBUG: eigentlich nä Event lesen
                         case META_TRACK_COMMENT:
                               {
                               QString s((char*)buffer);
@@ -1557,7 +1557,7 @@ MidiEvent* MidiFile::readEvent(MidiTrack* track)
                               delete[] buffer;
                               delete event;
                               }
-                              return (MidiEvent*)-1;  // DEBUG: eigentlich nän Event lesen
+                              return (MidiEvent*)-1;  // DEBUG: eigentlich nä Event lesen
                         case META_CHANNEL_PREFIX:
                               if (len == 1) {
                                     channelprefix = buffer[0];
@@ -1584,7 +1584,7 @@ printf("Port Change %d\n", buffer[0]);
                               delete[] buffer;
                               delete event;
                               }
-                              return (MidiEvent*)-1;  // DEBUG: eigentlich nän Event lesen
+                              return (MidiEvent*)-1;  // DEBUG: eigentlich nä Event lesen
                         case META_TIME_SIGNATURE:
                               {
                               timesig_z = buffer[0];
@@ -1596,7 +1596,7 @@ printf("Port Change %d\n", buffer[0]);
                               delete event;
                               delete[] buffer;
                               }
-                              return (MidiEvent*)-1;  // DEBUG: eigentlich nän Event lesen
+                              return (MidiEvent*)-1;  // DEBUG: eigentlich nä Event lesen
                         case META_KEY_SIGNATURE:
                               {
                               (*cs->keymap)[t] = (signed char)(buffer[0]);
@@ -1605,12 +1605,12 @@ printf("Port Change %d\n", buffer[0]);
                               delete event;
                               delete[] buffer;
                               }
-                              return (MidiEvent*)-1;  // DEBUG: eigentlich nän Event lesen
+                              return (MidiEvent*)-1;  // DEBUG: eigentlich nä Event lesen
                         case META_MARKER:
 //                              song->addMarker(QString((const char*)(buffer)), event->posTick(), false);
                               delete event;
                               delete[] buffer;
-                              return (MidiEvent*)-1;  // DEBUG: eigentlich nän Event lesen
+                              return (MidiEvent*)-1;  // DEBUG: eigentlich nä Event lesen
                         case META_TITLE:
                               title = (char*)buffer;
                               delete event;
@@ -1945,11 +1945,11 @@ QString MidiTrack::instrName(int type) const
 //      Instrumentennamen verwendet werden?
 //    - Instrumente feststellen
 //          - Name (kommentar?)
-//          - Schlü//          - Split System?
+//          - Schlü/          - Split System?
 //    * Takte feststellen
 //    - Schlagzeugtrack markieren
 //    - Quantisierung festlegen:
-//       - küe Note feststellen
+//       - kü Note feststellen
 //    - songtitle
 
 // process:

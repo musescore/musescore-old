@@ -31,7 +31,7 @@
 #include "key.h"
 #include "xml.h"
 #include "clef.h"
-#include "textelement.h"
+#include "text.h"
 #include "navigate.h"
 #include "select.h"
 #include "staff.h"

@@ -40,7 +40,7 @@
 #include "system.h"
 #include "undo.h"
 #include "hairpin.h"
-#include "textelement.h"
+#include "text.h"
 #include "select.h"
 #include "staff.h"
 #include "part.h"

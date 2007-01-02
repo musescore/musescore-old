@@ -25,7 +25,7 @@
 #include "xml.h"
 #include "preferences.h"
 #include "style.h"
-#include "textelement.h"
+#include "text.h"
 #include "element.h"
 
 //---------------------------------------------------------

@@ -21,7 +21,7 @@
 #ifndef __DYNAMICS_H__
 #define __DYNAMICS_H__
 
-#include "textelement.h"
+#include "text.h"
 
 struct Dyn {
       int textStyle;

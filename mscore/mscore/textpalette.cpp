@@ -20,7 +20,7 @@
 
 #include "textpalette.h"
 #include "icons.h"
-#include "textelement.h"
+#include "text.h"
 #include "sym.h"
 
 //---------------------------------------------------------

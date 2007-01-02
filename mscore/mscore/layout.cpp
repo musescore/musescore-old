@@ -25,7 +25,7 @@
 #include "score.h"
 #include "globals.h"
 #include "segment.h"
-#include "textelement.h"
+#include "text.h"
 #include "staff.h"
 #include "style.h"
 #include "layout.h"
