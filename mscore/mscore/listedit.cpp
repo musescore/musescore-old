@@ -178,6 +178,7 @@ PageListEditor::PageListEditor(Score* s)
       connect(barLineView,  SIGNAL(elementChanged(Element*)), SLOT(setElement(Element*)));
       connect(dynamicView,  SIGNAL(elementChanged(Element*)), SLOT(setElement(Element*)));
       connect(tupletView,   SIGNAL(elementChanged(Element*)), SLOT(setElement(Element*)));
+      connect(tupletView,   SIGNAL(scoreChanged()), SLOT(layoutScore()));
 
       connect(list, SIGNAL(currentItemChanged(QTreeWidgetItem*, QTreeWidgetItem*)),
          SLOT(itemChanged(QTreeWidgetItem*,QTreeWidgetItem*)));
@@ -185,6 +186,15 @@ PageListEditor::PageListEditor(Score* s)
       connect(list, SIGNAL(itemCollapsed(QTreeWidgetItem*)), SLOT(itemExpanded(QTreeWidgetItem*)));
       list->resizeColumnToContents(0);
       resize(900, 300);
+      }
+
+//---------------------------------------------------------
+//   layoutScore
+//---------------------------------------------------------
+
+void PageListEditor::layoutScore()
+      {
+      cs->layout();
       }
 
 //---------------------------------------------------------
@@ -973,6 +983,30 @@ TupletView::TupletView()
 
       connect(tb.number, SIGNAL(clicked()), SLOT(numberClicked()));
       connect(tb.elements, SIGNAL(itemClicked(QListWidgetItem*)), SLOT(elementClicked(QListWidgetItem*)));
+      connect(tb.hasNumber, SIGNAL(toggled(bool)), SLOT(hasNumberToggled(bool)));
+      connect(tb.hasLine, SIGNAL(toggled(bool)), SLOT(hasLineToggled(bool)));
+      }
+
+//---------------------------------------------------------
+//   hasNumberToggled
+//---------------------------------------------------------
+
+void TupletView::hasNumberToggled(bool val)
+      {
+      Tuplet* tuplet = (Tuplet*)element();
+      tuplet->setHasNumber(val);
+      emit scoreChanged();
+      }
+
+//---------------------------------------------------------
+//   hasLineToggled
+//---------------------------------------------------------
+
+void TupletView::hasLineToggled(bool val)
+      {
+      Tuplet* tuplet = (Tuplet*)element();
+      tuplet->setHasLine(val);
+      emit scoreChanged();
       }
 
 //---------------------------------------------------------
@@ -1000,6 +1034,7 @@ void TupletView::elementClicked(QListWidgetItem* item)
 
 void TupletView::setElement(Element* e)
       {
+      ShowElementBase::setElement(e);
       Tuplet* tuplet = (Tuplet*)e;
       tb.hasNumber->setChecked(tuplet->hasNumber());
       tb.hasLine->setChecked(tuplet->hasLine());
@@ -1007,7 +1042,6 @@ void TupletView::setElement(Element* e)
       tb.normalNotes->setValue(tuplet->normalNotes());
       tb.actualNotes->setValue(tuplet->actualNotes());
       tb.number->setEnabled(tuplet->number());
-      ShowElementBase::setElement(e);
       ChordRestList* el = tuplet->elements();
       for (iChordRest i = el->begin(); i != el->end(); ++i) {
             QListWidgetItem* item = new QListWidgetItem(tb.elements);
