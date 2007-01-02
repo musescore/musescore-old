@@ -23,7 +23,7 @@
 
 #include "ui_textpalette.h"
 
-class TextElement;
+class Text;
 
 //---------------------------------------------------------
 //   TextPalette
@@ -32,14 +32,14 @@ class TextElement;
 class TextPalette : public QWidget, public Ui::TextPaletteBase {
       Q_OBJECT
 
-      TextElement* _textElement;
+      Text* _textElement;
 
    private slots:
       void symbolClicked(int);
 
    public:
       TextPalette(QWidget* parent);
-      void setTextElement(TextElement* te) { _textElement = te; }
+      void setText(Text* te) { _textElement = te; }
       void setFontFamily(const QString& s);
       void setBold(bool);
       void setItalic(bool);

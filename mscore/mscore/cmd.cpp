@@ -436,7 +436,7 @@ void Score::cmdAddText(int style)
             }
       Measure* measure = ml->front();
 
-      TextElement* s = new TextElement(this, style);
+      Text* s = new Text(this, style);
       s->setText(textStyles[style].name);
 
       startCmd();

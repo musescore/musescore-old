@@ -645,7 +645,7 @@ bool ExportMidi::saver()
                   ElementList* el  = measure->pel();
                   for (iElement ie = el->begin(); ie != el->end(); ++ie) {
                         if ((*ie)->type() == TEXT) {
-                              TextElement* text = (TextElement*)(*ie);
+                              Text* text = (Text*)(*ie);
                               const char* txt = text->getText().toLatin1().data();
                               int len = strlen(txt) + 1;
                               switch (text->style()) {
@@ -1088,7 +1088,7 @@ bool MidiFile::readTrack(bool mergeChannels)
       int len       = readLong();       // len
       int endPos    = curPos + len;
       status        = -1;
-      sstatus       = -1;  // running status, der nicht bei meta oder sysex zurüsetzt wird
+      sstatus       = -1;  // running status, der nicht bei meta oder sysex zurüetzt wird
       lastchan      = -1;
       lastport      = -1;
       channelprefix = -1;
@@ -1549,7 +1549,7 @@ MidiEvent* MidiFile::readEvent(MidiTrack* track)
                               delete[] buffer;
                               delete event;
                               }
-                              return (MidiEvent*)-1;  // DEBUG: eigentlich näen Event lesen
+                              return (MidiEvent*)-1;  // DEBUG: eigentlich nän Event lesen
                         case META_TRACK_COMMENT:
                               {
                               QString s((char*)buffer);
@@ -1557,7 +1557,7 @@ MidiEvent* MidiFile::readEvent(MidiTrack* track)
                               delete[] buffer;
                               delete event;
                               }
-                              return (MidiEvent*)-1;  // DEBUG: eigentlich näen Event lesen
+                              return (MidiEvent*)-1;  // DEBUG: eigentlich nän Event lesen
                         case META_CHANNEL_PREFIX:
                               if (len == 1) {
                                     channelprefix = buffer[0];
@@ -1584,7 +1584,7 @@ printf("Port Change %d\n", buffer[0]);
                               delete[] buffer;
                               delete event;
                               }
-                              return (MidiEvent*)-1;  // DEBUG: eigentlich näen Event lesen
+                              return (MidiEvent*)-1;  // DEBUG: eigentlich nän Event lesen
                         case META_TIME_SIGNATURE:
                               {
                               timesig_z = buffer[0];
@@ -1596,7 +1596,7 @@ printf("Port Change %d\n", buffer[0]);
                               delete event;
                               delete[] buffer;
                               }
-                              return (MidiEvent*)-1;  // DEBUG: eigentlich näen Event lesen
+                              return (MidiEvent*)-1;  // DEBUG: eigentlich nän Event lesen
                         case META_KEY_SIGNATURE:
                               {
                               (*cs->keymap)[t] = (signed char)(buffer[0]);
@@ -1605,12 +1605,12 @@ printf("Port Change %d\n", buffer[0]);
                               delete event;
                               delete[] buffer;
                               }
-                              return (MidiEvent*)-1;  // DEBUG: eigentlich näen Event lesen
+                              return (MidiEvent*)-1;  // DEBUG: eigentlich nän Event lesen
                         case META_MARKER:
 //                              song->addMarker(QString((const char*)(buffer)), event->posTick(), false);
                               delete event;
                               delete[] buffer;
-                              return (MidiEvent*)-1;  // DEBUG: eigentlich näen Event lesen
+                              return (MidiEvent*)-1;  // DEBUG: eigentlich nän Event lesen
                         case META_TITLE:
                               title = (char*)buffer;
                               delete event;
@@ -1945,12 +1945,11 @@ QString MidiTrack::instrName(int type) const
 //      Instrumentennamen verwendet werden?
 //    - Instrumente feststellen
 //          - Name (kommentar?)
-//          - Schlü
-//          - Split System?
+//          - Schlü//          - Split System?
 //    * Takte feststellen
 //    - Schlagzeugtrack markieren
 //    - Quantisierung festlegen:
-//       - küte Note feststellen
+//       - küe Note feststellen
 //    - songtitle
 
 // process:
@@ -2160,27 +2159,27 @@ void Score::convertMidi(MidiFile* mf)
       if (measure == 0)
             return;
       if (!mf->title.isEmpty()) {
-            TextElement* text = new TextElement(this, TEXT_STYLE_TITLE);
+            Text* text = new Text(this, TEXT_STYLE_TITLE);
             text->setText(mf->title);
             measure->add(text);
             }
       if (!mf->subTitle.isEmpty()) {
-            TextElement* text = new TextElement(this, TEXT_STYLE_SUBTITLE);
+            Text* text = new Text(this, TEXT_STYLE_SUBTITLE);
             text->setText(mf->subTitle);
             measure->add(text);
             }
       if (!mf->composer.isEmpty()) {
-            TextElement* text = new TextElement(this, TEXT_STYLE_COMPOSER);
+            Text* text = new Text(this, TEXT_STYLE_COMPOSER);
             text->setText(mf->composer);
             measure->add(text);
             }
       if (!mf->translator.isEmpty()) {
-            TextElement* text = new TextElement(this, TEXT_STYLE_TRANSLATOR);
+            Text* text = new Text(this, TEXT_STYLE_TRANSLATOR);
             text->setText(mf->translator);
             measure->add(text);
             }
       if (!mf->poet.isEmpty()) {
-            TextElement* text = new TextElement(this, TEXT_STYLE_POET);
+            Text* text = new Text(this, TEXT_STYLE_POET);
             text->setText(mf->poet);
             measure->add(text);
             }

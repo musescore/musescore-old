@@ -156,7 +156,7 @@ class ExportMusicXml : public SaveFile {
       ExportMusicXml(Score* s) { score = s; tick = 0; }
       virtual bool saver();
       void moveToTick(int t);
-      void words(TextElement* text, int staff);
+      void words(Text* text, int staff);
       void hairpin(Hairpin* hp, int staff, int tick);
       void dynamic(Dynamic* dyn, int staff);
       void symbol(Symbol * sym, int staff);
@@ -381,7 +381,7 @@ void DirectionsHandler::handleElement(ExportMusicXml* exp, Element* el, int ssta
                                     exp->symbol((Symbol *) dir, sstaff);
                                     break;
                               case TEXT:
-                                    exp->words((TextElement*) dir, sstaff);
+                                    exp->words((Text*) dir, sstaff);
                                     break;
                               case DYNAMIC:
                                     exp->dynamic((Dynamic*) dir, sstaff);
@@ -415,7 +415,7 @@ void DirectionsHandler::handleElements(ExportMusicXml* exp, Staff* staff, int ms
                                     exp->symbol((Symbol *) dir, sstaff);
                                     break;
                               case TEXT:
-                                    exp->words((TextElement*) dir, sstaff);
+                                    exp->words((Text*) dir, sstaff);
                                     break;
                               case DYNAMIC:
                                     exp->dynamic((Dynamic*) dir, sstaff);
@@ -810,7 +810,7 @@ bool ExportMusicXml::saver()
       ElementList* el = measure->pel();
       for (iElement ie = el->begin(); ie != el->end(); ++ie) {
             if ((*ie)->type() == TEXT) {
-                  TextElement* text = (TextElement*)(*ie);
+                  Text* text = (Text*)(*ie);
                   switch (text->style()) {
                         case TEXT_STYLE_TITLE:
                               xml.tag("work-title", text->getText());
@@ -826,7 +826,7 @@ bool ExportMusicXml::saver()
       xml.stag("identification");
       for (iElement ie = el->begin(); ie != el->end(); ++ie) {
             if ((*ie)->type() == TEXT) {
-                  TextElement* text = (TextElement*)(*ie);
+                  Text* text = (Text*)(*ie);
                   switch (text->style()) {
                         case TEXT_STYLE_COMPOSER:
                               xml.tag("creator", "type=\"composer\"", text->getText());
@@ -1403,7 +1403,7 @@ static void directionETag(Xml& xml, int staff, int offs = 0)
 //   words
 //---------------------------------------------------------
 
-void ExportMusicXml::words(TextElement* text, int staff)
+void ExportMusicXml::words(Text* text, int staff)
       {
       directionTag(xml, attr, text);
       xml.tag("words", text->getText());

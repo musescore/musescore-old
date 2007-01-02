@@ -26,7 +26,7 @@
 #include "element.h"
 
 class Painter;
-class TextElement;
+class Text;
 
 //------------------------------------------------------------------------
 //   Tuplet
@@ -47,7 +47,7 @@ class Tuplet : public Element {
       int _normalNotes;
       int _actualNotes;
 
-      TextElement* _number;
+      Text* _number;
       QPolygonF bracketL;
       QPolygonF bracketR;
 
@@ -75,7 +75,7 @@ class Tuplet : public Element {
       virtual void layout();
       void add(ChordRest* a)      { _elements.add(a);   }
       void remove(ChordRest* a);
-      TextElement* number() const { return _number; }
+      Text* number() const { return _number; }
 
       virtual void read(QDomNode);
       void write(Xml&, int) const;

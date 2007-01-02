@@ -557,7 +557,7 @@ void System::add(Element* el)
 // printf("System::add: %s staff %d\n", el->name(), el->staffIdx());
       SysStaff* staff = _staves[el->staffIdx()];
       if (el->type() == INSTRUMENT_NAME1 || el->type() == INSTRUMENT_NAME2)
-            staff->instrumentName = (TextElement*)el;
+            staff->instrumentName = (Text*)el;
       else if (el->type() == BRACKET) {
             staff->bracket = (Bracket*)el;
             staff->bracket->setParent(this);

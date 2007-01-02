@@ -75,25 +75,25 @@ Dyn dynList[] = {
 //---------------------------------------------------------
 
 Dynamic::Dynamic(Score* s)
-   : TextElement(s)
+   : Text(s)
       {
       }
 
 Dynamic::Dynamic(Score* s, int st)
-   : TextElement(s)
+   : Text(s)
       {
       setSubtype(st);
       }
 
 Dynamic::Dynamic(Score* s, const QString& t)
-   : TextElement(s)
+   : Text(s)
       {
       setSubtype(0);
       setText(t);
       }
 
 Dynamic::Dynamic(const Dynamic& d)
-   : TextElement(d)
+   : Text(d)
       {
       setSubtype(subtype());
       }
@@ -198,7 +198,7 @@ const QString Dynamic::subtypeName() const
 
 //---------------------------------------------------------
 //   layout
-//    override TextElement()->layout()
+//    override Text()->layout()
 //---------------------------------------------------------
 
 void Dynamic::layout()

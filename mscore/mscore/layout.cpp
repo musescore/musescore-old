@@ -291,7 +291,7 @@ double Page::addMeasure(Measure* m, double y)
 
             el->layout();
             if (el->type() == TEXT) {
-                  int style = ((TextElement*)el)->style();
+                  int style = ((Text*)el)->style();
                   if (style == TEXT_STYLE_TITLE
                      || style == TEXT_STYLE_SUBTITLE
                      || style == TEXT_STYLE_COMPOSER

@@ -34,7 +34,7 @@ class SStaff;
 class BarLine;
 class Clef;
 class Page;
-class TextElement;
+class Text;
 class Painter;
 class MeasureList;
 class Bracket;
@@ -55,7 +55,7 @@ class SysStaff {
       int idx;
       Bracket* bracket;
       SStaff*  sstaff;
-      TextElement* instrumentName;
+      Text* instrumentName;
 
       const QRectF& bbox() const      { return _bbox; }
       void setbbox(const QRectF& r)   { _bbox = r; }
