@@ -1,3 +1,5 @@
+6.1.7 (lv)
+      - MusicXML import/export of (some) note attributes
 2.1.7 (ws)
       - rename TextSegment() to Text(); add a more lightweight TextLine()
         class which can hold at most one text line.
