@@ -118,6 +118,32 @@ class Notations {
       };
 
 //---------------------------------------------------------
+//   articulations -- prints <articulations> tag when necessary
+//---------------------------------------------------------
+
+class Articulations {
+      bool articulationsPrinted;
+
+   public:
+      Articulations() { articulationsPrinted = false; }
+      void tag(Xml& xml);
+      void etag(Xml& xml);
+      };
+
+//---------------------------------------------------------
+//   ornaments -- prints <ornaments> tag when necessary
+//---------------------------------------------------------
+
+class Ornaments {
+      bool ornamentsPrinted;
+
+   public:
+      Ornaments() { ornamentsPrinted = false; }
+      void tag(Xml& xml);
+      void etag(Xml& xml);
+      };
+
+//---------------------------------------------------------
 //   slur handler -- prints <slur> tags
 //---------------------------------------------------------
 
@@ -182,6 +208,50 @@ void Notations::etag(Xml& xml)
       if (notationsPrinted)
             xml.etag("notations");
       notationsPrinted = false;
+      }
+
+//---------------------------------------------------------
+//   tag
+//---------------------------------------------------------
+
+void Articulations::tag(Xml& xml)
+      {
+      if (!articulationsPrinted)
+            xml.stag("articulations");
+      articulationsPrinted = true;
+      }
+
+//---------------------------------------------------------
+//   etag
+//---------------------------------------------------------
+
+void Articulations::etag(Xml& xml)
+      {
+      if (articulationsPrinted)
+            xml.etag("articulations");
+      articulationsPrinted = false;
+      }
+
+//---------------------------------------------------------
+//   tag
+//---------------------------------------------------------
+
+void Ornaments::tag(Xml& xml)
+      {
+      if (!ornamentsPrinted)
+            xml.stag("ornaments");
+      ornamentsPrinted = true;
+      }
+
+//---------------------------------------------------------
+//   etag
+//---------------------------------------------------------
+
+void Ornaments::etag(Xml& xml)
+      {
+      if (ornamentsPrinted)
+            xml.etag("ornaments");
+      ornamentsPrinted = false;
       }
 
 //---------------------------------------------------------
@@ -1186,15 +1256,109 @@ static void chordAttributes(Chord* chord, Notations& notations, Xml& xml)
                   }
             }
       // then the attributes whose elements are children of <articulations>
+      Articulations articulations;
       for (ciAttribute ia = na->begin(); ia != na->end(); ++ia) {
             switch ((*ia)->subtype()) {
                   case UfermataSym:
                   case DfermataSym:
                         // ignore, already handled
                         break;
+                  case SforzatoaccentSym:
+                        {
+                        notations.tag(xml);
+                        articulations.tag(xml);
+                        xml.tagE("accent");
+                        }
+                        break;
+                  case StaccatoSym:
+                        {
+                        notations.tag(xml);
+                        articulations.tag(xml);
+                        xml.tagE("staccato");
+                        }
+                        break;
+                  case UstaccatissimoSym:
+                  case DstaccatissimoSym:
+                        {
+                        notations.tag(xml);
+                        articulations.tag(xml);
+                        xml.tagE("staccatissimo");
+                        }
+                        break;
                   case TenutoSym:
                         {
-                        // TODO
+                        notations.tag(xml);
+                        articulations.tag(xml);
+                        xml.tagE("tenuto");
+                        }
+                        break;
+                  case DmarcatoSym:
+                        {
+                        notations.tag(xml);
+                        articulations.tag(xml);
+                        xml.tagE("strong-accent type=\"down\"");
+                        }
+                        break;
+                  case UmarcatoSym:
+                        {
+                        notations.tag(xml);
+                        articulations.tag(xml);
+                        xml.tagE("strong-accent type=\"up\"");
+                        }
+                        break;
+                  case TurnSym:
+                  case TrillSym:
+                  case PrallSym:
+                  case MordentSym:
+                        // ignore, handled with ornaments
+                        break;
+                  default:
+                        printf("unknown chord attribute %s\n", (*ia)->name().toLatin1().data());
+                        break;
+                  }
+            }
+            articulations.etag(xml);
+      // and finally the attributes whose elements are children of <ornaments>
+      Ornaments ornaments;
+      for (ciAttribute ia = na->begin(); ia != na->end(); ++ia) {
+            switch ((*ia)->subtype()) {
+                  case UfermataSym:
+                  case DfermataSym:
+                  case SforzatoaccentSym:
+                  case StaccatoSym:
+                  case UstaccatissimoSym:
+                  case DstaccatissimoSym:
+                  case TenutoSym:
+                  case DmarcatoSym:
+                  case UmarcatoSym:
+                        // ignore, already handled
+                        break;
+                  case TurnSym:
+                        {
+                        notations.tag(xml);
+                        ornaments.tag(xml);
+                        xml.tagE("turn");
+                        }
+                        break;
+                  case TrillSym:
+                        {
+                        notations.tag(xml);
+                        ornaments.tag(xml);
+                        xml.tagE("trill-mark");
+                        }
+                        break;
+                  case PrallSym:
+                        {
+                        notations.tag(xml);
+                        ornaments.tag(xml);
+                        xml.tagE("inverted-mordent");
+                        }
+                        break;
+                  case MordentSym:
+                        {
+                        notations.tag(xml);
+                        ornaments.tag(xml);
+                        xml.tagE("mordent");
                         }
                         break;
                   default:
@@ -1202,6 +1366,7 @@ static void chordAttributes(Chord* chord, Notations& notations, Xml& xml)
                         break;
                   }
             }
+            ornaments.etag(xml);
       }
 
 //---------------------------------------------------------

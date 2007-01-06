@@ -1171,6 +1171,15 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomNode node)
       int octave = 4;
       int accidental = 0;
       DurationType durationType = D_QUARTER;
+      bool trillMark = false;
+      QString strongAccentType;
+      bool accent = false;
+      bool staccatissimo = false;
+      bool staccato = false;
+      bool tenuto = false;
+      bool turn = false;
+      bool mordent = false;
+      bool invertedMordent = false;
 
       for (; !node.isNull(); node = node.nextSibling()) {
             QDomElement e = node.toElement();
@@ -1430,12 +1439,44 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomNode node)
                               QString placement = e.attribute("placement");
                               }
                         else if (e.tagName() == "articulations") {
+                              for (QDomNode n2 = n.firstChild(); !n2.isNull(); n2 = n2.nextSibling()) {
+                                    QDomElement e = n2.toElement();
+                                    if (e.isNull())
+                                          continue;
+                                    if (e.tagName() == "accent")
+                                          accent = true;
+                                    else if (e.tagName() == "staccatissimo")
+                                          staccatissimo = true;
+                                    else if (e.tagName() == "staccato")
+                                          staccato = true;
+                                    else if (e.tagName() == "strong-accent")
+                                          strongAccentType = e.attribute(QString("type"));
+                                    else if (e.tagName() == "tenuto")
+                                          tenuto = true;
+                                    else
+                                          domError(n2);
+                                    }
                               }
                         else if (e.tagName() == "fermata") {
                               fermataType = e.attribute(QString("type"));
                               }
                         else if (e.tagName() == "ornaments") {
 					//	<trill-mark placement="above"/>
+                              for (QDomNode n2 = n.firstChild(); !n2.isNull(); n2 = n2.nextSibling()) {
+                                    QDomElement e = n2.toElement();
+                                    if (e.isNull())
+                                          continue;
+                                    if (e.tagName() == "trill-mark")
+                                          trillMark = true;
+                                    else if (e.tagName() == "turn")
+                                          turn = true;
+                                    else if (e.tagName() == "inverted-mordent")
+                                          invertedMordent = true;
+                                    else if (e.tagName() == "mordent")
+                                          mordent = true;
+                                    else
+                                          domError(n2);
+                                    }
                               }
                         else if (e.tagName() == "technical") {
                               for (QDomNode n2 = n.firstChild(); !n2.isNull(); n2 = n2.nextSibling()) {
@@ -1579,6 +1620,62 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomNode node)
                   printf("unknown fermata type %s\n", fermataType.toLatin1().data());
                   delete f;
                   }
+            }
+      if (!strongAccentType.isEmpty()) {
+            NoteAttribute* na = new NoteAttribute(score);
+            if (strongAccentType == "up") {
+                  na->setSubtype(UmarcatoSym);
+                  cr->add(na);
+                  }
+            else if (strongAccentType == "down") {
+                  na->setSubtype(DmarcatoSym);
+//                  f->setUserYoffset(5.3); // force below note (albeit by brute force)
+                  cr->add(na);
+                  }
+            else {
+                  printf("unknown mercato type %s\n", strongAccentType.toLatin1().data());
+                  delete na;
+                  }
+            }
+      if (trillMark) {
+            NoteAttribute* na = new NoteAttribute(score);
+            na->setSubtype(TrillSym);
+            cr->add(na);
+            }
+      if (turn) {
+            NoteAttribute* na = new NoteAttribute(score);
+            na->setSubtype(TurnSym);
+            cr->add(na);
+            }
+      if (mordent) {
+            NoteAttribute* na = new NoteAttribute(score);
+            na->setSubtype(MordentSym);
+            cr->add(na);
+            }
+      if (invertedMordent) {
+            NoteAttribute* na = new NoteAttribute(score);
+            na->setSubtype(PrallSym);
+            cr->add(na);
+            }
+      if (accent) {
+            NoteAttribute* na = new NoteAttribute(score);
+            na->setSubtype(SforzatoaccentSym);
+            cr->add(na);
+            }
+      if (staccatissimo) {
+            NoteAttribute* na = new NoteAttribute(score);
+            na->setSubtype(UstaccatissimoSym);
+            cr->add(na);
+            }
+      if (staccato) {
+            NoteAttribute* na = new NoteAttribute(score);
+            na->setSubtype(StaccatoSym);
+            cr->add(na);
+            }
+      if (tenuto) {
+            NoteAttribute* na = new NoteAttribute(score);
+            na->setSubtype(TenutoSym);
+            cr->add(na);
             }
       if (!tupletType.isEmpty()) {
             if (tupletType == "start") {
