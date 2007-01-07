@@ -53,7 +53,7 @@ include ( ${PROJECT_SOURCE_DIR}/cmake/TargetDoc.cmake)
 option ( ENABLE_FLUID  "enable fluidsynth softsynth plugins"    ON)
 
 # for debugging the make system uncomment next line:
-#set(CMAKE_VERBOSE_MAKEFILE ON)
+#  set(CMAKE_VERBOSE_MAKEFILE ON)
 
 set(QT_USE_QTXML TRUE)
 set(QT_USE_QTDESIGNER TRUE)

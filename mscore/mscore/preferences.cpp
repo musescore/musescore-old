@@ -113,7 +113,7 @@ Preferences::Preferences()
       // alsaDevice   = "hw:0";
       alsaSampleRate = 48000;
       alsaPeriodSize = 1024;
-      alsaFragments  = 2;
+      alsaFragments  = 3;
       layoutBreakColor = Qt::green;
       antialiasedDrawing = true;
       };

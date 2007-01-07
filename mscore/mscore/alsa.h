@@ -41,10 +41,10 @@
 
 class AlsaDriver {
       QString _name;
-      typedef char* (*clear_function)(char*, int, int);
       typedef char* (*play_function)(const float*, char*, int, int);
+      typedef char* (*clear_function)(char*, int, int);
 
-      enum { MAXPFD = 8, MAXPLAY = 32 };
+      enum { MAXPFD = 8, MAXPLAY = 4 };
 
       int setHwpar(snd_pcm_t* handle, snd_pcm_hw_params_t* hwpar);
       int setSwpar(snd_pcm_t* handle, snd_pcm_sw_params_t* swpar);
@@ -77,31 +77,23 @@ class AlsaDriver {
       static char* play_32le(const float* src, char* dst, int step, int nfrm);
       static char* play_24le(const float* src, char* dst, int step, int nfrm);
       static char* play_16le(const float* src, char* dst, int step, int nfrm);
+      int playInit(snd_pcm_uframes_t len);
+      snd_pcm_sframes_t pcmWait();
+      snd_pcm_t* playHandle() const   { return _play_handle; }
+      void clearChan(int chan, snd_pcm_uframes_t len) {
+            _play_ptr[chan] = _clear_func(_play_ptr[chan], _play_step, len);
+            }
 
     public:
       AlsaDriver(QString, unsigned, snd_pcm_uframes_t, unsigned);
       ~AlsaDriver();
       bool init();
       void printinfo();
-      int pcmStart();
+      bool pcmStart();
       int pcmStop();
-      snd_pcm_sframes_t pcmWait();
-      int pcmIdle(snd_pcm_uframes_t len);
-      int playInit(snd_pcm_uframes_t len);
-      void playChan(int chan, const float* src, snd_pcm_uframes_t len) {
-            _play_ptr[chan] = _play_func(src, _play_ptr[chan], _play_step, len);
-            }
-      void clearChan(int chan, snd_pcm_uframes_t len) {
-            _play_ptr[chan] = _clear_func(_play_ptr[chan], _play_step, len);
-            }
-      int playDone(snd_pcm_uframes_t len) {
-            return snd_pcm_mmap_commit(_play_handle, _play_offs, len);
-            }
-      int stat() const                { return _stat; }
-      int nplay() const               { return _play_nchan; }
-      snd_pcm_t* playHandle() const   { return _play_handle; }
       snd_pcm_uframes_t fsize() const { return _frsize;      }
       unsigned int sampleRate() const { return _rate; }
+      void write(int n, float* l, float* r);
       };
 
 //---------------------------------------------------------
@@ -128,7 +120,6 @@ class AlsaAudio : public Audio {
       virtual std::list<QString> inputPorts();
       virtual bool start();
       virtual bool stop();
-      int framePos() const;
       void connect(void*, void*) {}
       void disconnect(void* src, void* dst);
       float* getLBuffer(long n);
@@ -139,6 +130,7 @@ class AlsaAudio : public Audio {
       virtual int getState();
       virtual int sampleRate() const;
       void alsaLoop();
+      void write(int n, void* l, void* r);
       };
 
 #else
@@ -161,7 +153,6 @@ class AlsaAudio : public Audio {
             }
       virtual bool start() { return false; }
       virtual bool stop()  { return false; }
-      int framePos() const { return 0; }
       void connect(void*, void*) {}
       void disconnect(void*, void*) {}
       virtual bool isRealtime() const   { return false; }

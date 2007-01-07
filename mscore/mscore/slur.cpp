@@ -273,7 +273,7 @@ void SlurSegment::write(Xml& xml, int no) const
             }
       if (empty)
             return;
-      xml.tag("Segment no=\"%d\"", no);
+      xml.tag("SlurSegment no=\"%d\"", no);
       if (!(ups[0].off.isNull()))
             xml.tag("o1", ups[0].off);
       if (!(ups[1].off.isNull()))
@@ -282,7 +282,7 @@ void SlurSegment::write(Xml& xml, int no) const
             xml.tag("o3", ups[2].off);
       if (!(ups[3].off.isNull()))
             xml.tag("o4", ups[3].off);
-      xml.etag("Segment");
+      xml.etag("SlurSegment");
       }
 
 //---------------------------------------------------------
