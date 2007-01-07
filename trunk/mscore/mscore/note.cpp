@@ -373,24 +373,32 @@ void Note::setAccidental(int pre)
 
 void Note::setHead(int ticks)
       {
-      if (ticks <= division) {
+      if (ticks < (2*division)) {
             _head = _grace ? s_quartheadSym : quartheadSym;
-            if (ticks) {
-                  int n    = division / ticks;
-                  int rest = division % (n * ticks);
-                  if (rest)
-                        _dots = 1;
+            int nt = division;
+            for (int i = 0; i < 4; ++i) {
+                  if (ticks / nt) {
+                        int rest = ticks % nt;
+                        if (rest) {
+                              _dots = 1;
+                              nt /= 2;
+                              if (rest % nt)
+                                    ++_dots;
+                              }
+                        break;
+                        }
+                  nt /= 2;
                   }
             }
-      else if (ticks >= 4 * division) {
+      else if (ticks >= (4 * division)) {
+            _head = _grace ? s_wholeheadSym : wholeheadSym;
             if (ticks % (4 * division))
                   _dots = 1;
-            _head = _grace ? s_wholeheadSym : wholeheadSym;
             }
-      else if (ticks >= 2 * division) {
+      else {
+            _head = _grace ? s_halfheadSym : halfheadSym;
             if (ticks % (2 * division))
                   _dots = 1;
-            _head = _grace ? s_halfheadSym : halfheadSym;
             }
       bboxUpdate();
       }
