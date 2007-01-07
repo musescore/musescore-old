@@ -95,7 +95,8 @@ bool AlsaDriver::init()
 
       unsigned frsize = _frsize;
       if (snd_pcm_hw_params_get_period_size (_play_hwpar, &_frsize, &dir) || (frsize != _frsize) || dir) {
-            fprintf (stderr, "Alsa_driver: can't get requested period size for playback.\n");
+            fprintf (stderr, "Alsa_driver: can't get requested period size for playback %ld != %ld.\n",
+               frsize, _frsize);
             return false;
             }
 
@@ -110,16 +111,16 @@ bool AlsaDriver::init()
 
       switch (_play_format) {
             case SND_PCM_FORMAT_S32_LE:
-                  _clear_func = clear_32le;
                   _play_func  = play_32le;
+                  _clear_func = clear_32le;
                   break;
             case SND_PCM_FORMAT_S24_3LE:
-                  _clear_func = clear_24le;
                   _play_func  = play_24le;
+                  _clear_func = clear_24le;
                   break;
             case SND_PCM_FORMAT_S16_LE:
-                  _clear_func = clear_16le;
                   _play_func  = play_16le;
+                  _clear_func = clear_16le;
                   break;
             default:
                   fprintf (stderr, "Alsa_driver: can't handle playback sample format.\n");
@@ -149,27 +150,28 @@ AlsaDriver::~AlsaDriver()
 
 //---------------------------------------------------------
 //   pcmStart
+//    return true on error
 //---------------------------------------------------------
 
-int AlsaDriver::pcmStart()
+bool AlsaDriver::pcmStart()
       {
       int err;
-      unsigned n = snd_pcm_avail_update (_play_handle);
-      if (n != _frsize * _nfrags) {
+      snd_pcm_sframes_t n = snd_pcm_avail_update(_play_handle);
+      if (unsigned(n) != _frsize * _nfrags) {
             fprintf  (stderr, "Alsa_driver: full buffer not available at start.\n");
-            return -1;
+            return true;
             }
       for (unsigned i = 0; i < _nfrags; i++) {
             playInit (_frsize);
             for (unsigned j = 0; j < _play_nchan; j++)
-                  clearChan (j, _frsize);
-            playDone (_frsize);
+                  clearChan(j, _frsize);
+            snd_pcm_mmap_commit(_play_handle, _play_offs, _frsize);
             }
       if ((err = snd_pcm_start (_play_handle)) < 0) {
             fprintf (stderr, "Alsa_driver: pcm_start(play): %s.\n", snd_strerror (err));
-            return -1;
+            return true;
             }
-      return 0;
+      return false;
       }
 
 //---------------------------------------------------------
@@ -193,24 +195,17 @@ int AlsaDriver::pcmStop()
 
 snd_pcm_sframes_t AlsaDriver::pcmWait()
       {
-      _pcnt = 0;
       _stat = 0;
       _xrun = false;
       bool need_play = true;
 
       while (need_play) {
-            _pcnt++;
-            int n = 0;
-            if (need_play) {
-                  snd_pcm_poll_descriptors(_play_handle, &_pfd[0], _play_npfd);
-                  n += _play_npfd;
-                  }
-
-            for (int i = 0; i < n; i++)
-                  _pfd[i].events |= POLLERR;
+            if (need_play)
+                  snd_pcm_poll_descriptors(_play_handle, _pfd, _play_npfd);
 
             errno = 0;
-            if (poll(_pfd, n, 1000000) < 0) {
+            // timout in ms or infinite
+            if (poll(_pfd, _play_npfd, -1) < 0) {
                   if (errno == EINTR) {
                         _stat = 1;
                         return 0;
@@ -219,12 +214,9 @@ snd_pcm_sframes_t AlsaDriver::pcmWait()
                   _stat = 2;
                   return 0;
                   }
-
-            int i = 0;
             int play_to = 0;
-
             if (need_play) {
-                  for (; i < _play_npfd; i++) {
+                  for (int i = 0; i < _play_npfd; i++) {
                         if (_pfd[i].revents & POLLERR) {
                               _xrun = true;
                               _stat |= 4;
@@ -252,27 +244,6 @@ snd_pcm_sframes_t AlsaDriver::pcmWait()
             return 0;
             }
       return play_av;
-      }
-
-//---------------------------------------------------------
-//   pcmIdle
-//---------------------------------------------------------
-
-int AlsaDriver::pcmIdle(snd_pcm_uframes_t len)
-      {
-      snd_pcm_uframes_t n, k;
-
-      if (_play_handle) {
-            n = len;
-            while (n) {
-                  k = playInit (n);
-                  for (unsigned i = 0; i < _play_nchan; i++)
-                        clearChan (i, k);
-                  playDone (k);
-                  n -= k;
-                  }
-            }
-      return 0;
       }
 
 //---------------------------------------------------------
@@ -339,18 +310,18 @@ int AlsaDriver::setHwpar(snd_pcm_t* handle, snd_pcm_hw_params_t* hwpar)
             return -1;
             }
 
-      if ((err = snd_pcm_hw_params_set_rate (handle, hwpar, _rate, 0)) < 0) {
+      if ((err = snd_pcm_hw_params_set_rate(handle, hwpar, _rate, 0)) < 0) {
             fprintf (stderr, "Alsa_driver: can't set sample rate to %u.\n", _rate);
             return -1;
             }
 
-      if ((err = snd_pcm_hw_params_set_channels (handle, hwpar, _play_nchan)) < 0) {
+      if ((err = snd_pcm_hw_params_set_channels(handle, hwpar, _play_nchan)) < 0) {
             fprintf (stderr, "Alsa_driver: can't set channel count to %u.\n",
                _play_nchan);
             return -1;
             }
 
-      if ((err = snd_pcm_hw_params_set_period_size (handle, hwpar, _frsize, 0)) < 0) {
+      if ((err = snd_pcm_hw_params_set_period_size(handle, hwpar, _frsize, 0)) < 0) {
             fprintf (stderr, "Alsa_driver: can't set period size to %lu: %s\n",
                _frsize, snd_strerror(err));
             return -1;
@@ -415,34 +386,24 @@ int AlsaDriver::recover()
             }
       else if (snd_pcm_status_get_state (stat) == SND_PCM_STATE_XRUN) {
             struct timeval tnow, trig;
-
             gettimeofday (&tnow, 0);
             snd_pcm_status_get_trigger_tstamp (stat, &trig);
             fprintf (stderr, "Alsa_driver: stat = %02x, xrun of at least %8.3lf ms\n", _stat,
                1e3 * tnow.tv_sec - 1e3 * trig.tv_sec + 1e-3 * tnow.tv_usec - 1e-3 * trig.tv_usec);
             }
-      if (pcmStop())
+      if (pcmStop()) {
+            printf("pcmStop failed\n");
             return -1;
+            }
       if (_play_handle && ((err = snd_pcm_prepare (_play_handle)) < 0)) {
             fprintf (stderr, "Alsa_driver: pcm_prepare(play): %s\n", snd_strerror (err));
             return -1;
             }
-      if (pcmStart ())
+      if (pcmStart ()) {
+            printf("pcmStart failed\n");
             return -1;
-      return 0;
-      }
-
-//---------------------------------------------------------
-//   clear_16le
-//---------------------------------------------------------
-
-char* AlsaDriver::clear_16le (char* dst, int step, int nfrm)
-      {
-      while (nfrm--) {
-            *((short int *) dst) = 0;
-            dst += step;
             }
-      return dst;
+      return 0;
       }
 
 //---------------------------------------------------------
@@ -463,21 +424,6 @@ char* AlsaDriver::play_16le (const float* src, char* dst, int step, int nfrm)
             else
                   d = (short int)(0x7fff * s);
             *((short int *) dst) = d;
-            dst += step;
-            }
-      return dst;
-      }
-
-//---------------------------------------------------------
-//   clear_24le
-//---------------------------------------------------------
-
-char* AlsaDriver::clear_24le(char* dst, int step, int nfrm)
-      {
-      while (nfrm--) {
-            dst [0] = 0;
-            dst [1] = 0;
-            dst [2] = 0;
             dst += step;
             }
       return dst;
@@ -509,19 +455,6 @@ char* AlsaDriver::play_24le(const float* src, char* dst, int step, int nfrm)
       }
 
 //---------------------------------------------------------
-//   clear_32le
-//---------------------------------------------------------
-
-char* AlsaDriver::clear_32le(char* dst, int step, int nfrm)
-      {
-      while (nfrm--) {
-            *((int *) dst) = 0;
-            dst += step;
-            }
-      return dst;
-      }
-
-//---------------------------------------------------------
 //   play_32le
 //---------------------------------------------------------
 
@@ -542,6 +475,83 @@ char* AlsaDriver::play_32le(const float* src, char* dst, int step, int nfrm)
             dst += step;
             }
       return dst;
+      }
+
+//---------------------------------------------------------
+//   clear_16le
+//---------------------------------------------------------
+
+char* AlsaDriver::clear_16le (char* dst, int step, int nfrm)
+      {
+      while (nfrm--) {
+            *((short int *) dst) = 0;
+            dst += step;
+            }
+      return dst;
+      }
+
+//---------------------------------------------------------
+//   clear_24le
+//---------------------------------------------------------
+
+char* AlsaDriver::clear_24le(char* dst, int step, int nfrm)
+      {
+      while (nfrm--) {
+            dst [0] = 0;
+            dst [1] = 0;
+            dst [2] = 0;
+            dst += step;
+            }
+      return dst;
+      }
+
+//---------------------------------------------------------
+//   clear_32le
+//---------------------------------------------------------
+
+char* AlsaDriver::clear_32le(char* dst, int step, int nfrm)
+      {
+      while (nfrm--) {
+            *((int *) dst) = 0;
+            dst += step;
+            }
+      return dst;
+      }
+
+//---------------------------------------------------------
+//   write
+//---------------------------------------------------------
+
+void AlsaDriver::write(int n, float* l, float* r)
+      {
+      bool first = true;
+      for (;;) {
+            int avail = snd_pcm_avail_update(_play_handle);
+            if (avail < 0) {
+                  recover();
+                  first = true;
+                  continue;
+                  }
+            if (avail < n) {
+                  if (first) {
+                        first = false;
+                        snd_pcm_start(_play_handle);
+                        }
+                  else {
+                        int err = snd_pcm_wait(_play_handle, -1);
+                        if (err < 0) {
+                              recover();
+                              first = true;
+                              }
+                        }
+                  continue;
+                  }
+            break;
+            }
+      playInit(n);
+      _play_ptr[0] = _play_func(l, _play_ptr[0], _play_step, n);
+      _play_ptr[1] = _play_func(r, _play_ptr[1], _play_step, n);
+      snd_pcm_mmap_commit(_play_handle, _play_offs, n);
       }
 
 //---------------------------------------------------------
@@ -594,7 +604,6 @@ AlsaAudio::~AlsaAudio()
 
 bool AlsaAudio::init()
       {
-printf("AlsaAudio init\n");
       alsa = new AlsaDriver(
          preferences.alsaDevice,
          preferences.alsaSampleRate,
@@ -638,19 +647,12 @@ void AlsaAudio::alsaLoop()
             printf("MuseScore: running SCHED_FIFO\n");
 
       alsa->pcmStart();
-      snd_pcm_uframes_t size = alsa->fsize();
+      int size = alsa->fsize();
       float lbuffer[size];
       float rbuffer[size];
       while (runAlsa == 2) {
-            snd_pcm_sframes_t k = alsa->pcmWait();
-            while (k >= int(size)) {
-                  alsa->playInit(size);
-                  seq->process(size, lbuffer, rbuffer);
-                  alsa->playChan(0, lbuffer, size);
-                  alsa->playChan(1, rbuffer, size);
-                  alsa->playDone(size);
-                  k -= size;
-                  }
+            seq->process(size, lbuffer, rbuffer);
+            alsa->write(size, lbuffer, rbuffer);
             }
       alsa->pcmStop();
       runAlsa = 0;
@@ -712,15 +714,6 @@ std::list<QString> AlsaAudio::inputPorts()
       {
       std::list<QString> l;
       return l;
-      }
-
-//---------------------------------------------------------
-//   framePos
-//---------------------------------------------------------
-
-int AlsaAudio::framePos() const
-      {
-      return lrint((curTime()-startTime) * sampleRate());
       }
 
 //---------------------------------------------------------

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf8"?>
 <museScore version="1.0">
-  <Geometry x="208" y="0" w="1607" h="1090" />
+  <Geometry x="258" y="0" w="1607" h="1090" />
   <Spatium>1.625</Spatium>
   <Division>384</Division>
   <Mag>2</Mag>
@@ -4079,12 +4079,11 @@ p, li { white-space: pre-wrap; }
           <pitch>46</pitch>
           </Note>
         <Note>
-          <selected>1</selected>
           <pitch>58</pitch>
           </Note>
         </Chord>
       </Measure>
     </Staff>
-  <cursorStaff>1</cursorStaff>
+  <cursorStaff>0</cursorStaff>
   <cursorVoice>0</cursorVoice>
   </museScore>
