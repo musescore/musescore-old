@@ -32,6 +32,8 @@ class Xml : public QTextStream {
       void putLevel();
 
    public:
+      int curTick;      // used to optimize output
+
       Xml(QIODevice*);
       Xml();
 

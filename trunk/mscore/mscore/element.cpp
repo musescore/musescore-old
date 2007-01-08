@@ -185,7 +185,7 @@ void Element::writeProperties(Xml& xml) const
             xml.tag("selected", selected());
       if (!visible())
             xml.tag("visible", visible());
-      if (_time.tick())
+      if (_time.tick() && (_time.tick() != xml.curTick))
             xml.tag("tick", _time.tick());
       if (_duration.tick())
             xml.tag("ticklen", _duration.tick());

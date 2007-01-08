@@ -1,10 +1,15 @@
 8.1.7 (ws)
+      - added new demo file scales.msc
+      - removed redundant tick positions in native xml output. This
+        simplifies manual editing.
       - hacked pitch2xml() to fix xml export (export accidental2.msc)
       - new testfile accidental2.msc
       - KeySignature: dynamic calculation of clefOffset
       - fix drag&drop of LayoutBreak elements
       - removed pageBreak and lineBreak in xml and replaced by LayoutBreak
       - fix beam error (test2.msc)
+7.1.7 (ws)
+      - fixed note head symbol for dottet quarter note
 6.1.7 (lv)
       - MusicXML import/export of (some) note attributes
       - added related MusicXML regression testfile

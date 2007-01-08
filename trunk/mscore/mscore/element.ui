@@ -200,7 +200,7 @@ p, li { white-space: pre-wrap; }
         <item>
          <widget class="QSpinBox" name="time" >
           <property name="maximum" >
-           <number>99999</number>
+           <number>999999</number>
           </property>
          </widget>
         </item>
@@ -220,7 +220,7 @@ p, li { white-space: pre-wrap; }
         <item>
          <widget class="QSpinBox" name="duration" >
           <property name="maximum" >
-           <number>9999</number>
+           <number>999999</number>
           </property>
          </widget>
         </item>

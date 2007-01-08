@@ -27,6 +27,7 @@
 Xml::Xml()
       {
       level = 0;
+      curTick = 0;
       }
 
 Xml::Xml(QIODevice* device)
@@ -34,6 +35,7 @@ Xml::Xml(QIODevice* device)
       {
       setCodec("utf8");
       level = 0;
+      curTick = 0;
       }
 
 //---------------------------------------------------------
@@ -250,7 +252,7 @@ void domError(QDomNode node)
                   s += ":";
             s += k;
             }
-      fprintf(stderr, "%s: Unknown Node <%s>, type %d\n", 
+      fprintf(stderr, "%s: Unknown Node <%s>, type %d\n",
          s.toLatin1().data(), tag.toLatin1().data(), node.nodeType());
       if (node.isText()) {
             fprintf(stderr, "  text node <%s>\n", node.toText().data().toLatin1().data());
