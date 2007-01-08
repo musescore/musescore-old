@@ -410,8 +410,11 @@ void Score::write(Xml& xml)
       for (iStaff ip = _staves->begin(); ip != _staves->end(); ++ip, ++staff) {
             xml.stag("Staff id=\"%d\"", staff+1);
             int measureNumber = 1;
-            for (Measure* m = _layout->first(); m; m = m->next())
+            xml.curTick = 0;
+            for (Measure* m = _layout->first(); m; m = m->next()) {
                   m->write(xml, measureNumber++, staff);
+                  xml.curTick = m->tick() + sigmap->ticksMeasure(m->tick());
+                  }
             xml.etag("Staff");
             }
       }
@@ -817,6 +820,7 @@ void Score::readStaff(QDomNode node)
       QDomElement e = node.toElement();
       int staff = e.attribute("id", "1").toInt() - 1;
 
+      int curTick = 0;
       for (node = node.firstChild(); !node.isNull(); node = node.nextSibling()) {
             QDomElement e = node.toElement();
             if (e.isNull())
@@ -840,11 +844,12 @@ void Score::readStaff(QDomNode node)
                               _layout->push_back(measure);
                               }
                         }
+                  measure->setTick(curTick);
                   measure->read(node, staff);
+                  curTick = measure->tick() + sigmap->ticksMeasure(measure->tick());
                   }
             else
-                  printf("Mscore:Staff: unknown tag %s\n",
-                     tag.toLatin1().data());
+                  domError(node);
             }
       }
 

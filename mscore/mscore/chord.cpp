@@ -716,7 +716,9 @@ void Chord::write(Xml& xml) const
 void Chord::read(QDomNode node, int staffIdx)
       {
       QDomElement e = node.toElement();
-      setTick(e.attribute("tick", "0").toInt());
+      int tck = e.attribute("tick", "-1").toInt();
+      if (tck >= 0)
+            setTick(tck);
 
       for (node = node.firstChild(); !node.isNull(); node = node.nextSibling()) {
             QDomElement e = node.toElement();

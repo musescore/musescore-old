@@ -236,6 +236,7 @@ void ChordRest::writeProperties(Xml& xml) const
             }
       for (ciAttribute ia = attributes.begin(); ia != attributes.end(); ++ia)
             (*ia)->write(xml);
+      xml.curTick = tick() + tickLen();
       }
 
 //---------------------------------------------------------
@@ -292,7 +293,7 @@ void ChordRest::layoutAttributes()
       qreal chordBotY = downPos() + point(style->propertyDistanceHead) + sy;
       qreal staffTopY = s->bboxStaff(idx).y() - pos().y() - sy;
       qreal staffBotY = staffTopY + s->bboxStaff(idx).height() + sy;
-      
+
       bool up     = isUp();
       qreal dyTop = 0;
       qreal dyBot = 0;

@@ -4,8 +4,8 @@
   <Spatium>1.5</Spatium>
   <Division>480</Division>
   <Mag>1.5</Mag>
-  <xoff>-1534.02</xoff>
-  <yoff>-40.553</yoff>
+  <xoff>-957.02</xoff>
+  <yoff>-50.553</yoff>
   <Style>
     <staffUpperBorder>8</staffUpperBorder>
     <staffLowerBorder>4</staffLowerBorder>
@@ -94,6 +94,8 @@
     <key tick="76800" idx="-4"/>
     <key tick="84480" idx="-5"/>
     <key tick="92160" idx="-6"/>
+    <key tick="99840" idx="6"/>
+    <key tick="107520" idx="-6"/>
     </keylist>
   <tempolist fix="500000">
     <tempo at="0">
@@ -1668,11 +1670,14 @@ p, li { white-space: pre-wrap; }
       </Measure>
     <Measure number="52" tick="97920">
       <BarLine/>
+      <LayoutBreak>
+        <subtype>line</subtype>
+        <selected>1</selected>
+        </LayoutBreak>
       <Chord>
         <tick>97920</tick>
         <ticklen>480</ticklen>
         <Note>
-          <selected>1</selected>
           <pitch>72</pitch>
           </Note>
         </Chord>
@@ -1683,6 +1688,245 @@ p, li { white-space: pre-wrap; }
         </Rest>
       <Rest>
         <tick>98880</tick>
+        <ticklen>960</ticklen>
+        <BeamMode>4</BeamMode>
+        </Rest>
+      </Measure>
+    <Measure number="53" tick="99840">
+      <BarLine/>
+      <KeySig>
+        <subtype>6</subtype>
+        <tick>99840</tick>
+        </KeySig>
+      <Chord>
+        <tick>99840</tick>
+        <ticklen>480</ticklen>
+        <Note>
+          <pitch>60</pitch>
+          </Note>
+        </Chord>
+      <Chord>
+        <tick>100320</tick>
+        <ticklen>480</ticklen>
+        <Note>
+          <pitch>61</pitch>
+          </Note>
+        </Chord>
+      <Chord>
+        <tick>100800</tick>
+        <ticklen>480</ticklen>
+        <Note>
+          <pitch>62</pitch>
+          </Note>
+        </Chord>
+      <Chord>
+        <tick>101280</tick>
+        <ticklen>480</ticklen>
+        <Note>
+          <pitch>63</pitch>
+          </Note>
+        </Chord>
+      </Measure>
+    <Measure number="54" tick="101760">
+      <BarLine/>
+      <Chord>
+        <tick>101760</tick>
+        <ticklen>480</ticklen>
+        <Note>
+          <pitch>64</pitch>
+          </Note>
+        </Chord>
+      <Chord>
+        <tick>102240</tick>
+        <ticklen>480</ticklen>
+        <Note>
+          <pitch>65</pitch>
+          </Note>
+        </Chord>
+      <Chord>
+        <tick>102720</tick>
+        <ticklen>480</ticklen>
+        <Note>
+          <pitch>66</pitch>
+          </Note>
+        </Chord>
+      <Chord>
+        <tick>103200</tick>
+        <ticklen>480</ticklen>
+        <Note>
+          <pitch>67</pitch>
+          </Note>
+        </Chord>
+      </Measure>
+    <Measure number="55" tick="103680">
+      <BarLine/>
+      <Chord>
+        <tick>103680</tick>
+        <ticklen>480</ticklen>
+        <Note>
+          <pitch>68</pitch>
+          </Note>
+        </Chord>
+      <Chord>
+        <tick>104160</tick>
+        <ticklen>480</ticklen>
+        <Note>
+          <pitch>69</pitch>
+          </Note>
+        </Chord>
+      <Chord>
+        <tick>104640</tick>
+        <ticklen>480</ticklen>
+        <Note>
+          <pitch>70</pitch>
+          </Note>
+        </Chord>
+      <Chord>
+        <tick>105120</tick>
+        <ticklen>480</ticklen>
+        <Note>
+          <pitch>71</pitch>
+          </Note>
+        </Chord>
+      </Measure>
+    <Measure number="56" tick="105600">
+      <BarLine/>
+      <LayoutBreak>
+        <subtype>line</subtype>
+        <selected>1</selected>
+        </LayoutBreak>
+      <Chord>
+        <tick>105600</tick>
+        <ticklen>480</ticklen>
+        <Note>
+          <pitch>72</pitch>
+          </Note>
+        </Chord>
+      <Rest>
+        <tick>106080</tick>
+        <ticklen>480</ticklen>
+        <BeamMode>4</BeamMode>
+        </Rest>
+      <Rest>
+        <tick>106560</tick>
+        <ticklen>960</ticklen>
+        <BeamMode>4</BeamMode>
+        </Rest>
+      </Measure>
+    <Measure number="57" tick="107520">
+      <BarLine/>
+      <KeySig>
+        <subtype>-6</subtype>
+        <tick>107520</tick>
+        </KeySig>
+      <Chord>
+        <tick>107520</tick>
+        <ticklen>480</ticklen>
+        <Note>
+          <pitch>60</pitch>
+          </Note>
+        </Chord>
+      <Chord>
+        <tick>108000</tick>
+        <ticklen>480</ticklen>
+        <Note>
+          <pitch>61</pitch>
+          </Note>
+        </Chord>
+      <Chord>
+        <tick>108480</tick>
+        <ticklen>480</ticklen>
+        <Note>
+          <pitch>62</pitch>
+          </Note>
+        </Chord>
+      <Chord>
+        <tick>108960</tick>
+        <ticklen>480</ticklen>
+        <Note>
+          <pitch>63</pitch>
+          </Note>
+        </Chord>
+      </Measure>
+    <Measure number="58" tick="109440">
+      <BarLine/>
+      <Chord>
+        <tick>109440</tick>
+        <ticklen>480</ticklen>
+        <Note>
+          <pitch>64</pitch>
+          </Note>
+        </Chord>
+      <Chord>
+        <tick>109920</tick>
+        <ticklen>480</ticklen>
+        <Note>
+          <pitch>65</pitch>
+          </Note>
+        </Chord>
+      <Chord>
+        <tick>110400</tick>
+        <ticklen>480</ticklen>
+        <Note>
+          <pitch>66</pitch>
+          </Note>
+        </Chord>
+      <Chord>
+        <tick>110880</tick>
+        <ticklen>480</ticklen>
+        <Note>
+          <pitch>67</pitch>
+          </Note>
+        </Chord>
+      </Measure>
+    <Measure number="59" tick="111360">
+      <BarLine/>
+      <Chord>
+        <tick>111360</tick>
+        <ticklen>480</ticklen>
+        <Note>
+          <pitch>68</pitch>
+          </Note>
+        </Chord>
+      <Chord>
+        <tick>111840</tick>
+        <ticklen>480</ticklen>
+        <Note>
+          <pitch>69</pitch>
+          </Note>
+        </Chord>
+      <Chord>
+        <tick>112320</tick>
+        <ticklen>480</ticklen>
+        <Note>
+          <pitch>70</pitch>
+          </Note>
+        </Chord>
+      <Chord>
+        <tick>112800</tick>
+        <ticklen>480</ticklen>
+        <Note>
+          <pitch>71</pitch>
+          </Note>
+        </Chord>
+      </Measure>
+    <Measure number="60" tick="113280">
+      <BarLine/>
+      <Chord>
+        <tick>113280</tick>
+        <ticklen>480</ticklen>
+        <Note>
+          <selected>1</selected>
+          <pitch>72</pitch>
+          </Note>
+        </Chord>
+      <Rest>
+        <tick>113760</tick>
+        <ticklen>480</ticklen>
+        <BeamMode>4</BeamMode>
+        </Rest>
+      <Rest>
+        <tick>114240</tick>
         <ticklen>960</ticklen>
         <BeamMode>4</BeamMode>
         </Rest>
