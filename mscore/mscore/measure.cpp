@@ -83,7 +83,12 @@ int line2pitch(int line, int clef)
       }
 
 //
-// lines for one octave
+// This table contails the line position of notes for one
+// octave and all key signatures.
+// This determines what accidentals are used by default
+// to show a note of a given pitch.
+//
+// TODO: fix this
 //
 
 static char table1[15][12] = {
@@ -92,22 +97,23 @@ static char table1[15][12] = {
       { 0, 1, 1, 2, 3, 3, 4, 4, 5, 5, 6, 7 },  // des
       { 0, 1, 1, 2, 2, 3, 4, 4, 5, 5, 6, 7 },  // as
       { 0, 1, 1, 2, 2, 3, 4, 4, 5, 5, 6, 6 },  // es
-      { 0, 1, 1, 2, 2, 3, 3, 4, 5, 5, 6, 6 },  // B
+      { 0, 1, 1, 2, 2, 3, 3, 4, 5, 5, 6, 6 },  // Bb
       { 0, 0, 1, 2, 2, 3, 3, 4, 5, 5, 6, 6 },  // F
 
-      { 0, 0, 1, 2, 2, 3, 3, 4, 4, 5, 6, 6 },  // C
+//      c  #c d #d  e  f #f  g #g  a  b  #b    key signature
+      { 0, 0, 1, 1, 2, 3, 3, 4, 4, 5, 5, 6 },  // C
 
       { 0, 0, 1, 1, 2, 3, 3, 4, 4, 5, 6, 6 },  // G
       { 0, 0, 1, 1, 2, 3, 3, 4, 4, 5, 5, 6 },  // D
       { 0, 0, 1, 1, 2, 2, 3, 4, 4, 5, 5, 6 },  // A
       { 0, 0, 1, 1, 2, 2, 3, 4, 4, 5, 5, 6 },  // E
-      { 0, 0, 1, 1, 2, 2, 3, 3, 4, 5, 5, 6 },  // H
+      { 0, 0, 1, 1, 2, 2, 3, 3, 4, 5, 5, 6 },  // B
       { 0, 0, 0, 1, 2, 2, 3, 3, 4, 5, 5, 6 },  // fis
       { 0, 0, 0, 1, 2, 2, 3, 3, 4, 4, 5, 6 }   // cis
       };
 
 //
-//    feste Versetzungszeichen
+//    fixed accidentals
 //
 static int tab3[15][8] = {
       //c  d  e  f  g  a  b  c
@@ -479,10 +485,6 @@ void Measure::write(Xml& xml, int no, int staff) const
                   else
                         (*ie)->write(xml);
                   }
-            if (_lineBreak)
-                  xml.tagE("lineBreak");
-            if (_pageBreak)
-                  xml.tagE("pageBreak");
             if (_startRepeat)
                   xml.tag("startRepeat", _startRepeat);
             if (_endRepeat)
@@ -594,6 +596,7 @@ void Measure::read(QDomNode node, int idx)
                   KeySig* ks = new KeySig(score());
                   ks->setStaff(staff);
                   ks->read(node);
+                  ks->setSubtype(ks->subtype());
                   add(ks);
                   }
             else if (tag == "Dynamic") {
@@ -659,16 +662,10 @@ void Measure::read(QDomNode node, int idx)
                   }
             else if (tag == "stretch")
                   _userStretch = val.toDouble();
-            else if (tag == "lineBreak") {
+            else if (tag == "LayoutBreak") {
                   LayoutBreak* lb = new LayoutBreak(score());
-                  setSubtype(LAYOUT_BREAK_LINE);
                   lb->setStaff(staff);
-                  add(lb);
-                  }
-            else if (tag == "pageBreak") {
-                  LayoutBreak* lb = new LayoutBreak(score());
-                  setSubtype(LAYOUT_BREAK_PAGE);
-                  lb->setStaff(staff);
+                  lb->read(node);
                   add(lb);
                   }
             else if (tag == "irregular")
@@ -2153,7 +2150,7 @@ bool Measure::acceptDrop(const QPointF& p, int type, const QDomNode&) const
       qreal t = s->staff(idx)->bbox().top();    // top of staff
       qreal b = s->staff(idx)->bbox().bottom(); // bottom of staff
 
-      switch(ElementType(type)) {
+      switch(type) {
             case VOLTA:
             case OTTAVA:
             case TRILL:

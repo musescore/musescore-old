@@ -229,8 +229,11 @@ MuseScore::MuseScore()
       layout->setMargin(0);
       layout->setSpacing(0);
       tab    = new TabBar;
+      QHBoxLayout* hbox = new QHBoxLayout;
+      hbox->addWidget(tab);
+      hbox->addStretch(100);
       canvas = new Canvas;
-      layout->addWidget(tab);
+      layout->addLayout(hbox);
       layout->addWidget(canvas);
 
       connect(tab, SIGNAL(currentChanged(int)), SLOT(setCurrentScore(int)));

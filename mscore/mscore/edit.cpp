@@ -309,11 +309,10 @@ again:
       if (tick != 0) {
             m = tick2measure(tick);
             for (int staffIdx = 0; staffIdx < nstaves(); ++staffIdx) {
-                  int clef = staff(staffIdx)->clef()->clef(tick);
-                  int clefOffset = clefTable[clef].yOffset;
-                  KeySig* keysig = new KeySig(this, st, clefOffset);
+                  KeySig* keysig = new KeySig(this);
                   keysig->setStaff(staff(staffIdx));
                   keysig->setTick(tick);
+                  keysig->setSubtype(st);
                   keysig->setParent(m);
                   cmdAdd(keysig);
                   }

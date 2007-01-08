@@ -155,7 +155,6 @@ void Dynamic::write(Xml& xml) const
 
 void Dynamic::read(QDomNode node)
       {
-      int ts = 0;
       for (node = node.firstChild(); !node.isNull(); node = node.nextSibling()) {
             QDomElement e = node.toElement();
             if (e.isNull())

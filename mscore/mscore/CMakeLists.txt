@@ -162,7 +162,7 @@ add_executable ( mscore
       system.cpp
       tempo.cpp
       text.cpp
-      textline.cpp
+#      textline.cpp
       textpalette.cpp
       textstyle.cpp
       timedialog.cpp

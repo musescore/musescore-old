@@ -33,6 +33,7 @@
 #include "painter.h"
 #include "sym.h"
 #include "symbol.h"
+#include "clef.h"
 
 extern bool debugMode;
 extern bool showInvisible;
@@ -208,8 +209,10 @@ bool Element::readProperties(QDomNode node)
 
       if (tag == "tick")
             _time.setTick(i);
-      else if (tag == "subtype")
-            setSubtype(val);
+      else if (tag == "subtype") {
+            // do not always call Element::setSubtype():
+            this->setSubtype(val);
+            }
       else if (tag == "ticklen")
             setTickLen(i);
       else if (tag == "offset")
@@ -595,11 +598,13 @@ KeySig::KeySig(Score* s)
       {
       }
 
-KeySig::KeySig(Score* s, int i, int yoffset)
-  : Element(s)
+//---------------------------------------------------------
+//   setSubtype
+//---------------------------------------------------------
+
+void KeySig::setSubtype(int st)
       {
-      setSubtype(i);
-      yoff = double(-((yoffset % 10) / 2.0));
+      Element::setSubtype(st);
       layout();
       }
 
@@ -618,6 +623,15 @@ void KeySig::addLayout(bool flat, double x, double y)
 
 void KeySig::layout()
       {
+      double yoff;
+      if (staff()) {
+            int clef       = staff()->clef()->clef(tick());
+            int clefOffset = clefTable[clef].yOffset;
+            yoff = double(-((clefOffset % 10) / 2.0));
+            }
+      else
+            yoff = 0.0;
+
       _bbox = QRectF(0, 0, 0, 0);
       switch(subtype()) {
             case 7:     addLayout(false, 6.0, yoff + 2);
@@ -656,6 +670,15 @@ void KeySig::add(Painter& p, bool flat, double x, double y)
 
 void KeySig::draw1(Painter& p)
       {
+      double yoff;
+      if (staff()) {
+            int clef       = staff()->clef()->clef(tick());
+            int clefOffset = clefTable[clef].yOffset;
+            yoff = double(-((clefOffset % 10) / 2.0));
+            }
+      else
+            yoff = 0.0;
+
       switch(subtype()) {
             case 7:     add(p, false, 6.0, yoff + 2);
             case 6:     add(p, false, 5.0, yoff + .5);

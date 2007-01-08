@@ -214,14 +214,13 @@ void ScoreLayout::processSystemHeader(Measure* m)
                   }
 #endif
             if (!hasKeysig) {
-                  int clef = staff->clef()->clef(tick);
-                  int clefOffset = clefTable[clef].yOffset;
                   int idx = _score->keymap->key(tick);
                   if (idx) {
-                        KeySig* ks = new KeySig(_score, idx, clefOffset);
+                        KeySig* ks = new KeySig(_score);
                         ks->setStaff(staff);
                         ks->setTick(tick);
                         ks->setGenerated(true);
+                        ks->setSubtype(idx);
                         m->add(ks);
                         }
                   }

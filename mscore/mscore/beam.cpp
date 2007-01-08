@@ -481,7 +481,7 @@ void Beam::layout()
       bs->p1  = p1;
       bs->p2  = p2;
 
-      if (maxTickLen > division/2 + division/4) {
+//      if (maxTickLen > division/2 + division/4) {
             if (maxTickLen <= division/16) {       // 1/64     24
                   bs = new BeamSegment(p1, p2);
                   bs->move(0, beamDist * 3);
@@ -497,7 +497,7 @@ void Beam::layout()
                   bs->move(0, beamDist);
                   beamSegments.push_back(bs);
                   }
-            }
+//            }
 
             //---------------------------------------------
             //   create broken/short beam segments

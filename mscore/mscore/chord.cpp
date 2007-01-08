@@ -294,7 +294,7 @@ void Chord::layoutStem()
             downpos  = (downpos - sy)/_spatium * 2.0 + downnote->line();
 
       //-----------------------------------------
-      //  process stem (Hals)
+      //  process stem
       //-----------------------------------------
 
       bool up = isUp();
@@ -317,10 +317,8 @@ void Chord::layoutStem()
                   hookIdx = 4;
             else if (ticks < division/4)
                   hookIdx = 3;
-            else if (ticks < division/2) {
+            else if (ticks < division/2)
                   hookIdx = 2;
-                  stemLen -= Spatium(.5);    //??
-                  }
             else if (ticks < division)
                   hookIdx = 1;
             else if (ticks < division*2)
@@ -349,7 +347,8 @@ void Chord::layoutStem()
       _stem->setPos(npos);
 
       //-----------------------------------------
-      //  process hook (Fä    //-----------------------------------------
+      //  process hook
+      //-----------------------------------------
 
       if (hookIdx) {
             if (!up)
