@@ -1,3 +1,9 @@
+8.1.7 (ws)
+      - new testfile accidental2.msc
+      - KeySignature: dynamic calculation of clefOffset
+      - fix drag&drop of LayoutBreak elements
+      - removed pageBreak and lineBreak in xml and replaced by LayoutBreak
+      - fix beam error (test2.msc)
 6.1.7 (lv)
       - MusicXML import/export of (some) note attributes
       - added related MusicXML regression testfile

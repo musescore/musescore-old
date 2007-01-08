@@ -101,3 +101,31 @@ void LayoutBreak::layout()
       setbbox(bb);
       }
 
+//---------------------------------------------------------
+//   setSubtype
+//---------------------------------------------------------
+
+void LayoutBreak::setSubtype(const QString& s)
+      {
+      if (s == "line")
+            setSubtype(LAYOUT_BREAK_LINE);
+      else
+            setSubtype(LAYOUT_BREAK_PAGE);
+      }
+
+//---------------------------------------------------------
+//   subtypeName
+//---------------------------------------------------------
+
+const QString LayoutBreak::subtypeName() const
+      {
+      switch(subtype()) {
+            case LAYOUT_BREAK_LINE:
+                  return "line";
+            case LAYOUT_BREAK_PAGE:
+                  return "page";
+            default:
+                  return "??";
+            }
+      }
+

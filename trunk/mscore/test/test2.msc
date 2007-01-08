@@ -2,10 +2,10 @@
 <museScore version="1.0">
   <Geometry x="0" y="0" w="1391" h="592" />
   <Spatium>1.5</Spatium>
-  <Division>384</Division>
-  <Mag>1</Mag>
-  <xoff>0</xoff>
-  <yoff>0</yoff>
+  <Division>480</Division>
+  <Mag>2</Mag>
+  <xoff>-59</xoff>
+  <yoff>-73</yoff>
   <Style>
     <staffUpperBorder>8</staffUpperBorder>
     <staffLowerBorder>4</staffLowerBorder>
@@ -68,10 +68,10 @@
   <page-layout>
     <pageFormat>A4</pageFormat>
     <page-margins type="both">
-      <left-margin>10</left-margin>
-      <right-margin>10</right-margin>
-      <top-margin>10</top-margin>
-      <bottom-margin>20</bottom-margin>
+      <left-margin>66.6667</left-margin>
+      <right-margin>66.6667</right-margin>
+      <top-margin>66.6667</top-margin>
+      <bottom-margin>133.333</bottom-margin>
       </page-margins>
     </page-layout>
   <siglist>
@@ -99,7 +99,9 @@
         <clef tick="0" idx="0"/>
         </cleflist>
       </Staff>
-    <trackName>Sopran</trackName>
+    <trackName>Violin</trackName>
+    <name>Violin</name>
+    <shortName>V1n.</shortName>
     <Instrument>
       <midiChannel>0</midiChannel>
       <midiProgram>0</midiProgram>
@@ -112,219 +114,141 @@
     <Measure number="1" tick="0">
       <BarLine/>
       <Chord>
-        <ticklen>384</ticklen>
-        <Note>
-          <pitch>36</pitch>
-          </Note>
-        </Chord>
-      <Chord>
-        <tick>384</tick>
-        <ticklen>384</ticklen>
-        <Note>
-          <pitch>38</pitch>
-          </Note>
-        </Chord>
-      <Chord>
-        <tick>768</tick>
-        <ticklen>384</ticklen>
-        <Note>
-          <pitch>40</pitch>
-          </Note>
-        </Chord>
-      <Chord>
-        <tick>1152</tick>
-        <ticklen>384</ticklen>
-        <Note>
-          <pitch>41</pitch>
-          </Note>
-        </Chord>
-      </Measure>
-    <Measure number="2" tick="1536">
-      <BarLine/>
-      <Chord>
-        <tick>1536</tick>
-        <ticklen>384</ticklen>
-        <Note>
-          <pitch>43</pitch>
-          </Note>
-        </Chord>
-      <Chord>
-        <tick>1920</tick>
-        <ticklen>384</ticklen>
-        <Note>
-          <pitch>45</pitch>
-          </Note>
-        </Chord>
-      <Chord>
-        <tick>2304</tick>
-        <ticklen>384</ticklen>
-        <Note>
-          <pitch>47</pitch>
-          </Note>
-        </Chord>
-      <Chord>
-        <tick>2688</tick>
-        <ticklen>384</ticklen>
-        <Note>
-          <pitch>48</pitch>
-          </Note>
-        </Chord>
-      </Measure>
-    <Measure number="3" tick="3072">
-      <BarLine/>
-      <Chord>
-        <tick>3072</tick>
-        <ticklen>384</ticklen>
-        <Note>
-          <pitch>50</pitch>
-          </Note>
-        </Chord>
-      <Chord>
-        <tick>3456</tick>
-        <ticklen>384</ticklen>
-        <Note>
-          <pitch>52</pitch>
-          </Note>
-        </Chord>
-      <Chord>
-        <tick>3840</tick>
-        <ticklen>384</ticklen>
-        <Note>
-          <pitch>53</pitch>
-          </Note>
-        </Chord>
-      <Chord>
-        <tick>4224</tick>
-        <ticklen>384</ticklen>
-        <Note>
-          <pitch>55</pitch>
-          </Note>
-        </Chord>
-      </Measure>
-    <Measure number="4" tick="4608">
-      <BarLine/>
-      <Chord>
-        <tick>4608</tick>
-        <ticklen>384</ticklen>
-        <Note>
-          <pitch>57</pitch>
-          </Note>
-        </Chord>
-      <Chord>
-        <tick>4992</tick>
-        <ticklen>384</ticklen>
-        <Note>
-          <pitch>59</pitch>
-          </Note>
-        </Chord>
-      <Chord>
-        <tick>5376</tick>
-        <ticklen>384</ticklen>
-        <Note>
-          <pitch>60</pitch>
-          </Note>
-        </Chord>
-      <Chord>
-        <tick>5760</tick>
-        <ticklen>384</ticklen>
-        <Note>
-          <pitch>62</pitch>
-          </Note>
-        </Chord>
-      </Measure>
-    <Measure number="5" tick="6144">
-      <BarLine/>
-      <Chord>
-        <tick>6144</tick>
-        <ticklen>384</ticklen>
-        <Note>
-          <pitch>64</pitch>
-          </Note>
-        </Chord>
-      <Chord>
-        <tick>6528</tick>
-        <ticklen>384</ticklen>
-        <Note>
-          <pitch>65</pitch>
-          </Note>
-        </Chord>
-      <Chord>
-        <tick>6912</tick>
-        <ticklen>384</ticklen>
+        <ticklen>480</ticklen>
         <Note>
           <pitch>67</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>7296</tick>
-        <ticklen>384</ticklen>
+        <tick>480</tick>
+        <ticklen>240</ticklen>
+        <BeamMode>4</BeamMode>
         <Note>
-          <pitch>69</pitch>
+          <pitch>67</pitch>
+          </Note>
+        </Chord>
+      <Chord>
+        <tick>720</tick>
+        <ticklen>120</ticklen>
+        <Note>
+          <pitch>67</pitch>
+          </Note>
+        </Chord>
+      <Chord>
+        <tick>840</tick>
+        <ticklen>60</ticklen>
+        <Note>
+          <pitch>67</pitch>
+          </Note>
+        </Chord>
+      <Chord>
+        <tick>900</tick>
+        <ticklen>30</ticklen>
+        <Note>
+          <pitch>67</pitch>
+          </Note>
+        </Chord>
+      <Chord>
+        <tick>930</tick>
+        <ticklen>30</ticklen>
+        <Note>
+          <pitch>67</pitch>
+          </Note>
+        </Chord>
+      <Chord>
+        <tick>960</tick>
+        <ticklen>960</ticklen>
+        <Note>
+          <pitch>67</pitch>
           </Note>
         </Chord>
       </Measure>
-    <Measure number="6" tick="7680">
+    <Measure number="2" tick="1920">
       <BarLine/>
       <Chord>
-        <tick>7680</tick>
-        <ticklen>384</ticklen>
+        <tick>1920</tick>
+        <ticklen>720</ticklen>
         <Note>
-          <pitch>71</pitch>
+          <pitch>65</pitch>
           </Note>
         </Chord>
+      <Rest>
+        <tick>2640</tick>
+        <ticklen>240</ticklen>
+        <BeamMode>4</BeamMode>
+        </Rest>
       <Chord>
-        <tick>8064</tick>
-        <ticklen>384</ticklen>
+        <tick>2880</tick>
+        <ticklen>360</ticklen>
         <Note>
-          <pitch>72</pitch>
+          <pitch>65</pitch>
           </Note>
         </Chord>
+      <Rest>
+        <tick>3240</tick>
+        <ticklen>120</ticklen>
+        <BeamMode>4</BeamMode>
+        </Rest>
+      <Rest>
+        <tick>3360</tick>
+        <ticklen>60</ticklen>
+        <BeamMode>4</BeamMode>
+        </Rest>
       <Chord>
-        <tick>8448</tick>
-        <ticklen>384</ticklen>
+        <tick>3420</tick>
+        <ticklen>180</ticklen>
         <Note>
-          <pitch>74</pitch>
+          <pitch>65</pitch>
           </Note>
         </Chord>
+      <Rest>
+        <tick>3600</tick>
+        <ticklen>15</ticklen>
+        <BeamMode>4</BeamMode>
+        </Rest>
+      <Rest>
+        <tick>3615</tick>
+        <ticklen>30</ticklen>
+        <BeamMode>4</BeamMode>
+        </Rest>
+      <Rest>
+        <tick>3645</tick>
+        <ticklen>15</ticklen>
+        <BeamMode>4</BeamMode>
+        </Rest>
+      <Rest>
+        <tick>3660</tick>
+        <ticklen>60</ticklen>
+        <BeamMode>4</BeamMode>
+        </Rest>
       <Chord>
-        <tick>8832</tick>
-        <ticklen>384</ticklen>
+        <tick>3720</tick>
+        <ticklen>90</ticklen>
         <Note>
-          <pitch>76</pitch>
+          <pitch>65</pitch>
           </Note>
         </Chord>
+      <Rest>
+        <tick>3810</tick>
+        <ticklen>30</ticklen>
+        <BeamMode>4</BeamMode>
+        </Rest>
       </Measure>
-    <Measure number="7" tick="9216">
+    <Measure number="3" tick="3840">
       <BarLine/>
-      <Chord>
-        <tick>9216</tick>
-        <ticklen>384</ticklen>
-        <Note>
-          <pitch>77</pitch>
-          </Note>
-        </Chord>
-      <Chord>
-        <tick>9600</tick>
-        <ticklen>384</ticklen>
-        <Note>
-          <pitch>79</pitch>
-          </Note>
-        </Chord>
-      <Chord>
-        <tick>9984</tick>
-        <ticklen>384</ticklen>
-        <Note>
-          <pitch>81</pitch>
-          </Note>
-        </Chord>
-      <Chord>
-        <tick>10368</tick>
-        <ticklen>384</ticklen>
-        <Note>
-          <selected>1</selected>
-          <pitch>83</pitch>
-          </Note>
-        </Chord>
+      <Rest>
+        <tick>3840</tick>
+        <ticklen>1920</ticklen>
+        <BeamMode>4</BeamMode>
+        </Rest>
+      </Measure>
+    <Measure number="4" tick="5760">
+      <BarLine/>
+      <Rest>
+        <tick>5760</tick>
+        <ticklen>1920</ticklen>
+        <BeamMode>4</BeamMode>
+        </Rest>
       </Measure>
     </Staff>
   <cursorStaff>0</cursorStaff>

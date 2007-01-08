@@ -313,16 +313,20 @@ void MuseScore::keyMenu()
             ((QScrollArea*)keyPalette)->setWidget(sp);
             sp->showStaff(true);
             for (int i = 0; i < 7; ++i) {
-                  KeySig* k = new KeySig(cs, i+1, 0);
+                  KeySig* k = new KeySig(cs);
+                  k->setSubtype(i+1);
                   sp->addObject(i * 2,  k, keyNames[i*2]);
                   }
             for (int i = -7; i < 0; ++i) {
-                  KeySig* k = new KeySig(cs, i, 0);
+                  KeySig* k = new KeySig(cs);
+                  k->setSubtype(i);
                   sp->addObject((7 + i) * 2 + 1,  k, keyNames[(7 + i) * 2 + 1]);
                   }
-            KeySig* k = new KeySig(cs, 0, 0);
+            KeySig* k = new KeySig(cs);
+            k->setSubtype(0);
             sp->addObject(14,  k, keyNames[14]);
-            k = new KeySig(cs, 0, 0);
+            k = new KeySig(cs);
+            k->setSubtype(0);
             sp->addObject(15,  k, keyNames[14]);
             }
       keyPalette->show();

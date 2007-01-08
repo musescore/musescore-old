@@ -150,11 +150,12 @@ void BarLine::draw1(Painter& p)
 void BarLine::write(Xml& xml) const
       {
       if (subtype() == NORMAL_BAR)
+            xml.tagE("BarLine");
+      else {
             xml.stag("BarLine");
-      else
-            xml.stag("BarLine type=\"%d\"", subtype());
-      Element::writeProperties(xml);
-      xml.etag("BarLine");
+            Element::writeProperties(xml);
+            xml.etag("BarLine");
+            }
       }
 
 //---------------------------------------------------------
@@ -163,15 +164,11 @@ void BarLine::write(Xml& xml) const
 
 void BarLine::read(QDomNode node)
       {
-      QDomElement e = node.toElement();
-      setSubtype(e.attribute("type", "0").toInt());
-
       for (node = node.firstChild(); !node.isNull(); node = node.nextSibling()) {
-            if (Element::readProperties(node))
-                  ;
-            else
+            if (!Element::readProperties(node))
                   domError(node);
             }
+      setSubtype(subtype());
       }
 
 //---------------------------------------------------------

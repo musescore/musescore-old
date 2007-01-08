@@ -249,7 +249,7 @@ class Element {
  Used for reading xml data.
  Reimplemented by elements with subtype names.
  */
-      virtual void setSubtype(const QString& s) { _subtype = s.toInt(); }
+      virtual void setSubtype(const QString& s) { setSubtype(s.toInt()); }
       };
 
 //---------------------------------------------------------
@@ -405,18 +405,15 @@ class Compound : public Element {
 */
 
 class KeySig : public Element {
-      double yoff;
       void add(Painter&, bool, double x, double y);
       void addLayout(bool flat, double x, double y);
 
    public:
       KeySig(Score*);
-      KeySig(Score*, int, int);
+      virtual void setSubtype(int n);
       virtual Element* clone() const { return new KeySig(*this); }
       virtual void draw1(Painter&);
       virtual ElementType type() const { return KEYSIG; }
-      virtual void write(Xml& xml) const;
-      virtual void read(QDomNode);
       virtual bool acceptDrop(const QPointF&, int, const QDomNode&) const;
       virtual void drop(const QPointF&, int, const QDomNode&);
       virtual void layout();

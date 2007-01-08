@@ -42,9 +42,9 @@ class LayoutBreak : public Element {
       LayoutBreak(Score*);
       virtual Element* clone() const { return new LayoutBreak(*this); }
       virtual ElementType type() const { return LAYOUT_BREAK; }
+      virtual void setSubtype(const QString&);
+      virtual void setSubtype(int st) { Element::setSubtype(st); }
+      virtual const QString subtypeName() const;
       };
 
 #endif
-
-
-

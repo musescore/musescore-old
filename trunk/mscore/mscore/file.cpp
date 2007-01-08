@@ -421,19 +421,6 @@ void Clef::write(Xml& xml) const
       }
 
 //---------------------------------------------------------
-//   write KeySig
-//---------------------------------------------------------
-
-void KeySig::write(Xml& xml) const
-      {
-      xml.stag("KeySig");
-      if (yoff)
-            xml.tag("offset", yoff);
-      Element::writeProperties(xml);
-      xml.etag("KeySig");
-      }
-
-//---------------------------------------------------------
 //   SStaff::write
 //---------------------------------------------------------
 
@@ -545,29 +532,6 @@ void Clef::read(QDomNode node)
                   domError(node);
             }
       setSubtype(type + (small ? clefSmallBit : 0));
-      }
-
-//---------------------------------------------------------
-//   KeySig::read
-//---------------------------------------------------------
-
-void KeySig::read(QDomNode node)
-      {
-      yoff = 0;
-      for (node = node.firstChild(); !node.isNull(); node = node.nextSibling()) {
-            QDomElement e = node.toElement();
-            if (e.isNull())
-                  continue;
-            QString tag(e.tagName());
-            QString val(e.text());
-            int i = val.toInt();
-            if (tag == "offset")
-                  yoff = i;
-            else if (Element::readProperties(node))
-                  ;
-            else
-                  domError(node);
-            }
       }
 
 //---------------------------------------------------------

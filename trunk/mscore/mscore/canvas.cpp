@@ -1076,7 +1076,7 @@ static int readType(QDomNode& node)
                         type = PEDAL;
                   else if (e.tagName() == "Trill")
                         type = TRILL;
-                  else if (e.tagName() == "Break")
+                  else if (e.tagName() == "LayoutBreak")
                         type = LAYOUT_BREAK;
                   else if (e.tagName() == "HelpLine")
                         type = HELP_LINE;

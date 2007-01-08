@@ -1028,11 +1028,10 @@ void MusicXml::xmlAttributes(Measure* measure, int staff, QDomNode node)
                         Part* part = score->part(staff);
                         int staves = part->nstaves();
                         for (int i = 0; i < staves; ++i) {
-                              int clef = score->staff(staff)->clef()->clef(tick);
-                              int clefOffset = clefTable[clef].yOffset;
-                              KeySig* keysig = new KeySig(score, key, clefOffset);
+                              KeySig* keysig = new KeySig(score);
                               keysig->setTick(tick);
                               keysig->setStaff(score->staff(staff + i));
+                              keysig->setSubtype(key);
                               measure->add(keysig);
                               }
                         }
