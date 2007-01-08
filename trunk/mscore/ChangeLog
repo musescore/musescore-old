@@ -1,4 +1,5 @@
 8.1.7 (ws)
+      - hacked pitch2xml() to fix xml export (export accidental2.msc)
       - new testfile accidental2.msc
       - KeySignature: dynamic calculation of clefOffset
       - fix drag&drop of LayoutBreak elements
