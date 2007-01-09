@@ -195,6 +195,8 @@ void MuseScore::preferencesChanged()
 MuseScore::MuseScore()
    : QMainWindow()
       {
+      setIconSize(QSize(ICON_HEIGHT, ICON_HEIGHT));
+
       setWindowTitle(QString("MuseScore"));
       cs                    = 0;
       textStyleDialog       = 0;
@@ -666,7 +668,7 @@ MuseScore::MuseScore()
       mb->addSeparator();
       QMenu* menuHelp = mb->addMenu(tr("&Help"));
 
-      menuHelp->addAction(tr("Browser"),  this, SLOT(helpBrowser()), Qt::Key_F1);
+      menuHelp->addAction(tr("Manual"),  this, SLOT(helpBrowser()), Qt::Key_F1);
       menuHelp->addAction(tr("&About"),   this, SLOT(about()));
       menuHelp->addAction(tr("About&Qt"), this, SLOT(aboutQt()));
       menuHelp->addSeparator();

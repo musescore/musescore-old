@@ -329,5 +329,14 @@ void initSymbols()
       symbols[s_flatSym]                  = Sym("small flat",                0xe112, f3);
       symbols[s_flatflatSym]              = Sym("small flat flat",           0xe114, f3);
       symbols[s_sharpsharpSym]            = Sym("small sharp sharp",         0xe116, f3);
+      symbols[flipSym]                    = Sym("flip stem",  0xe0fd, f1);
+
+      // used for GUI:
+      symbols[note4Sym]                   = Sym("note 1/4",   0xe0fc, f1);
+      symbols[note8Sym]                   = Sym("note 1/8",   0xe0f8, f1);
+      symbols[note16Sym]                  = Sym("note 1/16",  0xe0f9, f1);
+      symbols[note32Sym]                  = Sym("note 1/32",  0xe0fa, f1);
+      symbols[note64Sym]                  = Sym("note 1/64",  0xe0fb, f1);
+      symbols[dotdotSym]                  = Sym("dot dot",    0xe0fd, f1);
       }
 

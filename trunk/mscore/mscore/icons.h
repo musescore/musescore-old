@@ -37,6 +37,7 @@ extern QIcon flatIcon;
 extern QIcon flatflatIcon;
 extern QIcon quartrestIcon;
 extern QIcon dotIcon;
+extern QIcon dotdotIcon;
 extern QIcon sforzatoaccentIcon;
 extern QIcon staccatoIcon;
 extern QIcon tenutoIcon;

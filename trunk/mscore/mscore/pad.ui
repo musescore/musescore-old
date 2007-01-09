@@ -1,15 +1,12 @@
 <ui version="4.0" >
- <author></author>
- <comment></comment>
- <exportmacro></exportmacro>
  <class>PadBase</class>
  <widget class="QWidget" name="PadBase" >
   <property name="geometry" >
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>226</width>
-    <height>186</height>
+    <width>197</width>
+    <height>149</height>
    </rect>
   </property>
   <property name="windowTitle" >
@@ -17,13 +14,21 @@
   </property>
   <layout class="QHBoxLayout" >
    <property name="margin" >
-    <number>8</number>
+    <number>0</number>
    </property>
    <property name="spacing" >
-    <number>6</number>
+    <number>0</number>
    </property>
    <item>
     <widget class="QGroupBox" name="padNoGroup" >
+     <property name="sizePolicy" >
+      <sizepolicy>
+       <hsizetype>0</hsizetype>
+       <vsizetype>7</vsizetype>
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
      <property name="title" >
       <string/>
      </property>
@@ -32,13 +37,13 @@
        <number>0</number>
       </property>
       <property name="spacing" >
-       <number>1</number>
+       <number>0</number>
       </property>
       <item>
        <widget class="QToolButton" name="buttonPad1" >
         <property name="sizePolicy" >
          <sizepolicy>
-          <hsizetype>0</hsizetype>
+          <hsizetype>7</hsizetype>
           <vsizetype>7</vsizetype>
           <horstretch>0</horstretch>
           <verstretch>0</verstretch>
@@ -56,7 +61,7 @@
        <widget class="QToolButton" name="buttonPad2" >
         <property name="sizePolicy" >
          <sizepolicy>
-          <hsizetype>0</hsizetype>
+          <hsizetype>7</hsizetype>
           <vsizetype>7</vsizetype>
           <horstretch>0</horstretch>
           <verstretch>0</verstretch>
@@ -74,7 +79,7 @@
        <widget class="QToolButton" name="buttonPad3" >
         <property name="sizePolicy" >
          <sizepolicy>
-          <hsizetype>0</hsizetype>
+          <hsizetype>7</hsizetype>
           <vsizetype>7</vsizetype>
           <horstretch>0</horstretch>
           <verstretch>0</verstretch>
@@ -92,7 +97,7 @@
        <widget class="QToolButton" name="buttonPad4" >
         <property name="sizePolicy" >
          <sizepolicy>
-          <hsizetype>0</hsizetype>
+          <hsizetype>7</hsizetype>
           <vsizetype>7</vsizetype>
           <horstretch>0</horstretch>
           <verstretch>0</verstretch>
@@ -129,6 +134,14 @@
    </item>
    <item>
     <widget class="QGroupBox" name="padGroup" >
+     <property name="sizePolicy" >
+      <sizepolicy>
+       <hsizetype>7</hsizetype>
+       <vsizetype>7</vsizetype>
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
      <property name="title" >
       <string/>
      </property>
@@ -137,7 +150,7 @@
        <number>0</number>
       </property>
       <property name="spacing" >
-       <number>1</number>
+       <number>0</number>
       </property>
       <item rowspan="2" row="1" column="3" >
        <widget class="QToolButton" name="buttonPlus" >
@@ -450,7 +463,6 @@
    </item>
   </layout>
  </widget>
- <pixmapfunction></pixmapfunction>
  <resources/>
  <connections/>
 </ui>
