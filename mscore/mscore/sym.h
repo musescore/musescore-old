@@ -32,7 +32,7 @@ class Painter;
 class Sym {
       QChar _code;
       QFont _font;
-      
+
       QString _name;
       QPointF _offset;        // drawing offset in spatium units
 
@@ -263,7 +263,14 @@ enum {
       s_sharpsharpSym,
 
       plusSym,
-      
+      flipSym,
+      note4Sym,
+      note8Sym,
+      note16Sym,
+      note32Sym,
+      note64Sym,
+      dotdotSym,
+
       lastSym
       };
 #endif

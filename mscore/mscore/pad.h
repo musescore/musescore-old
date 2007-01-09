@@ -55,7 +55,6 @@ class Pad : public QWidget, private Ui::PadBase {
 
       virtual void mouseMoveEvent(QMouseEvent* ev);
       virtual void mousePressEvent(QMouseEvent* ev);
-      virtual bool event(QEvent*);
       virtual void closeEvent(QCloseEvent*);
 
    public slots:

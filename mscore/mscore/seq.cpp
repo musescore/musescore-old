@@ -629,10 +629,12 @@ void Seq::collectEvents()
                   }
             }
       Measure* lm = cs->scoreLayout()->last();
-      endTick   = lm->tick() + lm->tickLen();
-      PlayPanel* pp = mscore->getPlayPanel();
-      if (pp)
-            pp->setEndpos(endTick);
+      if (lm) {
+            endTick   = lm->tick() + lm->tickLen();
+            PlayPanel* pp = mscore->getPlayPanel();
+            if (pp)
+                  pp->setEndpos(endTick);
+            }
       }
 
 //---------------------------------------------------------

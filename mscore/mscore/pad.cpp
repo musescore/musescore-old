@@ -237,20 +237,6 @@ void Pad::setOn(bool flag, int cmd)
       }
 
 //---------------------------------------------------------
-//   keyPressEvent
-//    try to route all key events to scanvas
-//---------------------------------------------------------
-
-bool Pad::event(QEvent* ev)
-      {
-      if (ev->type() != QEvent::KeyPress)
-            return QWidget::event(ev);
-      QKeyEvent* e = (QKeyEvent*)ev;
-      emit keyEvent(e);
-      return false;
-      }
-
-//---------------------------------------------------------
 //   setPadNo
 //---------------------------------------------------------
 

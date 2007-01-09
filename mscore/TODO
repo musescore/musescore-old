@@ -1,10 +1,4 @@
 Todo:
-	- don't save Time values as enum values. Thats not portable/expandable
-        and will break compatibility of xml files. Reuse code with musicXml save
-
-	* better automatic beaming; grouping of notes should depend on time type
-        (test example inv10.msc which has 9/8 time and should be grouped 3/8)
-        (untested; only implemented for some types; breaks some demos)
 
 Features:
       - allow for special musical symbols in text
@@ -47,7 +41,7 @@ Navigation Panel:
 
 Player:
       - interpret tempo
-      - interpret velocity; map velocity to musical symbols 
+      - interpret velocity; map velocity to musical symbols
         (pp-p-f-ff etc.)
       - interpret gate time (staccato etc.)
 
