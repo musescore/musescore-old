@@ -27,6 +27,7 @@
 #include "note.h"
 #include "playpanel.h"
 #include "pad.h"
+#include "icons.h"
 
 //---------------------------------------------------------
 //   buttons2stemDir
@@ -178,6 +179,7 @@ void Preferences::write()
       xml.tag("alsaFragments", alsaFragments);
       xml.tag("layoutBreakColor", layoutBreakColor);
       xml.tag("antialiasedDrawing", antialiasedDrawing);
+      writeShortcuts(xml);
       xml.etag("Preferences");
       xml.etag("museScore");
       f.close();
@@ -303,6 +305,8 @@ void Preferences::read()
                               layoutBreakColor.setNamedColor(val);
                         else if (tag == "antialiasedDrawing")
                               antialiasedDrawing = i;
+                        else if (tag == "Shortcuts")
+                              readShortcuts(node);
                         else
                               printf("Mscore:Preferences: unknown tag %s\n",
                                  tag.toLatin1().data());
@@ -711,4 +715,84 @@ void PreferenceDialog::padCurClicked()
       QPoint s(w->pos());
       keyPadX->setValue(s.x());
       keyPadY->setValue(s.y());
+      }
+
+//---------------------------------------------------------
+//   writeShortcuts
+//---------------------------------------------------------
+
+void writeShortcuts(Xml& xml)
+      {
+      xml.stag("Shortcuts");
+      foreach(Shortcut* s, shortcuts) {
+            //
+            // save only if different from default
+            //
+            for (unsigned i = 0;; ++i) {
+                  if (MuseScore::sc[i].xml == s->xml) {
+                        if (MuseScore::sc[i].key != s->key)
+                              xml.tag(s->xml, s->key.toString(QKeySequence::PortableText));
+                        break;
+                        }
+                  }
+            }
+      xml.etag("Shortcuts");
+      }
+
+//---------------------------------------------------------
+//   readShortcuts
+//---------------------------------------------------------
+
+void readShortcuts(QDomNode node)
+      {
+      for (node = node.firstChild(); !node.isNull(); node = node.nextSibling()) {
+            QDomElement e = node.toElement();
+            Shortcut* s   = shortcuts.value(e.tagName());
+            if (s)
+                  s->key = QKeySequence::fromString(e.text(), QKeySequence::PortableText);
+            else
+                  printf("MuseScore:readShortCuts: unknown tag <%s>\n", e.tagName().toLatin1().data());
+            }
+      }
+
+
+//---------------------------------------------------------
+//   getAction
+//    returns action for shortcut
+//---------------------------------------------------------
+
+QAction* getAction(const char* id, QObject* parent)
+      {
+      Shortcut* s = shortcuts.value(id);
+      if (s == 0) {
+            printf("interanl error: shortcut <%s> not found\n", id);
+            return 0;
+            }
+      if (s->action == 0 || (s->action->parent() != parent)) {
+            s->action = new QAction(s->xml, parent);
+            s->action->setData(s->xml);
+            s->action->setShortcut(s->key);
+            s->action->setShortcutContext(s->context);
+            if (!s->help.isEmpty()) {
+                  s->action->setToolTip(s->help);
+                  s->action->setWhatsThis(s->help);
+                  }
+            else {
+                  s->action->setToolTip(s->descr);
+                  s->action->setWhatsThis(s->descr);
+                  }
+            if (!s->text.isEmpty())
+                  s->action->setText(s->text);
+            if (s->iconOn) {
+                  QSize iconSize(ICON_HEIGHT, ICON_HEIGHT);
+                  QIcon icon;
+                  icon.addFile(s->iconOn,  iconSize, QIcon::Normal, QIcon::On);
+                  if (s->iconOff)
+                        icon.addFile(s->iconOff, iconSize, QIcon::Normal, QIcon::Off);
+                  s->action->setIcon(icon);
+                  }
+            }
+      //      else
+      //            printf("action <%s> already initialized\n", s->xml);
+      return s->action;
       }
