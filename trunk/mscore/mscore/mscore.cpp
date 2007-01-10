@@ -1156,7 +1156,6 @@ MuseScore::MuseScore()
             char buffer[8];
             sprintf(buffer, "note-%c", "cdefgab"[i]);
             a = getAction(buffer, this);
-            a->setData(i);
             menuAddPitch->addAction(a);
             ag->addAction(a);
             }
@@ -1168,7 +1167,6 @@ MuseScore::MuseScore()
             char buffer[8];
             sprintf(buffer, "chord-%c", "cdefgab"[i]);
             a = getAction(buffer, this);
-            a->setData(i);
             menuAddPitch->addAction(a);
             ag->addAction(a);
             }
@@ -1789,8 +1787,25 @@ void MuseScore::printFile()
 
 void MuseScore::cmdNote(QAction* action)
       {
-      if (cs)
-            cs->cmdAddPitch(action->data().toInt(), false);
+      if (cs) {
+            QString s(action->data().toString());
+            int val;
+            if (s == "note-c")
+                  val = 0;
+            else if (s == "note-d")
+                  val = 1;
+            else if (s == "note-e")
+                  val = 2;
+            else if (s == "note-f")
+                  val = 3;
+            else if (s == "note-g")
+                  val = 4;
+            else if (s == "note-a")
+                  val = 5;
+            else if (s == "note-b")
+                  val = 6;
+            cs->cmdAddPitch(val, false);
+            }
       }
 
 //---------------------------------------------------------
@@ -1799,8 +1814,25 @@ void MuseScore::cmdNote(QAction* action)
 
 void MuseScore::cmdAddNote(QAction* action)
       {
-      if (cs)
-            cs->cmdAddPitch(action->data().toInt(), true);
+      if (cs) {
+            QString s(action->data().toString());
+            int val;
+            if (s == "chord-c")
+                  val = 0;
+            else if (s == "chord-d")
+                  val = 1;
+            else if (s == "chord-e")
+                  val = 2;
+            else if (s == "chord-f")
+                  val = 3;
+            else if (s == "chord-g")
+                  val = 4;
+            else if (s == "chord-a")
+                  val = 5;
+            else if (s == "chord-b")
+                  val = 6;
+            cs->cmdAddPitch(val, true);
+            }
       }
 
 //---------------------------------------------------------
