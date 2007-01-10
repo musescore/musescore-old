@@ -150,34 +150,87 @@ void Score::endCmd(bool undo)
 //   cmdAddPitch
 //---------------------------------------------------------
 
-void Score::cmdAddPitch(int val)
+void Score::cmdAddPitch(int note, bool addFlag)
       {
-      //                        a   b   c   d   e   f   g
-      static int offsets[] = {  9, 11,  0,  2,  4,  5,  7 };
-
-      Note* on = getSelectedNote();
-      if (on == 0)
-            return;
-
       startCmd();
-      setNoteEntry(true, true);
-      int pitch  = on->pitch();
-      int octave = pitch / 12;
-      int ooff   = pitch % 12;
-      int noff   = offsets[val];
-      int diff   = noff - ooff;
-      if (diff > 6)
-            --octave;
-      else if (diff < -6)
-            ++octave;
-      pitch  = octave * 12 + noff;
-      if (pitch > 127)
-            pitch = 127;
-      if (pitch < 0)
-            pitch = 0;
-      Note* n    = addNote(on->chord(), pitch);
-      select(n, 0, 0);
-      padState.pitch = n->pitch();
+      // c d e f g a b entered: insert note or add note to chord
+      int octave = padState.pitch / 12;
+      static int ptab[15][7] = {
+        //    c  d  e  f  g  a  b
+            { -1, 1, 3, 5, 6,  8, 10 },     // Bes
+            { -1, 2, 3, 5, 6,  8, 10 },     // Ges
+            {  0, 2, 3, 5, 6,  8, 10 },     // Des
+            {  0, 2, 3, 5, 7,  8, 10 },     // As
+            {  0, 2, 3, 5, 7,  8, 10 },     // Es
+            {  0, 2, 3, 5, 7,  9, 10 },     // B
+            {  0, 2, 4, 5, 7,  9, 11 },     // F
+            {  0, 2, 4, 5, 7,  9, 11 },     // C
+            {  0, 2, 4, 6, 7,  9, 11 },     // G
+            {  1, 2, 4, 6, 7,  9, 11 },     // D
+            {  1, 2, 4, 6, 8,  9, 11 },     // A
+            {  1, 3, 4, 6, 8,  9, 11 },     // E
+            {  1, 3, 4, 6, 8, 10, 11 },     // H
+            {  1, 3, 5, 6, 8, 10, 11 },     // Fis
+            {  1, 3, 5, 6, 8, 10, 12 },     // Cis
+            };
+      int key   = keymap->key(cis->pos) + 7;
+      int pitch = ptab[key][note];
+
+      int delta = padState.pitch - (octave*12 + pitch);
+      if (delta > 6)
+            padState.pitch = (octave+1)*12 + pitch;
+      else if (delta < -6)
+            padState.pitch = (octave-1)*12 + pitch;
+      else
+            padState.pitch = octave*12 + pitch;
+      if (padState.pitch < 0)
+            padState.pitch = 0;
+      if (padState.pitch > 127)
+            padState.pitch = 127;
+      int len = padState.tickLen;
+      ChordRest* cr = 0;
+      if (cis->pos == -1) {
+            //
+            // start note entry mode at current selected
+            // note/rest
+            //
+            cr = setNoteEntry(true, false);
+            if (cr == 0) {
+                  // cannot enter notes
+                  // no note/rest selected?
+                  endCmd(true);
+                  return;
+                  }
+            }
+      else {
+            //
+            // look for next note position
+            //
+            cr = (ChordRest*)searchNote(cis->pos, cis->staff);
+            if (!cr || !cr->isChordRest()) {
+                  cis->pos = -1;
+                  endCmd(true);
+                  return;
+                  }
+            }
+      if (addFlag) {
+            // add note to chord
+            Note* on = getSelectedNote();
+            if (on) {
+                  Note* n = addNote(on->chord(), padState.pitch);
+                  select(n, 0, 0);
+                  }
+            }
+      else {
+            // insert note
+            if (cr->tuplet()) {
+                  len = cr->tuplet()->noteLen();
+                  printf("current is tuplet len %d\n", len);
+                  }
+            setNote(cis->pos, staff(cis->staff), cis->voice, padState.pitch, len);
+            cis->pos += len;
+            }
+      moveCursor();
       endCmd(true);
       }
 
@@ -496,7 +549,6 @@ void Score::cmdAddPoet()
 void Score::cmdUpDown(bool up, bool octave)
       {
       ElementList el;
-
       for (iElement i = sel->elements()->begin(); i != sel->elements()->end(); ++i) {
             Element* e = *i;
             if (e->type() != NOTE)
@@ -517,6 +569,7 @@ void Score::cmdUpDown(bool up, bool octave)
       if (el.empty())
             return;
 
+      startCmd();
       int newPitch = padState.pitch;
       for (iElement i = el.begin(); i != el.end(); ++i) {
             Note* oNote = (Note*)(*i);
@@ -541,6 +594,7 @@ void Score::cmdUpDown(bool up, bool octave)
       padState.pitch = newPitch;
       sel->updateState();     // accidentals may have changed
       layout();
+      endCmd(true);
       }
 
 //---------------------------------------------------------
@@ -744,28 +798,27 @@ void Score::resetUserStretch()
 //   moveUp
 //---------------------------------------------------------
 
-Element* Score::moveUp(Note* note)
+void Score::moveUp(Note* note)
       {
       int rstaff   = note->staff()->rstaff();
 
       if (note->move() == -1) {
-            return 0;
+            return;
             }
       if (rstaff + note->move() <= 0) {
-            return 0;
+            return;
             }
 
       note->setMove(note->move() - 1);
       note->chord()->segment()->measure()->layoutNoteHeads(staff(note->staff()));
       layout();
-      return 0;
       }
 
 //---------------------------------------------------------
 //   moveDown
 //---------------------------------------------------------
 
-Element* Score::moveDown(Note* note)
+void Score::moveDown(Note* note)
       {
       int staffIdx = staff(note->staff());
       Staff* staff = note->staff();
@@ -774,14 +827,289 @@ Element* Score::moveDown(Note* note)
       int rstaves  = part->nstaves();
 
       if (note->move() == 1) {
-            return 0;
+            return;
             }
       if (rstaff + note->move() >= rstaves-1) {
-            return 0;
+            return;
             }
       note->setMove(note->move() + 1);
       note->chord()->segment()->measure()->layoutNoteHeads(staffIdx);
       layout();
-      return 0;
+      }
+
+//---------------------------------------------------------
+//   cmdAddStretch
+//    TODO: cmdAddStretch: undo
+//---------------------------------------------------------
+
+void Score::cmdAddStretch(double val)
+      {
+      if (sel->state != SEL_SYSTEM && sel->state != SEL_STAFF)
+            return;
+      startCmd();
+      int startTick = sel->tickStart;
+      int endTick   = sel->tickEnd;
+      for (Measure* im = _layout->first(); im; im = im->next()) {
+            if (im->tick() < startTick)
+                  continue;
+            if (im->tick() >= endTick)
+                  break;
+            double stretch = im->userStretch();
+            stretch += val;
+            im->setUserStretch(stretch);
+            }
+      layout();
+      endCmd(true);
+      }
+
+//---------------------------------------------------------
+//   cmdMoveDown
+//    move note one staff down
+//---------------------------------------------------------
+
+void Score::cmdMoveDown()
+      {
+      Element* el = sel->element(); // single selection
+      if (el && el->type() == NOTE) {
+            startCmd();
+            moveDown((Note*)el);
+            endCmd(true);
+            }
+      }
+
+//---------------------------------------------------------
+//   cmdMoveUp
+//    move note one staff up
+//---------------------------------------------------------
+
+void Score::cmdMoveUp()
+      {
+      Element* el = sel->element(); // single selection
+      if (el && el->type() == NOTE) {
+            startCmd();
+            moveUp((Note*)el);
+            endCmd(true);
+            }
+      }
+
+//---------------------------------------------------------
+//   cmdMoveUpChord
+//---------------------------------------------------------
+
+void Score::cmdMoveUpChord()
+      {
+      Element* el = sel->element(); // single selection
+      if (el && (el->type() == NOTE || el->type() == REST)) {
+            startCmd();
+            Element* e = upAlt(el);
+            if (e) {
+                  if (e->type() == NOTE)
+                        padState.pitch = ((Note*)e)->pitch();
+                  select(e, 0, 0);
+                  }
+            endCmd(true);
+            }
+      }
+
+//---------------------------------------------------------
+//   cmdMoveDownChord
+//---------------------------------------------------------
+
+void Score::cmdMoveDownChord()
+      {
+      Element* el = sel->element(); // single selection
+      if (el && (el->type() == NOTE || el->type() == REST)) {
+            startCmd();
+            Element* e = downAlt(el);
+            if (e) {
+                  if (e->type() == NOTE)
+                        padState.pitch = ((Note*)e)->pitch();
+                  select(e, 0, 0);
+                  }
+            endCmd(true);
+            }
+      }
+
+//---------------------------------------------------------
+//   cmdMoveTopChord
+//---------------------------------------------------------
+
+void Score::cmdMoveTopChord()
+      {
+      Element* el = sel->element(); // single selection
+      if (el && el->type() == NOTE) {
+            startCmd();
+            Element* e = upAltCtrl((Note*)el);
+            if (e) {
+                  if (e->type() == NOTE)
+                        padState.pitch = ((Note*)e)->pitch();
+                  select(e, 0, 0);
+                  }
+            endCmd(true);
+            }
+      }
+
+//---------------------------------------------------------
+//   cmdMoveBottomChord
+//---------------------------------------------------------
+
+void Score::cmdMoveBottomChord()
+      {
+      Element* el = sel->element(); // single selection
+      if (el && el->type() == NOTE) {
+            startCmd();
+            Element* e = downAltCtrl((Note*)el);
+            if (e) {
+                  if (e->type() == NOTE)
+                        padState.pitch = ((Note*)e)->pitch();
+                  select(e, 0, 0);
+                  }
+            endCmd(true);
+            }
+      }
+
+//---------------------------------------------------------
+//   cmdMoveNextChord
+//---------------------------------------------------------
+
+void Score::cmdMoveNextChord()
+      {
+      if (canvas()->getState() == Canvas::NOTE_ENTRY)
+            setNoteEntry(false, false);
+      ChordRest* cr = sel->lastChordRest();
+      if (cr) {
+            startCmd();
+            Element* el = nextChordRest(cr);
+            if (el) {
+                  if (el->type() == CHORD)
+                        el = ((Chord*)el)->upNote();
+                  select(el, 0, 0);
+                  adjustCanvasPosition(el);
+                  }
+            endCmd(true);
+            }
+      }
+
+//---------------------------------------------------------
+//   cmdMovePrevChord
+//---------------------------------------------------------
+
+void Score::cmdMovePrevChord()
+      {
+      if (canvas()->getState() == Canvas::NOTE_ENTRY)
+            setNoteEntry(false, false);
+      ChordRest* cr = sel->lastChordRest();
+      if (cr) {
+            startCmd();
+            Element* el = prevChordRest(cr);
+            if (el) {
+                  if (el->type() == CHORD)
+                        el = ((Chord*)el)->upNote();
+                  select(el, 0, 0);
+                  adjustCanvasPosition(el);
+                  }
+            endCmd(true);
+            }
+      }
+
+//---------------------------------------------------------
+//   cmdMoveNextMeasure
+//---------------------------------------------------------
+
+void Score::cmdMoveNextMeasure()
+      {
+      if (canvas()->getState() == Canvas::NOTE_ENTRY)
+            setNoteEntry(false, false);
+      ChordRest* cr = sel->lastChordRest();
+      if (cr) {
+            startCmd();
+            Element* el = nextMeasure(cr);
+            if (el) {
+                  if (el->type() == CHORD)
+                        el = ((Chord*)el)->upNote();
+                  select(el, 0, 0);
+                  adjustCanvasPosition(el);
+                  }
+            endCmd(true);
+            }
+      }
+
+//---------------------------------------------------------
+//   cmdMovePrevMeasure
+//---------------------------------------------------------
+
+void Score::cmdMovePrevMeasure()
+      {
+      if (canvas()->getState() == Canvas::NOTE_ENTRY)
+            setNoteEntry(false, false);
+      ChordRest* cr = sel->lastChordRest();
+      if (cr) {
+            startCmd();
+            Element* el = prevMeasure(cr);
+            if (el) {
+                  if (el->type() == CHORD)
+                        el = ((Chord*)el)->upNote();
+                  select(el, 0, 0);
+                  adjustCanvasPosition(el);
+                  }
+            endCmd(true);
+            }
+      }
+
+//---------------------------------------------------------
+//   cmdRest
+//---------------------------------------------------------
+
+void Score::cmdRest()
+      {
+      startCmd();
+      if (cis->pos == -1) {
+            setNoteEntry(true, true);
+            Element* el = sel->element();
+            if (el->type() == NOTE)
+                  el = el->parent();
+            if (el->isChordRest())
+                  cis->pos = ((ChordRest*)el)->tick();
+            }
+      if (cis->pos != -1) {
+            int len = padState.tickLen;
+            setRest(cis->pos, staff(cis->staff), cis->voice, len);
+            cis->pos += len;
+            }
+      moveCursor();
+      endCmd(true);
+      }
+
+//---------------------------------------------------------
+//   cmd
+//---------------------------------------------------------
+
+void Score::cmd(const QString& cmd)
+      {
+      startCmd();
+      if (cmd == "page-prev")
+            pagePrev();
+      else if (cmd == "page-next")
+            pageNext();
+      else if (cmd == "page-top")
+            pageTop();
+      else if (cmd == "page-end")
+            pageEnd();
+      else if (cmd == "add-tie")
+            cmdAddTie();
+      else if (cmd == "add-slur")
+            cmdAddSlur();
+      else if (cmd == "add-hairpin")
+            cmdAddHairpin(false);
+      else if (cmd == "add-hairpin-reverse")
+            cmdAddHairpin(true);
+      else if (cmd == "escape") {
+            if (cis->pos != -1)
+                  setNoteEntry(false, false);
+            select(0, 0, 0);
+            }
+      else if (cmd == "delete")
+            cmdDeleteSelection();
+      endCmd(true);
       }
 

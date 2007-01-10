@@ -167,8 +167,8 @@ class Score : public QObject {
       Note* upAltCtrl(Note*) const;
       Note* downAlt(Element*);
       Note* downAltCtrl(Note*) const;
-      Element* moveUp(Note*);
-      Element* moveDown(Note*);
+      void moveUp(Note*);
+      void moveDown(Note*);
       void convertTrack(MidiTrack*, int);
       void preprocessTrack(MidiTrack*);
       void checkUndoOp();
@@ -220,7 +220,7 @@ class Score : public QObject {
       void addExpression();
 
       void startNoteEntry();
-      void cmdAddPitch(int);
+      void cmdAddPitch(int, bool);
       void cmdAddIntervall(int);
       void cmdTuplet(int);
       void midiReceived();
@@ -285,7 +285,7 @@ class Score : public QObject {
       void undoOp(UndoOp::UndoType type, Element*, int idx);
       void undoOp(UndoOp::UndoType type, int a, int b);
 
-      void keyPressEvent(QKeyEvent*);
+//      void keyPressEvent(QKeyEvent*);
       void setNote(int tick, Staff* staff, int voice, int pitch, int len);
       int clefOffset(int tick, int staffIdx) const;
       Rest* setRest(int tick, int len, Staff*, int voice, Measure*);
@@ -326,10 +326,10 @@ class Score : public QObject {
       // menu entry:
       void addBar(BarLine*, Measure*);
 
-      // keyboard entry:
       void cmdAddSlur();
       void cmdAddTie();
       void cmdAddHairpin(bool);
+      void cmdAddStretch(double);
 
       void removeClef(Clef*);
       void deleteItem(Element*);
@@ -427,6 +427,19 @@ class Score : public QObject {
       void changeTimeSig(int tick, int st);
       void changeKeySig(int tick, int st);
       void changeClef(int tick, int si, int idx);
+
+      void cmdMoveUp();
+      void cmdMoveDown();
+      void cmdMoveUpChord();
+      void cmdMoveDownChord();
+      void cmdMoveTopChord();
+      void cmdMoveBottomChord();
+      void cmdMoveNextChord();
+      void cmdMovePrevChord();
+      void cmdMoveNextMeasure();
+      void cmdMovePrevMeasure();
+      void cmdRest();
+      void cmd(const QString&);
       };
 
 extern void setPadState(Element*);

@@ -755,7 +755,6 @@ void readShortcuts(QDomNode node)
             }
       }
 
-
 //---------------------------------------------------------
 //   getAction
 //    returns action for shortcut
@@ -783,16 +782,8 @@ QAction* getAction(const char* id, QObject* parent)
                   }
             if (!s->text.isEmpty())
                   s->action->setText(s->text);
-            if (s->iconOn) {
-                  QSize iconSize(ICON_HEIGHT, ICON_HEIGHT);
-                  QIcon icon;
-                  icon.addFile(s->iconOn,  iconSize, QIcon::Normal, QIcon::On);
-                  if (s->iconOff)
-                        icon.addFile(s->iconOff, iconSize, QIcon::Normal, QIcon::Off);
-                  s->action->setIcon(icon);
-                  }
+            if (s->icon)
+                  s->action->setIcon(*s->icon);
             }
-      //      else
-      //            printf("action <%s> already initialized\n", s->xml);
       return s->action;
       }

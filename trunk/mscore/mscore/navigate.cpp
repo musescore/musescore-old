@@ -83,7 +83,7 @@ Note* Score::upAlt(Element* element)
 
 //---------------------------------------------------------
 //   upAltCtrl
-//    höchste Note in Chord selektieren
+//    select top note in chord
 //---------------------------------------------------------
 
 Note* Score::upAltCtrl(Note* note) const
@@ -95,8 +95,8 @@ Note* Score::upAltCtrl(Note* note) const
 
 //---------------------------------------------------------
 //   downAlt
-//    nächst niedrige Note in Chord oder Element im
-//    nächsten Staff selektieren
+//    goto next note with lower pitch in chord or to
+//    top note in next staff
 //---------------------------------------------------------
 
 Note* Score::downAlt(Element* element)

@@ -107,6 +107,10 @@ int appDpiY = 75;
 
 QMap<QString, Shortcut*> shortcuts;
 
+//---------------------------------------------------------
+//    initial list of shortcuts
+//---------------------------------------------------------
+
 Shortcut MuseScore::sc[] = {
       Shortcut(
          "instruments",
@@ -164,6 +168,480 @@ Shortcut MuseScore::sc[] = {
          QT_TR_NOOP("Input"),
          QT_TR_NOOP("Note Input Mode")
          ),
+      Shortcut(
+         "intervall1",
+         QT_TR_NOOP("enter prime above"),
+         Qt::Key_1,
+         Qt::ApplicationShortcut,
+         QT_TR_NOOP("Prime above"),
+         QT_TR_NOOP("Enter Prime above")
+         ),
+      Shortcut(
+         "intervall2",
+         QT_TR_NOOP("enter sekunde above"),
+         Qt::Key_2,
+         Qt::ApplicationShortcut,
+         QT_TR_NOOP("Sekunde above"),
+         QT_TR_NOOP("Enter Sekunde above")
+         ),
+      Shortcut(
+         "intervall3",
+         QT_TR_NOOP("enter terz above"),
+         Qt::Key_3,
+         Qt::ApplicationShortcut,
+         QT_TR_NOOP("Terz above"),
+         QT_TR_NOOP("Enter Terz above")
+         ),
+      Shortcut(
+         "intervall4",
+         QT_TR_NOOP("enter quart above"),
+         Qt::Key_4,
+         Qt::ApplicationShortcut,
+         QT_TR_NOOP("Quart above"),
+         QT_TR_NOOP("Enter Quart above")
+         ),
+      Shortcut(
+         "intervall5",
+         QT_TR_NOOP("enter quint above"),
+         Qt::Key_5,
+         Qt::ApplicationShortcut,
+         QT_TR_NOOP("Quint above"),
+         QT_TR_NOOP("Enter Quint above")
+         ),
+      Shortcut(
+         "intervall6",
+         QT_TR_NOOP("enter sexte above"),
+         Qt::Key_6,
+         Qt::ApplicationShortcut,
+         QT_TR_NOOP("Sexte above"),
+         QT_TR_NOOP("Enter Sexte above")
+         ),
+      Shortcut(
+         "intervall7",
+         QT_TR_NOOP("enter septime above"),
+         Qt::Key_7,
+         Qt::ApplicationShortcut,
+         QT_TR_NOOP("Septime above"),
+         QT_TR_NOOP("Enter Septime above")
+         ),
+      Shortcut(
+         "intervall8",
+         QT_TR_NOOP("enter octave above"),
+         Qt::Key_8,
+         Qt::ApplicationShortcut,
+         QT_TR_NOOP("Octave above"),
+         QT_TR_NOOP("Enter Octave above")
+         ),
+      Shortcut(
+         "intervall9",
+         QT_TR_NOOP("enter None above"),
+         Qt::Key_9,
+         Qt::ApplicationShortcut,
+         QT_TR_NOOP("None above"),
+         QT_TR_NOOP("Enter None above")
+         ),
+      Shortcut(
+         "intervall-2",
+         QT_TR_NOOP("enter sekunde below"),
+         Qt::SHIFT + Qt::Key_2,
+         Qt::ApplicationShortcut,
+         QT_TR_NOOP("Sekunde below"),
+         QT_TR_NOOP("Enter Sekunde below")
+         ),
+      Shortcut(
+         "intervall-3",
+         QT_TR_NOOP("enter terz below"),
+         Qt::SHIFT + Qt::Key_3,
+         Qt::ApplicationShortcut,
+         QT_TR_NOOP("Terz below"),
+         QT_TR_NOOP("Enter Terz below")
+         ),
+      Shortcut(
+         "intervall-4",
+         QT_TR_NOOP("enter quart below"),
+         Qt::SHIFT + Qt::Key_4,
+         Qt::ApplicationShortcut,
+         QT_TR_NOOP("Quart below"),
+         QT_TR_NOOP("Enter Quart below")
+         ),
+      Shortcut(
+         "intervall-5",
+         QT_TR_NOOP("enter quint below"),
+         Qt::SHIFT + Qt::Key_5,
+         Qt::ApplicationShortcut,
+         QT_TR_NOOP("Quint below"),
+         QT_TR_NOOP("Enter Quint below")
+         ),
+      Shortcut(
+         "intervall-6",
+         QT_TR_NOOP("enter sexte below"),
+         Qt::SHIFT + Qt::Key_6,
+         Qt::ApplicationShortcut,
+         QT_TR_NOOP("Sexte below"),
+         QT_TR_NOOP("Enter Sexte below")
+         ),
+      Shortcut(
+         "intervall-7",
+         QT_TR_NOOP("enter septime below"),
+         Qt::SHIFT + Qt::Key_7,
+         Qt::ApplicationShortcut,
+         QT_TR_NOOP("Septime below"),
+         QT_TR_NOOP("Enter Septime below")
+         ),
+      Shortcut(
+         "intervall-8",
+         QT_TR_NOOP("enter octave below"),
+         Qt::SHIFT + Qt::Key_8,
+         Qt::ApplicationShortcut,
+         QT_TR_NOOP("Octave below"),
+         QT_TR_NOOP("Enter Octave below")
+         ),
+      Shortcut(
+         "intervall-9",
+         QT_TR_NOOP("enter None below"),
+         Qt::SHIFT + Qt::Key_9,
+         Qt::ApplicationShortcut,
+         QT_TR_NOOP("None below"),
+         QT_TR_NOOP("Enter None below")
+         ),
+      Shortcut(
+         "note-a",
+         QT_TR_NOOP("enter note a"),
+         Qt::Key_A,
+         Qt::ApplicationShortcut,
+         QT_TR_NOOP("A"),
+         QT_TR_NOOP("Enter Note A")
+         ),
+      Shortcut(
+         "note-b",
+         QT_TR_NOOP("enter note b"),
+         Qt::Key_B,
+         Qt::ApplicationShortcut,
+         QT_TR_NOOP("B"),
+         QT_TR_NOOP("Enter Note B")
+         ),
+      Shortcut(
+         "note-c",
+         QT_TR_NOOP("enter note c"),
+         Qt::Key_C,
+         Qt::ApplicationShortcut,
+         QT_TR_NOOP("C"),
+         QT_TR_NOOP("Enter Note C")
+         ),
+      Shortcut(
+         "note-d",
+         QT_TR_NOOP("enter note d"),
+         Qt::Key_D,
+         Qt::ApplicationShortcut,
+         QT_TR_NOOP("D"),
+         QT_TR_NOOP("Enter Note D")
+         ),
+      Shortcut(
+         "note-e",
+         QT_TR_NOOP("enter note e"),
+         Qt::Key_E,
+         Qt::ApplicationShortcut,
+         QT_TR_NOOP("E"),
+         QT_TR_NOOP("Enter Note E")
+         ),
+      Shortcut(
+         "note-f",
+         QT_TR_NOOP("enter note f"),
+         Qt::Key_F,
+         Qt::ApplicationShortcut,
+         QT_TR_NOOP("F"),
+         QT_TR_NOOP("Enter Note F")
+         ),
+      Shortcut(
+         "note-g",
+         QT_TR_NOOP("enter note g"),
+         Qt::Key_G,
+         Qt::ApplicationShortcut,
+         QT_TR_NOOP("G"),
+         QT_TR_NOOP("Enter Note G")
+         ),
+      Shortcut(
+         "chord-a",
+         QT_TR_NOOP("add a to chord"),
+         Qt::SHIFT + Qt::Key_A,
+         Qt::ApplicationShortcut,
+         QT_TR_NOOP("A"),
+         QT_TR_NOOP("Add note A to chord")
+         ),
+      Shortcut(
+         "chord-b",
+         QT_TR_NOOP("add b to chord"),
+         Qt::SHIFT + Qt::Key_B,
+         Qt::ApplicationShortcut,
+         QT_TR_NOOP("B"),
+         QT_TR_NOOP("Add note B to chord")
+         ),
+      Shortcut(
+         "chord-c",
+         QT_TR_NOOP("add c to chord"),
+         Qt::SHIFT + Qt::Key_C,
+         Qt::ApplicationShortcut,
+         QT_TR_NOOP("C"),
+         QT_TR_NOOP("Add note C to chord")
+         ),
+      Shortcut(
+         "chord-d",
+         QT_TR_NOOP("add d to chord"),
+         Qt::SHIFT + Qt::Key_D,
+         Qt::ApplicationShortcut,
+         QT_TR_NOOP("D"),
+         QT_TR_NOOP("Add note D to chord")
+         ),
+      Shortcut(
+         "chord-e",
+         QT_TR_NOOP("add e to chord"),
+         Qt::SHIFT + Qt::Key_E,
+         Qt::ApplicationShortcut,
+         QT_TR_NOOP("E"),
+         QT_TR_NOOP("Add note E to chord")
+         ),
+      Shortcut(
+         "chord-f",
+         QT_TR_NOOP("add f to chord"),
+         Qt::SHIFT + Qt::Key_F,
+         Qt::ApplicationShortcut,
+         QT_TR_NOOP("F"),
+         QT_TR_NOOP("Add note F to chord")
+         ),
+      Shortcut(
+         "chord-g",
+         QT_TR_NOOP("add g to chord"),
+         Qt::SHIFT + Qt::Key_G,
+         Qt::ApplicationShortcut,
+         QT_TR_NOOP("G"),
+         QT_TR_NOOP("Add note G to chord")
+         ),
+      Shortcut(
+         "rest",
+         QT_TR_NOOP("enter rest"),
+         Qt::Key_Space,
+         Qt::ApplicationShortcut,
+         QT_TR_NOOP("rest"),
+         QT_TR_NOOP("enter rest")
+         ),
+      Shortcut(
+         "stretch+",
+         QT_TR_NOOP("more stretch"),
+         Qt::Key_Plus,
+         Qt::ApplicationShortcut,
+         QT_TR_NOOP("Add more stretch"),
+         QT_TR_NOOP("Add more stretch to selected measure")
+         ),
+      Shortcut(
+         "stretch-",
+         QT_TR_NOOP("less stretch"),
+         Qt::Key_Minus,
+         Qt::ApplicationShortcut,
+         QT_TR_NOOP("Add less stretch"),
+         QT_TR_NOOP("Add less stretch to selected measure")
+         ),
+      Shortcut(
+         "flip",
+         QT_TR_NOOP("flip stem"),
+         Qt::Key_X,
+         Qt::ApplicationShortcut,
+         QT_TR_NOOP("flip direction"),
+         QT_TR_NOOP("flip direction"),
+         &flipIcon
+         ),
+      Shortcut(
+         "pitch-up",
+         QT_TR_NOOP("up"),
+         Qt::Key_Up,
+         Qt::ApplicationShortcut,
+         QT_TR_NOOP("up"),
+         QT_TR_NOOP("up")
+         ),
+      Shortcut(
+         "pitch-up-octave",
+         QT_TR_NOOP("up+ctrl"),
+         Qt::CTRL + Qt::Key_Up,
+         Qt::ApplicationShortcut,
+         QT_TR_NOOP("up+ctrl"),
+         QT_TR_NOOP("up+ctrl")
+         ),
+      Shortcut(
+         "up-chord",
+         QT_TR_NOOP("up note in chord"),
+         Qt::ALT+Qt::Key_Up,
+         Qt::ApplicationShortcut,
+         QT_TR_NOOP("up note in chord"),
+         QT_TR_NOOP("goto higher pitched note in chord")
+         ),
+      Shortcut(
+         "top-chord",
+         QT_TR_NOOP("goto top note in chord"),
+         Qt::ALT+Qt::CTRL+Qt::Key_Up,
+         Qt::ApplicationShortcut,
+         QT_TR_NOOP("top note in chord"),
+         QT_TR_NOOP("goto top note in chord")
+         ),
+      Shortcut(
+         "move-up",
+         QT_TR_NOOP("up+shift+ctrl"),
+         Qt::SHIFT+Qt::CTRL+Qt::Key_Up,
+         Qt::ApplicationShortcut,
+         QT_TR_NOOP("up+shift+ctrl"),
+         QT_TR_NOOP("up+shift+ctrl")
+         ),
+      Shortcut(
+         "pitch-down",
+         QT_TR_NOOP("down"),
+         Qt::Key_Down,
+         Qt::ApplicationShortcut,
+         QT_TR_NOOP("down"),
+         QT_TR_NOOP("down")
+         ),
+      Shortcut(
+         "pitch-down-octave",
+         QT_TR_NOOP("down+ctrl"),
+         Qt::CTRL + Qt::Key_Down,
+         Qt::ApplicationShortcut,
+         QT_TR_NOOP("down+ctrl"),
+         QT_TR_NOOP("down+ctrl")
+         ),
+      Shortcut(
+         "down-chord",
+         QT_TR_NOOP("down note in chord"),
+         Qt::ALT+Qt::Key_Down,
+         Qt::ApplicationShortcut,
+         QT_TR_NOOP("down note in chord"),
+         QT_TR_NOOP("goto lower pitched note in chord")
+         ),
+      Shortcut(
+         "bottom-chord",
+         QT_TR_NOOP("goto bottom note in chord"),
+         Qt::ALT+Qt::CTRL+Qt::Key_Down,
+         Qt::ApplicationShortcut,
+         QT_TR_NOOP("bottom note in chord"),
+         QT_TR_NOOP("goto bottom note in chord")
+         ),
+      Shortcut(
+         "move-down",
+         QT_TR_NOOP("down+shift+ctrl"),
+         Qt::SHIFT+Qt::CTRL+Qt::Key_Down,
+         Qt::ApplicationShortcut,
+         QT_TR_NOOP("down+shift+ctrl"),
+         QT_TR_NOOP("down+shift+ctrl")
+         ),
+      Shortcut(
+         "prev-chord",
+         QT_TR_NOOP("left"),
+         Qt::Key_Left,
+         Qt::ApplicationShortcut,
+         QT_TR_NOOP("left"),
+         QT_TR_NOOP("left")
+         ),
+      Shortcut(
+         "prev-measure",
+         QT_TR_NOOP("left+ctrl"),
+         Qt::CTRL+Qt::Key_Left,
+         Qt::ApplicationShortcut,
+         QT_TR_NOOP("left+ctrl"),
+         QT_TR_NOOP("left+ctrl")
+         ),
+      Shortcut(
+         "next-chord",
+         QT_TR_NOOP("right"),
+         Qt::Key_Right,
+         Qt::ApplicationShortcut,
+         QT_TR_NOOP("right"),
+         QT_TR_NOOP("right")
+         ),
+      Shortcut(
+         "next-measure",
+         QT_TR_NOOP("right+ctrl"),
+         Qt::CTRL+Qt::Key_Right,
+         Qt::ApplicationShortcut,
+         QT_TR_NOOP("right+ctrl"),
+         QT_TR_NOOP("right+ctrl")
+         ),
+      Shortcut(
+         "page-prev",
+         QT_TR_NOOP(""),
+         Qt::Key_PageUp,
+         Qt::ApplicationShortcut,
+         QT_TR_NOOP(""),
+         QT_TR_NOOP("")
+         ),
+      Shortcut(
+         "page-next",
+         QT_TR_NOOP(""),
+         Qt::Key_PageDown,
+         Qt::ApplicationShortcut,
+         QT_TR_NOOP(""),
+         QT_TR_NOOP("")
+         ),
+      Shortcut(
+         "page-top",
+         QT_TR_NOOP(""),
+         Qt::Key_Home,
+         Qt::ApplicationShortcut,
+         QT_TR_NOOP(""),
+         QT_TR_NOOP("")
+         ),
+      Shortcut(
+         "page-end",
+         QT_TR_NOOP(""),
+         Qt::Key_End,
+         Qt::ApplicationShortcut,
+         QT_TR_NOOP(""),
+         QT_TR_NOOP("")
+         ),
+      Shortcut(
+         "add-tie",
+         QT_TR_NOOP(""),
+         Qt::SHIFT+Qt::Key_S,
+         Qt::ApplicationShortcut,
+         QT_TR_NOOP(""),
+         QT_TR_NOOP("")
+         ),
+      Shortcut(
+         "add-slur",
+         QT_TR_NOOP(""),
+         Qt::Key_S,
+         Qt::ApplicationShortcut,
+         QT_TR_NOOP(""),
+         QT_TR_NOOP("")
+         ),
+      Shortcut(
+         "add-hairpin",
+         QT_TR_NOOP(""),
+         Qt::Key_H,
+         Qt::ApplicationShortcut,
+         QT_TR_NOOP(""),
+         QT_TR_NOOP("")
+         ),
+      Shortcut(
+         "add-hairpin-reverse",
+         QT_TR_NOOP(""),
+         Qt::SHIFT+Qt::Key_H,
+         Qt::ApplicationShortcut,
+         QT_TR_NOOP(""),
+         QT_TR_NOOP("")
+         ),
+      Shortcut(
+         "escape",
+         QT_TR_NOOP(""),
+         Qt::Key_Escape,
+         Qt::ApplicationShortcut,
+         QT_TR_NOOP(""),
+         QT_TR_NOOP("")
+         ),
+      Shortcut(
+         "delete",
+         QT_TR_NOOP(""),
+         Qt::Key_Delete,
+         Qt::ApplicationShortcut,
+         QT_TR_NOOP(""),
+         QT_TR_NOOP("")
+         ),
+
       Shortcut(0, 0, 0),
       };
 
@@ -288,24 +766,99 @@ MuseScore::MuseScore()
 
       QAction* a = getAction("instruments", this);
       connect(a, SIGNAL(triggered()), SLOT(editInstrList()));
-
       a = getAction("clefs", this);
       connect(a, SIGNAL(triggered()), SLOT(clefMenu()));
-
       a = getAction("keys", this);
       connect(a, SIGNAL(triggered()), SLOT(keyMenu()));
-
       a = getAction("symbols", this);
       connect(a, SIGNAL(triggered()), SLOT(symbolMenu1()));
-
       a = getAction("times", this);
       connect(a, SIGNAL(triggered()), SLOT(timeMenu()));
-
       a = getAction("dynamics", this);
       connect(a, SIGNAL(triggered()), SLOT(dynamicsMenu()));
-
       a = getAction("note-input", this);
       connect(a, SIGNAL(triggered()), SLOT(startNoteEntry()));
+
+      // otherwise unused actions:
+      //   must be added somewere to work
+      a = getAction("pitch-up", this);
+      addAction(a);
+      connect(a, SIGNAL(triggered()), SLOT(cmdPitchUp()));
+      a = getAction("pitch-up-octave", this);
+      addAction(a);
+      connect(a, SIGNAL(triggered()), SLOT(cmdPitchUpOctave()));
+      a = getAction("pitch-down", this);
+      addAction(a);
+      connect(a, SIGNAL(triggered()), SLOT(cmdPitchDown()));
+      a = getAction("pitch-down-octave", this);
+      addAction(a);
+      connect(a, SIGNAL(triggered()), SLOT(cmdPitchDownOctave()));
+      a = getAction("move-up", this);
+      addAction(a);
+      connect(a, SIGNAL(triggered()), SLOT(cmdMoveUp()));
+      a = getAction("move-down", this);
+      addAction(a);
+      connect(a, SIGNAL(triggered()), SLOT(cmdMoveDown()));
+      a = getAction("up-chord", this);
+      addAction(a);
+      connect(a, SIGNAL(triggered()), SLOT(cmdMoveUpChord()));
+      a = getAction("down-chord", this);
+      addAction(a);
+      connect(a, SIGNAL(triggered()), SLOT(cmdMoveDownChord()));
+      a = getAction("top-chord", this);
+      addAction(a);
+      connect(a, SIGNAL(triggered()), SLOT(cmdMoveTopChord()));
+      a = getAction("bottom-chord", this);
+      addAction(a);
+      connect(a, SIGNAL(triggered()), SLOT(cmdMoveBottomChord()));
+      a = getAction("next-chord", this);
+      addAction(a);
+      connect(a, SIGNAL(triggered()), SLOT(cmdMoveNextChord()));
+      a = getAction("prev-chord", this);
+      addAction(a);
+      connect(a, SIGNAL(triggered()), SLOT(cmdMovePrevChord()));
+      a = getAction("next-measure", this);
+      addAction(a);
+      connect(a, SIGNAL(triggered()), SLOT(cmdMoveNextMeasure()));
+      a = getAction("prev-measure", this);
+      addAction(a);
+      connect(a, SIGNAL(triggered()), SLOT(cmdMovePrevMeasure()));
+      a = getAction("rest", this);
+      addAction(a);
+      connect(a, SIGNAL(triggered()), SLOT(cmdRest()));
+
+      QActionGroup* ag = new QActionGroup(this);
+      a = getAction("page-prev", this);
+      addAction(a);
+      ag->addAction(a);
+      a = getAction("page-next",this);
+      addAction(a);
+      ag->addAction(a);
+      a = getAction("page-top", this);
+      addAction(a);
+      ag->addAction(a);
+      a = getAction("page-end", this);
+      addAction(a);
+      ag->addAction(a);
+      a = getAction("add-tie", this);
+      addAction(a);
+      ag->addAction(a);
+      a = getAction("add-slur", this);
+      addAction(a);
+      ag->addAction(a);
+      a = getAction("add-hairpin", this);
+      addAction(a);
+      ag->addAction(a);
+      a = getAction("add-hairpin-reverse", this);
+      addAction(a);
+      ag->addAction(a);
+      a = getAction("escape", this);
+      addAction(a);
+      ag->addAction(a);
+      a = getAction("delete", this);
+      addAction(a);
+      ag->addAction(a);
+      connect(ag, SIGNAL(triggered(QAction*)), SLOT(cmd(QAction*)));
 
       QWidget* mainWindow = new QWidget;
       layout = new QVBoxLayout;
@@ -489,7 +1042,6 @@ MuseScore::MuseScore()
             { PAD_FLAT,   true, &flatIcon,       QT_TR_NOOP("flat") },
             { PAD_FLAT2,  true, &flatflatIcon,   QT_TR_NOOP("double flat") },
             { -1,         false, 0,              0 },
-            { PAD_FLIP,   false, &flipIcon,      QT_TR_NOOP("flip stem") },
             };
 
       entryTools = new QToolBar(tr("Note Entry"));
@@ -509,6 +1061,11 @@ MuseScore::MuseScore()
             entryAction[n]->setToolTip(ne[i].tt);
             ++n;
             }
+
+      a = getAction("flip", this);
+      a->setData(PAD_FLIP);
+      entryTools->addAction(a);
+
       entryTools->addSeparator();
       for (int i = 0; i < VOICES; ++i) {
             QString txt = QString("%1").arg(i+1);
@@ -590,71 +1147,56 @@ MuseScore::MuseScore()
 
       QMenu* menuNotes = mb->addMenu(tr("Notes"));
 
-      menuNotes->addAction(tr("Input\tN"), this, SLOT(startNoteEntry()));
+      menuNotes->addAction(getAction("note-input", this));
       menuNotes->addSeparator();
 
-      QMenu* menuAddPitch = new QMenu(tr("Add Pitch"));
-      a = menuAddPitch->addAction("A");
-      a->setData(0);;
-      a = menuAddPitch->addAction("B");
-      a->setData(1);
-      a = menuAddPitch->addAction("C");
-      a->setData(2);
-      a = menuAddPitch->addAction("D");
-      a->setData(3);
-      a = menuAddPitch->addAction("E");
-      a->setData(4);
-      a = menuAddPitch->addAction("F");
-      a->setData(5);
-      a = menuAddPitch->addAction("G");
-      a->setData(6);
-
+      QMenu* menuAddPitch = new QMenu(tr("Add Note"));
+      ag = new QActionGroup(this);
+      for (int i = 0; i < 7; ++i) {
+            char buffer[8];
+            sprintf(buffer, "note-%c", "cdefgab"[i]);
+            a = getAction(buffer, this);
+            a->setData(i);
+            menuAddPitch->addAction(a);
+            ag->addAction(a);
+            }
+      connect(ag, SIGNAL(triggered(QAction*)), SLOT(cmdNote(QAction*)));
       menuNotes->addMenu(menuAddPitch);
 
-      connect(menuAddPitch, SIGNAL(triggered(QAction*)), SLOT(cmdAddPitch(QAction*)));
+      ag = new QActionGroup(this);
+      for (int i = 0; i < 7; ++i) {
+            char buffer[8];
+            sprintf(buffer, "chord-%c", "cdefgab"[i]);
+            a = getAction(buffer, this);
+            a->setData(i);
+            menuAddPitch->addAction(a);
+            ag->addAction(a);
+            }
+      connect(ag, SIGNAL(triggered(QAction*)), SLOT(cmdAddNote(QAction*)));
 
       QMenu* menuAddIntervall = new QMenu(tr("Add Intervall"));
-
-      a = menuAddIntervall->addAction(tr("Prime\t1"));
-      a->setData(1);
-      a = menuAddIntervall->addAction(tr("Sekunde above\t2"));
-      a->setData(2);
-      a = menuAddIntervall->addAction(tr("Terz above\t3"));
-      a->setData(3);
-      a = menuAddIntervall->addAction(tr("Quart above\t4"));
-      a->setData(4);
-      a = menuAddIntervall->addAction(tr("Quinte above\t5"));
-      a->setData(5);
-      a = menuAddIntervall->addAction(tr("Sexte above\t6"));
-      a->setData(6);
-      a = menuAddIntervall->addAction(tr("Septime above\t7"));
-      a->setData(7);
-      a = menuAddIntervall->addAction(tr("Oktave above\t8"));
-      a->setData(8);
-      a = menuAddIntervall->addAction(tr("None above\t9"));
-      a->setData(9);
+      ag = new QActionGroup(this);
+      for (int i = 1; i < 10; ++i) {
+            char buffer[16];
+            sprintf(buffer, "intervall%d", i);
+            a = getAction(buffer, this);
+            a->setData(i);
+            ag->addAction(a);
+            menuAddIntervall->addAction(a);
+            }
+      connect(ag, SIGNAL(triggered(QAction*)), SLOT(cmdAddIntervall(QAction*)));
       menuAddIntervall->addSeparator();
-      a = menuAddIntervall->addAction(tr("Sekunde below"));
-      a->setData(12);
-      a = menuAddIntervall->addAction(tr("Terz below"));
-      a->setData(13);
-      a = menuAddIntervall->addAction(tr("Quart below"));
-      a->setData(14);
-      a = menuAddIntervall->addAction(tr("Quinte below"));
-      a->setData(15);
-      a = menuAddIntervall->addAction(tr("Sexte below"));
-      a->setData(16);
-      a = menuAddIntervall->addAction(tr("Septime below"));
-      a->setData(17);
-      a = menuAddIntervall->addAction(tr("Oktave below"));
-      a->setData(18);
-      a = menuAddIntervall->addAction(tr("None below"));
-      a->setData(19);
-
+      for (int i = 2; i < 10; ++i) {
+            char buffer[16];
+            sprintf(buffer, "intervall-%d", i);
+            a = getAction(buffer, this);
+            a->setData(i + 10);
+            ag->addAction(a);
+            menuAddIntervall->addAction(a);
+            }
       menuNotes->addMenu(menuAddIntervall);
-      connect(menuAddIntervall, SIGNAL(triggered(QAction*)), SLOT(cmdAddIntervall(QAction*)));
 
-      QMenu* menuNtole = new QMenu(tr("N-Tole"));
+      QMenu* menuNtole = new QMenu(tr("Tuples"));
 
       a = menuNtole->addAction("duole");
       a->setData(2);
@@ -667,6 +1209,7 @@ MuseScore::MuseScore()
       a->setShortcut(Qt::CTRL+Qt::Key_5);
 
       menuNotes->addMenu(menuNtole);
+
       connect(menuNtole, SIGNAL(triggered(QAction*)), SLOT(cmdTuplet(QAction*)));
 
       //---------------------
@@ -678,6 +1221,17 @@ MuseScore::MuseScore()
       menuLayout->addAction(tr("Page Settings..."), this, SLOT(showPageSettings()));
       menuLayout->addAction(tr("Reset Positions"),  this, SLOT(resetUserOffsets()));
       menuLayout->addAction(tr("Set Normal Staff Distances"),  canvas, SLOT(resetStaffOffsets()));
+      ag = new QActionGroup(this);
+      a  = getAction("stretch+", this);
+      a->setData(0.1);
+      ag->addAction(a);
+      menuLayout->addAction(a);
+      a = getAction("stretch-", this);
+      a->setData(-0.1);
+      ag->addAction(a);
+      menuLayout->addAction(a);
+      connect(ag, SIGNAL(triggered(QAction*)), SLOT(addStretch(QAction*)));
+
       menuLayout->addAction(tr("Reset Stretch"), this, SLOT(resetUserStretch()));
       menuLayout->addAction(tr("Breaks..."), this, SLOT(showLayoutBreakPalette()));
 
@@ -763,6 +1317,16 @@ MuseScore::MuseScore()
       connect(seq, SIGNAL(started()), SLOT(seqStarted()));
       connect(seq, SIGNAL(stopped()), SLOT(seqStopped()));
       loadScoreList();
+      }
+
+//---------------------------------------------------------
+//   addStretch
+//---------------------------------------------------------
+
+void MuseScore::addStretch(QAction* a)
+      {
+      if (cs)
+            cs->cmdAddStretch(a->data().toDouble());
       }
 
 //---------------------------------------------------------
@@ -1220,13 +1784,23 @@ void MuseScore::printFile()
       }
 
 //---------------------------------------------------------
-//   cmdAddPitch
+//   cmdNote
 //---------------------------------------------------------
 
-void MuseScore::cmdAddPitch(QAction* action)
+void MuseScore::cmdNote(QAction* action)
       {
       if (cs)
-            cs->cmdAddPitch(action->data().toInt());
+            cs->cmdAddPitch(action->data().toInt(), false);
+      }
+
+//---------------------------------------------------------
+//   cmdAddNote
+//---------------------------------------------------------
+
+void MuseScore::cmdAddNote(QAction* action)
+      {
+      if (cs)
+            cs->cmdAddPitch(action->data().toInt(), true);
       }
 
 //---------------------------------------------------------
@@ -1952,5 +2526,165 @@ int main(int argc, char* argv[])
       mscore->getCanvas()->setFocus(Qt::OtherFocusReason);
       mscore->show();
       return qApp->exec();
+      }
+
+//---------------------------------------------------------
+//   cmdPitchUp
+//---------------------------------------------------------
+
+void MuseScore::cmdPitchUp()
+      {
+      if (cs)
+            cs->cmdUpDown(true, false);
+      }
+
+//---------------------------------------------------------
+//   cmdPitchDown
+//---------------------------------------------------------
+
+void MuseScore::cmdPitchDown()
+      {
+      if (cs)
+            cs->cmdUpDown(false, false);
+      }
+
+//---------------------------------------------------------
+//   cmdPitchUpOctave
+//---------------------------------------------------------
+
+void MuseScore::cmdPitchUpOctave()
+      {
+      if (cs)
+            cs->cmdUpDown(true, true);
+      }
+
+//---------------------------------------------------------
+//   cmdPitchDownOctave
+//---------------------------------------------------------
+
+void MuseScore::cmdPitchDownOctave()
+      {
+      if (cs)
+            cs->cmdUpDown(false, true);
+      }
+
+//---------------------------------------------------------
+//   cmdMoveUp
+//---------------------------------------------------------
+
+void MuseScore::cmdMoveUp()
+      {
+      if (cs)
+            cs->cmdMoveUp();
+      }
+
+//---------------------------------------------------------
+//   cmdMoveDown
+//---------------------------------------------------------
+
+void MuseScore::cmdMoveDown()
+      {
+      if (cs)
+            cs->cmdMoveUp();
+      }
+
+//---------------------------------------------------------
+//   cmdMoveUpChord
+//---------------------------------------------------------
+
+void MuseScore::cmdMoveUpChord()
+      {
+      if (cs)
+            cs->cmdMoveUpChord();
+      }
+
+//---------------------------------------------------------
+//   cmdMoveDownChord
+//---------------------------------------------------------
+
+void MuseScore::cmdMoveDownChord()
+      {
+      if (cs)
+            cs->cmdMoveDownChord();
+      }
+
+//---------------------------------------------------------
+//   cmdMoveTopChord
+//---------------------------------------------------------
+
+void MuseScore::cmdMoveTopChord()
+      {
+      if (cs)
+            cs->cmdMoveTopChord();
+      }
+
+//---------------------------------------------------------
+//   cmdMoveBottomChord
+//---------------------------------------------------------
+
+void MuseScore::cmdMoveBottomChord()
+      {
+      if (cs)
+            cs->cmdMoveBottomChord();
+      }
+
+//---------------------------------------------------------
+//   cmdMoveNextChord
+//---------------------------------------------------------
+
+void MuseScore::cmdMoveNextChord()
+      {
+      if (cs)
+            cs->cmdMoveNextChord();
+      }
+
+//---------------------------------------------------------
+//   cmdMovePrevChord
+//---------------------------------------------------------
+
+void MuseScore::cmdMovePrevChord()
+      {
+      if (cs)
+            cs->cmdMovePrevChord();
+      }
+
+//---------------------------------------------------------
+//   cmdMoveNextMeasure
+//---------------------------------------------------------
+
+void MuseScore::cmdMoveNextMeasure()
+      {
+      if (cs)
+            cs->cmdMoveNextMeasure();
+      }
+
+//---------------------------------------------------------
+//   cmdMovePrevMeasure
+//---------------------------------------------------------
+
+void MuseScore::cmdMovePrevMeasure()
+      {
+      if (cs)
+            cs->cmdMovePrevMeasure();
+      }
+
+//---------------------------------------------------------
+//   cmdRest
+//---------------------------------------------------------
+
+void MuseScore::cmdRest()
+      {
+      if (cs)
+            cs->cmdRest();
+      }
+
+//---------------------------------------------------------
+//   cmd
+//---------------------------------------------------------
+
+void MuseScore::cmd(QAction* a)
+      {
+      if (cs)
+            cs->cmd(a->data().toString());
       }
 
