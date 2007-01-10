@@ -64,27 +64,6 @@ void Score::keyPressEvent(QKeyEvent* ev)
       keyState = ev->modifiers();
       if (keyState == 0) {
             switch(ev->key()) {
-                  case Qt::Key_I:
-                        mscore->editInstrList();
-                        break;
-                  case Qt::Key_Y:
-                        mscore->clefMenu();
-                        break;
-                  case Qt::Key_K:
-                        mscore->keyMenu();
-                        break;
-                  case Qt::Key_Z:
-                        mscore->symbolMenu1();
-                        break;
-                  case Qt::Key_T:
-                        mscore->timeMenu();
-                        break;
-                  case Qt::Key_L:
-                        mscore->dynamicsMenu();
-                        break;
-                  case Qt::Key_N:
-                        startNoteEntry();
-                        break;
                   case Qt::Key_1:
                         cmdAddIntervall(1);
                         break;

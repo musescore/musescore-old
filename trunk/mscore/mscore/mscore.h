@@ -40,6 +40,7 @@ class MeasureListEditor;
 class Score;
 class PageSettings;
 class Pad;
+class Xml;
 
 extern QString mscoreGlobalShare;
 static const int PROJECT_LIST_LEN = 6;
@@ -76,6 +77,42 @@ class TabBar : public QTabBar {
       TabBar() : QTabBar() {}
       };
 
+
+//---------------------------------------------------------
+//   Shortcut
+//    hold the basic values for configurable shortcuts
+//---------------------------------------------------------
+
+struct Shortcut {
+      const char* xml;        //! xml tag name for configuration file
+      QString descr;          //! descriptor, shown in editor
+      QKeySequence key;       //! shortcut
+      Qt::ShortcutContext context;
+      QString text;
+      QString help;
+      const char* iconOn;
+      const char* iconOff;
+      QAction* action;        //! cached action
+
+      Shortcut() {
+            xml     = 0;
+            key     = 0;
+            context = Qt::WindowShortcut;
+            iconOn  = 0;
+            iconOff = 0;
+            action  = 0;
+            }
+      Shortcut(const char* name, const QString& d, const QKeySequence& k,
+         Qt::ShortcutContext cont = Qt::ApplicationShortcut,
+         const QString& txt = QString(),
+         const QString& h = 0,
+         const char* ic1 = 0, const char* ic2 = 0)
+         : xml(name), descr(d), key(k), context(cont), text(txt), help(h),
+           iconOn(ic1), iconOff(ic2) {
+            action = 0;
+            }
+      };
+
 //---------------------------------------------------------
 //   MuseScore
 //---------------------------------------------------------
@@ -94,6 +131,7 @@ class MuseScore : public QMainWindow {
 
       QComboBox* mag;
       QActionGroup* transportAction;
+
       QAction* padId;
       QAction* playId;
       QAction* navigatorId;
@@ -259,10 +297,16 @@ class MuseScore : public QMainWindow {
       void setEntry(bool val, int i);
       bool midiinEnabled() const;
       bool playEnabled() const;
+      static Shortcut sc[];
       };
 
 extern QMenu* genCreateMenu(QWidget* parent);
 extern MuseScore* mscore;
+
+extern void writeShortcuts(Xml& xml);
+extern void readShortcuts(QDomNode);
+extern QAction* getAction(const char*, QObject* parent);
+extern QMap<QString, Shortcut*> shortcuts;
 
 #endif
 

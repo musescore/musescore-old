@@ -105,6 +105,68 @@ ProjectList projectList[PROJECT_LIST_LEN];
 int appDpiX = 75;
 int appDpiY = 75;
 
+QMap<QString, Shortcut*> shortcuts;
+
+Shortcut MuseScore::sc[] = {
+      Shortcut(
+         "instruments",
+         QT_TR_NOOP("show instruments dialog"),
+         Qt::Key_I,
+         Qt::ApplicationShortcut,
+         QT_TR_NOOP("Instruments..."),
+         QT_TR_NOOP("Show Instruments Dialog")
+         ),
+      Shortcut(
+         "clefs",
+         QT_TR_NOOP("show clefs palette"),
+         Qt::Key_Y,
+         Qt::ApplicationShortcut,
+         QT_TR_NOOP("Clef..."),
+         QT_TR_NOOP("Show Clefs Palette")
+         ),
+      Shortcut(
+         "keys",
+         QT_TR_NOOP("show keys palette"),
+         Qt::Key_K,
+         Qt::ApplicationShortcut,
+         QT_TR_NOOP("Key..."),
+         QT_TR_NOOP("Show Keys Palette")
+         ),
+      Shortcut(
+         "symbols",
+         QT_TR_NOOP("show symbols palette"),
+         Qt::Key_Z,
+         Qt::ApplicationShortcut,
+         QT_TR_NOOP("Symbols..."),
+         QT_TR_NOOP("Show Symbols Palette")
+         ),
+      Shortcut(
+         "times",
+         QT_TR_NOOP("show time palette"),
+         Qt::Key_T,
+         Qt::ApplicationShortcut,
+         QT_TR_NOOP("Time..."),
+         QT_TR_NOOP("Show Time Palette")
+         ),
+      Shortcut(
+         "dynamics",
+         QT_TR_NOOP("show dynamics palette"),
+         Qt::Key_L,
+         Qt::ApplicationShortcut,
+         QT_TR_NOOP("Dynamics..."),
+         QT_TR_NOOP("Show Dynamics Palette")
+         ),
+      Shortcut(
+         "note-input",
+         QT_TR_NOOP("note input"),
+         Qt::Key_N,
+         Qt::ApplicationShortcut,
+         QT_TR_NOOP("Input"),
+         QT_TR_NOOP("Note Input Mode")
+         ),
+      Shortcut(0, 0, 0),
+      };
+
 //---------------------------------------------------------
 //   getSharePath
 //---------------------------------------------------------
@@ -196,7 +258,6 @@ MuseScore::MuseScore()
    : QMainWindow()
       {
       setIconSize(QSize(ICON_HEIGHT, ICON_HEIGHT));
-
       setWindowTitle(QString("MuseScore"));
       cs                    = 0;
       textStyleDialog       = 0;
@@ -224,6 +285,27 @@ MuseScore::MuseScore()
       pad                   = 0;
       _midiinEnabled        = true;
       _speakerEnabled       = true;
+
+      QAction* a = getAction("instruments", this);
+      connect(a, SIGNAL(triggered()), SLOT(editInstrList()));
+
+      a = getAction("clefs", this);
+      connect(a, SIGNAL(triggered()), SLOT(clefMenu()));
+
+      a = getAction("keys", this);
+      connect(a, SIGNAL(triggered()), SLOT(keyMenu()));
+
+      a = getAction("symbols", this);
+      connect(a, SIGNAL(triggered()), SLOT(symbolMenu1()));
+
+      a = getAction("times", this);
+      connect(a, SIGNAL(triggered()), SLOT(timeMenu()));
+
+      a = getAction("dynamics", this);
+      connect(a, SIGNAL(triggered()), SLOT(dynamicsMenu()));
+
+      a = getAction("note-input", this);
+      connect(a, SIGNAL(triggered()), SLOT(startNoteEntry()));
 
       QWidget* mainWindow = new QWidget;
       layout = new QVBoxLayout;
@@ -512,7 +594,6 @@ MuseScore::MuseScore()
       menuNotes->addSeparator();
 
       QMenu* menuAddPitch = new QMenu(tr("Add Pitch"));
-      QAction* a;
       a = menuAddPitch->addAction("A");
       a->setData(0);;
       a = menuAddPitch->addAction("B");
@@ -1680,6 +1761,15 @@ int main(int argc, char* argv[])
       argc -= optind;
       ++argc;
 
+      //
+      // initialize shortcut table
+      //
+      for (unsigned i = 0;; ++i) {
+            if (MuseScore::sc[i].xml == 0)
+                  break;
+            shortcuts[MuseScore::sc[i].xml] = &MuseScore::sc[i];
+            }
+
       haveMidi = !initMidi();
       preferences.read();
 
@@ -1863,5 +1953,4 @@ int main(int argc, char* argv[])
       mscore->show();
       return qApp->exec();
       }
-
 
