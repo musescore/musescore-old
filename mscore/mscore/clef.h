@@ -83,26 +83,8 @@ enum {
       CLEF_F
       };
 
-// FIXME!
-// only values for CLEF_G..CLEF_G3 and CLEF_F are
-// checked
 
-const ClefInfo clefTable[] = {
-      ClefInfo("G",   2,  0,   0,  45, "Treble Clef (G Clef)"),
-      ClefInfo("G",   2,  1,   7,  52, "Treble Clef 8va"),
-      ClefInfo("G",   2,  2,  14,  59, "Treble Clef 15va"),
-      ClefInfo("G",   2, -1,  -7,  38, "Treble Clef 8va bassa"),
-      ClefInfo("F",   4,  0, -12,  33, "Bass Clef (F Clef)"),
-      ClefInfo("F",   4, -1, -19,  26, "Bass Clef 8va bassa"),
-      ClefInfo("F",   4, -2, -26,  19, "Bass Clef 15va bassa"),
-      ClefInfo("F",   4,  0, -10,  35, "Bass Clef"),
-      ClefInfo("F",   4,  0, -14,  31, "Bass Clef"),
-      ClefInfo("C",   4,  0,  -1,  -2, "Soprano Clef"),
-      ClefInfo("C",   4,  0,  -4,  -4, "Mezzo-soprano Clef"),
-      ClefInfo("C",   3,  0,  -4,  -6, "Alto Clef"),
-      ClefInfo("C",   4,  0,  -3,  -8, "Tenor Clef"),
-      ClefInfo("TAB", 5,  0,   0,   0, "Tabulator")
-      };
+extern const ClefInfo clefTable[];
 
 //---------------------------------------------------------
 //   ClefList

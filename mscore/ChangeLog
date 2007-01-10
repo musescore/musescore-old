@@ -1,3 +1,6 @@
+10.1.7 (ws)
+      - reorganisation of command structure using QAction and QShortCut;
+        preparations for making shortcuts configurable
 8.1.7 (ws)
       - added new demo file scales.msc
       - removed redundant tick positions in native xml output. This

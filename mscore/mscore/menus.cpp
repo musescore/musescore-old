@@ -78,7 +78,7 @@ QMenu* MuseScore::genCreateMenu()
       text->addAction(tr("Tempo..."),     this, SLOT(addTempo()),      Qt::CTRL+Qt::ALT+Qt::Key_T);
       text->addAction(tr("Metronome"),    this, SLOT(addMetronome()),  Qt::CTRL+Qt::ALT+Qt::Key_M);
 
-      popup->addAction(getAction("actions", this));
+      popup->addAction(getAction("symbols", this));
       return popup;
       }
 

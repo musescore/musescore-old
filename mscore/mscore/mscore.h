@@ -90,25 +90,22 @@ struct Shortcut {
       Qt::ShortcutContext context;
       QString text;
       QString help;
-      const char* iconOn;
-      const char* iconOff;
+      QIcon* icon;
       QAction* action;        //! cached action
 
       Shortcut() {
             xml     = 0;
             key     = 0;
             context = Qt::WindowShortcut;
-            iconOn  = 0;
-            iconOff = 0;
+            icon    = 0;
             action  = 0;
             }
       Shortcut(const char* name, const QString& d, const QKeySequence& k,
          Qt::ShortcutContext cont = Qt::ApplicationShortcut,
-         const QString& txt = QString(),
-         const QString& h = 0,
-         const char* ic1 = 0, const char* ic2 = 0)
-         : xml(name), descr(d), key(k), context(cont), text(txt), help(h),
-           iconOn(ic1), iconOff(ic2) {
+         const QString& txt = 0, const QString& h = 0, QIcon* i = 0)
+         : descr(d), key(k), context(cont), text(txt), help(h) {
+            xml    = name;
+            icon   = i;
             action = 0;
             }
       };
@@ -236,7 +233,8 @@ class MuseScore : public QMainWindow {
       void doRedo();
       void doUndo();
       void printFile();
-      void cmdAddPitch(QAction*);
+      void cmdNote(QAction*);
+      void cmdAddNote(QAction*);
       void cmdAddIntervall(QAction*);
       void cmdTuplet(QAction*);
       void midiReceived();
@@ -263,6 +261,23 @@ class MuseScore : public QMainWindow {
       void midiinToggled(bool);
       void speakerToggled(bool);
       void removeTab(int);
+      void addStretch(QAction*);
+      void cmdPitchUp();
+      void cmdPitchDown();
+      void cmdPitchUpOctave();
+      void cmdPitchDownOctave();
+      void cmdMoveUp();
+      void cmdMoveDown();
+      void cmdMoveUpChord();
+      void cmdMoveDownChord();
+      void cmdMoveTopChord();
+      void cmdMoveBottomChord();
+      void cmdMoveNextChord();
+      void cmdMovePrevChord();
+      void cmdMoveNextMeasure();
+      void cmdMovePrevMeasure();
+      void cmdRest();
+      void cmd(QAction*);
 
    public slots:
       void setCurrentScore(int);

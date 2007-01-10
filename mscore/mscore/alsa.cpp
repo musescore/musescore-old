@@ -95,7 +95,7 @@ bool AlsaDriver::init()
 
       unsigned frsize = _frsize;
       if (snd_pcm_hw_params_get_period_size (_play_hwpar, &_frsize, &dir) || (frsize != _frsize) || dir) {
-            fprintf (stderr, "Alsa_driver: can't get requested period size for playback %ld != %ld.\n",
+            fprintf (stderr, "Alsa_driver: can't get requested period size for playback %d != %ld.\n",
                frsize, _frsize);
             return false;
             }
