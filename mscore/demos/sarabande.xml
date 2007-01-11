@@ -7,9 +7,10 @@
     </work>
   <identification>
     <creator type="composer">Johann Sebastian Bach (1685-1750)</creator>
+    <rights>LilyPond example file baerenreiter-sarabande.ly, see www.lilypond.org</rights>
     <encoding>
       <software>MuseScore 0.4.0</software>
-      <encoding-date>2007-01-06</encoding-date>
+      <encoding-date>2007-01-11</encoding-date>
       </encoding>
     </identification>
   <part-list>
