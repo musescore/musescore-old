@@ -70,5 +70,7 @@
 #include <QtGui/QTextDocument>
 #include <QtGui/QTextCursor>
 #include <QtGui/QAbstractTextDocumentLayout>
+#include <QtGui/QToolBox>
+#include <QtGui/QToolButton>
 #endif
 

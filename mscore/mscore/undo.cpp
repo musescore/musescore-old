@@ -46,11 +46,9 @@
 #include "chord.h"
 #include "sig.h"
 #include "key.h"
+#include "mscore.h"
 
 extern Measure* tick2measure(int tick);
-
-extern QAction* undoAction;
-extern QAction* redoAction;
 
 //
 // for debugging:
@@ -140,8 +138,8 @@ void Score::endUndo()
             for (iUndo i = redoList.begin(); i != redoList.end(); ++i)
                   delete *i;
             redoList.clear();
-            undoAction->setEnabled(true);
-            redoAction->setEnabled(false);
+            getAction("undo")->setEnabled(true);
+            getAction("redo")->setEnabled(false);
             }
       undoActive = false;
       }
@@ -365,8 +363,8 @@ void Score::processUndoOp(UndoOp* i, bool undo)
 
 void Score::endUndoRedo(Undo* undo)
       {
-      undoAction->setEnabled(!undoList.empty());
-      redoAction->setEnabled(!redoList.empty());
+      getAction("undo")->setEnabled(!undoList.empty());
+      getAction("redo")->setEnabled(!redoList.empty());
       setDirty(true);
 
       *cis = undo->inputState;

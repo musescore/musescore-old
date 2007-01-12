@@ -51,55 +51,6 @@ void Canvas::keyPressEvent(QKeyEvent* ev)
             else if (_score->edit(ev))
                   state = NORMAL;
             }
-//      else
-//            _score->keyPressEvent(ev);
-      }
-
-#if 0
-//---------------------------------------------------------
-//   Canvas::keyPressEvent
-//---------------------------------------------------------
-
-void Score::keyPressEvent(QKeyEvent* ev)
-      {
-      keyState = ev->modifiers();
-      if (keyState == 0) {
-            switch(ev->key()) {
-                  case Qt::Key_Clear:
-                        mscore->keyPadToggled(PAD_5);
-                        break;
-                  case Qt::Key_Plus:
-                        mscore->keyPadToggled(PAD_PLUS);
-                        break;
-                  case Qt::Key_Minus:
-                        mscore->keyPadToggled(PAD_MINUS);
-                        break;
-                  case Qt::Key_Asterisk:
-                        // Mult
-                        mscore->keyPadToggled(PAD_MULT);
-                        break;
-                  case '/':
-                        mscore->keyPadToggled(PAD_DIV);
-                        break;
-                  }
-            }
-      }
-#endif
-
-//---------------------------------------------------------
-//   padTriggered
-//---------------------------------------------------------
-
-void MuseScore::padTriggered(QAction* action)
-      {
-      if (cs)
-            cs->padToggle(action->data().toInt());
-      }
-
-void MuseScore::padTriggered(int n)
-      {
-      if (cs)
-            cs->padToggle(n);
       }
 
 //---------------------------------------------------------
@@ -110,7 +61,6 @@ void MuseScore::padTriggered(int n)
 
 void Score::padToggle(int n)
       {
-      startCmd();
       switch (n) {
             case PAD_NOTE1:
                   padState.len = division * 4;
@@ -133,29 +83,11 @@ void Score::padToggle(int n)
             case PAD_NOTE64:
                   padState.len = division/16;
                   break;
-            case PAD_SHARP2:
-                  padState.prefix = padState.prefix != 3 ? 3 : 0;
-                  break;
-            case PAD_SHARP:
-                  padState.prefix = padState.prefix != 1 ? 1 : 0;
-                  break;
-            case PAD_NAT:
-                  padState.prefix = padState.prefix != 5 ? 5 : 0;
-                  break;
-            case PAD_FLAT:
-                  padState.prefix = padState.prefix != 2 ? 2 : 0;
-                  break;
-            case PAD_FLAT2:
-                  padState.prefix = padState.prefix != 4 ? 4 : 0;
-                  break;
             case PAD_REST:
                   padState.rest = !padState.rest;
                   break;
             case PAD_DOT:
                   padState.dot = !padState.dot;
-                  break;
-            case PAD_TIE:
-                  padState.tie = !padState.tie;
                   break;
             case PAD_ESCAPE:
                   canvas()->setState(Canvas::NORMAL);
@@ -180,21 +112,6 @@ void Score::padToggle(int n)
                   break;
             case PAD_BEAM32:
                   cmdSetBeamMode(BEAM_BEGIN32);
-                  break;
-            case PAD_FLIP:
-                  cmdFlipStemDirection();
-                  break;
-            case PAD_VOICE0:
-                  padState.voice = 0;
-                  break;
-            case PAD_VOICE1:
-                  padState.voice = 1;
-                  break;
-            case PAD_VOICE2:
-                  padState.voice = 2;
-                  break;
-            case PAD_VOICE3:
-                  padState.voice = 3;
                   break;
             }
       setPadState();
@@ -222,23 +139,6 @@ void Score::padToggle(int n)
                         }
                   }
             }
-      else if (n >= PAD_SHARP2 && n <= PAD_FLAT2)
-            addAccidental(padState.prefix);
-      else if (n >= PAD_VOICE0 && n <= PAD_VOICE3)
-            changeVoice(padState.voice);
-      else if (n == PAD_TIE) {
-            if (cis->pos == -1 && sel->state == SEL_SINGLE) {
-                  Element* el = sel->element();
-                  if (el->type() == NOTE) {
-            		Tie* tie = new Tie(this);
-                        tie->setParent(el);
-
-            		cmdAdd(tie);
-      			connectTies();
-                        }
-                  }
-            }
-      endCmd(true);
       }
 
 //---------------------------------------------------------
@@ -313,25 +213,29 @@ void setPadState(Element* obj)
 
 void Score::setPadState()
       {
-      mscore->setEntry(false, PAD_ESCAPE);
-      mscore->setEntry(padState.rest, PAD_REST);
-      mscore->setEntry(padState.dot, PAD_DOT);
-      mscore->setEntry(padState.tie, PAD_TIE);
-      mscore->setEntry(padState.len == division*4, PAD_NOTE1);
-      mscore->setEntry(padState.len == division*2, PAD_NOTE2);
-      mscore->setEntry(padState.len == division, PAD_NOTE4);
-      mscore->setEntry(padState.len == division/2, PAD_NOTE8);
-      mscore->setEntry(padState.len == division/4, PAD_NOTE16);
-      mscore->setEntry(padState.len == division/8, PAD_NOTE32);
-      mscore->setEntry(padState.len == division/16, PAD_NOTE64);
-      mscore->setEntry(padState.prefix == 3, PAD_SHARP2);
-      mscore->setEntry(padState.prefix == 1, PAD_SHARP);
-      mscore->setEntry(padState.prefix == 5, PAD_NAT);
-      mscore->setEntry(padState.prefix == 2, PAD_FLAT);
-      mscore->setEntry(padState.prefix == 4, PAD_FLAT2);
-      for (int i = 0; i < VOICES; ++i)
-            mscore->setEntry(padState.voice == i, PAD_VOICE0 + i);
-      padState.tickLen = padState.len +
-         (padState.dot ? padState.len/2 : 0);
+      getAction("pad-rest")->setChecked(padState.rest);
+      getAction("pad-dot")->setChecked(padState.dot);
+      getAction("pad-tie")->setChecked(padState.tie);
+
+      getAction("pad-note-1")->setChecked(padState.len == division * 4);
+      getAction("pad-note-2")->setChecked(padState.len == division*2);
+      getAction("pad-note-4")->setChecked(padState.len == division);
+      getAction("pad-note-8")->setChecked(padState.len == division/2);
+      getAction("pad-note-16")->setChecked(padState.len == division/4);
+      getAction("pad-note-32")->setChecked(padState.len == division/8);
+      getAction("pad-note-64")->setChecked(padState.len == division/16);
+
+      getAction("pad-sharp2")->setChecked(padState.prefix == 3);
+      getAction("pad-sharp")->setChecked(padState.prefix == 1);
+      getAction("pad-nat")->setChecked(padState.prefix == 5);
+      getAction("pad-flat")->setChecked(padState.prefix == 2);
+      getAction("pad-flat2")->setChecked(padState.prefix == 4);
+
+      getAction("voice-1")->setChecked(padState.voice == 0);
+      getAction("voice-2")->setChecked(padState.voice == 1);
+      getAction("voice-3")->setChecked(padState.voice == 2);
+      getAction("voice-4")->setChecked(padState.voice == 3);
+
+      padState.tickLen = padState.len + (padState.dot ? padState.len/2 : 0);
       }
 

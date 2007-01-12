@@ -1,3 +1,6 @@
+12.1.7 (ws)
+      - remove old "Pad" design; does not work with Laptops and cannot be
+        implemented with Qt shortcuts
 10.1.7 (ws)
       - reorganisation of command structure using QAction and QShortCut;
         preparations for making shortcuts configurable

@@ -45,6 +45,9 @@ extern QIcon plusIcon;
 extern QIcon flipIcon;
 extern QIcon voiceIcons[];
 
+extern QIcon undoIcon, redoIcon, cutIcon, copyIcon, pasteIcon;
+extern QIcon printIcon;
+
 static const int ICON_HEIGHT = 24;
 static const int ICON_WIDTH  = 16;
 #endif

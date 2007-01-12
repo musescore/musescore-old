@@ -760,30 +760,31 @@ void readShortcuts(QDomNode node)
 //    returns action for shortcut
 //---------------------------------------------------------
 
-QAction* getAction(const char* id, QObject* parent)
+QAction* getAction(const char* id)
       {
       Shortcut* s = shortcuts.value(id);
       if (s == 0) {
             printf("interanl error: shortcut <%s> not found\n", id);
             return 0;
             }
-      if (s->action == 0 || (s->action->parent() != parent)) {
-            s->action = new QAction(s->xml, parent);
-            s->action->setData(s->xml);
-            s->action->setShortcut(s->key);
-            s->action->setShortcutContext(s->context);
+      if (s->action == 0) {
+            QAction* a = new QAction(s->xml, mscore);
+            s->action = a;
+            a->setData(s->xml);
+            a->setShortcut(s->key);
+            a->setShortcutContext(s->context);
             if (!s->help.isEmpty()) {
-                  s->action->setToolTip(s->help);
-                  s->action->setWhatsThis(s->help);
+                  a->setToolTip(s->help);
+                  a->setWhatsThis(s->help);
                   }
             else {
-                  s->action->setToolTip(s->descr);
-                  s->action->setWhatsThis(s->descr);
+                  a->setToolTip(s->descr);
+                  a->setWhatsThis(s->descr);
                   }
             if (!s->text.isEmpty())
-                  s->action->setText(s->text);
+                  a->setText(s->text);
             if (s->icon)
-                  s->action->setIcon(*s->icon);
+                  a->setIcon(*s->icon);
             }
       return s->action;
       }

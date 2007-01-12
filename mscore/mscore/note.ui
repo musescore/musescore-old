@@ -1,7 +1,4 @@
 <ui version="4.0" >
- <author></author>
- <comment></comment>
- <exportmacro></exportmacro>
  <class>NoteBase</class>
  <widget class="QWidget" name="NoteBase" >
   <property name="geometry" >
@@ -52,7 +49,11 @@
        </widget>
       </item>
       <item row="3" column="1" >
-       <widget class="QSpinBox" name="dots" />
+       <widget class="QSpinBox" name="dots" >
+        <property name="maximum" >
+         <number>3</number>
+        </property>
+       </widget>
       </item>
       <item row="3" column="0" >
        <widget class="QLabel" name="label_5" >
@@ -84,7 +85,11 @@
        </widget>
       </item>
       <item row="1" column="1" >
-       <widget class="QSpinBox" name="line" />
+       <widget class="QSpinBox" name="line" >
+        <property name="minimum" >
+         <number>-99</number>
+        </property>
+       </widget>
       </item>
       <item row="1" column="0" >
        <widget class="QLabel" name="label_3" >
@@ -129,14 +134,17 @@
        </widget>
       </item>
       <item row="0" column="1" >
-       <widget class="QSpinBox" name="pitch" />
+       <widget class="QSpinBox" name="pitch" >
+        <property name="maximum" >
+         <number>127</number>
+        </property>
+       </widget>
       </item>
      </layout>
     </widget>
    </item>
   </layout>
  </widget>
- <pixmapfunction></pixmapfunction>
  <resources/>
  <connections/>
 </ui>

@@ -135,11 +135,6 @@ class MuseScore : public QMainWindow {
       QAction* visibleId;
       QAction* transportId;
       QAction* inputId;
-      QAction* entryAction[16];
-      QAction* voiceAction[VOICES];
-      QAction* cutId;
-      QAction* copyId;
-      QAction* pasteId;
       PreferenceDialog* preferenceDialog;
       QToolBar* fileTools;
       QToolBar* transportTools;
@@ -191,8 +186,6 @@ class MuseScore : public QMainWindow {
       void loadInstrumentTemplates();
 
    private slots:
-      void padTriggered(QAction* action);
-      void padTriggered(int);
       void helpBrowser();
       void about();
       void aboutQt();
@@ -230,13 +223,6 @@ class MuseScore : public QMainWindow {
       void fingeringMenu();
       void noteAttributesMenu();
       void accidentalsMenu();
-      void doRedo();
-      void doUndo();
-      void printFile();
-      void cmdNote(QAction*);
-      void cmdAddNote(QAction*);
-      void cmdAddIntervall(QAction*);
-      void cmdTuplet(QAction*);
       void midiReceived();
       void cmdAddTitle();
       void cmdAddSubTitle();
@@ -247,7 +233,6 @@ class MuseScore : public QMainWindow {
       void addTechnik();
       void addTempo();
       void addMetronome();
-      void cmdAppendMeasure();
       void cmdAppendMeasures();
       void resetUserStretch();
       void showLayoutBreakPalette();
@@ -261,22 +246,6 @@ class MuseScore : public QMainWindow {
       void midiinToggled(bool);
       void speakerToggled(bool);
       void removeTab(int);
-      void addStretch(QAction*);
-      void cmdPitchUp();
-      void cmdPitchDown();
-      void cmdPitchUpOctave();
-      void cmdPitchDownOctave();
-      void cmdMoveUp();
-      void cmdMoveDown();
-      void cmdMoveUpChord();
-      void cmdMoveDownChord();
-      void cmdMoveTopChord();
-      void cmdMoveBottomChord();
-      void cmdMoveNextChord();
-      void cmdMovePrevChord();
-      void cmdMoveNextMeasure();
-      void cmdMovePrevMeasure();
-      void cmdRest();
       void cmd(QAction*);
 
    public slots:
@@ -291,7 +260,6 @@ class MuseScore : public QMainWindow {
       void showPlayPanel(bool);
       void showPad(bool);
       void showNavigator(bool);
-      void keyPadToggled(int key);
 
    public:
       MuseScore();
@@ -307,9 +275,7 @@ class MuseScore : public QMainWindow {
       QString getScore(int idx) const;
       void midiNoteReceived(int pitch, bool chord);
       void showElementContext(Element* el);
-      void setPadNo(int padno);
 	void cmdAppendMeasures(int);
-      void setEntry(bool val, int i);
       bool midiinEnabled() const;
       bool playEnabled() const;
       static Shortcut sc[];
@@ -320,7 +286,7 @@ extern MuseScore* mscore;
 
 extern void writeShortcuts(Xml& xml);
 extern void readShortcuts(QDomNode);
-extern QAction* getAction(const char*, QObject* parent);
+extern QAction* getAction(const char*);
 extern QMap<QString, Shortcut*> shortcuts;
 
 #endif

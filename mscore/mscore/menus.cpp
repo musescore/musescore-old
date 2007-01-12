@@ -52,18 +52,18 @@ QMenu* MuseScore::genCreateMenu()
       {
       QMenu* popup = new QMenu(tr("&Create"));
 
-      popup->addAction(getAction("instruments", this));
-      popup->addAction(tr("Measure"),            this, SLOT(cmdAppendMeasure()), Qt::CTRL+Qt::Key_B);
+      popup->addAction(getAction("instruments"));
+      popup->addAction(getAction("append-measure"));
       popup->addAction(tr("Measures..."),        this, SLOT(cmdAppendMeasures()));
       popup->addAction(tr("Barlines..."),        this, SLOT(barMenu()));
-      popup->addAction(getAction("clefs", this));
-      popup->addAction(getAction("keys", this));
-      popup->addAction(getAction("times", this));
+      popup->addAction(getAction("clefs"));
+      popup->addAction(getAction("keys"));
+      popup->addAction(getAction("times"));
       popup->addAction(tr("&Lines..."),          this, SLOT(lineMenu()));
       popup->addAction(tr("System Brackets..."), this, SLOT(bracketMenu()));
       popup->addAction(tr("Note Attributes..."), this, SLOT(noteAttributesMenu()));
       popup->addAction(tr("Accidentals..."),     this, SLOT(accidentalsMenu()));
-      popup->addAction(getAction("dynamics", this));
+      popup->addAction(getAction("dynamics"));
 
       QMenu* text = popup->addMenu(tr("Text..."));
       text->addAction(tr("Title"),        this, SLOT(cmdAddTitle()));
@@ -78,7 +78,7 @@ QMenu* MuseScore::genCreateMenu()
       text->addAction(tr("Tempo..."),     this, SLOT(addTempo()),      Qt::CTRL+Qt::ALT+Qt::Key_T);
       text->addAction(tr("Metronome"),    this, SLOT(addMetronome()),  Qt::CTRL+Qt::ALT+Qt::Key_M);
 
-      popup->addAction(getAction("symbols", this));
+      popup->addAction(getAction("symbols"));
       return popup;
       }
 
