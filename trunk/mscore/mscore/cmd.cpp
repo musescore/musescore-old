@@ -47,6 +47,7 @@
 #include "seq.h"
 #include "mscore.h"
 #include "tuplet.h"
+#include "padids.h"
 
 //---------------------------------------------------------
 //   start
@@ -152,7 +153,6 @@ void Score::endCmd(bool undo)
 
 void Score::cmdAddPitch(int note, bool addFlag)
       {
-      startCmd();
       // c d e f g a b entered: insert note or add note to chord
       int octave = padState.pitch / 12;
       static int ptab[15][7] = {
@@ -231,7 +231,6 @@ void Score::cmdAddPitch(int note, bool addFlag)
             cis->pos += len;
             }
       moveCursor();
-      endCmd(true);
       }
 
 //---------------------------------------------------------
@@ -244,7 +243,6 @@ void Score::cmdAddIntervall(int val)
       if (on == 0)
             return;
 
-      startCmd();
       setNoteEntry(true, true);
       int pitch = on->pitch();
       switch(val) {
@@ -257,14 +255,14 @@ void Score::cmdAddIntervall(int val)
             case 7:   pitch += 11; break;
             case 8:   pitch += 12; break;
             case 9:   pitch += 14; break;
-            case 12:  pitch -= 2;  break;
-            case 13:  pitch -= 4;  break;
-            case 14:  pitch -= 5;  break;
-            case 15:  pitch -= 7;  break;
-            case 16:  pitch -= 9;  break;
-            case 17:  pitch -= 11; break;
-            case 18:  pitch -= 12; break;
-            case 19:  pitch -= 14; break;
+            case -2:  pitch -= 2;  break;
+            case -3:  pitch -= 4;  break;
+            case -4:  pitch -= 5;  break;
+            case -5:  pitch -= 7;  break;
+            case -6:  pitch -= 9;  break;
+            case -7:  pitch -= 11; break;
+            case -8:  pitch -= 12; break;
+            case -9:  pitch -= 14; break;
             default:
                   printf("cmdAddIntervall: unknown idx %d\n", val);
                   abort();
@@ -276,7 +274,6 @@ void Score::cmdAddIntervall(int val)
       Note* n = addNote(on->chord(), pitch);
       select(n, 0, 0);
       padState.pitch = n->pitch();
-      endCmd(true);
       }
 
 //---------------------------------------------------------
@@ -546,7 +543,7 @@ void Score::cmdAddPoet()
  Increment/decrement pitch of note by one or by an octave.
 */
 
-void Score::cmdUpDown(bool up, bool octave)
+void Score::upDown(bool up, bool octave)
       {
       ElementList el;
       for (iElement i = sel->elements()->begin(); i != sel->elements()->end(); ++i) {
@@ -569,7 +566,6 @@ void Score::cmdUpDown(bool up, bool octave)
       if (el.empty())
             return;
 
-      startCmd();
       int newPitch = padState.pitch;
       for (iElement i = el.begin(); i != el.end(); ++i) {
             Note* oNote = (Note*)(*i);
@@ -594,7 +590,6 @@ void Score::cmdUpDown(bool up, bool octave)
       padState.pitch = newPitch;
       sel->updateState();     // accidentals may have changed
       layout();
-      endCmd(true);
       }
 
 //---------------------------------------------------------
@@ -846,7 +841,6 @@ void Score::cmdAddStretch(double val)
       {
       if (sel->state != SEL_SYSTEM && sel->state != SEL_STAFF)
             return;
-      startCmd();
       int startTick = sel->tickStart;
       int endTick   = sel->tickEnd;
       for (Measure* im = _layout->first(); im; im = im->next()) {
@@ -859,37 +853,6 @@ void Score::cmdAddStretch(double val)
             im->setUserStretch(stretch);
             }
       layout();
-      endCmd(true);
-      }
-
-//---------------------------------------------------------
-//   cmdMoveDown
-//    move note one staff down
-//---------------------------------------------------------
-
-void Score::cmdMoveDown()
-      {
-      Element* el = sel->element(); // single selection
-      if (el && el->type() == NOTE) {
-            startCmd();
-            moveDown((Note*)el);
-            endCmd(true);
-            }
-      }
-
-//---------------------------------------------------------
-//   cmdMoveUp
-//    move note one staff up
-//---------------------------------------------------------
-
-void Score::cmdMoveUp()
-      {
-      Element* el = sel->element(); // single selection
-      if (el && el->type() == NOTE) {
-            startCmd();
-            moveUp((Note*)el);
-            endCmd(true);
-            }
       }
 
 //---------------------------------------------------------
@@ -1057,59 +1020,199 @@ void Score::cmdMovePrevMeasure()
       }
 
 //---------------------------------------------------------
-//   cmdRest
-//---------------------------------------------------------
-
-void Score::cmdRest()
-      {
-      startCmd();
-      if (cis->pos == -1) {
-            setNoteEntry(true, true);
-            Element* el = sel->element();
-            if (el->type() == NOTE)
-                  el = el->parent();
-            if (el->isChordRest())
-                  cis->pos = ((ChordRest*)el)->tick();
-            }
-      if (cis->pos != -1) {
-            int len = padState.tickLen;
-            setRest(cis->pos, staff(cis->staff), cis->voice, len);
-            cis->pos += len;
-            }
-      moveCursor();
-      endCmd(true);
-      }
-
-//---------------------------------------------------------
 //   cmd
 //---------------------------------------------------------
 
 void Score::cmd(const QString& cmd)
       {
-      startCmd();
-      if (cmd == "page-prev")
-            pagePrev();
-      else if (cmd == "page-next")
-            pageNext();
-      else if (cmd == "page-top")
-            pageTop();
-      else if (cmd == "page-end")
-            pageEnd();
-      else if (cmd == "add-tie")
-            cmdAddTie();
-      else if (cmd == "add-slur")
-            cmdAddSlur();
-      else if (cmd == "add-hairpin")
-            cmdAddHairpin(false);
-      else if (cmd == "add-hairpin-reverse")
-            cmdAddHairpin(true);
-      else if (cmd == "escape") {
-            if (cis->pos != -1)
-                  setNoteEntry(false, false);
-            select(0, 0, 0);
+printf("cmd <%s>\n", cmd.toLatin1().data());
+      if (cmd == "print")
+            printFile();
+      else if (cmd == "undo")
+            doUndo();
+      else if (cmd == "redo")
+            doRedo();
+      else if (cmd == "append-measure")
+            cmdAppendMeasure();
+      else {
+            startCmd();
+            if (cmd == "page-prev")
+                  pagePrev();
+            else if (cmd == "page-next")
+                  pageNext();
+            else if (cmd == "page-top")
+                  pageTop();
+            else if (cmd == "page-end")
+                  pageEnd();
+            else if (cmd == "add-tie")
+                  cmdAddTie();
+            else if (cmd == "add-slur")
+                  cmdAddSlur();
+            else if (cmd == "add-hairpin")
+                  cmdAddHairpin(false);
+            else if (cmd == "add-hairpin-reverse")
+                  cmdAddHairpin(true);
+            else if (cmd == "escape") {
+                  if (cis->pos != -1)
+                        setNoteEntry(false, false);
+                  select(0, 0, 0);
+                  }
+            else if (cmd == "delete")
+                  cmdDeleteSelection();
+            else if (cmd == "rest") {
+                  if (cis->pos == -1) {
+                        setNoteEntry(true, true);
+                        Element* el = sel->element();
+                        if (el->type() == NOTE)
+                              el = el->parent();
+                        if (el->isChordRest())
+                              cis->pos = ((ChordRest*)el)->tick();
+                        }
+                  if (cis->pos != -1) {
+                        int len = padState.tickLen;
+                        setRest(cis->pos, staff(cis->staff), cis->voice, len);
+                        cis->pos += len;
+                        }
+                  moveCursor();
+                  }
+            else if (cmd == "pitch-up")
+                  upDown(true, false);
+            else if (cmd == "pitch-down")
+                  upDown(false, false);
+            else if (cmd == "pitch-up-octave")
+                  upDown(true, true);
+            else if (cmd == "pitch-down-octave")
+                  upDown(false, true);
+            else if (cmd == "move-up") {
+                  Element* el = sel->element(); // single selection
+                  if (el && el->type() == NOTE)
+                        moveUp((Note*)el);
+                  }
+            else if (cmd == "move-down") {
+                  Element* el = sel->element(); // single selection
+                  if (el && el->type() == NOTE) {
+                        moveDown((Note*)el);
+                        }
+                  }
+            else if (cmd == "up-chord")
+                  cmdMoveUpChord();
+            else if (cmd == "down-chord")
+                  cmdMoveDownChord();
+            else if (cmd == "top-chord" )
+                  cmdMoveTopChord();
+            else if (cmd == "bottom-chord")
+                  cmdMoveBottomChord();
+            else if (cmd == "next-chord")
+                  cmdMoveNextChord();
+            else if (cmd == "prev-chord")
+                  cmdMovePrevChord();
+            else if (cmd == "next-measure")
+                  cmdMoveNextMeasure();
+            else if (cmd == "prev-measure")
+                  cmdMovePrevMeasure();
+            else if (cmd == "note-c")
+                  cmdAddPitch(0, false);
+            else if (cmd == "note-d")
+                  cmdAddPitch(1, false);
+            else if (cmd == "note-e")
+                  cmdAddPitch(2, false);
+            else if (cmd == "note-f")
+                  cmdAddPitch(3, false);
+            else if (cmd == "note-g")
+                  cmdAddPitch(4, false);
+            else if (cmd == "note-a")
+                  cmdAddPitch(5, false);
+            else if (cmd == "note-b")
+                  cmdAddPitch(6, false);
+            else if (cmd == "chord-c")
+                  cmdAddPitch(0, true);
+            else if (cmd == "chord-d")
+                  cmdAddPitch(1, true);
+            else if (cmd == "chord-e")
+                  cmdAddPitch(2, true);
+            else if (cmd == "chord-f")
+                  cmdAddPitch(3, true);
+            else if (cmd == "chord-g")
+                  cmdAddPitch(4, true);
+            else if (cmd == "chord-a")
+                  cmdAddPitch(5, true);
+            else if (cmd == "chord-b")
+                  cmdAddPitch(6, true);
+            else if (cmd == "pad-note-1")
+                  padToggle(PAD_NOTE1);
+            else if (cmd == "pad-note-2")
+                  padToggle(PAD_NOTE2);
+            else if (cmd == "pad-note-4")
+                  padToggle(PAD_NOTE4);
+            else if (cmd == "pad-note-8")
+                  padToggle(PAD_NOTE8);
+            else if (cmd == "pad-note-16")
+                  padToggle(PAD_NOTE16);
+            else if (cmd == "pad-note-32")
+                  padToggle(PAD_NOTE32);
+            else if (cmd == "pad-note-64")
+                  padToggle(PAD_NOTE64);
+            else if (cmd == "pad-rest")
+                  padToggle(PAD_REST);
+            else if (cmd == "pad-dot")
+                  padToggle(PAD_DOT);
+            else if (cmd == "pad-tie") {
+                  padState.tie = !padState.tie;
+                  if (cis->pos == -1 && sel->state == SEL_SINGLE) {
+                        Element* el = sel->element();
+                        if (el->type() == NOTE) {
+                  		Tie* tie = new Tie(this);
+                              tie->setParent(el);
+            	      	cmdAdd(tie);
+      			      connectTies();
+                              }
+                        }
+                  }
+            else if (cmd == "pad-sharp2") {
+                  padState.prefix = padState.prefix != 3 ? 3 : 0;
+                  addAccidental(padState.prefix);
+                  }
+            else if (cmd == "pad-sharp") {
+                  padState.prefix = padState.prefix != 1 ? 1 : 0;
+                  addAccidental(padState.prefix);
+                  }
+            else if (cmd == "pad-nat") {
+                  padState.prefix = padState.prefix != 5 ? 5 : 0;
+                  addAccidental(padState.prefix);
+                  }
+            else if (cmd == "pad-flat") {
+                  padState.prefix = padState.prefix != 2 ? 2 : 0;
+                  addAccidental(padState.prefix);
+                  }
+            else if (cmd == "pad-flat2") {
+                  padState.prefix = padState.prefix != 4 ? 4 : 0;
+                  addAccidental(padState.prefix);
+                  }
+            else if (cmd == "flip")
+                  cmdFlipStemDirection();
+            else if (cmd == "voice-1")
+                  changeVoice(0);
+            else if (cmd == "voice-2")
+                  changeVoice(1);
+            else if (cmd == "voice-3")
+                  changeVoice(2);
+            else if (cmd == "voice-4")
+                  changeVoice(3);
+            else if (cmd.startsWith("intervall")) {
+                  int n = cmd.mid(9).toInt();
+                  cmdAddIntervall(n);
+                  }
+            else if (cmd == "duole")
+                  cmdTuplet(2);
+            else if (cmd == "triole")
+                  cmdTuplet(3);
+            else if (cmd == "pentole")
+                  cmdTuplet(5);
+            else if (cmd == "stretch+")
+                  cmdAddStretch(0.1);
+            else if (cmd == "stretch-")
+                  cmdAddStretch(-0.1);
+            endCmd(true);
             }
-      else if (cmd == "delete")
-            cmdDeleteSelection();
-      endCmd(true);
       }
 

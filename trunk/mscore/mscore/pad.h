@@ -21,53 +21,23 @@
 #ifndef __PAD_H__
 #define __PAD_H__
 
-#include "ui_pad.h"
-
-const int PAD_LAYOUTS = 5;
-
-enum PadKeys {
-      PAD_0, PAD_1, PAD_2, PAD_3, PAD_4, PAD_5, PAD_6,
-      PAD_7, PAD_8, PAD_9, PAD_NUM, PAD_DIV, PAD_MULT,
-      PAD_MINUS, PAD_PLUS, PAD_ENTER, PAD_COMMA,
-      PAD_N0, PAD_N1, PAD_N2, PAD_N3, PAD_N4,
-      PAD_KEYS
-      };
-
-class QPixmap;
-
-struct PadEntry {
-      QIcon* icon;
-      int cmd;
-      const char* help;
-      };
-
-extern PadEntry padTrans[PAD_LAYOUTS][PAD_KEYS];
-
 //---------------------------------------------------------
 //   Pad
 //---------------------------------------------------------
 
-class Pad : public QWidget, private Ui::PadBase {
+class Pad : public QWidget {
       Q_OBJECT
-      int dx, dy;
-      int _padNo;
-      QButtonGroup* bg;
 
-      virtual void mouseMoveEvent(QMouseEvent* ev);
-      virtual void mousePressEvent(QMouseEvent* ev);
       virtual void closeEvent(QCloseEvent*);
 
    public slots:
-      void setPadNo(int);
-      void setOn(bool, int);
 
    signals:
-      void keyEvent(QKeyEvent*);
       void close();
 
    public:
-      int padNo() const { return _padNo; }
       Pad(QWidget* parent = 0);
       };
 
 #endif
+

@@ -200,6 +200,9 @@ class Score : public QObject {
       System* dragSystem;     ///< Valid if DRAG_STAFF.
       int dragStaff;
 
+      void cmdAddPitch(int, bool);
+      void cmdAddIntervall(int);
+
    public slots:
       void printFile();
       void cmdAddTitle();
@@ -220,8 +223,6 @@ class Score : public QObject {
       void addExpression();
 
       void startNoteEntry();
-      void cmdAddPitch(int, bool);
-      void cmdAddIntervall(int);
       void cmdTuplet(int);
       void midiReceived();
       void resetUserOffsets();
@@ -302,7 +303,7 @@ class Score : public QObject {
       void doLayout();
 
       void cmdAddText(int style);
-      void cmdUpDown(bool up, bool octave);
+      void upDown(bool up, bool octave);
       Element* searchNote(int tick, int staffIdx) const;
 
       // undo/redo ops
@@ -428,8 +429,6 @@ class Score : public QObject {
       void changeKeySig(int tick, int st);
       void changeClef(int tick, int si, int idx);
 
-      void cmdMoveUp();
-      void cmdMoveDown();
       void cmdMoveUpChord();
       void cmdMoveDownChord();
       void cmdMoveTopChord();
@@ -438,7 +437,6 @@ class Score : public QObject {
       void cmdMovePrevChord();
       void cmdMoveNextMeasure();
       void cmdMovePrevMeasure();
-      void cmdRest();
       void cmd(const QString&);
       };
 

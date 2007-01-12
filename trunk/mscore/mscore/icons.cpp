@@ -26,6 +26,13 @@
 #include "preferences.h"
 #include "sym.h"
 
+#include "data/undo.xpm"
+#include "data/redo.xpm"
+#include "data/editcut.xpm"
+#include "data/editcopy.xpm"
+#include "data/editpaste.xpm"
+#include "data/fileprint.xpm"
+
 QIcon noteIcon;
 QIcon note2Icon;
 QIcon note4Icon;
@@ -48,6 +55,9 @@ QIcon tenutoIcon;
 QIcon plusIcon;
 QIcon flipIcon;
 QIcon voiceIcons[VOICES];
+
+QIcon undoIcon, redoIcon, cutIcon, copyIcon, pasteIcon;
+QIcon printIcon;
 
 //---------------------------------------------------------
 //   symPixmap
@@ -131,5 +141,12 @@ void genIcons()
             voiceIcons[i].addPixmap(image, QIcon::Normal, QIcon::On);
             }
       flipIcon = symIcon(flipSym);
+
+      undoIcon.addPixmap(QPixmap(undo_xpm));
+      redoIcon.addPixmap(QPixmap(redo_xpm));
+      cutIcon.addPixmap(QPixmap(editcut_xpm));
+      copyIcon.addPixmap(QPixmap(editcopy_xpm));
+      pasteIcon.addPixmap(QPixmap(editpaste_xpm));
+      printIcon.addPixmap(QPixmap(fileprint_xpm));
       }
 

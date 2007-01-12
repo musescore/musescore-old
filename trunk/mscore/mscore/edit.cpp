@@ -1216,7 +1216,6 @@ void Score::cmdTuplet(int n)
       //    - add 2 rests of 1/d2 duration as placeholder
       //---------------------------------------------------
 
-      startCmd();
       int voice    = chord->voice();
       Staff* staff = chord->staff();
       int staffIdx = chord->staffIdx();
@@ -1266,7 +1265,6 @@ void Score::cmdTuplet(int n)
             undoOp(UndoOp::AddElement, rest);
             }
       layout();
-      endCmd(true);
       }
 
 //---------------------------------------------------------
@@ -1275,10 +1273,12 @@ void Score::cmdTuplet(int n)
 
 void Score::changeVoice(int voice)
       {
-      cis->voice = voice;
-// printf("change voice\n");
-      layout();
-      moveCursor();
+      padState.voice = voice;
+      if (cis->voice != voice) {
+            cis->voice = voice;
+            layout();
+            moveCursor();
+            }
       }
 
 //---------------------------------------------------------
