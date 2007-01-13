@@ -429,14 +429,6 @@ class Score : public QObject {
       void changeKeySig(int tick, int st);
       void changeClef(int tick, int si, int idx);
 
-      void cmdMoveUpChord();
-      void cmdMoveDownChord();
-      void cmdMoveTopChord();
-      void cmdMoveBottomChord();
-      void cmdMoveNextChord();
-      void cmdMovePrevChord();
-      void cmdMoveNextMeasure();
-      void cmdMovePrevMeasure();
       void cmd(const QString&);
       };
 

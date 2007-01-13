@@ -856,170 +856,6 @@ void Score::cmdAddStretch(double val)
       }
 
 //---------------------------------------------------------
-//   cmdMoveUpChord
-//---------------------------------------------------------
-
-void Score::cmdMoveUpChord()
-      {
-      Element* el = sel->element(); // single selection
-      if (el && (el->type() == NOTE || el->type() == REST)) {
-            startCmd();
-            Element* e = upAlt(el);
-            if (e) {
-                  if (e->type() == NOTE)
-                        padState.pitch = ((Note*)e)->pitch();
-                  select(e, 0, 0);
-                  }
-            endCmd(true);
-            }
-      }
-
-//---------------------------------------------------------
-//   cmdMoveDownChord
-//---------------------------------------------------------
-
-void Score::cmdMoveDownChord()
-      {
-      Element* el = sel->element(); // single selection
-      if (el && (el->type() == NOTE || el->type() == REST)) {
-            startCmd();
-            Element* e = downAlt(el);
-            if (e) {
-                  if (e->type() == NOTE)
-                        padState.pitch = ((Note*)e)->pitch();
-                  select(e, 0, 0);
-                  }
-            endCmd(true);
-            }
-      }
-
-//---------------------------------------------------------
-//   cmdMoveTopChord
-//---------------------------------------------------------
-
-void Score::cmdMoveTopChord()
-      {
-      Element* el = sel->element(); // single selection
-      if (el && el->type() == NOTE) {
-            startCmd();
-            Element* e = upAltCtrl((Note*)el);
-            if (e) {
-                  if (e->type() == NOTE)
-                        padState.pitch = ((Note*)e)->pitch();
-                  select(e, 0, 0);
-                  }
-            endCmd(true);
-            }
-      }
-
-//---------------------------------------------------------
-//   cmdMoveBottomChord
-//---------------------------------------------------------
-
-void Score::cmdMoveBottomChord()
-      {
-      Element* el = sel->element(); // single selection
-      if (el && el->type() == NOTE) {
-            startCmd();
-            Element* e = downAltCtrl((Note*)el);
-            if (e) {
-                  if (e->type() == NOTE)
-                        padState.pitch = ((Note*)e)->pitch();
-                  select(e, 0, 0);
-                  }
-            endCmd(true);
-            }
-      }
-
-//---------------------------------------------------------
-//   cmdMoveNextChord
-//---------------------------------------------------------
-
-void Score::cmdMoveNextChord()
-      {
-      if (canvas()->getState() == Canvas::NOTE_ENTRY)
-            setNoteEntry(false, false);
-      ChordRest* cr = sel->lastChordRest();
-      if (cr) {
-            startCmd();
-            Element* el = nextChordRest(cr);
-            if (el) {
-                  if (el->type() == CHORD)
-                        el = ((Chord*)el)->upNote();
-                  select(el, 0, 0);
-                  adjustCanvasPosition(el);
-                  }
-            endCmd(true);
-            }
-      }
-
-//---------------------------------------------------------
-//   cmdMovePrevChord
-//---------------------------------------------------------
-
-void Score::cmdMovePrevChord()
-      {
-      if (canvas()->getState() == Canvas::NOTE_ENTRY)
-            setNoteEntry(false, false);
-      ChordRest* cr = sel->lastChordRest();
-      if (cr) {
-            startCmd();
-            Element* el = prevChordRest(cr);
-            if (el) {
-                  if (el->type() == CHORD)
-                        el = ((Chord*)el)->upNote();
-                  select(el, 0, 0);
-                  adjustCanvasPosition(el);
-                  }
-            endCmd(true);
-            }
-      }
-
-//---------------------------------------------------------
-//   cmdMoveNextMeasure
-//---------------------------------------------------------
-
-void Score::cmdMoveNextMeasure()
-      {
-      if (canvas()->getState() == Canvas::NOTE_ENTRY)
-            setNoteEntry(false, false);
-      ChordRest* cr = sel->lastChordRest();
-      if (cr) {
-            startCmd();
-            Element* el = nextMeasure(cr);
-            if (el) {
-                  if (el->type() == CHORD)
-                        el = ((Chord*)el)->upNote();
-                  select(el, 0, 0);
-                  adjustCanvasPosition(el);
-                  }
-            endCmd(true);
-            }
-      }
-
-//---------------------------------------------------------
-//   cmdMovePrevMeasure
-//---------------------------------------------------------
-
-void Score::cmdMovePrevMeasure()
-      {
-      if (canvas()->getState() == Canvas::NOTE_ENTRY)
-            setNoteEntry(false, false);
-      ChordRest* cr = sel->lastChordRest();
-      if (cr) {
-            startCmd();
-            Element* el = prevMeasure(cr);
-            if (el) {
-                  if (el->type() == CHORD)
-                        el = ((Chord*)el)->upNote();
-                  select(el, 0, 0);
-                  adjustCanvasPosition(el);
-                  }
-            endCmd(true);
-            }
-      }
-
-//---------------------------------------------------------
 //   cmd
 //---------------------------------------------------------
 
@@ -1094,22 +930,106 @@ printf("cmd <%s>\n", cmd.toLatin1().data());
                         moveDown((Note*)el);
                         }
                   }
-            else if (cmd == "up-chord")
-                  cmdMoveUpChord();
-            else if (cmd == "down-chord")
-                  cmdMoveDownChord();
-            else if (cmd == "top-chord" )
-                  cmdMoveTopChord();
-            else if (cmd == "bottom-chord")
-                  cmdMoveBottomChord();
-            else if (cmd == "next-chord")
-                  cmdMoveNextChord();
-            else if (cmd == "prev-chord")
-                  cmdMovePrevChord();
-            else if (cmd == "next-measure")
-                  cmdMoveNextMeasure();
-            else if (cmd == "prev-measure")
-                  cmdMovePrevMeasure();
+            else if (cmd == "up-chord") {
+                  Element* el = sel->element(); // single selection
+                  if (el && (el->type() == NOTE || el->type() == REST)) {
+                        Element* e = upAlt(el);
+                        if (e) {
+                              if (e->type() == NOTE)
+                                    padState.pitch = ((Note*)e)->pitch();
+                              select(e, 0, 0);
+                              }
+                        }
+                  }
+            else if (cmd == "down-chord") {
+                  Element* el = sel->element(); // single selection
+                  if (el && (el->type() == NOTE || el->type() == REST)) {
+                        Element* e = downAlt(el);
+                        if (e) {
+                              if (e->type() == NOTE)
+                                    padState.pitch = ((Note*)e)->pitch();
+                              select(e, 0, 0);
+                              }
+                        }
+                  }
+            else if (cmd == "top-chord" ) {
+                  Element* el = sel->element(); // single selection
+                  if (el && el->type() == NOTE) {
+                        Element* e = upAltCtrl((Note*)el);
+                        if (e) {
+                              if (e->type() == NOTE)
+                                    padState.pitch = ((Note*)e)->pitch();
+                              select(e, 0, 0);
+                              }
+                        }
+                  }
+            else if (cmd == "bottom-chord") {
+                  Element* el = sel->element(); // single selection
+                  if (el && el->type() == NOTE) {
+                        Element* e = downAltCtrl((Note*)el);
+                        if (e) {
+                              if (e->type() == NOTE)
+                                    padState.pitch = ((Note*)e)->pitch();
+                              select(e, 0, 0);
+                              }
+                        }
+                  }
+            else if (cmd == "next-chord") {
+                  if (canvas()->getState() == Canvas::NOTE_ENTRY)
+                        setNoteEntry(false, false);
+                  ChordRest* cr = sel->lastChordRest();
+                  if (cr) {
+                        Element* el = nextChordRest(cr);
+                        if (el) {
+                              if (el->type() == CHORD)
+                                    el = ((Chord*)el)->upNote();
+                              select(el, 0, 0);
+                              adjustCanvasPosition(el);
+                              }
+                        }
+                  }
+            else if (cmd == "prev-chord") {
+                  if (canvas()->getState() == Canvas::NOTE_ENTRY)
+                        setNoteEntry(false, false);
+                  ChordRest* cr = sel->lastChordRest();
+                  if (cr) {
+                        Element* el = prevChordRest(cr);
+                        if (el) {
+                              if (el->type() == CHORD)
+                                    el = ((Chord*)el)->upNote();
+                              select(el, 0, 0);
+                              adjustCanvasPosition(el);
+                              }
+                        }
+                  }
+            else if (cmd == "next-measure") {
+                  if (canvas()->getState() == Canvas::NOTE_ENTRY)
+                        setNoteEntry(false, false);
+                  ChordRest* cr = sel->lastChordRest();
+                  if (cr) {
+                        Element* el = nextMeasure(cr);
+                        if (el) {
+                              if (el->type() == CHORD)
+                                    el = ((Chord*)el)->upNote();
+                              select(el, 0, 0);
+                              adjustCanvasPosition(el);
+                              }
+                        }
+                  }
+            else if (cmd == "prev-measure") {
+                  if (canvas()->getState() == Canvas::NOTE_ENTRY)
+                        setNoteEntry(false, false);
+                  ChordRest* cr = sel->lastChordRest();
+                  if (cr) {
+                        Element* el = prevMeasure(cr);
+                        if (el) {
+                              if (el->type() == CHORD)
+                                    el = ((Chord*)el)->upNote();
+                              select(el, 0, 0);
+                              adjustCanvasPosition(el);
+                              }
+                        }
+                  }
             else if (cmd == "note-c")
                   cmdAddPitch(0, false);
             else if (cmd == "note-d")

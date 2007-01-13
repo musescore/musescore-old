@@ -28,6 +28,7 @@
 #include "playpanel.h"
 #include "pad.h"
 #include "icons.h"
+#include "shortcutcapturedialog.h"
 
 //---------------------------------------------------------
 //   buttons2stemDir
@@ -73,13 +74,6 @@ Preferences preferences;
 
 Preferences::Preferences()
       {
-#ifdef MINGW32
-      printCmd  = "";
-      browseCmd = "explorer";
-#else
-      printCmd  = "kprinter -c %s";
-      browseCmd = "konqueror";
-#endif
       selectColor[0] = Qt::blue;
       selectColor[1] = Qt::green;
       selectColor[2] = Qt::yellow;
@@ -137,8 +131,6 @@ void Preferences::write()
       xml.header("museScore");
       xml.stag("museScore version=\"1.0\"");
       xml.stag("Preferences");
-      xml.tag("printCmd", printCmd);
-      xml.tag("browseCmd", browseCmd);
       xml.tag("cursorBlink", cursorBlink);
       if (fgUseColor)
             xml.tag("fgColor", fgColor.name());
@@ -225,11 +217,7 @@ void Preferences::read()
                         QString tag(e.tagName());
                         QString val(e.text());
                         int i = val.toInt();
-                        if (tag == "printCmd")
-                              printCmd = val;
-                        else if (tag == "browseCmd")
-                              browseCmd = val;
-                        else if (tag == "cursorBlink")
+                        if (tag == "cursorBlink")
                               cursorBlink = i;
                         else if (tag == "fgColor") {
                               fgColor.setNamedColor(val);
@@ -341,8 +329,6 @@ PreferenceDialog::PreferenceDialog(QWidget* parent)
 
       connect(buttonOk, SIGNAL(pressed()), SLOT(ok()));
       connect(buttonCancel, SIGNAL(pressed()), SLOT(cancel()));
-      printCmdEdit->setText(preferences.printCmd);
-      browseCmdEdit->setText(preferences.browseCmd);
       cursorBlink->setChecked(preferences.cursorBlink);
 
       QButtonGroup* fgButtons = new QButtonGroup(this);
@@ -430,8 +416,9 @@ PreferenceDialog::PreferenceDialog(QWidget* parent)
       alsaPeriodSize->setCurrentIndex(index);
 
       alsaFragments->setValue(preferences.alsaFragments);
-
       drawAntialiased->setChecked(preferences.antialiasedDrawing);
+
+      updateSCListView();
 
       connect(fgColorSelect,      SIGNAL(clicked()), SLOT(selectFgColor()));
       connect(bgColorSelect,      SIGNAL(clicked()), SLOT(selectBgColor()));
@@ -446,6 +433,63 @@ PreferenceDialog::PreferenceDialog(QWidget* parent)
 
       connect(playPanelCur, SIGNAL(clicked()), SLOT(playPanelCurClicked()));
       connect(keyPadCur, SIGNAL(clicked()), SLOT(padCurClicked()));
+
+      connect(resetShortcut, SIGNAL(clicked()), SLOT(resetShortcutClicked()));
+      connect(clearShortcut, SIGNAL(clicked()), SLOT(clearShortcutClicked()));
+      connect(defineShortcut, SIGNAL(clicked()), SLOT(defineShortcutClicked()));
+      }
+
+//---------------------------------------------------------
+//   updateSCListView
+//---------------------------------------------------------
+
+void PreferenceDialog::updateSCListView()
+      {
+      shortcutList->clear();
+      foreach (Shortcut* s, shortcuts) {
+            if (s) {
+                  QTreeWidgetItem* newItem = new QTreeWidgetItem;
+                  newItem->setText(0, tr(s->descr));
+                  newItem->setIcon(0, *s->icon);
+                  QKeySequence seq = s->key;
+                  newItem->setText(1, s->key.toString(QKeySequence::NativeText));
+                  newItem->setData(0, Qt::UserRole, s->xml);
+                  shortcutList->addTopLevelItem(newItem);
+                  }
+            }
+      }
+
+//---------------------------------------------------------
+//   resetShortcutClicked
+//---------------------------------------------------------
+
+void PreferenceDialog::resetShortcutClicked()
+      {
+      }
+
+//---------------------------------------------------------
+//   clearShortcutClicked
+//---------------------------------------------------------
+
+void PreferenceDialog::clearShortcutClicked()
+      {
+      }
+
+//---------------------------------------------------------
+//   defineShortcutClicked
+//---------------------------------------------------------
+
+void PreferenceDialog::defineShortcutClicked()
+      {
+      QTreeWidgetItem* active = shortcutList->currentItem();
+      Shortcut* s = shortcuts[active->data(0, Qt::UserRole).toString()];
+      ShortcutCaptureDialog sc(s, this);
+      if (sc.exec()) {
+            s->key = sc.getKey();
+            active->setText(1, s->key.toString(QKeySequence::NativeText));
+//            _config_changed = true;
+            }
+//      clearButton->setEnabled(true);
       }
 
 //---------------------------------------------------------
@@ -636,8 +680,6 @@ void PreferenceDialog::apply()
       preferences.selectColor[2] = selectColorLabel3->palette().color(QPalette::Background);
       preferences.selectColor[3] = selectColorLabel4->palette().color(QPalette::Background);
 
-      preferences.printCmd    = printCmdEdit->text();
-      preferences.browseCmd   = browseCmdEdit->text();
       preferences.cursorBlink = cursorBlink->isChecked();
       preferences.fgWallpaper = fgWallpaper->text();
       preferences.bgWallpaper = bgWallpaper->text();
