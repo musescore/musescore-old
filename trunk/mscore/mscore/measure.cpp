@@ -2195,6 +2195,11 @@ bool Measure::acceptDrop(const QPointF& p, int type, const QDomNode&) const
                   if (mrpy < t || mrpy > b)
                         return false;
                   return true;
+            case HAIRPIN:
+                  // accept drop only above or below staff
+                  if (mrpy < t || mrpy > b)
+                        return true;
+                  return false;
             case CLEF:
                   {
                   // accept drop only inside staff
@@ -2328,6 +2333,17 @@ void Measure::drop(const QPointF& p, int type, const QDomNode& node)
                   ottava->setTick2(tick() + tickLen());
                   ottava->setParent(this);
                   score()->cmdAdd(ottava);
+                  }
+                  break;
+            case HAIRPIN:
+                  {
+                  Hairpin* hairpin = new Hairpin(score());
+                  hairpin->read(node);
+                  hairpin->setStaff(staff);
+                  hairpin->setTick1(tick());
+                  hairpin->setTick2(tick() + tickLen());
+                  hairpin->setParent(this);
+                  score()->cmdAdd(hairpin);
                   }
                   break;
             case DYNAMIC:
