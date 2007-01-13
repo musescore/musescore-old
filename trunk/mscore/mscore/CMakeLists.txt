@@ -52,7 +52,6 @@ QT4_WRAP_UI (ui_headers
       measure.ui
       measuresdialog.ui
       note.ui
-      pad.ui
       page.ui
       pagesettings.ui
       partedit.ui
