@@ -74,7 +74,7 @@ class Note : public Element {
       Note(Score*, int pitch, bool grace = false);
       Note &operator=(const Note&);
       ~Note();
-      virtual Element* clone() const { return new Note(*this); }
+      virtual Note* clone() const { return new Note(*this); }
       virtual ElementType type() const { return NOTE; }
 
       virtual void bboxUpdate();
@@ -147,7 +147,7 @@ class ShadowNote : public Element {
    public:
       ShadowNote(Score*);
       ~ShadowNote();
-      virtual Element* clone() const { return new ShadowNote(*this); }
+      virtual ShadowNote* clone() const { return new ShadowNote(*this); }
       virtual ElementType type() const  { return SHADOW_NOTE; }
       int line() const                  { return _line;   }
       void setLine(int n)               { _line = n;      }

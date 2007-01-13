@@ -762,7 +762,7 @@ void ExportMusicXml::bar(const BarLine* bar, const Volta* volta, const QString& 
       if (bar && (bar->subtype() == NORMAL_BAR) && !volta)
             return;
       attr.doAttr(xml, false);
-      xml.stag("barline location=\"%s\"", dir.toLatin1().data());
+      xml.stag(QString("barline location=\"%1\"").arg(dir));
       if (bar && (bar->subtype() != NORMAL_BAR)) {
             switch(bar->subtype()) {
                   case DOUBLE_BAR:
@@ -931,14 +931,14 @@ bool ExportMusicXml::saver()
       int idx = 1;
       PartList* il = score->parts();
       for (iPart i = il->begin(); i != il->end(); ++i, ++idx) {
-            xml.stag("score-part id=\"P%d\"", idx);
+            xml.stag(QString("score-part id=\"P%1\"").arg(idx));
             xml.tag("part-name", (*i)->longName());
 
-            xml.stag("score-instrument id=\"P%d-I%d\"", idx, 3);
+            xml.stag(QString("score-instrument id=\"P%1-I%2\"").arg(idx).arg(3));
             xml.tag("instrument-name", (*i)->longName());
             xml.etag("score-instrument");
 
-            xml.stag("midi-instrument id=\"P%d-I%d\"", idx, 3);
+            xml.stag(QString("midi-instrument id=\"P%1-I%2\"").arg(idx).arg(3));
             xml.tag("midi-channel", (*i)->midiChannel() + 1);
             xml.tag("midi-program", (*i)->midiProgram() + 1);
             xml.etag("midi-instrument");
@@ -951,7 +951,7 @@ bool ExportMusicXml::saver()
       il = score->parts();
       for (iPart i = il->begin(); i != il->end(); ++i, ++idx) {
             tick = 0;
-            xml.stag("part id=\"P%d\"", idx);
+            xml.stag(QString("part id=\"P%1\"").arg(idx));
 
             int staves = (*i)->nstaves();
             int strack = score->staff(*i) * VOICES;
@@ -971,10 +971,10 @@ bool ExportMusicXml::saver()
                         pickupMeasureNo++;
                         }
                   else if (m->irregular()) {
-                        xml.stag("measure number=\"X%d\" implicit=\"yes\"", irregularMeasureNo++);
+                        xml.stag(QString("measure number=\"X%1\" implicit=\"yes\"").arg(irregularMeasureNo++));
                         }
                   else {
-                        xml.stag("measure number=\"%d\"", measureNo++);
+                        xml.stag(QString("measure number=\"%1\"").arg(measureNo++));
                         }
 
                   if (m->prev() && m->prev()->lineBreak())
@@ -1233,7 +1233,7 @@ void ExportMusicXml::clef(int staff, int clef)
       {
       attr.doAttr(xml, true);
       if (staff)
-            xml.stag("clef number=\"%d\"", staff);
+            xml.stag(QString("clef number=\"%1\"").arg(staff));
       else
             xml.stag("clef");
       char* sign = clefTable[clef].sign;
@@ -1552,7 +1552,7 @@ static void directionTag(Xml& xml, Attributes& attr, Element* el = 0)
       {
       attr.doAttr(xml, false);
       if (el)
-            xml.stag("direction placement=\"%s\"", (el->userOff().y() > 0.0) ? "below" : "above");
+            xml.stag(QString("direction placement=\"%1\"").arg((el->userOff().y() > 0.0) ? "below" : "above"));
       else
             xml.stag("direction");
       xml.stag("direction-type");
@@ -1642,7 +1642,7 @@ void ExportMusicXml::lyrics(const LyricsList* ll)
       {
       for (ciLyrics i = ll->begin(); i != ll->end(); ++i) {
             if (*i) {
-                  xml.stag("lyric number=\"%d\"", (*i)->no() + 1);
+                  xml.stag(QString("lyric number=\"%1\"").arg((*i)->no() + 1));
                   int syl   = (*i)->syllabic();
                   QString s = "";
                   switch(syl) {

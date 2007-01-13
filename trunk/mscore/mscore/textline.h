@@ -45,7 +45,7 @@ class TextLine : public Element {
 
       TextLine &operator=(const TextLine&);
 
-      virtual Element* clone() const { return new TextLine(*this); }
+      virtual TextLine* clone() const { return new TextLine(*this); }
       virtual ElementType type() const { return TEXT; }
 
       void setText(const QString& s);

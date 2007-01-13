@@ -36,7 +36,7 @@ class Symbol : public Element {
       Symbol(Score*);
       Symbol &operator=(const Symbol&);
 
-      virtual Element* clone() const { return new Symbol(*this); }
+      virtual Symbol* clone() const { return new Symbol(*this); }
       virtual ElementType type() const { return SYMBOL; }
       void setSym(int);
       int sym() const { return _sym;  }

@@ -32,7 +32,7 @@ class Trill : public SLine {
 
    public:
       Trill(Score* s);
-      virtual Element* clone() const { return new Trill(*this); }
+      virtual Trill* clone() const { return new Trill(*this); }
       virtual ElementType type() const { return TRILL; }
 
       virtual void draw1(Painter&);

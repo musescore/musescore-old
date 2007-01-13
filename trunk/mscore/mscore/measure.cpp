@@ -456,9 +456,9 @@ Element* Measure::findSelectableElement(QPointF p) const
 void Measure::write(Xml& xml, int no, int staff) const
       {
       if (xml.curTick != tick())
-            xml.stag("Measure number=\"%d\" tick=\"%d\"", no, tick());
+            xml.stag(QString("Measure number=\"%1\" tick=\"%2\"").arg(no).arg(tick()));
       else
-            xml.stag("Measure number=\"%d\"", no);
+            xml.stag(QString("Measure number=\"%1\"").arg(no));
 
       if (staff == 0) {
             for (ciElement ie = _pel.begin(); ie != _pel.end(); ++ie) {
@@ -504,7 +504,7 @@ void Measure::write(Xml& xml, int no, int staff) const
       if (_irregular)
             xml.tagE("irregular");
       for (ciElement i = _sel.begin(); i != _sel.end(); ++i) {
-            if ((*i)->staff() == _score->staff(staff))
+            if ((*i)->staff() == _score->staff(staff) && (*i)->type() != SLUR_SEGMENT)
                   (*i)->write(xml);
             }
 

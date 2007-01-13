@@ -303,7 +303,7 @@ int TempoList::time2tick(double time, int* sn) const
 
 void TempoList::write(Xml& xml) const
       {
-      xml.stag("tempolist fix=\"%d\"", _tempo);
+      xml.stag(QString("tempolist fix=\"%1\"").arg(_tempo));
       if (_relTempo != 100)
             xml.tag("relTempo", _relTempo);
       for (ciTEvent i = begin(); i != end(); ++i)
@@ -347,7 +347,7 @@ void TempoList::read(QDomNode node)
 
 void TEvent::write(Xml& xml, int at) const
       {
-      xml.stag("tempo at=\"%d\"", at);
+      xml.stag(QString("tempo at=\"%1\"").arg(at));
       xml.tag("tick", tick);
       xml.tag("val", tempo);
       xml.etag("tempo");

@@ -40,7 +40,7 @@ class BarLine : public Element {
       BarLine(Score*);
       BarLine &operator=(const BarLine&);
 
-      virtual Element* clone() const { return new BarLine(*this); }
+      virtual BarLine* clone() const { return new BarLine(*this); }
       virtual ElementType type() const { return BAR_LINE; }
       virtual void write(Xml& xml) const;
       virtual void read(QDomNode);

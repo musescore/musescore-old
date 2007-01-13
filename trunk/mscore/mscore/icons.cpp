@@ -57,13 +57,13 @@ QIcon flipIcon;
 QIcon voiceIcons[VOICES];
 
 QIcon undoIcon, redoIcon, cutIcon, copyIcon, pasteIcon;
-QIcon printIcon;
+QIcon printIcon, clefIcon;
 
 //---------------------------------------------------------
 //   symPixmap
 //---------------------------------------------------------
 
-static QIcon symIcon(int idx)
+static QIcon symIcon(int idx, int size = 20)
       {
       Sym sym(symbols[idx]);
       int width  = ICON_WIDTH;
@@ -71,7 +71,7 @@ static QIcon symIcon(int idx)
 
       TextStyle* s = &textStyles[TEXT_STYLE_SYMBOL1];
       QFont f(s->family);
-      f.setPixelSize(24);
+      f.setPixelSize(size);
 
       QFontMetricsF fm(f);
       QRectF bb(fm.boundingRect(sym.code()));
@@ -119,6 +119,7 @@ void genIcons()
       staccatoIcon       = symIcon(staccatoSym);
       tenutoIcon         = symIcon(tenutoSym);
       plusIcon           = symIcon(plusSym);
+      clefIcon           = symIcon(trebleclefSym, 14);
 
       static const char* vtext[VOICES] = { "1","2","3","4" };
       for (int i = 0; i < VOICES; ++i) {

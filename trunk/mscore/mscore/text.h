@@ -47,7 +47,7 @@ class Text : public Element {
       virtual ~Text();
       Text &operator=(const Text&);
 
-      virtual Element* clone() const { return new Text(*this); }
+      virtual Text* clone() const { return new Text(*this); }
       virtual ElementType type() const { return TEXT; }
 
 
@@ -88,7 +88,7 @@ class Lyrics : public Text {
 
    public:
       Lyrics(Score*);
-      virtual Element* clone() const { return new Lyrics(*this); }
+      virtual Lyrics* clone() const { return new Lyrics(*this); }
       virtual ElementType type() const { return LYRICS; }
 
       virtual void write(Xml& xml) const;
@@ -106,7 +106,7 @@ class Lyrics : public Text {
 class Fingering : public Text {
    public:
       Fingering(Score*);
-      virtual Element* clone() const { return new Fingering(*this); }
+      virtual Fingering* clone() const { return new Fingering(*this); }
       virtual ElementType type() const { return FINGERING; }
 
       virtual void write(Xml& xml) const;
@@ -121,7 +121,7 @@ class Fingering : public Text {
 class InstrumentName1 : public Text {
    public:
       InstrumentName1(Score*);
-      virtual Element* clone() const { return new InstrumentName1(*this); }
+      virtual InstrumentName1* clone() const { return new InstrumentName1(*this); }
       virtual ElementType type() const { return INSTRUMENT_NAME1; }
       };
 
@@ -133,7 +133,7 @@ class InstrumentName1 : public Text {
 class InstrumentName2 : public Text {
    public:
       InstrumentName2(Score*);
-      virtual Element* clone() const { return new InstrumentName2(*this); }
+      virtual InstrumentName2* clone() const { return new InstrumentName2(*this); }
       virtual ElementType type() const { return INSTRUMENT_NAME2; }
       };
 
@@ -144,7 +144,7 @@ class InstrumentName2 : public Text {
 class TempoText : public Text  {
    public:
       TempoText(Score*);
-      virtual Element* clone() const { return new TempoText(*this); }
+      virtual TempoText* clone() const { return new TempoText(*this); }
       virtual ElementType type() const { return TEMPO_TEXT; }
       };
 

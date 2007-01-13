@@ -32,7 +32,7 @@ class Pedal : public SLine {
 
    public:
       Pedal(Score* s);
-      virtual Element* clone() const { return new Pedal(*this); }
+      virtual Pedal* clone() const { return new Pedal(*this); }
       virtual ElementType type() const { return PEDAL; }
 
       virtual void draw1(Painter&);

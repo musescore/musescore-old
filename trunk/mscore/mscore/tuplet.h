@@ -54,7 +54,7 @@ class Tuplet : public Element {
    public:
       Tuplet(Score*);
       ~Tuplet();
-      virtual Element* clone() const { return new Tuplet(*this); }
+      virtual Tuplet* clone() const { return new Tuplet(*this); }
       virtual ElementType type() const { return TUPLET; }
       virtual void add(Element*);
       virtual void remove(Element*);

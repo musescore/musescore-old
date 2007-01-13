@@ -62,17 +62,10 @@ void Xml::header(const QString& /*type*/)
 //    <mops attribute="value">
 //---------------------------------------------------------
 
-void Xml::stag(const char* format, ...)
+void Xml::stag(const QString& s)
       {
-      va_list args;
-      va_start(args, format);
       putLevel();
-      *this << '<';
-    	char buffer[BS];
-      vsnprintf(buffer, BS, format, args);
-    	*this << buffer;
-      va_end(args);
-      *this << '>' << endl;
+      *this << '<' << s << '>' << endl;
       ++level;
       }
 

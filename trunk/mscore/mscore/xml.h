@@ -39,7 +39,7 @@ class Xml : public QTextStream {
 
       void header(const QString& type);
 
-      void stag(const char* format, ...);
+      void stag(const QString&);
       void etag(const char* s);
 
       void tagE(const char* format, ...);

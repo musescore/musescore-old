@@ -170,7 +170,8 @@ Shortcut MuseScore::sc[] = {
          Qt::Key_Y,
          Qt::ApplicationShortcut,
          QT_TR_NOOP("Clef..."),
-         QT_TR_NOOP("Show Clefs Palette")
+         QT_TR_NOOP("Show Clefs Palette"),
+         &clefIcon
          ),
       Shortcut(
          "keys",
@@ -178,7 +179,8 @@ Shortcut MuseScore::sc[] = {
          Qt::Key_K,
          Qt::ApplicationShortcut,
          QT_TR_NOOP("Key..."),
-         QT_TR_NOOP("Show Keys Palette")
+         QT_TR_NOOP("Show Keys Palette"),
+         &sharpIcon
          ),
       Shortcut(
          "symbols",
@@ -688,7 +690,7 @@ Shortcut MuseScore::sc[] = {
       Shortcut(
          "append-measure",
          QT_TR_NOOP("append measure"),
-         0,
+         Qt::CTRL+Qt::Key_B,
          Qt::ApplicationShortcut,
          QT_TR_NOOP("Measure")
          ),
@@ -1038,7 +1040,6 @@ MuseScore::MuseScore()
          << "chord-a" << "chord-b"
          << "stretch+" << "stretch-"
          ;
-
       foreach(const QString s, sl) {
             QAction* a = getAction(s.toLatin1().data());
             addAction(a);
@@ -1140,9 +1141,7 @@ MuseScore::MuseScore()
       //    Tool Bar
       //---------------------
 
-      fileTools = new QToolBar(tr("File Operations"));
-      addToolBar(fileTools);
-
+      fileTools = addToolBar(tr("File Operations"));
       fileTools->addAction(fileNewAction);
       fileTools->addAction(fileOpenAction);
       fileTools->addAction(fileSaveAction);
@@ -1153,8 +1152,7 @@ MuseScore::MuseScore()
       fileTools->addAction(getAction("redo"));
       fileTools->addSeparator();
 
-      transportTools = new QToolBar(tr("Transport Tools"));
-      addToolBar(transportTools);
+      transportTools = addToolBar(tr("Transport Tools"));
       transportTools->addAction(speakerAction);
       transportTools->addAction(midiinAction);
       transportTools->addSeparator();
@@ -1183,7 +1181,7 @@ MuseScore::MuseScore()
       //    Note Entry Tool Bar
       //-------------------------------
 
-      entryTools = new QToolBar(tr("Note Entry"));
+      entryTools = addToolBar(tr("Note Entry"));
       entryTools->setIconSize(QSize(ICON_WIDTH, ICON_HEIGHT));
 
       QStringList sl1;
@@ -1194,15 +1192,14 @@ MuseScore::MuseScore()
       foreach(const QString s, sl1) {
             QAction* a = getAction(s.toLatin1().data());
             a->setCheckable(true);
-            addAction(a);
             ag->addAction(a);
             entryTools->addAction(a);
             if (s == "pad-tie" || s == "pad-rest")
                   entryTools->addSeparator();
             }
-      addToolBar(entryTools);
 
       a = getAction("flip");
+      ag->addAction(a);
       entryTools->addAction(a);
       entryTools->addSeparator();
 
@@ -1214,11 +1211,9 @@ MuseScore::MuseScore()
             QAction* a = getAction(s.toLatin1().data());
             a->setCheckable(true);
             vag->addAction(a);
-            addAction(a);
             entryTools->addAction(a);
             }
       connect(vag, SIGNAL(triggered(QAction*)), SLOT(cmd(QAction*)));
-      addToolBar(entryTools);
 
       //---------------------
       //    Menus
@@ -1234,10 +1229,9 @@ MuseScore::MuseScore()
 
       menuFile->addAction(fileNewAction);
       menuFile->addAction(fileOpenAction);
-      openRecent = new QMenu(tr("Open &Recent"));
+      openRecent = menuFile->addMenu(QIcon(openIcon), tr("Open &Recent"));
       connect(openRecent, SIGNAL(aboutToShow()), SLOT(openRecentMenu()));
       connect(openRecent, SIGNAL(triggered(QAction*)), SLOT(selectScore(QAction*)));
-      menuFile->addMenu(openRecent);
       menuFile->addSeparator();
       menuFile->addAction(fileSaveAction);
       menuFile->addAction(QIcon(saveIcon), tr("Save &As"), this, SLOT(saveAs()), Qt::CTRL + Qt::Key_A);
