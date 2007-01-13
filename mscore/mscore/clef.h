@@ -45,7 +45,7 @@ class Clef : public Compound {
    public:
       Clef(Score*);
       Clef(Score*, int i);
-      virtual Element* clone() const { return new Clef(*this); }
+      virtual Clef* clone() const { return new Clef(*this); }
       virtual ElementType type() const { return CLEF; }
 
       void setSmall(bool val);

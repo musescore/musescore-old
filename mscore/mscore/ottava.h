@@ -33,7 +33,7 @@ class Ottava : public SLine {
 
    public:
       Ottava(Score* s) : SLine(s) {}
-      virtual Element* clone() const { return new Ottava(*this); }
+      virtual Ottava* clone() const { return new Ottava(*this); }
       virtual ElementType type() const { return OTTAVA; }
       virtual void draw1(Painter&);
       virtual void layout();

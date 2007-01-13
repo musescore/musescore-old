@@ -289,7 +289,7 @@ class SStaff : public Element {
 
    public:
       SStaff(Score*);
-      virtual Element* clone() const { return new SStaff(*this); }
+      virtual SStaff* clone() const { return new SStaff(*this); }
       virtual ElementType type() const { return STAFF; }
 
       virtual void draw1(Painter&);
@@ -310,7 +310,7 @@ class Cursor : public Element {
 
    public:
       Cursor(Score*, double l);
-      virtual Element* clone() const { return new Cursor(*this); }
+      virtual Cursor* clone() const { return new Cursor(*this); }
       virtual ElementType type() const { return CURSOR; }
 
       virtual void draw1(Painter&);
@@ -330,7 +330,7 @@ class VSpacer : public Element {
 
    public:
       VSpacer(Score*, double h);
-      virtual Element* clone() const { return new VSpacer(*this); }
+      virtual VSpacer* clone() const { return new VSpacer(*this); }
       virtual ElementType type() const { return VSPACER; }
       virtual void draw1(Painter&);
       };
@@ -342,7 +342,7 @@ class VSpacer : public Element {
 class Lasso : public Element {
    public:
       Lasso(Score*);
-      virtual Element* clone() const { return new Lasso(*this); }
+      virtual Lasso* clone() const { return new Lasso(*this); }
       virtual ElementType type() const   { return LASSO; }
       virtual void draw1(Painter&);
       };
@@ -363,7 +363,7 @@ class Line : public Element {
       Line(Score*, bool vertical);
       Line &operator=(const Line&);
 
-      virtual Element* clone() const { return new Line(*this); }
+      virtual Line* clone() const { return new Line(*this); }
       virtual ElementType type() const { return LINE; }
 
       virtual void draw1(Painter&);
@@ -411,7 +411,7 @@ class KeySig : public Element {
    public:
       KeySig(Score*);
       virtual void setSubtype(int n);
-      virtual Element* clone() const { return new KeySig(*this); }
+      virtual KeySig* clone() const { return new KeySig(*this); }
       virtual void draw1(Painter&);
       virtual ElementType type() const { return KEYSIG; }
       virtual bool acceptDrop(const QPointF&, int, const QDomNode&) const;
@@ -428,7 +428,7 @@ class RubberBand : public Element {
 
    public:
       RubberBand(Score* s) : Element(s) {}
-      virtual Element* clone() const { return new RubberBand(*this); }
+      virtual RubberBand* clone() const { return new RubberBand(*this); }
       virtual ElementType type() const { return RUBBERBAND; }
       virtual void draw(Painter&);
 
@@ -451,7 +451,7 @@ class Volta : public Element {
 
    public:
       Volta(Score* s) : Element(s) {}
-      virtual Element* clone() const { return new Volta(*this); }
+      virtual Volta* clone() const { return new Volta(*this); }
       virtual ElementType type() const { return VOLTA; }
       virtual void draw1(Painter&);
       virtual void layout();

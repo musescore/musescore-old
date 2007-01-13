@@ -93,7 +93,7 @@ class System : public Element {
    public:
       System(Score*);
       ~System();
-      virtual Element* clone() const { return new System(*this); }
+      virtual System* clone() const { return new System(*this); }
       virtual ElementType type() const { return SYSTEM; }
 
       virtual void add(Element*);

@@ -57,8 +57,9 @@ class SlurSegment : public Element {
 
    public:
       SlurSegment(SlurTie*);
+      SlurSegment(const SlurSegment&);
       ~SlurSegment();
-      virtual Element* clone() const { return new SlurSegment(*this); }
+      virtual SlurSegment* clone() const { return new SlurSegment(*this); }
       virtual ElementType type() const { return SLUR_SEGMENT; }
 
       void layout(const QPointF& p1, const QPointF& p2, qreal bow);
@@ -99,6 +100,7 @@ class SlurTie : public Element {
 
    public:
       SlurTie(Score*);
+      SlurTie(const SlurTie&);
       ~SlurTie();
 
       virtual ElementType type() const = 0;
@@ -133,7 +135,7 @@ class Slur : public SlurTie {
    public:
       Slur(Score*);
       ~Slur();
-      virtual Element* clone() const { return new Slur(*this); }
+      virtual Slur* clone() const      { return new Slur(*this); }
       virtual ElementType type() const { return SLUR; }
       virtual void write(Xml& xml) const;
       virtual void read(Score*, QDomNode);
@@ -158,7 +160,7 @@ class Tie : public SlurTie {
 
    public:
       Tie(Score*);
-      virtual Element* clone() const { return new Tie(*this); }
+      virtual Tie* clone() const   { return new Tie(*this); }
       virtual ElementType type() const { return TIE; }
       void setStartNote(Note* note);
       void setEndNote(Note* note)   { _endNote = note; }

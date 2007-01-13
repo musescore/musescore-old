@@ -429,7 +429,7 @@ void PageFormat::write(Xml& xml)
       QString type("both");
       if (twosided) {
             type = "even";
-            xml.stag("page-margins type=\"%s\"", type.toLatin1().data());
+            xml.stag(QString("page-margins type=\"%1\"").arg(type));
             xml.tag("left-margin",   evenLeftMargin * t);
             xml.tag("right-margin",  evenRightMargin * t);
             xml.tag("top-margin",    evenTopMargin * t);
@@ -437,7 +437,7 @@ void PageFormat::write(Xml& xml)
             xml.etag("page-margins");
             type = "odd";
             }
-      xml.stag("page-margins type=\"%s\"", type.toLatin1().data());
+      xml.stag(QString("page-margins type=\"%1\"").arg(type));
       xml.tag("left-margin",   oddLeftMargin * t);
       xml.tag("right-margin",  oddRightMargin * t);
       xml.tag("top-margin",    oddTopMargin * t);

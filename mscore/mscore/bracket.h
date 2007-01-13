@@ -43,7 +43,7 @@ class Bracket : public Element {
 
    public:
       Bracket(Score*);
-      virtual Element* clone() const { return new Bracket(*this); }
+      virtual Bracket* clone() const { return new Bracket(*this); }
       virtual ElementType type() const { return BRACKET; }
 
       int span() const      { return _span; }

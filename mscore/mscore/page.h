@@ -85,7 +85,7 @@ class Page : public Element {
    public:
       Page(ScoreLayout*);
       ~Page();
-      virtual Element* clone() const { return new Page(*this); }
+      virtual Page* clone() const { return new Page(*this); }
       virtual ElementType type() const   { return PAGE; }
 
       SystemList* systems() const        { return _systems;   }

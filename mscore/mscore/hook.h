@@ -33,7 +33,7 @@ class Hook : public Symbol {
 
    public:
       Hook(Score*);
-      virtual Element* clone() const { return new Hook(*this); }
+      virtual Hook* clone() const { return new Hook(*this); }
       virtual ElementType type() const { return HOOK; }
       int idx() const             { return val; }
       void setIdx(int v, bool);

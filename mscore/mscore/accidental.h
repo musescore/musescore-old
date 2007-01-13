@@ -35,7 +35,7 @@
 class Accidental : public Compound {
    public:
       Accidental(Score*);
-      virtual Element* clone() const { return new Accidental(*this); }
+      virtual Accidental* clone() const { return new Accidental(*this); }
       virtual ElementType type() const { return ACCIDENTAL; }
       virtual void setSubtype(int v);
       };

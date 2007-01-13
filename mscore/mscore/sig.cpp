@@ -249,7 +249,7 @@ void SigList::read(QDomNode node)
 
 void SigEvent::write(Xml& xml, int tick) const
       {
-      xml.stag("sig tick=\"%d\"", tick);
+      xml.stag(QString("sig tick=\"%1\"").arg(tick));
       if (irregular)
             xml.tag("ticks", ticks);
       xml.tag("nom", z);

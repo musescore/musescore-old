@@ -102,7 +102,7 @@ class NoteAttribute : public Symbol {
       NoteAttribute(Score*, int);
       NoteAttribute &operator=(const NoteAttribute&);
 
-      virtual Element* clone() const { return new NoteAttribute(*this); }
+      virtual NoteAttribute* clone() const { return new NoteAttribute(*this); }
       virtual ElementType type() const { return ATTRIBUTE; }
 
       virtual void setSubtype(int);

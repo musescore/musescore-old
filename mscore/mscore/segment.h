@@ -71,7 +71,7 @@ class Segment : public Element {
    public:
       Segment(Measure*);
       Segment(Measure*, int t);
-      virtual Element* clone() const { return new Segment(*this); }
+      virtual Segment* clone() const { return new Segment(*this); }
       virtual ElementType type() const { return SEGMENT; }
 
       Segment* next() const    { return (Segment*)Element::next(); }

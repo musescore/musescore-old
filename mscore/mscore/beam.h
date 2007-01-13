@@ -59,7 +59,7 @@ class Beam : public Element {
    public:
       Beam(Score* s) : Element(s) {}
       ~Beam();
-      virtual Element* clone() const { return new Beam(*this); }
+      virtual Beam* clone() const { return new Beam(*this); }
       virtual ElementType type() const { return BEAM; }
 
       void layout();

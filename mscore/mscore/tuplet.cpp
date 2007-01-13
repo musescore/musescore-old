@@ -266,7 +266,7 @@ void Tuplet::move(double x, double y)
 
 void Tuplet::write(Xml& xml, int id) const
       {
-      xml.stag("Tuplet id=\"%d\"", id);
+      xml.stag(QString("Tuplet id=\"%d\"").arg(id));
       xml.tag("hasNumber", _hasNumber);
       xml.tag("hasLine", _hasLine);
       xml.tag("baseLen", _baseLen);

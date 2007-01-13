@@ -250,28 +250,6 @@ Score::Score()
       undoActive        = false;
       clear();
       }
-#if 0
-Score::Score(const Score& s)
-      {
-      _layout       = s._layout;
-      tempomap          = s.tempomap;
-      sigmap            = s.sigmap;
-      keymap            = s.keymap;
-      sel               = s.sel;
-      _staves           = s._staves;
-      _parts            = s._parts;
-      _dirty            = s._dirty;
-      editObject        = s.editObject;
-      origDragObject    = s.origDragObject;
-      _dragObject       = s._dragObject;
-      cis               = s.cis;
-      keyState          = s.keyState;
-      editTempo         = s.editTempo;
-      updateAll         = s.updateAll;
-      _pageOffset       = s._pageOffset;
-      undoActive        = s.undoActive;
-      }
-#endif
 
 //---------------------------------------------------------
 //   ~Score
@@ -408,7 +386,7 @@ void Score::write(Xml& xml)
 
       int staff = 0;
       for (iStaff ip = _staves->begin(); ip != _staves->end(); ++ip, ++staff) {
-            xml.stag("Staff id=\"%d\"", staff+1);
+            xml.stag(QString("Staff id=\"%1\"").arg(staff+1));
             int measureNumber = 1;
             xml.curTick = 0;
             for (Measure* m = _layout->first(); m; m = m->next()) {
@@ -915,17 +893,16 @@ int Measure::snap(int tick, const QPointF p) const
 void Score::startEdit(Element* element)
       {
       if (element->type() == SLUR_SEGMENT) {
-#if 0 //TODO: edit slur
             //
             // we must clone the whole slur with all segments
             //
             SlurSegment* segment = (SlurSegment*)element;
-            SlurTie* slur = segment->slurTie();
-            SlurTie* newSlur = slur->clone();
+            SlurTie* slur        = segment->slurTie();
+            SlurTie* newSlur     = (SlurTie*)slur->clone();
             segment->resetMode();
+
             select(newSlur, 0, 0);
-            removeObject(slur);
-            addObject(newSlur);
+            removeElement(slur);
             origEditObject = element;
 
             //
@@ -949,24 +926,20 @@ void Score::startEdit(Element* element)
             if (editObject == 0)
                   abort();
 
-            undoOp(UndoOp::RemoveObject, slur);
-            undoOp(UndoOp::AddObject, newSlur);
-#endif
+            undoOp(UndoOp::RemoveElement, slur);
+            undoOp(UndoOp::AddElement, newSlur);
             }
       else {
-
-//TODO: undo edit mode
             origEditObject = element;
-            editObject     = element;   // element->clone();
+            editObject     = element->clone();
 
             select(editObject, 0, 0);
 
-//            removeObject(element);
-//            element->resetMode();
-//            addObject(editObject);
+            removeElement(element);
+            element->resetMode();
 
-//            undoOp(UndoOp::RemoveObject, origEditObject);
-//            undoOp(UndoOp::AddObject, editObject);
+            undoOp(UndoOp::RemoveElement, origEditObject);
+            undoOp(UndoOp::AddElement, editObject);
             }
 
       updateAll = true;

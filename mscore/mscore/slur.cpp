@@ -44,6 +44,18 @@ SlurSegment::SlurSegment(SlurTie* st)
       path = 0;
       }
 
+SlurSegment::SlurSegment(const SlurSegment& b)
+   : Element(b)
+      {
+      for (int i = 0; i < 4; ++i)
+            ups[i] = b.ups[i];
+      path = new QPainterPath(*(b.path));
+      slur = b.slur;
+      rb   = b.rb->clone();
+      bow  = b.bow;
+      mode = b.mode;
+      }
+
 //---------------------------------------------------------
 //   SlurSegment
 //---------------------------------------------------------
@@ -212,17 +224,19 @@ bool SlurSegment::editDrag(QMatrix& matrix, QPointF*, const QPointF& delta)
             //
             QPointF p0 = ups[0].pos();
             QPointF p3 = ups[3].pos();
-            qreal d    = (p3.x() - p0.x()) / 4;
-            qreal x1   = p0.x() + d;
-            qreal x2   = p3.x() - d;
 
             qreal xdelta = p3.x() - p0.x();
             if (xdelta == 0.0) {
                   printf("bad slur slope\n");
                   return true;
                   }
+
+            qreal d    = xdelta / 4.0;
+            qreal x1   = p0.x() + d;
+            qreal x2   = p3.x() - d;
+
             qreal slope = (p3.y() - p0.y()) / xdelta;
-            qreal y1    = p0.y() + (x1-p0.y()) * slope + bow;
+            qreal y1    = p0.y() + (x1-p0.x()) * slope + bow;
             qreal y2    = p0.y() + (x2-p0.x()) * slope + bow;
             ups[1].p    = QPointF(x1, y1);
             ups[2].p    = QPointF(x2, y2);
@@ -273,7 +287,7 @@ void SlurSegment::write(Xml& xml, int no) const
             }
       if (empty)
             return;
-      xml.tag("SlurSegment no=\"%d\"", no);
+      xml.stag(QString("SlurSegment no=\"%1\"").arg(no));
       if (!(ups[0].off.isNull()))
             xml.tag("o1", ups[0].off);
       if (!(ups[1].off.isNull()))
@@ -410,6 +424,7 @@ bool SlurSegment::edit(QKeyEvent*)
 
 void SlurSegment::layout(const QPointF& p1, const QPointF& p2, qreal b)
       {
+// printf("SlurSegment %p %p layout\n", slur, this);
       bow = b;
       QPointF ppos(apos());
       ups[0].p = p1 - ppos;
@@ -418,20 +433,21 @@ void SlurSegment::layout(const QPointF& p1, const QPointF& p2, qreal b)
       //
       //  compute bezier help points
       //
-      qreal x0 = ups[0].p.x();
-      qreal x3 = ups[3].p.x();
-      qreal y0 = ups[0].p.y();
-      qreal y3 = ups[3].p.y();
-
-      qreal delta = (x3 - x0) / 4;
-      qreal x1 = x0 + delta;
-      qreal x2 = x3 - delta;
+      qreal x0 = ups[0].pos().x();
+      qreal x3 = ups[3].pos().x();
+      qreal y0 = ups[0].pos().y();
+      qreal y3 = ups[3].pos().y();
 
       qreal xdelta = x3 - x0;
       if (xdelta == 0.0) {
             printf("bad slur slope\n");
             return;
             }
+
+      qreal d = xdelta / 4.0;
+      qreal x1 = x0 + d;
+      qreal x2 = x3 - d;
+
       qreal slope = (y3 - y0) / xdelta;
 
       qreal y1 = y0 + (x1-x0) * slope + bow;
@@ -473,6 +489,19 @@ SlurTie::SlurTie(Score* s)
       {
       _slurDirection = AUTO;
       up = true;
+      }
+
+SlurTie::SlurTie(const SlurTie& t)
+   : Element(t)
+      {
+      up             = t.up;
+      _slurDirection = t._slurDirection;
+      segments.clear();
+      for (ciElement ie = t.segments.begin(); ie != t.segments.end(); ++ie) {
+            SlurSegment* ss = new SlurSegment(*(SlurSegment*)(*ie));
+            ss->setSlurTie(this);
+            segments.push_back(ss);
+            }
       }
 
 //---------------------------------------------------------
@@ -588,7 +617,7 @@ bool SlurTie::readProperties(QDomNode node)
       QString tag(e.tagName());
       QString val(e.text());
 
-      if (tag == "Segment") {
+      if (tag == "SlurSegment") {
             SlurSegment* segment = new SlurSegment(this);
             segment->read(node);
             segments.push_back(segment);
@@ -866,7 +895,7 @@ void Slur::layout()
       for (iElement i = segments1.begin(); i != segments1.end(); ++i) {
             Element* el = *i;
             Element* parent = el->parent();
-// printf("Slur layout %d: remove segment %p from parent %p\n", segments.size(), el, pa);
+// printf("Slur layout %d: remove segment %p from parent %p\n", segments.size(), el, parent);
 
             if (parent)           // if layout was not called, parent is zero
                   parent->remove(el);

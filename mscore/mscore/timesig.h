@@ -49,7 +49,7 @@ class TimeSig : public Element {
       TimeSig(Score*, int st);
       TimeSig(Score*, int n, int z1, int z2=0, int z3=0, int z4=0);
 
-      virtual Element* clone() const { return new TimeSig(*this); }
+      virtual TimeSig* clone() const { return new TimeSig(*this); }
       virtual ElementType type() const { return TIMESIG; }
       virtual void setSubtype(int val);
       virtual void draw1(Painter&);
