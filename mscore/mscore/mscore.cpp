@@ -529,7 +529,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          "move-up",
-         QT_TR_NOOP("up+shift+ctrl"),
+         QT_TR_NOOP("move up"),
          Qt::SHIFT+Qt::CTRL+Qt::Key_Up,
          Qt::ApplicationShortcut,
          QT_TR_NOOP("up+shift+ctrl"),
@@ -537,7 +537,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          "pitch-down",
-         QT_TR_NOOP("down"),
+         QT_TR_NOOP("pitch down"),
          Qt::Key_Down,
          Qt::ApplicationShortcut,
          QT_TR_NOOP("down"),
@@ -545,7 +545,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          "pitch-down-octave",
-         QT_TR_NOOP("down+ctrl"),
+         QT_TR_NOOP("pitch down octave"),
          Qt::CTRL + Qt::Key_Down,
          Qt::ApplicationShortcut,
          QT_TR_NOOP("down+ctrl"),
@@ -569,7 +569,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          "move-down",
-         QT_TR_NOOP("down+shift+ctrl"),
+         QT_TR_NOOP("move down"),
          Qt::SHIFT+Qt::CTRL+Qt::Key_Down,
          Qt::ApplicationShortcut,
          QT_TR_NOOP("down+shift+ctrl"),
@@ -577,7 +577,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          "prev-chord",
-         QT_TR_NOOP("left"),
+         QT_TR_NOOP("previous chord"),
          Qt::Key_Left,
          Qt::ApplicationShortcut,
          QT_TR_NOOP("left"),
@@ -585,7 +585,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          "prev-measure",
-         QT_TR_NOOP("left+ctrl"),
+         QT_TR_NOOP("previous measure"),
          Qt::CTRL+Qt::Key_Left,
          Qt::ApplicationShortcut,
          QT_TR_NOOP("left+ctrl"),
@@ -593,7 +593,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          "next-chord",
-         QT_TR_NOOP("right"),
+         QT_TR_NOOP("next chord"),
          Qt::Key_Right,
          Qt::ApplicationShortcut,
          QT_TR_NOOP("right"),
@@ -601,7 +601,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          "next-measure",
-         QT_TR_NOOP("right+ctrl"),
+         QT_TR_NOOP("next measure"),
          Qt::CTRL+Qt::Key_Right,
          Qt::ApplicationShortcut,
          QT_TR_NOOP("right+ctrl"),
@@ -609,7 +609,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          "page-prev",
-         QT_TR_NOOP(""),
+         QT_TR_NOOP("page-prev"),
          Qt::Key_PageUp,
          Qt::ApplicationShortcut,
          QT_TR_NOOP(""),
@@ -617,7 +617,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          "page-next",
-         QT_TR_NOOP(""),
+         QT_TR_NOOP("page-next"),
          Qt::Key_PageDown,
          Qt::ApplicationShortcut,
          QT_TR_NOOP(""),
@@ -625,7 +625,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          "page-top",
-         QT_TR_NOOP(""),
+         QT_TR_NOOP("page-top"),
          Qt::Key_Home,
          Qt::ApplicationShortcut,
          QT_TR_NOOP(""),
@@ -633,7 +633,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          "page-end",
-         QT_TR_NOOP(""),
+         QT_TR_NOOP("page-end"),
          Qt::Key_End,
          Qt::ApplicationShortcut,
          QT_TR_NOOP(""),
@@ -641,7 +641,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          "add-tie",
-         QT_TR_NOOP(""),
+         QT_TR_NOOP("add tie"),
          Qt::SHIFT+Qt::Key_S,
          Qt::ApplicationShortcut,
          QT_TR_NOOP(""),
@@ -649,7 +649,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          "add-slur",
-         QT_TR_NOOP(""),
+         QT_TR_NOOP("add slur"),
          Qt::Key_S,
          Qt::ApplicationShortcut,
          QT_TR_NOOP(""),
@@ -657,7 +657,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          "add-hairpin",
-         QT_TR_NOOP(""),
+         QT_TR_NOOP("crescendo"),
          Qt::Key_H,
          Qt::ApplicationShortcut,
          QT_TR_NOOP(""),
@@ -665,7 +665,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          "add-hairpin-reverse",
-         QT_TR_NOOP(""),
+         QT_TR_NOOP("decrescendo"),
          Qt::SHIFT+Qt::Key_H,
          Qt::ApplicationShortcut,
          QT_TR_NOOP(""),
@@ -673,7 +673,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          "escape",
-         QT_TR_NOOP(""),
+         QT_TR_NOOP("ESCAPE"),
          Qt::Key_Escape,
          Qt::ApplicationShortcut,
          QT_TR_NOOP(""),
@@ -681,7 +681,7 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          "delete",
-         QT_TR_NOOP(""),
+         QT_TR_NOOP("delete"),
          Qt::Key_Delete,
          Qt::ApplicationShortcut,
          QT_TR_NOOP(""),
@@ -718,7 +718,7 @@ Shortcut MuseScore::sc[] = {
       Shortcut(
          "pad-note-1",
          QT_TR_NOOP("pad note 1/1"),
-         0,
+         Qt::ALT + Qt::Key_6,
          Qt::ApplicationShortcut,
          QT_TR_NOOP("1/1"),
          QT_TR_NOOP("1/1"),
@@ -727,7 +727,7 @@ Shortcut MuseScore::sc[] = {
       Shortcut(
          "pad-note-2",
          QT_TR_NOOP("pad note 1/2"),
-         0,
+         Qt::ALT + Qt::Key_7,
          Qt::ApplicationShortcut,
          QT_TR_NOOP("1/2"),
          QT_TR_NOOP("1/2"),
@@ -736,7 +736,7 @@ Shortcut MuseScore::sc[] = {
       Shortcut(
          "pad-note-4",
          QT_TR_NOOP("pad note 1/4"),
-         0,
+         Qt::ALT + Qt::Key_1,
          Qt::ApplicationShortcut,
          QT_TR_NOOP("1/4"),
          QT_TR_NOOP("1/4"),
@@ -745,7 +745,7 @@ Shortcut MuseScore::sc[] = {
       Shortcut(
          "pad-note-8",
          QT_TR_NOOP("pad note 1/8"),
-         0,
+         Qt::ALT + Qt::Key_2,
          Qt::ApplicationShortcut,
          QT_TR_NOOP("1/8"),
          QT_TR_NOOP("1/8"),
@@ -754,7 +754,7 @@ Shortcut MuseScore::sc[] = {
       Shortcut(
          "pad-note-16",
          QT_TR_NOOP("pad note 1/16"),
-         0,
+         Qt::ALT + Qt::Key_3,
          Qt::ApplicationShortcut,
          QT_TR_NOOP("1/16"),
          QT_TR_NOOP("1/16"),
@@ -763,7 +763,7 @@ Shortcut MuseScore::sc[] = {
       Shortcut(
          "pad-note-32",
          QT_TR_NOOP("pad note 1/32"),
-         0,
+         Qt::ALT + Qt::Key_4,
          Qt::ApplicationShortcut,
          QT_TR_NOOP("1/32"),
          QT_TR_NOOP("1/32"),
@@ -772,7 +772,7 @@ Shortcut MuseScore::sc[] = {
       Shortcut(
          "pad-note-64",
          QT_TR_NOOP("pad note 1/64"),
-         0,
+         Qt::ALT + Qt::Key_5,
          Qt::ApplicationShortcut,
          QT_TR_NOOP("1/64"),
          QT_TR_NOOP("1/64"),
@@ -781,7 +781,7 @@ Shortcut MuseScore::sc[] = {
       Shortcut(
          "pad-dot",
          QT_TR_NOOP("pad dot"),
-         0,
+         Qt::ALT + Qt::Key_8,
          Qt::ApplicationShortcut,
          QT_TR_NOOP("dot"),
          QT_TR_NOOP("dot"),
@@ -790,7 +790,7 @@ Shortcut MuseScore::sc[] = {
       Shortcut(
          "pad-tie",
          QT_TR_NOOP("pad tie"),
-         0,
+         Qt::ALT + Qt::Key_9,
          Qt::ApplicationShortcut,
          QT_TR_NOOP("tie"),
          QT_TR_NOOP("tie"),

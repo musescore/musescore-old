@@ -85,7 +85,7 @@ class TabBar : public QTabBar {
 
 struct Shortcut {
       const char* xml;        //! xml tag name for configuration file
-      QString descr;          //! descriptor, shown in editor
+      const char* descr;      //! descriptor, shown in editor
       QKeySequence key;       //! shortcut
       Qt::ShortcutContext context;
       QString text;
@@ -95,12 +95,13 @@ struct Shortcut {
 
       Shortcut() {
             xml     = 0;
+            descr   = 0;
             key     = 0;
             context = Qt::WindowShortcut;
             icon    = 0;
             action  = 0;
             }
-      Shortcut(const char* name, const QString& d, const QKeySequence& k,
+      Shortcut(const char* name, const char* d, const QKeySequence& k,
          Qt::ShortcutContext cont = Qt::ApplicationShortcut,
          const QString& txt = 0, const QString& h = 0, QIcon* i = 0)
          : descr(d), key(k), context(cont), text(txt), help(h) {

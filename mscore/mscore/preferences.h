@@ -29,8 +29,6 @@
 //---------------------------------------------------------
 
 struct Preferences {
-      QString printCmd;
-      QString browseCmd;
       bool cursorBlink;
       bool bgUseColor;
       bool fgUseColor;
@@ -75,6 +73,7 @@ class PreferenceDialog : public QDialog, private Ui::PrefsDialogBase {
       void apply();
 
       bool sfChanged;
+      void updateSCListView();
 
    private slots:
       void ok();
@@ -92,6 +91,9 @@ class PreferenceDialog : public QDialog, private Ui::PrefsDialogBase {
       void selectSoundFont();
       void playPanelCurClicked();
       void padCurClicked();
+      void resetShortcutClicked();
+      void clearShortcutClicked();
+      void defineShortcutClicked();
 
    signals:
       void preferencesChanged();

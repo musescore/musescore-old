@@ -892,19 +892,8 @@ void Score::printFile()
       printer.setPageSize(paperSizes[pageFormat()->size].qtsize);
       printer.setOrientation(pageFormat()->landscape ? QPrinter::Landscape : QPrinter::Portrait);
 
-      char tempName[512];
-      if (preferences.printCmd.isEmpty()) {
-            //
-            //  use default qt printer setup
-            //
-            QPrintDialog pd(&printer, 0);
-            pd.exec();
-            }
-      else {
-            sprintf(tempName, "%s/mscorePrint%d.ps", P_tmpdir, getpid());
-            QString s(tempName);
-            printer.setOutputFileName(s);
-            }
+      QPrintDialog pd(&printer, 0);
+      pd.exec();
 
       printer.setCreator("MuseScore Version: " VERSION);
       printer.setFullPage(true);
@@ -925,11 +914,5 @@ void Score::printFile()
             printer.newPage();
             }
       p.end();
-      if (tempName) {
-            int len = preferences.printCmd.length() + strlen(tempName) + 16;
-            char buffer[len];
-            sprintf(buffer, preferences.printCmd.toLatin1().data(), tempName);
-            system(buffer);
-            }
       }
 
