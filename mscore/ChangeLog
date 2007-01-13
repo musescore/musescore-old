@@ -1,3 +1,5 @@
+13.1.7 (lv)
+      - hairpin drag and drop
 12.1.7 (ws)
       - remove old "Pad" design; does not work with Laptops and cannot be
         implemented with Qt shortcuts
