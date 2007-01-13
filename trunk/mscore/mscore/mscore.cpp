@@ -499,7 +499,7 @@ Shortcut MuseScore::sc[] = {
          "pitch-up",
          QT_TR_NOOP("up"),
          Qt::Key_Up,
-         Qt::ApplicationShortcut,
+         Qt::WindowShortcut,
          QT_TR_NOOP("up"),
          QT_TR_NOOP("up")
          ),
@@ -539,7 +539,7 @@ Shortcut MuseScore::sc[] = {
          "pitch-down",
          QT_TR_NOOP("pitch down"),
          Qt::Key_Down,
-         Qt::ApplicationShortcut,
+         Qt::WindowShortcut,
          QT_TR_NOOP("down"),
          QT_TR_NOOP("down")
          ),
@@ -675,7 +675,7 @@ Shortcut MuseScore::sc[] = {
          "escape",
          QT_TR_NOOP("ESCAPE"),
          Qt::Key_Escape,
-         Qt::ApplicationShortcut,
+         Qt::WindowShortcut,
          QT_TR_NOOP(""),
          QT_TR_NOOP("")
          ),
