@@ -901,7 +901,6 @@ void Score::startEdit(Element* element)
             SlurTie* newSlur     = (SlurTie*)slur->clone();
             segment->resetMode();
 
-            select(newSlur, 0, 0);
             removeElement(slur);
             origEditObject = element;
 
@@ -925,7 +924,7 @@ void Score::startEdit(Element* element)
                   }
             if (editObject == 0)
                   abort();
-
+            select(editObject, 0, 0);
             undoOp(UndoOp::RemoveElement, slur);
             undoOp(UndoOp::AddElement, newSlur);
             }
@@ -933,11 +932,10 @@ void Score::startEdit(Element* element)
             origEditObject = element;
             editObject     = element->clone();
 
-            select(editObject, 0, 0);
-
             removeElement(element);
             element->resetMode();
 
+            select(editObject, 0, 0);
             undoOp(UndoOp::RemoveElement, origEditObject);
             undoOp(UndoOp::AddElement, editObject);
             }
