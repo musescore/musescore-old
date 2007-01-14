@@ -52,6 +52,7 @@
 #include "dynamics.h"
 #include "barline.h"
 #include "timesig.h"
+#include "ottava.h"
 
 //---------------------------------------------------------
 //   attributes -- prints <attributes> tag when necessary
@@ -184,6 +185,7 @@ class ExportMusicXml : public SaveFile {
       void moveToTick(int t);
       void words(Text* text, int staff);
       void hairpin(Hairpin* hp, int staff, int tick);
+      void ottava(Ottava* ot, int staff, int tick);
       void dynamic(Dynamic* dyn, int staff);
       void symbol(Symbol * sym, int staff);
       };
@@ -459,6 +461,10 @@ void DirectionsHandler::handleElement(ExportMusicXml* exp, Element* el, int ssta
                               case HAIRPIN:
                                     exp->hairpin((Hairpin*) dir, sstaff, da->getTick());
                                     break;
+                              case OTTAVA:
+                                    exp->ottava((Ottava*) dir, sstaff, da->getTick());
+                                    // printf("handleElement ottava tick=%d\n", da->getTick());
+                                    break;
                               default:
                                     printf("DirectionsHandler::handleElement: direction type %s at tick %d not implemented\n",
                                             elementNames[dir->type()], da->getTick());
@@ -492,6 +498,10 @@ void DirectionsHandler::handleElements(ExportMusicXml* exp, Staff* staff, int ms
                                     break;
                               case HAIRPIN:
                                     exp->hairpin((Hairpin*) dir, sstaff, da->getTick());
+                                    break;
+                              case OTTAVA:
+                                    exp->ottava((Ottava*) dir, sstaff, da->getTick());
+                                    // printf("handleElement ottava tick=%d\n", da->getTick());
                                     break;
                               default:
                                     printf("DirectionsHandler::handleElements: direction type %s at tick %d not implemented\n",
@@ -621,6 +631,21 @@ void DirectionsHandler::buildDirectionsList(Measure* m, bool dopart, Part* p, in
                                     storeAnchor(da);
                                     }
                               da = findMatchInPart(hp->tick2(), hp->staff(), cs, p, strack, etrack);
+                              if (da) {
+                                    da->setDirect(dir);
+                                    storeAnchor(da);
+                                    }
+                        }
+                        break;
+                  case OTTAVA:
+                        if (dopart) {
+                              Ottava* ot = (Ottava*) dir;
+                              da = findMatchInPart(ot->tick1(), ot->staff(), cs, p, strack, etrack);
+                              if (da) {
+                                    da->setDirect(dir);
+                                    storeAnchor(da);
+                                    }
+                              da = findMatchInPart(ot->tick2(), ot->staff(), cs, p, strack, etrack);
                               if (da) {
                                     da->setDirect(dir);
                                     storeAnchor(da);
@@ -1594,6 +1619,47 @@ void ExportMusicXml::hairpin(Hairpin* hp, int staff, int tick)
             xml.tagE("wedge type=\"%s\"", hp->subtype() ? "diminuendo" : "crescendo");
       else
             xml.tagE("wedge type=\"stop\"");
+      directionETag(xml, staff);
+      }
+
+//---------------------------------------------------------
+//   ottava
+// <octave-shift type="down" size="8" relative-y="14"/>
+// <octave-shift type="stop" size="8"/>
+//---------------------------------------------------------
+
+void ExportMusicXml::ottava(Ottava* ot, int staff, int tick)
+      {
+      directionTag(xml, attr, ot);
+      if (ot->tick1() == tick) {
+            int st = ot->subtype();
+            char* sz = 0;
+            char* tp = 0;
+            switch(st) {
+                  case 0:
+                        sz = "8";
+                        tp = "down";
+                        break;
+                  case 1:
+                        sz = "15";
+                        tp = "down";
+                        break;
+                  case 2:
+                        sz = "8";
+                        tp = "up";
+                        break;
+                  case 3:
+                        sz = "15";
+                        tp = "up";
+                        break;
+                  default:
+                        printf("ottava subtype %d not understood\n", st);
+                  }
+            if (sz && tp)
+                  xml.tagE("octave-shift type=\"%s\" size=\"%s\"", tp, sz);
+            }
+      else
+            xml.tagE("octave-shift type=\"stop\"");
       directionETag(xml, staff);
       }
 
