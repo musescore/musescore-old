@@ -29,6 +29,7 @@
 #include "pad.h"
 #include "icons.h"
 #include "shortcutcapturedialog.h"
+#include "canvas.h"
 
 //---------------------------------------------------------
 //   buttons2stemDir
@@ -850,7 +851,7 @@ QAction* getAction(const char* id)
             return 0;
             }
       if (s->action == 0) {
-            QAction* a = new QAction(s->xml, mscore);
+            QAction* a = new QAction(s->xml, mscore); // ->getCanvas());
             s->action = a;
             a->setData(s->xml);
             a->setShortcut(s->key);
