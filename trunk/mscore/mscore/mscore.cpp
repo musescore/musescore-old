@@ -411,7 +411,7 @@ Shortcut MuseScore::sc[] = {
          QT_TR_NOOP("add a to chord"),
          Qt::SHIFT + Qt::Key_A,
          Qt::WindowShortcut,
-         QT_TR_NOOP("A"),
+         QT_TR_NOOP("Add A"),
          QT_TR_NOOP("Add note A to chord")
          ),
       Shortcut(
@@ -419,7 +419,7 @@ Shortcut MuseScore::sc[] = {
          QT_TR_NOOP("add b to chord"),
          Qt::SHIFT + Qt::Key_B,
          Qt::WindowShortcut,
-         QT_TR_NOOP("B"),
+         QT_TR_NOOP("Add B"),
          QT_TR_NOOP("Add note B to chord")
          ),
       Shortcut(
@@ -427,7 +427,7 @@ Shortcut MuseScore::sc[] = {
          QT_TR_NOOP("add c to chord"),
          Qt::SHIFT + Qt::Key_C,
          Qt::WindowShortcut,
-         QT_TR_NOOP("C"),
+         QT_TR_NOOP("Add C"),
          QT_TR_NOOP("Add note C to chord")
          ),
       Shortcut(
@@ -435,7 +435,7 @@ Shortcut MuseScore::sc[] = {
          QT_TR_NOOP("add d to chord"),
          Qt::SHIFT + Qt::Key_D,
          Qt::WindowShortcut,
-         QT_TR_NOOP("D"),
+         QT_TR_NOOP("Add D"),
          QT_TR_NOOP("Add note D to chord")
          ),
       Shortcut(
@@ -443,7 +443,7 @@ Shortcut MuseScore::sc[] = {
          QT_TR_NOOP("add e to chord"),
          Qt::SHIFT + Qt::Key_E,
          Qt::WindowShortcut,
-         QT_TR_NOOP("E"),
+         QT_TR_NOOP("Add E"),
          QT_TR_NOOP("Add note E to chord")
          ),
       Shortcut(
@@ -451,7 +451,7 @@ Shortcut MuseScore::sc[] = {
          QT_TR_NOOP("add f to chord"),
          Qt::SHIFT + Qt::Key_F,
          Qt::WindowShortcut,
-         QT_TR_NOOP("F"),
+         QT_TR_NOOP("Add F"),
          QT_TR_NOOP("Add note F to chord")
          ),
       Shortcut(
@@ -459,7 +459,7 @@ Shortcut MuseScore::sc[] = {
          QT_TR_NOOP("add g to chord"),
          Qt::SHIFT + Qt::Key_G,
          Qt::WindowShortcut,
-         QT_TR_NOOP("G"),
+         QT_TR_NOOP("Add G"),
          QT_TR_NOOP("Add note G to chord")
          ),
       Shortcut(
