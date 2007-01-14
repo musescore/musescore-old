@@ -24,6 +24,8 @@
 #include "ui_prefsdialog.h"
 #include "globals.h"
 
+struct Shortcut;
+
 //---------------------------------------------------------
 //   Preferences
 //---------------------------------------------------------
@@ -70,14 +72,15 @@ struct Preferences {
 class PreferenceDialog : public QDialog, private Ui::PrefsDialogBase {
       Q_OBJECT
 
-      void apply();
+      QMap<QString, Shortcut*> localShortcuts;
+      bool shortcutsChanged;
 
+      void apply();
       bool sfChanged;
       void updateSCListView();
 
    private slots:
-      void ok();
-      void cancel();
+      void buttonBoxClicked(QAbstractButton*);
       void bgClicked(bool);
       void fgClicked(bool);
       void selectFgColor();

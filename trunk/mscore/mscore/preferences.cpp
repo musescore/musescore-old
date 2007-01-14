@@ -294,7 +294,7 @@ void Preferences::read()
                         else if (tag == "antialiasedDrawing")
                               antialiasedDrawing = i;
                         else if (tag == "Shortcuts")
-                              readShortcuts(node);
+                              readShortcuts(nnnode);
                         else
                               printf("Mscore:Preferences: unknown tag %s\n",
                                  tag.toLatin1().data());
@@ -327,8 +327,9 @@ PreferenceDialog::PreferenceDialog(QWidget* parent)
       {
       setupUi(this);
 
-      connect(buttonOk, SIGNAL(pressed()), SLOT(ok()));
-      connect(buttonCancel, SIGNAL(pressed()), SLOT(cancel()));
+      connect(buttonBox, SIGNAL(clicked(QAbstractButton*)), SLOT(buttonBoxClicked(QAbstractButton*)));
+//      connect(buttonCancel, SIGNAL(pressed()), SLOT(cancel()));
+
       cursorBlink->setChecked(preferences.cursorBlink);
 
       QButtonGroup* fgButtons = new QButtonGroup(this);
@@ -418,6 +419,17 @@ PreferenceDialog::PreferenceDialog(QWidget* parent)
       alsaFragments->setValue(preferences.alsaFragments);
       drawAntialiased->setChecked(preferences.antialiasedDrawing);
 
+      //
+      // initialize local shortcut table
+      //    we need a deep copy to be able to rewind all
+      //    changes on "Abort"
+      //
+      foreach(Shortcut* s, shortcuts) {
+            Shortcut* ns = new Shortcut(*s);
+            ns->action = 0;
+            ns->icon   = 0;
+            localShortcuts[s->xml] = ns;
+            }
       updateSCListView();
 
       connect(fgColorSelect,      SIGNAL(clicked()), SLOT(selectFgColor()));
@@ -434,6 +446,8 @@ PreferenceDialog::PreferenceDialog(QWidget* parent)
       connect(playPanelCur, SIGNAL(clicked()), SLOT(playPanelCurClicked()));
       connect(keyPadCur, SIGNAL(clicked()), SLOT(padCurClicked()));
 
+//      connect(shortcutList, SIGNAL(itemDoubleClicked(QTreeWidgetItem*, int)), SLOT(defineShortcutClicked()));
+      connect(shortcutList, SIGNAL(itemActivated(QTreeWidgetItem*, int)), SLOT(defineShortcutClicked()));
       connect(resetShortcut, SIGNAL(clicked()), SLOT(resetShortcutClicked()));
       connect(clearShortcut, SIGNAL(clicked()), SLOT(clearShortcutClicked()));
       connect(defineShortcut, SIGNAL(clicked()), SLOT(defineShortcutClicked()));
@@ -446,7 +460,7 @@ PreferenceDialog::PreferenceDialog(QWidget* parent)
 void PreferenceDialog::updateSCListView()
       {
       shortcutList->clear();
-      foreach (Shortcut* s, shortcuts) {
+      foreach (Shortcut* s, localShortcuts) {
             if (s) {
                   QTreeWidgetItem* newItem = new QTreeWidgetItem;
                   newItem->setText(0, tr(s->descr));
@@ -455,12 +469,18 @@ void PreferenceDialog::updateSCListView()
                   newItem->setText(1, s->key.toString(QKeySequence::NativeText));
                   newItem->setData(0, Qt::UserRole, s->xml);
                   shortcutList->addTopLevelItem(newItem);
+                  // does not work:
+                  // QBrush brush = newItem->background(1);
+                  // brush.setColor(brush.color().dark(200));
+                  // newItem->setBackground(0, brush);
                   }
             }
+      shortcutList->resizeColumnToContents(0);
       }
 
 //---------------------------------------------------------
 //   resetShortcutClicked
+//    reset all shortcuts to buildin defaults
 //---------------------------------------------------------
 
 void PreferenceDialog::resetShortcutClicked()
@@ -473,6 +493,12 @@ void PreferenceDialog::resetShortcutClicked()
 
 void PreferenceDialog::clearShortcutClicked()
       {
+      QTreeWidgetItem* active = shortcutList->currentItem();
+      if (active) {
+            Shortcut* s = localShortcuts[active->data(0, Qt::UserRole).toString()];
+            s->key = 0;
+            active->setText(1, s->key.toString(QKeySequence::NativeText));
+            }
       }
 
 //---------------------------------------------------------
@@ -482,12 +508,12 @@ void PreferenceDialog::clearShortcutClicked()
 void PreferenceDialog::defineShortcutClicked()
       {
       QTreeWidgetItem* active = shortcutList->currentItem();
-      Shortcut* s = shortcuts[active->data(0, Qt::UserRole).toString()];
+      Shortcut* s = localShortcuts[active->data(0, Qt::UserRole).toString()];
       ShortcutCaptureDialog sc(s, this);
       if (sc.exec()) {
             s->key = sc.getKey();
             active->setText(1, s->key.toString(QKeySequence::NativeText));
-//            _config_changed = true;
+            shortcutsChanged = true;
             }
 //      clearButton->setEnabled(true);
       }
@@ -651,22 +677,22 @@ void PreferenceDialog::bgClicked(bool id)
       }
 
 //---------------------------------------------------------
-//   ok
+//   buttonBoxClicked
 //---------------------------------------------------------
 
-void PreferenceDialog::ok()
+void PreferenceDialog::buttonBoxClicked(QAbstractButton* button)
       {
-      apply();
-      cancel();
-      }
-
-//---------------------------------------------------------
-//   cancel
-//---------------------------------------------------------
-
-void PreferenceDialog::cancel()
-      {
-      hide();
+      switch(buttonBox->standardButton(button)) {
+            case QDialogButtonBox::Apply:
+                  apply();
+                  break;
+            case QDialogButtonBox::Ok:
+                  apply();
+            case QDialogButtonBox::Cancel:
+            default:
+                  hide();
+                  break;
+            }
       }
 
 //---------------------------------------------------------
@@ -717,6 +743,17 @@ void PreferenceDialog::apply()
       preferences.alsaFragments  = alsaFragments->value();
       preferences.antialiasedDrawing = drawAntialiased->isChecked();
 
+      if (shortcutsChanged) {
+            shortcutsChanged = false;
+            foreach(Shortcut* s, localShortcuts) {
+                  Shortcut* os = shortcuts[s->xml];
+                  if (os->key != s->key) {
+                        os->key = s->key;
+                        if (os->action)
+                              os->action->setShortcut(s->key);
+                        }
+                  }
+            }
       emit preferencesChanged();
       preferences.write();
       if (sfChanged) {
@@ -789,9 +826,12 @@ void readShortcuts(QDomNode node)
       {
       for (node = node.firstChild(); !node.isNull(); node = node.nextSibling()) {
             QDomElement e = node.toElement();
-            Shortcut* s   = shortcuts.value(e.tagName());
-            if (s)
+            if (e.isNull())
+                  continue;
+            Shortcut* s = shortcuts.value(e.tagName());
+            if (s) {
                   s->key = QKeySequence::fromString(e.text(), QKeySequence::PortableText);
+                  }
             else
                   printf("MuseScore:readShortCuts: unknown tag <%s>\n", e.tagName().toLatin1().data());
             }
