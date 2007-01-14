@@ -579,7 +579,7 @@ Shortcut MuseScore::sc[] = {
          "prev-chord",
          QT_TR_NOOP("previous chord"),
          Qt::Key_Left,
-         Qt::ApplicationShortcut,
+         Qt::WindowShortcut,
          QT_TR_NOOP("left"),
          QT_TR_NOOP("left")
          ),
@@ -595,7 +595,7 @@ Shortcut MuseScore::sc[] = {
          "next-chord",
          QT_TR_NOOP("next chord"),
          Qt::Key_Right,
-         Qt::ApplicationShortcut,
+         Qt::WindowShortcut,
          QT_TR_NOOP("right"),
          QT_TR_NOOP("right")
          ),
@@ -2265,12 +2265,12 @@ int main(int argc, char* argv[])
       ++argc;
 
       //
-      // initialize shortcut table
+      // initialize shortcut hash table
       //
       for (unsigned i = 0;; ++i) {
             if (MuseScore::sc[i].xml == 0)
                   break;
-            shortcuts[MuseScore::sc[i].xml] = &MuseScore::sc[i];
+            shortcuts[MuseScore::sc[i].xml] = new Shortcut(MuseScore::sc[i]);
             }
 
       haveMidi = !initMidi();
