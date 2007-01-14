@@ -106,7 +106,7 @@ Shortcut MuseScore::sc[] = {
          "print",
          QT_TR_NOOP("print"),
          Qt::CTRL+Qt::Key_P,
-         Qt::ApplicationShortcut,
+         Qt::WindowShortcut,
          QT_TR_NOOP("Print"),
          QT_TR_NOOP("Print"),
          &printIcon
@@ -115,7 +115,7 @@ Shortcut MuseScore::sc[] = {
          "undo",
          QT_TR_NOOP("undo"),
          Qt::CTRL+Qt::Key_Z,        // QKeySequence::Undo,
-         Qt::ApplicationShortcut,
+         Qt::WindowShortcut,
          QT_TR_NOOP("Undo"),
          QT_TR_NOOP("undo last change"),
          &undoIcon
@@ -124,7 +124,7 @@ Shortcut MuseScore::sc[] = {
          "redo",
          QT_TR_NOOP("redo"),
          Qt::CTRL+Qt::SHIFT+Qt::Key_Z,    // QKeySequence::Redo,
-         Qt::ApplicationShortcut,
+         Qt::WindowShortcut,
          QT_TR_NOOP("Redo"),
          QT_TR_NOOP("redo last undo"),
          &redoIcon
@@ -133,7 +133,7 @@ Shortcut MuseScore::sc[] = {
          "cut",
          QT_TR_NOOP("cut"),
          Qt::CTRL+Qt::Key_X,        // QKeySequence::Cut,
-         Qt::ApplicationShortcut,
+         Qt::WindowShortcut,
          QT_TR_NOOP("Cut"),
          QT_TR_NOOP(""),
          &cutIcon
@@ -142,7 +142,7 @@ Shortcut MuseScore::sc[] = {
          "copy",
          QT_TR_NOOP("copy"),
          Qt::CTRL+Qt::Key_C,        // QKeySequence::Copy,
-         Qt::ApplicationShortcut,
+         Qt::WindowShortcut,
          QT_TR_NOOP("Copy"),
          QT_TR_NOOP(""),
          &copyIcon
@@ -151,7 +151,7 @@ Shortcut MuseScore::sc[] = {
          "paste",
          QT_TR_NOOP("paste"),
          Qt::CTRL+Qt::Key_V,        // QKeySequence::Paste,
-         Qt::ApplicationShortcut,
+         Qt::WindowShortcut,
          QT_TR_NOOP("Paste"),
          QT_TR_NOOP(""),
          &pasteIcon
@@ -160,7 +160,7 @@ Shortcut MuseScore::sc[] = {
          "instruments",
          QT_TR_NOOP("show instruments dialog"),
          Qt::Key_I,
-         Qt::ApplicationShortcut,
+         Qt::WindowShortcut,
          QT_TR_NOOP("Instruments..."),
          QT_TR_NOOP("Show Instruments Dialog")
          ),
@@ -168,7 +168,7 @@ Shortcut MuseScore::sc[] = {
          "clefs",
          QT_TR_NOOP("show clefs palette"),
          Qt::Key_Y,
-         Qt::ApplicationShortcut,
+         Qt::WindowShortcut,
          QT_TR_NOOP("Clef..."),
          QT_TR_NOOP("Show Clefs Palette"),
          &clefIcon
@@ -177,7 +177,7 @@ Shortcut MuseScore::sc[] = {
          "keys",
          QT_TR_NOOP("show keys palette"),
          Qt::Key_K,
-         Qt::ApplicationShortcut,
+         Qt::WindowShortcut,
          QT_TR_NOOP("Key..."),
          QT_TR_NOOP("Show Keys Palette"),
          &sharpIcon
@@ -186,7 +186,7 @@ Shortcut MuseScore::sc[] = {
          "symbols",
          QT_TR_NOOP("show symbols palette"),
          Qt::Key_Z,
-         Qt::ApplicationShortcut,
+         Qt::WindowShortcut,
          QT_TR_NOOP("Symbols..."),
          QT_TR_NOOP("Show Symbols Palette")
          ),
@@ -194,7 +194,7 @@ Shortcut MuseScore::sc[] = {
          "times",
          QT_TR_NOOP("show time palette"),
          Qt::Key_T,
-         Qt::ApplicationShortcut,
+         Qt::WindowShortcut,
          QT_TR_NOOP("Time..."),
          QT_TR_NOOP("Show Time Palette")
          ),
@@ -202,7 +202,7 @@ Shortcut MuseScore::sc[] = {
          "dynamics",
          QT_TR_NOOP("show dynamics palette"),
          Qt::Key_L,
-         Qt::ApplicationShortcut,
+         Qt::WindowShortcut,
          QT_TR_NOOP("Dynamics..."),
          QT_TR_NOOP("Show Dynamics Palette")
          ),
@@ -210,7 +210,7 @@ Shortcut MuseScore::sc[] = {
          "note-input",
          QT_TR_NOOP("note input"),
          Qt::Key_N,
-         Qt::ApplicationShortcut,
+         Qt::WindowShortcut,
          QT_TR_NOOP("Input"),
          QT_TR_NOOP("Note Input Mode")
          ),
@@ -218,7 +218,7 @@ Shortcut MuseScore::sc[] = {
          "intervall1",
          QT_TR_NOOP("enter prime above"),
          Qt::Key_1,
-         Qt::ApplicationShortcut,
+         Qt::WindowShortcut,
          QT_TR_NOOP("Prime above"),
          QT_TR_NOOP("Enter Prime above")
          ),
@@ -226,7 +226,7 @@ Shortcut MuseScore::sc[] = {
          "intervall2",
          QT_TR_NOOP("enter sekunde above"),
          Qt::Key_2,
-         Qt::ApplicationShortcut,
+         Qt::WindowShortcut,
          QT_TR_NOOP("Sekunde above"),
          QT_TR_NOOP("Enter Sekunde above")
          ),
@@ -234,7 +234,7 @@ Shortcut MuseScore::sc[] = {
          "intervall3",
          QT_TR_NOOP("enter terz above"),
          Qt::Key_3,
-         Qt::ApplicationShortcut,
+         Qt::WindowShortcut,
          QT_TR_NOOP("Terz above"),
          QT_TR_NOOP("Enter Terz above")
          ),
@@ -242,7 +242,7 @@ Shortcut MuseScore::sc[] = {
          "intervall4",
          QT_TR_NOOP("enter quart above"),
          Qt::Key_4,
-         Qt::ApplicationShortcut,
+         Qt::WindowShortcut,
          QT_TR_NOOP("Quart above"),
          QT_TR_NOOP("Enter Quart above")
          ),
@@ -250,7 +250,7 @@ Shortcut MuseScore::sc[] = {
          "intervall5",
          QT_TR_NOOP("enter quint above"),
          Qt::Key_5,
-         Qt::ApplicationShortcut,
+         Qt::WindowShortcut,
          QT_TR_NOOP("Quint above"),
          QT_TR_NOOP("Enter Quint above")
          ),
@@ -258,7 +258,7 @@ Shortcut MuseScore::sc[] = {
          "intervall6",
          QT_TR_NOOP("enter sexte above"),
          Qt::Key_6,
-         Qt::ApplicationShortcut,
+         Qt::WindowShortcut,
          QT_TR_NOOP("Sexte above"),
          QT_TR_NOOP("Enter Sexte above")
          ),
@@ -266,7 +266,7 @@ Shortcut MuseScore::sc[] = {
          "intervall7",
          QT_TR_NOOP("enter septime above"),
          Qt::Key_7,
-         Qt::ApplicationShortcut,
+         Qt::WindowShortcut,
          QT_TR_NOOP("Septime above"),
          QT_TR_NOOP("Enter Septime above")
          ),
@@ -274,7 +274,7 @@ Shortcut MuseScore::sc[] = {
          "intervall8",
          QT_TR_NOOP("enter octave above"),
          Qt::Key_8,
-         Qt::ApplicationShortcut,
+         Qt::WindowShortcut,
          QT_TR_NOOP("Octave above"),
          QT_TR_NOOP("Enter Octave above")
          ),
@@ -282,7 +282,7 @@ Shortcut MuseScore::sc[] = {
          "intervall9",
          QT_TR_NOOP("enter None above"),
          Qt::Key_9,
-         Qt::ApplicationShortcut,
+         Qt::WindowShortcut,
          QT_TR_NOOP("None above"),
          QT_TR_NOOP("Enter None above")
          ),
@@ -290,7 +290,7 @@ Shortcut MuseScore::sc[] = {
          "intervall-2",
          QT_TR_NOOP("enter sekunde below"),
          Qt::SHIFT + Qt::Key_2,
-         Qt::ApplicationShortcut,
+         Qt::WindowShortcut,
          QT_TR_NOOP("Sekunde below"),
          QT_TR_NOOP("Enter Sekunde below")
          ),
@@ -298,7 +298,7 @@ Shortcut MuseScore::sc[] = {
          "intervall-3",
          QT_TR_NOOP("enter terz below"),
          Qt::SHIFT + Qt::Key_3,
-         Qt::ApplicationShortcut,
+         Qt::WindowShortcut,
          QT_TR_NOOP("Terz below"),
          QT_TR_NOOP("Enter Terz below")
          ),
@@ -306,7 +306,7 @@ Shortcut MuseScore::sc[] = {
          "intervall-4",
          QT_TR_NOOP("enter quart below"),
          Qt::SHIFT + Qt::Key_4,
-         Qt::ApplicationShortcut,
+         Qt::WindowShortcut,
          QT_TR_NOOP("Quart below"),
          QT_TR_NOOP("Enter Quart below")
          ),
@@ -314,7 +314,7 @@ Shortcut MuseScore::sc[] = {
          "intervall-5",
          QT_TR_NOOP("enter quint below"),
          Qt::SHIFT + Qt::Key_5,
-         Qt::ApplicationShortcut,
+         Qt::WindowShortcut,
          QT_TR_NOOP("Quint below"),
          QT_TR_NOOP("Enter Quint below")
          ),
@@ -322,7 +322,7 @@ Shortcut MuseScore::sc[] = {
          "intervall-6",
          QT_TR_NOOP("enter sexte below"),
          Qt::SHIFT + Qt::Key_6,
-         Qt::ApplicationShortcut,
+         Qt::WindowShortcut,
          QT_TR_NOOP("Sexte below"),
          QT_TR_NOOP("Enter Sexte below")
          ),
@@ -330,7 +330,7 @@ Shortcut MuseScore::sc[] = {
          "intervall-7",
          QT_TR_NOOP("enter septime below"),
          Qt::SHIFT + Qt::Key_7,
-         Qt::ApplicationShortcut,
+         Qt::WindowShortcut,
          QT_TR_NOOP("Septime below"),
          QT_TR_NOOP("Enter Septime below")
          ),
@@ -338,7 +338,7 @@ Shortcut MuseScore::sc[] = {
          "intervall-8",
          QT_TR_NOOP("enter octave below"),
          Qt::SHIFT + Qt::Key_8,
-         Qt::ApplicationShortcut,
+         Qt::WindowShortcut,
          QT_TR_NOOP("Octave below"),
          QT_TR_NOOP("Enter Octave below")
          ),
@@ -346,7 +346,7 @@ Shortcut MuseScore::sc[] = {
          "intervall-9",
          QT_TR_NOOP("enter None below"),
          Qt::SHIFT + Qt::Key_9,
-         Qt::ApplicationShortcut,
+         Qt::WindowShortcut,
          QT_TR_NOOP("None below"),
          QT_TR_NOOP("Enter None below")
          ),
@@ -354,7 +354,7 @@ Shortcut MuseScore::sc[] = {
          "note-a",
          QT_TR_NOOP("enter note a"),
          Qt::Key_A,
-         Qt::ApplicationShortcut,
+         Qt::WindowShortcut,
          QT_TR_NOOP("A"),
          QT_TR_NOOP("Enter Note A")
          ),
@@ -362,7 +362,7 @@ Shortcut MuseScore::sc[] = {
          "note-b",
          QT_TR_NOOP("enter note b"),
          Qt::Key_B,
-         Qt::ApplicationShortcut,
+         Qt::WindowShortcut,
          QT_TR_NOOP("B"),
          QT_TR_NOOP("Enter Note B")
          ),
@@ -370,7 +370,7 @@ Shortcut MuseScore::sc[] = {
          "note-c",
          QT_TR_NOOP("enter note c"),
          Qt::Key_C,
-         Qt::ApplicationShortcut,
+         Qt::WindowShortcut,
          QT_TR_NOOP("C"),
          QT_TR_NOOP("Enter Note C")
          ),
@@ -378,7 +378,7 @@ Shortcut MuseScore::sc[] = {
          "note-d",
          QT_TR_NOOP("enter note d"),
          Qt::Key_D,
-         Qt::ApplicationShortcut,
+         Qt::WindowShortcut,
          QT_TR_NOOP("D"),
          QT_TR_NOOP("Enter Note D")
          ),
@@ -386,7 +386,7 @@ Shortcut MuseScore::sc[] = {
          "note-e",
          QT_TR_NOOP("enter note e"),
          Qt::Key_E,
-         Qt::ApplicationShortcut,
+         Qt::WindowShortcut,
          QT_TR_NOOP("E"),
          QT_TR_NOOP("Enter Note E")
          ),
@@ -394,7 +394,7 @@ Shortcut MuseScore::sc[] = {
          "note-f",
          QT_TR_NOOP("enter note f"),
          Qt::Key_F,
-         Qt::ApplicationShortcut,
+         Qt::WindowShortcut,
          QT_TR_NOOP("F"),
          QT_TR_NOOP("Enter Note F")
          ),
@@ -402,7 +402,7 @@ Shortcut MuseScore::sc[] = {
          "note-g",
          QT_TR_NOOP("enter note g"),
          Qt::Key_G,
-         Qt::ApplicationShortcut,
+         Qt::WindowShortcut,
          QT_TR_NOOP("G"),
          QT_TR_NOOP("Enter Note G")
          ),
@@ -410,7 +410,7 @@ Shortcut MuseScore::sc[] = {
          "chord-a",
          QT_TR_NOOP("add a to chord"),
          Qt::SHIFT + Qt::Key_A,
-         Qt::ApplicationShortcut,
+         Qt::WindowShortcut,
          QT_TR_NOOP("A"),
          QT_TR_NOOP("Add note A to chord")
          ),
@@ -418,7 +418,7 @@ Shortcut MuseScore::sc[] = {
          "chord-b",
          QT_TR_NOOP("add b to chord"),
          Qt::SHIFT + Qt::Key_B,
-         Qt::ApplicationShortcut,
+         Qt::WindowShortcut,
          QT_TR_NOOP("B"),
          QT_TR_NOOP("Add note B to chord")
          ),
@@ -426,7 +426,7 @@ Shortcut MuseScore::sc[] = {
          "chord-c",
          QT_TR_NOOP("add c to chord"),
          Qt::SHIFT + Qt::Key_C,
-         Qt::ApplicationShortcut,
+         Qt::WindowShortcut,
          QT_TR_NOOP("C"),
          QT_TR_NOOP("Add note C to chord")
          ),
@@ -434,7 +434,7 @@ Shortcut MuseScore::sc[] = {
          "chord-d",
          QT_TR_NOOP("add d to chord"),
          Qt::SHIFT + Qt::Key_D,
-         Qt::ApplicationShortcut,
+         Qt::WindowShortcut,
          QT_TR_NOOP("D"),
          QT_TR_NOOP("Add note D to chord")
          ),
@@ -442,7 +442,7 @@ Shortcut MuseScore::sc[] = {
          "chord-e",
          QT_TR_NOOP("add e to chord"),
          Qt::SHIFT + Qt::Key_E,
-         Qt::ApplicationShortcut,
+         Qt::WindowShortcut,
          QT_TR_NOOP("E"),
          QT_TR_NOOP("Add note E to chord")
          ),
@@ -450,7 +450,7 @@ Shortcut MuseScore::sc[] = {
          "chord-f",
          QT_TR_NOOP("add f to chord"),
          Qt::SHIFT + Qt::Key_F,
-         Qt::ApplicationShortcut,
+         Qt::WindowShortcut,
          QT_TR_NOOP("F"),
          QT_TR_NOOP("Add note F to chord")
          ),
@@ -458,7 +458,7 @@ Shortcut MuseScore::sc[] = {
          "chord-g",
          QT_TR_NOOP("add g to chord"),
          Qt::SHIFT + Qt::Key_G,
-         Qt::ApplicationShortcut,
+         Qt::WindowShortcut,
          QT_TR_NOOP("G"),
          QT_TR_NOOP("Add note G to chord")
          ),
@@ -466,7 +466,7 @@ Shortcut MuseScore::sc[] = {
          "rest",
          QT_TR_NOOP("enter rest"),
          Qt::Key_Space,
-         Qt::ApplicationShortcut,
+         Qt::WindowShortcut,
          QT_TR_NOOP("rest"),
          QT_TR_NOOP("enter rest")
          ),
@@ -474,7 +474,7 @@ Shortcut MuseScore::sc[] = {
          "stretch+",
          QT_TR_NOOP("more stretch"),
          Qt::Key_Plus,
-         Qt::ApplicationShortcut,
+         Qt::WindowShortcut,
          QT_TR_NOOP("Add more stretch"),
          QT_TR_NOOP("Add more stretch to selected measure")
          ),
@@ -482,7 +482,7 @@ Shortcut MuseScore::sc[] = {
          "stretch-",
          QT_TR_NOOP("less stretch"),
          Qt::Key_Minus,
-         Qt::ApplicationShortcut,
+         Qt::WindowShortcut,
          QT_TR_NOOP("Add less stretch"),
          QT_TR_NOOP("Add less stretch to selected measure")
          ),
@@ -490,7 +490,7 @@ Shortcut MuseScore::sc[] = {
          "flip",
          QT_TR_NOOP("flip stem"),
          Qt::Key_X,
-         Qt::ApplicationShortcut,
+         Qt::WindowShortcut,
          QT_TR_NOOP("flip direction"),
          QT_TR_NOOP("flip direction"),
          &flipIcon
@@ -507,7 +507,7 @@ Shortcut MuseScore::sc[] = {
          "pitch-up-octave",
          QT_TR_NOOP("up+ctrl"),
          Qt::CTRL + Qt::Key_Up,
-         Qt::ApplicationShortcut,
+         Qt::WindowShortcut,
          QT_TR_NOOP("up+ctrl"),
          QT_TR_NOOP("up+ctrl")
          ),
@@ -515,7 +515,7 @@ Shortcut MuseScore::sc[] = {
          "up-chord",
          QT_TR_NOOP("up note in chord"),
          Qt::ALT+Qt::Key_Up,
-         Qt::ApplicationShortcut,
+         Qt::WindowShortcut,
          QT_TR_NOOP("up note in chord"),
          QT_TR_NOOP("goto higher pitched note in chord")
          ),
@@ -523,7 +523,7 @@ Shortcut MuseScore::sc[] = {
          "top-chord",
          QT_TR_NOOP("goto top note in chord"),
          Qt::ALT+Qt::CTRL+Qt::Key_Up,
-         Qt::ApplicationShortcut,
+         Qt::WindowShortcut,
          QT_TR_NOOP("top note in chord"),
          QT_TR_NOOP("goto top note in chord")
          ),
@@ -531,7 +531,7 @@ Shortcut MuseScore::sc[] = {
          "move-up",
          QT_TR_NOOP("move up"),
          Qt::SHIFT+Qt::CTRL+Qt::Key_Up,
-         Qt::ApplicationShortcut,
+         Qt::WindowShortcut,
          QT_TR_NOOP("up+shift+ctrl"),
          QT_TR_NOOP("up+shift+ctrl")
          ),
@@ -547,7 +547,7 @@ Shortcut MuseScore::sc[] = {
          "pitch-down-octave",
          QT_TR_NOOP("pitch down octave"),
          Qt::CTRL + Qt::Key_Down,
-         Qt::ApplicationShortcut,
+         Qt::WindowShortcut,
          QT_TR_NOOP("down+ctrl"),
          QT_TR_NOOP("down+ctrl")
          ),
@@ -555,7 +555,7 @@ Shortcut MuseScore::sc[] = {
          "down-chord",
          QT_TR_NOOP("down note in chord"),
          Qt::ALT+Qt::Key_Down,
-         Qt::ApplicationShortcut,
+         Qt::WindowShortcut,
          QT_TR_NOOP("down note in chord"),
          QT_TR_NOOP("goto lower pitched note in chord")
          ),
@@ -563,7 +563,7 @@ Shortcut MuseScore::sc[] = {
          "bottom-chord",
          QT_TR_NOOP("goto bottom note in chord"),
          Qt::ALT+Qt::CTRL+Qt::Key_Down,
-         Qt::ApplicationShortcut,
+         Qt::WindowShortcut,
          QT_TR_NOOP("bottom note in chord"),
          QT_TR_NOOP("goto bottom note in chord")
          ),
@@ -571,7 +571,7 @@ Shortcut MuseScore::sc[] = {
          "move-down",
          QT_TR_NOOP("move down"),
          Qt::SHIFT+Qt::CTRL+Qt::Key_Down,
-         Qt::ApplicationShortcut,
+         Qt::WindowShortcut,
          QT_TR_NOOP("down+shift+ctrl"),
          QT_TR_NOOP("down+shift+ctrl")
          ),
@@ -587,7 +587,7 @@ Shortcut MuseScore::sc[] = {
          "prev-measure",
          QT_TR_NOOP("previous measure"),
          Qt::CTRL+Qt::Key_Left,
-         Qt::ApplicationShortcut,
+         Qt::WindowShortcut,
          QT_TR_NOOP("left+ctrl"),
          QT_TR_NOOP("left+ctrl")
          ),
@@ -603,7 +603,7 @@ Shortcut MuseScore::sc[] = {
          "next-measure",
          QT_TR_NOOP("next measure"),
          Qt::CTRL+Qt::Key_Right,
-         Qt::ApplicationShortcut,
+         Qt::WindowShortcut,
          QT_TR_NOOP("right+ctrl"),
          QT_TR_NOOP("right+ctrl")
          ),
@@ -611,7 +611,7 @@ Shortcut MuseScore::sc[] = {
          "page-prev",
          QT_TR_NOOP("page-prev"),
          Qt::Key_PageUp,
-         Qt::ApplicationShortcut,
+         Qt::WindowShortcut,
          QT_TR_NOOP(""),
          QT_TR_NOOP("")
          ),
@@ -619,7 +619,7 @@ Shortcut MuseScore::sc[] = {
          "page-next",
          QT_TR_NOOP("page-next"),
          Qt::Key_PageDown,
-         Qt::ApplicationShortcut,
+         Qt::WindowShortcut,
          QT_TR_NOOP(""),
          QT_TR_NOOP("")
          ),
@@ -627,7 +627,7 @@ Shortcut MuseScore::sc[] = {
          "page-top",
          QT_TR_NOOP("page-top"),
          Qt::Key_Home,
-         Qt::ApplicationShortcut,
+         Qt::WindowShortcut,
          QT_TR_NOOP(""),
          QT_TR_NOOP("")
          ),
@@ -635,7 +635,7 @@ Shortcut MuseScore::sc[] = {
          "page-end",
          QT_TR_NOOP("page-end"),
          Qt::Key_End,
-         Qt::ApplicationShortcut,
+         Qt::WindowShortcut,
          QT_TR_NOOP(""),
          QT_TR_NOOP("")
          ),
@@ -643,7 +643,7 @@ Shortcut MuseScore::sc[] = {
          "add-tie",
          QT_TR_NOOP("add tie"),
          Qt::SHIFT+Qt::Key_S,
-         Qt::ApplicationShortcut,
+         Qt::WindowShortcut,
          QT_TR_NOOP(""),
          QT_TR_NOOP("")
          ),
@@ -651,7 +651,7 @@ Shortcut MuseScore::sc[] = {
          "add-slur",
          QT_TR_NOOP("add slur"),
          Qt::Key_S,
-         Qt::ApplicationShortcut,
+         Qt::WindowShortcut,
          QT_TR_NOOP(""),
          QT_TR_NOOP("")
          ),
@@ -659,7 +659,7 @@ Shortcut MuseScore::sc[] = {
          "add-hairpin",
          QT_TR_NOOP("crescendo"),
          Qt::Key_H,
-         Qt::ApplicationShortcut,
+         Qt::WindowShortcut,
          QT_TR_NOOP(""),
          QT_TR_NOOP("")
          ),
@@ -667,7 +667,7 @@ Shortcut MuseScore::sc[] = {
          "add-hairpin-reverse",
          QT_TR_NOOP("decrescendo"),
          Qt::SHIFT+Qt::Key_H,
-         Qt::ApplicationShortcut,
+         Qt::WindowShortcut,
          QT_TR_NOOP(""),
          QT_TR_NOOP("")
          ),
@@ -683,7 +683,7 @@ Shortcut MuseScore::sc[] = {
          "delete",
          QT_TR_NOOP("delete"),
          Qt::Key_Delete,
-         Qt::ApplicationShortcut,
+         Qt::WindowShortcut,
          QT_TR_NOOP(""),
          QT_TR_NOOP("")
          ),
@@ -691,35 +691,35 @@ Shortcut MuseScore::sc[] = {
          "append-measure",
          QT_TR_NOOP("append measure"),
          Qt::CTRL+Qt::Key_B,
-         Qt::ApplicationShortcut,
+         Qt::WindowShortcut,
          QT_TR_NOOP("Measure")
          ),
       Shortcut(
          "duole",
          QT_TR_NOOP("duole"),
          Qt::CTRL+Qt::Key_2,
-         Qt::ApplicationShortcut,
+         Qt::WindowShortcut,
          QT_TR_NOOP("Duole")
          ),
       Shortcut(
          "triole",
          QT_TR_NOOP("triole"),
          Qt::CTRL+Qt::Key_3,
-         Qt::ApplicationShortcut,
+         Qt::WindowShortcut,
          QT_TR_NOOP("Triole")
          ),
       Shortcut(
          "pentole",
          QT_TR_NOOP("pentole"),
          Qt::CTRL+Qt::Key_5,
-         Qt::ApplicationShortcut,
+         Qt::WindowShortcut,
          QT_TR_NOOP("Pentole")
          ),
       Shortcut(
          "pad-note-1",
          QT_TR_NOOP("pad note 1/1"),
          Qt::ALT + Qt::Key_6,
-         Qt::ApplicationShortcut,
+         Qt::WindowShortcut,
          QT_TR_NOOP("1/1"),
          QT_TR_NOOP("1/1"),
          &noteIcon
@@ -728,7 +728,7 @@ Shortcut MuseScore::sc[] = {
          "pad-note-2",
          QT_TR_NOOP("pad note 1/2"),
          Qt::ALT + Qt::Key_7,
-         Qt::ApplicationShortcut,
+         Qt::WindowShortcut,
          QT_TR_NOOP("1/2"),
          QT_TR_NOOP("1/2"),
          &note2Icon
@@ -737,7 +737,7 @@ Shortcut MuseScore::sc[] = {
          "pad-note-4",
          QT_TR_NOOP("pad note 1/4"),
          Qt::ALT + Qt::Key_1,
-         Qt::ApplicationShortcut,
+         Qt::WindowShortcut,
          QT_TR_NOOP("1/4"),
          QT_TR_NOOP("1/4"),
          &note4Icon
@@ -746,7 +746,7 @@ Shortcut MuseScore::sc[] = {
          "pad-note-8",
          QT_TR_NOOP("pad note 1/8"),
          Qt::ALT + Qt::Key_2,
-         Qt::ApplicationShortcut,
+         Qt::WindowShortcut,
          QT_TR_NOOP("1/8"),
          QT_TR_NOOP("1/8"),
          &note8Icon
@@ -755,7 +755,7 @@ Shortcut MuseScore::sc[] = {
          "pad-note-16",
          QT_TR_NOOP("pad note 1/16"),
          Qt::ALT + Qt::Key_3,
-         Qt::ApplicationShortcut,
+         Qt::WindowShortcut,
          QT_TR_NOOP("1/16"),
          QT_TR_NOOP("1/16"),
          &note16Icon
@@ -764,7 +764,7 @@ Shortcut MuseScore::sc[] = {
          "pad-note-32",
          QT_TR_NOOP("pad note 1/32"),
          Qt::ALT + Qt::Key_4,
-         Qt::ApplicationShortcut,
+         Qt::WindowShortcut,
          QT_TR_NOOP("1/32"),
          QT_TR_NOOP("1/32"),
          &note32Icon
@@ -773,7 +773,7 @@ Shortcut MuseScore::sc[] = {
          "pad-note-64",
          QT_TR_NOOP("pad note 1/64"),
          Qt::ALT + Qt::Key_5,
-         Qt::ApplicationShortcut,
+         Qt::WindowShortcut,
          QT_TR_NOOP("1/64"),
          QT_TR_NOOP("1/64"),
          &note64Icon
@@ -782,7 +782,7 @@ Shortcut MuseScore::sc[] = {
          "pad-dot",
          QT_TR_NOOP("pad dot"),
          Qt::ALT + Qt::Key_8,
-         Qt::ApplicationShortcut,
+         Qt::WindowShortcut,
          QT_TR_NOOP("dot"),
          QT_TR_NOOP("dot"),
          &dotIcon
@@ -791,7 +791,7 @@ Shortcut MuseScore::sc[] = {
          "pad-tie",
          QT_TR_NOOP("pad tie"),
          Qt::ALT + Qt::Key_9,
-         Qt::ApplicationShortcut,
+         Qt::WindowShortcut,
          QT_TR_NOOP("tie"),
          QT_TR_NOOP("tie"),
          &plusIcon
@@ -800,7 +800,7 @@ Shortcut MuseScore::sc[] = {
          "pad-rest",
          QT_TR_NOOP("pad rest"),
          0,
-         Qt::ApplicationShortcut,
+         Qt::WindowShortcut,
          QT_TR_NOOP("rest"),
          QT_TR_NOOP("rest"),
          &quartrestIcon
@@ -809,7 +809,7 @@ Shortcut MuseScore::sc[] = {
          "pad-sharp2",
          QT_TR_NOOP("double sharp"),
          0,
-         Qt::ApplicationShortcut,
+         Qt::WindowShortcut,
          QT_TR_NOOP("double sharp"),
          QT_TR_NOOP("double sharp"),
          &sharpsharpIcon
@@ -818,7 +818,7 @@ Shortcut MuseScore::sc[] = {
          "pad-sharp",
          QT_TR_NOOP("sharp"),
          0,
-         Qt::ApplicationShortcut,
+         Qt::WindowShortcut,
          QT_TR_NOOP("sharp"),
          QT_TR_NOOP("sharp"),
          &sharpIcon
@@ -827,7 +827,7 @@ Shortcut MuseScore::sc[] = {
          "pad-nat",
          QT_TR_NOOP("natural"),
          0,
-         Qt::ApplicationShortcut,
+         Qt::WindowShortcut,
          QT_TR_NOOP("natural"),
          QT_TR_NOOP("natural"),
          &naturalIcon
@@ -836,7 +836,7 @@ Shortcut MuseScore::sc[] = {
          "pad-flat",
          QT_TR_NOOP("flat"),
          0,
-         Qt::ApplicationShortcut,
+         Qt::WindowShortcut,
          QT_TR_NOOP("flat"),
          QT_TR_NOOP("flat"),
          &flatIcon
@@ -845,7 +845,7 @@ Shortcut MuseScore::sc[] = {
          "pad-flat2",
          QT_TR_NOOP("double flat"),
          0,
-         Qt::ApplicationShortcut,
+         Qt::WindowShortcut,
          QT_TR_NOOP("double flat"),
          QT_TR_NOOP("double flat"),
          &flatflatIcon
@@ -854,7 +854,7 @@ Shortcut MuseScore::sc[] = {
          "voice-1",
          QT_TR_NOOP("voice 1"),
          0,
-         Qt::ApplicationShortcut,
+         Qt::WindowShortcut,
          QT_TR_NOOP("voice 1"),
          QT_TR_NOOP("voice 1"),
          &voiceIcons[0]
@@ -863,7 +863,7 @@ Shortcut MuseScore::sc[] = {
          "voice-2",
          QT_TR_NOOP("voice 2"),
          0,
-         Qt::ApplicationShortcut,
+         Qt::WindowShortcut,
          QT_TR_NOOP("voice 2"),
          QT_TR_NOOP("voice 2"),
          &voiceIcons[1]
@@ -872,7 +872,7 @@ Shortcut MuseScore::sc[] = {
          "voice-3",
          QT_TR_NOOP("voice 3"),
          0,
-         Qt::ApplicationShortcut,
+         Qt::WindowShortcut,
          QT_TR_NOOP("voice 3"),
          QT_TR_NOOP("voice 3"),
          &voiceIcons[2]
@@ -881,7 +881,7 @@ Shortcut MuseScore::sc[] = {
          "voice-4",
          QT_TR_NOOP("voice 4"),
          0,
-         Qt::ApplicationShortcut,
+         Qt::WindowShortcut,
          QT_TR_NOOP("voice 4"),
          QT_TR_NOOP("voice 4"),
          &voiceIcons[3]
@@ -979,6 +979,7 @@ void MuseScore::preferencesChanged()
 MuseScore::MuseScore()
    : QMainWindow()
       {
+      mscore = this;
       setIconSize(QSize(ICON_HEIGHT, ICON_HEIGHT));
       setWindowTitle(QString("MuseScore"));
       cs                    = 0;
@@ -2398,7 +2399,7 @@ int main(int argc, char* argv[])
 
       initSymbols();
       genIcons();
-      mscore = new MuseScore();
+      /*mscore =*/ new MuseScore();
 
       int currentScore = 0;
       int idx = 0;

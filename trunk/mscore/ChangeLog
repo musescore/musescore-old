@@ -1,4 +1,6 @@
 14.1.7 (ws)
+      - temporarily switch off all shortcuts when in element editing
+        mode
       - implement editing of shortcuts (preferences->shortcuts)
 14.1.7 (lv)
       - MusicXML export of ottava's

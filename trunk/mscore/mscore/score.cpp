@@ -892,6 +892,10 @@ int Measure::snap(int tick, const QPointF p) const
 
 void Score::startEdit(Element* element)
       {
+      foreach (Shortcut* s, shortcuts) {
+            if (s->action)
+                  s->action->setShortcut(0);
+            }
       if (element->type() == SLUR_SEGMENT) {
             //
             // we must clone the whole slur with all segments
@@ -970,6 +974,10 @@ bool Score::edit(QKeyEvent* ev)
 
 void Score::endEdit()
       {
+      foreach (Shortcut* s, shortcuts) {
+            if (s->action)
+                  s->action->setShortcut(s->key);
+            }
       refresh |= editObject->bbox();
       editObject->endEdit();
       refresh |= editObject->bbox();
