@@ -430,6 +430,7 @@ class Score : public QObject {
       void changeClef(int tick, int si, int idx);
 
       void cmd(const QString&);
+      Element* editElement() const { return editObject; }
       };
 
 extern void setPadState(Element*);

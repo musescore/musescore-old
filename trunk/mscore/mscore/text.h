@@ -50,7 +50,6 @@ class Text : public Element {
       virtual Text* clone() const { return new Text(*this); }
       virtual ElementType type() const { return TEXT; }
 
-
       void setText(const QString& s);
       QString getText() const;
 
@@ -66,6 +65,7 @@ class Text : public Element {
       virtual bool startEdit(QMatrix&);
       virtual bool edit(QKeyEvent*);
       void addSymbol(int);
+      void setCharFormat(QTextCharFormat);
       virtual void endEdit();
       virtual bool isMovable() const { return true; }
       virtual void write(Xml& xml) const;

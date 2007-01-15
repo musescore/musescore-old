@@ -274,9 +274,8 @@ void PageListEditor::updateList()
                                                 if (note->accidental()) {
                                                       new ElementItem(ni, note->accidental());
                                                       }
-                                                if (note->fingering()) {
-                                                      new ElementItem(ni, note->fingering());
-                                                      }
+                                                foreach(Fingering* f, note->fingering())
+                                                      new ElementItem(ni, f);
                                                 }
                                           }
                                     }

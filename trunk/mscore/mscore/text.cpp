@@ -259,6 +259,8 @@ void Text::read(QDomNode node)
 bool Text::startEdit(QMatrix&)
       {
       editMode = true;
+      if (palette)
+            palette->setCharFormat(cursor->charFormat());
       return true;
       }
 
@@ -277,6 +279,7 @@ bool Text::edit(QKeyEvent* ev)
                   palette->setText(this);
                   palette->show();
                   mscore->activateWindow();
+                  palette->setCharFormat(cursor->charFormat());
                   }
             return false;
             }
@@ -321,6 +324,8 @@ bool Text::edit(QKeyEvent* ev)
                   cursor->insertText(ev->text());
                   break;
             }
+      if (palette)
+            palette->setCharFormat(cursor->charFormat());
       return false;
       }
 
@@ -383,9 +388,23 @@ double Text::lineSpacing() const
 void Text::addSymbol(int n)
       {
 printf("Text: addSymbol(%x)\n", n);
-      QTextCharFormat format;
-      format.setFont(symbols[n].font());
-      cursor->insertText(QString(symbols[n].code()), format);
+      QTextCharFormat oFormat = cursor->charFormat();
+      QTextCharFormat nFormat(oFormat);
+      nFormat.setFontFamily(symbols[n].font().family());
+      cursor->setCharFormat(nFormat);
+      cursor->insertText(QString(symbols[n].code()));
+      cursor->setCharFormat(oFormat);
+      score()->layout();
+      score()->endCmd(false);
+      }
+
+//---------------------------------------------------------
+//   setCharFormat
+//---------------------------------------------------------
+
+void Text::setCharFormat(QTextCharFormat f)
+      {
+      cursor->setCharFormat(f);
       }
 
 //---------------------------------------------------------

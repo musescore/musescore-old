@@ -230,6 +230,11 @@ void Canvas::mousePressEvent(QMouseEvent* ev)
       startMove   = imatrix.map(QPointF(ev->pos()));
 
       Element* element = _score->findSelectableElement(startMove);
+
+      //
+      if (state == EDIT && element == score()->editElement())
+            return;
+
       _score->setDragObject(element);
 
       if (seq && mscore->playEnabled() && _score->dragObject() && _score->dragObject()->type() == NOTE) {

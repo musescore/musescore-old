@@ -2907,6 +2907,9 @@
       <attribute name="title" >
        <string>Shortcuts</string>
       </attribute>
+      <attribute name="icon" >
+       <iconset resource="mscore.qrc" >:/data/hotkeys.svg</iconset>
+      </attribute>
       <layout class="QVBoxLayout" >
        <property name="margin" >
         <number>9</number>
@@ -3029,6 +3032,8 @@
    </item>
   </layout>
  </widget>
- <resources/>
+ <resources>
+  <include location="mscore.qrc" />
+ </resources>
  <connections/>
 </ui>

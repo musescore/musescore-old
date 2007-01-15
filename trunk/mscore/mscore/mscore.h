@@ -185,6 +185,12 @@ class MuseScore : public QMainWindow {
       void saveScoreList();
       void loadScoreList();
       void loadInstrumentTemplates();
+      void editInstrList();
+      void symbolMenu1();
+      void clefMenu();
+      void keyMenu();
+      void timeMenu();
+      void dynamicsMenu();
 
    private slots:
       void helpBrowser();
@@ -251,12 +257,6 @@ class MuseScore : public QMainWindow {
 
    public slots:
       void setCurrentScore(int);
-      void editInstrList();
-      void symbolMenu1();
-      void clefMenu();
-      void keyMenu();
-      void timeMenu();
-      void dynamicsMenu();
       void startNoteEntry();
       void showPlayPanel(bool);
       void showPad(bool);

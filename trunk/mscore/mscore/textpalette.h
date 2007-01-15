@@ -33,17 +33,18 @@ class TextPalette : public QWidget, public Ui::TextPaletteBase {
       Q_OBJECT
 
       Text* _textElement;
+      QTextCharFormat format;
 
    private slots:
       void symbolClicked(int);
+      void sizeChanged(int value);
+      void boldClicked(bool);
+      void italicClicked(bool);
 
    public:
       TextPalette(QWidget* parent);
       void setText(Text* te) { _textElement = te; }
-      void setFontFamily(const QString& s);
-      void setBold(bool);
-      void setItalic(bool);
-      void setFontSize(int);
+      void setCharFormat(QTextCharFormat);
       };
 
 #endif
