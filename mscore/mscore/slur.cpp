@@ -356,12 +356,11 @@ bool SlurSegment::contains(const QPointF& p) const
 //   edit
 //---------------------------------------------------------
 
-bool SlurSegment::edit(QKeyEvent*)
+bool SlurSegment::edit(QKeyEvent* ev)
       {
-#if 0
       QPointF ppos(apos());
 
-      if ((ev->state() & Qt::ShiftButton)) {
+      if ((ev->modifiers() & Qt::ShiftModifier)) {
             if (ev->key() == Qt::Key_Left)
                   slur->prevSeg(apos(), mode, ups[mode-1]);
             else if (ev->key() == Qt::Key_Right)
@@ -371,7 +370,7 @@ bool SlurSegment::edit(QKeyEvent*)
 
       QPointF delta;
       qreal val = 1.0;
-      if (ev->state() & Qt::ControlButton)
+      if (ev->modifiers() & Qt::ControlModifier)
             val = 0.1;
       switch (ev->key()) {
             case Qt::Key_Left:
@@ -401,7 +400,7 @@ bool SlurSegment::edit(QKeyEvent*)
 
       int idx       = (mode-1) % 4;
       ups[idx].off += delta;
-      ups[idx].r   += (delta * _spatium);
+      ups[idx].r.translate(delta * _spatium);
 
       if (mode == 1 || mode == 4) {
             slur->layout2(apos(), mode, ups[idx]);
@@ -412,9 +411,10 @@ bool SlurSegment::edit(QKeyEvent*)
             rp1 = ups[idx].p + ups[idx].off * _spatium + ppos;
             rp2 = ups[idx].p + ppos;
             rb->set(rp1, rp2);
-            setbbox(bbox() | QRectF(rp1-ppos, rp2-ppos));
+            rp1 -= ppos;
+            rp2 -= ppos;
+            orBbox(QRectF(rp1, QSizeF(rp2.x() - rp1.x(), rp2.y() - rp1.y())));
             }
-#endif
       return false;
       }
 

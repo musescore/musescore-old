@@ -2,11 +2,16 @@
 <RCC version="1.0">
    <qresource>
       <file>data/paper2.png</file>
-      <file>data/text_bold.png</file>
-      <file>data/text_italic.png</file>
-      <file>data/text_left.png</file>
-      <file>data/text_right.png</file>
-      <file>data/text_center.png</file>
+      <file>data/text_bold.svg</file>
+      <file>data/text_italic.svg</file>
+      <file>data/text_left.svg</file>
+      <file>data/text_right.svg</file>
+      <file>data/text_center.svg</file>
+      <file>data/exit.svg</file>
+      <file>data/hotkeys.svg</file>
+      <file>data/start.svg</file>
+      <file>data/stop.svg</file>
+      <file>data/play.svg</file>
       <file alias="fonts/emmentaler_20.otf">fonts/emmentaler_20.otf</file>
       <file alias="fonts/mscore1_20.otf">fonts/mscore1_20.otf</file>
    </qresource>

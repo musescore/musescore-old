@@ -278,3 +278,4 @@ double TextLine::lineSpacing() const
       QFontMetrics fm(font());
       return fm.lineSpacing();
       }
+

@@ -42,12 +42,7 @@
 #include "data/filenew.xpm"
 #include "data/fileopen.xpm"
 #include "data/filesave.xpm"
-#include "data/exitS.xpm"
 #include "data/viewmag.xpm"
-#include "data/viewmagS.xpm"
-#include "data/start.xpm"
-#include "data/stop.xpm"
-#include "data/play.xpm"
 #include "data/midiin.xpm"
 #include "data/speaker.xpm"
 
@@ -1009,18 +1004,7 @@ MuseScore::MuseScore()
       _midiinEnabled        = true;
       _speakerEnabled       = true;
 
-      QAction* a = getAction("instruments");
-      connect(a, SIGNAL(triggered()), SLOT(editInstrList()));
-      a = getAction("clefs");
-      connect(a, SIGNAL(triggered()), SLOT(clefMenu()));
-      a = getAction("keys");
-      connect(a, SIGNAL(triggered()), SLOT(keyMenu()));
-      a = getAction("symbols");
-      connect(a, SIGNAL(triggered()), SLOT(symbolMenu1()));
-      a = getAction("times");
-      connect(a, SIGNAL(triggered()), SLOT(timeMenu()));
-      a = getAction("dynamics");
-      connect(a, SIGNAL(triggered()), SLOT(dynamicsMenu()));
+      QAction* a;
 
       // otherwise unused actions:
       //   must be added somewere to work
@@ -1040,6 +1024,7 @@ MuseScore::MuseScore()
          << "chord-c" << "chord-d" << "chord-e" << "chord-f" << "chord-g"
          << "chord-a" << "chord-b"
          << "stretch+" << "stretch-"
+         << "instruments" << "clefs" << "keys" << "symbols" << "times" << "dynamics"
          ;
       foreach(const QString s, sl) {
             QAction* a = getAction(s.toLatin1().data());
@@ -1066,20 +1051,14 @@ MuseScore::MuseScore()
 
       QPixmap newIcon(filenew_xpm);
       QPixmap saveIcon(filesave_xpm);
-      QPixmap newIconS(filenew_xpm);
-      QPixmap openIconS(fileopen_xpm);
       QPixmap openIcon(fileopen_xpm);
-      QPixmap saveIconS(filesave_xpm);
-      QPixmap exitIconS(exitS_xpm);
+      QIcon exitIcon(":/data/exit.svg");
       QPixmap viewmagIcon(viewmag_xpm);
-      QPixmap viewmagIconS(viewmagS_xpm);
-
       QPixmap midiinIcon(midiin_xpm);
       QPixmap speakerIcon(speaker_xpm);
-
-      QPixmap startIcon(start_xpm);
-      QPixmap stopIcon(stop_xpm);
-      QPixmap playIcon(play_xpm);
+      QIcon startIcon(":/data/start.svg");
+      QIcon stopIcon(":/data/stop.svg");
+      QIcon playIcon(":/data/play.svg");
 
       QAction* whatsThis = QWhatsThis::createAction(this);
 
@@ -1244,7 +1223,7 @@ MuseScore::MuseScore()
       menuFile->addSeparator();
       menuFile->addAction(getAction("print"));
       menuFile->addSeparator();
-      menuFile->addAction(QIcon(exitIconS), tr("&Quit"), this, SLOT(quitDoc()), Qt::CTRL + Qt::Key_Q);
+      menuFile->addAction(exitIcon, tr("&Quit"), this, SLOT(quitDoc()), Qt::CTRL + Qt::Key_Q);
 
       //---------------------
       //    Menu Edit
@@ -2464,7 +2443,23 @@ int main(int argc, char* argv[])
 
 void MuseScore::cmd(QAction* a)
       {
-      if (cs)
-            cs->cmd(a->data().toString());
+      QString cmd(a->data().toString());
+
+      if (cmd == "instruments")
+            editInstrList();
+      else if (cmd == "clefs")
+            clefMenu();
+      else if (cmd == "keys")
+            keyMenu();
+      else if (cmd == "symbols")
+            symbolMenu1();
+      else if (cmd == "times")
+            timeMenu();
+      else if (cmd == "dynamics")
+            dynamicsMenu();
+      else {
+            if (cs)
+                  cs->cmd(cmd);
+            }
       }
 

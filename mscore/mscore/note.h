@@ -58,7 +58,7 @@ class Note : public Element {
       bool _grace;
       bool _mirror;           ///< True if note is mirrored at stem.
       int _dots;
-      Fingering* _fingering;
+      QList<Fingering*> _fingering;
 
       Tie* _tieFor;
       Tie* _tieBack;
@@ -106,7 +106,7 @@ class Note : public Element {
       int line() const                { return _line + _lineOffset;   }
       void setLine(int n)             { _line = n;      }
 
-      Fingering* fingering() const    { return _fingering; }
+      QList<Fingering*>& fingering()  { return _fingering; }
 
       virtual void add(Element*);
       virtual void remove(Element*);

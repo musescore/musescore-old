@@ -1518,15 +1518,16 @@ void ExportMusicXml::chord(Chord* chord, int staff, const LyricsList* ll)
             if (i == nl->begin()) {
                   chordAttributes(chord, notations, xml);
                   }
-            if (note->fingering()) {
+            foreach (const Fingering* f, note->fingering()) {
                   notations.tag(xml);
                   xml.stag("technical");
-                  xml.tag("fingering", note->fingering()->getText());
+                  xml.tag("fingering", f->getText());
                   xml.etag("technical");
                   }
             notations.etag(xml);
             // write lyrics (only for first note)
-            if ((i == nl->begin()) && ll) lyrics(ll);
+            if ((i == nl->begin()) && ll)
+                  lyrics(ll);
             xml.etag("note");
             }
       }

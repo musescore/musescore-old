@@ -439,9 +439,10 @@ void Score::searchSelectedElements()
                                     if (note->tieFor() && note->tieFor()->selected()) {
                                           el->push_back(note->tieFor());
                                           }
-                                    if (note->fingering() && note->fingering()->selected())
-                                          el->push_back(note->fingering());
-
+                                    foreach(Fingering* f, note->fingering()) {
+                                          if (f->selected())
+                                                el->push_back(f);
+                                          }
                                     }
                                 pstl::plist<NoteAttribute*>* al = chord->getAttributes();
                                 for (ciAttribute i = al->begin(); i != al->end(); ++i) {

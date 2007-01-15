@@ -63,7 +63,6 @@ Note::Note(Score* s)
       _dots           = 0;
       _tieFor         = 0;
       _tieBack        = 0;
-      _fingering      = 0;
       _head           = 0;
       }
 
@@ -81,7 +80,6 @@ Note::Note(Score* s, int p, bool g)
       _dots           = 0;
       _tieFor         = 0;
       _tieBack        = 0;
-      _fingering      = 0;
       _pitch          = p;
       _head           = 0;
       }
@@ -92,8 +90,6 @@ Note::Note(Score* s, int p, bool g)
 
 Note::~Note()
       {
-      if (_fingering)
-            delete _fingering;
       if (_accidental)
             delete _accidental;
       }
@@ -267,7 +263,7 @@ void Note::add(Element* el)
       {
 	el->setParent(this);
       if (el->type() == FINGERING) {
-            _fingering = (Fingering*) el;
+            _fingering.append((Fingering*) el);
             }
       else if (el->type() == TIE) {
             Tie* tie = (Tie*)el;
@@ -298,8 +294,13 @@ void Note::setTieBack(Tie* t)
 
 void Note::remove(Element* el)
       {
-      if (el->type() == FINGERING)
-            _fingering = 0;
+      if (el->type() == FINGERING) {
+            int i = _fingering.indexOf((Fingering*)el);
+            if (i != -1)
+                  _fingering.removeAt(i);
+            else
+                  printf("Note::remove: fingering not found\n");
+            }
 	else if (el->type() == TIE) {
             Tie* tie = (Tie*) el;
             setTieFor(0);
@@ -456,8 +457,8 @@ void Note::draw1(Painter& p)
             _tieFor->draw(p);
       if (_accidental)
             _accidental->draw(p);
-      if (_fingering)
-            _fingering->draw(p);
+      foreach(Fingering* f, _fingering)
+            f->draw(p);
       }
 
 //---------------------------------------------------------
@@ -472,8 +473,8 @@ void Note::bboxUpdate()
             orBbox(_tieFor->bbox().translated(_tieFor->pos()));
       if (_accidental)
             orBbox(_accidental->bbox().translated(_accidental->pos()));
-      if (_fingering)
-            orBbox(_fingering->bbox().translated(_fingering->pos()));
+      foreach(const Fingering* f, _fingering)
+            orBbox(f->bbox().translated(f->pos()));
       if (_dots) {
             double y = 0;
             if ((_line & 1) == 0) {
@@ -504,8 +505,8 @@ void Note::write(Xml& xml) const
             xml.tag("prefix", _userAccidental);
             xml.tag("line", _line);
             }
-      if (_fingering)
-            _fingering->write(xml);
+      foreach(const Fingering* f, _fingering)
+            f->write(xml);
       if (_tieFor)
             _tieFor->write(xml);
       if (_move)
@@ -584,10 +585,11 @@ void Note::read(QDomNode node)
                   _tieFor->setStartNote(this);
                   }
             else if (tag == "Fingering") {
-                  _fingering = new Fingering(score());
-                  _fingering->setStaff(staff());
-                  _fingering->read(node);
-                  _fingering->setParent(this);
+                  Fingering* f = new Fingering(score());
+                  f->setStaff(staff());
+                  f->read(node);
+                  f->setParent(this);
+                  _fingering.append(f);
                   }
             else if (tag == "move")
                   _move = i;
@@ -615,8 +617,10 @@ Element* Note::findSelectableElement(QPointF p) const
             return tieFor();
       if (accidental() && accidental()->contains(p))
             return accidental();
-      if (fingering() && fingering()->contains(p))
-            return fingering();
+      foreach(Fingering* f, _fingering) {
+            if (f->contains(p))
+                  return f;
+            }
       if (symbols[_head].bbox().contains(p))
             return (Element*)this;
       return 0;
