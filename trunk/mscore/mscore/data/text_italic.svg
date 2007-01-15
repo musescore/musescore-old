@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 20010904//EN"
+"http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd">
+<svg
+   sodipodi:docname="italic.svg"
+   height="60.0000000"
+   sodipodi:version="0.32"
+   width="60.0000000"
+   _SVGFile__filename="scalable/actions/italic.svg"
+   version="1.0"
+   y="0"
+   x="0"
+   inkscape:version="0.39"
+   id="svg1"
+   sodipodi:docbase="/home/danny/work/flat/newscale/actions"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:cc="http://web.resource.org/cc/"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:xlink="http://www.w3.org/1999/xlink">
+  <sodipodi:namedview
+     bordercolor="#666666"
+     inkscape:pageshadow="2"
+     inkscape:window-y="0"
+     pagecolor="#ffffff"
+     inkscape:window-height="685"
+     inkscape:zoom="9.8238822"
+     inkscape:window-x="0"
+     borderopacity="1.0"
+     inkscape:cx="40.738942"
+     inkscape:cy="20.834116"
+     inkscape:window-width="1016"
+     inkscape:pageopacity="0.0"
+     id="base" />
+  <defs
+     id="defs3">
+    <linearGradient
+       id="linearGradient900">
+      <stop
+         style="stop-color:#000;stop-opacity:1;"
+         id="stop901"
+         offset="0" />
+      <stop
+         style="stop-color:#fff;stop-opacity:1;"
+         id="stop902"
+         offset="1" />
+    </linearGradient>
+    <linearGradient
+       xlink:href="#linearGradient900"
+       id="linearGradient903" />
+    <linearGradient
+       xlink:href="#linearGradient900"
+       id="linearGradient904" />
+    <linearGradient
+       xlink:href="#linearGradient900"
+       id="linearGradient905" />
+    <linearGradient
+       xlink:href="#linearGradient900"
+       id="linearGradient906" />
+    <linearGradient
+       xlink:href="#linearGradient900"
+       id="linearGradient907" />
+  </defs>
+  <path
+     style="font-size:12.000000;fill:#cccccc;fill-opacity:1.0000000;fill-rule:evenodd;stroke:#333333;stroke-width:3.1250000;stroke-linejoin:round;stroke-opacity:1.0000000;"
+     d="M 6.7172718,5.1745977 C 5.6092718,5.1745977 4.7172718,6.0665977 4.7172718,7.1745977 L 4.7172718,53.559440 C 4.7172718,54.667440 5.6092718,55.559440 6.7172718,55.559440 L 53.462004,55.559440 C 54.570004,55.559440 55.462004,54.667440 55.462004,53.559440 L 55.462004,7.1745977 C 55.462004,6.0665977 54.570004,5.1745977 53.462004,5.1745977 L 6.7172718,5.1745977 z "
+     id="rect812" />
+  <path
+     id="path837"
+     style="font-size:12.000000;fill:#333333;stroke-width:0.69752198;font-family:VAG Rounded Black SSi;"
+     d="M 14.271355,44.581857 L 35.430420,15.075895 C 36.410336,13.728351 37.543235,12.643316 38.829115,11.820789 C 40.138631,10.980762 41.449659,10.560748 42.762202,10.560748 C 44.144749,10.560748 45.181864,10.972012 45.873548,11.794539 C 46.582731,12.617065 46.934316,13.710851 46.928294,15.075895 L 47.137426,44.581857 C 47.147492,45.351882 47.054364,46.016906 46.858042,46.576924 C 46.489938,47.626958 45.818742,48.493235 44.844448,49.175758 C 43.893794,49.840778 42.910951,50.173289 41.895916,50.173289 C 39.900853,50.173289 38.913467,49.245760 38.933764,47.390698 L 39.126966,42.271781 L 24.190230,42.271781 L 20.786577,47.338195 C 19.528971,49.228256 17.911385,50.173289 15.933821,50.173289 C 14.831285,50.173289 14.015090,49.805779 13.485238,49.070752 C 12.972884,48.335731 12.903828,47.434451 13.278066,46.366917 C 13.455984,45.859397 13.787079,45.264380 14.271355,44.581857 z M 39.755668,18.987273 L 29.132246,34.764037 L 39.343831,34.764037 L 39.860673,18.987273 L 39.755668,18.987273 z " />
+  <metadata
+     id="metadata14">
+    <rdf:RDF
+       id="RDF15">
+      <cc:Work
+         rdf:about=""
+         id="Work16">
+        <dc:title
+           id="title17">Part of the Flat Icon Collection (Thu Aug 26 14:38:01 2004)</dc:title>
+        <dc:description
+           id="description19" />
+        <dc:subject
+           id="subject20">
+          <rdf:Bag
+             id="Bag21">
+            <rdf:li
+               id="li22" />
+          </rdf:Bag>
+        </dc:subject>
+        <dc:publisher
+           id="publisher23">
+          <cc:Agent
+             rdf:about=""
+             id="Agent24">
+            <dc:title
+               id="title25" />
+          </cc:Agent>
+        </dc:publisher>
+        <dc:creator
+           id="creator26">
+          <cc:Agent
+             rdf:about=""
+             id="Agent27">
+            <dc:title
+               id="title28">Danny Allen</dc:title>
+          </cc:Agent>
+        </dc:creator>
+        <dc:rights
+           id="rights30">
+          <cc:Agent
+             rdf:about=""
+             id="Agent31">
+            <dc:title
+               id="title32">Danny Allen</dc:title>
+          </cc:Agent>
+        </dc:rights>
+        <dc:date
+           id="date34" />
+        <dc:format
+           id="format35">image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage"
+           id="type37" />
+        <cc:license
+           rdf:resource="http://creativecommons.org/licenses/LGPL/2.1/"
+           id="license38">
+          <dc:date
+             id="date39" />
+        </cc:license>
+        <dc:language
+           id="language40">en</dc:language>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+</svg>
