@@ -317,7 +317,7 @@ bool ScoreLayout::layoutPage(Page* page, Measure*& im, iSystem& is)
       page->layout();
 
       // usable width of page:
-      qreal w  = _pageFormat->width() - page->lm() - page->rm();
+      qreal w  = _pageFormat->width() * DPI - page->lm() - page->rm();
       qreal x  = page->lm();
       qreal ey = page->height() - page->bm() - point(::style->staffLowerBorder);
 

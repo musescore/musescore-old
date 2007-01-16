@@ -39,7 +39,7 @@ class ScoreLayout;
 struct PaperSize {
       QPrinter::PageSize qtsize;
       const char* name;
-      double w, h;
+      double w, h;            // size in inch
       PaperSize(QPrinter::PageSize s, const char* n, double wi, double hi)
          : qtsize(s), name(n), w(wi), h(hi) {}
       };
@@ -49,8 +49,8 @@ struct PaperSize {
 //---------------------------------------------------------
 
 struct PageFormat {
-      int size;         // index in paperSizes[]
-      double evenLeftMargin;
+      int size;                     // index in paperSizes[]
+      double evenLeftMargin;        // values in inch
       double evenRightMargin;
       double evenTopMargin;
       double evenBottomMargin;
@@ -63,8 +63,8 @@ struct PageFormat {
 
    public:
       PageFormat();
-      double width() const;
-      double height() const;
+      double width() const;         // return width in inch
+      double height() const;        // height in inch
       const char* name() const;
       void read(QDomNode);
       void write(Xml&);
@@ -96,7 +96,7 @@ class Page : public Element {
       void setNo(int n)                  { _no = n;           }
       bool isOdd() const                 { return (_no+1) & 1;    }
 
-      double tm() const;       // margins
+      double tm() const;            // margins
       double bm() const;
       double lm() const;
       double rm() const;
@@ -105,8 +105,8 @@ class Page : public Element {
 
       ElementList* pel()                 { return &_elements; }
       const ElementList* pel() const     { return &_elements; }
-      Text* pageNo() const              { return _pageNo;    }
-      Text* copyright() const           { return _copyright; }
+      Text* pageNo() const               { return _pageNo;    }
+      Text* copyright() const            { return _copyright; }
 
       virtual void add(Element*);
       virtual void remove(Element* el);

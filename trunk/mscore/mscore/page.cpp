@@ -55,34 +55,34 @@ Page::~Page()
 double Page::tm() const
       {
       PageFormat* pf = _layout->pageFormat();
-      return isOdd() ? pf->oddTopMargin : pf->evenTopMargin;
+      return (isOdd() ? pf->oddTopMargin : pf->evenTopMargin) * DPI;
       }
 
 double Page::bm() const
       {
       PageFormat* pf = _layout->pageFormat();
-      return isOdd() ? pf->oddBottomMargin : pf->evenBottomMargin;
+      return (isOdd() ? pf->oddBottomMargin : pf->evenBottomMargin) * DPI;
       }
 
 double Page::lm() const
       {
       PageFormat* pf = _layout->pageFormat();
-      return isOdd() ? pf->oddLeftMargin : pf->evenLeftMargin;
+      return (isOdd() ? pf->oddLeftMargin : pf->evenLeftMargin) * DPI;
       }
 
 double Page::rm() const
       {
       PageFormat* pf = _layout->pageFormat();
-      return isOdd() ? pf->oddRightMargin : pf->evenRightMargin;
+      return (isOdd() ? pf->oddRightMargin : pf->evenRightMargin) * DPI;
       }
 
 double Page::loWidth() const
       {
-      return _layout->pageFormat()->width();
+      return _layout->pageFormat()->width() * DPI;
       }
 double Page::loHeight() const
       {
-      return _layout->pageFormat()->height();
+      return _layout->pageFormat()->height() * DPI;
       }
 
 //---------------------------------------------------------
@@ -290,14 +290,14 @@ void Page::draw(Painter& p)
 PageFormat::PageFormat()
       {
       size             = 0;   // A4
-      evenLeftMargin   = 10.0 * DPMM;
-      evenRightMargin  = 10.0 * DPMM;
-      evenTopMargin    = 10.0 * DPMM;
-      evenBottomMargin = 20.0 * DPMM;
-      oddLeftMargin    = 10.0 * DPMM;
-      oddRightMargin   = 10.0 * DPMM;
-      oddTopMargin     = 10.0 * DPMM;
-      oddBottomMargin  = 20.0 * DPMM;
+      evenLeftMargin   = 10.0 / INCH;
+      evenRightMargin  = 10.0 / INCH;
+      evenTopMargin    = 10.0 / INCH;
+      evenBottomMargin = 20.0 / INCH;
+      oddLeftMargin    = 10.0 / INCH;
+      oddRightMargin   = 10.0 / INCH;
+      oddTopMargin     = 10.0 / INCH;
+      oddBottomMargin  = 20.0 / INCH;
       landscape        = false;
       twosided         = false;
       }
@@ -313,6 +313,7 @@ const char* PageFormat::name() const
 
 //---------------------------------------------------------
 //   width
+//    return in inch
 //---------------------------------------------------------
 
 double PageFormat::width() const
@@ -322,6 +323,7 @@ double PageFormat::width() const
 
 //---------------------------------------------------------
 //   height
+//    return in inch
 //---------------------------------------------------------
 
 double PageFormat::height() const
@@ -371,7 +373,7 @@ void PageFormat::read(QDomNode node)
                         if (e.isNull())
                               continue;
                         QString tag(e.tagName());
-                        double val = e.text().toDouble() * _spatium * .1;
+                        double val = (e.text().toDouble() * _spatium * .1) / DPI;
                         if (tag == "left-margin")
                               lm = val;
                         else if (tag == "right-margin")

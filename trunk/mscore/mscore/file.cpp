@@ -902,11 +902,15 @@ void Score::printFile()
       Painter p(&printer);
       p.setClipRect(QRectF(0, 0, 100000, 100000));
       qreal oldSpatium = _spatium;
-//      _spatium = _spatium * printer.resolution() / 120.0;
-printf("spatium %f -> %f\n", oldSpatium, _spatium);
+      double oldDPI = DPI;
+      DPI  = printer.logicalDpiX();          // drawing resolution
+      DPMM = DPI / INCH;                     // dots/mm
+      _spatium = _spatium * DPI / oldDPI;
 
+printf("printer %d %d\n", printer.logicalDpiX(), printer.resolution());
       doLayout();
-      p.scale(printer.resolution()/DPI, printer.resolution()/DPI);
+//      p.scale(printer.resolution()/DPI, printer.resolution()/DPI);
+//      p.scale(10.0, 10.0);
 
       p.setPrint(true);
 
@@ -921,6 +925,9 @@ printf("spatium %f -> %f\n", oldSpatium, _spatium);
       p.end();
 
       _spatium = oldSpatium;
+      DPI = oldDPI;
+      DPMM = DPI / INCH;                     // dots/mm
+
       doLayout();
       }
 

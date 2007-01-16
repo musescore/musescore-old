@@ -1,3 +1,7 @@
+16.1.7 (ws)
+      - Use point size instead of pixel size for fonts. This fixes
+        some text entry bugs. This destroys printing and has some
+        other regressions.
 14.1.7 (ws)
       - temporarily switch off all shortcuts when in element editing
         mode

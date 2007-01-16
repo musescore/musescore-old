@@ -887,12 +887,10 @@ void Volta::draw1(Painter& p)
             p.drawLine(QLineF(_p2, p3));
 
       TextStyle* s = &textStyles[TEXT_STYLE_SYMBOL1];
-      QFont f(s->family);
+      QFont f(s->family, s->size);
       f.setItalic(s->italic);
       f.setUnderline(s->underline);
       f.setBold(s->bold);
-//      f.setPixelSize(lrint(s->size * _spatium / 5.0 * .7));
-      f.setPointSizeF(s->size);
       p.setFont(f);
 
       QPointF tp(p0.x() + _spatium * .5, p0.y());
