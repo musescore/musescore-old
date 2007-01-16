@@ -89,6 +89,7 @@ ProjectList projectList[PROJECT_LIST_LEN];
 
 int appDpiX = 75;
 int appDpiY = 75;
+double DPI, DPMM;
 
 QMap<QString, Shortcut*> shortcuts;
 
@@ -2217,6 +2218,10 @@ int main(int argc, char* argv[])
       appDpiX = QX11Info::appDpiX();
       appDpiY = QX11Info::appDpiY();
 #endif
+      DPI  = appDpiX;         // drawing resolution
+      DPMM = DPI / INCH;      // dots/mm
+
+      printf("dpi %f\n", DPI);
 
       int c;
       while ((c = getopt(argc, argv, "vdLsm")) != EOF) {

@@ -22,8 +22,8 @@
 #define __GLOBALS_H__
 
 static const qreal INCH = 25.4;
-static const qreal DPI  = 120.0;          // drawing resolution
-static const qreal DPMM = DPI / INCH;     // dots/mm
+extern qreal DPI;       // drawing resolution
+extern qreal DPMM;      // dots/mm
 
 enum Direction { AUTO, UP, DOWN };
 

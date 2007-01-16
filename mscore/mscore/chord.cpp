@@ -561,7 +561,6 @@ void Chord::layout()
             QList<Fingering*>& fingering = note->fingering();
             double x = _spatium * 0.8 + note->headWidth();
             foreach(Fingering* f, fingering) {
-                  double x = _spatium + note->headWidth();
                   f->setPos(x, 0.0);
                   x += _spatium;
                   }

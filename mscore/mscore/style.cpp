@@ -171,12 +171,8 @@ void setDefaultStyle()
 
 QFont TextStyle::font() const
       {
-      QFont f(family);
-      f.setItalic(italic);
+      QFont f(family, size, bold ? QFont::Bold : QFont::Normal, italic);
       f.setUnderline(underline);
-      f.setBold(bold);
-//      f.setPixelSize(lrint(size * _spatium * .2));
-      f.setPointSizeF(size);
       return f;
       }
 

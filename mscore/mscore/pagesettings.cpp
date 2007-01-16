@@ -26,15 +26,14 @@
 #include "preview.h"
 #include "layout.h"
 
-#define MM(x) ((x)*DPMM)
-#define IN(x) ((x)*DPI)
+#define MM(x) ((x)/INCH)
 
 const PaperSize paperSizes[] = {
       PaperSize(QPrinter::A4,      "A4",        MM(210),  MM(297)),
       PaperSize(QPrinter::B5,      "B5",        MM(176),  MM(250)),
-      PaperSize(QPrinter::Letter,  "Letter",    IN(8.5),  IN(11)),
-      PaperSize(QPrinter::Legal,   "Legal",     IN(8.5),  IN(14)),
-      PaperSize(QPrinter::Executive,"Executive", IN(7.5),  IN(10)),
+      PaperSize(QPrinter::Letter,  "Letter",    8.5,      11),
+      PaperSize(QPrinter::Legal,   "Legal",     8.5,  14),
+      PaperSize(QPrinter::Executive,"Executive",7.5,     10),
       PaperSize(QPrinter::A0,      "A0",        MM(841),  MM(1189)),
       PaperSize(QPrinter::A1,      "A1",        MM(594),  MM(841)),
       PaperSize(QPrinter::A2,      "A2",        MM(420),  MM(594)),
@@ -165,48 +164,47 @@ void PageSettings::setValues(ScoreLayout* lo)
 
       QString s;
       if (mmButton->isChecked()) {
-            oddPageTopMargin->setValue(pf->oddTopMargin/DPMM);
-            oddPageBottomMargin->setValue(pf->oddBottomMargin/DPMM);
-            oddPageLeftMargin->setValue(pf->oddLeftMargin/DPMM);
-            oddPageRightMargin->setValue(pf->oddRightMargin/DPMM);
+            oddPageTopMargin->setValue(pf->oddTopMargin * INCH);
+            oddPageBottomMargin->setValue(pf->oddBottomMargin * INCH);
+            oddPageLeftMargin->setValue(pf->oddLeftMargin * INCH);
+            oddPageRightMargin->setValue(pf->oddRightMargin * INCH);
 
-            evenPageTopMargin->setValue(pf->evenTopMargin/DPMM);
-            evenPageBottomMargin->setValue(pf->evenBottomMargin/DPMM);
-            evenPageLeftMargin->setValue(pf->evenLeftMargin/DPMM);
-            evenPageRightMargin->setValue(pf->evenRightMargin/DPMM);
+            evenPageTopMargin->setValue(pf->evenTopMargin * INCH);
+            evenPageBottomMargin->setValue(pf->evenBottomMargin * INCH);
+            evenPageLeftMargin->setValue(pf->evenLeftMargin * INCH);
+            evenPageRightMargin->setValue(pf->evenRightMargin * INCH);
 
             spatiumEntry->setValue(lo->spatium()/DPMM);
             if (pf->landscape) {
-                  pageWidth->setValue(pf->height()/DPMM);
-                  pageHeight->setValue(pf->width()/DPMM);
+                  pageWidth->setValue(pf->height() * INCH);
+                  pageHeight->setValue(pf->width() * INCH);
                   }
             else {
-                  pageWidth->setValue(pf->width()/DPMM);
-                  pageHeight->setValue(pf->height()/DPMM);
+                  pageWidth->setValue(pf->width() * INCH);
+                  pageHeight->setValue(pf->height()* INCH);
                   }
             }
       else {
-            oddPageTopMargin->setValue(pf->oddTopMargin/DPI);
-            oddPageBottomMargin->setValue(pf->oddBottomMargin/DPI);
-            oddPageLeftMargin->setValue(pf->oddLeftMargin/DPI);
-            oddPageRightMargin->setValue(pf->oddRightMargin/DPI);
+            oddPageTopMargin->setValue(pf->oddTopMargin);
+            oddPageBottomMargin->setValue(pf->oddBottomMargin);
+            oddPageLeftMargin->setValue(pf->oddLeftMargin);
+            oddPageRightMargin->setValue(pf->oddRightMargin);
 
-            evenPageTopMargin->setValue(pf->evenTopMargin/DPI);
-            evenPageBottomMargin->setValue(pf->evenBottomMargin/DPI);
-            evenPageLeftMargin->setValue(pf->evenLeftMargin/DPI);
-            evenPageRightMargin->setValue(pf->evenRightMargin/DPI);
+            evenPageTopMargin->setValue(pf->evenTopMargin);
+            evenPageBottomMargin->setValue(pf->evenBottomMargin);
+            evenPageLeftMargin->setValue(pf->evenLeftMargin);
+            evenPageRightMargin->setValue(pf->evenRightMargin);
 
             spatiumEntry->setValue(lo->spatium()/DPI);
             if (pf->landscape) {
-                  pageWidth->setValue(pf->height()/DPI);
-                  pageHeight->setValue(pf->width()/DPI);
+                  pageWidth->setValue(pf->height());
+                  pageHeight->setValue(pf->width());
                   }
             else {
-                  pageWidth->setValue(pf->width()/DPI);
-                  pageHeight->setValue(pf->height()/DPI);
+                  pageWidth->setValue(pf->width());
+                  pageHeight->setValue(pf->height());
                   }
             }
-
       evenPageTopMargin->setEnabled(pf->twosided);
       evenPageBottomMargin->setEnabled(pf->twosided);
       evenPageLeftMargin->setEnabled(pf->twosided);
@@ -264,7 +262,8 @@ void PageSettings::twosidedToggled(bool flag)
 
 void PageSettings::apply()
       {
-      double f = mmButton->isChecked() ? DPMM : DPI;
+      double f = mmButton->isChecked() ? 1.0/INCH : 1.0;
+      double f1 = mmButton->isChecked() ? DPMM : DPI;
 
       cs->pageFormat()->size             = pageGroup->currentIndex();
       cs->pageFormat()->evenTopMargin    = evenPageTopMargin->value() * f;
@@ -278,7 +277,7 @@ void PageSettings::apply()
 
       cs->pageFormat()->landscape = landscape->isChecked();
       cs->pageFormat()->twosided = twosided->isChecked();
-      cs->setSpatium(spatiumEntry->value() * f);
+      cs->setSpatium(spatiumEntry->value() * f1);
       emit pageSettingsChanged();
       }
 
@@ -309,7 +308,8 @@ void PageSettings::pageFormatSelected(int pf)
 
 void PageSettings::otmChanged(double val)
       {
-      val *= mmButton->isChecked() ? DPMM : DPI;
+      if (mmButton->isChecked())
+            val /= INCH;
       preview->lo()->pageFormat()->oddTopMargin = val;
       preview->layout();
       }
@@ -320,7 +320,8 @@ void PageSettings::otmChanged(double val)
 
 void PageSettings::olmChanged(double val)
       {
-      val *= mmButton->isChecked() ? DPMM : DPI;
+      if (mmButton->isChecked())
+            val /= INCH;
       preview->lo()->pageFormat()->oddLeftMargin = val;
       preview->layout();
       }
@@ -331,7 +332,8 @@ void PageSettings::olmChanged(double val)
 
 void PageSettings::ormChanged(double val)
       {
-      val *= mmButton->isChecked() ? DPMM : DPI;
+      if (mmButton->isChecked())
+            val /= INCH;
       preview->lo()->pageFormat()->oddRightMargin = val;
       preview->layout();
       }
@@ -342,7 +344,8 @@ void PageSettings::ormChanged(double val)
 
 void PageSettings::obmChanged(double val)
       {
-      val *= mmButton->isChecked() ? DPMM : DPI;
+      if (mmButton->isChecked())
+            val /= INCH;
       preview->lo()->pageFormat()->oddBottomMargin = val;
       preview->layout();
       }
@@ -353,7 +356,8 @@ void PageSettings::obmChanged(double val)
 
 void PageSettings::etmChanged(double val)
       {
-      val *= mmButton->isChecked() ? DPMM : DPI;
+      if (mmButton->isChecked())
+            val /= INCH;
       preview->lo()->pageFormat()->evenTopMargin = val;
       preview->layout();
       }
@@ -364,7 +368,8 @@ void PageSettings::etmChanged(double val)
 
 void PageSettings::elmChanged(double val)
       {
-      val *= mmButton->isChecked() ? DPMM : DPI;
+      if (mmButton->isChecked())
+            val /= INCH;
       preview->lo()->pageFormat()->evenLeftMargin = val;
       preview->layout();
       }
@@ -375,7 +380,8 @@ void PageSettings::elmChanged(double val)
 
 void PageSettings::ermChanged(double val)
       {
-      val *= mmButton->isChecked() ? DPMM : DPI;
+      if (mmButton->isChecked())
+            val /= INCH;
       preview->lo()->pageFormat()->evenRightMargin = val;
       preview->layout();
       }
@@ -386,7 +392,8 @@ void PageSettings::ermChanged(double val)
 
 void PageSettings::ebmChanged(double val)
       {
-      val *= mmButton->isChecked() ? DPMM : DPI;
+      if (mmButton->isChecked())
+            val /= INCH;
       preview->lo()->pageFormat()->evenBottomMargin = val;
       preview->layout();
       }
@@ -397,7 +404,8 @@ void PageSettings::ebmChanged(double val)
 
 void PageSettings::spatiumChanged(double val)
       {
-      val *= mmButton->isChecked() ? DPMM : DPI;
+      if (mmButton->isChecked())
+            val /= INCH;
       preview->lo()->setSpatium(val);
       preview->layout();
       }
