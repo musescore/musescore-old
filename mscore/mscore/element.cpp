@@ -891,7 +891,8 @@ void Volta::draw1(Painter& p)
       f.setItalic(s->italic);
       f.setUnderline(s->underline);
       f.setBold(s->bold);
-      f.setPixelSize(lrint(s->size * _spatium / 5.0 * .7));
+//      f.setPixelSize(lrint(s->size * _spatium / 5.0 * .7));
+      f.setPointSizeF(s->size);
       p.setFont(f);
 
       QPointF tp(p0.x() + _spatium * .5, p0.y());

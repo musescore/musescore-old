@@ -901,6 +901,11 @@ void Score::printFile()
 
       Painter p(&printer);
       p.setClipRect(QRectF(0, 0, 100000, 100000));
+      qreal oldSpatium = _spatium;
+//      _spatium = _spatium * printer.resolution() / 120.0;
+printf("spatium %f -> %f\n", oldSpatium, _spatium);
+
+      doLayout();
       p.scale(printer.resolution()/DPI, printer.resolution()/DPI);
 
       p.setPrint(true);
@@ -914,5 +919,8 @@ void Score::printFile()
             printer.newPage();
             }
       p.end();
+
+      _spatium = oldSpatium;
+      doLayout();
       }
 

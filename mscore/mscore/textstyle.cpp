@@ -189,12 +189,12 @@ void TextStyleDialog::nameSelected(int n)
             }
 
       QFont f(s->family);
-      f.setPixelSize(s->size);
+      f.setPointSizeF(s->size);
       f.setItalic(s->italic);
       f.setUnderline(s->underline);
       f.setBold(s->bold);
       fontSample->setFont(f);
-      fontSample->setText(tr("Ich und du, Müllers Kuh"));
+      fontSample->setText(tr("Ich und du, MÃ¼llers Kuh"));
       int i;
       for (i = 0; i < fonts; ++i) {
             QString ls = fontName->itemText(i);
@@ -229,7 +229,7 @@ void TextStyleDialog::fontChanged()
 void TextStyleDialog::fontSizeChanged(int n)
       {
       QFont f(fontSample->font());
-      f.setPixelSize(n);
+      f.setPointSizeF(n);
       fontSample->setFont(f);
       }
 

@@ -102,7 +102,8 @@ void Bracket::layout()
             QFont f;
             f.setStyleStrategy(QFont::PreferMatch);
             f.setFamily(s->family);
-            f.setPixelSize(lrint(20.0 / 5 * _spatium));
+//            f.setPixelSize(lrint(20.0 / 5 * _spatium));
+            f.setPointSizeF(20.0);
 
             qreal o = _spatium * .27;
             qreal slw = point(style->staffLineWidth);

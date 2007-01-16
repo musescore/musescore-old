@@ -43,6 +43,7 @@ Text::Text(Score* s)
       {
       textStyle = -1;
       doc = new QTextDocument(0);
+      doc->documentLayout()->setPaintDevice(s->canvas());
       setStyle(TEXT_STYLE_LYRIC);
       editMode = false;
       cursor = new QTextCursor(doc);
@@ -54,6 +55,7 @@ Text::Text(Score* s, int style)
       {
       textStyle = -1;
       doc = new QTextDocument(0);
+      doc->documentLayout()->setPaintDevice(s->canvas());
       setStyle(style);
       editMode = false;
       cursor = new QTextCursor(doc);
@@ -68,6 +70,7 @@ Text::Text(const Text& e)
       textStyle = e.textStyle;
       cursor    = new QTextCursor(doc);
       cursor->setPosition(e.cursor->position());
+      cursor->setCharFormat(e.cursor->charFormat());
       }
 
 Text::~Text()
@@ -182,7 +185,7 @@ void Text::setText(const QString& s)
       {
       doc->clear();
       QTextCharFormat format;
-      format.setFont(textStyles[textStyle].font());
+      format.setFont(font());
       cursor->setPosition(0);
       cursor->insertText(s, format);
       layout();
@@ -196,7 +199,7 @@ void Text::setStyle(int n)
       {
       if (textStyle != n) {
             textStyle = n;
-            doc->setDefaultFont(textStyles[textStyle].font());
+            doc->setDefaultFont(font());
             layout();
             }
       }
@@ -234,6 +237,10 @@ void Text::write(Xml& xml, const char* name) const
 
 void Text::read(QDomNode node)
       {
+      cursor->setPosition(0);
+      QTextCharFormat f = cursor->charFormat();
+      f.setFont(doc->defaultFont());
+      cursor->setCharFormat(f);
       for (node = node.firstChild(); !node.isNull(); node = node.nextSibling()) {
             if (!node.isElement())
                   continue;
@@ -249,6 +256,7 @@ void Text::read(QDomNode node)
             else
                   domError(node);
             }
+      cursor->setPosition(0);
       layout();
       }
 
@@ -258,6 +266,12 @@ void Text::read(QDomNode node)
 
 bool Text::startEdit(QMatrix&)
       {
+      cursor->setPosition(0);
+//      QTextCharFormat f = cursor->charFormat();
+//      QFont font(doc->defaultFont());
+//      f.setFont(font);
+//      cursor->setCharFormat(f);
+
       editMode = true;
       if (palette)
             palette->setCharFormat(cursor->charFormat());
@@ -270,7 +284,8 @@ bool Text::startEdit(QMatrix&)
 
 bool Text::edit(QKeyEvent* ev)
       {
-      if (ev->key() == Qt::Key_F2) {
+      int key = ev->key();
+      if (key == Qt::Key_F2) {
             if (palette == 0)
                   palette = new TextPalette(0);
             if (palette->isVisible())
@@ -278,12 +293,34 @@ bool Text::edit(QKeyEvent* ev)
             else {
                   palette->setText(this);
                   palette->show();
-                  mscore->activateWindow();
                   palette->setCharFormat(cursor->charFormat());
                   }
             return false;
             }
-      switch (ev->key()) {
+      if (ev->modifiers() & Qt::CTRL) {
+            switch (key) {
+                  case Qt::Key_B:   // toggle bold face
+                        {
+                        QTextCharFormat f = cursor->charFormat();
+                        f.setFontWeight(f.fontWeight() == QFont::Bold ? QFont::Normal : QFont::Bold);
+                        if (palette)
+                              palette->setCharFormat(f);
+                        cursor->setCharFormat(f);
+                        }
+                        break;
+                  case Qt::Key_I:   // toggle italic
+                        {
+                        QTextCharFormat f = cursor->charFormat();
+                        f.setFontItalic(!f.fontItalic());
+                        if (palette)
+                              palette->setCharFormat(f);
+                        cursor->setCharFormat(f);
+                        }
+                        break;
+                  }
+            return false;
+            }
+      switch (key) {
             case Qt::Key_Return:
                   cursor->insertText(QString("\n"));
                   break;
@@ -346,7 +383,14 @@ void Text::endEdit()
 
 QFont Text::font() const
       {
-      return textStyles[textStyle].font();
+      TextStyle* s = &textStyles[textStyle];
+      QFont f(s->family);
+      f.setItalic(s->italic);
+      f.setUnderline(s->underline);
+      f.setBold(s->bold);
+//      f.setPointSizeF(s->size * DPI / 72.0);
+      f.setPointSizeF(s->size);
+      return f;
       }
 
 //---------------------------------------------------------
@@ -377,7 +421,7 @@ void Text::draw1(Painter& p)
 
 double Text::lineSpacing() const
       {
-      QFontMetrics fm(doc->defaultFont());
+      QFontMetricsF fm(doc->defaultFont());
       return fm.lineSpacing();
       }
 

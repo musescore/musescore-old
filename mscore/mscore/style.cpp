@@ -25,7 +25,7 @@
 #include "mtime.h"
 
 Style* style;
-double _spatium = 1.5 * DPMM;
+double _spatium = 8.3;
 
 //---------------------------------------------------------
 //   textStyles
@@ -175,7 +175,8 @@ QFont TextStyle::font() const
       f.setItalic(italic);
       f.setUnderline(underline);
       f.setBold(bold);
-      f.setPixelSize(lrint(size * _spatium * .2));
+//      f.setPixelSize(lrint(size * _spatium * .2));
+      f.setPointSizeF(size);
       return f;
       }
 

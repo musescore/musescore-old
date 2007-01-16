@@ -114,20 +114,19 @@ int Sym::buildin(const QString& name)
 void initSymbols()
       {
       QFont f1("emmentaler");
-      f1.setPixelSize(lrint(20.0 * .2 * _spatium));
+      f1.setPointSizeF(20.0);
       QFont f3("emmentaler");
-      f3.setPixelSize(lrint(14.0 * .2 * _spatium));
-
+      f3.setPointSizeF(14.0);
       QFont f4("Times New Roman");
-      f4.setPixelSize(lrint(8.0 * .2 * _spatium));
+      f4.setPointSizeF(8.0);
 
       symbols[clefEightSym] = Sym("clef eight", 0x38, f4);
       symbols[clefOneSym]   = Sym("clef one",   0x31, f4);
       symbols[clefFiveSym]  = Sym("clef five",  0x35, f4);
 
-      symbols[stemSym]                    = Sym("stem", 0xf08f, f1);
-      symbols[stemSym]                    = Sym("stem",               0xf08f, f1);
-      symbols[dstemSym]                   = Sym("dstem",              0xf090, f1);
+      symbols[stemSym]      = Sym("stem",  0xf08f, f1);
+      symbols[stemSym]      = Sym("stem",  0xf08f, f1);
+      symbols[dstemSym]     = Sym("dstem", 0xf090, f1);
 
       symbols[plusSym]                    = Sym("plus",               0x2b, f1);
 
