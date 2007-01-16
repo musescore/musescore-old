@@ -66,7 +66,7 @@ TextLine::TextLine(const TextLine& e)
 const QRectF& TextLine::bbox() const
       {
 //TODO      _bbox = QRectF(0.0, 0.0, doc->size().width(), doc->size().height());
-//      QFontMetrics fm(font());
+//      QFontMetricsF fm(font());
       return _bbox;
       }
 
@@ -275,7 +275,7 @@ void TextLine::draw1(Painter& p)
 
 double TextLine::lineSpacing() const
       {
-      QFontMetrics fm(font());
+      QFontMetricsF fm(font());
       return fm.lineSpacing();
       }
 

@@ -38,7 +38,7 @@ TextPalette::TextPalette(QWidget* parent)
       sg->addButton(symFlat, flatSym);
       connect(sg, SIGNAL(buttonClicked(int)), SLOT(symbolClicked(int)));
 
-      connect(typefaceSize, SIGNAL(valueChanged(int)), SLOT(sizeChanged(int)));
+      connect(typefaceSize, SIGNAL(valueChanged(double)), SLOT(sizeChanged(double)));
       connect(typefaceBold, SIGNAL(clicked(bool)), SLOT(boldClicked(bool)));
       connect(typefaceItalic, SIGNAL(clicked(bool)), SLOT(italicClicked(bool)));
       setFocusPolicy(Qt::NoFocus);
@@ -57,12 +57,9 @@ void TextPalette::symbolClicked(int n)
 //   sizeChanged
 //---------------------------------------------------------
 
-void TextPalette::sizeChanged(int value)
+void TextPalette::sizeChanged(double value)
       {
-      QFont f(format.font());
-      f.setPointSize(value);
-//      format.setFontPointSize(value);
-      format.setFont(f);
+      format.setFontPointSize(value);
       _textElement->setCharFormat(format);
       }
 
@@ -90,14 +87,12 @@ void TextPalette::italicClicked(bool val)
 //   setCharFormat
 //---------------------------------------------------------
 
-void TextPalette::setCharFormat(QTextCharFormat cf)
+void TextPalette::setCharFormat(const QTextCharFormat& cf)
       {
       format = cf;
-      typefaceFamily->setCurrentFont(cf.font());
-      int fs = cf.font().pointSize();
-      qreal rfs = cf.fontPointSize();
-printf("points %d %f\n", fs, rfs);
-      typefaceSize->setValue(fs);
+      QFont f(cf.font());
+      typefaceFamily->setCurrentFont(f);
+      typefaceSize->setValue(f.pointSizeF());
       typefaceItalic->setChecked(cf.fontItalic());
       typefaceBold->setChecked(cf.fontWeight() == QFont::Bold);
       }

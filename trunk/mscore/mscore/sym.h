@@ -52,8 +52,6 @@ class Sym {
       void setCode(const QChar& c);
       QPointF offset() const      { return _offset; }
       void setOffset(QPointF& p);
-//      int size() const            { return _fontSize; }
-//      void setSize(int n);
 
       void draw(Painter& painter, qreal x, qreal y, int n) const;
       void draw(Painter& painter, qreal x, qreal y) const;

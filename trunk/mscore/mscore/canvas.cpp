@@ -45,6 +45,9 @@
 Canvas::Canvas(QWidget* parent)
    : QWidget(parent)
       {
+
+printf("dpi %d %d\n", logicalDpiX(), physicalDpiX());
+
       setAcceptDrops(true);
 //      setAttribute(Qt::WA_OpaquePaintEvent);
       setAttribute(Qt::WA_NoSystemBackground);
@@ -538,7 +541,7 @@ void Canvas::setMag(double nmag)
       setXoffset(xoffset() * deltamag);
       setYoffset(yoffset() * deltamag);
 
-      m = nmag * qreal(appDpiX) / DPI;
+      m = nmag;
       matrix.setMatrix(m, matrix.m12(), matrix.m21(),
          m * qreal(appDpiY)/qreal(appDpiX), matrix.dx(), matrix.dy());
       imatrix = matrix.inverted();
@@ -838,7 +841,7 @@ void Canvas::setShadowNote(const QPointF& p)
 
 qreal Canvas::mag() const
       {
-      return matrix.m11() * DPI / qreal(appDpiX);
+      return matrix.m11();
       }
 
 //---------------------------------------------------------
