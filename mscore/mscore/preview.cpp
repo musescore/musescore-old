@@ -47,7 +47,7 @@ void PagePreview::setScore(Score* s)
       _layout = new ScoreLayout(*(_score->scoreLayout()));
       _layout->setScore(s);
       setMag();
-      _layout->layout();
+      _layout->doLayout();
       }
 
 //---------------------------------------------------------
@@ -67,8 +67,8 @@ PagePreview::~PagePreview()
 
 void PagePreview::setMag()
       {
-      double mag1 = (width()  - 20) / _score->pageFormat()->width();
-      double mag2 = (height() - 20) / _score->pageFormat()->height();
+      double mag1 = (width()  - 20) / (_score->pageFormat()->width() * DPI);
+      double mag2 = (height() - 20) / (_score->pageFormat()->height() * DPI);
       qreal  m    = (mag1 > mag2) ? mag2 : mag1;
       matrix.setMatrix(m, matrix.m12(), matrix.m21(),
          m * qreal(appDpiY)/qreal(appDpiX), 10, 10);
@@ -90,7 +90,7 @@ void PagePreview::resizeEvent(QResizeEvent*)
 void PagePreview::layout()
       {
       _layout->pages()->update();
-      _layout->layout();
+      _layout->doLayout();
       update();
       }
 

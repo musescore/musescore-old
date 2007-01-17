@@ -39,7 +39,7 @@ class PagePreview : public QWidget {
       void setMag();
 
    public:
-      PagePreview(QWidget*);
+      PagePreview(QWidget* parent = 0);
       void setScore(Score*);
       ~PagePreview();
       void layout();

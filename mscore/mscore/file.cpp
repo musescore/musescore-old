@@ -914,8 +914,6 @@ void Score::printFile()
 
       doLayout();
       doLayout(); // DEBUG1
-//      p.scale(printer.resolution()/DPI, printer.resolution()/DPI);
-//      p.scale(10.0, 10.0);
 
       p.setPrint(true);
 
@@ -934,5 +932,6 @@ void Score::printFile()
       scoreLayout()->setPaintDevice(oldPaintDevice);
       setSpatium(oldSpatium);
       doLayout();
+      doLayout(); // DEBUG1
       }
 
