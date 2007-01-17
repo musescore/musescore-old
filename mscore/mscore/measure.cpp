@@ -734,7 +734,7 @@ void Measure::read(QDomNode node, int idx)
             else
                   domError(node);
             }
-      layoutNoteHeads(idx);
+//      layoutNoteHeads(idx);
       }
 
 //---------------------------------------------------------
@@ -837,6 +837,9 @@ void Measure::layout(double width)
             return;
 
       int n = _score->nstaves();
+      for (int i = 0; i < n; ++i)
+            layoutNoteHeads(i);
+
       double staffY[n];
       for (int i = 0; i < n; ++i) {
             staffY[i] = system()->staff(i)->bbox().y();

@@ -62,7 +62,7 @@ void Rest::draw1(Painter& p)
 void Rest::setSym(int s)
       {
       _sym = s;
-      bboxUpdate();
+//      bboxUpdate();   DEBUG1
       }
 
 //---------------------------------------------------------

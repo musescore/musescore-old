@@ -32,26 +32,23 @@ class Painter;
 class Sym {
       QChar _code;
       QFont _font;
-
       QString _name;
       QPointF _offset;        // drawing offset in spatium units
-
-      QRectF _boundingRect;   // cached bounding rectangle of symbol
-      void updateBoundingRect();
+      mutable QRectF _bbox;
 
    public:
-      Sym();
+      Sym() { _code = 0; }
       Sym(const QString& name, const QChar& c, const QFont& f, const QPointF& _o = QPointF());
 
       const QFont font() const    { return _font; }
       const QString& name() const { return _name; }
-      const QRectF& bbox() const  { return _boundingRect; }
-      double width() const        { return bbox().width(); }
-      double height() const       { return bbox().height(); }
-      QChar code() const          { return _code; }
-      void setCode(const QChar& c);
-      QPointF offset() const      { return _offset; }
-      void setOffset(QPointF& p);
+      const QRectF& bbox() const;
+      double width() const;
+      double height() const;
+      QChar code() const           { return _code;   }
+      void setCode(const QChar& c) { _code = c;      }
+      QPointF offset() const       { return _offset; }
+      void setOffset(QPointF& p)   { _offset = p;    }
 
       void draw(Painter& painter, qreal x, qreal y, int n) const;
       void draw(Painter& painter, qreal x, qreal y) const;

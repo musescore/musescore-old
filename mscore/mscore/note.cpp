@@ -252,7 +252,7 @@ void Note::changeAccidental(int pre)
       int newPitch = line2pitch(_line, clef) + pitchOffset;
 
       setPitch(newPitch);
-      chord()->measure()->layoutNoteHeads(staffIdx());
+//DEBUG1      chord()->measure()->layoutNoteHeads(staffIdx());
       }
 
 //---------------------------------------------------------
@@ -322,7 +322,7 @@ void Note::remove(Element* el)
 
 QPointF Note::stemPos(bool upFlag) const
       {
-      double sw2 = point(style->stemWidth) * .5;
+      double sw = point(style->stemWidth);
       double x = pos().x();
       double y = pos().y();
 
@@ -330,11 +330,11 @@ QPointF Note::stemPos(bool upFlag) const
             upFlag = !upFlag;
       qreal xo = symbols[_head].bbox().x();
       if (upFlag) {
-            x += symbols[_head].width() - sw2;
+            x += symbols[_head].width() - sw;
             y -= _spatium * .2;
             }
       else {
-            x += sw2;
+            x += sw * .5;
             y += _spatium * .2;
             }
       return QPointF(x + xo, y);
@@ -664,8 +664,16 @@ ShadowNote::ShadowNote(Score* s)
    : Element(s)
       {
       _sym  = new Sym(symbols[quartheadSym]);
-      setbbox(_sym->bbox());
       _line = 1000;
+      }
+
+//---------------------------------------------------------
+//   bbox
+//---------------------------------------------------------
+
+const QRectF& ShadowNote::bbox() const
+      {
+      return _sym->bbox();
       }
 
 //---------------------------------------------------------

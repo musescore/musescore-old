@@ -68,7 +68,7 @@ struct TextStyle {
       bool underline;
       int align;
       Anchor anchor;
-      double xoff, yoff;
+      double xoff, yoff;            // inch or spatium
       OffsetType offsetType;
       bool sizeIsSpatiumDependent;    // size depends on _spatium unit
 

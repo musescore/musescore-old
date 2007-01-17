@@ -45,9 +45,6 @@
 Canvas::Canvas(QWidget* parent)
    : QWidget(parent)
       {
-
-printf("dpi %d %d\n", logicalDpiX(), physicalDpiX());
-
       setAcceptDrops(true);
 //      setAttribute(Qt::WA_OpaquePaintEvent);
       setAttribute(Qt::WA_NoSystemBackground);

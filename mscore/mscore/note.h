@@ -153,6 +153,7 @@ class ShadowNote : public Element {
       void setLine(int n)               { _line = n;      }
       virtual void layout();
       virtual void draw(Painter& p);
+      virtual const QRectF& bbox() const;
       };
 
 #endif

@@ -32,8 +32,8 @@ const PaperSize paperSizes[] = {
       PaperSize(QPrinter::A4,      "A4",        MM(210),  MM(297)),
       PaperSize(QPrinter::B5,      "B5",        MM(176),  MM(250)),
       PaperSize(QPrinter::Letter,  "Letter",    8.5,      11),
-      PaperSize(QPrinter::Legal,   "Legal",     8.5,  14),
-      PaperSize(QPrinter::Executive,"Executive",7.5,     10),
+      PaperSize(QPrinter::Legal,   "Legal",     8.5,      14),
+      PaperSize(QPrinter::Executive,"Executive",7.5,      10),
       PaperSize(QPrinter::A0,      "A0",        MM(841),  MM(1189)),
       PaperSize(QPrinter::A1,      "A1",        MM(594),  MM(841)),
       PaperSize(QPrinter::A2,      "A2",        MM(420),  MM(594)),
@@ -160,10 +160,35 @@ void PageSettings::setScore(Score* s)
 
 void PageSettings::setValues(ScoreLayout* lo)
       {
+      bool mm = mmButton->isChecked();
+
+      oddPageTopMargin->blockSignals(true);
+      oddPageBottomMargin->blockSignals(true);
+      oddPageLeftMargin->blockSignals(true);
+      oddPageRightMargin->blockSignals(true);
+      evenPageTopMargin->blockSignals(true);
+      evenPageBottomMargin->blockSignals(true);
+      evenPageLeftMargin->blockSignals(true);
+      evenPageRightMargin->blockSignals(true);
+      spatiumEntry->blockSignals(true);
+
+      const char* suffix = mm ? "mm" : "in";
+      oddPageTopMargin->setSuffix(suffix);
+      oddPageBottomMargin->setSuffix(suffix);
+      oddPageLeftMargin->setSuffix(suffix);
+      oddPageRightMargin->setSuffix(suffix);
+      evenPageTopMargin->setSuffix(suffix);
+      evenPageBottomMargin->setSuffix(suffix);
+      evenPageLeftMargin->setSuffix(suffix);
+      evenPageRightMargin->setSuffix(suffix);
+      spatiumEntry->setSuffix(suffix);
+      pageWidth->setSuffix(suffix);
+      pageHeight->setSuffix(suffix);
+
       PageFormat* pf = lo->pageFormat();
 
       QString s;
-      if (mmButton->isChecked()) {
+      if (mm) {
             oddPageTopMargin->setValue(pf->oddTopMargin * INCH);
             oddPageBottomMargin->setValue(pf->oddBottomMargin * INCH);
             oddPageLeftMargin->setValue(pf->oddLeftMargin * INCH);
@@ -212,6 +237,16 @@ void PageSettings::setValues(ScoreLayout* lo)
 
       landscape->setChecked(pf->landscape);
       twosided->setChecked(pf->twosided);
+
+      oddPageTopMargin->blockSignals(false);
+      oddPageBottomMargin->blockSignals(false);
+      oddPageLeftMargin->blockSignals(false);
+      oddPageRightMargin->blockSignals(false);
+      evenPageTopMargin->blockSignals(false);
+      evenPageBottomMargin->blockSignals(false);
+      evenPageLeftMargin->blockSignals(false);
+      evenPageRightMargin->blockSignals(false);
+      spatiumEntry->blockSignals(false);
       }
 
 //---------------------------------------------------------

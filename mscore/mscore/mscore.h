@@ -279,6 +279,7 @@ class MuseScore : public QMainWindow {
 	void cmdAppendMeasures(int);
       bool midiinEnabled() const;
       bool playEnabled() const;
+      Score* currentScore() const { return cs; }
       static Shortcut sc[];
       };
 

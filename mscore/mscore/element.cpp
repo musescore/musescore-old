@@ -522,7 +522,7 @@ void Compound::draw1(Painter& p)
       {
       for (ciSymbol i = elemente.begin(); i != elemente.end(); ++i)
             (*i)->draw(p);
-
+#if 0
       if (debugMode && selected()) {
             //
             //  draw bounding box rectangle for all
@@ -532,6 +532,7 @@ void Compound::draw1(Painter& p)
             p.setPen(QPen(Qt::red, 4, Qt::SolidLine));
             p.drawRect(_bbox);
             }
+#endif
       }
 
 //---------------------------------------------------------
@@ -549,10 +550,21 @@ void Compound::addElement(Element* e, double x, double y)
       elemente.push_back(e);
 
       QRectF r = e->bbox().translated(e->pos());
-//      printf("Compound add %f %f %f %f\n", e->bbox().x(), e->bbox().y(), e->bbox().width(), e->bbox().height());
-//      printf("         add %f %f %f %f\n", r.x(), r.y(), r.width(), r.height());
       _bbox |= r;
-//      printf("  -> %f %f %f %f\n", _bbox.x(), _bbox.y(), _bbox.width(), _bbox.height());
+      }
+
+//---------------------------------------------------------
+//   bbox
+//---------------------------------------------------------
+
+const QRectF& Compound::bbox() const
+      {
+      _bbox = QRectF(0,0,0,0);
+      for (ciSymbol i = elemente.begin(); i != elemente.end(); ++i) {
+            const Element* e = *i;
+            _bbox |= e->bbox().translated(e->pos());
+            }
+      return _bbox;
       }
 
 //---------------------------------------------------------

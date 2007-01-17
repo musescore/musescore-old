@@ -25,7 +25,11 @@
 #include "mtime.h"
 
 Style* style;
-double _spatium = 8.3;
+//  20 points        font design size
+//  72 points/inch   point size
+// 120 dpi           screen resolution
+//  spatium = 20/4 points
+double _spatium = 20.0 / 72.0 * 120.0 / 4.0;  // 8.33
 
 //---------------------------------------------------------
 //   textStyles
@@ -35,26 +39,28 @@ TextStyleList textStyles;
 
 static const QString ff("Times New Roman");
 
+#define MM(x) ((x)/INCH)
+
 static const TextStyle defaultTextStyles[] = {
       TextStyle(QString("Symbols1"), QString("Emmentaler"), 20, false, false, false,
          ALIGN_LEFT,    ANCHOR_TICK, 0, 0, OFFSET_ABS),
       TextStyle(QString("Symbols3"), QString("Emmentaler"), 14, false, false, false,
          ALIGN_LEFT,    ANCHOR_TICK, 0, 0, OFFSET_SPATIUM),
-      TextStyle(QString("Title"),       ff, 24, false, false, false,
-         ALIGN_HCENTER | ALIGN_TOP,    ANCHOR_PAGE, 0, 5*DPMM, OFFSET_ABS),
-      TextStyle(QString("Subtitle"),    ff, 14, false, false, false,
-         ALIGN_HCENTER | ALIGN_TOP,    ANCHOR_PAGE, 0, 15*DPMM, OFFSET_ABS),
+      TextStyle(QString("Title"), ff, 24, false, false, false,
+         ALIGN_HCENTER | ALIGN_TOP, ANCHOR_PAGE, 0, MM(5), OFFSET_ABS),
+      TextStyle(QString("Subtitle"), ff, 14, false, false, false,
+         ALIGN_HCENTER | ALIGN_TOP, ANCHOR_PAGE, 0, MM(15), OFFSET_ABS),
       TextStyle(QString("Composer"), ff, 12, false, false, false,
-         ALIGN_RIGHT | ALIGN_TOP,    ANCHOR_PAGE, 0, 15*DPMM, OFFSET_ABS),
+         ALIGN_RIGHT | ALIGN_TOP, ANCHOR_PAGE, 0, MM(15), OFFSET_ABS),
       TextStyle(QString("Poet"), ff, 12, false, false, false,
-         ALIGN_LEFT | ALIGN_TOP,    ANCHOR_PAGE, 0, 10*DPMM, OFFSET_ABS),
-      TextStyle(QString("Lyrics"),      ff, 11, false, false, false,
-         ALIGN_HCENTER | ALIGN_TOP,    ANCHOR_TICK, 0, 7, OFFSET_SPATIUM),
-      TextStyle(QString("Fingering"),   ff,  8, false, false, false,
+         ALIGN_LEFT | ALIGN_TOP, ANCHOR_PAGE, 0, MM(10), OFFSET_ABS),
+      TextStyle(QString("Lyrics"), ff, 11, false, false, false,
+         ALIGN_HCENTER | ALIGN_TOP, ANCHOR_TICK, 0, 7, OFFSET_SPATIUM),
+      TextStyle(QString("Fingering"), ff,  8, false, false, false,
          ALIGN_HCENTER | ALIGN_VCENTER, ANCHOR_NOTE, 0, 0, OFFSET_SPATIUM),
-      TextStyle(QString("InstrumentsLong"),   ff,  12, false, false, false,
+      TextStyle(QString("InstrumentsLong"),   ff, 12, false, false, false,
          ALIGN_RIGHT | ALIGN_VCENTER, ANCHOR_SYSTEM, 0, 0, OFFSET_SPATIUM),
-      TextStyle(QString("InstrumentsShort"),   ff,  12, false, false, false,
+      TextStyle(QString("InstrumentsShort"),   ff, 12, false, false, false,
          ALIGN_RIGHT | ALIGN_VCENTER, ANCHOR_SYSTEM, 0, 0, OFFSET_SPATIUM),
       TextStyle(QString("Dynamics"), ff, 12, false, true, false,
          ALIGN_LEFT,    ANCHOR_TICK, 0, 6, OFFSET_SPATIUM),
@@ -65,17 +71,17 @@ static const TextStyle defaultTextStyles[] = {
       TextStyle(QString("Metronome"), ff, 12, true, false, false,
          ALIGN_LEFT,    ANCHOR_TICK, 0, 0, OFFSET_SPATIUM),
       TextStyle(QString("Copyright"), ff, 8, true, false, false,
-         ALIGN_HCENTER | ALIGN_BOTTOM,    ANCHOR_PAGE, 0, 1*DPMM, OFFSET_ABS),
+         ALIGN_HCENTER | ALIGN_BOTTOM,    ANCHOR_PAGE, 0, MM(1), OFFSET_ABS),
       TextStyle(QString("Measure Number"), ff, 8, false, false, false,
          ALIGN_LEFT,    ANCHOR_TICK, 0, -2.2, OFFSET_SPATIUM),
       TextStyle(QString("Page Number Odd"), ff, 12, false, false, false,
          ALIGN_RIGHT | ALIGN_TOP, ANCHOR_PAGE, 0, 0, OFFSET_ABS),
       TextStyle(QString("Page Number Even"), ff, 12, false, false, false,
          ALIGN_LEFT | ALIGN_TOP, ANCHOR_PAGE, 0, 0, OFFSET_ABS),
-      TextStyle(QString("Translator"),      ff, 11, false, false, false,
+      TextStyle(QString("Translator"), ff, 11, false, false, false,
          ALIGN_HCENTER | ALIGN_TOP,    ANCHOR_TICK, 0, 6, OFFSET_SPATIUM),
       TextStyle(QString("Dynamics1"), QString("MScore1"), 20, false, false, false,
-         ALIGN_LEFT,    ANCHOR_TICK, 0, 0, OFFSET_SPATIUM),
+         ALIGN_LEFT, ANCHOR_TICK, 0, 0, OFFSET_SPATIUM),
       };
 
 //---------------------------------------------------------
@@ -212,8 +218,8 @@ void TextStyle::write(Xml& xml) const
       xml.tag("anchor", anchor);
       xml.tag("offsetType", offsetType);
       if (offsetType == OFFSET_ABS || offsetType == OFFSET_REL) {
-            xml.tag("xoffset", xoff / DPMM);
-            xml.tag("yoffset", yoff /DPMM);
+            xml.tag("xoffset", xoff * INCH);
+            xml.tag("yoffset", yoff * INCH);
             }
       else {
             xml.tag("xoffset", xoff);
@@ -260,10 +266,6 @@ void TextStyle::read(QDomNode node)
                   offsetType = (OffsetType)i;
             else
                   domError(node);
-            }
-      if (offsetType == OFFSET_ABS || offsetType == OFFSET_REL) {
-            xoff *= DPMM;
-            yoff *= DPMM;
             }
       }
 
