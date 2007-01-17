@@ -146,21 +146,19 @@ class Element {
       int mxmlOff() const                     { return _mxmlOff;  }
       void setMxmlOff(int o)                  { _mxmlOff = o;     }
 
-      virtual bool contains(const QPointF& p) const;
-      bool intersects(const QRectF& r) const;
-
+      virtual const QRectF& bbox() const      { return _bbox;           }
+      virtual double height() const           { return bbox().height(); }
+      virtual double width() const            { return bbox().width();  }
       QRectF abbox() const                    { return bbox().translated(aref()); }
       QPointF apos() const                    { return aref();          }
-
-      void setbbox(const QRectF& r)           { _bbox = r;              }
-      virtual const QRectF& bbox() const      { return _bbox;           }
       void setWidth(double v)                 { _bbox.setWidth(v);      }
       void setHeight(double v)                { _bbox.setHeight(v);     }
       void setBboxX(qreal x)                  { _bbox.setX(x);          }
       void setBboxY(qreal y)                  { _bbox.setY(y);          }
       void orBbox(const QRectF& f)            { _bbox |= f;             }
-      virtual double height() const           { return bbox().height(); }
-      virtual double width() const            { return bbox().width();  }
+      virtual void setbbox(const QRectF& r)   { _bbox = r;              }
+      virtual bool contains(const QPointF& p) const;
+      bool intersects(const QRectF& r) const;
 
       virtual ElementType type() const = 0;
       int subtype() const                     { return _subtype;        }
@@ -394,6 +392,7 @@ class Compound : public Element {
       void clear();
       virtual void setSelected(bool f);
       virtual void setVisible(bool);
+      virtual const QRectF& bbox() const;
       };
 
 //---------------------------------------------------------

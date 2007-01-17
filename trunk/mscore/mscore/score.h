@@ -72,29 +72,7 @@ extern bool showRubberBand;
 
 class PartList;
 
-//---------------------------------------------------------
-//   ElemList
-//---------------------------------------------------------
-
-class ElemList {
-      int _size;
-      Element* _first;
-      Element* _last;
-
-   public:
-      ElemList() {
-            _first = 0;
-            _last  = 0;
-            _size  = 0;
-            };
-      Element* first() const { return _first; }
-      Element* last()  const { return _last; }
-      void clear()           { _first = _last = 0; }
-      void push_back(Element* e);
-      void push_front(Element* e);
-      void insert(Element*, Element*);
-      void erase(Element*);
-      };
+#include "layout.h"
 
 //---------------------------------------------------------
 //   ScoreView
@@ -385,7 +363,7 @@ class Score : public QObject {
       void read(QString name);
 
       void setSpatium(double v);
-      double spatium() const;
+      double spatium() const     { return _layout->spatium(); }
 
       double mag() const         { return scoreView._mag;     }
       void setMag(double val)    { scoreView._mag = val;      }

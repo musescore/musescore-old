@@ -96,7 +96,7 @@ class Page : public Element {
       void setNo(int n)                  { _no = n;           }
       bool isOdd() const                 { return (_no+1) & 1;    }
 
-      double tm() const;            // margins
+      double tm() const;            // margins in pixel
       double bm() const;
       double lm() const;
       double rm() const;

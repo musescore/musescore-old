@@ -21,6 +21,37 @@
 #ifndef __LAYOUT_H__
 #define __LAYOUT_H__
 
+class Score;
+class PageFormat;
+class PageList;
+class Page;
+class Measure;
+class QPaintDevice;
+
+//---------------------------------------------------------
+//   ElemList
+//---------------------------------------------------------
+
+class ElemList {
+      int _size;
+      Element* _first;
+      Element* _last;
+
+   public:
+      ElemList() {
+            _first = 0;
+            _last  = 0;
+            _size  = 0;
+            };
+      Element* first() const { return _first; }
+      Element* last()  const { return _last; }
+      void clear()           { _first = _last = 0; }
+      void push_back(Element* e);
+      void push_front(Element* e);
+      void insert(Element*, Element*);
+      void erase(Element*);
+      };
+
 //---------------------------------------------------------
 //   ScoreLayout
 //---------------------------------------------------------
@@ -29,6 +60,7 @@ class ScoreLayout {
       Score* _score;
       double _spatium;
       PageFormat* _pageFormat;
+      QPaintDevice* _paintDevice;
 
       //
       // modified by layout()
@@ -71,6 +103,8 @@ class ScoreLayout {
       void clear()                   { _measures.clear(); }
       void erase(Measure* im)        { _measures.erase(im); }
       void insert(Measure* im, Measure* m) { _measures.insert(im, m); }
+      void setPaintDevice(QPaintDevice* d) { _paintDevice = d; }
+      QPaintDevice* paintDevice() const { return _paintDevice; }
       };
 
 #endif

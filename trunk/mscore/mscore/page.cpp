@@ -373,7 +373,8 @@ void PageFormat::read(QDomNode node)
                         if (e.isNull())
                               continue;
                         QString tag(e.tagName());
-                        double val = (e.text().toDouble() * _spatium * .1) / DPI;
+//                        double val = e.text().toDouble() * (20/4)/ PPI  * .1;
+                        double val = e.text().toDouble() * 0.5 / PPI;
                         if (tag == "left-margin")
                               lm = val;
                         else if (tag == "right-margin")
@@ -417,7 +418,11 @@ void PageFormat::write(Xml& xml)
       {
       xml.stag("page-layout");
 
-      double t = 10.0 / _spatium;
+      // convert inch to 1/10 spatium units
+      // 20 - font design size in point
+      // SPATIUM = 20/4
+      // double t = 10 * PPI / (20 / 4);
+      double t = 2 * PPI;
 
       if (name() != "Other") {
             xml.tag("pageFormat", QString(name()));

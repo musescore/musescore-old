@@ -53,8 +53,8 @@ void Symbol::draw1(Painter& p)
 //   bbox
 //---------------------------------------------------------
 
-const QRectF& Symbol::bbox() const      
-      { 
+const QRectF& Symbol::bbox() const
+      {
       return symbols[_sym].bbox();
       }
 

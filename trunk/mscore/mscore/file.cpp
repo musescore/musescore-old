@@ -888,7 +888,10 @@ void Score::printFile()
 //         );
 //      printf("print format %d\n", paperSizes[pageFormat()->size].qtsize);
 
+      //
+      // HighResolution gives higher output quality
       QPrinter printer(QPrinter::HighResolution);
+//      QPrinter printer(QPrinter::ScreenResolution);
       printer.setPageSize(paperSizes[pageFormat()->size].qtsize);
       printer.setOrientation(pageFormat()->landscape ? QPrinter::Landscape : QPrinter::Portrait);
 
@@ -905,10 +908,12 @@ void Score::printFile()
       double oldDPI = DPI;
       DPI  = printer.logicalDpiX();          // drawing resolution
       DPMM = DPI / INCH;                     // dots/mm
-      _spatium = _spatium * DPI / oldDPI;
+      setSpatium(_spatium * DPI / oldDPI);
+      QPaintDevice* oldPaintDevice = scoreLayout()->paintDevice();
+      scoreLayout()->setPaintDevice(&printer);
 
-printf("printer %d %d\n", printer.logicalDpiX(), printer.resolution());
       doLayout();
+      doLayout(); // DEBUG1
 //      p.scale(printer.resolution()/DPI, printer.resolution()/DPI);
 //      p.scale(10.0, 10.0);
 
@@ -924,10 +929,10 @@ printf("printer %d %d\n", printer.logicalDpiX(), printer.resolution());
             }
       p.end();
 
-      _spatium = oldSpatium;
       DPI = oldDPI;
       DPMM = DPI / INCH;                     // dots/mm
-
+      scoreLayout()->setPaintDevice(oldPaintDevice);
+      setSpatium(oldSpatium);
       doLayout();
       }
 

@@ -22,6 +22,8 @@
 #define __GLOBALS_H__
 
 static const qreal INCH = 25.4;
+static const qreal PPI  = 72.0;     // printer points per inch
+
 extern qreal DPI;       // drawing resolution
 extern qreal DPMM;      // dots/mm
 

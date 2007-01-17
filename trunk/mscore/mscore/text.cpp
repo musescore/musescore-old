@@ -43,7 +43,6 @@ Text::Text(Score* s)
       {
       textStyle = -1;
       doc = new QTextDocument(0);
-      doc->documentLayout()->setPaintDevice(s->canvas());
       setStyle(TEXT_STYLE_LYRIC);
       editMode = false;
       cursor = new QTextCursor(doc);
@@ -55,7 +54,6 @@ Text::Text(Score* s, int style)
       {
       textStyle = -1;
       doc = new QTextDocument(0);
-      doc->documentLayout()->setPaintDevice(s->canvas());
       setStyle(style);
       editMode = false;
       cursor = new QTextCursor(doc);
@@ -124,6 +122,9 @@ void Text::layout()
       {
       if (parent() == 0)
             return;
+      doc->documentLayout()->setPaintDevice(score()->scoreLayout()->paintDevice());
+      doc->setUseDesignMetrics(true);
+
       TextStyle* s = &textStyles[textStyle];
 
       double tw = bbox().width();
@@ -132,6 +133,8 @@ void Text::layout()
       QPointF _off(QPointF(s->xoff, s->yoff));
       if (s->offsetType == OFFSET_SPATIUM)
             _off *= _score->spatium();
+      else
+            _off *= DPI;
 
       double x = 0.0, y = 0.0;
       if (s->anchor == ANCHOR_PAGE) {
@@ -143,9 +146,9 @@ void Text::layout()
             double w = page->loWidth() - page->lm() - page->rm();
             double h = page->loHeight() - page->tm() - page->bm();
 
-            if (s->offsetType == OFFSET_REL)
+            if (s->offsetType == OFFSET_REL) {
                   _off = QPointF(s->xoff * w * 0.01, s->yoff * h * 0.01);
-
+                  }
             if (s->align & ALIGN_LEFT)
                   x = page->lm();
             else if (s->align & ALIGN_RIGHT)
@@ -383,14 +386,7 @@ void Text::endEdit()
 
 QFont Text::font() const
       {
-      TextStyle* s = &textStyles[textStyle];
-      QFont f(s->family);
-      f.setItalic(s->italic);
-      f.setUnderline(s->underline);
-      f.setBold(s->bold);
-//      f.setPointSizeF(s->size * DPI / 72.0);
-      f.setPointSizeF(s->size);
-      return f;
+      return textStyles[textStyle].font();
       }
 
 //---------------------------------------------------------
@@ -400,18 +396,16 @@ QFont Text::font() const
 void Text::draw1(Painter& p)
       {
       p.save();
-      p.setRenderHint(QPainter::Antialiasing, false);
+      p.setRenderHint(QPainter::Antialiasing, true);
       p.setFont(font());
-#if 1
+
+//      doc->documentLayout()->setPaintDevice(p.device());
       QAbstractTextDocumentLayout::PaintContext c;
       c.cursorPosition = editMode ? cursor->position() : -1;
       QColor color = p.pen().color();
       c.palette.setColor(QPalette::Text, color);
-
-//      QAbstractTextDocumentLayout* layout = doc->documentLayout();
-
       doc->documentLayout()->draw(&p, c);
-#endif
+
       p.restore();
       }
 

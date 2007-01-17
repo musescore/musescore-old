@@ -24,6 +24,8 @@
 #include "spatium.h"
 #include "utils.h"
 #include "painter.h"
+#include "mscore.h"
+#include "score.h"
 
 QVector<Sym> symbols(lastSym);
 
@@ -34,34 +36,27 @@ QVector<Sym> symbols(lastSym);
 Sym::Sym(const QString& name, const QChar& c, const QFont& f, const QPointF& o)
    : _code(c), _font(f), _name(name), _offset(o)
       {
-      updateBoundingRect();
-      }
-
-Sym::Sym()
-      {
-      _code = 0;
-      }
-
-void Sym::setOffset(QPointF& p)
-      {
-      _offset = p;
-      updateBoundingRect();
-      }
-
-void Sym::setCode(const QChar& c)
-      {
-      _code = c;
-      updateBoundingRect();
       }
 
 //---------------------------------------------------------
-//   updateBoundingRect
+//   bbox
 //---------------------------------------------------------
 
-void Sym::updateBoundingRect()
+const QRectF& Sym::bbox() const
       {
-      QFontMetricsF fm(_font);
-      _boundingRect = fm.boundingRect(_code).translated(_offset * _spatium);
+      _bbox = QFontMetricsF(_font,
+         mscore->currentScore()->scoreLayout()->paintDevice()).boundingRect(_code).translated(_offset * _spatium);
+      return _bbox;
+      }
+
+double Sym::width() const
+      {
+      return bbox().width();
+      }
+
+double Sym::height() const
+      {
+      return bbox().height();
       }
 
 //---------------------------------------------------------
@@ -109,6 +104,14 @@ int Sym::buildin(const QString& name)
 
 //---------------------------------------------------------
 //   initSymbols
+//    TODO: symbol size must change _spatium
+//          _spatium combines two values:
+//             - the natural spatium value of the used font
+//             - a user defined magnification factor
+//               (combination selected in "page settings" dialog)
+//          _spatium depends of the curren DPI drawing
+//          resolution which is different for display and
+//          printer.
 //---------------------------------------------------------
 
 void initSymbols()

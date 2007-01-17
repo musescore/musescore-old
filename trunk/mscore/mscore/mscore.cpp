@@ -1758,7 +1758,6 @@ void MuseScore::setCurrentScore(int idx)
             cs->setMag(canvas->mag());
             cs->setXoffset(canvas->xoffset());
             cs->setYoffset(canvas->yoffset());
-//            cs->setSpatium(_spatium);
             }
 
       cs = scoreList[idx];
@@ -1781,9 +1780,9 @@ void MuseScore::setCurrentScore(int idx)
 
       cs->setUpdateAll();
       cs->endCmd(false);
+      cs->doLayout();   // DEBUG1
 
       connect(cs, SIGNAL(selectionChanged(int)), SLOT(selectionChanged(int)));
-//      initSymbols();
       }
 
 //---------------------------------------------------------
@@ -2221,7 +2220,7 @@ int main(int argc, char* argv[])
       DPI  = appDpiX;         // drawing resolution
       DPMM = DPI / INCH;      // dots/mm
 
-      printf("dpi %f\n", DPI);
+      printf("dpi %f %d\n", DPI, appDpiY);
 
       int c;
       while ((c = getopt(argc, argv, "vdLsm")) != EOF) {

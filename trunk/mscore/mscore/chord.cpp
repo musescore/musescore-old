@@ -185,7 +185,7 @@ void Chord::add(Element* e)
             notes.add((Note*)e);
       else if (e->type() == ATTRIBUTE)
             attributes.push_back((NoteAttribute*)e);
-      bboxUpdate();
+//      bboxUpdate();   //DEBUG1
       }
 
 //---------------------------------------------------------
@@ -373,6 +373,7 @@ void Chord::layout()
       {
       if (notes.empty())
             return;
+      bboxUpdate();     //DEBUG1
       Note* upnote     = notes.back();
       double headWidth = upnote->headWidth();
 

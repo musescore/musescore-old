@@ -30,6 +30,7 @@
 #include "style.h"
 #include "layout.h"
 #include "timesig.h"
+#include "canvas.h"
 
 //---------------------------------------------------------
 //   ScoreLayout
@@ -37,10 +38,11 @@
 
 ScoreLayout::ScoreLayout()
       {
-      _spatium    = ::_spatium;
-      _pageFormat = 0;
-      _systems    = new SystemList;
-      _pages      = new PageList;
+      _spatium     = ::_spatium;
+      _pageFormat  = 0;
+      _systems     = new SystemList;
+      _pages       = new PageList;
+      _paintDevice = 0;
       }
 
 ScoreLayout::~ScoreLayout()
@@ -67,6 +69,7 @@ void ScoreLayout::setScore(Score* s)
       if (_pageFormat)
             delete _pageFormat;
       _pageFormat = new PageFormat;
+      _paintDevice = _score->canvas();
       }
 
 //---------------------------------------------------------
@@ -317,9 +320,9 @@ bool ScoreLayout::layoutPage(Page* page, Measure*& im, iSystem& is)
       page->layout();
 
       // usable width of page:
-      qreal w  = _pageFormat->width() * DPI - page->lm() - page->rm();
+      qreal w  = page->loWidth() - page->lm() - page->rm();
       qreal x  = page->lm();
-      qreal ey = page->height() - page->bm() - point(::style->staffLowerBorder);
+      qreal ey = page->loHeight() - page->bm() - point(::style->staffLowerBorder);
 
       page->systems()->clear();
       page->pel()->clear();
@@ -416,8 +419,6 @@ System* ScoreLayout::layoutSystem(Measure*& im, iSystem& is, qreal x, qreal y, q
       bool pageBreak = false;
       for (Measure* m = im; m; m = m->next()) {
             pageBreak = m->pageBreak();
-//            if (nm && m->lineBreak())
-//                  break;
 
             clearGenerated(m);
             m->setSystem(system);   // needed by m->layout()
