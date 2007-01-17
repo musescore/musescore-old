@@ -75,12 +75,12 @@ struct TextStyle {
       TextStyle(QString _name, QString _family, int _size,
          bool _bold, bool _italic, bool _underline,
          int _align, Anchor _anchor,
-         double _xoff, double _yoff, OffsetType _ot)
+         double _xoff, double _yoff, OffsetType _ot, bool sd = false)
          : name(_name), family(_family), size(_size), bold(_bold),
            italic(_italic), underline(_underline),
            align(_align), anchor(_anchor),
            xoff(_xoff), yoff(_yoff), offsetType(_ot),
-           sizeIsSpatiumDependent(true)
+           sizeIsSpatiumDependent(sd)
             {}
       TextStyle() {}
       void write(Xml&) const;

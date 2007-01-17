@@ -29,6 +29,7 @@ Style* style;
 //  72 points/inch   point size
 // 120 dpi           screen resolution
 //  spatium = 20/4 points
+
 double _spatium = 20.0 / 72.0 * 120.0 / 4.0;  // 8.33
 
 //---------------------------------------------------------
@@ -177,7 +178,15 @@ void setDefaultStyle()
 
 QFont TextStyle::font() const
       {
-      QFont f(family, size, bold ? QFont::Bold : QFont::Normal, italic);
+      double mag = ::_spatium / (spatiumBase20 * DPI);
+
+      double m = size;
+      if (sizeIsSpatiumDependent)
+            m *= mag;
+      QFont f(family);
+      f.setWeight(bold ? QFont::Bold : QFont::Normal);
+      f.setItalic(italic);
+      f.setPointSizeF(m);
       f.setUnderline(underline);
       return f;
       }

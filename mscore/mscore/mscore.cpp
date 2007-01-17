@@ -1039,7 +1039,7 @@ MuseScore::MuseScore()
       mainWindow->setLayout(layout);
       layout->setMargin(0);
       layout->setSpacing(0);
-      tab    = new TabBar;
+      tab = new TabBar;
       QHBoxLayout* hbox = new QHBoxLayout;
       hbox->addWidget(tab);
       hbox->addStretch(100);
@@ -1767,7 +1767,7 @@ void MuseScore::setCurrentScore(int idx)
       getAction("undo")->setEnabled(!cs->undoEmpty());
       getAction("redo")->setEnabled(!cs->redoEmpty());
 
-      _spatium = cs->spatium();
+      cs->setSpatium(cs->spatium());
       canvas->setMag(cs->mag());
       canvas->setXoffset(cs->xoffset());
       canvas->setYoffset(cs->yoffset());
@@ -2220,7 +2220,7 @@ int main(int argc, char* argv[])
       DPI  = appDpiX;         // drawing resolution
       DPMM = DPI / INCH;      // dots/mm
 
-      printf("dpi %f %d\n", DPI, appDpiY);
+      _spatium = 20.0 / 72.0 * DPI / 4.0;
 
       int c;
       while ((c = getopt(argc, argv, "vdLsm")) != EOF) {
@@ -2380,7 +2380,6 @@ int main(int argc, char* argv[])
       //  load scores
       //-------------------------------
 
-      initSymbols();
       genIcons();
       /*mscore =*/ new MuseScore();
 

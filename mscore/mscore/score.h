@@ -150,6 +150,7 @@ class Score : public QObject {
       void convertTrack(MidiTrack*, int);
       void preprocessTrack(MidiTrack*);
       void checkUndoOp();
+      void initSymbols();
 
    public:
       //---------------------------------------------------

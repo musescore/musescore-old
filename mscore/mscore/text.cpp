@@ -46,7 +46,8 @@ Text::Text(Score* s)
       setStyle(TEXT_STYLE_LYRIC);
       editMode = false;
       cursor = new QTextCursor(doc);
-      cursor->setPosition(0);
+      cursorPos = 0;
+      cursor->setPosition(cursorPos);
       }
 
 Text::Text(Score* s, int style)
@@ -57,7 +58,8 @@ Text::Text(Score* s, int style)
       setStyle(style);
       editMode = false;
       cursor = new QTextCursor(doc);
-      cursor->setPosition(0);
+      cursorPos = 0;
+      cursor->setPosition(cursorPos);
       }
 
 Text::Text(const Text& e)
@@ -66,6 +68,7 @@ Text::Text(const Text& e)
       doc       = e.doc->clone(0);
       editMode  = e.editMode;
       textStyle = e.textStyle;
+      cursorPos = e.cursorPos;
       cursor    = new QTextCursor(doc);
       cursor->setPosition(e.cursor->position());
       cursor->setCharFormat(e.cursor->charFormat());
@@ -269,7 +272,7 @@ void Text::read(QDomNode node)
 
 bool Text::startEdit(QMatrix&)
       {
-      cursor->setPosition(0);
+      cursor->setPosition(cursorPos);
 //      QTextCharFormat f = cursor->charFormat();
 //      QFont font(doc->defaultFont());
 //      f.setFont(font);
@@ -375,6 +378,7 @@ bool Text::edit(QKeyEvent* ev)
 
 void Text::endEdit()
       {
+      cursorPos = cursor->position();
       if (palette)
             palette->hide();
       editMode = false;
