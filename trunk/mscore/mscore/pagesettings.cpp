@@ -88,7 +88,7 @@ PageSettings::PageSettings(QWidget* parent)
       {
       setupUi(this);
       setModal(true);
-      preview = new PagePreview(0);
+      preview = new PagePreview;
       QHBoxLayout* ppLayout = new QHBoxLayout;
       ppLayout->addWidget(preview);
       previewGroup->setLayout(ppLayout);

@@ -70,8 +70,8 @@ Text::Text(const Text& e)
       textStyle = e.textStyle;
       cursorPos = e.cursorPos;
       cursor    = new QTextCursor(doc);
-      cursor->setPosition(e.cursor->position());
       cursor->setCharFormat(e.cursor->charFormat());
+      cursor->setPosition(e.cursor->position());
       }
 
 Text::~Text()
@@ -273,11 +273,12 @@ void Text::read(QDomNode node)
 bool Text::startEdit(QMatrix&)
       {
       cursor->setPosition(cursorPos);
-//      QTextCharFormat f = cursor->charFormat();
-//      QFont font(doc->defaultFont());
-//      f.setFont(font);
-//      cursor->setCharFormat(f);
-
+#if 0
+      QTextCharFormat f = cursor->charFormat();
+      QFont font(doc->defaultFont());
+      f.setFont(font);
+      cursor->setCharFormat(f);
+#endif
       editMode = true;
       if (palette)
             palette->setCharFormat(cursor->charFormat());

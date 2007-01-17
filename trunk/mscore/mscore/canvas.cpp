@@ -314,6 +314,8 @@ void Canvas::mousePressEvent(QMouseEvent* ev)
 
 void Canvas::mouseDoubleClickEvent(QMouseEvent* ev)
       {
+      if (state == EDIT)
+            return;
       Element* element = _score->dragObject();
       if (element) {
             _score->startCmd();

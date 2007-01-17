@@ -76,9 +76,8 @@ void Navigator::setScore(Score* s)
       {
       redraw  = true;
       _score  = s;
-      qreal m = (height()-10.0) / _score->pageFormat()->height();
-      matrix.setMatrix(m, matrix.m12(), matrix.m21(),
-         m * qreal(appDpiY)/qreal(appDpiX), 5, 5);
+      qreal m = (height()-10.0) / (_score->pageFormat()->height() * DPI);
+      matrix.setMatrix(m, matrix.m12(), matrix.m21(), m, 5, 5);
       }
 
 //---------------------------------------------------------
