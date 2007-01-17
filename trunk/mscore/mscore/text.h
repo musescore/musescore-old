@@ -33,6 +33,7 @@ extern TextPalette* palette;
 class Text : public Element {
       QTextCursor* cursor;
       bool editMode;
+      int cursorPos;
 
    protected:
       QTextDocument* doc;

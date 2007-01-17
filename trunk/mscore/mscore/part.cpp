@@ -83,7 +83,7 @@ void Part::read(Score* score, QDomNode node)
                   _shortName = val; // .read(node);
             else if (tag == "trackName") {
                   _trackName = val;
-printf("trackName <%s>\n", val.toLocal8Bit().data());
+//printf("trackName <%s>\n", val.toLocal8Bit().data());
                   }
             else
                   printf("Mscore:Part: unknown tag %s\n", tag.toLocal8Bit().data());

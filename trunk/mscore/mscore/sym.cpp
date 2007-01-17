@@ -114,14 +114,16 @@ int Sym::buildin(const QString& name)
 //          printer.
 //---------------------------------------------------------
 
-void initSymbols()
+void Score::initSymbols()
       {
+      double mag = spatium() / (spatiumBase20 * DPI);
+
       QFont f1("emmentaler");
-      f1.setPointSizeF(20.0);
+      f1.setPointSizeF(20.0 * mag);
       QFont f3("emmentaler");
-      f3.setPointSizeF(14.0);
+      f3.setPointSizeF(14.0 * mag);
       QFont f4("Times New Roman");
-      f4.setPointSizeF(8.0);
+      f4.setPointSizeF(8.0 * mag);
 
       symbols[clefEightSym] = Sym("clef eight", 0x38, f4);
       symbols[clefOneSym]   = Sym("clef one",   0x31, f4);

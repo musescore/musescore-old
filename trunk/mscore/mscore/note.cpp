@@ -322,7 +322,7 @@ void Note::remove(Element* el)
 
 QPointF Note::stemPos(bool upFlag) const
       {
-      double sw = point(style->stemWidth);
+      double sw = point(style->stemWidth) * .5;
       double x = pos().x();
       double y = pos().y();
 
@@ -334,7 +334,7 @@ QPointF Note::stemPos(bool upFlag) const
             y -= _spatium * .2;
             }
       else {
-            x += sw * .5;
+            x += sw;
             y += _spatium * .2;
             }
       return QPointF(x + xo, y);
