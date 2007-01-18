@@ -22,6 +22,18 @@
 #include "icons.h"
 #include "text.h"
 #include "sym.h"
+#include "style.h"
+
+static SymCode pSymbols[] = {
+      SymCode(0xe10e, TEXT_STYLE_DYNAMICS1),    // sharp
+      SymCode(0xe112, TEXT_STYLE_DYNAMICS1),    // flat
+      SymCode(0xe102, TEXT_STYLE_DYNAMICS1),    // note2_Sym
+      SymCode(0xe0fc, TEXT_STYLE_DYNAMICS1),    // note4_Sym
+      SymCode(0xe0f8, TEXT_STYLE_DYNAMICS1),    // note8_Sym
+      SymCode(0xe0f9, TEXT_STYLE_DYNAMICS1),    // note16_Sym
+      SymCode(0xe0fa, TEXT_STYLE_DYNAMICS1),    // note32_Sym
+      SymCode(0xe0fb, TEXT_STYLE_DYNAMICS1),    // note64_Sym
+      };
 
 //---------------------------------------------------------
 //   TextPalette
@@ -31,13 +43,18 @@ TextPalette::TextPalette(QWidget* parent)
    : QWidget(parent)
       {
       setupUi(this);
+      QGridLayout* gl = new QGridLayout;
+      symbolBox->setLayout(gl);
       QButtonGroup* sg = new QButtonGroup(this);
-      symSharp->setIcon(sharpIcon);
-      sg->addButton(symSharp, sharpSym);
-      symFlat->setIcon(flatIcon);
-      sg->addButton(symFlat, flatSym);
-      connect(sg, SIGNAL(buttonClicked(int)), SLOT(symbolClicked(int)));
 
+      for (unsigned i = 0; i < sizeof(pSymbols)/sizeof(*pSymbols); ++i) {
+            QIcon icon = symIcon(pSymbols[i], 20);
+            QToolButton* tb = new QToolButton;
+            tb->setIcon(icon);
+            gl->addWidget(tb, i / 8, i % 8);
+            sg->addButton(tb, i);
+            }
+      connect(sg, SIGNAL(buttonClicked(int)), SLOT(symbolClicked(int)));
       connect(typefaceSize, SIGNAL(valueChanged(double)), SLOT(sizeChanged(double)));
       connect(typefaceBold, SIGNAL(clicked(bool)), SLOT(boldClicked(bool)));
       connect(typefaceItalic, SIGNAL(clicked(bool)), SLOT(italicClicked(bool)));
@@ -50,7 +67,7 @@ TextPalette::TextPalette(QWidget* parent)
 
 void TextPalette::symbolClicked(int n)
       {
-      _textElement->addSymbol(n);
+      _textElement->addSymbol(pSymbols[n]);
       }
 
 //---------------------------------------------------------

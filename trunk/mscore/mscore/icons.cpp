@@ -63,17 +63,17 @@ QIcon printIcon, clefIcon;
 //   symPixmap
 //---------------------------------------------------------
 
-static QIcon symIcon(QChar code, int size = 20)
+QIcon symIcon(const SymCode& sc, int size)
       {
       int width  = ICON_WIDTH;
       int height = ICON_HEIGHT;
 
-      TextStyle* s = &textStyles[TEXT_STYLE_SYMBOL1];
+      TextStyle* s = &textStyles[sc.style];
       QFont f(s->family);
       f.setPixelSize(size);
 
       QFontMetricsF fm(f);
-      QRectF bb(fm.boundingRect(code));
+      QRectF bb(fm.boundingRect(sc.code));
 
       qreal w   = bb.width();
       qreal h   = bb.height();
@@ -87,34 +87,32 @@ static QIcon symIcon(QChar code, int size = 20)
       painter.setFont(f);
       painter.setRenderHint(QPainter::TextAntialiasing, true);
       painter.setPen(QPen(QColor(0, 0, 0, 255)));
-      painter.drawText(QPointF(x, y), code);
+      painter.drawText(QPointF(x, y), sc.code);
       painter.end();
       return QIcon(QPixmap::fromImage(image));
       }
 
-enum {
-      wholehead_Sym       = 0xe11b,
-      halfhead_Sym       = 0xe11c,
-      note4_Sym          = 0xe0fc,
-      note8_Sym          = 0xe0f8,
-      note16_Sym         = 0xe0f9,
-      note32_Sym         = 0xe0fa,
-      note64_Sym         = 0xe0fb,
-      natural_Sym        = 0xe111,
-      sharp_Sym          = 0xe10e,
-      sharpsharp_Sym     = 0xe116,
-      flat_Sym           = 0xe112,
-      flatflat_Sym       = 0xe114,
-      quartrest_Sym      = 0xe107,
-      dot_Sym            = 0xe119,
-      dotdot_Sym         = 0xe0fd,
-      sforzatoaccent_Sym = 0xe151,
-      staccato_Sym       = 0xe153,
-      tenuto_Sym         = 0xe156,
-      plus_Sym           = 0x2b,
-      trebleclef_Sym     = 0xe18d,
-      flip_Sym           = 0xe0fd
-      };
+SymCode wholehead_Sym      (0xe11b, TEXT_STYLE_DYNAMICS1);
+SymCode note2_Sym          (0xe102, TEXT_STYLE_DYNAMICS1);
+SymCode note4_Sym          (0xe0fc, TEXT_STYLE_DYNAMICS1);
+SymCode note8_Sym          (0xe0f8, TEXT_STYLE_DYNAMICS1);
+SymCode note16_Sym         (0xe0f9, TEXT_STYLE_DYNAMICS1);
+SymCode note32_Sym         (0xe0fa, TEXT_STYLE_DYNAMICS1);
+SymCode note64_Sym         (0xe0fb, TEXT_STYLE_DYNAMICS1);
+SymCode natural_Sym        (0xe111, TEXT_STYLE_DYNAMICS1);
+SymCode sharp_Sym          (0xe10e, TEXT_STYLE_DYNAMICS1);
+SymCode sharpsharp_Sym     (0xe116, TEXT_STYLE_DYNAMICS1);
+SymCode flat_Sym           (0xe112, TEXT_STYLE_DYNAMICS1);
+SymCode flatflat_Sym       (0xe114, TEXT_STYLE_DYNAMICS1);
+SymCode quartrest_Sym      (0xe107, TEXT_STYLE_DYNAMICS1);
+SymCode dot_Sym            (0xe119, TEXT_STYLE_DYNAMICS1);
+SymCode dotdot_Sym         (0xe0fd, TEXT_STYLE_DYNAMICS1);
+SymCode sforzatoaccent_Sym (0xe151, TEXT_STYLE_SYMBOL1);
+SymCode staccato_Sym       (0xe153, TEXT_STYLE_SYMBOL1);
+SymCode tenuto_Sym         (0xe156, TEXT_STYLE_SYMBOL1);
+SymCode plus_Sym           (0x2b,   TEXT_STYLE_SYMBOL1);
+SymCode trebleclef_Sym     (0xe18d, TEXT_STYLE_DYNAMICS1);
+SymCode flip_Sym           (0xe0fd, TEXT_STYLE_DYNAMICS1);
 
 //---------------------------------------------------------
 //   genIcons
@@ -124,7 +122,7 @@ enum {
 void genIcons()
       {
       noteIcon           = symIcon(wholehead_Sym);
-      note2Icon          = symIcon(halfhead_Sym);
+      note2Icon          = symIcon(note2_Sym);
       note4Icon          = symIcon(note4_Sym);
       note8Icon          = symIcon(note8_Sym);
       note16Icon         = symIcon(note16_Sym);
@@ -142,7 +140,7 @@ void genIcons()
       staccatoIcon       = symIcon(staccato_Sym);
       tenutoIcon         = symIcon(tenuto_Sym);
       plusIcon           = symIcon(plus_Sym);
-      clefIcon           = symIcon(trebleclef_Sym, 14);
+      clefIcon           = symIcon(trebleclef_Sym, 17);
 
       static const char* vtext[VOICES] = { "1","2","3","4" };
       for (int i = 0; i < VOICES; ++i) {

@@ -24,6 +24,8 @@
 #include "element.h"
 
 class TextPalette;
+struct SymCode;
+
 extern TextPalette* palette;
 
 //---------------------------------------------------------
@@ -65,13 +67,15 @@ class Text : public Element {
 
       virtual bool startEdit(QMatrix&);
       virtual bool edit(QKeyEvent*);
-      void addSymbol(int);
+      void addSymbol(const SymCode&);
       void setCharFormat(QTextCharFormat);
       virtual void endEdit();
       virtual bool isMovable() const { return true; }
       virtual void write(Xml& xml) const;
-      void write(Xml& xml, const char*) const;
+      virtual void write(Xml& xml, const char*) const;
       virtual void read(QDomNode);
+      void writeProperties(Xml& xml) const;
+      bool readProperties(QDomNode node);
       virtual void layout();
       virtual const QRectF& bbox() const;
       };
@@ -143,10 +147,16 @@ class InstrumentName2 : public Text {
 //---------------------------------------------------------
 
 class TempoText : public Text  {
+      double _tempo;     // bpm
+
    public:
       TempoText(Score*);
       virtual TempoText* clone() const { return new TempoText(*this); }
       virtual ElementType type() const { return TEMPO_TEXT; }
+      double tempo() const    { return _tempo; }
+      void setTempo(double v) { _tempo = v; }
+      virtual void write(Xml& xml) const;
+      virtual void read(QDomNode);
       };
 
 #endif

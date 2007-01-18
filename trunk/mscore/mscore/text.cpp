@@ -228,12 +228,7 @@ void Text::write(Xml& xml, const char* name) const
       if (doc->isEmpty())
             return;
       xml.stag(name);
-      xml.tag("style", textStyle);
-
-      QString s = doc->toHtml("utf8");
-      xml.tag("data", s);
-
-      Element::writeProperties(xml);
+      writeProperties(xml);
       xml.etag(name);
       }
 
@@ -243,27 +238,51 @@ void Text::write(Xml& xml, const char* name) const
 
 void Text::read(QDomNode node)
       {
+      for (node = node.firstChild(); !node.isNull(); node = node.nextSibling()) {
+            if (!node.isElement())
+                  continue;
+            if (!readProperties(node))
+                  domError(node);
+            }
+      }
+
+//---------------------------------------------------------
+//   writeProperties
+//---------------------------------------------------------
+
+void Text::writeProperties(Xml& xml) const
+      {
+      xml.tag("style", textStyle);
+      QString s = doc->toHtml("utf8");
+      xml.tag("data", s);
+      Element::writeProperties(xml);
+      }
+
+//---------------------------------------------------------
+//   readProperties
+//---------------------------------------------------------
+
+bool Text::readProperties(QDomNode node)
+      {
       cursor->setPosition(0);
       QTextCharFormat f = cursor->charFormat();
       f.setFont(doc->defaultFont());
       cursor->setCharFormat(f);
-      for (node = node.firstChild(); !node.isNull(); node = node.nextSibling()) {
-            if (!node.isElement())
-                  continue;
-            QDomElement e = node.toElement();
-            QString tag(e.tagName());
-            QString val(e.text());
-            if (tag == "data")
-                  doc->setHtml(val);
-            else if (tag == "style")
-                  textStyle = val.toInt();
-            else if (Element::readProperties(node))
-                  ;
-            else
-                  domError(node);
-            }
+      QDomElement e = node.toElement();
+      if (e.isNull())
+            return true;
+      QString tag(e.tagName());
+      QString val(e.text());
+
+      if (tag == "style")
+            textStyle = val.toInt();
+      else if (tag == "data")
+            doc->setHtml(val);
+      else
+            return false;
       cursor->setPosition(0);
       layout();
+      return true;
       }
 
 //---------------------------------------------------------
@@ -404,7 +423,6 @@ void Text::draw1(Painter& p)
       p.setRenderHint(QPainter::Antialiasing, true);
       p.setFont(font());
 
-//      doc->documentLayout()->setPaintDevice(p.device());
       QAbstractTextDocumentLayout::PaintContext c;
       c.cursorPosition = editMode ? cursor->position() : -1;
       QColor color = p.pen().color();
@@ -428,14 +446,16 @@ double Text::lineSpacing() const
 //   addSymbol
 //---------------------------------------------------------
 
-void Text::addSymbol(int n)
+void Text::addSymbol(const SymCode& s)
       {
-printf("Text: addSymbol(%x)\n", n);
+// printf("Text: addSymbol(%x)\n", s.code);
       QTextCharFormat oFormat = cursor->charFormat();
       QTextCharFormat nFormat(oFormat);
-      nFormat.setFontFamily(symbols[n].font().family());
+      if (s.style >= 0)
+            nFormat.setFontFamily(textStyles[s.style].font().family());
       cursor->setCharFormat(nFormat);
-      cursor->insertText(QString(symbols[n].code()));
+//      QString str(s.code);
+      cursor->insertText(s.code);
       cursor->setCharFormat(oFormat);
       score()->layout();
       score()->endCmd(false);
@@ -557,5 +577,39 @@ InstrumentName2::InstrumentName2(Score* s)
 TempoText::TempoText(Score* s)
    : Text(s, TEXT_STYLE_TEMPO)
       {
+      _tempo = 120.0;
+      }
+
+//---------------------------------------------------------
+//   write
+//---------------------------------------------------------
+
+void TempoText::write(Xml& xml) const
+      {
+      xml.stag("Tempo");
+      xml.tag("tempo", _tempo);
+      Text::writeProperties(xml);
+      xml.etag("Tempo");
+      }
+
+//---------------------------------------------------------
+//   read
+//---------------------------------------------------------
+
+void TempoText::read(QDomNode node)
+      {
+      for (node = node.firstChild(); !node.isNull(); node = node.nextSibling()) {
+            if (!node.isElement())
+                  continue;
+            QDomElement e = node.toElement();
+            QString tag(e.tagName());
+            if (tag == "tempo")
+                  setTempo(e.text().toDouble());
+            else if (Text::readProperties(node))
+                  ;
+            else
+                  domError(node);
+            }
+      layout();
       }
 

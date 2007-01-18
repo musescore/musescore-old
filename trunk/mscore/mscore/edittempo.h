@@ -30,14 +30,14 @@
 class EditTempo : public QDialog, private Ui::EditTempoBase {
       Q_OBJECT
       QString _text;
-      int _bpm;
+      double _bpm;
 
    private slots:
       void selectTempo(int);
 
    public:
       EditTempo(QWidget* parent);
-      int bpm() const { return _bpm; }
+      double bpm() const { return _bpm; }
       QString text() const { return _text; }
       };
 

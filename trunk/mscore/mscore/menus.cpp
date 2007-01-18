@@ -632,14 +632,15 @@ void Score::addTempo()
             editTempo = new EditTempo(0);
       int rv = editTempo->exec();
       if (rv == 1) {
-            int bpm = editTempo->bpm();
-            printf("tempo at %d(%s)  %s %d\n",
-               e->tick(), e->name(), editTempo->text().toLatin1().data(), editTempo->bpm());
+            double bpm = editTempo->bpm();
+printf("tempo at %d(%s)  %s %f\n",
+   e->tick(), e->name(), editTempo->text().toLatin1().data(), editTempo->bpm());
             tempomap->addTempo(tick, int(60000000.0/double(bpm)));
             TempoText* tt = new TempoText(this);
             tt->setTick(tick);
             tt->setStaff(e->staff());
             tt->setText(editTempo->text());
+            tt->setTempo(bpm);
             tt->setParent(m);
             startCmd();
             cmdAdd(tt);

@@ -22,7 +22,7 @@
 
 struct TempoVal {
       const char* name;
-      int bpm;
+      double bpm;
       };
 
 static TempoVal tempos[] = {
@@ -59,7 +59,7 @@ static TempoVal tempos[] = {
       { "Bewegt",        100 },
       { "Langsam",        60 },
       { "Lebhaft",       120 },
-      { "M‰ﬂig",         100 },
+      { "M‰ig",         100 },
       { "Schnell",       120 },
       };
 
