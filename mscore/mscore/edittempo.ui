@@ -1,7 +1,4 @@
 <ui version="4.0" >
- <author></author>
- <comment></comment>
- <exportmacro></exportmacro>
  <class>EditTempoBase</class>
  <widget class="QDialog" name="EditTempoBase" >
   <property name="geometry" >
@@ -50,16 +47,6 @@
       </size>
      </property>
     </spacer>
-   </item>
-   <item row="1" column="2" >
-    <widget class="QSpinBox" name="tempoBPM" >
-     <property name="maximum" >
-      <number>350</number>
-     </property>
-     <property name="minimum" >
-      <number>3</number>
-     </property>
-    </widget>
    </item>
    <item row="1" column="1" >
     <widget class="QLabel" name="label_2" >
@@ -121,9 +108,21 @@
      </item>
     </layout>
    </item>
+   <item row="1" column="2" >
+    <widget class="QDoubleSpinBox" name="tempoBPM" >
+     <property name="decimals" >
+      <number>1</number>
+     </property>
+     <property name="maximum" >
+      <double>400.000000000000000</double>
+     </property>
+     <property name="minimum" >
+      <double>10.000000000000000</double>
+     </property>
+    </widget>
+   </item>
   </layout>
  </widget>
- <pixmapfunction></pixmapfunction>
  <resources/>
  <connections>
   <connection>

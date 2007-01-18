@@ -649,6 +649,13 @@ void Measure::read(QDomNode node, int idx)
                   t->read(node);
                   add(t);
                   }
+            else if (tag == "Tempo") {
+                  TempoText* t = new TempoText(score());
+                  t->setTick(curTickPos);
+                  t->setStaff(staff);
+                  t->read(node);
+                  add(t);
+                  }
             else if (tag == "Symbol") {
                   Symbol* sym = new Symbol(score());
                   sym->setTick(curTickPos);
