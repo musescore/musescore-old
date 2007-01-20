@@ -92,7 +92,7 @@ QIcon symIcon(const SymCode& sc, int size)
       return QIcon(QPixmap::fromImage(image));
       }
 
-SymCode wholehead_Sym      (0xe11b, TEXT_STYLE_DYNAMICS1);
+SymCode wholehead_Sym      (0xe103, TEXT_STYLE_DYNAMICS1);
 SymCode note2_Sym          (0xe102, TEXT_STYLE_DYNAMICS1);
 SymCode note4_Sym          (0xe0fc, TEXT_STYLE_DYNAMICS1);
 SymCode note8_Sym          (0xe0f8, TEXT_STYLE_DYNAMICS1);
@@ -128,18 +128,18 @@ void genIcons()
       note16Icon         = symIcon(note16_Sym);
       note32Icon         = symIcon(note32_Sym);
       note64Icon         = symIcon(note64_Sym);
-      naturalIcon        = symIcon(natural_Sym);
-      sharpIcon          = symIcon(sharp_Sym);
-      sharpsharpIcon     = symIcon(sharpsharp_Sym);
-      flatIcon           = symIcon(flat_Sym);
-      flatflatIcon       = symIcon(flatflat_Sym);
-      quartrestIcon      = symIcon(quartrest_Sym);
-      dotIcon            = symIcon(dot_Sym);
-      dotdotIcon         = symIcon(dotdot_Sym);
+      naturalIcon        = symIcon(natural_Sym, 30);
+      sharpIcon          = symIcon(sharp_Sym, 30);
+      sharpsharpIcon     = symIcon(sharpsharp_Sym, 30);
+      flatIcon           = symIcon(flat_Sym, 30);
+      flatflatIcon       = symIcon(flatflat_Sym, 30);
+      quartrestIcon      = symIcon(quartrest_Sym, 30);
+      dotIcon            = symIcon(dot_Sym, 30);
+      dotdotIcon         = symIcon(dotdot_Sym, 30);
       sforzatoaccentIcon = symIcon(sforzatoaccent_Sym);
       staccatoIcon       = symIcon(staccato_Sym);
       tenutoIcon         = symIcon(tenuto_Sym);
-      plusIcon           = symIcon(plus_Sym);
+      plusIcon           = symIcon(plus_Sym, 30);
       clefIcon           = symIcon(trebleclef_Sym, 17);
 
       static const char* vtext[VOICES] = { "1","2","3","4" };

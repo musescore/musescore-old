@@ -21,6 +21,7 @@
 #ifndef __GLOBALS_H__
 #define __GLOBALS_H__
 
+static const qreal SRM  = 1;        // screen render magnification
 static const qreal INCH = 25.4;
 static const qreal PPI  = 72.0;     // printer points per inch
 

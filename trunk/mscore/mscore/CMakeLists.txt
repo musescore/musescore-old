@@ -102,7 +102,6 @@ add_executable ( mscore
       alsa.cpp
       barline.cpp
       beam.cpp
-      binreloc.cpp
       bracket.cpp
       canvas.cpp
       chord.cpp

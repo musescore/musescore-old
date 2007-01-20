@@ -150,7 +150,6 @@ class Score : public QObject {
       void convertTrack(MidiTrack*, int);
       void preprocessTrack(MidiTrack*);
       void checkUndoOp();
-      void initSymbols();
 
    public:
       //---------------------------------------------------
@@ -410,6 +409,7 @@ class Score : public QObject {
 
       void cmd(const QString&);
       Element* editElement() const { return editObject; }
+      void initSymbols();
       };
 
 extern void setPadState(Element*);

@@ -1771,6 +1771,7 @@ void MuseScore::setCurrentScore(int idx)
       canvas->setMag(cs->mag());
       canvas->setXoffset(cs->xoffset());
       canvas->setYoffset(cs->yoffset());
+      cs->initSymbols();
 
       setWindowTitle("MuseScore: " + cs->projectName());
       canvas->setScore(cs);
@@ -2217,7 +2218,7 @@ int main(int argc, char* argv[])
       appDpiX = QX11Info::appDpiX();
       appDpiY = QX11Info::appDpiY();
 #endif
-      DPI  = appDpiX;         // drawing resolution
+      DPI  = appDpiX * SRM;     // drawing resolution
       DPMM = DPI / INCH;      // dots/mm
 
       _spatium = 20.0 / 72.0 * DPI / 4.0;
