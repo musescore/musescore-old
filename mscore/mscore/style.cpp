@@ -30,7 +30,7 @@ Style* style;
 // 120 dpi           screen resolution
 //  spatium = 20/4 points
 
-double _spatium = 20.0 / 72.0 * 120.0 / 4.0;  // 8.33
+double _spatium;
 
 //---------------------------------------------------------
 //   textStyles
@@ -180,7 +180,7 @@ QFont TextStyle::font() const
       {
       double mag = ::_spatium / (spatiumBase20 * DPI);
 
-      double m = size;
+      double m = size * SRM;
       if (sizeIsSpatiumDependent)
             m *= mag;
       QFont f(family);

@@ -40,12 +40,23 @@ Sym::Sym(const QString& name, const QChar& c, const QFont& f, const QPointF& o)
 
 //---------------------------------------------------------
 //   bbox
+//    BUG:
+//      Due to unknown reasons i cannot get the right font
+//      metrics from Qt.
+//      The problem is that the floating point metrics
+//      of Qt are the same as the integer metrics (rounded
+//      down to screen resolution). This makes no sense.
+//      Painting with float accuracy does not work well.
+//
+//      Qt4.3 delivers slightly different font metrics than
+//      Qt4.2.2
 //---------------------------------------------------------
 
 const QRectF& Sym::bbox() const
       {
       _bbox = QFontMetricsF(_font,
          mscore->currentScore()->scoreLayout()->paintDevice()).boundingRect(_code).translated(_offset * _spatium);
+      _bbox.setWidth(_bbox.width());
       return _bbox;
       }
 
@@ -116,7 +127,7 @@ int Sym::buildin(const QString& name)
 
 void Score::initSymbols()
       {
-      double mag = spatium() / (spatiumBase20 * DPI);
+      double mag = spatium() / (spatiumBase20 * DPI) * SRM;
 
       QFont f1("emmentaler");
       f1.setPointSizeF(20.0 * mag);
@@ -342,5 +353,22 @@ void Score::initSymbols()
       symbols[note32Sym]                  = Sym("note 1/32",  0xe0fa, f1);
       symbols[note64Sym]                  = Sym("note 1/64",  0xe0fb, f1);
       symbols[dotdotSym]                  = Sym("dot dot",    0xe0fd, f1);
+
+#if 0
+// some debug output
+//      Sym* s = &symbols[clefEightSym];
+      Sym* s = &symbols[quartheadSym];
+      QFontMetricsF fm(s->font(), scoreLayout()->paintDevice());
+      printf("screen metrics:  quart  l %f  w %f(%f) r %f\n",
+         fm.leftBearing(s->code()), fm.width(s->code()), s->width(), fm.rightBearing(s->code()));
+
+      QPrinter printer(QPrinter::HighResolution);
+      QFontMetricsF nfm(s->font(), &printer);
+      printf("printer metrics: quart  l %f  w %f(%f) r %f\n",
+         nfm.leftBearing(s->code()),
+         nfm.width(s->code()),
+         nfm.boundingRect(s->code()).width(),
+         nfm.rightBearing(s->code()));
+#endif
       }
 
