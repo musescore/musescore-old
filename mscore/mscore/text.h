@@ -22,29 +22,43 @@
 #define __TEXT_H__
 
 #include "element.h"
+#include "style.h"
 
 class TextPalette;
 struct SymCode;
 
 extern TextPalette* palette;
 
+enum {
+      TEXT_TITLE, TEXT_SUBTITLE, TEXT_COMPOSER, TEXT_POET,
+      TEXT_TRANSLATOR, TEXT_MEASURE_NUMBER,
+      TEXT_PAGE_NUMBER_ODD, TEXT_PAGE_NUMBER_EVEN,
+      TEXT_COPYRIGHT, TEXT_FINGERING,
+      TEXT_INSTRUMENT_LONG,
+      TEXT_INSTRUMENT_SHORT,
+      TEXT_TEMPO, TEXT_LYRIC
+      };
+
 //---------------------------------------------------------
 //   Text
 //---------------------------------------------------------
 
 class Text : public Element {
-      QTextCursor* cursor;
+      int _align;
+      double _xoff, _yoff;
+      Anchor _anchor;
+      OffsetType _offsetType;
+      bool _sizeIsSpatiumDependent;        // size depends on _spatium unit
+
       bool editMode;
       int cursorPos;
 
    protected:
       QTextDocument* doc;
-      int textStyle;
-      QFont font() const;
+      QTextCursor* cursor;
 
    public:
       Text(Score*);
-      Text(Score*, int style);
       Text(const Text&);
 
       virtual ~Text();
@@ -53,22 +67,26 @@ class Text : public Element {
       virtual Text* clone() const { return new Text(*this); }
       virtual ElementType type() const { return TEXT; }
 
+      virtual const QString subtypeName() const;
+      virtual void setSubtype(int val);
+      virtual void setSubtype(const QString& s);
+
       void setText(const QString& s);
       QString getText() const;
 
-      double lineSpacing() const;
       virtual void resetMode();
+      Anchor anchor() const { return _anchor; }
 
       bool isEmpty() const;
       void setStyle(int n);
-      int style() const           { return textStyle; }
 
       virtual void draw1(Painter&);
 
       virtual bool startEdit(QMatrix&);
       virtual bool edit(QKeyEvent*);
       void addSymbol(const SymCode&);
-      void setCharFormat(QTextCharFormat);
+      void setCharFormat(const QTextCharFormat&);
+      void setBlockFormat(const QTextBlockFormat&);
       virtual void endEdit();
       virtual bool isMovable() const { return true; }
       virtual void write(Xml& xml) const;

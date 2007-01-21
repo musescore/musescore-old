@@ -104,7 +104,7 @@ void Part::write(Xml& xml) const
       if (!_longName.isEmpty())
             xml.tag("name", _longName); // .write(xml, "name");
       if (!_shortName.isEmpty())
-            xml.tag("shortName", _shortName); // .write(xml, "shortName");
+            xml.tag("shortName", _shortName);
       _instrument.write(xml);
       xml.etag("Part");
       }

@@ -68,9 +68,9 @@ struct TextStyle {
       bool underline;
       int align;
       Anchor anchor;
-      double xoff, yoff;            // inch or spatium
+      double xoff, yoff;                  // inch or spatium
       OffsetType offsetType;
-      bool sizeIsSpatiumDependent;    // size depends on _spatium unit
+      bool sizeIsSpatiumDependent;        // size depends on _spatium unit
 
       TextStyle(QString _name, QString _family, int _size,
          bool _bold, bool _italic, bool _underline,
@@ -86,8 +86,8 @@ struct TextStyle {
       void write(Xml&) const;
       void read(QDomNode);
       QFont font() const;
-      QRectF bbox(const QString&) const;
-      QFontMetricsF fontMetrics() const;
+      QRectF bbox(const QString& s) const { return fontMetrics().boundingRect(s); }
+      QFontMetricsF fontMetrics() const   { return QFontMetricsF(font()); }
       };
 
 typedef std::vector<TextStyle> TextStyleList;

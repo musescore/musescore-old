@@ -467,7 +467,7 @@ void Score::setRest(int tick, Staff* st, int voice, int len)
 //   cmdAddText
 //---------------------------------------------------------
 
-void Score::cmdAddText(int style)
+void Score::cmdAddText(int subtype)
       {
       if (editObject) {
             endEdit();
@@ -486,8 +486,9 @@ void Score::cmdAddText(int style)
             }
       Measure* measure = ml->front();
 
-      Text* s = new Text(this, style);
-      s->setText(textStyles[style].name);
+      Text* s = new Text(this);
+      s->setSubtype(subtype);
+      s->setText(s->subtypeName());
 
       startCmd();
       s->setAnchor(measure);
@@ -505,7 +506,8 @@ void Score::cmdAddText(int style)
 
 void Score::cmdAddTitle()
       {
-      cmdAddText(TEXT_STYLE_TITLE);
+printf("add title\n");
+      cmdAddText(TEXT_TITLE);
       }
 
 //---------------------------------------------------------
@@ -514,7 +516,7 @@ void Score::cmdAddTitle()
 
 void Score::cmdAddSubTitle()
       {
-      cmdAddText(TEXT_STYLE_SUBTITLE);
+      cmdAddText(TEXT_SUBTITLE);
       }
 
 //---------------------------------------------------------
@@ -523,7 +525,7 @@ void Score::cmdAddSubTitle()
 
 void Score::cmdAddComposer()
       {
-      cmdAddText(TEXT_STYLE_COMPOSER);
+      cmdAddText(TEXT_COMPOSER);
       }
 
 //---------------------------------------------------------
@@ -532,7 +534,7 @@ void Score::cmdAddComposer()
 
 void Score::cmdAddPoet()
       {
-      cmdAddText(TEXT_STYLE_POET);
+      cmdAddText(TEXT_POET);
       }
 
 //---------------------------------------------------------

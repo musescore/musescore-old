@@ -1,3 +1,8 @@
+21.1.7 (ws)
+      - more text changes
+20.1.7 (ws)
+      - integrate TextStyle() parameters into Text(). Use TextStyle()
+        only to initialize Text().
 16.1.7 (ws)
       - Use point size instead of pixel size for fonts. This fixes
         some text entry bugs. This destroys printing and has some

@@ -1,7 +1,8 @@
-<?xml version="1.0" encoding="ISO-8859-1"?>
+<?xml version="1.0" encoding="utf8"?>
 <museScore version="1.0">
   <Geometry x="652" y="0" w="1020" h="951" />
   <Spatium>2</Spatium>
+  <Division>384</Division>
   <Mag>1</Mag>
   <xoff>23</xoff>
   <yoff>34</yoff>
@@ -114,19 +115,27 @@
       </Instrument>
     </Part>
   <Staff id="1">
-    <Measure number="1" tick="0">
-      <work-title>
-        <data>Tuple-Test</data>
-        <style>2</style>
-        </work-title>
-      <Bar>
-        </Bar>
-      <Tuplet id="0">
+    <Measure number="1">
+      <BarLine/>
+      <Tuplet id="%d">
         <hasNumber>1</hasNumber>
-        <hasLine>1</hasLine>
+        <hasLine>0</hasLine>
         <baseLen>192</baseLen>
         <normalNotes>2</normalNotes>
         <actualNotes>3</actualNotes>
+        <Number>
+          <align>36</align>
+          <xoffset>0</xoffset>
+          <yoffset>0</yoffset>
+          <anchor>note</anchor>
+          <offsetType>spatium</offsetType>
+          <spatiumSizeDependent>0</spatiumSizeDependent>
+          <data>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-size:8pt; font-weight:400; font-style:normal; text-decoration:none;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;3&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
+          <subtype>Fingering</subtype>
+          </Number>
         </Tuplet>
       <Chord>
         <ticklen>128</ticklen>
@@ -136,7 +145,6 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>128</tick>
         <ticklen>128</ticklen>
         <Tuplet>0</Tuplet>
         <Note>
@@ -144,7 +152,6 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>256</tick>
         <ticklen>128</ticklen>
         <Tuplet>0</Tuplet>
         <Note>
@@ -153,57 +160,48 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>384</tick>
         <ticklen>384</ticklen>
         <Note>
           <pitch>65</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>768</tick>
         <ticklen>384</ticklen>
         <Note>
           <pitch>67</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>1152</tick>
         <ticklen>384</ticklen>
         <Note>
           <pitch>67</pitch>
           </Note>
         </Chord>
       </Measure>
-    <Measure number="2" tick="1536">
-      <Bar>
-        </Bar>
+    <Measure number="2">
+      <BarLine/>
       <Rest>
-        <tick>1536</tick>
         <ticklen>1536</ticklen>
         <BeamMode>4</BeamMode>
         </Rest>
       </Measure>
-    <Measure number="3" tick="3072">
-      <Bar>
-        </Bar>
+    <Measure number="3">
+      <BarLine/>
       <Rest>
-        <tick>3072</tick>
         <ticklen>1536</ticklen>
         <BeamMode>4</BeamMode>
         </Rest>
       </Measure>
-    <Measure number="4" tick="4608">
-      <Bar>
-        </Bar>
+    <Measure number="4">
+      <BarLine/>
       <Rest>
-        <tick>4608</tick>
         <ticklen>1536</ticklen>
         <BeamMode>4</BeamMode>
         </Rest>
       </Measure>
     </Staff>
   <Staff id="2">
-    <Measure number="1" tick="0">
+    <Measure number="1">
       <Chord>
         <ticklen>384</ticklen>
         <Note>
@@ -211,44 +209,38 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>384</tick>
         <ticklen>384</ticklen>
         <Note>
           <pitch>50</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>768</tick>
         <ticklen>384</ticklen>
         <Note>
           <pitch>52</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>1152</tick>
         <ticklen>384</ticklen>
         <Note>
           <pitch>53</pitch>
           </Note>
         </Chord>
       </Measure>
-    <Measure number="2" tick="1536">
+    <Measure number="2">
       <Rest>
-        <tick>1536</tick>
         <ticklen>1536</ticklen>
         <BeamMode>4</BeamMode>
         </Rest>
       </Measure>
-    <Measure number="3" tick="3072">
+    <Measure number="3">
       <Rest>
-        <tick>3072</tick>
         <ticklen>1536</ticklen>
         <BeamMode>4</BeamMode>
         </Rest>
       </Measure>
-    <Measure number="4" tick="4608">
+    <Measure number="4">
       <Rest>
-        <tick>4608</tick>
         <ticklen>1536</ticklen>
         <BeamMode>4</BeamMode>
         </Rest>

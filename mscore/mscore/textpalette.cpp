@@ -58,6 +58,9 @@ TextPalette::TextPalette(QWidget* parent)
       connect(typefaceSize, SIGNAL(valueChanged(double)), SLOT(sizeChanged(double)));
       connect(typefaceBold, SIGNAL(clicked(bool)), SLOT(boldClicked(bool)));
       connect(typefaceItalic, SIGNAL(clicked(bool)), SLOT(italicClicked(bool)));
+      connect(leftAlign, SIGNAL(clicked()), SLOT(setLeftAlign()));
+      connect(rightAlign, SIGNAL(clicked()), SLOT(setRightAlign()));
+      connect(centerAlign, SIGNAL(clicked()), SLOT(setHCenterAlign()));
       setFocusPolicy(Qt::NoFocus);
       }
 
@@ -112,5 +115,50 @@ void TextPalette::setCharFormat(const QTextCharFormat& cf)
       typefaceSize->setValue(f.pointSizeF());
       typefaceItalic->setChecked(cf.fontItalic());
       typefaceBold->setChecked(cf.fontWeight() == QFont::Bold);
+      }
+
+//---------------------------------------------------------
+//   setBlockFormat
+//---------------------------------------------------------
+
+void TextPalette::setBlockFormat(const QTextBlockFormat& bf)
+      {
+      bformat = bf;
+      if (bf.alignment() & Qt::AlignHCenter)
+            centerAlign->setChecked(true);
+      else if (bf.alignment() & Qt::AlignLeft)
+            leftAlign->setChecked(true);
+      else if (bf.alignment() & Qt::AlignRight)
+            rightAlign->setChecked(true);
+      }
+
+//---------------------------------------------------------
+//   setHCenterAlign
+//---------------------------------------------------------
+
+void TextPalette::setHCenterAlign()
+      {
+      bformat.setAlignment(Qt::AlignHCenter);
+      _textElement->setBlockFormat(bformat);
+      }
+
+//---------------------------------------------------------
+//   setLeftAlign
+//---------------------------------------------------------
+
+void TextPalette::setLeftAlign()
+      {
+      bformat.setAlignment(Qt::AlignLeft);
+      _textElement->setBlockFormat(bformat);
+      }
+
+//---------------------------------------------------------
+//   setRightAlign
+//---------------------------------------------------------
+
+void TextPalette::setRightAlign()
+      {
+      bformat.setAlignment(Qt::AlignRight);
+      _textElement->setBlockFormat(bformat);
       }
 

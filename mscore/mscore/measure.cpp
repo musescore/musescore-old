@@ -227,7 +227,8 @@ Measure::Measure(Score* s)
       _endRepeat   = 0;
       _ending      = 0;
       _noOffset    = 0;
-      _noText      = new Text(score(), TEXT_STYLE_MEASURE_NUMBER);
+      _noText      = new Text(score());
+      _noText->setSubtype(TEXT_MEASURE_NUMBER);
       _noText->setParent(this);
       }
 
@@ -461,33 +462,8 @@ void Measure::write(Xml& xml, int no, int staff) const
             xml.stag(QString("Measure number=\"%1\"").arg(no));
 
       if (staff == 0) {
-            for (ciElement ie = _pel.begin(); ie != _pel.end(); ++ie) {
-                  Element* e = *ie;
-                  if (e->type() == TEXT) {
-                        Text* t = (Text*)e;
-                        switch(t->style()) {
-                              case TEXT_STYLE_TITLE:
-                                    t->write(xml, "work-title");
-                                    break;
-                              case TEXT_STYLE_SUBTITLE:
-                                    t->write(xml, "work-number");
-                                    break;
-                              case TEXT_STYLE_COMPOSER:
-                                    t->write(xml, "creator-composer");
-                                    break;
-                              case TEXT_STYLE_POET:
-                                    t->write(xml, "creator-poet");
-                                    break;
-                              case TEXT_STYLE_TRANSLATOR:
-                                    t->write(xml, "creator-translator");
-                                    break;
-                              default:
-                                    t->write(xml);
-                              }
-                        }
-                  else
-                        (*ie)->write(xml);
-                  }
+            for (ciElement ie = _pel.begin(); ie != _pel.end(); ++ie)
+                  (*ie)->write(xml);
             if (_startRepeat)
                   xml.tag("startRepeat", _startRepeat);
             if (_endRepeat)
@@ -644,9 +620,11 @@ void Measure::read(QDomNode node, int idx)
                   }
             else if (tag == "Text") {
                   Text* t = new Text(score());
-                  t->setTick(curTickPos);
-                  t->setStaff(staff);
                   t->read(node);
+                  if (t->anchor() != ANCHOR_PAGE) {
+                        t->setTick(curTickPos);
+                        t->setStaff(staff);
+                        }
                   add(t);
                   }
             else if (tag == "Tempo") {
@@ -701,31 +679,6 @@ void Measure::read(QDomNode node, int idx)
                   }
             else if (tag == "irregular")
                   _irregular = true;
-            else if (tag == "work-title") {
-                  Text* text = new Text(score(), TEXT_STYLE_TITLE);
-                  text->read(node);
-                  add(text);
-                  }
-            else if (tag == "work-number") {
-                  Text* text = new Text(score(), TEXT_STYLE_SUBTITLE);
-                  text->read(node);
-                  add(text);
-                  }
-            else if (tag == "creator-composer") {
-                  Text* text = new Text(score(), TEXT_STYLE_COMPOSER);
-                  text->read(node);
-                  add(text);
-                  }
-            else if (tag == "creator-poet") {
-                  Text* text = new Text(score(), TEXT_STYLE_POET);
-                  text->read(node);
-                  add(text);
-                  }
-            else if (tag == "creator-translator") {
-                  Text* text = new Text(score(), TEXT_STYLE_TRANSLATOR);
-                  text->read(node);
-                  add(text);
-                  }
             else if (tag == "Tuplet") {
                   Tuplet* tuplet = new Tuplet(score());
                   tuplet->read(node);
@@ -933,7 +886,7 @@ void Measure::layout(double width)
                               continue;
                         // center to middle of notehead:
                         double noteHeadWidth = symbols[quartheadSym].width();
-                        double lh = lyrics->lineSpacing();
+                        double lh = 10; // TODO: lyrics->lineSpacing();
                         double y = lh * line;
                         // lyrics->setPos(segment->x() + noteHeadWidth/2, y);
                         lyrics->setPos(noteHeadWidth/2, y);
@@ -2365,7 +2318,6 @@ void Measure::drop(const QPointF& p, int type, const QDomNode& node)
                   nd->setSubtype(dynamic->subtype());
                   if (dynamic->subtype() == 0)
                         nd->setText(dynamic->getText());
-printf("add dynamic subtype %d style %d\n", dynamic->subtype(), dynamic->style());
                   score()->addDynamic(nd, p);
                   }
                   break;

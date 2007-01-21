@@ -77,7 +77,8 @@ void Tuplet::layout()
       {
       if (_hasNumber) {
             if (_number == 0) {
-                  _number = new Text(score(), TEXT_STYLE_FINGERING);
+                  _number = new Text(score());
+                  _number->setSubtype(TEXT_FINGERING);
                   _number->setParent(this);
                   _number->setText(QString("%1").arg(_actualNotes));
                   }
@@ -266,7 +267,7 @@ void Tuplet::move(double x, double y)
 
 void Tuplet::write(Xml& xml, int id) const
       {
-      xml.stag(QString("Tuplet id=\"%d\"").arg(id));
+      xml.stag(QString("Tuplet id=\"%1\"").arg(id));
       xml.tag("hasNumber", _hasNumber);
       xml.tag("hasLine", _hasLine);
       xml.tag("baseLen", _baseLen);

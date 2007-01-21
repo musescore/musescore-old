@@ -874,7 +874,7 @@ void TextView::setElement(Element* e)
             TextStyle* s = &*i;
             tb.style->addItem(s->name);
             }
-      tb.style->setCurrentIndex(te->style());
+//      tb.style->setCurrentIndex(te->style());
       tb.text->setText(te->getText());
 //      tb.xoffset->setValue(te->styleOffset().x());
 //      tb.yoffset->setValue(te->styleOffset().y());
@@ -959,7 +959,7 @@ void DynamicView::setElement(Element* e)
             TextStyle* s = &*i;
             tb.style->addItem(s->name);
             }
-      tb.style->setCurrentIndex(dynamic->style());
+//      tb.style->setCurrentIndex(dynamic->style());
       tb.text->setText(dynamic->getText());
 //      tb.xoffset->setValue(dynamic->styleOffset().x());
 //      tb.yoffset->setValue(dynamic->styleOffset().y());

@@ -293,12 +293,9 @@ double Page::addMeasure(Measure* m, double y)
 
             el->layout();
             if (el->type() == TEXT) {
-                  int style = ((Text*)el)->style();
-                  if (style == TEXT_STYLE_TITLE
-                     || style == TEXT_STYLE_SUBTITLE
-                     || style == TEXT_STYLE_COMPOSER
-                     || style == TEXT_STYLE_POET
-                     || style == TEXT_STYLE_TRANSLATOR) {
+                  Text* text = (Text*)el;
+                  if (text->anchor() == ANCHOR_PAGE) {
+                        // TODO: only collect top aligned page elements?
                         if (el->pos().y() > y)
                               y = el->pos().y();
                         textFound = true;
