@@ -198,7 +198,6 @@ void Score::cmdAddPitch(int note, bool addFlag)
             if (cr == 0) {
                   // cannot enter notes
                   // no note/rest selected?
-                  endCmd(true);
                   return;
                   }
             }
@@ -209,7 +208,6 @@ void Score::cmdAddPitch(int note, bool addFlag)
             cr = (ChordRest*)searchNote(cis->pos, cis->staff);
             if (!cr || !cr->isChordRest()) {
                   cis->pos = -1;
-                  endCmd(true);
                   return;
                   }
             }
