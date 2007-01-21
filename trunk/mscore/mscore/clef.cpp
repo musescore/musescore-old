@@ -222,6 +222,29 @@ printf("drop clef %d to %d\n", stype, st);
       }
 
 //---------------------------------------------------------
+//   write Clef
+//---------------------------------------------------------
+
+void Clef::write(Xml& xml) const
+      {
+      xml.stag("Clef");
+      Element::writeProperties(xml);
+      xml.etag("Clef");
+      }
+
+//---------------------------------------------------------
+//   Clef::read
+//---------------------------------------------------------
+
+void Clef::read(QDomNode node)
+      {
+      for (node = node.firstChild(); !node.isNull(); node = node.nextSibling()) {
+            if (!Element::readProperties(node))
+                  domError(node);
+            }
+      }
+
+//---------------------------------------------------------
 //   clef
 //---------------------------------------------------------
 

@@ -410,17 +410,6 @@ bool MuseScore::saveFile(QFileInfo& info)
       }
 
 //---------------------------------------------------------
-//   write Clef
-//---------------------------------------------------------
-
-void Clef::write(Xml& xml) const
-      {
-      xml.stag("Clef");
-      Element::writeProperties(xml);
-      xml.etag("Clef");
-      }
-
-//---------------------------------------------------------
 //   SStaff::write
 //---------------------------------------------------------
 
@@ -505,33 +494,6 @@ void Symbol::read(QDomNode node)
             }
       setPos(pos);
       setSym(s);
-      }
-
-//---------------------------------------------------------
-//   Clef::read
-//---------------------------------------------------------
-
-void Clef::read(QDomNode node)
-      {
-      int type   = 0;
-      bool small = false;
-      for (node = node.firstChild(); !node.isNull(); node = node.nextSibling()) {
-            QDomElement e = node.toElement();
-            if (e.isNull())
-                  continue;
-            QString tag(e.tagName());
-            QString val(e.text());
-            int i = val.toInt();
-            if (tag == "small")
-                  small = i;
-            else if (tag == "idx")
-                  type = i;
-            else if (Element::readProperties(node))
-                  ;
-            else
-                  domError(node);
-            }
-      setSubtype(type + (small ? clefSmallBit : 0));
       }
 
 //---------------------------------------------------------
