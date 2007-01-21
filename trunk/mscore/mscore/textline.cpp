@@ -110,7 +110,7 @@ void TextLine::layout()
       if (s->anchor == ANCHOR_PAGE) {
             Page* page = (Page*)parent();
             if (parent()->type() != PAGE) {
-                  printf("fatal: text parent is not PAGE\n");
+                  printf("TextLine: fatal: text parent is not PAGE\n");
                   return;
                   }
             double w = page->loWidth() - page->lm() - page->rm();

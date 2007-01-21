@@ -34,17 +34,22 @@ class TextPalette : public QWidget, public Ui::TextPaletteBase {
 
       Text* _textElement;
       QTextCharFormat format;
+      QTextBlockFormat bformat;
 
    private slots:
       void symbolClicked(int);
       void sizeChanged(double value);
       void boldClicked(bool);
       void italicClicked(bool);
+      void setLeftAlign();
+      void setRightAlign();
+      void setHCenterAlign();
 
    public:
       TextPalette(QWidget* parent);
       void setText(Text* te) { _textElement = te; }
       void setCharFormat(const QTextCharFormat&);
+      void setBlockFormat(const QTextBlockFormat&);
       };
 
 #endif

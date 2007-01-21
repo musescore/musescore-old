@@ -67,8 +67,9 @@ static const TextStyle defaultTextStyles[] = {
          ALIGN_LEFT,    ANCHOR_TICK, 0, 6, OFFSET_SPATIUM),
       TextStyle(QString("Technik"), ff, 12, false, true, false,
          ALIGN_LEFT,    ANCHOR_TICK, 0, 0, OFFSET_SPATIUM),
-      TextStyle(QString("Tempo"), ff, 12, true, false, false,
-         ALIGN_LEFT,    ANCHOR_TICK, 0, -2.0, OFFSET_SPATIUM),
+/*12*/
+      TextStyle(QString("Tempo"), ff, 10, true, false, false,
+         ALIGN_LEFT,    ANCHOR_TICK, 0, -2.0, OFFSET_SPATIUM, true),
       TextStyle(QString("Metronome"), ff, 12, true, false, false,
          ALIGN_LEFT,    ANCHOR_TICK, 0, 0, OFFSET_SPATIUM),
       TextStyle(QString("Copyright"), ff, 8, true, false, false,
@@ -189,25 +190,6 @@ QFont TextStyle::font() const
       f.setPointSizeF(m);
       f.setUnderline(underline);
       return f;
-      }
-
-//---------------------------------------------------------
-//   bbox
-//---------------------------------------------------------
-
-QRectF TextStyle::bbox(const QString& s) const
-      {
-      QFontMetricsF fm(font());
-      return fm.boundingRect(s);
-      }
-
-//---------------------------------------------------------
-//   fontMetrics
-//---------------------------------------------------------
-
-QFontMetricsF TextStyle::fontMetrics() const
-      {
-      return QFontMetricsF(font());
       }
 
 //---------------------------------------------------------

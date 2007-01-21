@@ -1,9 +1,11 @@
 Todo:
+      * integrate TextStyle() parameters into Text(). Use TextStyle()
+        only to initiate Text().
 
 Features:
-      - allow for special musical symbols in text
-            - palette popup in text edit mode to allow for
-              selection of musical symbols
+      * allow for special musical symbols in text
+            * palette popup (F2) in text edit mode to allow for
+              selection of musical and other symbols
       - dotted rests
       - akkumulated empty measures
       - "Faulenzer Zeichen" (repeat symbols)
@@ -11,7 +13,7 @@ Features:
       - rehearsal marks
       + system brackets
       + trill lines
-      + octave lines
+      + ottava lines
             - shift pitch of bracketed notes while play
       - implement voice detection algorithm for midi import
       - allow insertion of arbitrary images

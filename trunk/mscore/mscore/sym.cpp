@@ -54,8 +54,10 @@ Sym::Sym(const QString& name, const QChar& c, const QFont& f, const QPointF& o)
 
 const QRectF& Sym::bbox() const
       {
-      _bbox = QFontMetricsF(_font,
-         mscore->currentScore()->scoreLayout()->paintDevice()).boundingRect(_code).translated(_offset * _spatium);
+      QPaintDevice* pd = 0;
+      if (mscore && mscore->currentScore() && mscore->currentScore()->scoreLayout())
+            pd = mscore->currentScore()->scoreLayout()->paintDevice();
+      _bbox = QFontMetricsF(_font, pd).boundingRect(_code).translated(_offset * _spatium);
       _bbox.setWidth(_bbox.width());
       return _bbox;
       }

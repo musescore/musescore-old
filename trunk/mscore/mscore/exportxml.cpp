@@ -914,11 +914,11 @@ bool ExportMusicXml::saver()
       for (iElement ie = el->begin(); ie != el->end(); ++ie) {
             if ((*ie)->type() == TEXT) {
                   Text* text = (Text*)(*ie);
-                  switch (text->style()) {
-                        case TEXT_STYLE_TITLE:
+                  switch (text->subtype()) {
+                        case TEXT_TITLE:
                               xml.tag("work-title", text->getText());
                               break;
-                        case TEXT_STYLE_SUBTITLE:
+                        case TEXT_SUBTITLE:
                               xml.tag("work-number", text->getText());
                               break;
                         }
@@ -930,14 +930,14 @@ bool ExportMusicXml::saver()
       for (iElement ie = el->begin(); ie != el->end(); ++ie) {
             if ((*ie)->type() == TEXT) {
                   Text* text = (Text*)(*ie);
-                  switch (text->style()) {
-                        case TEXT_STYLE_COMPOSER:
+                  switch (text->subtype()) {
+                        case TEXT_COMPOSER:
                               xml.tag("creator", "type=\"composer\"", text->getText());
                               break;
-                        case TEXT_STYLE_POET:
+                        case TEXT_POET:
                               xml.tag("creator", "type=\"poet\"", text->getText());
                               break;
-                        case TEXT_STYLE_TRANSLATOR:
+                        case TEXT_TRANSLATOR:
                               xml.tag("creator", "type=\"creator\"", text->getText());
                               break;
                         }

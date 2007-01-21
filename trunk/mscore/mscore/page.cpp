@@ -144,10 +144,11 @@ void Page::layout()
       // add page number
       if (::style->showPageNumber) {
             int n = no() + 1 + _score->_pageOffset;
-            TEXT_STYLE style = (n & 1) ? TEXT_STYLE_PAGE_NUMBER_ODD : TEXT_STYLE_PAGE_NUMBER_EVEN;
+            int subtype = (n & 1) ? TEXT_PAGE_NUMBER_ODD : TEXT_PAGE_NUMBER_EVEN;
             if (n || ::style->showPageNumberOne) {
                   if (_pageNo == 0) {
-                        _pageNo = new Text(score(), style);
+                        _pageNo = new Text(score());
+                        setSubtype(subtype);
                         _pageNo->setParent(this);
                         }
                   QString txt("%1");
@@ -168,7 +169,8 @@ void Page::layout()
       // add copyright to page
       if (!_score->rights.isEmpty()) {
             if (_copyright == 0) {
-                  _copyright = new Text(score(), TEXT_STYLE_COPYRIGHT);
+                  _copyright = new Text(score());
+                  _copyright->setSubtype(TEXT_COPYRIGHT);
                   _copyright->setParent(this);
                   }
             _copyright->setText(_score->rights);

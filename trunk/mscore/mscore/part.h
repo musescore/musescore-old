@@ -58,8 +58,8 @@ struct Instrument {
 class Part {
       Score* cs;
       QString _trackName;           // used in tracklist
-      QString _longName;              // shown on first system
-      QString _shortName;             // shown on followup systems
+      QString _longName;            // shown on first system
+      QString _shortName;           // shown on followup systems
       Instrument _instrument;
       StaffList* _staves;
       QString _id;                  // used for MusicXml import

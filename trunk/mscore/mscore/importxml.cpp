@@ -494,37 +494,44 @@ void MusicXml::xmlPart(QDomNode node, QString id)
                   }
             score->scoreLayout()->push_back(measure);
             if (!title.isEmpty()) {
-                  Text* text = new Text(score, TEXT_STYLE_TITLE);
+                  Text* text = new Text(score);
+                  text->setSubtype(TEXT_TITLE);
                   text->setText(title);
                   measure->add(text);
                   }
             else if (!score->movementTitle.isEmpty()) {
-                  Text* text = new Text(score, TEXT_STYLE_TITLE);
+                  Text* text = new Text(score);
+                  text->setSubtype(TEXT_TITLE);
                   text->setText(score->movementTitle);
                   measure->add(text);
                   }
             if (!subTitle.isEmpty()) {
-                  Text* text = new Text(score, TEXT_STYLE_SUBTITLE);
+                  Text* text = new Text(score);
+                  text->setSubtype(TEXT_SUBTITLE);
                   text->setText(subTitle);
                   measure->add(text);
                   }
             else if (!score->movementNumber.isEmpty()) {
-                  Text* text = new Text(score, TEXT_STYLE_SUBTITLE);
+                  Text* text = new Text(score);
+                  text->setSubtype(TEXT_SUBTITLE);
                   text->setText(score->movementNumber);
                   measure->add(text);
                   }
             if (!composer.isEmpty()) {
-                  Text* text = new Text(score, TEXT_STYLE_COMPOSER);
+                  Text* text = new Text(score);
+                  text->setSubtype(TEXT_COMPOSER);
                   text->setText(composer);
                   measure->add(text);
                   }
             if (!poet.isEmpty()) {
-                  Text* text = new Text(score, TEXT_STYLE_POET);
+                  Text* text = new Text(score);
+                  text->setSubtype(TEXT_POET);
                   text->setText(poet);
                   measure->add(text);
                   }
             if (!translator.isEmpty()) {
-                  Text* text = new Text(score, TEXT_STYLE_TRANSLATOR);
+                  Text* text = new Text(score);
+                  text->setSubtype(TEXT_TRANSLATOR);
                   text->setText(translator);
                   measure->add(text);
                   }
