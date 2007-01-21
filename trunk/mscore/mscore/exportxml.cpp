@@ -22,6 +22,10 @@
  MusicXML export.
  */
 
+// TODO: trill lines need to be handled the same way as slurs
+// in MuseScore they are measure level elements, while in MusicXML
+// they are attached to notes (as ornaments)
+
 //=========================================================
 //  LVI FIXME
 //
@@ -53,6 +57,7 @@
 #include "barline.h"
 #include "timesig.h"
 #include "ottava.h"
+#include "pedal.h"
 
 //---------------------------------------------------------
 //   attributes -- prints <attributes> tag when necessary
@@ -186,6 +191,7 @@ class ExportMusicXml : public SaveFile {
       void words(Text* text, int staff);
       void hairpin(Hairpin* hp, int staff, int tick);
       void ottava(Ottava* ot, int staff, int tick);
+      void pedal(Pedal* pd, int staff, int tick);
       void dynamic(Dynamic* dyn, int staff);
       void symbol(Symbol * sym, int staff);
       };
@@ -465,6 +471,10 @@ void DirectionsHandler::handleElement(ExportMusicXml* exp, Element* el, int ssta
                                     exp->ottava((Ottava*) dir, sstaff, da->getTick());
                                     // printf("handleElement ottava tick=%d\n", da->getTick());
                                     break;
+                              case PEDAL:
+                                    exp->pedal((Pedal*) dir, sstaff, da->getTick());
+                                    // printf("handleElement pedal tick=%d\n", da->getTick());
+                                    break;
                               default:
                                     printf("DirectionsHandler::handleElement: direction type %s at tick %d not implemented\n",
                                             elementNames[dir->type()], da->getTick());
@@ -502,6 +512,10 @@ void DirectionsHandler::handleElements(ExportMusicXml* exp, Staff* staff, int ms
                               case OTTAVA:
                                     exp->ottava((Ottava*) dir, sstaff, da->getTick());
                                     // printf("handleElement ottava tick=%d\n", da->getTick());
+                                    break;
+                              case PEDAL:
+                                    exp->pedal((Pedal*) dir, sstaff, da->getTick());
+                                    // printf("handleElement pedal tick=%d\n", da->getTick());
                                     break;
                               default:
                                     printf("DirectionsHandler::handleElements: direction type %s at tick %d not implemented\n",
@@ -646,6 +660,21 @@ void DirectionsHandler::buildDirectionsList(Measure* m, bool dopart, Part* p, in
                                     storeAnchor(da);
                                     }
                               da = findMatchInPart(ot->tick2(), ot->staff(), cs, p, strack, etrack);
+                              if (da) {
+                                    da->setDirect(dir);
+                                    storeAnchor(da);
+                                    }
+                        }
+                        break;
+                  case PEDAL:
+                        if (dopart) {
+                              Pedal* pd = (Pedal*) dir;
+                              da = findMatchInPart(pd->tick1(), pd->staff(), cs, p, strack, etrack);
+                              if (da) {
+                                    da->setDirect(dir);
+                                    storeAnchor(da);
+                                    }
+                              da = findMatchInPart(pd->tick2(), pd->staff(), cs, p, strack, etrack);
                               if (da) {
                                     da->setDirect(dir);
                                     storeAnchor(da);
@@ -1441,11 +1470,16 @@ void ExportMusicXml::chord(Chord* chord, int staff, const LyricsList* ll)
             xml.etag("pitch");
 
             int acc = ACC_NONE;
+            bool editorial = false;
             if (note->userAccidental() != -1)
                   acc = note->userAccidental();
             else
                   acc = note->accidentalIdx();
             if (acc != ACC_NONE) {
+                  if (6 <= acc && acc <= 10) {
+                        acc -= 5;
+                        editorial = true;
+                        }
                   QString s;
                   switch(acc) {
                         case ACC_SHARP:   s = "sharp";        break;
@@ -1456,7 +1490,10 @@ void ExportMusicXml::chord(Chord* chord, int staff, const LyricsList* ll)
                         default:
                               printf("unknown accidental %d\n", acc);
                         }
-                  xml.tag("accidental", s);
+                  if (editorial)
+                        xml.tag("accidental", "editorial=\"yes\"", s);
+                  else
+                        xml.tag("accidental", s);
                   }
 
             xml.tag("duration", note->chord()->tickLen());
@@ -1661,6 +1698,20 @@ void ExportMusicXml::ottava(Ottava* ot, int staff, int tick)
             }
       else
             xml.tagE("octave-shift type=\"stop\"");
+      directionETag(xml, staff);
+      }
+
+//---------------------------------------------------------
+//   pedal
+//---------------------------------------------------------
+
+void ExportMusicXml::pedal(Pedal* pd, int staff, int tick)
+      {
+      directionTag(xml, attr, pd);
+      if (pd->tick1() == tick)
+            xml.tagE("pedal type=\"start\" line=\"yes\"");
+      else
+            xml.tagE("pedal type=\"stop\"");
       directionETag(xml, staff);
       }
 
