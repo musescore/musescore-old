@@ -1,4 +1,7 @@
-21.1.7 (ws)
+21.1.7 (lv)
+      - MusicXML export of pedal lines and editorial accidentals
+      - new testfile testImplicitMeasure1.xml
+       (ws)
       - more text changes
 20.1.7 (ws)
       - integrate TextStyle() parameters into Text(). Use TextStyle()
