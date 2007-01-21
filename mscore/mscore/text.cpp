@@ -284,7 +284,7 @@ void Text::setText(const QString& s)
             }
       QTextCharFormat tf = cursor->charFormat();
       tf.setFont(doc->defaultFont());
-      cursor->setCharFormat(tf);
+      cursor->setBlockCharFormat(tf);
       cursor->insertText(s);
       layout();
       }
@@ -500,7 +500,7 @@ bool Text::edit(QKeyEvent* ev)
                   break;
 
             case Qt::Key_Delete:
-                  //TODO
+                  cursor->deleteChar();
                   break;
 
             case Qt::Key_Left:
