@@ -862,6 +862,10 @@ void Score::cmdAddStretch(double val)
 void Score::cmd(const QString& cmd)
       {
 printf("cmd <%s>\n", cmd.toLatin1().data());
+      if (editObject) {                          // in edit mode?
+            endUndo();
+            canvas()->setState(Canvas::NORMAL);  //calls endEdit()
+            }
       if (cmd == "print")
             printFile();
       else if (cmd == "undo")
