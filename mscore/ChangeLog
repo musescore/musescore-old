@@ -1,3 +1,9 @@
+22.1.7 (lv)
+      * MusicXML updates
+      - import of editorial accidentals
+      - import of soprano clefs improved (but still not completely correct)
+      - export of double flat accidental fixed
+      - new testfile testAccidentals1.xml
 21.1.7 (lv)
       - MusicXML export of pedal lines and editorial accidentals
       - new testfile testImplicitMeasure1.xml

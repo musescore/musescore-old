@@ -45,9 +45,9 @@ const ClefInfo clefTable[] = {
       ClefInfo("F",   4,  0, -10,  35, "Bass Clef"),
       ClefInfo("F",   4,  0, -14,  31, "Bass Clef"),
       ClefInfo("C",   4,  0,  -1,  -2, "Soprano Clef"),
-      ClefInfo("C",   4,  0,  -4,  -4, "Mezzo-soprano Clef"),
-      ClefInfo("C",   3,  0,  -4,  -6, "Alto Clef"),
-      ClefInfo("C",   4,  0,  -3,  -8, "Tenor Clef"),
+      ClefInfo("C",   3,  0,  -4,  -4, "Mezzo-soprano Clef"),
+      ClefInfo("C",   2,  0,  -4,  -6, "Alto Clef"),
+      ClefInfo("C",   1,  0,  -3,  -8, "Tenor Clef"),
       ClefInfo("TAB", 5,  0,   0,   0, "Tabulator")
       };
 

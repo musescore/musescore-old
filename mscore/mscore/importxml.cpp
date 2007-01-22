@@ -1096,7 +1096,9 @@ void MusicXml::xmlAttributes(Measure* measure, int staff, QDomNode node)
                   else if (c == "F" && i == -2)
                         clef = 6;
                   else if (c == "C") {
-                        if (line == 3)
+                        if (line == 4)
+                              clef = 9;
+                        else if (line == 3)
                               clef = 10;
                         else if (line == 2)
                               clef = 11;
@@ -1342,6 +1344,7 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomNode node)
                   ++dots;
             else if (tag == "accidental") {
                   QString s = e.text();
+                  QString editorial = e.attribute(QString("editorial"));
                   if (s == "natural")
                         accidental = 5;
                   else if (s == "flat")
@@ -1368,6 +1371,8 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomNode node)
                         ;
                   else
                         printf("unknown accidental %s\n", s.toLatin1().data());
+                  if (1 <= accidental && accidental <= 5 && editorial == "yes")
+                        accidental += 5;
                   }
             else if (tag == "notations") {
                   for (QDomNode n = node.firstChild(); !n.isNull(); n = n.nextSibling()) {
