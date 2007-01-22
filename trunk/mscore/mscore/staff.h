@@ -58,8 +58,8 @@ class Staff {
       bool isTop() const             { return _rstaff == 0; }
       bool isTopSplit() const;
       QString trackName() const;
-      QString longName() const;
-      QString shortName() const;
+      const QTextDocument& longName() const;
+      const QTextDocument& shortName() const;
       int midiChannel() const;
       int midiProgram() const;
       int volume() const;

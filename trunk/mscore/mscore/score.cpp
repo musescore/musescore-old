@@ -973,18 +973,16 @@ void Score::endEdit()
       refresh |= editObject->bbox();
 
       if (editObject->type() == INSTRUMENT_NAME2) {
-//            InstrumentName2* in = (InstrumentName2*)editObject;
-//            int staff           = in->staff();
-//            Instrument* instr   = instrument(staff);
-//            instr->setShortName(in->text());
+            InstrumentName2* in = (InstrumentName2*)editObject;
+            Part* p             = part(in->staffIdx());
+            p->setShortName(*(in->getDoc()));
             setInstrumentNames();
             }
       else if (editObject->type() == INSTRUMENT_NAME1) {
-//            InstrumentName1* in = (InstrumentName1*)editObject;
-//            int staff           = in->staff();
-//            Instrument* instr   = instrument(staff);
-//            instr->setLongName(in->text());
-//            setInstrumentNames();
+            InstrumentName1* in = (InstrumentName1*)editObject;
+            Part* p             = part(in->staffIdx());
+            p->setLongName(*(in->getDoc()));
+            setInstrumentNames();
             }
       else if (editObject->type() == LYRICS) {
             Lyrics* lyrics = (Lyrics*)editObject;

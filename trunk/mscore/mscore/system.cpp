@@ -393,10 +393,10 @@ void System::setInstrumentName(int idx)
                         staff->instrumentName->setParent(this);
                         staff->instrumentName->setStaff(s);
                         }
-                  staff->instrumentName->setText(s->longName());
+                  staff->instrumentName->setDoc(s->longName());
                   }
             else if (staff->instrumentName) {
-                  staff->instrumentName->setText(s->longName());
+                  staff->instrumentName->setText("");
                   // delete staff->instrumentName;
                   // staff->instrumentName = 0;
                   }
@@ -408,12 +408,12 @@ void System::setInstrumentName(int idx)
                         staff->instrumentName->setParent(this);
                         staff->instrumentName->setStaff(s);
                         }
-                  staff->instrumentName->setText(s->shortName());
+                  staff->instrumentName->setDoc(s->shortName());
                   }
             else if (staff->instrumentName) {
                   // delete staff->instrumentName;
                   // staff->instrumentName = 0;
-                  staff->instrumentName->setText(s->shortName());
+                  staff->instrumentName->setText("");
                   }
             }
       if (staff->instrumentName) {
