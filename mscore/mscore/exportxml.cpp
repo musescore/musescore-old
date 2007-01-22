@@ -986,10 +986,10 @@ bool ExportMusicXml::saver()
       PartList* il = score->parts();
       for (iPart i = il->begin(); i != il->end(); ++i, ++idx) {
             xml.stag(QString("score-part id=\"P%1\"").arg(idx));
-            xml.tag("part-name", (*i)->longName());
+            xml.tag("part-name", (*i)->longName().toPlainText());
 
             xml.stag(QString("score-instrument id=\"P%1-I%2\"").arg(idx).arg(3));
-            xml.tag("instrument-name", (*i)->longName());
+            xml.tag("instrument-name", (*i)->longName().toPlainText());
             xml.etag("score-instrument");
 
             xml.stag(QString("midi-instrument id=\"P%1-I%2\"").arg(idx).arg(3));

@@ -50,8 +50,7 @@ Text::Text(Score* s)
       editMode                = false;
       cursorPos               = 0;
       doc                     = new QTextDocument(0);
-      cursor                  = new QTextCursor(doc);
-      cursor->movePosition(QTextCursor::Start);
+      cursor                  = 0;
       }
 
 Text::Text(const Text& e)
@@ -66,16 +65,29 @@ Text::Text(const Text& e)
       editMode                = e.editMode;
       cursorPos               = e.cursorPos;
       doc                     = e.doc->clone(0);
-      cursor                  = new QTextCursor(doc);
-      cursor->setPosition(e.cursor->position());
-      cursor->setCharFormat(e.cursor->charFormat());
-      cursor->setBlockFormat(e.cursor->blockFormat());
+      if (editMode) {
+            cursor = new QTextCursor(doc);
+            cursor->movePosition(QTextCursor::Start);
+            }
+      else
+            cursor = 0;
       }
 
 Text::~Text()
       {
       delete doc;
-      delete cursor;
+      }
+
+//---------------------------------------------------------
+//   setDoc
+//---------------------------------------------------------
+
+void Text::setDoc(const QTextDocument& d)
+      {
+      if (doc)
+            delete doc;
+      doc = d.clone(0);
+      cursorPos = 0;
       }
 
 //---------------------------------------------------------
@@ -85,6 +97,9 @@ Text::~Text()
 void Text::setSubtype(int val)
       {
       Element::setSubtype(val);
+      //
+      // set default values:
+      //
       switch (val) {
             case TEXT_TITLE:            setStyle(TEXT_STYLE_TITLE); break;
             case TEXT_SUBTITLE:         setStyle(TEXT_STYLE_SUBTITLE); break;
@@ -276,16 +291,17 @@ void Text::layout()
 void Text::setText(const QString& s)
       {
       doc->clear();
-      cursor->movePosition(QTextCursor::Start);
+      QTextCursor cursor(doc);
+      cursor.movePosition(QTextCursor::Start);
       if (_align & ALIGN_HCENTER) {
-            QTextBlockFormat bf = cursor->blockFormat();
+            QTextBlockFormat bf = cursor.blockFormat();
             bf.setAlignment(Qt::AlignHCenter);
-            cursor->setBlockFormat(bf);
+            cursor.setBlockFormat(bf);
             }
-      QTextCharFormat tf = cursor->charFormat();
+      QTextCharFormat tf = cursor.charFormat();
       tf.setFont(doc->defaultFont());
-      cursor->setBlockCharFormat(tf);
-      cursor->insertText(s);
+      cursor.setBlockCharFormat(tf);
+      cursor.insertText(s);
       layout();
       }
 
@@ -303,6 +319,7 @@ void Text::setStyle(int n)
       _anchor      = s->anchor;
       _offsetType  = s->offsetType;
       _sizeIsSpatiumDependent = s->sizeIsSpatiumDependent;
+#if 0
       cursor->movePosition(QTextCursor::Start);
 
       if (_align & ALIGN_HCENTER) {
@@ -313,6 +330,7 @@ void Text::setStyle(int n)
       QTextCharFormat tf = cursor->charFormat();
       tf.setFont(s->font());
       cursor->setCharFormat(tf);
+#endif
       layout();
       }
 
@@ -350,7 +368,7 @@ void Text::read(QDomNode node)
             if (!readProperties(node))
                   domError(node);
             }
-      cursor->movePosition(QTextCursor::Start);
+      cursorPos = 0;
       layout();
       }
 
@@ -439,8 +457,8 @@ bool Text::readProperties(QDomNode node)
 
 bool Text::startEdit(QMatrix&)
       {
+      cursor = new QTextCursor(doc);
       cursor->movePosition(QTextCursor::Start);
-//      cursor->setPosition(cursorPos);
       editMode = true;
       if (palette)
             palette->setCharFormat(cursor->charFormat());
@@ -547,6 +565,8 @@ void Text::endEdit()
       cursorPos = cursor->position();
       if (palette)
             palette->hide();
+      delete cursor;
+      cursor = 0;
       editMode = false;
       }
 
@@ -593,6 +613,8 @@ void Text::addSymbol(const SymCode& s)
 
 void Text::setCharFormat(const QTextCharFormat& f)
       {
+      if (!cursor)
+            return;
       cursor->setCharFormat(f);
       }
 
@@ -602,6 +624,8 @@ void Text::setCharFormat(const QTextCharFormat& f)
 
 void Text::setBlockFormat(const QTextBlockFormat& bf)
       {
+      if (!cursor)
+            return;
       cursor->setBlockFormat(bf);
       layout();
       score()->doLayout();
@@ -753,7 +777,7 @@ void TempoText::read(QDomNode node)
             else
                   domError(node);
             }
-      cursor->setPosition(0);
+      cursorPos = 0;
 //      QTextCharFormat f = cursor->charFormat();
 //      f.setFont(defaultFont());
 //      cursor->setCharFormat(f);

@@ -63,7 +63,7 @@ StaffListItem::StaffListItem()
 
 void StaffListItem::setPartIdx(int val)
       {
-      _partIdx = val;      
+      _partIdx = val;
       QString s("Staff %1");
       setText(0, s.arg(_partIdx + 1));
       }
@@ -97,6 +97,7 @@ PartListItem::PartListItem(const InstrumentTemplate* i, QTreeWidget* lv)
       part = 0;
       it   = i;
       op   = ITEM_ADD;
+printf("part list item <%s>\n", it->name.toLatin1().data());
       setText(0, it->name);
       }
 
@@ -251,6 +252,15 @@ void InstrumentsDialog::on_partiturList_itemSelectionChanged()
       }
 
 //---------------------------------------------------------
+//   on_instrumentList
+//---------------------------------------------------------
+
+void InstrumentsDialog::on_instrumentList_itemActivated(QTreeWidgetItem*, int)
+      {
+      on_addButton_clicked();
+      }
+
+//---------------------------------------------------------
 //   on_addButton_clicked
 //    add instrument to partitur
 //---------------------------------------------------------
@@ -262,7 +272,7 @@ void InstrumentsDialog::on_addButton_clicked()
             return;
       InstrumentTemplateListItem* item = (InstrumentTemplateListItem*)wi.front();
       const InstrumentTemplate* it     = item->instrumentTemplate();
-      PartListItem* pli = new PartListItem(it, partiturList);
+      PartListItem* pli                = new PartListItem(it, partiturList);
       pli->op = ITEM_ADD;
 
       int n = it->staves;

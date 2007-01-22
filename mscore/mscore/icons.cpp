@@ -105,7 +105,7 @@ SymCode sharpsharp_Sym     (0xe116, TEXT_STYLE_DYNAMICS1);
 SymCode flat_Sym           (0xe112, TEXT_STYLE_DYNAMICS1);
 SymCode flatflat_Sym       (0xe114, TEXT_STYLE_DYNAMICS1);
 SymCode quartrest_Sym      (0xe107, TEXT_STYLE_DYNAMICS1);
-SymCode dot_Sym            (0xe119, TEXT_STYLE_DYNAMICS1);
+SymCode dot_Sym            (0xe0ff, TEXT_STYLE_DYNAMICS1);
 SymCode dotdot_Sym         (0xe0fd, TEXT_STYLE_DYNAMICS1);
 SymCode sforzatoaccent_Sym (0xe151, TEXT_STYLE_SYMBOL1);
 SymCode staccato_Sym       (0xe153, TEXT_STYLE_SYMBOL1);

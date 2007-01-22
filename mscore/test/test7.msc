@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf8"?>
 <museScore version="1.0">
-  <Geometry x="422" y="0" w="871" h="931" />
+  <Geometry x="764" y="0" w="1133" h="931" />
   <Spatium>2</Spatium>
   <Division>384</Division>
   <Mag>1</Mag>
-  <xoff>23</xoff>
-  <yoff>34</yoff>
+  <xoff>31.75</xoff>
+  <yoff>41.5</yoff>
   <Style>
     <staffUpperBorder>8</staffUpperBorder>
     <staffLowerBorder>4</staffLowerBorder>
@@ -105,7 +105,10 @@
         <clef tick="0" idx="4"/>
         </cleflist>
       </Staff>
-    <name>PianoForte</name>
+    <name>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;helvetica&apos;; font-size:11pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;PianoForte&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</name>
     <Instrument>
       <midiChannel>0</midiChannel>
       <midiProgram>0</midiProgram>
@@ -121,8 +124,14 @@
         </cleflist>
       </Staff>
     <trackName>B Trumpet</trackName>
-    <name>B Trumpet</name>
-    <shortName>B Tpt.</shortName>
+    <name>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;helvetica&apos;; font-size:11pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;B&lt;span style=&quot; font-family:&apos;MScore1&apos;;&quot;&gt;&lt;/span&gt; Trumpet&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</name>
+    <shortName>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;helvetica&apos;; font-size:11pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;B Tpt.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</shortName>
     <Instrument>
       <midiChannel>0</midiChannel>
       <midiProgram>0</midiProgram>
@@ -142,10 +151,24 @@
         <spatiumSizeDependent>0</spatiumSizeDependent>
         <data>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;helvetica&apos;; font-size:11pt; font-weight:400; font-style:normal; text-decoration:none;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Times New Roman&apos;; font-size:24pt;&quot;&gt;Title&lt;/p&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Times New Roman&apos;; font-size:24pt;&quot;&gt;&lt;span style=&quot; font-style:italic;&quot;&gt;italic &lt;/span&gt;&lt;span style=&quot; font-weight:600; font-style:italic;&quot;&gt;bold&lt;/span&gt;&lt;span style=&quot; font-style:italic;&quot;&gt; &lt;/span&gt;normal&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;helvetica&apos;; font-size:11pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Times New Roman&apos;; font-size:24pt;&quot;&gt;Title &lt;span style=&quot; font-weight:600;&quot;&gt;bold &lt;/span&gt;&lt;span style=&quot; font-weight:600; font-style:italic;&quot;&gt;italic &lt;/span&gt;&lt;span style=&quot; font-style:italic;&quot;&gt;italic &lt;/span&gt;normal&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
         </Text>
+      <Tempo>
+        <tempo>120</tempo>
+        <align>1</align>
+        <xoffset>0</xoffset>
+        <yoffset>-2</yoffset>
+        <anchor>tick</anchor>
+        <offsetType>spatium</offsetType>
+        <spatiumSizeDependent>1</spatiumSizeDependent>
+        <data>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-size:11.3386pt; font-weight:600; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:11pt;&quot;&gt;&lt;span style=&quot; font-family:&apos;MScore1&apos;;&quot;&gt;&lt;/span&gt;=120&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
+        <subtype>Tempo</subtype>
+        <offset x="-0.846667" y="-4.55083"/>
+        </Tempo>
       <Chord>
         <ticklen>192</ticklen>
         <Note>
@@ -293,6 +316,6 @@ p, li { white-space: pre-wrap; }
         </Rest>
       </Measure>
     </Staff>
-  <cursorStaff>2</cursorStaff>
+  <cursorStaff>-1</cursorStaff>
   <cursorVoice>0</cursorVoice>
   </museScore>

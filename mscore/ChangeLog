@@ -1,4 +1,6 @@
-22.1.7 (lv)
+22.10.7 (ws)
+      - fixed editing of instrument names (test7.msc)
+      (lv)
       * MusicXML updates
       - import of editorial accidentals
       - import of soprano clefs improved (but still not completely correct)

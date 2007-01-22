@@ -627,6 +627,26 @@ void Measure::read(QDomNode node, int idx)
                         }
                   add(t);
                   }
+            //-------------------------------------obsolete:
+            else if (tag == "work-title") {
+                  Text* t = new Text(score());
+                  t->setSubtype(TEXT_TITLE);
+                  t->read(node);
+                  add(t);
+                  }
+            else if (tag == "creator-composer") {
+                  Text* t = new Text(score());
+                  t->setSubtype(TEXT_COMPOSER);
+                  t->read(node);
+                  add(t);
+                  }
+            else if (tag == "work-number") {
+                  Text* t = new Text(score());
+                  t->setSubtype(TEXT_SUBTITLE);
+                  t->read(node);
+                  add(t);
+                  }
+            //-------------------------------------
             else if (tag == "Tempo") {
                   TempoText* t = new TempoText(score());
                   t->setTick(curTickPos);

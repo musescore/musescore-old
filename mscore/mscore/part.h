@@ -58,8 +58,8 @@ struct Instrument {
 class Part {
       Score* cs;
       QString _trackName;           // used in tracklist
-      QString _longName;            // shown on first system
-      QString _shortName;           // shown on followup systems
+      QTextDocument _longName;            // shown on first system
+      QTextDocument _shortName;           // shown on followup systems
       Instrument _instrument;
       StaffList* _staves;
       QString _id;                  // used for MusicXml import
@@ -74,11 +74,13 @@ class Part {
       Staff* staff(int idx) const;
       void setId(const QString& s)        { _id = s; }
       QString id() const                  { return _id; }
-      QString shortName() const           { return _shortName; }
-      QString longName() const            { return _longName;  }
+      const QTextDocument& shortName() const   { return _shortName; }
+      const QTextDocument& longName() const    { return _longName;  }
       QString trackName() const           { return _trackName; }
-      void setLongName(const QString& s)  { _longName = s;  }
-      void setShortName(const QString& s) { _shortName = s; }
+      void setLongName(const QString& s);
+      void setShortName(const QString& s);
+      void setLongName(const QTextDocument& s);
+      void setShortName(const QTextDocument& s);
       void setTrackName(const QString& s) { _trackName = s; }
       void setStaves(int);
       void setMidiChannel(int val)        { _instrument.midiChannel = val;  }

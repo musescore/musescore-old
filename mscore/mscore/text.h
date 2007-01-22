@@ -50,12 +50,12 @@ class Text : public Element {
       OffsetType _offsetType;
       bool _sizeIsSpatiumDependent;        // size depends on _spatium unit
 
+      QTextCursor* cursor;
       bool editMode;
-      int cursorPos;
 
    protected:
       QTextDocument* doc;
-      QTextCursor* cursor;
+      int cursorPos;
 
    public:
       Text(Score*);
@@ -73,6 +73,8 @@ class Text : public Element {
 
       void setText(const QString& s);
       QString getText() const;
+      void setDoc(const QTextDocument&);
+      QTextDocument* getDoc() const { return doc; }
 
       virtual void resetMode();
       Anchor anchor() const { return _anchor; }
