@@ -173,7 +173,7 @@ void Staff::read(QDomNode node)
                   continue;
             QString tag(e.tagName());
             if (tag == "cleflist") {
-                  _clef->read(node);
+                  _clef->read(node, _score);
                   }
             else if (tag == "bracket") {
                   _bracket = e.attribute("type", "-1").toInt();

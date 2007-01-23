@@ -1,3 +1,6 @@
+23.10.7 (ws)
+      - on *.msc load transform file division to internal division; this fixes
+        problems when several scores with different divisions are loaded
 22.10.7 (ws)
       - fixed editing of instrument names (test7.msc)
       (lv)

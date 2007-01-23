@@ -222,29 +222,6 @@ printf("drop clef %d to %d\n", stype, st);
       }
 
 //---------------------------------------------------------
-//   write Clef
-//---------------------------------------------------------
-
-void Clef::write(Xml& xml) const
-      {
-      xml.stag("Clef");
-      Element::writeProperties(xml);
-      xml.etag("Clef");
-      }
-
-//---------------------------------------------------------
-//   Clef::read
-//---------------------------------------------------------
-
-void Clef::read(QDomNode node)
-      {
-      for (node = node.firstChild(); !node.isNull(); node = node.nextSibling()) {
-            if (!Element::readProperties(node))
-                  domError(node);
-            }
-      }
-
-//---------------------------------------------------------
 //   clef
 //---------------------------------------------------------
 
@@ -296,33 +273,21 @@ void ClefList::write(Xml& xml, const char* name) const
 //   ClefList::read
 //---------------------------------------------------------
 
-void ClefList::read(QDomNode node)
+void ClefList::read(QDomNode node, Score* cs)
       {
       for (node = node.firstChild(); !node.isNull(); node = node.nextSibling()) {
             QDomElement e = node.toElement();
             if (e.isNull())
                   continue;
             QString tag(e.tagName());
-
-            if (tag == "clef")
-                  readEvent(node);
+            if (tag == "clef") {
+                  int tick = e.attribute("tick", "0").toInt();
+                  int idx = e.attribute("idx", "0").toInt();
+                  (*this)[cs->fileDivision(tick)] = idx;
+                  }
             else
                   domError(node);
             }
-      }
-
-//---------------------------------------------------------
-//   ClefEvent::read
-//---------------------------------------------------------
-
-void ClefList::readEvent(QDomNode node)
-      {
-      QDomElement e = node.toElement();
-      if (e.isNull())
-            return;
-      int tick = e.attribute("tick", "0").toInt();
-      int idx = e.attribute("idx", "0").toInt();
-      (*this)[tick] = idx;
       }
 
 //---------------------------------------------------------

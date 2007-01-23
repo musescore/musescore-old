@@ -527,8 +527,10 @@ void Measure::read(QDomNode node, int idx)
 
       QDomElement e = node.toElement();
       int tck = e.attribute("tick", "-1").toInt();
-      if (tck >= 0)
+      if (tck >= 0) {
+            tck = score()->fileDivision(tck);
             setTick(tck);
+            }
       Staff* staff = _score->staff(idx);
       int curTickPos = tick();
 

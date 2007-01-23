@@ -238,6 +238,7 @@ Score::Score()
       updateAll         = false;
       _pageOffset       = 0;
       undoActive        = false;
+      _fileDivision     = division;
       clear();
       }
 

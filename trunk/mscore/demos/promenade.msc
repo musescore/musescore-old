@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf8"?>
 <museScore version="1.0">
-  <Geometry x="66" y="0" w="1607" h="995" />
+  <Geometry x="63" y="0" w="1607" h="995" />
   <Spatium>1.625</Spatium>
   <Division>384</Division>
-  <Mag>2</Mag>
-  <xoff>48</xoff>
-  <yoff>16.67</yoff>
+  <Mag>0.75</Mag>
+  <xoff>65</xoff>
+  <yoff>-33.7488</yoff>
   <Style>
     <staffUpperBorder>8</staffUpperBorder>
     <staffLowerBorder>4</staffLowerBorder>
@@ -154,29 +154,46 @@
     </Part>
   <Staff id="1">
     <Measure number="1">
-      <work-title>
-        <style>2</style>
+      <Text>
+        <align>12</align>
+        <xoffset>0</xoffset>
+        <yoffset>0.19685</yoffset>
+        <anchor>page</anchor>
+        <offsetType>absolute</offsetType>
+        <spatiumSizeDependent>0</spatiumSizeDependent>
         <data>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-weight:400; font-style:normal; text-decoration:none;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Bilder einer Ausstellung&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
-        </work-title>
-      <creator-composer>
-        <style>4</style>
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-size:24pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Bilder einer Ausstellung&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
+        </Text>
+      <Text>
+        <align>10</align>
+        <xoffset>0</xoffset>
+        <yoffset>0.590551</yoffset>
+        <anchor>page</anchor>
+        <offsetType>absolute</offsetType>
+        <spatiumSizeDependent>0</spatiumSizeDependent>
         <data>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-weight:400; font-style:normal; text-decoration:none;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Modeste Moussorgsky&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-size:12pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p align=&quot;right&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Modeste Moussorgsky&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
+        <subtype>Composer</subtype>
         <offset x="-0.109388" y="0.771701"/>
-        </creator-composer>
-      <work-number>
-        <style>3</style>
+        </Text>
+      <Text>
+        <align>12</align>
+        <xoffset>0</xoffset>
+        <yoffset>0.590551</yoffset>
+        <anchor>page</anchor>
+        <offsetType>absolute</offsetType>
+        <spatiumSizeDependent>0</spatiumSizeDependent>
         <data>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-weight:400; font-style:normal; text-decoration:none;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Promenade&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-size:14pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Promenade&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
+        <subtype>Subtitle</subtype>
         <offset x="-0.437554" y="0.771701"/>
-        </work-number>
+        </Text>
       <BarLine>
         <subtype>1</subtype>
         </BarLine>
@@ -187,12 +204,10 @@ p, li { white-space: pre-wrap; }
       <Dynamic>
         <data>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-weight:400; font-style:italic; text-decoration:none;&quot;&gt;
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-size:12pt; font-weight:400; font-style:italic;&quot;&gt;
 &lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
         <offset x="0.453688" y="5.77915"/>
         </Dynamic>
-      <SlurSegment>
-        </SlurSegment>
       <TimeSig>
         <subtype>324</subtype>
         <den>4</den>
@@ -264,8 +279,6 @@ p, li { white-space: pre-wrap; }
         <startTick>1920</startTick>
         <endTick>2304</endTick>
         </Slur>
-      <SlurSegment>
-        </SlurSegment>
       <TimeSig>
         <subtype>388</subtype>
         <den>4</den>
@@ -350,8 +363,6 @@ p, li { white-space: pre-wrap; }
         <endVoice>1</endVoice>
         <up>1</up>
         </Slur>
-      <SlurSegment>
-        </SlurSegment>
       <TimeSig>
         <subtype>324</subtype>
         <den>4</den>
@@ -452,8 +463,6 @@ p, li { white-space: pre-wrap; }
         <endVoice>1</endVoice>
         <up>1</up>
         </Slur>
-      <SlurSegment>
-        </SlurSegment>
       <TimeSig>
         <subtype>388</subtype>
         <den>4</den>
@@ -717,8 +726,6 @@ p, li { white-space: pre-wrap; }
         <startTick>13824</startTick>
         <endTick>14208</endTick>
         </Slur>
-      <SlurSegment>
-        </SlurSegment>
       <TimeSig>
         <subtype>324</subtype>
         <den>4</den>
@@ -3741,6 +3748,6 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     </Staff>
-  <cursorStaff>0</cursorStaff>
+  <cursorStaff>-1</cursorStaff>
   <cursorVoice>0</cursorVoice>
   </museScore>

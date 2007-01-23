@@ -21,6 +21,7 @@
 #include "mtime.h"
 #include "tempo.h"
 #include "xml.h"
+#include "score.h"
 
 //---------------------------------------------------------
 //   TempoList
@@ -315,7 +316,7 @@ void TempoList::write(Xml& xml) const
 //   TempoList::read
 //---------------------------------------------------------
 
-void TempoList::read(QDomNode node)
+void TempoList::read(QDomNode node, Score* cs)
       {
       QDomElement e = node.toElement();
       _tempo = e.attribute("fix","500000").toInt();
@@ -326,7 +327,8 @@ void TempoList::read(QDomNode node)
                   continue;
             if (e.tagName() == "tempo") {
                   TEvent* t = new TEvent();
-                  unsigned tick = t->read(node);
+                  unsigned tick = t->read(node, cs);
+                  tick = cs->fileDivision(tick);
                   iTEvent pos = find(tick);
                   if (pos != end())
                         erase(pos);
@@ -357,7 +359,7 @@ void TEvent::write(Xml& xml, int at) const
 //   TEvent::read
 //---------------------------------------------------------
 
-int TEvent::read(QDomNode node)
+int TEvent::read(QDomNode node, Score* cs)
       {
       QDomElement e = node.toElement();
       int at = e.attribute("tick", "0").toInt();
@@ -370,7 +372,7 @@ int TEvent::read(QDomNode node)
             QString val(e.text());
             int i = val.toInt();
             if (tag == "tick")
-                  tick = i;
+                  tick = cs->fileDivision(i);
             else if (tag == "val")
                   tempo = i;
             else

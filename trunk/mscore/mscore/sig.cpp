@@ -21,6 +21,7 @@
 #include "sig.h"
 #include "xml.h"
 #include "mtime.h"
+#include "score.h"
 
 //---------------------------------------------------------
 //   ticks_beat
@@ -224,7 +225,7 @@ void SigList::write(Xml& xml) const
 //   SigList::read
 //---------------------------------------------------------
 
-void SigList::read(QDomNode node)
+void SigList::read(QDomNode node, Score* cs)
       {
       for (node = node.firstChild(); !node.isNull(); node = node.nextSibling()) {
             QDomElement e = node.toElement();
@@ -233,7 +234,7 @@ void SigList::read(QDomNode node)
             QString tag(e.tagName());
             if (tag == "sig") {
                   SigEvent t;
-                  int tick = t.read(node);
+                  int tick = t.read(node, cs);
                   (*this)[tick] = t;
                   }
             else
@@ -261,12 +262,13 @@ void SigEvent::write(Xml& xml, int tick) const
 //   SigEvent::read
 //---------------------------------------------------------
 
-int SigEvent::read(QDomNode node)
+int SigEvent::read(QDomNode node, Score* cs)
       {
       irregular = false;
 
       QDomElement e = node.toElement();
       int tick = e.attribute("tick", "0").toInt();
+      tick = cs->fileDivision(tick);
 
       for (node = node.firstChild(); !node.isNull(); node = node.nextSibling()) {
             QDomElement e = node.toElement();
@@ -280,7 +282,7 @@ int SigEvent::read(QDomNode node)
             else if (tag == "denom")
                   n = i;
             else if (tag == "ticks") {
-                  ticks = i;
+                  ticks = cs->fileDivision(i);
                   irregular = true;
                   }
             else
