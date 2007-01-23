@@ -150,33 +150,38 @@ void Canvas::objectPopup(const QPoint& pos, Element* obj)
       {
       QMenu* popup = new QMenu(this);
 
-      QAction* cutAction    = popup->addAction(tr("Cut"));
-      QAction* copyAction   = popup->addAction(tr("Copy"));
-      QAction* deleteAction = popup->addAction(tr("Delete"));
+      popup->addAction(getAction("cut"));
+      popup->addAction(getAction("copy"));
+      popup->addAction(getAction("paste"));
       popup->addSeparator();
-      QAction* invisibleAction;
+
+      QAction* a;
       if (obj->visible())
-            invisibleAction = popup->addAction(tr("Set Invisible"));
+            a = popup->addAction(tr("Set Invisible"));
       else
-            invisibleAction = popup->addAction(tr("Set Visible"));
-      QAction* colorAction = popup->addAction(tr("Color..."));
+            a = popup->addAction(tr("Set Visible"));
+      a->setData("invisible");
+      a = popup->addAction(tr("Color..."));
+      a->setData("color");
       popup->addSeparator();
-      QAction* contextAction = popup->addAction(tr("Context"));
-      QAction* action = popup->exec(pos);
-      if (action == 0)
+      a = popup->addAction(tr("Context"));
+      a->setData("context");
+      a = popup->exec(pos);
+      if (a == 0)
             return;
       _score->startCmd();
-      if (action == cutAction)
-            printf("cut action not implemented\n");
-      else if (action == copyAction)
-            printf("copy action not implemented\n");
-      else if (action == deleteAction)
+      QString cmd(a->data().toString());
+      if (cmd == "cut")
             _score->deleteItem(obj);
-      else if (action == contextAction)
+      else if (cmd == "copy")
+            printf("copy action not implemented\n");
+      else if (cmd == "paste")
+            printf("paste not implemented\n");
+      else if (cmd == "context")
             mscore->showElementContext(obj);
-      else if (action == invisibleAction)
+      else if (cmd == "invisible")
             _score->toggleInvisible(obj);
-      else if (action == colorAction)
+      else if (cmd == "color")
             _score->colorItem(obj);
       _score->endCmd(true);
       }
