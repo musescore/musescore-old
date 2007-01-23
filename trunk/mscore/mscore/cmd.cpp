@@ -504,7 +504,6 @@ void Score::cmdAddText(int subtype)
 
 void Score::cmdAddTitle()
       {
-printf("add title\n");
       cmdAddText(TEXT_TITLE);
       }
 
