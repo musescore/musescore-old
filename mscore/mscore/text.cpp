@@ -228,10 +228,11 @@ void Text::layout()
             return;
       doc->documentLayout()->setPaintDevice(score()->scoreLayout()->paintDevice());
       doc->setUseDesignMetrics(true);
-      // doc->adjustSize();
 
       double tw = bbox().width();
       double th = bbox().height();
+
+// printf("layout %f %s\n", tw, doc->toPlainText().toLatin1().data());
 
       QPointF _off(QPointF(_xoff, _yoff));
       if (_offsetType == OFFSET_SPATIUM)
@@ -248,6 +249,7 @@ void Text::layout()
                   }
             double w = page->loWidth() - page->lm() - page->rm();
             doc->setTextWidth(w);
+            tw = w;
             double h = page->loHeight() - page->tm() - page->bm();
 
             if (_offsetType == OFFSET_REL) {
