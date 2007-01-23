@@ -650,7 +650,7 @@ bool Score::loadFile(QFile* qf)
             return true;
             }
 
-      division = 384;   // for compatibility with old mscore files
+      _fileDivision = 384;   // for compatibility with old mscore files
 
       for (QDomNode node = doc.documentElement(); !node.isNull(); node = node.nextSibling()) {
             QDomElement e = node.toElement();
@@ -667,11 +667,11 @@ bool Score::loadFile(QFile* qf)
                         if (tag == "Staff")
                               readStaff(n);
                         else if (tag == "siglist")
-                              sigmap->read(n);
+                              sigmap->read(n, this);
                         else if (tag == "keylist")
-                              keymap->read(n);
+                              keymap->read(n, this);
                         else if (tag == "tempolist")
-                              tempomap->read(n);
+                              tempomap->read(n, this);
                         else if (tag == "cursorStaff")
                               cis->staff = i;
                         else if (tag == "cursorVoice")
@@ -687,7 +687,7 @@ bool Score::loadFile(QFile* qf)
                         else if (tag == "Spatium")
                               setSpatium (val.toDouble() * DPMM);
                         else if (tag == "Division")
-                              division = i;
+                              _fileDivision = i;
                         else if (tag == "showInvisible")
                               _showInvisible = i;
                         else if (tag == "Style")
@@ -741,9 +741,9 @@ bool Score::loadFile(QFile* qf)
                   m->add(barLine);
                   }
             }
-
       connectTies();
       searchSelectedElements();
+      _fileDivision = division;
       return false;
       }
 

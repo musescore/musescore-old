@@ -22,6 +22,7 @@
 #define __SIG_H__
 
 class Xml;
+class Score;
 
 //---------------------------------------------------------
 //   Signature Event
@@ -35,7 +36,7 @@ struct SigEvent {
       int z, n;            // measure signature
       int bar;             // precomputed
 
-      int read(QDomNode);
+      int read(QDomNode, Score*);
       void write(Xml&, int) const;
 
       SigEvent() { }
@@ -59,7 +60,7 @@ class SigList : public std::map<const int, SigEvent > {
       void add(int tick, int ticks, int z, int n);
       void del(int tick);
 
-      void read(QDomNode);
+      void read(QDomNode, Score*);
       void write(Xml&) const;
 
       void timesig(int tick, int& z, int& n) const;

@@ -22,6 +22,7 @@
 #define __KEY_H__
 
 class Xml;
+class Score;
 
 //---------------------------------------------------------
 //   KeyList
@@ -36,8 +37,7 @@ class KeyList : public std::map<const int, int> {
    public:
       KeyList() {}
       int key(int tick) const;
-      void read(QDomNode);
-      void readKey(QDomNode);
+      void read(QDomNode, Score*);
       void write(Xml&, const char* name) const;
 
       void removeTime(int start, int len);

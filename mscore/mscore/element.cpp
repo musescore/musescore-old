@@ -208,13 +208,13 @@ bool Element::readProperties(QDomNode node)
       int i = val.toInt();
 
       if (tag == "tick")
-            _time.setTick(i);
+            _time.setTick(score()->fileDivision(i));
       else if (tag == "subtype") {
             // do not always call Element::setSubtype():
             this->setSubtype(val);
             }
       else if (tag == "ticklen")
-            setTickLen(i);
+            setTickLen(score()->fileDivision(i));
       else if (tag == "offset")
             setUserOff(readPoint(node));
       else if (tag == "visible")

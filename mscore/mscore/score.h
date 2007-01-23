@@ -128,6 +128,8 @@ class Score : public QObject {
                         ///< save a backup file will be created, subsequent
                         ///< saves will not overwrite the backup file.
 
+      int _fileDivision; ///< division of current loading *.msc file
+
       ChordRest* nextChordRest(ChordRest*);
       ChordRest* prevChordRest(ChordRest*);
       ChordRest* nextMeasure(ChordRest*);
@@ -410,6 +412,7 @@ class Score : public QObject {
       void cmd(const QString&);
       Element* editElement() const { return editObject; }
       void initSymbols();
+      int fileDivision(int t) const { return (t * division + _fileDivision/2) / _fileDivision; }
       };
 
 extern void setPadState(Element*);

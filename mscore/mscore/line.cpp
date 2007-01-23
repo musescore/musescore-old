@@ -296,9 +296,9 @@ bool SLine::readProperties(QDomNode node)
       else if (tag == "off2")
             off2 = readPoint(node);
       else if (tag == "tick1")
-            _tick1 = i;
+            _tick1 = score()->fileDivision(i);
       else if (tag == "tick2")
-            _tick2 = i;
+            _tick2 = score()->fileDivision(i);
       else
             return false;
       return true;

@@ -21,6 +21,7 @@
 #include "key.h"
 #include "xml.h"
 #include "utils.h"
+#include "score.h"
 
 //---------------------------------------------------------
 //   key
@@ -50,32 +51,21 @@ void KeyList::write(Xml& xml, const char* name) const
       }
 
 //---------------------------------------------------------
-//   KeyList::readKey
-//---------------------------------------------------------
-
-void KeyList::readKey(QDomNode node)
-      {
-      QDomElement e = node.toElement();
-      if (e.isNull())
-            return;
-      int tick = e.attribute("tick", "0").toInt();
-      int idx   = e.attribute("idx", "0").toInt();
-      (*this)[tick] = idx;
-      }
-
-//---------------------------------------------------------
 //   KeyList::read
 //---------------------------------------------------------
 
-void KeyList::read(QDomNode node)
+void KeyList::read(QDomNode node, Score* cs)
       {
       for (node = node.firstChild(); !node.isNull(); node = node.nextSibling()) {
             QDomElement e = node.toElement();
             if (e.isNull())
                   continue;
             QString tag(e.tagName());
-            if (tag == "key")
-                  readKey(node);
+            if (tag == "key") {
+                  int tick = e.attribute("tick", "0").toInt();
+                  int idx  = e.attribute("idx", "0").toInt();
+                  (*this)[cs->fileDivision(tick)] = idx;
+                  }
             else
                   domError(node);
             }
