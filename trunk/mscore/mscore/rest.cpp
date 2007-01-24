@@ -62,7 +62,6 @@ void Rest::draw1(Painter& p)
 void Rest::setSym(int s)
       {
       _sym = s;
-//      bboxUpdate();   DEBUG1
       }
 
 //---------------------------------------------------------
@@ -218,7 +217,6 @@ void Rest::add(Element* e)
       e->setParent(this);
       e->setStaff(staff());
       attributes.push_back((NoteAttribute*)e);
-      bboxUpdate();
       }
 
 //---------------------------------------------------------
@@ -234,7 +232,6 @@ void Rest::remove(Element* e)
             printf("Rest::remove(): attribute not found\n");
       else
             attributes.erase(l);
-      bboxUpdate();
       }
 
 //---------------------------------------------------------
@@ -259,18 +256,18 @@ Element* Rest::findSelectableElement(QPointF p) const
 void Rest::layout()
       {
       layoutAttributes();
-      bboxUpdate();
       }
 
 //---------------------------------------------------------
-//   bboxUpdate
+//   bbox
 //---------------------------------------------------------
 
-void Rest::bboxUpdate()
+QRectF Rest::bbox() const
       {
-      setbbox(symbols[_sym].bbox());
+      QRectF b = symbols[_sym].bbox();
       for (ciAttribute i = attributes.begin(); i != attributes.end(); ++i)
-            orBbox((*i)->bbox().translated((*i)->pos()));
+            b |= (*i)->bbox().translated((*i)->pos());
+      return b;
       }
 
 //---------------------------------------------------------

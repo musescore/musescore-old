@@ -123,7 +123,15 @@ SysStaff* System::insertStaff(Staff*, int idx)
 #endif
       insertSysStaff(staff, idx);
       setInstrumentName(idx);
+      return staff;
+      }
 
+//---------------------------------------------------------
+//   bbox
+//---------------------------------------------------------
+
+QRectF System::bbox() const
+      {
       // calculate new height of bounding box
       double h = _spatium * 4;
       int n    = _staves.size();
@@ -131,8 +139,7 @@ SysStaff* System::insertStaff(Staff*, int idx)
             h += distance(i);
             h += _spatium * 4;
             }
-      setHeight(h);
-      return staff;
+      return QRectF(0.0, 0.0, _width, h);
       }
 
 //---------------------------------------------------------
@@ -275,6 +282,7 @@ double System::layout(const QPointF& p, double w)
                   }
             idx += nstaves;
             }
+
       qreal h;
       if (_staves.empty())
             h = 50.0;		// TODO: HACK
@@ -284,7 +292,8 @@ double System::layout(const QPointF& p, double w)
             barLine->setHeight(h);
             barLine->setPos(x, 0);
             }
-      setHeight(h);
+//DEBUG:?      setHeight(h);
+
       return x;
       }
 

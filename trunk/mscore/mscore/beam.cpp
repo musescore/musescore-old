@@ -621,13 +621,22 @@ void Beam::layout()
                   npos += QPointF(0, -stemLen);
             stem->setPos(npos - chord->pos() - chord->segment()->pos());
             }
-      setbbox(QRectF(0, 0, 0, 0));
+      }
+
+//---------------------------------------------------------
+//   bbox
+//---------------------------------------------------------
+
+QRectF Beam::bbox() const
+      {
+      QRectF r;
       for (ciBeamSegment ibs = beamSegments.begin();
          ibs != beamSegments.end(); ++ibs) {
             BeamSegment* bs = *ibs;
-            orBbox(QRectF(bs->p1, QSizeF(1.0, 1.0)));
-            orBbox(QRectF(bs->p2, QSizeF(1.0, 1.0)));
+            r |= QRectF(bs->p1, QSizeF(1.0, 1.0));
+            r |= QRectF(bs->p2, QSizeF(1.0, 1.0));
             }
+      return r;
       }
 
 

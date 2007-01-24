@@ -151,11 +151,6 @@ class Element {
       virtual double width() const            { return bbox().width();  }
       QRectF abbox() const                    { return bbox().translated(aref()); }
       QPointF apos() const                    { return aref();          }
-      void setWidth(double v)                 { _bbox.setWidth(v);      }
-      void setHeight(double v)                { _bbox.setHeight(v);     }
-      void setBboxX(qreal x)                  { _bbox.setX(x);          }
-      void setBboxY(qreal y)                  { _bbox.setY(y);          }
-      void orBbox(const QRectF& f)            { _bbox |= f;             }
       virtual void setbbox(const QRectF& r)   { _bbox = r;              }
       virtual bool contains(const QPointF& p) const;
       virtual QPainterPath shape() const;
@@ -282,14 +277,16 @@ typedef ElementList::reverse_iterator riElement;
 */
 
 class SStaff : public Element {
-      Spatium lineWidth;
+      // Spatium lineWidth;
+      qreal _width;
       int lines;
 
    public:
       SStaff(Score*);
-      virtual SStaff* clone() const { return new SStaff(*this); }
+      virtual SStaff* clone() const    { return new SStaff(*this); }
       virtual ElementType type() const { return STAFF; }
-
+      void setWidth(qreal v)           { _width = v; }
+      virtual QRectF bbox() const;
       virtual void draw1(Painter&);
       virtual void write(Xml& xml) const;
       virtual void read(QDomNode);
@@ -457,6 +454,7 @@ class Volta : public Element {
       void setLen(qreal);
       virtual void write(Xml&) const;
       virtual void read(QDomNode);
+      virtual QRectF bbox() const;
       };
 
 #endif

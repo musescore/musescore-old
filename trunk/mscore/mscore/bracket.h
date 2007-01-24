@@ -49,6 +49,7 @@ class Bracket : public Element {
       int span() const      { return _span; }
       void setSpan(int val) { _span = val; }
 
+      virtual QRectF bbox() const;
       virtual void setHeight(qreal);
       virtual double width() const;
 
@@ -63,7 +64,6 @@ class Bracket : public Element {
       virtual bool startEditDrag(const QPointF&);
       virtual bool editDrag(QMatrix&, QPointF*, const QPointF&);
       virtual bool endEditDrag();
-      virtual void bboxUpdate();
       virtual QPointF dragOff() const;
 
       virtual bool acceptDrop(const QPointF&, int, const QDomNode&) const;

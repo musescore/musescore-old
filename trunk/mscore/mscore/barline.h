@@ -35,6 +35,7 @@ enum BarType {
 //---------------------------------------------------------
 
 class BarLine : public Element {
+      qreal _height;
 
    public:
       BarLine(Score*);
@@ -51,6 +52,7 @@ class BarLine : public Element {
 
       virtual bool acceptDrop(const QPointF&, int, const QDomNode&) const;
       virtual void drop(const QPointF&, int, const QDomNode&);
+      void setHeight(qreal v) { _height = v; }
       };
 
 #endif

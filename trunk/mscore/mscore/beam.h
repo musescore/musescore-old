@@ -67,6 +67,7 @@ class Beam : public Element {
       void remove(ChordRest* a);
       QString xmlType(ChordRest*) const;
       virtual void move(double, double);
+      virtual QRectF bbox() const;
 
       virtual void draw1(Painter&);
       };

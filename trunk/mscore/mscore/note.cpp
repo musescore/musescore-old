@@ -666,15 +666,6 @@ ShadowNote::ShadowNote(Score* s)
       }
 
 //---------------------------------------------------------
-//   bbox
-//---------------------------------------------------------
-
-QRectF ShadowNote::bbox() const
-      {
-      return _sym->bbox();
-      }
-
-//---------------------------------------------------------
 //   ShadowNote
 //---------------------------------------------------------
 
@@ -723,21 +714,22 @@ void ShadowNote::draw(Painter& p)
       }
 
 //---------------------------------------------------------
-//   layout
+//   bbox
 //---------------------------------------------------------
 
-void ShadowNote::layout()
+QRectF ShadowNote::bbox() const
       {
-      setbbox(_sym->bbox());
+      QRectF b = _sym->bbox();
       double x  = _sym->width()/2 - _spatium;
       double lw = point(style->helpLineWidth);
 
       QRectF r(0, -lw/2.0, 2 * _spatium, lw);
 
       for (int i = -2; i >= _line; i -= 2)
-            orBbox(r.translated(QPointF(x, _spatium * .5 * (i - _line))));
+            b |= r.translated(QPointF(x, _spatium * .5 * (i - _line)));
       for (int i = 10; i <= _line; i += 2)
-            orBbox(r.translated(QPointF(x, _spatium * .5 * (i - _line))));
+            b |= r.translated(QPointF(x, _spatium * .5 * (i - _line)));
+      return b;
       }
 
 //---------------------------------------------------------

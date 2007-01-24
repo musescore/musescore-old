@@ -87,6 +87,7 @@ class System : public Element {
       SysStaffList _staves;
       BarLine* barLine;               ///< Left hand bar, connects staves in system.
       bool _pageBreak;
+      qreal _width;
 
       void setInstrumentName(int staff);
 
@@ -95,6 +96,9 @@ class System : public Element {
       ~System();
       virtual System* clone() const { return new System(*this); }
       virtual ElementType type() const { return SYSTEM; }
+
+      virtual QRectF bbox() const;
+      void setWidth(qreal v)  { _width = v; }
 
       virtual void add(Element*);
       virtual void remove(Element*);

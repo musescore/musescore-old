@@ -213,7 +213,6 @@ void Clef::drop(const QPointF&, int type, const QDomNode& node)
       int stype = clef->subtype();
       delete clef;
       int st = subtype();
-printf("drop clef %d to %d\n", stype, st);
       if (st == stype)
             return;
       setSubtype(stype);

@@ -41,7 +41,7 @@ class Ottava : public SLine {
       virtual void setSubtype(int val);
       virtual void write(Xml&) const;
       virtual void read(QDomNode);
-      virtual void bboxUpdate();
+      virtual QRectF bbox() const;
       };
 
 #endif
