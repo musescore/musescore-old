@@ -66,18 +66,17 @@ void Stem::draw1(Painter& p)
 void Stem::setLen(const Spatium& l)
       {
       _len = l;
-      bboxUpdate();
       }
 
 //---------------------------------------------------------
-//   bboxUpdate
+//   bbox
 //---------------------------------------------------------
 
-void Stem::bboxUpdate()
+QRectF Stem::bbox() const
       {
       double w = point(::style->stemWidth);
       double l = point(_len);
-      setbbox(QRectF(-w * .5, 0, w, l));
+      return QRectF(-w * .5, 0, w, l);
       }
 
 //---------------------------------------------------------
@@ -213,7 +212,6 @@ void Chord::remove(Element* e)
                   attributes.erase(l);
                   }
             }
-      bboxUpdate();
       }
 
 //---------------------------------------------------------
@@ -252,24 +250,23 @@ void Chord::draw1(Painter& p)
       }
 
 //---------------------------------------------------------
-//   bboxUpdate
+//   bbox
 //---------------------------------------------------------
 
-void Chord::bboxUpdate()
+QRectF Chord::bbox() const
       {
-      setbbox(QRectF(0, 0, 0, 0));
-      for (ciNote i = notes.begin(); i != notes.end(); ++i) {
-            i->second->bboxUpdate();
-            orBbox(i->second->bbox().translated(i->second->pos()));
-            }
+      QRectF _bbox;
+      for (ciNote i = notes.begin(); i != notes.end(); ++i)
+            _bbox |= i->second->bbox().translated(i->second->pos());
       for (ciHelpLine i = helpLines.begin(); i != helpLines.end(); ++i)
-            orBbox((*i)->bbox().translated((*i)->pos()));
+            _bbox |= (*i)->bbox().translated((*i)->pos());
       for (ciAttribute i = attributes.begin(); i != attributes.end(); ++i)
-            orBbox((*i)->bbox().translated((*i)->pos()));
+            _bbox |= (*i)->bbox().translated((*i)->pos());
       if (_hook)
-            orBbox(_hook->bbox().translated(_hook->pos()));
+            _bbox |= _hook->bbox().translated(_hook->pos());
       if (_stem)
-            orBbox(_stem->bbox().translated(_stem->pos()));
+            _bbox |= _stem->bbox().translated(_stem->pos());
+      return _bbox;
       }
 
 //---------------------------------------------------------
@@ -362,7 +359,6 @@ void Chord::layoutStem()
             }
       else
             setHook(0);
-      bboxUpdate();
       }
 
 //---------------------------------------------------------
@@ -373,7 +369,6 @@ void Chord::layout()
       {
       if (notes.empty())
             return;
-      bboxUpdate();     //DEBUG1
       Note* upnote     = notes.back();
       double headWidth = upnote->headWidth();
 
@@ -569,7 +564,6 @@ void Chord::layout()
                   // position in this list changes
                   }
             }
-      bboxUpdate();
       }
 
 //-----------------------------------------------------------------------------

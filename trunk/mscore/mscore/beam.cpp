@@ -620,7 +620,6 @@ void Beam::layout()
             if (chord->isUp())
                   npos += QPointF(0, -stemLen);
             stem->setPos(npos - chord->pos() - chord->segment()->pos());
-            chord->bboxUpdate();
             }
       setbbox(QRectF(0, 0, 0, 0));
       for (ciBeamSegment ibs = beamSegments.begin();

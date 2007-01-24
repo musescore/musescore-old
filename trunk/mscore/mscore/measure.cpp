@@ -1050,10 +1050,8 @@ void Measure::layout2()
                         const NoteList* nl = a->noteList();
                         for (ciNote in = nl->begin(); in != nl->end(); ++in) {
                               Tie* tie = in->second->tieFor();
-                              if (tie) {
+                              if (tie)
                                     tie->layout();
-                                    in->second->bboxUpdate();
-                                    }
                               }
                         }
                   }
