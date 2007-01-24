@@ -46,7 +46,7 @@ const char* elementNames[] = {
       "Cursor", "Selection", "Lasso", "Clef", "KeySig", "TimeSig", "Chord", "Rest",
       "Tie", "Slur", "Measure",
       "Attribute", "Dynamic", "Page", "Beam", "Flag", "Lyrics",
-      "InstrumentLong", "InstrumentShort", "Fingering", "System",
+      "InstrumentLong", "InstrumentShort", "System",
       "HairPin", "Tuplet", "RubberBand", "VSpacer",
       "Segment", "TempoText", "ShadowNote", "Volta", "Ottava",
       "Pedal", "Trill", "LayoutBreak", "HelpLine"
@@ -92,7 +92,6 @@ void Element::init()
 //---------------------------------------------------------
 
 Element::Element(Score* s)
-   : _bbox(0.0, 0.0, 0.0, 0.0)
       {
       _score = s;
       init();
@@ -142,14 +141,35 @@ QPointF Element::aref() const
 //---------------------------------------------------------
 
 /**
- Return true if \a p is inside of bounding box of object.
+ Return true if \a p is inside the shape of the object.
 
  Note: \a p is relative to the coordinate system of parent().
 */
 
 bool Element::contains(const QPointF& p) const
       {
-      return bbox().contains(p - pos());
+      return shape().contains(p - pos());
+      }
+
+//---------------------------------------------------------
+//   shape
+//---------------------------------------------------------
+
+/**
+  Returns the shape of this element as a QPainterPath in local
+  coordinates. The shape is used for collision detection and
+  hit tests (contains())
+
+  The default implementation calls bbox() to return a simple rectangular
+  shape, but subclasses can reimplement this function to return a more
+  accurate shape for non-rectangular items.
+*/
+
+QPainterPath Element::shape() const
+      {
+      QPainterPath pp;
+      pp.addRect(bbox());
+      return pp;
       }
 
 //---------------------------------------------------------
@@ -428,7 +448,6 @@ void Line::dump() const
 void Line::setLen(Spatium l)
       {
       _len = l;
-      bboxUpdate();
       }
 
 //---------------------------------------------------------
@@ -438,21 +457,20 @@ void Line::setLen(Spatium l)
 void Line::setLineWidth(Spatium w)
       {
       _width = w;
-      bboxUpdate();
       }
 
 //---------------------------------------------------------
-//   bboxUpdate
+//   bbox
 //---------------------------------------------------------
 
-void Line::bboxUpdate()
+QRectF Line::bbox() const
       {
       double w = point(_width);
       double l = point(_len);
       if (vertical)
-            setbbox(QRectF(-w*.5, 0, w, l));
+            return QRectF(-w*.5, 0, w, l);
       else
-            setbbox(QRectF(0, -w*.5, l, w));
+            return QRectF(0, -w*.5, l, w);
       }
 
 //---------------------------------------------------------
@@ -548,16 +566,13 @@ void Compound::addElement(Element* e, double x, double y)
       e->setPos(x, y);
       e->setParent(this);
       elemente.push_back(e);
-
-      QRectF r = e->bbox().translated(e->pos());
-      _bbox |= r;
       }
 
 //---------------------------------------------------------
 //   bbox
 //---------------------------------------------------------
 
-const QRectF& Compound::bbox() const
+QRectF Compound::bbox() const
       {
       _bbox = QRectF(0,0,0,0);
       for (ciSymbol i = elemente.begin(); i != elemente.end(); ++i) {
@@ -598,7 +613,6 @@ void Compound::clear()
       for (ciSymbol i = elemente.begin(); i != elemente.end(); ++i)
             delete *i;
       elemente.clear();
-      setbbox(QRectF());
       }
 
 //---------------------------------------------------------

@@ -185,7 +185,7 @@ void Text::setSubtype(const QString& s)
 //   bbox
 //---------------------------------------------------------
 
-const QRectF& Text::bbox() const
+QRectF Text::bbox() const
       {
       _bbox = QRectF(0.0, 0.0, doc->size().width(), doc->size().height());
       return _bbox;
@@ -255,12 +255,15 @@ void Text::layout()
             if (_offsetType == OFFSET_REL) {
                   _off = QPointF(_xoff * w * 0.01, _yoff * h * 0.01);
                   }
+            x = page->lm();
+#if 0
             if (_align & ALIGN_LEFT)
                   x = page->lm();
             else if (_align & ALIGN_RIGHT)
-                  x  = page->lm() + w - tw;
+                  x  = page->lm() + w;
             else if (_align & ALIGN_HCENTER)
                   x  = page->lm() + w * .5 - tw * .5;
+#endif
             if (_align & ALIGN_TOP)
                   y = page->tm();
             else if (_align & ALIGN_BOTTOM)
@@ -295,9 +298,15 @@ void Text::setText(const QString& s)
       doc->clear();
       QTextCursor cursor(doc);
       cursor.movePosition(QTextCursor::Start);
-      if (_align & ALIGN_HCENTER) {
+      if (_align) {
             QTextBlockFormat bf = cursor.blockFormat();
-            bf.setAlignment(Qt::AlignHCenter);
+            if (_align & ALIGN_HCENTER)
+                  bf.setAlignment(Qt::AlignHCenter);
+            else if (_align & ALIGN_LEFT)
+                  bf.setAlignment(Qt::AlignLeft);
+            else if (_align & ALIGN_RIGHT)
+                  bf.setAlignment(Qt::AlignRight);
+
             cursor.setBlockFormat(bf);
             }
       QTextCharFormat tf = cursor.charFormat();
@@ -321,18 +330,6 @@ void Text::setStyle(int n)
       _anchor      = s->anchor;
       _offsetType  = s->offsetType;
       _sizeIsSpatiumDependent = s->sizeIsSpatiumDependent;
-#if 0
-      cursor->movePosition(QTextCursor::Start);
-
-      if (_align & ALIGN_HCENTER) {
-            QTextBlockFormat bf = cursor->blockFormat();
-            bf.setAlignment(Qt::AlignHCenter);
-            cursor->setBlockFormat(bf);
-            }
-      QTextCharFormat tf = cursor->charFormat();
-      tf.setFont(s->font());
-      cursor->setCharFormat(tf);
-#endif
       layout();
       }
 
@@ -476,7 +473,7 @@ bool Text::edit(QKeyEvent* ev)
       int key = ev->key();
       if (key == Qt::Key_F2) {
             if (palette == 0)
-                  palette = new TextPalette(0);
+                  palette = new TextPalette(score()->canvas());
             if (palette->isVisible())
                   palette->hide();
             else {
@@ -586,8 +583,33 @@ void Text::draw1(Painter& p)
       QColor color = p.pen().color();
       c.palette.setColor(QPalette::Text, color);
       doc->documentLayout()->draw(&p, c);
-
       p.restore();
+
+#if 0
+      //
+      //  DEBUG: draw shape
+      //
+      p.setBrush(Qt::NoBrush);
+      p.setPen(QPen(Qt::red, 2, Qt::SolidLine));
+      p.drawPath(shape());
+#endif
+      }
+
+//---------------------------------------------------------
+//   shape
+//---------------------------------------------------------
+
+QPainterPath Text::shape() const
+      {
+      QPainterPath pp;
+
+      for (QTextBlock tb = doc->begin(); tb.isValid(); tb = tb.next()) {
+            QTextLayout* tl = tb.layout();
+            int n = tl->lineCount();
+            for (int i = 0; i < n; ++i)
+                  pp.addRect(tl->lineAt(0).naturalTextRect().translated(tl->position()));
+            }
+      return pp;
       }
 
 //---------------------------------------------------------
@@ -598,13 +620,16 @@ void Text::addSymbol(const SymCode& s)
       {
 // printf("Text: addSymbol(%x)\n", s.code);
       QTextCharFormat oFormat = cursor->charFormat();
-      QTextCharFormat nFormat(oFormat);
-      if (s.style >= 0)
+      if (s.style >= 0) {
+            QTextCharFormat oFormat = cursor->charFormat();
+            QTextCharFormat nFormat(oFormat);
             nFormat.setFontFamily(textStyles[s.style].font().family());
-      cursor->setCharFormat(nFormat);
-//      QString str(s.code);
-      cursor->insertText(s.code);
-      cursor->setCharFormat(oFormat);
+            cursor->setCharFormat(nFormat);
+            cursor->insertText(s.code);
+            cursor->setCharFormat(oFormat);
+            }
+      else
+            cursor->insertText(s.code);
       score()->layout();
       score()->endCmd(false);
       }
@@ -680,41 +705,6 @@ void Lyrics::read(QDomNode node)
                   ;
             else
                   domError(node);
-            }
-      }
-
-//---------------------------------------------------------
-//   Fingering
-//---------------------------------------------------------
-
-Fingering::Fingering(Score* s)
-   : Text(s)
-      {
-      setSubtype(TEXT_FINGERING);
-      }
-
-//---------------------------------------------------------
-//   write
-//---------------------------------------------------------
-
-void Fingering::write(Xml& xml) const
-      {
-      Text::write(xml, "Fingering");
-      }
-
-//---------------------------------------------------------
-//   setSubtype
-//---------------------------------------------------------
-
-void Fingering::setSubtype(int n)
-      {
-      Element::setSubtype(n);
-      switch(n) {
-            case 1: setText("1"); break;
-            case 2: setText("2"); break;
-            case 3: setText("3"); break;
-            case 4: setText("4"); break;
-            case 5: setText("5"); break;
             }
       }
 

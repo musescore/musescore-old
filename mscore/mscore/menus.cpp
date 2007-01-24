@@ -587,23 +587,27 @@ void MuseScore::fingeringMenu()
             sa->setWidget(sp);
             sp->setGrid(50, 50);
 
-            Fingering* k;
-            k = new Fingering(0);
-            k->setSubtype(1);
+            Text* k;
+            k = new Text(0);
+            k->setSubtype(TEXT_FINGERING);
+            k->setText("1");
             sp->addObject(0, k, tr("fingering 1"));
-            k = new Fingering(0);
-            k->setSubtype(2);
+            k = new Text(0);
+            k->setSubtype(TEXT_FINGERING);
+            k->setText("2");
             sp->addObject(1, k, tr("fingering 2"));
-            k = new Fingering(0);
-            k->setSubtype(3);
+            k = new Text(0);
+            k->setSubtype(TEXT_FINGERING);
+            k->setText("3");
             sp->addObject(2, k, tr("fingering 3"));
-            k = new Fingering(0);
-            k->setSubtype(4);
+            k = new Text(0);
+            k->setSubtype(TEXT_FINGERING);
+            k->setText("4");
             sp->addObject(3, k, tr("fingering 4"));
-            k = new Fingering(0);
-            k->setSubtype(5);
+            k = new Text(0);
+            k->setSubtype(TEXT_FINGERING);
+            k->setText("5");
             sp->addObject(4, k, tr("fingering 5"));
-
             }
       fingeringPalette->show();
       fingeringPalette->raise();

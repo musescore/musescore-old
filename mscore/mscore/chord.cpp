@@ -559,11 +559,14 @@ void Chord::layout()
 
       for (iNote in = notes.begin(); in != notes.end(); ++in) {
             Note* note = in->second;
-            QList<Fingering*>& fingering = note->fingering();
+            QList<Text*>& fingering = note->fingering();
             double x = _spatium * 0.8 + note->headWidth();
-            foreach(Fingering* f, fingering) {
+            foreach(Text* f, fingering) {
                   f->setPos(x, 0.0);
-                  x += _spatium;
+                  // TODO: x += _spatium;
+                  // if we have two fingerings and move the first,
+                  // the second will also change position because their
+                  // position in this list changes
                   }
             }
       bboxUpdate();

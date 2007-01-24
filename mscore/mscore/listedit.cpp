@@ -274,7 +274,7 @@ void PageListEditor::updateList()
                                                 if (note->accidental()) {
                                                       new ElementItem(ni, note->accidental());
                                                       }
-                                                foreach(Fingering* f, note->fingering())
+                                                foreach(Text* f, note->fingering())
                                                       new ElementItem(ni, f);
                                                 }
                                           }
@@ -382,7 +382,6 @@ void PageListEditor::itemChanged(QTreeWidgetItem* i, QTreeWidgetItem*)
             case BAR_LINE: ew = barLineView;  break;
             case DYNAMIC:  ew = dynamicView;  break;
             case TUPLET:   ew = tupletView;   break;
-            case FINGERING:
             case TEXT:
                   ew = textView;
                   break;
@@ -1208,9 +1207,9 @@ void ShowElementBase::offsetxChanged(double val)
       {
       QRectF r(el->abbox());
       el->setUserXoffset(val);
-      Element* e = el;
-      while ((e = e->parent()))
-            e->bboxUpdate();
+//      Element* e = el;
+//TODO      while ((e = e->parent()))
+//            e->bboxUpdate();
       el->score()->update(r | el->abbox());
       }
 

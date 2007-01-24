@@ -97,7 +97,7 @@ System::~System()
 //   bboxStaff
 //---------------------------------------------------------
 
-const QRectF& System::bboxStaff(int staff) const
+QRectF System::bboxStaff(int staff) const
       {
       if (staff >= int(_staves.size()))
             abort();

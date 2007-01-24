@@ -72,5 +72,6 @@
 #include <QtGui/QAbstractTextDocumentLayout>
 #include <QtGui/QToolBox>
 #include <QtGui/QToolButton>
+#include <QtGui/QTextBlock>
 #endif
 

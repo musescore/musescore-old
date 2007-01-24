@@ -46,7 +46,7 @@ enum ElementType {
       CLEF, KEYSIG, TIMESIG, CHORD, REST,
       TIE, SLUR, MEASURE,
       ATTRIBUTE, DYNAMIC, PAGE, BEAM, HOOK, LYRICS,
-      INSTRUMENT_NAME1, INSTRUMENT_NAME2, FINGERING,
+      INSTRUMENT_NAME1, INSTRUMENT_NAME2,
       SYSTEM, HAIRPIN, TUPLET, RUBBERBAND, VSPACER,
       SEGMENT, TEMPO_TEXT,
       SHADOW_NOTE, VOLTA, OTTAVA, PEDAL, TRILL,
@@ -146,7 +146,7 @@ class Element {
       int mxmlOff() const                     { return _mxmlOff;  }
       void setMxmlOff(int o)                  { _mxmlOff = o;     }
 
-      virtual const QRectF& bbox() const      { return _bbox;           }
+      virtual QRectF bbox() const             { return _bbox;           }
       virtual double height() const           { return bbox().height(); }
       virtual double width() const            { return bbox().width();  }
       QRectF abbox() const                    { return bbox().translated(aref()); }
@@ -158,6 +158,7 @@ class Element {
       void orBbox(const QRectF& f)            { _bbox |= f;             }
       virtual void setbbox(const QRectF& r)   { _bbox = r;              }
       virtual bool contains(const QPointF& p) const;
+      virtual QPainterPath shape() const;
       bool intersects(const QRectF& r) const;
 
       virtual ElementType type() const = 0;
@@ -217,7 +218,6 @@ class Element {
       virtual void space(double& min, double& extra) const;
       QColor color() const            { return _color; }
       void setColor(const QColor& c)  { _color = c;    }
-      virtual void bboxUpdate()       {}
       virtual QByteArray mimeData() const;
 /**
  Return true if this element accepts a drop at canvas relative \a pos
@@ -363,6 +363,7 @@ class Line : public Element {
 
       virtual Line* clone() const { return new Line(*this); }
       virtual ElementType type() const { return LINE; }
+      virtual QRectF bbox() const;
 
       virtual void draw1(Painter&);
       void writeProperties(Xml& xml) const;
@@ -373,7 +374,6 @@ class Line : public Element {
       Spatium lineWidth()  const { return _width; }
       void setLen(Spatium);
       void setLineWidth(Spatium);
-      virtual void bboxUpdate();
       };
 
 //---------------------------------------------------------
@@ -392,7 +392,7 @@ class Compound : public Element {
       void clear();
       virtual void setSelected(bool f);
       virtual void setVisible(bool);
-      virtual const QRectF& bbox() const;
+      virtual QRectF bbox() const;
       };
 
 //---------------------------------------------------------

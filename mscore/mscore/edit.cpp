@@ -968,7 +968,6 @@ void Score::deleteItem(Element* el)
             case HAIRPIN:
             case LYRICS:
             case ATTRIBUTE:
-            case FINGERING:
             case BRACKET:
             case VOLTA:
             case OTTAVA:

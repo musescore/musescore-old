@@ -107,7 +107,7 @@ class System : public Element {
 
       MeasureList* measures() const { return ml; }
 
-      const QRectF& bboxStaff(int staff) const;
+      QRectF bboxStaff(int staff) const;
       SysStaffList* staves()               { return &_staves; }
       SysStaff* staff(int n)               { return _staves[n]; }
 

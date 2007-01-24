@@ -1555,7 +1555,7 @@ void ExportMusicXml::chord(Chord* chord, int staff, const LyricsList* ll)
             if (i == nl->begin()) {
                   chordAttributes(chord, notations, xml);
                   }
-            foreach (const Fingering* f, note->fingering()) {
+            foreach (const Text* f, note->fingering()) {
                   notations.tag(xml);
                   xml.stag("technical");
                   xml.tag("fingering", f->getText());

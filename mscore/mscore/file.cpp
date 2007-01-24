@@ -492,6 +492,10 @@ void Symbol::read(QDomNode node)
             else
                   domError(node);
             }
+      if (s == -1) {
+            printf("unknown symbol\n");
+            s = 0;
+            }
       setPos(pos);
       setSym(s);
       }
@@ -842,27 +846,18 @@ void ElementList::write(Xml& xml) const
 
 void Score::printFile()
       {
-//      printer.setMargins(0, 0, 0, 0);
-//         lrint(cs->pageFormat()->topMargin),
-//         lrint(cs->pageFormat()->leftMargin),
-//         lrint(cs->pageFormat()->bottomMargin),
-//         lrint(cs->pageFormat()->rightMargin)
-//         );
-//      printf("print format %d\n", paperSizes[pageFormat()->size].qtsize);
-
       //
       // HighResolution gives higher output quality
       QPrinter printer(QPrinter::HighResolution);
-//      QPrinter printer(QPrinter::ScreenResolution);
       printer.setPageSize(paperSizes[pageFormat()->size].qtsize);
       printer.setOrientation(pageFormat()->landscape ? QPrinter::Landscape : QPrinter::Portrait);
-
-      QPrintDialog pd(&printer, 0);
-      pd.exec();
-
       printer.setCreator("MuseScore Version: " VERSION);
       printer.setFullPage(true);
       printer.setColorMode(QPrinter::Color);
+
+      QPrintDialog pd(&printer, 0);
+      if (!pd.exec())
+            return;
 
       Painter p(&printer);
       p.setClipRect(QRectF(0, 0, 100000, 100000));

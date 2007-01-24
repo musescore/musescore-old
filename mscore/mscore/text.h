@@ -97,7 +97,8 @@ class Text : public Element {
       void writeProperties(Xml& xml) const;
       bool readProperties(QDomNode node);
       virtual void layout();
-      virtual const QRectF& bbox() const;
+      virtual QRectF bbox() const;
+      virtual QPainterPath shape() const;
       };
 
 //---------------------------------------------------------
@@ -122,20 +123,6 @@ class Lyrics : public Text {
       int no() const               { return _no; }
       void setSyllabic(Syllabic s) { _syllabic = s; }
       Syllabic syllabic() const    { return _syllabic; }
-      };
-
-//---------------------------------------------------------
-//   Fingering
-//---------------------------------------------------------
-
-class Fingering : public Text {
-   public:
-      Fingering(Score*);
-      virtual Fingering* clone() const { return new Fingering(*this); }
-      virtual ElementType type() const { return FINGERING; }
-
-      virtual void write(Xml& xml) const;
-      virtual void setSubtype(int);
       };
 
 //---------------------------------------------------------

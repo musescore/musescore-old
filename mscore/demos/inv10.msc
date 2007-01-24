@@ -1,11 +1,11 @@
-<?xml version="1.0" encoding="ISO-8859-1"?>
+<?xml version="1.0" encoding="utf8"?>
 <museScore version="1.0">
-  <Geometry x="0" y="14" w="1662" h="942"></Geometry>
+  <Geometry x="25" y="0" w="1662" h="942" />
   <Spatium>1.55</Spatium>
-  <Division>384</Division>
+  <Division>480</Division>
   <Mag>1.5</Mag>
-  <xoff>10</xoff>
-  <yoff>10</yoff>
+  <xoff>-1141</xoff>
+  <yoff>58</yoff>
   <Style>
     <staffUpperBorder>8</staffUpperBorder>
     <staffLowerBorder>4</staffLowerBorder>
@@ -65,6 +65,15 @@
     <measureNumberSystem>1</measureNumberSystem>
     </Style>
   <showInvisible>1</showInvisible>
+  <page-layout>
+    <pageFormat>A4</pageFormat>
+    <page-margins type="both">
+      <left-margin>56.6929</left-margin>
+      <right-margin>56.6929</right-margin>
+      <top-margin>56.6929</top-margin>
+      <bottom-margin>113.386</bottom-margin>
+      </page-margins>
+    </page-layout>
   <siglist>
     <sig tick="0">
       <nom>9</nom>
@@ -106,256 +115,238 @@
       </Instrument>
     </Part>
   <Staff id="1">
-    <Measure number="1" tick="0">
-      <work-title>
-        <data>Inventio 10</data>
-        <style>2</style>
-        </work-title>
-      <work-number>
-        <data></data>
-        <style>3</style>
-        </work-number>
-      <work-number>
-        <data></data>
-        <style>3</style>
-        </work-number>
-      <work-number>
-        <data>BWV 781</data>
-        <style>3</style>
-        </work-number>
-      <creator-composer>
-        <data>J.S.Bach</data>
-        <style>4</style>
-        </creator-composer>
-      <BarLine>
-        </BarLine>
+    <Measure number="1">
+      <Text>
+        <align>12</align>
+        <xoffset>0</xoffset>
+        <yoffset>0.590551</yoffset>
+        <anchor>page</anchor>
+        <offsetType>absolute</offsetType>
+        <spatiumSizeDependent>0</spatiumSizeDependent>
+        <data>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-size:14pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;BWV 781&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
+        <subtype>Subtitle</subtype>
+        </Text>
+      <Text>
+        <align>10</align>
+        <xoffset>0</xoffset>
+        <yoffset>0.590551</yoffset>
+        <anchor>page</anchor>
+        <offsetType>absolute</offsetType>
+        <spatiumSizeDependent>0</spatiumSizeDependent>
+        <data>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-size:12pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p align=&quot;right&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;J.S.Bach&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
+        <subtype>Composer</subtype>
+        </Text>
+      <Text>
+        <align>12</align>
+        <xoffset>0</xoffset>
+        <yoffset>0.19685</yoffset>
+        <anchor>page</anchor>
+        <offsetType>absolute</offsetType>
+        <spatiumSizeDependent>0</spatiumSizeDependent>
+        <data>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-size:24pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Inventio 10&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
+        </Text>
+      <BarLine/>
       <Chord>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>67</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>192</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>71</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>384</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>74</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>576</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>71</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>768</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>67</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>960</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>74</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>1152</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>71</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>1344</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>67</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>1536</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>79</pitch>
           </Note>
         </Chord>
       </Measure>
-    <Measure number="2" tick="1728">
-      <BarLine>
-        <tick>192</tick>
-        </BarLine>
+    <Measure number="2">
+      <BarLine/>
       <Chord>
-        <tick>1728</tick>
-        <ticklen>384</ticklen>
-        <Note>
-          <pitch>78</pitch>
-          </Note>
+        <ticklen>480</ticklen>
         <Attribute>
           <idx>20</idx>
           <subtype>20</subtype>
           <offset x="0" y="-0.431973"/>
           </Attribute>
+        <Note>
+          <pitch>78</pitch>
+          </Note>
         </Chord>
       <Chord>
-        <tick>2112</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <BeamMode>4</BeamMode>
         <Note>
           <pitch>74</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>2304</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <BeamMode>1</BeamMode>
         <Note>
           <pitch>81</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>2496</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>78</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>2688</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>74</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>2880</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>81</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>3072</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>78</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>3264</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>74</pitch>
           </Note>
         </Chord>
       </Measure>
-    <Measure number="3" tick="3456">
-      <BarLine>
-        <tick>384</tick>
-        </BarLine>
+    <Measure number="3">
+      <BarLine/>
       <Chord>
-        <tick>3456</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>79</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>3648</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>74</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>3840</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>71</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>4032</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>77</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>4224</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>74</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>4416</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>71</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>4608</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>77</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>4800</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>74</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>4992</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>71</pitch>
           </Note>
         </Chord>
       </Measure>
-    <Measure number="4" tick="5184">
-      <BarLine>
-        <tick>576</tick>
-        </BarLine>
+    <Measure number="4">
+      <BarLine/>
       <Chord>
-        <tick>5184</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>76</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>5376</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>72</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>5568</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>69</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>5760</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>66</pitch>
           <prefix>1</prefix>
@@ -363,1015 +354,854 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>5952</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>69</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>6144</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>72</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>6336</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>76</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>6528</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>74</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>6720</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>72</pitch>
           </Note>
         </Chord>
       </Measure>
-    <Measure number="5" tick="6912">
-      <BarLine>
-        <tick>768</tick>
-        </BarLine>
+    <Measure number="5">
+      <BarLine/>
       <Chord>
-        <tick>6912</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>74</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>7104</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>71</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>7296</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>67</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>7488</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>64</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>7680</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>67</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>7872</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>71</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>8064</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>74</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>8256</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>72</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>8448</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>71</pitch>
           </Note>
         </Chord>
       </Measure>
-    <Measure number="6" tick="8640">
-      <BarLine>
-        <tick>960</tick>
-        </BarLine>
+    <Measure number="6">
+      <BarLine/>
       <Chord>
-        <tick>8640</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>72</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>8832</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>69</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>9024</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>66</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>9216</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>62</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>9408</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>66</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>9600</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>69</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>9792</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>72</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>9984</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>71</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>10176</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>69</pitch>
           </Note>
         </Chord>
       </Measure>
-    <Measure number="7" tick="10368">
-      <BarLine>
-        <tick>1152</tick>
-        </BarLine>
+    <Measure number="7">
+      <BarLine/>
       <Chord>
-        <tick>10368</tick>
-        <ticklen>192</ticklen>
-        <Note>
-          <pitch>71</pitch>
-          </Note>
+        <ticklen>240</ticklen>
         <Attribute>
           <idx>21</idx>
           <subtype>21</subtype>
           <offset x="0" y="-1.90068"/>
           </Attribute>
+        <Note>
+          <pitch>71</pitch>
+          </Note>
         </Chord>
       <Chord>
-        <tick>10560</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>72</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>10752</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>74</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>10944</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>76</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>11136</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>71</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>11328</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>79</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>11520</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>76</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>11712</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>71</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>11904</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>79</pitch>
           </Note>
         </Chord>
       </Measure>
-    <Measure number="8" tick="12096">
-      <BarLine>
-        <tick>1344</tick>
-        </BarLine>
+    <Measure number="8">
+      <BarLine/>
       <Chord>
-        <tick>12096</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>69</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>12288</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>71</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>12480</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>73</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>12672</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>74</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>12864</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>69</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>13056</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>78</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>13248</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>74</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>13440</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>69</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>13632</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>78</pitch>
           </Note>
         </Chord>
       </Measure>
-    <Measure number="9" tick="13824">
-      <BarLine>
-        <tick>1536</tick>
-        </BarLine>
+    <Measure number="9">
+      <BarLine/>
       <Chord>
-        <tick>13824</tick>
-        <ticklen>576</ticklen>
-        <Note>
-          <pitch>67</pitch>
-          <Tie>
-            </Tie>
-          </Note>
+        <ticklen>720</ticklen>
         <Attribute>
           <idx>21</idx>
           <subtype>21</subtype>
           <offset x="-0.441403" y="-1.00329"/>
           </Attribute>
+        <Note>
+          <pitch>67</pitch>
+          <Tie>
+            </Tie>
+          </Note>
         </Chord>
       <Chord>
-        <tick>14400</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>67</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>14592</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>69</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>14784</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>67</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>14976</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>66</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>15168</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>67</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>15360</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>64</pitch>
           </Note>
         </Chord>
       </Measure>
-    <Measure number="10" tick="15552">
-      <BarLine>
-        <tick>1728</tick>
-        </BarLine>
+    <Measure number="10">
+      <BarLine/>
       <Chord>
-        <tick>15552</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>66</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>15744</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>67</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>15936</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>66</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>16128</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>64</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>16320</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>66</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>16512</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>62</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>16704</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>69</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>16896</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>71</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>17088</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>72</pitch>
           </Note>
         </Chord>
       </Measure>
-    <Measure number="11" tick="17280">
-      <BarLine>
-        <tick>1920</tick>
-        </BarLine>
+    <Measure number="11">
+      <BarLine/>
       <Chord>
-        <tick>17280</tick>
-        <ticklen>192</ticklen>
-        <Note>
-          <pitch>71</pitch>
-          </Note>
+        <ticklen>240</ticklen>
         <Attribute>
           <idx>21</idx>
           <subtype>21</subtype>
           <offset x="0.220702" y="-2.67544"/>
           </Attribute>
+        <Note>
+          <pitch>71</pitch>
+          </Note>
         </Chord>
       <Chord>
-        <tick>17472</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>72</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>17664</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>71</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>17856</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>69</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>18048</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>71</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>18240</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>67</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>18432</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>76</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>18624</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>78</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>18816</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>79</pitch>
           </Note>
         </Chord>
       </Measure>
-    <Measure number="12" tick="19008">
-      <BarLine>
-        <tick>2112</tick>
-        </BarLine>
+    <Measure number="12">
+      <BarLine/>
       <Chord>
-        <tick>19008</tick>
-        <ticklen>192</ticklen>
-        <Note>
-          <pitch>73</pitch>
-          </Note>
+        <ticklen>240</ticklen>
         <Attribute>
           <idx>21</idx>
           <subtype>21</subtype>
           <offset x="0" y="-0.780338"/>
           </Attribute>
-        </Chord>
-      <Chord>
-        <tick>19200</tick>
-        <ticklen>192</ticklen>
-        <Note>
-          <pitch>74</pitch>
-          </Note>
-        </Chord>
-      <Chord>
-        <tick>19392</tick>
-        <ticklen>192</ticklen>
         <Note>
           <pitch>73</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>19584</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
+        <Note>
+          <pitch>74</pitch>
+          </Note>
+        </Chord>
+      <Chord>
+        <ticklen>240</ticklen>
+        <Note>
+          <pitch>73</pitch>
+          </Note>
+        </Chord>
+      <Chord>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>71</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>19776</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>73</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>19968</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>69</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>20160</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>79</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>20352</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>81</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>20544</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>83</pitch>
           </Note>
         </Chord>
       </Measure>
-    <Measure number="13" tick="20736">
-      <BarLine>
-        <tick>2304</tick>
-        </BarLine>
+    <Measure number="13">
+      <BarLine/>
       <Chord>
-        <tick>20736</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>81</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>20928</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>79</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>21120</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>78</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>21312</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>76</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>21504</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>78</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>21696</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>74</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>21888</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>69</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>22080</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>74</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>22272</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>73</pitch>
           </Note>
         </Chord>
       </Measure>
-    <Measure number="14" tick="22464">
-      <BarLine>
-        <tick>2496</tick>
-        </BarLine>
+    <Measure number="14">
+      <BarLine/>
       <Chord>
-        <tick>22464</tick>
-        <ticklen>576</ticklen>
-        <Note>
-          <pitch>74</pitch>
-          </Note>
+        <ticklen>720</ticklen>
         <Attribute>
           <idx>21</idx>
           <subtype>21</subtype>
           <offset x="-0.331052" y="-0.891815"/>
           </Attribute>
+        <Note>
+          <pitch>74</pitch>
+          </Note>
         </Chord>
       <Rest>
-        <tick>23040</tick>
-        <ticklen>384</ticklen>
+        <ticklen>480</ticklen>
         <BeamMode>4</BeamMode>
         </Rest>
       <Rest>
-        <tick>23424</tick>
-        <ticklen>768</ticklen>
+        <ticklen>960</ticklen>
         <BeamMode>4</BeamMode>
         </Rest>
       </Measure>
-    <Measure number="15" tick="24192">
-      <BarLine>
-        <tick>2688</tick>
-        </BarLine>
+    <Measure number="15">
+      <BarLine/>
       <Chord>
-        <tick>24192</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>69</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>24384</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>73</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>24576</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>76</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>24768</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>73</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>24960</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>69</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>25152</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>76</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>25344</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>73</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>25536</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>69</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>25728</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>79</pitch>
           </Note>
         </Chord>
       </Measure>
-    <Measure number="16" tick="25920">
-      <BarLine>
-        <tick>2880</tick>
-        </BarLine>
+    <Measure number="16">
+      <BarLine/>
       <Chord>
-        <tick>25920</tick>
-        <ticklen>576</ticklen>
-        <Note>
-          <pitch>78</pitch>
-          </Note>
+        <ticklen>720</ticklen>
         <Attribute>
           <idx>20</idx>
           <subtype>20</subtype>
           <offset x="0" y="-0.557384"/>
           </Attribute>
+        <Note>
+          <pitch>78</pitch>
+          </Note>
         </Chord>
       <Chord>
-        <tick>26496</tick>
-        <ticklen>576</ticklen>
+        <ticklen>720</ticklen>
         <Note>
           <pitch>74</pitch>
           </Note>
         </Chord>
       <Rest>
-        <tick>27072</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <BeamMode>4</BeamMode>
         </Rest>
       <Rest>
-        <tick>27264</tick>
-        <ticklen>384</ticklen>
+        <ticklen>480</ticklen>
         <BeamMode>4</BeamMode>
         </Rest>
       </Measure>
-    <Measure number="17" tick="27648">
-      <BarLine>
-        <tick>3072</tick>
-        </BarLine>
+    <Measure number="17">
+      <BarLine/>
       <Chord>
-        <tick>27648</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>67</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>27840</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>71</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>28032</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>74</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>28224</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>71</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>28416</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>67</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>28608</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>74</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>28800</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>71</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>28992</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>67</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>29184</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>77</pitch>
           </Note>
         </Chord>
       </Measure>
-    <Measure number="18" tick="29376">
-      <BarLine>
-        <tick>3264</tick>
-        </BarLine>
+    <Measure number="18">
+      <BarLine/>
       <Chord>
-        <tick>29376</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>76</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>29568</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>72</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>29760</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>69</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>29952</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>81</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>30144</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>76</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>30336</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>72</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>30528</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>69</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>30720</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>71</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>30912</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>72</pitch>
           </Note>
         </Chord>
       </Measure>
-    <Measure number="19" tick="31104">
-      <BarLine>
-        <tick>3456</tick>
-        </BarLine>
+    <Measure number="19">
+      <BarLine/>
       <Chord>
-        <tick>31104</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>74</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>31296</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>71</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>31488</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>67</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>31680</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>79</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>31872</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>74</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>32064</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>71</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>32256</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>67</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>32448</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>69</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>32640</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>71</pitch>
           </Note>
         </Chord>
       </Measure>
-    <Measure number="20" tick="32832">
-      <BarLine>
-        <tick>3648</tick>
-        </BarLine>
+    <Measure number="20">
+      <BarLine/>
       <Chord>
-        <tick>32832</tick>
-        <ticklen>1152</ticklen>
-        <Note>
-          <pitch>72</pitch>
-          <Tie>
-            </Tie>
-          </Note>
+        <ticklen>1440</ticklen>
         <Attribute>
           <idx>20</idx>
           <subtype>20</subtype>
           <offset x="0" y="-1.78363"/>
           </Attribute>
+        <Note>
+          <pitch>72</pitch>
+          <Tie>
+            </Tie>
+          </Note>
         </Chord>
       <Chord>
-        <tick>33984</tick>
-        <ticklen>576</ticklen>
+        <ticklen>720</ticklen>
         <Note>
           <pitch>72</pitch>
           <Tie>
@@ -1379,13 +1209,10 @@
           </Note>
         </Chord>
       </Measure>
-    <Measure number="21" tick="34560">
-      <BarLine>
-        <tick>3840</tick>
-        </BarLine>
+    <Measure number="21">
+      <BarLine/>
       <Chord>
-        <tick>34560</tick>
-        <ticklen>1152</ticklen>
+        <ticklen>1440</ticklen>
         <Note>
           <pitch>72</pitch>
           <Tie>
@@ -1393,34 +1220,29 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>35712</tick>
-        <ticklen>576</ticklen>
+        <ticklen>720</ticklen>
         <Note>
           <pitch>72</pitch>
           </Note>
         </Chord>
       </Measure>
-    <Measure number="22" tick="36288">
-      <BarLine>
-        <tick>4032</tick>
-        </BarLine>
+    <Measure number="22">
+      <BarLine/>
       <Chord>
-        <tick>36288</tick>
-        <ticklen>1152</ticklen>
-        <Note>
-          <pitch>71</pitch>
-          <Tie>
-            </Tie>
-          </Note>
+        <ticklen>1440</ticklen>
         <Attribute>
           <idx>20</idx>
           <subtype>20</subtype>
           <offset x="-0.331052" y="-1.89511"/>
           </Attribute>
+        <Note>
+          <pitch>71</pitch>
+          <Tie>
+            </Tie>
+          </Note>
         </Chord>
       <Chord>
-        <tick>37440</tick>
-        <ticklen>576</ticklen>
+        <ticklen>720</ticklen>
         <Note>
           <pitch>71</pitch>
           <Tie>
@@ -1428,13 +1250,10 @@
           </Note>
         </Chord>
       </Measure>
-    <Measure number="23" tick="38016">
-      <BarLine>
-        <tick>4224</tick>
-        </BarLine>
+    <Measure number="23">
+      <BarLine/>
       <Chord>
-        <tick>38016</tick>
-        <ticklen>1152</ticklen>
+        <ticklen>1440</ticklen>
         <Note>
           <pitch>71</pitch>
           <Tie>
@@ -1442,8 +1261,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>39168</tick>
-        <ticklen>576</ticklen>
+        <ticklen>720</ticklen>
         <Note>
           <pitch>71</pitch>
           <Tie>
@@ -1451,1948 +1269,1677 @@
           </Note>
         </Chord>
       </Measure>
-    <Measure number="24" tick="39744">
-      <BarLine>
-        <tick>4416</tick>
-        </BarLine>
+    <Measure number="24">
+      <BarLine/>
       <Chord>
-        <tick>39744</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>71</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>39936</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>76</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>40128</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>74</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>40320</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>72</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>40512</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>74</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>40704</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>71</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>40896</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>69</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>41088</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>71</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>41280</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>67</pitch>
           </Note>
         </Chord>
       </Measure>
-    <Measure number="25" tick="41472">
-      <BarLine>
-        <tick>4608</tick>
-        </BarLine>
+    <Measure number="25">
+      <BarLine/>
       <Chord>
-        <tick>41472</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>69</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>41664</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>72</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>41856</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>71</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>42048</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>69</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>42240</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>71</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>42432</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>67</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>42624</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>66</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>42816</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>67</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>43008</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>64</pitch>
           </Note>
         </Chord>
       </Measure>
-    <Measure number="26" tick="43200">
-      <BarLine>
-        <tick>4800</tick>
-        </BarLine>
+    <Measure number="26">
+      <BarLine/>
       <Chord>
-        <tick>43200</tick>
-        <ticklen>384</ticklen>
-        <Note>
-          <pitch>66</pitch>
-          </Note>
+        <ticklen>480</ticklen>
         <Attribute>
           <idx>20</idx>
           <subtype>20</subtype>
           <offset x="-0.220702" y="-1.00329"/>
           </Attribute>
+        <Note>
+          <pitch>66</pitch>
+          </Note>
         </Chord>
       <Chord>
-        <tick>43584</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>62</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>43776</tick>
-        <ticklen>384</ticklen>
-        <Note>
-          <pitch>69</pitch>
-          </Note>
+        <ticklen>480</ticklen>
         <Attribute>
           <idx>21</idx>
           <subtype>21</subtype>
           <offset x="-0.220702" y="-0.668861"/>
           </Attribute>
+        <Note>
+          <pitch>69</pitch>
+          </Note>
         </Chord>
       <Chord>
-        <tick>44160</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>66</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>44352</tick>
-        <ticklen>384</ticklen>
-        <Note>
-          <pitch>74</pitch>
-          </Note>
+        <ticklen>480</ticklen>
         <Attribute>
           <idx>21</idx>
           <subtype>21</subtype>
           <offset x="-0.110351" y="-1.56068"/>
           </Attribute>
+        <Note>
+          <pitch>74</pitch>
+          </Note>
         </Chord>
       <Chord>
-        <tick>44736</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>66</pitch>
           </Note>
         </Chord>
       </Measure>
-    <Measure number="27" tick="44928">
-      <BarLine>
-        <tick>4992</tick>
-        </BarLine>
+    <Measure number="27">
+      <BarLine/>
       <stretch>1.1</stretch>
       <Chord>
-        <tick>44928</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>67</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>45120</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>71</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>45312</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>74</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>45504</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>71</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>45696</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>67</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>45888</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>74</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>46080</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>71</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>46272</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>67</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>46464</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>79</pitch>
           </Note>
         </Chord>
       </Measure>
-    <Measure number="28" tick="46656">
-      <BarLine>
-        <tick>5184</tick>
-        </BarLine>
+    <Measure number="28">
+      <BarLine/>
       <stretch>1.1</stretch>
       <Chord>
-        <tick>46656</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>74</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>46848</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>78</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>47040</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>81</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>47232</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>78</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>47424</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>74</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>47616</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>81</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>47808</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>78</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>48000</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>74</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>48192</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>84</pitch>
           </Note>
         </Chord>
       </Measure>
-    <Measure number="29" tick="48384">
-      <BarLine>
-        <tick>5376</tick>
-        </BarLine>
+    <Measure number="29">
+      <BarLine/>
       <stretch>1.1</stretch>
       <Chord>
-        <tick>48384</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>83</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>48576</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>81</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>48768</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>79</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>48960</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>78</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>49152</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>79</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>49344</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>81</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>49536</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>74</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>49728</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>79</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>49920</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>78</pitch>
           </Note>
         </Chord>
       </Measure>
-    <Measure number="30" tick="50112">
-      <BarLine>
-        <tick>5568</tick>
-        </BarLine>
+    <Measure number="30">
+      <BarLine/>
       <stretch>1.1</stretch>
       <Chord>
-        <tick>50112</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>79</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>50304</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>78</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>50496</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>76</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>50688</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>74</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>50880</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>72</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>51072</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>71</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>51264</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>69</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>51456</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>71</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>51648</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>72</pitch>
           </Note>
         </Chord>
       </Measure>
-    <Measure number="31" tick="51840">
+    <Measure number="31">
+      <BarLine/>
+      <Chord>
+        <ticklen>240</ticklen>
+        <Note>
+          <pitch>71</pitch>
+          </Note>
+        </Chord>
+      <Chord>
+        <ticklen>240</ticklen>
+        <Note>
+          <pitch>69</pitch>
+          </Note>
+        </Chord>
+      <Chord>
+        <ticklen>240</ticklen>
+        <Note>
+          <pitch>67</pitch>
+          </Note>
+        </Chord>
+      <Chord>
+        <ticklen>240</ticklen>
+        <Note>
+          <pitch>66</pitch>
+          </Note>
+        </Chord>
+      <Chord>
+        <ticklen>240</ticklen>
+        <Note>
+          <pitch>67</pitch>
+          </Note>
+        </Chord>
+      <Chord>
+        <ticklen>240</ticklen>
+        <Note>
+          <pitch>69</pitch>
+          </Note>
+        </Chord>
+      <Chord>
+        <ticklen>240</ticklen>
+        <Note>
+          <pitch>62</pitch>
+          </Note>
+        </Chord>
+      <Chord>
+        <ticklen>240</ticklen>
+        <Note>
+          <pitch>67</pitch>
+          </Note>
+        </Chord>
+      <Chord>
+        <ticklen>240</ticklen>
+        <Note>
+          <pitch>66</pitch>
+          </Note>
+        </Chord>
+      </Measure>
+    <Measure number="32">
       <BarLine>
-        <tick>5760</tick>
-        </BarLine>
-      <Chord>
-        <tick>51840</tick>
-        <ticklen>192</ticklen>
-        <Note>
-          <pitch>71</pitch>
-          </Note>
-        </Chord>
-      <Chord>
-        <tick>52032</tick>
-        <ticklen>192</ticklen>
-        <Note>
-          <pitch>69</pitch>
-          </Note>
-        </Chord>
-      <Chord>
-        <tick>52224</tick>
-        <ticklen>192</ticklen>
-        <Note>
-          <pitch>67</pitch>
-          </Note>
-        </Chord>
-      <Chord>
-        <tick>52416</tick>
-        <ticklen>192</ticklen>
-        <Note>
-          <pitch>66</pitch>
-          </Note>
-        </Chord>
-      <Chord>
-        <tick>52608</tick>
-        <ticklen>192</ticklen>
-        <Note>
-          <pitch>67</pitch>
-          </Note>
-        </Chord>
-      <Chord>
-        <tick>52800</tick>
-        <ticklen>192</ticklen>
-        <Note>
-          <pitch>69</pitch>
-          </Note>
-        </Chord>
-      <Chord>
-        <tick>52992</tick>
-        <ticklen>192</ticklen>
-        <Note>
-          <pitch>62</pitch>
-          </Note>
-        </Chord>
-      <Chord>
-        <tick>53184</tick>
-        <ticklen>192</ticklen>
-        <Note>
-          <pitch>67</pitch>
-          </Note>
-        </Chord>
-      <Chord>
-        <tick>53376</tick>
-        <ticklen>192</ticklen>
-        <Note>
-          <pitch>66</pitch>
-          </Note>
-        </Chord>
-      </Measure>
-    <Measure number="32" tick="53568">
-      <Symbol>
-        <code>57672</code>
-        <style>0</style>
-        <x>4703.03</x>
-        <y>5828.57</y>
-        </Symbol>
-      <Symbol>
-        <code>57672</code>
-        <style>0</style>
-        <x>4703.03</x>
-        <y>5828.57</y>
-        </Symbol>
-      <Symbol>
-        <code>57673</code>
-        <style>0</style>
-        <x>4703.03</x>
-        <y>6428.57</y>
-        <selected>1</selected>
-        </Symbol>
-      <Symbol>
-        <code>57673</code>
-        <style>0</style>
-        <x>4703.03</x>
-        <y>6428.57</y>
-        <selected>1</selected>
-        </Symbol>
-      <BarLine type="5">
         <subtype>5</subtype>
-        <tick>5952</tick>
+        <tick>7440</tick>
         </BarLine>
+      <Symbol>
+        <name>clef eight</name>
+        <x>10.9843</x>
+        <y>0</y>
+        </Symbol>
+      <Symbol>
+        <name>clef eight</name>
+        <x>10.9843</x>
+        <y>0</y>
+        </Symbol>
+      <Symbol>
+        <name>clef eight</name>
+        <x>10.9843</x>
+        <y>0</y>
+        </Symbol>
+      <Symbol>
+        <name>clef eight</name>
+        <x>10.9843</x>
+        <y>0</y>
+        </Symbol>
       <Chord>
-        <tick>53568</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>67</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>53760</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>62</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>53952</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>59</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>54144</tick>
-        <ticklen>576</ticklen>
+        <ticklen>720</ticklen>
         <Note>
           <pitch>55</pitch>
           </Note>
         </Chord>
       <Rest>
-        <tick>54720</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <BeamMode>4</BeamMode>
         </Rest>
       <Rest>
-        <tick>54912</tick>
-        <ticklen>384</ticklen>
+        <ticklen>480</ticklen>
         <BeamMode>4</BeamMode>
         </Rest>
       </Measure>
     </Staff>
   <Staff id="2">
-    <Measure number="1" tick="0">
+    <Measure number="1">
       <Rest>
-        <ticklen>1728</ticklen>
+        <ticklen>2160</ticklen>
         <BeamMode>4</BeamMode>
         </Rest>
       </Measure>
-    <Measure number="2" tick="1728">
+    <Measure number="2">
       <Chord>
-        <tick>1728</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>50</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>1920</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>54</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>2112</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>57</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>2304</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>54</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>2496</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>50</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>2688</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>57</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>2880</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>54</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>3072</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>50</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>3264</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>60</pitch>
           </Note>
         </Chord>
       </Measure>
-    <Measure number="3" tick="3456">
+    <Measure number="3">
       <Chord>
-        <tick>3456</tick>
-        <ticklen>384</ticklen>
-        <Note>
-          <pitch>59</pitch>
-          </Note>
+        <ticklen>480</ticklen>
         <Attribute>
           <idx>20</idx>
           <subtype>20</subtype>
           <offset x="-0.0855219" y="-0.604762"/>
           </Attribute>
-        </Chord>
-      <Chord>
-        <tick>3840</tick>
-        <ticklen>192</ticklen>
-        <Note>
-          <pitch>55</pitch>
-          </Note>
-        </Chord>
-      <Chord>
-        <tick>4032</tick>
-        <ticklen>192</ticklen>
-        <Note>
-          <pitch>62</pitch>
-          </Note>
-        </Chord>
-      <Chord>
-        <tick>4224</tick>
-        <ticklen>192</ticklen>
         <Note>
           <pitch>59</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>4416</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>55</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>4608</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>62</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>4800</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>59</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>4992</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
+        <Note>
+          <pitch>55</pitch>
+          </Note>
+        </Chord>
+      <Chord>
+        <ticklen>240</ticklen>
+        <Note>
+          <pitch>62</pitch>
+          </Note>
+        </Chord>
+      <Chord>
+        <ticklen>240</ticklen>
+        <Note>
+          <pitch>59</pitch>
+          </Note>
+        </Chord>
+      <Chord>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>55</pitch>
           </Note>
         </Chord>
       </Measure>
-    <Measure number="4" tick="5184">
+    <Measure number="4">
       <Chord>
-        <tick>5184</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>60</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>5376</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>64</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>5568</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>60</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>5760</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>57</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>5952</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>60</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>6144</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>57</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>6336</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>54</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>6528</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>55</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>6720</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>57</pitch>
           </Note>
         </Chord>
       </Measure>
-    <Measure number="5" tick="6912">
+    <Measure number="5">
       <Chord>
-        <tick>6912</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>59</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>7104</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>62</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>7296</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>59</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>7488</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>55</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>7680</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>59</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>7872</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>55</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>8064</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>52</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>8256</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>54</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>8448</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>55</pitch>
           </Note>
         </Chord>
       </Measure>
-    <Measure number="6" tick="8640">
+    <Measure number="6">
       <Chord>
-        <tick>8640</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>57</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>8832</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>60</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>9024</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>57</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>9216</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>54</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>9408</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>57</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>9600</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>54</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>9792</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>50</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>9984</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>52</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>10176</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>54</pitch>
           </Note>
         </Chord>
       </Measure>
-    <Measure number="7" tick="10368">
+    <Measure number="7">
       <Chord>
-        <tick>10368</tick>
-        <ticklen>576</ticklen>
-        <Note>
-          <pitch>55</pitch>
-          <Tie>
-            </Tie>
-          </Note>
+        <ticklen>720</ticklen>
         <Attribute>
           <idx>21</idx>
           <subtype>21</subtype>
           <offset x="-0.110351" y="-1.00329"/>
           </Attribute>
+        <Note>
+          <pitch>55</pitch>
+          <Tie>
+            </Tie>
+          </Note>
         </Chord>
       <Chord>
-        <tick>10944</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>55</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>11136</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>54</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>11328</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>52</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>11520</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>50</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>11712</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>52</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>11904</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>49</pitch>
           </Note>
         </Chord>
       </Measure>
-    <Measure number="8" tick="12096">
+    <Measure number="8">
       <Chord>
-        <tick>12096</tick>
-        <ticklen>576</ticklen>
-        <Note>
-          <pitch>54</pitch>
-          <Tie>
-            </Tie>
-          </Note>
+        <ticklen>720</ticklen>
         <Attribute>
           <idx>21</idx>
           <subtype>21</subtype>
           <offset x="0.110351" y="-1.11477"/>
           </Attribute>
+        <Note>
+          <pitch>54</pitch>
+          <Tie>
+            </Tie>
+          </Note>
         </Chord>
       <Chord>
-        <tick>12672</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>54</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>12864</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>52</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>13056</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>50</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>13248</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>49</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>13440</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>50</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>13632</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>47</pitch>
           </Note>
         </Chord>
       </Measure>
-    <Measure number="9" tick="13824">
+    <Measure number="9">
       <Chord>
-        <tick>13824</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>52</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>14016</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>54</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>14208</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>55</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>14400</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>57</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>14592</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>52</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>14784</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>61</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>14976</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>57</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>15168</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>52</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>15360</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>61</pitch>
           </Note>
         </Chord>
       </Measure>
-    <Measure number="10" tick="15552">
+    <Measure number="10">
       <Chord>
-        <tick>15552</tick>
-        <ticklen>576</ticklen>
-        <Note>
-          <pitch>62</pitch>
-          <Tie>
-            </Tie>
-          </Note>
+        <ticklen>720</ticklen>
         <Attribute>
           <idx>21</idx>
           <subtype>21</subtype>
           <offset x="0" y="-0.780338"/>
           </Attribute>
+        <Note>
+          <pitch>62</pitch>
+          <Tie>
+            </Tie>
+          </Note>
         </Chord>
       <Chord>
-        <tick>16128</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>62</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>16320</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>50</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>16512</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>52</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>16704</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>54</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>16896</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>52</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>17088</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>48</pitch>
           </Note>
         </Chord>
       </Measure>
-    <Measure number="11" tick="17280">
+    <Measure number="11">
       <Chord>
-        <tick>17280</tick>
-        <ticklen>576</ticklen>
-        <Note>
-          <pitch>55</pitch>
-          <Tie>
-            </Tie>
-          </Note>
+        <ticklen>720</ticklen>
         <Attribute>
           <idx>21</idx>
           <subtype>21</subtype>
           <offset x="0" y="-0.891815"/>
           </Attribute>
+        <Note>
+          <pitch>55</pitch>
+          <Tie>
+            </Tie>
+          </Note>
         </Chord>
       <Chord>
-        <tick>17856</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>55</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>18048</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>52</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>18240</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>54</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>18432</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>55</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>18624</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>54</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>18816</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>52</pitch>
           </Note>
         </Chord>
       </Measure>
-    <Measure number="12" tick="19008">
+    <Measure number="12">
       <Chord>
-        <tick>19008</tick>
-        <ticklen>576</ticklen>
-        <Note>
-          <pitch>57</pitch>
-          <Tie>
-            </Tie>
-          </Note>
+        <ticklen>720</ticklen>
         <Attribute>
           <idx>21</idx>
           <subtype>21</subtype>
           <offset x="0.110351" y="-0.891815"/>
           </Attribute>
+        <Note>
+          <pitch>57</pitch>
+          <Tie>
+            </Tie>
+          </Note>
         </Chord>
       <Chord>
-        <tick>19584</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>57</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>19776</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>55</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>19968</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>54</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>20160</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>52</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>20352</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>50</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>20544</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>49</pitch>
           </Note>
         </Chord>
       </Measure>
-    <Measure number="13" tick="20736">
+    <Measure number="13">
       <Chord>
-        <tick>20736</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>50</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>20928</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>52</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>21120</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>54</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>21312</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>55</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>21504</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>57</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>21696</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>59</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>21888</tick>
-        <ticklen>384</ticklen>
+        <ticklen>480</ticklen>
         <Note>
           <pitch>57</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>22272</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>45</pitch>
           </Note>
         </Chord>
       </Measure>
-    <Measure number="14" tick="22464">
+    <Measure number="14">
       <Chord>
-        <tick>22464</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>50</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>22656</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>54</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>22848</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>57</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>23040</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>54</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>23232</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>50</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>23424</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>57</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>23616</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>54</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>23808</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>50</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>24000</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>62</pitch>
           </Note>
         </Chord>
       </Measure>
-    <Measure number="15" tick="24192">
+    <Measure number="15">
       <Chord>
-        <tick>24192</tick>
-        <ticklen>576</ticklen>
-        <Note>
-          <pitch>61</pitch>
-          </Note>
+        <ticklen>720</ticklen>
         <Attribute>
           <idx>20</idx>
           <subtype>20</subtype>
           <offset x="0.441403" y="0.222954"/>
           </Attribute>
+        <Note>
+          <pitch>61</pitch>
+          </Note>
         </Chord>
       <Chord>
-        <tick>24768</tick>
-        <ticklen>576</ticklen>
+        <ticklen>720</ticklen>
         <Note>
           <pitch>57</pitch>
           </Note>
         </Chord>
       <Rest>
-        <tick>25344</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <BeamMode>4</BeamMode>
         </Rest>
       <Rest>
-        <tick>25536</tick>
-        <ticklen>384</ticklen>
+        <ticklen>480</ticklen>
         <BeamMode>4</BeamMode>
         </Rest>
       </Measure>
-    <Measure number="16" tick="25920">
+    <Measure number="16">
       <Chord>
-        <tick>25920</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>50</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>26112</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>54</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>26304</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>57</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>26496</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>54</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>26688</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>50</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>26880</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>57</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>27072</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>54</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>27264</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>50</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>27456</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>60</pitch>
           </Note>
         </Chord>
       </Measure>
-    <Measure number="17" tick="27648">
+    <Measure number="17">
       <Chord>
-        <tick>27648</tick>
-        <ticklen>576</ticklen>
-        <Note>
-          <pitch>59</pitch>
-          </Note>
+        <ticklen>720</ticklen>
         <Attribute>
           <idx>20</idx>
           <subtype>20</subtype>
           <offset x="0.110351" y="-0.445907"/>
           </Attribute>
+        <Note>
+          <pitch>59</pitch>
+          </Note>
         </Chord>
       <Chord>
-        <tick>28224</tick>
-        <ticklen>576</ticklen>
+        <ticklen>720</ticklen>
         <Note>
           <pitch>55</pitch>
           </Note>
         </Chord>
       <Rest>
-        <tick>28800</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <BeamMode>4</BeamMode>
         </Rest>
       <Rest>
-        <tick>28992</tick>
-        <ticklen>384</ticklen>
+        <ticklen>480</ticklen>
         <BeamMode>4</BeamMode>
         </Rest>
       </Measure>
-    <Measure number="18" tick="29376">
+    <Measure number="18">
       <Chord>
-        <tick>29376</tick>
-        <ticklen>576</ticklen>
-        <Note>
-          <pitch>48</pitch>
-          <Tie>
-            </Tie>
-          </Note>
+        <ticklen>720</ticklen>
         <Attribute>
           <idx>21</idx>
           <subtype>21</subtype>
           <offset x="-0.220702" y="-0.557384"/>
           </Attribute>
+        <Note>
+          <pitch>48</pitch>
+          <Tie>
+            </Tie>
+          </Note>
         </Chord>
       <Chord>
-        <tick>29952</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>48</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>30144</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>50</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>30336</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>52</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>30528</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>42</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>30720</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>43</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>30912</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>45</pitch>
           </Note>
         </Chord>
       </Measure>
-    <Measure number="19" tick="31104">
+    <Measure number="19">
       <Chord>
-        <tick>31104</tick>
-        <ticklen>576</ticklen>
-        <Note>
-          <pitch>47</pitch>
-          <Tie>
-            </Tie>
-          </Note>
+        <ticklen>720</ticklen>
         <Attribute>
           <idx>21</idx>
           <subtype>21</subtype>
           <offset x="-0.110351" y="-0.557384"/>
           </Attribute>
+        <Note>
+          <pitch>47</pitch>
+          <Tie>
+            </Tie>
+          </Note>
         </Chord>
       <Chord>
-        <tick>31680</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>47</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>31872</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>48</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>32064</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>50</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>32256</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>40</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>32448</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>42</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>32640</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>43</pitch>
           </Note>
         </Chord>
       </Measure>
-    <Measure number="20" tick="32832">
+    <Measure number="20">
       <Chord>
-        <tick>32832</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>45</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>33024</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>48</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>33216</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>52</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>33408</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>57</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>33600</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>52</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>33792</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>48</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>33984</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>45</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>34176</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>47</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>34368</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>48</pitch>
           </Note>
         </Chord>
       </Measure>
-    <Measure number="21" tick="34560">
+    <Measure number="21">
       <Chord>
-        <tick>34560</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>50</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>34752</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>53</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>34944</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>57</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>35136</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>62</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>35328</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>57</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>35520</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>53</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>35712</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>50</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>35904</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>52</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>36096</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>53</pitch>
           </Note>
         </Chord>
       </Measure>
-    <Measure number="22" tick="36288">
+    <Measure number="22">
       <Chord>
-        <tick>36288</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>55</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>36480</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>59</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>36672</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>62</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>36864</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>67</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>37056</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>62</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>37248</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>59</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>37440</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>55</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>37632</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>57</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>37824</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>59</pitch>
           </Note>
         </Chord>
       </Measure>
-    <Measure number="23" tick="38016">
+    <Measure number="23">
       <Chord>
-        <tick>38016</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>54</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>38208</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>57</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>38400</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>59</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>38592</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>64</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>38784</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>59</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>38976</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>55</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>39168</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>52</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>39360</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>54</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>39552</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>55</pitch>
           </Note>
         </Chord>
       </Measure>
-    <Measure number="24" tick="39744">
+    <Measure number="24">
       <Chord>
-        <tick>39744</tick>
-        <ticklen>1152</ticklen>
-        <Note>
-          <pitch>48</pitch>
-          <Tie>
-            </Tie>
-          </Note>
+        <ticklen>1440</ticklen>
         <Attribute>
           <idx>20</idx>
           <subtype>20</subtype>
           <offset x="-0.662105" y="-0.668861"/>
           </Attribute>
+        <Note>
+          <pitch>48</pitch>
+          <Tie>
+            </Tie>
+          </Note>
         </Chord>
       <Chord>
-        <tick>40896</tick>
-        <ticklen>576</ticklen>
+        <ticklen>720</ticklen>
         <Note>
           <pitch>48</pitch>
           <Tie>
@@ -3400,10 +2947,9 @@
           </Note>
         </Chord>
       </Measure>
-    <Measure number="25" tick="41472">
+    <Measure number="25">
       <Chord>
-        <tick>41472</tick>
-        <ticklen>1152</ticklen>
+        <ticklen>1440</ticklen>
         <Note>
           <pitch>48</pitch>
           <Tie>
@@ -3411,8 +2957,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>42624</tick>
-        <ticklen>576</ticklen>
+        <ticklen>720</ticklen>
         <Note>
           <pitch>48</pitch>
           <Tie>
@@ -3420,274 +2965,237 @@
           </Note>
         </Chord>
       </Measure>
-    <Measure number="26" tick="43200">
+    <Measure number="26">
       <Chord>
-        <tick>43200</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>48</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>43392</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>50</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>43584</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>54</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>43776</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>57</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>43968</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>54</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>44160</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>50</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>44352</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>48</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>44544</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>47</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>44736</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>45</pitch>
           </Note>
         </Chord>
       </Measure>
-    <Measure number="27" tick="44928">
+    <Measure number="27">
       <stretch>1.1</stretch>
       <Chord>
-        <tick>44928</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>47</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>45120</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>43</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>45312</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>47</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>45504</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>50</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>45696</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>47</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>45888</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>43</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>46080</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>50</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>46272</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>47</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>46464</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>43</pitch>
           </Note>
         </Chord>
       </Measure>
-    <Measure number="28" tick="46656">
+    <Measure number="28">
       <stretch>1.1</stretch>
       <Chord>
-        <tick>46656</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>42</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>46848</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>38</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>47040</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>42</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>47232</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>45</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>47424</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>42</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>47616</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>38</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>47808</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>45</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>48000</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>42</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>48192</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>38</pitch>
           </Note>
         </Chord>
       </Measure>
-    <Measure number="29" tick="48384">
+    <Measure number="29">
       <stretch>1.1</stretch>
       <Chord>
-        <tick>48384</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>43</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>48576</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>45</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>48768</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>47</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>48960</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>45</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>49152</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>47</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>49344</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>48</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>49536</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>47</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>49728</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>48</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>49920</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>50</pitch>
           </Note>
         </Chord>
       </Measure>
-    <Measure number="30" tick="50112">
+    <Measure number="30">
       <stretch>1.1</stretch>
       <Chord>
-        <tick>50112</tick>
-        <ticklen>576</ticklen>
+        <ticklen>720</ticklen>
         <Note>
           <pitch>40</pitch>
           <Tie>
@@ -3695,106 +3203,93 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>50688</tick>
-        <ticklen>384</ticklen>
+        <ticklen>480</ticklen>
         <Note>
           <pitch>40</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>51072</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>52</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>51264</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>54</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>51456</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>52</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>51648</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>50</pitch>
           </Note>
         </Chord>
       </Measure>
-    <Measure number="31" tick="51840">
+    <Measure number="31">
       <Chord>
-        <tick>51840</tick>
-        <ticklen>384</ticklen>
-        <Note>
-          <pitch>55</pitch>
-          </Note>
+        <ticklen>480</ticklen>
         <Attribute>
           <idx>21</idx>
           <subtype>21</subtype>
           <offset x="0.110351" y="-1.00329"/>
           </Attribute>
+        <Note>
+          <pitch>55</pitch>
+          </Note>
         </Chord>
       <Chord>
-        <tick>52224</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>47</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>52416</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>52</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>52608</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>50</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>52800</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>48</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>52992</tick>
-        <ticklen>384</ticklen>
-        <Note>
-          <pitch>50</pitch>
-          </Note>
+        <ticklen>480</ticklen>
         <Attribute>
           <idx>21</idx>
           <subtype>21</subtype>
           <offset x="0" y="-2.00658"/>
           </Attribute>
+        <Note>
+          <pitch>50</pitch>
+          </Note>
         </Chord>
       <Chord>
-        <tick>53376</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>38</pitch>
           </Note>
         </Chord>
       </Measure>
-    <Measure number="32" tick="53568">
+    <Measure number="32">
       <Chord>
-        <tick>53568</tick>
-        <ticklen>576</ticklen>
+        <ticklen>720</ticklen>
         <Note>
           <pitch>43</pitch>
           <Tie>
@@ -3802,35 +3297,31 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>54144</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>43</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>54336</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>47</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>54528</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <Note>
           <pitch>50</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>54720</tick>
-        <ticklen>576</ticklen>
+        <ticklen>720</ticklen>
         <Note>
           <pitch>55</pitch>
           </Note>
         </Chord>
       </Measure>
     </Staff>
-  <cursorStaff>-1</cursorStaff>
+  <cursorStaff>0</cursorStaff>
   <cursorVoice>0</cursorVoice>
   </museScore>

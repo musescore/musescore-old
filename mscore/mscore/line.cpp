@@ -115,8 +115,6 @@ bool SLine::startEdit(QMatrix& matrix)
       bbr1 = br.translated(pp1);
       r2   = r.translated(pp2);
       bbr2 = br.translated(pp2);
-
-      bboxUpdate();
       return true;
       }
 
@@ -133,7 +131,6 @@ bool SLine::startEditDrag(const QPointF& p)
       else {
             return false;
             }
-      bboxUpdate();
       return true;
       }
 
@@ -182,7 +179,6 @@ bool SLine::editDrag(QMatrix&, QPointF*, const QPointF& d)
 void SLine::endEdit()
       {
       mode = NORMAL;
-      bboxUpdate();
       }
 
 //---------------------------------------------------------

@@ -35,7 +35,6 @@ BarLine::BarLine(Score* s)
    : Element(s)
       {
       setSubtype(NORMAL_BAR);
-      setWidth(point(style->barWidth));
       }
 
 //---------------------------------------------------------
@@ -187,6 +186,14 @@ void BarLine::dump() const
 void BarLine::setSubtype(int t)
       {
       Element::setSubtype(t);
+      }
+
+//---------------------------------------------------------
+//   bbox
+//---------------------------------------------------------
+
+QRectF BarLine::bbox() const
+      {
       Spatium w = style->barWidth;
       qreal dw;
 
@@ -213,7 +220,8 @@ void BarLine::setSubtype(int t)
             	dw = 0.0;
             	break;
             }
-      setWidth(dw);
+      _bbox.setWidth(dw);
+      return _bbox;
       }
 
 //---------------------------------------------------------

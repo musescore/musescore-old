@@ -122,6 +122,12 @@ void ScoreLayout::doLayout()
       iPage    ip = _pages->begin();
       iSystem  is = _systems->begin();
 
+      if (im == 0) {
+            if (_pages->empty())
+                  addPage();
+            return;
+            }
+
       //-----------------------------------------
       //    pass I:  process pages
       //-----------------------------------------

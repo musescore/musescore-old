@@ -68,7 +68,7 @@ class TextLine : public Element {
       void write(Xml& xml, const char*) const;
       virtual void read(QDomNode);
       virtual void layout();
-      virtual const QRectF& bbox() const;
+      virtual QRectF bbox() const;
       };
 
 #endif

@@ -63,11 +63,8 @@ QIcon printIcon, clefIcon;
 //   symPixmap
 //---------------------------------------------------------
 
-QIcon symIcon(const SymCode& sc, int size)
+QIcon symIcon(const SymCode& sc, int size, int width, int height)
       {
-      int width  = ICON_WIDTH;
-      int height = ICON_HEIGHT;
-
       TextStyle* s = &textStyles[sc.style];
       QFont f(s->family);
       f.setPixelSize(size);

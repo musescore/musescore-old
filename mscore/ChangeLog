@@ -1,3 +1,12 @@
+24.10.7 (ws)
+      - replace Fingering() by Text() with subtype TEXT_FINGERING
+      - textpalette now stays on top of all windows
+      - after clicking a symbol in textpalette, the canvas gets keyboard
+        focus again
+      - add some latin1 characters to textpalette
+      - added shape() method to Element class. Shape is called from contains().
+        Shape defaults to bbox() but is reimplemented in some classes
+        to make them better clickable.
 23.10.7 (ws)
       - on *.msc load transform file division to internal division; this fixes
         problems when several scores with different divisions are loaded
