@@ -52,7 +52,7 @@ class Stem : public Element {
       virtual ElementType type() const { return STEM; }
       virtual void draw1(Painter& p);
       void setLen(const Spatium&);
-      virtual void bboxUpdate();
+      virtual QRectF bbox() const;
       };
 
 //---------------------------------------------------------
@@ -136,7 +136,7 @@ class Chord : public ChordRest {
       virtual void setSelected(bool f);
       virtual void dump() const;
 
-      virtual void bboxUpdate();
+      virtual QRectF bbox() const;
       void setStemDirection(Direction d)     { _stemDirection = d; }
       Direction stemDirection() const        { return _stemDirection; }
       bool grace() const                     { return _grace; }

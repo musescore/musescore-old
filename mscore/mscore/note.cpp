@@ -361,7 +361,6 @@ void Note::setAccidental(int pre)
             delete _accidental;
             _accidental = 0;
             }
-      bboxUpdate();
       }
 
 //---------------------------------------------------------
@@ -401,7 +400,6 @@ void Note::setHead(int ticks)
             if (ticks % (2 * division))
                   _dots = 1;
             }
-      bboxUpdate();
       }
 
 //---------------------------------------------------------
@@ -462,19 +460,18 @@ void Note::draw1(Painter& p)
       }
 
 //---------------------------------------------------------
-//   bboxUpdate
+//   bbox
 //---------------------------------------------------------
 
-void Note::bboxUpdate()
+QRectF Note::bbox() const
       {
-      setbbox(symbols[_head].bbox());
-
+      QRectF _bbox = symbols[_head].bbox();
       if (_tieFor)
-            orBbox(_tieFor->bbox().translated(_tieFor->pos()));
+            _bbox |= _tieFor->bbox().translated(_tieFor->pos());
       if (_accidental)
-            orBbox(_accidental->bbox().translated(_accidental->pos()));
+            _bbox |= _accidental->bbox().translated(_accidental->pos());
       foreach(const Text* f, _fingering)
-            orBbox(f->bbox().translated(f->pos()));
+            _bbox |= f->bbox().translated(f->pos());
       if (_dots) {
             double y = 0;
             if ((_line & 1) == 0) {
@@ -487,9 +484,10 @@ void Note::bboxUpdate()
                   QRectF dot = symbols[dotSym].bbox();
                   double xoff = symbols[_head].width() + point(style->dotNoteDistance) * i;
                   dot.translate(xoff, y);
-                  orBbox(dot);
+                  _bbox |= dot;
                   }
             }
+      return _bbox;
       }
 
 //---------------------------------------------------------
@@ -635,7 +633,6 @@ QRectF Note::drag(const QPointF& s)
       {
       QRectF bb(chord()->bbox());
       _lineOffset = lrint(s.y() * 2 / _spatium);
-      bboxUpdate();
       chord()->layout();
       chord()->measure()->layoutBeams();
       bb |= chord()->bbox();

@@ -77,7 +77,7 @@ class Note : public Element {
       virtual Note* clone() const { return new Note(*this); }
       virtual ElementType type() const { return NOTE; }
 
-      virtual void bboxUpdate();
+      virtual QRectF bbox() const;
       bool grace() const            { return _grace; }
       void setGrace(bool val)       { _grace = val;  }
 
