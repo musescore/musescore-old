@@ -848,8 +848,8 @@ void Score::printFile()
       {
       //
       // HighResolution gives higher output quality
-//      QPrinter printer(QPrinter::HighResolution);
-      QPrinter printer;
+      QPrinter printer(QPrinter::HighResolution);
+      // QPrinter printer;
       printer.setPageSize(paperSizes[pageFormat()->size].qtsize);
       printer.setOrientation(pageFormat()->landscape ? QPrinter::Landscape : QPrinter::Portrait);
       printer.setCreator("MuseScore Version: " VERSION);
@@ -878,7 +878,6 @@ void Score::printFile()
 
       for (ciPage ip = pages()->begin();;) {
             Page* page = *ip;
-// printf("page %f %f DPMM %f DPI %f breite in mm: %f\n", page->width(), page->height(), DPMM, DPI, page->width() / DPMM);
             page->draw(p);
             ++ip;
             if (ip == pages()->end())

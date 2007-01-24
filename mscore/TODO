@@ -3,13 +3,14 @@ Todo:
 Bugs:
       - rubber band selection (shift+drag)
             - does not select text properly
-            - does not select bar lines
+            - does not select bar lines at all
 
       - printing:
-            - printing is done with different resolution than
-              screen display. Layout() does not recalculate all
-              resolution dependend values. This results in
-              printout looking different than screen.
+            - Printing is preferably done with a much higher resolution
+              than screen display.
+              This leads to different layouts for screen and print.
+              Main reason is that qt gives different (slightly wrong)
+              font metrics for different resolutions.
 
 Features:
       - dotted rests

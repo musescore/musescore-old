@@ -57,7 +57,7 @@ static const TextStyle defaultTextStyles[] = {
          ALIGN_LEFT | ALIGN_TOP, ANCHOR_PAGE, 0, MM(10), OFFSET_ABS),
       TextStyle(QString("Lyrics"), ff, 11, false, false, false,
          ALIGN_HCENTER | ALIGN_TOP, ANCHOR_TICK, 0, 7, OFFSET_SPATIUM),
-      TextStyle(QString("Fingering"), ff,  8, false, false, false,
+      TextStyle(QString("Fingering"), ff,  6, false, false, false,
          ALIGN_HCENTER | ALIGN_VCENTER, ANCHOR_NOTE, 0, 0, OFFSET_SPATIUM),
       TextStyle(QString("InstrumentsLong"),   ff, 12, false, false, false,
          ALIGN_RIGHT | ALIGN_VCENTER, ANCHOR_SYSTEM, 0, 0, OFFSET_SPATIUM),
