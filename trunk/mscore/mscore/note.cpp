@@ -262,8 +262,8 @@ void Note::changeAccidental(int pre)
 void Note::add(Element* el)
       {
 	el->setParent(this);
-      if (el->type() == FINGERING) {
-            _fingering.append((Fingering*) el);
+      if (el->type() == TEXT) {
+            _fingering.append((Text*) el);
             }
       else if (el->type() == TIE) {
             Tie* tie = (Tie*)el;
@@ -294,8 +294,8 @@ void Note::setTieBack(Tie* t)
 
 void Note::remove(Element* el)
       {
-      if (el->type() == FINGERING) {
-            int i = _fingering.indexOf((Fingering*)el);
+      if (el->type() == TEXT) {
+            int i = _fingering.indexOf((Text*)el);
             if (i != -1)
                   _fingering.removeAt(i);
             else
@@ -457,7 +457,7 @@ void Note::draw1(Painter& p)
             _tieFor->draw(p);
       if (_accidental)
             _accidental->draw(p);
-      foreach(Fingering* f, _fingering)
+      foreach(Text* f, _fingering)
             f->draw(p);
       }
 
@@ -473,7 +473,7 @@ void Note::bboxUpdate()
             orBbox(_tieFor->bbox().translated(_tieFor->pos()));
       if (_accidental)
             orBbox(_accidental->bbox().translated(_accidental->pos()));
-      foreach(const Fingering* f, _fingering)
+      foreach(const Text* f, _fingering)
             orBbox(f->bbox().translated(f->pos()));
       if (_dots) {
             double y = 0;
@@ -505,7 +505,7 @@ void Note::write(Xml& xml) const
             xml.tag("prefix", _userAccidental);
             xml.tag("line", _line);
             }
-      foreach(const Fingering* f, _fingering)
+      foreach(const Text* f, _fingering)
             f->write(xml);
       if (_tieFor)
             _tieFor->write(xml);
@@ -584,8 +584,9 @@ void Note::read(QDomNode node)
                   _tieFor->read(node);
                   _tieFor->setStartNote(this);
                   }
-            else if (tag == "Fingering") {
-                  Fingering* f = new Fingering(score());
+            else if (tag == "Text") {
+                  Text* f = new Text(score());
+                  f->setSubtype(TEXT_FINGERING);
                   f->setStaff(staff());
                   f->read(node);
                   f->setParent(this);
@@ -617,7 +618,7 @@ Element* Note::findSelectableElement(QPointF p) const
             return tieFor();
       if (accidental() && accidental()->contains(p))
             return accidental();
-      foreach(Fingering* f, _fingering) {
+      foreach(Text* f, _fingering) {
             if (f->contains(p))
                   return f;
             }
@@ -671,7 +672,7 @@ ShadowNote::ShadowNote(Score* s)
 //   bbox
 //---------------------------------------------------------
 
-const QRectF& ShadowNote::bbox() const
+QRectF ShadowNote::bbox() const
       {
       return _sym->bbox();
       }
@@ -748,7 +749,7 @@ void ShadowNote::layout()
 
 bool Note::acceptDrop(const QPointF&, int type, const QDomNode&) const
       {
-      return (type == ATTRIBUTE || type == FINGERING || type == ACCIDENTAL);
+      return (type == ATTRIBUTE || type == TEXT || type == ACCIDENTAL);
       }
 
 //---------------------------------------------------------
@@ -765,10 +766,17 @@ void Note::drop(const QPointF&, int t, const QDomNode& node)
                   score()->addAttribute(this, atr);
                   }
                   break;
-            case FINGERING:
+            case TEXT:
                   {
-                  Fingering* f = new Fingering(score());
+                  Text* f = new Text(score());
                   f->read(node);
+                  //
+                  // override palette settings for text:
+                  //
+                  QString s(f->getText());
+                  f->setSubtype(TEXT_FINGERING);
+                  f->setText(s);
+
                   f->setParent(this);
                   score()->select(f, 0, 0);
                   score()->undoOp(UndoOp::AddElement, f);

@@ -1,6 +1,7 @@
 <!DOCTYPE RCC>
 <RCC version="1.0">
    <qresource>
+      <file>data/fileopen.xpm</file>
       <file>data/paper2.png</file>
       <file>data/text_bold.svg</file>
       <file>data/text_italic.svg</file>

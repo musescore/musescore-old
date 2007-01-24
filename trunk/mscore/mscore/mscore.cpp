@@ -1553,11 +1553,14 @@ void MuseScore::selectScore(QAction* action)
       loadScoreFile(project);
       }
 
-void MuseScore::loadScoreFile(const QString&)
+void MuseScore::loadScoreFile(const QString& s)
       {
       if (checkDirty())
             return;
-printf("TODO      loadFile(s, false);\n");
+      Score* score = new Score();
+      score->read(s);
+      appendScore(score);
+      tab->setCurrentIndex(scoreList.size() - 1);
       }
 
 //---------------------------------------------------------

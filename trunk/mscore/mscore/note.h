@@ -33,7 +33,7 @@
 
 class Tie;
 class Chord;
-class Fingering;
+class Text;
 class Score;
 class Painter;
 class Sym;
@@ -58,7 +58,7 @@ class Note : public Element {
       bool _grace;
       bool _mirror;           ///< True if note is mirrored at stem.
       int _dots;
-      QList<Fingering*> _fingering;
+      QList<Text*> _fingering;
 
       Tie* _tieFor;
       Tie* _tieBack;
@@ -106,7 +106,7 @@ class Note : public Element {
       int line() const                { return _line + _lineOffset;   }
       void setLine(int n)             { _line = n;      }
 
-      QList<Fingering*>& fingering()  { return _fingering; }
+      QList<Text*>& fingering()       { return _fingering; }
 
       virtual void add(Element*);
       virtual void remove(Element*);
@@ -153,7 +153,7 @@ class ShadowNote : public Element {
       void setLine(int n)               { _line = n;      }
       virtual void layout();
       virtual void draw(Painter& p);
-      virtual const QRectF& bbox() const;
+      virtual QRectF bbox() const;
       };
 
 #endif

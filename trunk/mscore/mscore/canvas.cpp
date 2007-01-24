@@ -984,24 +984,6 @@ void Canvas::setViewRect(const QRectF& r)
       }
 
 //---------------------------------------------------------
-//   readSubtype
-//---------------------------------------------------------
-
-#if 0
-static QString readSubtype(QDomNode node)
-      {
-      for (node = node.firstChild(); !node.isNull(); node = node.nextSibling()) {
-            QDomElement e = node.toElement();
-            if (e.isNull())
-                  continue;
-            if (e.tagName() == "subtype")
-                  return e.text();
-            }
-      return QString();
-      }
-#endif
-
-//---------------------------------------------------------
 //   readType
 //---------------------------------------------------------
 
@@ -1066,8 +1048,6 @@ static int readType(QDomNode& node)
                         type = INSTRUMENT_NAME1;
                   else if (e.tagName() == "Instrument2")
                         type = INSTRUMENT_NAME2;
-                  else if (e.tagName() == "Fingering")
-                        type = FINGERING;
                   else if (e.tagName() == "System")
                         type = SYSTEM;
                   else if (e.tagName() == "HairPin")

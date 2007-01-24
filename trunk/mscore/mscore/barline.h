@@ -47,6 +47,7 @@ class BarLine : public Element {
       virtual void draw1(Painter&);
       virtual void dump() const;
       virtual void setSubtype(int t);
+      virtual QRectF bbox() const;
 
       virtual bool acceptDrop(const QPointF&, int, const QDomNode&) const;
       virtual void drop(const QPointF&, int, const QDomNode&);

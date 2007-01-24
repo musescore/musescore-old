@@ -206,8 +206,9 @@ void TimeSig::read(QDomNode node)
 //   layout
 //---------------------------------------------------------
 
-void TimeSig::layout()
+QRectF TimeSig::bbox() const
       {
+      QRectF _bbox;
       int st = subtype();
       if (st == 0)
             _bbox = QRectF(0, 0,0, 0);
@@ -232,6 +233,7 @@ void TimeSig::layout()
             qreal  nw = fm.width(ns);
             _bbox = QRectF(0.0, 0.0, qMax(zw, nw), 4.0 * _spatium);
             }
+      return _bbox;
       }
 
 //---------------------------------------------------------

@@ -1,11 +1,17 @@
 Todo:
-      * integrate TextStyle() parameters into Text(). Use TextStyle()
-        only to initiate Text().
+
+Bugs:
+      - rubber band selection (shift+drag)
+            - does not select text properly
+            - does not select bar lines
+
+      - printing:
+            - printing is done with different resolution than
+              screen display. Layout() does not recalculate all
+              resolution dependend values. This results in
+              printout looking different than screen.
 
 Features:
-      * allow for special musical symbols in text
-            * palette popup (F2) in text edit mode to allow for
-              selection of musical and other symbols
       - dotted rests
       - akkumulated empty measures
       - "Faulenzer Zeichen" (repeat symbols)

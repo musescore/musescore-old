@@ -233,7 +233,7 @@ bool TextLine::startEdit(QMatrix&)
 //   edit
 //---------------------------------------------------------
 
-bool TextLine::edit(QKeyEvent* ev)
+bool TextLine::edit(QKeyEvent*)
       {
       return false;
       }

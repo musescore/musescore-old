@@ -1562,7 +1562,8 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomNode node)
             note->setMove(move);
 
             if (!fingering.isEmpty()) {
-                  Fingering* f = new Fingering(score);
+                  Text* f = new Text(score);
+                  f->setSubtype(TEXT_FINGERING);
                   f->setText(fingering);
                   note->add(f);
                   }

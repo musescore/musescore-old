@@ -102,7 +102,7 @@ QRectF NoteAttribute::drag(const QPointF& s)
       QRectF r = bbox().translated(aref());
       setUserOff(s / _spatium);
       r |= bbox().translated(aref());
-      parent()->bboxUpdate();
+//      parent()->bboxUpdate();
       return r;
       }
 

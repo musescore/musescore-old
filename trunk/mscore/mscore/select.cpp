@@ -439,7 +439,7 @@ void Score::searchSelectedElements()
                                     if (note->tieFor() && note->tieFor()->selected()) {
                                           el->push_back(note->tieFor());
                                           }
-                                    foreach(Fingering* f, note->fingering()) {
+                                    foreach(Text* f, note->fingering()) {
                                           if (f->selected())
                                                 el->push_back(f);
                                           }

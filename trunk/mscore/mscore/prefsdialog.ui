@@ -5,8 +5,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>605</width>
-    <height>410</height>
+    <width>591</width>
+    <height>403</height>
    </rect>
   </property>
   <property name="windowTitle" >
@@ -22,7 +22,7 @@
    <item>
     <widget class="QTabWidget" name="General" >
      <property name="currentIndex" >
-      <number>6</number>
+      <number>3</number>
      </property>
      <widget class="QWidget" name="tab" >
       <attribute name="title" >
@@ -202,7 +202,7 @@
                <string>...</string>
               </property>
               <property name="icon" >
-               <iconset>../xpm/fileopen.xpm</iconset>
+               <iconset resource="mscore.qrc" >:/data/fileopen.xpm</iconset>
               </property>
              </widget>
             </item>
@@ -218,6 +218,9 @@
             </property>
             <item>
              <widget class="QLabel" name="bgColorLabel" >
+              <property name="autoFillBackground" >
+               <bool>true</bool>
+              </property>
               <property name="frameShape" >
                <enum>QFrame::Box</enum>
               </property>
@@ -234,6 +237,9 @@
             </item>
             <item>
              <widget class="QToolButton" name="bgColorSelect" >
+              <property name="autoFillBackground" >
+               <bool>false</bool>
+              </property>
               <property name="text" >
                <string>CS</string>
               </property>
@@ -276,7 +282,7 @@
                <string>...</string>
               </property>
               <property name="icon" >
-               <iconset>../xpm/fileopen.xpm</iconset>
+               <iconset resource="mscore.qrc" >:/data/fileopen.xpm</iconset>
               </property>
              </widget>
             </item>
@@ -292,6 +298,9 @@
             </property>
             <item>
              <widget class="QLabel" name="fgColorLabel" >
+              <property name="autoFillBackground" >
+               <bool>true</bool>
+              </property>
               <property name="frameShape" >
                <enum>QFrame::Box</enum>
               </property>
@@ -308,6 +317,9 @@
             </item>
             <item>
              <widget class="QToolButton" name="fgColorSelect" >
+              <property name="autoFillBackground" >
+               <bool>false</bool>
+              </property>
               <property name="text" >
                <string>CS</string>
               </property>
@@ -885,6 +897,9 @@
            </disabled>
           </palette>
          </property>
+         <property name="autoFillBackground" >
+          <bool>true</bool>
+         </property>
          <property name="frameShape" >
           <enum>QFrame::Panel</enum>
          </property>
@@ -1366,6 +1381,9 @@
             </colorrole>
            </disabled>
           </palette>
+         </property>
+         <property name="autoFillBackground" >
+          <bool>true</bool>
          </property>
          <property name="frameShape" >
           <enum>QFrame::Panel</enum>
@@ -1849,6 +1867,9 @@
            </disabled>
           </palette>
          </property>
+         <property name="autoFillBackground" >
+          <bool>true</bool>
+         </property>
          <property name="frameShape" >
           <enum>QFrame::Panel</enum>
          </property>
@@ -2331,6 +2352,9 @@
            </disabled>
           </palette>
          </property>
+         <property name="autoFillBackground" >
+          <bool>true</bool>
+         </property>
          <property name="frameShape" >
           <enum>QFrame::Panel</enum>
          </property>
@@ -2431,7 +2455,7 @@
           <string>...</string>
          </property>
          <property name="icon" >
-          <iconset>../xpm/fileopen.xpm</iconset>
+          <iconset resource="mscore.qrc" >:/data/fileopen.xpm</iconset>
          </property>
         </widget>
        </item>
@@ -2643,265 +2667,227 @@
       <attribute name="title" >
        <string>StemDir</string>
       </attribute>
-      <widget class="QLabel" name="upLabel" >
-       <property name="geometry" >
-        <rect>
-         <x>10</x>
-         <y>45</y>
-         <width>54</width>
-         <height>16</height>
-        </rect>
+      <layout class="QGridLayout" >
+       <property name="margin" >
+        <number>9</number>
        </property>
-       <property name="text" >
-        <string>Up</string>
+       <property name="spacing" >
+        <number>6</number>
        </property>
-      </widget>
-      <widget class="QLabel" name="autoLabel" >
-       <property name="geometry" >
-        <rect>
-         <x>10</x>
-         <y>67</y>
-         <width>54</width>
-         <height>16</height>
-        </rect>
-       </property>
-       <property name="text" >
-        <string>Auto</string>
-       </property>
-      </widget>
-      <widget class="QLabel" name="downLabel" >
-       <property name="geometry" >
-        <rect>
-         <x>10</x>
-         <y>89</y>
-         <width>54</width>
-         <height>16</height>
-        </rect>
-       </property>
-       <property name="text" >
-        <string>Down</string>
-       </property>
-      </widget>
-      <widget class="QGroupBox" name="voiceGroupBox1" >
-       <property name="geometry" >
-        <rect>
-         <x>100</x>
-         <y>20</y>
-         <width>81</width>
-         <height>91</height>
-        </rect>
-       </property>
-       <property name="title" >
-        <string>Voice 1</string>
-       </property>
-       <property name="flat" >
-        <bool>true</bool>
-       </property>
-       <widget class="QRadioButton" name="upRadioButton1" >
-        <property name="geometry" >
-         <rect>
-          <x>15</x>
-          <y>20</y>
-          <width>51</width>
-          <height>22</height>
-         </rect>
-        </property>
-        <property name="text" >
-         <string/>
-        </property>
-       </widget>
-       <widget class="QRadioButton" name="autoRadioButton1" >
-        <property name="geometry" >
-         <rect>
-          <x>15</x>
-          <y>42</y>
-          <width>51</width>
-          <height>22</height>
-         </rect>
-        </property>
-        <property name="text" >
-         <string/>
-        </property>
-       </widget>
-       <widget class="QRadioButton" name="downRadioButton1" >
-        <property name="geometry" >
-         <rect>
-          <x>15</x>
-          <y>64</y>
-          <width>51</width>
-          <height>22</height>
-         </rect>
-        </property>
-        <property name="text" >
-         <string/>
-        </property>
-       </widget>
-      </widget>
-      <widget class="QGroupBox" name="voiceGroupBox2" >
-       <property name="geometry" >
-        <rect>
-         <x>190</x>
-         <y>20</y>
-         <width>81</width>
-         <height>91</height>
-        </rect>
-       </property>
-       <property name="title" >
-        <string>Voice 2</string>
-       </property>
-       <property name="flat" >
-        <bool>true</bool>
-       </property>
-       <widget class="QRadioButton" name="upRadioButton2" >
-        <property name="geometry" >
-         <rect>
-          <x>15</x>
-          <y>20</y>
-          <width>51</width>
-          <height>22</height>
-         </rect>
-        </property>
-        <property name="text" >
-         <string/>
-        </property>
-       </widget>
-       <widget class="QRadioButton" name="autoRadioButton2" >
-        <property name="geometry" >
-         <rect>
-          <x>15</x>
-          <y>42</y>
-          <width>51</width>
-          <height>22</height>
-         </rect>
-        </property>
-        <property name="text" >
-         <string/>
-        </property>
-       </widget>
-       <widget class="QRadioButton" name="downRadioButton2" >
-        <property name="geometry" >
-         <rect>
-          <x>15</x>
-          <y>64</y>
-          <width>51</width>
-          <height>22</height>
-         </rect>
-        </property>
-        <property name="text" >
-         <string/>
-        </property>
-       </widget>
-      </widget>
-      <widget class="QGroupBox" name="voiceGroupBox3" >
-       <property name="geometry" >
-        <rect>
-         <x>280</x>
-         <y>20</y>
-         <width>81</width>
-         <height>91</height>
-        </rect>
-       </property>
-       <property name="title" >
-        <string>Voice 3</string>
-       </property>
-       <property name="flat" >
-        <bool>true</bool>
-       </property>
-       <widget class="QRadioButton" name="upRadioButton3" >
-        <property name="geometry" >
-         <rect>
-          <x>15</x>
-          <y>20</y>
-          <width>51</width>
-          <height>22</height>
-         </rect>
-        </property>
-        <property name="text" >
-         <string/>
-        </property>
-       </widget>
-       <widget class="QRadioButton" name="autoRadioButton3" >
-        <property name="geometry" >
-         <rect>
-          <x>15</x>
-          <y>42</y>
-          <width>51</width>
-          <height>22</height>
-         </rect>
-        </property>
-        <property name="text" >
-         <string/>
-        </property>
-       </widget>
-       <widget class="QRadioButton" name="downRadioButton3" >
-        <property name="geometry" >
-         <rect>
-          <x>15</x>
-          <y>64</y>
-          <width>51</width>
-          <height>22</height>
-         </rect>
-        </property>
-        <property name="text" >
-         <string/>
-        </property>
-       </widget>
-      </widget>
-      <widget class="QGroupBox" name="voiceGroupBox4" >
-       <property name="geometry" >
-        <rect>
-         <x>370</x>
-         <y>20</y>
-         <width>81</width>
-         <height>91</height>
-        </rect>
-       </property>
-       <property name="title" >
-        <string>Voice 4</string>
-       </property>
-       <property name="flat" >
-        <bool>true</bool>
-       </property>
-       <widget class="QRadioButton" name="upRadioButton4" >
-        <property name="geometry" >
-         <rect>
-          <x>15</x>
-          <y>20</y>
-          <width>51</width>
-          <height>22</height>
-         </rect>
-        </property>
-        <property name="text" >
-         <string/>
-        </property>
-       </widget>
-       <widget class="QRadioButton" name="autoRadioButton4" >
-        <property name="geometry" >
-         <rect>
-          <x>15</x>
-          <y>42</y>
-          <width>51</width>
-          <height>22</height>
-         </rect>
-        </property>
-        <property name="text" >
-         <string/>
-        </property>
-       </widget>
-       <widget class="QRadioButton" name="downRadioButton4" >
-        <property name="geometry" >
-         <rect>
-          <x>15</x>
-          <y>64</y>
-          <width>51</width>
-          <height>22</height>
-         </rect>
-        </property>
-        <property name="text" >
-         <string/>
-        </property>
-       </widget>
-      </widget>
+       <item row="1" column="0" >
+        <spacer>
+         <property name="orientation" >
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" >
+          <size>
+           <width>20</width>
+           <height>191</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item row="0" column="4" >
+        <widget class="QGroupBox" name="voiceGroupBox4" >
+         <property name="title" >
+          <string>Voice 4</string>
+         </property>
+         <property name="flat" >
+          <bool>true</bool>
+         </property>
+         <layout class="QVBoxLayout" >
+          <property name="margin" >
+           <number>9</number>
+          </property>
+          <property name="spacing" >
+           <number>6</number>
+          </property>
+          <item>
+           <widget class="QRadioButton" name="upRadioButton4" >
+            <property name="text" >
+             <string/>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QRadioButton" name="autoRadioButton4" >
+            <property name="text" >
+             <string/>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QRadioButton" name="downRadioButton4" >
+            <property name="text" >
+             <string/>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item row="0" column="3" >
+        <widget class="QGroupBox" name="voiceGroupBox3" >
+         <property name="title" >
+          <string>Voice 3</string>
+         </property>
+         <property name="flat" >
+          <bool>true</bool>
+         </property>
+         <layout class="QVBoxLayout" >
+          <property name="margin" >
+           <number>9</number>
+          </property>
+          <property name="spacing" >
+           <number>6</number>
+          </property>
+          <item>
+           <widget class="QRadioButton" name="upRadioButton3" >
+            <property name="text" >
+             <string/>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QRadioButton" name="autoRadioButton3" >
+            <property name="text" >
+             <string/>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QRadioButton" name="downRadioButton3" >
+            <property name="text" >
+             <string/>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item row="0" column="0" >
+        <layout class="QVBoxLayout" >
+         <property name="margin" >
+          <number>0</number>
+         </property>
+         <property name="spacing" >
+          <number>6</number>
+         </property>
+         <item>
+          <spacer>
+           <property name="orientation" >
+            <enum>Qt::Vertical</enum>
+           </property>
+           <property name="sizeHint" >
+            <size>
+             <width>20</width>
+             <height>40</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+         <item>
+          <widget class="QLabel" name="upLabel" >
+           <property name="text" >
+            <string>Up</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="autoLabel" >
+           <property name="text" >
+            <string>Auto</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="downLabel" >
+           <property name="text" >
+            <string>Down</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item row="0" column="1" >
+        <widget class="QGroupBox" name="voiceGroupBox1" >
+         <property name="title" >
+          <string>Voice 1</string>
+         </property>
+         <property name="flat" >
+          <bool>true</bool>
+         </property>
+         <layout class="QVBoxLayout" >
+          <property name="margin" >
+           <number>9</number>
+          </property>
+          <property name="spacing" >
+           <number>9</number>
+          </property>
+          <item>
+           <widget class="QRadioButton" name="upRadioButton1" >
+            <property name="text" >
+             <string/>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QRadioButton" name="autoRadioButton1" >
+            <property name="text" >
+             <string/>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QRadioButton" name="downRadioButton1" >
+            <property name="text" >
+             <string/>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item row="0" column="2" >
+        <widget class="QGroupBox" name="voiceGroupBox2" >
+         <property name="title" >
+          <string>Voice 2</string>
+         </property>
+         <property name="flat" >
+          <bool>true</bool>
+         </property>
+         <layout class="QVBoxLayout" >
+          <property name="margin" >
+           <number>9</number>
+          </property>
+          <property name="spacing" >
+           <number>9</number>
+          </property>
+          <item>
+           <widget class="QRadioButton" name="upRadioButton2" >
+            <property name="text" >
+             <string/>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QRadioButton" name="autoRadioButton2" >
+            <property name="text" >
+             <string/>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QRadioButton" name="downRadioButton2" >
+            <property name="text" >
+             <string/>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+      </layout>
      </widget>
      <widget class="QWidget" name="tab_3" >
       <attribute name="title" >

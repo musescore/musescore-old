@@ -145,7 +145,7 @@ void Page::layout()
       if (::style->showPageNumber) {
             int n = no() + 1 + _score->_pageOffset;
             int subtype = (n & 1) ? TEXT_PAGE_NUMBER_ODD : TEXT_PAGE_NUMBER_EVEN;
-            if (n || ::style->showPageNumberOne) {
+            if ((n > 1) || ::style->showPageNumberOne) {
                   if (_pageNo == 0) {
                         _pageNo = new Text(score());
                         setSubtype(subtype);

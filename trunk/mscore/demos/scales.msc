@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf8"?>
 <museScore version="1.0">
-  <Geometry x="126" y="119" w="1729" h="869" />
+  <Geometry x="-66" y="26" w="1674" h="869" />
   <Spatium>1.5</Spatium>
   <Division>480</Division>
   <Mag>2</Mag>
-  <xoff>37</xoff>
-  <yoff>52</yoff>
+  <xoff>14</xoff>
+  <yoff>-64</yoff>
   <Style>
     <staffUpperBorder>8</staffUpperBorder>
     <staffLowerBorder>4</staffLowerBorder>
@@ -123,18 +123,51 @@
     </Part>
   <Staff id="1">
     <Measure number="1">
-      <work-title>
-        <style>2</style>
+      <Text>
+        <align>12</align>
+        <xoffset>0</xoffset>
+        <yoffset>0.19685</yoffset>
+        <anchor>page</anchor>
+        <offsetType>absolute</offsetType>
+        <spatiumSizeDependent>0</spatiumSizeDependent>
         <data>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-weight:400; font-style:normal; text-decoration:none;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Scales &amp;amp; Chords&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
-        </work-title>
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;helvetica&apos;; font-size:11pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Times New Roman&apos;; font-size:24pt;&quot;&gt;Scales &amp;amp; Chords&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
+        </Text>
       <BarLine/>
       <Chord>
         <ticklen>480</ticklen>
         <Note>
           <pitch>60</pitch>
+          <Text>
+            <align>36</align>
+            <xoffset>0</xoffset>
+            <yoffset>0</yoffset>
+            <anchor>note</anchor>
+            <offsetType>spatium</offsetType>
+            <spatiumSizeDependent>0</spatiumSizeDependent>
+            <data>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-size:8pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;1&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
+            <subtype>Fingering</subtype>
+            <offset x="-2.11666" y="0.423334"/>
+            </Text>
+          <Text>
+            <align>36</align>
+            <xoffset>0</xoffset>
+            <yoffset>0</yoffset>
+            <anchor>note</anchor>
+            <offsetType>spatium</offsetType>
+            <spatiumSizeDependent>0</spatiumSizeDependent>
+            <data>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-size:8pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;4&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
+            <subtype>Fingering</subtype>
+            <offset x="-1.76389" y="-7.33777"/>
+            </Text>
           </Note>
         </Chord>
       <Chord>

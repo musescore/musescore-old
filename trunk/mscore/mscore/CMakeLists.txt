@@ -31,9 +31,9 @@ add_custom_target(all.h.pch
    WORKING_DIRECTORY ${PROJECT_BINARY_DIR}/mscore
    )
 
-set(CMAKE_CXX_FLAGS
-   "-g -Wall -Wextra -Winvalid-pch -fno-exceptions"
-   )
+set(CMAKE_CXX_FLAGS         "-g -Wall -Wextra -Winvalid-pch -fno-exceptions")
+set(CMAKE_CXX_FLAGS_RELEASE "-O2 -DQT_NO_DEBUG")
+set(CMAKE_CXX_FLAGS_DEBUG   "-DQT_DEBUG")
 
 include_directories(
       ${CMAKE_CURRENT_BINARY_DIR}
@@ -162,7 +162,6 @@ add_executable ( mscore
       system.cpp
       tempo.cpp
       text.cpp
-#      textline.cpp
       textpalette.cpp
       textstyle.cpp
       timedialog.cpp

@@ -45,7 +45,7 @@ class Symbol : public Element {
       virtual void write(Xml& xml) const;
       virtual void read(QDomNode);
       virtual bool isMovable() const { return true; }
-      virtual const QRectF& bbox() const;
+      virtual QRectF bbox() const;
       };
 
 typedef pstl::plist<Symbol*> SymbolList;

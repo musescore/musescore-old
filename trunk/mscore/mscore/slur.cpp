@@ -795,9 +795,9 @@ void Slur::read(Score* score, QDomNode node)
             QString val(e.text());
             int i = val.toInt();
             if (tag == "startTick")
-                  _tick1 = i;
+                  _tick1 = score->fileDivision(i);
             else if (tag == "endTick")
-                  _tick2 = i;
+                  _tick2 = score->fileDivision(i);
             else if (tag == "startVoice")
                   _voice1 = i;
             else if (tag == "endVoice")
