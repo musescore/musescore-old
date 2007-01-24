@@ -42,7 +42,7 @@ class Hairpin : public SLine {
       virtual void layout();
       virtual void write(Xml& xml) const;
       virtual void read(QDomNode);
-      virtual void bboxUpdate();
+      virtual QRectF bbox() const;
       virtual void setSubtype(int);
       };
 

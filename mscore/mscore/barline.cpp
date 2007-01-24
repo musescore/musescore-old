@@ -220,8 +220,7 @@ QRectF BarLine::bbox() const
             	dw = 0.0;
             	break;
             }
-      _bbox.setWidth(dw);
-      return _bbox;
+      return QRectF(0.0, 0.0, dw, _height);
       }
 
 //---------------------------------------------------------

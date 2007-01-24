@@ -61,7 +61,7 @@ class Rest : public ChordRest {
       virtual void drop(const QPointF&, int, const QDomNode&);
       virtual Element* findSelectableElement(QPointF p) const;
       virtual void layout();
-      virtual void bboxUpdate();
+      virtual QRectF bbox() const;
       };
 
 #endif

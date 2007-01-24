@@ -151,9 +151,8 @@ class ShadowNote : public Element {
       virtual ElementType type() const  { return SHADOW_NOTE; }
       int line() const                  { return _line;   }
       void setLine(int n)               { _line = n;      }
-      virtual void layout();
-      virtual void draw(Painter& p);
       virtual QRectF bbox() const;
+      virtual void draw(Painter& p);
       };
 
 #endif

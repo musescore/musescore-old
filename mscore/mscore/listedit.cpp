@@ -1209,7 +1209,6 @@ void ShowElementBase::offsetxChanged(double val)
       el->setUserXoffset(val);
 //      Element* e = el;
 //TODO      while ((e = e->parent()))
-//            e->bboxUpdate();
       el->score()->update(r | el->abbox());
       }
 

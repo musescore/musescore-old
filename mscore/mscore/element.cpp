@@ -395,9 +395,17 @@ SStaff::SStaff(Score* s)
    : Element(s)
       {
       lines = 5;
+      _width = 1.0;      // dummy
+      }
+
+//---------------------------------------------------------
+//   bbox
+//---------------------------------------------------------
+
+QRectF SStaff::bbox() const
+      {
       qreal lw = point(::style->staffLineWidth);
-      setBboxY(-lw/2);
-      setHeight((lines-1) * _spatium + lw);
+      return QRectF(0.0, -lw*.5, _width, (lines-1) * _spatium + lw);
       }
 
 //---------------------------------------------------------
@@ -769,8 +777,6 @@ Cursor::Cursor(Score* s, double l)
       lineWidth = .4;
       _on       = false;
       _blink    = true;
-      double w  = lineWidth * _spatium;
-      setbbox(QRectF(-w/2, 0, lineWidth * _spatium, dlen * _spatium * 1.1));
       }
 
 //---------------------------------------------------------
@@ -850,8 +856,6 @@ VSpacer::VSpacer(Score* s, double h)
    : Element(s)
       {
       height = h;
-      double w = .5 * _spatium;
-      setbbox(QRectF(-w, 0, 2*w, height));
       }
 
 //---------------------------------------------------------
@@ -942,9 +946,7 @@ void Volta::draw1(Painter& p)
 
 void Volta::setLen(qreal l)
       {
-      qreal voltaHeight = _spatium * 1.8;
       _p2.setX(l);
-      setbbox(QRectF(0.0, 0.0, _p2.x() - _p1.x(), voltaHeight));
       }
 
 //---------------------------------------------------------
@@ -969,8 +971,17 @@ void Volta::layout()
       _p2.setX(x2);
       _p2.setY(0.0);
 
-      setbbox(QRectF(0.0, 0.0, _p2.x() - _p1.x(), voltaHeight));
       setPos(0.0, y - (voltaHeight + voltaDistance));
+      }
+
+//---------------------------------------------------------
+//   bbox
+//---------------------------------------------------------
+
+QRectF Volta::bbox() const
+      {
+      qreal voltaHeight   = _spatium * 1.8;
+      return QRectF(0.0, 0.0, _p2.x() - _p1.x(), voltaHeight);
       }
 
 //---------------------------------------------------------

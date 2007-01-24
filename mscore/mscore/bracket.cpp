@@ -112,7 +112,6 @@ void Bracket::layout()
             path->addText(QPointF(0.0, h * 2.0 + o), f, QString(down));
             path->addRect(0.0, -slw * .5, w, h * 2.0 + slw);
             }
-      bboxUpdate();
       }
 
 //---------------------------------------------------------
@@ -206,7 +205,6 @@ void Bracket::updateGrips(QMatrix& matrix)
 
       grip[0] = r.translated(QPointF(0.0, 0.0));
       grip[1] = r.translated(QPointF(0.0, h2 * 2));
-      bboxUpdate();
       }
 
 //---------------------------------------------------------
@@ -230,24 +228,23 @@ bool Bracket::startEditDrag(const QPointF& p)
             mode = 1;
       else if (grip[1].contains(p))
             mode = 2;
-      if (mode) {
-            bboxUpdate();
+      if (mode)
             return true;
-            }
       return false;
       }
 
 //---------------------------------------------------------
-//   bboxUpdate
+//   bbox
 //---------------------------------------------------------
 
-void Bracket::bboxUpdate()
+QRectF Bracket::bbox() const
       {
-      setbbox(path->boundingRect());
+      QRectF b = path->boundingRect();
       if (mode) {
-            orBbox(grip[0]);
-            orBbox(grip[1]);
+            b |= grip[0];
+            b |= grip[1];
             }
+      return b;
       }
 
 //---------------------------------------------------------
@@ -382,7 +379,6 @@ bool Bracket::endEditDrag()
       layout();
       score()->staff(idx1)->setBracketSpan(idx2 - idx1 + 1);
       grip[1].moveTo(0.0, h2 *2);
-      bboxUpdate();
       return true;
       }
 

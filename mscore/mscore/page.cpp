@@ -129,10 +129,18 @@ void PageList::update()
             Page* page = *ip;
             page->setNo(no);
             page->setPos(x, 0);
-            page->setbbox(QRectF(0, 0, page->loWidth(), page->loHeight()));
             x += page->width() + ((no & 1) ? 1.0 : 50.0);
             page->layout();
             }
+      }
+
+//---------------------------------------------------------
+//   bbox
+//---------------------------------------------------------
+
+QRectF Page::bbox() const
+      {
+      return QRectF(0, 0, loWidth(), loHeight());
       }
 
 //---------------------------------------------------------

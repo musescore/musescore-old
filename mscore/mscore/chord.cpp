@@ -184,7 +184,6 @@ void Chord::add(Element* e)
             notes.add((Note*)e);
       else if (e->type() == ATTRIBUTE)
             attributes.push_back((NoteAttribute*)e);
-//      bboxUpdate();   //DEBUG1
       }
 
 //---------------------------------------------------------
@@ -782,13 +781,11 @@ void Chord::space(double& min, double& extra) const
                   }
             if (note->mirror()) {
                   if (isUp()) {
-                        // Notenkopf auf der rechten Seite des
-                        // Notenhalses
+                        // note head on the right side of stem
                         mirror = lhw;
                         }
                   else {
-                        // Notenkopf auf der linken Seite des
-                        // Notenhalses
+                        // note head on left side of stem
                         if ((lhw + prefixWidth) > extra)
                               extra = lhw + prefixWidth;
                         }

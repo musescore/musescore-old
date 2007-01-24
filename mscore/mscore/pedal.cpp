@@ -117,7 +117,6 @@ void Pedal::setLen(qreal l)
       hps.p1 = QPointF(0, 0);
       hps.p2 = QPointF(l, 0);
       segments.push_back(hps);
-      bboxUpdate();
       }
 
 //---------------------------------------------------------
@@ -137,22 +136,21 @@ void Pedal::layout()
       SysStaff* sstaff = system->staff(staffIdx());
       qreal y = sstaff->bbox().top() + pedalDistance;
       setPos(0.0, y);
-      bboxUpdate();
       }
 
 //---------------------------------------------------------
-//   bboxUpdate
+//   bbox
 //---------------------------------------------------------
 
-void Pedal::bboxUpdate()
+QRectF Pedal::bbox() const
       {
       const QRectF& rr = symbols[symbol].bbox();
       double h1 = rr.height() * .5;
 
       QRectF r(0, 0, 0, 0);
-      for (iLineSegment i = segments.begin(); i != segments.end(); ++i) {
-            LineSegment* s = &*i;
-            iLineSegment ii = i;
+      for (ciLineSegment i = segments.begin(); i != segments.end(); ++i) {
+            LineSegment* s = (LineSegment*)(&*i);
+            ciLineSegment ii = i;
             ++ii;
             QPointF pp1(s->p1);
             QPointF pp2(s->p2);
@@ -170,7 +168,7 @@ void Pedal::bboxUpdate()
             r |= bbr1;
             r |= bbr2;
             }
-      setbbox(r);
+      return r;
       }
 
 //---------------------------------------------------------

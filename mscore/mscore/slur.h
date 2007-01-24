@@ -51,7 +51,7 @@ class SlurSegment : public Element {
 
       int mode;         // 0-4  0 - normal
 
-      virtual void bboxUpdate();
+      virtual QRectF bbox() const;
       void updatePath();
       void updateGrips(QMatrix&);
 
@@ -143,6 +143,7 @@ class Slur : public SlurTie {
       virtual void layout2(const QPointF, int, struct UP&);
       virtual void nextSeg(const QPointF, int, struct UP&);
       virtual void prevSeg(const QPointF, int, struct UP&);
+      virtual QRectF bbox() const;
 
       void setStart(int t, Staff* staff, int voice);
       void setEnd(int t, Staff* staff, int voice);

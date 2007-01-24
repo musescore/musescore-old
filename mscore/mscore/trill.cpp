@@ -50,17 +50,17 @@ void Trill::setSubtype(int val)
       }
 
 //---------------------------------------------------------
-//   bboxUpdate
+//   bbox
 //---------------------------------------------------------
 
-void Trill::bboxUpdate()
+QRectF Trill::bbox() const
       {
       QRectF rr(symbols[trillSym].bbox());
 
       QRectF r(0, 0, 0, 0);
-      for (iLineSegment i = segments.begin(); i != segments.end(); ++i) {
-            LineSegment* s = &*i;
-            iLineSegment ii = i;
+      for (ciLineSegment i = segments.begin(); i != segments.end(); ++i) {
+            LineSegment* s = (LineSegment*)(&*i);
+            ciLineSegment ii = i;
             ++ii;
             QPointF pp1(s->p1);
             QPointF pp2(s->p2);
@@ -78,7 +78,7 @@ void Trill::bboxUpdate()
             r |= bbr1;
             r |= bbr2;
             }
-      setbbox(r);
+      return r;
       }
 
 //---------------------------------------------------------
@@ -149,7 +149,6 @@ void Trill::setLen(qreal l)
       hps.p1 = QPointF(0, 0);
       hps.p2 = QPointF(l, 0);
       segments.push_back(hps);
-      bboxUpdate();
       }
 
 //---------------------------------------------------------
@@ -167,7 +166,6 @@ void Trill::layout()
       SysStaff* sstaff = system->staff(staffIdx());
       qreal y = sstaff->bbox().top() - trillDistance;
       setPos(0.0, y);
-      bboxUpdate();
       }
 
 //---------------------------------------------------------

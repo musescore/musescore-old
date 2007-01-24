@@ -168,7 +168,6 @@ bool SLine::editDrag(QMatrix&, QPointF*, const QPointF& d)
       else
             return false;
       layout();
-//      bboxUpdate();
       return true;
       }
 

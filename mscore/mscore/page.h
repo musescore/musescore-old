@@ -87,6 +87,7 @@ class Page : public Element {
       ~Page();
       virtual Page* clone() const { return new Page(*this); }
       virtual ElementType type() const   { return PAGE; }
+      virtual QRectF bbox() const;
 
       SystemList* systems() const        { return _systems;   }
       void appendSystem(System* s);

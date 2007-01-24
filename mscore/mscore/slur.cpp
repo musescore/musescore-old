@@ -74,7 +74,6 @@ SlurSegment::~SlurSegment()
 void SlurSegment::resetMode()
       {
       mode = 0;
-      bboxUpdate();
       }
 
 //---------------------------------------------------------
@@ -93,7 +92,6 @@ void SlurSegment::updatePath()
       path->moveTo(pp[0]);
       path->cubicTo(pp[1]-t, pp[2]-t, pp[3]);
       path->cubicTo(pp[2]+t, pp[1]+t, pp[0]);
-      bboxUpdate();
       }
 
 //---------------------------------------------------------
@@ -183,7 +181,6 @@ bool SlurSegment::startEditDrag(const QPointF& p)
       mode = 1;
       for (int i = 0; i < 4; ++i) {
             if (ups[i].r.contains(p)) {
-                  bboxUpdate();
                   return true;
                   }
             ++mode;
@@ -257,19 +254,20 @@ bool SlurSegment::editDrag(QMatrix& matrix, QPointF*, const QPointF& delta)
       }
 
 //---------------------------------------------------------
-//    bboxUpdate
+//    bbox
 //---------------------------------------------------------
 
-void SlurSegment::bboxUpdate()
+QRectF SlurSegment::bbox() const
       {
+      QRectF r;
       if (path == 0)
-            return;
-      QRectF r(path->boundingRect());
+            return r;
+      r = path->boundingRect();
       if (mode) {
             for (int i = 0; i < 4; ++i)
                   r |= ups[i].r;
             }
-      setbbox(r);
+      return r;
       }
 
 //---------------------------------------------------------
@@ -413,7 +411,7 @@ bool SlurSegment::edit(QKeyEvent* ev)
             rb->set(rp1, rp2);
             rp1 -= ppos;
             rp2 -= ppos;
-            orBbox(QRectF(rp1, QSizeF(rp2.x() - rp1.x(), rp2.y() - rp1.y())));
+//??            orBbox(QRectF(rp1, QSizeF(rp2.x() - rp1.x(), rp2.y() - rp1.y())));
             }
       return false;
       }
@@ -953,10 +951,18 @@ void Slur::layout()
             if (*is == s2)
                   break;
             }
-      setbbox(QRectF(0, 0, 0, 0));
-      for (iElement i = segments.begin(); i != segments.end(); ++i)
-            orBbox((*i)->abbox().translated(apos()));
-// printf("Slur layout, segments %d\n", segments.size());
+      }
+
+//---------------------------------------------------------
+//   bbox
+//---------------------------------------------------------
+
+QRectF Slur::bbox() const
+      {
+      QRectF r;
+      for (ciElement i = segments.begin(); i != segments.end(); ++i)
+            r |= (*i)->abbox().translated(apos());
+      return r;
       }
 
 //---------------------------------------------------------

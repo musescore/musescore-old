@@ -848,7 +848,8 @@ void Score::printFile()
       {
       //
       // HighResolution gives higher output quality
-      QPrinter printer(QPrinter::HighResolution);
+//      QPrinter printer(QPrinter::HighResolution);
+      QPrinter printer;
       printer.setPageSize(paperSizes[pageFormat()->size].qtsize);
       printer.setOrientation(pageFormat()->landscape ? QPrinter::Landscape : QPrinter::Portrait);
       printer.setCreator("MuseScore Version: " VERSION);
@@ -860,7 +861,9 @@ void Score::printFile()
             return;
 
       Painter p(&printer);
-      p.setClipRect(QRectF(0, 0, 100000, 100000));
+      p.setRenderHint(QPainter::Antialiasing, true);
+      p.setClipRect(QRectF(0.0, 0.0, 1000000.0, 1000000.0));
+
       qreal oldSpatium = _spatium;
       double oldDPI = DPI;
       DPI  = printer.logicalDpiX();          // drawing resolution
@@ -870,12 +873,12 @@ void Score::printFile()
       scoreLayout()->setPaintDevice(&printer);
 
       doLayout();
-      doLayout(); // DEBUG1
 
       p.setPrint(true);
 
       for (ciPage ip = pages()->begin();;) {
             Page* page = *ip;
+// printf("page %f %f DPMM %f DPI %f breite in mm: %f\n", page->width(), page->height(), DPMM, DPI, page->width() / DPMM);
             page->draw(p);
             ++ip;
             if (ip == pages()->end())
@@ -889,6 +892,5 @@ void Score::printFile()
       scoreLayout()->setPaintDevice(oldPaintDevice);
       setSpatium(oldSpatium);
       doLayout();
-      doLayout(); // DEBUG1
       }
 

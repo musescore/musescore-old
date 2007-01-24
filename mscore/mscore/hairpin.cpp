@@ -59,22 +59,21 @@ void Hairpin::read(QDomNode node)
 void Hairpin::setSubtype(int st)
       {
       Element::setSubtype(st);
-      bboxUpdate();
       }
 
 //---------------------------------------------------------
-//   bboxUpdate
+//   bbox
 //---------------------------------------------------------
 
-void Hairpin::bboxUpdate()
+QRectF Hairpin::bbox() const
       {
       double h1 = point(style->hairpinHeight) * .5;
 //      double h2 = point(style->hairpinContHeight) * .5;
 
       QRectF r(0, 0, 0, 0);
-      for (iLineSegment i = segments.begin(); i != segments.end(); ++i) {
-            LineSegment* s = &*i;
-            iLineSegment ii = i;
+      for (ciLineSegment i = segments.begin(); i != segments.end(); ++i) {
+            LineSegment* s = (LineSegment*)(&*i);
+            ciLineSegment ii = i;
             ++ii;
             QPointF pp1(s->p1);
             QPointF pp2(s->p2);
@@ -95,7 +94,7 @@ void Hairpin::bboxUpdate()
 
       qreal lw = ::style->hairpinWidth.point() * .5;
       r.adjust(-lw, -lw, lw, lw);
-      setbbox(r);
+      return r;
       }
 
 //---------------------------------------------------------
@@ -171,7 +170,6 @@ void Hairpin::layout()
       {
       SLine::layout();
       setPos(0, _spatium * 6);
-      bboxUpdate();
       }
 
 //---------------------------------------------------------
@@ -185,7 +183,6 @@ void Hairpin::setLen(double l)
       hps.p1 = QPointF(0, 0);
       hps.p2 = QPointF(l, 0);
       segments.push_back(hps);
-      bboxUpdate();
       }
 
 //---------------------------------------------------------
