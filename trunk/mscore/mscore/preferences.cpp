@@ -329,8 +329,6 @@ PreferenceDialog::PreferenceDialog(QWidget* parent)
       setupUi(this);
 
       connect(buttonBox, SIGNAL(clicked(QAbstractButton*)), SLOT(buttonBoxClicked(QAbstractButton*)));
-//      connect(buttonCancel, SIGNAL(pressed()), SLOT(cancel()));
-
       cursorBlink->setChecked(preferences.cursorBlink);
 
       QButtonGroup* fgButtons = new QButtonGroup(this);
@@ -428,7 +426,6 @@ PreferenceDialog::PreferenceDialog(QWidget* parent)
       foreach(Shortcut* s, shortcuts) {
             Shortcut* ns = new Shortcut(*s);
             ns->action = 0;
-            ns->icon   = 0;
             localShortcuts[s->xml] = ns;
             }
       updateSCListView();
@@ -447,7 +444,6 @@ PreferenceDialog::PreferenceDialog(QWidget* parent)
       connect(playPanelCur, SIGNAL(clicked()), SLOT(playPanelCurClicked()));
       connect(keyPadCur, SIGNAL(clicked()), SLOT(padCurClicked()));
 
-//      connect(shortcutList, SIGNAL(itemDoubleClicked(QTreeWidgetItem*, int)), SLOT(defineShortcutClicked()));
       connect(shortcutList, SIGNAL(itemActivated(QTreeWidgetItem*, int)), SLOT(defineShortcutClicked()));
       connect(resetShortcut, SIGNAL(clicked()), SLOT(resetShortcutClicked()));
       connect(clearShortcut, SIGNAL(clicked()), SLOT(clearShortcutClicked()));

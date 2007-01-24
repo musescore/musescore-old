@@ -1,8 +1,8 @@
-<?xml version="1.0" encoding="ISO-8859-1"?>
+<?xml version="1.0" encoding="utf8"?>
 <museScore version="1.0">
-  <Geometry x="422" y="0" w="1061" h="931" />
+  <Geometry x="676" y="68" w="1061" h="931" />
   <Spatium>1.62</Spatium>
-  <Division>384</Division>
+  <Division>480</Division>
   <Mag>0.75</Mag>
   <xoff>20</xoff>
   <yoff>16</yoff>
@@ -102,8 +102,8 @@
     <Staff>
       <cleflist>
         <clef tick="0" idx="4"/>
-        <clef tick="12288" idx="0"/>
-        <clef tick="17664" idx="4"/>
+        <clef tick="15360" idx="0"/>
+        <clef tick="22080" idx="4"/>
         </cleflist>
       </Staff>
     <trackName>Part_1</trackName>
@@ -116,28 +116,52 @@
       </Instrument>
     </Part>
   <Staff id="1">
-    <Measure number="1" tick="0">
-      <work-title>
-        <data>Inventio 1</data>
-        <style>2</style>
-        </work-title>
-      <work-number>
-        <data>BWV 772</data>
-        <style>3</style>
-        </work-number>
-      <creator-composer>
-        <data>J.S.Bach</data>
-        <style>4</style>
-        </creator-composer>
-      <BarLine>
-        </BarLine>
+    <Measure number="1">
+      <Text>
+        <align>12</align>
+        <xoffset>0</xoffset>
+        <yoffset>0.19685</yoffset>
+        <anchor>page</anchor>
+        <offsetType>absolute</offsetType>
+        <spatiumSizeDependent>0</spatiumSizeDependent>
+        <data>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-size:24pt; font-weight:400; font-style:normal; text-decoration:none;&quot;&gt;
+&lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Inventio 1&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
+        </Text>
+      <Text>
+        <align>12</align>
+        <xoffset>0</xoffset>
+        <yoffset>0.590551</yoffset>
+        <anchor>page</anchor>
+        <offsetType>absolute</offsetType>
+        <spatiumSizeDependent>0</spatiumSizeDependent>
+        <data>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-size:14pt; font-weight:400; font-style:normal; text-decoration:none;&quot;&gt;
+&lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;BWV 772&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
+        <subtype>Subtitle</subtype>
+        </Text>
+      <Text>
+        <align>10</align>
+        <xoffset>0</xoffset>
+        <yoffset>0.590551</yoffset>
+        <anchor>page</anchor>
+        <offsetType>absolute</offsetType>
+        <spatiumSizeDependent>0</spatiumSizeDependent>
+        <data>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-size:12pt; font-weight:400; font-style:normal; text-decoration:none;&quot;&gt;
+&lt;p align=&quot;right&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;J.S.Bach&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
+        <subtype>Composer</subtype>
+        </Text>
+      <BarLine/>
       <Rest>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>4</BeamMode>
         </Rest>
       <Chord>
-        <tick>96</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>1</BeamMode>
         <StemDirection>1</StemDirection>
         <Note>
@@ -145,8 +169,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>192</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>2</BeamMode>
         <StemDirection>1</StemDirection>
         <Note>
@@ -154,8 +177,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>288</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>3</BeamMode>
         <StemDirection>1</StemDirection>
         <Note>
@@ -163,8 +185,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>384</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>1</BeamMode>
         <StemDirection>1</StemDirection>
         <Note>
@@ -172,8 +193,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>480</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>2</BeamMode>
         <StemDirection>1</StemDirection>
         <Note>
@@ -181,8 +201,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>576</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>2</BeamMode>
         <StemDirection>1</StemDirection>
         <Note>
@@ -190,8 +209,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>672</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>3</BeamMode>
         <StemDirection>1</StemDirection>
         <Note>
@@ -199,8 +217,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>768</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <BeamMode>1</BeamMode>
         <StemDirection>1</StemDirection>
         <Note>
@@ -208,8 +225,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>960</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <BeamMode>3</BeamMode>
         <StemDirection>1</StemDirection>
         <Note>
@@ -217,8 +233,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>1152</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <BeamMode>1</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -226,8 +241,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>1344</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <BeamMode>3</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -235,12 +249,10 @@
           </Note>
         </Chord>
       </Measure>
-    <Measure number="2" tick="1536">
-      <BarLine>
-        </BarLine>
+    <Measure number="2">
+      <BarLine/>
       <Chord>
-        <tick>1536</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>1</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -248,8 +260,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>1632</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>2</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -257,8 +268,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>1728</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>2</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -266,8 +276,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>1824</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>3</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -275,8 +284,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>1920</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>1</BeamMode>
         <StemDirection>1</StemDirection>
         <Note>
@@ -284,8 +292,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>2016</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>2</BeamMode>
         <StemDirection>1</StemDirection>
         <Note>
@@ -293,8 +300,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>2112</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>2</BeamMode>
         <StemDirection>1</StemDirection>
         <Note>
@@ -302,8 +308,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>2208</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>3</BeamMode>
         <StemDirection>1</StemDirection>
         <Note>
@@ -311,8 +316,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>2304</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <BeamMode>1</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -320,8 +324,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>2496</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <BeamMode>2</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -329,8 +332,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>2688</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <BeamMode>2</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -338,8 +340,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>2880</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <BeamMode>3</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -347,12 +348,10 @@
           </Note>
         </Chord>
       </Measure>
-    <Measure number="3" tick="3072">
-      <BarLine>
-        </BarLine>
+    <Measure number="3">
+      <BarLine/>
       <Chord>
-        <tick>3072</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>1</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -360,8 +359,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>3168</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>2</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -369,8 +367,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>3264</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>2</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -378,8 +375,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>3360</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>3</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -387,8 +383,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>3456</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>1</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -396,8 +391,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>3552</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>2</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -405,8 +399,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>3648</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>2</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -414,8 +407,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>3744</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>3</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -423,8 +415,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>3840</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>1</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -432,8 +423,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>3936</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>2</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -441,8 +431,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>4032</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>2</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -450,8 +439,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>4128</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>3</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -459,8 +447,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>4224</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>1</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -468,8 +455,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>4320</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>2</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -477,8 +463,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>4416</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>2</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -486,8 +471,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>4512</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>3</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -495,12 +479,10 @@
           </Note>
         </Chord>
       </Measure>
-    <Measure number="4" tick="4608">
-      <BarLine>
-        </BarLine>
+    <Measure number="4">
+      <BarLine/>
       <Chord>
-        <tick>4608</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>1</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -508,8 +490,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>4704</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>2</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -517,8 +498,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>4800</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>2</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -526,8 +506,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>4896</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>3</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -535,8 +514,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>4992</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>1</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -544,8 +522,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>5088</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>2</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -553,8 +530,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>5184</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>2</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -562,8 +538,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>5280</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>3</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -571,8 +546,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>5376</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>1</BeamMode>
         <StemDirection>1</StemDirection>
         <Note>
@@ -580,8 +554,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>5472</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>2</BeamMode>
         <StemDirection>1</StemDirection>
         <Note>
@@ -589,8 +562,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>5568</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>2</BeamMode>
         <StemDirection>1</StemDirection>
         <Note>
@@ -598,8 +570,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>5664</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>3</BeamMode>
         <StemDirection>1</StemDirection>
         <Note>
@@ -607,8 +578,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>5760</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>1</BeamMode>
         <StemDirection>1</StemDirection>
         <Note>
@@ -618,8 +588,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>5856</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>2</BeamMode>
         <StemDirection>1</StemDirection>
         <Note>
@@ -627,8 +596,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>5952</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>2</BeamMode>
         <StemDirection>1</StemDirection>
         <Note>
@@ -636,8 +604,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>6048</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>3</BeamMode>
         <StemDirection>1</StemDirection>
         <Note>
@@ -645,12 +612,10 @@
           </Note>
         </Chord>
       </Measure>
-    <Measure number="5" tick="6144">
-      <BarLine>
-        </BarLine>
+    <Measure number="5">
+      <BarLine/>
       <Chord>
-        <tick>6144</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <BeamMode>1</BeamMode>
         <StemDirection>1</StemDirection>
         <Note>
@@ -658,8 +623,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>6336</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <BeamMode>3</BeamMode>
         <StemDirection>1</StemDirection>
         <Note>
@@ -667,8 +631,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>6528</tick>
-        <ticklen>288</ticklen>
+        <ticklen>360</ticklen>
         <BeamMode>1</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -676,8 +639,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>6816</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>3</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -685,8 +647,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>6912</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>1</BeamMode>
         <StemDirection>1</StemDirection>
         <Note>
@@ -694,8 +655,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>7008</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>2</BeamMode>
         <StemDirection>1</StemDirection>
         <Note>
@@ -703,8 +663,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>7104</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>2</BeamMode>
         <StemDirection>1</StemDirection>
         <Note>
@@ -712,8 +671,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>7200</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>3</BeamMode>
         <StemDirection>1</StemDirection>
         <Note>
@@ -723,8 +681,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>7296</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>1</BeamMode>
         <StemDirection>1</StemDirection>
         <Note>
@@ -732,8 +689,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>7392</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>2</BeamMode>
         <StemDirection>1</StemDirection>
         <Note>
@@ -741,8 +697,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>7488</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>2</BeamMode>
         <StemDirection>1</StemDirection>
         <Note>
@@ -750,8 +705,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>7584</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>3</BeamMode>
         <StemDirection>1</StemDirection>
         <Note>
@@ -759,12 +713,10 @@
           </Note>
         </Chord>
       </Measure>
-    <Measure number="6" tick="7680">
-      <BarLine>
-        </BarLine>
+    <Measure number="6">
+      <BarLine/>
       <Chord>
-        <tick>7680</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>1</BeamMode>
         <StemDirection>1</StemDirection>
         <Note>
@@ -772,8 +724,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>7776</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>2</BeamMode>
         <StemDirection>1</StemDirection>
         <Note>
@@ -781,8 +732,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>7872</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>2</BeamMode>
         <StemDirection>1</StemDirection>
         <Note>
@@ -790,8 +740,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>7968</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>3</BeamMode>
         <StemDirection>1</StemDirection>
         <Note>
@@ -799,8 +748,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>8064</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>1</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -808,8 +756,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>8160</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>2</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -817,8 +764,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>8256</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>2</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -826,8 +772,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>8352</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>3</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -835,8 +780,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>8448</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>1</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -844,24 +788,21 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>8544</tick>
-        <ticklen>48</ticklen>
+        <ticklen>60</ticklen>
         <StemDirection>2</StemDirection>
         <Note>
           <pitch>71</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>8592</tick>
-        <ticklen>48</ticklen>
+        <ticklen>60</ticklen>
         <StemDirection>2</StemDirection>
         <Note>
           <pitch>72</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>8640</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>2</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -869,8 +810,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>8736</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>3</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -878,8 +818,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>8832</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <BeamMode>1</BeamMode>
         <StemDirection>1</StemDirection>
         <Note>
@@ -887,16 +826,14 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>9024</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <StemDirection>1</StemDirection>
         <Note>
           <pitch>69</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>9120</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>3</BeamMode>
         <StemDirection>1</StemDirection>
         <Note>
@@ -904,12 +841,10 @@
           </Note>
         </Chord>
       </Measure>
-    <Measure number="7" tick="9216">
-      <BarLine>
-        </BarLine>
+    <Measure number="7">
+      <BarLine/>
       <Chord>
-        <tick>9216</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <BeamMode>4</BeamMode>
         <StemDirection>1</StemDirection>
         <Note>
@@ -917,23 +852,19 @@
           </Note>
         </Chord>
       <Rest>
-        <tick>9408</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <BeamMode>4</BeamMode>
         </Rest>
       <Rest>
-        <tick>9600</tick>
-        <ticklen>384</ticklen>
+        <ticklen>480</ticklen>
         <BeamMode>4</BeamMode>
         </Rest>
       <Rest>
-        <tick>9984</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>4</BeamMode>
         </Rest>
       <Chord>
-        <tick>10080</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>1</BeamMode>
         <StemDirection>1</StemDirection>
         <Note>
@@ -941,8 +872,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>10176</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>2</BeamMode>
         <StemDirection>1</StemDirection>
         <Note>
@@ -950,8 +880,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>10272</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>3</BeamMode>
         <StemDirection>1</StemDirection>
         <Note>
@@ -959,8 +888,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>10368</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>1</BeamMode>
         <StemDirection>1</StemDirection>
         <Note>
@@ -968,8 +896,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>10464</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>2</BeamMode>
         <StemDirection>1</StemDirection>
         <Note>
@@ -977,8 +904,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>10560</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>2</BeamMode>
         <StemDirection>1</StemDirection>
         <Note>
@@ -986,8 +912,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>10656</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>3</BeamMode>
         <StemDirection>1</StemDirection>
         <Note>
@@ -995,12 +920,10 @@
           </Note>
         </Chord>
       </Measure>
-    <Measure number="8" tick="10752">
-      <BarLine>
-        </BarLine>
+    <Measure number="8">
+      <BarLine/>
       <Chord>
-        <tick>10752</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <BeamMode>4</BeamMode>
         <StemDirection>1</StemDirection>
         <Note>
@@ -1010,23 +933,19 @@
           </Note>
         </Chord>
       <Rest>
-        <tick>10944</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <BeamMode>4</BeamMode>
         </Rest>
       <Rest>
-        <tick>11136</tick>
-        <ticklen>384</ticklen>
+        <ticklen>480</ticklen>
         <BeamMode>4</BeamMode>
         </Rest>
       <Rest>
-        <tick>11520</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>4</BeamMode>
         </Rest>
       <Chord>
-        <tick>11616</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>1</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -1034,8 +953,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>11712</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>2</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -1043,8 +961,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>11808</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>3</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -1052,8 +969,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>11904</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>1</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -1061,8 +977,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>12000</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>2</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -1070,8 +985,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>12096</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>2</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -1079,8 +993,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>12192</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>3</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -1088,12 +1001,10 @@
           </Note>
         </Chord>
       </Measure>
-    <Measure number="9" tick="12288">
-      <BarLine>
-        </BarLine>
+    <Measure number="9">
+      <BarLine/>
       <Chord>
-        <tick>12288</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <BeamMode>4</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -1101,23 +1012,19 @@
           </Note>
         </Chord>
       <Rest>
-        <tick>12480</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <BeamMode>4</BeamMode>
         </Rest>
       <Rest>
-        <tick>12672</tick>
-        <ticklen>384</ticklen>
+        <ticklen>480</ticklen>
         <BeamMode>4</BeamMode>
         </Rest>
       <Rest>
-        <tick>13056</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>4</BeamMode>
         </Rest>
       <Chord>
-        <tick>13152</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>1</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -1125,8 +1032,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>13248</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>2</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -1134,8 +1040,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>13344</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>3</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -1143,8 +1048,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>13440</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>1</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -1152,8 +1056,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>13536</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>2</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -1161,8 +1064,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>13632</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>2</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -1170,8 +1072,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>13728</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>3</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -1179,13 +1080,10 @@
           </Note>
         </Chord>
       </Measure>
-    <Measure number="10" tick="13824">
-      <BarLine>
-        </BarLine>
-      <pageBreak/>
+    <Measure number="10">
+      <BarLine/>
       <Chord>
-        <tick>13824</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <BeamMode>4</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -1193,23 +1091,19 @@
           </Note>
         </Chord>
       <Rest>
-        <tick>14016</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <BeamMode>4</BeamMode>
         </Rest>
       <Rest>
-        <tick>14208</tick>
-        <ticklen>384</ticklen>
+        <ticklen>480</ticklen>
         <BeamMode>4</BeamMode>
         </Rest>
       <Rest>
-        <tick>14592</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>4</BeamMode>
         </Rest>
       <Chord>
-        <tick>14688</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>1</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -1217,8 +1111,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>14784</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>2</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -1226,8 +1119,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>14880</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>3</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -1235,8 +1127,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>14976</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>1</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -1244,8 +1135,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>15072</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>2</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -1253,8 +1143,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>15168</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>2</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -1264,8 +1153,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>15264</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>3</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -1273,12 +1161,10 @@
           </Note>
         </Chord>
       </Measure>
-    <Measure number="11" tick="15360">
-      <BarLine>
-        </BarLine>
+    <Measure number="11">
+      <BarLine/>
       <Chord>
-        <tick>15360</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <BeamMode>1</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -1286,8 +1172,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>15552</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <BeamMode>3</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -1297,8 +1182,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>15744</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <BeamMode>1</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -1306,8 +1190,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>15936</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <BeamMode>3</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -1315,8 +1198,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>16128</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <BeamMode>1</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -1324,8 +1206,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>16320</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <BeamMode>3</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -1333,8 +1214,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>16512</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <BeamMode>1</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -1344,8 +1224,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>16704</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <BeamMode>3</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -1353,16 +1232,14 @@
           </Note>
         </Chord>
       </Measure>
-    <Measure number="12" tick="16896">
-      <BarLine>
-        </BarLine>
+    <Measure number="12">
+      <BarLine/>
       <Slur>
-        <startTick>18048</startTick>
-        <endTick>18432</endTick>
+        <startTick>22560</startTick>
+        <endTick>23040</endTick>
         </Slur>
       <Chord>
-        <tick>16896</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <BeamMode>1</BeamMode>
         <StemDirection>1</StemDirection>
         <Note>
@@ -1370,8 +1247,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>17088</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <BeamMode>3</BeamMode>
         <StemDirection>1</StemDirection>
         <Note>
@@ -1381,8 +1257,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>17280</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <BeamMode>1</BeamMode>
         <StemDirection>1</StemDirection>
         <Note>
@@ -1392,8 +1267,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>17472</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <BeamMode>3</BeamMode>
         <StemDirection>1</StemDirection>
         <Note>
@@ -1401,8 +1275,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>17664</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <BeamMode>1</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -1410,8 +1283,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>17856</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <BeamMode>3</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -1419,8 +1291,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>18048</tick>
-        <ticklen>384</ticklen>
+        <ticklen>480</ticklen>
         <BeamMode>4</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -1428,12 +1299,10 @@
           </Note>
         </Chord>
       </Measure>
-    <Measure number="13" tick="18432">
-      <BarLine>
-        </BarLine>
+    <Measure number="13">
+      <BarLine/>
       <Chord>
-        <tick>18432</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>1</BeamMode>
         <StemDirection>1</StemDirection>
         <Note>
@@ -1441,8 +1310,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>18528</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>2</BeamMode>
         <StemDirection>1</StemDirection>
         <Note>
@@ -1450,8 +1318,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>18624</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>2</BeamMode>
         <StemDirection>1</StemDirection>
         <Note>
@@ -1461,8 +1328,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>18720</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>3</BeamMode>
         <StemDirection>1</StemDirection>
         <Note>
@@ -1472,8 +1338,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>18816</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>1</BeamMode>
         <StemDirection>1</StemDirection>
         <Note>
@@ -1481,8 +1346,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>18912</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>2</BeamMode>
         <StemDirection>1</StemDirection>
         <Note>
@@ -1490,8 +1354,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>19008</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>2</BeamMode>
         <StemDirection>1</StemDirection>
         <Note>
@@ -1499,8 +1362,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>19104</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>3</BeamMode>
         <StemDirection>1</StemDirection>
         <Note>
@@ -1508,8 +1370,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>19200</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>1</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -1517,8 +1378,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>19296</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>2</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -1526,8 +1386,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>19392</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>2</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -1535,8 +1394,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>19488</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>3</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -1544,8 +1402,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>19584</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>1</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -1553,8 +1410,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>19680</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>2</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -1562,8 +1418,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>19776</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>2</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -1571,8 +1426,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>19872</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>3</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -1580,12 +1434,10 @@
           </Note>
         </Chord>
       </Measure>
-    <Measure number="14" tick="19968">
-      <BarLine>
-        </BarLine>
+    <Measure number="14">
+      <BarLine/>
       <Chord>
-        <tick>19968</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>1</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -1593,8 +1445,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>20064</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>2</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -1602,8 +1453,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>20160</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>2</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -1613,8 +1463,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>20256</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>3</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -1622,8 +1471,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>20352</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>1</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -1631,8 +1479,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>20448</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>2</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -1640,8 +1487,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>20544</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>2</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -1649,8 +1495,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>20640</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>3</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -1658,8 +1503,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>20736</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>1</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -1669,8 +1513,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>20832</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>2</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -1678,8 +1521,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>20928</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>2</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -1687,8 +1529,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>21024</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>3</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -1696,8 +1537,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>21120</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <BeamMode>1</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -1705,16 +1545,14 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>21312</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <StemDirection>2</StemDirection>
         <Note>
           <pitch>71</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>21408</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>3</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -1722,16 +1560,14 @@
           </Note>
         </Chord>
       </Measure>
-    <Measure number="15" tick="21504">
-      <BarLine>
-        </BarLine>
+    <Measure number="15">
+      <BarLine/>
       <Slur>
-        <startTick>22272</startTick>
-        <endTick>23040</endTick>
+        <startTick>27840</startTick>
+        <endTick>28800</endTick>
         </Slur>
       <Chord>
-        <tick>21504</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>1</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -1739,8 +1575,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>21600</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>2</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -1748,8 +1583,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>21696</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>2</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -1759,8 +1593,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>21792</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>3</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -1768,8 +1601,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>21888</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>1</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -1777,8 +1609,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>21984</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>2</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -1786,8 +1617,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>22080</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>2</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -1795,8 +1625,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>22176</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>3</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -1804,8 +1633,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>22272</tick>
-        <ticklen>768</ticklen>
+        <ticklen>960</ticklen>
         <BeamMode>4</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -1813,12 +1641,10 @@
           </Note>
         </Chord>
       </Measure>
-    <Measure number="16" tick="23040">
-      <BarLine>
-        </BarLine>
+    <Measure number="16">
+      <BarLine/>
       <Chord>
-        <tick>23040</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>1</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -1826,8 +1652,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>23136</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>2</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -1835,8 +1660,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>23232</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>2</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -1844,8 +1668,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>23328</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>3</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -1853,8 +1676,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>23424</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>1</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -1862,8 +1684,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>23520</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>2</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -1871,8 +1692,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>23616</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>2</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -1880,8 +1700,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>23712</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>3</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -1889,8 +1708,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>23808</tick>
-        <ticklen>768</ticklen>
+        <ticklen>960</ticklen>
         <BeamMode>4</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -1900,19 +1718,24 @@
           </Note>
         </Chord>
       </Measure>
-    <Measure number="17" tick="24576">
-      <BarLine>
-        </BarLine>
+    <Measure number="17">
+      <BarLine/>
       <stretch>0.7</stretch>
       <Text>
-        <data>17</data>
-        <style>11</style>
+        <align>1</align>
+        <xoffset>0</xoffset>
+        <yoffset>0</yoffset>
+        <anchor>tick</anchor>
+        <offsetType>spatium</offsetType>
+        <spatiumSizeDependent>1</spatiumSizeDependent>
+        <data>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;helvetica&apos;; font-size:11pt; font-weight:400; font-style:normal; text-decoration:none;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;17&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
         <offset x="0" y="-1.2"/>
-        <tick>24576</tick>
         </Text>
       <Chord>
-        <tick>24576</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>1</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -1920,8 +1743,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>24672</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>2</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -1929,8 +1751,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>24768</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>2</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -1938,8 +1759,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>24864</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>3</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -1947,8 +1767,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>24960</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>1</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -1956,8 +1775,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>25056</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>2</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -1965,8 +1783,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>25152</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>2</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -1974,8 +1791,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>25248</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>3</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -1983,8 +1799,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>25344</tick>
-        <ticklen>768</ticklen>
+        <ticklen>960</ticklen>
         <BeamMode>4</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -1994,13 +1809,11 @@
           </Note>
         </Chord>
       </Measure>
-    <Measure number="18" tick="26112">
-      <BarLine>
-        </BarLine>
+    <Measure number="18">
+      <BarLine/>
       <stretch>0.7</stretch>
       <Chord>
-        <tick>26112</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>1</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -2008,8 +1821,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>26208</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>2</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -2017,8 +1829,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>26304</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>2</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -2026,8 +1837,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>26400</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>3</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -2035,8 +1845,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>26496</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>1</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -2044,8 +1853,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>26592</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>2</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -2053,8 +1861,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>26688</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>2</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -2062,8 +1869,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>26784</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>3</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -2071,8 +1877,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>26880</tick>
-        <ticklen>768</ticklen>
+        <ticklen>960</ticklen>
         <BeamMode>4</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -2082,13 +1887,11 @@
           </Note>
         </Chord>
       </Measure>
-    <Measure number="19" tick="27648">
-      <BarLine>
-        </BarLine>
+    <Measure number="19">
+      <BarLine/>
       <stretch>0.7</stretch>
       <Chord>
-        <tick>27648</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>1</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -2096,8 +1899,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>27744</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>2</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -2105,8 +1907,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>27840</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>2</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -2114,8 +1915,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>27936</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>3</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -2123,8 +1923,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>28032</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>1</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -2132,8 +1931,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>28128</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>2</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -2141,8 +1939,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>28224</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>2</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -2150,8 +1947,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>28320</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>3</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -2159,8 +1955,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>28416</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>1</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -2168,8 +1963,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>28512</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>2</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -2177,8 +1971,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>28608</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>2</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -2186,8 +1979,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>28704</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>3</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -2195,8 +1987,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>28800</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>1</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -2204,8 +1995,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>28896</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>2</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -2213,8 +2003,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>28992</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>2</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -2222,8 +2011,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>29088</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>3</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -2231,18 +2019,23 @@
           </Note>
         </Chord>
       </Measure>
-    <Measure number="20" tick="29184">
-      <BarLine>
-        </BarLine>
+    <Measure number="20">
+      <BarLine/>
       <Text>
-        <data>20</data>
-        <style>11</style>
+        <align>1</align>
+        <xoffset>0</xoffset>
+        <yoffset>0</yoffset>
+        <anchor>tick</anchor>
+        <offsetType>spatium</offsetType>
+        <spatiumSizeDependent>1</spatiumSizeDependent>
+        <data>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;helvetica&apos;; font-size:11pt; font-weight:400; font-style:normal; text-decoration:none;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;20&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
         <offset x="0" y="-1.2"/>
-        <tick>29184</tick>
         </Text>
       <Chord>
-        <tick>29184</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>1</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -2250,8 +2043,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>29280</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>2</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -2259,8 +2051,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>29376</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>2</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -2268,8 +2059,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>29472</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>3</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -2277,8 +2067,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>29568</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>1</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -2286,8 +2075,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>29664</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>2</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -2295,8 +2083,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>29760</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>2</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -2304,8 +2091,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>29856</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>3</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -2313,8 +2099,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>29952</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <BeamMode>1</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -2322,8 +2107,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>30144</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <BeamMode>3</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -2331,8 +2115,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>30336</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <BeamMode>1</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -2340,16 +2123,14 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>30528</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <StemDirection>2</StemDirection>
         <Note>
           <pitch>74</pitch>
           </Note>
         </Chord>
       <Chord>
-        <tick>30624</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>3</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -2357,12 +2138,10 @@
           </Note>
         </Chord>
       </Measure>
-    <Measure number="21" tick="30720">
-      <BarLine>
-        </BarLine>
+    <Measure number="21">
+      <BarLine/>
       <Chord>
-        <tick>30720</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>1</BeamMode>
         <StemDirection>1</StemDirection>
         <Note>
@@ -2370,8 +2149,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>30816</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>2</BeamMode>
         <StemDirection>1</StemDirection>
         <Note>
@@ -2381,8 +2159,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>30912</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>2</BeamMode>
         <StemDirection>1</StemDirection>
         <Note>
@@ -2390,8 +2167,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>31008</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>3</BeamMode>
         <StemDirection>1</StemDirection>
         <Note>
@@ -2399,8 +2175,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>31104</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>1</BeamMode>
         <StemDirection>1</StemDirection>
         <Note>
@@ -2408,8 +2183,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>31200</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>2</BeamMode>
         <StemDirection>1</StemDirection>
         <Note>
@@ -2417,8 +2191,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>31296</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>2</BeamMode>
         <StemDirection>1</StemDirection>
         <Note>
@@ -2426,8 +2199,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>31392</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>3</BeamMode>
         <StemDirection>1</StemDirection>
         <Note>
@@ -2435,8 +2207,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>31488</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>1</BeamMode>
         <StemDirection>1</StemDirection>
         <Note>
@@ -2444,8 +2215,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>31584</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>2</BeamMode>
         <StemDirection>1</StemDirection>
         <Note>
@@ -2455,8 +2225,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>31680</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>2</BeamMode>
         <StemDirection>1</StemDirection>
         <Note>
@@ -2464,8 +2233,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>31776</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>3</BeamMode>
         <StemDirection>1</StemDirection>
         <Note>
@@ -2473,8 +2241,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>31872</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>1</BeamMode>
         <StemDirection>1</StemDirection>
         <Note>
@@ -2482,8 +2249,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>31968</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>2</BeamMode>
         <StemDirection>1</StemDirection>
         <Note>
@@ -2491,8 +2257,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>32064</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>2</BeamMode>
         <StemDirection>1</StemDirection>
         <Note>
@@ -2500,8 +2265,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>32160</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>3</BeamMode>
         <StemDirection>1</StemDirection>
         <Note>
@@ -2509,13 +2273,12 @@
           </Note>
         </Chord>
       </Measure>
-    <Measure number="22" tick="32256">
-      <BarLine type="5">
+    <Measure number="22">
+      <BarLine>
         <subtype>5</subtype>
         </BarLine>
       <Chord>
-        <tick>32256</tick>
-        <ticklen>1536</ticklen>
+        <ticklen>1920</ticklen>
         <BeamMode>4</BeamMode>
         <Note>
           <pitch>64</pitch>
@@ -2530,19 +2293,17 @@
       </Measure>
     </Staff>
   <Staff id="2">
-    <Measure number="1" tick="0">
+    <Measure number="1">
       <Rest>
-        <ticklen>768</ticklen>
+        <ticklen>960</ticklen>
         <BeamMode>4</BeamMode>
         </Rest>
       <Rest>
-        <tick>768</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>4</BeamMode>
         </Rest>
       <Chord>
-        <tick>864</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>1</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -2550,8 +2311,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>960</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>2</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -2559,8 +2319,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>1056</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>3</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -2568,8 +2327,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>1152</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>1</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -2577,8 +2335,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>1248</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>2</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -2586,8 +2343,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>1344</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>2</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -2595,8 +2351,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>1440</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>3</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -2604,10 +2359,9 @@
           </Note>
         </Chord>
       </Measure>
-    <Measure number="2" tick="1536">
+    <Measure number="2">
       <Chord>
-        <tick>1536</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <BeamMode>1</BeamMode>
         <StemDirection>1</StemDirection>
         <Note>
@@ -2615,8 +2369,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>1728</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <BeamMode>3</BeamMode>
         <StemDirection>1</StemDirection>
         <Note>
@@ -2624,18 +2377,15 @@
           </Note>
         </Chord>
       <Rest>
-        <tick>1920</tick>
-        <ticklen>384</ticklen>
+        <ticklen>480</ticklen>
         <BeamMode>4</BeamMode>
         </Rest>
       <Rest>
-        <tick>2304</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>4</BeamMode>
         </Rest>
       <Chord>
-        <tick>2400</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>1</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -2643,8 +2393,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>2496</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>2</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -2652,8 +2401,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>2592</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>3</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -2661,8 +2409,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>2688</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>1</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -2670,8 +2417,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>2784</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>2</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -2679,8 +2425,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>2880</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>2</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -2688,8 +2433,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>2976</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>3</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -2697,10 +2441,9 @@
           </Note>
         </Chord>
       </Measure>
-    <Measure number="3" tick="3072">
+    <Measure number="3">
       <Chord>
-        <tick>3072</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <BeamMode>1</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -2708,8 +2451,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>3264</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <BeamMode>2</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -2717,8 +2459,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>3456</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <BeamMode>2</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -2726,8 +2467,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>3648</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <BeamMode>3</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -2735,8 +2475,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>3840</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <BeamMode>1</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -2744,8 +2483,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>4032</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <BeamMode>3</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -2753,8 +2491,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>4224</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <BeamMode>1</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -2762,8 +2499,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>4416</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <BeamMode>3</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -2771,10 +2507,9 @@
           </Note>
         </Chord>
       </Measure>
-    <Measure number="4" tick="4608">
+    <Measure number="4">
       <Chord>
-        <tick>4608</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <BeamMode>1</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -2782,8 +2517,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>4800</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <BeamMode>3</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -2791,8 +2525,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>4992</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <BeamMode>1</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -2802,8 +2535,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>5184</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <BeamMode>3</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -2811,8 +2543,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>5376</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <BeamMode>1</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -2820,8 +2551,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>5568</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <BeamMode>3</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -2829,8 +2559,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>5760</tick>
-        <ticklen>384</ticklen>
+        <ticklen>480</ticklen>
         <BeamMode>4</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -2838,10 +2567,9 @@
           </Note>
         </Chord>
       </Measure>
-    <Measure number="5" tick="6144">
+    <Measure number="5">
       <Chord>
-        <tick>6144</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>1</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -2849,8 +2577,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>6240</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>2</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -2858,8 +2585,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>6336</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>2</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -2867,8 +2593,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>6432</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>3</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -2878,8 +2603,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>6528</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>1</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -2887,8 +2611,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>6624</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>2</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -2896,8 +2619,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>6720</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>2</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -2905,8 +2627,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>6816</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>3</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -2914,8 +2635,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>6912</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <BeamMode>1</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -2923,8 +2643,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>7104</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <BeamMode>3</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -2932,8 +2651,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>7296</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <BeamMode>1</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -2941,8 +2659,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>7488</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <BeamMode>3</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -2950,10 +2667,9 @@
           </Note>
         </Chord>
       </Measure>
-    <Measure number="6" tick="7680">
+    <Measure number="6">
       <Chord>
-        <tick>7680</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <BeamMode>1</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -2961,8 +2677,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>7872</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <BeamMode>3</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -2972,8 +2687,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>8064</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <BeamMode>1</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -2981,8 +2695,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>8256</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <BeamMode>3</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -2990,8 +2703,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>8448</tick>
-        <ticklen>288</ticklen>
+        <ticklen>360</ticklen>
         <BeamMode>1</BeamMode>
         <StemDirection>1</StemDirection>
         <Note>
@@ -2999,8 +2711,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>8736</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>3</BeamMode>
         <StemDirection>1</StemDirection>
         <Note>
@@ -3008,8 +2719,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>8832</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <BeamMode>1</BeamMode>
         <StemDirection>1</StemDirection>
         <Note>
@@ -3017,8 +2727,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>9024</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <BeamMode>3</BeamMode>
         <StemDirection>1</StemDirection>
         <Note>
@@ -3026,15 +2735,13 @@
           </Note>
         </Chord>
       </Measure>
-    <Measure number="7" tick="9216">
+    <Measure number="7">
       <Rest>
-        <tick>9216</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>4</BeamMode>
         </Rest>
       <Chord>
-        <tick>9312</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>1</BeamMode>
         <StemDirection>1</StemDirection>
         <Note>
@@ -3042,8 +2749,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>9408</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>2</BeamMode>
         <StemDirection>1</StemDirection>
         <Note>
@@ -3051,8 +2757,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>9504</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>3</BeamMode>
         <StemDirection>1</StemDirection>
         <Note>
@@ -3060,8 +2765,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>9600</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>1</BeamMode>
         <StemDirection>1</StemDirection>
         <Note>
@@ -3069,8 +2773,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>9696</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>2</BeamMode>
         <StemDirection>1</StemDirection>
         <Note>
@@ -3078,8 +2781,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>9792</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>2</BeamMode>
         <StemDirection>1</StemDirection>
         <Note>
@@ -3087,8 +2789,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>9888</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>3</BeamMode>
         <StemDirection>1</StemDirection>
         <Note>
@@ -3096,8 +2797,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>9984</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <BeamMode>1</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -3105,8 +2805,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>10176</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <BeamMode>3</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -3114,8 +2813,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>10368</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <BeamMode>1</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -3125,8 +2823,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>10560</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <BeamMode>3</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -3134,10 +2831,9 @@
           </Note>
         </Chord>
       </Measure>
-    <Measure number="8" tick="10752">
+    <Measure number="8">
       <Chord>
-        <tick>10752</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>1</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -3145,8 +2841,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>10848</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>2</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -3154,8 +2849,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>10944</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>2</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -3163,8 +2857,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>11040</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>3</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -3174,8 +2867,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>11136</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>1</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -3183,8 +2875,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>11232</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>2</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -3192,8 +2883,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>11328</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>2</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -3201,8 +2891,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>11424</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>3</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -3210,8 +2899,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>11520</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <BeamMode>1</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -3219,8 +2907,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>11712</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <BeamMode>2</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -3228,8 +2915,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>11904</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <BeamMode>2</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -3237,8 +2923,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>12096</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <BeamMode>3</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -3248,19 +2933,11 @@
       <Clef>
         <subtype>4096</subtype>
         <offset x="0" y="3"/>
-        <tick>12288</tick>
         </Clef>
       </Measure>
-    <Measure number="9" tick="12288">
-      <Text>
-        <data></data>
-        <style>11</style>
-        <offset x="0" y="6"/>
-        <tick>12288</tick>
-        </Text>
+    <Measure number="9">
       <Chord>
-        <tick>12288</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>1</BeamMode>
         <StemDirection>1</StemDirection>
         <Note>
@@ -3268,8 +2945,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>12384</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>2</BeamMode>
         <StemDirection>1</StemDirection>
         <Note>
@@ -3277,8 +2953,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>12480</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>2</BeamMode>
         <StemDirection>1</StemDirection>
         <Note>
@@ -3286,8 +2961,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>12576</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>3</BeamMode>
         <StemDirection>1</StemDirection>
         <Note>
@@ -3295,8 +2969,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>12672</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>1</BeamMode>
         <StemDirection>1</StemDirection>
         <Note>
@@ -3304,8 +2977,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>12768</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>2</BeamMode>
         <StemDirection>1</StemDirection>
         <Note>
@@ -3313,8 +2985,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>12864</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>2</BeamMode>
         <StemDirection>1</StemDirection>
         <Note>
@@ -3322,8 +2993,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>12960</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>3</BeamMode>
         <StemDirection>1</StemDirection>
         <Note>
@@ -3331,8 +3001,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>13056</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <BeamMode>1</BeamMode>
         <StemDirection>1</StemDirection>
         <Note>
@@ -3340,8 +3009,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>13248</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <BeamMode>2</BeamMode>
         <StemDirection>1</StemDirection>
         <Note>
@@ -3349,8 +3017,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>13440</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <BeamMode>2</BeamMode>
         <StemDirection>1</StemDirection>
         <Note>
@@ -3358,8 +3025,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>13632</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <BeamMode>3</BeamMode>
         <StemDirection>1</StemDirection>
         <Note>
@@ -3367,11 +3033,9 @@
           </Note>
         </Chord>
       </Measure>
-    <Measure number="10" tick="13824">
-      <pageBreak/>
+    <Measure number="10">
       <Chord>
-        <tick>13824</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>1</BeamMode>
         <StemDirection>1</StemDirection>
         <Note>
@@ -3379,8 +3043,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>13920</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>2</BeamMode>
         <StemDirection>1</StemDirection>
         <Note>
@@ -3388,8 +3051,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>14016</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>2</BeamMode>
         <StemDirection>1</StemDirection>
         <Note>
@@ -3397,8 +3059,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>14112</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>3</BeamMode>
         <StemDirection>1</StemDirection>
         <Note>
@@ -3406,8 +3067,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>14208</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>1</BeamMode>
         <StemDirection>1</StemDirection>
         <Note>
@@ -3415,8 +3075,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>14304</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>2</BeamMode>
         <StemDirection>1</StemDirection>
         <Note>
@@ -3424,8 +3083,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>14400</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>2</BeamMode>
         <StemDirection>1</StemDirection>
         <Note>
@@ -3433,8 +3091,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>14496</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>3</BeamMode>
         <StemDirection>1</StemDirection>
         <Note>
@@ -3442,8 +3099,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>14592</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <BeamMode>1</BeamMode>
         <StemDirection>1</StemDirection>
         <Note>
@@ -3451,8 +3107,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>14784</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <BeamMode>3</BeamMode>
         <StemDirection>1</StemDirection>
         <Note>
@@ -3460,8 +3115,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>14976</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <BeamMode>1</BeamMode>
         <StemDirection>1</StemDirection>
         <Note>
@@ -3469,8 +3123,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>15168</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <BeamMode>3</BeamMode>
         <StemDirection>1</StemDirection>
         <Note>
@@ -3478,10 +3131,9 @@
           </Note>
         </Chord>
       </Measure>
-    <Measure number="11" tick="15360">
+    <Measure number="11">
       <Chord>
-        <tick>15360</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>1</BeamMode>
         <StemDirection>1</StemDirection>
         <Note>
@@ -3489,8 +3141,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>15456</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>2</BeamMode>
         <StemDirection>1</StemDirection>
         <Note>
@@ -3500,8 +3151,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>15552</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>2</BeamMode>
         <StemDirection>1</StemDirection>
         <Note>
@@ -3509,8 +3159,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>15648</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>3</BeamMode>
         <StemDirection>1</StemDirection>
         <Note>
@@ -3518,8 +3167,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>15744</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>1</BeamMode>
         <StemDirection>1</StemDirection>
         <Note>
@@ -3527,8 +3175,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>15840</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>2</BeamMode>
         <StemDirection>1</StemDirection>
         <Note>
@@ -3536,8 +3183,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>15936</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>2</BeamMode>
         <StemDirection>1</StemDirection>
         <Note>
@@ -3545,8 +3191,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>16032</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>3</BeamMode>
         <StemDirection>1</StemDirection>
         <Note>
@@ -3554,8 +3199,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>16128</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>1</BeamMode>
         <StemDirection>1</StemDirection>
         <Note>
@@ -3563,8 +3207,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>16224</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>2</BeamMode>
         <StemDirection>1</StemDirection>
         <Note>
@@ -3572,8 +3215,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>16320</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>2</BeamMode>
         <StemDirection>1</StemDirection>
         <Note>
@@ -3581,8 +3223,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>16416</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>3</BeamMode>
         <StemDirection>1</StemDirection>
         <Note>
@@ -3590,8 +3231,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>16512</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>1</BeamMode>
         <StemDirection>1</StemDirection>
         <Note>
@@ -3599,8 +3239,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>16608</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>2</BeamMode>
         <StemDirection>1</StemDirection>
         <Note>
@@ -3608,8 +3247,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>16704</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>2</BeamMode>
         <StemDirection>1</StemDirection>
         <Note>
@@ -3617,8 +3255,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>16800</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>3</BeamMode>
         <StemDirection>1</StemDirection>
         <Note>
@@ -3626,10 +3263,9 @@
           </Note>
         </Chord>
       </Measure>
-    <Measure number="12" tick="16896">
+    <Measure number="12">
       <Chord>
-        <tick>16896</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>1</BeamMode>
         <StemDirection>1</StemDirection>
         <Note>
@@ -3637,8 +3273,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>16992</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>2</BeamMode>
         <StemDirection>1</StemDirection>
         <Note>
@@ -3646,8 +3281,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>17088</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>2</BeamMode>
         <StemDirection>1</StemDirection>
         <Note>
@@ -3655,8 +3289,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>17184</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>3</BeamMode>
         <StemDirection>1</StemDirection>
         <Note>
@@ -3664,8 +3297,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>17280</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>1</BeamMode>
         <StemDirection>1</StemDirection>
         <Note>
@@ -3673,8 +3305,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>17376</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>2</BeamMode>
         <StemDirection>1</StemDirection>
         <Note>
@@ -3682,8 +3313,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>17472</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>2</BeamMode>
         <StemDirection>1</StemDirection>
         <Note>
@@ -3691,8 +3321,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>17568</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>3</BeamMode>
         <StemDirection>1</StemDirection>
         <Note>
@@ -3702,11 +3331,9 @@
       <Clef>
         <subtype>4100</subtype>
         <offset x="0" y="1"/>
-        <tick>17664</tick>
         </Clef>
       <Chord>
-        <tick>17664</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>1</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -3714,8 +3341,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>17760</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>2</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -3723,8 +3349,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>17856</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>2</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -3732,8 +3357,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>17952</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>3</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -3741,8 +3365,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>18048</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>1</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -3752,8 +3375,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>18144</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>2</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -3761,8 +3383,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>18240</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>2</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -3770,8 +3391,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>18336</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>3</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -3779,10 +3399,9 @@
           </Note>
         </Chord>
       </Measure>
-    <Measure number="13" tick="18432">
+    <Measure number="13">
       <Chord>
-        <tick>18432</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <BeamMode>1</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -3790,8 +3409,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>18624</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <BeamMode>3</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -3799,8 +3417,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>18816</tick>
-        <ticklen>288</ticklen>
+        <ticklen>360</ticklen>
         <BeamMode>1</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -3808,8 +3425,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>19104</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>3</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -3817,8 +3433,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>19200</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>1</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -3826,8 +3441,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>19296</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>2</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -3835,8 +3449,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>19392</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>2</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -3844,8 +3457,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>19488</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>3</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -3855,8 +3467,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>19584</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>1</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -3866,8 +3477,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>19680</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>2</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -3875,8 +3485,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>19776</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>2</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -3886,8 +3495,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>19872</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>3</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -3895,10 +3503,9 @@
           </Note>
         </Chord>
       </Measure>
-    <Measure number="14" tick="19968">
+    <Measure number="14">
       <Chord>
-        <tick>19968</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>1</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -3906,8 +3513,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>20064</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>2</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -3915,8 +3521,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>20160</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>2</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -3924,8 +3529,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>20256</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>3</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -3933,8 +3537,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>20352</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>1</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -3942,8 +3545,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>20448</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>2</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -3951,8 +3553,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>20544</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>2</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -3960,8 +3561,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>20640</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>3</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -3969,8 +3569,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>20736</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <BeamMode>1</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -3978,8 +3577,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>20928</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <BeamMode>3</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -3987,8 +3585,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>21120</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <BeamMode>1</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -3996,8 +3593,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>21312</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <BeamMode>3</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -4005,10 +3601,9 @@
           </Note>
         </Chord>
       </Measure>
-    <Measure number="15" tick="21504">
+    <Measure number="15">
       <Chord>
-        <tick>21504</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <BeamMode>1</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -4016,8 +3611,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>21696</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <BeamMode>3</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -4025,18 +3619,15 @@
           </Note>
         </Chord>
       <Rest>
-        <tick>21888</tick>
-        <ticklen>384</ticklen>
+        <ticklen>480</ticklen>
         <BeamMode>4</BeamMode>
         </Rest>
       <Rest>
-        <tick>22272</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>4</BeamMode>
         </Rest>
       <Chord>
-        <tick>22368</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>1</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -4044,8 +3635,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>22464</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>2</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -4053,8 +3643,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>22560</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>3</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -4062,8 +3651,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>22656</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>1</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -4071,8 +3659,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>22752</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>2</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -4080,8 +3667,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>22848</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>2</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -4091,8 +3677,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>22944</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>3</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -4100,10 +3685,9 @@
           </Note>
         </Chord>
       </Measure>
-    <Measure number="16" tick="23040">
+    <Measure number="16">
       <Chord>
-        <tick>23040</tick>
-        <ticklen>768</ticklen>
+        <ticklen>960</ticklen>
         <BeamMode>4</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -4113,8 +3697,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>23808</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>1</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -4122,8 +3705,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>23904</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>2</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -4131,8 +3713,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>24000</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>2</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -4140,8 +3721,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>24096</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>3</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -4151,8 +3731,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>24192</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>1</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -4160,8 +3739,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>24288</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>2</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -4169,8 +3747,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>24384</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>2</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -4178,8 +3755,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>24480</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>3</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -4187,11 +3763,10 @@
           </Note>
         </Chord>
       </Measure>
-    <Measure number="17" tick="24576">
+    <Measure number="17">
       <stretch>0.7</stretch>
       <Chord>
-        <tick>24576</tick>
-        <ticklen>768</ticklen>
+        <ticklen>960</ticklen>
         <BeamMode>4</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -4201,8 +3776,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>25344</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>1</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -4210,8 +3784,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>25440</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>2</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -4219,8 +3792,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>25536</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>2</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -4228,8 +3800,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>25632</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>3</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -4237,8 +3808,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>25728</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>1</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -4246,8 +3816,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>25824</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>2</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -4255,8 +3824,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>25920</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>2</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -4264,8 +3832,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>26016</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>3</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -4273,11 +3840,10 @@
           </Note>
         </Chord>
       </Measure>
-    <Measure number="18" tick="26112">
+    <Measure number="18">
       <stretch>0.7</stretch>
       <Chord>
-        <tick>26112</tick>
-        <ticklen>768</ticklen>
+        <ticklen>960</ticklen>
         <BeamMode>4</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -4285,8 +3851,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>26880</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>1</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -4294,8 +3859,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>26976</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>2</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -4303,8 +3867,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>27072</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>2</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -4312,8 +3875,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>27168</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>3</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -4323,8 +3885,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>27264</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>1</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -4332,8 +3893,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>27360</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>2</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -4341,8 +3901,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>27456</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>2</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -4350,8 +3909,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>27552</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>3</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -4359,11 +3917,10 @@
           </Note>
         </Chord>
       </Measure>
-    <Measure number="19" tick="27648">
+    <Measure number="19">
       <stretch>0.7</stretch>
       <Chord>
-        <tick>27648</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <BeamMode>1</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -4371,8 +3928,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>27840</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <BeamMode>2</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -4382,8 +3938,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>28032</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <BeamMode>2</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -4391,8 +3946,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>28224</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <BeamMode>3</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -4400,8 +3954,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>28416</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <BeamMode>1</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -4409,8 +3962,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>28608</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <BeamMode>3</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -4418,8 +3970,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>28800</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <BeamMode>1</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -4427,8 +3978,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>28992</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <BeamMode>3</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -4436,10 +3986,9 @@
           </Note>
         </Chord>
       </Measure>
-    <Measure number="20" tick="29184">
+    <Measure number="20">
       <Chord>
-        <tick>29184</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <BeamMode>1</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -4447,8 +3996,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>29376</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <BeamMode>3</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -4456,8 +4004,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>29568</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <BeamMode>1</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -4465,8 +4012,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>29760</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <BeamMode>3</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -4474,8 +4020,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>29952</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>1</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -4483,8 +4028,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>30048</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>2</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -4492,8 +4036,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>30144</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>2</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -4501,8 +4044,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>30240</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>3</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -4510,8 +4052,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>30336</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>1</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -4519,8 +4060,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>30432</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>2</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -4528,8 +4068,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>30528</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>2</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -4537,8 +4076,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>30624</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>3</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -4546,10 +4084,9 @@
           </Note>
         </Chord>
       </Measure>
-    <Measure number="21" tick="30720">
+    <Measure number="21">
       <Chord>
-        <tick>30720</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <BeamMode>1</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -4557,8 +4094,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>30912</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <BeamMode>2</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -4566,8 +4102,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>31104</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <BeamMode>2</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -4575,8 +4110,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>31296</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <BeamMode>3</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -4584,8 +4118,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>31488</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>1</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -4593,8 +4126,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>31584</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>2</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -4602,8 +4134,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>31680</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>2</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -4611,8 +4142,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>31776</tick>
-        <ticklen>96</ticklen>
+        <ticklen>120</ticklen>
         <BeamMode>3</BeamMode>
         <StemDirection>2</StemDirection>
         <Note>
@@ -4620,8 +4150,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>31872</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <BeamMode>1</BeamMode>
         <StemDirection>1</StemDirection>
         <Note>
@@ -4629,8 +4158,7 @@
           </Note>
         </Chord>
       <Chord>
-        <tick>32064</tick>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <BeamMode>3</BeamMode>
         <StemDirection>1</StemDirection>
         <Note>
@@ -4638,10 +4166,9 @@
           </Note>
         </Chord>
       </Measure>
-    <Measure number="22" tick="32256">
+    <Measure number="22">
       <Chord>
-        <tick>32256</tick>
-        <ticklen>1536</ticklen>
+        <ticklen>1920</ticklen>
         <BeamMode>4</BeamMode>
         <Note>
           <pitch>36</pitch>
@@ -4649,6 +4176,6 @@
         </Chord>
       </Measure>
     </Staff>
-  <cursorStaff>0</cursorStaff>
+  <cursorStaff>-1</cursorStaff>
   <cursorVoice>0</cursorVoice>
   </museScore>
