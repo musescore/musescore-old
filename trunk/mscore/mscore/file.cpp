@@ -205,23 +205,19 @@ bool SaveFile::save(QWidget* p, const QString& base, const QString& ext,
 
 //---------------------------------------------------------
 //   checkDirty
-//    if dirty, save current project
-//    return true if project stays dirty
+//    if dirty, save score
+//    return true on abort
 //---------------------------------------------------------
 
-bool MuseScore::checkDirty()
+bool MuseScore::checkDirty(Score* s)
       {
-      if (cs == 0)
-            return true;
-      if (cs->dirty()) {
+      if (s->dirty()) {
             int n = QMessageBox::warning(this, tr("MuseScore"),
                tr("The current Score contains unsaved data\n"
                "Save Current Score?"),
                tr("&Save"), tr("&Nosave"), tr("&Abort"), 0, 2);
-            if (n == 0) {
-                  if (!saveFile())
-                        return true;
-                  }
+            if (n == 0)
+                  s->saveFile();
             else if (n == 2)
                   return true;
             }
@@ -266,44 +262,50 @@ void MuseScore::loadFile()
 
 bool MuseScore::saveFile()
       {
-      if (cs->projectName().isEmpty() || cs->projectName() == tr("untitled")
-         || ((cs->fileInfo()->completeSuffix() != "msc"))) {
+      bool val = cs->saveFile();
+      setWindowTitle("MuseScore: " + cs->projectName());
+      tab->setTabText(tab->currentIndex(), cs->projectName());
+      return val;
+      }
+
+bool Score::saveFile()
+      {
+      if (projectName().isEmpty() || projectName() == tr("untitled")
+         || ((fileInfo()->completeSuffix() != "msc"))) {
             QString fn = QFileDialog::getSaveFileName(
-               this, tr("MuseScore: Save Score"),
+               mscore, tr("MuseScore: Save Score"),
                QString("."),
                QString("*.msc")
                );
             if (fn.isEmpty())
                   return false;
-            cs->fileInfo()->setFile(fn);
-            setWindowTitle("MuseScore: " + cs->projectName());
-            tab->setTabText(tab->currentIndex(), cs->projectName());
+            fileInfo()->setFile(fn);
             }
 
       // if file was already saved in this session
       // dont overwrite backup again
 
-      if (cs->saved()) {
-            bool rv = saveFile(*cs->fileInfo());
+      if (saved()) {
+            bool rv = mscore->saveFile(*fileInfo());
             if (rv)
-                  cs->setDirty(false);
+                  setDirty(false);
             return rv;
             }
       //
       // step 1
       // save into temporary file
       //
-      QFileInfo* qf = cs->fileInfo();
+      QFileInfo* qf = fileInfo();
       QTemporaryFile temp(qf->path() + "/msXXXXXX");
       temp.setAutoRemove(false);
       if (!temp.open()) {
             QString s = tr("Open Temp File\n") + temp.fileName() + tr("\nfailed: ")
                + QString(strerror(errno));
-            QMessageBox::critical(this, tr("MuseScore: Open File"), s);
+            QMessageBox::critical(mscore, tr("MuseScore: Open File"), s);
             return false;
             }
       temp.open();
-      bool rv = saveFile(&temp);
+      bool rv = mscore->saveFile(&temp);
 
       if (!rv)
             return false;
@@ -332,8 +334,8 @@ bool MuseScore::saveFile()
       temp.rename(name);
 //      temp.close();
 
-      cs->setDirty(false);
-      cs->setSaved(true);
+      setDirty(false);
+      setSaved(true);
       return true;
       }
 

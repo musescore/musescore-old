@@ -413,6 +413,7 @@ class Score : public QObject {
       Element* editElement() const { return editObject; }
       void initSymbols();
       int fileDivision(int t) const { return (t * division + _fileDivision/2) / _fileDivision; }
+      bool saveFile();
       };
 
 extern void setPadState(Element*);

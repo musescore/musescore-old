@@ -26,6 +26,10 @@
 
 struct Shortcut;
 
+enum SessionStart {
+      LAST_SESSION, NEW_SESSION, SCORE_SESSION
+      };
+
 //---------------------------------------------------------
 //   Preferences
 //---------------------------------------------------------
@@ -59,6 +63,8 @@ struct Preferences {
       int alsaFragments;
       QColor layoutBreakColor;
       bool antialiasedDrawing;
+      SessionStart sessionStart;
+      QString startScore;
 
       Preferences();
       void write();

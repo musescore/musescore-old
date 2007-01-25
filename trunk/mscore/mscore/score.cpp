@@ -360,6 +360,10 @@ void Score::read(QString name)
 
 void Score::write(Xml& xml)
       {
+      if (editObject) {                          // in edit mode?
+            endUndo();
+            canvas()->setState(Canvas::NORMAL);  //calls endEdit()
+            }
       xml.tag("showInvisible", _showInvisible);
       pageFormat()->write(xml);
       if (!rights.isEmpty())

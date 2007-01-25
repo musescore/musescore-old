@@ -646,8 +646,8 @@ bool ExportMidi::saver()
                   for (iElement ie = el->begin(); ie != el->end(); ++ie) {
                         if ((*ie)->type() == TEXT) {
                               Text* text = (Text*)(*ie);
-                              const char* txt = text->getText().toLatin1().data();
-                              int len = strlen(txt) + 1;
+                              QString str = text->getText();
+                              int len     = str.length() + 1;
                               switch (text->subtype()) {
                                     case TEXT_TITLE:
                                           {
@@ -656,7 +656,7 @@ bool ExportMidi::saver()
                                           ev->dataA     = META_TITLE;
                                           ev->len       = len;
                                           ev->data      = new unsigned char[len];
-                                          strcpy((char*)(ev->data), txt);
+                                          strcpy((char*)(ev->data), str.toLatin1().data());
                                           events->insert(std::pair<const unsigned, MidiEvent*> (0, ev));
                                           }
                                           break;
@@ -667,7 +667,7 @@ bool ExportMidi::saver()
                                           ev->dataA     = META_SUBTITLE;
                                           ev->len       = len;
                                           ev->data      = new unsigned char[len];
-                                          strcpy((char*)(ev->data), txt);
+                                          strcpy((char*)(ev->data), str.toLatin1().data());
                                           events->insert(std::pair<const unsigned, MidiEvent*> (0, ev));
                                           }
                                           break;
@@ -678,7 +678,7 @@ bool ExportMidi::saver()
                                           ev->dataA     = META_COMPOSER;
                                           ev->len       = len;
                                           ev->data      = new unsigned char[len];
-                                          strcpy((char*)(ev->data), txt);
+                                          strcpy((char*)(ev->data), str.toLatin1().data());
                                           events->insert(std::pair<const unsigned, MidiEvent*> (0, ev));
                                           }
                                           break;
@@ -689,7 +689,7 @@ bool ExportMidi::saver()
                                           ev->dataA     = META_TRANSLATOR;
                                           ev->len       = len;
                                           ev->data      = new unsigned char[len];
-                                          strcpy((char*)(ev->data), txt);
+                                          strcpy((char*)(ev->data), str.toLatin1().data());
                                           events->insert(std::pair<const unsigned, MidiEvent*> (0, ev));
                                           }
                                           break;
@@ -700,7 +700,7 @@ bool ExportMidi::saver()
                                           ev->dataA     = META_POET;
                                           ev->len       = len;
                                           ev->data      = new unsigned char[len];
-                                          strcpy((char*)(ev->data), txt);
+                                          strcpy((char*)(ev->data), str.toLatin1().data());
                                           events->insert(std::pair<const unsigned, MidiEvent*> (0, ev));
                                           }
                                           break;
@@ -1088,8 +1088,7 @@ bool MidiFile::readTrack(bool mergeChannels)
       int len       = readLong();       // len
       int endPos    = curPos + len;
       status        = -1;
-      sstatus       = -1;  // running status, der nicht bei meta oder sysex zurüwird
-      lastchan      = -1;
+      sstatus       = -1;  // running status, der nicht bei meta oder sysex zurü   lastchan      = -1;
       lastport      = -1;
       channelprefix = -1;
       click         = 0;
@@ -1549,7 +1548,7 @@ MidiEvent* MidiFile::readEvent(MidiTrack* track)
                               delete[] buffer;
                               delete event;
                               }
-                              return (MidiEvent*)-1;  // DEBUG: eigentlich nänt lesen
+                              return (MidiEvent*)-1;  // DEBUG: eigentlich nä
                         case META_TRACK_COMMENT:
                               {
                               QString s((char*)buffer);
@@ -1557,7 +1556,7 @@ MidiEvent* MidiFile::readEvent(MidiTrack* track)
                               delete[] buffer;
                               delete event;
                               }
-                              return (MidiEvent*)-1;  // DEBUG: eigentlich nänt lesen
+                              return (MidiEvent*)-1;  // DEBUG: eigentlich nä
                         case META_CHANNEL_PREFIX:
                               if (len == 1) {
                                     channelprefix = buffer[0];
@@ -1584,7 +1583,7 @@ printf("Port Change %d\n", buffer[0]);
                               delete[] buffer;
                               delete event;
                               }
-                              return (MidiEvent*)-1;  // DEBUG: eigentlich nänt lesen
+                              return (MidiEvent*)-1;  // DEBUG: eigentlich nä
                         case META_TIME_SIGNATURE:
                               {
                               timesig_z = buffer[0];
@@ -1596,7 +1595,7 @@ printf("Port Change %d\n", buffer[0]);
                               delete event;
                               delete[] buffer;
                               }
-                              return (MidiEvent*)-1;  // DEBUG: eigentlich nänt lesen
+                              return (MidiEvent*)-1;  // DEBUG: eigentlich nä
                         case META_KEY_SIGNATURE:
                               {
                               (*cs->keymap)[t] = (signed char)(buffer[0]);
@@ -1605,12 +1604,12 @@ printf("Port Change %d\n", buffer[0]);
                               delete event;
                               delete[] buffer;
                               }
-                              return (MidiEvent*)-1;  // DEBUG: eigentlich nänt lesen
+                              return (MidiEvent*)-1;  // DEBUG: eigentlich nä
                         case META_MARKER:
 //                              song->addMarker(QString((const char*)(buffer)), event->posTick(), false);
                               delete event;
                               delete[] buffer;
-                              return (MidiEvent*)-1;  // DEBUG: eigentlich nänt lesen
+                              return (MidiEvent*)-1;  // DEBUG: eigentlich nä
                         case META_TITLE:
                               title = (char*)buffer;
                               delete event;
@@ -1945,11 +1944,11 @@ QString MidiTrack::instrName(int type) const
 //      Instrumentennamen verwendet werden?
 //    - Instrumente feststellen
 //          - Name (kommentar?)
-//          - Schlü       - Split System?
+//          - Schlü Split System?
 //    * Takte feststellen
 //    - Schlagzeugtrack markieren
 //    - Quantisierung festlegen:
-//       - küe feststellen
+//       - küellen
 //    - songtitle
 
 // process:

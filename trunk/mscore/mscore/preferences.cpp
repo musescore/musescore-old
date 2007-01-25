@@ -112,6 +112,7 @@ Preferences::Preferences()
       alsaFragments  = 3;
       layoutBreakColor = Qt::green;
       antialiasedDrawing = true;
+      sessionStart = LAST_SESSION;
       };
 
 //---------------------------------------------------------
@@ -172,6 +173,14 @@ void Preferences::write()
       xml.tag("alsaFragments", alsaFragments);
       xml.tag("layoutBreakColor", layoutBreakColor);
       xml.tag("antialiasedDrawing", antialiasedDrawing);
+      switch(sessionStart) {
+            case LAST_SESSION:   xml.tag("sessionStart", "last"); break;
+            case NEW_SESSION:    xml.tag("sessionStart", "new"); break;
+            case SCORE_SESSION:  xml.tag("sessionStart", "score"); break;
+            }
+      if (!startScore.isEmpty())
+            xml.tag("startScore", startScore);
+
       writeShortcuts(xml);
       xml.etag("Preferences");
       xml.etag("museScore");
@@ -294,6 +303,16 @@ void Preferences::read()
                               layoutBreakColor.setNamedColor(val);
                         else if (tag == "antialiasedDrawing")
                               antialiasedDrawing = i;
+                        else if (tag == "sessionStart") {
+                              if (val == "last")
+                                    sessionStart = LAST_SESSION;
+                              else if (val == "new")
+                                    sessionStart = NEW_SESSION;
+                              else if (val == "score")
+                                    sessionStart = SCORE_SESSION;
+                              }
+                        else if (tag == "startScore")
+                              startScore =val;
                         else if (tag == "Shortcuts")
                               readShortcuts(nnnode);
                         else
@@ -417,6 +436,12 @@ PreferenceDialog::PreferenceDialog(QWidget* parent)
 
       alsaFragments->setValue(preferences.alsaFragments);
       drawAntialiased->setChecked(preferences.antialiasedDrawing);
+      switch(preferences.sessionStart) {
+            case LAST_SESSION:   lastSession->setChecked(true); break;
+            case NEW_SESSION:    newSession->setChecked(true); break;
+            case SCORE_SESSION:  scoreSession->setChecked(true); break;
+            }
+      sessionScore->setText(preferences.startScore);
 
       //
       // initialize local shortcut table
@@ -739,6 +764,14 @@ void PreferenceDialog::apply()
       preferences.alsaPeriodSize = alsaPeriodSize->currentText().toInt();
       preferences.alsaFragments  = alsaFragments->value();
       preferences.antialiasedDrawing = drawAntialiased->isChecked();
+
+      if (lastSession->isChecked())
+            preferences.sessionStart = LAST_SESSION;
+      else if (newSession->isChecked())
+            preferences.sessionStart = NEW_SESSION;
+      else if (scoreSession->isChecked())
+            preferences.sessionStart = SCORE_SESSION;
+      preferences.startScore = sessionScore->text();
 
       if (shortcutsChanged) {
             shortcutsChanged = false;
