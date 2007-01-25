@@ -1147,7 +1147,13 @@ MuseScore::MuseScore()
       mag = new QComboBox(fileTools);
       mag->setToolTip(tr("Mag"));
       mag->setWhatsThis(tr("Zoom Canvas"));
-      mag->setEditable(false);
+
+      //
+      // FIXME: the mag combobox is not editable but if we set
+      //        setEditable(false) we also cannot display arbitrary
+      //        mag values
+      mag->setEditable(true);
+
       mag->setValidator(new QDoubleValidator(.05, 20.0, 2, mag));
       for (unsigned int i =  0; i < sizeof(magTable)/sizeof(*magTable); ++i) {
             mag->addItem(tr(magTable[i]), i);
@@ -1762,9 +1768,11 @@ void MuseScore::setCurrentScore(int idx)
 
       getAction("undo")->setEnabled(!cs->undoEmpty());
       getAction("redo")->setEnabled(!cs->redoEmpty());
+      visibleId->setChecked(cs->showInvisible());
 
       cs->setSpatium(cs->spatium());
       canvas->setMag(cs->mag());
+      updateMag();
       canvas->setXoffset(cs->xoffset());
       canvas->setYoffset(cs->yoffset());
       cs->initSymbols();

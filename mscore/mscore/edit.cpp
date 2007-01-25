@@ -1208,6 +1208,10 @@ void Score::cmdTuplet(int n)
                   break;
             }
       int baseLen = chord->tickLen() / normalNotes;
+      if (chord->tickLen() % normalNotes) {
+            printf("cannot handle tuplet (rest %d)\n", chord->tickLen() % normalNotes);
+            return;
+            }
 
       //---------------------------------------------------
       //    - remove rest/note
@@ -1246,8 +1250,8 @@ void Score::cmdTuplet(int n)
       chord->setTickLen(ticks);
       measure->add(chord);
       measure->layoutNoteHeads(staffIdx);
-      chord->setParent(tuplet);
-      // tuplet->add(chord);
+//      chord->setParent(tuplet);
+tuplet->add(chord);
       undoOp(UndoOp::AddElement, chord);
 
       for (int i = 0; i < (actualNotes-1); ++i) {
@@ -1259,8 +1263,8 @@ void Score::cmdTuplet(int n)
             rest->setStaff(staff);
             rest->setTickLen(ticks);
             measure->add(rest);
-            // tuplet->add(rest);
-            rest->setParent(tuplet);
+tuplet->add(rest);
+//            rest->setParent(tuplet);
             undoOp(UndoOp::AddElement, rest);
             }
       layout();
