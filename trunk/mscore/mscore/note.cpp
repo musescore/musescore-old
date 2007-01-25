@@ -661,17 +661,7 @@ void Note::endDrag()
 ShadowNote::ShadowNote(Score* s)
    : Element(s)
       {
-      _sym  = new Sym(symbols[quartheadSym]);
       _line = 1000;
-      }
-
-//---------------------------------------------------------
-//   ShadowNote
-//---------------------------------------------------------
-
-ShadowNote::~ShadowNote()
-      {
-      delete _sym;
       }
 
 //---------------------------------------------------------
@@ -696,9 +686,9 @@ void ShadowNote::draw(Painter& p)
             pen.setWidthF(lw);
             p.setPen(pen);
 
-            _sym->draw(p);
+            symbols[quartheadSym].draw(p);
 
-            double x1 = _sym->width()/2 - _spatium;
+            double x1 = symbols[quartheadSym].width()/2 - _spatium;
             double x2 = x1 + 2 * _spatium;
 
             for (int i = -2; i >= _line; i -= 2) {
@@ -719,8 +709,8 @@ void ShadowNote::draw(Painter& p)
 
 QRectF ShadowNote::bbox() const
       {
-      QRectF b = _sym->bbox();
-      double x  = _sym->width()/2 - _spatium;
+      QRectF b = symbols[quartheadSym].bbox();
+      double x  = b.width()/2 - _spatium;
       double lw = point(style->helpLineWidth);
 
       QRectF r(0, -lw/2.0, 2 * _spatium, lw);

@@ -141,12 +141,10 @@ class Note : public Element {
 */
 
 class ShadowNote : public Element {
-      Sym* _sym;         ///< Note head.
       int _line;
 
    public:
       ShadowNote(Score*);
-      ~ShadowNote();
       virtual ShadowNote* clone() const { return new ShadowNote(*this); }
       virtual ElementType type() const  { return SHADOW_NOTE; }
       int line() const                  { return _line;   }

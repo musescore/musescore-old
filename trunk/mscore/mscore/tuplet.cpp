@@ -242,10 +242,10 @@ void Tuplet::draw1(Painter& p)
       {
       if (_number) {
             // ? p.setPen(QPen(Qt::NoPen));
-            p.setBrush(_number->selected() ? preferences.selectColor[0] : Qt::black);
+            // p.setBrush(_number->selected() ? preferences.selectColor[0] : Qt::black);
             _number->draw(p);
             if (_hasLine) {
-                  QPen pen(Qt::black);
+                  QPen pen(p.pen());
                   pen.setWidthF(_spatium * 0.1);
                   p.setPen(pen);
                   p.drawPolyline(bracketL);
