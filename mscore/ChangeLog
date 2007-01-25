@@ -1,4 +1,11 @@
-24.10.7 (ws)
+25.1.7 (ws)
+      - ask for save when double click on tab of a modified score to remove
+        score from tab-list
+      - ask for save for all modified scores on exit
+      - midi export: fix export of meta strings like subtitle etc.
+      - implement program start options selectable in preferences:
+        start with last score, start with empty score and start with defined score
+24.1.7 (ws)
       - replace Fingering() by Text() with subtype TEXT_FINGERING
       - textpalette now stays on top of all windows
       - after clicking a symbol in textpalette, the canvas gets keyboard
@@ -7,10 +14,10 @@
       - added shape() method to Element class. Shape is called from contains().
         Shape defaults to bbox() but is reimplemented in some classes
         to make them better clickable.
-23.10.7 (ws)
+23.1.7 (ws)
       - on *.msc load transform file division to internal division; this fixes
         problems when several scores with different divisions are loaded
-22.10.7 (ws)
+22.1.7 (ws)
       - fixed editing of instrument names (test7.msc)
       (lv)
       * MusicXML updates

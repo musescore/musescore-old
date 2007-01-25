@@ -904,42 +904,40 @@ static void printVersion(const char* prog)
       }
 
 //---------------------------------------------------------
-//   quitDoc
+//   quitApp
 //---------------------------------------------------------
 
-void MuseScore::quitDoc()
+void MuseScore::quitApp()
       {
-      if (checkDirty())
-            return;
-      int n = scoreList.size();
-      if (n <= 1) {
-            close();
-            return;
-            }
-      for (int i = 0; i < n; ++i) {
-            if (scoreList[i] == cs) {
-                  std::vector<Score*>::iterator ii = scoreList.begin() + i;
-                  scoreList.erase(ii);
-                  tab->removeTab(i);
-                  cs = 0;
-                  if (i >= (n-1))
-                        i = 0;
-                  setCurrentScore(i);
-                  break;
-                  }
-            }
+      close();
       }
 
 //---------------------------------------------------------
 //   closeEvent
 //---------------------------------------------------------
 
-void MuseScore::closeEvent(QCloseEvent* /*ev*/)
+void MuseScore::closeEvent(QCloseEvent* ev)
       {
-      if (!checkDirty())
-            qApp->quit();
+      for (std::vector<Score*>::iterator i = scoreList.begin(); i != scoreList.end(); ++i) {
+            Score* score = *i;
+            if (score->dirty()) {
+                  QString s(tr("%1 contains unsaved data\n"
+                    "Save Current Score?"));
+                  s = s.arg(score->projectName());
+                  int n = QMessageBox::warning(this, tr("MuseScore"),
+                     s,
+                     tr("&Save"), tr("&Nosave"), tr("&Abort"), 0, 2);
+                  if (n == 0)
+                        saveFile();
+                  else if (n == 2) {
+                        ev->ignore();
+                        return;
+                        }
+                  }
+            }
       saveScoreList();
       seq->exit();
+      ev->accept();
       }
 
 //---------------------------------------------------------
@@ -1142,18 +1140,20 @@ MuseScore::MuseScore()
       transportTools->addAction(playAction);
 
       QAction* magAction = new QAction(QIcon(viewmagIcon), tr("Mag"), fileTools);
+      magAction->setWhatsThis(tr("Zoom Canvas"));
       fileTools->addAction(magAction);
       connect(magAction, SIGNAL(triggered()), canvas, SLOT(magCanvas()));
 
       mag = new QComboBox(fileTools);
-      mag->setEditable(true);
+      mag->setToolTip(tr("Mag"));
+      mag->setWhatsThis(tr("Zoom Canvas"));
+      mag->setEditable(false);
       mag->setValidator(new QDoubleValidator(.05, 20.0, 2, mag));
       for (unsigned int i =  0; i < sizeof(magTable)/sizeof(*magTable); ++i) {
             mag->addItem(tr(magTable[i]), i);
             if (i == startMag)
                   mag->setCurrentIndex(i);
             }
-
       connect(mag, SIGNAL(activated(int)), SLOT(magChanged(int)));
       fileTools->addWidget(mag);
       addToolBarBreak();
@@ -1224,7 +1224,7 @@ MuseScore::MuseScore()
       menuFile->addSeparator();
       menuFile->addAction(getAction("print"));
       menuFile->addSeparator();
-      menuFile->addAction(exitIcon, tr("&Quit"), this, SLOT(quitDoc()), Qt::CTRL + Qt::Key_Q);
+      menuFile->addAction(exitIcon, tr("&Quit"), this, SLOT(quitApp()), Qt::CTRL + Qt::Key_Q);
 
       //---------------------
       //    Menu Edit
@@ -1424,21 +1424,21 @@ void MuseScore::magChanged(int idx)
             case 7:  mag = 8.0;  break;
             case 8:  mag = 16.0; break;
             case 9:      // page width
-                  mag *= s.width() / cs->pageFormat()->width();
+                  mag *= s.width() / (cs->pageFormat()->width() * DPI);
                   canvas->setOffset(0.0, 0.0);
                   break;
             case 10:     // page
                   {
-                  double mag1 = s.width()  / cs->pageFormat()->width();
-                  double mag2 = s.height() / cs->pageFormat()->height();
+                  double mag1 = s.width()  / (cs->pageFormat()->width() * DPI);
+                  double mag2 = s.height() / (cs->pageFormat()->height() * DPI);
                   mag  *= (mag1 > mag2) ? mag2 : mag1;
                   canvas->setOffset(0.0, 0.0);
                   }
                   break;
             case 11:    // double page
                   {
-                  double mag1 = s.width() / (cs->pageFormat()->width()*2+50.0);
-                  double mag2 = s.height() / cs->pageFormat()->height();
+                  double mag1 = s.width() / (cs->pageFormat()->width()*2*DPI+50.0);
+                  double mag2 = s.height() / (cs->pageFormat()->height() * DPI);
                   mag  *= (mag1 > mag2) ? mag2 : mag1;
                   canvas->setOffset(0.0, 0.0);
                   }
@@ -1547,15 +1547,8 @@ void MuseScore::selectScore(QAction* action)
       int id = action->data().toInt();
       if (id < 0)
             return;
-      QString project = getScore(id).mid(2);
-      if (project.isEmpty())
-            return;
-      loadScoreFile(project);
-      }
-
-void MuseScore::loadScoreFile(const QString& s)
-      {
-      if (checkDirty())
+      QString s = getScore(id).mid(2);
+      if (s.isEmpty())
             return;
       Score* score = new Score();
       score->read(s);
@@ -2196,6 +2189,8 @@ void MuseScore::removeTab(int i)
       if (n <= 1)
             return;
       std::vector<Score*>::iterator ii = scoreList.begin() + i;
+      if (checkDirty(*ii))
+            return;
       scoreList.erase(ii);
       tab->removeTab(i);
       cs = 0;
@@ -2391,18 +2386,30 @@ int main(int argc, char* argv[])
       int idx = 0;
       bool scoreCreated = false;
       if (argc < 2) {
-            for (int i = 0; i < PROJECT_LIST_LEN; ++i) {
-                  if (projectList[i].name.isEmpty())
+            switch (preferences.sessionStart) {
+                  case LAST_SESSION:
+                        for (int i = 0; i < PROJECT_LIST_LEN; ++i) {
+                              if (projectList[i].name.isEmpty())
+                                    break;
+                              if (projectList[i].loaded) {
+                                    Score* score = new Score();
+                                    scoreCreated = true;
+                                    score->read(projectList[i].name);
+                                    if (projectList[i].current)
+                                          currentScore = idx;
+                                    mscore->appendScore(score);
+                                    ++idx;
+                                    }
+                              }
                         break;
-                  if (projectList[i].loaded) {
+                  case NEW_SESSION:
+                        break;
+                  case SCORE_SESSION:
                         Score* score = new Score();
                         scoreCreated = true;
-                        score->read(projectList[i].name);
-                        if (projectList[i].current)
-                              currentScore = idx;
+                        score->read(preferences.startScore);
                         mscore->appendScore(score);
-                        ++idx;
-                        }
+                        break;
                   }
             }
       else {

@@ -174,7 +174,6 @@ class MuseScore : public QMainWindow {
       bool _speakerEnabled;
 
       virtual void closeEvent(QCloseEvent*);
-      void loadScoreFile(const QString&);
 
       void playVisible(bool flag);
       void navigatorVisible(bool flag);
@@ -199,7 +198,7 @@ class MuseScore : public QMainWindow {
       void padVisible(bool);
       void openRecentMenu();
       void selectScore(QAction*);
-      void quitDoc();
+      void quitApp();
       void updateMag();
       void selectionChanged(int);
       void startPreferenceDialog();
@@ -265,7 +264,7 @@ class MuseScore : public QMainWindow {
    public:
       MuseScore();
       Canvas* getCanvas() { return canvas; }
-      bool checkDirty();
+      bool checkDirty(Score*);
       void clearScore();
       bool saveFile(QFileInfo&);
       bool saveFile(QFile*);

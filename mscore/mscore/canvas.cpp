@@ -222,6 +222,7 @@ void Canvas::mousePressEvent(QMouseEvent* ev)
       bool b2 = ev->button() == Qt::MidButton;
       bool b3 = ev->button() == Qt::RightButton;
 
+      keyState = ev->modifiers();
       if (state == MAG) {
             if (b1)
                   incMag();
@@ -230,7 +231,6 @@ void Canvas::mousePressEvent(QMouseEvent* ev)
             return;
             }
 
-      keyState    = ev->modifiers();
       buttonState = ev->button();
       startMove   = imatrix.map(QPointF(ev->pos()));
 
@@ -462,10 +462,18 @@ void Canvas::mouseReleaseEvent(QMouseEvent* ev)
       seq->stopNotes();
       if (state == EDIT)
             return;
+      if (state == MAG) {
+            if (keyState & Qt::ShiftModifier)
+                  return;
+            setState(NORMAL);
+            return;
+            }
       mouseReleaseEvent1(ev);
+#if 0
       if (state == EDIT)
             _score->end();
       else
+#endif
             _score->endCmd(true);
       }
 
@@ -483,15 +491,6 @@ void Canvas::mouseReleaseEvent1(QMouseEvent* /*ev*/)
             }
 
       switch (state) {
-#if 0
-            case EDIT:
-                  if (_score->dragObject() != _score->editObject) {
-                        setState(NORMAL);
-                        // Pos sm = tf->ipoint2fpos(startMove);
-                        _score->select(_score->dragObject(), 0, 0);
-                        }
-                  break;
-#endif
             case DRAG_EDIT:
                   _score->addRefresh(_score->editObject->abbox());
                   _score->editObject->endEditDrag();
@@ -513,11 +512,6 @@ void Canvas::mouseReleaseEvent1(QMouseEvent* /*ev*/)
                   _score->layout();
                   setState(NORMAL);
                   break;
-
-            case MAG:
-                  if (keyState & Qt::ShiftModifier)
-                        break;
-                  // fall through
 
             default:
                   setState(NORMAL);

@@ -726,7 +726,7 @@ void ExportMusicXml::pitch2xml(Note* note, char& c, int& alter, int& octave)
 
 static QString tick2xml(const int ticks, int& dots)
       {
-      QString type("");
+      QString type;
       dots = 0;
       if (ticks == 16*division)       // 4/1
             type = "long";
@@ -1595,8 +1595,8 @@ void ExportMusicXml::rest(Rest* rest, int staff)
       int dots = 0;
       QString s = tick2xml(rest->tickLen(), dots);
       if (s.isEmpty()) {
-            printf("no rest type found for ticks %d\n",
-               rest->tickLen());
+            printf("no rest type found for ticks %d at %d in measure %d\n",
+               rest->tickLen(), rest->tick(), rest->measure()->no()+1);
             }
       xml.tag("type", s);
 
