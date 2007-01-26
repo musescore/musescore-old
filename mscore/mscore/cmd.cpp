@@ -221,10 +221,8 @@ void Score::cmdAddPitch(int note, bool addFlag)
             }
       else {
             // insert note
-            if (cr->tuplet()) {
+            if (cr->tuplet())
                   len = cr->tuplet()->noteLen();
-                  printf("current is tuplet len %d\n", len);
-                  }
             setNote(cis->pos, staff(cis->staff), cis->voice, padState.pitch, len);
             cis->pos += len;
             }

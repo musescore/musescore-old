@@ -62,4 +62,3 @@ package:
 	cd build; make package
 	mv build/mscore-*.sh .
 
-

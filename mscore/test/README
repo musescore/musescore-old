@@ -1,4 +1,6 @@
-Testfiles
+-------------------------------------------------
+      *.msc Testfiles
+-------------------------------------------------
 
 test1.msc
       single staff, single voice, c-scale
@@ -6,11 +8,13 @@ test1.msc
 test7.msc
       - piano and trumpet staff
       - flat symbol in instrument name
-      - title with bold and sharp symbol
+      - title with bold and italic text
       - start repeat / end repeat
       - prima volta / seconda volta
 
-test8.msc   simple tuplets: triplet
+tuplets.msc
+      - triplet
+
 testKeysig2.msc
 testTimesig2.msc
 
@@ -19,7 +23,9 @@ midi2.mid	single track, simple chords
 midi3.mid   single track, rests
 midi4.mid   single track, overlapping notes
 
-MusicXML testfiles
+-------------------------------------------------
+      MusicXML testfiles
+-------------------------------------------------
 
 testAccidentals1.xml     all supported accidentals including editorial
 testDirections1.xml      all supported direction types
@@ -33,3 +39,4 @@ testTimesig1.xml         all supported time signatures
 testVoicePiano1.xml      score with both a voice and a piano part
 testWedge1.xml           crescendo and diminuendo wedges
 testWords1.xml           the "words" direction
+
