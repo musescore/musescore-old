@@ -12,18 +12,15 @@
       - bei bedarf qt-libs installieren
       	- shell wrapper erzeugen
 
-	- font in Installer integrieren
-      - Font installieren
-
 	- share-verzeichnis installieren
 	- evtl. alternative 64 bit version zupacken
 
-      - abhängig von Rechten App in /usr/local oder ~/ installieren
+      - abhägig von Rechten App in /usr/local oder ~/ installieren
             - Link auf binary in PATH installieren
               dazu alle path elemente untersuchen, ob irgendwo
               Schreibrechte existieren
 
       - Icon auf Desktop installieren, Eintrag in KDE-Verzeichnis
         "Multimedia" erstellen
-            - feststellen, ob KDE System läuft
+            - feststellen, ob KDE System läft
 

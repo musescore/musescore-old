@@ -1,0 +1,46 @@
+#!/bin/bash
+
+#
+#     this script tries to produce a fake debian package
+#
+
+echo "creating fake *.deb package"
+mkdir debian
+cd debian
+
+#
+#     copy data
+#
+
+mkdir usr
+mkdir usr/bin
+cp ../build/mscore/mscore usr/bin
+
+#
+#     create DEBIAN
+#
+
+mkdir DEBIAN
+cd DEBIAN
+echo "Package: mscore" >> control
+echo "Version: 0.4-0ubuntu0.1" >> control
+echo "Priority: optional" >> control
+echo "Architecture: i386" >> control
+echo "Installed-Size: 10000000" >> control
+echo "Maintainer: ws<ws@seh.de>" >> control
+echo "Description: music score editor" >> control
+echo "   music score editor" >> control
+
+echo "#!/bin/sh" > postinst
+chmod 755 postinst
+echo "#!/bin/sh" > postrm
+chmod 755 postrm
+cd ..
+
+#
+#     create archiv
+#
+
+cd ..
+dpkg-deb -b debian mscore-0.4.deb
+

@@ -654,13 +654,15 @@ void Score::putNote(const QPointF& pos, bool addToChord)
       int len   = padState.tickLen;
       int voice = padState.voice;
 
+      ChordRest* el = m->findChordRest(tick, staff, voice, false);
+      if (!el) {
+            printf("putNote: chord/rest not found\n");
+            return;
+            }
+      if (el->tuplet())
+            len = el->tuplet()->noteLen();
       if (addToChord) {
             // add note to chord
-            ChordRest* el = m->findChordRest(tick, staff, voice, false);
-            if (!el) {
-                  printf("putNote: chord/rest not found\n");
-                  return;
-                  }
             if (el->type() == CHORD) {
                   Note* note = addNote((Chord*)el, pitch);
                   select(note, 0, 0);
