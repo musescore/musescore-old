@@ -114,4 +114,23 @@ void Accidental::setSubtype(int i)
       addElement(s, 0.0, 0.0);
       }
 
+//---------------------------------------------------------
+//   value
+//    returns the resulting pitch offset
+//---------------------------------------------------------
+
+int Accidental::subtype2value(int st)
+      {
+      static const int preTab[] = {
+            0,  // ACC_NONE
+            1,  // ACC_SHARP
+            -1, // ACC_FLAT
+            2,  // ACC_SHARP2
+            -2, // ACC_FLAT2
+            0,  // ACC_NAT
+            0, 0, 0, 0, 0,  // () brackets
+            0, 0, 0, 0, 0,  // [] brackets
+            };
+      return preTab[st % 100];
+      }
 

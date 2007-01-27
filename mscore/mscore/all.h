@@ -73,5 +73,6 @@
 #include <QtGui/QToolBox>
 #include <QtGui/QToolButton>
 #include <QtGui/QTextBlock>
+#include <QtGui/QClipboard>
 #endif
 

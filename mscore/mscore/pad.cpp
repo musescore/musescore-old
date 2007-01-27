@@ -112,6 +112,6 @@ Pad::Pad(QWidget* parent)
 
 void Pad::closeEvent(QCloseEvent* ev)
       {
-      emit close();
+      emit closed();
       QWidget::closeEvent(ev);
       }

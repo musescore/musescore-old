@@ -938,6 +938,12 @@ void MuseScore::closeEvent(QCloseEvent* ev)
       saveScoreList();
       seq->exit();
       ev->accept();
+      if (pageListEdit)
+            pageListEdit->close();
+      if (pad)
+            pad->close();
+      if (playPanel)
+            playPanel->close();
       }
 
 //---------------------------------------------------------
@@ -1245,7 +1251,9 @@ MuseScore::MuseScore()
 
       menuEdit->addAction(getAction("cut"));
       menuEdit->addAction(getAction("copy"));
-      menuEdit->addAction(getAction("paste"));
+      a = getAction("paste");
+      a->setEnabled(false);
+      menuEdit->addAction(a);
       selectionChanged(0);
       menuEdit->addSeparator();
       menuEdit->addAction(tr("Instrument List..."), this, SLOT(startInstrumentListEditor()));
@@ -1409,6 +1417,10 @@ MuseScore::MuseScore()
       connect(seq, SIGNAL(started()), SLOT(seqStarted()));
       connect(seq, SIGNAL(stopped()), SLOT(seqStopped()));
       loadScoreList();
+
+      QClipboard* cb = QApplication::clipboard();
+      connect(cb, SIGNAL(dataChanged()), SLOT(clipboardChanged()));
+      connect(cb, SIGNAL(selectionChanged()), SLOT(clipboardChanged()));
       }
 
 //---------------------------------------------------------
@@ -1570,7 +1582,6 @@ void MuseScore::selectionChanged(int state)
       {
       getAction("cut")->setEnabled(state);
       getAction("copy")->setEnabled(state);
-      getAction("paste")->setEnabled(state);
       }
 
 //---------------------------------------------------------
@@ -2054,7 +2065,7 @@ void MuseScore::showPlayPanel(bool visible)
             connect(playPanel, SIGNAL(relTempoChanged(int)),seq, SLOT(setRelTempo(int)));
             connect(playPanel, SIGNAL(posChange(int)),      seq, SLOT(setPos(int)));
             connect(playPanel, SIGNAL(rewindTriggered()),   seq, SLOT(rewindStart()));
-            connect(playPanel, SIGNAL(close()),                  SLOT(closePlayPanel()));
+            connect(playPanel, SIGNAL(closed()),                 SLOT(closePlayPanel()));
             connect(playPanel, SIGNAL(stopToggled(bool)),        SLOT(setStop(bool)));
             connect(playPanel, SIGNAL(playToggled(bool)),        SLOT(setPlay(bool)));
 
@@ -2089,7 +2100,7 @@ void MuseScore::showPad(bool visible)
       {
       if (pad == 0) {
             pad = new Pad(0);
-            connect(pad, SIGNAL(close()), SLOT(closePad()));
+            connect(pad, SIGNAL(closed()), SLOT(closePad()));
             cs->setPadState();
             }
       pad->setShown(visible);
@@ -2484,4 +2495,18 @@ void MuseScore::cmd(QAction* a)
                   cs->cmd(cmd);
             }
       }
+
+//---------------------------------------------------------
+//   clipboardChanged
+//---------------------------------------------------------
+
+void MuseScore::clipboardChanged()
+      {
+      const QMimeData* ms = QApplication::clipboard()->mimeData();
+      if (ms == 0)
+            return;
+      bool flag = ms->hasFormat("application/mscore/symbol");
+      getAction("paste")->setEnabled(flag);
+      }
+
 

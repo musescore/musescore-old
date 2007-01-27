@@ -176,7 +176,7 @@ void Note::changeAccidental(int pre)
                         int tick     = ((Chord*)e)->tick();
                         for (iNote in = nl->begin(); in != nl->end(); ++in) {
                               Note* note  = in->second;
-                              int nPrefix = note->accidentalIdx();
+                              int nPrefix = Accidental::subtype2value(note->accidentalIdx());
                               if (nPrefix) {
                                     int offset   = score()->clefOffset(tick, staffIdx());
                                     int line     = note->line();
@@ -191,17 +191,6 @@ void Note::changeAccidental(int pre)
             if (segment == 0)
                   printf("Note not found in measure\n");
             }
-
-      static int preTab[] = {
-            0,  // ACC_NONE
-            1,  // ACC_SHARP
-            -1, // ACC_FLAT
-            2,  // ACC_SHARP2
-            -2, // ACC_FLAT2
-            0,  // ACC_NAT
-            1, -1, 2, -2, 0,  // () brackets
-            1, -1, 2, -2, 0,  // [] brackets
-            };
 
      static int tab3[15][8] = {
           //c  d  e  f  g  a  b  c
@@ -225,34 +214,31 @@ void Note::changeAccidental(int pre)
           { 1, 1, 1, 1, 1, 1, 1, 1 }     // cis
           };
 
-      int tick   = chord()->tick();
-      int offset = score()->clefOffset(tick, staffIdx());
-      int l1     = 45 - _line + offset;
-
-      int curPre = tversatz[l1];
-
-      int key    = score()->keymap->key(tick);
-      int keyPre = tab3[key+7][l1 % 7];
+      int tick      = chord()->tick();
+      int offset    = score()->clefOffset(tick, staffIdx());
+      int l1        = 45 - _line + offset;
+      int curOffset = tversatz[l1];
+      int key       = score()->keymap->key(tick);
+      int keyOffset = tab3[key+7][l1 % 7];
 
       int pitchOffset;
 
       if (pre == ACC_NONE) {
-            if (curPre == ACC_NONE)
-                  pitchOffset = preTab[keyPre % 100];
+            if (curOffset == ACC_NONE)
+                  pitchOffset = keyOffset;
             else
-                  pitchOffset = preTab[curPre % 100];
+                  pitchOffset = curOffset;
             }
       else if (pre == ACC_NATURAL)
             pitchOffset = 0;
       else {
-            pitchOffset = preTab[pre % 100]; //  + preTab[keyPre % 100];
+            pitchOffset = Accidental::subtype2value(pre) + keyOffset;
             }
 
-      int clef = staff()->clef()->clef(tick);
+      int clef     = staff()->clef()->clef(tick);
       int newPitch = line2pitch(_line, clef) + pitchOffset;
 
       setPitch(newPitch);
-//DEBUG1      chord()->measure()->layoutNoteHeads(staffIdx());
       }
 
 //---------------------------------------------------------
