@@ -33,7 +33,7 @@ class Pad : public QWidget {
    public slots:
 
    signals:
-      void close();
+      void closed();
 
    public:
       Pad(QWidget* parent = 0);

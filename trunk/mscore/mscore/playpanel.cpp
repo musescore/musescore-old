@@ -58,7 +58,7 @@ PlayPanel::PlayPanel(QWidget* parent)
 
 void PlayPanel::closeEvent(QCloseEvent* ev)
       {
-      emit close();
+      emit closed();
       QWidget::closeEvent(ev);
       }
 

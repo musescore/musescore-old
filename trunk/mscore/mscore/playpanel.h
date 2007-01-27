@@ -43,7 +43,7 @@ class PlayPanel : public QWidget, private Ui::PlayPanelBase {
       void relTempoChanged(int);
       void posChange(int);
       void volChange(float);
-      void close();
+      void closed();
       void stopToggled(bool);
       void playToggled(bool);
       void rewindTriggered();

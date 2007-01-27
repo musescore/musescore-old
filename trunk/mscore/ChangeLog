@@ -1,4 +1,7 @@
-27.1.7 (lv)
+27.1.7 (ws)
+      - implemented some cut/copy/paste functionality
+      - try to handle accidentals in addition to key signatures
+      (lv)
       - MusicXML export of TempoText
       - MusicXML export of composite TimeSigs and of TSIG_ALLA_BREVE and TSIG_FOUR_FOUR
 25.1.7 (ws)

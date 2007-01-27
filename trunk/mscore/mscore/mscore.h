@@ -253,6 +253,7 @@ class MuseScore : public QMainWindow {
       void speakerToggled(bool);
       void removeTab(int);
       void cmd(QAction*);
+      void clipboardChanged();
 
    public slots:
       void setCurrentScore(int);

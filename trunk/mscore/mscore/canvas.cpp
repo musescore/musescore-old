@@ -133,6 +133,102 @@ Canvas::~Canvas()
       }
 
 //---------------------------------------------------------
+//   readType
+//---------------------------------------------------------
+
+static int readType(QDomNode& node)
+      {
+      int type = 0;
+      for (; !node.isNull(); node = node.nextSibling()) {
+            QDomElement e = node.toElement();
+            if (e.isNull())
+                  continue;
+                  //
+                  // DEBUG:
+                  // check names; remove non needed elements
+                  //
+                  if (e.tagName() == "Dynamic")
+                        type = DYNAMIC;
+                  else if (e.tagName() == "Symbol")
+                        type = SYMBOL;
+                  else if (e.tagName() == "Text")
+                        type = TEXT;
+                  else if (e.tagName() == "Staff")
+                        type = STAFF;
+                  else if (e.tagName() == "Slur")
+                        type = SLUR_SEGMENT;
+                  else if (e.tagName() == "Note")
+                        type = NOTE;
+                  else if (e.tagName() == "BarLine")
+                        type = BAR_LINE;
+                  else if (e.tagName() == "Stem")
+                        type = STEM;
+                  else if (e.tagName() == "Bracket")
+                        type = BRACKET;
+                  else if (e.tagName() == "Accidental")
+                        type = ACCIDENTAL;
+                  else if (e.tagName() == "Clef")
+                        type = CLEF;
+                  else if (e.tagName() == "KeySig")
+                        type = KEYSIG;
+                  else if (e.tagName() == "TimeSig")
+                        type = TIMESIG;
+                  else if (e.tagName() == "Chord")
+                        type = CHORD;
+                  else if (e.tagName() == "Rest")
+                        type = REST;
+                  else if (e.tagName() == "Tie")
+                        type = TIE;
+                  else if (e.tagName() == "Slur")
+                        type = SLUR;
+                  else if (e.tagName() == "Measure")
+                        type = MEASURE;
+                  else if (e.tagName() == "Attribute")
+                        type = ATTRIBUTE;
+                  else if (e.tagName() == "Page")
+                        type = PAGE;
+                  else if (e.tagName() == "Beam")
+                        type = BEAM;
+                  else if (e.tagName() == "Hook")
+                        type = HOOK;
+                  else if (e.tagName() == "Lyric")
+                        type = LYRICS;
+                  else if (e.tagName() == "Instrument1")
+                        type = INSTRUMENT_NAME1;
+                  else if (e.tagName() == "Instrument2")
+                        type = INSTRUMENT_NAME2;
+                  else if (e.tagName() == "System")
+                        type = SYSTEM;
+                  else if (e.tagName() == "HairPin")
+                        type = HAIRPIN;
+                  else if (e.tagName() == "Tuplet")
+                        type = TUPLET;
+                  else if (e.tagName() == "VSpacer")
+                        type = VSPACER;
+                  else if (e.tagName() == "Segment")
+                        type = SEGMENT;
+                  else if (e.tagName() == "TempoText")
+                        type = TEMPO_TEXT;
+                  else if (e.tagName() == "Volta")
+                        type = VOLTA;
+                  else if (e.tagName() == "Ottava")
+                        type = OTTAVA;
+                  else if (e.tagName() == "Pedal")
+                        type = PEDAL;
+                  else if (e.tagName() == "Trill")
+                        type = TRILL;
+                  else if (e.tagName() == "LayoutBreak")
+                        type = LAYOUT_BREAK;
+                  else if (e.tagName() == "HelpLine")
+                        type = HELP_LINE;
+                  else
+                        domError(node);
+                  break;
+                  }
+      return type;
+      }
+
+//---------------------------------------------------------
 //   cavasPopup
 //---------------------------------------------------------
 
@@ -171,12 +267,35 @@ void Canvas::objectPopup(const QPoint& pos, Element* obj)
             return;
       _score->startCmd();
       QString cmd(a->data().toString());
-      if (cmd == "cut")
+      if (cmd == "cut") {
+            QMimeData* mimeData = new QMimeData;
+            mimeData->setData("application/mscore/symbol", obj->mimeData());
+            QApplication::clipboard()->setMimeData(mimeData);
             _score->deleteItem(obj);
-      else if (cmd == "copy")
-            printf("copy action not implemented\n");
-      else if (cmd == "paste")
-            printf("paste not implemented\n");
+            }
+      else if (cmd == "copy") {
+            QMimeData* mimeData = new QMimeData;
+            mimeData->setData("application/mscore/symbol", obj->mimeData());
+            QApplication::clipboard()->setMimeData(mimeData);
+            }
+      else if (cmd == "paste") {
+            const QMimeData* ms = QApplication::clipboard()->mimeData();
+            if (ms && ms->hasFormat("application/mscore/symbol")) {
+                  QByteArray data(ms->data("application/mscore/symbol"));
+                  QDomDocument doc;
+                  int line, column;
+                  QString err;
+                  if (!doc.setContent(data, &err, &line, &column)) {
+                        printf("error reading paste data\n");
+                        return;
+                        }
+                  QDomNode node = doc.documentElement();
+                  int type      = readType(node);
+                  _score->addRefresh(obj->abbox());   // layout() ?!
+                  obj->drop(pos, type, node);
+                  _score->addRefresh(obj->abbox());
+                  }
+            }
       else if (cmd == "context")
             mscore->showElementContext(obj);
       else if (cmd == "invisible")
@@ -253,8 +372,11 @@ void Canvas::mousePressEvent(QMouseEvent* ev)
       //-----------------------------------------
 
       if (b3) {
-            if (_score->dragObject())
+            if (_score->dragObject()) {
+                  _score->select(_score->dragObject(), 0, 0);
+                  seq->stopNotes(); // stop now because we dont get a mouseRelease event
                   objectPopup(ev->globalPos(), _score->dragObject());
+                  }
             else
                   canvasPopup(ev->globalPos());
             return;
@@ -975,102 +1097,6 @@ void Canvas::setViewRect(const QRectF& r)
             r.translate(dx, dy);
             update(r);
             }
-      }
-
-//---------------------------------------------------------
-//   readType
-//---------------------------------------------------------
-
-static int readType(QDomNode& node)
-      {
-      int type = 0;
-      for (; !node.isNull(); node = node.nextSibling()) {
-            QDomElement e = node.toElement();
-            if (e.isNull())
-                  continue;
-                  //
-                  // DEBUG:
-                  // check names; remove non needed elements
-                  //
-                  if (e.tagName() == "Dynamic")
-                        type = DYNAMIC;
-                  else if (e.tagName() == "Symbol")
-                        type = SYMBOL;
-                  else if (e.tagName() == "Text")
-                        type = TEXT;
-                  else if (e.tagName() == "Staff")
-                        type = STAFF;
-                  else if (e.tagName() == "Slur")
-                        type = SLUR_SEGMENT;
-                  else if (e.tagName() == "Note")
-                        type = NOTE;
-                  else if (e.tagName() == "BarLine")
-                        type = BAR_LINE;
-                  else if (e.tagName() == "Stem")
-                        type = STEM;
-                  else if (e.tagName() == "Bracket")
-                        type = BRACKET;
-                  else if (e.tagName() == "Accidental")
-                        type = ACCIDENTAL;
-                  else if (e.tagName() == "Clef")
-                        type = CLEF;
-                  else if (e.tagName() == "KeySig")
-                        type = KEYSIG;
-                  else if (e.tagName() == "TimeSig")
-                        type = TIMESIG;
-                  else if (e.tagName() == "Chord")
-                        type = CHORD;
-                  else if (e.tagName() == "Rest")
-                        type = REST;
-                  else if (e.tagName() == "Tie")
-                        type = TIE;
-                  else if (e.tagName() == "Slur")
-                        type = SLUR;
-                  else if (e.tagName() == "Measure")
-                        type = MEASURE;
-                  else if (e.tagName() == "Attribute")
-                        type = ATTRIBUTE;
-                  else if (e.tagName() == "Page")
-                        type = PAGE;
-                  else if (e.tagName() == "Beam")
-                        type = BEAM;
-                  else if (e.tagName() == "Hook")
-                        type = HOOK;
-                  else if (e.tagName() == "Lyric")
-                        type = LYRICS;
-                  else if (e.tagName() == "Instrument1")
-                        type = INSTRUMENT_NAME1;
-                  else if (e.tagName() == "Instrument2")
-                        type = INSTRUMENT_NAME2;
-                  else if (e.tagName() == "System")
-                        type = SYSTEM;
-                  else if (e.tagName() == "HairPin")
-                        type = HAIRPIN;
-                  else if (e.tagName() == "Tuplet")
-                        type = TUPLET;
-                  else if (e.tagName() == "VSpacer")
-                        type = VSPACER;
-                  else if (e.tagName() == "Segment")
-                        type = SEGMENT;
-                  else if (e.tagName() == "TempoText")
-                        type = TEMPO_TEXT;
-                  else if (e.tagName() == "Volta")
-                        type = VOLTA;
-                  else if (e.tagName() == "Ottava")
-                        type = OTTAVA;
-                  else if (e.tagName() == "Pedal")
-                        type = PEDAL;
-                  else if (e.tagName() == "Trill")
-                        type = TRILL;
-                  else if (e.tagName() == "LayoutBreak")
-                        type = LAYOUT_BREAK;
-                  else if (e.tagName() == "HelpLine")
-                        type = HELP_LINE;
-                  else
-                        domError(node);
-                  break;
-                  }
-      return type;
       }
 
 //---------------------------------------------------------
