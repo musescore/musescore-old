@@ -14,7 +14,17 @@ cd debian
 
 mkdir usr
 mkdir usr/bin
+mkdir usr/share
+mkdir usr/share/mscore-0.4
+mkdir usr/share/mscore-0.4/doc
+mkdir usr/share/mscore-0.4/templates
+mkdir usr/share/mscore-0.4/wallpapers
 cp ../build/mscore/mscore usr/bin
+cp ../mscore/share/templates/*.xml   usr/share/mscore-0.4/templates
+cp ../mscore/share/templates/*.msc   usr/share/mscore-0.4/templates
+cp ../mscore/share/wallpaper/*.png  usr/share/mscore-0.4/wallpapers
+cp ../build/doc/de/man-de.pdf usr/share/mscore-0.4/doc
+cp ../build/doc/en/man-en.pdf usr/share/mscore-0.4/doc
 
 #
 #     create DEBIAN
@@ -26,15 +36,25 @@ echo "Package: mscore" >> control
 echo "Version: 0.4-0ubuntu0.1" >> control
 echo "Priority: optional" >> control
 echo "Architecture: i386" >> control
+echo "Section: multimedia" >> control
 echo "Installed-Size: 10000000" >> control
 echo "Maintainer: ws<ws@seh.de>" >> control
+echo "Depends: libqt4-core (>= 4.2), libqt4-gui (>= 4.2)" >> control
+echo "Depends: libfluidsynth1 (>= 1.0)" >> control
 echo "Description: music score editor" >> control
 echo "   music score editor" >> control
 
-echo "#!/bin/sh" > postinst
-chmod 755 postinst
-echo "#!/bin/sh" > postrm
-chmod 755 postrm
+# pre install script
+# echo "#!/bin/sh" > preinst
+# chmod 755 preinst
+
+# post install script
+# echo "#!/bin/sh" > postinst
+# chmod 755 postinst
+
+# remove temp files created by the package
+#echo "#!/bin/sh" > postrm
+#chmod 755 postrm
 cd ..
 
 #
@@ -42,5 +62,5 @@ cd ..
 #
 
 cd ..
-dpkg-deb -b debian mscore-0.4.deb
+dpkg-deb -b debian mscore_0.4-0.1.deb
 
