@@ -1,3 +1,6 @@
+27.1.7 (lv)
+      - MusicXML export of TempoText
+      - MusicXML export of composite TimeSigs and of TSIG_ALLA_BREVE and TSIG_FOUR_FOUR
 25.1.7 (ws)
       - ask for save when double click on tab of a modified score to remove
         score from tab-list
