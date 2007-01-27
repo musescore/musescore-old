@@ -58,6 +58,7 @@
 #include "timesig.h"
 #include "ottava.h"
 #include "pedal.h"
+#include "text.h"
 
 //---------------------------------------------------------
 //   attributes -- prints <attributes> tag when necessary
@@ -177,7 +178,7 @@ class ExportMusicXml : public SaveFile {
       void chord(Chord* chord, int staff, const LyricsList* ll);
       void rest(Rest* chord, int staff);
       void clef(int staff, int clef);
-      void timesig(int z, int n);
+      void timesig(TimeSig* tsig);
       void keysig(int key);
       void bar(const BarLine* bar, const Volta* volta=0, const QString& dir="");
       void barlineLeft(Measure* m, int strack, int etrack, Volta* volta);
@@ -194,6 +195,7 @@ class ExportMusicXml : public SaveFile {
       void pedal(Pedal* pd, int staff, int tick);
       void dynamic(Dynamic* dyn, int staff);
       void symbol(Symbol * sym, int staff);
+      void tempoText(TempoText* text, int staff);
       };
 
 //---------------------------------------------------------
@@ -405,7 +407,7 @@ class DirectionsAnchor {
 
 //---------------------------------------------------------
 //   LVI FIXME:
-//   - replace fixe sized anchors[] by something dynamically sized
+//   - replace fix-sized anchors[] by something dynamically sized
 //---------------------------------------------------------
 
 class DirectionsHandler {
@@ -458,6 +460,9 @@ void DirectionsHandler::handleElement(ExportMusicXml* exp, Element* el, int ssta
                               case SYMBOL:
                                     exp->symbol((Symbol *) dir, sstaff);
                                     break;
+                              case TEMPO_TEXT:
+                                    exp->tempoText((TempoText*) dir, sstaff);
+                                    break;
                               case TEXT:
                                     exp->words((Text*) dir, sstaff);
                                     break;
@@ -469,11 +474,9 @@ void DirectionsHandler::handleElement(ExportMusicXml* exp, Element* el, int ssta
                                     break;
                               case OTTAVA:
                                     exp->ottava((Ottava*) dir, sstaff, da->getTick());
-                                    // printf("handleElement ottava tick=%d\n", da->getTick());
                                     break;
                               case PEDAL:
                                     exp->pedal((Pedal*) dir, sstaff, da->getTick());
-                                    // printf("handleElement pedal tick=%d\n", da->getTick());
                                     break;
                               default:
                                     printf("DirectionsHandler::handleElement: direction type %s at tick %d not implemented\n",
@@ -500,6 +503,9 @@ void DirectionsHandler::handleElements(ExportMusicXml* exp, Staff* staff, int ms
                               case SYMBOL:
                                     exp->symbol((Symbol *) dir, sstaff);
                                     break;
+                              case TEMPO_TEXT:
+                                    exp->tempoText((TempoText*) dir, sstaff);
+                                    break;
                               case TEXT:
                                     exp->words((Text*) dir, sstaff);
                                     break;
@@ -511,11 +517,9 @@ void DirectionsHandler::handleElements(ExportMusicXml* exp, Staff* staff, int ms
                                     break;
                               case OTTAVA:
                                     exp->ottava((Ottava*) dir, sstaff, da->getTick());
-                                    // printf("handleElement ottava tick=%d\n", da->getTick());
                                     break;
                               case PEDAL:
                                     exp->pedal((Pedal*) dir, sstaff, da->getTick());
-                                    // printf("handleElement pedal tick=%d\n", da->getTick());
                                     break;
                               default:
                                     printf("DirectionsHandler::handleElements: direction type %s at tick %d not implemented\n",
@@ -625,9 +629,10 @@ void DirectionsHandler::buildDirectionsList(Measure* m, bool dopart, Part* p, in
             DirectionsAnchor* da = 0;
             Element* dir = *ci;
             switch(dir->type()) {
-                  case SYMBOL:
-                  case TEXT:
                   case DYNAMIC:
+                  case SYMBOL:
+                  case TEMPO_TEXT:
+                  case TEXT:
                         if (!dopart) {
                               da = findMatchInMeasure(dir->tick(), dir->staff(), m, p, strack, etrack);
                               if (da) {
@@ -683,6 +688,8 @@ void DirectionsHandler::buildDirectionsList(Measure* m, bool dopart, Part* p, in
                         break;
                   default:
                         // all others silently ignored
+                        // printf("DirectionsHandler::buildDirectionsList: direction type %s not implemented\n",
+                        //       elementNames[dir->type()]);
                         break;
                   }
             }
@@ -1079,7 +1086,7 @@ bool ExportMusicXml::saver()
                   if (tsig) {
                         int z, n;
                         score->sigmap->timesig(tsig->tick(), z, n);
-                        timesig(z, n);
+                        timesig(tsig);
                         }
                   // output attributes with the first actual measure (pickup or regular) only
                   if ((irregularMeasureNo + measureNo + pickupMeasureNo) == 4) {
@@ -1257,10 +1264,31 @@ void ExportMusicXml::moveToTick(int t)
 //   timesig
 //---------------------------------------------------------
 
-void ExportMusicXml::timesig(int z, int n)
+void ExportMusicXml::timesig(TimeSig* tsig)
       {
+      int n  = 0;
+      int st = tsig->subtype();
+      int z1 = 0;
+      int z2 = 0;
+      int z3 = 0;
+      int z4 = 0;
+      tsig->getSig(&n, &z1, &z2, &z3, &z4);
+      if (st == TSIG_ALLA_BREVE) {
+            // MuseScore calls this 2+2/4, MusicXML 2/2
+            n = 2;
+            z2 = 0;
+            }
       attr.doAttr(xml, true);
-      xml.stag("time");
+      if (st == TSIG_FOUR_FOUR)
+            xml.stag("time symbol=\"common\"");
+      else if (st == TSIG_ALLA_BREVE)
+            xml.stag("time symbol=\"cut\"");
+      else
+            xml.stag("time");
+      QString z = QString("%1").arg(z1);
+      if (z2) z += QString("+%1").arg(z2);
+      if (z3) z += QString("+%1").arg(z3);
+      if (z4) z += QString("+%1").arg(z4);
       xml.tag("beats", z);
       xml.tag("beat-type", n);
       xml.etag("time");
@@ -1632,6 +1660,26 @@ static void directionETag(Xml& xml, int staff, int offs = 0)
             xml.tag("offset", offs);
       if (staff)
             xml.tag("staff", staff);
+      xml.etag("direction");
+      }
+
+//---------------------------------------------------------
+//   words
+//---------------------------------------------------------
+
+void ExportMusicXml::tempoText(TempoText* text, int staff)
+      {
+      attr.doAttr(xml, false);
+      xml.stag(QString("direction placement=\"%1\"").arg((text->userOff().y() > 0.0) ? "below" : "above"));
+      xml.stag("direction-type");
+      xml.tag("words", text->getText());
+      xml.etag("direction-type");
+      int offs = text->mxmlOff();
+      if (offs)
+            xml.tag("offset", offs);
+      if (staff)
+            xml.tag("staff", staff);
+      xml.tagE("sound tempo=\"%d\"", (int) text->tempo());
       xml.etag("direction");
       }
 
