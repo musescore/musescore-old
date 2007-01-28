@@ -1030,6 +1030,7 @@ MuseScore::MuseScore()
          << "chord-a" << "chord-b"
          << "stretch+" << "stretch-"
          << "instruments" << "clefs" << "keys" << "symbols" << "times" << "dynamics"
+         << "cut" << "copy" << "paste"
          ;
       foreach(const QString s, sl) {
             QAction* a = getAction(s.toLatin1().data());

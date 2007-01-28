@@ -60,7 +60,7 @@ class Selection {
       void add(ElementList& ns);
       QRectF deselectAll(Score*);
       void remove(Element*);
-      void clear();
+      QRectF clear();
       Element* element() const;
       ChordRest* firstChordRest() const;
       ChordRest* lastChordRest() const;

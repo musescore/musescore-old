@@ -56,6 +56,17 @@ Tuplet::~Tuplet()
       }
 
 //---------------------------------------------------------
+//   setSelected
+//---------------------------------------------------------
+
+void Tuplet::setSelected(bool f)
+      {
+      Element::setSelected(f);
+      if (_number)
+            _number->setSelected(f);
+      }
+
+//---------------------------------------------------------
 //   remove
 //---------------------------------------------------------
 
@@ -78,13 +89,15 @@ void Tuplet::layout()
       if (_hasNumber) {
             if (_number == 0) {
                   _number = new Text(score());
-                  _number->setSubtype(TEXT_FINGERING);
+                  _number->setSubtype(TEXT_TUPLET);
                   _number->setParent(this);
                   _number->setText(QString("%1").arg(_actualNotes));
                   }
             }
       else {
             if (_number) {
+                  if (_number->selected())
+                        score()->deselect(_number);
                   delete _number;
                   _number = 0;
                   }
@@ -228,10 +241,26 @@ void Tuplet::layout()
                   bracketR[2] = QPointF(p2x, p2y + l2);
                   }
 
-            setbbox(bracketL.boundingRect() | bracketR.boundingRect() | _number->bbox().translated(_number->pos()));
             }
-      else
-            setbbox(_number->bbox().translated(_number->pos()));
+      }
+
+//---------------------------------------------------------
+//   bbox
+//---------------------------------------------------------
+
+QRectF Tuplet::bbox() const
+      {
+      QRectF r;
+      //
+      // _hasLine implies _hasNumber
+      //
+      if (_hasLine) {
+            r = bracketL.boundingRect() | bracketR.boundingRect();
+            r |= _number->bbox().translated(_number->pos());
+            }
+      else if (_hasNumber)
+            r |= _number->bbox().translated(_number->pos());
+      return r;
       }
 
 //---------------------------------------------------------
@@ -306,6 +335,7 @@ void Tuplet::read(QDomNode node)
                   _number = new Text(score());
                   _number->setParent(this);
                   _number->read(node);
+                  _number->setSubtype(TEXT_TUPLET);   // override read
                   }
             else if (Element::readProperties(node))
                   ;
@@ -314,6 +344,10 @@ void Tuplet::read(QDomNode node)
             }
       }
 
+//---------------------------------------------------------
+//   add
+//---------------------------------------------------------
+
 void Tuplet::add(Element* e)
       {
       if (e->type() != TEXT)
@@ -321,9 +355,38 @@ void Tuplet::add(Element* e)
       _number = (Text*)e;
       }
 
+//---------------------------------------------------------
+//   remove
+//---------------------------------------------------------
+
 void Tuplet::remove(Element* e)
       {
       if (e == _number)
             _number = 0;
+      }
+
+//---------------------------------------------------------
+//   genPropertyMenu
+//---------------------------------------------------------
+
+bool Tuplet::genPropertyMenu(QMenu* popup) const
+      {
+      QAction* a = popup->addAction(popup->tr("Show number"));
+      a->setData("number");
+      a->setCheckable(true);
+      a->setChecked(_hasNumber);
+      return true;
+      }
+
+//---------------------------------------------------------
+//   propertyAction
+//---------------------------------------------------------
+
+void Tuplet::propertyAction(const QString& s)
+      {
+      if (s == "number") {
+            _hasNumber = !_hasNumber;
+            }
+      layout();
       }
 

@@ -1007,3 +1007,100 @@ void Volta::read(QDomNode node)
             }
       }
 
+//---------------------------------------------------------
+//   readType
+//---------------------------------------------------------
+
+int Element::readType(QDomNode& node)
+      {
+      int type = 0;
+      for (; !node.isNull(); node = node.nextSibling()) {
+            QDomElement e = node.toElement();
+            if (e.isNull())
+                  continue;
+                  //
+                  // DEBUG:
+                  // check names; remove non needed elements
+                  //
+                  if (e.tagName() == "Dynamic")
+                        type = DYNAMIC;
+                  else if (e.tagName() == "Symbol")
+                        type = SYMBOL;
+                  else if (e.tagName() == "Text")
+                        type = TEXT;
+                  else if (e.tagName() == "Staff")
+                        type = STAFF;
+                  else if (e.tagName() == "Slur")
+                        type = SLUR_SEGMENT;
+                  else if (e.tagName() == "Note")
+                        type = NOTE;
+                  else if (e.tagName() == "BarLine")
+                        type = BAR_LINE;
+                  else if (e.tagName() == "Stem")
+                        type = STEM;
+                  else if (e.tagName() == "Bracket")
+                        type = BRACKET;
+                  else if (e.tagName() == "Accidental")
+                        type = ACCIDENTAL;
+                  else if (e.tagName() == "Clef")
+                        type = CLEF;
+                  else if (e.tagName() == "KeySig")
+                        type = KEYSIG;
+                  else if (e.tagName() == "TimeSig")
+                        type = TIMESIG;
+                  else if (e.tagName() == "Chord")
+                        type = CHORD;
+                  else if (e.tagName() == "Rest")
+                        type = REST;
+                  else if (e.tagName() == "Tie")
+                        type = TIE;
+                  else if (e.tagName() == "Slur")
+                        type = SLUR;
+                  else if (e.tagName() == "Measure")
+                        type = MEASURE;
+                  else if (e.tagName() == "Attribute")
+                        type = ATTRIBUTE;
+                  else if (e.tagName() == "Page")
+                        type = PAGE;
+                  else if (e.tagName() == "Beam")
+                        type = BEAM;
+                  else if (e.tagName() == "Hook")
+                        type = HOOK;
+                  else if (e.tagName() == "Lyric")
+                        type = LYRICS;
+                  else if (e.tagName() == "Instrument1")
+                        type = INSTRUMENT_NAME1;
+                  else if (e.tagName() == "Instrument2")
+                        type = INSTRUMENT_NAME2;
+                  else if (e.tagName() == "System")
+                        type = SYSTEM;
+                  else if (e.tagName() == "HairPin")
+                        type = HAIRPIN;
+                  else if (e.tagName() == "Tuplet")
+                        type = TUPLET;
+                  else if (e.tagName() == "VSpacer")
+                        type = VSPACER;
+                  else if (e.tagName() == "Segment")
+                        type = SEGMENT;
+                  else if (e.tagName() == "TempoText")
+                        type = TEMPO_TEXT;
+                  else if (e.tagName() == "Volta")
+                        type = VOLTA;
+                  else if (e.tagName() == "Ottava")
+                        type = OTTAVA;
+                  else if (e.tagName() == "Pedal")
+                        type = PEDAL;
+                  else if (e.tagName() == "Trill")
+                        type = TRILL;
+                  else if (e.tagName() == "LayoutBreak")
+                        type = LAYOUT_BREAK;
+                  else if (e.tagName() == "HelpLine")
+                        type = HELP_LINE;
+                  else
+                        domError(node);
+                  break;
+                  }
+      return type;
+      }
+
+

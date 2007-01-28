@@ -1133,6 +1133,41 @@ printf("cmd <%s>\n", cmd.toLatin1().data());
                   cmdAddStretch(0.1);
             else if (cmd == "stretch-")
                   cmdAddStretch(-0.1);
+            else if (cmd == "cut") {
+                  if (sel->state == SEL_SINGLE) {
+                        QMimeData* mimeData = new QMimeData;
+                        Element* el = sel->element();
+                        mimeData->setData("application/mscore/symbol", el->mimeData());
+                        QApplication::clipboard()->setMimeData(mimeData);
+                        deleteItem(el);
+                        }
+                  }
+            else if (cmd == "copy") {
+                  if (sel->state == SEL_SINGLE) {
+                        QMimeData* mimeData = new QMimeData;
+                        Element* el = sel->element();
+                        mimeData->setData("application/mscore/symbol", el->mimeData());
+                        QApplication::clipboard()->setMimeData(mimeData);
+                        }
+                  }
+            else if (cmd == "paste") {
+                  const QMimeData* ms = QApplication::clipboard()->mimeData();
+                  if (sel->state == SEL_SINGLE && ms && ms->hasFormat("application/mscore/symbol")) {
+                        QByteArray data(ms->data("application/mscore/symbol"));
+                        QDomDocument doc;
+                        int line, column;
+                        QString err;
+                        if (!doc.setContent(data, &err, &line, &column)) {
+                              printf("error reading paste data\n");
+                              return;
+                              }
+                        QDomNode node = doc.documentElement();
+                        int type      = Element::readType(node);
+                        addRefresh(sel->element()->abbox());   // layout() ?!
+                        sel->element()->drop(QPointF(), type, node);
+                        addRefresh(sel->element()->abbox());
+                        }
+                  }
             endCmd(true);
             }
       }

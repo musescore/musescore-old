@@ -213,6 +213,8 @@ class Element {
       virtual void space(double& min, double& extra) const;
       QColor color() const            { return _color; }
       void setColor(const QColor& c)  { _color = c;    }
+      static int readType(QDomNode& node);
+
       virtual QByteArray mimeData() const;
 /**
  Return true if this element accepts a drop at canvas relative \a pos
@@ -243,6 +245,12 @@ class Element {
  Reimplemented by elements with subtype names.
  */
       virtual void setSubtype(const QString& s) { setSubtype(s.toInt()); }
+
+/**
+ entend property menu by elemement specific items
+ */
+      virtual bool genPropertyMenu(QMenu*) const { return false; }
+      virtual void propertyAction(const QString&) {}
       };
 
 //---------------------------------------------------------
