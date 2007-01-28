@@ -111,24 +111,24 @@ QRectF Selection::deselectAll(Score* cs)
       QRectF r;
       if (state == SEL_STAFF || state == SEL_SYSTEM)
             cs->setUpdateAll();
-      for (iElement i = _el.begin(); i != _el.end(); ++i) {
-            r |= (*i)->abbox();
-            (*i)->setSelected(false);
-            }
-      clear();
-      return r;
+      return clear();
       }
 
 //---------------------------------------------------------
 //   clear
 //---------------------------------------------------------
 
-void Selection::clear()
+QRectF Selection::clear()
       {
-      for (ciElement i = _el.begin(); i != _el.end(); ++i)
+      QRectF r;
+      for (ciElement i = _el.begin(); i != _el.end(); ++i) {
+            r |= (*i)->abbox();
             (*i)->setSelected(false);
+            r |= (*i)->abbox();
+            }
       _el.clear();
       state = SEL_NONE;
+      return r;
       }
 
 //---------------------------------------------------------
@@ -179,11 +179,10 @@ void Score::deselect(Element* obj)
 
 void Score::select(Element* obj, int state, int staff)
       {
-//   printf("select element %s staff %d\n", obj ? obj->name() : "-0-", obj ? obj->staffIdx() : -1);
+// printf("select element <%s> staff %d\n", obj ? obj->name() : "", obj ? obj->staffIdx() : -1);
 
-      if (!(state & Qt::ShiftModifier) || !obj) {
+      if (!(state & Qt::ShiftModifier) || !obj)
             refresh |= sel->deselectAll(this);
-            }
       if (!obj) {
             sel->state   = SEL_NONE;
             padState.len = 0;
@@ -269,7 +268,6 @@ void Score::select(Element* obj, int state, int staff)
             padState.len = 0;
             return;
             }
-//      obj->setSelected(true);
       refresh |= obj->abbox();
       sel->add(obj);
       ::setPadState(obj);

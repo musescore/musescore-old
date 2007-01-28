@@ -51,11 +51,17 @@ class Tuplet : public Element {
       QPolygonF bracketL;
       QPolygonF bracketR;
 
+      virtual bool genPropertyMenu(QMenu* menu) const;
+      virtual void propertyAction(const QString&);
+      virtual void setSelected(bool f);
+
    public:
       Tuplet(Score*);
       ~Tuplet();
       virtual Tuplet* clone() const { return new Tuplet(*this); }
       virtual ElementType type() const { return TUPLET; }
+      virtual QRectF bbox() const;
+
       virtual void add(Element*);
       virtual void remove(Element*);
 

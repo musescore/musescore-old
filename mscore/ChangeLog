@@ -1,3 +1,6 @@
+28.1.7 (ws)
+      - implement global Cut/Copy/Paste
+      - implement Element drag (drag element with middle mouse key)
 27.1.7 (ws)
       - implemented some cut/copy/paste functionality
       - try to handle accidentals in addition to key signatures

@@ -84,6 +84,8 @@ static const TextStyle defaultTextStyles[] = {
          ALIGN_HCENTER | ALIGN_TOP,    ANCHOR_TICK, 0, 6, OFFSET_SPATIUM),
       TextStyle(QString("Dynamics1"), QString("MScore1"), 20, false, false, false,
          ALIGN_LEFT, ANCHOR_TICK, 0, 0, OFFSET_SPATIUM),
+      TextStyle(QString("Tuplets"), ff,  8, false, false, false,
+         ALIGN_HCENTER | ALIGN_VCENTER, ANCHOR_NOTE, 0, 0, OFFSET_SPATIUM),
       };
 
 //---------------------------------------------------------
