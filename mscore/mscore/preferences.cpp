@@ -876,7 +876,7 @@ QAction* getAction(const char* id)
       {
       Shortcut* s = shortcuts.value(id);
       if (s == 0) {
-            printf("interanl error: shortcut <%s> not found\n", id);
+            printf("internal error: shortcut <%s> not found\n", id);
             return 0;
             }
       if (s->action == 0) {

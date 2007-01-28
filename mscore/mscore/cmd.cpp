@@ -1143,10 +1143,10 @@ printf("cmd <%s>\n", cmd.toLatin1().data());
                         }
                   }
             else if (cmd == "copy") {
-                  if (sel->state == SEL_SINGLE) {
+                  const char* mimeType = sel->mimeType();
+                  if (mimeType) {
                         QMimeData* mimeData = new QMimeData;
-                        Element* el = sel->element();
-                        mimeData->setData("application/mscore/symbol", el->mimeData());
+                        mimeData->setData(mimeType, sel->mimeData());
                         QApplication::clipboard()->setMimeData(mimeData);
                         }
                   }
@@ -1167,6 +1167,14 @@ printf("cmd <%s>\n", cmd.toLatin1().data());
                         sel->element()->drop(QPointF(), type, node);
                         addRefresh(sel->element()->abbox());
                         }
+                  else if (sel->state == SEL_STAFF && ms && ms->hasFormat("application/mscore/staff")) {
+                        printf("paste staff\n");
+                        }
+                  else if (sel->state == SEL_SYSTEM && ms && ms->hasFormat("application/mscore/system")) {
+                        printf("paste system\n");
+                        }
+                  else
+                        printf("paste not supported: sel state %d\n", sel->state);
                   }
             endCmd(true);
             }

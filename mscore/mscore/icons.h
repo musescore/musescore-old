@@ -47,6 +47,7 @@ extern QIcon voiceIcons[];
 
 extern QIcon undoIcon, redoIcon, cutIcon, copyIcon, pasteIcon;
 extern QIcon printIcon, clefIcon;
+extern QIcon midiinIcon, speakerIcon, startIcon, stopIcon, playIcon;
 struct SymCode;
 
 static const int ICON_HEIGHT = 24;
