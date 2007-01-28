@@ -533,3 +533,51 @@ void Selection::updateState()
             state = SEL_MULT;
       }
 
+//---------------------------------------------------------
+//   mimeType
+//---------------------------------------------------------
+
+const char* Selection::mimeType() const
+      {
+      switch (state) {
+            default:
+            case SEL_NONE:
+                  return 0;
+            case SEL_SINGLE:
+                  return "application/mscore/symbol";
+            case SEL_MULT:
+                  return "application/mscore/symbols";
+            case SEL_STAFF:
+                  return "application/mscore/staff";
+            case SEL_SYSTEM:
+                  return "application/mscore/system";
+            }
+      }
+
+//---------------------------------------------------------
+//   mimeData
+//---------------------------------------------------------
+
+QByteArray Selection::mimeData() const
+      {
+      QByteArray a;
+      switch (state) {
+            case SEL_SINGLE:
+                  a = element()->mimeData();
+                  break;
+            default:
+            case SEL_NONE:
+                  break;
+            case SEL_MULT:
+                  break;
+            case SEL_STAFF:
+            case SEL_SYSTEM:
+                  // TODO
+                  printf("mime data staff %d-%d  tick %d-%d\n",
+                     staffStart, staffEnd, tickStart, tickEnd);
+                  a = "mops";
+                  break;
+            }
+      return a;
+      }
+

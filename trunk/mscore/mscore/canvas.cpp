@@ -154,7 +154,8 @@ void Canvas::objectPopup(const QPoint& pos, Element* obj)
       // show tuplet properties if number is clicked:
       if (obj->type() == TEXT && obj->subtype() == TEXT_TUPLET) {
             obj = obj->parent();
-            obj->score()->select(obj, 0, 0);
+            if (!obj->selected())
+                  obj->score()->select(obj, 0, 0);
             }
 
       QMenu* popup = new QMenu(this);
@@ -290,7 +291,9 @@ void Canvas::mousePressEvent(QMouseEvent* ev)
 
       if (b3) {
             if (element) {
-                  _score->select(element, 0, 0);
+                  if (!element->selected() && _score->sel->state != SEL_STAFF &&
+                     _score->sel->state != SEL_SYSTEM)
+                        _score->select(element, 0, 0);
                   seq->stopNotes(); // stop now because we dont get a mouseRelease event
                   objectPopup(ev->globalPos(), element);
                   }
@@ -383,14 +386,11 @@ void Canvas::mouseDoubleClickEvent(QMouseEvent* ev)
 void Canvas::mouseMoveEvent(QMouseEvent* ev)
       {
       if (buttonState == Qt::MidButton) {
-            if (_score->sel->state == SEL_SINGLE) {
+            const char* mimeType = _score->sel->mimeType();
+            if (mimeType) {
                   QDrag* drag = new QDrag(this);
                   QMimeData* mimeData = new QMimeData;
-                  Element* el = _score->sel->element();
-
-printf("drag %s %s\n", el->name(), el->subtypeName().toLatin1().data());
-
-                  mimeData->setData("application/mscore/symbol", el->mimeData());
+                  mimeData->setData(mimeType, _score->sel->mimeData());
                   drag->setMimeData(mimeData);
                   _score->endCmd(true);
                   drag->start(Qt::CopyAction);

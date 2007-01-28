@@ -32,6 +32,8 @@
 #include "data/editcopy.xpm"
 #include "data/editpaste.xpm"
 #include "data/fileprint.xpm"
+#include "data/midiin.xpm"
+#include "data/speaker.xpm"
 
 QIcon noteIcon;
 QIcon note2Icon;
@@ -58,6 +60,7 @@ QIcon voiceIcons[VOICES];
 
 QIcon undoIcon, redoIcon, cutIcon, copyIcon, pasteIcon;
 QIcon printIcon, clefIcon;
+QIcon midiinIcon, speakerIcon, startIcon, stopIcon, playIcon;
 
 //---------------------------------------------------------
 //   symPixmap
@@ -167,5 +170,11 @@ void genIcons()
       copyIcon.addPixmap(QPixmap(editcopy_xpm));
       pasteIcon.addPixmap(QPixmap(editpaste_xpm));
       printIcon.addPixmap(QPixmap(fileprint_xpm));
+
+      midiinIcon.addPixmap(QPixmap(midiin_xpm));
+      speakerIcon.addPixmap(QPixmap(speaker_xpm));
+      startIcon = QIcon(":/data/start.svg");
+      stopIcon  = QIcon(":/data/stop.svg");
+      playIcon  = QIcon(":/data/play.svg");
       }
 

@@ -43,8 +43,6 @@
 #include "data/fileopen.xpm"
 #include "data/filesave.xpm"
 #include "data/viewmag.xpm"
-#include "data/midiin.xpm"
-#include "data/speaker.xpm"
 
 #include "padids.h"
 #include "pad.h"
@@ -882,6 +880,51 @@ Shortcut MuseScore::sc[] = {
          QT_TR_NOOP("voice 4"),
          &voiceIcons[3]
          ),
+      Shortcut(
+         "midi-on",
+         QT_TR_NOOP("midi input in"),
+         0,
+         Qt::WindowShortcut,
+         QT_TR_NOOP("Enable Midi Input"),
+         QT_TR_NOOP("Enable Midi Input"),
+         &midiinIcon
+         ),
+      Shortcut(
+         "sound-on",
+         QT_TR_NOOP("editing sound on"),
+         0,
+         Qt::WindowShortcut,
+         QT_TR_NOOP("Enable sound while editing"),
+         QT_TR_NOOP("Enable sound while editing"),
+         &speakerIcon
+         ),
+      Shortcut(
+         "rewind",
+         QT_TR_NOOP("player rewind"),
+         0,
+         Qt::WindowShortcut,
+         QT_TR_NOOP("Rewind"),
+         QT_TR_NOOP("Rewind"),
+         &startIcon
+         ),
+      Shortcut(
+         "stop",
+         QT_TR_NOOP("player stop"),
+         0,
+         Qt::WindowShortcut,
+         QT_TR_NOOP("Stop"),
+         QT_TR_NOOP("Stop"),
+         &stopIcon
+         ),
+      Shortcut(
+         "play",
+         QT_TR_NOOP("plaser play"),
+         0,
+         Qt::WindowShortcut,
+         QT_TR_NOOP("Play"),
+         QT_TR_NOOP("Play"),
+         &playIcon
+         ),
       Shortcut(0, 0, 0),
       };
 
@@ -969,7 +1012,7 @@ void MuseScore::preferencesChanged()
       transportAction->setEnabled(seq->isRunning());
       transportId->setChecked(seq->isRunning());
       transportTools->setShown(seq->isRunning());
-      midiinAction->setEnabled(preferences.enableMidiInput);
+      getAction("midi-on")->setEnabled(preferences.enableMidiInput);
       }
 
 //---------------------------------------------------------
@@ -1060,11 +1103,6 @@ MuseScore::MuseScore()
       QPixmap openIcon(fileopen_xpm);
       QIcon exitIcon(":/data/exit.svg");
       QPixmap viewmagIcon(viewmag_xpm);
-      QPixmap midiinIcon(midiin_xpm);
-      QPixmap speakerIcon(speaker_xpm);
-      QIcon startIcon(":/data/start.svg");
-      QIcon stopIcon(":/data/stop.svg");
-      QIcon playIcon(":/data/play.svg");
 
       QAction* whatsThis = QWhatsThis::createAction(this);
 
@@ -1072,39 +1110,38 @@ MuseScore::MuseScore()
       //    Transport Action
       //---------------------------------------------------
 
-      midiinAction = new QAction(QIcon(midiinIcon), tr("Enable Midi Input"), this);
-      midiinAction->setCheckable(true);
-      midiinAction->setEnabled(preferences.enableMidiInput);
-      midiinAction->setChecked(_midiinEnabled);
-      connect(midiinAction, SIGNAL(triggered(bool)), SLOT(midiinToggled(bool)));
+      a  = getAction("midi-on");
+      a->setCheckable(true);
+      a->setEnabled(preferences.enableMidiInput);
+      a->setChecked(_midiinEnabled);
+      connect(a, SIGNAL(triggered(bool)), SLOT(midiinToggled(bool)));
 
-      speakerAction = new QAction(QIcon(speakerIcon), tr("Enable Sound while editing"), this);
-      speakerAction->setCheckable(true);
-      speakerAction->setEnabled(preferences.playNotes);
-      speakerAction->setChecked(_speakerEnabled);
-      connect(speakerAction, SIGNAL(triggered(bool)), SLOT(speakerToggled(bool)));
+      a = getAction("sound-on");
+      a->setCheckable(true);
+      a->setEnabled(preferences.playNotes);
+      a->setChecked(_speakerEnabled);
+      connect(a, SIGNAL(triggered(bool)), SLOT(speakerToggled(bool)));
 
       transportAction = new QActionGroup(this);
       transportAction->setExclusive(true);
 
-      QAction* startAction = new QAction(QIcon(startIcon), tr("Rewind"), transportAction);
-      startAction->setWhatsThis(tr(infoStartButton));
-      connect(startAction, SIGNAL(triggered()), seq, SLOT(rewindStart()));
+      a = getAction("rewind");
+      a->setWhatsThis(tr(infoStartButton));
+      transportAction->addAction(a);
+      connect(a, SIGNAL(triggered()), seq, SLOT(rewindStart()));
 
-      stopAction = new QAction(QIcon(stopIcon), tr("Stop"), transportAction);
-      stopAction->setCheckable(true);
-      stopAction->setChecked(true);
-      stopAction->setWhatsThis(tr(infoStopButton));
-      connect(stopAction, SIGNAL(toggled(bool)), this, SLOT(setStop(bool)));
+      a = getAction("stop");
+      a->setCheckable(true);
+      a->setChecked(true);
+      a->setWhatsThis(tr(infoStopButton));
+      transportAction->addAction(a);
+      connect(a, SIGNAL(toggled(bool)), this, SLOT(setStop(bool)));
 
-      playAction = new QAction(QIcon(playIcon), tr("Play"), transportAction);
-      playAction->setCheckable(true);
-      playAction->setWhatsThis(tr(infoPlayButton));
-      connect(playAction, SIGNAL(toggled(bool)), this, SLOT(setPlay(bool)));
-
-      transportAction->addAction(startAction);
-      transportAction->addAction(stopAction);
-      transportAction->addAction(playAction);
+      a = getAction("play");
+      a->setCheckable(true);
+      a->setWhatsThis(tr(infoPlayButton));
+      transportAction->addAction(a);
+      connect(a, SIGNAL(toggled(bool)), this, SLOT(setPlay(bool)));
 
       //---------------------------------------------------
       //    File Action
@@ -1139,12 +1176,12 @@ MuseScore::MuseScore()
       fileTools->addSeparator();
 
       transportTools = addToolBar(tr("Transport Tools"));
-      transportTools->addAction(speakerAction);
-      transportTools->addAction(midiinAction);
+      transportTools->addAction(getAction("sound-on"));
+      transportTools->addAction(getAction("midi-on"));
       transportTools->addSeparator();
-      transportTools->addAction(startAction);
-      transportTools->addAction(stopAction);
-      transportTools->addAction(playAction);
+      transportTools->addAction(getAction("rewind"));
+      transportTools->addAction(getAction("stop"));
+      transportTools->addAction(getAction("play"));
 
       QAction* magAction = new QAction(QIcon(viewmagIcon), tr("Mag"), fileTools);
       magAction->setWhatsThis(tr("Zoom Canvas"));
@@ -2506,7 +2543,11 @@ void MuseScore::clipboardChanged()
       const QMimeData* ms = QApplication::clipboard()->mimeData();
       if (ms == 0)
             return;
-      bool flag = ms->hasFormat("application/mscore/symbol");
+      bool flag = ms->hasFormat("application/mscore/symbol")
+            ||    ms->hasFormat("application/mscore/staff")
+            ||    ms->hasFormat("application/mscore/system")
+            ||    ms->hasFormat("application/mscore/symbols");
+      // TODO: depends on selection state
       getAction("paste")->setEnabled(flag);
       }
 

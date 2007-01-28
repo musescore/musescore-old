@@ -165,8 +165,6 @@ class MuseScore : public QMainWindow {
       QWidget* accidentalsPalette;
       QWidget* dynamicsPalette;
       QWidget* layoutBreakPalette;
-      QAction* midiinAction;
-      QAction* speakerAction;
 
       Pad* pad;
       std::vector<Score*> scoreList;
