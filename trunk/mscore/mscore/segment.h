@@ -26,7 +26,6 @@
 #ifndef __SEGMENT_H__
 #define __SEGMENT_H__
 
-#include "plist.h"
 #include "element.h"
 #include "spatium.h"
 
@@ -35,7 +34,7 @@ class Segment;
 class Lyrics;
 class Painter;
 
-typedef std::vector<Lyrics*> LyricsList;
+typedef QList<Lyrics*> LyricsList;
 typedef LyricsList::iterator iLyrics;
 typedef LyricsList::const_iterator ciLyrics;
 
@@ -63,8 +62,8 @@ class Segment : public Element {
 
    private:
       SegmentType _type;
-      std::vector<Element*> _elist;      ///< Element storage, size = staves * VOICES.
-      std::vector<LyricsList> _lyrics;   ///< Lyrics storage, size = staves.
+      QList<Element*> _elist;      ///< Element storage, size = staves * VOICES.
+      QList<LyricsList> _lyrics;   ///< Lyrics storage, size = staves.
 
       void init();
 
@@ -90,7 +89,7 @@ class Segment : public Element {
       double x() const               { return _pos.x();           }
       void setX(double v)            { _pos.setX(v);              }
 
-      std::vector<Element*>* elist() { return &_elist; }
+      QList<Element*>* elist()       { return &_elist; }
 
       SegmentType segmentType() const     { return _type; }
       void setSegmentType(SegmentType t)  { _type = t;    }
@@ -102,7 +101,7 @@ class Segment : public Element {
       virtual void remove(Element*);
 
       virtual void draw(Painter& p);
-      void sortStaves(std::list<int>& src, std::list<int>& dst);
+      void sortStaves(QList<int>& src, QList<int>& dst);
       const char* name() const { return segmentTypeNames[_type]; }
       };
 

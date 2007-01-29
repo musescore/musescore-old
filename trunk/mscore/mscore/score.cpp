@@ -220,7 +220,7 @@ Score::Score()
       tempomap          = new TempoList;
       sigmap            = new SigList;
       keymap            = new KeyList;
-      sel               = new Selection;
+      sel               = new Selection(this);
       _staves           = new StaffList;
       _parts            = new PartList;
       _dirty            = false;
@@ -281,7 +281,7 @@ void Score::clearViewer()
 
 void Score::moveCursor()
       {
-      for (std::list<Viewer*>::iterator i = viewer.begin(); i != viewer.end(); ++i)
+      for (QList<Viewer*>::iterator i = viewer.begin(); i != viewer.end(); ++i)
             refresh |= (*i)->moveCursor();
       }
 

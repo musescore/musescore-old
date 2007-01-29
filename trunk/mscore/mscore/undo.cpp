@@ -68,6 +68,8 @@ static const char* undoName[] = {
       "ChangeTimeSig",
       };
 
+static bool UNDO = false;
+
 //---------------------------------------------------------
 //   name
 //---------------------------------------------------------
@@ -85,10 +87,10 @@ const char* UndoOp::name() const
 //   Undo
 //---------------------------------------------------------
 
-Undo::Undo(const InputState& is, const Selection& s)
+Undo::Undo(const InputState& is, const Selection* s)
+   : selection(*s)
       {
       inputState = is;
-      selection  = s;
       }
 
 //---------------------------------------------------------
@@ -107,7 +109,7 @@ void Score::startUndo()
             fprintf(stderr, "startUndo: already active\n");
             abort();
             }
-      undoList.push_back(new Undo(*cis, *sel));
+      undoList.push_back(new Undo(*cis, sel));
       undoActive = true;
       }
 
@@ -158,9 +160,12 @@ void Score::doUndo()
       InputState oIs(*cis);
       sel->deselectAll(this);
       Undo* u = undoList.back();
-      for (riUndoOp i = u->rbegin(); i != u->rend(); ++i) {
-            processUndoOp(&*i, true);
-            if (i->type == UndoOp::ChangeAccidental) {
+      QMutableListIterator<UndoOp> i(*u);
+      i.toBack();
+      while (i.hasPrevious()) {
+            UndoOp* op = &i.previous();
+            processUndoOp(op, true);
+            if (op->type == UndoOp::ChangeAccidental) {
                   // HACK:
                   // selection is not valid anymore because changeAccidental()
                   // changes the selected Accidental element
@@ -189,9 +194,11 @@ void Score::doRedo()
       InputState oIs(*cis);
       sel->deselectAll(this);
       Undo* u = redoList.back();
-      for (iUndoOp i = u->begin(); i != u->end(); ++i) {
-            processUndoOp(&*i, false);
-            if (i->type == UndoOp::ChangeAccidental) {
+      QMutableListIterator<UndoOp> i(*u);
+      while (i.hasNext()) {
+            UndoOp* op = &i.next();
+            processUndoOp(op, false);
+            if (op->type == UndoOp::ChangeAccidental) {
                   // HACK:
                   // selection is not valid anymore because changeAccidental()
                   // changes the selected Accidental element
@@ -200,6 +207,7 @@ void Score::doRedo()
             }
       undoList.push_back(u); // put item on undo list
       redoList.pop_back();
+printf("endUndoRedo\n");
       endUndoRedo(u);
       u->inputState = oIs;
       u->selection  = oSel;
@@ -215,7 +223,8 @@ void Score::doRedo()
 
 void Score::processUndoOp(UndoOp* i, bool undo)
       {
-//      printf("Score::processUndoOp(i->type=%s, undo=%d)\n", i->name(), undo);
+      UNDO = true;
+// printf("Score::processUndoOp(i->type=%s, undo=%d)\n", i->name(), undo);
       switch(i->type) {
             case UndoOp::RemoveElement:
                   if (undo)
@@ -351,6 +360,7 @@ void Score::processUndoOp(UndoOp* i, bool undo)
                   printf("UndoOp::ChangeTimeSig: todo\n");
                   break;
             }
+      UNDO = FALSE;
       }
 
 //---------------------------------------------------------
@@ -387,6 +397,10 @@ void Score::checkUndoOp()
       {
       if (!undoActive) {
             fprintf(stderr, "undoOp: undo not started\n");
+            abort();
+            }
+      if (UNDO) {
+            fprintf(stderr, "create undo op in undo/redo operation\n");
             abort();
             }
       }
@@ -494,7 +508,7 @@ void Score::undoOp(UndoOp::UndoType type, Measure* m)
       undoList.back()->push_back(i);
       }
 
-void Score::undoOp(std::list<int> si, std::list<int> di)
+void Score::undoOp(QList<int> si, QList<int> di)
       {
       checkUndoOp();
       UndoOp i;

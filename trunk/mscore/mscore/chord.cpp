@@ -204,11 +204,11 @@ void Chord::remove(Element* e)
                   printf("Chord::remove() note %p not found!\n", e);
             }
       else if (e->type() == ATTRIBUTE) {
-            iAttribute l = attributes.find((NoteAttribute*)e);
-            if (l == attributes.end())
+            int idx = attributes.indexOf((NoteAttribute*)e);
+            if (idx == -1)
                   printf("Chord::remove(): attribute not found\n");
             else {
-                  attributes.erase(l);
+                  attributes.removeAt(idx);
                   }
             }
       }

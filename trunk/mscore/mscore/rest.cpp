@@ -227,11 +227,11 @@ void Rest::remove(Element* e)
       {
       if (e->type() != ATTRIBUTE)
             return;
-      iAttribute l = attributes.find((NoteAttribute*)e);
-      if (l == attributes.end())
+      int idx = attributes.indexOf((NoteAttribute*)e);
+      if (idx == -1)
             printf("Rest::remove(): attribute not found\n");
       else
-            attributes.erase(l);
+            attributes.removeAt(idx);
       }
 
 //---------------------------------------------------------

@@ -43,8 +43,6 @@ TempoList::TempoList()
 void TempoList::add(int tick, int tempo)
       {
       iTEvent e = upper_bound(tick);
-      assert(e != end());     // happens if tick > MAX_TICK
-
       if (tick == e->second->tick)
             e->second->tempo = tempo;
       else {
@@ -154,7 +152,6 @@ void TempoList::del(iTEvent e)
 void TempoList::change(int tick, int newTempo)
       {
       iTEvent e = find(tick);
-      assert(e != end());
       e->second->tempo = newTempo;
       normalize();
       ++_tempoSN;

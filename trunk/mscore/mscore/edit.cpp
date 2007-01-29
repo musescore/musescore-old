@@ -1298,7 +1298,6 @@ void Score::colorItem(Element* element)
             return;
 
       ElementList* el = sel->elements();
-      ElementList dl;
       for (iElement ie = el->begin(); ie != el->end(); ++ie) {
             Element* e = *ie;
             if (e->color() != c) {
@@ -1309,7 +1308,6 @@ void Score::colorItem(Element* element)
                   }
             }
       sel->deselectAll(this);
-      sel->add(dl);
       }
 
 //---------------------------------------------------------

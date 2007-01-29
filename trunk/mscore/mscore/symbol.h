@@ -48,7 +48,7 @@ class Symbol : public Element {
       virtual QRectF bbox() const;
       };
 
-typedef pstl::plist<Symbol*> SymbolList;
+typedef QList<Symbol*> SymbolList;
 typedef SymbolList::iterator iSymbol;
 typedef SymbolList::const_iterator ciSymbol;
 

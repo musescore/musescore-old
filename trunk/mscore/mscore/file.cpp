@@ -590,7 +590,7 @@ void MuseScore::saveStyle()
 bool SaveStyle::saver()
       {
       Xml xml(&f);
-      xml.header("museScore");
+      xml.header();
       xml.stag("museScore version=\"1.0\"");
 
       ::saveStyle(xml);
@@ -607,7 +607,7 @@ bool SaveStyle::saver()
 bool MuseScore::saveFile(QFile* f)
       {
       Xml xml(f);
-      xml.header("museScore");
+      xml.header();
       xml.stag("museScore version=\"1.0\"");
 
       xml.tag("Geometry", mscore);

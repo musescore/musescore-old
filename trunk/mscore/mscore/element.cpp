@@ -546,7 +546,7 @@ Compound::Compound(Score* s)
 
 void Compound::draw1(Painter& p)
       {
-      for (ciSymbol i = elemente.begin(); i != elemente.end(); ++i)
+      for (ciElement i = elemente.begin(); i != elemente.end(); ++i)
             (*i)->draw(p);
 #if 0
       if (debugMode && selected()) {
@@ -583,7 +583,7 @@ void Compound::addElement(Element* e, double x, double y)
 QRectF Compound::bbox() const
       {
       _bbox = QRectF(0,0,0,0);
-      for (ciSymbol i = elemente.begin(); i != elemente.end(); ++i) {
+      for (ciElement i = elemente.begin(); i != elemente.end(); ++i) {
             const Element* e = *i;
             _bbox |= e->bbox().translated(e->pos());
             }
@@ -597,7 +597,7 @@ QRectF Compound::bbox() const
 void Compound::setSelected(bool f)
       {
       Element::setSelected(f);
-      for (ciSymbol i = elemente.begin(); i != elemente.end(); ++i)
+      for (ciElement i = elemente.begin(); i != elemente.end(); ++i)
             (*i)->setSelected(f);
       }
 
@@ -608,7 +608,7 @@ void Compound::setSelected(bool f)
 void Compound::setVisible(bool f)
       {
       Element::setVisible(f);
-      for (ciSymbol i = elemente.begin(); i != elemente.end(); ++i)
+      for (ciElement i = elemente.begin(); i != elemente.end(); ++i)
             (*i)->setVisible(f);
       }
 
@@ -618,7 +618,7 @@ void Compound::setVisible(bool f)
 
 void Compound::clear()
       {
-      for (ciSymbol i = elemente.begin(); i != elemente.end(); ++i)
+      for (ciElement i = elemente.begin(); i != elemente.end(); ++i)
             delete *i;
       elemente.clear();
       }

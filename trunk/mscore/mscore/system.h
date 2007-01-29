@@ -69,7 +69,7 @@ class SysStaff {
       ~SysStaff();
       };
 
-typedef std::vector<SysStaff*> SysStaffList;
+typedef QList<SysStaff*> SysStaffList;
 typedef SysStaffList::iterator iSysStaff;
 typedef SysStaffList::const_iterator ciSysStaff;
 
@@ -141,12 +141,10 @@ class System : public Element {
 //   SystemList
 //---------------------------------------------------------
 
-typedef pstl::plist<System*>::iterator iSystem;
-typedef pstl::plist<System*>::const_iterator ciSystem;
-typedef pstl::plist<System*>::const_reverse_iterator rciSystem;
-typedef pstl::plist<System*>::reverse_iterator riSystem;
+typedef QList<System*>::iterator iSystem;
+typedef QList<System*>::const_iterator ciSystem;
 
-class SystemList : public pstl::plist<System*> {
+class SystemList : public QList<System*> {
    public:
       SystemList() {}
       };

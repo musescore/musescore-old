@@ -101,7 +101,7 @@ class Score : public QObject {
       bool updateAll;
       Qt::KeyboardModifiers keyState;
 
-      std::list<Viewer*> viewer;
+      QList<Viewer*> viewer;
 
       ScoreView scoreView;
       ScoreLayout* _layout;      ///< Main layout.
@@ -255,7 +255,7 @@ class Score : public QObject {
 
       void startUndo();
       void endUndo();
-      void undoOp(std::list<int> si, std::list<int> di);
+      void undoOp(QList<int> si, QList<int> di);
       void undoOp(UndoOp::UndoType type, Measure* m);
       void undoOp(UndoOp::UndoType type, Measure* m, MStaff s, int staff);
       void undoOp(UndoOp::UndoType type, Staff* staff, int idx);
@@ -361,7 +361,7 @@ class Score : public QObject {
       void midiNoteReceived(int pitch, bool);
       PartList* parts()             { return _parts; }
       void updateStaffIndex();
-      void sortStaves(std::list<int> src, std::list<int> dst);
+      void sortStaves(QList<int> src, QList<int> dst);
       void read(QString name);
 
       void setSpatium(double v);

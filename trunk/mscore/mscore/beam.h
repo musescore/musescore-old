@@ -21,7 +21,6 @@
 #ifndef __BEAM_H__
 #define __BEAM_H__
 
-#include "plist.h"
 #include "chordlist.h"
 #include "element.h"
 
@@ -43,7 +42,7 @@ struct BeamSegment {
             }
       };
 
-typedef pstl::plist<BeamSegment*> BeamSegmentList;
+typedef QList<BeamSegment*> BeamSegmentList;
 typedef BeamSegmentList::iterator iBeamSegment;
 typedef BeamSegmentList::const_iterator ciBeamSegment;
 
