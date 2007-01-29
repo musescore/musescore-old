@@ -21,7 +21,6 @@
 #ifndef __TUPLET_H__
 #define __TUPLET_H__
 
-#include "plist.h"
 #include "chordlist.h"
 #include "element.h"
 

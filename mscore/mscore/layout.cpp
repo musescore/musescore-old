@@ -252,8 +252,8 @@ void ScoreLayout::processSystemHeader(Measure* m)
 void ScoreLayout::clearGenerated(Measure* m)
       {
       for (Segment* seg = m->first(); seg; seg = seg->next()) {
-            std::vector<Element*>* el = seg->elist();
-            for (std::vector<Element*>::iterator i = el->begin(); i != el->end(); ++i) {
+            QList<Element*>* el = seg->elist();
+            for (QList<Element*>::iterator i = el->begin(); i != el->end(); ++i) {
                   Element* el = *i;
                   if (el && el->generated())
                         *i = 0;
@@ -270,8 +270,8 @@ void ScoreLayout::addGenerated(Measure*)
 /*      for (Segment* seg = m->first(); seg; seg = seg->next()) {
             int tick = seg->tick();
 
-            std::vector<Element*>* el = seg->elist();
-            for (std::vector<Element*>::iterator i = el->begin(); i != el->end(); ++i) {
+            QList<Element*>* el = seg->elist();
+            for (QList<Element*>::iterator i = el->begin(); i != el->end(); ++i) {
                   Element* el = *i;
                   if (el && el->generated())
                         *i = 0;
@@ -416,7 +416,7 @@ System* ScoreLayout::layoutSystem(Measure*& im, iSystem& is, qreal x, qreal y, q
       int nm              = 0;
       double systemWidth  = w - systemOffset;
       double minWidth     = 0;
-      std::vector<double> mwList;
+      QList<double> mwList;
       double uStretch = 0.0;
 
       bool pageBreak = false;

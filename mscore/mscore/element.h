@@ -26,7 +26,6 @@
  Definition of classes Element, ElementList, SStaff.
 */
 
-#include "plist.h"
 #include "spatium.h"
 #include "mtime.h"
 
@@ -257,7 +256,7 @@ class Element {
 //   ElementList
 //---------------------------------------------------------
 
-class ElementList : public pstl::plist<Element*> {
+class ElementList : public QList<Element*> {
    public:
       ElementList() {}
       bool remove(Element*);
@@ -273,7 +272,6 @@ class ElementList : public pstl::plist<Element*> {
 
 typedef ElementList::iterator iElement;
 typedef ElementList::const_iterator ciElement;
-typedef ElementList::reverse_iterator riElement;
 
 //---------------------------------------------------------
 //   SStaff

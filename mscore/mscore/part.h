@@ -21,8 +21,6 @@
 #ifndef __PART_H__
 #define __PART_H__
 
-#include "plist.h"
-
 class Instrument;
 class Xml;
 class StaffList;
@@ -100,10 +98,9 @@ class Part {
       Instrument* instrument() { return &_instrument; }
       };
 
-class PartList : public pstl::plist<Part*> {
+class PartList : public QList<Part*> {
       };
 typedef PartList::iterator iPart;
-typedef PartList::reverse_iterator riPart;
 typedef PartList::const_iterator ciPart;
 #endif
 

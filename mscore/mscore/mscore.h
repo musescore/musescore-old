@@ -167,7 +167,7 @@ class MuseScore : public QMainWindow {
       QWidget* layoutBreakPalette;
 
       Pad* pad;
-      std::vector<Score*> scoreList;
+      QList<Score*> scoreList;
       bool _midiinEnabled;
       bool _speakerEnabled;
 

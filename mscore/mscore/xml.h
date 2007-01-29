@@ -37,7 +37,7 @@ class Xml : public QTextStream {
       Xml(QIODevice*);
       Xml();
 
-      void header(const QString& type);
+      void header();
 
       void stag(const QString&);
       void etag(const char* s);

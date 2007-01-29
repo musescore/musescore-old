@@ -86,7 +86,7 @@ class Staff {
  List of staves.
 */
 
-class StaffList : public std::vector<Staff*> {
+class StaffList : public QList<Staff*> {
    public:
       void remove(Staff*);
       int idx(const Staff* p) const;
@@ -94,6 +94,5 @@ class StaffList : public std::vector<Staff*> {
 
 typedef StaffList::iterator iStaff;
 typedef StaffList::const_iterator ciStaff;
-typedef StaffList::reverse_iterator riStaff;
 #endif
 

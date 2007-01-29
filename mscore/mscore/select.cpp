@@ -42,6 +42,7 @@
 #include "layout.h"
 #include "page.h"
 #include "barline.h"
+#include "xml.h"
 
 //---------------------------------------------------------
 //   element
@@ -140,7 +141,7 @@ void Selection::remove(Element* el)
       _el.remove(el);
       updateState();
       }
-
+#if 0
 //---------------------------------------------------------
 //   splice
 //---------------------------------------------------------
@@ -150,7 +151,7 @@ void Selection::add(ElementList& ns)
       _el.splice(_el.begin(), ns);
       update();
       }
-
+#endif
 //---------------------------------------------------------
 //   add
 //---------------------------------------------------------
@@ -374,7 +375,7 @@ QRegion Canvas::lassoSelect()
                                                             if (note->accidental() && lr.contains(note->accidental()->abbox()))
                                                                   _score->select(note->accidental(), Qt::ShiftModifier, 0);
                                                             }
-                                                      pstl::plist<NoteAttribute*>* al = chord->getAttributes();
+                                                      QList<NoteAttribute*>* al = chord->getAttributes();
                                                       for (ciAttribute ia = al->begin(); ia != al->end(); ++ia) {
                                                             if (lr.contains((*ia)->abbox()))
                                                                   _score->select(*ia, Qt::ShiftModifier, 0);
@@ -383,7 +384,7 @@ QRegion Canvas::lassoSelect()
                                                 else if (e->type() == REST) {
                                                       if (lr.contains(e->abbox()))
                                                             _score->select(e, Qt::ShiftModifier, 0);
-                                                      pstl::plist<NoteAttribute*>* al = ((Rest*)e)->getAttributes();
+                                                      QList<NoteAttribute*>* al = ((Rest*)e)->getAttributes();
                                                       for (ciAttribute ia = al->begin(); ia != al->end(); ++ia) {
                                                             if (lr.contains((*ia)->abbox()))
                                                                   _score->select(*ia, Qt::ShiftModifier, 0);
@@ -442,7 +443,7 @@ void Score::searchSelectedElements()
                                                 el->push_back(f);
                                           }
                                     }
-                                pstl::plist<NoteAttribute*>* al = chord->getAttributes();
+                                QList<NoteAttribute*>* al = chord->getAttributes();
                                 for (ciAttribute i = al->begin(); i != al->end(); ++i) {
                                     NoteAttribute* a = *i;
                                 if (a->selected())
@@ -451,7 +452,7 @@ void Score::searchSelectedElements()
                               }
                         else if (e->type() == REST) {
                               Rest* rest = (Rest*)e;
-                                pstl::plist<NoteAttribute*>* al = rest->getAttributes();
+                                QList<NoteAttribute*>* al = rest->getAttributes();
                                 for (ciAttribute i = al->begin(); i != al->end(); ++i) {
                                       NoteAttribute* a = *i;
                                 if (a->selected())
@@ -571,13 +572,39 @@ QByteArray Selection::mimeData() const
             case SEL_MULT:
                   break;
             case SEL_STAFF:
+                  a = staffMimeData();
+                  break;
             case SEL_SYSTEM:
-                  // TODO
-                  printf("mime data staff %d-%d  tick %d-%d\n",
-                     staffStart, staffEnd, tickStart, tickEnd);
-                  a = "mops";
+                  a = staffMimeData();
                   break;
             }
       return a;
       }
 
+//---------------------------------------------------------
+//   staffMimeData
+//---------------------------------------------------------
+
+QByteArray Selection::staffMimeData() const
+      {
+      QBuffer buffer;
+      buffer.open(QIODevice::WriteOnly);
+      Xml xml(&buffer);
+      xml.header();
+
+      for (int staffIdx = staffStart; staffIdx < staffEnd; ++staffIdx) {
+            xml.stag(QString("Staff id=\"%1\"").arg(staffIdx));
+            for (Measure* m = _score->scoreLayout()->first(); m; m = m->next()) {
+                  int ms = m->tick();
+                  int me = ms + m->tickLen();
+                  if (me < tickStart)
+                        continue;
+                  if (ms >= tickEnd)
+                        break;
+                  m->write(xml, 0, staffIdx);
+                  }
+            xml.etag("Staff");
+            }
+      buffer.close();
+      return buffer.buffer();
+      }

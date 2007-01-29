@@ -97,7 +97,6 @@ struct MidiEvent {
 
 typedef std::multimap<int, MidiEvent*, std::less<int> > EventList;
 typedef EventList::iterator iEvent;
-typedef EventList::reverse_iterator riEvent;
 typedef EventList::const_iterator ciEvent;
 typedef std::pair <iEvent, iEvent> EventRange;
 

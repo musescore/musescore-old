@@ -57,7 +57,6 @@ struct Event {
 
 typedef std::multimap<int, Event, std::less<int> > EList;
 typedef EList::iterator iEvent;
-typedef EList::reverse_iterator riEvent;
 typedef EList::const_iterator ciEvent;
 typedef std::pair <iEvent, iEvent> EventRange;
 

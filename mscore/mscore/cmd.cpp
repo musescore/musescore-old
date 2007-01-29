@@ -106,7 +106,7 @@ void Score::cmdRemove(Element* e)
 
 void Score::update(const QRectF& r)
       {
-      for (std::list<Viewer*>::iterator i = viewer.begin(); i != viewer.end(); ++i)
+      for (QList<Viewer*>::iterator i = viewer.begin(); i != viewer.end(); ++i)
             (*i)->dataChanged(this, r);
       }
 
@@ -120,7 +120,7 @@ void Score::update(const QRectF& r)
 void Score::end()
       {
       if (updateAll) {
-            for (std::list<Viewer*>::iterator i = viewer.begin(); i != viewer.end(); ++i) {
+            for (QList<Viewer*>::iterator i = viewer.begin(); i != viewer.end(); ++i) {
                   (*i)->updateAll(this);
                   }
             updateAll = false;

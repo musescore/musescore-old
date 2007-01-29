@@ -32,7 +32,7 @@ static int ticks_beat(int n)
       int m = (division * 4) / n;
       if ((division * 4) % n) {
             fprintf(stderr, "Mscore: ticks_beat(): bad divisor %d\n", n);
-            assert(false);
+            abort();
             }
       return m;
       }
@@ -46,7 +46,7 @@ int ticks_measure(int z, int n)
       int m = (division * 4 * z) / n;
       if ((division * 4 * z) % n) {
             fprintf(stderr, "Mscore: ticks_measure(): bad divisor %d\n", n);
-            assert(false);
+            abort();
             }
       return m;
       }

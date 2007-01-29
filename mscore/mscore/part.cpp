@@ -272,7 +272,7 @@ void Instrument::read(QDomNode node)
 
 void Part::insertStaff(Staff* staff)
       {
-      unsigned idx = staff->rstaff();
+      int idx = staff->rstaff();
       if (idx > _staves->size())
             idx = _staves->size();
       _staves->insert(_staves->begin() + idx, staff);

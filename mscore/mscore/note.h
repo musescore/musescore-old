@@ -27,7 +27,6 @@
 */
 
 #include "globals.h"
-#include "plist.h"
 #include "element.h"
 #include "accidental.h"
 

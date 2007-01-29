@@ -46,9 +46,13 @@ class ChordRest;
 //---------------------------------------------------------
 
 class Selection {
+      Score* _score;
       ElementList _el;        // valid when SEL_SINGLE or SEL_MULT
 
+      QByteArray staffMimeData() const;
+
    public:
+      Selection(Score* s)     { _score = s; }
       SelState state;
       int tickStart;          // selection start time tick
       int tickEnd;            // selection end time tick
@@ -57,7 +61,7 @@ class Selection {
 
       ElementList* elements() { return &_el; }
       void add(Element*);
-      void add(ElementList& ns);
+//      void add(ElementList& ns);
       QRectF deselectAll(Score*);
       void remove(Element*);
       QRectF clear();

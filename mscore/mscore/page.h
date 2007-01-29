@@ -122,7 +122,7 @@ class Page : public Element {
 //   PageList
 //---------------------------------------------------------
 
-class PageList : public pstl::plist<Page*> {
+class PageList : public QList<Page*> {
    public:
       PageList() {}
       void update();
@@ -130,8 +130,6 @@ class PageList : public pstl::plist<Page*> {
 
 typedef PageList::iterator iPage;
 typedef PageList::const_iterator ciPage;
-typedef PageList::reverse_iterator riPage;
-typedef PageList::const_reverse_iterator criPage;
 
 extern const PaperSize paperSizes[];
 extern int paperSizeNameToIndex(const QString&);

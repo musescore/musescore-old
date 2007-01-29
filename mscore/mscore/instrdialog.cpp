@@ -272,6 +272,8 @@ void InstrumentsDialog::on_addButton_clicked()
             return;
       InstrumentTemplateListItem* item = (InstrumentTemplateListItem*)wi.front();
       const InstrumentTemplate* it     = item->instrumentTemplate();
+      if (it == 0)
+            return;
       PartListItem* pli                = new PartListItem(it, partiturList);
       pli->op = ITEM_ADD;
 
@@ -579,8 +581,8 @@ void MuseScore::editInstrList()
                   dst.push_back(sli->staff);
                   }
             }
-      std::list<int> sl;
-      std::list<int> dl;
+      QList<int> sl;
+      QList<int> dl;
       StaffList* src = cs->staves();
       int idx = 0;
       for (iStaff i = src->begin(); i != src->end(); ++i, ++idx)
@@ -603,9 +605,9 @@ void MuseScore::editInstrList()
       if (sl.size() != dl.size())
             printf("cannot happen: sl(%zd) != dl(%zd)\n", sl.size(), dl.size());
       bool sort = false;
-      std::list<int>::iterator isl = sl.begin();
-      std::list<int>::iterator dsl = dl.begin();
-      for (unsigned int i = 0; i < sl.size(); ++i, ++isl, ++dsl) {
+      QList<int>::iterator isl = sl.begin();
+      QList<int>::iterator dsl = dl.begin();
+      for (int i = 0; i < sl.size(); ++i, ++isl, ++dsl) {
             if (*isl != *dsl) {
                   sort = true;
                   break;
@@ -665,7 +667,7 @@ void Score::cmdRemovePart(Part* part)
             part->staves()->remove(*i);
             }
       _staves->erase(_staves->begin() + sidx, _staves->begin() + eidx);
-      _parts->remove(part);
+      _parts->removeAt(_parts->indexOf(part));
       undoOp(UndoOp::RemovePart, part, sidx);
       }
 
@@ -694,7 +696,7 @@ void Score::insertPart(Part* part, int idx)
 void Score::removePart(Part* part)
       {
       systems()->clear();
-      _parts->remove(part);
+      _parts->removeAt(_parts->indexOf(part));
       }
 
 //---------------------------------------------------------
@@ -704,7 +706,7 @@ void Score::removePart(Part* part)
 void Score::insertStaff(Staff* staff, int idx)
       {
       systems()->clear();
-      _staves->insert(_staves->begin() + idx, staff);
+      _staves->insert(idx, staff);
       staff->part()->insertStaff(staff);
       }
 
@@ -723,17 +725,16 @@ void Score::removeStaff(Staff* staff)
 //   sortStaves
 //---------------------------------------------------------
 
-void Score::sortStaves(std::list<int> src, std::list<int> dst)
+void Score::sortStaves(QList<int> src, QList<int> dst)
       {
       systems()->clear();
-
       _parts->clear();
       Part* curPart = 0;
       StaffList* dl = new StaffList;
-      for (std::list<int>::iterator i = dst.begin(); i != dst.end(); ++i) {
+      for (QList<int>::iterator i = dst.begin(); i != dst.end(); ++i) {
             int didx = *i;
             int sidx = 0;
-            for (std::list<int>::iterator ii = src.begin(); ii != src.end(); ++ii, ++sidx) {
+            for (QList<int>::iterator ii = src.begin(); ii != src.end(); ++ii, ++sidx) {
                   if (didx == *ii) {
                         Staff* staff = (*_staves)[sidx];
                         if (staff->part() != curPart) {
@@ -759,14 +760,13 @@ void Score::sortStaves(std::list<int> src, std::list<int> dst)
 //   sortStaves
 //---------------------------------------------------------
 
-void Measure::sortStaves(std::list<int>& src, std::list<int>& dst)
+void Measure::sortStaves(QList<int>& src, QList<int>& dst)
       {
       MStaffList ms;
-
-      for (std::list<int>::iterator i = dst.begin(); i != dst.end(); ++i) {
+      for (QList<int>::iterator i = dst.begin(); i != dst.end(); ++i) {
             int didx = *i;
             int sidx = 0;
-            for (std::list<int>::iterator ii = src.begin(); ii != src.end(); ++ii, ++sidx) {
+            for (QList<int>::iterator ii = src.begin(); ii != src.end(); ++ii, ++sidx) {
                   if (didx == *ii) {
                         ms.push_back(staves[sidx]);
                         break;
@@ -783,21 +783,25 @@ void Measure::sortStaves(std::list<int>& src, std::list<int>& dst)
 //   sortStaves
 //---------------------------------------------------------
 
-void Segment::sortStaves(std::list<int>& src, std::list<int>& dst)
+void Segment::sortStaves(QList<int>& src, QList<int>& dst)
       {
-      std::vector<Element*> dl;
+      QList<Element*> dl;
 
-      for (std::list<int>::iterator i = dst.begin(); i != dst.end(); ++i) {
-            int didx = *i;
-            int sidx = 0;
-            for (std::list<int>::iterator ii = src.begin(); ii != src.end(); ++ii, ++sidx) {
-                  if (didx == *ii) {
-                        int startTrack = sidx * VOICES;
-                        int endTrack = startTrack + VOICES;
-                        for (int k = startTrack; k < endTrack; ++k)
-                              dl.push_back(_elist[k]);
-                        break;
+      foreach (int didx, dst) {
+            int sidx = src.indexOf(didx);
+            int startTrack = sidx * VOICES;
+            int endTrack   = startTrack + VOICES;
+            for (int k = startTrack; k < endTrack; ++k) {
+//HACK
+                  if (k >= _elist.size()) {
+                        printf("Segment %p bad elist idx %d (size=%d)\n",
+                           this, k, _elist.size());
+                        Measure* m = measure();
+                        printf("Measure %d\n", m->no());
+                        dl.push_back(_elist[_elist.size()-1]);
                         }
+                  else
+                        dl.push_back(_elist[k]);
                   }
             }
       _elist = dl;

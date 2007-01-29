@@ -114,8 +114,8 @@ class NoteAttribute : public Symbol {
       static AttributeInfo atrList[];
       };
 
-typedef pstl::plist<NoteAttribute*>::iterator iAttribute;
-typedef pstl::plist<NoteAttribute*>::const_iterator ciAttribute;
+typedef QList<NoteAttribute*>::iterator iAttribute;
+typedef QList<NoteAttribute*>::const_iterator ciAttribute;
 
 //---------------------------------------------------------
 //   ChordRest
@@ -125,7 +125,7 @@ typedef pstl::plist<NoteAttribute*>::const_iterator ciAttribute;
 class ChordRest : public Element {
 
    protected:
-      pstl::plist<NoteAttribute*> attributes;
+      QList<NoteAttribute*> attributes;
       Beam* _beam;
       BeamMode _beamMode;
       Tuplet* _tuplet;
@@ -163,7 +163,7 @@ class ChordRest : public Element {
       virtual QPointF stemPos(bool, bool) const { return pos(); }    // point to connect stem
       bool isUp() const             { return _up; }
       void setUp(bool val)          { _up = val; }
-      pstl::plist<NoteAttribute*>* getAttributes() { return &attributes; }
+      QList<NoteAttribute*>* getAttributes() { return &attributes; }
       NoteAttribute* hasAttribute(const NoteAttribute*);
       virtual Element* findSelectableElement(QPointF p) const = 0;
       };

@@ -52,7 +52,7 @@ void Xml::putLevel()
 //   header
 //---------------------------------------------------------
 
-void Xml::header(const QString& /*type*/)
+void Xml::header()
       {
       *this << "<?xml version=\"1.0\" encoding=\"utf8\"?>\n";
       }

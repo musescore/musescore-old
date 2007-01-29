@@ -261,11 +261,11 @@ void PageListEditor::updateList()
                                                 new ElementItem(sei, chord->hook());
                                           if (chord->stem())
                                                 new ElementItem(sei, chord->stem());
-                                          pstl::plist<NoteAttribute*>* al = chord->getAttributes();
-                                          pstl::plist<HelpLine*>* hl = chord->getHelpLines();
-                                          for (pstl::plist<NoteAttribute*>::iterator i = al->begin(); i != al->end(); ++i)
+                                          QList<NoteAttribute*>* al = chord->getAttributes();
+                                          QList<HelpLine*>* hl = chord->getHelpLines();
+                                          for (QList<NoteAttribute*>::iterator i = al->begin(); i != al->end(); ++i)
                                                 new ElementItem(sei, *i);
-                                          for (pstl::plist<HelpLine*>::iterator i = hl->begin(); i != hl->end(); ++i)
+                                          for (QList<HelpLine*>::iterator i = hl->begin(); i != hl->end(); ++i)
                                                 new ElementItem(sei, *i);
                                           NoteList* notes = chord->noteList();
                                           for (iNote in = notes->begin(); in != notes->end(); ++in) {
@@ -581,16 +581,16 @@ void ShowChordWidget::setElement(Element* e)
       cb.stemDirection->addItem(tr("Down"), 2);
       cb.stemDirection->setCurrentIndex(int(chord->stemDirection()));
 
-      pstl::plist<NoteAttribute*>* al = chord->getAttributes();
-      pstl::plist<HelpLine*>* hl = chord->getHelpLines();
+      QList<NoteAttribute*>* al = chord->getAttributes();
+      QList<HelpLine*>* hl = chord->getHelpLines();
 
-      for (pstl::plist<NoteAttribute*>::iterator i = al->begin(); i != al->end(); ++i) {
+      for (QList<NoteAttribute*>::iterator i = al->begin(); i != al->end(); ++i) {
             QString s;
             s.setNum(long(*i), 16);
             QListWidgetItem* item = new QListWidgetItem(s, 0, long(*i));
             cb.attributeList->addItem(item);
             }
-      for (pstl::plist<HelpLine*>::iterator i = hl->begin(); i != hl->end(); ++i) {
+      for (QList<HelpLine*>::iterator i = hl->begin(); i != hl->end(); ++i) {
             QString s;
             s.setNum(long(*i), 16);
             QListWidgetItem* item = new QListWidgetItem(s, 0, long(*i));

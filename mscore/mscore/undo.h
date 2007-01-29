@@ -73,8 +73,8 @@ struct UndoOp {
       System* system;
       Measure* measure;
       Segment* segment;
-      std::list<int> si;
-      std::list<int> di;
+      QList<int> si;
+      QList<int> di;
       int val1;
       int val2;
       QColor color;
@@ -90,16 +90,13 @@ struct UndoOp {
  A single user visible undo.
 */
 
-struct Undo : public std::list<UndoOp> {
+struct Undo : public QList<UndoOp> {
       InputState inputState;
       Selection selection;
 
    public:
-      Undo(const InputState&, const Selection&);
+      Undo(const InputState&, const Selection*);
       };
-
-typedef Undo::iterator iUndoOp;
-typedef Undo::reverse_iterator riUndoOp;
 
 //---------------------------------------------------------
 //   UndoList
@@ -110,7 +107,7 @@ typedef Undo::reverse_iterator riUndoOp;
  a list of low level undo operations.
 */
 
-class UndoList : public pstl::plist<Undo*> {
+class UndoList : public QList<Undo*> {
    public:
       };
 

@@ -961,7 +961,7 @@ void MuseScore::quitApp()
 
 void MuseScore::closeEvent(QCloseEvent* ev)
       {
-      for (std::vector<Score*>::iterator i = scoreList.begin(); i != scoreList.end(); ++i) {
+      for (QList<Score*>::iterator i = scoreList.begin(); i != scoreList.end(); ++i) {
             Score* score = *i;
             if (score->dirty()) {
                   QString s(tr("%1 contains unsaved data\n"
@@ -2245,7 +2245,7 @@ void MuseScore::removeTab(int i)
       int n = scoreList.size();
       if (n <= 1)
             return;
-      std::vector<Score*>::iterator ii = scoreList.begin() + i;
+      QList<Score*>::iterator ii = scoreList.begin() + i;
       if (checkDirty(*ii))
             return;
       scoreList.erase(ii);

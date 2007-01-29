@@ -94,8 +94,8 @@ class HelpLine : public Line {
       virtual ElementType type() const { return HELP_LINE; }
       };
 
-typedef pstl::plist<HelpLine*>::iterator iHelpLine;
-typedef pstl::plist<HelpLine*>::const_iterator ciHelpLine;
+typedef QList<HelpLine*>::iterator iHelpLine;
+typedef QList<HelpLine*>::const_iterator ciHelpLine;
 
 //---------------------------------------------------------
 //   Chord
@@ -109,7 +109,7 @@ typedef pstl::plist<HelpLine*>::const_iterator ciHelpLine;
 
 class Chord : public ChordRest {
       NoteList notes;
-      pstl::plist<HelpLine*> helpLines;
+      QList<HelpLine*> helpLines;
       Stem* _stem;
       Hook* _hook;
       Direction _stemDirection;
@@ -142,7 +142,7 @@ class Chord : public ChordRest {
       bool grace() const                     { return _grace; }
       void setGrace(bool g)                  { _grace = g; }
 
-      pstl::plist<HelpLine*>* getHelpLines() { return &helpLines; }
+      QList<HelpLine*>* getHelpLines() { return &helpLines; }
 
       virtual void layoutStem();
       NoteList* noteList()                   { return &notes; }
@@ -153,7 +153,7 @@ class Chord : public ChordRest {
       Note* downNote()                       { return notes.front(); }
       virtual int move() const;
 
-      pstl::plist<HelpLine*>* helpLineList() { return &helpLines; }
+      QList<HelpLine*>* helpLineList() { return &helpLines; }
 
       Stem* stem()                           { return _stem; }
       void setStem(Stem* s);

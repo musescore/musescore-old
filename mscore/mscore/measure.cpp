@@ -2088,7 +2088,7 @@ void Measure::cmdAddStaves(int sStaff, int eStaff)
 
 void Measure::insertMStaff(MStaff staff, int idx)
       {
-      staves.insert(staves.begin() + idx, staff);
+      staves.insert(idx, staff);
       }
 
 //---------------------------------------------------------
@@ -2097,7 +2097,7 @@ void Measure::insertMStaff(MStaff staff, int idx)
 
 void Measure::removeMStaff(MStaff /*staff*/, int idx)
       {
-      staves.erase(staves.begin() + idx);
+      staves.removeAt(idx);
       }
 
 //---------------------------------------------------------

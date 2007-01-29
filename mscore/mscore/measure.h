@@ -26,7 +26,6 @@
  Definition of classes MStaff, Measure and MeasureList.
 */
 
-#include "plist.h"
 #include "element.h"
 
 class Segment;
@@ -42,10 +41,10 @@ class ChordRest;
 class Score;
 class Painter;
 
-typedef pstl::plist<Beam*>::iterator iBeam;
-typedef pstl::plist<Beam*>::const_iterator ciBeam;
+typedef QList<Beam*>::iterator iBeam;
+typedef QList<Beam*>::const_iterator ciBeam;
 
-typedef pstl::plist<Beam*> BeamList;
+typedef QList<Beam*> BeamList;
 typedef BeamList::iterator iBeam;
 typedef BeamList::const_iterator ciBeam;
 
@@ -215,7 +214,7 @@ class Measure : public Element {
       double tick2pos(int) const;
       Segment* tick2segment(int) const;
 
-      void sortStaves(std::list<int>& src, std::list<int>& dst);
+      void sortStaves(QList<int>& src, QList<int>& dst);
 
       void dump() const;
       virtual bool acceptDrop(const QPointF&, int, const QDomNode&) const;
@@ -238,15 +237,13 @@ class Measure : public Element {
  List of measures.
 */
 
-class MeasureList : public pstl::plist<Measure*> {
+class MeasureList : public QList<Measure*> {
    public:
       MeasureList() {}
       };
 
 typedef MeasureList::iterator iMeasure;
-typedef MeasureList::reverse_iterator riMeasure;
 typedef MeasureList::const_iterator ciMeasure;
-typedef MeasureList::const_reverse_iterator criMeasure;
 
 #endif
 

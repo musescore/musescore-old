@@ -1333,7 +1333,7 @@ void ExportMusicXml::clef(int staff, int clef)
 
 static void chordAttributes(Chord* chord, Notations& notations, Xml& xml)
       {
-      pstl::plist<NoteAttribute*>* na = chord->getAttributes();
+      QList<NoteAttribute*>* na = chord->getAttributes();
       // first output the fermatas
       for (ciAttribute ia = chord->getAttributes()->begin(); ia != chord->getAttributes()->end(); ++ia) {
             if ((*ia)->subtype() == UfermataSym) {

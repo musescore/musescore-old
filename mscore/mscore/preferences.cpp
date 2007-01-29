@@ -130,7 +130,7 @@ void Preferences::write()
             return;
             }
       Xml xml(&f);
-      xml.header("museScore");
+      xml.header();
       xml.stag("museScore version=\"1.0\"");
       xml.stag("Preferences");
       xml.tag("cursorBlink", cursorBlink);
