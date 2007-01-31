@@ -1,4 +1,6 @@
-31.1.7 (ws)
+31.1.7 (lv)
+      - fixed MusicXML export of dynamics
+      (ws)
       - fix printing instrument names
       - fixed insert instrument - undo - redo
       - fixed missing bar lines when inserting another piano staff
