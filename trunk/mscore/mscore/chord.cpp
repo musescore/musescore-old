@@ -611,7 +611,12 @@ void Chord::computeUp()
 
       Note* upnote = notes.rbegin()->second;
       if (notes.size() == 1) {
-            _up = upnote->line() > 4;
+            if (upnote->move() > 0)
+                  _up = true;
+            else if (upnote->move() < 0)
+                  _up = false;
+            else
+                  _up = upnote->line() > 4;
             return;
             }
       Note* downnote = notes.begin()->second;
@@ -700,8 +705,11 @@ void Chord::write(Xml& xml) const
       ChordRest::writeProperties(xml);
       if (_grace)
             xml.tag("GraceNote", _grace);
-      if (_stemDirection != AUTO)
-            xml.tag("StemDirection", int(_stemDirection));
+      switch(_stemDirection) {
+            case UP:   xml.tag("StemDirection", "up"); break;
+            case DOWN: xml.tag("StemDirection", "down"); break;
+            case AUTO: break;
+            }
       for (ciNote in = notes.begin(); in != notes.end(); ++in)
             in->second->write(xml);
       xml.etag("Chord");
@@ -733,8 +741,14 @@ void Chord::read(QDomNode node, int staffIdx)
                   }
             else if (tag == "GraceNote")
                   _grace = i;
-            else if (tag == "StemDirection")
-                  _stemDirection = Direction(i);
+            else if (tag == "StemDirection") {
+                  if (val == "up")
+                        _stemDirection = UP;
+                  else if (val == "down")
+                        _stemDirection = DOWN;
+                  else
+                        _stemDirection = Direction(i);
+                  }
             else if (ChordRest::readProperties(node))
                   ;
             else if (tag == "Slur") {
