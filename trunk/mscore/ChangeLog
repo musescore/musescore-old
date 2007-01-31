@@ -1,3 +1,6 @@
+31.1.7 (ws)
+      - fixed insert instrument - undo - redo
+      - fixed missing bar lines when inserting another piano staff
 28.1.7 (ws)
       - implement global Cut/Copy/Paste
       - implement Element drag (drag element with middle mouse key)

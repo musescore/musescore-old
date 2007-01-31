@@ -207,6 +207,8 @@ class Measure : public Element {
 
       void cmdRemoveStaves(int s, int e);
       void cmdAddStaves(int s, int e);
+      void removeStaves(int s, int e);
+      void insertStaves(int s, int e);
 
       Measure* next() const { return (Measure*)Element::next(); }
       Measure* prev() const { return (Measure*)Element::prev(); }
