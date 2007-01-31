@@ -962,9 +962,22 @@ void Score::deleteItem(Element* el)
                   }
                   break;
 
+            case TEXT:
+                  if (el->subtype() == TEXT_INSTRUMENT_LONG) {
+                        el->staff()->part()->setLongName(QString());
+                        setInstrumentNames();
+                        layout();
+                        break;
+                        }
+                  if (el->subtype() == TEXT_INSTRUMENT_SHORT) {
+                        el->staff()->part()->setShortName(QString());
+                        setInstrumentNames();
+                        layout();
+                        break;
+                        }
+
             case SYMBOL:
             case COMPOUND:
-            case TEXT:
             case DYNAMIC:
             case SLUR:
             case HAIRPIN:
@@ -1019,21 +1032,6 @@ void Score::deleteItem(Element* el)
 
             case ACCIDENTAL:
                   addAccidental((Note*)(el->parent()), ACC_NONE);
-                  break;
-
-            case INSTRUMENT_NAME1:
-                  el->staff()->part()->setLongName(QString());
-                  setInstrumentNames();
-                  layout();
-                  break;
-
-            case INSTRUMENT_NAME2:
-                  {
-                  Part* part = el->staff()->part();
-                  part->setShortName(QString());
-                  setInstrumentNames();
-                  layout();
-                  }
                   break;
 
             default:

@@ -233,17 +233,14 @@ void Text::layout()
       doc->documentLayout()->setPaintDevice(score()->scoreLayout()->paintDevice());
       doc->setUseDesignMetrics(true);
 
-      double tw = bbox().width();
-      double th = bbox().height();
-
-// printf("layout %f %s\n", tw, doc->toPlainText().toLatin1().data());
-
       QPointF _off(QPointF(_xoff, _yoff));
       if (_offsetType == OFFSET_SPATIUM)
             _off *= _score->spatium();
       else
             _off *= DPI;
 
+      double tw = bbox().width();
+      double th = bbox().height();
       double x = 0.0, y = 0.0;
       if (_anchor == ANCHOR_PAGE) {
             Page* page = (Page*)parent();
@@ -588,15 +585,6 @@ void Text::draw1(Painter& p)
       c.palette.setColor(QPalette::Text, color);
       doc->documentLayout()->draw(&p, c);
       p.restore();
-
-#if 0
-      //
-      //  DEBUG: draw shape
-      //
-      p.setBrush(Qt::NoBrush);
-      p.setPen(QPen(Qt::red, 2, Qt::SolidLine));
-      p.drawPath(shape());
-#endif
       }
 
 //---------------------------------------------------------
@@ -710,26 +698,6 @@ void Lyrics::read(QDomNode node)
             else
                   domError(node);
             }
-      }
-
-//---------------------------------------------------------
-//   InstrumentName1
-//---------------------------------------------------------
-
-InstrumentName1::InstrumentName1(Score* s)
-   : Text(s)
-      {
-      setSubtype(TEXT_INSTRUMENT_LONG);
-      }
-
-//---------------------------------------------------------
-//   InstrumentName2
-//---------------------------------------------------------
-
-InstrumentName2::InstrumentName2(Score* s)
-   : Text(s)
-      {
-      setSubtype(TEXT_INSTRUMENT_SHORT);
       }
 
 //---------------------------------------------------------
