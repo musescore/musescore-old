@@ -1548,6 +1548,13 @@ void ExportMusicXml::chord(Chord* chord, int staff, const LyricsList* ll)
             for (int ni = dots; ni > 0; ni--)
                   xml.tagE("dot");
 
+// LVIFIX: TODO tuplet support
+// Note: TBD: tuplets with rests
+// <time-modification>
+//   <actual-notes>3</actual-notes>
+//   <normal-notes>2</normal-notes>
+// </time-modification>
+
             // no stem for whole notes and beyond
             if (note->chord()->tickLen() < 4*division)
                   xml.tag("stem", note->chord()->isUp() ? "up" : "down");
@@ -1576,6 +1583,12 @@ void ExportMusicXml::chord(Chord* chord, int staff, const LyricsList* ll)
                   notations.tag(xml);
                   xml.tagE("tied type=\"start\"");
                   }
+
+// LVIFIX: TODO tuplet support
+// <notations>
+//   <tuplet type="start" placement="above" bracket="no"/>
+// </notations>
+
             if (i == nl->begin()) {
                   sh.doSlurStop(chord, notations, xml);
                   sh.doSlurStart(chord, notations, xml);
@@ -1767,17 +1780,29 @@ void ExportMusicXml::pedal(Pedal* pd, int staff, int tick)
 //   dynamic
 //---------------------------------------------------------
 
+// In MuseScore dynamics are essentially user-defined texts, therefore the ones
+// supported by MusicXML need to be filtered out. Everything not recognized
+// as MusicXML dynamics is written as words.
+
 void ExportMusicXml::dynamic(Dynamic* dyn, int staff)
       {
-      QString text = dyn->getText();
-      // check for dynamics currently not supported
-      // MusicXML does not have dynamics m, r, s and z.
-      // LVI FIXME: write as other-dynamics ?
-      if (text == "m" || text == "r" || text == "s" || text == "z" || text == "other-dynamics") return;
+      QString t = dyn->getText();
       directionTag(xml, attr, dyn);
-      xml.stag("dynamics");
-      xml.tagE(text.toLatin1().data());
-      xml.etag("dynamics");
+      if (t == "p" || t == "pp" || t == "ppp" || t == "pppp" || t == "ppppp" || t == "pppppp"
+       || t == "f" || t == "ff" || t == "fff" || t == "ffff" || t == "fffff" || t == "ffffff"
+       || t == "mp" || t == "mf" || t == "sf" || t == "sfp" || t == "sfpp" || t == "fp"
+       || t == "rf" || t == "rfz" || t == "sfz" || t == "sfzz" || t == "fz") {
+            xml.stag("dynamics");
+            xml.tagE(t.toLatin1().data());
+            xml.etag("dynamics");
+            }
+      else if (t == "m" || t == "z") {
+            xml.stag("dynamics");
+            xml.tag("other-dynamics", t);
+            xml.etag("dynamics");
+            }
+      else
+            xml.tag("words", t);
       directionETag(xml, staff, dyn->mxmlOff());
       }
 
