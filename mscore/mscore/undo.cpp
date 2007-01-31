@@ -61,6 +61,7 @@ static const char* undoName[] = {
       "InsertSegStaff",    "RemoveSegStaff",
       "InsertMStaff",      "RemoveMStaff",
       "InsertMeasure",     "RemoveMeasure",
+      "InsertStaves",      "RemoveStaves",
       "SortStaves",        "ToggleInvisible",
       "ChangeColor",       "ChangePitch",
       "ChangeSubtype",     "AddAccidental",
@@ -207,7 +208,6 @@ void Score::doRedo()
             }
       undoList.push_back(u); // put item on undo list
       redoList.pop_back();
-printf("endUndoRedo\n");
       endUndoRedo(u);
       u->inputState = oIs;
       u->selection  = oSel;
@@ -359,6 +359,19 @@ void Score::processUndoOp(UndoOp* i, bool undo)
             case UndoOp::ChangeTimeSig:
                   printf("UndoOp::ChangeTimeSig: todo\n");
                   break;
+            case UndoOp::InsertStaves:
+                  if (undo)
+                        i->measure->removeStaves(i->val1, i->val2);
+                  else
+                        i->measure->insertStaves(i->val1, i->val2);
+                  break;
+            case UndoOp::RemoveStaves:
+                  if (undo)
+                        i->measure->insertStaves(i->val1, i->val2);
+                  else
+                        i->measure->removeStaves(i->val1, i->val2);
+                  break;
+
             }
       UNDO = FALSE;
       }
@@ -437,7 +450,7 @@ void Score::undoOp(UndoOp::UndoType type, Element* object)
       //    appropriate "undo" action
       //
       if (type == UndoOp::AddElement)
-            processUndoOp(&i,false);
+            processUndoOp(&i, false);
       }
 
 //---------------------------------------------------------
@@ -505,6 +518,17 @@ void Score::undoOp(UndoOp::UndoType type, Measure* m)
       UndoOp i;
       i.type    = type;
       i.measure = m;
+      undoList.back()->push_back(i);
+      }
+
+void Score::undoOp(UndoOp::UndoType type, Measure* m, int a, int b)
+      {
+      checkUndoOp();
+      UndoOp i;
+      i.type    = type;
+      i.measure = m;
+      i.val1    = a;
+      i.val2    = b;
       undoList.back()->push_back(i);
       }
 

@@ -101,7 +101,7 @@ Segment::Segment(Measure* m, int t)
 
 void Segment::init()
       {
-      int staves = measure()->score()->nstaves();
+      int staves = score()->nstaves();
       int tracks = staves * VOICES;
       for (int i = 0; i < tracks; ++i)
             _elist.push_back(0);
@@ -145,8 +145,8 @@ void Segment::insertStaff(int staff)
       {
       int track = staff * VOICES;
       for (int voice = 0; voice < VOICES; ++voice)
-            _elist.insert(_elist.begin() + track, 0);
-      _lyrics.insert(_lyrics.begin() + staff, LyricsList());
+            _elist.insert(track+voice, 0);
+      _lyrics.insert(staff, LyricsList());
       }
 
 //---------------------------------------------------------
@@ -157,7 +157,7 @@ void Segment::removeStaff(int staff)
       {
       int track = staff * VOICES;
       _elist.erase(_elist.begin() + track, _elist.begin() + track + VOICES);
-      _lyrics.erase(_lyrics.begin() + staff);
+      _lyrics.removeAt(staff);
       }
 
 //---------------------------------------------------------
@@ -191,9 +191,10 @@ void Segment::draw(Painter& p)
 
 void Segment::add(Element* el)
       {
-// printf("Segment::add %s\n", el->name());
       el->setParent(this);
       int staffIdx = el->staffIdx();
+// printf("Segment::add %s tracks %d, staff %d, idx = %d\n",
+//   el->name(), _elist.size(), staffIdx, staffIdx * VOICES + el->voice());
       if (el->type() == LYRICS) {
             LyricsList* ll = &_lyrics[staffIdx];
             ll->push_back((Lyrics*)el);

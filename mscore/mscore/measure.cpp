@@ -843,8 +843,7 @@ void Measure::layout(double width)
       barLineLen += ::style->staffLineWidth;
       for (iPart ip = pl->begin(); ip != pl->end(); ++ip) {
             Part* p = *ip;
-            MStaff* ms = &staves[staff];
-            BarLine* barLine = ms->endBarLine;
+            BarLine* barLine = staves[staff].endBarLine;
             if (barLine) {
                   double y1 = staffY[staff];
                   double y2 = staffY[staff + p->nstaves() - 1] + point(barLineLen);
@@ -1143,7 +1142,8 @@ void Measure::add(Element* el)
       int t = el->tick();
       ElementType type = el->type();
 
- // printf("measure %p: add %s %p, staff %d\n", this, el->name(), el, staffIdx);
+// printf("measure %p: add %s %p, staff %d staves %d\n",
+//      this, el->name(), el, staffIdx, staves.size());
 
       switch(type) {
             case LAYOUT_BREAK:
@@ -2023,6 +2023,34 @@ void Measure::setNoText(const QString& s)
       }
 
 //---------------------------------------------------------
+//   removeStaves
+//---------------------------------------------------------
+
+void Measure::removeStaves(int sStaff, int eStaff)
+      {
+      for (Segment* s = _first; s; s = s->next()) {
+            for (int staff = eStaff-1; staff >= sStaff; --staff) {
+//                  _score->undoOp(UndoOp::RemoveSegStaff, s, staff);
+                  s->removeStaff(staff);
+                  }
+            }
+      }
+
+//---------------------------------------------------------
+//   insertStaves
+//---------------------------------------------------------
+
+void Measure::insertStaves(int sStaff, int eStaff)
+      {
+      for (Segment* s = _first; s; s = s->next()) {
+            for (int staff = sStaff; staff < eStaff; ++staff) {
+                  s->insertStaff(staff);
+//                  _score->undoOp(UndoOp::InsertSegStaff, s, staff);
+                  }
+            }
+      }
+
+//---------------------------------------------------------
 //   cmdRemoveStaves
 //---------------------------------------------------------
 
@@ -2037,17 +2065,17 @@ void Measure::cmdRemoveStaves(int sStaff, int eStaff)
                         _score->undoOp(UndoOp::RemoveElement, el);
                         }
                   }
-            for (int staff = eStaff-1; staff >= sStaff; --staff) {
-                  _score->undoOp(UndoOp::RemoveSegStaff, s, sStaff);
-                  s->removeStaff(sStaff);
-                  }
             }
+      _score->undoOp(UndoOp::RemoveStaves, this, sStaff, eStaff);
+      removeStaves(sStaff, eStaff);
+
       for (int i = eStaff - 1; i >= sStaff; --i)
             _score->undoOp(UndoOp::RemoveMStaff, this, *(staves.begin() + i), i);
       staves.erase(staves.begin() + sStaff, staves.begin() + eStaff);
 
       // BeamList   _beamList;
       // TupletList _tuplets;
+      // barLine
       // TODO
       }
 
@@ -2057,12 +2085,9 @@ void Measure::cmdRemoveStaves(int sStaff, int eStaff)
 
 void Measure::cmdAddStaves(int sStaff, int eStaff)
       {
-      for (Segment* s = _first; s; s = s->next()) {
-            for (int staff = sStaff; staff < eStaff; ++staff) {
-                  s->insertStaff(staff);
-                  _score->undoOp(UndoOp::InsertSegStaff, s, staff);
-                  }
-            }
+      _score->undoOp(UndoOp::InsertStaves, this, sStaff, eStaff);
+      insertStaves(sStaff, eStaff);
+
       for (int i = sStaff; i < eStaff; ++i) {
             BarLine* barLine = 0;
             if (i == sStaff) {
@@ -2070,15 +2095,17 @@ void Measure::cmdAddStaves(int sStaff, int eStaff)
                   barLine->setParent(this);
                   }
             MStaff ms;
+
             ms.endBarLine = barLine;
-            staves.insert(staves.begin() + i, ms);
+            staves.insert(i, ms);
             _score->undoOp(UndoOp::InsertMStaff, this, ms, i);
 
-            Rest* rest = new Rest(score(), tick(), _score->sigmap->ticksMeasure(tick()));
+            int tickLen = _score->sigmap->ticksMeasure(tick());
+            Rest* rest = new Rest(score(), tick(), tickLen);
             Staff* staff = _score->staff(i);
             rest->setStaff(staff);
             rest->setParent(this);
-            score()->cmdAdd(rest);
+            _score->undoOp(UndoOp::AddElement, rest);
             }
       }
 

@@ -97,7 +97,6 @@ PartListItem::PartListItem(const InstrumentTemplate* i, QTreeWidget* lv)
       part = 0;
       it   = i;
       op   = ITEM_ADD;
-printf("part list item <%s>\n", it->name.toLatin1().data());
       setText(0, it->name);
       }
 
@@ -527,8 +526,8 @@ void MuseScore::editInstrList()
                               staff->setBracketSpan(t->staves);
                               }
                         part->staves()->push_back(staff);
-                        cs->staves()->insert(cs->staves()->begin() + staffIdx, staff);
-                        cs->undoOp(UndoOp::InsertStaff, staff, staffIdx);
+                        cs->staves()->insert(staffIdx + rstaff, staff);
+                        cs->undoOp(UndoOp::InsertStaff, staff, staffIdx+rstaff);
                         }
                   cs->cmdInsertPart(part, staffIdx);
                   staffIdx += rstaff;
@@ -559,6 +558,10 @@ void MuseScore::editInstrList()
                               cs->insertStaff(staff, staffIdx);
                               cs->undoOp(UndoOp::InsertStaff, staff, staffIdx);
 
+                              ++staffIdx;
+                              ++rstaff;
+                              }
+                        else {
                               ++staffIdx;
                               ++rstaff;
                               }
@@ -633,17 +636,8 @@ void Score::cmdInsertPart(Part* part, int staffIdx)
 
       int sidx = staff(part);
       int eidx = sidx + part->nstaves();
-
       for (Measure* m = _layout->first(); m; m = m->next())
             m->cmdAddStaves(sidx, eidx);
-
-/*      int rstaff = 0;
-      for (int i = sidx; i < eidx; ++i, ++rstaff) {
-            Staff* staff = part->staff(rstaff);
-            _staves->insert(_staves->begin() + i, staff);
-            undoOp(UndoOp::InsertStaff, staff, i);
-            }
-      */
       }
 
 //---------------------------------------------------------
@@ -791,18 +785,8 @@ void Segment::sortStaves(QList<int>& src, QList<int>& dst)
             int sidx = src.indexOf(didx);
             int startTrack = sidx * VOICES;
             int endTrack   = startTrack + VOICES;
-            for (int k = startTrack; k < endTrack; ++k) {
-//HACK
-                  if (k >= _elist.size()) {
-                        printf("Segment %p bad elist idx %d (size=%d)\n",
-                           this, k, _elist.size());
-                        Measure* m = measure();
-                        printf("Measure %d\n", m->no());
-                        dl.push_back(_elist[_elist.size()-1]);
-                        }
-                  else
-                        dl.push_back(_elist[k]);
-                  }
+            for (int k = startTrack; k < endTrack; ++k)
+                  dl.push_back(_elist[k]);
             }
       _elist = dl;
       }

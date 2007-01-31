@@ -55,6 +55,7 @@ struct UndoOp {
             InsertSegStaff, RemoveSegStaff,
             InsertMStaff, RemoveMStaff,
             InsertMeasure, RemoveMeasure,
+            InsertStaves, RemoveStaves,
             SortStaves,
             ToggleInvisible,
             ChangeColor,
