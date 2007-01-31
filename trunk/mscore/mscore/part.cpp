@@ -31,9 +31,9 @@
 
 Part::Part(Score* s)
       {
+      _longName.setDefaultFont(textStyles[TEXT_STYLE_INSTRUMENT_LONG].font());
+      _shortName.setDefaultFont(textStyles[TEXT_STYLE_INSTRUMENT_SHORT].font());
       cs = s;
-//      _longName.setStyle(TEXT_STYLE_INSTRUMENT_LONG);
-//      _shortName.setStyle(TEXT_STYLE_INSTRUMENT_SHORT);
       _staves = new StaffList;
       }
 

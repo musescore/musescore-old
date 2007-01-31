@@ -1,4 +1,5 @@
 31.1.7 (ws)
+      - fix printing instrument names
       - fixed insert instrument - undo - redo
       - fixed missing bar lines when inserting another piano staff
 28.1.7 (ws)

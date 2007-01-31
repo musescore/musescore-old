@@ -46,7 +46,7 @@ const char* elementNames[] = {
       "Cursor", "Selection", "Lasso", "Clef", "KeySig", "TimeSig", "Chord", "Rest",
       "Tie", "Slur", "Measure",
       "Attribute", "Dynamic", "Page", "Beam", "Flag", "Lyrics",
-      "InstrumentLong", "InstrumentShort", "System",
+      "System",
       "HairPin", "Tuplet", "RubberBand", "VSpacer",
       "Segment", "TempoText", "ShadowNote", "Volta", "Ottava",
       "Pedal", "Trill", "LayoutBreak", "HelpLine"
@@ -1068,10 +1068,6 @@ int Element::readType(QDomNode& node)
                         type = HOOK;
                   else if (e.tagName() == "Lyric")
                         type = LYRICS;
-                  else if (e.tagName() == "Instrument1")
-                        type = INSTRUMENT_NAME1;
-                  else if (e.tagName() == "Instrument2")
-                        type = INSTRUMENT_NAME2;
                   else if (e.tagName() == "System")
                         type = SYSTEM;
                   else if (e.tagName() == "HairPin")

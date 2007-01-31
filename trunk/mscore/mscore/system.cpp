@@ -215,6 +215,7 @@ double System::layout(const QPointF& p, double w)
                         xoff1 = w;
                   }
             if (ss->instrumentName && !ss->instrumentName->isEmpty()) {
+                  ss->instrumentName->layout();
                   double w = ss->instrumentName->width() + instrumentNameOffset * _spatium;
                   if (w > xoff2)
                         xoff2 = w;
@@ -273,7 +274,10 @@ double System::layout(const QPointF& p, double w)
             Part* p     = *ip;
             SysStaff* s = staff(idx);
             int nstaves = p->nstaves();
-            if (s->instrumentName) {
+            if (s->instrumentName && !s->instrumentName->isEmpty()) {
+                  //
+                  // override Text->layout()
+                  //
                   double y1 = s->bbox().top();
                   double y2 = staff(idx + nstaves - 1)->bbox().bottom();
                   double y  = y1 + (y2 - y1) * .5 - s->instrumentName->bbox().height() * .5;
@@ -390,45 +394,23 @@ void System::setInstrumentNames()
 
 void System::setInstrumentName(int idx)
       {
-      Staff* s = score()->staff(idx);
+      Score* cs = score();
+      Staff* s = cs->staff(idx);
       if (!s->isTop())
             return;
       SysStaff* staff = _staves[idx];
-      Score* cs = score();
+      if (staff->instrumentName == 0)
+            staff->instrumentName = new Text(cs);
       if (cs->systems() && !cs->systems()->empty() && cs->systems()->front() == this) {
-            if (!s->longName().isEmpty()) {
-                  if (staff->instrumentName == 0) {
-                        staff->instrumentName = new InstrumentName1(score());
-                        staff->instrumentName->setParent(this);
-                        staff->instrumentName->setStaff(s);
-                        }
-                  staff->instrumentName->setDoc(s->longName());
-                  }
-            else if (staff->instrumentName) {
-                  staff->instrumentName->setText("");
-                  // delete staff->instrumentName;
-                  // staff->instrumentName = 0;
-                  }
+            staff->instrumentName->setSubtype(TEXT_INSTRUMENT_LONG);
+            staff->instrumentName->setDoc(s->longName());
             }
       else {
-            if (!s->shortName().isEmpty()) {
-                  if (staff->instrumentName == 0) {
-                        staff->instrumentName = new InstrumentName2(score());
-                        staff->instrumentName->setParent(this);
-                        staff->instrumentName->setStaff(s);
-                        }
-                  staff->instrumentName->setDoc(s->shortName());
-                  }
-            else if (staff->instrumentName) {
-                  // delete staff->instrumentName;
-                  // staff->instrumentName = 0;
-                  staff->instrumentName->setText("");
-                  }
+            staff->instrumentName->setSubtype(TEXT_INSTRUMENT_SHORT);
+            staff->instrumentName->setDoc(s->shortName());
             }
-      if (staff->instrumentName) {
-            staff->instrumentName->setParent(this);
-            staff->instrumentName->setStaff(s);
-            }
+      staff->instrumentName->setParent(this);
+      staff->instrumentName->setStaff(s);
       }
 
 //---------------------------------------------------------
@@ -447,8 +429,11 @@ void System::draw(Painter& p)
             (*is)->sstaff->draw(p);
             if ((*is)->bracket)
                   (*is)->bracket->draw(p);
-            if ((*is)->instrumentName)
+            if ((*is)->instrumentName) {
+//                  (*is)->instrumentName->getDoc()->documentLayout()->setPaintDevice(p.device());
+//                  (*is)->instrumentName->layout();
                   (*is)->instrumentName->draw(p);
+                  }
             }
       for (ciMeasure im = ml->begin(); im != ml->end(); ++im) {
             Measure* m = *im;
@@ -563,16 +548,14 @@ double System::distance(int n) const
 
 void System::add(Element* el)
       {
-// printf("System::add: %s staff %d\n", el->name(), el->staffIdx());
       SysStaff* staff = _staves[el->staffIdx()];
-      if (el->type() == INSTRUMENT_NAME1 || el->type() == INSTRUMENT_NAME2)
+      if (el->type() == TEXT && (el->subtype() == TEXT_INSTRUMENT_LONG || el->subtype() == TEXT_INSTRUMENT_SHORT))
             staff->instrumentName = (Text*)el;
       else if (el->type() == BRACKET) {
             staff->bracket = (Bracket*)el;
             staff->bracket->setParent(this);
             el->staff()->setBracket(staff->bracket->subtype());
             el->staff()->setBracketSpan(staff->bracket->span());
-// printf("   bracket %d %d\n", el->staff()->bracket(), el->staff()->bracketSpan());
             score()->layout();
             }
       }
@@ -585,7 +568,7 @@ void System::remove(Element* el)
       {
 // printf("System::remove: %s staff %d\n", el->name(), el->staffIdx());
       SysStaff* staff = _staves[el->staffIdx()];
-      if (el->type() == INSTRUMENT_NAME1 || el->type() == INSTRUMENT_NAME2)
+      if (el->type() == TEXT && (el->subtype() == TEXT_INSTRUMENT_LONG || el->subtype() == TEXT_INSTRUMENT_SHORT))
             staff->instrumentName = 0;
       else if (el->type() == BRACKET) {
             staff->bracket = 0;

@@ -126,30 +126,6 @@ class Lyrics : public Text {
       };
 
 //---------------------------------------------------------
-//   InstrumentName1
-//    long name
-//---------------------------------------------------------
-
-class InstrumentName1 : public Text {
-   public:
-      InstrumentName1(Score*);
-      virtual InstrumentName1* clone() const { return new InstrumentName1(*this); }
-      virtual ElementType type() const { return INSTRUMENT_NAME1; }
-      };
-
-//---------------------------------------------------------
-//   InstrumentName2
-//    short name, repeated on ervery staff except first
-//---------------------------------------------------------
-
-class InstrumentName2 : public Text {
-   public:
-      InstrumentName2(Score*);
-      virtual InstrumentName2* clone() const { return new InstrumentName2(*this); }
-      virtual ElementType type() const { return INSTRUMENT_NAME2; }
-      };
-
-//---------------------------------------------------------
 //   TempoText
 //---------------------------------------------------------
 

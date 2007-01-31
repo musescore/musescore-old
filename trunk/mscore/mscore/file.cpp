@@ -863,6 +863,7 @@ void Score::printFile()
             return;
 
       Painter p(&printer);
+      p.setPrint(true);
       p.setRenderHint(QPainter::Antialiasing, true);
       p.setClipRect(QRectF(0.0, 0.0, 1000000.0, 1000000.0));
 
@@ -875,8 +876,6 @@ void Score::printFile()
       scoreLayout()->setPaintDevice(&printer);
 
       doLayout();
-
-      p.setPrint(true);
 
       for (ciPage ip = pages()->begin();;) {
             Page* page = *ip;
