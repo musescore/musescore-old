@@ -156,13 +156,11 @@ void Page::layout()
             if ((n > 1) || ::style->showPageNumberOne) {
                   if (_pageNo == 0) {
                         _pageNo = new Text(score());
-                        setSubtype(subtype);
+                        _pageNo->setSubtype(subtype);
                         _pageNo->setParent(this);
                         }
-                  QString txt("%1");
-                  _pageNo->setText(txt.arg(n));
+                  _pageNo->setText(QString("%1").arg(n));
                   _pageNo->layout();
-                  QPointF f(_pageNo->apos());
                   }
             else if (_pageNo) {
                   delete _pageNo;

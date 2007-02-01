@@ -230,6 +230,7 @@ void Text::layout()
       {
       if (parent() == 0)
             return;
+
       doc->documentLayout()->setPaintDevice(score()->scoreLayout()->paintDevice());
       doc->setUseDesignMetrics(true);
 
@@ -253,18 +254,9 @@ void Text::layout()
             tw = w;
             double h = page->loHeight() - page->tm() - page->bm();
 
-            if (_offsetType == OFFSET_REL) {
+            if (_offsetType == OFFSET_REL)
                   _off = QPointF(_xoff * w * 0.01, _yoff * h * 0.01);
-                  }
             x = page->lm();
-#if 0
-            if (_align & ALIGN_LEFT)
-                  x = page->lm();
-            else if (_align & ALIGN_RIGHT)
-                  x  = page->lm() + w;
-            else if (_align & ALIGN_HCENTER)
-                  x  = page->lm() + w * .5 - tw * .5;
-#endif
             if (_align & ALIGN_TOP)
                   y = page->tm();
             else if (_align & ALIGN_BOTTOM)
