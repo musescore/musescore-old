@@ -55,7 +55,7 @@ User Documentation:
       "de" (german) directory.
 
       Requirements:
-            - tex with ConTeXt macro package
+            - TeX with ConTeXt macro package
               (as part of tetex 3.0 distribution)
 
       Type "make doc" to generate man-de.pdf in doc/de.
@@ -83,7 +83,7 @@ Test:
 
       MuseScore is in early alpha state. That means you should not use
       it for any real work. It is incomplete and probably buggy.
-      The save format (*.msc) will most likely change in future
+      The save format (*.msc files) will most likely change in future
       versions.
 
 

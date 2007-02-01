@@ -331,13 +331,11 @@ void ElementList::draw(Painter& p)
 
 bool ElementList::remove(Element* el)
       {
-      for (iElement i = begin(); i != end(); ++i) {
-            if ((*i) == el) {
-                  erase(i);
-                  return true;
-                  }
-            }
-      return false;
+      int idx = indexOf(el);
+      if (idx == -1)
+            return false;
+      removeAt(idx);
+      return true;
       }
 
 //---------------------------------------------------------
@@ -346,13 +344,12 @@ bool ElementList::remove(Element* el)
 
 void ElementList::replace(Element* o, Element* n)
       {
-      for (iElement i = begin(); i != end(); ++i) {
-            if ((*i) == o) {
-                  iElement in = erase(i);
-                  insert(in, n);
-                  break;
-                  }
+      int idx = indexOf(o);
+      if (idx == -1) {
+            printf("ElementList::replace: element not found\n");
+            return;
             }
+      QList<Element*>::replace(idx, n);
       }
 
 //---------------------------------------------------------
@@ -361,14 +358,14 @@ void ElementList::replace(Element* o, Element* n)
 
 void ElementList::move(Element* el, int tick)
       {
-      for (iElement i = begin(); i != end(); ++i) {
-            if ((*i) == el) {
-                  erase(i);
-                  el->setTick(tick);
-                  add(el);
-                  break;
-                  }
+      int idx = indexOf(el);
+      if (idx == -1) {
+            printf("ElementList::move: element not found\n");
+            return;
             }
+      QList<Element*>::removeAt(idx);
+      el->setTick(tick);
+      add(el);
       }
 
 //---------------------------------------------------------

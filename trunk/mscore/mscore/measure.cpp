@@ -989,14 +989,14 @@ double Measure::tick2pos(int tck) const
 
 void Measure::layout2()
       {
-      for (ciElement pe = _sel.begin(); pe != _sel.end(); ++pe) {
-            Element* pel = *pe;
+//      printf("Measure(%p)::layout2(): _sel.size = %d\n", this, _sel.size());
+
+      foreach(Element* pel, _sel) {
             int staff = _score->staff(pel->staff());
 
             // double y  = staff * point(Spatium(4) + style->staffDistance);
             double y = system()->staff(staff)->bbox().y();
 
-            pel->layout();
             switch(pel->type()) {
                   case VOLTA:
                   case OTTAVA:
@@ -1007,6 +1007,7 @@ void Measure::layout2()
                   case TEXT:
                   case TEMPO_TEXT:
                         {
+                        pel->layout();
                         double x = tick2pos(pel->tick());
                         pel->setPos(x, y);
                         }
@@ -1016,7 +1017,10 @@ void Measure::layout2()
                            bbox().width() - pel->bbox().width() - _spatium,
                            - pel->bbox().height() - _spatium);
                         break;
+                  case SLUR:
+                        // slur->layout() messes with add()/remove()
                   default:
+                        pel->layout();
                         break;
                   }
 
@@ -1167,20 +1171,15 @@ void Measure::add(Element* el)
 //            case LYRICS:
 //                  ((Lyrics*)el)->segment()->add(el);
 //                  break;
-            case SLUR_SEGMENT:
-                  // ((SlurSegment*)el)->slurTie()->add(el);
-// printf("Measure %p: add slur segment %p\n", this, el);
-                  _sel.push_back(el);
-                  break;
             case SLUR:
                   {
                   SlurTie* s = (SlurTie*)el;
-                  ElementList sl(*(s->elements()));
-                  for (iElement i = sl.begin(); i != sl.end(); ++i) {
-                        add(*i);
+                  ElementList* sl = s->elements();
+                  for (iElement i = sl->begin(); i != sl->end(); ++i) {
+                        _sel.append(*i);
                         }
                   }
-                  _sel.push_back(el);
+                  _sel.append(el);
                   break;
 
             case VOLTA:
@@ -1196,7 +1195,7 @@ void Measure::add(Element* el)
                               _ending = 2;
                               break;
                         };
-                  _sel.push_back(el);
+                  _sel.append(el);
                   break;
 
             case OTTAVA:
@@ -1207,7 +1206,8 @@ void Measure::add(Element* el)
             case SYMBOL:
             case TEXT:
             case TEMPO_TEXT:
-                  _sel.push_back(el);
+            case SLUR_SEGMENT:
+                  _sel.append(el);
                   break;
 
             case BAR_LINE:
@@ -1314,7 +1314,7 @@ void Measure::remove(Element* el)
                   break;
             case SLUR:
                   {
-                  SlurTie* s = (SlurTie*)el;
+                  Slur* s = (Slur*)el;
                   ElementList* sl = s->elements();
                   for (iElement i = sl->begin(); i != sl->end(); ++i)
                         remove(*i);
@@ -1327,6 +1327,7 @@ void Measure::remove(Element* el)
                         printf("Measure(%p)::remove(%s,%p) not found\n",
                            this, el->name(), el);
                   break;
+            case SLUR_SEGMENT:
             case DYNAMIC:
             case HAIRPIN:
             case TEMPO_TEXT:
@@ -1335,7 +1336,6 @@ void Measure::remove(Element* el)
             case OTTAVA:
             case PEDAL:
             case TRILL:
-            case SLUR_SEGMENT:
                   if (!_sel.remove(el)) {
                         if (!_pel.remove(el))
                               printf("Measure(%p)::remove(%s,%p) not found\n",

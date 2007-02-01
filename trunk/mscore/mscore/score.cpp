@@ -907,22 +907,12 @@ void Score::startEdit(Element* element)
             // find editObject (the right segment) in the
             // cloned slur
             //
-            int idx = 0;
-            ElementList* el = slur->elements();
-            for (iElement i = el->begin(); i != el->end(); ++i, ++idx) {
-                  if  (*i == segment)
-                        break;
-                  }
-            el = newSlur->elements();
-            editObject = 0;
-            for (iElement i = el->begin(); i != el->end(); ++i, --idx) {
-                  if (idx == 0) {
-                        editObject = *i;
-                        break;
-                        }
-                  }
-            if (editObject == 0)
+            int idx = slur->elements()->indexOf(segment);
+            if (idx == -1)
                   abort();
+            editObject = newSlur->elements()->at(idx);
+
+
             select(editObject, 0, 0);
             undoOp(UndoOp::RemoveElement, slur);
             undoOp(UndoOp::AddElement, newSlur);
@@ -938,7 +928,6 @@ void Score::startEdit(Element* element)
             undoOp(UndoOp::RemoveElement, origEditObject);
             undoOp(UndoOp::AddElement, editObject);
             }
-
       updateAll = true;
       endCmd(false);
       }
@@ -958,8 +947,8 @@ bool Score::edit(QKeyEvent* ev)
             endCmd(true);
             return true;
             }
-      layout();
       endCmd(false);
+      layout();
       return false;
       }
 
@@ -969,6 +958,7 @@ bool Score::edit(QKeyEvent* ev)
 
 void Score::endEdit()
       {
+      ((Measure*)editObject->parent())->layout2();
       foreach (Shortcut* s, shortcuts) {
             if (s->action)
                   s->action->setShortcut(s->key);
@@ -997,8 +987,8 @@ void Score::endEdit()
                   measure->remove(lyrics);
                   }
             }
-      editObject = 0;
       layout();
+      editObject = 0;
       }
 
 //---------------------------------------------------------
