@@ -1,3 +1,6 @@
+1.2.7  (ws)
+      - fix crash after editing slur
+      - fix page number position
 31.1.7 (lv)
       - fixed MusicXML export of dynamics
       (ws)

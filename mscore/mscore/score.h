@@ -120,7 +120,6 @@ class Score : public QObject {
 
       UndoList undoList;
       UndoList redoList;
-      bool undoActive;
 
       bool _playlistDirty;
       bool _dirty;      ///< Score data was modified.
@@ -154,6 +153,7 @@ class Score : public QObject {
       void checkUndoOp();
 
    public:
+      bool undoActive;
       //---------------------------------------------------
       //    input data for layout():
       //---------------------------------------------------

@@ -611,12 +611,6 @@ void Score::addElement(Element* element)
                   }
             layout();
             }
-/*      else if (element->type() == SLUR_SEGMENT) {
-            SlurSegment* ss = (SlurSegment*)element;
-            SlurTie* slur = ss->slurTie();
-            slur->add(element);
-            }
-      */
       }
 
 //---------------------------------------------------------

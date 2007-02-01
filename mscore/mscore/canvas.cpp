@@ -274,8 +274,8 @@ void Canvas::mousePressEvent(QMouseEvent* ev)
       Element* element = _score->findSelectableElement(startMove);
 
       //
-      if (state == EDIT && element == score()->editElement())
-            return;
+//??      if (state == EDIT && element == score()->editElement())
+//            return;
 
       _score->setDragObject(element);
 
@@ -523,7 +523,9 @@ void Canvas::mouseReleaseEvent(QMouseEvent* ev)
             return;
             }
       mouseReleaseEvent1(ev);
-      _score->endCmd(true);
+      // here we can be in state EDIT again
+      if (state != EDIT)
+            _score->endCmd(true);
       }
 
 //---------------------------------------------------------

@@ -135,18 +135,6 @@ void SlurSegment::draw1(Painter& p)
       }
 
 //---------------------------------------------------------
-//   startEdit
-//---------------------------------------------------------
-
-bool SlurSegment::startEdit(QMatrix& matrix)
-      {
-// printf("SlurSegment:: start edit\n");
-      mode = 4;
-      updateGrips(matrix);
-      return true;
-      }
-
-//---------------------------------------------------------
 //   updateGrips
 //---------------------------------------------------------
 
@@ -160,6 +148,83 @@ void SlurSegment::updateGrips(QMatrix& matrix)
             ups[i].r = r.translated(ups[i].p + ups[i].off * _spatium);
             }
       updatePath();
+      }
+
+//---------------------------------------------------------
+//   startEdit
+//---------------------------------------------------------
+
+bool SlurSegment::startEdit(QMatrix& matrix)
+      {
+      mode = 4;
+      updateGrips(matrix);
+      return true;
+      }
+
+//---------------------------------------------------------
+//   edit
+//---------------------------------------------------------
+
+bool SlurSegment::edit(QKeyEvent* ev)
+      {
+      QPointF ppos(apos());
+
+      if ((ev->modifiers() & Qt::ShiftModifier)) {
+            if (ev->key() == Qt::Key_Left)
+                  slur->prevSeg(apos(), mode, ups[mode-1]);
+            else if (ev->key() == Qt::Key_Right)
+                  slur->nextSeg(apos(), mode, ups[mode-1]);
+            return false;
+            }
+
+      QPointF delta;
+      qreal val = 1.0;
+      if (ev->modifiers() & Qt::ControlModifier)
+            val = 0.1;
+      switch (ev->key()) {
+            case Qt::Key_Left:
+                  delta = QPointF(-val, 0);
+                  break;
+            case Qt::Key_Right:
+                  delta = QPointF(val, 0);
+                  break;
+            case Qt::Key_Up:
+                  delta = QPointF(0, -val);
+                  break;
+            case Qt::Key_Down:
+                  delta = QPointF(0, val);
+                  break;
+            case Qt::Key_Tab:
+                  if (mode < 4)
+                        ++mode;
+                  else
+                        mode = 1;
+                  break;
+            case Qt::Key_X:
+                  slur->setSlurDirection(slur->isUp() ? DOWN : UP);
+                  break;
+            }
+      if (mode == 0)
+            return false;
+
+      int idx       = (mode-1) % 4;
+      ups[idx].off += delta;
+      ups[idx].r.translate(delta * _spatium);
+
+      if (mode == 1 || mode == 4) {
+            slur->layout2(apos(), mode, ups[idx]);
+            if (!showRubberBand || (mode != 1 && mode != 4))
+                  return true;
+            QPointF ppos(apos());
+            QPointF rp1, rp2;
+            rp1 = ups[idx].p + ups[idx].off * _spatium + ppos;
+            rp2 = ups[idx].p + ppos;
+            rb->set(rp1, rp2);
+            rp1 -= ppos;
+            rp2 -= ppos;
+//??            orBbox(QRectF(rp1, QSizeF(rp2.x() - rp1.x(), rp2.y() - rp1.y())));
+            }
+      return false;
       }
 
 //---------------------------------------------------------
@@ -351,72 +416,6 @@ bool SlurSegment::contains(const QPointF& p) const
 #endif
 
 //---------------------------------------------------------
-//   edit
-//---------------------------------------------------------
-
-bool SlurSegment::edit(QKeyEvent* ev)
-      {
-      QPointF ppos(apos());
-
-      if ((ev->modifiers() & Qt::ShiftModifier)) {
-            if (ev->key() == Qt::Key_Left)
-                  slur->prevSeg(apos(), mode, ups[mode-1]);
-            else if (ev->key() == Qt::Key_Right)
-                  slur->nextSeg(apos(), mode, ups[mode-1]);
-            return false;
-            }
-
-      QPointF delta;
-      qreal val = 1.0;
-      if (ev->modifiers() & Qt::ControlModifier)
-            val = 0.1;
-      switch (ev->key()) {
-            case Qt::Key_Left:
-                  delta = QPointF(-val, 0);
-                  break;
-            case Qt::Key_Right:
-                  delta = QPointF(val, 0);
-                  break;
-            case Qt::Key_Up:
-                  delta = QPointF(0, -val);
-                  break;
-            case Qt::Key_Down:
-                  delta = QPointF(0, val);
-                  break;
-            case Qt::Key_Tab:
-                  if (mode < 4)
-                        ++mode;
-                  else
-                        mode = 1;
-                  break;
-            case Qt::Key_X:
-                  slur->setSlurDirection(slur->isUp() ? DOWN : UP);
-                  break;
-            }
-      if (mode == 0)
-            return false;
-
-      int idx       = (mode-1) % 4;
-      ups[idx].off += delta;
-      ups[idx].r.translate(delta * _spatium);
-
-      if (mode == 1 || mode == 4) {
-            slur->layout2(apos(), mode, ups[idx]);
-            if (!showRubberBand || (mode != 1 && mode != 4))
-                  return true;
-            QPointF ppos(apos());
-            QPointF rp1, rp2;
-            rp1 = ups[idx].p + ups[idx].off * _spatium + ppos;
-            rp2 = ups[idx].p + ppos;
-            rb->set(rp1, rp2);
-            rp1 -= ppos;
-            rp2 -= ppos;
-//??            orBbox(QRectF(rp1, QSizeF(rp2.x() - rp1.x(), rp2.y() - rp1.y())));
-            }
-      return false;
-      }
-
-//---------------------------------------------------------
 //   layout
 //---------------------------------------------------------
 
@@ -494,11 +493,13 @@ SlurTie::SlurTie(const SlurTie& t)
       {
       up             = t.up;
       _slurDirection = t._slurDirection;
-      segments.clear();
-      for (ciElement ie = t.segments.begin(); ie != t.segments.end(); ++ie) {
-            SlurSegment* ss = new SlurSegment(*(SlurSegment*)(*ie));
+      //
+      // duplicate segments
+      //
+      foreach(const Element* s, t.segments) {
+            SlurSegment* ss = new SlurSegment(*(const SlurSegment*)s);
             ss->setSlurTie(this);
-            segments.push_back(ss);
+            segments.append(ss);
             }
       }
 
@@ -822,7 +823,6 @@ void Slur::read(Score* score, QDomNode node)
 
 void Slur::layout()
       {
-// printf("Slur layout\n");
       switch (_slurDirection) {
             case UP:    up = true; break;
             case DOWN:  up = false; break;
@@ -895,7 +895,7 @@ void Slur::layout()
             Element* parent = el->parent();
 // printf("Slur layout %d: remove segment %p from parent %p\n", segments.size(), el, parent);
 
-            if (parent)           // if layout was not called, parent is zero
+            if (parent)           // if layout was never called, parent is zero
                   parent->remove(el);
             }
       segments.clear();
