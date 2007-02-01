@@ -76,10 +76,12 @@ static const TextStyle defaultTextStyles[] = {
          ALIGN_HCENTER | ALIGN_BOTTOM,    ANCHOR_PAGE, 0, MM(1), OFFSET_ABS),
       TextStyle(QString("Measure Number"), ff, 8, false, false, false,
          ALIGN_LEFT,    ANCHOR_TICK, 0, -2.2, OFFSET_SPATIUM),
+
       TextStyle(QString("Page Number Odd"), ff, 12, false, false, false,
-         ALIGN_RIGHT | ALIGN_TOP, ANCHOR_PAGE, MM(-10), MM(10), OFFSET_ABS),
+         ALIGN_RIGHT | ALIGN_TOP, ANCHOR_PAGE, MM(0), MM(0), OFFSET_ABS),
       TextStyle(QString("Page Number Even"), ff, 12, false, false, false,
-         ALIGN_LEFT | ALIGN_TOP, ANCHOR_PAGE, MM(10), MM(10), OFFSET_ABS),
+         ALIGN_LEFT | ALIGN_TOP, ANCHOR_PAGE, MM(0), MM(0), OFFSET_ABS),
+
       TextStyle(QString("Translator"), ff, 11, false, false, false,
          ALIGN_HCENTER | ALIGN_TOP,    ANCHOR_TICK, 0, 6, OFFSET_SPATIUM),
       TextStyle(QString("Dynamics1"), QString("MScore1"), 20, false, false, false,

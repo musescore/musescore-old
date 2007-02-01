@@ -53,6 +53,9 @@
 #include "playpanel.h"
 #include "page.h"
 
+QTextStream cout(stdout);
+QTextStream eout(stderr);
+
 PadState padState;
 QString mscoreGlobalShare;
 QString language;
@@ -943,7 +946,8 @@ static QString getSharePath()
 
 static void printVersion(const char* prog)
       {
-      fprintf(stderr, "%s: Linux Music Score Editor; Version %s\n", prog, VERSION);
+      // fprintf(stderr, "%s: Linux Music Score Editor; Version %s\n", prog, VERSION);
+      cout << prog << ": Linux Music Score Editor; Version " << VERSION << endl;
       }
 
 //---------------------------------------------------------

@@ -49,6 +49,8 @@ extern QString language;
 
 extern int appDpiX;
 extern int appDpiY;
+
+extern QTextStream cout, eout;
 #endif
 
 

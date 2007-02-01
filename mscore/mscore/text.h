@@ -81,6 +81,8 @@ class Text : public Element {
 
       bool isEmpty() const;
       void setStyle(int n);
+      double xoff() const { return _xoff; }
+      double yoff() const { return _yoff; }
 
       virtual void draw1(Painter&);
 

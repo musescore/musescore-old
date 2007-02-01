@@ -300,7 +300,7 @@ void Beam::layout()
       int move       = 0;
       int firstMove  = elements.front()->move();
 
-printf("Layout Beam\n");
+// printf("Layout Beam\n");
       for (iChordRest i = elements.begin(); i != elements.end(); ++i) {
             ChordRest* cr = i->second;
             //
@@ -336,7 +336,7 @@ printf("Layout Beam\n");
                   maxTickLen = tl;
             }
 
-printf("   move %d  firstMove %d\n", move, firstMove);
+// printf("   move %d  firstMove %d\n", move, firstMove);
 
       bool upFlag = upCount >= 0;
       //
