@@ -1660,6 +1660,8 @@ MeasureWidth Measure::layoutX(double stretch)
 // (e.g. CLEF, CHORD, REST, TIMESIG).
 // Cause: redo restores the pointer from the segment to the element, but not does not
 // undo segment removal from the measure
+// WS: this has now changed; undo/redo should create/delete segments; needs
+// further testing
 
 again:
       for (Segment* s = first(); s; s = s->next()) {
@@ -1878,7 +1880,7 @@ again:
                         }
                   int nticks = (nseg ? nseg->tick() : ntick) - seg->tick();
                   if (nticks == 0) {
-                        printf("NTICKS is NULL size %d, idx %d, %d %d  %p %p types %d %d\n",
+                        printf("layoutX: nticks==0 size %d, idx %d, %d %d  %p %p types %d %d\n",
                            size(), i-1, seg->tick(), nseg ? nseg->tick() : 0, seg, nseg,
                            seg->type(), nseg ? nseg->type() : 0);
                         }
