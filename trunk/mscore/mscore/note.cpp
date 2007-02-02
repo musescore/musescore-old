@@ -218,7 +218,7 @@ void Note::changeAccidental(int pre)
       int offset    = score()->clefOffset(tick, staffIdx());
       int l1        = 45 - _line + offset;
       int curOffset = tversatz[l1];
-      int key       = score()->keymap->key(tick);
+      int key       = staff()->keymap()->key(tick);
       int keyOffset = tab3[key+7][l1 % 7];
 
       int pitchOffset;

@@ -18,12 +18,15 @@
 //  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //=============================================================================
 
+#include "globals.h"
 #include "staff.h"
 #include "part.h"
 #include "clef.h"
 #include "xml.h"
 #include "score.h"
 #include "bracket.h"
+#include "key.h"
+#include "segment.h"
 
 //---------------------------------------------------------
 //   isTopSplit
@@ -118,6 +121,8 @@ Staff::Staff(Score* s, Part* p, int rs)
       _clef   = new ClefList;
       _bracket = NO_BRACKET;
       _bracketSpan = 0;
+      _keymap = new KeyList;
+      (*_keymap)[0] = 0;
       }
 
 //---------------------------------------------------------
@@ -127,6 +132,7 @@ Staff::Staff(Score* s, Part* p, int rs)
 Staff::~Staff()
       {
       delete _clef;
+      delete _keymap;
       }
 
 //---------------------------------------------------------
@@ -146,6 +152,7 @@ void Staff::write(Xml& xml) const
       {
       xml.stag("Staff");
       _clef->write(xml, "cleflist");
+      _keymap->write(xml, "keylist");
       if (_bracket != NO_BRACKET) {
             xml.tagE("bracket type=\"%d\" span=\"%d\"", _bracket, _bracketSpan);
             }
@@ -172,9 +179,10 @@ void Staff::read(QDomNode node)
             if (e.isNull())
                   continue;
             QString tag(e.tagName());
-            if (tag == "cleflist") {
+            if (tag == "cleflist")
                   _clef->read(node, _score);
-                  }
+            else if (tag == "keylist")
+                  _keymap->read(node, _score);
             else if (tag == "bracket") {
                   _bracket = e.attribute("type", "-1").toInt();
                   _bracketSpan = e.attribute("span", "0").toInt();
@@ -213,4 +221,68 @@ int StaffList::idx(const Staff* p) const
       printf("StaffList::idx(%p): not found\n", p);
       return -1;
       }
+
+//---------------------------------------------------------
+//   changeKeySig
+//
+// change key signature at tick into subtype st for all staves
+// in response to gui command (drop keysig on measure or keysig)
+//
+// FIXME: redo does not work
+//---------------------------------------------------------
+
+void Staff::changeKeySig(int tick, int st)
+      {
+      int ot = _keymap->key(tick);
+//      printf("changeKeySig tick %d st %d ot %d\n",
+//         tick, st, ot);
+      if (ot == st)
+            return;                 // no change
+      (*_keymap)[tick] = st;
+
+      Measure* m = _score->tick2measure(tick);
+      if (!m) {
+            printf("measure for tick %d not found!\n", tick);
+            return;
+            }
+
+      //---------------------------------------------
+      // remove unnessesary keysig symbols
+      //---------------------------------------------
+
+      for (; m; m = m->next()) {
+again:
+            for (Segment* segment = m->first(); segment; segment = segment->next()) {
+                  for (int rstaff = 0; rstaff < VOICES; ++rstaff) {
+                        int track = idx() * VOICES + rstaff;
+                        Element* e = segment->element(track);
+
+                        if (e == 0 || e->type() != KEYSIG)
+                              continue;
+                        int etick = segment->tick();
+                        if (etick == tick) {
+                              _score->undoOp(UndoOp::RemoveElement, e);
+                              segment->setElement(track, 0);
+                              goto again;
+                              }
+                        }
+                  }
+            }
+
+      //---------------------------------------------
+      // insert new keysig symbols
+      //---------------------------------------------
+
+      if (tick != 0) {
+            m = _score->tick2measure(tick);
+            KeySig* keysig = new KeySig(_score);
+            keysig->setStaff(this);
+            keysig->setTick(tick);
+            keysig->setSubtype(st);
+            keysig->setParent(m);
+            _score->cmdAdd(keysig);
+            }
+      _score->layout();
+      }
+
 

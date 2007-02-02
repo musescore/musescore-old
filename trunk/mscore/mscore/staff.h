@@ -31,6 +31,7 @@ class ClefList;
 class Xml;
 class Part;
 class Score;
+class KeyList;
 
 //---------------------------------------------------------
 //   Staff
@@ -47,6 +48,7 @@ class Staff {
       Part* _part;
       int _rstaff;                  ///< Index in Part.
       ClefList* _clef;
+      KeyList* _keymap;
       int _bracket;
       int _bracketSpan;             ///< Bracket this number of staves.
 
@@ -76,6 +78,8 @@ class Staff {
       int bracketSpan() const        { return _bracketSpan; }
       void setBracket(int val)       { _bracket = val;      }
       void setBracketSpan(int val)   { _bracketSpan = val;  }
+      KeyList* keymap() const        { return _keymap;      }
+      void changeKeySig(int tick, int st);
       };
 
 //---------------------------------------------------------

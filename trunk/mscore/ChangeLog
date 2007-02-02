@@ -1,3 +1,6 @@
+2.2.7 (ws)
+      - move KeyList from Score() to Staff() allowing for different key
+        signatures for different staffs
 1.2.7  (ws)
       - fix crash after editing slur
       - fix page number position

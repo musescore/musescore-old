@@ -1073,8 +1073,9 @@ bool ExportMusicXml::saver()
                         // output only keysig changes, not generated keysigs
                         // at line beginning
                         int ti = ksig->tick();
-                        int key = score->keymap->key(ti);
-                        KeyList* kl = score->keymap;
+                        //TODO_K
+                        KeyList* kl = score->staff(0)->keymap();
+                        int key = kl->key(ti);
                         ciKeyEvent ci = kl->find(ti);
                         if (ci != kl->end()) {
                               keysig(key);

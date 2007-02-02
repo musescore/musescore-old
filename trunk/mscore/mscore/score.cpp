@@ -219,7 +219,6 @@ Score::Score()
       _layout->setScore(this);
       tempomap          = new TempoList;
       sigmap            = new SigList;
-      keymap            = new KeyList;
       sel               = new Selection(this);
       _staves           = new StaffList;
       _parts            = new PartList;
@@ -250,7 +249,6 @@ Score::~Score()
       {
       delete tempomap;
       delete sigmap;
-      delete keymap;
       delete sel;
       delete _staves;
       delete _parts;
@@ -318,8 +316,6 @@ void Score::clear()
 
       sigmap->clear();
       sigmap->add(0, 4, 4);
-      keymap->clear();
-      (*keymap)[0] = 0;
       tempomap->clear();
       _layout->systems()->clear();
       _layout->pages()->clear();
@@ -374,7 +370,6 @@ void Score::write(Xml& xml)
             xml.tag("movement-title", movementTitle);
 
       sigmap->write(xml);
-      keymap->write(xml, "keylist");
       tempomap->write(xml);
       for (iPart i = _parts->begin(); i != _parts->end(); ++i)
             (*i)->write(xml);
@@ -424,9 +419,10 @@ void Score::addMeasure(Measure* m)
             int mtick = im->tick();
             int len   = im->tickLen();
             sigmap->insertTime(mtick, len);
-            keymap->insertTime(mtick, len);
-            for (iStaff i = _staves->begin(); i != _staves->end(); ++i)
+            for (iStaff i = _staves->begin(); i != _staves->end(); ++i) {
                   (*i)->clef()->insertTime(mtick, len);
+                  (*i)->keymap()->insertTime(mtick, len);
+                  }
             }
       _layout->insert(im, m);
       fixTicks();
@@ -443,9 +439,10 @@ void Score::removeMeasure(int tick)
             if (mtick == tick) {
                   int len = im->tickLen();
                   sigmap->removeTime(mtick, len);
-                  keymap->removeTime(mtick, len);
-                  for (iStaff i = _staves->begin(); i != _staves->end(); ++i)
+                  for (iStaff i = _staves->begin(); i != _staves->end(); ++i) {
                         (*i)->clef()->removeTime(mtick, len);
+                        (*i)->keymap()->removeTime(mtick, len);
+                        }
                   _layout->erase(im);
                   fixTicks();
                   return;

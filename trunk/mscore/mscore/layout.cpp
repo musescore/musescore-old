@@ -223,7 +223,7 @@ void ScoreLayout::processSystemHeader(Measure* m)
                   }
 #endif
             if (!hasKeysig) {
-                  int idx = _score->keymap->key(tick);
+                  int idx = staff->keymap()->key(tick);
                   if (idx) {
                         KeySig* ks = new KeySig(_score);
                         ks->setStaff(staff);

@@ -25,7 +25,7 @@ class Xml;
 class Score;
 
 //---------------------------------------------------------
-//   Signature Event
+//   Time Signature Event
 //    for regular measures: ticks = ticks_measure(z, n)
 //    for irregular measures z/n has no meaning
 //---------------------------------------------------------

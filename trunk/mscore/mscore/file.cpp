@@ -674,8 +674,6 @@ bool Score::loadFile(QFile* qf)
                               readStaff(n);
                         else if (tag == "siglist")
                               sigmap->read(n, this);
-                        else if (tag == "keylist")
-                              keymap->read(n, this);
                         else if (tag == "tempolist")
                               tempomap->read(n, this);
                         else if (tag == "cursorStaff")
