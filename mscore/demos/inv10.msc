@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf8"?>
 <museScore version="1.0">
-  <Geometry x="676" y="68" w="1061" h="931" />
+  <Geometry x="484" y="68" w="1253" h="931" />
   <Spatium>1.55</Spatium>
   <Division>480</Division>
   <Mag>1.5</Mag>
-  <xoff>-28</xoff>
-  <yoff>26</yoff>
+  <xoff>48</xoff>
+  <yoff>-179</yoff>
   <Style>
     <staffUpperBorder>8</staffUpperBorder>
     <staffLowerBorder>4</staffLowerBorder>
@@ -80,9 +80,6 @@
       <denom>8</denom>
       </sig>
     </siglist>
-  <keylist>
-    <key tick="0" idx="1"/>
-    </keylist>
   <tempolist fix="500000">
     <tempo at="0">
       <tick>0</tick>
@@ -98,12 +95,18 @@
       <cleflist>
         <clef tick="0" idx="0"/>
         </cleflist>
+      <keylist>
+        <key tick="0" idx="1"/>
+        </keylist>
       <bracket type="1" span="2"/>
       </Staff>
     <Staff>
       <cleflist>
         <clef tick="0" idx="4"/>
         </cleflist>
+      <keylist>
+        <key tick="0" idx="1"/>
+        </keylist>
       </Staff>
     <trackName>Piano</trackName>
     <Instrument>
@@ -1731,26 +1734,6 @@ p, li { white-space: pre-wrap; }
         <subtype>5</subtype>
         <tick>7440</tick>
         </BarLine>
-      <Symbol>
-        <name>clef eight</name>
-        <x>8.7874</x>
-        <y>0</y>
-        </Symbol>
-      <Symbol>
-        <name>clef eight</name>
-        <x>8.7874</x>
-        <y>0</y>
-        </Symbol>
-      <Symbol>
-        <name>clef eight</name>
-        <x>8.7874</x>
-        <y>0</y>
-        </Symbol>
-      <Symbol>
-        <name>clef eight</name>
-        <x>8.7874</x>
-        <y>0</y>
-        </Symbol>
       <Chord>
         <ticklen>240</ticklen>
         <Note>

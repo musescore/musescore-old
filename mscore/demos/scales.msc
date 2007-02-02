@@ -92,10 +92,6 @@
       <denom>4</denom>
       </sig>
     </siglist>
-  <keylist>
-    <key tick="0" idx="0"/>
-    <key tick="20640" idx="1"/>
-    </keylist>
   <tempolist fix="500000">
     <tempo at="0">
       <tick>0</tick>
@@ -111,6 +107,10 @@
       <cleflist>
         <clef tick="0" idx="0"/>
         </cleflist>
+      <keylist>
+        <key tick="0" idx="0"/>
+        <key tick="20640" idx="1"/>
+        </keylist>
       </Staff>
     <trackName>Violin</trackName>
     <Instrument>

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf8"?>
 <museScore version="1.0">
-  <Geometry x="676" y="68" w="1061" h="931" />
+  <Geometry x="436" y="15" w="1061" h="931" />
   <Spatium>1.75</Spatium>
   <Division>480</Division>
-  <Mag>1.5</Mag>
-  <xoff>-131.08</xoff>
-  <yoff>5.499</yoff>
+  <Mag>0.75</Mag>
+  <xoff>35.0089</xoff>
+  <yoff>30.2583</yoff>
   <Style>
     <staffUpperBorder>8</staffUpperBorder>
     <staffLowerBorder>4</staffLowerBorder>
@@ -80,9 +80,6 @@
       <denom>4</denom>
       </sig>
     </siglist>
-  <keylist>
-    <key tick="0" idx="0"/>
-    </keylist>
   <tempolist fix="500000">
     <relTempo>76</relTempo>
     <tempo at="0">
@@ -101,12 +98,18 @@
         <clef tick="61440" idx="4"/>
         <clef tick="63360" idx="0"/>
         </cleflist>
+      <keylist>
+        <key tick="0" idx="0"/>
+        </keylist>
       <bracket type="1" span="2"/>
       </Staff>
     <Staff>
       <cleflist>
         <clef tick="0" idx="4"/>
         </cleflist>
+      <keylist>
+        <key tick="0" idx="0"/>
+        </keylist>
       </Staff>
     <trackName>Piano</trackName>
     <Instrument>
@@ -128,8 +131,8 @@
         <spatiumSizeDependent>0</spatiumSizeDependent>
         <data>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-size:24pt; font-weight:400; font-style:normal; text-decoration:none;&quot;&gt;
-&lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Praeludium I&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;helvetica&apos;; font-size:11pt; font-weight:400; font-style:normal; text-decoration:none;&quot;&gt;
+&lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Times New Roman&apos;; font-size:24pt;&quot;&gt;Praeludium I&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
         </Text>
       <Text>
         <align>10</align>
@@ -169,7 +172,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
-        <StemDirection>1</StemDirection>
+        <StemDirection>up</StemDirection>
         <Note>
           <pitch>76</pitch>
           </Note>
@@ -210,7 +213,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
-        <StemDirection>1</StemDirection>
+        <StemDirection>up</StemDirection>
         <Note>
           <pitch>76</pitch>
           </Note>
@@ -254,7 +257,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
-        <StemDirection>1</StemDirection>
+        <StemDirection>up</StemDirection>
         <Note>
           <pitch>77</pitch>
           </Note>
@@ -295,7 +298,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
-        <StemDirection>1</StemDirection>
+        <StemDirection>up</StemDirection>
         <Note>
           <pitch>77</pitch>
           </Note>
@@ -339,7 +342,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
-        <StemDirection>1</StemDirection>
+        <StemDirection>up</StemDirection>
         <Note>
           <pitch>77</pitch>
           </Note>
@@ -380,7 +383,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
-        <StemDirection>1</StemDirection>
+        <StemDirection>up</StemDirection>
         <Note>
           <pitch>77</pitch>
           </Note>
@@ -424,7 +427,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
-        <StemDirection>1</StemDirection>
+        <StemDirection>up</StemDirection>
         <Note>
           <pitch>76</pitch>
           </Note>
@@ -465,7 +468,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
-        <StemDirection>1</StemDirection>
+        <StemDirection>up</StemDirection>
         <Note>
           <pitch>76</pitch>
           </Note>
@@ -527,7 +530,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
-        <StemDirection>1</StemDirection>
+        <StemDirection>up</StemDirection>
         <Note>
           <pitch>81</pitch>
           </Note>
@@ -568,7 +571,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
-        <StemDirection>1</StemDirection>
+        <StemDirection>up</StemDirection>
         <Note>
           <pitch>81</pitch>
           </Note>
@@ -594,7 +597,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
-        <StemDirection>1</StemDirection>
+        <StemDirection>up</StemDirection>
         <Note>
           <pitch>74</pitch>
           </Note>
@@ -635,7 +638,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
-        <StemDirection>1</StemDirection>
+        <StemDirection>up</StemDirection>
         <Note>
           <pitch>74</pitch>
           </Note>
@@ -697,7 +700,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
-        <StemDirection>1</StemDirection>
+        <StemDirection>up</StemDirection>
         <Note>
           <pitch>79</pitch>
           </Note>
@@ -738,7 +741,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
-        <StemDirection>1</StemDirection>
+        <StemDirection>up</StemDirection>
         <Note>
           <pitch>79</pitch>
           </Note>
@@ -3010,7 +3013,7 @@ p, li { white-space: pre-wrap; }
         <ticklen>1920</ticklen>
         <Attribute>
           <idx>0</idx>
-          <offset x="-1.20015" y="1.05833"/>
+          <selected>1</selected>
           </Attribute>
         <Note>
           <pitch>64</pitch>
@@ -3048,7 +3051,7 @@ p, li { white-space: pre-wrap; }
         <voice>1</voice>
         <tick>120</tick>
         <ticklen>360</ticklen>
-        <StemDirection>1</StemDirection>
+        <StemDirection>up</StemDirection>
         <Note>
           <voice>1</voice>
           <pitch>64</pitch>
@@ -3060,7 +3063,7 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <voice>1</voice>
         <ticklen>480</ticklen>
-        <StemDirection>1</StemDirection>
+        <StemDirection>up</StemDirection>
         <Note>
           <voice>1</voice>
           <pitch>64</pitch>
@@ -3075,7 +3078,7 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <voice>1</voice>
         <ticklen>360</ticklen>
-        <StemDirection>1</StemDirection>
+        <StemDirection>up</StemDirection>
         <Note>
           <voice>1</voice>
           <pitch>64</pitch>
@@ -3087,18 +3090,12 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <voice>1</voice>
         <ticklen>480</ticklen>
-        <StemDirection>1</StemDirection>
+        <StemDirection>up</StemDirection>
         <Note>
           <voice>1</voice>
           <pitch>64</pitch>
           </Note>
         </Chord>
-      <Rest>
-        <offset x="0" y="-2.64584"/>
-        <voice>1</voice>
-        <ticklen>120</ticklen>
-        <BeamMode>4</BeamMode>
-        </Rest>
       </Measure>
     <Measure number="2">
       <Chord>
@@ -3123,7 +3120,7 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <voice>1</voice>
         <ticklen>360</ticklen>
-        <StemDirection>1</StemDirection>
+        <StemDirection>up</StemDirection>
         <Note>
           <voice>1</voice>
           <pitch>62</pitch>
@@ -3135,7 +3132,7 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <voice>1</voice>
         <ticklen>480</ticklen>
-        <StemDirection>1</StemDirection>
+        <StemDirection>up</StemDirection>
         <Note>
           <voice>1</voice>
           <pitch>62</pitch>
@@ -3150,7 +3147,7 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <voice>1</voice>
         <ticklen>360</ticklen>
-        <StemDirection>1</StemDirection>
+        <StemDirection>up</StemDirection>
         <Note>
           <voice>1</voice>
           <pitch>62</pitch>
@@ -3162,7 +3159,7 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <voice>1</voice>
         <ticklen>480</ticklen>
-        <StemDirection>1</StemDirection>
+        <StemDirection>up</StemDirection>
         <Note>
           <voice>1</voice>
           <pitch>62</pitch>
@@ -3192,7 +3189,7 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <voice>1</voice>
         <ticklen>360</ticklen>
-        <StemDirection>1</StemDirection>
+        <StemDirection>up</StemDirection>
         <Note>
           <voice>1</voice>
           <pitch>62</pitch>
@@ -3204,7 +3201,7 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <voice>1</voice>
         <ticklen>480</ticklen>
-        <StemDirection>1</StemDirection>
+        <StemDirection>up</StemDirection>
         <Note>
           <voice>1</voice>
           <pitch>62</pitch>
@@ -3219,7 +3216,7 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <voice>1</voice>
         <ticklen>360</ticklen>
-        <StemDirection>1</StemDirection>
+        <StemDirection>up</StemDirection>
         <Note>
           <voice>1</voice>
           <pitch>62</pitch>
@@ -3231,7 +3228,7 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <voice>1</voice>
         <ticklen>480</ticklen>
-        <StemDirection>1</StemDirection>
+        <StemDirection>up</StemDirection>
         <Note>
           <voice>1</voice>
           <pitch>62</pitch>
@@ -3261,7 +3258,7 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <voice>1</voice>
         <ticklen>360</ticklen>
-        <StemDirection>1</StemDirection>
+        <StemDirection>up</StemDirection>
         <Note>
           <voice>1</voice>
           <pitch>64</pitch>
@@ -3273,7 +3270,7 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <voice>1</voice>
         <ticklen>480</ticklen>
-        <StemDirection>1</StemDirection>
+        <StemDirection>up</StemDirection>
         <Note>
           <voice>1</voice>
           <pitch>64</pitch>
@@ -3288,7 +3285,7 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <voice>1</voice>
         <ticklen>360</ticklen>
-        <StemDirection>1</StemDirection>
+        <StemDirection>up</StemDirection>
         <Note>
           <voice>1</voice>
           <pitch>64</pitch>
@@ -3300,7 +3297,7 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <voice>1</voice>
         <ticklen>480</ticklen>
-        <StemDirection>1</StemDirection>
+        <StemDirection>up</StemDirection>
         <Note>
           <voice>1</voice>
           <pitch>64</pitch>
@@ -3330,7 +3327,7 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <voice>1</voice>
         <ticklen>360</ticklen>
-        <StemDirection>1</StemDirection>
+        <StemDirection>up</StemDirection>
         <Note>
           <voice>1</voice>
           <pitch>64</pitch>
@@ -3342,7 +3339,7 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <voice>1</voice>
         <ticklen>480</ticklen>
-        <StemDirection>1</StemDirection>
+        <StemDirection>up</StemDirection>
         <Note>
           <voice>1</voice>
           <pitch>64</pitch>
@@ -3357,7 +3354,7 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <voice>1</voice>
         <ticklen>360</ticklen>
-        <StemDirection>1</StemDirection>
+        <StemDirection>up</StemDirection>
         <Note>
           <voice>1</voice>
           <pitch>64</pitch>
@@ -3369,7 +3366,7 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <voice>1</voice>
         <ticklen>480</ticklen>
-        <StemDirection>1</StemDirection>
+        <StemDirection>up</StemDirection>
         <Note>
           <voice>1</voice>
           <pitch>64</pitch>
@@ -3399,7 +3396,7 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <voice>1</voice>
         <ticklen>360</ticklen>
-        <StemDirection>1</StemDirection>
+        <StemDirection>up</StemDirection>
         <Note>
           <voice>1</voice>
           <pitch>62</pitch>
@@ -3411,7 +3408,7 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <voice>1</voice>
         <ticklen>480</ticklen>
-        <StemDirection>1</StemDirection>
+        <StemDirection>up</StemDirection>
         <Note>
           <voice>1</voice>
           <pitch>62</pitch>
@@ -3426,7 +3423,7 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <voice>1</voice>
         <ticklen>360</ticklen>
-        <StemDirection>1</StemDirection>
+        <StemDirection>up</StemDirection>
         <Note>
           <voice>1</voice>
           <pitch>62</pitch>
@@ -3438,7 +3435,7 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <voice>1</voice>
         <ticklen>480</ticklen>
-        <StemDirection>1</StemDirection>
+        <StemDirection>up</StemDirection>
         <Note>
           <voice>1</voice>
           <pitch>62</pitch>
@@ -3468,7 +3465,7 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <voice>1</voice>
         <ticklen>360</ticklen>
-        <StemDirection>1</StemDirection>
+        <StemDirection>up</StemDirection>
         <Note>
           <voice>1</voice>
           <pitch>62</pitch>
@@ -3494,7 +3491,7 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <voice>1</voice>
         <ticklen>360</ticklen>
-        <StemDirection>1</StemDirection>
+        <StemDirection>up</StemDirection>
         <Note>
           <voice>1</voice>
           <pitch>62</pitch>
@@ -3506,7 +3503,7 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <voice>1</voice>
         <ticklen>480</ticklen>
-        <StemDirection>1</StemDirection>
+        <StemDirection>up</StemDirection>
         <Note>
           <voice>1</voice>
           <pitch>62</pitch>
@@ -3536,7 +3533,7 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <voice>1</voice>
         <ticklen>360</ticklen>
-        <StemDirection>1</StemDirection>
+        <StemDirection>up</StemDirection>
         <Note>
           <voice>1</voice>
           <pitch>60</pitch>
@@ -3548,7 +3545,7 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <voice>1</voice>
         <ticklen>480</ticklen>
-        <StemDirection>1</StemDirection>
+        <StemDirection>up</StemDirection>
         <Note>
           <voice>1</voice>
           <pitch>60</pitch>
@@ -3563,7 +3560,7 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <voice>1</voice>
         <ticklen>360</ticklen>
-        <StemDirection>1</StemDirection>
+        <StemDirection>up</StemDirection>
         <Note>
           <voice>1</voice>
           <pitch>60</pitch>
@@ -3575,7 +3572,7 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <voice>1</voice>
         <ticklen>480</ticklen>
-        <StemDirection>1</StemDirection>
+        <StemDirection>up</StemDirection>
         <Note>
           <voice>1</voice>
           <pitch>60</pitch>
@@ -3605,7 +3602,7 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <voice>1</voice>
         <ticklen>360</ticklen>
-        <StemDirection>1</StemDirection>
+        <StemDirection>up</StemDirection>
         <Note>
           <voice>1</voice>
           <pitch>60</pitch>
@@ -3617,7 +3614,7 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <voice>1</voice>
         <ticklen>480</ticklen>
-        <StemDirection>1</StemDirection>
+        <StemDirection>up</StemDirection>
         <Note>
           <voice>1</voice>
           <pitch>60</pitch>
@@ -3632,7 +3629,7 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <voice>1</voice>
         <ticklen>360</ticklen>
-        <StemDirection>1</StemDirection>
+        <StemDirection>up</StemDirection>
         <Note>
           <voice>1</voice>
           <pitch>60</pitch>
@@ -3644,7 +3641,7 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <voice>1</voice>
         <ticklen>480</ticklen>
-        <StemDirection>1</StemDirection>
+        <StemDirection>up</StemDirection>
         <Note>
           <voice>1</voice>
           <pitch>60</pitch>
@@ -3674,7 +3671,7 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <voice>1</voice>
         <ticklen>360</ticklen>
-        <StemDirection>1</StemDirection>
+        <StemDirection>up</StemDirection>
         <Note>
           <voice>1</voice>
           <pitch>57</pitch>
@@ -3686,7 +3683,7 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <voice>1</voice>
         <ticklen>480</ticklen>
-        <StemDirection>1</StemDirection>
+        <StemDirection>up</StemDirection>
         <Note>
           <voice>1</voice>
           <pitch>57</pitch>
@@ -3701,7 +3698,7 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <voice>1</voice>
         <ticklen>360</ticklen>
-        <StemDirection>1</StemDirection>
+        <StemDirection>up</StemDirection>
         <Note>
           <voice>1</voice>
           <pitch>57</pitch>
@@ -3713,7 +3710,7 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <voice>1</voice>
         <ticklen>480</ticklen>
-        <StemDirection>1</StemDirection>
+        <StemDirection>up</StemDirection>
         <Note>
           <voice>1</voice>
           <pitch>57</pitch>
@@ -3743,7 +3740,7 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <voice>1</voice>
         <ticklen>360</ticklen>
-        <StemDirection>1</StemDirection>
+        <StemDirection>up</StemDirection>
         <Note>
           <voice>1</voice>
           <pitch>59</pitch>
@@ -3755,7 +3752,7 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <voice>1</voice>
         <ticklen>480</ticklen>
-        <StemDirection>1</StemDirection>
+        <StemDirection>up</StemDirection>
         <Note>
           <voice>1</voice>
           <pitch>59</pitch>
@@ -3770,7 +3767,7 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <voice>1</voice>
         <ticklen>360</ticklen>
-        <StemDirection>1</StemDirection>
+        <StemDirection>up</StemDirection>
         <Note>
           <voice>1</voice>
           <pitch>59</pitch>
@@ -3782,7 +3779,7 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <voice>1</voice>
         <ticklen>480</ticklen>
-        <StemDirection>1</StemDirection>
+        <StemDirection>up</StemDirection>
         <Note>
           <voice>1</voice>
           <pitch>59</pitch>
@@ -3812,7 +3809,7 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <voice>1</voice>
         <ticklen>360</ticklen>
-        <StemDirection>1</StemDirection>
+        <StemDirection>up</StemDirection>
         <Note>
           <voice>1</voice>
           <pitch>58</pitch>
@@ -3824,7 +3821,7 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <voice>1</voice>
         <ticklen>480</ticklen>
-        <StemDirection>1</StemDirection>
+        <StemDirection>up</StemDirection>
         <Note>
           <voice>1</voice>
           <pitch>58</pitch>
@@ -3839,7 +3836,7 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <voice>1</voice>
         <ticklen>360</ticklen>
-        <StemDirection>1</StemDirection>
+        <StemDirection>up</StemDirection>
         <Note>
           <voice>1</voice>
           <pitch>58</pitch>
@@ -3851,7 +3848,7 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <voice>1</voice>
         <ticklen>480</ticklen>
-        <StemDirection>1</StemDirection>
+        <StemDirection>up</StemDirection>
         <Note>
           <voice>1</voice>
           <pitch>58</pitch>
@@ -3881,7 +3878,7 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <voice>1</voice>
         <ticklen>360</ticklen>
-        <StemDirection>1</StemDirection>
+        <StemDirection>up</StemDirection>
         <Note>
           <voice>1</voice>
           <pitch>57</pitch>
@@ -3893,7 +3890,7 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <voice>1</voice>
         <ticklen>480</ticklen>
-        <StemDirection>1</StemDirection>
+        <StemDirection>up</StemDirection>
         <Note>
           <voice>1</voice>
           <pitch>57</pitch>
@@ -3908,7 +3905,7 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <voice>1</voice>
         <ticklen>360</ticklen>
-        <StemDirection>1</StemDirection>
+        <StemDirection>up</StemDirection>
         <Note>
           <voice>1</voice>
           <pitch>57</pitch>
@@ -3920,7 +3917,7 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <voice>1</voice>
         <ticklen>480</ticklen>
-        <StemDirection>1</StemDirection>
+        <StemDirection>up</StemDirection>
         <Note>
           <voice>1</voice>
           <pitch>57</pitch>
@@ -3950,7 +3947,7 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <voice>1</voice>
         <ticklen>360</ticklen>
-        <StemDirection>1</StemDirection>
+        <StemDirection>up</StemDirection>
         <Note>
           <voice>1</voice>
           <pitch>56</pitch>
@@ -3964,7 +3961,7 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <voice>1</voice>
         <ticklen>480</ticklen>
-        <StemDirection>1</StemDirection>
+        <StemDirection>up</StemDirection>
         <Note>
           <voice>1</voice>
           <pitch>56</pitch>
@@ -3981,7 +3978,7 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <voice>1</voice>
         <ticklen>360</ticklen>
-        <StemDirection>1</StemDirection>
+        <StemDirection>up</StemDirection>
         <Note>
           <voice>1</voice>
           <pitch>56</pitch>
@@ -3995,7 +3992,7 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <voice>1</voice>
         <ticklen>480</ticklen>
-        <StemDirection>1</StemDirection>
+        <StemDirection>up</StemDirection>
         <Note>
           <voice>1</voice>
           <pitch>56</pitch>
@@ -4027,7 +4024,7 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <voice>1</voice>
         <ticklen>360</ticklen>
-        <StemDirection>1</StemDirection>
+        <StemDirection>up</StemDirection>
         <Note>
           <voice>1</voice>
           <pitch>55</pitch>
@@ -4039,7 +4036,7 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <voice>1</voice>
         <ticklen>480</ticklen>
-        <StemDirection>1</StemDirection>
+        <StemDirection>up</StemDirection>
         <Note>
           <voice>1</voice>
           <pitch>55</pitch>
@@ -4054,7 +4051,7 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <voice>1</voice>
         <ticklen>360</ticklen>
-        <StemDirection>1</StemDirection>
+        <StemDirection>up</StemDirection>
         <Note>
           <voice>1</voice>
           <pitch>55</pitch>
@@ -4066,7 +4063,7 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <voice>1</voice>
         <ticklen>480</ticklen>
-        <StemDirection>1</StemDirection>
+        <StemDirection>up</StemDirection>
         <Note>
           <voice>1</voice>
           <pitch>55</pitch>
@@ -4095,7 +4092,7 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <voice>1</voice>
         <ticklen>360</ticklen>
-        <StemDirection>1</StemDirection>
+        <StemDirection>up</StemDirection>
         <Note>
           <voice>1</voice>
           <pitch>53</pitch>
@@ -4107,7 +4104,7 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <voice>1</voice>
         <ticklen>480</ticklen>
-        <StemDirection>1</StemDirection>
+        <StemDirection>up</StemDirection>
         <Note>
           <voice>1</voice>
           <pitch>53</pitch>
@@ -4121,7 +4118,7 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <voice>1</voice>
         <ticklen>360</ticklen>
-        <StemDirection>1</StemDirection>
+        <StemDirection>up</StemDirection>
         <Note>
           <voice>1</voice>
           <pitch>53</pitch>
@@ -4133,7 +4130,7 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <voice>1</voice>
         <ticklen>480</ticklen>
-        <StemDirection>1</StemDirection>
+        <StemDirection>up</StemDirection>
         <Note>
           <voice>1</voice>
           <pitch>53</pitch>
@@ -4143,14 +4140,14 @@ p, li { white-space: pre-wrap; }
     <Measure number="17">
       <Chord>
         <ticklen>960</ticklen>
-        <StemDirection>2</StemDirection>
+        <StemDirection>down</StemDirection>
         <Note>
           <pitch>50</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>960</ticklen>
-        <StemDirection>2</StemDirection>
+        <StemDirection>down</StemDirection>
         <Note>
           <pitch>50</pitch>
           </Note>
@@ -4164,7 +4161,7 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <voice>1</voice>
         <ticklen>360</ticklen>
-        <StemDirection>1</StemDirection>
+        <StemDirection>up</StemDirection>
         <Note>
           <voice>1</voice>
           <pitch>53</pitch>
@@ -4176,7 +4173,7 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <voice>1</voice>
         <ticklen>480</ticklen>
-        <StemDirection>1</StemDirection>
+        <StemDirection>up</StemDirection>
         <Note>
           <voice>1</voice>
           <pitch>53</pitch>
@@ -4190,7 +4187,7 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <voice>1</voice>
         <ticklen>360</ticklen>
-        <StemDirection>1</StemDirection>
+        <StemDirection>up</StemDirection>
         <Note>
           <voice>1</voice>
           <pitch>53</pitch>
@@ -4202,7 +4199,7 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <voice>1</voice>
         <ticklen>480</ticklen>
-        <StemDirection>1</StemDirection>
+        <StemDirection>up</StemDirection>
         <Note>
           <voice>1</voice>
           <pitch>53</pitch>
@@ -4212,14 +4209,14 @@ p, li { white-space: pre-wrap; }
     <Measure number="18">
       <Chord>
         <ticklen>960</ticklen>
-        <StemDirection>2</StemDirection>
+        <StemDirection>down</StemDirection>
         <Note>
           <pitch>43</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>960</ticklen>
-        <StemDirection>2</StemDirection>
+        <StemDirection>down</StemDirection>
         <Note>
           <pitch>43</pitch>
           </Note>
@@ -4233,7 +4230,7 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <voice>1</voice>
         <ticklen>360</ticklen>
-        <StemDirection>1</StemDirection>
+        <StemDirection>up</StemDirection>
         <Note>
           <voice>1</voice>
           <pitch>50</pitch>
@@ -4245,7 +4242,7 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <voice>1</voice>
         <ticklen>480</ticklen>
-        <StemDirection>1</StemDirection>
+        <StemDirection>up</StemDirection>
         <Note>
           <voice>1</voice>
           <pitch>50</pitch>
@@ -4259,7 +4256,7 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <voice>1</voice>
         <ticklen>360</ticklen>
-        <StemDirection>1</StemDirection>
+        <StemDirection>up</StemDirection>
         <Note>
           <voice>1</voice>
           <pitch>50</pitch>
@@ -4271,7 +4268,7 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <voice>1</voice>
         <ticklen>480</ticklen>
-        <StemDirection>1</StemDirection>
+        <StemDirection>up</StemDirection>
         <Note>
           <voice>1</voice>
           <pitch>50</pitch>
@@ -4281,14 +4278,14 @@ p, li { white-space: pre-wrap; }
     <Measure number="19">
       <Chord>
         <ticklen>960</ticklen>
-        <StemDirection>2</StemDirection>
+        <StemDirection>down</StemDirection>
         <Note>
           <pitch>48</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>960</ticklen>
-        <StemDirection>2</StemDirection>
+        <StemDirection>down</StemDirection>
         <Note>
           <pitch>48</pitch>
           </Note>
@@ -4302,7 +4299,7 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <voice>1</voice>
         <ticklen>360</ticklen>
-        <StemDirection>1</StemDirection>
+        <StemDirection>up</StemDirection>
         <Note>
           <voice>1</voice>
           <pitch>52</pitch>
@@ -4314,7 +4311,7 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <voice>1</voice>
         <ticklen>480</ticklen>
-        <StemDirection>1</StemDirection>
+        <StemDirection>up</StemDirection>
         <Note>
           <voice>1</voice>
           <pitch>52</pitch>
@@ -4328,7 +4325,7 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <voice>1</voice>
         <ticklen>360</ticklen>
-        <StemDirection>1</StemDirection>
+        <StemDirection>up</StemDirection>
         <Note>
           <voice>1</voice>
           <pitch>52</pitch>
@@ -4340,7 +4337,7 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <voice>1</voice>
         <ticklen>480</ticklen>
-        <StemDirection>1</StemDirection>
+        <StemDirection>up</StemDirection>
         <Note>
           <voice>1</voice>
           <pitch>52</pitch>
@@ -4350,14 +4347,14 @@ p, li { white-space: pre-wrap; }
     <Measure number="20">
       <Chord>
         <ticklen>960</ticklen>
-        <StemDirection>2</StemDirection>
+        <StemDirection>down</StemDirection>
         <Note>
           <pitch>48</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>960</ticklen>
-        <StemDirection>2</StemDirection>
+        <StemDirection>down</StemDirection>
         <Note>
           <pitch>48</pitch>
           </Note>
@@ -4371,7 +4368,7 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <voice>1</voice>
         <ticklen>360</ticklen>
-        <StemDirection>1</StemDirection>
+        <StemDirection>up</StemDirection>
         <Note>
           <voice>1</voice>
           <pitch>55</pitch>
@@ -4383,7 +4380,7 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <voice>1</voice>
         <ticklen>480</ticklen>
-        <StemDirection>1</StemDirection>
+        <StemDirection>up</StemDirection>
         <Note>
           <voice>1</voice>
           <pitch>55</pitch>
@@ -4397,7 +4394,7 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <voice>1</voice>
         <ticklen>360</ticklen>
-        <StemDirection>1</StemDirection>
+        <StemDirection>up</StemDirection>
         <Note>
           <voice>1</voice>
           <pitch>55</pitch>
@@ -4409,7 +4406,7 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <voice>1</voice>
         <ticklen>480</ticklen>
-        <StemDirection>1</StemDirection>
+        <StemDirection>up</StemDirection>
         <Note>
           <voice>1</voice>
           <pitch>55</pitch>
@@ -4419,14 +4416,14 @@ p, li { white-space: pre-wrap; }
     <Measure number="21">
       <Chord>
         <ticklen>960</ticklen>
-        <StemDirection>2</StemDirection>
+        <StemDirection>down</StemDirection>
         <Note>
           <pitch>41</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>960</ticklen>
-        <StemDirection>2</StemDirection>
+        <StemDirection>down</StemDirection>
         <Note>
           <pitch>41</pitch>
           </Note>
@@ -4440,7 +4437,7 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <voice>1</voice>
         <ticklen>360</ticklen>
-        <StemDirection>1</StemDirection>
+        <StemDirection>up</StemDirection>
         <Note>
           <voice>1</voice>
           <pitch>53</pitch>
@@ -4452,7 +4449,7 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <voice>1</voice>
         <ticklen>480</ticklen>
-        <StemDirection>1</StemDirection>
+        <StemDirection>up</StemDirection>
         <Note>
           <voice>1</voice>
           <pitch>53</pitch>
@@ -4466,7 +4463,7 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <voice>1</voice>
         <ticklen>360</ticklen>
-        <StemDirection>1</StemDirection>
+        <StemDirection>up</StemDirection>
         <Note>
           <voice>1</voice>
           <pitch>53</pitch>
@@ -4478,7 +4475,7 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <voice>1</voice>
         <ticklen>480</ticklen>
-        <StemDirection>1</StemDirection>
+        <StemDirection>up</StemDirection>
         <Note>
           <voice>1</voice>
           <pitch>53</pitch>
@@ -4488,14 +4485,14 @@ p, li { white-space: pre-wrap; }
     <Measure number="22">
       <Chord>
         <ticklen>960</ticklen>
-        <StemDirection>2</StemDirection>
+        <StemDirection>down</StemDirection>
         <Note>
           <pitch>42</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>960</ticklen>
-        <StemDirection>2</StemDirection>
+        <StemDirection>down</StemDirection>
         <Note>
           <pitch>42</pitch>
           </Note>
@@ -4509,7 +4506,7 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <voice>1</voice>
         <ticklen>360</ticklen>
-        <StemDirection>1</StemDirection>
+        <StemDirection>up</StemDirection>
         <Note>
           <voice>1</voice>
           <pitch>48</pitch>
@@ -4554,7 +4551,7 @@ p, li { white-space: pre-wrap; }
     <Measure number="23">
       <Chord>
         <ticklen>960</ticklen>
-        <StemDirection>2</StemDirection>
+        <StemDirection>down</StemDirection>
         <Note>
           <pitch>44</pitch>
           <prefix>2</prefix>
@@ -4563,7 +4560,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>960</ticklen>
-        <StemDirection>2</StemDirection>
+        <StemDirection>down</StemDirection>
         <Note>
           <pitch>44</pitch>
           <prefix>0</prefix>
@@ -4579,7 +4576,7 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <voice>1</voice>
         <ticklen>360</ticklen>
-        <StemDirection>1</StemDirection>
+        <StemDirection>up</StemDirection>
         <Note>
           <voice>1</voice>
           <pitch>53</pitch>
@@ -4591,7 +4588,7 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <voice>1</voice>
         <ticklen>480</ticklen>
-        <StemDirection>1</StemDirection>
+        <StemDirection>up</StemDirection>
         <Note>
           <voice>1</voice>
           <pitch>53</pitch>
@@ -4605,7 +4602,7 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <voice>1</voice>
         <ticklen>360</ticklen>
-        <StemDirection>1</StemDirection>
+        <StemDirection>up</StemDirection>
         <Note>
           <voice>1</voice>
           <pitch>53</pitch>
@@ -4617,7 +4614,7 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <voice>1</voice>
         <ticklen>480</ticklen>
-        <StemDirection>1</StemDirection>
+        <StemDirection>up</StemDirection>
         <Note>
           <voice>1</voice>
           <pitch>53</pitch>
@@ -4627,14 +4624,14 @@ p, li { white-space: pre-wrap; }
     <Measure number="24">
       <Chord>
         <ticklen>960</ticklen>
-        <StemDirection>2</StemDirection>
+        <StemDirection>down</StemDirection>
         <Note>
           <pitch>43</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>960</ticklen>
-        <StemDirection>2</StemDirection>
+        <StemDirection>down</StemDirection>
         <Note>
           <pitch>43</pitch>
           </Note>
@@ -4648,7 +4645,7 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <voice>1</voice>
         <ticklen>360</ticklen>
-        <StemDirection>1</StemDirection>
+        <StemDirection>up</StemDirection>
         <Note>
           <voice>1</voice>
           <pitch>53</pitch>
@@ -4660,7 +4657,7 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <voice>1</voice>
         <ticklen>480</ticklen>
-        <StemDirection>1</StemDirection>
+        <StemDirection>up</StemDirection>
         <Note>
           <voice>1</voice>
           <pitch>53</pitch>
@@ -4674,7 +4671,7 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <voice>1</voice>
         <ticklen>360</ticklen>
-        <StemDirection>1</StemDirection>
+        <StemDirection>up</StemDirection>
         <Note>
           <voice>1</voice>
           <pitch>53</pitch>
@@ -4686,7 +4683,7 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <voice>1</voice>
         <ticklen>480</ticklen>
-        <StemDirection>1</StemDirection>
+        <StemDirection>up</StemDirection>
         <Note>
           <voice>1</voice>
           <pitch>53</pitch>
@@ -4696,14 +4693,14 @@ p, li { white-space: pre-wrap; }
     <Measure number="25">
       <Chord>
         <ticklen>960</ticklen>
-        <StemDirection>2</StemDirection>
+        <StemDirection>down</StemDirection>
         <Note>
           <pitch>43</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>960</ticklen>
-        <StemDirection>2</StemDirection>
+        <StemDirection>down</StemDirection>
         <Note>
           <pitch>43</pitch>
           </Note>
@@ -4717,7 +4714,7 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <voice>1</voice>
         <ticklen>360</ticklen>
-        <StemDirection>1</StemDirection>
+        <StemDirection>up</StemDirection>
         <Note>
           <voice>1</voice>
           <pitch>52</pitch>
@@ -4729,7 +4726,7 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <voice>1</voice>
         <ticklen>480</ticklen>
-        <StemDirection>1</StemDirection>
+        <StemDirection>up</StemDirection>
         <Note>
           <voice>1</voice>
           <pitch>52</pitch>
@@ -4743,7 +4740,7 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <voice>1</voice>
         <ticklen>360</ticklen>
-        <StemDirection>1</StemDirection>
+        <StemDirection>up</StemDirection>
         <Note>
           <voice>1</voice>
           <pitch>52</pitch>
@@ -4755,7 +4752,7 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <voice>1</voice>
         <ticklen>480</ticklen>
-        <StemDirection>1</StemDirection>
+        <StemDirection>up</StemDirection>
         <Note>
           <voice>1</voice>
           <pitch>52</pitch>
@@ -4765,14 +4762,14 @@ p, li { white-space: pre-wrap; }
     <Measure number="26">
       <Chord>
         <ticklen>960</ticklen>
-        <StemDirection>2</StemDirection>
+        <StemDirection>down</StemDirection>
         <Note>
           <pitch>43</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>960</ticklen>
-        <StemDirection>2</StemDirection>
+        <StemDirection>down</StemDirection>
         <Note>
           <pitch>43</pitch>
           </Note>
@@ -4786,7 +4783,7 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <voice>1</voice>
         <ticklen>360</ticklen>
-        <StemDirection>1</StemDirection>
+        <StemDirection>up</StemDirection>
         <Note>
           <voice>1</voice>
           <pitch>50</pitch>
@@ -4798,7 +4795,7 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <voice>1</voice>
         <ticklen>480</ticklen>
-        <StemDirection>1</StemDirection>
+        <StemDirection>up</StemDirection>
         <Note>
           <voice>1</voice>
           <pitch>50</pitch>
@@ -4812,7 +4809,7 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <voice>1</voice>
         <ticklen>360</ticklen>
-        <StemDirection>1</StemDirection>
+        <StemDirection>up</StemDirection>
         <Note>
           <voice>1</voice>
           <pitch>50</pitch>
@@ -4824,7 +4821,7 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <voice>1</voice>
         <ticklen>480</ticklen>
-        <StemDirection>1</StemDirection>
+        <StemDirection>up</StemDirection>
         <Note>
           <voice>1</voice>
           <pitch>50</pitch>
@@ -4834,14 +4831,14 @@ p, li { white-space: pre-wrap; }
     <Measure number="27">
       <Chord>
         <ticklen>960</ticklen>
-        <StemDirection>2</StemDirection>
+        <StemDirection>down</StemDirection>
         <Note>
           <pitch>43</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>960</ticklen>
-        <StemDirection>2</StemDirection>
+        <StemDirection>down</StemDirection>
         <Note>
           <pitch>43</pitch>
           </Note>
@@ -4855,7 +4852,7 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <voice>1</voice>
         <ticklen>360</ticklen>
-        <StemDirection>1</StemDirection>
+        <StemDirection>up</StemDirection>
         <Note>
           <voice>1</voice>
           <pitch>50</pitch>
@@ -4867,7 +4864,7 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <voice>1</voice>
         <ticklen>480</ticklen>
-        <StemDirection>1</StemDirection>
+        <StemDirection>up</StemDirection>
         <Note>
           <voice>1</voice>
           <pitch>50</pitch>
@@ -4881,7 +4878,7 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <voice>1</voice>
         <ticklen>360</ticklen>
-        <StemDirection>1</StemDirection>
+        <StemDirection>up</StemDirection>
         <Note>
           <voice>1</voice>
           <pitch>50</pitch>
@@ -4893,7 +4890,7 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <voice>1</voice>
         <ticklen>480</ticklen>
-        <StemDirection>1</StemDirection>
+        <StemDirection>up</StemDirection>
         <Note>
           <voice>1</voice>
           <pitch>50</pitch>
@@ -4903,14 +4900,14 @@ p, li { white-space: pre-wrap; }
     <Measure number="28">
       <Chord>
         <ticklen>960</ticklen>
-        <StemDirection>2</StemDirection>
+        <StemDirection>down</StemDirection>
         <Note>
           <pitch>43</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>960</ticklen>
-        <StemDirection>2</StemDirection>
+        <StemDirection>down</StemDirection>
         <Note>
           <pitch>43</pitch>
           </Note>
@@ -4924,7 +4921,7 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <voice>1</voice>
         <ticklen>360</ticklen>
-        <StemDirection>1</StemDirection>
+        <StemDirection>up</StemDirection>
         <Note>
           <voice>1</voice>
           <pitch>51</pitch>
@@ -4936,7 +4933,7 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <voice>1</voice>
         <ticklen>480</ticklen>
-        <StemDirection>1</StemDirection>
+        <StemDirection>up</StemDirection>
         <Note>
           <voice>1</voice>
           <pitch>51</pitch>
@@ -4950,7 +4947,7 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <voice>1</voice>
         <ticklen>360</ticklen>
-        <StemDirection>1</StemDirection>
+        <StemDirection>up</StemDirection>
         <Note>
           <voice>1</voice>
           <pitch>51</pitch>
@@ -4962,7 +4959,7 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <voice>1</voice>
         <ticklen>480</ticklen>
-        <StemDirection>1</StemDirection>
+        <StemDirection>up</StemDirection>
         <Note>
           <voice>1</voice>
           <pitch>51</pitch>
@@ -4972,14 +4969,14 @@ p, li { white-space: pre-wrap; }
     <Measure number="29">
       <Chord>
         <ticklen>960</ticklen>
-        <StemDirection>2</StemDirection>
+        <StemDirection>down</StemDirection>
         <Note>
           <pitch>43</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>960</ticklen>
-        <StemDirection>2</StemDirection>
+        <StemDirection>down</StemDirection>
         <Note>
           <pitch>43</pitch>
           </Note>
@@ -4993,7 +4990,7 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <voice>1</voice>
         <ticklen>360</ticklen>
-        <StemDirection>1</StemDirection>
+        <StemDirection>up</StemDirection>
         <Note>
           <voice>1</voice>
           <pitch>52</pitch>
@@ -5007,7 +5004,7 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <voice>1</voice>
         <ticklen>480</ticklen>
-        <StemDirection>1</StemDirection>
+        <StemDirection>up</StemDirection>
         <Note>
           <voice>1</voice>
           <pitch>52</pitch>
@@ -5021,7 +5018,7 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <voice>1</voice>
         <ticklen>360</ticklen>
-        <StemDirection>1</StemDirection>
+        <StemDirection>up</StemDirection>
         <Note>
           <voice>1</voice>
           <pitch>52</pitch>
@@ -5033,7 +5030,7 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <voice>1</voice>
         <ticklen>480</ticklen>
-        <StemDirection>1</StemDirection>
+        <StemDirection>up</StemDirection>
         <Note>
           <voice>1</voice>
           <pitch>52</pitch>
@@ -5043,14 +5040,14 @@ p, li { white-space: pre-wrap; }
     <Measure number="30">
       <Chord>
         <ticklen>960</ticklen>
-        <StemDirection>2</StemDirection>
+        <StemDirection>down</StemDirection>
         <Note>
           <pitch>43</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>960</ticklen>
-        <StemDirection>2</StemDirection>
+        <StemDirection>down</StemDirection>
         <Note>
           <pitch>43</pitch>
           </Note>
@@ -5064,7 +5061,7 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <voice>1</voice>
         <ticklen>360</ticklen>
-        <StemDirection>1</StemDirection>
+        <StemDirection>up</StemDirection>
         <Note>
           <voice>1</voice>
           <pitch>50</pitch>
@@ -5076,7 +5073,7 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <voice>1</voice>
         <ticklen>480</ticklen>
-        <StemDirection>1</StemDirection>
+        <StemDirection>up</StemDirection>
         <Note>
           <voice>1</voice>
           <pitch>50</pitch>
@@ -5090,7 +5087,7 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <voice>1</voice>
         <ticklen>360</ticklen>
-        <StemDirection>1</StemDirection>
+        <StemDirection>up</StemDirection>
         <Note>
           <voice>1</voice>
           <pitch>50</pitch>
@@ -5102,7 +5099,7 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <voice>1</voice>
         <ticklen>480</ticklen>
-        <StemDirection>1</StemDirection>
+        <StemDirection>up</StemDirection>
         <Note>
           <voice>1</voice>
           <pitch>50</pitch>
@@ -5112,14 +5109,14 @@ p, li { white-space: pre-wrap; }
     <Measure number="31">
       <Chord>
         <ticklen>960</ticklen>
-        <StemDirection>2</StemDirection>
+        <StemDirection>down</StemDirection>
         <Note>
           <pitch>43</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>960</ticklen>
-        <StemDirection>2</StemDirection>
+        <StemDirection>down</StemDirection>
         <Note>
           <pitch>43</pitch>
           </Note>
@@ -5133,7 +5130,7 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <voice>1</voice>
         <ticklen>360</ticklen>
-        <StemDirection>1</StemDirection>
+        <StemDirection>up</StemDirection>
         <Note>
           <voice>1</voice>
           <pitch>50</pitch>
@@ -5145,7 +5142,7 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <voice>1</voice>
         <ticklen>480</ticklen>
-        <StemDirection>1</StemDirection>
+        <StemDirection>up</StemDirection>
         <Note>
           <voice>1</voice>
           <pitch>50</pitch>
@@ -5159,7 +5156,7 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <voice>1</voice>
         <ticklen>360</ticklen>
-        <StemDirection>1</StemDirection>
+        <StemDirection>up</StemDirection>
         <Note>
           <voice>1</voice>
           <pitch>50</pitch>
@@ -5171,7 +5168,7 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <voice>1</voice>
         <ticklen>480</ticklen>
-        <StemDirection>1</StemDirection>
+        <StemDirection>up</StemDirection>
         <Note>
           <voice>1</voice>
           <pitch>50</pitch>
@@ -5181,14 +5178,14 @@ p, li { white-space: pre-wrap; }
     <Measure number="32">
       <Chord>
         <ticklen>960</ticklen>
-        <StemDirection>2</StemDirection>
+        <StemDirection>down</StemDirection>
         <Note>
           <pitch>36</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>960</ticklen>
-        <StemDirection>2</StemDirection>
+        <StemDirection>down</StemDirection>
         <Note>
           <pitch>36</pitch>
           </Note>
@@ -5213,7 +5210,7 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <voice>1</voice>
         <ticklen>480</ticklen>
-        <StemDirection>1</StemDirection>
+        <StemDirection>up</StemDirection>
         <Note>
           <voice>1</voice>
           <pitch>48</pitch>
@@ -5227,7 +5224,7 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <voice>1</voice>
         <ticklen>360</ticklen>
-        <StemDirection>1</StemDirection>
+        <StemDirection>up</StemDirection>
         <Note>
           <voice>1</voice>
           <pitch>48</pitch>
@@ -5239,7 +5236,7 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <voice>1</voice>
         <ticklen>480</ticklen>
-        <StemDirection>1</StemDirection>
+        <StemDirection>up</StemDirection>
         <Note>
           <voice>1</voice>
           <pitch>48</pitch>
@@ -5340,7 +5337,6 @@ p, li { white-space: pre-wrap; }
         <Attribute>
           <idx>1</idx>
           <subtype>1</subtype>
-          <offset x="-1.20015" y="8.92024"/>
           </Attribute>
         <Note>
           <pitch>36</pitch>
@@ -5351,6 +5347,6 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     </Staff>
-  <cursorStaff>-1</cursorStaff>
+  <cursorStaff>0</cursorStaff>
   <cursorVoice>0</cursorVoice>
   </museScore>

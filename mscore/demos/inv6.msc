@@ -4,8 +4,8 @@
   <Spatium>1.625</Spatium>
   <Division>480</Division>
   <Mag>1</Mag>
-  <xoff>36</xoff>
-  <yoff>84</yoff>
+  <xoff>-614</xoff>
+  <yoff>-338</yoff>
   <Style>
     <staffUpperBorder>8</staffUpperBorder>
     <staffLowerBorder>4</staffLowerBorder>
@@ -80,9 +80,6 @@
       <denom>8</denom>
       </sig>
     </siglist>
-  <keylist>
-    <key tick="0" idx="4"/>
-    </keylist>
   <tempolist fix="500000">
     <relTempo>53</relTempo>
     <tempo at="0">
@@ -99,12 +96,18 @@
       <cleflist>
         <clef tick="0" idx="0"/>
         </cleflist>
+      <keylist>
+        <key tick="0" idx="4"/>
+        </keylist>
       <bracket type="1" span="2"/>
       </Staff>
     <Staff>
       <cleflist>
         <clef tick="0" idx="4"/>
         </cleflist>
+      <keylist>
+        <key tick="0" idx="4"/>
+        </keylist>
       </Staff>
     <trackName>Piano</trackName>
     <Instrument>
@@ -126,8 +129,8 @@
         <spatiumSizeDependent>0</spatiumSizeDependent>
         <data>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-size:24pt; font-weight:400; font-style:normal; text-decoration:none;&quot;&gt;
-&lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Inventio 6&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;helvetica&apos;; font-size:11pt; font-weight:400; font-style:normal; text-decoration:none;&quot;&gt;
+&lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Times New Roman&apos;; font-size:24pt;&quot;&gt;Inventio 6&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
         </Text>
       <Text>
         <align>12</align>
@@ -168,6 +171,7 @@ p, li { white-space: pre-wrap; }
         </Rest>
       <Chord>
         <ticklen>240</ticklen>
+        <BeamMode>1</BeamMode>
         <Note>
           <pitch>76</pitch>
           </Note>
@@ -393,14 +397,14 @@ p, li { white-space: pre-wrap; }
       <stretch>1.2</stretch>
       <Chord>
         <ticklen>240</ticklen>
-        <StemDirection>2</StemDirection>
+        <StemDirection>down</StemDirection>
         <Note>
           <pitch>76</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
-        <StemDirection>1</StemDirection>
+        <StemDirection>up</StemDirection>
         <Note>
           <pitch>64</pitch>
           </Note>
@@ -545,7 +549,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
-        <StemDirection>1</StemDirection>
+        <StemDirection>up</StemDirection>
         <Note>
           <pitch>71</pitch>
           </Note>
@@ -954,6 +958,7 @@ p, li { white-space: pre-wrap; }
         </Rest>
       <Chord>
         <ticklen>240</ticklen>
+        <BeamMode>1</BeamMode>
         <Note>
           <pitch>83</pitch>
           </Note>
@@ -1873,7 +1878,7 @@ p, li { white-space: pre-wrap; }
       <BarLine/>
       <Chord>
         <ticklen>360</ticklen>
-        <StemDirection>2</StemDirection>
+        <StemDirection>down</StemDirection>
         <Note>
           <pitch>76</pitch>
           </Note>
@@ -2315,7 +2320,7 @@ p, li { white-space: pre-wrap; }
       <BarLine/>
       <Chord>
         <ticklen>120</ticklen>
-        <StemDirection>1</StemDirection>
+        <StemDirection>up</StemDirection>
         <Note>
           <pitch>71</pitch>
           </Note>
@@ -2398,8 +2403,12 @@ p, li { white-space: pre-wrap; }
           </Note>
         </Chord>
       <Rest>
+        <offset x="0" y="-0.488462"/>
         <ticklen>240</ticklen>
         <BeamMode>4</BeamMode>
+        <Attribute>
+          <idx>0</idx>
+          </Attribute>
         </Rest>
       </Measure>
     </Staff>
@@ -2511,6 +2520,7 @@ p, li { white-space: pre-wrap; }
         </Rest>
       <Chord>
         <ticklen>240</ticklen>
+        <BeamMode>1</BeamMode>
         <Note>
           <pitch>52</pitch>
           </Note>
@@ -2916,7 +2926,7 @@ p, li { white-space: pre-wrap; }
       <stretch>1.1</stretch>
       <Chord>
         <ticklen>120</ticklen>
-        <StemDirection>1</StemDirection>
+        <StemDirection>up</StemDirection>
         <Note>
           <pitch>51</pitch>
           </Note>
@@ -2992,6 +3002,7 @@ p, li { white-space: pre-wrap; }
         </Rest>
       <Chord>
         <ticklen>240</ticklen>
+        <BeamMode>1</BeamMode>
         <Note>
           <pitch>59</pitch>
           </Note>
@@ -3074,7 +3085,7 @@ p, li { white-space: pre-wrap; }
     <Measure number="24">
       <Chord>
         <ticklen>120</ticklen>
-        <StemDirection>1</StemDirection>
+        <StemDirection>up</StemDirection>
         <Note>
           <pitch>51</pitch>
           </Note>
@@ -3203,7 +3214,7 @@ p, li { white-space: pre-wrap; }
     <Measure number="28">
       <Chord>
         <ticklen>240</ticklen>
-        <StemDirection>2</StemDirection>
+        <StemDirection>down</StemDirection>
         <Note>
           <pitch>59</pitch>
           </Note>
@@ -3706,7 +3717,7 @@ p, li { white-space: pre-wrap; }
     <Measure number="49">
       <Chord>
         <ticklen>240</ticklen>
-        <StemDirection>1</StemDirection>
+        <StemDirection>up</StemDirection>
         <Note>
           <pitch>51</pitch>
           </Note>
@@ -4159,12 +4170,17 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
+        <Attribute>
+          <idx>1</idx>
+          <subtype>1</subtype>
+          <offset x="0.162821" y="2.93077"/>
+          </Attribute>
         <Note>
           <pitch>52</pitch>
           </Note>
         </Chord>
       </Measure>
     </Staff>
-  <cursorStaff>-1</cursorStaff>
+  <cursorStaff>1</cursorStaff>
   <cursorVoice>0</cursorVoice>
   </museScore>
