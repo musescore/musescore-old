@@ -511,6 +511,15 @@ void Measure::write(Xml& xml, int no, int staff) const
       }
 
 //---------------------------------------------------------
+//   setEndBarLine
+//---------------------------------------------------------
+
+void Measure::setEndBarLine(BarLine* barLine)
+      {
+      staves[barLine->staffIdx()].endBarLine = barLine;
+      }
+
+//---------------------------------------------------------
 //   Measure::read
 //---------------------------------------------------------
 
