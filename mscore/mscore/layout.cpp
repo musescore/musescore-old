@@ -82,18 +82,20 @@ Element* Score::searchNote(int tick, int staff) const
       {
       for (const Measure* measure = _layout->first(); measure; measure = measure->next()) {
             Element* ipe = 0;
-            for (Segment* segment = measure->first(); segment; segment = segment->next()) {
-                  // LVIFIX: check: shouldn't segment->element()'s parameter be a track ?
-                  Element* ie  = segment->element(staff);
-                  if (!ie)
-                        continue;
-                  if (!ie->isChordRest())
-                        continue;
-                  if (ie->tick() == tick)
-                        return ie;
-                  if (ie->tick() >  tick)
-                        return ipe ? ipe : ie;
-                  ipe = ie;
+
+            for (int track = staff * VOICES; track < (staff+1)*VOICES; ++track) {
+                  for (Segment* segment = measure->first(); segment; segment = segment->next()) {
+                        Element* ie  = segment->element(track);
+                        if (!ie)
+                              continue;
+                        if (!ie->isChordRest())
+                              continue;
+                        if (ie->tick() == tick)
+                              return ie;
+                        if (ie->tick() >  tick)
+                              return ipe ? ipe : ie;
+                        ipe = ie;
+                        }
                   }
             }
       return 0;
