@@ -489,7 +489,7 @@ void MusicXml::xmlPart(QDomNode node, QString id)
                   if (instr->isTop()) {
                         BarLine* bar = new BarLine(score);
                         bar->setStaff(instr);
-                        measure->add(bar);
+                        measure->setEndBarLine(bar);
                         }
                   }
             score->scoreLayout()->push_back(measure);
@@ -583,7 +583,7 @@ void MusicXml::xmlMeasure(Part* part, QDomNode node, int number)
                   if (staffp->isTop()) {
                         BarLine* bar = new BarLine(score);
                         bar->setStaff(staffp);
-                        measure->add(bar);
+                        measure->setEndBarLine(bar);
                         }
                   }
             score->scoreLayout()->push_back(measure);
@@ -731,7 +731,13 @@ void MusicXml::xmlMeasure(Part* part, QDomNode node, int number)
                         else
                               printf("unsupported bar type <%s>\n", barStyle.toLatin1().data());
                         barLine->setStaff(score->staff(staff));
-                        measure->add(barLine);
+                        if (barLine->subtype() == START_REPEAT) {
+                              barLine->setTick(measure->tick());
+                              Segment* s = measure->getSegment(barLine);
+                              s->add(barLine);
+                              }
+                        else
+                              measure->setEndBarLine(barLine);
                         }
                   if (!(endingNumber.isEmpty() && endingType.isEmpty())) {
                         if (endingNumber.isEmpty())
@@ -1027,7 +1033,8 @@ void MusicXml::xmlAttributes(Measure* measure, int staff, QDomNode node)
                                           keysig->setTick(tick);
                                           keysig->setStaff(score->staff(staffIdx + i));
                                           keysig->setSubtype(key);
-                                          measure->add(keysig);
+                                          Segment* s = measure->getSegment(keysig);
+                                          s->add(keysig);
                                           }
                                     }
                               }
@@ -1046,7 +1053,8 @@ void MusicXml::xmlAttributes(Measure* measure, int staff, QDomNode node)
                                     keysig->setTick(tick);
                                     keysig->setStaff(score->staff(staffIdx));
                                     keysig->setSubtype(key);
-                                    measure->add(keysig);
+                                    Segment* s = measure->getSegment(keysig);
+                                    s->add(keysig);
                                     }
                               }
                         }
@@ -1121,7 +1129,8 @@ void MusicXml::xmlAttributes(Measure* measure, int staff, QDomNode node)
                         Clef* clefs = new Clef(score, clef | clefSmallBit);
                         clefs->setTick(tick);
                         clefs->setStaff(part);
-                        measure->add(clefs);
+                        Segment* s = measure->getSegment(clefs);
+                        s->add(clefs);
                         ++clefno;
                         }
                   }
@@ -1147,7 +1156,8 @@ void MusicXml::xmlAttributes(Measure* measure, int staff, QDomNode node)
                   timesig->setTick(tick);
                   timesig->setSig(beatType, beats);
                   timesig->setStaff(score->staff(staff + i));
-                  measure->add(timesig);
+                  Segment* s = measure->getSegment(timesig);
+                  s->add(timesig);
                   }
             }
 }
@@ -1555,7 +1565,8 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomNode node)
             cr->setVoice(voice);
             cr->setStaff(score->staff(staff + relStaff));
             ((Rest*)cr)->setMove(move);
-            measure->add(cr);
+            Segment* s = measure->getSegment(cr);
+            s->add(cr);
             }
       else {
             char c     = step[0].toLatin1();
@@ -1591,7 +1602,8 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomNode node)
                   ((Chord*)cr)->setGrace(grace);
                   cr->setBeamMode(bm);
                   cr->setStaff(score->staff(staff + relStaff));
-                  measure->add(cr);
+                  Segment* s = measure->getSegment(cr);
+                  s->add(cr);
                   }
             cr->add(note);
 //            printf("staff for new note: %p (staff=%d, relStaff=%d)\n",

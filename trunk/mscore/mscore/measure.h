@@ -232,6 +232,7 @@ class Measure : public Element {
       Segment* getSegment(Element* el);
       Segment* findSegment(Segment::SegmentType st, int t);
       Segment* createSegment(Segment::SegmentType st, int t);
+      void setEndBarLine(BarLine* barLine);
       };
 
 //---------------------------------------------------------

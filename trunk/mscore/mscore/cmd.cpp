@@ -647,12 +647,13 @@ void Score::cmdAppendMeasures(int n)
                   Rest* rest = new Rest(this, tick, sigmap->ticksMeasure(tick));
                   Staff* staffp = staff(idx);
                   rest->setStaff(staffp);
-                  measure->add(rest);
+                  Segment* s = measure->getSegment(rest);
+                  s->add(rest);
                   BarLine* barLine = 0;
                   if (staffp->isTop()) {
                         barLine = new BarLine(this);
                         barLine->setStaff(staffp);
-                        measure->add(barLine);
+                        measure->setEndBarLine(barLine);
                         }
                   }
             undoOp(UndoOp::InsertMeasure, measure);

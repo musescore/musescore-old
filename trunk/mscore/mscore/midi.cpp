@@ -1088,7 +1088,7 @@ bool MidiFile::readTrack(bool mergeChannels)
       int len       = readLong();       // len
       int endPos    = curPos + len;
       status        = -1;
-      sstatus       = -1;  // running status, der nicht bei meta oder sysex zurülastchan      = -1;
+      sstatus       = -1;  // running status, der nicht bei meta oder sysex zurüstchan      = -1;
       lastport      = -1;
       channelprefix = -1;
       click         = 0;
@@ -1945,11 +1945,11 @@ QString MidiTrack::instrName(int type) const
 //      Instrumentennamen verwendet werden?
 //    - Instrumente feststellen
 //          - Name (kommentar?)
-//          - Schlülit System?
+//          - Schlüt System?
 //    * Takte feststellen
 //    - Schlagzeugtrack markieren
 //    - Quantisierung festlegen:
-//       - küen
+//       - kü
 //    - songtitle
 
 // process:
@@ -2123,7 +2123,7 @@ void Score::convertMidi(MidiFile* mf)
 	            if (s->isTop()) {
       	            BarLine* barLine = new BarLine(this);
             	      barLine->setStaff(s);
-	                  measure->add(barLine);
+	                  measure->setEndBarLine(barLine);
       	            }
                   }
       	_layout->push_back(measure);
@@ -2292,7 +2292,8 @@ void Score::convertTrack(MidiTrack* midiTrack, int staffIdx)
                   Chord* chord = new Chord(this, tick);
                   chord->setStaff(staff(staffIdx));
                   chord->setTickLen(len);
-                  measure->add(chord);
+                  Segment* s = measure->getSegment(chord);
+                  s->add(chord);
 
             	foreach (MNote* n, notes) {
             		Note* note = new Note(this, n->pitch, false);
@@ -2325,7 +2326,8 @@ void Score::convertTrack(MidiTrack* midiTrack, int staffIdx)
                   Rest* rest = new Rest(this, ctick, restLen);
       		Measure* measure = tick2measure(ctick);
                   rest->setStaff(staff(staffIdx));
-                  measure->add(rest);
+                  Segment* s = measure->getSegment(rest);
+                  s->add(rest);
                   }
             ctick = i->first;
 
@@ -2352,7 +2354,8 @@ void Score::convertTrack(MidiTrack* midiTrack, int staffIdx)
 	Measure* measure = tick2measure(tick);
       Chord* chord = new Chord(this, tick);
       chord->setStaff(staff(staffIdx));
-      measure->add(chord);
+      Segment* s = measure->getSegment(chord);
+      s->add(chord);
       int len = MAXINT;
 	foreach (MNote* n, notes) {
       	if (n->len < len)
@@ -2382,7 +2385,8 @@ void Score::convertTrack(MidiTrack* midiTrack, int staffIdx)
             Rest* rest = new Rest(this, ctick, restLen);
 		Measure* measure = tick2measure(ctick);
             rest->setStaff(staff(staffIdx));
-            measure->add(rest);
+            Segment* s = measure->getSegment(rest);
+            s->add(rest);
             }
       }
 
