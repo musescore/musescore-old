@@ -196,7 +196,6 @@ class MuseScore : public QMainWindow {
       void padVisible(bool);
       void openRecentMenu();
       void selectScore(QAction*);
-      void quitApp();
       void updateMag();
       void selectionChanged(int);
       void startPreferenceDialog();

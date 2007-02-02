@@ -987,15 +987,6 @@ static void printVersion(const char* prog)
       }
 
 //---------------------------------------------------------
-//   quitApp
-//---------------------------------------------------------
-
-void MuseScore::quitApp()
-      {
-      close();
-      }
-
-//---------------------------------------------------------
 //   closeEvent
 //---------------------------------------------------------
 
@@ -1021,12 +1012,39 @@ void MuseScore::closeEvent(QCloseEvent* ev)
       saveScoreList();
       seq->exit();
       ev->accept();
+      //
+      // close all toplevel windows
+      //
       if (pageListEdit)
             pageListEdit->close();
       if (pad)
             pad->close();
       if (playPanel)
             playPanel->close();
+      if (symbolPalette1)
+            symbolPalette1->close();
+      if (clefPalette)
+            clefPalette->close();
+      if (keyPalette)
+            keyPalette->close();
+      if (timePalette)
+            timePalette->close();
+      if (linePalette)
+            linePalette->close();
+      if (bracketPalette)
+            bracketPalette->close();
+      if (barPalette)
+            barPalette->close();
+      if (fingeringPalette)
+            fingeringPalette->close();
+      if (noteAttributesPalette)
+            noteAttributesPalette->close();
+      if (accidentalsPalette)
+            accidentalsPalette->close();
+      if (dynamicsPalette)
+            dynamicsPalette->close();
+      if (layoutBreakPalette)
+            layoutBreakPalette->close();
       }
 
 //---------------------------------------------------------
@@ -1315,7 +1333,7 @@ MuseScore::MuseScore()
       menuFile->addSeparator();
       menuFile->addAction(getAction("print"));
       menuFile->addSeparator();
-      menuFile->addAction(exitIcon, tr("&Quit"), this, SLOT(quitApp()), Qt::CTRL + Qt::Key_Q);
+      menuFile->addAction(exitIcon, tr("&Quit"), this, SLOT(close()), Qt::CTRL + Qt::Key_Q);
 
       //---------------------
       //    Menu Edit
