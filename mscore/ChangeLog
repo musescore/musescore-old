@@ -1,4 +1,6 @@
 2.2.7 (ws)
+      - tuplets: implement undo/redo
+      - add beam functions to pad
       - move KeyList from Score() to Staff() allowing for different key
         signatures for different staffs
 1.2.7  (ws)

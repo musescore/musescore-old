@@ -78,8 +78,6 @@ class Tuplet : public Element {
       ChordRestList* elements()    { return &_elements; }
 
       virtual void layout();
-      void add(ChordRest* a)      { _elements.add(a);   }
-      void remove(ChordRest* a);
       Text* number() const { return _number; }
 
       virtual void read(QDomNode);

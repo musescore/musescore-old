@@ -95,11 +95,22 @@ Pad::Pad(QWidget* parent)
       tb->addItem(w, tr("Beams"));
       gl = new QGridLayout;
       w->setLayout(gl);
-      b = new QToolButton;
 
-      // DEBUG:
-      b->setDefaultAction(getAction("pad-note-1"));
+      b = new QToolButton;
+      b->setDefaultAction(getAction("beam-start"));
       gl->addWidget(b, 0, 0);
+
+      b = new QToolButton;
+      b->setDefaultAction(getAction("beam-mid"));
+      gl->addWidget(b, 0, 1);
+
+      b = new QToolButton;
+      b->setDefaultAction(getAction("no-beam"));
+      gl->addWidget(b, 0, 2);
+
+      b = new QToolButton;
+      b->setDefaultAction(getAction("beam32"));
+      gl->addWidget(b, 0, 3);
 
       QVBoxLayout* l = new QVBoxLayout;
       l->addWidget(tb);

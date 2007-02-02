@@ -199,7 +199,13 @@ Rest* Score::setRest(int tick, int len, Staff* staffp, int voice, Measure* measu
       if (rest) {
             rest->setVoice(voice);
             rest->setStaff(staffp);
-            rest->setParent(measure);
+            Segment::SegmentType st = Segment::segmentType(rest->type());
+            Segment* seg = measure->findSegment(st, tick);
+            if (seg == 0) {
+                  seg = measure->createSegment(st, tick);
+                  undoOp(UndoOp::AddElement, seg);
+                  }
+            rest->setParent(seg);
             cmdAdd(rest);
             }
       return rest;
@@ -352,7 +358,13 @@ Element* Score::addClef(Clef* clef)
             printf("measure for tick %d not found!\n", tick);
             return 0;
             }
-      clef->setParent(measure);
+      Segment::SegmentType st = Segment::segmentType(CLEF);
+      Segment* seg = measure->findSegment(st, tick);
+      if (seg == 0) {
+            seg = measure->createSegment(st, tick);
+            undoOp(UndoOp::AddElement, seg);
+            }
+      clef->setParent(seg);
       addElement(clef);
       layout();
       return clef;
@@ -561,7 +573,13 @@ void Score::addTimeSig(int tick, int timeSigSubtype)
             TimeSig* nsig = new TimeSig(this, timeSigSubtype);
             nsig->setStaff(*i);
             nsig->setTick(tick);
-            nsig->setParent(measure);
+            Segment::SegmentType st = Segment::segmentType(TIMESIG);
+            Segment* seg = measure->findSegment(st, tick);
+            if (seg == 0) {
+                  seg = measure->createSegment(st, tick);
+                  undoOp(UndoOp::AddElement, seg);
+                  }
+            nsig->setParent(seg);
             undoOp(UndoOp::AddElement, nsig);
             }
       layout();
@@ -947,7 +965,7 @@ void Score::deleteItem(Element* el)
                   Chord* chord = (Chord*) el;
                   Rest* rest   = new Rest(this, chord->tick(), chord->tickLen());
                   rest->setStaff(el->staff());
-                  rest->setParent(el->parent());
+                  rest->setParent(chord->parent());
                   removeElement(chord);
                   undoOp(UndoOp::RemoveElement, chord);
                   undoOp(UndoOp::AddElement, rest);
@@ -1168,7 +1186,8 @@ void Score::cmdTuplet(int n)
       tuplet->setBaseLen(baseLen);
       tuplet->setStaff(staff);
       Measure* measure = chord->measure();
-      measure->addTuplet(tuplet);
+      tuplet->setParent(measure);
+      undoOp(UndoOp::AddElement, tuplet);
 
       int ticks = baseLen * normalNotes / actualNotes;
 
@@ -1180,11 +1199,15 @@ void Score::cmdTuplet(int n)
       chord->setStaff(staff);
       chord->add(note);
       chord->setTickLen(ticks);
-      measure->add(chord);
-      measure->layoutNoteHeads(staffIdx);
-//      chord->setParent(tuplet);
-tuplet->add(chord);
+      Segment::SegmentType st = Segment::segmentType(chord->type());
+      Segment* seg = measure->findSegment(st, tick);
+      if (seg == 0) {
+            seg = measure->createSegment(st, tick);
+            undoOp(UndoOp::AddElement, seg);
+            }
+      chord->setParent(seg);
       undoOp(UndoOp::AddElement, chord);
+      measure->layoutNoteHeads(staffIdx);
 
       for (int i = 0; i < (actualNotes-1); ++i) {
             tick += ticks;
@@ -1194,9 +1217,13 @@ tuplet->add(chord);
             rest->setVoice(voice);
             rest->setStaff(staff);
             rest->setTickLen(ticks);
-            measure->add(rest);
-tuplet->add(rest);
-//            rest->setParent(tuplet);
+            Segment::SegmentType st = Segment::segmentType(rest->type());
+            Segment* seg = measure->findSegment(st, tick);
+            if (seg == 0) {
+                  seg = measure->createSegment(st, tick);
+                  undoOp(UndoOp::AddElement, seg);
+                  }
+            rest->setParent(seg);
             undoOp(UndoOp::AddElement, rest);
             }
       layout();

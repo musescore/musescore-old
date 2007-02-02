@@ -193,19 +193,34 @@ void Segment::add(Element* el)
       {
       el->setParent(this);
       int staffIdx = el->staffIdx();
-// printf("Segment::add %s tracks %d, staff %d, idx = %d\n",
-//   el->name(), _elist.size(), staffIdx, staffIdx * VOICES + el->voice());
+
+//printf("Segment(%p)(t:%d)(%d)::add %s tracks %d, staff %d, track = %d\n",
+//   this, _type, el->tick(), el->name(), _elist.size(), staffIdx,
+//   staffIdx * VOICES + el->voice());
+
       if (el->type() == LYRICS) {
             LyricsList* ll = &_lyrics[staffIdx];
             ll->push_back((Lyrics*)el);
             el->layout();     //DEBUG
             return;
             }
-      if (el->type() == BAR_LINE && el->subtype() == START_REPEAT) {
-            measure()->add(el);
-            }
-      else
+      if (el->type() == BAR_LINE) {
+            if (el->subtype() != START_REPEAT) {
+                  (*measure()->staffList())[staffIdx].endBarLine = (BarLine*)el;
+                  if (el->subtype() == END_REPEAT)
+                        measure()->setEndRepeat(2);
+                  return;
+                  }
             _elist[staffIdx * VOICES + el->voice()] = el;
+            }
+      else {
+            if (el->isChordRest()) {
+                  ChordRest* cr = (ChordRest*)el;
+                  if (cr->tuplet())
+                        cr->tuplet()->add(cr);
+                  }
+            _elist[staffIdx * VOICES + el->voice()] = el;
+            }
       }
 
 //---------------------------------------------------------
@@ -232,5 +247,34 @@ void Segment::remove(Element* el)
       if (el->type() == BAR_LINE)
             measure()->setStartRepeat(false);
       _elist[staffIdx * VOICES + el->voice()] = 0;
+      if (el->isChordRest()) {
+            ChordRest* cr = (ChordRest*)el;
+            if (cr->tuplet())
+                  cr->tuplet()->remove(cr);
+            }
       }
 
+//---------------------------------------------------------
+//   segmentType
+//    returns segment type suitable for storage of Element
+//---------------------------------------------------------
+
+Segment::SegmentType Segment::segmentType(int type)
+      {
+      switch (type) {
+            case CHORD:
+            case REST:
+                  return Segment::SegChordRest;
+            case CLEF:
+                  return Segment::SegClef;
+            case KEYSIG:
+                  return Segment::SegKeySig;
+            case TIMESIG:
+                  return Segment::SegTimeSig;
+            case BAR_LINE:
+                  return Segment::SegBarLine;
+            default:
+                  printf("Segment:segmentType()  bad type!\n");
+                  return (Segment::SegmentType)-1;
+            }
+      }

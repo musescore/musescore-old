@@ -228,6 +228,7 @@ void Score::cmdAddPitch(int note, bool addFlag)
             if (cr->tuplet())
                   len = cr->tuplet()->noteLen();
             setNote(cis->pos, staff(cis->staff), cis->voice, padState.pitch, len);
+printf("cis->pos %d + %d = %d\n", cis->pos, len, cis->pos + len);
             cis->pos += len;
             }
       moveCursor();
@@ -362,8 +363,15 @@ void Score::setNote(int tick, Staff* staff, int voice, int pitch, int len)
                   chord->setTuplet(tuplet);
                   tuplet->add(chord);
                   }
-            chord->setParent(measure);
-            cmdAdd(chord);
+            Segment::SegmentType st = Segment::segmentType(chord->type());
+            Segment* seg = measure->findSegment(st, tick);
+            if (seg == 0) {
+                  seg = measure->createSegment(st, tick);
+                  undoOp(UndoOp::AddElement, seg);
+                  }
+            chord->setParent(seg);
+            undoOp(UndoOp::AddElement, chord);
+            layout();
             measure->layoutNoteHeads(staffIdx);
             select(note, 0, 0);
 
@@ -1081,6 +1089,14 @@ printf("cmd <%s>\n", cmd.toLatin1().data());
                   padToggle(PAD_REST);
             else if (cmd == "pad-dot")
                   padToggle(PAD_DOT);
+            else if (cmd == "beam-start")
+                  padToggle(PAD_BEAM_START);
+            else if (cmd == "beam-mid")
+                  padToggle(PAD_BEAM_MID);
+            else if (cmd == "no-beam")
+                  padToggle(PAD_BEAM_NO);
+            else if (cmd == "beam-32")
+                  padToggle(PAD_BEAM32);
             else if (cmd == "pad-tie") {
                   padState.tie = !padState.tie;
                   if (cis->pos == -1 && sel->state == SEL_SINGLE) {

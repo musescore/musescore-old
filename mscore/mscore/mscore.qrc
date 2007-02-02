@@ -13,6 +13,10 @@
       <file>data/start.svg</file>
       <file>data/stop.svg</file>
       <file>data/play.svg</file>
+      <file>data/mbeam.xpm</file>
+      <file>data/sbeam.xpm</file>
+      <file>data/nbeam.xpm</file>
+      <file>data/beam32.xpm</file>
       <file alias="fonts/emmentaler_20.otf">fonts/emmentaler_20.otf</file>
       <file alias="fonts/mscore1_20.otf">fonts/mscore1_20.otf</file>
    </qresource>
