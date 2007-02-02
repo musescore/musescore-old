@@ -232,7 +232,8 @@ void ScoreLayout::processSystemHeader(Measure* m)
                         ks->setTick(tick);
                         ks->setGenerated(true);
                         ks->setSubtype(idx);
-                        m->add(ks);
+                        Segment* seg = m->getSegment(ks);
+                        seg->add(ks);
                         }
                   }
             if (!hasClef) {
