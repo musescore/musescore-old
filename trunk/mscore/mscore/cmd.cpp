@@ -228,7 +228,6 @@ void Score::cmdAddPitch(int note, bool addFlag)
             if (cr->tuplet())
                   len = cr->tuplet()->noteLen();
             setNote(cis->pos, staff(cis->staff), cis->voice, padState.pitch, len);
-printf("cis->pos %d + %d = %d\n", cis->pos, len, cis->pos + len);
             cis->pos += len;
             }
       moveCursor();
