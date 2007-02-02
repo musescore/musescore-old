@@ -759,7 +759,7 @@ void KeySig::drop(const QPointF&, int type, const QDomNode& node)
                   return;
             // change keysig applies to all staves, can't simply set subtype
             // for this one only
-            score()->changeKeySig(tick(), stype);
+            staff()->changeKeySig(tick(), stype);
             }
       }
 

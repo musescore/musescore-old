@@ -230,7 +230,7 @@ Element* Score::addKeySig(KeySig* sig, const QPointF& pos)
             delete sig;
             return 0;
             }
-      (*keymap)[tick] = sig->subtype();
+      (*sig->staff()->keymap())[tick] = sig->subtype();
 
       if (tick != 0) {
             sig->setTick(tick);
@@ -250,74 +250,6 @@ Element* Score::addKeySig(KeySig* sig, const QPointF& pos)
             }
       layout();
       return sig;
-      }
-
-//---------------------------------------------------------
-//   changeKeySig
-//
-// change key signature at tick into subtype st for all staves
-// in response to gui command (drop keysig on measure or keysig)
-//
-// FIXME: redo does not work
-//---------------------------------------------------------
-
-void Score::changeKeySig(int tick, int st)
-      {
-      int ot = keymap->key(tick);
-//      printf("changeKeySig tick %d st %d ot %d\n",
-//         tick, st, ot);
-      if (ot == st)
-            return;                 // no change
-      (*keymap)[tick] = st;
-
-      Measure* m = tick2measure(tick);
-      if (!m) {
-            printf("measure for tick %d not found!\n", tick);
-            return;
-            }
-
-      //---------------------------------------------
-      // remove unnessesary keysig symbols
-      //---------------------------------------------
-
-      int staves = nstaves();
-      for (; m; m = m->next()) {
-again:
-            for (int staffIdx = 0; staffIdx < staves; ++staffIdx) {
-                  for (Segment* segment = m->first(); segment; segment = segment->next()) {
-                        for (int rstaff = 0; rstaff < VOICES; ++rstaff) {
-                              int track = staffIdx * VOICES + rstaff;
-                              Element* e = segment->element(track);
-
-                              if (e == 0 || e->type() != KEYSIG)
-                                    continue;
-                              int etick = segment->tick();
-                              if (etick == tick) {
-                                    undoOp(UndoOp::RemoveElement, e);
-                                    segment->setElement(track, 0);
-                                    goto again;
-                                    }
-                              }
-                        }
-                  }
-            }
-
-      //---------------------------------------------
-      // insert new keysig symbols
-      //---------------------------------------------
-
-      if (tick != 0) {
-            m = tick2measure(tick);
-            for (int staffIdx = 0; staffIdx < nstaves(); ++staffIdx) {
-                  KeySig* keysig = new KeySig(this);
-                  keysig->setStaff(staff(staffIdx));
-                  keysig->setTick(tick);
-                  keysig->setSubtype(st);
-                  keysig->setParent(m);
-                  cmdAdd(keysig);
-                  }
-            }
-      layout();
       }
 
 //---------------------------------------------------------

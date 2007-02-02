@@ -762,7 +762,7 @@ void Measure::layoutNoteHeads(int staff)
                         Staff* staffp = _score->staff(staff+move);
                         int clef    = staffp->clef()->clef(tick);
                         int userAcc = note->userAccidental();
-                        int key     = _score->keymap->key(tick);
+                        int key     = _score->staff(staff)->keymap()->key(tick);
 
                         int prefix;
                         int line = note->line();
@@ -2315,7 +2315,7 @@ void Measure::drop(const QPointF& p, int type, const QDomNode& node)
                   {
                   KeySig* ks = new KeySig(0);
                   ks->read(node);
-                  score()->changeKeySig(tick(), ks->subtype());
+                  staff->changeKeySig(tick(), ks->subtype());
                   delete ks;
                   }
                   break;

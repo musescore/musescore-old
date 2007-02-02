@@ -994,6 +994,10 @@ void MusicXml::xmlAttributes(Measure* measure, int staff, QDomNode node)
             if (e.tagName() == "divisions")
                   divisions = e.text().toInt();
             else if (e.tagName() == "key") {
+                  int number  = e.attribute(QString("number"), "-1").toInt();
+                  int staffIdx = staff;
+                  if (number != -1)
+                        staffIdx += number - 1;
                   int key = 0;
                   for (QDomNode n = node.firstChild(); !n.isNull(); n = n.nextSibling()) {
                         QDomElement e = n.toElement();
@@ -1006,40 +1010,44 @@ void MusicXml::xmlAttributes(Measure* measure, int staff, QDomNode node)
                         else
                               domError(n);
                         }
-                  bool needKey = false;
-                  int oldkey = score->keymap->key(tick);
-                  if (oldkey != key) {
-                        // new key differs from key in effect at this tick
-                        (*score->keymap)[tick] = key;
-                        needKey = true;
+                  if (number == -1) {
+                        //
+                        //   apply key to all staves in the part
+                        //
+                        int staves = score->part(staff)->nstaves();
+                        for (int i = 0; i < staves; ++i) {
+                              int oldkey = score->staff(staffIdx+i)->keymap()->key(tick);
+                              if (oldkey != key) {
+                                    // new key differs from key in effect at this tick
+                                    (*score->staff(staffIdx+i)->keymap())[tick] = key;
+                                    // dont generate symbol for tick 0
+                                    if (tick) {
+                                          // apply to all staves in part
+                                          KeySig* keysig = new KeySig(score);
+                                          keysig->setTick(tick);
+                                          keysig->setStaff(score->staff(staffIdx + i));
+                                          keysig->setSubtype(key);
+                                          measure->add(keysig);
+                                          }
+                                    }
+                              }
                         }
                   else {
-                        ciKeyEvent i = score->keymap->find(tick);
-                        if (i != score->keymap->end())
-                              if (i->second == key)
-                                    // Keymap already contains a keychange to key at tick,
-                                    // assume this was done by another part.
-                                    // Must insert keysig in all staves of this part too.
-                                    needKey = true;
-                              else {
-                                    // MusicXML associates keys with parts and thus may have
-                                    // a different key for each part, which is not supported
-                                    // MuseScore.
-                                    printf("Key already changes at tick %d to %d,", tick, i->second);
-                                    printf("ignoring change to %d", key);
+                        //
+                        //    apply key to staff(staffIdx) only
+                        //
+                        int oldkey = score->staff(staffIdx)->keymap()->key(tick);
+                        if (oldkey != key) {
+                              // new key differs from key in effect at this tick
+                              (*score->staff(staffIdx)->keymap())[tick] = key;
+                              // dont generate symbol for tick 0
+                              if (tick) {
+                                    KeySig* keysig = new KeySig(score);
+                                    keysig->setTick(tick);
+                                    keysig->setStaff(score->staff(staffIdx));
+                                    keysig->setSubtype(key);
+                                    measure->add(keysig);
                                     }
-                        }
-
-                  // dont generate symbol for tick 0
-                  if (tick && needKey) {
-                        Part* part = score->part(staff);
-                        int staves = part->nstaves();
-                        for (int i = 0; i < staves; ++i) {
-                              KeySig* keysig = new KeySig(score);
-                              keysig->setTick(tick);
-                              keysig->setStaff(score->staff(staff + i));
-                              keysig->setSubtype(key);
-                              measure->add(keysig);
                               }
                         }
                   }

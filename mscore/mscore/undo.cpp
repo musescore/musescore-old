@@ -352,7 +352,7 @@ void Score::processUndoOp(UndoOp* i, bool undo)
                   if (t == CLEF)
                         changeClef(i->obj->tick(), i->obj->staffIdx(), i->val1);
                   else if (t == KEYSIG)
-                        changeKeySig(i->obj->tick(), i->val1);
+                        i->obj->staff()->changeKeySig(i->obj->tick(), i->val1);
                   i->val1 = st;
                   }
                   break;
@@ -671,7 +671,7 @@ void Score::removeElement(Element* element)
             }
       else if (element->type() == KEYSIG) {
             // remove entry from keymap
-            keymap->erase(element->tick());
+            element->staff()->keymap()->erase(element->tick());
             // fixup all accidentals
             for (Measure* m = _layout->first(); m; m = m->next()) {
                   for (int staffIdx = 0; staffIdx < nstaves(); ++staffIdx) {

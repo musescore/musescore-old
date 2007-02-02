@@ -165,7 +165,6 @@ class Score : public QObject {
       int _pageOffset;              ///< Offset for page numbers.
 
       SigList*   sigmap;
-      KeyList*   keymap;
       TempoList* tempomap;
 
       //---------------------------------------------------
@@ -407,7 +406,6 @@ class Score : public QObject {
       void setSaved(bool v) { _saved = v; }
       bool playlistDirty();
       void changeTimeSig(int tick, int st);
-      void changeKeySig(int tick, int st);
       void changeClef(int tick, int si, int idx);
 
       void cmd(const QString&);

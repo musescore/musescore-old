@@ -173,21 +173,7 @@ void Score::cmdAddPitch(int note, bool addFlag)
             {  1, 3, 5, 6, 8, 10, 11 },     // Fis
             {  1, 3, 5, 6, 8, 10, 12 },     // Cis
             };
-      int key   = keymap->key(cis->pos) + 7;
-      int pitch = ptab[key][note];
 
-      int delta = padState.pitch - (octave*12 + pitch);
-      if (delta > 6)
-            padState.pitch = (octave+1)*12 + pitch;
-      else if (delta < -6)
-            padState.pitch = (octave-1)*12 + pitch;
-      else
-            padState.pitch = octave*12 + pitch;
-      if (padState.pitch < 0)
-            padState.pitch = 0;
-      if (padState.pitch > 127)
-            padState.pitch = 127;
-      int len = padState.tickLen;
       ChordRest* cr = 0;
       if (cis->pos == -1) {
             //
@@ -211,6 +197,23 @@ void Score::cmdAddPitch(int note, bool addFlag)
                   return;
                   }
             }
+
+      int key   = cr->staff()->keymap()->key(cis->pos) + 7;
+      int pitch = ptab[key][note];
+
+      int delta = padState.pitch - (octave*12 + pitch);
+      if (delta > 6)
+            padState.pitch = (octave+1)*12 + pitch;
+      else if (delta < -6)
+            padState.pitch = (octave-1)*12 + pitch;
+      else
+            padState.pitch = octave*12 + pitch;
+      if (padState.pitch < 0)
+            padState.pitch = 0;
+      if (padState.pitch > 127)
+            padState.pitch = 127;
+
+
       if (addFlag) {
             // add note to chord
             Note* on = getSelectedNote();
@@ -221,6 +224,7 @@ void Score::cmdAddPitch(int note, bool addFlag)
             }
       else {
             // insert note
+            int len = padState.tickLen;
             if (cr->tuplet())
                   len = cr->tuplet()->noteLen();
             setNote(cis->pos, staff(cis->staff), cis->voice, padState.pitch, len);
