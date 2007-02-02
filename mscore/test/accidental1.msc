@@ -80,9 +80,6 @@
       <denom>4</denom>
       </sig>
     </siglist>
-  <keylist>
-    <key tick="0" idx="0"/>
-    </keylist>
   <tempolist fix="500000">
     <tempo at="0">
       <tick>0</tick>
@@ -98,6 +95,9 @@
       <cleflist>
         <clef tick="0" idx="0"/>
         </cleflist>
+      <keylist>
+    <key tick="0" idx="0"/>
+    </keylist>
       </Staff>
     <trackName>Violin</trackName>
     <name>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;

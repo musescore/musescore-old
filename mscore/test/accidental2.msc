@@ -80,6 +80,21 @@
       <denom>4</denom>
       </sig>
     </siglist>
+  <tempolist fix="500000">
+    <tempo at="0">
+      <tick>0</tick>
+      <val>500000</val>
+      </tempo>
+    <tempo at="21474836">
+      <tick>0</tick>
+      <val>500000</val>
+      </tempo>
+    </tempolist>
+  <Part>
+    <Staff>
+      <cleflist>
+        <clef tick="0" idx="0"/>
+        </cleflist>
   <keylist>
     <key tick="0" idx="0"/>
     <key tick="7680" idx="1"/>
@@ -97,21 +112,6 @@
     <key tick="99840" idx="6"/>
     <key tick="107520" idx="-6"/>
     </keylist>
-  <tempolist fix="500000">
-    <tempo at="0">
-      <tick>0</tick>
-      <val>500000</val>
-      </tempo>
-    <tempo at="21474836">
-      <tick>0</tick>
-      <val>500000</val>
-      </tempo>
-    </tempolist>
-  <Part>
-    <Staff>
-      <cleflist>
-        <clef tick="0" idx="0"/>
-        </cleflist>
       </Staff>
     <Instrument>
       <midiChannel>0</midiChannel>
