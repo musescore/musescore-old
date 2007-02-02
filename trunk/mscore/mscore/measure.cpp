@@ -548,8 +548,11 @@ void Measure::read(QDomNode node, int idx)
                   barLine->setParent(this);
                   barLine->setStaff(staff);
                   barLine->read(node);
-                  if (barLine->subtype() == START_REPEAT)
-                        add(barLine);
+                  if (barLine->subtype() == START_REPEAT) {
+                        barLine->setTick(tick());
+                        Segment* s = getSegment(barLine);
+                        s->add(barLine);
+                        }
                   else
                         staves[idx].endBarLine = barLine;
                   }
@@ -559,7 +562,8 @@ void Measure::read(QDomNode node, int idx)
                   chord->setParent(this);       // only for reading tuplets
                   chord->setStaff(staff);
                   chord->read(node, idx);
-                  add(chord);
+                  Segment* s = getSegment(chord);
+                  s->add(chord);
                   curTickPos = chord->tick() + chord->tickLen();
                   }
             else if (tag == "Rest") {
@@ -568,7 +572,8 @@ void Measure::read(QDomNode node, int idx)
                   rest->setParent(this);        // only for reading tuplets
                   rest->setStaff(staff);
                   rest->read(node);
-                  add(rest);
+                  Segment* s = getSegment(rest);
+                  s->add(rest);
                   curTickPos = rest->tick() + rest->tickLen();
                   }
             else if (tag == "Clef") {
@@ -576,14 +581,16 @@ void Measure::read(QDomNode node, int idx)
                   clef->setTick(curTickPos);
                   clef->setStaff(staff);
                   clef->read(node);
-                  add(clef);
+                  Segment* s = getSegment(clef);
+                  s->add(clef);
                   }
             else if (tag == "TimeSig") {
                   TimeSig* ts = new TimeSig(score());
                   ts->setTick(curTickPos);
                   ts->setStaff(staff);
                   ts->read(node);
-                  add(ts);
+                  Segment* s = getSegment(ts);
+                  s->add(ts);
                   }
             else if (tag == "KeySig") {
                   KeySig* ks = new KeySig(score());
@@ -591,7 +598,8 @@ void Measure::read(QDomNode node, int idx)
                   ks->setStaff(staff);
                   ks->read(node);
                   ks->setSubtype(ks->subtype());
-                  add(ks);
+                  Segment* s = getSegment(ks);
+                  s->add(ks);
                   }
             else if (tag == "Dynamic") {
                   Dynamic* dyn = new Dynamic(score());
@@ -1123,6 +1131,49 @@ Segment* Measure::tick2segment(int tick) const
       }
 
 //---------------------------------------------------------
+//   findSegment
+//---------------------------------------------------------
+
+Segment* Measure::findSegment(Segment::SegmentType st, int t)
+      {
+      Segment* s;
+      for (s = first(); s && s->tick() < t; s = s->next())
+            ;
+
+      for (Segment* ss = s; ss && ss->tick() == t; ss = ss->next()) {
+            if (ss->segmentType() == st)
+                  return ss;
+            }
+      return 0;
+      }
+
+//---------------------------------------------------------
+//   createSegment
+//---------------------------------------------------------
+
+Segment* Measure::createSegment(Segment::SegmentType st, int t)
+      {
+      Segment* newSegment = new Segment(this, t);
+      newSegment->setSegmentType(st);
+      return newSegment;
+      }
+
+//---------------------------------------------------------
+//   getSegment
+//---------------------------------------------------------
+
+Segment* Measure::getSegment(Element* e)
+      {
+      Segment::SegmentType st = Segment::segmentType(e->type());
+      Segment* s = findSegment(st, e->tick());
+      if (!s) {
+            s = createSegment(st, e->tick());
+            add(s);
+            }
+      return s;
+      }
+
+//---------------------------------------------------------
 //   add
 //---------------------------------------------------------
 
@@ -1133,15 +1184,11 @@ Segment* Measure::tick2segment(int tick) const
 void Measure::add(Element* el)
       {
       Staff* staffp = el->staff();
-      int staffIdx  = staffp ? staffp->idx() : -1;
-      if (staffp == 0) {
+      if (el->type() != SEGMENT && staffp == 0) {
             _pel.push_back(el);
             el->setAnchor(this);
             return;
             }
-      int voice = el->voice();
-      int track = staffIdx * VOICES + voice;
-
       el->setParent(this);
       int t = el->tick();
       ElementType type = el->type();
@@ -1149,7 +1196,29 @@ void Measure::add(Element* el)
 // printf("measure %p: add %s %p, staff %d staves %d\n",
 //      this, el->name(), el, staffIdx, staves.size());
 
-      switch(type) {
+      switch (type) {
+            case SEGMENT:
+                  {
+                  Segment* s;
+                  for (s = first(); s && s->tick() < t; s = s->next())
+                        ;
+                  Segment::SegmentType st = ((Segment*)el)->segmentType();
+                  if (s) {
+                        if (st == Segment::SegChordRest) {
+                              while (s && s->segmentType() != Segment::SegChordRest && s->tick() == t)
+                                    s = s->next();
+                              }
+                        else {
+                              while (s->segmentType() <= st && s->next() && s->next()->tick() == t)
+                                    s = s->next();
+                              }
+                        }
+                  insert((Segment*)el, s);
+                  }
+                  break;
+            case TUPLET:
+                  _tuplets.append((Tuplet*)el);
+                  break;
             case LAYOUT_BREAK:
                   for (iElement i = _sel.begin(); i != _sel.end(); ++i) {
                         if ((*i)->type() == LAYOUT_BREAK && (*i)->subtype() == el->subtype()) {
@@ -1168,9 +1237,6 @@ void Measure::add(Element* el)
                         }
                   _sel.push_back(el);
                   break;
-//            case LYRICS:
-//                  ((Lyrics*)el)->segment()->add(el);
-//                  break;
             case SLUR:
                   {
                   SlurTie* s = (SlurTie*)el;
@@ -1209,78 +1275,9 @@ void Measure::add(Element* el)
             case SLUR_SEGMENT:
                   _sel.append(el);
                   break;
-
-            case BAR_LINE:
-                  if (el->subtype() != START_REPEAT) {
-                        staves[staffIdx].endBarLine = (BarLine*)el;
-                        if (el->subtype() == END_REPEAT)
-                              _endRepeat = 2;
-                        break;
-                        }
-                  el->setTick(tick());
-                  t = tick();
-                  _startRepeat = true;
-                  // add BarLine::START_REPEAT into segment
-                  //
-
-            case CLEF:
-            case KEYSIG:
-            case TIMESIG:
-            case CHORD:
-            case REST:
-                  {
-                  Segment::SegmentType st = (Segment::SegmentType)-1;
-                  if (type == CHORD || type == REST)
-                        st = Segment::SegChordRest;
-                  else if (type == CLEF)
-                        st = Segment::SegClef;
-                  else if (type == KEYSIG)
-                        st = Segment::SegKeySig;
-                  else if (type == TIMESIG)
-                        st = Segment::SegTimeSig;
-                  else if (type == BAR_LINE)
-                        st = Segment::SegBarLine;
-                  else
-                        printf("Measure::add() bad type!\n");
-
-                  Segment* s;
-                  for (s = first(); s && s->tick() < t; s = s->next())
-                        ;
-
-                  for (Segment* ss = s; ss && ss->tick() == t; ss = ss->next()) {
-                        if (ss->segmentType() != st)
-                              continue;
-                        if (ss->element(track)) {
-                              printf("Measure::add(%s,%d,tick:%d): element <%s> exists!\n",
-                              el->name(), track, t, ss->element(track)->name());
-                              }
-                        else {
-                              ss->setElement(track, el);
-                              return;
-                              }
-                        }
-                  Segment* newSegment = new Segment(this, t);
-                  newSegment->setSegmentType(st);
-                  if (s) {
-                        if (st == Segment::SegChordRest) {
-                              while (s && s->segmentType() != Segment::SegChordRest && s->tick() == t) {
-                                    s = s->next();
-                                    }
-                              }
-                        else {
-                              while (s->segmentType() <= st && s->next() && s->next()->tick() == t) {
-                                    s = s->next();
-                                    }
-                              }
-                        }
-                  insert(newSegment, s);
-                  newSegment->setElement(track, el);
-                  }
-                  break;
-
             default:
                   printf("Measure::add(%s) not impl.\n", el->name());
-                  break;
+                  abort();
             }
       }
 
@@ -1299,6 +1296,20 @@ void Measure::remove(Element* el)
 // printf("measure %p: remove el %s %p, staff %d\n", this, el->name(), el, staff);
 
       switch(el->type()) {
+            case SEGMENT:
+                  remove((Segment*)el);
+                  break;
+            case TUPLET:
+                  {
+                  int idx = _tuplets.indexOf((Tuplet*)el);
+                  if (idx == -1) {
+                        printf("Measure remove: Tuplet not found\n");
+                        return;
+                        }
+                  _tuplets.removeAt(idx);
+                  }
+                  break;
+
             case LAYOUT_BREAK:
                   switch(el->subtype()) {
                         case LAYOUT_BREAK_PAGE:
@@ -1535,16 +1546,6 @@ void Measure::addBeam(Beam* b)
       {
       b->setParent(this);
       _beamList.push_back(b);
-      }
-
-//---------------------------------------------------------
-//   addTuplet
-//---------------------------------------------------------
-
-void Measure::addTuplet(Tuplet* b)
-      {
-      b->setParent(this);
-      _tuplets.append(b);
       }
 
 //---------------------------------------------------------

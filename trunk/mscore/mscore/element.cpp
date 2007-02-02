@@ -1096,4 +1096,3 @@ int Element::readType(QDomNode& node)
       return type;
       }
 
-

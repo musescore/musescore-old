@@ -1702,7 +1702,7 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomNode node)
                   tuplet = new Tuplet(score);
                   // type, placement
 
-                  measure->addTuplet(tuplet);
+                  measure->add(tuplet);
                   cr->setTuplet(tuplet);
                   tuplet->add(cr);
                   }

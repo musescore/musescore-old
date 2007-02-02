@@ -67,20 +67,6 @@ void Tuplet::setSelected(bool f)
       }
 
 //---------------------------------------------------------
-//   remove
-//---------------------------------------------------------
-
-void Tuplet::remove(ChordRest* a)
-      {
-      for (iChordRest i = _elements.begin(); i != _elements.end(); ++i) {
-            if (i->second == a) {
-                  _elements.erase(i);
-                  return;
-                  }
-            }
-      }
-
-//---------------------------------------------------------
 //   layout
 //---------------------------------------------------------
 
@@ -136,36 +122,32 @@ void Tuplet::layout()
             _hasLine = false;
 
       QPointF mp(measure->apos());
-      qreal p1x, p1y, p2x, p2y;
+      QPointF p1, p2;
       if (isUp) {
             if (cr1->type() == CHORD) {
                   Chord* chord1 = (Chord*)cr1;
                   Stem* stem = chord1->stem();
                   QPointF p(stem->abbox().topLeft());
-                  p1x = p.x();
-                  p1y = p.y();
+                  p1 = p;
                   }
             else {
                   QPointF p(cr1->abbox().topLeft());
-                  p1x = p.x();
-                  p1y = p.y();
+                  p1 = p;
                   }
 
             if (cr2->type() == CHORD) {
                   Chord* chord2 = (Chord*)cr2;
                   Stem* stem = chord2->stem();
                   QPointF p(stem->abbox().topLeft());
-                  p2x = p.x();
-                  p2y = p.y();
+                  p2  = p;
                   }
             else  {
                   QPointF p(cr2->abbox().topRight());
-                  p2x = p.x();
-                  p2y = p.y();
-                  if (p1y < p2y)
-                        p2y = p1y;
+                  p2 = p;
+                  if (p1.y() < p2.y())
+                        p2.setY(p1.y());
                   else
-                        p1y = p2y;
+                        p1.setY(p2.y());
                   }
             }
       else {
@@ -173,72 +155,67 @@ void Tuplet::layout()
                   Chord* chord1 = (Chord*)cr1;
                   Stem* stem = chord1->stem();
                   QPointF p(stem->abbox().bottomLeft());
-                  p1x = p.x();
-                  p1y = p.y();
+                  p1 = p;
                   }
             else {
                   QPointF p(cr1->abbox().bottomLeft());
-                  p1x = p.x();
-                  p1y = p.y();
+                  p1 = p;
                   }
 
             if (cr2->type() == CHORD) {
                   Chord* chord2 = (Chord*)cr2;
                   Stem* stem = chord2->stem();
                   QPointF p(stem->abbox().bottomLeft());
-                  p2x = p.x();
-                  p2y = p.y();
+                  p2 = p;
                   }
             else  {
                   QPointF p(cr2->abbox().bottomRight());
-                  p2x = p.x();
-                  p2y = p.y();
-                  if (p1y > p2y)
-                        p2y = p1y;
+                  p2 = p;
+                  if (p1.y() > p2.y())
+                        p2.setY(p1.y());
                   else
-                        p1y = p2y;
+                        p1.setY(p2.y());
                   }
             }
-
-      p1x -= mp.x();
-      p1y -= mp.y();
-      p2x -= mp.x();
-      p2y -= mp.y();
+      p1 -= mp;
+      p2 -= mp;
 
       // center number
-      qreal x3 = p1x + (p2x - p1x) * .5;
-      qreal y3 = p1y + (p2y - p1y) * .5 - _number->bbox().height(); // - (l1 + l2) * (isUp ? 1.0 : -1.0);
+      qreal x3 = p1.x() + (p2.x() - p1.x()) * .5;
+      qreal y3 = p1.y() + (p2.y() - p1.y()) * .5
+         - _number->bbox().height() * .5
+         - (l1 + l2) * (isUp ? 1.0 : -1.0);
       qreal numberWidth = _number->bbox().width();
       _number->setPos(QPointF(x3 - numberWidth * .5, y3));
 
       if (_hasLine) {
-            qreal slope = (p2y - p1y) / (p2x - p1x);
+            qreal slope = (p2.y() - p1.y()) / (p2.x() - p1.x());
 
             if (isUp) {
-                  bracketL[0] = QPointF(p1x, p1y - l2);
-                  bracketL[1] = QPointF(p1x, p1y - l1 - l2);
+                  bracketL[0] = QPointF(p1.x(), p1.y() - l2);
+                  bracketL[1] = QPointF(p1.x(), p1.y() - l1 - l2);
                   qreal x = x3 - numberWidth * .5 - _spatium * .5;
-                  qreal y = p1y + (x - p1x) * slope;
+                  qreal y = p1.y() + (x - p1.x()) * slope;
                   bracketL[2] = QPointF(x,   y - l1 - l2);
 
                   x = x3 + numberWidth * .5 + _spatium * .5;
-                  y = p1y + (x - p1x) * slope;
+                  y = p1.y() + (x - p1.x()) * slope;
                   bracketR[0] = QPointF(x,   y - l1 - l2);
-                  bracketR[1] = QPointF(p2x, p2y - l1 - l2);
-                  bracketR[2] = QPointF(p2x, p2y - l2);
+                  bracketR[1] = QPointF(p2.x(), p2.y() - l1 - l2);
+                  bracketR[2] = QPointF(p2.x(), p2.y() - l2);
                   }
             else {
-                  bracketL[0] = QPointF(p1x, p1y + l2);
-                  bracketL[1] = QPointF(p1x, p1y + l1 + l2);
+                  bracketL[0] = QPointF(p1.x(), p1.y() + l2);
+                  bracketL[1] = QPointF(p1.x(), p1.y() + l1 + l2);
                   qreal x     = x3 - numberWidth * .5 - _spatium * .5;
-                  qreal y     = p1y + (x - p1x) * slope;
+                  qreal y     = p1.y() + (x - p1.x()) * slope;
                   bracketL[2] = QPointF(x,   y + l1 + l2);
 
                   x = x3 + numberWidth * .5 + _spatium * .5;
-                  y = p1y + (x - p1x) * slope;
+                  y = p1.y() + (x - p1.x()) * slope;
                   bracketR[0] = QPointF(x,   y + l1 + l2);
-                  bracketR[1] = QPointF(p2x, p2y + l1 + l2);
-                  bracketR[2] = QPointF(p2x, p2y + l2);
+                  bracketR[1] = QPointF(p2.x(), p2.y() + l1 + l2);
+                  bracketR[2] = QPointF(p2.x(), p2.y() + l2);
                   }
 
             }
@@ -350,9 +327,18 @@ void Tuplet::read(QDomNode node)
 
 void Tuplet::add(Element* e)
       {
-      if (e->type() != TEXT)
-            return;
-      _number = (Text*)e;
+      switch(e->type()) {
+            case TEXT:
+                  _number = (Text*)e;
+                  break;
+            case CHORD:
+            case REST:
+                  _elements.add((ChordRest*)e);
+                  break;
+            default:
+                  printf("Tuplet::add() unknown element\n");
+                  break;
+            }
       }
 
 //---------------------------------------------------------
@@ -361,8 +347,24 @@ void Tuplet::add(Element* e)
 
 void Tuplet::remove(Element* e)
       {
-      if (e == _number)
-            _number = 0;
+      switch(e->type()) {
+            case TEXT:
+                  if (e == _number)
+                        _number = 0;
+                  break;
+            case CHORD:
+            case REST:
+                  for (iChordRest i = _elements.begin(); i != _elements.end(); ++i) {
+                        if (i->second == e) {
+                              _elements.erase(i);
+                              return;
+                              }
+                        }
+                  break;
+            default:
+                  printf("Tuplet::remove() unknown element\n");
+                  break;
+            }
       }
 
 //---------------------------------------------------------

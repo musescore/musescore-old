@@ -928,6 +928,42 @@ Shortcut MuseScore::sc[] = {
          QT_TR_NOOP("Play"),
          &playIcon
          ),
+      Shortcut(
+         "beam-start",
+         QT_TR_NOOP("beam start"),
+         0,
+         Qt::WindowShortcut,
+         QT_TR_NOOP("beam start"),
+         QT_TR_NOOP("beam start"),
+         &sbeamIcon
+         ),
+      Shortcut(
+         "beam-mid",
+         QT_TR_NOOP("beam mid"),
+         0,
+         Qt::WindowShortcut,
+         QT_TR_NOOP("beam mid"),
+         QT_TR_NOOP("beam mid"),
+         &mbeamIcon
+         ),
+      Shortcut(
+         "no-beam",
+         QT_TR_NOOP("no beam"),
+         0,
+         Qt::WindowShortcut,
+         QT_TR_NOOP("no beam"),
+         QT_TR_NOOP("no beam"),
+         &nbeamIcon
+         ),
+      Shortcut(
+         "beam32",
+         QT_TR_NOOP("beam 32"),
+         0,
+         Qt::WindowShortcut,
+         QT_TR_NOOP("beam 32"),
+         QT_TR_NOOP("beam 32"),
+         &beam32Icon
+         ),
       Shortcut(0, 0, 0),
       };
 
@@ -1078,6 +1114,7 @@ MuseScore::MuseScore()
          << "stretch+" << "stretch-"
          << "instruments" << "clefs" << "keys" << "symbols" << "times" << "dynamics"
          << "cut" << "copy" << "paste"
+         << "beam-start" << "beam-mid" << "no-beam" << "beam32"
          ;
       foreach(const QString s, sl) {
             QAction* a = getAction(s.toLatin1().data());

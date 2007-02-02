@@ -27,6 +27,7 @@
 */
 
 #include "element.h"
+#include "segment.h"
 
 class Segment;
 class Xml;
@@ -174,7 +175,6 @@ class Measure : public Element {
       void setPageBreak(bool v)   { _pageBreak = v;    }
 
       void addBeam(Beam* b);
-      void addTuplet(Tuplet* b);
 
       System* system() const        { return (System*)parent(); }
       void setSystem(System* s)     { setParent((Element*)s);   }
@@ -229,6 +229,9 @@ class Measure : public Element {
 
       int ending() const         { return _ending; }
       void setEnding(int r)      { _ending = r;    }
+      Segment* getSegment(Element* el);
+      Segment* findSegment(Segment::SegmentType st, int t);
+      Segment* createSegment(Segment::SegmentType st, int t);
       };
 
 //---------------------------------------------------------

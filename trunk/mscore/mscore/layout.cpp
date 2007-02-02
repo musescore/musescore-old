@@ -239,7 +239,8 @@ void ScoreLayout::processSystemHeader(Measure* m)
                   cs->setStaff(staff);
                   cs->setTick(tick);
                   cs->setGenerated(true);
-                  m->add(cs);
+                  Segment* s = m->getSegment(cs);
+                  s->add(cs);
                   }
             }
       }
