@@ -136,8 +136,9 @@ bool ISynth::setController(int ch, int ctrl, int val)
                   if (lbank == 127 || ch == 9)       // drum HACK
                         lbank = 128;
                   int prog  = val & 0x7f;
+
                   fluid_synth_program_select(_fluidsynth, ch,
-                      fontId, lbank, prog+1);
+                      fontId, lbank, prog);
                   }
                   break;
 
