@@ -350,7 +350,7 @@ void MuseScore::seqStopped()
       a->blockSignals(true);
       a->setChecked(true);
       a->blockSignals(false);
-      a = getAction("stop");
+      a = getAction("play");
       a->blockSignals(true);
       a->setChecked(false);
       a->blockSignals(false);

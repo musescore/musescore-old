@@ -440,7 +440,7 @@ void PageSettings::ebmChanged(double val)
 void PageSettings::spatiumChanged(double val)
       {
       if (mmButton->isChecked())
-            val /= INCH;
+            val *= DPMM;
       preview->lo()->setSpatium(val);
       preview->layout();
       }
