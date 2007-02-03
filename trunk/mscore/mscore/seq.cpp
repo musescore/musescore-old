@@ -285,7 +285,7 @@ void Seq::stop()
 void MuseScore::setStop(bool f)
       {
       if (!f) {
-            stopAction->setChecked(true);
+            getAction("stop")->setChecked(true);
             if (playPanel)
                   playPanel->setStop(true);
             }
@@ -302,7 +302,7 @@ void MuseScore::setStop(bool f)
 void MuseScore::setPlay(bool f)
       {
       if (!f) {
-            playAction->setChecked(true);
+            getAction("play")->setChecked(true);
             if (playPanel)
                   playPanel->setPlay(true);
             }
@@ -319,13 +319,15 @@ void MuseScore::seqStarted()
       {
       disconnect(cs, SIGNAL(selectionChanged(int)), this, SLOT(selectionChanged(int)));
 
-      stopAction->blockSignals(true);
-      stopAction->setChecked(false);
-      stopAction->blockSignals(false);
+      QAction* a = getAction("stop");
+      a->blockSignals(true);
+      a->setChecked(false);
+      a->blockSignals(false);
 
-      playAction->blockSignals(true);
-      playAction->setChecked(true);
-      playAction->blockSignals(false);
+      a = getAction("play");
+      a->blockSignals(true);
+      a->setChecked(true);
+      a->blockSignals(false);
 
       if (playPanel) {
             playPanel->setStop(false);
@@ -344,12 +346,14 @@ void MuseScore::seqStarted()
 
 void MuseScore::seqStopped()
       {
-      stopAction->blockSignals(true);
-      stopAction->setChecked(true);
-      stopAction->blockSignals(false);
-      playAction->blockSignals(true);
-      playAction->setChecked(false);
-      playAction->blockSignals(false);
+      QAction* a = getAction("stop");
+      a->blockSignals(true);
+      a->setChecked(true);
+      a->blockSignals(false);
+      a = getAction("stop");
+      a->blockSignals(true);
+      a->setChecked(false);
+      a->blockSignals(false);
       if (playPanel) {
             playPanel->setStop(true);
             playPanel->setPlay(false);
