@@ -136,6 +136,7 @@ class MuseScore : public QMainWindow {
       QAction* visibleId;
       QAction* transportId;
       QAction* inputId;
+
       PreferenceDialog* preferenceDialog;
       QToolBar* fileTools;
       QToolBar* transportTools;
@@ -145,8 +146,6 @@ class MuseScore : public QMainWindow {
       InstrumentsDialog* instrList;
       TextStyleDialog* textStyleDialog;
       MeasuresDialog* measuresDialog;
-      QAction* playAction;
-      QAction* stopAction;
       PlayPanel* playPanel;
       InstrumentListEditor* iledit;
       PageListEditor* pageListEdit;
