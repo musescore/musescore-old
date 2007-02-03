@@ -59,6 +59,7 @@
 #include "ottava.h"
 #include "pedal.h"
 #include "text.h"
+#include "tuplet.h"
 
 //---------------------------------------------------------
 //   attributes -- prints <attributes> tag when necessary
@@ -1223,7 +1224,12 @@ bool ExportMusicXml::saver()
                               }
                         attr.stop(xml);
                         if (!((st + 1) % VOICES)) {
-                              dh.handleElements(this, (*i)->staff(sstaff - 1), m->tick(), m->tick() + m->tickLen(), sstaff);
+                              // sstaff may be 0, which causes a failed assertion (and abort)
+                              // in (*i)->staff(ssstaff - 1)
+                              // LVIFIX: find exact cause
+                              int ssstaff = sstaff > 0 ? sstaff : sstaff + 1;
+                              // printf("st=%d sstaff=%d ssstaff=%d\n", st, sstaff, ssstaff);
+                              dh.handleElements(this, (*i)->staff(ssstaff - 1), m->tick(), m->tick() + m->tickLen(), sstaff);
                               }
                         }
                   // move to end of measure (in case of incomplete last voice)
@@ -1326,6 +1332,29 @@ void ExportMusicXml::clef(int staff, int clef)
       if (clefTable[clef].octChng)
             xml.tag("clef-octave-change", clefTable[clef].octChng);
       xml.etag("clef");
+      }
+
+//---------------------------------------------------------
+//   tupletStartStop
+//---------------------------------------------------------
+
+// LVIFIX: add placement to tuplet support
+// <notations>
+//   <tuplet type="start" placement="above" bracket="no"/>
+// </notations>
+
+static void tupletStartStop(ChordRest* cr, Notations& notations, Xml& xml)
+      {
+      Tuplet* t = cr->tuplet();
+      if (!t) return;
+      if (cr == t->elements()->front()) {
+            notations.tag(xml);
+            xml.tagE("tuplet type=\"start\" bracket=\"%s\"", t->hasLine() ? "yes" : "no");
+            }
+      if (cr == t->elements()->back()) {
+            notations.tag(xml);
+            xml.tagE("tuplet type=\"stop\"");
+            }
       }
 
 //---------------------------------------------------------
@@ -1540,7 +1569,14 @@ void ExportMusicXml::chord(Chord* chord, int staff, const LyricsList* ll)
             xml.tag("voice", voice);
 
             int dots = 0;
-            QString s = tick2xml(note->chord()->tickLen(), dots);
+            Tuplet* t = note->chord()->tuplet();
+            int actNotes = 1;
+            int nrmNotes = 1;
+            if (t) {
+                  actNotes = t->actualNotes();
+                  nrmNotes = t->normalNotes();
+                  }
+            QString s = tick2xml(note->chord()->tickLen() * actNotes / nrmNotes, dots);
             if (s.isEmpty()) {
                   printf("no note type found for ticks %d\n",
                      note->chord()->tickLen());
@@ -1549,12 +1585,12 @@ void ExportMusicXml::chord(Chord* chord, int staff, const LyricsList* ll)
             for (int ni = dots; ni > 0; ni--)
                   xml.tagE("dot");
 
-// LVIFIX: TODO tuplet support
-// Note: TBD: tuplets with rests
-// <time-modification>
-//   <actual-notes>3</actual-notes>
-//   <normal-notes>2</normal-notes>
-// </time-modification>
+            if (t) {
+                  xml.stag("time-modification");
+                  xml.tag("actual-notes", actNotes);
+                  xml.tag("normal-notes", nrmNotes);
+                  xml.etag("time-modification");
+                  }
 
             // no stem for whole notes and beyond
             if (note->chord()->tickLen() < 4*division)
@@ -1585,16 +1621,10 @@ void ExportMusicXml::chord(Chord* chord, int staff, const LyricsList* ll)
                   xml.tagE("tied type=\"start\"");
                   }
 
-// LVIFIX: TODO tuplet support
-// <notations>
-//   <tuplet type="start" placement="above" bracket="no"/>
-// </notations>
-
             if (i == nl->begin()) {
+                  tupletStartStop(chord, notations, xml);
                   sh.doSlurStop(chord, notations, xml);
                   sh.doSlurStart(chord, notations, xml);
-                  }
-            if (i == nl->begin()) {
                   chordAttributes(chord, notations, xml);
                   }
             foreach (const Text* f, note->fingering()) {
@@ -1635,7 +1665,14 @@ void ExportMusicXml::rest(Rest* rest, int staff)
             voice += VOICES;
       xml.tag("voice", voice);
       int dots = 0;
-      QString s = tick2xml(rest->tickLen(), dots);
+      Tuplet* t = rest->tuplet();
+      int actNotes = 1;
+      int nrmNotes = 1;
+      if (t) {
+            actNotes = t->actualNotes();
+            nrmNotes = t->normalNotes();
+            }
+      QString s = tick2xml(rest->tickLen() * actNotes / nrmNotes, dots);
       if (s.isEmpty()) {
             printf("no rest type found for ticks %d at %d in measure %d\n",
                rest->tickLen(), rest->tick(), rest->measure()->no()+1);
@@ -1644,8 +1681,21 @@ void ExportMusicXml::rest(Rest* rest, int staff)
 
       for (int i = dots; i > 0; i--)
             xml.tagE("dot");
+
+      if (t) {
+            xml.stag("time-modification");
+            xml.tag("actual-notes", actNotes);
+            xml.tag("normal-notes", nrmNotes);
+            xml.etag("time-modification");
+            }
+
       if (staff)
             xml.tag("staff", staff);
+
+      Notations notations;
+      tupletStartStop(rest, notations, xml);
+      notations.etag(xml);
+
       xml.etag("note");
       }
 
