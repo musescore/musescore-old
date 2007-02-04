@@ -279,7 +279,8 @@ again:
             keysig->setStaff(this);
             keysig->setTick(tick);
             keysig->setSubtype(st);
-            keysig->setParent(m);
+            Segment* seg = m->getSegment(keysig);
+            keysig->setParent(seg);
             _score->cmdAdd(keysig);
             }
       _score->layout();

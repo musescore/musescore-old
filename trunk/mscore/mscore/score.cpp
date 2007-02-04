@@ -955,7 +955,6 @@ bool Score::edit(QKeyEvent* ev)
 
 void Score::endEdit()
       {
-      ((Measure*)editObject->parent())->layout2();
       foreach (Shortcut* s, shortcuts) {
             if (s->action)
                   s->action->setShortcut(s->key);

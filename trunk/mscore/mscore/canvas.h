@@ -108,7 +108,6 @@ class Canvas : public QWidget, public Viewer {
       QRegion lassoSelect();
       Note* searchTieNote(Note* note);
 
-      void endEdit();
       void setShadowNote(const QPointF&);
 
    private slots:
