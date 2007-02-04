@@ -1,4 +1,6 @@
 4.2.7 (ws)
+      - fix crash when pressing escape while editing title
+      - fix crash when clicking outside text while editing
       - printing fixes
 3.2.7 (lv)
       * MusicXML updates

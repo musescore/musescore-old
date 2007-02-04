@@ -516,6 +516,7 @@ void Measure::write(Xml& xml, int no, int staff) const
 
 void Measure::setEndBarLine(BarLine* barLine)
       {
+      barLine->setParent(this);
       staves[barLine->staffIdx()].endBarLine = barLine;
       }
 
@@ -1273,6 +1274,9 @@ void Measure::add(Element* el)
                   _sel.append(el);
                   break;
 
+            case BAR_LINE:
+                  staves[el->staffIdx()].endBarLine = (BarLine*)el;
+                  break;
             case OTTAVA:
             case PEDAL:
             case TRILL:

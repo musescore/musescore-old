@@ -272,11 +272,6 @@ void Canvas::mousePressEvent(QMouseEvent* ev)
       startMove   = imatrix.map(QPointF(ev->pos()));
 
       Element* element = _score->findSelectableElement(startMove);
-
-      //
-//??      if (state == EDIT && element == score()->editElement())
-//            return;
-
       _score->setDragObject(element);
 
       if (seq && mscore->playEnabled() && element && element->type() == NOTE) {
@@ -700,8 +695,8 @@ void Canvas::setState(State s)
       setMouseTracking(s == NOTE_ENTRY);
       if (state == LASSO || s == LASSO)
             lasso->setVisible(s == LASSO);
-      if (state == EDIT && s != EDIT && s != DRAG_EDIT) {
-            endEdit();
+      if ((state == EDIT) && (s != EDIT) && (s != DRAG_EDIT)) {
+            _score->endEdit();
             }
       state = s;
       }
@@ -785,15 +780,6 @@ bool Canvas::startEdit(Element* element)
             return true;
             }
       return false;
-      }
-
-//---------------------------------------------------------
-//   endEdit
-//---------------------------------------------------------
-
-void Canvas::endEdit()
-      {
-      _score->endEdit();
       }
 
 //---------------------------------------------------------

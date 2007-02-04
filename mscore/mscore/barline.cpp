@@ -250,19 +250,6 @@ void BarLine::drop(const QPointF& /*pos*/, int type, const QDomNode& node)
             delete bl;
             return;
             }
-
-      if (subtype() == START_REPEAT) {
-            Measure* m = (Measure*)(parent()->parent());
-            Measure* pm = m->system()->prevMeasure(m);
-            if (pm)
-                  bl->setParent(pm);
-            }
-      if (subtype() == START_REPEAT){
-            Measure* m  = (Measure*)(parent());
-            Measure* nm = m->system()->nextMeasure(m);
-            if (nm)
-                  bl->setParent(nm);
-            }
       score()->cmdAdd(bl);
       }
 
