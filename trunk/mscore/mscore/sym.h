@@ -41,30 +41,24 @@ struct SymCode {
 
 class Sym {
       QChar _code;
-      QFont _font;
-      QString _name;
-      QPointF _offset;        // drawing offset in spatium units
-      mutable QRectF _bbox;
+      int fontId;
+      const char* _name;
+      mutable QRectF _bbox;   // cached bounding box at mag X 10 at mag 1.0
 
    public:
       Sym() { _code = 0; }
-      Sym(const QString& name, const QChar& c, const QFont& f, const QPointF& _o = QPointF());
+      Sym(const char* name, const QChar& c, int fid);
 
-      const QFont font() const    { return _font; }
-      const QString& name() const { return _name; }
-      const QRectF& bbox() const;
+      QFont font(double mag = 1.0) const;
+      const char* name() const { return _name; }
+      const QRectF bbox() const;
       double width() const;
       double height() const;
       QChar code() const           { return _code;   }
       void setCode(const QChar& c) { _code = c;      }
-      QPointF offset() const       { return _offset; }
-      void setOffset(QPointF& p)   { _offset = p;    }
-
       void draw(Painter& painter, qreal x, qreal y, int n) const;
       void draw(Painter& painter, qreal x, qreal y) const;
       void draw(Painter& painter) const;
-
-      static int buildin(const QString& name);
       };
 
 extern QVector<Sym> symbols;

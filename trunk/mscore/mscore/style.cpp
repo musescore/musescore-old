@@ -185,7 +185,7 @@ QFont TextStyle::font() const
       {
       double mag = ::_spatium / (spatiumBase20 * DPI);
 
-      double m = size * SRM;
+      double m = size;
       if (sizeIsSpatiumDependent)
             m *= mag;
       QFont f(family);
