@@ -66,7 +66,7 @@ static const char* undoName[] = {
       "ChangeColor",       "ChangePitch",
       "ChangeSubtype",     "AddAccidental",
       "FlipStemDirection", "FlipSlurDirection",
-      "ChangeTimeSig",
+      "ChangeTimeSig",     "ChangeKeySig",
       };
 
 static bool UNDO = false;
@@ -372,6 +372,36 @@ void Score::processUndoOp(UndoOp* i, bool undo)
                         i->measure->removeStaves(i->val1, i->val2);
                   break;
 
+            case UndoOp::ChangeKeySig:
+                  {
+                  KeyList* kl = i->staff->keymap();
+                  if (undo) {
+                        // remove new value if there is any
+                        if (i->val3 != -1000) {
+                              iKeyEvent ik = kl->find(i->val1);
+                              if (ik == kl->end()) {
+                                    printf("   NOT FOUND tick %d\n", i->val1);
+                                    abort();
+                                    }
+                              kl->erase(ik);
+                              }
+                        if (i->val2 != -1000)
+                              (*kl)[i->val1] = i->val2;
+                        }
+                  else {
+                        if (i->val2 != -1000) {
+                              iKeyEvent ik = kl->find(i->val1);
+                              if (ik == kl->end()) {
+                                    printf("   NOT FOUND tick %d\n", i->val1);
+                                    abort();
+                                    }
+                              kl->erase(ik);
+                              }
+                        if (i->val3 != -1000)
+                              (*kl)[i->val1] = i->val3;
+                        }
+                  }
+                  break;
             }
       UNDO = FALSE;
       }
@@ -552,6 +582,18 @@ void Score::undoOp(UndoOp::UndoType type, int a, int b)
       undoList.back()->push_back(i);
       }
 
+void Score::undoOp(UndoOp::UndoType type, Staff* staff, int tick, int oval, int nval)
+      {
+      checkUndoOp();
+      UndoOp i;
+      i.type = type;
+      i.staff = staff;
+      i.val1 = tick;
+      i.val2 = oval;
+      i.val3 = nval;
+      undoList.back()->push_back(i);
+      }
+
 //---------------------------------------------------------
 //   addElement
 //---------------------------------------------------------
@@ -565,7 +607,7 @@ void Score::undoOp(UndoOp::UndoType type, int a, int b)
 
 void Score::addElement(Element* element)
       {
-// printf("Score::addObject %p %s parent %s\n", element, element->name(), element->parent()->name());
+//printf("Score::addObject %p %s parent %s\n", element, element->name(), element->parent()->name());
       element->parent()->add(element);
 
       if (element->type() == CLEF) {
@@ -671,7 +713,7 @@ void Score::removeElement(Element* element)
             }
       else if (element->type() == KEYSIG) {
             // remove entry from keymap
-            element->staff()->keymap()->erase(element->tick());
+//            element->staff()->keymap()->erase(element->tick());
             // fixup all accidentals
             for (Measure* m = _layout->first(); m; m = m->next()) {
                   for (int staffIdx = 0; staffIdx < nstaves(); ++staffIdx) {

@@ -205,10 +205,17 @@ void StaffList::remove(Staff* p)
 void Staff::changeKeySig(int tick, int st)
       {
       int ot = _keymap->key(tick);
-//      printf("changeKeySig tick %d st %d ot %d\n",
-//         tick, st, ot);
+printf("changeKeySig %p tick %d st %d ot %d\n",
+         this, tick, st, ot);
       if (ot == st)
             return;                 // no change
+
+      int oval = -1000;
+      iKeyEvent ki = _keymap->find(tick);
+      if (ki != _keymap->end())
+            oval = ki->second;
+
+      _score->undoOp(UndoOp::ChangeKeySig, this, tick, oval, st);
       (*_keymap)[tick] = st;
 
       Measure* m = _score->tick2measure(tick);
@@ -218,23 +225,24 @@ void Staff::changeKeySig(int tick, int st)
             }
 
       //---------------------------------------------
-      // remove unnessesary keysig symbols
+      //    remove unnessesary keysig symbols
       //---------------------------------------------
 
       for (; m; m = m->next()) {
-again:
             for (Segment* segment = m->first(); segment; segment = segment->next()) {
-                  for (int rstaff = 0; rstaff < VOICES; ++rstaff) {
-                        int track = idx() * VOICES + rstaff;
-                        Element* e = segment->element(track);
-
-                        if (e == 0 || e->type() != KEYSIG)
-                              continue;
+                  if (segment->segmentType() != Segment::SegKeySig)
+                        continue;
+                  //
+                  // we assume keySigs are only in first track (voice 0)
+                  //
+                  int track = idx() * VOICES;
+                  KeySig* e = (KeySig*)segment->element(track);
+                  if (e) {
                         int etick = segment->tick();
                         if (etick == tick) {
+printf("remove key sig at %d\n", tick);
                               _score->undoOp(UndoOp::RemoveElement, e);
-                              segment->setElement(track, 0);
-                              goto again;
+                              (*segment->elist())[track] = 0;
                               }
                         }
                   }
@@ -244,16 +252,20 @@ again:
       // insert new keysig symbols
       //---------------------------------------------
 
-      if (tick != 0) {
-            m = _score->tick2measure(tick);
-            KeySig* keysig = new KeySig(_score);
-            keysig->setStaff(this);
-            keysig->setTick(tick);
-            keysig->setSubtype(st);
-            Segment* seg = m->getSegment(keysig);
-            keysig->setParent(seg);
-            _score->cmdAdd(keysig);
+      m = _score->tick2measure(tick);
+      KeySig* keysig = new KeySig(_score);
+      keysig->setStaff(this);
+      keysig->setTick(tick);
+      keysig->setSubtype(st);
+
+      Segment::SegmentType stype = Segment::segmentType(KEYSIG);
+      Segment* s = m->findSegment(stype, tick);
+      if (!s) {
+            s = m->createSegment(stype, tick);
+            _score->undoOp(UndoOp::AddElement, s);
             }
+      keysig->setParent(s);
+      _score->undoOp(UndoOp::AddElement, keysig);
       _score->layout();
       }
 

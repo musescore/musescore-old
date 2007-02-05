@@ -851,13 +851,12 @@ void Score::printFile()
       QPrinter printer(QPrinter::HighResolution);
       // QPrinter printer;
       printer.setPageSize(paperSizes[pageFormat()->size].qtsize);
-printf("paperSize %d\n", paperSizes[pageFormat()->size].qtsize);
       printer.setOrientation(pageFormat()->landscape ? QPrinter::Landscape : QPrinter::Portrait);
       printer.setCreator("MuseScore Version: " VERSION);
       printer.setFullPage(true);
       printer.setColorMode(QPrinter::Color);
       printer.setDocName(projectName());
-      printer.setDoubleSidedPrinting(pageFormat()->twosided);
+//Qt4.3      printer.setDoubleSidedPrinting(pageFormat()->twosided);
 
       QPrintDialog pd(&printer, 0);
       if (!pd.exec())

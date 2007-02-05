@@ -231,6 +231,7 @@ Note* Score::addNote(Chord* chord, int pitch)
 
 Element* Score::addKeySig(KeySig* sig, const QPointF& pos)
       {
+printf("Score::addKeySig===\n");
       int tick;
       if (!pos2measure(pos, &tick, 0, 0, 0, 0)) {
             delete sig;

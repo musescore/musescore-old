@@ -65,6 +65,7 @@ struct UndoOp {
             FlipStemDirection,
             FlipSlurDirection,
             ChangeTimeSig,
+            ChangeKeySig,
             };
       UndoType type;
       Element* obj;
@@ -76,8 +77,7 @@ struct UndoOp {
       Segment* segment;
       QList<int> si;
       QList<int> di;
-      int val1;
-      int val2;
+      int val1, val2, val3;
       QColor color;
 
       const char* name() const;
