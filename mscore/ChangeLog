@@ -1,3 +1,8 @@
+5.2.7 (ws)
+      - added "Close" action
+      - fixed crash when loading a score with previously edited slur
+        (which now contains a SlurSegment element)
+      - updated template files
 4.2.7 (ws)
       - fix crash when pressing escape while editing title
       - fix crash when clicking outside text while editing

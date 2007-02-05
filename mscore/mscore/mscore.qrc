@@ -17,6 +17,9 @@
       <file>data/sbeam.xpm</file>
       <file>data/nbeam.xpm</file>
       <file>data/beam32.xpm</file>
+      <file>data/fileopen.xpm</file>
+      <file>data/filenew.xpm</file>
+      <file>data/filesave.xpm</file>
       <file alias="fonts/emmentaler_20.otf">fonts/emmentaler_20.otf</file>
       <file alias="fonts/mscore1_20.otf">fonts/mscore1_20.otf</file>
    </qresource>

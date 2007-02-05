@@ -187,6 +187,10 @@ class MuseScore : public QMainWindow {
       void keyMenu();
       void timeMenu();
       void dynamicsMenu();
+      void loadFile();
+      bool saveFile();
+      bool saveAs();
+      void newFile();
 
    private slots:
       void helpBrowser();
@@ -207,10 +211,6 @@ class MuseScore : public QMainWindow {
       void importMidi();
       void importMusicXml();
       void exportMusicXml();
-      void loadFile();
-      bool saveFile();
-      bool saveAs();
-      void newFile();
       void editStyle();
       void saveStyle();
       void loadStyle();

@@ -62,6 +62,7 @@ QIcon undoIcon, redoIcon, cutIcon, copyIcon, pasteIcon;
 QIcon printIcon, clefIcon;
 QIcon midiinIcon, speakerIcon, startIcon, stopIcon, playIcon;
 QIcon sbeamIcon, mbeamIcon, nbeamIcon, beam32Icon;
+QIcon fileOpenIcon, fileNewIcon, fileSaveIcon;
 
 //---------------------------------------------------------
 //   symPixmap
@@ -174,12 +175,15 @@ void genIcons()
 
       midiinIcon.addPixmap(QPixmap(midiin_xpm));
       speakerIcon.addPixmap(QPixmap(speaker_xpm));
-      startIcon  = QIcon(":/data/start.svg");
-      stopIcon   = QIcon(":/data/stop.svg");
-      playIcon   = QIcon(":/data/play.svg");
-      sbeamIcon  = QIcon(":/data/sbeam.xpm");
-      mbeamIcon  = QIcon(":/data/mbeam.xpm");
-      nbeamIcon  = QIcon(":/data/nbeam.xpm");
-      beam32Icon = QIcon(":/data/beam32.xpm");
+      startIcon    = QIcon(":/data/start.svg");
+      stopIcon     = QIcon(":/data/stop.svg");
+      playIcon     = QIcon(":/data/play.svg");
+      sbeamIcon    = QIcon(":/data/sbeam.xpm");
+      mbeamIcon    = QIcon(":/data/mbeam.xpm");
+      nbeamIcon    = QIcon(":/data/nbeam.xpm");
+      beam32Icon   = QIcon(":/data/beam32.xpm");
+      fileOpenIcon = QIcon(":/data/fileopen.xpm");
+      fileNewIcon  = QIcon(":/data/filenew.xpm");
+      fileSaveIcon = QIcon(":/data/filesave.xpm");
       }
 

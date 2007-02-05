@@ -632,7 +632,7 @@ void Score::putNote(const QPointF& pos, bool addToChord)
             else
                   setNote(tick, staff, voice, pitch, len);
             }
-      cis->staff     = _staves->idx(staff);
+      cis->staff     = _staves->indexOf(staff);
       cis->voice     = voice;
       padState.pitch = pitch;
       cis->pos       = tick + len;

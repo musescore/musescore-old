@@ -288,7 +288,7 @@ void Score::setNote(int tick, Staff* staff, int voice, int pitch, int len)
       {
       bool addTie = padState.tie;
 
-      int staffIdx = _staves->idx(staff);
+      int staffIdx = _staves->indexOf(staff);
       int track = staffIdx * VOICES + voice;
       Tie* tie  = 0;
       Note* note = 0;

@@ -93,7 +93,6 @@ class Staff {
 class StaffList : public QList<Staff*> {
    public:
       void remove(Staff*);
-      int idx(const Staff* p) const;
       };
 
 typedef StaffList::iterator iStaff;

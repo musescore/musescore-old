@@ -607,7 +607,7 @@ Measure* Score::pos2measure(const QPointF& p, int* tick, Staff** rst, int* pitch
                                           }
                                     if (offset) {
                                           //??
-                                          int staffIdx = _staves->idx(*rst);
+                                          int staffIdx = _staves->indexOf(*rst);
                                           SysStaff* staff = s->staff(staffIdx);
                                           *offset = pppp - QPointF(segment->x(), staff->bbox().y());
                                           }
@@ -745,12 +745,7 @@ int Score::staff(const Part* part) const
 
 int Score::staff(const Staff* p) const
       {
-      int staff = 0;
-      for (ciStaff i = _staves->begin(); i != _staves->end(); ++i, ++staff) {
-            if (*i == p)
-                  break;
-            }
-      return staff;
+      return _staves->indexOf((Staff*)p);
       }
 
 //---------------------------------------------------------

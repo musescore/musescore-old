@@ -1012,6 +1012,11 @@ void Measure::layout2()
       foreach(Element* pel, _sel) {
             int staff = _score->staff(pel->staff());
 
+            if (staff >= 2 || staff < 0) {
+                  printf("===========staff %d <%s>\n", staff, pel->name());
+                  staff = 1;
+                  }
+
             // double y  = staff * point(Spatium(4) + style->staffDistance);
             double y = system()->staff(staff)->bbox().y();
 
@@ -1114,7 +1119,7 @@ Chord* Measure::findChord(int tick, int staff, int voice, bool /*grace*/)
 
 ChordRest* Measure::findChordRest(int tick, Staff* staff, int voice, bool /*grace*/)
       {
-      int staffIdx = _score->staves()->idx(staff);
+      int staffIdx = _score->staves()->indexOf(staff);
       for (Segment* seg = _first; seg; seg = seg->next()) {
             if (seg->tick() > tick)
                   return 0;
@@ -1984,6 +1989,7 @@ again:
                         //
                         // center symbol if its a whole rest
                         //
+                        double yoffset = 0.0;   // hack for whole rest symbol
                         if (!_irregular && len == _score->sigmap->ticksMeasure(e->tick())) {
                               // center whole rest
                               int idx = 0;
@@ -1994,12 +2000,13 @@ again:
                               double o = xpos[idx+1];
                               double w = xpos[segs+2] - o;
                               pos.setX(w/2.0 - e->width()/2.0);
+                              yoffset = -_spatium;
                               }
                         if (e->voice() == 1)
                               y += -1 * _spatium;
                         else
                               y += 2 * _spatium;
-                        e->setPos(pos.x(), y);
+                        e->setPos(pos.x(), y + yoffset);
                         }
                   else if (t == CHORD) {
                         int move = 0; // TODO ((ChordRest*)e)->translate();

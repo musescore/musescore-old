@@ -67,14 +67,6 @@ const char* magTable[] = {
       QT_TRANSLATE_NOOP("magTable","DblPage"),
      };
 
-const char* fileOpenText       = QT_TR_NOOP("Load Score from File");
-const char* fileSaveText       = QT_TR_NOOP("Save Score to File");
-const char* fileNewText        = QT_TR_NOOP("Create New Score");
-const char* filePrintText      = QT_TR_NOOP("Print Score");
-const char* infoStartButton    = QT_TR_NOOP("rewind to start position");
-const char* infoStopButton     = QT_TR_NOOP("stop sequencer");
-const char* infoPlayButton     = QT_TR_NOOP("start sequencer play");
-
 static unsigned int startMag = 3;   // 100%, synchronize with canvas default
 
 const char* eventRecordFile;
@@ -100,12 +92,58 @@ QMap<QString, Shortcut*> shortcuts;
 
 Shortcut MuseScore::sc[] = {
       Shortcut(
+         "file-open",
+         QT_TR_NOOP("file open"),
+         Qt::CTRL+Qt::Key_O,
+         Qt::WindowShortcut,
+         QT_TR_NOOP("Open Score"),
+         QT_TR_NOOP("Load Score from File"),
+         &fileOpenIcon
+         ),
+      Shortcut(
+         "file-save",
+         QT_TR_NOOP("file save"),
+         Qt::CTRL+Qt::Key_S,
+         Qt::WindowShortcut,
+         QT_TR_NOOP("Save Score"),
+         QT_TR_NOOP("Save Score to File"),
+         &fileSaveIcon
+         ),
+      Shortcut(
+         "file-save-as",
+         QT_TR_NOOP("file save as"),
+         0,
+         Qt::WindowShortcut,
+         QT_TR_NOOP("Save Score As"),
+         QT_TR_NOOP("Save Score to named File"),
+         &fileSaveIcon
+         ),
+      Shortcut(
+         "file-close",
+         QT_TR_NOOP("file close"),
+         Qt::CTRL+Qt::Key_W,
+         Qt::WindowShortcut,
+         QT_TR_NOOP("Close Score"),
+         QT_TR_NOOP("Close Current Score"),
+         &fileSaveIcon
+         ),
+      Shortcut(
+         "file-new",
+         QT_TR_NOOP("file new"),
+         Qt::CTRL+Qt::Key_N,
+         Qt::WindowShortcut,
+         QT_TR_NOOP("New Score"),
+         QT_TR_NOOP("Create New Score"),
+         &fileNewIcon
+         ),
+
+      Shortcut(
          "print",
          QT_TR_NOOP("print"),
          Qt::CTRL+Qt::Key_P,
          Qt::WindowShortcut,
          QT_TR_NOOP("Print"),
-         QT_TR_NOOP("Print"),
+         QT_TR_NOOP("Print Score"),
          &printIcon
          ),
       Shortcut(
@@ -907,7 +945,7 @@ Shortcut MuseScore::sc[] = {
          0,
          Qt::WindowShortcut,
          QT_TR_NOOP("Rewind"),
-         QT_TR_NOOP("Rewind"),
+         QT_TR_NOOP("rewind to start position"),
          &startIcon
          ),
       Shortcut(
@@ -916,7 +954,7 @@ Shortcut MuseScore::sc[] = {
          0,
          Qt::WindowShortcut,
          QT_TR_NOOP("Stop"),
-         QT_TR_NOOP("Stop"),
+         QT_TR_NOOP("stop sequencer"),
          &stopIcon
          ),
       Shortcut(
@@ -925,7 +963,7 @@ Shortcut MuseScore::sc[] = {
          0,
          Qt::WindowShortcut,
          QT_TR_NOOP("Play"),
-         QT_TR_NOOP("Play"),
+         QT_TR_NOOP("start sequencer play"),
          &playIcon
          ),
       Shortcut(
@@ -1133,6 +1171,7 @@ MuseScore::MuseScore()
          << "instruments" << "clefs" << "keys" << "symbols" << "times" << "dynamics"
          << "cut" << "copy" << "paste"
          << "beam-start" << "beam-mid" << "no-beam" << "beam32"
+         << "file-open" << "file-new" << "file-save" << "file-save-as" << "file-close"
          ;
       foreach(const QString s, sl) {
             QAction* a = getAction(s.toLatin1().data());
@@ -1185,20 +1224,17 @@ MuseScore::MuseScore()
       transportAction->setExclusive(true);
 
       a = getAction("rewind");
-      a->setWhatsThis(tr(infoStartButton));
       transportAction->addAction(a);
       connect(a, SIGNAL(triggered()), seq, SLOT(rewindStart()));
 
       a = getAction("stop");
       a->setCheckable(true);
       a->setChecked(true);
-      a->setWhatsThis(tr(infoStopButton));
       transportAction->addAction(a);
       connect(a, SIGNAL(toggled(bool)), this, SLOT(setStop(bool)));
 
       a = getAction("play");
       a->setCheckable(true);
-      a->setWhatsThis(tr(infoPlayButton));
       transportAction->addAction(a);
       connect(a, SIGNAL(toggled(bool)), this, SLOT(setPlay(bool)));
 
@@ -1206,27 +1242,15 @@ MuseScore::MuseScore()
       //    File Action
       //---------------------------------------------------
 
-      QAction* fileNewAction = new QAction(QIcon(newIcon), tr("&New"), this);
-      fileNewAction->setToolTip(tr(fileNewText));
-
-      QAction* fileOpenAction = new QAction(QIcon(openIcon), tr("&Open"), this);
-      fileOpenAction->setToolTip(tr(fileOpenText));
-
-      QAction* fileSaveAction = new QAction(QIcon(saveIcon), tr("&Save"), this);
-      fileSaveAction->setToolTip(tr(fileSaveText));
-
-      connect(fileNewAction,   SIGNAL(triggered()), SLOT(newFile()));
-      connect(fileOpenAction,  SIGNAL(triggered()), SLOT(loadFile()));
-      connect(fileSaveAction,  SIGNAL(triggered()), SLOT(saveFile()));
-
       //---------------------
       //    Tool Bar
       //---------------------
 
       fileTools = addToolBar(tr("File Operations"));
-      fileTools->addAction(fileNewAction);
-      fileTools->addAction(fileOpenAction);
-      fileTools->addAction(fileSaveAction);
+      fileTools->addAction(getAction("file-new"));
+      fileTools->addAction(getAction("file-open"));
+      fileTools->addAction(getAction("file-save"));
+
       fileTools->addAction(getAction("print"));
       fileTools->addAction(whatsThis);
       fileTools->addSeparator();
@@ -1317,14 +1341,16 @@ MuseScore::MuseScore()
 
       QMenu* menuFile = mb->addMenu(tr("&File"));
 
-      menuFile->addAction(fileNewAction);
-      menuFile->addAction(fileOpenAction);
+      menuFile->addAction(getAction("file-new"));
+      menuFile->addAction(getAction("file-open"));
       openRecent = menuFile->addMenu(QIcon(openIcon), tr("Open &Recent"));
       connect(openRecent, SIGNAL(aboutToShow()), SLOT(openRecentMenu()));
       connect(openRecent, SIGNAL(triggered(QAction*)), SLOT(selectScore(QAction*)));
       menuFile->addSeparator();
-      menuFile->addAction(fileSaveAction);
-      menuFile->addAction(QIcon(saveIcon), tr("Save &As"), this, SLOT(saveAs()), Qt::CTRL + Qt::Key_A);
+      menuFile->addAction(getAction("file-save"));
+      menuFile->addAction(getAction("file-save-as"));
+      menuFile->addAction(getAction("file-close"));
+
       menuFile->addSeparator();
       menuFile->addAction(QIcon(saveIcon), tr("Export Midi"),     this, SLOT(exportMidi()));
       menuFile->addAction(QIcon(saveIcon), tr("Export MusicXML"), this, SLOT(exportMusicXml()));
@@ -1715,6 +1741,7 @@ void MuseScore::appendScore(Score* score)
       for (int i = 0; i < PROJECT_LIST_LEN-1; ++i)
             *d-- = *s--;
       projectList[0].name = name;
+      getAction("file-close")->setEnabled(scoreList.size() > 1);
       }
 
 //---------------------------------------------------------
@@ -2312,6 +2339,7 @@ void MuseScore::removeTab(int i)
       if (i >= (n-1))
             i = 0;
       setCurrentScore(i);
+      getAction("file-close")->setEnabled(scoreList.size() > 1);
       }
 
 //---------------------------------------------------------
@@ -2587,6 +2615,16 @@ void MuseScore::cmd(QAction* a)
             timeMenu();
       else if (cmd == "dynamics")
             dynamicsMenu();
+      else if (cmd == "file-open")
+            loadFile();
+      else if (cmd == "file-save")
+            saveFile();
+      else if (cmd == "file-close")
+            removeTab(scoreList.indexOf(cs));
+      else if (cmd == "file-save-as")
+            saveAs();
+      else if (cmd == "file-new")
+            newFile();
       else {
             if (cs)
                   cs->cmd(cmd);

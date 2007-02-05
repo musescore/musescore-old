@@ -1,10 +1,11 @@
-<?xml version="1.0" encoding="ISO-8859-1"?>
+<?xml version="1.0" encoding="utf8"?>
 <museScore version="1.0">
-  <Geometry x="0" y="0" w="950" h="500" />
+  <Geometry x="0" y="0" w="992" h="908" />
   <Spatium>1.5</Spatium>
-  <Mag>1.5</Mag>
-  <xoff>1.5</xoff>
-  <yoff>36</yoff>
+  <Division>480</Division>
+  <Mag>0.5</Mag>
+  <xoff>93.5</xoff>
+  <yoff>40</yoff>
   <Style>
     <staffUpperBorder>8</staffUpperBorder>
     <staffLowerBorder>4</staffLowerBorder>
@@ -40,9 +41,9 @@
     <beamWidth>0.48</beamWidth>
     <beamDistance>0.5</beamDistance>
     <beamMinLen>1.25</beamMinLen>
-    <beamMinSlope>0.03</beamMinSlope>
-    <beamMaxSlope>0.07</beamMaxSlope>
-    <maxBeamTicks>384</maxBeamTicks>
+    <beamMinSlope>0.1</beamMinSlope>
+    <beamMaxSlope>0.5</beamMaxSlope>
+    <maxBeamTicks>480</maxBeamTicks>
     <dotNoteDistance>0.5</dotNoteDistance>
     <dotRestDistance>0.25</dotRestDistance>
     <dotDotDistance>0.5</dotDotDistance>
@@ -67,10 +68,10 @@
   <page-layout>
     <pageFormat>A4</pageFormat>
     <page-margins type="both">
-      <left-margin>10</left-margin>
-      <right-margin>10</right-margin>
-      <top-margin>10</top-margin>
-      <bottom-margin>20</bottom-margin>
+      <left-margin>56.6929</left-margin>
+      <right-margin>56.6929</right-margin>
+      <top-margin>56.6929</top-margin>
+      <bottom-margin>170.079</bottom-margin>
       </page-margins>
     </page-layout>
   <siglist>
@@ -79,9 +80,6 @@
       <denom>4</denom>
       </sig>
     </siglist>
-  <keylist>
-    <key tick="0" idx="0"/>
-    </keylist>
   <tempolist fix="500000">
     <tempo at="0">
       <tick>0</tick>
@@ -97,16 +95,28 @@
       <cleflist>
         <clef tick="0" idx="0"/>
         </cleflist>
+      <keylist>
+        <key tick="0" idx="0"/>
+        </keylist>
       <bracket type="1" span="2"/>
       </Staff>
     <Staff>
       <cleflist>
         <clef tick="0" idx="4"/>
         </cleflist>
+      <keylist>
+        <key tick="0" idx="0"/>
+        </keylist>
       </Staff>
     <trackName>Piano</trackName>
-    <name>Piano</name>
-    <shortName>Pno</shortName>
+    <name>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-size:12pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Piano&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</name>
+    <shortName>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-size:12pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Pno&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</shortName>
     <Instrument>
       <midiChannel>0</midiChannel>
       <midiProgram>0</midiProgram>
@@ -116,67 +126,57 @@
       </Instrument>
     </Part>
   <Staff id="1">
-    <Measure number="1" tick="0">
-      <Bar>
-        </Bar>
+    <Measure number="1">
+      <BarLine/>
       <Rest>
-        <ticklen>1536</ticklen>
+        <ticklen>1920</ticklen>
         <BeamMode>4</BeamMode>
         </Rest>
       </Measure>
-    <Measure number="2" tick="1536">
-      <Bar>
-        </Bar>
+    <Measure number="2">
+      <BarLine/>
       <Rest>
-        <tick>1536</tick>
-        <ticklen>1536</ticklen>
+        <ticklen>1920</ticklen>
         <BeamMode>4</BeamMode>
         </Rest>
       </Measure>
-    <Measure number="3" tick="3072">
-      <Bar>
-        </Bar>
+    <Measure number="3">
+      <BarLine/>
       <Rest>
-        <tick>3072</tick>
-        <ticklen>1536</ticklen>
+        <ticklen>1920</ticklen>
         <BeamMode>4</BeamMode>
         </Rest>
       </Measure>
-    <Measure number="4" tick="4608">
-      <Bar>
-        </Bar>
+    <Measure number="4">
+      <BarLine/>
       <Rest>
-        <tick>4608</tick>
-        <ticklen>1536</ticklen>
+        <ticklen>1920</ticklen>
         <BeamMode>4</BeamMode>
         </Rest>
       </Measure>
     </Staff>
   <Staff id="2">
-    <Measure number="1" tick="0">
+    <Measure number="1">
       <Rest>
-        <ticklen>1536</ticklen>
+        <ticklen>1920</ticklen>
         <BeamMode>4</BeamMode>
         </Rest>
       </Measure>
-    <Measure number="2" tick="1536">
+    <Measure number="2">
       <Rest>
-        <tick>1536</tick>
-        <ticklen>1536</ticklen>
+        <ticklen>1920</ticklen>
         <BeamMode>4</BeamMode>
         </Rest>
       </Measure>
-    <Measure number="3" tick="3072">
+    <Measure number="3">
       <Rest>
-        <tick>3072</tick>
-        <ticklen>1536</ticklen>
+        <ticklen>1920</ticklen>
         <BeamMode>4</BeamMode>
         </Rest>
       </Measure>
-    <Measure number="4" tick="4608">
+    <Measure number="4">
       <Rest>
-        <tick>4608</tick>
-        <ticklen>1536</ticklen>
+        <ticklen>1920</ticklen>
         <BeamMode>4</BeamMode>
         </Rest>
       </Measure>

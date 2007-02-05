@@ -276,7 +276,7 @@ QRectF Rest::bbox() const
 
 qreal Rest::centerX() const
       {
-      return symbols[_sym].bbox().width()/2.0;
+      return symbols[_sym].width()*.5;
       }
 
 //---------------------------------------------------------
@@ -294,7 +294,7 @@ qreal Rest::upPos() const
 
 qreal Rest::downPos() const
       {
-      return symbols[_sym].bbox().y() + symbols[_sym].bbox().height();
+      return symbols[_sym].bbox().y() + symbols[_sym].height();
       }
 
 

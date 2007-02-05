@@ -160,15 +160,6 @@ void Staff::write(Xml& xml) const
       }
 
 //---------------------------------------------------------
-//   idx
-//---------------------------------------------------------
-
-int Staff::idx() const
-      {
-      return _score->staves()->idx(this);
-      }
-
-//---------------------------------------------------------
 //   read
 //---------------------------------------------------------
 
@@ -198,28 +189,8 @@ void Staff::read(QDomNode node)
 
 void StaffList::remove(Staff* p)
       {
-      for (iStaff i = begin(); i != end(); ++i) {
-            if (*i == p) {
-                  erase(i);
-                  return;
-                  }
-            }
-      printf("StaffList::remove(%p): not found\n", p);
-      }
-
-//---------------------------------------------------------
-//   idx
-//---------------------------------------------------------
-
-int StaffList::idx(const Staff* p) const
-      {
-      int idx = 0;
-      for (ciStaff i = begin(); i != end(); ++i, ++idx) {
-            if (*i == p)
-                  return idx;
-            }
-      printf("StaffList::idx(%p): not found\n", p);
-      return -1;
+      if (removeAll(p) < 1)
+            printf("StaffList::remove(%p): not found\n", p);
       }
 
 //---------------------------------------------------------
@@ -286,4 +257,12 @@ again:
       _score->layout();
       }
 
+//---------------------------------------------------------
+//   idx
+//---------------------------------------------------------
+
+int Staff::idx() const
+      {
+      return _score->staff(this);
+      }
 
