@@ -468,7 +468,7 @@ bool System::pos2tick(const QPointF& fp, int* tick, Staff** staff, int* pitch) c
       StaffList* sl = score()->staves();
       for (iStaff i = sl->begin(); i != sl->end(); ++i) {
             double ey = sy + _spatium*4;
-            double eey = distance(sl->idx(*i));
+            double eey = distance(sl->indexOf(*i));
             if (fp.y() < ey + (eey/2)) {
                   *staff = *i;
                   break;
@@ -489,7 +489,7 @@ bool System::pos2tick(const QPointF& fp, int* tick, Staff** staff, int* pitch) c
                   double x2 = ns ? ns->x() : measurex2;
                   if (fp.x() >= x1 && fp.x() < x2) {
                         *tick = segment->tick();
-                        double y1 = measure->y() + (sl->idx(*staff)) * dy;
+                        double y1 = measure->y() + (sl->indexOf(*staff)) * dy;
                         int clef = (*staff)->clef()->clef(*tick);
                         *pitch = y2pitch(fp.y() - y1, clef);
                         return true;

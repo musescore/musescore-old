@@ -497,6 +497,15 @@ bool Text::edit(QKeyEvent* ev)
                         cursor->setCharFormat(f);
                         }
                         break;
+                  case Qt::Key_U:   // toggle underline
+                        {
+                        QTextCharFormat f = cursor->charFormat();
+                        f.setFontUnderline(!f.fontUnderline());
+                        if (palette)
+                              palette->setCharFormat(f);
+                        cursor->setCharFormat(f);
+                        }
+                        break;
                   }
             return false;
             }

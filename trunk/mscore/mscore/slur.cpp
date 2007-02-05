@@ -619,6 +619,7 @@ bool SlurTie::readProperties(QDomNode node)
       if (tag == "SlurSegment") {
             SlurSegment* segment = new SlurSegment(this);
             segment->read(node);
+            segment->setStaff(staff());
             segments.push_back(segment);
             }
       else if (tag == "up")
