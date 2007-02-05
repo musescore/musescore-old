@@ -1,4 +1,5 @@
 5.2.7 (ws)
+      - fix KeySig undo/redo
       - added "Close" action
       - fixed crash when loading a score with previously edited slur
         (which now contains a SlurSegment element)

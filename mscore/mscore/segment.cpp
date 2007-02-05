@@ -194,33 +194,44 @@ void Segment::add(Element* el)
       el->setParent(this);
       int staffIdx = el->staffIdx();
 
-//printf("Segment(%p)(t:%d)(%d)::add %s tracks %d, staff %d, track = %d\n",
+// printf("Segment(%p)(t:%d)(%d)::add %s tracks %d, staff %d, track = %d\n",
 //   this, _type, el->tick(), el->name(), _elist.size(), staffIdx,
 //   staffIdx * VOICES + el->voice());
 
-      if (el->type() == LYRICS) {
-            LyricsList* ll = &_lyrics[staffIdx];
-            ll->push_back((Lyrics*)el);
-            el->layout();     //DEBUG
-            return;
-            }
-      if (el->type() == BAR_LINE) {
-            if (el->subtype() != START_REPEAT) {
-                  (*measure()->staffList())[staffIdx].endBarLine = (BarLine*)el;
-                  if (el->subtype() == END_REPEAT)
-                        measure()->setEndRepeat(2);
-                  return;
+      switch(el->type()) {
+            case LYRICS:
+                  {
+                  LyricsList* ll = &_lyrics[staffIdx];
+                  ll->push_back((Lyrics*)el);
+                  el->layout();     //DEBUG
                   }
-            _elist[staffIdx * VOICES + el->voice()] = el;
-            }
-      else {
-            if (el->isChordRest()) {
+                  break;
+
+            case BAR_LINE:
+                  if (el->subtype() != START_REPEAT) {
+                        (*measure()->staffList())[staffIdx].endBarLine = (BarLine*)el;
+                        if (el->subtype() == END_REPEAT)
+                              measure()->setEndRepeat(2);
+                        return;
+                        }
+                  _elist[staffIdx * VOICES + el->voice()] = el;
+                  break;
+
+            case CHORD:
+            case REST:
+                  {
                   ChordRest* cr = (ChordRest*)el;
                   if (cr->tuplet())
                         cr->tuplet()->add(cr);
+                  _elist[staffIdx * VOICES + el->voice()] = el;
                   }
-            _elist[staffIdx * VOICES + el->voice()] = el;
+                  break;
+
+            default:
+                  _elist[staffIdx * VOICES + el->voice()] = el;
+                  break;
             }
+      _score->layout(); //DEBUG
       }
 
 //---------------------------------------------------------
@@ -278,3 +289,4 @@ Segment::SegmentType Segment::segmentType(int type)
                   return (Segment::SegmentType)-1;
             }
       }
+

@@ -2278,6 +2278,7 @@ bool Measure::acceptDrop(const QPointF& p, int type, const QDomNode&) const
 
 void Measure::drop(const QPointF& p, int type, const QDomNode& node)
       {
+printf("measure drop\n");
       // determine staff
       System* s = system();
       int idx = s->y2staff(p.y());

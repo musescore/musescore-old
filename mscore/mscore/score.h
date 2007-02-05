@@ -259,6 +259,7 @@ class Score : public QObject {
       void undoOp(UndoOp::UndoType type, Measure*, int, int);
       void undoOp(UndoOp::UndoType type, Measure* m, MStaff s, int staff);
       void undoOp(UndoOp::UndoType type, Staff* staff, int idx);
+      void undoOp(UndoOp::UndoType type, Staff* staff, int tick, int oval, int nval);
       void undoOp(UndoOp::UndoType type, Part* part, int idx);
       void undoOp(UndoOp::UndoType type, Segment* seg, int staff);
       void undoOp(UndoOp::UndoType type, Element* object);
