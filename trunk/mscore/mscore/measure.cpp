@@ -297,7 +297,6 @@ int Measure::tickLen() const
 
 void Measure::remove(Segment* el)
       {
-// printf("measure %p: remove seg %p\n", this, el);
       --_size;
       if (el == _first) {
             _first = _first->next();
@@ -1669,8 +1668,10 @@ MeasureWidth Measure::layoutX(double stretch)
 // (e.g. CLEF, CHORD, REST, TIMESIG).
 // Cause: redo restores the pointer from the segment to the element, but not does not
 // undo segment removal from the measure
+//
 // WS: this has now changed; undo/redo should create/delete segments; needs
 // further testing
+// removal at this place should not be necessary any more
 
 again:
       for (Segment* s = first(); s; s = s->next()) {
@@ -1682,7 +1683,7 @@ again:
                         }
                   }
             if (empty) {
-//                  printf("Measure::layoutX remove empty segment %p\n", s);
+printf("Measure::layoutX(): internal error: remove empty segment %p\n", s);
                   remove(s);
                   goto again;
                   }
@@ -2278,7 +2279,6 @@ bool Measure::acceptDrop(const QPointF& p, int type, const QDomNode&) const
 
 void Measure::drop(const QPointF& p, int type, const QDomNode& node)
       {
-printf("measure drop\n");
       // determine staff
       System* s = system();
       int idx = s->y2staff(p.y());
@@ -2506,5 +2506,20 @@ printf("remove start repeat %p %p\n", e, e->parent());
             default:
                   break;
             }
+      }
+
+//---------------------------------------------------------
+//   cmdRemoveEmptySegment
+//---------------------------------------------------------
+
+void Measure::cmdRemoveEmptySegment(Segment* s)
+      {
+      int tracks = _score->nstaves() * VOICES;
+      for (int track = 0; track < tracks; ++track) {
+            if (s->element(track))
+                  return;
+            }
+      _score->undoOp(UndoOp::RemoveElement, s);
+      remove(s);
       }
 
