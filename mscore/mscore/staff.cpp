@@ -205,8 +205,8 @@ void StaffList::remove(Staff* p)
 void Staff::changeKeySig(int tick, int st)
       {
       int ot = _keymap->key(tick);
-printf("changeKeySig %p tick %d st %d ot %d\n",
-         this, tick, st, ot);
+// printf("changeKeySig %p tick %d st %d ot %d\n",
+//         this, tick, st, ot);
       if (ot == st)
             return;                 // no change
 
@@ -225,27 +225,43 @@ printf("changeKeySig %p tick %d st %d ot %d\n",
             }
 
       //---------------------------------------------
-      //    remove unnessesary keysig symbols
+      //    if the next keysig has the same subtype
+      //    then its unnecessary and must be removed
       //---------------------------------------------
 
       for (; m; m = m->next()) {
+            bool found = false;
             for (Segment* segment = m->first(); segment; segment = segment->next()) {
-                  if (segment->segmentType() != Segment::SegKeySig)
-                        continue;
-                  //
-                  // we assume keySigs are only in first track (voice 0)
-                  //
-                  int track = idx() * VOICES;
-                  KeySig* e = (KeySig*)segment->element(track);
-                  if (e) {
-                        int etick = segment->tick();
-                        if (etick == tick) {
-printf("remove key sig at %d\n", tick);
-                              _score->undoOp(UndoOp::RemoveElement, e);
-                              (*segment->elist())[track] = 0;
+                  if (segment->segmentType() == Segment::SegKeySig) {
+                        //
+                        // we assume keySigs are only in first track (voice 0)
+                        //
+                        int track = idx() * VOICES;
+                        KeySig* e = (KeySig*)segment->element(track);
+                        if (e) {
+                              int etick = segment->tick();
+                              if (etick >= tick && e->subtype() == st) {
+                                    _score->undoOp(UndoOp::RemoveElement, e);
+                                    (*segment->elist())[track] = 0;
+                                    m->cmdRemoveEmptySegment(segment);
+
+                                    if (etick > tick) {
+                                          _score->undoOp(UndoOp::ChangeKeySig, this, etick, st, -1000);
+                                          iKeyEvent ik = _keymap->find(etick);
+                                          if (ik == _keymap->end()) {
+                                                printf("   NOT FOUND tick %d\n", etick);
+                                                abort();
+                                                }
+                                          _keymap->erase(ik);
+                                          }
+                                    }
+                              found = true;
+                              break;
                               }
                         }
                   }
+            if (found)
+                  break;
             }
 
       //---------------------------------------------

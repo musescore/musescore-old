@@ -1321,11 +1321,23 @@ MuseScore::MuseScore()
       sl2 << "voice-1" << "voice-2" << "voice-3" << "voice-4";
       QActionGroup* vag = new QActionGroup(this);
       vag->setExclusive(true);
+      int i = 0;
       foreach(const QString s, sl2) {
             QAction* a = getAction(s.toLatin1().data());
             a->setCheckable(true);
             vag->addAction(a);
-            entryTools->addAction(a);
+            QToolButton* tb = new QToolButton(this);
+            tb->setDefaultAction(a);
+            tb->setToolButtonStyle(Qt::ToolButtonIconOnly);
+            tb->setAutoFillBackground(true);
+            QPalette pal = tb->palette();
+            QColor c(preferences.selectColor[i].light(180));
+            pal.setColor(QPalette::Window, preferences.selectColor[i].light(180));
+            pal.setColor(QPalette::Button, preferences.selectColor[i].light(150));
+//            pal.setColor(QPalette::BrightText, preferences.selectColor[i].light(140));
+            tb->setPalette(pal);
+            entryTools->addWidget(tb);
+            ++i;
             }
       connect(vag, SIGNAL(triggered(QAction*)), SLOT(cmd(QAction*)));
 
