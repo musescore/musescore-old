@@ -1683,7 +1683,7 @@ again:
                         }
                   }
             if (empty) {
-printf("Measure::layoutX(): internal error: remove empty segment %p\n", s);
+// printf("Measure::layoutX(): internal error: remove empty segment %p\n", s);
                   remove(s);
                   goto again;
                   }
