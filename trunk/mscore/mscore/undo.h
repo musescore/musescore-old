@@ -66,6 +66,7 @@ struct UndoOp {
             FlipSlurDirection,
             ChangeTimeSig,
             ChangeKeySig,
+            ChangeClef,
             };
       UndoType type;
       Element* obj;

@@ -29,6 +29,7 @@
 #include "sym.h"
 #include "symbol.h"
 #include "score.h"
+#include "staff.h"
 
 // FIXME!
 // only values for CLEF_G..CLEF_G3 and CLEF_F are
@@ -215,9 +216,7 @@ void Clef::drop(const QPointF&, int type, const QDomNode& node)
       int st = subtype();
       if (st == stype)
             return;
-      setSubtype(stype);
-      score()->undoOp(UndoOp::ChangeSubtype, this, st);
-      score()->changeClef(tick(), staffIdx(), stype);
+      staff()->changeClef(tick(), stype);
       }
 
 //---------------------------------------------------------

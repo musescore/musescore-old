@@ -194,32 +194,39 @@ void StaffList::remove(Staff* p)
       }
 
 //---------------------------------------------------------
+//   idx
+//---------------------------------------------------------
+
+int Staff::idx() const
+      {
+      return _score->staff(this);
+      }
+
+//---------------------------------------------------------
 //   changeKeySig
 //
 // change key signature at tick into subtype st for all staves
 // in response to gui command (drop keysig on measure or keysig)
-//
-// FIXME: redo does not work
 //---------------------------------------------------------
 
 void Staff::changeKeySig(int tick, int st)
       {
       int ot = _keymap->key(tick);
-// printf("changeKeySig %p tick %d st %d ot %d\n",
-//         this, tick, st, ot);
       if (ot == st)
             return;                 // no change
 
       int oval = -1000;
       iKeyEvent ki = _keymap->find(tick);
-      if (ki != _keymap->end())
+      if (ki != _keymap->end()) {
             oval = ki->second;
+            _keymap->erase(ki);
+            }
 
-      _score->undoOp(UndoOp::ChangeKeySig, this, tick, oval, st);
       (*_keymap)[tick] = st;
+      _score->undoOp(UndoOp::ChangeKeySig, this, tick, oval, st);
 
-      Measure* m = _score->tick2measure(tick);
-      if (!m) {
+      Measure* measure = _score->tick2measure(tick);
+      if (!measure) {
             printf("measure for tick %d not found!\n", tick);
             return;
             }
@@ -229,36 +236,32 @@ void Staff::changeKeySig(int tick, int st)
       //    then its unnecessary and must be removed
       //---------------------------------------------
 
-      for (; m; m = m->next()) {
+      for (Measure* m = measure; m; m = m->next()) {
             bool found = false;
             for (Segment* segment = m->first(); segment; segment = segment->next()) {
-                  if (segment->segmentType() == Segment::SegKeySig) {
-                        //
-                        // we assume keySigs are only in first track (voice 0)
-                        //
-                        int track = idx() * VOICES;
-                        KeySig* e = (KeySig*)segment->element(track);
-                        if (e) {
-                              int etick = segment->tick();
-                              if (etick >= tick && e->subtype() == st) {
-                                    _score->undoOp(UndoOp::RemoveElement, e);
-                                    (*segment->elist())[track] = 0;
-                                    m->cmdRemoveEmptySegment(segment);
-
-                                    if (etick > tick) {
-                                          _score->undoOp(UndoOp::ChangeKeySig, this, etick, st, -1000);
-                                          iKeyEvent ik = _keymap->find(etick);
-                                          if (ik == _keymap->end()) {
-                                                printf("   NOT FOUND tick %d\n", etick);
-                                                abort();
-                                                }
-                                          _keymap->erase(ik);
-                                          }
-                                    }
+                  if (segment->segmentType() != Segment::SegKeySig)
+                        continue;
+                  //
+                  // we assume keySigs are only in first track (voice 0)
+                  //
+                  int track = idx() * VOICES;
+                  KeySig* e = (KeySig*)segment->element(track);
+                  int etick = segment->tick();
+                  if (!e || (etick < tick))
+                        continue;
+                  if (e->subtype() == _keymap->key(etick)) {
+                        iKeyEvent ki = _keymap->find(etick);
+                        if (ki == _keymap->end()) {
                               found = true;
                               break;
                               }
+                        else {
+                              // redundant entry
+                              }
                         }
+                  _score->undoOp(UndoOp::RemoveElement, e);
+                  (*segment->elist())[track] = 0;
+                  m->cmdRemoveEmptySegment(segment);
                   }
             if (found)
                   break;
@@ -268,16 +271,15 @@ void Staff::changeKeySig(int tick, int st)
       // insert new keysig symbols
       //---------------------------------------------
 
-      m = _score->tick2measure(tick);
       KeySig* keysig = new KeySig(_score);
       keysig->setStaff(this);
       keysig->setTick(tick);
       keysig->setSubtype(st);
 
       Segment::SegmentType stype = Segment::segmentType(KEYSIG);
-      Segment* s = m->findSegment(stype, tick);
+      Segment* s = measure->findSegment(stype, tick);
       if (!s) {
-            s = m->createSegment(stype, tick);
+            s = measure->createSegment(stype, tick);
             _score->undoOp(UndoOp::AddElement, s);
             }
       keysig->setParent(s);
@@ -286,11 +288,84 @@ void Staff::changeKeySig(int tick, int st)
       }
 
 //---------------------------------------------------------
-//   idx
+//   changeClef
 //---------------------------------------------------------
 
-int Staff::idx() const
+void Staff::changeClef(int tick, int st)
       {
-      return _score->staff(this);
+      int ot = _clef->clef(tick);
+      if (ot == st)
+            return;                 // no change
+
+      int oval = -1000;
+      iClefEvent ki = _clef->find(tick);
+      if (ki != _clef->end()) {
+            oval = ki->second;
+            _clef->erase(ki);
+            }
+
+      (*_clef)[tick] = st;
+      _score->undoOp(UndoOp::ChangeClef, this, tick, oval, st);
+
+      Measure* measure = _score->tick2measure(tick);
+      if (!measure) {
+            printf("measure for tick %d not found!\n", tick);
+            return;
+            }
+
+      //---------------------------------------------
+      //    if the next clef has the same subtype
+      //    then its unnecessary and must be removed
+      //---------------------------------------------
+
+      for (Measure* m = measure; m; m = m->next()) {
+            bool found = false;
+            for (Segment* segment = m->first(); segment; segment = segment->next()) {
+                  if (segment->segmentType() != Segment::SegClef)
+                        continue;
+                  //
+                  // we assume Clefs are only in first track (voice 0)
+                  //
+                  int track = idx() * VOICES;
+                  Clef* e = (Clef*)segment->element(track);
+                  int etick = segment->tick();
+                  if (!e || (etick < tick))
+                        continue;
+                  if (e->subtype() == _clef->clef(etick)) {
+                        iClefEvent ki = _clef->find(etick);
+                        if (ki == _clef->end()) {
+                              found = true;
+                              break;
+                              }
+                        else {
+                              // redundant entry
+                              }
+                        }
+                  _score->undoOp(UndoOp::RemoveElement, e);
+                  (*segment->elist())[track] = 0;
+                  m->cmdRemoveEmptySegment(segment);
+                  }
+            if (found)
+                  break;
+            }
+
+      //---------------------------------------------
+      // insert new clef symbol
+      //---------------------------------------------
+
+      Clef* clef = new Clef(_score);
+      clef->setStaff(this);
+      clef->setTick(tick);
+      clef->setSubtype(st);
+
+      Segment::SegmentType stype = Segment::segmentType(CLEF);
+      Segment* s = measure->findSegment(stype, tick);
+      if (!s) {
+            s = measure->createSegment(stype, tick);
+            _score->undoOp(UndoOp::AddElement, s);
+            }
+      clef->setParent(s);
+      _score->undoOp(UndoOp::AddElement, clef);
+      _score->layout();
       }
 

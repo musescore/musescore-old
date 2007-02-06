@@ -1,4 +1,6 @@
 6.2.7 (ws)
+      - implement Clef handling similar to KeySig
+      - implement KeySig delete
       - fix: removal of unecessary KeySigs after insertion of new
         KeySig incl. undo/redo
 5.2.7 (ws)

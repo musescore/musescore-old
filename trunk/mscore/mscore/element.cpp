@@ -275,6 +275,8 @@ void Element::read(QDomNode node)
             if (!Element::readProperties(node))
                   domError(node);
             }
+      if (_subtype == 0)      // make sure setSubtype() is called at least once
+            setSubtype(0);
       }
 
 //---------------------------------------------------------

@@ -67,6 +67,7 @@ static const char* undoName[] = {
       "ChangeSubtype",     "AddAccidental",
       "FlipStemDirection", "FlipSlurDirection",
       "ChangeTimeSig",     "ChangeKeySig",
+      "ChangeClef"
       };
 
 static bool UNDO = false;
@@ -224,7 +225,9 @@ void Score::doRedo()
 void Score::processUndoOp(UndoOp* i, bool undo)
       {
       UNDO = true;
+
 // printf("Score::processUndoOp(i->type=%s, undo=%d)\n", i->name(), undo);
+
       switch(i->type) {
             case UndoOp::RemoveElement:
                   if (undo)
@@ -345,14 +348,8 @@ void Score::processUndoOp(UndoOp* i, bool undo)
             case UndoOp::ChangeSubtype:
                   {
                   int st = i->obj->subtype();
-                  int t = i->obj->type();
-//                  printf("obj=%p t=%d curst=%d newst=%d\n",
-//                         i->obj, t, st, i->val1);
+                  // int t = i->obj->type();
                   i->obj->setSubtype(i->val1);
-                  if (t == CLEF)
-                        changeClef(i->obj->tick(), i->obj->staffIdx(), i->val1);
-                  else if (t == KEYSIG)
-                        i->obj->staff()->changeKeySig(i->obj->tick(), i->val1);
                   i->val1 = st;
                   }
                   break;
@@ -391,6 +388,37 @@ void Score::processUndoOp(UndoOp* i, bool undo)
                   else {
                         if (i->val2 != -1000) {
                               iKeyEvent ik = kl->find(i->val1);
+                              if (ik == kl->end()) {
+                                    printf("   NOT FOUND tick %d\n", i->val1);
+                                    abort();
+                                    }
+                              kl->erase(ik);
+                              }
+                        if (i->val3 != -1000)
+                              (*kl)[i->val1] = i->val3;
+                        }
+                  }
+                  break;
+
+            case UndoOp::ChangeClef:
+                  {
+                  ClefList* kl = i->staff->clef();
+                  if (undo) {
+                        // remove new value if there is any
+                        if (i->val3 != -1000) {
+                              iClefEvent ik = kl->find(i->val1);
+                              if (ik == kl->end()) {
+                                    printf("Undo: ChangeClef: NOT FOUND tick %d\n", i->val1);
+                                    abort();
+                                    }
+                              kl->erase(ik);
+                              }
+                        if (i->val2 != -1000)
+                              (*kl)[i->val1] = i->val2;
+                        }
+                  else {
+                        if (i->val2 != -1000) {
+                              iClefEvent ik = kl->find(i->val1);
                               if (ik == kl->end()) {
                                     printf("   NOT FOUND tick %d\n", i->val1);
                                     abort();
@@ -607,15 +635,15 @@ void Score::undoOp(UndoOp::UndoType type, Staff* staff, int tick, int oval, int 
 
 void Score::addElement(Element* element)
       {
-//printf("Score::addObject %p %s parent %s\n", element, element->name(), element->parent()->name());
+//printf("Score::addObject %p %s parent %s\n",
+//  element, element->name(), element->parent()->name());
+
       element->parent()->add(element);
 
       if (element->type() == CLEF) {
             int staffIdx = element->staffIdx();
             Clef* clef   = (Clef*) element;
-            ClefList* ct = staff(staffIdx)->clef();
             int tick     = clef->tick();
-            ct->setClef(clef->tick(), clef->subtype());
 
             //-----------------------------------------------
             //   move notes
@@ -670,18 +698,14 @@ void Score::removeElement(Element* element)
       {
       Element* parent = element->parent();
 
-// printf("Score::removeElement %p %s parent %p %s\n",
+//printf("Score::removeElement %p %s parent %p %s\n",
 //   element, element->name(), parent, parent->name());
 
       parent->remove(element);
       if (element->type() == CLEF) {
-            Clef* clef = (Clef*)element;
-            int tick  = clef->tick();
+            Clef* clef   = (Clef*)element;
+            int tick     = clef->tick();
             int staffIdx = clef->staffIdx();
-
-            Staff* instr = staff(staffIdx);
-            ClefList* ct = instr->clef();
-            ct->erase(tick);
 
             //-----------------------------------------------
             //   move notes
