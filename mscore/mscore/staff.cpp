@@ -222,8 +222,13 @@ void Staff::changeKeySig(int tick, int st)
             _keymap->erase(ki);
             }
 
-      (*_keymap)[tick] = st;
-      _score->undoOp(UndoOp::ChangeKeySig, this, tick, oval, st);
+      bool removeFlag = st == _keymap->key(tick);
+      int nval = -1000;
+      if (!removeFlag) {
+            (*_keymap)[tick] = st;
+            nval = st;
+            }
+      _score->undoOp(UndoOp::ChangeKeySig, this, tick, oval, nval);
 
       Measure* measure = _score->tick2measure(tick);
       if (!measure) {
@@ -249,19 +254,17 @@ void Staff::changeKeySig(int tick, int st)
                   int etick = segment->tick();
                   if (!e || (etick < tick))
                         continue;
-                  if (e->subtype() == _keymap->key(etick)) {
-                        iKeyEvent ki = _keymap->find(etick);
-                        if (ki == _keymap->end()) {
-                              found = true;
-                              break;
-                              }
-                        else {
-                              // redundant entry
-                              }
+                  if ((e->subtype() != st) && (etick > tick)) {
+                        found = true;
+                        break;
                         }
                   _score->undoOp(UndoOp::RemoveElement, e);
                   (*segment->elist())[track] = 0;
                   m->cmdRemoveEmptySegment(segment);
+                  if (etick > tick) {
+                        found = true;
+                        break;
+                        }
                   }
             if (found)
                   break;
@@ -271,19 +274,21 @@ void Staff::changeKeySig(int tick, int st)
       // insert new keysig symbols
       //---------------------------------------------
 
-      KeySig* keysig = new KeySig(_score);
-      keysig->setStaff(this);
-      keysig->setTick(tick);
-      keysig->setSubtype(st);
+      if (!removeFlag) {
+            KeySig* keysig = new KeySig(_score);
+            keysig->setStaff(this);
+            keysig->setTick(tick);
+            keysig->setSubtype(st);
 
-      Segment::SegmentType stype = Segment::segmentType(KEYSIG);
-      Segment* s = measure->findSegment(stype, tick);
-      if (!s) {
-            s = measure->createSegment(stype, tick);
-            _score->undoOp(UndoOp::AddElement, s);
+            Segment::SegmentType stype = Segment::segmentType(KEYSIG);
+            Segment* s = measure->findSegment(stype, tick);
+            if (!s) {
+                  s = measure->createSegment(stype, tick);
+                  _score->undoOp(UndoOp::AddElement, s);
+                  }
+            keysig->setParent(s);
+            _score->undoOp(UndoOp::AddElement, keysig);
             }
-      keysig->setParent(s);
-      _score->undoOp(UndoOp::AddElement, keysig);
       _score->layout();
       }
 
@@ -304,8 +309,13 @@ void Staff::changeClef(int tick, int st)
             _clef->erase(ki);
             }
 
-      (*_clef)[tick] = st;
-      _score->undoOp(UndoOp::ChangeClef, this, tick, oval, st);
+      bool removeFlag = st == _clef->clef(tick);
+      int nval = -1000;
+      if (!removeFlag) {
+            (*_clef)[tick] = st;
+            nval = st;
+            }
+      _score->undoOp(UndoOp::ChangeClef, this, tick, oval, nval);
 
       Measure* measure = _score->tick2measure(tick);
       if (!measure) {
@@ -331,19 +341,17 @@ void Staff::changeClef(int tick, int st)
                   int etick = segment->tick();
                   if (!e || (etick < tick))
                         continue;
-                  if (e->subtype() == _clef->clef(etick)) {
-                        iClefEvent ki = _clef->find(etick);
-                        if (ki == _clef->end()) {
-                              found = true;
-                              break;
-                              }
-                        else {
-                              // redundant entry
-                              }
+                  if ((e->subtype() != st) && (etick > tick)) {
+                        found = true;
+                        break;
                         }
                   _score->undoOp(UndoOp::RemoveElement, e);
                   (*segment->elist())[track] = 0;
                   m->cmdRemoveEmptySegment(segment);
+                  if (etick > tick) {
+                        found = true;
+                        break;
+                        }
                   }
             if (found)
                   break;
@@ -353,19 +361,21 @@ void Staff::changeClef(int tick, int st)
       // insert new clef symbol
       //---------------------------------------------
 
-      Clef* clef = new Clef(_score);
-      clef->setStaff(this);
-      clef->setTick(tick);
-      clef->setSubtype(st);
+      if (!removeFlag) {
+            Clef* clef = new Clef(_score);
+            clef->setStaff(this);
+            clef->setTick(tick);
+            clef->setSubtype(st);
 
-      Segment::SegmentType stype = Segment::segmentType(CLEF);
-      Segment* s = measure->findSegment(stype, tick);
-      if (!s) {
-            s = measure->createSegment(stype, tick);
-            _score->undoOp(UndoOp::AddElement, s);
+            Segment::SegmentType stype = Segment::segmentType(CLEF);
+            Segment* s = measure->findSegment(stype, tick);
+            if (!s) {
+                  s = measure->createSegment(stype, tick);
+                  _score->undoOp(UndoOp::AddElement, s);
+                  }
+            clef->setParent(s);
+            _score->undoOp(UndoOp::AddElement, clef);
             }
-      clef->setParent(s);
-      _score->undoOp(UndoOp::AddElement, clef);
       _score->layout();
       }
 
