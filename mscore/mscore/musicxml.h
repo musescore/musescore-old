@@ -21,6 +21,11 @@
 #ifndef __MUSICXML_H__
 #define __MUSICXML_H__
 
+/**
+ \file
+ Definition of class MusicXML
+*/
+
 #include "globals.h"
 
 class Instrument;
@@ -46,6 +51,10 @@ const int MAX_SLURS  = 8;
 //   MusicXml
 //---------------------------------------------------------
 
+/**
+ The MusicXML importer.
+*/
+
 class MusicXml {
       Score* score;
       std::vector<int> voicelist[MAX_STAVES];
@@ -57,17 +66,15 @@ class MusicXml {
       int move;
 
       QDomDocument* doc;
-      int tick;         // current position
-      int maxtick;      // maxtick of a measure, used to calculate measure len
+      int tick;         ///< Current position in MusicXML time
+      int maxtick;      ///< Maxtick of a measure, used to calculate measure len
       int lastMeasureLen;
 
-      int lastLen;      // needed for chords
+      int lastLen;      ///< Needed for chords
       int maxLyrics;
 
-      int beats;        // current time parameters
-      int beatType;
       int divisions;
-      Tuplet* tuplet;   // current tuplet
+      Tuplet* tuplet;   ///< Current tuplet
 
       QString title;
       QString subTitle;
@@ -97,4 +104,3 @@ class MusicXml {
       };
 
 #endif
-
