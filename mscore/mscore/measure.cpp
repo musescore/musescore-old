@@ -2309,30 +2309,11 @@ void Measure::drop(const QPointF& p, int type, const QDomNode& node)
                   }
                   break;
             case CLEF:
-                  // LVIFIX: handle clefSmallBit
                   {
-                  // find tick of of first note or rest to the right of position p in this staff
-                  for (Segment* seg = _first; seg; seg = seg->next()) {
-                        if (seg->segmentType() != Segment::SegChordRest)
-                              continue;
-                        // SegChordRest found, check if it contains anything in this staff
-                        for (int track = idx * VOICES; track < idx * VOICES + VOICES; ++track)
-                              if (seg->element(track)) {
-                                    if (mrpx >= seg->pos().x())
-                                          // seg is left of p
-                                          continue;
-                                    // LVIFIX: check rest in newly created empty measures,
-                                    printf("segtick=%d track=%d idx=%d\n",
-                                            seg->tick(), track, idx);
-                                    Clef* clef = new Clef(score());
-                                    clef->read(node);
-                                    clef->setStaff(staff);
-                                    clef->setTick(seg->tick());
-                                    clef->setParent(this);
-                                    score()->cmdAdd(clef);
-                                    return;
-                                    }
-                        }
+                  Clef* clef = new Clef(0);
+                  clef->read(node);
+                  staff->changeClef(tick(), clef->subtype());
+                  delete clef;
                   }
                   break;
             case KEYSIG:

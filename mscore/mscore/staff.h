@@ -55,7 +55,6 @@ class Staff {
    public:
       Staff(Score*, Part*, int);
       ~Staff();
-      ClefList* clef() const         { return _clef; }
       int key(int tick) const;
       bool isTop() const             { return _rstaff == 0; }
       bool isTopSplit() const;
@@ -79,7 +78,9 @@ class Staff {
       void setBracket(int val)       { _bracket = val;      }
       void setBracketSpan(int val)   { _bracketSpan = val;  }
       KeyList* keymap() const        { return _keymap;      }
+      ClefList* clef() const         { return _clef; }
       void changeKeySig(int tick, int st);
+      void changeClef(int tick, int st);
       };
 
 //---------------------------------------------------------

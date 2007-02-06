@@ -372,30 +372,6 @@ Element* Score::addClef(Clef* clef)
       }
 
 //---------------------------------------------------------
-//   changeClef
-//---------------------------------------------------------
-
-void Score::changeClef(int tick, int si, int idx)
-      {
-      ClefList* ct = staff(si)->clef();
-      if (ct->clef(tick) == idx)    // no effect
-            return;
-      (*ct)[tick] = idx;
-
-      Measure* m = tick2measure(tick);
-      if (!m) {
-            printf("measure for tick %d not found!\n", tick);
-            return;
-            }
-
-      // move noteheads to new position
-      for (; m; m = m->next()) {
-            m->layoutNoteHeads(si);
-            }
-      layout();
-      }
-
-//---------------------------------------------------------
 //   addBar
 //---------------------------------------------------------
 
@@ -938,14 +914,10 @@ void Score::deleteItem(Element* el)
             case VOLTA:
             case OTTAVA:
             case LAYOUT_BREAK:
-                  el->parent()->remove(el);
-                  undoOp(UndoOp::RemoveElement, el);
-                  updateAll = true;
-                  break;
-
             case CLEF:
-                  removeClef((Clef*) el);
-                  undoOp(UndoOp::RemoveElement, el);
+            case KEYSIG:
+                  cmdRemove(el);
+                  updateAll = true;
                   break;
 
             case NOTE:
