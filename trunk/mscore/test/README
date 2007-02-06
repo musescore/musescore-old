@@ -35,7 +35,8 @@ testImplicitMeasure1.xml pickup measure
 testKeysig1.xml          change keysig from none to G major
 testNotesAttributes1.xml all note attributes supported by MusicXML import/export
 testNotesRests1.xml      all note and rest types, including some dotted
-testTimesig1.xml         all supported time signatures
+testTimesig1.xml         all supported simple time signatures
+testTimesig3.xml         the more difficult time signatures
 testVoicePiano1.xml      score with both a voice and a piano part
 testWedge1.xml           crescendo and diminuendo wedges
 testWords1.xml           the "words" direction

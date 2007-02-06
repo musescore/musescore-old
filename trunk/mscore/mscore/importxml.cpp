@@ -992,7 +992,9 @@ void MusicXml::direction(Measure* measure, int staff, QDomNode node)
 
 void MusicXml::xmlAttributes(Measure* measure, int staff, QDomNode node)
       {
-      bool foundTime = false;
+      QString beats = "";
+      QString beatType = "";
+      QString timeSymbol = "";
       for (;!node.isNull(); node = node.nextSibling()) {
             QDomElement e = node.toElement();
             if (e.isNull())
@@ -1060,20 +1062,19 @@ void MusicXml::xmlAttributes(Measure* measure, int staff, QDomNode node)
                         }
                   }
             else if (e.tagName() == "time") {
+                  timeSymbol = e.attribute("symbol");
                   for (QDomNode n = node.firstChild(); !n.isNull(); n = n.nextSibling()) {
                         QDomElement e = n.toElement();
                         if (e.isNull())
                               continue;
                         if (e.tagName() == "beats")
-                              beats = e.text().toInt();
+                              beats = e.text();
                         else if (e.tagName() == "beat-type") {
-                              beatType = e.text().toInt();
+                              beatType = e.text();
                               }
                         else
                               domError(n);
                         }
-                  if (beats != 0 && beatType != 0)
-                        foundTime = true;
                   }
             else if (e.tagName() == "clef") {
                   int clef   = 0;
@@ -1147,18 +1148,51 @@ void MusicXml::xmlAttributes(Measure* measure, int staff, QDomNode node)
             else
                   domError(node);
             }
-      if (foundTime) {
-            score->sigmap->add(tick, beats, beatType);
-            Part* part = score->part(staff);
-            int staves = part->nstaves();
-            for (int i = 0; i < staves; ++i) {
-                  TimeSig* timesig = new TimeSig(score);
-                  timesig->setTick(tick);
-                  timesig->setSig(beatType, beats);
-                  timesig->setStaff(score->staff(staff + i));
-                  Segment* s = measure->getSegment(timesig);
-                  s->add(timesig);
+      if (beats != "" && beatType != "") {
+            // determine if timesig is valid
+            int st = 0;  // timesig subtype calculated
+            int bts[4];  // the beats (max 4 separated by "+") as integer
+            int btp = 0; // beat-type as integer
+            if (beats == "2" && beatType == "2" && timeSymbol == "cut") {
+                  st = TSIG_ALLA_BREVE;
                   }
+            else if (beats == "4" && beatType == "4" && timeSymbol == "common") {
+                  st = TSIG_FOUR_FOUR;
+                  }
+            else if (timeSymbol == "") {
+                  btp = beatType.toInt();
+                  QStringList list = beats.split("+");
+                  for (int i = 0; i < 4; i++) bts[i] = 0;
+                  for (int i = 0; i < list.size() && i < 4; i++) {
+                        bts[i] = list.at(i).toInt();
+                        }
+                  // the beat type and at least one beat must be non-zero
+                  if (btp && (bts[0] || bts[1] || bts[2] || bts[3])) {
+                        TimeSig ts = TimeSig(score, btp, bts[0], bts[1], bts[2], bts[3]);
+                        st = ts.subtype();
+                        }
+                  }
+            if (st) {
+                  // add timesig to all staves
+                  int n;
+                  int z;
+                  TimeSig::getSig(st, &n, &z);
+                  score->sigmap->add(tick, z, n);
+                  Part* part = score->part(staff);
+                  int staves = part->nstaves();
+                  for (int i = 0; i < staves; ++i) {
+                        TimeSig* timesig = new TimeSig(score);
+                        timesig->setTick(tick);
+                        timesig->setSubtype(st);
+                        timesig->setStaff(score->staff(staff + i));
+                        Segment* s = measure->getSegment(timesig);
+                        s->add(timesig);
+                        }
+                  }
+            else
+                  printf("unknown time signature, beats=<%s> beat-type=<%s> symbol=<%s>\n",
+                         beats.toLatin1().data(), beatType.toLatin1().data(),
+                         timeSymbol.toLatin1().data());
             }
 }
 

@@ -3,6 +3,10 @@
       - implement KeySig delete
       - fix: removal of unecessary KeySigs after insertion of new
         KeySig incl. undo/redo
+      (lv)
+      * MusicXML updates
+      - import of composite TimeSigs and of TSIG_ALLA_BREVE and TSIG_FOUR_FOUR
+      - corresponding testfile testTimesig3.xml
 5.2.7 (ws)
       - fix KeySig undo/redo
       - added "Close" action
