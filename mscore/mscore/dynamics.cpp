@@ -202,5 +202,7 @@ const QString Dynamic::subtypeName() const
 
 void Dynamic::layout()
       {
+      doc->documentLayout()->setPaintDevice(score()->scoreLayout()->paintDevice());
+      doc->setUseDesignMetrics(true);
       }
 

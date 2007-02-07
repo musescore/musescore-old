@@ -1,3 +1,5 @@
+7.2.7 (ws)
+      - fix printing of dynamics and tuplets number
 6.2.7 (ws)
       - implement Clef handling similar to KeySig
       - implement KeySig delete
