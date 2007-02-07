@@ -98,7 +98,7 @@ void SLine::layout()
 //   startEdit
 //---------------------------------------------------------
 
-bool SLine::startEdit(QMatrix& matrix)
+bool SLine::startEdit(QMatrix& matrix, const QPointF&)
       {
       mode = DRAG2;
       LineSegment& s1 = segments.front();

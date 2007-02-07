@@ -154,7 +154,7 @@ void SlurSegment::updateGrips(QMatrix& matrix)
 //   startEdit
 //---------------------------------------------------------
 
-bool SlurSegment::startEdit(QMatrix& matrix)
+bool SlurSegment::startEdit(QMatrix& matrix, const QPointF&)
       {
       mode = 4;
       updateGrips(matrix);
