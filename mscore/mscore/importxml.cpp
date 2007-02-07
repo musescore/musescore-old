@@ -1746,6 +1746,7 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomNode node)
       if (!tupletType.isEmpty()) {
             if (tupletType == "start") {
                   tuplet = new Tuplet(score);
+                  tuplet->setStaff(score->staff(staff + relStaff));
                   // type, placement
 
                   measure->add(tuplet);
