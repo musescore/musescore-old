@@ -5,8 +5,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>431</width>
-    <height>346</height>
+    <width>681</width>
+    <height>637</height>
    </rect>
   </property>
   <property name="windowTitle" >
@@ -133,7 +133,38 @@
        </widget>
       </item>
       <item row="3" column="0" >
-       <widget class="QListWidget" name="elements" />
+       <widget class="QTreeWidget" name="elements" >
+        <property name="indentation" >
+         <number>0</number>
+        </property>
+        <property name="rootIsDecorated" >
+         <bool>false</bool>
+        </property>
+        <property name="uniformRowHeights" >
+         <bool>true</bool>
+        </property>
+        <property name="itemsExpandable" >
+         <bool>false</bool>
+        </property>
+        <property name="allColumnsShowFocus" >
+         <bool>true</bool>
+        </property>
+        <column>
+         <property name="text" >
+          <string>Element</string>
+         </property>
+        </column>
+        <column>
+         <property name="text" >
+          <string>Tick</string>
+         </property>
+        </column>
+        <column>
+         <property name="text" >
+          <string>Length</string>
+         </property>
+        </column>
+       </widget>
       </item>
      </layout>
     </widget>
