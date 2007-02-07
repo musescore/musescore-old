@@ -1011,11 +1011,6 @@ void Measure::layout2()
       foreach(Element* pel, _sel) {
             int staff = _score->staff(pel->staff());
 
-            if (staff >= 2 || staff < 0) {
-                  printf("===========staff %d <%s>\n", staff, pel->name());
-                  staff = 1;
-                  }
-
             // double y  = staff * point(Spatium(4) + style->staffDistance);
             double y = system()->staff(staff)->bbox().y();
 
