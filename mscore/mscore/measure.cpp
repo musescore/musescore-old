@@ -1047,8 +1047,7 @@ void Measure::layout2()
       //   set measure number
       //
       int pn = _no + _noOffset;
-      QString s("%1");
-      s = s.arg(pn + 1);
+      QString s = QString("%1").arg(pn + 1);
 
       QString ns;
       if (::style->showMeasureNumber
@@ -2284,7 +2283,7 @@ void Measure::drop(const QPointF& p, int type, const QDomNode& node)
 
       // convert p from canvas to measure relative position and take x coordinate
       QPointF mrp = p - pos() - system()->pos() - system()->page()->pos();
-      double mrpx = mrp.x();
+//      double mrpx = mrp.x();
 
       switch(ElementType(type)) {
             case BRACKET:

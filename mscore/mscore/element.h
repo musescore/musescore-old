@@ -249,6 +249,12 @@ class Element {
  */
       virtual bool genPropertyMenu(QMenu*) const { return false; }
       virtual void propertyAction(const QString&) {}
+
+/**
+ delivers mouseEvent to element in edit mode
+ returns true if mouse event is accepted by element
+ */
+      virtual bool mousePress(const QPointF&) { return false; }
       };
 
 //---------------------------------------------------------

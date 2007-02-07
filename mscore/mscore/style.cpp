@@ -75,7 +75,7 @@ static const TextStyle defaultTextStyles[] = {
       TextStyle(QString("Copyright"), ff, 8, true, false, false,
          ALIGN_HCENTER | ALIGN_BOTTOM,    ANCHOR_PAGE, 0, MM(1), OFFSET_ABS),
       TextStyle(QString("Measure Number"), ff, 8, false, false, false,
-         ALIGN_LEFT,    ANCHOR_TICK, 0, -2.2, OFFSET_SPATIUM),
+         ALIGN_LEFT,    ANCHOR_TICK, -1.0, -2.2, OFFSET_SPATIUM),
 
       TextStyle(QString("Page Number Odd"), ff, 12, false, false, false,
          ALIGN_RIGHT | ALIGN_TOP, ANCHOR_PAGE, MM(0), MM(0), OFFSET_ABS),

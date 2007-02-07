@@ -340,6 +340,8 @@ void Canvas::mousePressEvent(QMouseEvent* ev)
             case EDIT:
                   if (_score->editObject->startEditDrag(startMove - _score->editObject->aref()))
                         setState(DRAG_EDIT);
+                  else if (_score->editObject->mousePress(startMove))
+                        update();
                   else {
                         setState(NORMAL);
                         }

@@ -5,13 +5,6 @@ Bugs:
             - does not select text properly
             - does not select bar lines at all
 
-      - printing:
-            - Printing is preferably done with a much higher resolution
-              than screen display.
-              This leads to different layouts for screen and print.
-              Main reason is that qt gives different (slightly wrong)
-              font metrics for different resolutions.
-
 Features:
       - dotted rests
       - akkumulated empty measures
@@ -37,7 +30,7 @@ Instruments
 Misc:
       - better handling of multi voice parts
       - optimize layouter, to speed up rendering
-      - more drag/drop cut/paste operations
+      + more drag/drop cut/paste operations
 
 Page Preview in Page Settings:
       - add next/prev buttons for page selection
