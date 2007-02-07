@@ -185,7 +185,7 @@ void Bracket::read(QDomNode node)
 //   startEdit
 //---------------------------------------------------------
 
-bool Bracket::startEdit(QMatrix& matrix)
+bool Bracket::startEdit(QMatrix& matrix, const QPointF&)
       {
       mode = 2;
       updateGrips(matrix);

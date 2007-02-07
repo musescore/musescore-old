@@ -174,7 +174,7 @@ class Element {
       virtual QRectF drag(const QPointF& s);
       virtual void endDrag()                  {}
 
-      virtual bool startEdit(QMatrix&)        { return false; }
+      virtual bool startEdit(QMatrix&, const QPointF&)   { return false; }
       virtual bool edit(QKeyEvent*)           { return false;}
       virtual bool startEditDrag(const QPointF&)  { return false; }
       virtual bool editDrag(QMatrix&, QPointF*, const QPointF&) { return false; }

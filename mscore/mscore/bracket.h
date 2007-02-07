@@ -58,7 +58,7 @@ class Bracket : public Element {
       virtual void read(QDomNode);
       virtual void layout();
 
-      virtual bool startEdit(QMatrix&);
+      virtual bool startEdit(QMatrix&,const QPointF&);
       virtual bool edit(QKeyEvent*);
       virtual void endEdit();
       virtual bool startEditDrag(const QPointF&);

@@ -775,10 +775,11 @@ void Canvas::resetStaffOffsets()
 
 bool Canvas::startEdit(Element* element)
       {
-      if (element->startEdit(matrix)) {
+      if (element->startEdit(matrix, startMove)) {
             setFocus();
             _score->startEdit(element);
             setState(EDIT);
+            update();         // DEBUG
             return true;
             }
       return false;

@@ -67,7 +67,7 @@ Text::Text(const Text& e)
       doc                     = e.doc->clone(0);
       if (editMode) {
             cursor = new QTextCursor(doc);
-            cursor->movePosition(QTextCursor::Start);
+            cursor->setPosition(cursorPos);
             }
       else
             cursor = 0;
@@ -448,13 +448,15 @@ bool Text::readProperties(QDomNode node)
 //   startEdit
 //---------------------------------------------------------
 
-bool Text::startEdit(QMatrix&)
+bool Text::startEdit(QMatrix&, const QPointF& p)
       {
       cursor = new QTextCursor(doc);
-      cursor->movePosition(QTextCursor::Start);
+      cursor->setPosition(cursorPos);
       editMode = true;
       if (palette)
             palette->setCharFormat(cursor->charFormat());
+      mousePress(p);    // set cursor
+      cursorPos = cursor->position();
       return true;
       }
 
@@ -578,9 +580,6 @@ void Text::endEdit()
 
 void Text::draw1(Painter& p)
       {
-//      doc->documentLayout()->setPaintDevice(p.device());
-//      doc->setUseDesignMetrics(true);
-
       p.save();
       p.setRenderHint(QPainter::Antialiasing, true);
 
