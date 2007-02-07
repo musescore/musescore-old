@@ -1,4 +1,6 @@
 7.2.7 (ws)
+      - implement mouse click to move in text while in text edit mode
+      - tune position of measure number in style.cpp
       - fix printing of dynamics and tuplets number
 6.2.7 (ws)
       - implement Clef handling similar to KeySig

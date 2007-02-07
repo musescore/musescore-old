@@ -657,6 +657,21 @@ void Text::setBlockFormat(const QTextBlockFormat& bf)
       }
 
 //---------------------------------------------------------
+//   mousePress
+//    set text cursor
+//---------------------------------------------------------
+
+bool Text::mousePress(const QPointF& p)
+      {
+      QPointF pt = p - apos();
+      int idx = doc->documentLayout()->hitTest(pt, Qt::FuzzyHit);
+      if (idx == -1)
+            return true;
+      cursor->setPosition(idx);
+      return true;
+      }
+
+//---------------------------------------------------------
 //   Lyrics
 //---------------------------------------------------------
 

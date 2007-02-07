@@ -101,6 +101,7 @@ class Text : public Element {
       virtual void layout();
       virtual QRectF bbox() const;
       virtual QPainterPath shape() const;
+      virtual bool mousePress(const QPointF&);
       };
 
 //---------------------------------------------------------
