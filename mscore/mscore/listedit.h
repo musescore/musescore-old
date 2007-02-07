@@ -361,7 +361,7 @@ class TupletView : public ShowElementBase {
 
    private slots:
       void numberClicked();
-      void elementClicked(QListWidgetItem*);
+      void elementClicked(QTreeWidgetItem*);
       void hasNumberToggled(bool);
       void hasLineToggled(bool);
 

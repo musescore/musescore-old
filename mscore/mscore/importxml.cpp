@@ -1240,6 +1240,8 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomNode node)
       bool turn = false;
       bool mordent = false;
       bool invertedMordent = false;
+      int actualNotes = 1;
+      int normalNotes = 1;
 
       for (; !node.isNull(); node = node.nextSibling()) {
             QDomElement e = node.toElement();
@@ -1573,8 +1575,19 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomNode node)
                   grace = true;
                   graceSlash = e.attribute(QString("slash"));
                   }
-            else if (tag == "time-modification")  // tuplets
-                  ;
+            else if (tag == "time-modification") {  // tuplets
+                  for (QDomNode n = node.firstChild(); !n.isNull(); n = n.nextSibling()) {
+                        QDomElement e = n.toElement();
+                        if (e.isNull())
+                              continue;
+                        if (e.tagName() == "actual-notes")
+                              actualNotes = e.text().toInt();
+                        else if (e.tagName() == "normal-notes")
+                              normalNotes = e.text().toInt();
+                        else
+                              domError(n);
+                        }
+                  }
             else if (tag == "notehead")
                   ;
             else
@@ -1747,11 +1760,15 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomNode node)
             if (tupletType == "start") {
                   tuplet = new Tuplet(score);
                   tuplet->setStaff(score->staff(staff + relStaff));
+                  tuplet->setNormalNotes(normalNotes);
+                  tuplet->setActualNotes(actualNotes);
+                  tuplet->setBaseLen(cr->tickLen() * actualNotes / normalNotes);
+
                   // type, placement
 
                   measure->add(tuplet);
-                  cr->setTuplet(tuplet);
-                  tuplet->add(cr);
+//                  cr->setTuplet(tuplet);
+//                  tuplet->add(cr);
                   }
             else if (tupletType == "stop") {
                   cr->setTuplet(tuplet);

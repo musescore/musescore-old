@@ -980,7 +980,7 @@ TupletView::TupletView()
       layout->addStretch(10);
 
       connect(tb.number, SIGNAL(clicked()), SLOT(numberClicked()));
-      connect(tb.elements, SIGNAL(itemClicked(QListWidgetItem*)), SLOT(elementClicked(QListWidgetItem*)));
+      connect(tb.elements, SIGNAL(itemClicked(QTreeWidgetItem*,int)), SLOT(elementClicked(QTreeWidgetItem*)));
       connect(tb.hasNumber, SIGNAL(toggled(bool)), SLOT(hasNumberToggled(bool)));
       connect(tb.hasLine, SIGNAL(toggled(bool)), SLOT(hasLineToggled(bool)));
       }
@@ -1020,9 +1020,9 @@ void TupletView::numberClicked()
 //   elementClicked
 //---------------------------------------------------------
 
-void TupletView::elementClicked(QListWidgetItem* item)
+void TupletView::elementClicked(QTreeWidgetItem* item)
       {
-      Element* e = (Element*)item->data(Qt::UserRole).value<void*>();
+      Element* e = (Element*)item->data(0, Qt::UserRole).value<void*>();
       emit elementChanged(e);
       }
 
@@ -1041,11 +1041,16 @@ void TupletView::setElement(Element* e)
       tb.actualNotes->setValue(tuplet->actualNotes());
       tb.number->setEnabled(tuplet->number());
       ChordRestList* el = tuplet->elements();
+      tb.elements->clear();
       for (iChordRest i = el->begin(); i != el->end(); ++i) {
-            QListWidgetItem* item = new QListWidgetItem(tb.elements);
-            item->setText(i->second->name());
+            QTreeWidgetItem* item = new QTreeWidgetItem;
+            ChordRest* cr = i->second;
+            item->setText(0, cr->name());
+            item->setText(1, QString("%1").arg(cr->tick()));
+            item->setText(2, QString("%1").arg(cr->tickLen()));
             void* p = (void*) i->second;
-            item->setData(Qt::UserRole, QVariant::fromValue<void*>(p));
+            item->setData(0, Qt::UserRole, QVariant::fromValue<void*>(p));
+            tb.elements->addTopLevelItem(item);
             }
       }
 
