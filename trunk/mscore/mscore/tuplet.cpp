@@ -181,6 +181,7 @@ void Tuplet::layout()
       p2 -= mp;
 
       // center number
+      _number->layout();
       qreal x3 = p1.x() + (p2.x() - p1.x()) * .5;
       qreal y3 = p1.y() + (p2.y() - p1.y()) * .5
          - _number->bbox().height() * .5

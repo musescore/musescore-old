@@ -191,6 +191,7 @@ void Text::setSubtype(const QString& s)
 
 QRectF Text::bbox() const
       {
+//      doc->documentLayout()->setPaintDevice(score()->scoreLayout()->paintDevice());
       _bbox = QRectF(0.0, 0.0, doc->size().width(), doc->size().height());
       return _bbox;
       }
@@ -577,6 +578,9 @@ void Text::endEdit()
 
 void Text::draw1(Painter& p)
       {
+//      doc->documentLayout()->setPaintDevice(p.device());
+//      doc->setUseDesignMetrics(true);
+
       p.save();
       p.setRenderHint(QPainter::Antialiasing, true);
 
