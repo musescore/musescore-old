@@ -25,7 +25,6 @@
 // Dialog window for capturing keyboard shortcuts
 //
 
-// #include "filedialog.h"
 #include "ui_shortcutcapturedialog.h"
 
 class Shortcut;

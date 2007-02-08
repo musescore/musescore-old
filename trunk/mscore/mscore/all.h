@@ -23,16 +23,11 @@
 
 #include <stdio.h>
 #include <values.h>
-// #include <stdarg.h>
-// #include <vector>
-// #include <list>
 #include <map>
 #include <cmath>
 #include <errno.h>
 #include <fcntl.h>
 #include <unistd.h>
-// #include <assert.h>
-// #include <algorithm>
 
 #include <QtXml/QtXml>
 #include <QtCore/QPointF>
@@ -74,5 +69,6 @@
 #include <QtGui/QToolButton>
 #include <QtGui/QTextBlock>
 #include <QtGui/QClipboard>
+#include <QtGui/QStatusBar>
 #endif
 

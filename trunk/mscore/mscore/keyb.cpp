@@ -45,6 +45,7 @@ void Canvas::keyPressEvent(QKeyEvent* ev)
       {
 // printf("key key:%x state:%x text:<%s>\n", ev->key(),
 //    int(ev->modifiers()), ev->text().toLatin1().data());
+
       if (state == EDIT) {
             if ((ev->key() == Qt::Key_Tab) && (_score->editObject->type() == LYRICS))
                   _score->lyricsTab();

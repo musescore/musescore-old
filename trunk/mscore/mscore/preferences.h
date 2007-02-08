@@ -53,6 +53,7 @@ struct Preferences {
       bool showNavigator;
       bool showPad;
       bool showPlayPanel;
+      bool showStatusBar;
       QPoint padPos;
       QPoint playPanelPos;
       bool useAlsaAudio;

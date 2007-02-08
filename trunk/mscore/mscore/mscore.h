@@ -45,6 +45,12 @@ class Xml;
 extern QString mscoreGlobalShare;
 static const int PROJECT_LIST_LEN = 6;
 
+enum {
+      STATE_NORMAL,
+      STATE_NOTE_ENTRY,
+      STATE_EDIT
+      };
+
 //---------------------------------------------------------
 //   MeasuresDialog
 //---------------------------------------------------------
@@ -164,6 +170,8 @@ class MuseScore : public QMainWindow {
       QWidget* accidentalsPalette;
       QWidget* dynamicsPalette;
       QWidget* layoutBreakPalette;
+      QStatusBar* _statusBar;
+      QLabel* _modeText;
 
       Pad* pad;
       QList<Score*> scoreList;
@@ -276,6 +284,7 @@ class MuseScore : public QMainWindow {
       bool midiinEnabled() const;
       bool playEnabled() const;
       Score* currentScore() const { return cs; }
+      void setState(int);
       static Shortcut sc[];
       };
 

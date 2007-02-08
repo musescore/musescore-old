@@ -366,14 +366,8 @@ void Canvas::mouseDoubleClickEvent(QMouseEvent* ev)
       Element* element = _score->dragObject();
       if (element) {
             _score->startCmd();
-            if (element->type() == NOTE) {
-                  keyState = ev->modifiers();
-                  _score->setDragObject(((Note*)element)->chord());
-                  _score->select(_score->dragObject(), keyState, _score->dragStaff);
-                  }
-            else {
-                  startEdit(element);
-                  }
+            if (!startEdit(element))
+                  _score->endCmd(true);
             }
       else
             mousePressEvent(ev);
@@ -694,8 +688,10 @@ void Canvas::setState(State s)
             case MAG:
                   setCursor(QCursor(Qt::SizeAllCursor));
                   break;
-            case NORMAL:
             case EDIT:
+                  mscore->setState(STATE_EDIT);
+
+            case NORMAL:
             case DRAG_OBJ:
             case DRAG_STAFF:
             case DRAG_EDIT:

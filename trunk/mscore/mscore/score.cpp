@@ -980,6 +980,7 @@ void Score::endEdit()
             }
       layout();
       editObject = 0;
+      mscore->setState(STATE_NORMAL);
       }
 
 //---------------------------------------------------------
@@ -1216,6 +1217,7 @@ ChordRest* Score::setNoteEntry(bool val, bool step)
             setPadState();
             canvas()->setState(Canvas::NORMAL);
             }
+      mscore->setState(val ? STATE_NOTE_ENTRY : STATE_NORMAL);
       moveCursor();
       return cr;
       }
