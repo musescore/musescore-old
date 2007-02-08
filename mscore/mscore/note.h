@@ -128,6 +128,10 @@ class Note : public Element {
       Element* findSelectableElement(QPointF p) const;
       virtual bool acceptDrop(const QPointF&, int, const QDomNode&) const;
       virtual void drop(const QPointF&, int, const QDomNode&);
+
+      virtual bool startEdit(QMatrix&, const QPointF&);
+      virtual bool edit(QKeyEvent*);
+      virtual void endEdit();
       };
 
 //---------------------------------------------------------

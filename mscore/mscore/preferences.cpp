@@ -98,14 +98,15 @@ Preferences::Preferences()
       stemDir[1] = AUTO;
       stemDir[2] = AUTO;
       stemDir[3] = AUTO;
-      showNavigator = true;
-      showPlayPanel = false;
-      showPad       = false;
-      padPos       = QPoint(100, 100);
-      playPanelPos = QPoint(100, 300);
-      useAlsaAudio = true;
-      useJackAudio = true;
-      alsaDevice   = "default";
+      showNavigator  = true;
+      showPlayPanel  = false;
+      showStatusBar  = true;
+      showPad        = false;
+      padPos         = QPoint(100, 100);
+      playPanelPos   = QPoint(100, 300);
+      useAlsaAudio   = true;
+      useJackAudio   = true;
+      alsaDevice     = "default";
       // alsaDevice   = "hw:0";
       alsaSampleRate = 48000;
       alsaPeriodSize = 1024;
@@ -157,6 +158,7 @@ void Preferences::write()
       xml.tag("stemDirection3", stemDir[2]);
       xml.tag("stemDirection4", stemDir[3]);
       xml.tag("showNavigator", showNavigator);
+      xml.tag("showStatusBar", showStatusBar);
 
       xml.tag("showPlayPanel", showPlayPanel);
       xml.tagE("PlayPanelPos x=\"%d\" y=\"%d\"",
@@ -279,6 +281,8 @@ void Preferences::read()
                               showPlayPanel = i;
                         else if (tag == "showPad")
                               showPad = i;
+                        else if (tag == "showStatusBar")
+                              showStatusBar = i;
                         else if (tag == "PlayPanelPos") {
                               playPanelPos.setX(e.attribute("x").toInt());
                               playPanelPos.setY(e.attribute("y").toInt());

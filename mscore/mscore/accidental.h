@@ -38,6 +38,9 @@ class Accidental : public Compound {
       virtual Accidental* clone() const { return new Accidental(*this); }
       virtual ElementType type() const { return ACCIDENTAL; }
       virtual void setSubtype(int v);
+      virtual bool startEdit(QMatrix&, const QPointF&);
+      virtual bool edit(QKeyEvent*);
+      virtual void endEdit();
       static int subtype2value(int);      // return effective pitch offset
       };
 

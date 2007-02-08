@@ -8,7 +8,7 @@ sorry, this is not a real user manual :-(
             * click New
             * select a template (a4piano)
             * click Ok
-                                                        xx
+
       Create new:
             * click New
             * click Cancel in template dialog
@@ -22,9 +22,12 @@ sorry, this is not a real user manual :-(
       Note entry
 ---------------------------------------
 
+      Empty measures contain at least a rest. While entering notes
+      you are actually replacing the rest with notes.
+
       First select a note or rest were you want to start note entry.
 
-      N      start note entry
+      N      starts note entry
              the mouse cursor changes; an insert cursor appears on the note sheet
              - select the note duration for the next note you want to enter
                from note entry toolbar
@@ -54,7 +57,8 @@ sorry, this is not a real user manual :-(
 
       Mouse Entry:
       In note entry mode a mouse click replaces a note/chord,
-      shift+click adds a new note to chord.
+      shift+click adds a new note to chord. The insert position is
+      shown by a "shadow" note.
 
 -------------------------------------------------------------------------------
 	Ties

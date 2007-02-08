@@ -1,4 +1,7 @@
 8.2.7 (ws)
+      - implement status bar; display mode in status bar
+      - implemented edit mode of accidentals and note heads to allow
+        for manual position adjustment
       - some debug abort()'s are only active in debug mode
       - fix crash when a pulldown menu is active (Style) and the
         mouse release happens on the canvas

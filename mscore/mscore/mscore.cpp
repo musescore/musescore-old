@@ -1002,6 +1002,54 @@ Shortcut MuseScore::sc[] = {
          QT_TR_NOOP("beam 32"),
          &beam32Icon
          ),
+      Shortcut(
+         "toggle-pad",
+         QT_TR_NOOP("Pad"),
+         Qt::Key_F10,
+         Qt::ApplicationShortcut,
+         QT_TR_NOOP(""),
+         QT_TR_NOOP("")
+         ),
+      Shortcut(
+         "toggle-playpanel",
+         QT_TR_NOOP("Play Panel"),
+         Qt::Key_F11,
+         Qt::ApplicationShortcut,
+         QT_TR_NOOP(""),
+         QT_TR_NOOP("")
+         ),
+      Shortcut(
+         "toggle-navigator",
+         QT_TR_NOOP("Navigator"),
+         Qt::Key_F12,
+         Qt::ApplicationShortcut,
+         QT_TR_NOOP(""),
+         QT_TR_NOOP("")
+         ),
+      Shortcut(
+         "toggle-transport",
+         QT_TR_NOOP("Transport Toolbar"),
+         0,
+         Qt::WindowShortcut,
+         QT_TR_NOOP(""),
+         QT_TR_NOOP("")
+         ),
+      Shortcut(
+         "toggle-noteinput",
+         QT_TR_NOOP("Note Input Toolbar"),
+         0,
+         Qt::WindowShortcut,
+         QT_TR_NOOP(""),
+         QT_TR_NOOP("")
+         ),
+      Shortcut(
+         "toggle-statusbar",
+         QT_TR_NOOP("Status Bar"),
+         0,
+         Qt::WindowShortcut,
+         QT_TR_NOOP(""),
+         QT_TR_NOOP("")
+         ),
       Shortcut(0, 0, 0),
       };
 
@@ -1109,6 +1157,7 @@ void MuseScore::preferencesChanged()
       transportId->setChecked(seq->isRunning());
       transportTools->setShown(seq->isRunning());
       getAction("midi-on")->setEnabled(preferences.enableMidiInput);
+      _statusBar->setShown(preferences.showStatusBar);
       }
 
 //---------------------------------------------------------
@@ -1148,12 +1197,24 @@ MuseScore::MuseScore()
       _midiinEnabled        = true;
       _speakerEnabled       = true;
 
+      _modeText = new QLabel;
+      _modeText->setAutoFillBackground(true);
+      QPalette p(_modeText->palette());
+      p.setColor(QPalette::Window, QColor(176, 190, 242));
+      _modeText->setPalette(p);
+      _statusBar = new QStatusBar;
+      _statusBar->addPermanentWidget(_modeText, 0);
+      setStatusBar(_statusBar);
+      setState(STATE_NORMAL);
+      _statusBar->setShown(preferences.showStatusBar);
+
       QAction* a;
 
       // otherwise unused actions:
       //   must be added somewere to work
 
       QActionGroup* ag = new QActionGroup(this);
+      ag->setExclusive(false);
       QStringList sl;
       sl << "page-prev" << "page-next" << "page-top" << "page-end"
          << "add-tie" << "add-slur" << "add-hairpin" << "add-hairpin-reverse"
@@ -1172,6 +1233,7 @@ MuseScore::MuseScore()
          << "cut" << "copy" << "paste"
          << "beam-start" << "beam-mid" << "no-beam" << "beam32"
          << "file-open" << "file-new" << "file-save" << "file-save-as" << "file-close"
+         << "toggle-statusbar"
          ;
       foreach(const QString s, sl) {
             QAction* a = getAction(s.toLatin1().data());
@@ -1487,39 +1549,38 @@ MuseScore::MuseScore()
 
       menuDisplay = mb->addMenu(tr("&Display"));
 
-      padId = new QAction(tr("Pad"), this);
-      padId->setShortcut(Qt::Key_F10);
-      padId->setShortcutContext(Qt::ApplicationShortcut);
+      padId = getAction("toggle-pad");
       padId->setCheckable(true);
       connect(padId, SIGNAL(toggled(bool)), SLOT(showPad(bool)));
       menuDisplay->addAction(padId);
 
-      playId = new QAction(tr("PlayPanel"), this);
+      playId = getAction("toggle-playpanel");
       playId->setCheckable(true);
-      playId->setShortcut(Qt::Key_F11);
-      playId->setShortcutContext(Qt::ApplicationShortcut);
       connect(playId, SIGNAL(toggled(bool)), SLOT(showPlayPanel(bool)));
       menuDisplay->addAction(playId);
 
-      navigatorId = new QAction(tr("Navigator"), this);
+      navigatorId = getAction("toggle-navigator");
       navigatorId->setCheckable(true);
-      navigatorId->setShortcut(Qt::Key_F12);
-      navigatorId->setShortcutContext(Qt::ApplicationShortcut);
       connect(navigatorId, SIGNAL(toggled(bool)), SLOT(showNavigator(bool)));
       menuDisplay->addAction(navigatorId);
 
       menuDisplay->addSeparator();
 
-      transportId = new QAction(tr("Transport Toolbar"), this);
+      transportId = getAction("toggle-transport");
       transportId->setCheckable(true);
       menuDisplay->addAction(transportId);
       connect(transportId, SIGNAL(toggled(bool)), transportTools, SLOT(setVisible(bool)));
 
-      inputId = new QAction(tr("Note Input Toolbar"), this);
+      inputId = getAction("toggle-noteinput");
       inputId->setCheckable(true);
       inputId->setChecked(true);
       menuDisplay->addAction(inputId);
       connect(inputId, SIGNAL(toggled(bool)), entryTools, SLOT(setVisible(bool)));
+
+      a = getAction("toggle-statusbar");
+      a->setCheckable(true);
+      a->setChecked(preferences.showStatusBar);
+      menuDisplay->addAction(a);
 
       // if we have no sequencer, disable transport and play panel
       if (!seq->isRunning()) {
@@ -2637,6 +2698,12 @@ void MuseScore::cmd(QAction* a)
             saveAs();
       else if (cmd == "file-new")
             newFile();
+      else if (cmd == "toggle-statusbar") {
+            QAction* a = getAction("toggle-statusbar");
+            preferences.showStatusBar = a->isChecked();
+            _statusBar->setShown(preferences.showStatusBar);
+            preferences.write();
+            }
       else {
             if (cs)
                   cs->cmd(cmd);
@@ -2660,4 +2727,24 @@ void MuseScore::clipboardChanged()
       getAction("paste")->setEnabled(flag);
       }
 
+//---------------------------------------------------------
+//   setState
+//---------------------------------------------------------
+
+void MuseScore::setState(int val)
+      {
+      switch(val) {
+            case STATE_NORMAL:
+                  _modeText->hide();
+                  break;
+            case STATE_NOTE_ENTRY:
+                  _modeText->setText(tr("note entry mode"));
+                  _modeText->show();
+                  break;
+            case STATE_EDIT:
+                  _modeText->setText(tr("edit mode"));
+                  _modeText->show();
+                  break;
+            }
+      }
 

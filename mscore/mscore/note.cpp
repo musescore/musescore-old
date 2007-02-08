@@ -248,17 +248,25 @@ void Note::changeAccidental(int pre)
 void Note::add(Element* el)
       {
 	el->setParent(this);
-      if (el->type() == TEXT) {
-            _fingering.append((Text*) el);
+      switch(el->type()) {
+            case TEXT:
+                  _fingering.append((Text*) el);
+                  break;
+            case TIE:
+                  {
+                  Tie* tie = (Tie*)el;
+	      	tie->setStartNote(this);
+                  tie->setStaff(staff());
+      		setTieFor(tie);
+                  }
+                  break;
+            case ACCIDENTAL:
+                  _accidental = (Accidental*)el;
+                  break;
+            default:
+                  printf("Note::add() not impl. %s\n", el->name());
+                  break;
             }
-      else if (el->type() == TIE) {
-            Tie* tie = (Tie*)el;
-		tie->setStartNote(this);
-            tie->setStaff(staff());
-		setTieFor(tie);
-            }
-      else
-            printf("Note::add() not impl. %s\n", el->name());
       }
 
 //---------------------------------------------------------
@@ -280,26 +288,39 @@ void Note::setTieBack(Tie* t)
 
 void Note::remove(Element* el)
       {
-      if (el->type() == TEXT) {
-            int i = _fingering.indexOf((Text*)el);
-            if (i != -1)
-                  _fingering.removeAt(i);
-            else
-                  printf("Note::remove: fingering not found\n");
-            }
-	else if (el->type() == TIE) {
-            Tie* tie = (Tie*) el;
-            setTieFor(0);
-            if (tie->endNote())
-                  tie->endNote()->setTieBack(0);
-      	ElementList* el = tie->elements();
-            for (iElement i = el->begin(); i != el->end(); ++i) {
-	            score()->removeElement(*i);
+      switch(el->type()) {
+            case TEXT:
+                  {
+                  int i = _fingering.indexOf((Text*)el);
+                  if (i != -1)
+                        _fingering.removeAt(i);
+                  else
+                        printf("Note::remove: fingering not found\n");
                   }
-            el->clear();
+                  break;
+
+	      case TIE:
+                  {
+                  Tie* tie = (Tie*) el;
+                  setTieFor(0);
+                  if (tie->endNote())
+                        tie->endNote()->setTieBack(0);
+            	ElementList* el = tie->elements();
+                  for (iElement i = el->begin(); i != el->end(); ++i) {
+      	            score()->removeElement(*i);
+                        }
+                  el->clear();
+                  }
+                  break;
+
+            case ACCIDENTAL:
+                  _accidental = 0;
+                  break;
+
+            default:
+                  printf("Note::remove() not impl. %s\n", el->name());
+                  break;
             }
-      else
-            printf("Note::remove() not impl. %s\n", el->name());
       }
 
 //---------------------------------------------------------
@@ -761,5 +782,60 @@ void Note::drop(const QPointF&, int t, const QDomNode& node)
             default:
                   break;
             }
+      }
+
+//---------------------------------------------------------
+//   startEdit
+//---------------------------------------------------------
+
+bool Note::startEdit(QMatrix&, const QPointF&)
+      {
+      // TODO: visualization of edit mode
+      return true;
+      }
+
+//---------------------------------------------------------
+//   edit
+//---------------------------------------------------------
+
+bool Note::edit(QKeyEvent* ev)
+      {
+      int key = ev->key();
+
+      qreal o = 0.2;
+      if (ev->modifiers() & Qt::ControlModifier)
+            o = 0.02;
+      QPointF p = userOff();
+      switch (key) {
+            case Qt::Key_Left:
+                  p.setX(p.x() - o);
+                  break;
+
+            case Qt::Key_Right:
+                  p.setX(p.x() + o);
+                  break;
+
+            case Qt::Key_Up:
+                  p.setY(p.y() - o);
+                  break;
+
+            case Qt::Key_Down:
+                  p.setY(p.y() + o);
+                  break;
+
+            case Qt::Key_Home:
+                  p = QPointF(0.0, 0.0);    // reset to zero
+                  break;
+            }
+      setUserOff(p);
+      return false;
+      }
+
+//---------------------------------------------------------
+//   endEdit
+//---------------------------------------------------------
+
+void Note::endEdit()
+      {
       }
 

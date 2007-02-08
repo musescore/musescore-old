@@ -134,3 +134,60 @@ int Accidental::subtype2value(int st)
       return preTab[st % 100];
       }
 
+//---------------------------------------------------------
+//   startEdit
+//---------------------------------------------------------
+
+bool Accidental::startEdit(QMatrix&, const QPointF&)
+      {
+      printf("Accidental::startEdit\n");
+      // TODO: visualization of edit mode
+      return true;
+      }
+
+//---------------------------------------------------------
+//   edit
+//---------------------------------------------------------
+
+bool Accidental::edit(QKeyEvent* ev)
+      {
+      int key = ev->key();
+      printf("Accidental::edit\n");
+
+      qreal o = 0.2;
+      if (ev->modifiers() & Qt::ControlModifier)
+            o = 0.02;
+      QPointF p = userOff();
+      switch (key) {
+            case Qt::Key_Left:
+                  p.setX(p.x() - o);
+                  break;
+
+            case Qt::Key_Right:
+                  p.setX(p.x() + o);
+                  break;
+
+            case Qt::Key_Up:
+                  p.setY(p.y() - o);
+                  break;
+
+            case Qt::Key_Down:
+                  p.setY(p.y() + o);
+                  break;
+
+            case Qt::Key_Home:
+                  p = QPointF(0.0, 0.0);    // reset to zero
+                  break;
+            }
+      setUserOff(p);
+      return false;
+      }
+
+//---------------------------------------------------------
+//   endEdit
+//---------------------------------------------------------
+
+void Accidental::endEdit()
+      {
+      printf("Accidental::endEdit\n");
+      }
