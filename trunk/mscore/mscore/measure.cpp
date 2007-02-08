@@ -251,7 +251,6 @@ Measure::~Measure()
 
 void Measure::insert(Segment* e, Segment* el)
       {
-      e->setParent(this);
       if (el == 0) {
             push_back(e);
             return;
@@ -260,6 +259,7 @@ void Measure::insert(Segment* e, Segment* el)
             push_front(e);
             return;
             }
+      e->setParent(this);
       ++_size;
       e->setNext(el);
       e->setPrev(el->prev());
@@ -309,6 +309,9 @@ void Measure::remove(Segment* el)
             _last->setNext(0);
             return;
             }
+printf("remove Segment %p  _first %p _last %p prev %p next %p\n",
+   this, _first, _last, el->prev(), el->next());
+
       el->prev()->setNext(el->next());
       el->next()->setPrev(el->prev());
       }
@@ -2417,14 +2420,22 @@ void Measure::drop(const QPointF& p, int type, const QDomNode& node)
                                     if (s->segmentType() == Segment::SegBarLine) {
                                           Element* e = s->element(i * VOICES);
                                           if (e && e->type() == BAR_LINE && e->subtype() == START_REPEAT) {
+                                                // BarLine already there,
+                                                // do nothing
                                                 return;
                                                 }
                                           }
                                     }
+                              Segment::SegmentType st = Segment::SegBarLine;
+                              Segment* seg = findSegment(st, tick());
+                              if (seg == 0) {
+                                    seg = createSegment(st, tick());
+                                    score()->undoOp(UndoOp::AddElement, seg);
+                                    }
                               BarLine* bl = new BarLine(score());
                               bl->setSubtype(subtype);
                               bl->setStaff(staff);
-                              bl->setParent(this);
+                              bl->setParent(seg);
                               score()->cmdAdd(bl);
                               bl = 0;
                               Measure* m = system()->prevMeasure(this);
@@ -2438,7 +2449,7 @@ void Measure::drop(const QPointF& p, int type, const QDomNode& node)
                         else {
                               //
                               // if next measure is a start repeat, look for a
-                              // start repeat barline and remove ist
+                              // start repeat barline and remove it
                               //
                               Measure* m = system()->nextMeasure(this);
                               if (m && m->startRepeat()) {
@@ -2446,8 +2457,8 @@ void Measure::drop(const QPointF& p, int type, const QDomNode& node)
                                           if (s->segmentType() == Segment::SegBarLine) {
                                                 Element* e = s->element(i * VOICES);
                                                 if (e && e->type() == BAR_LINE && e->subtype() == START_REPEAT) {
-printf("remove start repeat %p %p\n", e, e->parent());
                                                       score()->cmdRemove(e);
+                                                      m->cmdRemoveEmptySegment(s);
                                                       break;
                                                       }
                                                 }

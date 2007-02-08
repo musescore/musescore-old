@@ -1,3 +1,8 @@
+8.2.7 (ws)
+      - some debug abort()'s are only active in debug mode
+      - fix crash when a pulldown menu is active (Style) and the
+        mouse release happens on the canvas
+      - fix insert repeat barline, undo/redo
 7.2.7 (ws)
       - implement mouse click to move in text while in text edit mode
       - tune position of measure number in style.cpp

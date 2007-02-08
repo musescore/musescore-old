@@ -372,16 +372,27 @@ void initSymbols()
 // some debug output
 //      Sym* s = &symbols[clefEightSym];
       Sym* s = &symbols[quartheadSym];
-      QFontMetricsF fm(s->font(), scoreLayout()->paintDevice());
-      printf("screen metrics:  quart  l %f  w %f(%f) r %f\n",
-         fm.leftBearing(s->code()), fm.width(s->code()), s->width(), fm.rightBearing(s->code()));
+      QFontMetricsF fm(s->font());
+      printf("screen metrics:  quart  l %f  w %f(%f,%f) r %f\n",
+         fm.leftBearing(s->code()), fm.width(s->code()),
+         s->width(), s->bbox().x(),
+         fm.rightBearing(s->code()));
+
+      QFont nf(s->font());
+      nf.setPointSizeF(s->font().pointSizeF() * 10.0);
+      fm = QFontMetricsF(nf);
+      printf("screen metrics10: quart l %f  w %f(%f,%f) r %f\n",
+         fm.leftBearing(s->code()), fm.width(s->code()),
+         s->width(), s->bbox().x(),
+         fm.rightBearing(s->code()));
 
       QPrinter printer(QPrinter::HighResolution);
       QFontMetricsF nfm(s->font(), &printer);
-      printf("printer metrics: quart  l %f  w %f(%f) r %f\n",
+      printf("printer metrics: quart  l %f  w %f(%f,%f) r %f\n",
          nfm.leftBearing(s->code()),
          nfm.width(s->code()),
          nfm.boundingRect(s->code()).width(),
+         nfm.boundingRect(s->code()).x(),
          nfm.rightBearing(s->code()));
 #endif
       }

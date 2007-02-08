@@ -354,7 +354,8 @@ void Chord::layoutStem()
                   _hook->setParent(this);
                   }
             _hook->setIdx(hookIdx, _grace);
-            _hook->setPos(npos + QPointF(1.5, up ? -1.5 : pstemLen));
+            qreal lw = point(::style->stemWidth) * .5;
+            _hook->setPos(npos + QPointF(lw, up ? -lw : pstemLen));
             }
       else
             setHook(0);

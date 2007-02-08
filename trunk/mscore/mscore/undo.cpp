@@ -109,7 +109,9 @@ void Score::startUndo()
       {
       if (undoActive) {
             fprintf(stderr, "startUndo: already active\n");
-            abort();
+            if (debugMode)
+                  abort();
+            return;
             }
       undoList.push_back(new Undo(*cis, sel));
       undoActive = true;
@@ -129,7 +131,9 @@ void Score::endUndo()
       {
       if (!undoActive) {
             fprintf(stderr, "endUndo: not active\n");
-            abort();
+            if (debugMode)
+                  abort();
+            return;
             }
 //      printf("end undo: %d actions\n", undoList.back()->size());
       if (undoList.back()->empty()) {
@@ -376,10 +380,6 @@ void Score::processUndoOp(UndoOp* i, bool undo)
                         // remove new value if there is any
                         if (i->val3 != -1000) {
                               iKeyEvent ik = kl->find(i->val1);
-                              if (ik == kl->end()) {
-                                    printf("   NOT FOUND tick %d\n", i->val1);
-                                    abort();
-                                    }
                               kl->erase(ik);
                               }
                         if (i->val2 != -1000)
@@ -388,10 +388,6 @@ void Score::processUndoOp(UndoOp* i, bool undo)
                   else {
                         if (i->val2 != -1000) {
                               iKeyEvent ik = kl->find(i->val1);
-                              if (ik == kl->end()) {
-                                    printf("   NOT FOUND tick %d\n", i->val1);
-                                    abort();
-                                    }
                               kl->erase(ik);
                               }
                         if (i->val3 != -1000)
@@ -407,10 +403,6 @@ void Score::processUndoOp(UndoOp* i, bool undo)
                         // remove new value if there is any
                         if (i->val3 != -1000) {
                               iClefEvent ik = kl->find(i->val1);
-                              if (ik == kl->end()) {
-                                    printf("Undo: ChangeClef: NOT FOUND tick %d\n", i->val1);
-                                    abort();
-                                    }
                               kl->erase(ik);
                               }
                         if (i->val2 != -1000)
@@ -419,10 +411,6 @@ void Score::processUndoOp(UndoOp* i, bool undo)
                   else {
                         if (i->val2 != -1000) {
                               iClefEvent ik = kl->find(i->val1);
-                              if (ik == kl->end()) {
-                                    printf("   NOT FOUND tick %d\n", i->val1);
-                                    abort();
-                                    }
                               kl->erase(ik);
                               }
                         if (i->val3 != -1000)
@@ -468,11 +456,13 @@ void Score::checkUndoOp()
       {
       if (!undoActive) {
             fprintf(stderr, "undoOp: undo not started\n");
-            abort();
+            if (debugMode)
+                  abort();
             }
       if (UNDO) {
             fprintf(stderr, "create undo op in undo/redo operation\n");
-            abort();
+            if (debugMode)
+                  abort();
             }
       }
 
