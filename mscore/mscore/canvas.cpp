@@ -74,6 +74,7 @@ Canvas::Canvas(QWidget* parent)
       cursorTimer      = new QTimer(this);
       buttonState      = 0;
       keyState         = 0;
+      mousePressed     = false;
 
       connect(cursorTimer, SIGNAL(timeout()), SLOT(cursorBlink()));
       cursorTimer->start(500);
@@ -255,6 +256,8 @@ void Canvas::updateNavigator(bool layoutChanged) const
 
 void Canvas::mousePressEvent(QMouseEvent* ev)
       {
+      mousePressed = true;
+
       bool b1 = ev->button() == Qt::LeftButton;
       bool b2 = ev->button() == Qt::MidButton;
       bool b3 = ev->button() == Qt::RightButton;
@@ -510,6 +513,17 @@ void Canvas::mouseMoveEvent1(QMouseEvent* ev)
 
 void Canvas::mouseReleaseEvent(QMouseEvent* ev)
       {
+      if (!mousePressed) {
+            //
+            // this happens if a pulldown menu is pressed and the
+            // mouse release happens on the canvas
+            //
+            if (debugMode)
+                  printf("...spurious mouse release\n");
+            return;
+            }
+      mousePressed = false;
+
       seq->stopNotes();
       if (state == EDIT)
             return;

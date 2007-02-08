@@ -53,6 +53,7 @@ class Canvas : public QWidget, public Viewer {
       int buttonState;
       State state;
       bool dragCanvasState;
+      bool mousePressed;
 
       bool cursorIsBlinking;
 

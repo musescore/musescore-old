@@ -214,6 +214,7 @@ void Segment::add(Element* el)
                               measure()->setEndRepeat(2);
                         return;
                         }
+                  measure()->setStartRepeat(true);
                   _elist[staffIdx * VOICES + el->voice()] = el;
                   break;
 
