@@ -66,6 +66,7 @@ struct Preferences {
       bool antialiasedDrawing;
       SessionStart sessionStart;
       QString startScore;
+      bool showSplashScreen;
 
       Preferences();
       void write();

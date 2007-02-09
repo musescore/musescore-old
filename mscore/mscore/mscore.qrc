@@ -22,6 +22,8 @@
       <file>data/filesave.xpm</file>
       <file alias="fonts/emmentaler_20.otf">fonts/emmentaler_20.otf</file>
       <file alias="fonts/mscore1_20.otf">fonts/mscore1_20.otf</file>
+      <file>data/splash.jpg</file>
+      <file>data/demo.msc</file>
    </qresource>
 
    <qresource lang="de">

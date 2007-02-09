@@ -98,7 +98,7 @@ Preferences::Preferences()
       stemDir[1] = AUTO;
       stemDir[2] = AUTO;
       stemDir[3] = AUTO;
-      showNavigator  = true;
+      showNavigator  = false;
       showPlayPanel  = false;
       showStatusBar  = true;
       showPad        = false;
@@ -113,7 +113,9 @@ Preferences::Preferences()
       alsaFragments  = 3;
       layoutBreakColor = Qt::green;
       antialiasedDrawing = true;
-      sessionStart = LAST_SESSION;
+      sessionStart = SCORE_SESSION;
+      startScore   = ":/data/demo.msc";
+      showSplashScreen = true;
       };
 
 //---------------------------------------------------------
@@ -182,6 +184,7 @@ void Preferences::write()
             }
       if (!startScore.isEmpty())
             xml.tag("startScore", startScore);
+      xml.tag("showSplashScreen", showSplashScreen);
 
       writeShortcuts(xml);
       xml.etag("Preferences");
@@ -316,7 +319,9 @@ void Preferences::read()
                                     sessionStart = SCORE_SESSION;
                               }
                         else if (tag == "startScore")
-                              startScore =val;
+                              startScore = val;
+                        else if (tag == "showSplashScreen")
+                              showSplashScreen = i;
                         else if (tag == "Shortcuts")
                               readShortcuts(nnnode);
                         else
@@ -446,6 +451,7 @@ PreferenceDialog::PreferenceDialog(QWidget* parent)
             case SCORE_SESSION:  scoreSession->setChecked(true); break;
             }
       sessionScore->setText(preferences.startScore);
+      showSplashScreen->setChecked(preferences.showSplashScreen);
 
       //
       // initialize local shortcut table
@@ -776,6 +782,7 @@ void PreferenceDialog::apply()
       else if (scoreSession->isChecked())
             preferences.sessionStart = SCORE_SESSION;
       preferences.startScore = sessionScore->text();
+      preferences.showSplashScreen = showSplashScreen->isChecked();
 
       if (shortcutsChanged) {
             shortcutsChanged = false;

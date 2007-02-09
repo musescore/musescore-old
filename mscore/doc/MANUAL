@@ -17,7 +17,6 @@ sorry, this is not a real user manual :-(
             * click Ok
             * enter Ctrl+B to create some empty measures
 
-
 ---------------------------------------
       Note entry
 ---------------------------------------
@@ -39,13 +38,19 @@ sorry, this is not a real user manual :-(
              the pitch of the new created note can be changed by entering up/down
              on the cursor pad
 
+      Shift + [A-G]   enter chord
+            the note is added, building up a chord
+
       Space  enter rest
 
       1-9    add intervall (build chord)
 
+      Shift + [1-9]     add intervall below current note
+
       x     flip stem direction; this overrides automatic
 
       Alt+click+drag    move canvas
+            (most likely this is overridden by your window manager)
 
       Midi Keyboard Entry:
       In note entry mode, notes can be entered with an midi keyboard. Note Events are read
@@ -59,6 +64,39 @@ sorry, this is not a real user manual :-(
       In note entry mode a mouse click replaces a note/chord,
       shift+click adds a new note to chord. The insert position is
       shown by a "shadow" note.
+
+-------------------------------------------------------------------------------
+	Measures
+-------------------------------------------------------------------------------
+
+      - append empty measures with Ctrl+B
+      - open the "Append Measures" menu (Create->Measures)
+        to append an arbitrary number of empty measures
+
+-------------------------------------------------------------------------------
+	Clefs
+-------------------------------------------------------------------------------
+
+      - open clef palette (Y)
+      - drag clef into measure
+        this also adjusts all notes to the new clef
+
+-------------------------------------------------------------------------------
+	Key Signature
+-------------------------------------------------------------------------------
+
+      - open key signature palette (K)
+      - drag key signature into measure
+        This adjusts all notes to the new key signature depending
+        on their pitch. Previously manual editing of accidentals
+        may get lost.
+
+-------------------------------------------------------------------------------
+	Time Signature
+-------------------------------------------------------------------------------
+
+      - open time signature palette (T)
+      - drag time signature into measure
 
 -------------------------------------------------------------------------------
 	Ties

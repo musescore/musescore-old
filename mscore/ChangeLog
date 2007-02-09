@@ -1,4 +1,6 @@
 9.2.7 (ws)
+      - added build-in demo file, shown on first start
+      - added splash screen
       - implement ctrl+mouse wheel to zoom in/out
 8.2.7 (ws)
       - shift+mouse wheel now scrolls horizontally

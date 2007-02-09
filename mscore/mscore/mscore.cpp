@@ -1723,15 +1723,19 @@ void MuseScore::helpBrowser()
 
 void MuseScore::about()
       {
-      QMessageBox* mb = new QMessageBox();
-      mb->setWindowTitle(QString("MuseScore"));
-      mb->setText(tr("Linux Music Score Editor\n"
-       "Version " VERSION "\n"
-       "(C) Copyright 2002-2005 Werner Schweer and others\n"
-       "see http://mscore.sourceforge.net/ for new versions\n"
-       "and more information\n"
-       "Published under the GNU Public Licence"));
-      mb->exec();
+      QPixmap pm(":/data/splash.jpg");
+      QSplashScreen* sc = new QSplashScreen(pm);
+      sc->setWindowFlags(Qt::FramelessWindowHint | Qt::WindowStaysOnTopHint);
+      QSize s(pm.size());
+      QBitmap bm(s);
+      bm.clear();
+      QPainter p;
+      p.begin(&bm);
+      p.setBrush(Qt::SolidPattern);
+      p.drawRoundRect(QRect(QPoint(0, 0), s), s.height()/6, s.width()/6);
+      p.end();
+      sc->setMask(bm);
+      sc->show();
       }
 
 //---------------------------------------------------------
@@ -2475,6 +2479,24 @@ int main(int argc, char* argv[])
       haveMidi = !initMidi();
       preferences.read();
 
+      QSplashScreen* sc = 0;
+      if (preferences.showSplashScreen) {
+            QPixmap pm(":/data/splash.jpg");
+            sc = new QSplashScreen(pm);
+            sc->setWindowFlags(Qt::FramelessWindowHint | Qt::WindowStaysOnTopHint);
+            QSize s(pm.size());
+            QBitmap bm(s);
+            bm.clear();
+            QPainter p;
+            p.begin(&bm);
+            p.setBrush(Qt::SolidPattern);
+            p.drawRoundRect(QRect(QPoint(0, 0), s), s.height()/6, s.width()/6);
+            p.end();
+            sc->setMask(bm);
+            sc->show();
+            app.processEvents();
+            }
+
       QApplication::setFont(QFont(QString("helvetica"), 11, QFont::Normal));
 
       if (debugMode) {
@@ -2665,6 +2687,9 @@ int main(int argc, char* argv[])
             }
       mscore->getCanvas()->setFocus(Qt::OtherFocusReason);
       mscore->show();
+
+      if (sc)
+            sc->finish(mscore);
       return qApp->exec();
       }
 
@@ -2747,4 +2772,3 @@ void MuseScore::setState(int val)
                   break;
             }
       }
-
