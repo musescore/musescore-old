@@ -1151,22 +1151,89 @@ void Canvas::dragLeaveEvent(QDragEnterEvent*)
 
 void Canvas::wheelEvent(QWheelEvent* event)
       {
-      int n = height() / 20;
-      if (n < 2)
-            n = 2;
-      int dy = event->delta() * n / 120;
+      if (event->modifiers() & Qt::ControlModifier) {
+            QApplication::sendPostedEvents(this, 0);
+            QPointF p1 = imatrix.map(QPointF(event->pos()));
+            //
+            //    magnify
+            //
+            int step = event->delta() / 120;
+            qreal _mag = mag();
+
+            if (step > 0) {
+                  for (int i = 0; i < step; ++i)
+                        _mag *= 1.1;
+                  }
+            else {
+                  for (int i = 0; i < -step; ++i)
+                        _mag *= 0.9;
+                  }
+            if (_mag > 16.0)
+                  _mag = 16.0;
+            else if (_mag < 0.05)
+                  _mag = 0.05;
+
+            double deltamag = _mag / mag();
+            setXoffset(xoffset() * deltamag);
+            setYoffset(yoffset() * deltamag);
+
+            matrix.setMatrix(_mag, matrix.m12(), matrix.m21(),
+               _mag * qreal(appDpiY)/qreal(appDpiX), matrix.dx(), matrix.dy());
+            imatrix = matrix.inverted();
+
+            QPointF p2 = imatrix.map(QPointF(event->pos()));
+            QPointF p3 = p2 - p1;
+            int dx    = lrint(p3.x() * _mag);
+            int dy    = lrint(p3.y() * _mag);
+
+            matrix.setMatrix(matrix.m11(), matrix.m12(), matrix.m21(),
+               matrix.m22(), matrix.dx()+dx, matrix.dy()+dy);
+            imatrix = matrix.inverted();
+            scroll(dx, dy, QRect(0, 0, width(), height()));
+
+            if ((dx > 0 || dy < 0) && navigator->isVisible()) {
+	            QRect r(navigator->geometry());
+            	r.translate(dx, dy);
+            	update(r);
+                  }
+            updateNavigator(false);
+            emit magChanged();
+            update();
+            return;
+            }
+      int dx = 0;
+      int dy = 0;
+      if (event->modifiers() & Qt::ShiftModifier) {
+            //
+            //    scroll horizontal
+            //
+            int n = width() / 10;
+            if (n < 2)
+                  n = 2;
+            dx = event->delta() * n / 120;
+            }
+      else {
+            //
+            //    scroll vertical
+            //
+            int n = height() / 10;
+            if (n < 2)
+                  n = 2;
+            dy = event->delta() * n / 120;
+            }
+
       matrix.setMatrix(matrix.m11(), matrix.m12(), matrix.m21(),
-	   matrix.m22(), matrix.dx(), matrix.dy() + dy);
-	imatrix = matrix.inverted();
+         matrix.m22(), matrix.dx() + dx, matrix.dy() + dy);
+      imatrix = matrix.inverted();
 
-	scroll(0, dy, QRect(0, 0, width(), height()));
+      scroll(dx, dy, QRect(0, 0, width(), height()));
 
-	//
+      //
       // this is necessary at least for qt4.1:
       //
       if ((dy < 0) && navigator->isVisible()) {
 		QRect r(navigator->geometry());
-		r.translate(0, dy);
+		r.translate(dx, dy);
 		update(r);
             }
 	updateNavigator(false);

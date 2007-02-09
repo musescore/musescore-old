@@ -1,4 +1,7 @@
+9.2.7 (ws)
+      - implement ctrl+mouse wheel to zoom in/out
 8.2.7 (ws)
+      - shift+mouse wheel now scrolls horizontally
       - implement status bar; display mode in status bar
       - implemented edit mode of accidentals and note heads to allow
         for manual position adjustment
