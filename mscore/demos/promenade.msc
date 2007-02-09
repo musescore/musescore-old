@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf8"?>
 <museScore version="1.0">
-  <Geometry x="417" y="0" w="1061" h="1135" />
+  <Geometry x="417" y="0" w="1061" h="995" />
   <Spatium>1.625</Spatium>
   <Division>480</Division>
-  <Mag>1.33678</Mag>
-  <xoff>22</xoff>
-  <yoff>-549</yoff>
+  <Mag>0.450781</Mag>
+  <xoff>98.5475</xoff>
+  <yoff>67.8939</yoff>
   <Style>
     <staffUpperBorder>8</staffUpperBorder>
     <staffLowerBorder>4</staffLowerBorder>
@@ -166,7 +166,7 @@
         <spatiumSizeDependent>0</spatiumSizeDependent>
         <data>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;helvetica&apos;; font-size:11pt; font-weight:400; font-style:normal; text-decoration:none;&quot;&gt;
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;helvetica&apos;; font-size:11pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Times New Roman&apos;; font-size:24pt;&quot;&gt;Bilder einer Ausstellung&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
         </Text>
       <Text>
@@ -178,7 +178,7 @@ p, li { white-space: pre-wrap; }
         <spatiumSizeDependent>0</spatiumSizeDependent>
         <data>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-size:12pt; font-weight:400; font-style:normal; text-decoration:none;&quot;&gt;
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-size:12pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p align=&quot;right&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Modeste Moussorgsky&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
         <subtype>Composer</subtype>
         <offset x="-0.109388" y="0.771701"/>
@@ -192,7 +192,7 @@ p, li { white-space: pre-wrap; }
         <spatiumSizeDependent>0</spatiumSizeDependent>
         <data>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-size:14pt; font-weight:400; font-style:normal; text-decoration:none;&quot;&gt;
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-size:14pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Promenade&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
         <subtype>Subtitle</subtype>
         <offset x="-0.437554" y="0.771701"/>
@@ -200,14 +200,10 @@ p, li { white-space: pre-wrap; }
       <BarLine>
         <subtype>1</subtype>
         </BarLine>
-      <Slur>
-        <startTick>1440</startTick>
-        <endTick>1920</endTick>
-        </Slur>
       <Dynamic>
         <data>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-size:12pt; font-weight:400; font-style:italic; text-decoration:none;&quot;&gt;
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-size:12pt; font-weight:400; font-style:italic;&quot;&gt;
 &lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
         <offset x="0.453688" y="5.77915"/>
         </Dynamic>
@@ -215,6 +211,16 @@ p, li { white-space: pre-wrap; }
         <subtype>f</subtype>
         <offset x="-0.526386" y="2.72978"/>
         </Dynamic>
+      <Slur>
+        <startTick>1440</startTick>
+        <endTick>1920</endTick>
+        <SlurSegment no="0">
+          <o1 x="0" y="-1"/>
+          <o2 x="0" y="0.4"/>
+          <o3 x="0" y="0.5"/>
+          <o4 x="0" y="-1"/>
+          </SlurSegment>
+        </Slur>
       <TimeSig>
         <subtype>324</subtype>
         <den>4</den>
@@ -285,6 +291,12 @@ p, li { white-space: pre-wrap; }
       <Slur>
         <startTick>2400</startTick>
         <endTick>2880</endTick>
+        <SlurSegment no="0">
+          <o1 x="0" y="-1"/>
+          <o2 x="0" y="0.4"/>
+          <o3 x="0" y="0.4"/>
+          <o4 x="0" y="-1"/>
+          </SlurSegment>
         </Slur>
       <TimeSig>
         <subtype>388</subtype>
@@ -362,7 +374,6 @@ p, li { white-space: pre-wrap; }
       <BarLine>
         <subtype>1</subtype>
         </BarLine>
-      <stretch>1.3</stretch>
       <Slur>
         <startTick>6720</startTick>
         <endTick>7200</endTick>
@@ -462,7 +473,6 @@ p, li { white-space: pre-wrap; }
       </Measure>
     <Measure number="4">
       <BarLine/>
-      <stretch>1.1</stretch>
       <Slur>
         <startTick>7680</startTick>
         <endTick>8160</endTick>
@@ -732,6 +742,12 @@ p, li { white-space: pre-wrap; }
       <Slur>
         <startTick>17280</startTick>
         <endTick>17760</endTick>
+        <SlurSegment no="0">
+          <o1 x="0" y="1"/>
+          <o2 x="0" y="-0.2"/>
+          <o3 x="0" y="-0.2"/>
+          <o4 x="0" y="1"/>
+          </SlurSegment>
         </Slur>
       <TimeSig>
         <subtype>324</subtype>
@@ -957,6 +973,7 @@ p, li { white-space: pre-wrap; }
         <ticklen>1440</ticklen>
         <StemDirection>down</StemDirection>
         <Note>
+          <offset x="-0.4" y="0"/>
           <voice>1</voice>
           <pitch>63</pitch>
           </Note>
@@ -966,6 +983,7 @@ p, li { white-space: pre-wrap; }
         <ticklen>1440</ticklen>
         <StemDirection>down</StemDirection>
         <Note>
+          <offset x="-0.4" y="0"/>
           <voice>1</voice>
           <pitch>63</pitch>
           </Note>
@@ -1210,6 +1228,7 @@ p, li { white-space: pre-wrap; }
         <ticklen>1440</ticklen>
         <StemDirection>down</StemDirection>
         <Note>
+          <offset x="-0.4" y="0"/>
           <voice>1</voice>
           <pitch>63</pitch>
           </Note>
@@ -1219,6 +1238,7 @@ p, li { white-space: pre-wrap; }
         <ticklen>720</ticklen>
         <StemDirection>down</StemDirection>
         <Note>
+          <offset x="-0.4" y="0"/>
           <voice>1</voice>
           <pitch>63</pitch>
           </Note>
@@ -1314,6 +1334,7 @@ p, li { white-space: pre-wrap; }
         <ticklen>1440</ticklen>
         <StemDirection>down</StemDirection>
         <Note>
+          <offset x="-0.4" y="0"/>
           <voice>1</voice>
           <pitch>67</pitch>
           <prefix>5</prefix>
@@ -1325,6 +1346,7 @@ p, li { white-space: pre-wrap; }
         <ticklen>1440</ticklen>
         <StemDirection>down</StemDirection>
         <Note>
+          <offset x="-0.46" y="0"/>
           <voice>1</voice>
           <pitch>67</pitch>
           </Note>
@@ -1805,7 +1827,6 @@ p, li { white-space: pre-wrap; }
       </Measure>
     <Measure number="17">
       <BarLine/>
-      <stretch>1.1</stretch>
       <Chord>
         <ticklen>480</ticklen>
         <Note>
@@ -1909,7 +1930,6 @@ p, li { white-space: pre-wrap; }
       </Measure>
     <Measure number="18">
       <BarLine/>
-      <stretch>1.1</stretch>
       <Chord>
         <ticklen>480</ticklen>
         <Note>
@@ -1994,7 +2014,6 @@ p, li { white-space: pre-wrap; }
       </Measure>
     <Measure number="19">
       <BarLine/>
-      <stretch>1.1</stretch>
       <Chord>
         <ticklen>480</ticklen>
         <Note>
@@ -2098,7 +2117,6 @@ p, li { white-space: pre-wrap; }
       </Measure>
     <Measure number="20">
       <BarLine/>
-      <stretch>1.1</stretch>
       <Chord>
         <ticklen>240</ticklen>
         <Note>
@@ -2558,7 +2576,6 @@ p, li { white-space: pre-wrap; }
         </Rest>
       </Measure>
     <Measure number="3">
-      <stretch>1.3</stretch>
       <TimeSig>
         <subtype>324</subtype>
         <den>4</den>
@@ -2611,7 +2628,6 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     <Measure number="4">
-      <stretch>1.1</stretch>
       <TimeSig>
         <subtype>388</subtype>
         <den>4</den>
@@ -3294,7 +3310,6 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     <Measure number="17">
-      <stretch>1.1</stretch>
       <Chord>
         <ticklen>480</ticklen>
         <Note>
@@ -3357,7 +3372,6 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     <Measure number="18">
-      <stretch>1.1</stretch>
       <Chord>
         <ticklen>480</ticklen>
         <Note>
@@ -3414,7 +3428,6 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     <Measure number="19">
-      <stretch>1.1</stretch>
       <Chord>
         <ticklen>480</ticklen>
         <Note>
@@ -3480,7 +3493,6 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     <Measure number="20">
-      <stretch>1.1</stretch>
       <Chord>
         <ticklen>480</ticklen>
         <Note>
