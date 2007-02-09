@@ -2,7 +2,7 @@
       MuseScore Score Typesetter
 =================================================================
 
-This is an early version of the Linux MusE Score Typesetter
+This is a developer version of the Linux MusE Score Typesetter
 "MuseScore".
 
 MuseScore is distributed under the GNU General Public License (GPL).
@@ -14,11 +14,13 @@ Features:
       - TrueType font(s) for printing & display allows for high quality
         scaling to all sizes
       - easy & fast note entry
+      - many editing functions
       - MusicXML import/export
       - Midi (SMF) import/export
       - Midi input for note entry
-      - integrated Fluid software synthesizer to play notes
-      - direct print into pdf or postscript files
+      - integrated sequencer and software synthesizer to
+        play the score
+      - print or create pdf files
 
 Requirements:
       - qt4 gui lib version qt4.2.x
@@ -29,7 +31,6 @@ Requirements:
       - ALSA Version 1.0 or newer (audio/midi input/output)
       - recommended: JACK audio server (audio output)
       - fluidsynth-1.0.0 and a decent sound font
-      - gcc 3.4 or gcc 4.0 or newer
       - CMake 2.4
 
 Credits:
@@ -61,10 +62,9 @@ User Documentation:
       Type "make doc" to generate man-de.pdf in doc/de.
 
 Program Documentation:
-      can be generated from source with DoxyGen;
-      enter
 
-            make doxy
+      Type "make doxy" to generate the program documentation with
+      DoxyGen.
 
       Browse the documentation with your favourite html browser
       at:
@@ -72,20 +72,24 @@ Program Documentation:
 
 
 Test:
-      Enter
-          mscore demos/promenade
-      to see the demo file (Modeste Moussorgsky: Pictures of an
+      Type "mscore demos/promenade"
+      to start MuseScore with the demo file (Modeste Moussorgsky: Pictures of an
       exhibition: Promenade)
 
 =================================================================
       Status
 =================================================================
 
-      MuseScore is in early alpha state. That means you should not use
-      it for any real work. It is incomplete and probably buggy.
-      The save format (*.msc files) will most likely change in future
-      versions.
+      MuseScore is in early beta state. That means you should not use
+      it for any mission critical work. It is incomplete and surely has
+      a lot of bugs. Also the save format (*.msc files) will most likely
+      change in future versions.
 
+=================================================================
+      Help needed
+=================================================================
+
+      We need your help!
 
 =================================================================
       Contact

@@ -50,27 +50,13 @@
           <property name="spacing" >
            <number>6</number>
           </property>
+          <item row="2" column="1" >
+           <widget class="QLineEdit" name="sessionScore" />
+          </item>
           <item row="1" column="0" >
            <widget class="QRadioButton" name="newSession" >
             <property name="text" >
              <string>start with new score</string>
-            </property>
-           </widget>
-          </item>
-          <item row="0" column="0" >
-           <widget class="QRadioButton" name="lastSession" >
-            <property name="text" >
-             <string>continue last session</string>
-            </property>
-            <property name="checked" >
-             <bool>true</bool>
-            </property>
-           </widget>
-          </item>
-          <item row="2" column="0" >
-           <widget class="QRadioButton" name="scoreSession" >
-            <property name="text" >
-             <string>start with score:</string>
             </property>
            </widget>
           </item>
@@ -84,8 +70,29 @@
             </property>
            </widget>
           </item>
-          <item row="2" column="1" >
-           <widget class="QLineEdit" name="sessionScore" />
+          <item row="2" column="0" >
+           <widget class="QRadioButton" name="scoreSession" >
+            <property name="text" >
+             <string>start with score:</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="0" >
+           <widget class="QRadioButton" name="lastSession" >
+            <property name="text" >
+             <string>continue last session</string>
+            </property>
+            <property name="checked" >
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="0" >
+           <widget class="QCheckBox" name="showSplashScreen" >
+            <property name="text" >
+             <string>show splash screen</string>
+            </property>
+           </widget>
           </item>
          </layout>
         </widget>
