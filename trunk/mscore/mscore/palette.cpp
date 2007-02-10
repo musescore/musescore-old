@@ -35,9 +35,10 @@
  Create Symbol palette with \a r rows and \a c columns
 */
 
-SymbolPalette::SymbolPalette(int r, int c)
+SymbolPalette::SymbolPalette(int r, int c, qreal mag)
    : QWidget(0)
       {
+      extraMag      = mag;
       staff         = false;
       rows          = r;
       columns       = c;
@@ -156,7 +157,7 @@ void SymbolPalette::mouseMoveEvent(QMouseEvent* ev)
       QMimeData* mimeData = new QMimeData;
       Element* el = symbols[currentSymbol];
 
-printf("drag %s %s\n", el->name(), el->subtypeName().toLatin1().data());
+// printf("drag %s %s\n", el->name(), el->subtypeName().toLatin1().data());
 
       mimeData->setData("application/mscore/symbol", el->mimeData());
       drag->setMimeData(mimeData);
@@ -193,7 +194,7 @@ void SymbolPalette::addObject(int idx, int symIdx)
 
 void SymbolPalette::paintEvent(QPaintEvent* e)
       {
-      qreal mag = PALETTE_SPATIUM / _spatium;
+      qreal mag = PALETTE_SPATIUM * extraMag / _spatium;
 
       Painter p(this);
       p.setRenderHint(QPainter::Antialiasing, true);
@@ -258,11 +259,6 @@ void SymbolPalette::paintEvent(QPaintEvent* e)
                   else
                         sy  = gy + (gh - sh) * .5 - el->bbox().y();
                   double sx  = gx + (gw - sw) * .5 - el->bbox().x();
-
-//                if (el->type() == TEXT || el->type() == DYNAMIC) {
-//                      sx -= ((SText*)s)->styleOffset().x();
-//                      sy -= ((SText*)s)->styleOffset().y();
-//                      }
 
                   el->setPos(sx, sy);
                   el->draw(p);

@@ -583,7 +583,7 @@ void MuseScore::fingeringMenu()
             QScrollArea* sa = new QScrollArea;
             sa->setWindowTitle(tr("MuseScore: Fingering"));
             fingeringPalette = sa;
-            SymbolPalette* sp = new SymbolPalette(1, 5);
+            SymbolPalette* sp = new SymbolPalette(1, 5, 1.5);
             sa->setWidget(sp);
             sp->setGrid(50, 50);
 

@@ -37,6 +37,7 @@ class SymbolPalette : public QWidget {
       int hgrid, vgrid;
       int currentSymbol;
       QPoint dragStartPosition;
+      qreal extraMag;
 
       bool staff;
 
@@ -47,7 +48,7 @@ class SymbolPalette : public QWidget {
       virtual bool event(QEvent*);
 
    public:
-      SymbolPalette(int rows, int columns);
+      SymbolPalette(int rows, int columns, qreal mag = 1.0);
       ~SymbolPalette();
       void addObject(int idx, Element*, const QString& name);
       void addObject(int idx, int sym);

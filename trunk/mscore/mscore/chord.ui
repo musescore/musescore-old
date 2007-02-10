@@ -92,7 +92,7 @@
         <item>
          <widget class="QLabel" name="label" >
           <property name="text" >
-           <string>&lt;html>&lt;head>&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; />&lt;/head>&lt;body style=&quot; white-space: pre-wrap; font-family:Arial; font-weight:400; font-style:normal; text-decoration:none;&quot;>&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;>Stem Direction&lt;/p>&lt;/body>&lt;/html></string>
+           <string>Stem Direction</string>
           </property>
          </widget>
         </item>
@@ -118,14 +118,14 @@
         <item row="0" column="0" >
          <widget class="QLabel" name="label_2" >
           <property name="text" >
-           <string>&lt;html>&lt;head>&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; />&lt;/head>&lt;body style=&quot; white-space: pre-wrap; font-family:Arial; font-weight:400; font-style:normal; text-decoration:none;&quot;>&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;>Note Attributes:&lt;/p>&lt;/body>&lt;/html></string>
+           <string>Note Attributes:</string>
           </property>
          </widget>
         </item>
         <item row="0" column="1" >
          <widget class="QLabel" name="label_3" >
           <property name="text" >
-           <string>&lt;html>&lt;head>&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; />&lt;/head>&lt;body style=&quot; white-space: pre-wrap; font-family:Arial; font-weight:400; font-style:normal; text-decoration:none;&quot;>&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;>Help Lines:&lt;/p>&lt;/body>&lt;/html></string>
+           <string>Help Lines:</string>
           </property>
          </widget>
         </item>
