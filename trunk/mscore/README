@@ -38,43 +38,55 @@ Credits:
 
 Installation:
       - unpack source distribution
-            tar xvofz mscore-x.x.x.tar.gz
-
-      - configure
-            cd mscore-x.x.x
-            cmake .
+            tar xvofj mscore-x.x.x.tar.bz2
 
       - make
+            cd mscore-x.x.x
+            make release
             make
+
+      if something goes wrong, then remove the whole subdirectory
+      build with "make clean" and start new with "make"
 
       - install as root user
             sudo make install
 
 User Documentation:
-      Currently there is not much documentation.
-      I did some work on the framework which can be seen in the
-      "de" (german) directory.
+      Currently there is no complete documentation.
+      Some fragments are in the "mscore/doc/de" (german) directory.
 
       Requirements:
             - TeX with ConTeXt macro package
               (as part of tetex 3.0 distribution)
 
-      Type "make doc" to generate man-de.pdf in doc/de.
+      Type
+            cd build
+            make doc
+
+      to generate man-de.pdf in build/doc/de.
 
 Program Documentation:
 
-      Type "make doxy" to generate the program documentation with
-      DoxyGen.
+      Type
+            cd build
+            make doxy
+
+      to generate the program documentation with DoxyGen.
 
       Browse the documentation with your favourite html browser
       at:
-            Doc/html/index.html
+            build/Doc/html/index.html
 
 
 Test:
-      Type "mscore demos/promenade"
-      to start MuseScore with the demo file (Modeste Moussorgsky: Pictures of an
-      exhibition: Promenade)
+      Type
+            cd build/mscore
+            mscore
+
+      to start mscore. On first invocation a demofile
+      (Modeste Moussorgsky: Pictures of an exhibition: Promenade)
+      is shown. You probably want to change that with the
+      "preferences" dialog.
 
 =================================================================
       Status
