@@ -790,7 +790,7 @@
                <item>
                 <widget class="QLabel" name="label_10" >
                  <property name="text" >
-                  <string>&lt;html>&lt;head>&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; />&lt;/head>&lt;body style=&quot; white-space: pre-wrap; font-family:Sans Serif; font-weight:400; font-style:normal; text-decoration:none;&quot;>&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;>&lt;span style=&quot; color:#000000;&quot;>Unit:&lt;/span>&lt;/p>&lt;/body>&lt;/html></string>
+                  <string>Unit:</string>
                  </property>
                 </widget>
                </item>

@@ -374,7 +374,7 @@ void Tuplet::remove(Element* e)
 
 bool Tuplet::genPropertyMenu(QMenu* popup) const
       {
-      QAction* a = popup->addAction(popup->tr("Show number"));
+      QAction* a = popup->addAction(QT_TR_NOOP("Show number"));
       a->setData("number");
       a->setCheckable(true);
       a->setChecked(_hasNumber);

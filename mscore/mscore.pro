@@ -38,7 +38,6 @@ SOURCES =                         \
      ./mscore/navigator.cpp       \
      ./mscore/canvas.cpp          \
      ./mscore/score.cpp           \
-     ./mscore/binreloc.cpp        \
      ./mscore/midi.cpp            \
      ./mscore/layoutbreak.cpp     \
      ./mscore/tempo.cpp           \
@@ -61,7 +60,6 @@ SOURCES =                         \
      ./mscore/alsa.cpp            \
      ./mscore/navigate.cpp        \
      ./mscore/ottava.cpp          \
-     ./mscore/textelement.cpp     \
      ./mscore/palette.cpp         \
      ./mscore/measure.cpp         \
      ./mscore/editinstrument.cpp  \
@@ -94,7 +92,6 @@ FORMS =                           \
      ./mscore/measure.ui          \
      ./mscore/text.ui             \
      ./mscore/playpanel.ui        \
-     ./mscore/pad.ui              \
      ./mscore/partedit.ui         \
      ./mscore/editinstrument.ui   \
      ./mscore/prefsdialog.ui      \
