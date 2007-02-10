@@ -1,3 +1,9 @@
+10.2.7 (lv)
+      * MusicXML updates
+      - fixed export of dynamic sffz
+      - fixed import of other-dynamics
+      - fixed import of TempoText
+      - updated dynamics default y position
 9.2.7 (ws)
       - added build-in demo file, shown on first start
       - added splash screen

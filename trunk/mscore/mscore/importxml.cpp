@@ -837,6 +837,7 @@ void MusicXml::direction(Measure* measure, int staff, QDomNode node)
       qreal yoffset = 0.0;
       qreal xoffset = 0.0;
       qreal size = textStyles[TEXT_STYLE_TECHNIK].size;
+      QString tempo = "";
 
       for (node = node.firstChild(); !node.isNull(); node = node.nextSibling()) {
             QDomElement e = node.toElement();
@@ -871,7 +872,10 @@ void MusicXml::direction(Measure* measure, int staff, QDomNode node)
                               if (!nn.isNull()) {
                                     QDomElement e = nn.toElement();
                                     if (!e.isNull()) {
-                                          dynamics.push_back(e.tagName());
+                                          if (e.tagName() == "other-dynamics")
+                                                dynamics.push_back(e.text());
+                                          else
+                                                dynamics.push_back(e.tagName());
                                           }
                                     }
                               }
@@ -887,6 +891,7 @@ void MusicXml::direction(Measure* measure, int staff, QDomNode node)
                   }
             else if (e.tagName() == "sound") {
                   // attr: dynamics, tempo
+                  tempo = e.attribute("tempo");
                   }
             else if (e.tagName() == "offset")
                   offset = (e.text().toInt() * ::division)/divisions;
@@ -899,25 +904,34 @@ void MusicXml::direction(Measure* measure, int staff, QDomNode node)
             else
                   domError(node);
             }
-      if (placement == "below")
-            ry += 2;
-      else
+      if (placement == "above")
             ry -= 2;
+      else
+            ry += 2;
 
       if (dirType == "words") {
-            Text* t = new Text(score);
+            // LVIFIX: tempotext font is incorrect
+            // printf("words txt='%s' tempo='%s'\n", txt.toLatin1().data(), tempo.toLatin1().data());
+            Text* t;
+            if (tempo != "") {
+                  t = new TempoText(score);
+                  ((TempoText*) t)->setTempo(tempo.toDouble());
+                  t->setStyle(TEXT_STYLE_TEMPO);
+                  }
+            else
+                  t = new Text(score);
+                  t->setStyle(TEXT_STYLE_TECHNIK);
             t->setTick(tick);
-            t->setStyle(TEXT_STYLE_TECHNIK);
             if (weight == "bold") {
                   // Text text(txt, TEXT_STYLE_TECHNIK, true, size);
                   t->setText(txt);
                   }
             else
                   t->setText(txt);
-            if (placement == "below")
-                  ry += t->bbox().height()/_spatium;
+            if (placement == "above")
+                  ry -= 3;
             else
-                  ry -= 1;
+                  ry += t->bbox().height()/_spatium - 2.3;
 
             t->setUserOff(QPointF(rx + xoffset, ry + yoffset));
             t->setMxmlOff(offset);
@@ -934,9 +948,9 @@ void MusicXml::direction(Measure* measure, int staff, QDomNode node)
             else
                   printf("unknown pedal %s\n", type.toLatin1().data());
             if (placement == "above")
-                  ry -= 0;    // ry -= 2;
+                  ry += 0.1;
             else
-                  ry += 5;    // ry += 2;
+                  ry += 5.3;
             s->setUserOff(QPointF(rx + xoffset, ry + yoffset));
             s->setMxmlOff(offset);
             s->setStaff(score->staff(staff + rstaff));
@@ -944,13 +958,14 @@ void MusicXml::direction(Measure* measure, int staff, QDomNode node)
             }
       else if (dirType == "dynamics") {
             // more than one dynamic ???
+            // LVIFIX: check import/export of <other-dynamics>unknown_text</...>
             for (QStringList::Iterator it = dynamics.begin(); it != dynamics.end(); ++it ) {
                   Dynamic* dyn = new Dynamic(score);
                   dyn->setSubtype(*it);
                   if (placement == "above")
-                        ry -= 1.5;  // ry -= 2.5;
+                        ry -= 5;
                   else
-                        ry += dyn->bbox().height() / _spatium;  // ry += 2;
+                        ry += dyn->bbox().height() / _spatium - 7.5;
                   dyn->setUserOff(QPointF(rx + xoffset, ry + yoffset));
                   dyn->setMxmlOff(offset);
 
@@ -961,9 +976,9 @@ void MusicXml::direction(Measure* measure, int staff, QDomNode node)
             }
       else if (dirType == "wedge") {
             if (placement == "above")
-                  ry -= 8;    // ry -= 9;
+                  ry -= 7;
             else
-                  ry -= 2;    // ry -= 5;
+                  ry -= 1.7;
             if (type == "crescendo")
                   addWedge(0, tick, rx, ry, 0);
             else if (type == "stop")
