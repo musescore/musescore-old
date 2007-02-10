@@ -1842,7 +1842,7 @@ void ExportMusicXml::dynamic(Dynamic* dyn, int staff)
       if (t == "p" || t == "pp" || t == "ppp" || t == "pppp" || t == "ppppp" || t == "pppppp"
        || t == "f" || t == "ff" || t == "fff" || t == "ffff" || t == "fffff" || t == "ffffff"
        || t == "mp" || t == "mf" || t == "sf" || t == "sfp" || t == "sfpp" || t == "fp"
-       || t == "rf" || t == "rfz" || t == "sfz" || t == "sfzz" || t == "fz") {
+       || t == "rf" || t == "rfz" || t == "sfz" || t == "sffz" || t == "fz") {
             xml.stag("dynamics");
             xml.tagE(t.toLatin1().data());
             xml.etag("dynamics");
