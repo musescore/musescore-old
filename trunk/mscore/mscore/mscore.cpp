@@ -2497,7 +2497,7 @@ int main(int argc, char* argv[])
             app.processEvents();
             }
 
-      QApplication::setFont(QFont(QString("helvetica"), 11, QFont::Normal));
+//      QApplication::setFont(QFont(QString("helvetica"), 11, QFont::Normal));
 
       if (debugMode) {
             if (haveMidi)
