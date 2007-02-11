@@ -34,6 +34,35 @@ default:
       echo "+start top level make...";              \
       make -f Makefile
 
+release:
+	if test ! -d build;                           \
+         then                                       \
+            echo "+creating build directory";       \
+            mkdir build;                            \
+            echo "+entering build directory";       \
+            cd build;                               \
+            echo "+calling cmake" ;                 \
+            cmake -DCMAKE_BUILD_TYPE=RELEASE ../mscore;                        \
+         else                                       \
+            echo "build directory does alread exist";       \
+            exit;                               \
+         fi; \
+         echo "release build is configured; now type make"
+
+debug:
+	if test ! -d build;                           \
+         then                                       \
+            echo "+creating build directory";       \
+            mkdir build;                            \
+            echo "+entering build directory";       \
+            cd build;                               \
+            echo "+calling cmake" ;                 \
+            cmake -DCMAKE_BUILD_TYPE=DEBUG ../mscore;                        \
+         else                                       \
+            echo "build directory does alread exist";       \
+            exit;                               \
+         fi; \
+         echo "debug build is configured; now type make"
 
 #
 # clean out of source build
@@ -47,8 +76,11 @@ clean:
 #
 
 dist:
-	cd build; make package_source
-	mv build/mscore-*.tar.gz .
+	mkdir mscore.dist
+	cd mscore.dist; svn co https://mscore.svn.sourceforge.net/svnroot/mscore/trunk mscore-0.4.0
+	cd mscore.dist; find . -name .svn -print0 | xargs -0 /bin/rm -rf
+	cd mscore.dist; tar cvfj mscore-0.4.0.tar.bz2 mscore-0.4.0
+	mv mscore.dist/mscore-0.4.0.tar.bz2 .
 
 install:
 	cd build; make install
