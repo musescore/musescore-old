@@ -58,10 +58,10 @@ class Selection {
       int tickEnd;            // selection end time tick
       int staffStart;         // valid if selState is SEL_STAFF
       int staffEnd;           // valid if selState is SEL_STAFF
+      QRectF lasso;
 
       ElementList* elements() { return &_el; }
       void add(Element*);
-//      void add(ElementList& ns);
       QRectF deselectAll(Score*);
       void remove(Element*);
       QRectF clear();

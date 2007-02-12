@@ -86,8 +86,6 @@ class Canvas : public QWidget, public Viewer {
       void objectPopup(const QPoint&, Element*);
 
       void saveChord(Xml&);
-      void incMag();
-      void decMag();
 
       virtual void resizeEvent(QResizeEvent*);
       virtual void mousePressEvent(QMouseEvent*);
@@ -123,9 +121,6 @@ class Canvas : public QWidget, public Viewer {
 
       void resetStaffOffsets();
       void setViewRect(const QRectF&);
-
-   signals:
-      void magChanged();
 
    public:
       Canvas(QWidget* parent = 0);

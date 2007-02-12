@@ -1,3 +1,9 @@
+Release 0.5 (svn)
+      - editing in the Mag combobox to enter arbitrary zoom factors is
+        now implemented
+      - the default application font is not hard coded anymore and can
+        be changed by external utilities (qtconfig)
+
 Release 0.4:
       - configurable keyboard short cuts
       - Instrument names and text can contain musical symbols

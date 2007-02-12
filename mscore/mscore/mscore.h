@@ -41,6 +41,7 @@ class Score;
 class PageSettings;
 class Pad;
 class Xml;
+class MagBox;
 
 extern QString mscoreGlobalShare;
 static const int PROJECT_LIST_LEN = 6;
@@ -133,7 +134,7 @@ class MuseScore : public QMainWindow {
       QMenu* menuEdit;
       QMenu* openRecent;
 
-      QComboBox* mag;
+      MagBox* mag;
       QActionGroup* transportAction;
 
       QAction* padId;
@@ -207,7 +208,6 @@ class MuseScore : public QMainWindow {
       void padVisible(bool);
       void openRecentMenu();
       void selectScore(QAction*);
-      void updateMag();
       void selectionChanged(int);
       void startPreferenceDialog();
       void startInstrumentListEditor();
@@ -247,7 +247,8 @@ class MuseScore : public QMainWindow {
       void resetUserStretch();
       void showLayoutBreakPalette();
       void resetUserOffsets();
-      void magChanged(int);
+      void magChanged(double);
+//      void magChanged(const QString&);
       void showPageSettings();
       void pageSettingsChanged();
       void textStyleChanged();
@@ -286,6 +287,42 @@ class MuseScore : public QMainWindow {
       Score* currentScore() const { return cs; }
       void setState(int);
       static Shortcut sc[];
+      void incMag();
+      void decMag();
+      void setMag(double);
+      };
+
+//---------------------------------------------------------
+//   MagValidator
+//---------------------------------------------------------
+
+class MagValidator : public QValidator {
+      Q_OBJECT
+
+      virtual State validate(QString&, int&) const;
+
+   public:
+      MagValidator(QObject* parent = 0);
+      };
+
+//---------------------------------------------------------
+//   MagBox
+//---------------------------------------------------------
+
+class MagBox : public QComboBox {
+      Q_OBJECT
+
+      double txt2mag(const QString&);
+
+   signals:
+      void magChanged(double);
+
+   private slots:
+      void indexChanged(int idx);
+
+   public:
+      MagBox(QWidget* parent = 0);
+      void setMag(double);
       };
 
 extern QMenu* genCreateMenu(QWidget* parent);

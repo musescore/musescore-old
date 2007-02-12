@@ -98,6 +98,7 @@ add_executable ( mscore
       ${ui_headers}
       ${mocs}
 
+      actions.cpp
       accidental.cpp
       alsa.cpp
       barline.cpp

@@ -1,6 +1,7 @@
 11.2.7 (ws)
+      - implement editing in "Mag"combobox
       - removed default application font setting
-      ======== Version 0.4 released =============
+      ======== Version 0.4 released (Revision 167) =============
 10.2.7 (ws)
       - added some more documentation
 10.2.7 (lv)
