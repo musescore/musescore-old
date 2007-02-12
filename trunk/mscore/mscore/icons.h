@@ -50,6 +50,7 @@ extern QIcon printIcon, clefIcon;
 extern QIcon midiinIcon, speakerIcon, startIcon, stopIcon, playIcon;
 extern QIcon sbeamIcon, mbeamIcon, nbeamIcon, beam32Icon;
 extern QIcon fileOpenIcon, fileNewIcon, fileSaveIcon;
+extern QIcon exitIcon, viewmagIcon;
 
 struct SymCode;
 

@@ -63,6 +63,7 @@ QIcon printIcon, clefIcon;
 QIcon midiinIcon, speakerIcon, startIcon, stopIcon, playIcon;
 QIcon sbeamIcon, mbeamIcon, nbeamIcon, beam32Icon;
 QIcon fileOpenIcon, fileNewIcon, fileSaveIcon;
+QIcon exitIcon, viewmagIcon;
 
 //---------------------------------------------------------
 //   symPixmap
@@ -185,5 +186,7 @@ void genIcons()
       fileOpenIcon = QIcon(":/data/fileopen.xpm");
       fileNewIcon  = QIcon(":/data/filenew.xpm");
       fileSaveIcon = QIcon(":/data/filesave.xpm");
+      exitIcon     = QIcon(":/data/exit.svg");
+      viewmagIcon  = QIcon(":/data/viewmag.xpm");
       }
 

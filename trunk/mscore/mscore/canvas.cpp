@@ -265,9 +265,9 @@ void Canvas::mousePressEvent(QMouseEvent* ev)
       keyState = ev->modifiers();
       if (state == MAG) {
             if (b1)
-                  incMag();
+                  mscore->incMag();
             else if (b3)
-                  decMag();
+                  mscore->decMag();
             return;
             }
 
@@ -602,33 +602,6 @@ void Canvas::setMag(double nmag)
 
       update();
       updateNavigator(false);
-      emit magChanged();
-      }
-
-//---------------------------------------------------------
-//   incMag
-//---------------------------------------------------------
-
-void Canvas::incMag()
-      {
-      qreal _mag = mag() * 1.7;
-      if (_mag > 16.0)
-            _mag = 16.0;
-      setMag(_mag);
-      emit magChanged();
-      }
-
-//---------------------------------------------------------
-//   decMag
-//---------------------------------------------------------
-
-void Canvas::decMag()
-      {
-      qreal nmag = mag() / 1.7;
-      if (nmag < 0.05)
-            nmag = 0.05;
-      setMag(nmag);
-      emit magChanged();
       }
 
 //---------------------------------------------------------
@@ -1173,6 +1146,8 @@ void Canvas::wheelEvent(QWheelEvent* event)
             else if (_mag < 0.05)
                   _mag = 0.05;
 
+            mscore->setMag(_mag);
+#if 0
             double deltamag = _mag / mag();
             setXoffset(xoffset() * deltamag);
             setYoffset(yoffset() * deltamag);
@@ -1180,7 +1155,7 @@ void Canvas::wheelEvent(QWheelEvent* event)
             matrix.setMatrix(_mag, matrix.m12(), matrix.m21(),
                _mag * qreal(appDpiY)/qreal(appDpiX), matrix.dx(), matrix.dy());
             imatrix = matrix.inverted();
-
+#endif
             QPointF p2 = imatrix.map(QPointF(event->pos()));
             QPointF p3 = p2 - p1;
             int dx    = lrint(p3.x() * _mag);
@@ -1197,7 +1172,7 @@ void Canvas::wheelEvent(QWheelEvent* event)
             	update(r);
                   }
             updateNavigator(false);
-            emit magChanged();
+//            emit magChanged();
             update();
             return;
             }
