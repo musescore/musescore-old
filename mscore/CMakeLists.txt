@@ -50,8 +50,6 @@ SET(Mscore_INSTALL_NAME  "mscore-0.4")
 include ( ${PROJECT_SOURCE_DIR}/cmake/UsePkgConfig1.cmake )
 include ( ${PROJECT_SOURCE_DIR}/cmake/TargetDoc.cmake)
 
-option ( ENABLE_FLUID  "enable fluidsynth softsynth plugins"    ON)
-
 # for debugging the make system uncomment next line:
 #  set(CMAKE_VERBOSE_MAKEFILE ON)
 
@@ -126,21 +124,6 @@ if (JACK_INCDIR)
       set ( USE_JACK 1 )
 endif (JACK_INCDIR)
 
-##
-## check for fluidsynth
-##
-
-if ( ENABLE_FLUID )
-      PKGCONFIG (fluidsynth 1.0.0 FLUID_INCDIR FLUID_LIBDIR FLUID_LIB FLUID_CPP )
-      if (NOT FLUID_INCDIR)
-            message("Error: fluidsynth >= 0.9.0 not found, disabling feature")
-            set ( ENABLE_FLUID OFF )
-      else (NOT FLUID_INCDIR)
-	    message("Fluidsynth detected")
-          set ( USE_FLUID 1 )
-      endif (NOT FLUID_INCDIR)
-endif ( ENABLE_FLUID )
-
 #
 # produce config.h file
 #
@@ -149,9 +132,23 @@ configure_file (
       ${PROJECT_BINARY_DIR}/config.h
       )
 
-subdirs(mscore share doc)
+add_custom_target(all.h.pch
+   ALL
+   COMMAND cp ${PROJECT_SOURCE_DIR}/mscore/all.h ${PROJECT_BINARY_DIR}/mscore/all.h
+   COMMAND ${CMAKE_CXX_COMPILER}
+     -g -Wextra -fno-exceptions -Wall
+     -I${QT_INCLUDE_DIR}
+     -I${QT_QTCORE_INCLUDE_DIR}
+     -I${QT_QTGUI_INCLUDE_DIR}
+     -o all.h.pch all.h
+   DEPENDS ${PROJECT_SOURCE_DIR}/mscore/all.h
+   WORKING_DIRECTORY ${PROJECT_BINARY_DIR}/mscore
+   )
+
+subdirs(fluid mscore share doc)
 
 include_directories(
+   ${PROJECT_SOURCE_DIR}
    ${PROJECT_SOURCE_DIR}/mscore
    ${PROJECT_BINARY_DIR}
    ${PROJECT_BINARY_DIR}/mscore

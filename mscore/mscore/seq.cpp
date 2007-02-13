@@ -238,7 +238,7 @@ std::list<QString> Seq::inputPorts()
 //   loadSoundFont
 //---------------------------------------------------------
 
-bool Seq::loadSoundFont(const char* s)
+bool Seq::loadSoundFont(const QString& s)
       {
       return synti->loadSoundFont(s);
       }

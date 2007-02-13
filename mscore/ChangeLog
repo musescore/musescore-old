@@ -1,3 +1,6 @@
+13.2.7 (ws)
+      - added small buildin soundfont to get mscore working "out of the box"
+      - added patched version of fluidsynth; removing FLUID dependency
 11.2.7 (ws)
       - implement editing in "Mag"combobox
       - removed default application font setting

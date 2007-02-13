@@ -83,39 +83,38 @@ Preferences::Preferences()
 
       // set fallback defaults:
 
-      cursorBlink = false;
-      fgUseColor  = false;
-      bgUseColor  = true;
-      fgWallpaper = ":/data/paper2.png";
-      enableMidiInput = true;
-      playNotes       = true;
+      cursorBlink        = false;
+      fgUseColor         = false;
+      bgUseColor         = true;
+      fgWallpaper        = ":/data/paper2.png";
+      enableMidiInput    = true;
+      playNotes          = true;
       bgColor.setRgb(0x19, 0x6c, 0xb9);
       fgColor.setRgb(50, 50, 50);
-      soundFont = "";
-      lPort     = "";
-      rPort     = "";
-      stemDir[0] = AUTO;
-      stemDir[1] = AUTO;
-      stemDir[2] = AUTO;
-      stemDir[3] = AUTO;
-      showNavigator  = false;
-      showPlayPanel  = false;
-      showStatusBar  = true;
-      showPad        = false;
-      padPos         = QPoint(100, 100);
-      playPanelPos   = QPoint(100, 300);
-      useAlsaAudio   = true;
-      useJackAudio   = true;
-      alsaDevice     = "default";
-      // alsaDevice   = "hw:0";
-      alsaSampleRate = 48000;
-      alsaPeriodSize = 1024;
-      alsaFragments  = 3;
-      layoutBreakColor = Qt::green;
+      lPort              = "";
+      rPort              = "";
+      stemDir[0]         = AUTO;
+      stemDir[1]         = AUTO;
+      stemDir[2]         = AUTO;
+      stemDir[3]         = AUTO;
+      showNavigator      = false;
+      showPlayPanel      = false;
+      showStatusBar      = true;
+      showPad            = false;
+      padPos             = QPoint(100, 100);
+      playPanelPos       = QPoint(100, 300);
+      useAlsaAudio       = true;
+      useJackAudio       = true;
+      alsaDevice         = "default";
+      alsaSampleRate     = 48000;
+      alsaPeriodSize     = 1024;
+      alsaFragments      = 3;
+      soundFont          = ":/data/piano1.sf2";
+      layoutBreakColor   = Qt::green;
       antialiasedDrawing = true;
-      sessionStart = SCORE_SESSION;
-      startScore   = ":/data/demo.msc";
-      showSplashScreen = true;
+      sessionStart       = SCORE_SESSION;
+      startScore         = ":/data/demo.msc";
+      showSplashScreen   = true;
       };
 
 //---------------------------------------------------------
@@ -804,7 +803,7 @@ void PreferenceDialog::apply()
                   }
             if (seq->isRunning()) {
                   sfChanged = false;
-                  seq->loadSoundFont(preferences.soundFont.toLatin1().data());
+                  seq->loadSoundFont(preferences.soundFont);
                   }
             }
       }

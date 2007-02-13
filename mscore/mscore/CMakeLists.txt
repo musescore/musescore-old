@@ -18,19 +18,6 @@
 #  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 #=============================================================================
 
-add_custom_target(all.h.pch
-   ALL
-   COMMAND cp ${PROJECT_SOURCE_DIR}/mscore/all.h ${PROJECT_BINARY_DIR}/mscore/all.h
-   COMMAND ${CMAKE_CXX_COMPILER}
-     -g -Wextra -fno-exceptions -Wall
-     -I${QT_INCLUDE_DIR}
-     -I${QT_QTCORE_INCLUDE_DIR}
-     -I${QT_QTGUI_INCLUDE_DIR}
-     -o all.h.pch all.h
-   DEPENDS ${PROJECT_SOURCE_DIR}/mscore/all.h
-   WORKING_DIRECTORY ${PROJECT_BINARY_DIR}/mscore
-   )
-
 set(CMAKE_CXX_FLAGS         "-g -Wall -Wextra -Winvalid-pch -fno-exceptions")
 set(CMAKE_CXX_FLAGS_RELEASE "-O2 -DQT_NO_DEBUG")
 set(CMAKE_CXX_FLAGS_DEBUG   "-DQT_DEBUG")
@@ -183,7 +170,8 @@ target_link_libraries(mscore
       ${QT_LIBRARIES}
       ${ALSA_LIB}
       ${JACK_LIB}
-      ${FLUID_LIB}
+      fluid
+      readline
       )
 
 install_targets ( /bin mscore )
