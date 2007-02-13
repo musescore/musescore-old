@@ -1,7 +1,6 @@
 <!DOCTYPE RCC>
 <RCC version="1.0">
    <qresource>
-      <file>data/fileopen.xpm</file>
       <file>data/paper2.png</file>
       <file>data/text_bold.svg</file>
       <file>data/text_italic.svg</file>
@@ -17,9 +16,10 @@
       <file>data/sbeam.xpm</file>
       <file>data/nbeam.xpm</file>
       <file>data/beam32.xpm</file>
-      <file>data/fileopen.xpm</file>
-      <file>data/filenew.xpm</file>
-      <file>data/filesave.xpm</file>
+      <file>data/fileopen.svg</file>
+      <file>data/filenew.svg</file>
+      <file>data/filesave.svg</file>
+      <file>data/filesaveas.svg</file>
       <file>data/viewmag.xpm</file>
       <file alias="fonts/emmentaler_20.otf">fonts/emmentaler_20.otf</file>
       <file alias="fonts/mscore1_20.otf">fonts/mscore1_20.otf</file>
