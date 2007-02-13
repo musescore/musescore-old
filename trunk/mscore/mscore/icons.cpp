@@ -62,7 +62,7 @@ QIcon undoIcon, redoIcon, cutIcon, copyIcon, pasteIcon;
 QIcon printIcon, clefIcon;
 QIcon midiinIcon, speakerIcon, startIcon, stopIcon, playIcon;
 QIcon sbeamIcon, mbeamIcon, nbeamIcon, beam32Icon;
-QIcon fileOpenIcon, fileNewIcon, fileSaveIcon;
+QIcon fileOpenIcon, fileNewIcon, fileSaveIcon, fileSaveAsIcon;
 QIcon exitIcon, viewmagIcon;
 
 //---------------------------------------------------------
@@ -183,9 +183,10 @@ void genIcons()
       mbeamIcon    = QIcon(":/data/mbeam.xpm");
       nbeamIcon    = QIcon(":/data/nbeam.xpm");
       beam32Icon   = QIcon(":/data/beam32.xpm");
-      fileOpenIcon = QIcon(":/data/fileopen.xpm");
-      fileNewIcon  = QIcon(":/data/filenew.xpm");
-      fileSaveIcon = QIcon(":/data/filesave.xpm");
+      fileOpenIcon = QIcon(":/data/fileopen.svg");
+      fileNewIcon  = QIcon(":/data/filenew.svg");
+      fileSaveIcon = QIcon(":/data/filesave.svg");
+      fileSaveAsIcon = QIcon(":/data/filesaveas.svg");
       exitIcon     = QIcon(":/data/exit.svg");
       viewmagIcon  = QIcon(":/data/viewmag.xpm");
       }

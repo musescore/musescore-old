@@ -66,7 +66,7 @@
              <string>...</string>
             </property>
             <property name="icon" >
-             <iconset resource="mscore.qrc" >:/data/fileopen.xpm</iconset>
+             <iconset resource="mscore.qrc" >:/data/fileopen.svg</iconset>
             </property>
            </widget>
           </item>
@@ -267,7 +267,7 @@
                <string>...</string>
               </property>
               <property name="icon" >
-               <iconset resource="mscore.qrc" >:/data/fileopen.xpm</iconset>
+               <iconset resource="mscore.qrc" >:/data/fileopen.svg</iconset>
               </property>
              </widget>
             </item>
@@ -347,7 +347,7 @@
                <string>...</string>
               </property>
               <property name="icon" >
-               <iconset resource="mscore.qrc" >:/data/fileopen.xpm</iconset>
+               <iconset resource="mscore.qrc" >:/data/fileopen.svg</iconset>
               </property>
              </widget>
             </item>
@@ -2520,7 +2520,7 @@
           <string>...</string>
          </property>
          <property name="icon" >
-          <iconset resource="mscore.qrc" >:/data/fileopen.xpm</iconset>
+          <iconset resource="mscore.qrc" >:/data/fileopen.svg</iconset>
          </property>
         </widget>
        </item>

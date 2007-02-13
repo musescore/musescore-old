@@ -1,107 +1,145 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 20010904//EN"
-"http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd">
+<!-- Created with Sodipodi ("http://www.sodipodi.com/") -->
 <svg
-   sodipodi:docname="3leftarrow.svg"
-   height="60.0000000"
-   sodipodi:version="0.32"
-   width="60.0000000"
-   _SVGFile__filename="scalable/actions/3downarrow.svg"
-   version="1.0"
-   y="0"
-   x="0"
-   inkscape:version="0.39"
-   id="svg1"
-   sodipodi:docbase="/home/danny/work/flat/newscale/actions"
-   xmlns="http://www.w3.org/2000/svg"
-   xmlns:cc="http://web.resource.org/cc/"
-   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
-   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
    xmlns:dc="http://purl.org/dc/elements/1.1/"
-   xmlns:xlink="http://www.w3.org/1999/xlink">
-  <sodipodi:namedview
-     bordercolor="#666666"
-     inkscape:pageshadow="2"
-     inkscape:window-y="0"
-     pagecolor="#ffffff"
-     inkscape:window-height="699"
-     inkscape:zoom="9.8238822"
-     inkscape:window-x="0"
-     borderopacity="1.0"
-     inkscape:cx="46.905599"
-     inkscape:cy="25.599765"
-     inkscape:window-width="1024"
-     inkscape:pageopacity="0.0"
-     id="base" />
+   xmlns:cc="http://web.resource.org/cc/"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xml:space="preserve"
+   width="120"
+   height="120"
+   viewBox="0 0 507.946 507.946"
+   id="svg49"
+   sodipodi:version="0.32"
+   sodipodi:docname="start.svg"
+   sodipodi:docbase="/home/ws/mscore/mscore/trunk/mscore/mscore/data"
+   inkscape:version="0.44"
+   version="1.0"><metadata
+   id="metadata22"><rdf:RDF><cc:Work
+       rdf:about=""><dc:format>image/svg+xml</dc:format><dc:type
+         rdf:resource="http://purl.org/dc/dcmitype/StillImage" /></cc:Work></rdf:RDF></metadata>
   <defs
-     id="defs3" />
-  <path
-     style="font-size:12.000000;fill:#b3b3b3;fill-opacity:1.0000000;fill-rule:evenodd;stroke:#333333;stroke-width:3.1250000;stroke-linecap:round;stroke-linejoin:round;stroke-opacity:1.0000000;"
-     d="M 30.017828,4.7066678 C 44.065222,4.7066678 55.455332,16.096774 55.455332,30.144168 C 55.455332,44.191562 44.065222,55.581669 30.017828,55.581668 C 15.970434,55.581668 4.5803278,44.191563 4.5803278,30.144168 C 4.5803278,16.096774 15.970433,4.7066678 30.017828,4.7066678 z M 25.642828,12.862918 L 19.361578,12.862918 C 19.101976,12.862918 18.892828,13.072066 18.892828,13.331668 L 18.892828,47.081668 C 18.892828,47.341270 19.101974,47.550419 19.361578,47.550418 L 25.642828,47.550418 C 25.902430,47.550418 26.111578,47.341269 26.111578,47.081668 L 26.111578,33.675418 L 39.830328,47.394168 L 39.830328,13.050418 L 26.111578,26.987918 L 26.111578,13.331668 C 26.111578,13.072066 25.902428,12.862918 25.642828,12.862918 z "
-     id="path930" />
-  <metadata
-     id="metadata5">
-    <rdf:RDF
-       id="RDF6">
-      <cc:Work
-         rdf:about=""
-         id="Work7">
-        <dc:title
-           id="title8">Part of the Flat Icon Collection (Thu Aug 26 14:38:01 2004)</dc:title>
-        <dc:description
-           id="description10" />
-        <dc:subject
-           id="subject11">
-          <rdf:Bag
-             id="Bag12">
-            <rdf:li
-               id="li13" />
-          </rdf:Bag>
-        </dc:subject>
-        <dc:publisher
-           id="publisher14">
-          <cc:Agent
-             rdf:about=""
-             id="Agent15">
-            <dc:title
-               id="title16" />
-          </cc:Agent>
-        </dc:publisher>
-        <dc:creator
-           id="creator17">
-          <cc:Agent
-             rdf:about=""
-             id="Agent18">
-            <dc:title
-               id="title19">Danny Allen</dc:title>
-          </cc:Agent>
-        </dc:creator>
-        <dc:rights
-           id="rights21">
-          <cc:Agent
-             rdf:about=""
-             id="Agent22">
-            <dc:title
-               id="title23">Danny Allen</dc:title>
-          </cc:Agent>
-        </dc:rights>
-        <dc:date
-           id="date25" />
-        <dc:format
-           id="format26">image/svg+xml</dc:format>
-        <dc:type
-           rdf:resource="http://purl.org/dc/dcmitype/StillImage"
-           id="type28" />
-        <cc:license
-           rdf:resource="http://creativecommons.org/licenses/LGPL/2.1/"
-           id="license29">
-          <dc:date
-             id="date30" />
-        </cc:license>
-        <dc:language
-           id="language31">en</dc:language>
-      </cc:Work>
-    </rdf:RDF>
-  </metadata>
+   id="defs62">
+    <radialGradient
+   id="aigrd1"
+   cx="218.9404"
+   cy="219.7715"
+   r="150.7063"
+   fx="218.9404"
+   fy="219.7715"
+   gradientUnits="userSpaceOnUse"
+   style="stroke:#000000;stroke-opacity:0.986014;stroke-width:0.981612;">
+      <stop
+   offset="0"
+   style="stop-color:#73ffff;stroke:#000000;stroke-opacity:0.986014;stroke-width:0.981612;"
+   id="stop53" />
+      <stop
+   offset="0.2809"
+   style="stop-color:#2EA6B9;stroke:#000000;stroke-opacity:0.986014;stroke-width:0.981612;"
+   id="stop54" />
+      <stop
+   offset="1"
+   style="stop-color:#006b8b;stroke:#000000;stroke-opacity:0.986014;stroke-width:0.981612;"
+   id="stop55" />
+    </radialGradient>
+    <linearGradient
+   xlink:href="#aigrd1"
+   id="linearGradient130"
+   x1="0.50627601"
+   y1="0.046875"
+   x2="0.50627601"
+   y2="0.984375"
+   gradientUnits="objectBoundingBox"
+   spreadMethod="pad" />
+    <linearGradient
+   x1="0"
+   y1="0"
+   x2="1"
+   y2="0"
+   xlink:href="#aigrd1"
+   id="linearGradient321" />
+    <linearGradient
+   x1="0.43077001"
+   y1="0.85156202"
+   x2="-0.123077"
+   y2="-0.078125"
+   xlink:href="#aigrd1"
+   id="linearGradient334"
+   gradientUnits="objectBoundingBox"
+   spreadMethod="pad" />
+    <linearGradient
+   x1="0.50627601"
+   y1="0.046875"
+   x2="0.50627601"
+   y2="0.984375"
+   xlink:href="#aigrd1"
+   id="linearGradient148" />
+  </defs>
+  <sodipodi:namedview
+   id="base"
+   width="120px"
+   height="120px"
+   inkscape:zoom="2.3625"
+   inkscape:cx="80"
+   inkscape:cy="80"
+   inkscape:window-width="849"
+   inkscape:window-height="579"
+   inkscape:window-x="1064"
+   inkscape:window-y="78"
+   inkscape:current-layer="svg49">
+    <sodipodi:guide
+   orientation="horizontal"
+   position="106.801262"
+   id="sodipodi:guide328" />
+    <sodipodi:guide
+   orientation="horizontal"
+   position="14.738171"
+   id="sodipodi:guide329" />
+  </sodipodi:namedview>
+  <g
+   id="g155"
+   transform="matrix(-1,0,0,-1,541.669,537.955)">
+    <g
+   id="g149"
+   transform="matrix(0,1,-1,0,393.896,19.0748)">
+      <path
+   style="font-size:12px;fill-rule:evenodd;stroke:#a4c9ee;stroke-width:10.82400036;stroke-linejoin:round;stroke-opacity:0.70196096"
+   d="M 338.593,175.32 L 435.492,261.836 L 339.257,355.345 L 338.593,175.32 z "
+   id="path126"
+   transform="matrix(0,-1.72603,1.94683,0,-263.45,853.702)"
+   sodipodi:nodetypes="cccc" />
+      <path
+   style="font-size:12px;fill:url(#linearGradient334);fill-opacity:0.99215698;fill-rule:evenodd;stroke:#0c6671;stroke-width:9.60303974;stroke-opacity:0.99215698"
+   d="M 355.635,183.469 L 437.887,259.936 L 355.817,342.102 L 355.635,183.469 z "
+   id="path84"
+   transform="matrix(0,-1.67014,1.75639,0,-211.885,851.763)"
+   sodipodi:nodetypes="cccc" />
+    </g>
+    <g
+   id="g152"
+   transform="matrix(0,1,-1,0,746.337,18.8684)">
+      <rect
+   style="font-size:12px;fill-rule:evenodd;stroke:#a4c9ee;stroke-width:16.03380013;stroke-opacity:0.70196096"
+   id="rect147"
+   x="120.97765"
+   y="297.23651"
+   width="256.37656"
+   height="146.69675"
+   rx="0"
+   ry="0" />
+      <rect
+   style="font-size:12px;fill:url(#linearGradient130);fill-rule:evenodd;stroke:#0c6671;stroke-width:14.05679989;stroke-opacity:0.99215698"
+   id="rect144"
+   x="134.68764"
+   y="308.2045"
+   width="231.69856"
+   height="124.76077"
+   rx="0"
+   ry="0" />
+    </g>
+  </g>
 </svg>
