@@ -23,9 +23,7 @@
 
 #include "config.h"
 #include "synti.h"
-
-#ifdef USE_FLUID
-#include <fluidsynth.h>
+#include "fluid/fluidsynth.h"
 
 //---------------------------------------------------------
 //   ISynth
@@ -44,35 +42,13 @@ class ISynth : public Synth {
       ISynth();
       ~ISynth() {}
       virtual bool init(int sampleRate);
-      virtual bool loadSoundFont(const char*);
+      virtual bool loadSoundFont(const QString&);
       virtual void process(unsigned, float*, float*);
       virtual void playNote(int channel, int pitch, int velo);
       virtual bool setController(int ch, int ctrl, int val);
       virtual const MidiPatch* getPatchInfo(int ch, const MidiPatch* p) const;
       };
 
-#else
-//---------------------------------------------------------
-//   ISynth
-//---------------------------------------------------------
-
-class ISynth : public Synth {
-
-   public:
-      ISynth() {}
-      ~ISynth() {}
-      virtual bool init(int) {
-            fprintf(stderr, "no synth available\n");
-            return true;
-            }
-      virtual bool loadSoundFont(const char*) { return true; }
-      virtual void process(unsigned, float*, float*) {}
-      virtual void playNote(int, int, int) {}
-      virtual bool setController(int, int, int) { return true;}
-      virtual const MidiPatch* getPatchInfo(int, const MidiPatch*) const { return 0; }
-      };
-
-#endif
 #endif
 
 

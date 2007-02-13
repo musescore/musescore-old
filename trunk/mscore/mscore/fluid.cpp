@@ -20,7 +20,6 @@
 
 #include "config.h"
 
-#ifdef USE_FLUID
 #include "preferences.h"
 #include "fluid.h"
 #include "score.h"
@@ -51,12 +50,12 @@ bool ISynth::init(int sampleRate)
 
       _fluidsynth = new_fluid_synth(settings);
 
-      const char* p = 0;
+      QString p;
       if (!preferences.soundFont.isEmpty())
-            p = preferences.soundFont.toLatin1().data();
+            p = preferences.soundFont;
       else
-            p = getenv("DEFAULT_SOUNDFONT");
-      if (p == 0) {
+            p = QString(getenv("DEFAULT_SOUNDFONT"));
+      if (p.isEmpty()) {
             fprintf(stderr, "Synth: no soundfont specified\n");
             return true;
             }
@@ -68,12 +67,10 @@ bool ISynth::init(int sampleRate)
 //    return true on error;
 //---------------------------------------------------------
 
-bool ISynth::loadSoundFont(const char* p)
+bool ISynth::loadSoundFont(const QString& sfont)
       {
       if (fontId != -1)
             fluid_synth_sfunload(_fluidsynth, fontId, true);
-      sfont = new char[strlen(p)+1];
-      strcpy(sfont, p);
       fontId = fluid_synth_sfload(_fluidsynth, sfont, true);
       if (fontId == -1) {
             fprintf(stderr, "ISynth: %s", fluid_synth_error(_fluidsynth));
@@ -185,6 +182,4 @@ const MidiPatch* ISynth::getPatchInfo(int ch, const MidiPatch* p) const
             }
       return 0;
       }
-
-#endif
 

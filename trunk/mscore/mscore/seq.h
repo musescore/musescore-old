@@ -122,7 +122,7 @@ class Seq : public QObject {
 
       Seq();
       ~Seq();
-      bool loadSoundFont(const char* s);
+      bool loadSoundFont(const QString&);
       bool init();
       void exit();
       bool isRunning() const    { return running; }

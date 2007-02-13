@@ -20,7 +20,6 @@
 
 #cmakedefine USE_ALSA
 #cmakedefine USE_JACK
-#cmakedefine USE_FLUID
 
 #define INSTALL_NAME     "${Mscore_INSTALL_NAME}"
 #define INSTPREFIX       "${CMAKE_INSTALL_PREFIX}"
