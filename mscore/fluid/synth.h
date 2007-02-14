@@ -37,7 +37,7 @@
 #include "voice.h"
 #include "chorus.h"
 #include "ladspa.h"
-#include "midi_router.h"
+// #include "midi_router.h"
 #include "sys.h"
 
 /***************************************************************

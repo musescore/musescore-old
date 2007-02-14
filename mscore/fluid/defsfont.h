@@ -20,22 +20,77 @@
  * 02111-1307, USA
  */
 
-
 #ifndef _FLUID_DEFSFONT_H
 #define _FLUID_DEFSFONT_H
-
 
 #include "fluidsynth.h"
 #include "priv.h"
 #include "list.h"
 
+//---------------------------------------------------------
+//   SFVersion
+//---------------------------------------------------------
 
+struct SFVersion {            // version structure
+      unsigned short major;
+      unsigned short minor;
 
-/********************************************************************************/
-/********************************************************************************/
-/********************************************************************************/
-/********************************************************************************/
-/********************************************************************************/
+      SFVersion() {
+            major = 0;
+            minor = 0;
+            }
+      };
+
+//---------------------------------------------------------
+//   SFChunk
+//---------------------------------------------------------
+
+struct SFChunk {              // RIFF file chunk structure
+      unsigned int id;	      // chunk id
+      unsigned int size;	// size of the following chunk
+      };
+
+//---------------------------------------------------------
+//   SFData
+//    Sound font data structure
+//---------------------------------------------------------
+
+class SFData : public QFile {
+      int read_listchunk(SFChunk * chunk);
+      int process_info(int size);
+      int process_sdta(int size);
+      int pdtahelper(unsigned int expid, unsigned int reclen, SFChunk * chunk, int * size);
+      int process_pdta(int size);
+      int load_phdr(int size);
+      int load_pbag(int size);
+      int load_pmod(int size);
+      int load_pgen(int size);
+      int load_ihdr(int size);
+      int load_ibag(int size);
+      int load_imod(int size);
+      int load_igen(int size);
+      int load_shdr(unsigned int size);
+      int fixup_pgen();
+      int fixup_igen();
+      int fixup_sample();
+      bool READCHUNK(SFChunk*);
+      bool safe_fread(void *buf, int count);
+      bool safe_fseek(long ofs, int whence);
+
+   public:
+      SFData(const QString& s);
+      ~SFData();
+      bool load_body();
+
+      SFVersion version;		// sound font version
+      SFVersion romver;		      // ROM version
+      unsigned int samplepos;	      // position within sffd of the sample chunk
+      unsigned int samplesize;	// length within sffd of the sample chunk
+      fluid_list_t* info;		// linked list of info strings (1st byte is ID)
+      fluid_list_t* preset;		// linked list of preset info
+      fluid_list_t* inst;		// linked list of instrument info
+      fluid_list_t* sample;		// linked list of sample info
+      };
 
 /*-----------------------------------sfont.h----------------------------*/
 
@@ -48,13 +103,6 @@
 #define SF_MIN_SAMPLE_LENGTH	32
 
 /* Sound Font structure defines */
-
-typedef struct _SFVersion
-{				/* version structure */
-  unsigned short major;
-  unsigned short minor;
-}
-SFVersion;
 
 typedef struct _SFMod
 {				/* Modulator structure */
@@ -136,20 +184,6 @@ typedef struct _SFPreset
 SFPreset;
 
 /* NOTE: sffd is also used to determine if sound font is new (NULL) */
-typedef struct _SFData
-{				/* Sound font data structure */
-  SFVersion version;		/* sound font version */
-  SFVersion romver;		/* ROM version */
-  unsigned int samplepos;	/* position within sffd of the sample chunk */
-  unsigned int samplesize;	/* length within sffd of the sample chunk */
-  QString fname;			/* file name */
-  QFile*  sffd;			/* loaded sfont file descriptor */
-  fluid_list_t *info;		/* linked list of info strings (1st byte is ID) */
-  fluid_list_t *preset;		/* linked list of preset info */
-  fluid_list_t *inst;		/* linked list of instrument info */
-  fluid_list_t *sample;		/* linked list of sample info */
-}
-SFData;
 
 /* sf file chunk IDs */
 enum
@@ -217,7 +251,6 @@ extern unsigned short badpgen[]; 	/* list of bad preset generators */
 /* functions */
 void sfont_init_chunks (void);
 
-void sfont_close (SFData * sf);
 void sfont_free_zone (SFZone * zone);
 int sfont_preset_compare_func (void* a, void* b);
 
@@ -244,12 +277,6 @@ int gen_validp (int gen);
 #define SFSHDRSIZE	46
 
 /* sfont file data structures */
-typedef struct _SFChunk
-{				/* RIFF file chunk structure */
-  unsigned int id;			/* chunk id */
-  unsigned int size;			/* size of the following chunk */
-}
-SFChunk;
 
 typedef struct _SFPhdr
 {

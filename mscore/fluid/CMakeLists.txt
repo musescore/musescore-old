@@ -30,14 +30,13 @@ add_library (fluid
   list.cpp
   ramsfont.cpp
   conv.cpp
-  event.cpp
   gen.cpp
   mod.cpp
   rev.cpp
   tuning.cpp
   midi.cpp
   )
-##  midi_router.cpp
+##  event.cpp
 
 set_target_properties( fluid
    PROPERTIES COMPILE_FLAGS "-include ${PROJECT_BINARY_DIR}/mscore/all.h"

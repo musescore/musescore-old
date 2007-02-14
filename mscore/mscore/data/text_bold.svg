@@ -1,138 +1,54 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?xml version="1.0" standalone="no"?>
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 20010904//EN"
-"http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd">
+"http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd"
+[
+ <!ATTLIST svg
+  xmlns:xlink CDATA #FIXED "http://www.w3.org/1999/xlink">
+]>
+<!-- Created with Sodipodi ("http://www.sodipodi.com/") -->
 <svg
-   sodipodi:docname="bold.svg"
-   height="60.0000000"
-   sodipodi:version="0.32"
-   width="60.0000000"
-   _SVGFile__filename="scalable/actions/bold.svg"
-   version="1.0"
-   y="0"
-   x="0"
-   inkscape:version="0.39"
-   id="svg1"
-   sodipodi:docbase="/home/danny/work/flat/newscale/actions"
+   xml:space="preserve"
+   width="128pt"
+   height="128pt"
+   viewBox="0 0 507.946 507.946"
+   id="svg49"
+   sodipodi:version="0.27"
+   sodipodi:docname="/mnt/windows/themes/Work/Blue-Sphere/text_bold-2.1.svg"
+   sodipodi:docbase="/mnt/windows/themes/Work/Blue-Sphere/"
    xmlns="http://www.w3.org/2000/svg"
-   xmlns:cc="http://web.resource.org/cc/"
-   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
-   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-   xmlns:dc="http://purl.org/dc/elements/1.1/"
    xmlns:xlink="http://www.w3.org/1999/xlink">
-  <sodipodi:namedview
-     bordercolor="#666666"
-     inkscape:pageshadow="2"
-     inkscape:window-y="0"
-     pagecolor="#ffffff"
-     inkscape:window-height="685"
-     inkscape:zoom="6.9465337"
-     inkscape:window-x="0"
-     borderopacity="1.0"
-     inkscape:cx="33.984483"
-     inkscape:cy="21.890955"
-     inkscape:window-width="1016"
-     inkscape:pageopacity="0.0"
-     id="base" />
   <defs
-     id="defs3">
-    <linearGradient
-       id="linearGradient900">
+     id="defs62">
+    <radialGradient
+       id="aigrd1"
+       cx="218.9404"
+       cy="219.7715"
+       r="150.7063"
+       fx="218.9404"
+       fy="219.7715"
+       gradientUnits="userSpaceOnUse"
+       style="stroke:#000000;stroke-opacity:0.986014;stroke-width:0.981612;">
       <stop
-         style="stop-color:#000;stop-opacity:1;"
-         id="stop901"
-         offset="0" />
+         offset="0"
+         style="stop-color:#73ffff;stroke:#000000;stroke-opacity:0.986014;stroke-width:0.981612;"
+         id="stop53" />
       <stop
-         style="stop-color:#fff;stop-opacity:1;"
-         id="stop902"
-         offset="1" />
-    </linearGradient>
-    <linearGradient
-       xlink:href="#linearGradient900"
-       id="linearGradient903" />
-    <linearGradient
-       xlink:href="#linearGradient900"
-       id="linearGradient904" />
-    <linearGradient
-       xlink:href="#linearGradient900"
-       id="linearGradient905" />
-    <linearGradient
-       xlink:href="#linearGradient900"
-       id="linearGradient906" />
-    <linearGradient
-       xlink:href="#linearGradient900"
-       id="linearGradient907" />
+         offset="0.2809"
+         style="stop-color:#2EA6B9;stroke:#000000;stroke-opacity:0.986014;stroke-width:0.981612;"
+         id="stop54" />
+      <stop
+         offset="1"
+         style="stop-color:#006b8b;stroke:#000000;stroke-opacity:0.986014;stroke-width:0.981612;"
+         id="stop55" />
+    </radialGradient>
   </defs>
+  <sodipodi:namedview
+     id="base" />
   <path
-     style="font-size:12.000000;fill:#cccccc;fill-opacity:1.0000000;fill-rule:evenodd;stroke:#333333;stroke-width:3.1250000;stroke-linejoin:round;stroke-opacity:1.0000000;"
-     d="M 6.6785922,5.1165123 C 5.5705922,5.1165123 4.6785922,6.0085123 4.6785922,7.1165123 L 4.6785922,53.501354 C 4.6785922,54.609354 5.5705922,55.501354 6.6785922,55.501354 L 53.423324,55.501354 C 54.531324,55.501354 55.423324,54.609354 55.423324,53.501354 L 55.423324,7.1165123 C 55.423324,6.0085123 54.531324,5.1165123 53.423324,5.1165123 L 6.6785922,5.1165123 z "
-     id="rect812" />
-  <path
-     id="path837"
-     style="font-size:12.000000;fill:#333333;stroke:#333333;stroke-width:2.5000000;font-family:VAG Rounded Black SSi;"
-     d="M 13.591671,44.523772 L 24.407024,15.017810 C 24.914540,13.670266 25.667065,12.585231 26.664597,11.762704 C 27.679630,10.922677 28.843418,10.502663 30.155961,10.502663 C 31.538506,10.502663 32.719795,10.913927 33.699827,11.736454 C 34.697359,12.558980 35.432383,13.652766 35.904899,15.017810 L 46.457743,44.523772 C 46.737752,45.293797 46.877757,45.958821 46.877757,46.518839 C 46.877757,47.568873 46.510246,48.435150 45.775220,49.117673 C 45.057697,49.782693 44.191419,50.115204 43.176386,50.115204 C 41.181321,50.115204 39.868778,49.187675 39.238757,47.332613 L 37.637455,42.213696 L 22.700718,42.213696 L 21.073165,47.280110 C 20.478146,49.170171 19.191854,50.115204 17.214289,50.115204 C 16.111753,50.115204 15.166722,49.747694 14.379197,49.012667 C 13.609172,48.277646 13.224159,47.376366 13.224159,46.308832 C 13.224159,45.801312 13.346663,45.206295 13.591671,44.523772 z M 30.103459,18.929188 L 25.010794,34.705952 L 35.222376,34.705952 L 30.208463,18.929188 L 30.103459,18.929188 z " />
-  <metadata
-     id="metadata14">
-    <rdf:RDF
-       id="RDF15">
-      <cc:Work
-         rdf:about=""
-         id="Work16">
-        <dc:title
-           id="title17">Part of the Flat Icon Collection (Thu Aug 26 14:38:01 2004)</dc:title>
-        <dc:description
-           id="description19" />
-        <dc:subject
-           id="subject20">
-          <rdf:Bag
-             id="Bag21">
-            <rdf:li
-               id="li22" />
-          </rdf:Bag>
-        </dc:subject>
-        <dc:publisher
-           id="publisher23">
-          <cc:Agent
-             rdf:about=""
-             id="Agent24">
-            <dc:title
-               id="title25" />
-          </cc:Agent>
-        </dc:publisher>
-        <dc:creator
-           id="creator26">
-          <cc:Agent
-             rdf:about=""
-             id="Agent27">
-            <dc:title
-               id="title28">Danny Allen</dc:title>
-          </cc:Agent>
-        </dc:creator>
-        <dc:rights
-           id="rights30">
-          <cc:Agent
-             rdf:about=""
-             id="Agent31">
-            <dc:title
-               id="title32">Danny Allen</dc:title>
-          </cc:Agent>
-        </dc:rights>
-        <dc:date
-           id="date34" />
-        <dc:format
-           id="format35">image/svg+xml</dc:format>
-        <dc:type
-           rdf:resource="http://purl.org/dc/dcmitype/StillImage"
-           id="type37" />
-        <cc:license
-           rdf:resource="http://creativecommons.org/licenses/LGPL/2.1/"
-           id="license38">
-          <dc:date
-             id="date39" />
-        </cc:license>
-        <dc:language
-           id="language40">en</dc:language>
-      </cc:Work>
-    </rdf:RDF>
-  </metadata>
+     d="M 14.514 0.39 L 14.5497 0.156 L 19.752 0.156 C 22.26 0.156 23.748 0.804 24.216 2.1 C 24.348 2.436 24.414 2.838 24.414 3.306 C 24.414 4.374 24.006 5.172 23.19 5.7 C 22.83 5.94 22.422 6.091 21.966 6.15 L 21.966 6.258 C 23.141 6.354 24 6.834 24.54 7.698 C 24.828 8.166 24.972 8.688 24.972 9.264 C 24.972 10.512 24.414 11.454 23.298 12.09 C 22.53 12.534 21.594 12.756 20.49 12.756 L 14.514 12.756 L 14.514 12.522 L 14.82 12.522 C 15.696 12.522 16.188 12.222 16.296 11.622 L 16.332 11.244 L 16.332 1.668 C 16.332 0.816 15.828 0.39 14.82 0.39 L 14.514 0.39 L 14.514 0.39 z M 18.33 0.948 L 18.33 5.79 C 18.738 5.862 19.11 5.898 19.446 5.898 C 20.838 5.898 21.744 5.394 22.164 4.386 C 22.32 4.026 22.398 3.618 22.398 3.162 C 22.398 2.322 21.99 1.692 21.174 1.272 C 20.682 1.008 20.1 0.876 19.428 0.876 L 18.33 0.948 z M 18.33 6.564 L 18.33 11.82 C 18.774 11.964 19.278 12.036 19.842 12.036 C 21.03 12.036 21.894 11.634 22.434 10.83 C 22.722 10.398 22.866 9.888 22.866 9.3 C 22.866 8.268 22.404 7.5 21.48 6.996 C 20.892 6.672 20.178 6.51 19.338 6.51 L 18.33 6.564 z "
+     id="path88"
+     style="font-size:12;stroke:#0c6772;stroke-opacity:0.992157;fill:#a4c9ee;fill-opacity:0.701961;stroke-width:0.447516;stroke-linejoin:round;"
+     transform="matrix(35.4698,0,0,35.4698,-457.575,23.0018)"
+     sodipodi:nodetypes="ccccccccccccccccccccccccccccccccccccc" />
 </svg>

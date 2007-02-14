@@ -1,131 +1,107 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?xml version="1.0" standalone="no"?>
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 20010904//EN"
-"http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd">
+"http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd"
+[
+ <!ATTLIST svg
+  xmlns:xlink CDATA #FIXED "http://www.w3.org/1999/xlink">
+]>
+<!-- Created with Sodipodi ("http://www.sodipodi.com/") -->
 <svg
-   sodipodi:docname="text_center.svg"
-   height="60.0000000"
-   sodipodi:version="0.32"
-   width="60.0000000"
-   _SVGFile__filename="scalable/actions/text_center.svg"
-   version="1.0"
-   y="0"
-   x="0"
-   inkscape:version="0.39"
-   id="svg1"
-   sodipodi:docbase="/home/danny/work/flat/newscale/actions"
+   xml:space="preserve"
+   width="128pt"
+   height="128pt"
+   viewBox="0 0 507.946 507.946"
+   id="svg49"
+   sodipodi:version="0.27"
+   sodipodi:docname="/mnt/windows/themes/Work/Blue-Sphere/text_center.svg"
+   sodipodi:docbase="/mnt/windows/themes/Work/Blue-Sphere/"
    xmlns="http://www.w3.org/2000/svg"
-   xmlns:cc="http://web.resource.org/cc/"
-   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
-   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-   xmlns:dc="http://purl.org/dc/elements/1.1/"
    xmlns:xlink="http://www.w3.org/1999/xlink">
-  <sodipodi:namedview
-     bordercolor="#666666"
-     inkscape:pageshadow="2"
-     inkscape:window-y="0"
-     pagecolor="#ffffff"
-     inkscape:window-height="685"
-     inkscape:zoom="6.9465337"
-     inkscape:window-x="0"
-     borderopacity="1.0"
-     inkscape:cx="33.984503"
-     inkscape:cy="21.891029"
-     inkscape:window-width="1016"
-     inkscape:pageopacity="0.0"
-     id="base" />
   <defs
-     id="defs3" />
-  <path
-     style="font-size:12.000000;fill:#cccccc;fill-opacity:1.0000000;fill-rule:evenodd;stroke:#333333;stroke-width:3.1250000;stroke-linejoin:round;stroke-opacity:1.0000000;"
-     d="M 6.6785922,5.1165123 C 5.5705922,5.1165123 4.6785922,6.0085123 4.6785922,7.1165123 L 4.6785922,53.501354 C 4.6785922,54.609354 5.5705922,55.501354 6.6785922,55.501354 L 53.423324,55.501354 C 54.531324,55.501354 55.423324,54.609354 55.423324,53.501354 L 55.423324,7.1165123 C 55.423324,6.0085123 54.531324,5.1165123 53.423324,5.1165123 L 6.6785922,5.1165123 z "
-     id="rect812" />
-  <g
-     id="g935"
-     transform="translate(0.165086,-0.171814)">
-    <path
-       style="font-size:12.000000;fill:none;fill-opacity:0.75000000;fill-rule:evenodd;stroke:#333333;stroke-width:3.1250000;stroke-linecap:round;stroke-linejoin:round;"
-       d="M 45.185769,12.880770 L 14.585976,12.880770"
-       sodipodi:stroke-cmyk="(0 0 0 0.8)"
-       id="path813" />
-    <path
-       style="font-size:12.000000;fill:none;fill-opacity:0.75000000;fill-rule:evenodd;stroke:#333333;stroke-width:3.1250000;stroke-linecap:round;stroke-linejoin:round;"
-       d="M 37.407609,48.080724 L 22.364136,48.080724"
-       sodipodi:stroke-cmyk="(0 0 0 0.8)"
-       id="path814" />
-    <path
-       style="font-size:12.000000;fill:none;fill-opacity:0.75000000;fill-rule:evenodd;stroke:#333333;stroke-width:3.1250000;stroke-linecap:round;stroke-linejoin:round;"
-       d="M 45.185769,36.347407 L 14.585976,36.347407"
-       sodipodi:stroke-cmyk="(0 0 0 0.8)"
-       id="path815" />
-    <path
-       style="font-size:12.000000;fill:none;fill-opacity:0.75000000;fill-rule:evenodd;stroke:#333333;stroke-width:3.1250000;stroke-linecap:round;stroke-linejoin:round;"
-       d="M 37.407609,24.614088 L 22.364136,24.614088"
-       sodipodi:stroke-cmyk="(0 0 0 0.8)"
-       id="path816" />
-  </g>
-  <metadata
-     id="metadata9">
-    <rdf:RDF
-       id="RDF10">
-      <cc:Work
-         rdf:about=""
-         id="Work11">
-        <dc:title
-           id="title12">Part of the Flat Icon Collection (Thu Aug 26 14:38:01 2004)</dc:title>
-        <dc:description
-           id="description14" />
-        <dc:subject
-           id="subject15">
-          <rdf:Bag
-             id="Bag16">
-            <rdf:li
-               id="li17" />
-          </rdf:Bag>
-        </dc:subject>
-        <dc:publisher
-           id="publisher18">
-          <cc:Agent
-             rdf:about=""
-             id="Agent19">
-            <dc:title
-               id="title20" />
-          </cc:Agent>
-        </dc:publisher>
-        <dc:creator
-           id="creator21">
-          <cc:Agent
-             rdf:about=""
-             id="Agent22">
-            <dc:title
-               id="title23">Danny Allen</dc:title>
-          </cc:Agent>
-        </dc:creator>
-        <dc:rights
-           id="rights25">
-          <cc:Agent
-             rdf:about=""
-             id="Agent26">
-            <dc:title
-               id="title27">Danny Allen</dc:title>
-          </cc:Agent>
-        </dc:rights>
-        <dc:date
-           id="date29" />
-        <dc:format
-           id="format30">image/svg+xml</dc:format>
-        <dc:type
-           rdf:resource="http://purl.org/dc/dcmitype/StillImage"
-           id="type32" />
-        <cc:license
-           rdf:resource="http://creativecommons.org/licenses/LGPL/2.1/"
-           id="license33">
-          <dc:date
-             id="date34" />
-        </cc:license>
-        <dc:language
-           id="language35">en</dc:language>
-      </cc:Work>
-    </rdf:RDF>
-  </metadata>
+     id="defs62">
+    <radialGradient
+       id="aigrd1"
+       cx="218.9404"
+       cy="219.7715"
+       r="150.7063"
+       fx="218.9404"
+       fy="219.7715"
+       gradientUnits="userSpaceOnUse"
+       style="stroke:#000000;stroke-opacity:0.986014;stroke-width:0.981612;">
+      <stop
+         offset="0"
+         style="stop-color:#73ffff;stroke:#000000;stroke-opacity:0.986014;stroke-width:0.981612;"
+         id="stop53" />
+      <stop
+         offset="0.2809"
+         style="stop-color:#2EA6B9;stroke:#000000;stroke-opacity:0.986014;stroke-width:0.981612;"
+         id="stop54" />
+      <stop
+         offset="1"
+         style="stop-color:#006b8b;stroke:#000000;stroke-opacity:0.986014;stroke-width:0.981612;"
+         id="stop55" />
+    </radialGradient>
+  </defs>
+  <sodipodi:namedview
+     id="base">
+    <sodipodi:guide
+       orientation="vertical"
+       position="11.507887"
+       id="sodipodi:guide2267" />
+  </sodipodi:namedview>
+  <rect
+     style="font-size:12;fill:#0c6772;fill-opacity:0.992157;fill-rule:evenodd;stroke:#0c6772;stroke-width:8.41811;stroke-opacity:0.992157;"
+     id="rect2234"
+     x="50.474127"
+     y="117.772959"
+     width="400.588318"
+     height="16.023554"
+     rx="0.000000"
+     ry="0.000000" />
+  <rect
+     style="font-size:12;fill:#0c6772;fill-opacity:0.992157;fill-rule:evenodd;stroke:#0c6772;stroke-width:7.33874;stroke-opacity:0.992157;"
+     id="rect2262"
+     x="98.544730"
+     y="173.855331"
+     width="304.447129"
+     height="16.023554"
+     rx="0.000000"
+     ry="0.000000" />
+  <rect
+     style="font-size:12;fill:#0c6772;fill-opacity:0.992157;fill-rule:evenodd;stroke:#0c6772;stroke-width:6.94175;stroke-opacity:0.992157;"
+     id="rect2263"
+     x="116.170616"
+     y="229.937683"
+     width="272.400055"
+     height="16.023554"
+     rx="0.000000"
+     ry="0.000000" />
+  <rect
+     style="font-size:12;fill:#0c6772;fill-opacity:0.992157;fill-rule:evenodd;stroke:#0c6772;stroke-width:7.00273;stroke-opacity:0.992157;"
+     id="rect2264"
+     x="112.965915"
+     y="290.827118"
+     width="277.207082"
+     height="16.023554"
+     rx="0.000000"
+     ry="0.000000" />
+  <rect
+     style="font-size:12;fill:#0c6772;fill-opacity:0.992157;fill-rule:evenodd;stroke:#0c6772;stroke-width:7.4727;stroke-opacity:0.992157;"
+     id="rect2265"
+     x="95.340019"
+     y="351.716553"
+     width="315.663586"
+     height="16.023554"
+     rx="0.000000"
+     ry="0.000000" />
+  <rect
+     style="font-size:12;fill:#0c6772;fill-opacity:0.992157;fill-rule:evenodd;stroke:#0c6772;stroke-width:7.08323;stroke-opacity:0.992157;"
+     id="rect2266"
+     x="108.158844"
+     y="412.605988"
+     width="283.616534"
+     height="16.023554"
+     rx="0.000000"
+     ry="0.000000" />
 </svg>

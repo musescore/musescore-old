@@ -453,8 +453,10 @@ bool Text::startEdit(QMatrix&, const QPointF& p)
       cursor = new QTextCursor(doc);
       cursor->setPosition(cursorPos);
       editMode = true;
-      if (palette)
+      if (palette) {
             palette->setCharFormat(cursor->charFormat());
+            palette->setBlockFormat(cursor->blockFormat());
+            }
       mousePress(p);    // set cursor
       cursorPos = cursor->position();
       return true;

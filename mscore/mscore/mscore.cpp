@@ -151,6 +151,8 @@ void MuseScore::closeEvent(QCloseEvent* ev)
             dynamicsPalette->close();
       if (layoutBreakPalette)
             layoutBreakPalette->close();
+      if (preferenceDialog)
+            preferenceDialog->close();
       }
 
 //---------------------------------------------------------
