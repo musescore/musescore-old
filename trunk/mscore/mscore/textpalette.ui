@@ -247,6 +247,28 @@
        </widget>
       </item>
       <item>
+       <widget class="QToolButton" name="typefaceUnderline" >
+        <property name="text" >
+         <string>...</string>
+        </property>
+        <property name="icon" >
+         <iconset resource="mscore.qrc" >:/data/text_under.svg</iconset>
+        </property>
+        <property name="iconSize" >
+         <size>
+          <width>24</width>
+          <height>24</height>
+         </size>
+        </property>
+        <property name="checkable" >
+         <bool>true</bool>
+        </property>
+        <property name="autoRaise" >
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
        <widget class="QLabel" name="label" >
         <property name="sizePolicy" >
          <sizepolicy>

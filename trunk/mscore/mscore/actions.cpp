@@ -942,31 +942,31 @@ Shortcut MuseScore::sc[] = {
          QT_TR_NOOP("Pad"),
          Qt::Key_F10,
          Qt::ApplicationShortcut,
-         QT_TR_NOOP(""),
-         QT_TR_NOOP("")
+         QT_TR_NOOP("Pad"),
+         QT_TR_NOOP("Pad")
          ),
       Shortcut(
          "toggle-playpanel",
          QT_TR_NOOP("Play Panel"),
          Qt::Key_F11,
          Qt::ApplicationShortcut,
-         QT_TR_NOOP(""),
-         QT_TR_NOOP("")
+         QT_TR_NOOP("Play Panel"),
+         QT_TR_NOOP("Play Panel")
          ),
       Shortcut(
          "toggle-navigator",
          QT_TR_NOOP("Navigator"),
          Qt::Key_F12,
          Qt::ApplicationShortcut,
-         QT_TR_NOOP(""),
-         QT_TR_NOOP("")
+         QT_TR_NOOP("Navigator"),
+         QT_TR_NOOP("Navigator")
          ),
       Shortcut(
          "toggle-transport",
          QT_TR_NOOP("Transport Toolbar"),
          0,
          Qt::WindowShortcut,
-         QT_TR_NOOP(""),
+         QT_TR_NOOP("Transport"),
          QT_TR_NOOP("")
          ),
       Shortcut(
@@ -974,7 +974,7 @@ Shortcut MuseScore::sc[] = {
          QT_TR_NOOP("Note Input Toolbar"),
          0,
          Qt::WindowShortcut,
-         QT_TR_NOOP(""),
+         QT_TR_NOOP("Note Input"),
          QT_TR_NOOP("")
          ),
       Shortcut(
@@ -982,8 +982,8 @@ Shortcut MuseScore::sc[] = {
          QT_TR_NOOP("Status Bar"),
          0,
          Qt::WindowShortcut,
-         QT_TR_NOOP(""),
-         QT_TR_NOOP("")
+         QT_TR_NOOP("Status Bar"),
+         QT_TR_NOOP("Status Bar")
          ),
 
       Shortcut(
@@ -1034,7 +1034,7 @@ Shortcut MuseScore::sc[] = {
       Shortcut(
          "mag",
          QT_TR_NOOP("Mag"),
-         Qt::CTRL + Qt::Key_Q,
+         0,
          Qt::WindowShortcut,
          QT_TR_NOOP("Mag"),
          QT_TR_NOOP("Zoom Canvas"),

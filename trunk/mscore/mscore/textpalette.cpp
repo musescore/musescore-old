@@ -149,6 +149,7 @@ TextPalette::TextPalette(QWidget* parent)
       connect(typefaceSize, SIGNAL(valueChanged(double)), SLOT(sizeChanged(double)));
       connect(typefaceBold, SIGNAL(clicked(bool)), SLOT(boldClicked(bool)));
       connect(typefaceItalic, SIGNAL(clicked(bool)), SLOT(italicClicked(bool)));
+      connect(typefaceUnderline, SIGNAL(clicked(bool)), SLOT(underlineClicked(bool)));
       connect(leftAlign, SIGNAL(clicked()), SLOT(setLeftAlign()));
       connect(rightAlign, SIGNAL(clicked()), SLOT(setRightAlign()));
       connect(centerAlign, SIGNAL(clicked()), SLOT(setHCenterAlign()));
@@ -173,6 +174,7 @@ void TextPalette::sizeChanged(double value)
       {
       format.setFontPointSize(value);
       _textElement->setCharFormat(format);
+      mscore->activateWindow();
       }
 
 //---------------------------------------------------------
@@ -183,6 +185,18 @@ void TextPalette::boldClicked(bool val)
       {
       format.setFontWeight(val ? QFont::Bold : QFont::Normal);
       _textElement->setCharFormat(format);
+      mscore->activateWindow();
+      }
+
+//---------------------------------------------------------
+//   underlineClicked
+//---------------------------------------------------------
+
+void TextPalette::underlineClicked(bool val)
+      {
+      format.setFontUnderline(val);
+      _textElement->setCharFormat(format);
+      mscore->activateWindow();
       }
 
 //---------------------------------------------------------
@@ -193,6 +207,7 @@ void TextPalette::italicClicked(bool val)
       {
       format.setFontItalic(val);
       _textElement->setCharFormat(format);
+      mscore->activateWindow();
       }
 
 //---------------------------------------------------------
@@ -207,6 +222,7 @@ void TextPalette::setCharFormat(const QTextCharFormat& cf)
       typefaceSize->setValue(f.pointSizeF());
       typefaceItalic->setChecked(cf.fontItalic());
       typefaceBold->setChecked(cf.fontWeight() == QFont::Bold);
+      typefaceUnderline->setChecked(cf.fontUnderline());
       }
 
 //---------------------------------------------------------
@@ -232,6 +248,7 @@ void TextPalette::setHCenterAlign()
       {
       bformat.setAlignment(Qt::AlignHCenter);
       _textElement->setBlockFormat(bformat);
+      mscore->activateWindow();
       }
 
 //---------------------------------------------------------
@@ -242,6 +259,7 @@ void TextPalette::setLeftAlign()
       {
       bformat.setAlignment(Qt::AlignLeft);
       _textElement->setBlockFormat(bformat);
+      mscore->activateWindow();
       }
 
 //---------------------------------------------------------
@@ -252,5 +270,6 @@ void TextPalette::setRightAlign()
       {
       bformat.setAlignment(Qt::AlignRight);
       _textElement->setBlockFormat(bformat);
+      mscore->activateWindow();
       }
 

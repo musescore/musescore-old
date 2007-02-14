@@ -781,7 +781,7 @@ fluid_voice_write(fluid_voice_t* voice,
        * Process the whole buffer in one run. */
       dsp_start = 0;
       dsp_end = FLUID_BUFSIZE;
-#include "dsp_core.cpp"
+#include "dsp.h"
 
     } else {
       /* The loop occurs during the current buffer length. Note, that
@@ -797,7 +797,7 @@ fluid_voice_write(fluid_voice_t* voice,
 
 	dsp_start = start;
 	dsp_end = end_in_buffer;
-#include "dsp_core.cpp"
+#include "dsp.h"
 
 	/* loop */
 	fluid_phase_sub_int(dsp_phase, voice->loopend - voice->loopstart);
@@ -807,7 +807,7 @@ fluid_voice_write(fluid_voice_t* voice,
       voice->has_looped=1;
       dsp_start = start;
       dsp_end = FLUID_BUFSIZE;
-#include "dsp_core.cpp"
+#include "dsp.h"
     }
 
   } else {
@@ -819,13 +819,13 @@ fluid_voice_write(fluid_voice_t* voice,
     if (end_in_buffer >= FLUID_BUFSIZE) {
       /* Run the whole buffer at once */
       dsp_end = FLUID_BUFSIZE;
-#include "dsp_core.cpp"
+#include "dsp.h"
     } else {
       /* The sample ends in the middle of the buffer length.
        * Process that far, and turn the voice off.
        */
       dsp_end = end_in_buffer;
-#include "dsp_core.cpp"
+#include "dsp.h"
       fluid_profile(FLUID_PROF_VOICE_RELEASE, voice->ref);
       fluid_voice_off(voice);
       goto post_process;

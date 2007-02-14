@@ -1,6 +1,7 @@
 TRANSLATIONS = \
       share/locale/mscore_de.ts \
-      share/locale/mscore_ru.ts
+      share/locale/mscore_ru.ts \
+      share/locale/mscore_it.ts
 
 SOURCES =                         \
      ./mscore/trill.cpp           \

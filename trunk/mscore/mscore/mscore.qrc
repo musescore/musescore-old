@@ -1,12 +1,15 @@
 <!DOCTYPE RCC>
 <RCC version="1.0">
    <qresource>
+      <file>data/paper1.png</file>
       <file>data/paper2.png</file>
+      <file>data/paper3.png</file>
       <file>data/text_bold.svg</file>
       <file>data/text_italic.svg</file>
       <file>data/text_left.svg</file>
       <file>data/text_right.svg</file>
       <file>data/text_center.svg</file>
+      <file>data/text_under.svg</file>
       <file>data/exit.svg</file>
       <file>data/hotkeys.svg</file>
       <file>data/start.svg</file>
@@ -34,6 +37,10 @@
 
    <qresource lang="ru">
       <file alias="mscore.qm">../share/locale/mscore_ru.qm</file>
+   </qresource>
+
+   <qresource lang="it">
+      <file alias="mscore.qm">../share/locale/mscore_it.qm</file>
    </qresource>
 
 

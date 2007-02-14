@@ -41,6 +41,7 @@ class TextPalette : public QWidget, public Ui::TextPaletteBase {
       void sizeChanged(double value);
       void boldClicked(bool);
       void italicClicked(bool);
+      void underlineClicked(bool);
       void setLeftAlign();
       void setRightAlign();
       void setHCenterAlign();

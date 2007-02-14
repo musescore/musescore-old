@@ -86,7 +86,7 @@ Preferences::Preferences()
       cursorBlink        = false;
       fgUseColor         = false;
       bgUseColor         = true;
-      fgWallpaper        = ":/data/paper2.png";
+      fgWallpaper        = ":/data/paper3.png";
       enableMidiInput    = true;
       playNotes          = true;
       bgColor.setRgb(0x19, 0x6c, 0xb9);
