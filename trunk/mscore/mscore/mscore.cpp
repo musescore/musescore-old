@@ -1589,12 +1589,15 @@ int main(int argc, char* argv[])
       setDefaultStyle();
       QApplication app(argc, argv);
 
-#ifndef MINGW32
+#ifdef __MINGW32__
+      appDpiX = 75;
+      appDpiY = 75;
+#else
       appDpiX = QX11Info::appDpiX();
       appDpiY = QX11Info::appDpiY();
 #endif
       DPI  = appDpiX;     // drawing resolution
-      DPMM = DPI / INCH;      // dots/mm
+      DPMM = DPI / INCH;  // dots/mm
 
       _spatium = 20.0 / 72.0 * DPI / 4.0;
 
@@ -1654,8 +1657,6 @@ int main(int argc, char* argv[])
             app.processEvents();
             }
 
-//      QApplication::setFont(QFont(QString("helvetica"), 11, QFont::Normal));
-
       if (debugMode) {
             if (haveMidi)
                   printf("midi devices found\n");
@@ -1686,7 +1687,7 @@ int main(int argc, char* argv[])
       //
       //  load internal fonts
       //
-      int fontId = QFontDatabase::addApplicationFont(":/fonts/emmentaler_20.otf");
+      int fontId = QFontDatabase::addApplicationFont(":/fonts/mscore_20.otf");
       if (fontId == -1) {
             fprintf(stderr, "Mscore: fatal error: cannot load internal font\n");
             exit(-1);
@@ -1708,7 +1709,9 @@ int main(int argc, char* argv[])
       // avoid font problems by overriding the environment
       //    fall back to "C" locale
       //
+#ifndef __MINGW32__
       setenv("LANG", "mops", 1);
+#endif
       QLocale::setDefault(QLocale(QLocale::C));
 
       //-----------------------------------------
@@ -1718,7 +1721,7 @@ int main(int argc, char* argv[])
 
 #if 1
       QFont f;
-      f.setFamily("Emmentaler");
+      f.setFamily("MScore");
       f.setPixelSize(20);
       QFontInfo fi(f);
 
@@ -1731,11 +1734,11 @@ int main(int argc, char* argv[])
             //
             // produce some debugging output:
             //
-            printf("Emmentaler not found (<%s><%d>)\n", fi.family().toLatin1().data(), fi.style());
+            printf("no exact match for font Mscore found (<%s><%d>)\n", fi.family().toLatin1().data(), fi.style());
             QFontDatabase fdb;
             QStringList families = fdb.families();
             foreach (QString family, families) {
-                  if (family == "Emmentaler") {
+                  if (family == "MScore") {
                         printf("  found <%s>\n", family.toLatin1().data());
                         QStringList styles = fdb.styles(family);
                         foreach (QString style, styles) {

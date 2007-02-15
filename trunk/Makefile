@@ -64,6 +64,22 @@ debug:
          fi; \
          echo "debug build is configured; now type make"
 
+win32:
+	if test ! -d win32build;                           \
+         then                                       \
+            echo "+creating build directory";       \
+            mkdir win32build;                            \
+            echo "+entering build directory";       \
+            cd win32build;                               \
+            echo "+calling cmake" ;                 \
+            cmake -DCMAKE_BUILD_TYPE=RLEASE -DCROSS_MINGW32=ON ../mscore;                        \
+         else                                       \
+            echo "build directory does alread exist";       \
+            exit;                               \
+         fi; \
+         echo "win32 build is now configured;"
+
+
 #
 # clean out of source build
 #

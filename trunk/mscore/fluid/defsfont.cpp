@@ -24,7 +24,7 @@
 
 #include "defsfont.h"
 /* Todo: Get rid of that 'include' */
-#include "sys.h"
+// #include "sys.h"
 
 /***************************************************************
  *
@@ -243,7 +243,7 @@ int delete_fluid_defsfont(fluid_defsfont_t* sfont)
   }
 
   if (sfont->sampledata != 0) {
-    fluid_munlock(sfont->sampledata, sfont->samplesize);
+//    fluid_munlock(sfont->sampledata, sfont->samplesize);
     FLUID_FREE(sfont->sampledata);
   }
 
@@ -417,9 +417,9 @@ fluid_defsfont_load_sampledata(fluid_defsfont_t* sfont)
       /* Lock the memory to disable paging. It's okay if this fails. It
          probably means that the user doesn't have to required permission.
       */
-      if (fluid_mlock(sfont->sampledata, sfont->samplesize) != 0) {
-            FLUID_LOG(FLUID_WARN, "Failed to pin the sample data to RAM; swapping is possible.");
-            }
+//      if (fluid_mlock(sfont->sampledata, sfont->samplesize) != 0) {
+//            FLUID_LOG(FLUID_WARN, "Failed to pin the sample data to RAM; swapping is possible.");
+//            }
 
       /* I'm not sure this endian test is waterproof...  */
       endian = 0x0100;

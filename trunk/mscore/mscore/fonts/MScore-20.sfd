@@ -1,23 +1,23 @@
 SplineFontDB: 1.0
-FontName: Emmentaler-20
-FullName: Emmentaler 20
-FamilyName: Emmentaler
+FontName: MScore-20
+FullName: Emmentaler 20 from Lilypond
+FamilyName: MScore
 Weight: 20
 Copyright: This font is distributed under the GNU General Public License. As a special exception, if you create a document which uses this font, and embed this font or unaltered portions of this font into the document, this font does not by itself cause the resulting document to be covered by the GNU General Public License.
 Version: @TOPLEVEL_VERSION@
 ItalicAngle: 0
-UnderlinePosition: -99.6094
-UnderlineWidth: 49.8047
+UnderlinePosition: -99
+UnderlineWidth: 49
 Ascent: 600
 Descent: 400
-XUID: [1021 437 116440368 13137597]
-UniqueID: 4034444
+XUID: [1021 437 116440368 12789433]
+UniqueID: 4131153
 FSType: 0
 OS2Version: 2
 OS2_WeightWidthSlopeOnly: 0
 OS2_UseTypoMetrics: 1
 CreationTime: 1122244955
-ModificationTime: 1169230370
+ModificationTime: 1171539747
 PfmFamily: 17
 TTFWeight: 400
 TTFWidth: 5
@@ -50,7 +50,7 @@ OS2StrikeYPos: 258
 OS2Vendor: 'PfEd'
 ScriptLang: 1
  1 latn 1 dflt 
-LangName: 1033 "" "" "" "FontForge 1.0 : Emmentaler 20 : 25-7-2005" 
+LangName: 1033 
 Encoding: UnicodeBmp
 UnicodeInterp: none
 NameList: Adobe Glyph List

@@ -620,6 +620,7 @@ bool SlurTie::readProperties(QDomNode node)
             SlurSegment* segment = new SlurSegment(this);
             segment->read(node);
             segment->setStaff(staff());
+            segment->setParent(parent());
             segments.push_back(segment);
             }
       else if (tag == "up")
@@ -872,8 +873,9 @@ void Slur::layout()
       QPointF p1 = slurPos(_tick1, _staff1, _voice1, s1);
       QPointF p2 = slurPos(_tick2, _staff2, _voice2, s2);
 
-      iSystem is = _score->systems()->begin();
-      while (is != _score->systems()->end()) {
+      SystemList* sl = _score->systems();
+      iSystem is = sl->begin();
+      while (is != sl->end()) {
             if (*is == s1)
                   break;
             ++is;
@@ -886,32 +888,31 @@ void Slur::layout()
       //---------------------------------------------------------
 
       unsigned nsegs = 1;
-      for (iSystem iis = is; (iis != _score->systems()->end()) && (*iis != s2); ++iis)
+      for (iSystem iis = is; iis != sl->end(); ++iis) {
+            if (*iis == s2)
+                  break;
             ++nsegs;
+            }
 
       unsigned onsegs = segments.size();
-      ElementList segments1 = segments;
-      for (iElement i = segments1.begin(); i != segments1.end(); ++i) {
-            Element* el = *i;
-            Element* parent = el->parent();
-// printf("Slur layout %d: remove segment %p from parent %p\n", segments.size(), el, parent);
-
-            if (parent)           // if layout was never called, parent is zero
-                  parent->remove(el);
-            }
-      segments.clear();
-      if (nsegs != onsegs) {
-// printf("Slur layout: create new segment list\n");
-            for (iElement i = segments1.begin(); i != segments1.end(); ++i)
-                  delete *i;
-            segments1.clear();
-            for (unsigned i = 0; i < nsegs; ++i) {
+      if (nsegs > onsegs) {
+            for (unsigned i = onsegs; i < nsegs; ++i) {
                   SlurSegment* s = new SlurSegment(this);
-                  segments1.push_back(s);
+                  segments.push_back(s);
+                  s->setParent(parent());
+                  parent()->add(s);
                   }
             }
+      else if (nsegs < onsegs) {
+            for (unsigned i = nsegs; i < onsegs; ++i) {
+                  SlurSegment* s = (SlurSegment*)(segments.takeLast());
+                  s->parent()->remove(s);
+                  }
+            }
+printf("nsegs %d  old %d\n", nsegs, onsegs);
+
       qreal bow = up ? 2*-_spatium : 2*_spatium;
-      iElement ibss = segments1.begin();
+      iElement ibss = segments.begin();
       for (int i = 0; is != _score->systems()->end(); ++i, ++is, ++ibss) {
             System* system = *is;
             QPointF sp(system->apos());
@@ -924,12 +925,20 @@ void Slur::layout()
                   }
             // case 2: start segment
             else if (i == 0) {
+printf("start segment\n");
                   System* system = *is;
+                  Measure* m = system->measures()->back();
                   qreal x       = system->apos().x() + system->bbox().width();
+                  if (m != bs->parent()) {
+                        bs->parent()->remove(bs);
+                        bs->setParent(m);
+                        m->add(bs);
+                        }
                   bs->layout(p1, QPointF(x, p1.y()), bow);
                   }
             // case 3: middle segment
             else if (i != 0 && *is != s2) {
+printf("mid segment\n");
                   System* system = *is;
                   Measure* m = system->measures()->front();
                   bs->setParent(m);
@@ -940,15 +949,13 @@ void Slur::layout()
                   }
             // case 4: end segment
             else {
+printf("end segment\n");
                   System* system = *is;
                   Measure* m = system->measures()->front();
                   bs->setParent(m);
                   qreal x = system->apos().x();
                   bs->layout(QPointF(x, p2.y()), p2, bow);
                   }
-// printf("Slur layout: add segment %p to parent %p\n", bs, bs->parent());
-            bs->parent()->add(bs);
-            segments.push_back(bs);
             if (*is == s2)
                   break;
             }

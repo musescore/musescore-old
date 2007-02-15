@@ -175,3 +175,4 @@ target_link_libraries(mscore
       )
 
 install_targets ( /bin mscore )
+

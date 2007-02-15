@@ -3,6 +3,7 @@ Release 0.5 (svn)
         now implemented
       - the default application font is not hard coded anymore and can
         be changed by external utilities (qtconfig)
+      - bracket editing with keyboard
 
 Release 0.4:
       - configurable keyboard short cuts

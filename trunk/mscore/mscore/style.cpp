@@ -43,9 +43,9 @@ static const QString ff("Times New Roman");
 #define MM(x) ((x)/INCH)
 
 static const TextStyle defaultTextStyles[] = {
-      TextStyle(QString("Symbols1"), QString("Emmentaler"), 20, false, false, false,
+      TextStyle(QString("Symbols1"), QString("MScore"), 20, false, false, false,
          ALIGN_LEFT,    ANCHOR_TICK, 0, 0, OFFSET_ABS),
-      TextStyle(QString("Symbols3"), QString("Emmentaler"), 14, false, false, false,
+      TextStyle(QString("Symbols3"), QString("MScore"), 14, false, false, false,
          ALIGN_LEFT,    ANCHOR_TICK, 0, 0, OFFSET_SPATIUM),
       TextStyle(QString("Title"), ff, 24, false, false, false,
          ALIGN_HCENTER | ALIGN_TOP, ANCHOR_PAGE, 0, MM(5), OFFSET_ABS),

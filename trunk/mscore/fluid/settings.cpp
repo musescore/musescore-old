@@ -19,7 +19,7 @@
  */
 
 #include "priv.h"
-#include "sys.h"
+// #include "sys.h"
 #include "hash.h"
 #include "synth.h"
 // #include "cmd.h"

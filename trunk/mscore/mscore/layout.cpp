@@ -117,7 +117,7 @@ int Score::clefOffset(int tick, int staffIdx) const
 
 void ScoreLayout::doLayout()
       {
-      ::_spatium = _spatium;
+      ::_spatium = _spatium;        // ??
       _needLayout = false;
 
       Measure* im = (Measure*)(_measures.first());
@@ -337,7 +337,19 @@ bool ScoreLayout::layoutPage(Page* page, Measure*& im, iSystem& is)
 
       int systemNo = 0;
       while (im) {
-            System* system = layoutSystem(im, is, x, y, w);
+            // get next system:
+            System* system;
+            if (is == _systems->end()) {
+                  system = new System(_score);
+                  _systems->push_back(system);
+                  is = _systems->end();
+                  }
+            else {
+                  system = *is++;
+                  system->clear();   // remove measures from system
+                  }
+
+            layoutSystem(im, system, x, y, w);
             system->setParent(page);
 
             qreal h = system->bbox().height() + point(::style->systemDistance);
@@ -358,11 +370,12 @@ bool ScoreLayout::layoutPage(Page* page, Measure*& im, iSystem& is)
                   systemDistance = point(style->systemDistance);
             system->move(0.0, systemDistance);
             y += h;
-
-            if (is != systems()->end())
-                  ++is;
             if (system->pageBreak())
                   break;
+            }
+
+      if (is != _systems->end()) {
+            // TODO: remove systems
             }
 
       //-----------------------------------------------------------------------
@@ -392,21 +405,8 @@ bool ScoreLayout::layoutPage(Page* page, Measure*& im, iSystem& is)
 //   layoutSystem
 //---------------------------------------------------------
 
-System* ScoreLayout::layoutSystem(Measure*& im, iSystem& is, qreal x, qreal y, qreal w)
+System* ScoreLayout::layoutSystem(Measure*& im, System* system, qreal x, qreal y, qreal w)
       {
-      // get next system:
-      System* system;
-      if (is == _systems->end()) {
-            system = new System(_score);
-            _systems->push_back(system);
-            is = _systems->end();
-            --is;
-            }
-      else {
-            system = *is;
-            system->clear();   // remove measures from system
-            }
-
       for (int i = system->staves()->size(); i < _score->nstaves(); ++i)
             system->insertStaff(_score->staff(i), i);
 
@@ -493,8 +493,6 @@ System* ScoreLayout::layoutSystem(Measure*& im, iSystem& is, qreal x, qreal y, q
       system->layout2();      // layout staff distances
 
       im = itt;
-      if (is != systems()->end())
-            ++is;
       return system;
       }
 

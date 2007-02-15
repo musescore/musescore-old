@@ -1,3 +1,9 @@
+15.2.7 (ws)
+      - fix: could not removed edited slur
+      - enable bracket editing with keyboard
+      - fix crash when inserting new instruments
+      - renamed embedded emmentaler-20 font to mscore-20 to avoid conflicts
+        with installed emmentaler fonts
 14.2.7 (ws)
       - in textpalette set focus back to mscore after clicking attribute
         buttons

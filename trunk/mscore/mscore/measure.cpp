@@ -309,8 +309,8 @@ void Measure::remove(Segment* el)
             _last->setNext(0);
             return;
             }
-printf("remove Segment %p  _first %p _last %p prev %p next %p\n",
-   this, _first, _last, el->prev(), el->next());
+// printf("remove Segment %p  _first %p _last %p prev %p next %p\n",
+//   this, _first, _last, el->prev(), el->next());
 
       el->prev()->setNext(el->next());
       el->next()->setPrev(el->prev());
@@ -624,6 +624,7 @@ void Measure::read(QDomNode node, int idx)
                   Slur* slur = new Slur(score());
                   slur->setTick(curTickPos);
                   slur->setStaff(staff);
+                  slur->setParent(this);
                   slur->read(_score, node);
                   add(slur);
                   }
@@ -1341,10 +1342,14 @@ void Measure::remove(Element* el)
                   {
                   Slur* s = (Slur*)el;
                   ElementList* sl = s->elements();
-                  for (iElement i = sl->begin(); i != sl->end(); ++i)
+                  for (iElement i = sl->begin(); i != sl->end(); ++i) {
                         remove(*i);
+                        }
+                  if (!_sel.remove(s))
+                        printf("Measure(%p)::remove(%s,%p) not found\n",
+                           this, el->name(), el);
                   }
-                  // fall through
+                  break;
 
             case VOLTA:
                   _ending = 0;
@@ -2125,7 +2130,8 @@ void Measure::cmdAddStaves(int sStaff, int eStaff)
             Rest* rest = new Rest(score(), tick(), tickLen);
             Staff* staff = _score->staff(i);
             rest->setStaff(staff);
-            rest->setParent(this);
+            Segment* s = findSegment(Segment::SegChordRest, tick());
+            rest->setParent(s);
             _score->undoOp(UndoOp::AddElement, rest);
             }
       }

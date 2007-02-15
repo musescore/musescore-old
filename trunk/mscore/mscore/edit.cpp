@@ -1000,8 +1000,14 @@ void Score::cmdDeleteSelection()
             // deleteItem modifies sel->elements() list,
             // so we need a local copy:
             ElementList l = *(sel->elements());
-            for (iElement i = l.begin(); i != l.end(); ++i)
-                  deleteItem(*i);
+            for (iElement i = l.begin(); i != l.end(); ++i) {
+                  Element* e = *i;
+                  e->setSelected(false);  // in case item is not deleted
+                  if (e->type() == SLUR_SEGMENT) {
+                        e = ((SlurSegment*)e)->slurTie();
+                        }
+                  deleteItem(e);
+                  }
             sel->elements()->clear();
             }
       sel->clear();
