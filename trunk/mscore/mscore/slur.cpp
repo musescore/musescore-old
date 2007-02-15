@@ -909,7 +909,7 @@ void Slur::layout()
                   s->parent()->remove(s);
                   }
             }
-printf("nsegs %d  old %d\n", nsegs, onsegs);
+// printf("nsegs %d  old %d\n", nsegs, onsegs);
 
       qreal bow = up ? 2*-_spatium : 2*_spatium;
       iElement ibss = segments.begin();
@@ -925,7 +925,7 @@ printf("nsegs %d  old %d\n", nsegs, onsegs);
                   }
             // case 2: start segment
             else if (i == 0) {
-printf("start segment\n");
+// printf("start segment\n");
                   System* system = *is;
                   Measure* m = system->measures()->back();
                   qreal x       = system->apos().x() + system->bbox().width();
@@ -938,7 +938,7 @@ printf("start segment\n");
                   }
             // case 3: middle segment
             else if (i != 0 && *is != s2) {
-printf("mid segment\n");
+// printf("mid segment\n");
                   System* system = *is;
                   Measure* m = system->measures()->front();
                   bs->setParent(m);
@@ -949,7 +949,7 @@ printf("mid segment\n");
                   }
             // case 4: end segment
             else {
-printf("end segment\n");
+// printf("end segment\n");
                   System* system = *is;
                   Measure* m = system->measures()->front();
                   bs->setParent(m);

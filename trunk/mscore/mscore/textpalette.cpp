@@ -150,6 +150,7 @@ TextPalette::TextPalette(QWidget* parent)
       connect(typefaceBold, SIGNAL(clicked(bool)), SLOT(boldClicked(bool)));
       connect(typefaceItalic, SIGNAL(clicked(bool)), SLOT(italicClicked(bool)));
       connect(typefaceUnderline, SIGNAL(clicked(bool)), SLOT(underlineClicked(bool)));
+      connect(typefaceFamily, SIGNAL(currentFontChanged(const QFont&)), SLOT(fontChanged(const QFont&)));
       connect(leftAlign, SIGNAL(clicked()), SLOT(setLeftAlign()));
       connect(rightAlign, SIGNAL(clicked()), SLOT(setRightAlign()));
       connect(centerAlign, SIGNAL(clicked()), SLOT(setHCenterAlign()));
@@ -195,6 +196,17 @@ void TextPalette::boldClicked(bool val)
 void TextPalette::underlineClicked(bool val)
       {
       format.setFontUnderline(val);
+      _textElement->setCharFormat(format);
+      mscore->activateWindow();
+      }
+
+//---------------------------------------------------------
+//   fontChanged
+//---------------------------------------------------------
+
+void TextPalette::fontChanged(const QFont& f)
+      {
+      format.setFontFamily(f.family());
       _textElement->setCharFormat(format);
       mscore->activateWindow();
       }
