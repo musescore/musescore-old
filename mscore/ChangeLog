@@ -1,4 +1,5 @@
 15.2.7 (ws)
+      - enable font family selection in text edit
       - fix: could not removed edited slur
       - enable bracket editing with keyboard
       - fix crash when inserting new instruments
