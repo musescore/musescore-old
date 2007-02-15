@@ -19,7 +19,7 @@
  */
 
 #include "ramsfont.h"
-#include "sys.h"
+// #include "sys.h"
 #include "synth.h"
 
 /* thenumber of samples before the start and after the end */

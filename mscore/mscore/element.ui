@@ -77,11 +77,18 @@
           </property>
           <property name="sizeHint" >
            <size>
-            <width>131</width>
+            <width>40</width>
             <height>20</height>
            </size>
           </property>
          </spacer>
+        </item>
+        <item>
+         <widget class="QLabel" name="address" >
+          <property name="text" >
+           <string>0</string>
+          </property>
+         </widget>
         </item>
        </layout>
       </item>

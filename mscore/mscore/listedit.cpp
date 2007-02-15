@@ -220,9 +220,7 @@ void PageListEditor::updateList()
                   new ElementItem(pi, *i);
                   }
 
-            SystemList* sl = page->systems();
-            for (iSystem s = sl->begin(); s != sl->end(); ++s) {
-                  System* system = *s;
+            foreach(System* system, *page->systems()) {
                   ElementItem* si = new ElementItem(pi, system);
 
                   if (system->getBarLine())
@@ -230,7 +228,7 @@ void PageListEditor::updateList()
 
                   // SysStaffList* staffList = system->staves();
 
-                  MeasureList* ml = (*s)->measures();
+                  MeasureList* ml = system->measures();
                   for (iMeasure im = ml->begin(); im != ml->end(); ++im) {
                         Measure* measure = *im;
                         ElementItem* mi = new ElementItem(si, measure);
@@ -1118,6 +1116,8 @@ ShowElementBase::ShowElementBase()
 void ShowElementBase::setElement(Element* e)
       {
       el = e;
+
+      eb.address->setText(QString("%1").arg((unsigned int)e, 0, 16));
 
       eb.subtype->setValue(e->subtype());
       eb.selected->setChecked(e->selected());

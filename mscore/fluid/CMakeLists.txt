@@ -21,7 +21,6 @@
 add_library (fluid
   synth.cpp
   settings.cpp
-  sys.cpp
   voice.cpp
   chan.cpp
   defsfont.cpp
@@ -34,9 +33,10 @@ add_library (fluid
   mod.cpp
   rev.cpp
   tuning.cpp
-  midi.cpp
+  sys.cpp
   )
-##  event.cpp
+##  sys.cpp
+##  midi.cpp
 
 set_target_properties( fluid
    PROPERTIES COMPILE_FLAGS "-include ${PROJECT_BINARY_DIR}/mscore/all.h"

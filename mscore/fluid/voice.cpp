@@ -24,20 +24,8 @@
 #include "chan.h"
 #include "conv.h"
 #include "synth.h"
-#include "sys.h"
+// #include "sys.h"
 #include "sfont.h"
-
-#ifndef WITH_FLOAT
-#ifdef ENABLE_SSE
-#error "Can't use SSE extensions with other than float type!"
-#endif
-#endif
-
-#ifdef ENABLE_SSE
-#include "fluid_sse.h"
-float interp_coeff_sse_mem[FLUID_INTERP_MAX*4+4];
-sse_t* interp_coeff_sse;
-#endif
 
 /* used for filter turn off optimization - if filter cutoff is above the
    specified value and filter q is below the other value, turn filter off */

@@ -64,7 +64,7 @@ Seq* seq;
 Seq::Seq()
       {
       running  = false;
-#ifndef MINGW32
+#ifndef __MINGW32__
       endTick  = 0;
       state    = STOP;
       synti    = new ISynth();

@@ -34,10 +34,9 @@
 Bracket::Bracket(Score* s)
    : Element(s)
       {
-      path  = 0;
-      h2    = 0.0;
-      mode  = 0;
-      _span = 1;
+      h2       = 0.0;
+      editMode = false;
+      _span    = 1;
       }
 
 //---------------------------------------------------------
@@ -70,14 +69,12 @@ double Bracket::width() const
 
 void Bracket::layout()
       {
+      path = QPainterPath();
       if (h2 == 0.0)
             return;
-      if (path)
-            delete path;
-      path = new QPainterPath();
 
       qreal h = h2;
-      if (mode == 2)
+      if (editMode)
             h = h2 + yoff * .5;
 
       if (subtype() == BRACKET_AKKOLADE) {
@@ -87,11 +84,11 @@ void Bracket::layout()
             const double X3 = -1.234 * w;
             const double X4 =  1.734 * w;
 
-            path->moveTo(0, h);
-            path->cubicTo(X1,  h + h * .3359, X2,  h + h * .5089, w, 2 * h);
-            path->cubicTo(X3,  h + h * .5025, X4,  h + h * .2413, 0, h);
-            path->cubicTo(X1,  h - h * .3359, X2,  h - h * .5089, w, 0);
-            path->cubicTo(X3,  h - h * .5025, X4,  h - h * .2413, 0, h);
+            path.moveTo(0, h);
+            path.cubicTo(X1,  h + h * .3359, X2,  h + h * .5089, w, 2 * h);
+            path.cubicTo(X3,  h + h * .5025, X4,  h + h * .2413, 0, h);
+            path.cubicTo(X1,  h - h * .3359, X2,  h - h * .5089, w, 0);
+            path.cubicTo(X3,  h - h * .5025, X4,  h - h * .2413, 0, h);
             }
       else if (subtype() == BRACKET_NORMAL) {
             qreal w = point(style->bracketWidth);
@@ -107,9 +104,9 @@ void Bracket::layout()
             qreal o = _spatium * .27;
             qreal slw = point(style->staffLineWidth);
 
-            path->addText(QPointF(0.0, -o), f, QString(up));
-            path->addText(QPointF(0.0, h * 2.0 + o), f, QString(down));
-            path->addRect(0.0, -slw * .5, w, h * 2.0 + slw);
+            path.addText(QPointF(0.0, -o), f, QString(up));
+            path.addText(QPointF(0.0, h * 2.0 + o), f, QString(down));
+            path.addRect(0.0, -slw * .5, w, h * 2.0 + slw);
             }
       }
 
@@ -119,23 +116,16 @@ void Bracket::layout()
 
 void Bracket::draw1(Painter& p)
       {
-      if (path == 0)
-            return;
-      p.setBrush(selected() ? preferences.selectColor[0] : Qt::black);
-      p.drawPath(*path);
+      p.setBrush(p.pen().color());
+      p.drawPath(path);
 
-      if (selected() && mode) {
+      if (selected() && editMode) {
             qreal lw = 2.0/p.matrix().m11();
             QPen pen(Qt::blue);
             pen.setWidthF(lw);
             p.setPen(pen);
-            for (int i = 0; i < 2; ++i) {
-                  if (i == (mode-1))
-                        p.setBrush(Qt::blue);
-                  else
-                        p.setBrush(Qt::NoBrush);
-                  p.drawRect(grip[i]);
-                  }
+            p.setBrush(Qt::blue);
+            p.drawRect(grip);
             }
       }
 
@@ -187,7 +177,8 @@ void Bracket::read(QDomNode node)
 
 bool Bracket::startEdit(QMatrix& matrix, const QPointF&)
       {
-      mode = 2;
+      yoff = 0.0;
+      editMode = true;
       updateGrips(matrix);
       return true;
       }
@@ -200,10 +191,9 @@ void Bracket::updateGrips(QMatrix& matrix)
       {
       qreal w = 8.0 / matrix.m11();
       qreal h = 8.0 / matrix.m22();
-      QRectF r(-w/2, -h/2, w, h);
+      QRectF r(-w*.5, -h*.5, w, h);
 
-      grip[0] = r.translated(QPointF(0.0, 0.0));
-      grip[1] = r.translated(QPointF(0.0, h2 * 2));
+      grip = r.translated(QPointF(0.0, h2 * 2));
       }
 
 //---------------------------------------------------------
@@ -212,7 +202,7 @@ void Bracket::updateGrips(QMatrix& matrix)
 
 void Bracket::endEdit()
       {
-      mode = 0;
+      editMode = false;
       }
 
 //---------------------------------------------------------
@@ -221,13 +211,7 @@ void Bracket::endEdit()
 
 bool Bracket::startEditDrag(const QPointF& p)
       {
-      yoff = 0.0;
-      mode = 0;
-      if (grip[0].contains(p))
-            mode = 1;
-      else if (grip[1].contains(p))
-            mode = 2;
-      if (mode)
+      if (grip.contains(p))
             return true;
       return false;
       }
@@ -238,11 +222,9 @@ bool Bracket::startEditDrag(const QPointF& p)
 
 QRectF Bracket::bbox() const
       {
-      QRectF b = path->boundingRect();
-      if (mode) {
-            b |= grip[0];
-            b |= grip[1];
-            }
+      QRectF b = path.boundingRect();
+      if (editMode)
+            b |= grip;
       return b;
       }
 
@@ -264,12 +246,11 @@ QPointF Bracket::dragOff() const
 
 bool Bracket::editDrag(QMatrix&, QPointF*, const QPointF& delta)
       {
-      if (!mode)
+      if (!editMode)
             return false;
-      int n = mode - 1;
       qreal dy = delta.y();
 
-      grip[n].translate(QPointF(0.0, dy));
+      grip.translate(QPointF(0.0, dy));
       yoff += dy;
       layout();
       return true;
@@ -279,65 +260,28 @@ bool Bracket::editDrag(QMatrix&, QPointF*, const QPointF& delta)
 //   edit
 //---------------------------------------------------------
 
-bool Bracket::edit(QKeyEvent*)
+bool Bracket::edit(QKeyEvent* ev)
       {
-#if 0
+      if (editMode == 0)
+            return false;
       QPointF ppos(apos());
 
-      if ((ev->state() & Qt::ShiftButton)) {
-            if (ev->key() == Qt::Key_Left)
-                  slur->prevSeg(apos(), mode, ups[mode-1]);
-            else if (ev->key() == Qt::Key_Right)
-                  slur->nextSeg(apos(), mode, ups[mode-1]);
-            return false;
-            }
-
-      QPointF delta;
+      qreal dy = 0.0;
       qreal val = 1.0;
-      if (ev->state() & Qt::ControlButton)
+      if (ev->modifiers() & Qt::ControlModifier)
             val = 0.1;
       switch (ev->key()) {
-            case Qt::Key_Left:
-                  delta = QPointF(-val, 0);
-                  break;
-            case Qt::Key_Right:
-                  delta = QPointF(val, 0);
-                  break;
             case Qt::Key_Up:
-                  delta = QPointF(0, -val);
+                  dy = -val;
                   break;
             case Qt::Key_Down:
-                  delta = QPointF(0, val);
-                  break;
-            case Qt::Key_Tab:
-                  if (mode < 4)
-                        ++mode;
-                  else
-                        mode = 1;
-                  break;
-            case Qt::Key_X:
-                  slur->setSlurDirection(slur->isUp() ? DOWN : UP);
+                  dy = val;
                   break;
             }
-      if (mode == 0)
-            return false;
 
-      int idx       = (mode-1) % 4;
-      ups[idx].off += delta;
-      ups[idx].r   += (delta * _spatium);
-
-      if (mode == 1 || mode == 4) {
-            slur->layout2(apos(), mode, ups[idx]);
-            if (!showRubberBand || (mode != 1 && mode != 4))
-                  return true;
-            QPointF ppos(apos());
-            QPointF rp1, rp2;
-            rp1 = ups[idx].p + ups[idx].off * _spatium + ppos;
-            rp2 = ups[idx].p + ppos;
-            rb->set(rp1, rp2);
-            setbbox(bbox() | QRectF(rp1-ppos, rp2-ppos));
-            }
-#endif
+      grip.translate(QPointF(0.0, dy));
+      yoff += dy;
+      layout();
       return false;
       }
 
@@ -377,7 +321,7 @@ bool Bracket::endEditDrag()
       yoff = 0.0;
       layout();
       score()->staff(idx1)->setBracketSpan(idx2 - idx1 + 1);
-      grip[1].moveTo(0.0, h2 *2);
+      grip.moveTo(0.0, h2 *2);
       return true;
       }
 
@@ -404,12 +348,12 @@ void Bracket::drop(const QPointF&, int type, const QDomNode& node)
       if (ElementType(type) == BRACKET) {
             Bracket* b = new Bracket(score());
             b->read(node);
+            b->setSelected(false);
             b->setParent(parent());
             b->setStaff(staff());
             b->setSpan(span());
             score()->cmdRemove(this);
             score()->cmdAdd(b);
-            b->layout();
             score()->layout();
             }
       }

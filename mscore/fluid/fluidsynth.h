@@ -11,7 +11,7 @@
  * WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
  * Library General Public License for more details.
- *  
+ *
  * You should have received a copy of the GNU Library General Public
  * License along with this library; if not, write to the Free
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA
@@ -27,21 +27,7 @@
 extern "C" {
 #endif
 
-#if defined(WIN32)
-#if defined(FLUIDSYNTH_DLL_EXPORTS)
-#define FLUIDSYNTH_API __declspec(dllexport)
-#elif defined(FLUIDSYNTH_NOT_A_DLL)
-#define FLUIDSYNTH_API 
-#else
-#define FLUIDSYNTH_API __declspec(dllimport)
-#endif
-
-#elif defined(MACOS9)
-#define FLUIDSYNTH_API __declspec(export)
-
-#else
 #define FLUIDSYNTH_API
-#endif
 
 
 /**
@@ -79,11 +65,8 @@ extern "C" {
 #include "fluidsynth/types.h"
 #include "fluidsynth/settings.h"
 #include "fluidsynth/synth.h"
-#include "fluidsynth/shell.h"
 #include "fluidsynth/sfont.h"
 #include "fluidsynth/ramsfont.h"
-#include "fluidsynth/audio.h"
-#include "fluidsynth/event.h"
 #include "fluidsynth/midi.h"
 #include "fluidsynth/seq.h"
 #include "fluidsynth/seqbind.h"
@@ -92,7 +75,6 @@ extern "C" {
 #include "fluidsynth/mod.h"
 #include "fluidsynth/gen.h"
 #include "fluidsynth/voice.h"
-#include "fluidsynth/version.h"
 
 
 #ifdef __cplusplus

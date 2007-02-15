@@ -22,7 +22,7 @@
 #define _FLUID_MIDI_H
 
 #include "priv.h"
-#include "sys.h"
+// #include "sys.h"
 #include "list.h"
 
 typedef struct _fluid_midi_parser_t fluid_midi_parser_t;

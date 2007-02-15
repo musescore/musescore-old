@@ -76,7 +76,7 @@ class ScoreLayout {
 
       Page* addPage();
       bool layoutPage(Page* page, Measure*& im, iSystem& is);
-      System* layoutSystem(Measure*& im, iSystem& is, qreal x, qreal y, qreal w);
+      System* layoutSystem(Measure*& im, System*, qreal x, qreal y, qreal w);
       void clearGenerated(Measure* m);
       void addGenerated(Measure* m);
       void processSystemHeader(Measure* m);

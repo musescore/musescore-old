@@ -1088,7 +1088,7 @@ bool MidiFile::readTrack(bool mergeChannels)
       int len       = readLong();       // len
       int endPos    = curPos + len;
       status        = -1;
-      sstatus       = -1;  // running status, der nicht bei meta oder sysex zurütchan      = -1;
+      sstatus       = -1;  // running status, der nicht bei meta oder sysex zurüchan      = -1;
       lastport      = -1;
       channelprefix = -1;
       click         = 0;
@@ -1945,11 +1945,11 @@ QString MidiTrack::instrName(int type) const
 //      Instrumentennamen verwendet werden?
 //    - Instrumente feststellen
 //          - Name (kommentar?)
-//          - Schlü System?
+//          - SchlüSystem?
 //    * Takte feststellen
 //    - Schlagzeugtrack markieren
 //    - Quantisierung festlegen:
-//       - kü//    - songtitle
+//       - kü/    - songtitle
 
 // process:
 //    for every measure:
@@ -2356,7 +2356,7 @@ void Score::convertTrack(MidiTrack* midiTrack, int staffIdx)
       chord->setStaff(staff(staffIdx));
       Segment* s = measure->getSegment(chord);
       s->add(chord);
-      int len = MAXINT;
+      int len = 0x7fffffff;      // MAXINT;
 	foreach (MNote* n, notes) {
       	if (n->len < len)
                   len = n->len;

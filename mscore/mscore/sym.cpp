@@ -42,11 +42,11 @@ Sym::Sym(const char* name, const QChar& c, int f)
 
       QFont font;
       if (fontId == 0) {
-            font = QFont("emmentaler");
+            font = QFont("MScore");
             font.setPointSizeF(20.0 * FMAG);
             }
       else if (fontId == 1) {
-            font = QFont("emmentaler");
+            font = QFont("MScore");
             font.setPointSizeF(14.0 * FMAG);
             }
       else {
@@ -126,12 +126,12 @@ QFont Sym::font(double extraMag) const
       {
       double mag = _spatium * extraMag / (spatiumBase20 * DPI);
       if (fontId == 0) {
-            QFont f("emmentaler");
+            QFont f("MScore");
             f.setPointSizeF(20.0 * mag);
             return f;
             }
       else if (fontId == 1) {
-            QFont f("emmentaler");
+            QFont f("MScore");
             f.setPointSizeF(14.0 * mag);
             return f;
             }

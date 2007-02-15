@@ -32,11 +32,11 @@ enum { BRACKET_NORMAL, BRACKET_AKKOLADE, NO_BRACKET = -1};
 
 class Bracket : public Element {
       int _span;
-      int mode;
+      bool editMode;
       qreal h2;
 
-      QPainterPath* path;
-      QRectF grip[2];
+      QPainterPath path;
+      QRectF grip;
       qreal yoff;
 
       void updateGrips(QMatrix& matrix);

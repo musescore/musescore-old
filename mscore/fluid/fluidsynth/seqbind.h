@@ -11,7 +11,7 @@
  * WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
  * Library General Public License for more details.
- *  
+ *
  * You should have received a copy of the GNU Library General Public
  * License along with this library; if not, write to the Free
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA
@@ -21,7 +21,7 @@
 #ifndef _FLUIDSYNTH_SEQBIND_H
 #define _FLUIDSYNTH_SEQBIND_H
 
-#include "fluidsynth/seq.h"
+// #include "fluidsynth/seq.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -29,10 +29,10 @@ extern "C" {
 
   /** registers fluidsynth as a client of the given sequencer.
       The fluidsynth is registered with the name "fluidsynth".
-	
+
       \returns the fluidsynth destID.
   */
-FLUIDSYNTH_API 
+FLUIDSYNTH_API
 short fluid_sequencer_register_fluidsynth(fluid_sequencer_t* seq, fluid_synth_t* synth);
 
 

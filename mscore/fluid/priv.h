@@ -24,14 +24,10 @@
 
 #include "config.h"
 
-#if defined(__POWERPC__) && !(defined(__APPLE__) && defined(__MACH__))
-#include "config_maxmsp43.h"
-#endif
+#include <sys/time.h>
 
-#if defined(WIN32) && !defined(MINGW32)
-#include "config_win32.h"
-#endif
-
+//==============================================================
+#if 0
 #if HAVE_STRING_H
 #include <string.h>
 #endif
@@ -74,9 +70,7 @@
 #include <sys/stat.h>
 #endif
 
-#if HAVE_SYS_TIME_H
 #include <sys/time.h>
-#endif
 
 #if HAVE_SYS_SOCKET_H
 #include <sys/socket.h>
@@ -105,10 +99,13 @@
 #if HAVE_IO_H
 #include <io.h>
 #endif
+#endif
 
-#if HAVE_WINDOWS_H
+#ifdef __MINGW32__
 #include <windows.h>
 #endif
+
+//============================================================
 
 /* MinGW32 special defines */
 #ifdef MINGW32
@@ -153,14 +150,6 @@ typedef enum {
   FLUID_OK = 0,
   FLUID_FAILED = -1
 } fluid_status;
-
-
-#if defined(WIN32)
-typedef SOCKET fluid_socket_t;
-#else
-typedef int fluid_socket_t;
-#define INVALID_SOCKET -1
-#endif
 
 
 /** Integer types  */
@@ -293,7 +282,8 @@ typedef FILE*  fluid_file;
 #define FLUID_FLUSH()                fflush(stdout)
 #endif
 
-#define FLUID_LOG                    fluid_log
+// #define FLUID_LOG                    fluid_log
+#define FLUID_LOG
 
 #ifndef M_PI
 #define M_PI 3.1415926535897932384626433832795
@@ -303,8 +293,7 @@ typedef FILE*  fluid_file;
 #define FLUID_ASSERT(a,b)
 #define FLUID_ASSERT_P(a,b)
 
-char* fluid_error(void);
-
+// char* fluid_error(void);
 
 /* Internationalization */
 #define _(s) s

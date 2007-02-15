@@ -66,7 +66,7 @@
  */
 
 #include "chorus.h"
-#include "sys.h"
+// #include "sys.h"
 
 #define MAX_CHORUS	99
 #define MAX_DELAY	100

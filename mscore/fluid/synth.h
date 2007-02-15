@@ -36,8 +36,7 @@
 #include "rev.h"
 #include "voice.h"
 #include "chorus.h"
-#include "ladspa.h"
-// #include "midi_router.h"
+// #include "ladspa.h"
 #include "sys.h"
 
 /***************************************************************
@@ -145,10 +144,7 @@ struct _fluid_synth_t
   fluid_tuning_t* cur_tuning;         /** current tuning in the iteration */
 
   fluid_midi_router_t* midi_router;     /* The midi router. Could be done nicer. */
-  fluid_mutex_t busy;                   /* Indicates, whether the audio thread is currently running.
-					 * Note: This simple scheme does -not- provide 100 % protection against
-					 * thread problems, for example from MIDI thread and shell thread
-					 */
+
 #ifdef LADSPA
   fluid_LADSPA_FxUnit_t* LADSPA_FxUnit; /** Effects unit for LADSPA support */
 #endif
