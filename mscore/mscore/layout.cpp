@@ -183,47 +183,32 @@ void ScoreLayout::processSystemHeader(Measure* m)
 
       for (int i = 0; i < nstaves; ++i) {
             Staff* staff   = _score->staff(i);
-//            bool hasTimesig = false;
             bool hasKeysig  = false;
             bool hasClef    = false;
             int strack      = i * VOICES;
-            int etrack      = strack + VOICES;
 
-            for (int track = strack; track < etrack; ++track) {
-                  for (Segment* seg = m->first(); seg; seg = seg->next()) {
-                        if (seg->segmentType() == Segment::SegChordRest)
+            // we assume that keysigs and clefs are only in the first
+            // track of a segment
+
+            for (Segment* seg = m->first(); seg; seg = seg->next()) {
+                  // search only up to the first ChordRest
+                  if (seg->segmentType() == Segment::SegChordRest)
+                        break;
+                  Element* el = seg->element(strack);
+                  if (!el)
+                        continue;
+                  switch (el->type()) {
+                        case KEYSIG:
+                              hasKeysig = true;
                               break;
-                        Element* el = seg->element(track);
-                        if (!el)
-                              continue;
-                        switch (el->type()) {
-//                              case TIMESIG:
-//                                    hasTimesig = true;
-//                                    break;
-                              case KEYSIG:
-                                    hasKeysig = true;
-                                    break;
-                              case CLEF:
-                                    hasClef = true;
-                                    ((Clef*)el)->setSmall(false);
-                                    break;
-                              default:
-                                    break;
-                              }
+                        case CLEF:
+                              hasClef = true;
+                              ((Clef*)el)->setSmall(false);
+                              break;
+                        default:
+                              break;
                         }
                   }
-#if 0
-            if (tick == 0 && !hasTimesig) {
-                  int z, n;
-                  _score->sigmap->timesig(tick, z, n);
-                  TimeSig* ts = new TimeSig(_score);
-                  ts->setStaff(staff);
-                  ts->setTick(tick);
-                  ts->setSig(n, z);
-                  ts->setGenerated(true);
-                  m->add(ts);
-                  }
-#endif
             if (!hasKeysig) {
                   int idx = staff->keymap()->key(tick);
                   if (idx) {
@@ -430,9 +415,30 @@ System* ScoreLayout::layoutSystem(Measure*& im, System* system, qreal x, qreal y
             clearGenerated(m);
             m->setSystem(system);   // needed by m->layout()
             if (m == im)
-                  processSystemHeader(m);  // add generated clef+keysig+timesig
-            else
+                  //
+                  // special handling for first measure in a system:
+                  // add generated clef and key signature
+                  //
+                  processSystemHeader(m);
+            else {
                   addGenerated(m);  //DEBUG
+                  //
+                  // if this is not the first measure in a system
+                  // switch all clefs to small size
+                  //
+                  int nstaves = _score->nstaves();
+                  for (int i = 0; i < nstaves; ++i) {
+                        int strack = i * VOICES;
+                        for (Segment* seg = m->first(); seg; seg = seg->next()) {
+                              Element* el = seg->element(strack);
+                              if (el && el->type() == CLEF) {
+                                    ((Clef*)el)->setSmall(true);
+                                    break;
+                                    }
+                              }
+                        }
+                  }
+
             MeasureWidth mw = m->layoutX(1.0);
             double ww = mw.stretchable;
 

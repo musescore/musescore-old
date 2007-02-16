@@ -1,3 +1,5 @@
+16.2.7 (ws)
+      - fix handling of normal/small clef symbols
 15.2.7 (ws)
       - enable font family selection in text edit
       - fix: could not removed edited slur

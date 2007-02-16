@@ -298,6 +298,8 @@ void Staff::changeKeySig(int tick, int st)
 
 void Staff::changeClef(int tick, int st)
       {
+      // bool small = st & clefSmallBit;
+      st &= ~clefSmallBit;
       int ot = _clef->clef(tick);
       if (ot == st)
             return;                 // no change
