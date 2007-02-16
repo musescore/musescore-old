@@ -177,9 +177,9 @@ void Clef::setSubtype(int st)
 void Clef::setSmall(bool val)
       {
       if (val)
-            setSubtype(subtype() & ~clefSmallBit);
-      else
             setSubtype(subtype() | clefSmallBit);
+      else
+            setSubtype(subtype() & ~clefSmallBit);
       }
 
 //---------------------------------------------------------
