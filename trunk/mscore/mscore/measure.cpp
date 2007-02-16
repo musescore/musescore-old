@@ -1196,6 +1196,7 @@ Segment* Measure::getSegment(Element* e)
 void Measure::add(Element* el)
       {
       Staff* staffp = el->staff();
+//      if (el->type() != SEGMENT && el->type() != SLUR_SEGMENT && staffp == 0) {
       if (el->type() != SEGMENT && staffp == 0) {
             _pel.push_back(el);
             el->setAnchor(this);
@@ -1287,7 +1288,10 @@ void Measure::add(Element* el)
             case SYMBOL:
             case TEXT:
             case TEMPO_TEXT:
+                  _sel.append(el);
+                  break;
             case SLUR_SEGMENT:
+// printf("measure(%p) add slur segment %p\n", this, el);
                   _sel.append(el);
                   break;
             default:
@@ -1358,6 +1362,7 @@ void Measure::remove(Element* el)
                            this, el->name(), el);
                   break;
             case SLUR_SEGMENT:
+// printf("measure(%p) remove slur segment %p\n", this, el);
             case DYNAMIC:
             case HAIRPIN:
             case TEMPO_TEXT:

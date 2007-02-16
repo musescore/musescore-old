@@ -33,6 +33,7 @@
 #include "ui_barline.h"
 #include "ui_dynamic.h"
 #include "ui_tuplet.h"
+#include "ui_slurtie.h"
 
 class ShowElementBase;
 class Element;
@@ -67,6 +68,8 @@ class PageListEditor : public QWidget {
       ShowElementBase* barLineView;
       ShowElementBase* dynamicView;
       ShowElementBase* tupletView;
+      ShowElementBase* slurView;
+      ShowElementBase* tieView;
 
       bool searchElement(QTreeWidgetItem* pi, Element* el);
 
@@ -381,6 +384,40 @@ class DoubleLabel : public QLabel {
       DoubleLabel(QWidget* parent);
       void setValue(double);
       virtual QSize sizeHint() const;
+      };
+
+//---------------------------------------------------------
+//   SlurView
+//---------------------------------------------------------
+
+class SlurView : public ShowElementBase {
+      Q_OBJECT;
+
+      Ui::SlurTieBase st;
+
+   private slots:
+      void segmentClicked(QTreeWidgetItem* item);
+
+   public:
+      SlurView();
+      virtual void setElement(Element*);
+      };
+
+//---------------------------------------------------------
+//   TieView
+//---------------------------------------------------------
+
+class TieView : public ShowElementBase {
+      Q_OBJECT;
+
+      Ui::SlurTieBase st;
+
+   private slots:
+      void segmentClicked(QTreeWidgetItem* item);
+
+   public:
+      TieView();
+      virtual void setElement(Element*);
       };
 
 #endif
