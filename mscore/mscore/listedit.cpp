@@ -38,6 +38,7 @@
 #include "barline.h"
 #include "hook.h"
 #include "dynamics.h"
+#include "slur.h"
 
 //---------------------------------------------------------
 //   ElementItem
@@ -144,6 +145,8 @@ PageListEditor::PageListEditor(Score* s)
       barLineView  = new BarLineView;
       dynamicView  = new DynamicView;
       tupletView   = new TupletView;
+      slurView     = new SlurView;
+      tieView      = new TieView;
 
       stack->addWidget(pagePanel);
       stack->addWidget(systemPanel);
@@ -161,6 +164,8 @@ PageListEditor::PageListEditor(Score* s)
       stack->addWidget(barLineView);
       stack->addWidget(dynamicView);
       stack->addWidget(tupletView);
+      stack->addWidget(slurView);
+      stack->addWidget(tieView);
 
       connect(pagePanel,    SIGNAL(elementChanged(Element*)), SLOT(setElement(Element*)));
       connect(systemPanel,  SIGNAL(elementChanged(Element*)), SLOT(setElement(Element*)));
@@ -178,6 +183,8 @@ PageListEditor::PageListEditor(Score* s)
       connect(barLineView,  SIGNAL(elementChanged(Element*)), SLOT(setElement(Element*)));
       connect(dynamicView,  SIGNAL(elementChanged(Element*)), SLOT(setElement(Element*)));
       connect(tupletView,   SIGNAL(elementChanged(Element*)), SLOT(setElement(Element*)));
+      connect(slurView,     SIGNAL(elementChanged(Element*)), SLOT(setElement(Element*)));
+      connect(tieView,      SIGNAL(elementChanged(Element*)), SLOT(setElement(Element*)));
       connect(tupletView,   SIGNAL(scoreChanged()), SLOT(layoutScore()));
 
       connect(list, SIGNAL(currentItemChanged(QTreeWidgetItem*, QTreeWidgetItem*)),
@@ -380,10 +387,13 @@ void PageListEditor::itemChanged(QTreeWidgetItem* i, QTreeWidgetItem*)
             case BAR_LINE: ew = barLineView;  break;
             case DYNAMIC:  ew = dynamicView;  break;
             case TUPLET:   ew = tupletView;   break;
+            case SLUR:
+                  ew = slurView;
+                  break;
+            case TIE:      ew = tieView;      break;
             case TEXT:
                   ew = textView;
                   break;
-            case ACCIDENTAL:
             default:
                   ew = elementView;
                   break;
@@ -1046,7 +1056,7 @@ void TupletView::setElement(Element* e)
             item->setText(0, cr->name());
             item->setText(1, QString("%1").arg(cr->tick()));
             item->setText(2, QString("%1").arg(cr->tickLen()));
-            void* p = (void*) i->second;
+            void* p = (void*) cr;
             item->setData(0, Qt::UserRole, QVariant::fromValue<void*>(p));
             tb.elements->addTopLevelItem(item);
             }
@@ -1227,4 +1237,97 @@ void ShowElementBase::offsetyChanged(double val)
       el->setUserYoffset(val);
       el->score()->update(r | el->abbox());
       }
+
+//---------------------------------------------------------
+//   segmentClicked
+//---------------------------------------------------------
+
+void SlurView::segmentClicked(QTreeWidgetItem* item)
+      {
+      Element* e = (Element*)item->data(0, Qt::UserRole).value<void*>();
+      emit elementChanged(e);
+      }
+
+//---------------------------------------------------------
+//   SlurView
+//---------------------------------------------------------
+
+SlurView::SlurView()
+   : ShowElementBase()
+      {
+      QWidget* slur = new QWidget;
+      st.setupUi(slur);
+      layout->addWidget(slur);
+      layout->addStretch(10);
+      connect(st.segments, SIGNAL(itemClicked(QTreeWidgetItem*,int)), SLOT(segmentClicked(QTreeWidgetItem*)));
+      }
+
+//---------------------------------------------------------
+//   setElement
+//---------------------------------------------------------
+
+void SlurView::setElement(Element* e)
+      {
+      Slur* slur = (Slur*)e;
+      ShowElementBase::setElement(e);
+
+      st.segments->clear();
+      ElementList* el = slur->elements();
+      foreach(const Element* e, *el) {
+            QTreeWidgetItem* item = new QTreeWidgetItem;
+            item->setText(0, QString("%1").arg((unsigned)e, 8, 16));
+item->setText(1, "klops");
+            item->setData(0, Qt::UserRole, QVariant::fromValue<void*>((void*)e));
+            st.segments->addTopLevelItem(item);
+            }
+      st.upFlag->setChecked(slur->isUp());
+      st.direction->setCurrentIndex(slur->slurDirection());
+      }
+
+//---------------------------------------------------------
+//   segmentClicked
+//---------------------------------------------------------
+
+void TieView::segmentClicked(QTreeWidgetItem* item)
+      {
+      Element* e = (Element*)item->data(0, Qt::UserRole).value<void*>();
+      emit elementChanged(e);
+      }
+
+//---------------------------------------------------------
+//   TieView
+//---------------------------------------------------------
+
+TieView::TieView()
+   : ShowElementBase()
+      {
+      QWidget* tie = new QWidget;
+      st.setupUi(tie);
+      layout->addWidget(tie);
+      layout->addStretch(10);
+      connect(st.segments, SIGNAL(itemClicked(QTreeWidgetItem*,int)), SLOT(segmentClicked(QTreeWidgetItem*)));
+      }
+
+//---------------------------------------------------------
+//   setElement
+//---------------------------------------------------------
+
+void TieView::setElement(Element* e)
+      {
+      Tie* tie = (Tie*)e;
+      ShowElementBase::setElement(e);
+
+      st.segments->clear();
+      ElementList* el = tie->elements();
+      foreach(const Element* e, *el) {
+            QTreeWidgetItem* item = new QTreeWidgetItem;
+            item->setText(0, QString("%1").arg((unsigned)e, 8, 16));
+item->setText(1, "klops");
+            item->setData(0, Qt::UserRole, QVariant::fromValue<void*>((void*)e));
+            st.segments->addTopLevelItem(item);
+            }
+      st.upFlag->setChecked(tie->isUp());
+      st.direction->setCurrentIndex(tie->slurDirection());
+      }
+
 

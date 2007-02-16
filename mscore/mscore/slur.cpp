@@ -900,6 +900,7 @@ void Slur::layout()
                   SlurSegment* s = new SlurSegment(this);
                   segments.push_back(s);
                   s->setParent(parent());
+                  s->setStaff(staff());
                   parent()->add(s);
                   }
             }
@@ -909,7 +910,6 @@ void Slur::layout()
                   s->parent()->remove(s);
                   }
             }
-// printf("nsegs %d  old %d\n", nsegs, onsegs);
 
       qreal bow = up ? 2*-_spatium : 2*_spatium;
       iElement ibss = segments.begin();
@@ -917,15 +917,12 @@ void Slur::layout()
             System* system = *is;
             QPointF sp(system->apos());
             SlurSegment* bs = (SlurSegment*)*ibss;
-            bs->setParent(parent());
-            bs->setStaff(staff());
             // case 1: one segment
             if (s1 == s2) {
                   bs->layout(p1, p2, bow);
                   }
             // case 2: start segment
             else if (i == 0) {
-// printf("start segment\n");
                   System* system = *is;
                   Measure* m = system->measures()->back();
                   qreal x       = system->apos().x() + system->bbox().width();
@@ -941,7 +938,11 @@ void Slur::layout()
 // printf("mid segment\n");
                   System* system = *is;
                   Measure* m = system->measures()->front();
-                  bs->setParent(m);
+                  if (m != bs->parent()) {
+                        bs->parent()->remove(bs);
+                        bs->setParent(m);
+                        m->add(bs);
+                        }
                   QPointF p = system->apos();
                   qreal x1 = p.x();
                   qreal x2 = x1 + system->bbox().width();
@@ -949,10 +950,13 @@ void Slur::layout()
                   }
             // case 4: end segment
             else {
-// printf("end segment\n");
                   System* system = *is;
                   Measure* m = system->measures()->front();
-                  bs->setParent(m);
+                  if (m != bs->parent()) {
+                        bs->parent()->remove(bs);
+                        bs->setParent(m);
+                        m->add(bs);
+                        }
                   qreal x = system->apos().x();
                   bs->layout(QPointF(x, p2.y()), p2, bow);
                   }

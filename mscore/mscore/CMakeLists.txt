@@ -52,6 +52,7 @@ QT4_WRAP_UI (ui_headers
       dynamic.ui
       tuplet.ui
       shortcutcapturedialog.ui
+      slurtie.ui
       )
 
 QT4_WRAP_CPP (mocs
@@ -163,7 +164,9 @@ add_executable ( mscore
       )
 
 set_target_properties( mscore
-      PROPERTIES COMPILE_FLAGS "-include ${PROJECT_BINARY_DIR}/mscore/all.h"
+      PROPERTIES
+         COMPILE_FLAGS "-include ${PROJECT_BINARY_DIR}/mscore/all.h"
+         LINK_FLAGS "-L /home/ws/.wine/drive_c/MinGW/lib"
       )
 
 target_link_libraries(mscore
@@ -171,8 +174,8 @@ target_link_libraries(mscore
       ${ALSA_LIB}
       ${JACK_LIB}
       fluid
-      readline
       )
+##      readline
 
 install_targets ( /bin mscore )
 

@@ -21,18 +21,36 @@
 project(mscore)
 CMAKE_MINIMUM_REQUIRED(VERSION 2.4.1)
 
-# support for mingw32 cross compiling
+# support for mingw cross compiling
 #  (incomplete, does not work now)
 #
-OPTION(CROSS_MINGW32 "Cross compile Win32 using mingw32" OFF)
-# OPTION(CROSS_MINGW32 "Cross compile Win32 using mingw32" ON)
-IF (UNIX)
-      IF(CROSS_MINGW32)
-            set(CMAKE_CXX_COMPILER i586-mingw32msvc-g++)
-            set(CMAKE_CXX_LINK_EXECUTABLE i586-mingw32msvc-ld)
-            set(MINGW32 ON)
-      ENDIF(CROSS_MINGW32)
-ENDIF (UNIX)
+if (UNIX)
+      option (CROSS_MINGW "Cross compile using MinGW on linux" OFF)
+else (UNIX)
+      set (CROSS_MINGW OFF)
+endif (UNIX)
+
+if (CROSS_MINGW)
+      set (CMAKE_CXX_COMPILER  "i586-mingw32msvc-c++")
+      set (CMAKE_COMPILER_IS_GNUCXX 1)
+      set (CMAKE_C_COMPILER  "i586-mingw32msvc-gcc")
+      set (CMAKE_AR "i586-mingw32msvc-ar")
+      set (CMAKE_RANLIB "i586-mingw32msvc-ranlib")
+      set (CMAKE_SHARED_LIBRARY_LINK_C_FLAGS "1")
+      set (QT_INCLUDE_DIR "/usr/win-qt422/include")
+      set (QT_LIBRARY_DIR "/usr/win-qt422/lib")
+      set (QT_MKSPECS_DIR "/usr/win-qt422/mkspecs")
+      set (WIN32 ON)
+      set (MINGW ON)
+      set (CMAKE_SHARED_LIBRARY_LINK_CXX_FLAGS)
+      set (CMAKE_SYSTEM_LIBRARY_PATH /home/ws/.wine/drive_c/MinGW)
+      set (CMAKE_VERBOSE_MAKEFILE ON)
+ENDIF(CROSS_MINGW)
+
+message (============================)
+message ("${LINK_DIRECTORIES}")
+message (============================)
+      set (LINK_DIRECTORIES /home/ws/.wine/drive_c/MinGW)
 
 # set(CMAKE_BUILD_TYPE DEBUG)
 # set(CMAKE_BUILD_TYPE RELEASE)
@@ -53,7 +71,7 @@ include ( ${PROJECT_SOURCE_DIR}/cmake/UsePkgConfig1.cmake )
 include ( ${PROJECT_SOURCE_DIR}/cmake/TargetDoc.cmake)
 
 # for debugging the make system uncomment next line:
-#set(CMAKE_VERBOSE_MAKEFILE ON)
+set(CMAKE_VERBOSE_MAKEFILE ON)
 
 set(QT_USE_QTXML TRUE)
 set(QT_USE_QTDESIGNER TRUE)
@@ -104,9 +122,9 @@ endif (NOT TEXEXEC_PATH)
 ## alsa >= 0.9.0
 ##
 
-if (APPLE OR MINGW32)
-	message("Disabling ALSA support due to OS X or MINGW32 build.")
-else (APPLE OR MINGW32)
+if (APPLE OR MINGW)
+	message("Disabling ALSA support due to OS X or MINGW build.")
+else (APPLE OR MINGW)
       PKGCONFIG (alsa 0.9.0 ALSA_INCDIR ALSA_LIBDIR ALSA_LIB ALSA_CPP )
 if (NOT ALSA_INCDIR)
       message(FATAL_ERROR "Fatal error: ALSA >= 1.0.0 required")
@@ -114,17 +132,17 @@ else (NOT ALSA_INCDIR)
 	message("Alsa detected.")
       set ( USE_ALSA 1 )
 endif (NOT ALSA_INCDIR)
-endif (APPLE OR MINGW32)
+endif (APPLE OR MINGW)
 
 ##
 ## find jack >= 0.98.0
 ##
 
-if (MINGW32)
-      message("no JACK in MINGW32 build")
-else (MINGW32)
+if (MINGW)
+      message("no JACK in MINGW build")
+else (MINGW)
       PKGCONFIG (jack 0.98.0 JACK_INCDIR JACK_LIBDIR JACK_LIB JACK_CPP )
-endif (MINGW32)
+endif (MINGW)
 
 if (JACK_INCDIR)
 	message("Jack detected")
