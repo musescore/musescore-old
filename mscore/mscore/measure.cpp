@@ -797,7 +797,7 @@ void Measure::layoutNoteHeads(int staff)
                                     case 1:    prefix = 1; break;
                                     case 2:    prefix = 3; break;
                                     default:
-                                          printf("line2pitch: internal error2: tick %d bad offset %d(%d-%d), line %d clef %d\n",
+                                          printf("line2pitch: error2: tick %d bad offset %d(%d-%d), line %d clef %d\n",
                                              tick, offset, pitch, np, line, clef);
                                           //abort();
                                           break;

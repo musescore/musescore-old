@@ -80,9 +80,14 @@ static void xmlSetPitch(Note* n, int tick, char step, int alter, int octave, int
       n->setPitch(pitch);
       static int table1[7]  = { 40, 39, 45, 44, 43, 42, 41 };
       int line  = table1[istep] - (octave+1) * 7;
-      int clef  = n->staff()->clef()->clef(tick);
+
+      int staffIdx = n->staffIdx() + n->move();
+      Staff* staff = n->score()->staff(staffIdx);
+
+      int clef  = staff->clef()->clef(tick);
+
       line     += clefTable[clef].yOffset;
-//      printf(" n->staff=%p clef=%d line=%d\n", n->staff(), clef, line);
+//      printf(" n->staff=%p clef=%d line=%d\n", staff, clef, line);
       n->setLine(line);
       n->setUserAccidental(accidental);
       }
@@ -365,6 +370,8 @@ void MusicXml::scorePartwise(QDomNode node)
             else if (tag == "movement-title") {
                   score->movementTitle = e.text();
                   }
+            else if (tag == "credit")
+                  ;     //TODO
             else
                   domError(node);
             }
