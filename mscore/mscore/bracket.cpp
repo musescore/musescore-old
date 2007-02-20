@@ -318,11 +318,12 @@ bool Bracket::endEditDrag()
             qreal y2 = y1 + ss->bbox().height();
             if (ay1 >= y1 && ay1 < y2)
                   idx1 = i;
-            if (ay2 >= y1 && ay2 < y2)
-                  idx2 = i;
+            idx2 = i;
+            if (y2 > ay2)
+                  break;
             }
       if (idx2 == -1)
-            idx2 = i -1;
+            idx2 = i - 1;
 
       qreal sy = (*(sl->begin() + idx1))->bbox().top();
       qreal ey = (*(sl->begin() + idx2))->bbox().bottom();
