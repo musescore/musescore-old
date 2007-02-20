@@ -366,8 +366,8 @@ SFData *sfload_file (const QString& fname);
 #define	TRUE	(!FALSE)
 #endif
 
-#define GPOINTER_TO_INT(p)	((int)   (p))
-#define GINT_TO_POINTER(i)      ((void *)  (i))
+#define GPOINTER_TO_INT(p)	((long int)   (p))
+#define GINT_TO_POINTER(i)    ((void *)  (i))
 
 char*	 g_strdup		(const char *str);
 

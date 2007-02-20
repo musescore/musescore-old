@@ -2292,7 +2292,7 @@ void Measure::drop(const QPointF& p, int type, const QDomNode& node)
       int idx = s->y2staff(p.y());
       if (idx == -1)
             return;
-      SysStaff* ss = s->staff(idx);
+//      SysStaff* ss = s->staff(idx);
       Staff* staff = score()->staff(idx);
 
       // convert p from canvas to measure relative position and take x coordinate
@@ -2306,14 +2306,8 @@ void Measure::drop(const QPointF& p, int type, const QDomNode& node)
                   bracket->read(node);
                   int subtype = bracket->subtype();
                   delete bracket;
-                  if (ss->bracket) {
-                        ss->bracket->drop(p, type, node);
-                        }
-                  else {
-                        staff->setBracket(subtype);
-                        staff->setBracketSpan(1);
-                        score()->layout();
-                        }
+                  staff->addBracket(BracketItem(subtype, 1));
+                  score()->layout();
                   }
                   break;
             case CLEF:

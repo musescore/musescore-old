@@ -29,6 +29,76 @@
 #include "segment.h"
 
 //---------------------------------------------------------
+//   bracket
+//---------------------------------------------------------
+
+int Staff::bracket(int idx) const
+      {
+      if (idx < _brackets.size())
+            return _brackets[idx]._bracket;
+      return NO_BRACKET;
+      }
+
+//---------------------------------------------------------
+//   bracketSpan
+//---------------------------------------------------------
+
+int Staff::bracketSpan(int idx) const
+      {
+      if (idx < _brackets.size())
+            return _brackets[idx]._bracketSpan;
+      return 0;
+      }
+
+//---------------------------------------------------------
+//   setBracket
+//---------------------------------------------------------
+
+void Staff::setBracket(int idx, int val)
+      {
+      if (idx >= _brackets.size()) {
+            for (int i = _brackets.size(); i <= idx; ++i)
+                  _brackets.append(BracketItem());
+            }
+      _brackets[idx]._bracket = val;
+      }
+
+//---------------------------------------------------------
+//   setBracketSpan
+//---------------------------------------------------------
+
+void Staff::setBracketSpan(int idx, int val)
+      {
+      if (idx >= _brackets.size()) {
+            for (int i = _brackets.size(); i <= idx; ++i)
+                  _brackets.append(BracketItem());
+            }
+      _brackets[idx]._bracketSpan = val;
+      }
+
+//---------------------------------------------------------
+//   addBracket
+//---------------------------------------------------------
+
+void Staff::addBracket(BracketItem b)
+      {
+      if (!_brackets.isEmpty() && _brackets[0]._bracket == NO_BRACKET) {
+            _brackets[0] = b;
+            }
+      else {
+            //
+            // create new bracket level
+            //
+            foreach(Staff* s, *_score->staves()) {
+                  if (s == this)
+                        s->_brackets.append(b);
+                  else
+                        s->_brackets.append(BracketItem());
+                  }
+            }
+      }
+
+//---------------------------------------------------------
 //   isTopSplit
 //---------------------------------------------------------
 
@@ -119,8 +189,6 @@ Staff::Staff(Score* s, Part* p, int rs)
       _rstaff = rs;
       _part   = p;
       _clef   = new ClefList;
-      _bracket = NO_BRACKET;
-      _bracketSpan = 0;
       _keymap = new KeyList;
       (*_keymap)[0] = 0;
       }
@@ -153,8 +221,8 @@ void Staff::write(Xml& xml) const
       xml.stag("Staff");
       _clef->write(xml, "cleflist");
       _keymap->write(xml, "keylist");
-      if (_bracket != NO_BRACKET) {
-            xml.tagE("bracket type=\"%d\" span=\"%d\"", _bracket, _bracketSpan);
+      foreach(const BracketItem& i, _brackets) {
+            xml.tagE("bracket type=\"%d\" span=\"%d\"", i._bracket, i._bracketSpan);
             }
       xml.etag("Staff");
       }
@@ -175,8 +243,10 @@ void Staff::read(QDomNode node)
             else if (tag == "keylist")
                   _keymap->read(node, _score);
             else if (tag == "bracket") {
-                  _bracket = e.attribute("type", "-1").toInt();
-                  _bracketSpan = e.attribute("span", "0").toInt();
+                  BracketItem b;
+                  b._bracket = e.attribute("type", "-1").toInt();
+                  b._bracketSpan = e.attribute("span", "0").toInt();
+                  _brackets.append(b);
                   }
             else
                   printf("Mscore:Staff: unknown tag %s\n", tag.toLatin1().data());

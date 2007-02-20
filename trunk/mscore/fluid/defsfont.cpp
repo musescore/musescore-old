@@ -2865,7 +2865,7 @@ int SFData::fixup_pgen()
 
   fluid_list_t *p, *p2, *p3;
   SFZone *z;
-  int i;
+  long int i;
 
   p = sf->preset;
   while (p)

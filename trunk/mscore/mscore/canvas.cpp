@@ -290,8 +290,22 @@ void Canvas::mousePressEvent(QMouseEvent* ev)
       if (b3) {
             if (element) {
                   if (!element->selected() && _score->sel->state != SEL_STAFF &&
-                     _score->sel->state != SEL_SYSTEM)
-                        _score->select(element, 0, 0);
+                     _score->sel->state != SEL_SYSTEM) {
+                        ElementType type = element->type();
+                        _score->dragStaff = 0;  // WS
+                        if (type == MEASURE) {
+                              _score->dragSystem = (System*)(element->parent());
+                              _score->dragStaff  = getStaff(_score->dragSystem, startMove);
+                              }
+                        // As findSelectableElement may return a measure
+                        // when clicked "a little bit" above or below it, getStaff
+                        // may not find the staff and return -1, which would cause
+                        // select() to crash
+                        if (_score->dragStaff >= 0)
+                              _score->select(element, keyState, _score->dragStaff);
+                        else
+                              _score->setDragObject(0);
+                        }
                   seq->stopNotes(); // stop now because we dont get a mouseRelease event
                   objectPopup(ev->globalPos(), element);
                   }

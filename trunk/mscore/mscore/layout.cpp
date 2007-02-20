@@ -112,7 +112,9 @@ int Score::clefOffset(int tick, int staffIdx) const
 
 //---------------------------------------------------------
 //   layout
-//    place all elements in staves into page structure
+//    - measures are akkumulated into systems
+//    - systems are akkumulated into pages
+//   already existent systems and pages are reused
 //---------------------------------------------------------
 
 void ScoreLayout::doLayout()
@@ -161,14 +163,16 @@ void ScoreLayout::doLayout()
             }
 
       //---------------------------------------------------
-      //    remove uneccesary pages
+      //    remove remaining pages and systems
       //---------------------------------------------------
 
-      for (iPage i = ip; i != _pages->end(); ++i) {
-//            refresh |= (*i)->abbox();
+      for (iPage i = ip; i != _pages->end(); ++i)
             delete *i;
-            }
       _pages->erase(ip, _pages->end());
+
+      for (iSystem i = is; i != _systems->end(); ++i)
+            delete *i;
+      _systems->erase(is, _systems->end());
       }
 
 //---------------------------------------------------------
@@ -359,10 +363,6 @@ bool ScoreLayout::layoutPage(Page* page, Measure*& im, iSystem& is)
                   break;
             }
 
-      if (is != _systems->end()) {
-            // TODO: remove systems
-            }
-
       //-----------------------------------------------------------------------
       // if remaining y space on page is greater (pageHeight*pageFillLimit)
       // then insert space between staffs to fill page
@@ -399,7 +399,7 @@ System* ScoreLayout::layoutSystem(Measure*& im, System* system, qreal x, qreal y
 
       //-------------------------------------------------------
       //    Round I
-      //    find out how many measures fit on current line
+      //    find out how many measures fit in system
       //-------------------------------------------------------
 
       int nm              = 0;

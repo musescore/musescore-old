@@ -30,7 +30,7 @@
 #include "spatium.h"
 
 class Staff;
-class SStaff;
+class StaffLines;
 class BarLine;
 class Clef;
 class Page;
@@ -48,13 +48,13 @@ class Bracket;
 */
 
 class SysStaff {
-      QRectF _bbox;   ///< Bbox of SStaff.
+      QRectF _bbox;   ///< Bbox of StaffLines.
       Spatium _distance;
 
    public:
       int idx;
-      Bracket* bracket;
-      SStaff*  sstaff;
+      QList<Bracket*> brackets;
+      StaffLines*  sstaff;
       Text* instrumentName;
 
       const QRectF& bbox() const      { return _bbox; }

@@ -1163,8 +1163,8 @@ void MusicXml::xmlAttributes(Measure* measure, int staff, QDomNode node)
                   part->setStaves(staves);
                   Staff* staff = part->staff(0);
                   if (staff && staves == 2) {
-                        staff->setBracket(BRACKET_AKKOLADE);
-                        staff->setBracketSpan(2);
+                        staff->setBracket(0, BRACKET_AKKOLADE);
+                        staff->setBracketSpan(0, 2);
                         }
                   }
             else

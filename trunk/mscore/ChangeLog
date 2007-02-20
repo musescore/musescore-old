@@ -1,4 +1,8 @@
+20.2.7 (ws)
+      - first implementation or nested system brackets
+      - fix in fluid for 64 bit systems
 19.2.7 (ws)
+      - renamed class SStaff to StaffLines
       - fix MusicXml import: line position of notes which moved to another staff
         was wrong
 16.2.7 (ws)
