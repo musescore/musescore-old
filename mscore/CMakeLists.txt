@@ -165,7 +165,7 @@ add_custom_target(all.h.pch
    WORKING_DIRECTORY ${PROJECT_BINARY_DIR}/mscore
    )
 
-subdirs(fluid mscore share doc)
+subdirs(awl fluid mscore share doc)
 
 include_directories(
    ${PROJECT_SOURCE_DIR}

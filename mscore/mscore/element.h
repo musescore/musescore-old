@@ -58,14 +58,13 @@ enum { ACC_NONE, ACC_SHARP, ACC_FLAT, ACC_SHARP2, ACC_FLAT2, ACC_NATURAL };
 extern const char* elementNames[];  // for debugging
 
 //---------------------------------------------------------
-//   Element
+///   \brief base class of score layout elements
+///
+///   The Element class is the virtual base class of all
+///   score layout elements.
+///
+///   More details: TBD
 //---------------------------------------------------------
-
-/**
- The Element class is the virtual base class of all score layout elements.
-
- More details: TBD
-*/
 
 class Element {
       Element* _next;
@@ -73,8 +72,8 @@ class Element {
       Element* _parent;
       Measure* _anchor;
 
-      bool _selected;
-      bool _dropTarget;
+      bool _selected;   ///< set if element is selected
+      bool _dropTarget; ///< true, if element accepts drops
       bool _generated;  ///< automatically generated Element
       bool _visible;    ///< visibility attribute
 

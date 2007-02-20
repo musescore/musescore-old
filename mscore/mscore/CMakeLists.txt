@@ -24,6 +24,8 @@ set(CMAKE_CXX_FLAGS_DEBUG   "-DQT_DEBUG")
 
 include_directories(
       ${CMAKE_CURRENT_BINARY_DIR}
+      ${PROJECT_SOURCE_DIR}/fluid
+      ${PROJECT_SOURCE_DIR}/awl
       )
 
 QT4_WRAP_UI (ui_headers
@@ -174,6 +176,7 @@ target_link_libraries(mscore
       ${ALSA_LIB}
       ${JACK_LIB}
       fluid
+      awl
       )
 ##      readline
 

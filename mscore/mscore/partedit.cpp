@@ -34,19 +34,13 @@ PartEdit::PartEdit()
       {
       setupUi(this);
       connect(patch,    SIGNAL(activated(int)),    SLOT(patchChanged(int)));
-      connect(volume,   SIGNAL(valueChanged(int)), SLOT(volChanged(int)));
-      connect(pan,      SIGNAL(valueChanged(int)), SLOT(panChanged(int)));
-      connect(chorus,   SIGNAL(valueChanged(int)), SLOT(chorusChanged(int)));
-      connect(reverb,   SIGNAL(valueChanged(int)), SLOT(reverbChanged(int)));
+      connect(volume,   SIGNAL(valueChanged(double,int)), SLOT(volChanged(double)));
+      connect(pan,      SIGNAL(valueChanged(double,int)), SLOT(panChanged(double)));
+      connect(chorus,   SIGNAL(valueChanged(double,int)), SLOT(chorusChanged(double)));
+      connect(reverb,   SIGNAL(valueChanged(double,int)), SLOT(reverbChanged(double)));
       connect(mute,     SIGNAL(toggled(bool)),     SLOT(muteChanged(bool)));
       connect(solo,     SIGNAL(toggled(bool)),     SLOT(soloChanged(bool)));
       connect(showPart, SIGNAL(toggled(bool)),     SLOT(showPartChanged(bool)));
-      connect(channel,  SIGNAL(valueChanged(int)), SLOT(channelChanged(int)));
-      connect(minPitch, SIGNAL(valueChanged(int)), SLOT(minPitchChanged(int)));
-      connect(maxPitch, SIGNAL(valueChanged(int)), SLOT(maxPitchChanged(int)));
-      connect(partName, SIGNAL(textChanged(const QString&)), SLOT(partNameChanged(const QString&)));
-      connect(shortName, SIGNAL(textChanged(const QString&)), SLOT(shortNameChanged(const QString&)));
-      connect(longName, SIGNAL(textChanged(const QString&)), SLOT(longNameChanged(const QString&)));
       }
 
 //---------------------------------------------------------
@@ -60,17 +54,12 @@ void PartEdit::setPart(Part* p)
       partName->setText(part->trackName());
       mute->setChecked(i->mute);
       solo->setChecked(i->solo);
-      showPart->setChecked(i->show);
-      channel->setValue(i->midiChannel);
+      showPart->setChecked(part->show());
       volume->setValue(i->volume);
       reverb->setValue(i->reverb);
       chorus->setValue(i->chorus);
       pan->setValue(i->pan);
       patch->setCurrentIndex(i->midiProgram);   // TODO!
-      shortName->setText(part->shortName().toPlainText());  // TODO
-      longName->setText(part->longName().toPlainText());    // TODO
-      minPitch->setValue(i->minPitch);
-      maxPitch->setValue(i->maxPitch);
       }
 
 //---------------------------------------------------------
@@ -165,52 +154,56 @@ void PartEdit::patchChanged(int n)
 //   volChanged
 //---------------------------------------------------------
 
-void PartEdit::volChanged(int val)
+void PartEdit::volChanged(double val)
       {
-// printf("volChanged %d\n", val);
+// printf("volChanged %d\n", lrint(val));
       Synth* synti = seq->synth();
       Instrument* i = part->instrument();
-      synti->setController(i->midiChannel, CTRL_VOLUME, val);
-      i->volume = val;
+      int iv = lrint(val);
+      synti->setController(i->midiChannel, CTRL_VOLUME, iv);
+      i->volume = iv;
       }
 
 //---------------------------------------------------------
 //   panChanged
 //---------------------------------------------------------
 
-void PartEdit::panChanged(int val)
+void PartEdit::panChanged(double val)
       {
-// printf("panChanged %d\n", val);
+// printf("panChanged %d\n", lrint(val));
       Synth* synti = seq->synth();
       Instrument* i = part->instrument();
-      synti->setController(i->midiChannel, CTRL_PAN, val);
-      i->pan = val;
+      int iv = lrint(val);
+      synti->setController(i->midiChannel, CTRL_PAN, iv);
+      i->pan = iv;
       }
 
 //---------------------------------------------------------
 //   reverbChanged
 //---------------------------------------------------------
 
-void PartEdit::reverbChanged(int val)
+void PartEdit::reverbChanged(double val)
       {
-// printf("reverbChanged %d\n", val);
+// printf("reverbChanged %d\n", lrint(val));
       Synth* synti = seq->synth();
       Instrument* i = part->instrument();
-      synti->setController(i->midiChannel, CTRL_REVERB_SEND, val);
-      i->reverb = val;
+      int iv = lrint(val);
+      synti->setController(i->midiChannel, CTRL_REVERB_SEND, iv);
+      i->reverb = iv;
       }
 
 //---------------------------------------------------------
 //   chorusChanged
 //---------------------------------------------------------
 
-void PartEdit::chorusChanged(int val)
+void PartEdit::chorusChanged(double val)
       {
-// printf("chorusChanged %d\n", val);
+// printf("chorusChanged %d\n", lrint(val));
       Synth* synti = seq->synth();
       Instrument* i = part->instrument();
-      synti->setController(i->midiChannel, CTRL_CHORUS_SEND, val);
-      i->chorus = val;
+      int iv = lrint(val);
+      synti->setController(i->midiChannel, CTRL_CHORUS_SEND, iv);
+      i->chorus = iv;
       }
 
 void PartEdit::muteChanged(bool val)
@@ -227,40 +220,7 @@ void PartEdit::soloChanged(bool val)
 
 void PartEdit::showPartChanged(bool val)
       {
-      Instrument* i = part->instrument();
-      i->show = val;
-      }
-
-void PartEdit::channelChanged(int val)
-      {
-      Instrument* i = part->instrument();
-      i->midiChannel = val;
-      }
-
-void PartEdit::minPitchChanged(int val)
-      {
-      Instrument* i = part->instrument();
-      i->minPitch = val;
-      }
-
-void PartEdit::maxPitchChanged(int val)
-      {
-      Instrument* i = part->instrument();
-      i->maxPitch = val;
-      }
-
-void PartEdit::partNameChanged(const QString& s)
-      {
-      part->setTrackName(s);
-      }
-
-void PartEdit::shortNameChanged(const QString& s)
-      {
-      part->setShortName(s);
-      }
-
-void PartEdit::longNameChanged(const QString& s)
-      {
-      part->setLongName(s);
+      part->setShow(val);
+      part->score()->layout();
       }
 

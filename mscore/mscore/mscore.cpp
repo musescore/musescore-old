@@ -454,7 +454,7 @@ MuseScore::MuseScore()
       menuEdit->addAction(a);
       selectionChanged(0);
       menuEdit->addSeparator();
-      menuEdit->addAction(tr("Instrument List..."), this, SLOT(startInstrumentListEditor()));
+      menuEdit->addAction(tr("Part List..."), this, SLOT(startInstrumentListEditor()));
       menuEdit->addSeparator();
       menuEdit->addAction(tr("Page List..."), this, SLOT(startPageListEditor()));
       menuEdit->addSeparator();

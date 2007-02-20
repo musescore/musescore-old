@@ -37,19 +37,13 @@ class PartEdit : public QWidget, public Ui::PartEditBase {
 
    private slots:
       void patchChanged(int);
-      void volChanged(int);
-      void panChanged(int);
-      void reverbChanged(int);
-      void chorusChanged(int);
+      void volChanged(double);
+      void panChanged(double);
+      void reverbChanged(double);
+      void chorusChanged(double);
       void muteChanged(bool);
       void soloChanged(bool);
       void showPartChanged(bool);
-      void channelChanged(int);
-      void minPitchChanged(int);
-      void maxPitchChanged(int);
-      void partNameChanged(const QString&);
-      void shortNameChanged(const QString&);
-      void longNameChanged(const QString&);
 
    public:
       PartEdit();

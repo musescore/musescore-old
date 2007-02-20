@@ -1,4 +1,5 @@
 20.2.7 (ws)
+      - use awl (muse audio widget library) for part editor knobs
       - first implementation or nested system brackets
       - fix in fluid for 64 bit systems
 19.2.7 (ws)
