@@ -23,7 +23,7 @@
 
 /**
  \file
- Definition of classes Element, ElementList, SStaff.
+ Definition of classes Element, ElementList, StaffLines.
 */
 
 #include "spatium.h"
@@ -38,7 +38,7 @@ class Painter;
 class Sym;
 
 enum ElementType {
-      SYMBOL, TEXT, STAFF, SLUR_SEGMENT, NOTE, BAR_LINE,
+      SYMBOL, TEXT, STAFF_LINES, SLUR_SEGMENT, NOTE, BAR_LINE,
       STEM, COMPOUND, LINE, BRACKET,
 /*11*/      ACCIDENTAL,
       CURSOR, SELECTION, LASSO,
@@ -279,23 +279,23 @@ typedef ElementList::iterator iElement;
 typedef ElementList::const_iterator ciElement;
 
 //---------------------------------------------------------
-//   SStaff
+//   StaffLines
 //---------------------------------------------------------
 
 /**
- The SStaff class is the graphic representation of a staff,
+ The StaffLines class is the graphic representation of a staff,
  it draws the horizontal staff lines.
 */
 
-class SStaff : public Element {
+class StaffLines : public Element {
       // Spatium lineWidth;
       qreal _width;
       int lines;
 
    public:
-      SStaff(Score*);
-      virtual SStaff* clone() const    { return new SStaff(*this); }
-      virtual ElementType type() const { return STAFF; }
+      StaffLines(Score*);
+      virtual StaffLines* clone() const    { return new StaffLines(*this); }
+      virtual ElementType type() const { return STAFF_LINES; }
       void setWidth(qreal v)           { _width = v; }
       virtual QRectF bbox() const;
       virtual void draw1(Painter&);

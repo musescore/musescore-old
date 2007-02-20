@@ -412,10 +412,10 @@ bool MuseScore::saveFile(QFileInfo& info)
       }
 
 //---------------------------------------------------------
-//   SStaff::write
+//   StaffLines::write
 //---------------------------------------------------------
 
-void SStaff::write(Xml& xml) const
+void StaffLines::write(Xml& xml) const
       {
       xml.stag("Staff");
       xml.tag("lines", lines);
@@ -424,10 +424,10 @@ void SStaff::write(Xml& xml) const
       }
 
 //---------------------------------------------------------
-//   SStaff::read
+//   StaffLines::read
 //---------------------------------------------------------
 
-void SStaff::read(QDomNode node)
+void StaffLines::read(QDomNode node)
       {
       for (node = node.firstChild(); !node.isNull(); node = node.nextSibling()) {
             QDomElement e = node.toElement();

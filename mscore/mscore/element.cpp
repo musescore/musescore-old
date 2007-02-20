@@ -20,7 +20,7 @@
 
 /**
  \file
- Implementation of Element, ElementList, SStaff.
+ Implementation of Element, ElementList, StaffLines.
 */
 
 #include "element.h"
@@ -40,7 +40,7 @@ extern bool showInvisible;
 
 // for debugging:
 const char* elementNames[] = {
-      "Symbol", "Text", "Staff", "SlurSegment", "Note", "BarLine",
+      "Symbol", "Text", "StaffLines", "SlurSegment", "Note", "BarLine",
       "Stem", "Compound", "Line", "SystemBracket",
       "Accidental",
       "Cursor", "Selection", "Lasso", "Clef", "KeySig", "TimeSig", "Chord", "Rest",
@@ -387,10 +387,10 @@ void ElementList::add(Element* e)
       }
 
 //---------------------------------------------------------
-//   SStaff
+//   StaffLines
 //---------------------------------------------------------
 
-SStaff::SStaff(Score* s)
+StaffLines::StaffLines(Score* s)
    : Element(s)
       {
       lines = 5;
@@ -401,7 +401,7 @@ SStaff::SStaff(Score* s)
 //   bbox
 //---------------------------------------------------------
 
-QRectF SStaff::bbox() const
+QRectF StaffLines::bbox() const
       {
       qreal lw = point(::style->staffLineWidth);
       return QRectF(0.0, -lw*.5, _width, (lines-1) * _spatium + lw);
@@ -411,7 +411,7 @@ QRectF SStaff::bbox() const
 //   draw
 //---------------------------------------------------------
 
-void SStaff::draw1(Painter& p)
+void StaffLines::draw1(Painter& p)
       {
       QPointF _pos(0.0, 0.0);
 
@@ -1027,8 +1027,8 @@ int Element::readType(QDomNode& node)
                         type = SYMBOL;
                   else if (e.tagName() == "Text")
                         type = TEXT;
-                  else if (e.tagName() == "Staff")
-                        type = STAFF;
+                  else if (e.tagName() == "StaffLines")
+                        type = STAFF_LINES;
                   else if (e.tagName() == "Slur")
                         type = SLUR_SEGMENT;
                   else if (e.tagName() == "Note")

@@ -34,23 +34,41 @@ class Score;
 class KeyList;
 
 //---------------------------------------------------------
+//   BracketItem
+//---------------------------------------------------------
+
+struct BracketItem {
+      int _bracket;
+      int _bracketSpan;
+
+      BracketItem() {
+            _bracket = -1;
+            _bracketSpan = 0;
+            }
+      BracketItem(int a, int b) {
+            _bracket = a;
+            _bracketSpan = b;
+            }
+      };
+
+//---------------------------------------------------------
 //   Staff
 //---------------------------------------------------------
 
 /**
  Global staff data not directly related to drawing.
 
- Most functions actually return data of the part the staff is associated with.
+ Most functions actually return data of the part the staff is
+ associated with.
 */
 
 class Staff {
       Score* _score;
       Part* _part;
-      int _rstaff;                  ///< Index in Part.
+      int _rstaff;            ///< Index in Part.
       ClefList* _clef;
       KeyList* _keymap;
-      int _bracket;
-      int _bracketSpan;             ///< Bracket this number of staves.
+      QList <BracketItem> _brackets;
 
    public:
       Staff(Score*, Part*, int);
@@ -73,10 +91,12 @@ class Staff {
       void write(Xml& xml) const;
       Instrument* instrument() const;
       Part* part() const             { return _part;        }
-      int bracket() const            { return _bracket;     }
-      int bracketSpan() const        { return _bracketSpan; }
-      void setBracket(int val)       { _bracket = val;      }
-      void setBracketSpan(int val)   { _bracketSpan = val;  }
+      int bracket(int idx) const;
+      int bracketSpan(int idx) const;
+      void setBracket(int idx, int val);
+      void setBracketSpan(int idx, int val);
+      int bracketLevels() const      { return _brackets.size(); }
+      void addBracket(BracketItem);
       KeyList* keymap() const        { return _keymap;      }
       ClefList* clef() const         { return _clef; }
       void changeKeySig(int tick, int st);

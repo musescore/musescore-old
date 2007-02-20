@@ -522,8 +522,8 @@ void MuseScore::editInstrList()
                         ++rstaff;
                         staff->clef()->setClef(0, sli->clef());
                         if (cidx == 0) {
-                              staff->setBracket(t->bracket);
-                              staff->setBracketSpan(t->staves);
+                              staff->setBracket(0, t->bracket);
+                              staff->setBracketSpan(0, t->staves);
                               }
                         part->staves()->push_back(staff);
                         cs->staves()->insert(staffIdx + rstaff, staff);

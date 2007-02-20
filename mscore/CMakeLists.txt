@@ -47,11 +47,6 @@ if (CROSS_MINGW)
       set (CMAKE_VERBOSE_MAKEFILE ON)
 ENDIF(CROSS_MINGW)
 
-message (============================)
-message ("${LINK_DIRECTORIES}")
-message (============================)
-      set (LINK_DIRECTORIES /home/ws/.wine/drive_c/MinGW)
-
 # set(CMAKE_BUILD_TYPE DEBUG)
 # set(CMAKE_BUILD_TYPE RELEASE)
 
@@ -71,7 +66,7 @@ include ( ${PROJECT_SOURCE_DIR}/cmake/UsePkgConfig1.cmake )
 include ( ${PROJECT_SOURCE_DIR}/cmake/TargetDoc.cmake)
 
 # for debugging the make system uncomment next line:
-set(CMAKE_VERBOSE_MAKEFILE ON)
+# set(CMAKE_VERBOSE_MAKEFILE ON)
 
 set(QT_USE_QTXML TRUE)
 set(QT_USE_QTDESIGNER TRUE)

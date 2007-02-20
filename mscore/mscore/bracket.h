@@ -35,6 +35,8 @@ class Bracket : public Element {
       bool editMode;
       qreal h2;
 
+      int _level;
+
       QPainterPath path;
       QRectF grip;
       qreal yoff;
@@ -48,6 +50,8 @@ class Bracket : public Element {
 
       int span() const      { return _span; }
       void setSpan(int val) { _span = val; }
+      int level() const     { return _level; }
+      void setLevel(int v)  { _level = v; }
 
       virtual QRectF bbox() const;
       virtual void setHeight(qreal);

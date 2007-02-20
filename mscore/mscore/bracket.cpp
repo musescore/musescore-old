@@ -37,6 +37,7 @@ Bracket::Bracket(Score* s)
       h2       = 0.0;
       editMode = false;
       _span    = 1;
+      _level   = 0;
       }
 
 //---------------------------------------------------------
@@ -143,6 +144,8 @@ void Bracket::write(Xml& xml) const
                   xml.stag("Bracket");
                   break;
             }
+      if (_level)
+            xml.tag("level", _level);
       Element::writeProperties(xml);
       xml.etag("Bracket");
       }
@@ -164,7 +167,14 @@ void Bracket::read(QDomNode node)
             fprintf(stderr, "unknown brace type <%s>\n", t.toLatin1().data());
 
       for (node = node.firstChild(); !node.isNull(); node = node.nextSibling()) {
-            if (Element::readProperties(node))
+            QDomElement e = node.toElement();
+            if (e.isNull())
+                  continue;
+            QString tag(e.tagName());
+            QString val(e.text());
+            if (tag == "level")
+                  _level = val.toInt();
+            else if (Element::readProperties(node))
                   ;
             else
                   domError(node);
@@ -320,7 +330,7 @@ bool Bracket::endEditDrag()
 
       yoff = 0.0;
       layout();
-      score()->staff(idx1)->setBracketSpan(idx2 - idx1 + 1);
+      score()->staff(idx1)->setBracketSpan(_level, idx2 - idx1 + 1);
       grip.moveTo(0.0, h2 *2);
       return true;
       }
@@ -352,6 +362,7 @@ void Bracket::drop(const QPointF&, int type, const QDomNode& node)
             b->setParent(parent());
             b->setStaff(staff());
             b->setSpan(span());
+            b->setLevel(level());
             score()->cmdRemove(this);
             score()->cmdAdd(b);
             score()->layout();

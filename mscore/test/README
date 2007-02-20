@@ -15,8 +15,15 @@ test7.msc
 tuplets.msc
       - triplet
 
+slur2.msc
+      slur spanning two systems
+
 testKeysig2.msc
 testTimesig2.msc
+
+-------------------------------------------------
+      MIDI Testfiles
+-------------------------------------------------
 
 midi1.mid	single track, single voice
 midi2.mid	single track, simple chords
