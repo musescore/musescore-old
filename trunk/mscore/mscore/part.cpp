@@ -35,6 +35,7 @@ Part::Part(Score* s)
       _shortName.setDefaultFont(textStyles[TEXT_STYLE_INSTRUMENT_SHORT].font());
       cs = s;
       _staves = new StaffList;
+      _show = true;
       }
 
 //---------------------------------------------------------
@@ -85,6 +86,8 @@ void Part::read(Score* score, QDomNode node)
                   _trackName = val;
 //printf("trackName <%s>\n", val.toLocal8Bit().data());
                   }
+            else if (tag == "show")
+                  _show = val.toInt();
             else
                   printf("Mscore:Part: unknown tag %s\n", tag.toLocal8Bit().data());
             }
@@ -141,6 +144,8 @@ void Part::write(Xml& xml) const
             xml.tag("name", _longName.toHtml("utf8"));
       if (!_shortName.isEmpty())
             xml.tag("shortName", _shortName.toHtml("utf8"));
+      if (!_show)
+            xml.tag("show", _show);
       _instrument.write(xml);
       xml.etag("Part");
       }
@@ -191,7 +196,6 @@ Instrument::Instrument()
       reverb  = 30;
       mute    = false;
       solo    = false;
-      show    = true;
       minPitch = 0;
       maxPitch = 127;
       }
@@ -216,8 +220,6 @@ void Instrument::write(Xml& xml) const
             xml.tag("mute", mute);
       if (solo)
             xml.tag("solo", solo);
-      if (!show)
-            xml.tag("show", show);
       if (minPitch > 0)
             xml.tag("minPitch", minPitch);
       if (maxPitch < 127)
@@ -254,8 +256,6 @@ void Instrument::read(QDomNode node)
                   mute = i;
             else if (tag == "solo")
                   solo = i;
-            else if (tag == "show")
-                  show = i;
             else if (tag == "minPitch")
                   minPitch = i;
             else if (tag == "maxPitch")

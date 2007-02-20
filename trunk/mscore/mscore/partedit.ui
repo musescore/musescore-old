@@ -1,15 +1,12 @@
 <ui version="4.0" >
- <author></author>
- <comment></comment>
- <exportmacro></exportmacro>
  <class>PartEditBase</class>
  <widget class="QWidget" name="PartEditBase" >
   <property name="geometry" >
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>596</width>
-    <height>173</height>
+    <width>438</width>
+    <height>124</height>
    </rect>
   </property>
   <property name="windowTitle" >
@@ -17,10 +14,10 @@
   </property>
   <layout class="QVBoxLayout" >
    <property name="margin" >
-    <number>-1</number>
+    <number>9</number>
    </property>
    <property name="spacing" >
-    <number>0</number>
+    <number>6</number>
    </property>
    <item>
     <widget class="QGroupBox" name="groupBox" >
@@ -32,244 +29,130 @@
      </property>
      <layout class="QGridLayout" >
       <property name="margin" >
-       <number>3</number>
+       <number>0</number>
       </property>
       <property name="spacing" >
-       <number>4</number>
+       <number>3</number>
       </property>
-      <item row="0" column="8" >
-       <widget class="QSpinBox" name="minPitch" >
-        <property name="maximum" >
-         <number>127</number>
-        </property>
-       </widget>
-      </item>
-      <item row="1" column="8" >
-       <widget class="QSpinBox" name="maxPitch" >
-        <property name="maximum" >
-         <number>127</number>
-        </property>
-        <property name="value" >
-         <number>127</number>
-        </property>
-       </widget>
-      </item>
-      <item row="2" column="8" >
-       <widget class="QLineEdit" name="longName" />
-      </item>
-      <item row="2" column="7" >
-       <widget class="QLabel" name="label_5" >
-        <property name="text" >
-         <string>Long Name:</string>
-        </property>
-        <property name="textFormat" >
-         <enum>Qt::PlainText</enum>
-        </property>
-       </widget>
-      </item>
-      <item row="3" column="7" >
-       <widget class="QLabel" name="label_6" >
-        <property name="text" >
-         <string>Short Name:</string>
-        </property>
-        <property name="textFormat" >
-         <enum>Qt::PlainText</enum>
-        </property>
-       </widget>
-      </item>
-      <item row="3" column="8" >
-       <widget class="QLineEdit" name="shortName" />
-      </item>
-      <item row="1" column="7" >
-       <widget class="QLabel" name="label_4" >
-        <property name="text" >
-         <string>Max.Pitch:</string>
-        </property>
-        <property name="textFormat" >
-         <enum>Qt::PlainText</enum>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="7" >
-       <widget class="QLabel" name="label_3" >
-        <property name="text" >
-         <string>Min.Pitch:</string>
-        </property>
-        <property name="textFormat" >
-         <enum>Qt::PlainText</enum>
-        </property>
-       </widget>
-      </item>
       <item row="2" column="2" colspan="2" >
        <widget class="QComboBox" name="patch" />
       </item>
-      <item row="1" column="2" colspan="2" >
+      <item row="2" column="0" colspan="2" >
        <widget class="QLabel" name="label_2" >
         <property name="text" >
-         <string>Midi Patch</string>
+         <string>Sound:</string>
         </property>
         <property name="textFormat" >
          <enum>Qt::PlainText</enum>
         </property>
        </widget>
       </item>
-      <item row="2" column="1" >
-       <widget class="QCheckBox" name="solo" >
-        <property name="text" >
-         <string>Solo</string>
-        </property>
-       </widget>
-      </item>
-      <item row="2" column="0" >
-       <spacer>
-        <property name="orientation" >
-         <enum>Qt::Horizontal</enum>
-        </property>
-        <property name="sizeHint" >
-         <size>
-          <width>59</width>
-          <height>28</height>
-         </size>
-        </property>
-       </spacer>
-      </item>
-      <item row="1" column="0" >
-       <spacer>
-        <property name="orientation" >
-         <enum>Qt::Horizontal</enum>
-        </property>
-        <property name="sizeHint" >
-         <size>
-          <width>59</width>
-          <height>25</height>
-         </size>
-        </property>
-       </spacer>
-      </item>
-      <item row="1" column="1" >
-       <widget class="QCheckBox" name="mute" >
-        <property name="text" >
-         <string>Mute</string>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="3" >
-       <widget class="QSpinBox" name="channel" >
-        <property name="maximum" >
-         <number>16</number>
-        </property>
-        <property name="minimum" >
-         <number>1</number>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="2" >
-       <widget class="QLabel" name="label" >
-        <property name="text" >
-         <string>Channel</string>
-        </property>
-        <property name="textFormat" >
-         <enum>Qt::PlainText</enum>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="0" colspan="2" >
-       <widget class="QLineEdit" name="partName" />
-      </item>
-      <item row="3" column="1" >
+      <item row="1" column="3" >
        <widget class="QCheckBox" name="showPart" >
         <property name="text" >
          <string>Show</string>
         </property>
        </widget>
       </item>
-      <item row="3" column="4" colspan="3" >
-       <widget class="QSlider" name="pan" >
-        <property name="sizePolicy" >
-         <sizepolicy>
-          <hsizetype>0</hsizetype>
-          <vsizetype>0</vsizetype>
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
+      <item row="1" column="1" colspan="2" >
+       <widget class="QCheckBox" name="solo" >
+        <property name="text" >
+         <string>Solo</string>
         </property>
-        <property name="toolTip" >
+       </widget>
+      </item>
+      <item row="1" column="0" >
+       <widget class="QCheckBox" name="mute" >
+        <property name="text" >
+         <string>Mute</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="0" colspan="4" >
+       <widget class="QLineEdit" name="partName" />
+      </item>
+      <item row="2" column="4" >
+       <widget class="QLabel" name="label" >
+        <property name="text" >
+         <string>Vol</string>
+        </property>
+        <property name="alignment" >
+         <set>Qt::AlignCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="5" >
+       <widget class="QLabel" name="label_3" >
+        <property name="text" >
          <string>Pan</string>
         </property>
-        <property name="maximum" >
-         <number>127</number>
-        </property>
-        <property name="orientation" >
-         <enum>Qt::Horizontal</enum>
+        <property name="alignment" >
+         <set>Qt::AlignCenter</set>
         </property>
        </widget>
       </item>
-      <item rowspan="3" row="0" column="4" >
-       <widget class="QSlider" name="volume" >
-        <property name="sizePolicy" >
-         <sizepolicy>
-          <hsizetype>4</hsizetype>
-          <vsizetype>0</vsizetype>
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
+      <item row="2" column="6" >
+       <widget class="QLabel" name="label_4" >
+        <property name="text" >
+         <string>Rev</string>
         </property>
-        <property name="toolTip" >
-         <string>Volume</string>
-        </property>
-        <property name="maximum" >
-         <number>127</number>
-        </property>
-        <property name="orientation" >
-         <enum>Qt::Vertical</enum>
+        <property name="alignment" >
+         <set>Qt::AlignCenter</set>
         </property>
        </widget>
       </item>
-      <item rowspan="3" row="0" column="5" >
-       <widget class="QSlider" name="reverb" >
-        <property name="sizePolicy" >
-         <sizepolicy>
-          <hsizetype>4</hsizetype>
-          <vsizetype>0</vsizetype>
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
+      <item row="2" column="7" >
+       <widget class="QLabel" name="label_5" >
+        <property name="text" >
+         <string>Cho</string>
         </property>
-        <property name="toolTip" >
-         <string>Reverb Send</string>
-        </property>
-        <property name="maximum" >
-         <number>127</number>
-        </property>
-        <property name="orientation" >
-         <enum>Qt::Vertical</enum>
+        <property name="alignment" >
+         <set>Qt::AlignCenter</set>
         </property>
        </widget>
       </item>
-      <item rowspan="3" row="0" column="6" >
-       <widget class="QSlider" name="chorus" >
-        <property name="sizePolicy" >
-         <sizepolicy>
-          <hsizetype>4</hsizetype>
-          <vsizetype>0</vsizetype>
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
+      <item rowspan="2" row="0" column="5" >
+       <widget class="Awl::MidiPanKnob" name="pan" />
+      </item>
+      <item rowspan="2" row="0" column="4" >
+       <widget class="Awl::Knob" name="volume" >
+        <property name="invertedAppearance" >
+         <bool>false</bool>
         </property>
-        <property name="toolTip" >
-         <string>Chorus Send</string>
+        <property name="maxValue" >
+         <double>127.000000000000000</double>
         </property>
-        <property name="minimum" >
-         <number>0</number>
+        <property name="lineStep" >
+         <double>1.000000000000000</double>
         </property>
-        <property name="value" >
-         <number>0</number>
+        <property name="pageStep" >
+         <double>10.000000000000000</double>
         </property>
-        <property name="sliderPosition" >
-         <number>0</number>
+       </widget>
+      </item>
+      <item rowspan="2" row="0" column="6" >
+       <widget class="Awl::Knob" name="reverb" >
+        <property name="maxValue" >
+         <double>127.000000000000000</double>
         </property>
-        <property name="orientation" >
-         <enum>Qt::Vertical</enum>
+        <property name="lineStep" >
+         <double>1.000000000000000</double>
+        </property>
+        <property name="pageStep" >
+         <double>10.000000000000000</double>
+        </property>
+       </widget>
+      </item>
+      <item rowspan="2" row="0" column="7" >
+       <widget class="Awl::Knob" name="chorus" >
+        <property name="maxValue" >
+         <double>127.000000000000000</double>
+        </property>
+        <property name="lineStep" >
+         <double>1.000000000000000</double>
+        </property>
+        <property name="pageStep" >
+         <double>10.000000000000000</double>
         </property>
        </widget>
       </item>
@@ -278,7 +161,18 @@
    </item>
   </layout>
  </widget>
- <pixmapfunction></pixmapfunction>
+ <customwidgets>
+  <customwidget>
+   <class>Awl::MidiPanKnob</class>
+   <extends>Awl::Knob</extends>
+   <header>awl/midipanknob.h</header>
+  </customwidget>
+  <customwidget>
+   <class>Awl::Knob</class>
+   <extends>QWidget</extends>
+   <header>awl/knob.h</header>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections/>
 </ui>

@@ -40,7 +40,6 @@ struct Instrument {
       int  reverb;
       bool mute;
       bool solo;
-      bool show;
       int  minPitch;
       int  maxPitch;
 
@@ -55,12 +54,13 @@ struct Instrument {
 
 class Part {
       Score* cs;
-      QString _trackName;           // used in tracklist
-      QTextDocument _longName;      // shown on first system
-      QTextDocument _shortName;     // shown on followup systems
+      QString _trackName;           ///< used in tracklist
+      QTextDocument _longName;      ///< shown on first system
+      QTextDocument _shortName;     ///< shown on followup systems
       Instrument _instrument;
       StaffList* _staves;
-      QString _id;                  // used for MusicXml import
+      QString _id;                  ///< used for MusicXml import
+      bool _show;                   ///< show part in partitur if true
 
    public:
       Part(Score*);
@@ -68,13 +68,13 @@ class Part {
       void read(Score*, QDomNode);
       void write(Xml& xml) const;
       int nstaves() const;
-      StaffList* staves() const           { return _staves; }
+      StaffList* staves() const                { return _staves; }
       Staff* staff(int idx) const;
-      void setId(const QString& s)        { _id = s; }
-      QString id() const                  { return _id; }
+      void setId(const QString& s)             { _id = s; }
+      QString id() const                       { return _id; }
       const QTextDocument& shortName() const   { return _shortName; }
       const QTextDocument& longName() const    { return _longName;  }
-      QString trackName() const           { return _trackName; }
+      QString trackName() const                { return _trackName; }
       void setLongName(const QString& s);
       void setShortName(const QString& s);
       void setLongName(const QTextDocument& s);
@@ -96,6 +96,9 @@ class Part {
       void removeStaff(Staff*);
       const Instrument* instrument() const { return &_instrument; }
       Instrument* instrument() { return &_instrument; }
+      bool show() const        { return _show; }
+      void setShow(bool val)   { _show = val; }
+      Score* score() const     { return cs; }
       };
 
 class PartList : public QList<Part*> {
