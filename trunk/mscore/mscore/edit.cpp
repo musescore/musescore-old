@@ -581,8 +581,8 @@ void Score::putNote(const QPointF& pos, bool addToChord)
       int len   = padState.tickLen;
       int voice = padState.voice;
 
-      ChordRest* el = m->findChordRest(tick, staff, voice, false);
-      if (!el) {
+      ChordRest* el = (ChordRest*)searchNote(tick, staff->idx());
+      if (!el || !el->isChordRest()) {
             printf("putNote: chord/rest not found\n");
             return;
             }
@@ -1045,6 +1045,7 @@ void Score::lyricsTab()
             lyrics = (*ll)[0];
             }
       else {
+            editObject = lyrics;
             lyrics = new Lyrics(this);
             lyrics->setTick(segment->tick());
             lyrics->setStaff(editObject->staff());
@@ -1065,15 +1066,16 @@ void Score::lyricsTab()
 void Score::addLyrics()
       {
       Note* e = getSelectedNote();
-      if (e == 0)
+      if (e == 0) {
+            endCmd(true);
             return;
+            }
 
       Chord* chord     = e->chord();
       Segment* segment = chord->segment();
       int tick         = chord->tick();
       int staff        = chord->staffIdx();
 
-      startCmd();
       // check if there is already a lyrics entry
       Lyrics* lyrics;
       LyricsList* ll = segment->lyricsList(staff);
@@ -1098,6 +1100,7 @@ void Score::addLyrics()
 void Score::addExpression()
       {
       printf("Not impl.: addExpression()\n");
+      endCmd(true);
       }
 
 //---------------------------------------------------------
@@ -1107,6 +1110,7 @@ void Score::addExpression()
 void Score::addTechnik()
       {
       printf("Not impl.: addTechnik()\n");
+      endCmd(true);
       }
 
 //---------------------------------------------------------

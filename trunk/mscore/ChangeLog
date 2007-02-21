@@ -1,3 +1,9 @@
+21.2.7 (ws)
+      - fixes for page formatting: make style parameters accoladeDistance and
+        staffDistance work
+      - fixes for lyrics entry
+      - fix mouse entry of notes with voice > 1
+      - implement hiding of parts (flag in partlist editor)
 20.2.7 (ws)
       - use awl (muse audio widget library) for part editor knobs
       - first implementation or nested system brackets

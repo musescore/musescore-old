@@ -1040,6 +1040,54 @@ Shortcut MuseScore::sc[] = {
          QT_TR_NOOP("Zoom Canvas"),
          &viewmagIcon
          ),
+      Shortcut(
+         "lyrics",
+         QT_TR_NOOP("Lyrics"),
+         Qt::CTRL + Qt::Key_L,
+         Qt::WindowShortcut,
+         QT_TR_NOOP("Lyrics"),
+         QT_TR_NOOP("Lyrics")
+         ),
+      Shortcut(
+         "fingering",
+         QT_TR_NOOP("Fingering Palette"),
+         0,
+         Qt::WindowShortcut,
+         QT_TR_NOOP("Fingering..."),
+         QT_TR_NOOP("Fingering")
+         ),
+      Shortcut(
+         "expression",
+         QT_TR_NOOP("Expression Palette"),
+         Qt::CTRL + Qt::Key_E,
+         Qt::WindowShortcut,
+         QT_TR_NOOP("Expression"),
+         QT_TR_NOOP("Expression")
+         ),
+      Shortcut(
+         "technik",
+         QT_TR_NOOP("Technik Palette"),
+         Qt::CTRL + Qt::Key_T,
+         Qt::WindowShortcut,
+         QT_TR_NOOP("Technik"),
+         QT_TR_NOOP("Technik")
+         ),
+      Shortcut(
+         "tempo",
+         QT_TR_NOOP("Tempo Palette"),
+         Qt::CTRL+Qt::ALT + Qt::Key_T,
+         Qt::WindowShortcut,
+         QT_TR_NOOP("Tempo..."),
+         QT_TR_NOOP("Tempo")
+         ),
+      Shortcut(
+         "metronome",
+         QT_TR_NOOP("Metronome"),
+         Qt::CTRL+Qt::ALT + Qt::Key_M,
+         Qt::WindowShortcut,
+         QT_TR_NOOP("Metronome"),
+         QT_TR_NOOP("Metronome")
+         ),
       Shortcut(0, 0, 0),
       };
 

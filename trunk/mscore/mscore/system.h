@@ -48,8 +48,8 @@ class Bracket;
 */
 
 class SysStaff {
-      QRectF _bbox;   ///< Bbox of StaffLines.
-      Spatium _distance;
+      QRectF _bbox;           ///< Bbox of StaffLines.
+      Spatium _distance;      ///< distance to next staff
 
    public:
       int idx;
@@ -85,7 +85,7 @@ typedef SysStaffList::const_iterator ciSysStaff;
 class System : public Element {
       MeasureList* ml;
       SysStaffList _staves;
-      BarLine* barLine;               ///< Left hand bar, connects staves in system.
+      BarLine* barLine;       ///< Left hand bar, connects staves in system.
       bool _pageBreak;
       qreal _width;
 
@@ -117,6 +117,7 @@ class System : public Element {
 
       double distance(int n) const;
       void setDistance(int n, double v)    { _staves[n]->setDistance(v); }
+      void setDistance(int n, Spatium v)   { _staves[n]->setDistance(v); }
       bool pageBreak() const               { return _pageBreak; }
       void setPageBreak(bool val)          { _pageBreak = val; }
 

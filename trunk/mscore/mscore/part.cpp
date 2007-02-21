@@ -276,6 +276,7 @@ void Part::insertStaff(Staff* staff)
       if (idx > _staves->size())
             idx = _staves->size();
       _staves->insert(_staves->begin() + idx, staff);
+      staff->setShow(_show);
       idx = 0;
       for (iStaff i = _staves->begin(); i != _staves->end(); ++i, ++idx)
             (*i)->setRstaff(idx);
@@ -291,5 +292,16 @@ void Part::removeStaff(Staff* staff)
       int idx = 0;
       for (iStaff i = _staves->begin(); i != _staves->end(); ++i, ++idx)
             (*i)->setRstaff(idx);
+      }
+
+//---------------------------------------------------------
+//   setShow
+//---------------------------------------------------------
+
+void Part::setShow(bool val)
+      {
+      _show = val;
+      foreach(Staff* staff, *_staves)
+            staff->setShow(_show);
       }
 

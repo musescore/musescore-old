@@ -102,6 +102,7 @@ class Text : public Element {
       virtual QRectF bbox() const;
       virtual QPainterPath shape() const;
       virtual bool mousePress(const QPointF&);
+      double lineSpacing() const;
       };
 
 //---------------------------------------------------------

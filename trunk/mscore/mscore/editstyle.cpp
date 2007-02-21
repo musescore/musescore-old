@@ -70,7 +70,8 @@ void EditStyle::apply()
       ::style->measureNumberInterval = intervalMeasureNumber->value();
       ::style->measureNumberSystem = showEverySystemMeasureNumber->isChecked();
       ::style->measureNumberAllStaffs = showAllStaffsMeasureNumber->isChecked();
-      cs->layout();
+      cs->doLayout();
+      cs->setUpdateAll();
       cs->endCmd(false);
       }
 

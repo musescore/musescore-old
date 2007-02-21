@@ -641,7 +641,12 @@ void Measure::read(QDomNode node, int idx)
                   lyrics->setStaff(staff);
                   lyrics->read(node);
                   Segment* segment = tick2segment(lyrics->tick());
-                  segment->add(lyrics);
+                  if (segment == 0) {
+                        printf("no segment for lyrics at %d\n",
+                           lyrics->tick());
+                        }
+                  else
+                        segment->add(lyrics);
                   }
             else if (tag == "Text") {
                   Text* t = new Text(score());
@@ -928,16 +933,18 @@ void Measure::layout(double width)
                         Lyrics* lyrics = *i;
                         if (lyrics == 0)
                               continue;
+                        lyrics->layout();
                         // center to middle of notehead:
                         double noteHeadWidth = symbols[quartheadSym].width();
-                        double lh = 10; // TODO: lyrics->lineSpacing();
-                        double y = lh * line;
-                        // lyrics->setPos(segment->x() + noteHeadWidth/2, y);
-                        lyrics->setPos(noteHeadWidth/2, y);
-                        y += _spatium * 6;
+                        double lh = lyrics->lineSpacing();
+                        double y  = lh * line + 6 * _spatium;
+                        lyrics->setPos(noteHeadWidth/2 - lyrics->bbox().width() * .5, y);
+
+                        // increase staff distance if necessary
+                        y += _spatium * 4;
                         if ((staff+1) < st) {
-                              if (y > staves[staff+1].distance) {
-                                    staves[staff+1].distance = y;
+                              if (y > staves[staff].distance) {
+                                    staves[staff].distance = y;
                                     }
                               }
                         }
@@ -1136,9 +1143,10 @@ ChordRest* Measure::findChordRest(int tick, Staff* staff, int voice, bool /*grac
 
 Segment* Measure::tick2segment(int tick) const
       {
-      for (Segment* s = first(); s; s = s->next())
-            if (s->tick() == tick)
+      for (Segment* s = first(); s; s = s->next()) {
+            if ((s->segmentType() == Segment::SegChordRest) && (s->tick() == tick))
                   return s;
+            }
       return 0;
       }
 
@@ -1196,7 +1204,6 @@ Segment* Measure::getSegment(Element* e)
 void Measure::add(Element* el)
       {
       Staff* staffp = el->staff();
-//      if (el->type() != SEGMENT && el->type() != SLUR_SEGMENT && staffp == 0) {
       if (el->type() != SEGMENT && staffp == 0) {
             _pel.push_back(el);
             el->setAnchor(this);
@@ -1210,6 +1217,10 @@ void Measure::add(Element* el)
 //      this, el->name(), el, staffIdx, staves.size());
 
       switch (type) {
+            case BEAM:
+                  _pel.push_back(el);
+                  el->setAnchor(this);
+                  break;
             case SEGMENT:
                   {
                   Segment* s;
@@ -1462,8 +1473,9 @@ void Measure::draw(Painter& p)
             (*i)->draw(p);
       foreach(Tuplet* tuplet, _tuplets)
             tuplet->draw(p);
-      for (ciMStaff is = staves.begin(); is != staves.end(); ++is) {
-            if (is->endBarLine)
+      int staffIdx = 0;
+      for (ciMStaff is = staves.begin(); is != staves.end(); ++is, ++staffIdx) {
+            if (score()->part(staffIdx)->show() && is->endBarLine)
                   is->endBarLine->draw(p);
             }
       for (ciElement i = _sel.begin(); i != _sel.end(); ++i)
@@ -1735,8 +1747,10 @@ again:
 
             for (int track = 0; track < tracks; ++track) {
                   const Element* el = s->element(track);
-                  spaces[seg][track].setValid(el);
-                  if (el) {
+                  Staff* staff = score()->staff(track/VOICES);
+                  bool valid = el && staff->show();
+                  spaces[seg][track].setValid(valid);
+                  if (valid) {
                         double min, extra;
                         el->space(min, extra);
                         spaces[seg][track].setMin(min + additionalMin);
