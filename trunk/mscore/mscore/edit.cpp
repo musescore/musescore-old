@@ -1040,18 +1040,44 @@ void Score::lyricsTab()
 
       startCmd();
 
-      if (!segment->lyricsList(staff)->empty()) {
-            LyricsList* ll = segment->lyricsList(staff);
-            lyrics = (*ll)[0];
-            }
-      else {
-            editObject = lyrics;
-            lyrics = new Lyrics(this);
-            lyrics->setTick(segment->tick());
-            lyrics->setStaff(editObject->staff());
-            lyrics->setParent(segment);
-            undoOp(UndoOp::AddElement, lyrics);
-            }
+      Lyrics* oldLyrics = lyrics;
+      lyrics = new Lyrics(this);
+      lyrics->setTick(segment->tick());
+      lyrics->setStaff(oldLyrics->staff());
+      lyrics->setParent(segment);
+      lyrics->setNo(oldLyrics->no());
+      undoOp(UndoOp::AddElement, lyrics);
+
+      select(lyrics, 0, 0);
+      canvas()->startEdit(lyrics);
+
+      layout();
+      }
+
+//---------------------------------------------------------
+//   lyricsReturn
+//---------------------------------------------------------
+
+void Score::lyricsReturn()
+      {
+      Lyrics* lyrics   = (Lyrics*)editObject;
+      Segment* segment = (Segment*)(lyrics->parent());
+      int staff        = lyrics->staffIdx();
+      int track        = staff * VOICES;
+
+      canvas()->setState(Canvas::NORMAL);
+      endCmd(true);
+
+      startCmd();
+
+      Lyrics* oldLyrics = lyrics;
+
+      lyrics = new Lyrics(this);
+      lyrics->setTick(segment->tick());
+      lyrics->setStaff(oldLyrics->staff());
+      lyrics->setParent(segment);
+      lyrics->setNo(oldLyrics->no() + 1);
+      undoOp(UndoOp::AddElement, lyrics);
       select(lyrics, 0, 0);
       canvas()->startEdit(lyrics);
 
@@ -1076,18 +1102,17 @@ void Score::addLyrics()
       int tick         = chord->tick();
       int staff        = chord->staffIdx();
 
-      // check if there is already a lyrics entry
       Lyrics* lyrics;
       LyricsList* ll = segment->lyricsList(staff);
-      if (ll && !ll->empty())
-            lyrics = ll->front();
-      else {
-            lyrics = new Lyrics(this);
-            lyrics->setTick(tick);
-            lyrics->setStaff(chord->staff());
-            lyrics->setParent(segment);
-            undoOp(UndoOp::AddElement, lyrics);
-            }
+      int no = 0;
+      if (ll)
+            no = ll->size();
+      lyrics = new Lyrics(this);
+      lyrics->setTick(tick);
+      lyrics->setStaff(chord->staff());
+      lyrics->setParent(segment);
+      lyrics->setNo(no);
+      undoOp(UndoOp::AddElement, lyrics);
       select(lyrics, 0, 0);
       canvas()->startEdit(lyrics);
       layout();

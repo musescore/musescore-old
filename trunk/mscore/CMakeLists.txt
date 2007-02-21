@@ -45,6 +45,10 @@ if (CROSS_MINGW)
       set (CMAKE_SHARED_LIBRARY_LINK_CXX_FLAGS)
       set (CMAKE_SYSTEM_LIBRARY_PATH /home/ws/.wine/drive_c/MinGW)
       set (CMAKE_VERBOSE_MAKEFILE ON)
+      set (QT_X11_X11_LIBRARY "")
+      set (QT_X11_Xext_LIBRARY "")
+      set (QT_X11_m_LIBRARY "")
+      set (HAVE_PTHREAD OFF)
 ENDIF(CROSS_MINGW)
 
 # set(CMAKE_BUILD_TYPE DEBUG)
@@ -89,14 +93,12 @@ endif (APPLE)
 ##
 
 find_package(Qt4)
-
 if (NOT QT4_FOUND)
       message(FATAL_ERROR "Fatal error: QT (version >= 4.2.0) required.\n"
-      "Cmake tries to detect QT4 by searching for 'qmake' in your PATH\n"
-      "If you have QT4 installed, make sure qmake is found in your PATH."
-      )
-endif (NOT QT4_FOUND)
-
+         "Cmake tries to detect QT4 by searching for 'qmake' in your PATH\n"
+         "If you have QT4 installed, make sure qmake is found in your PATH."
+         )
+      endif (NOT QT4_FOUND)
 include(${QT_USE_FILE})
 
 ##

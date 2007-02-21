@@ -141,17 +141,7 @@ void Selection::remove(Element* el)
       _el.remove(el);
       updateState();
       }
-#if 0
-//---------------------------------------------------------
-//   splice
-//---------------------------------------------------------
 
-void Selection::add(ElementList& ns)
-      {
-      _el.splice(_el.begin(), ns);
-      update();
-      }
-#endif
 //---------------------------------------------------------
 //   add
 //---------------------------------------------------------
@@ -422,6 +412,13 @@ void Score::searchSelectedElements()
 
       for (Measure* m = _layout->first(); m; m = m->next()) {
             for (Segment* s = m->first(); s; s = s->next()) {
+                  for (int staffIdx = 0; staffIdx < nstaves(); ++staffIdx) {
+                        LyricsList* ll = s->lyricsList(staffIdx);
+                        foreach(Lyrics* l, *ll) {
+                              if (l && l->selected())
+                                    el->push_back(l);
+                              }
+                        }
                   for (int track = 0; track < tracks; ++track) {
                         Element* e = s->element(track);
                         if (e == 0)

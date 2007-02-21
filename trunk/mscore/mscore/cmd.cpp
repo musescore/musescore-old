@@ -1022,6 +1022,7 @@ void Score::cmd(const QString& cmd)
                   if (cis->pos != -1)
                         setNoteEntry(false, false);
                   select(0, 0, 0);
+                  endCmd(true);
                   }
             else if (cmd == "delete")
                   cmdDeleteSelection();

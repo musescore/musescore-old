@@ -335,6 +335,7 @@ class Score : public QObject {
       void setUpdateAll()              { updateAll = true; }
       void addRefresh(const QRectF& r) { refresh |= r; }
       void lyricsTab();
+      void lyricsReturn();
 
       void startEdit(Element* element);
       bool edit(QKeyEvent* ev);
