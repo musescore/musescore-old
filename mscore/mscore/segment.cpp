@@ -201,8 +201,14 @@ void Segment::add(Element* el)
       switch(el->type()) {
             case LYRICS:
                   {
+                  Lyrics* l = (Lyrics*) el;
                   LyricsList* ll = &_lyrics[staffIdx];
-                  ll->push_back((Lyrics*)el);
+                  int size = ll->size();
+                  if (l->no() >= size) {
+                        for (int i = size-1; i < l->no(); ++i)
+                              ll->append(0);
+                        }
+                  (*ll)[l->no()] = l;
                   }
                   break;
 
@@ -243,13 +249,24 @@ void Segment::remove(Element* el)
 // printf("Segment::remove %s\n", el->name());
       int staffIdx = el->staffIdx();
       if (el->type() == LYRICS) {
-            LyricsList* ll = &_lyrics[staffIdx];
-            if (ll) {
-                  for (iLyrics il = ll->begin(); il != ll->end(); ++il) {
-                        if ((*il) == el) {
-                              ll->erase(il);
-                              return;
+            LyricsList& ll = _lyrics[staffIdx];
+            for (int i = 0; i < ll.size(); ++i) {
+                  if (ll[i] == el) {
+                        ll[i] = 0;
+                        //
+                        // remove entry if last or rest of list
+                        // is empty
+                        //
+                        int n = 1;
+                        ++i;
+                        for (; i < ll.size(); ++i) {
+                              if (ll[i])
+                                    return;
+                              ++n;
                               }
+                        for (int i = 0; i < n; ++i)
+                              ll.removeLast();
+                        return;
                         }
                   }
             printf("Measure::remove: %s %p not found\n", el->name(), el);

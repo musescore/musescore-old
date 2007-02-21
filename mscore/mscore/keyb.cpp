@@ -49,6 +49,8 @@ void Canvas::keyPressEvent(QKeyEvent* ev)
       if (state == EDIT) {
             if ((ev->key() == Qt::Key_Tab) && (_score->editObject->type() == LYRICS))
                   _score->lyricsTab();
+            else if ((ev->key() == Qt::Key_Return) && (_score->editObject->type() == LYRICS))
+                  _score->lyricsReturn();
             else if (_score->edit(ev))
                   state = NORMAL;
             ev->accept();

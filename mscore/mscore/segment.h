@@ -82,7 +82,7 @@ class Segment : public Element {
       void removeElement(int track);
       void setElement(int track, Element* el);
       LyricsList* lyricsList(int track)             { return &_lyrics[track];  }
-      const LyricsList* lyricsList(int track) const { return &_lyrics[track];  }
+      const LyricsList* lyricsList(int staffIdx) const { return &_lyrics[staffIdx];  }
       void setLyrics(int staff, Lyrics* l);
 
       Measure* measure() const       { return (Measure*)parent(); }

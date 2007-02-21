@@ -375,7 +375,7 @@ void Text::writeProperties(Xml& xml) const
       xml.tag("xoffset", _xoff);
       xml.tag("yoffset", _yoff);
 
-      const char* p;
+      const char* p = "?";
       switch(_anchor) {
             case ANCHOR_PAGE:     p = "page"; break;
             case ANCHOR_TICK:     p = "tick"; break;
