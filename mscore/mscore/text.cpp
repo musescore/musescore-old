@@ -677,6 +677,9 @@ void Text::setBlockFormat(const QTextBlockFormat& bf)
 bool Text::mousePress(const QPointF& p)
       {
       QPointF pt = p - apos();
+      bool inText = bbox().contains(pt);
+      if (!inText)
+            return false;
       int idx = doc->documentLayout()->hitTest(pt, Qt::FuzzyHit);
       if (idx == -1)
             return true;
