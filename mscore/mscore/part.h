@@ -97,7 +97,7 @@ class Part {
       const Instrument* instrument() const { return &_instrument; }
       Instrument* instrument() { return &_instrument; }
       bool show() const        { return _show; }
-      void setShow(bool val)   { _show = val; }
+      void setShow(bool val);
       Score* score() const     { return cs; }
       };
 

@@ -56,8 +56,10 @@ bool ISynth::init(int sampleRate)
       else
             p = QString(getenv("DEFAULT_SOUNDFONT"));
       if (p.isEmpty()) {
-            fprintf(stderr, "Synth: no soundfont specified\n");
-            return true;
+            //
+            // fallback to integrated soundfont
+            //
+            p = ":/data/piano1.sf2";
             }
       return loadSoundFont(p);
       }

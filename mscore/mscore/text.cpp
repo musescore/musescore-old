@@ -611,6 +611,18 @@ QPainterPath Text::shape() const
       }
 
 //---------------------------------------------------------
+//   lineSpacing
+//---------------------------------------------------------
+
+double Text::lineSpacing() const
+      {
+      QTextBlock tb = doc->begin();
+      QTextLayout* tl = tb.layout();
+      QFontMetricsF fm(tl->font());
+      return fm.lineSpacing();
+      }
+
+//---------------------------------------------------------
 //   addSymbol
 //---------------------------------------------------------
 

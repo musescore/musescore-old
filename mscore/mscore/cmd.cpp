@@ -1313,6 +1313,17 @@ void Score::cmd(const QString& cmd)
                   else
                         printf("paste not supported: sel state %d\n", sel->state);
                   }
+      else if (cmd == "lyrics")
+            addLyrics();
+      else if (cmd == "expression")
+            addExpression();
+      else if (cmd == "technik")
+            addTechnik();
+      else if (cmd == "tempo")
+            addTempo();
+      else if (cmd == "metronome")
+            addMetronome();
+      else
             endCmd(true);
             }
       }

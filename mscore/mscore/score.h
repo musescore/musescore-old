@@ -267,7 +267,6 @@ class Score : public QObject {
       void undoOp(UndoOp::UndoType type, Element*, int idx);
       void undoOp(UndoOp::UndoType type, int a, int b);
 
-//      void keyPressEvent(QKeyEvent*);
       void setNote(int tick, Staff* staff, int voice, int pitch, int len);
       int clefOffset(int tick, int staffIdx) const;
       Rest* setRest(int tick, int len, Staff*, int voice, Measure*);

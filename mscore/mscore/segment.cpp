@@ -29,6 +29,7 @@
 #include "measure.h"
 #include "painter.h"
 #include "barline.h"
+#include "part.h"
 
 const char* Segment::segmentTypeNames[] = {
    "Clef", "Key Signature", "Time Signature", "Begin Repeat", "ChordRest"
@@ -169,13 +170,12 @@ void Segment::draw(Painter& p)
       p.translate(pos());
 
       int staves = measure()->score()->nstaves();
-      int tracks = staves * VOICES;
-      for (int track = 0; track < tracks; ++track) {
-            Element* e = _elist[track];
-            if (e)
-                  e->draw(p);
-            }
       for (int staff = 0; staff < staves; ++staff) {
+            for (int voice = 0; voice < VOICES; ++voice) {
+                  Element* e = _elist[staff * VOICES + voice];
+                  if (e)
+                        e->draw(p);
+                  }
             const LyricsList* ll = lyricsList(staff);
             for (ciLyrics i = ll->begin(); i != ll->end(); ++i) {
                   if (*i)
@@ -203,7 +203,6 @@ void Segment::add(Element* el)
                   {
                   LyricsList* ll = &_lyrics[staffIdx];
                   ll->push_back((Lyrics*)el);
-                  el->layout();     //DEBUG
                   }
                   break;
 

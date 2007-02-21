@@ -200,6 +200,7 @@ class MuseScore : public QMainWindow {
       bool saveFile();
       bool saveAs();
       void newFile();
+      void fingeringMenu();
 
    private slots:
       void helpBrowser();
@@ -230,7 +231,6 @@ class MuseScore : public QMainWindow {
       void lineMenu();
       void bracketMenu();
       void barMenu();
-      void fingeringMenu();
       void noteAttributesMenu();
       void accidentalsMenu();
       void midiReceived();
@@ -238,11 +238,6 @@ class MuseScore : public QMainWindow {
       void cmdAddSubTitle();
       void cmdAddComposer();
       void cmdAddPoet();
-      void addLyrics();
-      void addExpression();
-      void addTechnik();
-      void addTempo();
-      void addMetronome();
       void cmdAppendMeasures();
       void resetUserStretch();
       void showLayoutBreakPalette();

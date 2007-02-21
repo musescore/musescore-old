@@ -71,12 +71,12 @@ QMenu* MuseScore::genCreateMenu()
       text->addAction(tr("Composer"),     this, SLOT(cmdAddComposer()));
       text->addAction(tr("Poet"),         this, SLOT(cmdAddPoet()));
       text->addSeparator();
-      text->addAction(tr("Lyrics"),       this, SLOT(addLyrics()),     Qt::CTRL+Qt::Key_L);
-      text->addAction(tr("Fingering..."), this, SLOT(fingeringMenu()));
-      text->addAction(tr("Expression"),   this, SLOT(addExpression()), Qt::CTRL+Qt::Key_E);
-      text->addAction(tr("Technik"),      this, SLOT(addTechnik()),    Qt::CTRL+Qt::Key_T);
-      text->addAction(tr("Tempo..."),     this, SLOT(addTempo()),      Qt::CTRL+Qt::ALT+Qt::Key_T);
-      text->addAction(tr("Metronome"),    this, SLOT(addMetronome()),  Qt::CTRL+Qt::ALT+Qt::Key_M);
+      text->addAction(getAction("lyrics"));
+      text->addAction(getAction("fingering"));
+      text->addAction(getAction("expression"));
+      text->addAction(getAction("technik"));
+      text->addAction(getAction("tempo"));
+      text->addAction(getAction("metronome"));
 
       popup->addAction(getAction("symbols"));
       return popup;
@@ -622,12 +622,14 @@ void Score::addTempo()
       Element* e = sel->element();
       if (!e) {
             printf("no element selected\n");
+            endCmd(true);
             return;
             }
       if (e->type() == NOTE)
             e = e->parent();
       if (e->type() != CHORD && e->type() != REST) {
             printf("no Chord/Rest selected\n");
+            endCmd(true);
             return;
             }
       Measure* m = ((ChordRest*)e)->segment()->measure();
@@ -646,7 +648,6 @@ printf("tempo at %d(%s)  %s %f\n",
             tt->setText(editTempo->text());
             tt->setTempo(bpm);
             tt->setParent(m);
-            startCmd();
             cmdAdd(tt);
             refresh |= tt->abbox();
             endCmd(true);
@@ -659,6 +660,8 @@ printf("tempo at %d(%s)  %s %f\n",
 
 void Score::addMetronome()
       {
+      printf("addMetronome: not implemented\n");
+      endCmd(true);
       }
 
 //---------------------------------------------------------

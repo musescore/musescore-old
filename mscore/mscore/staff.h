@@ -69,6 +69,7 @@ class Staff {
       ClefList* _clef;
       KeyList* _keymap;
       QList <BracketItem> _brackets;
+      bool _show;             ///< derived from part->show()
 
    public:
       Staff(Score*, Part*, int);
@@ -101,6 +102,8 @@ class Staff {
       ClefList* clef() const         { return _clef; }
       void changeKeySig(int tick, int st);
       void changeClef(int tick, int st);
+      bool show() const              { return _show; }
+      void setShow(bool val)        { _show = val; }
       };
 
 //---------------------------------------------------------

@@ -205,7 +205,8 @@ void Element::writeProperties(Xml& xml) const
             xml.tag("selected", selected());
       if (!visible())
             xml.tag("visible", visible());
-      if (_time.tick() && (_time.tick() != xml.curTick))
+//      if (_time.tick() && (_time.tick() != xml.curTick))
+      if (_time.tick() != xml.curTick)
             xml.tag("tick", _time.tick());
       if (_duration.tick())
             xml.tag("ticklen", _duration.tick());
@@ -287,7 +288,8 @@ void Element::draw(Painter& p)
       {
       if (!visible() && (p.print() || !(_score && _score->showInvisible())))
             return;
-
+      if (_staff && !_staff->show())
+            return;
       QRect r(bbox().translated(pos()).toRect());
       if (!p.clipRect().intersects(r))
             return;

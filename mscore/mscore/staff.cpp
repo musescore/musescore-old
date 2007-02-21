@@ -191,6 +191,7 @@ Staff::Staff(Score* s, Part* p, int rs)
       _clef   = new ClefList;
       _keymap = new KeyList;
       (*_keymap)[0] = 0;
+      _show   = true;
       }
 
 //---------------------------------------------------------

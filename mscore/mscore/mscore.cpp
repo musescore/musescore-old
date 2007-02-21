@@ -46,6 +46,7 @@
 #include "editstyle.h"
 #include "playpanel.h"
 #include "page.h"
+#include "partedit.h"
 
 QTextStream cout(stdout);
 QTextStream eout(stderr);
@@ -153,6 +154,10 @@ void MuseScore::closeEvent(QCloseEvent* ev)
             layoutBreakPalette->close();
       if (preferenceDialog)
             preferenceDialog->close();
+      if (iledit)
+            iledit->close();
+      if (editStyleWin)
+            editStyleWin->close();
       }
 
 //---------------------------------------------------------
@@ -252,7 +257,8 @@ MuseScore::MuseScore()
          << "chord-a" << "chord-b"
          << "stretch+" << "stretch-"
          << "instruments" << "clefs" << "keys" << "symbols" << "times" << "dynamics"
-         << "cut" << "copy" << "paste"
+         << "lyrics" << "fingering" << "expression" << "technik" << "tempo"
+         << "metronome" << "cut" << "copy" << "paste"
          << "beam-start" << "beam-mid" << "no-beam" << "beam32"
          << "file-open" << "file-new" << "file-save" << "file-save-as" << "file-close"
          << "export-midi" << "export-xml" << "import-midi" << "import-xml" << "quit"
@@ -1222,56 +1228,6 @@ void MuseScore::cmdAddPoet()
       }
 
 //---------------------------------------------------------
-//   addLyrics
-//---------------------------------------------------------
-
-void MuseScore::addLyrics()
-      {
-      if (cs)
-            cs->addLyrics();
-      }
-
-//---------------------------------------------------------
-//   addExpression
-//---------------------------------------------------------
-
-void MuseScore::addExpression()
-      {
-      if (cs)
-            cs->addExpression();
-      }
-
-//---------------------------------------------------------
-//   addTechnik
-//---------------------------------------------------------
-
-void MuseScore::addTechnik()
-      {
-      if (cs)
-            cs->addTechnik();
-      }
-
-//---------------------------------------------------------
-//   addTempo
-//---------------------------------------------------------
-
-void MuseScore::addTempo()
-      {
-      if (cs)
-            cs->addTempo();
-      }
-
-//---------------------------------------------------------
-//   addMetronome
-//---------------------------------------------------------
-
-void MuseScore::addMetronome()
-      {
-      if (cs)
-            cs->addMetronome();
-      }
-
-//---------------------------------------------------------
 //   startNoteEntry
 //---------------------------------------------------------
 
@@ -1893,6 +1849,8 @@ void MuseScore::cmd(QAction* a)
             importMusicXml();
       else if (cmd == "quit")
             close();
+      else if (cmd == "fingering")
+            fingeringMenu();
       else if (cmd == "toggle-statusbar") {
             QAction* a = getAction("toggle-statusbar");
             preferences.showStatusBar = a->isChecked();

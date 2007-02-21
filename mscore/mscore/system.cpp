@@ -51,7 +51,6 @@ SysStaff::SysStaff()
       {
       idx             = 0;
       sstaff          = 0;
-      _distance       = ::style->staffDistance;
       instrumentName  = 0;
       }
 
@@ -123,13 +122,19 @@ SysStaff* System::insertStaff(Staff*, int idx)
 
 QRectF System::bbox() const
       {
-      // calculate new height of bounding box
-      double h = _spatium * 4;
-      int n    = _staves.size();
-      for (int i = 1; i < n; ++i) {
-            h += distance(i);
-            h += _spatium * 4;
+      double h   = 0;
+      int n      = _staves.size();
+      double lastDist = 0.0;
+      for (int i = 0; i < n; ++i) {
+            Staff* staff = score()->staff(i);
+            if (!staff->show())
+                  continue;
+            lastDist = distance(i);
+            h += lastDist;
+// printf("add distance %f staff %d\n", distance(i), i);
+            h    += _spatium * 4;
             }
+      h -= lastDist;
       return QRectF(0.0, 0.0, _width, h);
       }
 
@@ -186,8 +191,8 @@ double System::layout(const QPointF& p, double w)
             bracketWidth[i] = 0.0;
 
       for (iSysStaff iss = _staves.begin(); iss != _staves.end(); ++iss, ++is) {
+            Staff* s = *is;
             SysStaff* ss = *iss;
-            Staff* s     = *is;
             if (bracketLevels < ss->brackets.size()) {
                   for (int i = bracketLevels; i < ss->brackets.size(); ++i) {
                         Bracket* b = ss->brackets.takeLast();
@@ -240,8 +245,14 @@ double System::layout(const QPointF& p, double w)
             x += bracketWidth[i];
 
       qreal y = 0.0;
-      for (iSysStaff is = _staves.begin(); is != _staves.end(); ++is) {
+      int staffIdx = 0;
+      for (iSysStaff is = _staves.begin(); is != _staves.end(); ++is, ++staffIdx) {
             SysStaff* s    = *is;
+            Staff* staff = score()->staff(staffIdx);
+            if (!staff->show()) {
+                  s->setbbox(QRectF());
+                  continue;
+                  }
             StaffLines* sstaff = s->sstaff;
             sstaff->setPos(x, y);
             sstaff->setWidth(w - x);
@@ -255,7 +266,7 @@ double System::layout(const QPointF& p, double w)
 
       is = sl->begin();
       int nstaves  = _staves.size();
-      int staffIdx = 0;
+      staffIdx = 0;
       for (iSysStaff iss = _staves.begin(); iss != _staves.end(); ++is, ++iss, ++staffIdx) {
             SysStaff* ss = *iss;
 
@@ -303,32 +314,24 @@ double System::layout(const QPointF& p, double w)
                   }
             idx += nstaves;
             }
-
-      qreal h;
-      if (_staves.empty())
-            h = 50.0;		// TODO: HACK
-      else
-      	h = _staves.back()->bbox().bottom();
-      if (barLine) {
-            barLine->setHeight(h);
-            barLine->setPos(x, 0);
-            }
-//DEBUG:?      setHeight(h);
-
       return x;
       }
 
 //---------------------------------------------------------
 //   layout2
 //    called after measure layout
+//    adjusts staff distance
 //---------------------------------------------------------
 
 void System::layout2()
       {
-#if 0
       int staves = score()->nstaves();
 
       for (int staff = 0; staff < staves; ++staff) {
+            if (score()->staff(staff)->isTopSplit())
+                  setDistance(staff, ::style->accoladeDistance);
+            else
+                  setDistance(staff, ::style->staffDistance);
             double dist = 0.0;
             for (iMeasure im = ml->begin(); im != ml->end(); ++im) {
                   Measure* m = *im;
@@ -336,8 +339,12 @@ void System::layout2()
                   }
             if (dist > distance(staff))
                  setDistance(staff, dist);
+// printf("set dist %f staff %d\n", distance(staff), staff);
             }
-#endif
+      if (barLine) {
+            barLine->setHeight(bbox().height());
+            barLine->setPos(_staves[0]->bbox().x(), 0);
+            }
       }
 
 //---------------------------------------------------------
@@ -443,17 +450,17 @@ void System::draw(Painter& p)
 
       if (barLine /*&& barLine->bbox().intersects(f)*/)
             barLine->draw(p);
-      for (ciSysStaff is = _staves.begin(); is != _staves.end(); ++is) {
-            (*is)->sstaff->draw(p);
-            foreach(Bracket* b, (*is)->brackets) {
+      for (int staffIdx = 0; staffIdx < _staves.size(); ++staffIdx) {
+            if (!score()->staff(staffIdx)->show())
+                  continue;
+            SysStaff* sysStaff = _staves[staffIdx];
+            sysStaff->sstaff->draw(p);
+            foreach(Bracket* b, sysStaff->brackets) {
                   if (b)
                         b->draw(p);
                   }
-            if ((*is)->instrumentName) {
-//                  (*is)->instrumentName->getDoc()->documentLayout()->setPaintDevice(p.device());
-//                  (*is)->instrumentName->layout();
-                  (*is)->instrumentName->draw(p);
-                  }
+            if (sysStaff->instrumentName)
+                  sysStaff->instrumentName->draw(p);
             }
       for (ciMeasure im = ml->begin(); im != ml->end(); ++im) {
             Measure* m = *im;

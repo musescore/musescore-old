@@ -216,6 +216,7 @@ newBeam:
                                           }
                                     else {
                                           beam = new Beam(score());
+                                          beam->setStaff(a1->staff());
                                           addBeam(beam);
                                           a1->setBeam(beam);
                                           beam->add(a1);
