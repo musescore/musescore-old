@@ -511,6 +511,27 @@ bool Text::edit(QKeyEvent* ev)
                         cursor->setCharFormat(f);
                         }
                         break;
+                  case Qt::Key_Up:
+                        {
+                        QTextCharFormat f = cursor->charFormat();
+                        if (f.verticalAlignment() == QTextCharFormat::AlignNormal)
+                              f.setVerticalAlignment(QTextCharFormat::AlignSuperScript);
+                        else if (f.verticalAlignment() == QTextCharFormat::AlignSubScript)
+                              f.setVerticalAlignment(QTextCharFormat::AlignNormal);
+                        cursor->setCharFormat(f);
+                        }
+                        break;
+
+                  case Qt::Key_Down:
+                        {
+                        QTextCharFormat f = cursor->charFormat();
+                        if (f.verticalAlignment() == QTextCharFormat::AlignNormal)
+                              f.setVerticalAlignment(QTextCharFormat::AlignSubScript);
+                        else if (f.verticalAlignment() == QTextCharFormat::AlignSuperScript)
+                              f.setVerticalAlignment(QTextCharFormat::AlignNormal);
+                        cursor->setCharFormat(f);
+                        }
+                        break;
                   }
             return false;
             }

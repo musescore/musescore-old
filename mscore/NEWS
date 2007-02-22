@@ -6,6 +6,7 @@ Release 0.5 (svn)
       - bracket editing with keyboard
       - nested system brackets
       - extended lyrics
+      - subscript and superscript for text
 
 Release 0.4:
       - configurable keyboard short cuts

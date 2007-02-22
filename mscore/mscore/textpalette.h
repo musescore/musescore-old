@@ -46,6 +46,8 @@ class TextPalette : public QWidget, public Ui::TextPaletteBase {
       void setRightAlign();
       void setHCenterAlign();
       void fontChanged(const QFont&);
+      void subscriptClicked(bool);
+      void superscriptClicked(bool);
 
    public:
       TextPalette(QWidget* parent);

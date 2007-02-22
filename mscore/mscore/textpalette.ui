@@ -86,9 +86,7 @@
    <item>
     <widget class="QFrame" name="frame" >
      <property name="sizePolicy" >
-      <sizepolicy>
-       <hsizetype>5</hsizetype>
-       <vsizetype>4</vsizetype>
+      <sizepolicy vsizetype="Maximum" hsizetype="Preferred" >
        <horstretch>0</horstretch>
        <verstretch>0</verstretch>
       </sizepolicy>
@@ -248,6 +246,9 @@
       </item>
       <item>
        <widget class="QToolButton" name="typefaceUnderline" >
+        <property name="toolTip" >
+         <string>underline</string>
+        </property>
         <property name="text" >
          <string>...</string>
         </property>
@@ -269,11 +270,59 @@
        </widget>
       </item>
       <item>
+       <widget class="QToolButton" name="typefaceSubscript" >
+        <property name="toolTip" >
+         <string>subscript</string>
+        </property>
+        <property name="text" >
+         <string>...</string>
+        </property>
+        <property name="icon" >
+         <iconset resource="mscore.qrc" >:/data/subscript.svg</iconset>
+        </property>
+        <property name="iconSize" >
+         <size>
+          <width>24</width>
+          <height>24</height>
+         </size>
+        </property>
+        <property name="checkable" >
+         <bool>true</bool>
+        </property>
+        <property name="autoRaise" >
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QToolButton" name="typefaceSuperscript" >
+        <property name="toolTip" >
+         <string>superscript</string>
+        </property>
+        <property name="text" >
+         <string>...</string>
+        </property>
+        <property name="icon" >
+         <iconset resource="mscore.qrc" >:/data/superscript.svg</iconset>
+        </property>
+        <property name="iconSize" >
+         <size>
+          <width>24</width>
+          <height>24</height>
+         </size>
+        </property>
+        <property name="checkable" >
+         <bool>true</bool>
+        </property>
+        <property name="autoRaise" >
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
        <widget class="QLabel" name="label" >
         <property name="sizePolicy" >
-         <sizepolicy>
-          <hsizetype>4</hsizetype>
-          <vsizetype>0</vsizetype>
+         <sizepolicy vsizetype="Fixed" hsizetype="Maximum" >
           <horstretch>0</horstretch>
           <verstretch>0</verstretch>
          </sizepolicy>
@@ -285,14 +334,17 @@
       </item>
       <item>
        <widget class="QDoubleSpinBox" name="typefaceSize" >
+        <property name="toolTip" >
+         <string>font size</string>
+        </property>
         <property name="decimals" >
          <number>1</number>
         </property>
-        <property name="maximum" >
-         <double>400.000000000000000</double>
-        </property>
         <property name="minimum" >
          <double>3.000000000000000</double>
+        </property>
+        <property name="maximum" >
+         <double>400.000000000000000</double>
         </property>
        </widget>
       </item>
@@ -312,9 +364,7 @@
       <item>
        <widget class="QLabel" name="label_2" >
         <property name="sizePolicy" >
-         <sizepolicy>
-          <hsizetype>4</hsizetype>
-          <vsizetype>0</vsizetype>
+         <sizepolicy vsizetype="Fixed" hsizetype="Maximum" >
           <horstretch>0</horstretch>
           <verstretch>0</verstretch>
          </sizepolicy>
@@ -325,7 +375,11 @@
        </widget>
       </item>
       <item>
-       <widget class="QFontComboBox" name="typefaceFamily" />
+       <widget class="QFontComboBox" name="typefaceFamily" >
+        <property name="toolTip" >
+         <string>select font family</string>
+        </property>
+       </widget>
       </item>
      </layout>
     </widget>
