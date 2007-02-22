@@ -475,15 +475,15 @@ void Measure::write(Xml& xml, int no, int staff) const
                   xml.tag("endRepeat", _endRepeat);
             if (_ending)
                   xml.tag("ending", _ending);
+            if (_irregular)
+                  xml.tagE("irregular");
+            if (_userStretch != 1.0)
+                  xml.tag("stretch", _userStretch);
             }
 
       const MStaff* ms = &staves[staff];
       if (ms->endBarLine)
             ms->endBarLine->write(xml);
-      if (_userStretch != 1.0)
-            xml.tag("stretch", _userStretch);
-      if (_irregular)
-            xml.tagE("irregular");
       for (ciElement i = _sel.begin(); i != _sel.end(); ++i) {
             if ((*i)->staff() == _score->staff(staff) && (*i)->type() != SLUR_SEGMENT)
                   (*i)->write(xml);
@@ -1234,8 +1234,11 @@ void Measure::add(Element* el)
                                     s = s->next();
                               }
                         else {
-                              while (s->segmentType() <= st && s->next() && s->next()->tick() == t)
+                              while (s && s->segmentType() <= st) {
+                                    if (s->next() && s->next()->tick() != t)
+                                          break;
                                     s = s->next();
+                                    }
                               }
                         }
                   insert((Segment*)el, s);

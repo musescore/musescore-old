@@ -375,7 +375,7 @@ void Chord::addHelpLine(double x, double y, int i)
       //
       for (iNote in = notes.begin(); in != notes.end(); ++in) {
             Note* n = in->second;
-            if (n->line() == i && n->accidental()) {
+            if (n->line() >= (i-1) && n->line() <= (i+1) && n->accidental()) {
                   ho = _spatium * .25;
                   h->setLen(h->len() - Spatium(.25));
                   }

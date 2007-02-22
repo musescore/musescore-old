@@ -823,7 +823,7 @@ Shortcut MuseScore::sc[] = {
       Shortcut(
          "voice-1",
          QT_TR_NOOP("voice 1"),
-         0,
+         QKeySequence(Qt::CTRL+Qt::Key_I, Qt::CTRL+Qt::Key_1),
          Qt::WindowShortcut,
          QT_TR_NOOP("voice 1"),
          QT_TR_NOOP("voice 1"),
@@ -832,7 +832,7 @@ Shortcut MuseScore::sc[] = {
       Shortcut(
          "voice-2",
          QT_TR_NOOP("voice 2"),
-         0,
+         QKeySequence(Qt::CTRL+Qt::Key_I, Qt::CTRL+Qt::Key_2),
          Qt::WindowShortcut,
          QT_TR_NOOP("voice 2"),
          QT_TR_NOOP("voice 2"),
@@ -841,7 +841,7 @@ Shortcut MuseScore::sc[] = {
       Shortcut(
          "voice-3",
          QT_TR_NOOP("voice 3"),
-         0,
+         QKeySequence(Qt::CTRL+Qt::Key_I, Qt::CTRL+Qt::Key_3),
          Qt::WindowShortcut,
          QT_TR_NOOP("voice 3"),
          QT_TR_NOOP("voice 3"),
@@ -850,7 +850,7 @@ Shortcut MuseScore::sc[] = {
       Shortcut(
          "voice-4",
          QT_TR_NOOP("voice 4"),
-         0,
+         QKeySequence(Qt::CTRL+Qt::Key_I, Qt::CTRL+Qt::Key_4),
          Qt::WindowShortcut,
          QT_TR_NOOP("voice 4"),
          QT_TR_NOOP("voice 4"),
