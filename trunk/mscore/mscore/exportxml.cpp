@@ -60,6 +60,7 @@
 #include "pedal.h"
 #include "text.h"
 #include "tuplet.h"
+#include "lyrics.h"
 
 //---------------------------------------------------------
 //   attributes -- prints <attributes> tag when necessary

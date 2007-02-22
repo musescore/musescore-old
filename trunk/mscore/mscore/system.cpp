@@ -42,6 +42,7 @@
 #include "bracket.h"
 #include "globals.h"
 #include "barline.h"
+#include "lyrics.h"
 
 //---------------------------------------------------------
 //   SysStaff
@@ -339,7 +340,63 @@ void System::layout2()
                   }
             if (dist > distance(staff))
                  setDistance(staff, dist);
-// printf("set dist %f staff %d\n", distance(staff), staff);
+            //
+            //  layout lyrics separators
+            //
+            for (iMeasure im = ml->begin(); im != ml->end(); ++im) {
+                  Measure* m = *im;
+                  for (Segment* s = m->first(); s; s = s->next()) {
+                        LyricsList* ll = s->lyricsList(staff);
+                        if (!ll)
+                              continue;
+                        foreach(Lyrics* l, *ll) {
+                              if (!l)
+                                   continue;
+                              if (l->syllabic() == Lyrics::SINGLE || l->syllabic() == Lyrics::END) {
+                                    Line* line = l->separator();
+                                    if (line) {
+                                          delete line;
+                                          l->setSeparator(0);
+                                          }
+                                    continue;
+                                    }
+                              //
+                              // we have to layout a separator to the next
+                              // Lyric syllable
+                              //
+                              int verse = l->no();
+                              Segment* ns = s;
+                              while ((ns = ns->next1())) {
+                                    LyricsList* nll = ns->lyricsList(staff);
+                                    if (!nll)
+                                          continue;
+                                    Lyrics* nl = nll->value(verse);
+                                    if (!nl)
+                                          continue;
+                                    Line* line = l->separator();
+                                    if (!line) {
+                                          line = new Line(l->score(), false);
+                                          line->setLineWidth(Spatium(0.1));
+                                          }
+                                    QRectF b = l->bbox();
+                                    qreal w = b.width();
+                                    qreal h = b.height();
+                                    qreal x = b.x() + _spatium + w;
+                                    qreal y = b.y() + h * .5;
+                                    line->setPos(QPointF(x, y));
+                                    QPointF p1 = l->apos();
+                                    QPointF p2 = nl->apos();
+                                    qreal len = p2.x() - p1.x() - 2 * _spatium - w;
+                                    Spatium sp;
+                                    sp.set(len);
+                                    line->setLen(sp);
+                                    l->setSeparator(line);
+                                    break;
+                                    }
+                              }
+                        }
+                  }
+
             }
       if (barLine) {
             barLine->setHeight(bbox().height());

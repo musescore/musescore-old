@@ -54,6 +54,7 @@
 #include "barline.h"
 #include "layoutbreak.h"
 #include "page.h"
+#include "lyrics.h"
 
 //---------------------------------------------------------
 //   y2pitch
@@ -1393,7 +1394,6 @@ void Measure::remove(Element* el)
             case CHORD:
             case REST:
             case TIMESIG:
-//            case LYRICS:
                   for (Segment* segment = first(); segment; segment = segment->next()) {
                         int staves = _score->nstaves();
                         int tracks = staves * VOICES;

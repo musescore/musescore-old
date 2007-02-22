@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf8"?>
 <museScore version="1.0">
-  <Geometry x="10" y="0" w="1166" h="839" />
+  <Geometry x="184" y="0" w="1490" h="539" />
   <Spatium>1.76389</Spatium>
   <Division>480</Division>
   <Mag>1.4641</Mag>
-  <xoff>18.9959</xoff>
-  <yoff>-2</yoff>
+  <xoff>17.9959</xoff>
+  <yoff>-281</yoff>
   <Style>
     <staffUpperBorder>8</staffUpperBorder>
     <staffLowerBorder>4</staffLowerBorder>
@@ -144,7 +144,7 @@
         <spatiumSizeDependent>0</spatiumSizeDependent>
         <data>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Arial&apos;; font-size:11pt; font-weight:400; font-style:normal; text-decoration:none;&quot;&gt;
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Times New Roman&apos;; font-size:24pt;&quot;&gt;Adeste Fideles&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
         </Text>
       <Text>
@@ -156,19 +156,19 @@ p, li { white-space: pre-wrap; }
         <spatiumSizeDependent>0</spatiumSizeDependent>
         <data>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-size:12pt; font-weight:400; font-style:normal; text-decoration:none;&quot;&gt;
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-size:12pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p align=&quot;right&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;John F. Wade&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
         <subtype>Composer</subtype>
         </Text>
       <BarLine/>
-      <KeySig>
-        <subtype>3</subtype>
-        </KeySig>
       <TimeSig>
         <subtype>260</subtype>
         <den>4</den>
         <nom1>4</nom1>
         </TimeSig>
+      <KeySig>
+        <subtype>3</subtype>
+        </KeySig>
       <Chord>
         <ticklen>480</ticklen>
         <Note>
@@ -182,18 +182,21 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Lyrics>
         <data>A</data>
+        <syllabic>begin</syllabic>
         <subtype>Lyric</subtype>
         <tick>0</tick>
         </Lyrics>
       <Lyrics>
         <data>Can</data>
         <no>1</no>
+        <syllabic>begin</syllabic>
         <subtype>Lyric</subtype>
         <tick>0</tick>
         </Lyrics>
       <Lyrics>
         <data>Er</data>
         <no>2</no>
+        <syllabic>begin</syllabic>
         <subtype>Lyric</subtype>
         <tick>0</tick>
         </Lyrics>
@@ -242,28 +245,33 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Lyrics>
         <data>des</data>
+        <syllabic>middle</syllabic>
         <subtype>Lyric</subtype>
         <tick>480</tick>
         </Lyrics>
       <Lyrics>
         <data>te</data>
+        <syllabic>end</syllabic>
         <subtype>Lyric</subtype>
         <tick>1440</tick>
         </Lyrics>
       <Lyrics>
         <data>tet</data>
         <no>1</no>
+        <syllabic>end</syllabic>
         <subtype>Lyric</subtype>
         <tick>1440</tick>
         </Lyrics>
       <Lyrics>
         <data>go</data>
         <no>2</no>
+        <syllabic>end</syllabic>
         <subtype>Lyric</subtype>
         <tick>1440</tick>
         </Lyrics>
       <Lyrics>
         <data>fi</data>
+        <syllabic>begin</syllabic>
         <subtype>Lyric</subtype>
         </Lyrics>
       <Lyrics>
@@ -310,35 +318,41 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Lyrics>
         <data>del</data>
+        <syllabic>middle</syllabic>
         <subtype>Lyric</subtype>
         <tick>2400</tick>
         </Lyrics>
       <Lyrics>
         <data>hym</data>
         <no>1</no>
+        <syllabic>begin</syllabic>
         <subtype>Lyric</subtype>
         <tick>2400</tick>
         </Lyrics>
       <Lyrics>
         <data>na</data>
         <no>2</no>
+        <syllabic>begin</syllabic>
         <subtype>Lyric</subtype>
         <tick>2400</tick>
         </Lyrics>
       <Lyrics>
         <data>es,</data>
+        <syllabic>end</syllabic>
         <subtype>Lyric</subtype>
         <tick>3360</tick>
         </Lyrics>
       <Lyrics>
         <data>nos</data>
         <no>1</no>
+        <syllabic>end</syllabic>
         <subtype>Lyric</subtype>
         <tick>3360</tick>
         </Lyrics>
       <Lyrics>
         <data>tus</data>
         <no>2</no>
+        <syllabic>end</syllabic>
         <subtype>Lyric</subtype>
         <tick>3360</tick>
         </Lyrics>
@@ -391,64 +405,75 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Lyrics>
         <data>Lae</data>
+        <syllabic>begin</syllabic>
         <subtype>Lyric</subtype>
         <tick>4320</tick>
         </Lyrics>
       <Lyrics>
         <data>Cho</data>
         <no>1</no>
+        <syllabic>begin</syllabic>
         <subtype>Lyric</subtype>
         <tick>4320</tick>
         </Lyrics>
       <Lyrics>
         <data>di</data>
         <no>2</no>
+        <syllabic>begin</syllabic>
         <subtype>Lyric</subtype>
         <tick>4320</tick>
         </Lyrics>
       <Lyrics>
         <data>rus</data>
         <no>1</no>
+        <syllabic>end</syllabic>
         <subtype>Lyric</subtype>
         <tick>4800</tick>
         </Lyrics>
       <Lyrics>
         <data>e</data>
         <no>2</no>
+        <syllabic>end</syllabic>
         <subtype>Lyric</subtype>
         <tick>4800</tick>
         </Lyrics>
       <Lyrics>
         <data>ti</data>
+        <syllabic>end</syllabic>
         <subtype>Lyric</subtype>
         <tick>5280</tick>
         </Lyrics>
       <Lyrics>
         <data>ang</data>
         <no>1</no>
+        <syllabic>begin</syllabic>
         <subtype>Lyric</subtype>
         <tick>5280</tick>
         </Lyrics>
       <Lyrics>
         <data>ho</data>
         <no>2</no>
+        <syllabic>begin</syllabic>
         <subtype>Lyric</subtype>
         <tick>5280</tick>
         </Lyrics>
       <Lyrics>
         <data>trium</data>
+        <syllabic>middle</syllabic>
         <subtype>Lyric</subtype>
         <tick>5760</tick>
         </Lyrics>
       <Lyrics>
         <data>el</data>
         <no>1</no>
+        <syllabic>middle</syllabic>
         <subtype>Lyric</subtype>
         <tick>5760</tick>
         </Lyrics>
       <Lyrics>
         <data>di</data>
         <no>2</no>
+        <syllabic>middle</syllabic>
         <subtype>Lyric</subtype>
         <tick>5760</tick>
         </Lyrics>
@@ -490,35 +515,41 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Lyrics>
         <data>phan</data>
+        <syllabic>middle</syllabic>
         <subtype>Lyric</subtype>
         <tick>6240</tick>
         </Lyrics>
       <Lyrics>
         <data>or</data>
         <no>1</no>
+        <syllabic>middle</syllabic>
         <subtype>Lyric</subtype>
         <tick>6240</tick>
         </Lyrics>
       <Lyrics>
         <data>er</data>
         <no>2</no>
+        <syllabic>middle</syllabic>
         <subtype>Lyric</subtype>
         <tick>6240</tick>
         </Lyrics>
       <Lyrics>
         <data>tes</data>
+        <syllabic>end</syllabic>
         <subtype>Lyric</subtype>
         <tick>7200</tick>
         </Lyrics>
       <Lyrics>
         <data>um;</data>
         <no>1</no>
+        <syllabic>end</syllabic>
         <subtype>Lyric</subtype>
         <tick>7200</tick>
         </Lyrics>
       <Lyrics>
         <data>na</data>
         <no>2</no>
+        <syllabic>end</syllabic>
         <subtype>Lyric</subtype>
         <tick>7200</tick>
         </Lyrics>
@@ -549,14 +580,14 @@ p, li { white-space: pre-wrap; }
         <subtype>4</subtype>
         <offset x="0" y="1"/>
         </Clef>
-      <KeySig>
-        <subtype>3</subtype>
-        </KeySig>
       <TimeSig>
         <subtype>260</subtype>
         <den>4</den>
         <nom1>4</nom1>
         </TimeSig>
+      <KeySig>
+        <subtype>3</subtype>
+        </KeySig>
       <Chord>
         <ticklen>480</ticklen>
         <Note>

@@ -40,6 +40,7 @@
 #include "tuplet.h"
 #include "seq.h"
 #include "mscore.h"
+#include "lyrics.h"
 
 //---------------------------------------------------------
 //   selectNoteMessage
@@ -1018,7 +1019,81 @@ void Score::cmdDeleteSelection()
 //   lyricsTab
 //---------------------------------------------------------
 
-void Score::lyricsTab()
+void Score::lyricsTab(bool back)
+      {
+      Lyrics* lyrics   = (Lyrics*)editObject;
+      Segment* segment = (Segment*)(lyrics->parent());
+      int staff        = lyrics->staffIdx();
+
+      canvas()->setState(Canvas::NORMAL);
+      endCmd(true);
+
+      // search next chord
+      if (back) {
+            while ((segment = segment->prev1())) {
+                  if (segment->segmentType() == Segment::SegChordRest)
+                        break;
+                  }
+            }
+      else {
+            while ((segment = segment->next1())) {
+                  if (segment->segmentType() == Segment::SegChordRest)
+                        break;
+                  }
+            }
+      if (segment == 0) {
+            return;
+            }
+
+      startCmd();
+
+      Lyrics* oldLyrics = lyrics;
+      switch(oldLyrics->syllabic()) {
+            case Lyrics::SINGLE:
+            case Lyrics::END:
+                  break;
+            case Lyrics::BEGIN:
+                  oldLyrics->setSyllabic(Lyrics::SINGLE);
+                  break;
+            case Lyrics::MIDDLE:
+                  oldLyrics->setSyllabic(Lyrics::END);
+                  break;
+            }
+      LyricsList* ll = segment->lyricsList(staff);
+      lyrics = ll->value(oldLyrics->no());
+      if (!lyrics)
+            lyrics = new Lyrics(this);
+
+      switch(lyrics->syllabic()) {
+            case Lyrics::SINGLE:
+            case Lyrics::BEGIN:
+                  break;
+            case Lyrics::END:
+                  lyrics->setSyllabic(Lyrics::SINGLE);
+                  break;
+            case Lyrics::MIDDLE:
+                  lyrics->setSyllabic(Lyrics::BEGIN);
+                  break;
+            }
+
+      lyrics->setTick(segment->tick());
+      lyrics->setStaff(oldLyrics->staff());
+      lyrics->setParent(segment);
+      lyrics->setNo(oldLyrics->no());
+      undoOp(UndoOp::AddElement, lyrics);
+
+      select(lyrics, 0, 0);
+      canvas()->startEdit(lyrics);
+      ((Lyrics*)editObject)->moveCursorToEnd();
+
+      layout();
+      }
+
+//---------------------------------------------------------
+//   lyricsMinus
+//---------------------------------------------------------
+
+void Score::lyricsMinus()
       {
       Lyrics* lyrics   = (Lyrics*)editObject;
       Segment* segment = (Segment*)(lyrics->parent());
@@ -1041,7 +1116,25 @@ void Score::lyricsTab()
       startCmd();
 
       Lyrics* oldLyrics = lyrics;
-      lyrics = new Lyrics(this);
+
+      LyricsList* ll = segment->lyricsList(staff);
+      lyrics = ll->value(oldLyrics->no());
+      if (!lyrics)
+            lyrics = new Lyrics(this);
+
+      switch(oldLyrics->syllabic()) {
+            case Lyrics::SINGLE:
+                  oldLyrics->setSyllabic(Lyrics::BEGIN);
+                  break;
+            case Lyrics::BEGIN:
+            case Lyrics::MIDDLE:
+                  break;
+            case Lyrics::END:
+                  oldLyrics->setSyllabic(Lyrics::MIDDLE);
+                  break;
+            }
+      lyrics->setSyllabic(Lyrics::END);
+
       lyrics->setTick(segment->tick());
       lyrics->setStaff(oldLyrics->staff());
       lyrics->setParent(segment);
@@ -1050,6 +1143,7 @@ void Score::lyricsTab()
 
       select(lyrics, 0, 0);
       canvas()->startEdit(lyrics);
+      ((Lyrics*)editObject)->moveCursorToEnd();
 
       layout();
       }
@@ -1062,8 +1156,8 @@ void Score::lyricsReturn()
       {
       Lyrics* lyrics   = (Lyrics*)editObject;
       Segment* segment = (Segment*)(lyrics->parent());
-      int staff        = lyrics->staffIdx();
-      int track        = staff * VOICES;
+//      int staff        = lyrics->staffIdx();
+//      int track        = staff * VOICES;
 
       canvas()->setState(Canvas::NORMAL);
       endCmd(true);
