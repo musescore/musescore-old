@@ -362,6 +362,29 @@ void Chord::layoutStem()
       }
 
 //---------------------------------------------------------
+//   addHelpLine
+//---------------------------------------------------------
+
+void Chord::addHelpLine(double x, double y, int i)
+      {
+      HelpLine* h = new HelpLine(score());
+      h->setParent(this);
+      double ho = 0.0;
+      //
+      // Experimental:
+      //
+      for (iNote in = notes.begin(); in != notes.end(); ++in) {
+            Note* n = in->second;
+            if (n->line() == i && n->accidental()) {
+                  ho = _spatium * .25;
+                  h->setLen(h->len() - Spatium(.25));
+                  }
+            }
+      h->setPos(x + ho, y + _spatium * .5 * i);
+      helpLines.push_back(h);
+      }
+
+//---------------------------------------------------------
 //   layout
 //---------------------------------------------------------
 
@@ -443,18 +466,10 @@ void Chord::layout()
                   double y = s->staff(staffIdx() - 1)->bbox().y();
                   y        -= s->staff(staffIdx())->bbox().y();
 
-                  for (int i = -2; i >= uppos; i -= 2) {
-                        HelpLine* h = new HelpLine(score());
-                        h->setParent(this);
-                        h->setPos(x, y + _spatium * .5 * i);
-                        helpLines.push_back(h);
-                        }
-                  for (int i = 10; i <= downpos; i += 2) {
-                        HelpLine* h = new HelpLine(score());
-                        h->setParent(this);
-                        h->setPos(x, y + _spatium * .5 * i);
-                        helpLines.push_back(h);
-                        }
+                  for (int i = -2; i >= uppos; i -= 2)
+                        addHelpLine(x, y, i);
+                  for (int i = 10; i <= downpos; i += 2)
+                        addHelpLine(x, y, i);
                   }
             }
 
@@ -473,16 +488,10 @@ void Chord::layout()
             x += headWidth/2 - _spatium;
 
             for (int i = -2; i >= uppos; i -= 2) {
-                  HelpLine* h = new HelpLine(score());
-                  h->setParent(this);
-                  h->setPos(x, _spatium * .5 * i);
-                  helpLines.push_back(h);
+                  addHelpLine(x, 0.0, i);
                   }
             for (int i = 10; i <= downpos; i += 2) {
-                  HelpLine* h = new HelpLine(score());
-                  h->setParent(this);
-                  h->setPos(x, _spatium * .5 * i);
-                  helpLines.push_back(h);
+                  addHelpLine(x, 0.0, i);
                   }
             }
 
@@ -509,18 +518,10 @@ void Chord::layout()
                   double y = s->staff(staffIdx() + 1)->bbox().y();
                   y        -= s->staff(staffIdx())->bbox().y();
 
-                  for (int i = -2; i >= uppos; i -= 2) {
-                        HelpLine* h = new HelpLine(score());
-                        h->setParent(this);
-                        h->setPos(x, y + _spatium * .5 * i);
-                        helpLines.push_back(h);
-                        }
-                  for (int i = 10; i <= downpos; i += 2) {
-                        HelpLine* h = new HelpLine(score());
-                        h->setParent(this);
-                        h->setPos(x, y + _spatium * .5 * i);
-                        helpLines.push_back(h);
-                        }
+                  for (int i = -2; i >= uppos; i -= 2)
+                        addHelpLine(x, y, i);
+                  for (int i = 10; i <= downpos; i += 2)
+                        addHelpLine(x, 0.0, i);
                   }
             }
 
