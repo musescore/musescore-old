@@ -121,6 +121,7 @@ class Chord : public ChordRest {
       virtual qreal upPos()   const;
       virtual qreal downPos() const;
       virtual qreal centerX() const;
+      void addHelpLine(double x, double y, int i);
 
    public:
       Chord(Score*);
