@@ -355,7 +355,7 @@ void System::layout2()
                               if (l->syllabic() == Lyrics::SINGLE || l->syllabic() == Lyrics::END) {
                                     Line* line = l->separator();
                                     if (line) {
-                                          delete line;
+                                          // delete line;  // does not work, undo needs this object
                                           l->setSeparator(0);
                                           }
                                     continue;

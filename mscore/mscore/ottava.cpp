@@ -76,7 +76,7 @@ void Ottava::draw1(Painter& p)
                   p.setFont(f);
                   QFontMetricsF fm(f);
                   QRectF bb(fm.boundingRect(text));
-                  qreal h = bb.height() * .5;
+                  qreal h = textHeight;   // bb.height() * .5;
                   p.drawText(pp1 + 	QPointF(0.0, h), text);
                   pp1 += QPointF(bb.width() + ottavaTextDistance, 0.0);
 
@@ -150,8 +150,16 @@ void Ottava::layout()
 
 QRectF Ottava::bbox() const
       {
-      QRectF rr(textStyles[TEXT_STYLE_DYNAMICS].bbox(text));
-      double h1 = rr.height() * .5;
+      QFontMetricsF fm(textStyles[TEXT_STYLE_DYNAMICS].fontMetrics());
+      qreal h1 = 0.0;
+      int n = text.size();
+      for (int i = 0; i < n; ++i) {
+            qreal h = fm.boundingRect(text[i]).height();
+            if (h > h1)
+                  h1 = h;
+            }
+      h1 *= .5;
+      textHeight = h1;
 
       QRectF r(0, 0, 0, 0);
       for (ciLineSegment i = segments.begin(); i != segments.end(); ++i) {
