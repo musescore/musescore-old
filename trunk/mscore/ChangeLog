@@ -1,4 +1,5 @@
 22.2.7 (ws)
+      - fix bug in segment ordering
       - adjust help line length if note on helpline has an accidental
       - fix ottava drawing
       - implement subscript and superscript for text edit mode
