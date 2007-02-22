@@ -30,6 +30,7 @@
 
 class Ottava : public SLine {
       QString text;
+      mutable qreal textHeight;      ///< cached value
 
    public:
       Ottava(Score* s) : SLine(s) {}

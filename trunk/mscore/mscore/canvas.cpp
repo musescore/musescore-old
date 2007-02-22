@@ -303,7 +303,7 @@ void Canvas::mousePressEvent(QMouseEvent* ev)
                         // select() to crash
                         if (_score->dragStaff >= 0)
                               _score->select(element, keyState, _score->dragStaff);
-                        else
+//                        else
                               _score->setDragObject(0);
                         }
                   seq->stopNotes(); // stop now because we dont get a mouseRelease event

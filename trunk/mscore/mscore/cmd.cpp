@@ -1022,7 +1022,6 @@ void Score::cmd(const QString& cmd)
                   if (cis->pos != -1)
                         setNoteEntry(false, false);
                   select(0, 0, 0);
-                  endCmd(true);
                   }
             else if (cmd == "delete")
                   cmdDeleteSelection();
@@ -1314,17 +1313,17 @@ void Score::cmd(const QString& cmd)
                   else
                         printf("paste not supported: sel state %d\n", sel->state);
                   }
-      else if (cmd == "lyrics")
-            addLyrics();
-      else if (cmd == "expression")
-            addExpression();
-      else if (cmd == "technik")
-            addTechnik();
-      else if (cmd == "tempo")
-            addTempo();
-      else if (cmd == "metronome")
-            addMetronome();
-      else
+            else if (cmd == "lyrics")
+                  addLyrics();
+            else if (cmd == "expression")
+                  addExpression();
+            else if (cmd == "technik")
+                  addTechnik();
+            else if (cmd == "tempo")
+                  addTempo();
+            else if (cmd == "metronome")
+                  addMetronome();
+
             endCmd(true);
             }
       }

@@ -1025,9 +1025,6 @@ void Score::lyricsTab(bool back)
       Segment* segment = (Segment*)(lyrics->parent());
       int staff        = lyrics->staffIdx();
 
-      canvas()->setState(Canvas::NORMAL);
-      endCmd(true);
-
       // search next chord
       if (back) {
             while ((segment = segment->prev1())) {
@@ -1041,12 +1038,10 @@ void Score::lyricsTab(bool back)
                         break;
                   }
             }
-      if (segment == 0) {
+      if (segment == 0)
             return;
-            }
 
-      startCmd();
-
+      canvas()->setState(Canvas::NORMAL);
       Lyrics* oldLyrics = lyrics;
       switch(oldLyrics->syllabic()) {
             case Lyrics::SINGLE:
@@ -1059,10 +1054,17 @@ void Score::lyricsTab(bool back)
                   oldLyrics->setSyllabic(Lyrics::END);
                   break;
             }
+      endCmd(true);
+
+      startCmd();
       LyricsList* ll = segment->lyricsList(staff);
       lyrics = ll->value(oldLyrics->no());
       if (!lyrics)
             lyrics = new Lyrics(this);
+      else {
+            lyrics->parent()->remove(lyrics);
+            undoOp(UndoOp::RemoveElement, lyrics);
+            }
 
       switch(lyrics->syllabic()) {
             case Lyrics::SINGLE:
