@@ -1,4 +1,5 @@
 22.2.7 (ws)
+      - implement subscript and superscript for text edit mode
       - fixes and extensions for lyrics input:
            ctrl+tab moves to previous syllable in edit mode
            "-"      moves to next syllable connecting both with a line

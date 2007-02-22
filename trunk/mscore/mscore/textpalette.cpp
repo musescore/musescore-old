@@ -150,6 +150,8 @@ TextPalette::TextPalette(QWidget* parent)
       connect(typefaceBold, SIGNAL(clicked(bool)), SLOT(boldClicked(bool)));
       connect(typefaceItalic, SIGNAL(clicked(bool)), SLOT(italicClicked(bool)));
       connect(typefaceUnderline, SIGNAL(clicked(bool)), SLOT(underlineClicked(bool)));
+      connect(typefaceSubscript, SIGNAL(clicked(bool)), SLOT(subscriptClicked(bool)));
+      connect(typefaceSuperscript, SIGNAL(clicked(bool)), SLOT(superscriptClicked(bool)));
       connect(typefaceFamily, SIGNAL(currentFontChanged(const QFont&)), SLOT(fontChanged(const QFont&)));
       connect(leftAlign, SIGNAL(clicked()), SLOT(setLeftAlign()));
       connect(rightAlign, SIGNAL(clicked()), SLOT(setRightAlign()));
@@ -282,6 +284,34 @@ void TextPalette::setRightAlign()
       {
       bformat.setAlignment(Qt::AlignRight);
       _textElement->setBlockFormat(bformat);
+      mscore->activateWindow();
+      }
+
+//---------------------------------------------------------
+//   subscriptClicked
+//---------------------------------------------------------
+
+void TextPalette::subscriptClicked(bool val)
+      {
+      typefaceSuperscript->blockSignals(true);
+      typefaceSuperscript->setChecked(false);
+      typefaceSuperscript->blockSignals(false);
+      format.setVerticalAlignment(val ? QTextCharFormat::AlignSubScript : QTextCharFormat::AlignNormal);
+      _textElement->setCharFormat(format);
+      mscore->activateWindow();
+      }
+
+//---------------------------------------------------------
+//   superscriptClicked
+//---------------------------------------------------------
+
+void TextPalette::superscriptClicked(bool val)
+      {
+      typefaceSubscript->blockSignals(true);
+      typefaceSubscript->setChecked(false);
+      typefaceSubscript->blockSignals(false);
+      format.setVerticalAlignment(val ? QTextCharFormat::AlignSuperScript : QTextCharFormat::AlignNormal);
+      _textElement->setCharFormat(format);
       mscore->activateWindow();
       }
 

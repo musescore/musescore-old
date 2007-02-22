@@ -24,6 +24,8 @@
       <file>data/filesave.svg</file>
       <file>data/filesaveas.svg</file>
       <file>data/viewmag.xpm</file>
+      <file>data/subscript.svg</file>
+      <file>data/superscript.svg</file>
       <file alias="fonts/mscore_20.otf">fonts/mscore_20.otf</file>
       <file alias="fonts/mscore1_20.otf">fonts/mscore1_20.otf</file>
       <file>data/splash.jpg</file>

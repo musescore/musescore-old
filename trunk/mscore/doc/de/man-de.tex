@@ -837,6 +837,8 @@ mscore <Optionen> <Dateiname>
             \NC\bf Strg+B  \NC schaltet Fettschrift ein/aus\NC\MR
             \NC\bf Strg+I  \NC schaltet Kursivschrift ein/aus\NC\MR
             \NC\bf Strg+U  \NC schaltet Unterstreichen ein/aus\NC\MR
+            \NC\bf Strg+tief \NC schaltet in den Subscriptmode\NC\MR
+            \NC\bf Strg+hoch \NC schaltet in den Superscriptmode\NC\MR
             \NC\bf F2      \NC schaltet die Eingabepalette ein/aus\NC\MR
             \stoptabulate
       \stopnarrower
@@ -874,8 +876,13 @@ mscore <Optionen> <Dateiname>
             \startnarrower[left]
             \starttabulate[|l|p|]
             \NC\bf Strg+L      \NC startet die Texteingabe. Ein Textcursor erscheint
-                                unter der Note\NC\MR
-            \NC\bf Tab         \NC positioniert den Cursor zur nächsten Note\NC\MR
+                                unter der ausgewählten Note\NC\MR
+            \NC\bf Tab         \NC positioniert den Cursor zur nächsten Note
+                                   (nächste Silbe)\NC\MR
+            \NC\bf Strg+Tab    \NC positioniert den Cursor zur vorherigen Note
+                                   (vorherige Silbe)\NC\MR
+            \NC\bf --          \NC positioniert den Cursor zur nächsten Silbe
+                                   und verbindet beide Silben mit einer Linie\NC\MR
             \NC\bf Return      \NC erzeugt eine weitere Liedtextzeile\NC\MR
             \NC\bf ESC         \NC beendet den Eingabemode\NC\MR
             \stoptabulate
