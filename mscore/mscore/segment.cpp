@@ -30,6 +30,7 @@
 #include "painter.h"
 #include "barline.h"
 #include "part.h"
+#include "lyrics.h"
 
 const char* Segment::segmentTypeNames[] = {
    "Clef", "Key Signature", "Time Signature", "Begin Repeat", "ChordRest"
@@ -114,6 +115,11 @@ void Segment::init()
 //   next1
 //---------------------------------------------------------
 
+/**
+ return next \a Segment, dont stop searching at end
+ of \a Measure
+*/
+
 Segment* Segment::next1() const
       {
       if (next())
@@ -127,6 +133,11 @@ Segment* Segment::next1() const
 //---------------------------------------------------------
 //   prev1
 //---------------------------------------------------------
+
+/**
+ return previous \a Segment, dont stop searching at
+ \a Measure begin
+*/
 
 Segment* Segment::prev1() const
       {

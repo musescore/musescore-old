@@ -1,3 +1,7 @@
+22.2.7 (ws)
+      - fixes and extensions for lyrics input:
+           ctrl+tab moves to previous syllable in edit mode
+           "-"      moves to next syllable connecting both with a line
 21.2.7 (ws)
       - fixes for page formatting: make style parameters accoladeDistance and
         staffDistance work

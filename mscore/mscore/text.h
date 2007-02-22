@@ -103,30 +103,7 @@ class Text : public Element {
       virtual QPainterPath shape() const;
       virtual bool mousePress(const QPointF&);
       double lineSpacing() const;
-      };
-
-//---------------------------------------------------------
-//   Lyrics
-//---------------------------------------------------------
-
-class Lyrics : public Text {
-   public:
-      enum Syllabic { SINGLE, BEGIN, END, MIDDLE };
-   private:
-      int _no;
-      Syllabic _syllabic;
-
-   public:
-      Lyrics(Score*);
-      virtual Lyrics* clone() const { return new Lyrics(*this); }
-      virtual ElementType type() const { return LYRICS; }
-
-      virtual void write(Xml& xml) const;
-      virtual void read(QDomNode);
-      void setNo(int n)            { _no = n; }
-      int no() const               { return _no; }
-      void setSyllabic(Syllabic s) { _syllabic = s; }
-      Syllabic syllabic() const    { return _syllabic; }
+      void moveCursorToEnd();
       };
 
 //---------------------------------------------------------

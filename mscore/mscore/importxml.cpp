@@ -50,6 +50,7 @@
 #include "timesig.h"
 #include "xml.h"
 #include "barline.h"
+#include "lyrics.h"
 
 //---------------------------------------------------------
 //   xmlSetPitch

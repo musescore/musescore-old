@@ -43,6 +43,7 @@
 #include "page.h"
 #include "barline.h"
 #include "xml.h"
+#include "lyrics.h"
 
 //---------------------------------------------------------
 //   element

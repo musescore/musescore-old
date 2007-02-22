@@ -81,7 +81,7 @@ class Segment : public Element {
       Element* element(int track) const             { return _elist[track];    }
       void removeElement(int track);
       void setElement(int track, Element* el);
-      LyricsList* lyricsList(int track)             { return &_lyrics[track];  }
+      LyricsList* lyricsList(int staffIdx)             { return &_lyrics[staffIdx];  }
       const LyricsList* lyricsList(int staffIdx) const { return &_lyrics[staffIdx];  }
       void setLyrics(int staff, Lyrics* l);
 

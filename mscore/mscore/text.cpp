@@ -563,6 +563,16 @@ bool Text::edit(QKeyEvent* ev)
       }
 
 //---------------------------------------------------------
+//   moveCursorToEnd
+//---------------------------------------------------------
+
+void Text::moveCursorToEnd()
+      {
+      if (cursor)
+            cursor->movePosition(QTextCursor::End);
+      }
+
+//---------------------------------------------------------
 //   endEdit
 //---------------------------------------------------------
 
@@ -685,55 +695,6 @@ bool Text::mousePress(const QPointF& p)
             return true;
       cursor->setPosition(idx);
       return true;
-      }
-
-//---------------------------------------------------------
-//   Lyrics
-//---------------------------------------------------------
-
-Lyrics::Lyrics(Score* s)
-   : Text(s)
-      {
-      setSubtype(TEXT_LYRIC);
-      _no = 0;
-      }
-
-//---------------------------------------------------------
-//   write
-//---------------------------------------------------------
-
-void Lyrics::write(Xml& xml) const
-      {
-      xml.stag("Lyrics");
-      xml.tag("data", getText());
-      if (_no)
-            xml.tag("no", _no);
-      Element::writeProperties(xml);
-      xml.etag("Lyrics");
-      }
-
-//---------------------------------------------------------
-//   read
-//---------------------------------------------------------
-
-void Lyrics::read(QDomNode node)
-      {
-      for (node = node.firstChild(); !node.isNull(); node = node.nextSibling()) {
-            QDomElement e = node.toElement();
-            if (e.isNull())
-                  continue;
-            QString tag(e.tagName());
-            QString val(e.text());
-            int i = val.toInt();
-            if (tag == "data")
-                  setText(val);
-            else if (tag == "no")
-                  _no = i;
-            else if (Element::readProperties(node))
-                  ;
-            else
-                  domError(node);
-            }
       }
 
 //---------------------------------------------------------

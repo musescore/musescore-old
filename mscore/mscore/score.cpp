@@ -51,6 +51,7 @@
 #include "style.h"
 #include "layout.h"
 #include "tuplet.h"
+#include "lyrics.h"
 
 InputState inputState;
 InputState* cis;              ///<  = &inputState;

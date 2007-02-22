@@ -47,10 +47,16 @@ void Canvas::keyPressEvent(QKeyEvent* ev)
 //    int(ev->modifiers()), ev->text().toLatin1().data());
 
       if (state == EDIT) {
-            if ((ev->key() == Qt::Key_Tab) && (_score->editObject->type() == LYRICS))
-                  _score->lyricsTab();
-            else if ((ev->key() == Qt::Key_Return) && (_score->editObject->type() == LYRICS))
-                  _score->lyricsReturn();
+            if (_score->editObject->type() == LYRICS) {
+                  if (ev->key() == Qt::Key_Tab)
+                        _score->lyricsTab(ev->modifiers() & Qt::ControlModifier);
+                  else if (ev->key() == Qt::Key_Return)
+                        _score->lyricsReturn();
+                  else if (ev->key() == Qt::Key_Minus)
+                        _score->lyricsMinus();
+                  else if (_score->edit(ev))
+                        state = NORMAL;
+                  }
             else if (_score->edit(ev))
                   state = NORMAL;
             ev->accept();
