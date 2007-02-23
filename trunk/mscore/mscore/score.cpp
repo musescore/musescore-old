@@ -1504,3 +1504,22 @@ bool Score::playlistDirty()
       return val;
       }
 
+//---------------------------------------------------------
+//   adjustTime
+//    change all time positions starting with measure
+//    according to new start time
+//---------------------------------------------------------
+
+void Score::adjustTime(int tick, Measure* m)
+      {
+      while (m) {
+            m->setTick(tick);
+            int delta = m->first()->tick() - tick;
+            for (Segment* s = m->first(); s; s = s->next()) {
+                  s->setTime(s->tick() - delta);
+                  }
+            tick += m->tickLen();
+            m = m->next();
+            }
+      }
+

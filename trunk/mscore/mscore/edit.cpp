@@ -473,7 +473,7 @@ again:
                         iSigEvent ic = sigmap->find(etick);
                         if (etick == tick
                             || ic == sigmap->end()
-                            || (ic->first == tick && ic->second.z != z && ic->second.n == n)) {
+                            || (ic->first == tick && ic->second.nominator != z && ic->second.denominator == n)) {
                               m->remove(segment);
                               goto again;
                               }

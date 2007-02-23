@@ -318,3 +318,22 @@ Segment::SegmentType Segment::segmentType(int type)
             }
       }
 
+//---------------------------------------------------------
+//   setTime
+//---------------------------------------------------------
+
+void Segment::setTime(int stick)
+      {
+      setTick(stick);
+      foreach(Element* e, _elist) {
+            if (e)
+                  e->setTick(stick);
+            }
+      foreach(LyricsList ll, _lyrics) {
+            foreach(Lyrics* l, ll) {
+                  if (l)
+                        l->setTick(stick);
+                  }
+            }
+      }
+

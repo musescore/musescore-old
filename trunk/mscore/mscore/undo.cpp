@@ -67,7 +67,8 @@ static const char* undoName[] = {
       "ChangeSubtype",     "AddAccidental",
       "FlipStemDirection", "FlipSlurDirection",
       "ChangeTimeSig",     "ChangeKeySig",
-      "ChangeClef"
+      "ChangeClef",
+      "ChangeSig"
       };
 
 static bool UNDO = false;
@@ -418,6 +419,21 @@ void Score::processUndoOp(UndoOp* i, bool undo)
                         }
                   }
                   break;
+            case UndoOp::ChangeSig:
+                  {
+                  if (undo) {
+                        if (i->sig2.valid())
+                              sigmap->del(i->val1);
+                        if (i->sig1.valid())
+                              sigmap->add(i->val1, i->sig1);
+                        }
+                  else {
+                        if (i->sig1.valid())
+                              sigmap->del(i->val1);
+                        if (i->sig2.valid())
+                              sigmap->add(i->val1, i->sig2);
+                        }
+                  }
             }
       UNDO = FALSE;
       }
@@ -610,6 +626,18 @@ void Score::undoOp(UndoOp::UndoType type, Staff* staff, int tick, int oval, int 
       i.val2 = oval;
       i.val3 = nval;
       undoList.back()->push_back(i);
+      }
+
+void Score::undoChangeSig(int tick, const SigEvent& o, const SigEvent& n)
+      {
+      checkUndoOp();
+      UndoOp i;
+      i.type = UndoOp::ChangeSig;
+      i.val1 = tick;
+      i.sig1 = o;
+      i.sig2 = n;
+      undoList.back()->push_back(i);
+      processUndoOp(&i, false);
       }
 
 //---------------------------------------------------------

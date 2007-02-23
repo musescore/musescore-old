@@ -104,6 +104,7 @@ class Segment : public Element {
       void sortStaves(QList<int>& src, QList<int>& dst);
       const char* name() const { return segmentTypeNames[_type]; }
       static SegmentType segmentType(int type);
+      void setTime(int tick);
       };
 
 #endif

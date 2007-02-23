@@ -46,6 +46,7 @@ QT4_WRAP_UI (ui_headers
       partedit.ui
       playpanel.ui
       prefsdialog.ui
+      irregular.ui
       segment.ui
       text.ui
       textpalette.ui
@@ -72,6 +73,7 @@ QT4_WRAP_CPP (mocs
       partedit.h
       playpanel.h
       preferences.h
+      irregular.h
       preview.h
       score.h
       seq.h
@@ -137,6 +139,7 @@ add_executable ( mscore
       pedal.cpp
       playpanel.cpp
       preferences.cpp
+      irregular.cpp
       preview.cpp
       rest.cpp
       score.cpp
@@ -179,7 +182,6 @@ target_link_libraries(mscore
       fluid
       awl
       )
-##      readline
 
 install_targets ( /bin mscore )
 

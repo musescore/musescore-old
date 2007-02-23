@@ -29,6 +29,7 @@
 #include "select.h"
 #include "measure.h"
 #include "input.h"
+#include "sig.h"
 
 class ElementList;
 class Element;
@@ -67,6 +68,7 @@ struct UndoOp {
             ChangeTimeSig,
             ChangeKeySig,
             ChangeClef,
+            ChangeSig,
             };
       UndoType type;
       Element* obj;
@@ -80,6 +82,7 @@ struct UndoOp {
       QList<int> di;
       int val1, val2, val3;
       QColor color;
+      SigEvent sig1, sig2;
 
       const char* name() const;
       };
