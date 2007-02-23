@@ -26,22 +26,25 @@ class Score;
 
 //---------------------------------------------------------
 //   Time Signature Event
-//    for regular measures: ticks = ticks_measure(z, n)
-//    for irregular measures z/n has no meaning
+//    for irregular measures the nominal values
+//    nominator2 denominator2 are also given
 //---------------------------------------------------------
 
 struct SigEvent {
       bool irregular;
-      int ticks;
-      int z, n;            // measure signature
-      int bar;             // precomputed
+      int nominator, denominator;   ///< actual values
+      int nominator2, denominator2; ///< nominal values for irregular measures
+      int bar;                      ///< precomputed value
+      int ticks;                    ///< ticks per measure, precomputed value
 
       int read(QDomNode, Score*);
       void write(Xml&, int) const;
 
-      SigEvent() { }
-      SigEvent(int z, int n);
-      SigEvent(int, int, int);
+      SigEvent() { nominator = 0; }
+      SigEvent(int, int);           ///< set regular event
+      SigEvent(int, int, int, int); ///< set irregular event
+      bool operator==(const SigEvent& e) const;
+      bool valid() const { return nominator > 0; }
       };
 
 //---------------------------------------------------------
@@ -57,13 +60,18 @@ class SigList : public std::map<const int, SigEvent > {
    public:
       SigList() {}
       void add(int tick, int z, int n);
+      void add(int tick, int z, int n, int z2, int n2);
       void add(int tick, int ticks, int z, int n);
+      void add(int tick, const SigEvent& ev);
+
       void del(int tick);
 
       void read(QDomNode, Score*);
       void write(Xml&) const;
 
       void timesig(int tick, int& z, int& n) const;
+      SigEvent timesig(int tick) const;
+
       void tickValues(int t, int* bar, int* beat, int* tick) const;
       int bar2tick(int bar, int beat, int tick) const;
 

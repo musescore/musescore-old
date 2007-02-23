@@ -721,9 +721,9 @@ bool ExportMidi::saver()
                         ev->dataA     = META_TIME_SIGNATURE;
                         ev->len  = 4;
                         ev->data = new unsigned char[4];
-                        ev->data[0] = se.z;
+                        ev->data[0] = se.nominator;
                         int n;
-                        switch(se.n) {
+                        switch(se.denominator) {
                               case 1: n = 0; break;
                               case 2: n = 1; break;
                               case 4: n = 2; break;
@@ -732,7 +732,7 @@ bool ExportMidi::saver()
                               case 32: n = 5; break;
                               default:
                                     n = 2;
-                                    printf("ExportMidi: unknown time signature %d/%d\n", se.z, n);
+                                    printf("ExportMidi: unknown time signature %d/%d\n", se.nominator, n);
                                     break;
                               }
                         ev->data[1] = n;
@@ -1088,7 +1088,7 @@ bool MidiFile::readTrack(bool mergeChannels)
       int len       = readLong();       // len
       int endPos    = curPos + len;
       status        = -1;
-      sstatus       = -1;  // running status, der nicht bei meta oder sysex zurüchan      = -1;
+      sstatus       = -1;  // running status, der nicht bei meta oder sysex zurühan      = -1;
       lastport      = -1;
       channelprefix = -1;
       click         = 0;
@@ -1945,11 +1945,11 @@ QString MidiTrack::instrName(int type) const
 //      Instrumentennamen verwendet werden?
 //    - Instrumente feststellen
 //          - Name (kommentar?)
-//          - SchlüSystem?
+//          - Schlüystem?
 //    * Takte feststellen
 //    - Schlagzeugtrack markieren
 //    - Quantisierung festlegen:
-//       - kü/    - songtitle
+//       - kü    - songtitle
 
 // process:
 //    for every measure:
@@ -2148,7 +2148,7 @@ void Score::convertMidi(MidiFile* mf)
                   for (int staffIdx = 0; staffIdx < nstaves(); ++staffIdx) {
                         TimeSig* ts = new TimeSig(this);
                         ts->setTick(tick);
-                        ts->setSig(se.n, se.z);
+                        ts->setSig(se.nominator, se.denominator);
                         ts->setStaff(staff(staffIdx));
                         Segment* seg = m->getSegment(ts);
                         seg->add(ts);

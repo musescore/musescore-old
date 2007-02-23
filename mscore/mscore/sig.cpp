@@ -55,22 +55,32 @@ int ticks_measure(int z, int n)
 //   SigEvent
 //---------------------------------------------------------
 
-SigEvent::SigEvent(int Z, int N)
+SigEvent::SigEvent(int z, int n)
       {
-      irregular = false;
-      z   = Z;
-      n   = N;
-      bar = 0;
-      ticks = ticks_measure(z, n);
+      irregular    = false;
+      nominator    = z;
+      denominator  = n;
+      nominator2   = z;
+      denominator2 = n;
+      bar          = 0;
+      ticks        = ticks_measure(z, n);
       }
 
-SigEvent::SigEvent(int Z, int N, int t)
+SigEvent::SigEvent(int z1, int n1, int z2, int n2)
       {
-      irregular = true;
-      ticks = t;
-      z   = Z;
-      n   = N;
-      bar = 0;
+      irregular    = z1 != z2 || n1 != n2;
+      nominator    = z1;
+      denominator  = n1;
+      nominator2   = z2;
+      denominator2 = n2;
+      bar          = 0;
+      ticks        = ticks_measure(z1, n1);
+      }
+
+bool SigEvent::operator==(const SigEvent& e) const
+      {
+      return e.nominator == nominator && e.denominator == denominator
+         && e.nominator2 == nominator2 && e.denominator2 == denominator2;
       }
 
 //---------------------------------------------------------
@@ -86,16 +96,46 @@ void SigList::add(int tick, int z, int n)
       normalize();
       }
 
+void SigList::add(int tick, int z, int n, int z2, int n2)
+      {
+      if (z == 0 || n == 0 || z2 == 0 || n2 == 0) {
+            printf("illegal signature %d/%d\n", z, n);
+            }
+      (*this)[tick] = SigEvent(z, n, z2, n2);
+      normalize();
+      }
+
+void SigList::add(int tick, const SigEvent& ev)
+      {
+      (*this)[tick] = ev;
+      normalize();
+      }
+
 //---------------------------------------------------------
 //   add
 //---------------------------------------------------------
 
-void SigList::add(int tick, int ticks, int z, int n)
+void SigList::add(int tick, int ticks, int z2, int n2)
       {
-      if (z == 0 || n == 0) {
-            printf("illegal signature %d/%d\n", z, n);
+      if (z2 == 0 || n2 == 0) {
+            printf("illegal signature %d/%d\n", z2, n2);
             }
-      (*this)[tick] = SigEvent(z, n, ticks);
+      int z = 1, n = 4;
+      if (ticks == division) {
+            z = 1;
+            n = 4;
+            }
+      else if (ticks == 2*division) {
+            z = 2;
+            n = 4;
+            }
+      else {
+            printf("irregular measure of len %d not supported\n", ticks);
+            if (debugMode)
+                  abort();
+            }
+
+      (*this)[tick] = SigEvent(z, n, z2, n2);
       normalize();
       }
 
@@ -126,7 +166,7 @@ void SigList::normalize()
             bar           = e->second.bar;
             tick          = e->first;
             if (!e->second.irregular) {
-                  tm = ticks_measure(e->second.z, e->second.n);
+                  tm = ticks_measure(e->second.nominator, e->second.denominator);
                   e->second.ticks = tm;
                   }
             }
@@ -153,16 +193,26 @@ int SigList::ticksMeasure(int tick) const
 
 void SigList::timesig(int tick, int& z, int& n) const
       {
-      ciSigEvent i = upper_bound(tick);
-      if (empty() || i == begin()) {
+      if (empty()) {
             z = 4;
             n = 4;
-            printf("timesig(%d): not found\n", tick);
             return;
             }
-      --i;
-      z = i->second.z;
-      n = i->second.n;
+      ciSigEvent i = upper_bound(tick);
+      if (i != begin())
+            --i;
+      z = i->second.nominator;
+      n = i->second.denominator;
+      }
+
+SigEvent SigList::timesig(int tick) const
+      {
+      if (empty())
+            return SigEvent(4, 4);
+      ciSigEvent i = upper_bound(tick);
+      if (i != begin())
+            --i;
+      return i->second;
       }
 
 //---------------------------------------------------------
@@ -178,8 +228,8 @@ void SigList::tickValues(int t, int* bar, int* beat, int* tick) const
             }
       --e;
       int delta  = t - e->first;
-      int ticksB = ticks_beat(e->second.n);
-      int ticksM = ticksB * e->second.z;
+      int ticksB = ticks_beat(e->second.denominator);
+      int ticksM = ticksB * e->second.nominator;
       *bar       = e->second.bar + delta / ticksM;
       int rest   = delta % ticksM;
       *beat      = rest / ticksB;
@@ -204,8 +254,8 @@ int SigList::bar2tick(int bar, int beat, int tick) const
             abort();
             }
       --e;
-      int ticksB = ticks_beat(e->second.n);
-      int ticksM = ticksB * e->second.z;
+      int ticksB = ticks_beat(e->second.denominator);
+      int ticksM = ticksB * e->second.nominator;
       return e->first + (bar - e->second.bar) * ticksM + ticksB * beat + tick;
       }
 
@@ -251,10 +301,12 @@ void SigList::read(QDomNode node, Score* cs)
 void SigEvent::write(Xml& xml, int tick) const
       {
       xml.stag(QString("sig tick=\"%1\"").arg(tick));
-      if (irregular)
-            xml.tag("ticks", ticks);
-      xml.tag("nom", z);
-      xml.tag("denom", n);
+      if (irregular) {
+            xml.tag("nom2", nominator2);
+            xml.tag("denom2", denominator2);
+            }
+      xml.tag("nom", nominator);
+      xml.tag("denom", denominator);
       xml.etag("sig");
       }
 
@@ -275,22 +327,29 @@ int SigEvent::read(QDomNode node, Score* cs)
             if (e.isNull())
                   continue;
             QString tag(e.tagName());
-            QString val(e.text());
-            int i = val.toInt();
+            int i = e.text().toInt();
+
             if (tag == "nom")
-                  z = i;
+                  nominator = i;
             else if (tag == "denom")
-                  n = i;
-            else if (tag == "ticks") {
-                  ticks = cs->fileDivision(i);
+                  denominator = i;
+            else if (tag == "nom2") {
+                  nominator2 = i;
+                  irregular = true;
+                  }
+            else if (tag == "denom2") {
+                  denominator2 = i;
                   irregular = true;
                   }
             else
                   printf("Mscore:SigEvent: unknown tag %s\n",
                      tag.toLatin1().data());
             }
-      if (!irregular)
-            ticks = ticks_measure(z, n);
+      if (!irregular) {
+            nominator2   = nominator;
+            denominator2 = denominator;
+            }
+      ticks = ticks_measure(nominator, denominator);
       return tick;
       }
 

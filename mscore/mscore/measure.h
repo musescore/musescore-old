@@ -127,6 +127,7 @@ class Measure : public Element {
 
       void push_back(Segment* e);
       void push_front(Segment* e);
+      void adjustToLen(int, int);
 
    public:
       Measure(Score*);
@@ -140,6 +141,8 @@ class Measure : public Element {
       virtual bool isMovable() const { return true; }
       virtual void add(Element*);
       virtual void remove(Element*);
+      virtual bool genPropertyMenu(QMenu*) const;
+      virtual void propertyAction(const QString&);
 
       MStaffList* staffList()          { return &staves;      }
       BeamList*   beamList()           { return &_beamList;   }

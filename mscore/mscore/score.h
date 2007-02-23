@@ -61,6 +61,7 @@ class MidiFile;
 class ScoreLayout;
 class TimeSig;
 class MidiTrack;
+struct SigEvent;
 
 extern QPoint scorePos;
 extern QSize scoreSize;
@@ -266,6 +267,7 @@ class Score : public QObject {
       void undoOp(UndoOp::UndoType type, Element*, const QColor&);
       void undoOp(UndoOp::UndoType type, Element*, int idx);
       void undoOp(UndoOp::UndoType type, int a, int b);
+      void undoChangeSig(int tick, const SigEvent& o, const SigEvent& n);
 
       void setNote(int tick, Staff* staff, int voice, int pitch, int len);
       int clefOffset(int tick, int staffIdx) const;
@@ -413,6 +415,7 @@ class Score : public QObject {
       Element* editElement() const { return editObject; }
       int fileDivision(int t) const { return (t * division + _fileDivision/2) / _fileDivision; }
       bool saveFile();
+      void adjustTime(int tick, Measure*);
       };
 
 extern void setPadState(Element*);

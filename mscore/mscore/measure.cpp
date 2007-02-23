@@ -55,6 +55,7 @@
 #include "layoutbreak.h"
 #include "page.h"
 #include "lyrics.h"
+#include "irregular.h"
 
 //---------------------------------------------------------
 //   y2pitch
@@ -2529,5 +2530,98 @@ void Measure::cmdRemoveEmptySegment(Segment* s)
             }
       _score->undoOp(UndoOp::RemoveElement, s);
       remove(s);
+      }
+
+//---------------------------------------------------------
+//   genPropertyMenu
+//---------------------------------------------------------
+
+bool Measure::genPropertyMenu(QMenu* popup) const
+      {
+      QAction* a = popup->addAction(QT_TR_NOOP("set irregular"));
+      a->setData("irregular");
+      return true;
+      }
+
+//---------------------------------------------------------
+//   propertyAction
+//---------------------------------------------------------
+
+void Measure::propertyAction(const QString& s)
+      {
+      if (s == "irregular") {
+            IrregularMeasureDialog im(this);
+            if (!im.exec())
+                  return;
+            SigList* sl = score()->sigmap();
+            int t = tick();
+            SigEvent oev = sl->timesig(t);
+            SigEvent nev = im.sig();
+            if (oev == nev)
+                  return;
+            int oldLen = oev.ticks;
+            int newLen = nev.ticks;
+
+            SigEvent ev1;
+            iSigEvent i = sl->find(t);
+            if (i != sl->end())
+                  ev1 = i->second;
+            score()->undoChangeSig(t, ev1, nev);
+            iSigEvent i = sl->find(t + newLen);
+            if (i != sl->end())
+                  ev1 = i->second;
+            else
+                  ev1 = SigEvent();
+            score()->undoChangeSig(t + newLen, ev1, oev);
+            adjustToLen(oldLen, newLen);
+            score()->layout();
+            }
+      }
+
+//---------------------------------------------------------
+//   adjustToLen
+//    the measure len has changed, adjust elements to
+//    new len
+//---------------------------------------------------------
+
+void Measure::adjustToLen(int ol, int nl)
+      {
+      //
+      // Plan B: remove all elements and replace with
+      //         measure rest
+      //
+
+      setTickLen(nl);
+      Segment* crs = 0;
+      int staves = score()->nstaves();
+
+      for (Segment* s = first(); s;) {
+            if (s->segmentType() == Segment::SegChordRest) {
+                  crs = s;
+                  Segment* ns = s->next();
+                  if (ns)
+                        remove(s);
+                  else
+                        crs = s;
+                  s = ns;
+                  }
+            else
+                  s = s->next();
+            }
+      if (crs) {
+            int tracks = staves * VOICES;
+            for (int i = 0; i < tracks; ++i) {
+                  Element* el = crs->element(i);
+                  if (el)
+                        crs->setElement(i, 0);
+                  }
+            for (int i = 0; i < staves; ++i) {
+                  Rest* rest = new Rest(score(), crs->tick(), nl);
+                  rest->setStaff(score()->staff(i));
+                  rest->setTickLen(nl);
+                  crs->add(rest);
+                  }
+            }
+      score()->adjustTime(t + newLen, next());
       }
 
