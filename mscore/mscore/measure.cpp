@@ -2553,7 +2553,7 @@ void Measure::propertyAction(const QString& s)
             IrregularMeasureDialog im(this);
             if (!im.exec())
                   return;
-            SigList* sl = score()->sigmap();
+            SigList* sl = score()->sigmap;
             int t = tick();
             SigEvent oev = sl->timesig(t);
             SigEvent nev = im.sig();
@@ -2567,7 +2567,7 @@ void Measure::propertyAction(const QString& s)
             if (i != sl->end())
                   ev1 = i->second;
             score()->undoChangeSig(t, ev1, nev);
-            iSigEvent i = sl->find(t + newLen);
+            i = sl->find(t + newLen);
             if (i != sl->end())
                   ev1 = i->second;
             else
@@ -2622,6 +2622,6 @@ void Measure::adjustToLen(int ol, int nl)
                   crs->add(rest);
                   }
             }
-      score()->adjustTime(t + newLen, next());
+      score()->adjustTime(tick() + tickLen(), next());
       }
 
