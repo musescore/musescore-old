@@ -908,7 +908,7 @@ void Score::startEdit(Element* element)
 
             select(editObject, 0, 0);
             undoOp(UndoOp::RemoveElement, slur);
-            undoOp(UndoOp::AddElement, newSlur);
+            undoAddElement(newSlur);
             }
       else {
             origEditObject = element;
@@ -919,7 +919,7 @@ void Score::startEdit(Element* element)
 
             select(editObject, 0, 0);
             undoOp(UndoOp::RemoveElement, origEditObject);
-            undoOp(UndoOp::AddElement, editObject);
+            undoAddElement(editObject);
             }
       updateAll = true;
       endCmd(false);
@@ -1124,7 +1124,7 @@ void Score::startDrag()
       undoOp(UndoOp::RemoveElement, origDragObject);
       removeElement(origDragObject);
 
-      undoOp(UndoOp::AddElement, _dragObject);
+      undoAddElement(_dragObject);
       sel->clear();
       sel->add(_dragObject);
       }

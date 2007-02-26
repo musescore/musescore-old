@@ -89,7 +89,8 @@ Preferences::Preferences()
       fgWallpaper        = ":/data/paper3.png";
       enableMidiInput    = true;
       playNotes          = true;
-      bgColor.setRgb(0x19, 0x6c, 0xb9);
+//      bgColor.setRgb(0x19, 0x6c, 0xb9);
+      bgColor.setRgb(0x76, 0x76, 0x6e);
       fgColor.setRgb(50, 50, 50);
       lPort              = "";
       rPort              = "";

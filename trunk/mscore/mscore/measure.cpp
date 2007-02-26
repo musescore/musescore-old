@@ -2155,7 +2155,7 @@ void Measure::cmdAddStaves(int sStaff, int eStaff)
             rest->setStaff(staff);
             Segment* s = findSegment(Segment::SegChordRest, tick());
             rest->setParent(s);
-            _score->undoOp(UndoOp::AddElement, rest);
+            _score->undoAddElement(rest);
             }
       }
 
@@ -2453,7 +2453,7 @@ void Measure::drop(const QPointF& p, int type, const QDomNode& node)
                               Segment* seg = findSegment(st, tick());
                               if (seg == 0) {
                                     seg = createSegment(st, tick());
-                                    score()->undoOp(UndoOp::AddElement, seg);
+                                    score()->undoAddElement(seg);
                                     }
                               BarLine* bl = new BarLine(score());
                               bl->setSubtype(subtype);
@@ -2584,14 +2584,15 @@ void Measure::propertyAction(const QString& s)
 //    new len
 //---------------------------------------------------------
 
-void Measure::adjustToLen(int ol, int nl)
+void Measure::adjustToLen(int, int nl)
       {
       //
       // Plan B: remove all elements and replace with
       //         measure rest
       //
 
-      setTickLen(nl);
+      score()->undoChangeMeasureLen(this, nl);
+
       Segment* crs = 0;
       int staves = score()->nstaves();
 
@@ -2600,7 +2601,7 @@ void Measure::adjustToLen(int ol, int nl)
                   crs = s;
                   Segment* ns = s->next();
                   if (ns)
-                        remove(s);
+                        score()->undoRemoveElement(s);
                   else
                         crs = s;
                   s = ns;
@@ -2613,15 +2614,15 @@ void Measure::adjustToLen(int ol, int nl)
             for (int i = 0; i < tracks; ++i) {
                   Element* el = crs->element(i);
                   if (el)
-                        crs->setElement(i, 0);
+                        score()->undoRemoveElement(el);
                   }
             for (int i = 0; i < staves; ++i) {
                   Rest* rest = new Rest(score(), crs->tick(), nl);
                   rest->setStaff(score()->staff(i));
                   rest->setTickLen(nl);
-                  crs->add(rest);
+                  rest->setParent(crs);
+                  score()->undoAddElement(rest);
                   }
             }
-      score()->adjustTime(tick() + tickLen(), next());
       }
 

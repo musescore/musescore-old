@@ -765,7 +765,7 @@ void Note::drop(const QPointF&, int t, const QDomNode& node)
 
                   f->setParent(this);
                   score()->select(f, 0, 0);
-                  score()->undoOp(UndoOp::AddElement, f);
+                  score()->undoAddElement(f);
                   chord()->layout();
                   }
                   break;

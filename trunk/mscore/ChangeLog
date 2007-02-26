@@ -1,3 +1,7 @@
+26.2.7 (ws)
+      - first "binary space partitioning" code for faster element
+        lookup when painting or clicking; borrowed from qt4.2 grapicsview
+      - implement undo/redo for "set irregular measure"
 22.2.7 (ws)
       - fix bug in segment ordering
       - adjust help line length if note on helpline has an accidental

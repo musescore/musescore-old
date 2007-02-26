@@ -68,7 +68,8 @@ static const char* undoName[] = {
       "FlipStemDirection", "FlipSlurDirection",
       "ChangeTimeSig",     "ChangeKeySig",
       "ChangeClef",
-      "ChangeSig"
+      "ChangeSig",
+      "ChangeMeasureLen",
       };
 
 static bool UNDO = false;
@@ -233,7 +234,7 @@ void Score::processUndoOp(UndoOp* i, bool undo)
 
 // printf("Score::processUndoOp(i->type=%s, undo=%d)\n", i->name(), undo);
 
-      switch(i->type) {
+      switch (i->type) {
             case UndoOp::RemoveElement:
                   if (undo)
                         addElement(i->obj);
@@ -434,6 +435,20 @@ void Score::processUndoOp(UndoOp* i, bool undo)
                               sigmap->add(i->val1, i->sig2);
                         }
                   }
+                  break;
+            case UndoOp::ChangeMeasureLen:
+                  {
+printf("%p:+val1 ist %d\n", i, i->val1);
+                  Measure* m = i->measure;
+                  int ot = m->tickLen();
+printf("  Change Measure Len %d -> %d\n", ot, i->val1);
+                  m->setTickLen(i->val1);
+                  if (m->next())
+                        adjustTime(m->tick() + i->val1, m->next());
+                  i->val1 = ot;
+printf("  val1 ist %d %d\n", ot, i->val1);
+                  }
+                  break;
             }
       UNDO = FALSE;
       }
@@ -508,13 +523,49 @@ void Score::undoOp(UndoOp::UndoType type, Element* object)
       i.type = type;
       i.obj  = object;
       undoList.back()->push_back(i);
-      //
-      // TEST: process REDO
-      // TODO: all undoOp's should be extended to do the
-      //    appropriate "undo" action
-      //
-      if (type == UndoOp::AddElement)
-            processUndoOp(&i, false);
+      }
+
+//---------------------------------------------------------
+//   undoOp
+//---------------------------------------------------------
+
+void Score::undoAddElement(Element* element)
+      {
+      checkUndoOp();
+      UndoOp i;
+      i.type = UndoOp::AddElement;
+      i.obj  = element;
+      processUndoOp(&i, false);
+      undoList.back()->push_back(i);
+      }
+
+//---------------------------------------------------------
+//   undoRemoveElement
+//---------------------------------------------------------
+
+void Score::undoRemoveElement(Element* element)
+      {
+      checkUndoOp();
+      UndoOp i;
+      i.type = UndoOp::RemoveElement;
+      i.obj  = element;
+      processUndoOp(&i, false);
+      undoList.back()->push_back(i);
+      }
+
+//---------------------------------------------------------
+//   undoChangeMeasureLen
+//---------------------------------------------------------
+
+void Score::undoChangeMeasureLen(Measure* m, int tick)
+      {
+      checkUndoOp();
+      UndoOp i;
+      i.type     = UndoOp::ChangeMeasureLen;
+      i.measure  = m;
+      i.val1     = tick;
+      processUndoOp(&i, false);
+      undoList.back()->push_back(i);
       }
 
 //---------------------------------------------------------
@@ -653,7 +704,7 @@ void Score::undoChangeSig(int tick, const SigEvent& o, const SigEvent& n)
 
 void Score::addElement(Element* element)
       {
-//printf("Score::addObject %p %s parent %s\n",
+//printf("Score::addElement %p %s parent %s\n",
 //  element, element->name(), element->parent()->name());
 
       element->parent()->add(element);
@@ -716,7 +767,7 @@ void Score::removeElement(Element* element)
       {
       Element* parent = element->parent();
 
-//printf("Score::removeElement %p %s parent %p %s\n",
+// printf("Score::removeElement %p %s parent %p %s\n",
 //   element, element->name(), parent, parent->name());
 
       parent->remove(element);

@@ -167,6 +167,7 @@ add_executable ( mscore
       xml.cpp
       timesig.cpp
       lyrics.cpp
+      bsp.cpp
       )
 
 set_target_properties( mscore
