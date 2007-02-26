@@ -235,6 +235,7 @@ void Score::update(const QRectF& r)
 */
 void Score::end()
       {
+      layout();   // DEBUG
       if (updateAll) {
             for (QList<Viewer*>::iterator i = viewer.begin(); i != viewer.end(); ++i) {
                   (*i)->updateAll(this);

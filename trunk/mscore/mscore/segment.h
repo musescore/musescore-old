@@ -100,7 +100,6 @@ class Segment : public Element {
       virtual void add(Element*);
       virtual void remove(Element*);
 
-      virtual void draw(Painter& p);
       void sortStaves(QList<int>& src, QList<int>& dst);
       const char* name() const { return segmentTypeNames[_type]; }
       static SegmentType segmentType(int type);

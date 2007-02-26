@@ -1157,9 +1157,8 @@ void MuseScore::setCurrentScore(int idx)
       if (playPanel)
             playPanel->setScore(cs);
 
-      cs->setUpdateAll();
       cs->endCmd(false);
-      cs->doLayout();   // DEBUG1
+      cs->layout();
 
       connect(cs, SIGNAL(selectionChanged(int)), SLOT(selectionChanged(int)));
       }
@@ -1300,8 +1299,7 @@ void MuseScore::pageSettingsChanged()
       {
       cs->pages()->update();
       setMag(cs->mag());
-      cs->doLayout();
-      cs->setUpdateAll();
+      cs->layout();
       cs->textStyleChanged();    // fix text styles (center, right etc.)
       canvas->updateNavigator(true);
       cs->endCmd(false);

@@ -891,6 +891,6 @@ void Score::printFile()
       DPMM = DPI / INCH;                     // dots/mm
       scoreLayout()->setPaintDevice(oldPaintDevice);
       setSpatium(oldSpatium);
-      doLayout();
+      layout();
       }
 

@@ -1466,48 +1466,24 @@ void Measure::moveTicks(int diff)
 //   draw
 //---------------------------------------------------------
 
-void Measure::draw(Painter& p)
+void Measure::draw1(Painter& p)
       {
-      p.translate(pos());
-
-      // printf("measure %p ::draw\n", this);
-      for (Segment* segment = first(); segment; segment = segment->next())
-            segment->draw(p);
-      for (ciBeam i = _beamList.begin(); i != _beamList.end(); ++i)
-            (*i)->draw(p);
-      foreach(Tuplet* tuplet, _tuplets)
-            tuplet->draw(p);
-      int staffIdx = 0;
-      for (ciMStaff is = staves.begin(); is != staves.end(); ++is, ++staffIdx) {
-            if (score()->part(staffIdx)->show() && is->endBarLine)
-                  is->endBarLine->draw(p);
-            }
-      for (ciElement i = _sel.begin(); i != _sel.end(); ++i)
-            (*i)->draw(p);
-
-      if (_noText)
-            _noText->draw(p);
-
       //-------------------------------
       // draw selection:
       //-------------------------------
 
-      if (_score->sel->state != SEL_STAFF && _score->sel->state != SEL_SYSTEM) {
-            p.translate(-pos());
+      if (_score->sel->state != SEL_STAFF && _score->sel->state != SEL_SYSTEM)
             return;
-            }
+
       int sstart = _score->sel->tickStart;
       int send   = _score->sel->tickEnd;
       int mstart = tick();
       int mend   = tick() + tickLen();
 
-      if (send <= mstart || sstart >= mend) {
-            p.translate(-pos());
+      if (send <= mstart || sstart >= mend)
             return;
-            }
 
       p.setBrush(Qt::NoBrush);
-
       double x1 = bbox().x();
       double x2 = x1 + bbox().width();
       if (_score->sel->state == SEL_SYSTEM) {
@@ -1551,7 +1527,6 @@ void Measure::draw(Painter& p)
             p.drawLine(QLineF(x1, y1, x2, y1));
             p.drawLine(QLineF(x1, y2, x2, y2));
             }
-      p.translate(-pos());
       }
 
 //---------------------------------------------------------
