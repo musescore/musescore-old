@@ -173,30 +173,6 @@ void Segment::removeStaff(int staff)
       }
 
 //---------------------------------------------------------
-//   draw
-//---------------------------------------------------------
-
-void Segment::draw(Painter& p)
-      {
-      p.translate(pos());
-
-      int staves = measure()->score()->nstaves();
-      for (int staff = 0; staff < staves; ++staff) {
-            for (int voice = 0; voice < VOICES; ++voice) {
-                  Element* e = _elist[staff * VOICES + voice];
-                  if (e)
-                        e->draw(p);
-                  }
-            const LyricsList* ll = lyricsList(staff);
-            for (ciLyrics i = ll->begin(); i != ll->end(); ++i) {
-                  if (*i)
-                        (*i)->draw(p);
-                  }
-            }
-      p.translate(-pos());
-      }
-
-//---------------------------------------------------------
 //   add
 //---------------------------------------------------------
 
@@ -248,7 +224,6 @@ void Segment::add(Element* el)
                   _elist[staffIdx * VOICES + el->voice()] = el;
                   break;
             }
-      _score->layout(); //DEBUG
       }
 
 //---------------------------------------------------------

@@ -45,6 +45,7 @@
 #include "bracket.h"
 #include "hook.h"
 #include "beam.h"
+#include "tuplet.h"
 
 static inline int intmaxlog(int n)
       {
@@ -286,7 +287,7 @@ void Canvas::mousePressEvent(QMouseEvent* ev)
       buttonState = ev->button();
       startMove   = imatrix.map(QPointF(ev->pos()));
 
-findBspElements(startMove);
+// findBspElements(startMove);      // TEST
 
       Element* element = _score->findSelectableElement(startMove);
       _score->setDragObject(element);
@@ -420,7 +421,8 @@ void Canvas::mouseMoveEvent(QMouseEvent* ev)
                   }
             }
       mouseMoveEvent1(ev);
-      _score->endCmd(false);      // update display but dont end undo
+      if (!dragCanvasState)
+            _score->endCmd(false);      // update display but dont end undo
       }
 
 //---------------------------------------------------------
@@ -918,17 +920,19 @@ static inline unsigned long long cycles()
 
 void Canvas::paintEvent(QPaintEvent* ev)
       {
+// QRect r = ev->rect();
 // printf("Canvas::paintEvent() %d %d %d %d\n", r.x(), r.y(), r.width(), r.height());
+
 // unsigned long long now = cycles();
       QRect rr;
       if (_score->needLayout()) {
-// printf("   doLayout()\n");
+printf("paintEvent: do Layout\n");
             _score->doLayout();
             if (navigator)
                   navigator->layoutChanged();
             rr.setRect(0, 0, width(), height());  // does not work because paintEvent
                                                   // is clipped?
-fillBspTree();
+            fillBspTree();
             paint(rr);
             }
       else {
@@ -959,29 +963,16 @@ void Canvas::paint(const QRect& rr)
 
       p.setMatrix(matrix);
       QRectF fr = imatrix.mapRect(QRectF(rr));
-      p.setClipRect(fr);
 
       QRegion r1(rr);
-
       for (iPage ip = _score->pages()->begin(); ip != _score->pages()->end(); ++ip) {
             Page* page = *ip;
-            QRectF pbbox(page->abbox());
-            r1 -= matrix.mapRect(pbbox).toRect();
-
-#if 0
-            if (fr.intersects(pbbox)) {
-                  p.translate(page->pos());
-                  page->draw(p);
-                  p.translate(-page->pos());
-                  }
-#endif
+            r1 -= matrix.mapRect(page->abbox()).toRect();
             }
       p.setClipRect(fr);
 
-#if 1
       ElementList ell = bspTree.items(fr);
       drawElements(p, ell);
-#endif
 
       lasso->draw(p);
       cursor->draw(p);
@@ -1004,7 +995,7 @@ void Canvas::paint(const QRect& rr)
 void Canvas::setScore(Score* s)
       {
       _score = s;
-      if (_score->needLayout())
+      if (_score->needLayout())           // DEBUG
             _score->doLayout();
       if (navigator) {
             navigator->setScore(_score);
@@ -1259,9 +1250,11 @@ void Canvas::wheelEvent(QWheelEvent* event)
 
 void Canvas::fillBspTree()
       {
+      QRectF r;
       el.clear();
       for (iPage ip = _score->pages()->begin(); ip != _score->pages()->end(); ++ip) {
             Page* page = *ip;
+            r |= page->abbox();
             foreach(Element* e, *page->pel())
                   el.append(e);
             if (page->copyright())
@@ -1291,6 +1284,7 @@ void Canvas::fillBspTree()
                         }
                   for (iMeasure im = s->measures()->begin(); im != s->measures()->end(); ++im) {
                         Measure* m = *im;
+                        el.append(m);     // draw selection
                         for (Segment* s = m->first(); s; s = s->next()) {
                               for (int staffIdx = 0; staffIdx < staves; ++staffIdx) {
                                     LyricsList* ll = s->lyricsList(staffIdx);
@@ -1325,24 +1319,25 @@ void Canvas::fillBspTree()
                                                 }
                                           else
                                                 el.append(e);
-                                          QList<NoteAttribute*>* al = ((ChordRest*)e)->getAttributes();
+                                          ChordRest* cr = (ChordRest*)e;
+                                          QList<NoteAttribute*>* al = cr->getAttributes();
                                           for (ciAttribute i = al->begin(); i != al->end(); ++i) {
                                                 NoteAttribute* a = *i;
                                                 el.append(a);
                                                 }
+                                          if (cr->tuplet())
+                                                el.append(cr->tuplet());
                                           }
                                     else
                                           el.append(e);
                                     }
                               }
                         const ElementList* l = m->el();
-                        for (ciElement i = l->begin(); i != l->end(); ++i) {
+                        for (ciElement i = l->begin(); i != l->end(); ++i)
                               el.append(*i);
-                              }
                         l = m->pel();
-                        for (ciElement i = l->begin(); i != l->end(); ++i) {
+                        for (ciElement i = l->begin(); i != l->end(); ++i)
                               el.append(*i);
-                              }
                         BeamList* bl = m->beamList();
                         foreach(Beam* b, *bl)
                               el.append(b);
@@ -1350,13 +1345,13 @@ void Canvas::fillBspTree()
                               if (m->barLine(staffIdx))
                                     el.append(m->barLine(staffIdx));
                               }
+                        if (m->noText())
+                              el.append(m->noText());
                         }
                   }
             }
-      QRectF f(0.0, 0.0, 1500.0, 1500.0);
       int depth = intmaxlog(el.size());
-
-      bspTree.initialize(f, depth);
+      bspTree.initialize(r, depth);
       for (int i = 0; i < el.size(); ++i) {
             Element* e = el.at(i);
             bspTree.insert(e);
@@ -1384,6 +1379,7 @@ printf("find elements\n");
 
 void Canvas::drawElements(Painter& p,const ElementList& el)
       {
+// printf("draw %d\n", el.size());
       for (int i = 0; i < el.size(); ++i) {
             Element* e = el.at(i);
             e->itemDiscovered = 0;

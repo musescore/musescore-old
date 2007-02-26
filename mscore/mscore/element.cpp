@@ -131,7 +131,7 @@ QRectF Element::drag(const QPointF& s)
 
 QPointF Element::aref() const
       {
-      QPointF p(pos());     // war _pos
+      QPointF p(pos());
       for (Element* e = _parent; e; e = e->parent())
             p += e->pos();
       return p;

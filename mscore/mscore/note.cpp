@@ -458,12 +458,6 @@ void Note::draw1(Painter& p)
             for (int i = 1; i <= _dots; ++i)
                   symbols[dotSym].draw(p, symbols[_head].width() + point(style->dotNoteDistance) * i, y);
             }
-      if (_tieFor)
-            _tieFor->draw(p);
-      if (_accidental)
-            _accidental->draw(p);
-      foreach(Text* f, _fingering)
-            f->draw(p);
       }
 
 //---------------------------------------------------------

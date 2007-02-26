@@ -122,6 +122,8 @@ void ScoreLayout::doLayout()
       ::_spatium = _spatium;        // ??
       _needLayout = false;
 
+printf("do layout\n");
+
       Measure* im = (Measure*)(_measures.first());
       iPage    ip = _pages->begin();
       iSystem  is = _systems->begin();
@@ -414,12 +416,13 @@ System* ScoreLayout::layoutSystem(Measure*& im, System* system, qreal x, qreal y
 
             clearGenerated(m);
             m->setSystem(system);   // needed by m->layout()
-            if (m == im)
+            if (m == im) {
                   //
                   // special handling for first measure in a system:
                   // add generated clef and key signature
                   //
                   processSystemHeader(m);
+                  }
             else {
                   addGenerated(m);  //DEBUG
                   //

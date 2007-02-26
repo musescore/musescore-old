@@ -696,7 +696,7 @@ void Text::setBlockFormat(const QTextBlockFormat& bf)
             return;
       cursor->setBlockFormat(bf);
       layout();
-      score()->doLayout();
+      score()->doLayout();    // DEBUG
       score()->update(QRectF(0.0, 0.0, 100000.0, 100000.0));
       }
 
