@@ -670,34 +670,6 @@ Note* Chord::selectedNote() const
       }
 
 //---------------------------------------------------------
-//   findSelectableElement
-//---------------------------------------------------------
-
-/**
- Find selectable element nearest to \a p.
-
- Note: \a p is Measure relative.
-*/
-
-Element* Chord::findSelectableElement(QPointF p) const
-      {
-      p -= pos();
-      for (ciAttribute ia = attributes.begin(); ia != attributes.end(); ++ia) {
-            if ((*ia)->contains(p))
-                  return *ia;
-            }
-      for (ciNote in = notes.begin(); in != notes.end(); ++in) {
-            Note* note = in->second;
-            if (note->contains(p)) {
-                  Element* se = note->findSelectableElement(p);
-                  if (se)
-                        return se;
-                  }
-            }
-      return 0;
-      }
-
-//---------------------------------------------------------
 //   Chord::write
 //---------------------------------------------------------
 

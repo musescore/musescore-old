@@ -165,7 +165,6 @@ class ChordRest : public Element {
       void setUp(bool val)          { _up = val; }
       QList<NoteAttribute*>* getAttributes() { return &attributes; }
       NoteAttribute* hasAttribute(const NoteAttribute*);
-      virtual Element* findSelectableElement(QPointF p) const = 0;
       };
 
 #endif

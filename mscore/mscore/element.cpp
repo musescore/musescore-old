@@ -40,16 +40,20 @@ extern bool showInvisible;
 
 // for debugging:
 const char* elementNames[] = {
-      "Symbol", "Text", "StaffLines", "SlurSegment", "Note", "BarLine",
-      "Stem", "Compound", "Line", "SystemBracket",
-      "Accidental",
-      "Cursor", "Selection", "Lasso", "Clef", "KeySig", "TimeSig", "Chord", "Rest",
-      "Tie", "Slur", "Measure",
-      "Attribute", "Dynamic", "Page", "Beam", "Flag", "Lyrics",
-      "System",
-      "HairPin", "Tuplet", "RubberBand", "VSpacer",
-      "Segment", "TempoText", "ShadowNote", "Volta", "Ottava",
-      "Pedal", "Trill", "LayoutBreak", "HelpLine"
+      "Symbol", "Text", "SlurSegment", "BarLine",
+      "Stem", "Line", "SystemBracket",
+      "Accidental", "Note",
+      "Clef", "KeySig", "TimeSig", "Rest",
+      "Tie",
+      "Attribute", "Dynamic", "Page", "Beam", "Hook", "Lyrics",
+      "HairPin", "Tuplet", "VSpacer",
+      "TempoText",
+      "Volta", "Ottava", "Pedal", "Trill",
+      "LayoutBreak",
+      "HelpLine"
+      "Measure", "StaffLines",
+      "Cursor", "Selection", "Lasso", "ShadowNote", "RubberBand",
+      "Segment", "System", "Compound", "Chord", "Slur"
       };
 
 //---------------------------------------------------------

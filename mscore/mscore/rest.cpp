@@ -233,21 +233,6 @@ void Rest::remove(Element* e)
       }
 
 //---------------------------------------------------------
-//   findSelectableElement
-//    p is Measure relative
-//---------------------------------------------------------
-
-Element* Rest::findSelectableElement(QPointF p) const
-      {
-      p -= pos();
-      for (ciAttribute ia = attributes.begin(); ia != attributes.end(); ++ia) {
-            if ((*ia)->contains(p))
-                  return *ia;
-            }
-      return 0;
-      }
-
-//---------------------------------------------------------
 //   layout
 //---------------------------------------------------------
 

@@ -289,7 +289,7 @@ void Canvas::mousePressEvent(QMouseEvent* ev)
 
 // findBspElements(startMove);      // TEST
 
-      Element* element = _score->findSelectableElement(startMove);
+      Element* element = elementAt(startMove);
       _score->setDragObject(element);
 
       if (seq && mscore->playEnabled() && element && element->type() == NOTE) {
@@ -1038,7 +1038,7 @@ void Canvas::dragMoveEvent(QDragMoveEvent* event)
             return;
       // convert window to canvas position
       QPointF pos(imatrix.map(QPointF(event->pos())));
-      Element* el = _score->findSelectableElement(pos);
+      Element* el = elementAt(pos);
       if (el) {
             QByteArray data(event->mimeData()->data("application/mscore/symbol"));
             QDomDocument doc;
@@ -1094,7 +1094,7 @@ void Canvas::dropEvent(QDropEvent* event)
       if (!event->mimeData()->hasFormat("application/mscore/symbol"))
             return;
       QPointF pos(imatrix.map(QPointF(event->pos())));
-      Element* el = _score->findSelectableElement(pos);
+      Element* el = elementAt(pos);
       if (el) {
             QByteArray data(event->mimeData()->data("application/mscore/symbol"));
             QDomDocument doc;
@@ -1359,17 +1359,26 @@ void Canvas::fillBspTree()
       }
 
 //---------------------------------------------------------
-//   findBspElements
-//    Experimental
+//   elementLower
 //---------------------------------------------------------
 
-void Canvas::findBspElements(const QPointF& p)
+static bool elementLower(const Element* e1, const Element* e2)
       {
-printf("find elements\n");
+      return e1->type() < e2->type();
+      }
+
+//---------------------------------------------------------
+//   elementAt
+//---------------------------------------------------------
+
+Element* Canvas::elementAt(const QPointF& p)
+      {
       ElementList el = bspTree.items(p);
-      foreach(Element* e, el) {
-            printf("   %p %s\n", e, e->name());
-            }
+      if (el.empty())
+            return 0;
+      qSort(el.begin(), el.end(), elementLower);
+// printf("elementAt <%s>\n", el.at(0)->name());
+      return el.at(0);
       }
 
 //---------------------------------------------------------

@@ -201,7 +201,6 @@ class Measure : public Element {
       void insertMStaff(MStaff staff, int idx);
       void removeMStaff(MStaff staff, int idx);
 
-      Element* findSelectableElement(QPointF p) const;
       void layoutBeams();
       void layoutNoteHeads(int staff);
 

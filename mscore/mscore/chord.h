@@ -173,7 +173,6 @@ class Chord : public ChordRest {
       virtual int downLine() const;
       virtual void space(double& min, double& extra) const;
 
-      virtual Element* findSelectableElement(QPointF p) const;
       };
 
 #endif

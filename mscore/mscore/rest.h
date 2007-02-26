@@ -59,7 +59,6 @@ class Rest : public ChordRest {
       virtual void space(double& min, double& extra) const;
       virtual bool acceptDrop(const QPointF&, int, const QDomNode&) const;
       virtual void drop(const QPointF&, int, const QDomNode&);
-      virtual Element* findSelectableElement(QPointF p) const;
       virtual void layout();
       virtual QRectF bbox() const;
       };

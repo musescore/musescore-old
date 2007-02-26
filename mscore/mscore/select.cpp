@@ -269,64 +269,6 @@ void Score::select(Element* obj, int state, int staff)
       }
 
 //---------------------------------------------------------
-//   findSelectableElement
-//---------------------------------------------------------
-
-/**
- If found, return selectable Element in this Score near Canvas relative point \a pp.
-*/
-
-Element* Score::findSelectableElement(const QPointF& pp)
-      {
-      for (ciPage ip = pages()->begin(); ip != pages()->end(); ++ip) {
-            const Page* page = *ip;
-            if (!page->contains(pp))
-                  continue;
-            QPointF p = pp - page->pos();  // transform to page relative
-
-            // Page Element?
-            const ElementList* el = page->pel();
-            for (ciElement i = el->begin(); i != el->end(); ++i) {
-                  if ((*i)->contains(p))
-                        return *i;
-                  }
-
-            // Element in System/Measure selected?
-            SystemList* sl = page->systems();
-            for (ciSystem s = sl->begin(); s != sl->end(); ++s) {
-                  Element* element = (*s)->findSelectableElement(p);
-                  if (element)
-                        return element;
-                  }
-            // System/Measure selected?
-            for (ciSystem s = sl->begin(); s != sl->end(); ++s) {
-                  QPointF ppp  = p - (*s)->pos();   // system relative
-                  BarLine* bar = (*s)->getBarLine();
-                  if (bar && bar->contains(ppp))
-                        return bar;
-                  MeasureList* ml = (*s)->measures();
-                  for (ciMeasure im = ml->begin(); im != ml->end(); ++im) {
-                        Measure* m = *im;
-                        const ElementList* pel = m->pel();
-                        for (ciElement ie = pel->begin(); ie != pel->end(); ++ie) {
-                              if ((*ie)->contains(p))
-                                    return *ie;
-                              }
-                        QPointF pppp = ppp - m->pos();  // measure relative
-
-                        // if on a staff in a measure, select the measure
-                        int idx  = (*s)->y2staff(p.y());
-                        double x = m->bbox().x();
-                        double w = m->bbox().width();
-                        if (idx >= 0 && pppp.x() > x && pppp.x() < (x + w))
-                              return m;
-                        }
-                  }
-            }
-      return 0;
-      }
-
-//---------------------------------------------------------
 //   lassoSelect
 //---------------------------------------------------------
 

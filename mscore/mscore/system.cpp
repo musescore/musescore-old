@@ -433,34 +433,6 @@ void System::clear()
       }
 
 //---------------------------------------------------------
-//   findSelectableElement
-//---------------------------------------------------------
-
-/**
- If found, return selectable Element in this System near Page relative point \a p.
-*/
-
-Element* System::findSelectableElement(QPointF p) const
-      {
-      for (ciMeasure im = ml->begin(); im != ml->end(); ++im) {
-            Measure* measure = *im;
-            Element* element = measure->findSelectableElement(p - pos());
-            if (element)
-                  return element;
-            }
-      p -= pos();
-      for (ciSysStaff is = _staves.begin(); is != _staves.end(); ++is) {
-            foreach(Bracket* b, (*is)->brackets) {
-                  if (b && b->contains(p))
-                        return b;
-                  }
-            if ((*is)->instrumentName && (*is)->instrumentName->contains(p))
-                  return (*is)->instrumentName;
-            }
-      return 0;
-      }
-
-//---------------------------------------------------------
 //   setInstrumentNames
 //---------------------------------------------------------
 
@@ -524,64 +496,6 @@ void System::draw(Painter& p)
             m->draw(p);
             }
       p.translate(-pos());
-      }
-
-//---------------------------------------------------------
-//   pos2tick
-//    fp is Page relative
-//---------------------------------------------------------
-
-bool System::pos2tick(const QPointF& fp, int* tick, Staff** staff, int* pitch) const
-      {
-      *pitch      = 64;  // default
-      double dy   = point(Spatium(4) + style->staffDistance);
-
-      Element* el = findSelectableElement(fp);
-      if (el) {
-            *tick  = el->tick();
-            int clef = (*staff)->clef()->clef(*tick);
-            *pitch = y2pitch(fp.y() - y(), clef);
-            *staff = el->staff();
-            return true;
-            }
-      //
-      // es wurde kein Element direkt angeclickt, also suchen wir nach
-      // dem angeclickten Segment
-
-      double sy = bbox().y();
-      StaffList* sl = score()->staves();
-      for (iStaff i = sl->begin(); i != sl->end(); ++i) {
-            double ey = sy + _spatium*4;
-            double eey = distance(sl->indexOf(*i));
-            if (fp.y() < ey + (eey/2)) {
-                  *staff = *i;
-                  break;
-                  }
-            sy = ey + eey;
-            }
-
-      for (ciMeasure im = ml->begin(); im != ml->end(); ++im) {
-            const Measure* measure = *im;
-            double x1 = measure->x();
-            double x2 = x1 + measure->width();
-            if (x2 < fp.x())
-                  continue;
-            double measurex2 = measure->x() + measure->width();
-            for (Segment* segment = measure->first(); segment;) {
-                  Segment* ns = segment->next();
-                  double x1 = segment->x();
-                  double x2 = ns ? ns->x() : measurex2;
-                  if (fp.x() >= x1 && fp.x() < x2) {
-                        *tick = segment->tick();
-                        double y1 = measure->y() + (sl->indexOf(*staff)) * dy;
-                        int clef = (*staff)->clef()->clef(*tick);
-                        *pitch = y2pitch(fp.y() - y1, clef);
-                        return true;
-                        }
-                  segment = ns;
-                  }
-            }
-      return false;
       }
 
 //---------------------------------------------------------
