@@ -122,7 +122,7 @@ void ScoreLayout::doLayout()
       ::_spatium = _spatium;        // ??
       _needLayout = false;
 
-printf("do layout\n");
+// printf("do layout\n");
 
       Measure* im = (Measure*)(_measures.first());
       iPage    ip = _pages->begin();

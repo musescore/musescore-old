@@ -926,7 +926,7 @@ void Canvas::paintEvent(QPaintEvent* ev)
 // unsigned long long now = cycles();
       QRect rr;
       if (_score->needLayout()) {
-printf("paintEvent: do Layout\n");
+// printf("paintEvent: do Layout\n");
             _score->doLayout();
             if (navigator)
                   navigator->layoutChanged();
