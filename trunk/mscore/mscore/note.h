@@ -125,7 +125,6 @@ class Note : public Element {
       virtual void read(QDomNode);
       virtual void write(Xml& xml) const;
       QPointF stemPos(bool upFlag) const;    ///< Point to connect stem.
-      Element* findSelectableElement(QPointF p) const;
       virtual bool acceptDrop(const QPointF&, int, const QDomNode&) const;
       virtual void drop(const QPointF&, int, const QDomNode&);
 

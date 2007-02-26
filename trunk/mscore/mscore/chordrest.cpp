@@ -162,20 +162,6 @@ NoteAttribute* ChordRest::hasAttribute(const NoteAttribute* a)
       }
 
 //---------------------------------------------------------
-//   findSelectableElement
-//    p is Measure relative
-//---------------------------------------------------------
-
-Element* ChordRest::findSelectableElement(QPointF p) const
-      {
-      for (ciAttribute ia = attributes.begin(); ia != attributes.end(); ++ia) {
-            if ((*ia)->contains(p))
-                  return *ia;
-            }
-      return 0;
-      }
-
-//---------------------------------------------------------
 //   ChordRest
 //---------------------------------------------------------
 

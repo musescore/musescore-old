@@ -128,9 +128,7 @@ class System : public Element {
       virtual void draw(Painter&);
 
       BarLine* getBarLine() const         { return barLine; }
-      bool pos2tick(const QPointF&, int* tick, Staff** staff, int* pitch) const;
       int y2staff(qreal y) const;
-      Element* findSelectableElement(QPointF p) const;
       void setInstrumentNames();
       int snap(int tick, const QPointF p) const;
       int snapNote(int tick, const QPointF p, int staff) const;

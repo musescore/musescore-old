@@ -601,32 +601,6 @@ void Note::read(QDomNode node)
       }
 
 //---------------------------------------------------------
-//   findSelectableElement
-//---------------------------------------------------------
-
-/**
- Find selectable element nearest to \a p.
-
- Note: \a p is Chord relative.
-*/
-
-Element* Note::findSelectableElement(QPointF p) const
-      {
-      p -= pos();       // note relative
-      if (tieFor() && tieFor()->contains(p))
-            return tieFor();
-      if (accidental() && accidental()->contains(p))
-            return accidental();
-      foreach(Text* f, _fingering) {
-            if (f->contains(p))
-                  return f;
-            }
-      if (symbols[_head].bbox().contains(p))
-            return (Element*)this;
-      return 0;
-      }
-
-//---------------------------------------------------------
 //   drag
 //---------------------------------------------------------
 

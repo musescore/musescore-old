@@ -394,7 +394,6 @@ class Score : public QObject {
       Segment* tick2segment(int tick);
       QPointF tick2pos(int tick, int staff);
       void fixTicks();
-      Element* findSelectableElement(const QPointF& pp);
       bool undoEmpty() const;
       bool redoEmpty() const;
       PageFormat* pageFormat() const;

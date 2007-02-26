@@ -115,7 +115,6 @@ class Canvas : public QWidget, public Viewer {
 
       // experimental
       void fillBspTree();
-      void findBspElements(const QPointF& p);
       void drawElements(Painter& p,const ElementList& el);
       ElementList el;
 
@@ -186,6 +185,7 @@ class Canvas : public QWidget, public Viewer {
       void showNavigator(bool visible);
       void redraw(const QRectF& r);
       void updateNavigator(bool layoutChanged) const;
+      Element* elementAt(const QPointF& pp);
       };
 
 extern int searchStaff(const Element* element);

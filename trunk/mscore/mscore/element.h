@@ -37,19 +37,27 @@ class Score;
 class Painter;
 class Sym;
 
+/**
+  The value of this enum determines the "stacking order" the elements are
+  put on the canvas.
+*/
+
 enum ElementType {
-      SYMBOL, TEXT, STAFF_LINES, SLUR_SEGMENT, NOTE, BAR_LINE,
-      STEM, COMPOUND, LINE, BRACKET,
-/*11*/      ACCIDENTAL,
-      CURSOR, SELECTION, LASSO,
-      CLEF, KEYSIG, TIMESIG, CHORD, REST,
-      TIE, SLUR, MEASURE,
+      SYMBOL, TEXT, SLUR_SEGMENT, BAR_LINE,
+      STEM, LINE, BRACKET,
+      ACCIDENTAL, NOTE,
+      CLEF, KEYSIG, TIMESIG, REST,
+      TIE,
       ATTRIBUTE, DYNAMIC, PAGE, BEAM, HOOK, LYRICS,
-      SYSTEM, HAIRPIN, TUPLET, RUBBERBAND, VSPACER,
-      SEGMENT, TEMPO_TEXT,
-      SHADOW_NOTE, VOLTA, OTTAVA, PEDAL, TRILL,
+      HAIRPIN, TUPLET, VSPACER,
+      TEMPO_TEXT,
+      VOLTA, OTTAVA, PEDAL, TRILL,
       LAYOUT_BREAK,
-      HELP_LINE
+      HELP_LINE,
+      MEASURE, STAFF_LINES,
+      CURSOR, SELECTION, LASSO, SHADOW_NOTE, RUBBERBAND,
+      // not drawable elements:
+      SEGMENT, SYSTEM, COMPOUND, CHORD, SLUR
       };
 
 // Accidentals
