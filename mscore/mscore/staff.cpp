@@ -355,10 +355,10 @@ void Staff::changeKeySig(int tick, int st)
             Segment* s = measure->findSegment(stype, tick);
             if (!s) {
                   s = measure->createSegment(stype, tick);
-                  _score->undoOp(UndoOp::AddElement, s);
+                  _score->undoAddElement(s);
                   }
             keysig->setParent(s);
-            _score->undoOp(UndoOp::AddElement, keysig);
+            _score->undoAddElement(keysig);
             }
       _score->layout();
       }
@@ -444,10 +444,10 @@ void Staff::changeClef(int tick, int st)
             Segment* s = measure->findSegment(stype, tick);
             if (!s) {
                   s = measure->createSegment(stype, tick);
-                  _score->undoOp(UndoOp::AddElement, s);
+                  _score->undoAddElement(s);
                   }
             clef->setParent(s);
-            _score->undoOp(UndoOp::AddElement, clef);
+            _score->undoAddElement(clef);
             }
       _score->layout();
       }

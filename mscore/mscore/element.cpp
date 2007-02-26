@@ -85,6 +85,7 @@ void Element::init()
       _pos.setY(0.0);
       _userOff.setX(0.0);
       _userOff.setY(0.0);
+      itemDiscovered = 0;
       }
 
 //---------------------------------------------------------

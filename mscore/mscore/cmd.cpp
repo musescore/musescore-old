@@ -85,7 +85,7 @@ void Score::startCmd()
 
 void Score::cmdAdd(Element* e)
       {
-      undoOp(UndoOp::AddElement, e);
+      undoAddElement(e);
       layout();
       }
 
@@ -482,10 +482,10 @@ void Score::setNote(int tick, Staff* staff, int voice, int pitch, int len)
             Segment* seg = measure->findSegment(st, tick);
             if (seg == 0) {
                   seg = measure->createSegment(st, tick);
-                  undoOp(UndoOp::AddElement, seg);
+                  undoAddElement(seg);
                   }
             chord->setParent(seg);
-            undoOp(UndoOp::AddElement, chord);
+            undoAddElement(chord);
             layout();
             measure->layoutNoteHeads(staffIdx);
             select(note, 0, 0);
@@ -616,7 +616,7 @@ void Score::cmdAddText(int subtype)
       startCmd();
       s->setAnchor(measure);
       s->setParent(page);
-      undoOp(UndoOp::AddElement, s);
+      undoAddElement(s);
       layout();
 
       select(s, 0, 0);

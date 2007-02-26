@@ -254,6 +254,7 @@ class Element {
  returns true if mouse event is accepted by element
  */
       virtual bool mousePress(const QPointF&) { return false; }
+      int itemDiscovered;
       };
 
 //---------------------------------------------------------

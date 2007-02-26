@@ -21,8 +21,9 @@
 #ifndef __SCANVAS_H__
 #define __SCANVAS_H__
 
-// #include "page.h"
 #include "viewer.h"
+#include "bsp.h"
+#include "element.h"
 
 class Rest;
 class Element;
@@ -34,6 +35,7 @@ class Lasso;
 class ShadowNote;
 class Navigator;
 class Cursor;
+class ElementList;
 
 //---------------------------------------------------------
 //   Canvas
@@ -49,6 +51,8 @@ class Canvas : public QWidget, public Viewer {
    private:
       Navigator* navigator;
       Score* _score;
+      BspTree bspTree;
+
       int keyState;
       int buttonState;
       State state;
@@ -108,6 +112,12 @@ class Canvas : public QWidget, public Viewer {
       Note* searchTieNote(Note* note);
 
       void setShadowNote(const QPointF&);
+
+      // experimental
+      void fillBspTree();
+      void findBspElements(const QPointF& p);
+      void drawElements(Painter& p,const ElementList& el);
+      ElementList el;
 
    private slots:
       void cursorBlink();

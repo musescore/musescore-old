@@ -268,6 +268,9 @@ class Score : public QObject {
       void undoOp(UndoOp::UndoType type, Element*, int idx);
       void undoOp(UndoOp::UndoType type, int a, int b);
       void undoChangeSig(int tick, const SigEvent& o, const SigEvent& n);
+      void undoAddElement(Element* element);
+      void undoRemoveElement(Element* element);
+      void undoChangeMeasureLen(Measure* m, int tick);
 
       void setNote(int tick, Staff* staff, int voice, int pitch, int len);
       int clefOffset(int tick, int staffIdx) const;
@@ -298,7 +301,6 @@ class Score : public QObject {
       void removeElement(Element*);
 
       Element* addClef(Clef*);
-//      Element* addTimeSig(TimeSig*, const QPointF&);
       void addTimeSig(int tick, int keySigSubtype);
       Element* addKeySig(KeySig*, const QPointF&);
       Element* addDynamic(Dynamic* atr, const QPointF& pos);
