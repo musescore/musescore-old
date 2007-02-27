@@ -66,6 +66,11 @@ bool Element::operator>(const Element& el) const
       return tick() > el.tick();
       }
 
+Element::~Element()
+      {
+//      printf("delete element\n");
+      }
+
 //---------------------------------------------------------
 //   init
 //---------------------------------------------------------

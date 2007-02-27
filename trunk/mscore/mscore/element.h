@@ -108,7 +108,7 @@ class Element {
 
    public:
       Element(Score*);
-      virtual ~Element() {}
+      virtual ~Element();
       Element &operator=(const Element&);
       virtual Element* clone() const = 0;
 

@@ -330,6 +330,7 @@ class Score : public QObject {
 
       void start();
       void end();
+      void end1();
       void startCmd();
       void endCmd(bool undo);
       void cmdAdd(Element*);

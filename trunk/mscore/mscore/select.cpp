@@ -123,10 +123,10 @@ QRectF Selection::deselectAll(Score* cs)
 QRectF Selection::clear()
       {
       QRectF r;
-      for (ciElement i = _el.begin(); i != _el.end(); ++i) {
-            r |= (*i)->abbox();
-            (*i)->setSelected(false);
-            r |= (*i)->abbox();
+      foreach(Element* e, _el) {
+            r |= e->abbox();
+            e->setSelected(false);
+            r |= e->abbox();
             }
       _el.clear();
       state = SEL_NONE;
@@ -139,7 +139,7 @@ QRectF Selection::clear()
 
 void Selection::remove(Element* el)
       {
-      _el.remove(el);
+      _el.removeAll(el);
       updateState();
       }
 
@@ -149,7 +149,7 @@ void Selection::remove(Element* el)
 
 void Selection::add(Element* el)
       {
-      _el.push_back(el);
+      _el.append(el);
       update();
       }
 
@@ -172,7 +172,6 @@ void Score::deselect(Element* obj)
 void Score::select(Element* obj, int state, int staff)
       {
 // printf("select element <%s> staff %d\n", obj ? obj->name() : "", obj ? obj->staffIdx() : -1);
-
       if (!(state & Qt::ShiftModifier) || !obj)
             refresh |= sel->deselectAll(this);
       if (!obj) {
@@ -181,6 +180,7 @@ void Score::select(Element* obj, int state, int staff)
             emit selectionChanged(int(SEL_NONE));
             return;
             }
+
       if (obj->type() == MEASURE) {
             refresh       |= QRectF(0, 0, 10000, 10000);   // hack
             Measure* m     = (Measure*)obj;
@@ -245,7 +245,7 @@ void Score::select(Element* obj, int state, int staff)
                               if (!e)
                                     continue;
                               e->setSelected(true);
-                              sel->elements()->push_back(e);
+                              sel->elements().append(e);
                               }
                         }
 //                  for (int st = sbar; st < ebar; ++st) {
@@ -277,10 +277,13 @@ void Canvas::lassoSelect()
       _score->select(0, 0, 0);
       QRectF lr(lasso->abbox());
       QList<Element*> el = bspTree.items(lr);
-      foreach(Element* e, el) {
+      for (int i = 0; i < el.size(); ++i) {
+            Element* e = el.at(i);
             e->itemDiscovered = 0;
-            if (lr.contains(e->abbox()))
-                  _score->select(e, Qt::ShiftModifier, 0);
+            if (lr.contains(e->abbox())) {
+                  if (e->type() != MEASURE)
+                        _score->select(e, Qt::ShiftModifier, 0);
+                  }
             }
       }
 
@@ -299,10 +302,9 @@ void Score::searchSelectedElements()
       for (iPage ip = pages()->begin(); ip != pages()->end(); ++ip)
             (*ip)->collectElements(l);
       sel->clear();
-      ElementList* el = sel->elements();
       foreach(Element* e, l) {
             if (e->selected())
-                  el->append(e);
+                  sel->append(e);
             }
       sel->updateState();
       emit selectionChanged(int(sel->state));

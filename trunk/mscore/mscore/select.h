@@ -23,8 +23,6 @@
 
 class Score;
 
-#include "element.h"
-
 //---------------------------------------------------------
 //   SelState
 //---------------------------------------------------------
@@ -40,6 +38,7 @@ enum SelState {
 class Page;
 class System;
 class ChordRest;
+class Element;
 
 //---------------------------------------------------------
 //   Selection
@@ -47,7 +46,7 @@ class ChordRest;
 
 class Selection {
       Score* _score;
-      ElementList _el;        // valid when SEL_SINGLE or SEL_MULT
+      QList<Element*> _el;        // valid when SEL_SINGLE or SEL_MULT
 
       QByteArray staffMimeData() const;
 
@@ -60,8 +59,9 @@ class Selection {
       int staffEnd;           // valid if selState is SEL_STAFF
       QRectF lasso;
 
-      ElementList* elements() { return &_el; }
+      QList<Element*> elements() { return _el; }
       void add(Element*);
+      void append(Element* el)   { _el.append(el); }
       QRectF deselectAll(Score*);
       void remove(Element*);
       QRectF clear();
