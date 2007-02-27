@@ -20,7 +20,6 @@
 
 #include "trill.h"
 #include "style.h"
-#include "painter.h"
 #include "system.h"
 #include "measure.h"
 #include "xml.h"
@@ -85,7 +84,7 @@ QRectF Trill::bbox() const
 //   draw
 //---------------------------------------------------------
 
-void Trill::draw1(Painter& p)
+void Trill::draw(QPainter& p)
       {
       for (ciLineSegment i = segments.begin(); i != segments.end(); ++i) {
             const LineSegment* s = &*i;
@@ -113,7 +112,7 @@ void Trill::draw1(Painter& p)
                   symbols[trillelementSym].draw(p, x + b1.x(), y + b1.y(), n);
                   }
             else {
-                  printf("Trill::draw1(): ===not impl. segments %zd\n",
+                  printf("Trill::draw(): ===not impl. segments %zd\n",
                      segments.size());
                   }
             }

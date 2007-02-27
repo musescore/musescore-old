@@ -21,7 +21,6 @@
 #include "tuplet.h"
 #include "score.h"
 #include "chord.h"
-#include "painter.h"
 #include "xml.h"
 #include "preferences.h"
 #include "style.h"
@@ -245,7 +244,7 @@ QRectF Tuplet::bbox() const
 //   draw
 //---------------------------------------------------------
 
-void Tuplet::draw1(Painter& p)
+void Tuplet::draw(QPainter& p)
       {
       if (_number) {
             // ? p.setPen(QPen(Qt::NoPen));

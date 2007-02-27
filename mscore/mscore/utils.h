@@ -25,9 +25,8 @@ class Measure;
 class Segment;
 class System;
 class Element;
-class Painter;
 
-extern QRectF drawHandle(Painter& p, const QPointF& pos, bool active);
+extern QRectF drawHandle(QPainter& p, const QPointF& pos, bool active);
 extern QRectF handleRect(const QPointF& pos);
 
 extern int getStaff(System* system, const QPointF& p);

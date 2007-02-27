@@ -22,14 +22,13 @@
 #include "score.h"
 #include "page.h"
 #include "segment.h"
-#include "painter.h"
 #include "layout.h"
 
 //---------------------------------------------------------
 //   drawHandle
 //---------------------------------------------------------
 
-QRectF drawHandle(Painter& p, const QPointF& pos, bool active)
+QRectF drawHandle(QPainter& p, const QPointF& pos, bool active)
       {
       p.save();
       p.setPen(QPen(QColor(Qt::blue), 2.0/p.matrix().m11()));

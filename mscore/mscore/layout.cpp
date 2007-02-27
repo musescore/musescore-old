@@ -124,6 +124,13 @@ void ScoreLayout::doLayout()
 
 // printf("do layout\n");
 
+      int n = _score->nstaves();
+      for (int i = 0; i < n; ++i) {
+            for (Element* m = _measures.first(); m; m = m->next()) {
+                  ((Measure*)m)->layoutNoteHeads(i);
+                  }
+            }
+
       Measure* im = (Measure*)(_measures.first());
       iPage    ip = _pages->begin();
       iSystem  is = _systems->begin();
@@ -411,6 +418,7 @@ System* ScoreLayout::layoutSystem(Measure*& im, System* system, qreal x, qreal y
       double uStretch = 0.0;
 
       bool pageBreak = false;
+
       for (Measure* m = im; m; m = m->next()) {
             pageBreak = m->pageBreak();
 

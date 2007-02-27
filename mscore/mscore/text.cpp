@@ -25,7 +25,6 @@
 #include "mscore.h"
 #include "canvas.h"
 #include "score.h"
-#include "painter.h"
 #include "utils.h"
 #include "page.h"
 #include "textpalette.h"
@@ -611,7 +610,7 @@ void Text::endEdit()
 //   Text::draw
 //---------------------------------------------------------
 
-void Text::draw1(Painter& p)
+void Text::draw(QPainter& p)
       {
       p.save();
       p.setRenderHint(QPainter::Antialiasing, true);
@@ -696,8 +695,7 @@ void Text::setBlockFormat(const QTextBlockFormat& bf)
             return;
       cursor->setBlockFormat(bf);
       layout();
-      score()->doLayout();    // DEBUG
-      score()->update(QRectF(0.0, 0.0, 100000.0, 100000.0));
+      score()->layout();
       }
 
 //---------------------------------------------------------

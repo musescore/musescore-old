@@ -24,7 +24,6 @@
 #include "chordlist.h"
 #include "element.h"
 
-class Painter;
 class Text;
 
 //------------------------------------------------------------------------
@@ -84,7 +83,7 @@ class Tuplet : public Element {
       void write(Xml&, int) const;
 
       virtual void move(double, double);
-      virtual void draw1(Painter&);
+      virtual void draw(QPainter&);
       };
 
 #endif

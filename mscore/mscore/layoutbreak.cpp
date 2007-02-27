@@ -19,7 +19,6 @@
 //=============================================================================
 
 #include "layoutbreak.h"
-#include "painter.h"
 #include "preferences.h"
 #include "score.h"
 #include "canvas.h"
@@ -35,10 +34,10 @@ LayoutBreak::LayoutBreak(Score* score)
       }
 
 //---------------------------------------------------------
-//   draw1
+//   draw
 //---------------------------------------------------------
 
-void LayoutBreak::draw1(Painter& p)
+void LayoutBreak::draw(QPainter& p)
       {
       QPen pen;
       if (selected())

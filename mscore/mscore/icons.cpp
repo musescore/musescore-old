@@ -21,7 +21,6 @@
 #include "globals.h"
 #include "icons.h"
 #include "score.h"
-#include "painter.h"
 #include "style.h"
 #include "preferences.h"
 #include "sym.h"
@@ -86,7 +85,7 @@ QIcon symIcon(const SymCode& sc, int size, int width, int height)
       QImage image(width, height, QImage::Format_ARGB32_Premultiplied);
       image.fill(qRgba(0, 0, 0, 0));
 
-      Painter painter(&image);
+      QPainter painter(&image);
       painter.setFont(f);
       painter.setRenderHint(QPainter::TextAntialiasing, true);
       painter.setPen(QPen(QColor(0, 0, 0, 255)));

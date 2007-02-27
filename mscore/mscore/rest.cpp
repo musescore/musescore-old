@@ -48,7 +48,7 @@ Rest::Rest(Score* s, int tick, int len)
 //   Rest::draw
 //---------------------------------------------------------
 
-void Rest::draw1(Painter& p)
+void Rest::draw(QPainter& p)
       {
       symbols[_sym].draw(p);
       }

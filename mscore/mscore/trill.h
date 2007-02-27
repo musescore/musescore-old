@@ -35,7 +35,7 @@ class Trill : public SLine {
       virtual Trill* clone() const { return new Trill(*this); }
       virtual ElementType type() const { return TRILL; }
 
-      virtual void draw1(Painter&);
+      virtual void draw(QPainter&);
       virtual void layout();
       void setLen(qreal);
       virtual void setSubtype(int val);

@@ -23,8 +23,6 @@
 
 #include "element.h"
 
-class Painter;
-
 enum BarType {
       NORMAL_BAR, DOUBLE_BAR, START_REPEAT, END_REPEAT,
       BROKEN_BAR, END_BAR, INVISIBLE_BAR
@@ -45,7 +43,7 @@ class BarLine : public Element {
       virtual ElementType type() const { return BAR_LINE; }
       virtual void write(Xml& xml) const;
       virtual void read(QDomNode);
-      virtual void draw1(Painter&);
+      virtual void draw(QPainter&);
       virtual void dump() const;
       virtual void setSubtype(int t);
       virtual QRectF bbox() const;

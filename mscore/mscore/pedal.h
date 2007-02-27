@@ -35,7 +35,7 @@ class Pedal : public SLine {
       virtual Pedal* clone() const { return new Pedal(*this); }
       virtual ElementType type() const { return PEDAL; }
 
-      virtual void draw1(Painter&);
+      virtual void draw(QPainter&);
       virtual void layout();
       void setLen(qreal);
       virtual void setSubtype(int val);

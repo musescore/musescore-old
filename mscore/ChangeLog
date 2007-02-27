@@ -1,3 +1,5 @@
+27.2.7 (ws)
+      - internal cleanups of drawing code making use of bsp
 26.2.7 (ws)
       - first "binary space partitioning" code for faster element
         lookup when painting or clicking; borrowed from qt4.2 grapicsview

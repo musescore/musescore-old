@@ -24,7 +24,6 @@
 #include "chord.h"
 #include "preferences.h"
 #include "sig.h"
-#include "painter.h"
 #include "style.h"
 #include "note.h"
 #include "tuplet.h"
@@ -66,7 +65,7 @@ void Beam::remove(ChordRest* a)
 //   draw
 //---------------------------------------------------------
 
-void Beam::draw1(Painter& p)
+void Beam::draw(QPainter& p)
       {
       p.setPen(QPen(Qt::NoPen));
       p.setBrush(selected() ? preferences.selectColor[0] : Qt::black);

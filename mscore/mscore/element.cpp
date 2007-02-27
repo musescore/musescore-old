@@ -30,7 +30,6 @@
 #include "preferences.h"
 #include "staff.h"
 #include "utils.h"
-#include "painter.h"
 #include "sym.h"
 #include "symbol.h"
 #include "clef.h"
@@ -50,10 +49,10 @@ const char* elementNames[] = {
       "TempoText",
       "Volta", "Ottava", "Pedal", "Trill",
       "LayoutBreak",
-      "HelpLine"
+      "HelpLine",
       "Measure", "StaffLines",
       "Cursor", "Selection", "Lasso", "ShadowNote", "RubberBand",
-      "Segment", "System", "Compound", "Chord", "Slur"
+      "Segment", "System", "Compound", "Chord", "Slur",
       };
 
 //---------------------------------------------------------
@@ -148,12 +147,12 @@ QPointF Element::aref() const
 /**
  Return true if \a p is inside the shape of the object.
 
- Note: \a p is relative to the coordinate system of parent().
+ Note: \a p is in canvas coordinates
 */
 
 bool Element::contains(const QPointF& p) const
       {
-      return shape().contains(p - pos());
+      return shape().contains(p - aref());
       }
 
 //---------------------------------------------------------
@@ -286,51 +285,6 @@ void Element::read(QDomNode node)
       }
 
 //---------------------------------------------------------
-//   Element::draw
-//---------------------------------------------------------
-
-void Element::draw(Painter& p)
-      {
-      if (!visible() && (p.print() || !(_score && _score->showInvisible())))
-            return;
-      if (_staff && !_staff->show())
-            return;
-      QRect r(bbox().translated(pos()).toRect());
-      if (!p.clipRect().intersects(r))
-            return;
-      p.translate(pos());
-      QColor c(visible() ? _color : Qt::gray);
-      if (!p.print()) {
-            if (selected())
-                  c = preferences.selectColor[voice()];
-            else if (dropTarget())
-                  c = preferences.dropColor;
-            }
-      p.setPen(QPen(c));
-      draw1(p);
-      if (debugMode && selected()) {
-            //
-            //  draw bounding box rectangle for all
-            //  selected Elements
-            //
-            p.setBrush(Qt::NoBrush);
-            p.setPen(QPen(Qt::blue, 0, Qt::SolidLine));
-            p.drawRect(bbox());
-            }
-      p.translate(-pos());
-      }
-
-//---------------------------------------------------------
-//   draw
-//---------------------------------------------------------
-
-void ElementList::draw(Painter& p)
-      {
-      for (ciElement i = begin(); i != end(); ++i)
-            (*i)->draw(p);
-      }
-
-//---------------------------------------------------------
 //   remove
 //---------------------------------------------------------
 
@@ -418,7 +372,7 @@ QRectF StaffLines::bbox() const
 //   draw
 //---------------------------------------------------------
 
-void StaffLines::draw1(Painter& p)
+void StaffLines::draw(QPainter& p)
       {
       QPointF _pos(0.0, 0.0);
 
@@ -491,7 +445,7 @@ QRectF Line::bbox() const
 //   draw
 //---------------------------------------------------------
 
-void Line::draw1(Painter& p)
+void Line::draw(QPainter& p)
       {
       QPen pen(p.pen());
       pen.setWidthF(point(_width));
@@ -550,7 +504,7 @@ Compound::Compound(Score* s)
 //   draw
 //---------------------------------------------------------
 
-void Compound::draw1(Painter& p)
+void Compound::draw(QPainter& p)
       {
       for (ciElement i = elemente.begin(); i != elemente.end(); ++i)
             (*i)->draw(p);
@@ -699,7 +653,7 @@ void KeySig::layout()
 //   add
 //---------------------------------------------------------
 
-void KeySig::add(Painter& p, bool flat, double x, double y)
+void KeySig::add(QPainter& p, bool flat, double x, double y)
       {
       symbols[flat ? flatSym : sharpSym].draw(p, x * _spatium, y * _spatium);
       }
@@ -708,7 +662,7 @@ void KeySig::add(Painter& p, bool flat, double x, double y)
 //   set
 //---------------------------------------------------------
 
-void KeySig::draw1(Painter& p)
+void KeySig::draw(QPainter& p)
       {
       double yoff;
       if (staff()) {
@@ -789,7 +743,7 @@ Cursor::Cursor(Score* s, double l)
 //   draw
 //---------------------------------------------------------
 
-void Cursor::draw1(Painter& p)
+void Cursor::draw(QPainter& p)
       {
       if (!(_on && _blink))
             return;
@@ -815,7 +769,7 @@ Lasso::Lasso(Score* s)
 //   draw
 //---------------------------------------------------------
 
-void Lasso::draw1(Painter& p)
+void Lasso::draw(QPainter& p)
       {
       p.setBrush(Qt::NoBrush);
       QPen pen(QColor(preferences.selectColor[0]));
@@ -846,7 +800,7 @@ void Element::dump() const
 //   RubberBand::draw
 //---------------------------------------------------------
 
-void RubberBand::draw(Painter& p)
+void RubberBand::draw(QPainter& p)
       {
       if (!showRubberBand)
             return;
@@ -868,7 +822,7 @@ VSpacer::VSpacer(Score* s, double h)
 //   draw
 //---------------------------------------------------------
 
-void VSpacer::draw1(Painter&)
+void VSpacer::draw(QPainter&)
       {
 //      int lw       = lrint(.5 * tf->mag() * _spatium);
 //      int len      = lrint(height * tf->mag() * _spatium);
@@ -906,7 +860,7 @@ QByteArray Element::mimeData() const
 //   draw
 //---------------------------------------------------------
 
-void Volta::draw1(Painter& p)
+void Volta::draw(QPainter& p)
       {
       qreal voltaLineWidth = _spatium * .18;
       qreal h              = _spatium * 1.8;

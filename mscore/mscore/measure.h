@@ -40,7 +40,6 @@ class BarLine;
 class Text;
 class ChordRest;
 class Score;
-class Painter;
 
 typedef QList<Beam*>::iterator iBeam;
 typedef QList<Beam*>::const_iterator ciBeam;
@@ -135,7 +134,7 @@ class Measure : public Element {
       virtual Measure* clone() const { return new Measure(*this); }
       virtual ElementType type() const { return MEASURE; }
 
-      virtual void draw1(Painter&);
+      virtual void draw(QPainter&);
       virtual void read(QDomNode, int idx);
       virtual void write(Xml&, int, int) const;
       virtual bool isMovable() const { return true; }

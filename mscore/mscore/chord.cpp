@@ -27,7 +27,6 @@
 #include "note.h"
 #include "xml.h"
 #include "style.h"
-#include "painter.h"
 #include "segment.h"
 #include "text.h"
 #include "measure.h"
@@ -46,10 +45,10 @@ Stem::Stem(Score* s)
       }
 
 //---------------------------------------------------------
-//   draw1
+//   draw
 //---------------------------------------------------------
 
-void Stem::draw1(Painter& p)
+void Stem::draw(QPainter& p)
       {
       qreal lw = point(::style->stemWidth);
       QPen pen(p.pen());
@@ -217,7 +216,7 @@ void Chord::remove(Element* e)
 //   drawPosMark
 //---------------------------------------------------------
 
-void drawPosMark(Painter& painter, const QPointF& p)
+void drawPosMark(QPainter& painter, const QPointF& p)
       {
       qreal x = p.x();
       qreal y = p.y();
@@ -234,7 +233,7 @@ void drawPosMark(Painter& painter, const QPointF& p)
  Draw chord and calculate bounding region.
 */
 
-void Chord::draw1(Painter& p)
+void Chord::draw(QPainter& p)
       {
       for (ciNote i = notes.begin(); i != notes.end(); ++i)
             i->second->draw(p);
@@ -709,7 +708,7 @@ void Chord::read(QDomNode node, int staffIdx)
                   note->setGrace(_grace);
                   note->setStaff(staff());
                   note->setVoice(voice());
-                  // note->setHead(tickLen());
+note->setHead(tickLen());
                   note->read(node);
                   notes.add(note);
                   }

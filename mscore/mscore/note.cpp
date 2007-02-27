@@ -40,7 +40,6 @@
 #include "preferences.h"
 #include "padstate.h"
 #include "utils.h"
-#include "painter.h"
 #include "style.h"
 #include "staff.h"
 
@@ -138,7 +137,7 @@ void Note::changePitch(int n)
       {
       setPitch(n);
       _userAccidental = -1;
-      chord()->measure()->layoutNoteHeads(staffIdx());
+//      chord()->measure()->layoutNoteHeads(staffIdx());
       }
 
 //---------------------------------------------------------
@@ -442,7 +441,7 @@ void Note::setType(DurationType t)
 //   draw
 //---------------------------------------------------------
 
-void Note::draw1(Painter& p)
+void Note::draw(QPainter& p)
       {
       symbols[_head].draw(p);
 
@@ -467,6 +466,7 @@ void Note::draw1(Painter& p)
 QRectF Note::bbox() const
       {
       QRectF _bbox = symbols[_head].bbox();
+#if 0
       if (_tieFor)
             _bbox |= _tieFor->bbox().translated(_tieFor->pos());
       if (_accidental)
@@ -488,6 +488,7 @@ QRectF Note::bbox() const
                   _bbox |= dot;
                   }
             }
+#endif
       return _bbox;
       }
 
@@ -643,7 +644,7 @@ ShadowNote::ShadowNote(Score* s)
 //   draw
 //---------------------------------------------------------
 
-void ShadowNote::draw(Painter& p)
+void ShadowNote::draw(QPainter& p)
       {
       if (!visible())
             return;
@@ -651,10 +652,9 @@ void ShadowNote::draw(Painter& p)
       QPointF ap(apos());
 
       QRect r(abbox().toRect());
-      QRect c(p.clipRect());
+//      QRect c(p.clipRect());
 
-      if (c.intersects(r)) {
-            QPointF ap(apos());
+//      if (c.intersects(r)) {
             p.translate(ap);
             qreal lw = point(style->helpLineWidth);
             QPen pen(preferences.selectColor[padState.voice].light(160));
@@ -675,7 +675,7 @@ void ShadowNote::draw(Painter& p)
                   p.drawLine(QLineF(x1, y, x2, y));
                   }
             p.translate(-ap);
-            }
+//            }
       }
 
 //---------------------------------------------------------

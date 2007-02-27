@@ -50,7 +50,7 @@ class Stem : public Element {
 
       virtual Stem* clone() const { return new Stem(*this); }
       virtual ElementType type() const { return STEM; }
-      virtual void draw1(Painter& p);
+      virtual void draw(QPainter& p);
       void setLen(const Spatium&);
       virtual QRectF bbox() const;
       };
@@ -131,7 +131,7 @@ class Chord : public ChordRest {
       virtual Chord* clone() const { return new Chord(*this); }
       virtual ElementType type() const { return CHORD; }
 
-      virtual void draw1(Painter&);
+      virtual void draw(QPainter&);
       virtual void write(Xml& xml) const;
       virtual void read(QDomNode, int staff);
       virtual void setSelected(bool f);

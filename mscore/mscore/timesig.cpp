@@ -25,7 +25,6 @@
 #include "style.h"
 #include "sym.h"
 #include "symbol.h"
-#include "painter.h"
 
 //---------------------------------------------------------
 //   TimeSig
@@ -240,10 +239,10 @@ QRectF TimeSig::bbox() const
       }
 
 //---------------------------------------------------------
-//   draw1
+//   draw
 //---------------------------------------------------------
 
-void TimeSig::draw1(Painter& p)
+void TimeSig::draw(QPainter& p)
       {
       int st = subtype();
       if (st == 0)

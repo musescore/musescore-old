@@ -487,8 +487,8 @@ void Score::setNote(int tick, Staff* staff, int voice, int pitch, int len)
                   }
             chord->setParent(seg);
             undoAddElement(chord);
-            layout();
-            measure->layoutNoteHeads(staffIdx);
+//            layout();
+//            measure->layoutNoteHeads(staffIdx);
             select(note, 0, 0);
 
             tick += noteLen;
@@ -931,7 +931,7 @@ void Score::moveUp(Note* note)
             }
 
       note->setMove(note->move() - 1);
-      note->chord()->segment()->measure()->layoutNoteHeads(staff(note->staff()));
+//      note->chord()->segment()->measure()->layoutNoteHeads(staff(note->staff()));
       layout();
       }
 
@@ -941,7 +941,7 @@ void Score::moveUp(Note* note)
 
 void Score::moveDown(Note* note)
       {
-      int staffIdx = staff(note->staff());
+//      int staffIdx = staff(note->staff());
       Staff* staff = note->staff();
       Part* part   = staff->part();
       int rstaff   = staff->rstaff();
@@ -954,7 +954,7 @@ void Score::moveDown(Note* note)
             return;
             }
       note->setMove(note->move() + 1);
-      note->chord()->segment()->measure()->layoutNoteHeads(staffIdx);
+//      note->chord()->segment()->measure()->layoutNoteHeads(staffIdx);
       layout();
       }
 

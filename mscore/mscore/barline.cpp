@@ -21,7 +21,6 @@
 #include "xml.h"
 #include "barline.h"
 #include "preferences.h"
-#include "painter.h"
 #include "style.h"
 #include "utils.h"
 #include "score.h"
@@ -41,7 +40,7 @@ BarLine::BarLine(Score* s)
 //   draw
 //---------------------------------------------------------
 
-void BarLine::draw1(Painter& p)
+void BarLine::draw(QPainter& p)
       {
       qreal lw    = point(style->barWidth);
       qreal h     = height();

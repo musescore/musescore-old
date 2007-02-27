@@ -784,8 +784,8 @@ void MusicXml::xmlMeasure(Part* part, QDomNode node, int number)
                   domError(node);
             }
       staves = part->nstaves();
-      for (int rstaff = 0; rstaff < staves; ++rstaff)
-            measure->layoutNoteHeads(staff + rstaff);
+//      for (int rstaff = 0; rstaff < staves; ++rstaff)
+//            measure->layoutNoteHeads(staff + rstaff);
       int measureLen = maxtick - measure->tick();
 #if 1
       if (lastMeasureLen != measureLen) {

@@ -730,7 +730,7 @@ void Score::addElement(Element* element)
                                     break;
                                     }
                               }
-                        measure->layoutNoteHeads(staffIdx);
+//                        measure->layoutNoteHeads(staffIdx);
                         if (endFound)
                               break;
                         }
@@ -743,11 +743,12 @@ void Score::addElement(Element* element)
             // but only after fixing redo for elements contained in segments
 
             // fixup all accidentals
-            for (Measure* m = _layout->first(); m; m = m->next()) {
+/*            for (Measure* m = _layout->first(); m; m = m->next()) {
                   for (int staffIdx = 0; staffIdx < nstaves(); ++staffIdx) {
                               m->layoutNoteHeads(staffIdx);
                         }
                   }
+ */
             layout();
             }
       }
@@ -792,7 +793,7 @@ void Score::removeElement(Element* element)
                                     break;
                                     }
                               }
-                        measure->layoutNoteHeads(staffIdx);
+//                        measure->layoutNoteHeads(staffIdx);
                         if (endFound)
                               break;
                         }
@@ -808,11 +809,12 @@ void Score::removeElement(Element* element)
             // remove entry from keymap
 //            element->staff()->keymap()->erase(element->tick());
             // fixup all accidentals
-            for (Measure* m = _layout->first(); m; m = m->next()) {
+/*            for (Measure* m = _layout->first(); m; m = m->next()) {
                   for (int staffIdx = 0; staffIdx < nstaves(); ++staffIdx) {
                               m->layoutNoteHeads(staffIdx);
                         }
                   }
+ */
             layout();
             }
 /*      else if (element->type() == SLUR_SEGMENT) {

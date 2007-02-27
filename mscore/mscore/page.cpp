@@ -23,11 +23,19 @@
 #include "text.h"
 #include "xml.h"
 #include "mscore.h"
-#include "painter.h"
 #include "preferences.h"
 #include "measure.h"
 #include "style.h"
 #include "layout.h"
+#include "chord.h"
+#include "beam.h"
+#include "tuplet.h"
+#include "note.h"
+#include "barline.h"
+#include "slur.h"
+#include "hook.h"
+#include "lyrics.h"
+#include "bracket.h"
 
 //---------------------------------------------------------
 //   Page
@@ -192,7 +200,7 @@ void Page::layout()
 //   drawBorder
 //---------------------------------------------------------
 
-void Page::drawBorder(Painter& p) const
+void Page::drawBorder(QPainter& p) const
       {
       QRectF r = bbox();
       qreal x1 = r.x();
@@ -277,18 +285,111 @@ void Page::drawBorder(Painter& p) const
 //    bounding rectange fr is relative to page QPointF
 //---------------------------------------------------------
 
-void Page::draw(Painter& p)
+void Page::draw(QPainter& p)
       {
-      if (!p.print())
-            drawBorder(p);
-      pel()->draw(p);
+      drawBorder(p);
+      }
+
+//---------------------------------------------------------
+//   elements
+//---------------------------------------------------------
+
+void Page::collectElements(ElementList& el)
+      {
+      foreach(Element* e, _elements)
+            el.append(e);
       if (_copyright)
-            _copyright->draw(p);
+            el.append(_copyright);
       if (_pageNo)
-            _pageNo->draw(p);
+            el.append(_pageNo);
       SystemList* sl = systems();
-      for (ciSystem is = sl->begin(); is != sl->end(); ++is)
-            (*is)->draw(p);
+      int staves = score()->nstaves();
+      int tracks = staves * VOICES;
+
+      for (ciSystem is = sl->begin(); is != sl->end(); ++is) {
+            System* s = *is;
+            if (s->getBarLine())
+                  el.append(s->getBarLine());
+            for (int i = 0; i < staves; ++i) {
+                  SysStaff* st = s->staff(i);
+                  if (st == 0)
+                        continue;
+                  foreach(Bracket* b, st->brackets) {
+                        if (b)
+                              el.append(b);
+                        }
+                  if (st->sstaff)
+                        el.append(st->sstaff);
+                  if (st->instrumentName)
+                        el.append(st->instrumentName);
+                  }
+            for (iMeasure im = s->measures()->begin(); im != s->measures()->end(); ++im) {
+                  Measure* m = *im;
+                  el.append(m);     // draw selection
+                  for (Segment* s = m->first(); s; s = s->next()) {
+                        for (int staffIdx = 0; staffIdx < staves; ++staffIdx) {
+                              LyricsList* ll = s->lyricsList(staffIdx);
+                              foreach(Lyrics* l, *ll)
+                                    el.append(l);
+                              }
+                        for (int track = 0; track < tracks; ++track) {
+                              Element* e = s->element(track);
+                              if (e == 0)
+                                    continue;
+                              if (e->isChordRest()) {
+                                    if (e->type() == CHORD) {
+                                          Chord* chord = (Chord*)e;
+                                          if (chord->hook())
+                                                el.append(chord->hook());
+                                          if (chord->stem())
+                                                el.append(chord->stem());
+                                          foreach(HelpLine* h, *chord->helpLineList())
+                                                el.append(h);
+
+                                          const NoteList* nl = chord->noteList();
+                                          for (ciNote in = nl->begin(); in != nl->end(); ++in) {
+                                                Note* note = in->second;
+                                                el.append(note);
+                                                if (note->tieFor())
+                                                      el.append(note->tieFor());
+                                                foreach(Text* f, note->fingering())
+                                                      el.append(f);
+                                                if (note->accidental())
+                                                      el.append(note->accidental());
+                                                }
+                                          }
+                                    else
+                                          el.append(e);
+                                    ChordRest* cr = (ChordRest*)e;
+                                    QList<NoteAttribute*>* al = cr->getAttributes();
+                                    for (ciAttribute i = al->begin(); i != al->end(); ++i) {
+                                          NoteAttribute* a = *i;
+                                          el.append(a);
+                                          }
+                                    if (cr->tuplet())
+                                          el.append(cr->tuplet());
+                                    }
+                              else
+                                    el.append(e);
+                              }
+                        }
+                  const ElementList* l = m->el();
+                  for (ciElement i = l->begin(); i != l->end(); ++i)
+                        el.append(*i);
+                  l = m->pel();
+                  for (ciElement i = l->begin(); i != l->end(); ++i)
+                        el.append(*i);
+                  BeamList* bl = m->beamList();
+                  foreach(Beam* b, *bl)
+                        el.append(b);
+                  for (int staffIdx = 0; staffIdx < staves; ++staffIdx) {
+                        if (m->barLine(staffIdx))
+                              el.append(m->barLine(staffIdx));
+                        }
+                  if (m->noText())
+                        el.append(m->noText());
+                  }
+            }
       }
 
 //---------------------------------------------------------

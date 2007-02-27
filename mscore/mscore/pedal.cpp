@@ -20,7 +20,6 @@
 
 #include "pedal.h"
 #include "style.h"
-#include "painter.h"
 #include "system.h"
 #include "measure.h"
 #include "xml.h"
@@ -50,7 +49,7 @@ void Pedal::setSubtype(int val)
 //   draw
 //---------------------------------------------------------
 
-void Pedal::draw1(Painter& p)
+void Pedal::draw(QPainter& p)
       {
       qreal ottavaLineWidth    = _spatium * .18;
       qreal ottavaTextDistance = _spatium * .5;
