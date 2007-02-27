@@ -27,7 +27,6 @@
 #include "measure.h"
 #include "segment.h"
 #include "system.h"
-#include "painter.h"
 
 //---------------------------------------------------------
 //   write
@@ -101,7 +100,7 @@ QRectF Hairpin::bbox() const
 //   draw
 //---------------------------------------------------------
 
-void Hairpin::draw1(Painter& p)
+void Hairpin::draw(QPainter& p)
       {
       double h1 = point(style->hairpinHeight) * .5;
       double h2 = point(style->hairpinContHeight) * .5;

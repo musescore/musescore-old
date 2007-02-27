@@ -28,7 +28,6 @@ class Note;
 class System;
 class SlurTie;
 class Score;
-class Painter;
 
 struct UP {
       QPointF p;            // layout position relative to pos()
@@ -67,7 +66,7 @@ class SlurSegment : public Element {
 
       virtual QPointF dragOff() const;
 
-      virtual void draw1(Painter&);
+      virtual void draw(QPainter&);
       virtual bool startEdit(QMatrix&, const QPointF&);
       virtual void endEdit();
       virtual bool startEditDrag(const QPointF&);

@@ -106,12 +106,12 @@ void Lyrics::remove(Element*)
       }
 
 //---------------------------------------------------------
-//   draw1
+//   draw
 //---------------------------------------------------------
 
-void Lyrics::draw1(Painter& p)
+void Lyrics::draw(QPainter& p)
       {
-      Text::draw1(p);
+      Text::draw(p);
       if (_separator)
             _separator->draw(p);
       }

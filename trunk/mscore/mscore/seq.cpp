@@ -32,7 +32,6 @@
 #include "canvas.h"
 #include "playpanel.h"
 #include "staff.h"
-#include "painter.h"
 #include "measure.h"
 #include "layout.h"
 #include "preferences.h"

@@ -108,14 +108,11 @@ class Canvas : public QWidget, public Viewer {
 
       void contextItem(Element*);
 
-      QRegion lassoSelect();
+      void lassoSelect();
       Note* searchTieNote(Note* note);
 
       void setShadowNote(const QPointF&);
-
-      // experimental
-      void fillBspTree();
-      void drawElements(Painter& p,const ElementList& el);
+      void drawElements(QPainter& p,const ElementList& el);
       ElementList el;
 
    private slots:

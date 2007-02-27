@@ -20,7 +20,6 @@
 
 #include "ottava.h"
 #include "style.h"
-#include "painter.h"
 #include "system.h"
 #include "measure.h"
 #include "xml.h"
@@ -53,7 +52,7 @@ void Ottava::setSubtype(int val)
 //   draw
 //---------------------------------------------------------
 
-void Ottava::draw1(Painter& p)
+void Ottava::draw(QPainter& p)
       {
       qreal ottavaLineWidth    = _spatium * .18;
       qreal ottavaTextDistance = _spatium * .5;

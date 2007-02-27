@@ -24,8 +24,6 @@
 #include "chordlist.h"
 #include "element.h"
 
-class Painter;
-
 //---------------------------------------------------------
 //   BeamSegment
 //---------------------------------------------------------
@@ -68,7 +66,7 @@ class Beam : public Element {
       virtual void move(double, double);
       virtual QRectF bbox() const;
 
-      virtual void draw1(Painter&);
+      virtual void draw(QPainter&);
       };
 
 #endif

@@ -63,7 +63,7 @@ class FindItemBspTreeVisitor : public BspTreeVisitor
       void visit(ElementList* items) {
             for (int i = 0; i < items->size(); ++i) {
                   Element* item = items->at(i);
-                  if (!item->itemDiscovered && item->visible()) {
+                  if (!item->itemDiscovered) {
                         item->itemDiscovered = 1;
                         foundItems->prepend(item);
                         }
@@ -181,8 +181,8 @@ ElementList BspTree::items(const QPointF& pos)
       for (int i = 0; i < tmp.size(); ++i) {
             Element* e = tmp.at(i);
             e->itemDiscovered = 0;
-            if (e->abbox().contains(pos))
-                  l << e;
+            if (e->contains(pos))
+                  l.append(e);
             }
       return l;
       }

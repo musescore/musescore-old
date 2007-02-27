@@ -21,7 +21,6 @@
 #include "bracket.h"
 #include "xml.h"
 #include "style.h"
-#include "painter.h"
 #include "preferences.h"
 #include "utils.h"
 #include "staff.h"
@@ -115,7 +114,7 @@ void Bracket::layout()
 //   draw
 //---------------------------------------------------------
 
-void Bracket::draw1(Painter& p)
+void Bracket::draw(QPainter& p)
       {
       p.setBrush(p.pen().color());
       p.drawPath(path);

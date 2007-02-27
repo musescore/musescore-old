@@ -22,7 +22,6 @@
 #include "mscore.h"
 #include "canvas.h"
 #include "score.h"
-#include "painter.h"
 #include "layout.h"
 #include "page.h"
 
@@ -96,7 +95,7 @@ void Navigator::setViewRect(const QRectF& r)
 
 void Navigator::paintEvent(QPaintEvent* ev)
       {
-      Painter p;
+      QPainter p;
       QRect r(ev->rect());
       if (redraw) {
             redraw = false;

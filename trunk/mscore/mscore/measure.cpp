@@ -44,7 +44,6 @@
 #include "select.h"
 #include "staff.h"
 #include "part.h"
-#include "painter.h"
 #include "style.h"
 #include "bracket.h"
 #include "ottava.h"
@@ -679,7 +678,6 @@ void Measure::read(QDomNode node, int idx)
             else
                   domError(node);
             }
-//      layoutNoteHeads(idx);
       }
 
 //---------------------------------------------------------
@@ -782,9 +780,6 @@ void Measure::layout(double width)
             return;
 
       int n = _score->nstaves();
-      for (int i = 0; i < n; ++i)
-            layoutNoteHeads(i);
-
       double staffY[n];
       for (int i = 0; i < n; ++i) {
             staffY[i] = system()->staff(i)->bbox().y();
@@ -792,43 +787,6 @@ void Measure::layout(double width)
       setbbox(QRectF(0, 0, width, system()->height()));
 
       layoutX(width);
-
-      //---------------------------------------------------
-      //    layout bars
-      //---------------------------------------------------
-
-      PartList* pl = _score->parts();
-      double x  = width;
-      int staff = 0;
-      Spatium barLineLen(4);
-      barLineLen += ::style->staffLineWidth;
-      for (iPart ip = pl->begin(); ip != pl->end(); ++ip) {
-            Part* p = *ip;
-            BarLine* barLine = staves[staff].endBarLine;
-            if (barLine) {
-                  double y1 = staffY[staff];
-                  double y2 = staffY[staff + p->nstaves() - 1] + point(barLineLen);
-                  barLine->setHeight(y2 - y1);
-                  barLine->setPos(x - barLine->width(), y1 - point(::style->staffLineWidth) * .5);
-                  }
-            staff += p->nstaves();
-            }
-
-#if 0
-      for (iMStaff is = staves.begin(); is != staves.end(); ++is, ++staff) {
-            double y = staffY[staff];
-            BarLine* barLine = is->endBarLine;
-            if (barLine) {
-                  bool split = _score->staff(staff)->isTopSplit();
-                  Spatium barLineLen(4);
-                  barLineLen += ::style->staffLineWidth;
-                  if (split)
-                        barLineLen += spatium(staffY[staff+1] - y);
-                  barLine->setHeight(point(barLineLen));
-                  barLine->setPos(x - barLine->width(), y - point(::style->staffLineWidth) * .5);
-                  }
-            }
-#endif
 
       //---------------------------------------------------
       //   layout Chords/Lyrics/Symbols/BeginRepeatBar
@@ -1399,7 +1357,7 @@ void Measure::moveTicks(int diff)
 //   draw
 //---------------------------------------------------------
 
-void Measure::draw1(Painter& p)
+void Measure::draw(QPainter& p)
       {
       //-------------------------------
       // draw selection:
@@ -1586,7 +1544,8 @@ MeasureWidth Measure::layoutX(double stretch)
       int nstaves = _score->nstaves();
       int tracks  = nstaves * VOICES;
 
-      int segs   = size();
+      int segs = size();
+
       if (nstaves == 0 || segs == 0)
             return MeasureWidth(1.0, 0.0);
 
@@ -1725,7 +1684,7 @@ again:
             }
 
 #ifdef DEBUG
-      printf("1======== ");
+      printf("1======== \n");
       for (int track = 0; track < tracks+nstaves; ++track) {
             for (int seg = 0; seg < segs+2; ++seg) {
                   if (spaces[seg][track].valid())

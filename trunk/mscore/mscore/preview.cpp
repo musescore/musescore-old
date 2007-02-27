@@ -21,7 +21,6 @@
 #include "preview.h"
 #include "score.h"
 #include "page.h"
-#include "painter.h"
 #include "globals.h"
 #include "layout.h"
 
@@ -114,7 +113,7 @@ void PagePreview::paintEvent(QPaintEvent* ev)
                ev->rect().width()+2*dx, ev->rect().height()+2*dy);
             }
 
-      Painter p(this);
+      QPainter p(this);
       p.setClipRect(ev->rect());
       p.setRenderHint(QPainter::Antialiasing, true);
 

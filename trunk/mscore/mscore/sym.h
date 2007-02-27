@@ -23,8 +23,6 @@
 
 extern void initSymbols();
 
-class Painter;
-
 //---------------------------------------------------------
 //   SymCode
 //---------------------------------------------------------
@@ -56,9 +54,9 @@ class Sym {
       double height() const;
       QChar code() const           { return _code;   }
       void setCode(const QChar& c) { _code = c;      }
-      void draw(Painter& painter, qreal x, qreal y, int n) const;
-      void draw(Painter& painter, qreal x, qreal y) const;
-      void draw(Painter& painter) const;
+      void draw(QPainter& painter, qreal x, qreal y, int n) const;
+      void draw(QPainter& painter, qreal x, qreal y) const;
+      void draw(QPainter& painter) const;
       };
 
 extern QVector<Sym> symbols;

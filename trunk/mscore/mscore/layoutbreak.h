@@ -35,7 +35,7 @@ enum { LAYOUT_BREAK_PAGE, LAYOUT_BREAK_LINE };
 class LayoutBreak : public Element {
       QPainterPath path;
 
-      virtual void draw1(Painter&);
+      virtual void draw(QPainter&);
       virtual void layout();
 
    public:

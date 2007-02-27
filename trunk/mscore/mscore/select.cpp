@@ -272,70 +272,16 @@ void Score::select(Element* obj, int state, int staff)
 //   lassoSelect
 //---------------------------------------------------------
 
-QRegion Canvas::lassoSelect()
+void Canvas::lassoSelect()
       {
-      QRegion r;
       _score->select(0, 0, 0);
       QRectF lr(lasso->abbox());
-
-      int tracks = _score->nstaves() * VOICES;
-      for (ciPage ip = _score->pages()->begin(); ip != _score->pages()->end(); ++ip) {
-            const Page* page = *ip;
-            if (page->abbox().intersects(lasso->abbox())) {
-                  const ElementList* el = page->pel();
-                  for (ciElement i = el->begin(); i != el->end(); ++i) {
-                        if (lr.contains((*i)->abbox()))
-                              _score->select(*i, Qt::ShiftModifier, 0);
-                        }
-
-                  SystemList* sl = page->systems();
-                  for (ciSystem s = sl->begin(); s != sl->end(); ++s) {
-                        for (ciMeasure im = (*s)->measures()->begin(); im != (*s)->measures()->end(); ++im) {
-                              Measure* measure = *im;
-                              for (const Segment* segment = measure->first(); segment; segment = segment->next()) {
-                                    for (int track = 0; track < tracks; ++track) {
-                                          Element* e = segment->element(track);
-                                          if (e) {
-                                                if (e->type() == CHORD) {
-                                                      Chord* chord = (Chord*)e;
-                                                      NoteList* notes = chord->noteList();
-                                                      for (ciNote in = notes->begin(); in != notes->end(); ++in) {
-                                                            Note* note = in->second;
-                                                            if (lr.contains(note->abbox()))
-                                                                  _score->select(note, Qt::ShiftModifier, 0);
-                                                            if (note->tieFor() && lr.contains(note->tieFor()->abbox()))
-                                                                  _score->select(note->tieFor(), Qt::ShiftModifier, 0);
-                                                            if (note->accidental() && lr.contains(note->accidental()->abbox()))
-                                                                  _score->select(note->accidental(), Qt::ShiftModifier, 0);
-                                                            }
-                                                      QList<NoteAttribute*>* al = chord->getAttributes();
-                                                      for (ciAttribute ia = al->begin(); ia != al->end(); ++ia) {
-                                                            if (lr.contains((*ia)->abbox()))
-                                                                  _score->select(*ia, Qt::ShiftModifier, 0);
-                                                            }
-                                                      }
-                                                else if (e->type() == REST) {
-                                                      if (lr.contains(e->abbox()))
-                                                            _score->select(e, Qt::ShiftModifier, 0);
-                                                      QList<NoteAttribute*>* al = ((Rest*)e)->getAttributes();
-                                                      for (ciAttribute ia = al->begin(); ia != al->end(); ++ia) {
-                                                            if (lr.contains((*ia)->abbox()))
-                                                                  _score->select(*ia, Qt::ShiftModifier, 0);
-                                                            }
-
-                                                      }
-                                                else {
-                                                      if (lr.contains(e->abbox()))
-                                                            _score->select(e, Qt::ShiftModifier, 0);
-                                                      }
-                                                }
-                                          }
-                                    }
-                              }
-                        }
-                  }
+      ElementList el = bspTree.items(lr);
+      foreach(Element* e, el) {
+            e->itemDiscovered = 0;
+            if (lr.contains(e->abbox()))
+                  _score->select(e, Qt::ShiftModifier, 0);
             }
-      return r;
       }
 
 //---------------------------------------------------------
@@ -349,68 +295,14 @@ QRegion Canvas::lassoSelect()
 
 void Score::searchSelectedElements()
       {
+      ElementList l;
+      for (iPage ip = pages()->begin(); ip != pages()->end(); ++ip)
+            (*ip)->collectElements(l);
       sel->clear();
-      int tracks = nstaves() * VOICES;
       ElementList* el = sel->elements();
-
-      for (Measure* m = _layout->first(); m; m = m->next()) {
-            for (Segment* s = m->first(); s; s = s->next()) {
-                  for (int staffIdx = 0; staffIdx < nstaves(); ++staffIdx) {
-                        LyricsList* ll = s->lyricsList(staffIdx);
-                        foreach(Lyrics* l, *ll) {
-                              if (l && l->selected())
-                                    el->push_back(l);
-                              }
-                        }
-                  for (int track = 0; track < tracks; ++track) {
-                        Element* e = s->element(track);
-                        if (e == 0)
-                              continue;
-                        if (e->selected())
-                              el->push_back(e);
-                        if (e->type() == CHORD) {
-                              Chord* chord = (Chord*)e;
-                              const NoteList* nl = chord->noteList();
-                              for (ciNote in = nl->begin(); in != nl->end(); ++in) {
-                                    Note* note = in->second;
-                                    if (note->selected())
-                                          el->push_back(note);
-                                    if (note->tieFor() && note->tieFor()->selected()) {
-                                          el->push_back(note->tieFor());
-                                          }
-                                    foreach(Text* f, note->fingering()) {
-                                          if (f->selected())
-                                                el->push_back(f);
-                                          }
-                                    }
-                                QList<NoteAttribute*>* al = chord->getAttributes();
-                                for (ciAttribute i = al->begin(); i != al->end(); ++i) {
-                                    NoteAttribute* a = *i;
-                                if (a->selected())
-                                      el->push_back(a);
-                                }
-                              }
-                        else if (e->type() == REST) {
-                              Rest* rest = (Rest*)e;
-                                QList<NoteAttribute*>* al = rest->getAttributes();
-                                for (ciAttribute i = al->begin(); i != al->end(); ++i) {
-                                      NoteAttribute* a = *i;
-                                if (a->selected())
-                                      el->push_back(a);
-                                }
-                              }
-                        }
-                  }
-            const ElementList* l = m->el();
-            for (ciElement i = l->begin(); i != l->end(); ++i) {
-                  if ((*i)->selected())
-                        el->push_back(*i);
-                  }
-            l = m->pel();
-            for (ciElement i = l->begin(); i != l->end(); ++i) {
-                  if ((*i)->selected())
-                        el->push_back(*i);
-                  }
+      foreach(Element* e, l) {
+            if (e->selected())
+                  el->append(e);
             }
       sel->updateState();
       emit selectionChanged(int(sel->state));

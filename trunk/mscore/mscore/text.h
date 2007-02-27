@@ -84,7 +84,7 @@ class Text : public Element {
       double xoff() const { return _xoff; }
       double yoff() const { return _yoff; }
 
-      virtual void draw1(Painter&);
+      virtual void draw(QPainter&);
 
       virtual bool startEdit(QMatrix&, const QPointF&);
       virtual bool edit(QKeyEvent*);

@@ -21,7 +21,6 @@
 #include "palette.h"
 #include "element.h"
 #include "style.h"
-#include "painter.h"
 #include "spatium.h"
 #include "globals.h"
 #include "sym.h"
@@ -196,7 +195,7 @@ void SymbolPalette::paintEvent(QPaintEvent* e)
       {
       qreal mag = PALETTE_SPATIUM * extraMag / _spatium;
 
-      Painter p(this);
+      QPainter p(this);
       p.setRenderHint(QPainter::Antialiasing, true);
       p.fillRect(e->rect(), Qt::white);
       p.setClipRect(e->rect());

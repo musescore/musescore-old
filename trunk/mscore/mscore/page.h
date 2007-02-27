@@ -29,7 +29,6 @@ class Text;
 class Measure;
 class Xml;
 class Score;
-class Painter;
 class ScoreLayout;
 
 //---------------------------------------------------------
@@ -112,10 +111,11 @@ class Page : public Element {
       virtual void add(Element*);
       virtual void remove(Element* el);
 
-      void drawBorder(Painter& p) const;
+      void drawBorder(QPainter& p) const;
       void layout();
 
-      virtual void draw(Painter&p);
+      virtual void draw(QPainter&p);
+      void collectElements(ElementList& el);
       };
 
 //---------------------------------------------------------

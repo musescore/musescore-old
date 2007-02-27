@@ -23,7 +23,6 @@
 #include "sym.h"
 #include "spatium.h"
 #include "utils.h"
-#include "painter.h"
 #include "mscore.h"
 #include "score.h"
 
@@ -92,7 +91,7 @@ double Sym::height() const
 //   draw
 //---------------------------------------------------------
 
-void Sym::draw(Painter& painter, qreal x, qreal y) const
+void Sym::draw(QPainter& painter, qreal x, qreal y) const
       {
       painter.setFont(font());
       painter.drawText(QPointF(x, y), QString(_code));
@@ -102,7 +101,7 @@ void Sym::draw(Painter& painter, qreal x, qreal y) const
 //   draw
 //---------------------------------------------------------
 
-void Sym::draw(Painter& painter, qreal x, qreal y, int n) const
+void Sym::draw(QPainter& painter, qreal x, qreal y, int n) const
       {
       painter.setFont(font());
       painter.drawText(QPointF(x, y), QString(n, _code));
@@ -112,7 +111,7 @@ void Sym::draw(Painter& painter, qreal x, qreal y, int n) const
 //   draw
 //---------------------------------------------------------
 
-void Sym::draw(Painter& painter) const
+void Sym::draw(QPainter& painter) const
       {
       painter.setFont(font());
       painter.drawText(QPointF(0,0), QString(_code));

@@ -31,21 +31,12 @@
 #include "mscore.h"
 #include "seq.h"
 #include "staff.h"
-#include "painter.h"
 #include "navigator.h"
 #include "chord.h"
 #include "page.h"
-#include "note.h"
 #include "xml.h"
 #include "text.h"
-#include "barline.h"
-#include "lyrics.h"
-#include "slur.h"
-#include "rest.h"
-#include "bracket.h"
-#include "hook.h"
-#include "beam.h"
-#include "tuplet.h"
+#include "note.h"
 
 static inline int intmaxlog(int n)
       {
@@ -932,7 +923,19 @@ void Canvas::paintEvent(QPaintEvent* ev)
                   navigator->layoutChanged();
             rr.setRect(0, 0, width(), height());  // does not work because paintEvent
                                                   // is clipped?
-            fillBspTree();
+            QRectF r;
+            el.clear();
+            for (iPage ip = _score->pages()->begin(); ip != _score->pages()->end(); ++ip) {
+                  Page* page = *ip;
+                  r |= page->abbox();
+                  page->collectElements(el);
+                  }
+            int depth = intmaxlog(el.size());
+            bspTree.initialize(r, depth);
+            for (int i = 0; i < el.size(); ++i) {
+                  Element* e = el.at(i);
+                  bspTree.insert(e);
+                  }
             paint(rr);
             }
       else {
@@ -952,7 +955,7 @@ void Canvas::paintEvent(QPaintEvent* ev)
 
 void Canvas::paint(const QRect& rr)
       {
-      Painter p(this);
+      QPainter p(this);
       p.setRenderHint(QPainter::Antialiasing, preferences.antialiasedDrawing);
 
       if (fgPixmap == 0 || fgPixmap->isNull())
@@ -995,8 +998,6 @@ void Canvas::paint(const QRect& rr)
 void Canvas::setScore(Score* s)
       {
       _score = s;
-      if (_score->needLayout())           // DEBUG
-            _score->doLayout();
       if (navigator) {
             navigator->setScore(_score);
             updateNavigator(false);
@@ -1243,122 +1244,6 @@ void Canvas::wheelEvent(QWheelEvent* event)
       }
 
 //---------------------------------------------------------
-//   fillBspTree
-//    Experimental
-//    populate a bsp tree with all visible elements
-//---------------------------------------------------------
-
-void Canvas::fillBspTree()
-      {
-      QRectF r;
-      el.clear();
-      for (iPage ip = _score->pages()->begin(); ip != _score->pages()->end(); ++ip) {
-            Page* page = *ip;
-            r |= page->abbox();
-            foreach(Element* e, *page->pel())
-                  el.append(e);
-            if (page->copyright())
-                  el.append(page->copyright());
-            if (page->pageNo())
-                  el.append(page->pageNo());
-            SystemList* sl = page->systems();
-            int staves = score()->nstaves();
-            int tracks = staves * VOICES;
-
-            for (ciSystem is = sl->begin(); is != sl->end(); ++is) {
-                  System* s = *is;
-                  if (s->getBarLine())
-                        el.append(s->getBarLine());
-                  for (int i = 0; i < staves; ++i) {
-                        SysStaff* st = s->staff(i);
-                        if (st == 0)
-                              continue;
-                        foreach(Bracket* b, st->brackets) {
-                              if (b)
-                                    el.append(b);
-                              }
-                        if (st->sstaff)
-                              el.append(st->sstaff);
-                        if (st->instrumentName)
-                              el.append(st->instrumentName);
-                        }
-                  for (iMeasure im = s->measures()->begin(); im != s->measures()->end(); ++im) {
-                        Measure* m = *im;
-                        el.append(m);     // draw selection
-                        for (Segment* s = m->first(); s; s = s->next()) {
-                              for (int staffIdx = 0; staffIdx < staves; ++staffIdx) {
-                                    LyricsList* ll = s->lyricsList(staffIdx);
-                                    foreach(Lyrics* l, *ll)
-                                          el.append(l);
-                                    }
-                              for (int track = 0; track < tracks; ++track) {
-                                    Element* e = s->element(track);
-                                    if (e == 0)
-                                          continue;
-                                    if (e->isChordRest()) {
-                                          if (e->type() == CHORD) {
-                                                Chord* chord = (Chord*)e;
-                                                if (chord->hook())
-                                                      el.append(chord->hook());
-                                                if (chord->stem())
-                                                      el.append(chord->stem());
-                                                foreach(HelpLine* h, *chord->helpLineList())
-                                                      el.append(h);
-
-                                                const NoteList* nl = chord->noteList();
-                                                for (ciNote in = nl->begin(); in != nl->end(); ++in) {
-                                                      Note* note = in->second;
-                                                      el.append(note);
-                                                      if (note->tieFor())
-                                                            el.append(note->tieFor());
-                                                      foreach(Text* f, note->fingering())
-                                                            el.append(f);
-                                                      if (note->accidental())
-                                                            el.append(note->accidental());
-                                                      }
-                                                }
-                                          else
-                                                el.append(e);
-                                          ChordRest* cr = (ChordRest*)e;
-                                          QList<NoteAttribute*>* al = cr->getAttributes();
-                                          for (ciAttribute i = al->begin(); i != al->end(); ++i) {
-                                                NoteAttribute* a = *i;
-                                                el.append(a);
-                                                }
-                                          if (cr->tuplet())
-                                                el.append(cr->tuplet());
-                                          }
-                                    else
-                                          el.append(e);
-                                    }
-                              }
-                        const ElementList* l = m->el();
-                        for (ciElement i = l->begin(); i != l->end(); ++i)
-                              el.append(*i);
-                        l = m->pel();
-                        for (ciElement i = l->begin(); i != l->end(); ++i)
-                              el.append(*i);
-                        BeamList* bl = m->beamList();
-                        foreach(Beam* b, *bl)
-                              el.append(b);
-                        for (int staffIdx = 0; staffIdx < staves; ++staffIdx) {
-                              if (m->barLine(staffIdx))
-                                    el.append(m->barLine(staffIdx));
-                              }
-                        if (m->noText())
-                              el.append(m->noText());
-                        }
-                  }
-            }
-      int depth = intmaxlog(el.size());
-      bspTree.initialize(r, depth);
-      for (int i = 0; i < el.size(); ++i) {
-            Element* e = el.at(i);
-            bspTree.insert(e);
-            }
-      }
-
-//---------------------------------------------------------
 //   elementLower
 //---------------------------------------------------------
 
@@ -1377,32 +1262,42 @@ Element* Canvas::elementAt(const QPointF& p)
       if (el.empty())
             return 0;
       qSort(el.begin(), el.end(), elementLower);
-// printf("elementAt <%s>\n", el.at(0)->name());
       return el.at(0);
       }
 
 //---------------------------------------------------------
 //   drawElements
-//    Experimental
 //---------------------------------------------------------
 
-void Canvas::drawElements(Painter& p,const ElementList& el)
+void Canvas::drawElements(QPainter& p,const ElementList& el)
       {
-// printf("draw %d\n", el.size());
       for (int i = 0; i < el.size(); ++i) {
             Element* e = el.at(i);
             e->itemDiscovered = 0;
+
+            if (!(e->visible() || (e->score() && score()->showInvisible())))
+                  continue;
+
             QPointF ap(e->apos());
             p.translate(ap);
-            QColor c(e->visible() ? e->color() : Qt::gray);
-            if (!p.print()) {
-                  if (e->selected())
-                        c = preferences.selectColor[e->voice()];
-                  else if (e->dropTarget())
-                        c = preferences.dropColor;
+            QPen pen(e->color());
+            if (e->selected())
+                  pen.setColor(preferences.selectColor[e->voice()]);
+            else if (e->dropTarget())
+                  pen.setColor(preferences.dropColor);
+            else if (!e->visible())
+                  pen.setColor(Qt::gray);
+            p.setPen(pen);
+            e->draw(p);
+            if (debugMode && e->selected()) {
+                  //
+                  //  draw bounding box rectangle for all
+                  //  selected Elements
+                  //
+                  p.setBrush(Qt::NoBrush);
+                  p.setPen(QPen(Qt::blue, 0, Qt::SolidLine));
+                  p.drawRect(e->bbox());
                   }
-            p.setPen(QPen(c));
-            e->draw1(p);
             p.translate(-ap);
             }
       }

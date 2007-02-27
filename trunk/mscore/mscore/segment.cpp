@@ -27,7 +27,6 @@
 #include "tuplet.h"
 #include "text.h"
 #include "measure.h"
-#include "painter.h"
 #include "barline.h"
 #include "part.h"
 #include "lyrics.h"

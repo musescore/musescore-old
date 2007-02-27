@@ -218,11 +218,11 @@ Rest* Score::setRest(int tick, int len, Staff* staffp, int voice, Measure* measu
 
 Note* Score::addNote(Chord* chord, int pitch)
       {
-      int staff  = chord->staffIdx();
+//      int staff  = chord->staffIdx();
       Note* note = new Note(this, pitch, false);
       note->setParent(chord);
       cmdAdd(note);
-      chord->measure()->layoutNoteHeads(staff);
+//      chord->measure()->layoutNoteHeads(staff);
       return note;
       }
 
@@ -1309,7 +1309,7 @@ void Score::cmdTuplet(int n)
             }
       chord->setParent(seg);
       undoAddElement(chord);
-      measure->layoutNoteHeads(staffIdx);
+//      measure->layoutNoteHeads(staffIdx);
 
       for (int i = 0; i < (actualNotes-1); ++i) {
             tick += ticks;

@@ -35,7 +35,6 @@ class BarLine;
 class Clef;
 class Page;
 class Text;
-class Painter;
 class MeasureList;
 class Bracket;
 
@@ -90,6 +89,7 @@ class System : public Element {
       qreal _width;
 
       void setInstrumentName(int staff);
+      void setDistance(int n, Spatium v)   { _staves[n]->setDistance(v); }
 
    public:
       System(Score*);
@@ -115,9 +115,8 @@ class System : public Element {
       SysStaffList* staves()               { return &_staves; }
       SysStaff* staff(int n)               { return _staves[n]; }
 
-      double distance(int n) const;
+      double distance(int n) const         { return _staves[n]->distance(); }
       void setDistance(int n, double v)    { _staves[n]->setDistance(v); }
-      void setDistance(int n, Spatium v)   { _staves[n]->setDistance(v); }
       bool pageBreak() const               { return _pageBreak; }
       void setPageBreak(bool val)          { _pageBreak = val; }
 
@@ -125,7 +124,7 @@ class System : public Element {
       void insertSysStaff(SysStaff*, int);
       SysStaff* removeStaff(int);
 
-      virtual void draw(Painter&);
+      virtual void draw(QPainter&);
 
       BarLine* getBarLine() const         { return barLine; }
       int y2staff(qreal y) const;

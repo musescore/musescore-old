@@ -43,7 +43,6 @@
 #include "staff.h"
 #include "part.h"
 #include "utils.h"
-#include "painter.h"
 #include "pad.h"
 #include "layout.h"
 #include "barline.h"
@@ -848,6 +847,8 @@ void Score::printFile()
       {
       //
       // HighResolution gives higher output quality
+      // but layout may be slightly different
+
       QPrinter printer(QPrinter::HighResolution);
       // QPrinter printer;
       printer.setPageSize(paperSizes[pageFormat()->size].qtsize);
@@ -862,10 +863,9 @@ void Score::printFile()
       if (!pd.exec())
             return;
 
-      Painter p(&printer);
-      p.setPrint(true);
+      QPainter p(&printer);
       p.setRenderHint(QPainter::Antialiasing, true);
-      p.setClipRect(QRectF(0.0, 0.0, 1000000.0, 1000000.0));
+//      p.setClipRect(QRectF(0.0, 0.0, 1000000.0, 1000000.0));
 
       qreal oldSpatium = _spatium;
       double oldDPI = DPI;
@@ -874,12 +874,22 @@ void Score::printFile()
       setSpatium(_spatium * DPI / oldDPI);
       QPaintDevice* oldPaintDevice = scoreLayout()->paintDevice();
       scoreLayout()->setPaintDevice(&printer);
-
       doLayout();
 
       for (ciPage ip = pages()->begin();;) {
             Page* page = *ip;
-            page->draw(p);
+            ElementList el;
+            page->collectElements(el);
+            for (int i = 0; i < el.size(); ++i) {
+                  Element* e = el.at(i);
+                  if (!e->visible())
+                        continue;
+                  QPointF ap(e->apos() - page->pos());
+                  p.translate(ap);
+                  p.setPen(QPen(e->color()));
+                  e->draw(p);
+                  p.translate(-ap);
+                  }
             ++ip;
             if (ip == pages()->end())
                   break;

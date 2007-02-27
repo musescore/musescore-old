@@ -29,7 +29,6 @@
 #include "system.h"
 #include "segment.h"
 #include "staff.h"
-#include "painter.h"
 
 //---------------------------------------------------------
 //   SlurSegment
@@ -109,7 +108,7 @@ void SlurSegment::move(const QPointF& s)
 //   draw
 //---------------------------------------------------------
 
-void SlurSegment::draw1(Painter& p)
+void SlurSegment::draw(QPainter& p)
       {
       if (path == 0)
             return;

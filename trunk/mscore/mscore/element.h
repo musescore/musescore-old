@@ -34,7 +34,6 @@ class Xml;
 class Measure;
 class Staff;
 class Score;
-class Painter;
 class Sym;
 
 /**
@@ -168,8 +167,7 @@ class Element {
             return type() == REST || type() == CHORD;
             }
 
-      virtual void draw(Painter&p);
-      virtual void draw1(Painter&) {}
+      virtual void draw(QPainter&) {}
 
       void writeProperties(Xml& xml) const;
       bool readProperties(QDomNode);
@@ -262,7 +260,8 @@ class Element {
  returns true if mouse event is accepted by element
  */
       virtual bool mousePress(const QPointF&) { return false; }
-      int itemDiscovered;
+
+      int itemDiscovered;     ///< helper flag for bsp
       };
 
 //---------------------------------------------------------
@@ -275,7 +274,6 @@ class ElementList : public QList<Element*> {
       bool remove(Element*);
       void replace(Element* old, Element* n);
       void write(Xml&) const;
-      void draw(Painter& p);
 
       void add(Element*);
       void move(Element* el, int tick);
@@ -306,7 +304,7 @@ class StaffLines : public Element {
       virtual ElementType type() const { return STAFF_LINES; }
       void setWidth(qreal v)           { _width = v; }
       virtual QRectF bbox() const;
-      virtual void draw1(Painter&);
+      virtual void draw(QPainter&);
       virtual void write(Xml& xml) const;
       virtual void read(QDomNode);
       };
@@ -327,7 +325,7 @@ class Cursor : public Element {
       virtual Cursor* clone() const { return new Cursor(*this); }
       virtual ElementType type() const { return CURSOR; }
 
-      virtual void draw1(Painter&);
+      virtual void draw(QPainter&);
       void setOn(bool f)  { _on = f; }
       bool isOn() const   { return _on; }
       void blink()        { _blink = !_blink; }
@@ -346,7 +344,7 @@ class VSpacer : public Element {
       VSpacer(Score*, double h);
       virtual VSpacer* clone() const { return new VSpacer(*this); }
       virtual ElementType type() const { return VSPACER; }
-      virtual void draw1(Painter&);
+      virtual void draw(QPainter&);
       };
 
 //---------------------------------------------------------
@@ -358,7 +356,7 @@ class Lasso : public Element {
       Lasso(Score*);
       virtual Lasso* clone() const { return new Lasso(*this); }
       virtual ElementType type() const   { return LASSO; }
-      virtual void draw1(Painter&);
+      virtual void draw(QPainter&);
       };
 
 //---------------------------------------------------------
@@ -381,7 +379,7 @@ class Line : public Element {
       virtual ElementType type() const { return LINE; }
       virtual QRectF bbox() const;
 
-      virtual void draw1(Painter&);
+      virtual void draw(QPainter&);
       void writeProperties(Xml& xml) const;
       bool readProperties(QDomNode);
       void dump() const;
@@ -403,7 +401,7 @@ class Compound : public Element {
       Compound(Score*);
       virtual ElementType type() const = 0;
 
-      virtual void draw1(Painter&);
+      virtual void draw(QPainter&);
       virtual void addElement(Element*, double x, double y);
       void clear();
       virtual void setSelected(bool f);
@@ -420,14 +418,14 @@ class Compound : public Element {
 */
 
 class KeySig : public Element {
-      void add(Painter&, bool, double x, double y);
+      void add(QPainter&, bool, double x, double y);
       void addLayout(bool flat, double x, double y);
 
    public:
       KeySig(Score*);
       virtual void setSubtype(int n);
       virtual KeySig* clone() const { return new KeySig(*this); }
-      virtual void draw1(Painter&);
+      virtual void draw(QPainter&);
       virtual ElementType type() const { return KEYSIG; }
       virtual bool acceptDrop(const QPointF&, int, const QDomNode&) const;
       virtual void drop(const QPointF&, int, const QDomNode&);
@@ -445,7 +443,7 @@ class RubberBand : public Element {
       RubberBand(Score* s) : Element(s) {}
       virtual RubberBand* clone() const { return new RubberBand(*this); }
       virtual ElementType type() const { return RUBBERBAND; }
-      virtual void draw(Painter&);
+      virtual void draw(QPainter&);
 
       void set(const QPointF& p1, const QPointF& p2) { _p1 = p1; _p2 = p2; }
       QPointF p1() const { return _p1; }
@@ -468,7 +466,7 @@ class Volta : public Element {
       Volta(Score* s) : Element(s) {}
       virtual Volta* clone() const { return new Volta(*this); }
       virtual ElementType type() const { return VOLTA; }
-      virtual void draw1(Painter&);
+      virtual void draw(QPainter&);
       virtual void layout();
       void setLen(qreal);
       virtual void write(Xml&) const;
