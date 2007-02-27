@@ -412,7 +412,11 @@ void Canvas::mouseMoveEvent(QMouseEvent* ev)
                   }
             }
       mouseMoveEvent1(ev);
-      if (!dragCanvasState)
+      if (dragCanvasState)
+           ;
+      else if (state == LASSO)
+            _score->end1();
+      else
             _score->endCmd(false);      // update display but dont end undo
       }
 

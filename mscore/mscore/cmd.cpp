@@ -246,6 +246,18 @@ void Score::end()
             update(refresh);
       }
 
+void Score::end1()
+      {
+      if (updateAll) {
+            for (QList<Viewer*>::iterator i = viewer.begin(); i != viewer.end(); ++i) {
+                  (*i)->updateAll(this);
+                  }
+            updateAll = false;
+            }
+      else
+            update(refresh);
+      }
+
 //---------------------------------------------------------
 //   endCmd
 //---------------------------------------------------------
@@ -671,8 +683,8 @@ void Score::cmdAddPoet()
 void Score::upDown(bool up, bool octave)
       {
       ElementList el;
-      for (iElement i = sel->elements()->begin(); i != sel->elements()->end(); ++i) {
-            Element* e = *i;
+      for (int i = 0; i < sel->elements().size(); ++i) {
+            Element* e = sel->elements().at(i);
             if (e->type() != NOTE)
                   continue;
             Note* note = (Note*)e;
@@ -792,14 +804,7 @@ void Score::cmdAppendMeasures(int n)
 
 void Score::addAttribute(int attr)
       {
-      //
-      // we need a local copy of sel->elements()
-      // because "addAttribute()" modifies sel->elements()
-      //
-      ElementList el(*sel->elements());
-
-      for (iElement ie = el.begin(); ie != el.end(); ++ie) {
-            Element* el = *ie;
+      foreach(Element* el, sel->elements()) {
             if (el->type() != NOTE && el->type() != REST)
                   continue;
             addAttribute(el, new NoteAttribute(this, attr));
@@ -816,14 +821,7 @@ void Score::addAttribute(int attr)
 
 void Score::addAccidental(int idx)
       {
-      //
-      // we need a local copy of sel->elements()
-      // because "addAccidental()" modifies sel->elements()
-      //
-      ElementList el(*sel->elements());
-
-      for (iElement ie = el.begin(); ie != el.end(); ++ie) {
-            Element* el = *ie;
+      foreach(Element* el, sel->elements()) {
             if (el->type() == NOTE)
                   addAccidental((Note*)el, idx);
             }
@@ -896,8 +894,8 @@ void Score::toggleInvisible(Element* obj)
 void Score::resetUserOffsets()
       {
       startCmd();
-      ElementList* el = sel->elements();
-      for (iElement i = el->begin(); i != el->end(); ++i)
+      QList<Element*> el = sel->elements();
+      for (iElement i = el.begin(); i != el.end(); ++i)
             (*i)->setUserOff(QPointF(0.0, 0.0));
       layout();
       endCmd(true);

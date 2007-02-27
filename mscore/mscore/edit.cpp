@@ -1000,7 +1000,7 @@ void Score::cmdDeleteSelection()
       else {
             // deleteItem modifies sel->elements() list,
             // so we need a local copy:
-            ElementList l = *(sel->elements());
+            QList<Element*> l = sel->elements();
             for (iElement i = l.begin(); i != l.end(); ++i) {
                   Element* e = *i;
                   e->setSelected(false);  // in case item is not deleted
@@ -1009,7 +1009,7 @@ void Score::cmdDeleteSelection()
                         }
                   deleteItem(e);
                   }
-            sel->elements()->clear();
+//            sel->clear();
             }
       sel->clear();
       layout();
@@ -1356,8 +1356,8 @@ void Score::colorItem(Element* element)
       if (!c.isValid())
             return;
 
-      ElementList* el = sel->elements();
-      for (iElement ie = el->begin(); ie != el->end(); ++ie) {
+      QList<Element*> el = sel->elements();
+      for (iElement ie = el.begin(); ie != el.end(); ++ie) {
             Element* e = *ie;
             if (e->color() != c) {
                   QColor color = e->color();
