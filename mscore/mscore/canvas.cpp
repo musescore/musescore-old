@@ -974,7 +974,7 @@ void Canvas::paint(const QRect& rr)
             }
       p.setClipRect(fr);
 
-      ElementList ell = bspTree.items(fr);
+      QList<Element*> ell = bspTree.items(fr);
       drawElements(p, ell);
 
       lasso->draw(p);
@@ -1258,7 +1258,7 @@ static bool elementLower(const Element* e1, const Element* e2)
 
 Element* Canvas::elementAt(const QPointF& p)
       {
-      ElementList el = bspTree.items(p);
+      QList<Element*> el = bspTree.items(p);
       if (el.empty())
             return 0;
       qSort(el.begin(), el.end(), elementLower);
@@ -1269,7 +1269,7 @@ Element* Canvas::elementAt(const QPointF& p)
 //   drawElements
 //---------------------------------------------------------
 
-void Canvas::drawElements(QPainter& p,const ElementList& el)
+void Canvas::drawElements(QPainter& p,const QList<Element*>& el)
       {
       for (int i = 0; i < el.size(); ++i) {
             Element* e = el.at(i);

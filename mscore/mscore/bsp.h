@@ -29,7 +29,7 @@ class InsertItemBspTreeVisitor;
 class RemoveItemBspTreeVisitor;
 class FindItemBspTreeVisitor;
 
-#include "element.h"
+class Element;
 
 //---------------------------------------------------------
 //   BspTree
@@ -52,12 +52,12 @@ class BspTree
       void climbTree(BspTreeVisitor* visitor, const QPointF& pos, int index = 0);
       void climbTree(BspTreeVisitor* visitor, const QRectF& rect, int index = 0);
 
-      void findItems(ElementList* foundItems, const QRectF& rect, int index);
-      void findItems(ElementList* foundItems, const QPointF& pos, int index);
+      void findItems(QList<Element*>* foundItems, const QRectF& rect, int index);
+      void findItems(QList<Element*>* foundItems, const QPointF& pos, int index);
       QRectF rectForIndex(int index) const;
 
       QVector<Node> nodes;
-      QVector<ElementList > leaves;
+      QVector<QList<Element*> > leaves;
       int leafCnt;
       QRectF rect;
 
@@ -76,8 +76,8 @@ class BspTree
       void remove(Element* item);
       void remove(const QSet<Element*>& items);
 
-      ElementList items(const QRectF& rect);
-      ElementList items(const QPointF& pos);
+      QList<Element*> items(const QRectF& rect);
+      QList<Element*> items(const QPointF& pos);
       int leafCount() const;
 
       inline int firstChildIndex(int index) const {
@@ -99,7 +99,7 @@ class BspTreeVisitor
       {
    public:
       virtual ~BspTreeVisitor() {}
-      virtual void visit(ElementList* items) = 0;
+      virtual void visit(QList<Element*>* items) = 0;
       };
 
 #endif

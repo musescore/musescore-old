@@ -22,6 +22,7 @@
 //=============================================================================
 
 #include "bsp.h"
+#include "element.h"
 
 //---------------------------------------------------------
 //   InsertItemBspTreeVisitor
@@ -32,7 +33,7 @@ class InsertItemBspTreeVisitor : public BspTreeVisitor
    public:
       Element* item;
 
-      void visit(ElementList *items) {
+      void visit(QList<Element*> *items) {
             items->prepend(item);
             }
       };
@@ -46,7 +47,7 @@ class RemoveItemBspTreeVisitor : public BspTreeVisitor
    public:
       Element* item;
 
-      void visit(ElementList *items) {
+      void visit(QList<Element*> *items) {
             items->removeAll(item);
             }
       };
@@ -58,9 +59,9 @@ class RemoveItemBspTreeVisitor : public BspTreeVisitor
 class FindItemBspTreeVisitor : public BspTreeVisitor
       {
    public:
-      ElementList* foundItems;
+      QList<Element*>* foundItems;
 
-      void visit(ElementList* items) {
+      void visit(QList<Element*>* items) {
             for (int i = 0; i < items->size(); ++i) {
                   Element* item = items->at(i);
                   if (!item->itemDiscovered) {
@@ -101,7 +102,7 @@ void BspTree::initialize(const QRectF& rect, int depth)
       nodes.resize((1 << (depth + 1)) - 1);
       nodes.fill(Node());
       leaves.resize(1 << depth);
-      leaves.fill(ElementList());
+      leaves.fill(QList<Element*>());
 
       initialize(rect, depth, 0);
       }
@@ -144,8 +145,8 @@ void BspTree::remove(Element* element)
 void BspTree::remove(const QSet<Element*>& items)
       {
       for (int i = 0; i < leaves.size(); ++i) {
-            ElementList newItemList;
-            const ElementList& oldItemList = leaves[i];
+            QList<Element*> newItemList;
+            const QList<Element*>& oldItemList = leaves[i];
             for (int j = 0; j < oldItemList.size(); ++j) {
                   Element* item = oldItemList.at(j);
                   if (!items.contains(item))
@@ -159,9 +160,9 @@ void BspTree::remove(const QSet<Element*>& items)
 //   items
 //---------------------------------------------------------
 
-ElementList BspTree::items(const QRectF& rect)
+QList<Element*> BspTree::items(const QRectF& rect)
       {
-      ElementList tmp;
+      QList<Element*> tmp;
       findVisitor->foundItems = &tmp;
       climbTree(findVisitor, rect);
       return tmp;
@@ -171,13 +172,13 @@ ElementList BspTree::items(const QRectF& rect)
 //   items
 //---------------------------------------------------------
 
-ElementList BspTree::items(const QPointF& pos)
+QList<Element*> BspTree::items(const QPointF& pos)
       {
-      ElementList tmp;
+      QList<Element*> tmp;
       findVisitor->foundItems = &tmp;
       climbTree(findVisitor, pos);
 
-      ElementList l;
+      QList<Element*> l;
       for (int i = 0; i < tmp.size(); ++i) {
             Element* e = tmp.at(i);
             e->itemDiscovered = 0;
