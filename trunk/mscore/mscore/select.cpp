@@ -276,7 +276,7 @@ void Canvas::lassoSelect()
       {
       _score->select(0, 0, 0);
       QRectF lr(lasso->abbox());
-      ElementList el = bspTree.items(lr);
+      QList<Element*> el = bspTree.items(lr);
       foreach(Element* e, el) {
             e->itemDiscovered = 0;
             if (lr.contains(e->abbox()))

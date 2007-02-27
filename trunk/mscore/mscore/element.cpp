@@ -344,7 +344,7 @@ void ElementList::add(Element* e)
                   return;
                   }
             }
-      push_back(e);
+      append(e);
       }
 
 //---------------------------------------------------------

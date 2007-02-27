@@ -112,7 +112,7 @@ class Canvas : public QWidget, public Viewer {
       Note* searchTieNote(Note* note);
 
       void setShadowNote(const QPointF&);
-      void drawElements(QPainter& p,const ElementList& el);
+      void drawElements(QPainter& p,const QList<Element*>& el);
       ElementList el;
 
    private slots:
