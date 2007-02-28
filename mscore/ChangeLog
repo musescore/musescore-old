@@ -1,3 +1,6 @@
+28.2.7 (ws)
+      - layout() reorganization to make preview in pagesettings more
+        stable
 27.2.7 (ws)
       - make layout() work in one pass
       - internal cleanups of drawing code making use of bsp
