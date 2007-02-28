@@ -1334,7 +1334,9 @@ again:
                   additionalExtra = point(::style->keysigLeftMargin);
 
             for (int track = 0; track < tracks; ++track) {
-                  const Element* el = s->element(track);
+                  Element* el = s->element(track);
+if (el)
+      el->layout(layout);
                   Staff* staff = score()->staff(track/VOICES);
                   bool valid = el && staff->show();
                   spaces[seg][track].setValid(valid);
