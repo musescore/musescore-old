@@ -483,6 +483,7 @@ void System::layout2(ScoreLayout* layout)
                   qreal ey = _staves[b->span() - 1]->bbox().bottom();
                   b->setPos(b->ipos().x(), sy);
                   b->setHeight(ey - sy);
+                  b->layout(layout);
                   }
             }
 
