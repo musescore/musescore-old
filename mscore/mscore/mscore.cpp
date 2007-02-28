@@ -711,7 +711,8 @@ double MagBox::txt2mag(const QString& s)
       int mn = sizeof(magTable)/sizeof(*magTable);
       bool found = false;
       for (int i = 0; i < mn; ++i) {
-            if (magTable[i] != s)
+            QString ts(QCoreApplication::translate("magTable", magTable[i]));
+            if (ts != s)
                   continue;
             switch(i) {
                   case 9:      // page width
@@ -866,7 +867,7 @@ void MuseScore::navigatorVisible(bool flag)
 
 void MuseScore::helpBrowser()
       {
-      QString lang(getenv("LANG"));
+      QString lang(QLocale::system().name().left(2));
       QFileInfo mscoreHelp(mscoreGlobalShare + QString("/doc/man-") + lang + QString(".pdf"));
       if (!mscoreHelp.isReadable()) {
             mscoreHelp.setFile(mscoreGlobalShare + QString("/doc/man-en.pdf"));
