@@ -27,6 +27,7 @@
 #include "measure.h"
 #include "segment.h"
 #include "system.h"
+#include "layout.h"
 
 //---------------------------------------------------------
 //   write

@@ -31,6 +31,7 @@
 #include "input.h"
 #include "measure.h"
 #include "page.h"
+#include "layout.h"
 
 //---------------------------------------------------------
 //   upAlt

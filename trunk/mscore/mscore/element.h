@@ -396,7 +396,7 @@ class Line : public Element {
 //---------------------------------------------------------
 
 class Compound : public Element {
-      ElementList elemente;
+      QList<Element*> elemente;
 
    public:
       Compound(Score*);

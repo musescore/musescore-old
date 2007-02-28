@@ -37,7 +37,6 @@
 #include "tempo.h"
 #include "padstate.h"
 #include "sym.h"
-
 #include "padids.h"
 #include "pad.h"
 #include "alsa.h"
@@ -47,6 +46,7 @@
 #include "playpanel.h"
 #include "page.h"
 #include "partedit.h"
+#include "layout.h"
 
 QTextStream cout(stdout);
 QTextStream eout(stderr);

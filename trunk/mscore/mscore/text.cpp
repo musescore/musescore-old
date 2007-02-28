@@ -30,6 +30,7 @@
 #include "textpalette.h"
 #include "sym.h"
 #include "symbol.h"
+#include "layout.h"
 
 TextPalette* palette;
 

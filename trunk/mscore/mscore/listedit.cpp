@@ -39,6 +39,7 @@
 #include "hook.h"
 #include "dynamics.h"
 #include "slur.h"
+#include "layout.h"
 
 //---------------------------------------------------------
 //   ElementItem

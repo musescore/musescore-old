@@ -26,6 +26,7 @@
 #include "segment.h"
 #include "utils.h"
 #include "style.h"
+#include "layout.h"
 
 static const QChar pp[]     = { 0x70, 0x70, 0x70, 0x70, 0x70, 0x70};
 static const QChar mp[]     = { 0x6d, 0x70 };               // mp

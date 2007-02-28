@@ -25,6 +25,7 @@
 #include "utils.h"
 #include "staff.h"
 #include "score.h"
+#include "layout.h"
 
 //---------------------------------------------------------
 //   Bracket
