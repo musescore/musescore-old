@@ -581,7 +581,7 @@ static DirectionsAnchor* findMatchInMeasure(int tick, Staff* st, Measure* m, Par
 
 static DirectionsAnchor* findSpecificMatchInPart(int tick, Staff* st, bool start, Score* sc, int strack, int etrack)
       {
-      for (Measure* m = sc->scoreLayout()->first(); m; m = m->next()) {
+      for (Measure* m = sc->mainLayout()->first(); m; m = m->next()) {
             DirectionsAnchor* da = findSpecificMatchInMeasure(tick, st, start, m, strack, etrack);
             if (da)
                   return da;
@@ -613,7 +613,7 @@ static DirectionsAnchor* findMatchInPart(int tick, Staff* st, Score* sc, Part* p
 
 void DirectionsHandler::buildDirectionsList(Part* p, int strack, int etrack)
       {
-      for (Measure* m = cs->scoreLayout()->first(); m; m = m->next())
+      for (Measure* m = cs->mainLayout()->first(); m; m = m->next())
             buildDirectionsList(m, true, p, strack, etrack);
       }
 
@@ -947,7 +947,7 @@ bool ExportMusicXml::saver()
       xml.stag("score-partwise");
       xml.stag("work");
 
-      Measure* measure = score->scoreLayout()->first();
+      Measure* measure = score->mainLayout()->first();
       ElementList* el = measure->pel();
       for (iElement ie = el->begin(); ie != el->end(); ++ie) {
             if ((*ie)->type() == TEXT) {
@@ -1027,7 +1027,7 @@ bool ExportMusicXml::saver()
             int irregularMeasureNo = 1; // number of next irregular measure
             int pickupMeasureNo = 1;    // number of next pickup measure
             Volta* volta = 0;           // volta in current measure(s)
-            for (Measure* m = score->scoreLayout()->first(); m; m = m->next()) {
+            for (Measure* m = score->mainLayout()->first(); m; m = m->next()) {
                   // pickup and other irregular measures need special care
                   if ((irregularMeasureNo + measureNo) == 2 && m->irregular()) {
                         xml.stag("measure number=\"0\" implicit=\"yes\"");

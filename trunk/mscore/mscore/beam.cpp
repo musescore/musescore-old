@@ -107,7 +107,7 @@ void Beam::move(double x, double y)
 //    auto - beamer
 //---------------------------------------------------------
 
-void Measure::layoutBeams()
+void Measure::layoutBeams(ScoreLayout* layout)
       {
       for (iBeam i = _beamList.begin(); i != _beamList.end(); ++i)
             delete *i;
@@ -123,11 +123,11 @@ void Measure::layoutBeams()
                         continue;
                   if (e->type() == CLEF) {
                         if (beam) {
-                              beam->layout();
+                              beam->layout(layout);
                               beam = 0;
                               }
                         if (a1) {
-                              a1->layoutStem();
+                              a1->layoutStem(layout);
                               a1 = 0;
                               }
                         continue;
@@ -160,7 +160,7 @@ void Measure::layoutBeams()
                                       && (bm != BEAM_END)
                                       && (styleBreak || tooLong || hintBreak);
                         if (mustBreak) {
-                              beam->layout();
+                              beam->layout(layout);
                               beam = 0;
                               a1   = 0;
                               goto newBeam;
@@ -171,7 +171,7 @@ void Measure::layoutBeams()
 
                               // is this the last beam element?
                               if (bm == BEAM_END) {
-                                    beam->layout();
+                                    beam->layout(layout);
                                     beam = 0;
                                     a1   = 0;
                                     }
@@ -210,7 +210,7 @@ newBeam:
                                     }
                               else {
                                     if (bm == BEAM_BEGIN) {
-                                          a1->layoutStem();
+                                          a1->layoutStem(layout);
                                           a1 = cr;
                                           }
                                     else {
@@ -225,17 +225,17 @@ newBeam:
                                     }
                               }
                         else {
-                              cr->layoutStem();
+                              cr->layoutStem(layout);
                               if (a1)
-                                    a1->layoutStem();
+                                    a1->layoutStem(layout);
                               a1 = 0;
                               }
                         }
                   }
             if (beam)
-                  beam->layout();
+                  beam->layout(layout);
             else if (a1)
-                  a1->layoutStem();
+                  a1->layoutStem(layout);
             }
       }
 
@@ -272,8 +272,10 @@ QString Beam::xmlType(ChordRest* cr) const
 //   layout
 //---------------------------------------------------------
 
-void Beam::layout()
+void Beam::layout(ScoreLayout* layout)
       {
+      double _spatium = layout->spatium();
+
       //delete old segments
       for (iBeamSegment i = beamSegments.begin(); i != beamSegments.end(); ++i)
             delete *i;

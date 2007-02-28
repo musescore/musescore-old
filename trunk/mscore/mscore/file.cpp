@@ -744,7 +744,7 @@ bool Score::loadFile(QFile* qf)
                   m->add(barLine);
                   }
             }
-      connectTies();
+//TODO      connectTies();
       searchSelectedElements();
       _fileDivision = division;
       return false;
@@ -865,20 +865,21 @@ void Score::printFile()
 
       QPainter p(&printer);
       p.setRenderHint(QPainter::Antialiasing, true);
-//      p.setClipRect(QRectF(0.0, 0.0, 1000000.0, 1000000.0));
+      p.setRenderHint(QPainter::TextAntialiasing, true);
 
       qreal oldSpatium = _spatium;
       double oldDPI = DPI;
       DPI  = printer.logicalDpiX();          // drawing resolution
       DPMM = DPI / INCH;                     // dots/mm
       setSpatium(_spatium * DPI / oldDPI);
-      QPaintDevice* oldPaintDevice = scoreLayout()->paintDevice();
-      scoreLayout()->setPaintDevice(&printer);
+      QPaintDevice* oldPaintDevice = mainLayout()->paintDevice();
+      mainLayout()->setPaintDevice(&printer);
       doLayout();
 
-      for (ciPage ip = pages()->begin();;) {
+      ElementList el;
+      for (ciPage ip = _layout->pages()->begin();;) {
             Page* page = *ip;
-            ElementList el;
+            el.clear();
             page->collectElements(el);
             for (int i = 0; i < el.size(); ++i) {
                   Element* e = el.at(i);
@@ -888,19 +889,25 @@ void Score::printFile()
                   p.translate(ap);
                   p.setPen(QPen(e->color()));
                   e->draw(p);
+                  //
+                  // HACK alert:
+                  //
+                  if (e->type() == TEXT) {
+                        Text* t = (Text*)e;
+                        t->getDoc()->documentLayout()->setPaintDevice(oldPaintDevice);
+                        }
                   p.translate(-ap);
                   }
             ++ip;
-            if (ip == pages()->end())
+            if (ip == _layout->pages()->end())
                   break;
             printer.newPage();
             }
-      p.end();
-
       DPI = oldDPI;
       DPMM = DPI / INCH;                     // dots/mm
-      scoreLayout()->setPaintDevice(oldPaintDevice);
+      mainLayout()->setPaintDevice(oldPaintDevice);
       setSpatium(oldSpatium);
       layout();
+      p.end();
       }
 

@@ -98,7 +98,7 @@ class Text : public Element {
       virtual void read(QDomNode);
       void writeProperties(Xml& xml) const;
       bool readProperties(QDomNode node);
-      virtual void layout();
+      virtual void layout(ScoreLayout*);
       virtual QRectF bbox() const;
       virtual QPainterPath shape() const;
       virtual bool mousePress(const QPointF&);

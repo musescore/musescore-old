@@ -37,7 +37,7 @@ class Ottava : public SLine {
       virtual Ottava* clone() const { return new Ottava(*this); }
       virtual ElementType type() const { return OTTAVA; }
       virtual void draw(QPainter&);
-      virtual void layout();
+      virtual void layout(ScoreLayout*);
       void setLen(qreal);
       virtual void setSubtype(int val);
       virtual void write(Xml&) const;

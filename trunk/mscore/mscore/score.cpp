@@ -91,25 +91,6 @@ PageFormat* Score::pageFormat() const
 void Score::setSpatium(double v)
       {
       _layout->setSpatium(v);
-      ::_spatium = v;
-      }
-
-//---------------------------------------------------------
-//   pages
-//---------------------------------------------------------
-
-PageList* Score::pages() const
-      {
-      return _layout->pages();
-      }
-
-//---------------------------------------------------------
-//   systems
-//---------------------------------------------------------
-
-SystemList* Score::systems() const
-      {
-      return _layout->systems();
       }
 
 //---------------------------------------------------------
@@ -129,85 +110,6 @@ void Score::layout()
 bool Score::needLayout() const
       {
       return _layout->needLayout();
-      }
-
-//---------------------------------------------------------
-//   push_back
-//---------------------------------------------------------
-
-void ElemList::push_back(Element* e)
-      {
-      ++_size;
-      if (_last) {
-            _last->setNext(e);
-            e->setPrev(_last);
-            e->setNext(0);
-            }
-      else {
-            _first = e;
-            e->setPrev(0);
-            e->setNext(0);
-            }
-      _last = e;
-      }
-
-//---------------------------------------------------------
-//   push_front
-//---------------------------------------------------------
-
-void ElemList::push_front(Element* e)
-      {
-      ++_size;
-      if (_first) {
-            _first->setPrev(e);
-            e->setNext(_first);
-            e->setPrev(0);
-            }
-      else {
-            _last = e;
-            e->setPrev(0);
-            e->setNext(0);
-            }
-      _first = e;
-      }
-
-//---------------------------------------------------------
-//   insert
-//---------------------------------------------------------
-
-void ElemList::insert(Element* e, Element* el)
-      {
-      if (el == 0) {
-            push_back(e);
-            return;
-            }
-      if (el == _first) {
-            push_front(e);
-            return;
-            }
-      ++_size;
-      e->setNext(el);
-      e->setPrev(el->prev());
-      el->prev()->setNext(e);
-      el->setPrev(e);
-      }
-
-//---------------------------------------------------------
-//   erase
-//---------------------------------------------------------
-
-void ElemList::erase(Element* el)
-      {
-      --_size;
-      if (el->prev())
-            el->prev()->setNext(el->next());
-      else {
-            _first = el->next();
-            }
-      if (el->next())
-            el->next()->setPrev(el->prev());
-      else
-            _last = el->prev();
       }
 
 //---------------------------------------------------------
@@ -508,7 +410,7 @@ Measure* Score::pos2measure(const QPointF& p, int* tick, Staff** rst, int* pitch
       {
       int voice = padState.voice;
 
-      for (ciPage ip = pages()->begin(); ip != pages()->end(); ++ip) {
+      for (ciPage ip = _layout->pages()->begin(); ip != _layout->pages()->end(); ++ip) {
             const Page* page = *ip;
             if (!page->contains(p))
                   continue;
@@ -642,7 +544,7 @@ Measure* Score::pos2measure2(const QPointF& p, int* tick, Staff** rst, int* line
       {
       int voice = padState.voice;
 
-      for (ciPage ip = pages()->begin(); ip != pages()->end(); ++ip) {
+      for (ciPage ip = _layout->pages()->begin(); ip != _layout->pages()->end(); ++ip) {
             const Page* page = *ip;
             if (!page->contains(p))
                   continue;
@@ -750,16 +652,6 @@ int Score::staff(const Staff* p) const
       }
 
 //---------------------------------------------------------
-//   setInstrumentNames
-//---------------------------------------------------------
-
-void Score::setInstrumentNames()
-      {
-      for (iSystem is = systems()->begin(); is != systems()->end(); ++is)
-            (*is)->setInstrumentNames();
-      }
-
-//---------------------------------------------------------
 //   part
 //---------------------------------------------------------
 
@@ -825,7 +717,7 @@ void Score::readStaff(QDomNode node)
 
 int Score::snap(int tick, const QPointF p) const
       {
-      for (iPage ip = pages()->begin(); ip != pages()->end(); ++ip) {
+      for (iPage ip = _layout->pages()->begin(); ip != _layout->pages()->end(); ++ip) {
             Page* page = *ip;
             if (!page->contains(p))
                   continue;
@@ -964,11 +856,11 @@ void Score::endEdit()
             Part* p  = part(in->staffIdx());
             if (editObject->subtype() == TEXT_INSTRUMENT_SHORT) {
                   p->setShortName(*(in->getDoc()));
-                  setInstrumentNames();
+                  _layout->setInstrumentNames();
                   }
             else if (editObject->subtype() == TEXT_INSTRUMENT_LONG) {
                   p->setLongName(*(in->getDoc()));
-                  setInstrumentNames();
+                  _layout->setInstrumentNames();
                   }
             }
       else if (editObject->type() == LYRICS) {
@@ -1270,71 +1162,13 @@ void Score::midiNoteReceived(int pitch, bool chord)
       }
 
 //---------------------------------------------------------
-//   searchTieNote
-//---------------------------------------------------------
-
-Note* Score::searchTieNote(Note* note, Segment* segment, int track)
-      {
-      int pitch = note->pitch();
-
-      while ((segment = segment->next1())) {
-            Element* element = segment->element(track);
-            if (element == 0 || element->type() != CHORD)
-                  continue;
-            const NoteList* nl = ((Chord*)element)->noteList();
-            for (ciNote in = nl->begin(); in != nl->end(); ++in) {
-                  if (in->second->pitch() == pitch)
-                        return in->second;
-                  }
-            }
-      return 0;
-      }
-
-//---------------------------------------------------------
-//   connectTies
-//---------------------------------------------------------
-
-/**
- Rebuild tie connections.
-*/
-
-void Score::connectTies()
-      {
-      int tracks = nstaves() * VOICES;
-      for (Measure* m = _layout->first(); m; m = m->next()) {
-            for (Segment* s = m->first(); s; s = s->next()) {
-                  for (int i = 0; i < tracks; ++i) {
-                        Element* el = s->element(i);
-                        if (el == 0 || el->type() != CHORD)
-                              continue;
-                        const NoteList* nl = ((Chord*)el)->noteList();
-                        for (ciNote in = nl->begin(); in != nl->end(); ++in) {
-                              Tie* tie = in->second->tieFor();
-                              if (!tie)
-                                    continue;
-                              Note* nnote = searchTieNote(in->second, s, i);
-                              if (nnote == 0)
-                                    printf("next note at %d(measure %d) for tie not found\n",
-                                       in->second->chord()->tick(),
-                                       m->no());
-                              else {
-                                    tie->setEndNote(nnote);
-                                    nnote->setTieBack(tie);
-                                    }
-                              }
-                        }
-                  }
-            }
-      }
-
-//---------------------------------------------------------
 //   snapNote
 //    p - absolute position
 //---------------------------------------------------------
 
 int Score::snapNote(int tick, const QPointF p, int staff) const
       {
-      for (iPage ip = pages()->begin(); ip != pages()->end(); ++ip) {
+      for (iPage ip = _layout->pages()->begin(); ip != _layout->pages()->end(); ++ip) {
             Page* page = *ip;
             if (!page->contains(p))
                   continue;
@@ -1363,7 +1197,7 @@ int Score::snapNote(int tick, const QPointF p, int staff) const
       }
 
 //---------------------------------------------------------
-//   pos2sel
+//   snapNote
 //---------------------------------------------------------
 
 int Measure::snapNote(int /*tick*/, const QPointF p, int staff) const
@@ -1416,41 +1250,6 @@ int Score::nstaves() const
 bool Score::noStaves() const
       {
       return _staves->empty();
-      }
-
-//---------------------------------------------------------
-//   textStyleChanged
-//---------------------------------------------------------
-
-void Score::textStyleChanged()
-      {
-      PageList* pl = pages();
-      for (iPage ip = pl->begin(); ip != pl->end(); ++ip) {
-            Page* page = *ip;
-            SystemList* sl = page->systems();
-
-            ElementList* el = page->pel();
-            for (iElement i = el->begin(); i != el->end(); ++i) {
-                  if ((*i)->type() == TEXT)
-                        (*i)->layout();
-                  }
-            for (iSystem s = sl->begin(); s != sl->end(); ++s) {
-                  MeasureList* ml = (*s)->measures();
-                  for (iMeasure im = ml->begin(); im != ml->end(); ++im) {
-                        Measure* measure = *im;
-                        el = measure->el();
-                        for (iElement i = el->begin(); i != el->end(); ++i) {
-                              if ((*i)->type() == TEXT)
-                                    (*i)->layout();
-                              }
-                        for (Segment* segment = measure->first(); segment; segment = segment->next()) {
-                              // TODO: Lyrics
-                              }
-                        }
-                  }
-            }
-      layout();
-      endCmd(false);
       }
 
 //---------------------------------------------------------

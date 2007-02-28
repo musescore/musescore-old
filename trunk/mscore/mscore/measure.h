@@ -135,8 +135,12 @@ class Measure : public Element {
       virtual ElementType type() const { return MEASURE; }
 
       virtual void draw(QPainter&);
+
       virtual void read(QDomNode, int idx);
       virtual void write(Xml&, int, int) const;
+      virtual void write(Xml&) const;
+      virtual void read(QDomNode);
+
       virtual bool isMovable() const { return true; }
       virtual void add(Element*);
       virtual void remove(Element*);
@@ -185,10 +189,10 @@ class Measure : public Element {
       const ElementList* el() const { return &_sel; }
       BarLine* barLine(int staff) const     { return staves[staff].endBarLine;   }
 
-      MeasureWidth layoutX(double stretch);
-      void layout(double width);
+      MeasureWidth layoutX(ScoreLayout*, double stretch);
+      void layout(ScoreLayout*, double width);
       void moveY(int, double);
-      void layout2();
+      void layout2(ScoreLayout*);
 
       Chord* findChord(int tick, int staff, int voice, bool grace);
       ChordRest* findChordRest(int tick, Staff* staff, int voice, bool grace);
@@ -200,8 +204,8 @@ class Measure : public Element {
       void insertMStaff(MStaff staff, int idx);
       void removeMStaff(MStaff staff, int idx);
 
-      void layoutBeams();
-      void layoutNoteHeads(int staff);
+      void layoutBeams(ScoreLayout*);
+      void layoutNoteHeads(ScoreLayout*, int staff);
 
       void moveTicks(int diff);
       void insert(Segment* ns, Segment* s);

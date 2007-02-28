@@ -98,7 +98,7 @@ Preferences::Preferences()
       stemDir[1]         = AUTO;
       stemDir[2]         = AUTO;
       stemDir[3]         = AUTO;
-      showNavigator      = false;
+      showNavigator      = true;
       showPlayPanel      = false;
       showStatusBar      = true;
       showPad            = false;

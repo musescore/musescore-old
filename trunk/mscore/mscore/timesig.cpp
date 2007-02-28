@@ -54,7 +54,7 @@ TimeSig::TimeSig(Score* s, int n, int z1, int z2, int z3, int z4)
 void TimeSig::setSubtype(int val)
       {
       Element::setSubtype(val);
-      layout();
+//TODO      layout();
       }
 
 //---------------------------------------------------------
@@ -192,17 +192,17 @@ void TimeSig::read(QDomNode node)
 
             case TSIG_FOUR_FOUR:    // special cases
             case TSIG_ALLA_BREVE:
-                  layout();
+//TODO                  layout();
                   break;
             default:
                   setSig(n, z1, z2, z3, z4);
                   break;
             }
-      layout();
+//      layout();
       }
 
 //---------------------------------------------------------
-//   layout
+//   bbox
 //---------------------------------------------------------
 
 QRectF TimeSig::bbox() const
@@ -228,7 +228,7 @@ QRectF TimeSig::bbox() const
             QString ns = QString("%1").arg(n);
             QPaintDevice* pd = 0;
             if (score())
-                  pd = score()->scoreLayout()->paintDevice();
+                  pd = score()->mainLayout()->paintDevice();
             QFontMetricsF fm(symbols[allabreveSym].font(), pd);
 
             qreal  zw = fm.width(zs);

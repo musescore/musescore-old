@@ -25,6 +25,7 @@
 #include "xml.h"
 #include "utils.h"
 #include "sym.h"
+#include "layout.h"
 
 //---------------------------------------------------------
 //   Pedal
@@ -122,14 +123,14 @@ void Pedal::setLen(qreal l)
 //   layout
 //---------------------------------------------------------
 
-void Pedal::layout()
+void Pedal::layout(ScoreLayout* layout)
       {
       if (!parent())
             return;
 
-      qreal pedalDistance = _spatium * 6;
+      qreal pedalDistance = layout->spatium() * 6;
 
-      SLine::layout();
+      SLine::layout(layout);
       Measure* measure = (Measure*)parent();
       System* system   = measure->system();
       SysStaff* sstaff = system->staff(staffIdx());

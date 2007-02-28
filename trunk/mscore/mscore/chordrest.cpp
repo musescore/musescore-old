@@ -26,6 +26,7 @@
 #include "measure.h"
 #include "staff.h"
 #include "tuplet.h"
+#include "layout.h"
 
 //---------------------------------------------------------
 //   NoteAttribute::atrList
@@ -266,8 +267,10 @@ bool ChordRest::readProperties(QDomNode node)
 //   layoutAttributes
 //---------------------------------------------------------
 
-void ChordRest::layoutAttributes()
+void ChordRest::layoutAttributes(ScoreLayout* layout)
       {
+      double _spatium = layout->spatium();
+
       Measure* m = measure();
       System* s  = m->system();
       int idx    = staff()->rstaff();

@@ -76,7 +76,7 @@ class Tuplet : public Element {
       int noteLen() const { return _baseLen * _normalNotes / _actualNotes; }
       ChordRestList* elements()    { return &_elements; }
 
-      virtual void layout();
+      virtual void layout(ScoreLayout*);
       Text* number() const { return _number; }
 
       virtual void read(QDomNode);

@@ -226,17 +226,17 @@ QString Text::getText() const
 //   layout
 //---------------------------------------------------------
 
-void Text::layout()
+void Text::layout(ScoreLayout* layout)
       {
       if (parent() == 0)
             return;
 
-      doc->documentLayout()->setPaintDevice(score()->scoreLayout()->paintDevice());
+      doc->documentLayout()->setPaintDevice(layout->paintDevice());
       doc->setUseDesignMetrics(true);
 
       QPointF _off(QPointF(_xoff, _yoff));
       if (_offsetType == OFFSET_SPATIUM)
-            _off *= _score->spatium();
+            _off *= _spatium;
       else
             _off *= DPI;
 
@@ -306,7 +306,7 @@ void Text::setText(const QString& s)
       tf.setFont(doc->defaultFont());
       cursor.setBlockCharFormat(tf);
       cursor.insertText(s);
-      layout();
+//TODO      layout();
       }
 
 //---------------------------------------------------------
@@ -323,7 +323,7 @@ void Text::setStyle(int n)
       _anchor      = s->anchor;
       _offsetType  = s->offsetType;
       _sizeIsSpatiumDependent = s->sizeIsSpatiumDependent;
-      layout();
+//      layout();
       }
 
 //---------------------------------------------------------
@@ -361,7 +361,7 @@ void Text::read(QDomNode node)
                   domError(node);
             }
       cursorPos = 0;
-      layout();
+//      layout();
       }
 
 //---------------------------------------------------------
@@ -670,7 +670,7 @@ void Text::addSymbol(const SymCode& s)
             }
       else
             cursor->insertText(s.code);
-      score()->layout();
+//      score()->layout();
       score()->endCmd(false);
       }
 
@@ -694,7 +694,7 @@ void Text::setBlockFormat(const QTextBlockFormat& bf)
       if (!cursor)
             return;
       cursor->setBlockFormat(bf);
-      layout();
+//      layout();
       score()->layout();
       }
 
@@ -762,6 +762,6 @@ void TempoText::read(QDomNode node)
 //      f.setFont(defaultFont());
 //      cursor->setCharFormat(f);
 //      doc->setDefaultFont(defaultFont());
-      layout();
+//      layout();
       }
 

@@ -31,6 +31,18 @@
 #include "layout.h"
 #include "timesig.h"
 #include "canvas.h"
+#include "chord.h"
+#include "note.h"
+#include "slur.h"
+
+//---------------------------------------------------------
+//   intmaxlog
+//---------------------------------------------------------
+
+static inline int intmaxlog(int n)
+      {
+      return (n > 0 ? qMax(int(::ceil(::log(double(n))/::log(double(2)))), 5) : 0);
+      }
 
 //---------------------------------------------------------
 //   ScoreLayout
@@ -39,7 +51,7 @@
 ScoreLayout::ScoreLayout()
       {
       _spatium     = ::_spatium;
-      _pageFormat  = 0;
+      _pageFormat  = new PageFormat;
       _systems     = new SystemList;
       _pages       = new PageList;
       _paintDevice = 0;
@@ -66,8 +78,6 @@ void ScoreLayout::setScore(Score* s)
       _systems->clear();
       _pages->clear();
       _needLayout = false;
-      if (_pageFormat)
-            delete _pageFormat;
       _pageFormat = new PageFormat;
       _paintDevice = _score->canvas();
       }
@@ -119,7 +129,7 @@ int Score::clefOffset(int tick, int staffIdx) const
 
 void ScoreLayout::doLayout()
       {
-      ::_spatium = _spatium;        // ??
+      ::_spatium = _spatium;        // needed for preview
       _needLayout = false;
 
 // printf("do layout\n");
@@ -127,7 +137,7 @@ void ScoreLayout::doLayout()
       int n = _score->nstaves();
       for (int i = 0; i < n; ++i) {
             for (Element* m = _measures.first(); m; m = m->next()) {
-                  ((Measure*)m)->layoutNoteHeads(i);
+                  ((Measure*)m)->layoutNoteHeads(this, i);
                   }
             }
 
@@ -168,7 +178,7 @@ void ScoreLayout::doLayout()
       //---------------------------------------------------
 
       for (Measure* m = first(); m; m = m->next()) {
-            m->layout2();
+            m->layout2(this);
             }
 
       //---------------------------------------------------
@@ -182,6 +192,24 @@ void ScoreLayout::doLayout()
       for (iSystem i = is; i != _systems->end(); ++i)
             delete *i;
       _systems->erase(is, _systems->end());
+
+      //---------------------------------------------------
+      //    rebuild bspTree
+      //---------------------------------------------------
+
+      QRectF r;
+      el.clear();
+      for (iPage ip = _pages->begin(); ip != _pages->end(); ++ip) {
+            Page* page = *ip;
+            r |= page->abbox();
+            page->collectElements(el);
+            }
+      int depth = intmaxlog(el.size());
+      bspTree.initialize(r, depth);
+      for (int i = 0; i < el.size(); ++i) {
+            Element* e = el.at(i);
+            bspTree.insert(e);
+            }
       }
 
 //---------------------------------------------------------
@@ -286,7 +314,7 @@ void ScoreLayout::addGenerated(Measure*)
 //   addMeasure
 //---------------------------------------------------------
 
-double Page::addMeasure(Measure* m, double y)
+double Page::addMeasure(ScoreLayout* layout, Measure* m, double y)
       {
       //---------------------------------------------------
       //    collect page elements from measure
@@ -299,7 +327,7 @@ double Page::addMeasure(Measure* m, double y)
             Element* el = *ie;
             add(el);
 
-            el->layout();
+            el->layout(layout);
             if (el->type() == TEXT) {
                   Text* text = (Text*)el;
                   if (text->anchor() == ANCHOR_PAGE) {
@@ -322,7 +350,7 @@ double Page::addMeasure(Measure* m, double y)
 
 bool ScoreLayout::layoutPage(Page* page, Measure*& im, iSystem& is)
       {
-      page->layout();
+      page->layout(this);
 
       // usable width of page:
       qreal w  = page->loWidth() - page->lm() - page->rm();
@@ -330,8 +358,8 @@ bool ScoreLayout::layoutPage(Page* page, Measure*& im, iSystem& is)
       qreal ey = page->loHeight() - page->bm() - point(::style->staffLowerBorder);
 
       page->systems()->clear();
-      page->pel()->clear();
-      qreal y = page->addMeasure(im, page->tm());
+      page->pel().clear();
+      qreal y = page->addMeasure(this, im, page->tm());
 
       int systemNo = 0;
       while (im) {
@@ -404,7 +432,7 @@ System* ScoreLayout::layoutSystem(Measure*& im, System* system, qreal x, qreal y
       for (int i = system->staves()->size(); i < _score->nstaves(); ++i)
             system->insertStaff(_score->staff(i), i);
 
-      double systemOffset = system->layout(QPointF(x, y), w);
+      double systemOffset = system->layout(this, QPointF(x, y), w);
 
       //-------------------------------------------------------
       //    Round I
@@ -450,7 +478,7 @@ System* ScoreLayout::layoutSystem(Measure*& im, System* system, qreal x, qreal y
                         }
                   }
 
-            MeasureWidth mw = m->layoutX(1.0);
+            MeasureWidth mw = m->layoutX(this, 1.0);
             double ww = mw.stretchable;
 
             mwList.push_back(ww);
@@ -503,11 +531,11 @@ System* ScoreLayout::layoutSystem(Measure*& im, System* system, qreal x, qreal y
             itt->setPos(pos);
             double weight = itt->tickLen() * itt->userStretch();
             double ww     = mwList[i] + rest * weight / totalWeight;
-            itt->layout(ww);
+            itt->layout(this, ww);
             pos.rx() += ww;
             }
 
-      system->layout2();      // layout staff distances
+      system->layout2(this);      // layout staff distances
 
       im = itt;
       return system;
@@ -536,18 +564,150 @@ void ScoreLayout::setPageFormat(const PageFormat& pf)
       }
 
 //---------------------------------------------------------
-//   ScoreLayout
+//   push_back
 //---------------------------------------------------------
 
-ScoreLayout::ScoreLayout(const ScoreLayout& l)
+void ElemList::push_back(Element* e)
       {
-      _score      = l._score;
-      _spatium    = l._spatium;
-      _pageFormat = l._pageFormat;
-      _measures   = l._measures;
-      _pages      = new PageList(*(l._pages));
-      _systems    = new SystemList(*(l._systems));
-      _needLayout = l._needLayout;
+      ++_size;
+      if (_last) {
+            _last->setNext(e);
+            e->setPrev(_last);
+            e->setNext(0);
+            }
+      else {
+            _first = e;
+            e->setPrev(0);
+            e->setNext(0);
+            }
+      _last = e;
+      }
+
+//---------------------------------------------------------
+//   push_front
+//---------------------------------------------------------
+
+void ElemList::push_front(Element* e)
+      {
+      ++_size;
+      if (_first) {
+            _first->setPrev(e);
+            e->setNext(_first);
+            e->setPrev(0);
+            }
+      else {
+            _last = e;
+            e->setPrev(0);
+            e->setNext(0);
+            }
+      _first = e;
+      }
+
+//---------------------------------------------------------
+//   insert
+//---------------------------------------------------------
+
+void ElemList::insert(Element* e, Element* el)
+      {
+      if (el == 0) {
+            push_back(e);
+            return;
+            }
+      if (el == _first) {
+            push_front(e);
+            return;
+            }
+      ++_size;
+      e->setNext(el);
+      e->setPrev(el->prev());
+      el->prev()->setNext(e);
+      el->setPrev(e);
+      }
+
+//---------------------------------------------------------
+//   erase
+//---------------------------------------------------------
+
+void ElemList::erase(Element* el)
+      {
+      --_size;
+      if (el->prev())
+            el->prev()->setNext(el->next());
+      else {
+            _first = el->next();
+            }
+      if (el->next())
+            el->next()->setPrev(el->prev());
+      else
+            _last = el->prev();
+      }
+
+//---------------------------------------------------------
+//   setInstrumentNames
+//---------------------------------------------------------
+
+void ScoreLayout::setInstrumentNames()
+      {
+      for (iSystem is = systems()->begin(); is != systems()->end(); ++is)
+            (*is)->setInstrumentNames();
+      }
+
+//---------------------------------------------------------
+//   searchTieNote
+//---------------------------------------------------------
+
+static Note* searchTieNote(Note* note, Segment* segment, int track)
+      {
+      int pitch = note->pitch();
+
+      while ((segment = segment->next1())) {
+            Element* element = segment->element(track);
+            if (element == 0 || element->type() != CHORD)
+                  continue;
+            const NoteList* nl = ((Chord*)element)->noteList();
+            for (ciNote in = nl->begin(); in != nl->end(); ++in) {
+                  if (in->second->pitch() == pitch)
+                        return in->second;
+                  }
+            }
+      return 0;
+      }
+
+//---------------------------------------------------------
+//   connectTies
+//---------------------------------------------------------
+
+/**
+ Rebuild tie connections.
+*/
+
+void ScoreLayout::connectTies()
+      {
+      int tracks = _score->nstaves() * VOICES;
+      for (Measure* m = first(); m; m = m->next()) {
+            for (Segment* s = m->first(); s; s = s->next()) {
+                  for (int i = 0; i < tracks; ++i) {
+                        Element* el = s->element(i);
+                        if (el == 0 || el->type() != CHORD)
+                              continue;
+                        const NoteList* nl = ((Chord*)el)->noteList();
+                        for (ciNote in = nl->begin(); in != nl->end(); ++in) {
+                              Tie* tie = in->second->tieFor();
+                              if (!tie)
+                                    continue;
+                              Note* nnote = searchTieNote(in->second, s, i);
+                              if (nnote == 0)
+                                    printf("next note at %d(measure %d) for tie not found\n",
+                                       in->second->chord()->tick(),
+                                       m->no());
+                              else {
+                                    tie->setEndNote(nnote);
+                                    nnote->setTieBack(tie);
+                                    }
+                              }
+                        }
+                  }
+            }
       }
 
 

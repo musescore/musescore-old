@@ -41,7 +41,7 @@ SLine::SLine(Score* s)
 //    compute segments from tick1 tick2
 //---------------------------------------------------------
 
-void SLine::layout()
+void SLine::layout(ScoreLayout* layout)
       {
       if (!parent())
             return;
@@ -61,13 +61,13 @@ void SLine::layout()
       QPointF p1 = QPointF(seg1->x(), 0) + measure1->apos() - ppos;
       QPointF p2 = QPointF(seg2->x(), 0) + measure2->apos() - ppos;
 
-      iSystem is = _score->systems()->begin();
-      while (is != _score->systems()->end()) {
+      iSystem is = layout->systems()->begin();
+      while (is != layout->systems()->end()) {
             if (*is == system1)
                   break;
             ++is;
             }
-      for (;is != _score->systems()->end(); ++is) {
+      for (;is != layout->systems()->end(); ++is) {
             LineSegment hps;
             if (*is == system1)
                   hps.p1 = p1;
@@ -167,7 +167,7 @@ bool SLine::editDrag(QMatrix&, QPointF*, const QPointF& d)
             }
       else
             return false;
-      layout();
+//      layout();
       return true;
       }
 

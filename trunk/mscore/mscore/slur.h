@@ -61,7 +61,7 @@ class SlurSegment : public Element {
       virtual SlurSegment* clone() const { return new SlurSegment(*this); }
       virtual ElementType type() const { return SLUR_SEGMENT; }
 
-      void layout(const QPointF& p1, const QPointF& p2, qreal bow);
+      void layout(ScoreLayout*, const QPointF& p1, const QPointF& p2, qreal bow);
       virtual void resetMode();
 
       virtual QPointF dragOff() const;
@@ -108,7 +108,7 @@ class SlurTie : public Element {
       Direction slurDirection() const    { return _slurDirection; }
       void setSlurDirection(Direction d) { _slurDirection = d; }
 
-      virtual void layout2(const QPointF, int, struct UP&)  {}
+      virtual void layout2(ScoreLayout*, const QPointF, int, struct UP&)  {}
       virtual void nextSeg(const QPointF, int, struct UP&)  {}
       virtual void prevSeg(const QPointF, int, struct UP&)  {}
       virtual void setSelected(bool f);
@@ -138,8 +138,8 @@ class Slur : public SlurTie {
       virtual ElementType type() const { return SLUR; }
       virtual void write(Xml& xml) const;
       virtual void read(Score*, QDomNode);
-      virtual void layout();
-      virtual void layout2(const QPointF, int, struct UP&);
+      virtual void layout(ScoreLayout*);
+      virtual void layout2(ScoreLayout*, const QPointF, int, struct UP&);
       virtual void nextSeg(const QPointF, int, struct UP&);
       virtual void prevSeg(const QPointF, int, struct UP&);
       virtual QRectF bbox() const;
@@ -168,7 +168,7 @@ class Tie : public SlurTie {
       Note* endNote() const         { return _endNote; }
       virtual void write(Xml& xml) const;
       virtual void read(QDomNode);
-      virtual void layout();
+      virtual void layout(ScoreLayout*);
       };
 
 #endif

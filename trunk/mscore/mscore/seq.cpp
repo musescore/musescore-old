@@ -591,7 +591,7 @@ void Seq::collectEvents()
             int channel = staff->midiChannel();
 
             int gateTime = 80;  // 100 - legato (100%)
-            for (Measure* m = cs->scoreLayout()->first(); m; m = m->next()) {
+            for (Measure* m = cs->mainLayout()->first(); m; m = m->next()) {
                   for (int voice = 0; voice < VOICES; ++voice) {
                         for (Segment* seg = m->first(); seg; seg = seg->next()) {
                               Element* el = seg->element(tr * VOICES + voice);
@@ -631,7 +631,7 @@ void Seq::collectEvents()
                         }
                   }
             }
-      Measure* lm = cs->scoreLayout()->last();
+      Measure* lm = cs->mainLayout()->last();
       if (lm) {
             endTick   = lm->tick() + lm->tickLen();
             PlayPanel* pp = mscore->getPlayPanel();

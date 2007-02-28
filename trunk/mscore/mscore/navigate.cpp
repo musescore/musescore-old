@@ -330,9 +330,9 @@ void Score::adjustCanvasPosition(Element* el)
 
 void Score::pageNext()
       {
-      if (pages()->empty())
+      if (_layout->pages()->empty())
             return;
-      Page* page = pages()->back();
+      Page* page = _layout->pages()->back();
       qreal mag  = canvas()->xMag();
       qreal x    = canvas()->xoffset() - page->width() * mag;
       qreal lx   = 10.0 - page->apos().x() * mag;
@@ -349,9 +349,9 @@ void Score::pageNext()
 
 void Score::pagePrev()
       {
-      if (pages()->empty())
+      if (_layout->pages()->empty())
             return;
-      Page* page = pages()->back();
+      Page* page = _layout->pages()->back();
       qreal x = canvas()->xoffset() + page->width() * canvas()->xMag();
       if (x > 10.0)
             x = 10.0;
@@ -377,9 +377,9 @@ void Score::pageTop()
 
 void Score::pageEnd()
       {
-      if (pages()->empty())
+      if (_layout->pages()->empty())
             return;
-      Page* lastPage = pages()->back();
+      Page* lastPage = _layout->pages()->back();
       QPointF p(lastPage->apos());
       qreal mag = canvas()->xMag();
       canvas()->setOffset(10.0 - p.x() * mag, 10.0);

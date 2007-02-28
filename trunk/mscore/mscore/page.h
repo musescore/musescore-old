@@ -79,18 +79,18 @@ class Page : public Element {
       int _no;                            // page number
       Text* _pageNo;
       Text* _copyright;
-      ElementList _elements;
+      QList<Element*> _elements;
 
    public:
       Page(ScoreLayout*);
       ~Page();
-      virtual Page* clone() const { return new Page(*this); }
+      virtual Page* clone() const        { return new Page(*this); }
       virtual ElementType type() const   { return PAGE; }
       virtual QRectF bbox() const;
 
       SystemList* systems() const        { return _systems;   }
       void appendSystem(System* s);
-      double addMeasure(Measure*, double);
+      double addMeasure(ScoreLayout*, Measure*, double);
 
       int no() const                     { return _no;        }
       void setNo(int n)                  { _no = n;           }
@@ -103,8 +103,8 @@ class Page : public Element {
       double loWidth() const;
       double loHeight() const;
 
-      ElementList* pel()                 { return &_elements; }
-      const ElementList* pel() const     { return &_elements; }
+      QList<Element*>& pel()             { return _elements; }
+      const QList<Element*>& pel() const { return _elements; }
       Text* pageNo() const               { return _pageNo;    }
       Text* copyright() const            { return _copyright; }
 
@@ -112,10 +112,10 @@ class Page : public Element {
       virtual void remove(Element* el);
 
       void drawBorder(QPainter& p) const;
-      void layout();
+      void layout(ScoreLayout*);
 
       virtual void draw(QPainter&p);
-      void collectElements(ElementList& el);
+      void collectElements(QList<Element*>& el);
       };
 
 //---------------------------------------------------------

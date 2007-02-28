@@ -276,7 +276,7 @@ void Canvas::lassoSelect()
       {
       _score->select(0, 0, 0);
       QRectF lr(lasso->abbox());
-      QList<Element*> el = bspTree.items(lr);
+      QList<Element*> el = _layout->items(lr);
       for (int i = 0; i < el.size(); ++i) {
             Element* e = el.at(i);
             e->itemDiscovered = 0;
@@ -299,7 +299,7 @@ void Canvas::lassoSelect()
 void Score::searchSelectedElements()
       {
       ElementList l;
-      for (iPage ip = pages()->begin(); ip != pages()->end(); ++ip)
+      for (iPage ip = _layout->pages()->begin(); ip != _layout->pages()->end(); ++ip)
             (*ip)->collectElements(l);
       sel->clear();
       foreach(Element* e, l) {
@@ -428,7 +428,7 @@ QByteArray Selection::staffMimeData() const
 
       for (int staffIdx = staffStart; staffIdx < staffEnd; ++staffIdx) {
             xml.stag(QString("Staff id=\"%1\"").arg(staffIdx));
-            for (Measure* m = _score->scoreLayout()->first(); m; m = m->next()) {
+            for (Measure* m = _score->mainLayout()->first(); m; m = m->next()) {
                   int ms = m->tick();
                   int me = ms + m->tickLen();
                   if (me < tickStart)

@@ -24,6 +24,7 @@
 #include "score.h"
 #include "layout.h"
 #include "page.h"
+#include "preferences.h"
 
 //---------------------------------------------------------
 //   Navigator
@@ -108,15 +109,14 @@ void Navigator::paintEvent(QPaintEvent* ev)
             QRect rr(r.x()-dx, r.y()-dy, r.width()+2*dx, r.height()+2*dy);
 
             p.begin(&pm);
-            p.setClipRect(r);
             p.setRenderHint(QPainter::Antialiasing, true);
 
             p.fillRect(rr, _fgColor);
-            if (_score->scoreLayout()->pages()->empty())
+            if (_score->mainLayout()->pages()->empty())
                   return;
             p.setMatrix(matrix);
             QRegion r1(rr);
-            for (iPage ip = _score->pages()->begin(); ip != _score->pages()->end(); ++ip) {
+            for (iPage ip = _score->mainLayout()->pages()->begin(); ip != _score->mainLayout()->pages()->end(); ++ip) {
                   Page* page = *ip;
                   QRectF pbbox(page->abbox());
                   r1 -= matrix.mapRect(pbbox).toRect();
@@ -125,11 +125,29 @@ void Navigator::paintEvent(QPaintEvent* ev)
                   p.translate(-page->pos());
                   }
 
+            QRectF fr = matrix.inverted().mapRect(QRectF(rr));
+            QList<Element*> ell = _score->mainLayout()->items(fr);
+
+            for (int i = 0; i < ell.size(); ++i) {
+                  Element* e = ell.at(i);
+                  e->itemDiscovered = 0;
+
+                  if (!(e->visible() || _score->showInvisible()))
+                        continue;
+
+                  QPointF ap(e->apos());
+                  p.translate(ap);
+                  p.setPen(QPen(e->color()));
+                  e->draw(p);
+                  p.translate(-ap);
+                  }
+
             p.setMatrixEnabled(false);
             p.setClipRegion(r1);
             p.fillRect(rr, _bgColor);
             p.end();
             }
+
       p.begin(this);
       p.drawPixmap(r.topLeft(), pm, r);
 

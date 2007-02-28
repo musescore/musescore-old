@@ -24,6 +24,7 @@
 #include "measure.h"
 #include "xml.h"
 #include "utils.h"
+#include "layout.h"
 
 //---------------------------------------------------------
 //   setSubtype
@@ -128,9 +129,10 @@ void Ottava::setLen(qreal l)
 //   layout
 //---------------------------------------------------------
 
-void Ottava::layout()
+void Ottava::layout(ScoreLayout* layout)
       {
-      SLine::layout();
+      double _spatium = layout->spatium();
+      SLine::layout(layout);
       qreal ottavaDistance = _spatium * 2.5;
       qreal y = 0.0;
       if (parent()) {

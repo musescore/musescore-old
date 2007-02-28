@@ -731,7 +731,7 @@ void Score::cmdAddTie()
       tie->setEndNote(note);
       tie->setStaff(staff);
       note->setTieFor(tie);
-      connectTies();
+//TODO      connectTies();
       layout();
       select(tie, 0, 0);
       }
@@ -893,13 +893,13 @@ void Score::deleteItem(Element* el)
             case TEXT:
                   if (el->subtype() == TEXT_INSTRUMENT_LONG) {
                         el->staff()->part()->setLongName(QString());
-                        setInstrumentNames();
+                        _layout->setInstrumentNames();
                         layout();
                         break;
                         }
                   if (el->subtype() == TEXT_INSTRUMENT_SHORT) {
                         el->staff()->part()->setShortName(QString());
-                        setInstrumentNames();
+                        _layout->setInstrumentNames();
                         layout();
                         break;
                         }

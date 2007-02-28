@@ -237,9 +237,8 @@ void Score::end()
       {
       layout();   // DEBUG
       if (updateAll) {
-            for (QList<Viewer*>::iterator i = viewer.begin(); i != viewer.end(); ++i) {
-                  (*i)->updateAll(this);
-                  }
+            foreach(Viewer* v, viewer)
+                  v->updateAll(this);
             updateAll = false;
             }
       else
@@ -527,7 +526,7 @@ void Score::setNote(int tick, Staff* staff, int voice, int pitch, int len)
             tie->setStaff(note->staff());
             note->setTieFor(tie);
             }
-      connectTies();
+//TODO      connectTies();
       layout();
       }
 
@@ -609,7 +608,7 @@ void Score::cmdAddText(int subtype)
             endEdit();
             endCmd(true);
             }
-      Page* page = pages()->front();
+      Page* page = _layout->pages()->front();
       SystemList* sl = page->systems();
       if (sl == 0 || sl->empty()) {
             printf("first create measure, then repeat operation\n");
@@ -1221,7 +1220,7 @@ void Score::cmd(const QString& cmd)
                   		Tie* tie = new Tie(this);
                               tie->setParent(el);
             	      	cmdAdd(tie);
-      			      connectTies();
+//TODO      			      connectTies();
                               }
                         }
                   }

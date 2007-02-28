@@ -1,4 +1,5 @@
 27.2.7 (ws)
+      - make layout() work in one pass
       - internal cleanups of drawing code making use of bsp
 26.2.7 (ws)
       - first "binary space partitioning" code for faster element

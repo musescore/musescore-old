@@ -55,7 +55,6 @@ class TextStyleDialog : public QDialog, private Ui::TextStyleBase {
       void setUnitSpace();
 
    signals:
-      void textStyleChanged();
 
    public:
       TextStyleDialog(QWidget* parent);

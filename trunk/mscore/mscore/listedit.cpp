@@ -211,7 +211,7 @@ void PageListEditor::layoutScore()
 void PageListEditor::updateList()
       {
       list->clear();
-      PageList* pl = cs->pages();
+      PageList* pl = cs->mainLayout()->pages();
       int tracks = cs->nstaves() * VOICES;
       for (iPage ip = pl->begin(); ip != pl->end(); ++ip) {
             Page* page = *ip;
@@ -222,10 +222,8 @@ void PageListEditor::updateList()
             if (page->pageNo())
                   new ElementItem(pi, page->pageNo());
 
-            ElementList* el = page->pel();
-            for (iElement i = el->begin(); i != el->end(); ++i) {
-                  new ElementItem(pi, *i);
-                  }
+            foreach(Element* el, page->pel())
+                  new ElementItem(pi, el);
 
             foreach(System* system, *page->systems()) {
                   ElementItem* si = new ElementItem(pi, system);
@@ -441,9 +439,8 @@ void ShowPageWidget::setElement(Element* e)
       ShowElementBase::setElement(e);
       pb.pageNo->setValue(p->no());
       pb.elementList->clear();
-      ElementList* el =p->pel();
-      for (iElement i = el->begin(); i != el->end(); ++i) {
-            ElementListWidgetItem* item = new ElementListWidgetItem(*i);
+      foreach(Element* el, p->pel()) {
+            ElementListWidgetItem* item = new ElementListWidgetItem(el);
             pb.elementList->addItem(item);
             }
       }

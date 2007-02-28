@@ -290,6 +290,5 @@ void TextStyleDialog::apply()
       {
       saveStyle(current);
       textStyles = styles;
-      emit textStyleChanged();
       }
 

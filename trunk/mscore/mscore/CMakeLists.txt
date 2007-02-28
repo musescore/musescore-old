@@ -170,11 +170,18 @@ add_executable ( mscore
       bsp.cpp
       )
 
-set_target_properties( mscore
+if (CROSS_MINGW)
+   set_target_properties( mscore
       PROPERTIES
          COMPILE_FLAGS "-include ${PROJECT_BINARY_DIR}/mscore/all.h"
          LINK_FLAGS "-L /home/ws/.wine/drive_c/MinGW/lib"
       )
+else (CROSS_MINGW)
+   set_target_properties( mscore
+      PROPERTIES
+         COMPILE_FLAGS "-include ${PROJECT_BINARY_DIR}/mscore/all.h"
+      )
+endif (CROSS_MINGW)
 
 target_link_libraries(mscore
       ${QT_LIBRARIES}

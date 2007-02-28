@@ -213,8 +213,6 @@ Measure::Measure(Score* s)
       int n = _score->nstaves();
       for (int staff = 0; staff < n; ++staff) {
             MStaff s;
-//            s.distance = point(staff == 0 ? style->systemDistance : style->staffDistance);
-//            s.userDistance = 0.0;
             staves.push_back(s);
             }
 
@@ -389,64 +387,6 @@ void Measure::moveAll(double x, double y)
       }
 
 //---------------------------------------------------------
-//   write
-//---------------------------------------------------------
-
-void Measure::write(Xml& xml, int no, int staff) const
-      {
-      if (xml.curTick != tick())
-            xml.stag(QString("Measure number=\"%1\" tick=\"%2\"").arg(no).arg(tick()));
-      else
-            xml.stag(QString("Measure number=\"%1\"").arg(no));
-
-      if (staff == 0) {
-            for (ciElement ie = _pel.begin(); ie != _pel.end(); ++ie)
-                  (*ie)->write(xml);
-            if (_startRepeat)
-                  xml.tag("startRepeat", _startRepeat);
-            if (_endRepeat)
-                  xml.tag("endRepeat", _endRepeat);
-            if (_ending)
-                  xml.tag("ending", _ending);
-            if (_irregular)
-                  xml.tagE("irregular");
-            if (_userStretch != 1.0)
-                  xml.tag("stretch", _userStretch);
-            }
-
-      const MStaff* ms = &staves[staff];
-      if (ms->endBarLine)
-            ms->endBarLine->write(xml);
-      for (ciElement i = _sel.begin(); i != _sel.end(); ++i) {
-            if ((*i)->staff() == _score->staff(staff) && (*i)->type() != SLUR_SEGMENT)
-                  (*i)->write(xml);
-            }
-
-      int id = 0;
-      foreach(Tuplet* tuplet, _tuplets) {
-            if (staff == tuplet->staffIdx())
-                  tuplet->write(xml, id++);
-            }
-
-      for (int track = staff * VOICES; track < staff * VOICES + VOICES; ++track) {
-            for (Segment* segment = first(); segment; segment = segment->next()) {
-                  Element* e = segment->element(track);
-                  if (e && !e->generated()) {
-                        e->write(xml);
-                        }
-                  }
-            }
-      for (Segment* segment = first(); segment; segment = segment->next()) {
-            const LyricsList* ll = segment->lyricsList(staff);
-            for (ciLyrics i = ll->begin(); i != ll->end(); ++i) {
-                  if (*i)
-                        (*i)->write(xml);
-                  }
-            }
-      xml.etag("Measure");
-      }
-
-//---------------------------------------------------------
 //   setEndBarLine
 //---------------------------------------------------------
 
@@ -454,230 +394,6 @@ void Measure::setEndBarLine(BarLine* barLine)
       {
       barLine->setParent(this);
       staves[barLine->staffIdx()].endBarLine = barLine;
-      }
-
-//---------------------------------------------------------
-//   Measure::read
-//---------------------------------------------------------
-
-/**
- Read Measure.
-*/
-
-void Measure::read(QDomNode node, int idx)
-      {
-      for (int n = staves.size(); n <= idx; ++n) {
-            MStaff s;
-            s.distance = point(n == 0 ? style->systemDistance : style->staffDistance);
-            s.userDistance = 0.0;
-            staves.push_back(s);
-            }
-
-      QDomElement e = node.toElement();
-      int tck = e.attribute("tick", "-1").toInt();
-      if (tck >= 0) {
-            tck = score()->fileDivision(tck);
-            setTick(tck);
-            }
-      Staff* staff = _score->staff(idx);
-      int curTickPos = tick();
-
-      for (node = node.firstChild(); !node.isNull(); node = node.nextSibling()) {
-            QDomElement e = node.toElement();
-            if (e.isNull())
-                  continue;
-            QString tag(e.tagName());
-            QString val(e.text());
-
-            if (tag == "BarLine") {
-                  BarLine* barLine = new BarLine(score());
-                  barLine->setParent(this);
-                  barLine->setStaff(staff);
-                  barLine->read(node);
-                  if (barLine->subtype() == START_REPEAT) {
-                        barLine->setTick(tick());
-                        Segment* s = getSegment(barLine);
-                        s->add(barLine);
-                        }
-                  else
-                        staves[idx].endBarLine = barLine;
-                  }
-            else if (tag == "Chord") {
-                  Chord* chord = new Chord(score());
-                  chord->setTick(curTickPos);   // set default tick position
-                  chord->setParent(this);       // only for reading tuplets
-                  chord->setStaff(staff);
-                  chord->read(node, idx);
-                  Segment* s = getSegment(chord);
-                  s->add(chord);
-                  curTickPos = chord->tick() + chord->tickLen();
-                  }
-            else if (tag == "Rest") {
-                  Rest* rest = new Rest(score());
-                  rest->setTick(curTickPos);    // set default tick position
-                  rest->setParent(this);        // only for reading tuplets
-                  rest->setStaff(staff);
-                  rest->read(node);
-                  Segment* s = getSegment(rest);
-                  s->add(rest);
-                  curTickPos = rest->tick() + rest->tickLen();
-                  }
-            else if (tag == "Clef") {
-                  Clef* clef = new Clef(score());
-                  clef->setTick(curTickPos);
-                  clef->setStaff(staff);
-                  clef->read(node);
-                  Segment* s = getSegment(clef);
-                  s->add(clef);
-                  }
-            else if (tag == "TimeSig") {
-                  TimeSig* ts = new TimeSig(score());
-                  ts->setTick(curTickPos);
-                  ts->setStaff(staff);
-                  ts->read(node);
-                  Segment* s = getSegment(ts);
-                  s->add(ts);
-                  }
-            else if (tag == "KeySig") {
-                  KeySig* ks = new KeySig(score());
-                  ks->setTick(curTickPos);
-                  ks->setStaff(staff);
-                  ks->read(node);
-                  ks->setSubtype(ks->subtype());
-                  Segment* s = getSegment(ks);
-                  s->add(ks);
-                  }
-            else if (tag == "Dynamic") {
-                  Dynamic* dyn = new Dynamic(score());
-                  dyn->setTick(curTickPos);
-                  dyn->setStaff(staff);
-                  dyn->read(node);
-                  add(dyn);
-                  }
-            else if (tag == "Slur") {
-                  Slur* slur = new Slur(score());
-                  slur->setTick(curTickPos);
-                  slur->setStaff(staff);
-                  slur->setParent(this);
-                  slur->read(_score, node);
-                  add(slur);
-                  }
-            else if (tag == "HairPin") {
-                  Hairpin* hairpin = new Hairpin(score());
-                  hairpin->setTick(curTickPos);
-                  hairpin->setStaff(staff);
-                  hairpin->read(node);
-                  add(hairpin);
-                  }
-            else if (tag == "Lyrics") {
-                  Lyrics* lyrics = new Lyrics(score());
-                  lyrics->setTick(curTickPos);
-                  lyrics->setStaff(staff);
-                  lyrics->read(node);
-                  Segment* segment = tick2segment(lyrics->tick());
-                  if (segment == 0) {
-                        printf("no segment for lyrics at %d\n",
-                           lyrics->tick());
-                        }
-                  else
-                        segment->add(lyrics);
-                  }
-            else if (tag == "Text") {
-                  Text* t = new Text(score());
-                  t->read(node);
-                  if (t->anchor() != ANCHOR_PAGE) {
-                        t->setTick(curTickPos);
-                        t->setStaff(staff);
-                        }
-                  add(t);
-                  }
-            //-------------------------------------obsolete:
-            else if (tag == "work-title") {
-                  Text* t = new Text(score());
-                  t->setSubtype(TEXT_TITLE);
-                  t->read(node);
-                  add(t);
-                  }
-            else if (tag == "creator-composer") {
-                  Text* t = new Text(score());
-                  t->setSubtype(TEXT_COMPOSER);
-                  t->read(node);
-                  add(t);
-                  }
-            else if (tag == "work-number") {
-                  Text* t = new Text(score());
-                  t->setSubtype(TEXT_SUBTITLE);
-                  t->read(node);
-                  add(t);
-                  }
-            //-------------------------------------
-            else if (tag == "Tempo") {
-                  TempoText* t = new TempoText(score());
-                  t->setTick(curTickPos);
-                  t->setStaff(staff);
-                  t->read(node);
-                  add(t);
-                  }
-            else if (tag == "Symbol") {
-                  Symbol* sym = new Symbol(score());
-                  sym->setTick(curTickPos);
-                  sym->setStaff(staff);
-                  sym->read(node);
-                  add(sym);
-                  }
-            else if (tag == "Ottava") {
-                  Ottava* ottava = new Ottava(score());
-                  ottava->setTick(curTickPos);
-                  ottava->setStaff(staff);
-                  ottava->read(node);
-                  add(ottava);
-                  }
-            else if (tag == "Volta") {
-                  Volta* volta = new Volta(score());
-                  volta->setTick(curTickPos);
-                  volta->setStaff(staff);
-                  volta->read(node);
-                  add(volta);
-                  }
-            else if (tag == "Trill") {
-                  Trill* trill = new Trill(score());
-                  trill->setTick(curTickPos);
-                  trill->setStaff(staff);
-                  trill->read(node);
-                  add(trill);
-                  }
-            else if (tag == "Pedal") {
-                  Pedal* pedal = new Pedal(score());
-                  pedal->setTick(curTickPos);
-                  pedal->setStaff(staff);
-                  pedal->read(node);
-                  add(pedal);
-                  }
-            else if (tag == "stretch")
-                  _userStretch = val.toDouble();
-            else if (tag == "LayoutBreak") {
-                  LayoutBreak* lb = new LayoutBreak(score());
-                  lb->setStaff(staff);
-                  lb->read(node);
-                  add(lb);
-                  }
-            else if (tag == "irregular")
-                  _irregular = true;
-            else if (tag == "Tuplet") {
-                  Tuplet* tuplet = new Tuplet(score());
-                  tuplet->read(node);
-                  tuplet->setStaff(staff);
-                  _tuplets.append(tuplet);
-                  }
-            else if (tag == "startRepeat")
-                  _startRepeat = val.toInt();
-            else if (tag == "endRepeat")
-                  _endRepeat = val.toInt();
-            else if (tag == "ending")
-                  _ending = val.toInt();
-            else
-                  domError(node);
-            }
       }
 
 //---------------------------------------------------------
@@ -689,7 +405,7 @@ void Measure::read(QDomNode node, int idx)
  on context.
 */
 
-void Measure::layoutNoteHeads(int staff)
+void Measure::layoutNoteHeads(ScoreLayout* layout, int staff)
       {
 // printf("Measure::layoutNoteHeads(this=%p staff=%d)\n", this, staff);
       char tversatz[75];
@@ -774,11 +490,12 @@ void Measure::layoutNoteHeads(int staff)
  Note: minWidth = width - stretch
 */
 
-void Measure::layout(double width)
+void Measure::layout(ScoreLayout* layout, double width)
       {
       if (first() == 0)
             return;
 
+      double _spatium = layout->spatium();
       int n = _score->nstaves();
       double staffY[n];
       for (int i = 0; i < n; ++i) {
@@ -786,7 +503,7 @@ void Measure::layout(double width)
             }
       setbbox(QRectF(0, 0, width, system()->height()));
 
-      layoutX(width);
+      layoutX(layout, width);
 
       //---------------------------------------------------
       //   layout Chords/Lyrics/Symbols/BeginRepeatBar
@@ -800,7 +517,7 @@ void Measure::layout(double width)
                   if (e == 0)
                         continue;
                   if (e->isChordRest())
-                        e->layout();
+                        e->layout(layout);
                   else if (e->type() == BAR_LINE) {
                         //
                         // must be begin repeat bar
@@ -826,7 +543,7 @@ void Measure::layout(double width)
                         Lyrics* lyrics = *i;
                         if (lyrics == 0)
                               continue;
-                        lyrics->layout();
+                        lyrics->layout(layout);
                         // center to middle of notehead:
                         double noteHeadWidth = symbols[quartheadSym].width();
                         double lh = lyrics->lineSpacing();
@@ -848,9 +565,9 @@ void Measure::layout(double width)
       //    layout beams and tuplets
       //---------------------------------------------------
 
-      layoutBeams();
+      layoutBeams(layout);
       foreach(Tuplet* tuplet, _tuplets)
-            tuplet->layout();
+            tuplet->layout(layout);
 
 #if 0  // adjust topDistance, bottomDistance
       for (iBeam ib = _beamList.begin(); ib != _beamList.end(); ++ib) {
@@ -861,7 +578,7 @@ void Measure::layout(double width)
             }
 #endif
       if (_noText)
-            _noText->layout();
+            _noText->layout(layout);
       }
 
 //---------------------------------------------------------
@@ -908,7 +625,7 @@ double Measure::tick2pos(int tck) const
 //   layout2
 //---------------------------------------------------------
 
-void Measure::layout2()
+void Measure::layout2(ScoreLayout* layout)
       {
 //      printf("Measure(%p)::layout2(): _sel.size = %d\n", this, _sel.size());
 
@@ -921,14 +638,14 @@ void Measure::layout2()
             switch(pel->type()) {
                   case VOLTA:
                   case OTTAVA:
-                        pel->layout();
+                        pel->layout(layout);
                         break;
                   case DYNAMIC:
                   case SYMBOL:
                   case TEXT:
                   case TEMPO_TEXT:
                         {
-                        pel->layout();
+                        pel->layout(layout);
                         double x = tick2pos(pel->tick());
                         pel->setPos(x, y);
                         }
@@ -941,7 +658,7 @@ void Measure::layout2()
                   case SLUR:
                         // slur->layout() messes with add()/remove()
                   default:
-                        pel->layout();
+                        pel->layout(layout);
                         break;
                   }
 
@@ -976,7 +693,7 @@ void Measure::layout2()
                         for (ciNote in = nl->begin(); in != nl->end(); ++in) {
                               Tie* tie = in->second->tieFor();
                               if (tie)
-                                    tie->layout();
+                                    tie->layout(layout);
                               }
                         }
                   }
@@ -1539,7 +1256,7 @@ static double sff(double x, double xMin)
  Return width of measure, taking into account \a stretch.
 */
 
-MeasureWidth Measure::layoutX(double stretch)
+MeasureWidth Measure::layoutX(ScoreLayout* layout, double stretch)
       {
       int nstaves = _score->nstaves();
       int tracks  = nstaves * VOICES;
@@ -2192,7 +1909,7 @@ void Measure::drop(const QPointF& p, int type, const QDomNode& node)
                   int subtype = bracket->subtype();
                   delete bracket;
                   staff->addBracket(BracketItem(subtype, 1));
-                  score()->layout();
+//                  score()->layout();
                   }
                   break;
             case CLEF:
@@ -2441,7 +2158,7 @@ void Measure::propertyAction(const QString& s)
                   ev1 = SigEvent();
             score()->undoChangeSig(t + newLen, ev1, oev);
             adjustToLen(oldLen, newLen);
-            score()->layout();
+//            score()->layout();
             }
       }
 
@@ -2490,6 +2207,382 @@ void Measure::adjustToLen(int, int nl)
                   rest->setParent(crs);
                   score()->undoAddElement(rest);
                   }
+            }
+      }
+
+//---------------------------------------------------------
+//   write
+//---------------------------------------------------------
+
+void Measure::write(Xml& xml, int no, int staff) const
+      {
+      if (xml.curTick != tick())
+            xml.stag(QString("Measure number=\"%1\" tick=\"%2\"").arg(no).arg(tick()));
+      else
+            xml.stag(QString("Measure number=\"%1\"").arg(no));
+
+      if (staff == 0) {
+            for (ciElement ie = _pel.begin(); ie != _pel.end(); ++ie)
+                  (*ie)->write(xml);
+            if (_startRepeat)
+                  xml.tag("startRepeat", _startRepeat);
+            if (_endRepeat)
+                  xml.tag("endRepeat", _endRepeat);
+            if (_ending)
+                  xml.tag("ending", _ending);
+            if (_irregular)
+                  xml.tagE("irregular");
+            if (_userStretch != 1.0)
+                  xml.tag("stretch", _userStretch);
+            }
+
+      const MStaff* ms = &staves[staff];
+      if (ms->endBarLine)
+            ms->endBarLine->write(xml);
+      for (ciElement i = _sel.begin(); i != _sel.end(); ++i) {
+            if ((*i)->staff() == _score->staff(staff) && (*i)->type() != SLUR_SEGMENT)
+                  (*i)->write(xml);
+            }
+
+      int id = 0;
+      foreach(Tuplet* tuplet, _tuplets) {
+            if (staff == tuplet->staffIdx())
+                  tuplet->write(xml, id++);
+            }
+
+      for (int track = staff * VOICES; track < staff * VOICES + VOICES; ++track) {
+            for (Segment* segment = first(); segment; segment = segment->next()) {
+                  Element* e = segment->element(track);
+                  if (e && !e->generated()) {
+                        e->write(xml);
+                        }
+                  }
+            }
+      for (Segment* segment = first(); segment; segment = segment->next()) {
+            const LyricsList* ll = segment->lyricsList(staff);
+            for (ciLyrics i = ll->begin(); i != ll->end(); ++i) {
+                  if (*i)
+                        (*i)->write(xml);
+                  }
+            }
+      xml.etag("Measure");
+      }
+
+//---------------------------------------------------------
+//   write
+//---------------------------------------------------------
+
+void Measure::write(Xml&xml) const
+      {
+      xml.stag(QString("Measure tick=\"%1\"").arg(tick()));
+
+      for (ciElement ie = _pel.begin(); ie != _pel.end(); ++ie)
+            (*ie)->write(xml);
+      xml.tag("startRepeat", _startRepeat);
+      xml.tag("endRepeat", _endRepeat);
+      xml.tag("ending", _ending);
+      xml.tagE("irregular");
+      xml.tag("stretch", _userStretch);
+
+      for (int staffIdx = 0; staffIdx < _score->nstaves(); ++staffIdx) {
+            xml.stag("Staff");
+            const MStaff* ms = &staves[staffIdx];
+            if (ms->endBarLine)
+                  ms->endBarLine->write(xml);
+            for (ciElement i = _sel.begin(); i != _sel.end(); ++i) {
+                  if ((*i)->staff() == _score->staff(staffIdx) && (*i)->type() != SLUR_SEGMENT)
+                        (*i)->write(xml);
+                  }
+            int id = 0;
+            foreach(Tuplet* tuplet, _tuplets) {
+                  if (staffIdx == tuplet->staffIdx())
+                        tuplet->write(xml, id++);
+                  }
+            for (int track = staffIdx * VOICES; track < staffIdx * VOICES + VOICES; ++track) {
+                  for (Segment* segment = first(); segment; segment = segment->next()) {
+                        Element* e = segment->element(track);
+                        if (e && !e->generated()) {
+                              e->write(xml);
+                              }
+                        }
+                  }
+            for (Segment* segment = first(); segment; segment = segment->next()) {
+                  const LyricsList* ll = segment->lyricsList(staffIdx);
+                  for (ciLyrics i = ll->begin(); i != ll->end(); ++i) {
+                        if (*i)
+                              (*i)->write(xml);
+                        }
+                  }
+            xml.etag("Staff");
+            }
+      xml.etag("Measure");
+      }
+
+//---------------------------------------------------------
+//   Measure::read
+//---------------------------------------------------------
+
+/**
+ Read Measure.
+*/
+
+void Measure::read(QDomNode node, int idx)
+      {
+      for (int n = staves.size(); n <= idx; ++n) {
+            MStaff s;
+            s.distance = point(n == 0 ? style->systemDistance : style->staffDistance);
+            s.userDistance = 0.0;
+            staves.push_back(s);
+            }
+
+      QDomElement e = node.toElement();
+      int tck = e.attribute("tick", "-1").toInt();
+      if (tck >= 0) {
+            tck = score()->fileDivision(tck);
+            setTick(tck);
+            }
+      Staff* staff = _score->staff(idx);
+      int curTickPos = tick();
+
+      for (node = node.firstChild(); !node.isNull(); node = node.nextSibling()) {
+            QDomElement e = node.toElement();
+            if (e.isNull())
+                  continue;
+            QString tag(e.tagName());
+            QString val(e.text());
+
+            if (tag == "BarLine") {
+                  BarLine* barLine = new BarLine(score());
+                  barLine->setParent(this);
+                  barLine->setStaff(staff);
+                  barLine->read(node);
+                  if (barLine->subtype() == START_REPEAT) {
+                        barLine->setTick(tick());
+                        Segment* s = getSegment(barLine);
+                        s->add(barLine);
+                        }
+                  else
+                        staves[idx].endBarLine = barLine;
+                  }
+            else if (tag == "Chord") {
+                  Chord* chord = new Chord(score());
+                  chord->setTick(curTickPos);   // set default tick position
+                  chord->setParent(this);       // only for reading tuplets
+                  chord->setStaff(staff);
+                  chord->read(node, idx);
+                  Segment* s = getSegment(chord);
+                  s->add(chord);
+                  curTickPos = chord->tick() + chord->tickLen();
+                  }
+            else if (tag == "Rest") {
+                  Rest* rest = new Rest(score());
+                  rest->setTick(curTickPos);    // set default tick position
+                  rest->setParent(this);        // only for reading tuplets
+                  rest->setStaff(staff);
+                  rest->read(node);
+                  Segment* s = getSegment(rest);
+                  s->add(rest);
+                  curTickPos = rest->tick() + rest->tickLen();
+                  }
+            else if (tag == "Clef") {
+                  Clef* clef = new Clef(score());
+                  clef->setTick(curTickPos);
+                  clef->setStaff(staff);
+                  clef->read(node);
+                  Segment* s = getSegment(clef);
+                  s->add(clef);
+                  }
+            else if (tag == "TimeSig") {
+                  TimeSig* ts = new TimeSig(score());
+                  ts->setTick(curTickPos);
+                  ts->setStaff(staff);
+                  ts->read(node);
+                  Segment* s = getSegment(ts);
+                  s->add(ts);
+                  }
+            else if (tag == "KeySig") {
+                  KeySig* ks = new KeySig(score());
+                  ks->setTick(curTickPos);
+                  ks->setStaff(staff);
+                  ks->read(node);
+                  ks->setSubtype(ks->subtype());
+                  Segment* s = getSegment(ks);
+                  s->add(ks);
+                  }
+            else if (tag == "Dynamic") {
+                  Dynamic* dyn = new Dynamic(score());
+                  dyn->setTick(curTickPos);
+                  dyn->setStaff(staff);
+                  dyn->read(node);
+                  add(dyn);
+                  }
+            else if (tag == "Slur") {
+                  Slur* slur = new Slur(score());
+                  slur->setTick(curTickPos);
+                  slur->setStaff(staff);
+                  slur->setParent(this);
+                  slur->read(_score, node);
+                  add(slur);
+                  }
+            else if (tag == "HairPin") {
+                  Hairpin* hairpin = new Hairpin(score());
+                  hairpin->setTick(curTickPos);
+                  hairpin->setStaff(staff);
+                  hairpin->read(node);
+                  add(hairpin);
+                  }
+            else if (tag == "Lyrics") {
+                  Lyrics* lyrics = new Lyrics(score());
+                  lyrics->setTick(curTickPos);
+                  lyrics->setStaff(staff);
+                  lyrics->read(node);
+                  Segment* segment = tick2segment(lyrics->tick());
+                  if (segment == 0) {
+                        printf("no segment for lyrics at %d\n",
+                           lyrics->tick());
+                        }
+                  else
+                        segment->add(lyrics);
+                  }
+            else if (tag == "Text") {
+                  Text* t = new Text(score());
+                  t->read(node);
+                  if (t->anchor() != ANCHOR_PAGE) {
+                        t->setTick(curTickPos);
+                        t->setStaff(staff);
+                        }
+                  add(t);
+                  }
+            //-------------------------------------obsolete:
+            else if (tag == "work-title") {
+                  Text* t = new Text(score());
+                  t->setSubtype(TEXT_TITLE);
+                  t->read(node);
+                  add(t);
+                  }
+            else if (tag == "creator-composer") {
+                  Text* t = new Text(score());
+                  t->setSubtype(TEXT_COMPOSER);
+                  t->read(node);
+                  add(t);
+                  }
+            else if (tag == "work-number") {
+                  Text* t = new Text(score());
+                  t->setSubtype(TEXT_SUBTITLE);
+                  t->read(node);
+                  add(t);
+                  }
+            //-------------------------------------
+            else if (tag == "Tempo") {
+                  TempoText* t = new TempoText(score());
+                  t->setTick(curTickPos);
+                  t->setStaff(staff);
+                  t->read(node);
+                  add(t);
+                  }
+            else if (tag == "Symbol") {
+                  Symbol* sym = new Symbol(score());
+                  sym->setTick(curTickPos);
+                  sym->setStaff(staff);
+                  sym->read(node);
+                  add(sym);
+                  }
+            else if (tag == "Ottava") {
+                  Ottava* ottava = new Ottava(score());
+                  ottava->setTick(curTickPos);
+                  ottava->setStaff(staff);
+                  ottava->read(node);
+                  add(ottava);
+                  }
+            else if (tag == "Volta") {
+                  Volta* volta = new Volta(score());
+                  volta->setTick(curTickPos);
+                  volta->setStaff(staff);
+                  volta->read(node);
+                  add(volta);
+                  }
+            else if (tag == "Trill") {
+                  Trill* trill = new Trill(score());
+                  trill->setTick(curTickPos);
+                  trill->setStaff(staff);
+                  trill->read(node);
+                  add(trill);
+                  }
+            else if (tag == "Pedal") {
+                  Pedal* pedal = new Pedal(score());
+                  pedal->setTick(curTickPos);
+                  pedal->setStaff(staff);
+                  pedal->read(node);
+                  add(pedal);
+                  }
+            else if (tag == "stretch")
+                  _userStretch = val.toDouble();
+            else if (tag == "LayoutBreak") {
+                  LayoutBreak* lb = new LayoutBreak(score());
+                  lb->setStaff(staff);
+                  lb->read(node);
+                  add(lb);
+                  }
+            else if (tag == "irregular")
+                  _irregular = true;
+            else if (tag == "Tuplet") {
+                  Tuplet* tuplet = new Tuplet(score());
+                  tuplet->read(node);
+                  tuplet->setStaff(staff);
+                  _tuplets.append(tuplet);
+                  }
+            else if (tag == "startRepeat")
+                  _startRepeat = val.toInt();
+            else if (tag == "endRepeat")
+                  _endRepeat = val.toInt();
+            else if (tag == "ending")
+                  _ending = val.toInt();
+            else
+                  domError(node);
+            }
+      }
+
+//---------------------------------------------------------
+//   read
+//---------------------------------------------------------
+
+void Measure::read(QDomNode node)
+      {
+      QDomElement e = node.toElement();
+      int curTickPos = e.attribute("tick", "0").toInt();
+      setTick(curTickPos);
+      int staffIdx = 0;
+      for (node = node.firstChild(); !node.isNull(); node = node.nextSibling()) {
+            QDomElement e = node.toElement();
+            if (e.isNull())
+                  continue;
+            QString tag(e.tagName());
+            QString val(e.text());
+            if (tag == "Staff") {
+                  read(node, staffIdx);
+                  ++staffIdx;
+                  }
+            else if (tag == "startRepeat")
+                  _startRepeat = val.toInt();
+            else if (tag == "endRepeat")
+                  _endRepeat = val.toInt();
+            else if (tag == "ending")
+                  _ending = val.toInt();
+            else if (tag == "irregular")
+                  _irregular = true;
+            else if (tag == "stretch")
+                  _userStretch = val.toDouble();
+            else if (tag == "Text") {
+                  Text* t = new Text(score());
+                  t->read(node);
+                  if (t->anchor() != ANCHOR_PAGE) {
+                        t->setTick(curTickPos);
+                        t->setStaff(0);
+                        }
+                  add(t);
+                  }
+            else
+                  domError(node);
             }
       }
 
