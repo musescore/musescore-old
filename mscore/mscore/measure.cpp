@@ -55,6 +55,7 @@
 #include "page.h"
 #include "lyrics.h"
 #include "irregular.h"
+#include "layout.h"
 
 //---------------------------------------------------------
 //   y2pitch
@@ -682,6 +683,7 @@ void Measure::layout2(ScoreLayout* layout)
                   ns = s;
             }
       _noText->setText(ns);
+      _noText->layout(layout);
 
       int tracks = _score->nstaves() * VOICES;
       for (Segment* s = first(); s; s = s->next()) {

@@ -23,6 +23,7 @@
 #include "measure.h"
 #include "score.h"
 #include "xml.h"
+#include "layout.h"
 
 //---------------------------------------------------------
 //   SLine

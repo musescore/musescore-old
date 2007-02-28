@@ -33,6 +33,7 @@
 #include "sym.h"
 #include "symbol.h"
 #include "clef.h"
+#include "layout.h"
 
 extern bool debugMode;
 extern bool showInvisible;
@@ -69,7 +70,8 @@ bool Element::operator>(const Element& el) const
 Element::~Element()
       {
       if (_selected) {
-            score()->deselect(this);
+            if (score())
+                  score()->deselect(this);
             printf("delete selected element\n");
             }
       }
@@ -525,19 +527,12 @@ Compound::Compound(Score* s)
 
 void Compound::draw(QPainter& p)
       {
-      for (ciElement i = elemente.begin(); i != elemente.end(); ++i)
-            (*i)->draw(p);
-#if 0
-      if (debugMode && selected()) {
-            //
-            //  draw bounding box rectangle for all
-            //  selected Elements
-            //
-            p.setBrush(Qt::NoBrush);
-            p.setPen(QPen(Qt::red, 4, Qt::SolidLine));
-            p.drawRect(_bbox);
+      foreach(Element* e, elemente) {
+            QPointF pt(e->pos());
+            p.translate(pt);
+            e->draw(p);
+            p.translate(-pt);
             }
-#endif
       }
 
 //---------------------------------------------------------

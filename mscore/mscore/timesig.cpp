@@ -25,6 +25,7 @@
 #include "style.h"
 #include "sym.h"
 #include "symbol.h"
+#include "layout.h"
 
 //---------------------------------------------------------
 //   TimeSig

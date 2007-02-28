@@ -27,6 +27,7 @@
 #include "style.h"
 #include "note.h"
 #include "tuplet.h"
+#include "layout.h"
 
 //---------------------------------------------------------
 //   Beam

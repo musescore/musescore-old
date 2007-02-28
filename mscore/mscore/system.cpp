@@ -42,6 +42,7 @@
 #include "globals.h"
 #include "barline.h"
 #include "lyrics.h"
+#include "layout.h"
 
 //---------------------------------------------------------
 //   SysStaff

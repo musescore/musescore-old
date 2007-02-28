@@ -29,6 +29,7 @@
 #include "system.h"
 #include "segment.h"
 #include "staff.h"
+#include "layout.h"
 
 //---------------------------------------------------------
 //   SlurSegment

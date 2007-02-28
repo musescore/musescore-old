@@ -22,6 +22,7 @@
 #define __LAYOUT_H__
 
 #include "bsp.h"
+#include "measure.h"
 
 class Score;
 class PageFormat;
@@ -29,6 +30,8 @@ class PageList;
 class Page;
 class Measure;
 class QPaintDevice;
+class SystemList;
+class System;
 
 //---------------------------------------------------------
 //   ElemList
@@ -79,7 +82,7 @@ class ScoreLayout {
       bool _needLayout;
 
       Page* addPage();
-      bool layoutPage(Page* page, Measure*& im, iSystem& is);
+      bool layoutPage(Page* page, Measure*& im, QList<System*>::iterator& is);
       System* layoutSystem(Measure*& im, System*, qreal x, qreal y, qreal w);
       void clearGenerated(Measure* m);
       void addGenerated(Measure* m);

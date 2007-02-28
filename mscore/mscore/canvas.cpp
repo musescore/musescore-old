@@ -37,6 +37,7 @@
 #include "xml.h"
 #include "text.h"
 #include "note.h"
+#include "layout.h"
 
 //---------------------------------------------------------
 //   Canvas

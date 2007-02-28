@@ -26,6 +26,7 @@
 #include "style.h"
 #include "text.h"
 #include "element.h"
+#include "layout.h"
 
 //---------------------------------------------------------
 //   Tuplet

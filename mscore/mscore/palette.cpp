@@ -25,6 +25,7 @@
 #include "globals.h"
 #include "sym.h"
 #include "symbol.h"
+#include "layout.h"
 
 //---------------------------------------------------------
 //   SymbolPalette
@@ -194,6 +195,8 @@ void SymbolPalette::addObject(int idx, int symIdx)
 void SymbolPalette::paintEvent(QPaintEvent* e)
       {
       qreal mag = PALETTE_SPATIUM * extraMag / _spatium;
+      ScoreLayout layout;
+      layout.setSpatium(_spatium);
 
       QPainter p(this);
       p.setRenderHint(QPainter::Antialiasing, true);
@@ -225,10 +228,10 @@ void SymbolPalette::paintEvent(QPaintEvent* e)
                   Element* el = symbols[idx];
                   if (el == 0)
                         continue;
-//TODO                  el->layout(0);
-                  QRect r(column*hgrid, row*vgrid, hgrid, vgrid);
-//TODO                  if (!p.clipRegion().boundingRect().intersects(r))
-//                        continue;
+                  el->layout(&layout);
+
+                  QRect r(column * hgrid, row * vgrid, hgrid, vgrid);
+
                   p.setPen(pen);
                   if (el->selected())
                         p.fillRect(r, Qt::yellow);
@@ -260,6 +263,8 @@ void SymbolPalette::paintEvent(QPaintEvent* e)
                   double sx  = gx + (gw - sw) * .5 - el->bbox().x();
 
                   el->setPos(sx, sy);
+                  QPointF pt(el->pos());
+                  p.translate(pt);
                   el->draw(p);
                   p.restore();
                   }
