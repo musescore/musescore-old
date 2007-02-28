@@ -377,8 +377,11 @@ void System::layout2(ScoreLayout* layout)
                                     if (!nll)
                                           continue;
                                     Lyrics* nl = nll->value(verse);
-                                    if (!nl)
+                                    if (!nl) {
+                                          // ignore last line which connects
+                                          // to nothing
                                           continue;
+                                          }
                                     Line* line = l->separator();
                                     if (!line) {
                                           line = new Line(l->score(), false);
@@ -396,6 +399,7 @@ void System::layout2(ScoreLayout* layout)
                                     Spatium sp;
                                     sp.set(len);
                                     line->setLen(sp);
+                                    line->layout(layout);
                                     l->setSeparator(line);
                                     break;
                                     }

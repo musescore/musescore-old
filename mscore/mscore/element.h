@@ -105,6 +105,8 @@ class Element {
                         ///< Note: interacts with userXoffset.
 
       mutable QRectF _bbox;     ///< Bounding box relative to _pos + _userOff
+                                ///< valid after call to layout()
+
       mutable MTime _duration;  ///< Note: lazy evaluation
 
    public:
@@ -378,7 +380,7 @@ class Line : public Element {
 
       virtual Line* clone() const { return new Line(*this); }
       virtual ElementType type() const { return LINE; }
-      virtual QRectF bbox() const;
+      virtual void layout(ScoreLayout*);
 
       virtual void draw(QPainter&);
       void writeProperties(Xml& xml) const;
