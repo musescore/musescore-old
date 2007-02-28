@@ -450,17 +450,18 @@ void Line::setLineWidth(Spatium w)
       }
 
 //---------------------------------------------------------
-//   bbox
+//   layout
 //---------------------------------------------------------
 
-QRectF Line::bbox() const
+void Line::layout(ScoreLayout* layout)
       {
-      double w = point(_width);
-      double l = point(_len);
+      double spatium = layout->spatium();
+      double w = _width.val() * spatium;
+      double l = _len.val() * spatium;
       if (vertical)
-            return QRectF(-w*.5, 0, w, l);
+            setbbox(QRectF(-w*.5, 0, w, l));
       else
-            return QRectF(0, -w*.5, l, w);
+            setbbox(QRectF(0, -w*.5, l, w));
       }
 
 //---------------------------------------------------------

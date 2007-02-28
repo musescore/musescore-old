@@ -112,8 +112,12 @@ void Lyrics::remove(Element*)
 void Lyrics::draw(QPainter& p)
       {
       Text::draw(p);
-      if (_separator)
+      if (_separator) {
+            QPointF pt(_separator->pos());
+            p.translate(pt);
             _separator->draw(p);
+            p.translate(-pt);
+            }
       }
 
 
