@@ -137,7 +137,7 @@
       \hfill \color[blue]{DE}\par
       \definebodyfont[10pt,11pt,12pt][rm][tfb=Regular at 24pt]
       \tfb\setupinterlinespace
-      \hfill Version 0.4\par
+      \hfill Version 0.5\par
       \stopstandardmakeup
 
    \startstandardmakeup[page=no]
@@ -161,11 +161,11 @@
       \M\ ist ''Open Source'' Software und wird unter der GNU General
       Public License (GPL) veröffentlicht (siehe Anhang).
 
+      \blank
       Einige Highlights:
 
       \startitemize[packed]
-            \item WYSIWYG Design, Noten können auf einem "virtuellen Notenblatt" eingegeben
-                  werden.
+            \item WYSIWYG Design, Noten werden auf einem "virtuellen Notenblatt" eingegeben
             \item \M\ verwendet TrueType Font(s) zum Drucken und für die
                   Bildschirmausgabe. Dies ermöglicht eine hochwertige Darstellung
                   in allen Vergrößerungsstufen.
@@ -178,60 +178,226 @@
                   der Partitur.
       \stopitemize
 
-   \section{Kurzanleitung}
+   \section{Tutorial}
+      Dieses Tutorial demonstriert die Eingabe einer einfachen Notenzeile. Als Vorlage
+      dient folgendes Bild aus der Wikipedia:
+\starttyping
+http://de.wikipedia.org/wiki/Adeste_Fideles
+\stoptyping
+
+      \blank
+      \externalfigure[adeste][scale=500]
+      \blank
+
       \subsection{Programmstart}
 
-      \Screen{main1}{Leeres Hauptfenster}
+      Nach dem ersten Programmstart zeigt \M\ ein Demofile:
 
-      Nach der Eingabe von
+      \blank
+      \externalfigure[tutorial1][scale=1600]
+      \blank
 
-      \starttyping
-mscore
-      \stoptyping
+      Wir starten eine neue Partitur durch Eingabe von:
 
-      wird das zuletzt bearbeitete Projekt gezeigt. Beim ersten
-      Start von \M\ erscheint das leere Hauptfenster (Abb. \in[fig:main1]).
+\starttyping
+Strg+N
+\stoptyping
 
-   Das Fenster besteht aus drei Bereichen:
-   \startitemize[packed]
-      \item einer Leiste mit Pulldownmenü
-      \item eine Leiste mit Werkzeugsymbolen
-      \item einem leeren Canvas
-   \stopitemize
+      \blank
+      \externalfigure[tutorial2][scale=1600]
+      \blank
 
-  \subsection{Neue Partitur erzeugen}
+      Eine Auswahl von Vorlagen erscheint,
+       die wir aber ignorieren, indem wir afu ''Cancel'' clicken.  \M\ erzeugt eine
+       neues leeres Notenblatt unter einem neuen Reiter mit dem Titel ''untitled''.
 
-      Um ein Notenblatt zu erzeugen geben Sie \type{Strg+N} ein.
-      Es erscheint ein Dialog mit einer Liste von Vorlagen (''Templates'') zur Auswahl
-      (Abb. \in[fig:template]).
-      \index{Vorlagen}\index{Templates}
+      \blank
+      \externalfigure[tutorial3][scale=1600]
+      \blank
 
-      \Screen{template}{Template Auswahl}
+      Durch die Eingabe von
 
-      Wir wählen \type{a4piano.msc} und verlassen den Dialog
-      mit \type{OK}.
+\starttyping
+I
+\stoptyping
+      kommen wir in die Instrumenteauswahl:
 
-      Auf dem dem Canvas des Hauptfensters wird nun ein Arbeitsblatt
-      mit dem gewünschten Template angezeigt, in unserem Fall also zwei
-      Notenzeilen, die mit einer Klammer verbunden sind. Die Noteschlüssel
-      sind gesetzt, die Taktart ist mit $4/4$ vorgegeben und die Notenzeilen
-      sind bereits mit ein paar Pausentakten bevölkert.
+      \blank
+      \externalfigure[tutorial4][scale=1600]
+      \blank
 
-      \Screen{emptypiano}{Leeres Pianosystem}
+      Wir doppelclicken auf ''Strings'', um die Streicherauswahl auszuklappen, selektieren
+      ''Violin'' und clicken anschließend zweimal auf ''Zufügen''.
 
-\subsection{Noteneingabe}
+      \blank
+      \externalfigure[tutorial5][scale=1600]
+      \blank
 
-      Nun wollen wir ein paar Noten eingeben. Dazu clicken wir zunächst die
-      erste Pause an um sie zu selektieren und starten dann
-      den Noteneingabemode durch Eingabe von \type{N}.
-      Der Cursor verändert sich, um den Eingabemodus anzuzeigen.
-      Ebenso erscheint eine Einfügemarke.
+      Nach clicken von ''Ok'' verschwindet die Instrumentenauswahl. Das Notenblatt ist
+      jedoch noch immer leer, da wir keine Takte erzeugt haben. Wir erzeugen fünf Takte
+      mit
 
-      Um die leeren Takte mit Noten zu bevölkern, tippen wir nun
-      einfach ''c d e'' auf der Tastatur ein. Es ergibt sich
-      folgendes Bild:
+\starttyping
+Strg+B Strg+B Strg+B Strg+B Strg+B
+\stoptyping
 
-      \Noten{noten1.pdf}
+      Unser Notenblatt sieht dann so aus:
+
+      \blank
+      \externalfigure[tutorial6][scale=1600]
+      \blank
+
+      Die fünf Takte sind mit Pausen vorbelegt.
+      Die Instrumentnamen stören und werden mit Selektieren + ''Entf'' gelöscht:
+
+      \blank
+      \externalfigure[tutorial7][scale=1600]
+      \blank
+
+      Im nächsten Schritt wollen wir die beiden Notenzeilen mit einer Klammer verbinden.
+      Dazu clicken wir mit der rechten Maustaste in auf einen leeren Bereich des
+      Notenblattes um in das ''Erzeugen'' Menü zu gelangen.
+
+      \blank
+      \hbox{\externalfigure[tutorial8][scale=1600]
+            \externalfigure[tutorial9][scale=1600]
+            }
+      \blank
+
+      Wir selektieren ''Systemklammern'' und die Systemklammernpalette erscheint.
+
+      Die Klammernpalette ist recht übersichtlich. Wir clicken auf die eckige Klammer
+      und ziehen sie auf den Anfang der oberen Notenzeile.
+
+      \blank
+      \externalfigure[tutorial10][scale=1600]
+      \blank
+
+      Durch Doppelclick auf die Klammer gelangen wir in den Edit-Modus:
+
+
+      \blank
+      \externalfigure[tutorial11][scale=1600]
+      \blank
+
+      Wir klicken auf das kleine blaue Rechteck (der ''Anfasser'') und ziehen
+      es mit der Maus nach unten, bis beide Notenzeilen umklammert sind.
+      Durch Eingabe von Escape verlassen wir den Editmodus. Die Klammer rastet nun
+      exakt auf die unterste Linie der zweiten Notenzeile.
+
+
+      \blank
+      \externalfigure[tutorial12][scale=1600]
+      \blank
+
+      Im nächsten Schritt wollen wir einen Baßschlüssel für die untere
+      Notenzeile einstellen. Dazu clicken wir wieder mit der rechten Maustaste auf
+      eine leere Stelle im Notenblatt und wählen ''Clef'' im erscheinenden ''Erzeugen''
+      Menü:
+
+      \blank
+      \hbox{\externalfigure[tutorial13][scale=1600]
+            \externalfigure[tutorial14][scale=1600]
+            }
+      \blank
+
+      Hier wieder das Ergebnis:
+
+      \blank
+      \externalfigure[tutorial15][scale=1600]
+      \blank
+
+      Die Tonart wird durch Ziehen eines Tonartsymbols aus der Tonartpalette
+      auf die oberen und auf die untere Notenzeile festgelegt.
+
+      \blank
+      \hbox{\externalfigure[tutorial16][scale=1600]
+            \externalfigure[tutorial17][scale=1600]
+            }
+      \blank
+
+      Das Hauptfenster mit Tonartsymbol:
+
+      \blank
+      \externalfigure[tutorial18][scale=1600]
+      \blank
+
+      Es fehlt noch die Taktartbezeichnung. Wir öffnen die Taktartpalette und
+      ziehen die gewünschte Taktart auf die obere Notenzeile.
+
+      \blank
+      \hbox{\externalfigure[tutorial19][scale=1600]
+            \externalfigure[tutorial20][scale=1600]
+            }
+      \blank
+
+      Hier das Hauptfenster mit Taktart:
+
+      \blank
+      \externalfigure[tutorial21][scale=1600]
+      \blank
+
+      Der erste Takt ist ein Auftakt, der anstatt 4/4 nur eine 1/4 Länge
+      hat. Dies stellen wir im Dialog ''irreguläre Takte'' ein, welcher
+      mit einem Rechtsclick auf einen freien Bereich im ersten Takt über
+      das Kontextmenü erreichbar ist:
+
+      \blank
+      \hbox{\externalfigure[tutorial21a][scale=1600]
+            \externalfigure[tutorial21b][scale=1600]
+            }
+      \blank
+
+      Nun wollen wir die bisherigen Eingaben in eine Datei sichern. Wir
+      geben ein:
+
+\starttyping
+Strg+S
+\stoptyping
+
+      woraufhin der ''Partitur speichern'' Dialog erscheint, um nach einem
+      Namen zu fragen. Wir geben als Namen ''adeste'' ein und clicken ''Save''.
+      Die Partitur wird nun unter dem Namen ''adeste.msc'' gespeichert.
+
+      \blank
+      \externalfigure[tutorial22][scale=1600]
+      \blank
+
+      Nun beginnen wir mit der Noteneingabe. Dies bedeutet, das wir die bestehenden
+      Pausen durch Noten ersetzen wollen. Noten werden in einem besonderen Noteneingabemodus
+      eingegeben. Diesen Modus starten wird nach dem selektieren der ersten Pause
+      mit der Eingabe von
+
+\starttyping
+N
+\stoptyping
+
+      Der Cursor verändert sich, um den neuen Modus anzuzeigen. Ebenso wird in der
+      Statuszeile unten rechts der Noteneingabemodus angezeigt.
+      Wenn wir nun mit der Maus über das Notenblatt fahren, sehen wir außerdem eine
+      ''Geistenotenkopf'', der anzeigt wo eine Note eingefügt würde, wenn wir die
+      linke Maustaste drücken.
+
+      Als nächstes müssen wir angeben, welchen Notenwert die neuen Noten haben
+      sollen. Dazu clicken wir in der Noteneingabewerkzeugleiste auf die Viertelnote.
+
+      \blank
+      \externalfigure[tutorial23][scale=1600]
+      \blank
+
+      Die ersten Noten werden durch Eingabe von
+
+\starttyping
+c Shift+a
+\stoptyping
+
+      erstellt.
+      Das sieht nun wie folgt aus:
+
+      \blank
+      \externalfigure[tutorial24][scale=1600]
+      \blank
+
 
 \subsection{Editieren}
    Einige Aktionen:
@@ -988,7 +1154,9 @@ mscore <Optionen> <Dateiname>
 \section{Stimmauszüge}
       Stimmauszüge können erstellt werden, indem nicht gewünschte
       Stimmen (Parts) im Partlisteneditor durch anclicken des Schalters
-      ''zeigen'' unsichtbar geschaltet werden.
+      ''Zeige'' unsichtbar geschaltet werden.
+
+      \Screen{partlist}{Partlisteneditor}
 
 \section{Styles}
 
@@ -1149,244 +1317,6 @@ su -c make install
       \Sc{Alt+Strg+Up}  \crlf selektiert die höhere Note im Akkord\par
       \Sc{Alt+Strg+Down} \crlf selektiert die niedrigste Note im Akkord\par
       \stopcolumns
-
-\chapter{Design and Implementation}
-
-   \section{Main Structure}
-
-      \M\ handles multiple documents (scores). The documents can
-      selected with a tab bar. A global pointer points to the current
-      selected score (\type{cs}).
-
-      A \type{Score} contains data read from an \type{*.msc} or \type{*.xml}
-      file. Think of it as a simple list of measures. The \type{layout()}
-      procedure breaks this list into lines ans pages producing a
-      \type{Layout} structure. The \type{Layout} can be viewed by a
-      \type{Viewer} providing a magnification and horizontal und
-      vertical offsets.
-
-      \setupFLOWcharts
-        [dx=2\bodyfontsize,
-         dy=2\bodyfontsize,
-         width=7\bodyfontsize,
-         height=3\bodyfontsize,
-         maxwidth=\textwidth]
-
-      \startFLOWchart[mops1]
-
-        \startFLOWcell
-          \name{MuseScore}
-          \location{1,1}
-          \shape{procedure}
-          \text{MuseScore}
-          \connect[bl]{Project1}
-          \connect[bl]{Project2}
-          \stopFLOWcell
-
-        \startFLOWcell
-          \name{Project1}
-          \location{1,2}
-          \shape{32}
-          \text{Score\\A}
-          \connect[rl]{Layout1}
-          \connect[rl]{Layout2}
-          \stopFLOWcell
-
-        \startFLOWcell
-          \name{Layout1}
-          \location{2,2}
-          \shape{34}
-          \text{Layout}
-          \connect[rl]{View1}
-          \stopFLOWcell
-
-        \startFLOWcell
-          \name{View1}
-          \location{3,2}
-          \shape{17}
-          \text{View PagePreView}
-          \stopFLOWcell
-
-        \startFLOWcell
-          \name{Layout2}
-          \location{2,3}
-          \shape{34}
-          \text{Layout}
-          \connect[rl]{View2}
-          \connect[rl]{View3}
-          \stopFLOWcell
-
-        \startFLOWcell
-          \name{View2}
-          \location{3,3}
-          \shape{17}
-          \text{View\\Canvas}
-          \stopFLOWcell
-
-        \startFLOWcell
-          \name{View3}
-          \location{3,4}
-          \shape{17}
-          \text{View Navigator}
-          \stopFLOWcell
-
-        \startFLOWcell
-          \name{Project2}
-          \location{1,3}
-          \shape{32}
-          \text{Score\\B}
-          \stopFLOWcell
-
-      \stopFLOWchart
-      \FLOWchart[mops1]
-
-      A \type{Score} can have more than one \type{Layout}. This is used in
-      the \type{Page Settings} dialog for a page preview.
-
-      A \type{Layout} can have more than one \type{View}. The main view
-      is called \type{Canvas} and can be used to view and edit the score.
-      A second smaller \type{View} ist used by the \type{Navigator} widget.
-
-   \section{Layout Object Hierarchy}
-
-      \setupFLOWcharts
-        [dx=1.5\bodyfontsize,
-         dy=1.5\bodyfontsize,
-         width=8\bodyfontsize,
-         height=4\bodyfontsize,
-         maxwidth=\textwidth]
-
-      \startFLOWchart[mops2]
-
-        \startFLOWcell
-          \name{Page}
-          \location{1,1}
-          \shape{procedure}
-          \text{Page}
-          \connect[rl]{System}
-          \stopFLOWcell
-
-        \startFLOWcell
-          \name{System}
-          \location{2,1}
-          \shape{procedure}
-          \text{System}
-          \connect[rl]{Bar}
-          \connect[rl]{SStaff}
-          \connect[rl]{SText}
-          \connect[rl]{Measure}
-          \connect[rl]{Bracket}
-          \stopFLOWcell
-
-        \startFLOWcell
-          \name{Bar}
-          \location{3,1}
-          \shape{procedure}
-          \text{Bar}
-          \stopFLOWcell
-
-        \startFLOWcell
-          \name{SStaff}
-          \location{3,2}
-          \shape{procedure}
-          \text{SStaff}
-          \stopFLOWcell
-
-        \startFLOWcell
-          \name{SText}
-          \location{3,3}
-          \shape{procedure}
-          \text{SText}
-          \stopFLOWcell
-
-        \startFLOWcell
-          \name{Bracket}
-          \location{3,4}
-          \shape{procedure}
-          \text{Bracket}
-          \stopFLOWcell
-
-        \startFLOWcell
-          \name{Measure}
-          \location{3,5}
-          \shape{procedure}
-          \text{Measure}
-          \connect[rl]{Slur}
-          \connect[rl]{SlurSegment}
-          \connect[rl]{Segment}
-          \stopFLOWcell
-
-        \startFLOWcell
-          \name{Slur}
-          \location{4,5}
-          \shape{procedure}
-          \text{Slur}
-          \stopFLOWcell
-
-        \startFLOWcell
-          \name{SlurSegment}
-          \location{4,6}
-          \shape{procedure}
-          \text{SlurSegment}
-          \stopFLOWcell
-
-        \startFLOWcell
-          \name{Segment}
-          \location{4,7}
-          \shape{procedure}
-          \text{Segment}
-          \connect[rl]{Chord}
-          \connect[rl]{Rest}
-          \connect[rl]{Lyric}
-          \stopFLOWcell
-
-          \startFLOWcell
-            \name{Chord}
-            \location{5,7}
-            \shape{procedure}
-            \text{Chord}
-            \connect[rl]{Note}
-            \connect[rl]{Attribute}
-            \stopFLOWcell
-
-            \startFLOWcell
-              \name{Note}
-              \location{6,7}
-              \shape{procedure}
-              \text{Note}
-              \connect[rl]{Accidental}
-              \stopFLOWcell
-
-            \startFLOWcell
-              \name{Attribute}
-              \location{6,8}
-              \shape{procedure}
-              \text{Attribute}
-              \stopFLOWcell
-
-              \startFLOWcell
-                \name{Accidental}
-                \location{7,7}
-                \shape{procedure}
-                \text{Accidental}
-                \stopFLOWcell
-
-          \startFLOWcell
-            \name{Rest}
-            \location{5,8}
-            \shape{procedure}
-            \text{Rest}
-            \stopFLOWcell
-
-          \startFLOWcell
-            \name{Lyric}
-            \location{5,}
-            \shape{procedure}
-            \text{Lyric}
-            \stopFLOWcell
-
-      \stopFLOWchart
-      \FLOWchart[mops2]
 
 \chapter{Beispiele}
       \vbox{\placecontent}

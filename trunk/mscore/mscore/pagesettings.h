@@ -43,8 +43,11 @@ class PageSettings : public QDialog, private Ui::PageSettingsBase {
       void mmClicked();
       void inchClicked();
       void pageFormatSelected(int);
+
       void apply();
       void ok();
+      void done(int val);
+
       void twosidedToggled(bool);
       void landscapeToggled(bool);
       void otmChanged(double val);
