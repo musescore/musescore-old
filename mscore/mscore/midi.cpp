@@ -641,7 +641,7 @@ bool ExportMidi::saver()
             track->setOutPort(0);
             track->setOutChannel(channel);
             if (tr == 0) {
-                  Measure* measure = cs->scoreLayout()->first();
+                  Measure* measure = cs->mainLayout()->first();
                   ElementList* el  = measure->pel();
                   for (iElement ie = el->begin(); ie != el->end(); ++ie) {
                         if ((*ie)->type() == TEXT) {
@@ -780,8 +780,8 @@ bool ExportMidi::saver()
 
                   }
             int gateTime = 80;  // 100 - legato (100%)
-            for (Measure* m = cs->scoreLayout()->first(); m; m = m->next()) {
-                  if (m == cs->scoreLayout()->first()) {
+            for (Measure* m = cs->mainLayout()->first(); m; m = m->next()) {
+                  if (m == cs->mainLayout()->first()) {
                         int program   = staff->midiProgram();
                         if (program != -1) {
                               MidiEvent* ev = new MidiEvent;
@@ -1088,7 +1088,7 @@ bool MidiFile::readTrack(bool mergeChannels)
       int len       = readLong();       // len
       int endPos    = curPos + len;
       status        = -1;
-      sstatus       = -1;  // running status, der nicht bei meta oder sysex zurüan      = -1;
+      sstatus       = -1;  // running status, der nicht bei meta oder sysex zurü      = -1;
       lastport      = -1;
       channelprefix = -1;
       click         = 0;
@@ -1945,11 +1945,11 @@ QString MidiTrack::instrName(int type) const
 //      Instrumentennamen verwendet werden?
 //    - Instrumente feststellen
 //          - Name (kommentar?)
-//          - Schlüstem?
+//          - Schlüem?
 //    * Takte feststellen
 //    - Schlagzeugtrack markieren
 //    - Quantisierung festlegen:
-//       - kü   - songtitle
+//       - kü - songtitle
 
 // process:
 //    for every measure:

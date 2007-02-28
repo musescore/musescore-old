@@ -105,8 +105,8 @@ class System : public Element {
 
       Page* page() const                 { return (Page*)parent(); }
 
-      double layout(const QPointF&, double);
-      void layout2();                     ///< Called after Measure layout.
+      double layout(ScoreLayout*, const QPointF&, double);
+      void layout2(ScoreLayout*);         ///< Called after Measure layout.
       void clear();                       ///< Clear measure list.
 
       MeasureList* measures() const { return ml; }

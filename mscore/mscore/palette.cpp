@@ -225,7 +225,7 @@ void SymbolPalette::paintEvent(QPaintEvent* e)
                   Element* el = symbols[idx];
                   if (el == 0)
                         continue;
-                  el->layout();
+//TODO                  el->layout(0);
                   QRect r(column*hgrid, row*vgrid, hgrid, vgrid);
 //TODO                  if (!p.clipRegion().boundingRect().intersects(r))
 //                        continue;

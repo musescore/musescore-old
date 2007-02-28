@@ -110,7 +110,7 @@ void Page::add(Element* el)
 
 void Page::remove(Element* el)
       {
-      _elements.remove(el);
+      _elements.removeAll(el);
       el->anchor()->remove(el);
       }
 
@@ -138,7 +138,7 @@ void PageList::update()
             page->setNo(no);
             page->setPos(x, 0);
             x += page->width() + ((no & 1) ? 1.0 : 50.0);
-            page->layout();
+//            page->layout();
             }
       }
 
@@ -155,7 +155,7 @@ QRectF Page::bbox() const
 //   layout
 //---------------------------------------------------------
 
-void Page::layout()
+void Page::layout(ScoreLayout* layout)
       {
       // add page number
       if (::style->showPageNumber) {
@@ -167,8 +167,12 @@ void Page::layout()
                         _pageNo->setSubtype(subtype);
                         _pageNo->setParent(this);
                         }
-                  _pageNo->setText(QString("%1").arg(n));
-                  _pageNo->layout();
+                  QString pnt;
+                  pnt.setNum(n);
+                  if (pnt != _pageNo->getText()) {
+                        _pageNo->setText(QString("%1").arg(n));
+                        _pageNo->layout(layout);
+                        }
                   }
             else if (_pageNo) {
                   delete _pageNo;
@@ -187,8 +191,10 @@ void Page::layout()
                   _copyright->setSubtype(TEXT_COPYRIGHT);
                   _copyright->setParent(this);
                   }
-            _copyright->setText(_score->rights);
-            _copyright->layout();
+            if (_copyright->getText() != _score->rights) {
+                  _copyright->setText(_score->rights);
+                  _copyright->layout(layout);
+                  }
             }
       else if (_copyright) {
             delete _copyright;
@@ -294,7 +300,7 @@ void Page::draw(QPainter& p)
 //   elements
 //---------------------------------------------------------
 
-void Page::collectElements(ElementList& el)
+void Page::collectElements(QList<Element*>& el)
       {
       foreach(Element* e, _elements)
             el.append(e);
@@ -329,8 +335,10 @@ void Page::collectElements(ElementList& el)
                   for (Segment* s = m->first(); s; s = s->next()) {
                         for (int staffIdx = 0; staffIdx < staves; ++staffIdx) {
                               LyricsList* ll = s->lyricsList(staffIdx);
-                              foreach(Lyrics* l, *ll)
-                                    el.append(l);
+                              foreach(Lyrics* l, *ll) {
+                                    if (l)
+                                          el.append(l);
+                                    }
                               }
                         for (int track = 0; track < tracks; ++track) {
                               Element* e = s->element(track);

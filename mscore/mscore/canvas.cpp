@@ -38,11 +38,6 @@
 #include "text.h"
 #include "note.h"
 
-static inline int intmaxlog(int n)
-      {
-      return (n > 0 ? qMax(int(::ceil(::log(double(n))/::log(double(2)))), 5) : 0);
-      }
-
 //---------------------------------------------------------
 //   Canvas
 //---------------------------------------------------------
@@ -581,7 +576,8 @@ void Canvas::mouseReleaseEvent1(QMouseEvent* /*ev*/)
 
             case LASSO:
                   setState(NORMAL);
-                  _score->addRefresh(lasso->abbox());
+                  _score->addRefresh(lasso->abbox().adjusted(-2, -2, 2, 2));
+                  lasso->setbbox(QRectF());
                   break;
 
             case DRAG_OBJ:
@@ -878,7 +874,7 @@ void Canvas::setShadowNote(const QPointF& p)
       y += line * _spatium * .5;
 
       shadowNote->setPos(seg->apos().x(), y);
-      shadowNote->layout();
+//      shadowNote->layout();
       }
 
 //---------------------------------------------------------
@@ -927,19 +923,6 @@ void Canvas::paintEvent(QPaintEvent* ev)
                   navigator->layoutChanged();
             rr.setRect(0, 0, width(), height());  // does not work because paintEvent
                                                   // is clipped?
-            QRectF r;
-            el.clear();
-            for (iPage ip = _score->pages()->begin(); ip != _score->pages()->end(); ++ip) {
-                  Page* page = *ip;
-                  r |= page->abbox();
-                  page->collectElements(el);
-                  }
-            int depth = intmaxlog(el.size());
-            bspTree.initialize(r, depth);
-            for (int i = 0; i < el.size(); ++i) {
-                  Element* e = el.at(i);
-                  bspTree.insert(e);
-                  }
             paint(rr);
             }
       else {
@@ -972,13 +955,14 @@ void Canvas::paint(const QRect& rr)
       QRectF fr = imatrix.mapRect(QRectF(rr));
 
       QRegion r1(rr);
-      for (iPage ip = _score->pages()->begin(); ip != _score->pages()->end(); ++ip) {
+      for (iPage ip = _layout->pages()->begin(); ip != _layout->pages()->end(); ++ip) {
             Page* page = *ip;
+            page->draw(p);
             r1 -= matrix.mapRect(page->abbox()).toRect();
             }
       p.setClipRect(fr);
 
-      QList<Element*> ell = bspTree.items(fr);
+      QList<Element*> ell = _layout->items(fr);
       drawElements(p, ell);
 
       lasso->draw(p);
@@ -999,9 +983,10 @@ void Canvas::paint(const QRect& rr)
 //   setScore
 //---------------------------------------------------------
 
-void Canvas::setScore(Score* s)
+void Canvas::setScore(Score* s, ScoreLayout* l)
       {
       _score = s;
+      _layout = l;
       if (navigator) {
             navigator->setScore(_score);
             updateNavigator(false);
@@ -1262,7 +1247,7 @@ static bool elementLower(const Element* e1, const Element* e2)
 
 Element* Canvas::elementAt(const QPointF& p)
       {
-      QList<Element*> el = bspTree.items(p);
+      QList<Element*> el = _layout->items(p);
       if (el.empty())
             return 0;
       qSort(el.begin(), el.end(), elementLower);
@@ -1279,19 +1264,12 @@ void Canvas::drawElements(QPainter& p,const QList<Element*>& el)
             Element* e = el.at(i);
             e->itemDiscovered = 0;
 
-            if (!(e->visible() || (e->score() && score()->showInvisible())))
+            if (!(e->visible() || score()->showInvisible()))
                   continue;
 
             QPointF ap(e->apos());
             p.translate(ap);
-            QPen pen(e->color());
-            if (e->selected())
-                  pen.setColor(preferences.selectColor[e->voice()]);
-            else if (e->dropTarget())
-                  pen.setColor(preferences.dropColor);
-            else if (!e->visible())
-                  pen.setColor(Qt::gray);
-            p.setPen(pen);
+            p.setPen(QPen(e->color()));
             e->draw(p);
             if (debugMode && e->selected()) {
                   //

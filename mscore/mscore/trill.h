@@ -36,7 +36,7 @@ class Trill : public SLine {
       virtual ElementType type() const { return TRILL; }
 
       virtual void draw(QPainter&);
-      virtual void layout();
+      virtual void layout(ScoreLayout*);
       void setLen(qreal);
       virtual void setSubtype(int val);
       virtual void write(Xml&) const;

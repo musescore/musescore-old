@@ -46,7 +46,7 @@ Bracket::Bracket(Score* s)
 void Bracket::setHeight(qreal h)
       {
       h2 = h * .5;
-      layout();
+//      layout();
       }
 
 //---------------------------------------------------------
@@ -67,8 +67,10 @@ double Bracket::width() const
 //   updateValues
 //---------------------------------------------------------
 
-void Bracket::layout()
+void Bracket::layout(ScoreLayout* layout)
       {
+      double _spatium = layout->spatium();
+
       path = QPainterPath();
       if (h2 == 0.0)
             return;
@@ -98,7 +100,7 @@ void Bracket::layout()
             QChar down(0xe19d);
             QFont f;
             f.setFamily(s->family);
-            double mag = score()->spatium() / (spatiumBase20 * DPI);
+            double mag = _spatium / (spatiumBase20 * DPI);
             f.setPointSizeF(20.0 * mag);
 
             qreal o = _spatium * .27;
@@ -261,7 +263,6 @@ bool Bracket::editDrag(QMatrix&, QPointF*, const QPointF& delta)
 
       grip.translate(QPointF(0.0, dy));
       yoff += dy;
-      layout();
       return true;
       }
 
@@ -290,7 +291,6 @@ bool Bracket::edit(QKeyEvent* ev)
 
       grip.translate(QPointF(0.0, dy));
       yoff += dy;
-      layout();
       return false;
       }
 
@@ -329,7 +329,6 @@ bool Bracket::endEditDrag()
       h2 = (ey - sy) / 2.0;
 
       yoff = 0.0;
-      layout();
       score()->staff(idx1)->setBracketSpan(_level, idx2 - idx1 + 1);
       grip.moveTo(0.0, h2 *2);
       return true;
@@ -365,7 +364,6 @@ void Bracket::drop(const QPointF&, int type, const QDomNode& node)
             b->setLevel(level());
             score()->cmdRemove(this);
             score()->cmdAdd(b);
-            score()->layout();
             }
       }
 

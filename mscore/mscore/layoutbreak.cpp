@@ -30,7 +30,7 @@
 LayoutBreak::LayoutBreak(Score* score)
    : Element(score)
       {
-      layout();
+//      layout();
       }
 
 //---------------------------------------------------------
@@ -56,8 +56,9 @@ void LayoutBreak::draw(QPainter& p)
 //   layout
 //---------------------------------------------------------
 
-void LayoutBreak::layout()
+void LayoutBreak::layout(ScoreLayout* layout)
       {
+      double _spatium = layout->spatium();
       path = QPainterPath();
 
       double h = _spatium * 4;

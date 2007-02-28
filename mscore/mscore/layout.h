@@ -21,6 +21,8 @@
 #ifndef __LAYOUT_H__
 #define __LAYOUT_H__
 
+#include "bsp.h"
+
 class Score;
 class PageFormat;
 class PageList;
@@ -61,6 +63,8 @@ class ScoreLayout {
       double _spatium;
       PageFormat* _pageFormat;
       QPaintDevice* _paintDevice;
+      ElementList el;
+      BspTree bspTree;
 
       //
       // modified by layout()
@@ -84,7 +88,6 @@ class ScoreLayout {
    public:
       ScoreLayout();
       ~ScoreLayout();
-      ScoreLayout(const ScoreLayout&);
 
       void setScore(Score*);
       void layout()                  { _needLayout = true; }
@@ -102,9 +105,13 @@ class ScoreLayout {
       void push_back(Measure* el)    { _measures.push_back((Element*)el);  }
       void clear()                   { _measures.clear(); }
       void erase(Measure* im)        { _measures.erase(im); }
-      void insert(Measure* im, Measure* m) { _measures.insert(im, m); }
-      void setPaintDevice(QPaintDevice* d) { _paintDevice = d; }
-      QPaintDevice* paintDevice() const { return _paintDevice; }
+      void insert(Measure* im, Measure* m)    { _measures.insert(im, m); }
+      void setPaintDevice(QPaintDevice* d)    { _paintDevice = d; }
+      QPaintDevice* paintDevice() const       { return _paintDevice; }
+      QList<Element*> items(const QRectF& r)  { return bspTree.items(r); }
+      QList<Element*> items(const QPointF& p) { return bspTree.items(p); }
+      void setInstrumentNames();
+      void connectTies();
       };
 
 #endif

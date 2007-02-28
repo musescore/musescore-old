@@ -145,7 +145,7 @@ class Chord : public ChordRest {
 
       QList<HelpLine*>* getHelpLines() { return &helpLines; }
 
-      virtual void layoutStem();
+      virtual void layoutStem(ScoreLayout*);
       NoteList* noteList()                   { return &notes; }
       const NoteList* noteList() const       { return &notes; }
       const Note* upNote() const             { return notes.back(); }
@@ -167,7 +167,7 @@ class Chord : public ChordRest {
       virtual void remove(Element*);
 
       Note* selectedNote() const;
-      virtual void layout();
+      virtual void layout(ScoreLayout*);
 
       virtual int upLine() const;
       virtual int downLine() const;

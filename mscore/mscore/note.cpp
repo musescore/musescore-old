@@ -609,9 +609,9 @@ QRectF Note::drag(const QPointF& s)
       {
       QRectF bb(chord()->bbox());
       _lineOffset = lrint(s.y() * 2 / _spatium);
-      chord()->layout();
-      chord()->measure()->layoutBeams();
-      bb |= chord()->bbox();
+//      chord()->layout();
+//      chord()->measure()->layoutBeams();
+//      bb |= chord()->bbox();
       return bb.translated(chord()->aref());
       }
 
@@ -734,7 +734,7 @@ void Note::drop(const QPointF&, int t, const QDomNode& node)
                   f->setParent(this);
                   score()->select(f, 0, 0);
                   score()->undoAddElement(f);
-                  chord()->layout();
+//                  chord()->layout();
                   }
                   break;
             case ACCIDENTAL:

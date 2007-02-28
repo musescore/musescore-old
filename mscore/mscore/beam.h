@@ -59,7 +59,7 @@ class Beam : public Element {
       virtual Beam* clone() const { return new Beam(*this); }
       virtual ElementType type() const { return BEAM; }
 
-      void layout();
+      void layout(ScoreLayout*);
       void add(ChordRest* a) { elements.add(a); }
       void remove(ChordRest* a);
       QString xmlType(ChordRest*) const;

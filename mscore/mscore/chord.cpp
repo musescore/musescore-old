@@ -33,6 +33,7 @@
 #include "system.h"
 #include "tuplet.h"
 #include "hook.h"
+#include "layout.h"
 
 //---------------------------------------------------------
 //   Stem
@@ -275,8 +276,9 @@ QRectF Chord::bbox() const
  Layout chord stem and hook.
 */
 
-void Chord::layoutStem()
+void Chord::layoutStem(ScoreLayout* layout)
       {
+      double _spatium = layout->spatium();
       System* s      = segment()->measure()->system();
       double sy      = s->staff(staffIdx())->bbox().y();
       Note* upnote   = notes.back();
@@ -387,10 +389,11 @@ void Chord::addHelpLine(double x, double y, int i)
 //   layout
 //---------------------------------------------------------
 
-void Chord::layout()
+void Chord::layout(ScoreLayout* layout)
       {
       if (notes.empty())
             return;
+      double _spatium = layout->spatium();
       Note* upnote     = notes.back();
       double headWidth = upnote->headWidth();
 
@@ -528,7 +531,7 @@ void Chord::layout()
       //  Note Attributes
       //-----------------------------------------
 
-      layoutAttributes();
+      layoutAttributes(layout);
 #if 0
       double x = upnote->pos().x();
       double y = upnote->pos().y();

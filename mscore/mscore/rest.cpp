@@ -236,9 +236,9 @@ void Rest::remove(Element* e)
 //   layout
 //---------------------------------------------------------
 
-void Rest::layout()
+void Rest::layout(ScoreLayout* l)
       {
-      layoutAttributes();
+      layoutAttributes(l);
       }
 
 //---------------------------------------------------------

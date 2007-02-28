@@ -35,6 +35,7 @@ class Measure;
 class Staff;
 class Score;
 class Sym;
+class ScoreLayout;
 
 /**
   The value of this enum determines the "stacking order" the elements are
@@ -196,7 +197,7 @@ class Element {
       virtual void add(Element*)    {}
       virtual void remove(Element*) {}
 
-      virtual void layout() {}
+      virtual void layout(ScoreLayout*) {}
       virtual void resetMode() {}
 
       // debug functions
@@ -214,7 +215,7 @@ class Element {
       virtual int tickLen() const     { return _duration.tick(); }
       virtual void setTickLen(int t)  { _duration.setTick(t); }
       virtual void space(double& min, double& extra) const;
-      QColor color() const            { return _color; }
+      QColor color() const;
       void setColor(const QColor& c)  { _color = c;    }
       static int readType(QDomNode& node);
 
@@ -429,7 +430,7 @@ class KeySig : public Element {
       virtual ElementType type() const { return KEYSIG; }
       virtual bool acceptDrop(const QPointF&, int, const QDomNode&) const;
       virtual void drop(const QPointF&, int, const QDomNode&);
-      virtual void layout();
+      virtual void layout(ScoreLayout*);
       };
 
 //---------------------------------------------------------
@@ -467,7 +468,7 @@ class Volta : public Element {
       virtual Volta* clone() const { return new Volta(*this); }
       virtual ElementType type() const { return VOLTA; }
       virtual void draw(QPainter&);
-      virtual void layout();
+      virtual void layout(ScoreLayout*);
       void setLen(qreal);
       virtual void write(Xml&) const;
       virtual void read(QDomNode);

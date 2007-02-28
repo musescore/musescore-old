@@ -154,11 +154,11 @@ void Trill::setLen(qreal l)
 //   layout
 //---------------------------------------------------------
 
-void Trill::layout()
+void Trill::layout(ScoreLayout* layout)
       {
       if (!parent())
             return;
-      SLine::layout();
+      SLine::layout(layout);
       qreal trillDistance = _spatium * 2.5;
       Measure* measure = (Measure*)parent();
       System* system   = measure->system();

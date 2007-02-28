@@ -538,11 +538,11 @@ void MuseScore::editInstrList()
                   for (int cidx = 0; (ci = pli->child(cidx)); ++cidx) {
                         StaffListItem* sli = (StaffListItem*)ci;
                         if (sli->op == ITEM_DELETE) {
-                              cs->systems()->clear();
+                              cs->mainLayout()->systems()->clear();
                               Staff* staff = sli->staff;
                               int sidx = cs->staff(staff);
                               int eidx = sidx + 1;
-                              for (Measure* m = cs->scoreLayout()->first(); m; m = m->next())
+                              for (Measure* m = cs->mainLayout()->first(); m; m = m->next())
                                     m->cmdRemoveStaves(sidx, eidx);
                               cs->undoOp(UndoOp::RemoveStaff, staff, sidx);
                               cs->removeStaff(staff);
@@ -552,7 +552,7 @@ void MuseScore::editInstrList()
                               sli->staff = staff;
                               staff->clef()->setClef(0, sli->clef());
 
-                              for (Measure* m = cs->scoreLayout()->first(); m; m = m->next())
+                              for (Measure* m = cs->mainLayout()->first(); m; m = m->next())
                                     m->cmdAddStaves(staffIdx, staffIdx+1);
 
                               cs->insertStaff(staff, staffIdx);
@@ -646,7 +646,7 @@ void Score::cmdInsertPart(Part* part, int staffIdx)
 
 void Score::cmdRemovePart(Part* part)
       {
-      systems()->clear();
+      _layout->systems()->clear();  //??
 
       int sidx = staff(part);
       int n    = part->nstaves();
@@ -671,7 +671,7 @@ void Score::cmdRemovePart(Part* part)
 
 void Score::insertPart(Part* part, int idx)
       {
-      systems()->clear();
+      _layout->systems()->clear();  //??
       int staff = 0;
       for (iPart i = _parts->begin(); i != _parts->end(); ++i) {
             if (staff >= idx) {
@@ -689,7 +689,7 @@ void Score::insertPart(Part* part, int idx)
 
 void Score::removePart(Part* part)
       {
-      systems()->clear();
+      _layout->systems()->clear();  //??
       _parts->removeAt(_parts->indexOf(part));
       }
 
@@ -699,7 +699,7 @@ void Score::removePart(Part* part)
 
 void Score::insertStaff(Staff* staff, int idx)
       {
-      systems()->clear();
+      _layout->systems()->clear();  //??
       _staves->insert(idx, staff);
       staff->part()->insertStaff(staff);
       }
@@ -710,7 +710,7 @@ void Score::insertStaff(Staff* staff, int idx)
 
 void Score::removeStaff(Staff* staff)
       {
-      systems()->clear();
+      _layout->systems()->clear();  //??
       _staves->remove(staff);
       staff->part()->removeStaff(staff);
       }
@@ -721,7 +721,7 @@ void Score::removeStaff(Staff* staff)
 
 void Score::sortStaves(QList<int> src, QList<int> dst)
       {
-      systems()->clear();
+      _layout->systems()->clear();  //??
       _parts->clear();
       Part* curPart = 0;
       StaffList* dl = new StaffList;

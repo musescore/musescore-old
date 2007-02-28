@@ -211,7 +211,7 @@ bool SlurSegment::edit(QKeyEvent* ev)
       ups[idx].r.translate(delta * _spatium);
 
       if (mode == 1 || mode == 4) {
-            slur->layout2(apos(), mode, ups[idx]);
+//TODO            slur->layout2(apos(), mode, ups[idx]);
             if (!showRubberBand || (mode != 1 && mode != 4))
                   return true;
             QPointF ppos(apos());
@@ -279,7 +279,7 @@ bool SlurSegment::editDrag(QMatrix& matrix, QPointF*, const QPointF& delta)
       ups[n].off += (delta / _spatium);
 
       if (mode == 1 || mode == 4) {
-            slur->layout2(apos(), mode, ups[n]);
+//TODO            slur->layout2(apos(), mode, ups[n]);
             //
             //  compute bezier help points
             //
@@ -418,7 +418,7 @@ bool SlurSegment::contains(const QPointF& p) const
 //   layout
 //---------------------------------------------------------
 
-void SlurSegment::layout(const QPointF& p1, const QPointF& p2, qreal b)
+void SlurSegment::layout(ScoreLayout*, const QPointF& p1, const QPointF& p2, qreal b)
       {
 // printf("SlurSegment %p %p layout\n", slur, this);
       bow = b;
@@ -822,8 +822,9 @@ void Slur::read(Score* score, QDomNode node)
 //   layout
 //---------------------------------------------------------
 
-void Slur::layout()
+void Slur::layout(ScoreLayout* layout)
       {
+      double _spatium = layout->spatium();
       switch (_slurDirection) {
             case UP:    up = true; break;
             case DOWN:  up = false; break;
@@ -872,7 +873,7 @@ void Slur::layout()
       QPointF p1 = slurPos(_tick1, _staff1, _voice1, s1);
       QPointF p2 = slurPos(_tick2, _staff2, _voice2, s2);
 
-      SystemList* sl = _score->systems();
+      SystemList* sl = layout->systems();
       iSystem is = sl->begin();
       while (is != sl->end()) {
             if (*is == s1)
@@ -912,13 +913,13 @@ void Slur::layout()
 
       qreal bow = up ? 2*-_spatium : 2*_spatium;
       iElement ibss = segments.begin();
-      for (int i = 0; is != _score->systems()->end(); ++i, ++is, ++ibss) {
+      for (int i = 0; is != layout->systems()->end(); ++i, ++is, ++ibss) {
             System* system = *is;
             QPointF sp(system->apos());
             SlurSegment* bs = (SlurSegment*)*ibss;
             // case 1: one segment
             if (s1 == s2) {
-                  bs->layout(p1, p2, bow);
+                  bs->layout(layout, p1, p2, bow);
                   }
             // case 2: start segment
             else if (i == 0) {
@@ -930,7 +931,7 @@ void Slur::layout()
                         bs->setParent(m);
                         m->add(bs);
                         }
-                  bs->layout(p1, QPointF(x, p1.y()), bow);
+                  bs->layout(layout, p1, QPointF(x, p1.y()), bow);
                   }
             // case 3: middle segment
             else if (i != 0 && *is != s2) {
@@ -945,7 +946,7 @@ void Slur::layout()
                   QPointF p = system->apos();
                   qreal x1 = p.x();
                   qreal x2 = x1 + system->bbox().width();
-                  bs->layout(QPointF(x1, p.y()), QPointF(x2, p.y()), bow);
+                  bs->layout(layout, QPointF(x1, p.y()), QPointF(x2, p.y()), bow);
                   }
             // case 4: end segment
             else {
@@ -957,7 +958,7 @@ void Slur::layout()
                         m->add(bs);
                         }
                   qreal x = system->apos().x();
-                  bs->layout(QPointF(x, p2.y()), p2, bow);
+                  bs->layout(layout, QPointF(x, p2.y()), p2, bow);
                   }
             if (*is == s2)
                   break;
@@ -981,8 +982,9 @@ QRectF Slur::bbox() const
 //    snap to next tick positions
 //---------------------------------------------------------
 
-void Slur::layout2(const QPointF ppos, int mode, struct UP& ups)
+void Slur::layout2(ScoreLayout* layout, const QPointF ppos, int mode, struct UP& ups)
       {
+      double _spatium = layout->spatium();
       //
       // compute absolute position of control point on canvas:
       //
@@ -1074,7 +1076,7 @@ void Tie::read(QDomNode node)
 //   layout
 //---------------------------------------------------------
 
-void Tie::layout()
+void Tie::layout(ScoreLayout* layout)
       {
       //
       // TODO: if there is a startNote but no endNote
@@ -1082,6 +1084,7 @@ void Tie::layout()
       if (_startNote == 0 || _endNote == 0)
             return;
 
+      double _spatium = layout->spatium();
       Chord* c1   = _startNote->chord();
       Measure* m1 = c1->measure();
       System* s1  = m1->system();
@@ -1104,8 +1107,8 @@ void Tie::layout()
       QPointF p1 = _startNote->apos() + off1;
       QPointF p2 = _endNote->apos()   + off2;
 
-      iSystem is = _score->systems()->begin();
-      while (is != _score->systems()->end()) {
+      iSystem is = layout->systems()->begin();
+      while (is != layout->systems()->end()) {
             if (*is == s1)
                   break;
             ++is;
@@ -1118,7 +1121,7 @@ void Tie::layout()
       //---------------------------------------------------------
 
       unsigned nsegs = 1;
-      for (iSystem iis = is; (iis != _score->systems()->end()) && (*iis != s2); ++iis)
+      for (iSystem iis = is; (iis != layout->systems()->end()) && (*iis != s2); ++iis)
             ++nsegs;
 
       unsigned onsegs = segments.size();
@@ -1143,7 +1146,7 @@ void Tie::layout()
 
       qreal bow = up ? -_spatium : _spatium;
       iElement ibss = segments1.begin();
-      for (int i = 0; is != _score->systems()->end(); ++i, ++is, ++ibss) {
+      for (int i = 0; is != layout->systems()->end(); ++i, ++is, ++ibss) {
             System* system = *is;
             QPointF sp(system->apos());
             SlurSegment* bs = (SlurSegment*)*ibss;
@@ -1151,17 +1154,17 @@ void Tie::layout()
             bs->setStaff(staff());
             // case 1: one segment
             if (s1 == s2) {
-                  bs->layout(p1, p2, bow);
+                  bs->layout(layout, p1, p2, bow);
                   }
             // case 2: start segment
             else if (i == 0) {
-                  bs->layout(p1, QPointF(p1.x()+2*_spatium, p1.y()), bow);
+                  bs->layout(layout, p1, QPointF(p1.x()+2*_spatium, p1.y()), bow);
                   }
             // case 3: end segment
             else {
                   Measure* m = (*is)->measures()->front();
                   bs->setParent(m);
-                  bs->layout(QPointF(p2.x()-2*_spatium, p2.y()), p2, bow);
+                  bs->layout(layout, QPointF(p2.x()-2*_spatium, p2.y()), p2, bow);
                   }
             segments.push_back(bs);
             bs->parent()->add(bs);  // puts segment also on segments list

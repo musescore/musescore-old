@@ -138,7 +138,6 @@ class Score : public QObject {
       void cmdFlipStemDirection();
       void moveCursor();
       Note* getSelectedNote();
-      Note* searchTieNote(Note* note, Segment* segment, int track);
       void pageNext();
       void pagePrev();
       void pageTop();
@@ -155,6 +154,7 @@ class Score : public QObject {
 
    public:
       bool undoActive;
+
       //---------------------------------------------------
       //    input data for layout():
       //---------------------------------------------------
@@ -210,7 +210,6 @@ class Score : public QObject {
 
       void pageBreak();
       void systemBreak();
-      void textStyleChanged();
 
    signals:
       void selectionChanged(int);
@@ -241,7 +240,6 @@ class Score : public QObject {
 
       void addMeasure(Measure*);
       void removeMeasure(int tick);
-      void setInstrumentNames();
 
       Measure* pos2measure(const QPointF&, int* tick, Staff** staff, int* pitch,
          Segment**, QPointF* offset) const;
@@ -358,7 +356,6 @@ class Score : public QObject {
 
       void changeVoice(int);
       ChordRest* setNoteEntry(bool on, bool step);
-      void connectTies();
 
       Element* paletteObject() const { return _paletteObject; }
       void colorItem(Element*);
@@ -372,8 +369,6 @@ class Score : public QObject {
       void read(QString name);
 
       void setSpatium(double v);
-      double spatium() const     { return _layout->spatium(); }
-
       double mag() const         { return scoreView._mag;     }
       void setMag(double val)    { scoreView._mag = val;      }
       qreal xoffset() const      { return scoreView._xoffset; }
@@ -398,9 +393,7 @@ class Score : public QObject {
       bool undoEmpty() const;
       bool redoEmpty() const;
       PageFormat* pageFormat() const;
-      PageList* pages() const;
-      SystemList* systems() const;
-      ScoreLayout* scoreLayout() const { return _layout; }
+      ScoreLayout* mainLayout() const { return _layout; }
       QString filePath() const    { return info.filePath(); }
       QFileInfo* fileInfo()       { return &info; }
       QString projectName() const { return info.baseName(); }

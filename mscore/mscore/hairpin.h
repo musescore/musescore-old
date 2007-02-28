@@ -38,7 +38,7 @@ class Hairpin : public SLine {
 
       void setLen(double);
       virtual void draw(QPainter&);
-      virtual void layout();
+      virtual void layout(ScoreLayout*);
       virtual void write(Xml& xml) const;
       virtual void read(QDomNode);
       virtual QRectF bbox() const;

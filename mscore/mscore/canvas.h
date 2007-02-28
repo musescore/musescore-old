@@ -51,7 +51,7 @@ class Canvas : public QWidget, public Viewer {
    private:
       Navigator* navigator;
       Score* _score;
-      BspTree bspTree;
+      ScoreLayout* _layout;
 
       int keyState;
       int buttonState;
@@ -113,7 +113,6 @@ class Canvas : public QWidget, public Viewer {
 
       void setShadowNote(const QPointF&);
       void drawElements(QPainter& p,const QList<Element*>& el);
-      ElementList el;
 
    private slots:
       void cursorBlink();
@@ -149,7 +148,7 @@ class Canvas : public QWidget, public Viewer {
       void setState(State);
       State getState() const { return state; }
       bool startEdit(Element*);
-      void setScore(Score* s);
+      void setScore(Score* s, ScoreLayout*);
       Score* score() const    { return _score; }
 
       qreal mag() const;

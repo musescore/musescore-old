@@ -200,9 +200,9 @@ const QString Dynamic::subtypeName() const
 //    override Text()->layout()
 //---------------------------------------------------------
 
-void Dynamic::layout()
+void Dynamic::layout(ScoreLayout* layout)
       {
-      doc->documentLayout()->setPaintDevice(score()->scoreLayout()->paintDevice());
+      doc->documentLayout()->setPaintDevice(layout->paintDevice());
       doc->setUseDesignMetrics(true);
       }
 

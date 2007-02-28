@@ -72,7 +72,7 @@ class SLine : public Element {
       void setTick2(int t) { _tick2 = t; }
       int tick1() const    { return _tick1; }
       int tick2() const    { return _tick2; }
-      virtual void layout();
+      virtual void layout(ScoreLayout*);
       bool readProperties(QDomNode node);
       void writeProperties(Xml& xml) const;
       };

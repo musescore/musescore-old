@@ -1006,21 +1006,9 @@ static void usage(const char* prog, const char*)
 
 void MuseScore::editTextStyle()
       {
-      if (textStyleDialog == 0) {
+      if (textStyleDialog == 0)
             textStyleDialog = new TextStyleDialog(this);
-            connect(textStyleDialog, SIGNAL(textStyleChanged()), SLOT(textStyleChanged()));
-            }
       textStyleDialog->show();
-      }
-
-//---------------------------------------------------------
-//   textStyleChanged
-//---------------------------------------------------------
-
-void MuseScore::textStyleChanged()
-      {
-      if (cs)
-            cs->textStyleChanged();
       }
 
 //---------------------------------------------------------
@@ -1146,13 +1134,13 @@ void MuseScore::setCurrentScore(int idx)
       getAction("redo")->setEnabled(!cs->redoEmpty());
       visibleId->setChecked(cs->showInvisible());
 
-      cs->setSpatium(cs->spatium());
+      cs->setSpatium(cs->mainLayout()->spatium());
       setMag(cs->mag());
       canvas->setXoffset(cs->xoffset());
       canvas->setYoffset(cs->yoffset());
 
       setWindowTitle("MuseScore: " + cs->projectName());
-      canvas->setScore(cs);
+      canvas->setScore(cs, cs->mainLayout());
       seq->setScore(cs);
       if (playPanel)
             playPanel->setScore(cs);
@@ -1297,10 +1285,9 @@ void MuseScore::showPageSettings()
 
 void MuseScore::pageSettingsChanged()
       {
-      cs->pages()->update();
+//TODO      cs->pages()->update();
       setMag(cs->mag());
       cs->layout();
-      cs->textStyleChanged();    // fix text styles (center, right etc.)
       canvas->updateNavigator(true);
       cs->endCmd(false);
       }

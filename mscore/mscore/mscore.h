@@ -246,7 +246,6 @@ class MuseScore : public QMainWindow {
 //      void magChanged(const QString&);
       void showPageSettings();
       void pageSettingsChanged();
-      void textStyleChanged();
       void showInvisibleClicked();
       void closePad();
       void midiinToggled(bool);

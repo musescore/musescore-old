@@ -68,7 +68,10 @@ bool Element::operator>(const Element& el) const
 
 Element::~Element()
       {
-//      printf("delete element\n");
+      if (_selected) {
+            score()->deselect(this);
+            printf("delete selected element\n");
+            }
       }
 
 //---------------------------------------------------------
@@ -116,6 +119,17 @@ int Element::staffIdx() const
       if (_staff)
             return _staff->idx();
       return -1;
+      }
+
+QColor Element::color() const
+      {
+      if (_selected)
+            return  preferences.selectColor[_voice];
+//      if (_dropTarget)
+//            pen.setColor(preferences.dropColor);
+      if (!_visible)
+            return Qt::gray;
+      return _color;
       }
 
 //---------------------------------------------------------
@@ -604,7 +618,7 @@ KeySig::KeySig(Score* s)
 void KeySig::setSubtype(int st)
       {
       Element::setSubtype(st);
-      layout();
+//      layout();
       }
 
 //---------------------------------------------------------
@@ -620,7 +634,7 @@ void KeySig::addLayout(bool flat, double x, double y)
 //   layout
 //---------------------------------------------------------
 
-void KeySig::layout()
+void KeySig::layout(ScoreLayout*)
       {
       double yoff;
       if (staff()) {
@@ -918,10 +932,11 @@ void Volta::setLen(qreal l)
 //   layout
 //---------------------------------------------------------
 
-void Volta::layout()
+void Volta::layout(ScoreLayout* layout)
       {
       if (!parent())
             return;
+      double _spatium = layout->spatium();
       qreal voltaHeight   = _spatium * 1.8;
       qreal voltaDistance = _spatium * .7;
 

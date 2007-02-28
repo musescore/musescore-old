@@ -169,7 +169,7 @@ SysStaff* System::removeStaff(int idx)
  Layout the System.
 */
 
-double System::layout(const QPointF& p, double w)
+double System::layout(ScoreLayout* layout, const QPointF& p, double w)
       {
       static const double instrumentNameOffset = 1;
       setPos(p);
@@ -229,7 +229,7 @@ double System::layout(const QPointF& p, double w)
                         }
                   }
             if (ss->instrumentName && !ss->instrumentName->isEmpty()) {
-                  ss->instrumentName->layout();
+                  ss->instrumentName->layout(layout);
                   double w = ss->instrumentName->width() + instrumentNameOffset * _spatium;
                   if (w > xoff2)
                         xoff2 = w;
@@ -326,7 +326,7 @@ double System::layout(const QPointF& p, double w)
 //    adjusts staff distance
 //---------------------------------------------------------
 
-void System::layout2()
+void System::layout2(ScoreLayout* layout)
       {
 // printf("System::layout2() %f\n", _spatium);
       int staves = score()->nstaves();
@@ -560,7 +560,7 @@ void System::setInstrumentName(int idx)
       SysStaff* staff = _staves[idx];
       if (staff->instrumentName == 0)
             staff->instrumentName = new Text(cs);
-      if (cs->systems() && !cs->systems()->empty() && cs->systems()->front() == this) {
+      if (cs->mainLayout()->systems() && !cs->mainLayout()->systems()->empty() && cs->mainLayout()->systems()->front() == this) {
             staff->instrumentName->setSubtype(TEXT_INSTRUMENT_LONG);
             staff->instrumentName->setDoc(s->longName());
             }
@@ -648,7 +648,7 @@ void System::add(Element* el)
             ss->brackets[level] = b;
             b->staff()->setBracket(level,   b->subtype());
             b->staff()->setBracketSpan(level, b->span());
-            score()->layout();
+//TODO            score()->layout();
             }
       }
 
@@ -669,7 +669,7 @@ void System::remove(Element* el)
                         el->staff()->setBracket(i, NO_BRACKET);
                         // TODO: remove empty bracket levels
 
-                        score()->layout();
+//TODO                        score()->layout();
                         return;
                         }
                   }

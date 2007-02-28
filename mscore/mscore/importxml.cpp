@@ -188,7 +188,7 @@ void Score::importMusicXml(const QString& name)
       setSaved(false);
       MusicXml musicxml(lx.doc());
       musicxml.import(this);
-      connectTies();
+      _layout->connectTies();
       layout();
       }
 
@@ -488,7 +488,7 @@ void MusicXml::xmlPart(QDomNode node, QString id)
       lastMeasureLen = 0;
 
       int staves = score->nstaves();
-      if (!score->scoreLayout()->first()) {
+      if (!score->mainLayout()->first()) {
             Measure* measure  = new Measure(score);
             measure->setTick(tick);
 
@@ -500,7 +500,7 @@ void MusicXml::xmlPart(QDomNode node, QString id)
                         measure->setEndBarLine(bar);
                         }
                   }
-            score->scoreLayout()->push_back(measure);
+            score->mainLayout()->push_back(measure);
             if (!title.isEmpty()) {
                   Text* text = new Text(score);
                   text->setSubtype(TEXT_TITLE);
@@ -575,7 +575,7 @@ void MusicXml::xmlMeasure(Part* part, QDomNode node, int number)
 
       // search measure for tick
       Measure* measure = 0;
-      for (Measure* m = score->scoreLayout()->first(); m; m = m->next()) {
+      for (Measure* m = score->mainLayout()->first(); m; m = m->next()) {
             if (m->tick() == tick) {
                   measure = m;
                   break;
@@ -594,7 +594,7 @@ void MusicXml::xmlMeasure(Part* part, QDomNode node, int number)
                         measure->setEndBarLine(bar);
                         }
                   }
-            score->scoreLayout()->push_back(measure);
+            score->mainLayout()->push_back(measure);
             }
 
       // initialize voice list

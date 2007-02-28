@@ -36,7 +36,7 @@ class LayoutBreak : public Element {
       QPainterPath path;
 
       virtual void draw(QPainter&);
-      virtual void layout();
+      virtual void layout(ScoreLayout*);
 
    public:
       LayoutBreak(Score*);

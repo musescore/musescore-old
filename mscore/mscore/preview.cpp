@@ -43,7 +43,34 @@ PagePreview::PagePreview(QWidget* parent)
 void PagePreview::setScore(Score* s)
       {
       _score = s;
-      _layout = new ScoreLayout(*(_score->scoreLayout()));
+      _layout = new ScoreLayout;
+      ScoreLayout* ol = _score->mainLayout();
+      _layout->setSpatium(ol->spatium());
+      _layout->setPageFormat(*(ol->pageFormat()));
+
+      for (Measure* m = ol->first(); m; m = m->next()) {
+            //
+            // HACK:
+            // create deep copy of Measure
+            //
+            static const char* mimeType = "application/mscore/measure";
+            QMimeData* mimeData = new QMimeData;
+            mimeData->setData(mimeType, m->mimeData());
+
+            Measure* nm = new Measure(_score);
+            QByteArray data(mimeData->data(mimeType));
+// printf("=====\n%s\n=========\n", data.constData());
+            QDomDocument doc;
+            int line, column;
+            QString err;
+            if (!doc.setContent(data, &err, &line, &column)) {
+                  printf("error reading internal data\n");
+                  return;
+                  }
+            QDomNode node = doc.documentElement();
+            nm->read(node);
+            _layout->push_back(nm);
+            }
       _layout->setScore(s);
       setMag();
       _layout->doLayout();
@@ -55,8 +82,11 @@ void PagePreview::setScore(Score* s)
 
 PagePreview::~PagePreview()
       {
-      if (_layout)
+      if (_layout) {
+            for (Measure* m = _layout->first(); m; m = m->next())
+                  delete m;
             delete _layout;
+            }
       }
 
 //---------------------------------------------------------
@@ -114,7 +144,6 @@ void PagePreview::paintEvent(QPaintEvent* ev)
             }
 
       QPainter p(this);
-      p.setClipRect(ev->rect());
       p.setRenderHint(QPainter::Antialiasing, true);
 
       p.fillRect(rr, _fgColor);
@@ -129,6 +158,23 @@ void PagePreview::paintEvent(QPaintEvent* ev)
       r1 -= matrix.mapRect(pbbox).toRect();
       p.translate(page->pos());
       page->draw(p);
+
+      QRectF fr = matrix.inverted().mapRect(QRectF(rr));
+      QList<Element*> ell = _layout->items(fr);
+
+      for (int i = 0; i < ell.size(); ++i) {
+            Element* e = ell.at(i);
+            e->itemDiscovered = 0;
+
+            if (!(e->visible() || _score->showInvisible()))
+                  continue;
+
+            QPointF ap(e->apos());
+            p.translate(ap);
+            p.setPen(QPen(e->color()));
+            e->draw(p);
+            p.translate(-ap);
+            }
 
       p.setMatrixEnabled(false);
       p.setClipRegion(r1);

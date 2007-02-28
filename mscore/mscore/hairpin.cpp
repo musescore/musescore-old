@@ -165,10 +165,10 @@ void Hairpin::draw(QPainter& p)
 //    compute segments from tick1 tick2
 //---------------------------------------------------------
 
-void Hairpin::layout()
+void Hairpin::layout(ScoreLayout* layout)
       {
-      SLine::layout();
-      setPos(0, _spatium * 6);
+      SLine::layout(layout);
+      setPos(0, layout->spatium() * 6);
       }
 
 //---------------------------------------------------------

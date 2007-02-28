@@ -131,7 +131,7 @@ class ChordRest : public Element {
       Tuplet* _tuplet;
       bool _up;
 
-      void layoutAttributes();
+      void layoutAttributes(ScoreLayout*);
 
    public:
       ChordRest(Score*);
@@ -156,7 +156,7 @@ class ChordRest : public Element {
       virtual qreal downPos() const = 0;
       virtual qreal centerX() const = 0;
 
-      virtual void layoutStem()     {}
+      virtual void layoutStem(ScoreLayout*)     {}
       virtual int upLine() const    { return 0;}
       virtual int downLine() const  { return 8;}
       virtual int line(bool up) const { return up ? upLine() : downLine(); }
