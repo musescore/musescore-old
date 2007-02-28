@@ -72,7 +72,8 @@ Element::~Element()
       if (_selected) {
             if (score())
                   score()->deselect(this);
-            printf("delete selected element\n");
+            if (debugMode)
+                  printf("delete selected element\n");
             }
       }
 
