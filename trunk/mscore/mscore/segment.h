@@ -61,7 +61,6 @@ class Segment : public Element {
       static const char* segmentTypeNames[];
 
    private:
-      SegmentType _type;
       QList<Element*> _elist;      ///< Element storage, size = staves * VOICES.
       QList<LyricsList> _lyrics;   ///< Lyrics storage, size = staves.
 
@@ -70,29 +69,24 @@ class Segment : public Element {
    public:
       Segment(Measure*);
       Segment(Measure*, int t);
-      virtual Segment* clone() const { return new Segment(*this); }
-      virtual ElementType type() const { return SEGMENT; }
+      virtual Segment* clone() const    { return new Segment(*this); }
+      virtual ElementType type() const  { return SEGMENT; }
 
-      Segment* next() const    { return (Segment*)Element::next(); }
-      Segment* prev() const    { return (Segment*)Element::prev(); }
+      Segment* next() const             { return (Segment*)Element::next(); }
+      Segment* prev() const             { return (Segment*)Element::prev(); }
       Segment* next1() const;
       Segment* prev1() const;
 
-      Element* element(int track) const             { return _elist[track];    }
+      Element* element(int track) const { return _elist[track];    }
       void removeElement(int track);
       void setElement(int track, Element* el);
       LyricsList* lyricsList(int staffIdx)             { return &_lyrics[staffIdx];  }
       const LyricsList* lyricsList(int staffIdx) const { return &_lyrics[staffIdx];  }
       void setLyrics(int staff, Lyrics* l);
 
-      Measure* measure() const       { return (Measure*)parent(); }
-      double x() const               { return _pos.x();           }
-      void setX(double v)            { _pos.setX(v);              }
-
-      QList<Element*>* elist()       { return &_elist; }
-
-      SegmentType segmentType() const     { return _type; }
-      void setSegmentType(SegmentType t)  { _type = t;    }
+      Measure* measure() const            { return (Measure*)parent(); }
+      double x() const                    { return _pos.x();           }
+      void setX(double v)                 { _pos.setX(v);              }
 
       void insertStaff(int staff);
       void removeStaff(int staff);
@@ -101,9 +95,10 @@ class Segment : public Element {
       virtual void remove(Element*);
 
       void sortStaves(QList<int>& src, QList<int>& dst);
-      const char* name() const { return segmentTypeNames[_type]; }
+      const char* name() const { return segmentTypeNames[subtype()]; }
       static SegmentType segmentType(int type);
       void setTime(int tick);
+      void removeGeneratedElements();
       };
 
 #endif

@@ -265,12 +265,10 @@ void PageListEditor::updateList()
                                                 new ElementItem(sei, chord->hook());
                                           if (chord->stem())
                                                 new ElementItem(sei, chord->stem());
-                                          QList<NoteAttribute*>* al = chord->getAttributes();
-                                          QList<HelpLine*>* hl = chord->getHelpLines();
-                                          for (QList<NoteAttribute*>::iterator i = al->begin(); i != al->end(); ++i)
-                                                new ElementItem(sei, *i);
-                                          for (QList<HelpLine*>::iterator i = hl->begin(); i != hl->end(); ++i)
-                                                new ElementItem(sei, *i);
+                                          foreach(NoteAttribute* a, *chord->getAttributes())
+                                                new ElementItem(sei, a);
+                                          foreach(HelpLine* h, *chord->getHelpLines())
+                                                new ElementItem(sei, h);
                                           NoteList* notes = chord->noteList();
                                           for (iNote in = notes->begin(); in != notes->end(); ++in) {
                                                 Note* note = in->second;
@@ -587,19 +585,18 @@ void ShowChordWidget::setElement(Element* e)
       cb.stemDirection->addItem(tr("Down"), 2);
       cb.stemDirection->setCurrentIndex(int(chord->stemDirection()));
 
-      QList<NoteAttribute*>* al = chord->getAttributes();
-      QList<HelpLine*>* hl = chord->getHelpLines();
-
-      for (QList<NoteAttribute*>::iterator i = al->begin(); i != al->end(); ++i) {
+      cb.attributeList->clear();
+      foreach(NoteAttribute* a, *chord->getAttributes()) {
             QString s;
-            s.setNum(long(*i), 16);
-            QListWidgetItem* item = new QListWidgetItem(s, 0, long(*i));
+            s.setNum(long(a), 16);
+            QListWidgetItem* item = new QListWidgetItem(s, 0, long(a));
             cb.attributeList->addItem(item);
             }
-      for (QList<HelpLine*>::iterator i = hl->begin(); i != hl->end(); ++i) {
+      cb.helplineList->clear();
+      foreach(HelpLine* h, *chord->getHelpLines()) {
             QString s;
-            s.setNum(long(*i), 16);
-            QListWidgetItem* item = new QListWidgetItem(s, 0, long(*i));
+            s.setNum(long(h), 16);
+            QListWidgetItem* item = new QListWidgetItem(s, 0, long(h));
             cb.helplineList->addItem(item);
             }
       }

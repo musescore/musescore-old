@@ -834,7 +834,7 @@ QRectF Canvas::moveCursor()
       if (measure) {
             Segment* segment;
             for (segment = measure->first(); segment; segment = segment->next()) {
-                  if (segment->segmentType() != Segment::SegChordRest)
+                  if (segment->subtype() != Segment::SegChordRest)
                         continue;
                   if (segment->tick() == tick)
                         break;

@@ -459,12 +459,12 @@ Measure* Score::pos2measure(const QPointF& p, int* tick, Staff** rst, int* pitch
                                     QPointF pppp = ppp - m->pos();
                                     int track = (i-1) * VOICES + voice;
                                     for (Segment* segment = m->first(); segment; segment = segment->next()) {
-                                          if (segment->segmentType() != Segment::SegChordRest || (segment->element(track) == 0 && voice == 0)) {
+                                          if (segment->subtype() != Segment::SegChordRest || (segment->element(track) == 0 && voice == 0)) {
                                                 continue;
                                                 }
                                           Segment* ns = segment->next();
                                           for (; ns; ns = ns->next()) {
-                                                if (ns->segmentType() == Segment::SegChordRest && (ns->element(track) || voice))
+                                                if (ns->subtype() == Segment::SegChordRest && (ns->element(track) || voice))
                                                       break;
                                                 }
                                           if (!ns || (pppp.x() < (segment->x() + (ns->x() - segment->x())/2.0))) {
@@ -492,7 +492,7 @@ Measure* Score::pos2measure(const QPointF& p, int* tick, Staff** rst, int* pitch
                               // search for segment + offset
                               QPointF pppp = ppp - m->pos();
                               for (Segment* segment = m->first(); segment; segment = segment->next()) {
-                                    if (segment->segmentType() != Segment::SegChordRest)
+                                    if (segment->subtype() != Segment::SegChordRest)
                                           continue;
                                     bool found = segment->next() == 0;
                                     if (!found) {
@@ -592,13 +592,13 @@ Measure* Score::pos2measure2(const QPointF& p, int* tick, Staff** rst, int* line
                               QPointF pppp = ppp - m->pos();
                               int track = (i-1) * VOICES + voice;
                               for (Segment* segment = m->first(); segment;) {
-                                    if (segment->segmentType() != Segment::SegChordRest || (segment->element(track) == 0 && voice == 0)) {
+                                    if (segment->subtype() != Segment::SegChordRest || (segment->element(track) == 0 && voice == 0)) {
                                           segment = segment->next();
                                           continue;
                                           }
                                     Segment* ns = segment->next();
                                     for (; ns; ns = ns->next()) {
-                                          if (ns->segmentType() == Segment::SegChordRest && (ns->element(track) || voice))
+                                          if (ns->subtype() == Segment::SegChordRest && (ns->element(track) || voice))
                                                 break;
                                           }
                                     if (!ns || (pppp.x() < (segment->x() + (ns->x() - segment->x())/2.0))) {
