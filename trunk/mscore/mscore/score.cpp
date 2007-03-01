@@ -1027,7 +1027,7 @@ void Score::startDrag()
 
 void Score::drag(const QPointF& delta)
       {
-      foreach(Element* e, sel->elements())
+      foreach(Element* e, *sel->elements())
             refresh |= e->drag(delta);
       }
 
