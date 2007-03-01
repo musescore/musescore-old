@@ -682,8 +682,7 @@ void Score::cmdAddPoet()
 void Score::upDown(bool up, bool octave)
       {
       ElementList el;
-      for (int i = 0; i < sel->elements().size(); ++i) {
-            Element* e = sel->elements().at(i);
+      foreach(Element* e, *sel->elements()) {
             if (e->type() != NOTE)
                   continue;
             Note* note = (Note*)e;
@@ -803,7 +802,7 @@ void Score::cmdAppendMeasures(int n)
 
 void Score::addAttribute(int attr)
       {
-      foreach(Element* el, sel->elements()) {
+      foreach(Element* el, *sel->elements()) {
             if (el->type() != NOTE && el->type() != REST)
                   continue;
             addAttribute(el, new NoteAttribute(this, attr));
@@ -820,7 +819,7 @@ void Score::addAttribute(int attr)
 
 void Score::addAccidental(int idx)
       {
-      foreach(Element* el, sel->elements()) {
+      foreach(Element* el, *sel->elements()) {
             if (el->type() == NOTE)
                   addAccidental((Note*)el, idx);
             }
@@ -893,7 +892,7 @@ void Score::toggleInvisible(Element* obj)
 void Score::resetUserOffsets()
       {
       startCmd();
-      QList<Element*> el = sel->elements();
+      QList<Element*> el = *sel->elements();
       for (iElement i = el.begin(); i != el.end(); ++i)
             (*i)->setUserOff(QPointF(0.0, 0.0));
       layout();

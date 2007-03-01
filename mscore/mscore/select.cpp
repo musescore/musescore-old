@@ -172,13 +172,14 @@ void Score::deselect(Element* obj)
 void Score::select(Element* obj, int state, int staff)
       {
 // printf("select element <%s> staff %d\n", obj ? obj->name() : "", obj ? obj->staffIdx() : -1);
-      if (!(state & Qt::ShiftModifier) || !obj)
+      if (!(state & Qt::ShiftModifier) || !obj) {
             refresh |= sel->deselectAll(this);
-      if (!obj) {
-            sel->state   = SEL_NONE;
-            padState.len = 0;
-            emit selectionChanged(int(SEL_NONE));
-            return;
+            if (!obj) {
+                  sel->state   = SEL_NONE;
+                  padState.len = 0;
+                  emit selectionChanged(int(SEL_NONE));
+                  return;
+                  }
             }
 
       if (obj->type() == MEASURE) {
@@ -245,7 +246,7 @@ void Score::select(Element* obj, int state, int staff)
                               if (!e)
                                     continue;
                               e->setSelected(true);
-                              sel->elements().append(e);
+                              sel->elements()->append(e);
                               }
                         }
 //                  for (int st = sbar; st < ebar; ++st) {
@@ -275,7 +276,7 @@ void Score::select(Element* obj, int state, int staff)
 void Canvas::lassoSelect()
       {
       _score->select(0, 0, 0);
-      QRectF lr(lasso->abbox());
+      QRectF lr(lasso->abbox().normalized());
       QList<Element*> el = _layout->items(lr);
       for (int i = 0; i < el.size(); ++i) {
             Element* e = el.at(i);
