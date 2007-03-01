@@ -778,11 +778,16 @@ bool Score::loadMsc(QString name)
 
 void MuseScore::loadInstrumentTemplates()
       {
-      QString instrTemplates = mscoreGlobalShare + "/templates/instruments_" + language.left(2) + ".xml";
+      QString lang(QLocale::system().name().left(2));
+      QString instrTemplates = mscoreGlobalShare + "/templates/instruments_" + lang + ".xml";
       QFileInfo info(instrTemplates);
       if (!info.isReadable()) {
             instrTemplates = mscoreGlobalShare + "/templates/instruments.xml";
             info.setFile(instrTemplates);
+            if (!info.isReadable()) {
+                  instrTemplates = ":/data/instruments.xml";
+                  info.setFile(instrTemplates);
+                  }
             }
       if (!info.isReadable()) {
             fprintf(stderr, "cannot find instrument templates <%s>\n", instrTemplates.toLatin1().data());

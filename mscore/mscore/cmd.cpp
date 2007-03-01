@@ -128,7 +128,7 @@ void Score::cmdRemove(Element* e)
                   for (Measure* m = measure; m; m = m->next()) {
                         bool found = false;
                         for (Segment* segment = m->first(); segment; segment = segment->next()) {
-                              if (segment->segmentType() != Segment::SegClef)
+                              if (segment->subtype() != Segment::SegClef)
                                     continue;
                               //
                               // we assume keySigs are only in first track (voice 0)
@@ -140,8 +140,7 @@ void Score::cmdRemove(Element* e)
                                     continue;
                               if (etick > tick)
                                     break;
-                              undoOp(UndoOp::RemoveElement, e);
-                              (*segment->elist())[track] = 0;
+                              undoRemoveElement(e);
                               m->cmdRemoveEmptySegment(segment);
                               found = true;
                               break;
@@ -184,7 +183,7 @@ void Score::cmdRemove(Element* e)
                   for (Measure* m = measure; m; m = m->next()) {
                         bool found = false;
                         for (Segment* segment = m->first(); segment; segment = segment->next()) {
-                              if (segment->segmentType() != Segment::SegKeySig)
+                              if (segment->subtype() != Segment::SegKeySig)
                                     continue;
                               //
                               // we assume keySigs are only in first track (voice 0)
@@ -196,8 +195,7 @@ void Score::cmdRemove(Element* e)
                                     continue;
                               if (etick > tick)
                                     break;
-                              undoOp(UndoOp::RemoveElement, e);
-                              (*segment->elist())[track] = 0;
+                              undoRemoveElement(e);
                               m->cmdRemoveEmptySegment(segment);
                               found = true;
                               break;
@@ -209,8 +207,7 @@ void Score::cmdRemove(Element* e)
                   break;
 
             default:
-                  removeElement(e);
-                  undoOp(UndoOp::RemoveElement, e);
+                  undoRemoveElement(e);
                   break;
             }
       layout();
@@ -437,7 +434,7 @@ void Score::setNote(int tick, Staff* staff, int voice, int pitch, int len)
                         }
                   if (segment == 0 || segment->tick() != stick) {
                         Segment* newSegment = new Segment(measure, stick);
-                        newSegment->setSegmentType(Segment::SegChordRest);
+                        newSegment->setSubtype(Segment::SegChordRest);
                         measure->insert(newSegment, segment);
                         segment = newSegment;
                         }

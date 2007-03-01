@@ -281,7 +281,7 @@ void Score::removeClef(Clef* clef)
             if ((m->tick()+m->tickLen()) < tick)
                   continue;
             for (Segment* segment = m->first(); segment; segment = segment->next()) {
-                  if (segment->segmentType() != Segment::SegClef)
+                  if (segment->subtype() != Segment::SegClef)
                         continue;
                   int startTrack = staffIdx * VOICES;
                   int endTrack   = startTrack + VOICES;
@@ -328,7 +328,7 @@ Element* Score::addClef(Clef* clef)
             if ((m->tick()+m->tickLen()) < tick)
                   continue;
             for (Segment* segment = m->first(); segment; segment = segment->next()) {
-                  if (segment->segmentType() != Segment::SegClef)
+                  if (segment->subtype() != Segment::SegClef)
                         continue;
                   int startTrack = staffIdx * VOICES;
                   int endTrack   = startTrack + VOICES;
@@ -421,7 +421,7 @@ void Score::changeTimeSig(int tick, int timeSigSubtype)
             Segment* ts = 0;
             for (Measure* m = _layout->first(); m; m = m->next()) {
                   for (Segment* segment = m->first(); segment; segment = segment->next()) {
-                        if (segment->segmentType() != Segment::SegTimeSig)
+                        if (segment->subtype() != Segment::SegTimeSig)
                               continue;
                         int etick = segment->tick();
                         if (etick == tick) {
@@ -466,7 +466,7 @@ void Score::changeTimeSig(int tick, int timeSigSubtype)
       for (Measure* m = _layout->first(); m; m = m->next()) {
 again:
             for (Segment* segment = m->first(); segment; segment = segment->next()) {
-                  if (segment->segmentType() != Segment::SegTimeSig)
+                  if (segment->subtype() != Segment::SegTimeSig)
                         continue;
                   int etick = segment->tick();
                   if (etick >= tick) {
@@ -1024,13 +1024,13 @@ void Score::lyricsTab(bool back)
       // search next chord
       if (back) {
             while ((segment = segment->prev1())) {
-                  if (segment->segmentType() == Segment::SegChordRest)
+                  if (segment->subtype() == Segment::SegChordRest)
                         break;
                   }
             }
       else {
             while ((segment = segment->next1())) {
-                  if (segment->segmentType() == Segment::SegChordRest)
+                  if (segment->subtype() == Segment::SegChordRest)
                         break;
                   }
             }

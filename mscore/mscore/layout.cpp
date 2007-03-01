@@ -233,7 +233,7 @@ void ScoreLayout::processSystemHeader(Measure* m)
 
             for (Segment* seg = m->first(); seg; seg = seg->next()) {
                   // search only up to the first ChordRest
-                  if (seg->segmentType() == Segment::SegChordRest)
+                  if (seg->subtype() == Segment::SegChordRest)
                         break;
                   Element* el = seg->element(strack);
                   if (!el)
@@ -270,23 +270,6 @@ void ScoreLayout::processSystemHeader(Measure* m)
                   cs->setGenerated(true);
                   Segment* s = m->getSegment(cs);
                   s->add(cs);
-                  }
-            }
-      }
-
-//---------------------------------------------------------
-//   clearGenerated
-//    remove generated elements form measure
-//---------------------------------------------------------
-
-void ScoreLayout::clearGenerated(Measure* m)
-      {
-      for (Segment* seg = m->first(); seg; seg = seg->next()) {
-            QList<Element*>* el = seg->elist();
-            for (QList<Element*>::iterator i = el->begin(); i != el->end(); ++i) {
-                  Element* el = *i;
-                  if (el && el->generated())
-                        *i = 0;
                   }
             }
       }
@@ -450,7 +433,9 @@ System* ScoreLayout::layoutSystem(Measure*& im, System* system, qreal x, qreal y
       for (Measure* m = im; m; m = m->next()) {
             pageBreak = m->pageBreak();
 
-            clearGenerated(m);
+            for (Segment* seg = m->first(); seg; seg = seg->next())
+                  seg->removeGeneratedElements();
+
             m->setSystem(system);   // needed by m->layout()
             if (m == im) {
                   //

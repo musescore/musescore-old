@@ -315,7 +315,7 @@ void Staff::changeKeySig(int tick, int st)
       for (Measure* m = measure; m; m = m->next()) {
             bool found = false;
             for (Segment* segment = m->first(); segment; segment = segment->next()) {
-                  if (segment->segmentType() != Segment::SegKeySig)
+                  if (segment->subtype() != Segment::SegKeySig)
                         continue;
                   //
                   // we assume keySigs are only in first track (voice 0)
@@ -329,8 +329,7 @@ void Staff::changeKeySig(int tick, int st)
                         found = true;
                         break;
                         }
-                  _score->undoOp(UndoOp::RemoveElement, e);
-                  (*segment->elist())[track] = 0;
+                  _score->undoRemoveElement(e);
                   m->cmdRemoveEmptySegment(segment);
                   if (etick > tick) {
                         found = true;
@@ -404,7 +403,7 @@ void Staff::changeClef(int tick, int st)
       for (Measure* m = measure; m; m = m->next()) {
             bool found = false;
             for (Segment* segment = m->first(); segment; segment = segment->next()) {
-                  if (segment->segmentType() != Segment::SegClef)
+                  if (segment->subtype() != Segment::SegClef)
                         continue;
                   //
                   // we assume Clefs are only in first track (voice 0)
@@ -418,8 +417,7 @@ void Staff::changeClef(int tick, int st)
                         found = true;
                         break;
                         }
-                  _score->undoOp(UndoOp::RemoveElement, e);
-                  (*segment->elist())[track] = 0;
+                  _score->undoRemoveElement(e);
                   m->cmdRemoveEmptySegment(segment);
                   if (etick > tick) {
                         found = true;

@@ -406,7 +406,7 @@ void Measure::setEndBarLine(BarLine* barLine)
  on context.
 */
 
-void Measure::layoutNoteHeads(ScoreLayout* layout, int staff)
+void Measure::layoutNoteHeads(ScoreLayout*, int staff)
       {
 // printf("Measure::layoutNoteHeads(this=%p staff=%d)\n", this, staff);
       char tversatz[75];
@@ -594,7 +594,7 @@ double Measure::tick2pos(int tck) const
       int tick1 = tick();
       int tick2 = tick1;
       for (s = _first; s; s = s->next()) {
-            if (s->segmentType() != Segment::SegChordRest)
+            if (s->subtype() != Segment::SegChordRest)
                   continue;
             x2 = s->x();
             tick2 = s->tick();
@@ -756,7 +756,7 @@ ChordRest* Measure::findChordRest(int tick, Staff* staff, int voice, bool /*grac
 Segment* Measure::tick2segment(int tick) const
       {
       for (Segment* s = first(); s; s = s->next()) {
-            if ((s->segmentType() == Segment::SegChordRest) && (s->tick() == tick))
+            if ((s->subtype() == Segment::SegChordRest) && (s->tick() == tick))
                   return s;
             }
       return 0;
@@ -773,7 +773,7 @@ Segment* Measure::findSegment(Segment::SegmentType st, int t)
             ;
 
       for (Segment* ss = s; ss && ss->tick() == t; ss = ss->next()) {
-            if (ss->segmentType() == st)
+            if (ss->subtype() == st)
                   return ss;
             }
       return 0;
@@ -786,7 +786,7 @@ Segment* Measure::findSegment(Segment::SegmentType st, int t)
 Segment* Measure::createSegment(Segment::SegmentType st, int t)
       {
       Segment* newSegment = new Segment(this, t);
-      newSegment->setSegmentType(st);
+      newSegment->setSubtype(st);
       return newSegment;
       }
 
@@ -838,14 +838,14 @@ void Measure::add(Element* el)
                   Segment* s;
                   for (s = first(); s && s->tick() < t; s = s->next())
                         ;
-                  Segment::SegmentType st = ((Segment*)el)->segmentType();
+                  int st = el->subtype();
                   if (s) {
                         if (st == Segment::SegChordRest) {
-                              while (s && s->segmentType() != Segment::SegChordRest && s->tick() == t)
+                              while (s && s->subtype() != Segment::SegChordRest && s->tick() == t)
                                     s = s->next();
                               }
                         else {
-                              while (s && s->segmentType() <= st) {
+                              while (s && s->subtype() <= st) {
                                     if (s->next() && s->next()->tick() != t)
                                           break;
                                     s = s->next();
@@ -1305,54 +1305,58 @@ again:
       //    xpos[segs+2]   - start of next measure (width of current measure)
       //-----------------------------------------------------------------------
 
-      Space spaces[segs+2][tracks + nstaves]; // dont forget lyrics
-      double xpos[segs+3], ypos[tracks], width[segs+2];
+      Space spaces[segs+2][nstaves];
+      double xpos[segs+3];
+      double ypos[tracks];
+      double width[segs+2];
 
       int seg = 1;
-      bool notesSeg = first()->segmentType() == Segment::SegChordRest;
+      bool notesSeg = first()->subtype() == Segment::SegChordRest;
       bool firstNoteRest = true;
       for (const Segment* s = first(); s; s = s->next(), ++seg) {
             //
             // add extra space between clef/key/timesig and first notes
             //
-            double additionalMin = 0.0;
+            double additionalMin   = 0.0;
             double additionalExtra = 0.0;
-            if (!notesSeg && s->next() && s->next()->segmentType() == Segment::SegChordRest) {
+            if (!notesSeg && s->next() && s->next()->subtype() == Segment::SegChordRest) {
                   additionalMin = point(::style->clefKeyRightMargin);
                   notesSeg = true;
                   }
-            if (s->segmentType() == Segment::SegChordRest) {
+            if (s->subtype() == Segment::SegChordRest) {
                   if (firstNoteRest) {
                         firstNoteRest = false;
                         }
                   else
                         additionalExtra = point(::style->minNoteDistance);
                   }
-            else if (s->segmentType() == Segment::SegClef)
+            else if (s->subtype() == Segment::SegClef)
                   additionalExtra = point(::style->clefLeftMargin);
-            else if (s->segmentType() == Segment::SegTimeSig)
+            else if (s->subtype() == Segment::SegTimeSig)
                   additionalExtra = point(::style->timesigLeftMargin);
-            else if (s->segmentType() == Segment::SegKeySig)
+            else if (s->subtype() == Segment::SegKeySig)
                   additionalExtra = point(::style->keysigLeftMargin);
 
-            for (int track = 0; track < tracks; ++track) {
-                  Element* el = s->element(track);
-if (el)
-      el->layout(layout);
-                  Staff* staff = score()->staff(track/VOICES);
-                  bool valid = el && staff->show();
-                  spaces[seg][track].setValid(valid);
-                  if (valid) {
-                        double min, extra;
-                        el->space(min, extra);
-                        spaces[seg][track].setMin(min + additionalMin);
-                        spaces[seg][track].setExtra(extra + additionalExtra);
+            for (int staffIdx = 0; staffIdx < nstaves; ++staffIdx) {
+                  double min = 0.0, extra = 0.0;
+                  Staff* staff = score()->staff(staffIdx);
+                  spaces[seg][staffIdx].setValid(false);
+                  if (!staff->show())
+                        continue;
+                  for (int voice = 0; voice < VOICES; ++voice) {
+                        Element* el  = s->element(staffIdx * VOICES + voice);
+                        if (!el)
+                              continue;
+                        spaces[seg][staffIdx].setValid(true);
+                        el->layout(layout);
+                        double min1, extra1;
+                        el->space(min1, extra1);
+                        if (min1 > min)
+                              min = min1;
+                        if (extra1 > extra)
+                              extra = extra1;
                         }
-                  }
-            for (int i = 0; i < nstaves; ++i) {
-                  const LyricsList* ll = s->lyricsList(i);
-                  double min = 0;
-                  double extra = 0;
+                  const LyricsList* ll = s->lyricsList(staffIdx);
                   for (ciLyrics l = ll->begin(); l != ll->end(); ++l) {
                         if (!*l)
                               continue;
@@ -1361,15 +1365,15 @@ if (el)
                               min = lw;
                         if (lw > extra)
                               extra = lw;
+                        spaces[seg][staffIdx].setValid(true);
                         }
-                  spaces[seg][tracks+i].setMin(min);
-                  spaces[seg][tracks+i].setExtra(extra);
-                  spaces[seg][tracks+i].setValid(!ll->empty());
+                  spaces[seg][staffIdx].setMin(min + additionalMin);
+                  spaces[seg][staffIdx].setExtra(extra + additionalExtra);
                   }
             }
-      for (int track = 0; track < tracks; ++track) {
+      for (int staffIdx = 0; staffIdx < nstaves; ++staffIdx) {
             Spatium lMargin;
-            switch(first()->segmentType()) {
+            switch(first()->subtype()) {
                   case Segment::SegClef:
                         lMargin = ::style->clefLeftMargin;
                         break;
@@ -1386,32 +1390,30 @@ if (el)
                         lMargin = Spatium(0);
                         break;
                   }
-            spaces[0][track].setMin(point(lMargin));
-            spaces[0][track].setExtra(0.0);
-            spaces[0][track].setValid(true);
-            spaces[segs+1][track].setExtra(point(::style->noteBarDistance));
+            spaces[0][staffIdx].setMin(point(lMargin));
+            spaces[0][staffIdx].setExtra(0.0);
+            spaces[0][staffIdx].setValid(true);
             double w;
-            BarLine* barLine = staves[track/VOICES].endBarLine;
+            BarLine* barLine = staves[staffIdx].endBarLine;
             if (barLine)
                   w = barLine->width();
             else
                   w = 0.0;
-            spaces[segs+1][track].setMin(w);
-            spaces[segs+1][track].setValid(true);
-            }
-      for (int track = tracks; track < tracks+nstaves; ++track) {
-            spaces[0][track].setValid(false);
-            spaces[segs+1][track].setValid(false);
+            spaces[segs+1][staffIdx].setExtra(point(::style->noteBarDistance));
+            spaces[segs+1][staffIdx].setMin(w);
+            spaces[segs+1][staffIdx].setValid(true);
             }
 
+// #define DEBUG 13
+
 #ifdef DEBUG
-      printf("1======== \n");
-      for (int track = 0; track < tracks+nstaves; ++track) {
+      printf("Measure %d:1======== \n", _no);
+      for (int staffIdx = 0; staffIdx < nstaves; ++staffIdx) {
             for (int seg = 0; seg < segs+2; ++seg) {
-                  if (spaces[seg][track].valid())
-                        printf("%3.1f+%3.1f ", spaces[seg][track].min(), spaces[seg][track].extra());
+                  if (spaces[seg][staffIdx].valid())
+                        printf("%3.1f+%3.1f ", spaces[seg][staffIdx].min(), spaces[seg][staffIdx].extra());
                   else
-                        printf("     -     ");
+                        printf("    -    ");
                   }
             printf("          \n");
             }
@@ -1421,28 +1423,28 @@ if (el)
       //    move extra space to previous cells
       //---------------------------------------------------
 
-      for (int staff = 0; staff < tracks+nstaves; ++staff) {
-            for (int seg = segs+1; seg > 0; --seg) {    // seg 0 kann keinen Platz mehr verschieben
-                  double extra = spaces[seg][staff].extra();
+      for (int staffIdx = 0; staffIdx < nstaves; ++staffIdx) {
+            for (int seg = segs+1; seg > 0; --seg) {    // seg 0 cannot move any space
+                  double extra = spaces[seg][staffIdx].extra();
                   if (extra < 0.00001)
                         continue;
-                  // extra Platz auf vorheriges nichtleeres Segment verschieben
+                  // move extra space to previous non empty Segment
                   int tseg;
                   for (tseg = seg-1; tseg >= 0; --tseg) {
-                        if (spaces[tseg][staff].valid())
+                        if (spaces[tseg][staffIdx].valid())
                               break;
                         }
                   if (tseg == 0) {
-                        if (spaces[tseg][staff].min() < extra)
-                              spaces[tseg][staff].setMin(extra);
+                        if (spaces[tseg][staffIdx].min() < extra)
+                              spaces[tseg][staffIdx].setMin(extra);
                         }
                   else
-                        spaces[tseg][staff].addMin(extra);
+                        spaces[tseg][staffIdx].addMin(extra);
                   }
             }
 #ifdef DEBUG
-      printf("2======== ");
-      for (int staff = 0; staff < tracks+nstaves; ++staff) {
+      printf("after move space:\n");
+      for (int staff = 0; staff < nstaves; ++staff) {
             for (int seg = 0; seg < segs+2; ++seg) {
                   if (spaces[seg][staff].valid())
                         printf("%3.1f+%3.1f ", spaces[seg][staff].min(), spaces[seg][staff].extra());
@@ -1458,29 +1460,31 @@ if (el)
 
       for (int seg = segs+1; seg >= 0; --seg) {
             double ww = 0.0;
-            for (int staff = 0; staff < tracks+nstaves; ++staff) {
-                  if (spaces[seg][staff].valid()) {
-                        double w = spaces[seg][staff].min();
-                        for (int nseg = seg+1; nseg < segs+2; ++nseg) {
-                              if (spaces[nseg][staff].valid())
-                                    break;
-                              w -= width[nseg];
-                              if (w < 0.0)
-                                    break;
-                              }
-                        if (w > ww)
-                              ww = w;
+            for (int staffIdx = 0; staffIdx < nstaves; ++staffIdx) {
+                  if (!spaces[seg][staffIdx].valid())
+                        continue;
+                  double w = spaces[seg][staffIdx].min();
+                  for (int nseg = seg+1; nseg < segs+2; ++nseg) {
+                        if (spaces[nseg][staffIdx].valid())
+                              break;
+                        w -= width[nseg];
+                        if (w < 0.0)
+                              break;
                         }
+                  if (w > ww)
+                        ww = w;
                   }
             width[seg] = ww;
             }
 
 #ifdef DEBUG
-      printf("3width:===");
+      printf("Measure %d: segment width\n   ", _no);
       for (int i = 0; i < segs+2; ++i)
             printf("%3.1f   ", width[i]);
       printf("\n");
 #endif
+#undef DEBUG
+
       //---------------------------------------------------
       //    segments with equal duration should have
       //    equal width
@@ -1494,11 +1498,11 @@ if (el)
       int ntick     = tick() + tickLen();   // position of next measure
       int i         = 1;
       for (Segment* seg = first(); seg; seg = seg->next(), ++i) {
-            if (seg->segmentType() == Segment::SegChordRest) {
+            if (seg->subtype() == Segment::SegChordRest) {
                   Segment* nseg = seg;
                   for (;;) {
                         nseg = nseg->next();
-                        if (nseg == 0 || nseg->segmentType() == Segment::SegChordRest)
+                        if (nseg == 0 || nseg->subtype() == Segment::SegChordRest)
                               break;
                         }
                   int nticks = (nseg ? nseg->tick() : ntick) - seg->tick();
@@ -1515,10 +1519,12 @@ if (el)
                   }
             }
 #ifdef DEBUG
-      printf("ticks:    ");
-      for (int i = 0; i < segs+2; ++i)
-            printf("%d ", ticks[i]);
-      printf("\n");
+      if (_no == DEBUG) {
+            printf("ticks:    ");
+            for (int i = 0; i < segs+2; ++i)
+                  printf("%d ", ticks[i]);
+            printf("\n");
+            }
 #endif
 
       // compute stretches:
@@ -1547,10 +1553,12 @@ if (el)
             springs.insert(std::pair<double, Spring>(d, Spring(i, stretchList[i], width[i])));
             }
 #ifdef DEBUG
-      printf("stretch:    ");
-      for (int i = 0; i < segs+2; ++i)
-            printf("%3.1f ", stretchList[i]);
-      printf("\n");
+      if (_no == DEBUG) {
+            printf("stretch:    ");
+            for (int i = 0; i < segs+2; ++i)
+                  printf("%3.1f ", stretchList[i]);
+            printf("\n");
+            }
 #endif
 
       //---------------------------------------------------
@@ -1570,10 +1578,12 @@ if (el)
             xpos[seg+1] = xpos[seg] + width[seg];
 
 #ifdef DEBUG
-      printf("a.stretch ");
-      for (int seg = 0; seg < segs+2; ++seg)
-            printf("%3.1f(%3.1f) ", xpos[seg], width[seg]);
-      printf("\n");
+      if (_no == DEBUG) {
+            printf("a.stretch ");
+            for (int seg = 0; seg < segs+2; ++seg)
+                  printf("%3.1f(%3.1f) ", xpos[seg], width[seg]);
+            printf("\n");
+            }
 #endif
 
       //---------------------------------------------------
@@ -1608,7 +1618,7 @@ if (el)
                               // center whole rest
                               int idx = 0;
                               for (Segment* s = _first; s; s = s->next(), ++idx) {
-                                    if (s->segmentType() == Segment::SegChordRest)
+                                    if (s->subtype() == Segment::SegChordRest)
                                           break;
                                     }
                               double o = xpos[idx+1];
@@ -1635,7 +1645,7 @@ if (el)
                               }
                         }
                   else {
-                        double xo = spaces[seg][staff].extra();
+                        double xo = spaces[seg][staff/VOICES].extra();
                         if (t == CLEF)
                               e->setPos(-e->bbox().x() - xo + point(::style->clefLeftMargin), y);
                         else if (t == TIMESIG)
@@ -1857,7 +1867,7 @@ bool Measure::acceptDrop(const QPointF& p, int type, const QDomNode&) const
                         return false;
                   // search segment list backwards for segchordrest
                   for (Segment* seg = _last; seg; seg = seg->prev()) {
-                        if (seg->segmentType() != Segment::SegChordRest)
+                        if (seg->subtype() != Segment::SegChordRest)
                               continue;
                         // SegChordRest found, check if it contains anything in this staff
                         for (int track = idx * VOICES; track < idx * VOICES + VOICES; ++track)
@@ -1875,7 +1885,7 @@ bool Measure::acceptDrop(const QPointF& p, int type, const QDomNode&) const
                   if (mrpy < t || mrpy > b)
                         return false;
                   for (Segment* seg = _first; seg; seg = seg->next())
-                        if (seg->segmentType() == Segment::SegChordRest)
+                        if (seg->subtype() == Segment::SegChordRest)
                               return (mrpx < seg->pos().x());
                   // fall through if no chordrest segment found
             default:
@@ -2028,7 +2038,7 @@ void Measure::drop(const QPointF& p, int type, const QDomNode& node)
                               continue;
                         if (subtype == START_REPEAT) {
                               for (Segment* s = _first; s != _last; s = s->next()) {
-                                    if (s->segmentType() == Segment::SegBarLine) {
+                                    if (s->subtype() == Segment::SegBarLine) {
                                           Element* e = s->element(i * VOICES);
                                           if (e && e->type() == BAR_LINE && e->subtype() == START_REPEAT) {
                                                 // BarLine already there,
@@ -2065,7 +2075,7 @@ void Measure::drop(const QPointF& p, int type, const QDomNode& node)
                               Measure* m = system()->nextMeasure(this);
                               if (m && m->startRepeat()) {
                                     for (Segment* s = m->first(); s != m->last(); s = s->next()) {
-                                          if (s->segmentType() == Segment::SegBarLine) {
+                                          if (s->subtype() == Segment::SegBarLine) {
                                                 Element* e = s->element(i * VOICES);
                                                 if (e && e->type() == BAR_LINE && e->subtype() == START_REPEAT) {
                                                       score()->cmdRemove(e);
@@ -2185,7 +2195,7 @@ void Measure::adjustToLen(int, int nl)
       int staves = score()->nstaves();
 
       for (Segment* s = first(); s;) {
-            if (s->segmentType() == Segment::SegChordRest) {
+            if (s->subtype() == Segment::SegChordRest) {
                   crs = s;
                   Segment* ns = s->next();
                   if (ns)

@@ -53,7 +53,6 @@ QTextStream eout(stderr);
 
 PadState padState;
 QString mscoreGlobalShare;
-QString language;
 
 static unsigned int startMag = 3;   // 100%, synchronize with canvas default
 

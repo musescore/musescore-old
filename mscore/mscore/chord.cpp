@@ -755,7 +755,7 @@ void Chord::space(double& min, double& extra) const
       double hw     = 0.0;
 
       for (ciNote i = notes.begin(); i != notes.end(); ++i) {
-            Note* note  = i->second;
+            Note* note = i->second;
             double lhw = note->headWidth();
             if (lhw > hw)
                   hw = lhw;
@@ -765,7 +765,7 @@ void Chord::space(double& min, double& extra) const
                   if (_grace)
                        prefixWidth += point(::style->prefixNoteDistance)/2.0;
                   else
-                       prefixWidth += 2.0 * point(::style->prefixNoteDistance);
+                       prefixWidth += point(::style->prefixNoteDistance);
                   if (prefixWidth > extra)
                         extra = prefixWidth;
                   }
