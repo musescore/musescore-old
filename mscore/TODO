@@ -1,17 +1,9 @@
-Todo:
-
-Bugs:
-      - rubber band selection (shift+drag)
-            - does not select text properly
-            - does not select bar lines at all
-
 Features:
       - dotted rests
       - akkumulated empty measures
       - "Faulenzer Zeichen" (repeat symbols)
       + tuplets
       - rehearsal marks
-      + system brackets
       + trill lines
       + ottava lines
             - shift pitch of bracketed notes while play

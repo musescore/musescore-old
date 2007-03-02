@@ -1857,6 +1857,11 @@ void MuseScore::clipboardChanged()
       const QMimeData* ms = QApplication::clipboard()->mimeData();
       if (ms == 0)
             return;
+      QStringList formats = ms->formats();
+//      printf("Formats:\n");
+//      foreach(QString s, formats)
+//            printf("format <%s>\n", s.toLatin1().data());
+
       bool flag = ms->hasFormat("application/mscore/symbol")
             ||    ms->hasFormat("application/mscore/staff")
             ||    ms->hasFormat("application/mscore/system")

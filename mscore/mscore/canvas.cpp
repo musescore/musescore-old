@@ -182,38 +182,13 @@ void Canvas::objectPopup(const QPoint& pos, Element* obj)
       a = popup->exec(pos);
       if (a == 0)
             return;
-      _score->startCmd();
       QString cmd(a->data().toString());
-      if (cmd == "cut") {
-            QMimeData* mimeData = new QMimeData;
-            mimeData->setData("application/mscore/symbol", obj->mimeData());
-            QApplication::clipboard()->setMimeData(mimeData);
-            _score->deleteItem(obj);
+      if (cmd == "cut" || cmd =="copy" || cmd == "paste") {
+            // these actions are already activated
+            return;
             }
-      else if (cmd == "copy") {
-            QMimeData* mimeData = new QMimeData;
-            mimeData->setData("application/mscore/symbol", obj->mimeData());
-            QApplication::clipboard()->setMimeData(mimeData);
-            }
-      else if (cmd == "paste") {
-            const QMimeData* ms = QApplication::clipboard()->mimeData();
-            if (ms && ms->hasFormat("application/mscore/symbol")) {
-                  QByteArray data(ms->data("application/mscore/symbol"));
-                  QDomDocument doc;
-                  int line, column;
-                  QString err;
-                  if (!doc.setContent(data, &err, &line, &column)) {
-                        printf("error reading paste data\n");
-                        return;
-                        }
-                  QDomNode node = doc.documentElement();
-                  int type      = Element::readType(node);
-                  _score->addRefresh(obj->abbox());   // layout() ?!
-                  obj->drop(pos, type, node);
-                  _score->addRefresh(obj->abbox());
-                  }
-            }
-      else if (cmd == "props")
+      _score->startCmd();
+      if (cmd == "props")
             mscore->showElementContext(obj);
       else if (cmd == "invisible")
             _score->toggleInvisible(obj);

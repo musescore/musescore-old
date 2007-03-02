@@ -48,6 +48,7 @@
 #include "mscore.h"
 #include "tuplet.h"
 #include "padids.h"
+#include "xml.h"
 
 //---------------------------------------------------------
 //   start
@@ -1298,14 +1299,20 @@ void Score::cmd(const QString& cmd)
                         sel->element()->drop(QPointF(), type, node);
                         addRefresh(sel->element()->abbox());
                         }
-                  else if (sel->state == SEL_STAFF && ms && ms->hasFormat("application/mscore/staff")) {
-                        printf("paste staff\n");
-                        }
+                  else if (sel->state == SEL_STAFF && ms && ms->hasFormat("application/mscore/staff"))
+                        pasteStaff(ms);
                   else if (sel->state == SEL_SYSTEM && ms && ms->hasFormat("application/mscore/system")) {
                         printf("paste system\n");
                         }
-                  else
-                        printf("paste not supported: sel state %d\n", sel->state);
+                  else {
+                        printf("paste not supported: sel state %d ms %p\n", sel->state, ms);
+                        if (ms) {
+                              QStringList formats = ms->formats();
+                              printf("Formate:\n");
+                              foreach(QString s, formats)
+                                    printf("format <%s>\n", s.toLatin1().data());
+                              }
+                        }
                   }
             else if (cmd == "lyrics")
                   addLyrics();
@@ -1319,6 +1326,49 @@ void Score::cmd(const QString& cmd)
                   addMetronome();
 
             endCmd(true);
+            }
+      }
+
+//---------------------------------------------------------
+//   pasteStaff
+//---------------------------------------------------------
+
+void Score::pasteStaff(const QMimeData* ms)
+      {
+      printf("paste staff\n");
+
+      QByteArray data(ms->data("application/mscore/staff"));
+      QDomDocument doc;
+      int line, column;
+      QString err;
+      if (!doc.setContent(data, &err, &line, &column)) {
+            printf("error reading paste data\n");
+            return;
+            }
+      for (QDomNode node = doc.documentElement(); !node.isNull(); node = node.nextSibling()) {
+            QDomElement e = node.toElement();
+            if (e.isNull())
+                  continue;
+            if (e.tagName() == "Staff") {
+                  int staffIdx = e.attribute("id", "0").toInt();
+                  printf("  staff %d\n", staffIdx);
+                  for (QDomNode n = node.firstChild(); !n.isNull(); n = n.nextSibling()) {
+                        e = n.toElement();
+                        if (e.isNull())
+                              continue;
+                        if (e.tagName() == "Measure") {
+                              // TODO:
+                              // find Measure
+                              // clear staff in Measure
+                              // read Staff
+                              printf("    measure\n");
+                              }
+                        else
+                              domError(e);
+                        }
+                  }
+            else
+                  domError(e);
             }
       }
 

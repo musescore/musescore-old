@@ -309,9 +309,6 @@ void Measure::remove(Segment* el)
             _last->setNext(0);
             return;
             }
-// printf("remove Segment %p  _first %p _last %p prev %p next %p\n",
-//   this, _first, _last, el->prev(), el->next());
-
       el->prev()->setNext(el->next());
       el->next()->setPrev(el->prev());
       }
@@ -381,8 +378,8 @@ void Measure::moveAll(double x, double y)
                         (*il)->move(x, y);
                   }
             }
-      for (ciBeam i = _beamList.begin(); i != _beamList.end(); ++i)
-            (*i)->move(x, y);
+      foreach(Beam* beam, _beamList)
+            beam->move(x, y);
       foreach(Tuplet* t, _tuplets)
             t->move(x, y);
       }
@@ -562,22 +559,9 @@ void Measure::layout(ScoreLayout* layout, double width)
                   }
             }
 
-      //---------------------------------------------------
-      //    layout beams and tuplets
-      //---------------------------------------------------
-
-      layoutBeams(layout);
       foreach(Tuplet* tuplet, _tuplets)
             tuplet->layout(layout);
 
-#if 0  // adjust topDistance, bottomDistance
-      for (iBeam ib = _beamList.begin(); ib != _beamList.end(); ++ib) {
-            Beam* b = *ib;
-
-            double y1 = b->bbox().y();
-            double y2 = y1 + b->bbox().height();
-            }
-#endif
       if (_noText)
             _noText->layout(layout);
       }
@@ -700,6 +684,7 @@ void Measure::layout2(ScoreLayout* layout)
                         }
                   }
             }
+      layoutBeams(layout);
       }
 
 //---------------------------------------------------------
@@ -1160,7 +1145,12 @@ void Measure::moveY(int staff, double dy)
                   barLine->setHeight(point(barLineLen));
                   }
             }
-      _noText->move(0, dy);
+      foreach(Beam* beam, _beamList)
+            beam->move(0, dy);
+      foreach(Tuplet* tuplet, _tuplets)
+            tuplet->move(0, dy);
+      if (_noText)
+            _noText->move(0, dy);
       }
 
 //---------------------------------------------------------
@@ -1404,7 +1394,7 @@ again:
             spaces[segs+1][staffIdx].setValid(true);
             }
 
-// #define DEBUG 13
+// #define DEBUG
 
 #ifdef DEBUG
       printf("Measure %d:1======== \n", _no);
@@ -1483,7 +1473,6 @@ again:
             printf("%3.1f   ", width[i]);
       printf("\n");
 #endif
-#undef DEBUG
 
       //---------------------------------------------------
       //    segments with equal duration should have
@@ -1677,7 +1666,6 @@ void Measure::removeStaves(int sStaff, int eStaff)
       {
       for (Segment* s = _first; s; s = s->next()) {
             for (int staff = eStaff-1; staff >= sStaff; --staff) {
-//                  _score->undoOp(UndoOp::RemoveSegStaff, s, staff);
                   s->removeStaff(staff);
                   }
             }
@@ -1692,7 +1680,6 @@ void Measure::insertStaves(int sStaff, int eStaff)
       for (Segment* s = _first; s; s = s->next()) {
             for (int staff = sStaff; staff < eStaff; ++staff) {
                   s->insertStaff(staff);
-//                  _score->undoOp(UndoOp::InsertSegStaff, s, staff);
                   }
             }
       }
@@ -1908,12 +1895,10 @@ void Measure::drop(const QPointF& p, int type, const QDomNode& node)
       int idx = s->y2staff(p.y());
       if (idx == -1)
             return;
-//      SysStaff* ss = s->staff(idx);
       Staff* staff = score()->staff(idx);
 
       // convert p from canvas to measure relative position and take x coordinate
       QPointF mrp = p - pos() - system()->pos() - system()->page()->pos();
-//      double mrpx = mrp.x();
 
       switch(ElementType(type)) {
             case BRACKET:

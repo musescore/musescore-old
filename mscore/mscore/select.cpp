@@ -432,7 +432,7 @@ QByteArray Selection::staffMimeData() const
             for (Measure* m = _score->mainLayout()->first(); m; m = m->next()) {
                   int ms = m->tick();
                   int me = ms + m->tickLen();
-                  if (me < tickStart)
+                  if (me <= tickStart)
                         continue;
                   if (ms >= tickEnd)
                         break;
@@ -443,3 +443,4 @@ QByteArray Selection::staffMimeData() const
       buffer.close();
       return buffer.buffer();
       }
+
