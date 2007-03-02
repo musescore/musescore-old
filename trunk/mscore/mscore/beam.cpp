@@ -110,8 +110,8 @@ void Beam::move(double x, double y)
 
 void Measure::layoutBeams(ScoreLayout* layout)
       {
-      for (iBeam i = _beamList.begin(); i != _beamList.end(); ++i)
-            delete *i;
+      foreach(Beam* beam, _beamList)
+            delete beam;
       _beamList.clear();
 
       int tracks = _score->nstaves() * VOICES;

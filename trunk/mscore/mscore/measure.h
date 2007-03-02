@@ -41,15 +41,6 @@ class Text;
 class ChordRest;
 class Score;
 
-typedef QList<Beam*>::iterator iBeam;
-typedef QList<Beam*>::const_iterator ciBeam;
-
-typedef QList<Beam*> BeamList;
-typedef BeamList::iterator iBeam;
-typedef BeamList::const_iterator ciBeam;
-
-typedef QList<Tuplet*> TupletList;
-
 //---------------------------------------------------------
 //   MeasureWidth
 //---------------------------------------------------------
@@ -109,8 +100,8 @@ class Measure : public Element {
       int _ending;
 
       MStaffList  staves;
-      BeamList    _beamList;
-      TupletList  _tuplets;
+      QList<Beam*>    _beamList;
+      QList<Tuplet*>  _tuplets;
       ElementList _pel;       ///< Page relative elements (i.e. text)
       ElementList _sel;       ///< Measure(/tick) relative elements: with defined start time
                               ///< but outside the staff
@@ -148,8 +139,8 @@ class Measure : public Element {
       virtual void propertyAction(const QString&);
 
       MStaffList* staffList()          { return &staves;      }
-      BeamList*   beamList()           { return &_beamList;   }
-      TupletList* tuplets()            { return &_tuplets;    }
+      QList<Beam*>* beamList()         { return &_beamList;   }
+      QList<Tuplet*>* tuplets()        { return &_tuplets;    }
 
       ElementList* pel()               { return &_pel;        }
       const ElementList* pel() const   { return &_pel;        }
@@ -158,7 +149,7 @@ class Measure : public Element {
       bool   irregular() const         { return _irregular;   }
       void   setIrregular(bool val)    { _irregular = val;    }
       int    noOffset() const          { return _noOffset;    }
-      Text* noText() const            { return _noText;      }
+      Text* noText() const             { return _noText;      }
       void   setNoText(const QString& s);
       void   setNo(int n)              { _no = n;             }
       void   setNoOffset(int n)        { _noOffset = n;       }

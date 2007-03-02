@@ -282,11 +282,9 @@ void PageListEditor::updateList()
                                           }
                                     }
                               }
-      			BeamList* bl = measure->beamList();
-                        for (iBeam ibl = bl->begin(); ibl != bl->end(); ++ibl) {
-					new ElementItem(mi, *ibl);
-                              }
-                        foreach(Tuplet* tuplet, *(measure->tuplets())) {
+                        foreach(Beam* beam, *measure->beamList())
+					new ElementItem(mi, beam);
+                        foreach(Tuplet* tuplet, *measure->tuplets()) {
 					ElementItem* item = new ElementItem(mi, tuplet);
                               if (tuplet->number())
                                     new ElementItem(item, tuplet->number());
@@ -1122,7 +1120,7 @@ void ShowElementBase::setElement(Element* e)
       {
       el = e;
 
-      eb.address->setText(QString("%1").arg((unsigned int)e, 0, 16));
+      eb.address->setText(QString("%1").arg((unsigned long)e, 0, 16));
 
       eb.subtype->setValue(e->subtype());
       eb.selected->setChecked(e->selected());
@@ -1270,7 +1268,7 @@ void SlurView::setElement(Element* e)
       ElementList* el = slur->elements();
       foreach(const Element* e, *el) {
             QTreeWidgetItem* item = new QTreeWidgetItem;
-            item->setText(0, QString("%1").arg((unsigned)e, 8, 16));
+            item->setText(0, QString("%1").arg((unsigned long)e, 8, 16));
 item->setText(1, "klops");
             item->setData(0, Qt::UserRole, QVariant::fromValue<void*>((void*)e));
             st.segments->addTopLevelItem(item);
@@ -1316,7 +1314,7 @@ void TieView::setElement(Element* e)
       ElementList* el = tie->elements();
       foreach(const Element* e, *el) {
             QTreeWidgetItem* item = new QTreeWidgetItem;
-            item->setText(0, QString("%1").arg((unsigned)e, 8, 16));
+            item->setText(0, QString("%1").arg((unsigned long)e, 8, 16));
 item->setText(1, "klops");
             item->setData(0, Qt::UserRole, QVariant::fromValue<void*>((void*)e));
             st.segments->addTopLevelItem(item);

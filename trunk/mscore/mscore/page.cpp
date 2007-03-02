@@ -387,8 +387,7 @@ void Page::collectElements(QList<Element*>& el)
                   l = m->pel();
                   for (ciElement i = l->begin(); i != l->end(); ++i)
                         el.append(*i);
-                  BeamList* bl = m->beamList();
-                  foreach(Beam* b, *bl)
+                  foreach(Beam* b, *m->beamList())
                         el.append(b);
                   for (int staffIdx = 0; staffIdx < staves; ++staffIdx) {
                         if (m->barLine(staffIdx))
