@@ -140,6 +140,7 @@ QRectF Selection::clear()
 void Selection::remove(Element* el)
       {
       _el.removeAll(el);
+      el->setSelected(false);
       updateState();
       }
 
@@ -262,10 +263,15 @@ void Score::select(Element* obj, int state, int staff)
             return;
             }
       refresh |= obj->abbox();
-      sel->add(obj);
+      if (obj->selected()) {
+            sel->remove(obj);
+            }
+      else {
+            sel->add(obj);
+            cis->staff = obj->staffIdx();
+            cis->voice = obj->voice();   //TODO
+            }
       ::setPadState(obj);
-      cis->staff = obj->staffIdx();
-      cis->voice = obj->voice();   //TODO
       emit selectionChanged(int(sel->state));
       }
 

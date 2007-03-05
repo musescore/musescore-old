@@ -150,6 +150,7 @@ class Score : public QObject {
       void preprocessTrack(MidiTrack*);
       void checkUndoOp();
       void pasteStaff(const QMimeData* ms);
+      void cmdReplaceElements(Measure* sm, Measure* dm, int staffIdx);
 
    public:
       bool undoActive;
