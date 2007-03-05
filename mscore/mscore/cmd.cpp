@@ -1335,7 +1335,22 @@ void Score::cmd(const QString& cmd)
 
 void Score::pasteStaff(const QMimeData* ms)
       {
-      printf("paste staff\n");
+      if (sel->state != SEL_STAFF) {
+            printf("  cannot paste to selection\n");
+            return;
+            }
+      int tickStart  = sel->tickStart;
+      int staffStart = sel->staffStart;
+
+      Measure* measure;
+      for (measure = _layout->first(); measure; measure = measure->next()) {
+            if (measure->tick() == tickStart)
+                  break;
+            }
+      if (measure->tick() != tickStart) {
+            printf("  cannot find measure\n");
+            return;
+            }
 
       QByteArray data(ms->data("application/mscore/staff"));
       QDomDocument doc;
@@ -1345,23 +1360,29 @@ void Score::pasteStaff(const QMimeData* ms)
             printf("error reading paste data\n");
             return;
             }
+      int srcStaffStart = -1;
       for (QDomNode node = doc.documentElement(); !node.isNull(); node = node.nextSibling()) {
             QDomElement e = node.toElement();
             if (e.isNull())
                   continue;
             if (e.tagName() == "Staff") {
+                  Measure* m = measure;
                   int staffIdx = e.attribute("id", "0").toInt();
-                  printf("  staff %d\n", staffIdx);
+                  if (srcStaffStart == -1)
+                        srcStaffStart = staffIdx;
+                  staffIdx = staffStart - srcStaffStart + staffIdx;
                   for (QDomNode n = node.firstChild(); !n.isNull(); n = n.nextSibling()) {
                         e = n.toElement();
                         if (e.isNull())
                               continue;
                         if (e.tagName() == "Measure") {
-                              // TODO:
-                              // find Measure
-                              // clear staff in Measure
-                              // read Staff
-                              printf("    measure\n");
+                              Measure* sm = new Measure(this);
+                              sm->read(n, staffIdx);
+                              cmdReplaceElements(sm, m, staffIdx);
+                              delete sm;
+                              m = m->next();
+                              if (m == 0)
+                                    break;
                               }
                         else
                               domError(e);
@@ -1369,6 +1390,58 @@ void Score::pasteStaff(const QMimeData* ms)
                   }
             else
                   domError(e);
+            }
+      }
+
+//---------------------------------------------------------
+//   cmdReplaceElements
+//---------------------------------------------------------
+
+void Score::cmdReplaceElements(Measure* sm, Measure* dm, int staffIdx)
+      {
+      select(0, 0, 0);
+      // clear staff in destination Measure
+      for (Segment* s = dm->first(); s;) {
+            int startTrack = staffIdx * VOICES;
+            int endTrack   = startTrack + VOICES;
+            for (int t = startTrack; t < endTrack; ++t) {
+                  Element* e = s->element(t);
+                  if (e)
+                        undoRemoveElement(e);
+                  }
+            Segment* ns = s->next();
+            dm->cmdRemoveEmptySegment(s);
+            s = ns;
+            }
+      // add src elements to destination
+      int srcTickOffset = sm->tick();
+      int dstTickOffset = dm->tick();
+      for (Segment* s = sm->first(); s; s = s->next()) {
+            int startTrack = staffIdx * VOICES;
+            int endTrack   = startTrack + VOICES;
+            for (int t = startTrack; t < endTrack; ++t) {
+                  Element* e = s->element(t);
+                  if (!e || !e->isChordRest())
+                        continue;
+                  int tick = e->tick();
+                  if (tick)
+                        tick = tick - srcTickOffset + dstTickOffset;
+                  Segment* ns = dm->findSegment((Segment::SegmentType)s->subtype(), tick);
+                  if (ns == 0)
+                        ns = dm->createSegment((Segment::SegmentType)s->subtype(), tick);
+                  e->setParent(ns);
+                  undoAddElement(e);
+                  e->setSelected(false);
+                  if (e->type() == REST)
+                        select(e, Qt::ShiftModifier, 0);
+                  else {
+                        Chord* c = (Chord*)e;
+                        NoteList* nl = c->noteList();
+                        for (iNote in = nl->begin(); in != nl->end(); ++in) {
+                              select(in->second, Qt::ShiftModifier, 0);
+                              }
+                        }
+                  }
             }
       }
 
