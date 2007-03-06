@@ -614,6 +614,8 @@ void Measure::layout2(ScoreLayout* layout)
       {
 //      printf("Measure(%p)::layout2(): _sel.size = %d\n", this, _sel.size());
 
+      layoutBeams(layout);
+
       foreach(Element* pel, _sel) {
             int staff = _score->staff(pel->staff());
 
@@ -636,6 +638,7 @@ void Measure::layout2(ScoreLayout* layout)
                         }
                         break;
                   case LAYOUT_BREAK:
+                        pel->layout(layout);
                         pel->setPos(
                            bbox().width() - pel->bbox().width() - _spatium,
                            - pel->bbox().height() - _spatium);
@@ -684,7 +687,7 @@ void Measure::layout2(ScoreLayout* layout)
                         }
                   }
             }
-      layoutBeams(layout);
+//      layoutBeams(layout);
       }
 
 //---------------------------------------------------------
@@ -1908,7 +1911,6 @@ void Measure::drop(const QPointF& p, int type, const QDomNode& node)
                   int subtype = bracket->subtype();
                   delete bracket;
                   staff->addBracket(BracketItem(subtype, 1));
-//                  score()->layout();
                   }
                   break;
             case CLEF:

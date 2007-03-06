@@ -25,14 +25,10 @@
 #include "preferences.h"
 #include "sym.h"
 
-#include "data/undo.xpm"
-#include "data/redo.xpm"
 #include "data/editcut.xpm"
 #include "data/editcopy.xpm"
 #include "data/editpaste.xpm"
 #include "data/fileprint.xpm"
-#include "data/midiin.xpm"
-#include "data/speaker.xpm"
 
 QIcon noteIcon;
 QIcon note2Icon;
@@ -166,15 +162,15 @@ void genIcons()
             }
       flipIcon = symIcon(flip_Sym);
 
-      undoIcon.addPixmap(QPixmap(undo_xpm));
-      redoIcon.addPixmap(QPixmap(redo_xpm));
       cutIcon.addPixmap(QPixmap(editcut_xpm));
       copyIcon.addPixmap(QPixmap(editcopy_xpm));
       pasteIcon.addPixmap(QPixmap(editpaste_xpm));
       printIcon.addPixmap(QPixmap(fileprint_xpm));
 
-      midiinIcon.addPixmap(QPixmap(midiin_xpm));
-      speakerIcon.addPixmap(QPixmap(speaker_xpm));
+      undoIcon     = QIcon(":/data/undo.svg");
+      redoIcon     = QIcon(":/data/redo.svg");
+      midiinIcon   = QIcon(":/data/midiin.svg");
+      speakerIcon  = QIcon(":/data/speaker.svg");
       startIcon    = QIcon(":/data/start.svg");
       stopIcon     = QIcon(":/data/stop.svg");
       playIcon     = QIcon(":/data/play.svg");

@@ -32,6 +32,10 @@
       <file>data/splash.jpg</file>
       <file>data/demo.msc</file>
       <file>data/piano1.sf2</file>
+      <file>data/speaker.svg</file>
+      <file>data/midiin.svg</file>
+      <file>data/undo.svg</file>
+      <file>data/redo.svg</file>
    </qresource>
 
    <qresource lang="de">

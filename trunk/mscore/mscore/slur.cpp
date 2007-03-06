@@ -41,7 +41,6 @@ SlurSegment::SlurSegment(SlurTie* st)
       slur = st;
       mode = 0;
       rb   = new RubberBand(st->score());
-      path = 0;
       }
 
 SlurSegment::SlurSegment(const SlurSegment& b)
@@ -49,7 +48,7 @@ SlurSegment::SlurSegment(const SlurSegment& b)
       {
       for (int i = 0; i < 4; ++i)
             ups[i] = b.ups[i];
-      path = new QPainterPath(*(b.path));
+      path = b.path;
       slur = b.slur;
       rb   = b.rb->clone();
       bow  = b.bow;
@@ -63,8 +62,6 @@ SlurSegment::SlurSegment(const SlurSegment& b)
 SlurSegment::~SlurSegment()
       {
       delete rb;
-      if (path)
-            delete path;
       }
 
 //---------------------------------------------------------
@@ -85,13 +82,11 @@ void SlurSegment::updatePath()
       QPointF pp[4];
       for (int i = 0; i < 4; ++i)
             pp[i] = ups[i].p + ups[i].off * _spatium;
-      if (path)
-            delete path;
-      path = new QPainterPath;
+      path = QPainterPath();
       QPointF t(0.0, _spatium * .08);    // thickness of slur
-      path->moveTo(pp[0]);
-      path->cubicTo(pp[1]-t, pp[2]-t, pp[3]);
-      path->cubicTo(pp[2]+t, pp[1]+t, pp[0]);
+      path.moveTo(pp[0]);
+      path.cubicTo(pp[1]-t, pp[2]-t, pp[3]);
+      path.cubicTo(pp[2]+t, pp[1]+t, pp[0]);
       }
 
 //---------------------------------------------------------
@@ -111,12 +106,8 @@ void SlurSegment::move(const QPointF& s)
 
 void SlurSegment::draw(QPainter& p)
       {
-      if (path == 0)
-            return;
-//      int seg = 0;      // todo
-// printf("draw\n");
-      p.setBrush(selected() ? preferences.selectColor[0] : Qt::black);
-      p.drawPath(*path);
+      p.setBrush(color());
+      p.drawPath(path);
       if (selected() && mode) {
             qreal lw = 2.0/p.matrix().m11();
             QPen pen(Qt::blue);
@@ -324,10 +315,7 @@ bool SlurSegment::editDrag(QMatrix& matrix, QPointF*, const QPointF& delta)
 
 QRectF SlurSegment::bbox() const
       {
-      QRectF r;
-      if (path == 0)
-            return r;
-      r = path->boundingRect();
+      QRectF r(path.boundingRect());
       if (mode) {
             for (int i = 0; i < 4; ++i)
                   r |= ups[i].r;
