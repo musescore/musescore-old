@@ -46,7 +46,6 @@ void LayoutBreak::draw(QPainter& p)
       else
             pen.setColor(preferences.layoutBreakColor);
 
-      qreal lw = _spatium * 0.3;
       pen.setWidthF(lw);
       p.setPen(pen);
       p.setBrush(Qt::NoBrush);
@@ -60,10 +59,10 @@ void LayoutBreak::draw(QPainter& p)
 void LayoutBreak::layout(ScoreLayout* layout)
       {
       double _spatium = layout->spatium();
-      path = QPainterPath();
-
-      double h = _spatium * 4;
-      double w = _spatium * 2.5;
+      path      = QPainterPath();
+      lw        = _spatium * 0.3;
+      double h  = _spatium * 4;
+      double w  = _spatium * 2.5;
       double w1 = w * .6;
 
       switch(subtype()) {
@@ -97,7 +96,6 @@ void LayoutBreak::layout(ScoreLayout* layout)
                   break;
             }
       QRectF bb(0, 0, w, h);
-      qreal lw = _spatium * 0.3;
       bb.adjust(-lw, -lw, lw, lw);
       setbbox(bb);
       }

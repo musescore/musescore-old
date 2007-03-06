@@ -86,6 +86,7 @@ void Score::startCmd()
 
 void Score::cmdAdd(Element* e)
       {
+      e->setSelected(false);
       undoAddElement(e);
       layout();
       }

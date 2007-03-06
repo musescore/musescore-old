@@ -42,7 +42,7 @@ struct UP {
 
 class SlurSegment : public Element {
       struct UP ups[4];
-      QPainterPath* path;
+      QPainterPath path;
 
       SlurTie* slur;
       RubberBand* rb;

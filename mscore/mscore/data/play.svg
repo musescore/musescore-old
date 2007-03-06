@@ -70,9 +70,9 @@
    inkscape:zoom="2.3625"
    inkscape:cx="80"
    inkscape:cy="80"
-   inkscape:window-width="849"
-   inkscape:window-height="579"
-   inkscape:window-x="1064"
+   inkscape:window-width="947"
+   inkscape:window-height="591"
+   inkscape:window-x="726"
    inkscape:window-y="78"
    inkscape:current-layer="svg49">
     <sodipodi:guide
@@ -84,20 +84,8 @@
    position="14.738171"
    id="sodipodi:guide329" />
   </sodipodi:namedview>
-  <g
-   id="g325"
-   transform="translate(24.0347,-1.60236)">
-    <path
-   style="font-size:12px;fill:black;fill-opacity:1;fill-rule:evenodd;stroke:#a4c9ee;stroke-width:10.82400036;stroke-linejoin:round;stroke-opacity:0.70196096"
-   d="M 338.593,175.32 L 435.492,261.836 L 339.257,355.345 L 338.593,175.32 z "
-   id="path326"
-   transform="matrix(1.72603,0,0,1.94683,-397.314,-245.978)"
-   sodipodi:nodetypes="cccc" />
-    <path
-   style="font-size:12px;fill:url(#linearGradient130);fill-opacity:0.99215698;fill-rule:evenodd;stroke:#0c6671;stroke-width:9.60303974;stroke-opacity:0.99215698"
-   d="M 355.635,183.469 L 437.887,259.936 L 355.817,342.102 L 355.635,183.469 z "
-   id="path327"
-   transform="matrix(1.67014,0,0,1.75639,-395.375,-194.413)"
-   sodipodi:nodetypes="cccc" />
-  </g>
-</svg>
+  
+<path
+   style="fill:#c3c8e1;fill-opacity:1;fill-rule:evenodd;stroke:black;stroke-width:21.16441667;stroke-linecap:butt;stroke-linejoin:round;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:none"
+   d="M 215.0036,101.23086 L 215.0036,436.27813 L 376.2563,262.48356 L 215.0036,101.23086 z "
+   id="path1879" /></svg>

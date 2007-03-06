@@ -1,3 +1,7 @@
+6.3.7 (ws)
+      - replace more icons with svg versions
+      - call layout() for LayoutBreak elements to make them visible
+      - fix layout dependency: first layout beams, then slur segments
 5.3.7 (ws)
       - implement cut & paste of staves
       - shift+click on selected element removes element from selection

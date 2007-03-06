@@ -86,9 +86,9 @@
    inkscape:zoom="2.3625"
    inkscape:cx="80"
    inkscape:cy="80"
-   inkscape:window-width="849"
-   inkscape:window-height="579"
-   inkscape:window-x="1064"
+   inkscape:window-width="947"
+   inkscape:window-height="591"
+   inkscape:window-x="726"
    inkscape:window-y="78"
    inkscape:current-layer="svg49">
     <sodipodi:guide
@@ -100,27 +100,11 @@
    position="14.738171"
    id="sodipodi:guide329" />
   </sodipodi:namedview>
-  <g
-   id="g223"
-   transform="matrix(0,-0.925,1.58984,0,-339.93,497.194)"
-   style="font-size:12px">
-    <rect
-   style="font-size:12px;fill-rule:evenodd;stroke:#a4c9ee;stroke-width:16.03380013;stroke-opacity:0.70196096"
-   id="rect224"
-   x="120.97765"
-   y="297.23651"
-   width="256.37656"
-   height="146.69675"
-   rx="0"
-   ry="0" />
-    <rect
-   style="font-size:12px;fill:url(#linearGradient130);fill-rule:evenodd;stroke:#0c6671;stroke-width:14.05679989;stroke-opacity:0.99215698"
-   id="rect225"
-   x="134.68764"
-   y="308.2045"
-   width="231.69856"
-   height="124.76077"
-   rx="0"
-   ry="0" />
-  </g>
-</svg>
+  
+<rect
+   style="fill:#c3c8e1;fill-opacity:1;stroke:black;stroke-width:21.16441667;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;stroke-linejoin:round;stroke-linecap:round"
+   id="rect1881"
+   width="227.54547"
+   height="229.33717"
+   x="137.96065"
+   y="154.98177" /></svg>
