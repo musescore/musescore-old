@@ -80,14 +80,14 @@ class Element {
       Element* _parent;
       Measure* _anchor;
 
-      bool _selected;   ///< set if element is selected
-      bool _dropTarget; ///< true, if element accepts drops
-      bool _generated;  ///< automatically generated Element
-      bool _visible;    ///< visibility attribute
+      bool _selected;           ///< set if element is selected
+      bool _dropTarget;         ///< true, if element accepts drops
+      bool _generated;          ///< automatically generated Element
+      bool _visible;            ///< visibility attribute
 
       int _subtype;
 
-      int _voice;       ///< 0 - VOICES
+      int _voice;               ///< 0 - VOICES
       Staff* _staff;
       MTime _time;
       QColor _color;
@@ -96,13 +96,13 @@ class Element {
 
    protected:
       Score* _score;
-      QPointF _pos;     ///< Reference position, relative to _parent.
-                        ///< Usually set from layout().
-      QPointF _userOff; ///< Offset from normal layout position:
-                        ///< user dragged object this amount.
-                        ///< In Spatium ("space") units!
-      int _mxmlOff;     ///< MusicXML offset in ticks.
-                        ///< Note: interacts with userXoffset.
+      QPointF _pos;             ///< Reference position, relative to _parent.
+                                ///< Usually set from layout().
+      QPointF _userOff;         ///< Offset from normal layout position:
+                                ///< user dragged object this amount.
+                                ///< In Spatium ("space") units!
+      int _mxmlOff;             ///< MusicXML offset in ticks.
+                                ///< Note: interacts with userXoffset.
 
       mutable QRectF _bbox;     ///< Bounding box relative to _pos + _userOff
                                 ///< valid after call to layout()

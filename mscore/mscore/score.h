@@ -181,7 +181,7 @@ class Score : public QObject {
       int dragStaff;
 
       void cmdAddPitch(int, bool);
-      void cmdAddIntervall(int);
+      void cmdAddInterval(int);
 
    public slots:
       void printFile();
