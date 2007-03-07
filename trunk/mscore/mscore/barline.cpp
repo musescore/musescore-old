@@ -45,11 +45,9 @@ void BarLine::draw(QPainter& p)
       qreal lw    = point(style->barWidth);
       qreal h     = height();
 
-      QColor color(selected() ? preferences.selectColor[0] : Qt::black);
-
       bool split = height() > (_spatium * 4.01);
 
-      QPen pen(color);
+      QPen pen(color());
       pen.setWidthF(lw);
       pen.setCapStyle(Qt::FlatCap);
       p.setPen(pen);

@@ -1,3 +1,6 @@
+7.3.7 (ws)
+      - applied patch from Seth Yastrov: fix crash when "add below" a new
+        staff
 6.3.7 (ws)
       - replace more icons with svg versions
       - call layout() for LayoutBreak elements to make them visible

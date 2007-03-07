@@ -550,16 +550,17 @@ void MuseScore::editInstrList()
                         else if (sli->op == ITEM_ADD) {
                               Staff* staff = new Staff(cs, part, rstaff);
                               sli->staff = staff;
+                              staff->setRstaff(rstaff);
+                              ++rstaff;
                               staff->clef()->setClef(0, sli->clef());
-
-                              for (Measure* m = cs->mainLayout()->first(); m; m = m->next())
-                                    m->cmdAddStaves(staffIdx, staffIdx+1);
 
                               cs->insertStaff(staff, staffIdx);
                               cs->undoOp(UndoOp::InsertStaff, staff, staffIdx);
 
+                              for (Measure* m = cs->mainLayout()->first(); m; m = m->next())
+                                    m->cmdAddStaves(staffIdx, staffIdx+1);
+
                               ++staffIdx;
-                              ++rstaff;
                               }
                         else {
                               ++staffIdx;
