@@ -249,7 +249,7 @@ MuseScore::MuseScore()
          << "move-up" << "move-down" << "up-chord" << "down-chord"
          << "top-chord" << "bottom-chord" << "next-chord" << "prev-chord"
          << "next-measure" << "prev-measure" << "print" << "undo"
-         << "redo" << "append-measure" << "duole" << "triole" << "pentole"
+         << "redo" << "append-measure" << "duplet" << "triplet" << "quadruplet"
          << "note-c" << "note-d" << "note-e" << "note-f" << "note-g"
          << "note-a" << "note-b"
          << "chord-c" << "chord-d" << "chord-e" << "chord-f" << "chord-g"
@@ -499,28 +499,28 @@ MuseScore::MuseScore()
             menuAddPitch->addAction(a);
             }
 
-      QMenu* menuAddIntervall = new QMenu(tr("Add Intervall"));
+      QMenu* menuAddInterval = new QMenu(tr("Add Interval"));
       for (int i = 1; i < 10; ++i) {
             char buffer[16];
-            sprintf(buffer, "intervall%d", i);
+            sprintf(buffer, "interval%d", i);
             a = getAction(buffer);
             ag->addAction(a);
-            menuAddIntervall->addAction(a);
+            menuAddInterval->addAction(a);
             }
-      menuAddIntervall->addSeparator();
+      menuAddInterval->addSeparator();
       for (int i = 2; i < 10; ++i) {
             char buffer[16];
-            sprintf(buffer, "intervall-%d", i);
+            sprintf(buffer, "interval-%d", i);
             a = getAction(buffer);
             ag->addAction(a);
-            menuAddIntervall->addAction(a);
+            menuAddInterval->addAction(a);
             }
-      menuNotes->addMenu(menuAddIntervall);
+      menuNotes->addMenu(menuAddInterval);
 
-      QMenu* menuNtole = new QMenu(tr("Tuples"));
-      menuNtole->addAction(getAction("duole"));
-      menuNtole->addAction(getAction("triole"));
-      menuNtole->addAction(getAction("pentole"));
+      QMenu* menuNtole = new QMenu(tr("Tuplets"));
+      menuNtole->addAction(getAction("duplet"));
+      menuNtole->addAction(getAction("triplet"));
+      menuNtole->addAction(getAction("quintuplet"));
       menuNotes->addMenu(menuNtole);
 
       //---------------------

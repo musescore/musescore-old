@@ -361,10 +361,10 @@ void Score::cmdAddPitch(int note, bool addFlag)
       }
 
 //---------------------------------------------------------
-//   cmdAddIntervall
+//   cmdAddInterval
 //---------------------------------------------------------
 
-void Score::cmdAddIntervall(int val)
+void Score::cmdAddInterval(int val)
       {
       Note* on = getSelectedNote();
       if (on == 0)
@@ -391,7 +391,7 @@ void Score::cmdAddIntervall(int val)
             case -8:  pitch -= 12; break;
             case -9:  pitch -= 14; break;
             default:
-                  printf("cmdAddIntervall: unknown idx %d\n", val);
+                  printf("cmdAddInterval: unknown idx %d\n", val);
                   abort();
             }
       if (pitch > 127)
@@ -1252,15 +1252,15 @@ void Score::cmd(const QString& cmd)
                   changeVoice(2);
             else if (cmd == "voice-4")
                   changeVoice(3);
-            else if (cmd.startsWith("intervall")) {
+            else if (cmd.startsWith("interval")) {
                   int n = cmd.mid(9).toInt();
-                  cmdAddIntervall(n);
+                  cmdAddInterval(n);
                   }
-            else if (cmd == "duole")
+            else if (cmd == "duplet")
                   cmdTuplet(2);
-            else if (cmd == "triole")
+            else if (cmd == "triplet")
                   cmdTuplet(3);
-            else if (cmd == "pentole")
+            else if (cmd == "quadruplet")
                   cmdTuplet(5);
             else if (cmd == "stretch+")
                   cmdAddStretch(0.1);

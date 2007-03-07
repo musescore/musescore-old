@@ -583,31 +583,19 @@ void MuseScore::fingeringMenu()
             QScrollArea* sa = new QScrollArea;
             sa->setWindowTitle(tr("MuseScore: Fingering"));
             fingeringPalette = sa;
-            SymbolPalette* sp = new SymbolPalette(1, 5, 1.5);
+            SymbolPalette* sp = new SymbolPalette(2, 6, 1.5);
             sa->setWidget(sp);
             sp->setGrid(50, 50);
 
+            const char finger[] = "012345pimac";
             Text* k;
-            k = new Text(0);
-            k->setSubtype(TEXT_FINGERING);
-            k->setText("1");
-            sp->addObject(0, k, tr("fingering 1"));
-            k = new Text(0);
-            k->setSubtype(TEXT_FINGERING);
-            k->setText("2");
-            sp->addObject(1, k, tr("fingering 2"));
-            k = new Text(0);
-            k->setSubtype(TEXT_FINGERING);
-            k->setText("3");
-            sp->addObject(2, k, tr("fingering 3"));
-            k = new Text(0);
-            k->setSubtype(TEXT_FINGERING);
-            k->setText("4");
-            sp->addObject(3, k, tr("fingering 4"));
-            k = new Text(0);
-            k->setSubtype(TEXT_FINGERING);
-            k->setText("5");
-            sp->addObject(4, k, tr("fingering 5"));
+
+            for (unsigned i = 0; i < strlen(finger); ++i) {
+                  k = new Text(0);
+                  k->setSubtype(TEXT_FINGERING);
+                  k->setText(QString(finger[i]));
+                  sp->addObject(i, k, QString("fingering %1").arg(finger[i]));
+                  }
             }
       fingeringPalette->show();
       fingeringPalette->raise();
