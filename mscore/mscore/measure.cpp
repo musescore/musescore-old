@@ -1726,8 +1726,9 @@ void Measure::cmdAddStaves(int sStaff, int eStaff)
       insertStaves(sStaff, eStaff);
 
       for (int i = sStaff; i < eStaff; ++i) {
+            Staff* staff = _score->staff(i);
             BarLine* barLine = 0;
-            if (i == sStaff) {
+            if (staff->isTop()) {
                   barLine = new BarLine(score());
                   barLine->setParent(this);
                   }
@@ -1739,7 +1740,6 @@ void Measure::cmdAddStaves(int sStaff, int eStaff)
 
             int tickLen = _score->sigmap->ticksMeasure(tick());
             Rest* rest = new Rest(score(), tick(), tickLen);
-            Staff* staff = _score->staff(i);
             rest->setStaff(staff);
             Segment* s = findSegment(Segment::SegChordRest, tick());
             rest->setParent(s);
