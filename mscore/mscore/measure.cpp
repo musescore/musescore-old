@@ -56,6 +56,7 @@
 #include "lyrics.h"
 #include "irregular.h"
 #include "layout.h"
+#include "viewer.h"
 
 //---------------------------------------------------------
 //   y2pitch
@@ -619,7 +620,6 @@ void Measure::layout2(ScoreLayout* layout)
       foreach(Element* pel, _sel) {
             int staff = _score->staff(pel->staff());
 
-            // double y  = staff * point(Spatium(4) + style->staffDistance);
             double y = system()->staff(staff)->bbox().y();
 
             switch(pel->type()) {
@@ -1809,7 +1809,7 @@ void Measure::insertStaff1(Staff* staff, int staffIdx)
  and key- and timesig (allow drop if left of first chord or rest).
 */
 
-bool Measure::acceptDrop(const QPointF& p, int type, const QDomNode&) const
+bool Measure::acceptDrop(Viewer* v, const QPointF& p, int type, const QDomNode&) const
       {
       // convert p from canvas to measure relative position and take x and y coordinates
       QPointF mrp = p - pos() - system()->pos() - system()->page()->pos();
@@ -1820,8 +1820,9 @@ bool Measure::acceptDrop(const QPointF& p, int type, const QDomNode&) const
       int idx = s->y2staff(p.y());
       if (idx == -1)
             return false;                       // staff not found
-      qreal t = s->staff(idx)->bbox().top();    // top of staff
-      qreal b = s->staff(idx)->bbox().bottom(); // bottom of staff
+      QRectF sb(s->staff(idx)->bbox());
+      qreal t = sb.top();    // top of staff
+      qreal b = sb.bottom(); // bottom of staff
 
       switch(type) {
             case VOLTA:
@@ -1831,25 +1832,32 @@ bool Measure::acceptDrop(const QPointF& p, int type, const QDomNode&) const
                   if (mrpy < t)
                         return true;
                   return false;
+
             case PEDAL:
-            case DYNAMIC:
                   // accept drop only below staff
-                  if (mrpy > b)
-                        return true;
-                  return false;
+                  // if (mrpy > b)
+                  //      return true;
+                  // Changed: accept anywhere
+//                  v->setDropRectangle(sb.translated(pos() + system()->pos() + system()->page()->pos()));
+                  v->setDropRectangle(abbox());
+                  return true;
+
             case BRACKET:
             case LAYOUT_BREAK:
                   return true;
+
             case BAR_LINE:
                   // accept drop only inside staff
                   if (mrpy < t || mrpy > b)
                         return false;
                   return true;
+
             case HAIRPIN:
                   // accept drop only above or below staff
                   if (mrpy < t || mrpy > b)
                         return true;
                   return false;
+
             case CLEF:
                   {
                   // accept drop only inside staff
@@ -1869,6 +1877,7 @@ bool Measure::acceptDrop(const QPointF& p, int type, const QDomNode&) const
                         }
                   }
                   return false;
+
             case KEYSIG:
             case TIMESIG:
                   // accept drop only inside staff
@@ -1878,6 +1887,7 @@ bool Measure::acceptDrop(const QPointF& p, int type, const QDomNode&) const
                         if (seg->subtype() == Segment::SegChordRest)
                               return (mrpx < seg->pos().x());
                   // fall through if no chordrest segment found
+
             default:
                   return false;
             }
@@ -1891,13 +1901,13 @@ bool Measure::acceptDrop(const QPointF& p, int type, const QDomNode&) const
  Handle a dropped element at position \a pos of given element \a type and \a subtype.
 */
 
-void Measure::drop(const QPointF& p, int type, const QDomNode& node)
+Element* Measure::drop(const QPointF& p, const QPointF& offset, int type, const QDomNode& node)
       {
       // determine staff
       System* s = system();
       int idx = s->y2staff(p.y());
       if (idx == -1)
-            return;
+            return 0;
       Staff* staff = score()->staff(idx);
 
       // convert p from canvas to measure relative position and take x coordinate
@@ -1944,8 +1954,8 @@ void Measure::drop(const QPointF& p, int type, const QDomNode& node)
                   volta->setStaff(staff);
                   volta->setParent(this);
                   score()->cmdAdd(volta);
+                  return volta;
                   }
-                  break;
             case OTTAVA:
                   {
                   Ottava* ottava = new Ottava(score());
@@ -1955,8 +1965,8 @@ void Measure::drop(const QPointF& p, int type, const QDomNode& node)
                   ottava->setTick2(tick() + tickLen());
                   ottava->setParent(this);
                   score()->cmdAdd(ottava);
+                  return ottava;
                   }
-                  break;
             case HAIRPIN:
                   {
                   Hairpin* hairpin = new Hairpin(score());
@@ -1966,20 +1976,8 @@ void Measure::drop(const QPointF& p, int type, const QDomNode& node)
                   hairpin->setTick2(tick() + tickLen());
                   hairpin->setParent(this);
                   score()->cmdAdd(hairpin);
+                  return hairpin;
                   }
-                  break;
-            case DYNAMIC:
-                  {
-                  Dynamic* dynamic = new Dynamic(score());
-                  dynamic->read(node);
-                  dynamic->setSelected(false);
-                  Dynamic* nd = new Dynamic(score());
-                  nd->setSubtype(dynamic->subtype());
-                  if (dynamic->subtype() == 0)
-                        nd->setText(dynamic->getText());
-                  score()->addDynamic(nd, p);
-                  }
-                  break;
             case TRILL:
                   {
                   Trill* trill = new Trill(score());
@@ -1989,8 +1987,8 @@ void Measure::drop(const QPointF& p, int type, const QDomNode& node)
                   trill->setTick2(lt);
                   trill->setParent(this);
                   score()->cmdAdd(trill);
+                  return trill;
                   }
-                  break;
             case PEDAL:
                   {
                   Pedal* pedal = new Pedal(score());
@@ -1999,8 +1997,8 @@ void Measure::drop(const QPointF& p, int type, const QDomNode& node)
                   pedal->setTick2(tick() + tickLen());
                   pedal->setParent(this);
                   score()->cmdAdd(pedal);
+                  return pedal;
                   }
-                  break;
             case LAYOUT_BREAK:
                   {
                   LayoutBreak* lb = new LayoutBreak(score());
@@ -2008,8 +2006,8 @@ void Measure::drop(const QPointF& p, int type, const QDomNode& node)
                   lb->setStaff(staff);
                   lb->setParent(this);
                   score()->cmdAdd(lb);
+                  return lb;
                   }
-                  break;
 
             case BAR_LINE:
                   {
@@ -2030,7 +2028,7 @@ void Measure::drop(const QPointF& p, int type, const QDomNode& node)
                                           if (e && e->type() == BAR_LINE && e->subtype() == START_REPEAT) {
                                                 // BarLine already there,
                                                 // do nothing
-                                                return;
+                                                return 0;
                                                 }
                                           }
                                     }
@@ -2100,6 +2098,7 @@ void Measure::drop(const QPointF& p, int type, const QDomNode& node)
             default:
                   break;
             }
+      return 0;
       }
 
 //---------------------------------------------------------

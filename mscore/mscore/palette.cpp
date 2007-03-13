@@ -157,12 +157,15 @@ void SymbolPalette::mouseMoveEvent(QMouseEvent* ev)
       QMimeData* mimeData = new QMimeData;
       Element* el = symbols[currentSymbol];
 
-// printf("drag %s %s\n", el->name(), el->subtypeName().toLatin1().data());
+      // qreal mag = PALETTE_SPATIUM * extraMag / _spatium;
+      qreal mag = extraMag;
+      QPointF sm(dragStartPosition);
+      QPointF rpos(QPointF(sm.x() * mag, sm.y() * mag) - el->pos());
 
-      mimeData->setData("application/mscore/symbol", el->mimeData());
+      mimeData->setData("application/mscore/symbol", el->mimeData(rpos));
       drag->setMimeData(mimeData);
 
-      /*Qt::DropAction dropAction =*/ drag->start(Qt::CopyAction);
+      drag->start(Qt::CopyAction);
       }
 
 //---------------------------------------------------------

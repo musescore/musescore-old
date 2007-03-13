@@ -36,6 +36,7 @@ class Staff;
 class Score;
 class Sym;
 class ScoreLayout;
+class Viewer;
 
 /**
   The value of this enum determines the "stacking order" the elements are
@@ -219,9 +220,9 @@ class Element {
       virtual void space(double& min, double& extra) const;
       QColor color() const;
       void setColor(const QColor& c)  { _color = c;    }
-      static int readType(QDomNode& node);
+      static int readType(QDomNode& node, QPointF*);
 
-      virtual QByteArray mimeData() const;
+      virtual QByteArray mimeData(const QPointF&) const;
 /**
  Return true if this element accepts a drop at canvas relative \a pos
  of given element \a type and \a subtype.
@@ -229,15 +230,15 @@ class Element {
  Reimplemented by elements that accept drops. Used to change cursor shape while
  dragging to indicate drop targets.
 */
-      virtual bool acceptDrop(const QPointF&, int, const QDomNode&) const { return false; }
+      virtual bool acceptDrop(Viewer*, const QPointF&, int, const QDomNode&) const { return false; }
 
 /**
  Handle a dropped element at canvas relative \a pos of given element
- \a type and \a subtype.
+ \a type and \a subtype. Returns dropped element if any.
 
  Reimplemented by elements that accept drops.
 */
-      virtual void drop(const QPointF&, int, const QDomNode&) {}
+      virtual Element* drop(const QPointF&, const QPointF&, int, const QDomNode&) { return 0;}
 
 /**
  Return a name for a \a subtype. Used for outputting xml data.
@@ -430,8 +431,8 @@ class KeySig : public Element {
       virtual KeySig* clone() const { return new KeySig(*this); }
       virtual void draw(QPainter&);
       virtual ElementType type() const { return KEYSIG; }
-      virtual bool acceptDrop(const QPointF&, int, const QDomNode&) const;
-      virtual void drop(const QPointF&, int, const QDomNode&);
+      virtual bool acceptDrop(Viewer*, const QPointF&, int, const QDomNode&) const;
+      virtual Element* drop(const QPointF&, const QPointF&, int, const QDomNode&);
       virtual void layout(ScoreLayout*);
       };
 

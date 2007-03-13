@@ -38,6 +38,7 @@
 #include "text.h"
 #include "note.h"
 #include "layout.h"
+#include "dynamics.h"
 
 //---------------------------------------------------------
 //   Canvas
@@ -47,7 +48,6 @@ Canvas::Canvas(QWidget* parent)
    : QWidget(parent)
       {
       setAcceptDrops(true);
-//      setAttribute(Qt::WA_OpaquePaintEvent);
       setAttribute(Qt::WA_NoSystemBackground);
       setFocusPolicy(Qt::StrongFocus);
       setAttribute(Qt::WA_InputMethodEnabled);
@@ -63,7 +63,6 @@ Canvas::Canvas(QWidget* parent)
       bgPixmap         = 0;
       cursorIsBlinking = preferences.cursorBlink;
       lasso            = new Lasso(_score);
-      dropTarget       = 0;
 
       setXoffset(30);
       setYoffset(30);
@@ -300,11 +299,20 @@ void Canvas::mousePressEvent(QMouseEvent* ev)
 
             case NORMAL:
                   //-----------------------------------------
-                  //  paste operation
+                  //  drag operation
                   //-----------------------------------------
 
                   if (b2 && (_score->sel->state == SEL_SINGLE)) {
-                        _score->paste(_score->sel->element(), startMove);
+#if 0
+                        QDrag* drag = new QDrag(this);
+                        QMimeData* mimeData = new QMimeData;
+                        Element* el = symbols[currentSymbol];
+
+                        mimeData->setData("application/mscore/symbol", el->mimeData());
+                        drag->setMimeData(mimeData);
+
+                        /*Qt::DropAction dropAction =*/ drag->start(Qt::CopyAction);
+#endif
                         break;
                         }
 
@@ -439,7 +447,20 @@ void Canvas::mouseMoveEvent1(QMouseEvent* ev)
                         return;
                   if (sqrt(pow(delta.x(),2)+pow(delta.y(),2))*matrix.m11() <= 2.0)
                         return;
-                  if (_score->dragObject() && _score->dragObject()->isMovable()) {
+                  {
+                  Element* de = _score->dragObject();
+                  if (de && keyState == Qt::ShiftModifier) {
+                        QDrag* drag = new QDrag(this);
+                        QMimeData* mimeData = new QMimeData;
+                        QPointF rpos(startMove - de->abbox().topLeft());
+// printf("drag %s: diff %f %f\n", de->name(), rpos.x(), rpos.y());
+                        mimeData->setData("application/mscore/symbol", de->mimeData(rpos));
+                        drag->setMimeData(mimeData);
+                        _score->endCmd(true);
+                        drag->start(Qt::CopyAction);
+                        break;
+                        }
+                  if (de && de->isMovable()) {
                         QPointF o;
                         if (_score->sel->state == SEL_STAFF || _score->sel->state == SEL_SYSTEM) {
                               double s(_score->dragSystem->distance(_score->dragStaff));
@@ -448,7 +469,7 @@ void Canvas::mouseMoveEvent1(QMouseEvent* ev)
                               }
                         else {
                               _score->startDrag();
-                              o = QPointF(_score->dragObject()->userOff() * _spatium);
+                              o = QPointF(de->userOff() * _spatium);
                               setState(DRAG_OBJ);
                               }
                         startMove -= o;
@@ -461,6 +482,7 @@ void Canvas::mouseMoveEvent1(QMouseEvent* ev)
                         setCursor(QCursor(Qt::SizeAllCursor));
                         return;
                         }
+                  }
                   break;
             case LASSO:
                   _score->addRefresh(lasso->abbox());
@@ -719,7 +741,7 @@ void Canvas::magCanvas()
 //   dataChanged
 //---------------------------------------------------------
 
-void Canvas::dataChanged(Score*, const QRectF& r)
+void Canvas::dataChanged(const QRectF& r)
       {
       redraw(r);
       }
@@ -943,8 +965,16 @@ void Canvas::paint(const QRect& rr)
       lasso->draw(p);
       cursor->draw(p);
       shadowNote->draw(p);
-      p.setMatrixEnabled(false);
 
+      if (dropRectangle.isValid())
+            p.fillRect(dropRectangle, QColor(80, 0, 0, 80));
+      if (!dropAnchor.isNull()) {
+            QPen pen(QBrush(QColor(80, 0, 0)), 2.0, Qt::DotLine);
+            p.setPen(pen);
+            p.drawLine(dropAnchor);
+            }
+
+      p.setMatrixEnabled(false);
       if (!r1.isEmpty()) {
             p.setClipRegion(r1);  // only background
             if (bgPixmap == 0 || bgPixmap->isNull())
@@ -961,6 +991,7 @@ void Canvas::paint(const QRect& rr)
 void Canvas::setScore(Score* s, ScoreLayout* l)
       {
       _score = s;
+      Viewer::setScore(s);
       _layout = l;
       if (navigator) {
             navigator->setScore(_score);
@@ -1001,50 +1032,56 @@ void Canvas::dragMoveEvent(QDragMoveEvent* event)
       {
       if (!event->mimeData()->hasFormat("application/mscore/symbol"))
             return;
+
       // convert window to canvas position
       QPointF pos(imatrix.map(QPointF(event->pos())));
-      Element* el = elementAt(pos);
-      if (el) {
-            QByteArray data(event->mimeData()->data("application/mscore/symbol"));
-            QDomDocument doc;
-            int line, column;
-            QString err;
-            if (!doc.setContent(data, &err, &line, &column)) {
-                  printf("error reading drag data\n");
+
+      QByteArray data(event->mimeData()->data("application/mscore/symbol"));
+      QDomDocument doc;
+      int line, column;
+      QString err;
+      if (!doc.setContent(data, &err, &line, &column)) {
+            printf("error reading drag data at %d/%d: %s\n<%s>\n",
+               line, column, err.toLatin1().data(), data.data());
                   return;
+            }
+      QDomNode node = doc.documentElement();
+      QPointF dragOffset;
+      int type = Element::readType(node, &dragOffset);
+      if (type == DYNAMIC) {
+            Staff* staff = 0;
+            Segment* seg;
+            QPointF offset;
+            int tick;
+            Measure* m = _score->pos2measure(pos, &tick, &staff, 0, &seg, &offset);
+            if (m) {
+                  System* s = m->system();
+                  int staffIdx = staff->idx();
+                  QRectF sb(s->staff(staffIdx)->bbox());
+                  sb.translate(s->pos() + s->page()->pos());
+                  setDropAnchor(QLineF(pos, seg->abbox().topLeft()));
+                  event->acceptProposedAction();
                   }
-
-            QDomNode node = doc.documentElement();
-            int type      = Element::readType(node);
-
-            bool val = el->acceptDrop(pos, type, node);
-            if (val)
-                  event->accept();
             else {
-                  if (debugMode)
-                        printf("ignore drop of %s\n", el->name());
                   event->ignore();
-                  }
-            // DEBUG:
-            if (dropTarget != el) {
-                  if (dropTarget) {
-                        dropTarget->setDropTarget(false);
-                        _score->addRefresh(dropTarget->abbox());
-                        dropTarget = 0;
-                        }
-                  if (type == ATTRIBUTE && el->type() == NOTE) {
-                        dropTarget = el;
-                        dropTarget->setDropTarget(true);
-                        _score->addRefresh(dropTarget->abbox());
-                        }
+                  setDropTarget(0);
                   }
             }
       else {
-            event->ignore();
-            if (dropTarget) {
-                  dropTarget->setDropTarget(false);
-                  _score->addRefresh(dropTarget->abbox());
-                  dropTarget = 0;
+            Element* el = elementAt(pos);
+            if (el) {
+                  bool accept = el->acceptDrop(this, pos, type, node);
+                  if (accept)
+                        event->acceptProposedAction();
+                  else {
+                        if (debugMode)
+                              printf("ignore drop of %s\n", elementNames[type]);
+                        event->ignore();
+                        }
+                  }
+            else {
+                  event->ignore();
+                  setDropTarget(0);
                   }
             }
       _score->end();
@@ -1056,34 +1093,53 @@ void Canvas::dragMoveEvent(QDragMoveEvent* event)
 
 void Canvas::dropEvent(QDropEvent* event)
       {
-      if (!event->mimeData()->hasFormat("application/mscore/symbol"))
+      if (!event->mimeData()->hasFormat("application/mscore/symbol")) {
+            printf("cannot drop this object: unknown mime type\n");
             return;
+            }
       QPointF pos(imatrix.map(QPointF(event->pos())));
-      Element* el = elementAt(pos);
-      if (el) {
-            QByteArray data(event->mimeData()->data("application/mscore/symbol"));
-            QDomDocument doc;
-            int line, column;
-            QString err;
-            if (!doc.setContent(data, &err, &line, &column)) {
-                  printf("error reading drag data\n");
-                  return;
-                  }
-            QDomNode node = doc.documentElement();
-            int type      = Element::readType(node);
 
+      QByteArray data(event->mimeData()->data("application/mscore/symbol"));
+      QDomDocument doc;
+      int line, column;
+      QString err;
+      if (!doc.setContent(data, &err, &line, &column)) {
+            printf("error reading drag data\n");
+            return;
+            }
+      QDomNode node = doc.documentElement();
+      QPointF dragOffset;
+      int type = Element::readType(node, &dragOffset);
+
+      if (type == DYNAMIC) {
             _score->startCmd();
-            _score->addRefresh(el->abbox());
-            el->drop(pos, type, node);
-            _score->addRefresh(el->abbox());
+            Dynamic* dynamic = new Dynamic(score());
+            dynamic->read(node);
+            dynamic->setSelected(false);
+            score()->cmdAddDynamic(dynamic, pos, dragOffset);
+            _score->select(dynamic, 0, 0);
+            _score->addRefresh(dynamic->abbox());
+            event->acceptProposedAction();
+            _score->endCmd(true);
             }
-      if (dropTarget) {
-            dropTarget->setDropTarget(false);
-            _score->addRefresh(dropTarget->abbox());
-            dropTarget = 0;
+      else {
+            Element* el = elementAt(pos);
+            if (el) {
+                  _score->startCmd();
+                  _score->addRefresh(el->abbox());
+                  Element* dropElement = el->drop(pos, dragOffset, type, node);
+                  _score->addRefresh(el->abbox());
+                  if (dropElement) {
+                        _score->select(dropElement, 0, 0);
+                        _score->addRefresh(dropElement->abbox());
+                        }
+                  event->acceptProposedAction();
+                  _score->endCmd(true);
+                  }
+            else
+                  printf("cannot drop here\n");
             }
-      event->acceptProposedAction();
-      _score->endCmd(true);
+      setDropTarget(0); // this also resets dropRectangle and dropAnchor
       setState(NORMAL);
       }
 
@@ -1246,6 +1302,7 @@ void Canvas::drawElements(QPainter& p,const QList<Element*>& el)
             p.translate(ap);
             p.setPen(QPen(e->color()));
             e->draw(p);
+            p.translate(-ap);
             if (debugMode && e->selected()) {
                   //
                   //  draw bounding box rectangle for all
@@ -1253,9 +1310,14 @@ void Canvas::drawElements(QPainter& p,const QList<Element*>& el)
                   //
                   p.setBrush(Qt::NoBrush);
                   p.setPen(QPen(Qt::blue, 0, Qt::SolidLine));
-                  p.drawRect(e->bbox());
+                  p.drawRect(e->abbox());
+
+                  Element* seg = e->parent();
+                  if (e->type() == NOTE)
+                        seg = seg->parent();
+                  p.setPen(QPen(Qt::red, 0, Qt::SolidLine));
+                  p.drawRect(seg->abbox());
                   }
-            p.translate(-ap);
             }
       }
 

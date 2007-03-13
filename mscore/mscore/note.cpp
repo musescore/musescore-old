@@ -701,7 +701,7 @@ QRectF ShadowNote::bbox() const
 //   acceptDrop
 //---------------------------------------------------------
 
-bool Note::acceptDrop(const QPointF&, int type, const QDomNode&) const
+bool Note::acceptDrop(Viewer*, const QPointF&, int type, const QDomNode&) const
       {
       return (type == ATTRIBUTE || type == TEXT || type == ACCIDENTAL);
       }
@@ -710,7 +710,7 @@ bool Note::acceptDrop(const QPointF&, int type, const QDomNode&) const
 //   drop
 //---------------------------------------------------------
 
-void Note::drop(const QPointF&, int t, const QDomNode& node)
+Element* Note::drop(const QPointF&, const QPointF&, int t, const QDomNode& node)
       {
       switch(t) {
             case ATTRIBUTE:
@@ -718,8 +718,8 @@ void Note::drop(const QPointF&, int t, const QDomNode& node)
                   NoteAttribute* atr = new NoteAttribute(score());
                   atr->read(node);
                   score()->addAttribute(this, atr);
+                  return atr;
                   }
-                  break;
             case TEXT:
                   {
                   Text* f = new Text(score());
@@ -734,9 +734,8 @@ void Note::drop(const QPointF&, int t, const QDomNode& node)
                   f->setParent(this);
                   score()->select(f, 0, 0);
                   score()->undoAddElement(f);
-//                  chord()->layout();
+                  return f;
                   }
-                  break;
             case ACCIDENTAL:
                   {
                   Accidental* a = new Accidental(0);
@@ -750,6 +749,7 @@ void Note::drop(const QPointF&, int t, const QDomNode& node)
             default:
                   break;
             }
+      return 0;
       }
 
 //---------------------------------------------------------

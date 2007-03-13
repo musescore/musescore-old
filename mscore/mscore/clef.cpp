@@ -196,7 +196,7 @@ void Clef::space(double& min, double& extra) const
 //   acceptDrop
 //---------------------------------------------------------
 
-bool Clef::acceptDrop(const QPointF&, int type, const QDomNode&) const
+bool Clef::acceptDrop(Viewer*, const QPointF&, int type, const QDomNode&) const
       {
       return (type == CLEF);
       }
@@ -205,18 +205,18 @@ bool Clef::acceptDrop(const QPointF&, int type, const QDomNode&) const
 //   drop
 //---------------------------------------------------------
 
-void Clef::drop(const QPointF&, int type, const QDomNode& node)
+Element* Clef::drop(const QPointF&, const QPointF&, int type, const QDomNode& node)
       {
       if (type != CLEF)
-            return;
+            return 0;
       Clef* clef = new Clef(0);
       clef->read(node);
       int stype = clef->subtype();
       delete clef;
       int st = subtype();
-      if (st == stype)
-            return;
-      staff()->changeClef(tick(), stype);
+      if (st != stype)
+            staff()->changeClef(tick(), stype);
+      return this;
       }
 
 //---------------------------------------------------------

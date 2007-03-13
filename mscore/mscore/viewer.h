@@ -22,17 +22,44 @@
 #define __VIEWER_H__
 
 class Score;
+class Element;
 
 //---------------------------------------------------------
 //   Viewer
 //---------------------------------------------------------
 
 class Viewer {
+      Score* _score;
+
+   protected:
+
+      // the next elements are used during dragMove to give some visual
+      // feedback:
+      //    dropTarget:       if valid, the element is drawn in a different color
+      //                      to mark it as a valid drop target
+      //    dropRectangle:    if valid, the rectangle is filled with a
+      //                      color to visualize a valid drop area
+      //    dropAnchor:       if valid the line is drawn from the current
+      //                      cursor position to the current anchor point
+      // Note:
+      //    only one of the elements is active during drag
+
+      Element* dropTarget;    ///< current drop target during dragMove
+      QRectF dropRectangle;   ///< current drop rectangle during dragMove
+      QLineF dropAnchor;      ///< line to current anchor point during dragMove
+
    public:
+      Viewer();
+      void setScore(Score* s) { _score = s; }
+
       virtual ~Viewer() {}
-      virtual void dataChanged(Score* cp, const QRectF&) = 0;
+      virtual void dataChanged(const QRectF&) = 0;
+
       virtual QRectF moveCursor() = 0;
       virtual void updateAll(Score*) = 0;
+      void setDropRectangle(const QRectF&);
+      void setDropTarget(Element*);
+      void setDropAnchor(const QLineF&);
       };
 
 #endif

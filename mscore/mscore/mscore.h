@@ -3,7 +3,7 @@
 //  Linux Music Score Editor
 //  $Id: mscore.h,v 1.54 2006/04/12 14:58:10 wschweer Exp $
 //
-//  Copyright (C) 2002-2006 Werner Schweer (ws@seh.de)
+//  Copyright (C) 2002-2007 Werner Schweer (ws@seh.de)
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.
@@ -200,7 +200,9 @@ class MuseScore : public QMainWindow {
       bool saveFile();
       bool saveAs();
       void newFile();
+      void newFileFromTemplate();
       void fingeringMenu();
+      QString createDefaultName() const;
 
    private slots:
       void helpBrowser();
@@ -243,7 +245,6 @@ class MuseScore : public QMainWindow {
       void showLayoutBreakPalette();
       void resetUserOffsets();
       void magChanged(double);
-//      void magChanged(const QString&);
       void showPageSettings();
       void pageSettingsChanged();
       void showInvisibleClicked();

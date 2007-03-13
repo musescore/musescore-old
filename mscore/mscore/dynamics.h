@@ -25,11 +25,12 @@
 
 struct Dyn {
       int textStyle;
+      int velocity;           ///< associated midi velocity (0-127, -1 = none)
       const QString str;
       const char* tag;
 
-      Dyn(int style, const char* t, const QString& s)
-         : textStyle(style), str(s), tag(t) {}
+      Dyn(int style, int velo, const char* t, const QString& s)
+         : textStyle(style), velocity(velo), str(s), tag(t) {}
       };
 
 //---------------------------------------------------------
@@ -43,7 +44,7 @@ class Dynamic : public Text {
       Dynamic(Score*, int val);
       Dynamic(Score*, const QString&);
       Dynamic(const Dynamic&);
-      virtual Dynamic* clone() const { return new Dynamic(*this); }
+      virtual Dynamic* clone() const   { return new Dynamic(*this); }
       virtual ElementType type() const { return DYNAMIC; }
 
       virtual void setSubtype(int val);

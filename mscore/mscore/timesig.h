@@ -23,6 +23,8 @@
 
 #include "element.h"
 
+class Viewer;
+
 enum {
       TSIG_FOUR_FOUR  = 0x40000104,
       TSIG_ALLA_BREVE = 0x40002084
@@ -65,8 +67,8 @@ class TimeSig : public Element {
             }
       void getSig(int* n, int* z1, int* z2, int*z3=0, int*z4=0) const;
       void setSig(int n, int z1, int z2=0, int z3=0, int z4=0);
-      virtual bool acceptDrop(const QPointF&, int, const QDomNode&) const;
-      virtual void drop(const QPointF&, int, const QDomNode&);
+      virtual bool acceptDrop(Viewer*, const QPointF&, int, const QDomNode&) const;
+      virtual Element* drop(const QPointF&, const QPointF&, int, const QDomNode&);
       virtual QRectF bbox() const;
       };
 

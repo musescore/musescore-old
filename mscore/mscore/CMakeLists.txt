@@ -168,6 +168,7 @@ add_executable ( mscore
       timesig.cpp
       lyrics.cpp
       bsp.cpp
+      viewer.cpp
       )
 
 if (CROSS_MINGW)

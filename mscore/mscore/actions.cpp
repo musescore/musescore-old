@@ -31,7 +31,7 @@ Shortcut MuseScore::sc[] = {
          QT_TR_NOOP("file open"),
          Qt::CTRL+Qt::Key_O,
          Qt::WindowShortcut,
-         QT_TR_NOOP("Open Score"),
+         QT_TR_NOOP("Open"),
          QT_TR_NOOP("Load Score from File"),
          &fileOpenIcon
          ),
@@ -40,7 +40,7 @@ Shortcut MuseScore::sc[] = {
          QT_TR_NOOP("file save"),
          Qt::CTRL+Qt::Key_S,
          Qt::WindowShortcut,
-         QT_TR_NOOP("Save Score"),
+         QT_TR_NOOP("Save"),
          QT_TR_NOOP("Save Score to File"),
          &fileSaveIcon
          ),
@@ -49,7 +49,7 @@ Shortcut MuseScore::sc[] = {
          QT_TR_NOOP("file save as"),
          0,
          Qt::WindowShortcut,
-         QT_TR_NOOP("Save Score As"),
+         QT_TR_NOOP("Save As"),
          QT_TR_NOOP("Save Score to named File"),
          &fileSaveIcon
          ),
@@ -58,17 +58,26 @@ Shortcut MuseScore::sc[] = {
          QT_TR_NOOP("file close"),
          Qt::CTRL+Qt::Key_W,
          Qt::WindowShortcut,
-         QT_TR_NOOP("Close Score"),
+         QT_TR_NOOP("Close"),
          QT_TR_NOOP("Close Current Score"),
          &fileSaveIcon
          ),
       Shortcut(
          "file-new",
          QT_TR_NOOP("file new"),
+         0,
+         Qt::WindowShortcut,
+         QT_TR_NOOP("New"),
+         QT_TR_NOOP("Create new score"),
+         &fileNewIcon
+         ),
+      Shortcut(
+         "file-template",
+         QT_TR_NOOP("file new from template"),
          Qt::CTRL+Qt::Key_N,
          Qt::WindowShortcut,
-         QT_TR_NOOP("New Score"),
-         QT_TR_NOOP("Create New Score"),
+         QT_TR_NOOP("New from template"),
+         QT_TR_NOOP("Create new score from template"),
          &fileNewIcon
          ),
 

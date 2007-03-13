@@ -860,6 +860,7 @@ void MuseScore::importMidi()
             return;
       Score* score = new Score();
       score->read(fn);
+      score->setCreated(true);
       appendScore(score);
       tab->setCurrentIndex(scoreList.size() - 1);
       }
@@ -1088,7 +1089,7 @@ bool MidiFile::readTrack(bool mergeChannels)
       int len       = readLong();       // len
       int endPos    = curPos + len;
       status        = -1;
-      sstatus       = -1;  // running status, der nicht bei meta oder sysex zurü      = -1;
+      sstatus       = -1;  // running status, der nicht bei meta oder sysex zurü     = -1;
       lastport      = -1;
       channelprefix = -1;
       click         = 0;
@@ -1945,11 +1946,11 @@ QString MidiTrack::instrName(int type) const
 //      Instrumentennamen verwendet werden?
 //    - Instrumente feststellen
 //          - Name (kommentar?)
-//          - Schlüem?
+//          - Schlüm?
 //    * Takte feststellen
 //    - Schlagzeugtrack markieren
 //    - Quantisierung festlegen:
-//       - kü - songtitle
+//       - kü- songtitle
 
 // process:
 //    for every measure:

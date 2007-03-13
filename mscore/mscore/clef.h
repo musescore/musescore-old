@@ -29,6 +29,7 @@
 #include "element.h"
 
 class Xml;
+class Viewer;
 
 static const int clefSmallBit = 0x1000;
 
@@ -51,8 +52,8 @@ class Clef : public Compound {
       void setSmall(bool val);
       virtual void setSubtype(int st);
       virtual void space(double& min, double& extra) const;
-      virtual bool acceptDrop(const QPointF&, int, const QDomNode&) const;
-      virtual void drop(const QPointF&, int, const QDomNode&);
+      virtual bool acceptDrop(Viewer*, const QPointF&, int, const QDomNode&) const;
+      virtual Element* drop(const QPointF&, const QPointF&, int, const QDomNode&);
       };
 
 //---------------------------------------------------------

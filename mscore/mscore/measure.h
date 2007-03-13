@@ -40,6 +40,7 @@ class BarLine;
 class Text;
 class ChordRest;
 class Score;
+class Viewer;
 
 //---------------------------------------------------------
 //   MeasureWidth
@@ -215,8 +216,8 @@ class Measure : public Element {
       void sortStaves(QList<int>& src, QList<int>& dst);
 
       void dump() const;
-      virtual bool acceptDrop(const QPointF&, int, const QDomNode&) const;
-      virtual void drop(const QPointF&, int, const QDomNode&);
+      virtual bool acceptDrop(Viewer*, const QPointF&, int, const QDomNode&) const;
+      virtual Element* drop(const QPointF&, const QPointF&, int, const QDomNode&);
 
       bool startRepeat() const      { return _startRepeat; }
       void setStartRepeat(bool val) { _startRepeat = val; }

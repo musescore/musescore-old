@@ -269,16 +269,16 @@ bool MuseScore::saveFile()
 
 bool Score::saveFile()
       {
-      if (projectName().isEmpty() || projectName() == tr("untitled")
-         || ((fileInfo()->completeSuffix() != "msc"))) {
+      if (created()) {
             QString fn = QFileDialog::getSaveFileName(
                mscore, tr("MuseScore: Save Score"),
-               QString("."),
+               QString("./%1.msc").arg(projectName()),
                QString("*.msc")
                );
             if (fn.isEmpty())
                   return false;
             fileInfo()->setFile(fn);
+            setCreated(false);
             }
 
       // if file was already saved in this session
@@ -357,11 +357,40 @@ bool MuseScore::saveAs()
       }
 
 //---------------------------------------------------------
-//   newFile
+//   createDefaultName
+//---------------------------------------------------------
+
+QString MuseScore::createDefaultName() const
+      {
+      QString name(tr("untitled"));
+      int n;
+      for (n = 1; ; ++n) {
+            bool nameExists = false;
+            QString tmpName;
+            if (n == 1)
+                  tmpName = name;
+            else
+                  tmpName = QString("%1-%2").arg(name).arg(n);
+            foreach(Score* s, scoreList) {
+                  if (s->projectName() == tmpName) {
+                        nameExists = true;
+                        break;
+                        }
+                  }
+            if (!nameExists) {
+                  name = tmpName;
+                  break;
+                  }
+            }
+      return name;
+      }
+
+//---------------------------------------------------------
+//   newFileFromTemplate
 //    create new score
 //---------------------------------------------------------
 
-void MuseScore::newFile()
+void MuseScore::newFileFromTemplate()
       {
       QString path(mscoreGlobalShare);
       path += "/templates";
@@ -370,21 +399,27 @@ void MuseScore::newFile()
          path,
          "Score templates (*.msc);; Any files (*)"
          );
-      Score* score;
-      if (cs->projectName() == "untitled" && !cs->dirty()) {
-            cs->clear();
-            score = cs;
-            }
-      else
-            score = new Score;
+      Score* score = new Score;
       if (!fn.isEmpty())
             score->read(fn);
-      score->fileInfo()->setFile(QString("untitled"));
+      score->fileInfo()->setFile(createDefaultName());
+      score->setCreated(true);
+      appendScore(score);
+      tab->setCurrentIndex(scoreList.size() - 1);
+      }
 
-      if (score != cs) {
-            appendScore(score);
-            tab->setCurrentIndex(scoreList.size() - 1);
-            }
+//---------------------------------------------------------
+//   newFile
+//    create new score
+//---------------------------------------------------------
+
+void MuseScore::newFile()
+      {
+      Score* score = new Score;
+      score->fileInfo()->setFile(createDefaultName());
+      score->setCreated(true);
+      appendScore(score);
+      tab->setCurrentIndex(scoreList.size() - 1);
       }
 
 //---------------------------------------------------------
