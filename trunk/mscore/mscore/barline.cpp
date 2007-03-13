@@ -224,7 +224,7 @@ QRectF BarLine::bbox() const
 //   acceptDrop
 //---------------------------------------------------------
 
-bool BarLine::acceptDrop(const QPointF&, int type, const QDomNode&) const
+bool BarLine::acceptDrop(Viewer*, const QPointF&, int type, const QDomNode&) const
       {
       return type == BAR_LINE;
       }
@@ -233,10 +233,10 @@ bool BarLine::acceptDrop(const QPointF&, int type, const QDomNode&) const
 //   drop
 //---------------------------------------------------------
 
-void BarLine::drop(const QPointF& /*pos*/, int type, const QDomNode& node)
+Element* BarLine::drop(const QPointF&, const QPointF&, int type, const QDomNode& node)
       {
       if (type != BAR_LINE)
-            return;
+            return 0;
       score()->cmdRemove(this);
 
       BarLine* bl = new BarLine(score());
@@ -245,8 +245,9 @@ void BarLine::drop(const QPointF& /*pos*/, int type, const QDomNode& node)
       bl->setStaff(staff());
       if (subtype() == bl->subtype()) {
             delete bl;
-            return;
+            return 0;
             }
       score()->cmdAdd(bl);
+      return bl;
       }
 

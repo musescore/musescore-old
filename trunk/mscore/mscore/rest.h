@@ -57,8 +57,8 @@ class Rest : public ChordRest {
 
       void setSym(int);
       virtual void space(double& min, double& extra) const;
-      virtual bool acceptDrop(const QPointF&, int, const QDomNode&) const;
-      virtual void drop(const QPointF&, int, const QDomNode&);
+      virtual bool acceptDrop(Viewer*, const QPointF&, int, const QDomNode&) const;
+      virtual Element* drop(const QPointF&, const QPointF&, int, const QDomNode&);
       virtual void layout(ScoreLayout*);
       virtual QRectF bbox() const;
       };

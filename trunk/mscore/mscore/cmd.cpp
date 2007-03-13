@@ -222,7 +222,7 @@ void Score::cmdRemove(Element* e)
 void Score::update(const QRectF& r)
       {
       for (QList<Viewer*>::iterator i = viewer.begin(); i != viewer.end(); ++i)
-            (*i)->dataChanged(this, r);
+            (*i)->dataChanged(r);
       }
 
 //---------------------------------------------------------
@@ -1260,7 +1260,7 @@ void Score::cmd(const QString& cmd)
                   cmdTuplet(2);
             else if (cmd == "triplet")
                   cmdTuplet(3);
-            else if (cmd == "quadruplet")
+            else if (cmd == "quintuplet")
                   cmdTuplet(5);
             else if (cmd == "stretch+")
                   cmdAddStretch(0.1);
@@ -1270,7 +1270,7 @@ void Score::cmd(const QString& cmd)
                   if (sel->state == SEL_SINGLE) {
                         QMimeData* mimeData = new QMimeData;
                         Element* el = sel->element();
-                        mimeData->setData("application/mscore/symbol", el->mimeData());
+                        mimeData->setData("application/mscore/symbol", el->mimeData(QPointF()));
                         QApplication::clipboard()->setMimeData(mimeData);
                         deleteItem(el);
                         }
@@ -1295,9 +1295,10 @@ void Score::cmd(const QString& cmd)
                               return;
                               }
                         QDomNode node = doc.documentElement();
-                        int type      = Element::readType(node);
+                        QPointF dragOffset;
+                        int type      = Element::readType(node, &dragOffset);
                         addRefresh(sel->element()->abbox());   // layout() ?!
-                        sel->element()->drop(QPointF(), type, node);
+                        sel->element()->drop(QPointF(), QPointF(), type, node);
                         addRefresh(sel->element()->abbox());
                         }
                   else if (sel->state == SEL_STAFF && ms && ms->hasFormat("application/mscore/staff"))

@@ -23,6 +23,8 @@
 
 #include "element.h"
 
+class Viewer;
+
 enum BarType {
       NORMAL_BAR, DOUBLE_BAR, START_REPEAT, END_REPEAT,
       BROKEN_BAR, END_BAR, INVISIBLE_BAR
@@ -48,8 +50,8 @@ class BarLine : public Element {
       virtual void setSubtype(int t);
       virtual QRectF bbox() const;
 
-      virtual bool acceptDrop(const QPointF&, int, const QDomNode&) const;
-      virtual void drop(const QPointF&, int, const QDomNode&);
+      virtual bool acceptDrop(Viewer*, const QPointF&, int, const QDomNode&) const;
+      virtual Element* drop(const QPointF&, const QPointF&, int, const QDomNode&);
       void setHeight(qreal v) { _height = v; }
       };
 

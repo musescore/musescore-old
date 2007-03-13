@@ -97,7 +97,7 @@ void TimeSig::getSig(int* n, int* z1, int* z2, int* z3, int* z4) const
 //   acceptDrop
 //---------------------------------------------------------
 
-bool TimeSig::acceptDrop(const QPointF&, int type, const QDomNode&) const
+bool TimeSig::acceptDrop(Viewer*, const QPointF&, int type, const QDomNode&) const
       {
       return type == TIMESIG;
       }
@@ -106,20 +106,22 @@ bool TimeSig::acceptDrop(const QPointF&, int type, const QDomNode&) const
 //   drop
 //---------------------------------------------------------
 
-void TimeSig::drop(const QPointF&, int type, const QDomNode& node)
+Element* TimeSig::drop(const QPointF&, const QPointF&, int type, const QDomNode& node)
       {
       if (type == TIMESIG) {
-            TimeSig* ts = new TimeSig(0);
+            TimeSig* ts = new TimeSig(score());
             ts->read(node);
             int stype = ts->subtype();
             delete ts;
             int st = subtype();
-            if (st == stype)
-                  return;
-            // change timesig applies to all staves, can't simply set subtype
-            // for this one only
-            score()->changeTimeSig(tick(), stype);
+            if (st != stype) {
+                  // change timesig applies to all staves, can't simply set subtype
+                  // for this one only
+                  score()->changeTimeSig(tick(), stype);
+                  }
+            return this;
             }
+      return 0;
       }
 
 //---------------------------------------------------------

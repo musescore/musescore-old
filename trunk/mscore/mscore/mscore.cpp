@@ -249,7 +249,7 @@ MuseScore::MuseScore()
          << "move-up" << "move-down" << "up-chord" << "down-chord"
          << "top-chord" << "bottom-chord" << "next-chord" << "prev-chord"
          << "next-measure" << "prev-measure" << "print" << "undo"
-         << "redo" << "append-measure" << "duplet" << "triplet" << "quadruplet"
+         << "redo" << "append-measure" << "duplet" << "triplet" << "quintuplet"
          << "note-c" << "note-d" << "note-e" << "note-f" << "note-g"
          << "note-a" << "note-b"
          << "chord-c" << "chord-d" << "chord-e" << "chord-f" << "chord-g"
@@ -259,7 +259,7 @@ MuseScore::MuseScore()
          << "lyrics" << "fingering" << "expression" << "technik" << "tempo"
          << "metronome" << "cut" << "copy" << "paste"
          << "beam-start" << "beam-mid" << "no-beam" << "beam32"
-         << "file-open" << "file-new" << "file-save" << "file-save-as" << "file-close"
+         << "file-open" << "file-new" << "file-template" << "file-save" << "file-save-as" << "file-close"
          << "export-midi" << "export-xml" << "import-midi" << "import-xml" << "quit"
          << "toggle-statusbar"
          ;
@@ -419,9 +419,10 @@ MuseScore::MuseScore()
       //    Menu File
       //---------------------
 
-      QMenu* menuFile = mb->addMenu(tr("&File"));
+      QMenu* menuFile = mb->addMenu(tr("&Score"));
 
       menuFile->addAction(getAction("file-new"));
+      menuFile->addAction(getAction("file-template"));
       menuFile->addAction(getAction("file-open"));
       openRecent = menuFile->addMenu(fileOpenIcon, tr("Open &Recent"));
       connect(openRecent, SIGNAL(aboutToShow()), SLOT(openRecentMenu()));
@@ -1344,6 +1345,7 @@ void MuseScore::importMusicXml()
             return;
       Score* score = new Score();
       score->read(name);
+      score->setCreated(true);
       appendScore(score);
       tab->setCurrentIndex(scoreList.size() - 1);
       }
@@ -1824,6 +1826,8 @@ void MuseScore::cmd(QAction* a)
             saveAs();
       else if (cmd == "file-new")
             newFile();
+      else if (cmd == "file-template")
+            newFileFromTemplate();
       else if (cmd == "export-midi")
             exportMidi();
       else if (cmd == "export-xml")

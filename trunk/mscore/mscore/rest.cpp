@@ -137,7 +137,7 @@ void Rest::space(double& min, double& extra) const
 //   acceptDrop
 //---------------------------------------------------------
 
-bool Rest::acceptDrop(const QPointF&, int type, const QDomNode& node) const
+bool Rest::acceptDrop(Viewer*, const QPointF&, int type, const QDomNode& node) const
       {
       if (type != ATTRIBUTE)
             return false;
@@ -152,18 +152,19 @@ bool Rest::acceptDrop(const QPointF&, int type, const QDomNode& node) const
 //   drop
 //---------------------------------------------------------
 
-void Rest::drop(const QPointF&, int t, const QDomNode& node)
+Element* Rest::drop(const QPointF&, const QPointF&, int t, const QDomNode& node)
       {
       if (t != ATTRIBUTE)
-            return;
+            return 0;
       NoteAttribute* atr = new NoteAttribute(score());
       atr->read(node);
       int st = atr->subtype();
       if (!(st == UfermataSym || st == DfermataSym)) {
             delete atr;
-            return;
+            return 0;
             }
       score()->addAttribute(this, atr);
+      return atr;
       }
 
 //---------------------------------------------------------

@@ -307,7 +307,6 @@ void Text::setText(const QString& s)
       tf.setFont(doc->defaultFont());
       cursor.setBlockCharFormat(tf);
       cursor.insertText(s);
-//TODO      layout();
       }
 
 //---------------------------------------------------------
@@ -324,7 +323,6 @@ void Text::setStyle(int n)
       _anchor      = s->anchor;
       _offsetType  = s->offsetType;
       _sizeIsSpatiumDependent = s->sizeIsSpatiumDependent;
-//      layout();
       }
 
 //---------------------------------------------------------
@@ -362,7 +360,6 @@ void Text::read(QDomNode node)
                   domError(node);
             }
       cursorPos = 0;
-//      layout();
       }
 
 //---------------------------------------------------------
@@ -671,7 +668,6 @@ void Text::addSymbol(const SymCode& s)
             }
       else
             cursor->insertText(s.code);
-//      score()->layout();
       score()->endCmd(false);
       }
 
@@ -695,7 +691,6 @@ void Text::setBlockFormat(const QTextBlockFormat& bf)
       if (!cursor)
             return;
       cursor->setBlockFormat(bf);
-//      layout();
       score()->layout();
       }
 
@@ -759,10 +754,5 @@ void TempoText::read(QDomNode node)
                   domError(node);
             }
       cursorPos = 0;
-//      QTextCharFormat f = cursor->charFormat();
-//      f.setFont(defaultFont());
-//      cursor->setCharFormat(f);
-//      doc->setDefaultFont(defaultFont());
-//      layout();
       }
 

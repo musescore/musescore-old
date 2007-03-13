@@ -70,10 +70,7 @@ class Canvas : public QWidget, public Viewer {
       ShadowNote* shadowNote;
       QTimer* cursorTimer;    // blink timer
 
-      Element* dropTarget;
-      int propertyStaff;
-
-      Lasso* lasso;           // temporarily drawn lasso selection
+      Lasso* lasso;           ///< temporarily drawn lasso selection
 
       QColor _bgColor;
       QColor _fgColor;
@@ -144,7 +141,7 @@ class Canvas : public QWidget, public Viewer {
       virtual QRectF moveCursor();
       void clearScore();
 
-      virtual void dataChanged(Score* cp, const QRectF&);
+      virtual void dataChanged(const QRectF&);
       void setState(State);
       State getState() const { return state; }
       bool startEdit(Element*);

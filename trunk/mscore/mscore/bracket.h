@@ -23,6 +23,8 @@
 
 #include "element.h"
 
+class Viewer;
+
 // System Brackets
 enum { BRACKET_NORMAL, BRACKET_AKKOLADE, NO_BRACKET = -1};
 
@@ -70,8 +72,8 @@ class Bracket : public Element {
       virtual bool endEditDrag();
       virtual QPointF dragOff() const;
 
-      virtual bool acceptDrop(const QPointF&, int, const QDomNode&) const;
-      virtual void drop(const QPointF&, int, const QDomNode&);
+      virtual bool acceptDrop(Viewer*, const QPointF&, int, const QDomNode&) const;
+      virtual Element* drop(const QPointF&, const QPointF&, int, const QDomNode&);
       };
 
 #endif

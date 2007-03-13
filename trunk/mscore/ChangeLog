@@ -1,4 +1,14 @@
+13.3.7 (ws)
+      - Visualize anchor position of dynamics while dragging.
+      - Allow to place Dynamics everywhere. This fixes the bug for one
+        staff systems were it was not possible to place Dynamics at all.
+12.3.7 (ws)
+      - enhance/fix Dynamics drag/drop
+8.3.7 (ws)
+      - separate "New" and "New from template"
 7.3.7 (ws)
+      - drag score element with shift+leftMouseButton+drag similar to
+        palette use
       - applied patch from Seth Yastrov: fix crash when "add below" a new
         staff
 6.3.7 (ws)

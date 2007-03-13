@@ -405,7 +405,7 @@ QByteArray Selection::mimeData() const
       QByteArray a;
       switch (state) {
             case SEL_SINGLE:
-                  a = element()->mimeData();
+                  a = element()->mimeData(QPointF());
                   break;
             default:
             case SEL_NONE:

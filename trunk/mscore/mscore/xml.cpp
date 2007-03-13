@@ -195,8 +195,7 @@ void Xml::tag(const char* name, const QRect& r)
 void Xml::tag(const char* const name, const QPointF& p)
       {
       putLevel();
-      QString s("<%1 x=\"%2\" y=\"%3\"/>\n");
-      *this << s.arg(name).arg(p.x()).arg(p.y());
+      *this << QString("<%1 x=\"%2\" y=\"%3\"/>\n").arg(name).arg(p.x()).arg(p.y());
       }
 
 //---------------------------------------------------------

@@ -801,29 +801,33 @@ void Score::cmdFlipStemDirection()
       }
 
 //---------------------------------------------------------
-//   addDynamic
+//   cmdAddDynamic
 //---------------------------------------------------------
 
-Element* Score::addDynamic(Dynamic* atr, const QPointF& pos)
+Element* Score::cmdAddDynamic(Dynamic* d, const QPointF& pos, const QPointF& off)
       {
       Staff* staff = 0;
       int pitch, tick;
       QPointF offset;
       Segment* segment;
+
       Measure* measure = pos2measure(pos, &tick, &staff, &pitch, &segment, &offset);
       if (measure == 0) {
             printf("addDynamic: cannot put object here\n");
-            delete atr;
+            delete d;
             return 0;
             }
-      atr->setPos(segment->x(), 0.0);
-      atr->setUserOff(offset / _spatium);
-      atr->setTick(tick);
-      atr->setStaff(staff);
-      measure->add(atr);
-// printf("Dyn staff %d tick %d offset %g %g\n", staff, tick, offset.x(), offset.y());
+      offset -= off;
+      d->setPos(segment->x(), 0.0);
+      d->setTick(segment->tick());
+      d->setUserOff(offset / _spatium);
+      d->setTick(segment->tick());
+      d->setStaff(staff);
+      d->setParent(measure);
+      undoAddElement(d);
+// printf("Dynamic tick %d offset %g %g\n", tick, offset.x(), offset.y());
       updateAll = true;
-      return atr;
+      return d;
       }
 
 //---------------------------------------------------------

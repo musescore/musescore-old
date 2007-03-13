@@ -35,6 +35,7 @@ class Chord;
 class Text;
 class Score;
 class Sym;
+class Viewer;
 
 //---------------------------------------------------------
 //   Note
@@ -124,8 +125,8 @@ class Note : public Element {
       virtual void read(QDomNode);
       virtual void write(Xml& xml) const;
       QPointF stemPos(bool upFlag) const;    ///< Point to connect stem.
-      virtual bool acceptDrop(const QPointF&, int, const QDomNode&) const;
-      virtual void drop(const QPointF&, int, const QDomNode&);
+      virtual bool acceptDrop(Viewer*, const QPointF&, int, const QDomNode&) const;
+      virtual Element* drop(const QPointF&, const QPointF&, int, const QDomNode&);
 
       virtual bool startEdit(QMatrix&, const QPointF&);
       virtual bool edit(QKeyEvent*);

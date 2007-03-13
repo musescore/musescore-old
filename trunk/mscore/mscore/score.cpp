@@ -201,9 +201,10 @@ Canvas* Score::canvas() const
 
 void Score::clear()
       {
-      info.setFile(tr("untitled.msc"));
+      info.setFile("");
       _dirty          = false;
       _saved          = false;
+      _created        = false;
       rights          = "";
       movementNumber  = "";
       movementTitle   = "";
@@ -874,135 +875,6 @@ void Score::endEdit()
       layout();
       editObject = 0;
       mscore->setState(STATE_NORMAL);
-      }
-
-//---------------------------------------------------------
-//   paste
-//---------------------------------------------------------
-
-/**
- Paste element \a el at position \a pos.
-*/
-
-void Score::paste(const Element* /*e*/, const QPointF& /*pos*/)
-      {
-      printf("TODO: Score::paste()\n");
-#if 0       //TODO: paste arbitrary element
-      Element* obj = e->clone();
-
-      Staff* staff = 0;
-      int tick;
-      Measure* measure = pos2measure(pos, &tick, &staff, 0, 0, 0);
-
-      bool tickFound = measure != 0;
-      Element* el = findSelectableElement(pos);
-
-      Element* element = 0;
-      switch(obj->type()) {
-            case SYMBOL:
-            case COMPOUND:
-            case TEXT:
-                  {
-                  if (measure == 0) {
-                        printf("cmdAddElement(): measure not found\n");
-                        break;
-                        }
-                  iPage ip;
-                  for (ip = pages()->begin(); ip != pages()->end(); ++ip) {
-                        if ((*ip)->contains(pos)) {
-                              obj->setPos(pos - (*ip)->apos());
-                              measure->add(obj);
-                              undoOp(UndoOp::AddObject, obj);
-                              (*ip)->add(obj);
-                              element = obj;
-                              break;
-                              }
-                        }
-                  if (ip == pages()->end())
-                        printf("cmdAddElement(): page not found\n");
-                  }
-                  break;
-            case CLEF:
-                  {
-                  if (!tickFound) {
-                        printf("cannot put clef at this position\n");
-                        delete obj;
-                        break;
-                        }
-                  Clef* clef = (Clef*)obj;
-                  clef->setTick(tick);
-                  clef->setStaff(staff);
-                  element = addClef(clef);
-                  if (element)
-                        undoOp(UndoOp::AddObject, element);
-                  else
-                        delete obj;
-                  }
-                  break;
-
-            case TIMESIG:
-                  element = addTimeSig((TimeSig*) obj, pos);
-                  break;
-            case KEYSIG:
-                  element = addKeySig((KeySig*) obj, pos);
-                  break;
-            case BAR_LINE:
-                  addBar((BarLine*)obj, measure);
-                  break;
-            case ATTRIBUTE:
-                  {
-                  NoteAttribute* a = (NoteAttribute*)obj;
-                  int st = a->subtype();
-                  if ((el->type() == NOTE)
-                     || (el->type() == REST && (st == UfermataSym || st == DfermataSym))) {
-                        addAttribute(el, a);
-                        element = obj;
-                        }
-                  }
-                  break;
-            case DYNAMIC:
-                  element = addDynamic((Dynamic*) obj, pos);
-                  break;
-            case HAIRPIN:
-                  element = cmdAddHairpin((Hairpin*) obj, pos);
-                  break;
-            case SLUR:
-                  element = addSlur((Slur*) obj, pos);
-                  break;
-            case FINGERING:
-                  {
-                  if (el && el->type() == NOTE) {
-                        el->add(obj);
-                        select(obj, 0, 0);
-                        layout();
-                        undoOp(UndoOp::AddObject, obj);
-                        element = obj;
-                        }
-                  }
-                  break;
-            case ACCIDENTAL:
-                  if (el && el->type() == NOTE)
-                        addAccidental((Note*)el, ((Accidental*)obj)->idx());
-                  delete obj;
-                  break;
-            case BRACKET:
-            	if (el == 0)
-                  	break;
-			measure->drop(pos, obj->type(), obj->subtype());
-            	break;
-            case NOTE:
-            case CHORD:
-            default:
-                  printf("cannot add element %s to %s\n",
-                     obj->name(), el ? el->name() :"??");
-                  delete obj;
-                  break;
-            }
-      _dragObject = element;
-
-      if (_dragObject)
-            select(_dragObject, 0, 0);
-#endif
       }
 
 //---------------------------------------------------------

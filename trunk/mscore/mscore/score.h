@@ -95,6 +95,7 @@ class Score : public QObject {
       Q_OBJECT
 
       QFileInfo info;
+      bool _created;          ///< file is never saved, has generated name
 
       QRectF refresh;
       bool updateAll;
@@ -103,7 +104,7 @@ class Score : public QObject {
       QList<Viewer*> viewer;
 
       ScoreView scoreView;
-      ScoreLayout* _layout;      ///< Main layout.
+      ScoreLayout* _layout;   ///< Main layout.
 
       bool _showInvisible;
 
@@ -301,7 +302,7 @@ class Score : public QObject {
       Element* addClef(Clef*);
       void addTimeSig(int tick, int keySigSubtype);
       Element* addKeySig(KeySig*, const QPointF&);
-      Element* addDynamic(Dynamic* atr, const QPointF& pos);
+      Element* cmdAddDynamic(Dynamic*, const QPointF&, const QPointF&);
       Element* cmdAddHairpin(Hairpin* atr, const QPointF& pos);
       Element* addSlur(Slur* atr, const QPointF& pos);
       Note* addNote(Chord*, int pitch);
@@ -345,7 +346,7 @@ class Score : public QObject {
       bool edit(QKeyEvent* ev);
       void endEdit();
 
-      void paste(const Element*, const QPointF&);
+//      void paste(const Element*, const QPointF&);
 
       void startDrag();
       void drag(const QPointF&);
@@ -399,10 +400,6 @@ class Score : public QObject {
       QString projectName() const { return info.baseName(); }
       void addAttribute(Element*, NoteAttribute* atr);
 
-      void setDirty(bool val = true);
-      bool dirty() const    { return _dirty; }
-      bool saved() const    { return _saved; }
-      void setSaved(bool v) { _saved = v; }
       bool playlistDirty();
       void changeTimeSig(int tick, int st);
 
@@ -411,6 +408,13 @@ class Score : public QObject {
       int fileDivision(int t) const { return (t * division + _fileDivision/2) / _fileDivision; }
       bool saveFile();
       void adjustTime(int tick, Measure*);
+
+      void setDirty(bool val = true);
+      bool dirty() const        { return _dirty; }
+      void setCreated(bool val) { _created = val; }
+      bool created() const      { return _created; }
+      bool saved() const        { return _saved; }
+      void setSaved(bool v)     { _saved = v; }
       };
 
 extern void setPadState(Element*);

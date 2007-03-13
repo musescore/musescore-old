@@ -55,7 +55,7 @@ void PagePreview::setScore(Score* s)
             //
             static const char* mimeType = "application/mscore/measure";
             QMimeData* mimeData = new QMimeData;
-            mimeData->setData(mimeType, m->mimeData());
+            mimeData->setData(mimeType, m->mimeData(QPointF()));
 
             Measure* nm = new Measure(_score);
             QByteArray data(mimeData->data(mimeType));

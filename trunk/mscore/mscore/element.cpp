@@ -128,8 +128,8 @@ QColor Element::color() const
       {
       if (_selected)
             return  preferences.selectColor[_voice];
-//      if (_dropTarget)
-//            pen.setColor(preferences.dropColor);
+      if (_dropTarget)
+            return preferences.dropColor;
       if (!_visible)
             return Qt::gray;
       return _color;
@@ -717,7 +717,7 @@ void KeySig::draw(QPainter& p)
 //   acceptDrop
 //---------------------------------------------------------
 
-bool KeySig::acceptDrop(const QPointF&, int type, const QDomNode&) const
+bool KeySig::acceptDrop(Viewer*, const QPointF&, int type, const QDomNode&) const
       {
       return type == KEYSIG;
       }
@@ -726,7 +726,7 @@ bool KeySig::acceptDrop(const QPointF&, int type, const QDomNode&) const
 //   drop
 //---------------------------------------------------------
 
-void KeySig::drop(const QPointF&, int type, const QDomNode& node)
+Element* KeySig::drop(const QPointF&, const QPointF&, int type, const QDomNode& node)
       {
       if (type == KEYSIG) {
             KeySig* k = new KeySig(0);
@@ -734,12 +734,14 @@ void KeySig::drop(const QPointF&, int type, const QDomNode& node)
             int stype = k->subtype();
             delete k;
             int st = subtype();
-            if (st == stype)
-                  return;
-            // change keysig applies to all staves, can't simply set subtype
-            // for this one only
-            staff()->changeKeySig(tick(), stype);
+            if (st != stype) {
+                  // change keysig applies to all staves, can't simply set subtype
+                  // for this one only
+                  staff()->changeKeySig(tick(), stype);
+                  }
+            return this;
             }
+      return 0;
       }
 
 //---------------------------------------------------------
@@ -862,12 +864,16 @@ void Element::space(double& min, double& extra) const
 //   mimeData
 //---------------------------------------------------------
 
-QByteArray Element::mimeData() const
+QByteArray Element::mimeData(const QPointF& dragOffset) const
       {
       QBuffer buffer;
       buffer.open(QIODevice::WriteOnly);
       Xml xml(&buffer);
+      xml.stag("Element");
+      if (!dragOffset.isNull())
+            xml.tag("dragOffset", dragOffset);
       write(xml);
+      xml.etag("Element");
       buffer.close();
       return buffer.buffer();
       }
@@ -988,18 +994,27 @@ void Volta::read(QDomNode node)
 //   readType
 //---------------------------------------------------------
 
-int Element::readType(QDomNode& node)
+int Element::readType(QDomNode& node1, QPointF* dragOffset)
       {
-      int type = 0;
-      for (; !node.isNull(); node = node.nextSibling()) {
-            QDomElement e = node.toElement();
+      int type = -1;
+      for (; !node1.isNull(); node1 = node1.nextSibling()) {
+            QDomElement e = node1.toElement();
             if (e.isNull())
                   continue;
+            if (e.tagName() != "Element")
+                  domError(node1);
+
+            for (QDomNode node = node1.firstChild(); !node.isNull(); node = node.nextSibling()) {
+                  QDomElement e = node.toElement();
+                  if (e.isNull())
+                        continue;
                   //
                   // DEBUG:
                   // check names; remove non needed elements
                   //
-                  if (e.tagName() == "Dynamic")
+                  if (e.tagName() == "dragOffset")
+                        *dragOffset = readPoint(node);
+                  else if (e.tagName() == "Dynamic")
                         type = DYNAMIC;
                   else if (e.tagName() == "Symbol")
                         type = SYMBOL;
@@ -1069,10 +1084,18 @@ int Element::readType(QDomNode& node)
                         type = LAYOUT_BREAK;
                   else if (e.tagName() == "HelpLine")
                         type = HELP_LINE;
-                  else
+                  else {
                         domError(node);
-                  break;
+                        type = 0;
+                        break;
+                        }
+                  if (type >= 0) {
+                        node1 = node;
+                        break;
+                        }
                   }
+            break;
+            }
       return type;
       }
 
