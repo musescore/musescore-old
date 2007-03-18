@@ -608,7 +608,7 @@ void Score::cmdAddText(int subtype)
             endCmd(true);
             }
       Page* page = _layout->pages()->front();
-      SystemList* sl = page->systems();
+      QList<System*>* sl = page->systems();
       if (sl == 0 || sl->empty()) {
             printf("first create measure, then repeat operation\n");
             return;
@@ -625,7 +625,7 @@ void Score::cmdAddText(int subtype)
       s->setText(s->subtypeName());
 
       startCmd();
-      s->setAnchor(measure);
+      s->setAnchorMeasure(measure);
       s->setParent(page);
       undoAddElement(s);
       layout();

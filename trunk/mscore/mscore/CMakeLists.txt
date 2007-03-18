@@ -52,6 +52,7 @@ QT4_WRAP_UI (ui_headers
       textpalette.ui
       textstyle.ui
       timedialog.ui
+      symboldialog.ui
       dynamic.ui
       tuplet.ui
       shortcutcapturedialog.ui
@@ -80,6 +81,7 @@ QT4_WRAP_CPP (mocs
       textpalette.h
       textstyle.h
       timedialog.h
+      symboldialog.h
       shortcutcapturedialog.h
       )
 
@@ -159,6 +161,7 @@ add_executable ( mscore
       textpalette.cpp
       textstyle.cpp
       timedialog.cpp
+      symboldialog.cpp
       trill.cpp
       tuplet.cpp
       shortcutcapturedialog.cpp

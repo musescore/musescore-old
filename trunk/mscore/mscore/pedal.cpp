@@ -193,3 +193,20 @@ void Pedal::read(QDomNode node)
                   domError(node);
             }
       }
+
+//---------------------------------------------------------
+//   contains
+//---------------------------------------------------------
+
+/**
+ Return true if \a p is inside the shape of the object.
+
+ Note: \a p is in canvas coordinates
+*/
+
+bool Pedal::contains(const QPointF& p) const
+      {
+      return abbox().contains(p);
+      }
+
+

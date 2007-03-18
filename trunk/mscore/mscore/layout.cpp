@@ -52,7 +52,7 @@ ScoreLayout::ScoreLayout()
       {
       _spatium     = ::_spatium;
       _pageFormat  = new PageFormat;
-      _systems     = new SystemList;
+      _systems     = new QList<System*>;
       _pages       = new PageList;
       _paintDevice = 0;
       }
@@ -395,7 +395,7 @@ bool ScoreLayout::layoutPage(Page* page, Measure*& im, iSystem& is)
       if (restHeight > (ph * ::style->pageFillLimit))
             return true;
 
-      SystemList* sl   = page->systems();
+      QList<System*>* sl   = page->systems();
       int systems      = sl->size();
       double extraDist = restHeight / (systems-1);
       y                = 0;

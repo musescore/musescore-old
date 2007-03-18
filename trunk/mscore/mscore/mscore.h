@@ -159,7 +159,7 @@ class MuseScore : public QMainWindow {
       MeasureListEditor* measureListEdit;
       PageSettings* pageSettings;
 
-      QWidget* symbolPalette1;
+      QWidget* symbolPalette;
       QWidget* clefPalette;
       QWidget* keyPalette;
       QWidget* timePalette;
@@ -191,7 +191,7 @@ class MuseScore : public QMainWindow {
       void loadScoreList();
       void loadInstrumentTemplates();
       void editInstrList();
-      void symbolMenu1();
+      void symbolMenu();
       void clefMenu();
       void keyMenu();
       void timeMenu();

@@ -30,7 +30,6 @@ class PageList;
 class Page;
 class Measure;
 class QPaintDevice;
-class SystemList;
 class System;
 
 //---------------------------------------------------------
@@ -77,7 +76,7 @@ class ScoreLayout {
       // generated objects by layout():
       //
       PageList* _pages;        // pages are build from systems
-      SystemList* _systems;    // measures are akkumulated to systems
+      QList<System*>* _systems;    // measures are akkumulated to systems
 
       bool _needLayout;
 
@@ -100,7 +99,7 @@ class ScoreLayout {
       PageFormat* pageFormat() const { return _pageFormat; }
       void setPageFormat(const PageFormat& pf);
       PageList* pages() const        { return _pages; }
-      SystemList* systems() const    { return _systems; }
+      QList<System*>* systems() const    { return _systems; }
       bool needLayout() const        { return _needLayout; }
       Measure* first() const         { return (Measure*)_measures.first(); }
       Measure* last()  const         { return (Measure*)_measures.last();  }

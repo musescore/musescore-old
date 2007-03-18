@@ -59,7 +59,7 @@ QRectF handleRect(const QPointF& pos)
 //   tick2measure
 //---------------------------------------------------------
 
-Measure* Score::tick2measure(int tick)
+Measure* Score::tick2measure(int tick) const
       {
       for (Measure* m = _layout->first(); m; m = m->next()) {
             int st = m->tick();
@@ -82,7 +82,7 @@ Measure* Score::tick2measure(int tick)
 //   tick2segment
 //---------------------------------------------------------
 
-Segment* Score::tick2segment(int tick)
+Segment* Score::tick2segment(int tick) const
       {
       Measure* m = tick2measure(tick);
       if (m == 0) {

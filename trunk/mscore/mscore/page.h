@@ -23,7 +23,6 @@
 
 #include "element.h"
 
-class SystemList;
 class System;
 class Text;
 class Measure;
@@ -75,7 +74,7 @@ struct PageFormat {
 
 class Page : public Element {
       ScoreLayout* _layout;
-      SystemList* _systems;
+      QList<System*>* _systems;
       int _no;                            // page number
       Text* _pageNo;
       Text* _copyright;
@@ -88,7 +87,7 @@ class Page : public Element {
       virtual ElementType type() const   { return PAGE; }
       virtual QRectF bbox() const;
 
-      SystemList* systems() const        { return _systems;   }
+      QList<System*>* systems() const     { return _systems;   }
       void appendSystem(System* s);
       double addMeasure(ScoreLayout*, Measure*, double);
 

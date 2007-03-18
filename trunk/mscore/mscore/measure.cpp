@@ -806,7 +806,7 @@ void Measure::add(Element* el)
       Staff* staffp = el->staff();
       if (el->type() != SEGMENT && staffp == 0) {
             _pel.push_back(el);
-            el->setAnchor(this);
+            el->setAnchorMeasure(this);
             return;
             }
       el->setParent(this);
@@ -819,7 +819,7 @@ void Measure::add(Element* el)
       switch (type) {
             case BEAM:
                   _pel.push_back(el);
-                  el->setAnchor(this);
+                  el->setAnchorMeasure(this);
                   break;
             case SEGMENT:
                   {
@@ -1809,7 +1809,7 @@ void Measure::insertStaff1(Staff* staff, int staffIdx)
  and key- and timesig (allow drop if left of first chord or rest).
 */
 
-bool Measure::acceptDrop(Viewer* v, const QPointF& p, int type, const QDomNode&) const
+bool Measure::acceptDrop(Viewer*, const QPointF& p, int type, const QDomNode&) const
       {
       // convert p from canvas to measure relative position and take x and y coordinates
       QPointF mrp = p - pos() - system()->pos() - system()->page()->pos();
@@ -1832,15 +1832,6 @@ bool Measure::acceptDrop(Viewer* v, const QPointF& p, int type, const QDomNode&)
                   if (mrpy < t)
                         return true;
                   return false;
-
-            case PEDAL:
-                  // accept drop only below staff
-                  // if (mrpy > b)
-                  //      return true;
-                  // Changed: accept anywhere
-//                  v->setDropRectangle(sb.translated(pos() + system()->pos() + system()->page()->pos()));
-                  v->setDropRectangle(abbox());
-                  return true;
 
             case BRACKET:
             case LAYOUT_BREAK:
@@ -1901,7 +1892,7 @@ bool Measure::acceptDrop(Viewer* v, const QPointF& p, int type, const QDomNode&)
  Handle a dropped element at position \a pos of given element \a type and \a subtype.
 */
 
-Element* Measure::drop(const QPointF& p, const QPointF& offset, int type, const QDomNode& node)
+Element* Measure::drop(const QPointF& p, const QPointF& /*offset*/, int type, const QDomNode& node)
       {
       // determine staff
       System* s = system();
@@ -1988,16 +1979,6 @@ Element* Measure::drop(const QPointF& p, const QPointF& offset, int type, const 
                   trill->setParent(this);
                   score()->cmdAdd(trill);
                   return trill;
-                  }
-            case PEDAL:
-                  {
-                  Pedal* pedal = new Pedal(score());
-                  pedal->setStaff(staff);
-                  pedal->setTick1(tick());
-                  pedal->setTick2(tick() + tickLen());
-                  pedal->setParent(this);
-                  score()->cmdAdd(pedal);
-                  return pedal;
                   }
             case LAYOUT_BREAK:
                   {
