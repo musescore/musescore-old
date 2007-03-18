@@ -39,6 +39,7 @@
 #include "note.h"
 #include "layout.h"
 #include "dynamics.h"
+#include "pedal.h"
 
 //---------------------------------------------------------
 //   Canvas
@@ -141,6 +142,7 @@ void Canvas::canvasPopup(const QPoint& pos)
       {
       QMenu* popup = mscore->genCreateMenu();
       popup->popup(pos);
+      setState(NORMAL);
       }
 
 //---------------------------------------------------------
@@ -248,8 +250,6 @@ void Canvas::mousePressEvent(QMouseEvent* ev)
       buttonState = ev->button();
       startMove   = imatrix.map(QPointF(ev->pos()));
 
-// findBspElements(startMove);      // TEST
-
       Element* element = elementAt(startMove);
       _score->setDragObject(element);
 
@@ -284,8 +284,9 @@ void Canvas::mousePressEvent(QMouseEvent* ev)
                   seq->stopNotes(); // stop now because we dont get a mouseRelease event
                   objectPopup(ev->globalPos(), element);
                   }
-            else
+            else {
                   canvasPopup(ev->globalPos());
+                  }
             return;
             }
 
@@ -321,6 +322,7 @@ void Canvas::mousePressEvent(QMouseEvent* ev)
                   //-----------------------------------------
 
                   if (element) {
+printf("select %s\n", element->name());
                         ElementType type = element->type();
                         _score->dragStaff = 0;  // WS
                         if (type == MEASURE) {
@@ -1025,6 +1027,30 @@ void Canvas::setViewRect(const QRectF& r)
       }
 
 //---------------------------------------------------------
+//   dragMovePageElement
+//---------------------------------------------------------
+
+bool Canvas::dragTimeAnchorElement(const QPointF& pos)
+      {
+      Staff* staff = 0;
+      Segment* seg;
+      QPointF offset;
+      int tick;
+      Measure* m = _score->pos2measure(pos, &tick, &staff, 0, &seg, &offset);
+      if (m) {
+            System* s = m->system();
+            int staffIdx = staff->idx();
+            QRectF sb(s->staff(staffIdx)->bbox());
+            sb.translate(s->pos() + s->page()->pos());
+            QPointF anchor(seg->abbox().x(), sb.topLeft().y());
+            setDropAnchor(QLineF(pos, anchor));
+            return true;
+            }
+      setDropTarget(0);
+      return false;
+      }
+
+//---------------------------------------------------------
 //   dragMoveEvent
 //---------------------------------------------------------
 
@@ -1048,41 +1074,43 @@ void Canvas::dragMoveEvent(QDragMoveEvent* event)
       QDomNode node = doc.documentElement();
       QPointF dragOffset;
       int type = Element::readType(node, &dragOffset);
-      if (type == DYNAMIC) {
-            Staff* staff = 0;
-            Segment* seg;
-            QPointF offset;
-            int tick;
-            Measure* m = _score->pos2measure(pos, &tick, &staff, 0, &seg, &offset);
-            if (m) {
-                  System* s = m->system();
-                  int staffIdx = staff->idx();
-                  QRectF sb(s->staff(staffIdx)->bbox());
-                  sb.translate(s->pos() + s->page()->pos());
-                  setDropAnchor(QLineF(pos, seg->abbox().topLeft()));
-                  event->acceptProposedAction();
-                  }
-            else {
-                  event->ignore();
-                  setDropTarget(0);
-                  }
-            }
-      else {
-            Element* el = elementAt(pos);
-            if (el) {
-                  bool accept = el->acceptDrop(this, pos, type, node);
-                  if (accept)
+      switch(type) {
+            case PEDAL:
+            case DYNAMIC:
+                  if (dragTimeAnchorElement(pos))
                         event->acceptProposedAction();
+                  break;
+            case SYMBOL:
+                  {
+                  Symbol* s = new Symbol(_score);
+                  s->read(node);
+                  if (s->anchor() == ANCHOR_TICK) {
+                        if (dragTimeAnchorElement(pos))
+                              event->acceptProposedAction();
+                        }
+                  delete s;
+                  }
+                  break;
+
+            default:
+                  {
+                  Element* el = elementAt(pos);
+                  if (el) {
+                        bool accept = el->acceptDrop(this, pos, type, node);
+                        if (accept)
+                              event->acceptProposedAction();
+                        else {
+                              if (debugMode)
+                                    printf("ignore drop of %s\n", elementNames[type]);
+                              event->ignore();
+                              }
+                        }
                   else {
-                        if (debugMode)
-                              printf("ignore drop of %s\n", elementNames[type]);
                         event->ignore();
+                        setDropTarget(0);
                         }
                   }
-            else {
-                  event->ignore();
-                  setDropTarget(0);
-                  }
+                  break;
             }
       _score->end();
       }
@@ -1111,33 +1139,56 @@ void Canvas::dropEvent(QDropEvent* event)
       QPointF dragOffset;
       int type = Element::readType(node, &dragOffset);
 
-      if (type == DYNAMIC) {
-            _score->startCmd();
-            Dynamic* dynamic = new Dynamic(score());
-            dynamic->read(node);
-            dynamic->setSelected(false);
-            score()->cmdAddDynamic(dynamic, pos, dragOffset);
-            _score->select(dynamic, 0, 0);
-            _score->addRefresh(dynamic->abbox());
-            event->acceptProposedAction();
-            _score->endCmd(true);
-            }
-      else {
-            Element* el = elementAt(pos);
-            if (el) {
+      switch(type) {
+            case SYMBOL:
+                  {
                   _score->startCmd();
-                  _score->addRefresh(el->abbox());
-                  Element* dropElement = el->drop(pos, dragOffset, type, node);
-                  _score->addRefresh(el->abbox());
-                  if (dropElement) {
-                        _score->select(dropElement, 0, 0);
-                        _score->addRefresh(dropElement->abbox());
-                        }
+                  Symbol* s = new Symbol(score());
+                  s->read(node);
+                  _score->cmdAddSymbol(s, pos, dragOffset);
                   event->acceptProposedAction();
                   _score->endCmd(true);
                   }
-            else
-                  printf("cannot drop here\n");
+                  break;
+            case PEDAL:
+                  {
+                  _score->startCmd();
+                  Pedal* pedal = new Pedal(score());
+                  pedal->read(node);
+                  _score->cmdAddPedal(pedal, pos, dragOffset);
+                  event->acceptProposedAction();
+                  _score->endCmd(true);
+                  }
+                  break;
+            case DYNAMIC:
+                  {
+                  _score->startCmd();
+                  Dynamic* dynamic = new Dynamic(score());
+                  dynamic->read(node);
+                  _score->cmdAddDynamic(dynamic, pos, dragOffset);
+                  event->acceptProposedAction();
+                  _score->endCmd(true);
+                  }
+                  break;
+            default:
+                  {
+                  Element* el = elementAt(pos);
+                  if (el) {
+                        _score->startCmd();
+                        _score->addRefresh(el->abbox());
+                        Element* dropElement = el->drop(pos, dragOffset, type, node);
+                        _score->addRefresh(el->abbox());
+                        if (dropElement) {
+                              _score->select(dropElement, 0, 0);
+                              _score->addRefresh(dropElement->abbox());
+                              }
+                        event->acceptProposedAction();
+                        _score->endCmd(true);
+                        }
+                  else
+                        printf("cannot drop here\n");
+                  }
+                  break;
             }
       setDropTarget(0); // this also resets dropRectangle and dropAnchor
       setState(NORMAL);
@@ -1282,6 +1333,10 @@ Element* Canvas::elementAt(const QPointF& p)
       if (el.empty())
             return 0;
       qSort(el.begin(), el.end(), elementLower);
+/*      printf("elementAt: %f %f\n", p.x(), p.y());
+      foreach(Element* e, el)
+            printf("  %s\n", e->name());
+      */
       return el.at(0);
       }
 

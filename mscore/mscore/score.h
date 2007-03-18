@@ -34,7 +34,6 @@ class PageList;
 class SigList;
 class KeyList;
 class PageFormat;
-class SystemList;
 class ElementList;
 class TempoList;
 class Selection;
@@ -61,6 +60,9 @@ class MidiFile;
 class ScoreLayout;
 class TimeSig;
 class MidiTrack;
+class Pedal;
+class Symbol;
+
 struct SigEvent;
 
 extern QPoint scorePos;
@@ -302,7 +304,9 @@ class Score : public QObject {
       Element* addClef(Clef*);
       void addTimeSig(int tick, int keySigSubtype);
       Element* addKeySig(KeySig*, const QPointF&);
-      Element* cmdAddDynamic(Dynamic*, const QPointF&, const QPointF&);
+      void cmdAddDynamic(Dynamic*, const QPointF&, const QPointF&);
+      void cmdAddPedal(Pedal*, const QPointF&, const QPointF&);
+      void cmdAddSymbol(Symbol*, const QPointF&, const QPointF&);
       Element* cmdAddHairpin(Hairpin* atr, const QPointF& pos);
       Element* addSlur(Slur* atr, const QPointF& pos);
       Note* addNote(Chord*, int pitch);
@@ -387,8 +391,8 @@ class Score : public QObject {
       void importMidi(const QString& name);
       ChordRest* getSelectedChordRest();
       int pos();
-      Measure* tick2measure(int tick);
-      Segment* tick2segment(int tick);
+      Measure* tick2measure(int tick) const;
+      Segment* tick2segment(int tick) const;
       QPointF tick2pos(int tick, int staff);
       void fixTicks();
       bool undoEmpty() const;
@@ -415,6 +419,8 @@ class Score : public QObject {
       bool created() const      { return _created; }
       bool saved() const        { return _saved; }
       void setSaved(bool v)     { _saved = v; }
+
+      QPointF tickAnchor(int tick, int staffIdx) const;
       };
 
 extern void setPadState(Element*);

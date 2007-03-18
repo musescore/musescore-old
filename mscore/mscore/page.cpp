@@ -48,7 +48,7 @@ Page::Page(ScoreLayout* s)
       _no        = 0;  // n;
       _pageNo    = 0;
       _copyright = 0;
-      _systems   = new SystemList;
+      _systems   = new QList<System*>;
       }
 
 Page::~Page()
@@ -101,7 +101,7 @@ void Page::add(Element* el)
       {
       el->setParent(this);
       _elements.push_back(el);
-      el->anchor()->add(el);
+      el->anchorMeasure()->add(el);
       }
 
 //---------------------------------------------------------
@@ -111,7 +111,7 @@ void Page::add(Element* el)
 void Page::remove(Element* el)
       {
       _elements.removeAll(el);
-      el->anchor()->remove(el);
+      el->anchorMeasure()->remove(el);
       }
 
 //---------------------------------------------------------
@@ -308,7 +308,7 @@ void Page::collectElements(QList<Element*>& el)
             el.append(_copyright);
       if (_pageNo)
             el.append(_pageNo);
-      SystemList* sl = systems();
+      QList<System*>* sl = systems();
       int staves = score()->nstaves();
       int tracks = staves * VOICES;
 
@@ -381,12 +381,10 @@ void Page::collectElements(QList<Element*>& el)
                                     el.append(e);
                               }
                         }
-                  const ElementList* l = m->el();
-                  for (ciElement i = l->begin(); i != l->end(); ++i)
-                        el.append(*i);
-                  l = m->pel();
-                  for (ciElement i = l->begin(); i != l->end(); ++i)
-                        el.append(*i);
+                  foreach(Element* e, *m->el())
+                        el.append(e);
+                  foreach(Element* e, *m->pel())
+                        el.append(e);
                   foreach(Beam* b, *m->beamList())
                         el.append(b);
                   for (int staffIdx = 0; staffIdx < staves; ++staffIdx) {

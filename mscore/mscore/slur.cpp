@@ -862,7 +862,7 @@ void Slur::layout(ScoreLayout* layout)
       QPointF p1 = slurPos(_tick1, _staff1, _voice1, s1);
       QPointF p2 = slurPos(_tick2, _staff2, _voice2, s2);
 
-      SystemList* sl = layout->systems();
+      QList<System*>* sl = layout->systems();
       iSystem is = sl->begin();
       while (is != sl->end()) {
             if (*is == s1)

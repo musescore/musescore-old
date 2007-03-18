@@ -79,7 +79,7 @@ class Element {
       Element* _next;
       Element* _prev;
       Element* _parent;
-      Measure* _anchor;
+      Measure* _anchorMeasure;
 
       bool _selected;           ///< set if element is selected
       bool _dropTarget;         ///< true, if element accepts drops
@@ -125,8 +125,8 @@ class Element {
       Element* parent() const                 { return _parent; }
       void setParent(Element* e)              { _parent = e;    }
 
-      Measure* anchor() const                 { return _anchor; }
-      void setAnchor(Measure* m)              { _anchor = m;    }
+      Measure* anchorMeasure() const          { return _anchorMeasure; }
+      void setAnchorMeasure(Measure* m)       { _anchorMeasure = m;    }
 
       bool selected() const                   { return _selected;   }
       virtual void setSelected(bool f)        { _selected = f;      }

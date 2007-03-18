@@ -110,6 +110,7 @@ class Canvas : public QWidget, public Viewer {
 
       void setShadowNote(const QPointF&);
       void drawElements(QPainter& p,const QList<Element*>& el);
+      bool dragTimeAnchorElement(const QPointF& pos);
 
    private slots:
       void cursorBlink();

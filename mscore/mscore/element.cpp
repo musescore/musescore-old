@@ -86,7 +86,7 @@ void Element::init()
       _prev       = 0;
       _next       = 0;
       _parent     = 0;
-      _anchor     = 0;
+      _anchorMeasure = 0;
       _selected   = false;
       _dropTarget = false;
       _visible    = true;
@@ -188,7 +188,7 @@ bool Element::contains(const QPointF& p) const
 
   The default implementation calls bbox() to return a simple rectangular
   shape, but subclasses can reimplement this function to return a more
-  accurate shape for non-rectangular items.
+  accurate shape for non-rectangular elements.
 */
 
 QPainterPath Element::shape() const

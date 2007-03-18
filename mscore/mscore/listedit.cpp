@@ -1143,7 +1143,7 @@ void ShowElementBase::setElement(Element* e)
       eb.nextButton->setEnabled(e->next());
       eb.previousButton->setEnabled(e->prev());
       eb.parentButton->setEnabled(e->parent());
-      eb.anchorButton->setEnabled(e->anchor());
+      eb.anchorButton->setEnabled(e->anchorMeasure());
       }
 
 //---------------------------------------------------------
@@ -1204,7 +1204,7 @@ void ShowElementBase::parentClicked()
 
 void ShowElementBase::anchorClicked()
       {
-      emit elementChanged(el->anchor());
+      emit elementChanged(el->anchorMeasure());
       }
 
 //---------------------------------------------------------

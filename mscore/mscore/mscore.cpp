@@ -127,8 +127,8 @@ void MuseScore::closeEvent(QCloseEvent* ev)
             pad->close();
       if (playPanel)
             playPanel->close();
-      if (symbolPalette1)
-            symbolPalette1->close();
+      if (symbolPalette)
+            symbolPalette->close();
       if (clefPalette)
             clefPalette->close();
       if (keyPalette)
@@ -206,7 +206,7 @@ MuseScore::MuseScore()
       iledit                = 0;
       pageListEdit          = 0;
       measureListEdit       = 0;
-      symbolPalette1        = 0;
+      symbolPalette         = 0;
       clefPalette           = 0;
       keyPalette            = 0;
       timePalette           = 0;
@@ -1811,7 +1811,7 @@ void MuseScore::cmd(QAction* a)
       else if (cmd == "keys")
             keyMenu();
       else if (cmd == "symbols")
-            symbolMenu1();
+            symbolMenu();
       else if (cmd == "times")
             timeMenu();
       else if (cmd == "dynamics")

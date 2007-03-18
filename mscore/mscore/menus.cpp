@@ -43,6 +43,7 @@
 #include "barline.h"
 #include "layoutbreak.h"
 #include "timedialog.h"
+#include "symboldialog.h"
 
 //---------------------------------------------------------
 //   genCreateMenu
@@ -86,184 +87,12 @@ QMenu* MuseScore::genCreateMenu()
 //   symbolMenu
 //---------------------------------------------------------
 
-void MuseScore::symbolMenu1()
+void MuseScore::symbolMenu()
       {
-      if (symbolPalette1 == 0) {
-            QScrollArea* sa = new QScrollArea;
-            sa->setWindowTitle(tr("MuseScore: Symbols 1"));
-            symbolPalette1 = sa;
-            SymbolPalette* pw = new SymbolPalette(11, 16);
-            sa->setWidget(pw);
-
-            pw->addObject(0, wholerestSym);
-            pw->addObject(1, halfrestSym);
-            pw->addObject(2, outsidewholerestSym);
-            pw->addObject(3, outsidehalfrestSym);
-            pw->addObject(4, longarestSym);
-            pw->addObject(5, breverestSym);
-            pw->addObject(6, quartrestSym);
-            pw->addObject(7, eighthrestSym);
-            pw->addObject(8, clasquartrestSym);
-            pw->addObject(9, sixteenthrestSym);
-            pw->addObject(10, thirtysecondrestSym);
-            pw->addObject(11, sixtyfourthrestSym);
-            pw->addObject(12, hundredtwentyeighthrestSym);
-//            pw->addObject(13, neomensmaximarestSym);
-//            pw->addObject(14, neomenslongarestSym);
-//            pw->addObject(15, neomensbreverestSym);
-            pw->addObject(16, zeroSym);
-            pw->addObject(17, oneSym);
-            pw->addObject(18, twoSym);
-            pw->addObject(19, threeSym);
-            pw->addObject(20, fourSym);
-            pw->addObject(21, fiveSym);
-            pw->addObject(22, sixSym);
-            pw->addObject(23, sevenSym);
-            pw->addObject(24, eightSym);
-            pw->addObject(25, nineSym);
-//            pw->addObject(26, neomenssemibrevisrestSym);
-//            pw->addObject(27, neomensminimahalfrestSym);
-//            pw->addObject(28, neomenssemiminimarestSym);
-//            pw->addObject(29, neomensfusarestSym);
-//            pw->addObject(30, neomenssemifusarestSym);
-            pw->addObject(31, sharpSym);
-            pw->addObject(32, naturalSym);
-            pw->addObject(33, flatSym);
-            pw->addObject(34, flatflatSym);
-            pw->addObject(35, sharpsharpSym);
-            pw->addObject(36, rightparenSym);
-            pw->addObject(37, leftparenSym);
-            pw->addObject(38, dotSym);
-            pw->addObject(39, brevisheadSym);
-            pw->addObject(40, wholeheadSym);
-            pw->addObject(41, halfheadSym);
-            pw->addObject(42, quartheadSym);
-            pw->addObject(43, wholediamondheadSym);
-            pw->addObject(44, halfdiamondheadSym);
-            pw->addObject(45, diamondheadSym);
-            pw->addObject(46, wholetriangleheadSym);
-            pw->addObject(47, halftriangleheadSym);
-            pw->addObject(48, triangleheadSym);
-            pw->addObject(49, wholeslashheadSym);
-            pw->addObject(50, halfslashheadSym);
-            pw->addObject(51, quartslashheadSym);
-            pw->addObject(52, wholecrossedheadSym);
-            pw->addObject(53, halfcrossedheadSym);
-            pw->addObject(54, crossedheadSym);
-            pw->addObject(55, xcircledheadSym);
-
-            pw->addObject(57, ufermataSym);
-            pw->addObject(58, dfermataSym);
-            pw->addObject(59, thumbSym);
-            pw->addObject(60, sforzatoaccentSym);
-            pw->addObject(61, staccatoSym);
-            pw->addObject(62, ustaccatissimoSym);
-            pw->addObject(63, dstaccatissimoSym);
-            pw->addObject(64, tenutoSym);
-            pw->addObject(65, uportatoSym);
-            pw->addObject(66, dportatoSym);
-            pw->addObject(67, umarcatoSym);
-            pw->addObject(68, dmarcatoSym);
-            pw->addObject(69, ouvertSym);
-            pw->addObject(70, plusstopSym);
-            pw->addObject(71, upbowSym);
-            pw->addObject(72, downbowSym);
-            pw->addObject(73, reverseturnSym);
-            pw->addObject(74, turnSym);
-            pw->addObject(75, trillSym);
-            pw->addObject(76, upedalheelSym);
-            pw->addObject(77, dpedalheelSym);
-            pw->addObject(78, upedaltoeSym);
-            pw->addObject(79, dpedaltoeSym);
-            pw->addObject(80, flageoletSym);
-            pw->addObject(81, segnoSym);
-            pw->addObject(82, codaSym);
-            pw->addObject(83, rcommaSym);
-            pw->addObject(84, lcommaSym);
-            pw->addObject(85, arpeggioSym);
-            pw->addObject(86, trillelementSym);
-            pw->addObject(87, arpeggioarrowdownSym);
-            pw->addObject(88, arpeggioarrowupSym);
-            pw->addObject(89, trilelementSym);
-            pw->addObject(90, prallSym);
-            pw->addObject(91, mordentSym);
-            pw->addObject(92, prallprallSym);
-            pw->addObject(93, prallmordentSym);
-            pw->addObject(94, upprallSym);
-            pw->addObject(95, downprallSym);
-            pw->addObject(96, upmordentSym);
-            pw->addObject(97, downmordentSym);
-            pw->addObject(98, lineprallSym);
-            pw->addObject(99, pralldownSym);
-            pw->addObject(101, prallupSym);
-            pw->addObject(102, eighthflagSym);
-            pw->addObject(103, sixteenthflagSym);
-            pw->addObject(104, thirtysecondflagSym);
-            pw->addObject(105, sixtyfourthflagSym);
-            pw->addObject(106, deighthflagSym);
-            pw->addObject(107, gracedashSym);
-            pw->addObject(108, dgracedashSym);
-            pw->addObject(109, dsixteenthflagSym);
-            pw->addObject(110, dthirtysecondflagSym);
-            pw->addObject(111, dsixtyfourthflagSym);
-            pw->addObject(112, stemSym);
-            pw->addObject(113, dstemSym);
-            pw->addObject(114, altoclefSym);
-            pw->addObject(115, caltoclefSym);
-            pw->addObject(116, bassclefSym);
-            pw->addObject(117, cbassclefSym);
-            pw->addObject(118, trebleclefSym);
-            pw->addObject(119, ctrebleclefSym);
-            pw->addObject(120, percussionclefSym);
-            pw->addObject(121, cpercussionclefSym);
-            pw->addObject(122, tabclefSym);
-            pw->addObject(123, ctabclefSym);
-            pw->addObject(124, fourfourmeterSym);
-            pw->addObject(125, allabreveSym);
-            pw->addObject(126, pedalasteriskSym);
-            pw->addObject(127, pedaldashSym);
-            pw->addObject(128, pedaldotSym);
-            pw->addObject(129, pedalPSym);
-            pw->addObject(130, pedaldSym);
-            pw->addObject(131, pedaleSym);
-            pw->addObject(132, pedalPedSym);
-            pw->addObject(133, accDiscantSym);
-            pw->addObject(134, accDotSym);
-            pw->addObject(135, accFreebaseSym);
-            pw->addObject(136, accStdbaseSym);
-            pw->addObject(137, accBayanbaseSym);
-            pw->addObject(138, accSBSym);
-            pw->addObject(139, accBBSym);
-            pw->addObject(140, accOldEESym);
-            pw->addObject(141, accOldEESSym);
-            pw->addObject(142, wholedoheadSym);
-            pw->addObject(143, halfdoheadSym);
-            pw->addObject(144, doheadSym);
-            pw->addObject(145, wholereheadSym);
-            pw->addObject(146, halfreheadSym);
-            pw->addObject(147, reheadSym);
-            pw->addObject(148, wholemeheadSym);
-            pw->addObject(149, halfmeheadSym);
-            pw->addObject(150, meheadSym);
-            pw->addObject(151, wholefaheadSym);
-            pw->addObject(152, halffauheadSym);
-            pw->addObject(152, fauheadSym);
-            pw->addObject(153, halffadheadSym);
-            pw->addObject(154, fadheadSym);
-            pw->addObject(155, wholelaheadSym);
-            pw->addObject(156, halflaheadSym);
-            pw->addObject(157, laheadSym);
-            pw->addObject(158, wholeteheadSym);
-            pw->addObject(159, halfteheadSym);
-            pw->addObject(160, letterfSym);
-            pw->addObject(161, lettermSym);
-            pw->addObject(162, letterpSym);
-            pw->addObject(163, letterrSym);
-            pw->addObject(164, lettersSym);
-            pw->addObject(165, letterzSym);
-            }
-      symbolPalette1->show();
-      symbolPalette1->raise();
+      if (symbolPalette == 0)
+            symbolPalette = new SymbolDialog(this);
+      symbolPalette->show();
+      symbolPalette->raise();
       }
 
 //---------------------------------------------------------

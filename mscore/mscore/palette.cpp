@@ -200,6 +200,7 @@ void SymbolPalette::paintEvent(QPaintEvent* e)
       qreal mag = PALETTE_SPATIUM * extraMag / _spatium;
       ScoreLayout layout;
       layout.setSpatium(_spatium);
+      layout.setPaintDevice(this);
 
       QPainter p(this);
       p.setRenderHint(QPainter::Antialiasing, true);

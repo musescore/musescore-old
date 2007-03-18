@@ -28,6 +28,7 @@
 Symbol::Symbol(Score* s)
    : Element(s)
       {
+      setAnchor(ANCHOR_PAGE);
       _sym = 0;
       }
 

@@ -29,10 +29,12 @@
 
 class Pedal : public SLine {
       int symbol;
+      qreal pedalLineWidth;
+      qreal pedalTextDistance;
 
    public:
       Pedal(Score* s);
-      virtual Pedal* clone() const { return new Pedal(*this); }
+      virtual Pedal* clone() const     { return new Pedal(*this); }
       virtual ElementType type() const { return PEDAL; }
 
       virtual void draw(QPainter&);
@@ -41,7 +43,8 @@ class Pedal : public SLine {
       virtual void setSubtype(int val);
       virtual void write(Xml&) const;
       virtual void read(QDomNode);
-      virtual QRectF bbox() const;
+      virtual bool contains(const QPointF& p) const;
+      QRectF bbox() const;
       };
 
 #endif

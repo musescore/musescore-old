@@ -41,6 +41,7 @@
 #include "seq.h"
 #include "mscore.h"
 #include "lyrics.h"
+#include "pedal.h"
 
 //---------------------------------------------------------
 //   selectNoteMessage
@@ -804,8 +805,9 @@ void Score::cmdFlipStemDirection()
 //   cmdAddDynamic
 //---------------------------------------------------------
 
-Element* Score::cmdAddDynamic(Dynamic* d, const QPointF& pos, const QPointF& off)
+void Score::cmdAddDynamic(Dynamic* d, const QPointF& pos, const QPointF& off)
       {
+      d->setSelected(false);
       Staff* staff = 0;
       int pitch, tick;
       QPointF offset;
@@ -815,19 +817,115 @@ Element* Score::cmdAddDynamic(Dynamic* d, const QPointF& pos, const QPointF& off
       if (measure == 0) {
             printf("addDynamic: cannot put object here\n");
             delete d;
-            return 0;
+            return;
             }
       offset -= off;
       d->setPos(segment->x(), 0.0);
       d->setTick(segment->tick());
       d->setUserOff(offset / _spatium);
-      d->setTick(segment->tick());
       d->setStaff(staff);
       d->setParent(measure);
       undoAddElement(d);
-// printf("Dynamic tick %d offset %g %g\n", tick, offset.x(), offset.y());
-      updateAll = true;
-      return d;
+      addRefresh(d->abbox());
+      select(d, 0, 0);
+      }
+
+//---------------------------------------------------------
+//   cmdAddPedal
+//---------------------------------------------------------
+
+void Score::cmdAddPedal(Pedal* pedal, const QPointF& pos, const QPointF& off)
+      {
+      pedal->setSelected(false);
+      Staff* staff = 0;
+      int pitch, tick;
+      QPointF offset;
+      Segment* segment;
+
+      Measure* measure = pos2measure(pos, &tick, &staff, &pitch, &segment, &offset);
+      if (measure == 0) {
+            printf("addPedal: cannot put object here\n");
+            delete pedal;
+            return;
+            }
+      pedal->setTick1(segment->tick());
+      pedal->setTick2(segment->tick() + measure->tickLen());
+      pedal->setStaff(staff);
+      pedal->setParent(measure);
+      pedal->layout(_layout);
+//      pedal->setUserOff((pos - pedal->pos() - off) / _spatium);
+      undoAddElement(pedal);
+      addRefresh(pedal->abbox());
+      select(pedal, 0, 0);
+      }
+
+//---------------------------------------------------------
+//   cmdAddSymbol
+//---------------------------------------------------------
+
+void Score::cmdAddSymbol(Symbol* s, const QPointF& pos, const QPointF& off)
+      {
+      s->setSelected(false);
+
+      if (s->anchor() == ANCHOR_TICK) {
+            Staff* staff = 0;
+            int pitch, tick;
+            QPointF offset;
+            Segment* segment;
+
+            Measure* measure = pos2measure(pos, &tick, &staff, &pitch, &segment, &offset);
+            if (measure == 0) {
+                  printf("addSymbol: cannot put symbol here: no measure\n");
+                  delete s;
+                  return;
+                  }
+            offset -= off;
+            s->setPos(segment->x(), 0.0);
+            s->setUserOff(offset / _spatium);
+            s->setTick(segment->tick());
+            s->setStaff(staff);
+            s->setParent(measure);
+            }
+      else if (s->anchor() == ANCHOR_PAGE) {
+            bool foundPage = false;
+            for (ciPage ip = _layout->pages()->begin(); ip != _layout->pages()->end(); ++ip) {
+                  const Page* page = *ip;
+                  if (page->contains(pos)) {
+                        QList<System*>* sl = page->systems();
+                        System* system = sl->front();
+                        if (system == 0) {
+                              printf("addSymbol: cannot put symbol here: no system on page\n");
+                              delete s;
+                              return;
+                              }
+                        Measure* m = system->measures()->front();
+                        if (m == 0) {
+                              printf("addSymbol: cannot put symbol here: no measure in system\n");
+                              delete s;
+                              return;
+                              }
+                        s->setPos(pos + off);
+                        s->setStaff(0);
+                        s->setParent(m);
+                        foundPage = true;
+                        break;
+                        }
+                  }
+            if (!foundPage) {
+                  printf("addSymbol: cannot put symbol here: no page\n");
+                  delete s;
+                  return;
+                  }
+            }
+      else {
+            printf("Anchor type not implemented\n");
+            delete s;
+            return;
+            }
+
+      undoAddElement(s);
+      addRefresh(s->abbox());
+      select(s, 0, 0);
       }
 
 //---------------------------------------------------------

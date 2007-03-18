@@ -1,7 +1,7 @@
 //=============================================================================
 //  MusE Score
 //  Linux Music Score Editor
-//  $Id: element.h,v 1.58 2006/04/12 14:58:10 wschweer Exp $
+//  $Id: mscore.h,v 1.54 2006/04/12 14:58:10 wschweer Exp $
 //
 //  Copyright (C) 2002-2006 Werner Schweer (ws@seh.de)
 //
@@ -18,43 +18,27 @@
 //  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //=============================================================================
 
-#ifndef __SYMBOL_H__
-#define __SYMBOL_H__
+#ifndef __SYMBOLDIALOG_H__
+#define __SYMBOLDIALOG_H__
 
-#include "element.h"
-#include "style.h"
+#include "ui_symboldialog.h"
+
+class SymbolPalette;
 
 //---------------------------------------------------------
-//   Symbol
-//    score symbol
+//   SymbolDialog
 //---------------------------------------------------------
 
-class Symbol : public Element {
-   protected:
-      int _sym;
+class SymbolDialog : public QWidget, Ui::SymbolDialogBase {
+      Q_OBJECT
+
+      SymbolPalette* sp;
+
+   private slots:
+      void anchorClicked(int);
 
    public:
-      Symbol(Score*);
-      Symbol &operator=(const Symbol&);
-
-      virtual Symbol* clone() const { return new Symbol(*this); }
-      virtual ElementType type() const { return SYMBOL; }
-      void setSym(int);
-      int sym() const { return _sym;  }
-
-      virtual void draw(QPainter&);
-      virtual void write(Xml& xml) const;
-      virtual void read(QDomNode);
-      virtual bool isMovable() const { return true; }
-      virtual QRectF bbox() const;
-
-      void setAnchor(Anchor a) { setSubtype(int(a)); }
-      Anchor anchor() const    { return (Anchor)subtype(); }
+      SymbolDialog(QWidget* parent = 0);
       };
 
-typedef QList<Symbol*> SymbolList;
-typedef SymbolList::iterator iSymbol;
-typedef SymbolList::const_iterator ciSymbol;
-
 #endif
-

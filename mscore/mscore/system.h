@@ -135,17 +135,8 @@ class System : public Element {
       Measure* nextMeasure(Measure*) const;
       };
 
-//---------------------------------------------------------
-//   SystemList
-//---------------------------------------------------------
-
 typedef QList<System*>::iterator iSystem;
 typedef QList<System*>::const_iterator ciSystem;
-
-class SystemList : public QList<System*> {
-   public:
-      SystemList() {}
-      };
 
 #endif
 

@@ -417,7 +417,7 @@ Measure* Score::pos2measure(const QPointF& p, int* tick, Staff** rst, int* pitch
                   continue;
             QPointF pp = p - page->pos();  // transform to page relative
 
-            SystemList* sl = page->systems();
+            QList<System*>* sl = page->systems();
             double y1 = 0;
             for (ciSystem is = sl->begin(); is != sl->end();) {
                   double y2;
@@ -551,7 +551,7 @@ Measure* Score::pos2measure2(const QPointF& p, int* tick, Staff** rst, int* line
                   continue;
             QPointF pp = p - page->pos();  // transform to page relative
 
-            SystemList* sl = page->systems();
+            QList<System*>* sl = page->systems();
             double y1 = 0;
             for (ciSystem is = sl->begin(); is != sl->end();) {
                   double y2;
@@ -723,7 +723,7 @@ int Score::snap(int tick, const QPointF p) const
             if (!page->contains(p))
                   continue;
             QPointF rp = p - page->pos();  // transform to page relative
-            SystemList* sl = page->systems();
+            QList<System*>* sl = page->systems();
             double y = 0.0;
             for (ciSystem is = sl->begin(); is != sl->end(); ++is) {
                   System* system = *is;
@@ -1045,7 +1045,7 @@ int Score::snapNote(int tick, const QPointF p, int staff) const
             if (!page->contains(p))
                   continue;
             QPointF rp = p - page->pos();  // transform to page relative
-            SystemList* sl = page->systems();
+            QList<System*>* sl = page->systems();
             double y = 0.0;
             for (ciSystem is = sl->begin(); is != sl->end(); ++is) {
                   System* system = *is;
@@ -1193,4 +1193,21 @@ void Score::adjustTime(int tick, Measure* m)
             m = m->next();
             }
       }
+
+//---------------------------------------------------------
+//   tickAnchor
+//    return anchor position for tick in global
+//    coordinates
+//---------------------------------------------------------
+
+QPointF Score::tickAnchor(int tick, int staffIdx) const
+      {
+      Segment* seg = tick2segment(tick);
+      qreal x = seg->abbox().x();
+      System* system = seg->measure()->system();
+      qreal y = system->staff(staffIdx)->bbox().y();
+      y += system->page()->pos().y();
+      return QPointF(x, y);
+      }
+
 
