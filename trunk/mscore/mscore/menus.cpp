@@ -44,6 +44,7 @@
 #include "layoutbreak.h"
 #include "timedialog.h"
 #include "symboldialog.h"
+#include "volta.h"
 
 //---------------------------------------------------------
 //   genCreateMenu
@@ -220,25 +221,29 @@ void MuseScore::lineMenu()
             volta4->setSubtype(SECONDA_VOLTA2);
             sp->addObject(7, volta4, tr("seconda volta"));
 
-            Ottava* ottava1 = new Ottava(cs);
-            ottava1->setSubtype(0);
-            ottava1->setLen(l);
-            sp->addObject(8, ottava1, tr("8va"));
+            //--------
 
-            Ottava* ottava2 = new Ottava(cs);
-            ottava2->setSubtype(1);
-            ottava2->setLen(l);
-            sp->addObject(9, ottava2, tr("15va"));
+            Ottava* ottava = new Ottava(cs);
+            ottava->setSubtype(0);
+            ottava->setLen(l);
+            sp->addObject(8, ottava, tr("8va"));
 
-            Ottava* ottava3 = new Ottava(cs);
-            ottava3->setSubtype(2);
-            ottava3->setLen(l);
-            sp->addObject(10, ottava3, tr("8vb"));
+            ottava = new Ottava(cs);
+            ottava->setSubtype(1);
+            ottava->setLen(l);
+            sp->addObject(9, ottava, tr("15va"));
 
-            Ottava* ottava4 = new Ottava(cs);
-            ottava4->setSubtype(3);
-            ottava4->setLen(l);
-            sp->addObject(11, ottava4, tr("15vb"));
+            ottava = new Ottava(cs);
+            ottava->setSubtype(2);
+            ottava->setLen(l);
+            sp->addObject(10, ottava, tr("8vb"));
+
+            ottava = new Ottava(cs);
+            ottava->setSubtype(3);
+            ottava->setLen(l);
+            sp->addObject(11, ottava, tr("15vb"));
+
+            //-------
 
             Pedal* pedal = new Pedal(cs);
             pedal->setLen(l);

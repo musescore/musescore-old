@@ -45,16 +45,22 @@ static const QString ff("Times New Roman");
 static const TextStyle defaultTextStyles[] = {
       TextStyle(QString("Symbols1"), QString("MScore"), 20, false, false, false,
          ALIGN_LEFT,    ANCHOR_TICK, 0, 0, OFFSET_ABS),
+
       TextStyle(QString("Symbols3"), QString("MScore"), 14, false, false, false,
          ALIGN_LEFT,    ANCHOR_TICK, 0, 0, OFFSET_SPATIUM),
+
       TextStyle(QString("Title"), ff, 24, false, false, false,
          ALIGN_HCENTER | ALIGN_TOP, ANCHOR_PAGE, 0, MM(5), OFFSET_ABS),
+
       TextStyle(QString("Subtitle"), ff, 14, false, false, false,
          ALIGN_HCENTER | ALIGN_TOP, ANCHOR_PAGE, 0, MM(15), OFFSET_ABS),
+
       TextStyle(QString("Composer"), ff, 12, false, false, false,
          ALIGN_RIGHT | ALIGN_TOP, ANCHOR_PAGE, 0, MM(15), OFFSET_ABS),
+
       TextStyle(QString("Poet"), ff, 12, false, false, false,
          ALIGN_LEFT | ALIGN_TOP, ANCHOR_PAGE, 0, MM(10), OFFSET_ABS),
+
       TextStyle(QString("Lyrics"), ff, 11, false, false, false,
          ALIGN_HCENTER | ALIGN_TOP, ANCHOR_TICK, 0, 7, OFFSET_SPATIUM),
 
@@ -65,6 +71,7 @@ static const TextStyle defaultTextStyles[] = {
          ALIGN_RIGHT | ALIGN_VCENTER, ANCHOR_SYSTEM, 0, 0, OFFSET_SPATIUM),
       TextStyle(QString("InstrumentsShort"),   ff, 12, false, false, false,
          ALIGN_RIGHT | ALIGN_VCENTER, ANCHOR_SYSTEM, 0, 0, OFFSET_SPATIUM),
+
       TextStyle(QString("Dynamics"), ff, 12, false, true, false,
          ALIGN_LEFT,    ANCHOR_TICK, 0, 6, OFFSET_SPATIUM),
       TextStyle(QString("Technik"), ff, 12, false, true, false,
@@ -86,8 +93,10 @@ static const TextStyle defaultTextStyles[] = {
 
       TextStyle(QString("Translator"), ff, 11, false, false, false,
          ALIGN_HCENTER | ALIGN_TOP,    ANCHOR_TICK, 0, 6, OFFSET_SPATIUM),
+
       TextStyle(QString("Dynamics1"), QString("MScore1"), 20, false, false, false,
          ALIGN_LEFT, ANCHOR_TICK, 0, 0, OFFSET_SPATIUM),
+
       TextStyle(QString("Tuplets"), ff,  8, false, false, false,
          ALIGN_HCENTER | ALIGN_VCENTER, ANCHOR_NOTE, 0, 0, OFFSET_SPATIUM),
       };

@@ -122,7 +122,7 @@ void Dynamic::endDrag()
       Staff* stf = staff();
       QPointF offset;
       Segment* seg;
-      Measure* measure = _score->pos2measure(aref(), &ntick, &stf, 0, &seg, &offset);
+      Measure* measure = _score->pos2measure(canvasPos(), &ntick, &stf, 0, &seg, &offset);
       if (measure) {
             offset /= _spatium;
             setTick(ntick);

@@ -61,6 +61,7 @@
 #include "text.h"
 #include "tuplet.h"
 #include "lyrics.h"
+#include "volta.h"
 
 //---------------------------------------------------------
 //   attributes -- prints <attributes> tag when necessary
@@ -646,7 +647,7 @@ void DirectionsHandler::buildDirectionsList(Measure* m, bool dopart, Part* p, in
                   case HAIRPIN:
                         if (dopart) {
                               Hairpin* hp = (Hairpin*) dir;
-                              da = findMatchInPart(hp->tick1(), hp->staff(), cs, p, strack, etrack);
+                              da = findMatchInPart(hp->tick(), hp->staff(), cs, p, strack, etrack);
                               if (da) {
                                     da->setDirect(dir);
                                     storeAnchor(da);
@@ -661,7 +662,7 @@ void DirectionsHandler::buildDirectionsList(Measure* m, bool dopart, Part* p, in
                   case OTTAVA:
                         if (dopart) {
                               Ottava* ot = (Ottava*) dir;
-                              da = findMatchInPart(ot->tick1(), ot->staff(), cs, p, strack, etrack);
+                              da = findMatchInPart(ot->tick(), ot->staff(), cs, p, strack, etrack);
                               if (da) {
                                     da->setDirect(dir);
                                     storeAnchor(da);
@@ -676,7 +677,7 @@ void DirectionsHandler::buildDirectionsList(Measure* m, bool dopart, Part* p, in
                   case PEDAL:
                         if (dopart) {
                               Pedal* pd = (Pedal*) dir;
-                              da = findMatchInPart(pd->tick1(), pd->staff(), cs, p, strack, etrack);
+                              da = findMatchInPart(pd->tick(), pd->staff(), cs, p, strack, etrack);
                               if (da) {
                                     da->setDirect(dir);
                                     storeAnchor(da);
@@ -1766,7 +1767,7 @@ void ExportMusicXml::words(Text* text, int staff)
 void ExportMusicXml::hairpin(Hairpin* hp, int staff, int tick)
       {
       directionTag(xml, attr, hp);
-      if (hp->tick1() == tick)
+      if (hp->tick() == tick)
             xml.tagE("wedge type=\"%s\"", hp->subtype() ? "diminuendo" : "crescendo");
       else
             xml.tagE("wedge type=\"stop\"");
@@ -1782,7 +1783,7 @@ void ExportMusicXml::hairpin(Hairpin* hp, int staff, int tick)
 void ExportMusicXml::ottava(Ottava* ot, int staff, int tick)
       {
       directionTag(xml, attr, ot);
-      if (ot->tick1() == tick) {
+      if (ot->tick() == tick) {
             int st = ot->subtype();
             char* sz = 0;
             char* tp = 0;
@@ -1821,7 +1822,7 @@ void ExportMusicXml::ottava(Ottava* ot, int staff, int tick)
 void ExportMusicXml::pedal(Pedal* pd, int staff, int tick)
       {
       directionTag(xml, attr, pd);
-      if (pd->tick1() == tick)
+      if (pd->tick() == tick)
             xml.tagE("pedal type=\"start\" line=\"yes\"");
       else
             xml.tagE("pedal type=\"stop\"");

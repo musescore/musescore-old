@@ -40,6 +40,9 @@
 #include "layout.h"
 #include "dynamics.h"
 #include "pedal.h"
+#include "volta.h"
+#include "ottava.h"
+#include "trill.h"
 
 //---------------------------------------------------------
 //   Canvas
@@ -322,7 +325,6 @@ void Canvas::mousePressEvent(QMouseEvent* ev)
                   //-----------------------------------------
 
                   if (element) {
-printf("select %s\n", element->name());
                         ElementType type = element->type();
                         _score->dragStaff = 0;  // WS
                         if (type == MEASURE) {
@@ -341,7 +343,7 @@ printf("select %s\n", element->name());
                   break;
 
             case EDIT:
-                  if (_score->editObject->startEditDrag(startMove - _score->editObject->aref()))
+                  if (_score->editObject->startEditDrag(startMove - _score->editObject->canvasPos()))
                         setState(DRAG_EDIT);
                   else if (_score->editObject->mousePress(startMove))
                         update();
@@ -840,8 +842,8 @@ QRectF Canvas::moveCursor()
             if (segment) {
                   _score->adjustCanvasPosition(segment);
                   System* system = measure->system();
-                  double x = segment->x() + measure->aref().x();
-                  double y = system->bboxStaff(staff).y() + system->aref().y();
+                  double x = segment->x() + measure->canvasPos().x();
+                  double y = system->bboxStaff(staff).y() + system->canvasPos().y();
                   refresh |= cursor->abbox();
                   cursor->setPos(x - _spatium, y - _spatium);
                   refresh |= cursor->abbox();
@@ -869,10 +871,10 @@ void Canvas::setShadowNote(const QPointF& p)
       System* s = m->system();
       shadowNote->setLine(line);
 
-      double y = seg->apos().y() + s->staff(staff->idx())->bbox().y();
+      double y = seg->canvasPos().y() + s->staff(staff->idx())->bbox().y();
       y += line * _spatium * .5;
 
-      shadowNote->setPos(seg->apos().x(), y);
+      shadowNote->setPos(seg->canvasPos().x(), y);
 //      shadowNote->layout();
       }
 
@@ -1051,6 +1053,63 @@ bool Canvas::dragTimeAnchorElement(const QPointF& pos)
       }
 
 //---------------------------------------------------------
+//   dragAboveMeasure
+//---------------------------------------------------------
+
+bool Canvas::dragAboveMeasure(const QPointF& pos)
+      {
+      Staff* staff = 0;
+      Segment* seg;
+      QPointF offset;
+      int tick;
+      Measure* m = _score->pos2measure(pos, &tick, &staff, 0, &seg, &offset);
+      if (m) {
+            System* s = m->system();
+            int staffIdx = staff->idx();
+
+            // compute rectangle of staff in measure
+            QRectF rrr(s->staff(staffIdx)->bbox().translated(s->canvasPos()));
+            QRectF rr(m->abbox());
+            QRectF r(rr.x(), rrr.y()-rrr.height(), rr.width(), rrr.height());
+
+            setDropRectangle(r);
+            return true;
+            }
+      setDropTarget(0);
+      return false;
+      }
+
+//---------------------------------------------------------
+//   dragAboveSystem
+//---------------------------------------------------------
+
+bool Canvas::dragAboveSystem(const QPointF& pos)
+      {
+      Staff* staff = 0;
+      Segment* seg;
+      QPointF offset;
+      int tick;
+      Measure* m = _score->pos2measure(pos, &tick, &staff, 0, &seg, &offset);
+      if (m) {
+            System* s = m->system();
+            int staffIdx = staff->idx();
+            if (staffIdx) {
+                  setDropTarget(0);
+                  return false;
+                  }
+            // compute rectangle of staff in measure
+            QRectF rrr(s->staff(staffIdx)->bbox().translated(s->canvasPos()));
+            QRectF rr(m->abbox());
+            QRectF r(rr.x(), rrr.y()-rrr.height(), rr.width(), rrr.height());
+
+            setDropRectangle(r);
+            return true;
+            }
+      setDropTarget(0);
+      return false;
+      }
+
+//---------------------------------------------------------
 //   dragMoveEvent
 //---------------------------------------------------------
 
@@ -1075,8 +1134,14 @@ void Canvas::dragMoveEvent(QDragMoveEvent* event)
       QPointF dragOffset;
       int type = Element::readType(node, &dragOffset);
       switch(type) {
+            case VOLTA:
+                  if (dragAboveSystem(pos))
+                        event->acceptProposedAction();
+                  break;
             case PEDAL:
             case DYNAMIC:
+            case OTTAVA:
+            case TRILL:
                   if (dragTimeAnchorElement(pos))
                         event->acceptProposedAction();
                   break;
@@ -1140,34 +1205,53 @@ void Canvas::dropEvent(QDropEvent* event)
       int type = Element::readType(node, &dragOffset);
 
       switch(type) {
+            case VOLTA:
+                  {
+                  Volta* volta = new Volta(score());
+                  volta->read(node);
+                  score()->cmdAdd(volta, pos, dragOffset);
+                  event->acceptProposedAction();
+                  }
+                  break;
+            case OTTAVA:
+                  {
+                  Ottava* ottava = new Ottava(score());
+                  ottava->read(node);
+                  score()->cmdAdd(ottava, pos, dragOffset);
+                  event->acceptProposedAction();
+                  }
+                  break;
+            case TRILL:
+                  {
+                  Trill* trill = new Trill(score());
+                  score()->cmdAdd(trill, pos, dragOffset);
+                  event->acceptProposedAction();
+                  }
+                  break;
             case SYMBOL:
                   {
                   _score->startCmd();
                   Symbol* s = new Symbol(score());
                   s->read(node);
-                  _score->cmdAddSymbol(s, pos, dragOffset);
+                  score()->cmdAddSymbol(s, pos, dragOffset);
                   event->acceptProposedAction();
-                  _score->endCmd(true);
+                  score()->endCmd(true);
                   }
                   break;
             case PEDAL:
                   {
-                  _score->startCmd();
                   Pedal* pedal = new Pedal(score());
                   pedal->read(node);
-                  _score->cmdAddPedal(pedal, pos, dragOffset);
+                  score()->cmdAdd(pedal, pos, dragOffset);
                   event->acceptProposedAction();
-                  _score->endCmd(true);
                   }
                   break;
             case DYNAMIC:
                   {
-                  _score->startCmd();
                   Dynamic* dynamic = new Dynamic(score());
                   dynamic->read(node);
-                  _score->cmdAddDynamic(dynamic, pos, dragOffset);
+                  _score->cmdAdd(dynamic, pos, dragOffset);
                   event->acceptProposedAction();
-                  _score->endCmd(true);
                   }
                   break;
             default:
@@ -1247,15 +1331,7 @@ void Canvas::wheelEvent(QWheelEvent* event)
                   _mag = 0.05;
 
             mscore->setMag(_mag);
-#if 0
-            double deltamag = _mag / mag();
-            setXoffset(xoffset() * deltamag);
-            setYoffset(yoffset() * deltamag);
 
-            matrix.setMatrix(_mag, matrix.m12(), matrix.m21(),
-               _mag * qreal(appDpiY)/qreal(appDpiX), matrix.dx(), matrix.dy());
-            imatrix = matrix.inverted();
-#endif
             QPointF p2 = imatrix.map(QPointF(event->pos()));
             QPointF p3 = p2 - p1;
             int dx    = lrint(p3.x() * _mag);
@@ -1272,7 +1348,6 @@ void Canvas::wheelEvent(QWheelEvent* event)
             	update(r);
                   }
             updateNavigator(false);
-//            emit magChanged();
             update();
             return;
             }
@@ -1353,11 +1428,10 @@ void Canvas::drawElements(QPainter& p,const QList<Element*>& el)
             if (!(e->visible() || score()->showInvisible()))
                   continue;
 
-            QPointF ap(e->apos());
+            QPointF ap(e->canvasPos());
             p.translate(ap);
             p.setPen(QPen(e->color()));
             e->draw(p);
-            p.translate(-ap);
             if (debugMode && e->selected()) {
                   //
                   //  draw bounding box rectangle for all
@@ -1365,7 +1439,8 @@ void Canvas::drawElements(QPainter& p,const QList<Element*>& el)
                   //
                   p.setBrush(Qt::NoBrush);
                   p.setPen(QPen(Qt::blue, 0, Qt::SolidLine));
-                  p.drawRect(e->abbox());
+                  // p.drawRect(e->bbox());
+                  p.drawPath(e->shape());
 
                   Element* seg = e->parent();
                   if (e->type() == NOTE)
@@ -1373,6 +1448,7 @@ void Canvas::drawElements(QPainter& p,const QList<Element*>& el)
                   p.setPen(QPen(Qt::red, 0, Qt::SolidLine));
                   p.drawRect(seg->abbox());
                   }
+            p.translate(-ap);
             }
       }
 

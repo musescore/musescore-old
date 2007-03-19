@@ -27,6 +27,16 @@
 #include "layout.h"
 
 //---------------------------------------------------------
+//   Ottava
+//---------------------------------------------------------
+
+Ottava::Ottava(Score* s)
+   : SLine(s)
+      {
+      setSubtype(0);
+      }
+
+//---------------------------------------------------------
 //   setSubtype
 //---------------------------------------------------------
 
@@ -71,25 +81,22 @@ void Ottava::draw(QPainter& p)
             if (ii == segments.end())
                   pp2 += off2 * _spatium;
 
-            if (i == segments.begin()) {
-                  QFont f(textStyles[TEXT_STYLE_DYNAMICS].font());
-                  p.setFont(f);
-                  QFontMetricsF fm(f);
-                  QRectF bb(fm.boundingRect(text));
-                  qreal h = textHeight;   // bb.height() * .5;
-                  p.drawText(pp1 + 	QPointF(0.0, h), text);
-                  pp1 += QPointF(bb.width() + ottavaTextDistance, 0.0);
+            QFont f(textStyles[TEXT_STYLE_DYNAMICS].font());
+            p.setFont(f);
+            QFontMetricsF fm(f);
+            QRectF bb(fm.boundingRect(text));
 
-                  QPen pen(p.pen());
-                  pen.setWidthF(ottavaLineWidth);
-                  pen.setStyle(Qt::DashLine);
-                  p.setPen(pen);
-                  p.drawLine(QLineF(pp1, pp2));
-                  if (ii == segments.end())
-                        p.drawLine(QLineF(pp2, QPointF(pp2.x(), h)));
-                  }
-            else
-                  printf("===not impl.\n");
+            qreal h = textHeight;   // bb.height() * .5;
+            p.drawText(pp1 + 	QPointF(0.0, h), text);
+            pp1 += QPointF(bb.width() + ottavaTextDistance, 0.0);
+
+            QPen pen(p.pen());
+            pen.setWidthF(ottavaLineWidth);
+            pen.setStyle(Qt::DashLine);
+            p.setPen(pen);
+            p.drawLine(QLineF(pp1, pp2));
+            if (ii == segments.end())
+                  p.drawLine(QLineF(pp2, QPointF(pp2.x(), h)));
             }
 
       if (mode != NORMAL) {
@@ -133,6 +140,7 @@ void Ottava::layout(ScoreLayout* layout)
       {
       double _spatium = layout->spatium();
       SLine::layout(layout);
+
       qreal ottavaDistance = _spatium * 2.5;
       qreal y = 0.0;
       if (parent()) {
@@ -142,15 +150,8 @@ void Ottava::layout(ScoreLayout* layout)
             y = sstaff->bbox().top() - ottavaDistance;
             }
 
-      setPos(0.0, y);
-      }
+      setPos(ipos().x(), y);
 
-//---------------------------------------------------------
-//   bbox
-//---------------------------------------------------------
-
-QRectF Ottava::bbox() const
-      {
       QFontMetricsF fm(textStyles[TEXT_STYLE_DYNAMICS].fontMetrics());
       qreal h1 = 0.0;
       int n = text.size();
@@ -163,8 +164,8 @@ QRectF Ottava::bbox() const
       textHeight = h1;
 
       QRectF r(0, 0, 0, 0);
-      for (ciLineSegment i = segments.begin(); i != segments.end(); ++i) {
-            LineSegment* s = (LineSegment*)(&*i);
+      for (iLineSegment i = segments.begin(); i != segments.end(); ++i) {
+            LineSegment* s = &*i;
             ciLineSegment ii = i;
             ++ii;
             QPointF pp1(s->p1);
@@ -183,7 +184,7 @@ QRectF Ottava::bbox() const
             r |= bbr1;
             r |= bbr2;
             }
-      return r;
+      setbbox(r);
       }
 
 //---------------------------------------------------------

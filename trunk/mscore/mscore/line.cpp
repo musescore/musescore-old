@@ -33,7 +33,7 @@ SLine::SLine(Score* s)
    : Element(s)
       {
       mode  = NORMAL;
-      _tick1 = 0;
+      setTick(0);
       _tick2 = 0;
       }
 
@@ -47,7 +47,7 @@ void SLine::layout(ScoreLayout* layout)
       if (!parent())
             return;
       segments.clear();
-      Segment* seg1 = _score->tick2segment(_tick1);
+      Segment* seg1 = _score->tick2segment(tick());
       Segment* seg2 = _score->tick2segment(_tick2);
       if (seg1 == 0 || seg2 == 0) {
             printf("SLine Layout: seg not found\n");
@@ -58,9 +58,13 @@ void SLine::layout(ScoreLayout* layout)
       System* system1   = measure1->system();
       System* system2   = measure2->system();
 
-      QPointF ppos(parent() ? parent()->apos() : QPointF());
-      QPointF p1 = QPointF(seg1->x(), 0) + measure1->apos() - ppos;
-      QPointF p2 = QPointF(seg2->x(), 0) + measure2->apos() - ppos;
+      QPointF ppos(parent() ? parent()->canvasPos() : QPointF());
+      QPointF p1 = QPointF(seg1->x(), 0) + measure1->canvasPos() - ppos;
+      QPointF p2 = QPointF(seg2->x(), 0) + measure2->canvasPos() - ppos;
+      setPos(p1);
+      p1 -= ipos();
+      p2 -= ipos();
+      ppos -= ipos();
 
       iSystem is = layout->systems()->begin();
       while (is != layout->systems()->end()) {
@@ -68,30 +72,34 @@ void SLine::layout(ScoreLayout* layout)
                   break;
             ++is;
             }
-      for (;is != layout->systems()->end(); ++is) {
-            LineSegment hps;
-            if (*is == system1)
-                  hps.p1 = p1;
-            else {
+      LineSegment hps;
+      hps.p1 = p1;
+      if (*is == system2) {
+            hps.p2 = p2;
+            layoutSingleSegment(&hps);
+            segments.push_back(hps);
+            }
+      else {
+            for (;;) {
+                  if (*is == system2) {
+                        hps.p2 = p2;
+                        layoutLastSegment(&hps);
+                        segments.push_back(hps);
+                        break;
+                        }
+                  hps.p2 = (*is)->pos() + QPointF((*is)->bbox().width() - _spatium * 0.5, 0) - ppos;
+
+                  if (*is == system1)
+                        layoutFirstSegment(&hps);
+                  else
+                        layoutMidleSegment(&hps);
+                  segments.push_back(hps);
+
+                  ++is;
+
                   Measure* m = (*is)->measures()->front();
                   hps.p1 = (*is)->pos() + m->pos() - ppos;
                   }
-            hps.p2 = p2;
-            segments.push_back(hps);
-            if (*is == system2)
-                  break;
-            hps.p2 = (*is)->pos() + QPointF((*is)->bbox().width() - _spatium * 0.5, 0) - ppos;
-
-            if (*is == system1) {
-                  if (*is == system2)
-                        layoutSingleSegment(&hps);
-                  else
-                        layoutFirstSegment(&hps);
-                  }
-            else if (*is == system2)
-                  layoutLastSegment(&hps);
-            else
-                  layoutMidleSegment(&hps);
             }
       }
 
@@ -233,17 +241,16 @@ bool SLine::endEditDrag()
 //---------------------------------------------------------
 //   contains
 //    return true if p is inside of bounding box of object
-//    p is relative to the coordinate system of parent()
+//    p is in canvas coordinates
 //---------------------------------------------------------
 
 bool SLine::contains(const QPointF& p) const
       {
       for (ciLineSegment i = segments.begin(); i != segments.end(); ++i) {
             const LineSegment* s = &*i;
-            if (s->bbox.contains(p - pos()))
+            if (s->bbox.contains(p - canvasPos()))
                   return true;
             }
-
       if (bbr1.contains(p-pos()) || bbr2.contains(p-pos()))
             return true;
       return false;
@@ -265,7 +272,6 @@ void SLine::endDrag()
 void SLine::writeProperties(Xml& xml) const
       {
       Element::writeProperties(xml);
-      xml.tag("tick1", _tick1);
       xml.tag("tick2", _tick2);
       if (!off1.isNull())
             xml.tag("off1", off1);
@@ -291,8 +297,6 @@ bool SLine::readProperties(QDomNode node)
             off1 = readPoint(node);
       else if (tag == "off2")
             off2 = readPoint(node);
-      else if (tag == "tick1")
-            _tick1 = score()->fileDivision(i);
       else if (tag == "tick2")
             _tick2 = score()->fileDivision(i);
       else

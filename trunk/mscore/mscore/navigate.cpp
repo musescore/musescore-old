@@ -282,7 +282,7 @@ ChordRest* Score::prevMeasure(ChordRest* element)
 
 void Score::adjustCanvasPosition(Element* el)
       {
-      QPointF p(el->apos());
+      QPointF p(el->canvasPos());
       QRectF r(canvas()->vGeometry());
       if (r.contains(p))
             return;
@@ -296,7 +296,7 @@ void Score::adjustCanvasPosition(Element* el)
       else
             return;
 
-      QPointF pos(m->apos());
+      QPointF pos(m->canvasPos());
       qreal mag = canvas()->xMag();
       qreal x   = canvas()->xoffset() / mag;
       qreal y   = canvas()->yoffset() / mag;
@@ -336,7 +336,7 @@ void Score::pageNext()
       Page* page = _layout->pages()->back();
       qreal mag  = canvas()->xMag();
       qreal x    = canvas()->xoffset() - page->width() * mag;
-      qreal lx   = 10.0 - page->apos().x() * mag;
+      qreal lx   = 10.0 - page->canvasPos().x() * mag;
       if (x < lx)
             x = lx;
       canvas()->setOffset(x, 10.0);
@@ -381,7 +381,7 @@ void Score::pageEnd()
       if (_layout->pages()->empty())
             return;
       Page* lastPage = _layout->pages()->back();
-      QPointF p(lastPage->apos());
+      QPointF p(lastPage->canvasPos());
       qreal mag = canvas()->xMag();
       canvas()->setOffset(10.0 - p.x() * mag, 10.0);
       canvas()->updateNavigator(false);

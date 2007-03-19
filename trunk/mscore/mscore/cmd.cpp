@@ -49,6 +49,9 @@
 #include "tuplet.h"
 #include "padids.h"
 #include "xml.h"
+#include "ottava.h"
+#include "trill.h"
+#include "pedal.h"
 
 //---------------------------------------------------------
 //   start
@@ -89,6 +92,76 @@ void Score::cmdAdd(Element* e)
       e->setSelected(false);
       undoAddElement(e);
       layout();
+      }
+
+//---------------------------------------------------------
+//   cmdAdd
+//---------------------------------------------------------
+
+void Score::cmdAdd(Element* e, const QPointF& pos, const QPointF& dragOffset)
+      {
+      e->setSelected(false);
+      startCmd();
+
+      Staff* staff = 0;
+      int pitch, tick;
+      QPointF offset;
+      Segment* segment;
+      Measure* measure = pos2measure(pos, &tick, &staff, &pitch, &segment, &offset);
+      if (measure == 0) {
+            printf("cmdAdd: cannot put object here\n");
+            delete e;
+            endCmd(true);
+            return;
+            }
+      e->setStaff(staff);
+      e->setParent(measure);
+
+      switch(e->type()) {
+            case VOLTA:
+                  break;
+            case PEDAL:
+                  {
+                  Pedal* pedal = (Pedal*)e;
+                  pedal->setTick(tick);
+                  pedal->setTick2(tick + measure->tickLen());
+                  e->layout(mainLayout());
+                  QPointF uo(pos - (e->ipos() + e->parent()->canvasPos()) - dragOffset);
+                  e->setUserOff(uo / _spatium);
+                  }
+                  break;
+            case OTTAVA:
+                  {
+                  Ottava* ottava = (Ottava*)e;
+                  ottava->setTick(tick);
+                  ottava->setTick2(tick + measure->tickLen());
+                  e->layout(mainLayout());
+                  QPointF uo(pos - (e->ipos() + e->parent()->canvasPos()) - dragOffset);
+                  e->setUserOff(uo / _spatium);
+                  }
+                  break;
+            case TRILL:
+                  {
+                  Trill* trill = (Trill*)e;
+                  trill->setTick(tick);
+                  int lt = measure->last()->tick();
+                  trill->setTick2(lt);
+                  }
+                  break;
+            case DYNAMIC:
+                  {
+                  e->setTick(tick);
+                  e->layout(mainLayout());
+                  QPointF uo(pos - (e->ipos() + e->parent()->canvasPos()) - dragOffset);
+                  e->setUserOff(uo / _spatium);
+                  }
+                  break;
+            default:
+                  break;
+            }
+      cmdAdd(e);
+      select(e, 0, 0);
+      endCmd(true);
       }
 
 //---------------------------------------------------------

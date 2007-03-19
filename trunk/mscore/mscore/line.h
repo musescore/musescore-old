@@ -41,7 +41,7 @@ class SLine : public Element {
    protected:
       std::list<LineSegment> segments;
 
-      int _tick1, _tick2;
+      int _tick2;
       QPointF off1, off2;   // user offset (in spatium units)
       QRectF r1, r2;        // "grips" for p1, p2
       QRectF bbr1, bbr2;    // bounding boxes for grips
@@ -68,9 +68,7 @@ class SLine : public Element {
    public:
       SLine(Score* s);
       virtual ElementType type() const { return LINE; }
-      void setTick1(int t) { _tick1 = t; }
       void setTick2(int t) { _tick2 = t; }
-      int tick1() const    { return _tick1; }
       int tick2() const    { return _tick2; }
       virtual void layout(ScoreLayout*);
       bool readProperties(QDomNode node);

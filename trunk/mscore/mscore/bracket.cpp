@@ -275,7 +275,7 @@ bool Bracket::edit(QKeyEvent* ev)
       {
       if (editMode == 0)
             return false;
-      QPointF ppos(apos());
+      QPointF ppos(canvasPos());
 
       qreal dy = 0.0;
       qreal val = 1.0;
@@ -303,7 +303,7 @@ bool Bracket::endEditDrag()
       {
       h2 += yoff * .5;
 
-      qreal ay1 = apos().y();
+      qreal ay1 = canvasPos().y();
       qreal ay2 = ay1 + h2 * 2;
 
       SysStaffList* sl = ((System*)parent())->staves();
@@ -311,7 +311,7 @@ bool Bracket::endEditDrag()
       int idx2 = -1;
       int i    = 0;
 
-      qreal ay = parent()->apos().y();
+      qreal ay = parent()->canvasPos().y();
       for (iSysStaff iss = sl->begin(); iss != sl->end(); ++iss, ++i) {
             SysStaff* ss = *iss;
             qreal y1 = ss->bbox().y() + ay;

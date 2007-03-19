@@ -151,10 +151,11 @@ QRectF Element::drag(const QPointF& s)
       }
 
 //---------------------------------------------------------
-//   aref
+//   canvasPos
+//    return position in canvas coordinates
 //---------------------------------------------------------
 
-QPointF Element::aref() const
+QPointF Element::canvasPos() const
       {
       QPointF p(pos());
       for (Element* e = _parent; e; e = e->parent())
@@ -174,7 +175,7 @@ QPointF Element::aref() const
 
 bool Element::contains(const QPointF& p) const
       {
-      return shape().contains(p - aref());
+      return shape().contains(p - canvasPos());
       }
 
 //---------------------------------------------------------
@@ -876,118 +877,6 @@ QByteArray Element::mimeData(const QPointF& dragOffset) const
       xml.etag("Element");
       buffer.close();
       return buffer.buffer();
-      }
-
-//---------------------------------------------------------
-//   draw
-//---------------------------------------------------------
-
-void Volta::draw(QPainter& p)
-      {
-      qreal voltaLineWidth = _spatium * .18;
-      qreal h              = _spatium * 1.8;
-
-      QPointF p0(_p1.x(), h);
-      QPointF p3(_p2.x(), h);
-
-      QPen pen(p.pen());
-      pen.setWidthF(voltaLineWidth);
-      p.setPen(pen);
-      p.drawLine(QLineF(p0, _p1));
-      p.drawLine(QLineF(_p1, _p2));
-      if (subtype() != 4)
-            p.drawLine(QLineF(_p2, p3));
-
-      TextStyle* s = &textStyles[TEXT_STYLE_SYMBOL1];
-      QFont f(s->family, s->size);
-      f.setItalic(s->italic);
-      f.setUnderline(s->underline);
-      f.setBold(s->bold);
-      p.setFont(f);
-
-      QPointF tp(p0.x() + _spatium * .5, p0.y());
-
-      switch(subtype()) {
-            default:
-            case PRIMA_VOLTA:
-                  p.drawText(tp, "1.");
-                  break;
-            case SECONDA_VOLTA:
-            case SECONDA_VOLTA2:
-                  p.drawText(tp, "2.");
-                  break;
-            case TERZA_VOLTA:
-                  p.drawText(tp, "3.");
-                  break;
-            }
-      }
-
-//---------------------------------------------------------
-//   setLen
-//---------------------------------------------------------
-
-void Volta::setLen(qreal l)
-      {
-      _p2.setX(l);
-      }
-
-//---------------------------------------------------------
-//   layout
-//---------------------------------------------------------
-
-void Volta::layout(ScoreLayout* layout)
-      {
-      if (!parent())
-            return;
-      double _spatium = layout->spatium();
-      qreal voltaHeight   = _spatium * 1.8;
-      qreal voltaDistance = _spatium * .7;
-
-      Measure* measure = (Measure*)parent();
-      System* system   = measure->system();
-      SysStaff* sstaff = system->staff(staffIdx());
-      qreal y  = sstaff->bbox().top();
-      qreal x2 = measure->width() - _spatium * .5;
-
-      _p1.setX(0.0);
-      _p1.setY(0.0);
-      _p2.setX(x2);
-      _p2.setY(0.0);
-
-      setPos(0.0, y - (voltaHeight + voltaDistance));
-      }
-
-//---------------------------------------------------------
-//   bbox
-//---------------------------------------------------------
-
-QRectF Volta::bbox() const
-      {
-      qreal voltaHeight   = _spatium * 1.8;
-      return QRectF(0.0, 0.0, _p2.x() - _p1.x(), voltaHeight);
-      }
-
-//---------------------------------------------------------
-//   write
-//---------------------------------------------------------
-
-void Volta::write(Xml& xml) const
-      {
-      xml.stag("Volta");
-      Element::writeProperties(xml);
-      xml.etag("Volta");
-      }
-
-//---------------------------------------------------------
-//   read
-//---------------------------------------------------------
-
-void Volta::read(QDomNode node)
-      {
-      for (node = node.firstChild(); !node.isNull(); node = node.nextSibling()) {
-            if (!Element::readProperties(node))
-                  domError(node);
-            }
       }
 
 //---------------------------------------------------------

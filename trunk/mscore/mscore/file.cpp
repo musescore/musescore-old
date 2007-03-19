@@ -925,7 +925,7 @@ void Score::printFile()
                   Element* e = el.at(i);
                   if (!e->visible())
                         continue;
-                  QPointF ap(e->apos() - page->pos());
+                  QPointF ap(e->canvasPos() - page->pos());
                   p.translate(ap);
                   p.setPen(QPen(e->color()));
                   e->draw(p);
