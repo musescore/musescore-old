@@ -100,9 +100,9 @@ NoteAttribute::NoteAttribute(Score* s, int idx)
 
 QRectF NoteAttribute::drag(const QPointF& s)
       {
-      QRectF r = bbox().translated(aref());
+      QRectF r = bbox().translated(canvasPos());
       setUserOff(s / _spatium);
-      r |= bbox().translated(aref());
+      r |= bbox().translated(canvasPos());
       return r;
       }
 

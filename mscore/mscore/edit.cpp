@@ -27,7 +27,6 @@
 #include "clef.h"
 #include "padstate.h"
 #include "score.h"
-#include "dynamics.h"
 #include "slur.h"
 #include "hairpin.h"
 #include "segment.h"
@@ -41,7 +40,6 @@
 #include "seq.h"
 #include "mscore.h"
 #include "lyrics.h"
-#include "pedal.h"
 
 //---------------------------------------------------------
 //   selectNoteMessage
@@ -753,7 +751,7 @@ void Score::cmdAddHairpin(bool decrescendo)
       int tick1 = el->tick();
       int tick2 = tick1 + 4 * division;
       Hairpin* gabel = new Hairpin(this);
-      gabel->setTick1(tick1);
+      gabel->setTick(tick1);
       gabel->setTick2(tick2);
       gabel->setSubtype(decrescendo ? 1 : 0);
 
@@ -799,64 +797,6 @@ void Score::cmdFlipStemDirection()
             return;
             }
       layout();
-      }
-
-//---------------------------------------------------------
-//   cmdAddDynamic
-//---------------------------------------------------------
-
-void Score::cmdAddDynamic(Dynamic* d, const QPointF& pos, const QPointF& off)
-      {
-      d->setSelected(false);
-      Staff* staff = 0;
-      int pitch, tick;
-      QPointF offset;
-      Segment* segment;
-
-      Measure* measure = pos2measure(pos, &tick, &staff, &pitch, &segment, &offset);
-      if (measure == 0) {
-            printf("addDynamic: cannot put object here\n");
-            delete d;
-            return;
-            }
-      offset -= off;
-      d->setPos(segment->x(), 0.0);
-      d->setTick(segment->tick());
-      d->setUserOff(offset / _spatium);
-      d->setStaff(staff);
-      d->setParent(measure);
-      undoAddElement(d);
-      addRefresh(d->abbox());
-      select(d, 0, 0);
-      }
-
-//---------------------------------------------------------
-//   cmdAddPedal
-//---------------------------------------------------------
-
-void Score::cmdAddPedal(Pedal* pedal, const QPointF& pos, const QPointF& off)
-      {
-      pedal->setSelected(false);
-      Staff* staff = 0;
-      int pitch, tick;
-      QPointF offset;
-      Segment* segment;
-
-      Measure* measure = pos2measure(pos, &tick, &staff, &pitch, &segment, &offset);
-      if (measure == 0) {
-            printf("addPedal: cannot put object here\n");
-            delete pedal;
-            return;
-            }
-      pedal->setTick1(segment->tick());
-      pedal->setTick2(segment->tick() + measure->tickLen());
-      pedal->setStaff(staff);
-      pedal->setParent(measure);
-      pedal->layout(_layout);
-//      pedal->setUserOff((pos - pedal->pos() - off) / _spatium);
-      undoAddElement(pedal);
-      addRefresh(pedal->abbox());
-      select(pedal, 0, 0);
       }
 
 //---------------------------------------------------------
@@ -967,7 +907,7 @@ Element* Score::addSlur(Slur* /*slur*/, const QPointF& /*pos*/)
             delete slur;
             return 0;
             }
-      slur->setTick1(tick1);
+      slur->setTick(tick1);
       slur->setTick2(tick2);
       slur->setStaffIdx(staff);
       measure->add(slur);

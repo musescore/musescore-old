@@ -51,6 +51,7 @@
 #include "xml.h"
 #include "barline.h"
 #include "lyrics.h"
+#include "volta.h"
 
 //---------------------------------------------------------
 //   xmlSetPitch
@@ -1849,7 +1850,7 @@ void MusicXml::genWedge(int no, int endTick, Measure* measure, int staff)
       {
       Hairpin* hp = new Hairpin(score);
 
-      hp->setTick1(wedgeList[no].startTick);
+      hp->setTick(wedgeList[no].startTick);
       hp->setTick2(endTick);
       hp->setSubtype(wedgeList[no].subType);
       hp->setUserOff(QPointF(wedgeList[no].rx, wedgeList[no].ry));

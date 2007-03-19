@@ -146,7 +146,7 @@ class Element {
       virtual void move(double xd, double yd) { _pos += QPointF(xd, yd); }
       virtual void move(const QPointF& s)     { _pos += s;               }
 
-      QPointF aref() const;     ///< Canvas reference pos
+      QPointF canvasPos() const;          ///< position in canvas coordinates
       const QPointF& userOff() const          { return _userOff;  }
       void setUserOff(const QPointF& o)       { _userOff = o;     }
       void setUserXoffset(qreal v)            { _userOff.setX(v); }
@@ -157,8 +157,7 @@ class Element {
       virtual QRectF bbox() const             { return _bbox;           }
       virtual double height() const           { return bbox().height(); }
       virtual double width() const            { return bbox().width();  }
-      QRectF abbox() const                    { return bbox().translated(aref()); }
-      QPointF apos() const                    { return aref();          }
+      QRectF abbox() const                    { return bbox().translated(canvasPos()); }
       virtual void setbbox(const QRectF& r)   { _bbox = r;              }
       virtual bool contains(const QPointF& p) const;
       virtual QPainterPath shape() const;
@@ -452,30 +451,6 @@ class RubberBand : public Element {
       void set(const QPointF& p1, const QPointF& p2) { _p1 = p1; _p2 = p2; }
       QPointF p1() const { return _p1; }
       QPointF p2() const { return _p2; }
-      };
-
-//---------------------------------------------------------
-//   Volta
-//    brackets
-//---------------------------------------------------------
-
-enum {
-      PRIMA_VOLTA = 1, SECONDA_VOLTA, TERZA_VOLTA, SECONDA_VOLTA2
-      };
-
-class Volta : public Element {
-      QPointF _p1, _p2;
-
-   public:
-      Volta(Score* s) : Element(s) {}
-      virtual Volta* clone() const { return new Volta(*this); }
-      virtual ElementType type() const { return VOLTA; }
-      virtual void draw(QPainter&);
-      virtual void layout(ScoreLayout*);
-      void setLen(qreal);
-      virtual void write(Xml&) const;
-      virtual void read(QDomNode);
-      virtual QRectF bbox() const;
       };
 
 #endif

@@ -172,6 +172,7 @@ add_executable ( mscore
       lyrics.cpp
       bsp.cpp
       viewer.cpp
+      volta.cpp
       )
 
 if (CROSS_MINGW)

@@ -33,8 +33,8 @@ class Ottava : public SLine {
       mutable qreal textHeight;      ///< cached value
 
    public:
-      Ottava(Score* s) : SLine(s) {}
-      virtual Ottava* clone() const { return new Ottava(*this); }
+      Ottava(Score* s);
+      virtual Ottava* clone() const    { return new Ottava(*this); }
       virtual ElementType type() const { return OTTAVA; }
       virtual void draw(QPainter&);
       virtual void layout(ScoreLayout*);
@@ -42,7 +42,6 @@ class Ottava : public SLine {
       virtual void setSubtype(int val);
       virtual void write(Xml&) const;
       virtual void read(QDomNode);
-      virtual QRectF bbox() const;
       };
 
 #endif

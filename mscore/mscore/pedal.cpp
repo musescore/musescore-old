@@ -68,22 +68,18 @@ void Pedal::draw(QPainter& p)
             if (ii == segments.end())
                   pp2 += off2 * _spatium;
 
-            if (i == segments.begin()) {
-                  const QRectF& bb = symbols[symbol].bbox();
+            const QRectF& bb = symbols[symbol].bbox();
+            qreal h = bb.height() * .5;
+            symbols[symbol].draw(p, pp1.x(), h);
 
-                  qreal h = bb.height() * .5;
-                  symbols[symbol].draw(p, 0.0, h);
-                  pp1 += QPointF(bb.width() + ottavaTextDistance, 0.0);
+            pp1 += QPointF(bb.width() + ottavaTextDistance, 0.0);
 
-                  QPen pen(p.pen());
-                  pen.setWidthF(ottavaLineWidth);
-                  p.setPen(pen);
-                  p.drawLine(QLineF(pp1, pp2));
-                  if (ii == segments.end())
-                        p.drawLine(QLineF(pp2, QPointF(pp2.x(), -h)));
-                  }
-            else
-                  printf("===not impl.\n");
+            QPen pen(p.pen());
+            pen.setWidthF(ottavaLineWidth);
+            p.setPen(pen);
+            p.drawLine(QLineF(pp1, pp2));
+            if (ii == segments.end())
+                  p.drawLine(QLineF(pp2, QPointF(pp2.x(), -h)));
             }
 
       if (mode != NORMAL) {
@@ -135,7 +131,7 @@ void Pedal::layout(ScoreLayout* layout)
       System* system   = measure->system();
       SysStaff* sstaff = system->staff(staffIdx());
       qreal y = sstaff->bbox().top() + pedalDistance;
-      setPos(0.0, y);
+      setPos(ipos().x(), y);
       }
 
 //---------------------------------------------------------
@@ -193,20 +189,4 @@ void Pedal::read(QDomNode node)
                   domError(node);
             }
       }
-
-//---------------------------------------------------------
-//   contains
-//---------------------------------------------------------
-
-/**
- Return true if \a p is inside the shape of the object.
-
- Note: \a p is in canvas coordinates
-*/
-
-bool Pedal::contains(const QPointF& p) const
-      {
-      return abbox().contains(p);
-      }
-
 

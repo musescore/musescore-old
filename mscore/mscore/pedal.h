@@ -43,7 +43,6 @@ class Pedal : public SLine {
       virtual void setSubtype(int val);
       virtual void write(Xml&) const;
       virtual void read(QDomNode);
-      virtual bool contains(const QPointF& p) const;
       QRectF bbox() const;
       };
 

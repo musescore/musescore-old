@@ -122,7 +122,7 @@ void Tuplet::layout(ScoreLayout* layout)
       if (cr1->beam())
             _hasLine = false;
 
-      QPointF mp(measure->apos());
+      QPointF mp(measure->canvasPos());
       QPointF p1, p2;
       if (isUp) {
             if (cr1->type() == CHORD) {

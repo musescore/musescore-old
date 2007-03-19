@@ -169,7 +169,7 @@ void PagePreview::paintEvent(QPaintEvent* ev)
             if (!(e->visible() || _score->showInvisible()))
                   continue;
 
-            QPointF ap(e->apos());
+            QPointF ap(e->canvasPos());
             p.translate(ap);
             p.setPen(QPen(e->color()));
             e->draw(p);

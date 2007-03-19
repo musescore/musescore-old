@@ -612,7 +612,7 @@ QRectF Note::drag(const QPointF& s)
 //      chord()->layout();
 //      chord()->measure()->layoutBeams();
 //      bb |= chord()->bbox();
-      return bb.translated(chord()->aref());
+      return bb.translated(chord()->canvasPos());
       }
 
 //---------------------------------------------------------
@@ -649,7 +649,7 @@ void ShadowNote::draw(QPainter& p)
       if (!visible())
             return;
 
-      QPointF ap(apos());
+      QPointF ap(canvasPos());
 
       QRect r(abbox().toRect());
 //      QRect c(p.clipRect());

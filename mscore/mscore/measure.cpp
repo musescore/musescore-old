@@ -57,6 +57,7 @@
 #include "irregular.h"
 #include "layout.h"
 #include "viewer.h"
+#include "volta.h"
 
 //---------------------------------------------------------
 //   y2pitch
@@ -1825,14 +1826,6 @@ bool Measure::acceptDrop(Viewer*, const QPointF& p, int type, const QDomNode&) c
       qreal b = sb.bottom(); // bottom of staff
 
       switch(type) {
-            case VOLTA:
-            case OTTAVA:
-            case TRILL:
-                  // accept drop only above staff
-                  if (mrpy < t)
-                        return true;
-                  return false;
-
             case BRACKET:
             case LAYOUT_BREAK:
                   return true;
@@ -1938,47 +1931,16 @@ Element* Measure::drop(const QPointF& p, const QPointF& /*offset*/, int type, co
                   delete ts;
                   }
                   break;
-            case VOLTA:
-                  {
-                  Volta* volta = new Volta(score());
-                  volta->read(node);
-                  volta->setStaff(staff);
-                  volta->setParent(this);
-                  score()->cmdAdd(volta);
-                  return volta;
-                  }
-            case OTTAVA:
-                  {
-                  Ottava* ottava = new Ottava(score());
-                  ottava->read(node);
-                  ottava->setStaff(staff);
-                  ottava->setTick1(tick());
-                  ottava->setTick2(tick() + tickLen());
-                  ottava->setParent(this);
-                  score()->cmdAdd(ottava);
-                  return ottava;
-                  }
             case HAIRPIN:
                   {
                   Hairpin* hairpin = new Hairpin(score());
                   hairpin->read(node);
                   hairpin->setStaff(staff);
-                  hairpin->setTick1(tick());
+                  hairpin->setTick(tick());
                   hairpin->setTick2(tick() + tickLen());
                   hairpin->setParent(this);
                   score()->cmdAdd(hairpin);
                   return hairpin;
-                  }
-            case TRILL:
-                  {
-                  Trill* trill = new Trill(score());
-                  trill->setStaff(staff);
-                  trill->setTick1(tick());
-                  int lt = _last->tick();
-                  trill->setTick2(lt);
-                  trill->setParent(this);
-                  score()->cmdAdd(trill);
-                  return trill;
                   }
             case LAYOUT_BREAK:
                   {

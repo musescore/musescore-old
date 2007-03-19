@@ -158,13 +158,13 @@ bool SlurSegment::startEdit(QMatrix& matrix, const QPointF&)
 
 bool SlurSegment::edit(QKeyEvent* ev)
       {
-      QPointF ppos(apos());
+      QPointF ppos(canvasPos());
 
       if ((ev->modifiers() & Qt::ShiftModifier)) {
             if (ev->key() == Qt::Key_Left)
-                  slur->prevSeg(apos(), mode, ups[mode-1]);
+                  slur->prevSeg(canvasPos(), mode, ups[mode-1]);
             else if (ev->key() == Qt::Key_Right)
-                  slur->nextSeg(apos(), mode, ups[mode-1]);
+                  slur->nextSeg(canvasPos(), mode, ups[mode-1]);
             return false;
             }
 
@@ -203,10 +203,10 @@ bool SlurSegment::edit(QKeyEvent* ev)
       ups[idx].r.translate(delta * _spatium);
 
       if (mode == 1 || mode == 4) {
-//TODO            slur->layout2(apos(), mode, ups[idx]);
+//TODO            slur->layout2(canvasPos(), mode, ups[idx]);
             if (!showRubberBand || (mode != 1 && mode != 4))
                   return true;
-            QPointF ppos(apos());
+            QPointF ppos(canvasPos());
             QPointF rp1, rp2;
             rp1 = ups[idx].p + ups[idx].off * _spatium + ppos;
             rp2 = ups[idx].p + ppos;
@@ -271,7 +271,7 @@ bool SlurSegment::editDrag(QMatrix& matrix, QPointF*, const QPointF& delta)
       ups[n].off += (delta / _spatium);
 
       if (mode == 1 || mode == 4) {
-//TODO            slur->layout2(apos(), mode, ups[n]);
+//TODO            slur->layout2(canvasPos(), mode, ups[n]);
             //
             //  compute bezier help points
             //
@@ -297,7 +297,7 @@ bool SlurSegment::editDrag(QMatrix& matrix, QPointF*, const QPointF& delta)
             updateGrips(matrix);
 
             if (showRubberBand) {
-                  QPointF ppos(apos());
+                  QPointF ppos(canvasPos());
                   QPointF rp1( ups[n].p + ups[n].off * _spatium + ppos);
                   QPointF rp2(ups[n].p + ppos);
                   rb->set(rp1, rp2);
@@ -411,7 +411,7 @@ void SlurSegment::layout(ScoreLayout*, const QPointF& p1, const QPointF& p2, qre
       {
 // printf("SlurSegment %p %p layout\n", slur, this);
       bow = b;
-      QPointF ppos(apos());
+      QPointF ppos(canvasPos());
       ups[0].p = p1 - ppos;
       ups[3].p = p2 - ppos;
 
@@ -565,7 +565,7 @@ QPointF SlurTie::slurPos(int tick, Staff* staff, int voice, System*& s)
       //    p
       //-----------------------------------------
 
-      return cr->apos() + off;
+      return cr->canvasPos() + off;
       }
 
 //---------------------------------------------------------
@@ -856,7 +856,7 @@ void Slur::layout(ScoreLayout* layout)
                   break;
             }
 
-      QPointF ppos(apos());
+      QPointF ppos(canvasPos());
       System *s1, *s2;
 
       QPointF p1 = slurPos(_tick1, _staff1, _voice1, s1);
@@ -904,7 +904,7 @@ void Slur::layout(ScoreLayout* layout)
       iElement ibss = segments.begin();
       for (int i = 0; is != layout->systems()->end(); ++i, ++is, ++ibss) {
             System* system = *is;
-            QPointF sp(system->apos());
+            QPointF sp(system->canvasPos());
             SlurSegment* bs = (SlurSegment*)*ibss;
             // case 1: one segment
             if (s1 == s2) {
@@ -914,7 +914,7 @@ void Slur::layout(ScoreLayout* layout)
             else if (i == 0) {
                   System* system = *is;
                   Measure* m = system->measures()->back();
-                  qreal x       = system->apos().x() + system->bbox().width();
+                  qreal x       = system->canvasPos().x() + system->bbox().width();
                   if (m != bs->parent()) {
                         bs->parent()->remove(bs);
                         bs->setParent(m);
@@ -932,7 +932,7 @@ void Slur::layout(ScoreLayout* layout)
                         bs->setParent(m);
                         m->add(bs);
                         }
-                  QPointF p = system->apos();
+                  QPointF p = system->canvasPos();
                   qreal x1 = p.x();
                   qreal x2 = x1 + system->bbox().width();
                   bs->layout(layout, QPointF(x1, p.y()), QPointF(x2, p.y()), bow);
@@ -946,7 +946,7 @@ void Slur::layout(ScoreLayout* layout)
                         bs->setParent(m);
                         m->add(bs);
                         }
-                  qreal x = system->apos().x();
+                  qreal x = system->canvasPos().x();
                   bs->layout(layout, QPointF(x, p2.y()), p2, bow);
                   }
             if (*is == s2)
@@ -962,7 +962,7 @@ QRectF Slur::bbox() const
       {
       QRectF r;
       for (ciElement i = segments.begin(); i != segments.end(); ++i)
-            r |= (*i)->abbox().translated(apos());
+            r |= (*i)->abbox().translated(canvasPos());
       return r;
       }
 
@@ -1092,9 +1092,9 @@ void Tie::layout(ScoreLayout* layout)
       QPointF off1(w, yo);
       QPointF off2(0.0, yo);
 
-      QPointF ppos(apos());
-      QPointF p1 = _startNote->apos() + off1;
-      QPointF p2 = _endNote->apos()   + off2;
+      QPointF ppos(canvasPos());
+      QPointF p1 = _startNote->canvasPos() + off1;
+      QPointF p2 = _endNote->canvasPos()   + off2;
 
       iSystem is = layout->systems()->begin();
       while (is != layout->systems()->end()) {
@@ -1137,7 +1137,7 @@ void Tie::layout(ScoreLayout* layout)
       iElement ibss = segments1.begin();
       for (int i = 0; is != layout->systems()->end(); ++i, ++is, ++ibss) {
             System* system = *is;
-            QPointF sp(system->apos());
+            QPointF sp(system->canvasPos());
             SlurSegment* bs = (SlurSegment*)*ibss;
             bs->setParent(m1);
             bs->setStaff(staff());

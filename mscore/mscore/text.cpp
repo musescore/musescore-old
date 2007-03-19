@@ -701,7 +701,7 @@ void Text::setBlockFormat(const QTextBlockFormat& bf)
 
 bool Text::mousePress(const QPointF& p)
       {
-      QPointF pt = p - apos();
+      QPointF pt = p - canvasPos();
       bool inText = bbox().contains(pt);
       if (!inText)
             return false;

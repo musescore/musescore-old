@@ -393,8 +393,8 @@ void System::layout2(ScoreLayout* layout)
                                     qreal x = b.x() + _spatium + w;
                                     qreal y = b.y() + h * .5;
                                     line->setPos(QPointF(x, y));
-                                    QPointF p1 = l->apos();
-                                    QPointF p2 = nl->apos();
+                                    QPointF p1 = l->canvasPos();
+                                    QPointF p2 = nl->canvasPos();
                                     qreal len = p2.x() - p1.x() - 2 * _spatium - w;
                                     Spatium sp;
                                     sp.set(len);

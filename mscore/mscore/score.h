@@ -304,9 +304,10 @@ class Score : public QObject {
       Element* addClef(Clef*);
       void addTimeSig(int tick, int keySigSubtype);
       Element* addKeySig(KeySig*, const QPointF&);
-      void cmdAddDynamic(Dynamic*, const QPointF&, const QPointF&);
-      void cmdAddPedal(Pedal*, const QPointF&, const QPointF&);
+
+      void cmdAdd(Element* e, const QPointF& pos, const QPointF& dragOffset);
       void cmdAddSymbol(Symbol*, const QPointF&, const QPointF&);
+
       Element* cmdAddHairpin(Hairpin* atr, const QPointF& pos);
       Element* addSlur(Slur* atr, const QPointF& pos);
       Note* addNote(Chord*, int pitch);

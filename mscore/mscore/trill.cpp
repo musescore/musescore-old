@@ -164,7 +164,7 @@ void Trill::layout(ScoreLayout* layout)
       System* system   = measure->system();
       SysStaff* sstaff = system->staff(staffIdx());
       qreal y = sstaff->bbox().top() - trillDistance;
-      setPos(0.0, y);
+      setPos(ipos().x(), y);
       }
 
 //---------------------------------------------------------

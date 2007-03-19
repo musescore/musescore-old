@@ -901,7 +901,7 @@ void HairpinView::setElement(Element* e)
       {
       Hairpin* hairpin = (Hairpin*)e;
       ShowElementBase::setElement(e);
-      hp.tick1->setValue(hairpin->tick1());
+      hp.tick1->setValue(hairpin->tick());
       hp.tick2->setValue(hairpin->tick2());
       }
 
