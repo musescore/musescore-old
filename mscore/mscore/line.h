@@ -25,26 +25,32 @@
 
 //---------------------------------------------------------
 //   LineSegment
+//    Virtual base class for OttavaSegment, PedalSegment
+//    HairpinSegment and TrillSegment.
+//    This class describes part of a line object. Line objects
+//    can span multiple staves. For every staff an Segment
+//    is created.
 //---------------------------------------------------------
 
-struct LineSegment {
-      QPointF p1;
+class LineSegment : public Element {
+   protected:
       QPointF p2;
-      QRectF bbox;
+      QPointF _userOff2;
+
+   public:
+      LineSegment(Score* s) : Element(s) {}
       };
 
 //---------------------------------------------------------
 //   SLine
+//    virtual base class for Ottava, Pedal, Hairpin and
+//    Trill
 //---------------------------------------------------------
 
 class SLine : public Element {
    protected:
-      QList<LineSegment> segments;
-
+      QList<LineSegment*> segments;
       int _tick2;
-      QPointF off1, off2;   // user offset (in spatium units)
-      QRectF r1, r2;        // "grips" for p1, p2
-      QRectF bbr1, bbr2;    // bounding boxes for grips
 
       int mode;
       enum { NORMAL, DRAG1, DRAG2 };
@@ -62,16 +68,16 @@ class SLine : public Element {
 
    public:
       SLine(Score* s);
-      virtual ElementType type() const { return LINE; }
       void setTick2(int t);
       int tick2() const    { return _tick2; }
       virtual void layout(ScoreLayout*);
       bool readProperties(QDomNode node);
       void writeProperties(Xml& xml) const;
+      virtual LineSegment* createSegment() = 0;
       };
 
-typedef QList<LineSegment>::iterator iLineSegment;
-typedef QList<LineSegment>::const_iterator ciLineSegment;
+typedef QList<LineSegment*>::iterator iLineSegment;
+typedef QList<LineSegment*>::const_iterator ciLineSegment;
 
 #endif
 

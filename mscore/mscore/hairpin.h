@@ -25,6 +25,17 @@
 class Score;
 
 //---------------------------------------------------------
+//   HairpinSegment
+//---------------------------------------------------------
+
+class HairpinSegment : public LineSegment {
+   protected:
+   public:
+      HairpinSegment(Score* s) : LineSegment(s) {}
+      virtual ElementType type() const { return HAIRPIN_SEGMENT; }
+      };
+
+//---------------------------------------------------------
 //   Hairpin
 //
 //    subtype: 0 = crescendo,  1 = decrescendo
@@ -41,6 +52,7 @@ class Hairpin : public SLine {
       virtual void layout(ScoreLayout*);
       virtual void write(Xml& xml) const;
       virtual void read(QDomNode);
+      virtual LineSegment* createSegment() { return new HairpinSegment(score()); }
       };
 
 #define __HAIRPIN_H__

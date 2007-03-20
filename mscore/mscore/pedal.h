@@ -24,6 +24,17 @@
 #include "line.h"
 
 //---------------------------------------------------------
+//   PedalSegment
+//---------------------------------------------------------
+
+class PedalSegment : public LineSegment {
+   protected:
+   public:
+      PedalSegment(Score* s) : LineSegment(s) {}
+      virtual ElementType type() const { return PEDAL_SEGMENT; }
+      };
+
+//---------------------------------------------------------
 //   Pedal
 //---------------------------------------------------------
 
@@ -44,6 +55,7 @@ class Pedal : public SLine {
       virtual void write(Xml&) const;
       virtual void read(QDomNode);
       QRectF bbox() const;
+      virtual LineSegment* createSegment() { return new PedalSegment(score()); }
       };
 
 #endif
