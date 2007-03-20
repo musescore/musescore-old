@@ -23,6 +23,7 @@
 #include "xml.h"
 #include "style.h"
 #include "staff.h"
+#include "viewer.h"
 
 //---------------------------------------------------------
 //   Rest
@@ -137,7 +138,7 @@ void Rest::space(double& min, double& extra) const
 //   acceptDrop
 //---------------------------------------------------------
 
-bool Rest::acceptDrop(Viewer*, const QPointF&, int type, const QDomNode& node) const
+bool Rest::acceptDrop(Viewer* viewer, const QPointF&, int type, const QDomNode& node) const
       {
       if (type != ATTRIBUTE)
             return false;
@@ -145,7 +146,11 @@ bool Rest::acceptDrop(Viewer*, const QPointF&, int type, const QDomNode& node) c
       a->read(node);
       int subtype = a->subtype();
       delete a;
-      return (subtype == UfermataSym || subtype == DfermataSym);
+      if (subtype == UfermataSym || subtype == DfermataSym) {
+            viewer->setDropTarget(this);
+            return true;
+            }
+      return false;
       }
 
 //---------------------------------------------------------

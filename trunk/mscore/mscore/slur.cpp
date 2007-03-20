@@ -30,6 +30,7 @@
 #include "segment.h"
 #include "staff.h"
 #include "layout.h"
+#include "viewer.h"
 
 //---------------------------------------------------------
 //   SlurSegment
@@ -129,7 +130,7 @@ void SlurSegment::draw(QPainter& p)
 //   updateGrips
 //---------------------------------------------------------
 
-void SlurSegment::updateGrips(QMatrix& matrix)
+void SlurSegment::updateGrips(const QMatrix& matrix)
       {
       qreal w = 8.0 / matrix.m11();
       qreal h = 8.0 / matrix.m22();
@@ -231,7 +232,7 @@ void SlurSegment::endEdit()
 //   startEditDrag
 //---------------------------------------------------------
 
-bool SlurSegment::startEditDrag(const QPointF& p)
+bool SlurSegment::startEditDrag(Viewer*, const QPointF& p)
       {
       // search for the clicked grip
       mode = 1;
@@ -261,7 +262,7 @@ QPointF SlurSegment::dragOff() const
 //   editDrag
 //---------------------------------------------------------
 
-bool SlurSegment::editDrag(QMatrix& matrix, QPointF*, const QPointF& delta)
+bool SlurSegment::editDrag(Viewer* viewer, QPointF*, const QPointF& delta)
       {
       if (!mode)
             return false;
@@ -294,7 +295,7 @@ bool SlurSegment::editDrag(QMatrix& matrix, QPointF*, const QPointF& delta)
             ups[1].p    = QPointF(x1, y1);
             ups[2].p    = QPointF(x2, y2);
 
-            updateGrips(matrix);
+            updateGrips(viewer->matrix());
 
             if (showRubberBand) {
                   QPointF ppos(canvasPos());

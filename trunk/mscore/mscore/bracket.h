@@ -67,8 +67,8 @@ class Bracket : public Element {
       virtual bool startEdit(QMatrix&,const QPointF&);
       virtual bool edit(QKeyEvent*);
       virtual void endEdit();
-      virtual bool startEditDrag(const QPointF&);
-      virtual bool editDrag(QMatrix&, QPointF*, const QPointF&);
+      virtual bool startEditDrag(Viewer*, const QPointF&);
+      virtual bool editDrag(Viewer*, QPointF*, const QPointF&);
       virtual bool endEditDrag();
       virtual QPointF dragOff() const;
 

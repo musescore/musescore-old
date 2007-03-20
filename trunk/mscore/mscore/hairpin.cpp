@@ -53,51 +53,6 @@ void Hairpin::read(QDomNode node)
       }
 
 //---------------------------------------------------------
-//   setSubtype
-//---------------------------------------------------------
-
-void Hairpin::setSubtype(int st)
-      {
-      Element::setSubtype(st);
-      }
-
-//---------------------------------------------------------
-//   bbox
-//---------------------------------------------------------
-
-QRectF Hairpin::bbox() const
-      {
-      double h1 = point(style->hairpinHeight) * .5;
-//      double h2 = point(style->hairpinContHeight) * .5;
-
-      QRectF r(0, 0, 0, 0);
-      for (ciLineSegment i = segments.begin(); i != segments.end(); ++i) {
-            LineSegment* s = (LineSegment*)(&*i);
-            ciLineSegment ii = i;
-            ++ii;
-            QPointF pp1(s->p1);
-            QPointF pp2(s->p2);
-
-            if (i == segments.begin())
-                  pp1 += off1 * _spatium;
-            if (ii == segments.end())
-                  pp2 += off2 * _spatium;
-
-            s->bbox.setCoords(pp1.x(), pp1.y() - h1, pp2.x(), pp2.y() + h1);
-            r |= s->bbox;
-            }
-
-      if (mode != NORMAL) {
-            r |= bbr1;
-            r |= bbr2;
-            }
-
-      qreal lw = ::style->hairpinWidth.point() * .5;
-      r.adjust(-lw, -lw, lw, lw);
-      return r;
-      }
-
-//---------------------------------------------------------
 //   draw
 //---------------------------------------------------------
 
@@ -168,8 +123,39 @@ void Hairpin::draw(QPainter& p)
 
 void Hairpin::layout(ScoreLayout* layout)
       {
+      qreal _spatium = layout->spatium();
       SLine::layout(layout);
-      setPos(0, layout->spatium() * 6);
+      setPos(ipos().x(), _spatium * 6);
+
+      // calculate bounding rect:
+
+      double h1 = point(style->hairpinHeight) * .5;
+
+      QRectF r(0, 0, 0, 0);
+      for (ciLineSegment i = segments.begin(); i != segments.end(); ++i) {
+            LineSegment* s = (LineSegment*)(&*i);
+            ciLineSegment ii = i;
+            ++ii;
+            QPointF pp1(s->p1);
+            QPointF pp2(s->p2);
+
+            if (i == segments.begin())
+                  pp1 += off1 * _spatium;
+            if (ii == segments.end())
+                  pp2 += off2 * _spatium;
+
+            s->bbox.setCoords(pp1.x(), pp1.y() - h1, pp2.x(), pp2.y() + h1);
+            r |= s->bbox;
+            }
+
+      if (mode != NORMAL) {
+            r |= bbr1;
+            r |= bbr2;
+            }
+
+      qreal lw = ::style->hairpinWidth.point() * .5;
+      r.adjust(-lw, -lw, lw, lw);
+      setbbox(r);
       }
 
 //---------------------------------------------------------
@@ -185,11 +171,3 @@ void Hairpin::setLen(double l)
       segments.push_back(hps);
       }
 
-//---------------------------------------------------------
-//   Hairpin
-//---------------------------------------------------------
-
-Hairpin::Hairpin(Score* s)
-   : SLine(s)
-      {
-      }

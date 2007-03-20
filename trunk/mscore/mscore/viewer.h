@@ -44,9 +44,10 @@ class Viewer {
       // Note:
       //    only one of the elements is active during drag
 
-      Element* dropTarget;    ///< current drop target during dragMove
-      QRectF dropRectangle;   ///< current drop rectangle during dragMove
-      QLineF dropAnchor;      ///< line to current anchor point during dragMove
+      const Element* dropTarget;    ///< current drop target during dragMove
+      QRectF dropRectangle;         ///< current drop rectangle during dragMove
+      QLineF dropAnchor;            ///< line to current anchor point during dragMove
+      QMatrix _matrix, imatrix;
 
    public:
       Viewer();
@@ -58,8 +59,9 @@ class Viewer {
       virtual QRectF moveCursor() = 0;
       virtual void updateAll(Score*) = 0;
       void setDropRectangle(const QRectF&);
-      void setDropTarget(Element*);
+      void setDropTarget(const Element*);
       void setDropAnchor(const QLineF&);
+      const QMatrix& matrix() const { return _matrix; }
       };
 
 #endif

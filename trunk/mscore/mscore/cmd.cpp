@@ -52,6 +52,7 @@
 #include "ottava.h"
 #include "trill.h"
 #include "pedal.h"
+#include "hairpin.h"
 
 //---------------------------------------------------------
 //   start
@@ -146,12 +147,25 @@ void Score::cmdAdd(Element* e, const QPointF& pos, const QPointF& dragOffset)
                   trill->setTick(tick);
                   int lt = measure->last()->tick();
                   trill->setTick2(lt);
+                  e->layout(mainLayout());
+                  QPointF uo(pos - (e->ipos() + e->parent()->canvasPos()) - dragOffset);
+                  e->setUserOff(uo / _spatium);
                   }
                   break;
             case DYNAMIC:
                   {
                   e->setTick(tick);
                   e->layout(mainLayout());
+                  QPointF uo(pos - (e->ipos() + e->parent()->canvasPos()) - dragOffset);
+                  e->setUserOff(uo / _spatium);
+                  }
+                  break;
+            case HAIRPIN:
+                  {
+                  Hairpin* hairpin = (Hairpin*)e;
+                  e->setTick(tick);
+                  hairpin->setTick2(tick + measure->last()->tick());
+                  hairpin->layout(mainLayout());
                   QPointF uo(pos - (e->ipos() + e->parent()->canvasPos()) - dragOffset);
                   e->setUserOff(uo / _spatium);
                   }

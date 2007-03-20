@@ -25,6 +25,7 @@
 #include "utils.h"
 #include "score.h"
 #include "sym.h"
+#include "viewer.h"
 
 //---------------------------------------------------------
 //   BarLine
@@ -224,9 +225,14 @@ QRectF BarLine::bbox() const
 //   acceptDrop
 //---------------------------------------------------------
 
-bool BarLine::acceptDrop(Viewer*, const QPointF&, int type, const QDomNode&) const
+bool BarLine::acceptDrop(Viewer* viewer, const QPointF&, int type,
+   const QDomNode&) const
       {
-      return type == BAR_LINE;
+      if (type == BAR_LINE) {
+            viewer->setDropTarget(this);
+            return true;
+            }
+      return false;
       }
 
 //---------------------------------------------------------

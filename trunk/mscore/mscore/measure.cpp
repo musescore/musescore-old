@@ -1810,7 +1810,8 @@ void Measure::insertStaff1(Staff* staff, int staffIdx)
  and key- and timesig (allow drop if left of first chord or rest).
 */
 
-bool Measure::acceptDrop(Viewer*, const QPointF& p, int type, const QDomNode&) const
+bool Measure::acceptDrop(Viewer* viewer, const QPointF& p, int type,
+   const QDomNode&) const
       {
       // convert p from canvas to measure relative position and take x and y coordinates
       QPointF mrp = p - pos() - system()->pos() - system()->page()->pos();
@@ -1825,28 +1826,30 @@ bool Measure::acceptDrop(Viewer*, const QPointF& p, int type, const QDomNode&) c
       qreal t = sb.top();    // top of staff
       qreal b = sb.bottom(); // bottom of staff
 
+      // compute rectangle of staff in measure
+      QRectF rrr(sb.translated(s->canvasPos()));
+      QRectF rr(abbox());
+      QRectF r(rr.x(), rrr.y(), rr.width(), rrr.height());
+
       switch(type) {
             case BRACKET:
             case LAYOUT_BREAK:
+                  viewer->setDropRectangle(r);
                   return true;
 
             case BAR_LINE:
                   // accept drop only inside staff
                   if (mrpy < t || mrpy > b)
                         return false;
+                  viewer->setDropRectangle(r);
                   return true;
-
-            case HAIRPIN:
-                  // accept drop only above or below staff
-                  if (mrpy < t || mrpy > b)
-                        return true;
-                  return false;
 
             case CLEF:
                   {
                   // accept drop only inside staff
                   if (mrpy < t || mrpy > b)
                         return false;
+                  viewer->setDropRectangle(r);
                   // search segment list backwards for segchordrest
                   for (Segment* seg = _last; seg; seg = seg->prev()) {
                         if (seg->subtype() != Segment::SegChordRest)
@@ -1867,6 +1870,7 @@ bool Measure::acceptDrop(Viewer*, const QPointF& p, int type, const QDomNode&) c
                   // accept drop only inside staff
                   if (mrpy < t || mrpy > b)
                         return false;
+                  viewer->setDropRectangle(r);
                   for (Segment* seg = _first; seg; seg = seg->next())
                         if (seg->subtype() == Segment::SegChordRest)
                               return (mrpx < seg->pos().x());
@@ -1931,17 +1935,6 @@ Element* Measure::drop(const QPointF& p, const QPointF& /*offset*/, int type, co
                   delete ts;
                   }
                   break;
-            case HAIRPIN:
-                  {
-                  Hairpin* hairpin = new Hairpin(score());
-                  hairpin->read(node);
-                  hairpin->setStaff(staff);
-                  hairpin->setTick(tick());
-                  hairpin->setTick2(tick() + tickLen());
-                  hairpin->setParent(this);
-                  score()->cmdAdd(hairpin);
-                  return hairpin;
-                  }
             case LAYOUT_BREAK:
                   {
                   LayoutBreak* lb = new LayoutBreak(score());

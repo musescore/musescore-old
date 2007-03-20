@@ -97,9 +97,13 @@ void TimeSig::getSig(int* n, int* z1, int* z2, int* z3, int* z4) const
 //   acceptDrop
 //---------------------------------------------------------
 
-bool TimeSig::acceptDrop(Viewer*, const QPointF&, int type, const QDomNode&) const
+bool TimeSig::acceptDrop(Viewer* viewer, const QPointF&, int type, const QDomNode&) const
       {
-      return type == TIMESIG;
+      if (type == TIMESIG) {
+            setDropTarget(viewer);
+            return true;
+            }
+      return false;
       }
 
 //---------------------------------------------------------

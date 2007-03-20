@@ -470,8 +470,7 @@ Measure* Score::pos2measure(const QPointF& p, int* tick, Staff** rst, int* pitch
                                                 }
                                           if (!ns || (pppp.x() < (segment->x() + (ns->x() - segment->x())/2.0))) {
                                                 i -= 1;
-                                                if (rst)
-                                                      *rst = (*_staves)[i];
+                                                *rst = (*_staves)[i];
                                                 if (tick)
                                                       *tick = segment->tick();
                                                 if (pitch) {
@@ -490,6 +489,9 @@ Measure* Score::pos2measure(const QPointF& p, int* tick, Staff** rst, int* pitch
                                     }
                               }
                         else {
+                              //
+                              // staff is fixed
+                              //
                               // search for segment + offset
                               QPointF pppp = ppp - m->pos();
                               for (Segment* segment = m->first(); segment; segment = segment->next()) {
@@ -922,10 +924,10 @@ void Score::endDrag()
 //   dragEdit
 //---------------------------------------------------------
 
-void Score::dragEdit(QMatrix& matrix, QPointF* startMove, const QPointF& fdelta)
+void Score::dragEdit(Viewer* viewer, QPointF* startMove, const QPointF& fdelta)
       {
       refresh |= editObject->abbox();
-      editObject->editDrag(matrix, startMove, fdelta);
+      editObject->editDrag(viewer, startMove, fdelta);
       refresh |= editObject->abbox();
       }
 
@@ -956,12 +958,18 @@ ChordRest* Score::setNoteEntry(bool val, bool step)
                         }
                   return cr;
                   }
-            if (sel->state != SEL_SINGLE || !el || (el->type() != NOTE &&
-               !el->isChordRest())) {
+            if (sel->state == SEL_NONE || (el && (el->type() != NOTE || !el->isChordRest()))) {
                   QMessageBox::information(0, "MuseScore: Note Entry",
                         tr("No note or rest selected:\n"
                            "please select a note or rest were you want to\n"
                            "start note entry"));
+                  return 0;
+                  }
+            if (el == 0) {
+                  // int tick = sel->tickStart;
+                  Segment* seg = tick2segment(sel->tickStart);
+                  // TODO
+                  printf("segment type %d\n", seg->subtype());
                   return 0;
                   }
             if (el->type() == NOTE)
@@ -1195,19 +1203,37 @@ void Score::adjustTime(int tick, Measure* m)
       }
 
 //---------------------------------------------------------
-//   tickAnchor
+//   tick2Anchor
 //    return anchor position for tick in global
 //    coordinates
 //---------------------------------------------------------
 
-QPointF Score::tickAnchor(int tick, int staffIdx) const
+QPointF Score::tick2Anchor(int tick, int staffIdx) const
       {
       Segment* seg = tick2segment(tick);
       qreal x = seg->abbox().x();
       System* system = seg->measure()->system();
-      qreal y = system->staff(staffIdx)->bbox().y();
-      y += system->page()->pos().y();
+      qreal y = system->staff(staffIdx)->bbox().y() + system->canvasPos().y();
       return QPointF(x, y);
       }
 
+//---------------------------------------------------------
+//   pos2TickAnchor
+//    Calculates anchor position and tick for a
+//    given position+staff in global coordinates.
+//
+//    return false if no anchor found
+//---------------------------------------------------------
+
+bool Score::pos2TickAnchor(QPointF& pos, Staff* staff, int* tick, QPointF* anchor) const
+      {
+      Segment* seg;
+      Measure* m = pos2measure(pos, tick, &staff, 0, &seg, 0);
+      if (!m)
+            return false;
+      System* system = m->system();
+      qreal y = system->staff(staff->idx())->bbox().y();
+      *anchor = QPointF(seg->abbox().x(), y + system->canvasPos().y());
+      return true;
+      }
 

@@ -24,6 +24,7 @@
 #include "score.h"
 #include "xml.h"
 #include "layout.h"
+#include "viewer.h"
 
 //---------------------------------------------------------
 //   SLine
@@ -38,6 +39,15 @@ SLine::SLine(Score* s)
       }
 
 //---------------------------------------------------------
+//   setTick2
+//---------------------------------------------------------
+
+void SLine::setTick2(int t)
+      {
+      _tick2 = t;
+      }
+
+//---------------------------------------------------------
 //   layout
 //    compute segments from tick1 tick2
 //---------------------------------------------------------
@@ -46,7 +56,7 @@ void SLine::layout(ScoreLayout* layout)
       {
       if (!parent())
             return;
-      segments.clear();
+
       Segment* seg1 = _score->tick2segment(tick());
       Segment* seg2 = _score->tick2segment(_tick2);
       if (seg1 == 0 || seg2 == 0) {
@@ -62,45 +72,52 @@ void SLine::layout(ScoreLayout* layout)
       QPointF p1 = QPointF(seg1->x(), 0) + measure1->canvasPos() - ppos;
       QPointF p2 = QPointF(seg2->x(), 0) + measure2->canvasPos() - ppos;
       setPos(p1);
-      p1 -= ipos();
-      p2 -= ipos();
+      p1   -= ipos();
+      p2   -= ipos();
       ppos -= ipos();
 
+      if (segments.size() != 1) {
+            LineSegment s;
+            s.p1 = QPointF(0.0, 0.0);
+            s.p2 = QPointF(0.0, 0.0);
+            segments.append(s);
+            }
+      LineSegment& s = segments[0];
+      s.p1 = p1;
+      s.p2 = p2;
+printf("Layout tick %d-%d  anchor %f\n", tick(), _tick2, p1.x());
+
+#if 0
       iSystem is = layout->systems()->begin();
       while (is != layout->systems()->end()) {
             if (*is == system1)
                   break;
             ++is;
             }
-      LineSegment hps;
-      hps.p1 = p1;
-      if (*is == system2) {
-            hps.p2 = p2;
-            layoutSingleSegment(&hps);
-            segments.push_back(hps);
+      int segmentsNeeded = 1;
+      for (iSystem iis = is; iis != layout->systems()->end(); ++iis, ++segmentsNeeded) {
+            if (*iis == system2)
+                  break;
             }
-      else {
-            for (;;) {
-                  if (*is == system2) {
-                        hps.p2 = p2;
-                        layoutLastSegment(&hps);
-                        segments.push_back(hps);
-                        break;
-                        }
-                  hps.p2 = (*is)->pos() + QPointF((*is)->bbox().width() - _spatium * 0.5, 0) - ppos;
+      if (segmentsNeeded != segments.size())
+            segments.clear();
 
-                  if (*is == system1)
-                        layoutFirstSegment(&hps);
-                  else
-                        layoutMidleSegment(&hps);
-                  segments.push_back(hps);
-
-                  ++is;
-
-                  Measure* m = (*is)->measures()->front();
-                  hps.p1 = (*is)->pos() + m->pos() - ppos;
+      int seg = 0;
+      for (; is != layout->systems()->end(); ++is, ++seg) {
+            if (seg+1 >= segments.size())
+                  segments.append(LineSegment());
+            LineSegment* hps = &segments[seg];
+            if (seg == 0)
+                  hps->p1 = p1;
+            else
+                  hps->p1 = (*is)->pos() /* + m->pos()*/ - ppos;
+            if (*is == system2) {
+                  hps->p2 = p2;
+                  break;
                   }
+            hps->p2 = (*is)->pos() + QPointF((*is)->bbox().width() - _spatium * 0.5, 0) - ppos;
             }
+#endif
       }
 
 //---------------------------------------------------------
@@ -131,12 +148,28 @@ bool SLine::startEdit(QMatrix& matrix, const QPointF&)
 //   startEditDrag
 //---------------------------------------------------------
 
-bool SLine::startEditDrag(const QPointF& p)
+bool SLine::startEditDrag(Viewer* viewer, const QPointF& p)
       {
-      if (bbr1.contains(p))
+      if (bbr1.contains(p)) {
             mode = DRAG1;
-      else if (bbr2.contains(p))
+
+            LineSegment& s1 = segments.front();
+            QPointF pp1(s1.p1 + off1 * _spatium);
+            pp1 += canvasPos();
+            QPointF anchor1 = score()->tick2Anchor(tick(), staffIdx());
+            QLineF l(anchor1, pp1);
+            viewer->setDropAnchor(l);
+            }
+      else if (bbr2.contains(p)) {
             mode = DRAG2;
+
+            LineSegment& s2 = segments.back();
+            QPointF pp2(s2.p2 + off2 * _spatium);
+            pp2 += canvasPos();
+            QPointF anchor2 = score()->tick2Anchor(_tick2, staffIdx());
+            QLineF l(anchor2, pp2);
+            viewer->setDropAnchor(l);
+            }
       else {
             return false;
             }
@@ -161,23 +194,52 @@ QPointF SLine::dragOff() const
 //   editDrag
 //---------------------------------------------------------
 
-bool SLine::editDrag(QMatrix&, QPointF*, const QPointF& d)
+bool SLine::editDrag(Viewer* viewer, QPointF*, const QPointF& d)
       {
       QPointF delta(d.x(), 0);    // only x-axis move
       if (mode == DRAG1) {
-            off1  += delta / _spatium;
             r1.translate(delta);
             bbr1.translate(delta);
+
+            LineSegment& s1 = segments.front();
+            QPointF pp1(s1.p1 + off1 * _spatium + delta);
+            int tick;
+            QPointF anchor;
+            QPointF apos(pp1 + canvasPos());
+            score()->pos2TickAnchor(apos, staff(), &tick, &anchor);
+            viewer->setDropAnchor(QLineF(anchor, apos));
+            setTick(tick);
+
+//            s1.p1.setX((anchor1 - canvasPos()).x());
+            off1.setX((apos.x() - anchor.x()) / _spatium);
+printf("editDrag setTick %d  anchor %f offset %f\n",
+    tick, anchor.x() - canvasPos().x(), off1.x());
             }
       else if (mode == DRAG2) {
             off2 += delta / _spatium;
             r2.translate(delta);
             bbr2.translate(delta);
+
+            LineSegment& s2 = segments.back();
+            QPointF pp2(s2.p2 + off2 * _spatium);
+            pp2 += canvasPos();
+            QPointF anchor2;
+            score()->pos2TickAnchor(pp2, staff(), &_tick2, &anchor2);
+            QLineF l(anchor2, pp2);
+            viewer->setDropAnchor(l);
             }
       else
             return false;
-//      layout();
       return true;
+      }
+
+//---------------------------------------------------------
+//   endEditDrag
+//---------------------------------------------------------
+
+bool SLine::endEditDrag()
+      {
+      return false;
       }
 
 //---------------------------------------------------------
@@ -224,17 +286,6 @@ bool SLine::edit(QKeyEvent* ev)
             off2 += delta;
             r2.moveTopLeft(r2.topLeft() + delta * _spatium);
             }
-//TODO      layout2();
-      return false;
-      }
-
-//---------------------------------------------------------
-//   endEditDrag
-//---------------------------------------------------------
-
-bool SLine::endEditDrag()
-      {
-//      layout2();
       return false;
       }
 
@@ -303,5 +354,4 @@ bool SLine::readProperties(QDomNode node)
             return false;
       return true;
       }
-
 

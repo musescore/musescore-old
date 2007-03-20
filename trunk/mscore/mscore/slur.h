@@ -52,7 +52,7 @@ class SlurSegment : public Element {
 
       virtual QRectF bbox() const;
       void updatePath();
-      void updateGrips(QMatrix&);
+      void updateGrips(const QMatrix&);
 
    public:
       SlurSegment(SlurTie*);
@@ -69,8 +69,8 @@ class SlurSegment : public Element {
       virtual void draw(QPainter&);
       virtual bool startEdit(QMatrix&, const QPointF&);
       virtual void endEdit();
-      virtual bool startEditDrag(const QPointF&);
-      virtual bool editDrag(QMatrix&, QPointF*, const QPointF&);
+      virtual bool startEditDrag(Viewer*, const QPointF&);
+      virtual bool editDrag(Viewer*, QPointF*, const QPointF&);
       virtual bool endEditDrag();
       virtual bool edit(QKeyEvent* ev);
 
