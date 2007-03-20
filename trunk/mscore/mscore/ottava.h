@@ -24,13 +24,24 @@
 #include "line.h"
 
 //---------------------------------------------------------
+//   OttavaSegment
+//---------------------------------------------------------
+
+class OttavaSegment : public LineSegment {
+   protected:
+   public:
+      OttavaSegment(Score* s) : LineSegment(s) {}
+      virtual ElementType type() const { return OTTAVA_SEGMENT; }
+      };
+
+//---------------------------------------------------------
 //   Ottava
 //    brackets
 //---------------------------------------------------------
 
 class Ottava : public SLine {
       QString text;
-      mutable qreal textHeight;      ///< cached value
+      mutable qreal textHeight;     ///< cached value
 
    public:
       Ottava(Score* s);
@@ -42,6 +53,7 @@ class Ottava : public SLine {
       virtual void setSubtype(int val);
       virtual void write(Xml&) const;
       virtual void read(QDomNode);
+      virtual LineSegment* createSegment() { return new OttavaSegment(score()); }
       };
 
 #endif

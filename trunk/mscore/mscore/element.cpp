@@ -46,13 +46,15 @@ const char* elementNames[] = {
       "Clef", "KeySig", "TimeSig", "Rest",
       "Tie",
       "Attribute", "Dynamic", "Page", "Beam", "Hook", "Lyrics",
-      "HairPin", "Tuplet", "VSpacer",
+      "Tuplet", "VSpacer",
       "TempoText",
-      "Volta", "Ottava", "Pedal", "Trill",
+      "Volta",
+      "HairpinSegment", "OttavaSegment", "PedalSegment", "TrillSegment",
       "LayoutBreak",
       "HelpLine",
       "Measure", "StaffLines",
       "Cursor", "Selection", "Lasso", "ShadowNote", "RubberBand",
+      "Hairpin", "Ottava", "Pedal", "Trill",
       "Segment", "System", "Compound", "Chord", "Slur",
       };
 

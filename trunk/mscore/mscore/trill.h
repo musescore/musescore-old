@@ -24,6 +24,17 @@
 #include "line.h"
 
 //---------------------------------------------------------
+//   TrillSegment
+//---------------------------------------------------------
+
+class TrillSegment : public LineSegment {
+   protected:
+   public:
+      TrillSegment(Score* s) : LineSegment(s) {}
+      virtual ElementType type() const { return TRILL_SEGMENT; }
+      };
+
+//---------------------------------------------------------
 //   Trill
 //---------------------------------------------------------
 
@@ -42,6 +53,7 @@ class Trill : public SLine {
       virtual void write(Xml&) const;
       virtual void read(QDomNode);
       virtual QRectF bbox() const;
+      virtual LineSegment* createSegment() { return new TrillSegment(score()); }
       };
 
 #endif
