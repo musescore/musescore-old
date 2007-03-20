@@ -720,7 +720,11 @@ void KeySig::draw(QPainter& p)
 
 bool KeySig::acceptDrop(Viewer*, const QPointF&, int type, const QDomNode&) const
       {
-      return type == KEYSIG;
+      if (type == KEYSIG) {
+            setDropTarget(this);
+            return true;
+            }
+      return false;
       }
 
 //---------------------------------------------------------

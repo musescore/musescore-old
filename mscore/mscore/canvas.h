@@ -61,8 +61,6 @@ class Canvas : public QWidget, public Viewer {
 
       bool cursorIsBlinking;
 
-      QMatrix matrix, imatrix;
-
       QPointF startMove;
 
       //--input state:
@@ -152,26 +150,26 @@ class Canvas : public QWidget, public Viewer {
       Score* score() const    { return _score; }
 
       qreal mag() const;
-      qreal xoffset() const   { return matrix.dx();  }
-      qreal yoffset() const   { return matrix.dy();  }
+      qreal xoffset() const   { return _matrix.dx();  }
+      qreal yoffset() const   { return _matrix.dy();  }
       void setMag(qreal m);
       void setXoffset(qreal x)  {
-            matrix.setMatrix(matrix.m11(), matrix.m12(), matrix.m21(),
-               matrix.m22(), x, matrix.dy());
-            imatrix = matrix.inverted();
+            _matrix.setMatrix(_matrix.m11(), _matrix.m12(), _matrix.m21(),
+               _matrix.m22(), x, _matrix.dy());
+            imatrix = _matrix.inverted();
             }
       void setYoffset(qreal y)  {
-            matrix.setMatrix(matrix.m11(), matrix.m12(), matrix.m21(),
-               matrix.m22(), matrix.dx(), y);
-            imatrix = matrix.inverted();
+            _matrix.setMatrix(_matrix.m11(), _matrix.m12(), _matrix.m21(),
+               _matrix.m22(), _matrix.dx(), y);
+            imatrix = _matrix.inverted();
             }
       void setOffset(qreal x, qreal y) {
-            matrix.setMatrix(matrix.m11(), matrix.m12(), matrix.m21(),
-               matrix.m22(), x, y);
-            imatrix = matrix.inverted();
+            _matrix.setMatrix(_matrix.m11(), _matrix.m12(), _matrix.m21(),
+               _matrix.m22(), x, y);
+            imatrix = _matrix.inverted();
             }
-      qreal xMag() const { return matrix.m11(); }
-      qreal yMag() const { return matrix.m22(); }
+      qreal xMag() const { return _matrix.m11(); }
+      qreal yMag() const { return _matrix.m22(); }
 
       QRectF vGeometry() const {
             return imatrix.mapRect(geometry());

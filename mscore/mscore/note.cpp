@@ -23,25 +23,19 @@
  Implementation of classes Note and ShadowNote.
 */
 
+#include "note.h"
 #include "score.h"
 #include "key.h"
-#include "note.h"
 #include "chord.h"
 #include "sym.h"
 #include "xml.h"
 #include "slur.h"
-#include "navigate.h"
-#include "measure.h"
 #include "text.h"
-#include "sig.h"
 #include "clef.h"
-#include "globals.h"
-#include "segment.h"
 #include "preferences.h"
 #include "padstate.h"
-#include "utils.h"
-#include "style.h"
 #include "staff.h"
+#include "viewer.h"
 
 //---------------------------------------------------------
 //   Note
@@ -701,9 +695,13 @@ QRectF ShadowNote::bbox() const
 //   acceptDrop
 //---------------------------------------------------------
 
-bool Note::acceptDrop(Viewer*, const QPointF&, int type, const QDomNode&) const
+bool Note::acceptDrop(Viewer* viewer, const QPointF&, int type, const QDomNode&) const
       {
-      return (type == ATTRIBUTE || type == TEXT || type == ACCIDENTAL);
+      if (type == ATTRIBUTE || type == TEXT || type == ACCIDENTAL) {
+            viewer->setDropTarget(this);
+            return true;
+            }
+      return false;
       }
 
 //---------------------------------------------------------
@@ -717,7 +715,22 @@ Element* Note::drop(const QPointF&, const QPointF&, int t, const QDomNode& node)
                   {
                   NoteAttribute* atr = new NoteAttribute(score());
                   atr->read(node);
-                  score()->addAttribute(this, atr);
+                  atr->setSelected(false);
+                  Chord* cr = chord();
+                  NoteAttribute* oa = cr->hasAttribute(atr);
+                  if (oa) {
+                        delete atr;
+                        atr = 0;
+                        // if attribute is already there, remove
+                        // score()->cmdRemove(oa); // unexpected behaviour?
+                        score()->select(oa, 0, 0);
+                        }
+                  else {
+                        atr->setParent(cr);
+                        atr->setStaff(staff());
+                        score()->select(atr, 0, 0);
+                        score()->cmdAdd(atr);
+                        }
                   return atr;
                   }
             case TEXT:

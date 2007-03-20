@@ -357,7 +357,7 @@ class Score : public QObject {
       void drag(const QPointF&);
       void endDrag();
 
-      void dragEdit(QMatrix&, QPointF* startMove, const QPointF& delta);
+      void dragEdit(Viewer*, QPointF* startMove, const QPointF& delta);
       void layoutPageHeader(Page*);
 
       void changeVoice(int);
@@ -421,7 +421,8 @@ class Score : public QObject {
       bool saved() const        { return _saved; }
       void setSaved(bool v)     { _saved = v; }
 
-      QPointF tickAnchor(int tick, int staffIdx) const;
+      QPointF tick2Anchor(int tick, int staffIdx) const;
+      bool pos2TickAnchor(QPointF&, Staff*, int* tick, QPointF* anchor) const;
       };
 
 extern void setPadState(Element*);

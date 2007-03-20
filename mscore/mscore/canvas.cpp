@@ -43,6 +43,7 @@
 #include "volta.h"
 #include "ottava.h"
 #include "trill.h"
+#include "hairpin.h"
 
 //---------------------------------------------------------
 //   Canvas
@@ -343,8 +344,10 @@ void Canvas::mousePressEvent(QMouseEvent* ev)
                   break;
 
             case EDIT:
-                  if (_score->editObject->startEditDrag(startMove - _score->editObject->canvasPos()))
+                  if (_score->editObject->startEditDrag(this, startMove - _score->editObject->canvasPos())) {
                         setState(DRAG_EDIT);
+                        update();
+                        }
                   else if (_score->editObject->mousePress(startMove))
                         update();
                   else {
@@ -396,6 +399,7 @@ void Canvas::mouseMoveEvent(QMouseEvent* ev)
       mouseMoveEvent1(ev);
       if (dragCanvasState)
            ;
+//      else if (state == LASSO || state == DRAG_EDIT)
       else if (state == LASSO)
             _score->end1();
       else
@@ -423,14 +427,14 @@ void Canvas::mouseMoveEvent1(QMouseEvent* ev)
       QPointF delta = p - startMove;
 
       if (dragCanvasState) {
-            QPoint d = ev->pos() - matrix.map(startMove).toPoint();
+            QPoint d = ev->pos() - _matrix.map(startMove).toPoint();
             int dx   = d.x();
             int dy   = d.y();
             QApplication::sendPostedEvents(this, 0);
 
-            matrix.setMatrix(matrix.m11(), matrix.m12(), matrix.m21(),
-               matrix.m22(), matrix.dx()+dx, matrix.dy()+dy);
-            imatrix = matrix.inverted();
+            _matrix.setMatrix(_matrix.m11(), _matrix.m12(), _matrix.m21(),
+               _matrix.m22(), _matrix.dx()+dx, _matrix.dy()+dy);
+            imatrix = _matrix.inverted();
             scroll(dx, dy, QRect(0, 0, width(), height()));
 
             //
@@ -449,7 +453,7 @@ void Canvas::mouseMoveEvent1(QMouseEvent* ev)
             case NORMAL:
                   if (buttonState == 0)    // debug
                         return;
-                  if (sqrt(pow(delta.x(),2)+pow(delta.y(),2))*matrix.m11() <= 2.0)
+                  if (sqrt(pow(delta.x(),2)+pow(delta.y(),2)) * _matrix.m11() <= 2.0)
                         return;
                   {
                   Element* de = _score->dragObject();
@@ -503,7 +507,7 @@ void Canvas::mouseMoveEvent1(QMouseEvent* ev)
                   break;
 
             case DRAG_EDIT:
-                  _score->dragEdit(matrix, &startMove, delta);
+                  _score->dragEdit(this, &startMove, delta);
                   startMove += delta;
                   break;
 
@@ -571,6 +575,7 @@ void Canvas::mouseReleaseEvent1(QMouseEvent* /*ev*/)
             case DRAG_EDIT:
                   _score->addRefresh(_score->editObject->abbox());
                   _score->editObject->endEditDrag();
+                  setDropTarget(0); // this also resets dropRectangle and dropAnchor
                   _score->addRefresh(_score->editObject->abbox());
                   setState(EDIT);
                   break;
@@ -618,9 +623,9 @@ void Canvas::setMag(double nmag)
       setYoffset(yoffset() * deltamag);
 
       m = nmag;
-      matrix.setMatrix(m, matrix.m12(), matrix.m21(),
-         m * qreal(appDpiY)/qreal(appDpiX), matrix.dx(), matrix.dy());
-      imatrix = matrix.inverted();
+      _matrix.setMatrix(m, _matrix.m12(), _matrix.m21(),
+         m * qreal(appDpiY)/qreal(appDpiX), _matrix.dx(), _matrix.dy());
+      imatrix = _matrix.inverted();
 
       update();
       updateNavigator(false);
@@ -756,7 +761,7 @@ void Canvas::dataChanged(const QRectF& r)
 
 void Canvas::redraw(const QRectF& fr)
       {
-      update(matrix.mapRect(fr).toRect());  // generate paint event
+      update(_matrix.mapRect(fr).toRect());  // generate paint event
       }
 
 //---------------------------------------------------------
@@ -780,7 +785,7 @@ void Canvas::resetStaffOffsets()
 
 bool Canvas::startEdit(Element* element)
       {
-      if (element->startEdit(matrix, startMove)) {
+      if (element->startEdit(_matrix, startMove)) {
             setFocus();
             _score->startEdit(element);
             setState(EDIT);
@@ -884,7 +889,7 @@ void Canvas::setShadowNote(const QPointF& p)
 
 qreal Canvas::mag() const
       {
-      return matrix.m11();
+      return _matrix.m11();
       }
 
 //---------------------------------------------------------
@@ -927,8 +932,8 @@ void Canvas::paintEvent(QPaintEvent* ev)
             paint(rr);
             }
       else {
-            int dx = lrint(matrix.m11());
-            int dy = lrint(matrix.m22());
+            int dx = lrint(_matrix.m11());
+            int dy = lrint(_matrix.m22());
 
             const QRegion& region = ev->region();
             QVector<QRect> vector = region.rects();
@@ -952,14 +957,14 @@ void Canvas::paint(const QRect& rr)
             p.drawTiledPixmap(rr, *fgPixmap, rr.topLeft()-QPoint(lrint(xoffset()), lrint(yoffset())));
             }
 
-      p.setMatrix(matrix);
+      p.setMatrix(_matrix);
       QRectF fr = imatrix.mapRect(QRectF(rr));
 
       QRegion r1(rr);
       for (iPage ip = _layout->pages()->begin(); ip != _layout->pages()->end(); ++ip) {
             Page* page = *ip;
             page->draw(p);
-            r1 -= matrix.mapRect(page->abbox()).toRect();
+            r1 -= _matrix.mapRect(page->abbox()).toRect();
             }
       p.setClipRect(fr);
 
@@ -1009,14 +1014,14 @@ void Canvas::setScore(Score* s, ScoreLayout* l)
 
 void Canvas::setViewRect(const QRectF& r)
       {
-      QRectF rr = matrix.mapRect(r);
+      QRectF rr = _matrix.mapRect(r);
       QPoint d = rr.topLeft().toPoint();
       int dx   = -d.x();
       int dy   = -d.y();
       QApplication::sendPostedEvents(this, 0);
-      matrix.setMatrix(matrix.m11(), matrix.m12(), matrix.m21(),
-         matrix.m22(), matrix.dx()+dx, matrix.dy()+dy);
-      imatrix = matrix.inverted();
+      _matrix.setMatrix(_matrix.m11(), _matrix.m12(), _matrix.m21(),
+         _matrix.m22(), _matrix.dx()+dx, _matrix.dy()+dy);
+      imatrix = _matrix.inverted();
       scroll(dx, dy, QRect(0, 0, width(), height()));
 	//
       // this is necessary at least for qt4.1:
@@ -1142,6 +1147,7 @@ void Canvas::dragMoveEvent(QDragMoveEvent* event)
             case DYNAMIC:
             case OTTAVA:
             case TRILL:
+            case HAIRPIN:
                   if (dragTimeAnchorElement(pos))
                         event->acceptProposedAction();
                   break;
@@ -1168,6 +1174,7 @@ void Canvas::dragMoveEvent(QDragMoveEvent* event)
                               if (debugMode)
                                     printf("ignore drop of %s\n", elementNames[type]);
                               event->ignore();
+                              setDropTarget(0);
                               }
                         }
                   else {
@@ -1244,6 +1251,13 @@ void Canvas::dropEvent(QDropEvent* event)
                   pedal->read(node);
                   score()->cmdAdd(pedal, pos, dragOffset);
                   event->acceptProposedAction();
+                  }
+                  break;
+            case HAIRPIN:
+                  {
+                  Hairpin* hairpin = new Hairpin(score());
+                  hairpin->read(node);
+                  score()->cmdAdd(hairpin, pos, dragOffset);
                   }
                   break;
             case DYNAMIC:
@@ -1337,9 +1351,9 @@ void Canvas::wheelEvent(QWheelEvent* event)
             int dx    = lrint(p3.x() * _mag);
             int dy    = lrint(p3.y() * _mag);
 
-            matrix.setMatrix(matrix.m11(), matrix.m12(), matrix.m21(),
-               matrix.m22(), matrix.dx()+dx, matrix.dy()+dy);
-            imatrix = matrix.inverted();
+            _matrix.setMatrix(_matrix.m11(), _matrix.m12(), _matrix.m21(),
+               _matrix.m22(), _matrix.dx()+dx, _matrix.dy()+dy);
+            imatrix = _matrix.inverted();
             scroll(dx, dy, QRect(0, 0, width(), height()));
 
             if ((dx > 0 || dy < 0) && navigator->isVisible()) {
@@ -1372,9 +1386,9 @@ void Canvas::wheelEvent(QWheelEvent* event)
             dy = event->delta() * n / 120;
             }
 
-      matrix.setMatrix(matrix.m11(), matrix.m12(), matrix.m21(),
-         matrix.m22(), matrix.dx() + dx, matrix.dy() + dy);
-      imatrix = matrix.inverted();
+      _matrix.setMatrix(_matrix.m11(), _matrix.m12(), _matrix.m21(),
+         _matrix.m22(), _matrix.dx() + dx, _matrix.dy() + dy);
+      imatrix = _matrix.inverted();
 
       scroll(dx, dy, QRect(0, 0, width(), height()));
 

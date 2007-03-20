@@ -82,7 +82,7 @@ class Element {
       Measure* _anchorMeasure;
 
       bool _selected;           ///< set if element is selected
-      bool _dropTarget;         ///< true, if element accepts drops
+      mutable bool _dropTarget; ///< true, if element accepts drops
       bool _generated;          ///< automatically generated Element
       bool _visible;            ///< visibility attribute
 
@@ -135,7 +135,7 @@ class Element {
       bool generated() const                  { return _generated;  }
       void setGenerated(bool val)             { _generated = val;   }
       bool dropTarget() const                 { return _dropTarget; }
-      void setDropTarget(bool f)              { _dropTarget = f;    }
+      void setDropTarget(bool f) const        { _dropTarget = f;    }
 
       virtual QPointF ipos() const            { return _pos;       }
       virtual QPointF pos() const             { return _pos + (_userOff * _spatium);         }
@@ -184,8 +184,8 @@ class Element {
 
       virtual bool startEdit(QMatrix&, const QPointF&)   { return false; }
       virtual bool edit(QKeyEvent*)           { return false;}
-      virtual bool startEditDrag(const QPointF&)  { return false; }
-      virtual bool editDrag(QMatrix&, QPointF*, const QPointF&) { return false; }
+      virtual bool startEditDrag(Viewer*, const QPointF&)  { return false; }
+      virtual bool editDrag(Viewer*, QPointF*, const QPointF&) { return false; }
       virtual bool endEditDrag()              { return false;}
       virtual QPointF dragOff() const         { return QPointF(0,0); }
       virtual void endEdit()                  {}

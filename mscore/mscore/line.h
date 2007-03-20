@@ -39,7 +39,7 @@ struct LineSegment {
 
 class SLine : public Element {
    protected:
-      std::list<LineSegment> segments;
+      QList<LineSegment> segments;
 
       int _tick2;
       QPointF off1, off2;   // user offset (in spatium units)
@@ -49,34 +49,29 @@ class SLine : public Element {
       int mode;
       enum { NORMAL, DRAG1, DRAG2 };
 
-      virtual void layoutSingleSegment(LineSegment*) {}
-      virtual void layoutFirstSegment(LineSegment*)  {}
-      virtual void layoutLastSegment(LineSegment*)   {}
-      virtual void layoutMidleSegment(LineSegment*)  {}
-
       virtual QPointF  dragOff() const;
       virtual bool contains(const QPointF& p) const;
       virtual bool isMovable() const { return true; }
       virtual void endDrag();
       virtual bool startEdit(QMatrix&, const QPointF&);
-      virtual bool startEditDrag(const QPointF&);
+      virtual bool startEditDrag(Viewer*, const QPointF&);
       virtual bool endEditDrag();
-      virtual bool editDrag(QMatrix&, QPointF*, const QPointF&);
+      virtual bool editDrag(Viewer*, QPointF*, const QPointF&);
       virtual void endEdit();
       virtual bool edit(QKeyEvent*);
 
    public:
       SLine(Score* s);
       virtual ElementType type() const { return LINE; }
-      void setTick2(int t) { _tick2 = t; }
+      void setTick2(int t);
       int tick2() const    { return _tick2; }
       virtual void layout(ScoreLayout*);
       bool readProperties(QDomNode node);
       void writeProperties(Xml& xml) const;
       };
 
-typedef std::list<LineSegment>::iterator iLineSegment;
-typedef std::list<LineSegment>::const_iterator ciLineSegment;
+typedef QList<LineSegment>::iterator iLineSegment;
+typedef QList<LineSegment>::const_iterator ciLineSegment;
 
 #endif
 

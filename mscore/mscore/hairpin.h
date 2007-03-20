@@ -32,7 +32,7 @@ class Score;
 
 class Hairpin : public SLine {
    public:
-      Hairpin(Score*);
+      Hairpin(Score* s) : SLine(s) {}
       virtual Hairpin* clone() const { return new Hairpin(*this); }
       virtual ElementType type() const { return HAIRPIN; }
 
@@ -41,8 +41,6 @@ class Hairpin : public SLine {
       virtual void layout(ScoreLayout*);
       virtual void write(Xml& xml) const;
       virtual void read(QDomNode);
-      virtual QRectF bbox() const;
-      virtual void setSubtype(int);
       };
 
 #define __HAIRPIN_H__

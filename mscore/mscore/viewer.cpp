@@ -40,7 +40,7 @@ Viewer::Viewer()
 //   setDropTarget
 //---------------------------------------------------------
 
-void Viewer::setDropTarget(Element* el)
+void Viewer::setDropTarget(const Element* el)
       {
       if (dropTarget != el) {
             if (dropTarget) {

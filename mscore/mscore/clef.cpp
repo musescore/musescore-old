@@ -30,6 +30,7 @@
 #include "symbol.h"
 #include "score.h"
 #include "staff.h"
+#include "viewer.h"
 
 // FIXME!
 // only values for CLEF_G..CLEF_G3 and CLEF_F are
@@ -196,9 +197,13 @@ void Clef::space(double& min, double& extra) const
 //   acceptDrop
 //---------------------------------------------------------
 
-bool Clef::acceptDrop(Viewer*, const QPointF&, int type, const QDomNode&) const
+bool Clef::acceptDrop(Viewer* viewer, const QPointF&, int type, const QDomNode&) const
       {
-      return (type == CLEF);
+      if (type == CLEF) {
+            viewer->setDropTarget(this);
+            return true;
+            }
+      return false;
       }
 
 //---------------------------------------------------------

@@ -26,6 +26,7 @@
 #include "staff.h"
 #include "score.h"
 #include "layout.h"
+#include "viewer.h"
 
 //---------------------------------------------------------
 //   Bracket
@@ -221,7 +222,7 @@ void Bracket::endEdit()
 //   startEditDrag
 //---------------------------------------------------------
 
-bool Bracket::startEditDrag(const QPointF& p)
+bool Bracket::startEditDrag(Viewer*, const QPointF& p)
       {
       if (grip.contains(p))
             return true;
@@ -256,7 +257,7 @@ QPointF Bracket::dragOff() const
 //   editDrag
 //---------------------------------------------------------
 
-bool Bracket::editDrag(QMatrix&, QPointF*, const QPointF& delta)
+bool Bracket::editDrag(Viewer*, QPointF*, const QPointF& delta)
       {
       if (!editMode)
             return false;
@@ -339,14 +340,13 @@ bool Bracket::endEditDrag()
 //   acceptDrop
 //---------------------------------------------------------
 
-bool Bracket::acceptDrop(Viewer*, const QPointF&, int type, const QDomNode&) const
+bool Bracket::acceptDrop(Viewer* viewer, const QPointF&, int type, const QDomNode&) const
       {
-      switch(ElementType(type)) {
-            case BRACKET:
-                  return true;
-            default:
-                  return false;
+      if (type == BRACKET) {
+            viewer->setDropTarget(this);
+            return true;
             }
+      return false;
       }
 
 //---------------------------------------------------------
