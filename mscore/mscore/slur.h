@@ -64,8 +64,6 @@ class SlurSegment : public Element {
       void layout(ScoreLayout*, const QPointF& p1, const QPointF& p2, qreal bow);
       virtual void resetMode();
 
-      virtual QPointF dragOff() const;
-
       virtual void draw(QPainter&);
       virtual bool startEdit(QMatrix&, const QPointF&);
       virtual void endEdit();

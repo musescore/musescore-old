@@ -65,6 +65,7 @@ void Ottava::setSubtype(int val)
 
 void Ottava::draw(QPainter& p)
       {
+#if 0
       qreal ottavaLineWidth    = _spatium * .18;
       qreal ottavaTextDistance = _spatium * .5;
 
@@ -117,19 +118,7 @@ void Ottava::draw(QPainter& p)
                   p.drawRect(r2);
                   }
             }
-      }
-
-//---------------------------------------------------------
-//   setLen
-//    used for palette operations
-//---------------------------------------------------------
-
-void Ottava::setLen(qreal l)
-      {
-      LineSegment hps;
-      hps.p1 = QPointF(0, 0);
-      hps.p2 = QPointF(l, 0);
-      segments.push_back(hps);
+#endif
       }
 
 //---------------------------------------------------------
@@ -138,6 +127,7 @@ void Ottava::setLen(qreal l)
 
 void Ottava::layout(ScoreLayout* layout)
       {
+#if 0
       double _spatium = layout->spatium();
       SLine::layout(layout);
 
@@ -185,6 +175,7 @@ void Ottava::layout(ScoreLayout* layout)
             r |= bbr2;
             }
       setbbox(r);
+#endif
       }
 
 //---------------------------------------------------------

@@ -32,6 +32,7 @@ class TrillSegment : public LineSegment {
    public:
       TrillSegment(Score* s) : LineSegment(s) {}
       virtual ElementType type() const { return TRILL_SEGMENT; }
+      virtual TrillSegment* clone() const { return new TrillSegment(*this); }
       };
 
 //---------------------------------------------------------
@@ -48,11 +49,9 @@ class Trill : public SLine {
 
       virtual void draw(QPainter&);
       virtual void layout(ScoreLayout*);
-      void setLen(qreal);
       virtual void setSubtype(int val);
       virtual void write(Xml&) const;
       virtual void read(QDomNode);
-      virtual QRectF bbox() const;
       virtual LineSegment* createSegment() { return new TrillSegment(score()); }
       };
 

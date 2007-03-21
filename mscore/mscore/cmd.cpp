@@ -126,9 +126,9 @@ void Score::cmdAdd(Element* e, const QPointF& pos, const QPointF& dragOffset)
                   Pedal* pedal = (Pedal*)e;
                   pedal->setTick(tick);
                   pedal->setTick2(tick + measure->tickLen());
-                  e->layout(mainLayout());
+                  pedal->layout(mainLayout());
                   QPointF uo(pos - (e->ipos() + e->parent()->canvasPos()) - dragOffset);
-                  e->setUserOff(uo / _spatium);
+                  pedal->setOff(uo / _spatium);
                   }
                   break;
             case OTTAVA:
@@ -136,9 +136,9 @@ void Score::cmdAdd(Element* e, const QPointF& pos, const QPointF& dragOffset)
                   Ottava* ottava = (Ottava*)e;
                   ottava->setTick(tick);
                   ottava->setTick2(tick + measure->tickLen());
-                  e->layout(mainLayout());
+                  ottava->layout(mainLayout());
                   QPointF uo(pos - (e->ipos() + e->parent()->canvasPos()) - dragOffset);
-                  e->setUserOff(uo / _spatium);
+                  ottava->setOff(uo / _spatium);
                   }
                   break;
             case TRILL:
@@ -147,17 +147,9 @@ void Score::cmdAdd(Element* e, const QPointF& pos, const QPointF& dragOffset)
                   trill->setTick(tick);
                   int lt = measure->last()->tick();
                   trill->setTick2(lt);
-                  e->layout(mainLayout());
+                  trill->layout(mainLayout());
                   QPointF uo(pos - (e->ipos() + e->parent()->canvasPos()) - dragOffset);
-                  e->setUserOff(uo / _spatium);
-                  }
-                  break;
-            case DYNAMIC:
-                  {
-                  e->setTick(tick);
-                  e->layout(mainLayout());
-                  QPointF uo(pos - (e->ipos() + e->parent()->canvasPos()) - dragOffset);
-                  e->setUserOff(uo / _spatium);
+                  trill->setOff(uo / _spatium);
                   }
                   break;
             case HAIRPIN:
@@ -166,6 +158,14 @@ void Score::cmdAdd(Element* e, const QPointF& pos, const QPointF& dragOffset)
                   e->setTick(tick);
                   hairpin->setTick2(tick + measure->last()->tick());
                   hairpin->layout(mainLayout());
+                  QPointF uo(pos - (e->ipos() + e->parent()->canvasPos()) - dragOffset);
+                  hairpin->setOff(uo / _spatium);
+                  }
+                  break;
+            case DYNAMIC:
+                  {
+                  e->setTick(tick);
+                  e->layout(mainLayout());
                   QPointF uo(pos - (e->ipos() + e->parent()->canvasPos()) - dragOffset);
                   e->setUserOff(uo / _spatium);
                   }

@@ -247,18 +247,6 @@ bool SlurSegment::startEditDrag(Viewer*, const QPointF& p)
       }
 
 //---------------------------------------------------------
-//   dragOff
-//---------------------------------------------------------
-
-QPointF SlurSegment::dragOff() const
-      {
-      if (mode)
-            return -ups[mode - 1].off;
-      else
-            return QPointF(0,0);
-      }
-
-//---------------------------------------------------------
 //   editDrag
 //---------------------------------------------------------
 

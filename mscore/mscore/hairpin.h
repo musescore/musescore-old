@@ -23,6 +23,7 @@
 #include "line.h"
 
 class Score;
+class Hairpin;
 
 //---------------------------------------------------------
 //   HairpinSegment
@@ -32,7 +33,11 @@ class HairpinSegment : public LineSegment {
    protected:
    public:
       HairpinSegment(Score* s) : LineSegment(s) {}
+      Hairpin* hairpin() const { return (Hairpin*)parent(); }
+      virtual HairpinSegment* clone() const { return new HairpinSegment(*this); }
       virtual ElementType type() const { return HAIRPIN_SEGMENT; }
+      virtual void draw(QPainter&);
+      virtual QRectF bbox() const;
       };
 
 //---------------------------------------------------------
@@ -47,12 +52,10 @@ class Hairpin : public SLine {
       virtual Hairpin* clone() const { return new Hairpin(*this); }
       virtual ElementType type() const { return HAIRPIN; }
 
-      void setLen(double);
-      virtual void draw(QPainter&);
       virtual void layout(ScoreLayout*);
       virtual void write(Xml& xml) const;
       virtual void read(QDomNode);
-      virtual LineSegment* createSegment() { return new HairpinSegment(score()); }
+      virtual LineSegment* createSegment();
       };
 
 #define __HAIRPIN_H__
