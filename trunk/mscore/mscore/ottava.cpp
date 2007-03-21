@@ -27,6 +27,50 @@
 #include "layout.h"
 
 //---------------------------------------------------------
+//   draw
+//---------------------------------------------------------
+
+void OttavaSegment::draw(QPainter& p)
+      {
+      qreal ottavaLineWidth    = _spatium * .18;
+      qreal ottavaTextDistance = _spatium * .5;
+
+      QPointF pp1(.0, .0);
+      QPointF pp2(_p2);
+
+      QFont f(textStyles[TEXT_STYLE_DYNAMICS].font());
+      p.setFont(f);
+      QFontMetricsF fm(f);
+      QRectF bb(fm.boundingRect(ottava()->text()));
+
+      qreal h = textHeight;   // bb.height() * .5;
+      p.drawText(QPointF(0.0, h), ottava()->text());
+      pp1 += QPointF(bb.width() + ottavaTextDistance, 0.0);
+
+      QPen pen(p.pen());
+      pen.setWidthF(ottavaLineWidth);
+      pen.setStyle(Qt::DashLine);
+      p.setPen(pen);
+      p.drawLine(QLineF(pp1, pp2));
+      p.drawLine(QLineF(pp2, QPointF(pp2.x(), h)));
+      }
+
+//---------------------------------------------------------
+//   bbox
+//---------------------------------------------------------
+
+QRectF OttavaSegment::bbox() const
+      {
+      double h = point(style->hairpinHeight);
+      QRectF r(.0, -h * .5, _p2.x(), h);
+      if (mode) {
+            r |= r1;
+            r |= r2;
+            }
+      return r;
+      }
+
+//---------------------------------------------------------
 //   Ottava
 //---------------------------------------------------------
 
@@ -45,80 +89,18 @@ void Ottava::setSubtype(int val)
       Element::setSubtype(val);
       switch(val) {
             case 0:
-                  text = "8va";
+                  _text = "8va";
                   break;
             case 1:
-                  text = "15va";
+                  _text = "15va";
                   break;
             case 2:
-                  text = "8vb";
+                  _text = "8vb";
                   break;
             case 3:
-                  text = "15vb";
+                  _text = "15vb";
                   break;
             }
-      }
-
-//---------------------------------------------------------
-//   draw
-//---------------------------------------------------------
-
-void Ottava::draw(QPainter& p)
-      {
-#if 0
-      qreal ottavaLineWidth    = _spatium * .18;
-      qreal ottavaTextDistance = _spatium * .5;
-
-      for (ciLineSegment i = segments.begin(); i != segments.end(); ++i) {
-            const LineSegment* s = &*i;
-
-            ciLineSegment ii = i;
-            ++ii;
-            QPointF pp1(s->p1);
-            QPointF pp2(s->p2);
-
-            if (i == segments.begin())
-                  pp1 += off1 * _spatium;
-            if (ii == segments.end())
-                  pp2 += off2 * _spatium;
-
-            QFont f(textStyles[TEXT_STYLE_DYNAMICS].font());
-            p.setFont(f);
-            QFontMetricsF fm(f);
-            QRectF bb(fm.boundingRect(text));
-
-            qreal h = textHeight;   // bb.height() * .5;
-            p.drawText(pp1 + 	QPointF(0.0, h), text);
-            pp1 += QPointF(bb.width() + ottavaTextDistance, 0.0);
-
-            QPen pen(p.pen());
-            pen.setWidthF(ottavaLineWidth);
-            pen.setStyle(Qt::DashLine);
-            p.setPen(pen);
-            p.drawLine(QLineF(pp1, pp2));
-            if (ii == segments.end())
-                  p.drawLine(QLineF(pp2, QPointF(pp2.x(), h)));
-            }
-
-      if (mode != NORMAL) {
-            qreal lw = 2.0/p.matrix().m11();
-            QPen pen(Qt::blue);
-            pen.setWidthF(lw);
-            p.setPen(pen);
-            if (mode == DRAG1) {
-                  p.setBrush(Qt::blue);
-                  p.drawRect(r1);
-                  p.setBrush(Qt::NoBrush);
-                  p.drawRect(r2);
-                  }
-            else {
-                  p.setBrush(Qt::NoBrush);
-                  p.drawRect(r1);
-                  p.setBrush(Qt::blue);
-                  p.drawRect(r2);
-                  }
-            }
-#endif
       }
 
 //---------------------------------------------------------
@@ -200,4 +182,17 @@ void Ottava::read(QDomNode node)
                   domError(node);
             }
       }
+
+//---------------------------------------------------------
+//   createSegment
+//---------------------------------------------------------
+
+LineSegment* Ottava::createSegment()
+      {
+      LineSegment* seg = new OttavaSegment(score());
+      seg->setParent(this);
+      seg->setStaff(staff());
+      return seg;
+      }
+
 
