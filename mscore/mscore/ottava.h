@@ -23,16 +23,23 @@
 
 #include "line.h"
 
+class Ottava;
+
 //---------------------------------------------------------
 //   OttavaSegment
 //---------------------------------------------------------
 
 class OttavaSegment : public LineSegment {
+      mutable qreal textHeight;     ///< cached value
+
    protected:
    public:
       OttavaSegment(Score* s) : LineSegment(s) {}
       virtual ElementType type() const { return OTTAVA_SEGMENT; }
       virtual OttavaSegment* clone() const { return new OttavaSegment(*this); }
+      virtual void draw(QPainter&);
+      virtual QRectF bbox() const;
+      Ottava* ottava() const { return (Ottava*)parent(); }
       };
 
 //---------------------------------------------------------
@@ -41,19 +48,18 @@ class OttavaSegment : public LineSegment {
 //---------------------------------------------------------
 
 class Ottava : public SLine {
-      QString text;
-      mutable qreal textHeight;     ///< cached value
+      QString _text;
 
    public:
       Ottava(Score* s);
       virtual Ottava* clone() const    { return new Ottava(*this); }
       virtual ElementType type() const { return OTTAVA; }
-      virtual void draw(QPainter&);
       virtual void layout(ScoreLayout*);
       virtual void setSubtype(int val);
       virtual void write(Xml&) const;
       virtual void read(QDomNode);
-      virtual LineSegment* createSegment() { return new OttavaSegment(score()); }
+      virtual LineSegment* createSegment();
+      const QString& text() const { return _text; }
       };
 
 #endif
