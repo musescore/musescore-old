@@ -330,7 +330,7 @@ double System::layout(ScoreLayout* layout, const QPointF& p, double w)
 void System::layout2(ScoreLayout* layout)
       {
 // printf("System::layout2() %f\n", _spatium);
-      int staves = score()->nstaves();
+      int staves = _staves.size();  // score()->nstaves();
 
       qreal y = 0.0;
       for (int staffIdx = 0; staffIdx < staves; ++staffIdx) {
