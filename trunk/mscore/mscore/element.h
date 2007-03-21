@@ -149,6 +149,10 @@ class Element {
       virtual void move(const QPointF& s)     { _pos += s;               }
 
       QPointF canvasPos() const;          ///< position in canvas coordinates
+
+      QPointF mapToCanvas(const QPointF&) const;
+      QPointF mapToElement(const Element*, const QPointF&) const;
+
       const QPointF& userOff() const          { return _userOff;  }
       void setUserOff(const QPointF& o)       { _userOff = o;     }
       void setUserXoffset(qreal v)            { _userOff.setX(v); }
@@ -189,7 +193,6 @@ class Element {
       virtual bool startEditDrag(Viewer*, const QPointF&)  { return false; }
       virtual bool editDrag(Viewer*, QPointF*, const QPointF&) { return false; }
       virtual bool endEditDrag()              { return false;}
-      virtual QPointF dragOff() const         { return QPointF(0,0); }
       virtual void endEdit()                  {}
 
       Staff* staff() const                    { return _staff; }

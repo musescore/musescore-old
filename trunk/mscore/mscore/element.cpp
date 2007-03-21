@@ -166,6 +166,34 @@ QPointF Element::canvasPos() const
       }
 
 //---------------------------------------------------------
+//   mapToCanvas
+//    maps point to canvas coordinates
+//---------------------------------------------------------
+
+QPointF Element::mapToCanvas(const QPointF& pp) const
+      {
+      QPointF p(pp);
+      for (Element* e = _parent; e; e = e->parent())
+            p += e->pos();
+      return p;
+      }
+
+//---------------------------------------------------------
+//   mapToElement
+//    maps point to canvas coordinates
+//---------------------------------------------------------
+
+QPointF Element::mapToElement(const Element* e, const QPointF& pp) const
+      {
+      QPointF p(pp);
+      for (Element* ee = e->parent(); ee; ee = ee->parent())
+            p += ee->pos();
+      for (Element* e = _parent; e; e = e->parent())
+            p -= e->pos();
+      return p;
+      }
+
+//---------------------------------------------------------
 //   contains
 //---------------------------------------------------------
 

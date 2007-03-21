@@ -578,6 +578,7 @@ void Canvas::mouseReleaseEvent1(QMouseEvent* /*ev*/)
                   setDropTarget(0); // this also resets dropRectangle and dropAnchor
                   _score->addRefresh(_score->editObject->abbox());
                   setState(EDIT);
+                  _score->endCmd(false);
                   break;
 
             case LASSO:
@@ -1442,8 +1443,8 @@ void Canvas::drawElements(QPainter& p,const QList<Element*>& el)
             if (!(e->visible() || score()->showInvisible()))
                   continue;
 
-            QPointF ap(e->canvasPos());
-            p.translate(ap);
+            p.save();
+            p.translate(e->canvasPos());
             p.setPen(QPen(e->color()));
             e->draw(p);
             if (debugMode && e->selected()) {
@@ -1462,7 +1463,7 @@ void Canvas::drawElements(QPainter& p,const QList<Element*>& el)
                   p.setPen(QPen(Qt::red, 0, Qt::SolidLine));
                   p.drawRect(seg->abbox());
                   }
-            p.translate(-ap);
+            p.restore();
             }
       }
 

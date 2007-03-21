@@ -32,6 +32,7 @@ class PedalSegment : public LineSegment {
    public:
       PedalSegment(Score* s) : LineSegment(s) {}
       virtual ElementType type() const { return PEDAL_SEGMENT; }
+      virtual PedalSegment* clone() const { return new PedalSegment(*this); }
       };
 
 //---------------------------------------------------------
@@ -50,11 +51,9 @@ class Pedal : public SLine {
 
       virtual void draw(QPainter&);
       virtual void layout(ScoreLayout*);
-      void setLen(qreal);
       virtual void setSubtype(int val);
       virtual void write(Xml&) const;
       virtual void read(QDomNode);
-      QRectF bbox() const;
       virtual LineSegment* createSegment() { return new PedalSegment(score()); }
       };
 

@@ -52,6 +52,7 @@ void Pedal::setSubtype(int val)
 
 void Pedal::draw(QPainter& p)
       {
+#if 0
       qreal ottavaLineWidth    = _spatium * .18;
       qreal ottavaTextDistance = _spatium * .5;
 
@@ -100,19 +101,7 @@ void Pedal::draw(QPainter& p)
                   p.drawRect(r2);
                   }
             }
-      }
-
-//---------------------------------------------------------
-//   setLen
-//    used for palette operations
-//---------------------------------------------------------
-
-void Pedal::setLen(qreal l)
-      {
-      LineSegment hps;
-      hps.p1 = QPointF(0, 0);
-      hps.p2 = QPointF(l, 0);
-      segments.push_back(hps);
+#endif
       }
 
 //---------------------------------------------------------
@@ -121,6 +110,7 @@ void Pedal::setLen(qreal l)
 
 void Pedal::layout(ScoreLayout* layout)
       {
+#if 0
       if (!parent())
             return;
 
@@ -132,12 +122,14 @@ void Pedal::layout(ScoreLayout* layout)
       SysStaff* sstaff = system->staff(staffIdx());
       qreal y = sstaff->bbox().top() + pedalDistance;
       setPos(ipos().x(), y);
+#endif
       }
 
 //---------------------------------------------------------
 //   bbox
 //---------------------------------------------------------
 
+#if 0
 QRectF Pedal::bbox() const
       {
       const QRectF& rr = symbols[symbol].bbox();
@@ -166,6 +158,7 @@ QRectF Pedal::bbox() const
             }
       return r;
       }
+#endif
 
 //---------------------------------------------------------
 //   write

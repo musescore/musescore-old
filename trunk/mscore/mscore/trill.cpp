@@ -52,6 +52,7 @@ void Trill::setSubtype(int val)
 //   bbox
 //---------------------------------------------------------
 
+#if 0
 QRectF Trill::bbox() const
       {
       QRectF rr(symbols[trillSym].bbox());
@@ -79,6 +80,7 @@ QRectF Trill::bbox() const
             }
       return r;
       }
+#endif
 
 //---------------------------------------------------------
 //   draw
@@ -86,6 +88,7 @@ QRectF Trill::bbox() const
 
 void Trill::draw(QPainter& p)
       {
+#if 0
       for (ciLineSegment i = segments.begin(); i != segments.end(); ++i) {
             const LineSegment* s = &*i;
 
@@ -135,19 +138,7 @@ void Trill::draw(QPainter& p)
                   p.drawRect(r2);
                   }
             }
-      }
-
-//---------------------------------------------------------
-//   setLen
-//    used for palette operations
-//---------------------------------------------------------
-
-void Trill::setLen(qreal l)
-      {
-      LineSegment hps;
-      hps.p1 = QPointF(0, 0);
-      hps.p2 = QPointF(l, 0);
-      segments.push_back(hps);
+#endif
       }
 
 //---------------------------------------------------------
@@ -156,6 +147,7 @@ void Trill::setLen(qreal l)
 
 void Trill::layout(ScoreLayout* layout)
       {
+#if 0
       if (!parent())
             return;
       SLine::layout(layout);
@@ -165,6 +157,7 @@ void Trill::layout(ScoreLayout* layout)
       SysStaff* sstaff = system->staff(staffIdx());
       qreal y = sstaff->bbox().top() - trillDistance;
       setPos(ipos().x(), y);
+#endif
       }
 
 //---------------------------------------------------------

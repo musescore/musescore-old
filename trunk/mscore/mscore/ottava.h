@@ -32,6 +32,7 @@ class OttavaSegment : public LineSegment {
    public:
       OttavaSegment(Score* s) : LineSegment(s) {}
       virtual ElementType type() const { return OTTAVA_SEGMENT; }
+      virtual OttavaSegment* clone() const { return new OttavaSegment(*this); }
       };
 
 //---------------------------------------------------------
@@ -49,7 +50,6 @@ class Ottava : public SLine {
       virtual ElementType type() const { return OTTAVA; }
       virtual void draw(QPainter&);
       virtual void layout(ScoreLayout*);
-      void setLen(qreal);
       virtual void setSubtype(int val);
       virtual void write(Xml&) const;
       virtual void read(QDomNode);

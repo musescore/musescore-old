@@ -36,6 +36,7 @@
 #include "hook.h"
 #include "lyrics.h"
 #include "bracket.h"
+#include "line.h"
 
 //---------------------------------------------------------
 //   Page
@@ -381,8 +382,19 @@ void Page::collectElements(QList<Element*>& el)
                                     el.append(e);
                               }
                         }
-                  foreach(Element* e, *m->el())
-                        el.append(e);
+                  foreach(Element* e, *m->el()) {
+                        switch(e->type()) {
+                              case HAIRPIN:
+                              case OTTAVA:
+                              case PEDAL:
+                              case TRILL:
+                                    ((SLine*)e)->collectElements(el);
+                                    break;
+                              default:
+                                    el.append(e);
+                                    break;
+                              }
+                        }
                   foreach(Element* e, *m->pel())
                         el.append(e);
                   foreach(Beam* b, *m->beamList())
