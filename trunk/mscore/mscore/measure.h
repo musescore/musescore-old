@@ -76,6 +76,8 @@ struct MStaff {
 
       MStaff() {
             endBarLine = 0;
+            distance = .0;
+            userDistance = .0;
             }
       };
 
