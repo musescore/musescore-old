@@ -958,7 +958,7 @@ ChordRest* Score::setNoteEntry(bool val, bool step)
                         }
                   return cr;
                   }
-            if (sel->state == SEL_NONE || (el && (el->type() != NOTE || !el->isChordRest()))) {
+            if (sel->state == SEL_NONE || (el && el->type() != NOTE && !el->isChordRest())) {
                   QMessageBox::information(0, "MuseScore: Note Entry",
                         tr("No note or rest selected:\n"
                            "please select a note or rest were you want to\n"
@@ -968,9 +968,21 @@ ChordRest* Score::setNoteEntry(bool val, bool step)
             if (el == 0) {
                   // int tick = sel->tickStart;
                   Segment* seg = tick2segment(sel->tickStart);
-                  // TODO
-                  printf("segment type %d\n", seg->subtype());
-                  return 0;
+                  if (seg == 0) {
+                        printf("no note or rest selected 1\n");
+                        return 0;
+                        }
+                  int staffIdx = sel->staffStart;
+                  for (int track = staffIdx * VOICES; track < (staffIdx+1)*VOICES; ++track) {
+                        el = seg->element(track);
+                        if (el)
+                              break;
+                        }
+                  if (el == 0) {
+                        printf("no note or rest selected 2\n");
+                        return 0;
+                        }
+                  select(el, 0, 0);
                   }
             if (el->type() == NOTE)
                   el = el->parent();
