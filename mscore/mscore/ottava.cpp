@@ -35,17 +35,16 @@ void OttavaSegment::draw(QPainter& p)
       qreal ottavaLineWidth    = _spatium * .18;
       qreal ottavaTextDistance = _spatium * .5;
 
-      QPointF pp1(.0, .0);
       QPointF pp2(_p2);
 
       QFont f(textStyles[TEXT_STYLE_DYNAMICS].font());
       p.setFont(f);
       QFontMetricsF fm(f);
-      QRectF bb(fm.boundingRect(ottava()->text()));
+      QRectF bb(fm.boundingRect(ottava()->text));
 
-      qreal h = textHeight;   // bb.height() * .5;
-      p.drawText(QPointF(0.0, h), ottava()->text());
-      pp1 += QPointF(bb.width() + ottavaTextDistance, 0.0);
+      qreal h = ottava()->textHeight;
+      p.drawText(QPointF(0.0, h), ottava()->text);
+      QPointF pp1(bb.width() + ottavaTextDistance, 0.0);
 
       QPen pen(p.pen());
       pen.setWidthF(ottavaLineWidth);
@@ -53,6 +52,7 @@ void OttavaSegment::draw(QPainter& p)
       p.setPen(pen);
       p.drawLine(QLineF(pp1, pp2));
       p.drawLine(QLineF(pp2, QPointF(pp2.x(), h)));
+      LineSegment::draw(p);
       }
 
 //---------------------------------------------------------
@@ -61,11 +61,15 @@ void OttavaSegment::draw(QPainter& p)
 
 QRectF OttavaSegment::bbox() const
       {
-      double h = point(style->hairpinHeight);
-      QRectF r(.0, -h * .5, _p2.x(), h);
-      if (mode) {
-            r |= r1;
-            r |= r2;
+      QPointF pp1;
+      QPointF pp2(pos2());
+
+      qreal h1 = ottava()->textHeight;
+      QRectF r(.0, -h1, pp2.x(), 2 * h1);
+
+      if (mode != NORMAL) {
+            r |= bbr1;
+            r |= bbr2;
             }
       return r;
       }
@@ -89,16 +93,16 @@ void Ottava::setSubtype(int val)
       Element::setSubtype(val);
       switch(val) {
             case 0:
-                  _text = "8va";
+                  text = "8va";
                   break;
             case 1:
-                  _text = "15va";
+                  text = "15va";
                   break;
             case 2:
-                  _text = "8vb";
+                  text = "8vb";
                   break;
             case 3:
-                  _text = "15vb";
+                  text = "15vb";
                   break;
             }
       }
@@ -109,7 +113,6 @@ void Ottava::setSubtype(int val)
 
 void Ottava::layout(ScoreLayout* layout)
       {
-#if 0
       double _spatium = layout->spatium();
       SLine::layout(layout);
 
@@ -132,32 +135,7 @@ void Ottava::layout(ScoreLayout* layout)
             if (h > h1)
                   h1 = h;
             }
-      h1 *= .5;
-      textHeight = h1;
-
-      QRectF r(0, 0, 0, 0);
-      for (iLineSegment i = segments.begin(); i != segments.end(); ++i) {
-            LineSegment* s = &*i;
-            ciLineSegment ii = i;
-            ++ii;
-            QPointF pp1(s->p1);
-            QPointF pp2(s->p2);
-
-            if (i == segments.begin())
-                  pp1 += off1 * _spatium;
-            if (ii == segments.end())
-                  pp2 += off2 * _spatium;
-
-            s->bbox.setCoords(pp1.x(), pp1.y() - h1, pp2.x(), pp2.y() + h1);
-            r |= s->bbox;
-            }
-
-      if (mode != NORMAL) {
-            r |= bbr1;
-            r |= bbr2;
-            }
-      setbbox(r);
-#endif
+      textHeight = h1 * .5;
       }
 
 //---------------------------------------------------------

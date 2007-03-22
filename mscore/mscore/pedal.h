@@ -23,6 +23,8 @@
 
 #include "line.h"
 
+class Pedal;
+
 //---------------------------------------------------------
 //   PedalSegment
 //---------------------------------------------------------
@@ -31,8 +33,11 @@ class PedalSegment : public LineSegment {
    protected:
    public:
       PedalSegment(Score* s) : LineSegment(s) {}
-      virtual ElementType type() const { return PEDAL_SEGMENT; }
+      Pedal* pedal() const                { return (Pedal*)parent(); }
+      virtual ElementType type() const    { return PEDAL_SEGMENT; }
       virtual PedalSegment* clone() const { return new PedalSegment(*this); }
+      virtual void draw(QPainter&);
+      virtual QRectF bbox() const;
       };
 
 //---------------------------------------------------------
@@ -40,21 +45,22 @@ class PedalSegment : public LineSegment {
 //---------------------------------------------------------
 
 class Pedal : public SLine {
+   protected:
       int symbol;
       qreal pedalLineWidth;
       qreal pedalTextDistance;
+
+      friend class PedalSegment;
 
    public:
       Pedal(Score* s);
       virtual Pedal* clone() const     { return new Pedal(*this); }
       virtual ElementType type() const { return PEDAL; }
 
-      virtual void draw(QPainter&);
       virtual void layout(ScoreLayout*);
-      virtual void setSubtype(int val);
       virtual void write(Xml&) const;
       virtual void read(QDomNode);
-      virtual LineSegment* createSegment() { return new PedalSegment(score()); }
+      virtual LineSegment* createSegment();
       };
 
 #endif

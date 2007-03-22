@@ -131,15 +131,11 @@ bool LineSegment::editDrag(Viewer* viewer, QPointF*, const QPointF& d)
             if (_segmentType == SEGMENT_SINGLE || _segmentType == SEGMENT_BEGIN)
                   line()->setTick(tick);
             setUserXoffset((apos.x() - anchor.x()) / _spatium);
-            setPos(anchor - parent()->canvasPos());
+            setXpos(anchor.x() - parent()->canvasPos().x());
 
             score()->pos2TickAnchor(apos2, staff(), &tick, &anchor);
-printf("%f %f\n", _p2.x(), (anchor-parent()->canvasPos()).x());
-            _p2 = anchor - parent()->canvasPos();
+            _p2.setX(anchor.x() - canvasPos().x());
             _userOff2.setX((apos2.x() - anchor.x()) / _spatium);
-
-            // qreal dx = (anchor - mapToCanvas(ipos())).x();
-            //  = setX(_userOff2.x() - (delta.x() - dx) / _spatium);
             }
       else {
             r2.translate(delta);
@@ -152,10 +148,8 @@ printf("%f %f\n", _p2.x(), (anchor-parent()->canvasPos()).x());
             viewer->setDropAnchor(QLineF(anchor, apos));;
             if (_segmentType == SEGMENT_SINGLE || _segmentType == SEGMENT_END)
                   line()->setTick2(tick);
-            qreal dx = (anchor - mapToCanvas(_p2)).x();
- printf("%f %f\n", apos.x() - anchor.x(), dx);
-            qreal x2 = (apos.x() - anchor.x()) / _spatium;
-            _userOff2.setX(x2);
+            setUserXoffset2((apos.x() - anchor.x()) / _spatium);
+            setXpos2(anchor.x() - canvasPos().x());
             }
       return true;
       }
@@ -187,7 +181,6 @@ bool LineSegment::edit(QKeyEvent* ev)
                         mode = DRAG1;
                   break;
             }
-printf("EDIT\n");
       if (mode == DRAG1) {
             setUserOff(userOff() + delta);
             r1.moveTopLeft(r1.topLeft() + delta * _spatium);
@@ -215,6 +208,7 @@ void LineSegment::endDrag()
 
 bool LineSegment::endEditDrag()
       {
+      // TODO: must move to different Measure?
       return false;
       }
 
@@ -275,16 +269,7 @@ void SLine::layout(ScoreLayout* layout)
       System* system2 = seg2->measure()->system();
 
       QPointF ppos(parent()->canvasPos());
-      QPointF p1 = seg1->canvasPos() - ppos;
-      QPointF p2 = seg2->canvasPos() - ppos;
-
-//      QPointF p1 = seg1->mapToElement(this, seg1->pos());
-//      QPointF p2 = seg2->mapToElement(this, seg2->pos());
-
-      setPos(p1);
-      p1   -= ipos();
-      p2   -= ipos();
-//      ppos -= ipos();
+      QPointF p1 = seg1->canvasPos() - ppos; //  - ipos();
 
       iSystem is = layout->systems()->begin();
       while (is != layout->systems()->end()) {
@@ -301,13 +286,24 @@ void SLine::layout(ScoreLayout* layout)
             // if line break changes do a complete re-layout;
             // this especially removes all user editing
 
-            printf("Delete all line segments\n");
             // TODO: selected segments?
             foreach(LineSegment* seg, segments)
                   delete seg;
             segments.clear();
             }
 
+//DEBUG:
+// TODO: support more than one segment
+
+      int seg = 0;
+      if (seg >= segments.size())
+            segments.append(createSegment());
+      LineSegment* hps = segments[seg];
+      hps->setPos(p1);
+      QPointF p2 = seg2->canvasPos() - hps->canvasPos();
+      hps->setXpos2(p2.x());
+
+#if 0
       int seg = 0;
       for (; is != layout->systems()->end(); ++is, ++seg) {
             if (seg >= segments.size()) {
@@ -329,6 +325,8 @@ printf("TEST2\n");
 printf("TEST1\n");
 //TODO            hps->setPos2((*is)->pos() + QPointF((*is)->bbox().width() - _spatium * 0.5, 0) - ppos);
             }
+#endif
+
       foreach(LineSegment* seg, segments)
             seg->layout(layout);
       }
@@ -341,12 +339,28 @@ void SLine::writeProperties(Xml& xml) const
       {
       Element::writeProperties(xml);
       xml.tag("tick2", _tick2);
-#if 0
-      if (!off1.isNull())
-            xml.tag("off1", off1);
-      if (!off2.isNull())
-            xml.tag("off2", off2);
-#endif
+      //
+      // check if user has modified the default layout
+      //
+      bool modified = false;
+      foreach(LineSegment* seg, segments) {
+            if (!seg->userOff().isNull() || !seg->userOff2().isNull()) {
+                  modified = true;
+                  break;
+                  }
+            }
+      if (!modified)
+            return;
+
+      //
+      // write user modified layout
+      //
+      foreach(LineSegment* seg, segments) {
+            xml.stag("Segment");
+            xml.tag("off1", seg->userOff());
+            xml.tag("off2", seg->userOff2());
+            xml.etag("Segment");
+            }
       }
 
 //---------------------------------------------------------
@@ -360,19 +374,28 @@ bool SLine::readProperties(QDomNode node)
       QDomElement e = node.toElement();
       if (e.isNull())
             return true;
-#if 0
       QString tag(e.tagName());
       QString val(e.text());
       int i = val.toInt();
-      if (tag == "off1")
-            off1 = readPoint(node);
-      else if (tag == "off2")
-            off2 = readPoint(node);
-      else if (tag == "tick2")
+      if (tag == "tick2")
             _tick2 = score()->fileDivision(i);
+      else if (tag == "Segment") {
+            LineSegment* ls = createSegment();
+            for (QDomNode n = node.firstChild(); !n.isNull(); n = n.nextSibling()) {
+                  e = n.toElement();
+                  if (e.isNull())
+                        continue;
+                  if (e.tagName() == "off1")
+                        ls->setUserOff(readPoint(n));
+                  else if (e.tagName() == "off2")
+                        ls->setUserOff2(readPoint(n));
+                  else
+                        domError(e);
+                  }
+            segments.append(ls);
+            }
       else
             return false;
-#endif
       return true;
       }
 
@@ -397,10 +420,10 @@ void SLine::setLen(double l)
 void SLine::draw(QPainter& p)
       {
       foreach(LineSegment* seg, segments) {
-//            p.save();
-//            p.translate(seg->canvasPos());
+            p.save();
+            p.translate(seg->pos());
             seg->draw(p);
-//            p.restore();
+            p.restore();
             }
       }
 
@@ -412,18 +435,6 @@ void SLine::collectElements(QList<Element*>& el)
       {
       foreach(LineSegment* seg, segments)
             el.append(seg);
-      }
-
-//---------------------------------------------------------
-//   setOff
-//    set user offset for first segment
-//    called from Score->cmdAdd()
-//---------------------------------------------------------
-
-void SLine::setOff(const QPointF& o)
-      {
-      if (!segments.isEmpty())
-            segments.front()->setUserOff(o);
       }
 
 //---------------------------------------------------------
@@ -445,3 +456,18 @@ void SLine::remove(Element*)
       //TODO multi segment
       segments.clear();
       }
+
+//---------------------------------------------------------
+//   bbox
+//    used by palette: only one segment
+//---------------------------------------------------------
+
+QRectF SLine::bbox() const
+      {
+      if (segments.isEmpty())
+            return QRectF();
+      else
+            return segments[0]->bbox();
+      }
+
+

@@ -399,8 +399,8 @@ void Canvas::mouseMoveEvent(QMouseEvent* ev)
       mouseMoveEvent1(ev);
       if (dragCanvasState)
            ;
-//      else if (state == LASSO || state == DRAG_EDIT)
-      else if (state == LASSO)
+      else if (state == LASSO || state == DRAG_EDIT)
+//      else if (state == LASSO)
             _score->end1();
       else
             _score->endCmd(false);      // update display but dont end undo
@@ -1461,7 +1461,7 @@ void Canvas::drawElements(QPainter& p,const QList<Element*>& el)
                   if (e->type() == NOTE)
                         seg = seg->parent();
                   p.setPen(QPen(Qt::red, 0, Qt::SolidLine));
-                  p.drawRect(seg->abbox());
+                  p.drawRect(seg->bbox());
                   }
             p.restore();
             }

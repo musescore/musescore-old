@@ -65,7 +65,9 @@ class LineSegment : public Element {
       SLine* line() const                 { return (SLine*)parent(); }
       const QPointF& userOff2() const     { return _userOff2;  }
       void setUserOff2(const QPointF& o)  { _userOff2 = o;     }
-      void setPos2(const QPointF& p)      { _p2 = p; }
+      void setUserXoffset2(qreal x)       { _userOff2.setX(x); }
+      void setPos2(const QPointF& p)      { _p2 = p;     }
+      void setXpos2(qreal x)              { _p2.setX(x); }
       QPointF pos2() const                { return _p2 + _userOff2 * _spatium; }
       QPointF canvasPos2() const          { return _p2 + _userOff2 * _spatium + canvasPos(); }
       void setSegmentType(SegmentType s)  { _segmentType = s;  }
@@ -93,9 +95,10 @@ class SLine : public Element {
       virtual LineSegment* createSegment() = 0;
       void setLen(double l);
       void collectElements(QList<Element*>& el);
-      void setOff(const QPointF&);
       virtual void add(Element*);
       virtual void remove(Element*);
+      virtual QRectF bbox() const;
+      QList<LineSegment*> lineSegments() { return segments; }
       };
 
 typedef QList<LineSegment*>::iterator iLineSegment;
