@@ -35,6 +35,11 @@
 
 void HairpinSegment::draw(QPainter& p)
       {
+/*      printf("draw: ");
+      for (Element* e = this; e; e = e->parent())
+            printf("%s(%f,%f) ", e->name(), e->x(), e->y());
+      printf("\n");
+  */
       double h1 = point(style->hairpinHeight) * .5;
       double h2 = point(style->hairpinContHeight) * .5;
 
@@ -42,21 +47,21 @@ void HairpinSegment::draw(QPainter& p)
       pen.setWidthF(::style->hairpinWidth.point());
       p.setPen(pen);
 
-// printf("Draw %p %f\n", this, pos().x());
-
-      QPointF pp2(pos2());
+      QPointF p2(pos2());
+      qreal x = p2.x();
+      qreal y = p2.y();
 
       if (hairpin()->subtype() == 0) {
             switch(_segmentType) {
                   case SEGMENT_SINGLE:
                   case SEGMENT_BEGIN:
-                        p.drawLine(QLineF(.0, .0, pp2.x(), pp2.y() + h1));
-                        p.drawLine(QLineF(.0, .0, pp2.x(), pp2.y() - h1));
+                        p.drawLine(QLineF(.0, .0, x, y + h1));
+                        p.drawLine(QLineF(.0, .0, x, y - h1));
                         break;
                   case SEGMENT_MIDDLE:
                   case SEGMENT_END:
-                        p.drawLine(QLineF(.0,  h2, pp2.x(), pp2.y() + h1));
-                        p.drawLine(QLineF(.0, -h2, pp2.x(), pp2.y() - h1));
+                        p.drawLine(QLineF(.0,  h2, x, y + h1));
+                        p.drawLine(QLineF(.0, -h2, x, y - h1));
                         break;
                   }
             }
@@ -64,13 +69,13 @@ void HairpinSegment::draw(QPainter& p)
             switch(_segmentType) {
                   case SEGMENT_SINGLE:
                   case SEGMENT_END:
-                        p.drawLine(QLineF(.0,  h1, pp2.x(), pp2.y()));
-                        p.drawLine(QLineF(.0, -h1, pp2.x(), pp2.y()));
+                        p.drawLine(QLineF(.0,  h1, x, y));
+                        p.drawLine(QLineF(.0, -h1, x, y));
                         break;
                   case SEGMENT_BEGIN:
                   case SEGMENT_MIDDLE:
-                        p.drawLine(QLineF(.0,  h1, pp2.x(), pp2.y() + h2));
-                        p.drawLine(QLineF(.0, -h1, pp2.x(), pp2.y() - h2));
+                        p.drawLine(QLineF(.0,  h1, x, y + h2));
+                        p.drawLine(QLineF(.0, -h1, x, y - h2));
                         break;
                   }
             }
@@ -86,8 +91,8 @@ QRectF HairpinSegment::bbox() const
       double h = point(style->hairpinHeight);
       QRectF r(.0, -h * .5, _p2.x(), h);
       if (mode) {
-            r |= r1;
-            r |= r2;
+            r |= bbr1;
+            r |= bbr2;
             }
       return r;
       }
@@ -117,12 +122,13 @@ void Hairpin::read(QDomNode node)
 
 //---------------------------------------------------------
 //   layout
-//    compute segments from tick1 tick2
+//    compute segments from tick() to _tick2
 //---------------------------------------------------------
 
 void Hairpin::layout(ScoreLayout* layout)
       {
       SLine::layout(layout);
+      setPos(ipos().x(), 6 * layout->spatium());
       }
 
 //---------------------------------------------------------

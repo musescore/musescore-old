@@ -23,6 +23,8 @@
 
 #include "line.h"
 
+class Trill;
+
 //---------------------------------------------------------
 //   TrillSegment
 //---------------------------------------------------------
@@ -31,8 +33,11 @@ class TrillSegment : public LineSegment {
    protected:
    public:
       TrillSegment(Score* s) : LineSegment(s) {}
-      virtual ElementType type() const { return TRILL_SEGMENT; }
+      Trill* trill() const                { return (Trill*)parent(); }
+      virtual ElementType type() const    { return TRILL_SEGMENT; }
       virtual TrillSegment* clone() const { return new TrillSegment(*this); }
+      virtual void draw(QPainter&);
+      virtual QRectF bbox() const;
       };
 
 //---------------------------------------------------------
@@ -47,12 +52,11 @@ class Trill : public SLine {
       virtual Trill* clone() const { return new Trill(*this); }
       virtual ElementType type() const { return TRILL; }
 
-      virtual void draw(QPainter&);
       virtual void layout(ScoreLayout*);
       virtual void setSubtype(int val);
       virtual void write(Xml&) const;
       virtual void read(QDomNode);
-      virtual LineSegment* createSegment() { return new TrillSegment(score()); }
+      virtual LineSegment* createSegment();
       };
 
 #endif

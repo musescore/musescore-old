@@ -1,3 +1,11 @@
+22.3.7 (ws)
+      - Reimplemented "line" classes Ottava Pedal Trill and Hairpin.
+        If this Elements span multiple staves, they are split into multiple
+        parts called "Segment"s. OttavaSegment, PedalSegment, TrillSegment
+        and HairpinSegment are the new Element subclasses to handle the
+        visual representation of an segment.
+19.3.7 (ws)
+      - move class Volta implementation into file volta.cpp/volta.h
 13.3.7 (ws)
       - Visualize anchor position of dynamics while dragging.
       - Allow to place Dynamics everywhere. This fixes the bug for one

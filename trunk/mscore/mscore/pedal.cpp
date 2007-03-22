@@ -28,80 +28,47 @@
 #include "layout.h"
 
 //---------------------------------------------------------
-//   Pedal
-//---------------------------------------------------------
-
-Pedal::Pedal(Score* s)
-   : SLine(s)
-      {
-      symbol = pedalPedSym;
-      }
-
-//---------------------------------------------------------
-//   setSubtype
-//---------------------------------------------------------
-
-void Pedal::setSubtype(int val)
-      {
-      Element::setSubtype(val);
-      }
-
-//---------------------------------------------------------
 //   draw
 //---------------------------------------------------------
 
-void Pedal::draw(QPainter& p)
+void PedalSegment::draw(QPainter& p)
       {
-#if 0
       qreal ottavaLineWidth    = _spatium * .18;
       qreal ottavaTextDistance = _spatium * .5;
 
-      for (ciLineSegment i = segments.begin(); i != segments.end(); ++i) {
-            const LineSegment* s = &*i;
+      QPointF pp1;
+      QPointF pp2(pos2());
 
-            ciLineSegment ii = i;
-            ++ii;
-            QPointF pp1(s->p1);
-            QPointF pp2(s->p2);
+      const QRectF& bb = symbols[pedal()->symbol].bbox();
+      qreal h = bb.height() * .5;
+      symbols[pedal()->symbol].draw(p, pp1.x(), h);
 
-            if (i == segments.begin())
-                  pp1 += off1 * _spatium;
-            if (ii == segments.end())
-                  pp2 += off2 * _spatium;
+      pp1 += QPointF(bb.width() + ottavaTextDistance, 0.0);
 
-            const QRectF& bb = symbols[symbol].bbox();
-            qreal h = bb.height() * .5;
-            symbols[symbol].draw(p, pp1.x(), h);
+      QPen pen(p.pen());
+      pen.setWidthF(ottavaLineWidth);
+      p.setPen(pen);
+      p.drawLine(QLineF(pp1, pp2));
+      p.drawLine(QLineF(pp2, QPointF(pp2.x(), -h)));
+      LineSegment::draw(p);
+      }
 
-            pp1 += QPointF(bb.width() + ottavaTextDistance, 0.0);
+//---------------------------------------------------------
+//   bbox
+//---------------------------------------------------------
 
-            QPen pen(p.pen());
-            pen.setWidthF(ottavaLineWidth);
-            p.setPen(pen);
-            p.drawLine(QLineF(pp1, pp2));
-            if (ii == segments.end())
-                  p.drawLine(QLineF(pp2, QPointF(pp2.x(), -h)));
-            }
+QRectF PedalSegment::bbox() const
+      {
+      const QRectF& rr = symbols[pedal()->symbol].bbox();
+      double h1 = rr.height();
 
+      QPointF pp2(pos2());
+      QRectF r(.0, -h1 * .5, pp2.x(), h1);
       if (mode != NORMAL) {
-            qreal lw = 2.0/p.matrix().m11();
-            QPen pen(Qt::blue);
-            pen.setWidthF(lw);
-            p.setPen(pen);
-            if (mode == DRAG1) {
-                  p.setBrush(Qt::blue);
-                  p.drawRect(r1);
-                  p.setBrush(Qt::NoBrush);
-                  p.drawRect(r2);
-                  }
-            else {
-                  p.setBrush(Qt::NoBrush);
-                  p.drawRect(r1);
-                  p.setBrush(Qt::blue);
-                  p.drawRect(r2);
-                  }
+            r |= bbr1;
+            r |= bbr2;
             }
-#endif
+      return r;
       }
 
 //---------------------------------------------------------
@@ -110,13 +77,15 @@ void Pedal::draw(QPainter& p)
 
 void Pedal::layout(ScoreLayout* layout)
       {
-#if 0
       if (!parent())
             return;
 
+      SLine::layout(layout);
+#if 0
+      if (!parent())
+            return;
       qreal pedalDistance = layout->spatium() * 6;
 
-      SLine::layout(layout);
       Measure* measure = (Measure*)parent();
       System* system   = measure->system();
       SysStaff* sstaff = system->staff(staffIdx());
@@ -126,39 +95,14 @@ void Pedal::layout(ScoreLayout* layout)
       }
 
 //---------------------------------------------------------
-//   bbox
+//   Pedal
 //---------------------------------------------------------
 
-#if 0
-QRectF Pedal::bbox() const
+Pedal::Pedal(Score* s)
+   : SLine(s)
       {
-      const QRectF& rr = symbols[symbol].bbox();
-      double h1 = rr.height() * .5;
-
-      QRectF r(0, 0, 0, 0);
-      for (ciLineSegment i = segments.begin(); i != segments.end(); ++i) {
-            LineSegment* s = (LineSegment*)(&*i);
-            ciLineSegment ii = i;
-            ++ii;
-            QPointF pp1(s->p1);
-            QPointF pp2(s->p2);
-
-            if (i == segments.begin())
-                  pp1 += off1 * _spatium;
-            if (ii == segments.end())
-                  pp2 += off2 * _spatium;
-
-            s->bbox.setCoords(pp1.x(), pp1.y() - h1, pp2.x(), pp2.y() + h1);
-            r |= s->bbox;
-            }
-
-      if (mode != NORMAL) {
-            r |= bbr1;
-            r |= bbr2;
-            }
-      return r;
+      symbol = pedalPedSym;
       }
-#endif
 
 //---------------------------------------------------------
 //   write
@@ -183,3 +127,14 @@ void Pedal::read(QDomNode node)
             }
       }
 
+//---------------------------------------------------------
+//   createSegment
+//---------------------------------------------------------
+
+LineSegment* Pedal::createSegment()
+      {
+      LineSegment* seg = new PedalSegment(score());
+      seg->setParent(this);
+      seg->setStaff(staff());
+      return seg;
+      }

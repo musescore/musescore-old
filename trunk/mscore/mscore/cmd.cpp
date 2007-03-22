@@ -118,6 +118,15 @@ void Score::cmdAdd(Element* e, const QPointF& pos, const QPointF& dragOffset)
       e->setStaff(staff);
       e->setParent(measure);
 
+      // calculate suitable endposition
+      int tick2 = measure->last()->tick();
+      while (tick2 <= tick) {
+            measure = measure->next();
+            if (measure == 0)
+                  break;
+            tick2 = measure->tick();
+            }
+
       switch(e->type()) {
             case VOLTA:
                   break;
@@ -125,41 +134,44 @@ void Score::cmdAdd(Element* e, const QPointF& pos, const QPointF& dragOffset)
                   {
                   Pedal* pedal = (Pedal*)e;
                   pedal->setTick(tick);
-                  pedal->setTick2(tick + measure->tickLen());
+                  pedal->setTick2(tick2);
                   pedal->layout(mainLayout());
-                  QPointF uo(pos - (e->ipos() + e->parent()->canvasPos()) - dragOffset);
-                  pedal->setOff(uo / _spatium);
+                  LineSegment* ls = pedal->lineSegments().front();
+                  QPointF uo(pos - ls->canvasPos() - dragOffset);
+                  ls->setUserOff(uo / _spatium);
                   }
                   break;
             case OTTAVA:
                   {
                   Ottava* ottava = (Ottava*)e;
                   ottava->setTick(tick);
-                  ottava->setTick2(tick + measure->tickLen());
+                  ottava->setTick2(tick2);
                   ottava->layout(mainLayout());
-                  QPointF uo(pos - (e->ipos() + e->parent()->canvasPos()) - dragOffset);
-                  ottava->setOff(uo / _spatium);
+                  LineSegment* ls = ottava->lineSegments().front();
+                  QPointF uo(pos - ls->canvasPos() - dragOffset);
+                  ls->setUserOff(uo / _spatium);
                   }
                   break;
             case TRILL:
                   {
                   Trill* trill = (Trill*)e;
                   trill->setTick(tick);
-                  int lt = measure->last()->tick();
-                  trill->setTick2(lt);
+                  trill->setTick2(tick2);
                   trill->layout(mainLayout());
-                  QPointF uo(pos - (e->ipos() + e->parent()->canvasPos()) - dragOffset);
-                  trill->setOff(uo / _spatium);
+                  LineSegment* ls = trill->lineSegments().front();
+                  QPointF uo(pos - ls->canvasPos() - dragOffset);
+                  ls->setUserOff(uo / _spatium);
                   }
                   break;
             case HAIRPIN:
                   {
                   Hairpin* hairpin = (Hairpin*)e;
                   e->setTick(tick);
-                  hairpin->setTick2(tick + measure->last()->tick());
+                  hairpin->setTick2(tick2);
                   hairpin->layout(mainLayout());
-                  QPointF uo(pos - (e->ipos() + e->parent()->canvasPos()) - dragOffset);
-                  hairpin->setOff(uo / _spatium);
+                  LineSegment* ls = hairpin->lineSegments().front();
+                  QPointF uo(pos - ls->canvasPos() - dragOffset);
+                  ls->setUserOff(uo / _spatium);
                   }
                   break;
             case DYNAMIC:

@@ -248,9 +248,24 @@ void PageListEditor::updateList()
                                     }
                               }
 
-                        ElementList* el = measure->el();
-                        for (iElement ie = el->begin(); ie != el->end(); ++ie)
-                              new ElementItem(mi, *ie);
+                        foreach(Element* e, *measure->el()) {
+                              switch(e->type()) {
+                                    case HAIRPIN:
+                                    case OTTAVA:
+                                    case PEDAL:
+                                    case TRILL:
+                                          {
+                                          ElementList eel;
+                                          ((SLine*)e)->collectElements(eel);
+                                          foreach(Element* e, eel)
+                                                new ElementItem(mi, e);
+                                          }
+                                          break;
+                                    default:
+                                          new ElementItem(mi, e);
+                                          break;
+                                    }
+                              }
 
                         for (Segment* segment = measure->first(); segment; segment = segment->next()) {
                               ElementItem* segItem = new ElementItem(mi, segment);

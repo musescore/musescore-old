@@ -53,6 +53,7 @@ Sym::Sym(const char* name, const QChar& c, int f)
             font.setPointSizeF(8.0 * FMAG);
             }
       _bbox = QFontMetricsF(font, &printer).boundingRect(_code);
+      _width = QFontMetricsF(font, &printer).width(_code);
       }
 
 //---------------------------------------------------------
@@ -78,7 +79,8 @@ const QRectF Sym::bbox() const
 double Sym::width() const
       {
       double m = _spatium / (spatiumBase20 * FMAG * 1200.0);
-      return _bbox.width() * m;
+//      return _bbox.width() * m;
+      return _width * m;
       }
 
 double Sym::height() const

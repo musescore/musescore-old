@@ -30,9 +30,8 @@ class Ottava;
 //---------------------------------------------------------
 
 class OttavaSegment : public LineSegment {
-      mutable qreal textHeight;     ///< cached value
-
    protected:
+
    public:
       OttavaSegment(Score* s) : LineSegment(s) {}
       virtual ElementType type() const { return OTTAVA_SEGMENT; }
@@ -48,7 +47,12 @@ class OttavaSegment : public LineSegment {
 //---------------------------------------------------------
 
 class Ottava : public SLine {
-      QString _text;
+
+   protected:
+      QString text;
+      mutable qreal textHeight;     ///< cached value
+
+      friend class OttavaSegment;
 
    public:
       Ottava(Score* s);
@@ -59,7 +63,6 @@ class Ottava : public SLine {
       virtual void write(Xml&) const;
       virtual void read(QDomNode);
       virtual LineSegment* createSegment();
-      const QString& text() const { return _text; }
       };
 
 #endif

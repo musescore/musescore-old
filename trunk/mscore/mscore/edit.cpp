@@ -950,12 +950,10 @@ void Score::deleteItem(Element* el)
             case COMPOUND:
             case DYNAMIC:
             case SLUR:
-            case HAIRPIN:
             case LYRICS:
             case ATTRIBUTE:
             case BRACKET:
             case VOLTA:
-            case OTTAVA:
             case LAYOUT_BREAK:
             case CLEF:
             case KEYSIG:
@@ -963,6 +961,17 @@ void Score::deleteItem(Element* el)
                   updateAll = true;
                   break;
 
+            case OTTAVA_SEGMENT:
+            case HAIRPIN_SEGMENT:
+            case TRILL_SEGMENT:
+            case PEDAL_SEGMENT:
+                  {
+                  SLine* l = (SLine*)el->parent();
+                  foreach(LineSegment* seg, l->lineSegments())
+                        undoRemoveElement(seg);
+                  undoRemoveElement(l);
+                  }
+                  break;
             case NOTE:
                   {
                   Chord* chord = (Chord*)(el->parent());

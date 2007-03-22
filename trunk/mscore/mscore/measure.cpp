@@ -927,8 +927,6 @@ void Measure::remove(Element* el)
       {
       int staff = _score->staff(el->staff());
 
-// printf("measure %p: remove el %s %p, staff %d\n", this, el->name(), el, staff);
-
       switch(el->type()) {
             case SEGMENT:
                   remove((Segment*)el);

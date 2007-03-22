@@ -30,6 +30,38 @@ static const QChar TC(0xe161);
 static const QChar TLC(0xe16f);
 
 //---------------------------------------------------------
+//   draw
+//---------------------------------------------------------
+
+void TrillSegment::draw(QPainter& p)
+      {
+      QRectF b1 = symbols[trillSym].bbox();
+//      qreal w1  = symbols[trillSym].width();
+      QRectF b2 = symbols[trillelementSym].bbox();
+      qreal w2  = symbols[trillelementSym].width();
+      int n     = lrint((pos2().x() - (b1.width() - b2.x())) / w2);
+
+      symbols[trillSym].draw(p, -b1.x(), 0);
+      symbols[trillelementSym].draw(p, b1.width() - b2.x(), b2.y(), n);
+      LineSegment::draw(p);
+      }
+
+//---------------------------------------------------------
+//   bbox
+//---------------------------------------------------------
+
+QRectF TrillSegment::bbox() const
+      {
+      QRectF rr(symbols[trillSym].bbox());
+      QRectF r(0.0, rr.y(), pos2().x(), rr.height());
+      if (mode != NORMAL) {
+            r |= bbr1;
+            r |= bbr2;
+            }
+      return r;
+      }
+
+//---------------------------------------------------------
 //   Trill
 //---------------------------------------------------------
 
@@ -49,108 +81,15 @@ void Trill::setSubtype(int val)
       }
 
 //---------------------------------------------------------
-//   bbox
-//---------------------------------------------------------
-
-#if 0
-QRectF Trill::bbox() const
-      {
-      QRectF rr(symbols[trillSym].bbox());
-
-      QRectF r(0, 0, 0, 0);
-      for (ciLineSegment i = segments.begin(); i != segments.end(); ++i) {
-            LineSegment* s = (LineSegment*)(&*i);
-            ciLineSegment ii = i;
-            ++ii;
-            QPointF pp1(s->p1);
-            QPointF pp2(s->p2);
-
-            if (i == segments.begin())
-                  pp1 += off1 * _spatium;
-            if (ii == segments.end())
-                  pp2 += off2 * _spatium;
-
-            s->bbox.setRect(pp1.x(), rr.y(), pp2.x() - pp1.x(), rr.height());
-            r |= s->bbox;
-            }
-
-      if (mode != NORMAL) {
-            r |= bbr1;
-            r |= bbr2;
-            }
-      return r;
-      }
-#endif
-
-//---------------------------------------------------------
-//   draw
-//---------------------------------------------------------
-
-void Trill::draw(QPainter& p)
-      {
-#if 0
-      for (ciLineSegment i = segments.begin(); i != segments.end(); ++i) {
-            const LineSegment* s = &*i;
-
-            ciLineSegment ii = i;
-            ++ii;
-            QPointF pp1(s->p1);
-            QPointF pp2(s->p2);
-
-            if (i == segments.begin())
-                  pp1 += off1 * _spatium;
-            if (ii == segments.end())
-                  pp2 += off2 * _spatium;
-
-            if (i == segments.begin()) {
-                  qreal x  = pp1.x();
-                  qreal y  = pp1.y();
-                  QRectF b = symbols[trillSym].bbox();
-                  symbols[trillSym].draw(p, x - b.x(), pp1.y());
-
-                  x += b.width();
-
-                  QRectF b1 = symbols[trillelementSym].bbox();
-                  int n     = lrint((pp2.x() - x) / symbols[trillelementSym].width());
-                  symbols[trillelementSym].draw(p, x + b1.x(), y + b1.y(), n);
-                  }
-            else {
-                  printf("Trill::draw(): ===not impl. segments %zd\n",
-                     segments.size());
-                  }
-            }
-
-      if (mode != NORMAL) {
-            qreal lw = 2.0 / p.matrix().m11();
-            QPen pen(Qt::blue);
-            pen.setWidthF(lw);
-            p.setPen(pen);
-            if (mode == DRAG1) {
-                  p.setBrush(Qt::blue);
-                  p.drawRect(r1);
-                  p.setBrush(Qt::NoBrush);
-                  p.drawRect(r2);
-                  }
-            else {
-                  p.setBrush(Qt::NoBrush);
-                  p.drawRect(r1);
-                  p.setBrush(Qt::blue);
-                  p.drawRect(r2);
-                  }
-            }
-#endif
-      }
-
-//---------------------------------------------------------
 //   layout
 //---------------------------------------------------------
 
 void Trill::layout(ScoreLayout* layout)
       {
-#if 0
+      SLine::layout(layout);
       if (!parent())
             return;
-      SLine::layout(layout);
+#if 0
       qreal trillDistance = _spatium * 2.5;
       Measure* measure = (Measure*)parent();
       System* system   = measure->system();
@@ -182,4 +121,17 @@ void Trill::read(QDomNode node)
                   domError(node);
             }
       }
+
+//---------------------------------------------------------
+//   createSegment
+//---------------------------------------------------------
+
+LineSegment* Trill::createSegment()
+      {
+      TrillSegment* seg = new TrillSegment(score());
+      seg->setParent(this);
+      seg->setStaff(staff());
+      return seg;
+      }
+
 
