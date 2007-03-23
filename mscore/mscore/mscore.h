@@ -257,7 +257,6 @@ class MuseScore : public QMainWindow {
 
    public slots:
       void setCurrentScore(int);
-      void startNoteEntry();
       void showPlayPanel(bool);
       void showPad(bool);
       void showNavigator(bool);

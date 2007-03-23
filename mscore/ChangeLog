@@ -1,4 +1,7 @@
 23.3.7 (ws)
+      - allow for cursor position commands while in note edit mode without
+        leaving mode
+      - fix position of key signature for 8va clefs
       - fix regression for tuplets
 22.3.7 (ws)
       - Reimplemented "line" classes Ottava Pedal Trill and Hairpin.

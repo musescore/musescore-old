@@ -8,6 +8,9 @@ Release 0.5 (svn)
       - extended lyrics
       - subscript and superscript for text
       - irregular measures
+      - more cut&paste and drag&drop operations
+      - better visual feedback for drag&drop
+      - as usual many fixes, enhancements and internal code cleanups
 
 Release 0.4:
       - configurable keyboard short cuts

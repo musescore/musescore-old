@@ -794,12 +794,12 @@ void Cursor::draw(QPainter& p)
       {
       if (!(_on && _blink))
             return;
-
       QPen pen(preferences.selectColor[voice()]);
       pen.setWidthF(2.0 * p.matrix().m11());
       p.setPen(pen);
 
-      p.drawLine(QLineF(0.0, 0.0, 0.0, dlen * _spatium));
+      QPointF pt(pos());
+      p.drawLine(QLineF(pt.x(), pt.y(), pt.x(), pt.y() + dlen * _spatium));
       }
 
 //---------------------------------------------------------

@@ -1008,17 +1008,6 @@ ChordRest* Score::setNoteEntry(bool val, bool step)
       }
 
 //---------------------------------------------------------
-//   startNoteEntry
-//---------------------------------------------------------
-
-void Score::startNoteEntry()
-      {
-      setNoteEntry(true, false);
-      padState.rest = false;
-      endCmd(false);
-      }
-
-//---------------------------------------------------------
 //   midiReceived
 //---------------------------------------------------------
 

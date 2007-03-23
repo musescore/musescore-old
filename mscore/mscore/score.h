@@ -154,6 +154,7 @@ class Score : public QObject {
       void checkUndoOp();
       void pasteStaff(const QMimeData* ms);
       void cmdReplaceElements(Measure* sm, Measure* dm, int staffIdx);
+      void move(const QString& cmd);
 
    public:
       bool undoActive;
@@ -205,7 +206,6 @@ class Score : public QObject {
       void addMetronome();
       void addExpression();
 
-      void startNoteEntry();
       void cmdTuplet(int);
       void midiReceived();
       void resetUserOffsets();
