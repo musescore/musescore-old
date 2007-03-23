@@ -747,7 +747,8 @@ void Score::cmdAddHairpin(bool decrescendo)
             printf("selState != single\n");
             return;
             }
-
+      if (el->type() == NOTE)
+            el = el->parent();
       int tick1 = el->tick();
       int tick2 = tick1 + 4 * division;
       Hairpin* gabel = new Hairpin(this);

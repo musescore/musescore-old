@@ -1,4 +1,5 @@
 23.3.7 (ws)
+      - fix H keyboard shortcut to input hairpin
       - allow for cursor position commands while in note edit mode without
         leaving mode
       - fix position of key signature for 8va clefs
