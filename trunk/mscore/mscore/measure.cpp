@@ -561,8 +561,8 @@ void Measure::layout(ScoreLayout* layout, double width)
                   }
             }
 
-      foreach(Tuplet* tuplet, _tuplets)
-            tuplet->layout(layout);
+//      foreach(Tuplet* tuplet, _tuplets)
+//            tuplet->layout(layout);
 
       if (_noText)
             _noText->layout(layout);
@@ -688,7 +688,9 @@ void Measure::layout2(ScoreLayout* layout)
                         }
                   }
             }
-//      layoutBeams(layout);
+      foreach(Tuplet* tuplet, _tuplets)
+            tuplet->layout(layout);
+
       }
 
 //---------------------------------------------------------

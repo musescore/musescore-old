@@ -1,3 +1,5 @@
+23.3.7 (ws)
+      - fix regression for tuplets
 22.3.7 (ws)
       - Reimplemented "line" classes Ottava Pedal Trill and Hairpin.
         If this Elements span multiple staves, they are split into multiple

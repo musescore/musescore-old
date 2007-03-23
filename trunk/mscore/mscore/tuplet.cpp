@@ -251,7 +251,10 @@ void Tuplet::draw(QPainter& p)
       if (_number) {
             // ? p.setPen(QPen(Qt::NoPen));
             // p.setBrush(_number->selected() ? preferences.selectColor[0] : Qt::black);
+            p.save();
+            p.translate(_number->pos());
             _number->draw(p);
+            p.restore();
             if (_hasLine) {
                   QPen pen(p.pen());
                   pen.setWidthF(_spatium * 0.1);
