@@ -42,8 +42,10 @@ const ClefInfo clefTable[] = {
       ClefInfo("G",   2,  2,  14,  59, "Treble Clef 15va"),
       ClefInfo("G",   2, -1,  -7,  38, "Treble Clef 8va bassa"),
       ClefInfo("F",   4,  0, -12,  33, "Bass Clef (F Clef)"),
+
       ClefInfo("F",   4, -1, -19,  26, "Bass Clef 8va bassa"),
       ClefInfo("F",   4, -2, -26,  19, "Bass Clef 15va bassa"),
+
       ClefInfo("F",   4,  0, -10,  35, "Bass Clef"),
       ClefInfo("F",   4,  0, -14,  31, "Bass Clef"),
       ClefInfo("C",   4,  0,  -1,  -2, "Soprano Clef"),

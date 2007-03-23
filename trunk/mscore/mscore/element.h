@@ -431,9 +431,10 @@ class KeySig : public Element {
       void add(QPainter&, bool, double x, double y);
       void addLayout(bool flat, double x, double y);
 
+      double yoffset() const;
+
    public:
       KeySig(Score*);
-      virtual void setSubtype(int n);
       virtual KeySig* clone() const { return new KeySig(*this); }
       virtual void draw(QPainter&);
       virtual ElementType type() const { return KEYSIG; }
