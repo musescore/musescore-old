@@ -261,7 +261,7 @@ MuseScore::MuseScore()
          << "beam-start" << "beam-mid" << "no-beam" << "beam32"
          << "file-open" << "file-new" << "file-template" << "file-save" << "file-save-as" << "file-close"
          << "export-midi" << "export-xml" << "import-midi" << "import-xml" << "quit"
-         << "toggle-statusbar"
+         << "toggle-statusbar" << "note-input"
          ;
       foreach(const QString s, sl) {
             QAction* a = getAction(s.toLatin1().data());
@@ -480,7 +480,6 @@ MuseScore::MuseScore()
       QMenu* menuNotes = mb->addMenu(tr("Notes"));
 
       a = getAction("note-input");
-      connect(a, SIGNAL(triggered()), SLOT(startNoteEntry()));
       menuNotes->addAction(a);
       menuNotes->addSeparator();
 
@@ -1213,16 +1212,6 @@ void MuseScore::cmdAddPoet()
       {
       if (cs)
             cs->cmdAddPoet();
-      }
-
-//---------------------------------------------------------
-//   startNoteEntry
-//---------------------------------------------------------
-
-void MuseScore::startNoteEntry()
-      {
-      if (cs)
-            cs->startNoteEntry();
       }
 
 //---------------------------------------------------------

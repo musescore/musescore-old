@@ -836,25 +836,16 @@ QRectF Canvas::moveCursor()
       cursor->setOn(true);
       cursor->setTick(tick);
 
-      Measure* measure = _score->tick2measure(tick);
-      if (measure) {
-            Segment* segment;
-            for (segment = measure->first(); segment; segment = segment->next()) {
-                  if (segment->subtype() != Segment::SegChordRest)
-                        continue;
-                  if (segment->tick() == tick)
-                        break;
-                  }
-            if (segment) {
-                  _score->adjustCanvasPosition(segment);
-                  System* system = measure->system();
-                  double x = segment->x() + measure->canvasPos().x();
-                  double y = system->bboxStaff(staff).y() + system->canvasPos().y();
-                  refresh |= cursor->abbox();
-                  cursor->setPos(x - _spatium, y - _spatium);
-                  refresh |= cursor->abbox();
-                  return refresh;
-                  }
+      Segment* segment = _score->tick2segment(tick);
+      if (segment) {
+            _score->adjustCanvasPosition(segment);
+            System* system = segment->measure()->system();
+            double x = segment->canvasPos().x();
+            double y = system->bboxStaff(staff).y() + system->canvasPos().y();
+            refresh |= cursor->abbox();
+            cursor->setPos(x - _spatium, y - _spatium);
+            refresh |= cursor->abbox();
+            return refresh;
             }
       printf("cursor position not found for tick %d\n", tick);
       return refresh;

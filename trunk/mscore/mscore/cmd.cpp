@@ -1095,6 +1095,11 @@ void Score::cmd(const QString& cmd)
             doRedo();
       else if (cmd == "append-measure")
             cmdAppendMeasure();
+      else if (cmd == "note-input") {
+            setNoteEntry(true, false);
+            padState.rest = false;
+            endCmd(false);
+            }
       else {
             startCmd();
             if (cmd == "page-prev")
@@ -1199,62 +1204,12 @@ void Score::cmd(const QString& cmd)
                               }
                         }
                   }
-            else if (cmd == "next-chord") {
-                  if (canvas()->getState() == Canvas::NOTE_ENTRY)
-                        setNoteEntry(false, false);
-                  ChordRest* cr = sel->lastChordRest();
-                  if (cr) {
-                        Element* el = nextChordRest(cr);
-                        if (el) {
-                              if (el->type() == CHORD)
-                                    el = ((Chord*)el)->upNote();
-                              select(el, 0, 0);
-                              adjustCanvasPosition(el);
-                              }
-                        }
-                  }
-            else if (cmd == "prev-chord") {
-                  if (canvas()->getState() == Canvas::NOTE_ENTRY)
-                        setNoteEntry(false, false);
-                  ChordRest* cr = sel->lastChordRest();
-                  if (cr) {
-                        Element* el = prevChordRest(cr);
-                        if (el) {
-                              if (el->type() == CHORD)
-                                    el = ((Chord*)el)->upNote();
-                              select(el, 0, 0);
-                              adjustCanvasPosition(el);
-                              }
-                        }
-                  }
-            else if (cmd == "next-measure") {
-                  if (canvas()->getState() == Canvas::NOTE_ENTRY)
-                        setNoteEntry(false, false);
-                  ChordRest* cr = sel->lastChordRest();
-                  if (cr) {
-                        Element* el = nextMeasure(cr);
-                        if (el) {
-                              if (el->type() == CHORD)
-                                    el = ((Chord*)el)->upNote();
-                              select(el, 0, 0);
-                              adjustCanvasPosition(el);
-                              }
-                        }
-                  }
-            else if (cmd == "prev-measure") {
-                  if (canvas()->getState() == Canvas::NOTE_ENTRY)
-                        setNoteEntry(false, false);
-                  ChordRest* cr = sel->lastChordRest();
-                  if (cr) {
-                        Element* el = prevMeasure(cr);
-                        if (el) {
-                              if (el->type() == CHORD)
-                                    el = ((Chord*)el)->upNote();
-                              select(el, 0, 0);
-                              adjustCanvasPosition(el);
-                              }
-                        }
-                  }
+            else if (cmd == "next-chord"
+               || cmd == "prev-chord"
+               || cmd == "next-measure"
+               || cmd == "prev-measure")
+                  move(cmd);
+
             else if (cmd == "note-c")
                   cmdAddPitch(0, false);
             else if (cmd == "note-d")
@@ -1546,3 +1501,33 @@ void Score::cmdReplaceElements(Measure* sm, Measure* dm, int staffIdx)
             }
       }
 
+//---------------------------------------------------------
+//   move
+//---------------------------------------------------------
+
+void Score::move(const QString& cmd)
+      {
+      ChordRest* cr = sel->lastChordRest();
+      if (cr) {
+            Element* el = 0;
+            if (cmd == "next-chord")
+                  el = nextChordRest(cr);
+            else if (cmd == "prev-chord")
+                  el = prevChordRest(cr);
+            else if (cmd == "next-measure")
+                  el = nextMeasure(cr);
+            else if (cmd == "prev-measure")
+                  el = prevMeasure(cr);
+            if (el) {
+                  int tick = el->tick();
+                  if (el->type() == CHORD)
+                        el = ((Chord*)el)->upNote();
+                  select(el, 0, 0);
+                  adjustCanvasPosition(el);
+                  if (canvas()->getState() == Canvas::NOTE_ENTRY) {
+                        cis->pos = tick;
+                        moveCursor();
+                        }
+                  }
+            }
+      }
