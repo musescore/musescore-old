@@ -303,11 +303,10 @@ void Beam::layout(ScoreLayout* layout)
       int move       = 0;
       int firstMove  = elements.front()->move();
 
-// printf("Layout Beam\n");
       for (iChordRest i = elements.begin(); i != elements.end(); ++i) {
             ChordRest* cr = i->second;
             //
-            // delete stem & flag for this chord
+            // delete stem & hook for this chord
             //
             if (cr->type() == CHORD) {
                   c2 = (Chord*)(cr);

@@ -49,6 +49,10 @@ void OttavaSegment::draw(QPainter& p)
       QPen pen(p.pen());
       pen.setWidthF(ottavaLineWidth);
       pen.setStyle(Qt::DashLine);
+      QVector<qreal> dashes;
+      dashes << _spatium * .5 << _spatium * .5;
+      pen.setDashPattern(dashes);
+
       p.setPen(pen);
       p.drawLine(QLineF(pp1, pp2));
       p.drawLine(QLineF(pp2, QPointF(pp2.x(), h)));

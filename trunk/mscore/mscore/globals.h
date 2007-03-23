@@ -27,6 +27,7 @@ static const qreal PPI  = 72.0;     // printer points per inch
 extern qreal DPI;       // drawing resolution
 extern qreal DPMM;      // dots/mm
 
+// used for stem and slur:
 enum Direction { AUTO, UP, DOWN };
 
 enum Placement {
