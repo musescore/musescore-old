@@ -274,7 +274,7 @@ class Score : public QObject {
       void undoChangeMeasureLen(Measure* m, int tick);
 
       void setNote(int tick, Staff* staff, int voice, int pitch, int len);
-      int clefOffset(int tick, int staffIdx) const;
+      int clefOffset(int tick, Staff*) const;
       Rest* setRest(int tick, int len, Staff*, int voice, Measure*);
       void setRest(int tick, Staff*, int voice, int len);
       Canvas* canvas() const;

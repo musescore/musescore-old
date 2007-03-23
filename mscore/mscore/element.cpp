@@ -640,16 +640,6 @@ KeySig::KeySig(Score* s)
       }
 
 //---------------------------------------------------------
-//   setSubtype
-//---------------------------------------------------------
-
-void KeySig::setSubtype(int st)
-      {
-      Element::setSubtype(st);
-//      layout();
-      }
-
-//---------------------------------------------------------
 //   add
 //---------------------------------------------------------
 
@@ -659,21 +649,32 @@ void KeySig::addLayout(bool flat, double x, double y)
       }
 
 //---------------------------------------------------------
+//   yoffset
+//---------------------------------------------------------
+
+double KeySig::yoffset() const
+      {
+      if (staff()) {
+            int clef       = staff()->clef()->clef(tick());
+            int clefOffset = clefTable[clef].yOffset;
+            while (clefOffset >= 7)
+                  clefOffset -= 7;
+            while (clefOffset < 0)
+                  clefOffset += 7;
+            return double(clefOffset / 2.0);
+            }
+      return .0;
+      }
+
+//---------------------------------------------------------
 //   layout
 //---------------------------------------------------------
 
 void KeySig::layout(ScoreLayout*)
       {
-      double yoff;
-      if (staff()) {
-            int clef       = staff()->clef()->clef(tick());
-            int clefOffset = clefTable[clef].yOffset;
-            yoff = double(-((clefOffset % 10) / 2.0));
-            }
-      else
-            yoff = 0.0;
-
+      double yoff = yoffset();
       _bbox = QRectF(0, 0, 0, 0);
+
       switch(subtype()) {
             case 7:     addLayout(false, 6.0, yoff + 2);
             case 6:     addLayout(false, 5.0, yoff + .5);
@@ -711,14 +712,7 @@ void KeySig::add(QPainter& p, bool flat, double x, double y)
 
 void KeySig::draw(QPainter& p)
       {
-      double yoff;
-      if (staff()) {
-            int clef       = staff()->clef()->clef(tick());
-            int clefOffset = clefTable[clef].yOffset;
-            yoff = double(-((clefOffset % 10) / 2.0));
-            }
-      else
-            yoff = 0.0;
+      double yoff = yoffset();
 
       switch(subtype()) {
             case 7:     add(p, false, 6.0, yoff + 2);

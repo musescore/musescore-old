@@ -115,9 +115,9 @@ Element* Score::searchNote(int tick, int staff) const
 //   clefOffset
 //---------------------------------------------------------
 
-int Score::clefOffset(int tick, int staffIdx) const
+int Score::clefOffset(int tick, Staff* staff) const
       {
-      return clefTable[staff(staffIdx)->clef()->clef(tick)].yOffset;
+      return clefTable[staff->clef()->clef(tick)].yOffset;
       }
 
 //---------------------------------------------------------

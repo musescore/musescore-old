@@ -165,27 +165,20 @@ Note* Score::downAltCtrl(Note* note) const
 //    element - current element
 //---------------------------------------------------------
 
-ChordRest* Score::nextChordRest(ChordRest* element)
+ChordRest* Score::nextChordRest(ChordRest* cr)
       {
-      if (!element)
+      if (!cr)
             return 0;
-      Element* pel = (ChordRest*)element;
-      Segment* seg = element->segment();
-
-      int staff = element->staffIdx();
-      int strack = staff * VOICES;
-      int etrack = strack + VOICES;
+      Segment* seg = cr->segment();
+      int track = cr->staffIdx() * VOICES + cr->voice();
 
       for (;;) {
             seg = seg->next1();
             if (!seg)
                   break;
-            for (int track = strack; track < etrack; ++track) {
-                  pel = seg->element(track);
-                  if (pel && pel->isChordRest()) {
-                        return (ChordRest*) pel;
-                        }
-                  }
+            Element* e = seg->element(track);
+            if (e && e->isChordRest())
+                  return (ChordRest*) e;
             }
       return 0;
       }
@@ -195,31 +188,20 @@ ChordRest* Score::nextChordRest(ChordRest* element)
 //    return previous Chord or Rest
 //---------------------------------------------------------
 
-ChordRest* Score::prevChordRest(ChordRest* element)
+ChordRest* Score::prevChordRest(ChordRest* cr)
       {
-      if (!element)
+      if (!cr)
             return 0;
+      Segment* seg = cr->segment();
+      int track = cr->staffIdx() * VOICES + cr->voice();
 
-      Measure* measure = element->measure();
-      Segment* seg     = element->segment();
-      int staff        = element->staffIdx();
-
-      seg = seg->prev();
       for (;;) {
-            while (seg) {
-                  int strack = staff * VOICES;
-                  int etrack = strack + VOICES;
-                  for (int track = strack; track < etrack; ++track) {
-                        Element* el = seg->element(track);
-                        if (el && el->isChordRest())
-                              return (ChordRest*) el;
-                        }
-                  seg = seg->prev();
-                  }
-            measure = measure->prev();
-            if (measure == 0)
+            seg = seg->prev1();
+            if (!seg)
                   break;
-            seg = measure->last();
+            Element* e = seg->element(track);
+            if (e && e->isChordRest())
+                  return (ChordRest*) e;
             }
       return 0;
       }

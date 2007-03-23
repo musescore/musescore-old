@@ -171,7 +171,7 @@ void Note::changeAccidental(int pre)
                               Note* note  = in->second;
                               int nPrefix = Accidental::subtype2value(note->accidentalIdx());
                               if (nPrefix) {
-                                    int offset   = score()->clefOffset(tick, staffIdx());
+                                    int offset   = score()->clefOffset(tick, staff());
                                     int line     = note->line();
                                     int l1       = 45 - line + offset;
                                     tversatz[l1] = nPrefix;
@@ -208,7 +208,7 @@ void Note::changeAccidental(int pre)
           };
 
       int tick      = chord()->tick();
-      int offset    = score()->clefOffset(tick, staffIdx());
+      int offset    = score()->clefOffset(tick, staff());
       int l1        = 45 - _line + offset;
       int curOffset = tversatz[l1];
       int key       = staff()->keymap()->key(tick);
