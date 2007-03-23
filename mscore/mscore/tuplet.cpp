@@ -105,8 +105,13 @@ void Tuplet::layout(ScoreLayout* layout)
       int up = 1;
       for (iChordRest i = _elements.begin(); i != _elements.end(); ++i) {
             ChordRest* cr = i->second;
-            if (cr->type() == CHORD)
-                  up += (cr->isUp() ? +1 : -1);
+            if (cr->type() == CHORD) {
+                  Chord* c = (Chord*) cr;
+                  if (c->stemDirection() != AUTO)
+                        up += c->stemDirection() == UP ? 1000 : -1000;
+                  else
+                        up += c->isUp() ? 1 : -1;
+                  }
             }
       bool isUp = up > 0;
 
