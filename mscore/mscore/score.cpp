@@ -808,13 +808,9 @@ void Score::startEdit(Element* element)
       else {
             origEditObject = element;
             editObject     = element->clone();
-
-            removeElement(element);
-            element->resetMode();
-
+            origEditObject->resetMode();
             select(editObject, 0, 0);
-            undoOp(UndoOp::RemoveElement, origEditObject);
-            undoAddElement(editObject);
+            undoChangeElement(origEditObject, editObject);
             }
       updateAll = true;
       endCmd(false);
@@ -887,10 +883,7 @@ void Score::startDrag()
       {
       origDragObject  = _dragObject;
       _dragObject     = _dragObject->clone();
-      undoOp(UndoOp::RemoveElement, origDragObject);
-      removeElement(origDragObject);
-
-      undoAddElement(_dragObject);
+      undoChangeElement(origDragObject, _dragObject);
       sel->clear();
       sel->add(_dragObject);
       }

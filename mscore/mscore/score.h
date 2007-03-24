@@ -272,6 +272,7 @@ class Score : public QObject {
       void undoAddElement(Element* element);
       void undoRemoveElement(Element* element);
       void undoChangeMeasureLen(Measure* m, int tick);
+      void undoChangeElement(Element* oldElement, Element* newElement);
 
       void setNote(int tick, Staff* staff, int voice, int pitch, int len);
       int clefOffset(int tick, Staff*) const;

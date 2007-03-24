@@ -70,9 +70,12 @@ struct UndoOp {
             ChangeClef,
             ChangeSig,
             ChangeMeasureLen,
+            ChangeElement,
             };
       UndoType type;
       Element* obj;
+      Element* obj2;
+
       Part* part;
       Staff* staff;
       MStaff mstaff;

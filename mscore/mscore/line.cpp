@@ -115,21 +115,25 @@ bool LineSegment::startEditDrag(Viewer* viewer, const QPointF& p)
 //   editDrag
 //---------------------------------------------------------
 
-bool LineSegment::editDrag(Viewer* viewer, QPointF*, const QPointF& d)
+bool LineSegment::editDrag(Viewer* viewer, QPointF* start, const QPointF& d)
       {
+      QPointF aapos(*start + d);
       QPointF delta(d.x(), 0);    // only x-axis move
+      int tick;
+      QPointF anchor;
+      score()->pos2TickAnchor(aapos, staff(), &tick, &anchor);
+
       if (mode == DRAG1) {
             r2.translate(-delta);
             bbr2.translate(-delta);
 
-            int tick;
-            QPointF anchor;
-            QPointF apos2(canvasPos2());
             QPointF apos(canvasPos() + delta);
-            score()->pos2TickAnchor(apos, staff(), &tick, &anchor);
             viewer->setDropAnchor(QLineF(anchor, apos));
+
             if (_segmentType == SEGMENT_SINGLE || _segmentType == SEGMENT_BEGIN)
                   line()->setTick(tick);
+
+            QPointF apos2(canvasPos2());
             setUserXoffset((apos.x() - anchor.x()) / _spatium);
             setXpos(anchor.x() - parent()->canvasPos().x());
 
@@ -141,13 +145,12 @@ bool LineSegment::editDrag(Viewer* viewer, QPointF*, const QPointF& d)
             r2.translate(delta);
             bbr2.translate(delta);
 
-            int tick;
-            QPointF anchor;
             QPointF apos(canvasPos2() + delta);
-            score()->pos2TickAnchor(apos, staff(), &tick, &anchor);
             viewer->setDropAnchor(QLineF(anchor, apos));;
+
             if (_segmentType == SEGMENT_SINGLE || _segmentType == SEGMENT_END)
                   line()->setTick2(tick);
+
             setUserXoffset2((apos.x() - anchor.x()) / _spatium);
             setXpos2(anchor.x() - canvasPos().x());
             }
@@ -195,14 +198,6 @@ bool LineSegment::edit(QKeyEvent* ev)
       }
 
 //---------------------------------------------------------
-//   endDrag
-//---------------------------------------------------------
-
-void LineSegment::endDrag()
-      {
-      }
-
-//---------------------------------------------------------
 //   endEditDrag
 //---------------------------------------------------------
 
@@ -219,6 +214,28 @@ bool LineSegment::endEditDrag()
 void LineSegment::endEdit()
       {
       mode = NORMAL;
+      }
+
+//---------------------------------------------------------
+//   drag
+//---------------------------------------------------------
+
+QRectF LineSegment::drag(const QPointF& s)
+      {
+      QRectF r(abbox());
+      QPointF newOffset(s / _spatium);
+      QPointF diff(userOff() - newOffset);
+      setUserOff(newOffset);
+      setUserXoffset2(userOff2().x() - diff.x());
+      return abbox() | r;
+      }
+
+//---------------------------------------------------------
+//   endDrag
+//---------------------------------------------------------
+
+void LineSegment::endDrag()
+      {
       }
 
 //---------------------------------------------------------
@@ -283,6 +300,7 @@ void SLine::layout(ScoreLayout* layout)
                   break;
             }
       if (segmentsNeeded != segments.size()) {
+printf("segments needed %d  but there are %d\n", segmentsNeeded, segments.size());
             // if line break changes do a complete re-layout;
             // this especially removes all user editing
 
@@ -292,18 +310,6 @@ void SLine::layout(ScoreLayout* layout)
             segments.clear();
             }
 
-//DEBUG:
-// TODO: support more than one segment
-
-      int seg = 0;
-      if (seg >= segments.size())
-            segments.append(createSegment());
-      LineSegment* hps = segments[seg];
-      hps->setPos(p1);
-      QPointF p2 = seg2->canvasPos() - hps->canvasPos();
-      hps->setXpos2(p2.x());
-
-#if 0
       int seg = 0;
       for (; is != layout->systems()->end(); ++is, ++seg) {
             if (seg >= segments.size()) {
@@ -315,20 +321,34 @@ void SLine::layout(ScoreLayout* layout)
                   hps->setPos(p1);
                   }
             else {
-printf("TEST2\n");
-//TODO                  hps->setPos((*is)->pos() /* + m->pos()*/ - ppos);
+                  hps->setPos((*is)->canvasPos() - parent()->canvasPos());
                   }
             if (*is == system2) {
-                  hps->setPos2(p2);
+                  QPointF p2 = seg2->canvasPos() - hps->canvasPos();
+                  hps->setXpos2(p2.x());
                   break;
                   }
-printf("TEST1\n");
-//TODO            hps->setPos2((*is)->pos() + QPointF((*is)->bbox().width() - _spatium * 0.5, 0) - ppos);
+            hps->setXpos2((*is)->canvasPos().x()
+               + (*is)->bbox().width()
+               - _spatium * 0.5
+               - hps->canvasPos().x()
+               );
             }
-#endif
 
-      foreach(LineSegment* seg, segments)
+      int idx = 0;
+      int n = segments.size();
+      foreach(LineSegment* seg, segments) {
+            ++idx;
+            if (n == 1)
+                  seg->setSegmentType(LineSegment::SEGMENT_SINGLE);
+            else if (idx == 1)
+                  seg->setSegmentType(LineSegment::SEGMENT_BEGIN);
+            else if (idx == n)
+                  seg->setSegmentType(LineSegment::SEGMENT_END);
+            else
+                  seg->setSegmentType(LineSegment::SEGMENT_MIDDLE);
             seg->layout(layout);
+            }
       }
 
 //---------------------------------------------------------
@@ -443,7 +463,6 @@ void SLine::collectElements(QList<Element*>& el)
 
 void SLine::add(Element* e)
       {
-      //TODO multi segment
       segments.append((LineSegment*) e);
       }
 
@@ -453,8 +472,24 @@ void SLine::add(Element* e)
 
 void SLine::remove(Element*)
       {
-      //TODO multi segment
+      printf("SLine::remove=========\n");
       segments.clear();
+      }
+
+//---------------------------------------------------------
+//   change
+//---------------------------------------------------------
+
+void SLine::change(Element* os, Element* ns)
+      {
+      int n = segments.size();
+      for (int i = 0; i < n; ++i) {
+            if (segments[i] == os) {
+                  segments[i] = (LineSegment*)ns;
+                  return;
+                  }
+            }
+      printf("SLine::change: segment not found\n");
       }
 
 //---------------------------------------------------------
