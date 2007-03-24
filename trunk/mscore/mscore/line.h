@@ -51,11 +51,12 @@ class LineSegment : public Element {
       int mode;
 
       virtual bool isMovable() const { return true; }
+      virtual QRectF drag(const QPointF& s);
       virtual void endDrag();
       virtual bool startEdit(QMatrix&, const QPointF&);
+      virtual bool edit(QKeyEvent*);
       virtual bool startEditDrag(Viewer*, const QPointF&);
       virtual bool editDrag(Viewer*, QPointF*, const QPointF&);
-      virtual bool edit(QKeyEvent*);
       virtual bool endEditDrag();
       virtual void endEdit();
 
@@ -97,6 +98,7 @@ class SLine : public Element {
       void collectElements(QList<Element*>& el);
       virtual void add(Element*);
       virtual void remove(Element*);
+      virtual void change(Element* o, Element* n);
       virtual QRectF bbox() const;
       QList<LineSegment*> lineSegments() { return segments; }
       };

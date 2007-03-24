@@ -205,6 +205,10 @@ class Element {
 
       virtual void add(Element*)    {}
       virtual void remove(Element*) {}
+      virtual void change(Element* o, Element* n) {
+            remove(o);
+            add(n);
+            }
 
       virtual void layout(ScoreLayout*) {}
       virtual void resetMode() {}

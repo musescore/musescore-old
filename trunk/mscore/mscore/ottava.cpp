@@ -35,15 +35,19 @@ void OttavaSegment::draw(QPainter& p)
       qreal ottavaLineWidth    = _spatium * .18;
       qreal ottavaTextDistance = _spatium * .5;
 
-      QPointF pp2(_p2);
+      QPointF pp2(pos2());
 
       QFont f(textStyles[TEXT_STYLE_DYNAMICS].font());
       p.setFont(f);
       QFontMetricsF fm(f);
-      QRectF bb(fm.boundingRect(ottava()->text));
-
+      QString txt;
+      if (_segmentType == SEGMENT_SINGLE || _segmentType == SEGMENT_BEGIN)
+            txt = ottava()->text;
+      else
+            txt = QString("(%1)").arg(ottava()->text);
+      QRectF bb(fm.boundingRect(txt));
       qreal h = ottava()->textHeight;
-      p.drawText(QPointF(0.0, h), ottava()->text);
+      p.drawText(QPointF(0.0, h), txt);
       QPointF pp1(bb.width() + ottavaTextDistance, 0.0);
 
       QPen pen(p.pen());
@@ -55,7 +59,8 @@ void OttavaSegment::draw(QPainter& p)
 
       p.setPen(pen);
       p.drawLine(QLineF(pp1, pp2));
-      p.drawLine(QLineF(pp2, QPointF(pp2.x(), h)));
+      if (_segmentType == SEGMENT_SINGLE || _segmentType == SEGMENT_END)
+            p.drawLine(QLineF(pp2, QPointF(pp2.x(), h)));
       LineSegment::draw(p);
       }
 
@@ -120,7 +125,7 @@ void Ottava::layout(ScoreLayout* layout)
       double _spatium = layout->spatium();
       SLine::layout(layout);
 
-      qreal ottavaDistance = _spatium * 2.5;
+      qreal ottavaDistance = _spatium * 3.5;
       qreal y = 0.0;
       if (parent()) {
             Measure* measure = (Measure*)parent();

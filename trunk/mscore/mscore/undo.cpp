@@ -70,6 +70,7 @@ static const char* undoName[] = {
       "ChangeClef",
       "ChangeSig",
       "ChangeMeasureLen",
+      "ChangeElement"
       };
 
 static bool UNDO = false;
@@ -359,6 +360,17 @@ void Score::processUndoOp(UndoOp* i, bool undo)
                   i->val1 = st;
                   }
                   break;
+
+            case UndoOp::ChangeElement:
+                  i->obj->parent()->change(i->obj, i->obj2);
+                  {
+                  // swap
+                  Element* e = i->obj;
+                  i->obj = i->obj2;
+                  i->obj2 = e;
+                  }
+                  break;
+
             case UndoOp::ChangeTimeSig:
                   printf("UndoOp::ChangeTimeSig: todo\n");
                   break;
@@ -564,6 +576,21 @@ void Score::undoChangeMeasureLen(Measure* m, int tick)
       i.type     = UndoOp::ChangeMeasureLen;
       i.measure  = m;
       i.val1     = tick;
+      processUndoOp(&i, false);
+      undoList.back()->push_back(i);
+      }
+
+//---------------------------------------------------------
+//   undoChangeElement
+//---------------------------------------------------------
+
+void Score::undoChangeElement(Element* oldElement, Element* newElement)
+      {
+      checkUndoOp();
+      UndoOp i;
+      i.type     = UndoOp::ChangeElement;
+      i.obj      = oldElement;
+      i.obj2     = newElement;
       processUndoOp(&i, false);
       undoList.back()->push_back(i);
       }
