@@ -1507,7 +1507,7 @@ void ExportMusicXml::chord(Chord* chord, int staff, const LyricsList* ll)
 
       for (iNote i = nl->begin(); i != nl->end(); ++i) {
             QString val;
-            Note* note = *i;
+            Note* note = i->second;
 
             attr.doAttr(xml, false);
             xml.stag("note");

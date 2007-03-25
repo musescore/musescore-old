@@ -103,19 +103,15 @@ void Ottava::setSubtype(int val)
       switch(val) {
             case 0:
                   text = "8va";
-                  shift = 12;
                   break;
             case 1:
-                  text = "15ma";
-                  shift = 24;
+                  text = "15va";
                   break;
             case 2:
                   text = "8vb";
-                  shift = -12;
                   break;
             case 3:
-                  text = "15mb";
-                  shift = -24;
+                  text = "15vb";
                   break;
             }
       }

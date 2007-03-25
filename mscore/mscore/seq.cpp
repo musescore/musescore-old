@@ -602,7 +602,7 @@ void Seq::collectEvents()
                                     NoteList* nl = chord->noteList();
 
                                     for (iNote in = nl->begin(); in != nl->end(); ++in) {
-                                          Note* note = *in;
+                                          Note* note = in->second;
                                           if (note->tieBack())
                                                 continue;
                                           unsigned len = 0;

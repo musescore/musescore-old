@@ -65,9 +65,18 @@ class Stem : public Element {
  Used by Chord to store its notes.
 */
 
-typedef QList<Note*> NoteList;
+class NoteList : public std::multimap <const int, Note*> {
+   public:
+      NoteList::iterator add(Note* n);
+      Note* front() const { return (begin() != end()) ? begin()->second : 0;  }
+      Note* back()  const { return (begin() != end()) ? rbegin()->second : 0; }
+      Note* find(int pitch) const;
+      };
+
 typedef NoteList::iterator iNote;
+typedef NoteList::reverse_iterator riNote;
 typedef NoteList::const_iterator ciNote;
+typedef NoteList::const_reverse_iterator criNote;
 
 //---------------------------------------------------------
 //   HelpLine
@@ -99,7 +108,7 @@ typedef QList<HelpLine*>::const_iterator ciHelpLine;
 */
 
 class Chord : public ChordRest {
-      QList<Note*> notes;
+      NoteList notes;
       QList<HelpLine*> helpLines;
       Stem* _stem;
       Hook* _hook;
@@ -137,14 +146,13 @@ class Chord : public ChordRest {
       QList<HelpLine*>* getHelpLines() { return &helpLines; }
 
       virtual void layoutStem(ScoreLayout*);
-      QList<Note*>* noteList()               { return &notes; }
-      const QList<Note*>* noteList() const   { return &notes; }
+      NoteList* noteList()                   { return &notes; }
+      const NoteList* noteList() const       { return &notes; }
       const Note* upNote() const             { return notes.back(); }
       const Note* downNote() const           { return notes.front(); }
       Note* upNote()                         { return notes.back(); }
       Note* downNote()                       { return notes.front(); }
       virtual int move() const;
-      void sortNotes();
 
       QList<HelpLine*>* helpLineList() { return &helpLines; }
 

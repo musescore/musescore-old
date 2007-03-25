@@ -1494,7 +1494,7 @@ void Score::cmdReplaceElements(Measure* sm, Measure* dm, int staffIdx)
                         Chord* c = (Chord*)e;
                         NoteList* nl = c->noteList();
                         for (iNote in = nl->begin(); in != nl->end(); ++in) {
-                              select(*in, Qt::ShiftModifier, 0);
+                              select(in->second, Qt::ShiftModifier, 0);
                               }
                         }
                   }

@@ -166,8 +166,9 @@ QPointF Chord::stemPos(bool upFlag, bool top) const
 void Chord::setSelected(bool f)
       {
       Element::setSelected(f);
-      foreach(Note* n, notes)
-            n->setSelected(f);
+      NoteList* nl = noteList();
+      for (iNote in = nl->begin(); in != nl->end(); ++in)
+            in->second->setSelected(f);
       }
 
 //---------------------------------------------------------
@@ -179,10 +180,8 @@ void Chord::add(Element* e)
       e->setVoice(voice());
       e->setParent(this);
       e->setStaff(staff());
-      if (e->type() == NOTE) {
-            notes.append((Note*)e);
-            qSort(notes.begin(), notes.end(), notesPitchCompare);
-            }
+      if (e->type() == NOTE)
+            notes.add((Note*)e);
       else if (e->type() == ATTRIBUTE)
             attributes.push_back((NoteAttribute*)e);
       }
@@ -194,13 +193,15 @@ void Chord::add(Element* e)
 void Chord::remove(Element* e)
       {
       if (e->type() == NOTE) {
-            int idx = notes.indexOf((Note*)e);
-            if (idx == -1)
-                  printf("Chord::remove() note %p not found!\n", e);
-            else {
-                  notes.removeAt(idx);
-                  qSort(notes.begin(), notes.end(), notesPitchCompare);
+            iNote i = notes.begin();
+            for (; i != notes.end(); ++i) {
+                  if (i->second == e) {
+                        notes.erase(i);
+                        break;
+                        }
                   }
+            if (i == notes.end())
+                  printf("Chord::remove() note %p not found!\n", e);
             }
       else if (e->type() == ATTRIBUTE) {
             int idx = attributes.indexOf((NoteAttribute*)e);
@@ -235,8 +236,8 @@ void drawPosMark(QPainter& painter, const QPointF& p)
 
 void Chord::draw(QPainter& p)
       {
-      foreach(Note* n, notes)
-            n->draw(p);
+      for (ciNote i = notes.begin(); i != notes.end(); ++i)
+            i->second->draw(p);
       for (ciHelpLine l = helpLines.begin(); l != helpLines.end(); ++l)
             (*l)->draw(p);
       for (ciAttribute l = attributes.begin(); l != attributes.end(); ++l)
@@ -249,14 +250,13 @@ void Chord::draw(QPainter& p)
 
 //---------------------------------------------------------
 //   bbox
-//    CHECK: is this function needed?
 //---------------------------------------------------------
 
 QRectF Chord::bbox() const
       {
       QRectF _bbox;
-      foreach(const Note* n, notes)
-            _bbox |= n->bbox().translated(n->pos());
+      for (ciNote i = notes.begin(); i != notes.end(); ++i)
+            _bbox |= i->second->bbox().translated(i->second->pos());
       for (ciHelpLine i = helpLines.begin(); i != helpLines.end(); ++i)
             _bbox |= (*i)->bbox().translated((*i)->pos());
       for (ciAttribute i = attributes.begin(); i != attributes.end(); ++i)
@@ -375,7 +375,7 @@ void Chord::addHelpLine(double x, double y, int i)
       // Experimental:
       //
       for (iNote in = notes.begin(); in != notes.end(); ++in) {
-            Note* n = *in;
+            Note* n = in->second;
             if (n->line() >= (i-1) && n->line() <= (i+1) && n->accidental()) {
                   ho = _spatium * .25;
                   h->setLen(h->len() - Spatium(.25));
@@ -410,7 +410,7 @@ void Chord::layout(ScoreLayout* layout)
 
       System* s = segment()->measure()->system();
       for (iNote in = notes.begin(); in != notes.end(); ++in) {
-            Note* note = *in;
+            Note* note = in->second;
             double x = 0;
 
             int move = note->move();
@@ -420,7 +420,7 @@ void Chord::layout(ScoreLayout* layout)
                   maxMove = move;
             double y = s->staff(staffIdx() + move)->bbox().y();
             y        -= s->staff(staffIdx())->bbox().y();
-            y        += (*in)->line() * _spatium * .5;
+            y        += in->second->line() * _spatium * .5;
 
             if (note->mirror())
                   x += up ? headWidth : - headWidth;
@@ -454,11 +454,11 @@ void Chord::layout(ScoreLayout* layout)
             uppos   = 1000;
             downpos = -1000;
             for (iNote in = notes.begin(); in != notes.end(); ++in) {
-                  if ((*in)->move() == -1) {
-                        if ((*in)->line() < uppos)
-                              uppos = (*in)->line();
-                        if ((*in)->line() > downpos)
-                              downpos = (*in)->line();
+                  if (in->second->move() == -1) {
+                        if (in->second->line() < uppos)
+                              uppos = in->second->line();
+                        if (in->second->line() > downpos)
+                              downpos = in->second->line();
                         }
                   }
             if (uppos < 0 || downpos >= 10) {
@@ -478,11 +478,11 @@ void Chord::layout(ScoreLayout* layout)
       uppos   = 1000;
       downpos = -1000;
       for (iNote in = notes.begin(); in != notes.end(); ++in) {
-            if ((*in)->move() == 0) {
-                  if ((*in)->line() < uppos)
-                        uppos = (*in)->line();
-                  if ((*in)->line() > downpos)
-                        downpos = (*in)->line();
+            if (in->second->move() == 0) {
+                  if (in->second->line() < uppos)
+                        uppos = in->second->line();
+                  if (in->second->line() > downpos)
+                        downpos = in->second->line();
                   }
             }
       if (uppos < 0 || downpos >= 10) {
@@ -506,11 +506,11 @@ void Chord::layout(ScoreLayout* layout)
             uppos   = 1000;
             downpos = -1000;
             for (iNote in = notes.begin(); in != notes.end(); ++in) {
-                  if ((*in)->move() == 1) {
-                        if ((*in)->line() < uppos)
-                              uppos = (*in)->line();
-                        if ((*in)->line() > downpos)
-                              downpos = (*in)->line();
+                  if (in->second->move() == 1) {
+                        if (in->second->line() < uppos)
+                              uppos = in->second->line();
+                        if (in->second->line() > downpos)
+                              downpos = in->second->line();
                         }
                   }
             if (uppos < 0 || downpos >= 10) {
@@ -556,7 +556,7 @@ void Chord::layout(ScoreLayout* layout)
       //-----------------------------------------
 
       for (iNote in = notes.begin(); in != notes.end(); ++in) {
-            Note* note = *in;
+            Note* note = in->second;
             QList<Text*>& fingering = note->fingering();
             double x = _spatium * 0.8 + note->headWidth();
             foreach(Text* f, fingering) {
@@ -613,7 +613,7 @@ void Chord::computeUp()
             return;
             }
 
-      Note* upnote = upNote();
+      Note* upnote = notes.rbegin()->second;
       if (notes.size() == 1) {
             if (upnote->move() > 0)
                   _up = true;
@@ -623,13 +623,13 @@ void Chord::computeUp()
                   _up = upnote->line() > 4;
             return;
             }
-      Note* downnote = downNote();
+      Note* downnote = notes.begin()->second;
       int ud = upnote->line() - 4;
       int dd = downnote->line() - 4;
       if (-ud == dd) {
             int up = 0;
             for (ciNote in = notes.begin(); in != notes.end(); ++in) {
-                  int l = (*in)->line();
+                  int l = in->second->line();
                   if (l <= 4)
                         --up;
                   else
@@ -648,7 +648,7 @@ int Chord::move() const
       {
       int move = notes.front()->move();
       for (ciNote in = notes.begin(); in != notes.end(); ++in) {
-            if ((*in)->move() != move)
+            if (in->second->move() != move)
                   return 0;
             }
       return move;
@@ -662,10 +662,10 @@ Note* Chord::selectedNote() const
       {
       Note* note = 0;
       for (ciNote in = notes.begin(); in != notes.end(); ++in) {
-            if ((*in)->selected()) {
+            if (in->second->selected()) {
                   if (note)
                         return 0;
-                  note = *in;
+                  note = in->second;
                   }
             }
       return note;
@@ -687,7 +687,7 @@ void Chord::write(Xml& xml) const
             case AUTO: break;
             }
       for (ciNote in = notes.begin(); in != notes.end(); ++in)
-            (*in)->write(xml);
+            in->second->write(xml);
       xml.etag("Chord");
       }
 
@@ -711,9 +711,9 @@ void Chord::read(QDomNode node, int staffIdx)
                   note->setGrace(_grace);
                   note->setStaff(staff());
                   note->setVoice(voice());
-                  note->setHead(tickLen());
+note->setHead(tickLen());
                   note->read(node);
-                  notes.append(note);
+                  notes.add(note);
                   }
             else if (tag == "GraceNote")
                   _grace = i;
@@ -733,7 +733,6 @@ void Chord::read(QDomNode node, int staffIdx)
             else
                   domError(node);
             }
-      qSort(notes.begin(), notes.end(), notesPitchCompare);
       }
 
 //---------------------------------------------------------
@@ -756,7 +755,7 @@ void Chord::space(double& min, double& extra) const
       double hw     = 0.0;
 
       for (ciNote i = notes.begin(); i != notes.end(); ++i) {
-            Note* note = *i;
+            Note* note = i->second;
             double lhw = note->headWidth();
             if (lhw > hw)
                   hw = lhw;
@@ -791,13 +790,11 @@ void Chord::space(double& min, double& extra) const
 //   find
 //---------------------------------------------------------
 
-#if 0
 Note* NoteList::find(int pitch) const
       {
-      foreach(Note* n, notes) {
-            if (n->pitch() == pitch)
-                  return n;
-            }
+      ciNote i = std::multimap<const int, Note*>::find(pitch);
+      if (i != end())
+            return i->second;
       return 0;
       }
 
@@ -805,12 +802,10 @@ Note* NoteList::find(int pitch) const
 //   add
 //---------------------------------------------------------
 
-void NoteList::add(Note* n)
+NoteList::iterator NoteList::add(Note* n)
       {
-      notes.append(n);
-      qSort(notes.begin(), notes.end(), notesPitchCompare);
+      return std::multimap<const int, Note*>::insert(std::pair<const int, Note*> (n->pitch(), n));
       }
-#endif
 
 //---------------------------------------------------------
 //   upPos
@@ -850,14 +845,5 @@ qreal Chord::centerX() const
             x += downnote->headWidth() * .5;
             }
       return x;
-      }
-
-//---------------------------------------------------------
-//   sortNotes
-//---------------------------------------------------------
-
-void Chord::sortNotes()
-      {
-      qSort(notes.begin(), notes.end(), notesPitchCompare);
       }
 
