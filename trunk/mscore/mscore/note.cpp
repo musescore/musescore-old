@@ -131,7 +131,7 @@ void Note::changePitch(int n)
       {
       setPitch(n);
       _userAccidental = -1;
-//      chord()->measure()->layoutNoteHeads(staffIdx());
+      chord()->sortNotes();
       }
 
 //---------------------------------------------------------
@@ -168,7 +168,7 @@ void Note::changeAccidental(int pre)
                         NoteList* nl = ((Chord*)e)->noteList();
                         int tick     = ((Chord*)e)->tick();
                         for (iNote in = nl->begin(); in != nl->end(); ++in) {
-                              Note* note  = in->second;
+                              Note* note  = *in;
                               int nPrefix = Accidental::subtype2value(note->accidentalIdx());
                               if (nPrefix) {
                                     int offset   = score()->clefOffset(tick, staff());

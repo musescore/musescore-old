@@ -51,7 +51,7 @@ Note* Score::upAlt(Element* element)
             // find segment
             Chord* chord     = ((Note*) element)->chord();
             Segment* segment = chord->segment();
-
+#if 0 //TODOA
             // collect all notes for this segment in noteList:
             NoteList rnl;
             iNote inote = rnl.end();
@@ -61,9 +61,10 @@ Note* Score::upAlt(Element* element)
                   if (!el || el->type() != CHORD)
                         continue;
                   NoteList* nl = ((Chord*)el)->noteList();
-                  for (riNote in   = nl->rbegin(); in != nl->rend(); ++in) {
-                        Note* note = in->second;
-                        iNote ii = rnl.add(note);
+                  int n = nl->size() - 1;
+                  for (int i = n; n >= 0; --n) {
+                        Note* note = nl->at(i);
+                        rnl.add(note);
                         if (note == element) {
                               inote = ii;
                               }
@@ -74,6 +75,7 @@ Note* Score::upAlt(Element* element)
                   if (inote != rnl.end())
                         re = inote->second;
                   }
+#endif
             }
       if (re == 0)
             return 0;
@@ -90,8 +92,7 @@ Note* Score::upAlt(Element* element)
 Note* Score::upAltCtrl(Note* note) const
       {
       Chord* chord = note->chord();
-      NoteList* nl  = chord->noteList();
-      return nl->rbegin()->second;
+      return chord->upNote();
       }
 
 //---------------------------------------------------------
@@ -114,7 +115,7 @@ Note* Score::downAlt(Element* element)
             // find segment
             Chord* chord     = ((Note*) element)->chord();
             Segment* segment = chord->segment();
-
+#if 0 //TODOA
             // collect all notes for this segment in noteList:
             NoteList rnl;
             iNote inote = rnl.end();
@@ -138,6 +139,7 @@ Note* Score::downAlt(Element* element)
                         re = inote->second;
                         }
                   }
+#endif
             }
 
       if (re == 0)
@@ -149,14 +151,13 @@ Note* Score::downAlt(Element* element)
 
 //---------------------------------------------------------
 //   downAltCtrl
-//    niedrigste Note in Chord selektieren
+//    select lowest note in chord
 //---------------------------------------------------------
 
 Note* Score::downAltCtrl(Note* note) const
       {
       Chord* chord = note->chord();
-      NoteList* nl  = chord->noteList();
-      return nl->begin()->second;
+      return chord->downNote();
       }
 
 //---------------------------------------------------------

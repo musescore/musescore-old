@@ -800,7 +800,7 @@ bool ExportMidi::saver()
                                     NoteList* nl = chord->noteList();
 
                                     for (iNote in = nl->begin(); in != nl->end(); ++in) {
-                                          Note* note = in->second;
+                                          Note* note = *in;
                                           if (note->tieBack())
                                                 continue;
                                           unsigned len = 0;
@@ -1089,7 +1089,7 @@ bool MidiFile::readTrack(bool mergeChannels)
       int len       = readLong();       // len
       int endPos    = curPos + len;
       status        = -1;
-      sstatus       = -1;  // running status, der nicht bei meta oder sysex zurü     = -1;
+      sstatus       = -1;  // running status, der nicht bei meta oder sysex zurü    = -1;
       lastport      = -1;
       channelprefix = -1;
       click         = 0;
@@ -1946,11 +1946,11 @@ QString MidiTrack::instrName(int type) const
 //      Instrumentennamen verwendet werden?
 //    - Instrumente feststellen
 //          - Name (kommentar?)
-//          - Schlüm?
+//          - Schlü?
 //    * Takte feststellen
 //    - Schlagzeugtrack markieren
 //    - Quantisierung festlegen:
-//       - kü- songtitle
+//       - kü songtitle
 
 // process:
 //    for every measure:
