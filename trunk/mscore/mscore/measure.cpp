@@ -426,7 +426,7 @@ void Measure::layoutNoteHeads(ScoreLayout*, int staff)
                   Tuplet* tuplet = chord->tuplet();
                   // printf("tick=%d key=%d\n", tick, _score->keymap->key(tick));
 
-                  int n = nl->size();
+                  int n = nl->size() -1;
                   for (int i = n; n >= 0; --n) {
                         Note* note = nl->at(i);
                         if (tuplet)
