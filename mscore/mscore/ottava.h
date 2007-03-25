@@ -50,6 +50,7 @@ class Ottava : public SLine {
 
    protected:
       QString text;
+      int shift;                    ///< pitch shift in semitones
       mutable qreal textHeight;     ///< cached value
 
       friend class OttavaSegment;
