@@ -357,7 +357,7 @@ void Page::collectElements(QList<Element*>& el)
 
                                           const NoteList* nl = chord->noteList();
                                           for (ciNote in = nl->begin(); in != nl->end(); ++in) {
-                                                Note* note = *in;
+                                                Note* note = in->second;
                                                 el.append(note);
                                                 if (note->tieFor())
                                                       el.append(note->tieFor());

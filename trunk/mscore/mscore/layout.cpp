@@ -651,8 +651,8 @@ static Note* searchTieNote(Note* note, Segment* segment, int track)
                   continue;
             const NoteList* nl = ((Chord*)element)->noteList();
             for (ciNote in = nl->begin(); in != nl->end(); ++in) {
-                  if ((*in)->pitch() == pitch)
-                        return *in;
+                  if (in->second->pitch() == pitch)
+                        return in->second;
                   }
             }
       return 0;
@@ -677,13 +677,13 @@ void ScoreLayout::connectTies()
                               continue;
                         const NoteList* nl = ((Chord*)el)->noteList();
                         for (ciNote in = nl->begin(); in != nl->end(); ++in) {
-                              Tie* tie = (*in)->tieFor();
+                              Tie* tie = in->second->tieFor();
                               if (!tie)
                                     continue;
-                              Note* nnote = searchTieNote(*in, s, i);
+                              Note* nnote = searchTieNote(in->second, s, i);
                               if (nnote == 0)
                                     printf("next note at %d(measure %d) for tie not found\n",
-                                       (*in)->chord()->tick(),
+                                       in->second->chord()->tick(),
                                        m->no());
                               else {
                                     tie->setEndNote(nnote);

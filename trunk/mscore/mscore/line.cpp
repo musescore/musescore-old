@@ -463,21 +463,17 @@ void SLine::collectElements(QList<Element*>& el)
 
 void SLine::add(Element* e)
       {
-      segments.prepend((LineSegment*) e);
+      segments.append((LineSegment*) e);
       }
 
 //---------------------------------------------------------
 //   remove
 //---------------------------------------------------------
 
-void SLine::remove(Element* e)
+void SLine::remove(Element*)
       {
-      int idx = segments.indexOf((LineSegment*)e);
-      if (idx == -1) {
-            printf("SLine::remove(): element not found\n");
-            return;
-            }
-      segments.removeAt(idx);
+      printf("SLine::remove=========\n");
+      segments.clear();
       }
 
 //---------------------------------------------------------

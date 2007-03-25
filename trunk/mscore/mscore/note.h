@@ -155,9 +155,5 @@ class ShadowNote : public Element {
       virtual void draw(QPainter& p);
       };
 
-static inline bool notesPitchCompare(Note* n1, Note* n2) {
-      return n1->pitch() < n2->pitch();
-      }
-
 #endif
 

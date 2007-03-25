@@ -426,9 +426,8 @@ void Measure::layoutNoteHeads(ScoreLayout*, int staff)
                   Tuplet* tuplet = chord->tuplet();
                   // printf("tick=%d key=%d\n", tick, _score->keymap->key(tick));
 
-                  int n = nl->size() -1;
-                  for (int i = n; n >= 0; --n) {
-                        Note* note = nl->at(i);
+                  for (riNote in = nl->rbegin(); in != nl->rend(); ++in) {
+                        Note* note  = in->second;
                         if (tuplet)
                               note->setHead(tuplet->baseLen());
                         else
@@ -682,7 +681,7 @@ void Measure::layout2(ScoreLayout* layout)
                         Chord* a = (Chord*)el;
                         const NoteList* nl = a->noteList();
                         for (ciNote in = nl->begin(); in != nl->end(); ++in) {
-                              Tie* tie = (*in)->tieFor();
+                              Tie* tie = in->second->tieFor();
                               if (tie)
                                     tie->layout(layout);
                               }
