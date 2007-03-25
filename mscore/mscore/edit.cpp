@@ -715,8 +715,8 @@ void Score::cmdAddTie()
       NoteList* nl = ((Chord*)el)->noteList();
       Note* note2 = 0;
       for (iNote i = nl->begin(); i != nl->end(); ++i) {
-            if (i->second->pitch() == note->pitch()) {
-                  note2 = i->second;
+            if ((*i)->pitch() == note->pitch()) {
+                  note2 = *i;
                   break;
                   }
             }

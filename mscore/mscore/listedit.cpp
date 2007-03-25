@@ -286,7 +286,7 @@ void PageListEditor::updateList()
                                                 new ElementItem(sei, h);
                                           NoteList* notes = chord->noteList();
                                           for (iNote in = notes->begin(); in != notes->end(); ++in) {
-                                                Note* note = in->second;
+                                                Note* note = *in;
                                                 ElementItem* ni = new ElementItem(sei, note);
                                                 if (note->accidental()) {
                                                       new ElementItem(ni, note->accidental());
