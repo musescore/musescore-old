@@ -5,8 +5,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>534</width>
-    <height>308</height>
+    <width>636</width>
+    <height>365</height>
    </rect>
   </property>
   <property name="windowTitle" >
@@ -122,32 +122,41 @@
          <property name="checkable" >
           <bool>true</bool>
          </property>
-         <widget class="QCheckBox" name="showFirstPageNumber" >
-          <property name="geometry" >
-           <rect>
-            <x>10</x>
-            <y>30</y>
-            <width>100</width>
-            <height>25</height>
-           </rect>
+         <layout class="QGridLayout" >
+          <property name="margin" >
+           <number>9</number>
           </property>
-          <property name="text" >
-           <string>show first</string>
+          <property name="spacing" >
+           <number>6</number>
           </property>
-         </widget>
-         <widget class="QCheckBox" name="showOddEvenPageNumber" >
-          <property name="geometry" >
-           <rect>
-            <x>130</x>
-            <y>30</y>
-            <width>100</width>
-            <height>25</height>
-           </rect>
-          </property>
-          <property name="text" >
-           <string>odd/even</string>
-          </property>
-         </widget>
+          <item row="1" column="0" >
+           <spacer>
+            <property name="orientation" >
+             <enum>Qt::Vertical</enum>
+            </property>
+            <property name="sizeHint" >
+             <size>
+              <width>20</width>
+              <height>40</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item row="0" column="1" >
+           <widget class="QCheckBox" name="showOddEvenPageNumber" >
+            <property name="text" >
+             <string>odd/even</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="0" >
+           <widget class="QCheckBox" name="showFirstPageNumber" >
+            <property name="text" >
+             <string>show first</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
         </widget>
        </item>
        <item>

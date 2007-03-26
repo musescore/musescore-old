@@ -85,7 +85,7 @@ InstrumentListEditor::InstrumentListEditor(QWidget* parent)
 
 void InstrumentListEditor::updateAll(Score* cs)
       {
-      PartList* pl = cs->parts();
+      QList<Part*>* pl = cs->parts();
 
       int n = pl->size() - vb->count();
       while (n < 0) {
@@ -110,7 +110,7 @@ void InstrumentListEditor::updateAll(Score* cs)
             }
       QString s;
       int idx = 0;
-      for (iPart ip = pl->begin(); ip != pl->end(); ++ip, ++idx) {
+      for (QList<Part*>::iterator ip = pl->begin(); ip != pl->end(); ++ip, ++idx) {
             QWidgetItem* wi = (QWidgetItem*)(vb->itemAt(idx));
             PartEdit* pe    = (PartEdit*)(wi->widget());
             pe->setPart(*ip);

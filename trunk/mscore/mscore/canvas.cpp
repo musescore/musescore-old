@@ -400,7 +400,6 @@ void Canvas::mouseMoveEvent(QMouseEvent* ev)
       if (dragCanvasState)
            ;
       else if (state == LASSO || state == DRAG_EDIT)
-//      else if (state == LASSO)
             _score->end1();
       else
             _score->endCmd(false);      // update display but dont end undo
@@ -872,7 +871,6 @@ void Canvas::setShadowNote(const QPointF& p)
       y += line * _spatium * .5;
 
       shadowNote->setPos(seg->canvasPos().x(), y);
-//      shadowNote->layout();
       }
 
 //---------------------------------------------------------

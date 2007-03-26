@@ -92,6 +92,7 @@ class Part {
       int volume() const                  { return _instrument.volume;      }
       int reverb() const                  { return _instrument.reverb;      }
       int chorus() const                  { return _instrument.chorus;      }
+      int pan() const                     { return _instrument.chorus;      }
       void insertStaff(Staff*);
       void removeStaff(Staff*);
       const Instrument* instrument() const { return &_instrument; }
@@ -101,9 +102,5 @@ class Part {
       Score* score() const     { return cs; }
       };
 
-class PartList : public QList<Part*> {
-      };
-typedef PartList::iterator iPart;
-typedef PartList::const_iterator ciPart;
 #endif
 

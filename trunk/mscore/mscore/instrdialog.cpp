@@ -199,10 +199,9 @@ void InstrumentsDialog::genPartList()
       {
       partiturList->clear();
 
-      PartList* pl = cs->parts();
-      for (iPart ip = pl->begin(); ip != pl->end(); ++ip) {
-            PartListItem* pli = new PartListItem(*ip, partiturList);
-            StaffList* sl = (*ip)->staves();
+      foreach(Part* p, *cs->parts()) {
+            PartListItem* pli = new PartListItem(p, partiturList);
+            StaffList* sl = p->staves();
             for (iStaff is = sl->begin(); is != sl->end(); ++is) {
                   StaffListItem* sli = new StaffListItem(pli);
                   Staff* s      = *is;
@@ -662,7 +661,7 @@ void Score::cmdRemovePart(Part* part)
             part->staves()->remove(*i);
             }
       _staves->erase(_staves->begin() + sidx, _staves->begin() + eidx);
-      _parts->removeAt(_parts->indexOf(part));
+      _parts.removeAt(_parts.indexOf(part));
       undoOp(UndoOp::RemovePart, part, sidx);
       }
 
@@ -674,14 +673,14 @@ void Score::insertPart(Part* part, int idx)
       {
       _layout->systems()->clear();  //??
       int staff = 0;
-      for (iPart i = _parts->begin(); i != _parts->end(); ++i) {
+      for (QList<Part*>::iterator i = _parts.begin(); i != _parts.end(); ++i) {
             if (staff >= idx) {
-                  _parts->insert(i, part);
+                  _parts.insert(i, part);
                   return;
                   }
             staff += (*i)->nstaves();
             }
-      _parts->push_back(part);
+      _parts.push_back(part);
       }
 
 //---------------------------------------------------------
@@ -691,7 +690,7 @@ void Score::insertPart(Part* part, int idx)
 void Score::removePart(Part* part)
       {
       _layout->systems()->clear();  //??
-      _parts->removeAt(_parts->indexOf(part));
+      _parts.removeAt(_parts.indexOf(part));
       }
 
 //---------------------------------------------------------
@@ -723,7 +722,7 @@ void Score::removeStaff(Staff* staff)
 void Score::sortStaves(QList<int> src, QList<int> dst)
       {
       _layout->systems()->clear();  //??
-      _parts->clear();
+      _parts.clear();
       Part* curPart = 0;
       StaffList* dl = new StaffList;
       for (QList<int>::iterator i = dst.begin(); i != dst.end(); ++i) {
@@ -735,7 +734,7 @@ void Score::sortStaves(QList<int> src, QList<int> dst)
                         if (staff->part() != curPart) {
                               curPart = staff->part();
                               curPart->staves()->clear();
-                              _parts->push_back(curPart);
+                              _parts.push_back(curPart);
                               }
                         curPart->staves()->push_back(staff);
                         dl->push_back(staff);

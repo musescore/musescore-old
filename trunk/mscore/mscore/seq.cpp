@@ -35,6 +35,8 @@
 #include "measure.h"
 #include "layout.h"
 #include "preferences.h"
+#include "part.h"
+#include "ottava.h"
 
 enum {
       ME_NOTEOFF    = 0x80,
@@ -575,28 +577,36 @@ void Seq::collectEvents()
       {
       events.clear();
 
-      int staves = cs->nstaves();
-      for (int tr = 0; tr < staves; ++tr) {
-            Staff* staff  = cs->staff(tr);
-            int channel = staff->midiChannel();
-//            int program = staff->midiProgram();
-            setController(channel, CTRL_PROGRAM, staff->midiProgram());
-            setController(channel, CTRL_VOLUME, staff->volume());
-            setController(channel, CTRL_REVERB_SEND, staff->reverb());
-            setController(channel, CTRL_CHORUS_SEND, staff->chorus());
-            }
+      int staffIdx = 0;
+      int gateTime = 80;  // 100 - legato (100%)
 
-      for (int tr = 0; tr < staves; ++tr) {
-            Staff* staff  = cs->staff(tr);
-            int channel = staff->midiChannel();
+      foreach(Part* part, *cs->parts()) {
+            int channel = part->midiChannel();
+            setController(channel, CTRL_PROGRAM, part->midiProgram());
+            setController(channel, CTRL_VOLUME, part->volume());
+            setController(channel, CTRL_REVERB_SEND, part->reverb());
+            setController(channel, CTRL_CHORUS_SEND, part->chorus());
+            setController(channel, CTRL_PAN, part->pan());
 
-            int gateTime = 80;  // 100 - legato (100%)
-            for (Measure* m = cs->mainLayout()->first(); m; m = m->next()) {
-                  for (int voice = 0; voice < VOICES; ++voice) {
-                        for (Segment* seg = m->first(); seg; seg = seg->next()) {
-                              Element* el = seg->element(tr * VOICES + voice);
-                              if (el) {
-                                    if (el->type() != CHORD)
+            for (int i = 0; i < part->staves()->size(); ++i) {
+                  QList<OttavaE> ol;
+                  for (Measure* m = cs->mainLayout()->first(); m; m = m->next()) {
+                        foreach(Element* e, *m->el()) {
+                              if (e->type() == OTTAVA) {
+                                    Ottava* ottava = (Ottava*)e;
+                                    OttavaE oe;
+                                    oe.offset = ottava->pitchShift();
+                                    oe.start  = ottava->tick();
+                                    oe.end    = ottava->tick2();
+                                    ol.append(oe);
+                                    }
+                              }
+                        }
+                  for (Measure* m = cs->mainLayout()->first(); m; m = m->next()) {
+                        for (int voice = 0; voice < VOICES; ++voice) {
+                              for (Segment* seg = m->first(); seg; seg = seg->next()) {
+                                    Element* el = seg->element(staffIdx * VOICES + voice);
+                                    if (!el || el->type() != CHORD)
                                           continue;
                                     Chord* chord = (Chord*)el;
                                     NoteList* nl = chord->noteList();
@@ -614,13 +624,19 @@ void Seq::collectEvents()
                                                 }
                                           len += (note->chord()->tickLen() * gateTime / 100);
 
+                                          unsigned tick = chord->tick();
                                           Event ev;
                                           ev.type       = 0x90; // note on
                                           ev.val1       = note->pitch();
+                                          foreach(OttavaE o, ol) {
+                                                if (tick >= o.start && tick <= o.end) {
+                                                      ev.val1 += o.offset;
+                                                      break;
+                                                      }
+                                                }
                                           ev.val2       = 60;
                                           ev.note       = note;
                                           ev.channel    = channel;
-                                          unsigned tick = chord->tick();
                                           events.insert(std::pair<const unsigned, Event> (tick, ev));
 
                                           ev.val2 = 0;
@@ -629,6 +645,7 @@ void Seq::collectEvents()
                                     }
                               }
                         }
+                  ++staffIdx;
                   }
             }
       Measure* lm = cs->mainLayout()->last();

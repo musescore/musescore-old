@@ -41,6 +41,8 @@
 #include "layout.h"
 #include "timesig.h"
 #include "barline.h"
+#include "pedal.h"
+#include "ottava.h"
 
 static unsigned const char gmOnMsg[] = { 0x7e, 0x7f, 0x09, 0x01 };
 static unsigned const char gsOnMsg[] = { 0x41, 0x10, 0x42, 0x12, 0x40, 0x00, 0x7f, 0x00, 0x41 };
@@ -603,6 +605,8 @@ static MidiInstrument minstr[] = {
 class ExportMidi : public SaveFile {
       Score* cs;
 
+      void writeHeader();
+
    public:
       MidiFile mf;
 
@@ -621,6 +625,151 @@ void MuseScore::exportMidi()
       }
 
 //---------------------------------------------------------
+//   writeHeader
+//---------------------------------------------------------
+
+void ExportMidi::writeHeader()
+      {
+      MidiTrack* track  = mf.tracks()->front();
+      EventList* events = track->events();
+      Measure* measure  = cs->mainLayout()->first();
+      foreach(const Element* e, *measure->pel()) {
+            if (e->type() == TEXT) {
+                  Text* text = (Text*)(e);
+                  QString str = text->getText();
+                  int len     = str.length() + 1;
+                  switch (text->subtype()) {
+                        case TEXT_TITLE:
+                              {
+                              MidiEvent* ev = new MidiEvent;
+                              ev->type      = ME_META;
+                              ev->dataA     = META_TITLE;
+                              ev->len       = len;
+                              ev->data      = new unsigned char[len];
+                              strcpy((char*)(ev->data), str.toLatin1().data());
+                              events->insert(std::pair<const unsigned, MidiEvent*> (0, ev));
+                              }
+                              break;
+                        case TEXT_SUBTITLE:
+                              {
+                              MidiEvent* ev = new MidiEvent;
+                              ev->type      = ME_META;
+                              ev->dataA     = META_SUBTITLE;
+                              ev->len       = len;
+                              ev->data      = new unsigned char[len];
+                              strcpy((char*)(ev->data), str.toLatin1().data());
+                              events->insert(std::pair<const unsigned, MidiEvent*> (0, ev));
+                              }
+                              break;
+                        case TEXT_COMPOSER:
+                              {
+                              MidiEvent* ev = new MidiEvent;
+                              ev->type      = ME_META;
+                              ev->dataA     = META_COMPOSER;
+                              ev->len       = len;
+                              ev->data      = new unsigned char[len];
+                              strcpy((char*)(ev->data), str.toLatin1().data());
+                              events->insert(std::pair<const unsigned, MidiEvent*> (0, ev));
+                              }
+                              break;
+                        case TEXT_TRANSLATOR:
+                              {
+                              MidiEvent* ev = new MidiEvent;
+                              ev->type      = ME_META;
+                              ev->dataA     = META_TRANSLATOR;
+                              ev->len       = len;
+                              ev->data      = new unsigned char[len];
+                              strcpy((char*)(ev->data), str.toLatin1().data());
+                              events->insert(std::pair<const unsigned, MidiEvent*> (0, ev));
+                              }
+                              break;
+                        case TEXT_POET:
+                              {
+                              MidiEvent* ev = new MidiEvent;
+                              ev->type      = ME_META;
+                              ev->dataA     = META_POET;
+                              ev->len       = len;
+                              ev->data      = new unsigned char[len];
+                              strcpy((char*)(ev->data), str.toLatin1().data());
+                              events->insert(std::pair<const unsigned, MidiEvent*> (0, ev));
+                              }
+                              break;
+                        }
+                  }
+            }
+
+      //--------------------------------------------
+      //    write time signature
+      //--------------------------------------------
+
+      SigList* sigmap = cs->sigmap;
+      for (iSigEvent is = sigmap->begin(); is != sigmap->end(); ++is) {
+            SigEvent se = is->second;
+            int tick = is->first;
+            MidiEvent* ev = new MidiEvent;
+            ev->type      = ME_META;
+            ev->dataA     = META_TIME_SIGNATURE;
+            ev->len  = 4;
+            ev->data = new unsigned char[4];
+            ev->data[0] = se.nominator;
+            int n;
+            switch(se.denominator) {
+                  case 1: n = 0; break;
+                  case 2: n = 1; break;
+                  case 4: n = 2; break;
+                  case 8: n = 3; break;
+                  case 16: n = 4; break;
+                  case 32: n = 5; break;
+                  default:
+                        n = 2;
+                        printf("ExportMidi: unknown time signature %d/%d\n", se.nominator, n);
+                        break;
+                  }
+            ev->data[1] = n;
+            ev->data[2] = 24;
+            ev->data[3] = 8;
+            events->insert(std::pair<const unsigned, MidiEvent*> (tick, ev));
+            }
+
+      //--------------------------------------------
+      //    write key signatures
+      //--------------------------------------------
+
+      KeyList* keymap = cs->staff(0)->keymap(); // TODO_K
+      for (iKeyEvent ik = keymap->begin(); ik != keymap->end(); ++ik) {
+            int tick      = ik->first;
+            int key       = ik->second;
+            MidiEvent* ev = new MidiEvent;
+            ev->type      = ME_META;
+            ev->dataA     = META_KEY_SIGNATURE;
+            ev->len       = 2;
+            ev->data      = new unsigned char[2];
+            ev->data[0]   = key;
+            ev->data[1]   = 0;  // major
+            events->insert(std::pair<const unsigned, MidiEvent*> (tick, ev));
+            }
+
+      //--------------------------------------------
+      //    write tempo changes
+      //--------------------------------------------
+
+      TempoList* tempomap = cs->tempomap;
+      for (iTEvent it = tempomap->begin(); it != tempomap->end(); ++it) {
+            int tick      = it->second->tick;
+            int tempo     = it->second->tempo;
+            MidiEvent* ev = new MidiEvent;
+            ev->type      = ME_META;
+            ev->dataA     = META_TEMPO;
+            ev->len       = 3;
+            ev->data      = new unsigned char[3];
+            ev->data[0]   = tempo >> 16;
+            ev->data[1]   = tempo >> 8;
+            ev->data[2]   = tempo;
+            events->insert(std::pair<const unsigned, MidiEvent*> (tick, ev));
+            }
+      }
+
+//---------------------------------------------------------
 //  saver
 //    export midi file
 //    return true on error
@@ -631,205 +780,136 @@ bool ExportMidi::saver()
       mf.setFp(&f);
 
       MidiTrackList* tracks = mf.tracks();
-      int staves = cs->nstaves();
-      for (int tr = 0; tr < staves; ++tr) {
-            MidiTrack* track = new MidiTrack;
-            tracks->push_back(track);
+      int nparts = cs->parts()->size();
+      for (int i = 0; i < nparts; ++i)
+            tracks->append(new MidiTrack);
+
+      int gateTime = 80;  // 100 - legato (100%)
+      writeHeader();
+      int staffIdx = 0;
+      int partIdx = 0;
+      foreach (Part* part, *cs->parts()) {
+            MidiTrack* track = tracks->at(partIdx);
             EventList* events = track->events();
-            Staff* staff  = cs->staff(tr);
-            int channel = staff->midiChannel();
+            int channel  = part->midiChannel();
             track->setOutPort(0);
             track->setOutChannel(channel);
-            if (tr == 0) {
-                  Measure* measure = cs->mainLayout()->first();
-                  ElementList* el  = measure->pel();
-                  for (iElement ie = el->begin(); ie != el->end(); ++ie) {
-                        if ((*ie)->type() == TEXT) {
-                              Text* text = (Text*)(*ie);
-                              QString str = text->getText();
-                              int len     = str.length() + 1;
-                              switch (text->subtype()) {
-                                    case TEXT_TITLE:
-                                          {
-                                          MidiEvent* ev = new MidiEvent;
-                                          ev->type      = ME_META;
-                                          ev->dataA     = META_TITLE;
-                                          ev->len       = len;
-                                          ev->data      = new unsigned char[len];
-                                          strcpy((char*)(ev->data), str.toLatin1().data());
-                                          events->insert(std::pair<const unsigned, MidiEvent*> (0, ev));
-                                          }
-                                          break;
-                                    case TEXT_SUBTITLE:
-                                          {
-                                          MidiEvent* ev = new MidiEvent;
-                                          ev->type      = ME_META;
-                                          ev->dataA     = META_SUBTITLE;
-                                          ev->len       = len;
-                                          ev->data      = new unsigned char[len];
-                                          strcpy((char*)(ev->data), str.toLatin1().data());
-                                          events->insert(std::pair<const unsigned, MidiEvent*> (0, ev));
-                                          }
-                                          break;
-                                    case TEXT_COMPOSER:
-                                          {
-                                          MidiEvent* ev = new MidiEvent;
-                                          ev->type      = ME_META;
-                                          ev->dataA     = META_COMPOSER;
-                                          ev->len       = len;
-                                          ev->data      = new unsigned char[len];
-                                          strcpy((char*)(ev->data), str.toLatin1().data());
-                                          events->insert(std::pair<const unsigned, MidiEvent*> (0, ev));
-                                          }
-                                          break;
-                                    case TEXT_TRANSLATOR:
-                                          {
-                                          MidiEvent* ev = new MidiEvent;
-                                          ev->type      = ME_META;
-                                          ev->dataA     = META_TRANSLATOR;
-                                          ev->len       = len;
-                                          ev->data      = new unsigned char[len];
-                                          strcpy((char*)(ev->data), str.toLatin1().data());
-                                          events->insert(std::pair<const unsigned, MidiEvent*> (0, ev));
-                                          }
-                                          break;
-                                    case TEXT_POET:
-                                          {
-                                          MidiEvent* ev = new MidiEvent;
-                                          ev->type      = ME_META;
-                                          ev->dataA     = META_POET;
-                                          ev->len       = len;
-                                          ev->data      = new unsigned char[len];
-                                          strcpy((char*)(ev->data), str.toLatin1().data());
-                                          events->insert(std::pair<const unsigned, MidiEvent*> (0, ev));
-                                          }
-                                          break;
+
+            MidiEvent* ev = new MidiEvent;
+            ev->type  = ME_PROGRAM;
+            ev->dataA = part->midiProgram();
+            events->insert(std::pair<const unsigned, MidiEvent*> (0, ev));
+
+            ev        = new MidiEvent;
+            ev->type  = ME_CONTROLLER;
+            ev->dataA = CTRL_VOLUME;
+            ev->dataB = part->volume();
+            events->insert(std::pair<const unsigned, MidiEvent*> (1, ev));
+
+            ev        = new MidiEvent;
+            ev->type  = ME_CONTROLLER;
+            ev->dataA = CTRL_PANPOT;
+            ev->dataB = part->pan();
+            events->insert(std::pair<const unsigned, MidiEvent*> (2, ev));
+
+            ev        = new MidiEvent;
+            ev->type  = ME_CONTROLLER;
+            ev->dataA = CTRL_REVERB_SEND;
+            ev->dataA = part->reverb();
+            events->insert(std::pair<const unsigned, MidiEvent*> (3, ev));
+
+            ev        = new MidiEvent;
+            ev->type  = ME_CONTROLLER;
+            ev->dataA = CTRL_CHORUS_SEND;
+            ev->dataA = part->chorus();
+            events->insert(std::pair<const unsigned, MidiEvent*> (4, ev));
+
+            for (int i = 0; i < part->staves()->size(); ++i) {
+                  QList<OttavaE> ol;
+                  for (Measure* m = cs->mainLayout()->first(); m; m = m->next()) {
+                        foreach(Element* e, *m->el()) {
+                              if (e->type() == OTTAVA) {
+                                    Ottava* ottava = (Ottava*)e;
+                                    OttavaE oe;
+                                    oe.offset = ottava->pitchShift();
+                                    oe.start  = ottava->tick();
+                                    oe.end    = ottava->tick2();
+                                    ol.append(oe);
                                     }
                               }
                         }
-
-                  //--------------------------------------------
-                  //    write time signature
-                  //--------------------------------------------
-
-                  SigList* sigmap = cs->sigmap;
-                  for (iSigEvent is = sigmap->begin(); is != sigmap->end(); ++is) {
-                        SigEvent se = is->second;
-                        int tick = is->first;
-                        MidiEvent* ev = new MidiEvent;
-                        ev->type      = ME_META;
-                        ev->dataA     = META_TIME_SIGNATURE;
-                        ev->len  = 4;
-                        ev->data = new unsigned char[4];
-                        ev->data[0] = se.nominator;
-                        int n;
-                        switch(se.denominator) {
-                              case 1: n = 0; break;
-                              case 2: n = 1; break;
-                              case 4: n = 2; break;
-                              case 8: n = 3; break;
-                              case 16: n = 4; break;
-                              case 32: n = 5; break;
-                              default:
-                                    n = 2;
-                                    printf("ExportMidi: unknown time signature %d/%d\n", se.nominator, n);
-                                    break;
-                              }
-                        ev->data[1] = n;
-                        ev->data[2] = 24;
-                        ev->data[3] = 8;
-                        events->insert(std::pair<const unsigned, MidiEvent*> (tick, ev));
-                        }
-
-                  //--------------------------------------------
-                  //    write key signatures
-                  //--------------------------------------------
-
-                  KeyList* keymap = cs->staff(0)->keymap(); // TODO_K
-                  for (iKeyEvent ik = keymap->begin(); ik != keymap->end(); ++ik) {
-                        int tick      = ik->first;
-                        int key       = ik->second;
-                        MidiEvent* ev = new MidiEvent;
-                        ev->type      = ME_META;
-                        ev->dataA     = META_KEY_SIGNATURE;
-                        ev->len       = 2;
-                        ev->data      = new unsigned char[2];
-                        ev->data[0]   = key;
-                        ev->data[1]   = 0;  // major
-                        events->insert(std::pair<const unsigned, MidiEvent*> (tick, ev));
-                        }
-
-                  //--------------------------------------------
-                  //    write tempo changes
-                  //--------------------------------------------
-
-                  TempoList* tempomap = cs->tempomap;
-                  for (iTEvent it = tempomap->begin(); it != tempomap->end(); ++it) {
-                        int tick      = it->second->tick;
-                        int tempo     = it->second->tempo;
-                        MidiEvent* ev = new MidiEvent;
-                        ev->type      = ME_META;
-                        ev->dataA     = META_TEMPO;
-                        ev->len       = 3;
-                        ev->data      = new unsigned char[3];
-                        ev->data[0]   = tempo >> 16;
-                        ev->data[1]   = tempo >> 8;
-                        ev->data[2]   = tempo;
-                        events->insert(std::pair<const unsigned, MidiEvent*> (tick, ev));
-                        }
-
-                  }
-            int gateTime = 80;  // 100 - legato (100%)
-            for (Measure* m = cs->mainLayout()->first(); m; m = m->next()) {
-                  if (m == cs->mainLayout()->first()) {
-                        int program   = staff->midiProgram();
-                        if (program != -1) {
-                              MidiEvent* ev = new MidiEvent;
-                              ev->type      = ME_PROGRAM;
-                              ev->dataA     = program;
-                              events->insert(std::pair<const unsigned, MidiEvent*> (0, ev));
-                              }
-                        }
-                  for (int voice = 0; voice < VOICES; ++voice) {
-                        for (Segment* seg = m->first(); seg; seg = seg->next()) {
-                              Element* el = seg->element(tr * VOICES + voice);
-                              if (el) {
-                                    if (el->type() != CHORD)
-                                          continue;
-                                    Chord* chord = (Chord*)el;
-                                    NoteList* nl = chord->noteList();
-
-                                    for (iNote in = nl->begin(); in != nl->end(); ++in) {
-                                          Note* note = in->second;
-                                          if (note->tieBack())
+                  for (Measure* m = cs->mainLayout()->first(); m; m = m->next()) {
+                        for (int voice = 0; voice < VOICES; ++voice) {
+                              for (Segment* seg = m->first(); seg; seg = seg->next()) {
+                                    Element* el = seg->element(staffIdx * VOICES + voice);
+                                    if (el) {
+                                          if (el->type() != CHORD)
                                                 continue;
-                                          unsigned len = 0;
-                                          while (note->tieFor()) {
-                                                len += note->chord()->tickLen();
-                                                note = note->tieFor()->endNote();
+                                          Chord* chord = (Chord*)el;
+                                          NoteList* nl = chord->noteList();
+
+                                          for (iNote in = nl->begin(); in != nl->end(); ++in) {
+                                                Note* note = in->second;
+                                                if (note->tieBack())
+                                                      continue;
+                                                unsigned len = 0;
+                                                while (note->tieFor()) {
+                                                      len += note->chord()->tickLen();
+                                                      note = note->tieFor()->endNote();
+                                                      }
+                                                len += (note->chord()->tickLen() * gateTime / 100);
+
+                                                unsigned tick   = chord->tick();
+                                                len = len * gateTime / 100;
+                                                int pitch  = note->pitch();
+
+                                                foreach(OttavaE o, ol) {
+                                                      if (tick >= o.start && tick <= o.end) {
+                                                            pitch += o.offset;
+                                                            break;
+                                                            }
+                                                      }
+
+                                                MidiEvent* ev = new MidiEvent;
+                                                ev->type = ME_NOTEON;
+                                                ev->dataA = pitch;
+                                                ev->dataB = 0x60;
+                                                events->insert(std::pair<const unsigned, MidiEvent*> (tick, ev));
+
+                                                ev = new MidiEvent;
+                                                ev->type  = ME_NOTEON;
+                                                ev->dataA = pitch;
+                                                ev->dataB = 0x0;
+                                                events->insert(std::pair<const unsigned, MidiEvent*> (tick + len, ev));
                                                 }
-                                          len += (note->chord()->tickLen() * gateTime / 100);
-
-                                          int tick   = chord->tick();
-                                          len = len * gateTime / 100;
-                                          int pitch  = note->pitch();
-
-                                          MidiEvent* ev = new MidiEvent;
-                                          ev->type = ME_NOTEON;
-                                          ev->dataA = pitch;
-                                          ev->dataB = 0x60;
-                                          events->insert(std::pair<const unsigned, MidiEvent*> (tick, ev));
-
-                                          ev = new MidiEvent;
-                                          ev->type  = ME_NOTEON;
-                                          ev->dataA = pitch;
-                                          ev->dataB = 0x0;
-                                          events->insert(std::pair<const unsigned, MidiEvent*> (tick + len, ev));
                                           }
                                     }
                               }
+
+                        foreach(Element* e, *m->el())
+                              switch(e->type()) {
+                                    case PEDAL:
+                                          {
+                                          Pedal* pedal = (Pedal*)e;
+                                          MidiEvent* ev = new MidiEvent;
+                                          ev->type  = ME_CONTROLLER;
+                                          ev->dataA = CTRL_SUSTAIN;
+                                          ev->dataB = 0x7f;
+                                          events->insert(std::pair<const unsigned, MidiEvent*> (pedal->tick(), ev));
+                                          ev        = new MidiEvent;
+                                          ev->type  = ME_CONTROLLER;
+                                          ev->dataA = CTRL_SUSTAIN;
+                                          ev->dataB = 0;
+                                          events->insert(std::pair<const unsigned, MidiEvent*> (pedal->tick2(), ev));
+                                          }
+                                          break;
+                                    default:
+                                          break;
+                              }
                         }
+                  ++staffIdx;
                   }
+            ++partIdx;
             }
       return mf.write();
       }
@@ -1089,8 +1169,7 @@ bool MidiFile::readTrack(bool mergeChannels)
       int len       = readLong();       // len
       int endPos    = curPos + len;
       status        = -1;
-      sstatus       = -1;  // running status, der nicht bei meta oder sysex zurü     = -1;
-      lastport      = -1;
+      sstatus       = -1;  // running status, der nicht bei meta oder sysex zurüstport      = -1;
       channelprefix = -1;
       click         = 0;
       int channel   = -1;
@@ -1946,13 +2025,10 @@ QString MidiTrack::instrName(int type) const
 //      Instrumentennamen verwendet werden?
 //    - Instrumente feststellen
 //          - Name (kommentar?)
-//          - Schlüm?
-//    * Takte feststellen
+//          - Schlüststellen
 //    - Schlagzeugtrack markieren
 //    - Quantisierung festlegen:
-//       - kü- songtitle
-
-// process:
+//       - kücess:
 //    for every measure:
 //          * create measure
 //          - insert notes
@@ -2050,7 +2126,7 @@ void Score::convertMidi(MidiFile* mf)
             part->setTrackName(part->longName().toPlainText());
             part->setMidiChannel(midiTrack->outChannel());
             part->setMidiProgram(midiTrack->program);
-            _parts->push_back(part);
+            _parts.push_back(part);
             }
 
       int lastTick = 0;

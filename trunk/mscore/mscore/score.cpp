@@ -124,7 +124,6 @@ Score::Score()
       sigmap            = new SigList;
       sel               = new Selection(this);
       _staves           = new StaffList;
-      _parts            = new PartList;
       _dirty            = false;
       _saved            = false;
       sel->state        = SEL_NONE;
@@ -154,7 +153,6 @@ Score::~Score()
       delete sigmap;
       delete sel;
       delete _staves;
-      delete _parts;
       delete _layout;
       }
 
@@ -214,9 +212,9 @@ void Score::clear()
             delete *i;
       _staves->clear();
       _layout->clear();
-      for (iPart i = _parts->begin(); i != _parts->end(); ++i)
-            delete *i;
-      _parts->clear();
+      foreach(Part* p, _parts)
+            delete p;
+      _parts.clear();
 
       sigmap->clear();
       sigmap->add(0, 4, 4);
@@ -275,8 +273,8 @@ void Score::write(Xml& xml)
 
       sigmap->write(xml);
       tempomap->write(xml);
-      for (iPart i = _parts->begin(); i != _parts->end(); ++i)
-            (*i)->write(xml);
+      foreach(const Part* part, _parts)
+            part->write(xml);
 
       int staff = 0;
       for (iStaff ip = _staves->begin(); ip != _staves->end(); ++ip, ++staff) {
@@ -298,10 +296,10 @@ void Score::write(Xml& xml)
 Part* Score::part(int n)
       {
       int idx = 0;
-      for (iPart i = _parts->begin(); i != _parts->end(); ++i) {
-            idx += (*i)->nstaves();
+      foreach (Part* part, _parts) {
+            idx += part->nstaves();
             if (n < idx)
-                  return *i;
+                  return part;
             }
       return 0;
       }
@@ -531,7 +529,6 @@ Measure* Score::pos2measure(const QPointF& p, int* tick, Staff** rst, int* pitch
 
 //---------------------------------------------------------
 //   pos2measure2
-//    p - canvas relative position
 //---------------------------------------------------------
 
 /**
@@ -633,10 +630,10 @@ Measure* Score::pos2measure2(const QPointF& p, int* tick, Staff** rst, int* line
 int Score::staff(const Part* part) const
       {
       int staff = 0;
-      for (ciPart i = _parts->begin(); i != _parts->end(); ++i) {
-            if (*i == part)
+      foreach(Part* p, _parts) {
+            if (p == part)
                   break;
-            staff += (*i)->nstaves();
+            staff += p->nstaves();
             }
       return staff;
       }

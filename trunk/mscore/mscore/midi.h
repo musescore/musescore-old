@@ -62,6 +62,43 @@ enum {
       META_KEY_SIGNATURE   = 0x59,
       };
 
+enum {
+      CTRL_HBANK = 0x00,
+      CTRL_LBANK = 0x20,
+
+      CTRL_HDATA = 0x06,
+      CTRL_LDATA = 0x26,
+
+      CTRL_HNRPN = 0x63,
+      CTRL_LNRPN = 0x62,
+
+      CTRL_HRPN  = 0x65,
+      CTRL_LRPN  = 0x64,
+
+      CTRL_MODULATION         = 0x01,
+      CTRL_PORTAMENTO_TIME    = 0x05,
+      CTRL_VOLUME             = 0x07,
+      CTRL_PANPOT             = 0x0a,
+      CTRL_EXPRESSION         = 0x0b,
+      CTRL_SUSTAIN            = 0x40,
+      CTRL_PORTAMENTO         = 0x41,
+      CTRL_SOSTENUTO          = 0x42,
+      CTRL_SOFT_PEDAL         = 0x43,
+      CTRL_HARMONIC_CONTENT   = 0x47,
+      CTRL_RELEASE_TIME       = 0x48,
+      CTRL_ATTACK_TIME        = 0x49,
+
+      CTRL_BRIGHTNESS         = 0x4a,
+      CTRL_PORTAMENTO_CONTROL = 0x54,
+      CTRL_REVERB_SEND        = 0x5b,
+      CTRL_CHORUS_SEND        = 0x5d,
+      CTRL_VARIATION_SEND     = 0x5e,
+
+      CTRL_ALL_SOUNDS_OFF     = 0x78, // 120
+      CTRL_RESET_ALL_CTRL     = 0x79, // 121
+      CTRL_LOCAL_OFF          = 0x7a, // 122
+      };
+
 //---------------------------------------------------------
 //   MidiEvent
 //---------------------------------------------------------

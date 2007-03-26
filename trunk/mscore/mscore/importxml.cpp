@@ -473,8 +473,8 @@ void MusicXml::xmlScorePart(QDomNode node, QString id)
 
 void MusicXml::xmlPart(QDomNode node, QString id)
       {
-      PartList* pl = score->parts();
-      iPart i;
+      QList<Part*>* pl = score->parts();
+      QList<Part*>::iterator i;
       for (i = pl->begin(); i != pl->end(); ++i) {
             if ((*i)->id() == id)
                   break;

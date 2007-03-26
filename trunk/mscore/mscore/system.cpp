@@ -300,10 +300,8 @@ double System::layout(ScoreLayout* layout, const QPointF& p, double w)
       //  layout instrument names
       //---------------------------------------------------
 
-      PartList* pl = score()->parts();
       int idx = 0;
-      for (iPart ip = pl->begin(); ip != pl->end(); ++ip) {
-            Part* p     = *ip;
+      foreach (Part* p, *score()->parts()) {
             SysStaff* s = staff(idx);
             int nstaves = p->nstaves();
             if (s->instrumentName && !s->instrumentName->isEmpty()) {
@@ -436,13 +434,12 @@ void System::layout2(ScoreLayout* layout)
 
       for (iMeasure im = ml->begin(); im != ml->end(); ++im) {
             Measure* m = *im;
-            PartList* pl = _score->parts();
+            QList<Part*>* pl = _score->parts();
             double x  = m->width();
             int staff = 0;
             Spatium barLineLen(4);
             barLineLen += ::style->staffLineWidth;
-            for (iPart ip = pl->begin(); ip != pl->end(); ++ip) {
-                  Part* p = *ip;
+            foreach(Part* p, *pl) {
                   BarLine* barLine = m->barLine(staff);
                   if (barLine) {
                         double y1 = staffY[staff];
@@ -496,10 +493,8 @@ void System::layout2(ScoreLayout* layout)
       //  layout instrument names
       //---------------------------------------------------
 
-      PartList* pl = score()->parts();
       int idx = 0;
-      for (iPart ip = pl->begin(); ip != pl->end(); ++ip) {
-            Part* p     = *ip;
+      foreach(Part* p, *score()->parts()) {
             SysStaff* s = staff(idx);
             int nstaves = p->nstaves();
             if (s->instrumentName && !s->instrumentName->isEmpty()) {

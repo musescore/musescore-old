@@ -73,8 +73,6 @@ extern bool noSeq;            ///< Dont use sequencer; cmd line option.
 extern bool noMidi;           ///< Dont use midi; cmd line option.
 extern bool showRubberBand;
 
-class PartList;
-
 //---------------------------------------------------------
 //   ScoreView
 //---------------------------------------------------------
@@ -117,7 +115,7 @@ class Score : public QObject {
       Element* _dragObject;
       ElementList startDragSelected;
 
-      PartList* _parts;
+      QList<Part*> _parts;
       StaffList* _staves;
 
       UndoList undoList;
@@ -370,7 +368,7 @@ class Score : public QObject {
       Element* dragObject() const    { return _dragObject; }
       void setDragObject(Element* e) { _dragObject = e; }
       void midiNoteReceived(int pitch, bool);
-      PartList* parts()             { return _parts; }
+      QList<Part*>* parts()       { return &_parts; }
       void updateStaffIndex();
       void sortStaves(QList<int> src, QList<int> dst);
       void read(QString name);
