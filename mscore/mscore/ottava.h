@@ -23,6 +23,16 @@
 
 #include "line.h"
 
+//---------------------------------------------------------
+//   OttavaE
+//---------------------------------------------------------
+
+struct OttavaE {
+      int offset;
+      unsigned start;
+      unsigned end;
+      };
+
 class Ottava;
 
 //---------------------------------------------------------
@@ -50,6 +60,7 @@ class Ottava : public SLine {
 
    protected:
       QString text;
+      int _pitchShift;
       mutable qreal textHeight;     ///< cached value
 
       friend class OttavaSegment;
@@ -63,6 +74,7 @@ class Ottava : public SLine {
       virtual void write(Xml&) const;
       virtual void read(QDomNode);
       virtual LineSegment* createSegment();
+      int pitchShift() const { return _pitchShift; }
       };
 
 #endif

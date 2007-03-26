@@ -992,37 +992,36 @@ bool ExportMusicXml::saver()
       xml.etag("identification");
 
       xml.stag("part-list");
-      int idx = 1;
-      PartList* il = score->parts();
-      for (iPart i = il->begin(); i != il->end(); ++i, ++idx) {
-            xml.stag(QString("score-part id=\"P%1\"").arg(idx));
-            xml.tag("part-name", (*i)->longName().toPlainText());
+      const QList<Part*>* il = score->parts();
+      for (int idx = 0; idx < il->size(); ++idx) {
+            Part* part = il->at(idx);
+            xml.stag(QString("score-part id=\"P%1\"").arg(idx+1));
+            xml.tag("part-name", part->longName().toPlainText());
 
-            xml.stag(QString("score-instrument id=\"P%1-I%2\"").arg(idx).arg(3));
-            xml.tag("instrument-name", (*i)->longName().toPlainText());
+            xml.stag(QString("score-instrument id=\"P%1-I%2\"").arg(idx+1).arg(3));
+            xml.tag("instrument-name", part->longName().toPlainText());
             xml.etag("score-instrument");
 
-            xml.stag(QString("midi-instrument id=\"P%1-I%2\"").arg(idx).arg(3));
-            xml.tag("midi-channel", (*i)->midiChannel() + 1);
-            xml.tag("midi-program", (*i)->midiProgram() + 1);
+            xml.stag(QString("midi-instrument id=\"P%1-I%2\"").arg(idx+1).arg(3));
+            xml.tag("midi-channel", part->midiChannel() + 1);
+            xml.tag("midi-program", part->midiProgram() + 1);
             xml.etag("midi-instrument");
 
             xml.etag("score-part");
             }
       xml.etag("part-list");
 
-      idx = 1;
-      il = score->parts();
-      for (iPart i = il->begin(); i != il->end(); ++i, ++idx) {
+      for (int idx = 0; idx < il->size(); ++idx) {
+            Part* part = il->at(idx);
             tick = 0;
-            xml.stag(QString("part id=\"P%1\"").arg(idx));
+            xml.stag(QString("part id=\"P%1\"").arg(idx+1));
 
-            int staves = (*i)->nstaves();
-            int strack = score->staff(*i) * VOICES;
+            int staves = part->nstaves();
+            int strack = score->staff(part) * VOICES;
             int etrack = strack + staves * VOICES;
 
             DirectionsHandler dh(score);
-            dh.buildDirectionsList(*i, strack, etrack);
+            dh.buildDirectionsList(part, strack, etrack);
 
             int measureNo = 1;          // number of next regular measure
             int irregularMeasureNo = 1; // number of next irregular measure
@@ -1047,7 +1046,7 @@ bool ExportMusicXml::saver()
                         xml.tagE("print new-page=\"yes\"");
 
                   attr.start();
-                  dh.buildDirectionsList(m, false, *i, strack, etrack);
+                  dh.buildDirectionsList(m, false, part, strack, etrack);
 
                   // barline left must be the first element in a measure
                   volta = findVolta(m);
@@ -1231,12 +1230,12 @@ bool ExportMusicXml::saver()
                               // LVIFIX: find exact cause
                               int ssstaff = sstaff > 0 ? sstaff : sstaff + 1;
                               // printf("st=%d sstaff=%d ssstaff=%d\n", st, sstaff, ssstaff);
-                              dh.handleElements(this, (*i)->staff(ssstaff - 1), m->tick(), m->tick() + m->tickLen(), sstaff);
+                              dh.handleElements(this, part->staff(ssstaff - 1), m->tick(), m->tick() + m->tickLen(), sstaff);
                               }
                         }
                   // move to end of measure (in case of incomplete last voice)
                   moveToTick(m->tick() + m->tickLen());
-                  BarLine * b = m->barLine(score->staff(*i));
+                  BarLine * b = m->barLine(score->staff(part));
                   bar(b, volta, "right");
                   xml.etag("measure");
                   }
