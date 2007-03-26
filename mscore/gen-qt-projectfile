@@ -1,0 +1,21 @@
+#!/bin/sh
+
+echo "TRANSLATIONS = \\"
+echo "      share/locale/mscore_de.ts \\"
+echo "      share/locale/mscore_ru.ts \\"
+echo "      share/locale/mscore_it.ts"
+
+echo "FORMS = \\"
+uis=`find mscore -name "*.ui"`
+for a in $uis; do
+      echo "    " $a \\;
+      done
+echo
+
+echo "SOURCES = \\"
+uis=`find mscore -name "*.cpp"`
+for a in $uis; do
+      echo "    " $a \\;
+      done
+echo
+echo
