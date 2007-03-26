@@ -129,9 +129,24 @@ int Note::totalTicks() const
 
 void Note::changePitch(int n)
       {
-      setPitch(n);
       _userAccidental = -1;
-//      chord()->measure()->layoutNoteHeads(staffIdx());
+      if (chord()) {
+            // keep notes sorted in chord:
+            Chord* c = chord();
+            NoteList* nl = c->noteList();
+            iNote i;
+            for (i = nl->lower_bound(pitch()); i != nl->upper_bound(pitch()); ++i) {
+                  if (i->second == this)
+                        break;
+                  }
+            if (i == nl->upper_bound(pitch())) {
+                  printf("Note::changePitch(): note not found in chord()\n");
+                  return;
+                  }
+            nl->erase(i);
+            nl->insert(std::pair<const int, Note*> (n, this));
+            }
+      setPitch(n);
       }
 
 //---------------------------------------------------------

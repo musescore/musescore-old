@@ -155,7 +155,7 @@ void Chord::setStem(Stem* s)
 
 QPointF Chord::stemPos(bool upFlag, bool top) const
       {
-      Note* note = (top ? !upFlag : upFlag) ? noteList()->front() : noteList()->back();
+      const Note* note = (top ? !upFlag : upFlag) ? downNote() : upNote();
       return note->stemPos(upFlag);
       }
 
@@ -281,8 +281,8 @@ void Chord::layoutStem(ScoreLayout* layout)
       double _spatium = layout->spatium();
       System* s      = segment()->measure()->system();
       double sy      = s->staff(staffIdx())->bbox().y();
-      Note* upnote   = notes.back();
-      Note* downnote = notes.front();
+      Note* upnote   = upNote();
+      Note* downnote = downNote();
 
       double uppos   = s->staff(staffIdx() + upnote->move())->bbox().y();
             uppos    = (uppos - sy)/_spatium * 2.0 + upnote->line();
@@ -613,7 +613,7 @@ void Chord::computeUp()
             return;
             }
 
-      Note* upnote = notes.rbegin()->second;
+      Note* upnote = upNote();
       if (notes.size() == 1) {
             if (upnote->move() > 0)
                   _up = true;
@@ -623,7 +623,7 @@ void Chord::computeUp()
                   _up = upnote->line() > 4;
             return;
             }
-      Note* downnote = notes.begin()->second;
+      Note* downnote = downNote();
       int ud = upnote->line() - 4;
       int dd = downnote->line() - 4;
       if (-ud == dd) {
@@ -711,7 +711,7 @@ void Chord::read(QDomNode node, int staffIdx)
                   note->setGrace(_grace);
                   note->setStaff(staff());
                   note->setVoice(voice());
-note->setHead(tickLen());
+                  note->setHead(tickLen());
                   note->read(node);
                   notes.add(note);
                   }
@@ -813,8 +813,7 @@ NoteList::iterator NoteList::add(Note* n)
 
 qreal Chord::upPos() const
       {
-      Note* upnote = notes.back();
-      return upnote->pos().y();
+      return upNote()->pos().y();
       }
 
 //---------------------------------------------------------
@@ -823,8 +822,7 @@ qreal Chord::upPos() const
 
 qreal Chord::downPos() const
       {
-      Note* downnote = notes.front();
-      return downnote->pos().y();
+      return downNote()->pos().y();
       }
 
 //---------------------------------------------------------
@@ -835,12 +833,12 @@ qreal Chord::centerX() const
       {
       qreal x;
       if (_up) {
-            Note* upnote = notes.back();
+            const Note* upnote = upNote();
             x  = upnote->pos().x();
             x += upnote->headWidth() * .5;
             }
       else {
-            Note* downnote = notes.front();
+            const Note* downnote = downNote();
             x = downnote->pos().x();
             x += downnote->headWidth() * .5;
             }
