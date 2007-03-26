@@ -1483,8 +1483,10 @@ void Score::cmdReplaceElements(Measure* sm, Measure* dm, int staffIdx)
                   if (tick)
                         tick = tick - srcTickOffset + dstTickOffset;
                   Segment* ns = dm->findSegment((Segment::SegmentType)s->subtype(), tick);
-                  if (ns == 0)
+                  if (ns == 0) {
                         ns = dm->createSegment((Segment::SegmentType)s->subtype(), tick);
+                        undoAddElement(ns);
+                        }
                   e->setParent(ns);
                   undoAddElement(e);
                   e->setSelected(false);

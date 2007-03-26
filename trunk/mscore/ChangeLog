@@ -1,4 +1,5 @@
 26.3.7 (ws)
+      - fix for measure cut&paste
       - midi export, sequencer: use Pedal and Ottava elements
       - ensure notes are sorted in chord after pitch change
 23.3.7 (ws)

@@ -795,7 +795,7 @@ void Cursor::draw(QPainter& p)
       if (!(_on && _blink))
             return;
       QPen pen(preferences.selectColor[voice()]);
-      pen.setWidthF(2.0 * p.matrix().m11());
+      pen.setWidthF(2.0 / p.matrix().m11());
       p.setPen(pen);
 
       QPointF pt(pos());

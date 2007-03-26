@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf8"?>
 <museScore version="1.0">
-  <Geometry x="676" y="68" w="1061" h="931" />
+  <Geometry x="53" y="0" w="1061" h="931" />
   <Spatium>1.62</Spatium>
   <Division>480</Division>
-  <Mag>1</Mag>
-  <xoff>12.37</xoff>
-  <yoff>26.125</yoff>
+  <Mag>1.59387</Mag>
+  <xoff>-993.581</xoff>
+  <yoff>-423.874</yoff>
   <Style>
     <staffUpperBorder>8</staffUpperBorder>
     <staffLowerBorder>4</staffLowerBorder>
@@ -81,9 +81,6 @@
       <denom>4</denom>
       </sig>
     </siglist>
-  <keylist>
-    <key tick="0" idx="0"/>
-    </keylist>
   <tempolist fix="500000">
     <tempo at="0">
       <tick>0</tick>
@@ -99,6 +96,9 @@
       <cleflist>
         <clef tick="0" idx="0"/>
         </cleflist>
+      <keylist>
+        <key tick="0" idx="0"/>
+        </keylist>
       <bracket type="1" span="2"/>
       </Staff>
     <Staff>
@@ -118,11 +118,14 @@
         <clef tick="90240" idx="0"/>
         <clef tick="128640" idx="4"/>
         </cleflist>
+      <keylist>
+        <key tick="0" idx="0"/>
+        </keylist>
       </Staff>
     <name>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;helvetica&apos;; font-size:11pt; font-weight:400; font-style:normal; text-decoration:none;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;16 &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</name>
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-size:12pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;helvetica&apos;; font-size:11pt;&quot;&gt;16 &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</name>
     <Instrument>
       <midiChannel>0</midiChannel>
       <midiProgram>0</midiProgram>
@@ -142,8 +145,8 @@ p, li { white-space: pre-wrap; }
         <spatiumSizeDependent>0</spatiumSizeDependent>
         <data>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-size:24pt; font-weight:400; font-style:normal; text-decoration:none;&quot;&gt;
-&lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Sonata Facile&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Arial&apos;; font-size:11pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Times New Roman&apos;; font-size:24pt;&quot;&gt;Sonata Facile&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
         <offset x="-0.132126" y="-0.924885"/>
         </Text>
       <Text>
@@ -155,7 +158,7 @@ p, li { white-space: pre-wrap; }
         <spatiumSizeDependent>0</spatiumSizeDependent>
         <data>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-size:12pt; font-weight:400; font-style:normal; text-decoration:none;&quot;&gt;
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-size:12pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p align=&quot;right&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;W.A.Mozart&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
         <subtype>Composer</subtype>
         </Text>
@@ -168,7 +171,7 @@ p, li { white-space: pre-wrap; }
         <spatiumSizeDependent>0</spatiumSizeDependent>
         <data>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-size:14pt; font-weight:400; font-style:normal; text-decoration:none;&quot;&gt;
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-size:14pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Köchel No. 545&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
         <subtype>Subtitle</subtype>
         </Text>
@@ -176,7 +179,7 @@ p, li { white-space: pre-wrap; }
       <Dynamic>
         <data>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-size:12pt; font-weight:400; font-style:italic; text-decoration:none;&quot;&gt;
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-size:12pt; font-weight:400; font-style:italic;&quot;&gt;
 &lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
         <offset x="-0.851995" y="7.25919"/>
         </Dynamic>
@@ -189,8 +192,8 @@ p, li { white-space: pre-wrap; }
         <spatiumSizeDependent>1</spatiumSizeDependent>
         <data>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;helvetica&apos;; font-size:11pt; font-weight:400; font-style:normal; text-decoration:none;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Allegro&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Arial&apos;; font-size:11pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;helvetica&apos;;&quot;&gt;Allegro&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
         <offset x="-0.972342" y="-0.367477"/>
         </Text>
       <TimeSig>
@@ -201,18 +204,21 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <ticklen>960</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>72</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>480</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>76</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>480</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>79</pitch>
           </Note>
         </Chord>
@@ -226,24 +232,28 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <ticklen>720</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>71</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>72</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>74</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>480</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>72</pitch>
           </Note>
         </Chord>
@@ -257,18 +267,21 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <ticklen>960</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>81</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>480</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>79</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>480</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>84</pitch>
           </Note>
         </Chord>
@@ -283,6 +296,7 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <ticklen>480</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>79</pitch>
           </Note>
         </Chord>
@@ -292,26 +306,31 @@ p, li { white-space: pre-wrap; }
           <idx>19</idx>
           <subtype>19</subtype>
           <offset x="0" y="-2.38125"/>
+          <tick>0</tick>
           </Attribute>
         <Note>
+          <tick>0</tick>
           <pitch>77</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>76</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>77</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>480</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>76</pitch>
           </Note>
         </Chord>
@@ -325,90 +344,105 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <ticklen>240</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>69</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>71</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>72</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>74</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>76</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>77</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>79</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>81</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>79</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>77</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>76</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>74</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>72</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>71</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>69</pitch>
           </Note>
         </Chord>
@@ -418,90 +452,105 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <ticklen>240</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>67</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>69</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>71</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>72</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>74</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>76</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>77</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>79</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>77</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>76</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>74</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>72</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>71</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>69</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>67</pitch>
           </Note>
         </Chord>
@@ -511,90 +560,105 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <ticklen>240</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>65</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>67</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>69</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>71</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>72</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>74</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>76</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>77</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>76</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>74</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>72</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>71</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>69</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>67</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>65</pitch>
           </Note>
         </Chord>
@@ -604,90 +668,105 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <ticklen>240</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>64</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>65</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>67</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>69</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>71</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>72</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>74</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>76</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>74</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>72</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>71</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>69</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>67</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>65</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>64</pitch>
           </Note>
         </Chord>
@@ -697,90 +776,105 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <ticklen>240</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>62</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>64</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>65</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>67</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>69</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>71</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>73</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>74</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>69</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>71</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>73</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>74</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>76</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>77</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>79</pitch>
           </Note>
         </Chord>
@@ -790,18 +884,21 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>81</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>83</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>84</pitch>
           <prefix>5</prefix>
           <line>-4</line>
@@ -810,78 +907,91 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>83</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>81</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>79</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>77</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>76</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>77</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>79</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>81</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>79</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>77</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>76</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>74</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>72</pitch>
           <prefix>5</prefix>
           <line>3</line>
@@ -893,12 +1003,14 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <ticklen>240</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>71</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>79</pitch>
           </Note>
         </Chord>
@@ -906,24 +1018,28 @@ p, li { white-space: pre-wrap; }
         <ticklen>240</ticklen>
         <BeamMode>2</BeamMode>
         <Note>
+          <tick>0</tick>
           <pitch>76</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>72</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>74</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>79</pitch>
           </Note>
         </Chord>
@@ -931,12 +1047,14 @@ p, li { white-space: pre-wrap; }
         <ticklen>240</ticklen>
         <BeamMode>2</BeamMode>
         <Note>
+          <tick>0</tick>
           <pitch>76</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>72</pitch>
           </Note>
         </Chord>
@@ -946,24 +1064,29 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <ticklen>480</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>74</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>480</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>71</pitch>
           </Note>
         <Note>
+          <tick>0</tick>
           <pitch>74</pitch>
           </Note>
         <Note>
+          <tick>0</tick>
           <pitch>79</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>480</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>67</pitch>
           </Note>
         </Chord>
@@ -992,42 +1115,49 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <ticklen>240</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>86</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>83</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>720</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>79</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>81</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>83</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>81</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>79</pitch>
           </Note>
         </Chord>
@@ -1044,20 +1174,24 @@ p, li { white-space: pre-wrap; }
           <idx>19</idx>
           <subtype>19</subtype>
           <offset x="-0.14399" y="-0.50236"/>
+          <tick>0</tick>
           </Attribute>
         <Note>
+          <tick>0</tick>
           <pitch>79</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>78</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>480</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>78</pitch>
           </Note>
         </Chord>
@@ -1079,42 +1213,49 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <ticklen>240</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>86</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>83</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>720</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>79</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>81</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>83</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>81</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>79</pitch>
           </Note>
         </Chord>
@@ -1130,20 +1271,24 @@ p, li { white-space: pre-wrap; }
         <Attribute>
           <idx>19</idx>
           <subtype>19</subtype>
+          <tick>0</tick>
           </Attribute>
         <Note>
+          <tick>0</tick>
           <pitch>79</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>78</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>480</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>78</pitch>
           </Note>
         </Chord>
@@ -1157,6 +1302,7 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <ticklen>480</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>86</pitch>
           </Note>
         </Chord>
@@ -1167,24 +1313,28 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>86</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>83</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>79</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>480</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>76</pitch>
           </Note>
         </Chord>
@@ -1195,18 +1345,21 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>76</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>79</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>76</pitch>
           </Note>
         </Chord>
@@ -1221,6 +1374,7 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <ticklen>480</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>84</pitch>
           </Note>
         </Chord>
@@ -1231,18 +1385,21 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>84</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>81</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>78</pitch>
           <prefix>1</prefix>
           <line>0</line>
@@ -1251,6 +1408,7 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <ticklen>480</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>74</pitch>
           </Note>
         </Chord>
@@ -1261,18 +1419,21 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>74</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>78</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>74</pitch>
           </Note>
         </Chord>
@@ -1282,6 +1443,7 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <ticklen>480</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>83</pitch>
           </Note>
         </Chord>
@@ -1292,24 +1454,28 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>83</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>79</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>76</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>480</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>72</pitch>
           </Note>
         </Chord>
@@ -1320,18 +1486,21 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>72</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>76</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>72</pitch>
           </Note>
         </Chord>
@@ -1341,6 +1510,7 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <ticklen>480</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>81</pitch>
           </Note>
         </Chord>
@@ -1351,24 +1521,28 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>81</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>78</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>72</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>480</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>71</pitch>
           </Note>
         </Chord>
@@ -1379,18 +1553,21 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>79</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>74</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>71</pitch>
           </Note>
         </Chord>
@@ -1400,18 +1577,21 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <ticklen>960</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>69</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>480</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>72</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>480</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>76</pitch>
           </Note>
         </Chord>
@@ -1429,36 +1609,42 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <ticklen>720</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>81</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>60</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>83</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>60</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>81</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>60</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>80</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>60</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>81</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>84</pitch>
           </Note>
         </Chord>
@@ -1466,6 +1652,7 @@ p, li { white-space: pre-wrap; }
         <ticklen>240</ticklen>
         <BeamMode>2</BeamMode>
         <Note>
+          <tick>0</tick>
           <pitch>81</pitch>
           </Note>
         </Chord>
@@ -1473,12 +1660,14 @@ p, li { white-space: pre-wrap; }
         <ticklen>240</ticklen>
         <BeamMode>2</BeamMode>
         <Note>
+          <tick>0</tick>
           <pitch>84</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>81</pitch>
           </Note>
         </Chord>
@@ -1488,12 +1677,14 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <ticklen>240</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>83</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>79</pitch>
           <prefix>5</prefix>
           <line>-1</line>
@@ -1502,30 +1693,35 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <ticklen>960</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>86</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>84</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>83</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>81</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>79</pitch>
           </Note>
         </Chord>
@@ -1533,12 +1729,16 @@ p, li { white-space: pre-wrap; }
     <Measure number="25">
       <BarLine/>
       <Trill>
-        <tick1>46080</tick1>
         <tick2>47880</tick2>
+        <Segment>
+          <off1 x="0.409878" y="-2.56174"/>
+          <off2 x="0.409878" y="0"/>
+          </Segment>
         </Trill>
       <Chord>
         <ticklen>1920</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>81</pitch>
           </Note>
         </Chord>
@@ -1548,78 +1748,91 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <ticklen>480</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>79</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>79</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>74</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>79</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>83</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>86</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>83</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>79</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>83</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>84</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>81</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>78</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>81</pitch>
           </Note>
         </Chord>
@@ -1629,78 +1842,91 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <ticklen>480</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>79</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>67</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>62</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>67</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>71</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>74</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>71</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>67</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>71</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>72</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>69</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>66</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>69</pitch>
           </Note>
         </Chord>
@@ -1708,28 +1934,34 @@ p, li { white-space: pre-wrap; }
     <Measure number="28">
       <BarLine>
         <subtype>3</subtype>
+        <tick>0</tick>
         </BarLine>
       <Chord>
         <ticklen>480</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>67</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>480</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>74</pitch>
           </Note>
         <Note>
+          <tick>0</tick>
           <pitch>83</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>480</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>71</pitch>
           </Note>
         <Note>
+          <tick>0</tick>
           <pitch>79</pitch>
           </Note>
         </Chord>
@@ -1743,72 +1975,84 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <ticklen>480</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>67</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>79</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>74</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>79</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>82</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>86</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>82</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>79</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>82</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>84</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>81</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>78</pitch>
           <prefix>1</prefix>
           <line>0</line>
@@ -1817,6 +2061,7 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>81</pitch>
           </Note>
         </Chord>
@@ -1826,78 +2071,91 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <ticklen>480</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>79</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>67</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>62</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>67</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>70</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>74</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>70</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>67</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>70</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>72</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>69</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>66</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>69</pitch>
           </Note>
         </Chord>
@@ -1907,6 +2165,7 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <ticklen>480</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>67</pitch>
           </Note>
         </Chord>
@@ -1921,30 +2180,35 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>79</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>82</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>81</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>79</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>77</pitch>
           <prefix>5</prefix>
           <line>0</line>
@@ -1953,12 +2217,14 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>76</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>74</pitch>
           </Note>
         </Chord>
@@ -1968,6 +2234,7 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <ticklen>480</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>73</pitch>
           </Note>
         </Chord>
@@ -1982,42 +2249,49 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>85</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>88</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>86</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>85</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>82</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>81</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>79</pitch>
           </Note>
         </Chord>
@@ -2027,6 +2301,7 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <ticklen>480</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>77</pitch>
           <prefix>5</prefix>
           <line>0</line>
@@ -2035,72 +2310,84 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>74</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>69</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>74</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>77</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>81</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>77</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>74</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>77</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>79</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>76</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>73</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>76</pitch>
           </Note>
         </Chord>
@@ -2110,78 +2397,91 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <ticklen>480</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>74</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>62</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>57</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>62</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>65</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>69</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>65</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>62</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>65</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>67</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>64</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>61</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>64</pitch>
           </Note>
         </Chord>
@@ -2195,36 +2495,42 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>62</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>64</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>65</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>67</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>69</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>71</pitch>
           <prefix>5</prefix>
           <line>4</line>
@@ -2233,12 +2539,14 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>73</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>480</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>74</pitch>
           </Note>
         </Chord>
@@ -2256,48 +2564,56 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>71</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>72</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>74</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>76</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>78</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>80</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>81</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>480</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>83</pitch>
           </Note>
         </Chord>
@@ -2315,42 +2631,49 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>81</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>88</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>86</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>84</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>83</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>81</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>79</pitch>
           <prefix>5</prefix>
           <line>-1</line>
@@ -2359,6 +2682,7 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <ticklen>480</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>77</pitch>
           <prefix>5</prefix>
           <line>0</line>
@@ -2378,48 +2702,56 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>77</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>86</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>84</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>83</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>81</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>79</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>77</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>480</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>76</pitch>
           </Note>
         </Chord>
@@ -2437,48 +2769,56 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>77</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>84</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>83</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>81</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>79</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>77</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>76</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>480</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>74</pitch>
           </Note>
         </Chord>
@@ -2496,30 +2836,35 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>76</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>83</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>81</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>80</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>77</pitch>
           <prefix>5</prefix>
           <line>0</line>
@@ -2528,18 +2873,21 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>76</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>74</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>480</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>72</pitch>
           </Note>
         </Chord>
@@ -2557,90 +2905,105 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>70</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>74</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>72</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>70</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>69</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>67</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>65</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>64</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>65</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>67</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>69</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>70</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>72</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>74</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>76</pitch>
           </Note>
         </Chord>
@@ -2650,18 +3013,21 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <ticklen>960</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>77</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>480</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>81</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>480</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>84</pitch>
           </Note>
         </Chord>
@@ -2671,24 +3037,28 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <ticklen>720</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>76</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>77</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>79</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>480</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>77</pitch>
           </Note>
         </Chord>
@@ -2702,18 +3072,21 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <ticklen>960</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>86</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>480</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>84</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>480</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>89</pitch>
           </Note>
         </Chord>
@@ -2723,30 +3096,35 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <ticklen>480</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>84</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>82</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>81</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>82</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>480</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>81</pitch>
           </Note>
         </Chord>
@@ -2760,90 +3138,105 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <ticklen>240</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>74</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>76</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>77</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>79</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>81</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>82</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>84</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>86</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>84</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>82</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>81</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>79</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>77</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>76</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>74</pitch>
           </Note>
         </Chord>
@@ -2853,90 +3246,105 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <ticklen>240</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>72</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>74</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>76</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>77</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>79</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>81</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>82</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>84</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>82</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>81</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>79</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>77</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>76</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>74</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>72</pitch>
           </Note>
         </Chord>
@@ -2946,90 +3354,105 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <ticklen>240</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>70</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>72</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>74</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>76</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>77</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>79</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>81</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>82</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>81</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>79</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>77</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>76</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>74</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>72</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>70</pitch>
           </Note>
         </Chord>
@@ -3039,90 +3462,105 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <ticklen>240</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>69</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>70</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>72</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>74</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>76</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>77</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>79</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>81</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>79</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>77</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>76</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>74</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>72</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>70</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>69</pitch>
           </Note>
         </Chord>
@@ -3132,6 +3570,7 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <ticklen>480</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>81</pitch>
           </Note>
         </Chord>
@@ -3146,9 +3585,11 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <ticklen>480</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>72</pitch>
           </Note>
         <Note>
+          <tick>0</tick>
           <pitch>81</pitch>
           </Note>
         </Chord>
@@ -3158,9 +3599,11 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <ticklen>480</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>72</pitch>
           </Note>
         <Note>
+          <tick>0</tick>
           <pitch>79</pitch>
           </Note>
         </Chord>
@@ -3175,9 +3618,11 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <ticklen>480</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>72</pitch>
           </Note>
         <Note>
+          <tick>0</tick>
           <pitch>79</pitch>
           </Note>
         </Chord>
@@ -3187,9 +3632,11 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <ticklen>480</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>72</pitch>
           </Note>
         <Note>
+          <tick>0</tick>
           <pitch>77</pitch>
           </Note>
         </Chord>
@@ -3204,11 +3651,13 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <ticklen>480</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>71</pitch>
           <prefix>5</prefix>
           <line>4</line>
           </Note>
         <Note>
+          <tick>0</tick>
           <pitch>77</pitch>
           </Note>
         </Chord>
@@ -3218,9 +3667,11 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <ticklen>480</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>72</pitch>
           </Note>
         <Note>
+          <tick>0</tick>
           <pitch>76</pitch>
           </Note>
         </Chord>
@@ -3235,9 +3686,11 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <ticklen>480</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>72</pitch>
           </Note>
         <Note>
+          <tick>0</tick>
           <pitch>76</pitch>
           </Note>
         </Chord>
@@ -3247,96 +3700,112 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>74</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>62</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>64</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>65</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>67</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>69</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>71</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>73</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>74</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>69</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>71</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>73</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>74</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>76</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>77</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>79</pitch>
           </Note>
         </Chord>
@@ -3346,18 +3815,21 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>81</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>83</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>84</pitch>
           <prefix>5</prefix>
           <line>-4</line>
@@ -3366,78 +3838,91 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>83</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>81</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>79</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>77</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>76</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>77</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>79</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>81</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>79</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>77</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>76</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>74</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>72</pitch>
           <prefix>5</prefix>
           <line>3</line>
@@ -3449,48 +3934,56 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <ticklen>240</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>71</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>79</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>76</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>72</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>74</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>79</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>76</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>72</pitch>
           </Note>
         </Chord>
@@ -3500,24 +3993,29 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <ticklen>480</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>74</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>480</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>71</pitch>
           </Note>
         <Note>
+          <tick>0</tick>
           <pitch>74</pitch>
           </Note>
         <Note>
+          <tick>0</tick>
           <pitch>79</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>480</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>67</pitch>
           </Note>
         </Chord>
@@ -3538,42 +4036,49 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <ticklen>240</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>79</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>76</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>720</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>72</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>74</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>76</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>74</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>72</pitch>
           </Note>
         </Chord>
@@ -3583,18 +4088,21 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <ticklen>360</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>72</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>71</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>480</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>71</pitch>
           </Note>
         </Chord>
@@ -3608,42 +4116,49 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <ticklen>240</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>79</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>76</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>720</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>72</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>74</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>76</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>74</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>72</pitch>
           </Note>
         </Chord>
@@ -3653,18 +4168,21 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <ticklen>360</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>72</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>71</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>480</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>71</pitch>
           </Note>
         </Chord>
@@ -3678,6 +4196,7 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <ticklen>480</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>79</pitch>
           </Note>
         </Chord>
@@ -3688,24 +4207,28 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>79</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>76</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>72</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>480</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>69</pitch>
           </Note>
         </Chord>
@@ -3716,18 +4239,21 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>69</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>72</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>69</pitch>
           </Note>
         </Chord>
@@ -3737,6 +4263,7 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <ticklen>480</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>65</pitch>
           </Note>
         </Chord>
@@ -3747,24 +4274,28 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>77</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>74</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>71</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>480</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>67</pitch>
           </Note>
         </Chord>
@@ -3775,18 +4306,21 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>79</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>83</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>79</pitch>
           </Note>
         </Chord>
@@ -3796,6 +4330,7 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <ticklen>480</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>88</pitch>
           </Note>
         </Chord>
@@ -3806,24 +4341,28 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>88</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>84</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>81</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>480</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>77</pitch>
           </Note>
         </Chord>
@@ -3834,18 +4373,21 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>77</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>81</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>77</pitch>
           </Note>
         </Chord>
@@ -3855,6 +4397,7 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <ticklen>480</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>86</pitch>
           </Note>
         </Chord>
@@ -3865,24 +4408,28 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>86</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>83</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>79</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>480</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>76</pitch>
           </Note>
         </Chord>
@@ -3893,18 +4440,21 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>84</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>79</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>76</pitch>
           </Note>
         </Chord>
@@ -3914,18 +4464,21 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <ticklen>960</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>74</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>480</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>74</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>480</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>74</pitch>
           </Note>
         </Chord>
@@ -3935,18 +4488,21 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <ticklen>960</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>81</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>480</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>81</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>480</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>81</pitch>
           </Note>
         </Chord>
@@ -3956,6 +4512,7 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <ticklen>240</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>79</pitch>
           <prefix>5</prefix>
           <line>-1</line>
@@ -3964,84 +4521,98 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>81</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>83</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>84</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>86</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>88</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>86</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>84</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>83</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>81</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>79</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>77</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>76</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>74</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>72</pitch>
           </Note>
         </Chord>
@@ -4051,6 +4622,7 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <ticklen>1920</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>74</pitch>
           </Note>
         </Chord>
@@ -4060,78 +4632,91 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <ticklen>480</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>72</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>72</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>67</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>72</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>76</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>79</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>74</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>72</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>76</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>77</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>74</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>71</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>74</pitch>
           </Note>
         </Chord>
@@ -4141,78 +4726,91 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <ticklen>480</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>72</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>60</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>55</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>60</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>64</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>67</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>64</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>60</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>64</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>65</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>62</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>59</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>62</pitch>
           </Note>
         </Chord>
@@ -4220,28 +4818,34 @@ p, li { white-space: pre-wrap; }
     <Measure number="73">
       <BarLine>
         <subtype>3</subtype>
+        <tick>0</tick>
         </BarLine>
       <Chord>
         <ticklen>480</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>60</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>480</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>76</pitch>
           </Note>
         <Note>
+          <tick>0</tick>
           <pitch>79</pitch>
           </Note>
         <Note>
+          <tick>0</tick>
           <pitch>84</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>480</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>72</pitch>
           </Note>
         </Chord>
@@ -4256,7 +4860,7 @@ p, li { white-space: pre-wrap; }
       <Dynamic>
         <data>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-size:12pt; font-weight:400; font-style:italic; text-decoration:none;&quot;&gt;
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-size:12pt; font-weight:400; font-style:italic;&quot;&gt;
 &lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
         <offset x="-0.0990949" y="7.19393"/>
         </Dynamic>
@@ -4268,12 +4872,14 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <ticklen>240</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>60</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>67</pitch>
           </Note>
         </Chord>
@@ -4281,24 +4887,28 @@ p, li { white-space: pre-wrap; }
         <ticklen>240</ticklen>
         <BeamMode>2</BeamMode>
         <Note>
+          <tick>0</tick>
           <pitch>64</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>67</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>60</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>67</pitch>
           </Note>
         </Chord>
@@ -4306,12 +4916,14 @@ p, li { white-space: pre-wrap; }
         <ticklen>240</ticklen>
         <BeamMode>2</BeamMode>
         <Note>
+          <tick>0</tick>
           <pitch>64</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>67</pitch>
           </Note>
         </Chord>
@@ -4320,12 +4932,14 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <ticklen>240</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>62</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>67</pitch>
           </Note>
         </Chord>
@@ -4333,24 +4947,28 @@ p, li { white-space: pre-wrap; }
         <ticklen>240</ticklen>
         <BeamMode>2</BeamMode>
         <Note>
+          <tick>0</tick>
           <pitch>65</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>67</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>60</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>67</pitch>
           </Note>
         </Chord>
@@ -4358,12 +4976,14 @@ p, li { white-space: pre-wrap; }
         <ticklen>240</ticklen>
         <BeamMode>2</BeamMode>
         <Note>
+          <tick>0</tick>
           <pitch>64</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>67</pitch>
           </Note>
         </Chord>
@@ -4372,12 +4992,14 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <ticklen>240</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>60</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>69</pitch>
           </Note>
         </Chord>
@@ -4385,24 +5007,28 @@ p, li { white-space: pre-wrap; }
         <ticklen>240</ticklen>
         <BeamMode>2</BeamMode>
         <Note>
+          <tick>0</tick>
           <pitch>65</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>69</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>60</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>67</pitch>
           </Note>
         </Chord>
@@ -4410,12 +5036,14 @@ p, li { white-space: pre-wrap; }
         <ticklen>240</ticklen>
         <BeamMode>2</BeamMode>
         <Note>
+          <tick>0</tick>
           <pitch>64</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>67</pitch>
           </Note>
         </Chord>
@@ -4424,12 +5052,14 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <ticklen>240</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>59</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>67</pitch>
           </Note>
         </Chord>
@@ -4437,24 +5067,28 @@ p, li { white-space: pre-wrap; }
         <ticklen>240</ticklen>
         <BeamMode>2</BeamMode>
         <Note>
+          <tick>0</tick>
           <pitch>62</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>67</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>60</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>67</pitch>
           </Note>
         </Chord>
@@ -4462,12 +5096,14 @@ p, li { white-space: pre-wrap; }
         <ticklen>240</ticklen>
         <BeamMode>2</BeamMode>
         <Note>
+          <tick>0</tick>
           <pitch>64</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>67</pitch>
           </Note>
         </Chord>
@@ -4476,6 +5112,7 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <ticklen>480</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>65</pitch>
           </Note>
         </Chord>
@@ -4488,15 +5125,17 @@ p, li { white-space: pre-wrap; }
         <BeamMode>4</BeamMode>
         </Rest>
       <Clef>
-        <subtype>4</subtype>
+        <subtype>4100</subtype>
         <offset x="0" y="1"/>
         </Clef>
       <Chord>
         <ticklen>480</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>53</pitch>
           </Note>
         <Note>
+          <tick>0</tick>
           <pitch>60</pitch>
           </Note>
         </Chord>
@@ -4505,9 +5144,11 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <ticklen>480</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>52</pitch>
           </Note>
         <Note>
+          <tick>0</tick>
           <pitch>60</pitch>
           </Note>
         </Chord>
@@ -4522,9 +5163,11 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <ticklen>480</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>52</pitch>
           </Note>
         <Note>
+          <tick>0</tick>
           <pitch>60</pitch>
           </Note>
         </Chord>
@@ -4533,9 +5176,11 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <ticklen>480</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>50</pitch>
           </Note>
         <Note>
+          <tick>0</tick>
           <pitch>60</pitch>
           </Note>
         </Chord>
@@ -4550,9 +5195,11 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <ticklen>480</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>50</pitch>
           </Note>
         <Note>
+          <tick>0</tick>
           <pitch>59</pitch>
           </Note>
         </Chord>
@@ -4561,9 +5208,11 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <ticklen>480</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>48</pitch>
           </Note>
         <Note>
+          <tick>0</tick>
           <pitch>60</pitch>
           </Note>
         </Chord>
@@ -4578,9 +5227,11 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <ticklen>480</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>48</pitch>
           </Note>
         <Note>
+          <tick>0</tick>
           <pitch>52</pitch>
           </Note>
         </Chord>
@@ -4589,9 +5240,11 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <ticklen>1920</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>53</pitch>
           </Note>
         <Note>
+          <tick>0</tick>
           <pitch>57</pitch>
           </Note>
         </Chord>
@@ -4600,24 +5253,28 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <ticklen>720</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>53</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>55</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>720</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>57</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>54</pitch>
           </Note>
         </Chord>
@@ -4626,12 +5283,14 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>43</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>47</pitch>
           </Note>
         </Chord>
@@ -4639,84 +5298,98 @@ p, li { white-space: pre-wrap; }
         <ticklen>120</ticklen>
         <BeamMode>2</BeamMode>
         <Note>
+          <tick>0</tick>
           <pitch>50</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>55</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>43</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>48</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>52</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>55</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>43</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>47</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>50</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>55</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>43</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>47</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>50</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>55</pitch>
           </Note>
         </Chord>
@@ -4725,18 +5398,21 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <ticklen>480</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>43</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>480</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>55</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>480</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>43</pitch>
           </Note>
         </Chord>
@@ -4749,54 +5425,63 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>61</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>62</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>61</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>62</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>61</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>62</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>61</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>62</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>60</pitch>
           <prefix>5</prefix>
           <line>-2</line>
@@ -4805,42 +5490,49 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>62</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>61</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>62</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>61</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>62</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>61</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>62</pitch>
           </Note>
         </Chord>
@@ -4849,96 +5541,112 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>59</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>62</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>59</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>62</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>59</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>62</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>59</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>62</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>59</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>62</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>59</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>62</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>59</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>62</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>59</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>62</pitch>
           </Note>
         </Chord>
@@ -4947,96 +5655,112 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>60</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>62</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>59</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>62</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>57</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>62</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>59</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>62</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>60</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>62</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>59</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>62</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>60</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>62</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>57</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>62</pitch>
           </Note>
         </Chord>
@@ -5045,96 +5769,112 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>59</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>62</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>59</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>62</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>59</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>62</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>59</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>62</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>59</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>62</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>59</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>62</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>59</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>62</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>59</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>62</pitch>
           </Note>
         </Chord>
@@ -5143,96 +5883,112 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>60</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>62</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>59</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>62</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>57</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>62</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>59</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>62</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>60</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>62</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>59</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>62</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>60</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>62</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>57</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>62</pitch>
           </Note>
         </Chord>
@@ -5249,24 +6005,28 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>59</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>62</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>67</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>480</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>71</pitch>
           </Note>
         </Chord>
@@ -5277,24 +6037,28 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>60</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>64</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>67</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>480</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>72</pitch>
           </Note>
         </Chord>
@@ -5307,24 +6071,28 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>57</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>60</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>65</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>480</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>69</pitch>
           </Note>
         </Chord>
@@ -5335,24 +6103,28 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>59</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>62</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>66</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>480</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>71</pitch>
           </Note>
         </Chord>
@@ -5365,24 +6137,28 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>55</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>59</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>64</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>480</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>67</pitch>
           </Note>
         </Chord>
@@ -5393,24 +6169,28 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>57</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>60</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>64</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>480</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>69</pitch>
           </Note>
         </Chord>
@@ -5423,24 +6203,28 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>54</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>57</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>62</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>480</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>66</pitch>
           </Note>
         </Chord>
@@ -5451,24 +6235,28 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>55</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>59</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>62</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>480</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>67</pitch>
           </Note>
         </Chord>
@@ -5477,9 +6265,11 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <ticklen>240</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>60</pitch>
           </Note>
         <Note>
+          <tick>0</tick>
           <pitch>64</pitch>
           </Note>
         </Chord>
@@ -5487,9 +6277,11 @@ p, li { white-space: pre-wrap; }
         <ticklen>240</ticklen>
         <BeamMode>2</BeamMode>
         <Note>
+          <tick>0</tick>
           <pitch>60</pitch>
           </Note>
         <Note>
+          <tick>0</tick>
           <pitch>64</pitch>
           </Note>
         </Chord>
@@ -5497,36 +6289,44 @@ p, li { white-space: pre-wrap; }
         <ticklen>240</ticklen>
         <BeamMode>2</BeamMode>
         <Note>
+          <tick>0</tick>
           <pitch>60</pitch>
           </Note>
         <Note>
+          <tick>0</tick>
           <pitch>64</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>60</pitch>
           </Note>
         <Note>
+          <tick>0</tick>
           <pitch>64</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>60</pitch>
           </Note>
         <Note>
+          <tick>0</tick>
           <pitch>64</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>60</pitch>
           </Note>
         <Note>
+          <tick>0</tick>
           <pitch>64</pitch>
           </Note>
         </Chord>
@@ -5534,18 +6334,22 @@ p, li { white-space: pre-wrap; }
         <ticklen>240</ticklen>
         <BeamMode>2</BeamMode>
         <Note>
+          <tick>0</tick>
           <pitch>60</pitch>
           </Note>
         <Note>
+          <tick>0</tick>
           <pitch>64</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>60</pitch>
           </Note>
         <Note>
+          <tick>0</tick>
           <pitch>64</pitch>
           </Note>
         </Chord>
@@ -5554,55 +6358,22 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <ticklen>240</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>60</pitch>
           </Note>
         <Note>
+          <tick>0</tick>
           <pitch>64</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>60</pitch>
           </Note>
         <Note>
-          <pitch>64</pitch>
-          </Note>
-        </Chord>
-      <Chord>
-        <ticklen>240</ticklen>
-        <BeamMode>2</BeamMode>
-        <Note>
-          <pitch>60</pitch>
-          </Note>
-        <Note>
-          <pitch>64</pitch>
-          </Note>
-        </Chord>
-      <Chord>
-        <ticklen>240</ticklen>
-        <Note>
-          <pitch>60</pitch>
-          </Note>
-        <Note>
-          <pitch>64</pitch>
-          </Note>
-        </Chord>
-      <Chord>
-        <ticklen>240</ticklen>
-        <Note>
-          <pitch>60</pitch>
-          </Note>
-        <Note>
-          <pitch>64</pitch>
-          </Note>
-        </Chord>
-      <Chord>
-        <ticklen>240</ticklen>
-        <Note>
-          <pitch>60</pitch>
-          </Note>
-        <Note>
+          <tick>0</tick>
           <pitch>64</pitch>
           </Note>
         </Chord>
@@ -5610,9 +6381,44 @@ p, li { white-space: pre-wrap; }
         <ticklen>240</ticklen>
         <BeamMode>2</BeamMode>
         <Note>
+          <tick>0</tick>
           <pitch>60</pitch>
           </Note>
         <Note>
+          <tick>0</tick>
+          <pitch>64</pitch>
+          </Note>
+        </Chord>
+      <Chord>
+        <ticklen>240</ticklen>
+        <Note>
+          <tick>0</tick>
+          <pitch>60</pitch>
+          </Note>
+        <Note>
+          <tick>0</tick>
+          <pitch>64</pitch>
+          </Note>
+        </Chord>
+      <Chord>
+        <ticklen>240</ticklen>
+        <Note>
+          <tick>0</tick>
+          <pitch>60</pitch>
+          </Note>
+        <Note>
+          <tick>0</tick>
+          <pitch>64</pitch>
+          </Note>
+        </Chord>
+      <Chord>
+        <ticklen>240</ticklen>
+        <Note>
+          <tick>0</tick>
+          <pitch>60</pitch>
+          </Note>
+        <Note>
+          <tick>0</tick>
           <pitch>64</pitch>
           </Note>
         </Chord>
@@ -5620,9 +6426,23 @@ p, li { white-space: pre-wrap; }
         <ticklen>240</ticklen>
         <BeamMode>2</BeamMode>
         <Note>
+          <tick>0</tick>
           <pitch>60</pitch>
           </Note>
         <Note>
+          <tick>0</tick>
+          <pitch>64</pitch>
+          </Note>
+        </Chord>
+      <Chord>
+        <ticklen>240</ticklen>
+        <BeamMode>2</BeamMode>
+        <Note>
+          <tick>0</tick>
+          <pitch>60</pitch>
+          </Note>
+        <Note>
+          <tick>0</tick>
           <pitch>64</pitch>
           </Note>
         </Chord>
@@ -5631,96 +6451,112 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>62</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>71</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>67</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>71</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>62</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>71</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>67</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>71</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>62</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>71</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>67</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>69</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>62</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>71</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>67</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>71</pitch>
           </Note>
         </Chord>
@@ -5729,96 +6565,112 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>62</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>72</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>66</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>72</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>62</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>72</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>66</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>72</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>62</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>72</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>66</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>72</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>62</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>72</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>66</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>72</pitch>
           </Note>
         </Chord>
@@ -5827,9 +6679,11 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <ticklen>480</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>67</pitch>
           </Note>
         <Note>
+          <tick>0</tick>
           <pitch>71</pitch>
           </Note>
         </Chord>
@@ -5844,12 +6698,15 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <ticklen>480</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>62</pitch>
           </Note>
         <Note>
+          <tick>0</tick>
           <pitch>69</pitch>
           </Note>
         <Note>
+          <tick>0</tick>
           <pitch>72</pitch>
           </Note>
         </Chord>
@@ -5858,9 +6715,11 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <ticklen>480</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>67</pitch>
           </Note>
         <Note>
+          <tick>0</tick>
           <pitch>71</pitch>
           </Note>
         </Chord>
@@ -5879,12 +6738,15 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <ticklen>480</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>50</pitch>
           </Note>
         <Note>
+          <tick>0</tick>
           <pitch>57</pitch>
           </Note>
         <Note>
+          <tick>0</tick>
           <pitch>60</pitch>
           </Note>
         </Chord>
@@ -5893,27 +6755,33 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <ticklen>480</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>55</pitch>
           </Note>
         <Note>
+          <tick>0</tick>
           <pitch>59</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>480</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>43</pitch>
           </Note>
         <Note>
+          <tick>0</tick>
           <pitch>55</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>480</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>43</pitch>
           </Note>
         <Note>
+          <tick>0</tick>
           <pitch>55</pitch>
           </Note>
         </Chord>
@@ -5926,9 +6794,11 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <ticklen>480</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>43</pitch>
           </Note>
         <Note>
+          <tick>0</tick>
           <pitch>55</pitch>
           </Note>
         </Chord>
@@ -5941,17 +6811,21 @@ p, li { white-space: pre-wrap; }
         <BeamMode>4</BeamMode>
         </Rest>
       <Clef>
+        <subtype>4096</subtype>
         <offset x="0" y="3"/>
         </Clef>
       <Chord>
         <ticklen>480</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>62</pitch>
           </Note>
         <Note>
+          <tick>0</tick>
           <pitch>69</pitch>
           </Note>
         <Note>
+          <tick>0</tick>
           <pitch>72</pitch>
           </Note>
         </Chord>
@@ -5960,9 +6834,11 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <ticklen>480</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>67</pitch>
           </Note>
         <Note>
+          <tick>0</tick>
           <pitch>70</pitch>
           </Note>
         </Chord>
@@ -5981,12 +6857,15 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <ticklen>480</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>50</pitch>
           </Note>
         <Note>
+          <tick>0</tick>
           <pitch>57</pitch>
           </Note>
         <Note>
+          <tick>0</tick>
           <pitch>60</pitch>
           </Note>
         </Chord>
@@ -5999,48 +6878,56 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>43</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>45</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>46</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>48</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>50</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>52</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>54</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>480</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>55</pitch>
           </Note>
         </Chord>
@@ -6057,12 +6944,14 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>45</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>47</pitch>
           <prefix>5</prefix>
           <line>6</line>
@@ -6071,36 +6960,42 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>49</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>50</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>52</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>54</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>56</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>480</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>57</pitch>
           </Note>
         </Chord>
@@ -6113,9 +7008,11 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <ticklen>480</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>38</pitch>
           </Note>
         <Note>
+          <tick>0</tick>
           <pitch>50</pitch>
           </Note>
         </Chord>
@@ -6128,17 +7025,21 @@ p, li { white-space: pre-wrap; }
         <BeamMode>4</BeamMode>
         </Rest>
       <Clef>
+        <subtype>4096</subtype>
         <offset x="0" y="3"/>
         </Clef>
       <Chord>
         <ticklen>480</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>57</pitch>
           </Note>
         <Note>
+          <tick>0</tick>
           <pitch>64</pitch>
           </Note>
         <Note>
+          <tick>0</tick>
           <pitch>67</pitch>
           </Note>
         </Chord>
@@ -6147,9 +7048,11 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <ticklen>480</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>62</pitch>
           </Note>
         <Note>
+          <tick>0</tick>
           <pitch>65</pitch>
           </Note>
         </Chord>
@@ -6162,18 +7065,21 @@ p, li { white-space: pre-wrap; }
         <BeamMode>4</BeamMode>
         </Rest>
       <Clef>
-        <subtype>4</subtype>
+        <subtype>4100</subtype>
         <offset x="0" y="1"/>
         </Clef>
       <Chord>
         <ticklen>480</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>45</pitch>
           </Note>
         <Note>
+          <tick>0</tick>
           <pitch>52</pitch>
           </Note>
         <Note>
+          <tick>0</tick>
           <pitch>55</pitch>
           </Note>
         </Chord>
@@ -6182,9 +7088,11 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <ticklen>480</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>50</pitch>
           </Note>
         <Note>
+          <tick>0</tick>
           <pitch>53</pitch>
           </Note>
         </Chord>
@@ -6199,30 +7107,35 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>62</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>65</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>64</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>62</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>60</pitch>
           <prefix>5</prefix>
           <line>-2</line>
@@ -6231,12 +7144,14 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>59</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>57</pitch>
           </Note>
         </Chord>
@@ -6245,6 +7160,7 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <ticklen>480</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>56</pitch>
           </Note>
         </Chord>
@@ -6259,30 +7175,35 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>56</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>59</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>57</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>56</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>53</pitch>
           <prefix>5</prefix>
           <line>2</line>
@@ -6291,12 +7212,14 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>52</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>50</pitch>
           </Note>
         </Chord>
@@ -6305,6 +7228,7 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <ticklen>480</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>48</pitch>
           </Note>
         </Chord>
@@ -6319,42 +7243,49 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>62</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>69</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>67</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>65</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>64</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>62</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>60</pitch>
           </Note>
         </Chord>
@@ -6363,6 +7294,7 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <ticklen>480</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>59</pitch>
           </Note>
         </Chord>
@@ -6378,36 +7310,42 @@ p, li { white-space: pre-wrap; }
         <tick>72240</tick>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>67</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>65</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>64</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>62</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>60</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>59</pitch>
           </Note>
         </Chord>
@@ -6416,6 +7354,7 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <ticklen>480</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>57</pitch>
           </Note>
         </Chord>
@@ -6430,42 +7369,49 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>59</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>65</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>64</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>62</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>60</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>59</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>57</pitch>
           </Note>
         </Chord>
@@ -6474,6 +7420,7 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <ticklen>480</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>56</pitch>
           </Note>
         </Chord>
@@ -6488,42 +7435,49 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>57</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>60</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>59</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>57</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>55</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>53</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>52</pitch>
           </Note>
         </Chord>
@@ -6532,29 +7486,35 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <ticklen>960</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>50</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>960</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>48</pitch>
           </Note>
         <Note>
+          <tick>0</tick>
           <pitch>55</pitch>
           </Note>
         <Note>
+          <tick>0</tick>
           <pitch>58</pitch>
           </Note>
         </Chord>
       </Measure>
     <Measure number="42">
       <Clef>
+        <subtype>4096</subtype>
         <offset x="0" y="3"/>
         </Clef>
       <Chord>
         <ticklen>240</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>65</pitch>
           </Note>
         </Chord>
@@ -6562,6 +7522,7 @@ p, li { white-space: pre-wrap; }
         <ticklen>240</ticklen>
         <BeamMode>2</BeamMode>
         <Note>
+          <tick>0</tick>
           <pitch>72</pitch>
           </Note>
         </Chord>
@@ -6569,24 +7530,28 @@ p, li { white-space: pre-wrap; }
         <ticklen>240</ticklen>
         <BeamMode>2</BeamMode>
         <Note>
+          <tick>0</tick>
           <pitch>69</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>72</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>65</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>72</pitch>
           </Note>
         </Chord>
@@ -6594,12 +7559,14 @@ p, li { white-space: pre-wrap; }
         <ticklen>240</ticklen>
         <BeamMode>2</BeamMode>
         <Note>
+          <tick>0</tick>
           <pitch>69</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>72</pitch>
           </Note>
         </Chord>
@@ -6607,14 +7574,16 @@ p, li { white-space: pre-wrap; }
     <Measure number="43">
       <Chord>
         <ticklen>240</ticklen>
-        <StemDirection>1</StemDirection>
+        <StemDirection>up</StemDirection>
         <Note>
+          <tick>0</tick>
           <pitch>67</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>72</pitch>
           </Note>
         </Chord>
@@ -6622,24 +7591,28 @@ p, li { white-space: pre-wrap; }
         <ticklen>240</ticklen>
         <BeamMode>2</BeamMode>
         <Note>
+          <tick>0</tick>
           <pitch>70</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>72</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>65</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>72</pitch>
           </Note>
         </Chord>
@@ -6647,12 +7620,14 @@ p, li { white-space: pre-wrap; }
         <ticklen>240</ticklen>
         <BeamMode>2</BeamMode>
         <Note>
+          <tick>0</tick>
           <pitch>69</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>72</pitch>
           </Note>
         </Chord>
@@ -6660,14 +7635,16 @@ p, li { white-space: pre-wrap; }
     <Measure number="44">
       <Chord>
         <ticklen>240</ticklen>
-        <StemDirection>1</StemDirection>
+        <StemDirection>up</StemDirection>
         <Note>
+          <tick>0</tick>
           <pitch>65</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>74</pitch>
           </Note>
         </Chord>
@@ -6675,24 +7652,28 @@ p, li { white-space: pre-wrap; }
         <ticklen>240</ticklen>
         <BeamMode>2</BeamMode>
         <Note>
+          <tick>0</tick>
           <pitch>70</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>74</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>65</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>72</pitch>
           </Note>
         </Chord>
@@ -6700,12 +7681,14 @@ p, li { white-space: pre-wrap; }
         <ticklen>240</ticklen>
         <BeamMode>2</BeamMode>
         <Note>
+          <tick>0</tick>
           <pitch>69</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>72</pitch>
           </Note>
         </Chord>
@@ -6714,12 +7697,14 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <ticklen>240</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>64</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>72</pitch>
           </Note>
         </Chord>
@@ -6727,24 +7712,28 @@ p, li { white-space: pre-wrap; }
         <ticklen>240</ticklen>
         <BeamMode>2</BeamMode>
         <Note>
+          <tick>0</tick>
           <pitch>67</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>72</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>65</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>72</pitch>
           </Note>
         </Chord>
@@ -6752,12 +7741,14 @@ p, li { white-space: pre-wrap; }
         <ticklen>240</ticklen>
         <BeamMode>2</BeamMode>
         <Note>
+          <tick>0</tick>
           <pitch>69</pitch>
           </Note>
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>72</pitch>
           </Note>
         </Chord>
@@ -6766,6 +7757,7 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <ticklen>480</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>70</pitch>
           </Note>
         </Chord>
@@ -6774,15 +7766,17 @@ p, li { white-space: pre-wrap; }
         <BeamMode>4</BeamMode>
         </Rest>
       <Clef>
-        <subtype>4</subtype>
+        <subtype>4100</subtype>
         <offset x="0" y="1"/>
         </Clef>
       <Chord>
         <ticklen>480</ticklen>
         <Note>
+          <tick>0</tick>
           <pitch>58</pitch>
           </Note>
         <Note>
+          <tick>0</tick>
           <pitch>65</pitch>
           </Note>
         </Chord>
@@ -6919,7 +7913,7 @@ p, li { white-space: pre-wrap; }
       </Measure>
     <Measure number="68">
       <Clef>
-        <subtype>4</subtype>
+        <subtype>4100</subtype>
         <offset x="0" y="1"/>
         </Clef>
       <Rest>
@@ -6958,6 +7952,6 @@ p, li { white-space: pre-wrap; }
         </Rest>
       </Measure>
     </Staff>
-  <cursorStaff>-1</cursorStaff>
+  <cursorStaff>1</cursorStaff>
   <cursorVoice>0</cursorVoice>
   </museScore>
