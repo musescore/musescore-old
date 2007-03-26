@@ -1,3 +1,5 @@
+26.3.7 (ws)
+      - ensure notes are sorted in chord after pitch change
 23.3.7 (ws)
       - fix dash pattern for ottava lines
       - fix H keyboard shortcut to input hairpin
