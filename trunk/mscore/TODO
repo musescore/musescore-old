@@ -2,11 +2,7 @@ Features:
       - dotted rests
       - akkumulated empty measures
       - "Faulenzer Zeichen" (repeat symbols)
-      + tuplets
       - rehearsal marks
-      + trill lines
-      + ottava lines
-            - shift pitch of bracketed notes while play
       - implement voice detection algorithm for midi import
       - allow insertion of arbitrary images
             - scale images
@@ -37,5 +33,5 @@ Player:
       - interpret tempo
       - interpret velocity; map velocity to musical symbols
         (pp-p-f-ff etc.)
-      - interpret gate time (staccato etc.)
+      - interpret gate time (staccato, tenuto etc.)
 
