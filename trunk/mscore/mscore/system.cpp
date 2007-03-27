@@ -356,51 +356,7 @@ void System::layout2(ScoreLayout* layout)
                         foreach(Lyrics* l, *ll) {
                               if (!l)
                                    continue;
-                              if (l->syllabic() == Lyrics::SINGLE || l->syllabic() == Lyrics::END) {
-                                    Line* line = l->separator();
-                                    if (line) {
-                                          // delete line;  // does not work, undo needs this object
-                                          l->setSeparator(0);
-                                          }
-                                    continue;
-                                    }
-                              //
-                              // we have to layout a separator to the next
-                              // Lyric syllable
-                              //
-                              int verse = l->no();
-                              Segment* ns = s;
-                              while ((ns = ns->next1())) {
-                                    LyricsList* nll = ns->lyricsList(staffIdx);
-                                    if (!nll)
-                                          continue;
-                                    Lyrics* nl = nll->value(verse);
-                                    if (!nl) {
-                                          // ignore last line which connects
-                                          // to nothing
-                                          continue;
-                                          }
-                                    Line* line = l->separator();
-                                    if (!line) {
-                                          line = new Line(l->score(), false);
-                                          line->setLineWidth(Spatium(0.1));
-                                          }
-                                    QRectF b = l->bbox();
-                                    qreal w = b.width();
-                                    qreal h = b.height();
-                                    qreal x = b.x() + _spatium + w;
-                                    qreal y = b.y() + h * .5;
-                                    line->setPos(QPointF(x, y));
-                                    QPointF p1 = l->canvasPos();
-                                    QPointF p2 = nl->canvasPos();
-                                    qreal len = p2.x() - p1.x() - 2 * _spatium - w;
-                                    Spatium sp;
-                                    sp.set(len);
-                                    line->setLen(sp);
-                                    line->layout(layout);
-                                    l->setSeparator(line);
-                                    break;
-                                    }
+                              layoutLyrics(layout, l, s, staffIdx);
                               }
                         }
                   }
@@ -738,5 +694,64 @@ Measure* System::nextMeasure(Measure* m) const
                   }
             }
       return 0;
+      }
+
+//---------------------------------------------------------
+//   layoutLyrics
+//---------------------------------------------------------
+
+void System::layoutLyrics(ScoreLayout* layout, Lyrics* l, Segment* s, int staffIdx)
+      {
+      if (l->syllabic() == Lyrics::SINGLE || l->syllabic() == Lyrics::END) {
+            Line* line = l->separator();
+            if (line) {
+                  // delete line;  // does not work, undo needs this object
+                  l->setSeparator(0);
+                  }
+            return;
+            }
+      //
+      // we have to layout a separator to the next
+      // Lyric syllable
+      //
+      int verse   = l->no();
+      Segment* ns = s;
+      while ((ns = ns->next1())) {
+            LyricsList* nll = ns->lyricsList(staffIdx);
+            if (!nll)
+                  continue;
+            Lyrics* nl = nll->value(verse);
+            if (!nl) {
+                  // ignore last line which connects
+                  // to nothing
+                  continue;
+                  }
+            Line* line = l->separator();
+            if (!line) {
+                  line = new Line(l->score(), false);
+                  line->setLineWidth(Spatium(0.1));
+                  }
+            QRectF b = l->bbox();
+            qreal w  = b.width();
+            qreal h  = b.height();
+            qreal x  = b.x() + _spatium + w;
+            qreal y  = b.y() + h * .5;
+            line->setPos(QPointF(x, y));
+
+            qreal x1 = l->canvasPos().x();
+            qreal x2 = nl->canvasPos().x();
+            qreal len;
+            if (x2 < x1) {
+                  System* system = s->measure()->system();
+                  x2 = system->canvasPos().x() + system->bbox().width();
+                  }
+            len = x2 - x1 - 2 * _spatium - w;
+            Spatium sp;
+            sp.set(len);
+            line->setLen(sp);
+            line->layout(layout);
+            l->setSeparator(line);
+            break;
+            }
       }
 

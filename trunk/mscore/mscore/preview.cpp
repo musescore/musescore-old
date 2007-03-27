@@ -59,6 +59,7 @@ void PagePreview::setScore(Score* s)
 
             Measure* nm = new Measure(_score);
             QByteArray data(mimeData->data(mimeType));
+
 // printf("=====\n%s\n=========\n", data.constData());
             QDomDocument doc;
             int line, column;
@@ -67,7 +68,12 @@ void PagePreview::setScore(Score* s)
                   printf("error reading internal data\n");
                   return;
                   }
+            // <Element>
+            //    <Measure>
+            //       </Measure>
+            //    </Element>
             QDomNode node = doc.documentElement();
+            node = node.firstChild();
             nm->read(node);
             _layout->push_back(nm);
             }

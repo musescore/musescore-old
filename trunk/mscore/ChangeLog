@@ -1,3 +1,6 @@
+27.3.7 (ws)
+      - fix regression for page preview in page layout dialog
+      - fix lyrics layout when line between syllables crosses systems
 26.3.7 (ws)
       - fix for measure cut&paste
       - midi export, sequencer: use Pedal and Ottava elements

@@ -120,4 +120,3 @@ void Lyrics::draw(QPainter& p)
             }
       }
 
-

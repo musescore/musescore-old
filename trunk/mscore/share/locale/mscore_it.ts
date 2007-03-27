@@ -304,7 +304,7 @@
         <translation>Numeri di Pagina</translation>
     </message>
     <message>
-        <location filename="../../mscore/editstyle.ui" line="188"/>
+        <location filename="../../mscore/editstyle.ui" line="197"/>
         <source>show first</source>
         <translation>solo primo</translation>
     </message>
@@ -314,72 +314,72 @@
         <translation>dispari/pari</translation>
     </message>
     <message>
-        <location filename="../../mscore/editstyle.ui" line="156"/>
+        <location filename="../../mscore/editstyle.ui" line="165"/>
         <source>Measure Numbers</source>
         <translation>Numeri Battute</translation>
     </message>
     <message>
-        <location filename="../../mscore/editstyle.ui" line="174"/>
+        <location filename="../../mscore/editstyle.ui" line="183"/>
         <source>all staffs</source>
         <translation>tutti i pentagrammi</translation>
     </message>
     <message>
-        <location filename="../../mscore/editstyle.ui" line="181"/>
+        <location filename="../../mscore/editstyle.ui" line="190"/>
         <source>every system</source>
         <translation>ogni sistema</translation>
     </message>
     <message>
-        <location filename="../../mscore/editstyle.ui" line="195"/>
+        <location filename="../../mscore/editstyle.ui" line="204"/>
         <source>interval</source>
         <translation>intervallo</translation>
     </message>
     <message>
-        <location filename="../../mscore/editstyle.ui" line="355"/>
+        <location filename="../../mscore/editstyle.ui" line="364"/>
         <source>spaces</source>
         <translation>spazi</translation>
     </message>
     <message>
-        <location filename="../../mscore/editstyle.ui" line="260"/>
+        <location filename="../../mscore/editstyle.ui" line="269"/>
         <source>staff upper border</source>
         <translation type="unfinished">bordo superiore pentagramma</translation>
     </message>
     <message>
-        <location filename="../../mscore/editstyle.ui" line="267"/>
+        <location filename="../../mscore/editstyle.ui" line="276"/>
         <source>staff lower border</source>
         <translation type="unfinished">bordo inferiore pentagramma</translation>
     </message>
     <message>
-        <location filename="../../mscore/editstyle.ui" line="274"/>
+        <location filename="../../mscore/editstyle.ui" line="283"/>
         <source>staff distance</source>
         <translation type="unfinished">distanza tra pentagrammi</translation>
     </message>
     <message>
-        <location filename="../../mscore/editstyle.ui" line="281"/>
+        <location filename="../../mscore/editstyle.ui" line="290"/>
         <source>akkolade distance</source>
         <translation>distanza graffa</translation>
     </message>
     <message>
-        <location filename="../../mscore/editstyle.ui" line="318"/>
+        <location filename="../../mscore/editstyle.ui" line="327"/>
         <source>system distance</source>
         <translation>distanza tra sistemi</translation>
     </message>
     <message>
-        <location filename="../../mscore/editstyle.ui" line="362"/>
+        <location filename="../../mscore/editstyle.ui" line="371"/>
         <source>min note distance</source>
         <translation>distanza minima note</translation>
     </message>
     <message>
-        <location filename="../../mscore/editstyle.ui" line="369"/>
+        <location filename="../../mscore/editstyle.ui" line="378"/>
         <source>min. right margin</source>
         <translation>margine destro minimo</translation>
     </message>
     <message>
-        <location filename="../../mscore/editstyle.ui" line="376"/>
+        <location filename="../../mscore/editstyle.ui" line="385"/>
         <source>left margin</source>
         <translation>margine sinistro</translation>
     </message>
     <message>
-        <location filename="../../mscore/editstyle.ui" line="383"/>
+        <location filename="../../mscore/editstyle.ui" line="392"/>
         <source>spacing (1=tight)</source>
         <translation>spaziatura (1=tight)</translation>
     </message>
@@ -1590,12 +1590,12 @@ fallito: </translation>
         <translation>MuseScore: Importazione MusicXML</translation>
     </message>
     <message>
-        <location filename="../../mscore/midi.cpp" line="620"/>
+        <location filename="../../mscore/midi.cpp" line="624"/>
         <source>MuseScore: Export as Midi (SMF)</source>
         <translation>MuseScore: Esportazione Midi (SMF)</translation>
     </message>
     <message>
-        <location filename="../../mscore/midi.cpp" line="855"/>
+        <location filename="../../mscore/midi.cpp" line="935"/>
         <source>MuseScore: Import Midi File</source>
         <translation>MuseScore: Importazione Midi</translation>
     </message>
@@ -2895,6 +2895,11 @@ Save Current Score?</source>
         <source>Tuplets</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <location filename="../../mscore/actions.cpp" line="988"/>
+        <source></source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>NoteBase</name>
@@ -3913,7 +3918,7 @@ fallito: </translation>
         <translation type="unfinished">MuseScore: Apri File</translation>
     </message>
     <message>
-        <location filename="../../mscore/score.cpp" line="958"/>
+        <location filename="../../mscore/score.cpp" line="955"/>
         <source>No note or rest selected:
 please select a note or rest were you want to
 start note entry</source>
