@@ -475,7 +475,7 @@
         <translation>Числа</translation>
     </message>
     <message>
-        <location filename="../../mscore/editstyle.ui" line="376"/>
+        <location filename="../../mscore/editstyle.ui" line="385"/>
         <source>left margin</source>
         <translation type="unfinished">левое поле</translation>
     </message>
@@ -495,22 +495,22 @@
         <translation>чёт/нечет</translation>
     </message>
     <message>
-        <location filename="../../mscore/editstyle.ui" line="188"/>
+        <location filename="../../mscore/editstyle.ui" line="197"/>
         <source>show first</source>
         <translation>плказать первой</translation>
     </message>
     <message>
-        <location filename="../../mscore/editstyle.ui" line="156"/>
+        <location filename="../../mscore/editstyle.ui" line="165"/>
         <source>Measure Numbers</source>
         <translation>Числа размера</translation>
     </message>
     <message>
-        <location filename="../../mscore/editstyle.ui" line="174"/>
+        <location filename="../../mscore/editstyle.ui" line="183"/>
         <source>all staffs</source>
         <translation>все станы</translation>
     </message>
     <message>
-        <location filename="../../mscore/editstyle.ui" line="181"/>
+        <location filename="../../mscore/editstyle.ui" line="190"/>
         <source>every system</source>
         <translation>каждая система</translation>
     </message>
@@ -535,52 +535,52 @@
         <translation type="unfinished">Отменить</translation>
     </message>
     <message>
-        <location filename="../../mscore/editstyle.ui" line="195"/>
+        <location filename="../../mscore/editstyle.ui" line="204"/>
         <source>interval</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mscore/editstyle.ui" line="355"/>
+        <location filename="../../mscore/editstyle.ui" line="364"/>
         <source>spaces</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mscore/editstyle.ui" line="281"/>
+        <location filename="../../mscore/editstyle.ui" line="290"/>
         <source>akkolade distance</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mscore/editstyle.ui" line="318"/>
+        <location filename="../../mscore/editstyle.ui" line="327"/>
         <source>system distance</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mscore/editstyle.ui" line="362"/>
+        <location filename="../../mscore/editstyle.ui" line="371"/>
         <source>min note distance</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mscore/editstyle.ui" line="369"/>
+        <location filename="../../mscore/editstyle.ui" line="378"/>
         <source>min. right margin</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mscore/editstyle.ui" line="383"/>
+        <location filename="../../mscore/editstyle.ui" line="392"/>
         <source>spacing (1=tight)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mscore/editstyle.ui" line="260"/>
+        <location filename="../../mscore/editstyle.ui" line="269"/>
         <source>staff upper border</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mscore/editstyle.ui" line="267"/>
+        <location filename="../../mscore/editstyle.ui" line="276"/>
         <source>staff lower border</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mscore/editstyle.ui" line="274"/>
+        <location filename="../../mscore/editstyle.ui" line="283"/>
         <source>staff distance</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1522,7 +1522,7 @@ exists</source>
         <translation type="unfinished">MuseScore: Экспортировать как MusicXml</translation>
     </message>
     <message>
-        <location filename="../../mscore/midi.cpp" line="620"/>
+        <location filename="../../mscore/midi.cpp" line="624"/>
         <source>MuseScore: Export as Midi (SMF)</source>
         <translation type="unfinished">MuseScore: Экспортировать как Midi (SMF)</translation>
     </message>
@@ -1582,7 +1582,7 @@ exists</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mscore/midi.cpp" line="855"/>
+        <location filename="../../mscore/midi.cpp" line="935"/>
         <source>MuseScore: Import Midi File</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2985,6 +2985,11 @@ Save Current Score?</source>
     <message>
         <location filename="../../mscore/mscore.cpp" line="520"/>
         <source>Tuplets</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../mscore/actions.cpp" line="988"/>
+        <source></source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -4805,7 +4810,7 @@ first create some staves</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mscore/score.cpp" line="958"/>
+        <location filename="../../mscore/score.cpp" line="955"/>
         <source>No note or rest selected:
 please select a note or rest were you want to
 start note entry</source>

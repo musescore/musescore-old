@@ -37,6 +37,9 @@ class Page;
 class Text;
 class MeasureList;
 class Bracket;
+class Lyrics;
+class Segment;
+class ScoreLayout;
 
 //---------------------------------------------------------
 //   SysStaff
@@ -90,6 +93,7 @@ class System : public Element {
 
       void setInstrumentName(int staff);
       void setDistance(int n, Spatium v)   { _staves[n]->setDistance(v); }
+      void layoutLyrics(ScoreLayout*, Lyrics*, Segment*, int staffIdx);
 
    public:
       System(Score*);
