@@ -9,7 +9,11 @@ Release 0.5 (svn)
       - subscript and superscript for text
       - irregular measures
       - more cut&paste and drag&drop operations
-      - better visual feedback for drag&drop
+      - better visual feedback for some drag&drop operations
+      - the sequencer now interprets ottava and pedal lines. They are
+        are also exported to midi.
+      - some line object can now span several systems (ottava, pedal,
+        trill and hairpins)
       - as usual many fixes, enhancements and internal code cleanups
 
 Release 0.4:
