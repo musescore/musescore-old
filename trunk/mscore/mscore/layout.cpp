@@ -165,6 +165,8 @@ void ScoreLayout::doLayout()
                   page = *ip;
                   ++ip;
                   }
+            _pages->update();
+
             Measure* om = im;
             layoutPage(page, im, is);
             if (im == om) {
@@ -538,7 +540,7 @@ Page* ScoreLayout::addPage()
       Page* page = new Page(this);
       page->setNo(_pages->size());
       _pages->push_back(page);
-      _pages->update();
+//      _pages->update();
       return page;
       }
 
