@@ -37,6 +37,7 @@
 #include "lyrics.h"
 #include "bracket.h"
 #include "line.h"
+#include "staff.h"
 
 //---------------------------------------------------------
 //   Page
@@ -298,7 +299,8 @@ void Page::draw(QPainter& p)
       }
 
 //---------------------------------------------------------
-//   elements
+//   collectElements
+//    collect all visible elements
 //---------------------------------------------------------
 
 void Page::collectElements(QList<Element*>& el)
@@ -318,6 +320,8 @@ void Page::collectElements(QList<Element*>& el)
             if (s->getBarLine())
                   el.append(s->getBarLine());
             for (int i = 0; i < staves; ++i) {
+                  if (!score()->staff(i)->show())
+                        continue;
                   SysStaff* st = s->staff(i);
                   if (st == 0)
                         continue;
@@ -335,6 +339,8 @@ void Page::collectElements(QList<Element*>& el)
                   el.append(m);     // draw selection
                   for (Segment* s = m->first(); s; s = s->next()) {
                         for (int staffIdx = 0; staffIdx < staves; ++staffIdx) {
+                              if (!score()->staff(staffIdx)->show())
+                                    continue;
                               LyricsList* ll = s->lyricsList(staffIdx);
                               foreach(Lyrics* l, *ll) {
                                     if (l)
@@ -342,6 +348,9 @@ void Page::collectElements(QList<Element*>& el)
                                     }
                               }
                         for (int track = 0; track < tracks; ++track) {
+                              Staff* staff = score()->staff(track / VOICES);
+                              if (!staff->show())
+                                    continue;
                               Element* e = s->element(track);
                               if (e == 0)
                                     continue;
@@ -383,6 +392,8 @@ void Page::collectElements(QList<Element*>& el)
                               }
                         }
                   foreach(Element* e, *m->el()) {
+                        if (!e->staff()->show())
+                              continue;
                         switch(e->type()) {
                               case HAIRPIN:
                               case OTTAVA:
@@ -397,11 +408,14 @@ void Page::collectElements(QList<Element*>& el)
                         }
                   foreach(Element* e, *m->pel())
                         el.append(e);
-                  foreach(Beam* b, *m->beamList())
-                        el.append(b);
+                  foreach(Beam* b, *m->beamList()) {
+                        if (b->staff()->show())
+                              el.append(b);
+                        }
                   for (int staffIdx = 0; staffIdx < staves; ++staffIdx) {
-                        if (m->barLine(staffIdx))
-                              el.append(m->barLine(staffIdx));
+                        BarLine* b = m->barLine(staffIdx);
+                        if (b && b->staff()->show())
+                              el.append(b);
                         }
                   if (m->noText())
                         el.append(m->noText());

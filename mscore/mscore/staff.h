@@ -103,7 +103,7 @@ class Staff {
       void changeKeySig(int tick, int st);
       void changeClef(int tick, int st);
       bool show() const              { return _show; }
-      void setShow(bool val)        { _show = val; }
+      void setShow(bool val)         { _show = val; }
       };
 
 //---------------------------------------------------------

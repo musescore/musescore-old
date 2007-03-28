@@ -47,6 +47,7 @@
 #include "sig.h"
 #include "key.h"
 #include "mscore.h"
+#include "canvas.h"
 
 extern Measure* tick2measure(int tick);
 
@@ -480,7 +481,19 @@ void Score::endUndoRedo(Undo* undo)
       setDirty(true);
 
       *cis = undo->inputState;
+
+      if (cis->pos == -1) {
+            // no input state
+            canvas()->setState(Canvas::NORMAL);
+            mscore->setState(STATE_NORMAL);
+            }
+      else {
+            // input state
+            canvas()->setState(Canvas::NOTE_ENTRY);
+            mscore->setState(STATE_NOTE_ENTRY);
+            }
       moveCursor();
+
       *sel = undo->selection;
       sel->update();
       layout();

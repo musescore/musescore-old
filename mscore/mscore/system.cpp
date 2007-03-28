@@ -193,6 +193,8 @@ double System::layout(ScoreLayout* layout, const QPointF& p, double w)
 
       for (iSysStaff iss = _staves.begin(); iss != _staves.end(); ++iss, ++is) {
             Staff* s = *is;
+            if (!s->show())
+                  continue;
             SysStaff* ss = *iss;
             if (bracketLevels < ss->brackets.size()) {
                   for (int i = bracketLevels; i < ss->brackets.size(); ++i) {

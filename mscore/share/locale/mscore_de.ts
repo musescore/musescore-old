@@ -44,42 +44,42 @@
 <context>
     <name>ChordBase</name>
     <message>
-        <location filename="../../mscore/chord.ui" line="16"/>
+        <location filename="../../mscore/slursegment.ui" line="16"/>
         <source>Form</source>
         <translation>Formular</translation>
     </message>
     <message>
-        <location filename="../../mscore/chord.ui" line="28"/>
+        <location filename="../../mscore/slursegment.ui" line="28"/>
         <source>Chord</source>
         <translation>Akkord</translation>
     </message>
     <message>
-        <location filename="../../mscore/chord.ui" line="51"/>
+        <location filename="../../mscore/slursegment.ui" line="51"/>
         <source>Stem</source>
         <translation>Notenhals</translation>
     </message>
     <message>
-        <location filename="../../mscore/chord.ui" line="58"/>
+        <location filename="../../mscore/slursegment.ui" line="58"/>
         <source>Hook</source>
         <translation>Fähnchen</translation>
     </message>
     <message>
-        <location filename="../../mscore/chord.ui" line="88"/>
+        <location filename="../../mscore/slursegment.ui" line="88"/>
         <source>Grace Note</source>
         <translation>Vorschlagnote</translation>
     </message>
     <message>
-        <location filename="../../mscore/chord.ui" line="95"/>
+        <location filename="../../mscore/slursegment.ui" line="95"/>
         <source>Stem Direction</source>
         <translation>Halsrichtung</translation>
     </message>
     <message>
-        <location filename="../../mscore/chord.ui" line="121"/>
+        <location filename="../../mscore/slursegment.ui" line="121"/>
         <source>Note Attributes:</source>
         <translation>Notenattribute:</translation>
     </message>
     <message>
-        <location filename="../../mscore/chord.ui" line="128"/>
+        <location filename="../../mscore/slursegment.ui" line="128"/>
         <source>Help Lines:</source>
         <translation>Hilfslinien:</translation>
     </message>
@@ -847,11 +847,6 @@ failed: </source>
         <translation>Noteneingabe</translation>
     </message>
     <message>
-        <location filename="" line="2359296"/>
-        <source>&amp;File</source>
-        <translation type="obsolete">&amp;Datei</translation>
-    </message>
-    <message>
         <location filename="../../mscore/mscore.cpp" line="427"/>
         <source>Open &amp;Recent</source>
         <translation>&amp;Letzte Dateien</translation>
@@ -880,11 +875,6 @@ failed: </source>
         <location filename="../../mscore/mscore.cpp" line="480"/>
         <source>Notes</source>
         <translation>Noten</translation>
-    </message>
-    <message>
-        <location filename="" line="2359296"/>
-        <source>Add Intervall</source>
-        <translation type="obsolete">Intervall hinzufügen</translation>
     </message>
     <message>
         <location filename="../../mscore/mscore.cpp" line="530"/>
@@ -1000,11 +990,6 @@ failed: </source>
         <location filename="../../mscore/menus.cpp" line="67"/>
         <source>Accidentals...</source>
         <translation>Vorzeichen...</translation>
-    </message>
-    <message>
-        <location filename="" line="2359296"/>
-        <source>MuseScore: Symbols 1</source>
-        <translation type="obsolete">MuseScore: Symbole</translation>
     </message>
     <message>
         <location filename="../../mscore/menus.cpp" line="107"/>
@@ -1127,31 +1112,6 @@ failed: </source>
         <translation>MuseScore: Fingersatz</translation>
     </message>
     <message>
-        <location filename="" line="2359296"/>
-        <source>fingering 1</source>
-        <translation type="obsolete">Fingersatz 1</translation>
-    </message>
-    <message>
-        <location filename="" line="2359296"/>
-        <source>fingering 2</source>
-        <translation type="obsolete">Fingersatz 2</translation>
-    </message>
-    <message>
-        <location filename="" line="2359296"/>
-        <source>fingering 3</source>
-        <translation type="obsolete">Fingersatz 3</translation>
-    </message>
-    <message>
-        <location filename="" line="2359296"/>
-        <source>fingering 4</source>
-        <translation type="obsolete">Fingersatz 4</translation>
-    </message>
-    <message>
-        <location filename="" line="2359296"/>
-        <source>fingering 5</source>
-        <translation type="obsolete">Fingersatz 5</translation>
-    </message>
-    <message>
         <location filename="../../mscore/menus.cpp" line="497"/>
         <source>MuseScore: Layout Breaks</source>
         <translation>MuseScore: Layout Umbrüche</translation>
@@ -1189,11 +1149,6 @@ Partitur sichern?</translation>
         <translation>Note zufügen</translation>
     </message>
     <message>
-        <location filename="" line="2359296"/>
-        <source>Tuples</source>
-        <translation type="obsolete">Tuples</translation>
-    </message>
-    <message>
         <location filename="../../mscore/mscore.cpp" line="608"/>
         <source>Manual</source>
         <translation>Handbuch</translation>
@@ -1219,11 +1174,6 @@ Partitur sichern?</translation>
         <translation>Datei öffnen</translation>
     </message>
     <message>
-        <location filename="" line="2359296"/>
-        <source>Open Score</source>
-        <translation type="obsolete">Partitur öffnen</translation>
-    </message>
-    <message>
         <location filename="../../mscore/actions.cpp" line="35"/>
         <source>Load Score from File</source>
         <translation>Partitur laden</translation>
@@ -1232,11 +1182,6 @@ Partitur sichern?</translation>
         <location filename="../../mscore/actions.cpp" line="40"/>
         <source>file save</source>
         <translation>Datei sichern</translation>
-    </message>
-    <message>
-        <location filename="" line="2359296"/>
-        <source>Save Score</source>
-        <translation type="obsolete">Partitur sichern</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="44"/>
@@ -1249,11 +1194,6 @@ Partitur sichern?</translation>
         <translation>Speichern unter</translation>
     </message>
     <message>
-        <location filename="" line="2359296"/>
-        <source>Save Score As</source>
-        <translation type="obsolete">Partitur speichern unter</translation>
-    </message>
-    <message>
         <location filename="../../mscore/actions.cpp" line="53"/>
         <source>Save Score to named File</source>
         <translation>Partitur speichern</translation>
@@ -1264,11 +1204,6 @@ Partitur sichern?</translation>
         <translation>Datei schließen</translation>
     </message>
     <message>
-        <location filename="" line="2359296"/>
-        <source>Close Score</source>
-        <translation type="obsolete">Partitur schließen</translation>
-    </message>
-    <message>
         <location filename="../../mscore/actions.cpp" line="62"/>
         <source>Close Current Score</source>
         <translation>Aktuelle Partitur schließen</translation>
@@ -1277,16 +1212,6 @@ Partitur sichern?</translation>
         <location filename="../../mscore/actions.cpp" line="67"/>
         <source>file new</source>
         <translation>Neue Datei</translation>
-    </message>
-    <message>
-        <location filename="" line="2359296"/>
-        <source>New Score</source>
-        <translation type="obsolete">Neue Partitur</translation>
-    </message>
-    <message>
-        <location filename="" line="2359296"/>
-        <source>Create New Score</source>
-        <translation type="obsolete">Neue Partitur erstellen</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="86"/>
@@ -1469,111 +1394,6 @@ Partitur sichern?</translation>
         <translation>Noteneingabemodus</translation>
     </message>
     <message>
-        <location filename="" line="2359296"/>
-        <source>enter prime above</source>
-        <translation type="obsolete">Prime darüber eingeben</translation>
-    </message>
-    <message>
-        <location filename="" line="2359296"/>
-        <source>Prime above</source>
-        <translation type="obsolete">Prime darüber</translation>
-    </message>
-    <message>
-        <location filename="" line="2359296"/>
-        <source>Enter Prime above</source>
-        <translation type="obsolete">Prime darüber eingeben</translation>
-    </message>
-    <message>
-        <location filename="" line="2359296"/>
-        <source>enter sekunde above</source>
-        <translation type="obsolete">Sekunde darüber eingeben</translation>
-    </message>
-    <message>
-        <location filename="" line="2359296"/>
-        <source>Sekunde above</source>
-        <translation type="obsolete">Sekunde darüber</translation>
-    </message>
-    <message>
-        <location filename="" line="2359296"/>
-        <source>Enter Sekunde above</source>
-        <translation type="obsolete">Sekunde darüber eingeben</translation>
-    </message>
-    <message>
-        <location filename="" line="2359296"/>
-        <source>enter terz above</source>
-        <translation type="obsolete">Terz darüber eingeben</translation>
-    </message>
-    <message>
-        <location filename="" line="2359296"/>
-        <source>Terz above</source>
-        <translation type="obsolete">Terz darüber</translation>
-    </message>
-    <message>
-        <location filename="" line="2359296"/>
-        <source>Enter Terz above</source>
-        <translation type="obsolete">Terz darüber eingeben</translation>
-    </message>
-    <message>
-        <location filename="" line="2359296"/>
-        <source>enter quart above</source>
-        <translation type="obsolete">Quarte darüber eingeben</translation>
-    </message>
-    <message>
-        <location filename="" line="2359296"/>
-        <source>Quart above</source>
-        <translation type="obsolete">Quarte darüber</translation>
-    </message>
-    <message>
-        <location filename="" line="2359296"/>
-        <source>Enter Quart above</source>
-        <translation type="obsolete">Quarte darüber eingeben</translation>
-    </message>
-    <message>
-        <location filename="" line="2359296"/>
-        <source>enter quint above</source>
-        <translation type="obsolete">Quinte darüber eingeben</translation>
-    </message>
-    <message>
-        <location filename="" line="2359296"/>
-        <source>Quint above</source>
-        <translation type="obsolete">Quinte darüber</translation>
-    </message>
-    <message>
-        <location filename="" line="2359296"/>
-        <source>Enter Quint above</source>
-        <translation type="obsolete">Quinte darüber eingeben</translation>
-    </message>
-    <message>
-        <location filename="" line="2359296"/>
-        <source>enter sexte above</source>
-        <translation type="obsolete">Sexte darüber eingeben</translation>
-    </message>
-    <message>
-        <location filename="" line="2359296"/>
-        <source>Sexte above</source>
-        <translation type="obsolete">Sexte darüber</translation>
-    </message>
-    <message>
-        <location filename="" line="2359296"/>
-        <source>Enter Sexte above</source>
-        <translation type="obsolete">Sexte darüber eingeben</translation>
-    </message>
-    <message>
-        <location filename="" line="2359296"/>
-        <source>enter septime above</source>
-        <translation type="obsolete">Septime darüber eingeben</translation>
-    </message>
-    <message>
-        <location filename="" line="2359296"/>
-        <source>Septime above</source>
-        <translation type="obsolete">Septime darüber</translation>
-    </message>
-    <message>
-        <location filename="" line="2359296"/>
-        <source>Enter Septime above</source>
-        <translation type="obsolete">Septime darüber eingeben</translation>
-    </message>
-    <message>
         <location filename="../../mscore/actions.cpp" line="254"/>
         <source>enter octave above</source>
         <translation>Oktave darüber eingeben</translation>
@@ -1589,111 +1409,6 @@ Partitur sichern?</translation>
         <translation>Oktave darüber eingeben</translation>
     </message>
     <message>
-        <location filename="" line="2359296"/>
-        <source>enter None above</source>
-        <translation type="obsolete">None darüber eingeben</translation>
-    </message>
-    <message>
-        <location filename="" line="2359296"/>
-        <source>None above</source>
-        <translation type="obsolete">None darüber</translation>
-    </message>
-    <message>
-        <location filename="" line="2359296"/>
-        <source>Enter None above</source>
-        <translation type="obsolete">None darüber eingeben</translation>
-    </message>
-    <message>
-        <location filename="" line="2359296"/>
-        <source>enter sekunde below</source>
-        <translation type="obsolete">Sekunde darunter eingeben</translation>
-    </message>
-    <message>
-        <location filename="" line="2359296"/>
-        <source>Sekunde below</source>
-        <translation type="obsolete">Sekunde darunter</translation>
-    </message>
-    <message>
-        <location filename="" line="2359296"/>
-        <source>Enter Sekunde below</source>
-        <translation type="obsolete">Sekunde darunter eingeben</translation>
-    </message>
-    <message>
-        <location filename="" line="2359296"/>
-        <source>enter terz below</source>
-        <translation type="obsolete">Terz darunter eingeben</translation>
-    </message>
-    <message>
-        <location filename="" line="2359296"/>
-        <source>Terz below</source>
-        <translation type="obsolete">Terz darunter</translation>
-    </message>
-    <message>
-        <location filename="" line="2359296"/>
-        <source>Enter Terz below</source>
-        <translation type="obsolete">Terz darunter eingeben</translation>
-    </message>
-    <message>
-        <location filename="" line="2359296"/>
-        <source>enter quart below</source>
-        <translation type="obsolete">Quarte darunter eingeben</translation>
-    </message>
-    <message>
-        <location filename="" line="2359296"/>
-        <source>Quart below</source>
-        <translation type="obsolete">Quarte darunter</translation>
-    </message>
-    <message>
-        <location filename="" line="2359296"/>
-        <source>Enter Quart below</source>
-        <translation type="obsolete">Quarte darunter eingeben</translation>
-    </message>
-    <message>
-        <location filename="" line="2359296"/>
-        <source>enter quint below</source>
-        <translation type="obsolete">Quinte darunter eingeben</translation>
-    </message>
-    <message>
-        <location filename="" line="2359296"/>
-        <source>Quint below</source>
-        <translation type="obsolete">Quinte darunter</translation>
-    </message>
-    <message>
-        <location filename="" line="2359296"/>
-        <source>Enter Quint below</source>
-        <translation type="obsolete">Quinte darunter eingeben</translation>
-    </message>
-    <message>
-        <location filename="" line="2359296"/>
-        <source>enter sexte below</source>
-        <translation type="obsolete">Sexte darunter eingeben</translation>
-    </message>
-    <message>
-        <location filename="" line="2359296"/>
-        <source>Sexte below</source>
-        <translation type="obsolete">Sexte darunter</translation>
-    </message>
-    <message>
-        <location filename="" line="2359296"/>
-        <source>Enter Sexte below</source>
-        <translation type="obsolete">Sexte darunter eingeben</translation>
-    </message>
-    <message>
-        <location filename="" line="2359296"/>
-        <source>enter septime below</source>
-        <translation type="obsolete">Septime darunter eingeben</translation>
-    </message>
-    <message>
-        <location filename="" line="2359296"/>
-        <source>Septime below</source>
-        <translation type="obsolete">Septime darunter</translation>
-    </message>
-    <message>
-        <location filename="" line="2359296"/>
-        <source>Enter Septime below</source>
-        <translation type="obsolete">Septime darunter eingeben</translation>
-    </message>
-    <message>
         <location filename="../../mscore/actions.cpp" line="318"/>
         <source>enter octave below</source>
         <translation>Oktave darunter eingeben</translation>
@@ -1707,21 +1422,6 @@ Partitur sichern?</translation>
         <location filename="../../mscore/actions.cpp" line="323"/>
         <source>Enter Octave below</source>
         <translation>Oktave darunter eingeben</translation>
-    </message>
-    <message>
-        <location filename="" line="2359296"/>
-        <source>enter None below</source>
-        <translation type="obsolete">None darunter eingeben</translation>
-    </message>
-    <message>
-        <location filename="" line="2359296"/>
-        <source>None below</source>
-        <translation type="obsolete">None darunter</translation>
-    </message>
-    <message>
-        <location filename="" line="2359296"/>
-        <source>Enter None below</source>
-        <translation type="obsolete">None darunter eingeben</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="334"/>
@@ -2167,36 +1867,6 @@ Partitur sichern?</translation>
         <location filename="../../mscore/actions.cpp" line="675"/>
         <source>Measure</source>
         <translation>Takt</translation>
-    </message>
-    <message>
-        <location filename="" line="2359296"/>
-        <source>duole</source>
-        <translation type="obsolete">Duole</translation>
-    </message>
-    <message>
-        <location filename="" line="2359296"/>
-        <source>Duole</source>
-        <translation type="obsolete">Duole</translation>
-    </message>
-    <message>
-        <location filename="" line="2359296"/>
-        <source>triole</source>
-        <translation type="obsolete">Triole</translation>
-    </message>
-    <message>
-        <location filename="" line="2359296"/>
-        <source>Triole</source>
-        <translation type="obsolete">Triole</translation>
-    </message>
-    <message>
-        <location filename="" line="2359296"/>
-        <source>pentole</source>
-        <translation type="obsolete">Pentole</translation>
-    </message>
-    <message>
-        <location filename="" line="2359296"/>
-        <source>Pentole</source>
-        <translation type="obsolete">Pentole</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="699"/>
@@ -2872,11 +2542,6 @@ Partitur sichern?</translation>
         <location filename="../../mscore/mscore.cpp" line="520"/>
         <source>Tuplets</source>
         <translation>Tupel</translation>
-    </message>
-    <message>
-        <location filename="../../mscore/actions.cpp" line="988"/>
-        <source></source>
-        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -3624,11 +3289,6 @@ Bitte benutze den Instrumentdialog, um zunächst einige Notenzeilen
 (Instrumente) anzulegen.</translation>
     </message>
     <message>
-        <location filename="" line="2359296"/>
-        <source>untitled.msc</source>
-        <translation type="obsolete">untitled.msc</translation>
-    </message>
-    <message>
         <location filename="../../mscore/score.cpp" line="955"/>
         <source>No note or rest selected:
 please select a note or rest were you want to
@@ -3636,11 +3296,6 @@ start note entry</source>
         <translation>Es ist keine Note oder Pause ausgewählt:
 Bitte wähle zunächst die Note oder Pause wo die Noteneingabe
 starten soll.</translation>
-    </message>
-    <message>
-        <location filename="" line="2359296"/>
-        <source>untitled</source>
-        <translation type="obsolete">untitled</translation>
     </message>
     <message>
         <location filename="../../mscore/file.cpp" line="274"/>

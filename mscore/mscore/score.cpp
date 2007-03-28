@@ -984,15 +984,20 @@ ChordRest* Score::setNoteEntry(bool val, bool step)
                   else
                         cis->pos += cr->tickLen();
                   }
-            canvas()->setState(Canvas::NOTE_ENTRY);
             }
       else {
             padState.len = 0;
             cis->pos = -1;
             setPadState();
-            canvas()->setState(Canvas::NORMAL);
             }
-      mscore->setState(val ? STATE_NOTE_ENTRY : STATE_NORMAL);
+      if (cis->pos == -1) {
+            canvas()->setState(Canvas::NORMAL);
+            mscore->setState(STATE_NORMAL);
+            }
+      else {
+            canvas()->setState(Canvas::NOTE_ENTRY);
+            mscore->setState(STATE_NOTE_ENTRY);
+            }
       moveCursor();
       return cr;
       }
