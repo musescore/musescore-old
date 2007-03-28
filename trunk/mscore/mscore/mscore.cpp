@@ -1559,15 +1559,6 @@ int main(int argc, char* argv[])
       argc -= optind;
       ++argc;
 
-      //
-      // initialize shortcut hash table
-      //
-      for (unsigned i = 0;; ++i) {
-            if (MuseScore::sc[i].xml == 0)
-                  break;
-            shortcuts[MuseScore::sc[i].xml] = new Shortcut(MuseScore::sc[i]);
-            }
-
       haveMidi = !initMidi();
       preferences.read();
 
@@ -1615,6 +1606,15 @@ int main(int argc, char* argv[])
                      QLocale::system().name().toLatin1().data());
                   }
             }
+      //
+      // initialize shortcut hash table
+      //
+      for (unsigned i = 0;; ++i) {
+            if (MuseScore::sc[i].xml == 0)
+                  break;
+            shortcuts[MuseScore::sc[i].xml] = new Shortcut(MuseScore::sc[i]);
+            }
+
 
       //
       //  load internal fonts
@@ -1883,3 +1883,39 @@ void MuseScore::setState(int val)
                   break;
             }
       }
+
+//---------------------------------------------------------
+//   Shortcut
+//---------------------------------------------------------
+
+Shortcut::Shortcut()
+      {
+      xml     = 0;
+      key     = 0;
+      context = Qt::WindowShortcut;
+      icon    = 0;
+      action  = 0;
+      }
+
+Shortcut::Shortcut(const char* name, const char* d, const QKeySequence& k,
+   Qt::ShortcutContext cont,
+   const char* txt, const char* h, QIcon* i)
+   : descr(d), key(k), context(cont), text(txt), help(h)
+      {
+      xml    = name;
+      icon   = i;
+      action = 0;
+      }
+
+Shortcut::Shortcut(const Shortcut& c)
+      {
+      xml     = c.xml;
+      key     = c.key;
+      context = c.context;
+      icon    = c.icon;
+      action  = c.action;
+      descr   = qApp->translate("MuseScore", c.descr.toLatin1().data());
+      help    = qApp->translate("MuseScore", c.help.toLatin1().data());
+      text    = qApp->translate("MuseScore", c.text.toLatin1().data());
+      }
+

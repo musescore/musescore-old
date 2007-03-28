@@ -3668,173 +3668,173 @@ start note entry</source>
 <context>
     <name>TextStyleBase</name>
     <message>
-        <location filename="../../mscore/textstyle.ui" line="16"/>
+        <location filename="../../mscore/textstyle.ui" line="13"/>
         <source>MuseScore: Edit Text Styles</source>
         <translation>MuseScore: Modifica Stile Testo</translation>
     </message>
     <message>
-        <location filename="../../mscore/textstyle.ui" line="63"/>
+        <location filename="../../mscore/textstyle.ui" line="51"/>
         <source>General</source>
         <translation>Generale</translation>
     </message>
     <message>
-        <location filename="../../mscore/textstyle.ui" line="83"/>
+        <location filename="../../mscore/textstyle.ui" line="89"/>
         <source>Font</source>
         <translation>Carattere</translation>
     </message>
     <message>
-        <location filename="../../mscore/textstyle.ui" line="105"/>
+        <location filename="../../mscore/textstyle.ui" line="109"/>
         <source>Size</source>
         <translation>Dimensione</translation>
     </message>
     <message>
-        <location filename="../../mscore/textstyle.ui" line="138"/>
+        <location filename="../../mscore/textstyle.ui" line="151"/>
         <source>Style</source>
         <translation>Stile</translation>
     </message>
     <message>
-        <location filename="../../mscore/textstyle.ui" line="165"/>
+        <location filename="../../mscore/textstyle.ui" line="178"/>
         <source>B</source>
         <translation>Grassetto</translation>
     </message>
     <message>
-        <location filename="../../mscore/textstyle.ui" line="200"/>
+        <location filename="../../mscore/textstyle.ui" line="211"/>
         <source>I</source>
         <translation>Corsivo</translation>
     </message>
     <message>
-        <location filename="../../mscore/textstyle.ui" line="227"/>
+        <location filename="../../mscore/textstyle.ui" line="238"/>
         <source>U</source>
         <translation>Sottolineato</translation>
     </message>
     <message>
-        <location filename="../../mscore/textstyle.ui" line="252"/>
+        <location filename="../../mscore/textstyle.ui" line="263"/>
         <source>Text Sample</source>
         <translation>Esempio Testo</translation>
     </message>
     <message>
-        <location filename="../../mscore/textstyle.ui" line="549"/>
+        <location filename="../../mscore/textstyle.ui" line="776"/>
         <source>Position</source>
         <translation>Posizione</translation>
     </message>
     <message>
-        <location filename="../../mscore/textstyle.ui" line="561"/>
+        <location filename="../../mscore/textstyle.ui" line="797"/>
         <source>Reference Position</source>
         <translation>Ancoraggio</translation>
     </message>
     <message>
-        <location filename="../../mscore/textstyle.ui" line="574"/>
+        <location filename="../../mscore/textstyle.ui" line="819"/>
         <source>Page</source>
         <translation>Pagina</translation>
     </message>
     <message>
-        <location filename="../../mscore/textstyle.ui" line="579"/>
+        <location filename="../../mscore/textstyle.ui" line="824"/>
         <source>Time Tick</source>
         <translation>MarcaTempo</translation>
     </message>
     <message>
-        <location filename="../../mscore/textstyle.ui" line="584"/>
+        <location filename="../../mscore/textstyle.ui" line="829"/>
         <source>Note Head</source>
         <translation>Testa Nota</translation>
     </message>
     <message>
-        <location filename="../../mscore/textstyle.ui" line="589"/>
+        <location filename="../../mscore/textstyle.ui" line="834"/>
         <source>System</source>
         <translation>Sistema</translation>
     </message>
     <message>
-        <location filename="../../mscore/textstyle.ui" line="613"/>
+        <location filename="../../mscore/textstyle.ui" line="858"/>
         <source>Alignment</source>
         <translation>Allineamento</translation>
     </message>
     <message>
-        <location filename="../../mscore/textstyle.ui" line="625"/>
+        <location filename="../../mscore/textstyle.ui" line="879"/>
         <source>Horizontal</source>
         <translation>Orizzontale</translation>
     </message>
     <message>
-        <location filename="../../mscore/textstyle.ui" line="637"/>
+        <location filename="../../mscore/textstyle.ui" line="900"/>
         <source>Left</source>
         <translation>A Sinistra</translation>
     </message>
     <message>
-        <location filename="../../mscore/textstyle.ui" line="644"/>
+        <location filename="../../mscore/textstyle.ui" line="907"/>
         <source>Right</source>
         <translation>A Destra</translation>
     </message>
     <message>
-        <location filename="../../mscore/textstyle.ui" line="687"/>
+        <location filename="../../mscore/textstyle.ui" line="959"/>
         <source>Center</source>
         <translation>Al Centro</translation>
     </message>
     <message>
-        <location filename="../../mscore/textstyle.ui" line="661"/>
+        <location filename="../../mscore/textstyle.ui" line="924"/>
         <source>Vertical</source>
         <translation>Verticale</translation>
     </message>
     <message>
-        <location filename="../../mscore/textstyle.ui" line="673"/>
+        <location filename="../../mscore/textstyle.ui" line="945"/>
         <source>Top</source>
         <translation>In Alto</translation>
     </message>
     <message>
-        <location filename="../../mscore/textstyle.ui" line="680"/>
+        <location filename="../../mscore/textstyle.ui" line="952"/>
         <source>Bottom</source>
         <translation>In Basso</translation>
     </message>
     <message>
-        <location filename="../../mscore/textstyle.ui" line="700"/>
+        <location filename="../../mscore/textstyle.ui" line="972"/>
         <source>Offset</source>
         <translation>Spiazzamento</translation>
     </message>
     <message>
-        <location filename="../../mscore/textstyle.ui" line="720"/>
+        <location filename="../../mscore/textstyle.ui" line="1010"/>
         <source>X:</source>
         <translation>Oriz.:</translation>
     </message>
     <message>
-        <location filename="../../mscore/textstyle.ui" line="748"/>
+        <location filename="../../mscore/textstyle.ui" line="1036"/>
         <source>Y:</source>
         <translation>Vert.:</translation>
     </message>
     <message>
-        <location filename="../../mscore/textstyle.ui" line="793"/>
+        <location filename="../../mscore/textstyle.ui" line="1088"/>
         <source>Unit:</source>
         <translation>Unità:</translation>
     </message>
     <message>
-        <location filename="../../mscore/textstyle.ui" line="800"/>
+        <location filename="../../mscore/textstyle.ui" line="1095"/>
         <source>MM</source>
         <translation>mm</translation>
     </message>
     <message>
-        <location filename="../../mscore/textstyle.ui" line="807"/>
+        <location filename="../../mscore/textstyle.ui" line="1102"/>
         <source>Percent</source>
         <translation>percentuale</translation>
     </message>
     <message>
-        <location filename="../../mscore/textstyle.ui" line="814"/>
+        <location filename="../../mscore/textstyle.ui" line="1109"/>
         <source>Space</source>
         <translation>Spazio</translation>
     </message>
     <message>
-        <location filename="../../mscore/textstyle.ui" line="854"/>
+        <location filename="../../mscore/textstyle.ui" line="1158"/>
         <source>Apply</source>
         <translation>Applica</translation>
     </message>
     <message>
-        <location filename="../../mscore/textstyle.ui" line="861"/>
+        <location filename="../../mscore/textstyle.ui" line="1165"/>
         <source>OK</source>
         <translation>OK</translation>
     </message>
     <message>
-        <location filename="../../mscore/textstyle.ui" line="868"/>
+        <location filename="../../mscore/textstyle.ui" line="1172"/>
         <source>Cancel</source>
         <translation>Annulla</translation>
     </message>
-    <message encoding="UTF-8">
-        <location filename="../../mscore/textstyle.ui" line="538"/>
-        <source>Ich und Du, Müllesrs Kuh...</source>
+    <message>
+        <location filename="../../mscore/textstyle.ui" line="762"/>
+        <source>Ich und Du, Mllers Kuh...</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -3842,7 +3842,7 @@ start note entry</source>
     <name>TextStyleDialog</name>
     <message>
         <location filename="../../mscore/textstyle.cpp" line="197"/>
-        <source>Ich und du, M&#xc3;&#xbc;llers Kuh</source>
+        <source>Ich und du, M&#xfc;llers Kuh</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

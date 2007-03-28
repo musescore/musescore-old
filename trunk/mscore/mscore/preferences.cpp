@@ -494,7 +494,7 @@ void PreferenceDialog::updateSCListView()
       foreach (Shortcut* s, localShortcuts) {
             if (s) {
                   QTreeWidgetItem* newItem = new QTreeWidgetItem;
-                  newItem->setText(0, tr(s->descr));
+                  newItem->setText(0, s->descr);
                   newItem->setIcon(0, *s->icon);
                   QKeySequence seq = s->key;
                   newItem->setText(1, s->key.toString(QKeySequence::NativeText));
