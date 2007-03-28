@@ -206,3 +206,10 @@ IF(EXISTS "${CMAKE_ROOT}/Modules/CPack.cmake")
   INCLUDE(CPack)
 ENDIF(EXISTS "${CMAKE_ROOT}/Modules/CPack.cmake")
 
+add_custom_target(lupdate
+   COMMAND ${PROJECT_SOURCE_DIR}/gen-qt-projectfile ${PROJECT_SOURCE_DIR} > mscore.pro
+   COMMAND lupdate -noobsolete ${PROJECT_BINARY_DIR}/mscore.pro
+   WORKING_DIRECTORY ${PROJECT_BINARY_DIR}
+   )
+
+

@@ -224,6 +224,9 @@ void ScoreLayout::processSystemHeader(Measure* m)
 
       for (int i = 0; i < nstaves; ++i) {
             Staff* staff   = _score->staff(i);
+            if (!staff->show())
+                  continue;
+
             bool hasKeysig  = false;
             bool hasClef    = false;
             int strack      = i * VOICES;

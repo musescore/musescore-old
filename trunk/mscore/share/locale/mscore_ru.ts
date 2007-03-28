@@ -1,92 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS><TS version="1.1">
 <context>
-    <name></name>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>Measure</source>
-        <translation type="obsolete">Размер</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>Text...</source>
-        <translation type="obsolete">Текст...</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>Title</source>
-        <translation type="obsolete">Название</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>Subtitle</source>
-        <translation type="obsolete">Подзаголовок</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>Composer</source>
-        <translation type="obsolete">Композитор</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>Poet</source>
-        <translation type="obsolete">Поэт</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>Lyrics</source>
-        <translation type="obsolete">Лирика</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>Tempo</source>
-        <translation type="obsolete">Темп</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>Metronome</source>
-        <translation type="obsolete">Метроном</translation>
-    </message>
-</context>
-<context>
-    <name>@default</name>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>Load Score from File</source>
-        <translation type="obsolete">Загрузить партитуру из файла</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>Save Score to File</source>
-        <translation type="obsolete">Сохранить партитуру в файл</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>Create New Score</source>
-        <translation type="obsolete">Создать новую партитуру</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>Print Score</source>
-        <translation type="obsolete">Напечатать партитуру</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>rewind to start position</source>
-        <translation type="obsolete">вернуться к началу</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>stop sequencer</source>
-        <translation type="obsolete">остановить секвенсер</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>start sequencer play</source>
-        <translation type="obsolete">начать воспроизведение в секвенсере</translation>
-    </message>
-</context>
-<context>
     <name>BarLineBase</name>
     <message>
         <location filename="../../mscore/barline.ui" line="16"/>
@@ -106,86 +20,6 @@
 </context>
 <context>
     <name>Canvas</name>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>Measure</source>
-        <translation type="obsolete">Размер</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>Time...</source>
-        <translation type="obsolete">Время...</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>Lines...</source>
-        <translation type="obsolete">Строк...</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>Text...</source>
-        <translation type="obsolete">Текст...</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>Title</source>
-        <translation type="obsolete">Название</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>Subtitle</source>
-        <translation type="obsolete">Подзаголовок</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>Composer</source>
-        <translation type="obsolete">Композитор</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>Poet</source>
-        <translation type="obsolete">Поэт</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>Lyrics</source>
-        <translation type="obsolete">Лирика</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>Fingering</source>
-        <translation type="obsolete">Аппликатура</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>Tempo</source>
-        <translation type="obsolete">Темп</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>Metronome</source>
-        <translation type="obsolete">Метроном</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>Cut</source>
-        <translation type="obsolete">Вырезать</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>Copy</source>
-        <translation type="obsolete">Скопировать</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>Delete</source>
-        <translation type="obsolete">Удалить</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>Context</source>
-        <translation type="obsolete">Контекст</translation>
-    </message>
     <message>
         <location filename="../../mscore/canvas.cpp" line="176"/>
         <source>Set Invisible</source>
@@ -210,42 +44,42 @@
 <context>
     <name>ChordBase</name>
     <message>
-        <location filename="../../mscore/chord.ui" line="16"/>
+        <location filename="../../mscore/slursegment.ui" line="16"/>
         <source>Form</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mscore/chord.ui" line="28"/>
+        <location filename="../../mscore/slursegment.ui" line="28"/>
         <source>Chord</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mscore/chord.ui" line="51"/>
+        <location filename="../../mscore/slursegment.ui" line="51"/>
         <source>Stem</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mscore/chord.ui" line="58"/>
+        <location filename="../../mscore/slursegment.ui" line="58"/>
         <source>Hook</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mscore/chord.ui" line="88"/>
+        <location filename="../../mscore/slursegment.ui" line="88"/>
         <source>Grace Note</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mscore/chord.ui" line="95"/>
+        <location filename="../../mscore/slursegment.ui" line="95"/>
         <source>Stem Direction</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mscore/chord.ui" line="121"/>
+        <location filename="../../mscore/slursegment.ui" line="121"/>
         <source>Note Attributes:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../mscore/chord.ui" line="128"/>
+        <location filename="../../mscore/slursegment.ui" line="128"/>
         <source>Help Lines:</source>
         <translation type="unfinished"></translation>
     </message>
@@ -284,39 +118,6 @@
     </message>
 </context>
 <context>
-    <name>ClefPropertyBase</name>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>MusE Score: Clef Property</source>
-        <translation type="obsolete">MusE Score: Свойства ключа</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>Clef</source>
-        <translation type="obsolete">Ключ</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>Position</source>
-        <translation type="obsolete">Позиция</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>Offset</source>
-        <translation type="obsolete">Смещение</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>horizontal</source>
-        <translation type="obsolete">по горизонтали</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>vertical</source>
-        <translation type="obsolete">по вертикали</translation>
-    </message>
-</context>
-<context>
     <name>DynamicBase</name>
     <message>
         <location filename="../../mscore/dynamic.ui" line="13"/>
@@ -337,24 +138,9 @@
 <context>
     <name>EditInstrumentBase</name>
     <message>
-        <location filename="" line="1668179317"/>
-        <source>MusE Score: Edit Instrument Properties</source>
-        <translation type="obsolete">MusE Score: Изменение свойств инструмента</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>Available Instruments</source>
-        <translation type="obsolete">Доступные инструменты</translation>
-    </message>
-    <message>
         <location filename="../../mscore/editinstrument.ui" line="36"/>
         <source>New</source>
         <translation>Новый</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>F1</source>
-        <translation type="obsolete">F1</translation>
     </message>
     <message>
         <location filename="../../mscore/editinstrument.ui" line="56"/>
@@ -387,24 +173,9 @@
         <translation type="unfinished">мин. высота тона:</translation>
     </message>
     <message>
-        <location filename="" line="1668179317"/>
-        <source>max Pitch:</source>
-        <translation type="obsolete">макс. высота тона:</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>Transpose:</source>
-        <translation type="obsolete">Транспозиция:</translation>
-    </message>
-    <message>
         <location filename="../../mscore/editinstrument.ui" line="125"/>
         <source>Upper Clef:</source>
         <translation type="unfinished">Верхний ключ:</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>Lower Clef:</source>
-        <translation type="obsolete">Нижний ключ:</translation>
     </message>
     <message>
         <location filename="../../mscore/editinstrument.ui" line="108"/>
@@ -440,26 +211,6 @@
         <translation>MusE Score: Изменение стиля</translation>
     </message>
     <message>
-        <location filename="" line="1668179317"/>
-        <source>&amp;Apply</source>
-        <translation type="obsolete">При&amp;менить</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>Alt+A</source>
-        <translation type="obsolete">Alt+м</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>&amp;OK</source>
-        <translation type="obsolete">&amp;ОК</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>&amp;Cancel</source>
-        <translation type="obsolete">О&amp;тменить</translation>
-    </message>
-    <message>
         <location filename="../../mscore/editstyle.ui" line="81"/>
         <source>Page</source>
         <translation>Страница</translation>
@@ -485,11 +236,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="" line="1668179317"/>
-        <source>show</source>
-        <translation type="obsolete">показать</translation>
-    </message>
-    <message>
         <location filename="../../mscore/editstyle.ui" line="148"/>
         <source>odd/even</source>
         <translation>чёт/нечет</translation>
@@ -513,11 +259,6 @@
         <location filename="../../mscore/editstyle.ui" line="190"/>
         <source>every system</source>
         <translation>каждая система</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>interval:</source>
-        <translation type="obsolete">интервал:</translation>
     </message>
     <message>
         <location filename="../../mscore/editstyle.ui" line="33"/>
@@ -587,16 +328,6 @@
 </context>
 <context>
     <name>EditTempoBase</name>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>&amp;OK</source>
-        <translation type="obsolete">&amp;ОК</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>&amp;Cancel</source>
-        <translation type="obsolete">О&amp;тменить</translation>
-    </message>
     <message>
         <location filename="../../mscore/edittempo.ui" line="13"/>
         <source>Dialog</source>
@@ -816,24 +547,6 @@
     </message>
 </context>
 <context>
-    <name>InstrumentsBase</name>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>OK</source>
-        <translation type="obsolete">ОК</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>Cancel</source>
-        <translation type="obsolete">Отменить</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>Available Instruments</source>
-        <translation type="obsolete">Доступные инструменты</translation>
-    </message>
-</context>
-<context>
     <name>InstrumentsDialog</name>
     <message>
         <location filename="../../mscore/instrdialog.cpp" line="174"/>
@@ -989,34 +702,6 @@
     </message>
 </context>
 <context>
-    <name>MeasurePropertyBase</name>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>Offset</source>
-        <translation type="obsolete">Смещение</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>horizontal</source>
-        <translation type="obsolete">по горизонтали</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>vertical</source>
-        <translation type="obsolete">по вертикали</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>Measure</source>
-        <translation type="obsolete">Размер</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>Position</source>
-        <translation type="obsolete">Позиция</translation>
-    </message>
-</context>
-<context>
     <name>MeasuresDialogBase</name>
     <message>
         <location filename="../../mscore/measuresdialog.ui" line="16"/>
@@ -1073,18 +758,6 @@ Save Current Score?</source>
         <translation type="unfinished">&amp;Прервать</translation>
     </message>
     <message>
-        <location filename="" line="1668179317"/>
-        <source>MuseScore: load Score</source>
-        <translation type="obsolete">MuseScore: Загрузить партитуру</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>Open Temp File
-</source>
-        <translation type="obsolete">Открыть временный файл
-</translation>
-    </message>
-    <message>
         <location filename="../../mscore/file.cpp" line="439"/>
         <source>
 failed: </source>
@@ -1095,44 +768,6 @@ failed: </source>
         <location filename="../../mscore/file.cpp" line="440"/>
         <source>MuseScore: Open File</source>
         <translation type="unfinished">MusE Score: Открыть файл</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>saveAs</source>
-        <translation type="obsolete">Сохранить как</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>MuseScore: save As</source>
-        <translation type="obsolete">MuseScore: Сохранить как...</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>MuseScore: load template</source>
-        <translation type="obsolete">MuseScore: Загрузить шаблон</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>File
-</source>
-        <translation type="obsolete">Файл
-</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>
-exists</source>
-        <translation type="obsolete">уже существует</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>MuseScore: write</source>
-        <translation type="obsolete">MuseScore: Записать</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>Overwrite</source>
-        <translation type="obsolete">Перезаписать</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="1040"/>
@@ -1237,31 +872,6 @@ exists</source>
         <translation type="unfinished">Воспроизвести</translation>
     </message>
     <message>
-        <location filename="" line="1668179317"/>
-        <source>&amp;New</source>
-        <translation type="obsolete">&amp;Новый</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>&amp;Open</source>
-        <translation type="obsolete">&amp;Открыть</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>&amp;Print</source>
-        <translation type="obsolete">На&amp;печатать</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>Und&amp;o</source>
-        <translation type="obsolete">О&amp;тменить</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>Re&amp;do</source>
-        <translation type="obsolete">&amp;Повторить</translation>
-    </message>
-    <message>
         <location filename="../../mscore/actions.cpp" line="99"/>
         <source>undo last change</source>
         <translation type="unfinished">отменить последнее изменение</translation>
@@ -1327,19 +937,9 @@ exists</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="" line="1668179317"/>
-        <source>&amp;File</source>
-        <translation type="obsolete">&amp;Файл</translation>
-    </message>
-    <message>
         <location filename="../../mscore/mscore.cpp" line="427"/>
         <source>Open &amp;Recent</source>
         <translation type="unfinished">&amp;Недавние файлы</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>Save &amp;As</source>
-        <translation type="obsolete">Сохранить &amp;как</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="1004"/>
@@ -1362,29 +962,9 @@ exists</source>
         <translation type="unfinished">Импортировать MusicXML</translation>
     </message>
     <message>
-        <location filename="" line="1668179317"/>
-        <source>&amp;Quit</source>
-        <translation type="obsolete">В&amp;ыйти</translation>
-    </message>
-    <message>
         <location filename="../../mscore/mscore.cpp" line="450"/>
         <source>&amp;Edit</source>
         <translation type="unfinished">&amp;Правка</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>C&amp;ut</source>
-        <translation type="obsolete">&amp;Вырезать</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>&amp;Copy</source>
-        <translation type="obsolete">&amp;Скопировать</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>&amp;Paste</source>
-        <translation type="obsolete">Вст&amp;авить</translation>
     </message>
     <message>
         <location filename="../../mscore/mscore.cpp" line="465"/>
@@ -1405,16 +985,6 @@ exists</source>
         <location filename="../../mscore/mscore.cpp" line="480"/>
         <source>Notes</source>
         <translation type="unfinished">Ноты</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>Add Pitch</source>
-        <translation type="obsolete">Добавить изменение высоты тона</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>Add Intervall</source>
-        <translation type="obsolete">Добавить интервал</translation>
     </message>
     <message>
         <location filename="../../mscore/mscore.cpp" line="530"/>
@@ -1492,11 +1062,6 @@ exists</source>
         <translation type="unfinished">По&amp;мощь</translation>
     </message>
     <message>
-        <location filename="" line="1668179317"/>
-        <source>Browser</source>
-        <translation type="obsolete">Браузер</translation>
-    </message>
-    <message>
         <location filename="../../mscore/mscore.cpp" line="609"/>
         <source>&amp;About</source>
         <translation type="unfinished">О &amp;программе</translation>
@@ -1525,11 +1090,6 @@ exists</source>
         <location filename="../../mscore/midi.cpp" line="624"/>
         <source>MuseScore: Export as Midi (SMF)</source>
         <translation type="unfinished">MuseScore: Экспортировать как Midi (SMF)</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>MuseScore: Import Midi</source>
-        <translation type="obsolete">MuseScore: Импортировать Midi</translation>
     </message>
     <message>
         <location filename="../../mscore/file.cpp" line="245"/>
@@ -1705,11 +1265,6 @@ exists</source>
         <location filename="../../mscore/actions.cpp" line="44"/>
         <source>Save Score to File</source>
         <translation type="unfinished">Сохранить партитуру в файл</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>Create New Score</source>
-        <translation type="obsolete">Создать новую партитуру</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="89"/>
@@ -2987,11 +2542,6 @@ Save Current Score?</source>
         <source>Tuplets</source>
         <translation type="unfinished"></translation>
     </message>
-    <message>
-        <location filename="../../mscore/actions.cpp" line="988"/>
-        <source></source>
-        <translation type="unfinished"></translation>
-    </message>
 </context>
 <context>
     <name>NoteBase</name>
@@ -3042,195 +2592,7 @@ Save Current Score?</source>
     </message>
 </context>
 <context>
-    <name>NotePropertyBase</name>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>MuseScore: Note Property</source>
-        <translation type="obsolete">MusE Score: Свойства ноты</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>Offset</source>
-        <translation type="obsolete">Смещение</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>horizontal</source>
-        <translation type="obsolete">по горизонтали</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>vertical</source>
-        <translation type="obsolete">по вертикали</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>Note</source>
-        <translation type="obsolete">Нота</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>Position</source>
-        <translation type="obsolete">Позиция</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>Pitch</source>
-        <translation type="obsolete">Высота тона</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>Ticks</source>
-        <translation type="obsolete">Тиков</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>Voice</source>
-        <translation type="obsolete">Голос</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>Mirror</source>
-        <translation type="obsolete">Отражение</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>Beam</source>
-        <translation type="obsolete">Группировать</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>BeamMode</source>
-        <translation type="obsolete">Режим группировки</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>Auto</source>
-        <translation type="obsolete">Авто</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>Begin</source>
-        <translation type="obsolete">Начало</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>Mid</source>
-        <translation type="obsolete">Середина</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>End</source>
-        <translation type="obsolete">Конец</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>No Beam</source>
-        <translation type="obsolete">Без группировки</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>Tuplet</source>
-        <translation type="obsolete">Группа</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>Grace</source>
-        <translation type="obsolete">Форшлаг</translation>
-    </message>
-</context>
-<context>
     <name>Pad</name>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>rest</source>
-        <translation type="obsolete">пауза</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>1/32</source>
-        <translation type="obsolete">1/32</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>1/16</source>
-        <translation type="obsolete">1/16</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>1/8</source>
-        <translation type="obsolete">1/8</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>1/4</source>
-        <translation type="obsolete">1/4</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>1/1</source>
-        <translation type="obsolete">1/1</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>natural</source>
-        <translation type="obsolete">бекар</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>sharp</source>
-        <translation type="obsolete">диез</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>flat</source>
-        <translation type="obsolete">бемоль</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>staccato</source>
-        <translation type="obsolete">стаккато</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>tenuto</source>
-        <translation type="obsolete">тенуто</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>tie</source>
-        <translation type="obsolete">лига</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>dot</source>
-        <translation type="obsolete">точка</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>double sharp</source>
-        <translation type="obsolete">двойной диез</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>double flat</source>
-        <translation type="obsolete">двойной бемоль</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>beam start</source>
-        <translation type="obsolete">начало группы</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>beam mid</source>
-        <translation type="obsolete">середина группы</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>no beam</source>
-        <translation type="obsolete">без группы</translation>
-    </message>
     <message>
         <location filename="../../mscore/pad.cpp" line="41"/>
         <source>Notes</source>
@@ -3240,102 +2602,6 @@ Save Current Score?</source>
         <location filename="../../mscore/pad.cpp" line="95"/>
         <source>Beams</source>
         <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>Pad1Base</name>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>1/32</source>
-        <translation type="obsolete">1/32</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>1/16</source>
-        <translation type="obsolete">1/16</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>Rest</source>
-        <translation type="obsolete">Пауза</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>&gt;</source>
-        <translation type="obsolete">&gt;</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>#</source>
-        <translation type="obsolete">#</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>*</source>
-        <translation type="obsolete">*</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>1/2</source>
-        <translation type="obsolete">1/2</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>1/8</source>
-        <translation type="obsolete">1/8</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>1/4</source>
-        <translation type="obsolete">1/4</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>-</source>
-        <translation type="obsolete">-</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>+</source>
-        <translation type="obsolete">+</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>.</source>
-        <translation type="obsolete">.</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>1/1</source>
-        <translation type="obsolete">1/1</translation>
-    </message>
-</context>
-<context>
-    <name>PadBase</name>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>+</source>
-        <translation type="obsolete">+</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>.</source>
-        <translation type="obsolete">.</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>Rest</source>
-        <translation type="obsolete">Пауза</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>#</source>
-        <translation type="obsolete">#</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>-</source>
-        <translation type="obsolete">-</translation>
     </message>
 </context>
 <context>
@@ -3371,16 +2637,6 @@ Save Current Score?</source>
 </context>
 <context>
     <name>PageSettingsBase</name>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>MusE Score: Page Settings</source>
-        <translation type="obsolete">MusE Score: Настройки страницы</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>Margins</source>
-        <translation type="obsolete">Поля</translation>
-    </message>
     <message>
         <location filename="../../mscore/pagesettings.ui" line="481"/>
         <source>Top Margin</source>
@@ -3538,34 +2794,9 @@ Save Current Score?</source>
         <translation type="unfinished">001.01</translation>
     </message>
     <message>
-        <location filename="" line="1668179317"/>
-        <source>time position</source>
-        <translation type="obsolete">позиция во времени</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>120</source>
-        <translation type="obsolete">120</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>tempo</source>
-        <translation type="obsolete">темп</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>position</source>
-        <translation type="obsolete">позиция</translation>
-    </message>
-    <message>
         <location filename="../../mscore/playpanel.ui" line="2578"/>
         <source>Rewind</source>
         <translation>Перемотать назад</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>rewind</source>
-        <translation type="obsolete">перемотать назад</translation>
     </message>
     <message>
         <location filename="../../mscore/playpanel.ui" line="2588"/>
@@ -3573,24 +2804,9 @@ Save Current Score?</source>
         <translation>Остановить</translation>
     </message>
     <message>
-        <location filename="" line="1668179317"/>
-        <source>stop</source>
-        <translation type="obsolete">остановить</translation>
-    </message>
-    <message>
         <location filename="../../mscore/playpanel.ui" line="2601"/>
         <source>Play</source>
         <translation>Воспроизвести</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>play</source>
-        <translation type="obsolete">воспроизвести</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>volume</source>
-        <translation type="obsolete">громкость</translation>
     </message>
     <message>
         <location filename="../../mscore/playpanel.ui" line="490"/>
@@ -3626,19 +2842,9 @@ Save Current Score?</source>
         <translation type="unfinished">Изображения (*.jpg *.gif *.png)</translation>
     </message>
     <message>
-        <location filename="" line="1668179317"/>
-        <source>select fg wallpaper</source>
-        <translation type="obsolete">выбрать изображение переднего плана</translation>
-    </message>
-    <message>
         <location filename="../../mscore/preferences.cpp" line="644"/>
         <source>Choose Notepaper</source>
         <translation type="unfinished">Выбрать фон страницы</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>select bg wallpaper</source>
-        <translation type="obsolete">выбрать изображение заднего плана</translation>
     </message>
     <message>
         <location filename="../../mscore/preferences.cpp" line="660"/>
@@ -3649,11 +2855,6 @@ Save Current Score?</source>
         <location filename="../../mscore/preferences.cpp" line="679"/>
         <source>Sound Fonds (*.sf2 *.SF2);;All (*)</source>
         <translation type="unfinished">Sound Fonts (*.sf2 *.SF2);;All (*)</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>select sound font</source>
-        <translation type="obsolete">Выбрать sound font</translation>
     </message>
     <message>
         <location filename="../../mscore/preferences.cpp" line="676"/>
@@ -3667,16 +2868,6 @@ Save Current Score?</source>
         <location filename="../../mscore/prefsdialog.ui" line="13"/>
         <source>MuseScore: Preferences</source>
         <translation>MusE Score: Настройки</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>OK</source>
-        <translation type="obsolete">ОК</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>Cancel</source>
-        <translation type="obsolete">Отменить</translation>
     </message>
     <message>
         <location filename="../../mscore/prefsdialog.ui" line="215"/>
@@ -3744,21 +2935,6 @@ Save Current Score?</source>
         <translation>Цвет выделения для голоса 4</translation>
     </message>
     <message>
-        <location filename="" line="1668179317"/>
-        <source>Audio/Midi</source>
-        <translation type="obsolete">Звук/MIDI</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>enable Midi Input</source>
-        <translation type="obsolete">включить MIDI-вход</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>Sound Font:</source>
-        <translation type="obsolete">Sound Font:</translation>
-    </message>
-    <message>
         <location filename="../../mscore/prefsdialog.ui" line="2600"/>
         <source>JACK: L-Port</source>
         <translation>JACK: Л-порт</translation>
@@ -3767,21 +2943,6 @@ Save Current Score?</source>
         <location filename="../../mscore/prefsdialog.ui" line="2584"/>
         <source>JACK: R-Port</source>
         <translation>JACK: П-порт</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>Programs</source>
-        <translation type="obsolete">Программы</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>Browser</source>
-        <translation type="obsolete">Браузер</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>Print Command</source>
-        <translation type="obsolete">Команда печати</translation>
     </message>
     <message>
         <location filename="../../mscore/prefsdialog.ui" line="2739"/>
@@ -3802,36 +2963,6 @@ Save Current Score?</source>
         <location filename="../../mscore/prefsdialog.ui" line="2863"/>
         <source>Up</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>Voice</source>
-        <translation type="obsolete">Голос</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>1</source>
-        <translation type="obsolete">1</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>2</source>
-        <translation type="obsolete">2</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>3</source>
-        <translation type="obsolete">3</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>4</source>
-        <translation type="obsolete">4</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>5</source>
-        <translation type="obsolete">5</translation>
     </message>
     <message>
         <location filename="../../mscore/prefsdialog.ui" line="2520"/>
@@ -4104,31 +3235,9 @@ Save Current Score?</source>
 и попробуйте ещё раз
 </translation>
     </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>please click a note to add object
-</source>
-        <translation type="obsolete">щёлкните мышкой по ноте для добавления объекта
-</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>Fatal Error: Cannot find font &apos;mscore20&apos;.
-The font file &apos;mscore20.ttf&apos; must be installed manually
-from the mscore distribution
-</source>
-        <translation type="obsolete">Критическая ошибка: не найден шрифт &apos;mscore20&apos;.
-Файл шрифта &apos;mscore20.ttf&apos; из поставки MScore
-должен быть установлен самостоятельно</translation>
-    </message>
 </context>
 <context>
     <name>QWidget</name>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>load</source>
-        <translation type="obsolete">загрузить</translation>
-    </message>
     <message>
         <location filename="../../mscore/file.cpp" line="160"/>
         <source>MuseScore: load failed:</source>
@@ -4138,35 +3247,6 @@ from the mscore distribution
         <location filename="../../mscore/file.cpp" line="162"/>
         <source>Quit</source>
         <translation type="unfinished">Выйти</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>save</source>
-        <translation type="obsolete">сохранить</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>File
-</source>
-        <translation type="obsolete">Файл
-</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>
-exists</source>
-        <translation type="obsolete">
-существует</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>MuseScore: write</source>
-        <translation type="obsolete">MuseScore: записать</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>Overwrite</source>
-        <translation type="obsolete">Перезаписать</translation>
     </message>
     <message>
         <location filename="../../mscore/file.cpp" line="190"/>
@@ -4192,147 +3272,9 @@ failed: </source>
         <source>MuseScore: Write</source>
         <translation type="unfinished">MuseScore: Записать</translation>
     </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>Measure</source>
-        <translation type="obsolete">Размер</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>Text...</source>
-        <translation type="obsolete">Текст...</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>Title</source>
-        <translation type="obsolete">Название</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>Subtitle</source>
-        <translation type="obsolete">Подзаголовок</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>Composer</source>
-        <translation type="obsolete">Композитор</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>Poet</source>
-        <translation type="obsolete">Поэт</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>Lyrics</source>
-        <translation type="obsolete">Лирика</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>Tempo</source>
-        <translation type="obsolete">Темп</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>Metronome</source>
-        <translation type="obsolete">Метроном</translation>
-    </message>
-</context>
-<context>
-    <name>RestPropertyBase</name>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>MuseScore: Rest Property</source>
-        <translation type="obsolete">MusE Score: Свойства паузы</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>Offset</source>
-        <translation type="obsolete">Смещение</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>horizontal</source>
-        <translation type="obsolete">по горизонтали</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>vertical</source>
-        <translation type="obsolete">по вертикали</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>Rest</source>
-        <translation type="obsolete">Пауза</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>Position</source>
-        <translation type="obsolete">Позиция</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>Voice</source>
-        <translation type="obsolete">Голос</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>BeamMode</source>
-        <translation type="obsolete">Режим группировки</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>Auto</source>
-        <translation type="obsolete">Авто</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>Begin</source>
-        <translation type="obsolete">Начало</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>Mid</source>
-        <translation type="obsolete">Середина</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>End</source>
-        <translation type="obsolete">Конец</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>No Beam</source>
-        <translation type="obsolete">Без группировки</translation>
-    </message>
 </context>
 <context>
     <name>Score</name>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>MuseScore</source>
-        <translation type="obsolete">MuseScore</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>&amp;Save</source>
-        <translation type="obsolete">&amp;Сохранить</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>&amp;Nosave</source>
-        <translation type="obsolete">&amp;Не сохранять</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>&amp;Abort</source>
-        <translation type="obsolete">&amp;Прервать</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>MuseScore: load Score</source>
-        <translation type="obsolete">MuseScore: Загрузить партитуру</translation>
-    </message>
     <message>
         <location filename="../../mscore/file.cpp" line="301"/>
         <source>Open Temp File
@@ -4351,451 +3293,6 @@ failed: </source>
         <location filename="../../mscore/file.cpp" line="303"/>
         <source>MuseScore: Open File</source>
         <translation type="unfinished">MusE Score: Открыть файл</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>saveAs</source>
-        <translation type="obsolete">Сохранить как</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>MuseScore: save As</source>
-        <translation type="obsolete">MuseScore: Сохранить как...</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>MuseScore: load template</source>
-        <translation type="obsolete">MuseScore: Загрузить шаблон</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>gz</source>
-        <translation type="obsolete">gz</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>bz2</source>
-        <translation type="obsolete">bz2</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>File
-</source>
-        <translation type="obsolete">Файл
-</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>
-exists</source>
-        <translation type="obsolete">уже существует</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>MuseScore: write</source>
-        <translation type="obsolete">MuseScore: Записать</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>Overwrite</source>
-        <translation type="obsolete">Перезаписать</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>Quit</source>
-        <translation type="obsolete">Выйти</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>Open File
-</source>
-        <translation type="obsolete">Открыть файл
-</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>MuseScore: load Style</source>
-        <translation type="obsolete">MuseScore: Загрузить стиль</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>MuseScore: Save Style</source>
-        <translation type="obsolete">MuseScore: Сохранить стиль</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>MuseScore: Write File</source>
-        <translation type="obsolete">MusE Score: Записать файл</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>Transport</source>
-        <translation type="obsolete">Пульт управления</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>rewind</source>
-        <translation type="obsolete">перемотать назад</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>Rewind</source>
-        <translation type="obsolete">Перемотать назад</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>stop</source>
-        <translation type="obsolete">остановить</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>Stop</source>
-        <translation type="obsolete">Остановить</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>play</source>
-        <translation type="obsolete">воспроизвести</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>Play</source>
-        <translation type="obsolete">Воспроизвести</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>New</source>
-        <translation type="obsolete">Новый</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>&amp;New</source>
-        <translation type="obsolete">&amp;Новый</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>Open</source>
-        <translation type="obsolete">Открыть</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>&amp;Open</source>
-        <translation type="obsolete">&amp;Открыть</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>Save</source>
-        <translation type="obsolete">Сохранить</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>Print</source>
-        <translation type="obsolete">Напечатать</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>&amp;Print</source>
-        <translation type="obsolete">На&amp;печатать</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>Undo</source>
-        <translation type="obsolete">Отменить</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>Und&amp;o</source>
-        <translation type="obsolete">О&amp;тменить</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>Redo</source>
-        <translation type="obsolete">Повторить</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>Re&amp;do</source>
-        <translation type="obsolete">&amp;Повторить</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>undo last change</source>
-        <translation type="obsolete">отменить последнее изменение</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>redo last undo</source>
-        <translation type="obsolete">повторить последнее изменение</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>File Operations</source>
-        <translation type="obsolete">Операции с файлами</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>Transport Tools</source>
-        <translation type="obsolete">Кнопки пульта управления</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>dot</source>
-        <translation type="obsolete">точка</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>rest</source>
-        <translation type="obsolete">пауза</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>double sharp</source>
-        <translation type="obsolete">Двойной диез</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>sharp</source>
-        <translation type="obsolete">диез</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>natural</source>
-        <translation type="obsolete">бекар</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>flat</source>
-        <translation type="obsolete">бемоль</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>double flat</source>
-        <translation type="obsolete">двойной бемоль</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>&amp;File</source>
-        <translation type="obsolete">&amp;Файл</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>Open &amp;Recent</source>
-        <translation type="obsolete">&amp;Недавние файлы</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>Save &amp;As</source>
-        <translation type="obsolete">Сохранить &amp;как</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>Export Midi</source>
-        <translation type="obsolete">Экспортировать MIDI</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>Export MusicXML</source>
-        <translation type="obsolete">Экспортировать в MusicXML</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>Import Midi</source>
-        <translation type="obsolete">Импортировать MIDI</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>Import MusicXML</source>
-        <translation type="obsolete">Импортировать MusicXML</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>&amp;Quit</source>
-        <translation type="obsolete">В&amp;ыйти</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>&amp;Edit</source>
-        <translation type="obsolete">&amp;Правка</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>C&amp;ut</source>
-        <translation type="obsolete">&amp;Вырезать</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>&amp;Copy</source>
-        <translation type="obsolete">&amp;Скопировать</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>&amp;Paste</source>
-        <translation type="obsolete">Вст&amp;авить</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>Preferences</source>
-        <translation type="obsolete">Настроить...</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>&amp;Create</source>
-        <translation type="obsolete">&amp;Создать</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>Measure</source>
-        <translation type="obsolete">Размер</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>Fingering</source>
-        <translation type="obsolete">Аппликатура</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>Tempo</source>
-        <translation type="obsolete">Темп</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>Metronome</source>
-        <translation type="obsolete">Метроном</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>Text</source>
-        <translation type="obsolete">Текст</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>Symbols</source>
-        <translation type="obsolete">Символы</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>Notes</source>
-        <translation type="obsolete">Ноты</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>Input</source>
-        <translation type="obsolete">Ввод</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>Add Pitch</source>
-        <translation type="obsolete">Добавить изменение высоты тона</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>Add Intervall</source>
-        <translation type="obsolete">Добавить интервал</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>&amp;Layout</source>
-        <translation type="obsolete">&amp;Облик</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>Page Settings...</source>
-        <translation type="obsolete">Параметры страницы...</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>&amp;Style</source>
-        <translation type="obsolete">&amp;Стиль</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>Edit Style...</source>
-        <translation type="obsolete">Изменить стиль...</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>Edit Text Style...</source>
-        <translation type="obsolete">Изменить стиль текста...</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>Load Style</source>
-        <translation type="obsolete">Загрузить стиль</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>Save Style</source>
-        <translation type="obsolete">Сохранить стиль</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>&amp;Display</source>
-        <translation type="obsolete">&amp;Вид</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>Transport Toolbar</source>
-        <translation type="obsolete">Панель пульта управления</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>Note Input Toolbar</source>
-        <translation type="obsolete">Панель ввода нот</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>Show Invisible</source>
-        <translation type="obsolete">Показать невидимое</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>&amp;Help</source>
-        <translation type="obsolete">По&amp;мощь</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>Browser</source>
-        <translation type="obsolete">Браузер</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>&amp;About</source>
-        <translation type="obsolete">О &amp;программе</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>About&amp;Qt</source>
-        <translation type="obsolete">&amp;О Qt</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>What&apos;s &amp;This</source>
-        <translation type="obsolete">&amp;Что это</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>MuseScore: Open Help</source>
-        <translation type="obsolete">MusE Score: Открыть файл справки</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>MuseScore: Export as MusicXml</source>
-        <translation type="obsolete">MuseScore: Экспортировать как MusicXml</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>MuseScore: Import MusicXML</source>
-        <translation type="obsolete">MuseScore: Импортировать как MusicXml</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>MuseScore: Export as Midi (SMF)</source>
-        <translation type="obsolete">MuseScore: Экспортировать как Midi (SMF)</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>MuseScore: Import Midi</source>
-        <translation type="obsolete">MuseScore: Импортировать Midi</translation>
     </message>
     <message>
         <location filename="../../mscore/file.cpp" line="689"/>
@@ -5178,21 +3675,6 @@ start note entry</source>
         <translation>Общие</translation>
     </message>
     <message>
-        <location filename="" line="1668179317"/>
-        <source>Sample</source>
-        <translation type="obsolete">Пример</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>Font:</source>
-        <translation type="obsolete">Шрифт:</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>Style:</source>
-        <translation type="obsolete">Стиль:</translation>
-    </message>
-    <message>
         <location filename="../../mscore/textstyle.ui" line="165"/>
         <source>B</source>
         <translation>Ж</translation>
@@ -5206,11 +3688,6 @@ start note entry</source>
         <location filename="../../mscore/textstyle.ui" line="227"/>
         <source>U</source>
         <translation>Ч</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>Size:</source>
-        <translation type="obsolete">Кегль:</translation>
     </message>
     <message>
         <location filename="../../mscore/textstyle.ui" line="549"/>
@@ -5296,16 +3773,6 @@ start note entry</source>
         <location filename="../../mscore/textstyle.ui" line="854"/>
         <source>Apply</source>
         <translation>Применить</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>&amp;OK</source>
-        <translation type="obsolete">&amp;ОК</translation>
-    </message>
-    <message>
-        <location filename="" line="1668179317"/>
-        <source>&amp;Cancel</source>
-        <translation type="obsolete">О&amp;тменить</translation>
     </message>
     <message>
         <location filename="../../mscore/textstyle.ui" line="83"/>

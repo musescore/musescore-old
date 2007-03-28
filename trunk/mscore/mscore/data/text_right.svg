@@ -1,107 +1,91 @@
-<?xml version="1.0" standalone="no"?>
-<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 20010904//EN"
-"http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd"
-[
- <!ATTLIST svg
-  xmlns:xlink CDATA #FIXED "http://www.w3.org/1999/xlink">
-]>
-<!-- Created with Sodipodi ("http://www.sodipodi.com/") -->
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
 <svg
-   xml:space="preserve"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   version="1.0"
    width="128pt"
    height="128pt"
    viewBox="0 0 507.946 507.946"
    id="svg49"
-   sodipodi:version="0.27"
-   sodipodi:docname="/mnt/windows/themes/Work/Blue-Sphere/text_right.svg"
-   sodipodi:docbase="/mnt/windows/themes/Work/Blue-Sphere/"
-   xmlns="http://www.w3.org/2000/svg"
-   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
-   xmlns:xlink="http://www.w3.org/1999/xlink">
+   xml:space="preserve">
   <defs
-     id="defs62">
+   id="defs62">
     <radialGradient
-       id="aigrd1"
-       cx="218.9404"
-       cy="219.7715"
-       r="150.7063"
-       fx="218.9404"
-       fy="219.7715"
-       gradientUnits="userSpaceOnUse"
-       style="stroke:#000000;stroke-opacity:0.986014;stroke-width:0.981612;">
+   cx="218.9404"
+   cy="219.7715"
+   r="150.7063"
+   fx="218.9404"
+   fy="219.7715"
+   id="aigrd1"
+   gradientUnits="userSpaceOnUse">
       <stop
-         offset="0"
-         style="stop-color:#73ffff;stroke:#000000;stroke-opacity:0.986014;stroke-width:0.981612;"
-         id="stop53" />
+   style="stop-color:#73ffff;stop-opacity:1"
+   offset="0"
+   id="stop53" />
       <stop
-         offset="0.2809"
-         style="stop-color:#2EA6B9;stroke:#000000;stroke-opacity:0.986014;stroke-width:0.981612;"
-         id="stop54" />
+   style="stop-color:#2ea6b9;stop-opacity:1"
+   offset="0.2809"
+   id="stop54" />
       <stop
-         offset="1"
-         style="stop-color:#006b8b;stroke:#000000;stroke-opacity:0.986014;stroke-width:0.981612;"
-         id="stop55" />
+   style="stop-color:#006b8b;stop-opacity:1"
+   offset="1"
+   id="stop55" />
     </radialGradient>
   </defs>
-  <sodipodi:namedview
-     id="base">
-    <sodipodi:guide
-       orientation="vertical"
-       position="11.507887"
-       id="sodipodi:guide2267" />
-  </sodipodi:namedview>
+  
   <rect
-     style="font-size:12;fill:#0c6772;fill-opacity:0.992157;fill-rule:evenodd;stroke:#0c6772;stroke-width:8.41811;stroke-opacity:0.992157;"
-     id="rect2234"
-     x="50.474127"
-     y="117.772959"
-     width="400.588318"
-     height="16.023554"
-     rx="0.000000"
-     ry="0.000000" />
+   width="400.58832"
+   height="16.023554"
+   rx="0"
+   ry="0"
+   x="50.474129"
+   y="117.77296"
+   style="font-size:12px;fill:#0c6772;fill-opacity:0.99215698;fill-rule:evenodd;stroke:#0c6772;stroke-width:8.41810989;stroke-opacity:0.99215698"
+   id="rect2234" />
   <rect
-     style="font-size:12;fill:#0c6772;fill-opacity:0.992157;fill-rule:evenodd;stroke:#0c6772;stroke-width:7.62292;stroke-opacity:0.992157;"
-     id="rect2262"
-     x="122.580028"
-     y="173.855331"
-     width="328.482419"
-     height="16.023554"
-     rx="0.000000"
-     ry="0.000000" />
+   width="328.48242"
+   height="16.023554"
+   rx="0"
+   ry="0"
+   x="122.58002"
+   y="173.85533"
+   style="font-size:12px;fill:#0c6772;fill-opacity:0.99215698;fill-rule:evenodd;stroke:#0c6772;stroke-width:7.62292004;stroke-opacity:0.99215698"
+   id="rect2262" />
   <rect
-     style="font-size:12;fill:#0c6772;fill-opacity:0.992157;fill-rule:evenodd;stroke:#0c6772;stroke-width:8.41811;stroke-opacity:0.992157;"
-     id="rect2263"
-     x="50.474127"
-     y="229.937690"
-     width="400.588318"
-     height="16.023554"
-     rx="0.000000"
-     ry="0.000000" />
+   width="400.58832"
+   height="16.023554"
+   rx="0"
+   ry="0"
+   x="50.474129"
+   y="229.93768"
+   style="font-size:12px;fill:#0c6772;fill-opacity:0.99215698;fill-rule:evenodd;stroke:#0c6772;stroke-width:8.41810989;stroke-opacity:0.99215698"
+   id="rect2263" />
   <rect
-     style="font-size:12;fill:#0c6772;fill-opacity:0.992157;fill-rule:evenodd;stroke:#0c6772;stroke-width:7.62292;stroke-opacity:0.992157;"
-     id="rect2264"
-     x="122.580028"
-     y="290.827118"
-     width="328.482419"
-     height="16.023554"
-     rx="0.000000"
-     ry="0.000000" />
+   width="328.48242"
+   height="16.023554"
+   rx="0"
+   ry="0"
+   x="122.58002"
+   y="290.82712"
+   style="font-size:12px;fill:#0c6772;fill-opacity:0.99215698;fill-rule:evenodd;stroke:#0c6772;stroke-width:7.62292004;stroke-opacity:0.99215698"
+   id="rect2264" />
   <rect
-     style="font-size:12;fill:#0c6772;fill-opacity:0.992157;fill-rule:evenodd;stroke:#0c6772;stroke-width:8.41811;stroke-opacity:0.992157;"
-     id="rect2265"
-     x="50.474127"
-     y="351.716547"
-     width="400.588318"
-     height="16.023554"
-     rx="0.000000"
-     ry="0.000000" />
+   width="400.58832"
+   height="16.023554"
+   rx="0"
+   ry="0"
+   x="50.474129"
+   y="351.71655"
+   style="font-size:12px;fill:#0c6772;fill-opacity:0.99215698;fill-rule:evenodd;stroke:#0c6772;stroke-width:8.41810989;stroke-opacity:0.99215698"
+   id="rect2265" />
   <rect
-     style="font-size:12;fill:#0c6772;fill-opacity:0.992157;fill-rule:evenodd;stroke:#0c6772;stroke-width:7.58565;stroke-opacity:0.992157;"
-     id="rect2266"
-     x="124.182378"
-     y="412.605988"
-     width="325.277743"
-     height="16.023554"
-     rx="0.000000"
-     ry="0.000000" />
+   width="325.27774"
+   height="16.023554"
+   rx="0"
+   ry="0"
+   x="124.18238"
+   y="412.60599"
+   style="font-size:12px;fill:#0c6772;fill-opacity:0.99215698;fill-rule:evenodd;stroke:#0c6772;stroke-width:7.58564997;stroke-opacity:0.99215698"
+   id="rect2266" />
 </svg>

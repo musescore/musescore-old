@@ -1,44 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS><TS version="1.1">
 <context>
-    <name>@default</name>
-    <message>
-        <location filename="" line="760173385"/>
-        <source>Load Score from File</source>
-        <translation type="obsolete">Apri Spartito</translation>
-    </message>
-    <message>
-        <location filename="" line="760173385"/>
-        <source>Save Score to File</source>
-        <translation type="obsolete">Salva Spartito</translation>
-    </message>
-    <message>
-        <location filename="" line="760173385"/>
-        <source>Create New Score</source>
-        <translation type="obsolete">Nuovo Spartito</translation>
-    </message>
-    <message>
-        <location filename="" line="760173385"/>
-        <source>Print Score</source>
-        <translation type="obsolete">Stampa Spartito</translation>
-    </message>
-    <message>
-        <location filename="" line="760173385"/>
-        <source>rewind to start position</source>
-        <translation type="obsolete">Riavvolgi</translation>
-    </message>
-    <message>
-        <location filename="" line="760173385"/>
-        <source>stop sequencer</source>
-        <translation type="obsolete">Interrompi Riproduzione</translation>
-    </message>
-    <message>
-        <location filename="" line="760173385"/>
-        <source>start sequencer play</source>
-        <translation type="obsolete">Inizia Riproduzine</translation>
-    </message>
-</context>
-<context>
     <name>BarLineBase</name>
     <message>
         <location filename="../../mscore/barline.ui" line="16"/>
@@ -59,21 +21,6 @@
 <context>
     <name>Canvas</name>
     <message>
-        <location filename="" line="760173385"/>
-        <source>Cut</source>
-        <translation type="obsolete">Taglia</translation>
-    </message>
-    <message>
-        <location filename="" line="760173385"/>
-        <source>Copy</source>
-        <translation type="obsolete">Copia</translation>
-    </message>
-    <message>
-        <location filename="" line="760173385"/>
-        <source>Delete</source>
-        <translation type="obsolete">Elimina</translation>
-    </message>
-    <message>
         <location filename="../../mscore/canvas.cpp" line="176"/>
         <source>Set Invisible</source>
         <translation>Rendi Invisibile</translation>
@@ -89,11 +36,6 @@
         <translation>Colori...</translation>
     </message>
     <message>
-        <location filename="" line="760173385"/>
-        <source>Context</source>
-        <translation type="obsolete">Contesto</translation>
-    </message>
-    <message>
         <location filename="../../mscore/canvas.cpp" line="185"/>
         <source>Properties</source>
         <translation type="unfinished">Proprietà</translation>
@@ -102,42 +44,42 @@
 <context>
     <name>ChordBase</name>
     <message>
-        <location filename="../../mscore/chord.ui" line="16"/>
+        <location filename="../../mscore/slursegment.ui" line="16"/>
         <source>Form</source>
         <translation>Formato</translation>
     </message>
     <message>
-        <location filename="../../mscore/chord.ui" line="28"/>
+        <location filename="../../mscore/slursegment.ui" line="28"/>
         <source>Chord</source>
         <translation>Accordo</translation>
     </message>
     <message>
-        <location filename="../../mscore/chord.ui" line="51"/>
+        <location filename="../../mscore/slursegment.ui" line="51"/>
         <source>Stem</source>
         <translation>Asta</translation>
     </message>
     <message>
-        <location filename="../../mscore/chord.ui" line="58"/>
+        <location filename="../../mscore/slursegment.ui" line="58"/>
         <source>Hook</source>
         <translation>Virgola</translation>
     </message>
     <message>
-        <location filename="../../mscore/chord.ui" line="88"/>
+        <location filename="../../mscore/slursegment.ui" line="88"/>
         <source>Grace Note</source>
         <translation>Abbellimento</translation>
     </message>
     <message>
-        <location filename="../../mscore/chord.ui" line="95"/>
+        <location filename="../../mscore/slursegment.ui" line="95"/>
         <source>Stem Direction</source>
         <translation>Orientamento Asta</translation>
     </message>
     <message>
-        <location filename="../../mscore/chord.ui" line="121"/>
+        <location filename="../../mscore/slursegment.ui" line="121"/>
         <source>Note Attributes:</source>
         <translation>Attributi Nota:</translation>
     </message>
     <message>
-        <location filename="../../mscore/chord.ui" line="128"/>
+        <location filename="../../mscore/slursegment.ui" line="128"/>
         <source>Help Lines:</source>
         <translation type="unfinished"></translation>
     </message>
@@ -460,11 +402,6 @@
         <translation>visibile</translation>
     </message>
     <message>
-        <location filename="" line="760173385"/>
-        <source>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;/head&gt;&lt;body style=&quot; white-space: pre-wrap; font-family:Arial; font-weight:400; font-style:normal; text-decoration:none;&quot;&gt;&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Subtype&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="obsolete">&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;/head&gt;&lt;body style=&quot; white-space: pre-wrap; font-family:Arial; font-weight:400; font-style:normal; text-decoration:none;&quot;&gt;&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Sottotipo&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
-    </message>
-    <message>
         <location filename="../../mscore/element.ui" line="171"/>
         <source>Voice</source>
         <translation>Voce</translation>
@@ -483,11 +420,6 @@
         <location filename="../../mscore/element.ui" line="256"/>
         <source>Color</source>
         <translation>Colore</translation>
-    </message>
-    <message>
-        <location filename="" line="760173385"/>
-        <source>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;/head&gt;&lt;body style=&quot; white-space: pre-wrap; font-family:Sans Serif; font-weight:400; font-style:normal; text-decoration:none;&quot;&gt;&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Color&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="obsolete">&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;/head&gt;&lt;body style=&quot; white-space: pre-wrap; font-family:Sans Serif; font-weight:400; font-style:normal; text-decoration:none;&quot;&gt;&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Colore&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../../mscore/element.ui" line="273"/>
@@ -839,18 +771,6 @@ Vuoi Salvarlo?</translation>
         <translation type="unfinished">Senza Titolo</translation>
     </message>
     <message>
-        <location filename="" line="760173385"/>
-        <source>MuseScore: Save Score</source>
-        <translation type="obsolete">MuseScore: Salva Spartito</translation>
-    </message>
-    <message>
-        <location filename="" line="760173385"/>
-        <source>Open Temp File
-</source>
-        <translation type="obsolete">Apri File Temporaneo
-</translation>
-    </message>
-    <message>
         <location filename="../../mscore/file.cpp" line="439"/>
         <source>
 failed: </source>
@@ -905,34 +825,9 @@ fallito: </translation>
         <translation>&amp;Crea</translation>
     </message>
     <message>
-        <location filename="" line="760173385"/>
-        <source>&amp;Instruments...<byte value="x9"/>I</source>
-        <translation type="obsolete">&amp;Strumenti Musicali...<byte value="x9"/>I</translation>
-    </message>
-    <message>
         <location filename="../../mscore/actions.cpp" line="675"/>
         <source>Measure</source>
         <translation type="unfinished">Battuta</translation>
-    </message>
-    <message>
-        <location filename="" line="760173385"/>
-        <source>Bars...</source>
-        <translation type="obsolete">Barre...</translation>
-    </message>
-    <message>
-        <location filename="" line="760173385"/>
-        <source>Clef...<byte value="x9"/>Y</source>
-        <translation type="obsolete">Chiavi...<byte value="x9"/>Y</translation>
-    </message>
-    <message>
-        <location filename="" line="760173385"/>
-        <source>&amp;Key...<byte value="x9"/>K</source>
-        <translation type="obsolete">&amp;Tonalità...<byte value="x9"/>K</translation>
-    </message>
-    <message>
-        <location filename="" line="760173385"/>
-        <source>&amp;Time...<byte value="x9"/>T</source>
-        <translation type="obsolete">&amp;Tempo...<byte value="x9"/>T</translation>
     </message>
     <message>
         <location filename="../../mscore/menus.cpp" line="64"/>
@@ -953,11 +848,6 @@ fallito: </translation>
         <location filename="../../mscore/menus.cpp" line="67"/>
         <source>Accidentals...</source>
         <translation>Alterazioni...</translation>
-    </message>
-    <message>
-        <location filename="" line="760173385"/>
-        <source>Dynamics...<byte value="x9"/>L</source>
-        <translation type="obsolete">Dinamiche...<byte value="x9"/>L</translation>
     </message>
     <message>
         <location filename="../../mscore/menus.cpp" line="70"/>
@@ -1015,34 +905,14 @@ fallito: </translation>
         <translation type="unfinished">Metronomo</translation>
     </message>
     <message>
-        <location filename="" line="760173385"/>
-        <source>Symbols...<byte value="x9"/>Z</source>
-        <translation type="obsolete">Simboli...<byte value="x9"/>Z</translation>
-    </message>
-    <message>
-        <location filename="" line="760173385"/>
-        <source>MuseScore: Symbols 1</source>
-        <translation type="obsolete">MuseScore: Simboli 1</translation>
-    </message>
-    <message>
         <location filename="../../mscore/menus.cpp" line="107"/>
         <source>MuseScore: Clefs</source>
         <translation>MuseScore: Chiavi</translation>
     </message>
     <message>
-        <location filename="" line="760173385"/>
-        <source>clef</source>
-        <translation type="obsolete">chiave</translation>
-    </message>
-    <message>
         <location filename="../../mscore/menus.cpp" line="141"/>
         <source>MuseScore: Key Signature</source>
         <translation>MuseScore: Tonalità</translation>
-    </message>
-    <message>
-        <location filename="" line="760173385"/>
-        <source>MuseScore: TimeSignature</source>
-        <translation type="obsolete">MuseScore: Tempo</translation>
     </message>
     <message>
         <location filename="../../mscore/menus.cpp" line="187"/>
@@ -1125,39 +995,9 @@ fallito: </translation>
         <translation>MuseScore: Dinamiche</translation>
     </message>
     <message>
-        <location filename="" line="760173385"/>
-        <source>MuseScore: Bars</source>
-        <translation type="obsolete">MuseScore: Barre</translation>
-    </message>
-    <message>
         <location filename="../../mscore/menus.cpp" line="418"/>
         <source>MuseScore: Fingering</source>
         <translation>MuseScore: Diteggiatura</translation>
-    </message>
-    <message>
-        <location filename="" line="760173385"/>
-        <source>fingering 1</source>
-        <translation type="obsolete">diteggiatura 1</translation>
-    </message>
-    <message>
-        <location filename="" line="760173385"/>
-        <source>fingering 2</source>
-        <translation type="obsolete">diteggiatura 2</translation>
-    </message>
-    <message>
-        <location filename="" line="760173385"/>
-        <source>fingering 3</source>
-        <translation type="obsolete">diteggiatura 3</translation>
-    </message>
-    <message>
-        <location filename="" line="760173385"/>
-        <source>fingering 4</source>
-        <translation type="obsolete">diteggiatura 4</translation>
-    </message>
-    <message>
-        <location filename="" line="760173385"/>
-        <source>fingering 5</source>
-        <translation type="obsolete">diteggiatura 5</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="891"/>
@@ -1173,31 +1013,6 @@ fallito: </translation>
         <location filename="../../mscore/actions.cpp" line="909"/>
         <source>Play</source>
         <translation type="unfinished">Riproduci</translation>
-    </message>
-    <message>
-        <location filename="" line="760173385"/>
-        <source>&amp;New</source>
-        <translation type="obsolete">&amp;Nuovo</translation>
-    </message>
-    <message>
-        <location filename="" line="760173385"/>
-        <source>&amp;Open</source>
-        <translation type="obsolete">&amp;Apri</translation>
-    </message>
-    <message>
-        <location filename="" line="760173385"/>
-        <source>&amp;Print</source>
-        <translation type="obsolete">&amp;Stampa</translation>
-    </message>
-    <message>
-        <location filename="" line="760173385"/>
-        <source>Und&amp;o</source>
-        <translation type="obsolete">&amp;Annulla</translation>
-    </message>
-    <message>
-        <location filename="" line="760173385"/>
-        <source>Re&amp;do</source>
-        <translation type="obsolete">&amp;Ripristina</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="99"/>
@@ -1275,19 +1090,9 @@ fallito: </translation>
         <translation>Inserimento Note</translation>
     </message>
     <message>
-        <location filename="" line="760173385"/>
-        <source>&amp;File</source>
-        <translation type="obsolete">&amp;File</translation>
-    </message>
-    <message>
         <location filename="../../mscore/mscore.cpp" line="427"/>
         <source>Open &amp;Recent</source>
         <translation>&amp;Recenti</translation>
-    </message>
-    <message>
-        <location filename="" line="760173385"/>
-        <source>Save &amp;As</source>
-        <translation type="obsolete">Salva &amp;Come</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="1004"/>
@@ -1310,34 +1115,9 @@ fallito: </translation>
         <translation type="unfinished">Importa MusicXML</translation>
     </message>
     <message>
-        <location filename="" line="760173385"/>
-        <source>&amp;Quit</source>
-        <translation type="obsolete">&amp;Esci</translation>
-    </message>
-    <message>
         <location filename="../../mscore/mscore.cpp" line="450"/>
         <source>&amp;Edit</source>
         <translation>&amp;Modifica</translation>
-    </message>
-    <message>
-        <location filename="" line="760173385"/>
-        <source>C&amp;ut</source>
-        <translation type="obsolete">&amp;Taglia</translation>
-    </message>
-    <message>
-        <location filename="" line="760173385"/>
-        <source>&amp;Copy</source>
-        <translation type="obsolete">&amp;Copia</translation>
-    </message>
-    <message>
-        <location filename="" line="760173385"/>
-        <source>&amp;Paste</source>
-        <translation type="obsolete">&amp;Incolla</translation>
-    </message>
-    <message>
-        <location filename="" line="760173385"/>
-        <source>Instrument List...</source>
-        <translation type="obsolete">Elenco Strumenti Musicali...</translation>
     </message>
     <message>
         <location filename="../../mscore/mscore.cpp" line="465"/>
@@ -1358,106 +1138,6 @@ fallito: </translation>
         <location filename="../../mscore/actions.cpp" line="193"/>
         <source>Input</source>
         <translation type="unfinished">Modalità Inserimento</translation>
-    </message>
-    <message>
-        <location filename="" line="760173385"/>
-        <source>Add Pitch</source>
-        <translation type="obsolete">Aggiungi Nota</translation>
-    </message>
-    <message>
-        <location filename="" line="760173385"/>
-        <source>Add Intervall</source>
-        <translation type="obsolete">Aggiungi Intervallo di</translation>
-    </message>
-    <message>
-        <location filename="" line="760173385"/>
-        <source>Prime<byte value="x9"/>1</source>
-        <translation type="obsolete">Prima<byte value="x9"/>1</translation>
-    </message>
-    <message>
-        <location filename="" line="760173385"/>
-        <source>Sekunde above<byte value="x9"/>2</source>
-        <translation type="obsolete">Seconda sopra<byte value="x9"/>2</translation>
-    </message>
-    <message>
-        <location filename="" line="760173385"/>
-        <source>Terz above<byte value="x9"/>3</source>
-        <translation type="obsolete">Terza sopra<byte value="x9"/>3</translation>
-    </message>
-    <message>
-        <location filename="" line="760173385"/>
-        <source>Quart above<byte value="x9"/>4</source>
-        <translation type="obsolete">Quarta sopra<byte value="x9"/>4</translation>
-    </message>
-    <message>
-        <location filename="" line="760173385"/>
-        <source>Quinte above<byte value="x9"/>5</source>
-        <translation type="obsolete">Quinta sopra<byte value="x9"/>5</translation>
-    </message>
-    <message>
-        <location filename="" line="760173385"/>
-        <source>Sexte above<byte value="x9"/>6</source>
-        <translation type="obsolete">Sesta sopra<byte value="x9"/>6</translation>
-    </message>
-    <message>
-        <location filename="" line="760173385"/>
-        <source>Septime above<byte value="x9"/>7</source>
-        <translation type="obsolete">Settima sopra<byte value="x9"/>7</translation>
-    </message>
-    <message>
-        <location filename="" line="760173385"/>
-        <source>Oktave above<byte value="x9"/>8</source>
-        <translation type="obsolete">Ottava sopra<byte value="x9"/>8</translation>
-    </message>
-    <message>
-        <location filename="" line="760173385"/>
-        <source>None above<byte value="x9"/>9</source>
-        <translation type="obsolete">Nona sopra<byte value="x9"/>9</translation>
-    </message>
-    <message>
-        <location filename="" line="760173385"/>
-        <source>Sekunde below</source>
-        <translation type="obsolete">Seconda sotto</translation>
-    </message>
-    <message>
-        <location filename="" line="760173385"/>
-        <source>Terz below</source>
-        <translation type="obsolete">Terza sotto</translation>
-    </message>
-    <message>
-        <location filename="" line="760173385"/>
-        <source>Quart below</source>
-        <translation type="obsolete">Quarta sotto</translation>
-    </message>
-    <message>
-        <location filename="" line="760173385"/>
-        <source>Quinte below</source>
-        <translation type="obsolete">Quinta sotto</translation>
-    </message>
-    <message>
-        <location filename="" line="760173385"/>
-        <source>Sexte below</source>
-        <translation type="obsolete">Sesta sotto</translation>
-    </message>
-    <message>
-        <location filename="" line="760173385"/>
-        <source>Septime below</source>
-        <translation type="obsolete">Settima sotto</translation>
-    </message>
-    <message>
-        <location filename="" line="760173385"/>
-        <source>Oktave below</source>
-        <translation type="obsolete">Ottava sotto</translation>
-    </message>
-    <message>
-        <location filename="" line="760173385"/>
-        <source>None below</source>
-        <translation type="obsolete">Nona sotto</translation>
-    </message>
-    <message>
-        <location filename="" line="760173385"/>
-        <source>N-Tole</source>
-        <translation type="obsolete">N-upla</translation>
     </message>
     <message>
         <location filename="../../mscore/mscore.cpp" line="530"/>
@@ -1483,16 +1163,6 @@ fallito: </translation>
         <location filename="../../mscore/mscore.cpp" line="538"/>
         <source>Reset Stretch</source>
         <translation>Riduci Battute Allungate</translation>
-    </message>
-    <message>
-        <location filename="" line="760173385"/>
-        <source>System Break</source>
-        <translation type="obsolete">Interruzione Sistema</translation>
-    </message>
-    <message>
-        <location filename="" line="760173385"/>
-        <source>Page Break</source>
-        <translation type="obsolete">Interruzione Pagina</translation>
     </message>
     <message>
         <location filename="../../mscore/mscore.cpp" line="545"/>
@@ -1530,11 +1200,6 @@ fallito: </translation>
         <translation type="unfinished">Tastierino</translation>
     </message>
     <message>
-        <location filename="" line="760173385"/>
-        <source>PlayPanel</source>
-        <translation type="obsolete">Controlli Riproduzione</translation>
-    </message>
-    <message>
         <location filename="../../mscore/actions.cpp" line="972"/>
         <source>Navigator</source>
         <translation type="unfinished">Navigatore</translation>
@@ -1560,11 +1225,6 @@ fallito: </translation>
         <translation>&amp;Aiuto</translation>
     </message>
     <message>
-        <location filename="" line="760173385"/>
-        <source>Browser</source>
-        <translation type="obsolete">Browser</translation>
-    </message>
-    <message>
         <location filename="../../mscore/mscore.cpp" line="609"/>
         <source>&amp;About</source>
         <translation>&amp;A Proposito di</translation>
@@ -1573,11 +1233,6 @@ fallito: </translation>
         <location filename="../../mscore/mscore.cpp" line="610"/>
         <source>About&amp;Qt</source>
         <translation>A Proposito di &amp;Qt</translation>
-    </message>
-    <message>
-        <location filename="" line="760173385"/>
-        <source>no help found at: </source>
-        <translation type="obsolete">nessun Aiuto trovato in: </translation>
     </message>
     <message>
         <location filename="../../mscore/mscore.cpp" line="876"/>
@@ -1719,11 +1374,6 @@ Save Current Score?</source>
         <location filename="../../mscore/actions.cpp" line="67"/>
         <source>file new</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="" line="760173385"/>
-        <source>Create New Score</source>
-        <translation type="obsolete">Nuovo Spartito</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="86"/>
@@ -2895,11 +2545,6 @@ Save Current Score?</source>
         <source>Tuplets</source>
         <translation type="unfinished"></translation>
     </message>
-    <message>
-        <location filename="../../mscore/actions.cpp" line="988"/>
-        <source></source>
-        <translation type="unfinished"></translation>
-    </message>
 </context>
 <context>
     <name>NoteBase</name>
@@ -2952,111 +2597,6 @@ Save Current Score?</source>
 <context>
     <name>Pad</name>
     <message>
-        <location filename="" line="760173385"/>
-        <source>rest</source>
-        <translation type="obsolete">pausa</translation>
-    </message>
-    <message>
-        <location filename="" line="760173385"/>
-        <source>1/32</source>
-        <translation type="obsolete">1/32</translation>
-    </message>
-    <message>
-        <location filename="" line="760173385"/>
-        <source>1/16</source>
-        <translation type="obsolete">1/16</translation>
-    </message>
-    <message>
-        <location filename="" line="760173385"/>
-        <source>1/8</source>
-        <translation type="obsolete">1/8</translation>
-    </message>
-    <message>
-        <location filename="" line="760173385"/>
-        <source>1/4</source>
-        <translation type="obsolete">1/4</translation>
-    </message>
-    <message>
-        <location filename="" line="760173385"/>
-        <source>1/1</source>
-        <translation type="obsolete">1/1</translation>
-    </message>
-    <message>
-        <location filename="" line="760173385"/>
-        <source>natural</source>
-        <translation type="obsolete">bequadro</translation>
-    </message>
-    <message>
-        <location filename="" line="760173385"/>
-        <source>sharp</source>
-        <translation type="obsolete">diesis</translation>
-    </message>
-    <message>
-        <location filename="" line="760173385"/>
-        <source>flat</source>
-        <translation type="obsolete">bemolle</translation>
-    </message>
-    <message>
-        <location filename="" line="760173385"/>
-        <source>escape</source>
-        <translation type="obsolete">interrompi</translation>
-    </message>
-    <message>
-        <location filename="" line="760173385"/>
-        <source>accent</source>
-        <translation type="obsolete">accento</translation>
-    </message>
-    <message>
-        <location filename="" line="760173385"/>
-        <source>staccato</source>
-        <translation type="obsolete">staccato</translation>
-    </message>
-    <message>
-        <location filename="" line="760173385"/>
-        <source>tenuto</source>
-        <translation type="obsolete">tenuto</translation>
-    </message>
-    <message>
-        <location filename="" line="760173385"/>
-        <source>tie</source>
-        <translation type="obsolete">legatura</translation>
-    </message>
-    <message>
-        <location filename="" line="760173385"/>
-        <source>dot</source>
-        <translation type="obsolete">punto</translation>
-    </message>
-    <message>
-        <location filename="" line="760173385"/>
-        <source>double sharp</source>
-        <translation type="obsolete">doppio diesis</translation>
-    </message>
-    <message>
-        <location filename="" line="760173385"/>
-        <source>double flat</source>
-        <translation type="obsolete">doppio bemolle</translation>
-    </message>
-    <message>
-        <location filename="" line="760173385"/>
-        <source>beam start</source>
-        <translation type="obsolete">inizio gruppo</translation>
-    </message>
-    <message>
-        <location filename="" line="760173385"/>
-        <source>beam mid</source>
-        <translation type="obsolete">centro gruppo</translation>
-    </message>
-    <message>
-        <location filename="" line="760173385"/>
-        <source>no beam</source>
-        <translation type="obsolete">scollega gruppo</translation>
-    </message>
-    <message>
-        <location filename="" line="760173385"/>
-        <source>beam32</source>
-        <translation type="obsolete">gruppo 1/32</translation>
-    </message>
-    <message>
         <location filename="../../mscore/pad.cpp" line="41"/>
         <source>Notes</source>
         <translation type="unfinished">Note</translation>
@@ -3065,64 +2605,6 @@ Save Current Score?</source>
         <location filename="../../mscore/pad.cpp" line="95"/>
         <source>Beams</source>
         <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>PadBase</name>
-    <message>
-        <location filename="" line="760173385"/>
-        <source>Form</source>
-        <translation type="obsolete">Formato</translation>
-    </message>
-    <message>
-        <location filename="" line="760173385"/>
-        <source>P1</source>
-        <translation type="obsolete">P1</translation>
-    </message>
-    <message>
-        <location filename="" line="760173385"/>
-        <source>P2</source>
-        <translation type="obsolete">P2</translation>
-    </message>
-    <message>
-        <location filename="" line="760173385"/>
-        <source>P3</source>
-        <translation type="obsolete">P3</translation>
-    </message>
-    <message>
-        <location filename="" line="760173385"/>
-        <source>P4</source>
-        <translation type="obsolete">P4</translation>
-    </message>
-    <message>
-        <location filename="" line="760173385"/>
-        <source>P5</source>
-        <translation type="obsolete">P5</translation>
-    </message>
-    <message>
-        <location filename="" line="760173385"/>
-        <source>+</source>
-        <translation type="obsolete">+</translation>
-    </message>
-    <message>
-        <location filename="" line="760173385"/>
-        <source>.</source>
-        <translation type="obsolete">.</translation>
-    </message>
-    <message>
-        <location filename="" line="760173385"/>
-        <source>Rest</source>
-        <translation type="obsolete">Pausa</translation>
-    </message>
-    <message>
-        <location filename="" line="760173385"/>
-        <source>#</source>
-        <translation type="obsolete">#</translation>
-    </message>
-    <message>
-        <location filename="" line="760173385"/>
-        <source>-</source>
-        <translation type="obsolete">-</translation>
     </message>
 </context>
 <context>
@@ -3267,31 +2749,6 @@ Save Current Score?</source>
         <translation>Formato</translation>
     </message>
     <message>
-        <location filename="" line="760173385"/>
-        <source>Long Name:</source>
-        <translation type="obsolete">Nome per Esteso:</translation>
-    </message>
-    <message>
-        <location filename="" line="760173385"/>
-        <source>Short Name:</source>
-        <translation type="obsolete">Nome Abbreviato:</translation>
-    </message>
-    <message>
-        <location filename="" line="760173385"/>
-        <source>Max.Pitch:</source>
-        <translation type="obsolete">Max. Altezza:</translation>
-    </message>
-    <message>
-        <location filename="" line="760173385"/>
-        <source>Min.Pitch:</source>
-        <translation type="obsolete">Min. Altezza:</translation>
-    </message>
-    <message>
-        <location filename="" line="760173385"/>
-        <source>Midi Patch</source>
-        <translation type="obsolete">Suono Midi</translation>
-    </message>
-    <message>
         <location filename="../../mscore/partedit.ui" line="60"/>
         <source>Solo</source>
         <translation>Solista</translation>
@@ -3302,11 +2759,6 @@ Save Current Score?</source>
         <translation>Muto</translation>
     </message>
     <message>
-        <location filename="" line="760173385"/>
-        <source>Channel</source>
-        <translation type="obsolete">Canale</translation>
-    </message>
-    <message>
         <location filename="../../mscore/partedit.ui" line="53"/>
         <source>Show</source>
         <translation>Mostra</translation>
@@ -3315,21 +2767,6 @@ Save Current Score?</source>
         <location filename="../../mscore/partedit.ui" line="87"/>
         <source>Pan</source>
         <translation>Bilanciamento</translation>
-    </message>
-    <message>
-        <location filename="" line="760173385"/>
-        <source>Volume</source>
-        <translation type="obsolete">Volume</translation>
-    </message>
-    <message>
-        <location filename="" line="760173385"/>
-        <source>Reverb Send</source>
-        <translation type="obsolete">Invia Reverbero</translation>
-    </message>
-    <message>
-        <location filename="" line="760173385"/>
-        <source>Chorus Send</source>
-        <translation type="obsolete">Invia Chorus</translation>
     </message>
     <message>
         <location filename="../../mscore/partedit.ui" line="43"/>
@@ -3541,16 +2978,6 @@ Save Current Score?</source>
         <translation>Selezione Colore Voce 1</translation>
     </message>
     <message>
-        <location filename="" line="760173385"/>
-        <source>Audio/Midi</source>
-        <translation type="obsolete">Audio/Midi</translation>
-    </message>
-    <message>
-        <location filename="" line="760173385"/>
-        <source>play note on click</source>
-        <translation type="obsolete">souna nota cliccata</translation>
-    </message>
-    <message>
         <location filename="../../mscore/prefsdialog.ui" line="2513"/>
         <source>enable midi input</source>
         <translation>abilita inserzione note Midi</translation>
@@ -3569,21 +2996,6 @@ Save Current Score?</source>
         <location filename="../../mscore/prefsdialog.ui" line="2543"/>
         <source>Sound Font</source>
         <translation>Suono Sintetizzatore</translation>
-    </message>
-    <message>
-        <location filename="" line="760173385"/>
-        <source>Programs</source>
-        <translation type="obsolete">Programmi</translation>
-    </message>
-    <message>
-        <location filename="" line="760173385"/>
-        <source>Browser:</source>
-        <translation type="obsolete">Browser:</translation>
-    </message>
-    <message>
-        <location filename="" line="760173385"/>
-        <source>Print Command:</source>
-        <translation type="obsolete">Comando di Stampa:</translation>
     </message>
     <message>
         <location filename="../../mscore/prefsdialog.ui" line="2739"/>
@@ -3624,16 +3036,6 @@ Save Current Score?</source>
         <location filename="../../mscore/prefsdialog.ui" line="2877"/>
         <source>Down</source>
         <translation>Giu</translation>
-    </message>
-    <message>
-        <location filename="" line="760173385"/>
-        <source>OK</source>
-        <translation type="obsolete">OK</translation>
-    </message>
-    <message>
-        <location filename="" line="760173385"/>
-        <source>Cancel</source>
-        <translation type="obsolete">Annulla</translation>
     </message>
     <message>
         <location filename="../../mscore/prefsdialog.ui" line="41"/>
@@ -3887,11 +3289,6 @@ configurare gli Strumenti Musicali</translation>
         <location filename="../../mscore/file.cpp" line="689"/>
         <source>MuseScore: Read File</source>
         <translation>MuseScore: Lettura File</translation>
-    </message>
-    <message>
-        <location filename="" line="760173385"/>
-        <source>untitled</source>
-        <translation type="obsolete">Senza Titolo</translation>
     </message>
     <message>
         <location filename="../../mscore/file.cpp" line="274"/>
@@ -4316,11 +3713,6 @@ start note entry</source>
         <translation>Esempio Testo</translation>
     </message>
     <message>
-        <location filename="" line="760173385"/>
-        <source>Ich und Du, M&#xfc;llers Kuh...</source>
-        <translation type="obsolete">O sole mio</translation>
-    </message>
-    <message>
         <location filename="../../mscore/textstyle.ui" line="549"/>
         <source>Position</source>
         <translation>Posizione</translation>
@@ -4448,11 +3840,6 @@ start note entry</source>
 </context>
 <context>
     <name>TextStyleDialog</name>
-    <message>
-        <location filename="" line="760173385"/>
-        <source>Ich und du, M&#xfc;llers Kuh</source>
-        <translation type="obsolete">O sole mio</translation>
-    </message>
     <message>
         <location filename="../../mscore/textstyle.cpp" line="197"/>
         <source>Ich und du, M&#xc3;&#xbc;llers Kuh</source>
