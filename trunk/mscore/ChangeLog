@@ -1,3 +1,5 @@
+      ======== Version 0.5.1 released (Revision 248) =============
+
 29.3.7 (ws)
       - textstyle.ui was modified with qt4.3 designer; fixed so that mscore
         compiles again winth qt4.2
