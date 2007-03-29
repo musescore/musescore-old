@@ -63,7 +63,7 @@ SET(Mscore_VERSION_MAJOR 0)
 SET(Mscore_VERSION_MINOR 5)
 SET(Mscore_VERSION_PATCH "0")
 SET(Mscore_VERSION       "0.5")
-SET(Mscore_VERSION_FULL  "0.5.0")
+SET(Mscore_VERSION_FULL  "0.5.1")
 SET(Mscore_INSTALL_NAME  "mscore-0.5")
 
 include ( ${PROJECT_SOURCE_DIR}/cmake/UsePkgConfig1.cmake )
