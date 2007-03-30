@@ -7,6 +7,8 @@
 29.3.7 (ws)
       - textstyle.ui was modified with qt4.3 designer; fixed so that mscore
         compiles again winth qt4.2
+
+      ======== Version 0.5 released (Revision 246) =============
 28.3.7 (ws)
       - fix localization of action strings
       - fix page layout when switching from portrait to landscape
