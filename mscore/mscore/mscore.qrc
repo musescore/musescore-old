@@ -21,6 +21,7 @@
       <file>data/beam32.xpm</file>
       <file>data/plus.xpm</file>
       <file>data/minus.xpm</file>
+      <file>data/tab_remove.png</file>
       <file>data/fileopen.svg</file>
       <file>data/filenew.svg</file>
       <file>data/filesave.svg</file>

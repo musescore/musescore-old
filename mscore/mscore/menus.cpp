@@ -130,8 +130,8 @@ void MuseScore::showPalette(bool visible)
             //    Bar Lines
             //-----------------------------------
 
-            sp = new SymbolPalette(3, 3);
-            sp->setGrid(60, 60);
+            sp = new SymbolPalette(2, 4);
+            sp->setGrid(45, 50);
             sp->showStaff(true);
 
             struct {
@@ -261,13 +261,13 @@ void MuseScore::showPalette(bool visible)
             //    Accidentals
             //-----------------------------------
 
-            sp = new SymbolPalette(4, 4);
-            sp->setGrid(45, 60);
+            sp = new SymbolPalette(3, 5);
+            sp->setGrid(36, 36);
 
             for (int i = 1; i < 16; ++i) {
                   Accidental* s = new Accidental(cs);
                   s->setSubtype(i);
-                  sp->addObject(i, s, s->name());
+                  sp->addObject(i-1, s, s->name());
                   }
             paletteBox->addPalette(tr("Accidentals"), sp);
 
@@ -299,8 +299,8 @@ void MuseScore::showPalette(bool visible)
             //    Fingering
             //-----------------------------------
 
-            sp = new SymbolPalette(3, 4, 1.5);
-            sp->setGrid(45, 45);
+            sp = new SymbolPalette(2, 6, 1.5);
+            sp->setGrid(30, 30);
 
             const char finger[] = "012345pimac";
             for (unsigned i = 0; i < strlen(finger); ++i) {

@@ -1,4 +1,8 @@
 30.3.7 (ws)
+      - hide tab bar if only one score left after remove
+      - add button to remove a score from the tab bar
+      - significantly reduce cpu load during play by removing debug
+        code which re-layouts complete score after each heart beat tick
       - organized all palettes into a dock widget
       - fix crash after entering space without prior selecting a note
 

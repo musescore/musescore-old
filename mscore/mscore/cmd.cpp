@@ -322,6 +322,7 @@ void Score::update(const QRectF& r)
       {
       foreach(Viewer* v, viewer)
             v->dataChanged(r);
+      updateAll = false;
       }
 
 //---------------------------------------------------------
