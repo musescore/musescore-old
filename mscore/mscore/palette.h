@@ -25,6 +25,32 @@ class Element;
 class Sym;
 
 //---------------------------------------------------------
+//   PaletteBoxButton
+//---------------------------------------------------------
+
+class PaletteBoxButton : public QPushButton {
+      Q_OBJECT
+
+   public:
+      PaletteBoxButton(QWidget*, QWidget* parent = 0);
+      };
+
+//---------------------------------------------------------
+//   PaletteBox
+//---------------------------------------------------------
+
+class PaletteBox : public QDockWidget {
+      Q_OBJECT
+
+      QList<QWidget*> widgets;
+      QVBoxLayout* vbox;
+
+   public:
+      PaletteBox(QWidget* parent = 0);
+      void addPalette(const QString& s, QWidget*);
+      };
+
+//---------------------------------------------------------
 //   SymbolPalette
 //---------------------------------------------------------
 
@@ -38,6 +64,7 @@ class SymbolPalette : public QWidget {
       int currentSymbol;
       QPoint dragStartPosition;
       qreal extraMag;
+      bool _drawGrid;
 
       bool staff;
 

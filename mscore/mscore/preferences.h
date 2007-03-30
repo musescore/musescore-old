@@ -114,4 +114,5 @@ class PreferenceDialog : public QDialog, private Ui::PrefsDialogBase {
       };
 
 extern Preferences preferences;
+extern QString appStyleSheet;
 #endif

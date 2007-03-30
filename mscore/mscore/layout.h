@@ -83,7 +83,6 @@ class ScoreLayout {
       Page* addPage();
       bool layoutPage(Page* page, Measure*& im, QList<System*>::iterator& is);
       System* layoutSystem(Measure*& im, System*, qreal x, qreal y, qreal w);
-      void addGenerated(Measure* m);
       void processSystemHeader(Measure* m);
 
    public:

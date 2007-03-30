@@ -40,6 +40,7 @@ class MeasureListEditor;
 class Score;
 class PageSettings;
 class Pad;
+class PaletteBox;
 class Xml;
 class MagBox;
 
@@ -128,7 +129,6 @@ class MuseScore : public QMainWindow {
       MagBox* mag;
       QActionGroup* transportAction;
 
-      QAction* padId;
       QAction* playId;
       QAction* navigatorId;
       QAction* visibleId;
@@ -166,6 +166,7 @@ class MuseScore : public QMainWindow {
       QLabel* _modeText;
 
       Pad* pad;
+      PaletteBox* paletteBox;
       QList<Score*> scoreList;
       bool _midiinEnabled;
       bool _speakerEnabled;
@@ -239,7 +240,6 @@ class MuseScore : public QMainWindow {
       void showPageSettings();
       void pageSettingsChanged();
       void showInvisibleClicked();
-      void closePad();
       void midiinToggled(bool);
       void speakerToggled(bool);
       void removeTab(int);
@@ -250,6 +250,7 @@ class MuseScore : public QMainWindow {
       void setCurrentScore(int);
       void showPlayPanel(bool);
       void showPad(bool);
+      void showPalette(bool);
       void showNavigator(bool);
 
    public:

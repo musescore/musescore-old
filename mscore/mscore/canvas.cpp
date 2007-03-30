@@ -1158,8 +1158,9 @@ void Canvas::dragMoveEvent(QDragMoveEvent* event)
                   Element* el = elementAt(pos);
                   if (el) {
                         bool accept = el->acceptDrop(this, pos, type, node);
-                        if (accept)
+                        if (accept) {
                               event->acceptProposedAction();
+                              }
                         else {
                               if (debugMode)
                                     printf("ignore drop of %s\n", elementNames[type]);

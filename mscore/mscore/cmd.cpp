@@ -320,8 +320,8 @@ void Score::cmdRemove(Element* e)
 
 void Score::update(const QRectF& r)
       {
-      for (QList<Viewer*>::iterator i = viewer.begin(); i != viewer.end(); ++i)
-            (*i)->dataChanged(r);
+      foreach(Viewer* v, viewer)
+            v->dataChanged(r);
       }
 
 //---------------------------------------------------------
@@ -1129,10 +1129,12 @@ void Score::cmd(const QString& cmd)
                   if (cis->pos == -1) {
                         setNoteEntry(true, true);
                         Element* el = sel->element();
-                        if (el->type() == NOTE)
-                              el = el->parent();
-                        if (el->isChordRest())
-                              cis->pos = ((ChordRest*)el)->tick();
+                        if (el) {
+                              if (el->type() == NOTE)
+                                    el = el->parent();
+                              if (el->isChordRest())
+                                    cis->pos = ((ChordRest*)el)->tick();
+                              }
                         }
                   if (cis->pos != -1) {
                         int len = padState.tickLen;

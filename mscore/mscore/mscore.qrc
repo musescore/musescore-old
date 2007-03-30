@@ -19,6 +19,8 @@
       <file>data/sbeam.xpm</file>
       <file>data/nbeam.xpm</file>
       <file>data/beam32.xpm</file>
+      <file>data/plus.xpm</file>
+      <file>data/minus.xpm</file>
       <file>data/fileopen.svg</file>
       <file>data/filenew.svg</file>
       <file>data/filesave.svg</file>
@@ -36,6 +38,7 @@
       <file>data/midiin.svg</file>
       <file>data/undo.svg</file>
       <file>data/redo.svg</file>
+      <file>data/style.qss</file>
    </qresource>
 
    <qresource lang="de">
