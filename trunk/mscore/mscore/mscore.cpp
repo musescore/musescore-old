@@ -281,6 +281,12 @@ MuseScore::MuseScore()
       QHBoxLayout* hbox = new QHBoxLayout;
       hbox->addWidget(tab);
       hbox->addStretch(100);
+
+      removeTabButton = new QToolButton;
+      removeTabButton->setIcon(QIcon(QPixmap(":/data/tab_remove.png")));
+      hbox->addWidget(removeTabButton);
+      connect(removeTabButton, SIGNAL(clicked()), SLOT(removeTab()));
+
       canvas = new Canvas;
       layout->addLayout(hbox);
       layout->addWidget(canvas);
@@ -965,10 +971,9 @@ void MuseScore::appendScore(Score* score)
       scoreList.push_back(score);
       tab->addTab(score->projectName());
 
-      if (scoreList.size() > 1)
-            tab->show();
-      else
-            tab->hide();
+      bool showTabBar = scoreList.size() > 1;
+      tab->setVisible(showTabBar);
+      removeTabButton->setVisible(showTabBar);
 
       QString name(score->filePath());
       for (int i = 0; i < PROJECT_LIST_LEN; ++i) {
@@ -1491,6 +1496,17 @@ bool MuseScore::playEnabled() const
 //   removeTab
 //---------------------------------------------------------
 
+void MuseScore::removeTab()
+      {
+      int n = scoreList.size();
+      for (int i = 0; i < n; ++i) {
+            if (scoreList[i] == cs) {
+                  removeTab(i);
+                  break;
+                  }
+            }
+      }
+
 void MuseScore::removeTab(int i)
       {
       int n = scoreList.size();
@@ -1505,7 +1521,10 @@ void MuseScore::removeTab(int i)
       if (i >= (n-1))
             i = 0;
       setCurrentScore(i);
-      getAction("file-close")->setEnabled(scoreList.size() > 1);
+      bool showTabBar = scoreList.size() > 1;
+      getAction("file-close")->setEnabled(showTabBar);
+      tab->setVisible(showTabBar);
+      removeTabButton->setVisible(showTabBar);
       }
 
 //---------------------------------------------------------

@@ -350,8 +350,6 @@ class Score : public QObject {
       bool edit(QKeyEvent* ev);
       void endEdit();
 
-//      void paste(const Element*, const QPointF&);
-
       void startDrag();
       void drag(const QPointF&);
       void endDrag();

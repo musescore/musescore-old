@@ -674,7 +674,7 @@ void Seq::heartBeat()
             else
                   cs->select(i->second.note, Qt::ShiftModifier, 0);
             }
-      cs->end();
+      cs->end1();
       PlayPanel* pp = mscore->getPlayPanel();
       if (pp)
             pp->heartBeat(frame2tick(playFrame));

@@ -324,6 +324,7 @@ PaletteBoxButton::PaletteBoxButton(QWidget* w, QWidget* parent)
 PaletteBox::PaletteBox(QWidget* parent)
    : QDockWidget(parent)
       {
+      setMinimumWidth(180);
       setAutoFillBackground(true);
 
       QWidget* mainWidget = new QWidget;
@@ -336,24 +337,38 @@ PaletteBox::PaletteBox(QWidget* parent)
       }
 
 //---------------------------------------------------------
+//   PaletteBox::sizeHint
+//---------------------------------------------------------
+
+QSize PaletteBox::sizeHint() const
+      {
+      return QSize(180, 100);
+      }
+
+//---------------------------------------------------------
 //   addPalette
 //---------------------------------------------------------
 
 void PaletteBox::addPalette(const QString& s, QWidget* w)
       {
+      QScrollArea* sa = new QScrollArea;
+      sa->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+      sa->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
+      sa->setWidget(w);
+
       QPixmap plus(":/data/plus.xpm");
       QPixmap minus(":/data/minus.xpm");
       QIcon icon;
       icon.addPixmap(plus, QIcon::Normal, QIcon::Off);
       icon.addPixmap(minus, QIcon::Normal, QIcon::On);
 
-      w->setVisible(false);
-      PaletteBoxButton* b = new PaletteBoxButton(w);
+      sa->setVisible(false);
+      PaletteBoxButton* b = new PaletteBoxButton(sa);
       b->setText(s);
       b->setIcon(icon);
       int slot = widgets.size() * 2;
       vbox->insertWidget(slot, b);
-      vbox->insertWidget(slot+1, w);
+      vbox->insertWidget(slot+1, sa);
       widgets.append(w);
       }
 

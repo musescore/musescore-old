@@ -121,6 +121,7 @@ class MuseScore : public QMainWindow {
       Canvas* canvas;
       QVBoxLayout* layout;
       TabBar* tab;
+      QToolButton* removeTabButton;
 
       QMenu* menuDisplay;
       QMenu* menuEdit;
@@ -243,6 +244,7 @@ class MuseScore : public QMainWindow {
       void midiinToggled(bool);
       void speakerToggled(bool);
       void removeTab(int);
+      void removeTab();
       void cmd(QAction*);
       void clipboardChanged();
 

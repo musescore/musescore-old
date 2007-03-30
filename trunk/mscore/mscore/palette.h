@@ -44,6 +44,7 @@ class PaletteBox : public QDockWidget {
 
       QList<QWidget*> widgets;
       QVBoxLayout* vbox;
+      virtual QSize sizeHint() const;
 
    public:
       PaletteBox(QWidget* parent = 0);
