@@ -36,7 +36,6 @@
 */
 
 SymbolPalette::SymbolPalette(int r, int c, qreal mag)
-   : QWidget(0)
       {
       extraMag      = mag;
       staff         = false;
@@ -48,6 +47,8 @@ SymbolPalette::SymbolPalette(int r, int c, qreal mag)
       for (int i = 0; i < rows*columns; ++i)
             symbols[i] = 0;
       setGrid(50, 60);
+      _drawGrid = false;
+      setStyleSheet("* { background-color: rgb(176, 190, 242) }");
       }
 
 SymbolPalette::~SymbolPalette()
@@ -195,7 +196,7 @@ void SymbolPalette::addObject(int idx, int symIdx)
 //   paintEvent
 //---------------------------------------------------------
 
-void SymbolPalette::paintEvent(QPaintEvent* e)
+void SymbolPalette::paintEvent(QPaintEvent*)
       {
       qreal mag = PALETTE_SPATIUM * extraMag / _spatium;
       ScoreLayout layout;
@@ -204,18 +205,21 @@ void SymbolPalette::paintEvent(QPaintEvent* e)
 
       QPainter p(this);
       p.setRenderHint(QPainter::Antialiasing, true);
-      p.fillRect(e->rect(), Qt::white);
-      p.setClipRect(e->rect());
+//      p.setClipRect(e->rect());
+
+//      p.eraseRect(e->rect());
 
       //
       // draw grid
       //
 
-      p.setPen(Qt::gray);
-      for (int row = 1; row < rows; ++row)
-            p.drawLine(0, row*vgrid, columns*hgrid, row*vgrid);
-      for (int column = 1; column < columns; ++column)
-            p.drawLine(hgrid*column, 0, hgrid*column, rows*vgrid);
+      if (_drawGrid) {
+            p.setPen(Qt::gray);
+            for (int row = 1; row < rows; ++row)
+                  p.drawLine(0, row*vgrid, columns*hgrid, row*vgrid);
+            for (int column = 1; column < columns; ++column)
+                  p.drawLine(hgrid*column, 0, hgrid*column, rows*vgrid);
+            }
 
       qreal dy = lrint(2 * PALETTE_SPATIUM);
 
@@ -300,5 +304,56 @@ bool SymbolPalette::event(QEvent* ev)
             return false;
             }
       return QWidget::event(ev);
+      }
+
+//---------------------------------------------------------
+//   PaletteBoxButton
+//---------------------------------------------------------
+
+PaletteBoxButton::PaletteBoxButton(QWidget* w, QWidget* parent)
+   : QPushButton(parent)
+      {
+      setCheckable(true);
+      connect(this, SIGNAL(clicked(bool)), w, SLOT(setVisible(bool)));
+      }
+
+//---------------------------------------------------------
+//   PaletteBox
+//---------------------------------------------------------
+
+PaletteBox::PaletteBox(QWidget* parent)
+   : QDockWidget(parent)
+      {
+      setAutoFillBackground(true);
+
+      QWidget* mainWidget = new QWidget;
+      vbox = new QVBoxLayout;
+      vbox->setMargin(0);
+      vbox->setSpacing(0);
+      mainWidget->setLayout(vbox);
+      vbox->addStretch(10);
+      setWidget(mainWidget);
+      }
+
+//---------------------------------------------------------
+//   addPalette
+//---------------------------------------------------------
+
+void PaletteBox::addPalette(const QString& s, QWidget* w)
+      {
+      QPixmap plus(":/data/plus.xpm");
+      QPixmap minus(":/data/minus.xpm");
+      QIcon icon;
+      icon.addPixmap(plus, QIcon::Normal, QIcon::Off);
+      icon.addPixmap(minus, QIcon::Normal, QIcon::On);
+
+      w->setVisible(false);
+      PaletteBoxButton* b = new PaletteBoxButton(w);
+      b->setText(s);
+      b->setIcon(icon);
+      int slot = widgets.size() * 2;
+      vbox->insertWidget(slot, b);
+      vbox->insertWidget(slot+1, w);
+      widgets.append(w);
       }
 

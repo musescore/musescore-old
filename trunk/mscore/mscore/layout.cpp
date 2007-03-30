@@ -280,25 +280,6 @@ void ScoreLayout::processSystemHeader(Measure* m)
       }
 
 //---------------------------------------------------------
-//   addGenerated
-//---------------------------------------------------------
-
-void ScoreLayout::addGenerated(Measure*)
-      {
-/*      for (Segment* seg = m->first(); seg; seg = seg->next()) {
-            int tick = seg->tick();
-
-            QList<Element*>* el = seg->elist();
-            for (QList<Element*>::iterator i = el->begin(); i != el->end(); ++i) {
-                  Element* el = *i;
-                  if (el && el->generated())
-                        *i = 0;
-                  }
-            }
-*/
-      }
-
-//---------------------------------------------------------
 //   addMeasure
 //---------------------------------------------------------
 
@@ -438,9 +419,6 @@ System* ScoreLayout::layoutSystem(Measure*& im, System* system, qreal x, qreal y
       for (Measure* m = im; m; m = m->next()) {
             pageBreak = m->pageBreak();
 
-            for (Segment* seg = m->first(); seg; seg = seg->next())
-                  seg->removeGeneratedElements();
-
             m->setSystem(system);   // needed by m->layout()
             if (m == im) {
                   //
@@ -450,7 +428,13 @@ System* ScoreLayout::layoutSystem(Measure*& im, System* system, qreal x, qreal y
                   processSystemHeader(m);
                   }
             else {
-                  addGenerated(m);  //DEBUG
+                  // this happens for all measures but the first
+                  // because for every system we
+                  // look at least one measure ahead:
+                  //
+                  for (Segment* seg = m->first(); seg; seg = seg->next())
+                        seg->removeGeneratedElements();
+
                   //
                   // if this is not the first measure in a system
                   // switch all clefs to small size

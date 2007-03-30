@@ -30,12 +30,9 @@
 //---------------------------------------------------------
 
 Pad::Pad(QWidget* parent)
-   : QWidget(parent)
+   : QDockWidget(tr("Pad"), parent)
       {
-//      setWindowFlags(Qt::FramelessWindowHint | Qt::WindowStaysOnTopHint);
-      setWindowFlags(Qt::WindowStaysOnTopHint);
       QToolBox* tb = new QToolBox;
-      setWindowTitle("MuseScore: Pad");
 
       QWidget* w = new QWidget;
       tb->addItem(w, tr("Notes"));
@@ -112,17 +109,5 @@ Pad::Pad(QWidget* parent)
       b->setDefaultAction(getAction("beam32"));
       gl->addWidget(b, 0, 3);
 
-      QVBoxLayout* l = new QVBoxLayout;
-      l->addWidget(tb);
-      setLayout(l);
-      }
-
-//---------------------------------------------------------
-//   closeEvent
-//---------------------------------------------------------
-
-void Pad::closeEvent(QCloseEvent* ev)
-      {
-      emit closed();
-      QWidget::closeEvent(ev);
+      setWidget(tb);
       }

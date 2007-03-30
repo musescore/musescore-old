@@ -73,5 +73,6 @@
 #include <QtGui/QClipboard>
 #include <QtGui/QStatusBar>
 #include <QtGui/QSplashScreen>
+#include <QtGui/QPushButton>
 #endif
 

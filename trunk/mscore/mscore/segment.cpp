@@ -318,8 +318,9 @@ void Segment::setTime(int stick)
 void Segment::removeGeneratedElements()
       {
       for (int i = 0; i < _elist.size(); ++i) {
-            if (_elist[i] && _elist[i]->generated())
+            if (_elist[i] && _elist[i]->generated()) {
                   _elist[i] = 0;
+                  }
             }
       }
 

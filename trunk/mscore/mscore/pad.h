@@ -25,15 +25,8 @@
 //   Pad
 //---------------------------------------------------------
 
-class Pad : public QWidget {
+class Pad : public QDockWidget {
       Q_OBJECT
-
-      virtual void closeEvent(QCloseEvent*);
-
-   public slots:
-
-   signals:
-      void closed();
 
    public:
       Pad(QWidget* parent = 0);

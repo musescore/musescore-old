@@ -47,6 +47,7 @@
 #include "page.h"
 #include "partedit.h"
 #include "layout.h"
+#include "palette.h"
 
 QTextStream cout(stdout);
 QTextStream eout(stderr);
@@ -123,8 +124,8 @@ void MuseScore::closeEvent(QCloseEvent* ev)
       //
       if (pageListEdit)
             pageListEdit->close();
-      if (pad)
-            pad->close();
+//      if (pad)
+//            pad->close();
       if (playPanel)
             playPanel->close();
       if (symbolPalette)
@@ -220,6 +221,7 @@ MuseScore::MuseScore()
       accidentalsPalette    = 0;
       layoutBreakPalette    = 0;
       pad                   = 0;
+      paletteBox            = 0;
       _midiinEnabled        = true;
       _speakerEnabled       = true;
 
@@ -555,10 +557,15 @@ MuseScore::MuseScore()
 
       menuDisplay = mb->addMenu(tr("&Display"));
 
-      padId = getAction("toggle-pad");
-      padId->setCheckable(true);
-      connect(padId, SIGNAL(toggled(bool)), SLOT(showPad(bool)));
-      menuDisplay->addAction(padId);
+      a = getAction("toggle-pad");
+      a->setCheckable(true);
+      connect(a, SIGNAL(toggled(bool)), SLOT(showPad(bool)));
+      menuDisplay->addAction(a);
+
+      a = getAction("toggle-palette");
+      a->setCheckable(true);
+      connect(a, SIGNAL(toggled(bool)), SLOT(showPalette(bool)));
+      menuDisplay->addAction(a);
 
       playId = getAction("toggle-playpanel");
       playId->setCheckable(true);
@@ -848,7 +855,7 @@ void MuseScore::decMag()
 
 void MuseScore::padVisible(bool flag)
       {
-      padId->setChecked(flag);
+      getAction("toggle-pad")->setChecked(flag);
       }
 
 //---------------------------------------------------------
@@ -1387,22 +1394,15 @@ void MuseScore::closePlayPanel()
 
 void MuseScore::showPad(bool visible)
       {
+      QAction* a = getAction("toggle-pad");
       if (pad == 0) {
-            pad = new Pad(0);
-            connect(pad, SIGNAL(closed()), SLOT(closePad()));
+            pad = new Pad(this);
+            connect(pad, SIGNAL(visibilityChanged(bool)), a, SLOT(setChecked(bool)));
             cs->setPadState();
+            addDockWidget(Qt::RightDockWidgetArea, pad);
             }
       pad->setShown(visible);
-      padId->setChecked(visible);
-      }
-
-//---------------------------------------------------------
-//   closePad
-//---------------------------------------------------------
-
-void MuseScore::closePad()
-      {
-      padId->setChecked(false);
+      a->setChecked(visible);
       }
 
 //---------------------------------------------------------
@@ -1778,6 +1778,7 @@ int main(int argc, char* argv[])
             sn->connect(sn, SIGNAL(activated(int)), mscore, SLOT(midiReceived()));
             }
       mscore->getCanvas()->setFocus(Qt::OtherFocusReason);
+      qApp->setStyleSheet(appStyleSheet);
       mscore->show();
 
       if (sc)

@@ -955,6 +955,14 @@ Shortcut MuseScore::sc[] = {
          QT_TR_NOOP("Pad")
          ),
       Shortcut(
+         "toggle-palette",
+         QT_TR_NOOP("Palette"),
+         Qt::Key_F9,
+         Qt::ApplicationShortcut,
+         QT_TR_NOOP("Palette"),
+         QT_TR_NOOP("Palette")
+         ),
+      Shortcut(
          "toggle-playpanel",
          QT_TR_NOOP("Play Panel"),
          Qt::Key_F11,
