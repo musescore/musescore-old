@@ -347,9 +347,8 @@ void Score::end()
 void Score::end1()
       {
       if (updateAll) {
-            for (QList<Viewer*>::iterator i = viewer.begin(); i != viewer.end(); ++i) {
-                  (*i)->updateAll(this);
-                  }
+            foreach(Viewer* v, viewer)
+                  v->updateAll(this);
             updateAll = false;
             }
       else

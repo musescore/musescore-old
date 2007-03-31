@@ -117,6 +117,9 @@ void MuseScore::closeEvent(QCloseEvent* ev)
                   }
             }
       saveScoreList();
+      seq->stop();
+      while(!seq->isStopped())
+            usleep(50000);
       seq->exit();
       ev->accept();
       //
@@ -1136,6 +1139,7 @@ void MuseScore::setCurrentScore(int idx)
             cs->setMag(canvas->mag());
             cs->setXoffset(canvas->xoffset());
             cs->setYoffset(canvas->yoffset());
+            cs->clearViewer();
             }
 
       cs = scoreList[idx];

@@ -127,6 +127,7 @@ class Seq : public QObject {
       void exit();
       bool isRunning() const    { return running; }
       bool isPlaying() const    { return state == PLAY; }
+      bool isStopped() const    { return state == STOP; }
       void process(unsigned, float*, float*);
       std::list<QString> inputPorts();
       AList& activeNotes()      { return _activeNotes; }

@@ -1,3 +1,5 @@
+31.3.7 (ws)
+      - fix crash after switching score while sequencer is playing
 30.3.7 (ws)
       - hide tab bar if only one score left after remove
       - add button to remove a score from the tab bar
