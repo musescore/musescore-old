@@ -65,6 +65,8 @@ Seq* seq;
 Seq::Seq()
       {
       running  = false;
+      cs = 0;
+
 #ifndef __MINGW32__
       endTick  = 0;
       state    = STOP;
@@ -125,6 +127,12 @@ Seq::~Seq()
 
 void Seq::setScore(Score* s)
       {
+      if (cs) {
+            disconnect(cs, SIGNAL(selectionChanged(int)), this, SLOT(selectionChanged(int)));
+            stop();
+            while (state != STOP)
+                  usleep(100000);
+            }
       cs = s;
       connect(cs, SIGNAL(selectionChanged(int)), SLOT(selectionChanged(int)));
       if (audio)
