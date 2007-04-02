@@ -22,17 +22,9 @@
 #ifndef _FLUID_RAMSFONT_H
 #define _FLUID_RAMSFONT_H
 
-
 #include "fluidsynth.h"
 #include "priv.h"
 #include "defsfont.h"
-
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-
 
 /*
 
@@ -102,12 +94,5 @@ int fluid_rampreset_get_banknum(fluid_rampreset_t* preset);
 int fluid_rampreset_get_num(fluid_rampreset_t* preset);
 int fluid_rampreset_noteon(fluid_rampreset_t* preset, fluid_synth_t* synth, int chan, int key, int vel);
 
-
-
-
-
-#ifdef __cplusplus
-}
-#endif
 
 #endif  /* _FLUID_SFONT_H */

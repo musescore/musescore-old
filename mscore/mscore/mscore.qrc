@@ -40,6 +40,10 @@
       <file>data/undo.svg</file>
       <file>data/redo.svg</file>
       <file>data/style.qss</file>
+      <file>data/greendot.svg</file>
+      <file>data/darkgreendot.svg</file>
+      <file>data/recordOn.svg</file>
+      <file>data/recordOff.svg</file>
    </qresource>
 
    <qresource lang="de">

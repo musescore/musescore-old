@@ -945,6 +945,53 @@ void readMidiEvent()
                   else
                         --active;
                   }
+            if (dumpMidi) {
+                  printf("MidiIn: ");
+                  switch(ev->type) {
+                        case SND_SEQ_EVENT_NOTEON:
+                              printf("noteOn ch:%2d 0x%02x 0x%02x\n",
+                                 ev->data.note.channel,
+                                 ev->data.note.note,
+                                 ev->data.note.velocity);
+                              break;
+                        case SND_SEQ_EVENT_SYSEX:
+                              printf("sysEx len %d", ev->data.ext.len);
+                              break;
+                        case SND_SEQ_EVENT_CONTROLLER:
+                              printf("ctrl 0x%02x 0x%02x",
+                                 ev->data.control.param,
+                                 ev->data.control.value);
+                              break;
+                        case SND_SEQ_EVENT_PITCHBEND:
+                              printf("pitchbend 0x%04x", ev->data.control.value);
+                              break;
+                        case SND_SEQ_EVENT_PGMCHANGE:
+                              printf("pgmChange 0x%02x", ev->data.control.value);
+                              break;
+                        case SND_SEQ_EVENT_CHANPRESS:
+                              printf("channelPress 0x%02x", ev->data.control.value);
+                              break;
+                        case SND_SEQ_EVENT_START:
+                              printf("start");
+                              break;
+                        case SND_SEQ_EVENT_CONTINUE:
+                              printf("continue");
+                              break;
+                        case SND_SEQ_EVENT_STOP:
+                              printf("stop");
+                              break;
+                        case SND_SEQ_EVENT_SONGPOS:
+                              printf("songpos");
+                              break;
+                        default:
+                              printf("type 0x%02x", ev->type);
+                              break;
+                        case SND_SEQ_EVENT_PORT_SUBSCRIBED:
+                        case SND_SEQ_EVENT_SENSING:
+                              break;
+                        }
+                  printf("\n");
+                  }
             midiFreeEvent(ev);
             }
       }

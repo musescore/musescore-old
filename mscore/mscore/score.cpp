@@ -64,6 +64,7 @@ bool debugMode      = false;
 bool layoutDebug    = false;
 bool noSeq          = false;
 bool noMidi         = false;
+bool dumpMidi       = false;
 bool showRubberBand = true;
 
 //---------------------------------------------------------

@@ -114,8 +114,8 @@ void SymbolPalette::showStaff(bool flag)
 
 void SymbolPalette::mousePressEvent(QMouseEvent* ev)
       {
-      if (ev->button() == Qt::LeftButton)
-            dragStartPosition = ev->pos();
+      dragStartPosition = ev->pos();
+
       int x = ev->pos().x();
       int y = ev->pos().y();
 
@@ -158,10 +158,12 @@ void SymbolPalette::mouseMoveEvent(QMouseEvent* ev)
       QMimeData* mimeData = new QMimeData;
       Element* el = symbols[currentSymbol];
 
-      // qreal mag = PALETTE_SPATIUM * extraMag / _spatium;
-      qreal mag = extraMag;
-      QPointF sm(dragStartPosition);
-      QPointF rpos(QPointF(sm.x() * mag, sm.y() * mag) - el->pos());
+      qreal mag = PALETTE_SPATIUM * extraMag / _spatium;
+
+      QPointF spos(dragStartPosition / mag);
+      QPointF rpos(spos - el->pos());
+
+      rpos /= mag;
 
       mimeData->setData("application/mscore/symbol", el->mimeData(rpos));
       drag->setMimeData(mimeData);

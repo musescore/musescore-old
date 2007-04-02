@@ -1,4 +1,10 @@
+2.4.7 (ws)
+      - fixed drop position of line elements
+1.4.7 (ws)
+      - fixed entry of intervals
 31.3.7 (ws)
+      - after entering a rest with the space key clear the rest bit
+        in pad state
       - fix crash after switching score while sequencer is playing
 30.3.7 (ws)
       - hide tab bar if only one score left after remove

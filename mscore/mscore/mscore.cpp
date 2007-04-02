@@ -1013,6 +1013,7 @@ static void usage(const char* prog, const char*)
       fprintf(stderr, "   -s        no internal synthesizer\n");
       fprintf(stderr, "   -m        no midi\n");
       fprintf(stderr, "   -L        layout debug\n");
+      fprintf(stderr, "   -i        dump midi input\n");
       }
 
 //---------------------------------------------------------
@@ -1557,7 +1558,7 @@ int main(int argc, char* argv[])
       _spatium = 20.0 / 72.0 * DPI / 4.0;
 
       int c;
-      while ((c = getopt(argc, argv, "vdLsm")) != EOF) {
+      while ((c = getopt(argc, argv, "vdLsmi")) != EOF) {
             switch (c) {
                   case 'v':
                         printVersion(argv[0]);
@@ -1573,6 +1574,9 @@ int main(int argc, char* argv[])
                         break;
                   case 'm':
                         noMidi = true;
+                        break;
+                  case 'i':
+                        dumpMidi = true;
                         break;
                   default:
                         usage(argv[0], "bad argument");

@@ -1169,7 +1169,7 @@ bool MidiFile::readTrack(bool mergeChannels)
       int len       = readLong();       // len
       int endPos    = curPos + len;
       status        = -1;
-      sstatus       = -1;  // running status, der nicht bei meta oder sysex zurüstport      = -1;
+      sstatus       = -1;  // running status, will not be reset on meta or sysex
       channelprefix = -1;
       click         = 0;
       int channel   = -1;
@@ -2025,10 +2025,8 @@ QString MidiTrack::instrName(int type) const
 //      Instrumentennamen verwendet werden?
 //    - Instrumente feststellen
 //          - Name (kommentar?)
-//          - Schlüststellen
 //    - Schlagzeugtrack markieren
 //    - Quantisierung festlegen:
-//       - kücess:
 //    for every measure:
 //          * create measure
 //          - insert notes

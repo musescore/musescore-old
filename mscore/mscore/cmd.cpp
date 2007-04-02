@@ -1141,6 +1141,7 @@ void Score::cmd(const QString& cmd)
                         setRest(cis->pos, staff(cis->staff), cis->voice, len);
                         cis->pos += len;
                         }
+                  padState.rest = false;  // continue with normal note entry
                   moveCursor();
                   }
             else if (cmd == "pitch-up")
@@ -1309,7 +1310,7 @@ void Score::cmd(const QString& cmd)
             else if (cmd == "voice-4")
                   changeVoice(3);
             else if (cmd.startsWith("interval")) {
-                  int n = cmd.mid(9).toInt();
+                  int n = cmd.mid(8).toInt();
                   cmdAddInterval(n);
                   }
             else if (cmd == "duplet")
