@@ -1389,7 +1389,7 @@ void Score::changeVoice(int voice)
       if (cis->voice != voice) {
             cis->voice = voice;
             layout();
-            moveCursor();
+            // moveCursor();
             }
       }
 

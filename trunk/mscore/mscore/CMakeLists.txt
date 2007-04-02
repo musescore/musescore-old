@@ -83,6 +83,7 @@ QT4_WRAP_CPP (mocs
       timedialog.h
       symboldialog.h
       shortcutcapturedialog.h
+      simplebutton.h greendotbutton.h recordbutton.h
       )
 
 QT4_ADD_RESOURCES (qrc_files mscore.qrc)
@@ -173,6 +174,7 @@ add_executable ( mscore
       bsp.cpp
       viewer.cpp
       volta.cpp
+      simplebutton.cpp
       )
 
 if (CROSS_MINGW)

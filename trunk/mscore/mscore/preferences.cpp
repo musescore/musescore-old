@@ -126,6 +126,20 @@ Preferences::Preferences()
       sessionStart       = SCORE_SESSION;
       startScore         = ":/data/demo.msc";
       showSplashScreen   = true;
+      rewind.type        = -1;
+      rewind.type        = -1;
+      play.type          = -1;
+      stop.type          = -1;
+      len1.type          = -1;
+      len2.type          = -1;
+      len4.type          = -1;
+      len8.type          = -1;
+      len16.type         = -1;
+      len32.type         = -1;
+      len3.type          = -1;
+      len6.type          = -1;
+      len12.type         = -1;
+      len24.type         = -1;
       };
 
 //---------------------------------------------------------

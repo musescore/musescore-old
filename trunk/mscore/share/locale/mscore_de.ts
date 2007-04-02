@@ -2281,12 +2281,12 @@ Partitur sichern?</translation>
     <message>
         <location filename="../../mscore/actions.cpp" line="201"/>
         <source>Unison above</source>
-        <translation type="unfinished"></translation>
+        <translation>Sekunde darüber</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="203"/>
         <source>Enter Unison above</source>
-        <translation type="unfinished"></translation>
+        <translation>Sekunde darüber eingeben</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="206"/>

@@ -22,7 +22,6 @@
 #define _FLUID_CHAN_H
 
 #include "priv.h"
-// #include "midi.h"
 #include "tuning.h"
 
 enum fluid_midi_event_type {

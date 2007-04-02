@@ -26,8 +26,20 @@
 
 struct Shortcut;
 
+static const QSize ICON_SIZE(18, 18);
+
 enum SessionStart {
       LAST_SESSION, NEW_SESSION, SCORE_SESSION
+      };
+
+//---------------------------------------------------------
+//   MidiRemote
+//---------------------------------------------------------
+
+struct MidiRemote {
+      int channel;
+      int type;         // -1 : inactive, 0 : noteOn, 1 : ctrl
+      int data;         // pitch or controller number
       };
 
 //---------------------------------------------------------
@@ -67,6 +79,9 @@ struct Preferences {
       SessionStart sessionStart;
       QString startScore;
       bool showSplashScreen;
+      MidiRemote rewind, play, stop;
+      MidiRemote len1, len2, len4, len8, len16, len32;
+      MidiRemote len3, len6, len12, len24;
 
       Preferences();
       void write();

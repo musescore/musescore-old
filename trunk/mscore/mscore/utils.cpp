@@ -23,6 +23,30 @@
 #include "page.h"
 #include "segment.h"
 #include "layout.h"
+#include "recordbutton.h"
+#include "greendotbutton.h"
+
+//---------------------------------------------------------
+//   RecordButton
+//---------------------------------------------------------
+
+RecordButton::RecordButton(QWidget* parent)
+   : SimpleButton(":/xpm/recordOn.svg", ":/xpm/recordOff.svg", parent)
+      {
+      setCheckable(true);
+      setToolTip(tr("record"));
+      }
+
+//---------------------------------------------------------
+//   GreendotButton
+//---------------------------------------------------------
+
+GreendotButton::GreendotButton(QWidget* parent)
+   : SimpleButton(":/xpm/greendot.svg", ":/xpm/darkgreendot.svg", parent)
+      {
+      setCheckable(true);
+      setToolTip(tr("record"));
+      }
 
 //---------------------------------------------------------
 //   drawHandle

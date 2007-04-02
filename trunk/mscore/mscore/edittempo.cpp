@@ -59,7 +59,7 @@ static TempoVal tempos[] = {
       { "Bewegt",        100 },
       { "Langsam",        60 },
       { "Lebhaft",       120 },
-      { "M�ig",         100 },
+      { "Mäßig",         100 },
       { "Schnell",       120 },
       };
 

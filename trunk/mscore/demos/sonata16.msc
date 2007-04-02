@@ -3,9 +3,9 @@
   <Geometry x="53" y="0" w="1061" h="931" />
   <Spatium>1.62</Spatium>
   <Division>480</Division>
-  <Mag>1.59387</Mag>
-  <xoff>-993.581</xoff>
-  <yoff>-423.874</yoff>
+  <Mag>1.83406</Mag>
+  <xoff>-5078.09</xoff>
+  <yoff>-566.07</yoff>
   <Style>
     <staffUpperBorder>8</staffUpperBorder>
     <staffLowerBorder>4</staffLowerBorder>
@@ -4619,6 +4619,13 @@ p, li { white-space: pre-wrap; }
       </Measure>
     <Measure number="70">
       <BarLine/>
+      <Trill>
+        <tick2>134280</tick2>
+        <Segment>
+          <off1 x="-0.534679" y="-1.24499"/>
+          <off2 x="1.2467" y="0"/>
+          </Segment>
+        </Trill>
       <Chord>
         <ticklen>1920</ticklen>
         <Note>
@@ -4675,7 +4682,7 @@ p, li { white-space: pre-wrap; }
         <ticklen>120</ticklen>
         <Note>
           <tick>0</tick>
-          <pitch>74</pitch>
+          <pitch>76</pitch>
           </Note>
         </Chord>
       <Chord>
@@ -7928,30 +7935,227 @@ p, li { white-space: pre-wrap; }
         </Rest>
       </Measure>
     <Measure number="70">
-      <Rest>
-        <ticklen>1920</ticklen>
-        <BeamMode>4</BeamMode>
-        </Rest>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Note>
+          <tick>0</tick>
+          <pitch>55</pitch>
+          </Note>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Note>
+          <tick>0</tick>
+          <pitch>65</pitch>
+          </Note>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Note>
+          <tick>0</tick>
+          <pitch>59</pitch>
+          </Note>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Note>
+          <tick>0</tick>
+          <pitch>65</pitch>
+          </Note>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Note>
+          <tick>0</tick>
+          <pitch>55</pitch>
+          </Note>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Note>
+          <tick>0</tick>
+          <pitch>65</pitch>
+          </Note>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Note>
+          <tick>0</tick>
+          <pitch>59</pitch>
+          </Note>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Note>
+          <tick>0</tick>
+          <pitch>65</pitch>
+          </Note>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Note>
+          <tick>0</tick>
+          <pitch>55</pitch>
+          </Note>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Note>
+          <tick>0</tick>
+          <pitch>65</pitch>
+          </Note>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Note>
+          <tick>0</tick>
+          <pitch>59</pitch>
+          </Note>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Note>
+          <tick>0</tick>
+          <pitch>65</pitch>
+          </Note>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Note>
+          <tick>0</tick>
+          <pitch>55</pitch>
+          </Note>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Note>
+          <tick>0</tick>
+          <pitch>65</pitch>
+          </Note>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Note>
+          <tick>0</tick>
+          <pitch>59</pitch>
+          </Note>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Note>
+          <tick>0</tick>
+          <pitch>65</pitch>
+          </Note>
+        </Chord>
       </Measure>
     <Measure number="71">
+      <Chord>
+        <ticklen>480</ticklen>
+        <Note>
+          <tick>0</tick>
+          <pitch>60</pitch>
+          </Note>
+        <Note>
+          <tick>0</tick>
+          <pitch>64</pitch>
+          </Note>
+        </Chord>
       <Rest>
-        <ticklen>1920</ticklen>
+        <ticklen>480</ticklen>
         <BeamMode>4</BeamMode>
         </Rest>
+      <Rest>
+        <ticklen>480</ticklen>
+        <BeamMode>4</BeamMode>
+        </Rest>
+      <Chord>
+        <ticklen>480</ticklen>
+        <Note>
+          <tick>0</tick>
+          <pitch>55</pitch>
+          </Note>
+        <Note>
+          <tick>0</tick>
+          <pitch>62</pitch>
+          </Note>
+        <Note>
+          <tick>0</tick>
+          <pitch>65</pitch>
+          </Note>
+        </Chord>
       </Measure>
     <Measure number="72">
+      <Chord>
+        <ticklen>480</ticklen>
+        <Note>
+          <tick>0</tick>
+          <pitch>60</pitch>
+          </Note>
+        <Note>
+          <tick>0</tick>
+          <pitch>64</pitch>
+          </Note>
+        </Chord>
       <Rest>
-        <ticklen>1920</ticklen>
+        <ticklen>480</ticklen>
         <BeamMode>4</BeamMode>
         </Rest>
+      <Rest>
+        <ticklen>480</ticklen>
+        <BeamMode>4</BeamMode>
+        </Rest>
+      <Chord>
+        <ticklen>480</ticklen>
+        <Note>
+          <tick>0</tick>
+          <pitch>43</pitch>
+          </Note>
+        <Note>
+          <tick>0</tick>
+          <pitch>50</pitch>
+          </Note>
+        <Note>
+          <tick>0</tick>
+          <pitch>53</pitch>
+          </Note>
+        </Chord>
       </Measure>
     <Measure number="73">
+      <Chord>
+        <ticklen>480</ticklen>
+        <Note>
+          <tick>0</tick>
+          <pitch>48</pitch>
+          </Note>
+        <Note>
+          <tick>0</tick>
+          <pitch>52</pitch>
+          </Note>
+        </Chord>
+      <Chord>
+        <ticklen>480</ticklen>
+        <Note>
+          <tick>0</tick>
+          <pitch>60</pitch>
+          </Note>
+        </Chord>
+      <Chord>
+        <ticklen>480</ticklen>
+        <Note>
+          <tick>0</tick>
+          <pitch>36</pitch>
+          </Note>
+        <Note>
+          <tick>0</tick>
+          <pitch>48</pitch>
+          </Note>
+        </Chord>
       <Rest>
-        <ticklen>1920</ticklen>
+        <ticklen>480</ticklen>
         <BeamMode>4</BeamMode>
         </Rest>
       </Measure>
     </Staff>
-  <cursorStaff>1</cursorStaff>
+  <cursorStaff>0</cursorStaff>
   <cursorVoice>0</cursorVoice>
   </museScore>
