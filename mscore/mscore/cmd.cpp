@@ -854,6 +854,17 @@ void Score::cmdAppendMeasure()
 
 void Score::cmdAppendMeasures(int n)
       {
+      startCmd();
+      appendMeasures(n);
+      endCmd(true);
+      }
+
+//---------------------------------------------------------
+//   appendMeasures
+//---------------------------------------------------------
+
+void Score::appendMeasures(int n)
+      {
       if (noStaves()) {
             QMessageBox::warning(0, "MuseScore",
                tr("No staves found:\n"
@@ -861,7 +872,6 @@ void Score::cmdAppendMeasures(int n)
                   "first create some staves"));
             return;
             }
-      startCmd();
       for (int i = 0; i < n; ++i) {
             Measure* last = _layout->last();
             int tick = last ? last->tick() + last->tickLen() : 0;
@@ -885,7 +895,6 @@ void Score::cmdAppendMeasures(int n)
             _layout->push_back(measure);
             }
       layout();
-      endCmd(true);
       }
 
 //---------------------------------------------------------
@@ -1093,8 +1102,6 @@ void Score::cmd(const QString& cmd)
             doUndo();
       else if (cmd == "redo")
             doRedo();
-      else if (cmd == "append-measure")
-            cmdAppendMeasure();
       else if (cmd == "note-input") {
             setNoteEntry(true, false);
             padState.rest = false;
@@ -1102,7 +1109,9 @@ void Score::cmd(const QString& cmd)
             }
       else {
             startCmd();
-            if (cmd == "page-prev")
+            if (cmd == "append-measure")
+                  appendMeasures(1);
+            else if (cmd == "page-prev")
                   pagePrev();
             else if (cmd == "page-next")
                   pageNext();
