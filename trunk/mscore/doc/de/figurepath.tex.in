@@ -1,2 +1,2 @@
-\setupexternalfigures[directory={@CMAKE_SOURCE_DIR@/doc/de/pics}]
+\setupexternalfigures[directory={@CMAKE_SOURCE_DIR@/doc/pics, @CMAKE_SOURCE_DIR@/doc/de/pics}]
 

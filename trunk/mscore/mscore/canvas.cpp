@@ -835,16 +835,26 @@ QRectF Canvas::moveCursor()
       cursor->setOn(true);
       cursor->setTick(tick);
 
-      Segment* segment = _score->tick2segment(tick);
-      if (segment) {
-            _score->adjustCanvasPosition(segment);
-            System* system = segment->measure()->system();
-            double x = segment->canvasPos().x();
-            double y = system->bboxStaff(staff).y() + system->canvasPos().y();
-            refresh |= cursor->abbox();
-            cursor->setPos(x - _spatium, y - _spatium);
-            refresh |= cursor->abbox();
-            return refresh;
+      for (int i = 0; i < 2; ++i) {
+            Segment* segment = _score->tick2segment(tick);
+            if (segment) {
+                  if (i)
+                        return refresh;
+                  //
+                  // we cannot exec next code after appendMeasure();
+                  // the new measure has no System because doLayout()
+                  // was not called at this moment:
+                  //
+                  _score->adjustCanvasPosition(segment);
+                  System* system = segment->measure()->system();
+                  double x = segment->canvasPos().x();
+                  double y = system->bboxStaff(staff).y() + system->canvasPos().y();
+                  refresh |= cursor->abbox();
+                  cursor->setPos(x - _spatium, y - _spatium);
+                  refresh |= cursor->abbox();
+                  return refresh;
+                  }
+            _score->appendMeasures(1);
             }
       printf("cursor position not found for tick %d\n", tick);
       return refresh;

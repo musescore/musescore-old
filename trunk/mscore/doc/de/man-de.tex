@@ -15,7 +15,6 @@
 \setupcolors[state=start]
 \setupbodyfont[Palatino]
 \language[de]
-% typeset in unicode (utf8)
 \enableregime[utf]
 
 \startuseMPgraphic{FunnyFrame}
@@ -120,26 +119,38 @@
 \setuptyping[before=\blank\startbackground, after=\stopbackground\blank] % source code with background
 
 \component figurepath.tex
+\setuplayout[backspace=25mm, width=160mm, height=250mm, topspace=15mm, header=10mm, footer=0cm]
+\setuppagenumbering[alternative=doublesided, location={header, inmargin}]
 
 %----------------------------------------------------------
-%     Body
+%     Titelseite
 %----------------------------------------------------------
 
 \starttext
    \language[de]
    \mainlanguage[de]
-   \startstandardmakeup[doublesided=no]
-      \definebodyfont[10pt,11pt,12pt][rm][tfe=Regular at 48pt]
-      \tfe\setupinterlinespace
-      \hfill \color[red]{\M}\par
-      \hfill \color[blue]{Manual}\par
-      \vfill
-      \hfill \color[blue]{DE}\par
-      \definebodyfont[10pt,11pt,12pt][rm][tfb=Regular at 24pt]
-      \tfb\setupinterlinespace
-      \hfill Version 0.5\par
-      \stopstandardmakeup
+   \defineoverlay[titelbild][{\externalfigure[titel2]}]
 
+   \framed[frame=off, background=titelbild]{
+      \startstandardmakeup[doublesided=no]
+         \definebodyfont[10pt,11pt,12pt][rm][tfe=Regular at 48pt]
+         \tfe\setupinterlinespace
+         \hfill \color[red]{\M}\par
+         \hfill \color[blue]{Manual}\par
+         \vfill
+         \hfill \color[blue]{DE}\par
+         \definebodyfont[10pt,11pt,12pt][rm][tfb=Regular at 24pt]
+         \tfb\setupinterlinespace
+         \hfill Version 0.5\par
+         \stopstandardmakeup
+      }
+      \par
+
+%----------------------------------------------------------
+%     Titelrückseite
+%----------------------------------------------------------
+
+   \framed[frame=off]{
    \startstandardmakeup[page=no]
       \vfill
       Das \M\ Projekt ist auf SourceForge gehostet:\par
@@ -150,8 +161,17 @@
       \blank[line]
       \copyright 2005-2007 Werner Schweer und Andere
       \stopstandardmakeup
+      }
+
+%----------------------------------------------------------
+%     Inhaltsverzeichnis
+%----------------------------------------------------------
 
    \completecontent
+
+%----------------------------------------------------------
+%     Einführung
+%----------------------------------------------------------
 
 \chapter{Einführung}
    \section{Was ist \M?}
@@ -445,9 +465,7 @@ c Shift+a
       \StopFrame
 
 %----------------------------------------------------------
-%
 %     Referenz
-%
 %----------------------------------------------------------
 
 \chapter{Referenz}
@@ -472,6 +490,8 @@ mscore <Optionen> <Dateiname>
             \NC -d \NC startet \M\ im Debug-Modus\NC\NR
             \NC -s \NC startet \M\ ohne integrierten Software Synthesizer\NC\NR
             \NC -m \NC startete \M\ ohne MIDI Input Support\NC\NR
+            \NC -L \NC startete \M\ im Layout-Debug Mode\NC\NR
+            \NC -i \NC alle Midi Input Events werden auf der Konsole protokolliert
             \stoptabulate
             \stopnarrower
 
@@ -505,8 +525,7 @@ mscore <Optionen> <Dateiname>
             \stopnarrower
             \blank[big]
 
-
-   \section{Menü}
+   \section{Menüs}
       Viele Menüoptionen stehen auch in Form von Buttons in einer
       Toolbox zur Verfügung.
 
@@ -515,48 +534,47 @@ mscore <Optionen> <Dateiname>
             \blank[medium]
             \startnarrower[left]
             \starttabulate
-            \NC \type{Alt+F} \NC Datei\NC\NR
-            \NC \type{Alt+E} \NC Bearbeiten\NC\NR
-            \NC \type{Alt+C} \NC Erzeugen\NC\NR
+            \NC \type{Alt+P} \NC Partitur\NC\NR
+            \NC \type{Alt+B} \NC Bearbeiten\NC\NR
+            \NC \type{Alt+E} \NC Erzeugen\NC\NR
             \NC \type{Alt+N} \NC Noten\NC\NR
             \NC \type{Alt+L} \NC Layout\NC\NR
             \NC \type{Alt+S} \NC Stil\NC\NR
-            \NC \type{Alt+D} \NC Anzeige\NC\NR
+            \NC \type{Alt+A} \NC Anzeige\NC\NR
             \NC \type{Alt+H} \NC Hilfe\NC\NR
             \stoptabulate
             \stopnarrower
             \blank[big]
 
-      \subsection{File Menü}
+      \subsection{Partitur Menü}
       \Menu{menu1}
 
       \startpacked
-      \Opt{New (Strg+N)} erzeugt ein neues Notenblatt. Als
-            nächstes müssen zunächst Instrumente und dann Leertakte
+      \Opt{Neu (Strg+N)} erzeugt eine neue leere Partitur. Als
+            näch\-stes müssen Instrumente und dann Leertakte
             erzeugt werden.\par
-      \Opt{Open} öffnet eine neue Partitur\par
-      \Opt{Open Recent} zeigt eine Liste der zuletzt bearbeiteten
+      \Opt{neue Partitur aus Template}\par
+      \Opt{Öffnen} öffnet eine Partitur. Es können gleichzeitig mehrere
+          Partituren geöffnet sein. Die aktuelle Partitur kann über
+          Karteireiter angewählt werden.\par
+      \Opt{Letzte Partituren} zeigt eine Liste der zuletzt bearbeiteten
         Partituren. Ein Click auf eine Partitur öffnet sie zur
         Bearbeitung.\par
-      \Opt{Save} schreibt die aktuelle Partitur auf die
+      \Opt{Sichern} schreibt die aktuelle Partitur auf die
         Festplatte\par
-      \Opt{Save As} schreibt die aktuelle Partitur unter einem
+      \Opt{Sichern unter} schreibt die aktuelle Partitur unter einem
         zu wählenden Namen auf die Festplatte\par
-
+      \Opt{Schließen} schließt die aktuelle Partitur und entfernt den
+        entsprechenden Karteireiter.\par
       \Opt{Export Midi} Exportiert die aktuelle Partitur als
-        MIDI-Datei. \index{Midi-Datei}
-
+        MIDI-Datei. \index{Midi-Datei}\par
       \Opt{Export MusicXML} Exportiert die aktuelle Partitur als
-        MusicXML Datei. \index{MusicXML}
-
+        MusicXML Datei. \index{MusicXML}\par
       \Opt{Import Midi} Import eine MIDI-Datei und versucht, sie
-        als Partitur darzustellen.
-
-      \Opt{Import MusicXML} Importiert eine MusicXML Datei.
-
-      \Opt{Print (Strg+P)} druckt die aktuelle Partitur.
-        \index{Drucken}
-
+        als Partitur darzustellen.\par
+      \Opt{Import MusicXML} Importiert eine MusicXML Datei.\par
+      \Opt{Drucken (Strg+P)} druckt die aktuelle Partitur.
+        \index{Drucken}\par
       \Opt{Quit} Beendet \M.\par
         \index{Beenden}
 

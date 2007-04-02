@@ -194,6 +194,7 @@ class Score : public QObject {
       void cmdAddPoet();
       void cmdAppendMeasure();
       void cmdAppendMeasures(int);
+      void appendMeasures(int);
       void padToggle(int n);
       void doUndo();
       void doRedo();

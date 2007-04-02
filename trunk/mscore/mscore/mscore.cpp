@@ -1435,7 +1435,6 @@ void MuseScore::cmdAppendMeasures()
 void MuseScore::cmdAppendMeasures(int n)
       {
       if (cs) {
-	      printf("append %d measures\n", n);
             cs->cmdAppendMeasures(n);
             }
       }
