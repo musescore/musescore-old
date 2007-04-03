@@ -343,7 +343,7 @@ PaletteBox::PaletteBox(QWidget* parent)
       vbox->setMargin(0);
       vbox->setSpacing(0);
       mainWidget->setLayout(vbox);
-      vbox->addStretch(10);
+      vbox->addStretch(1);
       setWidget(mainWidget);
       }
 
@@ -380,7 +380,7 @@ void PaletteBox::addPalette(const QString& s, QWidget* w)
       b->setIcon(icon);
       int slot = widgets.size() * 2;
       vbox->insertWidget(slot, b);
-      vbox->insertWidget(slot+1, sa);
+      vbox->insertWidget(slot+1, sa, 1000);
       widgets.append(w);
       }
 

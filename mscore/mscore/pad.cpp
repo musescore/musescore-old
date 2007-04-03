@@ -37,6 +37,7 @@ Pad::Pad(QWidget* parent)
       QWidget* w = new QWidget;
       tb->addItem(w, tr("Notes"));
       QGridLayout* gl = new QGridLayout;
+      gl->setSpacing(2);
       w->setLayout(gl);
       QToolButton* b = new QToolButton;
       b->setDefaultAction(getAction("pad-note-1"));
@@ -94,6 +95,7 @@ Pad::Pad(QWidget* parent)
       w = new QWidget;
       tb->addItem(w, tr("Beams"));
       gl = new QGridLayout;
+      gl->setSpacing(2);
       w->setLayout(gl);
 
       b = new QToolButton;
