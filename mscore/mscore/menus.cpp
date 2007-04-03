@@ -87,7 +87,7 @@ void MuseScore::showPalette(bool visible)
             //-----------------------------------
 
             sp = new SymbolPalette(5, 3, .8);
-            sp->setGrid(60, 40);
+            sp->setGrid(60, 45);
             sp->showStaff(true);
             for (int i = 0; i < 7; ++i) {
                   KeySig* k = new KeySig(0);
@@ -109,7 +109,7 @@ void MuseScore::showPalette(bool visible)
             //-----------------------------------
 
             sp = new SymbolPalette(4, 3);
-            sp->setGrid(60, 60);
+            sp->setGrid(60, 45);
             sp->showStaff(true);
 
       	sp->addObject(0,   new TimeSig(0, 2, 2), "2/2");
@@ -227,8 +227,8 @@ void MuseScore::showPalette(bool visible)
             //    Brackets
             //-----------------------------------
 
-            sp = new SymbolPalette(1, 4);
-            sp->setGrid(45, 80);
+            sp = new SymbolPalette(1, 4, .7);
+            sp->setGrid(45, 60);
 
             Bracket* b1 = new Bracket(cs);
             b1->setSubtype(BRACKET_NORMAL);
@@ -247,7 +247,7 @@ void MuseScore::showPalette(bool visible)
             //-----------------------------------
 
             sp = new SymbolPalette((NOTE_ATTRIBUTES+3) / 4, 4);
-            sp->setGrid(45, 45);
+            sp->setGrid(45, 40);
 
             for (int i = 0; i < NOTE_ATTRIBUTES; ++i) {
                   NoteAttribute* s = new NoteAttribute(cs);
@@ -276,7 +276,7 @@ void MuseScore::showPalette(bool visible)
             //-----------------------------------
 
             sp = new SymbolPalette(18, 2);
-            sp->setGrid(90, 40);
+            sp->setGrid(90, 35);
 
             for (int i = 0; i < 27; ++i) {
                   Dynamic* dynamic = new Dynamic(cs, i+1);
@@ -301,6 +301,7 @@ void MuseScore::showPalette(bool visible)
 
             sp = new SymbolPalette(2, 6, 1.5);
             sp->setGrid(30, 30);
+            sp->setDrawGrid(true);
 
             const char finger[] = "012345pimac";
             for (unsigned i = 0; i < strlen(finger); ++i) {
@@ -317,6 +318,7 @@ void MuseScore::showPalette(bool visible)
 
             sp = new SymbolPalette(42, 4);
             sp->setGrid(45, 45);
+            sp->setDrawGrid(true);
             sp->addObject(0, wholerestSym);
             sp->addObject(1, halfrestSym);
             sp->addObject(2, outsidewholerestSym);

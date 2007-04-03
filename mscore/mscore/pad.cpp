@@ -87,6 +87,9 @@ Pad::Pad(QWidget* parent)
       b = new QToolButton;
       b->setDefaultAction(getAction("pad-flat2"));
       gl->addWidget(b, 2, 4);
+      gl->setRowStretch(3, 100);
+
+      //-----------
 
       w = new QWidget;
       tb->addItem(w, tr("Beams"));
@@ -109,5 +112,6 @@ Pad::Pad(QWidget* parent)
       b->setDefaultAction(getAction("beam32"));
       gl->addWidget(b, 0, 3);
 
+      gl->setRowStretch(1, 100);
       setWidget(tb);
       }

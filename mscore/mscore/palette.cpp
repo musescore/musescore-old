@@ -48,7 +48,7 @@ SymbolPalette::SymbolPalette(int r, int c, qreal mag)
             symbols[i] = 0;
       setGrid(50, 60);
       _drawGrid = false;
-      setStyleSheet("* { background-color: rgb(176, 190, 242) }");
+//      setStyleSheet("* { background-color: rgb(0, 190, 242) }");
       }
 
 SymbolPalette::~SymbolPalette()
@@ -70,6 +70,15 @@ void SymbolPalette::setGrid(int hh, int vv)
       hgrid = hh;
       vgrid = vv;
       setFixedSize(columns * hgrid, rows * vgrid);
+      }
+
+//---------------------------------------------------------
+//   sizeHint
+//---------------------------------------------------------
+
+QSize SymbolPalette::sizeHint() const
+      {
+      return QSize(columns * hgrid, rows * vgrid);
       }
 
 //---------------------------------------------------------
@@ -344,7 +353,7 @@ PaletteBox::PaletteBox(QWidget* parent)
 
 QSize PaletteBox::sizeHint() const
       {
-      return QSize(180, 100);
+      return QSize(180, 10);
       }
 
 //---------------------------------------------------------
@@ -357,6 +366,7 @@ void PaletteBox::addPalette(const QString& s, QWidget* w)
       sa->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
       sa->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
       sa->setWidget(w);
+      sa->setMaximumHeight(w->height()+4);
 
       QPixmap plus(":/data/plus.xpm");
       QPixmap minus(":/data/minus.xpm");

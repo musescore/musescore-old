@@ -2675,38 +2675,6 @@
           <bool>true</bool>
          </property>
          <layout class="QGridLayout" >
-          <property name="leftMargin" >
-           <number>9</number>
-          </property>
-          <property name="topMargin" >
-           <number>9</number>
-          </property>
-          <property name="rightMargin" >
-           <number>9</number>
-          </property>
-          <property name="bottomMargin" >
-           <number>9</number>
-          </property>
-          <property name="horizontalSpacing" >
-           <number>6</number>
-          </property>
-          <property name="verticalSpacing" >
-           <number>6</number>
-          </property>
-          <item row="1" column="0" >
-           <widget class="QLabel" name="label_14" >
-            <property name="text" >
-             <string>Record</string>
-            </property>
-           </widget>
-          </item>
-          <item row="2" column="0" >
-           <widget class="QLabel" name="label_15" >
-            <property name="text" >
-             <string>Rewind</string>
-            </property>
-           </widget>
-          </item>
           <item row="0" column="0" >
            <widget class="QLabel" name="label_16" >
             <property name="text" >
@@ -2714,7 +2682,21 @@
             </property>
            </widget>
           </item>
-          <item row="0" column="5" >
+          <item row="0" column="1" >
+           <widget class="GreendotButton" name="stopActive" >
+            <property name="text" >
+             <string>...</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="2" >
+           <widget class="RecordButton" name="recordStop" >
+            <property name="text" >
+             <string>...</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="3" >
            <spacer>
             <property name="orientation" >
              <enum>Qt::Horizontal</enum>
@@ -2727,6 +2709,48 @@
             </property>
            </spacer>
           </item>
+          <item row="1" column="0" >
+           <widget class="QLabel" name="label_14" >
+            <property name="text" >
+             <string>Record</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="1" >
+           <widget class="GreendotButton" name="recordActive" >
+            <property name="text" >
+             <string>...</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="2" >
+           <widget class="RecordButton" name="recordRecord" >
+            <property name="text" >
+             <string>...</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="0" >
+           <widget class="QLabel" name="label_15" >
+            <property name="text" >
+             <string>Rewind</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="1" >
+           <widget class="GreendotButton" name="rewindActive" >
+            <property name="text" >
+             <string>...</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="2" >
+           <widget class="RecordButton" name="recordRewind" >
+            <property name="text" >
+             <string>...</string>
+            </property>
+           </widget>
+          </item>
           <item row="3" column="0" >
            <widget class="QLabel" name="label_20" >
             <property name="text" >
@@ -2734,81 +2758,15 @@
             </property>
            </widget>
           </item>
-          <item row="0" column="3" >
-           <widget class="RecordButton" native="1" name="recordStop" />
-          </item>
-          <item row="1" column="3" >
-           <widget class="RecordButton" native="1" name="recordRecord" />
-          </item>
-          <item row="2" column="3" >
-           <widget class="RecordButton" native="1" name="recordGotoLeftMark" />
-          </item>
-          <item row="3" column="3" >
-           <widget class="RecordButton" native="1" name="recordPlay" />
-          </item>
-          <item row="0" column="2" >
-           <widget class="GreendotButton" native="1" name="stopActive" />
-          </item>
-          <item row="1" column="2" >
-           <widget class="GreendotButton" native="1" name="recordActive" />
-          </item>
-          <item row="2" column="2" >
-           <widget class="GreendotButton" native="1" name="gotoLeftMarkActive" />
+          <item row="3" column="1" >
+           <widget class="GreendotButton" name="playActive" >
+            <property name="text" >
+             <string>...</string>
+            </property>
+           </widget>
           </item>
           <item row="3" column="2" >
-           <widget class="GreendotButton" native="1" name="playActive" />
-          </item>
-          <item row="0" column="1" >
-           <widget class="QToolButton" name="stopActive_2" >
-            <property name="text" >
-             <string>...</string>
-            </property>
-           </widget>
-          </item>
-          <item row="1" column="1" >
-           <widget class="QToolButton" name="recordActive_2" >
-            <property name="text" >
-             <string>...</string>
-            </property>
-           </widget>
-          </item>
-          <item row="2" column="1" >
-           <widget class="QToolButton" name="rewindActive" >
-            <property name="text" >
-             <string>...</string>
-            </property>
-           </widget>
-          </item>
-          <item row="3" column="1" >
-           <widget class="QToolButton" name="playActive_2" >
-            <property name="text" >
-             <string>...</string>
-            </property>
-           </widget>
-          </item>
-          <item row="0" column="4" >
-           <widget class="QToolButton" name="recordStop_2" >
-            <property name="text" >
-             <string>...</string>
-            </property>
-           </widget>
-          </item>
-          <item row="1" column="4" >
-           <widget class="QToolButton" name="recordRecord_2" >
-            <property name="text" >
-             <string>...</string>
-            </property>
-           </widget>
-          </item>
-          <item row="2" column="4" >
-           <widget class="QToolButton" name="recordRewind" >
-            <property name="text" >
-             <string>...</string>
-            </property>
-           </widget>
-          </item>
-          <item row="3" column="4" >
-           <widget class="QToolButton" name="recordPlay_2" >
+           <widget class="RecordButton" name="recordPlay" >
             <property name="text" >
              <string>...</string>
             </property>
@@ -3478,14 +3436,14 @@
  </widget>
  <customwidgets>
   <customwidget>
-   <class>RecordButton</class>
-   <extends>QWidget</extends>
-   <header>recordbutton.h</header>
+   <class>GreendotButton</class>
+   <extends>QToolButton</extends>
+   <header>greendotbutton.h</header>
   </customwidget>
   <customwidget>
-   <class>GreendotButton</class>
-   <extends>QWidget</extends>
-   <header>greendotbutton.h</header>
+   <class>RecordButton</class>
+   <extends>QToolButton</extends>
+   <header>recordbutton.h</header>
   </customwidget>
  </customwidgets>
  <resources>

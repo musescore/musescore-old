@@ -32,15 +32,9 @@
 #include "canvas.h"
 
 QString appStyleSheet(
-         "Pad *           { background-color: rgb(176, 190, 242) }\n"
-         "Pad             { background-color: rgb(176, 190, 242) }\n"
-         "SymbolPalette * { background-color: rgb(176, 190, 242) }\n"
-         "SymbolPalette   { background-color: rgb(176, 190, 242) }\n"
-         "PaletteBox *    { background-color: rgb(176, 190, 242) }\n"
-         "PaletteBox      { background-color: rgb(176, 190, 242) }\n"
-         "PaletteBox QToolBox  { background-color: rgb(176, 190, 242) }\n"
-         "PaletteBox QToolBox SymbolPalette { background-color: rgb(176, 190, 242) }\n"
-         );
+      "Pad *           { background-color: rgb(176, 190, 242) }\n"
+      "PaletteBox *    { background-color: rgb(176, 190, 242) }\n"
+      );
 
 //---------------------------------------------------------
 //   buttons2stemDir
