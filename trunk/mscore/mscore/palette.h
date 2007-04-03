@@ -74,6 +74,7 @@ class SymbolPalette : public QWidget {
       virtual void mousePressEvent(QMouseEvent*);
       virtual void mouseMoveEvent(QMouseEvent*);
       virtual bool event(QEvent*);
+      virtual QSize sizeHint() const;
 
    public:
       SymbolPalette(int rows, int columns, qreal mag = 1.0);
@@ -86,6 +87,7 @@ class SymbolPalette : public QWidget {
       int getColumns() const { return columns; }
       void setRowsColumns(int r, int c);
       Element* element(int idx) { return symbols[idx]; }
+      void setDrawGrid(bool val) { _drawGrid = val; }
       };
 
 #endif
