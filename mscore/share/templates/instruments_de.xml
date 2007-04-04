@@ -1,13 +1,13 @@
-<?xml version="1.0" encoding="ISO-8859-1"?>
+<?xml version="1.0" encoding="utf8"?>
 <museScore version="1.0">
-   <instrument-group name="Woodwinds">
+   <instrument-group name="Holzbläser">
       <instrument>
          <name>Piccolo</name>
          <short-name>Picc.</short-name>
          <clef>0</clef>
          </instrument>
       <instrument>
-         <name>Flute</name>
+         <name>Flöte</name>
          <short-name>Fl.</short-name>
          </instrument>
       <instrument>
@@ -19,7 +19,7 @@
          <short-name>Bs. Fl.</short-name>
          </instrument>
       <instrument>
-         <name>Pan Flute</name>
+         <name>Panflöte</name>
          <short-name>Pan Fl.</short-name>
          </instrument>
       <instrument>
@@ -27,23 +27,23 @@
          <short-name>Ob.</short-name>
          </instrument>
       <instrument>
-         <name>English Horn</name>
+         <name>Englisch Horn</name>
          <short-name>Eng. Hn.</short-name>
          </instrument>
       <instrument>
-         <name>Bb Clarinet</name>
+         <name>Bb Clarinette</name>
          <short-name>Bb Cl.</short-name>
          </instrument>
       <instrument>
-         <name>Eb Clarinet</name>
+         <name>Eb Clarinette</name>
          <short-name>Eb Cl.</short-name>
          </instrument>
       <instrument>
-         <name>A Clarinet</name>
+         <name>A Clarinette</name>
          <short-name>A Cl.</short-name>
          </instrument>
       <instrument>
-         <name>Bass Clarinet</name>
+         <name>Bass Clarinette</name>
          <short-name>Bs. Cl.</short-name>
          </instrument>
       <instrument>
@@ -80,25 +80,25 @@
          </instrument>
       </instrument-group>
 
-   <instrument-group name="Bl�ser">
+   <instrument-group name="Bläser">
       <instrument>
          <name>Horn</name>
          <short-name>F Hn.</short-name>
          </instrument>
       <instrument>
-         <name>Bb Trumpet</name>
+         <name>Bb Trompete</name>
          <short-name>Bb Tpt.</short-name>
          </instrument>
       <instrument>
-         <name>D Trumpet</name>
+         <name>D Trompete</name>
          <short-name>D Tpt.</short-name>
          </instrument>
       <instrument>
-         <name>C Trumpet</name>
+         <name>C Trompete</name>
          <short-name>C Tpt.</short-name>
          </instrument>
       <instrument>
-         <name>Eb Trumpet</name>
+         <name>Eb Trompete</name>
          <short-name>Eb Tpt.</short-name>
          </instrument>
       <instrument>
@@ -142,7 +142,7 @@
          <short-name>El. Git.</short-name>
          </instrument>
       <instrument>
-         <name>Bass Guitar</name>
+         <name>Bass Gitarre</name>
          <short-name>B. Guit.</short-name>
          </instrument>
       </instrument-group>
@@ -167,7 +167,7 @@
          <name>Tenor</name>
          </instrument>
       <instrument>
-         <name>Baritone</name>
+         <name>Bariton</name>
          </instrument>
       <instrument>
          <name>Bass</name>
@@ -219,11 +219,10 @@
          <short-name>D.B.</short-name>
          </instrument>
       <instrument>
-         <name>Contrabass</name>
+         <name>Kontrabass</name>
          <short-name>C.B.</short-name>
          </instrument>
       </instrument-group>
 
    </museScore>
-
 

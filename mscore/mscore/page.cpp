@@ -414,7 +414,8 @@ void Page::collectElements(QList<Element*>& el)
                         }
                   for (int staffIdx = 0; staffIdx < staves; ++staffIdx) {
                         BarLine* b = m->barLine(staffIdx);
-                        if (b && b->staff()->show())
+                        // the system barline has no staff()
+                        if (b && (!b->staff() || b->staff()->show()))
                               el.append(b);
                         }
                   if (m->noText())
