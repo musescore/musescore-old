@@ -283,7 +283,8 @@ void Seq::start()
 
 void Seq::stop()
       {
-      audio->stopTransport();
+      if (audio)
+            audio->stopTransport();
       }
 
 //---------------------------------------------------------

@@ -188,6 +188,7 @@ void MuseScore::preferencesChanged()
       transportTools->setShown(seq->isRunning());
       getAction("midi-on")->setEnabled(preferences.enableMidiInput);
       _statusBar->setShown(preferences.showStatusBar);
+
       }
 
 //---------------------------------------------------------
@@ -237,7 +238,7 @@ MuseScore::MuseScore()
       _statusBar->addPermanentWidget(_modeText, 0);
       setStatusBar(_statusBar);
       setState(STATE_NORMAL);
-      _statusBar->setShown(preferences.showStatusBar);
+//      _statusBar->setShown(preferences.showStatusBar);
 
       QAction* a;
 
@@ -1791,6 +1792,7 @@ int main(int argc, char* argv[])
       mscore->setCurrentScore(currentScore);
       mscore->showNavigator(preferences.showNavigator);
       mscore->showPad(preferences.showPad);
+      mscore->showPalette(preferences.showPanel);
       if (mscore->getKeyPad())
             mscore->getKeyPad()->move(preferences.padPos);
       mscore->showPlayPanel(preferences.showPlayPanel);

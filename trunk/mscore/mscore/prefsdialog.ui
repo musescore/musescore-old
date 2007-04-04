@@ -6,7 +6,7 @@
     <x>0</x>
     <y>0</y>
     <width>660</width>
-    <height>403</height>
+    <height>425</height>
    </rect>
   </property>
   <property name="windowTitle" >
@@ -244,6 +244,20 @@
             </property>
             <property name="textFormat" >
              <enum>Qt::PlainText</enum>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="0" >
+           <widget class="QLabel" name="label_8" >
+            <property name="text" >
+             <string>Panel</string>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="1" >
+           <widget class="QCheckBox" name="panelShow" >
+            <property name="text" >
+             <string>show</string>
             </property>
            </widget>
           </item>
@@ -2684,6 +2698,9 @@
           </item>
           <item row="0" column="1" >
            <widget class="GreendotButton" name="stopActive" >
+            <property name="toolTip" >
+             <string>is active</string>
+            </property>
             <property name="text" >
              <string>...</string>
             </property>
@@ -2691,6 +2708,9 @@
           </item>
           <item row="0" column="2" >
            <widget class="RecordButton" name="recordStop" >
+            <property name="toolTip" >
+             <string>record</string>
+            </property>
             <property name="text" >
              <string>...</string>
             </property>
@@ -2718,6 +2738,9 @@
           </item>
           <item row="1" column="1" >
            <widget class="GreendotButton" name="recordActive" >
+            <property name="toolTip" >
+             <string>is active</string>
+            </property>
             <property name="text" >
              <string>...</string>
             </property>
@@ -2725,6 +2748,9 @@
           </item>
           <item row="1" column="2" >
            <widget class="RecordButton" name="recordRecord" >
+            <property name="toolTip" >
+             <string>record</string>
+            </property>
             <property name="text" >
              <string>...</string>
             </property>
@@ -2739,6 +2765,9 @@
           </item>
           <item row="2" column="1" >
            <widget class="GreendotButton" name="rewindActive" >
+            <property name="toolTip" >
+             <string>is active</string>
+            </property>
             <property name="text" >
              <string>...</string>
             </property>
@@ -2746,6 +2775,9 @@
           </item>
           <item row="2" column="2" >
            <widget class="RecordButton" name="recordRewind" >
+            <property name="toolTip" >
+             <string>record</string>
+            </property>
             <property name="text" >
              <string>...</string>
             </property>
@@ -2760,6 +2792,9 @@
           </item>
           <item row="3" column="1" >
            <widget class="GreendotButton" name="playActive" >
+            <property name="toolTip" >
+             <string>is active</string>
+            </property>
             <property name="text" >
              <string>...</string>
             </property>
@@ -2767,6 +2802,9 @@
           </item>
           <item row="3" column="2" >
            <widget class="RecordButton" name="recordPlay" >
+            <property name="toolTip" >
+             <string>record</string>
+            </property>
             <property name="text" >
              <string>...</string>
             </property>

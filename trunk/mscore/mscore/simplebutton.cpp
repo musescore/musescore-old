@@ -30,8 +30,8 @@ SimpleButton::SimpleButton(const QString& on, const QString& off, QWidget* paren
       {
       setAutoRaise(true);
       QIcon icon;
-      icon.addFile(on, ICON_SIZE, QIcon::Normal, QIcon::On);
-      icon.addFile(off, ICON_SIZE, QIcon::Normal, QIcon::Off);
+      icon.addFile(on,  QSize(), QIcon::Normal, QIcon::On);
+      icon.addFile(off, QSize(), QIcon::Normal, QIcon::Off);
       QAction* a = new QAction(this);
       a->setIcon(icon);
       setDefaultAction(a);

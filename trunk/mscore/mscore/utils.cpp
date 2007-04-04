@@ -31,7 +31,7 @@
 //---------------------------------------------------------
 
 RecordButton::RecordButton(QWidget* parent)
-   : SimpleButton(":/xpm/recordOn.svg", ":/xpm/recordOff.svg", parent)
+   : SimpleButton(":/data/recordOn.svg", ":/data/recordOff.svg", parent)
       {
       setCheckable(true);
       setToolTip(tr("record"));
@@ -42,7 +42,7 @@ RecordButton::RecordButton(QWidget* parent)
 //---------------------------------------------------------
 
 GreendotButton::GreendotButton(QWidget* parent)
-   : SimpleButton(":/xpm/greendot.svg", ":/xpm/darkgreendot.svg", parent)
+   : SimpleButton(":/data/greendot.svg", ":/data/darkgreendot.svg", parent)
       {
       setCheckable(true);
       setToolTip(tr("record"));

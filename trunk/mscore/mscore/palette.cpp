@@ -41,14 +41,14 @@ SymbolPalette::SymbolPalette(int r, int c, qreal mag)
       staff         = false;
       rows          = r;
       columns       = c;
-      currentSymbol = 0;;
+      currentSymbol = -1;
       symbols       = new Element*[rows*columns];
       names         = new QString[rows*columns];
       for (int i = 0; i < rows*columns; ++i)
             symbols[i] = 0;
       setGrid(50, 60);
       _drawGrid = false;
-//      setStyleSheet("* { background-color: rgb(0, 190, 242) }");
+      setMouseTracking(true);
       }
 
 SymbolPalette::~SymbolPalette()
@@ -124,32 +124,6 @@ void SymbolPalette::showStaff(bool flag)
 void SymbolPalette::mousePressEvent(QMouseEvent* ev)
       {
       dragStartPosition = ev->pos();
-
-      int x = ev->pos().x();
-      int y = ev->pos().y();
-
-      int row = y / vgrid;
-      int col = x / hgrid;
-
-      if (row < 0 || row >= rows)
-            return;
-      if (col < 0 || col >= columns)
-            return;
-      int idx = row * columns + col;
-      if (symbols[idx] == 0)
-            return;
-
-      int cc = currentSymbol % columns;
-      int cr = currentSymbol / columns;
-      QRect r(cc * hgrid, cr * vgrid, hgrid, vgrid);
-      symbols[currentSymbol]->setSelected(false);
-      currentSymbol = idx;
-      symbols[currentSymbol]->setSelected(true);
-
-      cc = currentSymbol % columns;
-      cr = currentSymbol / columns;
-      r |= QRect(cc * hgrid, cr * vgrid, hgrid, vgrid);
-      update(r);
       }
 
 //---------------------------------------------------------
@@ -158,26 +132,70 @@ void SymbolPalette::mousePressEvent(QMouseEvent* ev)
 
 void SymbolPalette::mouseMoveEvent(QMouseEvent* ev)
       {
-      if (!(ev->buttons() & Qt::LeftButton))
-            return;
-      if ((ev->pos() - dragStartPosition).manhattanLength()
-         > QApplication::startDragDistance())
-            return;
-      QDrag* drag = new QDrag(this);
-      QMimeData* mimeData = new QMimeData;
-      Element* el = symbols[currentSymbol];
+      if ((ev->buttons() & Qt::LeftButton)
+         && (ev->pos() - dragStartPosition).manhattanLength() > QApplication::startDragDistance()) {
+            QDrag* drag = new QDrag(this);
+            QMimeData* mimeData = new QMimeData;
+            Element* el = symbols[currentSymbol];
 
-      qreal mag = PALETTE_SPATIUM * extraMag / _spatium;
+            qreal mag = PALETTE_SPATIUM * extraMag / _spatium;
 
-      QPointF spos(dragStartPosition / mag);
-      QPointF rpos(spos - el->pos());
+            QPointF spos(dragStartPosition / mag);
+            QPointF rpos(spos - el->pos());
 
-      rpos /= mag;
+            rpos /= mag;
 
-      mimeData->setData("application/mscore/symbol", el->mimeData(rpos));
-      drag->setMimeData(mimeData);
+            mimeData->setData("application/mscore/symbol", el->mimeData(rpos));
+            drag->setMimeData(mimeData);
 
-      drag->start(Qt::CopyAction);
+            drag->start(Qt::CopyAction);
+            }
+      else {
+            int x = ev->pos().x();
+            int y = ev->pos().y();
+
+            int row = y / vgrid;
+            int col = x / hgrid;
+
+            if (row < 0 || row >= rows)
+                  return;
+            int idx = row * columns + col;
+
+            QRect r;
+            int cc, cr;
+            if (currentSymbol != -1) {
+                  cc = currentSymbol % columns;
+                  cr = currentSymbol / columns;
+                  r = QRect(cc * hgrid, cr * vgrid, hgrid, vgrid);
+                  symbols[currentSymbol]->setSelected(false);
+                  }
+            if (symbols[idx] == 0) {
+                  update(r);
+                  return;
+                  }
+            currentSymbol = idx;
+            symbols[currentSymbol]->setSelected(true);
+            cc = currentSymbol % columns;
+            cr = currentSymbol / columns;
+            r |= QRect(cc * hgrid, cr * vgrid, hgrid, vgrid);
+            update(r);
+            }
+      }
+
+//---------------------------------------------------------
+//   leaveEvent
+//---------------------------------------------------------
+
+void SymbolPalette::leaveEvent(QEvent*)
+      {
+      if (currentSymbol != -1) {
+            int cc = currentSymbol % columns;
+            int cr = currentSymbol / columns;
+            QRect r(cc * hgrid, cr * vgrid, hgrid, vgrid);
+            symbols[currentSymbol]->setSelected(false);
+            currentSymbol = -1;
+            update(r);
+            }
       }
 
 //---------------------------------------------------------
@@ -216,9 +234,6 @@ void SymbolPalette::paintEvent(QPaintEvent*)
 
       QPainter p(this);
       p.setRenderHint(QPainter::Antialiasing, true);
-//      p.setClipRect(e->rect());
-
-//      p.eraseRect(e->rect());
 
       //
       // draw grid
@@ -253,7 +268,7 @@ void SymbolPalette::paintEvent(QPaintEvent*)
 
                   p.setPen(pen);
                   if (el->selected())
-                        p.fillRect(r, Qt::yellow);
+                        p.fillRect(r, p.background().color().lighter(118));
                   if (staff) {
                         qreal y = r.y() + vgrid / 2 - dy;
                         qreal x = r.x() + 7;
@@ -325,7 +340,30 @@ PaletteBoxButton::PaletteBoxButton(QWidget* w, QWidget* parent)
    : QPushButton(parent)
       {
       setCheckable(true);
+      setFocusPolicy(Qt::NoFocus);
       connect(this, SIGNAL(clicked(bool)), w, SLOT(setVisible(bool)));
+      setFixedHeight(QFontMetrics(font()).height() + 2);
+//      setAutoFillBackground(true);
+      }
+
+//---------------------------------------------------------
+//   paintEvent
+//---------------------------------------------------------
+
+void PaletteBoxButton::paintEvent(QPaintEvent* e)
+      {
+      QPushButton::paintEvent(e);
+      QPixmap pm;
+      if (isChecked()) {
+            pm = QPixmap(":/data/minus.svg");
+            }
+      else {
+            pm = QPixmap(":/data/plus.svg");
+            }
+      int x = 5;
+      int y = (height() - pm.height()) / 2;
+      QPainter p(this);
+      p.drawPixmap(x, y, pm);
       }
 
 //---------------------------------------------------------
@@ -336,7 +374,7 @@ PaletteBox::PaletteBox(QWidget* parent)
    : QDockWidget(parent)
       {
       setMinimumWidth(180);
-      setAutoFillBackground(true);
+//      setAutoFillBackground(true);
 
       QWidget* mainWidget = new QWidget;
       vbox = new QVBoxLayout;
@@ -368,16 +406,16 @@ void PaletteBox::addPalette(const QString& s, QWidget* w)
       sa->setWidget(w);
       sa->setMaximumHeight(w->height()+4);
 
-      QPixmap plus(":/data/plus.xpm");
-      QPixmap minus(":/data/minus.xpm");
+/*      QPixmap plus(":/data/plus.svg");
+      QPixmap minus(":/data/minus.svg");
       QIcon icon;
       icon.addPixmap(plus, QIcon::Normal, QIcon::Off);
       icon.addPixmap(minus, QIcon::Normal, QIcon::On);
-
+  */
       sa->setVisible(false);
       PaletteBoxButton* b = new PaletteBoxButton(sa);
       b->setText(s);
-      b->setIcon(icon);
+//      b->setIcon(icon);
       int slot = widgets.size() * 2;
       vbox->insertWidget(slot, b);
       vbox->insertWidget(slot+1, sa, 1000);
