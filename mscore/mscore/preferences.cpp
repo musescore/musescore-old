@@ -32,10 +32,16 @@
 #include "canvas.h"
 
 QString appStyleSheet(
+      "Pad *             { background-color: rgb(220, 220, 220) }\n"
+      "PaletteBoxButton  { background-color: rgb(215, 215, 215) }\n"
+      "PaletteBox        { background-color: rgb(230, 230, 230) }\n"
+      );
+/*
+QString appStyleSheet(
       "Pad *           { background-color: rgb(176, 190, 242) }\n"
       "PaletteBox *    { background-color: rgb(176, 190, 242) }\n"
       );
-
+  */
 //---------------------------------------------------------
 //   buttons2stemDir
 //    convert checked button to StemDirection
@@ -106,6 +112,7 @@ Preferences::Preferences()
       showPlayPanel      = false;
       showStatusBar      = true;
       showPad            = false;
+      showPanel          = false;
       padPos             = QPoint(100, 100);
       playPanelPos       = QPoint(100, 300);
       useAlsaAudio       = true;
@@ -184,6 +191,7 @@ void Preferences::write()
       xml.tagE("PlayPanelPos x=\"%d\" y=\"%d\"",
          playPanelPos.x(), playPanelPos.y());
       xml.tag("showPad", showPad);
+      xml.tag("showPanel", showPanel);
       xml.tagE("KeyPadPos x=\"%d\" y=\"%d\"",
          padPos.x(), padPos.y());
       xml.tag("showNavigator", showNavigator);
@@ -302,6 +310,8 @@ void Preferences::read()
                               showPlayPanel = i;
                         else if (tag == "showPad")
                               showPad = i;
+                        else if (tag == "showPanel")
+                              showPanel = i;
                         else if (tag == "showStatusBar")
                               showStatusBar = i;
                         else if (tag == "PlayPanelPos") {
@@ -446,6 +456,7 @@ PreferenceDialog::PreferenceDialog(QWidget* parent)
 
       navigatorShow->setChecked(preferences.showNavigator);
       keyPadShow->setChecked(preferences.showPad);
+      panelShow->setChecked(preferences.showPanel);
       playPanelShow->setChecked(preferences.showPlayPanel);
       keyPadX->setValue(preferences.padPos.x());
       keyPadY->setValue(preferences.padPos.y());
@@ -781,6 +792,7 @@ void PreferenceDialog::apply()
 
       preferences.showNavigator  = navigatorShow->isChecked();
       preferences.showPad        = keyPadShow->isChecked();
+      preferences.showPanel      = panelShow->isChecked();
       preferences.showPlayPanel  = playPanelShow->isChecked();
       preferences.padPos         = QPoint(keyPadX->value(), keyPadY->value());
       preferences.playPanelPos   = QPoint(playPanelX->value(), playPanelY->value());

@@ -31,6 +31,8 @@ class Sym;
 class PaletteBoxButton : public QPushButton {
       Q_OBJECT
 
+      virtual void paintEvent(QPaintEvent*);
+
    public:
       PaletteBoxButton(QWidget*, QWidget* parent = 0);
       };
@@ -73,6 +75,7 @@ class SymbolPalette : public QWidget {
       virtual void paintEvent(QPaintEvent*);
       virtual void mousePressEvent(QMouseEvent*);
       virtual void mouseMoveEvent(QMouseEvent*);
+      virtual void leaveEvent(QEvent*);
       virtual bool event(QEvent*);
       virtual QSize sizeHint() const;
 

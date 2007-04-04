@@ -26,8 +26,6 @@
 
 struct Shortcut;
 
-static const QSize ICON_SIZE(18, 18);
-
 enum SessionStart {
       LAST_SESSION, NEW_SESSION, SCORE_SESSION
       };
@@ -66,6 +64,7 @@ struct Preferences {
       bool showPad;
       bool showPlayPanel;
       bool showStatusBar;
+      bool showPanel;
       QPoint padPos;
       QPoint playPanelPos;
       bool useAlsaAudio;

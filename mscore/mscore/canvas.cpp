@@ -58,6 +58,7 @@ Canvas::Canvas(QWidget* parent)
       setAttribute(Qt::WA_InputMethodEnabled);
       setAttribute(Qt::WA_KeyCompression);
       setAttribute(Qt::WA_StaticContents);
+      setAutoFillBackground(true);
 
       navigator        = 0;
       _score           = 0;
@@ -411,6 +412,32 @@ void Canvas::mouseMoveEvent(QMouseEvent* ev)
 
 void Canvas::mouseMoveEvent1(QMouseEvent* ev)
       {
+      if (dragCanvasState) {
+            QPoint d = ev->pos() - _matrix.map(startMove).toPoint();
+            int dx   = d.x();
+            int dy   = d.y();
+            QApplication::sendPostedEvents(this, 0);
+
+            _matrix.setMatrix(_matrix.m11(), _matrix.m12(), _matrix.m21(),
+               _matrix.m22(), _matrix.dx()+dx, _matrix.dy()+dy);
+            imatrix = _matrix.inverted();
+            scroll(dx, dy, QRect(0, 0, width(), height()));
+//            scroll(dx, dy);
+
+            //
+            // this is necessary at least for qt4.1:
+            //
+#if 0
+            if ((dx > 0 || dy < 0) && navigator->isVisible()) {
+	            QRect r(navigator->geometry());
+            	r.translate(dx, dy);
+            	update(r);
+                  updateNavigator(false);
+                  }
+#endif
+            return;
+            }
+
       QPointF p = imatrix.map(QPointF(ev->pos()));
       if (state == NOTE_ENTRY) {
             _score->addRefresh(shadowNote->abbox());
@@ -425,29 +452,6 @@ void Canvas::mouseMoveEvent1(QMouseEvent* ev)
 
       QPointF delta = p - startMove;
 
-      if (dragCanvasState) {
-            QPoint d = ev->pos() - _matrix.map(startMove).toPoint();
-            int dx   = d.x();
-            int dy   = d.y();
-            QApplication::sendPostedEvents(this, 0);
-
-            _matrix.setMatrix(_matrix.m11(), _matrix.m12(), _matrix.m21(),
-               _matrix.m22(), _matrix.dx()+dx, _matrix.dy()+dy);
-            imatrix = _matrix.inverted();
-            scroll(dx, dy, QRect(0, 0, width(), height()));
-
-            //
-            // this is necessary at least for qt4.1:
-            //
-            if ((dx > 0 || dy < 0) && navigator->isVisible()) {
-	            QRect r(navigator->geometry());
-            	r.translate(dx, dy);
-            	update(r);
-                  }
-
-            updateNavigator(false);
-            return;
-            }
       switch (state) {
             case NORMAL:
                   if (buttonState == 0)    // debug
@@ -531,6 +535,13 @@ void Canvas::mouseMoveEvent1(QMouseEvent* ev)
 
 void Canvas::mouseReleaseEvent(QMouseEvent* ev)
       {
+      if (dragCanvasState) {
+            dragCanvasState = false;
+            setState(state);        // reset cursor pixmap
+            mousePressed = false;
+            _score->endUndo();
+            return;
+            }
       if (!mousePressed) {
             //
             // this happens if a pulldown menu is pressed and the
@@ -564,12 +575,6 @@ void Canvas::mouseReleaseEvent(QMouseEvent* ev)
 void Canvas::mouseReleaseEvent1(QMouseEvent* /*ev*/)
       {
       buttonState = 0;
-      if (dragCanvasState) {
-            dragCanvasState = false;
-            setState(state);        // reset cursor pixmap
-            return;
-            }
-
       switch (state) {
             case DRAG_EDIT:
                   _score->addRefresh(_score->editObject->abbox());
@@ -940,6 +945,7 @@ void Canvas::paintEvent(QPaintEvent* ev)
             foreach(QRect r, vector) {
                   // refresh a little more:
                   rr = r.adjusted(-dx, -dy, 2 * dx, 2 * dy);
+// printf("   paintEvent() %d %d %d %d\n", rr.x(), rr.y(), rr.width(), rr.height());
                   paint(rr);
                   }
             }

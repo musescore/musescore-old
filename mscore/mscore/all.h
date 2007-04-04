@@ -74,5 +74,7 @@
 #include <QtGui/QStatusBar>
 #include <QtGui/QSplashScreen>
 #include <QtGui/QPushButton>
+#include <QtGui/QStylePainter>
+#include <QtGui/QStyleOptionButton>
 #endif
 
