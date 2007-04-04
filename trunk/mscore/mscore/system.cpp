@@ -539,6 +539,7 @@ void System::setInstrumentName(int idx)
 
 void System::draw(QPainter& p)
       {
+printf("System draw\n");
       p.translate(pos());
 
       if (barLine /*&& barLine->bbox().intersects(f)*/)
