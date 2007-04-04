@@ -400,7 +400,7 @@ void Canvas::mouseMoveEvent(QMouseEvent* ev)
       mouseMoveEvent1(ev);
       if (dragCanvasState)
            ;
-      else if (state == LASSO || state == DRAG_EDIT)
+      else if (state == LASSO || state == DRAG_EDIT || state == NOTE_ENTRY)
             _score->end1();
       else
             _score->endCmd(false);      // update display but dont end undo
