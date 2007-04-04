@@ -422,19 +422,16 @@ void Canvas::mouseMoveEvent1(QMouseEvent* ev)
                _matrix.m22(), _matrix.dx()+dx, _matrix.dy()+dy);
             imatrix = _matrix.inverted();
             scroll(dx, dy, QRect(0, 0, width(), height()));
-//            scroll(dx, dy);
 
             //
             // this is necessary at least for qt4.1:
             //
-#if 0
             if ((dx > 0 || dy < 0) && navigator->isVisible()) {
 	            QRect r(navigator->geometry());
             	r.translate(dx, dy);
             	update(r);
-                  updateNavigator(false);
                   }
-#endif
+            updateNavigator(false);
             return;
             }
 
