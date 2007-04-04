@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf8"?>
 <museScore version="1.0">
-  <Geometry x="53" y="0" w="1061" h="931" />
+  <Geometry x="0" y="0" w="1913" h="1135" />
   <Spatium>1.62</Spatium>
   <Division>480</Division>
   <Mag>1.83406</Mag>
-  <xoff>-5078.09</xoff>
-  <yoff>-566.07</yoff>
+  <xoff>-2928.09</xoff>
+  <yoff>-949.07</yoff>
   <Style>
     <staffUpperBorder>8</staffUpperBorder>
     <staffLowerBorder>4</staffLowerBorder>
@@ -7793,10 +7793,36 @@ p, li { white-space: pre-wrap; }
         </Rest>
       </Measure>
     <Measure number="47">
+      <Chord>
+        <ticklen>480</ticklen>
+        <Note>
+          <tick>0</tick>
+          <pitch>57</pitch>
+          </Note>
+        <Note>
+          <tick>0</tick>
+          <pitch>65</pitch>
+          </Note>
+        </Chord>
       <Rest>
-        <ticklen>1920</ticklen>
+        <ticklen>480</ticklen>
         <BeamMode>4</BeamMode>
         </Rest>
+      <Rest>
+        <ticklen>480</ticklen>
+        <BeamMode>4</BeamMode>
+        </Rest>
+      <Chord>
+        <ticklen>480</ticklen>
+        <Note>
+          <tick>0</tick>
+          <pitch>57</pitch>
+          </Note>
+        <Note>
+          <tick>0</tick>
+          <pitch>65</pitch>
+          </Note>
+        </Chord>
       </Measure>
     <Measure number="48">
       <Rest>
@@ -8156,6 +8182,6 @@ p, li { white-space: pre-wrap; }
         </Rest>
       </Measure>
     </Staff>
-  <cursorStaff>0</cursorStaff>
+  <cursorStaff>1</cursorStaff>
   <cursorVoice>0</cursorVoice>
   </museScore>

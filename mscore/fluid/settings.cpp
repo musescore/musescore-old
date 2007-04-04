@@ -19,11 +19,8 @@
  */
 
 #include "priv.h"
-// #include "sys.h"
 #include "hash.h"
 #include "synth.h"
-// #include "cmd.h"
-// #include "mdriver.h"
 #include "settings.h"
 
 /* maximum allowed components of a settings variable (separated by '.') */
