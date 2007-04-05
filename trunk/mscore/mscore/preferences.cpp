@@ -213,8 +213,8 @@ void Preferences::write()
       xml.tag("showSplashScreen", showSplashScreen);
 
       writeShortcuts(xml);
-      xml.etag("Preferences");
-      xml.etag("museScore");
+      xml.etag();
+      xml.etag();
       f.close();
       }
 
@@ -886,7 +886,7 @@ void writeShortcuts(Xml& xml)
                         }
                   }
             }
-      xml.etag("Shortcuts");
+      xml.etag();
       }
 
 //---------------------------------------------------------

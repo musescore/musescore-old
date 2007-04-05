@@ -1467,6 +1467,10 @@ void Score::pasteStaff(const QMimeData* ms)
 
 void Score::cmdReplaceElements(Measure* sm, Measure* dm, int staffIdx)
       {
+      //
+      // TODO: handle special cases: sm->tickLen() != ds->tickLen()
+      //
+
       select(0, 0, 0);
       // clear staff in destination Measure
       for (Segment* s = dm->first(); s;) {
@@ -1484,22 +1488,22 @@ void Score::cmdReplaceElements(Measure* sm, Measure* dm, int staffIdx)
       // add src elements to destination
       int srcTickOffset = sm->tick();
       int dstTickOffset = dm->tick();
+
       for (Segment* s = sm->first(); s; s = s->next()) {
             int startTrack = staffIdx * VOICES;
             int endTrack   = startTrack + VOICES;
+            int tick       = s->tick() - srcTickOffset + dstTickOffset;
+            Segment* ns    = dm->findSegment((Segment::SegmentType)s->subtype(), tick);
+            if (ns == 0) {
+                  ns = dm->createSegment((Segment::SegmentType)s->subtype(), tick);
+                  undoAddElement(ns);
+                  }
             for (int t = startTrack; t < endTrack; ++t) {
                   Element* e = s->element(t);
                   if (!e || !e->isChordRest())
                         continue;
-                  int tick = e->tick();
-                  if (tick)
-                        tick = tick - srcTickOffset + dstTickOffset;
-                  Segment* ns = dm->findSegment((Segment::SegmentType)s->subtype(), tick);
-                  if (ns == 0) {
-                        ns = dm->createSegment((Segment::SegmentType)s->subtype(), tick);
-                        undoAddElement(ns);
-                        }
                   e->setParent(ns);
+                  e->setTick(tick);
                   undoAddElement(e);
                   e->setSelected(false);
                   if (e->type() == REST)

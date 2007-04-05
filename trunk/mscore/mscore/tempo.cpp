@@ -306,7 +306,7 @@ void TempoList::write(Xml& xml) const
             xml.tag("relTempo", _relTempo);
       for (ciTEvent i = begin(); i != end(); ++i)
             i->second->write(xml, i->first);
-      xml.etag("tempolist");
+      xml.etag();
       }
 
 //---------------------------------------------------------
@@ -349,7 +349,7 @@ void TEvent::write(Xml& xml, int at) const
       xml.stag(QString("tempo at=\"%1\"").arg(at));
       xml.tag("tick", tick);
       xml.tag("val", tempo);
-      xml.etag("tempo");
+      xml.etag();
       }
 
 //---------------------------------------------------------

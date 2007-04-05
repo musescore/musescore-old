@@ -107,7 +107,7 @@ void Trill::write(Xml& xml) const
       {
       xml.stag("Trill");
       SLine::writeProperties(xml);
-      xml.etag("Trill");
+      xml.etag();
       }
 
 //---------------------------------------------------------

@@ -1098,8 +1098,44 @@ mscore <Optionen> <Dateiname>
             \stopnarrower
 
 \section{Symbole}
+      Symbole können von der Symbolpalette auf die Partitur gezogen werden.
 
       \Screen{symbols}{Symbole}
+
+      Symbole verhalten sich je nach ihrem Anker unterschiedlich. Wird ein
+      Symbol verschoben, dann merkt sich \M\ nicht die absolute Position des
+      Symbols, sondern die Position relativ zum Anker. Verschiebt sich der
+      Anker infolge einer Layoutänderung, dann verschiebt sich das Symbol
+      entsprechend mit.
+
+      \startnarrower[left]
+      \starttabulate[|l|p|]
+      \NC\bf Seite \NC
+            Das Symbol ist einem Takt zugeordnet der bestimmt, auf welcher
+            Seite das Symbol erscheint. Der Anker des Symbols ist die linke
+            obere Seitenecke.
+            \NC\MR
+      \NC\bf Zeit \NC
+            Der Anker des Symbols ist eine Zeitposition in einer bestimmten
+            Notenzeile. Eine Zeitposition ist die Position einer Note oder einer
+            Pause.
+            \NC\MR
+      \NC\bf Note \NC
+            Das Symbol ist hier einem Notenkopf zugeordnet. Wenn sich die Position
+            des Notenkopfes ändert, dann verschiebt sich auch das Symbol
+            entsprechend.
+            \NC\MR
+      \NC\bf System \NC
+            Das Symbol ist einem System zugeordnet.
+            \NC\MR
+      \stoptabulate
+      \stopnarrower
+
+      \subsection{Selbstdefinierte Symbole}
+
+      Die Symbolpalette kann um selbstdefinierte Symbole erweitert werden.
+      Die Symbole müssen im SVG-Format (Scalable Vector Grafik) vorliegen.
+
 
 \section{Element Attribute}
       Fast alle auf dem Notenblatt dargestellten Elemente haben ein Kontextmenü, welches

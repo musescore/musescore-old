@@ -112,7 +112,7 @@ void Pedal::write(Xml& xml) const
       {
       xml.stag("Pedal");
       SLine::writeProperties(xml);
-      xml.etag("Pedal");
+      xml.etag();
       }
 
 //---------------------------------------------------------

@@ -44,6 +44,7 @@ const char* elementNames[] = {
       "Stem", "Line", "SystemBracket",
       "Accidental", "Note",
       "Clef", "KeySig", "TimeSig", "Rest",
+      "Image",
       "Tie",
       "Attribute", "Dynamic", "Page", "Beam", "Hook", "Lyrics",
       "Tuplet", "VSpacer",
@@ -320,7 +321,7 @@ void Element::write(Xml& xml) const
       {
       xml.stag(name());
       Element::writeProperties(xml);
-      xml.etag(name());
+      xml.etag();
       }
 
 //---------------------------------------------------------
@@ -902,7 +903,7 @@ QByteArray Element::mimeData(const QPointF& dragOffset) const
       if (!dragOffset.isNull())
             xml.tag("dragOffset", dragOffset);
       write(xml);
-      xml.etag("Element");
+      xml.etag();
       buffer.close();
       return buffer.buffer();
       }

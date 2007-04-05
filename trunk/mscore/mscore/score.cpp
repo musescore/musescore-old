@@ -286,7 +286,7 @@ void Score::write(Xml& xml)
                   m->write(xml, measureNumber++, staff);
                   xml.curTick = m->tick() + sigmap->ticksMeasure(m->tick());
                   }
-            xml.etag("Staff");
+            xml.etag();
             }
       }
 

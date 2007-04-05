@@ -582,7 +582,7 @@ void PageFormat::write(Xml& xml)
             xml.tag("right-margin",  evenRightMargin * t);
             xml.tag("top-margin",    evenTopMargin * t);
             xml.tag("bottom-margin", evenBottomMargin * t);
-            xml.etag("page-margins");
+            xml.etag();
             type = "odd";
             }
       xml.stag(QString("page-margins type=\"%1\"").arg(type));
@@ -590,8 +590,8 @@ void PageFormat::write(Xml& xml)
       xml.tag("right-margin",  oddRightMargin * t);
       xml.tag("top-margin",    oddTopMargin * t);
       xml.tag("bottom-margin", oddBottomMargin * t);
-      xml.etag("page-margins");
+      xml.etag();
 
-      xml.etag("page-layout");
+      xml.etag();
       }
 

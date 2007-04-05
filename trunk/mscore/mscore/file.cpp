@@ -454,7 +454,7 @@ void StaffLines::write(Xml& xml) const
       xml.stag("Staff");
       xml.tag("lines", lines);
       Element::writeProperties(xml);
-      xml.etag("Staff");
+      xml.etag();
       }
 
 //---------------------------------------------------------
@@ -489,7 +489,7 @@ void Symbol::write(Xml& xml) const
       xml.tag("x", pos().x());
       xml.tag("y", pos().y());
       Element::writeProperties(xml);
-      xml.etag("Symbol");
+      xml.etag();
       }
 
 //---------------------------------------------------------
@@ -629,7 +629,7 @@ bool SaveStyle::saver()
 
       ::saveStyle(xml);
 
-      xml.etag("museScore");
+      xml.etag();
       return false;
       }
 
@@ -658,7 +658,7 @@ bool MuseScore::saveFile(QFile* f)
       xml.tag("cursorStaff", cis->staff);
       xml.tag("cursorVoice", cis->voice);
 
-      xml.etag("museScore");
+      xml.etag();
       if (f->error() != QFile::NoError) {
             QString s = QString("Write File failed: ") + f->errorString();
             QMessageBox::critical(this, tr("MuseScore: Write File"), s);

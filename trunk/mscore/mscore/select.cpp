@@ -444,7 +444,7 @@ QByteArray Selection::staffMimeData() const
                         break;
                   m->write(xml, 0, staffIdx);
                   }
-            xml.etag("Staff");
+            xml.etag();
             }
       buffer.close();
       return buffer.buffer();

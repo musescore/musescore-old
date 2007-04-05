@@ -48,6 +48,7 @@ enum ElementType {
       STEM, LINE, BRACKET,
       ACCIDENTAL, NOTE,
       CLEF, KEYSIG, TIMESIG, REST,
+      IMAGE,
       TIE,
       ATTRIBUTE, DYNAMIC, PAGE, BEAM, HOOK, LYRICS,
       TUPLET, VSPACER,

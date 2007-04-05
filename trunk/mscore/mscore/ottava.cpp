@@ -159,7 +159,7 @@ void Ottava::write(Xml& xml) const
       {
       xml.stag("Ottava");
       SLine::writeProperties(xml);
-      xml.etag("Ottava");
+      xml.etag();
       }
 
 //---------------------------------------------------------

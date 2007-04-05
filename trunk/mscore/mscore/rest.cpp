@@ -182,7 +182,7 @@ void Rest::write(Xml& xml) const
       ChordRest::writeProperties(xml);
       if (_move)
             xml.tag("move", _move);
-      xml.etag("Rest");
+      xml.etag();
       }
 
 //---------------------------------------------------------

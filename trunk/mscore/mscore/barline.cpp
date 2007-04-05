@@ -151,7 +151,7 @@ void BarLine::write(Xml& xml) const
       else {
             xml.stag("BarLine");
             Element::writeProperties(xml);
-            xml.etag("BarLine");
+            xml.etag();
             }
       }
 

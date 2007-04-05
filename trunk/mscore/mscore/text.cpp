@@ -344,7 +344,7 @@ void Text::write(Xml& xml, const char* name) const
             return;
       xml.stag(name);
       writeProperties(xml);
-      xml.etag(name);
+      xml.etag();
       }
 
 //---------------------------------------------------------
@@ -732,7 +732,7 @@ void TempoText::write(Xml& xml) const
       xml.stag("Tempo");
       xml.tag("tempo", _tempo);
       Text::writeProperties(xml);
-      xml.etag("Tempo");
+      xml.etag();
       }
 
 //---------------------------------------------------------

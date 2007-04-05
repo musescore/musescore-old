@@ -149,7 +149,7 @@ void TimeSig::write(Xml& xml) const
                         xml.tag("nom4", z4);
                   }
             }
-      xml.etag("TimeSig");
+      xml.etag();
       }
 
 //---------------------------------------------------------

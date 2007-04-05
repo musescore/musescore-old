@@ -225,7 +225,7 @@ void Staff::write(Xml& xml) const
       foreach(const BracketItem& i, _brackets) {
             xml.tagE("bracket type=\"%d\" span=\"%d\"", i._bracket, i._bracketSpan);
             }
-      xml.etag("Staff");
+      xml.etag();
       }
 
 //---------------------------------------------------------

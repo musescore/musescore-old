@@ -26,7 +26,7 @@
 
 Xml::Xml()
       {
-      level = 0;
+      stack.clear();
       curTick = 0;
       }
 
@@ -34,7 +34,7 @@ Xml::Xml(QIODevice* device)
    : QTextStream(device)
       {
       setCodec("utf8");
-      level = 0;
+      stack.clear();
       curTick = 0;
       }
 
@@ -44,6 +44,7 @@ Xml::Xml(QIODevice* device)
 
 void Xml::putLevel()
       {
+      int level = stack.size();
       for (int i = 0; i < level * 2; ++i)
             *this << ' ';
       }
@@ -66,7 +67,7 @@ void Xml::stag(const QString& s)
       {
       putLevel();
       *this << '<' << s << '>' << endl;
-      ++level;
+      stack.append(s.split(' ')[0]);
       }
 
 //---------------------------------------------------------
@@ -74,11 +75,10 @@ void Xml::stag(const QString& s)
 //    </mops>
 //---------------------------------------------------------
 
-void Xml::etag(const char* s)
+void Xml::etag()
       {
       putLevel();
-      *this << "</" << s << '>' << endl;
-      --level;
+      *this << "</" << stack.takeLast() << '>' << endl;
       }
 
 //---------------------------------------------------------

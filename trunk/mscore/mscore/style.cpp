@@ -231,7 +231,7 @@ void TextStyle::write(Xml& xml) const
             xml.tag("xoffset", xoff);
             xml.tag("yoffset", yoff);
             }
-      xml.etag("TextStyle");
+      xml.etag();
       }
 
 //---------------------------------------------------------
@@ -499,7 +499,7 @@ void saveStyle(Xml& xml)
       xml.tag("measureNumberAllStaffs", style->measureNumberAllStaffs);
       xml.tag("measureNumberSystem",    style->measureNumberSystem);
 
-      xml.etag("Style");
+      xml.etag();
       }
 
 

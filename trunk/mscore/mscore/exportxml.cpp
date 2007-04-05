@@ -88,7 +88,7 @@ void Attributes::doAttr(Xml& xml, bool attr)
             inAttributes = true;
             }
       else if (inAttributes && !attr) {
-            xml.etag("attributes");
+            xml.etag();
             inAttributes = false;
             }
       }
@@ -109,7 +109,7 @@ void Attributes::start()
 void Attributes::stop(Xml& xml)
       {
       if (inAttributes) {
-            xml.etag("attributes");
+            xml.etag();
             inAttributes = false;
             }
       }
@@ -219,7 +219,7 @@ void Notations::tag(Xml& xml)
 void Notations::etag(Xml& xml)
       {
       if (notationsPrinted)
-            xml.etag("notations");
+            xml.etag();
       notationsPrinted = false;
       }
 
@@ -241,7 +241,7 @@ void Articulations::tag(Xml& xml)
 void Articulations::etag(Xml& xml)
       {
       if (articulationsPrinted)
-            xml.etag("articulations");
+            xml.etag();
       articulationsPrinted = false;
       }
 
@@ -263,7 +263,7 @@ void Ornaments::tag(Xml& xml)
 void Ornaments::etag(Xml& xml)
       {
       if (ornamentsPrinted)
-            xml.etag("ornaments");
+            xml.etag();
       ornamentsPrinted = false;
       }
 
@@ -890,7 +890,7 @@ void ExportMusicXml::bar(const BarLine* bar, const Volta* volta, const QString& 
                         break;
                   }
             }
-      xml.etag("barline");
+      xml.etag();
       }
 
 //---------------------------------------------------------
@@ -963,7 +963,7 @@ bool ExportMusicXml::saver()
                         }
                   }
             }
-      xml.etag("work");
+      xml.etag();
 
       xml.stag("identification");
       for (iElement ie = el->begin(); ie != el->end(); ++ie) {
@@ -988,8 +988,8 @@ bool ExportMusicXml::saver()
       xml.stag("encoding");
       xml.tag("software", QString("MuseScore ") + QString(VERSION));
       xml.tag("encoding-date", QDate::currentDate().toString(Qt::ISODate));
-      xml.etag("encoding");
-      xml.etag("identification");
+      xml.etag();
+      xml.etag();
 
       xml.stag("part-list");
       const QList<Part*>* il = score->parts();
@@ -1000,16 +1000,16 @@ bool ExportMusicXml::saver()
 
             xml.stag(QString("score-instrument id=\"P%1-I%2\"").arg(idx+1).arg(3));
             xml.tag("instrument-name", part->longName().toPlainText());
-            xml.etag("score-instrument");
+            xml.etag();
 
             xml.stag(QString("midi-instrument id=\"P%1-I%2\"").arg(idx+1).arg(3));
             xml.tag("midi-channel", part->midiChannel() + 1);
             xml.tag("midi-program", part->midiProgram() + 1);
-            xml.etag("midi-instrument");
+            xml.etag();
 
-            xml.etag("score-part");
+            xml.etag();
             }
-      xml.etag("part-list");
+      xml.etag();
 
       for (int idx = 0; idx < il->size(); ++idx) {
             Part* part = il->at(idx);
@@ -1237,12 +1237,12 @@ bool ExportMusicXml::saver()
                   moveToTick(m->tick() + m->tickLen());
                   BarLine * b = m->barLine(score->staff(part));
                   bar(b, volta, "right");
-                  xml.etag("measure");
+                  xml.etag();
                   }
-            xml.etag("part");
+            xml.etag();
             }
 
-      xml.etag("score-partwise");
+      xml.etag();
 
       return f.error() != QFile::NoError;
       }
@@ -1257,13 +1257,13 @@ void ExportMusicXml::moveToTick(int t)
             attr.doAttr(xml, false);
             xml.stag("backup");
             xml.tag("duration", tick - t);
-            xml.etag("backup");
+            xml.etag();
             }
       else if (t > tick) {
             attr.doAttr(xml, false);
             xml.stag("forward");
             xml.tag("duration", t - tick);
-            xml.etag("forward");
+            xml.etag();
             }
       tick = t;
       }
@@ -1299,7 +1299,7 @@ void ExportMusicXml::timesig(TimeSig* tsig)
       if (z4) z += QString("+%1").arg(z4);
       xml.tag("beats", z);
       xml.tag("beat-type", n);
-      xml.etag("time");
+      xml.etag();
       }
 
 //---------------------------------------------------------
@@ -1312,7 +1312,7 @@ void ExportMusicXml::keysig(int key)
       xml.stag("key");
       xml.tag("fifths", key);
       xml.tag("mode", "major");
-      xml.etag("key");
+      xml.etag();
       }
 
 //---------------------------------------------------------
@@ -1332,7 +1332,7 @@ void ExportMusicXml::clef(int staff, int clef)
       xml.tag("line", line);
       if (clefTable[clef].octChng)
             xml.tag("clef-octave-change", clefTable[clef].octChng);
-      xml.etag("clef");
+      xml.etag();
       }
 
 //---------------------------------------------------------
@@ -1526,7 +1526,7 @@ void ExportMusicXml::chord(Chord* chord, int staff, const LyricsList* ll)
             if (alter)
                   xml.tag("alter", alter);
             xml.tag("octave", octave);
-            xml.etag("pitch");
+            xml.etag();
 
             int acc = ACC_NONE;
             bool editorial = false;
@@ -1590,7 +1590,7 @@ void ExportMusicXml::chord(Chord* chord, int staff, const LyricsList* ll)
                   xml.stag("time-modification");
                   xml.tag("actual-notes", actNotes);
                   xml.tag("normal-notes", nrmNotes);
-                  xml.etag("time-modification");
+                  xml.etag();
                   }
 
             // no stem for whole notes and beyond
@@ -1632,13 +1632,13 @@ void ExportMusicXml::chord(Chord* chord, int staff, const LyricsList* ll)
                   notations.tag(xml);
                   xml.stag("technical");
                   xml.tag("fingering", f->getText());
-                  xml.etag("technical");
+                  xml.etag();
                   }
             notations.etag(xml);
             // write lyrics (only for first note)
             if ((i == nl->begin()) && ll)
                   lyrics(ll);
-            xml.etag("note");
+            xml.etag();
             }
       }
 
@@ -1687,7 +1687,7 @@ void ExportMusicXml::rest(Rest* rest, int staff)
             xml.stag("time-modification");
             xml.tag("actual-notes", actNotes);
             xml.tag("normal-notes", nrmNotes);
-            xml.etag("time-modification");
+            xml.etag();
             }
 
       if (staff)
@@ -1697,7 +1697,7 @@ void ExportMusicXml::rest(Rest* rest, int staff)
       tupletStartStop(rest, notations, xml);
       notations.etag(xml);
 
-      xml.etag("note");
+      xml.etag();
       }
 
 //---------------------------------------------------------
@@ -1720,12 +1720,12 @@ static void directionTag(Xml& xml, Attributes& attr, Element* el = 0)
 
 static void directionETag(Xml& xml, int staff, int offs = 0)
       {
-      xml.etag("direction-type");
+      xml.etag();
       if (offs)
             xml.tag("offset", offs);
       if (staff)
             xml.tag("staff", staff);
-      xml.etag("direction");
+      xml.etag();
       }
 
 //---------------------------------------------------------
@@ -1738,14 +1738,14 @@ void ExportMusicXml::tempoText(TempoText* text, int staff)
       xml.stag(QString("direction placement=\"%1\"").arg((text->userOff().y() > 0.0) ? "below" : "above"));
       xml.stag("direction-type");
       xml.tag("words", text->getText());
-      xml.etag("direction-type");
+      xml.etag();
       int offs = text->mxmlOff();
       if (offs)
             xml.tag("offset", offs);
       if (staff)
             xml.tag("staff", staff);
       xml.tagE("sound tempo=\"%d\"", (int) text->tempo());
-      xml.etag("direction");
+      xml.etag();
       }
 
 //---------------------------------------------------------
@@ -1846,12 +1846,12 @@ void ExportMusicXml::dynamic(Dynamic* dyn, int staff)
        || t == "rf" || t == "rfz" || t == "sfz" || t == "sffz" || t == "fz") {
             xml.stag("dynamics");
             xml.tagE(t.toLatin1().data());
-            xml.etag("dynamics");
+            xml.etag();
             }
       else if (t == "m" || t == "z") {
             xml.stag("dynamics");
             xml.tag("other-dynamics", t);
-            xml.etag("dynamics");
+            xml.etag();
             }
       else
             xml.tag("words", t);
@@ -1898,7 +1898,7 @@ void ExportMusicXml::lyrics(const LyricsList* ll)
                         }
                   xml.tag("syllabic", s);
                   xml.tag("text", (*i)->getText());
-                  xml.etag("lyric");
+                  xml.etag();
                   }
             }
       }
