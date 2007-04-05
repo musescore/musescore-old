@@ -32,8 +32,20 @@ class Image : public Element {
       QString _path;
       QSvgRenderer* doc;
       QImage buffer;
-      QSize sz;
+      QSizeF sz;
       bool _dirty;
+
+      QRectF r1, r2, bbr1, bbr2;     // "grips" for dragging
+
+      enum { NORMAL, DRAG1, DRAG2 };
+      int mode;
+
+      virtual bool startEdit(QMatrix&, const QPointF&);
+      virtual bool edit(QKeyEvent*);
+      virtual bool startEditDrag(Viewer*, const QPointF&);
+      virtual bool editDrag(Viewer*, QPointF*, const QPointF&);
+      virtual bool endEditDrag();
+      virtual void endEdit();
 
    public:
       Image(Score*);

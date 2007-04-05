@@ -306,13 +306,20 @@ void Canvas::lassoSelect()
 void Score::searchSelectedElements()
       {
       ElementList l;
+      for(Measure* m = _layout->first(); m; m = m->next())
+            m->collectElements(l);
       for (iPage ip = _layout->pages()->begin(); ip != _layout->pages()->end(); ++ip)
             (*ip)->collectElements(l);
       sel->clear();
       foreach(Element* e, l) {
-            if (e->selected())
+            if (e->type() == IMAGE)
+                  printf("==========================IMAGE\n");
+            if (e->selected()) {
+      printf("==============================selected %d <%s>\n", l.size(), e->name());
                   sel->append(e);
+                  }
             }
+printf("===================================END SEARCH\n");
       sel->updateState();
       emit selectionChanged(int(sel->state));
       }

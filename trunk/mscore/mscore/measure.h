@@ -233,6 +233,7 @@ class Measure : public Element {
       Segment* createSegment(Segment::SegmentType st, int t);
       void setEndBarLine(BarLine* barLine);
       void cmdRemoveEmptySegment(Segment* s);
+      void collectElements(QList<Element*>& el);
       };
 
 //---------------------------------------------------------

@@ -59,6 +59,8 @@
 #include "viewer.h"
 #include "volta.h"
 #include "image.h"
+#include "hook.h"
+#include "beam.h"
 
 //---------------------------------------------------------
 //   y2pitch
@@ -2527,5 +2529,100 @@ void Measure::read(QDomNode node)
             else
                   domError(node);
             }
+      }
+
+//---------------------------------------------------------
+//   collectElements
+//---------------------------------------------------------
+
+void Measure::collectElements(QList<Element*>& el)
+      {
+      el.append(this);     // draw selection
+      int staves = score()->nstaves();
+      int tracks = staves * VOICES;
+      for (Segment* s = first(); s; s = s->next()) {
+            for (int staffIdx = 0; staffIdx < staves; ++staffIdx) {
+                  if (!score()->staff(staffIdx)->show())
+                        continue;
+                  LyricsList* ll = s->lyricsList(staffIdx);
+                  foreach(Lyrics* l, *ll) {
+                        if (l)
+                              el.append(l);
+                        }
+                  }
+            for (int track = 0; track < tracks; ++track) {
+                  Staff* staff = score()->staff(track / VOICES);
+                  if (!staff->show())
+                        continue;
+                  Element* e = s->element(track);
+                  if (e == 0)
+                        continue;
+                  if (e->isChordRest()) {
+                        if (e->type() == CHORD) {
+                              Chord* chord = (Chord*)e;
+                              if (chord->hook())
+                                    el.append(chord->hook());
+                              if (chord->stem())
+                                    el.append(chord->stem());
+                              foreach(HelpLine* h, *chord->helpLineList())
+                                    el.append(h);
+
+                              const NoteList* nl = chord->noteList();
+                              for (ciNote in = nl->begin(); in != nl->end(); ++in) {
+                                    Note* note = in->second;
+                                    el.append(note);
+                                    if (note->tieFor())
+                                          el.append(note->tieFor());
+                                    foreach(Text* f, note->fingering())
+                                          el.append(f);
+                                    if (note->accidental())
+                                          el.append(note->accidental());
+                                    }
+                              }
+                        else
+                              el.append(e);
+                        ChordRest* cr = (ChordRest*)e;
+                        QList<NoteAttribute*>* al = cr->getAttributes();
+                        for (ciAttribute i = al->begin(); i != al->end(); ++i) {
+                              NoteAttribute* a = *i;
+                              el.append(a);
+                              }
+                        if (cr->tuplet())
+                              el.append(cr->tuplet());
+                        }
+                  else
+                        el.append(e);
+                  }
+            }
+      foreach(Element* e, _sel) {
+            if (!e->staff()->show())
+                  continue;
+            switch(e->type()) {
+                  case HAIRPIN:
+                  case OTTAVA:
+                  case PEDAL:
+                  case TRILL:
+                        ((SLine*)e)->collectElements(el);
+                        break;
+                  default:
+                        el.append(e);
+                        break;
+                  }
+            }
+      foreach(Element* e, _pel) {
+            el.append(e);
+            }
+      foreach(Beam* b, _beamList) {
+            if (b->staff()->show())
+                  el.append(b);
+            }
+      for (int staffIdx = 0; staffIdx < staves; ++staffIdx) {
+            BarLine* b = barLine(staffIdx);
+            // the system barline has no staff()
+            if (b && (!b->staff() || b->staff()->show()))
+                  el.append(b);
+            }
+      if (noText())
+            el.append(noText());
       }
 

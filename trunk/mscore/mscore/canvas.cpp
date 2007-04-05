@@ -1524,12 +1524,13 @@ void Canvas::drawElements(QPainter& p,const QList<Element*>& el)
                   p.setPen(QPen(Qt::blue, 0, Qt::SolidLine));
                   // p.drawRect(e->bbox());
                   p.drawPath(e->shape());
-
+#if 0
                   Element* seg = e->parent();
                   if (e->type() == NOTE)
                         seg = seg->parent();
                   p.setPen(QPen(Qt::red, 0, Qt::SolidLine));
                   p.drawRect(seg->bbox());
+#endif
                   }
             p.restore();
             }
