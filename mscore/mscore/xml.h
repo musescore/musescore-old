@@ -57,11 +57,13 @@ class Xml : public QTextStream {
       void tag(const char* name, const QWidget*);
       void tag(const char* name, const QRect&);
       void tag(const char* name, const QPointF&);
+      void tag(const char* name, const QSizeF&);
 
       static QString xmlString(const QString&);
       };
 
 extern QPointF readPoint(QDomNode);
+extern QSizeF readSize(QDomNode);
 extern void domError(QDomNode node);
 #endif
 

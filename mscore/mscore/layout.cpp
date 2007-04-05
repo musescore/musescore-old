@@ -201,6 +201,8 @@ void ScoreLayout::doLayout()
 
       QRectF r;
       el.clear();
+      for(Measure* m = first(); m; m = m->next())
+            m->collectElements(el);
       for (iPage ip = _pages->begin(); ip != _pages->end(); ++ip) {
             Page* page = *ip;
             r |= page->abbox();

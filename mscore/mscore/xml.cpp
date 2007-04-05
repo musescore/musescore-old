@@ -198,6 +198,12 @@ void Xml::tag(const char* const name, const QPointF& p)
       *this << QString("<%1 x=\"%2\" y=\"%3\"/>\n").arg(name).arg(p.x()).arg(p.y());
       }
 
+void Xml::tag(const char* const name, const QSizeF& p)
+      {
+      putLevel();
+      *this << QString("<%1 w=\"%2\" h=\"%3\"/>\n").arg(name).arg(p.width()).arg(p.height());
+      }
+
 //---------------------------------------------------------
 //   xmlString
 //---------------------------------------------------------
@@ -223,6 +229,19 @@ QPointF readPoint(QDomNode node)
       QPointF p;
       p.setX(e.attribute("x", "0.0").toDouble());
       p.setY(e.attribute("y", "0.0").toDouble());
+      return p;
+      }
+
+//---------------------------------------------------------
+//   readSize
+//---------------------------------------------------------
+
+QSizeF readSize(QDomNode node)
+      {
+      QDomElement e = node.toElement();
+      QSizeF p;
+      p.setWidth(e.attribute("w", "0.0").toDouble());
+      p.setHeight(e.attribute("h", "0.0").toDouble());
       return p;
       }
 

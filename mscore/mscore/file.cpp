@@ -921,6 +921,11 @@ void Score::printFile()
             Page* page = *ip;
             el.clear();
             page->collectElements(el);
+            foreach(System* system, *page->systems()) {
+                  foreach(Measure* m, *system->measures()) {
+                        m->collectElements(el);
+                        }
+                  }
             for (int i = 0; i < el.size(); ++i) {
                   Element* e = el.at(i);
                   if (!e->visible())

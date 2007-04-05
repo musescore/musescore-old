@@ -846,7 +846,8 @@ void Score::cmdAddImage(Image* s, const QPointF& pos, const QPointF& off)
                               delete s;
                               return;
                               }
-                        s->setPos(pos + off);
+                        s->setPos(0.0, 0.0);
+                        s->setUserOff((pos - page->pos() - off) / _spatium);
                         s->setStaff(0);
                         s->setParent(m);
                         foundPage = true;
