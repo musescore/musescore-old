@@ -520,7 +520,7 @@ void Note::write(Xml& xml) const
             _tieFor->write(xml);
       if (_move)
             xml.tag("move", _move);
-      xml.etag("Note");
+      xml.etag();
       }
 
 //---------------------------------------------------------

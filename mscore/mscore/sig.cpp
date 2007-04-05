@@ -268,7 +268,7 @@ void SigList::write(Xml& xml) const
       xml.stag("siglist");
       for (ciSigEvent i = begin(); i != end(); ++i)
             i->second.write(xml, i->first);
-      xml.etag("siglist");
+      xml.etag();
       }
 
 //---------------------------------------------------------
@@ -307,7 +307,7 @@ void SigEvent::write(Xml& xml, int tick) const
             }
       xml.tag("nom", nominator);
       xml.tag("denom", denominator);
-      xml.etag("sig");
+      xml.etag();
       }
 
 //---------------------------------------------------------

@@ -379,7 +379,7 @@ void SLine::writeProperties(Xml& xml) const
             xml.stag("Segment");
             xml.tag("off1", seg->userOff());
             xml.tag("off2", seg->userOff2());
-            xml.etag("Segment");
+            xml.etag();
             }
       }
 

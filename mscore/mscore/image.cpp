@@ -1,9 +1,9 @@
 //=============================================================================
 //  MusE Score
 //  Linux Music Score Editor
-//  $Id:$
+//  $Id: element.h,v 1.58 2006/04/12 14:58:10 wschweer Exp $
 //
-//  Copyright (C) 2002-2007 Werner Schweer (ws@seh.de)
+//  Copyright (C) 2007 Werner Schweer (ws@seh.de)
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.
@@ -18,38 +18,66 @@
 //  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //=============================================================================
 
-#include "lyrics.h"
+#include "image.h"
 #include "xml.h"
 
 //---------------------------------------------------------
-//   Lyrics
+//   Image
 //---------------------------------------------------------
 
-Lyrics::Lyrics(Score* s)
-   : Text(s)
+Image::Image(Score* s)
+   : Element(s)
       {
-      setSubtype(TEXT_LYRIC);
-      _no        = 0;
-      _syllabic  = SINGLE;
-      _separator = 0;
+      _dirty = false;
+      doc    = 0;
+      setAnchor(ANCHOR_PAGE);
+      }
+
+//---------------------------------------------------------
+//   Image
+//---------------------------------------------------------
+
+Image::~Image()
+      {
+      if (doc)
+            delete doc;
+      }
+
+Image* Image::clone() const
+      {
+      return new Image(*this);
+      }
+
+//---------------------------------------------------------
+//   draw
+//---------------------------------------------------------
+
+void Image::draw(QPainter& p)
+      {
+      if (!doc)
+            return;
+      QSize s(sz.width() * p.device()->logicalDpiX() / 120,
+              sz.height() * p.device()->logicalDpiY() / 120);
+      if (buffer.size() != s || _dirty) {
+            buffer = QImage(s, QImage::Format_ARGB32_Premultiplied);
+            buffer.fill(0x0);
+            QPainter pp(&buffer);
+            pp.setViewport(0, 0, s.width(), s.height());
+            doc->render(&pp);
+            _dirty = false;
+            }
+      p.drawImage(0, 0, buffer);
       }
 
 //---------------------------------------------------------
 //   write
 //---------------------------------------------------------
 
-void Lyrics::write(Xml& xml) const
+void Image::write(Xml& xml) const
       {
-      xml.stag("Lyrics");
-      xml.tag("data", getText());
-      if (_no)
-            xml.tag("no", _no);
-      static const char* sl[] = {
-            "single", "begin", "end", "middle"
-            };
-      if (_syllabic != SINGLE)
-            xml.tag("syllabic", sl[_syllabic]);
+      xml.stag("Image");
       Element::writeProperties(xml);
+      xml.tag("path", _path);
       xml.etag();
       }
 
@@ -57,66 +85,43 @@ void Lyrics::write(Xml& xml) const
 //   read
 //---------------------------------------------------------
 
-void Lyrics::read(QDomNode node)
+void Image::read(QDomNode node)
       {
       for (node = node.firstChild(); !node.isNull(); node = node.nextSibling()) {
             QDomElement e = node.toElement();
             if (e.isNull())
                   continue;
             QString tag(e.tagName());
-            QString val(e.text());
-            int i = val.toInt();
-            if (tag == "data")
-                  setText(val);
-            else if (tag == "no")
-                  _no = i;
-            else if (tag == "syllabic") {
-                  if (val == "single")
-                        _syllabic = SINGLE;
-                  else if (val == "begin")
-                        _syllabic = BEGIN;
-                  else if (val == "end")
-                        _syllabic = END;
-                  else if (val == "middle")
-                        _syllabic = MIDDLE;
-                  else
-                        printf("bad syllabic property\n");
-                  }
+            if (tag == "path")
+                  _path = e.text();
             else if (!Element::readProperties(node))
                   domError(node);
             }
+      setPath(_path);
       }
 
 //---------------------------------------------------------
-//   add
+//   setPath
 //---------------------------------------------------------
 
-void Lyrics::add(Element* el)
+void Image::setPath(const QString& s)
       {
-      _separator = (Line*)el;
-      }
-
-//---------------------------------------------------------
-//   remove
-//---------------------------------------------------------
-
-void Lyrics::remove(Element*)
-      {
-      _separator = 0;
-      }
-
-//---------------------------------------------------------
-//   draw
-//---------------------------------------------------------
-
-void Lyrics::draw(QPainter& p)
-      {
-      Text::draw(p);
-      if (_separator) {
-            QPointF pt(_separator->pos());
-            p.translate(pt);
-            _separator->draw(p);
-            p.translate(-pt);
+      _path = s;
+      if (doc == 0)
+            doc = new QSvgRenderer;
+      doc->load(s);
+      if (doc->isValid()) {
+            sz = doc->defaultSize();
+            _dirty = true;
             }
+      }
+
+//---------------------------------------------------------
+//   bbox
+//---------------------------------------------------------
+
+QRectF Image::bbox() const
+      {
+      return QRectF(0.0, 0.0, sz.width(), sz.height());
       }
 

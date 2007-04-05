@@ -44,6 +44,7 @@
 #include "ottava.h"
 #include "trill.h"
 #include "hairpin.h"
+#include "image.h"
 
 //---------------------------------------------------------
 //   Canvas
@@ -300,7 +301,8 @@ void Canvas::mousePressEvent(QMouseEvent* ev)
       switch (state) {
             case NOTE_ENTRY:
                   if (!(keyState & Qt::AltModifier))  // Alt+move = drag canvas
-                        _score->putNote(startMove, keyState & Qt::ShiftModifier);
+                        // _score->putNote(startMove, keyState & Qt::ShiftModifier);
+                        _score->putNote(startMove, Qt::ShiftModifier);
                   break;
 
             case NORMAL:
@@ -1123,6 +1125,16 @@ bool Canvas::dragAboveSystem(const QPointF& pos)
 
 void Canvas::dragMoveEvent(QDragMoveEvent* event)
       {
+      if (event->mimeData()->hasUrls()) {
+            QList<QUrl>ul = event->mimeData()->urls();
+            QUrl u = ul.front();
+            if (u.scheme() == "file") {
+                  QFileInfo fi(u.path());
+                  if (fi.suffix() != "svg")
+                        return;
+                  event->acceptProposedAction();
+                  }
+            }
       if (!event->mimeData()->hasFormat("application/mscore/symbol"))
             return;
 
@@ -1197,11 +1209,33 @@ void Canvas::dragMoveEvent(QDragMoveEvent* event)
 
 void Canvas::dropEvent(QDropEvent* event)
       {
-      if (!event->mimeData()->hasFormat("application/mscore/symbol")) {
+      QPointF dragOffset;
+      QPointF pos(imatrix.map(QPointF(event->pos())));
+
+      if (event->mimeData()->hasUrls()) {
+            QList<QUrl>ul = event->mimeData()->urls();
+            QUrl u = ul.front();
+            if (u.scheme() == "file") {
+                  QFileInfo fi(u.path());
+                  if (fi.suffix() != "svg")
+                        return;
+                  event->acceptProposedAction();
+                  _score->startCmd();
+                  Image* s = new Image(score());
+                  s->setPath(u.path());
+                  s->setAnchor(ANCHOR_PAGE);
+                  score()->cmdAddImage(s, pos, dragOffset);
+                  event->acceptProposedAction();
+                  score()->endCmd(true);
+                  setDropTarget(0); // this also resets dropRectangle and dropAnchor
+                  setState(NORMAL);
+                  return;
+                  }
+            }
+      else if (!event->mimeData()->hasFormat("application/mscore/symbol")) {
             printf("cannot drop this object: unknown mime type\n");
             return;
             }
-      QPointF pos(imatrix.map(QPointF(event->pos())));
 
       QByteArray data(event->mimeData()->data("application/mscore/symbol"));
       QDomDocument doc;
@@ -1212,7 +1246,6 @@ void Canvas::dropEvent(QDropEvent* event)
             return;
             }
       QDomNode node = doc.documentElement();
-      QPointF dragOffset;
       int type = Element::readType(node, &dragOffset);
 
       switch(type) {
@@ -1245,6 +1278,16 @@ void Canvas::dropEvent(QDropEvent* event)
                   Symbol* s = new Symbol(score());
                   s->read(node);
                   score()->cmdAddSymbol(s, pos, dragOffset);
+                  event->acceptProposedAction();
+                  score()->endCmd(true);
+                  }
+                  break;
+            case IMAGE:
+                  {
+                  _score->startCmd();
+                  Image* s = new Image(score());
+                  s->read(node);
+                  score()->cmdAddImage(s, pos, dragOffset);
                   event->acceptProposedAction();
                   score()->endCmd(true);
                   }
@@ -1304,6 +1347,28 @@ void Canvas::dragEnterEvent(QDragEnterEvent* event)
       {
       if (event->mimeData()->hasFormat("application/mscore/symbol"))
             event->acceptProposedAction();
+      else if (event->mimeData()->hasUrls()) {
+            QList<QUrl>ul = event->mimeData()->urls();
+            QUrl u = ul.front();
+            if (debugMode)
+                  printf("drag Url: %s\n", u.toString().toLatin1().data());
+            printf("scheme <%s> path <%s>\n", u.scheme().toLatin1().data(),
+               u.path().toLatin1().data());
+            if (u.scheme() == "file") {
+                  QFileInfo fi(u.path());
+                  if (fi.suffix() == "svg") {
+                        printf("SVG-FILE!\n");
+                        event->acceptProposedAction();
+                        }
+                  }
+            }
+      else {
+            if (debugMode) {
+                  printf("dragEnterEvent: formats:\n");
+                  foreach(QString s, event->mimeData()->formats())
+                        printf("   %s\n", s.toLatin1().data());
+                  }
+            }
       }
 
 //---------------------------------------------------------

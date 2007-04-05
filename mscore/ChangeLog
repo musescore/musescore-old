@@ -1,3 +1,9 @@
+5.4.7 (ws)
+      - implement svg images as symbols
+      - simplify Xml class interface
+      - more fixes for cut&paste of measures
+      - changed behaviour of note entry with mouse: new notes are always added
+        to chord instead of replacing it (no shift+click necessary anymore)
 2.4.7 (ws)
       - fixed drop position of line elements
 1.4.7 (ws)

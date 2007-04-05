@@ -76,5 +76,6 @@
 #include <QtGui/QPushButton>
 #include <QtGui/QStylePainter>
 #include <QtGui/QStyleOptionButton>
+#include <QtSvg/QSvgRenderer>
 #endif
 

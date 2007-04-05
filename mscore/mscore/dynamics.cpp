@@ -147,7 +147,7 @@ void Dynamic::write(Xml& xml) const
       if (subtype() == 0)
             xml.tag("data", doc->toHtml("utf8"));
       Element::writeProperties(xml);
-      xml.etag("Dynamic");
+      xml.etag();
       }
 
 //---------------------------------------------------------

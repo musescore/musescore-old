@@ -688,7 +688,7 @@ void Chord::write(Xml& xml) const
             }
       for (ciNote in = notes.begin(); in != notes.end(); ++in)
             in->second->write(xml);
-      xml.etag("Chord");
+      xml.etag();
       }
 
 //---------------------------------------------------------

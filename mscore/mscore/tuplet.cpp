@@ -293,7 +293,7 @@ void Tuplet::write(Xml& xml, int id) const
       xml.tag("actualNotes", _actualNotes);
       if (_number)
             _number->write(xml, "Number");
-      xml.etag("Tuplet");
+      xml.etag();
       }
 
 //---------------------------------------------------------

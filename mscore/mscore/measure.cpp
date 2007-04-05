@@ -58,6 +58,7 @@
 #include "layout.h"
 #include "viewer.h"
 #include "volta.h"
+#include "image.h"
 
 //---------------------------------------------------------
 //   y2pitch
@@ -986,6 +987,7 @@ void Measure::remove(Element* el)
             case OTTAVA:
             case PEDAL:
             case TRILL:
+            case IMAGE:
                   if (!_sel.remove(el)) {
                         if (!_pel.remove(el))
                               printf("Measure(%p)::remove(%s,%p) not found\n",
@@ -2201,7 +2203,7 @@ void Measure::write(Xml& xml, int no, int staff) const
                         (*i)->write(xml);
                   }
             }
-      xml.etag("Measure");
+      xml.etag();
       }
 
 //---------------------------------------------------------
@@ -2249,9 +2251,9 @@ void Measure::write(Xml&xml) const
                               (*i)->write(xml);
                         }
                   }
-            xml.etag("Staff");
+            xml.etag();
             }
-      xml.etag("Measure");
+      xml.etag();
       }
 
 //---------------------------------------------------------
@@ -2473,6 +2475,11 @@ void Measure::read(QDomNode node, int idx)
                   _endRepeat = val.toInt();
             else if (tag == "ending")
                   _ending = val.toInt();
+            else if (tag == "Image") {
+                  Image* image = new Image(score());
+                  image->read(node);
+                  add(image);
+                  }
             else
                   domError(node);
             }

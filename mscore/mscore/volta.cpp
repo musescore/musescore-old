@@ -121,7 +121,7 @@ void Volta::write(Xml& xml) const
       {
       xml.stag("Volta");
       Element::writeProperties(xml);
-      xml.etag("Volta");
+      xml.etag();
       }
 
 //---------------------------------------------------------

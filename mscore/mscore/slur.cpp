@@ -336,7 +336,7 @@ void SlurSegment::write(Xml& xml, int no) const
             xml.tag("o3", ups[2].off);
       if (!(ups[3].off.isNull()))
             xml.tag("o4", ups[3].off);
-      xml.etag("SlurSegment");
+      xml.etag();
       }
 
 //---------------------------------------------------------
@@ -754,7 +754,7 @@ void Slur::write(Xml& xml) const
       if (s2)
             xml.tag("endStaff", s2);
       SlurTie::writeProperties(xml);
-      xml.etag("Slur");
+      xml.etag();
       }
 
 //---------------------------------------------------------
@@ -1027,7 +1027,7 @@ void Tie::write(Xml& xml) const
       xml.stag("Tie");
       Element::writeProperties(xml);
       SlurTie::writeProperties(xml);
-      xml.etag("Tie");
+      xml.etag();
       }
 
 //---------------------------------------------------------

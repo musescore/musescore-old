@@ -147,7 +147,7 @@ void Part::write(Xml& xml) const
       if (!_show)
             xml.tag("show", _show);
       _instrument.write(xml);
-      xml.etag("Part");
+      xml.etag();
       }
 
 //---------------------------------------------------------
@@ -224,7 +224,7 @@ void Instrument::write(Xml& xml) const
             xml.tag("minPitch", minPitch);
       if (maxPitch < 127)
             xml.tag("maxPitch", maxPitch);
-      xml.etag("Instrument");
+      xml.etag();
       }
 
 //---------------------------------------------------------

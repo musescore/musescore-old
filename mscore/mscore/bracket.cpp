@@ -150,7 +150,7 @@ void Bracket::write(Xml& xml) const
       if (_level)
             xml.tag("level", _level);
       Element::writeProperties(xml);
-      xml.etag("Bracket");
+      xml.etag();
       }
 
 //---------------------------------------------------------

@@ -62,6 +62,7 @@ class TimeSig;
 class MidiTrack;
 class Pedal;
 class Symbol;
+class Image;
 
 struct SigEvent;
 
@@ -308,6 +309,7 @@ class Score : public QObject {
 
       void cmdAdd(Element* e, const QPointF& pos, const QPointF& dragOffset);
       void cmdAddSymbol(Symbol*, const QPointF&, const QPointF&);
+      void cmdAddImage(Image* s, const QPointF& pos, const QPointF& off);
 
       Element* cmdAddHairpin(Hairpin* atr, const QPointF& pos);
       Element* addSlur(Slur* atr, const QPointF& pos);

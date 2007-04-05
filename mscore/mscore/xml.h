@@ -28,7 +28,7 @@
 class Xml : public QTextStream {
       static const int BS = 2048;
 
-      int level;        // indentation level
+      QList<QString> stack;
       void putLevel();
 
    public:
@@ -40,7 +40,7 @@ class Xml : public QTextStream {
       void header();
 
       void stag(const QString&);
-      void etag(const char* s);
+      void etag();
 
       void tagE(const char* format, ...);
       void ntag(const char* name);

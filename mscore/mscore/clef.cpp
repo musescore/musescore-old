@@ -271,7 +271,7 @@ void ClefList::write(Xml& xml, const char* name) const
       xml.stag(name);
       for (ciClefEvent i = begin(); i != end(); ++i)
             xml.tagE("clef tick=\"%d\" idx=\"%d\"", i->first, i->second);
-      xml.etag(name);
+      xml.etag();
       }
 
 //---------------------------------------------------------

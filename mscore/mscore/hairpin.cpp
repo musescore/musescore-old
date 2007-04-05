@@ -105,7 +105,7 @@ void Hairpin::write(Xml& xml) const
       {
       xml.stag("HairPin");
       SLine::writeProperties(xml);
-      xml.etag("HairPin");
+      xml.etag();
       }
 
 //---------------------------------------------------------

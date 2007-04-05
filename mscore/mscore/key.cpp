@@ -47,7 +47,7 @@ void KeyList::write(Xml& xml, const char* name) const
       xml.stag(name);
       for (ciKeyEvent i = begin(); i != end(); ++i)
             xml.tagE("key tick=\"%d\" idx=\"%d\"", i->first, i->second);
-      xml.etag(name);
+      xml.etag();
       }
 
 //---------------------------------------------------------

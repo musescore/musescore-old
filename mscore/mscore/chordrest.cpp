@@ -145,7 +145,7 @@ void NoteAttribute::write(Xml& xml) const
       xml.stag("Attribute");
       xml.tag("idx", subtype());
       Element::writeProperties(xml);
-      xml.etag("Attribute");
+      xml.etag();
       }
 
 //---------------------------------------------------------
