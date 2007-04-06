@@ -1679,7 +1679,7 @@ printf("Port Change %d\n", buffer[0]);
                         case META_KEY_SIGNATURE:
                               {
                               //TODO_K
-                              (*cs->staff(0)->keymap())[t] = (signed char)(buffer[0]);
+//                              (*cs->staff(0)->keymap())[t] = (signed char)(buffer[0]);
                               track->setKey(buffer[0]);
                               track->setMinor(buffer[1]);
                               delete event;

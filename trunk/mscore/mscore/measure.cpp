@@ -2478,9 +2478,34 @@ void Measure::read(QDomNode node, int idx)
             else if (tag == "ending")
                   _ending = val.toInt();
             else if (tag == "Image") {
-                  Image* image = new Image(score());
-                  image->read(node);
-                  add(image);
+                  // look ahead for image type
+                  QString path;
+                  for (QDomNode n = node.firstChild(); !n.isNull(); n = n.nextSibling()) {
+                        QDomElement e = n.toElement();
+                        if (e.isNull())
+                              continue;
+                        QString tag(e.tagName());
+                        if (tag == "path") {
+                              path = e.text();
+                              break;
+                              }
+                        }
+                  Image* image = 0;
+                  if (path.endsWith(".svg"))
+                        image = new SvgImage(score());
+                  else if (path.endsWith(".jpg")
+                     || path.endsWith(".png")
+                     || path.endsWith(".xpm")
+                        ) {
+                        image = new RasterImage(score());
+                        }
+                  else {
+                        printf("unknown image format <%s>\n", path.toLatin1().data());
+                        }
+                  if (image) {
+                        image->read(node);
+                        add(image);
+                        }
                   }
             else
                   domError(node);

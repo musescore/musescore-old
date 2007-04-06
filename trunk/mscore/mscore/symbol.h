@@ -21,15 +21,14 @@
 #ifndef __SYMBOL_H__
 #define __SYMBOL_H__
 
-#include "element.h"
-#include "style.h"
+#include "bsymbol.h"
 
 //---------------------------------------------------------
 //   Symbol
 //    score symbol
 //---------------------------------------------------------
 
-class Symbol : public Element {
+class Symbol : public BSymbol {
    protected:
       int _sym;
 
@@ -37,7 +36,7 @@ class Symbol : public Element {
       Symbol(Score*);
       Symbol &operator=(const Symbol&);
 
-      virtual Symbol* clone() const { return new Symbol(*this); }
+      virtual Symbol* clone() const    { return new Symbol(*this); }
       virtual ElementType type() const { return SYMBOL; }
       void setSym(int);
       int sym() const { return _sym;  }
@@ -45,16 +44,8 @@ class Symbol : public Element {
       virtual void draw(QPainter&);
       virtual void write(Xml& xml) const;
       virtual void read(QDomNode);
-      virtual bool isMovable() const { return true; }
       virtual QRectF bbox() const;
-
-      void setAnchor(Anchor a) { setSubtype(int(a)); }
-      Anchor anchor() const    { return (Anchor)subtype(); }
       };
-
-typedef QList<Symbol*> SymbolList;
-typedef SymbolList::iterator iSymbol;
-typedef SymbolList::const_iterator ciSymbol;
 
 #endif
 

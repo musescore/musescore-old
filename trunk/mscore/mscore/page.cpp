@@ -313,7 +313,7 @@ void Page::collectElements(QList<Element*>& el)
             el.append(_pageNo);
       QList<System*>* sl = systems();
       int staves = score()->nstaves();
-      int tracks = staves * VOICES;
+//      int tracks = staves * VOICES;
 
       for (ciSystem is = sl->begin(); is != sl->end(); ++is) {
             System* s = *is;

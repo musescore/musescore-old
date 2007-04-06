@@ -1,3 +1,6 @@
+6.4.7 (ws)
+      - extend the range of accepted external symbol types to raster images
+        JPG PNG and XPM
 5.4.7 (ws)
       - implement svg images as symbols
       - simplify Xml class interface

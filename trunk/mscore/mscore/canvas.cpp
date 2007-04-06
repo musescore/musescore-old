@@ -1130,7 +1130,11 @@ void Canvas::dragMoveEvent(QDragMoveEvent* event)
             QUrl u = ul.front();
             if (u.scheme() == "file") {
                   QFileInfo fi(u.path());
-                  if (fi.suffix() != "svg")
+                  if (fi.suffix() != "svg"
+                     && fi.suffix() != "jpg"
+                     && fi.suffix() != "png"
+                     && fi.suffix() != "xpm"
+                     )
                         return;
                   event->acceptProposedAction();
                   }
@@ -1217,14 +1221,20 @@ void Canvas::dropEvent(QDropEvent* event)
             QUrl u = ul.front();
             if (u.scheme() == "file") {
                   QFileInfo fi(u.path());
-                  if (fi.suffix() != "svg")
+                  Image* s = 0;
+                  if (fi.suffix() == "svg")
+                        s = new SvgImage(score());
+                  else if (fi.suffix() == "jpg"
+                     || fi.suffix() == "png"
+                     || fi.suffix() == "xpm"
+                        )
+                        s = new RasterImage(score());
+                  else
                         return;
-                  event->acceptProposedAction();
                   _score->startCmd();
-                  Image* s = new Image(score());
                   s->setPath(u.path());
                   s->setAnchor(ANCHOR_PAGE);
-                  score()->cmdAddImage(s, pos, dragOffset);
+                  score()->cmdAddBSymbol(s, pos, dragOffset);
                   event->acceptProposedAction();
                   score()->endCmd(true);
                   setDropTarget(0); // this also resets dropRectangle and dropAnchor
@@ -1277,7 +1287,7 @@ void Canvas::dropEvent(QDropEvent* event)
                   _score->startCmd();
                   Symbol* s = new Symbol(score());
                   s->read(node);
-                  score()->cmdAddSymbol(s, pos, dragOffset);
+                  score()->cmdAddBSymbol(s, pos, dragOffset);
                   event->acceptProposedAction();
                   score()->endCmd(true);
                   }
@@ -1285,10 +1295,34 @@ void Canvas::dropEvent(QDropEvent* event)
             case IMAGE:
                   {
                   _score->startCmd();
-                  Image* s = new Image(score());
-                  s->read(node);
-                  score()->cmdAddImage(s, pos, dragOffset);
-                  event->acceptProposedAction();
+                  // look ahead for image type
+                  QString path;
+                  for (QDomNode n = node.firstChild(); !n.isNull(); n = n.nextSibling()) {
+                        QDomElement e = n.toElement();
+                        if (e.isNull())
+                              continue;
+                        QString tag(e.tagName());
+                        if (tag == "path") {
+                              path = e.text();
+                              break;
+                              }
+                        }
+                  Image* image = 0;
+                  if (path.endsWith(".svg"))
+                        image = new SvgImage(score());
+                  else if (path.endsWith(".jpg")
+                     || path.endsWith(".png")
+                     || path.endsWith(".xpm")
+                        )
+                        image = new RasterImage(score());
+                  else {
+                        printf("unknown image format <%s>\n", path.toLatin1().data());
+                        }
+                  if (image) {
+                        image->read(node);
+                        score()->cmdAddBSymbol(image, pos, dragOffset);
+                        event->acceptProposedAction();
+                        }
                   score()->endCmd(true);
                   }
                   break;
@@ -1356,8 +1390,11 @@ void Canvas::dragEnterEvent(QDragEnterEvent* event)
                u.path().toLatin1().data());
             if (u.scheme() == "file") {
                   QFileInfo fi(u.path());
-                  if (fi.suffix() == "svg") {
-                        printf("SVG-FILE!\n");
+                  if (fi.suffix() == "svg"
+                     || fi.suffix() == "jpg"
+                     || fi.suffix() == "png"
+                     || fi.suffix() == "xpm"
+                     ) {
                         event->acceptProposedAction();
                         }
                   }

@@ -1,7 +1,7 @@
 //=============================================================================
-//  MuseScore
+//  MusE Score
 //  Linux Music Score Editor
-//  $Id: element.cpp,v 1.79 2006/04/12 14:58:10 wschweer Exp $
+//  $Id: element.h,v 1.58 2006/04/12 14:58:10 wschweer Exp $
 //
 //  Copyright (C) 2002-2006 Werner Schweer (ws@seh.de)
 //
@@ -18,44 +18,28 @@
 //  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //=============================================================================
 
-#include "symbol.h"
-#include "sym.h"
+#ifndef __BSYMBOL_H__
+#define __BSYMBOL_H__
+
+#include "element.h"
+#include "style.h"
 
 //---------------------------------------------------------
-//   Symbol
+//   BSymbol
+//    base class for Symbol and Image
 //---------------------------------------------------------
 
-Symbol::Symbol(Score* s)
-   : BSymbol(s)
-      {
-      setAnchor(ANCHOR_PAGE);
-      _sym = 0;
-      }
+class BSymbol : public Element {
 
-//---------------------------------------------------------
-//   setSym
-//---------------------------------------------------------
+   public:
+      BSymbol(Score* s) : Element(s) {}
+      BSymbol &operator=(const BSymbol&);
 
-void Symbol::setSym(int s)
-      {
-      _sym  = s;
-      }
+      virtual bool isMovable() const { return true; }
 
-//---------------------------------------------------------
-//   Symbol::draw
-//---------------------------------------------------------
+      void setAnchor(Anchor a) { setSubtype(int(a)); }
+      Anchor anchor() const    { return (Anchor)subtype(); }
+      };
 
-void Symbol::draw(QPainter& p)
-      {
-      symbols[_sym].draw(p);
-      }
-
-//---------------------------------------------------------
-//   bbox
-//---------------------------------------------------------
-
-QRectF Symbol::bbox() const
-      {
-      return symbols[_sym].bbox();
-      }
+#endif
 
