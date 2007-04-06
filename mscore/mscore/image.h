@@ -21,17 +21,16 @@
 #ifndef __IMAGE_H__
 #define __IMAGE_H__
 
-#include "element.h"
-#include "style.h"
+#include "bsymbol.h"
 
 //---------------------------------------------------------
 //   Image
 //---------------------------------------------------------
 
-class Image : public Element {
+class Image : public BSymbol {
+   protected:
       QString _path;
-      QSvgRenderer* doc;
-      QImage buffer;
+      QImage buffer;                ///< cached rendering
       QSizeF sz;
       bool _dirty;
 
@@ -49,17 +48,41 @@ class Image : public Element {
 
    public:
       Image(Score*);
-      ~Image();
-      virtual Image* clone() const;
       virtual ElementType type() const { return IMAGE; }
-      virtual void draw(QPainter&);
       virtual void write(Xml& xml) const;
       virtual void read(QDomNode);
-      void setPath(const QString& s);
+      virtual void setPath(const QString& s);
       virtual QRectF bbox() const;
-      virtual bool isMovable() const { return true; }
-      void setAnchor(Anchor a) { setSubtype(int(a)); }
-      Anchor anchor() const    { return (Anchor)subtype(); }
+      };
+
+//---------------------------------------------------------
+//   RasterImage
+//---------------------------------------------------------
+
+class RasterImage : public Image {
+      QImage doc;
+
+   public:
+      RasterImage(Score*);
+      ~RasterImage();
+      virtual RasterImage* clone() const;
+      virtual void draw(QPainter&);
+      virtual void setPath(const QString& s);
+      };
+
+//---------------------------------------------------------
+//   SvgImage
+//---------------------------------------------------------
+
+class SvgImage : public Image {
+      QSvgRenderer* doc;
+
+   public:
+      SvgImage(Score*);
+      ~SvgImage();
+      virtual SvgImage* clone() const;
+      virtual void draw(QPainter&);
+      virtual void setPath(const QString& s);
       };
 
 #endif
