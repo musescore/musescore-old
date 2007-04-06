@@ -20,6 +20,7 @@
 
 #include "image.h"
 #include "xml.h"
+#include "mscore.h"
 
 //---------------------------------------------------------
 //   Image
@@ -31,6 +32,39 @@ Image::Image(Score* s)
       _dirty = false;
       mode   = NORMAL;
       setAnchor(ANCHOR_PAGE);
+      }
+
+//---------------------------------------------------------
+//   draw
+//---------------------------------------------------------
+
+void Image::draw(QPainter& p)
+      {
+      p.drawImage(0, 0, buffer);
+      if (mode != NORMAL) {
+            qreal lw = 2.0/p.matrix().m11();
+            QPen pen(Qt::blue);
+            pen.setWidthF(lw);
+            p.setPen(pen);
+            if (mode == DRAG1) {
+                  p.setBrush(Qt::blue);
+                  p.drawRect(r1);
+                  p.setBrush(Qt::NoBrush);
+                  p.drawRect(r2);
+                  }
+            else {
+                  p.setBrush(Qt::NoBrush);
+                  p.drawRect(r1);
+                  p.setBrush(Qt::blue);
+                  p.drawRect(r2);
+                  }
+            }
+      if (selected()) {
+            p.setBrush(Qt::NoBrush);
+            p.setPen(QPen(Qt::blue, 0, Qt::SolidLine));
+            QRectF r(0.0, 0.0, sz.width(), sz.height());
+            p.drawRect(r);
+            }
       }
 
 //---------------------------------------------------------
@@ -237,10 +271,9 @@ void SvgImage::draw(QPainter& p)
       {
       if (!doc)
             return;
-/*      QSizeF s(sz.width() * p.device()->logicalDpiX() / 120.0,
-              sz.height() * p.device()->logicalDpiY() / 120.0);
-      */
-      QSize s = sz.toSize();
+      QSizeF sf(sz.width() * p.device()->logicalDpiX() / mscore->logicalDpiX(),
+              sz.height() * p.device()->logicalDpiY() / mscore->logicalDpiY());
+      QSize s = sf.toSize();
 
       if (buffer.size() != s || _dirty) {
             buffer = QImage(s, QImage::Format_ARGB32_Premultiplied);
@@ -250,25 +283,7 @@ void SvgImage::draw(QPainter& p)
             doc->render(&pp);
             _dirty = false;
             }
-      p.drawImage(0, 0, buffer);
-      if (mode != NORMAL) {
-            qreal lw = 2.0/p.matrix().m11();
-            QPen pen(Qt::blue);
-            pen.setWidthF(lw);
-            p.setPen(pen);
-            if (mode == DRAG1) {
-                  p.setBrush(Qt::blue);
-                  p.drawRect(r1);
-                  p.setBrush(Qt::NoBrush);
-                  p.drawRect(r2);
-                  }
-            else {
-                  p.setBrush(Qt::NoBrush);
-                  p.drawRect(r1);
-                  p.setBrush(Qt::blue);
-                  p.drawRect(r2);
-                  }
-            }
+      Image::draw(p);
       }
 
 //---------------------------------------------------------
@@ -315,34 +330,15 @@ RasterImage* RasterImage::clone() const
 
 void RasterImage::draw(QPainter& p)
       {
-/*      QSizeF s(sz.width() * p.device()->logicalDpiX() / 120.0,
-              sz.height() * p.device()->logicalDpiY() / 120.0);
-      */
-      QSize s = sz.toSize();
+      QSizeF sf(sz.width() * p.device()->logicalDpiX() / mscore->logicalDpiX(),
+              sz.height() * p.device()->logicalDpiY() / mscore->logicalDpiY());
+      QSize s = sf.toSize();
 
       if (buffer.size() != s || _dirty) {
             buffer = doc.scaled(s, Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
             _dirty = false;
             }
-      p.drawImage(0, 0, buffer);
-      if (mode != NORMAL) {
-            qreal lw = 2.0/p.matrix().m11();
-            QPen pen(Qt::blue);
-            pen.setWidthF(lw);
-            p.setPen(pen);
-            if (mode == DRAG1) {
-                  p.setBrush(Qt::blue);
-                  p.drawRect(r1);
-                  p.setBrush(Qt::NoBrush);
-                  p.drawRect(r2);
-                  }
-            else {
-                  p.setBrush(Qt::NoBrush);
-                  p.drawRect(r1);
-                  p.setBrush(Qt::blue);
-                  p.drawRect(r2);
-                  }
-            }
+      Image::draw(p);
       }
 
 //---------------------------------------------------------

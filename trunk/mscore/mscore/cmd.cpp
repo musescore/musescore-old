@@ -456,7 +456,7 @@ void Score::cmdAddPitch(int note, bool addFlag)
             setNote(cis->pos, staff(cis->staff), cis->voice, padState.pitch, len);
             cis->pos += len;
             }
-      moveCursor();
+//      moveCursor();
       }
 
 //---------------------------------------------------------
@@ -512,13 +512,13 @@ void Score::cmdAddInterval(int val)
 
 void Score::setNote(int tick, Staff* staff, int voice, int pitch, int len)
       {
-      bool addTie = padState.tie;
-
+      bool addTie  = padState.tie;
       int staffIdx = _staves->indexOf(staff);
-      int track = staffIdx * VOICES + voice;
-      Tie* tie  = 0;
-      Note* note = 0;
+      int track    = staffIdx * VOICES + voice;
+      Tie* tie     = 0;
+      Note* note   = 0;
       Tuplet* tuplet = 0;
+
       while (len) {
             int stick = tick;
             Measure* measure = tick2measure(stick);
@@ -625,7 +625,7 @@ void Score::setNote(int tick, Staff* staff, int voice, int pitch, int len)
             note->setTieFor(tie);
             }
 //TODO      connectTies();
-      layout();
+//      layout();
       }
 
 //---------------------------------------------------------
@@ -1151,7 +1151,7 @@ void Score::cmd(const QString& cmd)
                         cis->pos += len;
                         }
                   padState.rest = false;  // continue with normal note entry
-                  moveCursor();
+//                  moveCursor();
                   }
             else if (cmd == "pitch-up")
                   upDown(true, false);
@@ -1544,7 +1544,7 @@ void Score::move(const QString& cmd)
                   adjustCanvasPosition(el);
                   if (canvas()->getState() == Canvas::NOTE_ENTRY) {
                         cis->pos = tick;
-                        moveCursor();
+//                        moveCursor();
                         }
                   }
             }

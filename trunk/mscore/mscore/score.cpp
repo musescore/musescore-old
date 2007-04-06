@@ -74,6 +74,7 @@ bool showRubberBand = true;
 void Score::doLayout()
       {
       _layout->doLayout();
+      moveCursor();
       }
 
 //---------------------------------------------------------
