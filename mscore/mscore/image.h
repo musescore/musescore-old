@@ -45,6 +45,7 @@ class Image : public BSymbol {
       virtual bool editDrag(Viewer*, QPointF*, const QPointF&);
       virtual bool endEditDrag();
       virtual void endEdit();
+      virtual void draw(QPainter&);
 
    public:
       Image(Score*);

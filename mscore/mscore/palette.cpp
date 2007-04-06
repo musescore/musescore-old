@@ -132,7 +132,7 @@ void SymbolPalette::mousePressEvent(QMouseEvent* ev)
 
 void SymbolPalette::mouseMoveEvent(QMouseEvent* ev)
       {
-      if ((ev->buttons() & Qt::LeftButton)
+      if ((currentSymbol != -1) && (ev->buttons() & Qt::LeftButton)
          && (ev->pos() - dragStartPosition).manhattanLength() > QApplication::startDragDistance()) {
             QDrag* drag = new QDrag(this);
             QMimeData* mimeData = new QMimeData;
