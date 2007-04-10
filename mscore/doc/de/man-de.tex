@@ -1134,7 +1134,40 @@ mscore <Optionen> <Dateiname>
       \subsection{Selbstdefinierte Symbole}
 
       Die Symbolpalette kann um selbstdefinierte Symbole erweitert werden.
-      Die Symbole müssen im SVG-Format (Scalable Vector Grafik) vorliegen.
+      Es werden folgende Formate unterstützt:
+
+      \startnarrower[left]
+      \starttabulate[|l|p|]
+      \NC\bf *.svg \NC
+            Scalable Vector Grafik: Dies ist das bevorzugte Format für alle
+            Symbole, da es verlustfrei beliebig skaliert werden kann.
+            \NC\MR
+      \NC\bf *.png \NC
+            Dies ist ein Rasterformat welches sich optimal für Grafiken mit
+            wenigen Farben eignet. Es kann nicht verlustfrei skaliert werden.
+            \NC\MR
+      \NC\bf *.jpg \NC
+            Das JPEG Format wird vorzugsweise für Fotos oder Grafiken mit
+            vielen Farben eingesetzt. Ebenso wie PNG-Grafiken können JPEG's
+            nicht verlustfrei skaliert werden.
+            \NC\MR
+      \stoptabulate
+      \stopnarrower
+
+      Grafiksymbole können von einem Browser (z.B. Konqueror oder Firefox) direkt
+      auf die Partitur gezogen werden. Die Symbole werden dann mit der aktuellen
+      Seite verankert. Werden die Symbole zunächst auf die Symbolpalette gezogen,
+      so kann der Anker dort frei gewählt werden. \M\ merkt sich übrigens die
+      Belegung der Symbolpalette. Die neuen Symbole sind auch nach einem Neustart
+      noch dort zu finden.
+
+      Es ist sinnvoll, alle von irgendwelchen Partituren verwendeten Symbole
+      in einem speziellen Verzeichnis zu sammeln. Wird dieses Verzeichnis als
+      "Image-Verzeichnis" in \M\ konfiguriert, dann wird nicht mehr der komplette
+      Pfad für Symbole in diesem Verzeichnis gespeichert, sondern nur noch ihr
+      Name. Liest \M\ eine Partitur mit Symbolen, die nicht mit ihrem absoluten
+      Pfad gespeichert sind, dann werden diese Symbole in dem konfigurierten
+      Image-Verzeichnis gesucht.
 
 
 \section{Element Attribute}

@@ -127,8 +127,6 @@ void MuseScore::closeEvent(QCloseEvent* ev)
       //
       if (pageListEdit)
             pageListEdit->close();
-//      if (pad)
-//            pad->close();
       if (playPanel)
             playPanel->close();
       if (symbolPalette)
@@ -161,6 +159,8 @@ void MuseScore::closeEvent(QCloseEvent* ev)
             iledit->close();
       if (editStyleWin)
             editStyleWin->close();
+      if (preferences.dirty)
+            preferences.write();
       }
 
 //---------------------------------------------------------
@@ -188,7 +188,6 @@ void MuseScore::preferencesChanged()
       transportTools->setShown(seq->isRunning());
       getAction("midi-on")->setEnabled(preferences.enableMidiInput);
       _statusBar->setShown(preferences.showStatusBar);
-
       }
 
 //---------------------------------------------------------
@@ -1544,6 +1543,7 @@ int main(int argc, char* argv[])
       padState.pitch = 60;
       setDefaultStyle();
       QApplication app(argc, argv);
+      preferences.createSymbolPalette();
 
 #ifdef __MINGW32__
       appDpiX = 75;
@@ -1587,6 +1587,8 @@ int main(int argc, char* argv[])
       ++argc;
 
       haveMidi = !initMidi();
+
+      initSymbols();
       preferences.read();
 
       QSplashScreen* sc = 0;
@@ -1736,7 +1738,7 @@ int main(int argc, char* argv[])
       //  load scores
       //-------------------------------
 
-      initSymbols();
+      initSymbols();    // again!?!
       genIcons();
       new MuseScore();
 

@@ -312,14 +312,10 @@ void Score::searchSelectedElements()
             (*ip)->collectElements(l);
       sel->clear();
       foreach(Element* e, l) {
-            if (e->type() == IMAGE)
-                  printf("==========================IMAGE\n");
             if (e->selected()) {
-      printf("==============================selected %d <%s>\n", l.size(), e->name());
                   sel->append(e);
                   }
             }
-printf("===================================END SEARCH\n");
       sel->updateState();
       emit selectionChanged(int(sel->state));
       }

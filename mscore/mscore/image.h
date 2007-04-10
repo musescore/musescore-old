@@ -53,7 +53,9 @@ class Image : public BSymbol {
       virtual void write(Xml& xml) const;
       virtual void read(QDomNode);
       virtual void setPath(const QString& s);
+      QString path() const;
       virtual QRectF bbox() const;
+      void setSize(QSizeF s) { sz = s; }
       };
 
 //---------------------------------------------------------

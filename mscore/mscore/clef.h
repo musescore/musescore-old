@@ -32,6 +32,7 @@ class Xml;
 class Viewer;
 
 static const int clefSmallBit = 0x1000;
+static const int NO_CLEF = -1000;
 
 //---------------------------------------------------------
 //   Clef

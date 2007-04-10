@@ -21,6 +21,7 @@
 #include "image.h"
 #include "xml.h"
 #include "mscore.h"
+#include "preferences.h"
 
 //---------------------------------------------------------
 //   Image
@@ -104,9 +105,26 @@ void Image::read(QDomNode node)
 //   setPath
 //---------------------------------------------------------
 
-void Image::setPath(const QString& s)
+void Image::setPath(const QString& ss)
       {
+      QString s(ss);
+      if (s.startsWith(preferences.imagePath)) {
+            s = s.mid(preferences.imagePath.size());
+            if (s[0] == '/')
+                  s = s.mid(1);
+            }
       _path = s;
+      }
+
+//---------------------------------------------------------
+//   path
+//---------------------------------------------------------
+
+QString Image::path() const
+      {
+      if (_path[0] == '/')
+            return _path;
+      return preferences.imagePath + '/' + _path;
       }
 
 //---------------------------------------------------------
@@ -295,7 +313,7 @@ void SvgImage::setPath(const QString& s)
       Image::setPath(s);
       if (doc == 0)
             doc = new QSvgRenderer;
-      doc->load(s);
+      doc->load(path());
       if (doc->isValid()) {
             sz = doc->defaultSize();
             _dirty = true;
@@ -348,7 +366,7 @@ void RasterImage::draw(QPainter& p)
 void RasterImage::setPath(const QString& s)
       {
       Image::setPath(s);
-      doc.load(s);
+      doc.load(path());
       if (!doc.isNull()) {
             sz = doc.size();
             _dirty = true;

@@ -36,7 +36,7 @@ TimeDialog::TimeDialog(QWidget* parent)
       frame->setLayout(l);
       QScrollArea* timePalette = new QScrollArea;
       l->addWidget(timePalette);
-      sp = new SymbolPalette(4, 4);
+      sp = new Palette(4, 4);
       timePalette->setWidget(sp);
       sp->setGrid(60, 60);
       sp->showStaff(true);

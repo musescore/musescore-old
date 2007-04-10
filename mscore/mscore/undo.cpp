@@ -416,19 +416,19 @@ void Score::processUndoOp(UndoOp* i, bool undo)
                   ClefList* kl = i->staff->clef();
                   if (undo) {
                         // remove new value if there is any
-                        if (i->val3 != -1000) {
+                        if (i->val3 != NO_CLEF) {
                               iClefEvent ik = kl->find(i->val1);
                               kl->erase(ik);
                               }
-                        if (i->val2 != -1000)
+                        if (i->val2 != NO_CLEF)
                               (*kl)[i->val1] = i->val2;
                         }
                   else {
-                        if (i->val2 != -1000) {
+                        if (i->val2 != NO_CLEF) {
                               iClefEvent ik = kl->find(i->val1);
                               kl->erase(ik);
                               }
-                        if (i->val3 != -1000)
+                        if (i->val3 != NO_CLEF)
                               (*kl)[i->val1] = i->val3;
                         }
                   }

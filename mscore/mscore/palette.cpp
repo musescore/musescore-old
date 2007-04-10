@@ -26,32 +26,38 @@
 #include "sym.h"
 #include "symbol.h"
 #include "layout.h"
+#include "score.h"
+#include "image.h"
+#include "xml.h"
 
 //---------------------------------------------------------
-//   SymbolPalette
+//   Palette
 //---------------------------------------------------------
 
 /**
  Create Symbol palette with \a r rows and \a c columns
 */
 
-SymbolPalette::SymbolPalette(int r, int c, qreal mag)
+Palette::Palette(int r, int c, qreal mag)
       {
       extraMag      = mag;
       staff         = false;
       rows          = r;
       columns       = c;
-      currentSymbol = -1;
+      currentIdx    = -1;
+      selectedIdx   = -1;
       symbols       = new Element*[rows*columns];
       names         = new QString[rows*columns];
+
       for (int i = 0; i < rows*columns; ++i)
             symbols[i] = 0;
       setGrid(50, 60);
-      _drawGrid = false;
+      _drawGrid      = false;
+      _showSelection = false;
       setMouseTracking(true);
       }
 
-SymbolPalette::~SymbolPalette()
+Palette::~Palette()
       {
       delete symbols;
       delete names;
@@ -65,7 +71,7 @@ SymbolPalette::~SymbolPalette()
  Set size of one element in palette
 */
 
-void SymbolPalette::setGrid(int hh, int vv)
+void Palette::setGrid(int hh, int vv)
       {
       hgrid = hh;
       vgrid = vv;
@@ -76,7 +82,7 @@ void SymbolPalette::setGrid(int hh, int vv)
 //   sizeHint
 //---------------------------------------------------------
 
-QSize SymbolPalette::sizeHint() const
+QSize Palette::sizeHint() const
       {
       return QSize(columns * hgrid, rows * vgrid);
       }
@@ -85,10 +91,10 @@ QSize SymbolPalette::sizeHint() const
 //   setRowsColumns
 //---------------------------------------------------------
 
-void SymbolPalette::setRowsColumns(int r, int c)
+void Palette::setRowsColumns(int r, int c)
       {
-      int n = rows * columns;
-      rows = r;
+      int n   = rows * columns;
+      rows    = r;
       columns = c;
       setFixedSize(columns * hgrid, rows * vgrid);
 
@@ -99,11 +105,14 @@ void SymbolPalette::setRowsColumns(int r, int c)
 
       for (int i = 0; i < n; ++i) {
             nsymbols[i] = symbols[i];
-            nnames[i] = names[i];
+            nnames[i]   = names[i];
             }
       // TODO: delete symbols
-      delete[] symbols;
-      delete[] names;
+
+      if (symbols)
+            delete[] symbols;
+      if (names)
+            delete[] names;
       symbols = nsymbols;
       names = nnames;
       }
@@ -112,7 +121,7 @@ void SymbolPalette::setRowsColumns(int r, int c)
 //   showStaff
 //---------------------------------------------------------
 
-void SymbolPalette::showStaff(bool flag)
+void Palette::showStaff(bool flag)
       {
       staff = flag;
       }
@@ -121,22 +130,59 @@ void SymbolPalette::showStaff(bool flag)
 //   contentsMousePressEvent
 //---------------------------------------------------------
 
-void SymbolPalette::mousePressEvent(QMouseEvent* ev)
+void Palette::mousePressEvent(QMouseEvent* ev)
       {
       dragStartPosition = ev->pos();
+      if (_showSelection) {
+            int i = idx(ev->pos());
+            if (i != selectedIdx) {
+                  update(idxRect(i) | idxRect(selectedIdx));
+                  selectedIdx = i;
+                  }
+            }
+      }
+
+//---------------------------------------------------------
+//   idx
+//---------------------------------------------------------
+
+int Palette::idx(const QPoint& p) const
+      {
+      int x = p.x();
+      int y = p.y();
+
+      int row = y / vgrid;
+      int col = x / hgrid;
+
+      if (row < 0 || row >= rows || col < 0 || col >= columns)
+            return -1;
+      return row * columns + col;
+      }
+
+//---------------------------------------------------------
+//   idxRect
+//---------------------------------------------------------
+
+QRect Palette::idxRect(int i)
+      {
+      if (i == -1)
+            return QRect();
+      int cc = i % columns;
+      int cr = i / columns;
+      return QRect(cc * hgrid, cr * vgrid, hgrid, vgrid);
       }
 
 //---------------------------------------------------------
 //   mouseMoveEvent
 //---------------------------------------------------------
 
-void SymbolPalette::mouseMoveEvent(QMouseEvent* ev)
+void Palette::mouseMoveEvent(QMouseEvent* ev)
       {
-      if ((currentSymbol != -1) && (ev->buttons() & Qt::LeftButton)
+      if ((currentIdx != -1) && (ev->buttons() & Qt::LeftButton)
          && (ev->pos() - dragStartPosition).manhattanLength() > QApplication::startDragDistance()) {
             QDrag* drag = new QDrag(this);
             QMimeData* mimeData = new QMimeData;
-            Element* el = symbols[currentSymbol];
+            Element* el = symbols[currentIdx];
 
             qreal mag = PALETTE_SPATIUM * extraMag / _spatium;
 
@@ -148,36 +194,28 @@ void SymbolPalette::mouseMoveEvent(QMouseEvent* ev)
             mimeData->setData("application/mscore/symbol", el->mimeData(rpos));
             drag->setMimeData(mimeData);
 
-            drag->start(Qt::CopyAction);
+            int srcIdx = currentIdx;
+            Qt::DropAction action = drag->start(Qt::CopyAction | Qt::MoveAction);
+            if (action == Qt::MoveAction) {
+                  symbols[srcIdx] = 0;
+                  names[srcIdx] = QString();
+                  }
             }
       else {
-            int x = ev->pos().x();
-            int y = ev->pos().y();
-
-            int row = y / vgrid;
-            int col = x / hgrid;
-
-            if (row < 0 || row >= rows)
+            int i = idx(ev->pos());
+            if (i == -1)
                   return;
-            int idx = row * columns + col;
 
             QRect r;
-            int cc, cr;
-            if (currentSymbol != -1) {
-                  cc = currentSymbol % columns;
-                  cr = currentSymbol / columns;
-                  r = QRect(cc * hgrid, cr * vgrid, hgrid, vgrid);
-                  symbols[currentSymbol]->setSelected(false);
+            if (currentIdx != -1) {
+                  r = idxRect(currentIdx);
                   }
-            if (symbols[idx] == 0) {
+            if (symbols[i] == 0) {
                   update(r);
                   return;
                   }
-            currentSymbol = idx;
-            symbols[currentSymbol]->setSelected(true);
-            cc = currentSymbol % columns;
-            cr = currentSymbol / columns;
-            r |= QRect(cc * hgrid, cr * vgrid, hgrid, vgrid);
+            currentIdx = i;
+            r |= idxRect(currentIdx);
             update(r);
             }
       }
@@ -186,14 +224,11 @@ void SymbolPalette::mouseMoveEvent(QMouseEvent* ev)
 //   leaveEvent
 //---------------------------------------------------------
 
-void SymbolPalette::leaveEvent(QEvent*)
+void Palette::leaveEvent(QEvent*)
       {
-      if (currentSymbol != -1) {
-            int cc = currentSymbol % columns;
-            int cr = currentSymbol / columns;
-            QRect r(cc * hgrid, cr * vgrid, hgrid, vgrid);
-            symbols[currentSymbol]->setSelected(false);
-            currentSymbol = -1;
+      if (currentIdx != -1) {
+            QRect r = idxRect(currentIdx);
+            currentIdx = -1;
             update(r);
             }
       }
@@ -202,9 +237,9 @@ void SymbolPalette::leaveEvent(QEvent*)
 //   addObject
 //---------------------------------------------------------
 
-void SymbolPalette::addObject(int idx, Element* s, const QString& name)
+void Palette::addObject(int idx, Element* s, const QString& name)
       {
-      s->setSelected(false);
+      currentIdx   = idx;
       symbols[idx] = s;
       names[idx]   = name;
       update();
@@ -214,7 +249,7 @@ void SymbolPalette::addObject(int idx, Element* s, const QString& name)
 //   addObject
 //---------------------------------------------------------
 
-void SymbolPalette::addObject(int idx, int symIdx)
+void Palette::addObject(int idx, int symIdx)
       {
       Symbol* s = new Symbol(0);
       s->setSym(symIdx);
@@ -225,7 +260,7 @@ void SymbolPalette::addObject(int idx, int symIdx)
 //   paintEvent
 //---------------------------------------------------------
 
-void SymbolPalette::paintEvent(QPaintEvent*)
+void Palette::paintEvent(QPaintEvent*)
       {
       qreal mag = PALETTE_SPATIUM * extraMag / _spatium;
       ScoreLayout layout;
@@ -259,16 +294,22 @@ void SymbolPalette::paintEvent(QPaintEvent*)
       for (int row = 0; row < rows; ++row) {
             for (int column = 0; column < columns; ++column) {
                   int idx = row * columns + column;
+
+                  QRect r = idxRect(idx);
+                  p.setPen(pen);
+                  if (idx == selectedIdx) {
+                        if (idx == currentIdx)
+                              p.fillRect(r, QColor(220, 220, 200));
+                        else
+                              p.fillRect(r, QColor(200, 200, 180));
+                        }
+                  else if (idx == currentIdx)
+                        p.fillRect(r, p.background().color().lighter(118));
                   Element* el = symbols[idx];
                   if (el == 0)
                         continue;
                   el->layout(&layout);
 
-                  QRect r(column * hgrid, row * vgrid, hgrid, vgrid);
-
-                  p.setPen(pen);
-                  if (el->selected())
-                        p.fillRect(r, p.background().color().lighter(118));
                   if (staff) {
                         qreal y = r.y() + vgrid / 2 - dy;
                         qreal x = r.x() + 7;
@@ -309,7 +350,7 @@ void SymbolPalette::paintEvent(QPaintEvent*)
 //   event
 //---------------------------------------------------------
 
-bool SymbolPalette::event(QEvent* ev)
+bool Palette::event(QEvent* ev)
       {
       if (ev->type() == QEvent::ToolTip) {
             QHelpEvent* he = (QHelpEvent*)ev;
@@ -333,6 +374,282 @@ bool SymbolPalette::event(QEvent* ev)
       }
 
 //---------------------------------------------------------
+//   dragEnterEvent
+//---------------------------------------------------------
+
+void Palette::dragEnterEvent(QDragEnterEvent* event)
+      {
+      const QMimeData* data = event->mimeData();
+      if (data->hasUrls()) {
+            QList<QUrl>ul = event->mimeData()->urls();
+            QUrl u = ul.front();
+            if (debugMode)
+                  printf("drag Url: %s\n", u.toString().toLatin1().data());
+            printf("scheme <%s> path <%s>\n", u.scheme().toLatin1().data(),
+               u.path().toLatin1().data());
+            if (u.scheme() == "file") {
+                  QFileInfo fi(u.path());
+                  if (fi.suffix() == "svg"
+                     || fi.suffix() == "jpg"
+                     || fi.suffix() == "png"
+                     || fi.suffix() == "xpm"
+                     ) {
+                        event->acceptProposedAction();
+                        }
+                  }
+            }
+      else if (data->hasFormat(mimeSymbolFormat))
+            event->acceptProposedAction();
+      else {
+            if (debugMode) {
+                  printf("dragEnterEvent: formats:\n");
+                  foreach(QString s, event->mimeData()->formats())
+                        printf("   %s\n", s.toLatin1().data());
+                  }
+            }
+      }
+
+//---------------------------------------------------------
+//   dragMoveEvent
+//---------------------------------------------------------
+
+void Palette::dragMoveEvent(QDragMoveEvent* ev)
+      {
+      int i = idx(ev->pos());
+      if (i == -1)
+            return;
+
+      int n = rows * columns;
+      int ii = i;
+      for (; ii < n; ++ii) {
+            if (symbols[ii] == 0)
+                  break;
+            }
+      if (ii == n)
+            return;
+
+      QRect r;
+      if (currentIdx != -1)
+            r = idxRect(currentIdx);
+      update(r | idxRect(ii));
+      currentIdx = ii;
+      }
+
+//---------------------------------------------------------
+//   dropEvent
+//---------------------------------------------------------
+
+void Palette::dropEvent(QDropEvent* event)
+      {
+      Element* e = 0;
+      QString name;
+
+      const QMimeData* data = event->mimeData();
+      if (data->hasUrls()) {
+            QList<QUrl>ul = event->mimeData()->urls();
+            QUrl u = ul.front();
+            if (u.scheme() == "file") {
+                  QFileInfo fi(u.path());
+                  Image* s = 0;
+                  if (fi.suffix() == "svg")
+                        s = new SvgImage(0);
+                  else if (fi.suffix() == "jpg"
+                     || fi.suffix() == "png"
+                     || fi.suffix() == "xpm"
+                        )
+                        s = new RasterImage(0);
+                  else
+                        return;
+                  qreal mag = PALETTE_SPATIUM * extraMag / _spatium;
+                  s->setPath(u.path());
+                  s->setSize(QSizeF(hgrid / mag, hgrid / mag));
+                  s->setAnchor(ANCHOR_PAGE);
+                  e = s;
+                  name = s->path();
+                  }
+            }
+      else if (data->hasFormat(mimeSymbolFormat)) {
+            QByteArray data(event->mimeData()->data(mimeSymbolFormat));
+            QDomDocument doc;
+            int line, column;
+            QString err;
+            if (!doc.setContent(data, &err, &line, &column)) {
+                  printf("error reading drag data\n");
+                  return;
+                  }
+            QDomNode node = doc.documentElement();
+            QPointF dragOffset;
+            int type = Element::readType(node, &dragOffset);
+
+            if (type == IMAGE) {
+                  // look ahead for image type
+                  QString path;
+                  for (QDomNode n = node.firstChild(); !n.isNull(); n = n.nextSibling()) {
+                        QDomElement e = n.toElement();
+                        if (e.isNull())
+                              continue;
+                        QString tag(e.tagName());
+                        if (tag == "path") {
+                              path = e.text();
+                              break;
+                              }
+                        }
+                  Image* image = 0;
+                  if (path.endsWith(".svg"))
+                        image = new SvgImage(0);
+                  else if (path.endsWith(".jpg")
+                     || path.endsWith(".png")
+                     || path.endsWith(".xpm")
+                        )
+                        image = new RasterImage(0);
+                  else {
+                        printf("unknown image format <%s>\n", path.toLatin1().data());
+                        }
+                  if (image) {
+                        image->read(node);
+                        e = image;
+                        }
+                  }
+            else if (type == SYMBOL) {
+                  Symbol* s = new Symbol(0);
+                  s->read(node);
+                  e = s;
+                  }
+            }
+      if (e) {
+            int i = idx(event->pos());
+            if (i == -1)
+                  return;
+
+            int n = rows * columns;
+            int ii = i;
+            for (; ii < n; ++ii) {
+                  if (symbols[ii] == 0)
+                        break;
+                  }
+            if (ii == n)
+                  setRowsColumns(rows + 1, columns);
+            addObject(ii, e, name);
+            emit droppedElement(e);
+            if (event->source() == this) {
+                  event->setDropAction(Qt::MoveAction);
+                  event->accept();
+                  }
+            else
+                  event->acceptProposedAction();
+            }
+      }
+
+//---------------------------------------------------------
+//   write
+//---------------------------------------------------------
+
+void Palette::write(Xml& xml, const char* name) const
+      {
+      xml.stag(QString(name));
+      int n = rows * columns;
+      int i = 0;
+      xml.tag("rows", rows);
+      xml.tag("columns", columns);
+      for (i = 0; i < n; ++i) {
+            if (symbols[i] == 0)
+                  continue;
+            xml.tag("idx", i);
+            if (!names[i].isEmpty())
+                  xml.tag("name", names[i]);
+            symbols[i]->write(xml);
+            }
+      xml.etag();
+      }
+
+//---------------------------------------------------------
+//   read
+//---------------------------------------------------------
+
+void Palette::read(QDomNode node)
+      {
+      int idx = 0;
+      QString name = "";
+      int r = 0;
+      int c = 0;
+      for (node = node.firstChild(); !node.isNull(); node = node.nextSibling()) {
+            QDomElement e = node.toElement();
+            if (e.isNull())
+                  continue;
+            QString tag(e.tagName());
+            if (tag == "idx") {
+                  idx = e.text().toInt();
+                  name = "";
+                  }
+            else if (tag == "name") {
+                  name = e.text();
+                  }
+            else if (tag == "rows")
+                  r = e.text().toInt();
+            else if (tag == "columns") {
+                  c = e.text().toInt();
+                  setRowsColumns(r, c);
+                  }
+            else if (tag == "Image") {
+                  // look ahead for image type
+                  QString path;
+                  for (QDomNode n = node.firstChild(); !n.isNull(); n = n.nextSibling()) {
+                        QDomElement e = n.toElement();
+                        if (e.isNull())
+                              continue;
+                        QString tag(e.tagName());
+                        if (tag == "path") {
+                              path = e.text();
+                              break;
+                              }
+                        }
+                  Image* image = 0;
+                  if (path.endsWith(".svg"))
+                        image = new SvgImage(0);
+                  else if (path.endsWith(".jpg")
+                     || path.endsWith(".png")
+                     || path.endsWith(".xpm")
+                        )
+                        image = new RasterImage(0);
+                  else {
+                        printf("unknown image format <%s>\n", path.toLatin1().data());
+                        }
+                  if (image) {
+                        image->read(node);
+                        addObject(idx, image, name);
+                        }
+                  }
+            else if (tag == "Symbol") {
+                  Symbol* s = new Symbol(0);
+                  s->read(node);
+                  addObject(idx, s, name);
+                  }
+            else
+                  domError(node);
+            }
+      }
+
+//---------------------------------------------------------
+//   clear
+//---------------------------------------------------------
+
+void Palette::clear()
+      {
+      int n = rows * columns;
+
+      for (int i = 0; i < n; ++i) {
+            if (symbols[i])
+                  delete symbols[i];
+            }
+      delete[] symbols;
+      delete[] names;
+      rows    = 0;
+      columns = 0;
+      symbols = 0;
+      names   = 0;
+      }
+
+//---------------------------------------------------------
 //   PaletteBoxButton
 //---------------------------------------------------------
 
@@ -343,7 +660,6 @@ PaletteBoxButton::PaletteBoxButton(QWidget* w, QWidget* parent)
       setFocusPolicy(Qt::NoFocus);
       connect(this, SIGNAL(clicked(bool)), w, SLOT(setVisible(bool)));
       setFixedHeight(QFontMetrics(font()).height() + 2);
-//      setAutoFillBackground(true);
       }
 
 //---------------------------------------------------------
@@ -373,9 +689,8 @@ void PaletteBoxButton::paintEvent(QPaintEvent* e)
 PaletteBox::PaletteBox(QWidget* parent)
    : QDockWidget(parent)
       {
-      setMinimumWidth(180);
-//      setAutoFillBackground(true);
-
+      // setMinimumWidth(180);
+      setFixedWidth(180);
       QWidget* mainWidget = new QWidget;
       vbox = new QVBoxLayout;
       vbox->setMargin(0);
@@ -406,16 +721,9 @@ void PaletteBox::addPalette(const QString& s, QWidget* w)
       sa->setWidget(w);
       sa->setMaximumHeight(w->height()+4);
 
-/*      QPixmap plus(":/data/plus.svg");
-      QPixmap minus(":/data/minus.svg");
-      QIcon icon;
-      icon.addPixmap(plus, QIcon::Normal, QIcon::Off);
-      icon.addPixmap(minus, QIcon::Normal, QIcon::On);
-  */
       sa->setVisible(false);
       PaletteBoxButton* b = new PaletteBoxButton(sa);
       b->setText(s);
-//      b->setIcon(icon);
       int slot = widgets.size() * 2;
       vbox->insertWidget(slot, b);
       vbox->insertWidget(slot+1, sa, 1000);

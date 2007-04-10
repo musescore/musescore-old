@@ -374,7 +374,7 @@ void Staff::changeClef(int tick, int st)
       if (ot == st)
             return;                 // no change
 
-      int oval = -1000;
+      int oval = NO_CLEF;
       iClefEvent ki = _clef->find(tick);
       if (ki != _clef->end()) {
             oval = ki->second;
@@ -382,7 +382,7 @@ void Staff::changeClef(int tick, int st)
             }
 
       bool removeFlag = st == _clef->clef(tick);
-      int nval = -1000;
+      int nval = NO_CLEF;
       if (!removeFlag) {
             (*_clef)[tick] = st;
             nval = st;

@@ -23,7 +23,8 @@
 
 #include "ui_symboldialog.h"
 
-class SymbolPalette;
+class Palette;
+class Element;
 
 //---------------------------------------------------------
 //   SymbolDialog
@@ -32,10 +33,12 @@ class SymbolPalette;
 class SymbolDialog : public QWidget, Ui::SymbolDialogBase {
       Q_OBJECT
 
-      SymbolPalette* sp;
+      Palette* sp;
 
    private slots:
       void anchorClicked(int);
+      void elementDropped(Element*);
+      void deleteElement();
 
    public:
       SymbolDialog(QWidget* parent = 0);

@@ -25,6 +25,7 @@
 #include "globals.h"
 
 struct Shortcut;
+class Palette;
 
 enum SessionStart {
       LAST_SESSION, NEW_SESSION, SCORE_SESSION
@@ -77,14 +78,19 @@ struct Preferences {
       bool antialiasedDrawing;
       SessionStart sessionStart;
       QString startScore;
+      QString imagePath;
       bool showSplashScreen;
       MidiRemote rewind, play, stop;
       MidiRemote len1, len2, len4, len8, len16, len32;
       MidiRemote len3, len6, len12, len24;
+      Palette* sp;
+
+      bool dirty;
 
       Preferences();
       void write();
       void read();
+      void createSymbolPalette();
       };
 
 //---------------------------------------------------------
@@ -114,6 +120,7 @@ class PreferenceDialog : public QDialog, private Ui::PrefsDialogBase {
       void selectFgWallpaper();
       void selectBgWallpaper();
       void selectSoundFont();
+      void selectImagePath();
       void playPanelCurClicked();
       void padCurClicked();
       void resetShortcutClicked();

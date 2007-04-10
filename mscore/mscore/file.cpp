@@ -478,65 +478,6 @@ void StaffLines::read(QDomNode node)
       }
 
 //---------------------------------------------------------
-//   Symbol::write
-//---------------------------------------------------------
-
-void Symbol::write(Xml& xml) const
-      {
-      xml.stag("Symbol");
-      xml.tag("name", symbols[_sym].name());
-//      xml.tag("style", _sym->textStyle());
-      xml.tag("x", pos().x());
-      xml.tag("y", pos().y());
-      Element::writeProperties(xml);
-      xml.etag();
-      }
-
-//---------------------------------------------------------
-//   Symbol::read
-//---------------------------------------------------------
-
-void Symbol::read(QDomNode node)
-      {
-      QPointF pos;
-      int s = -1;
-
-      for (node = node.firstChild(); !node.isNull(); node = node.nextSibling()) {
-            QDomElement e = node.toElement();
-            if (e.isNull())
-                  continue;
-            QString tag(e.tagName());
-            QString val(e.text());
-            if (tag == "name") {
-                  for (int i = 0; i < symbols.size(); ++i) {
-                        if (val == symbols[i].name()) {
-                              s = i;
-                              break;
-                              }
-                        }
-                  if (s == -1) {
-                        printf("unknown symbol <%s>\n", val.toLocal8Bit().data());
-                        s = 0;
-                        }
-                  }
-            else if (Element::readProperties(node))
-                  ;
-            else if (tag == "x")
-                  pos.setX(val.toDouble());
-            else if (tag == "y")
-                  pos.setY(val.toDouble());
-            else
-                  domError(node);
-            }
-      if (s == -1) {
-            printf("unknown symbol\n");
-            s = 0;
-            }
-      setPos(pos);
-      setSym(s);
-      }
-
-//---------------------------------------------------------
 //   readGeometry
 //---------------------------------------------------------
 
