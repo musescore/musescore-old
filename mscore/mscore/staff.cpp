@@ -413,7 +413,8 @@ void Staff::changeClef(int tick, int st)
                   int etick = segment->tick();
                   if (!e || (etick < tick))
                         continue;
-                  if ((e->subtype() != st) && (etick > tick)) {
+                  int est = e->subtype() & ~clefSmallBit;
+                  if ((est != st) && (etick > tick)) {
                         found = true;
                         break;
                         }
