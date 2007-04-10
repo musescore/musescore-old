@@ -73,7 +73,7 @@ void MuseScore::showPalette(bool visible)
             //    clefs
             //-----------------------------------
 
-            SymbolPalette* sp = new SymbolPalette(4, 4, .8);
+            Palette* sp = new Palette(4, 4, .8);
             sp->setGrid(45, 60);
             sp->showStaff(true);
             for (int i = 0; i < 13; ++i) {
@@ -86,7 +86,7 @@ void MuseScore::showPalette(bool visible)
             //    key signatures
             //-----------------------------------
 
-            sp = new SymbolPalette(5, 3, .8);
+            sp = new Palette(5, 3, .8);
             sp->setGrid(60, 45);
             sp->showStaff(true);
             for (int i = 0; i < 7; ++i) {
@@ -108,7 +108,7 @@ void MuseScore::showPalette(bool visible)
             //    Time
             //-----------------------------------
 
-            sp = new SymbolPalette(4, 3);
+            sp = new Palette(4, 3);
             sp->setGrid(60, 45);
             sp->showStaff(true);
 
@@ -130,7 +130,7 @@ void MuseScore::showPalette(bool visible)
             //    Bar Lines
             //-----------------------------------
 
-            sp = new SymbolPalette(2, 4);
+            sp = new Palette(2, 4);
             sp->setGrid(45, 50);
             sp->showStaff(true);
 
@@ -158,7 +158,7 @@ void MuseScore::showPalette(bool visible)
             //    Lines
             //-----------------------------------
 
-            sp = new SymbolPalette(6, 2);
+            sp = new Palette(6, 2);
             sp->setGrid(90, 30);
 
             double l = _spatium * 8;
@@ -227,7 +227,7 @@ void MuseScore::showPalette(bool visible)
             //    Brackets
             //-----------------------------------
 
-            sp = new SymbolPalette(1, 4, .7);
+            sp = new Palette(1, 4, .7);
             sp->setGrid(45, 60);
 
             Bracket* b1 = new Bracket(cs);
@@ -246,7 +246,7 @@ void MuseScore::showPalette(bool visible)
             //    Attributes
             //-----------------------------------
 
-            sp = new SymbolPalette((NOTE_ATTRIBUTES+3) / 4, 4);
+            sp = new Palette((NOTE_ATTRIBUTES+3) / 4, 4);
             sp->setGrid(45, 40);
 
             for (int i = 0; i < NOTE_ATTRIBUTES; ++i) {
@@ -261,7 +261,7 @@ void MuseScore::showPalette(bool visible)
             //    Accidentals
             //-----------------------------------
 
-            sp = new SymbolPalette(3, 5);
+            sp = new Palette(3, 5);
             sp->setGrid(36, 36);
 
             for (int i = 1; i < 16; ++i) {
@@ -275,7 +275,7 @@ void MuseScore::showPalette(bool visible)
             //    Dynamics
             //-----------------------------------
 
-            sp = new SymbolPalette(18, 2);
+            sp = new Palette(18, 2);
             sp->setGrid(90, 35);
 
             for (int i = 0; i < 27; ++i) {
@@ -299,7 +299,7 @@ void MuseScore::showPalette(bool visible)
             //    Fingering
             //-----------------------------------
 
-            sp = new SymbolPalette(2, 6, 1.5);
+            sp = new Palette(2, 6, 1.5);
             sp->setGrid(30, 30);
             sp->setDrawGrid(true);
 
@@ -316,7 +316,7 @@ void MuseScore::showPalette(bool visible)
             //    Symbols
             //-----------------------------------
 
-            sp = new SymbolPalette(42, 4);
+            sp = new Palette(42, 4);
             sp->setGrid(45, 45);
             sp->setDrawGrid(true);
             sp->addObject(0, wholerestSym);
@@ -543,7 +543,7 @@ void MuseScore::clefMenu()
             QScrollArea* sa = new QScrollArea;
             sa->setWindowTitle(tr("MuseScore: Clefs"));
             clefPalette = sa;
-            SymbolPalette* sp = new SymbolPalette(4, 4);
+            Palette* sp = new Palette(4, 4);
             sa->setWidget(sp);
             sp->setGrid(60, 80);
             sp->showStaff(true);
@@ -565,7 +565,7 @@ void MuseScore::keyMenu()
       if (keyPalette == 0) {
             keyPalette = new QScrollArea;
             keyPalette->setWindowTitle(tr("MuseScore: Key Signature"));
-            SymbolPalette* sp = new SymbolPalette(4, 4);
+            Palette* sp = new Palette(4, 4);
             sp->setGrid(80, 60);
             ((QScrollArea*)keyPalette)->setWidget(sp);
             sp->showStaff(true);
@@ -611,7 +611,7 @@ void MuseScore::lineMenu()
       if (linePalette == 0) {
             linePalette = new QScrollArea;
             linePalette->setWindowTitle(tr("MuseScore: Lines"));
-            SymbolPalette* sp = new SymbolPalette(4, 4);
+            Palette* sp = new Palette(4, 4);
             ((QScrollArea*)linePalette)->setWidget(sp);
             sp->setGrid(100, 30);
 
@@ -693,7 +693,7 @@ void MuseScore::bracketMenu()
       if (bracketPalette == 0) {
             bracketPalette = new QScrollArea;
             bracketPalette->setWindowTitle(tr("MuseScore: System Brackets"));
-            SymbolPalette* sp = new SymbolPalette(1, 4);
+            Palette* sp = new Palette(1, 4);
             ((QScrollArea*)bracketPalette)->setWidget(sp);
             sp->setGrid(40, 80);
 
@@ -721,7 +721,7 @@ void MuseScore::noteAttributesMenu()
       if (noteAttributesPalette == 0) {
             noteAttributesPalette = new QScrollArea;
             noteAttributesPalette->setWindowTitle(tr("MuseScore: Note Attributes"));
-            SymbolPalette* sp = new SymbolPalette(3, 10);
+            Palette* sp = new Palette(3, 10);
             ((QScrollArea*)noteAttributesPalette)->setWidget(sp);
             sp->setGrid(60, 60);
 
@@ -745,7 +745,7 @@ void MuseScore::accidentalsMenu()
       if (accidentalsPalette == 0) {
             accidentalsPalette = new QScrollArea;
             accidentalsPalette->setWindowTitle(tr("MuseScore: Accidentals"));
-            SymbolPalette* sp = new SymbolPalette(2, 8);
+            Palette* sp = new Palette(2, 8);
             ((QScrollArea*)accidentalsPalette)->setWidget(sp);
             sp->setGrid(60, 60);
 
@@ -768,7 +768,7 @@ void MuseScore::dynamicsMenu()
       if (dynamicsPalette == 0) {
             dynamicsPalette = new QScrollArea;
             dynamicsPalette->setWindowTitle(tr("MuseScore: Dynamics"));
-            SymbolPalette* sp = new SymbolPalette(6, 6);
+            Palette* sp = new Palette(6, 6);
             ((QScrollArea*)dynamicsPalette)->setWidget(sp);
             sp->setGrid(90, 40);
 
@@ -804,7 +804,7 @@ void MuseScore::barMenu()
       if (barPalette == 0) {
             barPalette = new QScrollArea;
             barPalette->setWindowTitle(tr("MuseScore: Barlines"));
-            SymbolPalette* sp = new SymbolPalette(2, 4);
+            Palette* sp = new Palette(2, 4);
             ((QScrollArea*)barPalette)->setWidget(sp);
             sp->setGrid(60, 60);
             sp->showStaff(true);
@@ -843,7 +843,7 @@ void MuseScore::fingeringMenu()
             QScrollArea* sa = new QScrollArea;
             sa->setWindowTitle(tr("MuseScore: Fingering"));
             fingeringPalette = sa;
-            SymbolPalette* sp = new SymbolPalette(2, 6, 1.5);
+            Palette* sp = new Palette(2, 6, 1.5);
             sa->setWidget(sp);
             sp->setGrid(50, 50);
 
@@ -922,7 +922,7 @@ void MuseScore::showLayoutBreakPalette()
             QScrollArea* sa = new QScrollArea;
             sa->setWindowTitle(tr("MuseScore: Layout Breaks"));
             layoutBreakPalette = sa;
-            SymbolPalette* sp = new SymbolPalette(1, 3);
+            Palette* sp = new Palette(1, 3);
             sa->setWidget(sp);
             sp->setGrid(80, 80);
             LayoutBreak* lb = new LayoutBreak(cs);

@@ -263,7 +263,6 @@ void Element::writeProperties(Xml& xml) const
             xml.tag("selected", selected());
       if (!visible())
             xml.tag("visible", visible());
-//      if (_time.tick() && (_time.tick() != xml.curTick))
       if (_time.tick() != xml.curTick)
             xml.tag("tick", _time.tick());
       if (_duration.tick())
@@ -1002,6 +1001,8 @@ int Element::readType(QDomNode& node1, QPointF* dragOffset)
                         type = LAYOUT_BREAK;
                   else if (e.tagName() == "HelpLine")
                         type = HELP_LINE;
+                  else if (e.tagName() == "Image")
+                        type = IMAGE;
                   else {
                         domError(node);
                         type = 0;

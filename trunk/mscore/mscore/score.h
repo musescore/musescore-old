@@ -30,9 +30,7 @@
 #include "undo.h"
 
 class Page;
-class PageList;
 class SigList;
-class KeyList;
 class PageFormat;
 class ElementList;
 class TempoList;
@@ -46,21 +44,15 @@ class NoteAttribute;
 class Note;
 class Chord;
 class ChordRest;
-class Dynamic;
 class Slur;
 class Hairpin;
 class Undo;
-class Synth;
-class Audio;
-class SymbolPalette;
 class EditTempo;
 class Part;
 class StaffList;
 class MidiFile;
 class ScoreLayout;
-class TimeSig;
 class MidiTrack;
-class Pedal;
 class BSymbol;
 
 struct SigEvent;
@@ -308,7 +300,6 @@ class Score : public QObject {
 
       void cmdAdd(Element* e, const QPointF& pos, const QPointF& dragOffset);
       void cmdAddBSymbol(BSymbol*, const QPointF&, const QPointF&);
-//      void cmdAddImage(Image* s, const QPointF& pos, const QPointF& off);
 
       Element* cmdAddHairpin(Hairpin* atr, const QPointF& pos);
       Element* addSlur(Slur* atr, const QPointF& pos);

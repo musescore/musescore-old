@@ -21,6 +21,8 @@
 #ifndef __GLOBALS_H__
 #define __GLOBALS_H__
 
+static const QString mimeSymbolFormat("application/mscore/symbol");
+
 static const qreal INCH = 25.4;
 static const qreal PPI  = 72.0;     // printer points per inch
 

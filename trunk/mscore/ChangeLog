@@ -1,3 +1,8 @@
+10.4.7 (ws)
+      - make symbol palette configurable: delete elements, move elements,
+        save in ~/.mscore
+9.4.7 (ws)
+      - updated russian translation from Alexandre Prokoudine
 6.4.7 (ws)
       - extend the range of accepted external symbol types to raster images
         JPG PNG and XPM

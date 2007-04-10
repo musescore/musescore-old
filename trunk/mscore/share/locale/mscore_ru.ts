@@ -1,152 +1,85 @@
-<!DOCTYPE TS><TS>
-<context>
-    <name>@default</name>
-    <message>
-        <source>m</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>mute</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>s</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>solo</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Mo</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>monitor</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Dr</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>use drum map</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>off</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>aR</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>automation read</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>aW</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>automation write</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>sync</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>send sync events</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>1/2 channel</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>oR</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>output routing</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>iR</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>input routing</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE TS><TS version="1.1" language="ru">
 <context>
     <name>BarLineBase</name>
     <message>
+        <location filename="" line="136873180"/>
         <source>Form</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>BarLine</source>
-        <translation type="unfinished"></translation>
+        <translation>Тактовая черта</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>SubType:</source>
-        <translation type="unfinished"></translation>
+        <translation>Подтип</translation>
     </message>
 </context>
 <context>
     <name>Canvas</name>
     <message>
+        <location filename="" line="136873180"/>
         <source>Set Invisible</source>
-        <translation type="unfinished"></translation>
+        <translation>Сделать невидимой</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Set Visible</source>
-        <translation type="unfinished"></translation>
+        <translation>Сделать видимой</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Color...</source>
-        <translation type="unfinished"></translation>
+        <translation>Цвет...</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Properties</source>
-        <translation type="unfinished">Свойства</translation>
+        <translation>Свойства</translation>
     </message>
 </context>
 <context>
     <name>ChordBase</name>
     <message>
+        <location filename="" line="136873180"/>
         <source>Form</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Chord</source>
-        <translation type="unfinished"></translation>
+        <translation>Аккорд</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Stem</source>
-        <translation type="unfinished"></translation>
+        <translation>Штиль</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Hook</source>
-        <translation type="unfinished"></translation>
+        <translation>Хвостик</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Grace Note</source>
-        <translation type="unfinished"></translation>
+        <translation>Форшлаг</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Stem Direction</source>
-        <translation type="unfinished"></translation>
+        <translation>Направление штиля</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Note Attributes:</source>
-        <translation type="unfinished"></translation>
+        <translation>Атрибуты ноты:</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Help Lines:</source>
         <translation type="unfinished"></translation>
     </message>
@@ -154,41 +87,50 @@
 <context>
     <name>ChordRestBase</name>
     <message>
+        <location filename="" line="136873180"/>
         <source>Form</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>ChordRest</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Beam</source>
-        <translation type="unfinished">Группировать</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Tuplet</source>
-        <translation type="unfinished">Группа</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Up</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Beam Mode:</source>
-        <translation type="unfinished"></translation>
+        <translation>Тип группировки</translation>
     </message>
 </context>
 <context>
     <name>DynamicBase</name>
     <message>
+        <location filename="" line="136873180"/>
         <source>Form</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Dynamic</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>SubType:</source>
         <translation type="unfinished"></translation>
     </message>
@@ -196,54 +138,67 @@
 <context>
     <name>EditInstrumentBase</name>
     <message>
+        <location filename="" line="136873180"/>
         <source>New</source>
         <translation>Новый</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>OK</source>
         <translation>ОК</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Cancel</source>
         <translation>Отменить</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Properties</source>
         <translation>Свойства</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Name:</source>
         <translation type="unfinished">Имя:</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Short Name:</source>
         <translation type="unfinished">Короткое имя:</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>min. Pitch:</source>
         <translation type="unfinished">мин. высота тона:</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Upper Clef:</source>
         <translation type="unfinished">Верхний ключ:</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Split System</source>
         <translation>Система разделения</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>MuseScore: Edit Instrument Properties</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Lower Clef</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Transpose</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>max. Pitch</source>
         <translation type="unfinished"></translation>
     </message>
@@ -251,226 +206,271 @@
 <context>
     <name>EditStyleBase</name>
     <message>
+        <location filename="" line="136873180"/>
         <source>MuseScore: Edit Style</source>
-        <translation>MusE Score: Изменение стиля</translation>
+        <translation>MusE Score: правка стиля</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Page</source>
         <translation>Страница</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Measure</source>
-        <translation>Размер</translation>
+        <translation>Такт</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Numbers</source>
         <translation>Числа</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>left margin</source>
-        <translation type="unfinished">левое поле</translation>
+        <translation>Левое поле</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Page Numbers</source>
-        <translation type="unfinished"></translation>
+        <translation>Номера страниц</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>odd/even</source>
-        <translation>чёт/нечет</translation>
+        <translation>Чёт/нечет</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>show first</source>
-        <translation>плказать первой</translation>
+        <translation>Показывать номер на первой</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Measure Numbers</source>
         <translation>Числа размера</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>all staffs</source>
-        <translation>все станы</translation>
+        <translation>На всех станах</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>every system</source>
-        <translation>каждая система</translation>
+        <translation>Каждая система</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Apply</source>
-        <translation type="unfinished">Применить</translation>
+        <translation>Применить</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>OK</source>
-        <translation type="unfinished">ОК</translation>
+        <translation>ОК</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Cancel</source>
-        <translation type="unfinished">Отменить</translation>
+        <translation>Отменить</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>interval</source>
-        <translation type="unfinished"></translation>
+        <translation>Интервал</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>spaces</source>
-        <translation type="unfinished"></translation>
+        <translation>пробелов</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>akkolade distance</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>system distance</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>min note distance</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>min. right margin</source>
-        <translation type="unfinished"></translation>
+        <translation>Мин. правое поле</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>spacing (1=tight)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>staff upper border</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>staff lower border</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>staff distance</source>
-        <translation type="unfinished"></translation>
+        <translation>Расстояние между станами</translation>
     </message>
 </context>
 <context>
     <name>EditTempoBase</name>
     <message>
+        <location filename="" line="136873180"/>
         <source>Dialog</source>
-        <translation type="unfinished"></translation>
+        <translation>Диалог</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>OK</source>
-        <translation type="unfinished">ОК</translation>
+        <translation>ОК</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Cancel</source>
-        <translation type="unfinished">Отменить</translation>
+        <translation>Отменить</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>BPM:</source>
-        <translation type="unfinished"></translation>
+        <translation>BPM:</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Text:</source>
-        <translation type="unfinished"></translation>
+        <translation>Текст:</translation>
     </message>
 </context>
 <context>
     <name>ElementBase</name>
     <message>
+        <location filename="" line="136873180"/>
         <source>Form</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Element</source>
-        <translation type="unfinished"></translation>
+        <translation>Элемент</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Previous</source>
-        <translation type="unfinished"></translation>
+        <translation>Предыдущий</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Next</source>
-        <translation type="unfinished"></translation>
+        <translation>Следующий</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Parent</source>
-        <translation type="unfinished"></translation>
+        <translation>Родительский</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Anchor</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>selected</source>
-        <translation type="unfinished"></translation>
+        <translation>Выбран</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>generated</source>
-        <translation type="unfinished"></translation>
+        <translation>Создан</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>visible</source>
-        <translation type="unfinished"></translation>
+        <translation>Видим</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Voice</source>
-        <translation type="unfinished">Голос</translation>
+        <translation>Голос</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Time</source>
-        <translation type="unfinished"></translation>
+        <translation>Время</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Len</source>
-        <translation type="unfinished"></translation>
+        <translation>Длительность</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Color</source>
-        <translation type="unfinished">Цвет</translation>
+        <translation>Цвет</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Pos</source>
-        <translation type="unfinished"></translation>
+        <translation>Положение</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Offset</source>
-        <translation type="unfinished">Смещение</translation>
+        <translation>Смещение</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>BBox</source>
-        <translation type="unfinished"></translation>
+        <translation>BBox</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source> sp</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>subtype</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>0</source>
-        <translation type="unfinished">0</translation>
-    </message>
-</context>
-<context>
-    <name>GreendotButton</name>
-    <message>
-        <source>record</source>
-        <translation type="unfinished"></translation>
+        <translation>0</translation>
     </message>
 </context>
 <context>
     <name>HairpinBase</name>
     <message>
+        <location filename="" line="136873180"/>
         <source>Form</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Hairpin</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Tick1:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Tick2:</source>
         <translation type="unfinished"></translation>
     </message>
@@ -478,57 +478,70 @@
 <context>
     <name>InstrumentDialogBase</name>
     <message>
+        <location filename="" line="136873180"/>
         <source>MuseScore: Create Instruments</source>
-        <translation type="unfinished"></translation>
+        <translation>MuseScore: создание инструментов</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>0</source>
-        <translation type="unfinished">0</translation>
+        <translation>0</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Add</source>
-        <translation type="unfinished"></translation>
+        <translation>Добавить</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Remove</source>
-        <translation type="unfinished"></translation>
+        <translation>Удалить</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Up</source>
-        <translation type="unfinished"></translation>
+        <translation>Выше</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Down</source>
-        <translation type="unfinished"></translation>
+        <translation>Ниже</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Edit</source>
-        <translation type="unfinished"></translation>
+        <translation>Изменить</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Add Above</source>
-        <translation type="unfinished"></translation>
+        <translation>Добавить выше</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Add Below</source>
-        <translation type="unfinished"></translation>
+        <translation>Добавить ниже</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>1</source>
-        <translation type="unfinished">1</translation>
+        <translation>1</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>OK</source>
-        <translation type="unfinished">ОК</translation>
+        <translation>ОК</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Cancel</source>
-        <translation type="unfinished">Отменить</translation>
+        <translation>Отменить</translation>
     </message>
 </context>
 <context>
     <name>InstrumentListEditor</name>
     <message>
+        <location filename="" line="136873180"/>
         <source>MuseScore: Part List</source>
         <translation type="unfinished"></translation>
     </message>
@@ -536,10 +549,12 @@
 <context>
     <name>InstrumentsDialog</name>
     <message>
+        <location filename="" line="136873180"/>
         <source>Staves</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Clef</source>
         <translation type="unfinished">Ключ</translation>
     </message>
@@ -547,30 +562,37 @@
 <context>
     <name>IrregularMeasureDialogBase</name>
     <message>
+        <location filename="" line="136873180"/>
         <source>MuseScore: irregular Measure</source>
-        <translation type="unfinished"></translation>
+        <translation>MuseScore: нерегулярный такт</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Measure Duration</source>
-        <translation type="unfinished"></translation>
+        <translation>Длительность такта</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>nominal</source>
-        <translation type="unfinished"></translation>
+        <translation>номинальный</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>/</source>
-        <translation type="unfinished"></translation>
+        <translation>/</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>actual</source>
-        <translation type="unfinished"></translation>
+        <translation>действительный</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>other Properties</source>
-        <translation type="unfinished"></translation>
+        <translation>Прочие свойства</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>irregular</source>
         <translation type="unfinished"></translation>
     </message>
@@ -578,10 +600,12 @@
 <context>
     <name>MagBox</name>
     <message>
+        <location filename="" line="136873180"/>
         <source>Mag</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Zoom Canvas</source>
         <translation type="unfinished"></translation>
     </message>
@@ -589,6 +613,7 @@
 <context>
     <name>Measure</name>
     <message>
+        <location filename="" line="136873180"/>
         <source>set irregular</source>
         <translation type="unfinished"></translation>
     </message>
@@ -596,66 +621,82 @@
 <context>
     <name>MeasureBase</name>
     <message>
+        <location filename="" line="136873180"/>
         <source>Form</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Measure</source>
-        <translation type="unfinished">Размер</translation>
+        <translation>Такт</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Irregular</source>
-        <translation type="unfinished"></translation>
+        <translation>Нерегулярный</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Page Break</source>
-        <translation type="unfinished"></translation>
+        <translation>Разрыв страницы</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Line Break</source>
-        <translation type="unfinished"></translation>
+        <translation>Разрыв строки</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>No.:</source>
-        <translation type="unfinished"></translation>
+        <translation>№:</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Beams:</source>
-        <translation type="unfinished"></translation>
+        <translation>Групп:</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Stretch:</source>
-        <translation type="unfinished"></translation>
+        <translation>Растяжение:</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>PageElem:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Staves:</source>
-        <translation type="unfinished"></translation>
+        <translation>Нотоносцев:</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>NoOffset:</source>
-        <translation type="unfinished"></translation>
+        <translation>Без смещения:</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Tuplets:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Segments:</source>
-        <translation type="unfinished"></translation>
+        <translation>Сегментов:</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>StartRepeat</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Ending:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>EndRep:</source>
         <translation type="unfinished"></translation>
     </message>
@@ -663,1562 +704,1895 @@
 <context>
     <name>MeasuresDialogBase</name>
     <message>
+        <location filename="" line="136873180"/>
         <source>Mscore: Append Measures</source>
-        <translation type="unfinished"></translation>
+        <translation>MScore: Добавить такты</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Number of measures to append</source>
-        <translation type="unfinished"></translation>
+        <translation>Сколько тактов добавить:</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>OK</source>
-        <translation type="unfinished">ОК</translation>
+        <translation>ОК</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Cancel</source>
-        <translation type="unfinished">Отменить</translation>
+        <translation>Отменить</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Append empty measures:</source>
-        <translation type="unfinished"></translation>
+        <translation>Добавка пустых тактов</translation>
     </message>
 </context>
 <context>
     <name>MuseScore</name>
     <message>
+        <location filename="" line="136873180"/>
         <source>MuseScore</source>
-        <translation type="unfinished">MuseScore</translation>
+        <translation>MuseScore</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>The current Score contains unsaved data
 Save Current Score?</source>
-        <translation type="unfinished"></translation>
+        <translation>В текущей партитуре не сохранены все изменения.
+Сохранить партитуру?</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>&amp;Save</source>
-        <translation type="unfinished">&amp;Сохранить</translation>
+        <translation>&amp;Сохранить</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>&amp;Nosave</source>
-        <translation type="unfinished">&amp;Не сохранять</translation>
+        <translation>&amp;Не сохранять</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>&amp;Abort</source>
-        <translation type="unfinished">&amp;Прервать</translation>
+        <translation>&amp;Прервать</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>
 failed: </source>
-        <translation type="unfinished">
-не удалось:</translation>
+        <translation>
+не удалось: </translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>MuseScore: Open File</source>
-        <translation type="unfinished">MusE Score: Открыть файл</translation>
+        <translation>MusE Score: открыть файл</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Quit</source>
-        <translation type="unfinished">Выйти</translation>
+        <translation>Выйти</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Open File
 </source>
-        <translation type="unfinished">Открыть файл
+        <translation>Открыть файл
 </translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>MuseScore: load Style</source>
-        <translation type="unfinished">MuseScore: Загрузить стиль</translation>
+        <translation>MuseScore: загрузить стиль</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>MuseScore: Save Style</source>
-        <translation type="unfinished">MuseScore: Сохранить стиль</translation>
+        <translation>MuseScore: сохранить стиль</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>MuseScore: Write File</source>
-        <translation type="unfinished">MusE Score: Записать файл</translation>
+        <translation>MusE Score: записать файл</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>MuseScore: Read File</source>
-        <translation type="unfinished"></translation>
+        <translation>MusE Score: прочитать файл</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Measure</source>
-        <translation type="unfinished">Размер</translation>
+        <translation>Размер</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>&amp;Lines...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Note Attributes...</source>
-        <translation type="unfinished"></translation>
+        <translation>Атрибуты нот...</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Text...</source>
-        <translation type="unfinished">Текст...</translation>
+        <translation>Текст...</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Title</source>
-        <translation type="unfinished">Название</translation>
+        <translation>Название</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Subtitle</source>
-        <translation type="unfinished">Подзаголовок</translation>
+        <translation>Подзаголовок</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Composer</source>
-        <translation type="unfinished">Композитор</translation>
+        <translation>Композитор</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Poet</source>
-        <translation type="unfinished">Поэт</translation>
+        <translation>Поэт</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Lyrics</source>
-        <translation type="unfinished">Лирика</translation>
+        <translation>Лирика</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Tempo</source>
-        <translation type="unfinished">Темп</translation>
+        <translation>Темп</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Metronome</source>
-        <translation type="unfinished">Метроном</translation>
+        <translation>Метроном</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Rewind</source>
-        <translation type="unfinished">Перемотать назад</translation>
+        <translation>Перемотать назад</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Stop</source>
-        <translation type="unfinished">Остановить</translation>
+        <translation>Остановить</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Play</source>
-        <translation type="unfinished">Воспроизвести</translation>
+        <translation>Воспроизвести</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>undo last change</source>
-        <translation type="unfinished">отменить последнее изменение</translation>
+        <translation>Отменить последнее действие</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>redo last undo</source>
-        <translation type="unfinished">повторить последнее изменение</translation>
+        <translation>Повторить последнее действие</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>File Operations</source>
-        <translation type="unfinished">Операции с файлами</translation>
+        <translation>Операции с файлами</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Transport Tools</source>
         <translation type="unfinished">Кнопки пульта управления</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>dot</source>
-        <translation type="unfinished">точка</translation>
+        <translation>Точка</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>tie</source>
-        <translation type="unfinished">лига</translation>
+        <translation>Лига</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>rest</source>
-        <translation type="unfinished">пауза</translation>
+        <translation>Пауза</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>double sharp</source>
-        <translation type="unfinished">Двойной диез</translation>
+        <translation>Двойной диез</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>sharp</source>
-        <translation type="unfinished">диез</translation>
+        <translation>Диез</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>natural</source>
-        <translation type="unfinished">бекар</translation>
+        <translation>Бекар</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>flat</source>
-        <translation type="unfinished">бемоль</translation>
+        <translation>Бемоль</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>double flat</source>
-        <translation type="unfinished">двойной бемоль</translation>
+        <translation>Двойной бемоль</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Note Entry</source>
-        <translation type="unfinished"></translation>
+        <translation>Ввод нот</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Open &amp;Recent</source>
-        <translation type="unfinished">&amp;Недавние файлы</translation>
+        <translation>&amp;Недавние файлы</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Export Midi</source>
-        <translation type="unfinished">Экспортировать MIDI</translation>
+        <translation>Экспортировать MIDI</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Export MusicXML</source>
-        <translation type="unfinished">Экспортировать в MusicXML</translation>
+        <translation>Экспортировать в MusicXML</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Import Midi</source>
-        <translation type="unfinished">Импортировать MIDI</translation>
+        <translation>Импортировать MIDI</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Import MusicXML</source>
-        <translation type="unfinished">Импортировать MusicXML</translation>
+        <translation>Импортировать MusicXML</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>&amp;Edit</source>
-        <translation type="unfinished">&amp;Правка</translation>
+        <translation>&amp;Правка</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Page List...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Preferences...</source>
-        <translation type="unfinished"></translation>
+        <translation>Параметры...</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>&amp;Create</source>
-        <translation type="unfinished">&amp;Создать</translation>
+        <translation>&amp;Вставка</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Notes</source>
-        <translation type="unfinished">Ноты</translation>
+        <translation>Ноты</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>&amp;Layout</source>
-        <translation type="unfinished">&amp;Облик</translation>
+        <translation>&amp;Макет</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Page Settings...</source>
-        <translation type="unfinished">Параметры страницы...</translation>
+        <translation>Параметры страницы...</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Reset Positions</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Set Normal Staff Distances</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Reset Stretch</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>&amp;Style</source>
-        <translation type="unfinished">&amp;Стиль</translation>
+        <translation>&amp;Стиль</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Edit Style...</source>
-        <translation type="unfinished">Изменить стиль...</translation>
+        <translation>Изменить стиль...</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Edit Text Style...</source>
-        <translation type="unfinished">Изменить стиль текста...</translation>
+        <translation>Изменить стиль текста...</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Load Style</source>
-        <translation type="unfinished">Загрузить стиль</translation>
+        <translation>Загрузить стиль</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Save Style</source>
-        <translation type="unfinished">Сохранить стиль</translation>
+        <translation>Сохранить стиль</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>&amp;Display</source>
-        <translation type="unfinished">&amp;Вид</translation>
+        <translation>&amp;Вид</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Transport Toolbar</source>
-        <translation type="unfinished">Панель пульта управления</translation>
+        <translation>Панель пульта управления</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Note Input Toolbar</source>
-        <translation type="unfinished">Панель ввода нот</translation>
+        <translation>Панель ввода нот</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Show Invisible</source>
-        <translation type="unfinished">Показать невидимое</translation>
+        <translation>Показывать невидимое</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>&amp;Help</source>
-        <translation type="unfinished">По&amp;мощь</translation>
+        <translation>По&amp;мощь</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>&amp;About</source>
-        <translation type="unfinished">О &amp;программе</translation>
+        <translation>О &amp;программе</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>About&amp;Qt</source>
-        <translation type="unfinished">&amp;О Qt</translation>
+        <translation>&amp;О Qt</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>MuseScore: Open Help</source>
-        <translation type="unfinished">MusE Score: Открыть файл справки</translation>
+        <translation>MusE Score: Открыть файл справки</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>MuseScore: Import MusicXML</source>
-        <translation type="unfinished">MuseScore: Импортировать как MusicXml</translation>
+        <translation>MuseScore: Импортировать как MusicXML</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>MuseScore: Export as MusicXml</source>
-        <translation type="unfinished">MuseScore: Экспортировать как MusicXml</translation>
+        <translation>MuseScore: Экспортировать как MusicXML</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>MuseScore: Export as Midi (SMF)</source>
-        <translation type="unfinished">MuseScore: Экспортировать как Midi (SMF)</translation>
+        <translation>MuseScore: Экспортировать как MIDI (SMF)</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>MuseScore: Load Score</source>
-        <translation type="unfinished"></translation>
+        <translation>MuseScore: Загрузить партитуру</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>MuseScore: Save As</source>
-        <translation type="unfinished"></translation>
+        <translation>MuseScore: Сохранить как</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>MuseScore: Load Template</source>
-        <translation type="unfinished"></translation>
+        <translation>MuseScore: Загрузить шаблон</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Accidentals...</source>
-        <translation type="unfinished"></translation>
+        <translation>Знаки альтерации...</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>MuseScore: Clefs</source>
-        <translation type="unfinished"></translation>
+        <translation>MuseScore: Ключи</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>MuseScore: Key Signature</source>
-        <translation type="unfinished"></translation>
+        <translation>MuseScore: Ключевые знаки</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>MuseScore: Lines</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>MuseScore: Note Attributes</source>
-        <translation type="unfinished"></translation>
+        <translation>MuseScore: Атрибуты нот</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>MuseScore: Accidentals</source>
-        <translation type="unfinished"></translation>
+        <translation>MuseScore: Знаки альтерации</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>MuseScore: Dynamics</source>
-        <translation type="unfinished"></translation>
+        <translation>MuseScore: Нюансы</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>MuseScore: Import Midi File</source>
-        <translation type="unfinished"></translation>
+        <translation>MuseScore: Импорт файла MIDI</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Measures...</source>
-        <translation type="unfinished"></translation>
+        <translation>Такты...</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Barlines...</source>
-        <translation type="unfinished"></translation>
+        <translation>Тактовые черты...</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>System Brackets...</source>
-        <translation type="unfinished"></translation>
+        <translation>Акколады...</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>crescendo</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>diminuendo</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>prima volta</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>seconda volta</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>terza volta</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>8va</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>15va</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>8vb</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>15vb</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>pedal</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>trill line</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>MuseScore: System Brackets</source>
-        <translation type="unfinished"></translation>
+        <translation>MuseScore: Акколады</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>MuseScore: Barlines</source>
-        <translation type="unfinished"></translation>
+        <translation>MusE Score: Тактовые черты</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>MuseScore: Fingering</source>
-        <translation type="unfinished"></translation>
+        <translation>MusE Score: Аппликатура</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>MuseScore: Layout Breaks</source>
-        <translation type="unfinished"></translation>
+        <translation>MuseScore: Разрывы в макете</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>break line</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>break page</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Breaks...</source>
-        <translation type="unfinished"></translation>
+        <translation>Разрывы...</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>MuseScore manual not found at: </source>
-        <translation type="unfinished"></translation>
+        <translation>Руководство MuseScore не найдено в каталоге: </translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Load Score from File</source>
-        <translation type="unfinished">Загрузить партитуру из файла</translation>
+        <translation>Загрузить партитуру из файла</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Save Score to File</source>
-        <translation type="unfinished">Сохранить партитуру в файл</translation>
+        <translation>Сохранить партитуру в файл</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Print</source>
-        <translation type="unfinished">Напечатать</translation>
+        <translation>Напечатать</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Print Score</source>
-        <translation type="unfinished">Напечатать партитуру</translation>
+        <translation>Напечатать партитуру</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Undo</source>
-        <translation type="unfinished">Отменить</translation>
+        <translation>Отменить</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Redo</source>
-        <translation type="unfinished">Повторить</translation>
+        <translation>Повторить</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Cut</source>
-        <translation type="unfinished">Вырезать</translation>
+        <translation>Вырезать</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Copy</source>
-        <translation type="unfinished">Скопировать</translation>
+        <translation>Скопировать</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Time...</source>
-        <translation type="unfinished">Время...</translation>
+        <translation>Тактовый размер...</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Input</source>
-        <translation type="unfinished">Ввод</translation>
+        <translation>Ввод</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>B</source>
-        <translation type="unfinished">Ж</translation>
+        <translation>Си</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>1/1</source>
-        <translation type="unfinished">1/1</translation>
+        <translation>1/1</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>1/2</source>
-        <translation type="unfinished">1/2</translation>
+        <translation>1/2</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>1/4</source>
-        <translation type="unfinished">1/4</translation>
+        <translation>1/4</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>1/8</source>
-        <translation type="unfinished">1/8</translation>
+        <translation>1/8</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>1/16</source>
-        <translation type="unfinished">1/16</translation>
+        <translation>1/16</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>1/32</source>
-        <translation type="unfinished">1/32</translation>
+        <translation>1/32</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>1/64</source>
-        <translation type="unfinished">1/64</translation>
+        <translation>1/64</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>rewind to start position</source>
-        <translation type="unfinished">вернуться к началу</translation>
+        <translation>вернуться к началу</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>stop sequencer</source>
-        <translation type="unfinished">остановить секвенсер</translation>
+        <translation>остановить секвенсер</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>start sequencer play</source>
-        <translation type="unfinished">начать воспроизведение в секвенсере</translation>
+        <translation>начать воспроизведение в секвенсере</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>beam start</source>
-        <translation type="unfinished">начало группы</translation>
+        <translation>начало группы</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>beam mid</source>
-        <translation type="unfinished">середина группы</translation>
+        <translation>середина группы</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>no beam</source>
-        <translation type="unfinished">без группы</translation>
+        <translation>без группы</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>%1 contains unsaved data
 Save Current Score?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Add Note</source>
-        <translation type="unfinished"></translation>
+        <translation>Добавить ноту</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Manual</source>
-        <translation type="unfinished"></translation>
+        <translation>Руководство</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>note entry mode</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>edit mode</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Part List...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>file open</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>file save</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>file save as</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Save Score to named File</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>file close</source>
-        <translation type="unfinished"></translation>
+        <translation>закрыть файл</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Close Current Score</source>
-        <translation type="unfinished"></translation>
+        <translation>Закрыть текущую партитуру</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>file new</source>
-        <translation type="unfinished"></translation>
+        <translation>создать файл</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>print</source>
-        <translation type="unfinished"></translation>
+        <translation>напечатать</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>undo</source>
-        <translation type="unfinished"></translation>
+        <translation>отменить</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>redo</source>
-        <translation type="unfinished"></translation>
+        <translation>повторить</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>cut</source>
-        <translation type="unfinished"></translation>
+        <translation>вырезать</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>copy</source>
-        <translation type="unfinished"></translation>
+        <translation>скопировать</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>paste</source>
-        <translation type="unfinished"></translation>
+        <translation>вставить</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Paste</source>
-        <translation type="unfinished"></translation>
+        <translation>Вставить</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>show instruments dialog</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Instruments...</source>
-        <translation type="unfinished"></translation>
+        <translation>Инструменты...</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Show Instruments Dialog</source>
-        <translation type="unfinished"></translation>
+        <translation>Показать диалог «Инструменты»</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>show clefs palette</source>
-        <translation type="unfinished"></translation>
+        <translation>Показать палитру «Ключ»</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Clef...</source>
-        <translation type="unfinished"></translation>
+        <translation>Ключ...</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Show Clefs Palette</source>
-        <translation type="unfinished"></translation>
+        <translation>Показать палитру «Ключи»</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>show keys palette</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Key...</source>
-        <translation type="unfinished"></translation>
+        <translation>Ключевой знак...</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Show Keys Palette</source>
-        <translation type="unfinished"></translation>
+        <translation>Показать палитру «Ключевой знак»</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>show symbols palette</source>
-        <translation type="unfinished"></translation>
+        <translation>Показать палитру «Символы»</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Symbols...</source>
-        <translation type="unfinished"></translation>
+        <translation>Символы...</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Show Symbols Palette</source>
-        <translation type="unfinished"></translation>
+        <translation>Показать палитру «Символы»</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>show time palette</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Show Time Palette</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>show dynamics palette</source>
-        <translation type="unfinished"></translation>
+        <translation>Показать палитру «Нюансы»</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Dynamics...</source>
-        <translation type="unfinished"></translation>
+        <translation>Нюансы...</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Show Dynamics Palette</source>
-        <translation type="unfinished"></translation>
+        <translation>Показать палитру «Нюансы»</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>note input</source>
-        <translation type="unfinished"></translation>
+        <translation>ввод нот</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Note Input Mode</source>
-        <translation type="unfinished"></translation>
+        <translation>Режим ввода нот</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>enter octave above</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Octave above</source>
-        <translation type="unfinished"></translation>
+        <translation>Октавой выше</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Enter Octave above</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>enter octave below</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Octave below</source>
-        <translation type="unfinished"></translation>
+        <translation>Октавой ниже</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Enter Octave below</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>enter note a</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>A</source>
-        <translation type="unfinished"></translation>
+        <translation>Ля</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Enter Note A</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>enter note b</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Enter Note B</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>enter note c</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>C</source>
-        <translation type="unfinished"></translation>
+        <translation>До</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Enter Note C</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>enter note d</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>D</source>
-        <translation type="unfinished"></translation>
+        <translation>Ре</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Enter Note D</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>enter note e</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>E</source>
-        <translation type="unfinished"></translation>
+        <translation>Ми</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Enter Note E</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>enter note f</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>F</source>
-        <translation type="unfinished"></translation>
+        <translation>Фа</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Enter Note F</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>enter note g</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>G</source>
-        <translation type="unfinished"></translation>
+        <translation>Соль</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Enter Note G</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>add a to chord</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Add A</source>
-        <translation type="unfinished"></translation>
+        <translation>Добавить Ля</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Add note A to chord</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>add b to chord</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Add B</source>
-        <translation type="unfinished"></translation>
+        <translation>Добавить Си</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Add note B to chord</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>add c to chord</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Add C</source>
-        <translation type="unfinished"></translation>
+        <translation>Добавить До</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Add note C to chord</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>add d to chord</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Add D</source>
-        <translation type="unfinished"></translation>
+        <translation>Добавить Ре</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Add note D to chord</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>add e to chord</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Add E</source>
-        <translation type="unfinished"></translation>
+        <translation>Добавить Ми</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Add note E to chord</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>add f to chord</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Add F</source>
-        <translation type="unfinished"></translation>
+        <translation>Добавить Фа</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Add note F to chord</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>add g to chord</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Add G</source>
-        <translation type="unfinished"></translation>
+        <translation>Добавить Соль</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Add note G to chord</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>enter rest</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>more stretch</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Add more stretch</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Add more stretch to selected measure</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>less stretch</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Add less stretch</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Add less stretch to selected measure</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>flip stem</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>flip direction</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>up</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>up+ctrl</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>up note in chord</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>goto higher pitched note in chord</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>goto top note in chord</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>top note in chord</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>move up</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>up+shift+ctrl</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>pitch down</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>down</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>pitch down octave</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>down+ctrl</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>down note in chord</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>goto lower pitched note in chord</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>goto bottom note in chord</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>bottom note in chord</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>move down</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>down+shift+ctrl</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>previous chord</source>
-        <translation type="unfinished"></translation>
+        <translation>Предыдущий аккорд</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>left</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>previous measure</source>
-        <translation type="unfinished"></translation>
+        <translation>Предыдущий такт</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>left+ctrl</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>next chord</source>
-        <translation type="unfinished"></translation>
+        <translation>Следующий аккорд</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>right</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>next measure</source>
-        <translation type="unfinished"></translation>
+        <translation>Следующий такт</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>right+ctrl</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>page-prev</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>page-next</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>page-top</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>page-end</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>add tie</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>add slur</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>decrescendo</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>ESCAPE</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>delete</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>append measure</source>
-        <translation type="unfinished"></translation>
+        <translation>Добавить такт</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>pad note 1/1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>pad note 1/2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>pad note 1/4</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>pad note 1/8</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>pad note 1/16</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>pad note 1/32</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>pad note 1/64</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>pad dot</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>pad tie</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>pad rest</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>voice 1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>voice 2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>voice 3</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>voice 4</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>midi input in</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Enable Midi Input</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>editing sound on</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Enable sound while editing</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>player rewind</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>player stop</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>plaser play</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>beam 32</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Pad</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Play Panel</source>
-        <translation type="unfinished"></translation>
+        <translation>Пульт управления</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Navigator</source>
-        <translation type="unfinished"></translation>
+        <translation>Навигатор</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Transport</source>
-        <translation type="unfinished">Пульт управления</translation>
+        <translation>Пульт управления</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Note Input</source>
-        <translation type="unfinished"></translation>
+        <translation>Ввод нот</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Status Bar</source>
-        <translation type="unfinished"></translation>
+        <translation>Статусная строка</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Mag</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Zoom Canvas</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Fingering Palette</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Fingering...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Fingering</source>
-        <translation type="unfinished">Аппликатура</translation>
+        <translation>Аппликатура</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Expression Palette</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Expression</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Technik Palette</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Technik</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Tempo Palette</source>
-        <translation type="unfinished"></translation>
+        <translation>Палитра темпа</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Tempo...</source>
-        <translation type="unfinished"></translation>
+        <translation>Темп...</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Open</source>
-        <translation type="unfinished">Открыть</translation>
+        <translation>Открыть</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Save</source>
-        <translation type="unfinished">Сохранить</translation>
+        <translation>Сохранить</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Save As</source>
-        <translation type="unfinished"></translation>
+        <translation>Сохранить как</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Close</source>
-        <translation type="unfinished"></translation>
+        <translation>Закрыть</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>New</source>
-        <translation type="unfinished">Новый</translation>
+        <translation>Создать</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Create new score</source>
-        <translation type="unfinished"></translation>
+        <translation>Создать новую партитуру</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>file new from template</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>New from template</source>
-        <translation type="unfinished"></translation>
+        <translation>Создать из шаблона</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Create new score from template</source>
-        <translation type="unfinished"></translation>
+        <translation>Создать новую партитуру из шаблона</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>enter unison above</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Unison above</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Enter Unison above</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>enter second above</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Second above</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Enter Second above</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>enter third above</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Third above</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Enter Third above</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>enter fourth above</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Fourth above</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Enter Fourth above</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>enter fifth above</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Fifth above</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Enter Fifth above</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>enter sixth above</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Sixth above</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Enter Sixth above</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>enter seventh above</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Seventh above</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Enter Seventh above</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>enter ninth above</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Ninth above</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Enter Ninth above</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>enter second below</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Second below</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Enter Second below</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>enter third below</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Third below</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Enter Third below</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>enter fourth below</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Fourth below</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Enter Fourth below</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>enter fifth below</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Fifth below</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Enter Fifth below</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>enter sixth below</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Sixth below</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Enter Sixth below</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>enter seventh below</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Seventh below</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Enter Seventh below</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>enter ninth below</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Ninth below</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Enter Ninth below</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>duplet</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Duplet</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>triplet</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Triplet</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Quintuplet</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>untitled</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>&amp;Score</source>
-        <translation type="unfinished"></translation>
+        <translation>П&amp;артитура</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Add Interval</source>
-        <translation type="unfinished"></translation>
+        <translation>Добавить интервал</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Tuplets</source>
-        <translation type="unfinished"></translation>
+        <translation>Триолеобразные фигуры</translation>
     </message>
     <message>
-        <source>Clefs</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Keys</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Time</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Bar Lines</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Lines</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Brackets</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Attributes</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Accidentals</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Dynamics</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Symbols</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
+        <location filename="" line="136873180"/>
         <source></source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Palette</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>
     <name>NoteBase</name>
     <message>
+        <location filename="" line="136873180"/>
         <source>Form</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Note</source>
-        <translation type="unfinished">Нота</translation>
+        <translation>Нота</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Mirror Head</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>GraceNote</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Dots</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Move</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Line</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>User Accidental</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Pitch</source>
         <translation type="unfinished">Высота тона</translation>
     </message>
@@ -2226,40 +2600,43 @@ Save Current Score?</source>
 <context>
     <name>Pad</name>
     <message>
+        <location filename="" line="136873180"/>
         <source>Notes</source>
-        <translation type="unfinished">Ноты</translation>
+        <translation>Ноты</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Beams</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Pad</source>
-        <translation type="unfinished"></translation>
+        <translation>Группы</translation>
     </message>
 </context>
 <context>
     <name>PageBase</name>
     <message>
+        <location filename="" line="136873180"/>
         <source>Form</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Page</source>
-        <translation type="unfinished">Страница</translation>
+        <translation>Страница</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Element List:</source>
-        <translation type="unfinished"></translation>
+        <translation>Список элементов:</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Page No.:</source>
-        <translation type="unfinished"></translation>
+        <translation>Страница №:</translation>
     </message>
 </context>
 <context>
     <name>PageListEditor</name>
     <message>
+        <location filename="" line="136873180"/>
         <source>MuseScore: List Edit</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2267,121 +2644,150 @@ Save Current Score?</source>
 <context>
     <name>PageSettingsBase</name>
     <message>
+        <location filename="" line="136873180"/>
         <source>Top Margin</source>
-        <translation type="unfinished">Верхнее поле</translation>
+        <translation>Верхнее поле</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Right Margin</source>
-        <translation type="unfinished">Правое поле</translation>
+        <translation>Правое поле</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Bottom Margin</source>
-        <translation type="unfinished">Нижнее поле</translation>
+        <translation>Нижнее поле</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Left Margin</source>
-        <translation type="unfinished">Левое поле</translation>
+        <translation>Левое поле</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Space</source>
-        <translation type="unfinished">Промежуток</translation>
+        <translation>Интервал</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Apply</source>
         <translation>Применить</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>OK</source>
         <translation>ОК</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Cancel</source>
         <translation>Отменить</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>mm</source>
         <translation>мм</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>inch</source>
         <translation>дюйм</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Page Size</source>
-        <translation>Размер страницы</translation>
+        <translation>Формат страницы</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Width</source>
-        <translation type="unfinished">Ширина</translation>
+        <translation>Ширина</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Height</source>
-        <translation type="unfinished">Высота</translation>
+        <translation>Высота</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Scaling</source>
-        <translation type="unfinished"></translation>
+        <translation>Масштаб</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>MuseScore: Page Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>MuseScore: Параметры страницы</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Landscape</source>
-        <translation type="unfinished"></translation>
+        <translation>Альбом</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Two Sided</source>
-        <translation type="unfinished"></translation>
+        <translation>Двухсторонняя печать</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Preview</source>
-        <translation type="unfinished"></translation>
+        <translation>Просмотр</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Even Page Margins</source>
-        <translation type="unfinished"></translation>
+        <translation>Поля чётных страниц</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Odd Page Margins</source>
-        <translation type="unfinished"></translation>
+        <translation>Поля нечётных страниц</translation>
     </message>
 </context>
 <context>
     <name>PartEditBase</name>
     <message>
+        <location filename="" line="136873180"/>
         <source>Form</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Solo</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Mute</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Show</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Pan</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Sound:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Vol</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Rev</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Cho</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2389,38 +2795,47 @@ Save Current Score?</source>
 <context>
     <name>PlayPanelBase</name>
     <message>
+        <location filename="" line="136873180"/>
         <source>001.01</source>
-        <translation type="unfinished">001.01</translation>
+        <translation>001.01</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Rewind</source>
         <translation>Перемотать назад</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Stop</source>
         <translation>Остановить</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Play</source>
         <translation>Воспроизвести</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>MuseScore: Play Panel</source>
-        <translation type="unfinished"></translation>
+        <translation>MuseScore: Пульт управления</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>120bpm</source>
-        <translation type="unfinished"></translation>
+        <translation>120bpm</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>100%</source>
-        <translation type="unfinished"></translation>
+        <translation>100%</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Vol</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Tmp</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2428,338 +2843,390 @@ Save Current Score?</source>
 <context>
     <name>PreferenceDialog</name>
     <message>
+        <location filename="" line="136873180"/>
         <source>Images (*.jpg *.gif *.png)</source>
-        <translation type="unfinished">Изображения (*.jpg *.gif *.png)</translation>
+        <translation>Изображения (*.jpg *.gif *.png)</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Choose Notepaper</source>
-        <translation type="unfinished">Выбрать фон страницы</translation>
+        <translation>Выберите фон страницы</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Choose Background Wallpaper</source>
-        <translation type="unfinished">Выбрать фон рабочего поля</translation>
+        <translation>Выберите фон рабочего поля</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Sound Fonds (*.sf2 *.SF2);;All (*)</source>
-        <translation type="unfinished">Sound Fonts (*.sf2 *.SF2);;All (*)</translation>
+        <translation>Sound Fonts (*.sf2 *.SF2);;All (*)</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Choose Synthesizer Sound Font</source>
-        <translation type="unfinished">Выбрать Sound Font для синтезатора</translation>
+        <translation>Выберите Sound Font для синтезатора</translation>
     </message>
 </context>
 <context>
     <name>PrefsDialogBase</name>
     <message>
+        <location filename="" line="136873180"/>
         <source>MuseScore: Preferences</source>
         <translation>MusE Score: Настройки</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Canvas</source>
         <translation>Канва</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Color</source>
         <translation>Цвет</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Notesheet</source>
-        <translation>Нотная страницв</translation>
+        <translation>Нотная страница</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>current</source>
         <translation>текущий</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>CS</source>
         <translation>Изм</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Wallpaper</source>
         <translation>Обои</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>blinking Cursor</source>
-        <translation>мигающий курсор</translation>
+        <translation>Мигающий курсор</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Background</source>
         <translation>Фоновое изображение</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Colors</source>
         <translation>Цвета</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Selection Color Voice 1</source>
         <translation>Цвет выделения для голоса 1</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Selection Color Voice 2</source>
         <translation>Цвет выделения для голоса 2</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Selection Color Voice 3</source>
         <translation>Цвет выделения для голоса 3</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Selection Color Voice 4</source>
         <translation>Цвет выделения для голоса 4</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>JACK: L-Port</source>
         <translation>JACK: Л-порт</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>JACK: R-Port</source>
         <translation>JACK: П-порт</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>StemDir</source>
-        <translation type="unfinished"></translation>
+        <translation>Направление штилей</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Down</source>
-        <translation type="unfinished"></translation>
+        <translation>Вниз</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Auto</source>
-        <translation type="unfinished">Авто</translation>
+        <translation>Автоматически</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Up</source>
-        <translation type="unfinished"></translation>
+        <translation>Вверх</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>...</source>
-        <translation type="unfinished"></translation>
+        <translation>...</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>enable midi input</source>
-        <translation type="unfinished"></translation>
+        <translation>Включить ввод по MIDI</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Sound Font</source>
-        <translation type="unfinished"></translation>
+        <translation>Sound Font</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Voice 4</source>
-        <translation type="unfinished"></translation>
+        <translation>Голос 4</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Voice 3</source>
-        <translation type="unfinished"></translation>
+        <translation>Голос 3</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Voice 2</source>
-        <translation type="unfinished"></translation>
+        <translation>Голос 2</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Voice 1</source>
-        <translation type="unfinished"></translation>
+        <translation>Голос 1</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>General</source>
-        <translation type="unfinished">Общие</translation>
+        <translation>Общие</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Windows</source>
-        <translation type="unfinished"></translation>
+        <translation>Окна</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Cur</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>show</source>
-        <translation type="unfinished">показать</translation>
+        <translation>Показать</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Key Pad:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Play Panel:</source>
-        <translation type="unfinished"></translation>
+        <translation>Пульт управления:</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Navigator</source>
-        <translation type="unfinished"></translation>
+        <translation>Навигатор</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Misc.</source>
-        <translation type="unfinished"></translation>
+        <translation>Разное</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>disable antialiased drawing</source>
-        <translation type="unfinished"></translation>
+        <translation>Отключить сглаженную отрисовку</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>uncheck this to speed up drawing</source>
-        <translation type="unfinished"></translation>
+        <translation>Отключить для ускорения отрисовки</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Draw Antialiased</source>
-        <translation type="unfinished"></translation>
+        <translation>Сглаженная отрисовка</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Midi</source>
-        <translation type="unfinished"></translation>
+        <translation>MIDI</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Play Notes when editing</source>
-        <translation type="unfinished"></translation>
+        <translation>Воспроизводить ноты при их вводе</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Audio</source>
-        <translation type="unfinished"></translation>
+        <translation>Звук</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>JACK Audio Server</source>
-        <translation type="unfinished"></translation>
+        <translation>Звуковой сервер JACK</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>ALSA Audio</source>
-        <translation type="unfinished"></translation>
+        <translation>ALSA Audio</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>default</source>
-        <translation type="unfinished"></translation>
+        <translation>по умолчанию</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>48000</source>
-        <translation type="unfinished">48000</translation>
+        <translation>48000</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>44500</source>
-        <translation type="unfinished">44500</translation>
+        <translation>44500</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>4096</source>
-        <translation type="unfinished">4096</translation>
+        <translation>4096</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>2048</source>
-        <translation type="unfinished">2048</translation>
+        <translation>2048</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>1024</source>
-        <translation type="unfinished">1024</translation>
+        <translation>1024</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>512</source>
-        <translation type="unfinished">512</translation>
+        <translation>512</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>256</source>
-        <translation type="unfinished">256</translation>
+        <translation>256</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>128</source>
-        <translation type="unfinished">128</translation>
+        <translation>128</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>64</source>
-        <translation type="unfinished">64</translation>
+        <translation>64</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Fragments:</source>
-        <translation type="unfinished"></translation>
+        <translation>Фрагментов:</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Period Size:</source>
-        <translation type="unfinished"></translation>
+        <translation>Размер периода:</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Sample Rate:</source>
-        <translation type="unfinished"></translation>
+        <translation>Частота сэмплирования:</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Device:</source>
-        <translation type="unfinished"></translation>
+        <translation>Устройство:</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Program Start</source>
-        <translation type="unfinished"></translation>
+        <translation>При запуске программы</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>start with new score</source>
-        <translation type="unfinished"></translation>
+        <translation>начинать с новой партитуры</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>start with score:</source>
-        <translation type="unfinished"></translation>
+        <translation>начинать с партитуры:</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>continue last session</source>
-        <translation type="unfinished"></translation>
+        <translation>продолжить предыдущий сеанс</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>show splash screen</source>
-        <translation type="unfinished"></translation>
+        <translation>Показывать экранную заставку</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Shortcuts</source>
-        <translation type="unfinished"></translation>
+        <translation>Клавиатурные комбинации</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Action</source>
-        <translation type="unfinished"></translation>
+        <translation>Действие</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Shortcut</source>
-        <translation type="unfinished"></translation>
+        <translation>Комбинация</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Reset to Default</source>
-        <translation type="unfinished"></translation>
+        <translation>Сбросить до исходных</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Clear</source>
-        <translation type="unfinished"></translation>
+        <translation>Очистить</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Define...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>enable midi remote control</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Midi Remote Control</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Record</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Rewind</source>
-        <translation type="unfinished">Перемотать назад</translation>
-    </message>
-    <message>
-        <source>Stop</source>
-        <translation type="unfinished">Остановить</translation>
-    </message>
-    <message>
-        <source>Play</source>
-        <translation type="unfinished">Воспроизвести</translation>
+        <translation>Назначить...</translation>
     </message>
 </context>
 <context>
     <name>QMessageBox</name>
     <message>
+        <location filename="" line="136873180"/>
         <source>MuseScore:</source>
-        <translation type="unfinished">MuseScore:</translation>
+        <translation>MuseScore:</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>please select a single note and retry operation
 </source>
         <translation type="unfinished">выберите одинарную ноту и попробуйте ещё раз
 </translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>please select a single note or rest and retry operation
 </source>
         <translation type="unfinished">выберите одинарную ноту или паузу
@@ -2767,6 +3234,7 @@ Save Current Score?</source>
 </translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>please select a single note or slur and retry operation
 </source>
         <translation type="unfinished">выберите одинарную ноту или лигу
@@ -2777,196 +3245,233 @@ Save Current Score?</source>
 <context>
     <name>QWidget</name>
     <message>
+        <location filename="" line="136873180"/>
         <source>MuseScore: load failed:</source>
-        <translation type="unfinished">MuseScore: загрузка не удалась:</translation>
+        <translation>MuseScore: загрузка не удалась:</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Quit</source>
-        <translation type="unfinished">Выйти</translation>
+        <translation>Выйти</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Open File
 </source>
-        <translation type="unfinished">Открытие файла
+        <translation>Открытие файла
 </translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>
 failed: </source>
-        <translation type="unfinished">
+        <translation>
 не удалось:</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>MuseScore: Open File</source>
-        <translation type="unfinished">MusE Score: Открыть файл</translation>
+        <translation>MusE Score: открыть файл</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>MuseScore: Write</source>
-        <translation type="unfinished">MuseScore: Записать</translation>
-    </message>
-</context>
-<context>
-    <name>RecordButton</name>
-    <message>
-        <source>record</source>
-        <translation type="unfinished"></translation>
+        <translation>MuseScore: записать</translation>
     </message>
 </context>
 <context>
     <name>Score</name>
     <message>
+        <location filename="" line="136873180"/>
         <source>Open Temp File
 </source>
-        <translation type="unfinished">Открыть временный файл
+        <translation>Открыть временный файл
 </translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>
 failed: </source>
-        <translation type="unfinished">
-не удалось:</translation>
+        <translation>
+не удалось: </translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>MuseScore: Open File</source>
-        <translation type="unfinished">MusE Score: Открыть файл</translation>
+        <translation>MusE Score: открыть файл</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>MuseScore: Read File</source>
-        <translation type="unfinished"></translation>
+        <translation>MuseScore: прочитать файл</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>No staves found:
 please use the instruments dialog to
 first create some staves</source>
-        <translation type="unfinished"></translation>
+        <translation>Нотоносцев не найдено:
+Используйте диалог инструментов
+для создания нотоносцев</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>No note or rest selected:
 please select a note or rest were you want to
 start note entry</source>
-        <translation type="unfinished"></translation>
+        <translation>Ни одна нота или пауза не выделена:
+выберите ноту или паузу, 
+откуда хотите начать ввод нот.</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>MuseScore: Save Score</source>
-        <translation type="unfinished"></translation>
+        <translation>MuseScore: сохранить партитуру</translation>
     </message>
 </context>
 <context>
     <name>SegmentBase</name>
     <message>
+        <location filename="" line="136873180"/>
         <source>Form</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Segment</source>
-        <translation type="unfinished"></translation>
+        <translation>Сегмент</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Clef Segment</source>
-        <translation type="unfinished"></translation>
+        <translation>Сегмент ключа</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Key Signature</source>
-        <translation type="unfinished"></translation>
+        <translation>Ключевой знак</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Time Signature</source>
-        <translation type="unfinished"></translation>
+        <translation>Тактовый размер</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Begin Repeat</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Chord/Rest</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Lyrics:</source>
-        <translation type="unfinished"></translation>
+        <translation>Лирика:</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Segment Type:</source>
-        <translation type="unfinished"></translation>
+        <translation>Тип сегмента:</translation>
     </message>
 </context>
 <context>
     <name>ShortcutCaptureDialog</name>
     <message>
+        <location filename="" line="136873180"/>
         <source>Shortcut conflicts with </source>
-        <translation type="unfinished"></translation>
+        <translation>Комбинация конфликтует с </translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Undefined</source>
-        <translation type="unfinished"></translation>
+        <translation>Не определена</translation>
     </message>
 </context>
 <context>
     <name>ShortcutCaptureDialogBase</name>
     <message>
+        <location filename="" line="136873180"/>
         <source>Enter shortcut sequence</source>
-        <translation type="unfinished"></translation>
+        <translation>Введите комбинацию клавиш</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Press up to 4 keys to enter shortcut sequence!</source>
-        <translation type="unfinished"></translation>
+        <translation>Нажмите до 4 клавиш одновременно, чтобы ввести комбинацию!</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Old shortcut:</source>
-        <translation type="unfinished"></translation>
+        <translation>Старая комбинация:</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>New shortcut:</source>
-        <translation type="unfinished"></translation>
+        <translation>Новая комбинация:</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Clear</source>
-        <translation type="unfinished"></translation>
+        <translation>Очистить</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>OK</source>
-        <translation type="unfinished">ОК</translation>
+        <translation>ОК</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Cancel</source>
-        <translation type="unfinished">Отменить</translation>
+        <translation>Отменить</translation>
     </message>
 </context>
 <context>
     <name>ShowChordWidget</name>
     <message>
+        <location filename="" line="136873180"/>
         <source>auto</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>beam begin</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>beam mid</source>
         <translation type="unfinished">середина группы</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>beam end</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>no beam</source>
         <translation type="unfinished">без группы</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>begin 1/32</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Auto</source>
         <translation type="unfinished">Авто</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Up</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Down</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2974,44 +3479,53 @@ start note entry</source>
 <context>
     <name>ShowClefWidget</name>
     <message>
+        <location filename="" line="136873180"/>
         <source>Clef Type:</source>
-        <translation type="unfinished"></translation>
+        <translation>Тип ключа:</translation>
     </message>
 </context>
 <context>
     <name>ShowRestWidget</name>
     <message>
+        <location filename="" line="136873180"/>
         <source>Segment:</source>
-        <translation type="unfinished"></translation>
+        <translation>Сегмент:</translation>
     </message>
 </context>
 <context>
     <name>SlurTieBase</name>
     <message>
+        <location filename="" line="136873180"/>
         <source>Form</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>SlurTie</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Slur Segment</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Up</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Direction:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Auto</source>
         <translation type="unfinished">Авто</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Down</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3019,6 +3533,7 @@ start note entry</source>
 <context>
     <name>SymbolDialog</name>
     <message>
+        <location filename="" line="136873180"/>
         <source>MuseScore: Symbols</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3026,26 +3541,32 @@ start note entry</source>
 <context>
     <name>SymbolDialogBase</name>
     <message>
+        <location filename="" line="136873180"/>
         <source>Form</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Anchor</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Page</source>
         <translation type="unfinished">Страница</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Time</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Note</source>
         <translation type="unfinished">Нота</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>System</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3053,220 +3574,273 @@ start note entry</source>
 <context>
     <name>TextBase</name>
     <message>
+        <location filename="" line="136873180"/>
         <source>Form</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Text</source>
-        <translation type="unfinished">Текст</translation>
+        <translation>Текст</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Offset:</source>
-        <translation type="unfinished"></translation>
+        <translation>Смещение:</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Text:</source>
-        <translation type="unfinished"></translation>
+        <translation>Текст:</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Style:</source>
-        <translation type="unfinished">Стиль:</translation>
+        <translation>Стиль:</translation>
     </message>
 </context>
 <context>
     <name>TextPaletteBase</name>
     <message>
+        <location filename="" line="136873180"/>
         <source>MuseScore: Special Text Symbols</source>
-        <translation type="unfinished"></translation>
+        <translation>MuseScore: Специальные символы</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>...</source>
-        <translation type="unfinished"></translation>
+        <translation>...</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Size:</source>
-        <translation type="unfinished">Кегль:</translation>
+        <translation>Кегль:</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Family:</source>
-        <translation type="unfinished"></translation>
+        <translation>Гарнитура:</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>align left</source>
-        <translation type="unfinished"></translation>
+        <translation>Выключка влево</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>align center</source>
-        <translation type="unfinished"></translation>
+        <translation>Выключка по центру</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>align right</source>
-        <translation type="unfinished"></translation>
+        <translation>Выключка вправо</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>bold</source>
-        <translation type="unfinished"></translation>
+        <translation>Полужирное начертание</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>italic</source>
-        <translation type="unfinished"></translation>
+        <translation>Курсивное начертание</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>underline</source>
-        <translation type="unfinished"></translation>
+        <translation>Подчёркивание</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>subscript</source>
-        <translation type="unfinished"></translation>
+        <translation>Нижний индекс</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>superscript</source>
-        <translation type="unfinished"></translation>
+        <translation>Верхний индекс</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>font size</source>
-        <translation type="unfinished"></translation>
+        <translation>Кегль шрифта</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>select font family</source>
-        <translation type="unfinished"></translation>
+        <translation>Выберите шрифтовую гарнитуру</translation>
     </message>
 </context>
 <context>
     <name>TextStyleBase</name>
     <message>
+        <location filename="" line="136873180"/>
         <source>MuseScore: Edit Text Styles</source>
         <translation>MuseScore: Правка стилей текста</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>General</source>
         <translation>Общие</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>B</source>
         <translation>Ж</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>I</source>
         <translation>К</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>U</source>
         <translation>Ч</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Position</source>
         <translation>Позиция</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Reference Position</source>
-        <translation type="unfinished"></translation>
+        <translation>Привязка</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Page</source>
         <translation>Страница</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Time Tick</source>
-        <translation type="unfinished"></translation>
+        <translation>К time tick</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Note Head</source>
-        <translation type="unfinished"></translation>
+        <translation>К головке ноты</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>System</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Alignment</source>
         <translation>Выравнивание</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Left</source>
-        <translation type="unfinished"></translation>
+        <translation>Влево</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Right</source>
-        <translation type="unfinished"></translation>
+        <translation>Вправо</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Top</source>
-        <translation type="unfinished"></translation>
+        <translation>Вверх</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Bottom</source>
-        <translation type="unfinished"></translation>
+        <translation>Вниз</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Offset</source>
         <translation>Смещение</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Unit:</source>
-        <translation type="unfinished">Единица:</translation>
+        <translation>Единица измерения:</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>MM</source>
-        <translation type="unfinished"></translation>
+        <translation>мм</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Percent</source>
         <translation>Процент</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Space</source>
-        <translation type="unfinished">Промежуток</translation>
+        <translation>Пробел</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Apply</source>
         <translation>Применить</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Font</source>
-        <translation type="unfinished"></translation>
+        <translation>Гарнитура</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Size</source>
-        <translation type="unfinished"></translation>
+        <translation>Кегль</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Style</source>
-        <translation type="unfinished"></translation>
+        <translation>Стиль</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Text Sample</source>
-        <translation type="unfinished"></translation>
+        <translation>Образец текста</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Horizontal</source>
-        <translation type="unfinished"></translation>
+        <translation>По горизонтали</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Center</source>
-        <translation type="unfinished"></translation>
+        <translation>По центру</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Vertical</source>
-        <translation type="unfinished"></translation>
+        <translation>По вертикали</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>OK</source>
-        <translation type="unfinished">ОК</translation>
+        <translation>ОК</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Cancel</source>
-        <translation type="unfinished">Отменить</translation>
+        <translation>Отменить</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>X:</source>
-        <translation type="unfinished"></translation>
+        <translation>X:</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Y:</source>
-        <translation type="unfinished"></translation>
+        <translation>Y:</translation>
     </message>
     <message encoding="UTF-8">
+        <location filename="" line="136873180"/>
         <source>Ich und Du, M�llers Kuh...</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3274,94 +3848,114 @@ start note entry</source>
 <context>
     <name>TextStyleDialog</name>
     <message>
-        <source>Ich und du, M&#xc3;&#xbc;llers Kuh</source>
+        <location filename="" line="136873180"/>
+        <source>Ich und du, M&#xfc;llers Kuh</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
     <name>TimeDialog</name>
     <message>
+        <location filename="" line="136873180"/>
         <source>MuseScore: TimeSignature</source>
-        <translation type="unfinished"></translation>
+        <translation>MuseScore: тактовый размер</translation>
     </message>
 </context>
 <context>
     <name>TimeDialogBase</name>
     <message>
+        <location filename="" line="136873180"/>
         <source>Form</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Create TimeSignature</source>
-        <translation type="unfinished"></translation>
+        <translation>Создать тактовый размер</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>+</source>
-        <translation type="unfinished">+</translation>
+        <translation>+</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>add time signature to palette</source>
-        <translation type="unfinished"></translation>
+        <translation>добавить в палитру тактовый размер</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Add</source>
-        <translation type="unfinished"></translation>
+        <translation>Добавить</translation>
     </message>
 </context>
 <context>
     <name>Tuplet</name>
     <message>
+        <location filename="" line="136873180"/>
         <source>Show number</source>
-        <translation type="unfinished"></translation>
+        <translation>Показать число</translation>
     </message>
 </context>
 <context>
     <name>TupletBase</name>
     <message>
+        <location filename="" line="136873180"/>
         <source>Form</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Tuplet</source>
         <translation type="unfinished">Группа</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>has number</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>has line</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>base len</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>normal notes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>actual notes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Chord/Rest list:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Text Element</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Element</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Tick</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>Length</source>
         <translation type="unfinished"></translation>
     </message>
@@ -3369,14 +3963,17 @@ start note entry</source>
 <context>
     <name>magTable</name>
     <message>
+        <location filename="" line="136873180"/>
         <source>Page</source>
         <translation type="unfinished">Страница</translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>PgeWidth</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="" line="136873180"/>
         <source>DblPage</source>
         <translation type="unfinished"></translation>
     </message>

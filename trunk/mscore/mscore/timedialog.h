@@ -23,7 +23,7 @@
 
 #include "ui_timedialog.h"
 
-class SymbolPalette;
+class Palette;
 
 //---------------------------------------------------------
 //   TimeDialog
@@ -32,7 +32,7 @@ class SymbolPalette;
 class TimeDialog : public QWidget, Ui::TimeDialogBase {
       Q_OBJECT
 
-      SymbolPalette* sp;
+      Palette* sp;
 
    private slots:
       void addClicked();

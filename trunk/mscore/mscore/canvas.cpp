@@ -45,6 +45,7 @@
 #include "trill.h"
 #include "hairpin.h"
 #include "image.h"
+#include "globals.h"
 
 //---------------------------------------------------------
 //   Canvas
@@ -316,7 +317,7 @@ void Canvas::mousePressEvent(QMouseEvent* ev)
                         QMimeData* mimeData = new QMimeData;
                         Element* el = symbols[currentSymbol];
 
-                        mimeData->setData("application/mscore/symbol", el->mimeData());
+                        mimeData->setData(mimeSymbolFormat, el->mimeData());
                         drag->setMimeData(mimeData);
 
                         /*Qt::DropAction dropAction =*/ drag->start(Qt::CopyAction);
@@ -464,7 +465,7 @@ void Canvas::mouseMoveEvent1(QMouseEvent* ev)
                         QMimeData* mimeData = new QMimeData;
                         QPointF rpos(startMove - de->abbox().topLeft());
 // printf("drag %s: diff %f %f\n", de->name(), rpos.x(), rpos.y());
-                        mimeData->setData("application/mscore/symbol", de->mimeData(rpos));
+                        mimeData->setData(mimeSymbolFormat, de->mimeData(rpos));
                         drag->setMimeData(mimeData);
                         _score->endCmd(true);
                         drag->start(Qt::CopyAction);
@@ -1139,13 +1140,13 @@ void Canvas::dragMoveEvent(QDragMoveEvent* event)
                   event->acceptProposedAction();
                   }
             }
-      if (!event->mimeData()->hasFormat("application/mscore/symbol"))
+      if (!event->mimeData()->hasFormat(mimeSymbolFormat))
             return;
 
       // convert window to canvas position
       QPointF pos(imatrix.map(QPointF(event->pos())));
 
-      QByteArray data(event->mimeData()->data("application/mscore/symbol"));
+      QByteArray data(event->mimeData()->data(mimeSymbolFormat));
       QDomDocument doc;
       int line, column;
       QString err;
@@ -1180,6 +1181,9 @@ void Canvas::dragMoveEvent(QDragMoveEvent* event)
                         }
                   delete s;
                   }
+                  break;
+            case IMAGE:
+                  event->acceptProposedAction();
                   break;
 
             default:
@@ -1242,12 +1246,12 @@ void Canvas::dropEvent(QDropEvent* event)
                   return;
                   }
             }
-      else if (!event->mimeData()->hasFormat("application/mscore/symbol")) {
+      else if (!event->mimeData()->hasFormat(mimeSymbolFormat)) {
             printf("cannot drop this object: unknown mime type\n");
             return;
             }
 
-      QByteArray data(event->mimeData()->data("application/mscore/symbol"));
+      QByteArray data(event->mimeData()->data(mimeSymbolFormat));
       QDomDocument doc;
       int line, column;
       QString err;
@@ -1379,10 +1383,11 @@ void Canvas::dropEvent(QDropEvent* event)
 
 void Canvas::dragEnterEvent(QDragEnterEvent* event)
       {
-      if (event->mimeData()->hasFormat("application/mscore/symbol"))
+      const QMimeData* data = event->mimeData();
+      if (data->hasFormat(mimeSymbolFormat))
             event->acceptProposedAction();
-      else if (event->mimeData()->hasUrls()) {
-            QList<QUrl>ul = event->mimeData()->urls();
+      else if (data->hasUrls()) {
+            QList<QUrl>ul = data->urls();
             QUrl u = ul.front();
             if (debugMode)
                   printf("drag Url: %s\n", u.toString().toLatin1().data());
@@ -1401,9 +1406,9 @@ void Canvas::dragEnterEvent(QDragEnterEvent* event)
             }
       else {
             if (debugMode) {
-                  printf("dragEnterEvent: formats:\n");
-                  foreach(QString s, event->mimeData()->formats())
-                        printf("   %s\n", s.toLatin1().data());
+                  printf("dragEnterEvent: formats %d:\n", data->hasFormat(mimeSymbolFormat));
+                  foreach(QString s, data->formats())
+                        printf("   <%s>\n", s.toLatin1().data());
                   }
             }
       }

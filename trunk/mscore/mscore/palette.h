@@ -23,6 +23,7 @@
 
 class Element;
 class Sym;
+class Xml;
 
 //---------------------------------------------------------
 //   PaletteBoxButton
@@ -54,20 +55,22 @@ class PaletteBox : public QDockWidget {
       };
 
 //---------------------------------------------------------
-//   SymbolPalette
+//   Palette
 //---------------------------------------------------------
 
-class SymbolPalette : public QWidget {
+class Palette : public QWidget {
       Q_OBJECT
 
       Element** symbols;
       QString* names;
       int rows, columns;
       int hgrid, vgrid;
-      int currentSymbol;
+      int currentIdx;
+      int selectedIdx;
       QPoint dragStartPosition;
       qreal extraMag;
       bool _drawGrid;
+      bool _showSelection;
 
       bool staff;
 
@@ -79,9 +82,19 @@ class SymbolPalette : public QWidget {
       virtual bool event(QEvent*);
       virtual QSize sizeHint() const;
 
+      virtual void dragEnterEvent(QDragEnterEvent*);
+      virtual void dragMoveEvent(QDragMoveEvent*);
+      virtual void dropEvent(QDropEvent*);
+
+      int idx(const QPoint&) const;
+      QRect idxRect(int);
+
+   signals:
+      void droppedElement(Element*);
+
    public:
-      SymbolPalette(int rows, int columns, qreal mag = 1.0);
-      ~SymbolPalette();
+      Palette(int rows, int columns, qreal mag = 1.0);
+      ~Palette();
       void addObject(int idx, Element*, const QString& name);
       void addObject(int idx, int sym);
       void setGrid(int, int);
@@ -91,6 +104,11 @@ class SymbolPalette : public QWidget {
       void setRowsColumns(int r, int c);
       Element* element(int idx) { return symbols[idx]; }
       void setDrawGrid(bool val) { _drawGrid = val; }
+      void write(Xml&, const char*) const;
+      void read(QDomNode);
+      void clear();
+      void setShowSelection(bool val) { _showSelection = val; }
+      int getSelectedIdx() const { return selectedIdx; }
       };
 
 #endif
