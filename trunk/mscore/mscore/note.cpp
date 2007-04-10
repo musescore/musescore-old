@@ -132,14 +132,14 @@ void Note::changePitch(int n)
       _userAccidental = -1;
       if (chord()) {
             // keep notes sorted in chord:
-            Chord* c = chord();
+            Chord* c     = chord();
             NoteList* nl = c->noteList();
             iNote i;
-            for (i = nl->lower_bound(pitch()); i != nl->upper_bound(pitch()); ++i) {
+            for (i = nl->begin(); i != nl->end(); ++i) {
                   if (i->second == this)
                         break;
                   }
-            if (i == nl->upper_bound(pitch())) {
+            if (i == nl->end()) {
                   printf("Note::changePitch(): note not found in chord()\n");
                   return;
                   }
