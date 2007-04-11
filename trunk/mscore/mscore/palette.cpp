@@ -304,7 +304,7 @@ void Palette::paintEvent(QPaintEvent*)
                               p.fillRect(r, QColor(200, 200, 180));
                         }
                   else if (idx == currentIdx)
-                        p.fillRect(r, p.background().color().lighter(118));
+                        p.fillRect(r, p.background().color().light(118));
                   Element* el = symbols[idx];
                   if (el == 0)
                         continue;

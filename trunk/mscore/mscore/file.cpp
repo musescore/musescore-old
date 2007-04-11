@@ -720,7 +720,7 @@ bool Score::loadFile(QFile* qf)
                   m->add(barLine);
                   }
             }
-//TODO      connectTies();
+      _layout->connectTies();
       searchSelectedElements();
       _fileDivision = division;
       return false;
