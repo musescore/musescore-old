@@ -26,12 +26,35 @@ QT4_WRAP_CPP (mocs
       midipanknob.h
       )
 
-set(awl_src
-      awl.cpp utils.cpp  ${mocCPP} ${moc_headers}
+add_custom_command(
+   OUTPUT ${PROJECT_BINARY_DIR}/all.h
+   COMMAND cp ${PROJECT_SOURCE_DIR}/all.h ${PROJECT_BINARY_DIR}/all.h
+   DEPENDS ${PROJECT_SOURCE_DIR}/all.h
+   WORKING_DIRECTORY ${PROJECT_BINARY_DIR}
+   )
+
+add_custom_command(
+   OUTPUT ${PROJECT_BINARY_DIR}/all.h.pch
+   COMMAND ${CMAKE_CXX_COMPILER}
+     -g -Wextra -fno-exceptions -Wall
+     -I${QT_INCLUDE_DIR}
+     -I${QT_QTCORE_INCLUDE_DIR}
+     -I${QT_QTGUI_INCLUDE_DIR}
+     -o all.h.pch all.h
+   DEPENDS ${PROJECT_BINARY_DIR}/all.h
+   WORKING_DIRECTORY ${PROJECT_BINARY_DIR}
+   )
+
+set_source_files_properties(
+      ${PROJECT_BINARY_DIR}/all.h
+      ${PROJECT_BINARY_DIR}/all.h.pch
+      PROPERTIES generated true
       )
 
 add_library (
       awl STATIC
+      ${PROJECT_BINARY_DIR}/all.h
+      ${PROJECT_BINARY_DIR}/all.h.pch
       ${mocs}
       aslider.cpp
       knob.cpp
@@ -42,7 +65,7 @@ add_library (
 
 set_target_properties( awl
    PROPERTIES COMPILE_FLAGS
-      "-include ${PROJECT_BINARY_DIR}/mscore/all.h"
+      "-include ${PROJECT_BINARY_DIR}/all.h"
    )
 
 QT4_WRAP_CPP (mocs2
@@ -56,6 +79,8 @@ QT4_WRAP_CPP (mocs2
 
 add_library (
       awlplugin SHARED
+      ${PROJECT_BINARY_DIR}/all.h
+      ${PROJECT_BINARY_DIR}/all.h.pch
       ${mocs2}
       awlplugin.cpp
       aslider.cpp
@@ -67,7 +92,7 @@ add_library (
 
 set_target_properties( awlplugin
       PROPERTIES COMPILE_FLAGS
-      "-D_GNU_SOURCE -D_REENTRANT -DHAVE_CONFIG_H -DQT_PLUGIN -DQT_SHARED -DQT_NO_DEBUG -include ${PROJECT_SOURCE_DIR}/mscore/all.h"
+      "-D_GNU_SOURCE -D_REENTRANT -DHAVE_CONFIG_H -DQT_PLUGIN -DQT_SHARED -DQT_NO_DEBUG -include ${PROJECT_SOURCE_DIR}/all.h"
       )
 
 target_link_libraries( awlplugin
