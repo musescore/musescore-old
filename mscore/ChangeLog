@@ -1,4 +1,7 @@
+11.4.7 (ws)
+      - fix Ties
 10.4.7 (ws)
+      - insert/remove clefs: fix removing of redundant clef symbols
       - make symbol palette configurable: delete elements, move elements,
         save in ~/.mscore
 9.4.7 (ws)

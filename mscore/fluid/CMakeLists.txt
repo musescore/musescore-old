@@ -35,10 +35,8 @@ add_library (fluid
   tuning.cpp
   sys.cpp
   )
-##  sys.cpp
-##  midi.cpp
 
 set_target_properties( fluid
-   PROPERTIES COMPILE_FLAGS "-include ${PROJECT_BINARY_DIR}/mscore/all.h"
+   PROPERTIES COMPILE_FLAGS "-include ${PROJECT_BINARY_DIR}/all.h"
    )
 
