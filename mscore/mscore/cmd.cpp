@@ -624,8 +624,7 @@ void Score::setNote(int tick, Staff* staff, int voice, int pitch, int len)
             tie->setStaff(note->staff());
             note->setTieFor(tie);
             }
-//TODO      connectTies();
-//      layout();
+      _layout->connectTies();
       }
 
 //---------------------------------------------------------
@@ -1284,7 +1283,7 @@ void Score::cmd(const QString& cmd)
                   		Tie* tie = new Tie(this);
                               tie->setParent(el);
             	      	cmdAdd(tie);
-//TODO      			      connectTies();
+                              _layout->connectTies();
                               }
                         }
                   }

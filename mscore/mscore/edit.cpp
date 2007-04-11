@@ -731,7 +731,7 @@ void Score::cmdAddTie()
       tie->setEndNote(note);
       tie->setStaff(staff);
       note->setTieFor(tie);
-//TODO      connectTies();
+      _layout->connectTies();
       layout();
       select(tie, 0, 0);
       }

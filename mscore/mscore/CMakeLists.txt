@@ -23,17 +23,29 @@ set(CMAKE_CXX_FLAGS_RELEASE "-O2 -DQT_NO_DEBUG")
 set(CMAKE_CXX_FLAGS_DEBUG   "-DQT_DEBUG")
 
 add_custom_command(
-   OUTPUT ${PROJECT_BINARY_DIR}/mscore/all.h.pch
-   COMMAND cp ${PROJECT_SOURCE_DIR}/mscore/all.h ${PROJECT_BINARY_DIR}/mscore/all.h
+   OUTPUT ${PROJECT_BINARY_DIR}/all.h
+   COMMAND cp ${PROJECT_SOURCE_DIR}/all.h ${PROJECT_BINARY_DIR}/all.h
+   DEPENDS ${PROJECT_SOURCE_DIR}/all.h
+   WORKING_DIRECTORY ${PROJECT_BINARY_DIR}
+   )
+
+add_custom_command(
+   OUTPUT ${PROJECT_BINARY_DIR}/all.h.pch
    COMMAND ${CMAKE_CXX_COMPILER}
      -g -Wextra -fno-exceptions -Wall
      -I${QT_INCLUDE_DIR}
      -I${QT_QTCORE_INCLUDE_DIR}
      -I${QT_QTGUI_INCLUDE_DIR}
      -o all.h.pch all.h
-   DEPENDS ${PROJECT_SOURCE_DIR}/mscore/all.h
-   WORKING_DIRECTORY ${PROJECT_BINARY_DIR}/mscore
+   DEPENDS ${PROJECT_BINARY_DIR}/all.h
+   WORKING_DIRECTORY ${PROJECT_BINARY_DIR}
    )
+
+set_source_files_properties(
+      ${PROJECT_BINARY_DIR}/all.h
+      ${PROJECT_BINARY_DIR}/all.h.pch
+      PROPERTIES generated true
+      )
 
 include_directories(
       ${CMAKE_CURRENT_BINARY_DIR}
@@ -105,7 +117,8 @@ add_executable ( mscore
       ${qrc_files}
       ${ui_headers}
       ${mocs}
-      ${PROJECT_BINARY_DIR}/mscore/all.h.pch
+      ${PROJECT_BINARY_DIR}/all.h
+      ${PROJECT_BINARY_DIR}/all.h.pch
 
       actions.cpp
       accidental.cpp
@@ -195,13 +208,13 @@ add_executable ( mscore
 if (CROSS_MINGW)
    set_target_properties( mscore
       PROPERTIES
-         COMPILE_FLAGS "-include ${PROJECT_BINARY_DIR}/mscore/all.h"
+         COMPILE_FLAGS "-include ${PROJECT_BINARY_DIR}/all.h"
          LINK_FLAGS "-L /home/ws/.wine/drive_c/MinGW/lib"
       )
 else (CROSS_MINGW)
    set_target_properties( mscore
       PROPERTIES
-         COMPILE_FLAGS "-include ${PROJECT_BINARY_DIR}/mscore/all.h"
+         COMPILE_FLAGS "-include ${PROJECT_BINARY_DIR}/all.h"
       )
 endif (CROSS_MINGW)
 
