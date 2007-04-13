@@ -263,8 +263,10 @@ void Element::writeProperties(Xml& xml) const
             xml.tag("selected", selected());
       if (!visible())
             xml.tag("visible", visible());
-      if (_time.tick() != xml.curTick)
-            xml.tag("tick", _time.tick());
+      if (_time.tick() != xml.curTick) {
+            if (type() != NOTE)
+                  xml.tag("tick", _time.tick());
+            }
       if (_duration.tick())
             xml.tag("ticklen", _duration.tick());
       if (_color != Qt::black)

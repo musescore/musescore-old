@@ -154,7 +154,7 @@ void Measure::layoutBeams(ScoreLayout* layout)
                         else if (z == 4 && n == 4)
                               group = division;
 
-                        bool styleBreak = (cr->tick() % group) == 0;
+                        bool styleBreak = ((cr->tick() - tick()) % group) == 0;
                         bool hintBreak  = bm == BEAM_BEGIN || bm == BEAM_NO;
 
                         bool mustBreak = (bm != BEAM_MID)
