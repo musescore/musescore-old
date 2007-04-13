@@ -109,8 +109,6 @@ class Page : public Element {
 
       virtual void add(Element*);
       virtual void remove(Element* el);
-
-      void drawBorder(QPainter& p) const;
       void layout(ScoreLayout*);
 
       virtual void draw(QPainter&p);

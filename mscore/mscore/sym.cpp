@@ -30,6 +30,8 @@ QVector<Sym> symbols(lastSym);
 
 static const double FMAG = 1.0;
 
+QPrinter* printer;
+
 //---------------------------------------------------------
 //   Sym
 //---------------------------------------------------------
@@ -37,8 +39,6 @@ static const double FMAG = 1.0;
 Sym::Sym(const char* name, const QChar& c, int f)
    : _code(c), fontId(f), _name(name)
       {
-      QPrinter printer(QPrinter::HighResolution);
-
       QFont font;
       if (fontId == 0) {
             font = QFont("MScore");
@@ -52,8 +52,8 @@ Sym::Sym(const char* name, const QChar& c, int f)
             font = QFont("Times New Roman");
             font.setPointSizeF(8.0 * FMAG);
             }
-      _bbox = QFontMetricsF(font, &printer).boundingRect(_code);
-      _width = QFontMetricsF(font, &printer).width(_code);
+      _bbox = QFontMetricsF(font, printer).boundingRect(_code);
+      _width = QFontMetricsF(font, printer).width(_code);
       }
 
 //---------------------------------------------------------
@@ -149,6 +149,8 @@ QFont Sym::font(double extraMag) const
 
 void initSymbols()
       {
+      printer = new QPrinter(QPrinter::HighResolution);
+
       symbols[clefEightSym] = Sym("clef eight", 0x38, 2);
       symbols[clefOneSym]   = Sym("clef one",   0x31, 2);
       symbols[clefFiveSym]  = Sym("clef five",  0x35, 2);

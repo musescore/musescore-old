@@ -1,4 +1,5 @@
 Release 0.6 (svn)
+      - configurable symbol palette
       - new button to remove a score tab from the tab bar
       - new dock widget which collects all palettes
 Release 0.5

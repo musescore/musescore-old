@@ -218,7 +218,6 @@ double System::layout(ScoreLayout* layout, const QPointF& p, double w)
                   else {
                         if (b == 0) {
                               ss->brackets[i] = b = new Bracket(score());
-                              b->setSubtype(s->bracket(i));
                               b->setParent(this);
                               b->setStaff(s);
                               }
@@ -272,9 +271,8 @@ double System::layout(ScoreLayout* layout, const QPointF& p, double w)
 
       is = sl->begin();
       int nstaves  = _staves.size();
-      staffIdx = 0;
-      for (iSysStaff iss = _staves.begin(); iss != _staves.end(); ++is, ++iss, ++staffIdx) {
-            SysStaff* ss = *iss;
+      for (staffIdx = 0; staffIdx < nstaves; ++staffIdx) {
+            SysStaff* ss = _staves[staffIdx];
 
             double xo = 0.0;
             for (int i = 0; i < bracketLevels; ++i) {
@@ -283,16 +281,15 @@ double System::layout(ScoreLayout* layout, const QPointF& p, double w)
                   if (b == 0)
                         continue;
 
-                  int restStaves = nstaves - staffIdx;
-                  if (b->span() > restStaves) {
+                  qreal sy = ss->bbox().top();
+                  if (b->span() >= (nstaves - staffIdx)) {
                         //
                         // this may happen if a system was removed in
                         // instruments dialog
                         //
-                        b->setSpan(restStaves);
+                        b->setSpan(nstaves - staffIdx);
                         }
-                  qreal sy = ss->bbox().top();
-                  qreal ey = (*(iss + b->span() - 1))->bbox().bottom();
+                  qreal ey = _staves[staffIdx + b->span() - 1]->bbox().bottom();
                   b->setPos(x - xo, sy);
                   b->setHeight(ey - sy);
                   }
@@ -432,7 +429,7 @@ void System::layout2(ScoreLayout* layout)
                         continue;
 
                   int restStaves = staves - staffIdx;
-                  if (b->span() > restStaves) {
+                  if (b->span() >= restStaves) {
                         //
                         // this may happen if a system was removed in
                         // instruments dialog
@@ -440,7 +437,7 @@ void System::layout2(ScoreLayout* layout)
                         b->setSpan(restStaves);
                         }
                   qreal sy = ss->bbox().top();
-                  qreal ey = _staves[b->span() - 1]->bbox().bottom();
+                  qreal ey = _staves[staffIdx + b->span() - 1]->bbox().bottom();
                   b->setPos(b->ipos().x(), sy);
                   b->setHeight(ey - sy);
                   b->layout(layout);
@@ -540,6 +537,7 @@ void System::setInstrumentName(int idx)
 void System::draw(QPainter& p)
       {
 printf("System draw\n");
+#if 0
       p.translate(pos());
 
       if (barLine /*&& barLine->bbox().intersects(f)*/)
@@ -550,8 +548,9 @@ printf("System draw\n");
             SysStaff* sysStaff = _staves[staffIdx];
             sysStaff->sstaff->draw(p);
             foreach(Bracket* b, sysStaff->brackets) {
-                  if (b)
+                  if (b) {
                         b->draw(p);
+                        }
                   }
             if (sysStaff->instrumentName)
                   sysStaff->instrumentName->draw(p);
@@ -561,6 +560,7 @@ printf("System draw\n");
             m->draw(p);
             }
       p.translate(-pos());
+#endif
       }
 
 //---------------------------------------------------------
@@ -619,22 +619,25 @@ void System::add(Element* el)
 void System::remove(Element* el)
       {
 // printf("System::remove: %s staff %d\n", el->name(), el->staffIdx());
-      SysStaff* staff = _staves[el->staffIdx()];
-      if (el->type() == TEXT && (el->subtype() == TEXT_INSTRUMENT_LONG || el->subtype() == TEXT_INSTRUMENT_SHORT))
+      if (el->type() == TEXT && (el->subtype() == TEXT_INSTRUMENT_LONG || el->subtype() == TEXT_INSTRUMENT_SHORT)) {
+            SysStaff* staff = _staves[el->staffIdx()];
             staff->instrumentName = 0;
+            }
       else if (el->type() == BRACKET) {
+            SysStaff* staff = _staves[el->staffIdx()];
             for (int i = 0; i < staff->brackets.size(); ++i) {
                   if (staff->brackets[i] == el) {
                         staff->brackets[i] = 0;
                         el->staff()->setBracket(i, NO_BRACKET);
                         // TODO: remove empty bracket levels
-
 //TODO                        score()->layout();
                         return;
                         }
                   }
             printf("internal error: bracket not found\n");
             }
+      else
+            printf("System::remove(%s) not implemented\n", el->name());
       }
 
 //---------------------------------------------------------

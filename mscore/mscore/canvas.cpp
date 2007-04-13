@@ -402,8 +402,8 @@ void Canvas::mouseMoveEvent(QMouseEvent* ev)
             }
       mouseMoveEvent1(ev);
       if (dragCanvasState)
-           ;
-      else if (state == LASSO || state == DRAG_EDIT || state == NOTE_ENTRY)
+           return;
+      if (state == LASSO || state == DRAG_EDIT || state == NOTE_ENTRY)
             _score->end1();
       else
             _score->endCmd(false);      // update display but dont end undo
@@ -954,6 +954,8 @@ void Canvas::paintEvent(QPaintEvent* ev)
 
 void Canvas::paint(const QRect& rr)
       {
+//  printf("Canvas::paint() %d %d %d %d\n", rr.x(), rr.y(), rr.width(), rr.height());
+
       QPainter p(this);
       p.setRenderHint(QPainter::Antialiasing, preferences.antialiasedDrawing);
 
@@ -969,7 +971,7 @@ void Canvas::paint(const QRect& rr)
       QRegion r1(rr);
       for (iPage ip = _layout->pages()->begin(); ip != _layout->pages()->end(); ++ip) {
             Page* page = *ip;
-            page->draw(p);
+//            page->draw(p);
             r1 -= _matrix.mapRect(page->abbox()).toRect();
             }
       p.setClipRect(fr);
@@ -1546,12 +1548,16 @@ Element* Canvas::elementAt(const QPointF& p)
 
 void Canvas::drawElements(QPainter& p,const QList<Element*>& el)
       {
+// printf("drawElements %d\n", el.size());
+
       for (int i = 0; i < el.size(); ++i) {
             Element* e = el.at(i);
             e->itemDiscovered = 0;
 
             if (!(e->visible() || score()->showInvisible()))
                   continue;
+
+// printf("paint %s %f %f\n", e->name(), e->abbox().width(), e->abbox().height());
 
             p.save();
             p.translate(e->canvasPos());

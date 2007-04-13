@@ -205,10 +205,11 @@ void Page::layout(ScoreLayout* layout)
       }
 
 //---------------------------------------------------------
-//   drawBorder
+//   draw
+//    bounding rectange fr is relative to page QPointF
 //---------------------------------------------------------
 
-void Page::drawBorder(QPainter& p) const
+void Page::draw(QPainter& p)
       {
       QRectF r = bbox();
       qreal x1 = r.x();
@@ -217,7 +218,7 @@ void Page::drawBorder(QPainter& p) const
       qreal y2 = y1 + r.height();
 
       //-----------------------------------------
-      // draw page boarder gradients
+      // draw page border gradients
       //-----------------------------------------
 
       const QColor c1("#befbbefbbefb");
@@ -286,16 +287,6 @@ void Page::drawBorder(QPainter& p) const
                   p.drawLine(QLineF(x2-bw+i, y1, x2-bw+i, y2));
                   }
             }
-      }
-
-//---------------------------------------------------------
-//   draw
-//    bounding rectange fr is relative to page QPointF
-//---------------------------------------------------------
-
-void Page::draw(QPainter& p)
-      {
-      drawBorder(p);
       }
 
 //---------------------------------------------------------

@@ -23,6 +23,7 @@
 
 class Score;
 class Element;
+class ScoreLayout;
 
 //---------------------------------------------------------
 //   Viewer
@@ -51,9 +52,9 @@ class Viewer {
 
    public:
       Viewer();
-      void setScore(Score* s) { _score = s; }
-
       virtual ~Viewer() {}
+      void setScore(Score* s) { _score = s; }
+      ScoreLayout* layout();
       virtual void dataChanged(const QRectF&) = 0;
 
       virtual QRectF moveCursor() = 0;

@@ -101,22 +101,6 @@ PartListItem::PartListItem(const InstrumentTemplate* i, QTreeWidget* lv)
       }
 
 //---------------------------------------------------------
-//   InstrumentTemplate
-//---------------------------------------------------------
-
-InstrumentTemplate::InstrumentTemplate(const QString& grp, const QString& n, const QString& sn,
-   int noSystems, const int* ci, int br) : group(grp), name(n), shortName(sn)
-      {
-      midiProgram = 0;
-      staves      = noSystems;
-      minPitch    = 0;
-      maxPitch    = 127;
-      for (int i = 0; i < staves; ++i)
-            clefIdx[i] = *ci++;
-      bracket = br;
-      }
-
-//---------------------------------------------------------
 //   InstrumentTemplateListItem
 //---------------------------------------------------------
 

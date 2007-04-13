@@ -1042,11 +1042,12 @@ void Tie::read(QDomNode node)
                   continue;
             QString tag(e.tagName());
             QString val(e.text());
-            if (SlurTie::readProperties(node))
+            if (Element::readProperties(node))
+                  ;
+            else if (SlurTie::readProperties(node))
                   ;
             else
-                  printf("Mscore:Tie: unknown tag %s\n",
-                     tag.toLatin1().data());
+                  domError(e);
             }
       }
 

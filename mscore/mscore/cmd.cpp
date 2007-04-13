@@ -366,7 +366,6 @@ void Score::end1()
 
 void Score::endCmd(bool undo)
       {
-//      printf("endCmd() undo %d\n", undo);
       if (undo)
             endUndo();
       end();
