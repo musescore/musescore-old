@@ -33,7 +33,7 @@
 #include "viewer.h"
 
 // FIXME!
-// only values for CLEF_G..CLEF_G3 and CLEF_F are
+// only values for CLEF_G..CLEF_G3 CLEF_F and CLEF_C3 are
 // checked
 
 const ClefInfo clefTable[] = {
@@ -46,13 +46,15 @@ const ClefInfo clefTable[] = {
       ClefInfo("F",   4, -1, -19,  26, "Bass Clef 8va bassa"),
       ClefInfo("F",   4, -2, -26,  19, "Bass Clef 15va bassa"),
 
-      ClefInfo("F",   4,  0, -10,  35, "Bass Clef"),
-      ClefInfo("F",   4,  0, -14,  31, "Bass Clef"),
-      ClefInfo("C",   4,  0,  -1,  -2, "Soprano Clef"),
-      ClefInfo("C",   3,  0,  -4,  -4, "Mezzo-soprano Clef"),
-      ClefInfo("C",   2,  0,  -4,  -6, "Alto Clef"),
-      ClefInfo("C",   1,  0,  -3,  -8, "Tenor Clef"),
-      ClefInfo("TAB", 5,  0,   0,   0, "Tabulator")
+/*NC*/      ClefInfo("F",   4,  0, -10,  35, "Bass Clef"),
+/*NC*/      ClefInfo("F",   4,  0, -14,  31, "Bass Clef"),
+
+/*NC*/      ClefInfo("C",   1,  0, -10,  35, "Soprano Clef"),        // CLEF_C1
+/*NC*/      ClefInfo("C",   2,  0,  -8,  37, "Mezzo-soprano Clef"),  // CLEF_C2
+      ClefInfo("C",   3,  0,  -6,  39, "Alto Clef"),           // CLEF_C3
+/*NC*/      ClefInfo("C",   4,  0,  -4,  41, "Tenor Clef"),          // CLEF_C4
+
+/*NC*/      ClefInfo("TAB", 5,  0,   0,   0, "Tablature")
       };
 
 //---------------------------------------------------------
@@ -149,21 +151,21 @@ void Clef::setSubtype(int st)
                   symbol->setSym(_small ? cbassclefSym : bassclefSym);
                   yoff = 1.0;
                   break;
-            case 9:
+            case CLEF_C1:
                   symbol->setSym(_small ? caltoclefSym : altoclefSym);
-                  yoff = 1.0;
+                  yoff = 4.0;
                   break;
-            case 10:
-                  symbol->setSym(_small ? caltoclefSym : altoclefSym);
-                  yoff = 2.0;
-                  break;
-            case 11:
+            case CLEF_C2:
                   symbol->setSym(_small ? caltoclefSym : altoclefSym);
                   yoff = 3.0;
                   break;
-            case 12:
+            case CLEF_C3:
                   symbol->setSym(_small ? caltoclefSym : altoclefSym);
-                  yoff = 4.0;
+                  yoff = 2.0;
+                  break;
+            case CLEF_C4:
+                  symbol->setSym(_small ? caltoclefSym : altoclefSym);
+                  yoff = 1.0;
                   break;
             case 13:
             default:

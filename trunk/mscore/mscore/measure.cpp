@@ -74,6 +74,7 @@ int y2pitch(double y, int clef)
 
 //---------------------------------------------------------
 //   line2pitch
+//    TODO: needs cleanup
 //---------------------------------------------------------
 
 int line2pitch(int line, int clef)
@@ -81,11 +82,18 @@ int line2pitch(int line, int clef)
       static const int pt[] = { 0, 2, 4, 5, 7, 9, 11, 12 };
 
       int l = clefTable[clef].pitchOffset - line;
-      if (l < 0)
-            l = 0;
+      int octave = 0;
+      while (l < 0) {
+            l += 7;
+            octave++;
+            }
       if (l > 74)
             l = 74;
-      int pitch = pt[l % 7] + (l / 7) * 12;
+      int pitch = pt[l % 7] + (l / 7 + octave) * 12;
+
+// printf("line2pitch(line=%d, clef=%d) pitch=%d l=%d idx=%d\n",
+//   line, clef, pitch, clefTable[clef].pitchOffset - line, l % 7);
+
       return pitch;
       }
 

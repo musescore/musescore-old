@@ -89,6 +89,7 @@ void Staff::addBracket(BracketItem b)
             //
             // create new bracket level
             //
+printf("create new bracket level\n");
             foreach(Staff* s, *_score->staves()) {
                   if (s == this)
                         s->_brackets.append(b);

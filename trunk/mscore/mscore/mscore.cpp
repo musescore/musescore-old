@@ -1172,14 +1172,12 @@ void MuseScore::setCurrentScore(int idx)
 //   signalHandler
 //---------------------------------------------------------
 
-#if 1
 static void signalHandler(int)
       {
       printf("fp exception\n");
+//      feclearexcept(fegetexcept());
       abort();
       }
-#endif
-
 
 //---------------------------------------------------------
 //   midiReceived
@@ -1538,7 +1536,7 @@ void MuseScore::removeTab(int i)
 int main(int argc, char* argv[])
       {
 //      feenableexcept(FE_DIVBYZERO | FE_INVALID | FE_OVERFLOW);
-      signal(SIGFPE, signalHandler);
+//      signal(SIGFPE, signalHandler);
 
       padState.pitch = 60;
       setDefaultStyle();

@@ -129,8 +129,21 @@ void SigList::add(int tick, int ticks, int z2, int n2)
             z = 2;
             n = 4;
             }
+      else if (ticks == 4*division) {
+            z = 4;
+            n = 4;
+            }
+      else if (ticks == division/2) {
+            z = 1;
+            n = 8;
+            }
+      else if (ticks == division*7/2) {
+            z = 7;
+            n = 8;
+            }
       else {
-            printf("irregular measure of len %d not supported\n", ticks);
+            printf("SigList::add(tick:%d, ticks:%d, z2:%d, n2:%d): irregular measure not supported\n",
+               tick, ticks, z2, n2);
             if (debugMode)
                   abort();
             }

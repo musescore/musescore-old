@@ -53,15 +53,19 @@
 
 static void readInstrument(const QString& group, QDomNode node)
       {
-      int clef[MAX_STAVES];
-      for (int i = 0; i < MAX_STAVES; ++i)
-            clef[i] = 0;
-      QString name;
-      QString shortName;
-      int staves = 1;
-      int clefIdx = 0;
-      int bracket = -1;
+      InstrumentTemplate t;
 
+      t.group       = group;
+      t.staves      = 1;
+      for (int i = 0; i < MAX_STAVES; ++i)
+            t.clefIdx[i] = 0;
+      t.bracket     = -1;
+      t.midiProgram = 0;
+      t.minPitch    = 0;
+      t.maxPitch    = 127;
+      t.transpose   = 0;
+
+      int clefIdx = 0;
       for (node = node.firstChild(); !node.isNull(); node = node.nextSibling()) {
             QDomElement e = node.toElement();
             if (e.isNull())
@@ -70,25 +74,29 @@ static void readInstrument(const QString& group, QDomNode node)
             QString val(e.text());
             int i = val.toInt();
             if (tag == "name")
-                  name = val;
+                  t.name = val;
             else if (tag == "short-name")
-                  shortName = val;
+                  t.shortName = val;
             else if (tag == "staves")
-                  staves = i;
+                  t.staves = i;
             else if (tag == "clef") {
-                  clef[clefIdx] = i;
+                  t.clefIdx[clefIdx] = i;
                   ++clefIdx;
                   if (clefIdx >= MAX_STAVES)
                         clefIdx = MAX_STAVES-1;
                   }
             else if (tag == "bracket")
-                  bracket = i;
+                  t.bracket = i;
+            else if (tag == "minPitch")
+                  t.minPitch = i;
+            else if (tag == "maxPitch")
+                  t.maxPitch = i;
+            else if (tag == "transpose")
+                  t.transpose = i;
             else
                   domError(node);
             }
-
-      instrumentTemplates.push_back(InstrumentTemplate(group, name, shortName,
-         staves, clef, bracket));
+      instrumentTemplates.push_back(t);
       }
 
 //---------------------------------------------------------

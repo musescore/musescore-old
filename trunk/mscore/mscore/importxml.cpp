@@ -800,10 +800,13 @@ void MusicXml::xmlMeasure(Part* part, QDomNode node, int number)
                             /* MusicXML's implicit means "don't print measure number",
                               set it only if explicitly requested, not when the measure length
                               is not what is expected. See MozartTrio.xml measures 12..13.
+                            */
                               measure->setIrregular(true);
+                            /*
+                              printf("irregular Measure %d Len %d at %d   lastLen: %d -> should be: %d (tm=%d)\n",
+                                 number, measure->tick(), maxtick,
+                                 lastMeasureLen, measureLen, tm);
                               */
-                              printf("irregular Measure %d Len at %d(%d)   last: %d -> should be: %d (tm=%d)\n",
-                                 number, measure->tick(), maxtick, lastMeasureLen, measureLen, tm);
                               }
                         }
                   }
@@ -1138,13 +1141,13 @@ void MusicXml::xmlAttributes(Measure* measure, int staff, QDomNode node)
                         clef = 6;
                   else if (c == "C") {
                         if (line == 4)
-                              clef = 9;
+                              clef = CLEF_C4;
                         else if (line == 3)
-                              clef = 10;
+                              clef = CLEF_C3;
                         else if (line == 2)
-                              clef = 11;
+                              clef = CLEF_C2;
                         else if (line == 1)
-                              clef = 12;
+                              clef = CLEF_C1;
                         }
                   Staff* part = score->staff(staff + clefno);
                   ClefList* ct = part->clef();

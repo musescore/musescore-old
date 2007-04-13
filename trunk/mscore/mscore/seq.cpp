@@ -283,8 +283,12 @@ void Seq::start()
 
 void Seq::stop()
       {
-      if (audio)
+      printf("Seq::stop\n");
+      if (audio) {
+            printf("  Seq::stop\n");
             audio->stopTransport();
+            printf("  Seq::stop\n");
+            }
       }
 
 //---------------------------------------------------------
@@ -420,6 +424,8 @@ void Seq::seqMessage(int fd)
 
 void Seq::stopTransport()
       {
+      printf("stop transport\n");
+
       // send note off events
       for (iEvent i = _activeNotes.begin(); i != _activeNotes.end(); ++i) {
 //            printf("stop note %d\n", i->second.val1);
@@ -452,6 +458,7 @@ void Seq::startTransport()
 void Seq::process(unsigned frames, float* lbuffer, float* rbuffer)
       {
       int jackState = audio->getState();
+
       if (state == START_PLAY && jackState == PLAY) {
             startTransport();
             }
@@ -673,6 +680,8 @@ void Seq::collectEvents()
 
 void Seq::heartBeat()
       {
+      if (state == Seq::STOP)
+            return;
       if (guiPos == playPos)
             return;
 

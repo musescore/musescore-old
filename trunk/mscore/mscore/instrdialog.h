@@ -44,15 +44,7 @@ struct InstrumentTemplate {
       int midiProgram;
       int minPitch;
       int maxPitch;
-
-      InstrumentTemplate(
-         const QString& group,
-         const QString& name,
-         const QString& sn,
-         int,
-         const int*,
-         int                  // bracket
-         );
+      int transpose;          // for transposing instruments
       };
 
 typedef std::list<InstrumentTemplate> InstrumentTemplateList;

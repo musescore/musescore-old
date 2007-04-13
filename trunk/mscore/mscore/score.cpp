@@ -807,9 +807,10 @@ void Score::startEdit(Element* element)
       else {
             origEditObject = element;
             editObject     = element->clone();
+            editObject->setSelected(false);
             origEditObject->resetMode();
-            select(editObject, 0, 0);
             undoChangeElement(origEditObject, editObject);
+            select(editObject, 0, 0);
             }
       updateAll = true;
       endCmd(false);

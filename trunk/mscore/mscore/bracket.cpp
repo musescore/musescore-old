@@ -66,7 +66,7 @@ double Bracket::width() const
       }
 
 //---------------------------------------------------------
-//   updateValues
+//   layout
 //---------------------------------------------------------
 
 void Bracket::layout(ScoreLayout* layout)
@@ -123,7 +123,7 @@ void Bracket::draw(QPainter& p)
       p.setBrush(p.pen().color());
       p.drawPath(path);
 
-      if (selected() && editMode) {
+      if (editMode) {
             qreal lw = 2.0/p.matrix().m11();
             QPen pen(Qt::blue);
             pen.setWidthF(lw);
@@ -215,6 +215,7 @@ void Bracket::updateGrips(QMatrix& matrix)
 
 void Bracket::endEdit()
       {
+      endEditDrag();
       editMode = false;
       }
 
@@ -245,14 +246,14 @@ QRectF Bracket::bbox() const
 //   editDrag
 //---------------------------------------------------------
 
-bool Bracket::editDrag(Viewer*, QPointF*, const QPointF& delta)
+bool Bracket::editDrag(Viewer* v, QPointF*, const QPointF& delta)
       {
       if (!editMode)
             return false;
       qreal dy = delta.y();
-
       grip.translate(QPointF(0.0, dy));
       yoff += dy;
+      layout(v->layout());
       return true;
       }
 
@@ -278,7 +279,6 @@ bool Bracket::edit(QKeyEvent* ev)
                   dy = val;
                   break;
             }
-
       grip.translate(QPointF(0.0, dy));
       yoff += dy;
       return false;
