@@ -276,7 +276,7 @@ double System::layout(ScoreLayout* layout, const QPointF& p, double w)
 
             double xo = 0.0;
             for (int i = 0; i < bracketLevels; ++i) {
-                  xo += bracketWidth[i];
+                  xo += bracketWidth[i] + _spatium * .25;
                   Bracket*   b = ss->brackets[i];
                   if (b == 0)
                         continue;
@@ -423,7 +423,7 @@ void System::layout2(ScoreLayout* layout)
 
             double xo = 0.0;
             for (int i = 0; i < bracketLevels; ++i) {
-                  xo += bracketWidth[i];
+                  xo += bracketWidth[i] + _spatium * .25;
                   Bracket*   b = ss->brackets[i];
                   if (b == 0)
                         continue;
