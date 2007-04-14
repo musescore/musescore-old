@@ -897,7 +897,7 @@ void Score::printFile()
                   break;
             printer.newPage();
             }
-      DPI = oldDPI;
+      DPI  = oldDPI;
       DPMM = DPI / INCH;                     // dots/mm
       mainLayout()->setPaintDevice(oldPaintDevice);
       setSpatium(oldSpatium);

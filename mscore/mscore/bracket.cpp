@@ -102,7 +102,10 @@ void Bracket::layout(ScoreLayout* layout)
             QChar down(0xe19d);
             QFont f;
             f.setFamily(s->family);
-            double mag = _spatium / (spatiumBase20 * DPI);
+
+            //?!?:
+            double mmag   = DPI / double(QX11Info::appDpiX());
+            double mag = mmag * _spatium / (spatiumBase20 * DPI);
             f.setPointSizeF(20.0 * mag);
 
             qreal o = _spatium * .27;
