@@ -205,24 +205,45 @@ int ChordRest::beams() const
       }
 
 //---------------------------------------------------------
-//   writeProperties
+//   properties
 //---------------------------------------------------------
 
-void ChordRest::writeProperties(Xml& xml) const
+QList<Prop> ChordRest::properties(Xml& xml) const
       {
-      Element::writeProperties(xml);
+      QList<Prop> pl = Element::properties(xml);
       if (_beamMode != BEAM_AUTO)
-            xml.tag("BeamMode", int(_beamMode));
+            pl.append(Prop("BeamMode", int(_beamMode)));
       if (_tuplet) {
             int idx = measure()->tuplets()->indexOf(_tuplet);
             if (idx == -1)
                   printf("ChordRest::writeProperties(): tuplet not found\n");
             else
-                  xml.tag("Tuplet", idx);
+                  pl.append(Prop("Tuplet", idx));
             }
+      return pl;
+      }
+
+//---------------------------------------------------------
+//   writeProperties
+//---------------------------------------------------------
+
+void ChordRest::writeProperties(Xml& xml) const
+      {
+      QList<Prop> pl = properties(xml);
+      xml.prop(pl);
       for (ciAttribute ia = attributes.begin(); ia != attributes.end(); ++ia)
             (*ia)->write(xml);
       xml.curTick = tick() + tickLen();
+      }
+
+//---------------------------------------------------------
+//   isSimple
+//---------------------------------------------------------
+
+bool ChordRest::isSimple(Xml& xml) const
+      {
+      QList<Prop> pl = properties(xml);
+      return pl.size() <= 1 && attributes.empty();
       }
 
 //---------------------------------------------------------

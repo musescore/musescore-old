@@ -19,6 +19,7 @@
 //=============================================================================
 
 #include "xml.h"
+#include "globals.h"
 
 //---------------------------------------------------------
 //   Xml
@@ -100,6 +101,16 @@ void Xml::tagE(const char* format, ...)
       }
 
 //---------------------------------------------------------
+//   tagE
+//---------------------------------------------------------
+
+void Xml::tagE(const QString& s)
+      {
+      putLevel();
+      *this << '<' << s << "/>\n";
+      }
+
+//---------------------------------------------------------
 //   ntag
 //    <mops> without newline
 //---------------------------------------------------------
@@ -125,41 +136,55 @@ void Xml::netag(const char* s)
 //    <mops>value</mops>
 //---------------------------------------------------------
 
-void Xml::tag(const char* name, int val)
+void Xml::tag(const char* name, QVariant data)
       {
       putLevel();
-      *this << "<" << name << ">" << val << "</" << name << ">\n";
-      }
-
-void Xml::tag(const char* name, QChar val)
-      {
-      putLevel();
-      *this << "<" << name << ">" << val << "</" << name << ">\n";
-      }
-
-void Xml::tag(const char* name, double val)
-      {
-      putLevel();
-      QString s("<%1>%2</%3>\n");
-      *this << s.arg(name).arg(val).arg(name);
-      }
-
-void Xml::tag(const char* name, float val)
-      {
-      putLevel();
-      *this << QString("<%1>%2</%3>\n").arg(name).arg(val).arg(name);
-      }
-
-void Xml::tag(const char* name, const char* s)
-      {
-      tag(name, QString(s));
-      }
-
-void Xml::tag(const char* name, const QString& s)
-      {
-      putLevel();
-      *this << "<" << name << ">";
-      *this << xmlString(s) << "</" << name << ">\n";
+      switch(data.type()) {
+            case QVariant::Bool:
+            case QVariant::Char:
+            case QVariant::Int:
+                  *this << "<" << name << ">";
+                  *this << data.toInt();
+                  *this << "</" << name << ">\n";
+                  break;
+            case QVariant::Double:
+                  *this << "<" << name << ">";
+                  *this << data.value<double>();
+                  *this << "</" << name << ">\n";
+                  break;
+            case QVariant::String:
+                  *this << "<" << name << ">";
+                  *this << xmlString(data.value<QString>());
+                  *this << "</" << name << ">\n";
+                  break;
+            case QVariant::Color:
+                  {
+                  QColor color(data.value<QColor>());
+                  *this << QString("<%1 r=\"%2\" g=\"%3\" b=\"%4\"/>\n").arg(name).arg(color.red()).arg(color.green()).arg(color.blue());
+                  }
+                  break;
+            case QVariant::Rect:
+                  {
+                  QRect r(data.value<QRect>());
+                  *this << QString("<%1 x=\"%2\" y=\"%3\" w=\"%4\" h=\"%5\"/>\n").arg(name).arg(r.x()).arg(r.y()).arg(r.width()).arg(r.height());
+                  }
+                  break;
+            case QVariant::PointF:
+                  {
+                  QPointF p(data.value<QPointF>());
+                  *this << QString("<%1 x=\"%2\" y=\"%3\"/>\n").arg(name).arg(p.x()).arg(p.y());
+                  }
+                  break;
+            case QVariant::SizeF:
+                  {
+                  QSizeF p(data.value<QSizeF>());
+                  *this << QString("<%1 w=\"%2\" h=\"%3\"/>\n").arg(name).arg(p.width()).arg(p.height());
+                  }
+                  break;
+            default:
+                  printf("Xml::tag: unsupported type %d\n", data.type());
+                  break;
+            }
       }
 
 void Xml::tag(const char* name, const char* attributes, const QString& s)
@@ -168,40 +193,9 @@ void Xml::tag(const char* name, const char* attributes, const QString& s)
       *this << "<" << name << " " << attributes << ">" << s << "</" << name << ">\n";
       }
 
-void Xml::tag(const char* name, const QColor& color)
-      {
-      putLevel();
-    	char buffer[BS];
-      snprintf(buffer, BS, "<%s r=\"%d\" g=\"%d\" b=\"%d\"/>\n",
-	    name, color.red(), color.green(), color.blue());
-    	*this << buffer;
-      }
-
 void Xml::tag(const char* name, const QWidget* g)
       {
       tag(name, QRect(g->pos(), g->size()));
-      }
-
-void Xml::tag(const char* name, const QRect& r)
-      {
-      putLevel();
-   	*this << "<" << name;
-    	char buffer[BS];
-      snprintf(buffer, BS, " x=\"%d\" y=\"%d\" w=\"%d\" h=\"%d\" />\n",
-         r.x(), r.y(), r.width(), r.height());
-    	*this << buffer;
-      }
-
-void Xml::tag(const char* const name, const QPointF& p)
-      {
-      putLevel();
-      *this << QString("<%1 x=\"%2\" y=\"%3\"/>\n").arg(name).arg(p.x()).arg(p.y());
-      }
-
-void Xml::tag(const char* const name, const QSizeF& p)
-      {
-      putLevel();
-      *this << QString("<%1 w=\"%2\" h=\"%3\"/>\n").arg(name).arg(p.width()).arg(p.height());
       }
 
 //---------------------------------------------------------
@@ -264,6 +258,33 @@ void domError(QDomNode node)
             s += k;
             }
       fprintf(stderr, "%s: Unknown Node <%s>, type %d\n",
+         s.toLatin1().data(), tag.toLatin1().data(), node.nodeType());
+      if (node.isText()) {
+            fprintf(stderr, "  text node <%s>\n", node.toText().data().toLatin1().data());
+            }
+      }
+
+//---------------------------------------------------------
+//   domNotImplemented
+//---------------------------------------------------------
+
+void domNotImplemented(QDomNode node)
+      {
+      if (!debugMode)
+            return;
+      QDomElement e = node.toElement();
+      QString tag(e.tagName());
+      QString s;
+      QDomNode dn(node);
+      while (!dn.parentNode().isNull()) {
+            dn = dn.parentNode();
+            const QDomElement e = dn.toElement();
+            const QString k(e.tagName());
+            if (!s.isEmpty())
+                  s += ":";
+            s += k;
+            }
+      fprintf(stderr, "%s: Node not implemented: <%s>, type %d\n",
          s.toLatin1().data(), tag.toLatin1().data(), node.nodeType());
       if (node.isText()) {
             fprintf(stderr, "  text node <%s>\n", node.toText().data().toLatin1().data());

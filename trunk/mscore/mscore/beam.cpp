@@ -155,6 +155,12 @@ void Measure::layoutBeams(ScoreLayout* layout)
                               group = division;
 
                         bool styleBreak = ((cr->tick() - tick()) % group) == 0;
+                        if (styleBreak) {
+                              // some experimental optimization
+                              ChordRestList* l = beam->getElements();
+                              if (l->size() == 2 && cr->tickLen() == l->back()->tickLen())
+                                    styleBreak = false;
+                              }
                         bool hintBreak  = bm == BEAM_BEGIN || bm == BEAM_NO;
 
                         bool mustBreak = (bm != BEAM_MID)

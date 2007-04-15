@@ -265,13 +265,10 @@ void MusicXml::scorePartwise(QDomNode node)
                         }
                   }
             else if (tag == "identification") {
-                  QDomNode n = node.firstChild();
-                  while (!n.isNull()) {
+                  for (QDomNode n = node.firstChild(); !n.isNull(); n = n.nextSibling()) {
                         QDomElement e = n.toElement();
-                        if (e.isNull()) {
-                              n = n.nextSibling();
+                        if (e.isNull())
                               continue;
-                              }
                         if (e.tagName() == "creator") {
                               // type is an arbitrary label
                               QString type = e.attribute(QString("type"));
@@ -282,18 +279,19 @@ void MusicXml::scorePartwise(QDomNode node)
                                     poet = str;
                               else if (type == "translator")
                                     translator = str;
+                              else if (type == "transcriber")
+                                    ;
                               else
-                                    domError(n);
+                                    printf("unknown creator <%s>\n", type.toLatin1().data());
                               }
                         else if (e.tagName() == "rights")
                               score->rights = e.text();
                         else if (e.tagName() == "encoding")
-                              ;
+                              domNotImplemented(n);
                         else if (e.tagName() == "source")
-                              ;
+                              domNotImplemented(n);
                         else
                               domError(n);
-                        n = n.nextSibling();
                         }
                   }
             else if (tag == "defaults") {
@@ -353,27 +351,22 @@ void MusicXml::scorePartwise(QDomNode node)
                                           domError(node);
                                     }
                               }
-                        else if (tag == "music-font") {
-                              printf("ImportXml:: music-font not supported\n");
-                              }
-                        else if (tag == "word-font") {
-                              printf("ImportXml:: word-font not supported\n");
-                              }
-                        else if (tag == "lyric-font") {
-                              printf("ImportXml:: lyric-font not supported\n");
-                              }
+                        else if (tag == "music-font")
+                              domNotImplemented(n);
+                        else if (tag == "word-font")
+                              domNotImplemented(n);
+                        else if (tag == "lyric-font")
+                              domNotImplemented(n);
                         else
-                              printf("Import MusicXml:defaults: <%s> not supported\n", tag.toLatin1().data());
+                              domError(n);
                         }
                   }
-            else if (tag == "movement-number") {
+            else if (tag == "movement-number")
                   score->movementNumber = e.text();
-                  }
-            else if (tag == "movement-title") {
+            else if (tag == "movement-title")
                   score->movementTitle = e.text();
-                  }
             else if (tag == "credit")
-                  ;     //TODO
+                  domNotImplemented(node);
             else
                   domError(node);
             }
@@ -781,6 +774,10 @@ void MusicXml::xmlMeasure(Part* part, QDomNode node, int number)
                               }
                         }
                   }
+            else if (e.tagName() == "sound")
+                  domNotImplemented(node);
+            else if (e.tagName() == "harmony")
+                  domNotImplemented(node);
             else
                   domError(node);
             }
@@ -895,8 +892,16 @@ void MusicXml::direction(Measure* measure, int staff, QDomNode node)
                               type   = e.attribute(QString("type"));
                               spread = e.attribute(QString("spread"), "0").toInt();
                               }
-                        else if (dirType == "dashes") {
-                              }
+                        else if (dirType == "dashes")
+                              domNotImplemented(n);
+                        else if (dirType == "bracket")
+                              domNotImplemented(n);
+                        else if (dirType == "metronome")
+                              domNotImplemented(n);
+                        else if (dirType == "octave-shift")
+                              domNotImplemented(n);
+                        else if (dirType == "segno")
+                              domNotImplemented(n);
                         else
                               domError(n);
                         }
@@ -1041,7 +1046,7 @@ void MusicXml::xmlAttributes(Measure* measure, int staff, QDomNode node)
                         if (e.tagName() == "fifths")
                               key = e.text().toInt();
                         else if (e.tagName() == "mode")
-                              ;
+                              domNotImplemented(n);
                         else
                               domError(n);
                         }
@@ -1172,6 +1177,12 @@ void MusicXml::xmlAttributes(Measure* measure, int staff, QDomNode node)
                         staff->setBracketSpan(0, 2);
                         }
                   }
+            else if (e.tagName() == "staff-details")
+                  domNotImplemented(node);
+            else if (e.tagName() == "instruments")
+                  domNotImplemented(node);
+            else if (e.tagName() == "transpose")
+                  domNotImplemented(node);
             else
                   domError(node);
             }
@@ -1326,14 +1337,17 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomNode node)
                   }
             else if (tag == "chord")
                   tick -= lastLen;
-            else if (tag == "voice") {
+            else if (tag == "voice")
                   voice = e.text().toInt() - 1;
-                  }
             else if (tag == "stem") {
                   if (e.text() == "up")
                         sd = UP;
                   else if (e.text() == "down")
                         sd = DOWN;
+                  else if (e.text() == "none")  // ?
+                        ;
+                  else if (e.text() == "double")
+                        ;
                   else
                         printf("unknown stem direction %s\n", e.text().toLatin1().data());
                   }
@@ -1566,6 +1580,10 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomNode node)
                                           invertedMordent = true;
                                     else if (e.tagName() == "mordent")
                                           mordent = true;
+                                    else if (e.tagName() == "accidental-mark")
+                                          domNotImplemented(n2);
+                                    else if (e.tagName() == "delayed-turn")
+                                          domNotImplemented(n2);
                                     else
                                           domError(n2);
                                     }
@@ -1578,13 +1596,17 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomNode node)
                                     if (e.tagName() == "fingering")
                                           fingering = e.text();
                                     else if (e.tagName() == "fret")
-                                          ;
+                                          domNotImplemented(n2);
                                     else if (e.tagName() == "string")
-                                          ;
+                                          domNotImplemented(n2);
+                                    else if (e.tagName() == "pull-off")
+                                          domNotImplemented(n2);
                                     else
                                           domError(n2);
                                     }
                               }
+                        else if (e.tagName() == "arpeggiate")
+                              domNotImplemented(n);
                         else
                               domError(n);
                         }
@@ -1611,12 +1633,18 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomNode node)
                               actualNotes = e.text().toInt();
                         else if (e.tagName() == "normal-notes")
                               normalNotes = e.text().toInt();
+                        else if (e.tagName() == "normal-type")
+                              domNotImplemented(n);
                         else
                               domError(n);
                         }
                   }
             else if (tag == "notehead")
-                  ;
+                  domNotImplemented(node);
+            else if (tag == "instrument")
+                  domNotImplemented(node);
+            else if (tag == "cue")
+                  domNotImplemented(node);
             else
                   domError(node);
             }
@@ -1859,6 +1887,6 @@ void MusicXml::genWedge(int no, int endTick, Measure* measure, int staff)
       hp->setUserOff(QPointF(wedgeList[no].rx, wedgeList[no].ry));
       hp->setStaff(score->staff(staff));
       measure->add(hp);
-      printf("gen wedge staff %d\n", staff);
+//      printf("gen wedge staff %d\n", staff);
       }
 

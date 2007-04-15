@@ -41,7 +41,8 @@ class MTime {
       MTime();
       MTime(int z, int n);
       MTime(int t);
-      int tick() const { return _tick; }
+      int tick() const     { return _tick; }
+      bool isValid() const { return _tick != -1; }
       void setTick(int t);
       void setFrac(int z, int n);
       };

@@ -21,6 +21,12 @@
 #ifndef __GLOBALS_H__
 #define __GLOBALS_H__
 
+extern bool debugMode;
+extern bool layoutDebug;
+extern bool noSeq;            ///< Dont use sequencer; cmd line option.
+extern bool noMidi;           ///< Dont use midi; cmd line option.
+extern bool dumpMidi;         ///< debug option: dump midi input
+
 static const QString mimeSymbolFormat("application/mscore/symbol");
 
 static const qreal INCH = 25.4;

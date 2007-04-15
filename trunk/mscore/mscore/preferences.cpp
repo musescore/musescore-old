@@ -377,9 +377,9 @@ void Preferences::write()
       xml.tag("layoutBreakColor", layoutBreakColor);
       xml.tag("antialiasedDrawing", antialiasedDrawing);
       switch(sessionStart) {
-            case LAST_SESSION:   xml.tag("sessionStart", "last"); break;
-            case NEW_SESSION:    xml.tag("sessionStart", "new"); break;
-            case SCORE_SESSION:  xml.tag("sessionStart", "score"); break;
+            case LAST_SESSION:   xml.tag("sessionStart", QString("last")); break;
+            case NEW_SESSION:    xml.tag("sessionStart", QString("new")); break;
+            case SCORE_SESSION:  xml.tag("sessionStart", QString("score")); break;
             }
       if (!startScore.isEmpty())
             xml.tag("startScore", startScore);

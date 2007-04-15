@@ -738,6 +738,8 @@ Chord* Measure::findChord(int tick, int staff, int voice, bool /*grace*/)
 ChordRest* Measure::findChordRest(int tick, Staff* staff, int voice, bool /*grace*/)
       {
       int staffIdx = _score->staves()->indexOf(staff);
+      if (staffIdx == -1)
+            return 0;
       for (Segment* seg = _first; seg; seg = seg->next()) {
             if (seg->tick() > tick)
                   return 0;
@@ -2318,6 +2320,16 @@ void Measure::read(QDomNode node, int idx)
                   chord->setParent(this);       // only for reading tuplets
                   chord->setStaff(staff);
                   chord->read(node, idx);
+                  Segment* s = getSegment(chord);
+                  s->add(chord);
+                  curTickPos = chord->tick() + chord->tickLen();
+                  }
+            else if (tag == "Note") {
+                  Chord* chord = new Chord(score());
+                  chord->setTick(curTickPos);   // set default tick position
+                  chord->setParent(this);       // only for reading tuplets
+                  chord->setStaff(staff);
+                  chord->readNote(node, idx);
                   Segment* s = getSegment(chord);
                   s->add(chord);
                   curTickPos = chord->tick() + chord->tickLen();

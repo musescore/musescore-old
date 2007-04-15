@@ -739,7 +739,6 @@ void AlsaAudio::startTransport()
 
 void AlsaAudio::stopTransport()
       {
-      printf("AlsaAudio::stopTransport\n");
       state = Seq::STOP;
       }
 

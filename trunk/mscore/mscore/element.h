@@ -21,6 +21,8 @@
 #ifndef __ELEMENT_H__
 #define __ELEMENT_H__
 
+#include "xml.h"
+
 /**
  \file
  Definition of classes Element, ElementList, StaffLines.
@@ -277,6 +279,8 @@ class Element {
       virtual bool mousePress(const QPointF&) { return false; }
 
       int itemDiscovered;     ///< helper flag for bsp
+
+      virtual QList<Prop> properties(Xml&) const;
       };
 
 //---------------------------------------------------------

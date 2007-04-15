@@ -59,11 +59,6 @@ struct SigEvent;
 
 extern QPoint scorePos;
 extern QSize scoreSize;
-extern bool debugMode;
-extern bool layoutDebug;
-extern bool noSeq;            ///< Dont use sequencer; cmd line option.
-extern bool noMidi;           ///< Dont use midi; cmd line option.
-extern bool dumpMidi;         ///< debug option: dump midi input
 extern bool showRubberBand;
 
 //---------------------------------------------------------

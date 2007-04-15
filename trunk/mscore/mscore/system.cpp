@@ -529,41 +529,6 @@ void System::setInstrumentName(int idx)
       }
 
 //---------------------------------------------------------
-//   draw
-//    p - has page coordinate system
-//    f - System relative
-//---------------------------------------------------------
-
-void System::draw(QPainter& p)
-      {
-printf("System draw\n");
-#if 0
-      p.translate(pos());
-
-      if (barLine /*&& barLine->bbox().intersects(f)*/)
-            barLine->draw(p);
-      for (int staffIdx = 0; staffIdx < _staves.size(); ++staffIdx) {
-            if (!score()->staff(staffIdx)->show())
-                  continue;
-            SysStaff* sysStaff = _staves[staffIdx];
-            sysStaff->sstaff->draw(p);
-            foreach(Bracket* b, sysStaff->brackets) {
-                  if (b) {
-                        b->draw(p);
-                        }
-                  }
-            if (sysStaff->instrumentName)
-                  sysStaff->instrumentName->draw(p);
-            }
-      for (ciMeasure im = ml->begin(); im != ml->end(); ++im) {
-            Measure* m = *im;
-            m->draw(p);
-            }
-      p.translate(-pos());
-#endif
-      }
-
-//---------------------------------------------------------
 //   y2staff
 //---------------------------------------------------------
 

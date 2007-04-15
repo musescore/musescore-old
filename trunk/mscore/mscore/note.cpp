@@ -502,25 +502,44 @@ QRectF Note::bbox() const
       }
 
 //---------------------------------------------------------
+//   isSimple
+//---------------------------------------------------------
+
+bool Note::isSimple(Xml& xml) const
+      {
+      QList<Prop> pl = Element::properties(xml);
+      return (pl.empty() && _userAccidental == -1 && _fingering.empty() && _tieFor == 0
+         && _move == 0);
+      }
+
+//---------------------------------------------------------
 //   Note::write
 //---------------------------------------------------------
 
 void Note::write(Xml& xml) const
       {
-      xml.stag("Note");
-      Element::writeProperties(xml);
-      xml.tag("pitch", pitch());
-      if (_userAccidental != -1) {
-            xml.tag("prefix", _userAccidental);
-            xml.tag("line", _line);
+      QList<Prop> pl = Element::properties(xml);
+
+      if (pl.empty() && _userAccidental == -1 && _fingering.empty() && _tieFor == 0
+         && _move == 0) {
+            xml.tagE(QString("Note pitch=\"%1\"").arg(pitch()));
             }
-      foreach(const Text* f, _fingering)
-            f->write(xml);
-      if (_tieFor)
-            _tieFor->write(xml);
-      if (_move)
-            xml.tag("move", _move);
-      xml.etag();
+      else {
+            xml.stag("Note");
+            xml.prop(pl);
+            xml.tag("pitch", pitch());
+            if (_userAccidental != -1) {
+                  xml.tag("prefix", _userAccidental);
+                  xml.tag("line", _line);
+                  }
+            foreach(const Text* f, _fingering)
+                  f->write(xml);
+            if (_tieFor)
+                  _tieFor->write(xml);
+            if (_move)
+                  xml.tag("move", _move);
+            xml.etag();
+            }
       }
 
 //---------------------------------------------------------
@@ -573,6 +592,11 @@ void Chord::readSlur(QDomNode node, int /*staff*/)
 
 void Note::read(QDomNode node)
       {
+      QDomElement e = node.toElement();
+      int ptch = e.attribute("pitch", "-1").toInt();
+      if (ptch != -1)
+            setPitch(ptch);
+
       for (node = node.firstChild(); !node.isNull(); node = node.nextSibling()) {
             QDomElement e = node.toElement();
             if (e.isNull())

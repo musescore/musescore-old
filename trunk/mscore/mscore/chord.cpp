@@ -34,6 +34,7 @@
 #include "tuplet.h"
 #include "hook.h"
 #include "layout.h"
+#include "slur.h"
 
 //---------------------------------------------------------
 //   Stem
@@ -677,18 +678,104 @@ Note* Chord::selectedNote() const
 
 void Chord::write(Xml& xml) const
       {
+      if (ChordRest::isSimple(xml) && notes.size() == 1) {
+//      if (notes.size() == 1) {
+            ciNote in = notes.begin();
+            Note* note = in->second;
+            if (note->isSimple(xml)) {
+                  xml.tagE(QString("Note pitch=\"%1\" ticks=\"%2\"")
+                     .arg(note->pitch()).arg(tickLen()));
+                  xml.curTick = tick() + tickLen();
+                  return;
+                  }
+            else
+                  printf("   note not simple\n");
+            }
       xml.stag("Chord");
       ChordRest::writeProperties(xml);
       if (_grace)
             xml.tag("GraceNote", _grace);
       switch(_stemDirection) {
-            case UP:   xml.tag("StemDirection", "up"); break;
-            case DOWN: xml.tag("StemDirection", "down"); break;
+            case UP:   xml.tag("StemDirection", QVariant("up")); break;
+            case DOWN: xml.tag("StemDirection", QVariant("down")); break;
             case AUTO: break;
             }
       for (ciNote in = notes.begin(); in != notes.end(); ++in)
             in->second->write(xml);
       xml.etag();
+      }
+
+//---------------------------------------------------------
+//   Chord::readNote
+//---------------------------------------------------------
+
+void Chord::readNote(QDomNode node, int staffIdx)
+      {
+      Note* note = new Note(score());
+      QDomElement e = node.toElement();
+      int ptch = e.attribute("pitch", "-1").toInt();
+      int ticks = e.attribute("ticks", "-1").toInt();
+
+      if (ticks != -1)
+            setTickLen(ticks);
+
+      for (node = node.firstChild(); !node.isNull(); node = node.nextSibling()) {
+            QDomElement e = node.toElement();
+            if (e.isNull())
+                  continue;
+            QString tag(e.tagName());
+            QString val(e.text());
+            int i = val.toInt();
+
+            if (tag == "GraceNote")
+                  _grace = i;
+            else if (tag == "StemDirection") {
+                  if (val == "up")
+                        _stemDirection = UP;
+                  else if (val == "down")
+                        _stemDirection = DOWN;
+                  else
+                        _stemDirection = Direction(i);
+                  }
+            else if (tag == "pitch")
+                  note->setPitch(i);
+            else if (tag == "prefix")
+                  note->setUserAccidental(i);
+            else if (tag == "line")
+                  note->setLine(i);
+            else if (tag == "Tie") {
+                  Tie* _tieFor = new Tie(score());
+                  _tieFor->setStaff(staff());
+                  _tieFor->read(node);
+                  _tieFor->setStartNote(note);
+                  note->setTieFor(_tieFor);
+                  }
+            else if (tag == "Text") {
+                  Text* f = new Text(score());
+                  f->setSubtype(TEXT_FINGERING);
+                  f->setStaff(staff());
+                  f->read(node);
+                  f->setParent(this);
+                  note->add(f);
+                  }
+            else if (tag == "move")
+                  note->setMove(i);
+            else if (ChordRest::readProperties(node))
+                  ;
+            else if (tag == "Slur") {
+                  readSlur(node, staffIdx);
+                  }
+            else
+                  domError(node);
+            }
+      note->setParent(this);
+      note->setGrace(_grace);
+      note->setStaff(staff());
+      note->setVoice(voice());
+      note->setHead(tickLen());
+      if (ptch != -1)
+            note->setPitch(ptch);
+      notes.add(note);
       }
 
 //---------------------------------------------------------

@@ -61,6 +61,7 @@ class Beam : public Element {
 
       void layout(ScoreLayout*);
       void add(ChordRest* a) { elements.add(a); }
+      ChordRestList* getElements() { return &elements; }
       void remove(ChordRest* a);
       QString xmlType(ChordRest*) const;
       virtual void move(double, double);

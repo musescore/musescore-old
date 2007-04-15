@@ -802,6 +802,8 @@ void Slur::read(Score* score, QDomNode node)
 
 void Slur::layout(ScoreLayout* layout)
       {
+      if (_staff2 == 0)
+            return;
       double _spatium = layout->spatium();
       switch (_slurDirection) {
             case UP:    up = true; break;
