@@ -22,6 +22,7 @@
 #include "xml.h"
 #include "mtime.h"
 #include "score.h"
+#include "globals.h"
 
 //---------------------------------------------------------
 //   ticks_beat
@@ -121,25 +122,17 @@ void SigList::add(int tick, int ticks, int z2, int n2)
             printf("illegal signature %d/%d\n", z2, n2);
             }
       int z = 1, n = 4;
-      if (ticks == division) {
-            z = 1;
+      if ((ticks % division) == 0) {
+            z = ticks / division;
             n = 4;
             }
-      else if (ticks == 2*division) {
-            z = 2;
-            n = 4;
-            }
-      else if (ticks == 4*division) {
-            z = 4;
-            n = 4;
-            }
-      else if (ticks == division/2) {
-            z = 1;
+      else if ((ticks % (division/2)) == 0) {
+            z = ticks / (division/2);
             n = 8;
             }
-      else if (ticks == division*7/2) {
-            z = 7;
-            n = 8;
+      else if ((ticks % (division/4)) == 0) {
+            z = ticks / (division/4);
+            n = 16;
             }
       else {
             printf("SigList::add(tick:%d, ticks:%d, z2:%d, n2:%d): irregular measure not supported\n",

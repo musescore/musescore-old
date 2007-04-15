@@ -131,6 +131,7 @@ class Note : public Element {
       virtual bool startEdit(QMatrix&, const QPointF&);
       virtual bool edit(QKeyEvent*);
       virtual void endEdit();
+      bool isSimple(Xml&) const;
       };
 
 //---------------------------------------------------------

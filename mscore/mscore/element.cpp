@@ -248,30 +248,38 @@ bool Element::intersects(const QRectF& rr) const
       }
 
 //---------------------------------------------------------
+//   properties
+//---------------------------------------------------------
+
+QList<Prop> Element::properties(Xml& xml) const
+      {
+      QList<Prop> pl;
+      if (_subtype)
+            pl.append(Prop("subtype", subtypeName()));
+      if (!_userOff.isNull())
+            pl.append(Prop("offset", _userOff));
+      if (voice())
+            pl.append(Prop("voice", voice()));
+      if (selected())
+            pl.append(Prop("selected", selected()));
+      if (!visible())
+            pl.append(Prop("visible", visible()));
+      if (_time.isValid() && (_time.tick() != xml.curTick))
+            pl.append(Prop("tick", _time.tick()));
+      if (_duration.isValid())
+            pl.append(Prop("ticklen", _duration.tick()));
+      if (_color != Qt::black)
+            pl.append(Prop("color", _color));
+      return pl;
+      }
+
+//---------------------------------------------------------
 //   writeProperties
 //---------------------------------------------------------
 
 void Element::writeProperties(Xml& xml) const
       {
-      if (_subtype)
-            xml.tag("subtype", subtypeName());
-      if (!_userOff.isNull())
-            xml.tag("offset", _userOff);
-      if (voice())
-            xml.tag("voice", voice());
-      if (selected())
-            xml.tag("selected", selected());
-      if (!visible())
-            xml.tag("visible", visible());
-      if (_time.tick() != xml.curTick) {
-            if (type() != NOTE)
-                  xml.tag("tick", _time.tick());
-            }
-      if (_duration.tick())
-            xml.tag("ticklen", _duration.tick());
-      if (_color != Qt::black)
-            xml.tagE("color r=\"%d\" g=\"%d\" b=\"%d\"",
-               _color.red(), _color.green(), _color.blue());
+      xml.prop(properties(xml));
       }
 
 //---------------------------------------------------------

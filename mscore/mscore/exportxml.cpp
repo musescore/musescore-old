@@ -830,24 +830,24 @@ void ExportMusicXml::bar(const BarLine* bar, const Volta* volta, const QString& 
       if (bar && (bar->subtype() != NORMAL_BAR)) {
             switch(bar->subtype()) {
                   case DOUBLE_BAR:
-                        xml.tag("bar-style", "light-light");
+                        xml.tag("bar-style", QString("light-light"));
                         break;
                   case START_REPEAT:
-                        xml.tag("bar-style", "heavy-light");
+                        xml.tag("bar-style", QString("heavy-light"));
                         xml.tagE("repeat direction=\"forward\"");
                         break;
                   case END_REPEAT:
-                        xml.tag("bar-style", "light-heavy");
+                        xml.tag("bar-style", QString("light-heavy"));
                         xml.tagE("repeat direction=\"backward\"");
                         break;
                   case BROKEN_BAR:
-                        xml.tag("bar-style", "dotted");
+                        xml.tag("bar-style", QString("dotted"));
                         break;
                   case END_BAR:
-                        xml.tag("bar-style", "light-heavy");
+                        xml.tag("bar-style", QString("light-heavy"));
                         break;
                   case INVISIBLE_BAR:
-                        xml.tag("bar-style", "none");
+                        xml.tag("bar-style", QString("none"));
                         break;
                   default:
                         printf("ExportMusicXml::bar(): bar subtype %d not supported\n", bar->subtype());
@@ -1311,7 +1311,7 @@ void ExportMusicXml::keysig(int key)
       attr.doAttr(xml, true);
       xml.stag("key");
       xml.tag("fifths", key);
-      xml.tag("mode", "major");
+      xml.tag("mode", QString("major"));
       xml.etag();
       }
 
@@ -1326,7 +1326,7 @@ void ExportMusicXml::clef(int staff, int clef)
             xml.stag(QString("clef number=\"%1\"").arg(staff));
       else
             xml.stag("clef");
-      char* sign = clefTable[clef].sign;
+      QString sign = clefTable[clef].sign;
       int line   = clefTable[clef].line;
       xml.tag("sign", sign);
       xml.tag("line", line);
@@ -1595,7 +1595,7 @@ void ExportMusicXml::chord(Chord* chord, int staff, const LyricsList* ll)
 
             // no stem for whole notes and beyond
             if (note->chord()->tickLen() < 4*division)
-                  xml.tag("stem", note->chord()->isUp() ? "up" : "down");
+                  xml.tag("stem", QString(note->chord()->isUp() ? "up" : "down"));
             // LVIFIX: check move() handling
             if (staff)
                   xml.tag("staff", staff + note->move());

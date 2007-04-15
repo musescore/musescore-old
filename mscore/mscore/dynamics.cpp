@@ -145,7 +145,7 @@ void Dynamic::write(Xml& xml) const
       {
       xml.stag("Dynamic");
       if (subtype() == 0)
-            xml.tag("data", doc->toHtml("utf8"));
+            xml.tag("data", QVariant(doc->toHtml("utf8")));
       Element::writeProperties(xml);
       xml.etag();
       }

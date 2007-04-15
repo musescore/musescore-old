@@ -28,10 +28,10 @@ int division = 480;     // 480 midi ticks represent a quarter note
 
 MTime::MTime()
       {
-      _tick = 0;
-      _nominator = 0;
+      _tick        = -1;      // set invalid
+      _nominator   = 0;
       _denominator = 4;
-      tickTime = false;
+      tickTime     = false;
       }
 
 MTime::MTime(int z, int n)
@@ -50,7 +50,7 @@ MTime::MTime(int t)
 
 void MTime::setTick(int t)
       {
-      _tick = t;
+      _tick    = t;
       tickTime = true;
       }
 

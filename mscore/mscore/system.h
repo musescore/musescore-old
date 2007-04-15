@@ -128,8 +128,6 @@ class System : public Element {
       void insertSysStaff(SysStaff*, int);
       SysStaff* removeStaff(int);
 
-      virtual void draw(QPainter&);
-
       BarLine* getBarLine() const         { return barLine; }
       int y2staff(qreal y) const;
       void setInstrumentNames();

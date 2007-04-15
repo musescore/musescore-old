@@ -22,6 +22,18 @@
 #define __XML_H__
 
 //---------------------------------------------------------
+//   Property
+//---------------------------------------------------------
+
+class Prop {
+   public:
+      const char* name;
+      QVariant data;
+      Prop() {}
+      Prop(const char* n, const QVariant& d) : name(n), data(d) {}
+      };
+
+//---------------------------------------------------------
 //   Xml
 //---------------------------------------------------------
 
@@ -42,22 +54,20 @@ class Xml : public QTextStream {
       void stag(const QString&);
       void etag();
 
+      void tagE(const QString&);
       void tagE(const char* format, ...);
       void ntag(const char* name);
       void netag(const char* name);
 
-      void tag(const char* name, int);
-      void tag(const char* name, QChar);
-      void tag(const char* name, double);
-      void tag(const char* name, float);
-      void tag(const char* name, const char*);
-      void tag(const char* name, const QString&);
+      void prop(const Prop& p) { tag(p.name, p.data); }
+      void prop(QList<Prop> pl) { foreach(Prop p, pl) prop(p); }
+
+      void tag(const char* name, QVariant data);
+      void tag(const char* name, qreal v)          { tag(name, QVariant(double(v))); }
+      void tag(const char* name, const char* s)    { tag(name, QVariant(s)); }
+      void tag(const char* name, const QString& s) { tag(name, QVariant(s)); }
       void tag(const char* name, const char* attribute, const QString&);
-      void tag(const char* name, const QColor&);
       void tag(const char* name, const QWidget*);
-      void tag(const char* name, const QRect&);
-      void tag(const char* name, const QPointF&);
-      void tag(const char* name, const QSizeF&);
 
       static QString xmlString(const QString&);
       };
@@ -65,5 +75,6 @@ class Xml : public QTextStream {
 extern QPointF readPoint(QDomNode);
 extern QSizeF readSize(QDomNode);
 extern void domError(QDomNode node);
+extern void domNotImplemented(QDomNode node);
 #endif
 
