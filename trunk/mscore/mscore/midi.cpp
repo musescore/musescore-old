@@ -955,6 +955,7 @@ void Score::importMidi(const QString& name)
       lm.load(name);
       _saved = false;
       convertMidi(&(lm.mf));
+      _created = true;
       }
 
 //---------------------------------------------------------

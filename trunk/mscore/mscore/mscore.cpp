@@ -1561,7 +1561,7 @@ int main(int argc, char* argv[])
                   case 'v':
                         printVersion(argv[0]);
                         return 0;
-                  case 'd':
+                   case 'd':
                         debugMode = true;
                         break;
                   case 'L':

@@ -1,3 +1,5 @@
+25.4.7 (ws)
+      - dont overwrite imported midi file on "save"
 15.4.7 (ws)
       - lots of small changes and fixes
       - new demo file "Brandenburg Concerto No.2; J.S.Bach" adapted from
