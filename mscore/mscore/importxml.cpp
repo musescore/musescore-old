@@ -191,6 +191,7 @@ void Score::importMusicXml(const QString& name)
       musicxml.import(this);
       _layout->connectTies();
       layout();
+      _created = true;
       }
 
 //---------------------------------------------------------
@@ -1254,7 +1255,8 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomNode node)
       int relStaff = 0;
       QString lyric[MAX_LYRICS];
       QString syllabic[MAX_LYRICS];
-      BeamMode bm  = BEAM_NO;
+      // BeamMode bm  = BEAM_NO;
+      BeamMode bm  = BEAM_AUTO;
       Direction sd = AUTO;
       int dots     = 0;
       bool grace   = false;

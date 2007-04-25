@@ -688,8 +688,8 @@ void Chord::write(Xml& xml) const
                   xml.curTick = tick() + tickLen();
                   return;
                   }
-            else
-                  printf("   note not simple\n");
+//            else
+//                  printf("   note not simples\n");
             }
       xml.stag("Chord");
       ChordRest::writeProperties(xml);
