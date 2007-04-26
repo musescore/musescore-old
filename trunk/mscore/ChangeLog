@@ -1,3 +1,6 @@
+26.4.7 (ws)
+      - cleanups for midi import
+      - import midi file lyrics META event
 25.4.7 (ws)
       - dont overwrite imported midi file on "save"
 15.4.7 (ws)

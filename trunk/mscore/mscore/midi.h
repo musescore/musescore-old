@@ -109,18 +109,12 @@ struct MidiEvent {
       int tick;
       int len;
       int type;
-      unsigned char dataA, dataB, dataC;
+      int channel;
+      int port;
+      int dataA, dataB, dataC;
 
-      MidiEvent() {
-            data = 0;
-            dataLen = 0;
-            len = 0;
-            tick = 0;
-            }
-      ~MidiEvent() {
-            if (data)
-                  delete data;
-            }
+      MidiEvent();
+      ~MidiEvent();
       bool isNote() const { return type == ME_NOTEON; }
       bool isNoteOff() const {
             return (type == ME_NOTEOFF) || ((type == ME_NOTEON) && (dataB == 0));
@@ -132,10 +126,9 @@ struct MidiEvent {
       int velo() const  { return dataB; }
       };
 
-typedef std::multimap<int, MidiEvent*, std::less<int> > EventList;
+typedef QMultiMap<int, MidiEvent*> EventList;
 typedef EventList::iterator iEvent;
 typedef EventList::const_iterator ciEvent;
-typedef std::pair <iEvent, iEvent> EventRange;
 
 //---------------------------------------------------------
 //   MidiTrack
@@ -197,9 +190,8 @@ class MidiFile {
       Score* cs;
       MidiTrackList _tracks;
       int timesig_z, timesig_n;
-      int status, lastchan, click;
+      int status, click;
       int sstatus;
-      int lastport;
       int channelprefix;
       QFile* fp;
       int fileDivision;
@@ -216,7 +208,7 @@ class MidiFile {
       void writeShort(int);
       int readLong();
       void writeLong(int);
-      MidiEvent* readEvent(MidiTrack*);
+      MidiEvent* readEvent();
       bool readTrack(bool);
       bool writeTrack(const MidiTrack*);
       int getvl();
