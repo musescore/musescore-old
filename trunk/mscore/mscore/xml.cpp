@@ -187,7 +187,7 @@ void Xml::tag(const char* name, QVariant data)
             }
       }
 
-void Xml::tag(const char* name, const char* attributes, const QString& s)
+void Xml::tag(const char* name, const QString& attributes, const QString& s)
       {
       putLevel();
       *this << "<" << name << " " << attributes << ">" << s << "</" << name << ">\n";

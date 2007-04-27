@@ -51,6 +51,7 @@ include_directories(
       ${CMAKE_CURRENT_BINARY_DIR}
       ${PROJECT_SOURCE_DIR}/fluid
       ${PROJECT_SOURCE_DIR}/awl
+      ${PROJECT_SOURCE_DIR}
       )
 
 QT4_WRAP_UI (ui_headers
@@ -224,6 +225,19 @@ target_link_libraries(mscore
       ${JACK_LIB}
       fluid
       awl
+      )
+
+#======================================
+#     target smf2xml
+#======================================
+
+add_executable ( smf2xml smf2xml.cpp midifile.cpp xml.cpp)
+
+target_link_libraries( smf2xml
+      ${QT_LIBRARIES}
+      )
+set_target_properties( smf2xml
+      PROPERTIES COMPILE_FLAGS "-include ${PROJECT_BINARY_DIR}/all.h"
       )
 
 install_targets ( /bin mscore )
