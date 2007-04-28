@@ -130,29 +130,26 @@ typedef QMultiMap<int, MidiEvent*> EventList;
 typedef EventList::iterator iEvent;
 typedef EventList::const_iterator ciEvent;
 
+class MidiFile;
+
 //---------------------------------------------------------
 //   MidiTrack
 //---------------------------------------------------------
 
 class MidiTrack {
-      EventList* _events;
+      MidiFile* mf;
+      EventList _events;
       int _outChannel;
       int _outPort;
       QString _name;
       QString _comment;
-      bool _drumTrack;
-      int _key;
 
    public:
-      MidiTrack();
+      MidiTrack(MidiFile*);
       ~MidiTrack();
 
-      int hbank, lbank, program;
-      int minPitch, maxPitch, medPitch;
-
       bool empty() const;
-      EventList* events() const         { return _events;     }
-      void setEvents(EventList* el)     { _events = el;       }
+      const EventList events() const    { return _events;     }
       int outChannel() const            { return _outChannel; }
       void setOutChannel(int n)         { _outChannel = n;    }
       int outPort() const               { return _outPort;    }
@@ -161,8 +158,10 @@ class MidiTrack {
       void setName(const QString& s)    { _name = s;          }
       QString comment() const           { return _comment;    }
       void setComment(const QString& s) { _comment = s;       }
-      void setKey(int k)                { _key = k;           }
-      int key() const                   { return _key;        }
+      void insert(MidiEvent* e)         { _events.insert(e->tick, e); }
+      void mergeNoteOnOff();
+      void cleanup();
+      void changeDivision(int newDivision);
       };
 
 typedef QList<MidiTrack*> MidiTrackList;
@@ -185,7 +184,6 @@ class MidiFile {
       int timesig_z, timesig_n;
       int status, click;
       int sstatus;
-      int channelprefix;
       int _division;
       int curPos;
       int _format;
@@ -199,10 +197,9 @@ class MidiFile {
       bool skip(qint64);
       void writeShort(int);
       void writeLong(int);
-      bool writeTrack(const MidiTrack*);
       void putvl(unsigned);
       void writeEvent(int channel, const MidiEvent*);
-      void processTrack1(MidiTrack* track);
+      bool writeTrack(const MidiTrack*);
 
       // read
       bool read(void*, qint64);
@@ -217,12 +214,14 @@ class MidiFile {
       bool read(QIODevice*);
       bool write(QIODevice*);
 
-      MidiTrackList* tracks()   { return &_tracks; }
-      MidiType midiType() const { return _midiType; }
-      int format() const        { return _format; }
-      void setFormat(int fmt)   { _format = fmt; }
-      int division() const      { return _division; }
-      void setDivision(int val) { _division = val; }
+      MidiTrackList* tracks()       { return &_tracks;  }
+      MidiType midiType() const     { return _midiType; }
+      void setMidiType(MidiType mt) { _midiType = mt;   }
+      int format() const            { return _format;   }
+      void setFormat(int fmt)       { _format = fmt;    }
+      int division() const          { return _division; }
+      void setDivision(int val)     { _division = val;  }
+      void changeDivision(int val);
       void process1();
       };
 
