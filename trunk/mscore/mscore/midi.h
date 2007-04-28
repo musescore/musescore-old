@@ -21,6 +21,7 @@
 #ifndef __MIDI_H__
 #define __MIDI_H__
 
+#if 0
 const int MIDI_PORTS = 16;
 // const int MIDI_CHANNEL = 16;
 enum {
@@ -245,7 +246,6 @@ class MidiFile {
 #define BE_SHORT(x) XCHG_SHORT(x)
 #define BE_LONG(x)  XCHG_LONG(x)
 
-
 //---------------------------------------------------------
 //   MidiInstrument
 //---------------------------------------------------------
@@ -257,5 +257,6 @@ struct MidiInstrument {
       char* name;
       };
 
+#endif
 #endif
 

@@ -21,6 +21,31 @@
 #include "midifile.h"
 
 //---------------------------------------------------------
+//   quantizeLen
+//---------------------------------------------------------
+
+static int quantizeLen(int division, int len)
+      {
+      if (len < division/12)
+            len = division/8;
+      else if (len < division/6)
+            len = division/4;
+      else if (len < division/3)
+            len = division/2;
+      else if (len < division+division/2)
+            len = division;
+      else if (len < division * 3)
+            len = division*2;
+      else if (len < division * 6)
+            len = division * 4;
+      else if (len < division * 12)
+            len = division * 8;
+      else
+            len = division * 16;
+      return len;
+      }
+
+//---------------------------------------------------------
 //   MidiEvent
 //---------------------------------------------------------
 
@@ -50,7 +75,7 @@ MidiFile::MidiFile()
       timesig_z = 4;
       timesig_n = 4;
       curPos    = 0;
-      _midiType = MT_GM;      // MT_UNKNOWN;
+      _midiType = MT_UNKNOWN;
       }
 
 //---------------------------------------------------------
@@ -66,9 +91,11 @@ bool MidiFile::write(QIODevice* out)
       writeShort(1);                // format
       writeShort(_tracks.size());
       writeShort(_division);
-      foreach(MidiTrack* t, _tracks)
-            writeTrack(t);
-      return false; // fp->error() != QFile::NoError;
+      foreach (const MidiTrack* t, _tracks) {
+            if (writeTrack(t))
+                  return true;
+            }
+      return false;
       }
 
 //---------------------------------------------------------
@@ -77,19 +104,15 @@ bool MidiFile::write(QIODevice* out)
 
 bool MidiFile::writeTrack(const MidiTrack* t)
       {
-      const EventList* events = t->events();
       write("MTrk", 4);
       qint64 lenpos = fp->pos();
       writeLong(0);                 // dummy len
 
-      status = -1;
+      status   = -1;
       int tick = 0;
-      for (ciEvent i = events->begin(); i != events->end(); ++i) {
+      const EventList events = t->events();
+      for (ciEvent i = events.begin(); i != events.end(); ++i) {
             int ntick = i.key();
-            if (ntick < tick) {
-                  printf("MidiFile::writeTrack: ntick %d < tick %d\n", ntick, tick);
-                  ntick = tick;
-                  }
             putvl(ntick - tick);    // write tick delta
             writeEvent(t->outChannel(), i.value());
             tick = ntick;
@@ -223,11 +246,9 @@ bool MidiFile::readTrack(bool)
       int endPos    = curPos + len;
       status        = -1;
       sstatus       = -1;  // running status, will not be reset on meta or sysex
-      channelprefix = -1;
       click         =  0;
-      MidiTrack* track  = new MidiTrack();
+      MidiTrack* track  = new MidiTrack(this);
       _tracks.push_back(track);
-      EventList* el = track->events();
 
       int port = 0;
       track->setOutPort(port);
@@ -243,12 +264,12 @@ bool MidiFile::readTrack(bool)
                   int mt = event->dataA;
                   if (mt == 0x2f)         // end of track
                         break;
-                  el->insert(event->tick, event);
+                  track->insert(event);
                   continue;
                   }
             if (event->channel == -1) {
                   printf("importMidi: event type 0x%02x not implemented\n", event->type);
-                  // el->insert(event->tick, event);
+                  // track->insert(event);
                   delete event;
                   continue;
                   }
@@ -258,7 +279,7 @@ bool MidiFile::readTrack(bool)
                   printf("importMidi: channel changed on track %d - %d\n",
                      track->outChannel(), event->channel);
                   }
-            el->insert(event->tick, event);
+            track->insert(event);
             }
       if (curPos != endPos) {
             printf("bad track len: %d != %d, %d bytes too much\n",
@@ -400,24 +421,15 @@ void MidiFile::putvl(unsigned val)
 //   MidiTrack
 //---------------------------------------------------------
 
-MidiTrack::MidiTrack()
+MidiTrack::MidiTrack(MidiFile* f)
       {
-      _events     = new EventList;
-      _outChannel = 0;
-      _outPort    = 0;
-      _drumTrack  = false;
-      _key        = 0;
-      hbank       = 0;
-      lbank       = 0;
-      program     = 0;
-      minPitch    = 127;
-      maxPitch    = 0;
-      medPitch    = 64;
+      mf = f;
+      _outChannel = -1;
+      _outPort    = -1;
       }
 
 MidiTrack::~MidiTrack()
       {
-      delete _events;
       }
 
 //---------------------------------------------------------
@@ -569,44 +581,18 @@ MidiEvent* MidiFile::readEvent()
       }
 
 //---------------------------------------------------------
-//   processTrack1
+//   mergeNoteOnOff
+//    find matching note on / note off events and merge
+//    into a note event with tick len
 //---------------------------------------------------------
 
-void MidiFile::processTrack1(MidiTrack* track)
+void MidiTrack::mergeNoteOnOff()
       {
-//      if (track->outChannel() == 9 && midiType() != MT_UNKNOWN)
-//            track->setDrumTrack(true);
-
-      EventList* tevents = track->events();
-
-#if 0
-      //---------------------------------------------------
-      //    get initial controller state
-      //---------------------------------------------------
-
-      track->hbank   = -1;
-      track->lbank   = -1;
-      track->program = -1;
-
-      foreach(MidiEvent* ev, *tevents) {
-            if (ev->type == ME_PROGRAM) {
-                  if (track->program == -1) {
-                        track->program = ev->dataA;
-                        tevents->remove(ev->tick, ev);
-                        }
-                  }
-            }
-#endif
-      //---------------------------------------------------
-      //    change NoteOff events into Note events
-      //    with len
-      //---------------------------------------------------
-
-      foreach (MidiEvent* event, *tevents)      // invalidate all note len
+      foreach (MidiEvent* event, _events)      // invalidate all note len
             if (event->isNote())
                   event->len = -1;
 
-      foreach (MidiEvent* ev, *tevents) {
+      foreach (MidiEvent* ev, _events) {
             if (!ev->isNote())
                   continue;
             int tick = ev->tick;
@@ -616,7 +602,7 @@ void MidiFile::processTrack1(MidiTrack* track)
                   }
 
             iEvent k;
-            for (k = tevents->lowerBound(tick); k != tevents->end(); ++k) {
+            for (k = _events.lowerBound(tick); k != _events.end(); ++k) {
                   MidiEvent* event = k.value();
                   if (ev->isNoteOff(event)) {
                         int t = k.key() - tick;
@@ -627,7 +613,7 @@ void MidiFile::processTrack1(MidiTrack* track)
                         break;
                         }
                   }
-            if (k == tevents->end()) {
+            if (k == _events.end()) {
                   printf("-no note-off! %d pitch %d velo %d\n",
                      tick, ev->dataA, ev->dataB);
                   //
@@ -637,17 +623,16 @@ void MidiFile::processTrack1(MidiTrack* track)
                   ev->len = endTick - ev->tick;
                   }
             else {
-                  tevents->erase(k);      // memory leak
+                  _events.erase(k);      // memory leak
                   }
             }
 
       // DEBUG: any note off left?
 
-      for (iEvent i = tevents->begin(); i != tevents->end(); ++i) {
-            MidiEvent* ev  = i.value();
+      foreach (const MidiEvent* ev, _events) {
             if (ev->isNoteOff()) {
                   printf("+extra note-off! %d pitch %d velo %d\n",
-                           i.key(), ev->dataA, ev->dataB);
+                           ev->tick, ev->dataA, ev->dataB);
                   }
             }
       }
@@ -659,7 +644,7 @@ void MidiFile::processTrack1(MidiTrack* track)
 
 bool MidiTrack::empty() const
       {
-      return _events->empty();
+      return _events.empty();
       }
 
 //---------------------------------------------------------
@@ -669,5 +654,86 @@ bool MidiTrack::empty() const
 void MidiFile::process1()
       {
       foreach (MidiTrack* t, _tracks)
-            processTrack1(t);
+            t->mergeNoteOnOff();
       }
+
+//---------------------------------------------------------
+//   cleanup
+//    - quantize
+//    - remove overlaps
+//---------------------------------------------------------
+
+void MidiTrack::cleanup()
+	{
+      const int tickRaster = mf->division()/2; 	// 1/8 quantize
+      EventList dl;
+
+      //
+      //	quantize
+      //
+      foreach(MidiEvent* e, _events) {
+            if (e->isNote()) {
+	            int len  = quantizeLen(mf->division(), e->len);
+      	      int tick = (e->tick / tickRaster) * tickRaster;
+
+	            e->tick = tick;
+      	      e->len  = len;
+                  }
+		dl.insert(e->tick, e);
+            }
+      //
+      //
+      //
+      _events.clear();
+
+      for(iEvent i = dl.begin(); i != dl.end(); ++i) {
+            MidiEvent* e = i.value();
+            if (e->isNote()) {
+                  iEvent ii = i;
+                  ++ii;
+                  for (; ii != dl.end(); ++ii) {
+                        MidiEvent* ee = ii.value();
+                        if (!ee->isNote() || ee->pitch() != e->pitch())
+                              continue;
+                        if (ee->tick >= e->tick + e->len)
+                              break;
+                        e->len = ee->tick - e->tick;
+                        break;
+                        }
+                  if (e->len <= 0)
+                        continue;
+                  }
+		_events.insert(e->tick, e);
+            }
+      }
+
+//---------------------------------------------------------
+//   changeDivision
+//---------------------------------------------------------
+
+void MidiTrack::changeDivision(int newDivision)
+      {
+      EventList dl;
+
+      int division = mf->division();
+      foreach(MidiEvent* e, _events) {
+            int tick = (e->tick * newDivision + division/2) / division;
+            e->tick = tick;
+		dl.insert(tick, e);
+            }
+      _events = dl;
+      }
+
+//---------------------------------------------------------
+//   changeDivision
+//---------------------------------------------------------
+
+void MidiFile::changeDivision(int newDivision)
+      {
+      if (_division == newDivision)
+            return;
+      foreach (MidiTrack* t, _tracks)
+            t->changeDivision(newDivision);
+      _division = newDivision;
+      }
+

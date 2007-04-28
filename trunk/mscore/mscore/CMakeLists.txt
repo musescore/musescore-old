@@ -155,6 +155,7 @@ add_executable ( mscore
       measure.cpp
       menus.cpp
       midi.cpp
+      midifile.cpp
       mscore.cpp
       mtime.cpp
       navigate.cpp

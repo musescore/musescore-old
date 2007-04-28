@@ -3,7 +3,7 @@
 //  Linux Music Score Editor
 //  $Id: midi.cpp,v 1.38 2006/03/22 12:04:14 wschweer Exp $
 //
-//  Copyright (C) 2002-2006 Werner Schweer (ws@seh.de)
+//  Copyright (C) 2002-2007 Werner Schweer (ws@seh.de)
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.
@@ -19,6 +19,7 @@
 //=============================================================================
 
 #include "mscore.h"
+#include "midifile.h"
 #include "midi.h"
 #include "canvas.h"
 #include "file.h"
@@ -51,6 +52,17 @@ static unsigned const char xgOnMsg[] = { 0x43, 0x10, 0x4c, 0x00, 0x00, 0x7e, 0x0
 static unsigned const int  gmOnMsgLen = sizeof(gmOnMsg);
 static unsigned const int  gsOnMsgLen = sizeof(gsOnMsg);
 static unsigned const int  xgOnMsgLen = sizeof(xgOnMsg);
+
+//---------------------------------------------------------
+//   MidiInstrument
+//---------------------------------------------------------
+
+struct MidiInstrument {
+      int type;
+      int hbank, lbank, patch;
+      int split;
+      char* name;
+      };
 
 static MidiInstrument minstr[] = {
       // Piano
@@ -600,23 +612,23 @@ static MidiInstrument minstr[] = {
       };
 
 //---------------------------------------------------------
-//   MidiEvent
+//   instrName
 //---------------------------------------------------------
 
-MidiEvent::MidiEvent()
+static QString instrName(int type, int hbank, int lbank, int program)
       {
-      data    = 0;
-      dataLen = 0;
-      len     = 0;
-      tick    = 0;
-      channel = -1;
-      port    = -1;
-      }
-
-MidiEvent::~MidiEvent()
-      {
-      if (data)
-            delete data;
+      if (program != -1) {
+            for (unsigned int i = 0; i < sizeof(minstr)/sizeof(*minstr); ++i) {
+                  MidiInstrument* mi = &minstr[i];
+                  if ((mi->patch == program)
+                     && (mi->type & type)
+                     && (mi->hbank == hbank || hbank == -1)
+                     && (mi->lbank == lbank || lbank == -1)) {
+                        return QString(mi->name);
+                        }
+                  }
+            }
+      return QString();
       }
 
 //---------------------------------------------------------
@@ -631,7 +643,7 @@ class ExportMidi : public SaveFile {
    public:
       MidiFile mf;
 
-      ExportMidi(Score* s) : mf(s) { cs = s; }
+      ExportMidi(Score* s) : mf() { cs = s; }
       virtual bool saver();
       };
 
@@ -652,7 +664,6 @@ void MuseScore::exportMidi()
 void ExportMidi::writeHeader()
       {
       MidiTrack* track  = mf.tracks()->front();
-      EventList* events = track->events();
       Measure* measure  = cs->mainLayout()->first();
       foreach(const Element* e, *measure->pel()) {
             if (e->type() == TEXT) {
@@ -668,7 +679,7 @@ void ExportMidi::writeHeader()
                               ev->len       = len;
                               ev->data      = new unsigned char[len];
                               strcpy((char*)(ev->data), str.toLatin1().data());
-                              events->insert(0, ev);
+                              track->insert(ev);
                               }
                               break;
                         case TEXT_SUBTITLE:
@@ -679,7 +690,7 @@ void ExportMidi::writeHeader()
                               ev->len       = len;
                               ev->data      = new unsigned char[len];
                               strcpy((char*)(ev->data), str.toLatin1().data());
-                              events->insert(0, ev);
+                              track->insert(ev);
                               }
                               break;
                         case TEXT_COMPOSER:
@@ -690,7 +701,7 @@ void ExportMidi::writeHeader()
                               ev->len       = len;
                               ev->data      = new unsigned char[len];
                               strcpy((char*)(ev->data), str.toLatin1().data());
-                              events->insert(0, ev);
+                              track->insert(ev);
                               }
                               break;
                         case TEXT_TRANSLATOR:
@@ -701,7 +712,7 @@ void ExportMidi::writeHeader()
                               ev->len       = len;
                               ev->data      = new unsigned char[len];
                               strcpy((char*)(ev->data), str.toLatin1().data());
-                              events->insert(0, ev);
+                              track->insert(ev);
                               }
                               break;
                         case TEXT_POET:
@@ -712,7 +723,7 @@ void ExportMidi::writeHeader()
                               ev->len       = len;
                               ev->data      = new unsigned char[len];
                               strcpy((char*)(ev->data), str.toLatin1().data());
-                              events->insert(0, ev);
+                              track->insert(ev);
                               }
                               break;
                         }
@@ -725,9 +736,9 @@ void ExportMidi::writeHeader()
 
       SigList* sigmap = cs->sigmap;
       for (iSigEvent is = sigmap->begin(); is != sigmap->end(); ++is) {
-            SigEvent se = is->second;
-            int tick = is->first;
             MidiEvent* ev = new MidiEvent;
+            SigEvent se   = is->second;
+            ev->tick      = is->first;
             ev->type      = ME_META;
             ev->dataA     = META_TIME_SIGNATURE;
             ev->len  = 4;
@@ -735,10 +746,10 @@ void ExportMidi::writeHeader()
             ev->data[0] = se.nominator;
             int n;
             switch(se.denominator) {
-                  case 1: n = 0; break;
-                  case 2: n = 1; break;
-                  case 4: n = 2; break;
-                  case 8: n = 3; break;
+                  case 1:  n = 0; break;
+                  case 2:  n = 1; break;
+                  case 4:  n = 2; break;
+                  case 8:  n = 3; break;
                   case 16: n = 4; break;
                   case 32: n = 5; break;
                   default:
@@ -749,7 +760,7 @@ void ExportMidi::writeHeader()
             ev->data[1] = n;
             ev->data[2] = 24;
             ev->data[3] = 8;
-            events->insert(tick, ev);
+            track->insert(ev);
             }
 
       //--------------------------------------------
@@ -758,16 +769,16 @@ void ExportMidi::writeHeader()
 
       KeyList* keymap = cs->staff(0)->keymap(); // TODO_K
       for (iKeyEvent ik = keymap->begin(); ik != keymap->end(); ++ik) {
-            int tick      = ik->first;
-            int key       = ik->second;
             MidiEvent* ev = new MidiEvent;
+            ev->tick      = ik->first;
+            int key       = ik->second;
             ev->type      = ME_META;
             ev->dataA     = META_KEY_SIGNATURE;
             ev->len       = 2;
             ev->data      = new unsigned char[2];
             ev->data[0]   = key;
             ev->data[1]   = 0;  // major
-            events->insert(tick, ev);
+            track->insert(ev);
             }
 
       //--------------------------------------------
@@ -776,9 +787,9 @@ void ExportMidi::writeHeader()
 
       TempoList* tempomap = cs->tempomap;
       for (iTEvent it = tempomap->begin(); it != tempomap->end(); ++it) {
-            int tick      = it->second->tick;
-            int tempo     = it->second->tempo;
             MidiEvent* ev = new MidiEvent;
+            ev->tick      = it->second->tick;
+            int tempo     = it->second->tempo;
             ev->type      = ME_META;
             ev->dataA     = META_TEMPO;
             ev->len       = 3;
@@ -786,7 +797,7 @@ void ExportMidi::writeHeader()
             ev->data[0]   = tempo >> 16;
             ev->data[1]   = tempo >> 8;
             ev->data[2]   = tempo;
-            events->insert(tick, ev);
+            track->insert(ev);
             }
       }
 
@@ -798,12 +809,10 @@ void ExportMidi::writeHeader()
 
 bool ExportMidi::saver()
       {
-      mf.setFp(&f);
-
       MidiTrackList* tracks = mf.tracks();
       int nparts = cs->parts()->size();
       for (int i = 0; i < nparts; ++i)
-            tracks->append(new MidiTrack);
+            tracks->append(new MidiTrack(&mf));
 
       int gateTime = 80;  // 100 - legato (100%)
       writeHeader();
@@ -811,7 +820,6 @@ bool ExportMidi::saver()
       int partIdx = 0;
       foreach (Part* part, *cs->parts()) {
             MidiTrack* track = tracks->at(partIdx);
-            EventList* events = track->events();
             int channel  = part->midiChannel();
             track->setOutPort(0);
             track->setOutChannel(channel);
@@ -819,31 +827,35 @@ bool ExportMidi::saver()
             MidiEvent* ev = new MidiEvent;
             ev->type  = ME_PROGRAM;
             ev->dataA = part->midiProgram();
-            events->insert(0, ev);
+            track->insert(ev);
 
             ev        = new MidiEvent;
             ev->type  = ME_CONTROLLER;
             ev->dataA = CTRL_VOLUME;
             ev->dataB = part->volume();
-            events->insert(1, ev);
+            ev->tick  = 1;
+            track->insert(ev);
 
             ev        = new MidiEvent;
             ev->type  = ME_CONTROLLER;
             ev->dataA = CTRL_PANPOT;
             ev->dataB = part->pan();
-            events->insert(2, ev);
+            ev->tick  = 2;
+            track->insert(ev);
 
             ev        = new MidiEvent;
             ev->type  = ME_CONTROLLER;
             ev->dataA = CTRL_REVERB_SEND;
             ev->dataA = part->reverb();
-            events->insert(3, ev);
+            ev->tick  = 3;
+            track->insert(ev);
 
             ev        = new MidiEvent;
             ev->type  = ME_CONTROLLER;
             ev->dataA = CTRL_CHORUS_SEND;
             ev->dataA = part->chorus();
-            events->insert(4, ev);
+            ev->tick  = 4;
+            track->insert(ev);
 
             for (int i = 0; i < part->staves()->size(); ++i) {
                   QList<OttavaE> ol;
@@ -895,13 +907,15 @@ bool ExportMidi::saver()
                                                 ev->type = ME_NOTEON;
                                                 ev->dataA = pitch;
                                                 ev->dataB = 0x60;
-                                                events->insert(tick, ev);
+                                                ev->tick  = tick;
+                                                track->insert(ev);
 
                                                 ev = new MidiEvent;
                                                 ev->type  = ME_NOTEON;
                                                 ev->dataA = pitch;
                                                 ev->dataB = 0x0;
-                                                events->insert(tick + len, ev);
+                                                ev->tick  = tick + len;
+                                                track->insert(ev);
                                                 }
                                           }
                                     }
@@ -916,12 +930,14 @@ bool ExportMidi::saver()
                                           ev->type  = ME_CONTROLLER;
                                           ev->dataA = CTRL_SUSTAIN;
                                           ev->dataB = 0x7f;
-                                          events->insert(pedal->tick(), ev);
+                                          ev->tick  = pedal->tick();
+                                          track->insert(ev);
                                           ev        = new MidiEvent;
                                           ev->type  = ME_CONTROLLER;
                                           ev->dataA = CTRL_SUSTAIN;
                                           ev->dataB = 0;
-                                          events->insert(pedal->tick2(), ev);
+                                          ev->tick  = pedal->tick2();
+                                          track->insert(ev);
                                           }
                                           break;
                                     default:
@@ -932,7 +948,7 @@ bool ExportMidi::saver()
                   }
             ++partIdx;
             }
-      return mf.write();
+      return mf.write(&f);
       }
 
 //---------------------------------------------------------
@@ -942,7 +958,7 @@ bool ExportMidi::saver()
 class LoadMidi : public LoadFile {
    public:
       MidiFile mf;
-      LoadMidi(Score* s) : mf(s) {}
+      LoadMidi(Score*) : mf() {}
       virtual bool loader(QFile* f);
       };
 
@@ -987,838 +1003,10 @@ void Score::importMidi(const QString& name)
 
 bool LoadMidi::loader(QFile* fp)
       {
-      mf.setFp(fp);
-      if (mf.read()) {
-            error = mf.error;
+      if (mf.read(fp)) {
             return true;
             }
       return false;
-      }
-
-//---------------------------------------------------------
-//   MidiFile
-//---------------------------------------------------------
-
-MidiFile::MidiFile(Score* s)
-      {
-      cs        = s;
-      fp        = 0;
-      error     = 0;
-      timesig_z = 4;
-      timesig_n = 4;
-      curPos    = 0;
-      _midiType = MT_GM;      // MT_UNKNOWN;
-      }
-
-//---------------------------------------------------------
-//   setFp
-//---------------------------------------------------------
-
-void MidiFile::setFp(QFile* _fp)
-      {
-      fp = _fp;
-      }
-
-//---------------------------------------------------------
-//   write
-//    returns true on error
-//---------------------------------------------------------
-
-bool MidiFile::write()
-      {
-      write("MThd", 4);
-      writeLong(6);                 // header len
-      writeShort(1);                // format
-      writeShort(_tracks.size());
-      writeShort(division);
-      foreach(MidiTrack* t, _tracks)
-            writeTrack(t);
-      return fp->error() != QFile::NoError;
-      }
-
-//---------------------------------------------------------
-//   writeTrack
-//---------------------------------------------------------
-
-bool MidiFile::writeTrack(const MidiTrack* t)
-      {
-      const EventList* events = t->events();
-      write("MTrk", 4);
-      qint64 lenpos = fp->pos();
-      writeLong(0);                 // dummy len
-
-      status = -1;
-      int tick = 0;
-      for (ciEvent i = events->begin(); i != events->end(); ++i) {
-            int ntick = i.key();
-            if (ntick < tick) {
-                  printf("MidiFile::writeTrack: ntick %d < tick %d\n", ntick, tick);
-                  ntick = tick;
-                  }
-            putvl(ntick - tick);    // write tick delta
-            writeEvent(t->outChannel(), i.value());
-            tick = ntick;
-            }
-
-      //---------------------------------------------------
-      //    write "End Of Track" Meta
-      //    write Track Len
-      //
-
-      putvl(0);
-      put(0xff);        // Meta
-      put(0x2f);        // EOT
-      putvl(0);         // len 0
-      qint64 endpos = fp->pos();
-      fp->seek(lenpos);
-      writeLong(endpos-lenpos-4);   // tracklen
-      fp->seek(endpos);
-      return false;
-      }
-
-//---------------------------------------------------------
-//   writeEvent
-//---------------------------------------------------------
-
-void MidiFile::writeEvent(int c, const MidiEvent* event)
-      {
-      int nstat = event->type;
-
-      // we dont save meta data into smf type 0 files:
-
-      nstat |= c;
-      //
-      //  running status; except for Sysex- and Meta Events
-      //
-      if (((nstat & 0xf0) != 0xf0) && (nstat != status)) {
-            status = nstat;
-            put(nstat);
-            }
-      switch (event->type) {
-            case ME_NOTEOFF:
-            case ME_NOTEON:
-            case ME_POLYAFTER:
-            case ME_CONTROLLER:
-            case ME_PITCHBEND:
-                  put(event->dataA);
-                  put(event->dataB);
-                  break;
-            case ME_PROGRAM:        // Program Change
-            case ME_AFTERTOUCH:     // Channel Aftertouch
-                  put(event->dataA);
-                  break;
-            case ME_SYSEX:
-                  put(0xf0);
-                  putvl(event->len + 1);  // including 0xf7
-                  write(event->data, event->len);
-                  put(0xf7);
-                  status = -1;      // invalidate running status
-                  break;
-            case ME_META:
-                  put(0xff);
-                  put(event->dataA);
-                  putvl(event->len);
-                  write(event->data, event->len);
-                  status = -1;
-                  break;
-            }
-      }
-
-//---------------------------------------------------------
-//   readMidi
-//    return true on error
-//---------------------------------------------------------
-
-bool MidiFile::read()
-      {
-      errorBuffer[0] = 0;
-      error = errorBuffer;
-      _tracks.clear();
-
-      char tmp[4];
-
-      read(tmp, 4);
-      int len = readLong();
-      if (memcmp(tmp, "MThd", 4) || len < 6) {
-            error = "bad midifile: MThd expected\n";
-            return true;
-            }
-
-      int format  = readShort();
-      int ntracks = readShort();
-      fileDivision = readShort();
-
-      if (fileDivision < 0)
-            fileDivision = (-(fileDivision/256)) * (fileDivision & 0xff);
-      if (len > 6)
-            skip(len-6); // skip the excess
-
-printf("read midi file type %d, tracks %d\n", format, ntracks);
-
-      switch (format) {
-            case 0:
-                  if (readTrack(true))
-                        return true;
-                  break;
-            case 1:
-                  for (int i = 0; i < ntracks; i++) {
-                        if (readTrack(false))
-                              return true;
-                        }
-                  break;
-            default:
-            case 2:
-                  sprintf(errorBuffer, "midi fileformat %d not implemented!\n", format);
-                  return true;
-            }
-
-      foreach(MidiTrack* t, _tracks)
-            processTrack(t);
-      return false;
-      }
-
-//---------------------------------------------------------
-//   readTrack
-//    return true on error
-//---------------------------------------------------------
-
-bool MidiFile::readTrack(bool)
-      {
-      char tmp[4];
-      read(tmp, 4);
-      if (memcmp(tmp, "MTrk", 4)) {
-            sprintf(errorBuffer, "bad midifile: MTrk expected\n");
-            return true;
-            }
-      int len       = readLong();       // len
-      int endPos    = curPos + len;
-      status        = -1;
-      sstatus       = -1;  // running status, will not be reset on meta or sysex
-      channelprefix = -1;
-      click         =  0;
-      MidiTrack* track  = new MidiTrack();
-      _tracks.push_back(track);
-      EventList* el = track->events();
-
-      int port = 0;
-      track->setOutPort(port);
-      track->setOutChannel(-1);
-
-      for (;;) {
-            MidiEvent* event = readEvent();
-            if (event == 0)
-                  return true;
-
-            // check for end of track:
-            if ((event->type == ME_META)) {
-                  int mt = event->dataA;
-                  if (mt == 0x2f)
-                        break;
-
-                  switch (mt) {
-                        case META_TRACK_NAME:
-                              track->setName(QString((char*)event->data));
-                              delete event;
-                              break;
-                        case META_TRACK_COMMENT:
-                              track->setComment(QString((char*)event->data));
-                              delete event;
-                              break;
-                        case META_TITLE:
-                              title = (char*)event->data;
-                              delete event;
-                              break;
-                        case META_SUBTITLE:
-                              subTitle = (char*)event->data;
-                              delete event;
-                              break;
-                        case META_COMPOSER:
-                              composer = (char*)(event->data);
-                              delete event;
-                              break;
-                        case META_TRANSLATOR:
-                              translator = (char*)event->data;
-                              delete event;
-                              break;
-                        case META_POET:
-                              poet = (char*)event->data;
-                              delete event;
-                              break;
-                        case META_LYRIC:
-                        case META_TEMPO:
-                        case META_TIME_SIGNATURE:
-                        case META_KEY_SIGNATURE:
-                              el->insert(event->tick, event);
-                              break;
-                        default:
-                              printf("importMidi: meta event 0x%02x not implemented\n", mt);
-                              delete event;
-                              break;
-                        }
-                  continue;
-                  }
-            if (event->channel == -1) {
-                  printf("importMidi: event type 0x%02x not implemented\n", event->type);
-                  // el->insert(event->tick, event);
-                  delete event;
-                  continue;
-                  }
-            if (track->outChannel() == -1)
-                  track->setOutChannel(event->channel);
-            else if (track->outChannel() != event->channel) {
-                  printf("importMidi: channel changed on track %d - %d\n",
-                     track->outChannel(), event->channel);
-                  }
-
-#if 0
-            if (lastchan != channel) {
-                  mergeChannels = true;   // DEBUG
-                  if (!mergeChannels) {
-                        //
-                        // try to insert in approp track
-                        //
-                        int i = 0;
-                        for (; i < _tracks.size(); ++i) {
-                              MidiTrack* mtrack = _tracks.at(i);
-                              if (mtrack == 0)
-                                    continue;
-                              if (mtrack->outChannel() == lastchan) {
-                                    mtrack->events()->insert(event->tick, event);
-                                    break;
-                                    }
-                              }
-                        if (i == _tracks.size())
-                              printf("no approp. track found\n");
-                        }
-                  else {
-                        //
-                        // event with new channel in track
-                        //    try to find channel with appropr. track
-                        //    or create new track
-                        //
-                        int i = 0;
-                        MidiTrack* mtrack = 0;
-                        for (; i < _tracks.size(); ++i) {
-                              mtrack = _tracks.at(i);
-                              if (mtrack == 0)
-                                    continue;
-                              if (mtrack->outChannel() == lastchan)
-                                    break;
-                              }
-                        if (i == _tracks.size()) {
-                              mtrack = new MidiTrack();
-                              mtrack->setOutChannel(lastchan);
-                              mtrack->setOutPort(port);
-                              _tracks.push_back(mtrack);
-                              }
-                        track   = mtrack;
-                        channel = lastchan;
-                        el = track->events();
-                        }
-                  }
-#endif
-            el->insert(event->tick, event);
-            }
-      if (curPos != endPos) {
-            printf("bad track len: %d != %d, %d bytes too much\n",
-               endPos, curPos, endPos - curPos);
-            if (curPos < endPos) {
-                  printf("skip %d\n", endPos - curPos);
-                  skip(endPos - curPos);
-                  }
-            }
-      return false;
-      }
-
-/*---------------------------------------------------------
- *    read
- *    return false on error
- *---------------------------------------------------------*/
-
-bool MidiFile::read(void* p, qint64 len)
-      {
-      curPos += len;
-      qint64 rv = fp->read((char*)p, len);
-      return rv != len;
-      }
-
-//---------------------------------------------------------
-//   write
-//---------------------------------------------------------
-
-bool MidiFile::write(const void* p, qint64 len)
-      {
-      qint64 rv = fp->write((char*)p, len);
-      if (rv == len)
-            return false;
-      printf("write midifile failed: %s\n", fp->errorString().toLatin1().data());
-      return true;
-      }
-
-//---------------------------------------------------------
-//   readShort
-//---------------------------------------------------------
-
-int MidiFile::readShort()
-      {
-      short format;
-      read(&format, 2);
-      return BE_SHORT(format);
-      }
-
-//---------------------------------------------------------
-//   writeShort
-//---------------------------------------------------------
-
-void MidiFile::writeShort(int i)
-      {
-      int format = BE_SHORT(i);
-      write(&format, 2);
-      }
-
-//---------------------------------------------------------
-//   readLong
-//   writeLong
-//---------------------------------------------------------
-
-int MidiFile::readLong()
-      {
-      int format;
-      read(&format, 4);
-      return BE_LONG(format);
-      }
-
-//---------------------------------------------------------
-//   writeLong
-//---------------------------------------------------------
-
-void MidiFile::writeLong(int i)
-      {
-      int format = BE_LONG(i);
-      write(&format, 4);
-      }
-
-/*---------------------------------------------------------
- *    skip
- *    This is meant for skipping a few bytes in a
- *    file or fifo.
- *---------------------------------------------------------*/
-
-bool MidiFile::skip(qint64 len)
-      {
-      if (len <= 0)
-            return false;
-      char tmp[len];
-      return read(tmp, len);
-      }
-
-/*---------------------------------------------------------
- *    getvl
- *    Read variable-length number (7 bits per byte, MSB first)
- *---------------------------------------------------------*/
-
-int MidiFile::getvl()
-      {
-      int l = 0;
-      for (int i = 0;i < 16; i++) {
-            uchar c;
-            if (read(&c, 1))
-                  return -1;
-            l += (c & 0x7f);
-            if (!(c & 0x80)) {
-                  return l;
-                  }
-            l <<= 7;
-            }
-      return -1;
-      }
-
-/*---------------------------------------------------------
- *    putvl
- *    Write variable-length number (7 bits per byte, MSB first)
- *---------------------------------------------------------*/
-
-void MidiFile::putvl(unsigned val)
-      {
-      unsigned long buf = val & 0x7f;
-      while ((val >>= 7) > 0) {
-            buf <<= 8;
-            buf |= 0x80;
-            buf += (val & 0x7f);
-            }
-      for (;;) {
-            put(buf);
-            if (buf & 0x80)
-                  buf >>= 8;
-            else
-                  break;
-            }
-      }
-
-//---------------------------------------------------------
-//   MidiTrack
-//---------------------------------------------------------
-
-MidiTrack::MidiTrack()
-      {
-      _events     = new EventList;
-      _outChannel = 0;
-      _outPort    = 0;
-      _drumTrack  = false;
-      _minor      = false;
-      _key        = 0;
-      hbank       = 0;
-      lbank       = 0;
-      program     = 0;
-      minPitch    = 127;
-      maxPitch    = 0;
-      medPitch    = 64;
-      }
-
-MidiTrack::~MidiTrack()
-      {
-      delete _events;
-      }
-
-//---------------------------------------------------------
-//   checkSysex
-//---------------------------------------------------------
-
-bool MidiFile::checkSysex(MidiTrack* track, unsigned len, unsigned char* buf)
-      {
-      if ((len == gmOnMsgLen) && memcmp(buf, gmOnMsg, gmOnMsgLen) == 0) {
-            _midiType = MT_GM;
-            return false;
-            }
-      if ((len == gsOnMsgLen) && memcmp(buf, gsOnMsg, gsOnMsgLen) == 0) {
-            _midiType = MT_GS;
-            return false;
-            }
-      if (buf[0] == 0x41) {   // Roland
-            if (_midiType != MT_XG)
-                  _midiType = MT_GS;
-            }
-
-      else if (buf[0] == 0x43) {   // Yamaha
-            _midiType = MT_XG;
-            int type  = buf[1] & 0xf0;
-            switch (type) {
-                  case 0x00:  // bulk dump
-                        buf[1] = 0;
-                        break;
-                  case 0x10:
-                        if (buf[1] != 0x10) {
-// printf("SYSEX Device changed from %d(0x%x) to 1\n", (buf[1] & 0xf) + 1, buf[1]);
-                              buf[1] = 0x10;    // fix to Device 1
-                              }
-                        if (len == 7 && buf[2] == 0x4c && buf[3] == 0x08 && buf[5] == 7) {
-                              // part mode
-                              // 0 - normal
-                              // 1 - DRUM
-                              // 2 - DRUM 1
-                              // 3 - DRUM 2
-                              // 4 - DRUM 3
-                              // 5 - DRUM 4
-                              printf("xg set part mode channel %d to %d\n", buf[4]+1, buf[6]);
-                              if (buf[6] != 0)
-                                    track->setDrumTrack(true);
-                              }
-                        break;
-                  case 0x20:
-                        printf("YAMAHA DUMP REQUEST\n");
-                        return true;
-                  case 0x30:
-                        printf("YAMAHA PARAMETER REQUEST\n");
-                        return true;
-                  default:
-                        printf("YAMAHA unknown SYSEX: data[2]=%02x\n", buf[1]);
-//                        dump(buf, len);
-                        return true;
-                  }
-            }
-      else if (buf[0] == 0x42) {   // Korg
-//            int device = buf[1] & 0xf;
-            if ((buf[1] & 0xf0) != 0x30) {
-                  printf("KORG SYSEX??\n");
-                  }
-//            buf[1] &= 0xf;    // fest auf Device 1 klemmen
-            fflush(stdout);
-            }
-      else if (buf[0] == 0x41) {   // Korg
-//            int device = buf[1] & 0xf;
-            if ((buf[1] & 0xf0) != 0x10) {
-                  printf("GM SYSEX??\n");
-                  }
-//            buf[1] &= 0xf;    // fest auf Device 1 klemmen
-            fflush(stdout);
-            }
-
-      if ((len == xgOnMsgLen) && memcmp(buf, xgOnMsg, xgOnMsgLen) == 0) {
-            _midiType = MT_XG;
-            return false;
-            }
-      return true;
-      }
-
-//---------------------------------------------------------
-//   readEvent
-//---------------------------------------------------------
-
-MidiEvent* MidiFile::readEvent()
-      {
-      uchar me, a, b;
-
-      int nclick = getvl();
-      if (nclick == -1) {
-            printf("readEvent: error 1\n");
-            return 0;
-            }
-      click += nclick;
-      for (;;) {
-            if (read(&me, 1)) {
-                  sprintf(errorBuffer, "readEvent: error 2\n");
-                  return 0;
-                  }
-            if (me >= 0xf1 && me <= 0xfe && me != 0xf7) {
-                  if (debugMode)
-                        printf("Midi: Unknown Message 0x%02x\n", me & 0xff);
-                  }
-            else
-                  break;
-            }
-
-      MidiEvent* event = new MidiEvent;
-      event->tick = (click * division + fileDivision/2) / fileDivision;
-
-      if (me == 0xf0 || me == 0xf7) {
-            status  = -1;                  // no running status
-            int len = getvl();
-            if (len == -1) {
-                  printf("readEvent: error 3\n");
-                  delete event;
-                  return 0;
-                  }
-            event->data    = new unsigned char[len];
-            event->dataLen = len;
-            event->type    = ME_SYSEX;
-            if (read(event->data, len)) {
-                  printf("readEvent: error 4\n");
-                  delete event;
-                  return 0;
-                  }
-            if (event->data[len-1] != 0xf7) {
-                  printf("SYSEX does not end with 0xf7!\n");
-                  // more to come?
-                  }
-            else
-                  event->dataLen--;      // don't count 0xf7
-            }
-      else if (me == ME_META) {
-            status = -1;                  // no running status
-            uchar type;
-            if (read(&type, 1)) {
-                  printf("readEvent: error 5\n");
-                  delete event;
-                  return 0;
-                  }
-            int len = getvl();                // read len
-            if (len == -1) {
-                  printf("readEvent: error 6\n");
-                  delete event;
-                  return 0;
-                  }
-            event->type    = ME_META;
-            event->dataLen = len;
-            event->data    = new unsigned char[len+1];
-            event->dataA   = type;
-
-            if (len) {
-                  if (read(event->data, len)) {
-                        printf("readEvent: error 7\n");
-                        delete event;
-                        return 0;
-                        }
-                  }
-            event->data[len] = 0;
-            }
-      else {
-            if (me & 0x80) {                     // status byte
-                  status   = me;
-                  sstatus  = status;
-                  if (read(&a, 1)) {
-                        printf("readEvent: error 9\n");
-                        delete event;
-                        return 0;
-                        }
-                  }
-            else {
-                  if (status == -1) {
-                        printf("readEvent: no running status, read 0x%02x\n", me);
-                        printf("sstatus ist 0x%02x\n", sstatus);
-                        if (sstatus == -1) {
-                              delete event;
-                              return 0;
-                              }
-                        status = sstatus;
-                        }
-                  a = me;
-                  }
-            event->channel = status & 0x0f;
-            event->type    = status & 0xf0;
-            event->dataA   = a & 0x7f;
-            b = 0;
-            switch (status & 0xf0) {
-                  case 0x80:        // note off
-                  case 0x90:        // note on
-                  case 0xa0:        // polyphone aftertouch
-                  case 0xb0:        // controller
-                  case 0xe0:        // pitch bend
-                        if (read(&b, 1)) {
-                              printf("readEvent: error 15\n");
-                              delete event;
-                              return 0;
-                              }
-                        if ((status & 0xf0) == 0xe0)
-                              event->dataA = (((((b & 0x80) ? 0 : b) << 7) + a) - 8192);
-                        else
-                              event->dataB = (b & 0x80 ? 0 : b);
-                        break;
-                  case 0xc0:        // Program Change
-                  case 0xd0:        // Channel Aftertouch
-                        break;
-                  default:          // f1 f2 f3 f4 f5 f6 f7 f8 f9
-                        printf("BAD STATUS 0x%02x, me 0x%02x\n", status, me);
-                        delete event;
-                        return 0;
-                  }
-
-            if ((a & 0x80) || (b & 0x80)) {
-                  printf("8't bit in data set(%02x %02x): tick %d read 0x%02x  status:0x%02x\n",
-                    a & 0xff, b & 0xff, click, me, status);
-                  printf("readEvent: error 16\n");
-                  if (b & 0x80) {
-                        // Try to fix: interpret as channel byte
-                        status   = b;
-                        sstatus  = status;
-                        return event;
-                        }
-                  delete event;
-                  return 0;
-                  }
-            }
-      return event;
-      }
-
-//---------------------------------------------------------
-//   processTrack
-//---------------------------------------------------------
-
-void MidiFile::processTrack(MidiTrack* track)
-      {
-      if (track->outChannel() == 9 && midiType() != MT_UNKNOWN)
-            track->setDrumTrack(true);
-
-      //---------------------------------------------------
-      //    get initial controller state
-      //---------------------------------------------------
-
-      EventList* tevents = track->events();
-      track->hbank   = -1;
-      track->lbank   = -1;
-      track->program = -1;
-
-      foreach(MidiEvent* ev, *tevents) {
-            if (ev->type == ME_PROGRAM) {
-                  if (track->program == -1) {
-                        track->program = ev->dataA;
-                        tevents->remove(ev->tick, ev);
-                        }
-                  }
-            }
-
-      //---------------------------------------------------
-      //    change NoteOff events into Note events
-      //    with len
-      //---------------------------------------------------
-
-      foreach (MidiEvent* event, *tevents)      // invalidate all note len
-            if (event->isNote())
-                  event->len = -1;
-
-      foreach (MidiEvent* ev, *tevents) {
-            if (!ev->isNote())
-                  continue;
-            int tick = ev->tick;
-            if (ev->isNoteOff()) {
-                  // printf("NOTE OFF without Note ON at tick %d\n", tick);
-                  continue;
-                  }
-
-            iEvent k;
-            for (k = tevents->lowerBound(tick); k != tevents->end(); ++k) {
-                  MidiEvent* event = k.value();
-                  if (ev->isNoteOff(event)) {
-                        int t = k.key() - tick;
-                        if (t <= 0)
-                              t = 1;
-                        ev->len = t;
-                        ev->dataC = event->dataC;
-                        break;
-                        }
-                  }
-            if (k == tevents->end()) {
-                  printf("-no note-off! %d pitch %d velo %d\n",
-                     tick, ev->dataA, ev->dataB);
-                  //
-                  // note off at end of bar
-                  //
-                  int endTick = ev->tick + 1; // song->roundUpBar(ev->tick + 1);
-                  ev->len = endTick - ev->tick;
-                  }
-            else {
-                  tevents->erase(k);      // memory leak
-                  }
-            }
-
-      // DEBUG: any note off left?
-
-      for (iEvent i = tevents->begin(); i != tevents->end(); ++i) {
-            MidiEvent* ev  = i.value();
-            if (ev->isNoteOff()) {
-                  printf("+extra note-off! %d pitch %d velo %d\n",
-                           i.key(), ev->dataA, ev->dataB);
-                  }
-            }
-      }
-
-//---------------------------------------------------------
-//   empty
-//    check for empty track
-//---------------------------------------------------------
-
-bool MidiTrack::empty() const
-      {
-      return _events->empty();
-      }
-
-//---------------------------------------------------------
-//   instrName
-//---------------------------------------------------------
-
-QString MidiTrack::instrName(int type) const
-      {
-      if (program != -1) {
-            for (unsigned int i = 0; i < sizeof(minstr)/sizeof(*minstr); ++i) {
-                  MidiInstrument* mi = &minstr[i];
-                  if ((mi->patch == program)
-                     && (mi->type & type)
-                     && (mi->hbank == hbank || hbank == -1)
-                     && (mi->lbank == lbank || lbank == -1)) {
-                        return QString(mi->name);
-                        }
-                  }
-            }
-      return name();
       }
 
 // prepare:
@@ -1835,68 +1023,58 @@ QString MidiTrack::instrName(int type) const
 //          - Triolen?
 
 //---------------------------------------------------------
-//   quantizeLen
-//---------------------------------------------------------
-
-static int quantizeLen(int len)
-      {
-      if (len < division/12)
-            len = division/8;
-      else if (len < division/6)
-            len = division/4;
-      else if (len < division/3)
-            len = division/2;
-      else if (len < division+division/2)
-            len = division;
-      else if (len < division * 3)
-            len = division*2;
-      else if (len < division * 6)
-            len = division * 4;
-      else if (len < division * 12)
-            len = division * 8;
-      else
-            len = division * 16;
-      return len;
-      }
-
-//---------------------------------------------------------
 //   convertMidi
 //---------------------------------------------------------
 
 void Score::convertMidi(MidiFile* mf)
       {
+      mf->process1();
+      mf->changeDivision(division);
+
       MidiTrackList* tracks = mf->tracks();
 
       //---------------------------------------------------
       //  remove empty tracks
       //---------------------------------------------------
 
-      foreach (MidiTrack* track, *tracks) {
-		int events = 0;
-            EventList* el = track->events();
-            for (iEvent ie = el->begin(); ie != el->end(); ++ie) {
+      int ntracks = tracks->size();
+
+      int maxPitch[ntracks];
+      int minPitch[ntracks];
+      int medPitch[ntracks];
+
+      for (int i = 0; i < ntracks; ++i) {
+            MidiTrack* track = tracks->at(i);
+
+            maxPitch[i] = 0;
+            minPitch[i] = 127;
+            medPitch[i] = 0;
+		int events  = 0;
+            const EventList el = track->events();
+            for (ciEvent ie = el.begin(); ie != el.end(); ++ie) {
                   if (ie.value()->isNote()) {
                         ++events;
                         int pitch = ie.value()->pitch();
-                        if (pitch > track->maxPitch)
-                              track->maxPitch = pitch;
-                        if (pitch < track->minPitch)
-                              track->minPitch = pitch;
-                        track->medPitch += pitch;
+                        if (pitch > maxPitch[i])
+                              maxPitch[i] = pitch;
+                        if (pitch < minPitch[i])
+                              minPitch[i] = pitch;
+                        medPitch[i] += pitch;
                         }
                   }
             if (events == 0)
 		      tracks->removeAt(tracks->indexOf(track));
             else
-	            track->medPitch = track->medPitch / events;
+	            medPitch[i] /= events;
             }
 
       //---------------------------------------------------
       //  create instruments
       //---------------------------------------------------
 
-      foreach (MidiTrack* midiTrack, *tracks) {
-            int staves = (midiTrack->maxPitch - midiTrack->minPitch > 36) ? 2 : 1;
+      for (int i = 0; i < ntracks; ++i) {
+            MidiTrack* track = tracks->at(i);
+            int staves = (maxPitch[i] - minPitch[i] > 36) ? 2 : 1;
             Part* part = new Part(this);
             for (int staff = 0; staff < staves; ++staff) {
                   Staff* s = new Staff(this, part, staff);
@@ -1906,28 +1084,42 @@ void Score::convertMidi(MidiFile* mf)
                         s->clef()->setClef(0, staff == 0 ? 0 : 4);
                         }
                   else {
-                        s->clef()->setClef(0, midiTrack->medPitch < 58 ? 4 : 0);
+                        s->clef()->setClef(0, medPitch[i] < 58 ? 4 : 0);
                         }
                   }
-            if (midiTrack->name().isEmpty()) {
-                  // Text t(midiTrack->instrName(mf->midiType()), TEXT_STYLE_INSTRUMENT_LONG);
-                  QString t(midiTrack->instrName(mf->midiType()));
-                  part->setLongName(t);
+            if (track->name().isEmpty()) {
+                  int hbank = -1, lbank = -1, program = 0;
+                  foreach(const MidiEvent* e, track->events()) {
+                        if (e->type == ME_PROGRAM) {
+                              program = e->dataA;
+                              break;
+                              }
+                        else if (e->type == ME_CONTROLLER) {
+                              if (e->dataA == CTRL_HBANK)
+                                    hbank = e->dataB;
+                              else if (e->dataA == CTRL_LBANK)
+                                    lbank = e->dataB;
+                              }
+                        }
+                  QString t(instrName(mf->midiType(), hbank, lbank, program));
+                  if (!t.isEmpty())
+                        part->setLongName(t);
                   }
             else
-                  // part->setLongName(Text(midiTrack->name(), TEXT_STYLE_INSTRUMENT_LONG));
-                  part->setLongName(midiTrack->name());
+
+                  part->setLongName(track->name());
+
             part->setTrackName(part->longName().toPlainText());
-            part->setMidiChannel(midiTrack->outChannel());
-            part->setMidiProgram(midiTrack->program);
+            part->setMidiChannel(track->outChannel());
+//TODO            part->setMidiProgram(track->program);
             _parts.push_back(part);
             }
 
       int lastTick = 0;
       foreach (MidiTrack* midiTrack, *tracks) {
-            EventList* el = midiTrack->events();
-            if (!el->empty()) {
-                  iEvent i = el->end();
+            const EventList el = midiTrack->events();
+            if (!el.empty()) {
+                  ciEvent i = el.end();
                   --i;
                   if (i.key() >lastTick)
                         lastTick = i.key();
@@ -1947,10 +1139,10 @@ void Score::convertMidi(MidiFile* mf)
             int tick2 = sigmap->bar2tick(startBar + 1, 0, 0);
             int events = 0;
             foreach (MidiTrack* midiTrack, *tracks) {
-                  EventList* el = midiTrack->events();
-                  iEvent i1     = el->lowerBound(tick1);
-                  iEvent i2     = el->lowerBound(tick2);
-                  for (iEvent ie = i1; ie != i2; ++ie) {
+                  const EventList el = midiTrack->events();
+                  ciEvent i1     = el.lowerBound(tick1);
+                  ciEvent i2     = el.lowerBound(tick2);
+                  for (ciEvent ie = i1; ie != i2; ++ie) {
                         if (ie.value()->isNote()) {
                               ++events;
                               break;
@@ -1967,8 +1159,8 @@ void Score::convertMidi(MidiFile* mf)
 
       int bars = 1;
       foreach (MidiTrack* midiTrack, *tracks) {
-            EventList* el = midiTrack->events();
-            for (iEvent ie = el->begin(); ie != el->end(); ++ie) {
+            const EventList el = midiTrack->events();
+            for (ciEvent ie = el.begin(); ie != el.end(); ++ie) {
                   if (!(ie.value()->isNote()))
                         continue;
                   int tick = ie.key() + ie.value()->len;
@@ -2000,7 +1192,7 @@ void Score::convertMidi(MidiFile* mf)
             }
 
 	foreach (MidiTrack* midiTrack, *tracks)
-            preprocessTrack(midiTrack);
+            midiTrack->cleanup();
 
 	int staffIdx = 0;
 	foreach (MidiTrack* midiTrack, *tracks)
@@ -2021,94 +1213,6 @@ void Score::convertMidi(MidiFile* mf)
                         }
                   }
             }
-      Measure* measure = tick2measure(0);
-      if (measure == 0)
-            return;
-      if (!mf->title.isEmpty()) {
-            Text* text = new Text(this);
-            text->setSubtype(TEXT_TITLE);
-            text->setText(mf->title);
-            measure->add(text);
-            }
-      if (!mf->subTitle.isEmpty()) {
-            Text* text = new Text(this);
-            text->setSubtype(TEXT_SUBTITLE);
-            text->setText(mf->subTitle);
-            measure->add(text);
-            }
-      if (!mf->composer.isEmpty()) {
-            Text* text = new Text(this);
-            text->setSubtype(TEXT_COMPOSER);
-            text->setText(mf->composer);
-            measure->add(text);
-            }
-      if (!mf->translator.isEmpty()) {
-            Text* text = new Text(this);
-            text->setSubtype(TEXT_TRANSLATOR);
-            text->setText(mf->translator);
-            measure->add(text);
-            }
-      if (!mf->poet.isEmpty()) {
-            Text* text = new Text(this);
-            text->setSubtype(TEXT_POET);
-            text->setText(mf->poet);
-            measure->add(text);
-            }
-      }
-
-//---------------------------------------------------------
-//   preprocessTrack
-//	 - perform silly quantisation
-//	 - remove overlapping
-//---------------------------------------------------------
-
-void Score::preprocessTrack(MidiTrack* midiTrack)
-	{
-      static const int tickRaster = division/2; 	// 1/8 quantize
-
-	EventList* sl = midiTrack->events();
-      EventList* dl = new EventList;
-
-      //
-      //	quantize
-      //
-      for (iEvent i = sl->begin(); i != sl->end(); ++i) {
-            MidiEvent* e = i.value();
-            if (e->isNote()) {
-	            int len  = quantizeLen(e->len);
-      	      int tick = (e->tick / tickRaster) * tickRaster;
-
-	            e->tick = tick;
-      	      e->len  = len;
-                  }
-		dl->insert(e->tick, e);
-            }
-      //
-      //
-      //
-      sl->clear();
-
-      for (iEvent i = dl->begin(); i != dl->end(); ++i) {
-            MidiEvent* e = i.value();
-            if (e->isNote()) {
-                  iEvent ii = i;
-                  ++ii;
-                  for (; ii != dl->end(); ++ii) {
-                        MidiEvent* ee = ii.value();
-                        if (!ee->isNote() || ee->pitch() != e->pitch())
-                              continue;
-                        if (ee->tick >= e->tick + e->len)
-                              break;
-                        e->len = ee->tick - e->tick;
-                        break;
-                        }
-                  if (e->len <= 0)
-                        continue;
-// printf("Note %6d %3d\n", e->tick, e->len);
-                  }
-		sl->insert(e->tick, e);
-            }
-      delete dl;
       }
 
 //---------------------------------------------------------
@@ -2132,11 +1236,11 @@ struct MNote {
 
 void Score::convertTrack(MidiTrack* midiTrack, int staffIdx)
 	{
-	EventList* el = midiTrack->events();
+	const EventList el = midiTrack->events();
       QList<MNote*> notes;
 
 	int ctick = 0;
-      for (iEvent i = el->begin(); i != el->end();) {
+      for (ciEvent i = el.begin(); i != el.end();) {
             MidiEvent* e = i.value();
             if (!(e->isNote())) {
                   ++i;
@@ -2206,7 +1310,7 @@ void Score::convertTrack(MidiTrack* midiTrack, int staffIdx)
             // collect all notes on current
             // tick position
             //
-            for (;i != el->end(); ++i) {
+            for (;i != el.end(); ++i) {
             	MidiEvent* e = i.value();
                   if (!e->isNote())
                         continue;
@@ -2217,7 +1321,8 @@ void Score::convertTrack(MidiTrack* midiTrack, int staffIdx)
                   }
             }
 
-      for (iEvent i = el->begin(); i != el->end(); ++i) {
+      Measure* measure = tick2measure(0);
+      for (ciEvent i = el.begin(); i != el.end(); ++i) {
             MidiEvent* e = i.value();
             if (e->type == ME_META) {
                   switch(e->dataA) {
@@ -2239,6 +1344,47 @@ void Score::convertTrack(MidiTrack* midiTrack, int staffIdx)
                               break;
                         case META_KEY_SIGNATURE:
                               break;
+                        case META_TITLE:  // mscore extension
+                              {
+                              Text* text = new Text(this);
+                              text->setSubtype(TEXT_TITLE);
+                              text->setText((char*)(e->data));
+                              measure->add(text);
+                              }
+                              break;
+
+                        case META_SUBTITLE:     // mscore extension
+                              {
+                              Text* text = new Text(this);
+                              text->setSubtype(TEXT_SUBTITLE);
+                              text->setText((char*)(e->data));
+                              measure->add(text);
+                              }
+                              break;
+                        case META_COMPOSER:     // mscore extension
+                              {
+                              Text* text = new Text(this);
+                              text->setSubtype(TEXT_COMPOSER);
+                              text->setText((char*)(e->data));
+                              measure->add(text);
+                              }
+                              break;
+                        case META_TRANSLATOR:   // mscore extension
+                              {
+                              Text* text = new Text(this);
+                              text->setSubtype(TEXT_TRANSLATOR);
+                              text->setText((char*)(e->data));
+                              measure->add(text);
+                              }
+                              break;
+                        case META_POET:         // mscore extension
+                              {
+                              Text* text = new Text(this);
+                              text->setSubtype(TEXT_POET);
+                              text->setText((char*)(e->data));
+                              measure->add(text);
+                              }
+                              break;
                         }
                   }
             }
@@ -2248,7 +1394,7 @@ void Score::convertTrack(MidiTrack* midiTrack, int staffIdx)
       if (notes.isEmpty())
             return;
       int tick = notes[0]->tick;
-	Measure* measure = tick2measure(tick);
+	measure = tick2measure(tick);
       Chord* chord = new Chord(this, tick);
       chord->setStaff(staff(staffIdx));
       Segment* s = measure->getSegment(chord);
@@ -2262,7 +1408,6 @@ void Score::convertTrack(MidiTrack* midiTrack, int staffIdx)
 	foreach (MNote* n, notes) {
 		Note* note = new Note(this, n->pitch, false);
 		note->setStaff(staff(staffIdx));
-//		note->setTicks(len);
             note->setTick(tick);
 		chord->add(note);
             n->len -= len;

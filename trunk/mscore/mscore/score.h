@@ -136,7 +136,6 @@ class Score : public QObject {
       void moveUp(Note*);
       void moveDown(Note*);
       void convertTrack(MidiTrack*, int);
-      void preprocessTrack(MidiTrack*);
       void checkUndoOp();
       void pasteStaff(const QMimeData* ms);
       void cmdReplaceElements(Measure* sm, Measure* dm, int staffIdx);

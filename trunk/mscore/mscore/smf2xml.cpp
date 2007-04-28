@@ -47,8 +47,7 @@ static void convert(QIODevice* in, QIODevice* out)
       MidiTrackList* tl = mf.tracks();
       foreach(MidiTrack* t, *tl) {
             xml.stag("Track");
-            EventList* el = t->events();
-            foreach (MidiEvent* e, *el) {
+            foreach (const MidiEvent* e, t->events()) {
                   switch(e->type) {
                         case ME_NOTEOFF:
                               xml.tagE(QString("NoteOff tick=\"%1\" channel=\"%2\" pitch=\"%3\" velo=\"%4\"")
