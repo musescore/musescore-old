@@ -163,6 +163,8 @@ static int tab3[15][8] = {
 
 static int pitch2y(int pitch, int userPrefix, int clef, int key, int& prefix, const char* tversatz)
       {
+// printf("pitch2y %d %d %d %d\n", pitch, userPrefix, clef, key);
+
       int clefOffset = clefTable[clef].yOffset;
       bool natural = false;
       int l1;
@@ -193,7 +195,8 @@ static int pitch2y(int pitch, int userPrefix, int clef, int key, int& prefix, co
             case 1:    prefix = 1; break;
             case 2:    prefix = 3; break;
             default:
-                  printf("pitch2y: internal error: bad val %d\n", offset);
+                  printf("pitch2y: internal error: bad val %d, (l1=%d mtone=%d)\n",
+                     offset, l1, mtone);
                   abort();
             }
       int cprefix = tversatz[l1 + octave * 7];

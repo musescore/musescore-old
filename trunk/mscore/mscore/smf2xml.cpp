@@ -78,9 +78,9 @@ static void convert(QIODevice* in, QIODevice* out)
                                                 "C",
                                                 "G", "D", "A", "E", "H", "Fis"
                                                 };
-                                          int key = e->data[0] + 7;
+                                          int key = (char)(e->data[0]) + 7;
                                           if (key < 0 || key > 14) {
-                                                printf("bad key signature\n");
+                                                printf("bad key signature %d\n", key);
                                                 key = 0;
                                                 }
                                           QString sex(e->data[1] ? "Minor" : "Major");

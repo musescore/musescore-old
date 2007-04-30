@@ -55,7 +55,6 @@ TimeSig::TimeSig(Score* s, int n, int z1, int z2, int z3, int z4)
 void TimeSig::setSubtype(int val)
       {
       Element::setSubtype(val);
-//TODO      layout();
       }
 
 //---------------------------------------------------------
@@ -199,13 +198,11 @@ void TimeSig::read(QDomNode node)
 
             case TSIG_FOUR_FOUR:    // special cases
             case TSIG_ALLA_BREVE:
-//TODO                  layout();
                   break;
             default:
                   setSig(n, z1, z2, z3, z4);
                   break;
             }
-//      layout();
       }
 
 //---------------------------------------------------------

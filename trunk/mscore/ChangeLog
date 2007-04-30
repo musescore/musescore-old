@@ -1,3 +1,6 @@
+30.4.7 (ws)
+      - implement midi import of time signature
+      - midi import: fix handling of multiple rests
 27.4.7 (ws)
       - added small debug utility to dump midi files to xml: smf2xml
 26.4.7 (ws)
