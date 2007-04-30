@@ -665,6 +665,7 @@ void ExportMidi::writeHeader()
       {
       MidiTrack* track  = mf.tracks()->front();
       Measure* measure  = cs->mainLayout()->first();
+
       foreach(const Element* e, *measure->pel()) {
             if (e->type() == TEXT) {
                   Text* text = (Text*)(e);
@@ -745,7 +746,7 @@ void ExportMidi::writeHeader()
             ev->data = new unsigned char[4];
             ev->data[0] = se.nominator;
             int n;
-            switch(se.denominator) {
+            switch (se.denominator) {
                   case 1:  n = 0; break;
                   case 2:  n = 1; break;
                   case 4:  n = 2; break;
@@ -763,22 +764,28 @@ void ExportMidi::writeHeader()
             track->insert(ev);
             }
 
-      //--------------------------------------------
+      //---------------------------------------------------
       //    write key signatures
-      //--------------------------------------------
+      //    assume every staff corresponds to a midi track
+      //---------------------------------------------------
 
-      KeyList* keymap = cs->staff(0)->keymap(); // TODO_K
-      for (iKeyEvent ik = keymap->begin(); ik != keymap->end(); ++ik) {
-            MidiEvent* ev = new MidiEvent;
-            ev->tick      = ik->first;
-            int key       = ik->second;
-            ev->type      = ME_META;
-            ev->dataA     = META_KEY_SIGNATURE;
-            ev->len       = 2;
-            ev->data      = new unsigned char[2];
-            ev->data[0]   = key;
-            ev->data[1]   = 0;  // major
-            track->insert(ev);
+      MidiTrackList* tl = mf.tracks();
+      for (int i = 0; i < tl->size(); ++i) {
+            MidiTrack* track  = tl->at(i);
+
+            KeyList* keymap = cs->staff(i)->keymap();
+            for (iKeyEvent ik = keymap->begin(); ik != keymap->end(); ++ik) {
+                  MidiEvent* ev = new MidiEvent;
+                  ev->tick      = ik->first;
+                  int key       = ik->second;
+                  ev->type      = ME_META;
+                  ev->dataA     = META_KEY_SIGNATURE;
+                  ev->len       = 2;
+                  ev->data      = new unsigned char[2];
+                  ev->data[0]   = key;
+                  ev->data[1]   = 0;  // major
+                  track->insert(ev);
+                  }
             }
 
       //--------------------------------------------
@@ -809,20 +816,25 @@ void ExportMidi::writeHeader()
 
 bool ExportMidi::saver()
       {
+      mf.setDivision(::division);
       MidiTrackList* tracks = mf.tracks();
-      int nparts = cs->parts()->size();
-      for (int i = 0; i < nparts; ++i)
+      int nstaves = cs->nstaves();
+
+      for (int i = 0; i < nstaves; ++i)
             tracks->append(new MidiTrack(&mf));
 
       int gateTime = 80;  // 100 - legato (100%)
+
       writeHeader();
+
       int staffIdx = 0;
-      int partIdx = 0;
+      int partIdx  = 0;
+
       foreach (Part* part, *cs->parts()) {
-            MidiTrack* track = tracks->at(partIdx);
             int channel  = part->midiChannel();
+
+            MidiTrack* track = tracks->at(staffIdx);
             track->setOutPort(0);
-            track->setOutChannel(channel);
 
             MidiEvent* ev = new MidiEvent;
             ev->type  = ME_PROGRAM;
@@ -858,6 +870,9 @@ bool ExportMidi::saver()
             track->insert(ev);
 
             for (int i = 0; i < part->staves()->size(); ++i) {
+                  MidiTrack* track = tracks->at(staffIdx);
+                  track->setOutChannel(channel);
+
                   QList<OttavaE> ol;
                   for (Measure* m = cs->mainLayout()->first(); m; m = m->next()) {
                         foreach(Element* e, *m->el()) {
@@ -1035,6 +1050,8 @@ void Score::convertMidi(MidiFile* mf)
 
       //---------------------------------------------------
       //  remove empty tracks
+      //    determine maxPitch/minPitch/medPitch
+      //    build time signature list
       //---------------------------------------------------
 
       int ntracks = tracks->size();
@@ -1051,15 +1068,23 @@ void Score::convertMidi(MidiFile* mf)
             medPitch[i] = 0;
 		int events  = 0;
             const EventList el = track->events();
-            for (ciEvent ie = el.begin(); ie != el.end(); ++ie) {
-                  if (ie.value()->isNote()) {
+            foreach(MidiEvent* e, track->events()) {
+                  if (e->isNote()) {
                         ++events;
-                        int pitch = ie.value()->pitch();
+                        int pitch = e->pitch();
                         if (pitch > maxPitch[i])
                               maxPitch[i] = pitch;
                         if (pitch < minPitch[i])
                               minPitch[i] = pitch;
                         medPitch[i] += pitch;
+                        }
+                  if (e->type == ME_META && e->dataA == META_TIME_SIGNATURE) {
+                        int z  = e->data[0];
+                        int nn = e->data[1];
+                        int n  = 1;
+                        for (int i = 0; i < nn; ++i)
+                              n *= 2;
+                        sigmap->add(e->tick, z, n);
                         }
                   }
             if (events == 0)
@@ -1202,15 +1227,15 @@ void Score::convertMidi(MidiFile* mf)
             SigEvent se = is->second;
             int tick    = is->first;
             Measure* m  = tick2measure(tick);
-            if (m) {
-                  for (int staffIdx = 0; staffIdx < nstaves(); ++staffIdx) {
-                        TimeSig* ts = new TimeSig(this);
-                        ts->setTick(tick);
-                        ts->setSig(se.nominator, se.denominator);
-                        ts->setStaff(staff(staffIdx));
-                        Segment* seg = m->getSegment(ts);
-                        seg->add(ts);
-                        }
+            if (!m)
+                  continue;
+            for (int staffIdx = 0; staffIdx < nstaves(); ++staffIdx) {
+                  TimeSig* ts = new TimeSig(this);
+                  ts->setTick(tick);
+                  ts->setSig(se.denominator, se.nominator);
+                  ts->setStaff(staff(staffIdx));
+                  Segment* seg = m->getSegment(ts);
+                  seg->add(ts);
                   }
             }
       }
@@ -1259,7 +1284,6 @@ void Score::convertTrack(MidiTrack* midiTrack, int staffIdx)
                               len = n->len;
                         }
       		Measure* measure = tick2measure(tick);
-
                   // split notes on measure boundary
                   if ((tick + len) > measure->tick() + measure->tickLen()) {
                         len = measure->tick() + measure->tickLen() - tick;
@@ -1297,14 +1321,20 @@ void Score::convertTrack(MidiTrack* midiTrack, int staffIdx)
             // check for gap and fill with rest
             //
             int restLen = i.key() - ctick;
-            if (restLen > 0) {
-                  Rest* rest = new Rest(this, ctick, restLen);
+            while (restLen > 0) {
+                  int len = restLen;
       		Measure* measure = tick2measure(ctick);
+                  // split rest on measure boundary
+                  if ((ctick + len) > measure->tick() + measure->tickLen()) {
+                        len = measure->tick() + measure->tickLen() - ctick;
+                        }
+                  Rest* rest = new Rest(this, ctick, len);
                   rest->setStaff(staff(staffIdx));
                   Segment* s = measure->getSegment(rest);
                   s->add(rest);
+                  ctick   += len;
+                  restLen -= len;
                   }
-            ctick = i.key();
 
             //
             // collect all notes on current
@@ -1340,9 +1370,20 @@ void Score::convertTrack(MidiTrack* midiTrack, int staffIdx)
                               break;
                         case META_TEMPO:
                               break;
+
                         case META_TIME_SIGNATURE:
-                              break;
+                              break;      // already handled
+
                         case META_KEY_SIGNATURE:
+                              {
+                              int key = (char)(e->data[0]);
+                              if (key < -7 || key > 7) {
+                                    printf("ImportMidi: illegal key %d\n", key);
+                                    break;
+                                    }
+            		      Staff* s = staff(staffIdx);
+                              (*s->keymap())[e->tick] = key;
+                              }
                               break;
                         case META_TITLE:  // mscore extension
                               {
