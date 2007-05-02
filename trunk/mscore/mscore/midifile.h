@@ -124,6 +124,15 @@ struct MidiEvent {
             }
       int pitch() const { return dataA; }
       int velo() const  { return dataB; }
+      bool isChannelEvent() const {
+            return (type == ME_NOTEOFF
+                   || type == ME_NOTEON
+                   || type == ME_POLYAFTER
+                   || type == ME_CONTROLLER
+                   || type == ME_PROGRAM
+                   || type == ME_AFTERTOUCH
+                   || type == ME_PITCHBEND);
+            }
       };
 
 typedef QMultiMap<int, MidiEvent*> EventList;
@@ -145,11 +154,18 @@ class MidiTrack {
       QString _comment;
 
    public:
+      int maxPitch;
+      int minPitch;
+      int medPitch;
+      int program;
+
+
       MidiTrack(MidiFile*);
       ~MidiTrack();
 
       bool empty() const;
       const EventList events() const    { return _events;     }
+      EventList& events()               { return _events;     }
       int outChannel() const            { return _outChannel; }
       void setOutChannel(int n)         { _outChannel = n;    }
       int outPort() const               { return _outPort;    }
@@ -223,6 +239,8 @@ class MidiFile {
       void setDivision(int val)     { _division = val;  }
       void changeDivision(int val);
       void process1();
+      void sortTracks();
+      void separateChannel();
       };
 
 #define XCHG_SHORT(x) ((((x)&0xFF)<<8) | (((x)>>8)&0xFF))

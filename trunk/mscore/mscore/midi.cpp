@@ -45,6 +45,7 @@
 #include "pedal.h"
 #include "ottava.h"
 #include "lyrics.h"
+#include "bracket.h"
 
 static unsigned const char gmOnMsg[] = { 0x7e, 0x7f, 0x09, 0x01 };
 static unsigned const char gsOnMsg[] = { 0x41, 0x10, 0x42, 0x12, 0x40, 0x00, 0x7f, 0x00, 0x41 };
@@ -1043,6 +1044,7 @@ bool LoadMidi::loader(QFile* fp)
 
 void Score::convertMidi(MidiFile* mf)
       {
+      mf->separateChannel();
       mf->process1();
       mf->changeDivision(division);
 
@@ -1051,32 +1053,26 @@ void Score::convertMidi(MidiFile* mf)
       //---------------------------------------------------
       //  remove empty tracks
       //    determine maxPitch/minPitch/medPitch
+      //    find out instrument
       //    build time signature list
       //---------------------------------------------------
 
-      int ntracks = tracks->size();
-
-      int maxPitch[ntracks];
-      int minPitch[ntracks];
-      int medPitch[ntracks];
-
-      for (int i = 0; i < ntracks; ++i) {
-            MidiTrack* track = tracks->at(i);
-
-            maxPitch[i] = 0;
-            minPitch[i] = 127;
-            medPitch[i] = 0;
-		int events  = 0;
+      foreach(MidiTrack* track, *tracks) {
+            track->maxPitch = 0;
+            track->minPitch = 127;
+            track->medPitch = 0;
+            track->program  = 0;
+		int events      = 0;
             const EventList el = track->events();
             foreach(MidiEvent* e, track->events()) {
                   if (e->isNote()) {
                         ++events;
                         int pitch = e->pitch();
-                        if (pitch > maxPitch[i])
-                              maxPitch[i] = pitch;
-                        if (pitch < minPitch[i])
-                              minPitch[i] = pitch;
-                        medPitch[i] += pitch;
+                        if (pitch > track->maxPitch)
+                              track->maxPitch = pitch;
+                        if (pitch < track->minPitch)
+                              track->minPitch = pitch;
+                        track->medPitch += pitch;
                         }
                   if (e->type == ME_META && e->dataA == META_TIME_SIGNATURE) {
                         int z  = e->data[0];
@@ -1086,30 +1082,52 @@ void Score::convertMidi(MidiFile* mf)
                               n *= 2;
                         sigmap->add(e->tick, z, n);
                         }
+                  else if (e->type == ME_PROGRAM) {
+                        track->program = e->dataA;
+                        }
                   }
             if (events == 0)
 		      tracks->removeAt(tracks->indexOf(track));
             else
-	            medPitch[i] /= events;
+	            track->medPitch /= events;
             }
+      mf->sortTracks();
 
       //---------------------------------------------------
       //  create instruments
       //---------------------------------------------------
 
-      for (int i = 0; i < ntracks; ++i) {
+      int ntracks = tracks->size();
+      for (int i = 0; i < ntracks;) {
             MidiTrack* track = tracks->at(i);
-            int staves = (maxPitch[i] - minPitch[i] > 36) ? 2 : 1;
+            int staves = 1;
             Part* part = new Part(this);
+            int ii;
+            for (ii = i + 1; ii < ntracks; ++ii) {
+                  MidiTrack* ntrack = tracks->at(ii);
+                  if (part->midiProgram() != ntrack->program)
+                        break;
+                  ++staves;
+                  }
+            i = ii;
+
+            if (staves == 1)
+                  staves = (track->maxPitch - track->minPitch > 36) ? 2 : 1;
+
             for (int staff = 0; staff < staves; ++staff) {
                   Staff* s = new Staff(this, part, staff);
                   part->insertStaff(s);
                   _staves->push_back(s);
                   if (staves == 2) {
                         s->clef()->setClef(0, staff == 0 ? 0 : 4);
+                        if (staff == 0) {
+                              // assume this is a piano staff
+                              s->setBracket(0, BRACKET_AKKOLADE);
+                              s->setBracketSpan(0, 2);
+                              }
                         }
                   else {
-                        s->clef()->setClef(0, medPitch[i] < 58 ? 4 : 0);
+                        s->clef()->setClef(0, track->medPitch < 58 ? 4 : 0);
                         }
                   }
             if (track->name().isEmpty()) {
@@ -1136,7 +1154,7 @@ void Score::convertMidi(MidiFile* mf)
 
             part->setTrackName(part->longName().toPlainText());
             part->setMidiChannel(track->outChannel());
-//TODO            part->setMidiProgram(track->program);
+            part->setMidiProgram(track->program);
             _parts.push_back(part);
             }
 
