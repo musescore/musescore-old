@@ -24,8 +24,9 @@
 #include "midifile.h"
 
 static const char versionString[] = "0.1";
-bool debugMode  = false;
-bool mergeNotes = false;
+bool debugMode       = false;
+bool mergeNotes      = false;
+bool separateChannel = false;
 
 //---------------------------------------------------------
 //   convert
@@ -39,6 +40,8 @@ static void convert(QIODevice* in, QIODevice* out)
       mf.read(in);
       if (mergeNotes)
             mf.process1();
+      if (separateChannel)
+            mf.separateChannel();
 
       xml.header();
       xml.stag("SMF");
@@ -104,11 +107,23 @@ static void convert(QIODevice* in, QIODevice* out)
                                     }
                               break;
                         case ME_POLYAFTER:
+                              xml.tagE(QString("PolyAftertouch tick=\"%1\"").arg(e->tick));
+                              break;
                         case ME_CONTROLLER:
+                              xml.tagE(QString("Controller tick=\"%1\" channel=\"%2\"").arg(e->tick).arg(e->channel));
+                              break;
                         case ME_PROGRAM:
+                              xml.tagE(QString("ProgramChange tick=\"%1\" channel=\"%2\"").arg(e->tick).arg(e->channel));
+                              break;
                         case ME_AFTERTOUCH:
+                              xml.tagE(QString("ChannelAftertouch tick=\"%1\"").arg(e->tick));
+                              break;
                         case ME_PITCHBEND:
+                              xml.tagE(QString("Pitchbend tick=\"%1\"").arg(e->tick));
+                              break;
                         case ME_SYSEX:
+                              xml.tagE(QString("Sysex tick=\"%1\"").arg(e->tick));
+                              break;
                         default:
                               xml.tagE(QString("Event tick=\"%1\" type=\"%2\"").arg(e->tick).arg(e->type));
                               break;
@@ -139,7 +154,8 @@ static void usage()
       printf("   args:\n"
              "      -v   print version\n"
              "      -d   debug mode\n"
-             "      -n   merge note on/off events\n"
+             "      -m   merge note on/off events\n"
+             "      -s   separate channels into different tracks\n"
             );
       }
 
@@ -150,7 +166,7 @@ static void usage()
 int main(int argc, char* argv[])
       {
       int c;
-      while ((c = getopt(argc, argv, "vdn")) != EOF) {
+      while ((c = getopt(argc, argv, "vdms")) != EOF) {
             switch (c) {
                   case 'v':
                         printVersion();
@@ -158,18 +174,17 @@ int main(int argc, char* argv[])
                   case 'd':
                         debugMode = true;
                         break;
-                  case 'n':
+                  case 'm':
                         mergeNotes = true;
+                        break;
+                  case 's':
+                        separateChannel = true;
                         break;
                   default:
                         usage();
                         return -1;
                   }
             }
-      for (int i = 0; i < argc; ++i)
-            printf("arg %d <%s>\n", i, argv[i]);
-      printf("argc %d  optind %d\n", argc, optind);
-
       QIODevice* in = 0;
       QIODevice* out = 0;
 

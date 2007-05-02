@@ -273,12 +273,6 @@ bool MidiFile::readTrack(bool)
                   delete event;
                   continue;
                   }
-            if (track->outChannel() == -1)
-                  track->setOutChannel(event->channel);
-            else if (track->outChannel() != event->channel) {
-                  printf("importMidi: channel changed on track %d - %d\n",
-                     track->outChannel(), event->channel);
-                  }
             track->insert(event);
             }
       if (curPos != endPos) {
@@ -665,7 +659,8 @@ void MidiFile::process1()
 
 void MidiTrack::cleanup()
 	{
-      const int tickRaster = mf->division()/2; 	// 1/8 quantize
+//      const int tickRaster = mf->division()/2; 	// 1/8 quantize
+      const int tickRaster = mf->division()/4; 	// 1/16 quantize
       EventList dl;
 
       //
@@ -735,5 +730,64 @@ void MidiFile::changeDivision(int newDivision)
       foreach (MidiTrack* t, _tracks)
             t->changeDivision(newDivision);
       _division = newDivision;
+      }
+
+//---------------------------------------------------------
+//   sortTracks
+//    sort tracks in instrument order
+//---------------------------------------------------------
+
+bool instrumentLessThan(const MidiTrack* t1, const MidiTrack* t2)
+      {
+      return t1->program < t2->program;
+      }
+
+void MidiFile::sortTracks()
+      {
+      qSort(_tracks.begin(), _tracks.end(), instrumentLessThan);
+      }
+
+//---------------------------------------------------------
+//   separateChannel
+//    if a track contains events for different midi channels,
+//    then split events into separate tracks
+//---------------------------------------------------------
+
+void MidiFile::separateChannel()
+      {
+      int n = _tracks.size();
+      for (int i = 0; i < n; ++i) {
+            QList<int> channel;
+            MidiTrack* mt = _tracks.at(i);
+            foreach(MidiEvent* e, mt->events()) {
+                  if (e->isChannelEvent() && !channel.contains(e->channel))
+                        channel.append(e->channel);
+                  }
+            int nn = channel.size();
+            if (nn <= 1)
+                  continue;
+            qSort(channel);
+
+            // split
+            for (int ii = 1; ii < nn; ++ii) {
+                  MidiTrack* t = new MidiTrack(this);
+                  _tracks.insert(i + 1, t);
+                  }
+            EventList& el = mt->events();
+            for (iEvent ie = el.begin(); ie != el.end();) {
+                  MidiEvent* e = *ie;
+                  if (e->isChannelEvent()) {
+                        int ch  = e->channel;
+                        int idx = channel.indexOf(ch);
+                        MidiTrack* t = _tracks.at(i * idx);
+                        if (t != mt) {
+                              t->insert(e);
+                              ie = el.erase(ie);
+                              continue;
+                              }
+                        }
+                  ++ie;
+                  }
+            }
       }
 

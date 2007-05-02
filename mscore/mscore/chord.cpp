@@ -281,6 +281,8 @@ void Chord::layoutStem(ScoreLayout* layout)
       {
       double _spatium = layout->spatium();
       System* s      = segment()->measure()->system();
+      if (s == 0)       //DEBUG
+            return;
       double sy      = s->staff(staffIdx())->bbox().y();
       Note* upnote   = upNote();
       Note* downnote = downNote();
