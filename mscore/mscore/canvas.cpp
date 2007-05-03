@@ -52,7 +52,7 @@
 //---------------------------------------------------------
 
 Canvas::Canvas(QWidget* parent)
-   : QWidget(parent)
+   : QFrame(parent)
       {
       setAcceptDrops(true);
       setAttribute(Qt::WA_NoSystemBackground);
@@ -61,6 +61,9 @@ Canvas::Canvas(QWidget* parent)
       setAttribute(Qt::WA_KeyCompression);
       setAttribute(Qt::WA_StaticContents);
       setAutoFillBackground(true);
+
+//      setFrameStyle(QFrame::Panel | QFrame::Raised);
+//      setLineWidth(10);
 
       navigator        = 0;
       _score           = 0;

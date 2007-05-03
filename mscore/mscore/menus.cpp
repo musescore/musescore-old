@@ -76,7 +76,7 @@ void MuseScore::showPalette(bool visible)
             Palette* sp = new Palette(4, 4, .8);
             sp->setGrid(45, 60);
             sp->showStaff(true);
-            for (int i = 0; i < 13; ++i) {
+            for (int i = 0; i < 15; ++i) {
                   Clef* k = new ::Clef(0, i);
                   sp->addObject(i,  k, tr(clefTable[i].name));
                   }
@@ -92,12 +92,12 @@ void MuseScore::showPalette(bool visible)
             for (int i = 0; i < 7; ++i) {
                   KeySig* k = new KeySig(0);
                   k->setSubtype(i+1);
-                  sp->addObject(i * 2,  k, keyNames[i*2]);
+                  sp->addObject(i,  k, keyNames[i*2]);
                   }
             for (int i = -7; i < 0; ++i) {
                   KeySig* k = new KeySig(0);
                   k->setSubtype(i);
-                  sp->addObject((7 + i) * 2 + 1,  k, keyNames[(7 + i) * 2 + 1]);
+                  sp->addObject(14 + i,  k, keyNames[(7 + i) * 2 + 1]);
                   }
             KeySig* k = new KeySig(0);
             k->setSubtype(0);
@@ -547,7 +547,7 @@ void MuseScore::clefMenu()
             sa->setWidget(sp);
             sp->setGrid(60, 80);
             sp->showStaff(true);
-            for (int i = 0; i < 13; ++i) {
+            for (int i = 0; i < 15; ++i) {
                   Clef* k = new ::Clef(0, i);
                   sp->addObject(i,  k, tr(clefTable[i].name));
                   }

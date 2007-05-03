@@ -54,7 +54,8 @@ const ClefInfo clefTable[] = {
       ClefInfo("C",   3,  0,  -6,  39, "Alto Clef"),           // CLEF_C3
 /*NC*/      ClefInfo("C",   4,  0,  -4,  41, "Tenor Clef"),          // CLEF_C4
 
-/*NC*/      ClefInfo("TAB", 5,  0,   0,   0, "Tablature")
+/*NC*/      ClefInfo("TAB", 5,  0,   0,   0, "Tablature"),
+/*NC*/      ClefInfo("PERC", 4,  -2,   -26,   19, "Percussion")
       };
 
 //---------------------------------------------------------
@@ -125,7 +126,7 @@ void Clef::setSubtype(int st)
                   symbol->setSym(_small ? cbassclefSym : bassclefSym);
                   yoff = 1.0;
                   break;
-            case 5:
+            case CLEF_F8:
                   {
                   symbol->setSym(_small ? cbassclefSym : bassclefSym);
                   yoff = 1.0;
@@ -134,7 +135,7 @@ void Clef::setSubtype(int st)
                   addElement(number, .0, 3.5*_spatium);
                   }
                   break;
-            case 6:
+            case CLEF_F15:
                   {
                   symbol->setSym(_small ? cbassclefSym : bassclefSym);
                   yoff = 1.0;
@@ -146,8 +147,8 @@ void Clef::setSubtype(int st)
                   addElement(number, .8 * _spatium, 3.5 * _spatium);
                   }
                   break;
-            case 7:
-            case 8:
+            case CLEF_F_B:
+            case CLEF_F_C:
                   symbol->setSym(_small ? cbassclefSym : bassclefSym);
                   yoff = 1.0;
                   break;
@@ -167,8 +168,13 @@ void Clef::setSubtype(int st)
                   symbol->setSym(_small ? caltoclefSym : altoclefSym);
                   yoff = 1.0;
                   break;
-            case 13:
-            default:
+            case CLEF_TAB:
+                  symbol->setSym(_small ? ctabclefSym : tabclefSym);
+                  yoff = 2.0;
+                  break;
+            case CLEF_PERC:
+                  symbol->setSym(_small ? cpercussionclefSym : percussionclefSym);
+                  yoff = 2.0;
                   break;
             }
       addElement(symbol, .0, .0);

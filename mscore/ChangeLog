@@ -1,3 +1,6 @@
+3.5.7 (ws)
+      - added percussion clef
+      - fixed crash when importing midi files with empty start measure
 30.4.7 (ws)
       - implement midi import of time signature
       - midi import: fix handling of multiple rests
