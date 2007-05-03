@@ -763,6 +763,7 @@ void MidiFile::separateChannel()
                   if (e->isChannelEvent() && !channel.contains(e->channel))
                         channel.append(e->channel);
                   }
+            mt->setOutChannel(channel.empty() ? 0 : channel[0]);
             int nn = channel.size();
             if (nn <= 1)
                   continue;
@@ -772,6 +773,7 @@ void MidiFile::separateChannel()
             for (int ii = 1; ii < nn; ++ii) {
                   MidiTrack* t = new MidiTrack(this);
                   _tracks.insert(i + 1, t);
+                  t->setOutChannel(channel[ii]);
                   }
             EventList& el = mt->events();
             for (iEvent ie = el.begin(); ie != el.end();) {
@@ -789,5 +791,34 @@ void MidiFile::separateChannel()
                   ++ie;
                   }
             }
+      }
+
+//---------------------------------------------------------
+//   move
+//    Move all events in midifile.
+//---------------------------------------------------------
+
+void MidiFile::move(int ticks)
+      {
+      foreach(MidiTrack* track, _tracks)
+            track->move(ticks);
+      }
+
+//---------------------------------------------------------
+//   move
+//---------------------------------------------------------
+
+void MidiTrack::move(int ticks)
+      {
+      EventList dl;
+
+      foreach(MidiEvent* e, _events) {
+            int tick = e->tick + ticks;
+            if (tick < 0)
+                  tick = 0;
+            e->tick = tick;
+		dl.insert(tick, e);
+            }
+      _events = dl;
       }
 

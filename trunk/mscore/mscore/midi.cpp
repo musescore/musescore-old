@@ -1036,7 +1036,7 @@ bool LoadMidi::loader(QFile* fp)
 //    for every measure:
 //          * create measure
 //          - insert notes
-//          - Triolen?
+//          - Tupel ?
 
 //---------------------------------------------------------
 //   convertMidi
@@ -1057,14 +1057,14 @@ void Score::convertMidi(MidiFile* mf)
       //    build time signature list
       //---------------------------------------------------
 
-      foreach(MidiTrack* track, *tracks) {
+      foreach (MidiTrack* track, *tracks) {
             track->maxPitch = 0;
             track->minPitch = 127;
             track->medPitch = 0;
             track->program  = 0;
 		int events      = 0;
             const EventList el = track->events();
-            foreach(MidiEvent* e, track->events()) {
+            foreach (MidiEvent* e, track->events()) {
                   if (e->isNote()) {
                         ++events;
                         int pitch = e->pitch();
@@ -1074,7 +1074,7 @@ void Score::convertMidi(MidiFile* mf)
                               track->minPitch = pitch;
                         track->medPitch += pitch;
                         }
-                  if (e->type == ME_META && e->dataA == META_TIME_SIGNATURE) {
+                  else if (e->type == ME_META && e->dataA == META_TIME_SIGNATURE) {
                         int z  = e->data[0];
                         int nn = e->data[1];
                         int n  = 1;
@@ -1118,8 +1118,8 @@ void Score::convertMidi(MidiFile* mf)
                   Staff* s = new Staff(this, part, staff);
                   part->insertStaff(s);
                   _staves->push_back(s);
-                  if (staves == 2) {
-                        s->clef()->setClef(0, staff == 0 ? 0 : 4);
+                  if (staves == 2 && part->midiProgram() == 0) {
+                        s->clef()->setClef(0, staff == 0 ? CLEF_G : CLEF_F);
                         if (staff == 0) {
                               // assume this is a piano staff
                               s->setBracket(0, BRACKET_AKKOLADE);
@@ -1127,7 +1127,10 @@ void Score::convertMidi(MidiFile* mf)
                               }
                         }
                   else {
-                        s->clef()->setClef(0, track->medPitch < 58 ? 4 : 0);
+                        if (track->outChannel() == 9)
+                              s->clef()->setClef(0, CLEF_PERC);
+                        else
+                              s->clef()->setClef(0, track->medPitch < 58 ? CLEF_F : CLEF_G);
                         }
                   }
             if (track->name().isEmpty()) {
@@ -1196,6 +1199,9 @@ void Score::convertMidi(MidiFile* mf)
                   break;
             }
 
+      tick = sigmap->bar2tick(startBar, 0, 0);
+      mf->move(-tick);
+
       //---------------------------------------------------
       //  count measures
       //---------------------------------------------------
@@ -1218,7 +1224,7 @@ void Score::convertMidi(MidiFile* mf)
       //  create measures
       //---------------------------------------------------
 
-      for (int i = startBar; i < bars; ++i) {
+      for (int i = 0; i < bars; ++i) {
             Measure* measure  = new Measure(this);
             int tick = sigmap->bar2tick(i, 0, 0);
             measure->setTick(tick);

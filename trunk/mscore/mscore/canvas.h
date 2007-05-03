@@ -41,7 +41,7 @@ class ElementList;
 //   Canvas
 //---------------------------------------------------------
 
-class Canvas : public QWidget, public Viewer {
+class Canvas : public QFrame, public Viewer {
       Q_OBJECT
 
    public:

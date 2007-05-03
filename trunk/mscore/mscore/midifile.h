@@ -178,6 +178,7 @@ class MidiTrack {
       void mergeNoteOnOff();
       void cleanup();
       void changeDivision(int newDivision);
+      void move(int ticks);
       };
 
 typedef QList<MidiTrack*> MidiTrackList;
@@ -241,6 +242,7 @@ class MidiFile {
       void process1();
       void sortTracks();
       void separateChannel();
+      void move(int ticks);
       };
 
 #define XCHG_SHORT(x) ((((x)&0xFF)<<8) | (((x)>>8)&0xFF))

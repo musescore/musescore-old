@@ -239,7 +239,6 @@ void Palette::leaveEvent(QEvent*)
 
 void Palette::addObject(int idx, Element* s, const QString& name)
       {
-      currentIdx   = idx;
       symbols[idx] = s;
       names[idx]   = name;
       update();
