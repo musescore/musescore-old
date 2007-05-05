@@ -179,6 +179,7 @@ class MidiTrack {
       void cleanup();
       void changeDivision(int newDivision);
       void move(int ticks);
+      bool isDrumTrack() const;
       };
 
 typedef QList<MidiTrack*> MidiTrackList;

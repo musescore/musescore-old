@@ -205,6 +205,7 @@ add_executable ( mscore
       volta.cpp
       simplebutton.cpp
       image.cpp
+      keyfinder.cpp
       )
 
 if (CROSS_MINGW)

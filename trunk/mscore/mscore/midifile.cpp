@@ -822,3 +822,12 @@ void MidiTrack::move(int ticks)
       _events = dl;
       }
 
+//---------------------------------------------------------
+//   isDrumTrack
+//---------------------------------------------------------
+
+bool MidiTrack::isDrumTrack() const
+      {
+      return outChannel() == 9;
+      }
+

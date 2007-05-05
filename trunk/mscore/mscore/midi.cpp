@@ -46,6 +46,7 @@
 #include "ottava.h"
 #include "lyrics.h"
 #include "bracket.h"
+#include "keyfinder.h"
 
 static unsigned const char gmOnMsg[] = { 0x7e, 0x7f, 0x09, 0x01 };
 static unsigned const char gsOnMsg[] = { 0x41, 0x10, 0x42, 0x12, 0x40, 0x00, 0x7f, 0x00, 0x41 };
@@ -1127,7 +1128,7 @@ void Score::convertMidi(MidiFile* mf)
                               }
                         }
                   else {
-                        if (track->outChannel() == 9)
+                        if (track->isDrumTrack())
                               s->clef()->setClef(0, CLEF_PERC);
                         else
                               s->clef()->setClef(0, track->medPitch < 58 ? CLEF_F : CLEF_G);
@@ -1286,6 +1287,7 @@ struct MNote {
 void Score::convertTrack(MidiTrack* midiTrack, int staffIdx)
 	{
 	const EventList el = midiTrack->events();
+
       QList<MNote*> notes;
 
 	int ctick = 0;
@@ -1375,6 +1377,8 @@ void Score::convertTrack(MidiTrack* midiTrack, int staffIdx)
                   }
             }
 
+      bool keyFound = false;
+
       Measure* measure = tick2measure(0);
       for (ciEvent i = el.begin(); i != el.end(); ++i) {
             MidiEvent* e = i.value();
@@ -1407,6 +1411,7 @@ void Score::convertTrack(MidiTrack* midiTrack, int staffIdx)
                                     }
             		      Staff* s = staff(staffIdx);
                               (*s->keymap())[e->tick] = key;
+                              keyFound = false;
                               }
                               break;
                         case META_TITLE:  // mscore extension
@@ -1494,6 +1499,13 @@ void Score::convertTrack(MidiTrack* midiTrack, int staffIdx)
             rest->setStaff(staff(staffIdx));
             Segment* s = measure->getSegment(rest);
             s->add(rest);
+            }
+      if (!keyFound && !midiTrack->isDrumTrack()) {
+            // try to find out key
+            int key = findKey(midiTrack, sigmap);
+printf("find key %d\n", key);
+            Staff* s = staff(staffIdx);
+            (*s->keymap())[0] = key;
             }
       }
 
