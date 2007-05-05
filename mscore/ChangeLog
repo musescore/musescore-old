@@ -1,3 +1,5 @@
+5.5.7 (ws)
+      - added key finder to midi import
 3.5.7 (ws)
       - added percussion clef
       - fixed crash when importing midi files with empty start measure
