@@ -21,31 +21,6 @@
 #ifndef __KEYFINDER_H__
 #define __KEYFINDER_H__
 
-struct note_struct {
-      int ontime;
-      int offtime;
-      int duration;
-      int pitch;
-      int tpc;
-      };
-
-struct Beat {
-      int time;
-      int level;
-      };
-
-struct SBeat {
-      int time;
-      };
-
-struct MidiSegment {
-      int start;
-      int end;
-      struct note_struct snote[100];
-      int numnotes;           /* number of notes in the segment */
-      double average_dur;     /* average input vector value (needed for K-S algorithm) */
-      };
-
 class MidiTrack;
 class SigList;
 extern int findKey(MidiTrack*, SigList*);

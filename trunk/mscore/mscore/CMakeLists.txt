@@ -233,7 +233,7 @@ target_link_libraries(mscore
 #     target smf2xml
 #======================================
 
-add_executable ( smf2xml smf2xml.cpp midifile.cpp xml.cpp)
+add_executable ( smf2xml smf2xml.cpp midifile.cpp xml.cpp sig.cpp)
 
 target_link_libraries( smf2xml
       ${QT_LIBRARIES}

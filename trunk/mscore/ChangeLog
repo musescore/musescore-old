@@ -1,3 +1,5 @@
+8.5.7 (ws)
+      - fixes to midi lyrics import: move lyrics position to last note
 5.5.7 (ws)
       - added key finder to midi import
 3.5.7 (ws)

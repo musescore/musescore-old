@@ -21,7 +21,6 @@
 #include "sig.h"
 #include "xml.h"
 #include "mtime.h"
-#include "score.h"
 #include "globals.h"
 
 //---------------------------------------------------------
@@ -281,7 +280,7 @@ void SigList::write(Xml& xml) const
 //   SigList::read
 //---------------------------------------------------------
 
-void SigList::read(QDomNode node, Score* cs)
+void SigList::read(QDomNode node, int division, int fileDivision)
       {
       for (node = node.firstChild(); !node.isNull(); node = node.nextSibling()) {
             QDomElement e = node.toElement();
@@ -290,7 +289,7 @@ void SigList::read(QDomNode node, Score* cs)
             QString tag(e.tagName());
             if (tag == "sig") {
                   SigEvent t;
-                  int tick = t.read(node, cs);
+                  int tick = t.read(node, division, fileDivision);
                   (*this)[tick] = t;
                   }
             else
@@ -320,13 +319,13 @@ void SigEvent::write(Xml& xml, int tick) const
 //   SigEvent::read
 //---------------------------------------------------------
 
-int SigEvent::read(QDomNode node, Score* cs)
+int SigEvent::read(QDomNode node, int division, int fileDivision)
       {
       irregular = false;
 
       QDomElement e = node.toElement();
       int tick = e.attribute("tick", "0").toInt();
-      tick = cs->fileDivision(tick);
+      tick = tick * division / fileDivision;
 
       for (node = node.firstChild(); !node.isNull(); node = node.nextSibling()) {
             QDomElement e = node.toElement();
