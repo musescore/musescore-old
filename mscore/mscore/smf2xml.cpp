@@ -24,9 +24,98 @@
 #include "midifile.h"
 
 static const char versionString[] = "0.1";
+
+int division  = 480;
 bool debugMode       = false;
 bool mergeNotes      = false;
 bool separateChannel = false;
+bool cleanup         = false;
+
+//---------------------------------------------------------
+//   dumpEvent
+//---------------------------------------------------------
+
+void dumpEvent(Xml& xml, const MidiEvent* e)
+      {
+      switch(e->type) {
+            case ME_NOTEOFF:
+                  xml.tagE(QString("NoteOff tick=\"%1\" channel=\"%2\" pitch=\"%3\" velo=\"%4\"")
+                     .arg(e->tick).arg(e->channel).arg(e->pitch()).arg(e->velo()));
+                  break;
+            case ME_NOTEON:
+                  if (e->len) {
+                        xml.tagE(QString("Note  tick=\"%1\" channel=\"%2\" len=\"%3\" pitch=\"%4\" velo=\"%5\"")
+                           .arg(e->tick).arg(e->channel).arg(e->len).arg(e->pitch()).arg(e->velo()));
+                        }
+                  else {
+                        xml.tagE(QString("NoteOn  tick=\"%1\" channel=\"%2\" pitch=\"%3\" velo=\"%4\"")
+                           .arg(e->tick).arg(e->channel).arg(e->pitch()).arg(e->velo()));
+                        }
+                  break;
+            case ME_META:
+                  switch(e->dataA) {
+                        case META_TRACK_NAME:
+                              xml.tag("TrackName",  QString("tick=\"%1\"").arg(e->tick), QString((char*)(e->data)));
+                              break;
+                        case META_LYRIC:
+                              xml.tag("Lyric",  QString("tick=\"%1\"").arg(e->tick), QString((char*)(e->data)));
+                              break;
+                        case META_KEY_SIGNATURE:
+                              {
+                              const char* keyTable[] = {
+                                    "Ges", "Des", "As", "Es", "B", "F",
+                                    "C",
+                                    "G", "D", "A", "E", "H", "Fis"
+                                    };
+                              int key = (char)(e->data[0]) + 7;
+                              if (key < 0 || key > 14) {
+                                    printf("bad key signature %d\n", key);
+                                    key = 0;
+                                    }
+                              QString sex(e->data[1] ? "Minor" : "Major");
+                              QString keyName(keyTable[key]);
+                              xml.tag("Key",  QString("tick=\"%1\"").arg(e->tick), QString("%1 %2").arg(keyName).arg(sex));
+                              }
+                              break;
+                        case META_TIME_SIGNATURE:
+                              xml.tagE(QString("TimeSig tick=\"%1\" num=\"%2\" denom=\"%3\" metro=\"%4\" quarter=\"%5\"")
+                                 .arg(e->tick)
+                                 .arg(int(e->data[0]))
+                                 .arg(int(e->data[1]))
+                                 .arg(int(e->data[2]))
+                                 .arg(int(e->data[3])));
+                              break;
+
+                        case META_TEMPO:
+                        default:
+                              xml.tagE(QString("Meta tick=\"%1\" type=\"%2\"").arg(e->tick).arg(int(e->dataA)));
+                              break;
+                        }
+                  break;
+            case ME_POLYAFTER:
+                  xml.tagE(QString("PolyAftertouch tick=\"%1\"").arg(e->tick));
+                  break;
+            case ME_CONTROLLER:
+                  xml.tagE(QString("Controller tick=\"%1\" channel=\"%2\"").arg(e->tick).arg(e->channel));
+                  break;
+            case ME_PROGRAM:
+                  xml.tagE(QString("ProgramChange tick=\"%1\" channel=\"%2\"").arg(e->tick).arg(e->channel));
+                  break;
+            case ME_AFTERTOUCH:
+                  xml.tagE(QString("ChannelAftertouch tick=\"%1\"").arg(e->tick));
+                  break;
+            case ME_PITCHBEND:
+                  xml.tagE(QString("Pitchbend tick=\"%1\"").arg(e->tick));
+                  break;
+            case ME_SYSEX:
+                  xml.tagE(QString("Sysex tick=\"%1\"").arg(e->tick));
+                  break;
+            default:
+                  xml.tagE(QString("Event tick=\"%1\" type=\"%2\"").arg(e->tick).arg(e->type));
+                  break;
+            }
+
+      }
 
 //---------------------------------------------------------
 //   convert
@@ -46,88 +135,15 @@ static void convert(QIODevice* in, QIODevice* out)
       xml.header();
       xml.stag("SMF");
       xml.tag("format", mf.format());
+      xml.tag("division", mf.division());
 
       MidiTrackList* tl = mf.tracks();
       foreach(MidiTrack* t, *tl) {
+            if (cleanup)
+                  t->cleanup();
             xml.stag("Track");
             foreach (const MidiEvent* e, t->events()) {
-                  switch(e->type) {
-                        case ME_NOTEOFF:
-                              xml.tagE(QString("NoteOff tick=\"%1\" channel=\"%2\" pitch=\"%3\" velo=\"%4\"")
-                                 .arg(e->tick).arg(e->channel).arg(e->pitch()).arg(e->velo()));
-                              break;
-                        case ME_NOTEON:
-                              if (e->len) {
-                                    xml.tagE(QString("Note  tick=\"%1\" channel=\"%2\" len=\"%3\" pitch=\"%4\" velo=\"%5\"")
-                                       .arg(e->tick).arg(e->channel).arg(e->len).arg(e->pitch()).arg(e->velo()));
-                                    }
-                              else {
-                                    xml.tagE(QString("NoteOn  tick=\"%1\" channel=\"%2\" pitch=\"%3\" velo=\"%4\"")
-                                       .arg(e->tick).arg(e->channel).arg(e->pitch()).arg(e->velo()));
-                                    }
-                              break;
-                        case ME_META:
-                              switch(e->dataA) {
-                                    case META_TRACK_NAME:
-                                          xml.tag("TrackName",  QString("tick=\"%1\"").arg(e->tick), QString((char*)(e->data)));
-                                          break;
-                                    case META_LYRIC:
-                                          xml.tag("Lyric",  QString("tick=\"%1\"").arg(e->tick), QString((char*)(e->data)));
-                                          break;
-                                    case META_KEY_SIGNATURE:
-                                          {
-                                          const char* keyTable[] = {
-                                                "Ges", "Des", "As", "Es", "B", "F",
-                                                "C",
-                                                "G", "D", "A", "E", "H", "Fis"
-                                                };
-                                          int key = (char)(e->data[0]) + 7;
-                                          if (key < 0 || key > 14) {
-                                                printf("bad key signature %d\n", key);
-                                                key = 0;
-                                                }
-                                          QString sex(e->data[1] ? "Minor" : "Major");
-                                          QString keyName(keyTable[key]);
-                                          xml.tag("Key",  QString("tick=\"%1\"").arg(e->tick), QString("%1 %2").arg(keyName).arg(sex));
-                                          }
-                                          break;
-                                    case META_TIME_SIGNATURE:
-                                          xml.tagE(QString("TimeSig tick=\"%1\" num=\"%2\" denom=\"%3\" metro=\"%4\" quarter=\"%5\"")
-                                             .arg(e->tick)
-                                             .arg(int(e->data[0]))
-                                             .arg(int(e->data[1]))
-                                             .arg(int(e->data[2]))
-                                             .arg(int(e->data[3])));
-                                          break;
-
-                                    case META_TEMPO:
-                                    default:
-                                          xml.tagE(QString("Meta tick=\"%1\" type=\"%2\"").arg(e->tick).arg(int(e->dataA)));
-                                          break;
-                                    }
-                              break;
-                        case ME_POLYAFTER:
-                              xml.tagE(QString("PolyAftertouch tick=\"%1\"").arg(e->tick));
-                              break;
-                        case ME_CONTROLLER:
-                              xml.tagE(QString("Controller tick=\"%1\" channel=\"%2\"").arg(e->tick).arg(e->channel));
-                              break;
-                        case ME_PROGRAM:
-                              xml.tagE(QString("ProgramChange tick=\"%1\" channel=\"%2\"").arg(e->tick).arg(e->channel));
-                              break;
-                        case ME_AFTERTOUCH:
-                              xml.tagE(QString("ChannelAftertouch tick=\"%1\"").arg(e->tick));
-                              break;
-                        case ME_PITCHBEND:
-                              xml.tagE(QString("Pitchbend tick=\"%1\"").arg(e->tick));
-                              break;
-                        case ME_SYSEX:
-                              xml.tagE(QString("Sysex tick=\"%1\"").arg(e->tick));
-                              break;
-                        default:
-                              xml.tagE(QString("Event tick=\"%1\" type=\"%2\"").arg(e->tick).arg(e->type));
-                              break;
-                        }
+                  dumpEvent(xml, e);
                   }
             xml.etag();
             }
@@ -156,6 +172,7 @@ static void usage()
              "      -d   debug mode\n"
              "      -m   merge note on/off events\n"
              "      -s   separate channels into different tracks\n"
+             "      -c   cleanup: quantize, remove overlaps\n"
             );
       }
 
@@ -166,7 +183,7 @@ static void usage()
 int main(int argc, char* argv[])
       {
       int c;
-      while ((c = getopt(argc, argv, "vdms")) != EOF) {
+      while ((c = getopt(argc, argv, "vdmsc")) != EOF) {
             switch (c) {
                   case 'v':
                         printVersion();
@@ -180,11 +197,17 @@ int main(int argc, char* argv[])
                   case 's':
                         separateChannel = true;
                         break;
+                  case 'c':
+                        cleanup = true;
+                        break;
                   default:
                         usage();
                         return -1;
                   }
             }
+      if (cleanup)
+            mergeNotes = true;
+
       QIODevice* in = 0;
       QIODevice* out = 0;
 

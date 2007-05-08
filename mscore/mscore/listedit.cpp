@@ -539,7 +539,21 @@ void SegmentView::setElement(Element* e)
 
       Segment* s = (Segment*)e;
       ShowElementBase::setElement(e);
-      sb.segmentType->setCurrentIndex(s->type());
+      sb.segmentType->setCurrentIndex(s->subtype());
+      sb.lyrics->clear();
+
+      Score* cs = e->score();
+      for (int i = 0; i < cs->nstaves(); ++i) {
+            const LyricsList* ll = s->lyricsList(i);
+            if (ll) {
+                  foreach(Lyrics* l, *ll) {
+                        QString s;
+                        s.setNum(long(l), 16);
+                        QListWidgetItem* item = new QListWidgetItem(s, 0, long(l));
+                        sb.lyrics->addItem(item);
+                        }
+                  }
+            }
       }
 
 //---------------------------------------------------------

@@ -62,17 +62,44 @@
 #include "midifile.h"
 #include "sig.h"
 
-#define CHANGE_PENALTY 12
-#define SEGMENT_BEAT_LEVEL 3
-#define BEAT_PRINTOUT_LEVEL 2
+//---------------------------------------------------------
+//   SNote
+//---------------------------------------------------------
 
-static int segment_beat_level = SEGMENT_BEAT_LEVEL;
-static float change_penalty = CHANGE_PENALTY;
+struct SNote {
+      int ontime;
+      int offtime;
+      int duration;
+      int pitch;
+      int tpc;
+      };
+
+//---------------------------------------------------------
+//   SBeat
+//---------------------------------------------------------
+
+struct SBeat {
+      int time;
+      };
+
+//---------------------------------------------------------
+//   MidiSegment
+//---------------------------------------------------------
+
+struct MidiSegment {
+      int start;
+      int end;
+      QList<SNote> snote;
+      int numnotes;           // number of notes in the segment
+      double average_dur;     // average input vector value (needed for K-S algorithm)
+      };
+
+#define CHANGE_PENALTY        12
+
+static float change_penalty   = CHANGE_PENALTY;
 static int npc_or_tpc_profile = 1;
-static int scoring_mode = 1;
-static int verbosity = 1;
-
-static int seg = 1;
+static int scoring_mode       = 1;
+static int verbosity          = 1;
 
 static double major_profile[12] = {5.0, 2.0, 3.5, 2.0, 4.5, 4.0, 2.0, 4.5, 2.0, 3.5, 1.5, 4.0};
 static double minor_profile[12] = {5.0, 2.0, 3.5, 4.5, 2.0, 4.0, 2.0, 4.5, 3.5, 2.0, 1.5, 4.0};
@@ -100,30 +127,27 @@ Krumhansl's minor, normalized: 5.94 2.51 3.30 5.05 2.44 3.31 2.38 4.46 3.73 2.52
 */
 
 static int firstbeat;
-static struct note_struct note[10000];
-
-static MidiSegment segment[500];        /* An array storing the notes in each segment. */
-static int segtotal;              /* total number of segments - 1 */
+static QList<SNote> note;
+static QList<MidiSegment> segment;  // An array storing the notes in each segment
+static int segtotal;                // total number of segments - 1
 
 static double seglength;
 
-static int seg_prof[500][28];
-static double key_score[500][56];
-static double total_prob[500];
+static QList<int> seg_prof[28];
+static QList<double> key_score[56];
+static QList<SBeat> sbeat;
+static QList<double> analysis[56][56];
 
-static Beat beat[5000];
-static SBeat sbeat[1000];
+static QList<int> best[56];
+static QList<int> final;
 
-static double analysis[500][56][56];
-static int best[500][56];
-static int final[500];
+static int numnotes, numchords, num_sbeats;
 
-static int numnotes, numbeats, numchords, num_sbeats;
+static QList<int> pc_tally;
+static QList<double> final_score;
 
-static int pc_tally[500];
 static double key_profile[56][28];
 static int final_timepoint;
-static double final_score[500];
 
 //---------------------------------------------------------
 //   print_keyname
@@ -160,24 +184,23 @@ static void print_keyname(int f)
 
 static void create_segments()
       {
-      int b, s;
+      segment.append(MidiSegment());
+
       segment[0].start = firstbeat; // Always start a segment at the very beginning of the piece (the first beat)
-      s=1;
-      for (b = 0; b < num_sbeats; b++) {
-            if (b==0 && (sbeat[0].time-firstbeat) <((sbeat[1].time-firstbeat) - (sbeat[0].time-firstbeat))/2)
+      for (int b = 0; b < num_sbeats; b++) {
+            if (b == 0 && (sbeat[0].time - firstbeat) < ((sbeat[1].time-firstbeat) - (sbeat[0].time-firstbeat))/2)
                   continue;
             /* If it's the first beat of the piece, and the upbeat is
                less than half of the first beat interval, don't start a segment
             */
             else {
-                  segment[s].start=sbeat[b].time;
-                  segment[s-1].end=sbeat[b].time;
-                  // printf("A segment starts at %d and ends at %d\n",
-                  //    segment[s-1].start, segment[s-1].end);
-                  s++;
+                  MidiSegment seg;
+                  seg.start          = sbeat[b].time;
+                  segment.back().end = sbeat[b].time;
+                  segment.append(seg);
                   }
             }
-      s--;  /* Now s = array number of final segment */
+      int s = segment.size() - 1;
 
     /* If final segment starts at or after final timepoint of piece, ignore it,
        decrementing number of segments by 1; if not, set that segment's ending
@@ -187,16 +210,10 @@ static void create_segments()
             s--;
             }
       else {
-            segment[s].end=final_timepoint;
+            segment[s].end = final_timepoint;
             /* printf("Final segment ends at %d", segment[s].end); */
             }
-      segtotal = s; /* array number of final segment  */
-
-      if (verbosity >= 2) {
-            for(int s = 0; s <= segtotal; s++) {
-                  printf("Segment: %d %d\n", segment[s].start, segment[s].end);
-                  }
-            }
+      segtotal = s; // index of final segment
       }
 
 //---------------------------------------------------------
@@ -205,40 +222,42 @@ static void create_segments()
 
 static void fill_segments()
       {
-      for (int s = 0; s <= segtotal; ++s) {
-            int n = 0;
-            for (int x = 0; x < numnotes; ++x) {
-                  if (note[x].ontime >= segment[s].start && note[x].ontime < segment[s].end
-                     && note[x].offtime <= segment[s].end) {  /* note begins and ends in segment */
-                        segment[s].snote[n].pitch=note[x].pitch;
-                        segment[s].snote[n].tpc=note[x].tpc;
-                        segment[s].snote[n].duration=note[x].duration;
-                        ++n;
+      for (int s = 0; s < segment.size(); ++s) {
+            foreach (const SNote n, note) {
+                  SNote sn;
+                  if (n.ontime >= segment[s].start && n.ontime < segment[s].end
+                     && n.offtime <= segment[s].end) {
+                        /* note begins and ends in segment */
+                        sn.pitch    = n.pitch;
+                        sn.tpc      = n.tpc;
+                        sn.duration = n.duration;
+                        segment[s].snote.append(sn);
                         }
-                  if (note[x].ontime >= segment[s].start && note[x].ontime < segment[s].end && note[x].offtime > segment[s].end) {
+                  if (n.ontime >= segment[s].start && n.ontime < segment[s].end && n.offtime > segment[s].end) {
                         /* note begins, doesn't end in segment*/
-                        segment[s].snote[n].pitch=note[x].pitch;
-                        segment[s].snote[n].tpc=note[x].tpc;
-                        segment[s].snote[n].duration = segment[s].end - note[x].ontime;
-                        ++n;
+                        sn.pitch    = n.pitch;
+                        sn.tpc      = n.tpc;
+                        sn.duration = segment[s].end - n.ontime;
+                        segment[s].snote.append(sn);
                         }
-                  if (note[x].ontime < segment[s].start && note[x].offtime > segment[s].start && note[x].offtime <= segment[s].end) {
+                  if (n.ontime < segment[s].start && n.offtime > segment[s].start && n.offtime <= segment[s].end) {
                         /* note ends, doesn't begin in segment */
-                        segment[s].snote[n].pitch=note[x].pitch;
-                        segment[s].snote[n].tpc=note[x].tpc;
-                        segment[s].snote[n].duration = note[x].offtime - segment[s].start;
-                        ++n;
+                        sn.pitch    = n.pitch;
+                        sn.tpc      = n.tpc;
+                        sn.duration = n.offtime - segment[s].start;
+                        segment[s].snote.append(sn);
                         }
-                  if (note[x].ontime < segment[s].start && note[x].offtime > segment[s].end) {
+                  if (n.ontime < segment[s].start && n.offtime > segment[s].end) {
                         /* note doesn't begin or end in segment */
-                        segment[s].snote[n].pitch=note[x].pitch;
-                        segment[s].snote[n].tpc=note[x].tpc;
-                        segment[s].snote[n].duration = segment[s].end - segment[s].start;
-                        ++n;
+                        sn.pitch    = n.pitch;
+                        sn.tpc      = n.tpc;
+                        sn.duration = segment[s].end - segment[s].start;
+                        segment[s].snote.append(sn);
                         }
                   }
-            segment[s].numnotes = n;          /* number of notes in the segment */
-            /* printf("Number of notes in segment %d: %d\n", s, n); */
+            segment[s].numnotes = segment[s].snote.size();
+            // printf("fillSegments %d: %d-%d  %d\n", s, segment[s].start,
+            //   segment[s].end, segment[s].numnotes);
             }
       }
 
@@ -249,31 +268,28 @@ static void fill_segments()
 
 static void count_segment_notes()
       {
-      int s, y, n;
-      double total_dur;
-
-      for (s=0; s<=segtotal; ++s) {
+      for (int s = 0; s <= segtotal; ++s) {
             pc_tally[s] = 0;
-            for (y=0; y<28; ++y) {  // cycle through the pc's, make sure all the seg_prof values are zero
-                  seg_prof[s][y] = 0;
-	            }
 
-            total_dur = 0;
+            for (int y = 0; y < 28; ++y)  // cycle through the pc's, make sure all the seg_prof values are zero
+                  seg_prof[y].append(0);
 
-            for (n = 0; n < segment[s].numnotes; ++n) {
+            double total_dur = 0;
+
+            for (int n = 0; n < segment[s].numnotes; ++n) {
                   if (scoring_mode == 0)
                         total_dur += segment[s].snote[n].duration;
-                  for (y=0; y<28; ++y) {
+                  for (int y=0; y<28; ++y) {
             	      if (segment[s].snote[n].tpc == y) {
-            	            if(seg_prof[s][y]==0)
+            	            if(seg_prof[y][s]==0)
                                     pc_tally[s]++;
                   	      /* This keeps track of how many different pc's the segment contains. This counts TPCs, not NPCs! */
                               /* If scoring_mode is > 1, set array value to 1. If 0, add the note's duration to the
 		                     array value (as in the K-S algorithm) */
                               if (scoring_mode > 0)
-                                    seg_prof[s][y] = 1;
+                                    seg_prof[y][s] = 1;
 		                  else {
-                                    seg_prof[s][y] += segment[s].snote[n].duration;
+                                    seg_prof[y][s] += segment[s].snote[n].duration;
                                     }
                               }
                         }
@@ -288,10 +304,10 @@ static void count_segment_notes()
 
             if (verbosity>=2) {
                   printf("Segment %d: ", s);
-                  for (y=0; y<28; ++y) {
+                  for (int y=0; y<28; ++y) {
                         if(npc_or_tpc_profile == 0 && (y<9 || y>20))
                               continue;
-                        printf("%d ", seg_prof[s][y]);
+                        printf("%d ", seg_prof[y][s]);
                         }
                   printf("\n");
                   }
@@ -484,10 +500,9 @@ static void match_profiles()
       double major_sumsq, minor_sumsq, input_sumsq;
       double kprob[56];
 
-      for (s = 0; s <= segtotal; ++s) {
-            for (key = 0; key < 56; ++key) {
-                  key_score[s][key] = 0.0;
-                  }
+      for (key = 0; key < 56; ++key) {
+            for (s = 0; s <= segtotal; ++s)
+                  key_score[key].append(0.0);
             }
 
       if (scoring_mode==0) {
@@ -501,12 +516,14 @@ static void match_profiles()
                   printf("major_sumsq = %6.3f, minor_sumsq = %6.3f\n", major_sumsq, minor_sumsq);
             }
 
+      double total_prob[segtotal + 1];
+
       for (s = 0; s <= segtotal; ++s) {
             if (scoring_mode==0) {
                   input_sumsq = 0.0;
                   for (i = 9; i <= 20; i++) {
-                        input_sumsq += pow((seg_prof[s][i]-segment[s].average_dur), 2.0);
-                        /* printf("%d X %6.3f squared is %6.3f\n", seg_prof[s][i], segment[s].average_dur, pow((seg_prof[s][i]-segment[s].average_dur), 2.0)); */
+                        input_sumsq += pow((seg_prof[i][s]-segment[s].average_dur), 2.0);
+                        /* printf("%d X %6.3f squared is %6.3f\n", seg_prof[i][s], segment[s].average_dur, pow((seg_prof[i][s]-segment[s].average_dur), 2.0)); */
                         }
                   if (verbosity==3)
                         printf("For segment %d: average_dur = %6.3f; input_sumsq = %6.3f\n", s, segment[s].average_dur, input_sumsq);
@@ -515,11 +532,11 @@ static void match_profiles()
 
             for (key=0; key<56; ++key) {
                   kprob[key] = 0.0;
-                  key_score[s][key]=-1000000.0;
+                  key_score[key][s] = -1000000.0;
                   if (npc_or_tpc_profile==0 && (key<9 || (key>20 && key<37) || key>48))
                         continue;
                   kprob[key] = 1.0;
-                  key_score[s][key] = 0.0;
+                  key_score[key][s] = 0.0;
                   for (tpc=0; tpc<28; ++tpc) {
 
 	    /*
@@ -527,7 +544,7 @@ static void match_profiles()
 	       profile values represent total duration of each pc (in all other cases, they're just 1
 	       for present pc's and 0 for absent ones). Key-profiles have been normalized linearly
 	       around the average key-profile value. We normalize the input values similarly by taking
-	       (seg_prof[s][tpc]-segment[s].average_dur). Then we multiply each normalized KP value by
+	       (seg_prof[tpc][s]-segment[s].average_dur). Then we multiply each normalized KP value by
 	       the normalized input value, and sum these products; this gives us the numerator of the
 	       correlation expression (as commented below). We've summed the squares of the normalized
 	       key-profile value (major_sumsq and minor_sumsq above) and the normalized input values
@@ -549,30 +566,30 @@ static void match_profiles()
                               if(tpc<9 || tpc>20)
                                     continue;
                               /* calculate numerator */
-                              key_score[s][key] += key_profile[key][tpc] * (seg_prof[s][tpc]-segment[s].average_dur);
-                              /* printf("x-X=%6.3f, y-Y=%6.3f, product=%6.3f, new total=%6.3f\n", key_profile[key][tpc], seg_prof[s][tpc]-segment[s].average_dur, key_profile[key][tpc] * (seg_prof[s][tpc]-segment[s].average_dur), key_score[s][key]); */
+                              key_score[key][s] += key_profile[key][tpc] * (seg_prof[tpc][s]-segment[s].average_dur);
+                              /* printf("x-X=%6.3f, y-Y=%6.3f, product=%6.3f, new total=%6.3f\n", key_profile[key][tpc], seg_prof[tpc][s]-segment[s].average_dur, key_profile[key][tpc] * (seg_prof[tpc][s]-segment[s].average_dur), key_score[key][s]); */
                               }
 
                         if(scoring_mode==1 || scoring_mode==2)
-                              key_score[s][key] += (key_profile[key][tpc] * seg_prof[s][tpc]);
+                              key_score[key][s] += (key_profile[key][tpc] * seg_prof[tpc][s]);
 
                         if(scoring_mode == 3) {
                               /* if(tpc>11) continue; */
                               /* if(tpc<9 || tpc>20) continue; */
 
-                              if(seg_prof[s][tpc]==0) {
-                                    key_score[s][key] += log(1.000 - key_profile[key][tpc]);
-		                        /* printf("kp value = %6.3f: log(1-p) = %6.3f: score = %6.3f\n", key_profile[key][tpc], log(1.000 - key_profile[key][tpc]), key_score[s][key]); */
+                              if(seg_prof[tpc][s]==0) {
+                                    key_score[key][s] += log(1.000 - key_profile[key][tpc]);
+		                        /* printf("kp value = %6.3f: log(1-p) = %6.3f: score = %6.3f\n", key_profile[key][tpc], log(1.000 - key_profile[key][tpc]), key_score[key][s]); */
 		                        if(tpc>=9 && tpc<=20)
                                           kprob[key] *= (1.000 - key_profile[key][tpc]);
                                     }
                               else {
-                                    key_score[s][key] += log(key_profile[key][tpc]);
+                                    key_score[key][s] += log(key_profile[key][tpc]);
                                     if(tpc>=9 && tpc<=20)
                                           kprob[key] *= key_profile[key][tpc];
                                     }
 
-                              /* printf("kp value = %6.3f: log(p) = %6.3f: score = %6.3f\n", key_profile[key][tpc], log(key_profile[key][tpc]), key_score[s][key]); */
+                              /* printf("kp value = %6.3f: log(p) = %6.3f: score = %6.3f\n", key_profile[key][tpc], log(key_profile[key][tpc]), key_score[key][s]); */
                               }
                         }
 
@@ -580,26 +597,26 @@ static void match_profiles()
                         /* printf("sqrt(major_sumsq * input_sumsq) = %6.3f\n", sqrt(major_sumsq * input_sumsq)); */
                         /* calculate denominator */
                         if(key<28)
-                              key_score[s][key] = key_score[s][key] / sqrt(major_sumsq * input_sumsq);
+                              key_score[key][s] = key_score[key][s] / sqrt(major_sumsq * input_sumsq);
                         else
-                              key_score[s][key] = key_score[s][key] / sqrt(minor_sumsq * input_sumsq);
+                              key_score[key][s] = key_score[key][s] / sqrt(minor_sumsq * input_sumsq);
                         }
                   if(scoring_mode == 2) {
                         if(pc_tally[s] == 0)
-                              key_score[s][key] = 0;
+                              key_score[key][s] = 0;
                         else
-                              key_score[s][key] = key_score[s][key] / pc_tally[s];
+                              key_score[key][s] = key_score[key][s] / pc_tally[s];
                         }
 
-                  /* if(s==0) printf("local score for key %d on segment %d: %6.3f\n", key, s, key_score[s][key]); */
-                  if (key_score[s][key] > key_score[s][best_key])
+                  /* if(s==0) printf("local score for key %d on segment %d: %6.3f\n", key, s, key_score[key][s]); */
+                  if (key_score[key][s] > key_score[best_key][s])
                         best_key = key;
                   }
 
             if(verbosity>=2) {
                   printf("The best local key for segment %d at time %d is ", s, segment[s].start);
                   print_keyname(best_key);
-                  printf("with score %6.3f\n", key_score[s][best_key]);
+                  printf("with score %6.3f\n", key_score[best_key][s]);
                   }
 
             if(scoring_mode==3) {
@@ -626,19 +643,22 @@ static void match_profiles()
 //   choose_best_i
 //---------------------------------------------------------
 
-static void choose_best_i()
+static void choose_best_i(int seg)
       {
       for (int j = 0; j < 56; ++j) {
             int k = 0;
             for (int i = 0; i < 56; ++i) {
-                  if (analysis[seg][i][j] > analysis[seg][k][j])
+                  if (analysis[i][j][seg] > analysis[k][j][seg])
                         k=i;
                   }
             /* For a given segment seg, and the key j at that segment,
                the best previous key is k
             */
-            best[seg][j] = k;
-            /* printf("For segment-%d-key %d, best segment-%d-key is %d, with score %d\n", seg, j, seg-1, k, analysis[seg][k][j]); */
+            int size = best[j].size();
+            for (int i = size; i < seg+1; ++i)
+                  best[j].append(0);
+            best[j][seg] = k;
+            /* printf("For segment-%d-key %d, best segment-%d-key is %d, with score %d\n", seg, j, seg-1, k, analysis[k][j][seg]); */
             }
       }
 
@@ -646,7 +666,7 @@ static void choose_best_i()
 //   make_first_table
 //---------------------------------------------------------
 
-static void make_first_table()
+static void make_first_table(int seg)
       {
       int i, j, s;
       double seg_factor, mod_factor, nomod_factor;
@@ -664,21 +684,20 @@ static void make_first_table()
 
       for(s = 0; s <= segtotal; s++) {
             for(i = 0; i < 56; ++i) {
-                  for(j = 0; j < 56; ++j) {
-                        analysis[s][i][j]=-1000.0;
-                        }
+                  for(j = 0; j < 56; ++j)
+                        analysis[i][j].append(-1000.0);
                   }
             }
 
       for(i = 0; i < 56; ++i) {
             for(j = 0; j < 56; ++j) {
                   if (j != i)
-                        analysis[1][i][j] = ((key_score[0][i] + key_score[1][j]) * seg_factor) + mod_factor;
+                        analysis[i][j][1] = ((key_score[i][0] + key_score[j][1]) * seg_factor) + mod_factor;
                   else
-                        analysis[1][i][j] = ((key_score[0][i] + key_score[1][j]) * seg_factor) + nomod_factor;
+                        analysis[i][j][1] = ((key_score[i][0] + key_score[j][1]) * seg_factor) + nomod_factor;
                   }
             }
-      choose_best_i();
+      choose_best_i(seg);
       }
 
 //---------------------------------------------------------
@@ -703,19 +722,18 @@ static void make_tables()
             seg_factor = seglength;
             }
 
-      for (seg=2; seg<=segtotal; ++seg) {
-            int i, j, n;
+      for (int seg = 2; seg <= segtotal; ++seg) {
             /* printf("mod_factor = %6.6f; ; nomod_factor = %6.6f\n", mod_factor, nomod_factor);  */
-            for(j=0; j<56; ++j) {
-                  for(i=0; i<56; ++i) {
-                        n=best[seg-1][i];
+            for(int j = 0; j < 56; ++j) {
+                  for(int i = 0; i < 56; ++i) {
+                        int n = best[i][seg-1];
                         if (j != i)
-                              analysis[seg][i][j] = analysis[seg-1][n][i] + (key_score[seg][j] * seg_factor) + mod_factor;
+                              analysis[i][j][seg] = analysis[n][i][seg-1] + (key_score[j][seg] * seg_factor) + mod_factor;
                         else
-                              analysis[seg][i][j] = analysis[seg-1][n][i] + (key_score[seg][j] * seg_factor) + nomod_factor;
+                              analysis[i][j][seg] = analysis[n][i][seg-1] + (key_score[j][seg] * seg_factor) + nomod_factor;
                         }
                   }
-            choose_best_i();
+            choose_best_i(seg);
             }
       }
 
@@ -729,10 +747,10 @@ static void best_key_analysis()
       int s = segtotal;
       int k = 0;
       for(int j = 0; j < 56; ++j) {
-            n=best[s][j];
-            m=best[s][k];
+            n = best[j][s];
+            m = best[k][s];
 
-            if (analysis[s][n][j] < analysis[s][m][k] + .001 && analysis[s][n][j] > analysis[s][m][k] - .001 && j!=k) {
+            if (analysis[n][j][s] < analysis[m][k][s] + .001 && analysis[n][j][s] > analysis[m][k][s] - .001 && j!=k) {
                   tie1=j;
                   tie2=k;
                   }
@@ -740,12 +758,12 @@ static void best_key_analysis()
             if (verbosity>1 && !(npc_or_tpc_profile == 0 && (j<9 || (j>20 && j<37) || j>48))) {
                   printf("Final score for ");
                   print_keyname(j);
-                  /* printf("is %6.3f\n", analysis[s][n][j] * 1000 / (segment[segtotal].end - segment[0].start));   */
-                  printf("is %6.3f\n", analysis[s][n][j]);
+                  /* printf("is %6.3f\n", analysis[n][j][s] * 1000 / (segment[segtotal].end - segment[0].start));   */
+                  printf("is %6.3f\n", analysis[n][j][s]);
                   }
-            if (analysis[s][n][j] > analysis[s][m][k] + .000001) {
+            if (analysis[n][j][s] > analysis[m][k][s] + .000001) {
                   /* The .000001 is to fix a strange bug: sometimes it thinks the conditional is satisfied in the case of ties */
-                  k=j;   /* compute best key of final segment */
+                  k = j;   /* compute best key of final segment */
                   }
             }
 
@@ -759,16 +777,16 @@ static void best_key_analysis()
       // Here's where we take the best key choices and put them into final[s]
 
       for(s = segtotal; s >= 1; --s) {
-            final[s-1] = best[s][k];
+            final[s-1] = best[k][s];
             k = final[s-1];
             }
 
       if (verbosity >= 2) {
-            printf("Segment 0: key choice %d; total score %6.3f; segment score %6.3f\n", final[0], key_score[0][final[0]],
-               key_score[0][final[0]]);
-            printf("Segment 1: key choice %d; total score %6.3f; segment score %6.3f\n", final[1], analysis[1][final[0]][final[1]], analysis[1][final[0]][final[1]] - key_score[0][final[0]]);
+            printf("Segment 0: key choice %d; total score %6.3f; segment score %6.3f\n", final[0], key_score[final[0]][0],
+               key_score[final[0]][0]);
+            printf("Segment 1: key choice %d; total score %6.3f; segment score %6.3f\n", final[1], analysis[final[0]][final[1]][1], analysis[final[0]][final[1]][1] - key_score[final[0]][0]);
             for(s = 2; s <= segtotal; s++) {
-                  printf("Segment %d: key choice %d; total score %6.3f; segment score %6.3f\n", s, final[s], analysis[s][final[s-1]][final[s]], analysis[s][final[s-1]][final[s]] - analysis[s-1][final[s-2]][final[s-1]]);
+                  printf("Segment %d: key choice %d; total score %6.3f; segment score %6.3f\n", s, final[s], analysis[final[s-1]][final[s]][s], analysis[final[s-1]][final[s]][s] - analysis[final[s-2]][final[s-1]][s-1]);
                   }
             }
 
@@ -782,9 +800,9 @@ static void best_key_analysis()
       for (s = 0; s <= segtotal; ++s) {
             f = final[s];
             if (s > 0 && final[s] != final[s-1])
-                  final_score[s] = (key_score[s][f]) - (change_penalty / seglength);
+                  final_score[s] = (key_score[f][s]) - (change_penalty / seglength);
             else
-                  final_score[s]=key_score[s][f];
+                  final_score[s]=key_score[f][s];
             if (verbosity > 1) {
                   printf(" segment %d: %6.3f\n", s, final_score[s]);
                   }
@@ -813,9 +831,7 @@ static void best_key_analysis()
 
 int findKey(MidiTrack* mt, SigList* sigmap)
       {
-      int z=0, b=0, c=0, s=0, tpc_found, npc_found;
-
-      bool harmonic_input = false;
+      int tpc_found, npc_found;
 
       if ((scoring_mode == 0 || scoring_mode == 3) && npc_or_tpc_profile == 1) {
             printf("Error: scoring mode %d requires an npc profile\n", scoring_mode);
@@ -829,101 +845,56 @@ int findKey(MidiTrack* mt, SigList* sigmap)
 
       int lastTick = 0;
       const EventList el = mt->events();
-      foreach(MidiEvent* e, el) {
+      foreach (MidiEvent* e, el) {
             if (!(e->isNote()))
                   continue;
-            note[z].ontime   = e->tick;
-            note[z].offtime  = e->tick + e->len;
-            if (note[z].offtime > lastTick)
-                  lastTick = note[z].offtime;
-            note[z].duration = e->len;
+            SNote n;
+            n.ontime   = e->tick;
+            n.offtime  = e->tick + e->len;
+            if (n.offtime > lastTick)
+                  lastTick = n.offtime;
+            n.duration = e->len;
             int pitch        = e->dataA;
-            note[z].pitch    = pitch;
+            n.pitch    = pitch;
             /* For note input, generate TPC labels within the 9-to-20 range */
-            note[z].tpc      = ((((((pitch % 12) * 7) % 12) + 5) % 12) + 9);
-            ++z;
+            n.tpc      = ((((((pitch % 12) * 7) % 12) + 5) % 12) + 9);
+            note.append(n);
             }
       npc_found = 1;
 
-      // create one segemnt for every measure
+      // create one segment for every measure
       for (int i = 0;; ++i) {
             int tick = sigmap->bar2tick(i, 0, 0);
             if (tick > lastTick)
                   break;
-            beat[b].time  = tick;
-            beat[b].level = 5;      // fake
-            ++b;
+            SBeat b;
+            b.time = tick;
+            sbeat.append(b);
             }
 
-#if 0
-      "TCPNote %d %d %d %d %10s", &note[z].ontime, &note[z].offtime, &note[z].pitch, &note[z].tpc
-            tpc_found = 1;
-            ++z
-            note[z].duration = note[z].offtime - note[z].ontime;
+      firstbeat       = sbeat.first().time;
+      final_timepoint = sbeat.last().time;
+      num_sbeats      = sbeat.size();
 
-      while (fgets(line, sizeof(line), in_file)) {     // read in TPC_Notes, Chords, and Beats
-            if (strcmp (noteword, "TPCNote") == 0) {
-                  if (sscanf (line, "%s %d %d %d %d %10s", noteword, &note[z].ontime, &note[z].offtime, &note[z].pitch,
-                     &note[z].tpc, junk) != 5)
-                        bad_input(line_no);
-                  note[z].duration = note[z].offtime - note[z].ontime;
+      numnotes   = note.size();
+      numchords  = 0;
 
-                  if (npc_or_tpc_profile==1)
-                        note[z].tpc = note[z].tpc + 12;             /* C = 14 for present purposes */
-                  else
-                        /* Use this line instead to shift all TPC's into
-				   one cycle of the LOF: 9 to 20 inclusive */
-                        note[z].tpc = ((note[z].tpc+3+120) % 12) + 9;
-                  tpc_found = 1;
-                  ++z;
-                  }
-            else if (strcmp (noteword, "Note") == 0) {
-                  if (sscanf (line, "%s %d %d %d %10s", noteword, &note[z].ontime, &note[z].offtime, &pitch, junk) != 4)
-                        bad_input(line_no);
-
-                  note[z].tpc = ((((((pitch%12) * 7) % 12) + 5) % 12) + 9);
-                        /* For note input, generate TPC labels
-				   within the 9-to-20 range */
-                  note[z].duration = note[z].offtime - note[z].ontime;
-                  npc_found = 1;
-                  ++z;
-                  }
-            else if (strcmp (noteword, "Beat") == 0) {
-                  if (sscanf (line, "%s %d %d %10s", noteword, &beat[b].time, &beat[b].level, junk) != 3)
-                        bad_input(line_no);
-                  b++;
-                  }
-            else
-                  bad_input(line_no);
-            }
-#endif
-
-      firstbeat       = beat[0].time;
-      final_timepoint = beat[b-1].time;
-
-      numnotes  = z;
-      numchords = c;
-      numbeats  = b;
-
-      if (z == 0) {
+      if (note.isEmpty()) {
             printf("Error: No notes in input.\n");
-            exit(1);
+            return 0;
             }
-      if (c > 0)
-            harmonic_input = true;
 
-      for (b = 0; b < numbeats; b++) {    /* create sbeats - beats of segment level or higher */
-            if (beat[b].level >= segment_beat_level) {
-                  sbeat[s].time = beat[b].time;
-                  s++;
-                  }
-            }
-      num_sbeats = s;
-      seglength  = (sbeat[1].time - sbeat[0].time) / 1000.0; /* define segment length as the length of the first segment (in secs) */
+      seglength  = (sbeat[1].time - sbeat[0].time) / 1000.0; /* define segment length as the length of the first segment */
       if (verbosity > 1)
             printf("seglength = %3.3f\n", seglength);
 
       create_segments();
+      for (int i = 0; i < segtotal+1; ++i) {
+            final.append(0);
+            pc_tally.append(0);
+            final_score.append(0.0);
+            }
+
       fill_segments();
       count_segment_notes();
       if (scoring_mode==0)
@@ -934,7 +905,7 @@ int findKey(MidiTrack* mt, SigList* sigmap)
             generate_npc_profiles();
       match_profiles();
       if (segtotal > 0) {
-            make_first_table();
+            make_first_table(1);
             make_tables();
             best_key_analysis();
             }
@@ -943,7 +914,7 @@ int findKey(MidiTrack* mt, SigList* sigmap)
       for (int i = 0; i < 27; ++i)
             keys.append(0);
       for (int i = 0; i <= segtotal; ++i)
-            keys[final[i] % 27]++;
+            keys[final[i] % 27]++;        // fold major/minor
       int xkey   = 0;
       int xcount = 0;
       for (int i = 0; i < 27; ++i) {
@@ -952,6 +923,30 @@ int findKey(MidiTrack* mt, SigList* sigmap)
                   xkey   = i;
                   }
             }
-      return xkey - 14;
+      xkey -= 14;
+      if (xkey < -7 || xkey > 7) {
+            printf("illegal key %d found\n", xkey);
+            xkey = 0;
+            }
+
+      //
+      // clear all arrays
+      //
+      note.clear();
+      segment.clear();
+      sbeat.clear();
+      for (int i = 0; i < 28; ++i)
+            seg_prof[i].clear();
+      for (int i = 0; i < 56; ++i) {
+            key_score[i].clear();
+            best[i].clear();
+            for (int k = 0; k < 56; ++k)
+                  analysis[i][k].clear();
+            }
+      final.clear();
+      pc_tally.clear();
+      final_score.clear();
+
+      return xkey;
       }
 

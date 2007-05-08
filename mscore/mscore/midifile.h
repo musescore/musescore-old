@@ -21,6 +21,8 @@
 #ifndef __MIDIFILE_H__
 #define __MIDIFILE_H__
 
+#include "sig.h"
+
 const int MIDI_CHANNEL = 16;
 
 enum {
@@ -180,6 +182,8 @@ class MidiTrack {
       void changeDivision(int newDivision);
       void move(int ticks);
       bool isDrumTrack() const;
+      void extractTimeSig(SigList* sig);
+      void quantize(int startTick, int endTick, EventList* dst);
       };
 
 typedef QList<MidiTrack*> MidiTrackList;
@@ -197,6 +201,7 @@ enum MidiType {
 //---------------------------------------------------------
 
 class MidiFile {
+      SigList _siglist;
       QIODevice* fp;
       MidiTrackList _tracks;
       int timesig_z, timesig_n;
@@ -225,7 +230,7 @@ class MidiFile {
       int readShort();
       int readLong();
       MidiEvent* readEvent();
-      bool readTrack(bool);
+      bool readTrack();
 
    public:
       MidiFile();
@@ -244,6 +249,7 @@ class MidiFile {
       void sortTracks();
       void separateChannel();
       void move(int ticks);
+      SigList siglist() const { return _siglist; }
       };
 
 #define XCHG_SHORT(x) ((((x)&0xFF)<<8) | (((x)>>8)&0xFF))

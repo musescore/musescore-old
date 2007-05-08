@@ -21,31 +21,6 @@
 #include "midifile.h"
 
 //---------------------------------------------------------
-//   quantizeLen
-//---------------------------------------------------------
-
-static int quantizeLen(int division, int len)
-      {
-      if (len < division/12)
-            len = division/8;
-      else if (len < division/6)
-            len = division/4;
-      else if (len < division/3)
-            len = division/2;
-      else if (len < division+division/2)
-            len = division;
-      else if (len < division * 3)
-            len = division*2;
-      else if (len < division * 6)
-            len = division * 4;
-      else if (len < division * 12)
-            len = division * 8;
-      else
-            len = division * 16;
-      return len;
-      }
-
-//---------------------------------------------------------
 //   MidiEvent
 //---------------------------------------------------------
 
@@ -191,6 +166,7 @@ bool MidiFile::read(QIODevice* in)
      {
       fp = in;
       _tracks.clear();
+      _siglist.clear();
 
       char tmp[4];
 
@@ -201,9 +177,9 @@ bool MidiFile::read(QIODevice* in)
             return true;
             }
 
-      _format  = readShort();
+      _format     = readShort();
       int ntracks = readShort();
-      _division = readShort();
+      _division   = readShort();
 
       if (_division < 0)
             _division = (-(_division/256)) * (_division & 0xff);
@@ -212,17 +188,16 @@ bool MidiFile::read(QIODevice* in)
 
       switch (_format) {
             case 0:
-                  if (readTrack(true))
+                  if (readTrack())
                         return true;
                   break;
             case 1:
                   for (int i = 0; i < ntracks; i++) {
-                        if (readTrack(false))
+                        if (readTrack())
                               return true;
                         }
                   break;
             default:
-            case 2:
                   printf("midi fileformat %d not implemented!\n", _format);
                   return true;
             }
@@ -234,7 +209,7 @@ bool MidiFile::read(QIODevice* in)
 //    return true on error
 //---------------------------------------------------------
 
-bool MidiFile::readTrack(bool)
+bool MidiFile::readTrack()
       {
       char tmp[4];
       read(tmp, 4);
@@ -642,13 +617,103 @@ bool MidiTrack::empty() const
       }
 
 //---------------------------------------------------------
+//   extractTimeSig
+//---------------------------------------------------------
+
+void MidiTrack::extractTimeSig(SigList* sigmap)
+      {
+      EventList el;
+
+      foreach (MidiEvent* e, _events) {
+            if (e->type == ME_META && e->dataA == META_TIME_SIGNATURE) {
+                  int z  = e->data[0];
+                  int nn = e->data[1];
+                  int n  = 1;
+                  for (int i = 0; i < nn; ++i)
+                        n *= 2;
+                  sigmap->add(e->tick, z, n);
+                  }
+            else
+                  el.insert(e->tick, e);
+            }
+      _events = el;
+      }
+
+//---------------------------------------------------------
 //   process1
+//    merge note on/off events
+//    extract time signatures and build siglist
 //---------------------------------------------------------
 
 void MidiFile::process1()
       {
-      foreach (MidiTrack* t, _tracks)
+      foreach (MidiTrack* t, _tracks) {
             t->mergeNoteOnOff();
+            t->extractTimeSig(&_siglist);
+            }
+      }
+
+//---------------------------------------------------------
+//   quantizeLen
+//---------------------------------------------------------
+
+static int quantizeLen(int, int len, int raster)
+      {
+      int rl = (len / raster) * raster;
+      rl /= 2;
+      if (rl == 0)
+            rl = 1;
+      rl = ((len + rl - 1) / rl) * rl;
+      return rl;
+      }
+
+//---------------------------------------------------------
+//   quantize
+//    process one segment (measure)
+//---------------------------------------------------------
+
+void MidiTrack::quantize(int startTick, int endTick, EventList* dst)
+      {
+      int division = mf->division();
+
+      int mintick = division * 64;
+      for (iEvent i = _events.lowerBound(startTick); i != _events.lowerBound(endTick); ++i) {
+            MidiEvent* e = *i;
+            if (e->isNote() && (e->len < mintick))
+                  mintick = e->len;
+            }
+      if (mintick <= division / 16)        // minimum duration is 1/64
+            mintick = division / 16;
+      else if (mintick <= division / 8)
+            mintick = division / 8;
+      else if (mintick <= division / 4)
+            mintick = division / 4;
+      else if (mintick <= division / 2)
+            mintick = division / 2;
+      else if (mintick <= division)
+            mintick = division;
+      else if (mintick <= division * 2)
+            mintick = division * 2;
+      else if (mintick <= division * 4)
+            mintick = division * 4;
+      else if (mintick <= division * 8)
+            mintick = division * 8;
+      int raster;
+      if (mintick > division)
+            raster = division;
+      else
+            raster = mintick;
+
+      for (iEvent i = _events.lowerBound(startTick); i != _events.lowerBound(endTick); ++i) {
+            MidiEvent* e = *i;
+            if (e->isNote()) {
+	            int len  = quantizeLen(division, e->len, raster);
+      	      int tick = (e->tick / raster) * raster;
+	            e->tick = tick;
+      	      e->len  = len;
+                  }
+            dst->insert(e->tick, e);
+            }
       }
 
 //---------------------------------------------------------
@@ -659,23 +724,28 @@ void MidiFile::process1()
 
 void MidiTrack::cleanup()
 	{
-//      const int tickRaster = mf->division()/2; 	// 1/8 quantize
-      const int tickRaster = mf->division()/4; 	// 1/16 quantize
       EventList dl;
 
       //
       //	quantize
       //
-      foreach(MidiEvent* e, _events) {
-            if (e->isNote()) {
-	            int len  = quantizeLen(mf->division(), e->len);
-      	      int tick = (e->tick / tickRaster) * tickRaster;
-
-	            e->tick = tick;
-      	      e->len  = len;
-                  }
-		dl.insert(e->tick, e);
+      int lastTick = 0;
+      foreach (MidiEvent* e, _events) {
+            if (!(e->isNote()))
+                  continue;
+            int offtime  = e->tick + e->len;
+            if (offtime > lastTick)
+                  lastTick = offtime;
             }
+      int startTick = 0;
+      for (int i = 1;; ++i) {
+            int endTick = mf->siglist().bar2tick(i, 0, 0);
+            if (endTick > lastTick)
+                  break;
+            quantize(startTick, endTick, &dl);
+            startTick = endTick;
+            }
+
       //
       //
       //
@@ -714,6 +784,8 @@ void MidiTrack::changeDivision(int newDivision)
       foreach(MidiEvent* e, _events) {
             int tick = (e->tick * newDivision + division/2) / division;
             e->tick = tick;
+            if (e->isNote())
+                  e->len = (e->len * newDivision + division/2) / division;
 		dl.insert(tick, e);
             }
       _events = dl;

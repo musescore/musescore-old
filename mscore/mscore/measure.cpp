@@ -783,6 +783,11 @@ Segment* Measure::findSegment(Segment::SegmentType st, int t)
             if (ss->subtype() == st)
                   return ss;
             }
+#if 0
+      printf("segment at %d type %d not found\n", t, st);
+      for (Segment* s = first(); s; s = s->next())
+            printf("  %d: %d\n", s->tick(), s->subtype());
+#endif
       return 0;
       }
 
