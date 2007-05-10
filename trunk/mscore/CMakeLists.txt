@@ -19,7 +19,9 @@
 #=============================================================================
 
 project(mscore)
-CMAKE_MINIMUM_REQUIRED(VERSION 2.4.1)
+CMAKE_MINIMUM_REQUIRED(VERSION 2.4.6)
+
+# cmake 2.4.3 does not install all.h and does not link against qtsvg
 
 # support for mingw cross compiling
 #  (incomplete, does not work now)

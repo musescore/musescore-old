@@ -121,91 +121,24 @@ add_executable ( mscore
       ${PROJECT_BINARY_DIR}/all.h
       ${PROJECT_BINARY_DIR}/all.h.pch
 
-      actions.cpp
-      accidental.cpp
-      alsa.cpp
-      barline.cpp
-      beam.cpp
-      bracket.cpp
-      canvas.cpp
-      chord.cpp
-      chordrest.cpp
-      clef.cpp
-      cmd.cpp
-      dynamics.cpp
-      edit.cpp
-      editinstrument.cpp
-      editstyle.cpp
-      edittempo.cpp
-      element.cpp
-      exportxml.cpp
-      file.cpp
-      fluid.cpp
-      hairpin.cpp
-      icons.cpp
-      importxml.cpp
-      instrdialog.cpp
-      jackaudio.cpp
-      key.cpp
-      keyb.cpp
-      layout.cpp
-      layoutbreak.cpp
-      line.cpp
-      listedit.cpp
-      measure.cpp
-      menus.cpp
-      midi.cpp
-      midifile.cpp
-      mscore.cpp
-      mtime.cpp
-      navigate.cpp
-      navigator.cpp
-      note.cpp
-      ottava.cpp
-      pad.cpp
-      page.cpp
-      pagesettings.cpp
-      palette.cpp
-      part.cpp
-      partedit.cpp
-      pedal.cpp
-      playpanel.cpp
-      preferences.cpp
-      irregular.cpp
-      preview.cpp
-      rest.cpp
-      score.cpp
-      segment.cpp
-      select.cpp
-      seq.cpp
-      sig.cpp
-      slur.cpp
-      staff.cpp
-      style.cpp
-      sym.cpp sym.h
-      symbol.cpp symbol.h
-      hook.cpp hook.h
-      system.cpp
-      tempo.cpp
-      text.cpp
-      textpalette.cpp
-      textstyle.cpp
-      timedialog.cpp
-      symboldialog.cpp
-      trill.cpp
-      tuplet.cpp
-      shortcutcapturedialog.cpp
-      undo.cpp
-      utils.cpp
-      xml.cpp
-      timesig.cpp
-      lyrics.cpp
-      bsp.cpp
-      viewer.cpp
-      volta.cpp
-      simplebutton.cpp
-      image.cpp
-      keyfinder.cpp
+      actions.cpp accidental.cpp alsa.cpp barline.cpp beam.cpp
+      bracket.cpp canvas.cpp chord.cpp chordrest.cpp clef.cpp
+      cmd.cpp dynamics.cpp edit.cpp editinstrument.cpp editstyle.cpp
+      edittempo.cpp element.cpp exportxml.cpp file.cpp fluid.cpp
+      hairpin.cpp icons.cpp importxml.cpp instrdialog.cpp jackaudio.cpp
+      key.cpp keyb.cpp layout.cpp layoutbreak.cpp line.cpp listedit.cpp
+      measure.cpp menus.cpp midifile.cpp midi.cpp mscore.cpp
+      mtime.cpp navigate.cpp navigator.cpp note.cpp ottava.cpp
+      pad.cpp page.cpp pagesettings.cpp palette.cpp part.cpp
+      partedit.cpp pedal.cpp playpanel.cpp preferences.cpp irregular.cpp
+      preview.cpp rest.cpp score.cpp segment.cpp select.cpp
+      seq.cpp sig.cpp slur.cpp staff.cpp style.cpp
+      sym.cpp sym.h symbol.cpp symbol.h hook.cpp hook.h
+      system.cpp tempo.cpp text.cpp textpalette.cpp textstyle.cpp
+      timedialog.cpp symboldialog.cpp trill.cpp tuplet.cpp shortcutcapturedialog.cpp
+      undo.cpp utils.cpp xml.cpp timesig.cpp lyrics.cpp bsp.cpp
+      viewer.cpp volta.cpp simplebutton.cpp image.cpp keyfinder.cpp
+      pitchspelling.cpp
       )
 
 if (CROSS_MINGW)

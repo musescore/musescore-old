@@ -19,26 +19,124 @@
 //=============================================================================
 
 #include "midifile.h"
+#include "xml.h"
+
+#define BE_SHORT(x) ((((x)&0xFF)<<8) | (((x)>>8)&0xFF))
+#ifdef __i486__
+#define BE_LONG(x) \
+     ({ int __value; \
+        asm ("bswap %1; movl %1,%0" : "=g" (__value) : "r" (x)); \
+       __value; })
+#else
+#define BE_LONG(x) ((((x)&0xFF)<<24) | \
+		      (((x)&0xFF00)<<8) | \
+		      (((x)&0xFF0000)>>8) | \
+		      (((x)>>24)&0xFF))
+#endif
 
 //---------------------------------------------------------
-//   MidiEvent
+//   dump
 //---------------------------------------------------------
 
-MidiEvent::MidiEvent()
+void MidiNote::dump(Xml& xml) const
       {
-      data    = 0;
-      dataLen = 0;
-      len     = 0;
-      tick    = 0;
-      channel = -1;
-      port    = -1;
+      xml.tagE(QString("Note  tick=\"%1\" channel=\"%2\" len=\"%3\" pitch=\"%4\" velo=\"%5\"")
+         .arg(ontime()).arg(channel()).arg(duration()).arg(pitch()).arg(velo()));
       }
 
-MidiEvent::~MidiEvent()
+void MidiNoteOn::dump(Xml& xml) const
       {
-      if (data)
-            delete data;
+      xml.tagE(QString("NoteOn  tick=\"%1\" channel=\"%2\" pitch=\"%3\" velo=\"%4\"")
+            .arg(ontime()).arg(channel()).arg(pitch()).arg(velo()));
       }
+
+void MidiNoteOff::dump(Xml& xml) const
+      {
+      xml.tagE(QString("NoteOff  tick=\"%1\" channel=\"%2\" pitch=\"%3\" velo=\"%4\"")
+            .arg(ontime()).arg(channel()).arg(pitch()).arg(velo()));
+      }
+
+void MidiController::dump(Xml& xml) const
+      {
+      xml.tagE(QString("Controller tick=\"%1\" channel=\"%2\"").arg(ontime()).arg(channel()));
+      }
+
+void MidiSysex::dump(Xml& xml) const
+      {
+      xml.tagE(QString("Sysex tick=\"%1\"").arg(ontime()));
+      }
+
+void MidiMeta::dump(Xml& xml) const
+      {
+      switch(metaType()) {
+            case META_TRACK_NAME:
+                  xml.tag("TrackName",  QString("tick=\"%1\"").arg(ontime()), QString((char*)(data())));
+                  break;
+            case META_LYRIC:
+                  xml.tag("Lyric",  QString("tick=\"%1\"").arg(ontime()), QString((char*)(data())));
+                  break;
+            case META_KEY_SIGNATURE:
+                  {
+                  const char* keyTable[] = {
+                        "Ces", "Ges", "Des", "As", "Es", "Bes", "F",
+                        "C",
+                        "G", "D", "A", "E", "B", "Fis", "Cis"
+                        };
+                  int key = (char)(_data[0]) + 7;
+                  if (key < 0 || key > 14) {
+                        printf("bad key signature %d\n", key);
+                        key = 0;
+                        }
+                  QString sex(_data[1] ? "Minor" : "Major");
+                  QString keyName(keyTable[key]);
+                  xml.tag("Key",  QString("tick=\"%1\"").arg(ontime()), QString("%1 %2").arg(keyName).arg(sex));
+                  }
+                  break;
+            case META_TIME_SIGNATURE:
+                  xml.tagE(QString("TimeSig tick=\"%1\" num=\"%2\" denom=\"%3\" metro=\"%4\" quarter=\"%5\"")
+                     .arg(ontime())
+                     .arg(int(_data[0]))
+                     .arg(int(_data[1]))
+                     .arg(int(_data[2]))
+                     .arg(int(_data[3])));
+                  break;
+
+            case META_TEMPO:
+            default:
+                  xml.tagE(QString("Meta tick=\"%1\" type=\"%2\"").arg(ontime()).arg(int(metaType())));
+                  break;
+            }
+      }
+
+#if 0
+//---------------------------------------------------------
+//   dumpEvent
+//---------------------------------------------------------
+
+void dumpEvent(Xml& xml, const MidiEvent* e)
+      {
+      switch (e->type()) {
+            case ME_POLYAFTER:
+                  xml.tagE(QString("PolyAftertouch tick=\"%1\"").arg(e->ontime));
+                  break;
+            case ME_PROGRAM:
+                  xml.tagE(QString("ProgramChange tick=\"%1\" channel=\"%2\"").arg(e->ontime).arg(e->channel));
+                  break;
+            case ME_AFTERTOUCH:
+                  xml.tagE(QString("ChannelAftertouch tick=\"%1\"").arg(e->ontime));
+                  break;
+            case ME_PITCHBEND:
+                  xml.tagE(QString("Pitchbend tick=\"%1\"").arg(e->ontime));
+                  break;
+            case ME_SYSEX:
+                  xml.tagE(QString("Sysex tick=\"%1\"").arg(e->ontime));
+                  break;
+            default:
+                  xml.tagE(QString("Event tick=\"%1\" type=\"%2\"").arg(e->ontime).arg(e->type));
+                  break;
+            }
+      }
+#endif
 
 //---------------------------------------------------------
 //   MidiFile
@@ -87,9 +185,12 @@ bool MidiFile::writeTrack(const MidiTrack* t)
       int tick = 0;
       const EventList events = t->events();
       for (ciEvent i = events.begin(); i != events.end(); ++i) {
-            int ntick = i.key();
+            int ntick     = i.key();
+            MidiEvent* ev = i.value();
             putvl(ntick - tick);    // write tick delta
-            writeEvent(t->outChannel(), i.value());
+            if (ev->isChannelEvent())
+                  ((MidiChannelEvent*)ev)->setChannel(t->outChannel());
+            ev->write(this);
             tick = ntick;
             }
 
@@ -110,15 +211,46 @@ bool MidiFile::writeTrack(const MidiTrack* t)
       }
 
 //---------------------------------------------------------
-//   writeEvent
+//   write
 //---------------------------------------------------------
 
-void MidiFile::writeEvent(int c, const MidiEvent* event)
+void MidiNoteOn::write(MidiFile* mf) const
       {
-      int nstat = event->type;
+      mf->writeStatus(ME_NOTEON, channel());
+      mf->put(_pitch);
+      mf->put(_velo);
+      }
 
-      // we dont save meta data into smf type 0 files:
+void MidiNoteOff::write(MidiFile* mf) const
+      {
+      mf->writeStatus(ME_NOTEOFF, channel());
+      mf->put(_pitch);
+      mf->put(_velo);
+      }
 
+void MidiController::write(MidiFile* mf) const
+      {
+      }
+
+void MidiMeta::write(MidiFile* mf) const
+      {
+      }
+
+void MidiSysex::write(MidiFile* mf) const
+      {
+      mf->put(0xf0);
+      mf->putvl(len() + 1);  // including 0xf7
+      mf->write(data(), len());
+      mf->put(0xf7);
+      mf->resetRunningStatus();
+      }
+
+//---------------------------------------------------------
+//   writeStatus
+//---------------------------------------------------------
+
+void MidiFile::writeStatus(int nstat, int c)
+      {
       nstat |= c;
       //
       //  running status; except for Sysex- and Meta Events
@@ -127,6 +259,8 @@ void MidiFile::writeEvent(int c, const MidiEvent* event)
             status = nstat;
             put(nstat);
             }
+      }
+#if 0
       switch (event->type) {
             case ME_NOTEOFF:
             case ME_NOTEON:
@@ -142,20 +276,14 @@ void MidiFile::writeEvent(int c, const MidiEvent* event)
                   break;
             case ME_SYSEX:
                   put(0xf0);
-                  putvl(event->len + 1);  // including 0xf7
-                  write(event->data, event->len);
+                  putvl(event->duration + 1);  // including 0xf7
+                  write(event->data, event->dataLen);
                   put(0xf7);
                   status = -1;      // invalidate running status
                   break;
-            case ME_META:
-                  put(0xff);
-                  put(event->dataA);
-                  putvl(event->len);
-                  write(event->data, event->len);
-                  status = -1;
-                  break;
             }
       }
+#endif
 
 //---------------------------------------------------------
 //   readMidi
@@ -235,16 +363,15 @@ bool MidiFile::readTrack()
                   return true;
 
             // check for end of track:
-            if ((event->type == ME_META)) {
-                  int mt = event->dataA;
+            if ((event->type() == ME_META)) {
+                  int mt = ((MidiMeta*)event)->metaType();
                   if (mt == 0x2f)         // end of track
                         break;
                   track->insert(event);
                   continue;
                   }
-            if (event->channel == -1) {
-                  printf("importMidi: event type 0x%02x not implemented\n", event->type);
-                  // track->insert(event);
+            if (!event->isChannelEvent()) {
+                  printf("importMidi: event type 0x%02x not implemented\n", event->type());
                   delete event;
                   continue;
                   }
@@ -427,124 +554,142 @@ MidiEvent* MidiFile::readEvent()
                   break;
             }
 
-      MidiEvent* event = new MidiEvent;
-      event->tick = click;    // (click * division + fileDivision/2) / fileDivision;
+      MidiEvent* event;
+      int ontime = click;
+      unsigned char* data;
+      int dataLen;
 
       if (me == 0xf0 || me == 0xf7) {
             status  = -1;                  // no running status
             int len = getvl();
             if (len == -1) {
                   printf("readEvent: error 3\n");
-                  delete event;
                   return 0;
                   }
-            event->data    = new unsigned char[len];
-            event->dataLen = len;
-            event->type    = ME_SYSEX;
-            if (read(event->data, len)) {
+            data    = new unsigned char[len];
+            dataLen = len;
+            if (read(data, len)) {
                   printf("readEvent: error 4\n");
-                  delete event;
+                  delete data;
                   return 0;
                   }
-            if (event->data[len-1] != 0xf7) {
+            if (data[len-1] != 0xf7) {
                   printf("SYSEX does not end with 0xf7!\n");
                   // more to come?
                   }
             else
-                  event->dataLen--;      // don't count 0xf7
+                  dataLen--;      // don't count 0xf7
+            return new MidiSysex(ontime, dataLen, data);
             }
-      else if (me == ME_META) {
+
+      if (me == ME_META) {
             status = -1;                  // no running status
             uchar type;
             if (read(&type, 1)) {
                   printf("readEvent: error 5\n");
-                  delete event;
                   return 0;
                   }
             int len = getvl();                // read len
             if (len == -1) {
                   printf("readEvent: error 6\n");
-                  delete event;
                   return 0;
                   }
-            event->type    = ME_META;
-            event->dataLen = len;
-            event->data    = new unsigned char[len+1];
-            event->dataA   = type;
-
+            dataLen = len;
+            data    = new unsigned char[len+1];
             if (len) {
-                  if (read(event->data, len)) {
+                  if (read(data, len)) {
                         printf("readEvent: error 7\n");
-                        delete event;
+                        delete data;
                         return 0;
                         }
                   }
-            event->data[len] = 0;
+            data[len] = 0;
+            return new MidiMeta(ontime, type, dataLen, data);
+            }
+
+      if (me & 0x80) {                     // status byte
+            status   = me;
+            sstatus  = status;
+            if (read(&a, 1)) {
+                  printf("readEvent: error 9\n");
+                  delete event;
+                  return 0;
+                  }
             }
       else {
-            if (me & 0x80) {                     // status byte
-                  status   = me;
-                  sstatus  = status;
-                  if (read(&a, 1)) {
-                        printf("readEvent: error 9\n");
+            if (status == -1) {
+                  printf("readEvent: no running status, read 0x%02x\n", me);
+                  printf("sstatus ist 0x%02x\n", sstatus);
+                  if (sstatus == -1) {
                         delete event;
                         return 0;
                         }
+                  status = sstatus;
                   }
-            else {
-                  if (status == -1) {
-                        printf("readEvent: no running status, read 0x%02x\n", me);
-                        printf("sstatus ist 0x%02x\n", sstatus);
-                        if (sstatus == -1) {
-                              delete event;
-                              return 0;
-                              }
-                        status = sstatus;
-                        }
-                  a = me;
-                  }
-            event->channel = status & 0x0f;
-            event->type    = status & 0xf0;
-            event->dataA   = a & 0x7f;
-            b = 0;
-            switch (status & 0xf0) {
-                  case 0x80:        // note off
-                  case 0x90:        // note on
-                  case 0xa0:        // polyphone aftertouch
-                  case 0xb0:        // controller
-                  case 0xe0:        // pitch bend
-                        if (read(&b, 1)) {
-                              printf("readEvent: error 15\n");
-                              delete event;
-                              return 0;
-                              }
-                        if ((status & 0xf0) == 0xe0)
-                              event->dataA = (((((b & 0x80) ? 0 : b) << 7) + a) - 8192);
-                        else
-                              event->dataB = (b & 0x80 ? 0 : b);
-                        break;
-                  case 0xc0:        // Program Change
-                  case 0xd0:        // Channel Aftertouch
-                        break;
-                  default:          // f1 f2 f3 f4 f5 f6 f7 f8 f9
-                        printf("BAD STATUS 0x%02x, me 0x%02x\n", status, me);
-                        delete event;
+            a = me;
+            }
+      int channel = status & 0x0f;
+      b           = 0;
+      switch (status & 0xf0) {
+            case 0x80:        // note off
+                  if (read(&b, 1)) {
+                        printf("readEvent: error 15\n");
                         return 0;
-                  }
-
-            if ((a & 0x80) || (b & 0x80)) {
-                  printf("8't bit in data set(%02x %02x): tick %d read 0x%02x  status:0x%02x\n",
-                    a & 0xff, b & 0xff, click, me, status);
-                  printf("readEvent: error 16\n");
-                  if (b & 0x80) {
-                        // Try to fix: interpret as channel byte
-                        status   = b;
-                        sstatus  = status;
-                        return event;
                         }
-                  delete event;
+                  event = new MidiNoteOff(ontime, channel, a & 0x7f, b & 0x7f);
+                  break;
+            case 0x90:        // note on
+                  if (read(&b, 1)) {
+                        printf("readEvent: error 15\n");
+                        return 0;
+                        }
+                  event = new MidiNoteOn(ontime, channel, a & 0x7f, b & 0x7f);
+                  break;
+            case 0xa0:        // polyphone aftertouch
+                  if (read(&b, 1)) {
+                        printf("readEvent: error 15\n");
+                        return 0;
+                        }
+                  // event = new MidiNoteOff(ontime, channel, a, b);
+                  break;
+            case 0xb0:        // controller
+                  if (read(&b, 1)) {
+                        printf("readEvent: error 15\n");
+                        return 0;
+                        }
+                  event = new MidiController(ontime, channel, a & 0x7f, b & 0x7f);
+                  break;
+            case 0xe0:        // pitch bend
+                  if (read(&b, 1)) {
+                        printf("readEvent: error 15\n");
+                        return 0;
+                        }
+                  event = new MidiController(ontime, channel, CTRL_PITCH,
+                     ((((b & 0x80) ? 0 : b) << 7) + a) - 8192);
+                  break;
+            case 0xc0:        // Program Change
+                  event = new MidiController(ontime, channel, CTRL_PROGRAM, a & 0x7f);
+                  break;
+            case 0xd0:        // Channel Aftertouch
+                  event = new MidiController(ontime, channel, CTRL_PRESS, a & 0x7f);
+                  break;
+            default:          // f1 f2 f3 f4 f5 f6 f7 f8 f9
+                  printf("BAD STATUS 0x%02x, me 0x%02x\n", status, me);
                   return 0;
+            }
+
+      if ((a & 0x80) || (b & 0x80)) {
+            printf("8't bit in data set(%02x %02x): tick %d read 0x%02x  status:0x%02x\n",
+              a & 0xff, b & 0xff, click, me, status);
+            printf("readEvent: error 16\n");
+            if (b & 0x80) {
+                  // Try to fix: interpret as channel byte
+                  status   = b;
+                  sstatus  = status;
+                  return event;
                   }
+            delete event;
+            return 0;
             }
       return event;
       }
@@ -552,58 +697,64 @@ MidiEvent* MidiFile::readEvent()
 //---------------------------------------------------------
 //   mergeNoteOnOff
 //    find matching note on / note off events and merge
-//    into a note event with tick len
+//    into a note event with tick duration
 //---------------------------------------------------------
 
 void MidiTrack::mergeNoteOnOff()
       {
-      foreach (MidiEvent* event, _events)      // invalidate all note len
-            if (event->isNote())
-                  event->len = -1;
+      EventList el;
 
-      foreach (MidiEvent* ev, _events) {
-            if (!ev->isNote())
-                  continue;
-            int tick = ev->tick;
-            if (ev->isNoteOff()) {
-                  // printf("NOTE OFF without Note ON at tick %d\n", tick);
+      for (iEvent i = _events.begin(); i != _events.end();) {
+            MidiEvent* ev = i.value();
+            if (ev->type() != ME_NOTEON && ev->type() != ME_NOTEOFF) {
+                  el.insert(ev->ontime(), ev);
+                  i = _events.erase(i);
                   continue;
                   }
+            int tick = ev->ontime();
+            if (ev->type() == ME_NOTEOFF || ((MidiNoteOn*)ev)->velo() == 0) {
+                  printf("-extra note off at %d\n", tick);
+                  i = _events.erase(i);
+                  delete ev;
+                  continue;
+                  }
+            MidiNoteOn* no = (MidiNoteOn*)ev;
+            MidiNote* note = new MidiNote;
+            note->setOntime(tick);
+            note->setPitch(no->pitch());
+            note->setVelo(no->velo());
 
             iEvent k;
             for (k = _events.lowerBound(tick); k != _events.end(); ++k) {
-                  MidiEvent* event = k.value();
-                  if (ev->isNoteOff(event)) {
+                  MidiEvent* e = k.value();
+                  if (e->type() != ME_NOTEON && e->type() != ME_NOTEOFF)
+                        continue;
+                  MidiNoteOnOff* oo = (MidiNoteOnOff*) e;
+                  if ((oo->type() == ME_NOTEOFF || (oo->type() == ME_NOTEON && oo->velo() == 0))
+                     && (oo->pitch() == no->pitch())) {
                         int t = k.key() - tick;
                         if (t <= 0)
                               t = 1;
-                        ev->len = t;
-                        ev->dataC = event->dataC;
+                        note->setDuration(t);
+                        note->setVelo(oo->velo());
+                        _events.erase(k);
+                        delete e;
                         break;
                         }
                   }
             if (k == _events.end()) {
-                  printf("-no note-off! %d pitch %d velo %d\n",
-                     tick, ev->dataA, ev->dataB);
+                  printf("-no note-off for note at %d\n", tick);
                   //
                   // note off at end of bar
                   //
-                  int endTick = ev->tick + 1; // song->roundUpBar(ev->tick + 1);
-                  ev->len = endTick - ev->tick;
+                  int endTick = note->ontime() + 1; // song->roundUpBar(ev->ontime + 1);
+                  note->setDuration(endTick - note->ontime());
                   }
-            else {
-                  _events.erase(k);      // memory leak
-                  }
+            el.insert(note->ontime(), note);
+            delete ev;
+            i = _events.erase(i);
             }
-
-      // DEBUG: any note off left?
-
-      foreach (const MidiEvent* ev, _events) {
-            if (ev->isNoteOff()) {
-                  printf("+extra note-off! %d pitch %d velo %d\n",
-                           ev->tick, ev->dataA, ev->dataB);
-                  }
-            }
+      _events = el;
       }
 
 //---------------------------------------------------------
@@ -625,16 +776,17 @@ void MidiTrack::extractTimeSig(SigList* sigmap)
       EventList el;
 
       foreach (MidiEvent* e, _events) {
-            if (e->type == ME_META && e->dataA == META_TIME_SIGNATURE) {
-                  int z  = e->data[0];
-                  int nn = e->data[1];
+            if (e->type() == ME_META && ((MidiMeta*)e)->metaType() == META_TIME_SIGNATURE) {
+                  const unsigned char* data = ((MidiMeta*)e)->data();
+                  int z  = data[0];
+                  int nn = data[1];
                   int n  = 1;
                   for (int i = 0; i < nn; ++i)
                         n *= 2;
-                  sigmap->add(e->tick, z, n);
+                  sigmap->add(e->ontime(), z, n);
                   }
             else
-                  el.insert(e->tick, e);
+                  el.insert(e->ontime(), e);
             }
       _events = el;
       }
@@ -679,8 +831,8 @@ void MidiTrack::quantize(int startTick, int endTick, EventList* dst)
       int mintick = division * 64;
       for (iEvent i = _events.lowerBound(startTick); i != _events.lowerBound(endTick); ++i) {
             MidiEvent* e = *i;
-            if (e->isNote() && (e->len < mintick))
-                  mintick = e->len;
+            if (e->type() == ME_NOTE && (((MidiNote*)e)->duration() < mintick))
+                  mintick = ((MidiNote*)e)->duration();
             }
       if (mintick <= division / 16)        // minimum duration is 1/64
             mintick = division / 16;
@@ -706,13 +858,14 @@ void MidiTrack::quantize(int startTick, int endTick, EventList* dst)
 
       for (iEvent i = _events.lowerBound(startTick); i != _events.lowerBound(endTick); ++i) {
             MidiEvent* e = *i;
-            if (e->isNote()) {
-	            int len  = quantizeLen(division, e->len, raster);
-      	      int tick = (e->tick / raster) * raster;
-	            e->tick = tick;
-      	      e->len  = len;
+            if (e->type() == ME_NOTE) {
+                  MidiNote* note = (MidiNote*)e;
+	            int len  = quantizeLen(division, note->duration(), raster);
+      	      int tick = (note->ontime() / raster) * raster;
+	            note->setOntime(tick);
+      	      note->setDuration(len);
                   }
-            dst->insert(e->tick, e);
+            dst->insert(e->ontime(), e);
             }
       }
 
@@ -731,9 +884,9 @@ void MidiTrack::cleanup()
       //
       int lastTick = 0;
       foreach (MidiEvent* e, _events) {
-            if (!(e->isNote()))
+            if (!(e->type() == ME_NOTE))
                   continue;
-            int offtime  = e->tick + e->len;
+            int offtime  = e->ontime() + ((MidiNote*)e)->duration();
             if (offtime > lastTick)
                   lastTick = offtime;
             }
@@ -753,22 +906,22 @@ void MidiTrack::cleanup()
 
       for(iEvent i = dl.begin(); i != dl.end(); ++i) {
             MidiEvent* e = i.value();
-            if (e->isNote()) {
+            if (e->type() == ME_NOTE) {
                   iEvent ii = i;
                   ++ii;
                   for (; ii != dl.end(); ++ii) {
                         MidiEvent* ee = ii.value();
-                        if (!ee->isNote() || ee->pitch() != e->pitch())
+                        if (ee->type() != ME_NOTE || ((MidiNote*)ee)->pitch() != ((MidiNote*)e)->pitch())
                               continue;
-                        if (ee->tick >= e->tick + e->len)
+                        if (ee->ontime() >= e->ontime() + ((MidiNote*)e)->duration())
                               break;
-                        e->len = ee->tick - e->tick;
+                        ((MidiNote*)e)->setDuration(ee->ontime() - e->ontime());
                         break;
                         }
-                  if (e->len <= 0)
+                  if (((MidiNote*)e)->duration() <= 0)
                         continue;
                   }
-		_events.insert(e->tick, e);
+		_events.insert(e->ontime(), e);
             }
       }
 
@@ -782,10 +935,12 @@ void MidiTrack::changeDivision(int newDivision)
 
       int division = mf->division();
       foreach(MidiEvent* e, _events) {
-            int tick = (e->tick * newDivision + division/2) / division;
-            e->tick = tick;
-            if (e->isNote())
-                  e->len = (e->len * newDivision + division/2) / division;
+            int tick = (e->ontime() * newDivision + division/2) / division;
+            e->setOntime(tick);
+            if (e->type() == ME_NOTE) {
+                  MidiNote* n = (MidiNote*)e;
+                  n->setDuration((n->duration() * newDivision + division/2) / division);
+                  }
 		dl.insert(tick, e);
             }
       _events = dl;
@@ -832,8 +987,8 @@ void MidiFile::separateChannel()
             QList<int> channel;
             MidiTrack* mt = _tracks.at(i);
             foreach(MidiEvent* e, mt->events()) {
-                  if (e->isChannelEvent() && !channel.contains(e->channel))
-                        channel.append(e->channel);
+                  if (e->isChannelEvent() && !channel.contains(((MidiChannelEvent*)e)->channel()))
+                        channel.append(((MidiChannelEvent*)e)->channel());
                   }
             mt->setOutChannel(channel.empty() ? 0 : channel[0]);
             int nn = channel.size();
@@ -851,7 +1006,7 @@ void MidiFile::separateChannel()
             for (iEvent ie = el.begin(); ie != el.end();) {
                   MidiEvent* e = *ie;
                   if (e->isChannelEvent()) {
-                        int ch  = e->channel;
+                        int ch  = ((MidiChannelEvent*)e)->channel();
                         int idx = channel.indexOf(ch);
                         MidiTrack* t = _tracks.at(i * idx);
                         if (t != mt) {
@@ -885,10 +1040,10 @@ void MidiTrack::move(int ticks)
       EventList dl;
 
       foreach(MidiEvent* e, _events) {
-            int tick = e->tick + ticks;
+            int tick = e->ontime() + ticks;
             if (tick < 0)
                   tick = 0;
-            e->tick = tick;
+            e->setOntime(tick);
 		dl.insert(tick, e);
             }
       _events = dl;

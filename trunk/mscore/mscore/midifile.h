@@ -40,6 +40,8 @@ enum {
       ME_START      = 0xfa,
       ME_CONTINUE   = 0xfb,
       ME_STOP       = 0xfc,
+
+      ME_NOTE       = 0x100,
       };
 
 enum {
@@ -99,42 +101,202 @@ enum {
       CTRL_ALL_SOUNDS_OFF     = 0x78, // 120
       CTRL_RESET_ALL_CTRL     = 0x79, // 121
       CTRL_LOCAL_OFF          = 0x7a, // 122
+
+      CTRL_PROGRAM = 0x40001,
+      CTRL_PITCH   = 0x40002,
+      CTRL_PRESS   = 0x40003,
       };
+
+class MidiFile;
+class Xml;
 
 //---------------------------------------------------------
 //   MidiEvent
 //---------------------------------------------------------
 
-struct MidiEvent {
-      unsigned char* data;
-      int dataLen;
-      int tick;
-      int len;
-      int type;
-      int channel;
-      int port;
-      char dataA, dataB, dataC;
+class MidiEvent {
+      int _ontime;
 
-      MidiEvent();
-      ~MidiEvent();
-      bool isNote() const { return type == ME_NOTEON; }
-      bool isNoteOff() const {
-            return (type == ME_NOTEOFF) || ((type == ME_NOTEON) && (dataB == 0));
+   public:
+      MidiEvent()           { _ontime = -1; }
+      MidiEvent(int t)      { _ontime = t;  }
+      virtual ~MidiEvent()  {}
+
+      int ontime() const    { return _ontime; }
+      void setOntime(int v) { _ontime = v; }
+
+      virtual int type() const = 0;
+      virtual bool isChannelEvent() const = 0;
+      virtual void write(MidiFile*) const {}
+      virtual void dump(Xml&) const {}
+      };
+
+//---------------------------------------------------------
+//   MidiChannelEvent
+//---------------------------------------------------------
+
+class MidiChannelEvent : public MidiEvent {
+      char _channel;
+
+   public:
+      MidiChannelEvent()          { _channel = -1;   }
+      MidiChannelEvent(int t, int c) : MidiEvent(t), _channel(c) {}
+      bool isChannelEvent() const { return true;     }
+      int channel() const         { return _channel; }
+      void setChannel(int c)      { _channel = c;    }
+      };
+
+//---------------------------------------------------------
+//   MidiNoteOnOff
+//---------------------------------------------------------
+
+class MidiNoteOnOff : public MidiChannelEvent {
+   protected:
+      char _pitch;
+      char _velo;
+
+   public:
+      MidiNoteOnOff()             { _pitch = -1; _velo = -1; }
+      MidiNoteOnOff(int t, int c, int p, int v)
+         : MidiChannelEvent(t, c), _pitch(p), _velo(v) {}
+      int pitch() const        { return _pitch; }
+      void setPitch(int p)     { _pitch = p; }
+      int velo() const         { return _velo; }
+      void setVelo(int v)      { _velo = v; }
+      };
+
+//---------------------------------------------------------
+//   MidiNoteOn
+//---------------------------------------------------------
+
+class MidiNoteOn : public MidiNoteOnOff {
+   public:
+      MidiNoteOn()             {}
+      MidiNoteOn(int t, int c, int p, int v) : MidiNoteOnOff(t, c, p, v) {}
+      virtual int type() const { return ME_NOTEON; }
+      virtual void write(MidiFile*) const;
+      virtual void dump(Xml&) const;
+      };
+
+//---------------------------------------------------------
+//   MidiNoteOff
+//---------------------------------------------------------
+
+class MidiNoteOff : public MidiNoteOnOff {
+      char _pitch;
+      char _velo;
+
+   public:
+      MidiNoteOff()            {}
+      MidiNoteOff(int t, int c, int p, int v) : MidiNoteOnOff(t, c, p, v) {}
+      virtual int type() const { return ME_NOTEOFF; }
+      int pitch() const        { return _pitch; }
+      void setPitch(int p)     { _pitch = p; }
+      int velo() const         { return _velo; }
+      void setVelo(int v)      { _velo = v; }
+      virtual void write(MidiFile*) const;
+      virtual void dump(Xml&) const;
+      };
+
+//---------------------------------------------------------
+//   MidiNote
+//---------------------------------------------------------
+
+class MidiNote : public MidiNoteOnOff {
+      int _duration;
+      int _tpc;               // tonal pitch class
+
+   public:
+      MidiNote()               { _pitch = -1; _velo = -1; _duration = -1; }
+      virtual int type() const { return ME_NOTE; }
+      int duration() const     { return _duration; }
+      void setDuration(int v)  { _duration = v; }
+      int offtime() const      { return ontime() + _duration; }
+      int tpc() const          { return _tpc;    }
+      void setTpc(int v)       { _tpc = v;       }
+      virtual void dump(Xml&) const;
+      };
+
+//---------------------------------------------------------
+//   MidiController
+//    the following midi events are stored as special
+//    controller:
+//      ME_POLYAFTER  =
+//      ME_PROGRAM    =
+//      ME_AFTERTOUCH =
+//      ME_PITCHBEND  =
+//---------------------------------------------------------
+
+class MidiController : public MidiChannelEvent {
+      int _controller;
+      int _value;
+
+   public:
+      MidiController()                    { _controller = -1; _value = 0; }
+      MidiController(int t, int ch, int c, int v)
+         : MidiChannelEvent(t, ch), _controller(c), _value(v) {}
+      virtual int type() const            { return ME_CONTROLLER; }
+      virtual bool isChannelEvent() const { return true; }
+      int controller() const              { return _controller; }
+      void setController(int val)         { _value = val; }
+      int value() const                   { return _value; }
+      void setValue(int v)                { _value = v; }
+      virtual void write(MidiFile*) const;
+      virtual void dump(Xml&) const;
+      };
+
+//---------------------------------------------------------
+//   MidiData
+//---------------------------------------------------------
+
+class MidiData : public MidiEvent {
+   protected:
+      int _len;
+      unsigned char* _data;
+
+   public:
+      MidiData() { _data = 0; _len = 0; }
+      MidiData(int t, int l, unsigned char* d) : MidiEvent(t), _len(l), _data(d) {}
+      ~MidiData() {
+            if (_data)
+                  delete _data;
             }
-      bool isNoteOff(MidiEvent* e) {
-            return (e->isNoteOff() && (e->dataA == dataA));
-            }
-      int pitch() const { return dataA; }
-      int velo() const  { return dataB; }
-      bool isChannelEvent() const {
-            return (type == ME_NOTEOFF
-                   || type == ME_NOTEON
-                   || type == ME_POLYAFTER
-                   || type == ME_CONTROLLER
-                   || type == ME_PROGRAM
-                   || type == ME_AFTERTOUCH
-                   || type == ME_PITCHBEND);
-            }
+      virtual bool isChannelEvent() const { return false; }
+      unsigned char* data() const         { return _data; }
+      void setData(unsigned char* d)      { _data = d;    }
+      int len() const                     { return _len;  }
+      void setLen(int l)                  { _len = l;     }
+      };
+
+//---------------------------------------------------------
+//   MidiSysex
+//---------------------------------------------------------
+
+class MidiSysex : public MidiData {
+   public:
+      MidiSysex()              {}
+      MidiSysex(int t, int l, unsigned char* d) : MidiData(t, l, d) {}
+      virtual int type() const { return ME_SYSEX; }
+      virtual void write(MidiFile*) const;
+      virtual void dump(Xml&) const;
+      };
+
+//---------------------------------------------------------
+//   MidiMeta
+//---------------------------------------------------------
+
+class MidiMeta : public MidiData {
+      int _metaType;
+
+   public:
+      MidiMeta()               { _metaType = -1; }
+      MidiMeta(int t, int mt, int l, unsigned char* d)
+         : MidiData(t, l, d), _metaType(mt) {}
+      virtual int type() const { return ME_META;   }
+      int metaType() const     { return _metaType; }
+      void setMetaType(int v)  { _metaType = v;    }
+      virtual void write(MidiFile*) const;
+      virtual void dump(Xml&) const;
       };
 
 typedef QMultiMap<int, MidiEvent*> EventList;
@@ -161,7 +323,6 @@ class MidiTrack {
       int medPitch;
       int program;
 
-
       MidiTrack(MidiFile*);
       ~MidiTrack();
 
@@ -176,7 +337,7 @@ class MidiTrack {
       void setName(const QString& s)    { _name = s;          }
       QString comment() const           { return _comment;    }
       void setComment(const QString& s) { _comment = s;       }
-      void insert(MidiEvent* e)         { _events.insert(e->tick, e); }
+      void insert(MidiEvent* e)         { _events.insert(e->ontime(), e); }
       void mergeNoteOnOff();
       void cleanup();
       void changeDivision(int newDivision);
@@ -214,15 +375,16 @@ class MidiFile {
       MidiType _midiType;
       char errorBuffer[512];
 
+   protected:
       // write
       bool write(const void*, qint64);
-      void put(unsigned char c) { write(&c, 1); }
       bool skip(qint64);
       void writeShort(int);
       void writeLong(int);
-      void putvl(unsigned);
-      void writeEvent(int channel, const MidiEvent*);
       bool writeTrack(const MidiTrack*);
+      void putvl(unsigned);
+      void put(unsigned char c) { write(&c, 1); }
+      void writeStatus(int type, int channel);
 
       // read
       bool read(void*, qint64);
@@ -231,6 +393,8 @@ class MidiFile {
       int readLong();
       MidiEvent* readEvent();
       bool readTrack();
+
+      void resetRunningStatus() { status = -1; }
 
    public:
       MidiFile();
@@ -250,23 +414,14 @@ class MidiFile {
       void separateChannel();
       void move(int ticks);
       SigList siglist() const { return _siglist; }
+
+//      friend class MidiNote;
+      friend class MidiNoteOn;
+      friend class MidiNoteOff;
+      friend class MidiMeta;
+      friend class MidiSysex;
+      friend class MidiController;
       };
-
-#define XCHG_SHORT(x) ((((x)&0xFF)<<8) | (((x)>>8)&0xFF))
-#ifdef __i486__
-#define XCHG_LONG(x) \
-     ({ int __value; \
-        asm ("bswap %1; movl %1,%0" : "=g" (__value) : "r" (x)); \
-       __value; })
-#else
-#define XCHG_LONG(x) ((((x)&0xFF)<<24) | \
-		      (((x)&0xFF00)<<8) | \
-		      (((x)&0xFF0000)>>8) | \
-		      (((x)>>24)&0xFF))
-#endif
-
-#define BE_SHORT(x) XCHG_SHORT(x)
-#define BE_LONG(x)  XCHG_LONG(x)
 
 #endif
 
