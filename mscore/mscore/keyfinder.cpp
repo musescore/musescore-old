@@ -61,18 +61,8 @@
 #include "keyfinder.h"
 #include "midifile.h"
 #include "sig.h"
-
-//---------------------------------------------------------
-//   SNote
-//---------------------------------------------------------
-
-struct SNote {
-      int ontime;
-      int offtime;
-      int duration;
-      int pitch;
-      int tpc;
-      };
+#include "analyse.h"
+#include "pitchspelling.h"
 
 //---------------------------------------------------------
 //   SBeat
@@ -845,21 +835,31 @@ int findKey(MidiTrack* mt, SigList* sigmap)
 
       int lastTick = 0;
       const EventList el = mt->events();
-      foreach (MidiEvent* e, el) {
-            if (!(e->isNote()))
+
+      foreach (const MidiEvent* e, el) {
+            if (e->type() != ME_NOTE)
                   continue;
+            MidiNote* mn = (MidiNote*)e;
             SNote n;
-            n.ontime   = e->tick;
-            n.offtime  = e->tick + e->len;
+            n.ontime  = mn->ontime();
+            n.offtime = mn->ontime() + mn->duration();
             if (n.offtime > lastTick)
                   lastTick = n.offtime;
-            n.duration = e->len;
-            int pitch        = e->dataA;
-            n.pitch    = pitch;
-            /* For note input, generate TPC labels within the 9-to-20 range */
-            n.tpc      = ((((((pitch % 12) * 7) % 12) + 5) % 12) + 9);
+            n.duration = mn->duration();
+            n.pitch    = mn->pitch();
+// For note input, generate TPC labels within the 9-to-20 range
+//            n.tpc      = ((((((pitch % 12) * 7) % 12) + 5) % 12) + 9);
             note.append(n);
             }
+      spell(note);
+
+#if 0
+      foreach(SNote n, note) {
+            int tpc = ((((((n.pitch % 12) * 7) % 12) + 5) % 12) + 9);
+            printf("Note %d pitch %3d  %3d %3d\n",
+               n.ontime, n.pitch, n.tpc, tpc);
+            }
+#endif
       npc_found = 1;
 
       // create one segment for every measure
@@ -924,6 +924,7 @@ int findKey(MidiTrack* mt, SigList* sigmap)
                   }
             }
       xkey -= 14;
+      // xkey -= 15;       // bennyR
       if (xkey < -7 || xkey > 7) {
             printf("illegal key %d found\n", xkey);
             xkey = 0;

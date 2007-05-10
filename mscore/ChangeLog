@@ -1,3 +1,6 @@
+10.5.7 (ws)
+      - implemented pitch spelling for midi import
+      - reorganization of midi import
 8.5.7 (ws)
       - fixes to midi lyrics import: move lyrics position to last note
 5.5.7 (ws)
