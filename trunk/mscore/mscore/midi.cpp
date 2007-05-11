@@ -1212,13 +1212,11 @@ void Score::convertMidi(MidiFile* mf)
 //---------------------------------------------------------
 
 struct MNote {
-	int pitch, velo;
-      int ontime;
-      int duration;
+	int pitch, velo, ontime, duration, tpc;
       Tie* tie;
 
-      MNote(int p, int v, int t, int l)
-         : pitch(p), velo(v), ontime(t), duration(l), tie(0) {}
+      MNote(int p, int v, int t, int l, int _tpc)
+         : pitch(p), velo(v), ontime(t), duration(l), tpc(_tpc), tie(0) {}
       };
 
 //---------------------------------------------------------
@@ -1266,9 +1264,9 @@ void Score::convertTrack(MidiTrack* midiTrack, int staffIdx)
 
             	foreach (MNote* n, notes) {
             		Note* note = new Note(this, n->pitch, false);
+                        note->setTpc(n->tpc);
             		note->setStaff(staff(staffIdx));
             		chord->add(note);
-            		// note->setTicks(len);
                         note->setTick(tick);
                         if (n->tie) {
                               n->tie->setEndNote(note);
@@ -1317,7 +1315,8 @@ void Score::convertTrack(MidiTrack* midiTrack, int staffIdx)
                   if (i.key() != ctick)
                         break;
                   MidiNote* mn = (MidiNote*)e;
-            	MNote* n = new MNote(mn->pitch(), mn->velo(), mn->ontime(), mn->duration());
+            	MNote* n = new MNote(mn->pitch(), mn->velo(), mn->ontime(),
+                     mn->duration(), mn->tpc());
       	      notes.append(n);
                   }
             }
@@ -1343,6 +1342,7 @@ void Score::convertTrack(MidiTrack* midiTrack, int staffIdx)
 		Note* note = new Note(this, n->pitch, false);
 		note->setStaff(staff(staffIdx));
             note->setTick(tick);
+            note->setTpc(n->tpc);
 		chord->add(note);
             n->duration -= len;
             if (n->duration <= 0) {

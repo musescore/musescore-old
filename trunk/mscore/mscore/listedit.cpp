@@ -740,6 +740,7 @@ void ShowNoteWidget::setElement(Element* e)
       nb.dots->setValue(note->dots());
       nb.graceNote->setChecked(note->grace());
       nb.mirror->setChecked(note->mirror());
+      nb.tpc->setValue(note->tpc());
       //accidental
       //note head
       //fingering

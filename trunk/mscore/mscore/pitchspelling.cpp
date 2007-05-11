@@ -22,19 +22,11 @@
 //  algorithmus from Emilios Cambouropoulos as published in:
 //  "Automatic Pitch Spelling: From Numbers to Sharps and Flats"
 
-#include "analyse.h"
+#include "midifile.h"
 
+//    TPC - tonal pitch classes
+//    "line of fifth's" LOF
 //
-// "line of fifth's"
-//    LOF
-//
-
-// table of alternative spellings for one octave
-// each entry is an index in the LOF
-//    tab1 does not contain double sharps
-//    tab2 does not contain double flats
-
-// int table[] = {
 //       bb  b   -   #  ##
 //       -   6, 13, 20, 27,  // F
 //       0,  7, 14, 21, 28,  // C
@@ -45,12 +37,17 @@
 //       5, 12, 19, 26, 33,  // B
 
 
+// table of alternative spellings for one octave
+// each entry is the TPC of the note
+//    tab1 does not contain double sharps
+//    tab2 does not contain double flats
+
 static const int tab1[24] = {
       14,  2,  // 60  C   Dbb
       21,  9,  // 61  C#  Db
       16,  4,  // 62  D   Ebb
       23, 11,  // 63  D#  Eb
-      18, 13,  // 64  E   Fb
+      18,  6,  // 64  E   Fb
       13,  1,  // 65  F   Gbb
       20,  8,  // 66  F#  Gb
       15,  3,  // 67  G   Abb
@@ -84,22 +81,150 @@ int intervalPenalty[13] = {
       0, 0, 0, 0, 0, 0, 1, 3, 1, 1, 1, 3, 3
       };
 
-static const bool enharmonicSpelling[35] = {
+//       bb  b   -   #  ##
+//       -   6, 13, 20, 27,  // F
+//       0,  7, 14, 21, 28,  // C
+//       1,  8, 15, 22, 39,  // G
+//       2,  9, 16, 23, 30,  // D
+//       3, 10, 17, 24, 31,  // A
+//       4, 11, 18, 25, 32,  // E
+//       5, 12, 19, 26, 33,  // B
+
+//---------------------------------------------------------
+//   enharmonicSpelling
+//    TODO: fill tables with more sensible data
+//---------------------------------------------------------
+
+static const bool enharmonicSpelling[15][34] = {
+      {
   //  f  c  g  d  a  e  b
-      1, 1, 1, 1, 1, 1, 1, // bb
+         1, 1, 1, 1, 1, 1, // bb
       1, 1, 0, 0, 0, 0, 0, // b
       0, 0, 0, 0, 0, 0, 0,
       0, 0, 0, 0, 0, 1, 1, // #
       1, 1, 1, 1, 1, 1, 1  // ##
+      },
+      {
+  //  f  c  g  d  a  e  b
+         1, 1, 1, 1, 1, 1, // bb
+      1, 1, 0, 0, 0, 0, 0, // b
+      0, 0, 0, 0, 0, 0, 0,
+      0, 0, 0, 0, 0, 1, 1, // #
+      1, 1, 1, 1, 1, 1, 1  // ##
+      },
+      {
+  //  f  c  g  d  a  e  b
+         1, 1, 1, 1, 1, 1, // bb
+      1, 1, 0, 0, 0, 0, 0, // b
+      0, 0, 0, 0, 0, 0, 0,
+      0, 0, 0, 0, 0, 1, 1, // #
+      1, 1, 1, 1, 1, 1, 1  // ##
+      },
+      {
+  //  f  c  g  d  a  e  b
+         1, 1, 1, 1, 1, 1, // bb
+      1, 1, 0, 0, 0, 0, 0, // b
+      0, 0, 0, 0, 0, 0, 0,
+      0, 0, 0, 0, 0, 1, 1, // #
+      1, 1, 1, 1, 1, 1, 1  // ##
+      },
+      {
+  //  f  c  g  d  a  e  b
+         1, 1, 1, 1, 1, 1, // bb
+      1, 1, 0, 0, 0, 0, 0, // b
+      0, 0, 0, 0, 0, 0, 0,
+      0, 0, 0, 0, 0, 1, 1, // #
+      1, 1, 1, 1, 1, 1, 1  // ##
+      },
+      {
+//Bb  f  c  g  d  a  e  b
+         1, 1, 1, 1, 1, 1, // bb
+      1, 1, 0, 0, 0, 0, 0, // b
+      0, 0, 0, 0, 0, 1, 1,
+      0, 0, 0, 0, 1, 1, 1, // #
+      1, 1, 1, 1, 1, 1, 1  // ##
+      },
+      {
+//F      f  c  g  d  a  e  b
+         1, 1, 1, 1, 1, 1, // bb
+      1, 1, 0, 0, 0, 0, 0, // b
+      0, 0, 0, 0, 0, 0, 0,
+      0, 0, 0, 0, 0, 1, 1, // #
+      1, 1, 1, 1, 1, 1, 1  // ##
+      },
+      {
+//C   f  c  g  d  a  e  b
+         1, 1, 1, 1, 1, 1, // bb
+      1, 1, 0, 0, 0, 0, 0, // b
+      0, 0, 0, 0, 0, 0, 0,
+      0, 0, 0, 0, 0, 1, 1, // #
+      1, 1, 1, 1, 1, 1, 1  // ##
+      },
+      {
+  //  f  c  g  d  a  e  b
+         1, 1, 1, 1, 1, 1, // bb
+      1, 1, 0, 0, 0, 0, 0, // b
+      0, 0, 0, 0, 0, 0, 0,
+      0, 0, 0, 0, 0, 1, 1, // #
+      1, 1, 1, 1, 1, 1, 1  // ##
+      },
+      {
+  //  f  c  g  d  a  e  b
+         1, 1, 1, 1, 1, 1, // bb
+      1, 1, 0, 0, 0, 0, 0, // b
+      0, 0, 0, 0, 0, 0, 0,
+      0, 0, 0, 0, 0, 1, 1, // #
+      1, 1, 1, 1, 1, 1, 1  // ##
+      },
+      {
+  //  f  c  g  d  a  e  b
+         1, 1, 1, 1, 1, 1, // bb
+      1, 1, 0, 0, 0, 0, 0, // b
+      0, 0, 0, 0, 0, 0, 0,
+      0, 0, 0, 0, 0, 1, 1, // #
+      1, 1, 1, 1, 1, 1, 1  // ##
+      },
+      {
+  //  f  c  g  d  a  e  b
+         1, 1, 1, 1, 1, 1, // bb
+      1, 1, 0, 0, 0, 0, 0, // b
+      0, 0, 0, 0, 0, 0, 0,
+      0, 0, 0, 0, 0, 1, 1, // #
+      1, 1, 1, 1, 1, 1, 1  // ##
+      },
+      {
+  //  f  c  g  d  a  e  b
+         1, 1, 1, 1, 1, 1, // bb
+      1, 1, 0, 0, 0, 0, 0, // b
+      0, 0, 0, 0, 0, 0, 0,
+      0, 0, 0, 0, 0, 1, 1, // #
+      1, 1, 1, 1, 1, 1, 1  // ##
+      },
+      {
+  //  f  c  g  d  a  e  b
+         1, 1, 1, 1, 1, 1, // bb
+      1, 1, 0, 0, 0, 0, 0, // b
+      0, 0, 0, 0, 0, 0, 0,
+      0, 0, 0, 0, 0, 1, 1, // #
+      1, 1, 1, 1, 1, 1, 1  // ##
+      },
+      {
+  //  f  c  g  d  a  e  b
+         1, 1, 1, 1, 1, 1, // bb
+      1, 1, 0, 0, 0, 0, 0, // b
+      0, 0, 0, 0, 0, 0, 0,
+      0, 0, 0, 0, 0, 1, 1, // #
+      1, 1, 1, 1, 1, 1, 1  // ##
+      }
       };
 
 //---------------------------------------------------------
 //   penalty
 //---------------------------------------------------------
 
-static int penalty(int lof1, int lof2)
+static int penalty(int lof1, int lof2, int k)
       {
-      int penalty  = enharmonicSpelling[lof1] * 4 + enharmonicSpelling[lof2] * 4;
+      int penalty  = enharmonicSpelling[k][lof1] * 4 + enharmonicSpelling[k][lof2] * 4;
       int distance = lof2 > lof1 ? lof2 - lof1 : lof1 - lof2;
       if (distance > 12)
             penalty += 3;
@@ -116,7 +241,7 @@ static const int ASIZE        = 1024;   // 2 ** WINDOW
 //   computeWindow
 //---------------------------------------------------------
 
-static int computeWindow(const QList<SNote>& notes, int start, int end)
+static int computeWindow(const QList<MidiNote*>& notes, int start, int end, int keyIdx)
       {
       int p   = 10000;
       int idx = -1;
@@ -125,7 +250,7 @@ static int computeWindow(const QList<SNote>& notes, int start, int end)
       int i = start;
       int k = 0;
       while (i < end)
-            pitch[k++] = notes[i++].pitch % 12;
+            pitch[k++] = notes[i++]->pitch() % 12;
 
       for (; k < 10; ++k)
             pitch[k] = pitch[k-1];
@@ -141,8 +266,8 @@ static int computeWindow(const QList<SNote>& notes, int start, int end)
                   int l = pitch[k] * 2 + ((i & (1 << k)) >> k);
                   int lof2a = tab1[l];
                   int lof2b = tab2[l];
-                  pa += penalty(lof1a, lof2a);
-                  pb += penalty(lof1b, lof2b);
+                  pa += penalty(lof1a, lof2a, keyIdx);
+                  pb += penalty(lof1b, lof2b, keyIdx);
                   lof1a = lof2a;
                   lof1b = lof2b;
                   }
@@ -166,7 +291,7 @@ static int computeWindow(const QList<SNote>& notes, int start, int end)
 //   spell
 //---------------------------------------------------------
 
-void spell(QList<SNote>& notes)
+void spell(QList<MidiNote*>& notes, int key)
       {
       int n = notes.size();
 
@@ -175,7 +300,7 @@ void spell(QList<SNote>& notes)
             int end = start + WINDOW;
             if (end > n)
                   end = n;
-            int opt = computeWindow(notes, start, end);
+            int opt = computeWindow(notes, start, end, key + 7);
             const int* tab;
             if (opt < 0) {
                   tab = tab2;
@@ -185,29 +310,33 @@ void spell(QList<SNote>& notes)
                   tab = tab1;
 
             if (start == 0) {
-                  notes[0].tpc = tab[(notes[0].pitch % 12) * 2 + (opt & 1)];
-                  int idx = (notes[1].pitch % 12) * 2 + ((opt & 2) >> 1);
-                  notes[1].tpc = tab[idx];
-                  notes[2].tpc = tab[idx];
+                  notes[0]->setTpc(tab[(notes[0]->pitch() % 12) * 2 + (opt & 1)]);
+                  notes[1]->setTpc(tab[(notes[1]->pitch() % 12) * 2 + ((opt & 2)>>1)]);
+                  notes[2]->setTpc(tab[(notes[2]->pitch() % 12) * 2 + ((opt & 4)>>2)]);
                   }
             if ((end - start) >= 6) {
-                  notes[start+3].tpc = tab[(notes[start+3].pitch % 12) * 2 + ((opt &  8) >> 3)];
-                  notes[start+4].tpc = tab[(notes[start+4].pitch % 12) * 2 + ((opt & 16) >> 4)];
-                  notes[start+5].tpc = tab[(notes[start+5].pitch % 12) * 2 + ((opt & 32) >> 5)];
+                  notes[start+3]->setTpc(tab[(notes[start+3]->pitch() % 12) * 2 + ((opt &  8) >> 3)]);
+                  notes[start+4]->setTpc(tab[(notes[start+4]->pitch() % 12) * 2 + ((opt & 16) >> 4)]);
+                  notes[start+5]->setTpc(tab[(notes[start+5]->pitch() % 12) * 2 + ((opt & 32) >> 5)]);
                   }
             if (end == n) {
-                  switch(end - start - 6) {
+                  int n = end - start;
+                  int k;
+                  switch(n - 6) {
                         case 3:
-                              notes[end-3].tpc = tab[(notes[end-3].pitch % 12) * 2 + ((opt & 64) >> 6)];
+                              k = end - start - 3;
+                              notes[end-3]->setTpc(tab[(notes[end-3]->pitch() % 12) * 2 + ((opt & (1<<k)) >> k)]);
                         case 2:
-                              notes[end-2].tpc = tab[(notes[end-2].pitch % 12) * 2 + ((opt & 128) >> 7)];
+                              k = end - start - 2;
+                              notes[end-2]->setTpc(tab[(notes[end-2]->pitch() % 12) * 2 + ((opt & (1<<k)) >> k)]);
                         case 1:
-                              notes[end-1].tpc = tab[(notes[end-1].pitch % 12) * 2 + ((opt & 256) >> 8)];
-                              break;
+                              k = end - start - 1;
+                              notes[end-1]->setTpc(tab[(notes[end-1]->pitch() % 12) * 2 + ((opt & (1<<k)) >> k)]);
                         }
+                  break;
                   }
             // advance to next window
-            start += WINDOW_SHIFT;
+            start += 3;
             }
       }
 

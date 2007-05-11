@@ -90,130 +90,7 @@ int line2pitch(int line, int clef)
       if (l > 74)
             l = 74;
       int pitch = pt[l % 7] + (l / 7 + octave) * 12;
-
-// printf("line2pitch(line=%d, clef=%d) pitch=%d l=%d idx=%d\n",
-//   line, clef, pitch, clefTable[clef].pitchOffset - line, l % 7);
-
       return pitch;
-      }
-
-//
-// This table contails the line position of notes for one
-// octave and all key signatures.
-// This determines what accidentals are used by default
-// to show a note of a given pitch.
-//
-// TODO: fix this
-//
-
-static char table1[15][12] = {
-      { 0, 1, 2, 2, 3, 3, 4, 4, 5, 6, 6, 7 },  // ces
-      { 0, 1, 1, 2, 3, 3, 4, 4, 5, 5, 6, 7 },  // ges
-      { 0, 1, 1, 2, 3, 3, 4, 4, 5, 5, 6, 7 },  // des
-      { 0, 1, 1, 2, 2, 3, 4, 4, 5, 5, 6, 7 },  // as
-      { 0, 1, 1, 2, 2, 3, 4, 4, 5, 5, 6, 6 },  // es
-      { 0, 1, 1, 2, 2, 3, 3, 4, 5, 5, 6, 6 },  // Bb
-      { 0, 1, 1, 2, 2, 3, 4, 4, 5, 5, 6, 6 },  // F
-
-//      c  #c d #d  e  f #f  g #g  a  b  #b    key signature
-      { 0, 0, 1, 1, 2, 3, 3, 4, 4, 5, 5, 6 },  // C
-
-      { 0, 0, 1, 1, 2, 3, 3, 4, 4, 5, 5, 6 },  // G
-      { 0, 0, 1, 1, 2, 3, 3, 4, 4, 5, 5, 6 },  // D
-      { 0, 0, 1, 1, 2, 2, 3, 4, 4, 5, 5, 6 },  // A
-      { 0, 0, 1, 1, 2, 2, 3, 4, 4, 5, 5, 6 },  // E
-      { 0, 0, 1, 1, 2, 2, 3, 4, 4, 5, 5, 6 },  // B
-      { 0, 0, 1, 1, 2, 2, 3, 4, 4, 5, 5, 6 },  // fis
-      { 0, 0, 0, 1, 2, 2, 3, 3, 4, 4, 5, 6 }   // cis
-      };
-
-//
-//    fixed accidentals
-//
-static int tab3[15][8] = {
-      //c  d  e  f  g  a  b  c
-      //------------------------
-      { 2, 2, 2, 2, 2, 2, 2, 2 },    // ces
-      { 2, 2, 2, 0, 2, 2, 2, 2 },    // ges
-      { 0, 2, 2, 0, 2, 2, 2, 0 },    // des
-      { 0, 2, 2, 0, 0, 2, 2, 0 },    // as
-      { 0, 0, 2, 0, 0, 2, 2, 0 },    // es
-      { 0, 0, 2, 0, 0, 0, 2, 0 },    // B
-      { 0, 0, 0, 0, 0, 0, 2, 0 },    // F
-
-      { 0, 0, 0, 0, 0, 0, 0, 0 },    // C
-
-      { 0, 0, 0, 1, 0, 0, 0, 0 },    // G
-      { 1, 0, 0, 1, 0, 0, 0, 1 },    // D
-      { 1, 0, 0, 1, 1, 0, 0, 1 },    // A
-      { 1, 1, 0, 1, 1, 0, 0, 1 },    // E
-      { 1, 1, 0, 1, 1, 1, 0, 1 },    // H
-      { 1, 1, 1, 1, 1, 1, 0, 1 },    // fis
-      { 1, 1, 1, 1, 1, 1, 1, 1 }     // cis
-      };
-
-//---------------------------------------------------------
-//    pitch2y
-//    y  = 0 = top staff line
-//
-//    key: -7 - +7  (C==0)
-//    userPrefix = -1   no user defined prefix
-//    return line and prefix
-//---------------------------------------------------------
-
-static int pitch2y(int pitch, int userPrefix, int clef, int key, int& prefix, const char* tversatz)
-      {
-// printf("pitch2y %d %d %d %d\n", pitch, userPrefix, clef, key);
-
-      int clefOffset = clefTable[clef].yOffset;
-      bool natural = false;
-      int l1;
-      int mtone  = pitch % 12;
-      int octave = pitch / 12;
-      octave = pitch / 12;
-      natural = false;
-      if (userPrefix == ACC_NATURAL) {
-            userPrefix = ACC_NONE;
-            natural = true;
-            }
-
-      l1 = table1[key+7][mtone];
-
-      while (l1 < 0) {
-            l1 += 7;
-            octave--;
-            mtone += 12;
-            }
-      static char table2[8] = { 0, 2, 4, 5, 7, 9, 11, 12 };
-
-      int l2     = 45 - l1 - (octave * 7) + clefOffset;
-      int offset = mtone - table2[l1];
-      switch (offset) {
-            case -2:   prefix = 4; break;
-            case -1:   prefix = 2; break;
-            case 0:    prefix = 0; break;
-            case 1:    prefix = 1; break;
-            case 2:    prefix = 3; break;
-            default:
-                  printf("pitch2y: internal error: bad val %d, (l1=%d mtone=%d)\n",
-                     offset, l1, mtone);
-                  abort();
-            }
-      int cprefix = tversatz[l1 + octave * 7];
-      if (cprefix == 0)
-            cprefix = tab3[key+7][l1];
-      if (cprefix == 5)
-            cprefix = 0;
-      if (cprefix) {
-            if (prefix == cprefix)
-                  prefix = 0;             // keine Versetzung
-            else if (prefix == 0) {
-                  prefix = 5;
-                  }
-            }
-      if (natural)
-            prefix = 5;
-      return l2;
       }
 
 //---------------------------------------------------------
@@ -411,6 +288,42 @@ void Measure::setEndBarLine(BarLine* barLine)
       }
 
 //---------------------------------------------------------
+//   tpc2line
+//---------------------------------------------------------
+
+inline static int tpc2line(int tpc)
+      {
+      static const int lines[7] = { 3, 0, 4, 1, 5, 2, 6 };
+      return lines[(tpc+1) % 7];
+      }
+
+//---------------------------------------------------------
+//   initLineList
+//    preset lines list with accidentals for given key
+//---------------------------------------------------------
+
+static void initLineList(char* ll, int key)
+      {
+      memset(ll, 0, 74);
+      for (int octave = 0; octave < 11; ++octave) {
+            if (key > 0) {
+                  for (int i = 0; i < key; ++i) {
+                        int idx = tpc2line(20 + i) + octave * 7;
+                        if (idx < 74)
+                              ll[idx] = 1;
+                        }
+                  }
+            else {
+                  for (int i = 0; i > key; --i) {
+                        int idx = tpc2line(12 + i) + octave * 7;
+                        if (idx < 74)
+                              ll[idx] = -1;
+                        }
+                  }
+            }
+      }
+
+//---------------------------------------------------------
 //   layoutNoteHeads
 //---------------------------------------------------------
 
@@ -421,9 +334,11 @@ void Measure::setEndBarLine(BarLine* barLine)
 
 void Measure::layoutNoteHeads(ScoreLayout*, int staff)
       {
-// printf("Measure::layoutNoteHeads(this=%p staff=%d)\n", this, staff);
-      char tversatz[75];
-      memset(tversatz, 0, sizeof(tversatz));
+      char tversatz[74];      // list of already set accidentals for this measure
+
+      int key  = _score->staff(staff)->keymap()->key(tick());
+      initLineList(tversatz, key);
+
       for (Segment* segment = first(); segment; segment = segment->next()) {
             int startTrack = staff * VOICES;
             int endTrack   = startTrack + VOICES;
@@ -438,57 +353,51 @@ void Measure::layoutNoteHeads(ScoreLayout*, int staff)
                   int ll         = -1000;    // make sure top head is not mirrored
                   int move1      = nl->front()->move();
                   Tuplet* tuplet = chord->tuplet();
-                  // printf("tick=%d key=%d\n", tick, _score->keymap->key(tick));
 
                   for (riNote in = nl->rbegin(); in != nl->rend(); ++in) {
                         Note* note  = in->second;
-                        if (tuplet)
-                              note->setHead(tuplet->baseLen());
-                        else
-                              note->setHead(chord->tickLen());
+                        note->setHead(tuplet ? tuplet->baseLen() : chord->tickLen());
                         int pitch   = note->pitch();
                         int move    = note->move();
-                        Staff* staffp = _score->staff(staff+move);
-                        int clef    = staffp->clef()->clef(tick);
-                        int userAcc = note->userAccidental();
-                        int key     = _score->staff(staff)->keymap()->key(tick);
+                        int clef = note->staff()->clef()->clef(tick);
 
-                        int prefix;
-                        int line = note->line();
-                        if (userAcc != -1) {
-                              int np = line2pitch(line, clef);
-                              int offset = pitch - np;
-                              switch (offset) {
-                                    case -2:   prefix = 4; break;
-                                    case -1:   prefix = 2; break;
-                                    case 0:    prefix = 0; break;
-                                    case 1:    prefix = 1; break;
-                                    case 2:    prefix = 3; break;
-                                    default:
-                                          printf("line2pitch: error2: tick %d bad offset %d(%d-%d), line %d clef %d\n",
-                                             tick, offset, pitch, np, line, clef);
-                                          //abort();
-                                          break;
+                        //
+                        // compute accidental
+                        //
+                        int tpc        = note->tpc();
+                        int line       = tpc2line(tpc) + (pitch/12) * 7;
+                        int accidental = ((tpc + 1) / 7) - 2;
+
+                        if (accidental && !tversatz[line]) {
+                              tversatz[line] = accidental;
+                              switch(accidental) {
+                                    case -2: accidental = ACC_FLAT2;  break;
+                                    case -1: accidental = ACC_FLAT;   break;
+                                    case  1: accidental = ACC_SHARP;  break;
+                                    case  2: accidental = ACC_SHARP2; break;
+                                    default: printf("bad accidental\n"); break;
                                     }
                               }
-                        else {
-                              line = ::pitch2y(pitch, userAcc, clef, key, prefix, tversatz);
-                              note->setLine(line);
+                        else if (accidental == tversatz[line])
+                              accidental = 0;
+                        else if (!accidental && tversatz[line]) {
+                              tversatz[line] = 0;
+                              accidental = ACC_NATURAL;   // natural
                               }
-                        int offset = clefTable[clef].yOffset;
-                        if (prefix) {
-                              int l1       = 45 - line + offset;
-                              tversatz[l1] = prefix;
-                              }
-                        if (mirror || (((line - ll) < 2) && move1 == move)) {
+
+                        //
+                        // calculate the real note line depending on clef
+                        //
+                        line = 127 - line - 82 + clefTable[clef].yOffset;
+                        note->setLine(line);
+
+                        if (mirror || (((line - ll) < 2) && move1 == move))
                               mirror = !mirror;
-                              }
+
                         move1 = move;
                         note->setMirror(mirror);
-                        note->setAccidental(userAcc == -1 ? prefix : userAcc);
+                        note->setAccidental(accidental);
                         ll = line;
-//                        printf("tick=%d key=%d pitch=%d line=%d ua=%d pref=%d\n",
-//                                tick, key, pitch, line, userAcc, prefix);
                         }
                   }
             }

@@ -57,6 +57,7 @@ Note::Note(Score* s)
       _tieFor         = 0;
       _tieBack        = 0;
       _head           = 0;
+      _tpc            = -1;
       }
 
 Note::Note(Score* s, int p, bool g)
@@ -73,8 +74,19 @@ Note::Note(Score* s, int p, bool g)
       _dots           = 0;
       _tieFor         = 0;
       _tieBack        = 0;
-      _pitch          = p;
+      setPitch(p);
       _head           = 0;
+      _tpc            = -1;
+      }
+
+//---------------------------------------------------------
+//   setPitch
+//---------------------------------------------------------
+
+void Note::setPitch(int val)
+      {
+      _pitch = val;
+      _tpc   = (((((_pitch % 12) * 7) % 12) + 5) % 12) + 9;
       }
 
 //---------------------------------------------------------
@@ -660,7 +672,7 @@ void Note::endDrag()
       _line      += _lineOffset;
       _lineOffset = 0;
       int clef    = chord()->staff()->clef()->clef(chord()->tick());
-      _pitch      = line2pitch(_line, clef);
+      setPitch(line2pitch(_line, clef));
       }
 
 //---------------------------------------------------------

@@ -61,7 +61,7 @@
 #include "keyfinder.h"
 #include "midifile.h"
 #include "sig.h"
-#include "analyse.h"
+#include "midifile.h"
 #include "pitchspelling.h"
 
 //---------------------------------------------------------
@@ -79,7 +79,7 @@ struct SBeat {
 struct MidiSegment {
       int start;
       int end;
-      QList<SNote> snote;
+      QList<MidiNote> snote;
       int numnotes;           // number of notes in the segment
       double average_dur;     // average input vector value (needed for K-S algorithm)
       };
@@ -117,7 +117,7 @@ Krumhansl's minor, normalized: 5.94 2.51 3.30 5.05 2.44 3.31 2.38 4.46 3.73 2.52
 */
 
 static int firstbeat;
-static QList<SNote> note;
+static QList<MidiNote*> note;
 static QList<MidiSegment> segment;  // An array storing the notes in each segment
 static int segtotal;                // total number of segments - 1
 
@@ -213,35 +213,42 @@ static void create_segments()
 static void fill_segments()
       {
       for (int s = 0; s < segment.size(); ++s) {
-            foreach (const SNote n, note) {
-                  SNote sn;
-                  if (n.ontime >= segment[s].start && n.ontime < segment[s].end
-                     && n.offtime <= segment[s].end) {
-                        /* note begins and ends in segment */
-                        sn.pitch    = n.pitch;
-                        sn.tpc      = n.tpc;
-                        sn.duration = n.duration;
+            foreach (const MidiNote* n, note) {
+                  int ontime  = n->ontime();
+                  int offtime = n->offtime();
+                  int start   = segment[s].start;
+                  int end     = segment[s].end;
+
+                  if (ontime >= start && ontime < end && offtime <= end) {
+                        // note begins and ends in segment
+                        MidiNote sn;
+                        sn.setPitch(n->pitch());
+                        sn.setTpc(n->tpc());
+                        sn.setDuration(n->duration());
                         segment[s].snote.append(sn);
                         }
-                  if (n.ontime >= segment[s].start && n.ontime < segment[s].end && n.offtime > segment[s].end) {
-                        /* note begins, doesn't end in segment*/
-                        sn.pitch    = n.pitch;
-                        sn.tpc      = n.tpc;
-                        sn.duration = segment[s].end - n.ontime;
+                  if (ontime >= start && ontime < end && offtime > end) {
+                        // note begins, doesn't end in segment
+                        MidiNote sn;
+                        sn.setPitch(n->pitch());
+                        sn.setTpc(n->tpc());
+                        sn.setDuration(end - ontime);
                         segment[s].snote.append(sn);
                         }
-                  if (n.ontime < segment[s].start && n.offtime > segment[s].start && n.offtime <= segment[s].end) {
-                        /* note ends, doesn't begin in segment */
-                        sn.pitch    = n.pitch;
-                        sn.tpc      = n.tpc;
-                        sn.duration = n.offtime - segment[s].start;
+                  if (ontime < start && offtime > start && offtime <= end) {
+                        // note ends, doesn't begin in segment
+                        MidiNote sn;
+                        sn.setPitch(n->pitch());
+                        sn.setTpc(n->tpc());
+                        sn.setDuration(offtime - start);
                         segment[s].snote.append(sn);
                         }
-                  if (n.ontime < segment[s].start && n.offtime > segment[s].end) {
-                        /* note doesn't begin or end in segment */
-                        sn.pitch    = n.pitch;
-                        sn.tpc      = n.tpc;
-                        sn.duration = segment[s].end - segment[s].start;
+                  if (ontime < start && offtime > end) {
+                        // note doesn't begin or end in segment
+                        MidiNote sn;
+                        sn.setPitch(n->pitch());
+                        sn.setTpc(n->tpc());
+                        sn.setDuration(end - start);
                         segment[s].snote.append(sn);
                         }
                   }
@@ -268,9 +275,9 @@ static void count_segment_notes()
 
             for (int n = 0; n < segment[s].numnotes; ++n) {
                   if (scoring_mode == 0)
-                        total_dur += segment[s].snote[n].duration;
+                        total_dur += segment[s].snote[n].duration();
                   for (int y=0; y<28; ++y) {
-            	      if (segment[s].snote[n].tpc == y) {
+            	      if (segment[s].snote[n].tpc() == y) {
             	            if(seg_prof[y][s]==0)
                                     pc_tally[s]++;
                   	      /* This keeps track of how many different pc's the segment contains. This counts TPCs, not NPCs! */
@@ -279,7 +286,7 @@ static void count_segment_notes()
                               if (scoring_mode > 0)
                                     seg_prof[y][s] = 1;
 		                  else {
-                                    seg_prof[y][s] += segment[s].snote[n].duration;
+                                    seg_prof[y][s] += segment[s].snote[n].duration();
                                     }
                               }
                         }
@@ -840,24 +847,19 @@ int findKey(MidiTrack* mt, SigList* sigmap)
             if (e->type() != ME_NOTE)
                   continue;
             MidiNote* mn = (MidiNote*)e;
-            SNote n;
-            n.ontime  = mn->ontime();
-            n.offtime = mn->ontime() + mn->duration();
-            if (n.offtime > lastTick)
-                  lastTick = n.offtime;
-            n.duration = mn->duration();
-            n.pitch    = mn->pitch();
-// For note input, generate TPC labels within the 9-to-20 range
-//            n.tpc      = ((((((pitch % 12) * 7) % 12) + 5) % 12) + 9);
-            note.append(n);
+            if (mn->offtime() > lastTick)
+                  lastTick = mn->offtime();
+            // For note input, generate TPC labels within the 9-to-20 range
+            mn->setTpc((((((mn->pitch() % 12) * 7) % 12) + 5) % 12) + 9);
+            note.append(mn);
             }
-      spell(note);
+      spell(note, 0);
 
 #if 0
-      foreach(SNote n, note) {
+      foreach(MidiNote* n, note) {
             int tpc = ((((((n.pitch % 12) * 7) % 12) + 5) % 12) + 9);
             printf("Note %d pitch %3d  %3d %3d\n",
-               n.ontime, n.pitch, n.tpc, tpc);
+               n->ontime(), n->pitch(), n->tpc(), tpc);
             }
 #endif
       npc_found = 1;
@@ -924,11 +926,12 @@ int findKey(MidiTrack* mt, SigList* sigmap)
                   }
             }
       xkey -= 14;
-      // xkey -= 15;       // bennyR
       if (xkey < -7 || xkey > 7) {
             printf("illegal key %d found\n", xkey);
             xkey = 0;
             }
+
+      spell(note, xkey);      // spell again with found key
 
       //
       // clear all arrays
