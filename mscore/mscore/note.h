@@ -47,6 +47,7 @@ class Viewer;
 
 class Note : public Element {
       int _pitch;             ///< Note pitch as midi value (0 - 127).
+      int _tpc;               ///< tonal pitch class
       int _userAccidental;    ///< -1 - automatic accidental.
       int _line;              ///< y-Position; 0 - top line.
       int _move;              ///< -1, 0, +1.
@@ -77,23 +78,25 @@ class Note : public Element {
       virtual ElementType type() const { return NOTE; }
 
       virtual QRectF bbox() const;
-      bool grace() const            { return _grace; }
-      void setGrace(bool val)       { _grace = val;  }
+      bool grace() const              { return _grace; }
+      void setGrace(bool val)         { _grace = val;  }
 
       void setHead(int);
       int totalTicks() const;
       void setType(DurationType);
-      void setDots(int n)           { _dots = n; }
-      int dots() const              { return _dots; }
+      void setDots(int n)             { _dots = n; }
+      int dots() const                { return _dots; }
 
       double headWidth() const;
-      int noteHead()                { return _head;  }
+      int noteHead()                  { return _head;  }
 
-      int pitch() const             { return _pitch; }
-      void setPitch(int val)        { _pitch = val; }
+      int pitch() const               { return _pitch; }
+      void setPitch(int val);
+      int tpc() const                 { return _tpc; }
+      void setTpc(int v)              { _tpc = v;    }
       void changePitch(int val);
-      int move() const              { return _move; }
-      void setMove(int val)         { _move = val; }
+      int move() const                { return _move; }
+      void setMove(int val)           { _move = val; }
 
       int userAccidental() const      { return _userAccidental; }
       void setUserAccidental(int i)   { _userAccidental = i; }

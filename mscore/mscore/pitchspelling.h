@@ -21,9 +21,9 @@
 #ifndef __PITCHSPELLING_H__
 #define __PITCHSPELLING_H__
 
-#include "analyse.h"
+class MidiNote;
 
-void spell(QList<SNote>& notes);
+void spell(QList<MidiNote*>& notes, int);
 
 #endif
 
