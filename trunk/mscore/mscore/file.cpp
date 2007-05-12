@@ -701,7 +701,6 @@ bool Score::loadFile(QFile* qf)
                         }
                   }
             }
-      // fixTicks();       //DEBUG
 
       //
       // create missing barlines
@@ -731,6 +730,7 @@ bool Score::loadFile(QFile* qf)
       _layout->connectTies();
       searchSelectedElements();
       _fileDivision = division;
+      spell();
       return false;
       }
 

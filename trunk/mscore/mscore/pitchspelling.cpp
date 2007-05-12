@@ -23,6 +23,13 @@
 //  "Automatic Pitch Spelling: From Numbers to Sharps and Flats"
 
 #include "midifile.h"
+#include "score.h"
+#include "layout.h"
+#include "globals.h"
+#include "chord.h"
+#include "note.h"
+#include "staff.h"
+#include "key.h"
 
 //    TPC - tonal pitch classes
 //    "line of fifth's" LOF
@@ -141,11 +148,11 @@ static const bool enharmonicSpelling[15][34] = {
          1, 1, 1, 1, 1, 1, // bb
       1, 1, 0, 0, 0, 0, 0, // b
       0, 0, 0, 0, 0, 1, 1,
-      0, 0, 0, 0, 1, 1, 1, // #
+      0, 0, 0, 1, 1, 1, 1, // #
       1, 1, 1, 1, 1, 1, 1  // ##
       },
       {
-//F      f  c  g  d  a  e  b
+//F   f  c  g  d  a  e  b
          1, 1, 1, 1, 1, 1, // bb
       1, 1, 0, 0, 0, 0, 0, // b
       0, 0, 0, 0, 0, 0, 0,
@@ -288,6 +295,56 @@ static int computeWindow(const QList<MidiNote*>& notes, int start, int end, int 
       }
 
 //---------------------------------------------------------
+//   computeWindow
+//---------------------------------------------------------
+
+static int computeWindow(const QList<Note*>& notes, int start, int end, int keyIdx)
+      {
+      int p   = 10000;
+      int idx = -1;
+      int pitch[10];
+
+      int i = start;
+      int k = 0;
+      while (i < end)
+            pitch[k++] = notes[i++]->pitch() % 12;
+
+      for (; k < 10; ++k)
+            pitch[k] = pitch[k-1];
+
+      for (int i = 0; i < 512; ++i) {
+            int pa    = 0;
+            int pb    = 0;
+            int l     = pitch[0] * 2 + (i & 1);
+            int lof1a = tab1[l];
+            int lof1b = tab2[l];
+
+            for (int k = 1; k < 10; ++k) {
+                  int l = pitch[k] * 2 + ((i & (1 << k)) >> k);
+                  int lof2a = tab1[l];
+                  int lof2b = tab2[l];
+                  pa += penalty(lof1a, lof2a, keyIdx);
+                  pb += penalty(lof1b, lof2b, keyIdx);
+                  lof1a = lof2a;
+                  lof1b = lof2b;
+                  }
+            if (pa < pb) {
+                  if (pa < p) {
+                        p   = pa;
+                        idx = i;
+                        }
+                  }
+            else {
+                  if (pb < p) {
+                        p   = pb;
+                        idx = i * -1;
+                        }
+                  }
+            }
+      return idx;
+      }
+
+//---------------------------------------------------------
 //   spell
 //---------------------------------------------------------
 
@@ -337,6 +394,89 @@ void spell(QList<MidiNote*>& notes, int key)
                   }
             // advance to next window
             start += 3;
+            }
+      }
+
+//---------------------------------------------------------
+//   spell
+//---------------------------------------------------------
+
+void spell(QList<Note*> notes, int key)
+      {
+      int n = notes.size();
+
+      int start = 0;
+      while (start < n) {
+            int end = start + WINDOW;
+            if (end > n)
+                  end = n;
+            int opt = computeWindow(notes, start, end, key + 7);
+            const int* tab;
+            if (opt < 0) {
+                  tab = tab2;
+                  opt *= -1;
+                  }
+            else
+                  tab = tab1;
+
+            if (start == 0) {
+                  notes[0]->setTpc(tab[(notes[0]->pitch() % 12) * 2 + (opt & 1)]);
+                  notes[1]->setTpc(tab[(notes[1]->pitch() % 12) * 2 + ((opt & 2)>>1)]);
+                  notes[2]->setTpc(tab[(notes[2]->pitch() % 12) * 2 + ((opt & 4)>>2)]);
+                  }
+            if ((end - start) >= 6) {
+                  notes[start+3]->setTpc(tab[(notes[start+3]->pitch() % 12) * 2 + ((opt &  8) >> 3)]);
+                  notes[start+4]->setTpc(tab[(notes[start+4]->pitch() % 12) * 2 + ((opt & 16) >> 4)]);
+                  notes[start+5]->setTpc(tab[(notes[start+5]->pitch() % 12) * 2 + ((opt & 32) >> 5)]);
+                  }
+            if (end == n) {
+                  int n = end - start;
+                  int k;
+                  switch(n - 6) {
+                        case 3:
+                              k = end - start - 3;
+                              notes[end-3]->setTpc(tab[(notes[end-3]->pitch() % 12) * 2 + ((opt & (1<<k)) >> k)]);
+                        case 2:
+                              k = end - start - 2;
+                              notes[end-2]->setTpc(tab[(notes[end-2]->pitch() % 12) * 2 + ((opt & (1<<k)) >> k)]);
+                        case 1:
+                              k = end - start - 1;
+                              notes[end-1]->setTpc(tab[(notes[end-1]->pitch() % 12) * 2 + ((opt & (1<<k)) >> k)]);
+                        }
+                  break;
+                  }
+            // advance to next window
+            start += 3;
+            }
+      }
+
+//---------------------------------------------------------
+//   spell
+//---------------------------------------------------------
+
+void Score::spell()
+      {
+      for (int i = 0; i < nstaves(); ++i) {
+            QList<Note*> notes;
+            int key = staff(i)->keymap()->key(0);
+            for(Measure* m = _layout->first(); m; m = m->next()) {
+                  for (Segment* s = m->first(); s; s = s->next()) {
+                        int strack = i * VOICES;
+                        int etrack = strack + VOICES;
+                        for (int track = strack; track < etrack; ++track) {
+                              Element* e = s->element(track);
+                              if (e && e->type() == CHORD) {
+                                    Chord* chord = (Chord*) e;
+                                    const NoteList* nl = chord->noteList();
+                                    for (ciNote in = nl->begin(); in != nl->end(); ++in) {
+                                          Note* note = in->second;
+                                          notes.append(note);
+                                          }
+                                    }
+                              }
+                        }
+                  }
+            ::spell(notes, key);
             }
       }
 

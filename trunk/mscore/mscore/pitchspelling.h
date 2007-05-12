@@ -23,6 +23,16 @@
 
 class MidiNote;
 
+//---------------------------------------------------------
+//   tpc2line
+//---------------------------------------------------------
+
+inline static int tpc2line(int tpc)
+      {
+      static const int lines[7] = { 3, 0, 4, 1, 5, 2, 6 };
+      return lines[(tpc+1) % 7];
+      }
+
 void spell(QList<MidiNote*>& notes, int);
 
 #endif

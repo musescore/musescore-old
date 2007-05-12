@@ -1,3 +1,5 @@
+12.5.7 (ws)
+      - apply pitch spelling algo to normal score after read()
 10.5.7 (ws)
       - implemented pitch spelling for midi import
       - reorganization of midi import
