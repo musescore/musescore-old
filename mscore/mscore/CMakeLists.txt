@@ -177,3 +177,18 @@ set_target_properties( smf2xml
 
 install_targets ( /bin mscore )
 
+#======================================
+#     target xml2smf
+#======================================
+
+add_executable ( xml2smf xml2smf.cpp midifile.cpp xml.cpp sig.cpp)
+
+target_link_libraries( xml2smf
+      ${QT_LIBRARIES}
+      )
+set_target_properties( xml2smf
+      PROPERTIES COMPILE_FLAGS "-include ${PROJECT_BINARY_DIR}/all.h"
+      )
+
+install_targets ( /bin mscore )
+

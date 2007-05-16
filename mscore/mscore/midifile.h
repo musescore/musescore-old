@@ -36,6 +36,7 @@ enum {
       ME_SYSEX      = 0xf0,
       ME_META       = 0xff,
       ME_SONGPOS    = 0xf2,
+      ME_ENDSYSEX   = 0xf7,
       ME_CLOCK      = 0xf8,
       ME_START      = 0xfa,
       ME_CONTINUE   = 0xfb,
@@ -139,7 +140,7 @@ class MidiChannelEvent : public MidiEvent {
       char _channel;
 
    public:
-      MidiChannelEvent()          { _channel = -1;   }
+      MidiChannelEvent()          { _channel = 0;   }
       MidiChannelEvent(int t, int c) : MidiEvent(t), _channel(c) {}
       bool isChannelEvent() const { return true;     }
       int channel() const         { return _channel; }
@@ -299,7 +300,12 @@ class MidiMeta : public MidiData {
       virtual void dump(Xml&) const;
       };
 
-typedef QMultiMap<int, MidiEvent*> EventList;
+class EventList : public QList<MidiEvent*> {
+   public:
+      void insert(MidiEvent*);
+      void insert(int,int);
+      };
+
 typedef EventList::iterator iEvent;
 typedef EventList::const_iterator ciEvent;
 
@@ -316,6 +322,9 @@ class MidiTrack {
       int _outPort;
       QString _name;
       QString _comment;
+
+   protected:
+      void readXml(QDomNode);
 
    public:
       int maxPitch;
@@ -337,7 +346,8 @@ class MidiTrack {
       void setName(const QString& s)    { _name = s;          }
       QString comment() const           { return _comment;    }
       void setComment(const QString& s) { _comment = s;       }
-      void insert(MidiEvent* e)         { _events.insert(e->ontime(), e); }
+      void insert(MidiEvent* e)         { _events.insert(e);  }
+      void append(MidiEvent* e)         { _events.append(e);  }
       void mergeNoteOnOff();
       void cleanup();
       void changeDivision(int newDivision);
@@ -345,6 +355,8 @@ class MidiTrack {
       bool isDrumTrack() const;
       void extractTimeSig(SigList* sig);
       void quantize(int startTick, int endTick, EventList* dst);
+
+      friend class MidiFile;
       };
 
 typedef QList<MidiTrack*> MidiTrackList;
@@ -371,6 +383,7 @@ class MidiFile {
       int _division;
       int curPos;
       int _format;
+      bool _noRunningStatus;  // do not use running status on output
 
       MidiType _midiType;
       char errorBuffer[512];
@@ -400,6 +413,7 @@ class MidiFile {
       MidiFile();
       bool read(QIODevice*);
       bool write(QIODevice*);
+      void readXml(QDomNode);
 
       MidiTrackList* tracks()       { return &_tracks;  }
       MidiType midiType() const     { return _midiType; }
@@ -413,15 +427,18 @@ class MidiFile {
       void sortTracks();
       void separateChannel();
       void move(int ticks);
-      SigList siglist() const { return _siglist; }
+      SigList siglist() const         { return _siglist;         }
+      int noRunningStatus() const     { return _noRunningStatus; }
+      void setNoRunningStatus(bool v) { _noRunningStatus = v;    }
 
-//      friend class MidiNote;
       friend class MidiNoteOn;
       friend class MidiNoteOff;
       friend class MidiMeta;
       friend class MidiSysex;
       friend class MidiController;
       };
+
+extern QString midiMetaName(int meta);
 
 #endif
 

@@ -25,12 +25,8 @@
 
 static const char versionString[] = "0.1";
 
-int division  = 480;
+int division         = 480;
 bool debugMode       = false;
-bool mergeNotes      = false;
-bool separateChannel = false;
-bool cleanup         = false;
-bool smfOutput       = false;
 bool noRunningStatus = false;
 
 //---------------------------------------------------------
@@ -39,7 +35,7 @@ bool noRunningStatus = false;
 
 static void printVersion()
       {
-      printf("This is smf2xml version %s\n", versionString);
+      printf("This is xml2smf version %s\n", versionString);
       }
 
 //---------------------------------------------------------
@@ -49,15 +45,11 @@ static void printVersion()
 static void usage()
       {
       printVersion();
-      printf("Usage: smf2xml [args] [infile] [outfile]\n");
+      printf("Usage: xml2smf [args] [infile] [outfile]\n");
       printf("   args:\n"
              "      -v      print version\n"
              "      -d      debug mode\n"
-             "      -m      merge note on/off events\n"
-             "      -s      separate channels into different tracks\n"
-             "      -c      cleanup: quantize, remove overlaps\n"
              "      -D nn   change division to nn\n"
-             "      -M      output smf instead of xml\n"
              "      -r      do not use running status for smf output\n"
             );
       }
@@ -70,7 +62,7 @@ int main(int argc, char* argv[])
       {
       int c;
       int division = -1;
-      while ((c = getopt(argc, argv, "vdmscD:Mr")) != EOF) {
+      while ((c = getopt(argc, argv, "vdD:r")) != EOF) {
             switch (c) {
                   case 'v':
                         printVersion();
@@ -78,20 +70,8 @@ int main(int argc, char* argv[])
                   case 'd':
                         debugMode = true;
                         break;
-                  case 'm':
-                        mergeNotes = true;
-                        break;
-                  case 's':
-                        separateChannel = true;
-                        break;
-                  case 'c':
-                        cleanup = true;
-                        break;
                   case 'D':
                         division = atoi(optarg);
-                        break;
-                  case 'M':
-                        smfOutput = true;
                         break;
                   case 'r':
                         noRunningStatus = true;
@@ -101,9 +81,6 @@ int main(int argc, char* argv[])
                         return -1;
                   }
             }
-      if (cleanup)
-            mergeNotes = true;
-
       QIODevice* in = 0;
       QIODevice* out = 0;
 
@@ -137,40 +114,32 @@ int main(int argc, char* argv[])
             ((QFile*)out)->open(stdout, QIODevice::WriteOnly);
             }
 
+      QDomDocument doc;
+      int line, column;
+      QString err;
+      if (!doc.setContent(in, false, &err, &line, &column)) {
+            printf("error reading file at line %d column %d: %s\n",
+               line, column, err.toLatin1().data());
+            return 1;
+            }
+
       MidiFile mf;
-      mf.read(in);
+      for (QDomNode node = doc.documentElement(); !node.isNull(); node = node.nextSibling()) {
+            QDomElement e = node.toElement();
+            if (e.isNull())
+                  continue;
+            if (e.tagName() == "SMF") {
+                  mf.readXml(node);
+                  break;
+                  }
+            }
       in->close();
 
-      if (mergeNotes)
-            mf.process1();
-      if (separateChannel)
-            mf.separateChannel();
       if (division != -1)
             mf.changeDivision(division);
 
-      if (smfOutput) {
-            mf.setNoRunningStatus(noRunningStatus);
-            mf.write(out);
-            }
-      else {
-            Xml xml(out);
-
-            xml.header();
-            xml.stag("SMF");
-            xml.tag("format", mf.format());
-            xml.tag("division", mf.division());
-
-            MidiTrackList* tl = mf.tracks();
-            foreach(MidiTrack* t, *tl) {
-                  if (cleanup)
-                        t->cleanup();
-                  xml.stag("Track");
-                  foreach (const MidiEvent* e, t->events())
-                        e->dump(xml);
-                  xml.etag();
-                  }
-            xml.etag();
-            }
+      mf.setNoRunningStatus(noRunningStatus);
+      mf.write(out);
       out->close();
       delete out;
       delete in;
