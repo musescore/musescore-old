@@ -1107,8 +1107,8 @@ void Score::convertMidi(MidiFile* mf)
             if (!el.empty()) {
                   ciEvent i = el.end();
                   --i;
-                  if (i.key() >lastTick)
-                        lastTick = i.key();
+                  if ((*i)->ontime() >lastTick)
+                        lastTick = (*i)->ontime();
                   }
             }
 
@@ -1125,11 +1125,13 @@ void Score::convertMidi(MidiFile* mf)
             int tick2 = sigmap->bar2tick(startBar + 1, 0, 0);
             int events = 0;
             foreach (MidiTrack* midiTrack, *tracks) {
-                  const EventList el = midiTrack->events();
-                  ciEvent i1 = el.lowerBound(tick1);
-                  ciEvent i2 = el.lowerBound(tick2);
-                  for (ciEvent ie = i1; ie != i2; ++ie) {
-                        if (ie.value()->type() == ME_NOTE) {
+                  foreach(const MidiEvent* ev, midiTrack->events()) {
+                        int t = ev->ontime();
+                        if (t >= tick2)
+                              break;
+                        if (t < tick1)
+                              continue;
+                        if (ev->type() == ME_NOTE) {
                               ++events;
                               break;
                               }
@@ -1150,9 +1152,9 @@ void Score::convertMidi(MidiFile* mf)
       foreach (MidiTrack* midiTrack, *tracks) {
             const EventList el = midiTrack->events();
             for (ciEvent ie = el.begin(); ie != el.end(); ++ie) {
-                  if (ie.value()->type() != ME_NOTE)
+                  if ((*ie)->type() != ME_NOTE)
                         continue;
-                  int tick = ie.key() + ((MidiNote*)ie.value())->duration();
+                  int tick = (*ie)->ontime() + ((MidiNote*)(*ie))->duration();
                   if (tick > lastTick)
                         lastTick = tick;
                   }
@@ -1234,7 +1236,7 @@ void Score::convertTrack(MidiTrack* midiTrack, int staffIdx)
 
 	int ctick = 0;
       for (ciEvent i = el.begin(); i != el.end();) {
-            MidiEvent* e = i.value();
+            MidiEvent* e = *i;
             if (e->type() != ME_NOTE) {
                   ++i;
                   continue;
@@ -1244,7 +1246,7 @@ void Score::convertTrack(MidiTrack* midiTrack, int staffIdx)
             //
             while (!notes.isEmpty()) {
                   int tick = notes[0]->ontime;
-                  int len  = i.key() - tick;
+                  int len  = (*i)->ontime() - tick;
                   if (len <= 0)
                         break;
             	foreach (MNote* n, notes) {
@@ -1288,7 +1290,7 @@ void Score::convertTrack(MidiTrack* midiTrack, int staffIdx)
             //
             // check for gap and fill with rest
             //
-            int restLen = i.key() - ctick;
+            int restLen = (*i)->ontime() - ctick;
             while (restLen > 0) {
                   int len = restLen;
       		Measure* measure = tick2measure(ctick);
@@ -1309,10 +1311,10 @@ void Score::convertTrack(MidiTrack* midiTrack, int staffIdx)
             // tick position
             //
             for (;i != el.end(); ++i) {
-            	MidiEvent* e = i.value();
+            	MidiEvent* e = *i;
                   if (e->type() != ME_NOTE)
                         continue;
-                  if (i.key() != ctick)
+                  if ((*i)->ontime() != ctick)
                         break;
                   MidiNote* mn = (MidiNote*)e;
             	MNote* n = new MNote(mn->pitch(), mn->velo(), mn->ontime(),
@@ -1369,7 +1371,7 @@ void Score::convertTrack(MidiTrack* midiTrack, int staffIdx)
 
       measure = tick2measure(0);
       for (ciEvent i = el.begin(); i != el.end(); ++i) {
-            MidiEvent* e = i.value();
+            MidiEvent* e = *i;
             if (e->type() == ME_META) {
                   MidiMeta* mm = (MidiMeta*)e;
                   switch(mm->metaType()) {
