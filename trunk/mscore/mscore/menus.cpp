@@ -261,10 +261,10 @@ void MuseScore::showPalette(bool visible)
             //    Accidentals
             //-----------------------------------
 
-            sp = new Palette(3, 5);
+            sp = new Palette(2, 5);
             sp->setGrid(36, 36);
 
-            for (int i = 1; i < 16; ++i) {
+            for (int i = 1; i < 11; ++i) {
                   Accidental* s = new Accidental(cs);
                   s->setSubtype(i);
                   sp->addObject(i-1, s, s->name());

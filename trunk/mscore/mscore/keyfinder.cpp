@@ -628,7 +628,7 @@ static void match_profiles()
                      occurring? Then we have to multiply this by 12. (But not for something like a diminished
                      seventh which is symmetrical! */
 
-                  if(verbosity>=3) {
+                  if (verbosity>=3) {
                         printf("Best key for segment %d = %d, score = %6.8f\n", s, best_key, kprob[best_key]);
                         printf("Total (local) probability of segment %d: %6.8f\n", s, total_prob[s]);
                         }
@@ -804,22 +804,6 @@ static void best_key_analysis()
                   printf(" segment %d: %6.3f\n", s, final_score[s]);
                   }
             }
-#if 0
-      if (verbosity >= 1) {
-            /* This routine prints out the chosen key of each segment */
-            for (s = 0; s <= segtotal; ++s) {
-                  f = final[s];
-                  /* printf("Key of segment %d starting at time %d is %d: ", s, segment[s].start, f); */
-
-                  /* if ((s+1) % 10 == 0) printf("%d.", s+1); */
-
-                  if (s % 10 == 0)
-                        printf("\n");
-                  print_keyname(f);
-                  }
-            printf("\n");
-            }
-#endif
       }
 
 //---------------------------------------------------------
@@ -855,13 +839,6 @@ int findKey(MidiTrack* mt, SigList* sigmap)
             }
       spell(note, 0);
 
-#if 0
-      foreach(MidiNote* n, note) {
-            int tpc = ((((((n.pitch % 12) * 7) % 12) + 5) % 12) + 9);
-            printf("Note %d pitch %3d  %3d %3d\n",
-               n->ontime(), n->pitch(), n->tpc(), tpc);
-            }
-#endif
       npc_found = 1;
 
       // create one segment for every measure

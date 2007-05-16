@@ -266,7 +266,7 @@ MuseScore::MuseScore()
          << "beam-start" << "beam-mid" << "no-beam" << "beam32"
          << "file-open" << "file-new" << "file-template" << "file-save" << "file-save-as" << "file-close"
          << "export-midi" << "export-xml" << "import-midi" << "import-xml" << "quit"
-         << "toggle-statusbar" << "note-input"
+         << "toggle-statusbar" << "note-input" << "pitch-spell"
          ;
       foreach(const QString s, sl) {
             QAction* a = getAction(s.toLatin1().data());
@@ -490,8 +490,8 @@ MuseScore::MuseScore()
 
       QMenu* menuNotes = mb->addMenu(tr("Notes"));
 
-      a = getAction("note-input");
-      menuNotes->addAction(a);
+      menuNotes->addAction(getAction("note-input"));
+      menuNotes->addAction(getAction("pitch-spell"));
       menuNotes->addSeparator();
 
       QMenu* menuAddPitch = new QMenu(tr("Add Note"));

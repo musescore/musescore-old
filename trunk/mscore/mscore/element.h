@@ -66,9 +66,6 @@ enum ElementType {
       SEGMENT, SYSTEM, COMPOUND, CHORD, SLUR
       };
 
-// Accidentals
-enum { ACC_NONE, ACC_SHARP, ACC_FLAT, ACC_SHARP2, ACC_FLAT2, ACC_NATURAL };
-
 extern const char* elementNames[];  // for debugging
 
 //---------------------------------------------------------

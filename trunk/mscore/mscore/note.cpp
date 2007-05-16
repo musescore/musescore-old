@@ -36,6 +36,7 @@
 #include "padstate.h"
 #include "staff.h"
 #include "viewer.h"
+#include "pitchspelling.h"
 
 //---------------------------------------------------------
 //   Note
@@ -45,7 +46,6 @@ Note::Note(Score* s)
    : Element(s)
       {
       _pitch          = 0;
-      _userAccidental = -1;
       _durationType   = D_QUARTER;
       _grace          = false;
       _accidental     = 0;
@@ -66,7 +66,6 @@ Note::Note(Score* s, int p, bool g)
       _durationType   = D_QUARTER;
       _grace          = g;
       _accidental     = 0;
-      _userAccidental = -1;
       _mirror         = false;
       _line           = 0;
       _move           = 0;
@@ -86,7 +85,7 @@ Note::Note(Score* s, int p, bool g)
 void Note::setPitch(int val)
       {
       _pitch = val;
-      _tpc   = (((((_pitch % 12) * 7) % 12) + 5) % 12) + 9;
+      _tpc   = pitch2tpc(_pitch);
       }
 
 //---------------------------------------------------------
@@ -136,12 +135,10 @@ int Note::totalTicks() const
 
 /**
  Computes _line and _accidental,
- resets _userAccidental.
 */
 
 void Note::changePitch(int n)
       {
-      _userAccidental = -1;
       if (chord()) {
             // keep notes sorted in chord:
             Chord* c     = chord();
@@ -159,6 +156,7 @@ void Note::changePitch(int n)
             nl->insert(std::pair<const int, Note*> (n, this));
             }
       setPitch(n);
+      score()->spell(this);
       }
 
 //---------------------------------------------------------
@@ -167,98 +165,15 @@ void Note::changePitch(int n)
 
 /**
  Sets a "user selected" accidental.
- This recomputes _pitch.
+ This recomputes _pitch and _tpc.
 */
 
-void Note::changeAccidental(int pre)
+void Note::changeAccidental(int accType)
       {
-      _userAccidental = pre;
-
-      Measure* m = chord()->measure();
-      char tversatz[128];
-      memset(tversatz, 0, sizeof(tversatz));
-      if (pre == ACC_NONE) {
-            // compute current state:
-            bool found = false;
-            Segment* segment;
-            for (segment = m->first(); segment; segment = segment->next()) {
-                  int startTrack = staffIdx() * VOICES;
-                  int endTrack   = startTrack + VOICES;
-                  for (int track = startTrack; track < endTrack; ++track) {
-                        Element* e = segment->element(track);
-                        if (e == 0 || e->type() != CHORD)
-                              continue;
-                        if (chord() == (Chord*) e) {
-                              found = true;
-                              break;
-                              }
-                        NoteList* nl = ((Chord*)e)->noteList();
-                        int tick     = ((Chord*)e)->tick();
-                        for (iNote in = nl->begin(); in != nl->end(); ++in) {
-                              Note* note  = in->second;
-                              int nPrefix = Accidental::subtype2value(note->accidentalIdx());
-                              if (nPrefix) {
-                                    int offset   = score()->clefOffset(tick, staff());
-                                    int line     = note->line();
-                                    int l1       = 45 - line + offset;
-                                    tversatz[l1] = nPrefix;
-                                    }
-                              }
-                        }
-                  if (found)
-                        break;
-                  }
-            if (segment == 0)
-                  printf("Note not found in measure\n");
-            }
-
-     static int tab3[15][8] = {
-          //c  d  e  f  g  a  b  c
-          //------------------------
-          { 2, 2, 2, 2, 2, 2, 2, 2 },    // ces
-          { 2, 2, 2, 0, 2, 2, 2, 2 },    // ges
-          { 0, 2, 2, 0, 2, 2, 2, 0 },    // des
-          { 0, 2, 2, 0, 0, 2, 2, 0 },    // as
-          { 0, 0, 2, 0, 0, 2, 2, 0 },    // es
-          { 0, 0, 2, 0, 0, 0, 2, 0 },    // B
-          { 0, 0, 0, 0, 0, 0, 2, 0 },    // F
-
-          { 0, 0, 0, 0, 0, 0, 0, 0 },    // C
-
-          { 0, 0, 0, 1, 0, 0, 0, 0 },    // G
-          { 1, 0, 0, 1, 0, 0, 0, 1 },    // D
-          { 1, 0, 0, 1, 1, 0, 0, 1 },    // A
-          { 1, 1, 0, 1, 1, 0, 0, 1 },    // E
-          { 1, 1, 0, 1, 1, 1, 0, 1 },    // H
-          { 1, 1, 1, 1, 1, 1, 0, 1 },    // fis
-          { 1, 1, 1, 1, 1, 1, 1, 1 }     // cis
-          };
-
-      int tick      = chord()->tick();
-      int offset    = score()->clefOffset(tick, staff());
-      int l1        = 45 - _line + offset;
-      int curOffset = tversatz[l1];
-      int key       = staff()->keymap()->key(tick);
-      int keyOffset = tab3[key+7][l1 % 7];
-
-      int pitchOffset;
-
-      if (pre == ACC_NONE) {
-            if (curOffset == ACC_NONE)
-                  pitchOffset = keyOffset;
-            else
-                  pitchOffset = curOffset;
-            }
-      else if (pre == ACC_NATURAL)
-            pitchOffset = 0;
-      else {
-            pitchOffset = Accidental::subtype2value(pre) + keyOffset;
-            }
-
-      int clef     = staff()->clef()->clef(tick);
-      int newPitch = line2pitch(_line, clef) + pitchOffset;
-
-      setPitch(newPitch);
+      int pre  = Accidental::subtype2value(accType);
+      int line = tpc2line(_tpc);
+      _tpc     = line2tpc(line, pre);
+      _pitch   = tpc2pitch(_tpc) + (_pitch / 12) * 12;
       }
 
 //---------------------------------------------------------
@@ -374,15 +289,12 @@ QPointF Note::stemPos(bool upFlag) const
 void Note::setAccidental(int pre)
       {
       if (pre && !_tieBack) {
-            if (_accidental) {
-                  _accidental->setSubtype(pre);
-                  }
-            else {
+            if (!_accidental) {
                   _accidental = new Accidental(score());
-                  _accidental->setSubtype(_grace ? 100 + pre : pre);
                   _accidental->setParent(this);
                   _accidental->setVoice(voice());
                   }
+            _accidental->setSubtype(_grace ? 100 + pre : pre);
             }
       else if (_accidental) {
             delete _accidental;
@@ -520,8 +432,7 @@ QRectF Note::bbox() const
 bool Note::isSimple(Xml& xml) const
       {
       QList<Prop> pl = Element::properties(xml);
-      return (pl.empty() && _userAccidental == -1 && _fingering.empty() && _tieFor == 0
-         && _move == 0);
+      return (pl.empty() && _fingering.empty() && _tieFor == 0 && _move == 0);
       }
 
 //---------------------------------------------------------
@@ -530,20 +441,21 @@ bool Note::isSimple(Xml& xml) const
 
 void Note::write(Xml& xml) const
       {
-      QList<Prop> pl = Element::properties(xml);
-
-      if (pl.empty() && _userAccidental == -1 && _fingering.empty() && _tieFor == 0
-         && _move == 0) {
-            xml.tagE(QString("Note pitch=\"%1\"").arg(pitch()));
+      if (isSimple(xml)) {
+            xml.tagE(QString("Note pitch=\"%1\" tpc=\"%2\"").arg(pitch()).arg(tpc()));
             }
       else {
             xml.stag("Note");
+            QList<Prop> pl = Element::properties(xml);
             xml.prop(pl);
             xml.tag("pitch", pitch());
+            xml.tag("tpc", tpc());
+#if 0
             if (_userAccidental != -1) {
                   xml.tag("prefix", _userAccidental);
                   xml.tag("line", _line);
                   }
+#endif
             foreach(const Text* f, _fingering)
                   f->write(xml);
             if (_tieFor)
@@ -607,7 +519,8 @@ void Note::read(QDomNode node)
       QDomElement e = node.toElement();
       int ptch = e.attribute("pitch", "-1").toInt();
       if (ptch != -1)
-            setPitch(ptch);
+            _pitch = ptch;
+      int tpcVal = -100;
 
       for (node = node.firstChild(); !node.isNull(); node = node.nextSibling()) {
             QDomElement e = node.toElement();
@@ -618,11 +531,9 @@ void Note::read(QDomNode node)
             int i = val.toInt();
 
             if (tag == "pitch")
-                  setPitch(i);
-            else if (tag == "prefix")
-                  _userAccidental = i;
-            else if (tag == "line")
-                  _line = i;
+                  _pitch = i;
+            else if (tag == "tpc")
+                  tpcVal = i;
             else if (tag == "Tie") {
                   _tieFor = new Tie(score());
                   _tieFor->setStaff(staff());
@@ -643,6 +554,12 @@ void Note::read(QDomNode node)
                   ;
             else
                   domError(node);
+            }
+      if (tpcVal != -100)
+            _tpc = tpcVal;
+      else {
+            int val = e.attribute("tpc", "-1").toInt();
+            _tpc = val != -1 ? val : pitch2tpc(_pitch);
             }
       }
 

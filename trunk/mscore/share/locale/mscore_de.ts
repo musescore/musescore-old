@@ -1438,11 +1438,11 @@ Partitur sichern?</translation>
     </message>
     <message>
         <source>flip stem</source>
-        <translation>Notenhals kippen</translation>
+        <translation>Notenhals umkehren</translation>
     </message>
     <message>
         <source>flip direction</source>
-        <translation>Notenhalsrichtung kippen</translation>
+        <translation>Notenhalsrichtung umkehren</translation>
     </message>
     <message>
         <source>up</source>
@@ -1906,11 +1906,11 @@ Partitur sichern?</translation>
     </message>
     <message>
         <source>file new from template</source>
-        <translation>neue Partitur aus Template</translation>
+        <translation>Neue Partitur aus Template</translation>
     </message>
     <message>
         <source>New from template</source>
-        <translation>neue Partitur aus Template</translation>
+        <translation>Neue Partitur aus Template</translation>
     </message>
     <message>
         <source>Create new score from template</source>

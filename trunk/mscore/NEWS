@@ -1,7 +1,10 @@
 Release 0.6 (svn)
+      - better automatic pitch spelling using context information
+      - automatic key detection on midi import
       - configurable symbol palette
       - new button to remove a score tab from the tab bar
       - new dock widget which collects all palettes
+
 Release 0.5
       - editing in the Mag combobox to enter arbitrary zoom factors is
         now implemented

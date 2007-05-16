@@ -3,7 +3,7 @@
 //  Linux Music Score Editor
 //  $Id: mscore.cpp,v 1.105 2006/09/15 09:34:57 wschweer Exp $
 //
-//  Copyright (C) 2002-2006 Werner Schweer (ws@seh.de)
+//  Copyright (C) 2007 Werner Schweer (ws@seh.de)
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.
@@ -23,26 +23,88 @@
 //  "Automatic Pitch Spelling: From Numbers to Sharps and Flats"
 
 #include "midifile.h"
-#include "score.h"
-#include "layout.h"
-#include "globals.h"
-#include "chord.h"
 #include "note.h"
-#include "staff.h"
 #include "key.h"
+#include "pitchspelling.h"
 
+//---------------------------------------------------------
+//   line2tpc
+//    prefix -2 < 2
+//---------------------------------------------------------
+
+int line2tpc(int line, int prefix)
+      {
 //    TPC - tonal pitch classes
 //    "line of fifth's" LOF
-//
-//       bb  b   -   #  ##
-//       -   6, 13, 20, 27,  // F
-//       0,  7, 14, 21, 28,  // C
-//       1,  8, 15, 22, 39,  // G
-//       2,  9, 16, 23, 30,  // D
-//       3, 10, 17, 24, 31,  // A
-//       4, 11, 18, 25, 32,  // E
-//       5, 12, 19, 26, 33,  // B
 
+      static int spellings[] = {
+//          bb  b   -   #  ##
+            0,  7, 14, 21, 28,  // C
+            2,  9, 16, 23, 30,  // D
+            4, 11, 18, 25, 32,  // E
+           -1,  6, 13, 20, 27,  // F
+            1,  8, 15, 22, 39,  // G
+            3, 10, 17, 24, 31,  // A
+            5, 12, 19, 26, 33,  // B
+            };
+      return spellings[line * 5 + 2 + prefix];
+      };
+
+//---------------------------------------------------------
+//   tpc2pitch
+//---------------------------------------------------------
+
+int tpc2pitch(int tpc)
+      {
+      static int pitches[35] = {
+//line:     F   C   G   D   A   E   B
+            3, -2,  5,  0,  7,  2,  9,     // bb
+            4, -1,  6,  1,  8,  3, 10,     // b
+            5,  0,  7,  2,  9,  4, 11,     // -
+            6,  1,  8,  3, 10,  5, 12,     // #
+            7,  2,  9,  4, 11,  6, 13      // ##
+            };
+      return pitches[tpc+1];
+      }
+
+//---------------------------------------------------------
+//   tpc2line
+//---------------------------------------------------------
+
+int tpc2line(int tpc)
+      {
+      static const int lines[7] = { 3, 0, 4, 1, 5, 2, 6 };
+      return lines[(tpc+1) % 7];
+      }
+
+//---------------------------------------------------------
+//   pitch2line
+//---------------------------------------------------------
+
+int pitch2line(int pitch)
+      {
+      int tpc = pitch2tpc(pitch);
+      return tpc2line(tpc) + (pitch / 12) * 7;
+      }
+
+//---------------------------------------------------------
+//   printTpc
+//    print note name
+//---------------------------------------------------------
+
+QString tpc2name(int tpc)
+      {
+      const char names[] = "FCGDAEB";
+      int acc   = ((tpc+1) / 7) - 2;
+      QString s(names[(tpc + 1) % 7]);
+      switch(acc) {
+            case -2: s += "bb"; break;
+            case -1: s += "b";  break;
+            case  1: s += "#";  break;
+            case  2: s += "##"; break;
+            }
+      return s;
+      }
 
 // table of alternative spellings for one octave
 // each entry is the TPC of the note
@@ -79,27 +141,13 @@ static const int tab2[24] = {
       31,  7,  // 71  A## Cb
       };
 
-// intervall classes ABCD - 0123 for LOF distances
-// int intervalClass[12] = {
-//      0, 1, 1, 1, 1, 2, 3, 2, 2, 2, 3, 3
-//      };
-
 int intervalPenalty[13] = {
       0, 0, 0, 0, 0, 0, 1, 3, 1, 1, 1, 3, 3
       };
 
-//       bb  b   -   #  ##
-//       -   6, 13, 20, 27,  // F
-//       0,  7, 14, 21, 28,  // C
-//       1,  8, 15, 22, 39,  // G
-//       2,  9, 16, 23, 30,  // D
-//       3, 10, 17, 24, 31,  // A
-//       4, 11, 18, 25, 32,  // E
-//       5, 12, 19, 26, 33,  // B
-
 //---------------------------------------------------------
 //   enharmonicSpelling
-//    TODO: fill tables with more sensible data
+//    TODO: only key C and Bb is checked
 //---------------------------------------------------------
 
 static const bool enharmonicSpelling[15][34] = {
@@ -298,7 +346,7 @@ static int computeWindow(const QList<MidiNote*>& notes, int start, int end, int 
 //   computeWindow
 //---------------------------------------------------------
 
-static int computeWindow(const QList<Note*>& notes, int start, int end, int keyIdx)
+int computeWindow(const QList<Note*>& notes, int start, int end, int keyIdx)
       {
       int p   = 10000;
       int idx = -1;
@@ -398,10 +446,26 @@ void spell(QList<MidiNote*>& notes, int key)
       }
 
 //---------------------------------------------------------
+//   tpc
+//---------------------------------------------------------
+
+int tpc(int idx, int pitch, int opt)
+      {
+      const int* tab;
+      if (opt < 0) {
+            tab = tab2;
+            opt *= -1;
+            }
+      else
+            tab = tab1;
+      return tab[(pitch % 12) * 2 + ((opt & (1 << idx)) >> idx)];
+      }
+
+//---------------------------------------------------------
 //   spell
 //---------------------------------------------------------
 
-void spell(QList<Note*> notes, int key)
+void spell(QList<Note*>& notes, int key)
       {
       int n = notes.size();
 
@@ -447,36 +511,6 @@ void spell(QList<Note*> notes, int key)
                   }
             // advance to next window
             start += 3;
-            }
-      }
-
-//---------------------------------------------------------
-//   spell
-//---------------------------------------------------------
-
-void Score::spell()
-      {
-      for (int i = 0; i < nstaves(); ++i) {
-            QList<Note*> notes;
-            int key = staff(i)->keymap()->key(0);
-            for(Measure* m = _layout->first(); m; m = m->next()) {
-                  for (Segment* s = m->first(); s; s = s->next()) {
-                        int strack = i * VOICES;
-                        int etrack = strack + VOICES;
-                        for (int track = strack; track < etrack; ++track) {
-                              Element* e = s->element(track);
-                              if (e && e->type() == CHORD) {
-                                    Chord* chord = (Chord*) e;
-                                    const NoteList* nl = chord->noteList();
-                                    for (ciNote in = nl->begin(); in != nl->end(); ++in) {
-                                          Note* note = in->second;
-                                          notes.append(note);
-                                          }
-                                    }
-                              }
-                        }
-                  }
-            ::spell(notes, key);
             }
       }
 

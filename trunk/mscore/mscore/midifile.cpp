@@ -108,36 +108,6 @@ void MidiMeta::dump(Xml& xml) const
             }
       }
 
-#if 0
-//---------------------------------------------------------
-//   dumpEvent
-//---------------------------------------------------------
-
-void dumpEvent(Xml& xml, const MidiEvent* e)
-      {
-      switch (e->type()) {
-            case ME_POLYAFTER:
-                  xml.tagE(QString("PolyAftertouch tick=\"%1\"").arg(e->ontime));
-                  break;
-            case ME_PROGRAM:
-                  xml.tagE(QString("ProgramChange tick=\"%1\" channel=\"%2\"").arg(e->ontime).arg(e->channel));
-                  break;
-            case ME_AFTERTOUCH:
-                  xml.tagE(QString("ChannelAftertouch tick=\"%1\"").arg(e->ontime));
-                  break;
-            case ME_PITCHBEND:
-                  xml.tagE(QString("Pitchbend tick=\"%1\"").arg(e->ontime));
-                  break;
-            case ME_SYSEX:
-                  xml.tagE(QString("Sysex tick=\"%1\"").arg(e->ontime));
-                  break;
-            default:
-                  xml.tagE(QString("Event tick=\"%1\" type=\"%2\"").arg(e->ontime).arg(e->type));
-                  break;
-            }
-      }
-#endif
-
 //---------------------------------------------------------
 //   MidiFile
 //---------------------------------------------------------

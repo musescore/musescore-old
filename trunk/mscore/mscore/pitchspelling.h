@@ -22,19 +22,28 @@
 #define __PITCHSPELLING_H__
 
 class MidiNote;
+class Note;
 
 //---------------------------------------------------------
-//   tpc2line
+//   pitch2tpc
+//    Returns a default tpc for a given midi pitch.
+//    Midi pitch 60 is middle C.
 //---------------------------------------------------------
 
-inline static int tpc2line(int tpc)
+inline static int pitch2tpc(int pitch)
       {
-      static const int lines[7] = { 3, 0, 4, 1, 5, 2, 6 };
-      return lines[(tpc+1) % 7];
+      return (((((pitch % 12) * 7) % 12) + 5) % 12) + 9;
       }
 
-void spell(QList<MidiNote*>& notes, int);
+extern void spell(QList<MidiNote*>& notes, int);
+extern void spell(QList<Note*>& notes, int);
+extern int computeWindow(const QList<Note*>& notes, int start, int end, int keyIdx);
+extern int tpc(int idx, int pitch, int opt);
+extern int pitch2line(int pitch);
+extern QString tpc2name(int tpc);
+extern int line2tpc(int line, int prefix);
+extern int tpc2pitch(int tpc);
+extern int tpc2line(int tpc);
 
 #endif
-
 

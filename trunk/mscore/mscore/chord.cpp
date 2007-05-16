@@ -681,17 +681,14 @@ Note* Chord::selectedNote() const
 void Chord::write(Xml& xml) const
       {
       if (ChordRest::isSimple(xml) && notes.size() == 1) {
-//      if (notes.size() == 1) {
             ciNote in = notes.begin();
             Note* note = in->second;
             if (note->isSimple(xml)) {
-                  xml.tagE(QString("Note pitch=\"%1\" ticks=\"%2\"")
-                     .arg(note->pitch()).arg(tickLen()));
+                  xml.tagE(QString("Note pitch=\"%1\" tpc=\"%2\" ticks=\"%3\"")
+                     .arg(note->pitch()).arg(note->tpc()).arg(tickLen()));
                   xml.curTick = tick() + tickLen();
                   return;
                   }
-//            else
-//                  printf("   note not simples\n");
             }
       xml.stag("Chord");
       ChordRest::writeProperties(xml);
@@ -717,6 +714,7 @@ void Chord::readNote(QDomNode node, int staffIdx)
       QDomElement e = node.toElement();
       int ptch = e.attribute("pitch", "-1").toInt();
       int ticks = e.attribute("ticks", "-1").toInt();
+      int tpc = e.attribute("tpc", "-1").toInt();
 
       if (ticks != -1)
             setTickLen(ticks);
@@ -741,8 +739,9 @@ void Chord::readNote(QDomNode node, int staffIdx)
                   }
             else if (tag == "pitch")
                   note->setPitch(i);
-            else if (tag == "prefix")
-                  note->setUserAccidental(i);
+            else if (tag == "prefix") {
+                  printf("read Note:: prefix: TODO\n");
+                  }
             else if (tag == "line")
                   note->setLine(i);
             else if (tag == "Tie") {
@@ -777,6 +776,8 @@ void Chord::readNote(QDomNode node, int staffIdx)
       note->setHead(tickLen());
       if (ptch != -1)
             note->setPitch(ptch);
+      if (tpc != -1)
+            note->setTpc(tpc);
       notes.add(note);
       }
 

@@ -52,6 +52,7 @@
 #include "layout.h"
 #include "tuplet.h"
 #include "lyrics.h"
+#include "pitchspelling.h"
 
 InputState inputState;
 InputState* cis;              ///<  = &inputState;
@@ -1234,5 +1235,123 @@ bool Score::pos2TickAnchor(QPointF& pos, Staff* staff, int* tick, QPointF* ancho
       qreal y = system->staff(staff->idx())->bbox().y();
       *anchor = QPointF(seg->abbox().x(), y + system->canvasPos().y());
       return true;
+      }
+
+//---------------------------------------------------------
+//   spell
+//---------------------------------------------------------
+
+void Score::spell()
+      {
+      for (int i = 0; i < nstaves(); ++i) {
+            QList<Note*> notes;
+            int key = staff(i)->keymap()->key(0);
+            for(Measure* m = _layout->first(); m; m = m->next()) {
+                  for (Segment* s = m->first(); s; s = s->next()) {
+                        int strack = i * VOICES;
+                        int etrack = strack + VOICES;
+                        for (int track = strack; track < etrack; ++track) {
+                              Element* e = s->element(track);
+                              if (e && e->type() == CHORD) {
+                                    Chord* chord = (Chord*) e;
+                                    const NoteList* nl = chord->noteList();
+                                    for (ciNote in = nl->begin(); in != nl->end(); ++in) {
+                                          Note* note = in->second;
+                                          notes.append(note);
+                                          }
+                                    }
+                              }
+                        }
+                  }
+            ::spell(notes, key);
+            }
+      }
+
+//---------------------------------------------------------
+//   prevNote
+//---------------------------------------------------------
+
+Note* prevNote(Note* n)
+      {
+      Chord* chord = n->chord();
+      Segment* seg = chord->segment();
+      NoteList* nl = chord->noteList();
+      ciNote i = nl->std::multimap<const int, Note*>::find(n->pitch());
+      if (i != nl->begin()) {
+            --i;
+            return i->second;
+            }
+
+      seg = seg->prev1();
+      int staff = n->staffIdx();
+      int startTrack = staff * VOICES + n->voice() - 1;
+      int endTrack   = 0;
+      while (seg) {
+            if (seg->subtype() == Segment::SegChordRest) {
+                  for (int track = startTrack; track >= endTrack; --track) {
+                        Element* e = seg->element(track);
+                        if (e && e->type() == CHORD)
+                              return ((Chord*)e)->upNote();
+                        }
+                  }
+            seg = seg->prev1();
+            startTrack = staff * VOICES + VOICES - 1;
+            }
+      return n;
+      }
+
+//---------------------------------------------------------
+//   nextNote
+//---------------------------------------------------------
+
+Note* nextNote(Note* n)
+      {
+      Chord* chord = n->chord();
+      NoteList* nl = chord->noteList();
+      ciNote i = nl->std::multimap<const int, Note*>::find(n->pitch());
+      ++i;
+      if (i != nl->end())
+            return i->second;
+      Segment* seg = chord->segment();
+      int staff = n->staffIdx();
+      int startTrack = staff * VOICES + n->voice() + 1;
+      int endTrack   = staff * VOICES + VOICES;
+      while (seg) {
+            if (seg->subtype() == Segment::SegChordRest) {
+                  for (int track = startTrack; track < endTrack; ++track) {
+                        Element* e = seg->element(track);
+                        if (e && e->type() == CHORD) {
+                              return ((Chord*)e)->downNote();
+                              }
+                        }
+                  }
+            seg = seg->next1();
+            startTrack = staff * VOICES;
+            }
+      return n;
+      }
+
+void Score::spell(Note* note)
+      {
+      QList<Note*> notes;
+
+      notes.append(note);
+      Note* nn = nextNote(note);
+      notes.append(nn);
+      nn = nextNote(nn);
+      notes.append(nn);
+      nn = nextNote(nn);
+      notes.append(nn);
+
+      nn = prevNote(note);
+      notes.prepend(nn);
+      nn = prevNote(nn);
+      notes.prepend(nn);
+      nn = prevNote(nn);
+      notes.prepend(nn);
+
+      int key = note->staff()->keymap()->key(0);
+      int opt = ::computeWindow(notes, 0, 7, key + 7);
+      note->setTpc(::tpc(3, note->pitch(), opt));
       }
 

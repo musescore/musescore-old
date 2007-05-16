@@ -28,6 +28,9 @@
 
 #include "element.h"
 
+// Accidentals
+enum { ACC_NONE, ACC_SHARP, ACC_FLAT, ACC_SHARP2, ACC_FLAT2, ACC_NATURAL };
+
 //---------------------------------------------------------
 //   Accidental
 //---------------------------------------------------------
