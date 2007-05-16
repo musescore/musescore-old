@@ -48,7 +48,6 @@ class Viewer;
 class Note : public Element {
       int _pitch;             ///< Note pitch as midi value (0 - 127).
       int _tpc;               ///< tonal pitch class
-      int _userAccidental;    ///< -1 - automatic accidental.
       int _line;              ///< y-Position; 0 - top line.
       int _move;              ///< -1, 0, +1.
       Accidental* _accidental;
@@ -98,8 +97,6 @@ class Note : public Element {
       int move() const                { return _move; }
       void setMove(int val)           { _move = val; }
 
-      int userAccidental() const      { return _userAccidental; }
-      void setUserAccidental(int i)   { _userAccidental = i; }
       int accidentalIdx() const       { return _accidental ? _accidental->subtype() : ACC_NONE; }
       Accidental* accidental() const  { return _accidental; }
       void setAccidental(int);

@@ -514,8 +514,6 @@ p, li { white-space: pre-wrap; }
         <ticklen>480</ticklen>
         <Note>
           <pitch>64</pitch>
-          <prefix>5</prefix>
-          <line>8</line>
           </Note>
         <Note>
           <pitch>67</pitch>
@@ -1042,8 +1040,6 @@ p, li { white-space: pre-wrap; }
         <BeamMode>2</BeamMode>
         <Note>
           <pitch>66</pitch>
-          <prefix>2</prefix>
-          <line>6</line>
           </Note>
         <Note>
           <pitch>70</pitch>
@@ -1053,8 +1049,6 @@ p, li { white-space: pre-wrap; }
           </Note>
         <Note>
           <pitch>78</pitch>
-          <prefix>2</prefix>
-          <line>-1</line>
           </Note>
         </Chord>
       <Chord>
@@ -1091,13 +1085,9 @@ p, li { white-space: pre-wrap; }
         <ticklen>240</ticklen>
         <Note>
           <pitch>66</pitch>
-          <prefix>0</prefix>
-          <line>6</line>
           </Note>
         <Note>
           <pitch>78</pitch>
-          <prefix>0</prefix>
-          <line>-1</line>
           </Note>
         </Chord>
       <Chord>
@@ -1257,13 +1247,9 @@ p, li { white-space: pre-wrap; }
         <ticklen>480</ticklen>
         <Note>
           <pitch>62</pitch>
-          <prefix>5</prefix>
-          <line>9</line>
           </Note>
         <Note>
           <pitch>74</pitch>
-          <prefix>5</prefix>
-          <line>2</line>
           </Note>
         </Chord>
       <Chord>
@@ -1330,8 +1316,6 @@ p, li { white-space: pre-wrap; }
           <offset x="-0.4" y="0"/>
           <voice>1</voice>
           <pitch>67</pitch>
-          <prefix>5</prefix>
-          <line>6</line>
           </Note>
         </Chord>
       <Chord>
@@ -1767,8 +1751,6 @@ p, li { white-space: pre-wrap; }
         <Note>
           <voice>1</voice>
           <pitch>63</pitch>
-          <prefix>2</prefix>
-          <line>8</line>
           </Note>
         </Chord>
       <Chord>
@@ -2234,8 +2216,6 @@ p, li { white-space: pre-wrap; }
           </Note>
         <Note>
           <pitch>63</pitch>
-          <prefix>2</prefix>
-          <line>8</line>
           </Note>
         <Note>
           <pitch>67</pitch>
@@ -2666,8 +2646,6 @@ p, li { white-space: pre-wrap; }
         <ticklen>480</ticklen>
         <Note>
           <pitch>40</pitch>
-          <prefix>5</prefix>
-          <line>10</line>
           </Note>
         <Note>
           <pitch>52</pitch>
@@ -2777,8 +2755,6 @@ p, li { white-space: pre-wrap; }
           </Note>
         <Note>
           <pitch>56</pitch>
-          <prefix>2</prefix>
-          <line>0</line>
           </Note>
         </Chord>
       <Chord>
@@ -2814,13 +2790,9 @@ p, li { white-space: pre-wrap; }
         <ticklen>960</ticklen>
         <Note>
           <pitch>30</pitch>
-          <prefix>2</prefix>
-          <line>15</line>
           </Note>
         <Note>
           <pitch>42</pitch>
-          <prefix>2</prefix>
-          <line>8</line>
           </Note>
         </Chord>
       <Chord>
@@ -2836,39 +2808,27 @@ p, li { white-space: pre-wrap; }
         <ticklen>480</ticklen>
         <Note>
           <pitch>30</pitch>
-          <prefix>0</prefix>
-          <line>15</line>
           </Note>
         <Note>
           <pitch>42</pitch>
-          <prefix>0</prefix>
-          <line>8</line>
           </Note>
         </Chord>
       <Chord>
         <ticklen>480</ticklen>
         <Note>
           <pitch>30</pitch>
-          <prefix>0</prefix>
-          <line>15</line>
           </Note>
         <Note>
           <pitch>42</pitch>
-          <prefix>0</prefix>
-          <line>8</line>
           </Note>
         </Chord>
       <Chord>
         <ticklen>480</ticklen>
         <Note>
           <pitch>42</pitch>
-          <prefix>2</prefix>
-          <line>8</line>
           </Note>
         <Note>
           <pitch>54</pitch>
-          <prefix>2</prefix>
-          <line>1</line>
           </Note>
         </Chord>
       </Measure>
@@ -2956,13 +2916,9 @@ p, li { white-space: pre-wrap; }
         <ticklen>960</ticklen>
         <Note>
           <pitch>30</pitch>
-          <prefix>2</prefix>
-          <line>15</line>
           </Note>
         <Note>
           <pitch>42</pitch>
-          <prefix>2</prefix>
-          <line>8</line>
           </Note>
         </Chord>
       <Chord>
@@ -2978,26 +2934,18 @@ p, li { white-space: pre-wrap; }
         <ticklen>480</ticklen>
         <Note>
           <pitch>30</pitch>
-          <prefix>0</prefix>
-          <line>15</line>
           </Note>
         <Note>
           <pitch>42</pitch>
-          <prefix>0</prefix>
-          <line>8</line>
           </Note>
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
         <Note>
           <pitch>42</pitch>
-          <prefix>0</prefix>
-          <line>8</line>
           </Note>
         <Note>
           <pitch>54</pitch>
-          <prefix>2</prefix>
-          <line>1</line>
           </Note>
         </Chord>
       <Rest>

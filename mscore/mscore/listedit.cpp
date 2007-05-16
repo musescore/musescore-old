@@ -734,7 +734,6 @@ void ShowNoteWidget::setElement(Element* e)
       ShowElementBase::setElement(e);
 
       nb.pitch->setValue(note->pitch());
-      nb.userAccidental->setValue(note->userAccidental());
       nb.line->setValue(note->line());
       nb.move->setValue(note->move());
       nb.dots->setValue(note->dots());

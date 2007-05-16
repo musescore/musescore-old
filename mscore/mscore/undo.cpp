@@ -336,9 +336,15 @@ void Score::processUndoOp(UndoOp* i, bool undo)
             case UndoOp::ChangeAccidental:
                   {
                   Note* note = (Note*)(i->obj);
-                  int accidental  = note->userAccidental();
-                  note->changeAccidental(i->val1);
-                  i->val1 = accidental;
+                  int pitch  = note->pitch();
+                  int tpc    = note->tpc();
+                  int acc    = note->accidentalIdx();
+                  note->setPitch(i->val1);
+                  note->setTpc(i->val2);
+                  note->setAccidental(i->val3);
+                  i->val1 = pitch;
+                  i->val2 = tpc;
+                  i->val3 = acc;
                   }
                   break;
             case UndoOp::FlipStemDirection:

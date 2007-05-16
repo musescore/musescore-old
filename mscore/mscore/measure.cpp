@@ -357,6 +357,11 @@ void Measure::layoutNoteHeads(ScoreLayout*, int staff)
                         //
                         int tpc        = note->tpc();
                         int line       = tpc2line(tpc) + (pitch/12) * 7;
+                        int tpcPitch   = tpc2pitch(tpc);
+                        if (tpcPitch < 0)
+                              line += 7;
+                        else
+                              line -= (tpcPitch/12)*7;
                         int accidental = ((tpc + 1) / 7) - 2;
 
                         if (accidental && !tversatz[line]) {

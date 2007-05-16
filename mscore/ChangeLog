@@ -1,3 +1,7 @@
+16.5.7 (ws)
+      - more pitch spelling updates
+      - new function to explicit recalculate all accidentals:
+            Note->PitchSpell
 12.5.7 (ws)
       - apply pitch spelling algo to normal score after read()
 10.5.7 (ws)

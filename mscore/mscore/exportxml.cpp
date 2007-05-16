@@ -1530,9 +1530,11 @@ void ExportMusicXml::chord(Chord* chord, int staff, const LyricsList* ll)
 
             int acc = ACC_NONE;
             bool editorial = false;
+#if 0
             if (note->userAccidental() != -1)
                   acc = note->userAccidental();
             else
+#endif
                   acc = note->accidentalIdx();
             if (acc != ACC_NONE) {
                   if (6 <= acc && acc <= 10) {

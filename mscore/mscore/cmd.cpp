@@ -943,7 +943,9 @@ void Score::addAccidental(Note* oNote, int accidental)
       UndoOp i;
       i.type  = UndoOp::ChangeAccidental;
       i.obj   = oNote;
-      i.val1  = oNote->userAccidental();
+      i.val1  = oNote->pitch();
+      i.val2  = oNote->tpc();
+      i.val3  = oNote->accidentalIdx();
       undoList.back()->push_back(i);
       oNote->changeAccidental(accidental);
       layout();
@@ -1390,7 +1392,8 @@ void Score::cmd(const QString& cmd)
                   addTempo();
             else if (cmd == "metronome")
                   addMetronome();
-
+            else if (cmd == "pitch-spell")
+                  spell();
             endCmd(true);
             }
       }

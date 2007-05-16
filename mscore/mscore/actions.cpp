@@ -194,6 +194,14 @@ Shortcut MuseScore::sc[] = {
          QT_TR_NOOP("Note Input Mode")
          ),
       Shortcut(
+         "pitch-spell",
+         QT_TR_NOOP("pitch spell"),
+         0,
+         Qt::WindowShortcut,
+         QT_TR_NOOP("Pitch spell"),
+         QT_TR_NOOP("Pitch spell")
+         ),
+      Shortcut(
          "interval1",
          QT_TR_NOOP("enter unison above"),
          Qt::Key_1,
