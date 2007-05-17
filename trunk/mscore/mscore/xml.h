@@ -69,6 +69,8 @@ class Xml : public QTextStream {
       void tag(const char* name, const QString&, const QString&);
       void tag(const char* name, const QWidget*);
 
+      void dump(int len, const unsigned char* p);
+
       static QString xmlString(const QString&);
       };
 
