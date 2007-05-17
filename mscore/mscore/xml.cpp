@@ -213,6 +213,33 @@ QString Xml::xmlString(const QString& ss)
       return s;
       }
 
+ //---------------------------------------------------------
+//   dump
+//---------------------------------------------------------
+
+void Xml::dump(int len, const unsigned char* p)
+      {
+      putLevel();
+      int col = 0;
+      setFieldWidth(5);
+      setNumberFlags(numberFlags() | QTextStream::ShowBase);
+      setIntegerBase(16);
+      for (int i = 0; i < len; ++i, ++col) {
+            if (col >= 16) {
+                  setFieldWidth(0);
+                  *this << endl;
+                  col = 0;
+                  putLevel();
+                  setFieldWidth(5);
+                  }
+            *this << (p[i] & 0xff);
+            }
+      if (col)
+            *this << endl << dec;
+      setFieldWidth(0);
+      setIntegerBase(10);
+      }
+
 //---------------------------------------------------------
 //   readPoint
 //---------------------------------------------------------

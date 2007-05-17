@@ -97,18 +97,20 @@ void MidiNoteOff::dump(Xml& xml) const
 
 void MidiController::dump(Xml& xml) const
       {
-      xml.tagE(QString("Controller tick=\"%1\" channel=\"%2\"").arg(ontime()).arg(channel()));
+      xml.tagE(QString("Controller tick=\"%1\" channel=\"%2\" ctrl=\"%3\" value=\"%4\"")
+         .arg(ontime()).arg(channel()).arg(controller()).arg(value()));
       }
 
 void MidiSysex::dump(Xml& xml) const
       {
-      xml.tagE(QString("Sysex tick=\"%1\"").arg(ontime()));
+      xml.stag(QString("Sysex tick=\"%1\" len=\"%2\"").arg(ontime()).arg(_len));
+      xml.dump(_len, _data);
+      xml.etag();
       }
 
 void MidiMeta::dump(Xml& xml) const
       {
       switch(metaType()) {
-
             case META_TRACK_NAME:
                   xml.tag("TrackName",  QString("tick=\"%1\"").arg(ontime()), QString((char*)(data())));
                   break;
@@ -131,7 +133,9 @@ void MidiMeta::dump(Xml& xml) const
                         }
                   QString sex(_data[1] ? "Minor" : "Major");
                   QString keyName(keyTable[key]);
-                  xml.tag("Key",  QString("tick=\"%1\"").arg(ontime()), QString("%1 %2").arg(keyName).arg(sex));
+                  xml.tag("Key",
+                     QString("tick=\"%1\" key=\"%2\" sex=\"%3\"").arg(ontime()).arg(_data[0]).arg(_data[1]),
+                     QString("%1 %2").arg(keyName).arg(sex));
                   }
                   break;
 
@@ -152,8 +156,10 @@ void MidiMeta::dump(Xml& xml) const
                   break;
 
             default:
-                  xml.tagE(QString("Meta tick=\"%1\" type=\"%2\" name=\"%3\"")
-                     .arg(ontime()).arg(metaType()).arg(midiMetaName(metaType())));
+                  xml.stag(QString("Meta tick=\"%1\" type=\"%2\" len=\"%3\" name=\"%4\"")
+                     .arg(ontime()).arg(metaType()).arg(_len).arg(midiMetaName(metaType())));
+                  xml.dump(_len, _data);
+                  xml.etag();
                   break;
             }
       }
@@ -395,11 +401,6 @@ bool MidiFile::readTrack()
                   if (mt == 0x2f)         // end of track
                         break;
                   track->append(event);
-                  continue;
-                  }
-            if (!event->isChannelEvent()) {
-                  printf("importMidi: event type 0x%02x not implemented\n", event->type());
-                  delete event;
                   continue;
                   }
             track->append(event);
@@ -1116,6 +1117,25 @@ void EventList::insert(MidiEvent* e)
       }
 
 //---------------------------------------------------------
+//   readData
+//---------------------------------------------------------
+
+static void readData(unsigned char* d, int dataLen, QString s)
+      {
+      QStringList l = s.simplified().split(" ", QString::SkipEmptyParts);
+      if (dataLen != l.size()) {
+            printf("error converting data string <%s>\n", s.toLatin1().data());
+            }
+      int numberBase = 16;
+      for (int i = 0; i < l.size(); ++i) {
+            bool ok;
+            *d++ = l.at(i).toInt(&ok, numberBase);
+            if (!ok)
+                  printf("error converting data val <%s>\n", l.at(i).toLatin1().data());
+            }
+      }
+
+//---------------------------------------------------------
 //   readXml
 //---------------------------------------------------------
 
@@ -1127,18 +1147,98 @@ void MidiTrack::readXml(QDomNode node)
                   continue;
             QString tag(e.tagName());
             QString val(e.text());
-            if (tag == "NoteOn")
-                  ;
-            else if (tag == "Lyric")
-                  ;
-            else if (tag == "Controller")
-                  ;
-            else if (tag == "Key")
-                  ;
-            else if (tag == "Tempo")
-                  ;
-            else if (tag == "TimeSig")
-                  ;
+            if (tag == "NoteOn") {
+                  int tick    = e.attribute("tick").toInt();
+                  int channel = e.attribute("channel").toInt();
+                  int pitch   = e.attribute("pitch").toInt();
+                  int velo    = e.attribute("velo").toInt();
+                  MidiNoteOn* e = new MidiNoteOn(tick, channel, pitch, velo);
+                  _events.append(e);
+                  }
+            else if (tag == "NoteOff") {
+                  int tick    = e.attribute("tick").toInt();
+                  int channel = e.attribute("channel").toInt();
+                  int pitch   = e.attribute("pitch").toInt();
+                  int velo    = e.attribute("velo").toInt();
+                  MidiNoteOff* e = new MidiNoteOff(tick, channel, pitch, velo);
+                  _events.append(e);
+                  }
+            else if (tag == "Lyric") {
+                  int tick    = e.attribute("tick").toInt();
+                  QString s   = e.text();
+                  char* data  = new char[s.length() + 1];
+                  strcpy(data, s.toLatin1().data());
+                  MidiMeta* e = new MidiMeta(tick, META_LYRIC, s.length(), (unsigned char*)data);
+                  _events.append(e);
+                  }
+            else if (tag == "TrackName") {
+                  int tick    = e.attribute("tick").toInt();
+                  QString s   = e.text();
+                  char* data  = new char[s.length() + 1];
+                  strcpy(data, s.toLatin1().data());
+                  MidiMeta* e = new MidiMeta(tick, META_TRACK_NAME, s.length(), (unsigned char*)data);
+                  _events.append(e);
+                  }
+            else if (tag == "Controller") {
+                  int tick    = e.attribute("tick").toInt();
+                  int channel = e.attribute("channel").toInt();
+                  int ctrl    = e.attribute("ctrl").toInt();
+                  int value   = e.attribute("value").toInt();
+                  MidiController* e = new MidiController(tick, channel, ctrl, value);
+                  _events.append(e);
+                  }
+            else if (tag == "Key") {
+                  int tick = e.attribute("tick").toInt();
+                  int key  = e.attribute("key").toInt();
+                  int sex  = e.attribute("sex").toInt();
+                  unsigned char* data = new unsigned char[2];
+                  data[0]  = key;
+                  data[1]  = sex;
+                  MidiMeta* e = new MidiMeta(tick, META_KEY_SIGNATURE, 2, data);
+                  _events.append(e);
+                  }
+            else if (tag == "Tempo") {
+                  int tick = e.attribute("tick").toInt();
+                  int val  = e.attribute("value").toInt();
+                  unsigned char* data = new unsigned char[3];
+                  data[0] = val >> 16;
+                  data[1] = val >> 8;
+                  data[2] = val;
+                  MidiMeta* e = new MidiMeta(tick, META_TEMPO, 3, data);
+                  _events.append(e);
+                  }
+            else if (tag == "TimeSig") {
+                  int tick    = e.attribute("tick").toInt();
+                  int num     = e.attribute("num").toInt();
+                  int denom   = e.attribute("denom").toInt();
+                  int metro   = e.attribute("metro").toInt();
+                  int quarter = e.attribute("quarter").toInt();
+
+                  unsigned char* data = new unsigned char[4];
+                  data[0] = num;
+                  data[1] = denom;
+                  data[2] = metro;
+                  data[3] = quarter;
+                  MidiMeta* e = new MidiMeta(tick, META_TIME_SIGNATURE, 4, data);
+                  _events.append(e);
+                  }
+            else if (tag == "Meta") {
+                  int type = e.attribute("type").toInt();
+                  int len  = e.attribute("len").toInt();
+                  int tick    = e.attribute("tick").toInt();
+                  unsigned char* data = new unsigned char[len];
+                  readData(data, len, e.text());
+                  MidiMeta* e = new MidiMeta(tick, type, len, data);
+                  _events.append(e);
+                  }
+            else if (tag == "Sysex") {
+                  int tick = e.attribute("tick").toInt();
+                  int len  = e.attribute("len").toInt();
+                  unsigned char* data = new unsigned char[len];
+                  readData(data, len, e.text());
+                  MidiSysex* e = new MidiSysex(tick, len, data);
+                  _events.append(e);
+                  }
             else
                   domError(n);
             }
