@@ -137,7 +137,7 @@ Style defaultStyle = {
       1.8,              // spacing4;
       2.2,              // spacing2;
 
-      1.5,              // measureSpacing
+      1.3,              // measureSpacing
 
       Spatium(0.08),    // staff line width
       Spatium(0.16),    // helpLineWidth;

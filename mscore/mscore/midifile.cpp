@@ -34,6 +34,36 @@
 		      (((x)>>24)&0xFF))
 #endif
 
+static unsigned const char gmOnMsg[] = {
+      0x7e,       // Non-Real Time header
+      0x7f,       // ID of target device (7f = all devices)
+      0x09,
+      0x01
+      };
+static unsigned const char gsOnMsg[] = {
+      0x41,       // roland id
+      0x10,       // Id of target device (default = 10h for roland)
+      0x42,       // model id (42h = gs devices)
+      0x12,       // command id (12h = data set)
+      0x40,       // address & value
+      0x00,
+      0x7f,
+      0x00,
+      0x41        // checksum?
+      };
+static unsigned const char xgOnMsg[] = {
+      0x43,       // yamaha id
+      0x10,       // device number (0)
+      0x4c,       // model id
+      0x00,       // address (high, mid, low)
+      0x00,
+      0x7e,
+      0x00        // data
+      };
+const int  gmOnMsgLen = sizeof(gmOnMsg);
+const int  gsOnMsgLen = sizeof(gsOnMsg);
+const int  xgOnMsgLen = sizeof(xgOnMsg);
+
 //---------------------------------------------------------
 //    midi_meta_name
 //---------------------------------------------------------
@@ -42,34 +72,34 @@ QString midiMetaName(int meta)
       {
       const char* s = "";
       switch (meta) {
-                  case 0:     s = "Sequence Number"; break;
-                  case 1:     s = "Text Event"; break;
-                  case 2:     s = "Copyright"; break;
-                  case 3:     s = "Sequence/Track Name"; break;
-                  case 4:     s = "Instrument Name"; break;
-                  case 5:     s = "Lyric"; break;
-                  case 6:     s = "Marker"; break;
-                  case 7:     s = "Cue Point"; break;
-                  case 8:
-                  case 9:
-                  case 0x0a:
-                  case 0x0b:
-                  case 0x0c:
-                  case 0x0d:
-                  case 0x0e:
-                  case 0x0f:  s = "Text"; break;
-                  case 0x20:  s = "Channel Prefix"; break;
-                  case 0x21:  s = "Port Change"; break;
-                  case 0x2f:  s = "End of Track"; break;
-                  case 0x51:  s = "Tempo"; break;
-                  case 0x54:  s = "SMPTE Offset"; break;
-                  case 0x58:  s = "Time Signature"; break;
-                  case 0x59:  s = "Key Signature"; break;
-                  case 0x74:  s = "Sequencer-Specific1"; break;
-                  case 0x7f:  s = "Sequencer-Specific2"; break;
-                  default:
-                        break;
-                  }
+            case 0:     s = "Sequence Number"; break;
+            case 1:     s = "Text Event"; break;
+            case 2:     s = "Copyright"; break;
+            case 3:     s = "Sequence/Track Name"; break;
+            case 4:     s = "Instrument Name"; break;
+            case 5:     s = "Lyric"; break;
+            case 6:     s = "Marker"; break;
+            case 7:     s = "Cue Point"; break;
+            case 8:
+            case 9:
+            case 0x0a:
+            case 0x0b:
+            case 0x0c:
+            case 0x0d:
+            case 0x0e:
+            case 0x0f:  s = "Text"; break;
+            case 0x20:  s = "Channel Prefix"; break;
+            case 0x21:  s = "Port Change"; break;
+            case 0x2f:  s = "End of Track"; break;
+            case 0x51:  s = "Tempo"; break;
+            case 0x54:  s = "SMPTE Offset"; break;
+            case 0x58:  s = "Time Signature"; break;
+            case 0x59:  s = "Key Signature"; break;
+            case 0x74:  s = "Sequencer-Specific1"; break;
+            case 0x7f:  s = "Sequencer-Specific2"; break;
+            default:
+                  break;
+            }
       return QString(s);
       }
 
@@ -174,6 +204,7 @@ MidiFile::MidiFile()
       timesig_z = 4;
       timesig_n = 4;
       curPos    = 0;
+      _format   = 1;
       _midiType = MT_UNKNOWN;
       _noRunningStatus = false;
       }
@@ -211,7 +242,7 @@ bool MidiFile::writeTrack(const MidiTrack* t)
       status   = -1;
       int tick = 0;
       foreach(const MidiEvent* ev, t->events()) {
-            int ntick     = ev->ontime();
+            int ntick = ev->ontime();
             putvl(ntick - tick);    // write tick delta
             //
             // if track channel != -1, then use this
@@ -547,9 +578,10 @@ void MidiFile::putvl(unsigned val)
 
 MidiTrack::MidiTrack(MidiFile* f)
       {
-      mf = f;
+      mf          = f;
       _outChannel = -1;
       _outPort    = -1;
+      _drumTrack  = false;
       }
 
 MidiTrack::~MidiTrack()
@@ -731,12 +763,175 @@ void MidiTrack::mergeNoteOnOff()
       {
       EventList el;
 
+      int hbank = 0xff;
+      int lbank = 0xff;
+      int rpnh  = -1;
+      int rpnl  = -1;
+      int datah = 0;
+      int datal = 0;
+      int dataType = 0; // 0 : disabled, 0x20000 : rpn, 0x30000 : nrpn;
+
       int n = _events.size();
       for (int i = 0; i < n; ++i) {
             MidiEvent* ev = _events[i];
             if (ev == 0)
                   continue;
-            if (ev->type() != ME_NOTEON && ev->type() != ME_NOTEOFF) {
+            if ((ev->type() != ME_NOTEON) && (ev->type() != ME_NOTEOFF)) {
+                  if (ev->type() == ME_CONTROLLER) {
+                        MidiController* ctrl = (MidiController*)ev;
+                        int val  = ctrl->value();
+                        int cn   = ctrl->controller();
+                        if (cn == CTRL_HBANK) {
+                              hbank = val;
+                              delete ev;
+                              _events[i] = 0;
+                              continue;
+                              }
+                        else if (cn == CTRL_LBANK) {
+                              lbank = val;
+                              delete ev;
+                              _events[i] = 0;
+                              continue;
+                              }
+                        else if (cn == CTRL_HDATA) {
+                              datah = val;
+
+                              // check if a CTRL_LDATA follows
+                              // e.g. wie have a 14 bit controller:
+                              int ii = i;
+                              ++ii;
+                              bool found = false;
+                              for (; ii < n; ++ii) {
+                                    MidiEvent* ev = _events[ii];
+                                    if (ev->type() == ME_CONTROLLER) {
+                                          if (((MidiController*)ev)->controller() == CTRL_LDATA) {
+                                                // handle later
+                                                found = true;
+                                                }
+                                          break;
+                                          }
+                                    }
+                              if (!found) {
+                                    if (rpnh == -1 || rpnl == -1) {
+                                          printf("parameter number not defined, data 0x%x\n", datah);
+                                          delete ev;
+                                          _events[i] = 0;
+                                          continue;
+                                          }
+                                    else {
+                                          ctrl->setController(dataType | (rpnh << 8) | rpnl);
+                                          ctrl->setValue(datah);
+                                          }
+                                    }
+                              else {
+                                    delete ev;
+                                    _events[i] = 0;
+                                    continue;
+                                    }
+                              }
+                        else if (cn == CTRL_LDATA) {
+                              datal = val;
+
+                              if (rpnh == -1 || rpnl == -1) {
+                                    printf("parameter number not defined, data 0x%x 0x%x, tick %d, channel %d\n",
+                                       datah, datal, ctrl->ontime(), ctrl->channel());
+                                    break;
+                                    }
+                              // assume that the sequence is always
+                              //    CTRL_HDATA - CTRL_LDATA
+                              // eg. that LDATA is always send last
+
+                              // 14 Bit RPN/NRPN
+                              ctrl->setController((dataType+0x30000) | (rpnh << 8) | rpnl);
+                              ctrl->setValue((datah << 7) | datal);
+                              }
+                        else if (cn == CTRL_HRPN) {
+                              rpnh = val;
+                              dataType = 0x20000;
+                              delete ev;
+                              _events[i] = 0;
+                              continue;
+                              }
+                        else if (cn == CTRL_LRPN) {
+                              rpnl = val;
+                              dataType = 0x20000;
+                              delete ev;
+                              _events[i] = 0;
+                              continue;
+                              }
+                        else if (cn == CTRL_HNRPN) {
+                              rpnh = val;
+                              dataType = 0x30000;
+                              delete ev;
+                              _events[i] = 0;
+                              continue;
+                              }
+                        else if (cn == CTRL_LNRPN) {
+                              rpnl = val;
+                              dataType = 0x30000;
+                              delete ev;
+                              _events[i] = 0;
+                              continue;
+                              }
+                        else if (cn == CTRL_PROGRAM) {
+                              ctrl->setValue((hbank << 16) | (lbank << 8) | ctrl->value());
+                              el.insert(ctrl);
+                              _events[i] = 0;
+                              continue;
+                              }
+                        }
+                  else if (ev->type() == ME_SYSEX) {
+                        int len = ((MidiSysex*)ev)->len();
+                        unsigned char* buffer = ((MidiSysex*)ev)->data();
+                        if ((len == gmOnMsgLen) && memcmp(buffer, gmOnMsg, gmOnMsgLen) == 0) {
+                              mf->_midiType = MT_GM;
+                              delete ev;
+                              _events[i] = 0;
+                              continue;
+                              }
+                        if ((len == gsOnMsgLen) && memcmp(buffer, gsOnMsg, gsOnMsgLen) == 0) {
+                              mf->_midiType = MT_GS;
+                              delete ev;
+                              _events[i] = 0;
+                              continue;
+                              }
+                        if ((len == xgOnMsgLen) && memcmp(buffer, xgOnMsg, xgOnMsgLen) == 0) {
+                              mf->_midiType = MT_XG;
+                              delete ev;
+                              _events[i] = 0;
+                              continue;
+                              }
+                        if (buffer[0] == 0x43) {    // Yamaha
+                              mf->_midiType = MT_XG;
+                              int type   = buffer[1] & 0xf0;
+                              if (type == 0x10) {
+                                    if (buffer[1] != 0x10) {
+                                          buffer[1] = 0x10;    // fix to Device 1
+                                          }
+                                    if ((len == xgOnMsgLen) && memcmp(buffer, xgOnMsg, xgOnMsgLen) == 0) {
+                                          mf->_midiType = MT_XG;
+                                          delete ev;
+                                          _events[i] = 0;
+                                          continue;
+                                          }
+                                    if (len == 7 && buffer[2] == 0x4c && buffer[3] == 0x08 && buffer[5] == 7) {
+                                          // part mode
+                                          // 0 - normal
+                                          // 1 - DRUM
+                                          // 2 - DRUM 1
+                                          // 3 - DRUM 2
+                                          // 4 - DRUM 3
+                                          // 5 - DRUM 4
+                                          if (buffer[6] != 0) {
+                                                _drumTrack = true;
+                                                }
+                                          delete ev;
+                                          _events[i] = 0;
+                                          continue;
+                                          }
+                                    }
+                              }
+                        }
                   el.insert(ev);
                   _events[i] = 0;
                   continue;
@@ -798,6 +993,17 @@ bool MidiTrack::empty() const
       }
 
 //---------------------------------------------------------
+//   setOutChannel
+//---------------------------------------------------------
+
+void MidiTrack::setOutChannel(int n)
+      {
+      _outChannel = n;
+      if (_outChannel == 9)
+            _drumTrack = true;
+      }
+
+//---------------------------------------------------------
 //   extractTimeSig
 //---------------------------------------------------------
 
@@ -823,8 +1029,10 @@ void MidiTrack::extractTimeSig(SigList* sigmap)
 
 //---------------------------------------------------------
 //   process1
-//    merge note on/off events
-//    extract time signatures and build siglist
+//    - merge note on/off events into MidiNote events
+//    - extract time signatures and build siglist
+//    - extract initialisation sysex and set MidiType
+//    - find out if track is a drum track
 //---------------------------------------------------------
 
 void MidiFile::process1()
@@ -1095,7 +1303,7 @@ void MidiTrack::move(int ticks)
 
 bool MidiTrack::isDrumTrack() const
       {
-      return outChannel() == 9;
+      return _drumTrack;
       }
 
 //---------------------------------------------------------
