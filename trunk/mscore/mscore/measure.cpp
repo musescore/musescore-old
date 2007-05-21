@@ -1218,7 +1218,11 @@ again:
                   goto again;
                   }
             }
-/**/
+
+      segs = size();
+      if (segs == 0)
+            return MeasureWidth(1.0, 0.0);
+
       //-----------------------------------------------------------------------
       //    fill array of Spaces for all segments and staves
       //    spaces[0]      - left margin

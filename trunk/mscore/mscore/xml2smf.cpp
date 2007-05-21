@@ -138,6 +138,7 @@ int main(int argc, char* argv[])
       if (division != -1)
             mf.changeDivision(division);
 
+      mf.setFormat(1);
       mf.setNoRunningStatus(noRunningStatus);
       mf.write(out);
       out->close();

@@ -668,7 +668,7 @@ void ExportMidi::writeHeader()
       MidiTrack* track  = mf.tracks()->front();
       Measure* measure  = cs->mainLayout()->first();
 
-      foreach(const Element* e, *measure->pel()) {
+      foreach (const Element* e, *measure->pel()) {
             if (e->type() == TEXT) {
                   Text* text = (Text*)(e);
                   QString str = text->getText();
@@ -676,6 +676,7 @@ void ExportMidi::writeHeader()
                   unsigned char* data = new unsigned char[len];
                   strcpy((char*)(data), str.toLatin1().data());
                   MidiMeta* ev = new MidiMeta();
+                  ev->setOntime(0);
                   ev->setData(data);
                   ev->setLen(len);
 
@@ -701,7 +702,7 @@ void ExportMidi::writeHeader()
                               track->insert(ev);
                               break;
                         default:
-                              delete data;
+                              delete ev;
                               break;
                         }
                   }
@@ -794,6 +795,7 @@ void ExportMidi::writeHeader()
 bool ExportMidi::saver()
       {
       mf.setDivision(::division);
+      mf.setFormat(1);
       MidiTrackList* tracks = mf.tracks();
       int nstaves = cs->nstaves();
 
@@ -807,30 +809,25 @@ bool ExportMidi::saver()
       int staffIdx = 0;
       int partIdx  = 0;
 
+      SigList* sigmap = cs->sigmap;
+      int tickOffset = sigmap->ticksMeasure(0);
+
       foreach (Part* part, *cs->parts()) {
             int channel  = part->midiChannel();
 
             MidiTrack* track = tracks->at(staffIdx);
             track->setOutPort(0);
+            track->setOutChannel(channel);
 
-            MidiController* ev = new MidiController(0, 0, CTRL_PROGRAM,
-               part->midiProgram());
+            MidiController* ev = new MidiController(0, channel, CTRL_PROGRAM, part->midiProgram());
             track->insert(ev);
-
-            ev = new MidiController(1, 0, CTRL_VOLUME,
-               part->volume());
+            ev = new MidiController(2, channel, CTRL_VOLUME, part->volume());
             track->insert(ev);
-
-            ev = new MidiController(2, 0, CTRL_PANPOT,
-               part->pan());
+            ev = new MidiController(4, channel, CTRL_PANPOT, part->pan());
             track->insert(ev);
-
-            ev = new MidiController(3, 0, CTRL_REVERB_SEND,
-               part->reverb());
+            ev = new MidiController(6, channel, CTRL_REVERB_SEND, part->reverb());
             track->insert(ev);
-
-            ev = new MidiController(4, 0, CTRL_CHORUS_SEND,
-               part->chorus());
+            ev = new MidiController(8, channel, CTRL_CHORUS_SEND, part->chorus());
             track->insert(ev);
 
             for (int i = 0; i < part->staves()->size(); ++i) {
@@ -871,7 +868,7 @@ bool ExportMidi::saver()
                                                       }
                                                 len += (note->chord()->tickLen() * gateTime / 100);
 
-                                                unsigned tick   = chord->tick();
+                                                unsigned tick = chord->tick();
                                                 len = len * gateTime / 100;
                                                 int pitch  = note->pitch();
 
@@ -882,9 +879,9 @@ bool ExportMidi::saver()
                                                             }
                                                       }
 
-                                                MidiNoteOn* ev = new MidiNoteOn(tick, 0, pitch, 0x60);
+                                                MidiNoteOn* ev = new MidiNoteOn(tick + tickOffset, channel, pitch, 0x60);
                                                 track->insert(ev);
-                                                ev = new MidiNoteOn(tick+len, 0, pitch, 0);
+                                                ev = new MidiNoteOn(tick + tickOffset + len, channel, pitch, 0);
                                                 track->insert(ev);
                                                 }
                                           }
@@ -896,10 +893,10 @@ bool ExportMidi::saver()
                                     case PEDAL:
                                           {
                                           Pedal* pedal = (Pedal*)e;
-                                          MidiController* ev = new MidiController(pedal->tick(), 0,
+                                          MidiController* ev = new MidiController(pedal->tick() + tickOffset, channel,
                                              CTRL_SUSTAIN, 0x7f);
                                           track->insert(ev);
-                                          ev = new MidiController(pedal->tick2(), 0,
+                                          ev = new MidiController(pedal->tick2() + tickOffset, channel,
                                              CTRL_SUSTAIN, 0);
                                           track->insert(ev);
                                           }
@@ -973,19 +970,6 @@ bool LoadMidi::loader(QFile* fp)
       return false;
       }
 
-// prepare:
-//    * remove empty tracks
-//    * Tracknamen feststellen; sollen Kommentare oder
-//      Instrumentennamen verwendet werden?
-//    - Instrumente feststellen
-//          - Name (kommentar?)
-//    - Schlagzeugtrack markieren
-//    - Quantisierung festlegen:
-//    for every measure:
-//          * create measure
-//          - insert notes
-//          - Tupel ?
-
 //---------------------------------------------------------
 //   convertMidi
 //---------------------------------------------------------
@@ -1032,59 +1016,47 @@ void Score::convertMidi(MidiFile* mf)
             else
 	            track->medPitch /= events;
             }
-      mf->sortTracks();
+//      mf->sortTracks();
 
       //---------------------------------------------------
       //  create instruments
       //---------------------------------------------------
 
       int ntracks = tracks->size();
-      for (int i = 0; i < ntracks;) {
+      for (int i = 0; i < ntracks; ++i) {
             MidiTrack* track = tracks->at(i);
-            int staves = 1;
             Part* part = new Part(this);
-            int ii;
-            for (ii = i + 1; ii < ntracks; ++ii) {
-                  MidiTrack* ntrack = tracks->at(ii);
-                  if (part->midiProgram() != ntrack->program)
-                        break;
-                  ++staves;
-                  }
-            i = ii;
 
-            if (staves == 1)
-                  staves = (track->maxPitch - track->minPitch > 36) ? 2 : 1;
-
+            int staves = 1;
             for (int staff = 0; staff < staves; ++staff) {
                   Staff* s = new Staff(this, part, staff);
                   part->insertStaff(s);
                   _staves->push_back(s);
-                  if (staves == 2 && part->midiProgram() == 0) {
-                        s->clef()->setClef(0, staff == 0 ? CLEF_G : CLEF_F);
-                        if (staff == 0) {
-                              // assume this is a piano staff
-                              s->setBracket(0, BRACKET_AKKOLADE);
-                              s->setBracketSpan(0, 2);
-                              }
-                        }
+                  if (track->isDrumTrack())
+                        s->clef()->setClef(0, CLEF_PERC);
                   else {
-                        if (track->isDrumTrack())
-                              s->clef()->setClef(0, CLEF_PERC);
-                        else
+                        if (staves == 2 && part->midiProgram() == 0) {
+                              s->clef()->setClef(0, staff == 0 ? CLEF_G : CLEF_F);
+                              if (staff == 0) {
+                                    // assume this is a piano staff
+                                    s->setBracket(0, BRACKET_AKKOLADE);
+                                    s->setBracketSpan(0, 2);
+                                    }
+                              }
+                        else {
                               s->clef()->setClef(0, track->medPitch < 58 ? CLEF_F : CLEF_G);
+                              }
                         }
                   }
             if (track->name().isEmpty()) {
                   int hbank = -1, lbank = -1, program = 0;
                   foreach(const MidiEvent* e, track->events()) {
-                        if (e->type() == ME_CONTROLLER) {
-                              MidiController* mc = (MidiController*)e;
-                              if (mc->controller() == CTRL_HBANK)
-                                    hbank = mc->value();
-                              else if (mc->controller() == CTRL_LBANK)
-                                    lbank = mc->value();
-                              else if (mc->controller() == ME_PROGRAM)
-                                    program = mc->value();
+                        if ((e->type() == ME_CONTROLLER)
+                           && (((MidiController*)e)->controller() == CTRL_PROGRAM)) {
+                              program = ((MidiController*)e)->value();
+                              hbank = (program >> 16);
+                              lbank = (program >> 8) & 0xff;
+                              program = program & 0xff;
                               }
                         }
                   QString t(instrName(mf->midiType(), hbank, lbank, program));

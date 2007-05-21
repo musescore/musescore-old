@@ -103,6 +103,9 @@ enum {
       CTRL_RESET_ALL_CTRL     = 0x79, // 121
       CTRL_LOCAL_OFF          = 0x7a, // 122
 
+      // special midi events are mapped to internal
+      // controller
+      //
       CTRL_PROGRAM = 0x40001,
       CTRL_PITCH   = 0x40002,
       CTRL_PRESS   = 0x40003,
@@ -239,7 +242,7 @@ class MidiController : public MidiChannelEvent {
       virtual int type() const            { return ME_CONTROLLER; }
       virtual bool isChannelEvent() const { return true; }
       int controller() const              { return _controller; }
-      void setController(int val)         { _value = val; }
+      void setController(int val)         { _controller = val; }
       int value() const                   { return _value; }
       void setValue(int v)                { _value = v; }
       virtual void write(MidiFile*) const;
@@ -322,6 +325,7 @@ class MidiTrack {
       int _outPort;
       QString _name;
       QString _comment;
+      bool _drumTrack;
 
    protected:
       void readXml(QDomNode);
@@ -339,7 +343,7 @@ class MidiTrack {
       const EventList events() const    { return _events;     }
       EventList& events()               { return _events;     }
       int outChannel() const            { return _outChannel; }
-      void setOutChannel(int n)         { _outChannel = n;    }
+      void setOutChannel(int n);
       int outPort() const               { return _outPort;    }
       void setOutPort(int n)            { _outPort = n;       }
       QString name() const              { return _name;       }
@@ -436,6 +440,7 @@ class MidiFile {
       friend class MidiMeta;
       friend class MidiSysex;
       friend class MidiController;
+      friend class MidiTrack;
       };
 
 extern QString midiMetaName(int meta);
