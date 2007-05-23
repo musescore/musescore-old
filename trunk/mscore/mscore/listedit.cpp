@@ -293,6 +293,8 @@ void PageListEditor::updateList()
                                                       }
                                                 foreach(Text* f, note->fingering())
                                                       new ElementItem(ni, f);
+                                                if (note->tieFor())
+                                                      new ElementItem(ni, note->tieFor());
                                                 }
                                           }
                                     }
@@ -571,6 +573,7 @@ ShowChordWidget::ShowChordWidget()
       connect(crb.tupletButton, SIGNAL(clicked()), SLOT(tupletClicked()));
       connect(crb.upFlag, SIGNAL(toggled(bool)), SLOT(upChanged(bool)));
       connect(crb.beamMode, SIGNAL(activated(int)), SLOT(beamModeChanged(int)));
+      connect(crb.attributes, SIGNAL(itemClicked(QListWidgetItem*)), SLOT(gotoElement(QListWidgetItem*)));
 
       // chord
       QWidget* ch = new QWidget;
@@ -580,8 +583,8 @@ ShowChordWidget::ShowChordWidget()
       connect(cb.hookButton, SIGNAL(clicked()), SLOT(hookClicked()));
       connect(cb.stemButton, SIGNAL(clicked()), SLOT(stemClicked()));
       connect(cb.stemDirection, SIGNAL(activated(int)), SLOT(directionChanged(int)));
-      connect(cb.attributeList, SIGNAL(itemClicked(QListWidgetItem*)), SLOT(gotoAttribute(QListWidgetItem*)));
-      connect(cb.helplineList, SIGNAL(itemClicked(QListWidgetItem*)), SLOT(gotoHelpline(QListWidgetItem*)));
+      connect(cb.helplineList, SIGNAL(itemClicked(QListWidgetItem*)), SLOT(gotoElement(QListWidgetItem*)));
+      connect(cb.notes, SIGNAL(itemClicked(QListWidgetItem*)), SLOT(gotoElement(QListWidgetItem*)));
       }
 
 //---------------------------------------------------------
@@ -612,12 +615,12 @@ void ShowChordWidget::setElement(Element* e)
       cb.stemDirection->addItem(tr("Down"), 2);
       cb.stemDirection->setCurrentIndex(int(chord->stemDirection()));
 
-      cb.attributeList->clear();
+      crb.attributes->clear();
       foreach(NoteAttribute* a, *chord->getAttributes()) {
             QString s;
             s.setNum(long(a), 16);
             QListWidgetItem* item = new QListWidgetItem(s, 0, long(a));
-            cb.attributeList->addItem(item);
+            crb.attributes->addItem(item);
             }
       cb.helplineList->clear();
       foreach(HelpLine* h, *chord->getHelpLines()) {
@@ -626,24 +629,15 @@ void ShowChordWidget::setElement(Element* e)
             QListWidgetItem* item = new QListWidgetItem(s, 0, long(h));
             cb.helplineList->addItem(item);
             }
-      }
-
-//---------------------------------------------------------
-//   gotoAttribute
-//---------------------------------------------------------
-
-void ShowChordWidget::gotoAttribute(QListWidgetItem* ai)
-      {
-      NoteAttribute* attr = (NoteAttribute*)(ai->type());
-      emit elementChanged(attr);
-      }
-
-//---------------------------------------------------------
-//   gotoHelpline
-//---------------------------------------------------------
-
-void ShowChordWidget::gotoHelpline(QListWidgetItem*)
-      {
+      cb.notes->clear();
+      NoteList* nl = chord->noteList();
+      for (ciNote in = nl->begin(); in != nl->end(); ++in) {
+            Note* n = in->second;
+            QString s;
+            s.setNum(long(n), 16);
+            QListWidgetItem* item = new QListWidgetItem(s, 0, long(n));
+            cb.notes->addItem(item);
+            }
       }
 
 //---------------------------------------------------------
@@ -720,8 +714,12 @@ ShowNoteWidget::ShowNoteWidget()
       QWidget* note = new QWidget;
       nb.setupUi(note);
       layout->addWidget(note);
-
       layout->addStretch(10);
+
+      connect(nb.tieFor, SIGNAL(clicked()), SLOT(tieForClicked()));
+      connect(nb.tieBack, SIGNAL(clicked()), SLOT(tieBackClicked()));
+      connect(nb.accidental, SIGNAL(clicked()), SLOT(accidentalClicked()));
+      connect(nb.fingering, SIGNAL(itemClicked(QListWidgetItem*)), SLOT(gotoElement(QListWidgetItem*)));
       }
 
 //---------------------------------------------------------
@@ -740,11 +738,45 @@ void ShowNoteWidget::setElement(Element* e)
       nb.graceNote->setChecked(note->grace());
       nb.mirror->setChecked(note->mirror());
       nb.tpc->setValue(note->tpc());
-      //accidental
-      //note head
-      //fingering
-      //tieFor
-      //tieBack
+      nb.head->setValue(note->noteHead());
+
+      nb.tieFor->setEnabled(note->tieFor());
+      nb.tieBack->setEnabled(note->tieBack());
+      nb.accidental->setEnabled(note->accidental());
+
+      foreach(Text* text, note->fingering()) {
+            QString s;
+            s.setNum(long(text), 16);
+            QListWidgetItem* item = new QListWidgetItem(s, 0, long(text));
+            nb.fingering->addItem(item);
+            }
+      }
+
+//---------------------------------------------------------
+//   tieForClicked
+//---------------------------------------------------------
+
+void ShowNoteWidget::tieForClicked()
+      {
+      emit elementChanged(((Note*)element())->tieFor());
+      }
+
+//---------------------------------------------------------
+//   tieBackClicked
+//---------------------------------------------------------
+
+void ShowNoteWidget::tieBackClicked()
+      {
+      emit elementChanged(((Note*)element())->tieBack());
+      }
+
+//---------------------------------------------------------
+//   accidentalClicked
+//---------------------------------------------------------
+
+void ShowNoteWidget::accidentalClicked()
+      {
+      emit elementChanged(((Note*)element())->accidental());
       }
 
 //---------------------------------------------------------
@@ -1139,6 +1171,16 @@ ShowElementBase::ShowElementBase()
       connect(eb.offsety, SIGNAL(valueChanged(double)), SLOT(offsetyChanged(double)));
       connect(eb.selected, SIGNAL(clicked(bool)), SLOT(selectedClicked(bool)));
       connect(eb.visible, SIGNAL(clicked(bool)), SLOT(visibleClicked(bool)));
+      }
+
+//---------------------------------------------------------
+//   gotoElement
+//---------------------------------------------------------
+
+void ShowElementBase::gotoElement(QListWidgetItem* ai)
+      {
+      Element* e = (Element*)(ai->type());
+      emit elementChanged(e);
       }
 
 //---------------------------------------------------------

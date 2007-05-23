@@ -25,6 +25,10 @@
 
 const int MIDI_CHANNEL = 16;
 
+//---------------------------------------------------------
+//   Midi Events
+//---------------------------------------------------------
+
 enum {
       ME_NOTEOFF    = 0x80,
       ME_NOTEON     = 0x90,
@@ -43,7 +47,12 @@ enum {
       ME_STOP       = 0xfc,
 
       ME_NOTE       = 0x100,
+      ME_CHORD      = 0x101,
       };
+
+//---------------------------------------------------------
+//   Midi Meta Events
+//---------------------------------------------------------
 
 enum {
       META_SEQUENCE_NUMBER = 0,
@@ -66,6 +75,10 @@ enum {
       META_TIME_SIGNATURE  = 0x58,
       META_KEY_SIGNATURE   = 0x59,
       };
+
+//---------------------------------------------------------
+//   Midi Controller
+//---------------------------------------------------------
 
 enum {
       CTRL_HBANK = 0x00,
@@ -109,6 +122,14 @@ enum {
       CTRL_PROGRAM = 0x40001,
       CTRL_PITCH   = 0x40002,
       CTRL_PRESS   = 0x40003,
+      };
+
+//---------------------------------------------------------
+//   MidiType
+//---------------------------------------------------------
+
+enum MidiType {
+      MT_UNKNOWN = 0, MT_GM = 1, MT_GS = 2, MT_XG = 4
       };
 
 class MidiFile;
@@ -219,6 +240,25 @@ class MidiNote : public MidiNoteOnOff {
       int tpc() const          { return _tpc;    }
       void setTpc(int v)       { _tpc = v;       }
       virtual void dump(Xml&) const;
+      };
+
+//---------------------------------------------------------
+//   MidiChord
+//---------------------------------------------------------
+
+class MidiChord : public MidiEvent {
+      int _duration;
+      QList<MidiNote*> _notes;
+
+   public:
+      MidiChord()              {}
+      virtual int type() const  { return ME_CHORD; }
+      int duration() const      { return _duration; }
+      void setDuration(int v)   { _duration = v; }
+      int offtime() const       { return ontime() + _duration; }
+      QList<MidiNote*>& notes() { return _notes; }
+      virtual void dump(Xml&) const {}
+      bool isChannelEvent() const { return true;     }
       };
 
 //---------------------------------------------------------
@@ -359,19 +399,13 @@ class MidiTrack {
       bool isDrumTrack() const;
       void extractTimeSig(SigList* sig);
       void quantize(int startTick, int endTick, EventList* dst);
+      int getInitProgram();
+      void findChords();
 
       friend class MidiFile;
       };
 
 typedef QList<MidiTrack*> MidiTrackList;
-
-//---------------------------------------------------------
-//   MidiType
-//---------------------------------------------------------
-
-enum MidiType {
-      MT_UNKNOWN = 0, MT_GM = 1, MT_GS = 2, MT_XG = 4
-      };
 
 //---------------------------------------------------------
 //   MidiFile

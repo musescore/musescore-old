@@ -945,15 +945,18 @@ void MuseScore::importMidi()
 
 //---------------------------------------------------------
 //   importMidi
+//    return true on success
 //---------------------------------------------------------
 
-void Score::importMidi(const QString& name)
+bool Score::importMidi(const QString& name)
       {
       LoadMidi lm(this);
-      lm.load(name);
+      if (lm.load(name))
+            return false;
       _saved = false;
       convertMidi(&(lm.mf));
       _created = true;
+      return true;
       }
 
 //---------------------------------------------------------
@@ -964,10 +967,7 @@ void Score::importMidi(const QString& name)
 
 bool LoadMidi::loader(QFile* fp)
       {
-      if (mf.read(fp)) {
-            return true;
-            }
-      return false;
+      return mf.read(fp);
       }
 
 //---------------------------------------------------------
@@ -1016,48 +1016,50 @@ void Score::convertMidi(MidiFile* mf)
             else
 	            track->medPitch /= events;
             }
-//      mf->sortTracks();
 
       //---------------------------------------------------
       //  create instruments
       //---------------------------------------------------
 
       int ntracks = tracks->size();
-      for (int i = 0; i < ntracks; ++i) {
+      for (int i = 0;;) {
             MidiTrack* track = tracks->at(i);
-            Part* part = new Part(this);
+            int program      = track->getInitProgram();
+            Part* part       = new Part(this);
 
-            int staves = 1;
-            for (int staff = 0; staff < staves; ++staff) {
-                  Staff* s = new Staff(this, part, staff);
-                  part->insertStaff(s);
-                  _staves->push_back(s);
-                  if (track->isDrumTrack())
-                        s->clef()->setClef(0, CLEF_PERC);
+            Staff* s = new Staff(this, part, 0);
+            part->insertStaff(s);
+            _staves->push_back(s);
+
+            if (track->isDrumTrack())
+                  s->clef()->setClef(0, CLEF_PERC);
+            else {
+                  if ((i < (ntracks-1)) && (tracks->at(i+1)->outChannel() == track->outChannel()
+                     && ((program & 0xff) == 0))) {
+                        // assume that the current track and the next track
+                        // form a piano part
+                        Staff* ss = new Staff(this, part, 1);
+                        part->insertStaff(ss);
+                        _staves->push_back(ss);
+
+                        s->clef()->setClef(0, CLEF_G);
+                        s->setBracket(0, BRACKET_AKKOLADE);
+                        s->setBracketSpan(0, 2);
+                        ss->clef()->setClef(0, CLEF_F);
+                        ++i;
+                        }
                   else {
-                        if (staves == 2 && part->midiProgram() == 0) {
-                              s->clef()->setClef(0, staff == 0 ? CLEF_G : CLEF_F);
-                              if (staff == 0) {
-                                    // assume this is a piano staff
-                                    s->setBracket(0, BRACKET_AKKOLADE);
-                                    s->setBracketSpan(0, 2);
-                                    }
-                              }
-                        else {
-                              s->clef()->setClef(0, track->medPitch < 58 ? CLEF_F : CLEF_G);
-                              }
+                        s->clef()->setClef(0, track->medPitch < 58 ? CLEF_F : CLEF_G);
                         }
                   }
             if (track->name().isEmpty()) {
-                  int hbank = -1, lbank = -1, program = 0;
-                  foreach(const MidiEvent* e, track->events()) {
-                        if ((e->type() == ME_CONTROLLER)
-                           && (((MidiController*)e)->controller() == CTRL_PROGRAM)) {
-                              program = ((MidiController*)e)->value();
-                              hbank = (program >> 16);
-                              lbank = (program >> 8) & 0xff;
-                              program = program & 0xff;
-                              }
+                  int hbank = -1, lbank = -1;
+                  if (program == -1)
+                        program = 0;
+                  else {
+                        hbank = (program >> 16);
+                        lbank = (program >> 8) & 0xff;
+                        program = program & 0xff;
                         }
                   QString t(instrName(mf->midiType(), hbank, lbank, program));
                   if (!t.isEmpty())
@@ -1071,6 +1073,10 @@ void Score::convertMidi(MidiFile* mf)
             part->setMidiChannel(track->outChannel());
             part->setMidiProgram(track->program);
             _parts.push_back(part);
+
+            ++i;
+            if (i >= ntracks)
+                  break;
             }
 
       int lastTick = 0;
@@ -1182,15 +1188,17 @@ void Score::convertMidi(MidiFile* mf)
 
 //---------------------------------------------------------
 //   MNote
-//	Midi Note
+//	special Midi Note
 //---------------------------------------------------------
 
 struct MNote {
-	int pitch, velo, ontime, duration, tpc;
-      Tie* tie;
+	MidiChord* mc;
+      QList<Tie*> ties;
 
-      MNote(int p, int v, int t, int l, int _tpc)
-         : pitch(p), velo(v), ontime(t), duration(l), tpc(_tpc), tie(0) {}
+      MNote(MidiChord* _mc) : mc(_mc) {
+            for (int i = 0; i < mc->notes().size(); ++i)
+                  ties.append(0);
+            }
       };
 
 //---------------------------------------------------------
@@ -1199,17 +1207,19 @@ struct MNote {
 
 void Score::convertTrack(MidiTrack* midiTrack, int staffIdx)
 	{
-	const EventList el = midiTrack->events();
-
       // try to find out key
       int key = findKey(midiTrack, sigmap);
 
+      midiTrack->findChords();
+
+      Staff* cstaff = staff(staffIdx);
+	const EventList el = midiTrack->events();
       QList<MNote*> notes;
 
 	int ctick = 0;
       for (ciEvent i = el.begin(); i != el.end();) {
             MidiEvent* e = *i;
-            if (e->type() != ME_NOTE) {
+            if (e->type() != ME_CHORD) {
                   ++i;
                   continue;
                   }
@@ -1217,13 +1227,13 @@ void Score::convertTrack(MidiTrack* midiTrack, int staffIdx)
             // process pending notes
             //
             while (!notes.isEmpty()) {
-                  int tick = notes[0]->ontime;
+                  int tick = notes[0]->mc->ontime();
                   int len  = (*i)->ontime() - tick;
                   if (len <= 0)
                         break;
             	foreach (MNote* n, notes) {
-                  	if (n->duration < len)
-                              len = n->duration;
+                  	if (n->mc->duration() < len)
+                              len = n->mc->duration();
                         }
       		Measure* measure = tick2measure(tick);
                   // split notes on measure boundary
@@ -1231,31 +1241,39 @@ void Score::convertTrack(MidiTrack* midiTrack, int staffIdx)
                         len = measure->tick() + measure->tickLen() - tick;
                         }
                   Chord* chord = new Chord(this, tick);
-                  chord->setStaff(staff(staffIdx));
+                  chord->setStaff(cstaff);
                   chord->setTickLen(len);
                   Segment* s = measure->getSegment(chord);
                   s->add(chord);
 
             	foreach (MNote* n, notes) {
-            		Note* note = new Note(this, n->pitch, false);
-                        note->setTpc(n->tpc);
-            		note->setStaff(staff(staffIdx));
-            		chord->add(note);
-                        note->setTick(tick);
-                        if (n->tie) {
-                              n->tie->setEndNote(note);
-                              n->tie->setStaff(note->staff());
-                              note->setTieBack(n->tie);
+                        QList<MidiNote*>& nl = n->mc->notes();
+                        for (int i = 0; i < nl.size(); ++i) {
+                              MidiNote* mn = nl[i];
+                  		Note* note = new Note(this, mn->pitch(), false);
+                              note->setTpc(mn->tpc());
+                  		note->setStaff(cstaff);
+            	      	chord->add(note);
+                              note->setTick(tick);
+                              if (n->ties[i]) {
+                                    n->ties[i]->setEndNote(note);
+                                    n->ties[i]->setStaff(note->staff());
+                                    note->setTieBack(n->ties[i]);
+                                    }
                               }
-                        if (n->duration <= len) {
+                        if (n->mc->duration() <= len) {
                               notes.removeAt(notes.indexOf(n));
                               continue;
                               }
-				n->tie = new Tie(this);
-                        n->tie->setStartNote(note);
-				note->setTieFor(n->tie);
-	                  n->ontime   += len;
-                        n->duration -= len;
+                        for (int i = 0; i < nl.size(); ++i) {
+                              MidiNote* mn = nl[i];
+                              Note* note = chord->noteList()->find(mn->pitch());
+      				n->ties[i] = new Tie(this);
+                              n->ties[i]->setStartNote(note);
+		      		note->setTieFor(n->ties[i]);
+                              }
+	                  n->mc->setOntime(n->mc->ontime() + len);
+                        n->mc->setDuration(n->mc->duration() - len);
                         }
                   ctick += len;
                   }
@@ -1271,7 +1289,7 @@ void Score::convertTrack(MidiTrack* midiTrack, int staffIdx)
                         len = measure->tick() + measure->tickLen() - ctick;
                         }
                   Rest* rest = new Rest(this, ctick, len);
-                  rest->setStaff(staff(staffIdx));
+                  rest->setStaff(cstaff);
                   Segment* s = measure->getSegment(rest);
                   s->add(rest);
                   ctick   += len;
@@ -1284,13 +1302,12 @@ void Score::convertTrack(MidiTrack* midiTrack, int staffIdx)
             //
             for (;i != el.end(); ++i) {
             	MidiEvent* e = *i;
-                  if (e->type() != ME_NOTE)
+                  if (e->type() != ME_CHORD)
                         continue;
                   if ((*i)->ontime() != ctick)
                         break;
-                  MidiNote* mn = (MidiNote*)e;
-            	MNote* n = new MNote(mn->pitch(), mn->velo(), mn->ontime(),
-                     mn->duration(), mn->tpc());
+                  MidiChord* mc = (MidiChord*)e;
+            	MNote* n = new MNote(mc);
       	      notes.append(n);
                   }
             }
@@ -1300,33 +1317,37 @@ void Score::convertTrack(MidiTrack* midiTrack, int staffIdx)
       //
       if (notes.isEmpty())
             return;
-      int tick = notes[0]->ontime;
+      int tick = notes[0]->mc->ontime();
 	Measure* measure = tick2measure(tick);
       Chord* chord = new Chord(this, tick);
-      chord->setStaff(staff(staffIdx));
+      chord->setStaff(cstaff);
       Segment* s = measure->getSegment(chord);
       s->add(chord);
       int len = 0x7fffffff;      // MAXINT;
 	foreach (MNote* n, notes) {
-      	if (n->duration < len)
-                  len = n->duration;
+      	if (n->mc->duration() < len)
+                  len = n->mc->duration();
             }
       chord->setTickLen(len);
 	foreach (MNote* n, notes) {
-		Note* note = new Note(this, n->pitch, false);
-		note->setStaff(staff(staffIdx));
-            note->setTick(tick);
-            note->setTpc(n->tpc);
-		chord->add(note);
-            n->duration -= len;
-            if (n->duration <= 0) {
+            foreach(MidiNote* mn, n->mc->notes()) {
+      		Note* note = new Note(this, mn->pitch(), false);
+	      	note->setStaff(cstaff);
+                  note->setTick(tick);
+                  note->setTpc(mn->tpc());
+	      	chord->add(note);
+                  }
+            n->mc->setDuration(n->mc->duration() - len);
+            if (n->mc->duration() <= 0) {
                   notes.removeAt(notes.indexOf(n));
                   delete n;
                   }
             else
-                  n->ontime += len;
+                  n->mc->setOntime(n->mc->ontime() + len);
             }
       ctick += len;
+
+
       //
       // check for gap and fill with rest
       //
@@ -1334,7 +1355,7 @@ void Score::convertTrack(MidiTrack* midiTrack, int staffIdx)
       if (restLen > 0) {
             Rest* rest = new Rest(this, ctick, restLen);
 		Measure* measure = tick2measure(ctick);
-            rest->setStaff(staff(staffIdx));
+            rest->setStaff(cstaff);
             Segment* s = measure->getSegment(rest);
             s->add(rest);
             }
@@ -1387,8 +1408,7 @@ void Score::convertTrack(MidiTrack* midiTrack, int staffIdx)
                                     printf("ImportMidi: illegal key %d\n", key);
                                     break;
                                     }
-            		      Staff* s = staff(staffIdx);
-                              (*s->keymap())[e->ontime()] = key;
+                              (*cstaff->keymap())[e->ontime()] = key;
                               keyFound = false;
                               }
                               break;
@@ -1438,8 +1458,7 @@ void Score::convertTrack(MidiTrack* midiTrack, int staffIdx)
             }
 
       if (!keyFound && !midiTrack->isDrumTrack()) {
-            Staff* s = staff(staffIdx);
-            (*s->keymap())[0] = key;
+            (*cstaff->keymap())[0] = key;
             }
       }
 
