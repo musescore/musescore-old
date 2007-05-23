@@ -1025,6 +1025,8 @@ void MidiTrack::extractTimeSig(SigList* sigmap)
                   el.insert(e);
             }
       _events = el;
+      if (sigmap->empty())                // set default
+            sigmap->add(0, 4, 4);
       }
 
 //---------------------------------------------------------
@@ -1049,7 +1051,7 @@ void MidiFile::process1()
 
 static int quantizeLen(int, int len, int raster)
       {
-      int rl = (len / raster) * raster;
+      int rl = ((len + raster - 1) / raster) * raster;
       rl /= 2;
       if (rl == 0)
             rl = 1;
@@ -1132,18 +1134,18 @@ void MidiTrack::cleanup()
       //
       int lastTick = 0;
       foreach (MidiEvent* e, _events) {
-            if (!(e->type() == ME_NOTE))
+            if (e->type() != ME_NOTE)
                   continue;
-            int offtime  = e->ontime() + ((MidiNote*)e)->duration();
+            int offtime  = ((MidiNote*)e)->offtime();
             if (offtime > lastTick)
                   lastTick = offtime;
             }
       int startTick = 0;
       for (int i = 1;; ++i) {
             int endTick = mf->siglist().bar2tick(i, 0, 0);
+            quantize(startTick, endTick, &dl);
             if (endTick > lastTick)
                   break;
-            quantize(startTick, endTick, &dl);
             startTick = endTick;
             }
 
@@ -1453,6 +1455,22 @@ void MidiTrack::readXml(QDomNode node)
       }
 
 //---------------------------------------------------------
+//   getInitProgram
+//---------------------------------------------------------
+
+int MidiTrack::getInitProgram()
+      {
+      foreach(const MidiEvent* e, _events) {
+            if (e->type() != ME_CONTROLLER)
+                  continue;
+            MidiController* mc = (MidiController*)e;
+            if (mc->controller() == CTRL_PROGRAM)
+                  return mc->value();
+            }
+      return -1;
+      }
+
+//---------------------------------------------------------
 //   readXml
 //---------------------------------------------------------
 
@@ -1477,4 +1495,51 @@ void MidiFile::readXml(QDomNode node)
                   domError(n);
             }
       }
+
+//---------------------------------------------------------
+//   findChords
+//---------------------------------------------------------
+
+void MidiTrack::findChords()
+      {
+      EventList dl;
+      int n = _events.size();
+
+      int jitter = 3;   // tick tolerance for note on/off
+      MidiChord* chord = 0;
+
+      for (int i = 0; i < n; ++i) {
+            MidiEvent* e = _events[i];
+            if (e == 0)
+                  continue;
+            if (e->type() != ME_NOTE) {
+                  dl.append(e);
+                  continue;
+                  }
+
+            MidiNote* note   = (MidiNote*)e;
+            int ontime       = note->ontime();
+            int offtime      = note->offtime();
+            MidiChord* chord = new MidiChord();
+            chord->setOntime(ontime);
+            chord->setDuration(note->duration());
+            chord->notes().append(note);
+            dl.append(chord);
+            _events[i] = 0;
+
+            for (int k = i + 1; k < n; ++k) {
+                  if (_events[k] == 0 || _events[k]->type() != ME_NOTE)
+                        continue;
+                  MidiNote* nn = (MidiNote*)_events[k];
+                  if (nn->ontime() - jitter > ontime)
+                        break;
+                  if (qAbs(nn->ontime() - ontime) > jitter || qAbs(nn->offtime() - offtime) > jitter)
+                        continue;
+                  chord->notes().append(nn);
+                  _events[k] = 0;
+                  }
+            }
+      _events = dl;
+      }
+
 

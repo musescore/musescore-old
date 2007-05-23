@@ -374,7 +374,7 @@ class Score : public QObject {
       bool loadFile(QFile* f);
       void importMusicXml(const QString&);
       void convertMidi(MidiFile*);
-      void importMidi(const QString& name);
+      bool importMidi(const QString& name);
       ChordRest* getSelectedChordRest();
       int pos();
       Measure* tick2measure(int tick) const;

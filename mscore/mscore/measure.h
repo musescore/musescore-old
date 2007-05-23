@@ -135,7 +135,7 @@ class Measure : public Element {
       virtual void write(Xml&) const;
       virtual void read(QDomNode);
 
-      virtual bool isMovable() const { return true; }
+      virtual bool isMovable() const { return false; }
       virtual void add(Element*);
       virtual void remove(Element*);
       virtual bool genPropertyMenu(QMenu*) const;

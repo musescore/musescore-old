@@ -571,9 +571,6 @@ QRectF Note::drag(const QPointF& s)
       {
       QRectF bb(chord()->bbox());
       _lineOffset = lrint(s.y() * 2 / _spatium);
-//      chord()->layout();
-//      chord()->measure()->layoutBeams();
-//      bb |= chord()->bbox();
       return bb.translated(chord()->canvasPos());
       }
 

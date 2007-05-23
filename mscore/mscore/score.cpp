@@ -240,7 +240,8 @@ void Score::read(QString name)
             importMusicXml(name);
             }
       else if (info.completeSuffix() == "mid") {
-            importMidi(name);
+            if (!importMidi(name))
+                  return;
             }
       else {
             loadMsc(name);

@@ -573,7 +573,6 @@ void System::add(Element* el)
             ss->brackets[level] = b;
             b->staff()->setBracket(level,   b->subtype());
             b->staff()->setBracketSpan(level, b->span());
-//TODO            score()->layout();
             }
       }
 

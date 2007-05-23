@@ -838,17 +838,16 @@ int findKey(MidiTrack* mt, SigList* sigmap)
             note.append(mn);
             }
       spell(note, 0);
-
       npc_found = 1;
 
       // create one segment for every measure
       for (int i = 0;; ++i) {
             int tick = sigmap->bar2tick(i, 0, 0);
-            if (tick > lastTick)
-                  break;
             SBeat b;
             b.time = tick;
             sbeat.append(b);
+            if (tick > lastTick)
+                  break;
             }
 
       firstbeat       = sbeat.first().time;
@@ -902,6 +901,7 @@ int findKey(MidiTrack* mt, SigList* sigmap)
                   xkey   = i;
                   }
             }
+
       xkey -= 14;
       if (xkey < -7 || xkey > 7) {
             printf("illegal key %d found\n", xkey);

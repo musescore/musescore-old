@@ -134,32 +134,19 @@ bool LoadFile::load(QWidget* parent, const QString& base, const QString& ext,
       if (_name.isEmpty())
             return true;
       QFileInfo info(_name);
-      QString zip;
 
       if (info.completeSuffix() == QString("")) {
             _name += ext;
             info.setFile(_name);
             }
-      QFile fp(_name);
-      if (!fp.open(QIODevice::ReadOnly))
-            return true;
-      if (loader(&fp)) {
-            QMessageBox::warning(parent,
-               QWidget::tr("MuseScore: load failed:"),
-               error,
-               QString::null, QWidget::tr("Quit"), QString::null, 0, 1);
-            }
-      fp.close();
-      return false;
+      return load(_name);
       }
 
 bool LoadFile::load(const QString& name)
       {
       if (name.isEmpty())
             return true;
-      QString zip;
 
-      QFileInfo info(name);
       QFile fp(name);
       if (!fp.open(QIODevice::ReadOnly))
             return true;
@@ -776,7 +763,6 @@ void MuseScore::loadInstrumentTemplates()
             fprintf(stderr, "cannot find instrument templates <%s>\n", instrTemplates.toLatin1().data());
             return;
             }
-      QString zip;
 
       QFile qf(instrTemplates);
       if (!qf.open(QIODevice::ReadOnly))

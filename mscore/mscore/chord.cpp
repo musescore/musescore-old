@@ -430,11 +430,14 @@ void Chord::layout(ScoreLayout* layout)
             note->setPos(x, y);
             Accidental* accidental = note->accidental();
             if (accidental) {
-                  double x = point(style->prefixNoteDistance);
+                  double x = - point(style->prefixNoteDistance);
                   if (_grace)
                         x /= 2;
-                  // accidental->setPos(- x - accidental->width(), 0);
-                  accidental->setPos(- x - accidental->width() - accidental->bbox().x(), 0);
+
+                  x -= accidental->width() - accidental->bbox().x();
+                  if (note->mirror())
+                        x -= headWidth;
+                  accidental->setPos(x, 0);
                   }
             }
 

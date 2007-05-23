@@ -122,6 +122,7 @@ class ShowElementBase : public QWidget {
       void offsetyChanged(double);
       void selectedClicked(bool);
       void visibleClicked(bool);
+      void gotoElement(QListWidgetItem* ai);
 
    protected:
       QVBoxLayout* layout;
@@ -190,8 +191,6 @@ class ShowChordWidget : public ShowElementBase {
       void hookClicked();
       void stemClicked();
       void directionChanged(int);
-      void gotoAttribute(QListWidgetItem*);
-      void gotoHelpline(QListWidgetItem*);
       void beamClicked();
       void tupletClicked();
       void upChanged(bool);
@@ -223,6 +222,11 @@ class ShowNoteWidget : public ShowElementBase {
       Q_OBJECT;
 
       Ui::NoteBase nb;
+
+   private slots:
+      void tieForClicked();
+      void tieBackClicked();
+      void accidentalClicked();
 
    public:
       ShowNoteWidget();

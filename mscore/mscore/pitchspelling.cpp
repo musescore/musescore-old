@@ -399,6 +399,8 @@ int computeWindow(const QList<Note*>& notes, int start, int end, int keyIdx)
 void spell(QList<MidiNote*>& notes, int key)
       {
       int n = notes.size();
+      if (n == 0)
+            return;
 
       int start = 0;
       while (start < n) {
@@ -416,8 +418,10 @@ void spell(QList<MidiNote*>& notes, int key)
 
             if (start == 0) {
                   notes[0]->setTpc(tab[(notes[0]->pitch() % 12) * 2 + (opt & 1)]);
-                  notes[1]->setTpc(tab[(notes[1]->pitch() % 12) * 2 + ((opt & 2)>>1)]);
-                  notes[2]->setTpc(tab[(notes[2]->pitch() % 12) * 2 + ((opt & 4)>>2)]);
+                  if (n > 1)
+                        notes[1]->setTpc(tab[(notes[1]->pitch() % 12) * 2 + ((opt & 2)>>1)]);
+                  if (n > 2)
+                        notes[2]->setTpc(tab[(notes[2]->pitch() % 12) * 2 + ((opt & 4)>>2)]);
                   }
             if ((end - start) >= 6) {
                   notes[start+3]->setTpc(tab[(notes[start+3]->pitch() % 12) * 2 + ((opt &  8) >> 3)]);
@@ -485,8 +489,10 @@ void spell(QList<Note*>& notes, int key)
 
             if (start == 0) {
                   notes[0]->setTpc(tab[(notes[0]->pitch() % 12) * 2 + (opt & 1)]);
-                  notes[1]->setTpc(tab[(notes[1]->pitch() % 12) * 2 + ((opt & 2)>>1)]);
-                  notes[2]->setTpc(tab[(notes[2]->pitch() % 12) * 2 + ((opt & 4)>>2)]);
+                  if (n > 1)
+                        notes[1]->setTpc(tab[(notes[1]->pitch() % 12) * 2 + ((opt & 2)>>1)]);
+                  if (n > 2)
+                        notes[2]->setTpc(tab[(notes[2]->pitch() % 12) * 2 + ((opt & 4)>>2)]);
                   }
             if ((end - start) >= 6) {
                   notes[start+3]->setTpc(tab[(notes[start+3]->pitch() % 12) * 2 + ((opt &  8) >> 3)]);
