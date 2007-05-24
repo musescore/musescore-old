@@ -154,18 +154,13 @@ void Dynamic::write(Xml& xml) const
 //   read
 //---------------------------------------------------------
 
-void Dynamic::read(QDomNode node)
+void Dynamic::read(QDomElement e)
       {
-      for (node = node.firstChild(); !node.isNull(); node = node.nextSibling()) {
-            QDomElement e = node.toElement();
-            if (e.isNull())
-                  continue;
+      for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             if (e.tagName() == "data")
                   doc->setHtml(e.text());
-            else if (Element::readProperties(node))
-                  ;
-            else
-                  domError(node);
+            else if (!Element::readProperties(e))
+                  domError(e);
             }
       setSubtype(subtype());
       }

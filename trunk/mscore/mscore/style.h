@@ -85,7 +85,7 @@ struct TextStyle {
             {}
       TextStyle() {}
       void write(Xml&) const;
-      void read(QDomNode);
+      void read(QDomElement);
       QFont font() const;
       QRectF bbox(const QString& s) const { return fontMetrics().boundingRect(s); }
       QFontMetricsF fontMetrics() const   { return QFontMetricsF(font()); }
@@ -169,7 +169,7 @@ struct Style {
 
 extern void setDefaultStyle();
 extern void setTextStyle(const TextStyle& ts);
-extern void loadStyle(QDomNode);
+extern void loadStyle(QDomElement);
 extern void saveStyle(Xml& xml);
 
 extern Style* style;

@@ -343,23 +343,20 @@ void SlurSegment::write(Xml& xml, int no) const
 //   readSegment
 //---------------------------------------------------------
 
-void SlurSegment::read(QDomNode node)
+void SlurSegment::read(QDomElement e)
       {
-      for (node = node.firstChild(); !node.isNull(); node = node.nextSibling()) {
-            QDomElement e = node.toElement();
-            if (e.isNull())
-                  continue;
+      for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             QString tag(e.tagName());
             if (tag == "o1")
-                  ups[0].off = readPoint(node);
+                  ups[0].off = readPoint(e);
             else if (tag == "o2")
-                  ups[1].off = readPoint(node);
+                  ups[1].off = readPoint(e);
             else if (tag == "o3")
-                  ups[2].off = readPoint(node);
+                  ups[2].off = readPoint(e);
             else if (tag == "o4")
-                  ups[3].off = readPoint(node);
+                  ups[3].off = readPoint(e);
             else
-                  domError(node);
+                  domError(e);
             }
       }
 
@@ -585,17 +582,14 @@ void SlurTie::setSelected(bool f)
 //   readProperties
 //---------------------------------------------------------
 
-bool SlurTie::readProperties(QDomNode node)
+bool SlurTie::readProperties(QDomElement e)
       {
-      QDomElement e = node.toElement();
-      if (e.isNull())
-            return true;
       QString tag(e.tagName());
       QString val(e.text());
 
       if (tag == "SlurSegment") {
             SlurSegment* segment = new SlurSegment(this);
-            segment->read(node);
+            segment->read(e);
             segment->setStaff(staff());
             segment->setParent(parent());
             segments.push_back(segment);
@@ -761,14 +755,11 @@ void Slur::write(Xml& xml) const
 //   read
 //---------------------------------------------------------
 
-void Slur::read(Score* score, QDomNode node)
+void Slur::read(Score* score, QDomElement e)
       {
       _staff1 = 0;
       _staff2 = 0;
-      for (node = node.firstChild(); !node.isNull(); node = node.nextSibling()) {
-            QDomElement e = node.toElement();
-            if (e.isNull())
-                  continue;
+      for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             QString tag(e.tagName());
             QString val(e.text());
             int i = val.toInt();
@@ -784,11 +775,10 @@ void Slur::read(Score* score, QDomNode node)
                   _staff1 = score->staff(i);
             else if (tag == "endStaff")
                   _staff2 = score->staff(i);
-            else if (SlurTie::readProperties(node))
+            else if (SlurTie::readProperties(e))
                   ;
             else
-                  printf("Mscore:Slur: unknown tag %s\n",
-                     tag.toLatin1().data());
+                  domError(e);
             }
       if (_staff1 == 0)
             _staff1 = score->staff(0);
@@ -1036,17 +1026,14 @@ void Tie::write(Xml& xml) const
 //   read
 //---------------------------------------------------------
 
-void Tie::read(QDomNode node)
+void Tie::read(QDomElement e)
       {
-      for (node = node.firstChild(); !node.isNull(); node = node.nextSibling()) {
-            QDomElement e = node.toElement();
-            if (e.isNull())
-                  continue;
+      for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             QString tag(e.tagName());
             QString val(e.text());
-            if (Element::readProperties(node))
+            if (Element::readProperties(e))
                   ;
-            else if (SlurTie::readProperties(node))
+            else if (SlurTie::readProperties(e))
                   ;
             else
                   domError(e);

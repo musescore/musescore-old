@@ -1360,11 +1360,11 @@ void Score::cmd(const QString& cmd)
                               printf("error reading paste data\n");
                               return;
                               }
-                        QDomNode node = doc.documentElement();
+                        QDomElement e = doc.documentElement();
                         QPointF dragOffset;
-                        int type      = Element::readType(node, &dragOffset);
+                        int type      = Element::readType(e, &dragOffset);
                         addRefresh(sel->element()->abbox());   // layout() ?!
-                        sel->element()->drop(QPointF(), QPointF(), type, node);
+                        sel->element()->drop(QPointF(), QPointF(), type, e);
                         addRefresh(sel->element()->abbox());
                         }
                   else if (sel->state == SEL_STAFF && ms && ms->hasFormat("application/mscore/staff"))
@@ -1430,23 +1430,17 @@ void Score::pasteStaff(const QMimeData* ms)
             return;
             }
       int srcStaffStart = -1;
-      for (QDomNode node = doc.documentElement(); !node.isNull(); node = node.nextSibling()) {
-            QDomElement e = node.toElement();
-            if (e.isNull())
-                  continue;
+      for (QDomElement e = doc.documentElement(); !e.isNull(); e = e.nextSiblingElement()) {
             if (e.tagName() == "Staff") {
                   Measure* m = measure;
                   int staffIdx = e.attribute("id", "0").toInt();
                   if (srcStaffStart == -1)
                         srcStaffStart = staffIdx;
                   staffIdx = staffStart - srcStaffStart + staffIdx;
-                  for (QDomNode n = node.firstChild(); !n.isNull(); n = n.nextSibling()) {
-                        e = n.toElement();
-                        if (e.isNull())
-                              continue;
-                        if (e.tagName() == "Measure") {
+                  for (QDomElement ee = e.firstChildElement(); !ee.isNull(); ee = ee.nextSiblingElement()) {
+                        if (ee.tagName() == "Measure") {
                               Measure* sm = new Measure(this);
-                              sm->read(n, staffIdx);
+                              sm->read(ee, staffIdx);
                               cmdReplaceElements(sm, m, staffIdx);
                               delete sm;
                               m = m->next();
@@ -1454,7 +1448,7 @@ void Score::pasteStaff(const QMimeData* ms)
                                     break;
                               }
                         else
-                              domError(e);
+                              domError(ee);
                         }
                   }
             else

@@ -51,7 +51,7 @@
 //   readInstrument
 //---------------------------------------------------------
 
-static void readInstrument(const QString& group, QDomNode node)
+static void readInstrument(const QString& group, QDomElement e)
       {
       InstrumentTemplate t;
 
@@ -66,10 +66,7 @@ static void readInstrument(const QString& group, QDomNode node)
       t.transpose   = 0;
 
       int clefIdx = 0;
-      for (node = node.firstChild(); !node.isNull(); node = node.nextSibling()) {
-            QDomElement e = node.toElement();
-            if (e.isNull())
-                  continue;
+      for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             QString tag(e.tagName());
             QString val(e.text());
             int i = val.toInt();
@@ -94,7 +91,7 @@ static void readInstrument(const QString& group, QDomNode node)
             else if (tag == "transpose")
                   t.transpose = i;
             else
-                  domError(node);
+                  domError(e);
             }
       instrumentTemplates.push_back(t);
       }
@@ -103,20 +100,16 @@ static void readInstrument(const QString& group, QDomNode node)
 //   readInstrumentGroup
 //---------------------------------------------------------
 
-static void readInstrumentGroup(QDomNode node)
+static void readInstrumentGroup(QDomElement e)
       {
-      QDomElement e = node.toElement();
       QString group = e.attribute("name");
 
-      for (node = node.firstChild(); !node.isNull(); node = node.nextSibling()) {
-            QDomElement e = node.toElement();
-            if (e.isNull())
-                  continue;
+      for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             QString tag(e.tagName());
             if (tag == "instrument")
-                  readInstrument(group, node);
+                  readInstrument(group, e);
             else
-                  domError(node);
+                  domError(e);
             }
       }
 
@@ -456,19 +449,14 @@ void StaffLines::write(Xml& xml) const
 //   StaffLines::read
 //---------------------------------------------------------
 
-void StaffLines::read(QDomNode node)
+void StaffLines::read(QDomElement e)
       {
-      for (node = node.firstChild(); !node.isNull(); node = node.nextSibling()) {
-            QDomElement e = node.toElement();
-            if (e.isNull())
-                  continue;
+      for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             QString tag(e.tagName());
             if (tag == "lines")
                   lines = e.text().toInt();
-            else if (Element::readProperties(node))
-                  ;
-            else
-                  domError(node);
+            else if (!Element::readProperties(e))
+                  domError(e);
             }
       }
 
@@ -476,9 +464,8 @@ void StaffLines::read(QDomNode node)
 //   readGeometry
 //---------------------------------------------------------
 
-void Score::readGeometry(QDomNode node)
+void Score::readGeometry(QDomElement e)
       {
-      QDomElement e = node.toElement();
       scorePos.setX(e.attribute("x", "0").toInt());
       scorePos.setY(e.attribute("y", "0").toInt());
       scoreSize.setWidth(e.attribute("w", "0").toInt());
@@ -520,22 +507,16 @@ bool LoadStyle::loader(QFile* qf)
             return true;
             }
 
-      for (QDomNode node = doc.documentElement(); !node.isNull(); node = node.nextSibling()) {
-            QDomElement e = node.toElement();
-            if (e.isNull())
-                  continue;
+      for (QDomElement e = doc.documentElement(); !e.isNull(); e = e.nextSiblingElement()) {
             if (e.tagName() == "museScore") {
                   // QString version = e.attribute(QString("version"));
-                  for (QDomNode n = node.firstChild(); !n.isNull();  n = n.nextSibling()) {
-                        e = n.toElement();
-                        if (e.isNull())
-                              continue;
-                        QString tag(e.tagName());
-                        QString val(e.text());
+                  for (QDomElement ee = e.firstChildElement(); !ee.isNull();  ee = ee.nextSiblingElement()) {
+                        QString tag(ee.tagName());
+                        QString val(ee.text());
                         if (tag == "Style")
-                              loadStyle(n);
+                              loadStyle(ee);
                         else
-                              domError(node);
+                              domError(ee);
                         }
                   }
             }
@@ -614,8 +595,6 @@ bool Score::loadFile(QFile* qf)
       int line, column;
       QString err;
       QXmlSimpleReader reader;
-//      reader.setFeature("http://xml.org/sax/features/namespaces", false);
-//      reader.setFeature("http://trolltech.com/xml/features/report-whitespace-only-CharData", true);
       QXmlInputSource  source(qf);
       if (!doc.setContent(&source, &reader, &err, &line, &column)) {
             QString s;
@@ -628,30 +607,24 @@ bool Score::loadFile(QFile* qf)
 
       _fileDivision = 384;   // for compatibility with old mscore files
 
-      for (QDomNode node = doc.documentElement(); !node.isNull(); node = node.nextSibling()) {
-            QDomElement e = node.toElement();
-            if (e.isNull())
-                  continue;
+      for (QDomElement e = doc.documentElement(); !e.isNull(); e = e.nextSiblingElement()) {
             if (e.tagName() == "museScore") {
-                  for (QDomNode n = node.firstChild(); !n.isNull(); n = n.nextSibling()) {
-                        e = n.toElement();
-                        if (e.isNull())
-                              continue;
-                        QString tag(e.tagName());
-                        QString val(e.text());
+                  for (QDomElement ee = e.firstChildElement(); !ee.isNull(); ee = ee.nextSiblingElement()) {
+                        QString tag(ee.tagName());
+                        QString val(ee.text());
                         int i = val.toInt();
                         if (tag == "Staff")
-                              readStaff(n);
+                              readStaff(ee);
                         else if (tag == "siglist")
-                              sigmap->read(n, division, _fileDivision);
+                              sigmap->read(ee, division, _fileDivision);
                         else if (tag == "tempolist")
-                              tempomap->read(n, this);
+                              tempomap->read(ee, this);
                         else if (tag == "cursorStaff")
                               cis->staff = i;
                         else if (tag == "cursorVoice")
                               cis->voice = i;
                         else if (tag == "Geometry")
-                              readGeometry(n);
+                              readGeometry(ee);
                         else if (tag == "Mag")
                               setMag(val.toDouble());
                         else if (tag == "xoff")
@@ -665,11 +638,11 @@ bool Score::loadFile(QFile* qf)
                         else if (tag == "showInvisible")
                               _showInvisible = i;
                         else if (tag == "Style")
-                              ::loadStyle(n);
+                              ::loadStyle(ee);
                         else if (tag == "page-layout")
-                              pageFormat()->read(n);
+                              pageFormat()->read(ee);
                         else if (tag == "instrument-group")
-                              readInstrumentGroup(n);
+                              readInstrumentGroup(ee);
                         else if (tag == "rights")
                               rights = val;
                         else if (tag == "movement-number")
@@ -678,13 +651,13 @@ bool Score::loadFile(QFile* qf)
                               movementTitle = val;
                         else if (tag == "Part") {
                               Part* part = new Part(this);
-                              part->read(this, n);
+                              part->read(this, ee);
                               parts()->push_back(part);
                               }
                         else if (tag == "showInvisible")
                               _showInvisible = i;
                         else
-                              domError(e);
+                              domError(ee);
                         }
                   }
             }
@@ -783,21 +756,15 @@ void MuseScore::loadInstrumentTemplates()
             return;
             }
 
-      for (QDomNode node = doc.documentElement(); !node.isNull(); node = node.nextSibling()) {
-            QDomElement e = node.toElement();
-            if (e.isNull())
-                  continue;
+      for (QDomElement e = doc.documentElement(); !e.isNull(); e = e.nextSiblingElement()) {
             if (e.tagName() == "museScore") {
-                  for (QDomNode n = node.firstChild(); !n.isNull(); n = n.nextSibling()) {
-                        e = n.toElement();
-                        if (e.isNull())
-                              continue;
-                        QString tag(e.tagName());
-                        QString val(e.text());
+                  for (QDomElement ee = e.firstChildElement(); !ee.isNull(); ee = ee.nextSiblingElement()) {
+                        QString tag(ee.tagName());
+                        QString val(ee.text());
                         if (tag == "instrument-group")
-                              readInstrumentGroup(n);
+                              readInstrumentGroup(ee);
                         else
-                              domError(e);
+                              domError(ee);
                         }
                   }
             }

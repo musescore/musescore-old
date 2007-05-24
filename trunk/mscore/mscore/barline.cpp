@@ -159,11 +159,11 @@ void BarLine::write(Xml& xml) const
 //   read
 //---------------------------------------------------------
 
-void BarLine::read(QDomNode node)
+void BarLine::read(QDomElement e)
       {
-      for (node = node.firstChild(); !node.isNull(); node = node.nextSibling()) {
-            if (!Element::readProperties(node))
-                  domError(node);
+      for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
+            if (!Element::readProperties(e))
+                  domError(e);
             }
       setSubtype(subtype());
       }
@@ -226,7 +226,7 @@ QRectF BarLine::bbox() const
 //---------------------------------------------------------
 
 bool BarLine::acceptDrop(Viewer* viewer, const QPointF&, int type,
-   const QDomNode&) const
+   const QDomElement&) const
       {
       if (type == BAR_LINE) {
             viewer->setDropTarget(this);
@@ -239,14 +239,14 @@ bool BarLine::acceptDrop(Viewer* viewer, const QPointF&, int type,
 //   drop
 //---------------------------------------------------------
 
-Element* BarLine::drop(const QPointF&, const QPointF&, int type, const QDomNode& node)
+Element* BarLine::drop(const QPointF&, const QPointF&, int type, const QDomElement& e)
       {
       if (type != BAR_LINE)
             return 0;
       score()->cmdRemove(this);
 
       BarLine* bl = new BarLine(score());
-      bl->read(node);
+      bl->read(e);
       bl->setParent(parent());
       bl->setStaff(staff());
       if (subtype() == bl->subtype()) {

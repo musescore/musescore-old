@@ -1160,9 +1160,9 @@ void Canvas::dragMoveEvent(QDragMoveEvent* event)
                line, column, err.toLatin1().data(), data.data());
                   return;
             }
-      QDomNode node = doc.documentElement();
+      QDomElement e = doc.documentElement();
       QPointF dragOffset;
-      int type = Element::readType(node, &dragOffset);
+      int type = Element::readType(e, &dragOffset);
       switch(type) {
             case VOLTA:
                   if (dragAboveSystem(pos))
@@ -1179,7 +1179,7 @@ void Canvas::dragMoveEvent(QDragMoveEvent* event)
             case SYMBOL:
                   {
                   Symbol* s = new Symbol(_score);
-                  s->read(node);
+                  s->read(e);
                   if (s->anchor() == ANCHOR_TICK) {
                         if (dragTimeAnchorElement(pos))
                               event->acceptProposedAction();
@@ -1195,7 +1195,7 @@ void Canvas::dragMoveEvent(QDragMoveEvent* event)
                   {
                   Element* el = elementAt(pos);
                   if (el) {
-                        bool accept = el->acceptDrop(this, pos, type, node);
+                        bool accept = el->acceptDrop(this, pos, type, e);
                         if (accept) {
                               event->acceptProposedAction();
                               }
@@ -1264,14 +1264,14 @@ void Canvas::dropEvent(QDropEvent* event)
             printf("error reading drag data\n");
             return;
             }
-      QDomNode node = doc.documentElement();
-      int type = Element::readType(node, &dragOffset);
+      QDomElement e = doc.documentElement();
+      int type = Element::readType(e, &dragOffset);
 
       switch(type) {
             case VOLTA:
                   {
                   Volta* volta = new Volta(score());
-                  volta->read(node);
+                  volta->read(e);
                   score()->cmdAdd(volta, pos, dragOffset);
                   event->acceptProposedAction();
                   }
@@ -1279,7 +1279,7 @@ void Canvas::dropEvent(QDropEvent* event)
             case OTTAVA:
                   {
                   Ottava* ottava = new Ottava(score());
-                  ottava->read(node);
+                  ottava->read(e);
                   score()->cmdAdd(ottava, pos, dragOffset);
                   event->acceptProposedAction();
                   }
@@ -1295,7 +1295,7 @@ void Canvas::dropEvent(QDropEvent* event)
                   {
                   _score->startCmd();
                   Symbol* s = new Symbol(score());
-                  s->read(node);
+                  s->read(e);
                   score()->cmdAddBSymbol(s, pos, dragOffset);
                   event->acceptProposedAction();
                   score()->endCmd(true);
@@ -1306,13 +1306,10 @@ void Canvas::dropEvent(QDropEvent* event)
                   _score->startCmd();
                   // look ahead for image type
                   QString path;
-                  for (QDomNode n = node.firstChild(); !n.isNull(); n = n.nextSibling()) {
-                        QDomElement e = n.toElement();
-                        if (e.isNull())
-                              continue;
-                        QString tag(e.tagName());
+                  for (QDomElement ee = e.firstChildElement(); !ee.isNull(); ee = ee.nextSiblingElement()) {
+                        QString tag(ee.tagName());
                         if (tag == "path") {
-                              path = e.text();
+                              path = ee.text();
                               break;
                               }
                         }
@@ -1328,7 +1325,7 @@ void Canvas::dropEvent(QDropEvent* event)
                         printf("unknown image format <%s>\n", path.toLatin1().data());
                         }
                   if (image) {
-                        image->read(node);
+                        image->read(e);
                         score()->cmdAddBSymbol(image, pos, dragOffset);
                         event->acceptProposedAction();
                         }
@@ -1338,7 +1335,7 @@ void Canvas::dropEvent(QDropEvent* event)
             case PEDAL:
                   {
                   Pedal* pedal = new Pedal(score());
-                  pedal->read(node);
+                  pedal->read(e);
                   score()->cmdAdd(pedal, pos, dragOffset);
                   event->acceptProposedAction();
                   }
@@ -1346,14 +1343,14 @@ void Canvas::dropEvent(QDropEvent* event)
             case HAIRPIN:
                   {
                   Hairpin* hairpin = new Hairpin(score());
-                  hairpin->read(node);
+                  hairpin->read(e);
                   score()->cmdAdd(hairpin, pos, dragOffset);
                   }
                   break;
             case DYNAMIC:
                   {
                   Dynamic* dynamic = new Dynamic(score());
-                  dynamic->read(node);
+                  dynamic->read(e);
                   _score->cmdAdd(dynamic, pos, dragOffset);
                   event->acceptProposedAction();
                   }
@@ -1364,7 +1361,7 @@ void Canvas::dropEvent(QDropEvent* event)
                   if (el) {
                         _score->startCmd();
                         _score->addRefresh(el->abbox());
-                        Element* dropElement = el->drop(pos, dragOffset, type, node);
+                        Element* dropElement = el->drop(pos, dragOffset, type, e);
                         _score->addRefresh(el->abbox());
                         if (dropElement) {
                               _score->select(dropElement, 0, 0);

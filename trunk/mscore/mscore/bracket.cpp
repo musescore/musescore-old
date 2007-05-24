@@ -160,9 +160,8 @@ void Bracket::write(Xml& xml) const
 //   Bracket::read
 //---------------------------------------------------------
 
-void Bracket::read(QDomNode node)
+void Bracket::read(QDomElement e)
       {
-      QDomElement e = node.toElement();
       QString t(e.attribute("type", "Normal"));
 
       if (t == "Normal")
@@ -172,18 +171,13 @@ void Bracket::read(QDomNode node)
       else
             fprintf(stderr, "unknown brace type <%s>\n", t.toLatin1().data());
 
-      for (node = node.firstChild(); !node.isNull(); node = node.nextSibling()) {
-            QDomElement e = node.toElement();
-            if (e.isNull())
-                  continue;
+      for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             QString tag(e.tagName());
             QString val(e.text());
             if (tag == "level")
                   _level = val.toInt();
-            else if (Element::readProperties(node))
-                  ;
-            else
-                  domError(node);
+            else if (!Element::readProperties(e))
+                  domError(e);
             }
       }
 
@@ -193,7 +187,7 @@ void Bracket::read(QDomNode node)
 
 bool Bracket::startEdit(QMatrix& matrix, const QPointF&)
       {
-      yoff = 0.0;
+      yoff     = 0.0;
       editMode = true;
       updateGrips(matrix);
       return true;
@@ -331,7 +325,7 @@ bool Bracket::endEditDrag()
 //   acceptDrop
 //---------------------------------------------------------
 
-bool Bracket::acceptDrop(Viewer* viewer, const QPointF&, int type, const QDomNode&) const
+bool Bracket::acceptDrop(Viewer* viewer, const QPointF&, int type, const QDomElement&) const
       {
       if (type == BRACKET) {
             viewer->setDropTarget(this);
@@ -344,11 +338,11 @@ bool Bracket::acceptDrop(Viewer* viewer, const QPointF&, int type, const QDomNod
 //   drop
 //---------------------------------------------------------
 
-Element* Bracket::drop(const QPointF&, const QPointF&, int type, const QDomNode& node)
+Element* Bracket::drop(const QPointF&, const QPointF&, int type, const QDomElement& e)
       {
       if (ElementType(type) == BRACKET) {
             Bracket* b = new Bracket(score());
-            b->read(node);
+            b->read(e);
             b->setSelected(false);
             b->setParent(parent());
             b->setStaff(staff());

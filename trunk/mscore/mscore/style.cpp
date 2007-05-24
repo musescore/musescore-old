@@ -238,12 +238,9 @@ void TextStyle::write(Xml& xml) const
 //   read
 //---------------------------------------------------------
 
-void TextStyle::read(QDomNode node)
+void TextStyle::read(QDomElement e)
       {
-      for (node = node.firstChild(); !node.isNull(); node = node.nextSibling()) {
-            QDomElement e = node.toElement();
-            if (e.isNull())
-                  continue;
+      for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             QString tag(e.tagName());
             QString val(e.text());
             int i = val.toInt();
@@ -271,7 +268,7 @@ void TextStyle::read(QDomNode node)
             else if (tag == "offsetType")
                   offsetType = (OffsetType)i;
             else
-                  domError(node);
+                  domError(e);
             }
       }
 
@@ -294,20 +291,17 @@ void setTextStyle(const TextStyle& ts)
 //   loadStyle
 //---------------------------------------------------------
 
-void loadStyle(QDomNode node)
+void loadStyle(QDomElement e)
       {
-      for (node = node.firstChild(); !node.isNull(); node = node.nextSibling()) {
-            QDomElement e = node.toElement();
-            if (e.isNull())
-                  continue;
+      for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             QString tag(e.tagName());
             QString val(e.text());
-            int i = val.toInt();
+            int i    = val.toInt();
             double d = val.toDouble();
 
             if (tag == "TextStyle") {
                   TextStyle ts;
-                  ts.read(node);
+                  ts.read(e);
                   setTextStyle(ts);
                   }
             else if (tag == "staffUpperBorder")
@@ -423,7 +417,7 @@ void loadStyle(QDomNode node)
             else if (tag == "measureNumberAllStaffs")
                   ::style->measureNumberAllStaffs = i;
             else
-                  domError(node);
+                  domError(e);
             }
       }
 

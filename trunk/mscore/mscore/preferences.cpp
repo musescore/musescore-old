@@ -415,130 +415,131 @@ void Preferences::read()
       if (!doc.setContent(&qf, false, &err, &line, &column)) {
             printf("error reading file %s at line %d column %d: %s\n",
                qf.fileName().toLatin1().data(), line, column, err.toLatin1().data());
+            qf.close();
             return;
             }
-      for (QDomNode node = doc.documentElement(); !node.isNull(); node = node.nextSibling()) {
-            QDomElement e = node.toElement();
-            if (e.isNull() || e.tagName() != "museScore")
-                  continue;
-
-            for (QDomNode nnode = node.firstChild(); !nnode.isNull(); nnode = nnode.nextSibling()) {
-                  QDomElement e = nnode.toElement();
-                  if (e.isNull() || e.tagName() != "Preferences")
-                        continue;
-
-                  for (QDomNode nnnode = nnode.firstChild(); !nnnode.isNull(); nnnode = nnnode.nextSibling()) {
-                        QDomElement e = nnnode.toElement();
-                        if (e.isNull())
-                              continue;
-                        QString tag(e.tagName());
-                        QString val(e.text());
-                        int i = val.toInt();
-                        if (tag == "cursorBlink")
-                              cursorBlink = i;
-                        else if (tag == "fgColor") {
-                              fgColor.setNamedColor(val);
-                              fgUseColor = true;
-                              }
-                        else if (tag == "bgColor") {
-                              bgColor.setNamedColor(val);
-                              bgUseColor = true;
-                              }
-                        else if (tag == "fgWallpaper") {
-                              fgWallpaper = val;
-                              fgUseColor = false;
-                              }
-                        else if (tag == "bgWallpaper") {
-                              bgWallpaper = val;
-                              bgUseColor = false;
-                              }
-                        else if (tag == "selectColor")      // obsolete
-                              selectColor[0].setNamedColor(val);
-                        else if (tag == "selectColor1")
-                              selectColor[0].setNamedColor(val);
-                        else if (tag == "selectColor2")
-                              selectColor[1].setNamedColor(val);
-                        else if (tag == "selectColor3")
-                              selectColor[2].setNamedColor(val);
-                        else if (tag == "selectColor4")
-                              selectColor[3].setNamedColor(val);
-                        else if (tag == "enableMidiInput")
-                              enableMidiInput = i;
-                        else if (tag == "playNotes")
-                              playNotes = i;
-                        else if (tag == "soundFont")
-                              soundFont = val;
-                        else if (tag == "rPort")
-                              rPort = val;
-                        else if (tag == "lPort")
-                              lPort = val;
-                        else if (tag == "stemDirection1")
-                              stemDir[0] = Direction(i);
-                        else if (tag == "stemDirection2")
-                              stemDir[1] = Direction(i);
-                        else if (tag == "stemDirection3")
-                              stemDir[2] = Direction(i);
-                        else if (tag == "stemDirection4")
-                              stemDir[3] = Direction(i);
-                        else if (tag == "showNavigator")
-                              showNavigator = i;
-                        else  if (tag == "showPlayPanel")
-                              showPlayPanel = i;
-                        else if (tag == "showPad")
-                              showPad = i;
-                        else if (tag == "showPanel")
-                              showPanel = i;
-                        else if (tag == "showStatusBar")
-                              showStatusBar = i;
-                        else if (tag == "PlayPanelPos") {
-                              playPanelPos.setX(e.attribute("x").toInt());
-                              playPanelPos.setY(e.attribute("y").toInt());
-                              }
-                        else if (tag == "KeyPadPos") {
-                              padPos.setX(e.attribute("x").toInt());
-                              padPos.setY(e.attribute("y").toInt());
-                              }
-                        else if (tag == "useAlsaAudio")
-                              useAlsaAudio = i;
-                        else if (tag == "useJackAudio")
-                              useJackAudio = i;
-                        else if (tag == "alsaDevice")
-                              alsaDevice = val;
-                        else if (tag == "alsaSampleRate")
-                              alsaSampleRate = i;
-                        else if (tag == "alsaPeriodSize")
-                              alsaPeriodSize = i;
-                        else if (tag == "alsaFragments")
-                              alsaFragments = i;
-                        else if (tag == "layoutBreakColor")
-                              layoutBreakColor.setNamedColor(val);
-                        else if (tag == "antialiasedDrawing")
-                              antialiasedDrawing = i;
-                        else if (tag == "sessionStart") {
-                              if (val == "last")
-                                    sessionStart = LAST_SESSION;
-                              else if (val == "new")
-                                    sessionStart = NEW_SESSION;
-                              else if (val == "score")
-                                    sessionStart = SCORE_SESSION;
-                              }
-                        else if (tag == "startScore")
-                              startScore = val;
-                        else if (tag == "imagePath")
-                              imagePath = val;
-                        else if (tag == "showSplashScreen")
-                              showSplashScreen = i;
-                        else if (tag == "Shortcuts")
-                              readShortcuts(nnnode);
-                        else if (tag == "SymbolPalette") {
-                              sp->clear();
-                              sp->read(nnnode);
-                              }
-                        else
-                              printf("Mscore:Preferences: unknown tag %s\n",
-                                 tag.toLatin1().data());
-                        }
+      QDomElement e = doc.documentElement();
+      if (e.tagName() != "museScore") {
+            e = e.nextSiblingElement("museScore");
+            if (e.isNull()) {
+                  printf("Mscore: reading preferences: is not a mscore file\n");
+                  qf.close();
+                  return;
                   }
+            }
+      e = e.firstChildElement("Preferences");
+      if (e.isNull()) {
+            printf("Mscore: reading preferences: is not a mscore preferences file\n");
+            qf.close();
+            return;
+            }
+
+      for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
+            QString tag(e.tagName());
+            QString val(e.text());
+            int i = val.toInt();
+            if (tag == "cursorBlink")
+                  cursorBlink = i;
+            else if (tag == "fgColor") {
+                  fgColor.setNamedColor(val);
+                  fgUseColor = true;
+                  }
+            else if (tag == "bgColor") {
+                  bgColor.setNamedColor(val);
+                  bgUseColor = true;
+                  }
+            else if (tag == "fgWallpaper") {
+                  fgWallpaper = val;
+                  fgUseColor = false;
+                  }
+            else if (tag == "bgWallpaper") {
+                  bgWallpaper = val;
+                  bgUseColor = false;
+                  }
+            else if (tag == "selectColor")      // obsolete
+                  selectColor[0].setNamedColor(val);
+            else if (tag == "selectColor1")
+                  selectColor[0].setNamedColor(val);
+            else if (tag == "selectColor2")
+                  selectColor[1].setNamedColor(val);
+            else if (tag == "selectColor3")
+                  selectColor[2].setNamedColor(val);
+            else if (tag == "selectColor4")
+                  selectColor[3].setNamedColor(val);
+            else if (tag == "enableMidiInput")
+                  enableMidiInput = i;
+            else if (tag == "playNotes")
+                  playNotes = i;
+            else if (tag == "soundFont")
+                  soundFont = val;
+            else if (tag == "rPort")
+                  rPort = val;
+            else if (tag == "lPort")
+                  lPort = val;
+            else if (tag == "stemDirection1")
+                  stemDir[0] = Direction(i);
+            else if (tag == "stemDirection2")
+                  stemDir[1] = Direction(i);
+            else if (tag == "stemDirection3")
+                  stemDir[2] = Direction(i);
+            else if (tag == "stemDirection4")
+                  stemDir[3] = Direction(i);
+            else if (tag == "showNavigator")
+                  showNavigator = i;
+            else  if (tag == "showPlayPanel")
+                  showPlayPanel = i;
+            else if (tag == "showPad")
+                  showPad = i;
+            else if (tag == "showPanel")
+                  showPanel = i;
+            else if (tag == "showStatusBar")
+                  showStatusBar = i;
+            else if (tag == "PlayPanelPos") {
+                  playPanelPos.setX(e.attribute("x").toInt());
+                  playPanelPos.setY(e.attribute("y").toInt());
+                  }
+            else if (tag == "KeyPadPos") {
+                  padPos.setX(e.attribute("x").toInt());
+                  padPos.setY(e.attribute("y").toInt());
+                  }
+            else if (tag == "useAlsaAudio")
+                  useAlsaAudio = i;
+            else if (tag == "useJackAudio")
+                  useJackAudio = i;
+            else if (tag == "alsaDevice")
+                  alsaDevice = val;
+            else if (tag == "alsaSampleRate")
+                  alsaSampleRate = i;
+            else if (tag == "alsaPeriodSize")
+                  alsaPeriodSize = i;
+            else if (tag == "alsaFragments")
+                  alsaFragments = i;
+            else if (tag == "layoutBreakColor")
+                  layoutBreakColor.setNamedColor(val);
+            else if (tag == "antialiasedDrawing")
+                  antialiasedDrawing = i;
+            else if (tag == "sessionStart") {
+                  if (val == "last")
+                        sessionStart = LAST_SESSION;
+                  else if (val == "new")
+                        sessionStart = NEW_SESSION;
+                  else if (val == "score")
+                        sessionStart = SCORE_SESSION;
+                  }
+            else if (tag == "startScore")
+                  startScore = val;
+            else if (tag == "imagePath")
+                  imagePath = val;
+            else if (tag == "showSplashScreen")
+                  showSplashScreen = i;
+            else if (tag == "Shortcuts")
+                  readShortcuts(e);
+            else if (tag == "SymbolPalette") {
+                  sp->clear();
+                  sp->read(e);
+                  }
+            else
+                  domError(e);
             }
       qf.close();
       }
@@ -1093,12 +1094,9 @@ void writeShortcuts(Xml& xml)
 //   readShortcuts
 //---------------------------------------------------------
 
-void readShortcuts(QDomNode node)
+void readShortcuts(QDomElement e)
       {
-      for (node = node.firstChild(); !node.isNull(); node = node.nextSibling()) {
-            QDomElement e = node.toElement();
-            if (e.isNull())
-                  continue;
+      for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             Shortcut* s = shortcuts.value(e.tagName());
             if (s) {
                   s->key = QKeySequence::fromString(e.text(), QKeySequence::PortableText);

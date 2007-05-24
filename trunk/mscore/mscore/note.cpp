@@ -470,12 +470,11 @@ void Note::write(Xml& xml) const
 //   readSlur
 //---------------------------------------------------------
 
-void Chord::readSlur(QDomNode node, int /*staff*/)
+void Chord::readSlur(QDomElement e, int /*staff*/)
       {
       int type = 0;         // 0 - begin, 1 - end
       Placement placement = PLACE_AUTO;
 
-      QDomElement e = node.toElement();
       QString s = e.attribute("type", "");
       if (s == "begin")
             type = 0;
@@ -514,18 +513,14 @@ void Chord::readSlur(QDomNode node, int /*staff*/)
 //   Note::read
 //---------------------------------------------------------
 
-void Note::read(QDomNode node)
+void Note::read(QDomElement e)
       {
-      QDomElement e = node.toElement();
       int ptch = e.attribute("pitch", "-1").toInt();
       if (ptch != -1)
             _pitch = ptch;
       int tpcVal = -100;
 
-      for (node = node.firstChild(); !node.isNull(); node = node.nextSibling()) {
-            QDomElement e = node.toElement();
-            if (e.isNull())
-                  continue;
+      for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             QString tag(e.tagName());
             QString val(e.text());
             int i = val.toInt();
@@ -537,23 +532,23 @@ void Note::read(QDomNode node)
             else if (tag == "Tie") {
                   _tieFor = new Tie(score());
                   _tieFor->setStaff(staff());
-                  _tieFor->read(node);
+                  _tieFor->read(e);
                   _tieFor->setStartNote(this);
                   }
             else if (tag == "Text") {
                   Text* f = new Text(score());
                   f->setSubtype(TEXT_FINGERING);
                   f->setStaff(staff());
-                  f->read(node);
+                  f->read(e);
                   f->setParent(this);
                   _fingering.append(f);
                   }
             else if (tag == "move")
                   _move = i;
-            else if (Element::readProperties(node))
+            else if (Element::readProperties(e))
                   ;
             else
-                  domError(node);
+                  domError(e);
             }
       if (tpcVal != -100)
             _tpc = tpcVal;
@@ -660,7 +655,7 @@ QRectF ShadowNote::bbox() const
 //   acceptDrop
 //---------------------------------------------------------
 
-bool Note::acceptDrop(Viewer* viewer, const QPointF&, int type, const QDomNode&) const
+bool Note::acceptDrop(Viewer* viewer, const QPointF&, int type, const QDomElement&) const
       {
       if (type == ATTRIBUTE || type == TEXT || type == ACCIDENTAL) {
             viewer->setDropTarget(this);
@@ -673,7 +668,7 @@ bool Note::acceptDrop(Viewer* viewer, const QPointF&, int type, const QDomNode&)
 //   drop
 //---------------------------------------------------------
 
-Element* Note::drop(const QPointF&, const QPointF&, int t, const QDomNode& node)
+Element* Note::drop(const QPointF&, const QPointF&, int t, const QDomElement& node)
       {
       switch(t) {
             case ATTRIBUTE:

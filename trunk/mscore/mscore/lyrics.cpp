@@ -57,12 +57,9 @@ void Lyrics::write(Xml& xml) const
 //   read
 //---------------------------------------------------------
 
-void Lyrics::read(QDomNode node)
+void Lyrics::read(QDomElement e)
       {
-      for (node = node.firstChild(); !node.isNull(); node = node.nextSibling()) {
-            QDomElement e = node.toElement();
-            if (e.isNull())
-                  continue;
+      for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             QString tag(e.tagName());
             QString val(e.text());
             int i = val.toInt();
@@ -82,8 +79,8 @@ void Lyrics::read(QDomNode node)
                   else
                         printf("bad syllabic property\n");
                   }
-            else if (!Element::readProperties(node))
-                  domError(node);
+            else if (!Element::readProperties(e))
+                  domError(e);
             }
       }
 

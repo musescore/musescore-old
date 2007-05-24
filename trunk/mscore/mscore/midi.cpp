@@ -1211,158 +1211,171 @@ void Score::convertTrack(MidiTrack* midiTrack, int staffIdx)
       int key = findKey(midiTrack, sigmap);
 
       midiTrack->findChords();
+      int voices = midiTrack->separateVoices(2);
 
       Staff* cstaff = staff(staffIdx);
 	const EventList el = midiTrack->events();
-      QList<MNote*> notes;
 
-	int ctick = 0;
-      for (ciEvent i = el.begin(); i != el.end();) {
-            MidiEvent* e = *i;
-            if (e->type() != ME_CHORD) {
-                  ++i;
-                  continue;
+      for (int voice = 0; voice < voices; ++voice) {
+            QList<MNote*> notes;
+            int ctick = 0;
+            for (ciEvent i = el.begin(); i != el.end();) {
+                  MidiEvent* e = *i;
+                  if (e->type() != ME_CHORD) {
+                        ++i;
+                        continue;
+                        }
+                  if (((MidiChord*)e)->voice() != voice)
+                        continue;
+                  //
+                  // process pending notes
+                  //
+                  while (!notes.isEmpty()) {
+                        int tick = notes[0]->mc->ontime();
+                        int len  = (*i)->ontime() - tick;
+                        if (len <= 0)
+                              break;
+                  	foreach (MNote* n, notes) {
+                        	if (n->mc->duration() < len)
+                                    len = n->mc->duration();
+                              }
+            		Measure* measure = tick2measure(tick);
+                        // split notes on measure boundary
+                        if ((tick + len) > measure->tick() + measure->tickLen()) {
+                              len = measure->tick() + measure->tickLen() - tick;
+                              }
+                        Chord* chord = new Chord(this, tick);
+                        chord->setStaff(cstaff);
+                        chord->setTickLen(len);
+                        Segment* s = measure->getSegment(chord);
+                        s->add(chord);
+
+                  	foreach (MNote* n, notes) {
+                              QList<MidiNote*>& nl = n->mc->notes();
+                              for (int i = 0; i < nl.size(); ++i) {
+                                    MidiNote* mn = nl[i];
+                        		Note* note = new Note(this, mn->pitch(), false);
+                                    note->setTpc(mn->tpc());
+                        		note->setStaff(cstaff);
+                  	      	chord->add(note);
+                                    note->setTick(tick);
+                                    note->setVoice(voice);
+
+                                    if (n->ties[i]) {
+                                          n->ties[i]->setEndNote(note);
+                                          n->ties[i]->setStaff(note->staff());
+                                          note->setTieBack(n->ties[i]);
+                                          }
+                                    }
+                              if (n->mc->duration() <= len) {
+                                    notes.removeAt(notes.indexOf(n));
+                                    continue;
+                                    }
+                              for (int i = 0; i < nl.size(); ++i) {
+                                    MidiNote* mn = nl[i];
+                                    Note* note = chord->noteList()->find(mn->pitch());
+            				n->ties[i] = new Tie(this);
+                                    n->ties[i]->setStartNote(note);
+      		      		note->setTieFor(n->ties[i]);
+                                    }
+      	                  n->mc->setOntime(n->mc->ontime() + len);
+                              n->mc->setDuration(n->mc->duration() - len);
+                              }
+                        ctick += len;
+                        }
+                  //
+                  // check for gap and fill with rest
+                  //
+                  int restLen = (*i)->ontime() - ctick;
+                  if (voice == 0) {
+                        while (restLen > 0) {
+                              int len = restLen;
+                  		Measure* measure = tick2measure(ctick);
+                              // split rest on measure boundary
+                              if ((ctick + len) > measure->tick() + measure->tickLen()) {
+                                    len = measure->tick() + measure->tickLen() - ctick;
+                                    }
+                              Rest* rest = new Rest(this, ctick, len);
+                              rest->setStaff(cstaff);
+                              Segment* s = measure->getSegment(rest);
+                              s->add(rest);
+                              ctick   += len;
+                              restLen -= len;
+                              }
+                        }
+                  else
+                        ctick += restLen;
+
+                  //
+                  // collect all notes on current
+                  // tick position
+                  //
+                  for (;i != el.end(); ++i) {
+                  	MidiEvent* e = *i;
+                        if (e->type() != ME_CHORD)
+                              continue;
+                        if ((*i)->ontime() != ctick)
+                              break;
+                        MidiChord* mc = (MidiChord*)e;
+                        if (mc->voice() != voice)
+                              continue;
+                  	MNote* n = new MNote(mc);
+            	      notes.append(n);
+                        }
                   }
+
             //
-            // process pending notes
+      	// process pending notes
             //
-            while (!notes.isEmpty()) {
+            if (!notes.isEmpty()) {
                   int tick = notes[0]->mc->ontime();
-                  int len  = (*i)->ontime() - tick;
-                  if (len <= 0)
-                        break;
+            	Measure* measure = tick2measure(tick);
+                  Chord* chord = new Chord(this, tick);
+                  chord->setStaff(cstaff);
+                  Segment* s = measure->getSegment(chord);
+                  s->add(chord);
+                  int len = 0x7fffffff;      // MAXINT;
             	foreach (MNote* n, notes) {
                   	if (n->mc->duration() < len)
                               len = n->mc->duration();
                         }
-      		Measure* measure = tick2measure(tick);
-                  // split notes on measure boundary
-                  if ((tick + len) > measure->tick() + measure->tickLen()) {
-                        len = measure->tick() + measure->tickLen() - tick;
-                        }
-                  Chord* chord = new Chord(this, tick);
-                  chord->setStaff(cstaff);
                   chord->setTickLen(len);
-                  Segment* s = measure->getSegment(chord);
-                  s->add(chord);
-
             	foreach (MNote* n, notes) {
-                        QList<MidiNote*>& nl = n->mc->notes();
-                        for (int i = 0; i < nl.size(); ++i) {
-                              MidiNote* mn = nl[i];
+                        foreach(MidiNote* mn, n->mc->notes()) {
                   		Note* note = new Note(this, mn->pitch(), false);
-                              note->setTpc(mn->tpc());
-                  		note->setStaff(cstaff);
-            	      	chord->add(note);
+            	      	note->setStaff(cstaff);
                               note->setTick(tick);
-                              if (n->ties[i]) {
-                                    n->ties[i]->setEndNote(note);
-                                    n->ties[i]->setStaff(note->staff());
-                                    note->setTieBack(n->ties[i]);
-                                    }
+                              note->setTpc(mn->tpc());
+                              note->setVoice(voice);
+            	      	chord->add(note);
                               }
-                        if (n->mc->duration() <= len) {
-                              notes.removeAt(notes.indexOf(n));
-                              continue;
-                              }
-                        for (int i = 0; i < nl.size(); ++i) {
-                              MidiNote* mn = nl[i];
-                              Note* note = chord->noteList()->find(mn->pitch());
-      				n->ties[i] = new Tie(this);
-                              n->ties[i]->setStartNote(note);
-		      		note->setTieFor(n->ties[i]);
-                              }
-	                  n->mc->setOntime(n->mc->ontime() + len);
                         n->mc->setDuration(n->mc->duration() - len);
+                        if (n->mc->duration() <= 0) {
+                              notes.removeAt(notes.indexOf(n));
+                              delete n;
+                              }
+                        else
+                              n->mc->setOntime(n->mc->ontime() + len);
                         }
                   ctick += len;
-                  }
-            //
-            // check for gap and fill with rest
-            //
-            int restLen = (*i)->ontime() - ctick;
-            while (restLen > 0) {
-                  int len = restLen;
-      		Measure* measure = tick2measure(ctick);
-                  // split rest on measure boundary
-                  if ((ctick + len) > measure->tick() + measure->tickLen()) {
-                        len = measure->tick() + measure->tickLen() - ctick;
+
+                  //
+                  // check for gap and fill with rest
+                  //
+                  int restLen = measure->tick() + measure->tickLen() - ctick;
+                  if (restLen > 0 && voice > 0) {
+                        Rest* rest = new Rest(this, ctick, restLen);
+            		Measure* measure = tick2measure(ctick);
+                        rest->setStaff(cstaff);
+                        Segment* s = measure->getSegment(rest);
+                        s->add(rest);
                         }
-                  Rest* rest = new Rest(this, ctick, len);
-                  rest->setStaff(cstaff);
-                  Segment* s = measure->getSegment(rest);
-                  s->add(rest);
-                  ctick   += len;
-                  restLen -= len;
                   }
-
-            //
-            // collect all notes on current
-            // tick position
-            //
-            for (;i != el.end(); ++i) {
-            	MidiEvent* e = *i;
-                  if (e->type() != ME_CHORD)
-                        continue;
-                  if ((*i)->ontime() != ctick)
-                        break;
-                  MidiChord* mc = (MidiChord*)e;
-            	MNote* n = new MNote(mc);
-      	      notes.append(n);
-                  }
-            }
-
-      //
-	// process pending notes
-      //
-      if (notes.isEmpty())
-            return;
-      int tick = notes[0]->mc->ontime();
-	Measure* measure = tick2measure(tick);
-      Chord* chord = new Chord(this, tick);
-      chord->setStaff(cstaff);
-      Segment* s = measure->getSegment(chord);
-      s->add(chord);
-      int len = 0x7fffffff;      // MAXINT;
-	foreach (MNote* n, notes) {
-      	if (n->mc->duration() < len)
-                  len = n->mc->duration();
-            }
-      chord->setTickLen(len);
-	foreach (MNote* n, notes) {
-            foreach(MidiNote* mn, n->mc->notes()) {
-      		Note* note = new Note(this, mn->pitch(), false);
-	      	note->setStaff(cstaff);
-                  note->setTick(tick);
-                  note->setTpc(mn->tpc());
-	      	chord->add(note);
-                  }
-            n->mc->setDuration(n->mc->duration() - len);
-            if (n->mc->duration() <= 0) {
-                  notes.removeAt(notes.indexOf(n));
-                  delete n;
-                  }
-            else
-                  n->mc->setOntime(n->mc->ontime() + len);
-            }
-      ctick += len;
-
-
-      //
-      // check for gap and fill with rest
-      //
-      int restLen = measure->tick() + measure->tickLen() - ctick;
-      if (restLen > 0) {
-            Rest* rest = new Rest(this, ctick, restLen);
-		Measure* measure = tick2measure(ctick);
-            rest->setStaff(cstaff);
-            Segment* s = measure->getSegment(rest);
-            s->add(rest);
             }
 
       bool keyFound = false;
 
-      measure = tick2measure(0);
+      Measure* measure = tick2measure(0);
       for (ciEvent i = el.begin(); i != el.end(); ++i) {
             MidiEvent* e = *i;
             if (e->type() == ME_META) {

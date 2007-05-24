@@ -120,19 +120,14 @@ void NoteAttribute::setSubtype(int idx)
 //   read
 //---------------------------------------------------------
 
-void NoteAttribute::read(QDomNode node)
+void NoteAttribute::read(QDomElement e)
       {
-      for (node = node.firstChild(); !node.isNull(); node = node.nextSibling()) {
-            QDomElement e = node.toElement();
-            if (e.isNull())
-                  continue;
+      for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             QString tag(e.tagName());
             if (tag == "idx")
                   setSubtype(e.text().toInt());
-            else if (Element::readProperties(node))
-                  ;
-            else
-                  domError(node);
+            else if (!Element::readProperties(e))
+                  domError(e);
             }
       }
 
@@ -250,12 +245,9 @@ bool ChordRest::isSimple(Xml& xml) const
 //   readProperties
 //---------------------------------------------------------
 
-bool ChordRest::readProperties(QDomNode node)
+bool ChordRest::readProperties(QDomElement e)
       {
-      if (Element::readProperties(node))
-            return true;
-      QDomElement e = node.toElement();
-      if (e.isNull())
+      if (Element::readProperties(e))
             return true;
       QString tag(e.tagName());
       QString val(e.text());
@@ -265,7 +257,7 @@ bool ChordRest::readProperties(QDomNode node)
             _beamMode = BeamMode(i);
       else if (tag == "Attribute") {
             NoteAttribute* atr = new NoteAttribute(score());
-            atr->read(node);
+            atr->read(e);
             add(atr);
             }
       else if (tag == "Tuplet") {

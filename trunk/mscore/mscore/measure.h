@@ -130,10 +130,10 @@ class Measure : public Element {
 
       virtual void draw(QPainter&);
 
-      virtual void read(QDomNode, int idx);
+      virtual void read(QDomElement, int idx);
       virtual void write(Xml&, int, int) const;
       virtual void write(Xml&) const;
-      virtual void read(QDomNode);
+      virtual void read(QDomElement);
 
       virtual bool isMovable() const { return false; }
       virtual void add(Element*);
@@ -218,8 +218,8 @@ class Measure : public Element {
       void sortStaves(QList<int>& src, QList<int>& dst);
 
       void dump() const;
-      virtual bool acceptDrop(Viewer*, const QPointF&, int, const QDomNode&) const;
-      virtual Element* drop(const QPointF&, const QPointF&, int, const QDomNode&);
+      virtual bool acceptDrop(Viewer*, const QPointF&, int, const QDomElement&) const;
+      virtual Element* drop(const QPointF&, const QPointF&, int, const QDomElement&);
 
       bool startRepeat() const      { return _startRepeat; }
       void setStartRepeat(bool val) { _startRepeat = val; }

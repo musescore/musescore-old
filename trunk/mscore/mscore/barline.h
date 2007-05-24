@@ -44,14 +44,14 @@ class BarLine : public Element {
       virtual BarLine* clone() const { return new BarLine(*this); }
       virtual ElementType type() const { return BAR_LINE; }
       virtual void write(Xml& xml) const;
-      virtual void read(QDomNode);
+      virtual void read(QDomElement);
       virtual void draw(QPainter&);
       virtual void dump() const;
       virtual void setSubtype(int t);
       virtual QRectF bbox() const;
 
-      virtual bool acceptDrop(Viewer*, const QPointF&, int, const QDomNode&) const;
-      virtual Element* drop(const QPointF&, const QPointF&, int, const QDomNode&);
+      virtual bool acceptDrop(Viewer*, const QPointF&, int, const QDomElement&) const;
+      virtual Element* drop(const QPointF&, const QPointF&, int, const QDomElement&);
       void setHeight(qreal v) { _height = v; }
       };
 

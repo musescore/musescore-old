@@ -60,24 +60,21 @@ Staff* Part::staff(int idx) const
 //   read
 //---------------------------------------------------------
 
-void Part::read(Score* score, QDomNode node)
+void Part::read(Score* score, QDomElement e)
       {
       int rstaff = 0;
-      for (node = node.firstChild(); !node.isNull(); node = node.nextSibling()) {
-            QDomElement e = node.toElement();
-            if (e.isNull())
-                  continue;
+      for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             QString tag(e.tagName());
             QString val(e.text());
             if (tag == "Staff") {
                   Staff* staff = new Staff(score, this, rstaff);
-                  staff->read(node);
+                  staff->read(e);
                   score->staves()->push_back(staff);
                   _staves->push_back(staff);
                   ++rstaff;
                   }
             else if (tag == "Instrument")
-                  _instrument.read(node);
+                  _instrument.read(e);
             else if (tag == "name")
                   _longName.setHtml(val);
             else if (tag == "shortName")
@@ -89,7 +86,7 @@ void Part::read(Score* score, QDomNode node)
             else if (tag == "show")
                   _show = val.toInt();
             else
-                  printf("Mscore:Part: unknown tag %s\n", tag.toLocal8Bit().data());
+                  domError(e);
             }
       }
 
@@ -231,12 +228,9 @@ void Instrument::write(Xml& xml) const
 //   Instrument::read
 //---------------------------------------------------------
 
-void Instrument::read(QDomNode node)
+void Instrument::read(QDomElement e)
       {
-      for (node = node.firstChild(); !node.isNull(); node = node.nextSibling()) {
-            QDomElement e = node.toElement();
-            if (e.isNull())
-                  continue;
+      for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             QString tag(e.tagName());
             QString val(e.text());
             int i = val.toInt();
@@ -261,8 +255,7 @@ void Instrument::read(QDomNode node)
             else if (tag == "maxPitch")
                   maxPitch = i;
             else
-                  printf("Mscore:Instrument: unknown tag %s\n",
-                     tag.toLatin1().data());
+                  domError(e);
             }
       }
 

@@ -128,11 +128,11 @@ void Volta::write(Xml& xml) const
 //   read
 //---------------------------------------------------------
 
-void Volta::read(QDomNode node)
+void Volta::read(QDomElement e)
       {
-      for (node = node.firstChild(); !node.isNull(); node = node.nextSibling()) {
-            if (!Element::readProperties(node))
-                  domError(node);
+      for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
+            if (!Element::readProperties(e))
+                  domError(e);
             }
       }
 

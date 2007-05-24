@@ -181,7 +181,7 @@ class MidiNoteOnOff : public MidiChannelEvent {
       char _velo;
 
    public:
-      MidiNoteOnOff()             { _pitch = -1; _velo = -1; }
+      MidiNoteOnOff()          { _pitch = -1; _velo = -1; }
       MidiNoteOnOff(int t, int c, int p, int v)
          : MidiChannelEvent(t, c), _pitch(p), _velo(v) {}
       int pitch() const        { return _pitch; }
@@ -248,17 +248,20 @@ class MidiNote : public MidiNoteOnOff {
 
 class MidiChord : public MidiEvent {
       int _duration;
+      int _voice;
       QList<MidiNote*> _notes;
 
    public:
-      MidiChord()              {}
-      virtual int type() const  { return ME_CHORD; }
-      int duration() const      { return _duration; }
-      void setDuration(int v)   { _duration = v; }
-      int offtime() const       { return ontime() + _duration; }
-      QList<MidiNote*>& notes() { return _notes; }
+      MidiChord()                   {}
+      virtual int type() const      { return ME_CHORD;  }
+      int duration() const          { return _duration; }
+      void setDuration(int v)       { _duration = v;    }
+      int voice() const             { return _voice;    }
+      void setVoice(int val)        { _voice = val;     }
+      int offtime() const           { return ontime() + _duration; }
+      QList<MidiNote*>& notes()     { return _notes;    }
+      bool isChannelEvent() const   { return true;      }
       virtual void dump(Xml&) const {}
-      bool isChannelEvent() const { return true;     }
       };
 
 //---------------------------------------------------------
@@ -368,7 +371,7 @@ class MidiTrack {
       bool _drumTrack;
 
    protected:
-      void readXml(QDomNode);
+      void readXml(QDomElement);
 
    public:
       int maxPitch;
@@ -401,6 +404,7 @@ class MidiTrack {
       void quantize(int startTick, int endTick, EventList* dst);
       int getInitProgram();
       void findChords();
+      int separateVoices(int);
 
       friend class MidiFile;
       };
@@ -415,16 +419,16 @@ class MidiFile {
       SigList _siglist;
       QIODevice* fp;
       MidiTrackList _tracks;
-      int timesig_z, timesig_n;
-      int status, click;
-      int sstatus;
       int _division;
-      int curPos;
-      int _format;
-      bool _noRunningStatus;  // do not use running status on output
-
+      int _format;               ///< midi file format (0-2)
+      bool _noRunningStatus;     ///< do not use running status on output
       MidiType _midiType;
-      char errorBuffer[512];
+
+      // values used during read()
+      int status;                ///< running status
+      int sstatus;               ///< running status (not reset after meta or sysex events)
+      int click;                 ///< current tick position in file
+      qint64 curPos;             ///< current file byte position
 
    protected:
       // write
@@ -451,7 +455,7 @@ class MidiFile {
       MidiFile();
       bool read(QIODevice*);
       bool write(QIODevice*);
-      void readXml(QDomNode);
+      void readXml(QDomElement);
 
       MidiTrackList* tracks()       { return &_tracks;  }
       MidiType midiType() const     { return _midiType; }

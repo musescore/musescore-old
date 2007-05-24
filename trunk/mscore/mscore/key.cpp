@@ -54,12 +54,9 @@ void KeyList::write(Xml& xml, const char* name) const
 //   KeyList::read
 //---------------------------------------------------------
 
-void KeyList::read(QDomNode node, Score* cs)
+void KeyList::read(QDomElement e, Score* cs)
       {
-      for (node = node.firstChild(); !node.isNull(); node = node.nextSibling()) {
-            QDomElement e = node.toElement();
-            if (e.isNull())
-                  continue;
+      for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             QString tag(e.tagName());
             if (tag == "key") {
                   int tick = e.attribute("tick", "0").toInt();
@@ -67,7 +64,7 @@ void KeyList::read(QDomNode node, Score* cs)
                   (*this)[cs->fileDivision(tick)] = idx;
                   }
             else
-                  domError(node);
+                  domError(e);
             }
       }
 

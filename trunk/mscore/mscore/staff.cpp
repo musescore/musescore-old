@@ -233,17 +233,14 @@ void Staff::write(Xml& xml) const
 //   read
 //---------------------------------------------------------
 
-void Staff::read(QDomNode node)
+void Staff::read(QDomElement e)
       {
-      for (node = node.firstChild(); !node.isNull(); node = node.nextSibling()) {
-            QDomElement e = node.toElement();
-            if (e.isNull())
-                  continue;
+      for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             QString tag(e.tagName());
             if (tag == "cleflist")
-                  _clef->read(node, _score);
+                  _clef->read(e, _score);
             else if (tag == "keylist")
-                  _keymap->read(node, _score);
+                  _keymap->read(e, _score);
             else if (tag == "bracket") {
                   BracketItem b;
                   b._bracket = e.attribute("type", "-1").toInt();
@@ -251,7 +248,7 @@ void Staff::read(QDomNode node)
                   _brackets.append(b);
                   }
             else
-                  printf("Mscore:Staff: unknown tag %s\n", tag.toLatin1().data());
+                  domError(e);
             }
       }
 

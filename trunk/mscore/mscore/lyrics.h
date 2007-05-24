@@ -42,7 +42,7 @@ class Lyrics : public Text {
       virtual ElementType type() const { return LYRICS; }
 
       virtual void write(Xml& xml) const;
-      virtual void read(QDomNode);
+      virtual void read(QDomElement);
       void setNo(int n)             { _no = n; }
       int no() const                { return _no; }
       void setSyllabic(Syllabic s)  { _syllabic = s; }

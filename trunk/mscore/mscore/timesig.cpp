@@ -96,7 +96,7 @@ void TimeSig::getSig(int* n, int* z1, int* z2, int* z3, int* z4) const
 //   acceptDrop
 //---------------------------------------------------------
 
-bool TimeSig::acceptDrop(Viewer* viewer, const QPointF&, int type, const QDomNode&) const
+bool TimeSig::acceptDrop(Viewer* viewer, const QPointF&, int type, const QDomElement&) const
       {
       if (type == TIMESIG) {
             setDropTarget(viewer);
@@ -109,11 +109,11 @@ bool TimeSig::acceptDrop(Viewer* viewer, const QPointF&, int type, const QDomNod
 //   drop
 //---------------------------------------------------------
 
-Element* TimeSig::drop(const QPointF&, const QPointF&, int type, const QDomNode& node)
+Element* TimeSig::drop(const QPointF&, const QPointF&, int type, const QDomElement& e)
       {
       if (type == TIMESIG) {
             TimeSig* ts = new TimeSig(score());
-            ts->read(node);
+            ts->read(e);
             int stype = ts->subtype();
             delete ts;
             int st = subtype();
@@ -155,15 +155,12 @@ void TimeSig::write(Xml& xml) const
 //   TimeSig::read
 //---------------------------------------------------------
 
-void TimeSig::read(QDomNode node)
+void TimeSig::read(QDomElement e)
       {
       setSubtype(-1);
       int n=0, z1=0, z2=0, z3=0, z4=0;
 
-      for (node = node.firstChild(); !node.isNull(); node = node.nextSibling()) {
-            QDomElement e = node.toElement();
-            if (e.isNull())
-                  continue;
+      for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             QString tag(e.tagName());
             int val = e.text().toInt();
             if (tag == "den")
@@ -176,8 +173,8 @@ void TimeSig::read(QDomNode node)
                   z3 = val;
             else if (tag == "nom4")
                   z4 = val;
-            else if (!Element::readProperties(node))
-                  domError(node);
+            else if (!Element::readProperties(e))
+                  domError(e);
             }
       //
       // silently accept old values:

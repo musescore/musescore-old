@@ -106,7 +106,7 @@ class NoteAttribute : public Symbol {
       virtual ElementType type() const { return ATTRIBUTE; }
 
       virtual void setSubtype(int);
-      virtual void read(QDomNode);
+      virtual void read(QDomElement);
       virtual void write(Xml& xml) const;
       virtual QRectF drag(const QPointF& s);
       QString name() const { return atrList[subtype()].name; }
@@ -139,7 +139,7 @@ class ChordRest : public Element {
       virtual ElementType type() const = 0;
 
       void writeProperties(Xml& xml) const;
-      bool readProperties(QDomNode);
+      bool readProperties(QDomElement);
       virtual QList<Prop> properties(Xml&) const;
       bool isSimple(Xml&) const;
 

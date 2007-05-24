@@ -675,18 +675,13 @@ Staff* Score::staff(int n) const
 //   readStaff
 //---------------------------------------------------------
 
-void Score::readStaff(QDomNode node)
+void Score::readStaff(QDomElement e)
       {
       Measure* im = _layout->first();
-
-      QDomElement e = node.toElement();
-      int staff = e.attribute("id", "1").toInt() - 1;
+      int staff   = e.attribute("id", "1").toInt() - 1;
 
       int curTick = 0;
-      for (node = node.firstChild(); !node.isNull(); node = node.nextSibling()) {
-            QDomElement e = node.toElement();
-            if (e.isNull())
-                  continue;
+      for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             QString tag(e.tagName());
 
             if (tag == "Measure") {
@@ -707,11 +702,11 @@ void Score::readStaff(QDomNode node)
                               }
                         }
                   measure->setTick(curTick);
-                  measure->read(node, staff);
+                  measure->read(e, staff);
                   curTick = measure->tick() + sigmap->ticksMeasure(measure->tick());
                   }
             else
-                  domError(node);
+                  domError(e);
             }
       }
 

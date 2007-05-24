@@ -181,10 +181,10 @@ class Element {
       virtual void draw(QPainter&) {}
 
       void writeProperties(Xml& xml) const;
-      bool readProperties(QDomNode);
+      bool readProperties(QDomElement);
 
       virtual void write(Xml&) const;
-      virtual void read(QDomNode);
+      virtual void read(QDomElement);
 
       virtual bool isMovable() const          { return false; }
       virtual QRectF drag(const QPointF& s);
@@ -230,7 +230,7 @@ class Element {
       virtual void space(double& min, double& extra) const;
       QColor color() const;
       void setColor(const QColor& c)  { _color = c;    }
-      static int readType(QDomNode& node, QPointF*);
+      static int readType(QDomElement& node, QPointF*);
 
       virtual QByteArray mimeData(const QPointF&) const;
 /**
@@ -240,7 +240,7 @@ class Element {
  Reimplemented by elements that accept drops. Used to change cursor shape while
  dragging to indicate drop targets.
 */
-      virtual bool acceptDrop(Viewer*, const QPointF&, int, const QDomNode&) const { return false; }
+      virtual bool acceptDrop(Viewer*, const QPointF&, int, const QDomElement&) const { return false; }
 
 /**
  Handle a dropped element at canvas relative \a pos of given element
@@ -248,7 +248,7 @@ class Element {
 
  Reimplemented by elements that accept drops.
 */
-      virtual Element* drop(const QPointF&, const QPointF&, int, const QDomNode&) { return 0;}
+      virtual Element* drop(const QPointF&, const QPointF&, int, const QDomElement&) { return 0;}
 
 /**
  Return a name for a \a subtype. Used for outputting xml data.
@@ -294,7 +294,7 @@ class ElementList : public QList<Element*> {
       void add(Element*);
       void move(Element* el, int tick);
       void write(Xml&, const char* name) const;
-      void read(QDomNode);
+      void read(QDomElement);
       };
 
 typedef ElementList::iterator iElement;
@@ -322,7 +322,7 @@ class StaffLines : public Element {
       virtual QRectF bbox() const;
       virtual void draw(QPainter&);
       virtual void write(Xml& xml) const;
-      virtual void read(QDomNode);
+      virtual void read(QDomElement);
       };
 
 //---------------------------------------------------------
@@ -397,7 +397,7 @@ class Line : public Element {
 
       virtual void draw(QPainter&);
       void writeProperties(Xml& xml) const;
-      bool readProperties(QDomNode);
+      bool readProperties(QDomElement);
       void dump() const;
 
       Spatium len()    const { return _len; }
@@ -444,8 +444,8 @@ class KeySig : public Element {
       virtual KeySig* clone() const { return new KeySig(*this); }
       virtual void draw(QPainter&);
       virtual ElementType type() const { return KEYSIG; }
-      virtual bool acceptDrop(Viewer*, const QPointF&, int, const QDomNode&) const;
-      virtual Element* drop(const QPointF&, const QPointF&, int, const QDomNode&);
+      virtual bool acceptDrop(Viewer*, const QPointF&, int, const QDomElement&) const;
+      virtual Element* drop(const QPointF&, const QPointF&, int, const QDomElement&);
       virtual void layout(ScoreLayout*);
       };
 

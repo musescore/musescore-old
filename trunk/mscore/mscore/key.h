@@ -37,7 +37,7 @@ class KeyList : public std::map<const int, int> {
    public:
       KeyList() {}
       int key(int tick) const;
-      void read(QDomNode, Score*);
+      void read(QDomElement, Score*);
       void write(Xml&, const char* name) const;
 
       void removeTime(int start, int len);

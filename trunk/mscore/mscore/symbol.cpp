@@ -78,15 +78,12 @@ void Symbol::write(Xml& xml) const
 //   Symbol::read
 //---------------------------------------------------------
 
-void Symbol::read(QDomNode node)
+void Symbol::read(QDomElement e)
       {
       QPointF pos;
       int s = -1;
 
-      for (node = node.firstChild(); !node.isNull(); node = node.nextSibling()) {
-            QDomElement e = node.toElement();
-            if (e.isNull())
-                  continue;
+      for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             QString tag(e.tagName());
             QString val(e.text());
             if (tag == "name") {
@@ -102,14 +99,14 @@ void Symbol::read(QDomNode node)
                         s = 0;
                         }
                   }
-            else if (Element::readProperties(node))
+            else if (Element::readProperties(e))
                   ;
 //            else if (tag == "x")
 //                  pos.setX(val.toDouble());
 //            else if (tag == "y")
 //                  pos.setY(val.toDouble());
             else
-                  domError(node);
+                  domError(e);
             }
       if (s == -1) {
             printf("unknown symbol\n");

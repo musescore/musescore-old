@@ -138,12 +138,12 @@ void Rest::space(double& min, double& extra) const
 //   acceptDrop
 //---------------------------------------------------------
 
-bool Rest::acceptDrop(Viewer* viewer, const QPointF&, int type, const QDomNode& node) const
+bool Rest::acceptDrop(Viewer* viewer, const QPointF&, int type, const QDomElement& e) const
       {
       if (type != ATTRIBUTE)
             return false;
       NoteAttribute* a = new NoteAttribute(0);
-      a->read(node);
+      a->read(e);
       int subtype = a->subtype();
       delete a;
       if (subtype == UfermataSym || subtype == DfermataSym) {
@@ -157,12 +157,12 @@ bool Rest::acceptDrop(Viewer* viewer, const QPointF&, int type, const QDomNode& 
 //   drop
 //---------------------------------------------------------
 
-Element* Rest::drop(const QPointF&, const QPointF&, int t, const QDomNode& node)
+Element* Rest::drop(const QPointF&, const QPointF&, int t, const QDomElement& e)
       {
       if (t != ATTRIBUTE)
             return 0;
       NoteAttribute* atr = new NoteAttribute(score());
-      atr->read(node);
+      atr->read(e);
       int st = atr->subtype();
       if (!(st == UfermataSym || st == DfermataSym)) {
             delete atr;
@@ -189,12 +189,9 @@ void Rest::write(Xml& xml) const
 //   Rest::read
 //---------------------------------------------------------
 
-void Rest::read(QDomNode node)
+void Rest::read(QDomElement e)
       {
-      for (node = node.firstChild(); !node.isNull(); node = node.nextSibling()) {
-            QDomElement e = node.toElement();
-            if (e.isNull())
-                  continue;
+      for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             QString tag(e.tagName());
             QString val(e.text());
             int i = val.toInt();
@@ -202,10 +199,10 @@ void Rest::read(QDomNode node)
                   setTickLen(i);
             else if (tag == "move")
                   _move = i;
-            else if (ChordRest::readProperties(node))
+            else if (ChordRest::readProperties(e))
                   ;
             else
-                  domError(node);
+                  domError(e);
             }
       }
 

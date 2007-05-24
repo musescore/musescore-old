@@ -689,43 +689,40 @@ void Chord::write(Xml& xml) const
             if (note->isSimple(xml)) {
                   xml.tagE(QString("Note pitch=\"%1\" tpc=\"%2\" ticks=\"%3\"")
                      .arg(note->pitch()).arg(note->tpc()).arg(tickLen()));
-                  xml.curTick = tick() + tickLen();
-                  return;
                   }
             }
-      xml.stag("Chord");
-      ChordRest::writeProperties(xml);
-      if (_grace)
-            xml.tag("GraceNote", _grace);
-      switch(_stemDirection) {
-            case UP:   xml.tag("StemDirection", QVariant("up")); break;
-            case DOWN: xml.tag("StemDirection", QVariant("down")); break;
-            case AUTO: break;
+      else {
+            xml.stag("Chord");
+            ChordRest::writeProperties(xml);
+            if (_grace)
+                  xml.tag("GraceNote", _grace);
+            switch(_stemDirection) {
+                  case UP:   xml.tag("StemDirection", QVariant("up")); break;
+                  case DOWN: xml.tag("StemDirection", QVariant("down")); break;
+                  case AUTO: break;
+                  }
+            for (ciNote in = notes.begin(); in != notes.end(); ++in)
+                  in->second->write(xml);
+            xml.etag();
             }
-      for (ciNote in = notes.begin(); in != notes.end(); ++in)
-            in->second->write(xml);
-      xml.etag();
+      xml.curTick = tick() + tickLen();
       }
 
 //---------------------------------------------------------
 //   Chord::readNote
 //---------------------------------------------------------
 
-void Chord::readNote(QDomNode node, int staffIdx)
+void Chord::readNote(QDomElement e, int staffIdx)
       {
-      Note* note = new Note(score());
-      QDomElement e = node.toElement();
-      int ptch = e.attribute("pitch", "-1").toInt();
-      int ticks = e.attribute("ticks", "-1").toInt();
-      int tpc = e.attribute("tpc", "-1").toInt();
+      Note* note    = new Note(score());
+      int ptch      = e.attribute("pitch", "-1").toInt();
+      int ticks     = e.attribute("ticks", "-1").toInt();
+      int tpc       = e.attribute("tpc", "-1").toInt();
 
       if (ticks != -1)
             setTickLen(ticks);
 
-      for (node = node.firstChild(); !node.isNull(); node = node.nextSibling()) {
-            QDomElement e = node.toElement();
-            if (e.isNull())
-                  continue;
+      for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             QString tag(e.tagName());
             QString val(e.text());
             int i = val.toInt();
@@ -750,7 +747,7 @@ void Chord::readNote(QDomNode node, int staffIdx)
             else if (tag == "Tie") {
                   Tie* _tieFor = new Tie(score());
                   _tieFor->setStaff(staff());
-                  _tieFor->read(node);
+                  _tieFor->read(e);
                   _tieFor->setStartNote(note);
                   note->setTieFor(_tieFor);
                   }
@@ -758,19 +755,19 @@ void Chord::readNote(QDomNode node, int staffIdx)
                   Text* f = new Text(score());
                   f->setSubtype(TEXT_FINGERING);
                   f->setStaff(staff());
-                  f->read(node);
+                  f->read(e);
                   f->setParent(this);
                   note->add(f);
                   }
             else if (tag == "move")
                   note->setMove(i);
-            else if (ChordRest::readProperties(node))
+            else if (ChordRest::readProperties(e))
                   ;
             else if (tag == "Slur") {
-                  readSlur(node, staffIdx);
+                  readSlur(e, staffIdx);
                   }
             else
-                  domError(node);
+                  domError(e);
             }
       note->setParent(this);
       note->setGrace(_grace);
@@ -788,12 +785,9 @@ void Chord::readNote(QDomNode node, int staffIdx)
 //   Chord::read
 //---------------------------------------------------------
 
-void Chord::read(QDomNode node, int staffIdx)
+void Chord::read(QDomElement e, int staffIdx)
       {
-      for (node = node.firstChild(); !node.isNull(); node = node.nextSibling()) {
-            QDomElement e = node.toElement();
-            if (e.isNull())
-                  continue;
+      for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             QString tag(e.tagName());
             QString val(e.text());
             int i = val.toInt();
@@ -805,7 +799,7 @@ void Chord::read(QDomNode node, int staffIdx)
                   note->setStaff(staff());
                   note->setVoice(voice());
                   note->setHead(tickLen());
-                  note->read(node);
+                  note->read(e);
                   notes.add(note);
                   }
             else if (tag == "GraceNote")
@@ -818,13 +812,13 @@ void Chord::read(QDomNode node, int staffIdx)
                   else
                         _stemDirection = Direction(i);
                   }
-            else if (ChordRest::readProperties(node))
+            else if (ChordRest::readProperties(e))
                   ;
             else if (tag == "Slur") {
-                  readSlur(node, staffIdx);
+                  readSlur(e, staffIdx);
                   }
             else
-                  domError(node);
+                  domError(e);
             }
       }
 

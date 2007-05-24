@@ -54,7 +54,7 @@ class Hairpin : public SLine {
 
       virtual void layout(ScoreLayout*);
       virtual void write(Xml& xml) const;
-      virtual void read(QDomNode);
+      virtual void read(QDomElement);
       virtual LineSegment* createSegment();
       };
 
