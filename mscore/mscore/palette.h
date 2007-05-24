@@ -105,7 +105,7 @@ class Palette : public QWidget {
       Element* element(int idx) { return symbols[idx]; }
       void setDrawGrid(bool val) { _drawGrid = val; }
       void write(Xml&, const char*) const;
-      void read(QDomNode);
+      void read(QDomElement);
       void clear();
       void setShowSelection(bool val) { _showSelection = val; }
       int getSelectedIdx() const { return selectedIdx; }

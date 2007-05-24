@@ -79,7 +79,7 @@ class Tuplet : public Element {
       virtual void layout(ScoreLayout*);
       Text* number() const { return _number; }
 
-      virtual void read(QDomNode);
+      virtual void read(QDomElement);
       void write(Xml&, int) const;
 
       virtual void move(double, double);

@@ -264,8 +264,10 @@ QList<Prop> Element::properties(Xml& xml) const
             pl.append(Prop("selected", selected()));
       if (!visible())
             pl.append(Prop("visible", visible()));
-      if (_time.isValid() && (_time.tick() != xml.curTick))
+      if (_time.isValid() && (_time.tick() != xml.curTick)) {
             pl.append(Prop("tick", _time.tick()));
+            xml.curTick = _time.tick();
+            }
       if (_duration.isValid())
             pl.append(Prop("ticklen", _duration.tick()));
       if (_color != Qt::black)
@@ -286,11 +288,8 @@ void Element::writeProperties(Xml& xml) const
 //   readProperties
 //---------------------------------------------------------
 
-bool Element::readProperties(QDomNode node)
+bool Element::readProperties(QDomElement e)
       {
-      QDomElement e = node.toElement();
-      if (e.isNull())
-            return true;
       QString tag(e.tagName());
       QString val(e.text());
       int i = val.toInt();
@@ -304,7 +303,7 @@ bool Element::readProperties(QDomNode node)
       else if (tag == "ticklen")
             setTickLen(score()->fileDivision(i));
       else if (tag == "offset")
-            setUserOff(readPoint(node));
+            setUserOff(readPoint(e));
       else if (tag == "visible")
             setVisible(i);
       else if (tag == "voice")
@@ -337,11 +336,11 @@ void Element::write(Xml& xml) const
 //   read
 //---------------------------------------------------------
 
-void Element::read(QDomNode node)
+void Element::read(QDomElement e)
       {
-      for (node = node.firstChild(); !node.isNull(); node = node.nextSibling()) {
-            if (!Element::readProperties(node))
-                  domError(node);
+      for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
+            if (!Element::readProperties(e))
+                  domError(e);
             }
       if (_subtype == 0)      // make sure setSubtype() is called at least once
             setSubtype(0);
@@ -536,11 +535,8 @@ void Line::writeProperties(Xml& xml) const
 //   readProperties
 //---------------------------------------------------------
 
-bool Line::readProperties(QDomNode node)
+bool Line::readProperties(QDomElement e)
       {
-      QDomElement e = node.toElement();
-      if (e.isNull())
-            return true;
       QString tag(e.tagName());
       QString val(e.text());
 
@@ -752,7 +748,7 @@ void KeySig::draw(QPainter& p)
 //   acceptDrop
 //---------------------------------------------------------
 
-bool KeySig::acceptDrop(Viewer*, const QPointF&, int type, const QDomNode&) const
+bool KeySig::acceptDrop(Viewer*, const QPointF&, int type, const QDomElement&) const
       {
       if (type == KEYSIG) {
             setDropTarget(this);
@@ -765,11 +761,11 @@ bool KeySig::acceptDrop(Viewer*, const QPointF&, int type, const QDomNode&) cons
 //   drop
 //---------------------------------------------------------
 
-Element* KeySig::drop(const QPointF&, const QPointF&, int type, const QDomNode& node)
+Element* KeySig::drop(const QPointF&, const QPointF&, int type, const QDomElement& e)
       {
       if (type == KEYSIG) {
             KeySig* k = new KeySig(0);
-            k->read(node);
+            k->read(e);
             int stype = k->subtype();
             delete k;
             int st = subtype();
@@ -921,109 +917,103 @@ QByteArray Element::mimeData(const QPointF& dragOffset) const
 //   readType
 //---------------------------------------------------------
 
-int Element::readType(QDomNode& node1, QPointF* dragOffset)
+int Element::readType(QDomElement& e1, QPointF* dragOffset)
       {
+      QDomElement e = e1.nextSiblingElement("Element");
+      if (e1.isNull()) {
+            domError(e1);
+            return -1;
+            }
       int type = -1;
-      for (; !node1.isNull(); node1 = node1.nextSibling()) {
-            QDomElement e = node1.toElement();
-            if (e.isNull())
-                  continue;
-            if (e.tagName() != "Element")
-                  domError(node1);
 
-            for (QDomNode node = node1.firstChild(); !node.isNull(); node = node.nextSibling()) {
-                  QDomElement e = node.toElement();
-                  if (e.isNull())
-                        continue;
-                  //
-                  // DEBUG:
-                  // check names; remove non needed elements
-                  //
-                  if (e.tagName() == "dragOffset")
-                        *dragOffset = readPoint(node);
-                  else if (e.tagName() == "Dynamic")
-                        type = DYNAMIC;
-                  else if (e.tagName() == "Symbol")
-                        type = SYMBOL;
-                  else if (e.tagName() == "Text")
-                        type = TEXT;
-                  else if (e.tagName() == "StaffLines")
-                        type = STAFF_LINES;
-                  else if (e.tagName() == "Slur")
-                        type = SLUR_SEGMENT;
-                  else if (e.tagName() == "Note")
-                        type = NOTE;
-                  else if (e.tagName() == "BarLine")
-                        type = BAR_LINE;
-                  else if (e.tagName() == "Stem")
-                        type = STEM;
-                  else if (e.tagName() == "Bracket")
-                        type = BRACKET;
-                  else if (e.tagName() == "Accidental")
-                        type = ACCIDENTAL;
-                  else if (e.tagName() == "Clef")
-                        type = CLEF;
-                  else if (e.tagName() == "KeySig")
-                        type = KEYSIG;
-                  else if (e.tagName() == "TimeSig")
-                        type = TIMESIG;
-                  else if (e.tagName() == "Chord")
-                        type = CHORD;
-                  else if (e.tagName() == "Rest")
-                        type = REST;
-                  else if (e.tagName() == "Tie")
-                        type = TIE;
-                  else if (e.tagName() == "Slur")
-                        type = SLUR;
-                  else if (e.tagName() == "Measure")
-                        type = MEASURE;
-                  else if (e.tagName() == "Attribute")
-                        type = ATTRIBUTE;
-                  else if (e.tagName() == "Page")
-                        type = PAGE;
-                  else if (e.tagName() == "Beam")
-                        type = BEAM;
-                  else if (e.tagName() == "Hook")
-                        type = HOOK;
-                  else if (e.tagName() == "Lyric")
-                        type = LYRICS;
-                  else if (e.tagName() == "System")
-                        type = SYSTEM;
-                  else if (e.tagName() == "HairPin")
-                        type = HAIRPIN;
-                  else if (e.tagName() == "Tuplet")
-                        type = TUPLET;
-                  else if (e.tagName() == "VSpacer")
-                        type = VSPACER;
-                  else if (e.tagName() == "Segment")
-                        type = SEGMENT;
-                  else if (e.tagName() == "TempoText")
-                        type = TEMPO_TEXT;
-                  else if (e.tagName() == "Volta")
-                        type = VOLTA;
-                  else if (e.tagName() == "Ottava")
-                        type = OTTAVA;
-                  else if (e.tagName() == "Pedal")
-                        type = PEDAL;
-                  else if (e.tagName() == "Trill")
-                        type = TRILL;
-                  else if (e.tagName() == "LayoutBreak")
-                        type = LAYOUT_BREAK;
-                  else if (e.tagName() == "HelpLine")
-                        type = HELP_LINE;
-                  else if (e.tagName() == "Image")
-                        type = IMAGE;
-                  else {
-                        domError(node);
-                        type = 0;
-                        break;
-                        }
-                  if (type >= 0) {
-                        node1 = node;
-                        break;
-                        }
+      for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
+            //
+            // DEBUG:
+            // check names; remove non needed elements
+            //
+            if (e.tagName() == "dragOffset")
+                  *dragOffset = readPoint(e);
+            else if (e.tagName() == "Dynamic")
+                  type = DYNAMIC;
+            else if (e.tagName() == "Symbol")
+                  type = SYMBOL;
+            else if (e.tagName() == "Text")
+                  type = TEXT;
+            else if (e.tagName() == "StaffLines")
+                  type = STAFF_LINES;
+            else if (e.tagName() == "Slur")
+                  type = SLUR_SEGMENT;
+            else if (e.tagName() == "Note")
+                  type = NOTE;
+            else if (e.tagName() == "BarLine")
+                  type = BAR_LINE;
+            else if (e.tagName() == "Stem")
+                  type = STEM;
+            else if (e.tagName() == "Bracket")
+                  type = BRACKET;
+            else if (e.tagName() == "Accidental")
+                  type = ACCIDENTAL;
+            else if (e.tagName() == "Clef")
+                  type = CLEF;
+            else if (e.tagName() == "KeySig")
+                  type = KEYSIG;
+            else if (e.tagName() == "TimeSig")
+                  type = TIMESIG;
+            else if (e.tagName() == "Chord")
+                  type = CHORD;
+            else if (e.tagName() == "Rest")
+                  type = REST;
+            else if (e.tagName() == "Tie")
+                  type = TIE;
+            else if (e.tagName() == "Slur")
+                  type = SLUR;
+            else if (e.tagName() == "Measure")
+                  type = MEASURE;
+            else if (e.tagName() == "Attribute")
+                  type = ATTRIBUTE;
+            else if (e.tagName() == "Page")
+                  type = PAGE;
+            else if (e.tagName() == "Beam")
+                  type = BEAM;
+            else if (e.tagName() == "Hook")
+                  type = HOOK;
+            else if (e.tagName() == "Lyric")
+                  type = LYRICS;
+            else if (e.tagName() == "System")
+                  type = SYSTEM;
+            else if (e.tagName() == "HairPin")
+                  type = HAIRPIN;
+            else if (e.tagName() == "Tuplet")
+                  type = TUPLET;
+            else if (e.tagName() == "VSpacer")
+                  type = VSPACER;
+            else if (e.tagName() == "Segment")
+                  type = SEGMENT;
+            else if (e.tagName() == "TempoText")
+                  type = TEMPO_TEXT;
+            else if (e.tagName() == "Volta")
+                  type = VOLTA;
+            else if (e.tagName() == "Ottava")
+                  type = OTTAVA;
+            else if (e.tagName() == "Pedal")
+                  type = PEDAL;
+            else if (e.tagName() == "Trill")
+                  type = TRILL;
+            else if (e.tagName() == "LayoutBreak")
+                  type = LAYOUT_BREAK;
+            else if (e.tagName() == "HelpLine")
+                  type = HELP_LINE;
+            else if (e.tagName() == "Image")
+                  type = IMAGE;
+            else {
+                  domError(e);
+                  type = 0;
+                  break;
                   }
-            break;
+            if (type >= 0) {
+                  e1 = e;
+                  break;
+                  }
             }
       return type;
       }

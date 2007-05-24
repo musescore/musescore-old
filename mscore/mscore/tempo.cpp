@@ -313,18 +313,14 @@ void TempoList::write(Xml& xml) const
 //   TempoList::read
 //---------------------------------------------------------
 
-void TempoList::read(QDomNode node, Score* cs)
+void TempoList::read(QDomElement e, Score* cs)
       {
-      QDomElement e = node.toElement();
       _tempo = e.attribute("fix","500000").toInt();
 
-      for (node = node.firstChild(); !node.isNull(); node = node.nextSibling()) {
-            e = node.toElement();
-            if (e.isNull())
-                  continue;
+      for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             if (e.tagName() == "tempo") {
                   TEvent* t = new TEvent();
-                  unsigned tick = t->read(node, cs);
+                  unsigned tick = t->read(e, cs);
                   tick = cs->fileDivision(tick);
                   iTEvent pos = find(tick);
                   if (pos != end())
@@ -334,7 +330,7 @@ void TempoList::read(QDomNode node, Score* cs)
             else if (e.tagName() == "relTempo")
                   _relTempo = e.text().toInt();
             else
-                  printf("MuseScore:Tempolist: unknown tag %s\n", e.tagName().toLatin1().data());
+                  domError(e);
             }
       normalize();
       ++_tempoSN;
@@ -356,15 +352,11 @@ void TEvent::write(Xml& xml, int at) const
 //   TEvent::read
 //---------------------------------------------------------
 
-int TEvent::read(QDomNode node, Score* cs)
+int TEvent::read(QDomElement e, Score* cs)
       {
-      QDomElement e = node.toElement();
       int at = e.attribute("tick", "0").toInt();
 
-      for (node = node.firstChild(); !node.isNull(); node = node.nextSibling()) {
-            QDomElement e = node.toElement();
-            if (e.isNull())
-                  continue;
+      for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             QString tag(e.tagName());
             QString val(e.text());
             int i = val.toInt();
@@ -373,8 +365,7 @@ int TEvent::read(QDomNode node, Score* cs)
             else if (tag == "val")
                   tempo = i;
             else
-                  printf("Mscore:TEvent: unknown tag %s\n",
-                     tag.toLatin1().data());
+                  domError(e);
             }
       return at;
       }

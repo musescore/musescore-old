@@ -85,19 +85,16 @@ void Image::write(Xml& xml) const
 //   read
 //---------------------------------------------------------
 
-void Image::read(QDomNode node)
+void Image::read(QDomElement e)
       {
-      for (node = node.firstChild(); !node.isNull(); node = node.nextSibling()) {
-            QDomElement e = node.toElement();
-            if (e.isNull())
-                  continue;
+      for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             QString tag(e.tagName());
             if (tag == "path")
                   setPath(e.text());
             else if (tag == "size")
-                  sz = readSize(node);
-            else if (!Element::readProperties(node))
-                  domError(node);
+                  sz = readSize(e);
+            else if (!Element::readProperties(e))
+                  domError(e);
             }
       }
 

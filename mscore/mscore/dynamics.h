@@ -55,7 +55,7 @@ class Dynamic : public Text {
       virtual void endDrag();
 
       virtual void write(Xml& xml) const;
-      virtual void read(QDomNode);
+      virtual void read(QDomElement);
       virtual void layout(ScoreLayout*);
       };
 

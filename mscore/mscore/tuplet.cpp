@@ -300,12 +300,9 @@ void Tuplet::write(Xml& xml, int id) const
 //   read
 //---------------------------------------------------------
 
-void Tuplet::read(QDomNode node)
+void Tuplet::read(QDomElement e)
       {
-      for (node = node.firstChild(); !node.isNull(); node = node.nextSibling()) {
-            QDomElement e = node.toElement();
-            if (e.isNull())
-                  continue;
+      for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             QString tag(e.tagName());
             int i = e.text().toInt();
             if (tag == "hasNumber")
@@ -321,13 +318,11 @@ void Tuplet::read(QDomNode node)
             else if (tag == "Number") {
                   _number = new Text(score());
                   _number->setParent(this);
-                  _number->read(node);
+                  _number->read(e);
                   _number->setSubtype(TEXT_TUPLET);   // override read
                   }
-            else if (Element::readProperties(node))
-                  ;
-            else
-                  domError(node);
+            else if (!Element::readProperties(e))
+                  domError(e);
             }
       }
 

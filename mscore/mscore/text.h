@@ -95,9 +95,9 @@ class Text : public Element {
       virtual bool isMovable() const { return true; }
       virtual void write(Xml& xml) const;
       virtual void write(Xml& xml, const char*) const;
-      virtual void read(QDomNode);
+      virtual void read(QDomElement);
       void writeProperties(Xml& xml) const;
-      bool readProperties(QDomNode node);
+      bool readProperties(QDomElement node);
       virtual void layout(ScoreLayout*);
       virtual QRectF bbox() const;
       virtual QPainterPath shape() const;
@@ -120,7 +120,7 @@ class TempoText : public Text  {
       double tempo() const    { return _tempo; }
       void setTempo(double v) { _tempo = v; }
       virtual void write(Xml& xml) const;
-      virtual void read(QDomNode);
+      virtual void read(QDomElement);
       };
 
 #endif

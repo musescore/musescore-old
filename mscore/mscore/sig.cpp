@@ -280,21 +280,17 @@ void SigList::write(Xml& xml) const
 //   SigList::read
 //---------------------------------------------------------
 
-void SigList::read(QDomNode node, int division, int fileDivision)
+void SigList::read(QDomElement e, int division, int fileDivision)
       {
-      for (node = node.firstChild(); !node.isNull(); node = node.nextSibling()) {
-            QDomElement e = node.toElement();
-            if (e.isNull())
-                  continue;
+      for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             QString tag(e.tagName());
             if (tag == "sig") {
                   SigEvent t;
-                  int tick = t.read(node, division, fileDivision);
+                  int tick = t.read(e, division, fileDivision);
                   (*this)[tick] = t;
                   }
             else
-                  printf("Mscore:SigList: unknown tag %s\n",
-                     tag.toLatin1().data());
+                  domError(e);
             }
       normalize();
       }
@@ -319,18 +315,13 @@ void SigEvent::write(Xml& xml, int tick) const
 //   SigEvent::read
 //---------------------------------------------------------
 
-int SigEvent::read(QDomNode node, int division, int fileDivision)
+int SigEvent::read(QDomElement e, int division, int fileDivision)
       {
       irregular = false;
+      int tick  = e.attribute("tick", "0").toInt();
+      tick      = tick * division / fileDivision;
 
-      QDomElement e = node.toElement();
-      int tick = e.attribute("tick", "0").toInt();
-      tick = tick * division / fileDivision;
-
-      for (node = node.firstChild(); !node.isNull(); node = node.nextSibling()) {
-            QDomElement e = node.toElement();
-            if (e.isNull())
-                  continue;
+      for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             QString tag(e.tagName());
             int i = e.text().toInt();
 
@@ -347,8 +338,7 @@ int SigEvent::read(QDomNode node, int division, int fileDivision)
                   irregular = true;
                   }
             else
-                  printf("Mscore:SigEvent: unknown tag %s\n",
-                     tag.toLatin1().data());
+                  domError(e);
             }
       if (!irregular) {
             nominator2   = nominator;

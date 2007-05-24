@@ -387,12 +387,9 @@ void SLine::writeProperties(Xml& xml) const
 //   readProperties
 //---------------------------------------------------------
 
-bool SLine::readProperties(QDomNode node)
+bool SLine::readProperties(QDomElement e)
       {
-      if (Element::readProperties(node))
-            return true;
-      QDomElement e = node.toElement();
-      if (e.isNull())
+      if (Element::readProperties(e))
             return true;
       QString tag(e.tagName());
       QString val(e.text());
@@ -401,14 +398,11 @@ bool SLine::readProperties(QDomNode node)
             _tick2 = score()->fileDivision(i);
       else if (tag == "Segment") {
             LineSegment* ls = createSegment();
-            for (QDomNode n = node.firstChild(); !n.isNull(); n = n.nextSibling()) {
-                  e = n.toElement();
-                  if (e.isNull())
-                        continue;
+            for (QDomElement e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
                   if (e.tagName() == "off1")
-                        ls->setUserOff(readPoint(n));
+                        ls->setUserOff(readPoint(e));
                   else if (e.tagName() == "off2")
-                        ls->setUserOff2(readPoint(n));
+                        ls->setUserOff2(readPoint(e));
                   else
                         domError(e);
                   }

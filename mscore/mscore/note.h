@@ -122,11 +122,11 @@ class Note : public Element {
       void setChord(Chord* a)         { setParent((Element*)a);    }
 
       virtual void draw(QPainter&);
-      virtual void read(QDomNode);
+      virtual void read(QDomElement);
       virtual void write(Xml& xml) const;
       QPointF stemPos(bool upFlag) const;    ///< Point to connect stem.
-      virtual bool acceptDrop(Viewer*, const QPointF&, int, const QDomNode&) const;
-      virtual Element* drop(const QPointF&, const QPointF&, int, const QDomNode&);
+      virtual bool acceptDrop(Viewer*, const QPointF&, int, const QDomElement&) const;
+      virtual Element* drop(const QPointF&, const QPointF&, int, const QDomElement&);
 
       virtual bool startEdit(QMatrix&, const QPointF&);
       virtual bool edit(QKeyEvent*);

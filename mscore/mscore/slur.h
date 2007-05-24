@@ -79,7 +79,7 @@ class SlurSegment : public Element {
       void setSlurTie(SlurTie* st) { slur = st; }
 
       void write(Xml& xml, int no) const;
-      void read(QDomNode);
+      void read(QDomElement);
       void dump() const;
       };
 
@@ -117,7 +117,7 @@ class SlurTie : public Element {
       virtual void remove(Element* s);
 
       void writeProperties(Xml& xml) const;
-      bool readProperties(QDomNode);
+      bool readProperties(QDomElement);
       };
 
 //---------------------------------------------------------
@@ -135,7 +135,7 @@ class Slur : public SlurTie {
       virtual Slur* clone() const      { return new Slur(*this); }
       virtual ElementType type() const { return SLUR; }
       virtual void write(Xml& xml) const;
-      virtual void read(Score*, QDomNode);
+      virtual void read(Score*, QDomElement);
       virtual void layout(ScoreLayout*);
       virtual void layout2(ScoreLayout*, const QPointF, int, struct UP&);
       virtual void nextSeg(const QPointF, int, struct UP&);
@@ -165,7 +165,7 @@ class Tie : public SlurTie {
       Note* startNote() const       { return _startNote; }
       Note* endNote() const         { return _endNote; }
       virtual void write(Xml& xml) const;
-      virtual void read(QDomNode);
+      virtual void read(QDomElement);
       virtual void layout(ScoreLayout*);
       };
 

@@ -21,6 +21,9 @@
 #include "midifile.h"
 #include "xml.h"
 
+extern QTextStream cout;
+extern QTextStream eout;
+
 #define BE_SHORT(x) ((((x)&0xFF)<<8) | (((x)>>8)&0xFF))
 #ifdef __i486__
 #define BE_LONG(x) \
@@ -201,9 +204,6 @@ void MidiMeta::dump(Xml& xml) const
 MidiFile::MidiFile()
       {
       fp        = 0;
-      timesig_z = 4;
-      timesig_n = 4;
-      curPos    = 0;
       _format   = 1;
       _midiType = MT_UNKNOWN;
       _noRunningStatus = false;
@@ -359,6 +359,7 @@ bool MidiFile::read(QIODevice* in)
       fp = in;
       _tracks.clear();
       _siglist.clear();
+      curPos    = 0;
 
       char tmp[4];
 
@@ -410,7 +411,7 @@ bool MidiFile::readTrack()
             return true;
             }
       int len       = readLong();       // len
-      int endPos    = curPos + len;
+      qint64 endPos = curPos + len;
       status        = -1;
       sstatus       = -1;  // running status, will not be reset on meta or sysex
       click         =  0;
@@ -437,10 +438,10 @@ bool MidiFile::readTrack()
             track->append(event);
             }
       if (curPos != endPos) {
-            printf("bad track len: %d != %d, %d bytes too much\n",
-               endPos, curPos, endPos - curPos);
+            eout << "bad track len: " << endPos << " != " << curPos
+               << ", " << (endPos - curPos) << " bytes too much\n";
             if (curPos < endPos) {
-                  printf("skip %d\n", endPos - curPos);
+                  eout << "  skip " << (endPos-curPos) << "\n";
                   skip(endPos - curPos);
                   }
             }
@@ -1349,12 +1350,9 @@ static void readData(unsigned char* d, int dataLen, QString s)
 //   readXml
 //---------------------------------------------------------
 
-void MidiTrack::readXml(QDomNode node)
+void MidiTrack::readXml(QDomElement e)
       {
-      for (QDomNode n = node.firstChild(); !n.isNull();  n = n.nextSibling()) {
-            QDomElement e = n.toElement();
-            if (e.isNull())
-                  continue;
+      for (e = e.firstChildElement(); !e.isNull();  e = e.nextSiblingElement()) {
             QString tag(e.tagName());
             QString val(e.text());
             if (tag == "NoteOn") {
@@ -1450,7 +1448,7 @@ void MidiTrack::readXml(QDomNode node)
                   _events.append(e);
                   }
             else
-                  domError(n);
+                  domError(e);
             }
       }
 
@@ -1474,12 +1472,9 @@ int MidiTrack::getInitProgram()
 //   readXml
 //---------------------------------------------------------
 
-void MidiFile::readXml(QDomNode node)
+void MidiFile::readXml(QDomElement e)
       {
-      for (QDomNode n = node.firstChild(); !n.isNull();  n = n.nextSibling()) {
-            QDomElement e = n.toElement();
-            if (e.isNull())
-                  continue;
+      for (e = e.firstChildElement(); !e.isNull();  e = e.nextSiblingElement()) {
             QString tag(e.tagName());
             QString val(e.text());
             if (tag == "format")
@@ -1488,11 +1483,11 @@ void MidiFile::readXml(QDomNode node)
                   _division = val.toInt();
             else if (tag == "Track") {
                   MidiTrack* track = new MidiTrack(this);
-                  track->readXml(n);
+                  track->readXml(e);
                   _tracks.append(track);
                   }
             else
-                  domError(n);
+                  domError(e);
             }
       }
 
@@ -1506,7 +1501,6 @@ void MidiTrack::findChords()
       int n = _events.size();
 
       int jitter = 3;   // tick tolerance for note on/off
-      MidiChord* chord = 0;
 
       for (int i = 0; i < n; ++i) {
             MidiEvent* e = _events[i];
@@ -1542,4 +1536,21 @@ void MidiTrack::findChords()
       _events = dl;
       }
 
+
+//---------------------------------------------------------
+//   separateVoices
+//---------------------------------------------------------
+
+int MidiTrack::separateVoices(int /*maxVoices*/)
+      {
+      int n = _events.size();
+      for (int i = 0; i < n; ++i) {
+            MidiEvent* e = _events[i];
+            if (e->type() != ME_CHORD)
+                  continue;
+            MidiChord* mc = (MidiChord*) e;
+            mc->setVoice(0);
+            }
+      return 1;
+      }
 

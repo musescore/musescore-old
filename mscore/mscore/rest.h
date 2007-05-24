@@ -48,7 +48,7 @@ class Rest : public ChordRest {
       virtual void dump() const;
       virtual void draw(QPainter&);
       virtual void write(Xml& xml) const;
-      virtual void read(QDomNode);
+      virtual void read(QDomElement);
       virtual void add(Element*);
       virtual void remove(Element*);
 
@@ -57,8 +57,8 @@ class Rest : public ChordRest {
 
       void setSym(int);
       virtual void space(double& min, double& extra) const;
-      virtual bool acceptDrop(Viewer*, const QPointF&, int, const QDomNode&) const;
-      virtual Element* drop(const QPointF&, const QPointF&, int, const QDomNode&);
+      virtual bool acceptDrop(Viewer*, const QPointF&, int, const QDomElement&) const;
+      virtual Element* drop(const QPointF&, const QPointF&, int, const QDomElement&);
       virtual void layout(ScoreLayout*);
       virtual QRectF bbox() const;
       };

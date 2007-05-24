@@ -214,16 +214,12 @@ void MusicXml::import(Score* s)
       for (int i = 0; i < MAX_SLURS; ++i)
             slur[i] = 0;
       tuplet = 0;
-      QDomNode node = doc->documentElement();
 
-      for (QDomNode node = doc->documentElement(); !node.isNull(); node = node.nextSibling()) {
-            QDomElement e = node.toElement();
-            if (e.isNull())
-                  continue;
+      for (QDomElement e = doc->documentElement(); !e.isNull(); e = e.nextSiblingElement()) {
             if (e.tagName() == "score-partwise")
-                  scorePartwise(node.firstChild());
+                  scorePartwise(e.firstChildElement());
             else
-                  domError(node);
+                  domError(e);
             }
       }
 
@@ -235,45 +231,30 @@ void MusicXml::import(Score* s)
  Read the MusicXML score-partwise element.
  */
 
-void MusicXml::scorePartwise(QDomNode node)
+void MusicXml::scorePartwise(QDomElement e)
       {
-      for (;!node.isNull(); node = node.nextSibling()) {
-            QDomElement e = node.toElement();
-            if (e.isNull())
-                  continue;
+      for (;!e.isNull(); e = e.nextSiblingElement()) {
             QString tag(e.tagName());
             if (tag == "part-list")
-                  xmlPartList(node.firstChild());
+                  xmlPartList(e.firstChildElement());
             else if (tag == "part")
-                  xmlPart(node.firstChild(), e.attribute(QString("id")));
+                  xmlPart(e.firstChildElement(), e.attribute(QString("id")));
             else if (tag == "work") {
-                  QDomNode n = node.firstChild();
-                  while (!n.isNull()) {
-                        QDomElement e = n.toElement();
-                        if (e.isNull()) {
-                              n = n.nextSibling();
-                              continue;
-                              }
-                        if (e.tagName() == "work-number") {
-                              subTitle = e.text();
-                              }
-                        else if (e.tagName() == "work-title") {
-                              title = e.text();
-                              }
+                  for (QDomElement ee = e.firstChildElement(); !ee.isNull(); ee = ee.nextSiblingElement()) {
+                        if (ee.tagName() == "work-number")
+                              subTitle = ee.text();
+                        else if (ee.tagName() == "work-title")
+                              title = ee.text();
                         else
-                              domError(n);
-                        n = n.nextSibling();
+                              domError(ee);
                         }
                   }
             else if (tag == "identification") {
-                  for (QDomNode n = node.firstChild(); !n.isNull(); n = n.nextSibling()) {
-                        QDomElement e = n.toElement();
-                        if (e.isNull())
-                              continue;
-                        if (e.tagName() == "creator") {
+                  for (QDomElement ee = e.firstChildElement(); !ee.isNull(); ee = ee.nextSiblingElement()) {
+                        if (ee.tagName() == "creator") {
                               // type is an arbitrary label
-                              QString type = e.attribute(QString("type"));
-                              QString str = e.text();
+                              QString type = ee.attribute(QString("type"));
+                              QString str = ee.text();
                               if (type == "composer")
                                     composer = str;
                               else if (type == "poet")
@@ -286,47 +267,38 @@ void MusicXml::scorePartwise(QDomNode node)
                                     printf("unknown creator <%s>\n", type.toLatin1().data());
                               }
                         else if (e.tagName() == "rights")
-                              score->rights = e.text();
-                        else if (e.tagName() == "encoding")
-                              domNotImplemented(n);
+                              score->rights = ee.text();
+                        else if (ee.tagName() == "encoding")
+                              domNotImplemented(ee);
                         else if (e.tagName() == "source")
-                              domNotImplemented(n);
+                              domNotImplemented(ee);
                         else
-                              domError(n);
+                              domError(ee);
                         }
                   }
             else if (tag == "defaults") {
-                  for (QDomNode n = node.firstChild(); !n.isNull(); n = n.nextSibling()) {
-                        QDomElement e = n.toElement();
-                        if (e.isNull())
-                              continue;
-                        QString tag(e.tagName());
+                  for (QDomElement ee = ee.firstChildElement(); !ee.isNull(); ee = ee.nextSiblingElement()) {
+                        QString tag(ee.tagName());
                         if (tag == "scaling") {
                               double millimeter = _spatium/10.0;
                               double tenths = 1.0;
-                              for (QDomNode node = n.firstChild(); !node.isNull(); node = node.nextSibling()) {
-                                    QDomElement e = node.toElement();
-                                    if (e.isNull())
-                                          continue;
-                                    QString tag(e.tagName());
+                              for (QDomElement eee = ee.firstChildElement(); !eee.isNull(); eee = eee.nextSiblingElement()) {
+                                    QString tag(eee.tagName());
                                     if (tag == "millimeters")
-                                          millimeter = e.text().toDouble();
+                                          millimeter = eee.text().toDouble();
                                     else if (tag == "tenths")
-                                          tenths = e.text().toDouble();
+                                          tenths = eee.text().toDouble();
                                     else
-                                          domError(n);
+                                          domError(eee);
                                     }
                               _spatium = DPMM * (millimeter * 10.0 / tenths);
                               }
                         else if (tag == "page-layout")
-                              score->pageFormat()->read(n);
+                              score->pageFormat()->read(ee);
                         else if (tag == "system-layout") {
-                              for (QDomNode node = n.firstChild(); !node.isNull(); node = node.nextSibling()) {
-                                    QDomElement e = node.toElement();
-                                    if (e.isNull())
-                                          continue;
-                                    QString tag(e.tagName());
-                                    Spatium val(e.text().toDouble() / 10.0);
+                              for (QDomElement eee = ee.firstChildElement(); !eee.isNull(); eee = eee.nextSiblingElement()) {
+                                    QString tag(eee.tagName());
+                                    Spatium val(eee.text().toDouble() / 10.0);
                                     if (tag == "system-margins")
                                           ;
                                     else if (tag == "system-distance") {
@@ -336,30 +308,27 @@ void MusicXml::scorePartwise(QDomNode node)
                                     else if (tag == "top-system-distance")
                                           ;
                                     else
-                                          domError(node);
+                                          domError(eee);
                                     }
                               }
                         else if (tag == "staff-layout") {
-                              for (QDomNode node = n.firstChild(); !node.isNull(); node = node.nextSibling()) {
-                                    QDomElement e = node.toElement();
-                                    if (e.isNull())
-                                          continue;
-                                    QString tag(e.tagName());
-                                    Spatium val(e.text().toDouble() / 10.0);
+                              for (QDomElement eee = ee.firstChildElement(); !eee.isNull(); eee = eee.nextSiblingElement()) {
+                                    QString tag(eee.tagName());
+                                    Spatium val(eee.text().toDouble() / 10.0);
                                     if (tag == "staff-distance")
                                           style->staffDistance = val;
                                     else
-                                          domError(node);
+                                          domError(eee);
                                     }
                               }
                         else if (tag == "music-font")
-                              domNotImplemented(n);
+                              domNotImplemented(ee);
                         else if (tag == "word-font")
-                              domNotImplemented(n);
+                              domNotImplemented(ee);
                         else if (tag == "lyric-font")
-                              domNotImplemented(n);
+                              domNotImplemented(ee);
                         else
-                              domError(n);
+                              domError(ee);
                         }
                   }
             else if (tag == "movement-number")
@@ -367,9 +336,9 @@ void MusicXml::scorePartwise(QDomNode node)
             else if (tag == "movement-title")
                   score->movementTitle = e.text();
             else if (tag == "credit")
-                  domNotImplemented(node);
+                  domNotImplemented(e);
             else
-                  domError(node);
+                  domError(e);
             }
       }
 
@@ -381,18 +350,15 @@ void MusicXml::scorePartwise(QDomNode node)
  Read the MusicXML part-list element.
  */
 
-void MusicXml::xmlPartList(QDomNode node)
+void MusicXml::xmlPartList(QDomElement e)
       {
-      for (;!node.isNull(); node = node.nextSibling()) {
-            QDomElement e = node.toElement();
-            if (e.isNull())
-                  continue;
+      for (;!e.isNull(); e = e.nextSiblingElement()) {
             if (e.tagName() == "score-part")
-                  xmlScorePart(node.firstChild(), e.attribute(QString("id")));
+                  xmlScorePart(e.firstChildElement(), e.attribute(QString("id")));
             else if (e.tagName() == "part-group")
                   ;
             else
-                  domError(node);
+                  domError(e);
             }
       }
 
@@ -404,17 +370,14 @@ void MusicXml::xmlPartList(QDomNode node)
  Read the MusicXML score-part element.
  */
 
-void MusicXml::xmlScorePart(QDomNode node, QString id)
+void MusicXml::xmlScorePart(QDomElement e, QString id)
       {
       Part* part = new Part(score);
       part->setId(id);
 
 // printf("create track id:<%s>\n", id.toLatin1().data());
 
-      for (;!node.isNull(); node = node.nextSibling()) {
-            QDomElement e = node.toElement();
-            if (e.isNull())
-                  continue;
+      for (;!e.isNull(); e = e.nextSiblingElement()) {
             if (e.tagName() == "part-name") {
                   part->setLongName(e.text());
                   part->setTrackName(e.text());
@@ -422,34 +385,28 @@ void MusicXml::xmlScorePart(QDomNode node, QString id)
             else if (e.tagName() == "part-abbreviation")
                   ;
             else if (e.tagName() == "score-instrument") {
-                  for (QDomNode n = node.firstChild(); !n.isNull(); n = n.nextSibling()) {
-                        QDomElement e = n.toElement();
-                        if (e.isNull())
-                              continue;
-                        if (e.tagName() == "instrument-name") {
+                  for (QDomElement ee = e.firstChildElement(); !ee.isNull(); ee = ee.nextSiblingElement()) {
+                        if (ee.tagName() == "instrument-name") {
                               // part-name or instrument-name?
                               if (part->longName().isEmpty())
-                                    part->setLongName(e.text());
+                                    part->setLongName(ee.text());
                               }
                         else
-                              domError(n);
+                              domError(ee);
                         }
                   }
             else if (e.tagName() == "midi-instrument") {
-                  for (QDomNode n = node.firstChild(); !n.isNull(); n = n.nextSibling()) {
-                        QDomElement e = n.toElement();
-                        if (e.isNull())
-                              continue;
-                        if (e.tagName() == "midi-channel")
-                              part->setMidiChannel(e.text().toInt() - 1);
-                        else if (e.tagName() == "midi-program")
-                              part->setMidiProgram(e.text().toInt() - 1);
+                  for (QDomElement ee = e.firstChildElement(); !ee.isNull(); ee = ee.nextSiblingElement()) {
+                        if (ee.tagName() == "midi-channel")
+                              part->setMidiChannel(ee.text().toInt() - 1);
+                        else if (ee.tagName() == "midi-program")
+                              part->setMidiProgram(ee.text().toInt() - 1);
                         else
-                              domError(n);
+                              domError(ee);
                         }
                   }
             else
-                  domError(node);
+                  domError(e);
             }
       score->parts()->push_back(part);
       Staff* staff = new Staff(score, part, 0);
@@ -465,7 +422,7 @@ void MusicXml::xmlScorePart(QDomNode node, QString id)
  Read the MusicXML part element.
  */
 
-void MusicXml::xmlPart(QDomNode node, QString id)
+void MusicXml::xmlPart(QDomElement e, QString id)
       {
       QList<Part*>* pl = score->parts();
       QList<Part*>::iterator i;
@@ -540,15 +497,12 @@ void MusicXml::xmlPart(QDomNode node, QString id)
                   }
             }
 
-      for (; !node.isNull(); node = node.nextSibling()) {
-            QDomElement e = node.toElement();
-            if (e.isNull())
-                  continue;
+      for (; !e.isNull(); e = e.nextSiblingElement()) {
             if (e.tagName() == "measure")
-                  xmlMeasure(part, node, e.attribute(QString("number")).toInt()-1);
+                  xmlMeasure(part, e, e.attribute(QString("number")).toInt()-1);
 
             else
-                  domError(node);
+                  domError(e);
             }
       }
 
@@ -560,7 +514,7 @@ void MusicXml::xmlPart(QDomNode node, QString id)
  Read the MusicXML measure element.
  */
 
-void MusicXml::xmlMeasure(Part* part, QDomNode node, int number)
+void MusicXml::xmlMeasure(Part* part, QDomElement e, int number)
       {
       int staves = score->nstaves();
       if (staves == 0) {
@@ -600,27 +554,20 @@ void MusicXml::xmlMeasure(Part* part, QDomNode node, int number)
       // must remember volta to handle <ending type="discontinue">
       Volta* lastVolta = 0;
 
-      QDomElement e = node.toElement();
       QString implicit = e.attribute("implicit", "no");
       if (implicit == "yes")
             measure->setIrregular(true);
 
       int staff = score->staff(part);
-      for (node = node.firstChild(); !node.isNull(); node = node.nextSibling()) {
-            QDomElement e = node.toElement();
-            if (e.isNull())
-                  continue;
+      for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             if (e.tagName() == "attributes")
-                  xmlAttributes(measure, staff, node.firstChild());
+                  xmlAttributes(measure, staff, e.firstChildElement());
             else if (e.tagName() == "note")
-                  xmlNote(measure, staff, node.firstChild());
+                  xmlNote(measure, staff, e.firstChildElement());
             else if (e.tagName() == "backup") {
-                  for (QDomNode n = node.firstChild(); !n.isNull(); n = n.nextSibling()) {
-                        QDomElement e = n.toElement();
-                        if (e.isNull())
-                              continue;
-                        if (e.tagName() == "duration") {
-                              int val = e.text().toInt();
+                  for (QDomElement ee = e.firstChildElement(); !ee.isNull(); ee = ee.nextSiblingElement()) {
+                        if (ee.tagName() == "duration") {
+                              int val = ee.text().toInt();
                               if (val == 0)     // neuratron scanner produces sometimes 0 !?
                                     val = 1;
                               val = (val * ::division) / divisions;
@@ -628,11 +575,11 @@ void MusicXml::xmlMeasure(Part* part, QDomNode node, int number)
                               lastLen = val;    // ?
                               }
                         else
-                              domError(n);
+                              domError(ee);
                         }
                   }
             else if (e.tagName() == "direction") {
-                  direction(measure, staff, node);
+                  direction(measure, staff, e);
                   }
             else if (e.tagName() == "print") {
                   QString newSystem = e.attribute("new-system", "no");
@@ -649,34 +596,28 @@ void MusicXml::xmlMeasure(Part* part, QDomNode node, int number)
                         if (newPage == "yes")
                               pm->prev()->setPageBreak(true);
                         }
-                  for (QDomNode n = node.firstChild(); !n.isNull(); n = n.nextSibling()) {
-                        QDomElement e = n.toElement();
-                        if (e.isNull())
-                              continue;
-                        if (e.tagName() == "system-layout") {
+                  for (QDomElement ee = e.firstChildElement(); !ee.isNull(); ee = ee.nextSiblingElement()) {
+                        if (ee.tagName() == "system-layout") {
                               }
-                        else if (e.tagName() == "staff-layout") {
+                        else if (ee.tagName() == "staff-layout") {
                               }
                         else
-                              domError(n);
+                              domError(ee);
                         }
                   }
             else if (e.tagName() == "forward") {
-                  for (QDomNode n = node.firstChild(); !n.isNull(); n = n.nextSibling()) {
-                        QDomElement e = n.toElement();
-                        if (e.isNull())
-                              continue;
-                        if (e.tagName() == "duration") {
-                              int val = (e.text().toInt() * ::division)/divisions;
+                  for (QDomElement ee = e.firstChildElement(); !ee.isNull(); ee = ee.nextSiblingElement()) {
+                        if (ee.tagName() == "duration") {
+                              int val = (ee.text().toInt() * ::division)/divisions;
                               tick += val;
                               lastLen = val;    // ?
                               }
-                        else if (e.tagName() == "voice")
+                        else if (ee.tagName() == "voice")
                               ;
-                        else if (e.tagName() == "staff")
+                        else if (ee.tagName() == "staff")
                               ;
                         else
-                              domError(n);
+                              domError(ee);
                         }
                   }
             else if (e.tagName() == "barline") {
@@ -685,20 +626,17 @@ void MusicXml::xmlMeasure(Part* part, QDomNode node, int number)
                   QString endingNumber;
                   QString endingType;
                   QString repeat;
-                  for (QDomNode n = node.firstChild(); !n.isNull(); n = n.nextSibling()) {
-                        QDomElement e = n.toElement();
-                        if (e.isNull())
-                              continue;
-                        if (e.tagName() == "bar-style")
-                              barStyle = e.text();
-                        else if (e.tagName() == "ending") {
-                              endingNumber = e.attribute("number");
-                              endingType = e.attribute("type");
+                  for (QDomElement ee = e.firstChildElement(); !ee.isNull(); ee = ee.nextSiblingElement()) {
+                        if (ee.tagName() == "bar-style")
+                              barStyle = ee.text();
+                        else if (ee.tagName() == "ending") {
+                              endingNumber = ee.attribute("number");
+                              endingType   = ee.attribute("type");
                               }
-                        else if (e.tagName() == "repeat")
-                              repeat = e.attribute("direction");
+                        else if (ee.tagName() == "repeat")
+                              repeat = ee.attribute("direction");
                         else
-                              domError(n);
+                              domError(ee);
                         }
                   if ((barStyle != "") || (repeat != "")) {
                         BarLine* barLine = new BarLine(score);
@@ -776,11 +714,11 @@ void MusicXml::xmlMeasure(Part* part, QDomNode node, int number)
                         }
                   }
             else if (e.tagName() == "sound")
-                  domNotImplemented(node);
+                  domNotImplemented(e);
             else if (e.tagName() == "harmony")
-                  domNotImplemented(node);
+                  domNotImplemented(e);
             else
-                  domError(node);
+                  domError(e);
             }
       staves = part->nstaves();
 //      for (int rstaff = 0; rstaff < staves; ++rstaff)
@@ -828,9 +766,8 @@ void MusicXml::xmlMeasure(Part* part, QDomNode node, int number)
 // even though the DTD does not mention it, practically speaking
 // offset and relative-x are mutually exclusive
 
-void MusicXml::direction(Measure* measure, int staff, QDomNode node)
+void MusicXml::direction(Measure* measure, int staff, QDomElement e)
       {
-      QDomElement e = node.toElement();
       QString placement = e.attribute("placement");
 
       QString dirType;
@@ -849,36 +786,32 @@ void MusicXml::direction(Measure* measure, int staff, QDomNode node)
       qreal size = textStyles[TEXT_STYLE_TECHNIK].size;
       QString tempo = "";
 
-      for (node = node.firstChild(); !node.isNull(); node = node.nextSibling()) {
-            QDomElement e = node.toElement();
-            if (e.isNull())
-                  continue;
+      for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             if (e.tagName() == "direction-type") {
-                  for (QDomNode n = node.firstChild(); !n.isNull(); n = n.nextSibling()) {
-                        QDomElement e = n.toElement();
-                        if (e.isNull())
-                              continue;
-                        dirType = e.tagName();
+                  for (QDomElement ee = e.firstChildElement(); !ee.isNull(); ee = ee.nextSiblingElement()) {
+                        dirType = ee.tagName();
                         //
                         // TODO: whats the difference between relative-x and default-x
                         //       in handling?
                         //
-                        ry      = e.attribute(QString("relative-y"), "0").toDouble() * -.1;
-                        rx      = e.attribute(QString("relative-x"), "0").toDouble() * .1;
-                        yoffset = e.attribute("default-y", "0.0").toDouble() * -0.1;
-                        xoffset = e.attribute("default-x", "0.0").toDouble() * 0.1;
+                        ry      = ee.attribute(QString("relative-y"), "0").toDouble() * -.1;
+                        rx      = ee.attribute(QString("relative-x"), "0").toDouble() * .1;
+                        yoffset = ee.attribute("default-y", "0.0").toDouble() * -0.1;
+                        xoffset = ee.attribute("default-x", "0.0").toDouble() * 0.1;
                         if (dirType == "words") {
-                              txt    = e.text();
-                              lang   = e.attribute(QString("xml:lang"), "it");
-                              weight = e.attribute(QString("font-weight"));
-                              if (e.hasAttribute("font-size"))
-                                    size = e.attribute("font-size").toDouble();
+                              txt    = ee.text();
+                              lang   = ee.attribute(QString("xml:lang"), "it");
+                              weight = ee.attribute(QString("font-weight"));
+                              if (ee.hasAttribute("font-size"))
+                                    size = ee.attribute("font-size").toDouble();
                               }
                         else if (dirType == "pedal") {
-                              type = e.attribute(QString("type"));
+                              type = ee.attribute(QString("type"));
                               }
                         else if (dirType == "dynamics") {
-                              QDomNode nn = n.firstChild();
+#if 0  //TODOWS
+
+                              QDomElement eee = n.firstChild();
                               if (!nn.isNull()) {
                                     QDomElement e = nn.toElement();
                                     if (!e.isNull()) {
@@ -888,23 +821,24 @@ void MusicXml::direction(Measure* measure, int staff, QDomNode node)
                                                 dynamics.push_back(e.tagName());
                                           }
                                     }
+#endif
                               }
                         else if (dirType == "wedge") {
-                              type   = e.attribute(QString("type"));
-                              spread = e.attribute(QString("spread"), "0").toInt();
+                              type   = ee.attribute(QString("type"));
+                              spread = ee.attribute(QString("spread"), "0").toInt();
                               }
                         else if (dirType == "dashes")
-                              domNotImplemented(n);
+                              domNotImplemented(ee);
                         else if (dirType == "bracket")
-                              domNotImplemented(n);
+                              domNotImplemented(ee);
                         else if (dirType == "metronome")
-                              domNotImplemented(n);
+                              domNotImplemented(ee);
                         else if (dirType == "octave-shift")
-                              domNotImplemented(n);
+                              domNotImplemented(ee);
                         else if (dirType == "segno")
-                              domNotImplemented(n);
+                              domNotImplemented(ee);
                         else
-                              domError(n);
+                              domError(ee);
                         }
                   }
             else if (e.tagName() == "sound") {
@@ -920,7 +854,7 @@ void MusicXml::direction(Measure* measure, int staff, QDomNode node)
                         rstaff = 0;
                   }
             else
-                  domError(node);
+                  domError(e);
             }
       if (placement == "above")
             ry -= 2;
@@ -1023,15 +957,13 @@ void MusicXml::direction(Measure* measure, int staff, QDomNode node)
 // part, delay insertion of time signatures until after all attributes
 // have been read.
 
-void MusicXml::xmlAttributes(Measure* measure, int staff, QDomNode node)
+void MusicXml::xmlAttributes(Measure* measure, int staff, QDomElement e)
       {
       QString beats = "";
       QString beatType = "";
       QString timeSymbol = "";
-      for (;!node.isNull(); node = node.nextSibling()) {
-            QDomElement e = node.toElement();
-            if (e.isNull())
-                  continue;
+
+      for (;!e.isNull(); e = e.nextSiblingElement()) {
             if (e.tagName() == "divisions")
                   divisions = e.text().toInt();
             else if (e.tagName() == "key") {
@@ -1040,16 +972,13 @@ void MusicXml::xmlAttributes(Measure* measure, int staff, QDomNode node)
                   if (number != -1)
                         staffIdx += number - 1;
                   int key = 0;
-                  for (QDomNode n = node.firstChild(); !n.isNull(); n = n.nextSibling()) {
-                        QDomElement e = n.toElement();
-                        if (e.isNull())
-                              continue;
-                        if (e.tagName() == "fifths")
-                              key = e.text().toInt();
+                  for (QDomElement ee = e.firstChildElement(); !ee.isNull(); ee = ee.nextSiblingElement()) {
+                        if (ee.tagName() == "fifths")
+                              key = ee.text().toInt();
                         else if (e.tagName() == "mode")
-                              domNotImplemented(n);
+                              domNotImplemented(ee);
                         else
-                              domError(n);
+                              domError(ee);
                         }
                   if (number == -1) {
                         //
@@ -1096,17 +1025,14 @@ void MusicXml::xmlAttributes(Measure* measure, int staff, QDomNode node)
                   }
             else if (e.tagName() == "time") {
                   timeSymbol = e.attribute("symbol");
-                  for (QDomNode n = node.firstChild(); !n.isNull(); n = n.nextSibling()) {
-                        QDomElement e = n.toElement();
-                        if (e.isNull())
-                              continue;
-                        if (e.tagName() == "beats")
-                              beats = e.text();
-                        else if (e.tagName() == "beat-type") {
-                              beatType = e.text();
+                  for (QDomElement ee = e.firstChildElement(); !ee.isNull(); ee = ee.nextSiblingElement()) {
+                        if (ee.tagName() == "beats")
+                              beats = ee.text();
+                        else if (ee.tagName() == "beat-type") {
+                              beatType = ee.text();
                               }
                         else
-                              domError(n);
+                              domError(ee);
                         }
                   }
             else if (e.tagName() == "clef") {
@@ -1115,21 +1041,18 @@ void MusicXml::xmlAttributes(Measure* measure, int staff, QDomNode node)
                   QString c;
                   int i = 0;
                   int line = -1;
-                  for (QDomNode n = node.firstChild(); !n.isNull(); n = n.nextSibling()) {
-                        QDomElement e = n.toElement();
-                        if (e.isNull())
-                              continue;
-                        if (e.tagName() == "sign")
-                              c = e.text();
+                  for (QDomElement ee = e.firstChildElement(); !ee.isNull(); ee = ee.nextSiblingElement()) {
+                        if (ee.tagName() == "sign")
+                              c = ee.text();
                         else if (e.tagName() == "line")
-                              line = e.text().toInt();
-                        else if (e.tagName() == "clef-octave-change") {
-                              i = e.text().toInt();
+                              line = ee.text().toInt();
+                        else if (ee.tagName() == "clef-octave-change") {
+                              i = ee.text().toInt();
                               if (i && !(c == "F" || c == "G"))
                                     printf("clef-octave-change only implemented for F and G key\n");
                               }
                         else
-                              domError(n);
+                              domError(ee);
                         }
                   if (c == "G" && i == 0)
                         clef = 0;
@@ -1179,13 +1102,13 @@ void MusicXml::xmlAttributes(Measure* measure, int staff, QDomNode node)
                         }
                   }
             else if (e.tagName() == "staff-details")
-                  domNotImplemented(node);
+                  domNotImplemented(e);
             else if (e.tagName() == "instruments")
-                  domNotImplemented(node);
+                  domNotImplemented(e);
             else if (e.tagName() == "transpose")
-                  domNotImplemented(node);
+                  domNotImplemented(e);
             else
-                  domError(node);
+                  domError(e);
             }
       if (beats != "" && beatType != "") {
             // determine if timesig is valid
@@ -1245,7 +1168,7 @@ void MusicXml::xmlAttributes(Measure* measure, int staff, QDomNode node)
  \a Staff is the number of first staff of the part this note belongs to.
  */
 
-void MusicXml::xmlNote(Measure* measure, int staff, QDomNode node)
+void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
       {
       voice = 0;
       move  = 0;
@@ -1283,35 +1206,28 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomNode node)
       int actualNotes = 1;
       int normalNotes = 1;
 
-      for (; !node.isNull(); node = node.nextSibling()) {
-            QDomElement e = node.toElement();
-            if (e.isNull())
-                  continue;
+      for (; !e.isNull(); e = e.nextSiblingElement()) {
             QString tag(e.tagName());
-            QString txt(e.text());
+            QString s(e.text());
 
             if (tag == "pitch") {
                   step   = "C";
                   alter  = 0;
                   octave = 4;
-                  for (QDomNode n = node.firstChild(); !n.isNull(); n = n.nextSibling()) {
-                        QDomElement e = n.toElement();
-                        if (e.isNull())
-                              continue;
-                        if (e.tagName() == "step")          // A-G
-                              step = e.text();
-                        else if (e.tagName() == "alter")    // -1=flat 1=sharp (0.5=quarter sharp)
-                              alter = e.text().toInt();
-                        else if (e.tagName() == "octave")   // 0-9 4=middle C
-                              octave = e.text().toInt();
+                  for (QDomElement ee = e.firstChildElement(); !ee.isNull(); ee = ee.nextSiblingElement()) {
+                        if (ee.tagName() == "step")          // A-G
+                              step = ee.text();
+                        else if (ee.tagName() == "alter")    // -1=flat 1=sharp (0.5=quarter sharp)
+                              alter = ee.text().toInt();
+                        else if (ee.tagName() == "octave")   // 0-9 4=middle C
+                              octave = ee.text().toInt();
                         else
-                              domError(n);
+                              domError(ee);
                         }
                   }
             else if (tag == "duration")
-                  duration = e.text().toInt();
+                  duration = s.toInt();
             else if (tag == "type") {
-                  QString s = e.text();
                   if (s == "quarter")
                         durationType = D_QUARTER;
                   else if (s == "eighth")
@@ -1340,21 +1256,21 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomNode node)
             else if (tag == "chord")
                   tick -= lastLen;
             else if (tag == "voice")
-                  voice = e.text().toInt() - 1;
+                  voice = s.toInt() - 1;
             else if (tag == "stem") {
-                  if (e.text() == "up")
+                  if (s == "up")
                         sd = UP;
-                  else if (e.text() == "down")
+                  else if (s == "down")
                         sd = DOWN;
-                  else if (e.text() == "none")  // ?
+                  else if (s == "none")  // ?
                         ;
-                  else if (e.text() == "double")
+                  else if (s == "double")
                         ;
                   else
                         printf("unknown stem direction %s\n", e.text().toLatin1().data());
                   }
             else if (tag == "staff") {
-                  relStaff = e.text().toInt() - 1;
+                  relStaff = s.toInt() - 1;
                   //
                   // Musicxml voices are counted for all staffs of an
                   // instrument. They are not limited. In mscore voices are associated
@@ -1395,7 +1311,6 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomNode node)
 //                  printf(" after: relStaff=%d move=%d voice=%d\n", relStaff, move, voice);
                   }
             else if (tag == "beam") {
-                  QString s = e.text();
                   if (s == "begin") {
                         bm = BEAM_BEGIN;
                         }
@@ -1419,28 +1334,24 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomNode node)
                         maxLyrics = lyricNo + 1;
                   if (lyricNo > MAX_LYRICS)
                         printf("too much lyrics (>%d)\n", MAX_LYRICS);
-                  for (QDomNode n = node.firstChild(); !n.isNull(); n = n.nextSibling()) {
-                        QDomElement e = n.toElement();
-                        if (e.isNull())
-                              continue;
-                        if (e.tagName() == "syllabic")
-                              syllabic[lyricNo] = e.text();
-                        else if (e.tagName() == "text")
-                              lyric[lyricNo] = e.text();
-                        else if (e.tagName() == "extend")
+                  for (QDomElement ee = e.firstChildElement(); !ee.isNull(); ee = ee.nextSiblingElement()) {
+                        if (ee.tagName() == "syllabic")
+                              syllabic[lyricNo] = ee.text();
+                        else if (ee.tagName() == "text")
+                              lyric[lyricNo] = ee.text();
+                        else if (ee.tagName() == "extend")
                               ;
-                        else if (e.tagName() == "end-line")
+                        else if (ee.tagName() == "end-line")
                               ;
-                        else if (e.tagName() == "end-paragraph")
+                        else if (ee.tagName() == "end-paragraph")
                               ;
                         else
-                              domError(n);
+                              domError(ee);
                         }
                   }
             else if (tag == "dot")
                   ++dots;
             else if (tag == "accidental") {
-                  QString s = e.text();
                   QString editorial = e.attribute(QString("editorial"));
                   if (s == "natural")
                         accidental = 5;
@@ -1472,20 +1383,17 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomNode node)
                         accidental += 5;
                   }
             else if (tag == "notations") {
-                  for (QDomNode n = node.firstChild(); !n.isNull(); n = n.nextSibling()) {
-                        QDomElement e = n.toElement();
-                        if (e.isNull())
-                              continue;
-                        if (e.tagName() == "slur") {
-                              int slurNo   = e.attribute(QString("number"), "1").toInt() - 1;
-                              QString slurType = e.attribute(QString("type"));
+                  for (QDomElement ee = e.firstChildElement(); !ee.isNull(); ee = ee.nextSiblingElement()) {
+                        if (ee.tagName() == "slur") {
+                              int slurNo   = ee.attribute(QString("number"), "1").toInt() - 1;
+                              QString slurType = ee.attribute(QString("type"));
                               if (slurType == "start") {
                                     bool endSlur = false;
                                     if (slur[slurNo] == 0)
                                           slur[slurNo] = new Slur(score);
                                     else
                                           endSlur = true;
-                                    QString pl = e.attribute(QString("placement"));
+                                    QString pl = ee.attribute(QString("placement"));
                                     if (pl == "above")
                                           slur[slurNo]->setSlurDirection(UP);
                                     else if (pl == "below")
@@ -1512,8 +1420,8 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomNode node)
                               else
                                     printf("unknown slur type %s\n", slurType.toLatin1().data());
                               }
-                        else if (e.tagName() == "tied") {
-                              QString tiedType = e.attribute(QString("type"));
+                        else if (ee.tagName() == "tied") {
+                              QString tiedType = ee.attribute(QString("type"));
                               if (tiedType == "start") {
                                     if (tie) {
                                           printf("Tie already active\n");
@@ -1537,80 +1445,71 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomNode node)
                               else
                                     printf("unknown tied type %s\n", tiedType.toLatin1().data());
                               }
-                        else if (e.tagName() == "tuplet") {
-                              tupletType      = e.attribute(QString("type"));
-                              tupletPlacement = e.attribute("placement");
-                              tupletBracket   = e.attribute("bracket");
+                        else if (ee.tagName() == "tuplet") {
+                              tupletType      = ee.attribute(QString("type"));
+                              tupletPlacement = ee.attribute("placement");
+                              tupletBracket   = ee.attribute("bracket");
                               }
-                        else if (e.tagName() == "dynamics") {
-                              // int rx            = e.attribute("relative-x").toInt();
-                              QString placement = e.attribute("placement");
+                        else if (ee.tagName() == "dynamics") {
+                              // int rx            = ee.attribute("relative-x").toInt();
+                              QString placement = ee.attribute("placement");
                               }
-                        else if (e.tagName() == "articulations") {
-                              for (QDomNode n2 = n.firstChild(); !n2.isNull(); n2 = n2.nextSibling()) {
-                                    QDomElement e = n2.toElement();
-                                    if (e.isNull())
-                                          continue;
-                                    if (e.tagName() == "accent")
+                        else if (ee.tagName() == "articulations") {
+                              for (QDomElement eee = ee.firstChildElement(); !eee.isNull(); eee = eee.nextSiblingElement()) {
+                                    if (eee.tagName() == "accent")
                                           accent = true;
-                                    else if (e.tagName() == "staccatissimo")
+                                    else if (eee.tagName() == "staccatissimo")
                                           staccatissimo = true;
-                                    else if (e.tagName() == "staccato")
+                                    else if (eee.tagName() == "staccato")
                                           staccato = true;
-                                    else if (e.tagName() == "strong-accent")
-                                          strongAccentType = e.attribute(QString("type"));
-                                    else if (e.tagName() == "tenuto")
+                                    else if (eee.tagName() == "strong-accent")
+                                          strongAccentType = eee.attribute(QString("type"));
+                                    else if (eee.tagName() == "tenuto")
                                           tenuto = true;
                                     else
-                                          domError(n2);
+                                          domError(eee);
                                     }
                               }
-                        else if (e.tagName() == "fermata") {
-                              fermataType = e.attribute(QString("type"));
+                        else if (ee.tagName() == "fermata") {
+                              fermataType = ee.attribute(QString("type"));
                               }
-                        else if (e.tagName() == "ornaments") {
+                        else if (ee.tagName() == "ornaments") {
 					//	<trill-mark placement="above"/>
-                              for (QDomNode n2 = n.firstChild(); !n2.isNull(); n2 = n2.nextSibling()) {
-                                    QDomElement e = n2.toElement();
-                                    if (e.isNull())
-                                          continue;
-                                    if (e.tagName() == "trill-mark")
+                              for (QDomElement eee = ee.firstChildElement(); !eee.isNull(); eee = eee.nextSiblingElement()) {
+                                    if (eee.tagName() == "trill-mark")
                                           trillMark = true;
-                                    else if (e.tagName() == "turn")
+                                    else if (eee.tagName() == "turn")
                                           turn = true;
-                                    else if (e.tagName() == "inverted-mordent")
+                                    else if (eee.tagName() == "inverted-mordent")
                                           invertedMordent = true;
-                                    else if (e.tagName() == "mordent")
+                                    else if (eee.tagName() == "mordent")
                                           mordent = true;
-                                    else if (e.tagName() == "accidental-mark")
-                                          domNotImplemented(n2);
-                                    else if (e.tagName() == "delayed-turn")
-                                          domNotImplemented(n2);
+                                    else if (eee.tagName() == "accidental-mark")
+                                          domNotImplemented(eee);
+                                    else if (eee.tagName() == "delayed-turn")
+                                          domNotImplemented(eee);
                                     else
-                                          domError(n2);
+                                          domError(eee);
                                     }
                               }
-                        else if (e.tagName() == "technical") {
-                              for (QDomNode n2 = n.firstChild(); !n2.isNull(); n2 = n2.nextSibling()) {
-                                    QDomElement e = n2.toElement();
-                                    if (e.isNull())
-                                          continue;
-                                    if (e.tagName() == "fingering")
-                                          fingering = e.text();
-                                    else if (e.tagName() == "fret")
-                                          domNotImplemented(n2);
-                                    else if (e.tagName() == "string")
-                                          domNotImplemented(n2);
-                                    else if (e.tagName() == "pull-off")
-                                          domNotImplemented(n2);
+                        else if (ee.tagName() == "technical") {
+                              for (QDomElement eee = ee.firstChildElement(); !eee.isNull(); eee = eee.nextSiblingElement()) {
+                                    if (eee.tagName() == "fingering")
+                                          fingering = eee.text();
+                                    else if (eee.tagName() == "fret")
+                                          domNotImplemented(eee);
+                                    else if (eee.tagName() == "string")
+                                          domNotImplemented(eee);
+                                    else if (eee.tagName() == "pull-off")
+                                          domNotImplemented(eee);
                                     else
-                                          domError(n2);
+                                          domError(eee);
                                     }
                               }
-                        else if (e.tagName() == "arpeggiate")
-                              domNotImplemented(n);
+                        else if (ee.tagName() == "arpeggiate")
+                              domNotImplemented(ee);
                         else
-                              domError(n);
+                              domError(ee);
                         }
                   }
             else if (tag == "tie") {
@@ -1627,28 +1526,25 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomNode node)
                   graceSlash = e.attribute(QString("slash"));
                   }
             else if (tag == "time-modification") {  // tuplets
-                  for (QDomNode n = node.firstChild(); !n.isNull(); n = n.nextSibling()) {
-                        QDomElement e = n.toElement();
-                        if (e.isNull())
-                              continue;
-                        if (e.tagName() == "actual-notes")
-                              actualNotes = e.text().toInt();
-                        else if (e.tagName() == "normal-notes")
-                              normalNotes = e.text().toInt();
-                        else if (e.tagName() == "normal-type")
-                              domNotImplemented(n);
+                  for (QDomElement ee = e.firstChildElement(); !ee.isNull(); ee = ee.nextSiblingElement()) {
+                        if (ee.tagName() == "actual-notes")
+                              actualNotes = ee.text().toInt();
+                        else if (ee.tagName() == "normal-notes")
+                              normalNotes = ee.text().toInt();
+                        else if (ee.tagName() == "normal-type")
+                              domNotImplemented(ee);
                         else
-                              domError(n);
+                              domError(ee);
                         }
                   }
             else if (tag == "notehead")
-                  domNotImplemented(node);
+                  domNotImplemented(e);
             else if (tag == "instrument")
-                  domNotImplemented(node);
+                  domNotImplemented(e);
             else if (tag == "cue")
-                  domNotImplemented(node);
+                  domNotImplemented(e);
             else
-                  domError(node);
+                  domError(e);
             }
       int ticks = (::division * duration) / divisions;
 

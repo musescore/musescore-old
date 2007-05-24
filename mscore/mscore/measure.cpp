@@ -1742,7 +1742,7 @@ void Measure::insertStaff1(Staff* staff, int staffIdx)
 */
 
 bool Measure::acceptDrop(Viewer* viewer, const QPointF& p, int type,
-   const QDomNode&) const
+   const QDomElement&) const
       {
       // convert p from canvas to measure relative position and take x and y coordinates
       QPointF mrp = p - pos() - system()->pos() - system()->page()->pos();
@@ -1820,7 +1820,7 @@ bool Measure::acceptDrop(Viewer* viewer, const QPointF& p, int type,
  Handle a dropped element at position \a pos of given element \a type and \a subtype.
 */
 
-Element* Measure::drop(const QPointF& p, const QPointF& /*offset*/, int type, const QDomNode& node)
+Element* Measure::drop(const QPointF& p, const QPointF& /*offset*/, int type, const QDomElement& e)
       {
       // determine staff
       System* s = system();
@@ -1836,7 +1836,7 @@ Element* Measure::drop(const QPointF& p, const QPointF& /*offset*/, int type, co
             case BRACKET:
                   {
                   Bracket* bracket = new Bracket(0);
-                  bracket->read(node);
+                  bracket->read(e);
                   int subtype = bracket->subtype();
                   delete bracket;
                   staff->addBracket(BracketItem(subtype, 1));
@@ -1845,7 +1845,7 @@ Element* Measure::drop(const QPointF& p, const QPointF& /*offset*/, int type, co
             case CLEF:
                   {
                   Clef* clef = new Clef(0);
-                  clef->read(node);
+                  clef->read(e);
                   staff->changeClef(tick(), clef->subtype());
                   delete clef;
                   }
@@ -1853,7 +1853,7 @@ Element* Measure::drop(const QPointF& p, const QPointF& /*offset*/, int type, co
             case KEYSIG:
                   {
                   KeySig* ks = new KeySig(0);
-                  ks->read(node);
+                  ks->read(e);
                   staff->changeKeySig(tick(), ks->subtype());
                   delete ks;
                   }
@@ -1861,7 +1861,7 @@ Element* Measure::drop(const QPointF& p, const QPointF& /*offset*/, int type, co
             case TIMESIG:
                   {
                   TimeSig* ts = new TimeSig(0);
-                  ts->read(node);
+                  ts->read(e);
                   score()->changeTimeSig(tick(), ts->subtype());
                   delete ts;
                   }
@@ -1869,7 +1869,7 @@ Element* Measure::drop(const QPointF& p, const QPointF& /*offset*/, int type, co
             case LAYOUT_BREAK:
                   {
                   LayoutBreak* lb = new LayoutBreak(score());
-                  lb->read(node);
+                  lb->read(e);
                   lb->setStaff(staff);
                   lb->setParent(this);
                   score()->cmdAdd(lb);
@@ -1879,7 +1879,7 @@ Element* Measure::drop(const QPointF& p, const QPointF& /*offset*/, int type, co
             case BAR_LINE:
                   {
                   BarLine* barLine = new BarLine(score());
-                  barLine->read(node);
+                  barLine->read(e);
                   int subtype = barLine->subtype();
                   delete barLine;
 
@@ -2087,6 +2087,7 @@ void Measure::write(Xml& xml, int no, int staff) const
             xml.stag(QString("Measure number=\"%1\" tick=\"%2\"").arg(no).arg(tick()));
       else
             xml.stag(QString("Measure number=\"%1\"").arg(no));
+      xml.curTick = tick();
 
       if (staff == 0) {
             for (ciElement ie = _pel.begin(); ie != _pel.end(); ++ie)
@@ -2142,6 +2143,7 @@ void Measure::write(Xml& xml, int no, int staff) const
 void Measure::write(Xml&xml) const
       {
       xml.stag(QString("Measure tick=\"%1\"").arg(tick()));
+      xml.curTick = tick();
 
       for (ciElement ie = _pel.begin(); ie != _pel.end(); ++ie)
             (*ie)->write(xml);
@@ -2193,7 +2195,7 @@ void Measure::write(Xml&xml) const
  Read Measure.
 */
 
-void Measure::read(QDomNode node, int idx)
+void Measure::read(QDomElement e, int idx)
       {
       for (int n = staves.size(); n <= idx; ++n) {
             MStaff s;
@@ -2202,7 +2204,6 @@ void Measure::read(QDomNode node, int idx)
             staves.push_back(s);
             }
 
-      QDomElement e = node.toElement();
       int tck = e.attribute("tick", "-1").toInt();
       if (tck >= 0) {
             tck = score()->fileDivision(tck);
@@ -2211,10 +2212,7 @@ void Measure::read(QDomNode node, int idx)
       Staff* staff = _score->staff(idx);
       int curTickPos = tick();
 
-      for (node = node.firstChild(); !node.isNull(); node = node.nextSibling()) {
-            QDomElement e = node.toElement();
-            if (e.isNull())
-                  continue;
+      for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             QString tag(e.tagName());
             QString val(e.text());
 
@@ -2222,7 +2220,7 @@ void Measure::read(QDomNode node, int idx)
                   BarLine* barLine = new BarLine(score());
                   barLine->setParent(this);
                   barLine->setStaff(staff);
-                  barLine->read(node);
+                  barLine->read(e);
                   if (barLine->subtype() == START_REPEAT) {
                         barLine->setTick(tick());
                         Segment* s = getSegment(barLine);
@@ -2236,7 +2234,7 @@ void Measure::read(QDomNode node, int idx)
                   chord->setTick(curTickPos);   // set default tick position
                   chord->setParent(this);       // only for reading tuplets
                   chord->setStaff(staff);
-                  chord->read(node, idx);
+                  chord->read(e, idx);
                   Segment* s = getSegment(chord);
                   s->add(chord);
                   curTickPos = chord->tick() + chord->tickLen();
@@ -2246,7 +2244,7 @@ void Measure::read(QDomNode node, int idx)
                   chord->setTick(curTickPos);   // set default tick position
                   chord->setParent(this);       // only for reading tuplets
                   chord->setStaff(staff);
-                  chord->readNote(node, idx);
+                  chord->readNote(e, idx);
                   Segment* s = getSegment(chord);
                   s->add(chord);
                   curTickPos = chord->tick() + chord->tickLen();
@@ -2256,7 +2254,7 @@ void Measure::read(QDomNode node, int idx)
                   rest->setTick(curTickPos);    // set default tick position
                   rest->setParent(this);        // only for reading tuplets
                   rest->setStaff(staff);
-                  rest->read(node);
+                  rest->read(e);
                   Segment* s = getSegment(rest);
                   s->add(rest);
                   curTickPos = rest->tick() + rest->tickLen();
@@ -2265,7 +2263,7 @@ void Measure::read(QDomNode node, int idx)
                   Clef* clef = new Clef(score());
                   clef->setTick(curTickPos);
                   clef->setStaff(staff);
-                  clef->read(node);
+                  clef->read(e);
                   Segment* s = getSegment(clef);
                   s->add(clef);
                   }
@@ -2273,7 +2271,7 @@ void Measure::read(QDomNode node, int idx)
                   TimeSig* ts = new TimeSig(score());
                   ts->setTick(curTickPos);
                   ts->setStaff(staff);
-                  ts->read(node);
+                  ts->read(e);
                   Segment* s = getSegment(ts);
                   s->add(ts);
                   }
@@ -2281,7 +2279,7 @@ void Measure::read(QDomNode node, int idx)
                   KeySig* ks = new KeySig(score());
                   ks->setTick(curTickPos);
                   ks->setStaff(staff);
-                  ks->read(node);
+                  ks->read(e);
                   ks->setSubtype(ks->subtype());
                   Segment* s = getSegment(ks);
                   s->add(ks);
@@ -2290,7 +2288,7 @@ void Measure::read(QDomNode node, int idx)
                   Dynamic* dyn = new Dynamic(score());
                   dyn->setTick(curTickPos);
                   dyn->setStaff(staff);
-                  dyn->read(node);
+                  dyn->read(e);
                   add(dyn);
                   }
             else if (tag == "Slur") {
@@ -2298,21 +2296,21 @@ void Measure::read(QDomNode node, int idx)
                   slur->setTick(curTickPos);
                   slur->setStaff(staff);
                   slur->setParent(this);
-                  slur->read(_score, node);
+                  slur->read(_score, e);
                   add(slur);
                   }
             else if (tag == "HairPin") {
                   Hairpin* hairpin = new Hairpin(score());
                   hairpin->setTick(curTickPos);
                   hairpin->setStaff(staff);
-                  hairpin->read(node);
+                  hairpin->read(e);
                   add(hairpin);
                   }
             else if (tag == "Lyrics") {
                   Lyrics* lyrics = new Lyrics(score());
                   lyrics->setTick(curTickPos);
                   lyrics->setStaff(staff);
-                  lyrics->read(node);
+                  lyrics->read(e);
                   Segment* segment = tick2segment(lyrics->tick());
                   if (segment == 0) {
                         printf("no segment for lyrics at %d\n",
@@ -2323,7 +2321,7 @@ void Measure::read(QDomNode node, int idx)
                   }
             else if (tag == "Text") {
                   Text* t = new Text(score());
-                  t->read(node);
+                  t->read(e);
                   if (t->anchor() != ANCHOR_PAGE) {
                         t->setTick(curTickPos);
                         t->setStaff(staff);
@@ -2334,19 +2332,19 @@ void Measure::read(QDomNode node, int idx)
             else if (tag == "work-title") {
                   Text* t = new Text(score());
                   t->setSubtype(TEXT_TITLE);
-                  t->read(node);
+                  t->read(e);
                   add(t);
                   }
             else if (tag == "creator-composer") {
                   Text* t = new Text(score());
                   t->setSubtype(TEXT_COMPOSER);
-                  t->read(node);
+                  t->read(e);
                   add(t);
                   }
             else if (tag == "work-number") {
                   Text* t = new Text(score());
                   t->setSubtype(TEXT_SUBTITLE);
-                  t->read(node);
+                  t->read(e);
                   add(t);
                   }
             //-------------------------------------
@@ -2354,42 +2352,42 @@ void Measure::read(QDomNode node, int idx)
                   TempoText* t = new TempoText(score());
                   t->setTick(curTickPos);
                   t->setStaff(staff);
-                  t->read(node);
+                  t->read(e);
                   add(t);
                   }
             else if (tag == "Symbol") {
                   Symbol* sym = new Symbol(score());
                   sym->setTick(curTickPos);
                   sym->setStaff(staff);
-                  sym->read(node);
+                  sym->read(e);
                   add(sym);
                   }
             else if (tag == "Ottava") {
                   Ottava* ottava = new Ottava(score());
                   ottava->setTick(curTickPos);
                   ottava->setStaff(staff);
-                  ottava->read(node);
+                  ottava->read(e);
                   add(ottava);
                   }
             else if (tag == "Volta") {
                   Volta* volta = new Volta(score());
                   volta->setTick(curTickPos);
                   volta->setStaff(staff);
-                  volta->read(node);
+                  volta->read(e);
                   add(volta);
                   }
             else if (tag == "Trill") {
                   Trill* trill = new Trill(score());
                   trill->setTick(curTickPos);
                   trill->setStaff(staff);
-                  trill->read(node);
+                  trill->read(e);
                   add(trill);
                   }
             else if (tag == "Pedal") {
                   Pedal* pedal = new Pedal(score());
                   pedal->setTick(curTickPos);
                   pedal->setStaff(staff);
-                  pedal->read(node);
+                  pedal->read(e);
                   add(pedal);
                   }
             else if (tag == "stretch")
@@ -2397,14 +2395,14 @@ void Measure::read(QDomNode node, int idx)
             else if (tag == "LayoutBreak") {
                   LayoutBreak* lb = new LayoutBreak(score());
                   lb->setStaff(staff);
-                  lb->read(node);
+                  lb->read(e);
                   add(lb);
                   }
             else if (tag == "irregular")
                   _irregular = true;
             else if (tag == "Tuplet") {
                   Tuplet* tuplet = new Tuplet(score());
-                  tuplet->read(node);
+                  tuplet->read(e);
                   tuplet->setStaff(staff);
                   _tuplets.append(tuplet);
                   }
@@ -2417,16 +2415,9 @@ void Measure::read(QDomNode node, int idx)
             else if (tag == "Image") {
                   // look ahead for image type
                   QString path;
-                  for (QDomNode n = node.firstChild(); !n.isNull(); n = n.nextSibling()) {
-                        QDomElement e = n.toElement();
-                        if (e.isNull())
-                              continue;
-                        QString tag(e.tagName());
-                        if (tag == "path") {
-                              path = e.text();
-                              break;
-                              }
-                        }
+                  QDomElement ee = e.firstChildElement("path");
+                  if (!ee.isNull())
+                        path = ee.text();
                   Image* image = 0;
                   if (path.endsWith(".svg"))
                         image = new SvgImage(score());
@@ -2440,12 +2431,12 @@ void Measure::read(QDomNode node, int idx)
                         printf("unknown image format <%s>\n", path.toLatin1().data());
                         }
                   if (image) {
-                        image->read(node);
+                        image->read(e);
                         add(image);
                         }
                   }
             else
-                  domError(node);
+                  domError(e);
             }
       }
 
@@ -2453,20 +2444,16 @@ void Measure::read(QDomNode node, int idx)
 //   read
 //---------------------------------------------------------
 
-void Measure::read(QDomNode node)
+void Measure::read(QDomElement e)
       {
-      QDomElement e = node.toElement();
       int curTickPos = e.attribute("tick", "0").toInt();
       setTick(curTickPos);
       int staffIdx = 0;
-      for (node = node.firstChild(); !node.isNull(); node = node.nextSibling()) {
-            QDomElement e = node.toElement();
-            if (e.isNull())
-                  continue;
+      for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             QString tag(e.tagName());
             QString val(e.text());
             if (tag == "Staff") {
-                  read(node, staffIdx);
+                  read(e, staffIdx);
                   ++staffIdx;
                   }
             else if (tag == "startRepeat")
@@ -2481,7 +2468,7 @@ void Measure::read(QDomNode node)
                   _userStretch = val.toDouble();
             else if (tag == "Text") {
                   Text* t = new Text(score());
-                  t->read(node);
+                  t->read(e);
                   if (t->anchor() != ANCHOR_PAGE) {
                         t->setTick(curTickPos);
                         t->setStaff(0);
@@ -2489,7 +2476,7 @@ void Measure::read(QDomNode node)
                   add(t);
                   }
             else
-                  domError(node);
+                  domError(e);
             }
       }
 

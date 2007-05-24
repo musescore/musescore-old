@@ -51,7 +51,7 @@ class Image : public BSymbol {
       Image(Score*);
       virtual ElementType type() const { return IMAGE; }
       virtual void write(Xml& xml) const;
-      virtual void read(QDomNode);
+      virtual void read(QDomElement);
       virtual void setPath(const QString& s);
       QString path() const;
       virtual QRectF bbox() const;

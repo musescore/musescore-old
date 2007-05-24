@@ -317,7 +317,7 @@ extern QMenu* genCreateMenu(QWidget* parent);
 extern MuseScore* mscore;
 
 extern void writeShortcuts(Xml& xml);
-extern void readShortcuts(QDomNode);
+extern void readShortcuts(QDomElement);
 extern QAction* getAction(const char*);
 extern QMap<QString, Shortcut*> shortcuts;
 

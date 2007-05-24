@@ -53,8 +53,8 @@ class Clef : public Compound {
       void setSmall(bool val);
       virtual void setSubtype(int st);
       virtual void space(double& min, double& extra) const;
-      virtual bool acceptDrop(Viewer*, const QPointF&, int, const QDomNode&) const;
-      virtual Element* drop(const QPointF&, const QPointF&, int, const QDomNode&);
+      virtual bool acceptDrop(Viewer*, const QPointF&, int, const QDomElement&) const;
+      virtual Element* drop(const QPointF&, const QPointF&, int, const QDomElement&);
       };
 
 //---------------------------------------------------------
@@ -107,7 +107,7 @@ class ClefList : public std::map<const int, int> {
       ClefList() {}
       int clef(int tick) const;
       void setClef(int tick, int idx);
-      void read(QDomNode, Score*);
+      void read(QDomElement, Score*);
       void write(Xml&, const char* name) const;
       void removeTime(int, int);
       void insertTime(int, int);

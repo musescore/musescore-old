@@ -44,7 +44,7 @@ struct Instrument {
       int  maxPitch;
 
       Instrument();
-      void read(QDomNode);
+      void read(QDomElement);
       void write(Xml& xml) const;
       };
 
@@ -65,7 +65,7 @@ class Part {
    public:
       Part(Score*);
       ~Part();
-      void read(Score*, QDomNode);
+      void read(Score*, QDomElement);
       void write(Xml& xml) const;
       int nstaves() const;
       StaffList* staves() const                { return _staves; }

@@ -117,7 +117,7 @@ class Chord : public ChordRest {
 
       void computeUp();
       void init();
-      void readSlur(QDomNode, int staff);
+      void readSlur(QDomElement, int staff);
       virtual qreal upPos()   const;
       virtual qreal downPos() const;
       virtual qreal centerX() const;
@@ -133,7 +133,7 @@ class Chord : public ChordRest {
 
       virtual void draw(QPainter&);
       virtual void write(Xml& xml) const;
-      virtual void read(QDomNode, int staff);
+      virtual void read(QDomElement, int staff);
       virtual void setSelected(bool f);
       virtual void dump() const;
 
@@ -172,7 +172,7 @@ class Chord : public ChordRest {
       virtual int upLine() const;
       virtual int downLine() const;
       virtual void space(double& min, double& extra) const;
-      void readNote(QDomNode node, int staffIdx);
+      void readNote(QDomElement node, int staffIdx);
       };
 
 #endif

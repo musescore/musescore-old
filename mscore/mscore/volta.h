@@ -46,7 +46,7 @@ class Volta : public Element {
       virtual void layout(ScoreLayout*);
       void setLen(qreal);
       virtual void write(Xml&) const;
-      virtual void read(QDomNode);
+      virtual void read(QDomElement);
       virtual QRectF bbox() const;
       virtual bool isMovable() const { return true; }
       };

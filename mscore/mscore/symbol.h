@@ -43,7 +43,7 @@ class Symbol : public BSymbol {
 
       virtual void draw(QPainter&);
       virtual void write(Xml& xml) const;
-      virtual void read(QDomNode);
+      virtual void read(QDomElement);
       virtual QRectF bbox() const;
       };
 

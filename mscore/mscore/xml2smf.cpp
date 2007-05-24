@@ -25,6 +25,9 @@
 
 static const char versionString[] = "0.1";
 
+QTextStream cout(stdout);
+QTextStream eout(stderr);
+
 int division         = 480;
 bool debugMode       = false;
 bool noRunningStatus = false;
@@ -124,12 +127,9 @@ int main(int argc, char* argv[])
             }
 
       MidiFile mf;
-      for (QDomNode node = doc.documentElement(); !node.isNull(); node = node.nextSibling()) {
-            QDomElement e = node.toElement();
-            if (e.isNull())
-                  continue;
+      for (QDomElement e = doc.documentElement(); !e.isNull(); e = e.nextSiblingElement()) {
             if (e.tagName() == "SMF") {
-                  mf.readXml(node);
+                  mf.readXml(e);
                   break;
                   }
             }

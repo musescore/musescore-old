@@ -37,7 +37,7 @@ struct SigEvent {
       int bar;                      ///< precomputed value
       int ticks;                    ///< ticks per measure, precomputed value
 
-      int read(QDomNode, int division, int fileDivision);
+      int read(QDomElement, int division, int fileDivision);
       void write(Xml&, int) const;
 
       SigEvent() { nominator = 0; }
@@ -66,7 +66,7 @@ class SigList : public std::map<const int, SigEvent > {
 
       void del(int tick);
 
-      void read(QDomNode, int div = 1, int fileDiv = 1);
+      void read(QDomElement, int div = 1, int fileDiv = 1);
       void write(Xml&) const;
 
       void timesig(int tick, int& z, int& n) const;

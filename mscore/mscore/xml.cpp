@@ -244,9 +244,8 @@ void Xml::dump(int len, const unsigned char* p)
 //   readPoint
 //---------------------------------------------------------
 
-QPointF readPoint(QDomNode node)
+QPointF readPoint(QDomElement e)
       {
-      QDomElement e = node.toElement();
       QPointF p;
       p.setX(e.attribute("x", "0.0").toDouble());
       p.setY(e.attribute("y", "0.0").toDouble());
@@ -257,9 +256,8 @@ QPointF readPoint(QDomNode node)
 //   readSize
 //---------------------------------------------------------
 
-QSizeF readSize(QDomNode node)
+QSizeF readSize(QDomElement e)
       {
-      QDomElement e = node.toElement();
       QSizeF p;
       p.setWidth(e.attribute("w", "0.0").toDouble());
       p.setHeight(e.attribute("h", "0.0").toDouble());
@@ -270,12 +268,11 @@ QSizeF readSize(QDomNode node)
 //   domError
 //---------------------------------------------------------
 
-void domError(QDomNode node)
+void domError(QDomElement e)
       {
-      QDomElement e = node.toElement();
       QString tag(e.tagName());
       QString s;
-      QDomNode dn(node);
+      QDomNode dn(e);
       while (!dn.parentNode().isNull()) {
             dn = dn.parentNode();
             const QDomElement e = dn.toElement();
@@ -285,9 +282,9 @@ void domError(QDomNode node)
             s += k;
             }
       fprintf(stderr, "%s: Unknown Node <%s>, type %d\n",
-         s.toLatin1().data(), tag.toLatin1().data(), node.nodeType());
-      if (node.isText()) {
-            fprintf(stderr, "  text node <%s>\n", node.toText().data().toLatin1().data());
+         s.toLatin1().data(), tag.toLatin1().data(), e.nodeType());
+      if (e.isText()) {
+            fprintf(stderr, "  text node <%s>\n", e.toText().data().toLatin1().data());
             }
       }
 
@@ -295,14 +292,13 @@ void domError(QDomNode node)
 //   domNotImplemented
 //---------------------------------------------------------
 
-void domNotImplemented(QDomNode node)
+void domNotImplemented(QDomElement e)
       {
       if (!debugMode)
             return;
-      QDomElement e = node.toElement();
       QString tag(e.tagName());
       QString s;
-      QDomNode dn(node);
+      QDomNode dn(e);
       while (!dn.parentNode().isNull()) {
             dn = dn.parentNode();
             const QDomElement e = dn.toElement();
@@ -312,9 +308,9 @@ void domNotImplemented(QDomNode node)
             s += k;
             }
       fprintf(stderr, "%s: Node not implemented: <%s>, type %d\n",
-         s.toLatin1().data(), tag.toLatin1().data(), node.nodeType());
-      if (node.isText()) {
-            fprintf(stderr, "  text node <%s>\n", node.toText().data().toLatin1().data());
+         s.toLatin1().data(), tag.toLatin1().data(), e.nodeType());
+      if (e.isText()) {
+            fprintf(stderr, "  text node <%s>\n", e.toText().data().toLatin1().data());
             }
       }
 

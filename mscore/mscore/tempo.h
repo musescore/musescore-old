@@ -39,7 +39,7 @@ struct TEvent {
       int tick;            // new tempo at tick
       double time;         // precomputed time for tick in sec
 
-      int read(QDomNode, Score*);
+      int read(QDomElement, Score*);
       void write(Xml&, int) const;
 
       TEvent() { }
@@ -75,7 +75,7 @@ class TempoList : public pstl::ipmap<TEvent* > {
       TempoList();
       void clear();
 
-      void read(QDomNode, Score*);
+      void read(QDomElement, Score*);
       void write(Xml&) const;
       void dump() const;
 

@@ -61,7 +61,7 @@ class Bracket : public Element {
 
       virtual void draw(QPainter&);
       virtual void write(Xml& xml) const;
-      virtual void read(QDomNode);
+      virtual void read(QDomElement);
       virtual void layout(ScoreLayout*);
 
       virtual bool startEdit(QMatrix&,const QPointF&);
@@ -70,8 +70,8 @@ class Bracket : public Element {
       virtual bool startEditDrag(Viewer*, const QPointF&);
       virtual bool editDrag(Viewer*, QPointF*, const QPointF&);
       virtual bool endEditDrag();
-      virtual bool acceptDrop(Viewer*, const QPointF&, int, const QDomNode&) const;
-      virtual Element* drop(const QPointF&, const QPointF&, int, const QDomNode&);
+      virtual bool acceptDrop(Viewer*, const QPointF&, int, const QDomElement&) const;
+      virtual Element* drop(const QPointF&, const QPointF&, int, const QDomElement&);
       };
 
 #endif

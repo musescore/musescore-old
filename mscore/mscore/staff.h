@@ -88,7 +88,7 @@ class Staff {
       int rstaff() const             { return _rstaff; }
       int idx() const;
       void setRstaff(int n)          { _rstaff = n; }
-      void read(QDomNode);
+      void read(QDomElement);
       void write(Xml& xml) const;
       Instrument* instrument() const;
       Part* part() const             { return _part;        }

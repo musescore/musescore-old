@@ -89,14 +89,14 @@ class MusicXml {
       void addWedge(int no, int startPos, qreal rx, qreal ry, int subType);
       void genWedge(int no, int endPos, Measure*, int staff);
 
-      void direction(Measure* measure, int staff, QDomNode node);
-      void scorePartwise(QDomNode);
-      void xmlPartList(QDomNode);
-      void xmlPart(QDomNode, QString id);
-      void xmlScorePart(QDomNode node, QString id);
-      void xmlMeasure(Part*, QDomNode, int);
-      void xmlAttributes(Measure*, int stave, QDomNode node);
-      void xmlNote(Measure*, int stave, QDomNode node);
+      void direction(Measure* measure, int staff, QDomElement node);
+      void scorePartwise(QDomElement);
+      void xmlPartList(QDomElement);
+      void xmlPart(QDomElement, QString id);
+      void xmlScorePart(QDomElement node, QString id);
+      void xmlMeasure(Part*, QDomElement, int);
+      void xmlAttributes(Measure*, int stave, QDomElement node);
+      void xmlNote(Measure*, int stave, QDomElement node);
 
    public:
       MusicXml(QDomDocument* d);

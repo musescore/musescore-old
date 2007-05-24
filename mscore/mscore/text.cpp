@@ -351,13 +351,11 @@ void Text::write(Xml& xml, const char* name) const
 //   Text::read
 //---------------------------------------------------------
 
-void Text::read(QDomNode node)
+void Text::read(QDomElement e)
       {
-      for (node = node.firstChild(); !node.isNull(); node = node.nextSibling()) {
-            if (!node.isElement())
-                  continue;
-            if (!readProperties(node))
-                  domError(node);
+      for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
+            if (!readProperties(e))
+                  domError(e);
             }
       cursorPos = 0;
       }
@@ -396,11 +394,8 @@ void Text::writeProperties(Xml& xml) const
 //   readProperties
 //---------------------------------------------------------
 
-bool Text::readProperties(QDomNode node)
+bool Text::readProperties(QDomElement e)
       {
-      QDomElement e = node.toElement();
-      if (e.isNull())
-            return true;
       QString tag(e.tagName());
       QString val(e.text());
 
@@ -436,7 +431,7 @@ bool Text::readProperties(QDomNode node)
             }
       else if (tag == "spatiumSizeDependent")
             _sizeIsSpatiumDependent = val.toInt();
-      else if (!Element::readProperties(node))
+      else if (!Element::readProperties(e))
             return false;
       return true;
       }
@@ -739,19 +734,14 @@ void TempoText::write(Xml& xml) const
 //   read
 //---------------------------------------------------------
 
-void TempoText::read(QDomNode node)
+void TempoText::read(QDomElement e)
       {
-      for (node = node.firstChild(); !node.isNull(); node = node.nextSibling()) {
-            if (!node.isElement())
-                  continue;
-            QDomElement e = node.toElement();
+      for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             QString tag(e.tagName());
             if (tag == "tempo")
                   setTempo(e.text().toDouble());
-            else if (Text::readProperties(node))
-                  ;
-            else
-                  domError(node);
+            else if (!Text::readProperties(e))
+                  domError(e);
             }
       cursorPos = 0;
       }

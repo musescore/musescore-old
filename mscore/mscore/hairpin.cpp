@@ -112,11 +112,11 @@ void Hairpin::write(Xml& xml) const
 //   read
 //---------------------------------------------------------
 
-void Hairpin::read(QDomNode node)
+void Hairpin::read(QDomElement e)
       {
-      for (node = node.firstChild(); !node.isNull(); node = node.nextSibling()) {
-            if (!SLine::readProperties(node))
-                  domError(node);
+      for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
+            if (!SLine::readProperties(e))
+                  domError(e);
             }
       }
 

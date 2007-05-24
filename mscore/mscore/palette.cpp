@@ -476,20 +476,17 @@ void Palette::dropEvent(QDropEvent* event)
                   printf("error reading drag data\n");
                   return;
                   }
-            QDomNode node = doc.documentElement();
+            QDomElement el = doc.documentElement();
             QPointF dragOffset;
-            int type = Element::readType(node, &dragOffset);
+            int type = Element::readType(el, &dragOffset);
 
             if (type == IMAGE) {
                   // look ahead for image type
                   QString path;
-                  for (QDomNode n = node.firstChild(); !n.isNull(); n = n.nextSibling()) {
-                        QDomElement e = n.toElement();
-                        if (e.isNull())
-                              continue;
-                        QString tag(e.tagName());
+                  for (QDomElement ee = el.firstChildElement(); !ee.isNull(); ee = ee.nextSiblingElement()) {
+                        QString tag(ee.tagName());
                         if (tag == "path") {
-                              path = e.text();
+                              path = ee.text();
                               break;
                               }
                         }
@@ -505,13 +502,13 @@ void Palette::dropEvent(QDropEvent* event)
                         printf("unknown image format <%s>\n", path.toLatin1().data());
                         }
                   if (image) {
-                        image->read(node);
+                        image->read(el);
                         e = image;
                         }
                   }
             else if (type == SYMBOL) {
                   Symbol* s = new Symbol(0);
-                  s->read(node);
+                  s->read(el);
                   e = s;
                   }
             }
@@ -565,16 +562,13 @@ void Palette::write(Xml& xml, const char* name) const
 //   read
 //---------------------------------------------------------
 
-void Palette::read(QDomNode node)
+void Palette::read(QDomElement e)
       {
       int idx = 0;
       QString name = "";
       int r = 0;
       int c = 0;
-      for (node = node.firstChild(); !node.isNull(); node = node.nextSibling()) {
-            QDomElement e = node.toElement();
-            if (e.isNull())
-                  continue;
+      for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             QString tag(e.tagName());
             if (tag == "idx") {
                   idx = e.text().toInt();
@@ -592,13 +586,10 @@ void Palette::read(QDomNode node)
             else if (tag == "Image") {
                   // look ahead for image type
                   QString path;
-                  for (QDomNode n = node.firstChild(); !n.isNull(); n = n.nextSibling()) {
-                        QDomElement e = n.toElement();
-                        if (e.isNull())
-                              continue;
-                        QString tag(e.tagName());
+                  for (QDomElement ee = e.firstChildElement(); !ee.isNull(); ee = ee.nextSiblingElement()) {
+                        QString tag(ee.tagName());
                         if (tag == "path") {
-                              path = e.text();
+                              path = ee.text();
                               break;
                               }
                         }
@@ -614,17 +605,17 @@ void Palette::read(QDomNode node)
                         printf("unknown image format <%s>\n", path.toLatin1().data());
                         }
                   if (image) {
-                        image->read(node);
+                        image->read(e);
                         addObject(idx, image, name);
                         }
                   }
             else if (tag == "Symbol") {
                   Symbol* s = new Symbol(0);
-                  s->read(node);
+                  s->read(e);
                   addObject(idx, s, name);
                   }
             else
-                  domError(node);
+                  domError(e);
             }
       }
 

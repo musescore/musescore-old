@@ -209,7 +209,7 @@ class Score : public QObject {
 
       void clear();
       void write(Xml&);
-      void readStaff(QDomNode);
+      void readStaff(QDomElement);
 
       StaffList* staves() const     { return _staves; }
       int nstaves() const;
@@ -233,7 +233,7 @@ class Score : public QObject {
       Measure* pos2measure(const QPointF&, int* tick, Staff** staff, int* pitch,
          Segment**, QPointF* offset) const;
       Measure* pos2measure2(const QPointF&, int* tick, Staff** staff, int* pitch, Segment**) const;
-      void readGeometry(QDomNode);
+      void readGeometry(QDomElement);
       int snap(int tick, const QPointF) const;
       int snapNote(int tick, const QPointF, int staff) const;
 

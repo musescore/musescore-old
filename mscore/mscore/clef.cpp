@@ -207,7 +207,7 @@ void Clef::space(double& min, double& extra) const
 //   acceptDrop
 //---------------------------------------------------------
 
-bool Clef::acceptDrop(Viewer* viewer, const QPointF&, int type, const QDomNode&) const
+bool Clef::acceptDrop(Viewer* viewer, const QPointF&, int type, const QDomElement&) const
       {
       if (type == CLEF) {
             viewer->setDropTarget(this);
@@ -220,12 +220,12 @@ bool Clef::acceptDrop(Viewer* viewer, const QPointF&, int type, const QDomNode&)
 //   drop
 //---------------------------------------------------------
 
-Element* Clef::drop(const QPointF&, const QPointF&, int type, const QDomNode& node)
+Element* Clef::drop(const QPointF&, const QPointF&, int type, const QDomElement& e)
       {
       if (type != CLEF)
             return 0;
       Clef* clef = new Clef(0);
-      clef->read(node);
+      clef->read(e);
       int stype = clef->subtype();
       delete clef;
       int st = subtype();
@@ -286,12 +286,9 @@ void ClefList::write(Xml& xml, const char* name) const
 //   ClefList::read
 //---------------------------------------------------------
 
-void ClefList::read(QDomNode node, Score* cs)
+void ClefList::read(QDomElement e, Score* cs)
       {
-      for (node = node.firstChild(); !node.isNull(); node = node.nextSibling()) {
-            QDomElement e = node.toElement();
-            if (e.isNull())
-                  continue;
+      for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             QString tag(e.tagName());
             if (tag == "clef") {
                   int tick = e.attribute("tick", "0").toInt();
@@ -299,7 +296,7 @@ void ClefList::read(QDomNode node, Score* cs)
                   (*this)[cs->fileDivision(tick)] = idx;
                   }
             else
-                  domError(node);
+                  domError(e);
             }
       }
 

@@ -396,12 +396,9 @@ double PageFormat::height() const
 //    to reuse this code with MusicXml routines
 //---------------------------------------------------------
 
-void PageFormat::read(QDomNode node)
+void PageFormat::read(QDomElement e)
       {
-      for (node = node.firstChild(); !node.isNull(); node = node.nextSibling()) {
-            QDomElement e = node.toElement();
-            if (e.isNull())
-                  continue;
+      for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             QString tag(e.tagName());
             QString val(e.text());
             int i = val.toInt();
@@ -413,13 +410,10 @@ void PageFormat::read(QDomNode node)
             else if (tag == "page-margins") {
                   QString type = e.attribute("type","both");
                   double lm = 0.0, rm = 0.0, tm = 0.0, bm = 0.0;
-                  for (QDomNode n = node.firstChild(); !n.isNull(); n = n.nextSibling()) {
-                        QDomElement e = n.toElement();
-                        if (e.isNull())
-                              continue;
-                        QString tag(e.tagName());
-//                        double val = e.text().toDouble() * (20/4)/ PPI  * .1;
-                        double val = e.text().toDouble() * 0.5 / PPI;
+                  for (QDomElement ee = e.firstChildElement(); !ee.isNull(); ee = ee.nextSiblingElement()) {
+                        QString tag(ee.tagName());
+//                        double val = ee.text().toDouble() * (20/4)/ PPI  * .1;
+                        double val = ee.text().toDouble() * 0.5 / PPI;
                         if (tag == "left-margin")
                               lm = val;
                         else if (tag == "right-margin")
@@ -429,7 +423,7 @@ void PageFormat::read(QDomNode node)
                         else if (tag == "bottom-margin")
                               bm = val;
                         else
-                              domError(n);
+                              domError(ee);
                         }
                   twosided = type == "odd" || type == "even";
                   if (type == "odd" || type == "both") {
@@ -450,8 +444,7 @@ void PageFormat::read(QDomNode node)
             else if (tag == "page-width")	 	// TODO
                   ;
             else
-                  printf("Mscore:PageFormat: unknown tag %s\n",
-                     tag.toLatin1().data());
+                  domError(e);
             }
       }
 
