@@ -61,12 +61,13 @@ const char* eventRecordFile;
 
 static bool haveMidi;
 
-struct ProjectList {
+struct ProjectItem {
       QString name;
-      bool loaded;
       bool current;
+      bool loaded;
       };
-ProjectList projectList[PROJECT_LIST_LEN];
+
+QList<ProjectItem*> projectList;
 
 int appDpiX = 75;
 int appDpiY = 75;
@@ -117,6 +118,7 @@ void MuseScore::closeEvent(QCloseEvent* ev)
                   }
             }
       saveScoreList();
+      writeSettings();
       seq->stop();
       while(!seq->isStopped())
             usleep(50000);
@@ -129,8 +131,8 @@ void MuseScore::closeEvent(QCloseEvent* ev)
             pageListEdit->close();
       if (playPanel)
             playPanel->close();
-      if (symbolPalette)
-            symbolPalette->close();
+      if (symbolDialog)
+            symbolDialog->close();
       if (clefPalette)
             clefPalette->close();
       if (keyPalette)
@@ -210,7 +212,7 @@ MuseScore::MuseScore()
       iledit                = 0;
       pageListEdit          = 0;
       measureListEdit       = 0;
-      symbolPalette         = 0;
+      symbolDialog          = 0;
       clefPalette           = 0;
       keyPalette            = 0;
       timePalette           = 0;
@@ -928,30 +930,18 @@ void MuseScore::aboutQt()
       }
 
 //---------------------------------------------------------
-//   openRecentMenu
-//---------------------------------------------------------
-
-void MuseScore::openRecentMenu()
-      {
-      genRecentPopup(openRecent);
-      }
-
-//---------------------------------------------------------
 //   selectScore
 //---------------------------------------------------------
 
 void MuseScore::selectScore(QAction* action)
       {
-      int id = action->data().toInt();
-      if (id < 0)
-            return;
-      QString s = getScore(id).mid(2);
-      if (s.isEmpty())
-            return;
-      Score* score = new Score();
-      score->read(s);
-      appendScore(score);
-      tab->setCurrentIndex(scoreList.size() - 1);
+      ProjectItem* item = (ProjectItem*)action->data().value<void*>();
+      if (item) {
+            Score* score      = new Score();
+            score->read(item->name);
+            appendScore(score);
+            tab->setCurrentIndex(scoreList.size() - 1);
+            }
       }
 
 //---------------------------------------------------------
@@ -979,24 +969,21 @@ void MuseScore::appendScore(Score* score)
       removeTabButton->setVisible(showTabBar);
 
       QString name(score->filePath());
-      for (int i = 0; i < PROJECT_LIST_LEN; ++i) {
-            if (projectList[i].name.isEmpty())
-                  break;
-            if (name == projectList[i].name) {
-                  int dst = i;
-                  int src = i+1;
-                  int n   = PROJECT_LIST_LEN - i - 1;
-                  for (int k = 0; k < n; ++k)
-                        projectList[dst++] = projectList[src++];
-                  projectList[dst].name = "";
+
+      for (int i = 0; i < projectList.size(); ++i) {
+            if (projectList[i]->name == name) {
+                  delete projectList[i];
+                  projectList.removeAt(i);
                   break;
                   }
             }
-      ProjectList* s = &projectList[PROJECT_LIST_LEN - 2];
-      ProjectList* d = &projectList[PROJECT_LIST_LEN - 1];
-      for (int i = 0; i < PROJECT_LIST_LEN-1; ++i)
-            *d-- = *s--;
-      projectList[0].name = name;
+      if (projectList.size() >= PROJECT_LIST_LEN) {
+            ProjectItem* item = projectList.takeLast();
+            delete item;
+            }
+      ProjectItem* item = new ProjectItem;
+      item->name = name;
+      projectList.prepend(item);
       getAction("file-close")->setEnabled(scoreList.size() > 1);
       }
 
@@ -1033,33 +1020,31 @@ void MuseScore::editTextStyle()
 
 void MuseScore::saveScoreList()
       {
-      QFile f(QDir::homePath() + "/.mscorePrj");
-      if (!f.open(QIODevice::WriteOnly))
-            return;
-      int n = scoreList.size();
-      QTextStream out(&f);
-      for (int i = PROJECT_LIST_LEN-1; i >= 0; --i) {
-            if (projectList[i].name.isEmpty())
-                  continue;
+      QSettings settings;
+
+      int n  = scoreList.size();
+      int pn = projectList.size();
+      for (int i = pn - 1; i >= 0; --i) {
             bool loaded  = false;
             bool current = false;
             for (int k = 0; k < n; ++k) {
-                  if (scoreList[k]->filePath() == projectList[i].name) {
+                  if (scoreList[k]->filePath() == projectList[i]->name) {
                         loaded = true;
                         if (scoreList[k] == cs)
                               current = true;
                         break;
                         }
                   }
+            QString s;
             if (current)
-                  out << '+';
+                  s += "+";
             else if (loaded)
-                  out << '*';
+                  s += "*";
             else
-                  out << ' ';
-            out << " " << projectList[i].name << '\n';
+                  s += " ";
+            s += projectList[i]->name;
+            settings.setValue(QString("recent-%1").arg(i), s);
             }
-      f.close();
       }
 
 //---------------------------------------------------------
@@ -1069,58 +1054,33 @@ void MuseScore::saveScoreList()
 
 void MuseScore::loadScoreList()
       {
-      QFile f(QDir::homePath() + "/.mscorePrj");
-      if (!f.open(QIODevice::ReadOnly))
-            return;
-
+      QSettings s;
       for (int i = 0; i < PROJECT_LIST_LEN; ++i) {
-            QByteArray buffer = f.readLine(512);
+            QString buffer = s.value(QString("recent-%1").arg(i)).toString();
             int n = buffer.size();
-            if (n <= 0)
-                  break;
-            if (n && buffer[n-1] == '\n')
-                  buffer[n-1] = 0;
-            if (strlen(buffer) >= 3) {
-                  projectList[i].name    = QString(buffer.data() + 2);
-                  projectList[i].current = (buffer[0] == '+');
-                  projectList[i].loaded  = (buffer[0] != ' ');
+            if (n >= 2) {
+                  ProjectItem* item = new ProjectItem;
+                  item->name    = buffer.mid(1);
+                  item->current = (buffer[0] == '+');
+                  item->loaded  = (buffer[0] != ' ');
+                  projectList.append(item);
                   }
-            else
-                  break;
-            }
-      f.close();
-      }
-
-//---------------------------------------------------------
-//   genRecentPopup
-//---------------------------------------------------------
-
-void MuseScore::genRecentPopup(QMenu* popup) const
-      {
-      popup->clear();
-      for (int i = 0; i < PROJECT_LIST_LEN; ++i) {
-            if (projectList[i].name.isEmpty())
-                  break;
-            const char* path = projectList[i].name.toLatin1().data();
-            const char* p = strrchr(path, '/');
-            if (p == 0)
-                  p = path;
-            else
-                  ++p;
-            QAction* action = popup->addAction(QString(p));
-            action->setData(i);
             }
       }
 
 //---------------------------------------------------------
-//   getTopScore
+//   openRecentMenu
 //---------------------------------------------------------
 
-QString MuseScore::getScore(int idx) const
+void MuseScore::openRecentMenu()
       {
-      if (idx >= PROJECT_LIST_LEN)
-            idx = PROJECT_LIST_LEN - 1;
-      return projectList[idx].name;
+      openRecent->clear();
+      for (int i = 0; i < projectList.size(); ++i) {
+            const ProjectItem* item = projectList[i];
+            QFileInfo fi(item->name);
+            QAction* action = openRecent->addAction(fi.baseName());
+            action->setData(QVariant::fromValue<void*>((void*)item));
+            }
       }
 
 //---------------------------------------------------------
@@ -1541,7 +1501,10 @@ int main(int argc, char* argv[])
       padState.pitch = 60;
       setDefaultStyle();
       QApplication app(argc, argv);
-      preferences.createSymbolPalette();
+      QCoreApplication::setOrganizationName("MusE");
+      QCoreApplication::setOrganizationDomain("muse.org");
+      QCoreApplication::setApplicationName("MuseScore");
+//      preferences.createSymbolPalette();
 
 #ifdef __MINGW32__
       appDpiX = 75;
@@ -1587,6 +1550,14 @@ int main(int argc, char* argv[])
       haveMidi = !initMidi();
 
       initSymbols();
+      //
+      // initialize shortcut hash table
+      //
+      for (unsigned i = 0;; ++i) {
+            if (MuseScore::sc[i].xml == 0)
+                  break;
+            shortcuts[MuseScore::sc[i].xml] = new Shortcut(MuseScore::sc[i]);
+            }
       preferences.read();
 
       QSplashScreen* sc = 0;
@@ -1632,14 +1603,6 @@ int main(int argc, char* argv[])
                   printf("locale file not found for locale <%s>\n",
                      QLocale::system().name().toLatin1().data());
                   }
-            }
-      //
-      // initialize shortcut hash table
-      //
-      for (unsigned i = 0;; ++i) {
-            if (MuseScore::sc[i].xml == 0)
-                  break;
-            shortcuts[MuseScore::sc[i].xml] = new Shortcut(MuseScore::sc[i]);
             }
 
 
@@ -1738,7 +1701,8 @@ int main(int argc, char* argv[])
 
       initSymbols();    // again!?!
       genIcons();
-      new MuseScore();
+      mscore = new MuseScore();
+      mscore->readSettings();
 
       int currentScore = 0;
       int idx = 0;
@@ -1746,14 +1710,12 @@ int main(int argc, char* argv[])
       if (argc < 2) {
             switch (preferences.sessionStart) {
                   case LAST_SESSION:
-                        for (int i = 0; i < PROJECT_LIST_LEN; ++i) {
-                              if (projectList[i].name.isEmpty())
-                                    break;
-                              if (projectList[i].loaded) {
+                        foreach(const ProjectItem* item, projectList) {
+                              if (item->loaded) {
                                     Score* score = new Score();
                                     scoreCreated = true;
-                                    score->read(projectList[i].name);
-                                    if (projectList[i].current)
+                                    score->read(item->name);
+                                    if (item->current)
                                           currentScore = idx;
                                     mscore->appendScore(score);
                                     ++idx;
@@ -1787,8 +1749,6 @@ int main(int argc, char* argv[])
             // start with empty score:
             mscore->appendScore(new Score());
 
-      mscore->resize(scoreSize);
-      mscore->move(scorePos);
       mscore->setCurrentScore(currentScore);
       mscore->showNavigator(preferences.showNavigator);
       mscore->showPad(preferences.showPad);
@@ -1946,5 +1906,31 @@ Shortcut::Shortcut(const Shortcut& c)
       descr   = qApp->translate("MuseScore", c.descr.toLatin1().data());
       help    = qApp->translate("MuseScore", c.help.toLatin1().data());
       text    = qApp->translate("MuseScore", c.text.toLatin1().data());
+      }
+
+//---------------------------------------------------------
+//   writeSettings
+//---------------------------------------------------------
+
+void MuseScore::writeSettings()
+      {
+      QSettings settings;
+      settings.beginGroup("MainWindow");
+      settings.setValue("size", size());
+      settings.setValue("pos", pos());
+      settings.endGroup();
+      }
+
+//---------------------------------------------------------
+//   readSettings
+//---------------------------------------------------------
+
+void MuseScore::readSettings()
+      {
+      QSettings settings;
+      settings.beginGroup("MainWindow");
+      resize(settings.value("size", QSize(950, 500)).toSize());
+      move(settings.value("pos", QPoint(10, 10)).toPoint());
+      settings.endGroup();
       }
 

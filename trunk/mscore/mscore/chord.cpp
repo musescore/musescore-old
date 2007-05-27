@@ -683,13 +683,16 @@ Note* Chord::selectedNote() const
 
 void Chord::write(Xml& xml) const
       {
-      if (ChordRest::isSimple(xml) && notes.size() == 1) {
-            ciNote in = notes.begin();
-            Note* note = in->second;
-            if (note->isSimple(xml)) {
+      ciNote in = notes.begin();
+      Note* note = in->second;
+
+      if (ChordRest::isSimple(xml) && notes.size() == 1 && note->isSimple(xml)) {
+            if (tick() != xml.curTick)
+                  xml.tagE(QString("Note tick=\"%1\" pitch=\"%2\" tpc=\"%3\" ticks=\"%4\"")
+                     .arg(tick()).arg(note->pitch()).arg(note->tpc()).arg(tickLen()));
+            else
                   xml.tagE(QString("Note pitch=\"%1\" tpc=\"%2\" ticks=\"%3\"")
                      .arg(note->pitch()).arg(note->tpc()).arg(tickLen()));
-                  }
             }
       else {
             xml.stag("Chord");
@@ -701,7 +704,7 @@ void Chord::write(Xml& xml) const
                   case DOWN: xml.tag("StemDirection", QVariant("down")); break;
                   case AUTO: break;
                   }
-            for (ciNote in = notes.begin(); in != notes.end(); ++in)
+            for (; in != notes.end(); ++in)
                   in->second->write(xml);
             xml.etag();
             }

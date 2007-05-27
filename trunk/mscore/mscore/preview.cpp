@@ -60,7 +60,7 @@ void PagePreview::setScore(Score* s)
             Measure* nm = new Measure(_score);
             QByteArray data(mimeData->data(mimeType));
 
-printf("DATA\n%s\n", data.data());
+// printf("DATA\n%s\n", data.data());
 
             QDomDocument doc;
             int line, column;
