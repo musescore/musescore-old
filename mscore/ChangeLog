@@ -1,3 +1,9 @@
+27.5.7 (ws)
+      - dont use .mscorePrj anymore; move infos from .mscorePrj
+        into QSettings
+25.5.7 (ws)
+      - use QSettings for preferences; move main widget geometry setting
+        from score file to settings.
 24.5.7 (ws)
       - replace QDomNode with QDomElement were appropriate
 23.5.7 (ws)

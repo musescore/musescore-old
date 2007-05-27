@@ -46,6 +46,8 @@
 #include "pad.h"
 #include "layout.h"
 #include "barline.h"
+#include "palette.h"
+#include "symboldialog.h"
 
 //---------------------------------------------------------
 //   readInstrument
@@ -461,18 +463,6 @@ void StaffLines::read(QDomElement e)
       }
 
 //---------------------------------------------------------
-//   readGeometry
-//---------------------------------------------------------
-
-void Score::readGeometry(QDomElement e)
-      {
-      scorePos.setX(e.attribute("x", "0").toInt());
-      scorePos.setY(e.attribute("y", "0").toInt());
-      scoreSize.setWidth(e.attribute("w", "0").toInt());
-      scoreSize.setHeight(e.attribute("h", "0").toInt());
-      }
-
-//---------------------------------------------------------
 //   loadStyle
 //---------------------------------------------------------
 
@@ -561,7 +551,6 @@ bool MuseScore::saveFile(QFile* f)
       xml.header();
       xml.stag("museScore version=\"1.0\"");
 
-      xml.tag("Geometry", mscore);
       xml.tag("Spatium", _spatium / DPMM);
       xml.tag("Division", division);
       xml.tag("Mag",  canvas->mag());
@@ -569,6 +558,8 @@ bool MuseScore::saveFile(QFile* f)
       xml.tag("yoff", canvas->yoffset());
 
       ::saveStyle(xml);       // should style really saved with score?
+
+      ::symbolPalette->write(xml, "Symbols");
 
       cs->write(xml);
 
@@ -623,8 +614,6 @@ bool Score::loadFile(QFile* qf)
                               cis->staff = i;
                         else if (tag == "cursorVoice")
                               cis->voice = i;
-                        else if (tag == "Geometry")
-                              readGeometry(ee);
                         else if (tag == "Mag")
                               setMag(val.toDouble());
                         else if (tag == "xoff")
@@ -656,6 +645,8 @@ bool Score::loadFile(QFile* qf)
                               }
                         else if (tag == "showInvisible")
                               _showInvisible = i;
+                        else if (tag == "Symbols")
+                              symbolPalette->read(ee);
                         else
                               domError(ee);
                         }
@@ -798,7 +789,7 @@ void Score::printFile()
       printer.setFullPage(true);
       printer.setColorMode(QPrinter::Color);
       printer.setDocName(projectName());
-//Qt4.3      printer.setDoubleSidedPrinting(pageFormat()->twosided);
+      printer.setDoubleSidedPrinting(pageFormat()->twosided);
 
       QPrintDialog pd(&printer, 0);
       if (!pd.exec())

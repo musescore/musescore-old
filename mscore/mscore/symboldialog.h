@@ -26,6 +26,8 @@
 class Palette;
 class Element;
 
+extern Palette* symbolPalette;
+
 //---------------------------------------------------------
 //   SymbolDialog
 //---------------------------------------------------------

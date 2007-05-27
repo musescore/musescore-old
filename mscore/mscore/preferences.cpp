@@ -33,6 +33,9 @@
 #include "sym.h"
 #include "palette.h"
 
+extern void writeShortcuts();
+extern void readShortcuts();
+
 QString appStyleSheet(
       "Pad *             { background-color: rgb(220, 220, 220) }\n"
       "PaletteBoxButton  { background-color: rgb(215, 215, 215) }\n"
@@ -85,8 +88,6 @@ static void stemDir2button(Direction dir, QRadioButton *up, QRadioButton *down, 
 //---------------------------------------------------------
 
 Preferences preferences;
-static const int ROWS = 11;
-static const int COLUMNS = 16;
 
 Preferences::Preferences()
       {
@@ -146,174 +147,7 @@ Preferences::Preferences()
       len6.type          = -1;
       len12.type         = -1;
       len24.type         = -1;
-      sp = 0;
       };
-
-//---------------------------------------------------------
-//   createSymbolPalette
-//---------------------------------------------------------
-
-void Preferences::createSymbolPalette()
-      {
-      sp = new Palette(ROWS, COLUMNS);
-      sp->addObject(0, wholerestSym);
-      sp->addObject(1, halfrestSym);
-      sp->addObject(2, outsidewholerestSym);
-      sp->addObject(3, outsidehalfrestSym);
-      sp->addObject(4, longarestSym);
-      sp->addObject(5, breverestSym);
-      sp->addObject(6, quartrestSym);
-      sp->addObject(7, eighthrestSym);
-      sp->addObject(8, clasquartrestSym);
-      sp->addObject(9, sixteenthrestSym);
-      sp->addObject(10, thirtysecondrestSym);
-      sp->addObject(11, sixtyfourthrestSym);
-      sp->addObject(12, hundredtwentyeighthrestSym);
-      sp->addObject(16, zeroSym);
-      sp->addObject(17, oneSym);
-      sp->addObject(18, twoSym);
-      sp->addObject(19, threeSym);
-      sp->addObject(20, fourSym);
-      sp->addObject(21, fiveSym);
-      sp->addObject(22, sixSym);
-      sp->addObject(23, sevenSym);
-      sp->addObject(24, eightSym);
-      sp->addObject(25, nineSym);
-      sp->addObject(31, sharpSym);
-      sp->addObject(32, naturalSym);
-      sp->addObject(33, flatSym);
-      sp->addObject(34, flatflatSym);
-      sp->addObject(35, sharpsharpSym);
-      sp->addObject(36, rightparenSym);
-      sp->addObject(37, leftparenSym);
-      sp->addObject(38, dotSym);
-      sp->addObject(39, brevisheadSym);
-      sp->addObject(40, wholeheadSym);
-      sp->addObject(41, halfheadSym);
-      sp->addObject(42, quartheadSym);
-      sp->addObject(43, wholediamondheadSym);
-      sp->addObject(44, halfdiamondheadSym);
-      sp->addObject(45, diamondheadSym);
-      sp->addObject(46, wholetriangleheadSym);
-      sp->addObject(47, halftriangleheadSym);
-      sp->addObject(48, triangleheadSym);
-      sp->addObject(49, wholeslashheadSym);
-      sp->addObject(50, halfslashheadSym);
-      sp->addObject(51, quartslashheadSym);
-      sp->addObject(52, wholecrossedheadSym);
-      sp->addObject(53, halfcrossedheadSym);
-      sp->addObject(54, crossedheadSym);
-      sp->addObject(55, xcircledheadSym);
-      sp->addObject(57, ufermataSym);
-      sp->addObject(58, dfermataSym);
-      sp->addObject(59, thumbSym);
-      sp->addObject(60, sforzatoaccentSym);
-      sp->addObject(61, staccatoSym);
-      sp->addObject(62, ustaccatissimoSym);
-      sp->addObject(63, dstaccatissimoSym);
-      sp->addObject(64, tenutoSym);
-      sp->addObject(65, uportatoSym);
-      sp->addObject(66, dportatoSym);
-      sp->addObject(67, umarcatoSym);
-      sp->addObject(68, dmarcatoSym);
-      sp->addObject(69, ouvertSym);
-      sp->addObject(70, plusstopSym);
-      sp->addObject(71, upbowSym);
-      sp->addObject(72, downbowSym);
-      sp->addObject(73, reverseturnSym);
-      sp->addObject(74, turnSym);
-      sp->addObject(75, trillSym);
-      sp->addObject(76, upedalheelSym);
-      sp->addObject(77, dpedalheelSym);
-      sp->addObject(78, upedaltoeSym);
-      sp->addObject(79, dpedaltoeSym);
-      sp->addObject(80, flageoletSym);
-      sp->addObject(81, segnoSym);
-      sp->addObject(82, codaSym);
-      sp->addObject(83, rcommaSym);
-      sp->addObject(84, lcommaSym);
-      sp->addObject(85, arpeggioSym);
-      sp->addObject(86, trillelementSym);
-      sp->addObject(87, arpeggioarrowdownSym);
-      sp->addObject(88, arpeggioarrowupSym);
-      sp->addObject(89, trilelementSym);
-      sp->addObject(90, prallSym);
-      sp->addObject(91, mordentSym);
-      sp->addObject(92, prallprallSym);
-      sp->addObject(93, prallmordentSym);
-      sp->addObject(94, upprallSym);
-      sp->addObject(95, downprallSym);
-      sp->addObject(96, upmordentSym);
-      sp->addObject(97, downmordentSym);
-      sp->addObject(98, lineprallSym);
-      sp->addObject(99, pralldownSym);
-      sp->addObject(101, prallupSym);
-      sp->addObject(102, eighthflagSym);
-      sp->addObject(103, sixteenthflagSym);
-      sp->addObject(104, thirtysecondflagSym);
-      sp->addObject(105, sixtyfourthflagSym);
-      sp->addObject(106, deighthflagSym);
-      sp->addObject(107, gracedashSym);
-      sp->addObject(108, dgracedashSym);
-      sp->addObject(109, dsixteenthflagSym);
-      sp->addObject(110, dthirtysecondflagSym);
-      sp->addObject(111, dsixtyfourthflagSym);
-      sp->addObject(112, stemSym);
-      sp->addObject(113, dstemSym);
-      sp->addObject(114, altoclefSym);
-      sp->addObject(115, caltoclefSym);
-      sp->addObject(116, bassclefSym);
-      sp->addObject(117, cbassclefSym);
-      sp->addObject(118, trebleclefSym);
-      sp->addObject(119, ctrebleclefSym);
-      sp->addObject(120, percussionclefSym);
-      sp->addObject(121, cpercussionclefSym);
-      sp->addObject(122, tabclefSym);
-      sp->addObject(123, ctabclefSym);
-      sp->addObject(124, fourfourmeterSym);
-      sp->addObject(125, allabreveSym);
-      sp->addObject(126, pedalasteriskSym);
-      sp->addObject(127, pedaldashSym);
-      sp->addObject(128, pedaldotSym);
-      sp->addObject(129, pedalPSym);
-      sp->addObject(130, pedaldSym);
-      sp->addObject(131, pedaleSym);
-      sp->addObject(132, pedalPedSym);
-      sp->addObject(133, accDiscantSym);
-      sp->addObject(134, accDotSym);
-      sp->addObject(135, accFreebaseSym);
-      sp->addObject(136, accStdbaseSym);
-      sp->addObject(137, accBayanbaseSym);
-      sp->addObject(138, accSBSym);
-      sp->addObject(139, accBBSym);
-      sp->addObject(140, accOldEESym);
-      sp->addObject(141, accOldEESSym);
-      sp->addObject(142, wholedoheadSym);
-      sp->addObject(143, halfdoheadSym);
-      sp->addObject(144, doheadSym);
-      sp->addObject(145, wholereheadSym);
-      sp->addObject(146, halfreheadSym);
-      sp->addObject(147, reheadSym);
-      sp->addObject(148, wholemeheadSym);
-      sp->addObject(149, halfmeheadSym);
-      sp->addObject(150, meheadSym);
-      sp->addObject(151, wholefaheadSym);
-      sp->addObject(152, halffauheadSym);
-      sp->addObject(152, fauheadSym);
-      sp->addObject(153, halffadheadSym);
-      sp->addObject(154, fadheadSym);
-      sp->addObject(155, wholelaheadSym);
-      sp->addObject(156, halflaheadSym);
-      sp->addObject(157, laheadSym);
-      sp->addObject(158, wholeteheadSym);
-      sp->addObject(159, halfteheadSym);
-      sp->addObject(160, letterfSym);
-      sp->addObject(161, lettermSym);
-      sp->addObject(162, letterpSym);
-      sp->addObject(163, letterrSym);
-      sp->addObject(164, lettersSym);
-      sp->addObject(165, letterzSym);
-      }
 
 //---------------------------------------------------------
 //   write
@@ -322,76 +156,60 @@ void Preferences::createSymbolPalette()
 void Preferences::write()
       {
       dirty = false;
-      QFile f(QString("%1/.mscore").arg(QDir::homePath()));
-      if (!f.open(QIODevice::WriteOnly)) {
-            if (debugMode) {
-                  printf("Preferences: open(%s) failed: %s\n",
-                     f.fileName().toLatin1().data(), strerror(errno));
-                  }
-            return;
-            }
-      Xml xml(&f);
-      xml.header();
-      xml.stag("museScore version=\"1.0\"");
-      xml.stag("Preferences");
-      xml.tag("cursorBlink", cursorBlink);
-      if (fgUseColor)
-            xml.tag("fgColor", fgColor.name());
-      else
-            xml.tag("fgWallpaper", fgWallpaper);
-      if (bgUseColor)
-            xml.tag("bgColor", bgColor.name());
-      else
-            xml.tag("bgWallpaper", bgWallpaper);
-      xml.tag("selectColor1", selectColor[0].name());
-      xml.tag("selectColor2", selectColor[1].name());
-      xml.tag("selectColor3", selectColor[2].name());
-      xml.tag("selectColor4", selectColor[3].name());
-      xml.tag("enableMidiInput", enableMidiInput);
-      xml.tag("playNotes", playNotes);
-      xml.tag("lPort", lPort);
-      xml.tag("rPort", rPort);
-      if (!soundFont.isEmpty())
-            xml.tag("soundFont", soundFont);
-      xml.tag("stemDirection1", stemDir[0]);
-      xml.tag("stemDirection2", stemDir[1]);
-      xml.tag("stemDirection3", stemDir[2]);
-      xml.tag("stemDirection4", stemDir[3]);
-      xml.tag("showNavigator", showNavigator);
-      xml.tag("showStatusBar", showStatusBar);
+      QSettings s;
 
-      xml.tag("showPlayPanel", showPlayPanel);
-      xml.tagE("PlayPanelPos x=\"%d\" y=\"%d\"",
-         playPanelPos.x(), playPanelPos.y());
-      xml.tag("showPad", showPad);
-      xml.tag("showPanel", showPanel);
-      xml.tagE("KeyPadPos x=\"%d\" y=\"%d\"",
-         padPos.x(), padPos.y());
-      xml.tag("showNavigator", showNavigator);
-      xml.tag("useAlsaAudio", useAlsaAudio);
-      xml.tag("useJackAudio", useJackAudio);
-      xml.tag("alsaDevice", alsaDevice);
-      xml.tag("alsaSampleRate", alsaSampleRate);
-      xml.tag("alsaPeriodSize", alsaPeriodSize);
-      xml.tag("alsaFragments", alsaFragments);
-      xml.tag("layoutBreakColor", layoutBreakColor);
-      xml.tag("antialiasedDrawing", antialiasedDrawing);
+      s.setValue("cursorBlink",     cursorBlink);
+      s.setValue("fgUseColor",      fgUseColor);
+      s.setValue("bgUseColor",      bgUseColor);
+      s.setValue("fgColor",         fgColor);
+      s.setValue("fgWallpaper",     fgWallpaper);
+      s.setValue("bgColor",         bgColor);
+      s.setValue("bgWallpaper",     bgWallpaper);
+      s.setValue("selectColor1",    selectColor[0]);
+      s.setValue("selectColor2",    selectColor[1]);
+      s.setValue("selectColor3",    selectColor[2]);
+      s.setValue("selectColor4",    selectColor[3]);
+      s.setValue("enableMidiInput", enableMidiInput);
+      s.setValue("playNotes",       playNotes);
+      s.setValue("lPort",           lPort);
+      s.setValue("rPort",           rPort);
+      s.setValue("soundFont",       soundFont);
+      s.setValue("stemDirection1",  stemDir[0]);
+      s.setValue("stemDirection2",  stemDir[1]);
+      s.setValue("stemDirection3",  stemDir[2]);
+      s.setValue("stemDirection4",  stemDir[3]);
+      s.setValue("showNavigator",   showNavigator);
+      s.setValue("showStatusBar",   showStatusBar);
+      s.setValue("showPlayPanel",   showPlayPanel);
+
+      s.setValue("showPad",            showPad);
+      s.setValue("showPanel",          showPanel);
+      s.setValue("useAlsaAudio",       useAlsaAudio);
+      s.setValue("useJackAudio",       useJackAudio);
+      s.setValue("alsaDevice",         alsaDevice);
+      s.setValue("alsaSampleRate",     alsaSampleRate);
+      s.setValue("alsaPeriodSize",     alsaPeriodSize);
+      s.setValue("alsaFragments",      alsaFragments);
+      s.setValue("layoutBreakColor",   layoutBreakColor);
+      s.setValue("antialiasedDrawing", antialiasedDrawing);
+      s.setValue("imagePath",          imagePath);
+      s.setValue("showSplashScreen",   showSplashScreen);
       switch(sessionStart) {
-            case LAST_SESSION:   xml.tag("sessionStart", QString("last")); break;
-            case NEW_SESSION:    xml.tag("sessionStart", QString("new")); break;
-            case SCORE_SESSION:  xml.tag("sessionStart", QString("score")); break;
+            case LAST_SESSION:   s.setValue("sessionStart", "last"); break;
+            case NEW_SESSION:    s.setValue("sessionStart", "new"); break;
+            case SCORE_SESSION:  s.setValue("sessionStart", "score"); break;
             }
-      if (!startScore.isEmpty())
-            xml.tag("startScore", startScore);
-      xml.tag("imagePath", imagePath);
-      xml.tag("showSplashScreen", showSplashScreen);
+      s.setValue("startScore", startScore);
 
-      writeShortcuts(xml);
-      sp->write(xml, "SymbolPalette");
+      s.beginGroup("PlayPanel");
+      s.setValue("pos", playPanelPos);
+      s.endGroup();
 
-      xml.etag();
-      xml.etag();
-      f.close();
+      s.beginGroup("KeyPad");
+      s.setValue("pos", padPos);
+      s.endGroup();
+
+      writeShortcuts();
       }
 
 //---------------------------------------------------------
@@ -400,148 +218,65 @@ void Preferences::write()
 
 void Preferences::read()
       {
-      QFile qf(QString("%1/.mscore").arg(QDir::homePath()));
-      if (!qf.open(QIODevice::ReadOnly)) {
-            if (debugMode) {
-                  printf("Preferences: open(%s) failed: %s\n",
-                     qf.fileName().toLatin1().data(), strerror(errno));
-                  }
-            return;
-            }
+      QSettings s;
 
-      QDomDocument doc;
-      int line, column;
-      QString err;
-      if (!doc.setContent(&qf, false, &err, &line, &column)) {
-            printf("error reading file %s at line %d column %d: %s\n",
-               qf.fileName().toLatin1().data(), line, column, err.toLatin1().data());
-            qf.close();
-            return;
-            }
-      QDomElement e = doc.documentElement();
-      if (e.tagName() != "museScore") {
-            e = e.nextSiblingElement("museScore");
-            if (e.isNull()) {
-                  printf("Mscore: reading preferences: is not a mscore file\n");
-                  qf.close();
-                  return;
-                  }
-            }
-      e = e.firstChildElement("Preferences");
-      if (e.isNull()) {
-            printf("Mscore: reading preferences: is not a mscore preferences file\n");
-            qf.close();
-            return;
-            }
+      cursorBlink     = s.value("cursorBlink", false).toBool();
+      fgUseColor      = s.value("fgUseColor", false).toBool();
+      bgUseColor      = s.value("bgUseColor", true).toBool();
+      fgColor         = s.value("fgColor", QColor(50,50,50)).value<QColor>();
+      fgWallpaper     = s.value("fgWallpaper", ":/data/paper3.png").toString();
+      bgColor         = s.value("bgColor", QColor(0x76, 0x76, 0x6e)).value<QColor>();
+      bgWallpaper     = s.value("bgWallpaper").toString();
+      selectColor[0]  = s.value("selectColor1", QColor(Qt::blue)).value<QColor>();
+      selectColor[1]  = s.value("selectColor2", QColor(Qt::green)).value<QColor>();
+      selectColor[2]  = s.value("selectColor3", QColor(Qt::yellow)).value<QColor>();
+      selectColor[3]  = s.value("selectColor4", QColor(Qt::magenta)).value<QColor>();
+      enableMidiInput = s.value("enableMidiInput", true).toBool();
+      playNotes       = s.value("playNotes", true).toBool();
+      lPort           = s.value("lPort").toString();
+      rPort           = s.value("rPort").toString();
+      soundFont       = s.value("soundFont", ":/data/piano1.sf2").toString();
+      stemDir[0]      = (Direction)s.value("stemDirection1", AUTO).toInt();
+      stemDir[1]      = (Direction)s.value("stemDirection2", AUTO).toInt();
+      stemDir[2]      = (Direction)s.value("stemDirection3", AUTO).toInt();
+      stemDir[3]      = (Direction)s.value("stemDirection4", AUTO).toInt();
+      showNavigator   = s.value("showNavigator", true).toBool();
+      showStatusBar   = s.value("showStatusBar", true).toBool();
+      showPlayPanel   = s.value("showPlayPanel", false).toBool();
 
-      for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
-            QString tag(e.tagName());
-            QString val(e.text());
-            int i = val.toInt();
-            if (tag == "cursorBlink")
-                  cursorBlink = i;
-            else if (tag == "fgColor") {
-                  fgColor.setNamedColor(val);
-                  fgUseColor = true;
-                  }
-            else if (tag == "bgColor") {
-                  bgColor.setNamedColor(val);
-                  bgUseColor = true;
-                  }
-            else if (tag == "fgWallpaper") {
-                  fgWallpaper = val;
-                  fgUseColor = false;
-                  }
-            else if (tag == "bgWallpaper") {
-                  bgWallpaper = val;
-                  bgUseColor = false;
-                  }
-            else if (tag == "selectColor")      // obsolete
-                  selectColor[0].setNamedColor(val);
-            else if (tag == "selectColor1")
-                  selectColor[0].setNamedColor(val);
-            else if (tag == "selectColor2")
-                  selectColor[1].setNamedColor(val);
-            else if (tag == "selectColor3")
-                  selectColor[2].setNamedColor(val);
-            else if (tag == "selectColor4")
-                  selectColor[3].setNamedColor(val);
-            else if (tag == "enableMidiInput")
-                  enableMidiInput = i;
-            else if (tag == "playNotes")
-                  playNotes = i;
-            else if (tag == "soundFont")
-                  soundFont = val;
-            else if (tag == "rPort")
-                  rPort = val;
-            else if (tag == "lPort")
-                  lPort = val;
-            else if (tag == "stemDirection1")
-                  stemDir[0] = Direction(i);
-            else if (tag == "stemDirection2")
-                  stemDir[1] = Direction(i);
-            else if (tag == "stemDirection3")
-                  stemDir[2] = Direction(i);
-            else if (tag == "stemDirection4")
-                  stemDir[3] = Direction(i);
-            else if (tag == "showNavigator")
-                  showNavigator = i;
-            else  if (tag == "showPlayPanel")
-                  showPlayPanel = i;
-            else if (tag == "showPad")
-                  showPad = i;
-            else if (tag == "showPanel")
-                  showPanel = i;
-            else if (tag == "showStatusBar")
-                  showStatusBar = i;
-            else if (tag == "PlayPanelPos") {
-                  playPanelPos.setX(e.attribute("x").toInt());
-                  playPanelPos.setY(e.attribute("y").toInt());
-                  }
-            else if (tag == "KeyPadPos") {
-                  padPos.setX(e.attribute("x").toInt());
-                  padPos.setY(e.attribute("y").toInt());
-                  }
-            else if (tag == "useAlsaAudio")
-                  useAlsaAudio = i;
-            else if (tag == "useJackAudio")
-                  useJackAudio = i;
-            else if (tag == "alsaDevice")
-                  alsaDevice = val;
-            else if (tag == "alsaSampleRate")
-                  alsaSampleRate = i;
-            else if (tag == "alsaPeriodSize")
-                  alsaPeriodSize = i;
-            else if (tag == "alsaFragments")
-                  alsaFragments = i;
-            else if (tag == "layoutBreakColor")
-                  layoutBreakColor.setNamedColor(val);
-            else if (tag == "antialiasedDrawing")
-                  antialiasedDrawing = i;
-            else if (tag == "sessionStart") {
-                  if (val == "last")
-                        sessionStart = LAST_SESSION;
-                  else if (val == "new")
-                        sessionStart = NEW_SESSION;
-                  else if (val == "score")
-                        sessionStart = SCORE_SESSION;
-                  }
-            else if (tag == "startScore")
-                  startScore = val;
-            else if (tag == "imagePath")
-                  imagePath = val;
-            else if (tag == "showSplashScreen")
-                  showSplashScreen = i;
-            else if (tag == "Shortcuts")
-                  readShortcuts(e);
-            else if (tag == "SymbolPalette") {
-                  sp->clear();
-                  sp->read(e);
-                  }
-            else
-                  domError(e);
-            }
-      qf.close();
+      showPad            = s.value("showPad", false).toBool();
+      showPanel          = s.value("showPanel", false).toBool();
+      useAlsaAudio       = s.value("useAlsaAudio", true).toBool();
+      useJackAudio       = s.value("useJackAudio", false).toBool();
+      alsaDevice         = s.value("alsaDevice", "default").toString();
+      alsaSampleRate     = s.value("alsaSampleRate", 48000).toInt();
+      alsaPeriodSize     = s.value("alsaPeriodSize", 1024).toInt();
+      alsaFragments      = s.value("alsaFragments", 3).toInt();
+      layoutBreakColor   = s.value("layoutBreakColor", QColor(Qt::green)).value<QColor>();
+      antialiasedDrawing = s.value("antialiasedDrawing", true).toBool();
+      imagePath          = s.value("imagePath", "~/mscore/images").toString();
+      showSplashScreen   = s.value("showSplashScreen", true).toBool();
+
+      QString ss(s.value("sessionStart", "score").toString());
+      if (ss == "last")
+            sessionStart = LAST_SESSION;
+      else if (ss == "new")
+            sessionStart = NEW_SESSION;
+      else if (ss == "score")
+            sessionStart = SCORE_SESSION;
+
+      startScore         = ":/data/demo.msc";
+      startScore = s.value("startScore", ":/data/demo.msc").toString();
+
+      s.beginGroup("PlayPanel");
+      playPanelPos = s.value("pos", QPoint(100, 300)).toPoint();
+      s.endGroup();
+
+      s.beginGroup("KeyPad");
+      padPos = s.value("pos", QPoint(100, 300)).toPoint();
+      s.endGroup();
+
+      readShortcuts();
       }
 
 //---------------------------------------------------------
@@ -1072,38 +807,52 @@ void PreferenceDialog::padCurClicked()
 //   writeShortcuts
 //---------------------------------------------------------
 
-void writeShortcuts(Xml& xml)
+void writeShortcuts()
       {
-      xml.stag("Shortcuts");
-      foreach(Shortcut* s, shortcuts) {
-            //
-            // save only if different from default
-            //
+      QSettings s;
+      s.beginGroup("Shortcuts");
+
+      int n = 0;
+      foreach(Shortcut* shortcut, shortcuts) {
             for (unsigned i = 0;; ++i) {
-                  if (MuseScore::sc[i].xml == s->xml) {
-                        if (MuseScore::sc[i].key != s->key)
-                              xml.tag(s->xml, s->key.toString(QKeySequence::PortableText));
+                  if (MuseScore::sc[i].xml == shortcut->xml) {
+                        if (MuseScore::sc[i].key != shortcut->key) {
+                              QString tag("sc[%1]");
+                              s.setValue(tag.arg(n), shortcut->xml);
+                              tag = "seq[%1]";
+                              s.setValue(tag.arg(n), shortcut->key.toString(QKeySequence::PortableText));
+                              ++n;
+                              }
                         break;
                         }
                   }
             }
-      xml.etag();
+      s.setValue("n", n);
+      s.endGroup();
       }
 
 //---------------------------------------------------------
 //   readShortcuts
 //---------------------------------------------------------
 
-void readShortcuts(QDomElement e)
+void readShortcuts()
       {
-      for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
-            Shortcut* s = shortcuts.value(e.tagName());
-            if (s) {
-                  s->key = QKeySequence::fromString(e.text(), QKeySequence::PortableText);
-                  }
+      QSettings s;
+      s.beginGroup("Shortcuts");
+      int n = s.value("n", 0).toInt();
+
+      for (int i = 0; i < n; ++i) {
+            QString tag("sc[%1]");
+            QString name = s.value(tag.arg(i)).toString();
+            tag = "seq[%1]";
+            QString seq = s.value(tag.arg(i)).toString();
+            Shortcut* s = shortcuts.value(name);
+            if (s)
+                  s->key = QKeySequence::fromString(seq, QKeySequence::PortableText);
             else
-                  printf("MuseScore:readShortCuts: unknown tag <%s>\n", e.tagName().toLatin1().data());
+                  printf("MuseScore:readShortCuts: unknown tag <%s>\n", qPrintable(name));
             }
+      s.endGroup();
       }
 
 //---------------------------------------------------------

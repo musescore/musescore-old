@@ -2118,6 +2118,9 @@ void Measure::write(Xml& xml, int no, int staff) const
                   tuplet->write(xml, id++);
             }
 
+      if (no == 2)
+            printf("measure 2: staff %d\n", staff);
+
       for (int track = staff * VOICES; track < staff * VOICES + VOICES; ++track) {
             for (Segment* segment = first(); segment; segment = segment->next()) {
                   Element* e = segment->element(track);
@@ -2209,8 +2212,8 @@ void Measure::read(QDomElement e, int idx)
             tck = score()->fileDivision(tck);
             setTick(tck);
             }
-      Staff* staff = _score->staff(idx);
-      int curTickPos = tick();
+      Staff* staff     = _score->staff(idx);
+      score()->curTick = tick();
 
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             QString tag(e.tagName());
@@ -2231,37 +2234,37 @@ void Measure::read(QDomElement e, int idx)
                   }
             else if (tag == "Chord") {
                   Chord* chord = new Chord(score());
-                  chord->setTick(curTickPos);   // set default tick position
+                  chord->setTick(score()->curTick);   // set default tick position
                   chord->setParent(this);       // only for reading tuplets
                   chord->setStaff(staff);
                   chord->read(e, idx);
                   Segment* s = getSegment(chord);
                   s->add(chord);
-                  curTickPos = chord->tick() + chord->tickLen();
+                  score()->curTick = chord->tick() + chord->tickLen();
                   }
             else if (tag == "Note") {
                   Chord* chord = new Chord(score());
-                  chord->setTick(curTickPos);   // set default tick position
+                  chord->setTick(score()->curTick);   // set default tick position
                   chord->setParent(this);       // only for reading tuplets
                   chord->setStaff(staff);
                   chord->readNote(e, idx);
                   Segment* s = getSegment(chord);
                   s->add(chord);
-                  curTickPos = chord->tick() + chord->tickLen();
+                  score()->curTick = chord->tick() + chord->tickLen();
                   }
             else if (tag == "Rest") {
                   Rest* rest = new Rest(score());
-                  rest->setTick(curTickPos);    // set default tick position
+                  rest->setTick(score()->curTick);    // set default tick position
                   rest->setParent(this);        // only for reading tuplets
                   rest->setStaff(staff);
                   rest->read(e);
                   Segment* s = getSegment(rest);
                   s->add(rest);
-                  curTickPos = rest->tick() + rest->tickLen();
+                  score()->curTick = rest->tick() + rest->tickLen();
                   }
             else if (tag == "Clef") {
                   Clef* clef = new Clef(score());
-                  clef->setTick(curTickPos);
+                  clef->setTick(score()->curTick);
                   clef->setStaff(staff);
                   clef->read(e);
                   Segment* s = getSegment(clef);
@@ -2269,7 +2272,7 @@ void Measure::read(QDomElement e, int idx)
                   }
             else if (tag == "TimeSig") {
                   TimeSig* ts = new TimeSig(score());
-                  ts->setTick(curTickPos);
+                  ts->setTick(score()->curTick);
                   ts->setStaff(staff);
                   ts->read(e);
                   Segment* s = getSegment(ts);
@@ -2277,7 +2280,7 @@ void Measure::read(QDomElement e, int idx)
                   }
             else if (tag == "KeySig") {
                   KeySig* ks = new KeySig(score());
-                  ks->setTick(curTickPos);
+                  ks->setTick(score()->curTick);
                   ks->setStaff(staff);
                   ks->read(e);
                   ks->setSubtype(ks->subtype());
@@ -2286,14 +2289,14 @@ void Measure::read(QDomElement e, int idx)
                   }
             else if (tag == "Dynamic") {
                   Dynamic* dyn = new Dynamic(score());
-                  dyn->setTick(curTickPos);
+                  dyn->setTick(score()->curTick);
                   dyn->setStaff(staff);
                   dyn->read(e);
                   add(dyn);
                   }
             else if (tag == "Slur") {
                   Slur* slur = new Slur(score());
-                  slur->setTick(curTickPos);
+                  slur->setTick(score()->curTick);
                   slur->setStaff(staff);
                   slur->setParent(this);
                   slur->read(_score, e);
@@ -2301,14 +2304,14 @@ void Measure::read(QDomElement e, int idx)
                   }
             else if (tag == "HairPin") {
                   Hairpin* hairpin = new Hairpin(score());
-                  hairpin->setTick(curTickPos);
+                  hairpin->setTick(score()->curTick);
                   hairpin->setStaff(staff);
                   hairpin->read(e);
                   add(hairpin);
                   }
             else if (tag == "Lyrics") {
                   Lyrics* lyrics = new Lyrics(score());
-                  lyrics->setTick(curTickPos);
+                  lyrics->setTick(score()->curTick);
                   lyrics->setStaff(staff);
                   lyrics->read(e);
                   Segment* segment = tick2segment(lyrics->tick());
@@ -2323,7 +2326,7 @@ void Measure::read(QDomElement e, int idx)
                   Text* t = new Text(score());
                   t->read(e);
                   if (t->anchor() != ANCHOR_PAGE) {
-                        t->setTick(curTickPos);
+                        t->setTick(score()->curTick);
                         t->setStaff(staff);
                         }
                   add(t);
@@ -2350,42 +2353,42 @@ void Measure::read(QDomElement e, int idx)
             //-------------------------------------
             else if (tag == "Tempo") {
                   TempoText* t = new TempoText(score());
-                  t->setTick(curTickPos);
+                  t->setTick(score()->curTick);
                   t->setStaff(staff);
                   t->read(e);
                   add(t);
                   }
             else if (tag == "Symbol") {
                   Symbol* sym = new Symbol(score());
-                  sym->setTick(curTickPos);
+                  sym->setTick(score()->curTick);
                   sym->setStaff(staff);
                   sym->read(e);
                   add(sym);
                   }
             else if (tag == "Ottava") {
                   Ottava* ottava = new Ottava(score());
-                  ottava->setTick(curTickPos);
+                  ottava->setTick(score()->curTick);
                   ottava->setStaff(staff);
                   ottava->read(e);
                   add(ottava);
                   }
             else if (tag == "Volta") {
                   Volta* volta = new Volta(score());
-                  volta->setTick(curTickPos);
+                  volta->setTick(score()->curTick);
                   volta->setStaff(staff);
                   volta->read(e);
                   add(volta);
                   }
             else if (tag == "Trill") {
                   Trill* trill = new Trill(score());
-                  trill->setTick(curTickPos);
+                  trill->setTick(score()->curTick);
                   trill->setStaff(staff);
                   trill->read(e);
                   add(trill);
                   }
             else if (tag == "Pedal") {
                   Pedal* pedal = new Pedal(score());
-                  pedal->setTick(curTickPos);
+                  pedal->setTick(score()->curTick);
                   pedal->setStaff(staff);
                   pedal->read(e);
                   add(pedal);

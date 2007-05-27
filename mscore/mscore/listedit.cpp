@@ -40,6 +40,7 @@
 #include "dynamics.h"
 #include "slur.h"
 #include "layout.h"
+#include "lyrics.h"
 
 //---------------------------------------------------------
 //   ElementItem
@@ -213,7 +214,8 @@ void PageListEditor::updateList()
       {
       list->clear();
       PageList* pl = cs->mainLayout()->pages();
-      int tracks = cs->nstaves() * VOICES;
+      int staves = cs->nstaves();
+      int tracks = staves * VOICES;
       for (iPage ip = pl->begin(); ip != pl->end(); ++ip) {
             Page* page = *ip;
             ElementItem* pi = new ElementItem(list, page);
@@ -296,6 +298,11 @@ void PageListEditor::updateList()
                                                 if (note->tieFor())
                                                       new ElementItem(ni, note->tieFor());
                                                 }
+                                          }
+                                    }
+                              for (int i = 0; i < staves; ++i) {
+                                    foreach(Lyrics* l, *(segment->lyricsList(i))) {
+                                          new ElementItem(segItem, l);
                                           }
                                     }
                               }

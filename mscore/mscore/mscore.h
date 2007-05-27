@@ -151,7 +151,7 @@ class MuseScore : public QMainWindow {
       MeasureListEditor* measureListEdit;
       PageSettings* pageSettings;
 
-      QWidget* symbolPalette;
+      QWidget* symbolDialog;
       QWidget* clefPalette;
       QWidget* keyPalette;
       QWidget* timePalette;
@@ -179,7 +179,6 @@ class MuseScore : public QMainWindow {
       void launchBrowser(const QString whereTo);
 
       void addScore(const QString& name);
-      void genRecentPopup(QMenu*) const;
       void saveScoreList();
       void loadScoreList();
       void loadInstrumentTemplates();
@@ -266,7 +265,6 @@ class MuseScore : public QMainWindow {
       Pad* getKeyPad() const          { return pad; }
       QMenu* genCreateMenu();
       void appendScore(Score*);
-      QString getScore(int idx) const;
       void midiNoteReceived(int pitch, bool chord);
       void showElementContext(Element* el);
 	void cmdAppendMeasures(int);
@@ -278,6 +276,8 @@ class MuseScore : public QMainWindow {
       void incMag();
       void decMag();
       void setMag(double);
+      void readSettings();
+      void writeSettings();
       };
 
 //---------------------------------------------------------
@@ -316,8 +316,6 @@ class MagBox : public QComboBox {
 extern QMenu* genCreateMenu(QWidget* parent);
 extern MuseScore* mscore;
 
-extern void writeShortcuts(Xml& xml);
-extern void readShortcuts(QDomElement);
 extern QAction* getAction(const char*);
 extern QMap<QString, Shortcut*> shortcuts;
 

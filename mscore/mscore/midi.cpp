@@ -1407,6 +1407,7 @@ void Score::convertTrack(MidiTrack* midiTrack, int staffIdx)
                               Lyrics* l = new Lyrics(this);
                               QString txt((char*)(mm->data()));
                               l->setText(txt);
+                              l->setTick(seg->tick());
                               seg->setLyrics(staffIdx, l);
                               }
                               break;

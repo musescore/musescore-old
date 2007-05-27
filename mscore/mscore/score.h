@@ -57,8 +57,6 @@ class BSymbol;
 
 struct SigEvent;
 
-extern QPoint scorePos;
-extern QSize scoreSize;
 extern bool showRubberBand;
 
 //---------------------------------------------------------
@@ -143,6 +141,7 @@ class Score : public QObject {
 
    public:
       bool undoActive;
+      int curTick;      // used for read()/write() optimization
 
       //---------------------------------------------------
       //    input data for layout():
@@ -233,7 +232,6 @@ class Score : public QObject {
       Measure* pos2measure(const QPointF&, int* tick, Staff** staff, int* pitch,
          Segment**, QPointF* offset) const;
       Measure* pos2measure2(const QPointF&, int* tick, Staff** staff, int* pitch, Segment**) const;
-      void readGeometry(QDomElement);
       int snap(int tick, const QPointF) const;
       int snapNote(int tick, const QPointF, int staff) const;
 

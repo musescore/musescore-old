@@ -25,7 +25,7 @@
 #include "globals.h"
 
 struct Shortcut;
-class Palette;
+// class Palette;
 
 enum SessionStart {
       LAST_SESSION, NEW_SESSION, SCORE_SESSION
@@ -83,14 +83,14 @@ struct Preferences {
       MidiRemote rewind, play, stop;
       MidiRemote len1, len2, len4, len8, len16, len32;
       MidiRemote len3, len6, len12, len24;
-      Palette* sp;
+//      Palette* sp;
 
       bool dirty;
 
       Preferences();
       void write();
       void read();
-      void createSymbolPalette();
+//      void createSymbolPalette();
       };
 
 //---------------------------------------------------------

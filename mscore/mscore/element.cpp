@@ -264,10 +264,8 @@ QList<Prop> Element::properties(Xml& xml) const
             pl.append(Prop("selected", selected()));
       if (!visible())
             pl.append(Prop("visible", visible()));
-      if (_time.isValid() && (_time.tick() != xml.curTick)) {
+      if (_time.isValid() && (_time.tick() != xml.curTick))
             pl.append(Prop("tick", _time.tick()));
-            xml.curTick = _time.tick();
-            }
       if (_duration.isValid())
             pl.append(Prop("ticklen", _duration.tick()));
       if (_color != Qt::black)
@@ -282,6 +280,8 @@ QList<Prop> Element::properties(Xml& xml) const
 void Element::writeProperties(Xml& xml) const
       {
       xml.prop(properties(xml));
+      if (_time.isValid() && (_time.tick() != xml.curTick))
+            score()->curTick = _time.tick();
       }
 
 //---------------------------------------------------------
@@ -294,8 +294,10 @@ bool Element::readProperties(QDomElement e)
       QString val(e.text());
       int i = val.toInt();
 
-      if (tag == "tick")
+      if (tag == "tick") {
             _time.setTick(score()->fileDivision(i));
+            score()->curTick = _time.tick();
+            }
       else if (tag == "subtype") {
             // do not always call Element::setSubtype():
             this->setSubtype(val);

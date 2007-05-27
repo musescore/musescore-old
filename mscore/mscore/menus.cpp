@@ -527,10 +527,10 @@ QMenu* MuseScore::genCreateMenu()
 
 void MuseScore::symbolMenu()
       {
-      if (symbolPalette == 0)
-            symbolPalette = new SymbolDialog(this);
-      symbolPalette->show();
-      symbolPalette->raise();
+      if (symbolDialog == 0)
+            symbolDialog = new SymbolDialog(this);
+      symbolDialog->show();
+      symbolDialog->raise();
       }
 
 //---------------------------------------------------------
@@ -935,5 +935,4 @@ void MuseScore::showLayoutBreakPalette()
       layoutBreakPalette->show();
       layoutBreakPalette->raise();
       }
-
 
