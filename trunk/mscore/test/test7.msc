@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf8"?>
 <museScore version="1.0">
-  <Geometry x="764" y="0" w="1133" h="931" />
   <Spatium>2</Spatium>
-  <Division>384</Division>
+  <Division>480</Division>
   <Mag>1</Mag>
   <xoff>31.75</xoff>
   <yoff>41.5</yoff>
@@ -95,23 +94,23 @@
       <cleflist>
         <clef tick="0" idx="0"/>
         </cleflist>
-  <keylist>
-    <key tick="0" idx="0"/>
-    </keylist>
+      <keylist>
+        <key tick="0" idx="0"/>
+        </keylist>
       <bracket type="1" span="2"/>
       </Staff>
     <Staff>
       <cleflist>
         <clef tick="0" idx="4"/>
         </cleflist>
-  <keylist>
-    <key tick="0" idx="0"/>
-    </keylist>
+      <keylist>
+        <key tick="0" idx="0"/>
+        </keylist>
       </Staff>
     <name>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;helvetica&apos;; font-size:11pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;PianoForte&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</name>
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-size:12pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;helvetica&apos;; font-size:11pt;&quot;&gt;PianoForte&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</name>
     <Instrument>
       <midiChannel>0</midiChannel>
       <midiProgram>0</midiProgram>
@@ -125,16 +124,19 @@ p, li { white-space: pre-wrap; }
       <cleflist>
         <clef tick="0" idx="0"/>
         </cleflist>
+      <keylist>
+        <key tick="0" idx="0"/>
+        </keylist>
       </Staff>
     <trackName>B Trumpet</trackName>
     <name>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;helvetica&apos;; font-size:11pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;B&lt;span style=&quot; font-family:&apos;MScore1&apos;;&quot;&gt;&lt;/span&gt; Trumpet&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</name>
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-size:12pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;helvetica&apos;; font-size:11pt;&quot;&gt;B&lt;span style=&quot; font-family:&apos;MScore1&apos;;&quot;&gt;&lt;/span&gt; Trumpet&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</name>
     <shortName>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;helvetica&apos;; font-size:11pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;B Tpt.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</shortName>
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-size:12pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;helvetica&apos;; font-size:11pt;&quot;&gt;B Tpt.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</shortName>
     <Instrument>
       <midiChannel>0</midiChannel>
       <midiProgram>0</midiProgram>
@@ -154,7 +156,7 @@ p, li { white-space: pre-wrap; }
         <spatiumSizeDependent>0</spatiumSizeDependent>
         <data>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;helvetica&apos;; font-size:11pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Times New Roman&apos;; font-size:24pt;&quot;&gt;Title &lt;span style=&quot; font-weight:600;&quot;&gt;bold &lt;/span&gt;&lt;span style=&quot; font-weight:600; font-style:italic;&quot;&gt;italic &lt;/span&gt;&lt;span style=&quot; font-style:italic;&quot;&gt;italic &lt;/span&gt;normal&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
         </Text>
       <Tempo>
@@ -167,55 +169,20 @@ p, li { white-space: pre-wrap; }
         <spatiumSizeDependent>1</spatiumSizeDependent>
         <data>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-size:11.3386pt; font-weight:600; font-style:normal;&quot;&gt;
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-size:10pt; font-weight:600; font-style:normal;&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:11pt;&quot;&gt;&lt;span style=&quot; font-family:&apos;MScore1&apos;;&quot;&gt;&lt;/span&gt;=120&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
         <subtype>Tempo</subtype>
         <offset x="-0.846667" y="-4.55083"/>
         </Tempo>
-      <Chord>
-        <ticklen>192</ticklen>
-        <Note>
-          <pitch>60</pitch>
-          </Note>
-        </Chord>
-      <Chord>
-        <ticklen>192</ticklen>
-        <Note>
-          <pitch>62</pitch>
-          </Note>
-        </Chord>
-      <Chord>
-        <ticklen>192</ticklen>
-        <Note>
-          <pitch>64</pitch>
-          </Note>
-        </Chord>
-      <Chord>
-        <ticklen>192</ticklen>
-        <Note>
-          <pitch>65</pitch>
-          </Note>
-        </Chord>
-      <Chord>
-        <ticklen>192</ticklen>
-        <Note>
-          <pitch>67</pitch>
-          </Note>
-        </Chord>
-      <Chord>
-        <ticklen>192</ticklen>
-        <Note>
-          <pitch>69</pitch>
-          </Note>
-        </Chord>
-      <Chord>
-        <ticklen>192</ticklen>
-        <Note>
-          <pitch>71</pitch>
-          </Note>
-        </Chord>
+      <Note pitch="60" tpc="14" ticks="240"/>
+      <Note pitch="62" tpc="16" ticks="240"/>
+      <Note pitch="64" tpc="18" ticks="240"/>
+      <Note pitch="65" tpc="13" ticks="240"/>
+      <Note pitch="67" tpc="15" ticks="240"/>
+      <Note pitch="69" tpc="17" ticks="240"/>
+      <Note pitch="71" tpc="19" ticks="240"/>
       <Rest>
-        <ticklen>192</ticklen>
+        <ticklen>240</ticklen>
         <BeamMode>4</BeamMode>
         </Rest>
       </Measure>
@@ -226,7 +193,7 @@ p, li { white-space: pre-wrap; }
         <subtype>2</subtype>
         </BarLine>
       <Rest>
-        <ticklen>1536</ticklen>
+        <ticklen>1920</ticklen>
         <BeamMode>4</BeamMode>
         </Rest>
       </Measure>
@@ -239,7 +206,7 @@ p, li { white-space: pre-wrap; }
         <subtype>1</subtype>
         </Volta>
       <Rest>
-        <ticklen>1536</ticklen>
+        <ticklen>1920</ticklen>
         <BeamMode>4</BeamMode>
         </Rest>
       </Measure>
@@ -252,7 +219,7 @@ p, li { white-space: pre-wrap; }
         <subtype>2</subtype>
         </Volta>
       <Rest>
-        <ticklen>1536</ticklen>
+        <ticklen>1920</ticklen>
         <BeamMode>4</BeamMode>
         </Rest>
       </Measure>
@@ -260,25 +227,25 @@ p, li { white-space: pre-wrap; }
   <Staff id="2">
     <Measure number="1">
       <Rest>
-        <ticklen>1536</ticklen>
+        <ticklen>1920</ticklen>
         <BeamMode>4</BeamMode>
         </Rest>
       </Measure>
     <Measure number="2">
       <Rest>
-        <ticklen>1536</ticklen>
+        <ticklen>1920</ticklen>
         <BeamMode>4</BeamMode>
         </Rest>
       </Measure>
     <Measure number="3">
       <Rest>
-        <ticklen>1536</ticklen>
+        <ticklen>1920</ticklen>
         <BeamMode>4</BeamMode>
         </Rest>
       </Measure>
     <Measure number="4">
       <Rest>
-        <ticklen>1536</ticklen>
+        <ticklen>1920</ticklen>
         <BeamMode>4</BeamMode>
         </Rest>
       </Measure>
@@ -286,7 +253,7 @@ p, li { white-space: pre-wrap; }
   <Staff id="3">
     <Measure number="1">
       <Rest>
-        <ticklen>1536</ticklen>
+        <ticklen>1920</ticklen>
         <BeamMode>4</BeamMode>
         </Rest>
       </Measure>
@@ -296,7 +263,7 @@ p, li { white-space: pre-wrap; }
         <subtype>2</subtype>
         </BarLine>
       <Rest>
-        <ticklen>1536</ticklen>
+        <ticklen>1920</ticklen>
         <BeamMode>4</BeamMode>
         </Rest>
       </Measure>
@@ -305,7 +272,7 @@ p, li { white-space: pre-wrap; }
         <subtype>3</subtype>
         </BarLine>
       <Rest>
-        <ticklen>1536</ticklen>
+        <ticklen>1920</ticklen>
         <BeamMode>4</BeamMode>
         </Rest>
       </Measure>
@@ -314,7 +281,7 @@ p, li { white-space: pre-wrap; }
         <subtype>1</subtype>
         </BarLine>
       <Rest>
-        <ticklen>1536</ticklen>
+        <ticklen>1920</ticklen>
         <BeamMode>4</BeamMode>
         </Rest>
       </Measure>

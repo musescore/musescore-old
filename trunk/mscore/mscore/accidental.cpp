@@ -140,8 +140,6 @@ int Accidental::subtype2value(int st)
 
 bool Accidental::startEdit(QMatrix&, const QPointF&)
       {
-      printf("Accidental::startEdit\n");
-      // TODO: visualization of edit mode
       return true;
       }
 
@@ -152,7 +150,6 @@ bool Accidental::startEdit(QMatrix&, const QPointF&)
 bool Accidental::edit(QKeyEvent* ev)
       {
       int key = ev->key();
-      printf("Accidental::edit\n");
 
       qreal o = 0.2;
       if (ev->modifiers() & Qt::ControlModifier)
@@ -189,5 +186,4 @@ bool Accidental::edit(QKeyEvent* ev)
 
 void Accidental::endEdit()
       {
-      printf("Accidental::endEdit\n");
       }

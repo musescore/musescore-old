@@ -667,7 +667,8 @@ MagBox::MagBox(QWidget* parent)
       setValidator(new MagValidator(this));
 
       for (unsigned int i =  0; i < sizeof(magTable)/sizeof(*magTable); ++i) {
-            addItem(tr(magTable[i]), i);
+            QString ts(QCoreApplication::translate("magTable", magTable[i]));
+            addItem(ts, i);
             if (i == startMag)
                   setCurrentIndex(i);
             }
@@ -720,13 +721,13 @@ void MagBox::indexChanged(int idx)
 double MagBox::txt2mag(const QString& s)
       {
       Canvas* canvas = mscore->getCanvas();
-      double cw = canvas->fsize().width();
-      double ch = canvas->fsize().height();
+      double cw      = canvas->fsize().width();
+      double ch      = canvas->fsize().height();
 
       PageFormat* pf = mscore->currentScore()->pageFormat();
-      double nmag = canvas->mag();
-      int mn = sizeof(magTable)/sizeof(*magTable);
-      bool found = false;
+      double nmag    = canvas->mag();
+      int mn         = sizeof(magTable)/sizeof(*magTable);
+      bool found     = false;
       for (int i = 0; i < mn; ++i) {
             QString ts(QCoreApplication::translate("magTable", magTable[i]));
             if (ts != s)

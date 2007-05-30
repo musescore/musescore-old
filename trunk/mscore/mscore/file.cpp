@@ -559,7 +559,8 @@ bool MuseScore::saveFile(QFile* f)
 
       ::saveStyle(xml);       // should style really saved with score?
 
-      ::symbolPalette->write(xml, "Symbols");
+      if (::symbolPalette)
+            ::symbolPalette->write(xml, "Symbols");
 
       cs->write(xml);
 
