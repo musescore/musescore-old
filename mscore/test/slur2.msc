@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf8"?>
 <museScore version="1.0">
-  <Geometry x="412" y="27" w="950" h="500" />
   <Spatium>1.76389</Spatium>
   <Division>480</Division>
   <Mag>1</Mag>
@@ -119,18 +118,8 @@ p, li { white-space: pre-wrap; }
   <Staff id="1">
     <Measure number="1">
       <BarLine/>
-      <Chord>
-        <ticklen>960</ticklen>
-        <Note>
-          <pitch>60</pitch>
-          </Note>
-        </Chord>
-      <Chord>
-        <ticklen>960</ticklen>
-        <Note>
-          <pitch>62</pitch>
-          </Note>
-        </Chord>
+      <Note pitch="60" tpc="14" ticks="960"/>
+      <Note pitch="62" tpc="16" ticks="960"/>
       </Measure>
     <Measure number="2">
       <BarLine/>
@@ -141,123 +130,43 @@ p, li { white-space: pre-wrap; }
           <o1 x="-0.24" y="3.6"/>
           </SlurSegment>
         </Slur>
-      <Chord>
-        <ticklen>960</ticklen>
-        <Note>
-          <pitch>64</pitch>
-          </Note>
-        </Chord>
-      <Chord>
-        <ticklen>960</ticklen>
-        <Note>
-          <pitch>65</pitch>
-          </Note>
-        </Chord>
+      <Note pitch="64" tpc="18" ticks="960"/>
+      <Note pitch="65" tpc="13" ticks="960"/>
       </Measure>
     <Measure number="3">
       <BarLine/>
-      <Chord>
-        <ticklen>960</ticklen>
-        <Note>
-          <pitch>60</pitch>
-          </Note>
-        </Chord>
-      <Chord>
-        <ticklen>960</ticklen>
-        <Note>
-          <pitch>62</pitch>
-          </Note>
-        </Chord>
+      <Note pitch="60" tpc="14" ticks="960"/>
+      <Note pitch="62" tpc="16" ticks="960"/>
       </Measure>
     <Measure number="4">
       <BarLine/>
-      <Chord>
-        <ticklen>960</ticklen>
-        <Note>
-          <pitch>64</pitch>
-          </Note>
-        </Chord>
-      <Chord>
-        <ticklen>960</ticklen>
-        <Note>
-          <pitch>60</pitch>
-          </Note>
-        </Chord>
+      <Note pitch="64" tpc="18" ticks="960"/>
+      <Note pitch="60" tpc="14" ticks="960"/>
       </Measure>
     <Measure number="5">
       <BarLine/>
-      <Chord>
-        <ticklen>960</ticklen>
-        <Note>
-          <pitch>62</pitch>
-          </Note>
-        </Chord>
-      <Chord>
-        <ticklen>960</ticklen>
-        <Note>
-          <pitch>64</pitch>
-          </Note>
-        </Chord>
+      <Note pitch="62" tpc="16" ticks="960"/>
+      <Note pitch="64" tpc="18" ticks="960"/>
       </Measure>
     <Measure number="6">
       <BarLine/>
-      <Chord>
-        <ticklen>960</ticklen>
-        <Note>
-          <pitch>60</pitch>
-          </Note>
-        </Chord>
-      <Chord>
-        <ticklen>960</ticklen>
-        <Note>
-          <pitch>62</pitch>
-          </Note>
-        </Chord>
+      <Note pitch="60" tpc="14" ticks="960"/>
+      <Note pitch="62" tpc="16" ticks="960"/>
       </Measure>
     <Measure number="7">
       <BarLine/>
-      <Chord>
-        <ticklen>960</ticklen>
-        <Note>
-          <pitch>64</pitch>
-          </Note>
-        </Chord>
-      <Chord>
-        <ticklen>960</ticklen>
-        <Note>
-          <pitch>60</pitch>
-          </Note>
-        </Chord>
+      <Note pitch="64" tpc="18" ticks="960"/>
+      <Note pitch="60" tpc="14" ticks="960"/>
       </Measure>
     <Measure number="8">
       <BarLine/>
-      <Chord>
-        <ticklen>960</ticklen>
-        <Note>
-          <pitch>62</pitch>
-          </Note>
-        </Chord>
-      <Chord>
-        <ticklen>960</ticklen>
-        <Note>
-          <pitch>64</pitch>
-          </Note>
-        </Chord>
+      <Note pitch="62" tpc="16" ticks="960"/>
+      <Note pitch="64" tpc="18" ticks="960"/>
       </Measure>
     <Measure number="9">
       <BarLine/>
-      <Chord>
-        <ticklen>960</ticklen>
-        <Note>
-          <pitch>60</pitch>
-          </Note>
-        </Chord>
-      <Chord>
-        <ticklen>960</ticklen>
-        <Note>
-          <pitch>62</pitch>
-          </Note>
-        </Chord>
+      <Note pitch="60" tpc="14" ticks="960"/>
+      <Note pitch="62" tpc="16" ticks="960"/>
       </Measure>
     <Measure number="10">
       <BarLine/>
@@ -265,80 +174,30 @@ p, li { white-space: pre-wrap; }
         <startTick>18240</startTick>
         <endTick>19200</endTick>
         </Slur>
-      <Chord>
-        <ticklen>960</ticklen>
-        <Note>
-          <pitch>64</pitch>
-          </Note>
-        </Chord>
-      <Chord>
-        <ticklen>960</ticklen>
-        <Note>
-          <pitch>60</pitch>
-          </Note>
-        </Chord>
+      <Note pitch="64" tpc="18" ticks="960"/>
+      <Note pitch="60" tpc="14" ticks="960"/>
       </Measure>
     <Measure number="11">
       <BarLine/>
-      <Chord>
-        <ticklen>960</ticklen>
-        <Note>
-          <pitch>62</pitch>
-          </Note>
-        </Chord>
-      <Chord>
-        <ticklen>960</ticklen>
-        <Note>
-          <pitch>64</pitch>
-          </Note>
-        </Chord>
+      <Note pitch="62" tpc="16" ticks="960"/>
+      <Note pitch="64" tpc="18" ticks="960"/>
       </Measure>
     <Measure number="12">
       <BarLine/>
-      <Chord>
-        <ticklen>960</ticklen>
-        <Note>
-          <pitch>60</pitch>
-          </Note>
-        </Chord>
-      <Chord>
-        <ticklen>960</ticklen>
-        <Note>
-          <pitch>62</pitch>
-          </Note>
-        </Chord>
+      <Note pitch="60" tpc="14" ticks="960"/>
+      <Note pitch="62" tpc="16" ticks="960"/>
       </Measure>
     <Measure number="13">
       <BarLine/>
-      <Chord>
-        <ticklen>960</ticklen>
-        <Note>
-          <pitch>64</pitch>
-          </Note>
-        </Chord>
-      <Chord>
-        <ticklen>960</ticklen>
-        <Note>
-          <pitch>60</pitch>
-          </Note>
-        </Chord>
+      <Note pitch="64" tpc="18" ticks="960"/>
+      <Note pitch="60" tpc="14" ticks="960"/>
       </Measure>
     <Measure number="14">
       <BarLine/>
-      <Chord>
-        <ticklen>960</ticklen>
-        <Note>
-          <pitch>62</pitch>
-          </Note>
-        </Chord>
-      <Chord>
-        <ticklen>960</ticklen>
-        <Note>
-          <pitch>64</pitch>
-          </Note>
-        </Chord>
+      <Note pitch="62" tpc="16" ticks="960"/>
+      <Note pitch="64" tpc="18" ticks="960"/>
       </Measure>
     </Staff>
-  <cursorStaff>0</cursorStaff>
+  <cursorStaff>-1</cursorStaff>
   <cursorVoice>0</cursorVoice>
   </museScore>

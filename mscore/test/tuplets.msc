@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf8"?>
 <museScore version="1.0">
-  <Geometry x="0" y="0" w="950" h="500" />
   <Spatium>1.76389</Spatium>
   <Division>480</Division>
   <Mag>1</Mag>

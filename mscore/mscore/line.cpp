@@ -398,7 +398,7 @@ bool SLine::readProperties(QDomElement e)
             _tick2 = score()->fileDivision(i);
       else if (tag == "Segment") {
             LineSegment* ls = createSegment();
-            for (QDomElement e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
+            for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
                   if (e.tagName() == "off1")
                         ls->setUserOff(readPoint(e));
                   else if (e.tagName() == "off2")
