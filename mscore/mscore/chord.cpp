@@ -433,8 +433,7 @@ void Chord::layout(ScoreLayout* layout)
                   double x = - point(style->prefixNoteDistance);
                   if (_grace)
                         x /= 2;
-
-                  x -= accidental->width() - accidental->bbox().x();
+                  x -= accidental->width(); // - accidental->bbox().x();
                   if (note->mirror())
                         x -= headWidth;
                   accidental->setPos(x, 0);

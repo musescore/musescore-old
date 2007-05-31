@@ -137,7 +137,7 @@ void ScoreLayout::doLayout()
       int n = _score->nstaves();
       for (int i = 0; i < n; ++i) {
             for (Element* m = _measures.first(); m; m = m->next()) {
-                  ((Measure*)m)->layoutNoteHeads(this, i);
+                  ((Measure*)m)->layoutNoteHeads(i);
                   }
             }
 

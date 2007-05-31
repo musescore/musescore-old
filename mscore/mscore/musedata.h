@@ -1,9 +1,9 @@
 //=============================================================================
-//  MusE Score
+//  MuseScore
 //  Linux Music Score Editor
-//  $Id: element.h,v 1.58 2006/04/12 14:58:10 wschweer Exp $
+//  $Id:$
 //
-//  Copyright (C) 2002-2006 Werner Schweer (ws@seh.de)
+//  Copyright (C) 2007 Werner Schweer (ws@seh.de)
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.
@@ -18,35 +18,42 @@
 //  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //=============================================================================
 
-#ifndef __ACCIDENTAL_H__
-#define __ACCIDENTAL_H__
+#ifndef __MUSEDATA_H__
+#define __MUSEDATA_H__
 
-/**
- \file
- Definition of class Accidental
-*/
-
-#include "element.h"
-
-// Accidental Values
-
-enum { ACC_NONE, ACC_SHARP, ACC_FLAT, ACC_SHARP2, ACC_FLAT2, ACC_NATURAL };
+class Staff;
+class Part;
+class Score;
+class Chord;
+class Measure;
 
 //---------------------------------------------------------
-//   Accidental
+//   MuseData
+//    used importing Musedata files
 //---------------------------------------------------------
 
-class Accidental : public Compound {
+class MuseData {
+      int _division;
+      int curTick;
+      QList<QStringList> parts;
+      Score* score;
+      Chord* chord;
+      Measure* measure;
+      int voice;
+
+      void musicalAttribute(QString s, Part*);
+      void readPart(QStringList sl, Part*);
+      void readNote(Part*, const QString& s);
+      void readChord(Part*, const QString& s);
+      void readRest(Part*, const QString& s);
+      void readBackup(const QString& s);
+      Measure* createMeasure();
+      int countStaves(const QStringList& sl);
+
    public:
-      Accidental(Score*);
-      virtual Accidental* clone() const { return new Accidental(*this); }
-      virtual ElementType type() const  { return ACCIDENTAL; }
-      virtual void setSubtype(int v);
-      virtual bool startEdit(QMatrix&, const QPointF&);
-      virtual bool edit(QKeyEvent*);
-      virtual void endEdit();
-      static int subtype2value(int);      // return effective pitch offset
-      static int value2subtype(int);
+      MuseData(Score* s) { score = s; }
+      bool read(const QString&);
+      void convert();
       };
 
 #endif

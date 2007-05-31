@@ -199,7 +199,7 @@ class Measure : public Element {
       void removeMStaff(MStaff staff, int idx);
 
       void layoutBeams(ScoreLayout*);
-      void layoutNoteHeads(ScoreLayout*, int staff);
+      void layoutNoteHeads(int staff);
 
       void moveTicks(int diff);
       void insert(Segment* ns, Segment* s);

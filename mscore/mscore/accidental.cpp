@@ -77,7 +77,7 @@ void Accidental::setSubtype(int i)
                         case  9: s->setSym(flatflatSym);   break;
                         case 10: s->setSym(naturalSym);    break;
                         }
-                  addElement(s, x, 0.0);
+                  addElement(s, x - s->bbox().x(), 0.0);
                   x += s->width();
                   s = new Symbol(score());
                   s->setSym(rightparenSym);
@@ -115,7 +115,7 @@ void Accidental::setSubtype(int i)
       }
 
 //---------------------------------------------------------
-//   value
+//   subtype2value
 //    returns the resulting pitch offset
 //---------------------------------------------------------
 
@@ -132,6 +132,22 @@ int Accidental::subtype2value(int st)
             0, 0, 0, 0, 0,  // [] brackets
             };
       return preTab[st % 100];
+      }
+
+//---------------------------------------------------------
+//   value2subtype
+//---------------------------------------------------------
+
+int Accidental::value2subtype(int v)
+      {
+      switch(v) {
+            case 0:  return ACC_NONE;
+            case 1:  return ACC_SHARP;
+            case 2:  return ACC_SHARP2;
+            case -1: return ACC_FLAT;
+            case -2: return ACC_FLAT2;
+            }
+      return 0;
       }
 
 //---------------------------------------------------------

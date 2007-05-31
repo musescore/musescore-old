@@ -1201,7 +1201,7 @@ void Canvas::dragMoveEvent(QDragMoveEvent* event)
                               }
                         else {
                               if (debugMode)
-                                    printf("ignore drop of %s\n", elementNames[type]);
+                                    printf("ignore drop of %s(%d)\n", elementNames[type], type);
                               event->ignore();
                               setDropTarget(0);
                               }
@@ -1572,6 +1572,13 @@ void Canvas::drawElements(QPainter& p,const QList<Element*>& el)
                   p.setPen(QPen(Qt::blue, 0, Qt::SolidLine));
                   // p.drawRect(e->bbox());
                   p.drawPath(e->shape());
+                  p.setPen(QPen(Qt::red, 0, Qt::SolidLine));
+                  qreal w = e->bbox().width() / 4.0;
+                  qreal h = e->bbox().height() / 4.0;
+                  qreal x = e->bbox().x();
+                  qreal y = e->bbox().y();
+                  p.drawLine(QLineF(x-w, y-h, x+w, y+h));
+                  p.drawLine(QLineF(x+w, y-h, x-w, y+h));
 #if 0
                   Element* seg = e->parent();
                   if (e->type() == NOTE)

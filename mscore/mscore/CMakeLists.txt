@@ -138,7 +138,7 @@ add_executable ( mscore
       timedialog.cpp symboldialog.cpp trill.cpp tuplet.cpp shortcutcapturedialog.cpp
       undo.cpp utils.cpp xml.cpp timesig.cpp lyrics.cpp bsp.cpp
       viewer.cpp volta.cpp simplebutton.cpp image.cpp keyfinder.cpp
-      pitchspelling.cpp
+      pitchspelling.cpp musedata.cpp
       )
 
 if (CROSS_MINGW)

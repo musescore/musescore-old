@@ -95,9 +95,9 @@ endif (APPLE)
 ##  look for Qt4
 ##
 
-find_package(Qt4)
+find_package(Qt4 4.3)
 if (NOT QT4_FOUND)
-      message(FATAL_ERROR "Fatal error: QT (version >= 4.2.0) required.\n"
+      message(FATAL_ERROR "Fatal error: QT (version >= 4.3.0) required.\n"
          "Cmake tries to detect QT4 by searching for 'qmake' in your PATH\n"
          "If you have QT4 installed, make sure qmake is found in your PATH."
          )

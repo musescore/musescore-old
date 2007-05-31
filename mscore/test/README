@@ -48,3 +48,11 @@ testVoicePiano1.xml      score with both a voice and a piano part
 testWedge1.xml           crescendo and diminuendo wedges
 testWords1.xml           the "words" direction
 
+-------------------------------------------------
+      MuseData
+      http://www.musedata.org
+-------------------------------------------------
+
+bach-1046-1.md          MuseData import testfile
+teleman.md
+

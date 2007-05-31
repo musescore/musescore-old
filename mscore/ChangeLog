@@ -1,3 +1,5 @@
+31.5.7 (ws)
+      - implemented MuseData import
 27.5.7 (ws)
       - dont use .mscorePrj anymore; move infos from .mscorePrj
         into QSettings

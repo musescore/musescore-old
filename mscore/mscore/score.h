@@ -356,6 +356,7 @@ class Score : public QObject {
       void updateStaffIndex();
       void sortStaves(QList<int> src, QList<int> dst);
       void read(QString name);
+      void readMuseData(QString name);
 
       void setSpatium(double v);
       double mag() const         { return scoreView._mag;     }
@@ -373,6 +374,7 @@ class Score : public QObject {
       void importMusicXml(const QString&);
       void convertMidi(MidiFile*);
       bool importMidi(const QString& name);
+      bool importMuseData(const QString& name);
       ChordRest* getSelectedChordRest();
       int pos();
       Measure* tick2measure(int tick) const;

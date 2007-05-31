@@ -207,6 +207,8 @@ void Segment::add(Element* el)
                         return;
                         }
                   measure()->setStartRepeat(true);
+                  if (_elist[staffIdx * VOICES + el->voice()])
+                        printf("%06d: segment slot already used\n", el->tick());
                   _elist[staffIdx * VOICES + el->voice()] = el;
                   break;
 

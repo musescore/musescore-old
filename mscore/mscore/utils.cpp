@@ -92,12 +92,12 @@ Measure* Score::tick2measure(int tick) const
                   return m;
             }
       printf("tick2measure %d not found\n", tick);
+      int idx = 0;
       for (Measure* m = _layout->first(); m; m = m->next()) {
             int st = m->tick();
             int l  = m->tickLen();
-            printf("   %d %d %d\n", st, tick, st+l);
-            if (tick >= st && tick < (st+l))
-                  return m;
+            printf("(%d)   %d - %d\n", idx, st, st+l);
+            ++idx;
             }
       return 0;
       }
