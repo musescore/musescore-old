@@ -1254,7 +1254,8 @@ void Score::convertTrack(MidiTrack* midiTrack, int staffIdx)
                               QList<MidiNote*>& nl = n->mc->notes();
                               for (int i = 0; i < nl.size(); ++i) {
                                     MidiNote* mn = nl[i];
-                        		Note* note = new Note(this, mn->pitch(), false);
+                        		Note* note = new Note(this);
+                                    note->setPitch(mn->pitch());
                                     note->setTpc(mn->tpc());
                         		note->setStaff(cstaff);
                   	      	chord->add(note);
@@ -1342,7 +1343,8 @@ void Score::convertTrack(MidiTrack* midiTrack, int staffIdx)
                   chord->setTickLen(len);
             	foreach (MNote* n, notes) {
                         foreach(MidiNote* mn, n->mc->notes()) {
-                  		Note* note = new Note(this, mn->pitch(), false);
+                  		Note* note = new Note(this);
+                              note->setPitch(mn->pitch());
             	      	note->setStaff(cstaff);
                               note->setTick(tick);
                               note->setTpc(mn->tpc());

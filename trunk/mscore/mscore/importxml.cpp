@@ -91,7 +91,7 @@ static void xmlSetPitch(Note* n, int tick, char step, int alter, int octave, int
       line     += clefTable[clef].yOffset;
 //      printf(" n->staff=%p clef=%d line=%d\n", staff, clef, line);
       n->setLine(line);
-//TODO      n->setUserAccidental(accidental);
+      n->changeAccidental(accidental);
       }
 
 //---------------------------------------------------------

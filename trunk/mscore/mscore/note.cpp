@@ -52,28 +52,11 @@ Note::Note(Score* s)
       _mirror         = false;
       _line           = 0;
       _move           = 0;
+      _userAccidental = 0;
       _lineOffset     = 0;
       _dots           = 0;
       _tieFor         = 0;
       _tieBack        = 0;
-      _head           = 0;
-      _tpc            = -1;
-      }
-
-Note::Note(Score* s, int p, bool g)
-   : Element(s)
-      {
-      _durationType   = D_QUARTER;
-      _grace          = g;
-      _accidental     = 0;
-      _mirror         = false;
-      _line           = 0;
-      _move           = 0;
-      _lineOffset     = 0;
-      _dots           = 0;
-      _tieFor         = 0;
-      _tieBack        = 0;
-      setPitch(p);
       _head           = 0;
       _tpc            = -1;
       }
@@ -170,10 +153,15 @@ void Note::changePitch(int n)
 
 void Note::changeAccidental(int accType)
       {
-      int pre  = Accidental::subtype2value(accType);
-      int line = tpc2line(_tpc);
-      _tpc     = line2tpc(line, pre);
-      _pitch   = tpc2pitch(_tpc) + (_pitch / 12) * 12;
+      _userAccidental = 0;
+      int acc1  = Accidental::subtype2value(accType);
+      int line  = tpc2line(_tpc);
+      _tpc      = line2tpc(line, acc1);
+      _pitch    = tpc2pitch(_tpc) + (_pitch / 12) * 12;
+      chord()->measure()->layoutNoteHeads(staffIdx());    // compute actual accidental
+      int acc2 = accidentalIdx();
+      if (accType != Accidental::value2subtype(acc2))
+            _userAccidental = accType;    // bracketed editorial accidental
       }
 
 //---------------------------------------------------------

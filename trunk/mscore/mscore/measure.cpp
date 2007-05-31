@@ -323,7 +323,7 @@ static void initLineList(char* ll, int key)
  on context.
 */
 
-void Measure::layoutNoteHeads(ScoreLayout*, int staff)
+void Measure::layoutNoteHeads(int staff)
       {
       char tversatz[74];      // list of already set accidentals for this measure
 
@@ -362,23 +362,29 @@ void Measure::layoutNoteHeads(ScoreLayout*, int staff)
                               line += 7;
                         else
                               line -= (tpcPitch/12)*7;
-                        int accidental = ((tpc + 1) / 7) - 2;
 
-                        if (accidental && !tversatz[line]) {
-                              tversatz[line] = accidental;
-                              switch(accidental) {
-                                    case -2: accidental = ACC_FLAT2;  break;
-                                    case -1: accidental = ACC_FLAT;   break;
-                                    case  1: accidental = ACC_SHARP;  break;
-                                    case  2: accidental = ACC_SHARP2; break;
-                                    default: printf("bad accidental\n"); break;
+                        int accidental = 0;
+                        if (note->userAccidental())
+                              accidental = note->userAccidental();
+                        else  {
+                              accidental = ((tpc + 1) / 7) - 2;
+
+                              if (accidental && !tversatz[line]) {
+                                    tversatz[line] = accidental;
+                                    switch(accidental) {
+                                          case -2: accidental = ACC_FLAT2;  break;
+                                          case -1: accidental = ACC_FLAT;   break;
+                                          case  1: accidental = ACC_SHARP;  break;
+                                          case  2: accidental = ACC_SHARP2; break;
+                                          default: printf("bad accidental\n"); break;
+                                          }
                                     }
-                              }
-                        else if (accidental == tversatz[line])
-                              accidental = 0;
-                        else if (!accidental && tversatz[line]) {
-                              tversatz[line] = 0;
-                              accidental = ACC_NATURAL;   // natural
+                              else if (accidental == tversatz[line])
+                                    accidental = 0;
+                              else if (!accidental && tversatz[line]) {
+                                    tversatz[line] = 0;
+                                    accidental = ACC_NATURAL;   // natural
+                                    }
                               }
 
                         //
@@ -583,7 +589,7 @@ void Measure::layout2(ScoreLayout* layout)
          && !_irregular
          && (pn || ::style->showMeasureNumberOne)) {
             if (::style->measureNumberSystem) {
-                  if (system()->measures() && system()->measures()->front() == this)
+                  if (system() && system()->measures() && system()->measures()->front() == this)
                         ns = s;
                   }
             else if ((pn % ::style->measureNumberInterval) == 0)

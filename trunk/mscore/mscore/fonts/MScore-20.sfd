@@ -1,4 +1,4 @@
-SplineFontDB: 1.0
+SplineFontDB: 2.0
 FontName: MScore-20
 FullName: Emmentaler 20 from Lilypond
 FamilyName: MScore
@@ -10,14 +10,14 @@ UnderlinePosition: -99
 UnderlineWidth: 49
 Ascent: 600
 Descent: 400
-XUID: [1021 437 116440368 12789433]
+XUID: [1021 437 116440368 12789434]
 UniqueID: 4131153
 FSType: 0
 OS2Version: 2
 OS2_WeightWidthSlopeOnly: 0
 OS2_UseTypoMetrics: 1
 CreationTime: 1122244955
-ModificationTime: 1171539747
+ModificationTime: 1180523000
 PfmFamily: 17
 TTFWeight: 400
 TTFWidth: 5
@@ -48,8 +48,6 @@ OS2SupYOff: 480
 OS2StrikeYSize: 48
 OS2StrikeYPos: 258
 OS2Vendor: 'PfEd'
-ScriptLang: 1
- 1 latn 1 dflt 
 LangName: 1033 
 Encoding: UnicodeBmp
 UnicodeInterp: none
@@ -57,7 +55,7 @@ NameList: Adobe Glyph List
 DisplaySize: -96
 AntiAlias: 1
 FitToEm: 1
-WinInfo: 57584 8 8
+WinInfo: 57600 8 8
 BeginPrivate: 8
 BlueValues 30 [-4 0 266 292 472 472 500 500]
 OtherBlues 11 [-146 -146]
@@ -2514,48 +2512,48 @@ EndSplineSet
 EndChar
 StartChar: accidentals.rightparen
 Encoding: 57623 57623 52
-Width: 149
+Width: 116
 GlyphClass: 2
-Flags: HMW
-HStem: 224 40G<49 53>
-VStem: 96 52
+Flags: HMWO
+HStem: 224 40G<14.25 18.25>
+VStem: 61.25 52
 Fore
-44 260 m 1
- 44 262 48 264 50 264 c 0
- 56 264 60 260 68 244 c 0
- 112 176 140 112 148 42 c 0
- 150 22 150 -22 148 -40 c 0
- 140 -112 112 -176 68 -244 c 0
- 60 -260 56 -264 50 -264 c 0
- 44 -264 36 -256 36 -250 c 0
- 36 -248 40 -244 42 -240 c 0
- 76 -188 92 -134 98 -56 c 0
- 100 -36 100 36 98 56 c 0
- 92 134 76 188 42 240 c 0
- 40 244 36 248 36 250 c 0
- 36 254 40 260 44 260 c 1
+9.25 260 m 1
+ 9.25 262 13.25 264 15.25 264 c 0
+ 21.25 264 25.25 260 33.25 244 c 0
+ 77.25 176 105.25 112 113.25 42 c 0
+ 115.25 22 115.25 -22 113.25 -40 c 0
+ 105.25 -112 77.25 -176 33.25 -244 c 0
+ 25.25 -260 21.25 -264 15.25 -264 c 0
+ 9.25 -264 1.25 -256 1.25 -250 c 0
+ 1.25 -248 5.25 -244 7.25 -240 c 0
+ 41.25 -188 57.25 -134 63.25 -56 c 0
+ 65.25 -36 65.25 36 63.25 56 c 0
+ 57.25 134 41.25 188 7.25 240 c 0
+ 5.25 244 1.25 248 1.25 250 c 0
+ 1.25 254 5.25 260 9.25 260 c 1
 EndSplineSet
 EndChar
 StartChar: accidentals.leftparen
 Encoding: 57624 57624 53
-Width: 0
+Width: 116
 GlyphClass: 2
-Flags: HMW
-VStem: -148 50
+Flags: HMWO
+VStem: 2.74967 50
 Fore
--56 260 m 1
- -50 264 -44 264 -40 256 c 1
- -36 252 -36 248 -42 240 c 0
- -76 188 -92 134 -98 56 c 0
- -100 36 -100 -36 -98 -56 c 0
- -92 -134 -76 -188 -42 -240 c 0
- -40 -244 -36 -248 -36 -250 c 0
- -36 -256 -44 -264 -48 -264 c 0
- -56 -264 -60 -260 -68 -244 c 0
- -112 -176 -140 -112 -148 -40 c 0
- -150 -22 -150 22 -148 42 c 0
- -140 112 -112 176 -68 244 c 0
- -64 252 -58 260 -56 260 c 1
+94.75 260 m 1
+ 100.75 264 106.75 264 110.75 256 c 1
+ 114.75 252 114.75 248 108.75 240 c 0
+ 74.75 188 58.75 134 52.75 56 c 0
+ 50.75 36 50.75 -36 52.75 -56 c 0
+ 58.75 -134 74.75 -188 108.75 -240 c 0
+ 110.75 -244 114.75 -248 114.75 -250 c 0
+ 114.75 -256 106.75 -264 102.75 -264 c 0
+ 94.75 -264 90.75 -260 82.75 -244 c 0
+ 38.75 -176 10.75 -112 2.75 -40 c 0
+ 0.75 -22 0.75 22 2.75 42 c 0
+ 10.75 112 38.75 176 82.75 244 c 0
+ 86.75 252 92.75 260 94.75 260 c 1
 EndSplineSet
 EndChar
 StartChar: dots.dot

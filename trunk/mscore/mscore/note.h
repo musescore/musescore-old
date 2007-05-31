@@ -50,6 +50,7 @@ class Note : public Element {
       int _tpc;               ///< tonal pitch class
       int _line;              ///< y-Position; 0 - top line.
       int _move;              ///< -1, 0, +1.
+      int _userAccidental;    ///< editorial accidental type (0-15)
       Accidental* _accidental;
 
       int _head;              ///< Note head.
@@ -70,7 +71,6 @@ class Note : public Element {
 
    public:
       Note(Score*);
-      Note(Score*, int pitch, bool grace = false);
       Note &operator=(const Note&);
       ~Note();
       virtual Note* clone() const { return new Note(*this); }
@@ -94,8 +94,11 @@ class Note : public Element {
       int tpc() const                 { return _tpc; }
       void setTpc(int v)              { _tpc = v;    }
       void changePitch(int val);
+
       int move() const                { return _move; }
       void setMove(int val)           { _move = val; }
+
+      int userAccidental() const      { return _userAccidental; }
 
       int accidentalIdx() const       { return _accidental ? _accidental->subtype() : ACC_NONE; }
       Accidental* accidental() const  { return _accidental; }

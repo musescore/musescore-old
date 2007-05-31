@@ -213,6 +213,7 @@ class MuseScore : public QMainWindow {
       void exportMidi();
       void importMidi();
       void importMusicXml();
+      void importMuseData();
       void exportMusicXml();
       void editStyle();
       void saveStyle();

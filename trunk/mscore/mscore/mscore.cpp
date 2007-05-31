@@ -267,7 +267,8 @@ MuseScore::MuseScore()
          << "metronome" << "cut" << "copy" << "paste"
          << "beam-start" << "beam-mid" << "no-beam" << "beam32"
          << "file-open" << "file-new" << "file-template" << "file-save" << "file-save-as" << "file-close"
-         << "export-midi" << "export-xml" << "import-midi" << "import-xml" << "quit"
+         << "export-midi" << "export-xml" << "import-midi" << "import-xml"  << "import-muse"
+         << "quit"
          << "toggle-statusbar" << "note-input" << "pitch-spell"
          ;
       foreach(const QString s, sl) {
@@ -450,6 +451,7 @@ MuseScore::MuseScore()
       menuFile->addAction(getAction("export-xml"));
       menuFile->addAction(getAction("import-midi"));
       menuFile->addAction(getAction("import-xml"));
+      menuFile->addAction(getAction("import-muse"));
 
       menuFile->addSeparator();
       menuFile->addAction(getAction("print"));
@@ -1316,6 +1318,27 @@ void MuseScore::importMusicXml()
       }
 
 //---------------------------------------------------------
+//   importMuseData
+//---------------------------------------------------------
+
+void MuseScore::importMuseData()
+      {
+      QString name = QFileDialog::getOpenFileName(
+         this,
+         tr("MuseScore: Import MuseData"),
+         ".",
+         QString("MusicXml files (*.md);; All files (*)")
+         );
+      if (name.isEmpty())
+            return;
+      Score* score = new Score();
+      score->readMuseData(name);
+      score->setCreated(true);
+      appendScore(score);
+      tab->setCurrentIndex(scoreList.size() - 1);
+      }
+
+//---------------------------------------------------------
 //   showPlayPanel
 //---------------------------------------------------------
 
@@ -1815,6 +1838,8 @@ void MuseScore::cmd(QAction* a)
             importMidi();
       else if (cmd == "import-xml")
             importMusicXml();
+      else if (cmd == "import-muse")
+            importMuseData();
       else if (cmd == "quit")
             close();
       else if (cmd == "fingering")

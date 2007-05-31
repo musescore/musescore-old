@@ -1048,6 +1048,15 @@ Shortcut MuseScore::sc[] = {
          &fileOpenIcon
          ),
       Shortcut(
+         "import-muse",
+         QT_TR_NOOP("Import MuseData"),
+         0,
+         Qt::WindowShortcut,
+         QT_TR_NOOP("Import MuseData"),
+         QT_TR_NOOP("Import MuseData"),
+         &fileOpenIcon
+         ),
+      Shortcut(
          "quit",
          QT_TR_NOOP("Quit"),
          Qt::CTRL + Qt::Key_Q,

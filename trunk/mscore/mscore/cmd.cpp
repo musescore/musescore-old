@@ -565,7 +565,8 @@ void Score::setNote(int tick, Staff* staff, int voice, int pitch, int len)
             if (len < 0)
                   noteLen += len;
 
-            note = new Note(this, pitch, false);
+            note = new Note(this);
+            note->setPitch(pitch);
             note->setStaff(staff);
 
             if (seq && mscore->playEnabled()) {

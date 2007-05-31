@@ -919,13 +919,8 @@ QByteArray Element::mimeData(const QPointF& dragOffset) const
 //   readType
 //---------------------------------------------------------
 
-int Element::readType(QDomElement& e1, QPointF* dragOffset)
+int Element::readType(QDomElement& e, QPointF* dragOffset)
       {
-      QDomElement e = e1.nextSiblingElement("Element");
-      if (e1.isNull()) {
-            domError(e1);
-            return -1;
-            }
       int type = -1;
 
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
@@ -1012,10 +1007,8 @@ int Element::readType(QDomElement& e1, QPointF* dragOffset)
                   type = 0;
                   break;
                   }
-            if (type >= 0) {
-                  e1 = e;
+            if (type >= 0)
                   break;
-                  }
             }
       return type;
       }

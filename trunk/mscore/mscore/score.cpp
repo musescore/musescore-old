@@ -243,6 +243,10 @@ void Score::read(QString name)
             if (!importMidi(name))
                   return;
             }
+      else if (info.completeSuffix() == "md") {
+            if (!importMuseData(name))
+                  return;
+            }
       else {
             loadMsc(name);
             }
