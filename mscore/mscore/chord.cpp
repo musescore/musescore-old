@@ -228,28 +228,6 @@ void drawPosMark(QPainter& painter, const QPointF& p)
       }
 
 //---------------------------------------------------------
-//   draw
-//---------------------------------------------------------
-
-/**
- Draw chord and calculate bounding region.
-*/
-
-void Chord::draw(QPainter& p)
-      {
-      for (ciNote i = notes.begin(); i != notes.end(); ++i)
-            i->second->draw(p);
-      for (ciHelpLine l = helpLines.begin(); l != helpLines.end(); ++l)
-            (*l)->draw(p);
-      for (ciAttribute l = attributes.begin(); l != attributes.end(); ++l)
-            (*l)->draw(p);
-      if (_hook)
-            _hook->draw(p);
-      if (_stem)
-            _stem->draw(p);
-      }
-
-//---------------------------------------------------------
 //   bbox
 //---------------------------------------------------------
 
@@ -775,7 +753,7 @@ void Chord::readNote(QDomElement e, int staffIdx)
       note->setGrace(_grace);
       note->setStaff(staff());
       note->setVoice(voice());
-      note->setHead(tickLen());
+//      note->setHead(tickLen());
       if (ptch != -1)
             note->setPitch(ptch);
       if (tpc != -1)
@@ -800,7 +778,7 @@ void Chord::read(QDomElement e, int staffIdx)
                   note->setGrace(_grace);
                   note->setStaff(staff());
                   note->setVoice(voice());
-                  note->setHead(tickLen());
+//                  note->setHead(tickLen());
                   note->read(e);
                   notes.add(note);
                   }

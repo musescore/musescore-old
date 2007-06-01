@@ -216,8 +216,8 @@ void Segment::add(Element* el)
             case REST:
                   {
                   ChordRest* cr = (ChordRest*)el;
-                  if (cr->tuplet())
-                        cr->tuplet()->add(cr);
+//                  if (cr->tuplet())
+//                        cr->tuplet()->add(cr);
                   _elist[staffIdx * VOICES + el->voice()] = el;
                   }
                   break;

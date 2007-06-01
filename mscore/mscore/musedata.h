@@ -24,7 +24,7 @@
 class Staff;
 class Part;
 class Score;
-class Chord;
+class ChordRest;
 class Measure;
 
 //---------------------------------------------------------
@@ -37,7 +37,8 @@ class MuseData {
       int curTick;
       QList<QStringList> parts;
       Score* score;
-      Chord* chord;
+      ChordRest* chordRest;
+      int ntuplet;
       Measure* measure;
       int voice;
 
