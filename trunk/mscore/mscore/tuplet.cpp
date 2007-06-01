@@ -123,7 +123,7 @@ void Tuplet::layout(ScoreLayout* layout)
 
       const ChordRest* cr1 = _elements.front();
       const ChordRest* cr2 = _elements.back();
-      Measure* measure = cr1->measure();
+      Measure* measure     = cr1->measure();
       if (cr1->beam())
             _hasLine = false;
 
@@ -183,17 +183,20 @@ void Tuplet::layout(ScoreLayout* layout)
                         p1.setY(p2.y());
                   }
             }
+
       p1 -= mp;
       p2 -= mp;
 
       // center number
       _number->layout(layout);
       qreal x3 = p1.x() + (p2.x() - p1.x()) * .5;
+
       qreal y3 = p1.y() + (p2.y() - p1.y()) * .5
          - _number->bbox().height() * .5
          - (l1 + l2) * (isUp ? 1.0 : -1.0);
+
       qreal numberWidth = _number->bbox().width();
-      _number->setPos(QPointF(x3 - numberWidth * .5, y3));
+      _number->setPos(QPointF(x3 - numberWidth * .5, y3) - pos());
 
       if (_hasLine) {
             qreal slope = (p2.y() - p1.y()) / (p2.x() - p1.x());

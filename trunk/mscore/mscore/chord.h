@@ -131,7 +131,6 @@ class Chord : public ChordRest {
       virtual Chord* clone() const { return new Chord(*this); }
       virtual ElementType type() const { return CHORD; }
 
-      virtual void draw(QPainter&);
       virtual void write(Xml& xml) const;
       virtual void read(QDomElement, int staff);
       virtual void setSelected(bool f);

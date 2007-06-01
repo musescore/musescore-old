@@ -615,7 +615,6 @@ void Measure::layout2(ScoreLayout* layout)
             }
       foreach(Tuplet* tuplet, _tuplets)
             tuplet->layout(layout);
-
       }
 
 //---------------------------------------------------------
@@ -2413,7 +2412,7 @@ void Measure::read(QDomElement e, int idx)
                   Tuplet* tuplet = new Tuplet(score());
                   tuplet->read(e);
                   tuplet->setStaff(staff);
-                  _tuplets.append(tuplet);
+                  add(tuplet);
                   }
             else if (tag == "startRepeat")
                   _startRepeat = val.toInt();
@@ -2545,8 +2544,6 @@ void Measure::collectElements(QList<Element*>& el)
                               NoteAttribute* a = *i;
                               el.append(a);
                               }
-                        if (cr->tuplet())
-                              el.append(cr->tuplet());
                         }
                   else
                         el.append(e);
@@ -2580,6 +2577,11 @@ void Measure::collectElements(QList<Element*>& el)
             if (b && (!b->staff() || b->staff()->show()))
                   el.append(b);
             }
+      foreach(Tuplet* tuplet, _tuplets) {
+            if (tuplet->staff()->show())
+                  el.append(tuplet);
+            }
+
       if (noText())
             el.append(noText());
       }

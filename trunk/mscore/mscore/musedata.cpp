@@ -31,6 +31,7 @@
 #include "rest.h"
 #include "text.h"
 #include "bracket.h"
+#include "tuplet.h"
 
 //---------------------------------------------------------
 //   musicalAttribute
@@ -47,7 +48,6 @@ void MuseData::musicalAttribute(QString s, Part* part)
                   }
             else if (item.startsWith("Q:")) {
                   _division = item.mid(2).toInt();
-//                  printf("division %d\n", _division);
                   }
             else if (item.startsWith("T:")) {
                   QStringList tl = item.mid(2).split("/");
@@ -57,10 +57,8 @@ void MuseData::musicalAttribute(QString s, Part* part)
                         }
                   int z = tl[0].toInt();
                   int n = tl[1].toInt();
-                  if ((z > 0) && (n > 0)) {
-                        printf("add sig at %d  %d %d\n", curTick, z, n);
+                  if ((z > 0) && (n > 0))
                         score->sigmap->add(curTick, z, n);
-                        }
                   }
             else if (item.startsWith("X:"))
                   ;
@@ -126,13 +124,8 @@ void MuseData::readChord(Part* part, const QString& s)
             pitch = 0;
       if (pitch > 127)
             pitch = 127;
-      {
-      int ticks = s.mid(5, 3).toInt();
-      ticks     = (ticks * ::division + _division/2) / _division;
-      if (ticks != chord->tickLen())
-            printf("Chord-Ticks %d-%d\n", ticks, chord->tickLen());
-      }
 
+      Chord* chord = (Chord*)chordRest;
       Note* note = new Note(score);
       note->setPitch(pitch);
       note->setStaff(staff);
@@ -189,10 +182,50 @@ void MuseData::readNote(Part* part, const QString& s)
       int tick  = curTick;
       curTick  += ticks;
 
-      chord = new Chord(score, tick);
+      Tuplet* tuplet = 0;
+      if (s.size() >= 22) {
+            int a = 1;
+            int b = 1;
+            if (s[19] != ' ') {
+                  a = s[19].toAscii() - '0';
+                  if (a == 3 && s[20] != ':')
+                        b = 2;
+                  else {
+                        b = s[21].toAscii() - '0';
+                        }
+                  }
+            if (a == 3 && b == 2) {       // triplet
+                  if (chordRest && chordRest->tuplet() && ntuplet) {
+                        tuplet = chordRest->tuplet();
+                        }
+                  else {
+                        tuplet = new Tuplet(score);
+                        tuplet->setStaff(staff);
+                        tuplet->setBaseLen(ticks * a / b);
+
+                        ntuplet = a;
+                        tuplet->setNormalNotes(b);
+                        tuplet->setActualNotes(a);
+
+                        measure->add(tuplet);
+                        }
+                  }
+            else if (a == 1 && b == 1)
+                  ;
+            else
+                  printf("unsupported tuple %d/%d\n", a, b);
+            }
+
+      Chord* chord = new Chord(score, tick);
+      chordRest = chord;
       chord->setStaff(staff);
-      chord->setTickLen(ticks);
       chord->setStemDirection(dir);
+      if (tuplet) {
+            chord->setTuplet(tuplet);
+            tuplet->add(chord);
+            --ntuplet;
+            }
+      chord->setTickLen(ticks);
 
       Segment* segment = measure->getSegment(chord);
 
@@ -236,12 +269,27 @@ void MuseData::readRest(Part* part, const QString& s)
                   staffIdx = s.mid(23,1).toInt() - 1;
             }
       Staff* staff = part->staff(staffIdx);
+      int gstaff = score->staff(staff);
 
       Rest* rest = new Rest(score, tick, ticks);
+      chordRest = rest;
       rest->setStaff(staff);
-      Measure* measure = score->tick2measure(tick);
       Segment* segment = measure->getSegment(rest);
-      segment->add(rest);
+
+      voice = 0;
+      for (; voice < VOICES; ++voice) {
+            Element* e = segment->element(gstaff * VOICES + voice);
+            if (e == 0) {
+                  rest->setVoice(voice);
+                  segment->add(rest);
+                  break;
+                  }
+            }
+      if (voice == VOICES) {
+            printf("cannot allocate voice\n");
+            delete rest;
+            return;
+            }
       }
 
 //---------------------------------------------------------
@@ -268,8 +316,17 @@ Measure* MuseData::createMeasure()
       for (Measure* m = la->first(); m; m = m->next()) {
             int st = m->tick();
             int l  = m->tickLen();
-            if (curTick >= st && curTick < (st+l))
+            if (curTick == st)
                   return m;
+            if (curTick > st && curTick < (st+l)) {
+                  // irregular measure
+                  int z, n;
+                  score->sigmap->timesig(st, z, n);
+                  score->sigmap->add(st, curTick - st, z, n);
+                  score->sigmap->add(curTick, z, n);
+                  m->setTickLen(curTick - st);
+                  break;
+                  }
             if (curTick < st + l) {
                   printf("cannot create measure at %d\n", curTick);
                   return 0;
@@ -296,12 +353,6 @@ Measure* MuseData::createMeasure()
 
 void MuseData::readPart(QStringList sl, Part* part)
       {
-#if 0
-      printf("ReadPart=============================================\n");
-      foreach(QString s, sl)
-            printf("%s\n", qPrintable(s));
-      printf("=============================================\n");
-#endif
       int line = 10;
       QString s;
       for (; line < sl.size(); ++line) {
@@ -314,6 +365,7 @@ void MuseData::readPart(QStringList sl, Part* part)
             return;
             }
       curTick = 0;
+      measure = 0;
       measure = createMeasure();
       for (; line < sl.size(); ++line) {
             s = sl[line];

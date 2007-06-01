@@ -17,21 +17,23 @@ Features:
       - many editing functions
       - MusicXML import/export
       - Midi (SMF) import/export
+      - MuseData import
       - Midi input for note entry
       - integrated sequencer and software synthesizer to
         play the score
       - print or create pdf files
 
 Requirements:
-      - qt4 gui lib version qt4.2.x
+      - qt4 gui lib version qt4.3.x
 
         Note that many linux distributions split packages into a user
         and developer package and that you need to install both.
 
       - ALSA Version 1.0 or newer (audio/midi input/output)
+
+      - CMake 2.4.6
+
       - recommended: JACK audio server (audio output)
-      - fluidsynth-1.0.0 and a decent sound font
-      - CMake 2.4
 
 Credits:
       MuseScore uses the "Emmentaler" font from the lilypond project.
@@ -45,8 +47,8 @@ Installation:
             make release
             make
 
-      if something goes wrong, then remove the whole subdirectory
-      build with "make clean" and start new with "make"
+      if something goes wrong, then remove the whole build subdirectory
+      with "make clean" and start new with "make"
 
       - install as root user
             sudo make install
@@ -85,7 +87,7 @@ Test:
 
       to start mscore. On first invocation a demofile
       (Modeste Moussorgsky: Pictures of an exhibition: Promenade)
-      is shown. You probably want to change that with the
+      is shown. You probably want to change that in the
       "preferences" dialog.
 
 =================================================================
