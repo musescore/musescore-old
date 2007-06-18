@@ -32,6 +32,9 @@
 #include "text.h"
 #include "bracket.h"
 #include "tuplet.h"
+#include "slur.h"
+#include "dynamics.h"
+#include "lyrics.h"
 
 //---------------------------------------------------------
 //   musicalAttribute
@@ -132,6 +135,37 @@ void MuseData::readChord(Part* part, const QString& s)
       note->setTick(chord->tick());
       note->setVoice(voice);
       chord->add(note);
+      }
+
+//---------------------------------------------------------
+//   openSlur
+//---------------------------------------------------------
+
+void MuseData::openSlur(int idx, int tick, Staff* staff, int voice)
+      {
+      if (slur[idx]) {
+            printf("%06d: slur %d already open\n", tick, idx+1);
+            return;
+            }
+      slur[idx] = new Slur(score);
+      slur[idx]->setStart(tick, staff, voice);
+      slur[idx]->setStaff(staff);
+      slur[idx]->setParent(measure);
+      score->addElement(slur[idx]);
+      }
+
+//---------------------------------------------------------
+//   closeSlur
+//---------------------------------------------------------
+
+void MuseData::closeSlur(int idx, int tick, Staff* staff, int voice)
+      {
+      if (slur[idx]) {
+            slur[idx]->setEnd(tick, staff, voice);
+            slur[idx] = 0;
+            }
+      else
+            printf("%06d: slur %d not open\n", tick, idx+1);
       }
 
 //---------------------------------------------------------
@@ -249,6 +283,145 @@ void MuseData::readNote(Part* part, const QString& s)
       note->setTick(tick);
       note->setVoice(voice);
       chord->add(note);
+
+      QString dynamics;
+      QString an = s.mid(31, 11);
+      for (int i = 0; i < an.size(); ++i) {
+            if (an[i] == '(')
+                  openSlur(0, tick, staff, voice);
+            else if (an[i] == ')')
+                  closeSlur(0, tick, staff, voice);
+            else if (an[i] == '[')
+                  openSlur(1, tick, staff, voice);
+            else if (an[i] == ']')
+                  closeSlur(1, tick, staff, voice);
+            else if (an[i] == '{')
+                  openSlur(2, tick, staff, voice);
+            else if (an[i] == '}')
+                  closeSlur(2, tick, staff, voice);
+            else if (an[i] == 'z')
+                  openSlur(3, tick, staff, voice);
+            else if (an[i] == 'x')
+                  closeSlur(3, tick, staff, voice);
+            else if (an[i] == '.') {
+                  NoteAttribute* atr = new NoteAttribute(score);
+                  atr->setSubtype(StaccatoSym);
+                  chord->add(atr);
+                  }
+            else if (an[i] == '_') {
+                  NoteAttribute* atr = new NoteAttribute(score);
+                  atr->setSubtype(TenutoSym);
+                  chord->add(atr);
+                  }
+            else if (an[i] == 'v') {
+                  NoteAttribute* atr = new NoteAttribute(score);
+                  atr->setSubtype(UpbowSym);
+                  chord->add(atr);
+                  }
+            else if (an[i] == 'n') {
+                  NoteAttribute* atr = new NoteAttribute(score);
+                  atr->setSubtype(DownbowSym);
+                  chord->add(atr);
+                  }
+            else if (an[i] == 't') {
+                  NoteAttribute* atr = new NoteAttribute(score);
+                  atr->setSubtype(TrillSym);
+                  chord->add(atr);
+                  }
+            else if (an[i] == 'F') {
+                  NoteAttribute* atr = new NoteAttribute(score);
+                  atr->setSubtype(UfermataSym);
+                  chord->add(atr);
+                  }
+            else if (an[i] == 'E') {
+                  NoteAttribute* atr = new NoteAttribute(score);
+                  atr->setSubtype(DfermataSym);
+                  chord->add(atr);
+                  }
+            else if (an[i] == 'O') {
+                  // NoteAttribute* atr = new NoteAttribute(score);
+                  // atr->setSubtype(DownbowSym);
+                  // chord->add(atr);
+                  printf("%06d: open string '%c' not implemented\n", tick, an[i].toAscii());
+                  }
+            else if (an[i] == '&') {
+                  // skip editorial level
+                  if (i <= an.size() && an[i+1].isDigit())
+                        ++i;
+                  }
+            else if (an[i] == 'p')
+                  dynamics += "p";
+            else if (an[i] == 'm')
+                  dynamics += "m";
+            else if (an[i] == 'f')
+                  dynamics += "f";
+            else if (an[i] == '-')        // tie
+                  ;
+            else if (an[i] == '*')        // start tuplet
+                  ;
+            else if (an[i] == '!')        // stop tuplet
+                  ;
+            else if (an[i] == '+')        // cautionary accidental
+                  ;
+            else if (an[i] == 'X')        // ???
+                  ;
+            else if (an[i] == ' ')
+                  ;
+            else {
+                  printf("%06d: notation '%c' not implemented\n", tick, an[i].toAscii());
+                  }
+            }
+      if (!dynamics.isEmpty()) {
+            Dynamic* dyn = new Dynamic(score);
+            dyn->setSubtype(dynamics);
+            dyn->setStaff(staff);
+            dyn->setTick(tick);
+            measure->add(dyn);
+            }
+
+      QString txt = s.mid(43, 36);
+      if (!txt.isEmpty()) {
+            QStringList sl = txt.split("|");
+            int no = 0;
+            foreach(QString w, sl) {
+                  w = diacritical(w);
+                  Lyrics* l = new Lyrics(score);
+                  l->setText(w);
+                  l->setTick(tick);
+                  l->setNo(no++);
+                  l->setStaff(staff);
+                  Segment* segment = measure->tick2segment(tick);
+                  segment->add(l);
+                  }
+            }
+      }
+
+//---------------------------------------------------------
+//   diacritical
+// TODO: not complete
+//---------------------------------------------------------
+
+QString MuseData::diacritical(QString s)
+      {
+      struct TAB {
+            const char* a;
+            const char* b;
+            } tab[] = {
+            { "\\\\", "\\" },
+            { "\\2s", "ß" },
+            { "\\3a", "ä" },
+            { "\\3o", "ö" },
+            { "\\3u", "ü" },
+
+            { "\\s2", "ß" },
+            { "\\a3", "ä" },
+            { "\\o3", "ö" },
+            { "\\u3", "ü" },
+            };
+      for (unsigned int i = 0; i < sizeof(tab)/sizeof(*tab); ++i) {
+            s = s.replace(tab[i].a, QString::fromUtf8(tab[i].b));
+            }
+      return s;
       }
 
 //---------------------------------------------------------
@@ -365,6 +538,10 @@ void MuseData::readPart(QStringList sl, Part* part)
             return;
             }
       curTick = 0;
+      slur[0] = 0;
+      slur[1] = 0;
+      slur[2] = 0;
+      slur[3] = 0;
       measure = 0;
       measure = createMeasure();
       for (; line < sl.size(); ++line) {

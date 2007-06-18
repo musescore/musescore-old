@@ -809,19 +809,13 @@ void MusicXml::direction(Measure* measure, int staff, QDomElement e)
                               type = ee.attribute(QString("type"));
                               }
                         else if (dirType == "dynamics") {
-#if 0  //TODOWS
-
-                              QDomElement eee = n.firstChild();
-                              if (!nn.isNull()) {
-                                    QDomElement e = nn.toElement();
-                                    if (!e.isNull()) {
-                                          if (e.tagName() == "other-dynamics")
-                                                dynamics.push_back(e.text());
-                                          else
-                                                dynamics.push_back(e.tagName());
-                                          }
+                              QDomElement eee = ee.firstChildElement();
+                              if (!eee.isNull()) {
+                                    if (eee.tagName() == "other-dynamics")
+                                          dynamics.push_back(eee.text());
+                                    else
+                                          dynamics.push_back(eee.tagName());
                                     }
-#endif
                               }
                         else if (dirType == "wedge") {
                               type   = ee.attribute(QString("type"));

@@ -26,6 +26,7 @@ class Part;
 class Score;
 class ChordRest;
 class Measure;
+class Slur;
 
 //---------------------------------------------------------
 //   MuseData
@@ -41,6 +42,7 @@ class MuseData {
       int ntuplet;
       Measure* measure;
       int voice;
+      Slur* slur[4];
 
       void musicalAttribute(QString s, Part*);
       void readPart(QStringList sl, Part*);
@@ -50,6 +52,9 @@ class MuseData {
       void readBackup(const QString& s);
       Measure* createMeasure();
       int countStaves(const QStringList& sl);
+      void openSlur(int idx, int tick, Staff* staff, int voice);
+      void closeSlur(int idx, int tick, Staff* staff, int voice);
+      QString diacritical(QString);
 
    public:
       MuseData(Score* s) { score = s; }

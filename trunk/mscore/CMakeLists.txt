@@ -74,11 +74,6 @@ include ( ${PROJECT_SOURCE_DIR}/cmake/TargetDoc.cmake)
 # for debugging the make system uncomment next line:
 # set(CMAKE_VERBOSE_MAKEFILE ON)
 
-set(QT_USE_QTXML TRUE)
-set(QT_USE_QTSVG TRUE)
-set(QT_USE_QTDESIGNER TRUE)
-set(QT_USE_QTNSPLUGIN TRUE)
-
 ##
 ## Just print a notice if this is OS X
 ##
@@ -95,6 +90,11 @@ endif (APPLE)
 ##  look for Qt4
 ##
 
+set(QT_MIN_VERSION "4.3.0")
+set(QT_USE_QTXML TRUE)
+set(QT_USE_QTSVG TRUE)
+set(QT_USE_QTDESIGNER TRUE)
+set(QT_USE_QTNSPLUGIN TRUE)
 find_package(Qt4 4.3)
 if (NOT QT4_FOUND)
       message(FATAL_ERROR "Fatal error: QT (version >= 4.3.0) required.\n"
