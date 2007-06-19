@@ -833,12 +833,12 @@ void Score::cmdAddBSymbol(BSymbol* s, const QPointF& pos, const QPointF& off)
                   const Page* page = *ip;
                   if (page->contains(pos)) {
                         QList<System*>* sl = page->systems();
-                        System* system = sl->front();
-                        if (system == 0) {
+                        if (sl->isEmpty()) {
                               printf("addSymbol: cannot put symbol here: no system on page\n");
                               delete s;
                               return;
                               }
+                        System* system = sl->front();
                         Measure* m = system->measures()->front();
                         if (m == 0) {
                               printf("addSymbol: cannot put symbol here: no measure in system\n");
