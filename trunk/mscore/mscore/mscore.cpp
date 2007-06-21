@@ -1348,7 +1348,7 @@ void MuseScore::showPlayPanel(bool visible)
             return;
 
       if (playPanel == 0) {
-            playPanel = new PlayPanel();
+            playPanel = new PlayPanel(this);
             connect(playPanel, SIGNAL(volChange(float)),    seq, SLOT(setVolume(float)));
             connect(playPanel, SIGNAL(relTempoChanged(int)),seq, SLOT(setRelTempo(int)));
             connect(playPanel, SIGNAL(posChange(int)),      seq, SLOT(setPos(int)));
@@ -1389,7 +1389,7 @@ void MuseScore::showPad(bool visible)
       QAction* a = getAction("toggle-pad");
       if (pad == 0) {
             pad = new Pad(this);
-            connect(pad, SIGNAL(visibilityChanged(bool)), a, SLOT(setChecked(bool)));
+            connect(pad, SIGNAL(padVisible(bool)), a, SLOT(setChecked(bool)));
             cs->setPadState();
             addDockWidget(Qt::RightDockWidgetArea, pad);
             }

@@ -66,7 +66,8 @@ void MuseScore::showPalette(bool visible)
       QAction* a = getAction("toggle-palette");
       if (paletteBox == 0) {
             paletteBox = new PaletteBox(this);
-            connect(paletteBox, SIGNAL(visibilityChanged(bool)), a, SLOT(setChecked(bool)));
+//            connect(paletteBox, SIGNAL(visibilityChanged(bool)), a, SLOT(setChecked(bool)));
+            connect(paletteBox, SIGNAL(paletteVisible(bool)), a, SLOT(setChecked(bool)));
             addDockWidget(Qt::LeftDockWidgetArea, paletteBox);
 
             //-----------------------------------

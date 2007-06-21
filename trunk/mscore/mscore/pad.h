@@ -28,6 +28,11 @@
 class Pad : public QDockWidget {
       Q_OBJECT
 
+      virtual void closeEvent(QCloseEvent* ev);
+
+   signals:
+      void padVisible(bool);
+
    public:
       Pad(QWidget* parent = 0);
       };

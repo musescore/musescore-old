@@ -1,3 +1,6 @@
+21.6.7 (ws)
+      - fix: pad and tools window was closed after minimizing the main window
+      - fix: play window was not minimized with main window
 19.6.7 (ws)
       - fix crash when dragging symbol on empty page
 31.5.7 (ws)
