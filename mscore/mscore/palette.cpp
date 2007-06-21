@@ -720,3 +720,12 @@ void PaletteBox::addPalette(const QString& s, QWidget* w)
       widgets.append(w);
       }
 
+//---------------------------------------------------------
+//   closeEvent
+//---------------------------------------------------------
+
+void PaletteBox::closeEvent(QCloseEvent* ev)
+      {
+      emit paletteVisible(false);
+      QWidget::closeEvent(ev);
+      }

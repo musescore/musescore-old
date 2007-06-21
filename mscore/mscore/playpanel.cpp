@@ -31,7 +31,7 @@ const int MAX_VOL = 10;
 //---------------------------------------------------------
 
 PlayPanel::PlayPanel(QWidget* parent)
-   : QWidget(parent)
+   : QWidget(parent, Qt::Dialog)
       {
       setupUi(this);
       volumeSlider->setRange(MIN_VOL * 1000, MAX_VOL * 1000);

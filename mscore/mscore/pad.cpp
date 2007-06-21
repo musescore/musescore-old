@@ -117,3 +117,14 @@ Pad::Pad(QWidget* parent)
       gl->setRowStretch(1, 100);
       setWidget(tb);
       }
+
+//---------------------------------------------------------
+//   closeEvent
+//---------------------------------------------------------
+
+void Pad::closeEvent(QCloseEvent* ev)
+      {
+      emit padVisible(false);
+      QWidget::closeEvent(ev);
+      }
+
