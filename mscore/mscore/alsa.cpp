@@ -864,9 +864,12 @@ bool initMidi()
       alsaSeqFdo = pfdo[0].fd;
       alsaSeqFdi = pfdi[0].fd;
 
+//      int port  = snd_seq_create_simple_port(alsaSeq, "MuseScore Port 0",
+//         inCap | outCap | SND_SEQ_PORT_CAP_READ | SND_SEQ_PORT_CAP_WRITE,
+//         SND_SEQ_PORT_TYPE_APPLICATION);
+      // mscore can only read midi events:
       int port  = snd_seq_create_simple_port(alsaSeq, "MuseScore Port 0",
-         inCap | outCap | SND_SEQ_PORT_CAP_READ | SND_SEQ_PORT_CAP_WRITE,
-         SND_SEQ_PORT_TYPE_APPLICATION);
+         outCap | SND_SEQ_PORT_CAP_WRITE, SND_SEQ_PORT_TYPE_APPLICATION);
       if (port < 0) {
             perror("create port");
             exit(1);
