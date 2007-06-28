@@ -979,6 +979,7 @@ void Score::convertMidi(MidiFile* mf)
       mf->separateChannel();
       mf->process1();
       mf->changeDivision(division);
+
       *sigmap = mf->siglist();
 
       MidiTrackList* tracks = mf->tracks();
@@ -1120,6 +1121,7 @@ void Score::convertMidi(MidiFile* mf)
             }
 
       tick = sigmap->bar2tick(startBar, 0, 0);
+printf("remove empty measures %d ticks\n", tick);
       mf->move(-tick);
 
       //---------------------------------------------------

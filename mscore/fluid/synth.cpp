@@ -59,7 +59,6 @@ int fluid_synth_set_gen2(fluid_synth_t* synth, int chan,
 /* has the synth module been initialized? */
 static int fluid_synth_initialized = 0;
 static void fluid_synth_init(void);
-static void init_dither(void);
 
 /* default modulators
  * SF2.01 page 52 ff:
@@ -157,8 +156,6 @@ fluid_synth_init()
   fluid_voice_config();
 
   fluid_sys_config();
-
-   init_dither();
 
 
   /* SF2.01 page 53 section 8.4.1: MIDI Note-On Velocity to Initial Attenuation */
@@ -1548,287 +1545,36 @@ void fluid_synth_set_chorus(fluid_synth_t* synth, int nr, double level,
     }
   }
 
-***************************************************/
-
-/*
- *  fluid_synth_nwrite_float
- */
-int
-fluid_synth_nwrite_float(fluid_synth_t* synth, int len,
-			float** left, float** right,
-			float** fx_left, float** fx_right)
-{
-  fluid_real_t** left_in = synth->left_buf;
-  fluid_real_t** right_in = synth->right_buf;
-  fluid_real_t** fx_left_in = synth->fx_left_buf;
-  fluid_real_t** fx_right_in = synth->fx_right_buf;
-  double time = fluid_utime();
-  int i, num, available, count, bytes;
-
-  /* make sure we're playing */
-  if (synth->state != FLUID_SYNTH_PLAYING) {
-    return 0;
-  }
-
-  /* First, take what's still available in the buffer */
-  count = 0;
-  num = synth->cur;
-  if (synth->cur < FLUID_BUFSIZE) {
-    available = FLUID_BUFSIZE - synth->cur;
-
-    num = (available > len)? len : available;
-    bytes = num * sizeof(float);
-
-    for (i = 0; i < synth->audio_channels; i++) {
-      FLUID_MEMCPY(left[i], left_in[i] + synth->cur, bytes);
-      FLUID_MEMCPY(right[i], right_in[i] + synth->cur, bytes);
-    }
-    for (i = 0; i < synth->effects_channels; i++) {
-      FLUID_MEMCPY(fx_left[i], fx_left_in[i] + synth->cur, bytes);
-      FLUID_MEMCPY(fx_right[i], fx_right_in[i] + synth->cur, bytes);
-    }
-    count += num;
-    num += synth->cur; /* if we're now done, num becomes the new synth->cur below */
-  }
-
-  /* Then, run one_block() and copy till we have 'len' samples  */
-  while (count < len) {
-    fluid_synth_one_block(synth, 1);
-
-    num = (FLUID_BUFSIZE > len - count)? len - count : FLUID_BUFSIZE;
-    bytes = num * sizeof(float);
-
-    for (i = 0; i < synth->audio_channels; i++) {
-      FLUID_MEMCPY(left[i] + count, left_in[i], bytes);
-      FLUID_MEMCPY(right[i] + count, right_in[i], bytes);
-    }
-    for (i = 0; i < synth->effects_channels; i++) {
-      FLUID_MEMCPY(fx_left[i] + count, fx_left_in[i], bytes);
-      FLUID_MEMCPY(fx_right[i] + count, fx_right_in[i], bytes);
-    }
-
-    count += num;
-  }
-
-  synth->cur = num;
-
-  time = fluid_utime() - time;
-  synth->cpu_load = 0.5 * (synth->cpu_load +
-			   time * synth->sample_rate / len / 10000.0);
-
-/*   printf("CPU: %.2f\n", synth->cpu_load); */
-
-  return 0;
-}
-
-int fluid_synth_process(fluid_synth_t* synth, int len,
-		       int nin, float** in,
-		       int nout, float** out)
-{
-  return fluid_synth_write_float(synth, len, out[0], 0, 1, out[1], 0, 1);
-}
-
 
 /*
  *  fluid_synth_write_float
  */
-int
-fluid_synth_write_float(fluid_synth_t* synth, int len,
-		       void* lout, int loff, int lincr,
-		       void* rout, int roff, int rincr)
-{
-  int i, j, k, l;
-  float* left_out = (float*) lout;
-  float* right_out = (float*) rout;
-  fluid_real_t* left_in = synth->left_buf[0];
-  fluid_real_t* right_in = synth->right_buf[0];
-  double time = fluid_utime();
+void fluid_synth_write_float(fluid_synth_t* synth, int len, float* lout, float* rout)
+      {
+      static const int lincr = 1;
+      static const int rincr = 1;
+      int i, j, k;
+      fluid_real_t* left_in  = synth->left_buf[0];
+      fluid_real_t* right_in = synth->right_buf[0];
 
-  /* make sure we're playing */
-  if (synth->state != FLUID_SYNTH_PLAYING) {
-    return 0;
-  }
+      int l = synth->cur;
 
-  l = synth->cur;
-
-  for (i = 0, j = loff, k = roff; i < len; i++, l++, j += lincr, k += rincr) {
-    /* fill up the buffers as needed */
-      if (l == FLUID_BUFSIZE) {
-	fluid_synth_one_block(synth, 0);
-	l = 0;
+      for (i = 0; i < len; i++, l++) {
+            if (l == FLUID_BUFSIZE) {
+                  fluid_synth_one_block(synth);
+                  l = 0;
+                  }
+            lout[i] = left_in[l];
+            rout[i] = right_in[l];
+            }
+      synth->cur = l;
       }
-
-      left_out[j] = (float) left_in[l];
-      right_out[k] = (float) right_in[l];
-  }
-
-  synth->cur = l;
-
-  time = fluid_utime() - time;
-  synth->cpu_load = 0.5 * (synth->cpu_load +
-			   time * synth->sample_rate / len / 10000.0);
-
-/*   printf("CPU: %.2f\n", synth->cpu_load); */
-
-  return 0;
-}
-
-#define DITHER_SIZE 48000
-#define DITHER_CHANNELS 2
-
-static float rand_table[DITHER_CHANNELS][DITHER_SIZE];
-
-static void init_dither(void)
-{
-  float d, dp;
-  int c, i;
-
-  for (c = 0; c < DITHER_CHANNELS; c++) {
-    dp = 0;
-    for (i = 0; i < DITHER_SIZE-1; i++) {
-      d = rand() / (float)RAND_MAX - 0.5f;
-      rand_table[c][i] = d - dp;
-      dp = d;
-    }
-    rand_table[c][DITHER_SIZE-1] = 0 - dp;
-  }
-}
-
-/* A portable replacement for roundf(), seems it may actually be faster too! */
-static inline int
-roundi (float x)
-{
-  if (x >= 0.0f)
-    return (int)(x+0.5f);
-  else
-    return (int)(x-0.5f);
-}
-
-/*
- *  fluid_synth_write_s16
- */
-int
-fluid_synth_write_s16(fluid_synth_t* synth, int len,
-		     void* lout, int loff, int lincr,
-		     void* rout, int roff, int rincr)
-{
-  int i, j, k, cur;
-  signed short* left_out = (signed short*) lout;
-  signed short* right_out = (signed short*) rout;
-  fluid_real_t* left_in = synth->left_buf[0];
-  fluid_real_t* right_in = synth->right_buf[0];
-  double prof_ref = fluid_profile_ref();
-  fluid_real_t left_sample;
-  fluid_real_t right_sample;
-  double time = fluid_utime();
-  int di = synth->dither_index;
-  double prof_ref_on_block;
-
-  /* make sure we're playing */
-  if (synth->state != FLUID_SYNTH_PLAYING) {
-    return 0;
-  }
-
-  cur = synth->cur;
-
-  for (i = 0, j = loff, k = roff; i < len; i++, cur++, j += lincr, k += rincr) {
-
-    /* fill up the buffers as needed */
-    if (cur == FLUID_BUFSIZE) {
-      prof_ref_on_block = fluid_profile_ref();
-
-      fluid_synth_one_block(synth, 0);
-      cur = 0;
-
-      fluid_profile(FLUID_PROF_ONE_BLOCK, prof_ref_on_block);
-    }
-
-    left_sample = roundi (left_in[cur] * 32766.0f + rand_table[0][di]);
-    right_sample = roundi (right_in[cur] * 32766.0f + rand_table[1][di]);
-
-    di++;
-    if (di >= DITHER_SIZE) di = 0;
-
-    /* digital clipping */
-    if (left_sample > 32767.0f) left_sample = 32767.0f;
-    if (left_sample < -32768.0f) left_sample = -32768.0f;
-    if (right_sample > 32767.0f) right_sample = 32767.0f;
-    if (right_sample < -32768.0f) right_sample = -32768.0f;
-
-    left_out[j] = (signed short) left_sample;
-    right_out[k] = (signed short) right_sample;
-  }
-
-  synth->cur = cur;
-  synth->dither_index = di;	/* keep dither buffer continous */
-
-  fluid_profile(FLUID_PROF_WRITE_S16, prof_ref);
-
-
-  time = fluid_utime() - time;
-  synth->cpu_load = 0.5 * (synth->cpu_load +
-			   time * synth->sample_rate / len / 10000.0);
-
-/*   printf("CPU: %.2f\n", synth->cpu_load); */
-
-  return 0;
-}
-
-/*
- * fluid_synth_dither_s16
- * Converts stereo floating point sample data to signed 16 bit data with
- * dithering.  This function and fluid_synth_write_s16 should not be used
- * on the same synth instance (dithering is per synth).
- * Only used internally currently.
- */
-void
-fluid_synth_dither_s16(fluid_synth_t* synth, int len, float* lin, float* rin,
-		       void* lout, int loff, int lincr,
-		       void* rout, int roff, int rincr)
-{
-  int i, j, k;
-  signed short* left_out = (signed short*) lout;
-  signed short* right_out = (signed short*) rout;
-  double prof_ref = fluid_profile_ref();
-  fluid_real_t left_sample;
-  fluid_real_t right_sample;
-/*  double time = fluid_utime(); */
-  int di = synth->dither_index;
-
-  for (i = 0, j = loff, k = roff; i < len; i++, j += lincr, k += rincr) {
-
-    left_sample = roundi (lin[i] * 32766.0f + rand_table[0][di]);
-    right_sample = roundi (rin[i] * 32766.0f + rand_table[1][di]);
-
-    di++;
-    if (di >= DITHER_SIZE) di = 0;
-
-    /* digital clipping */
-    if (left_sample > 32767.0f) left_sample = 32767.0f;
-    if (left_sample < -32768.0f) left_sample = -32768.0f;
-    if (right_sample > 32767.0f) right_sample = 32767.0f;
-    if (right_sample < -32768.0f) right_sample = -32768.0f;
-
-    left_out[j] = (signed short) left_sample;
-    right_out[k] = (signed short) right_sample;
-  }
-
-  synth->dither_index = di;	/* keep dither buffer continous */
-
-  fluid_profile(FLUID_PROF_WRITE_S16, prof_ref);
-
-  /* FIXME - Should cpu_load be processed here?
-  time = fluid_utime() - time;
-  synth->cpu_load = 0.5 * (synth->cpu_load +
-			   time * synth->sample_rate / len / 10000.0);
-  */
-}
 
 /*
  *  fluid_synth_one_block
  */
 int
-fluid_synth_one_block(fluid_synth_t* synth, int do_not_mix_fx_to_out)
+fluid_synth_one_block(fluid_synth_t* synth)
 {
   int i, auchan;
   fluid_voice_t* voice;
@@ -1839,9 +1585,7 @@ fluid_synth_one_block(fluid_synth_t* synth, int do_not_mix_fx_to_out)
   int byte_size = FLUID_BUFSIZE * sizeof(fluid_real_t);
   double prof_ref = fluid_profile_ref();
 
-  fluid_check_fpe("??? Just starting up ???");
-
-  /* clean the audio buffers */
+      /* clean the audio buffers */
   for (i = 0; i < synth->nbuf; i++) {
     FLUID_MEMSET(synth->left_buf[i], 0, byte_size);
     FLUID_MEMSET(synth->right_buf[i], 0, byte_size);
@@ -1855,11 +1599,12 @@ fluid_synth_one_block(fluid_synth_t* synth, int do_not_mix_fx_to_out)
    * enabled on synth level.  Nonexisting buffers are detected in the
    * DSP loop. Not sending the reverb / chorus signal saves some time
    * in that case. */
-  if (synth->with_reverb) {
-    reverb_buf = synth->fx_left_buf[0];
-  } else {
-    reverb_buf = 0;
-  }
+      if (synth->with_reverb) {
+            reverb_buf = synth->fx_left_buf[0];
+            }
+      else {
+            reverb_buf = 0;
+            }
 
   if (synth->with_chorus) {
     chorus_buf = synth->fx_left_buf[1];
@@ -1867,8 +1612,6 @@ fluid_synth_one_block(fluid_synth_t* synth, int do_not_mix_fx_to_out)
     chorus_buf = 0;
   }
 
-
-  fluid_profile(FLUID_PROF_ONE_BLOCK_CLEAR, prof_ref);
 
   /* call all playing synthesis processes */
   for (i = 0; i < synth->polyphony; i++) {
@@ -1896,72 +1639,24 @@ fluid_synth_one_block(fluid_synth_t* synth, int do_not_mix_fx_to_out)
 
       fluid_voice_write(voice, left_buf, right_buf, reverb_buf, chorus_buf);
 
-      fluid_profile(FLUID_PROF_ONE_BLOCK_VOICE, prof_ref_voice);
-    }
-  }
-  fluid_check_fpe("Synthesis processes");
-
-  fluid_profile(FLUID_PROF_ONE_BLOCK_VOICES, prof_ref);
-
-  /* if multi channel output, don't mix the output of the chorus and
-     reverb in the final output. The effects outputs are send
-     separately. */
-
-  if (do_not_mix_fx_to_out) {
-
-    /* send to reverb */
-    if (reverb_buf) {
-      fluid_revmodel_processreplace(synth->reverb, reverb_buf,
-				   synth->fx_left_buf[0], synth->fx_right_buf[0]);
-      fluid_check_fpe("Reverb");
-    }
-
-    fluid_profile(FLUID_PROF_ONE_BLOCK_REVERB, prof_ref);
-
-    /* send to chorus */
-    if (chorus_buf) {
-      fluid_chorus_processreplace(synth->chorus, chorus_buf,
-				 synth->fx_left_buf[1], synth->fx_right_buf[1]);
-      fluid_check_fpe("Chorus");
-    }
-
-  } else {
-
-    /* send to reverb */
-    if (reverb_buf) {
-      fluid_revmodel_processmix(synth->reverb, reverb_buf,
-			       synth->left_buf[0], synth->right_buf[0]);
-      fluid_check_fpe("Reverb");
-    }
-
-    fluid_profile(FLUID_PROF_ONE_BLOCK_REVERB, prof_ref);
-
-    /* send to chorus */
-    if (chorus_buf) {
-      fluid_chorus_processmix(synth->chorus, chorus_buf,
-			     synth->left_buf[0], synth->right_buf[0]);
-      fluid_check_fpe("Chorus");
     }
   }
 
-  fluid_profile(FLUID_PROF_ONE_BLOCK_CHORUS, prof_ref);
+      /* send to reverb */
+      if (reverb_buf) {
+            fluid_revmodel_processmix(synth->reverb, reverb_buf,
+               synth->left_buf[0], synth->right_buf[0]);
+            }
 
-#ifdef LADSPA
-  /* Run the signal through the LADSPA Fx unit */
-  fluid_LADSPA_run(synth->LADSPA_FxUnit, synth->left_buf, synth->right_buf, synth->fx_left_buf, synth->fx_right_buf);
-  fluid_check_fpe("LADSPA");
-#endif
+      /* send to chorus */
+      if (chorus_buf) {
+            fluid_chorus_processmix(synth->chorus, chorus_buf,
+               synth->left_buf[0], synth->right_buf[0]);
+            }
 
-  synth->ticks += FLUID_BUFSIZE;
-
-  /* Testcase, that provokes a denormal floating point error */
-#if 0
-  {float num=1;while (num != 0){num*=0.5;};};
-#endif
-  fluid_check_fpe("??? Remainder of synth_one_block ???");
-
-  return 0;
-}
+      synth->ticks += FLUID_BUFSIZE;
+      return 0;
+      }
 
 
 /*
@@ -2991,44 +2686,6 @@ float fluid_synth_get_gen(fluid_synth_t* synth, int chan, int param)
 void fluid_synth_set_midi_router(fluid_synth_t* synth, fluid_midi_router_t* router){
   synth->midi_router=router;
 };
-
-#if 0
-/* Purpose:
- * Any MIDI event from the MIDI router arrives here and is handed
- * to the appropriate function.
- */
-int fluid_synth_handle_midi_event(void* data, fluid_midi_event_t* event)
-{
-  fluid_synth_t* synth = (fluid_synth_t*) data;
-  int type = fluid_midi_event_get_type(event);
-  int chan = fluid_midi_event_get_channel(event);
-
-  switch(type) {
-      case NOTE_ON:
-	return fluid_synth_noteon(synth, chan,
-				 fluid_midi_event_get_key(event),
-				 fluid_midi_event_get_velocity(event));
-
-      case NOTE_OFF:
-	return fluid_synth_noteoff(synth, chan, fluid_midi_event_get_key(event));
-
-      case CONTROL_CHANGE:
-	return fluid_synth_cc(synth, chan,
-			     fluid_midi_event_get_control(event),
-			     fluid_midi_event_get_value(event));
-
-      case PROGRAM_CHANGE:
-	return fluid_synth_program_change(synth, chan, fluid_midi_event_get_program(event));
-
-      case PITCH_BEND:
-	return fluid_synth_pitch_bend(synth, chan, fluid_midi_event_get_pitch(event));
-
-      case MIDI_SYSTEM_RESET:
-	return fluid_synth_system_reset(synth);
-  }
-  return FLUID_FAILED;
-}
-#endif
 
 int fluid_synth_start(fluid_synth_t* synth, unsigned int id, fluid_preset_t* preset,
 		      int audio_chan, int midi_chan, int key, int vel)

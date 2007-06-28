@@ -1194,7 +1194,6 @@ void MidiTrack::changeDivision(int newDivision)
                   }
 		dl.insert(e);
             }
-      _events = dl;
       }
 
 //---------------------------------------------------------
@@ -1207,6 +1206,15 @@ void MidiFile::changeDivision(int newDivision)
             return;
       foreach (MidiTrack* t, _tracks)
             t->changeDivision(newDivision);
+
+      SigList sl;
+      for (iSigEvent is = _siglist.begin(); is != _siglist.end(); ++is) {
+            int tick    = (is->first * newDivision + _division/2) / _division;
+            SigEvent se = is->second;
+            sl.add(tick, se);
+            }
+      _siglist = sl;
+
       _division = newDivision;
       }
 

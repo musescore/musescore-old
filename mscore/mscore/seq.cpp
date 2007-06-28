@@ -273,7 +273,7 @@ void Seq::start()
             setPos(playTick);
             }
       audio->startTransport();
-      heartBeatTimer->start(1000/20);
+      heartBeatTimer->start(100);
       }
 
 //---------------------------------------------------------

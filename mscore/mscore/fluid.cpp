@@ -88,7 +88,7 @@ bool ISynth::loadSoundFont(const QString& sfont)
 
 void ISynth::process(unsigned n, float* l, float* r)
       {
-      fluid_synth_write_float(_fluidsynth, n, l, 0, 1, r, 0, 1);
+      fluid_synth_write_float(_fluidsynth, n, l, r);
       }
 
 //---------------------------------------------------------
