@@ -36,7 +36,6 @@
 #include "rev.h"
 #include "voice.h"
 #include "chorus.h"
-// #include "ladspa.h"
 #include "sys.h"
 
 /***************************************************************
@@ -172,7 +171,7 @@ int fluid_synth_getint(fluid_synth_t* synth, char* name, int* val);
 
 int fluid_synth_set_reverb_preset(fluid_synth_t* synth, int num);
 
-int fluid_synth_one_block(fluid_synth_t* synth, int do_not_mix_fx_to_out);
+int fluid_synth_one_block(fluid_synth_t* synth);
 
 fluid_preset_t* fluid_synth_get_preset(fluid_synth_t* synth,
 				     unsigned int sfontnum,
@@ -207,10 +206,6 @@ int fluid_synth_update_polyphony(fluid_synth_t* synth, char* name, int value);
 fluid_bank_offset_t* fluid_synth_get_bank_offset0(fluid_synth_t* synth, int sfont_id);
 void fluid_synth_remove_bank_offset(fluid_synth_t* synth, int sfont_id);
 
-/* FIXME: Might be useful in public API */
-void fluid_synth_dither_s16(fluid_synth_t* synth, int len, float* lin, float* rin,
-			    void* lout, int loff, int lincr,
-			    void* rout, int roff, int rincr);
 /*
  * misc
  */

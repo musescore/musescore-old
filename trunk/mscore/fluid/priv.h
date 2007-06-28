@@ -223,7 +223,7 @@ typedef struct _fluid_server_socket_t fluid_server_socket_t;
  *                      CONSTANTS
  */
 
-#define FLUID_BUFSIZE                64
+#define FLUID_BUFSIZE                256  // 64
 
 #ifndef PI
 #define PI                          3.141592654

@@ -142,47 +142,10 @@ enum {
 };
 
 
-#if WITH_PROFILING
-
-void fluid_profiling_print(void);
-
-
-/** Profiling data. Keep track of min/avg/max values to execute a
-    piece of code. */
-typedef struct _fluid_profile_data_t {
-  int num;
-  char* description;
-  double min, max, total;
-  unsigned int count;
-} fluid_profile_data_t;
-
-extern fluid_profile_data_t fluid_profile_data[];
-
-/** Macro to obtain a time refence used for the profiling */
-#define fluid_profile_ref() fluid_utime()
-
-/** Macro to calculate the min/avg/max. Needs a time refence and a
-    profile number. */
-#define fluid_profile(_num,_ref) { \
-  double _now = fluid_utime(); \
-  double _delta = _now - _ref; \
-  fluid_profile_data[_num].min = _delta < fluid_profile_data[_num].min ? _delta : fluid_profile_data[_num].min; \
-  fluid_profile_data[_num].max = _delta > fluid_profile_data[_num].max ? _delta : fluid_profile_data[_num].max; \
-  fluid_profile_data[_num].total += _delta; \
-  fluid_profile_data[_num].count++; \
-  _ref = _now; \
-}
-
-
-#else
-
 /* No profiling */
 #define fluid_profiling_print()
 #define fluid_profile_ref()  0
 #define fluid_profile(_num,_ref)
-
-#endif
-
 
 
 /**
