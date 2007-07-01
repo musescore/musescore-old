@@ -1,3 +1,6 @@
+1.7.7 (ws)
+      - fixed another midi import crash
+      - fixed sample rate table in preferences
 28.6.7 (ws)
       - fixed crash when importing midis with time signature
 24.6.7 (ws)

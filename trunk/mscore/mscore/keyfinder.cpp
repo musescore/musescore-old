@@ -891,8 +891,10 @@ int findKey(MidiTrack* mt, SigList* sigmap)
       QList<int> keys;
       for (int i = 0; i < 27; ++i)
             keys.append(0);
-      for (int i = 0; i <= segtotal; ++i)
+      for (int i = 0; i <= segtotal; ++i) {
             keys[final[i] % 27]++;        // fold major/minor
+//            printf("key %d: %d  %d\n", i, final[i], (final[i] % 27) - 14);
+            }
       int xkey   = 0;
       int xcount = 0;
       for (int i = 0; i < 27; ++i) {
@@ -904,7 +906,7 @@ int findKey(MidiTrack* mt, SigList* sigmap)
 
       xkey -= 14;
       if (xkey < -7 || xkey > 7) {
-            printf("illegal key %d found\n", xkey);
+            printf("findKey(): illegal key %d found\n", xkey);
             xkey = 0;
             }
 

@@ -119,9 +119,10 @@ enum {
       // special midi events are mapped to internal
       // controller
       //
-      CTRL_PROGRAM = 0x40001,
-      CTRL_PITCH   = 0x40002,
-      CTRL_PRESS   = 0x40003,
+      CTRL_PROGRAM   = 0x40001,
+      CTRL_PITCH     = 0x40002,
+      CTRL_PRESS     = 0x40003,
+      CTRL_POLYAFTER = 0x40004
       };
 
 //---------------------------------------------------------
@@ -146,11 +147,11 @@ class MidiEvent {
       MidiEvent()           { _ontime = -1; }
       MidiEvent(int t)      { _ontime = t;  }
       virtual ~MidiEvent()  {}
+      virtual int type() const = 0;
 
       int ontime() const    { return _ontime; }
       void setOntime(int v) { _ontime = v; }
 
-      virtual int type() const = 0;
       virtual bool isChannelEvent() const = 0;
       virtual void write(MidiFile*) const {}
       virtual void dump(Xml&) const {}
@@ -166,6 +167,8 @@ class MidiChannelEvent : public MidiEvent {
    public:
       MidiChannelEvent()          { _channel = 0;   }
       MidiChannelEvent(int t, int c) : MidiEvent(t), _channel(c) {}
+      virtual int type() const = 0;
+
       bool isChannelEvent() const { return true;     }
       int channel() const         { return _channel; }
       void setChannel(int c)      { _channel = c;    }
@@ -184,6 +187,8 @@ class MidiNoteOnOff : public MidiChannelEvent {
       MidiNoteOnOff()          { _pitch = -1; _velo = -1; }
       MidiNoteOnOff(int t, int c, int p, int v)
          : MidiChannelEvent(t, c), _pitch(p), _velo(v) {}
+      virtual int type() const = 0;
+
       int pitch() const        { return _pitch; }
       void setPitch(int p)     { _pitch = p; }
       int velo() const         { return _velo; }
@@ -199,6 +204,7 @@ class MidiNoteOn : public MidiNoteOnOff {
       MidiNoteOn()             {}
       MidiNoteOn(int t, int c, int p, int v) : MidiNoteOnOff(t, c, p, v) {}
       virtual int type() const { return ME_NOTEON; }
+
       virtual void write(MidiFile*) const;
       virtual void dump(Xml&) const;
       };
@@ -215,6 +221,7 @@ class MidiNoteOff : public MidiNoteOnOff {
       MidiNoteOff()            {}
       MidiNoteOff(int t, int c, int p, int v) : MidiNoteOnOff(t, c, p, v) {}
       virtual int type() const { return ME_NOTEOFF; }
+
       int pitch() const        { return _pitch; }
       void setPitch(int p)     { _pitch = p; }
       int velo() const         { return _velo; }
@@ -234,6 +241,7 @@ class MidiNote : public MidiNoteOnOff {
    public:
       MidiNote()               { _pitch = -1; _velo = -1; _duration = -1; }
       virtual int type() const { return ME_NOTE; }
+
       int duration() const     { return _duration; }
       void setDuration(int v)  { _duration = v; }
       int offtime() const      { return ontime() + _duration; }
@@ -254,6 +262,7 @@ class MidiChord : public MidiEvent {
    public:
       MidiChord()                   {}
       virtual int type() const      { return ME_CHORD;  }
+
       int duration() const          { return _duration; }
       void setDuration(int v)       { _duration = v;    }
       int voice() const             { return _voice;    }
@@ -283,6 +292,7 @@ class MidiController : public MidiChannelEvent {
       MidiController(int t, int ch, int c, int v)
          : MidiChannelEvent(t, ch), _controller(c), _value(v) {}
       virtual int type() const            { return ME_CONTROLLER; }
+
       virtual bool isChannelEvent() const { return true; }
       int controller() const              { return _controller; }
       void setController(int val)         { _controller = val; }
@@ -304,6 +314,8 @@ class MidiData : public MidiEvent {
    public:
       MidiData() { _data = 0; _len = 0; }
       MidiData(int t, int l, unsigned char* d) : MidiEvent(t), _len(l), _data(d) {}
+      virtual int type() const = 0;
+
       ~MidiData() {
             if (_data)
                   delete _data;
@@ -324,6 +336,7 @@ class MidiSysex : public MidiData {
       MidiSysex()              {}
       MidiSysex(int t, int l, unsigned char* d) : MidiData(t, l, d) {}
       virtual int type() const { return ME_SYSEX; }
+
       virtual void write(MidiFile*) const;
       virtual void dump(Xml&) const;
       };
@@ -340,6 +353,7 @@ class MidiMeta : public MidiData {
       MidiMeta(int t, int mt, int l, unsigned char* d)
          : MidiData(t, l, d), _metaType(mt) {}
       virtual int type() const { return ME_META;   }
+
       int metaType() const     { return _metaType; }
       void setMetaType(int v)  { _metaType = v;    }
       virtual void write(MidiFile*) const;
