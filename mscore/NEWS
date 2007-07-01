@@ -1,5 +1,5 @@
 Release 0.6 (svn)
-      - MuseData import
+      - MuseData import (www.musedata.org)
       - better automatic pitch spelling using context information
       - automatic key detection on midi import
       - configurable symbol palette

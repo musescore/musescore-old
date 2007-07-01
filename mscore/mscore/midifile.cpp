@@ -615,7 +615,6 @@ MidiEvent* MidiFile::readEvent()
                   break;
             }
 
-      MidiEvent* event;
       int ontime = click;
       unsigned char* data;
       int dataLen;
@@ -672,7 +671,6 @@ MidiEvent* MidiFile::readEvent()
             sstatus  = status;
             if (read(&a, 1)) {
                   printf("readEvent: error 9\n");
-                  delete event;
                   return 0;
                   }
             }
@@ -681,7 +679,6 @@ MidiEvent* MidiFile::readEvent()
                   printf("readEvent: no running status, read 0x%02x\n", me);
                   printf("sstatus ist 0x%02x\n", sstatus);
                   if (sstatus == -1) {
-                        delete event;
                         return 0;
                         }
                   status = sstatus;
@@ -690,40 +687,34 @@ MidiEvent* MidiFile::readEvent()
             }
       int channel = status & 0x0f;
       b           = 0;
+      MidiEvent* event = 0;
       switch (status & 0xf0) {
             case ME_NOTEOFF:
-                  if (read(&b, 1)) {
-                        printf("readEvent: error 15\n");
-                        return 0;
-                        }
-                  event = new MidiNoteOff(ontime, channel, a & 0x7f, b & 0x7f);
-                  break;
             case ME_NOTEON:
-                  if (read(&b, 1)) {
-                        printf("readEvent: error 15\n");
-                        return 0;
-                        }
-                  event = new MidiNoteOn(ontime, channel, a & 0x7f, b & 0x7f);
-                  break;
             case ME_POLYAFTER:
-                  if (read(&b, 1)) {
-                        printf("readEvent: error 15\n");
-                        return 0;
-                        }
-                  // event = new MidiNoteOff(ontime, channel, a, b);
-                  break;
             case ME_CONTROLLER:        // controller
-                  if (read(&b, 1)) {
-                        printf("readEvent: error 15\n");
-                        return 0;
-                        }
-                  event = new MidiController(ontime, channel, a & 0x7f, b & 0x7f);
-                  break;
             case ME_PITCHBEND:        // pitch bend
                   if (read(&b, 1)) {
                         printf("readEvent: error 15\n");
                         return 0;
                         }
+                  break;
+            }
+      switch (status & 0xf0) {
+            case ME_NOTEOFF:
+                  event = new MidiNoteOff(ontime, channel, a & 0x7f, b & 0x7f);
+                  break;
+            case ME_NOTEON:
+                  event = new MidiNoteOn(ontime, channel, a & 0x7f, b & 0x7f);
+                  break;
+            case ME_POLYAFTER:
+                  event = new MidiController(ontime, channel, CTRL_POLYAFTER,
+                     ((a & 0x7f) << 8) + (b & 0x7f));
+                  break;
+            case ME_CONTROLLER:        // controller
+                  event = new MidiController(ontime, channel, a & 0x7f, b & 0x7f);
+                  break;
+            case ME_PITCHBEND:        // pitch bend
                   event = new MidiController(ontime, channel, CTRL_PITCH,
                      ((((b & 0x80) ? 0 : b) << 7) + a) - 8192);
                   break;
@@ -804,7 +795,7 @@ void MidiTrack::mergeNoteOnOff()
                               bool found = false;
                               for (; ii < n; ++ii) {
                                     MidiEvent* ev = _events[ii];
-                                    if (ev->type() == ME_CONTROLLER) {
+                                    if (ev && (ev->type() == ME_CONTROLLER)) {
                                           if (((MidiController*)ev)->controller() == CTRL_LDATA) {
                                                 // handle later
                                                 found = true;
