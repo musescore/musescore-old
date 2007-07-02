@@ -638,7 +638,9 @@ void Seq::collectEvents()
                                           unsigned tick = chord->tick();
                                           Event ev;
                                           ev.type       = 0x90; // note on
-                                          ev.val1       = note->pitch();
+                                          ev.val1       = note->pitch() + part->pitchOffset();
+                                          if (ev.val1 > 127)
+                                                ev.val1 = 127;
                                           foreach(OttavaE o, ol) {
                                                 if (tick >= o.start && tick <= o.end) {
                                                       ev.val1 += o.offset;

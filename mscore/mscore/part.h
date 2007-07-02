@@ -42,6 +42,7 @@ struct Instrument {
       bool solo;
       int  minPitch;
       int  maxPitch;
+      int  pitchOffset;
 
       Instrument();
       void read(QDomElement);
@@ -93,6 +94,8 @@ class Part {
       int reverb() const                  { return _instrument.reverb;      }
       int chorus() const                  { return _instrument.chorus;      }
       int pan() const                     { return _instrument.chorus;      }
+      void setPitchOffset(int val)        { _instrument.pitchOffset = val;  }
+      int pitchOffset() const             { return _instrument.pitchOffset; }
       void insertStaff(Staff*);
       void removeStaff(Staff*);
       const Instrument* instrument() const { return &_instrument; }

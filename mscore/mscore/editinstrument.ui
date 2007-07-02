@@ -1,7 +1,4 @@
 <ui version="4.0" >
- <author></author>
- <comment></comment>
- <exportmacro></exportmacro>
  <class>EditInstrumentBase</class>
  <widget class="QDialog" name="EditInstrumentBase" >
   <property name="geometry" >
@@ -16,19 +13,40 @@
    <string>MuseScore: Edit Instrument Properties</string>
   </property>
   <layout class="QGridLayout" >
-   <property name="margin" >
+   <property name="leftMargin" >
     <number>8</number>
    </property>
-   <property name="spacing" >
+   <property name="topMargin" >
+    <number>8</number>
+   </property>
+   <property name="rightMargin" >
+    <number>8</number>
+   </property>
+   <property name="bottomMargin" >
+    <number>8</number>
+   </property>
+   <property name="horizontalSpacing" >
+    <number>6</number>
+   </property>
+   <property name="verticalSpacing" >
     <number>6</number>
    </property>
    <item row="1" column="0" colspan="2" >
     <layout class="QHBoxLayout" >
-     <property name="margin" >
-      <number>0</number>
-     </property>
      <property name="spacing" >
       <number>6</number>
+     </property>
+     <property name="leftMargin" >
+      <number>0</number>
+     </property>
+     <property name="topMargin" >
+      <number>0</number>
+     </property>
+     <property name="rightMargin" >
+      <number>0</number>
+     </property>
+     <property name="bottomMargin" >
+      <number>0</number>
      </property>
      <item>
       <widget class="QPushButton" name="buttonNew" >
@@ -67,7 +85,16 @@
     </layout>
    </item>
    <item row="0" column="0" >
-    <widget class="QTreeWidget" name="instrumentList" />
+    <widget class="QTreeWidget" name="instrumentList" >
+     <property name="alternatingRowColors" >
+      <bool>true</bool>
+     </property>
+     <column>
+      <property name="text" >
+       <string>Instrument List</string>
+      </property>
+     </column>
+    </widget>
    </item>
    <item row="0" column="1" >
     <widget class="QGroupBox" name="groupBox" >
@@ -75,10 +102,22 @@
       <string>Properties</string>
      </property>
      <layout class="QGridLayout" >
-      <property name="margin" >
+      <property name="leftMargin" >
        <number>8</number>
       </property>
-      <property name="spacing" >
+      <property name="topMargin" >
+       <number>8</number>
+      </property>
+      <property name="rightMargin" >
+       <number>8</number>
+      </property>
+      <property name="bottomMargin" >
+       <number>8</number>
+      </property>
+      <property name="horizontalSpacing" >
+       <number>6</number>
+      </property>
+      <property name="verticalSpacing" >
        <number>6</number>
       </property>
       <item row="0" column="1" >
@@ -88,41 +127,40 @@
        <widget class="QLineEdit" name="shortNameEdit" />
       </item>
       <item row="2" column="1" >
-       <widget class="QSpinBox" name="minPitch" />
+       <widget class="QSpinBox" name="minPitch" >
+        <property name="maximum" >
+         <number>127</number>
+        </property>
+       </widget>
       </item>
       <item row="3" column="1" >
-       <widget class="QSpinBox" name="maxPitch" />
+       <widget class="QSpinBox" name="maxPitch" >
+        <property name="maximum" >
+         <number>127</number>
+        </property>
+       </widget>
       </item>
       <item row="4" column="1" >
-       <widget class="QSpinBox" name="transpose" />
+       <widget class="QSpinBox" name="transpose" >
+        <property name="maximum" >
+         <number>127</number>
+        </property>
+       </widget>
       </item>
       <item row="7" column="1" >
-       <widget class="QSpinBox" name="lowerClef" />
+       <widget class="QSpinBox" name="staves" />
       </item>
       <item row="6" column="1" >
-       <widget class="QSpinBox" name="upperClef" />
-      </item>
-      <item row="5" column="0" colspan="2" >
-       <widget class="QCheckBox" name="checkBox" >
-        <property name="text" >
-         <string>Split System</string>
+       <widget class="QSpinBox" name="midiProgram" >
+        <property name="maximum" >
+         <number>127</number>
         </property>
        </widget>
       </item>
       <item row="7" column="0" >
        <widget class="QLabel" name="label_7" >
         <property name="text" >
-         <string>Lower Clef</string>
-        </property>
-        <property name="textFormat" >
-         <enum>Qt::PlainText</enum>
-        </property>
-       </widget>
-      </item>
-      <item row="6" column="0" >
-       <widget class="QLabel" name="label_6" >
-        <property name="text" >
-         <string>Upper Clef:</string>
+         <string>Staves</string>
         </property>
         <property name="textFormat" >
          <enum>Qt::PlainText</enum>
@@ -152,7 +190,7 @@
       <item row="2" column="0" >
        <widget class="QLabel" name="label_3" >
         <property name="text" >
-         <string>min. Pitch:</string>
+         <string>min. Pitch</string>
         </property>
         <property name="textFormat" >
          <enum>Qt::PlainText</enum>
@@ -162,7 +200,7 @@
       <item row="1" column="0" >
        <widget class="QLabel" name="label_2" >
         <property name="text" >
-         <string>Short Name:</string>
+         <string>Short Name</string>
         </property>
         <property name="textFormat" >
          <enum>Qt::PlainText</enum>
@@ -172,7 +210,17 @@
       <item row="0" column="0" >
        <widget class="QLabel" name="label" >
         <property name="text" >
-         <string>Name:</string>
+         <string>Name</string>
+        </property>
+        <property name="textFormat" >
+         <enum>Qt::PlainText</enum>
+        </property>
+       </widget>
+      </item>
+      <item row="6" column="0" >
+       <widget class="QLabel" name="label_6" >
+        <property name="text" >
+         <string>Midi Program</string>
         </property>
         <property name="textFormat" >
          <enum>Qt::PlainText</enum>
@@ -183,7 +231,7 @@
     </widget>
    </item>
   </layout>
-  <widget class="QWidget" name="layoutWidget" >
+  <widget class="QWidget" native="1" name="layoutWidget" >
    <property name="geometry" >
     <rect>
      <x>9</x>
@@ -194,7 +242,6 @@
    </property>
   </widget>
  </widget>
- <pixmapfunction></pixmapfunction>
  <resources/>
  <connections>
   <connection>

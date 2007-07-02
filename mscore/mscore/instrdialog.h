@@ -29,6 +29,7 @@ class Instrument;
 class Part;
 class Staff;
 class Score;
+class EditInstrument;
 
 //---------------------------------------------------------
 //   InstrumentTemplate
@@ -47,9 +48,6 @@ struct InstrumentTemplate {
       int transpose;          // for transposing instruments
       };
 
-typedef std::list<InstrumentTemplate> InstrumentTemplateList;
-typedef InstrumentTemplateList::const_iterator ciInstrumentTemplate;
-
 //---------------------------------------------------------
 //   InstrumentsDialog
 //---------------------------------------------------------
@@ -57,6 +55,7 @@ typedef InstrumentTemplateList::const_iterator ciInstrumentTemplate;
 class InstrumentsDialog : public QDialog, public Ui::InstrumentDialogBase {
       Q_OBJECT
       Score* cs;
+      EditInstrument* editInstrument;
 
    private slots:
       void on_instrumentList_itemSelectionChanged();
@@ -82,15 +81,15 @@ class InstrumentsDialog : public QDialog, public Ui::InstrumentDialogBase {
 //---------------------------------------------------------
 
 class InstrumentTemplateListItem : public QTreeWidgetItem {
-      const InstrumentTemplate* _instrumentTemplate;
+      InstrumentTemplate* _instrumentTemplate;
       QString _group;
 
    public:
       InstrumentTemplateListItem(QString group, QTreeWidget* parent);
-      InstrumentTemplateListItem(const InstrumentTemplate* i, InstrumentTemplateListItem* parent);
-      InstrumentTemplateListItem(const InstrumentTemplate* i, QTreeWidget* parent);
+      InstrumentTemplateListItem(InstrumentTemplate* i, InstrumentTemplateListItem* parent);
+      InstrumentTemplateListItem(InstrumentTemplate* i, QTreeWidget* parent);
 
-      const InstrumentTemplate* instrumentTemplate() const { return _instrumentTemplate; }
+      InstrumentTemplate* instrumentTemplate() const { return _instrumentTemplate; }
       virtual QString text(int col) const;
       };
 
@@ -134,6 +133,7 @@ class StaffListItem : public QTreeWidgetItem {
       int clef() const { return _clef; }
       };
 
-extern InstrumentTemplateList instrumentTemplates;
+extern QList<InstrumentTemplate*> instrumentTemplates;
+
 #endif
 

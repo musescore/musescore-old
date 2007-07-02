@@ -95,7 +95,7 @@ static void readInstrument(const QString& group, QDomElement e)
             else
                   domError(e);
             }
-      instrumentTemplates.push_back(t);
+      instrumentTemplates.push_back(new InstrumentTemplate(t));
       }
 
 //---------------------------------------------------------

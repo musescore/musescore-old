@@ -30,8 +30,9 @@
 #include "segment.h"
 #include "layout.h"
 #include "style.h"
+#include "editinstrument.h"
 
-InstrumentTemplateList instrumentTemplates;
+QList<InstrumentTemplate*> instrumentTemplates;
 
 //---------------------------------------------------------
 //   StaffListItem
@@ -111,14 +112,14 @@ InstrumentTemplateListItem::InstrumentTemplateListItem(QString group, QTreeWidge
       setText(0, group);
       }
 
-InstrumentTemplateListItem::InstrumentTemplateListItem(const InstrumentTemplate* i, InstrumentTemplateListItem* item)
+InstrumentTemplateListItem::InstrumentTemplateListItem(InstrumentTemplate* i, InstrumentTemplateListItem* item)
    : QTreeWidgetItem(item) {
       _instrumentTemplate = i;
       _group = _instrumentTemplate->group;
       setText(0, i->name);
       }
 
-InstrumentTemplateListItem::InstrumentTemplateListItem(const InstrumentTemplate* i, QTreeWidget* parent)
+InstrumentTemplateListItem::InstrumentTemplateListItem(InstrumentTemplate* i, QTreeWidget* parent)
    : QTreeWidgetItem(parent) {
       _instrumentTemplate = i;
       _group = _instrumentTemplate->group;
@@ -147,6 +148,7 @@ QString InstrumentTemplateListItem::text(int col) const
 InstrumentsDialog::InstrumentsDialog(QWidget* parent)
    : QDialog(parent)
       {
+      editInstrument = 0;
       setupUi(this);
       cs = 0;
       QString curGroup;
@@ -158,12 +160,13 @@ InstrumentsDialog::InstrumentsDialog(QWidget* parent)
       QStringList header = (QStringList() << tr("Staves") << tr("Clef"));
       partiturList->setHeaderLabels(header);
       InstrumentTemplateListItem* group = 0;
-      for (ciInstrumentTemplate i = instrumentTemplates.begin(); i != instrumentTemplates.end(); ++i) {
-            if (curGroup != i->group) {
-                  curGroup = i->group;
+      foreach(InstrumentTemplate* t, instrumentTemplates) {
+            if (curGroup != t->group) {
+                  curGroup = t->group;
                   group    = new InstrumentTemplateListItem(curGroup, instrumentList);
+                  group->setFlags(Qt::ItemIsEnabled);
                   }
-            new InstrumentTemplateListItem(&*i, group);
+            new InstrumentTemplateListItem(t, group);
             }
 
       addButton->setEnabled(false);
@@ -205,12 +208,7 @@ void InstrumentsDialog::genPartList()
 void InstrumentsDialog::on_instrumentList_itemSelectionChanged()
       {
       QList<QTreeWidgetItem*> wi = instrumentList->selectedItems();
-      if (wi.isEmpty())
-            return;
-      QTreeWidgetItem* item = wi.front();
-      bool flag = true;
-      if (item == 0 || item->parent() == 0)
-            flag = false;
+      bool flag = !wi.isEmpty();
       addButton->setEnabled(flag);
       editButton->setEnabled(flag);
       }
@@ -390,8 +388,19 @@ void InstrumentsDialog::on_editButton_clicked()
       QList<QTreeWidgetItem*> wi = instrumentList->selectedItems();
       if (wi.isEmpty())
             return;
-//      QTreeWidgetItem* item = wi.front();
-      printf("edit not implemented\n");
+      QTreeWidgetItem* item = wi.front();
+
+      InstrumentTemplateListItem* ti = (InstrumentTemplateListItem*) item;
+      InstrumentTemplate* tp   = ti->instrumentTemplate();
+      if (tp == 0)
+            return;
+
+      if (editInstrument == 0)
+            editInstrument = new EditInstrument(this);
+
+      editInstrument->update();
+      editInstrument->setCurrentInstrument(tp);
+      editInstrument->show();
       }
 
 //---------------------------------------------------------
@@ -493,6 +502,7 @@ void MuseScore::editInstrList()
                   part->setShortName(t->shortName);
                   part->setTrackName(t->name);
                   part->setLongName(t->name);
+                  part->setPitchOffset(t->transpose);
 
                   pli->part = part;
                   QTreeWidgetItem* ci = 0;
