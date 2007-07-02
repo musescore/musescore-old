@@ -1032,6 +1032,8 @@ void Score::convertMidi(MidiFile* mf)
             part->insertStaff(s);
             _staves->push_back(s);
 
+printf("isDrumTrack: %d\n", track->isDrumTrack());
+
             if (track->isDrumTrack())
                   s->clef()->setClef(0, CLEF_PERC);
             else {

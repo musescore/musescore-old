@@ -23,6 +23,8 @@
 
 #include "ui_editinstrument.h"
 
+class InstrumentTemplate;
+
 //---------------------------------------------------------
 //   EditInstrument
 //---------------------------------------------------------
@@ -31,9 +33,19 @@ class EditInstrument : public QDialog, private Ui::EditInstrumentBase
       {
       Q_OBJECT
 
+      QList<InstrumentTemplate*> templates;
+
+   private slots:
+      void on_instrumentList_itemSelectionChanged();
+      void on_buttonCancel_pressed();
+      void on_buttonOk_pressed();
+      void on_buttonNew_pressed();
+
    public:
       EditInstrument(QWidget* parent = 0);
       ~EditInstrument();
+      void setCurrentInstrument(const InstrumentTemplate* instr);
+      void update();
       };
 
 #endif
