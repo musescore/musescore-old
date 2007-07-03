@@ -1,3 +1,6 @@
+3.7.7 (ws)
+      - fix crash when importing midi files containing tracks with different
+        channel events
 1.7.7 (ws)
       - fixed another midi import crash
       - fixed sample rate table in preferences
