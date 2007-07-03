@@ -1235,7 +1235,7 @@ void MidiFile::separateChannel()
       {
       int n = _tracks.size();
 printf("separate channel for %d tracks\n", n);
-      for (int i = 0; i < n; ++i) {
+      for (int i = 0; i < _tracks.size(); ++i) {
             QList<int> channel;
             MidiTrack* mt = _tracks.at(i);
             foreach(MidiEvent* e, mt->events()) {
@@ -1261,7 +1261,7 @@ printf("  track %d has %d channel\n", i, channel.size());
                   if (e->isChannelEvent()) {
                         int ch  = ((MidiChannelEvent*)e)->channel();
                         int idx = channel.indexOf(ch);
-                        MidiTrack* t = _tracks.at(i * idx);
+                        MidiTrack* t = _tracks.at(i + idx);
                         if (t != mt) {
                               t->insert(e);
                               ie = el.erase(ie);
@@ -1270,6 +1270,7 @@ printf("  track %d has %d channel\n", i, channel.size());
                         }
                   ++ie;
                   }
+            i += nn - 1;
             }
       }
 
