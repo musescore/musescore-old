@@ -52,6 +52,7 @@
 #include "barline.h"
 #include "lyrics.h"
 #include "volta.h"
+#include "keysig.h"
 
 //---------------------------------------------------------
 //   xmlSetPitch

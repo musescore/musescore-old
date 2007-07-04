@@ -53,6 +53,7 @@
 #include "trill.h"
 #include "pedal.h"
 #include "hairpin.h"
+#include "keysig.h"
 
 //---------------------------------------------------------
 //   start

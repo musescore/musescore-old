@@ -34,6 +34,7 @@
 #include "chord.h"
 #include "note.h"
 #include "slur.h"
+#include "keysig.h"
 
 //---------------------------------------------------------
 //   intmaxlog
@@ -247,7 +248,12 @@ void ScoreLayout::processSystemHeader(Measure* m)
                         continue;
                   switch (el->type()) {
                         case KEYSIG:
+                              {
                               hasKeysig = true;
+                              KeySig* ks = (KeySig*)el;
+                              // no natural accidentals
+                              ks->setSubtype(ks->subtype() & 0xff);
+                              }
                               break;
                         case CLEF:
                               hasClef = true;
@@ -264,7 +270,7 @@ void ScoreLayout::processSystemHeader(Measure* m)
                         ks->setStaff(staff);
                         ks->setTick(tick);
                         ks->setGenerated(true);
-                        ks->setSubtype(idx);
+                        ks->setSubtype(idx & 0xff);
                         Segment* seg = m->getSegment(ks);
                         seg->add(ks);
                         }

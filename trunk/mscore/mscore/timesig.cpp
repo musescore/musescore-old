@@ -26,6 +26,7 @@
 #include "sym.h"
 #include "symbol.h"
 #include "layout.h"
+#include "viewer.h"
 
 //---------------------------------------------------------
 //   TimeSig
@@ -99,7 +100,7 @@ void TimeSig::getSig(int* n, int* z1, int* z2, int* z3, int* z4) const
 bool TimeSig::acceptDrop(Viewer* viewer, const QPointF&, int type, const QDomElement&) const
       {
       if (type == TIMESIG) {
-            setDropTarget(viewer);
+            viewer->setDropTarget(this);
             return true;
             }
       return false;

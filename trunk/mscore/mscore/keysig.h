@@ -1,9 +1,9 @@
 //=============================================================================
 //  MusE Score
 //  Linux Music Score Editor
-//  $Id: editinstrument.h,v 1.4 2006/03/02 17:08:33 wschweer Exp $
+//  $Id:$
 //
-//  Copyright (C) 2002-2006 Werner Schweer (ws@seh.de)
+//  Copyright (C) 2002-2007 Werner Schweer (ws@seh.de)
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.
@@ -18,33 +18,35 @@
 //  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //=============================================================================
 
-#ifndef __EDITINSTRUMENT_H__
-#define __EDITINSTRUMENT_H__
+#ifndef __KEYSIG_H__
+#define __KEYSIG_H__
 
-#include "ui_editinstrument.h"
+#include "element.h"
 
-class InstrumentTemplate;
+class Sym;
 
 //---------------------------------------------------------
-//   EditInstrument
+//   KeySig
 //---------------------------------------------------------
 
-class EditInstrument : public QDialog, private Ui::EditInstrumentBase
-      {
-      Q_OBJECT
+/**
+ The KeySig class represents a Key Signature on a staff
+*/
 
-      InstrumentTemplate* instr;
-      InstrumentTemplate* lt;
+class KeySig : public Element {
+      void addLayout(Sym*, double x, double y);
 
-   private slots:
-      void on_buttonCancel_pressed();
-      void on_buttonOk_pressed();
-      void valueChanged();
+      double yoffset() const;
 
    public:
-      EditInstrument(QWidget* parent = 0);
-      ~EditInstrument();
-      void setInstrument(InstrumentTemplate* instr);
+      KeySig(Score*);
+      virtual KeySig* clone() const { return new KeySig(*this); }
+      virtual void draw(QPainter&);
+      virtual ElementType type() const { return KEYSIG; }
+      virtual bool acceptDrop(Viewer*, const QPointF&, int, const QDomElement&) const;
+      virtual Element* drop(const QPointF&, const QPointF&, int, const QDomElement&);
+      virtual void layout(ScoreLayout*);
+      void setSig(int oldSig, int newSig);
       };
 
 #endif

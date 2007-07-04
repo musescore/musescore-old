@@ -26,6 +26,7 @@
 #include "score.h"
 #include "bracket.h"
 #include "key.h"
+#include "keysig.h"
 #include "segment.h"
 
 //---------------------------------------------------------
@@ -323,7 +324,8 @@ void Staff::changeKeySig(int tick, int st)
                   int etick = segment->tick();
                   if (!e || (etick < tick))
                         continue;
-                  if ((e->subtype() != st) && (etick > tick)) {
+                  int cst = char(e->subtype() & 0xff);
+                  if ((cst != st) && (etick > tick)) {
                         found = true;
                         break;
                         }
@@ -346,7 +348,8 @@ void Staff::changeKeySig(int tick, int st)
             KeySig* keysig = new KeySig(_score);
             keysig->setStaff(this);
             keysig->setTick(tick);
-            keysig->setSubtype(st);
+            int oldKey = _keymap->key(tick-1);
+            keysig->setSig(oldKey, st);
 
             Segment::SegmentType stype = Segment::segmentType(KEYSIG);
             Segment* s = measure->findSegment(stype, tick);

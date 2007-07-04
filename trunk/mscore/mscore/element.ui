@@ -13,11 +13,20 @@
    <string>Form</string>
   </property>
   <layout class="QVBoxLayout" >
-   <property name="margin" >
-    <number>8</number>
-   </property>
    <property name="spacing" >
     <number>6</number>
+   </property>
+   <property name="leftMargin" >
+    <number>8</number>
+   </property>
+   <property name="topMargin" >
+    <number>8</number>
+   </property>
+   <property name="rightMargin" >
+    <number>8</number>
+   </property>
+   <property name="bottomMargin" >
+    <number>8</number>
    </property>
    <item>
     <widget class="QGroupBox" name="groupBox" >
@@ -28,19 +37,37 @@
       <bool>true</bool>
      </property>
      <layout class="QVBoxLayout" >
-      <property name="margin" >
-       <number>8</number>
-      </property>
       <property name="spacing" >
        <number>6</number>
       </property>
+      <property name="leftMargin" >
+       <number>8</number>
+      </property>
+      <property name="topMargin" >
+       <number>8</number>
+      </property>
+      <property name="rightMargin" >
+       <number>8</number>
+      </property>
+      <property name="bottomMargin" >
+       <number>8</number>
+      </property>
       <item>
        <layout class="QHBoxLayout" >
-        <property name="margin" >
-         <number>0</number>
-        </property>
         <property name="spacing" >
          <number>6</number>
+        </property>
+        <property name="leftMargin" >
+         <number>0</number>
+        </property>
+        <property name="topMargin" >
+         <number>0</number>
+        </property>
+        <property name="rightMargin" >
+         <number>0</number>
+        </property>
+        <property name="bottomMargin" >
+         <number>0</number>
         </property>
         <item>
          <widget class="QPushButton" name="previousButton" >
@@ -94,11 +121,20 @@
       </item>
       <item>
        <layout class="QHBoxLayout" >
-        <property name="margin" >
-         <number>0</number>
-        </property>
         <property name="spacing" >
          <number>6</number>
+        </property>
+        <property name="leftMargin" >
+         <number>0</number>
+        </property>
+        <property name="topMargin" >
+         <number>0</number>
+        </property>
+        <property name="rightMargin" >
+         <number>0</number>
+        </property>
+        <property name="bottomMargin" >
+         <number>0</number>
         </property>
         <item>
          <widget class="QCheckBox" name="selected" >
@@ -124,9 +160,7 @@
         <item>
          <widget class="QLabel" name="label_4" >
           <property name="sizePolicy" >
-           <sizepolicy>
-            <hsizetype>1</hsizetype>
-            <vsizetype>0</vsizetype>
+           <sizepolicy vsizetype="Fixed" hsizetype="Minimum" >
             <horstretch>0</horstretch>
             <verstretch>0</verstretch>
            </sizepolicy>
@@ -140,7 +174,11 @@
          </widget>
         </item>
         <item>
-         <widget class="QSpinBox" name="subtype" />
+         <widget class="QSpinBox" name="subtype" >
+          <property name="maximum" >
+           <number>999999999</number>
+          </property>
+         </widget>
         </item>
         <item>
          <spacer>
@@ -159,11 +197,20 @@
       </item>
       <item>
        <layout class="QHBoxLayout" >
-        <property name="margin" >
-         <number>0</number>
-        </property>
         <property name="spacing" >
          <number>6</number>
+        </property>
+        <property name="leftMargin" >
+         <number>0</number>
+        </property>
+        <property name="topMargin" >
+         <number>0</number>
+        </property>
+        <property name="rightMargin" >
+         <number>0</number>
+        </property>
+        <property name="bottomMargin" >
+         <number>0</number>
         </property>
         <item>
          <widget class="QLabel" name="label" >
@@ -180,11 +227,11 @@
         </item>
         <item>
          <widget class="QSpinBox" name="voice" >
-          <property name="maximum" >
-           <number>4</number>
-          </property>
           <property name="minimum" >
            <number>1</number>
+          </property>
+          <property name="maximum" >
+           <number>4</number>
           </property>
          </widget>
         </item>
@@ -261,11 +308,20 @@
       </item>
       <item>
        <layout class="QHBoxLayout" >
-        <property name="margin" >
-         <number>0</number>
-        </property>
         <property name="spacing" >
          <number>6</number>
+        </property>
+        <property name="leftMargin" >
+         <number>0</number>
+        </property>
+        <property name="topMargin" >
+         <number>0</number>
+        </property>
+        <property name="rightMargin" >
+         <number>0</number>
+        </property>
+        <property name="bottomMargin" >
+         <number>0</number>
         </property>
         <item>
          <widget class="QLabel" name="label_5" >
@@ -325,11 +381,11 @@
           <property name="suffix" >
            <string> sp</string>
           </property>
-          <property name="maximum" >
-           <double>100000.000000000000000</double>
-          </property>
           <property name="minimum" >
            <double>-100000.000000000000000</double>
+          </property>
+          <property name="maximum" >
+           <double>100000.000000000000000</double>
           </property>
           <property name="singleStep" >
            <double>0.100000000000000</double>
@@ -341,11 +397,11 @@
           <property name="suffix" >
            <string> sp</string>
           </property>
-          <property name="maximum" >
-           <double>100000.000000000000000</double>
-          </property>
           <property name="minimum" >
            <double>-100000.000000000000000</double>
+          </property>
+          <property name="maximum" >
+           <double>100000.000000000000000</double>
           </property>
           <property name="singleStep" >
            <double>0.100000000000000</double>
@@ -356,18 +412,25 @@
       </item>
       <item>
        <layout class="QHBoxLayout" >
-        <property name="margin" >
-         <number>0</number>
-        </property>
         <property name="spacing" >
          <number>6</number>
+        </property>
+        <property name="leftMargin" >
+         <number>0</number>
+        </property>
+        <property name="topMargin" >
+         <number>0</number>
+        </property>
+        <property name="rightMargin" >
+         <number>0</number>
+        </property>
+        <property name="bottomMargin" >
+         <number>0</number>
         </property>
         <item>
          <widget class="QLabel" name="label_7" >
           <property name="sizePolicy" >
-           <sizepolicy>
-            <hsizetype>4</hsizetype>
-            <vsizetype>5</vsizetype>
+           <sizepolicy vsizetype="Preferred" hsizetype="Maximum" >
             <horstretch>0</horstretch>
             <verstretch>0</verstretch>
            </sizepolicy>
@@ -382,41 +445,41 @@
         </item>
         <item>
          <widget class="QDoubleSpinBox" name="bboxx" >
-          <property name="maximum" >
-           <double>100000.000000000000000</double>
-          </property>
           <property name="minimum" >
            <double>-100000.000000000000000</double>
+          </property>
+          <property name="maximum" >
+           <double>100000.000000000000000</double>
           </property>
          </widget>
         </item>
         <item>
          <widget class="QDoubleSpinBox" name="bboxy" >
-          <property name="maximum" >
-           <double>100000.000000000000000</double>
-          </property>
           <property name="minimum" >
            <double>-100000.000000000000000</double>
+          </property>
+          <property name="maximum" >
+           <double>100000.000000000000000</double>
           </property>
          </widget>
         </item>
         <item>
          <widget class="QDoubleSpinBox" name="bboxw" >
-          <property name="maximum" >
-           <double>100000.000000000000000</double>
-          </property>
           <property name="minimum" >
            <double>-100000.000000000000000</double>
+          </property>
+          <property name="maximum" >
+           <double>100000.000000000000000</double>
           </property>
          </widget>
         </item>
         <item>
          <widget class="QDoubleSpinBox" name="bboxh" >
-          <property name="maximum" >
-           <double>100000.000000000000000</double>
-          </property>
           <property name="minimum" >
            <double>-100000.000000000000000</double>
+          </property>
+          <property name="maximum" >
+           <double>100000.000000000000000</double>
           </property>
          </widget>
         </item>

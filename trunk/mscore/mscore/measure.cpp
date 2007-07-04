@@ -62,6 +62,7 @@
 #include "hook.h"
 #include "beam.h"
 #include "pitchspelling.h"
+#include "keysig.h"
 
 //---------------------------------------------------------
 //   y2pitch
@@ -1859,7 +1860,8 @@ Element* Measure::drop(const QPointF& p, const QPointF& /*offset*/, int type, co
                   {
                   KeySig* ks = new KeySig(0);
                   ks->read(e);
-                  staff->changeKeySig(tick(), ks->subtype());
+                  int newSig = char(ks->subtype() & 0xff);
+                  staff->changeKeySig(tick(), newSig);
                   delete ks;
                   }
                   break;
@@ -2288,7 +2290,8 @@ void Measure::read(QDomElement e, int idx)
                   ks->setTick(score()->curTick);
                   ks->setStaff(staff);
                   ks->read(e);
-                  ks->setSubtype(ks->subtype());
+                  int oldSig = staff->keymap()->key(score()->curTick - 1);
+                  ks->setSig(oldSig, ks->subtype() & 0xff);
                   Segment* s = getSegment(ks);
                   s->add(ks);
                   }

@@ -45,6 +45,7 @@
 #include "timedialog.h"
 #include "symboldialog.h"
 #include "volta.h"
+#include "keysig.h"
 
 static const char* keyNames[] = {
       "g-major, e-minor",     "ces",
@@ -97,7 +98,7 @@ void MuseScore::showPalette(bool visible)
                   }
             for (int i = -7; i < 0; ++i) {
                   KeySig* k = new KeySig(0);
-                  k->setSubtype(i);
+                  k->setSubtype(i & 0xff);
                   sp->addObject(14 + i,  k, keyNames[(7 + i) * 2 + 1]);
                   }
             KeySig* k = new KeySig(0);
@@ -577,7 +578,7 @@ void MuseScore::keyMenu()
                   }
             for (int i = -7; i < 0; ++i) {
                   KeySig* k = new KeySig(cs);
-                  k->setSubtype(i);
+                  k->setSubtype(i & 0xff);
                   sp->addObject((7 + i) * 2 + 1,  k, keyNames[(7 + i) * 2 + 1]);
                   }
             KeySig* k = new KeySig(cs);

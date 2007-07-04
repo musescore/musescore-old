@@ -28,58 +28,27 @@
 EditInstrument::EditInstrument(QWidget* parent)
    : QDialog(parent)
       {
+      lt = new InstrumentTemplate;
       setupUi(this);
+      connect(minPitch, SIGNAL(valueChanged(int)), SLOT(valueChanged()));
+      connect(maxPitch, SIGNAL(valueChanged(int)), SLOT(valueChanged()));
       }
 
 //---------------------------------------------------------
-//   update
+//   setInstrument
 //---------------------------------------------------------
 
-void EditInstrument::update()
+void EditInstrument::setInstrument(InstrumentTemplate* t)
       {
-      foreach(InstrumentTemplate* t, templates)
-            delete t;
-      templates.clear();
-
-      QString curGroup;
-      InstrumentTemplateListItem* group = 0;
-      foreach(InstrumentTemplate* t, instrumentTemplates) {
-            InstrumentTemplate* tt = new InstrumentTemplate(*t);
-            templates.append(tt);
-            if (curGroup != tt->group) {
-                  curGroup = tt->group;
-                  group    = new InstrumentTemplateListItem(curGroup, instrumentList);
-                  group->setFlags(Qt::ItemIsEnabled);
-                  }
-            new InstrumentTemplateListItem(tt, group);
-            }
-      }
-
-//---------------------------------------------------------
-//   setCurrentInstrument
-//---------------------------------------------------------
-
-void EditInstrument::setCurrentInstrument(const InstrumentTemplate* t)
-      {
-      bool found = false;
-      for (int i = 0; i < instrumentList->topLevelItemCount(); ++i) {
-            QTreeWidgetItem* item = instrumentList->topLevelItem(i);
-            int n = item->childCount();
-            for (int k = 0; k < n; ++k) {
-                  QTreeWidgetItem* item2 = item->child(k);
-                  InstrumentTemplate* it = ((InstrumentTemplateListItem*)item2)->instrumentTemplate();
-                  if (t == it) {
-                        item2->setExpanded(true);
-                        item2->setSelected(true);
-                        found = true;
-                        break;
-                        }
-                  }
-            if (found) {
-                  item->setExpanded(true);
-                  break;
-                  }
-            }
+      instr = t;
+      *lt   = *t;
+      nameEdit->setText(t->name);
+      shortNameEdit->setText(t->shortName);
+      minPitch->setValue(t->minPitch);
+      maxPitch->setValue(t->maxPitch);
+      transpose->setValue(t->transpose);
+      midiProgram->setValue(t->midiProgram);
+      staves->setValue(t->staves);
       }
 
 //---------------------------------------------------------
@@ -88,42 +57,7 @@ void EditInstrument::setCurrentInstrument(const InstrumentTemplate* t)
 
 EditInstrument::~EditInstrument()
       {
-      }
-
-//---------------------------------------------------------
-//   on_instrumentList_itemSelectionChanged
-//---------------------------------------------------------
-
-void EditInstrument::on_instrumentList_itemSelectionChanged()
-      {
-      QList<QTreeWidgetItem*> wi = instrumentList->selectedItems();
-      InstrumentTemplate* t = 0;
-      if (!wi.isEmpty()) {
-            QTreeWidgetItem* item = wi.front();
-            t = ((InstrumentTemplateListItem*)item)->instrumentTemplate();
-            }
-
-//      int clefIdx[MAX_STAVES];
-//      int bracket;            // bracket type (NO_BRACKET)
-
-      if (t == 0) {
-            nameEdit->setText("");
-            shortNameEdit->setText("");
-            minPitch->setValue(0);
-            maxPitch->setValue(0);
-            transpose->setValue(0);
-            midiProgram->setValue(0);
-            staves->setValue(1);
-            }
-      else {
-            nameEdit->setText(t->name);
-            shortNameEdit->setText(t->shortName);
-            minPitch->setValue(t->minPitch);
-            maxPitch->setValue(t->maxPitch);
-            transpose->setValue(t->transpose);
-            midiProgram->setValue(t->midiProgram);
-            staves->setValue(t->staves);
-            }
+      delete lt;
       }
 
 //---------------------------------------------------------
@@ -141,27 +75,21 @@ void EditInstrument::on_buttonCancel_pressed()
 
 void EditInstrument::on_buttonOk_pressed()
       {
-      foreach(InstrumentTemplate* t, instrumentTemplates)
-            delete t;
-      instrumentTemplates.clear();
-
-      for (int i = 0; i < instrumentList->topLevelItemCount(); ++i) {
-            QTreeWidgetItem* item = instrumentList->topLevelItem(i);
-            int n = item->childCount();
-            for (int k = 0; k < n; ++k) {
-                  QTreeWidgetItem* item2 = item->child(k);
-                  InstrumentTemplate* it = ((InstrumentTemplateListItem*)item2)->instrumentTemplate();
-                  instrumentTemplates.append(it);
-                  }
-            }
+      *instr = *lt;
       }
 
 //---------------------------------------------------------
-//   on_buttonNew_pressed
+//   valueChanged
 //---------------------------------------------------------
 
-void EditInstrument::on_buttonNew_pressed()
+void EditInstrument::valueChanged()
       {
-      printf("New\n");
+      lt->name        = nameEdit->text();
+      lt->shortName   = shortNameEdit->text();
+      lt->minPitch    = minPitch->value();
+      lt->maxPitch    = maxPitch->value();
+      lt->transpose   = transpose->value();
+      lt->midiProgram = midiProgram->value();
+      lt->staves      = staves->value();
       }
 

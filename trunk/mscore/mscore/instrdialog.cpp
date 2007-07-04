@@ -391,15 +391,14 @@ void InstrumentsDialog::on_editButton_clicked()
       QTreeWidgetItem* item = wi.front();
 
       InstrumentTemplateListItem* ti = (InstrumentTemplateListItem*) item;
-      InstrumentTemplate* tp   = ti->instrumentTemplate();
+      InstrumentTemplate* tp         = ti->instrumentTemplate();
       if (tp == 0)
             return;
 
       if (editInstrument == 0)
             editInstrument = new EditInstrument(this);
 
-      editInstrument->update();
-      editInstrument->setCurrentInstrument(tp);
+      editInstrument->setInstrument(tp);
       editInstrument->show();
       }
 
