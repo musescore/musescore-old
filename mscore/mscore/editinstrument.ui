@@ -5,33 +5,131 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>464</width>
-    <height>375</height>
+    <width>285</width>
+    <height>321</height>
    </rect>
   </property>
   <property name="windowTitle" >
    <string>MuseScore: Edit Instrument Properties</string>
   </property>
-  <layout class="QGridLayout" >
-   <property name="leftMargin" >
-    <number>8</number>
-   </property>
-   <property name="topMargin" >
-    <number>8</number>
-   </property>
-   <property name="rightMargin" >
-    <number>8</number>
-   </property>
-   <property name="bottomMargin" >
-    <number>8</number>
-   </property>
-   <property name="horizontalSpacing" >
-    <number>6</number>
-   </property>
-   <property name="verticalSpacing" >
-    <number>6</number>
-   </property>
-   <item row="1" column="0" colspan="2" >
+  <layout class="QVBoxLayout" >
+   <item>
+    <widget class="QGroupBox" name="groupBox" >
+     <property name="title" >
+      <string>Instrument Properties</string>
+     </property>
+     <layout class="QGridLayout" >
+      <item row="0" column="0" >
+       <widget class="QLabel" name="label" >
+        <property name="text" >
+         <string>Name</string>
+        </property>
+        <property name="textFormat" >
+         <enum>Qt::PlainText</enum>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1" >
+       <widget class="QLineEdit" name="nameEdit" />
+      </item>
+      <item row="1" column="0" >
+       <widget class="QLabel" name="label_2" >
+        <property name="text" >
+         <string>Short Name</string>
+        </property>
+        <property name="textFormat" >
+         <enum>Qt::PlainText</enum>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1" >
+       <widget class="QLineEdit" name="shortNameEdit" />
+      </item>
+      <item row="2" column="0" >
+       <widget class="QLabel" name="label_3" >
+        <property name="text" >
+         <string>min. Pitch</string>
+        </property>
+        <property name="textFormat" >
+         <enum>Qt::PlainText</enum>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="1" >
+       <widget class="QSpinBox" name="minPitch" >
+        <property name="maximum" >
+         <number>127</number>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="0" >
+       <widget class="QLabel" name="label_4" >
+        <property name="text" >
+         <string>max. Pitch</string>
+        </property>
+        <property name="textFormat" >
+         <enum>Qt::PlainText</enum>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="1" >
+       <widget class="QSpinBox" name="maxPitch" >
+        <property name="maximum" >
+         <number>127</number>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="0" >
+       <widget class="QLabel" name="label_5" >
+        <property name="text" >
+         <string>Transpose</string>
+        </property>
+        <property name="textFormat" >
+         <enum>Qt::PlainText</enum>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="1" >
+       <widget class="QSpinBox" name="transpose" >
+        <property name="maximum" >
+         <number>127</number>
+        </property>
+       </widget>
+      </item>
+      <item row="5" column="0" >
+       <widget class="QLabel" name="label_6" >
+        <property name="text" >
+         <string>Midi Program</string>
+        </property>
+        <property name="textFormat" >
+         <enum>Qt::PlainText</enum>
+        </property>
+       </widget>
+      </item>
+      <item row="5" column="1" >
+       <widget class="QSpinBox" name="midiProgram" >
+        <property name="maximum" >
+         <number>127</number>
+        </property>
+       </widget>
+      </item>
+      <item row="6" column="0" >
+       <widget class="QLabel" name="label_7" >
+        <property name="text" >
+         <string>Staves</string>
+        </property>
+        <property name="textFormat" >
+         <enum>Qt::PlainText</enum>
+        </property>
+       </widget>
+      </item>
+      <item row="6" column="1" >
+       <widget class="QSpinBox" name="staves" />
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
     <layout class="QHBoxLayout" >
      <property name="spacing" >
       <number>6</number>
@@ -48,13 +146,6 @@
      <property name="bottomMargin" >
       <number>0</number>
      </property>
-     <item>
-      <widget class="QPushButton" name="buttonNew" >
-       <property name="text" >
-        <string>New</string>
-       </property>
-      </widget>
-     </item>
      <item>
       <spacer>
        <property name="orientation" >
@@ -84,163 +175,7 @@
      </item>
     </layout>
    </item>
-   <item row="0" column="0" >
-    <widget class="QTreeWidget" name="instrumentList" >
-     <property name="alternatingRowColors" >
-      <bool>true</bool>
-     </property>
-     <column>
-      <property name="text" >
-       <string>Instrument List</string>
-      </property>
-     </column>
-    </widget>
-   </item>
-   <item row="0" column="1" >
-    <widget class="QGroupBox" name="groupBox" >
-     <property name="title" >
-      <string>Properties</string>
-     </property>
-     <layout class="QGridLayout" >
-      <property name="leftMargin" >
-       <number>8</number>
-      </property>
-      <property name="topMargin" >
-       <number>8</number>
-      </property>
-      <property name="rightMargin" >
-       <number>8</number>
-      </property>
-      <property name="bottomMargin" >
-       <number>8</number>
-      </property>
-      <property name="horizontalSpacing" >
-       <number>6</number>
-      </property>
-      <property name="verticalSpacing" >
-       <number>6</number>
-      </property>
-      <item row="0" column="1" >
-       <widget class="QLineEdit" name="nameEdit" />
-      </item>
-      <item row="1" column="1" >
-       <widget class="QLineEdit" name="shortNameEdit" />
-      </item>
-      <item row="2" column="1" >
-       <widget class="QSpinBox" name="minPitch" >
-        <property name="maximum" >
-         <number>127</number>
-        </property>
-       </widget>
-      </item>
-      <item row="3" column="1" >
-       <widget class="QSpinBox" name="maxPitch" >
-        <property name="maximum" >
-         <number>127</number>
-        </property>
-       </widget>
-      </item>
-      <item row="4" column="1" >
-       <widget class="QSpinBox" name="transpose" >
-        <property name="maximum" >
-         <number>127</number>
-        </property>
-       </widget>
-      </item>
-      <item row="7" column="1" >
-       <widget class="QSpinBox" name="staves" />
-      </item>
-      <item row="6" column="1" >
-       <widget class="QSpinBox" name="midiProgram" >
-        <property name="maximum" >
-         <number>127</number>
-        </property>
-       </widget>
-      </item>
-      <item row="7" column="0" >
-       <widget class="QLabel" name="label_7" >
-        <property name="text" >
-         <string>Staves</string>
-        </property>
-        <property name="textFormat" >
-         <enum>Qt::PlainText</enum>
-        </property>
-       </widget>
-      </item>
-      <item row="4" column="0" >
-       <widget class="QLabel" name="label_5" >
-        <property name="text" >
-         <string>Transpose</string>
-        </property>
-        <property name="textFormat" >
-         <enum>Qt::PlainText</enum>
-        </property>
-       </widget>
-      </item>
-      <item row="3" column="0" >
-       <widget class="QLabel" name="label_4" >
-        <property name="text" >
-         <string>max. Pitch</string>
-        </property>
-        <property name="textFormat" >
-         <enum>Qt::PlainText</enum>
-        </property>
-       </widget>
-      </item>
-      <item row="2" column="0" >
-       <widget class="QLabel" name="label_3" >
-        <property name="text" >
-         <string>min. Pitch</string>
-        </property>
-        <property name="textFormat" >
-         <enum>Qt::PlainText</enum>
-        </property>
-       </widget>
-      </item>
-      <item row="1" column="0" >
-       <widget class="QLabel" name="label_2" >
-        <property name="text" >
-         <string>Short Name</string>
-        </property>
-        <property name="textFormat" >
-         <enum>Qt::PlainText</enum>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="0" >
-       <widget class="QLabel" name="label" >
-        <property name="text" >
-         <string>Name</string>
-        </property>
-        <property name="textFormat" >
-         <enum>Qt::PlainText</enum>
-        </property>
-       </widget>
-      </item>
-      <item row="6" column="0" >
-       <widget class="QLabel" name="label_6" >
-        <property name="text" >
-         <string>Midi Program</string>
-        </property>
-        <property name="textFormat" >
-         <enum>Qt::PlainText</enum>
-        </property>
-       </widget>
-      </item>
-     </layout>
-    </widget>
-   </item>
   </layout>
-  <widget class="QWidget" native="1" name="layoutWidget" >
-   <property name="geometry" >
-    <rect>
-     <x>9</x>
-     <y>333</y>
-     <width>446</width>
-     <height>33</height>
-    </rect>
-   </property>
-  </widget>
  </widget>
  <resources/>
  <connections>

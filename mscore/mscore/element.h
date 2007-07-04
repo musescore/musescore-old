@@ -3,7 +3,7 @@
 //  Linux Music Score Editor
 //  $Id: element.h,v 1.58 2006/04/12 14:58:10 wschweer Exp $
 //
-//  Copyright (C) 2002-2006 Werner Schweer (ws@seh.de)
+//  Copyright (C) 2002-2007 Werner Schweer (ws@seh.de)
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.
@@ -139,7 +139,7 @@ class Element {
       bool dropTarget() const                 { return _dropTarget; }
       void setDropTarget(bool f) const        { _dropTarget = f;    }
 
-      virtual QPointF ipos() const            { return _pos;       }
+      virtual QPointF ipos() const            { return _pos;        }
       virtual QPointF pos() const             { return _pos + (_userOff * _spatium);         }
       virtual double x() const                { return _pos.x() + (_userOff.x() * _spatium); }
       virtual double y() const                { return _pos.y() + (_userOff.y() * _spatium); }
@@ -423,30 +423,6 @@ class Compound : public Element {
       virtual void setSelected(bool f);
       virtual void setVisible(bool);
       virtual QRectF bbox() const;
-      };
-
-//---------------------------------------------------------
-//   KeySig
-//---------------------------------------------------------
-
-/**
- The KeySig class represents a Key Signature on a staff
-*/
-
-class KeySig : public Element {
-      void add(QPainter&, bool, double x, double y);
-      void addLayout(bool flat, double x, double y);
-
-      double yoffset() const;
-
-   public:
-      KeySig(Score*);
-      virtual KeySig* clone() const { return new KeySig(*this); }
-      virtual void draw(QPainter&);
-      virtual ElementType type() const { return KEYSIG; }
-      virtual bool acceptDrop(Viewer*, const QPointF&, int, const QDomElement&) const;
-      virtual Element* drop(const QPointF&, const QPointF&, int, const QDomElement&);
-      virtual void layout(ScoreLayout*);
       };
 
 //---------------------------------------------------------

@@ -171,13 +171,15 @@ void Canvas::objectPopup(const QPoint& pos, Element* obj)
             }
 
       QMenu* popup = new QMenu(this);
+      popup->setSeparatorsCollapsible(false);
 
+      QAction* a = popup->addSeparator();
+      a->setText(obj->name());
       popup->addAction(getAction("cut"));
       popup->addAction(getAction("copy"));
       popup->addAction(getAction("paste"));
       popup->addSeparator();
 
-      QAction* a;
       if (obj->visible())
             a = popup->addAction(tr("Set Invisible"));
       else
@@ -1421,12 +1423,8 @@ void Canvas::dragEnterEvent(QDragEnterEvent* event)
 
 void Canvas::dragLeaveEvent(QDragEnterEvent*)
       {
-      if (!dropTarget)
-            return;
-      dropTarget->setDropTarget(false);
-      _score->addRefresh(dropTarget->abbox());
+      setDropTarget(0);
       _score->end();
-      dropTarget = 0;
       }
 
 //---------------------------------------------------------

@@ -54,6 +54,7 @@ class MidiFile;
 class ScoreLayout;
 class MidiTrack;
 class BSymbol;
+class KeySig;
 
 struct SigEvent;
 

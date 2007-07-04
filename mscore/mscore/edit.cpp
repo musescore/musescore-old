@@ -41,6 +41,7 @@
 #include "mscore.h"
 #include "lyrics.h"
 #include "image.h"
+#include "keysig.h"
 
 //---------------------------------------------------------
 //   selectNoteMessage

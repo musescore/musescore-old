@@ -62,6 +62,7 @@
 #include "tuplet.h"
 #include "lyrics.h"
 #include "volta.h"
+#include "keysig.h"
 
 //---------------------------------------------------------
 //   attributes -- prints <attributes> tag when necessary

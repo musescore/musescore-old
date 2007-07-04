@@ -1174,10 +1174,10 @@ ShowElementBase::ShowElementBase()
       connect(eb.previousButton, SIGNAL(clicked()), SLOT(previousClicked()));
       connect(eb.parentButton,   SIGNAL(clicked()), SLOT(parentClicked()));
       connect(eb.anchorButton,   SIGNAL(clicked()), SLOT(anchorClicked()));
-      connect(eb.offsetx, SIGNAL(valueChanged(double)), SLOT(offsetxChanged(double)));
-      connect(eb.offsety, SIGNAL(valueChanged(double)), SLOT(offsetyChanged(double)));
-      connect(eb.selected, SIGNAL(clicked(bool)), SLOT(selectedClicked(bool)));
-      connect(eb.visible, SIGNAL(clicked(bool)), SLOT(visibleClicked(bool)));
+      connect(eb.offsetx,        SIGNAL(valueChanged(double)), SLOT(offsetxChanged(double)));
+      connect(eb.offsety,        SIGNAL(valueChanged(double)), SLOT(offsetyChanged(double)));
+      connect(eb.selected,       SIGNAL(clicked(bool)), SLOT(selectedClicked(bool)));
+      connect(eb.visible,        SIGNAL(clicked(bool)), SLOT(visibleClicked(bool)));
       }
 
 //---------------------------------------------------------
