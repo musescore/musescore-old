@@ -53,6 +53,7 @@
 #include "lyrics.h"
 #include "volta.h"
 #include "keysig.h"
+#include "pitchspelling.h"
 
 //---------------------------------------------------------
 //   xmlSetPitch
@@ -81,18 +82,12 @@ static void xmlSetPitch(Note* n, int tick, char step, int alter, int octave, int
       if (pitch > 127)
             pitch = 127;
       n->setPitch(pitch);
-      static int table1[7]  = { 40, 39, 45, 44, 43, 42, 41 };
-      int line  = table1[istep] - (octave+1) * 7;
 
-      int staffIdx = n->staffIdx() + n->move();
-      Staff* staff = n->score()->staff(staffIdx);
-
-      int clef  = staff->clef()->clef(tick);
-
-      line     += clefTable[clef].yOffset;
-//      printf(" n->staff=%p clef=%d line=%d\n", staff, clef, line);
-      n->setLine(line);
-      n->changeAccidental(accidental);
+      //                        a  b  c  d  e  f  g
+      static int table1[7]  = { 5, 6, 0, 1, 2, 3, 4 };
+      int line = table1[istep];
+      int tpc  = line2tpc(line, alter);
+      n->setTpc(tpc);
       }
 
 //---------------------------------------------------------

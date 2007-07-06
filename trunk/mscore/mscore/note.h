@@ -54,8 +54,8 @@ enum {
 */
 
 class Note : public Element {
-      static int noteHeads[HEAD_GROUPS][3];
-      static int smallNoteHeads[HEAD_GROUPS][3];
+      static int noteHeads[HEAD_GROUPS][4];
+      static int smallNoteHeads[HEAD_GROUPS][4];
 
       int _pitch;             ///< Note pitch as midi value (0 - 127).
       int _tpc;               ///< tonal pitch class
