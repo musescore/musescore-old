@@ -38,18 +38,18 @@
 #include "viewer.h"
 #include "pitchspelling.h"
 
-int Note::noteHeads[HEAD_GROUPS][3] = {
-      { wholeheadSym, halfheadSym, quartheadSym },
-      { wholecrossedheadSym, halfcrossedheadSym, crossedheadSym },
-      { wholediamondheadSym, halfdiamondheadSym, diamondheadSym },
-      { wholetriangleheadSym, halftriangleheadSym, triangleheadSym },
+int Note::noteHeads[HEAD_GROUPS][4] = {
+      { wholeheadSym,         halfheadSym,         quartheadSym,    brevisheadSym},
+      { wholecrossedheadSym,  halfcrossedheadSym,  crossedheadSym,  wholecrossedheadSym },
+      { wholediamondheadSym,  halfdiamondheadSym,  diamondheadSym,  wholediamondheadSym},
+      { wholetriangleheadSym, halftriangleheadSym, triangleheadSym, wholetriangleheadSym},
       };
 
-int Note::smallNoteHeads[HEAD_GROUPS][3] = {
-      { s_wholeheadSym,         s_halfheadSym,         s_quartheadSym },
-      { s_wholecrossedheadSym,  s_halfcrossedheadSym,  s_crossedheadSym },
-      { s_wholediamondheadSym,  s_halfdiamondheadSym,  s_diamondheadSym },
-      { s_wholetriangleheadSym, s_halftriangleheadSym, s_triangleheadSym },
+int Note::smallNoteHeads[HEAD_GROUPS][4] = {
+      { s_wholeheadSym,         s_halfheadSym,         s_quartheadSym,    s_brevisheadSym },
+      { s_wholecrossedheadSym,  s_halfcrossedheadSym,  s_crossedheadSym,  s_wholecrossedheadSym},
+      { s_wholediamondheadSym,  s_halfdiamondheadSym,  s_diamondheadSym,  s_wholediamondheadSym},
+      { s_wholetriangleheadSym, s_halftriangleheadSym, s_triangleheadSym, s_wholetriangleheadSym},
       };
 
 //---------------------------------------------------------
@@ -355,7 +355,7 @@ void Note::setHead(int ticks)
 
 void Note::setType(DurationType t)
       {
-printf("Note::setType\n");
+      int headType = 0;
       switch(t) {
             case D_256TH:
             case D_128TH:
@@ -364,19 +364,23 @@ printf("Note::setType\n");
             case D_16TH:
             case D_EIGHT:
             case D_QUARTER:
-                  _head = _grace ? s_quartheadSym : quartheadSym;
+                  headType = 2;
                   break;
             case D_HALF:
-                  _head = _grace ? s_halfheadSym : halfheadSym;
+                  headType = 1;
                   break;
             case D_WHOLE:
-                  _head = _grace ? s_wholeheadSym : wholeheadSym;
+                  headType = 0;
                   break;
             case D_BREVE:
             case D_LONG:      // not impl.
-                  _head = _grace ? s_brevisheadSym : brevisheadSym;
+                  headType = 3;
                   break;
             }
+      if (_grace)
+            _head = smallNoteHeads[_headGroup][headType];
+      else
+            _head = noteHeads[_headGroup][headType];
       }
 
 //---------------------------------------------------------
