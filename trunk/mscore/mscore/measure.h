@@ -111,7 +111,7 @@ class Measure : public Element {
 
       int    _no;             ///< Measure number, counting from zero
       int    _noOffset;       ///< Offset to measure number
-      Text* _noText;   ///< Measure number text object
+      Text* _noText;          ///< Measure number text object
 
       double _userStretch;
       bool _lineBreak;        ///< Forced line break
@@ -159,20 +159,20 @@ class Measure : public Element {
       double distance(int i) const     { return staves[i].distance; }
       double userDistance(int i) const { return staves[i].userDistance; }
 
-      int size() const            { return _size;       }
+      int size() const                 { return _size;       }
       virtual int tickLen() const;
       void moveAll(double, double);
-      Segment* first() const      { return _first;      }
-      Segment* last() const       { return _last;       }
+      Segment* first() const           { return _first;      }
+      Segment* last() const            { return _last;       }
       void remove(Segment*);
-      bool empty()                { return _first == 0; }
+      bool empty()                     { return _first == 0; }
 
-      double userStretch() const  { return _userStretch; }
-      bool lineBreak() const      { return _lineBreak; }
-      bool pageBreak() const      { return _pageBreak; }
-      void setUserStretch(double v)  { _userStretch = v;  }
-      void setLineBreak(bool v)   { _lineBreak = v;    }
-      void setPageBreak(bool v)   { _pageBreak = v;    }
+      double userStretch() const       { return _userStretch; }
+      bool lineBreak() const           { return _lineBreak; }
+      bool pageBreak() const           { return _pageBreak; }
+      void setUserStretch(double v)    { _userStretch = v;  }
+      void setLineBreak(bool v)        { _lineBreak = v;    }
+      void setPageBreak(bool v)        { _pageBreak = v;    }
 
       void addBeam(Beam* b);
 
@@ -226,8 +226,8 @@ class Measure : public Element {
       int endRepeat() const         { return _endRepeat; }
       void setEndRepeat(bool val)   { _endRepeat = val; }
 
-      int ending() const         { return _ending; }
-      void setEnding(int r)      { _ending = r;    }
+      int ending() const            { return _ending; }
+      void setEnding(int r)         { _ending = r;    }
       Segment* getSegment(Element* el);
       Segment* findSegment(Segment::SegmentType st, int t);
       Segment* createSegment(Segment::SegmentType st, int t);

@@ -1045,10 +1045,11 @@ void Score::cmdDeleteSelection()
 
             sigmap->tickValues(sel->tickEnd, &bar, &beat, &tck);
             Measure* ie = _layout->first();
-            for (int i = 0; i < bar && is; ++i)
+            for (int i = 0; i < bar && ie; ++i)
                   ie = ie->next();
+printf("cmdDeleteSelection %p - %p\n", is, ie);
             do {
-                  --ie;
+                  ie = ie->prev();
                   deleteItem(ie);
                   } while (ie != is);
             }

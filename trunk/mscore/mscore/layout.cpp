@@ -590,6 +590,7 @@ void ElemList::push_front(Element* e)
 
 //---------------------------------------------------------
 //   insert
+//    insert e before el
 //---------------------------------------------------------
 
 void ElemList::insert(Element* e, Element* el)
@@ -695,4 +696,21 @@ void ScoreLayout::connectTies()
             }
       }
 
+//---------------------------------------------------------
+//   erase
+//---------------------------------------------------------
+
+void ScoreLayout::erase(Measure* im)
+      {
+      _measures.erase(im);
+      }
+
+//---------------------------------------------------------
+//   insert
+//---------------------------------------------------------
+
+void ScoreLayout::insert(Measure* im, Measure* m)
+      {
+      _measures.insert(im, m);
+      }
 

@@ -28,6 +28,29 @@ class Staff;
 class Score;
 
 //---------------------------------------------------------
+//   DrumInstrument
+//---------------------------------------------------------
+
+struct DrumInstrument {
+      int notehead;           ///< notehead symbol set
+      int line;               ///< place notehead onto this line
+      };
+
+//---------------------------------------------------------
+//   Drumset
+//    defines note heads and line position for all
+//    possible midi notes in a drumset
+//---------------------------------------------------------
+
+struct Drumset {
+      DrumInstrument drum[128];
+
+      bool isValid(int pitch) const  { return drum[pitch].line != -1; }
+      int  noteHead(int pitch) const { return drum[pitch].notehead;   }
+      bool line(int pitch) const     { return drum[pitch].line;       }
+      };
+
+//---------------------------------------------------------
 //   Instrument
 //---------------------------------------------------------
 
@@ -43,6 +66,7 @@ struct Instrument {
       int  minPitch;
       int  maxPitch;
       int  pitchOffset;
+      Drumset* drumset;
 
       Instrument();
       void read(QDomElement);
@@ -80,30 +104,34 @@ class Part {
       void setShortName(const QString& s);
       void setLongName(const QTextDocument& s);
       void setShortName(const QTextDocument& s);
-      void setTrackName(const QString& s) { _trackName = s; }
+      void setTrackName(const QString& s)      { _trackName = s; }
       void setStaves(int);
-      void setMidiChannel(int val)        { _instrument.midiChannel = val;  }
-      void setMidiProgram(int val)        { _instrument.midiProgram = val;  }
-      void setMinPitch(int val)           { _instrument.minPitch = val;     }
-      void setMaxPitch(int val)           { _instrument.maxPitch = val;     }
-      int midiChannel() const             { return _instrument.midiChannel; }
-      int midiProgram() const             { return _instrument.midiProgram; }
-      int minPitch() const                { return _instrument.minPitch;    }
-      int maxPitch() const                { return _instrument.maxPitch;    }
-      int volume() const                  { return _instrument.volume;      }
-      int reverb() const                  { return _instrument.reverb;      }
-      int chorus() const                  { return _instrument.chorus;      }
-      int pan() const                     { return _instrument.chorus;      }
-      void setPitchOffset(int val)        { _instrument.pitchOffset = val;  }
-      int pitchOffset() const             { return _instrument.pitchOffset; }
+      void setMidiChannel(int val)             { _instrument.midiChannel = val;  }
+      void setMidiProgram(int val)             { _instrument.midiProgram = val;  }
+      void setMinPitch(int val)                { _instrument.minPitch = val;     }
+      void setMaxPitch(int val)                { _instrument.maxPitch = val;     }
+      void setDrumset(Drumset* ds)             { _instrument.drumset = ds;       }
+      Drumset* drumset()                       { return _instrument.drumset;     }
+      int midiChannel() const                  { return _instrument.midiChannel; }
+      int midiProgram() const                  { return _instrument.midiProgram; }
+      int minPitch() const                     { return _instrument.minPitch;    }
+      int maxPitch() const                     { return _instrument.maxPitch;    }
+      int volume() const                       { return _instrument.volume;      }
+      int reverb() const                       { return _instrument.reverb;      }
+      int chorus() const                       { return _instrument.chorus;      }
+      int pan() const                          { return _instrument.chorus;      }
+      void setPitchOffset(int val)             { _instrument.pitchOffset = val;  }
+      int pitchOffset() const                  { return _instrument.pitchOffset; }
       void insertStaff(Staff*);
       void removeStaff(Staff*);
-      const Instrument* instrument() const { return &_instrument; }
-      Instrument* instrument() { return &_instrument; }
-      bool show() const        { return _show; }
+      const Instrument* instrument() const     { return &_instrument; }
+      Instrument* instrument()                 { return &_instrument; }
+      bool show() const                        { return _show; }
       void setShow(bool val);
-      Score* score() const     { return cs; }
+      Score* score() const                     { return cs; }
       };
 
+extern Drumset* smDrumset;
+extern void initDrumset();
 #endif
 

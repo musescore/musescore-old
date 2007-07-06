@@ -331,6 +331,8 @@ void Measure::layoutNoteHeads(int staff)
       int key  = _score->staff(staff)->keymap()->key(tick());
       initLineList(tversatz, key);
 
+      Drumset* drumset = _score->part(staff)->drumset();
+
       for (Segment* segment = first(); segment; segment = segment->next()) {
             int startTrack = staff * VOICES;
             int endTrack   = startTrack + VOICES;
@@ -348,9 +350,15 @@ void Measure::layoutNoteHeads(int staff)
 
                   for (riNote in = nl->rbegin(); in != nl->rend(); ++in) {
                         Note* note  = in->second;
-                        note->setHead(tuplet ? tuplet->baseLen() : chord->tickLen());
                         int pitch   = note->pitch();
-                        int move    = note->move();
+                        if (drumset) {
+                              note->setHeadGroup(drumset->noteHead(pitch));
+                              note->setLine(drumset->line(pitch));
+                              continue;
+                              }
+
+                        note->setHead(tuplet ? tuplet->baseLen() : chord->tickLen());
+                        int move = note->move();
                         int clef = note->staff()->clef()->clef(tick);
 
                         //

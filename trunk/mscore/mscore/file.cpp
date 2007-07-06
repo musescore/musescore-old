@@ -66,6 +66,7 @@ static void readInstrument(const QString& group, QDomElement e)
       t.minPitch    = 0;
       t.maxPitch    = 127;
       t.transpose   = 0;
+      t.useDrumset  = false;
 
       int clefIdx = 0;
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
@@ -92,6 +93,8 @@ static void readInstrument(const QString& group, QDomElement e)
                   t.maxPitch = i;
             else if (tag == "transpose")
                   t.transpose = i;
+            else if (tag == "drumset")
+                  t.useDrumset = i;
             else
                   domError(e);
             }

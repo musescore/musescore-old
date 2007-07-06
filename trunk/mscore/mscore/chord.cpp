@@ -753,7 +753,6 @@ void Chord::readNote(QDomElement e, int staffIdx)
       note->setGrace(_grace);
       note->setStaff(staff());
       note->setVoice(voice());
-//      note->setHead(tickLen());
       if (ptch != -1)
             note->setPitch(ptch);
       if (tpc != -1)
@@ -778,7 +777,6 @@ void Chord::read(QDomElement e, int staffIdx)
                   note->setGrace(_grace);
                   note->setStaff(staff());
                   note->setVoice(voice());
-//                  note->setHead(tickLen());
                   note->read(e);
                   notes.add(note);
                   }

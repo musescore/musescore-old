@@ -502,6 +502,8 @@ void MuseScore::editInstrList()
                   part->setTrackName(t->name);
                   part->setLongName(t->name);
                   part->setPitchOffset(t->transpose);
+                  if (t->useDrumset)
+                        part->setDrumset(smDrumset);
 
                   pli->part = part;
                   QTreeWidgetItem* ci = 0;

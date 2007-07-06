@@ -1032,10 +1032,10 @@ void Score::convertMidi(MidiFile* mf)
             part->insertStaff(s);
             _staves->push_back(s);
 
-printf("isDrumTrack: %d\n", track->isDrumTrack());
-
-            if (track->isDrumTrack())
+            if (track->isDrumTrack()) {
                   s->clef()->setClef(0, CLEF_PERC);
+                  part->setDrumset(smDrumset);
+                  }
             else {
                   if ((i < (ntracks-1)) && (tracks->at(i+1)->outChannel() == track->outChannel()
                      && ((program & 0xff) == 0))) {
@@ -1220,6 +1220,8 @@ void Score::convertTrack(MidiTrack* midiTrack, int staffIdx)
       Staff* cstaff = staff(staffIdx);
 	const EventList el = midiTrack->events();
 
+      Drumset* drumset = part(staffIdx)->drumset();
+
       for (int voice = 0; voice < voices; ++voice) {
             QList<MNote*> notes;
             int ctick = 0;
@@ -1258,6 +1260,9 @@ void Score::convertTrack(MidiTrack* midiTrack, int staffIdx)
                               QList<MidiNote*>& nl = n->mc->notes();
                               for (int i = 0; i < nl.size(); ++i) {
                                     MidiNote* mn = nl[i];
+                                    if (drumset && !drumset->isValid(mn->pitch())) {
+printf("unmapped drum note 0x%02x %d\n", mn->pitch(), mn->pitch());
+                                          }
                         		Note* note = new Note(this);
                                     note->setPitch(mn->pitch());
                                     note->setTpc(mn->tpc());

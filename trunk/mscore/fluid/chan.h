@@ -128,68 +128,54 @@ enum fluid_midi_control_change {
   POLY_ON = 0x7F
 };
 
-enum midi_meta_event {
-  MIDI_COPYRIGHT = 0x02,
-  MIDI_TRACK_NAME = 0x03,
-  MIDI_INST_NAME = 0x04,
-  MIDI_LYRIC = 0x05,
-  MIDI_MARKER = 0x06,
-  MIDI_CUE_POINT = 0x07,
-  MIDI_EOT = 0x2f,
-  MIDI_SET_TEMPO = 0x51,
-  MIDI_SMPTE_OFFSET = 0x54,
-  MIDI_TIME_SIGNATURE = 0x58,
-  MIDI_KEY_SIGNATURE = 0x59,
-  MIDI_SEQUENCER_EVENT = 0x7f
-};
-
 /*
  * fluid_channel_t
  */
 struct _fluid_channel_t
-{
-  int channum;
-  unsigned int sfontnum;
-  unsigned int banknum;
-  unsigned int prognum;
-  fluid_preset_t* preset;
-  fluid_synth_t* synth;
-  short key_pressure;
-  short channel_pressure;
-  short pitch_bend;
-  short pitch_wheel_sensitivity;
+      {
+      int channum;
+      unsigned int sfontnum;
+      unsigned int banknum;
+      unsigned int prognum;
+      fluid_preset_t* preset;
+      fluid_synth_t* synth;
+      short key_pressure;
+      short channel_pressure;
+      short pitch_bend;
+      short pitch_wheel_sensitivity;
 
-  /* controller values */
-  short cc[128];
+      /* controller values */
+      short cc[128];
 
-  /* cached values of last MSB values of MSB/LSB controllers */
-  unsigned char bank_msb;
-  int interp_method;
+      /* cached values of last MSB values of MSB/LSB controllers */
+      unsigned char bank_msb;
+      int interp_method;
 
-  /* the micro-tuning */
-  fluid_tuning_t* tuning;
+      /* the micro-tuning */
+      fluid_tuning_t* tuning;
 
-  /* NRPN system */
-  short nrpn_select;
+      /* NRPN system */
+      short nrpn_select;
 
-  /* The values of the generators, set by NRPN messages, or by
-   * fluid_synth_set_gen(), are cached in the channel so they can be
-   * applied to future notes. They are copied to a voice's generators
-   * in fluid_voice_init(), wihich calls fluid_gen_init().  */
-  fluid_real_t gen[GEN_LAST];
+      /* The values of the generators, set by NRPN messages, or by
+       * fluid_synth_set_gen(), are cached in the channel so they can be
+       * applied to future notes. They are copied to a voice's generators
+       * in fluid_voice_init(), wihich calls fluid_gen_init().  */
 
-  /* By default, the NRPN values are relative to the values of the
-   * generators set in the SoundFont. For example, if the NRPN
-   * specifies an attack of 100 msec then 100 msec will be added to the
-   * combined attack time of the sound font and the modulators.
-   *
-   * However, it is useful to be able to specify the generator value
-   * absolutely, completely ignoring the generators of the sound font
-   * and the values of modulators. The gen_abs field, is a boolean
-   * flag indicating whether the NRPN value is absolute or not.
-   */
-  char gen_abs[GEN_LAST];
-};
+      fluid_real_t gen[GEN_LAST];
+
+      /* By default, the NRPN values are relative to the values of the
+       * generators set in the SoundFont. For example, if the NRPN
+       * specifies an attack of 100 msec then 100 msec will be added to the
+       * combined attack time of the sound font and the modulators.
+       *
+       * However, it is useful to be able to specify the generator value
+       * absolutely, completely ignoring the generators of the sound font
+       * and the values of modulators. The gen_abs field, is a boolean
+       * flag indicating whether the NRPN value is absolute or not.
+       */
+      char gen_abs[GEN_LAST];
+      };
 
 fluid_channel_t* new_fluid_channel(fluid_synth_t* synth, int num);
 int delete_fluid_channel(fluid_channel_t* chan);
