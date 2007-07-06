@@ -46,6 +46,7 @@ struct InstrumentTemplate {
       int minPitch;
       int maxPitch;
       int transpose;          // for transposing instruments
+      bool useDrumset;
       };
 
 //---------------------------------------------------------

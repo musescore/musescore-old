@@ -1,3 +1,7 @@
+6.7.7 (ws)
+      - preparations for drumset notation
+      - fix crash when deleting measure (but implementation of function
+        ist still incomplete)
 4.7.7 (ws)
       - show natural accidentals when changing key signature
       - move class KeySig into separate source file

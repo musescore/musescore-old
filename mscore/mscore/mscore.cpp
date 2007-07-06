@@ -48,6 +48,7 @@
 #include "partedit.h"
 #include "layout.h"
 #include "palette.h"
+#include "part.h"
 
 QTextStream cout(stdout);
 QTextStream eout(stderr);
@@ -1725,6 +1726,8 @@ int main(int argc, char* argv[])
 
       initSymbols();    // again!?!
       genIcons();
+      initDrumset();
+
       mscore = new MuseScore();
       mscore->readSettings();
 

@@ -123,13 +123,13 @@
          </instrument>
       </instrument-group>
 
-   <instrument-group name="Schlaginstrumente">
-      </instrument-group>
-
-   <instrument-group name="Blasorchester">
-      </instrument-group>
-
    <instrument-group name="Percussion">
+      <instrument>
+         <name>Drumset</name>
+         <short-name>Drm.</short-name>
+         <drumset>1</drumset>
+         <clef>14</clef>
+         </instrument>
       </instrument-group>
 
    <instrument-group name="Guitars">

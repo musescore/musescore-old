@@ -363,6 +363,22 @@ void initSymbols()
       symbols[s_sharpsharpSym]            = Sym("small sharp sharp",         0xe116, 1);
       symbols[flipSym]                    = Sym("flip stem",  0xe0fd, 0);
 
+      symbols[s_wholediamondheadSym]        = Sym("whole diamond head",       0xe11e, 1);
+      symbols[s_halfdiamondheadSym]         = Sym("half diamond head",        0xe11f, 1);
+      symbols[s_diamondheadSym]             = Sym("diamond head",             0xe120, 1);
+
+      symbols[s_wholetriangleheadSym]       = Sym("whole triangle head",      0xe121, 1);
+      symbols[s_halftriangleheadSym]        = Sym("half triangle head",       0xe122, 1);
+      symbols[s_triangleheadSym]            = Sym("triangle head",            0xe124, 1);
+
+      symbols[s_wholeslashheadSym]          = Sym("whole slash head",         0xe126, 1);
+      symbols[s_halfslashheadSym]           = Sym("half slash head",          0xe127, 1);
+      symbols[s_quartslashheadSym]          = Sym("quart slash head",         0xe128, 1);
+
+      symbols[s_wholecrossedheadSym]        = Sym("whole cross head",         0xe129, 1);
+      symbols[s_halfcrossedheadSym]         = Sym("half cross head",          0xe12a, 1);
+      symbols[s_crossedheadSym]             = Sym("cross head",               0xe12b, 1);
+
       // used for GUI:
       symbols[note4Sym]                   = Sym("note 1/4",   0xe0fc, 0);
       symbols[note8Sym]                   = Sym("note 1/8",   0xe0f8, 0);

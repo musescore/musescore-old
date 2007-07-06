@@ -38,6 +38,20 @@
 #include "viewer.h"
 #include "pitchspelling.h"
 
+int Note::noteHeads[HEAD_GROUPS][3] = {
+      { wholeheadSym, halfheadSym, quartheadSym },
+      { wholecrossedheadSym, halfcrossedheadSym, crossedheadSym },
+      { wholediamondheadSym, halfdiamondheadSym, diamondheadSym },
+      { wholetriangleheadSym, halftriangleheadSym, triangleheadSym },
+      };
+
+int Note::smallNoteHeads[HEAD_GROUPS][3] = {
+      { s_wholeheadSym,         s_halfheadSym,         s_quartheadSym },
+      { s_wholecrossedheadSym,  s_halfcrossedheadSym,  s_crossedheadSym },
+      { s_wholediamondheadSym,  s_halfdiamondheadSym,  s_diamondheadSym },
+      { s_wholetriangleheadSym, s_halftriangleheadSym, s_triangleheadSym },
+      };
+
 //---------------------------------------------------------
 //   Note
 //---------------------------------------------------------
@@ -59,6 +73,7 @@ Note::Note(Score* s)
       _tieBack        = 0;
       _head           = 0;
       _tpc            = -1;
+      _headGroup      = 0;
       }
 
 //---------------------------------------------------------
@@ -300,8 +315,9 @@ void Note::setAccidental(int pre)
 
 void Note::setHead(int ticks)
       {
+      int headType = 0;
       if (ticks < (2*division)) {
-            _head = _grace ? s_quartheadSym : quartheadSym;
+            headType = 2;
             int nt = division;
             for (int i = 0; i < 4; ++i) {
                   if (ticks / nt) {
@@ -318,15 +334,19 @@ void Note::setHead(int ticks)
                   }
             }
       else if (ticks >= (4 * division)) {
-            _head = _grace ? s_wholeheadSym : wholeheadSym;
+            headType = 0;
             if (ticks % (4 * division))
                   _dots = 1;
             }
       else {
-            _head = _grace ? s_halfheadSym : halfheadSym;
+            headType = 1;
             if (ticks % (2 * division))
                   _dots = 1;
             }
+      if (_grace)
+            _head = smallNoteHeads[_headGroup][headType];
+      else
+            _head = noteHeads[_headGroup][headType];
       }
 
 //---------------------------------------------------------
@@ -335,6 +355,7 @@ void Note::setHead(int ticks)
 
 void Note::setType(DurationType t)
       {
+printf("Note::setType\n");
       switch(t) {
             case D_256TH:
             case D_128TH:

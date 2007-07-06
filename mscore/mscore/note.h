@@ -37,6 +37,14 @@ class Score;
 class Sym;
 class Viewer;
 
+//
+//    note head groups
+//
+enum {
+      HEAD_NORMAL, HEAD_CROSS, HEAD_DIAMOND, HEAD_TRIANGLE,
+      HEAD_GROUPS
+      };
+
 //---------------------------------------------------------
 //   Note
 //---------------------------------------------------------
@@ -46,6 +54,9 @@ class Viewer;
 */
 
 class Note : public Element {
+      static int noteHeads[HEAD_GROUPS][3];
+      static int smallNoteHeads[HEAD_GROUPS][3];
+
       int _pitch;             ///< Note pitch as midi value (0 - 127).
       int _tpc;               ///< tonal pitch class
       int _line;              ///< y-Position; 0 - top line.
@@ -54,6 +65,7 @@ class Note : public Element {
       Accidental* _accidental;
 
       int _head;              ///< Note head.
+      int _headGroup;
       DurationType _durationType;
       bool _grace;
       bool _mirror;           ///< True if note is mirrored at stem.
@@ -87,7 +99,9 @@ class Note : public Element {
       int dots() const                { return _dots; }
 
       double headWidth() const;
-      int noteHead()                  { return _head;  }
+      int noteHead() const            { return _head;  }
+      int headGroup() const           { return _headGroup; }
+      void setHeadGroup(int val)      { _headGroup = val; }
 
       int pitch() const               { return _pitch; }
       void setPitch(int val);

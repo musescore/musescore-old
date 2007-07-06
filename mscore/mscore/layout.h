@@ -90,22 +90,22 @@ class ScoreLayout {
       ~ScoreLayout();
 
       void setScore(Score*);
-      void layout()                  { _needLayout = true; }
+      void layout()                           { _needLayout = true; }
       void doLayout();
-      Score* score() const           { return _score; }
-      double spatium() const         { return _spatium; }
-      void setSpatium(double v)      { _spatium = v; }
-      PageFormat* pageFormat() const { return _pageFormat; }
+      Score* score() const                    { return _score; }
+      double spatium() const                  { return _spatium; }
+      void setSpatium(double v)               { _spatium = v; }
+      PageFormat* pageFormat() const          { return _pageFormat; }
       void setPageFormat(const PageFormat& pf);
-      PageList* pages() const        { return _pages; }
-      QList<System*>* systems() const    { return _systems; }
-      bool needLayout() const        { return _needLayout; }
-      Measure* first() const         { return (Measure*)_measures.first(); }
-      Measure* last()  const         { return (Measure*)_measures.last();  }
-      void push_back(Measure* el)    { _measures.push_back((Element*)el);  }
-      void clear()                   { _measures.clear(); }
-      void erase(Measure* im)        { _measures.erase(im); }
-      void insert(Measure* im, Measure* m)    { _measures.insert(im, m); }
+      PageList* pages() const                 { return _pages; }
+      QList<System*>* systems() const         { return _systems; }
+      bool needLayout() const                 { return _needLayout; }
+      Measure* first() const                  { return (Measure*)_measures.first(); }
+      Measure* last()  const                  { return (Measure*)_measures.last();  }
+      void push_back(Measure* el)             { _measures.push_back((Element*)el);  }
+      void clear()                            { _measures.clear(); }
+      void erase(Measure* im);
+      void insert(Measure* im, Measure* m);
       void setPaintDevice(QPaintDevice* d)    { _paintDevice = d; }
       QPaintDevice* paintDevice() const       { return _paintDevice; }
       QList<Element*> items(const QRectF& r)  { return bspTree.items(r); }

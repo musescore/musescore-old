@@ -319,12 +319,8 @@ Part* Score::part(int n)
 void Score::addMeasure(Measure* m)
       {
       int tick = m->tick();
-      Measure* im;
-      for (im = _layout->first(); im; im = im->next()) {
-            int mtick = im->tick();
-            if (mtick == tick)
-                  break;
-            }
+      Measure* im = tick2measure(tick);
+
       if (im) {
             int mtick = im->tick();
             int len   = im->tickLen();
@@ -334,7 +330,7 @@ void Score::addMeasure(Measure* m)
                   (*i)->keymap()->insertTime(mtick, len);
                   }
             }
-      _layout->insert(im, m);
+      _layout->insert(m, im);
       fixTicks();
       }
 
@@ -344,19 +340,18 @@ void Score::addMeasure(Measure* m)
 
 void Score::removeMeasure(int tick)
       {
-      for (Measure* im = _layout->first(); im; im = im->next()) {
+      Measure* im = tick2measure(tick);
+      if (im && im->tick() == tick) {
             int mtick = im->tick();
-            if (mtick == tick) {
-                  int len = im->tickLen();
-                  sigmap->removeTime(mtick, len);
-                  for (iStaff i = _staves->begin(); i != _staves->end(); ++i) {
-                        (*i)->clef()->removeTime(mtick, len);
-                        (*i)->keymap()->removeTime(mtick, len);
-                        }
-                  _layout->erase(im);
-                  fixTicks();
-                  return;
+            int len = im->tickLen();
+            sigmap->removeTime(mtick, len);
+            for (iStaff i = _staves->begin(); i != _staves->end(); ++i) {
+                  (*i)->clef()->removeTime(mtick, len);
+                  (*i)->keymap()->removeTime(mtick, len);
                   }
+            _layout->erase(im);
+            fixTicks();
+            return;
             }
       printf("no measure found at tick %d\n", tick);
       }
@@ -394,7 +389,7 @@ void Score::fixTicks()
             if (!m->irregular())
                   ++bar;
             int mtick = m->tick();
-            int diff = tick - mtick;
+            int diff  = tick - mtick;
             tick += sigmap->ticksMeasure(tick);
             if (diff == 0)
                   continue;

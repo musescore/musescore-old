@@ -130,6 +130,12 @@
       </instrument-group>
 
    <instrument-group name="Percussion">
+      <instrument>
+         <name>Drumset</name>
+         <short-name>Drm.</short-name>
+         <clef>14</clef>
+         <drumset>1</drumset>
+         </instrument>
       </instrument-group>
 
    <instrument-group name="Gitarren">

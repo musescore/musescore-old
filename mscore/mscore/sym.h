@@ -269,6 +269,19 @@ enum {
       note64Sym,
       dotdotSym,
 
+      s_wholediamondheadSym,
+      s_halfdiamondheadSym,
+      s_diamondheadSym,
+      s_wholetriangleheadSym,
+      s_halftriangleheadSym,
+      s_triangleheadSym,
+      s_wholeslashheadSym,
+      s_halfslashheadSym,
+      s_quartslashheadSym,
+      s_wholecrossedheadSym,
+      s_halfcrossedheadSym,
+      s_crossedheadSym,
+
       lastSym
       };
 #endif
