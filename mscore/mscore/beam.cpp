@@ -151,6 +151,10 @@ void Measure::layoutBeams(ScoreLayout* layout)
                               group = division * 3 / 2;
                         else if (z == 9 && n == 8)
                               group = division * 3 / 2;
+                        else if (z == 5 && n == 8)
+                              group = division * 5 / 2;
+                        else if (z == 6 && n == 8)
+                              group = division * 6 / 2;
                         else if (z == 4 && n == 4)
                               group = division;
 

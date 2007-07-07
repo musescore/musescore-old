@@ -990,7 +990,6 @@ bool MidiTrack::empty() const
 
 void MidiTrack::setOutChannel(int n)
       {
-printf("MidiTrack: setOutChannel %d\n", n);
       _outChannel = n;
       if (_outChannel == 9)
             _drumTrack = true;
@@ -1242,7 +1241,6 @@ printf("separate channel for %d tracks\n", n);
                   if (e->isChannelEvent() && !channel.contains(((MidiChannelEvent*)e)->channel()))
                         channel.append(((MidiChannelEvent*)e)->channel());
                   }
-printf("  track %d has %d channel\n", i, channel.size());
             mt->setOutChannel(channel.empty() ? 0 : channel[0]);
             int nn = channel.size();
             if (nn <= 1)

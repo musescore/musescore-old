@@ -316,8 +316,8 @@ void initDrumset()
       {
       smDrumset = new Drumset;
       for (int i = 0; i < 128; ++i) {
-            smDrumset->drum[i].notehead = 0;
-            smDrumset->drum[i].line     = -1;   // invalidate entry
+            smDrumset->drum[i].notehead = -1;   // invalid entry
+            smDrumset->drum[i].line     = 0;
             }
       smDrumset->drum[35].notehead = HEAD_NORMAL;   // Acoustic Bass Drum
       smDrumset->drum[35].line     = 7;

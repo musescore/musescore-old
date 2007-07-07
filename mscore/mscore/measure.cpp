@@ -352,9 +352,15 @@ void Measure::layoutNoteHeads(int staff)
                         Note* note  = in->second;
                         int pitch   = note->pitch();
                         if (drumset) {
-                              note->setHeadGroup(drumset->noteHead(pitch));
-                              note->setLine(drumset->line(pitch));
-                              continue;
+                              if (!drumset->isValid(pitch)) {
+                                    printf("unmapped drum note %d\n", pitch);
+                                    }
+                              else {
+                                    note->setHeadGroup(drumset->noteHead(pitch));
+                                    note->setLine(drumset->line(pitch));
+                                    note->setHead(tuplet ? tuplet->baseLen() : chord->tickLen());
+                                    continue;
+                                    }
                               }
 
                         note->setHead(tuplet ? tuplet->baseLen() : chord->tickLen());
@@ -1849,7 +1855,7 @@ Element* Measure::drop(const QPointF& p, const QPointF& /*offset*/, int type, co
       switch(ElementType(type)) {
             case BRACKET:
                   {
-                  Bracket* bracket = new Bracket(0);
+                  Bracket* bracket = new Bracket(score());
                   bracket->read(e);
                   int subtype = bracket->subtype();
                   delete bracket;
@@ -1858,7 +1864,7 @@ Element* Measure::drop(const QPointF& p, const QPointF& /*offset*/, int type, co
                   break;
             case CLEF:
                   {
-                  Clef* clef = new Clef(0);
+                  Clef* clef = new Clef(score());
                   clef->read(e);
                   staff->changeClef(tick(), clef->subtype());
                   delete clef;
@@ -1866,7 +1872,7 @@ Element* Measure::drop(const QPointF& p, const QPointF& /*offset*/, int type, co
                   break;
             case KEYSIG:
                   {
-                  KeySig* ks = new KeySig(0);
+                  KeySig* ks = new KeySig(score());
                   ks->read(e);
                   int newSig = char(ks->subtype() & 0xff);
                   staff->changeKeySig(tick(), newSig);
@@ -1875,7 +1881,7 @@ Element* Measure::drop(const QPointF& p, const QPointF& /*offset*/, int type, co
                   break;
             case TIMESIG:
                   {
-                  TimeSig* ts = new TimeSig(0);
+                  TimeSig* ts = new TimeSig(score());
                   ts->read(e);
                   score()->changeTimeSig(tick(), ts->subtype());
                   delete ts;
