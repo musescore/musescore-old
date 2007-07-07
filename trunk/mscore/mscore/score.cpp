@@ -239,7 +239,7 @@ void Score::read(QString name)
       if (info.completeSuffix() == "xml") {
             importMusicXml(name);
             }
-      else if (info.completeSuffix() == "mid") {
+      else if (info.completeSuffix().toLower() == "mid") {
             if (!importMidi(name))
                   return;
             }

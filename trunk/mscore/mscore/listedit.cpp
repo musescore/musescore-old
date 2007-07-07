@@ -746,6 +746,7 @@ void ShowNoteWidget::setElement(Element* e)
       nb.mirror->setChecked(note->mirror());
       nb.tpc->setValue(note->tpc());
       nb.head->setValue(note->noteHead());
+      nb.headGroup->setValue(note->headGroup());
 
       nb.tieFor->setEnabled(note->tieFor());
       nb.tieBack->setEnabled(note->tieBack());

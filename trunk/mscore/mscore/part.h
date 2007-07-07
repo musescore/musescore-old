@@ -45,9 +45,9 @@ struct DrumInstrument {
 struct Drumset {
       DrumInstrument drum[128];
 
-      bool isValid(int pitch) const  { return drum[pitch].line != -1; }
-      int  noteHead(int pitch) const { return drum[pitch].notehead;   }
-      bool line(int pitch) const     { return drum[pitch].line;       }
+      bool isValid(int pitch) const  { return drum[pitch].notehead != -1; }
+      int noteHead(int pitch) const  { return drum[pitch].notehead;   }
+      int line(int pitch) const      { return drum[pitch].line;       }
       };
 
 //---------------------------------------------------------
