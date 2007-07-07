@@ -64,7 +64,7 @@
  set line and user accidental.
  */
 
-static void xmlSetPitch(Note* n, int tick, char step, int alter, int octave, int accidental)
+static void xmlSetPitch(Note* n, int /*tick*/, char step, int alter, int octave, int /*accidental*/)
       {
 //      printf("xmlSetPitch(n=%p, tick=%d, st=%c, alter=%d, octave=%d, accidental=%d)",
 //             n, tick, step, alter, octave, accidental);
@@ -1586,7 +1586,8 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
 
             cr = measure->findChord(tick, staff + relStaff, voice, grace);
             if (cr == 0) {
-                  cr = new Chord(score, tick);
+                  cr = new Chord(score);
+                  cr->setTick(tick);
                   cr->setVoice(voice);
                   cr->setTickLen(ticks);
                   ((Chord*)cr)->setGrace(grace);

@@ -1,4 +1,5 @@
 7.7.7 (ws)
+      - always save user selected stem direction
       - fix crash when drag time signature with shift+drag
       - fixes for drumset notation
 6.7.7 (ws)

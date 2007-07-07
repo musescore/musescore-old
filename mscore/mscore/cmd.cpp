@@ -579,7 +579,8 @@ void Score::setNote(int tick, Staff* staff, int voice, int pitch, int len)
                   tie->setEndNote(note);
                   note->setTieBack(tie);
                   }
-            Chord* chord = new Chord(this, tick);
+            Chord* chord = new Chord(this);
+            chord->setTick(tick);
             chord->setVoice(voice);
             chord->setStaff(staff);
             chord->add(note);

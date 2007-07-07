@@ -1250,7 +1250,8 @@ void Score::convertTrack(MidiTrack* midiTrack, int staffIdx)
                         if ((tick + len) > measure->tick() + measure->tickLen()) {
                               len = measure->tick() + measure->tickLen() - tick;
                               }
-                        Chord* chord = new Chord(this, tick);
+                        Chord* chord = new Chord(this);
+                        chord->setTick(tick);
                         chord->setStaff(cstaff);
                         chord->setTickLen(len);
                         Segment* s = measure->getSegment(chord);
@@ -1340,7 +1341,8 @@ printf("unmapped drum note 0x%02x %d\n", mn->pitch(), mn->pitch());
             if (!notes.isEmpty()) {
                   int tick = notes[0]->mc->ontime();
             	Measure* measure = tick2measure(tick);
-                  Chord* chord = new Chord(this, tick);
+                  Chord* chord = new Chord(this);
+                  chord->setTick(tick);
                   chord->setStaff(cstaff);
                   Segment* s = measure->getSegment(chord);
                   s->add(chord);

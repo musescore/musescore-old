@@ -116,7 +116,6 @@ class Chord : public ChordRest {
       bool _grace;
 
       void computeUp();
-      void init();
       void readSlur(QDomElement, int staff);
       virtual qreal upPos()   const;
       virtual qreal downPos() const;
@@ -125,7 +124,6 @@ class Chord : public ChordRest {
 
    public:
       Chord(Score*);
-      Chord(Score*, int tick);
       Chord &operator=(const Chord&);
 
       virtual Chord* clone() const { return new Chord(*this); }
