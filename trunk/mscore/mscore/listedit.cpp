@@ -592,6 +592,17 @@ ShowChordWidget::ShowChordWidget()
       connect(cb.stemDirection, SIGNAL(activated(int)), SLOT(directionChanged(int)));
       connect(cb.helplineList, SIGNAL(itemClicked(QListWidgetItem*)), SLOT(gotoElement(QListWidgetItem*)));
       connect(cb.notes, SIGNAL(itemClicked(QListWidgetItem*)), SLOT(gotoElement(QListWidgetItem*)));
+
+      crb.beamMode->addItem(tr("auto"));
+      crb.beamMode->addItem(tr("beam begin"));
+      crb.beamMode->addItem(tr("beam mid"));
+      crb.beamMode->addItem(tr("beam end"));
+      crb.beamMode->addItem(tr("no beam"));
+      crb.beamMode->addItem(tr("begin 1/32"));
+
+      cb.stemDirection->addItem(tr("Auto"), 0);
+      cb.stemDirection->addItem(tr("Up"), 1);
+      cb.stemDirection->addItem(tr("Down"), 2);
       }
 
 //---------------------------------------------------------
@@ -606,20 +617,11 @@ void ShowChordWidget::setElement(Element* e)
       crb.beamButton->setEnabled(chord->beam());
       crb.tupletButton->setEnabled(chord->tuplet());
       crb.upFlag->setChecked(chord->isUp());
-      crb.beamMode->addItem(tr("auto"));
-      crb.beamMode->addItem(tr("beam begin"));
-      crb.beamMode->addItem(tr("beam mid"));
-      crb.beamMode->addItem(tr("beam end"));
-      crb.beamMode->addItem(tr("no beam"));
-      crb.beamMode->addItem(tr("begin 1/32"));
       crb.beamMode->setCurrentIndex(int(chord->beamMode()));
 
       cb.hookButton->setEnabled(chord->hook());
       cb.stemButton->setEnabled(chord->stem());
       cb.graceNote->setChecked(chord->grace());
-      cb.stemDirection->addItem(tr("Auto"), 0);
-      cb.stemDirection->addItem(tr("Up"), 1);
-      cb.stemDirection->addItem(tr("Down"), 2);
       cb.stemDirection->setCurrentIndex(int(chord->stemDirection()));
 
       crb.attributes->clear();

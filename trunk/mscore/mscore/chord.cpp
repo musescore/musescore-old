@@ -81,19 +81,6 @@ QRectF Stem::bbox() const
       }
 
 //---------------------------------------------------------
-//   Chord
-//---------------------------------------------------------
-
-void Chord::init()
-      {
-      _up            = true;
-      _stem          = 0;
-      _hook          = 0;
-      _stemDirection = AUTO;
-      _grace         = false;
-      }
-
-//---------------------------------------------------------
 //   upLine
 //---------------------------------------------------------
 
@@ -114,14 +101,11 @@ int Chord::downLine() const
 Chord::Chord(Score* s)
    : ChordRest(s)
       {
-      init();
-      }
-
-Chord::Chord(Score* s, int tick)
-   : ChordRest(s)
-      {
-      init();
-      setTick(tick);
+      _up            = true;
+      _stem          = 0;
+      _hook          = 0;
+      _stemDirection = AUTO;
+      _grace         = false;
       }
 
 //---------------------------------------------------------
@@ -663,7 +647,12 @@ void Chord::write(Xml& xml) const
       ciNote in = notes.begin();
       Note* note = in->second;
 
-      if (ChordRest::isSimple(xml) && notes.size() == 1 && note->isSimple(xml)) {
+      if (ChordRest::isSimple(xml)
+         && (notes.size() == 1)
+         && note->isSimple(xml)
+         && (_stemDirection == AUTO)
+         && !_grace
+         ) {
             if (tick() != xml.curTick)
                   xml.tagE(QString("Note tick=\"%1\" pitch=\"%2\" tpc=\"%3\" ticks=\"%4\"")
                      .arg(tick()).arg(note->pitch()).arg(note->tpc()).arg(tickLen()));

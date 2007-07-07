@@ -250,7 +250,8 @@ void MuseData::readNote(Part* part, const QString& s)
                   printf("unsupported tuple %d/%d\n", a, b);
             }
 
-      Chord* chord = new Chord(score, tick);
+      Chord* chord = new Chord(score);
+      chord->setTick(tick);
       chordRest = chord;
       chord->setStaff(staff);
       chord->setStemDirection(dir);

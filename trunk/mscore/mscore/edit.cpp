@@ -1348,7 +1348,8 @@ void Score::cmdTuplet(int n)
       note = new Note(this);
       note->setPitch(pitch);
       note->setStaff(staff);
-      chord = new Chord(this, tick);
+      chord = new Chord(this);
+      chord->setTick(tick);
       chord->setTuplet(tuplet);
       chord->setVoice(voice);
       chord->setStaff(staff);
