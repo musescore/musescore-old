@@ -1,4 +1,6 @@
 7.7.7 (ws)
+      - use current voice when entering notes with mouse
+      - fix crash when deleting last measure
       - always save user selected stem direction
       - fix crash when drag time signature with shift+drag
       - fixes for drumset notation

@@ -45,7 +45,7 @@ Note* Score::upAlt(Element* element)
             if (cis->staff <= 0)
                   return 0;
             --(cis->staff);
-            re = searchNote(((Rest*)element)->tick(), cis->staff);
+            re = searchNote(((Rest*)element)->tick(), cis->staff, -1);
             }
       else {
             // find segment
@@ -108,7 +108,7 @@ Note* Score::downAlt(Element* element)
             if ((cis->staff+1) >= staves)
                   return 0;
             ++(cis->staff);
-            re = searchNote(((Rest*)element)->tick(), cis->staff);
+            re = searchNote(((Rest*)element)->tick(), cis->staff, -1);
             }
       else {
             // find segment

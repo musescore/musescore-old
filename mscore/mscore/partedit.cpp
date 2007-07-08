@@ -59,7 +59,7 @@ void PartEdit::setPart(Part* p)
       reverb->setValue(i->reverb);
       chorus->setValue(i->chorus);
       pan->setValue(i->pan);
-      patch->setCurrentIndex(i->midiProgram);   // TODO!
+      patch->setCurrentIndex(i->midiProgram);
       }
 
 //---------------------------------------------------------
@@ -110,10 +110,11 @@ void InstrumentListEditor::updateAll(Score* cs)
             }
       QString s;
       int idx = 0;
-      for (QList<Part*>::iterator ip = pl->begin(); ip != pl->end(); ++ip, ++idx) {
+      foreach (Part* part, *pl) {
             QWidgetItem* wi = (QWidgetItem*)(vb->itemAt(idx));
             PartEdit* pe    = (PartEdit*)(wi->widget());
-            pe->setPart(*ip);
+            pe->setPart(part);
+            ++idx;
             }
       }
 

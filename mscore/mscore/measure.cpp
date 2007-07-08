@@ -2538,7 +2538,7 @@ void Measure::collectElements(QList<Element*>& el)
                                     el.append(chord->hook());
                               if (chord->stem())
                                     el.append(chord->stem());
-                              foreach(HelpLine* h, *chord->helpLineList())
+                              foreach(LedgerLine* h, *chord->ledgerLines())
                                     el.append(h);
 
                               const NoteList* nl = chord->noteList();

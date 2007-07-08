@@ -581,16 +581,27 @@ void Score::putNote(const QPointF& pos, bool addToChord)
 
       int len   = padState.tickLen;
       int voice = padState.voice;
+      int track = staff->idx() * VOICES + voice;
 
-      ChordRest* el = (ChordRest*)searchNote(tick, staff->idx());
-      if (!el || !el->isChordRest()) {
-            printf("putNote: chord/rest not found\n");
-            return;
-            }
-      if (el->tuplet())
-            len = el->tuplet()->noteLen();
       if (addToChord) {
-            // add note to chord
+            ChordRest* el = 0;
+            for (Segment* segment = m->first(); segment; segment = segment->next()) {
+                  if (segment->subtype() != Segment::SegChordRest)
+                        continue;
+                  Element* ie  = segment->element(track);
+                  if (!ie)
+                        continue;
+                  el = (ChordRest*)ie;
+                  if (el->tick() >= tick)
+                        break;
+                  }
+            if (!el) {
+                  printf("putNote: chord/rest not found\n");
+                  return;
+                  }
+            if (el->tuplet())
+                  len = el->tuplet()->noteLen();
+
             if (el->type() == CHORD) {
                   Note* note = addNote((Chord*)el, pitch);
                   select(note, 0, 0);
@@ -1037,21 +1048,18 @@ void Score::cmdDeleteItem(Element* el)
 void Score::cmdDeleteSelection()
       {
       if (sel->state == SEL_SYSTEM) {
-            int bar, beat, tck;
-            sigmap->tickValues(sel->tickStart, &bar, &beat, &tck);
-            Measure* is = _layout->first();
-            for (int i = 0; i < bar && is; ++i)
-                  is = is->next();
-
-            sigmap->tickValues(sel->tickEnd, &bar, &beat, &tck);
-            Measure* ie = _layout->first();
-            for (int i = 0; i < bar && ie; ++i)
-                  ie = ie->next();
-printf("cmdDeleteSelection %p - %p\n", is, ie);
-            do {
-                  ie = ie->prev();
-                  deleteItem(ie);
-                  } while (ie != is);
+            Measure* is = tick2measure(sel->tickStart);
+            if (is->next()) {
+                  Measure* ie = tick2measure(sel->tickEnd);
+                  if (ie) {
+                        do {
+                              ie = ie->prev();
+                              deleteItem(ie);
+                              } while (ie != is);
+                        }
+                  }
+            else
+                  deleteItem(is);
             }
       else {
             // deleteItem modifies sel->elements() list,
@@ -1063,7 +1071,7 @@ printf("cmdDeleteSelection %p - %p\n", is, ie);
                   deleteItem(e);
                   }
             }
-      sel->clear();
+      sel->elements()->clear();
       layout();
       }
 

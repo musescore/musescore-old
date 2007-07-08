@@ -1,0 +1,3675 @@
+<?xml version="1.0" encoding="utf8"?>
+<museScore version="1.0">
+  <Spatium>1.5</Spatium>
+  <Division>480</Division>
+  <Mag>0.884329</Mag>
+  <xoff>-754</xoff>
+  <yoff>186</yoff>
+  <Style>
+    <staffUpperBorder>8</staffUpperBorder>
+    <staffLowerBorder>4</staffLowerBorder>
+    <staffDistance>7.5</staffDistance>
+    <akkoladeDistance>5.5</akkoladeDistance>
+    <systemDistance>16.5</systemDistance>
+    <minMeasureWidth>4</minMeasureWidth>
+    <barWidth>0.16</barWidth>
+    <doubleBarWidth>0.16</doubleBarWidth>
+    <endBarWidth>0.3</endBarWidth>
+    <doubleBarDistance>0.3</doubleBarDistance>
+    <endBarDistance>0.3</endBarDistance>
+    <bracketWidth>0.35</bracketWidth>
+    <bracketDistance>0.3</bracketDistance>
+    <clefLeftMargin>0.5</clefLeftMargin>
+    <keysigLeftMargin>0.5</keysigLeftMargin>
+    <timesigLeftMargin>0.5</timesigLeftMargin>
+    <clefKeyRightMargin>1.75</clefKeyRightMargin>
+    <stemWidth>0.13</stemWidth>
+    <minNoteDistance>0.5</minNoteDistance>
+    <spacing16>1</spacing16>
+    <spacing8>1.4</spacing8>
+    <spacing4>1.8</spacing4>
+    <spacing2>2.2</spacing2>
+    <measureSpacing>1.3</measureSpacing>
+    <barNoteDistance>1.5</barNoteDistance>
+    <noteBarDistance>1</noteBarDistance>
+    <staffLineWidth>0.08</staffLineWidth>
+    <ledgerLineWidth>0.08</ledgerLineWidth>
+    <akkoladeWidth>1.6</akkoladeWidth>
+    <prefixDistance>0.13</prefixDistance>
+    <prefixNoteDistance>0.22</prefixNoteDistance>
+    <beamWidth>0.48</beamWidth>
+    <beamDistance>0.5</beamDistance>
+    <beamMinLen>1.25</beamMinLen>
+    <beamMinSlope>0.1</beamMinSlope>
+    <beamMaxSlope>0.5</beamMaxSlope>
+    <maxBeamTicks>480</maxBeamTicks>
+    <dotNoteDistance>0.5</dotNoteDistance>
+    <dotRestDistance>0.25</dotRestDistance>
+    <dotDotDistance>0.5</dotDotDistance>
+    <propertyDistanceHead>0.5</propertyDistanceHead>
+    <propertyDistanceStem>0.5</propertyDistanceStem>
+    <propertyDistance>0.25</propertyDistance>
+    <ticklen2Width>0.5</ticklen2Width>
+    <pageFillLimit>0.3</pageFillLimit>
+    <hairpinHeight>1.2</hairpinHeight>
+    <hairpinContHeight>0.5</hairpinContHeight>
+    <hairpinWidth>0.13</hairpinWidth>
+    <showPageNumber>1</showPageNumber>
+    <showPageNumberOne>0</showPageNumberOne>
+    <pageNumberOddEven>1</pageNumberOddEven>
+    <showMeasureNumber>1</showMeasureNumber>
+    <showMeasureNumberOne>0</showMeasureNumberOne>
+    <measureNumberInterval>5</measureNumberInterval>
+    <measureNumberAllStaffs>0</measureNumberAllStaffs>
+    <measureNumberSystem>1</measureNumberSystem>
+    </Style>
+  <Symbols>
+    <rows>11</rows>
+    <columns>16</columns>
+    <idx>0</idx>
+    <name>whole rest</name>
+    <Symbol>
+      <name>whole rest</name>
+      </Symbol>
+    <idx>1</idx>
+    <name>half rest</name>
+    <Symbol>
+      <name>half rest</name>
+      </Symbol>
+    <idx>2</idx>
+    <name>outside whole rest</name>
+    <Symbol>
+      <name>outside whole rest</name>
+      </Symbol>
+    <idx>3</idx>
+    <name>outside half rest</name>
+    <Symbol>
+      <name>outside half rest</name>
+      </Symbol>
+    <idx>4</idx>
+    <name>longa rest</name>
+    <Symbol>
+      <name>longa rest</name>
+      </Symbol>
+    <idx>5</idx>
+    <name>breve rest</name>
+    <Symbol>
+      <name>breve rest</name>
+      </Symbol>
+    <idx>6</idx>
+    <name>quart rest</name>
+    <Symbol>
+      <name>quart rest</name>
+      </Symbol>
+    <idx>7</idx>
+    <name>eight rest</name>
+    <Symbol>
+      <name>eight rest</name>
+      </Symbol>
+    <idx>8</idx>
+    <name>clas quart rest</name>
+    <Symbol>
+      <name>clas quart rest</name>
+      </Symbol>
+    <idx>9</idx>
+    <name>16&apos; rest</name>
+    <Symbol>
+      <name>16&apos; rest</name>
+      </Symbol>
+    <idx>10</idx>
+    <name>32&apos;  rest</name>
+    <Symbol>
+      <name>32&apos;  rest</name>
+      </Symbol>
+    <idx>11</idx>
+    <name>64&apos; rest</name>
+    <Symbol>
+      <name>64&apos; rest</name>
+      </Symbol>
+    <idx>12</idx>
+    <name>128&apos; rest</name>
+    <Symbol>
+      <name>128&apos; rest</name>
+      </Symbol>
+    <idx>16</idx>
+    <name>zero</name>
+    <Symbol>
+      <name>zero</name>
+      </Symbol>
+    <idx>17</idx>
+    <name>one</name>
+    <Symbol>
+      <name>one</name>
+      </Symbol>
+    <idx>18</idx>
+    <name>two</name>
+    <Symbol>
+      <name>two</name>
+      </Symbol>
+    <idx>19</idx>
+    <name>three</name>
+    <Symbol>
+      <name>three</name>
+      </Symbol>
+    <idx>20</idx>
+    <name>four</name>
+    <Symbol>
+      <name>four</name>
+      </Symbol>
+    <idx>21</idx>
+    <name>five</name>
+    <Symbol>
+      <name>five</name>
+      </Symbol>
+    <idx>22</idx>
+    <name>six</name>
+    <Symbol>
+      <name>six</name>
+      </Symbol>
+    <idx>23</idx>
+    <name>seven</name>
+    <Symbol>
+      <name>seven</name>
+      </Symbol>
+    <idx>24</idx>
+    <name>eight</name>
+    <Symbol>
+      <name>eight</name>
+      </Symbol>
+    <idx>25</idx>
+    <name>nine</name>
+    <Symbol>
+      <name>nine</name>
+      </Symbol>
+    <idx>31</idx>
+    <name>sharp</name>
+    <Symbol>
+      <name>sharp</name>
+      </Symbol>
+    <idx>32</idx>
+    <name>natural</name>
+    <Symbol>
+      <name>natural</name>
+      </Symbol>
+    <idx>33</idx>
+    <name>flat</name>
+    <Symbol>
+      <name>flat</name>
+      </Symbol>
+    <idx>34</idx>
+    <name>flat flat</name>
+    <Symbol>
+      <name>flat flat</name>
+      </Symbol>
+    <idx>35</idx>
+    <name>sharp sharp</name>
+    <Symbol>
+      <name>sharp sharp</name>
+      </Symbol>
+    <idx>36</idx>
+    <name>right parenthesis</name>
+    <Symbol>
+      <name>right parenthesis</name>
+      </Symbol>
+    <idx>37</idx>
+    <name>left parenthesis</name>
+    <Symbol>
+      <name>left parenthesis</name>
+      </Symbol>
+    <idx>38</idx>
+    <name>dot</name>
+    <Symbol>
+      <name>dot</name>
+      </Symbol>
+    <idx>39</idx>
+    <name>brevis head</name>
+    <Symbol>
+      <name>brevis head</name>
+      </Symbol>
+    <idx>40</idx>
+    <name>whole head</name>
+    <Symbol>
+      <name>whole head</name>
+      </Symbol>
+    <idx>41</idx>
+    <name>half head</name>
+    <Symbol>
+      <name>half head</name>
+      </Symbol>
+    <idx>42</idx>
+    <name>quart head</name>
+    <Symbol>
+      <name>quart head</name>
+      </Symbol>
+    <idx>43</idx>
+    <name>whole diamond head</name>
+    <Symbol>
+      <name>whole diamond head</name>
+      </Symbol>
+    <idx>44</idx>
+    <name>half diamond head</name>
+    <Symbol>
+      <name>half diamond head</name>
+      </Symbol>
+    <idx>45</idx>
+    <name>diamond head</name>
+    <Symbol>
+      <name>diamond head</name>
+      </Symbol>
+    <idx>46</idx>
+    <name>whole triangle head</name>
+    <Symbol>
+      <name>whole triangle head</name>
+      </Symbol>
+    <idx>47</idx>
+    <name>half triangle head</name>
+    <Symbol>
+      <name>half triangle head</name>
+      </Symbol>
+    <idx>48</idx>
+    <name>triangle head</name>
+    <Symbol>
+      <name>triangle head</name>
+      </Symbol>
+    <idx>49</idx>
+    <name>whole slash head</name>
+    <Symbol>
+      <name>whole slash head</name>
+      </Symbol>
+    <idx>50</idx>
+    <name>half slash head</name>
+    <Symbol>
+      <name>half slash head</name>
+      </Symbol>
+    <idx>51</idx>
+    <name>quart slash head</name>
+    <Symbol>
+      <name>quart slash head</name>
+      </Symbol>
+    <idx>52</idx>
+    <name>whole cross head</name>
+    <Symbol>
+      <name>whole cross head</name>
+      </Symbol>
+    <idx>53</idx>
+    <name>half cross head</name>
+    <Symbol>
+      <name>half cross head</name>
+      </Symbol>
+    <idx>54</idx>
+    <name>cross head</name>
+    <Symbol>
+      <name>cross head</name>
+      </Symbol>
+    <idx>55</idx>
+    <name>x circle head</name>
+    <Symbol>
+      <name>x circle head</name>
+      </Symbol>
+    <idx>57</idx>
+    <name>ufermata</name>
+    <Symbol>
+      <name>ufermata</name>
+      </Symbol>
+    <idx>58</idx>
+    <name>dfermata</name>
+    <Symbol>
+      <name>dfermata</name>
+      </Symbol>
+    <idx>59</idx>
+    <name>thumb</name>
+    <Symbol>
+      <name>thumb</name>
+      </Symbol>
+    <idx>60</idx>
+    <name>sforza to accent</name>
+    <Symbol>
+      <name>sforza to accent</name>
+      </Symbol>
+    <idx>61</idx>
+    <name>staccato</name>
+    <Symbol>
+      <name>staccato</name>
+      </Symbol>
+    <idx>62</idx>
+    <name>ustaccatissimo</name>
+    <Symbol>
+      <name>ustaccatissimo</name>
+      </Symbol>
+    <idx>63</idx>
+    <name>dstacattissimo</name>
+    <Symbol>
+      <name>dstacattissimo</name>
+      </Symbol>
+    <idx>64</idx>
+    <name>tenuto</name>
+    <Symbol>
+      <name>tenuto</name>
+      </Symbol>
+    <idx>65</idx>
+    <name>uportato</name>
+    <Symbol>
+      <name>uportato</name>
+      </Symbol>
+    <idx>66</idx>
+    <name>dportato</name>
+    <Symbol>
+      <name>dportato</name>
+      </Symbol>
+    <idx>67</idx>
+    <name>umarcato</name>
+    <Symbol>
+      <name>umarcato</name>
+      </Symbol>
+    <idx>68</idx>
+    <name>dmarcato</name>
+    <Symbol>
+      <name>dmarcato</name>
+      </Symbol>
+    <idx>69</idx>
+    <name>ouvert</name>
+    <Symbol>
+      <name>ouvert</name>
+      </Symbol>
+    <idx>70</idx>
+    <name>plus stop</name>
+    <Symbol>
+      <name>plus stop</name>
+      </Symbol>
+    <idx>71</idx>
+    <name>up bow</name>
+    <Symbol>
+      <name>up bow</name>
+      </Symbol>
+    <idx>72</idx>
+    <name>down bow</name>
+    <Symbol>
+      <name>down bow</name>
+      </Symbol>
+    <idx>73</idx>
+    <name>reverse turn</name>
+    <Symbol>
+      <name>reverse turn</name>
+      </Symbol>
+    <idx>74</idx>
+    <name>turn</name>
+    <Symbol>
+      <name>turn</name>
+      </Symbol>
+    <idx>75</idx>
+    <name>trill</name>
+    <Symbol>
+      <name>trill</name>
+      </Symbol>
+    <idx>76</idx>
+    <name>upedal heel</name>
+    <Symbol>
+      <name>upedal heel</name>
+      </Symbol>
+    <idx>77</idx>
+    <name>dpedalheel</name>
+    <Symbol>
+      <name>dpedalheel</name>
+      </Symbol>
+    <idx>78</idx>
+    <name>upedal toe</name>
+    <Symbol>
+      <name>upedal toe</name>
+      </Symbol>
+    <idx>79</idx>
+    <name>dpedal toe</name>
+    <Symbol>
+      <name>dpedal toe</name>
+      </Symbol>
+    <idx>80</idx>
+    <name>flageolet</name>
+    <Symbol>
+      <name>flageolet</name>
+      </Symbol>
+    <idx>81</idx>
+    <name>segno</name>
+    <Symbol>
+      <name>segno</name>
+      </Symbol>
+    <idx>82</idx>
+    <name>coda</name>
+    <Symbol>
+      <name>coda</name>
+      </Symbol>
+    <idx>83</idx>
+    <name>rcomma</name>
+    <Symbol>
+      <name>rcomma</name>
+      </Symbol>
+    <idx>84</idx>
+    <name>lcomma</name>
+    <Symbol>
+      <name>lcomma</name>
+      </Symbol>
+    <idx>85</idx>
+    <name>arpeggio</name>
+    <Symbol>
+      <name>arpeggio</name>
+      </Symbol>
+    <idx>86</idx>
+    <name>trillelement</name>
+    <Symbol>
+      <name>trillelement</name>
+      </Symbol>
+    <idx>87</idx>
+    <name>arpeggio arrow down</name>
+    <Symbol>
+      <name>arpeggio arrow down</name>
+      </Symbol>
+    <idx>88</idx>
+    <name>arpeggio arrow up</name>
+    <Symbol>
+      <name>arpeggio arrow up</name>
+      </Symbol>
+    <idx>89</idx>
+    <name>trill element</name>
+    <Symbol>
+      <name>trill element</name>
+      </Symbol>
+    <idx>90</idx>
+    <name>prall</name>
+    <Symbol>
+      <name>prall</name>
+      </Symbol>
+    <idx>91</idx>
+    <name>mordent</name>
+    <Symbol>
+      <name>mordent</name>
+      </Symbol>
+    <idx>92</idx>
+    <name>prall prall</name>
+    <Symbol>
+      <name>prall prall</name>
+      </Symbol>
+    <idx>93</idx>
+    <name>prall mordent</name>
+    <Symbol>
+      <name>prall mordent</name>
+      </Symbol>
+    <idx>94</idx>
+    <name>up prall</name>
+    <Symbol>
+      <name>up prall</name>
+      </Symbol>
+    <idx>95</idx>
+    <name>down prall</name>
+    <Symbol>
+      <name>down prall</name>
+      </Symbol>
+    <idx>96</idx>
+    <name>up mordent</name>
+    <Symbol>
+      <name>up mordent</name>
+      </Symbol>
+    <idx>97</idx>
+    <name>down mordent</name>
+    <Symbol>
+      <name>down mordent</name>
+      </Symbol>
+    <idx>98</idx>
+    <name>line prall</name>
+    <Symbol>
+      <name>line prall</name>
+      </Symbol>
+    <idx>99</idx>
+    <name>prall down</name>
+    <Symbol>
+      <name>prall down</name>
+      </Symbol>
+    <idx>101</idx>
+    <name>prall up</name>
+    <Symbol>
+      <name>prall up</name>
+      </Symbol>
+    <idx>102</idx>
+    <name>eight flag</name>
+    <Symbol>
+      <name>eight flag</name>
+      </Symbol>
+    <idx>103</idx>
+    <name>sixteenth flag</name>
+    <Symbol>
+      <name>sixteenth flag</name>
+      </Symbol>
+    <idx>104</idx>
+    <name>thirtysecond flag</name>
+    <Symbol>
+      <name>thirtysecond flag</name>
+      </Symbol>
+    <idx>105</idx>
+    <name>sixtyfour flag</name>
+    <Symbol>
+      <name>sixtyfour flag</name>
+      </Symbol>
+    <idx>106</idx>
+    <name>deight flag</name>
+    <Symbol>
+      <name>deight flag</name>
+      </Symbol>
+    <idx>107</idx>
+    <name>grace dash</name>
+    <Symbol>
+      <name>grace dash</name>
+      </Symbol>
+    <idx>108</idx>
+    <name>dgrace dash</name>
+    <Symbol>
+      <name>dgrace dash</name>
+      </Symbol>
+    <idx>109</idx>
+    <name>dsixteenth flag</name>
+    <Symbol>
+      <name>dsixteenth flag</name>
+      </Symbol>
+    <idx>110</idx>
+    <name>dthirtysecond flag</name>
+    <Symbol>
+      <name>dthirtysecond flag</name>
+      </Symbol>
+    <idx>111</idx>
+    <name>dsixtyfourth flag</name>
+    <Symbol>
+      <name>dsixtyfourth flag</name>
+      </Symbol>
+    <idx>112</idx>
+    <name>stem</name>
+    <Symbol>
+      <name>stem</name>
+      </Symbol>
+    <idx>113</idx>
+    <name>dstem</name>
+    <Symbol>
+      <name>dstem</name>
+      </Symbol>
+    <idx>114</idx>
+    <name>alto clef</name>
+    <Symbol>
+      <name>alto clef</name>
+      </Symbol>
+    <idx>115</idx>
+    <name>calto clef</name>
+    <Symbol>
+      <name>calto clef</name>
+      </Symbol>
+    <idx>116</idx>
+    <name>bass clef</name>
+    <Symbol>
+      <name>bass clef</name>
+      </Symbol>
+    <idx>117</idx>
+    <name>cbass clef</name>
+    <Symbol>
+      <name>cbass clef</name>
+      </Symbol>
+    <idx>118</idx>
+    <name>trebleclef</name>
+    <Symbol>
+      <name>trebleclef</name>
+      </Symbol>
+    <idx>119</idx>
+    <name>ctrebleclef</name>
+    <Symbol>
+      <name>ctrebleclef</name>
+      </Symbol>
+    <idx>120</idx>
+    <name>percussion clef</name>
+    <Symbol>
+      <name>percussion clef</name>
+      </Symbol>
+    <idx>121</idx>
+    <name>cpercussion clef</name>
+    <Symbol>
+      <name>cpercussion clef</name>
+      </Symbol>
+    <idx>122</idx>
+    <name>tab clef</name>
+    <Symbol>
+      <name>tab clef</name>
+      </Symbol>
+    <idx>123</idx>
+    <name>ctab clef</name>
+    <Symbol>
+      <name>ctab clef</name>
+      </Symbol>
+    <idx>124</idx>
+    <name>four four meter</name>
+    <Symbol>
+      <name>four four meter</name>
+      </Symbol>
+    <idx>125</idx>
+    <name>allabreve</name>
+    <Symbol>
+      <name>allabreve</name>
+      </Symbol>
+    <idx>126</idx>
+    <name>pedalasterisk</name>
+    <Symbol>
+      <name>pedalasterisk</name>
+      </Symbol>
+    <idx>127</idx>
+    <name>pedaldash</name>
+    <Symbol>
+      <name>pedaldash</name>
+      </Symbol>
+    <idx>128</idx>
+    <name>pedaldot</name>
+    <Symbol>
+      <name>pedaldot</name>
+      </Symbol>
+    <idx>129</idx>
+    <name>pedalP</name>
+    <Symbol>
+      <name>pedalP</name>
+      </Symbol>
+    <idx>130</idx>
+    <name>pedald</name>
+    <Symbol>
+      <name>pedald</name>
+      </Symbol>
+    <idx>131</idx>
+    <name>pedale</name>
+    <Symbol>
+      <name>pedale</name>
+      </Symbol>
+    <idx>132</idx>
+    <name>pedal ped</name>
+    <Symbol>
+      <name>pedal ped</name>
+      </Symbol>
+    <idx>133</idx>
+    <name>acc discant</name>
+    <Symbol>
+      <name>acc discant</name>
+      </Symbol>
+    <idx>134</idx>
+    <name>acc dot</name>
+    <Symbol>
+      <name>acc dot</name>
+      </Symbol>
+    <idx>135</idx>
+    <name>acc freebase</name>
+    <Symbol>
+      <name>acc freebase</name>
+      </Symbol>
+    <idx>136</idx>
+    <name>acc stdbase</name>
+    <Symbol>
+      <name>acc stdbase</name>
+      </Symbol>
+    <idx>137</idx>
+    <name>acc bayanbase</name>
+    <Symbol>
+      <name>acc bayanbase</name>
+      </Symbol>
+    <idx>138</idx>
+    <name>acc sb</name>
+    <Symbol>
+      <name>acc sb</name>
+      </Symbol>
+    <idx>139</idx>
+    <name>acc bb</name>
+    <Symbol>
+      <name>acc bb</name>
+      </Symbol>
+    <idx>140</idx>
+    <name>acc old ee</name>
+    <Symbol>
+      <name>acc old ee</name>
+      </Symbol>
+    <idx>141</idx>
+    <name>acc old ees</name>
+    <Symbol>
+      <name>acc old ees</name>
+      </Symbol>
+    <idx>142</idx>
+    <name>whole do head</name>
+    <Symbol>
+      <name>whole do head</name>
+      </Symbol>
+    <idx>143</idx>
+    <name>half do head</name>
+    <Symbol>
+      <name>half do head</name>
+      </Symbol>
+    <idx>144</idx>
+    <name>do head</name>
+    <Symbol>
+      <name>do head</name>
+      </Symbol>
+    <idx>145</idx>
+    <name>whole re head</name>
+    <Symbol>
+      <name>whole re head</name>
+      </Symbol>
+    <idx>146</idx>
+    <name>half re head</name>
+    <Symbol>
+      <name>half re head</name>
+      </Symbol>
+    <idx>147</idx>
+    <name>re head</name>
+    <Symbol>
+      <name>re head</name>
+      </Symbol>
+    <idx>148</idx>
+    <name>whole me head</name>
+    <Symbol>
+      <name>whole me head</name>
+      </Symbol>
+    <idx>149</idx>
+    <name>half me head</name>
+    <Symbol>
+      <name>half me head</name>
+      </Symbol>
+    <idx>150</idx>
+    <name>me head</name>
+    <Symbol>
+      <name>me head</name>
+      </Symbol>
+    <idx>151</idx>
+    <name>whole fa head</name>
+    <Symbol>
+      <name>whole fa head</name>
+      </Symbol>
+    <idx>152</idx>
+    <name>fau head</name>
+    <Symbol>
+      <name>fau head</name>
+      </Symbol>
+    <idx>153</idx>
+    <name>half fad head</name>
+    <Symbol>
+      <name>half fad head</name>
+      </Symbol>
+    <idx>154</idx>
+    <name>fad head</name>
+    <Symbol>
+      <name>fad head</name>
+      </Symbol>
+    <idx>155</idx>
+    <name>whole la head</name>
+    <Symbol>
+      <name>whole la head</name>
+      </Symbol>
+    <idx>156</idx>
+    <name>half la head</name>
+    <Symbol>
+      <name>half la head</name>
+      </Symbol>
+    <idx>157</idx>
+    <name>la head</name>
+    <Symbol>
+      <name>la head</name>
+      </Symbol>
+    <idx>158</idx>
+    <name>whole te head</name>
+    <Symbol>
+      <name>whole te head</name>
+      </Symbol>
+    <idx>159</idx>
+    <name>half te head</name>
+    <Symbol>
+      <name>half te head</name>
+      </Symbol>
+    <idx>160</idx>
+    <name>f</name>
+    <Symbol>
+      <name>f</name>
+      </Symbol>
+    <idx>161</idx>
+    <name>m</name>
+    <Symbol>
+      <name>m</name>
+      </Symbol>
+    <idx>162</idx>
+    <name>p</name>
+    <Symbol>
+      <name>p</name>
+      </Symbol>
+    <idx>163</idx>
+    <name>r</name>
+    <Symbol>
+      <name>r</name>
+      </Symbol>
+    <idx>164</idx>
+    <name>s</name>
+    <Symbol>
+      <name>s</name>
+      </Symbol>
+    <idx>165</idx>
+    <name>z</name>
+    <Symbol>
+      <name>z</name>
+      </Symbol>
+    </Symbols>
+  <showInvisible>0</showInvisible>
+  <page-layout>
+    <pageFormat>A4</pageFormat>
+    <page-margins type="both">
+      <left-margin>56.6929</left-margin>
+      <right-margin>56.6929</right-margin>
+      <top-margin>56.6929</top-margin>
+      <bottom-margin>113.386</bottom-margin>
+      </page-margins>
+    </page-layout>
+  <siglist>
+    <sig tick="0">
+      <nom>5</nom>
+      <denom>8</denom>
+      </sig>
+    <sig tick="1200">
+      <nom>6</nom>
+      <denom>8</denom>
+      </sig>
+    <sig tick="2640">
+      <nom>5</nom>
+      <denom>8</denom>
+      </sig>
+    <sig tick="3840">
+      <nom>6</nom>
+      <denom>8</denom>
+      </sig>
+    <sig tick="5280">
+      <nom>5</nom>
+      <denom>8</denom>
+      </sig>
+    <sig tick="6480">
+      <nom>6</nom>
+      <denom>8</denom>
+      </sig>
+    <sig tick="7920">
+      <nom>5</nom>
+      <denom>8</denom>
+      </sig>
+    <sig tick="9120">
+      <nom>6</nom>
+      <denom>8</denom>
+      </sig>
+    <sig tick="10560">
+      <nom>5</nom>
+      <denom>8</denom>
+      </sig>
+    <sig tick="11760">
+      <nom>6</nom>
+      <denom>8</denom>
+      </sig>
+    <sig tick="13200">
+      <nom>5</nom>
+      <denom>8</denom>
+      </sig>
+    <sig tick="14400">
+      <nom>6</nom>
+      <denom>8</denom>
+      </sig>
+    <sig tick="18720">
+      <nom>5</nom>
+      <denom>8</denom>
+      </sig>
+    <sig tick="19920">
+      <nom>6</nom>
+      <denom>8</denom>
+      </sig>
+    <sig tick="21360">
+      <nom>5</nom>
+      <denom>8</denom>
+      </sig>
+    <sig tick="22560">
+      <nom>6</nom>
+      <denom>8</denom>
+      </sig>
+    <sig tick="26880">
+      <nom>4</nom>
+      <denom>8</denom>
+      </sig>
+    <sig tick="28800">
+      <nom>6</nom>
+      <denom>8</denom>
+      </sig>
+    <sig tick="30240">
+      <nom>4</nom>
+      <denom>8</denom>
+      </sig>
+    <sig tick="31200">
+      <nom>6</nom>
+      <denom>8</denom>
+      </sig>
+    <sig tick="32640">
+      <nom>4</nom>
+      <denom>8</denom>
+      </sig>
+    <sig tick="36480">
+      <nom>6</nom>
+      <denom>8</denom>
+      </sig>
+    <sig tick="42240">
+      <nom>5</nom>
+      <denom>8</denom>
+      </sig>
+    <sig tick="43440">
+      <nom>6</nom>
+      <denom>8</denom>
+      </sig>
+    <sig tick="44880">
+      <nom>5</nom>
+      <denom>8</denom>
+      </sig>
+    <sig tick="46080">
+      <nom>6</nom>
+      <denom>8</denom>
+      </sig>
+    <sig tick="53280">
+      <nom>4</nom>
+      <denom>8</denom>
+      </sig>
+    <sig tick="54240">
+      <nom>4</nom>
+      <denom>8</denom>
+      </sig>
+    <sig tick="55200">
+      <nom>6</nom>
+      <denom>8</denom>
+      </sig>
+    <sig tick="56640">
+      <nom>4</nom>
+      <denom>8</denom>
+      </sig>
+    <sig tick="58560">
+      <nom>6</nom>
+      <denom>8</denom>
+      </sig>
+    <sig tick="61440">
+      <nom>5</nom>
+      <denom>8</denom>
+      </sig>
+    <sig tick="62640">
+      <nom>6</nom>
+      <denom>8</denom>
+      </sig>
+    <sig tick="64080">
+      <nom>5</nom>
+      <denom>8</denom>
+      </sig>
+    <sig tick="65280">
+      <nom>6</nom>
+      <denom>8</denom>
+      </sig>
+    <sig tick="66720">
+      <nom>5</nom>
+      <denom>8</denom>
+      </sig>
+    <sig tick="67920">
+      <nom>6</nom>
+      <denom>8</denom>
+      </sig>
+    </siglist>
+  <tempolist fix="500000">
+    <tempo at="0">
+      <tick>0</tick>
+      <val>500000</val>
+      </tempo>
+    <tempo at="21474836">
+      <tick>0</tick>
+      <val>500000</val>
+      </tempo>
+    </tempolist>
+  <Part>
+    <Staff>
+      <cleflist>
+        <clef tick="0" idx="0"/>
+        </cleflist>
+      <keylist>
+        <key tick="0" idx="0"/>
+        </keylist>
+      <bracket type="-1" span="1"/>
+      </Staff>
+    <trackName>Gitarre</trackName>
+    <Instrument>
+      <midiChannel>0</midiChannel>
+      <midiProgram>0</midiProgram>
+      <volume>100</volume>
+      <chorus>30</chorus>
+      <reverb>30</reverb>
+      </Instrument>
+    </Part>
+  <Staff id="1">
+    <Measure number="1">
+      <Text>
+        <align>12</align>
+        <xoffset>0</xoffset>
+        <yoffset>0.19685</yoffset>
+        <anchor>page</anchor>
+        <offsetType>absolute</offsetType>
+        <spatiumSizeDependent>0</spatiumSizeDependent>
+        <data>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Arial&apos;; font-size:11pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Times New Roman&apos;; font-size:24pt;&quot;&gt;&lt;span style=&quot; font-size:10pt;&quot;&gt;In memoriam Alexandre Tansman&lt;/span&gt;&lt;/p&gt;
+&lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Times New Roman&apos;; font-size:10pt;&quot;&gt;&lt;span style=&quot; font-size:24pt;&quot;&gt;Prelude&lt;/span&gt;&lt;/p&gt;
+&lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Times New Roman&apos;; font-size:24pt;&quot;&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;For Guitar&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
+        </Text>
+      <Text>
+        <align>10</align>
+        <xoffset>0</xoffset>
+        <yoffset>0.590551</yoffset>
+        <anchor>page</anchor>
+        <offsetType>absolute</offsetType>
+        <spatiumSizeDependent>0</spatiumSizeDependent>
+        <data>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-size:12pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p align=&quot;right&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Dave Phillips 2005&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
+        <subtype>Composer</subtype>
+        </Text>
+      <BarLine/>
+      <Slur>
+        <startTick>0</startTick>
+        <endTick>240</endTick>
+        <SlurSegment no="0">
+          <o4 x="11.6403" y="-3.4"/>
+          </SlurSegment>
+        </Slur>
+      <Dynamic>
+        <subtype>f</subtype>
+        <offset x="-0.790478" y="2.79612"/>
+        </Dynamic>
+      <Dynamic>
+        <data>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-size:12pt; font-weight:400; font-style:italic;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Allegro sostenuto&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
+        <offset x="-6.73515" y="-10.6225"/>
+        </Dynamic>
+      <TimeSig>
+        <subtype>328</subtype>
+        <den>8</den>
+        <nom1>5</nom1>
+        </TimeSig>
+      <Chord>
+        <ticklen>240</ticklen>
+        <StemDirection>up</StemDirection>
+        <Note>
+          <pitch>60</pitch>
+          <tpc>14</tpc>
+          <Text>
+            <align>36</align>
+            <xoffset>0</xoffset>
+            <yoffset>0</yoffset>
+            <anchor>note</anchor>
+            <offsetType>spatium</offsetType>
+            <spatiumSizeDependent>0</spatiumSizeDependent>
+            <data>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-size:8pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:7pt;&quot;&gt;3&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
+            <subtype>Fingering</subtype>
+            <offset x="-1.41111" y="-7.49653"/>
+            </Text>
+          </Note>
+        </Chord>
+      <Chord>
+        <ticklen>240</ticklen>
+        <Note>
+          <pitch>64</pitch>
+          <tpc>18</tpc>
+          <Text>
+            <align>36</align>
+            <xoffset>0</xoffset>
+            <yoffset>0</yoffset>
+            <anchor>note</anchor>
+            <offsetType>spatium</offsetType>
+            <spatiumSizeDependent>0</spatiumSizeDependent>
+            <data>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-size:8pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:7pt;&quot;&gt;2&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
+            <subtype>Fingering</subtype>
+            <offset x="-1.94028" y="-6.96736"/>
+            </Text>
+          </Note>
+        </Chord>
+      <Chord>
+        <ticklen>240</ticklen>
+        <Note>
+          <pitch>71</pitch>
+          <tpc>19</tpc>
+          <Text>
+            <align>36</align>
+            <xoffset>0</xoffset>
+            <yoffset>0</yoffset>
+            <anchor>note</anchor>
+            <offsetType>spatium</offsetType>
+            <spatiumSizeDependent>0</spatiumSizeDependent>
+            <data>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-size:8pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:7pt;&quot;&gt;4&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
+            <subtype>Fingering</subtype>
+            <offset x="-1.94028" y="-6.35"/>
+            </Text>
+          </Note>
+        </Chord>
+      <Chord>
+        <ticklen>240</ticklen>
+        <Note>
+          <pitch>72</pitch>
+          <tpc>14</tpc>
+          <Text>
+            <align>36</align>
+            <xoffset>0</xoffset>
+            <yoffset>0</yoffset>
+            <anchor>note</anchor>
+            <offsetType>spatium</offsetType>
+            <spatiumSizeDependent>0</spatiumSizeDependent>
+            <data>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-size:8pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:7pt;&quot;&gt;1&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
+            <subtype>Fingering</subtype>
+            <offset x="-1.5875" y="-6.87917"/>
+            </Text>
+          </Note>
+        </Chord>
+      <Chord>
+        <ticklen>240</ticklen>
+        <Note>
+          <pitch>76</pitch>
+          <tpc>18</tpc>
+          <Text>
+            <align>36</align>
+            <xoffset>0</xoffset>
+            <yoffset>0</yoffset>
+            <anchor>note</anchor>
+            <offsetType>spatium</offsetType>
+            <spatiumSizeDependent>0</spatiumSizeDependent>
+            <data>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-size:8pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:7pt;&quot;&gt;0&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
+            <subtype>Fingering</subtype>
+            <offset x="-2.11667" y="-6.79097"/>
+            </Text>
+          </Note>
+        </Chord>
+      </Measure>
+    <Measure number="2">
+      <BarLine/>
+      <Slur>
+        <startTick>1200</startTick>
+        <endTick>1440</endTick>
+        <SlurSegment no="0">
+          <o4 x="15.4222" y="-5.07639"/>
+          </SlurSegment>
+        </Slur>
+      <TimeSig>
+        <subtype>392</subtype>
+        <den>8</den>
+        <nom1>6</nom1>
+        </TimeSig>
+      <Chord>
+        <ticklen>240</ticklen>
+        <Note>
+          <pitch>55</pitch>
+          <tpc>15</tpc>
+          <Text>
+            <align>36</align>
+            <xoffset>0</xoffset>
+            <yoffset>0</yoffset>
+            <anchor>note</anchor>
+            <offsetType>spatium</offsetType>
+            <spatiumSizeDependent>0</spatiumSizeDependent>
+            <data>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-size:8pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:7pt;&quot;&gt;1&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
+            <subtype>Fingering</subtype>
+            <offset x="-1.49931" y="-9.17222"/>
+            </Text>
+          </Note>
+        </Chord>
+      <Chord>
+        <ticklen>240</ticklen>
+        <Note>
+          <pitch>62</pitch>
+          <tpc>16</tpc>
+          <Text>
+            <align>36</align>
+            <xoffset>0</xoffset>
+            <yoffset>0</yoffset>
+            <anchor>note</anchor>
+            <offsetType>spatium</offsetType>
+            <spatiumSizeDependent>0</spatiumSizeDependent>
+            <data>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-size:8pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:7pt;&quot;&gt;3&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
+            <subtype>Fingering</subtype>
+            <offset x="-1.85208" y="-7.40834"/>
+            </Text>
+          </Note>
+        </Chord>
+      <Chord>
+        <ticklen>240</ticklen>
+        <Note>
+          <pitch>65</pitch>
+          <tpc>13</tpc>
+          <Text>
+            <align>36</align>
+            <xoffset>0</xoffset>
+            <yoffset>0</yoffset>
+            <anchor>note</anchor>
+            <offsetType>spatium</offsetType>
+            <spatiumSizeDependent>0</spatiumSizeDependent>
+            <data>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-size:8pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:7pt;&quot;&gt;1&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
+            <subtype>Fingering</subtype>
+            <offset x="-1.5875" y="-6.87917"/>
+            </Text>
+          </Note>
+        </Chord>
+      <Chord>
+        <ticklen>240</ticklen>
+        <Note>
+          <pitch>72</pitch>
+          <tpc>14</tpc>
+          <Text>
+            <align>36</align>
+            <xoffset>0</xoffset>
+            <yoffset>0</yoffset>
+            <anchor>note</anchor>
+            <offsetType>spatium</offsetType>
+            <spatiumSizeDependent>0</spatiumSizeDependent>
+            <data>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-size:8pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:7pt;&quot;&gt;4&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
+            <subtype>Fingering</subtype>
+            <offset x="-1.94028" y="-6.35"/>
+            </Text>
+          </Note>
+        </Chord>
+      <Chord>
+        <ticklen>240</ticklen>
+        <Note>
+          <pitch>74</pitch>
+          <tpc>16</tpc>
+          <Text>
+            <align>36</align>
+            <xoffset>0</xoffset>
+            <yoffset>0</yoffset>
+            <anchor>note</anchor>
+            <offsetType>spatium</offsetType>
+            <spatiumSizeDependent>0</spatiumSizeDependent>
+            <data>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-size:8pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:7pt;&quot;&gt;1&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
+            <subtype>Fingering</subtype>
+            <offset x="-1.5875" y="-6.87917"/>
+            </Text>
+          </Note>
+        </Chord>
+      <Chord>
+        <ticklen>240</ticklen>
+        <Note>
+          <pitch>79</pitch>
+          <tpc>15</tpc>
+          <Text>
+            <align>36</align>
+            <xoffset>0</xoffset>
+            <yoffset>0</yoffset>
+            <anchor>note</anchor>
+            <offsetType>spatium</offsetType>
+            <spatiumSizeDependent>0</spatiumSizeDependent>
+            <data>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-size:8pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:7pt;&quot;&gt;1&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
+            <subtype>Fingering</subtype>
+            <offset x="-1.5875" y="-6.87917"/>
+            </Text>
+          </Note>
+        </Chord>
+      </Measure>
+    <Measure number="3">
+      <BarLine/>
+      <Slur>
+        <startTick>2640</startTick>
+        <endTick>2880</endTick>
+        <SlurSegment no="0">
+          <o4 x="11.8181" y="-3.35139"/>
+          </SlurSegment>
+        </Slur>
+      <Dynamic>
+        <data>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-size:12pt; font-weight:400; font-style:italic;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;simile&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
+        <offset x="-1.71635" y="5.4279"/>
+        </Dynamic>
+      <TimeSig>
+        <subtype>328</subtype>
+        <den>8</den>
+        <nom1>5</nom1>
+        </TimeSig>
+      <Chord>
+        <ticklen>240</ticklen>
+        <StemDirection>up</StemDirection>
+        <Note pitch="60" tpc="14"/>
+        </Chord>
+      <Note pitch="64" tpc="18" ticks="240"/>
+      <Note pitch="71" tpc="19" ticks="240"/>
+      <Note pitch="72" tpc="14" ticks="240"/>
+      <Note pitch="76" tpc="18" ticks="240"/>
+      </Measure>
+    <Measure number="4">
+      <BarLine/>
+      <Slur>
+        <startTick>3840</startTick>
+        <endTick>4080</endTick>
+        <SlurSegment no="0">
+          <o4 x="15.5222" y="-4.85069"/>
+          </SlurSegment>
+        </Slur>
+      <TimeSig>
+        <subtype>392</subtype>
+        <den>8</den>
+        <nom1>6</nom1>
+        </TimeSig>
+      <Note pitch="55" tpc="15" ticks="240"/>
+      <Note pitch="62" tpc="16" ticks="240"/>
+      <Note pitch="65" tpc="13" ticks="240"/>
+      <Note pitch="72" tpc="14" ticks="240"/>
+      <Note pitch="74" tpc="16" ticks="240"/>
+      <Note pitch="79" tpc="15" ticks="240"/>
+      </Measure>
+    <Measure number="5">
+      <BarLine/>
+      <LayoutBreak>
+        <subtype>line</subtype>
+        </LayoutBreak>
+      <Slur>
+        <startTick>5280</startTick>
+        <endTick>5520</endTick>
+        <SlurSegment no="0">
+          <o4 x="11.774" y="-3.39549"/>
+          </SlurSegment>
+        </Slur>
+      <TimeSig>
+        <subtype>328</subtype>
+        <den>8</den>
+        <nom1>5</nom1>
+        </TimeSig>
+      <Chord>
+        <ticklen>240</ticklen>
+        <Note>
+          <pitch>53</pitch>
+          <tpc>13</tpc>
+          <Text>
+            <align>36</align>
+            <xoffset>0</xoffset>
+            <yoffset>0</yoffset>
+            <anchor>note</anchor>
+            <offsetType>spatium</offsetType>
+            <spatiumSizeDependent>0</spatiumSizeDependent>
+            <data>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-size:8pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:7pt;&quot;&gt;1&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
+            <subtype>Fingering</subtype>
+            <offset x="-1.41111" y="-9.87778"/>
+            </Text>
+          </Note>
+        </Chord>
+      <Chord>
+        <ticklen>240</ticklen>
+        <Note>
+          <pitch>64</pitch>
+          <tpc>18</tpc>
+          <Text>
+            <align>36</align>
+            <xoffset>0</xoffset>
+            <yoffset>0</yoffset>
+            <anchor>note</anchor>
+            <offsetType>spatium</offsetType>
+            <spatiumSizeDependent>0</spatiumSizeDependent>
+            <data>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-size:8pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:7pt;&quot;&gt;3&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
+            <subtype>Fingering</subtype>
+            <offset x="-1.67569" y="-6.87917"/>
+            </Text>
+          </Note>
+        </Chord>
+      <Chord>
+        <ticklen>240</ticklen>
+        <Note>
+          <pitch>69</pitch>
+          <tpc>17</tpc>
+          <Text>
+            <align>36</align>
+            <xoffset>0</xoffset>
+            <yoffset>0</yoffset>
+            <anchor>note</anchor>
+            <offsetType>spatium</offsetType>
+            <spatiumSizeDependent>0</spatiumSizeDependent>
+            <data>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-size:8pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:7pt;&quot;&gt;4&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
+            <subtype>Fingering</subtype>
+            <offset x="-2.02847" y="-6.35"/>
+            </Text>
+          </Note>
+        </Chord>
+      <Chord>
+        <ticklen>240</ticklen>
+        <Note>
+          <pitch>72</pitch>
+          <tpc>14</tpc>
+          <Text>
+            <align>36</align>
+            <xoffset>0</xoffset>
+            <yoffset>0</yoffset>
+            <anchor>note</anchor>
+            <offsetType>spatium</offsetType>
+            <spatiumSizeDependent>0</spatiumSizeDependent>
+            <data>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-size:8pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:7pt;&quot;&gt;2&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
+            <subtype>Fingering</subtype>
+            <offset x="-2.02847" y="-6.87917"/>
+            </Text>
+          </Note>
+        </Chord>
+      <Chord>
+        <ticklen>240</ticklen>
+        <Note>
+          <pitch>76</pitch>
+          <tpc>18</tpc>
+          <Text>
+            <align>36</align>
+            <xoffset>0</xoffset>
+            <yoffset>0</yoffset>
+            <anchor>note</anchor>
+            <offsetType>spatium</offsetType>
+            <spatiumSizeDependent>0</spatiumSizeDependent>
+            <data>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-size:8pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:7pt;&quot;&gt;0&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
+            <subtype>Fingering</subtype>
+            <offset x="-1.85208" y="-7.49653"/>
+            </Text>
+          </Note>
+        </Chord>
+      </Measure>
+    <Measure number="6">
+      <BarLine/>
+      <Slur>
+        <startTick>6480</startTick>
+        <endTick>6720</endTick>
+        <SlurSegment no="0">
+          <o4 x="14.2875" y="0.132292"/>
+          </SlurSegment>
+        <up>2</up>
+        </Slur>
+      <TimeSig>
+        <subtype>392</subtype>
+        <den>8</den>
+        <nom1>6</nom1>
+        </TimeSig>
+      <Chord>
+        <ticklen>240</ticklen>
+        <StemDirection>down</StemDirection>
+        <Note pitch="57" tpc="17"/>
+        </Chord>
+      <Note pitch="76" tpc="18" ticks="240"/>
+      <Note pitch="72" tpc="14" ticks="240"/>
+      <Note pitch="67" tpc="15" ticks="240"/>
+      <Note pitch="64" tpc="18" ticks="240"/>
+      <Note pitch="59" tpc="19" ticks="240"/>
+      <Chord>
+        <voice>1</voice>
+        <tick>6480</tick>
+        <ticklen>1440</ticklen>
+        <Attribute>
+          <idx>3</idx>
+          <subtype>3</subtype>
+          <offset x="-0.176389" y="-5.64444"/>
+          <voice>1</voice>
+          </Attribute>
+        <StemDirection>up</StemDirection>
+        <Note>
+          <voice>1</voice>
+          <pitch>84</pitch>
+          <tpc>14</tpc>
+          </Note>
+        </Chord>
+      </Measure>
+    <Measure number="7">
+      <BarLine/>
+      <Slur>
+        <startTick>7920</startTick>
+        <endTick>8160</endTick>
+        <SlurSegment no="0">
+          <o4 x="11.3771" y="-3.43958"/>
+          </SlurSegment>
+        </Slur>
+      <TimeSig>
+        <subtype>328</subtype>
+        <den>8</den>
+        <nom1>5</nom1>
+        </TimeSig>
+      <Note pitch="53" tpc="13" ticks="240"/>
+      <Note pitch="64" tpc="18" ticks="240"/>
+      <Note pitch="69" tpc="17" ticks="240"/>
+      <Note pitch="72" tpc="14" ticks="240"/>
+      <Note pitch="76" tpc="18" ticks="240"/>
+      </Measure>
+    <Measure number="8">
+      <BarLine/>
+      <Slur>
+        <startTick>9120</startTick>
+        <endTick>9360</endTick>
+        <SlurSegment no="0">
+          <o4 x="14.6403" y="-0.0881944"/>
+          </SlurSegment>
+        <up>2</up>
+        </Slur>
+      <TimeSig>
+        <subtype>392</subtype>
+        <den>8</den>
+        <nom1>6</nom1>
+        </TimeSig>
+      <Chord>
+        <ticklen>240</ticklen>
+        <StemDirection>down</StemDirection>
+        <Note pitch="57" tpc="17"/>
+        </Chord>
+      <Note pitch="76" tpc="18" ticks="240"/>
+      <Note pitch="72" tpc="14" ticks="240"/>
+      <Note pitch="67" tpc="15" ticks="240"/>
+      <Note pitch="64" tpc="18" ticks="240"/>
+      <Note pitch="59" tpc="19" ticks="240"/>
+      <Chord>
+        <voice>1</voice>
+        <tick>9120</tick>
+        <ticklen>1440</ticklen>
+        <Attribute>
+          <idx>3</idx>
+          <subtype>3</subtype>
+          <offset x="-0.176389" y="-5.64444"/>
+          <voice>1</voice>
+          </Attribute>
+        <StemDirection>up</StemDirection>
+        <Note>
+          <voice>1</voice>
+          <pitch>83</pitch>
+          <tpc>19</tpc>
+          </Note>
+        </Chord>
+      </Measure>
+    <Measure number="9">
+      <BarLine/>
+      <Slur>
+        <startTick>10560</startTick>
+        <endTick>10800</endTick>
+        <SlurSegment no="0">
+          <o4 x="11.3863" y="-3.33736"/>
+          </SlurSegment>
+        </Slur>
+      <TimeSig>
+        <subtype>328</subtype>
+        <den>8</den>
+        <nom1>5</nom1>
+        </TimeSig>
+      <Chord>
+        <ticklen>240</ticklen>
+        <StemDirection>up</StemDirection>
+        <Note pitch="60" tpc="14"/>
+        </Chord>
+      <Note pitch="64" tpc="18" ticks="240"/>
+      <Note pitch="71" tpc="19" ticks="240"/>
+      <Note pitch="72" tpc="14" ticks="240"/>
+      <Note pitch="76" tpc="18" ticks="240"/>
+      </Measure>
+    <Measure number="10">
+      <BarLine/>
+      <LayoutBreak>
+        <subtype>line</subtype>
+        </LayoutBreak>
+      <Slur>
+        <startTick>11760</startTick>
+        <endTick>12000</endTick>
+        <SlurSegment no="0">
+          <o4 x="15.1163" y="-4.95696"/>
+          </SlurSegment>
+        </Slur>
+      <TimeSig>
+        <subtype>392</subtype>
+        <den>8</den>
+        <nom1>6</nom1>
+        </TimeSig>
+      <Note pitch="55" tpc="15" ticks="240"/>
+      <Note pitch="62" tpc="16" ticks="240"/>
+      <Note pitch="65" tpc="13" ticks="240"/>
+      <Note pitch="72" tpc="14" ticks="240"/>
+      <Note pitch="74" tpc="16" ticks="240"/>
+      <Note pitch="79" tpc="15" ticks="240"/>
+      </Measure>
+    <Measure number="11">
+      <BarLine/>
+      <Dynamic>
+        <data>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-size:12pt; font-weight:400; font-style:italic;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;come prima&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
+        <offset x="-1.94192" y="12.1487"/>
+        </Dynamic>
+      <Slur>
+        <startTick>13200</startTick>
+        <endTick>13440</endTick>
+        <SlurSegment no="0">
+          <o4 x="11.0941" y="-3.63508"/>
+          </SlurSegment>
+        </Slur>
+      <TimeSig>
+        <subtype>328</subtype>
+        <den>8</den>
+        <nom1>5</nom1>
+        </TimeSig>
+      <Chord>
+        <ticklen>240</ticklen>
+        <StemDirection>up</StemDirection>
+        <Note pitch="60" tpc="14"/>
+        </Chord>
+      <Note pitch="64" tpc="18" ticks="240"/>
+      <Note pitch="71" tpc="19" ticks="240"/>
+      <Note pitch="72" tpc="14" ticks="240"/>
+      <Note pitch="76" tpc="18" ticks="240"/>
+      </Measure>
+    <Measure number="12">
+      <BarLine/>
+      <Slur>
+        <startTick>14400</startTick>
+        <endTick>14640</endTick>
+        <SlurSegment no="0">
+          <o3 x="0.59011" y="0.755341"/>
+          <o4 x="14.8236" y="-4.90971"/>
+          </SlurSegment>
+        </Slur>
+      <TimeSig>
+        <subtype>392</subtype>
+        <den>8</den>
+        <nom1>6</nom1>
+        </TimeSig>
+      <Note pitch="55" tpc="15" ticks="240"/>
+      <Note pitch="62" tpc="16" ticks="240"/>
+      <Note pitch="65" tpc="13" ticks="240"/>
+      <Note pitch="72" tpc="14" ticks="240"/>
+      <Note pitch="74" tpc="16" ticks="240"/>
+      <Note pitch="79" tpc="15" ticks="240"/>
+      </Measure>
+    <Measure number="13">
+      <BarLine/>
+      <Slur>
+        <startTick>15840</startTick>
+        <endTick>16080</endTick>
+        <SlurSegment no="0">
+          <o2 x="0.313101" y="-0.521836"/>
+          <o4 x="4.25818" y="-1.21066"/>
+          </SlurSegment>
+        </Slur>
+      <Slur>
+        <startTick>16560</startTick>
+        <endTick>16800</endTick>
+        <SlurSegment no="0">
+          <o2 x="0.0417468" y="-0.709696"/>
+          <o4 x="4.04944" y="-1.23153"/>
+          </SlurSegment>
+        </Slur>
+      <Chord>
+        <ticklen>240</ticklen>
+        <Attribute>
+          <idx>3</idx>
+          <subtype>3</subtype>
+          <offset x="0.399225" y="0.33868"/>
+          </Attribute>
+        <Note>
+          <pitch>60</pitch>
+          <tpc>14</tpc>
+          <Text>
+            <align>36</align>
+            <xoffset>0</xoffset>
+            <yoffset>0</yoffset>
+            <anchor>note</anchor>
+            <offsetType>spatium</offsetType>
+            <spatiumSizeDependent>0</spatiumSizeDependent>
+            <data>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-size:8pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;4&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
+            <subtype>Fingering</subtype>
+            <offset x="-1.54469" y="-8.18683"/>
+            </Text>
+          </Note>
+        </Chord>
+      <Chord>
+        <ticklen>240</ticklen>
+        <Note>
+          <pitch>63</pitch>
+          <tpc>11</tpc>
+          <Text>
+            <align>36</align>
+            <xoffset>0</xoffset>
+            <yoffset>0</yoffset>
+            <anchor>note</anchor>
+            <offsetType>spatium</offsetType>
+            <spatiumSizeDependent>0</spatiumSizeDependent>
+            <data>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-size:8pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;2&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
+            <subtype>Fingering</subtype>
+            <offset x="-1.69915" y="-7.10555"/>
+            </Text>
+          </Note>
+        </Chord>
+      <Chord>
+        <ticklen>240</ticklen>
+        <Note>
+          <pitch>67</pitch>
+          <tpc>15</tpc>
+          <Text>
+            <align>36</align>
+            <xoffset>0</xoffset>
+            <yoffset>0</yoffset>
+            <anchor>note</anchor>
+            <offsetType>spatium</offsetType>
+            <spatiumSizeDependent>0</spatiumSizeDependent>
+            <data>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-size:8pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;1&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
+            <subtype>Fingering</subtype>
+            <offset x="-1.69915" y="-6.48768"/>
+            </Text>
+          </Note>
+        </Chord>
+      <Chord>
+        <ticklen>240</ticklen>
+        <BeamMode>1</BeamMode>
+        <Attribute>
+          <idx>3</idx>
+          <subtype>3</subtype>
+          <offset x="0.294858" y="0.296933"/>
+          </Attribute>
+        <Note>
+          <pitch>58</pitch>
+          <tpc>12</tpc>
+          <Text>
+            <align>36</align>
+            <xoffset>0</xoffset>
+            <yoffset>0</yoffset>
+            <anchor>note</anchor>
+            <offsetType>spatium</offsetType>
+            <spatiumSizeDependent>0</spatiumSizeDependent>
+            <data>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-size:8pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;4&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
+            <subtype>Fingering</subtype>
+            <offset x="-1.54469" y="-8.18683"/>
+            </Text>
+          </Note>
+        </Chord>
+      <Chord>
+        <ticklen>240</ticklen>
+        <Note>
+          <pitch>62</pitch>
+          <tpc>16</tpc>
+          <Text>
+            <align>36</align>
+            <xoffset>0</xoffset>
+            <yoffset>0</yoffset>
+            <anchor>note</anchor>
+            <offsetType>spatium</offsetType>
+            <spatiumSizeDependent>0</spatiumSizeDependent>
+            <data>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-size:8pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;3&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
+            <subtype>Fingering</subtype>
+            <offset x="-1.85362" y="-7.26002"/>
+            </Text>
+          </Note>
+        </Chord>
+      <Chord>
+        <ticklen>240</ticklen>
+        <Note>
+          <pitch>65</pitch>
+          <tpc>13</tpc>
+          <Text>
+            <align>36</align>
+            <xoffset>0</xoffset>
+            <yoffset>0</yoffset>
+            <anchor>note</anchor>
+            <offsetType>spatium</offsetType>
+            <spatiumSizeDependent>0</spatiumSizeDependent>
+            <data>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-size:8pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;1&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
+            <subtype>Fingering</subtype>
+            <offset x="-1.69915" y="-6.48768"/>
+            </Text>
+          </Note>
+        </Chord>
+      </Measure>
+    <Measure number="14">
+      <BarLine/>
+      <Chord>
+        <ticklen>240</ticklen>
+        <Note>
+          <pitch>56</pitch>
+          <tpc>10</tpc>
+          <Text>
+            <align>36</align>
+            <xoffset>0</xoffset>
+            <yoffset>0</yoffset>
+            <anchor>note</anchor>
+            <offsetType>spatium</offsetType>
+            <spatiumSizeDependent>0</spatiumSizeDependent>
+            <data>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-size:8pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;1&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
+            <subtype>Fingering</subtype>
+            <offset x="-1.69915" y="-8.65024"/>
+            </Text>
+          </Note>
+        </Chord>
+      <Chord>
+        <ticklen>240</ticklen>
+        <Attribute>
+          <idx>3</idx>
+          <subtype>3</subtype>
+          <offset x="0.264583" y="-7.58472"/>
+          </Attribute>
+        <Note pitch="63" tpc="11"/>
+        <Note pitch="68" tpc="10"/>
+        </Chord>
+      <Chord>
+        <ticklen>240</ticklen>
+        <BeamMode>1</BeamMode>
+        <Note>
+          <pitch>56</pitch>
+          <tpc>10</tpc>
+          <Text>
+            <align>36</align>
+            <xoffset>0</xoffset>
+            <yoffset>0</yoffset>
+            <anchor>note</anchor>
+            <offsetType>spatium</offsetType>
+            <spatiumSizeDependent>0</spatiumSizeDependent>
+            <data>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-size:8pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;2&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
+            <subtype>Fingering</subtype>
+            <offset x="-1.85362" y="-8.95917"/>
+            </Text>
+          </Note>
+        </Chord>
+      <Chord>
+        <ticklen>240</ticklen>
+        <BeamMode>2</BeamMode>
+        <Attribute>
+          <idx>3</idx>
+          <subtype>3</subtype>
+          <offset x="0.264583" y="-7.58472"/>
+          </Attribute>
+        <Note pitch="65" tpc="13"/>
+        <Note>
+          <pitch>67</pitch>
+          <tpc>15</tpc>
+          <Text>
+            <align>36</align>
+            <xoffset>0</xoffset>
+            <yoffset>0</yoffset>
+            <anchor>note</anchor>
+            <offsetType>spatium</offsetType>
+            <spatiumSizeDependent>0</spatiumSizeDependent>
+            <data>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-size:8pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;0&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
+            <subtype>Fingering</subtype>
+            <offset x="-1.85362" y="-8.95918"/>
+            </Text>
+          </Note>
+        </Chord>
+      <Chord>
+        <ticklen>240</ticklen>
+        <BeamMode>1</BeamMode>
+        <Note>
+          <pitch>58</pitch>
+          <tpc>12</tpc>
+          <Text>
+            <align>36</align>
+            <xoffset>0</xoffset>
+            <yoffset>0</yoffset>
+            <anchor>note</anchor>
+            <offsetType>spatium</offsetType>
+            <spatiumSizeDependent>0</spatiumSizeDependent>
+            <data>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-size:8pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;1&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
+            <subtype>Fingering</subtype>
+            <offset x="-1.39021" y="-8.18683"/>
+            </Text>
+          </Note>
+        </Chord>
+      <Chord>
+        <ticklen>240</ticklen>
+        <Attribute>
+          <idx>3</idx>
+          <subtype>3</subtype>
+          <offset x="0.264583" y="-7.58472"/>
+          </Attribute>
+        <Note pitch="62" tpc="16"/>
+        <Note pitch="68" tpc="10"/>
+        </Chord>
+      </Measure>
+    <Measure number="15">
+      <BarLine/>
+      <LayoutBreak>
+        <subtype>line</subtype>
+        </LayoutBreak>
+      <Slur>
+        <startTick>18720</startTick>
+        <endTick>18960</endTick>
+        <SlurSegment no="0">
+          <o4 x="11.1733" y="-3.43489"/>
+          </SlurSegment>
+        </Slur>
+      <TimeSig>
+        <subtype>328</subtype>
+        <den>8</den>
+        <nom1>5</nom1>
+        </TimeSig>
+      <Note pitch="53" tpc="13" ticks="240"/>
+      <Note pitch="64" tpc="18" ticks="240"/>
+      <Note pitch="69" tpc="17" ticks="240"/>
+      <Note pitch="72" tpc="14" ticks="240"/>
+      <Note pitch="76" tpc="18" ticks="240"/>
+      </Measure>
+    <Measure number="16">
+      <BarLine/>
+      <Slur>
+        <startTick>19920</startTick>
+        <endTick>20160</endTick>
+        <SlurSegment no="0">
+          <o4 x="14.1309" y="-0.142162"/>
+          </SlurSegment>
+        <up>2</up>
+        </Slur>
+      <TimeSig>
+        <subtype>392</subtype>
+        <den>8</den>
+        <nom1>6</nom1>
+        </TimeSig>
+      <Chord>
+        <ticklen>240</ticklen>
+        <StemDirection>down</StemDirection>
+        <Note pitch="57" tpc="17"/>
+        </Chord>
+      <Note pitch="76" tpc="18" ticks="240"/>
+      <Note pitch="72" tpc="14" ticks="240"/>
+      <Note pitch="67" tpc="15" ticks="240"/>
+      <Note pitch="64" tpc="18" ticks="240"/>
+      <Note pitch="59" tpc="19" ticks="240"/>
+      <Chord>
+        <voice>1</voice>
+        <tick>19920</tick>
+        <ticklen>1440</ticklen>
+        <Attribute>
+          <idx>3</idx>
+          <subtype>3</subtype>
+          <offset x="-0.308937" y="-5.4064"/>
+          <voice>1</voice>
+          </Attribute>
+        <StemDirection>up</StemDirection>
+        <Note>
+          <voice>1</voice>
+          <pitch>84</pitch>
+          <tpc>14</tpc>
+          </Note>
+        </Chord>
+      </Measure>
+    <Measure number="17">
+      <BarLine/>
+      <Slur>
+        <startTick>21360</startTick>
+        <endTick>21600</endTick>
+        <SlurSegment no="0">
+          <o4 x="10.7475" y="-3.52563"/>
+          </SlurSegment>
+        </Slur>
+      <TimeSig>
+        <subtype>328</subtype>
+        <den>8</den>
+        <nom1>5</nom1>
+        </TimeSig>
+      <Note pitch="53" tpc="13" ticks="240"/>
+      <Note pitch="64" tpc="18" ticks="240"/>
+      <Note pitch="69" tpc="17" ticks="240"/>
+      <Note pitch="72" tpc="14" ticks="240"/>
+      <Note pitch="76" tpc="18" ticks="240"/>
+      </Measure>
+    <Measure number="18">
+      <BarLine/>
+      <Slur>
+        <startTick>22560</startTick>
+        <endTick>22800</endTick>
+        <SlurSegment no="0">
+          <o4 x="13.9319" y="-0.142162"/>
+          </SlurSegment>
+        <up>2</up>
+        </Slur>
+      <TimeSig>
+        <subtype>392</subtype>
+        <den>8</den>
+        <nom1>6</nom1>
+        </TimeSig>
+      <Chord>
+        <ticklen>240</ticklen>
+        <StemDirection>down</StemDirection>
+        <Note pitch="57" tpc="17"/>
+        </Chord>
+      <Note pitch="76" tpc="18" ticks="240"/>
+      <Note pitch="72" tpc="14" ticks="240"/>
+      <Note pitch="67" tpc="15" ticks="240"/>
+      <Note pitch="64" tpc="18" ticks="240"/>
+      <Note pitch="59" tpc="19" ticks="240"/>
+      <Chord>
+        <voice>1</voice>
+        <tick>22560</tick>
+        <ticklen>1440</ticklen>
+        <Attribute>
+          <idx>3</idx>
+          <subtype>3</subtype>
+          <offset x="0" y="-5.77186"/>
+          <voice>1</voice>
+          </Attribute>
+        <StemDirection>up</StemDirection>
+        <Note>
+          <voice>1</voice>
+          <pitch>83</pitch>
+          <tpc>19</tpc>
+          </Note>
+        </Chord>
+      </Measure>
+    <Measure number="19">
+      <BarLine/>
+      <Slur>
+        <startTick>24000</startTick>
+        <endTick>24240</endTick>
+        <SlurSegment no="0">
+          <o2 x="0.810936" y="-0.70697"/>
+          <o4 x="3.95071" y="-1.20601"/>
+          </SlurSegment>
+        </Slur>
+      <Slur>
+        <startTick>24720</startTick>
+        <endTick>24960</endTick>
+        <SlurSegment no="0">
+          <o2 x="0.956489" y="-0.873316"/>
+          <o4 x="3.90913" y="-1.16442"/>
+          </SlurSegment>
+        </Slur>
+      <Chord>
+        <ticklen>240</ticklen>
+        <Attribute>
+          <idx>3</idx>
+          <subtype>3</subtype>
+          <offset x="0.124759" y="0.270312"/>
+          </Attribute>
+        <Note pitch="60" tpc="14"/>
+        </Chord>
+      <Note pitch="63" tpc="11" ticks="240"/>
+      <Note pitch="67" tpc="15" ticks="240"/>
+      <Chord>
+        <ticklen>240</ticklen>
+        <BeamMode>1</BeamMode>
+        <Attribute>
+          <idx>3</idx>
+          <subtype>3</subtype>
+          <offset x="0.191959" y="0.161526"/>
+          </Attribute>
+        <Note pitch="58" tpc="12"/>
+        </Chord>
+      <Note pitch="62" tpc="16" ticks="240"/>
+      <Note pitch="65" tpc="13" ticks="240"/>
+      </Measure>
+    <Measure number="20">
+      <BarLine/>
+      <LayoutBreak>
+        <subtype>line</subtype>
+        </LayoutBreak>
+      <Note pitch="56" tpc="10" ticks="240"/>
+      <Chord>
+        <ticklen>240</ticklen>
+        <Attribute>
+          <idx>3</idx>
+          <subtype>3</subtype>
+          <offset x="0.508678" y="-7.503"/>
+          </Attribute>
+        <Note pitch="63" tpc="11"/>
+        <Note pitch="68" tpc="10"/>
+        </Chord>
+      <Chord>
+        <ticklen>240</ticklen>
+        <BeamMode>1</BeamMode>
+        <Note pitch="57" tpc="17"/>
+        </Chord>
+      <Chord>
+        <ticklen>240</ticklen>
+        <Attribute>
+          <idx>3</idx>
+          <subtype>3</subtype>
+          <offset x="0.508678" y="-7.503"/>
+          </Attribute>
+        <Note pitch="65" tpc="13"/>
+        <Note pitch="67" tpc="15"/>
+        </Chord>
+      <Chord>
+        <ticklen>240</ticklen>
+        <BeamMode>1</BeamMode>
+        <Note pitch="58" tpc="12"/>
+        </Chord>
+      <Chord>
+        <ticklen>240</ticklen>
+        <Attribute>
+          <idx>3</idx>
+          <subtype>3</subtype>
+          <offset x="0.254339" y="-8.52036"/>
+          </Attribute>
+        <Note pitch="62" tpc="16"/>
+        <Note pitch="68" tpc="10"/>
+        </Chord>
+      </Measure>
+    <Measure number="21">
+      <BarLine/>
+      <Slur>
+        <startTick>26880</startTick>
+        <endTick>27840</endTick>
+        <startVoice>1</startVoice>
+        <endVoice>1</endVoice>
+        <SlurSegment no="0">
+          <o4 x="7.55852" y="1.63134"/>
+          </SlurSegment>
+        <up>1</up>
+        </Slur>
+      <Slur>
+        <startTick>26880</startTick>
+        <endTick>27120</endTick>
+        <SlurSegment no="0">
+          <o4 x="6.98393" y="-2.13558"/>
+          </SlurSegment>
+        <up>2</up>
+        </Slur>
+      <TimeSig>
+        <subtype>264</subtype>
+        <den>8</den>
+        <nom1>4</nom1>
+        </TimeSig>
+      <Chord>
+        <ticklen>240</ticklen>
+        <StemDirection>down</StemDirection>
+        <Note pitch="60" tpc="14"/>
+        </Chord>
+      <Note pitch="64" tpc="18" ticks="240"/>
+      <Note pitch="71" tpc="19" ticks="240"/>
+      <Note pitch="72" tpc="14" ticks="240"/>
+      <Chord>
+        <voice>1</voice>
+        <tick>26880</tick>
+        <ticklen>960</ticklen>
+        <Attribute>
+          <idx>3</idx>
+          <subtype>3</subtype>
+          <offset x="0.0950921" y="-5.98358"/>
+          <voice>1</voice>
+          </Attribute>
+        <StemDirection>up</StemDirection>
+        <Note>
+          <voice>1</voice>
+          <pitch>76</pitch>
+          <tpc>18</tpc>
+          </Note>
+        </Chord>
+      </Measure>
+    <Measure number="22">
+      <BarLine/>
+      <Slur>
+        <startTick>27840</startTick>
+        <endTick>28080</endTick>
+        <SlurSegment no="0">
+          <o4 x="7.5034" y="-1.66533e-16"/>
+          </SlurSegment>
+        <up>2</up>
+        </Slur>
+      <Chord>
+        <ticklen>240</ticklen>
+        <StemDirection>down</StemDirection>
+        <Note pitch="59" tpc="19"/>
+        </Chord>
+      <Note pitch="65" tpc="13" ticks="240"/>
+      <Note pitch="69" tpc="17" ticks="240"/>
+      <Note pitch="54" tpc="20" ticks="240"/>
+      <Chord>
+        <voice>1</voice>
+        <tick>27840</tick>
+        <ticklen>480</ticklen>
+        <Attribute>
+          <idx>3</idx>
+          <subtype>3</subtype>
+          <offset x="-0.308937" y="-5.4064"/>
+          <voice>1</voice>
+          </Attribute>
+        <StemDirection>up</StemDirection>
+        <Note>
+          <voice>1</voice>
+          <pitch>74</pitch>
+          <tpc>16</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <voice>1</voice>
+        <ticklen>480</ticklen>
+        <StemDirection>up</StemDirection>
+        <Note>
+          <voice>1</voice>
+          <pitch>69</pitch>
+          <tpc>17</tpc>
+          </Note>
+        </Chord>
+      </Measure>
+    <Measure number="23">
+      <BarLine/>
+      <Slur>
+        <startTick>28800</startTick>
+        <endTick>29040</endTick>
+        <SlurSegment no="0">
+          <o4 x="14.2565" y="-4.84835"/>
+          </SlurSegment>
+        </Slur>
+      <TimeSig>
+        <subtype>392</subtype>
+        <den>8</den>
+        <nom1>6</nom1>
+        </TimeSig>
+      <Note pitch="55" tpc="15" ticks="240"/>
+      <Note pitch="59" tpc="19" ticks="240"/>
+      <Note pitch="65" tpc="13" ticks="240"/>
+      <Note pitch="67" tpc="15" ticks="240"/>
+      <Note pitch="71" tpc="19" ticks="240"/>
+      <Note pitch="76" tpc="18" ticks="240"/>
+      </Measure>
+    <Measure number="24">
+      <BarLine/>
+      <Slur>
+        <startTick>30240</startTick>
+        <endTick>30480</endTick>
+        <SlurSegment no="0">
+          <o4 x="8.48461" y="-5.55112e-17"/>
+          </SlurSegment>
+        <up>2</up>
+        </Slur>
+      <TimeSig>
+        <subtype>264</subtype>
+        <den>8</den>
+        <nom1>4</nom1>
+        </TimeSig>
+      <Chord>
+        <ticklen>240</ticklen>
+        <StemDirection>down</StemDirection>
+        <Note pitch="59" tpc="19"/>
+        </Chord>
+      <Note pitch="66" tpc="20" ticks="240"/>
+      <Note pitch="69" tpc="17" ticks="240"/>
+      <Note pitch="54" tpc="20" ticks="240"/>
+      <Chord>
+        <voice>1</voice>
+        <tick>30240</tick>
+        <ticklen>480</ticklen>
+        <Attribute>
+          <idx>3</idx>
+          <subtype>3</subtype>
+          <offset x="-0.308937" y="-5.4064"/>
+          <voice>1</voice>
+          </Attribute>
+        <StemDirection>up</StemDirection>
+        <Note>
+          <voice>1</voice>
+          <pitch>74</pitch>
+          <tpc>16</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <voice>1</voice>
+        <ticklen>480</ticklen>
+        <Attribute>
+          <idx>3</idx>
+          <subtype>3</subtype>
+          <offset x="-0.308937" y="-5.4064"/>
+          <voice>1</voice>
+          </Attribute>
+        <Note>
+          <voice>1</voice>
+          <pitch>69</pitch>
+          <tpc>17</tpc>
+          </Note>
+        </Chord>
+      </Measure>
+    <Measure number="25">
+      <BarLine/>
+      <Slur>
+        <startTick>31200</startTick>
+        <endTick>31440</endTick>
+        <SlurSegment no="0">
+          <o4 x="14.2565" y="-4.84835"/>
+          </SlurSegment>
+        </Slur>
+      <TimeSig>
+        <subtype>392</subtype>
+        <den>8</den>
+        <nom1>6</nom1>
+        </TimeSig>
+      <Note pitch="55" tpc="15" ticks="240"/>
+      <Note pitch="59" tpc="19" ticks="240"/>
+      <Note pitch="65" tpc="13" ticks="240"/>
+      <Note pitch="67" tpc="15" ticks="240"/>
+      <Note pitch="71" tpc="19" ticks="240"/>
+      <Note pitch="76" tpc="18" ticks="240"/>
+      </Measure>
+    <Measure number="26">
+      <BarLine/>
+      <LayoutBreak>
+        <subtype>line</subtype>
+        </LayoutBreak>
+      <Slur>
+        <startTick>32640</startTick>
+        <endTick>32880</endTick>
+        <SlurSegment no="0">
+          <o4 x="7.12077" y="-0.390179"/>
+          </SlurSegment>
+        <up>2</up>
+        </Slur>
+      <TimeSig>
+        <subtype>264</subtype>
+        <den>8</den>
+        <nom1>4</nom1>
+        </TimeSig>
+      <Chord>
+        <ticklen>240</ticklen>
+        <StemDirection>down</StemDirection>
+        <Note>
+          <pitch>64</pitch>
+          <tpc>18</tpc>
+          <Text>
+            <align>36</align>
+            <xoffset>0</xoffset>
+            <yoffset>0</yoffset>
+            <anchor>note</anchor>
+            <offsetType>spatium</offsetType>
+            <spatiumSizeDependent>0</spatiumSizeDependent>
+            <data>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-size:8pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;4&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
+            <subtype>Fingering</subtype>
+            <offset x="-2.69874" y="4.48706"/>
+            </Text>
+          </Note>
+        </Chord>
+      <Chord>
+        <ticklen>240</ticklen>
+        <Note>
+          <pitch>67</pitch>
+          <tpc>15</tpc>
+          <Text>
+            <align>36</align>
+            <xoffset>0</xoffset>
+            <yoffset>0</yoffset>
+            <anchor>note</anchor>
+            <offsetType>spatium</offsetType>
+            <spatiumSizeDependent>0</spatiumSizeDependent>
+            <data>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-size:8pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;3&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
+            <subtype>Fingering</subtype>
+            <offset x="-2.8288" y="6.5355"/>
+            </Text>
+          </Note>
+        </Chord>
+      <Chord>
+        <ticklen>240</ticklen>
+        <Note>
+          <pitch>71</pitch>
+          <tpc>19</tpc>
+          <Text>
+            <align>36</align>
+            <xoffset>0</xoffset>
+            <yoffset>0</yoffset>
+            <anchor>note</anchor>
+            <offsetType>spatium</offsetType>
+            <spatiumSizeDependent>0</spatiumSizeDependent>
+            <data>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-size:8pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;4&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
+            <subtype>Fingering</subtype>
+            <offset x="-2.34108" y="7.44592"/>
+            </Text>
+          </Note>
+        </Chord>
+      <Chord>
+        <ticklen>240</ticklen>
+        <Note>
+          <pitch>60</pitch>
+          <tpc>14</tpc>
+          <Text>
+            <align>36</align>
+            <xoffset>0</xoffset>
+            <yoffset>0</yoffset>
+            <anchor>note</anchor>
+            <offsetType>spatium</offsetType>
+            <spatiumSizeDependent>0</spatiumSizeDependent>
+            <data>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-size:8pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;1&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
+            <subtype>Fingering</subtype>
+            <offset x="-2.1785" y="4.38952"/>
+            </Text>
+          </Note>
+        </Chord>
+      <Chord>
+        <voice>1</voice>
+        <tick>32640</tick>
+        <ticklen>960</ticklen>
+        <Attribute>
+          <idx>3</idx>
+          <subtype>3</subtype>
+          <offset x="0.278672" y="-5.96963"/>
+          <voice>1</voice>
+          </Attribute>
+        <StemDirection>up</StemDirection>
+        <Note>
+          <voice>1</voice>
+          <pitch>79</pitch>
+          <tpc>15</tpc>
+          </Note>
+        </Chord>
+      </Measure>
+    <Measure number="27">
+      <BarLine/>
+      <Chord>
+        <ticklen>240</ticklen>
+        <StemDirection>down</StemDirection>
+        <Note pitch="62" tpc="16"/>
+        </Chord>
+      <Note pitch="67" tpc="15" ticks="240"/>
+      <Note pitch="71" tpc="19" ticks="240"/>
+      <Note pitch="59" tpc="19" ticks="240"/>
+      <Chord>
+        <voice>1</voice>
+        <tick>33600</tick>
+        <ticklen>960</ticklen>
+        <StemDirection>up</StemDirection>
+        <Note>
+          <voice>1</voice>
+          <pitch>77</pitch>
+          <tpc>13</tpc>
+          </Note>
+        </Chord>
+      </Measure>
+    <Measure number="28">
+      <BarLine/>
+      <Chord>
+        <ticklen>240</ticklen>
+        <StemDirection>down</StemDirection>
+        <Note pitch="60" tpc="14"/>
+        </Chord>
+      <Note pitch="67" tpc="15" ticks="240"/>
+      <Note pitch="71" tpc="19" ticks="240"/>
+      <Note pitch="57" tpc="17" ticks="240"/>
+      <Chord>
+        <voice>1</voice>
+        <tick>34560</tick>
+        <ticklen>960</ticklen>
+        <StemDirection>up</StemDirection>
+        <Note>
+          <voice>1</voice>
+          <pitch>76</pitch>
+          <tpc>18</tpc>
+          </Note>
+        </Chord>
+      </Measure>
+    <Measure number="29">
+      <BarLine/>
+      <Chord>
+        <ticklen>240</ticklen>
+        <StemDirection>down</StemDirection>
+        <Note pitch="59" tpc="19"/>
+        </Chord>
+      <Note pitch="67" tpc="15" ticks="240"/>
+      <Note pitch="71" tpc="19" ticks="240"/>
+      <Note pitch="60" tpc="14" ticks="240"/>
+      <Chord>
+        <voice>1</voice>
+        <tick>35520</tick>
+        <ticklen>960</ticklen>
+        <StemDirection>up</StemDirection>
+        <Note>
+          <voice>1</voice>
+          <pitch>74</pitch>
+          <tpc>16</tpc>
+          </Note>
+        </Chord>
+      </Measure>
+    <Measure number="30">
+      <BarLine/>
+      <TimeSig>
+        <subtype>392</subtype>
+        <den>8</den>
+        <nom1>6</nom1>
+        </TimeSig>
+      <Note pitch="57" tpc="17" ticks="240"/>
+      <Note pitch="60" tpc="14" ticks="240"/>
+      <Note pitch="64" tpc="18" ticks="240"/>
+      <Chord>
+        <ticklen>240</ticklen>
+        <BeamMode>1</BeamMode>
+        <Note pitch="55" tpc="15"/>
+        </Chord>
+      <Note pitch="59" tpc="19" ticks="240"/>
+      <Note pitch="65" tpc="13" ticks="240"/>
+      </Measure>
+    <Measure number="31">
+      <BarLine/>
+      <Note pitch="57" tpc="17" ticks="240"/>
+      <Chord>
+        <ticklen>240</ticklen>
+        <Note pitch="64" tpc="18"/>
+        <Note pitch="71" tpc="19"/>
+        </Chord>
+      <Chord>
+        <ticklen>240</ticklen>
+        <BeamMode>1</BeamMode>
+        <Note pitch="57" tpc="17"/>
+        </Chord>
+      <Chord>
+        <ticklen>240</ticklen>
+        <Note pitch="65" tpc="13"/>
+        <Note pitch="67" tpc="15"/>
+        </Chord>
+      <Chord>
+        <ticklen>240</ticklen>
+        <BeamMode>1</BeamMode>
+        <Note pitch="62" tpc="16"/>
+        <Note pitch="69" tpc="17"/>
+        </Chord>
+      <Note pitch="59" tpc="19" ticks="240"/>
+      </Measure>
+    <Measure number="32">
+      <BarLine/>
+      <LayoutBreak>
+        <subtype>line</subtype>
+        </LayoutBreak>
+      <Note pitch="57" tpc="17" ticks="240"/>
+      <Note pitch="60" tpc="14" ticks="240"/>
+      <Note pitch="64" tpc="18" ticks="240"/>
+      <Chord>
+        <ticklen>240</ticklen>
+        <BeamMode>1</BeamMode>
+        <Note pitch="57" tpc="17"/>
+        </Chord>
+      <Note pitch="59" tpc="19" ticks="240"/>
+      <Note pitch="65" tpc="13" ticks="240"/>
+      </Measure>
+    <Measure number="33">
+      <BarLine/>
+      <Note pitch="57" tpc="17" ticks="240"/>
+      <Chord>
+        <ticklen>240</ticklen>
+        <Note pitch="64" tpc="18"/>
+        <Note pitch="69" tpc="17"/>
+        </Chord>
+      <Chord>
+        <ticklen>240</ticklen>
+        <BeamMode>1</BeamMode>
+        <Note pitch="69" tpc="17"/>
+        </Chord>
+      <Chord>
+        <ticklen>240</ticklen>
+        <Note pitch="65" tpc="13"/>
+        <Note pitch="67" tpc="15"/>
+        </Chord>
+      <Chord>
+        <ticklen>240</ticklen>
+        <BeamMode>1</BeamMode>
+        <Note pitch="62" tpc="16"/>
+        <Note pitch="69" tpc="17"/>
+        </Chord>
+      <Note pitch="59" tpc="19" ticks="240"/>
+      </Measure>
+    <Measure number="34">
+      <BarLine/>
+      <TimeSig>
+        <subtype>328</subtype>
+        <den>8</den>
+        <nom1>5</nom1>
+        </TimeSig>
+      <Note pitch="60" tpc="14" ticks="240"/>
+      <Note pitch="64" tpc="18" ticks="240"/>
+      <Note pitch="71" tpc="19" ticks="240"/>
+      <Note pitch="72" tpc="14" ticks="240"/>
+      <Note pitch="76" tpc="18" ticks="240"/>
+      </Measure>
+    <Measure number="35">
+      <BarLine/>
+      <TimeSig>
+        <subtype>392</subtype>
+        <den>8</den>
+        <nom1>6</nom1>
+        </TimeSig>
+      <Note pitch="55" tpc="15" ticks="240"/>
+      <Note pitch="62" tpc="16" ticks="240"/>
+      <Note pitch="65" tpc="13" ticks="240"/>
+      <Note pitch="72" tpc="14" ticks="240"/>
+      <Note pitch="74" tpc="16" ticks="240"/>
+      <Note pitch="79" tpc="15" ticks="240"/>
+      </Measure>
+    <Measure number="36">
+      <BarLine/>
+      <TimeSig>
+        <subtype>328</subtype>
+        <den>8</den>
+        <nom1>5</nom1>
+        </TimeSig>
+      <Note pitch="60" tpc="14" ticks="240"/>
+      <Note pitch="64" tpc="18" ticks="240"/>
+      <Note pitch="71" tpc="19" ticks="240"/>
+      <Note pitch="72" tpc="14" ticks="240"/>
+      <Note pitch="76" tpc="18" ticks="240"/>
+      </Measure>
+    <Measure number="37">
+      <BarLine/>
+      <TimeSig>
+        <subtype>392</subtype>
+        <den>8</den>
+        <nom1>6</nom1>
+        </TimeSig>
+      <Note pitch="55" tpc="15" ticks="240"/>
+      <Note pitch="62" tpc="16" ticks="240"/>
+      <Note pitch="65" tpc="13" ticks="240"/>
+      <Note pitch="72" tpc="14" ticks="240"/>
+      <Note pitch="74" tpc="16" ticks="240"/>
+      <Note pitch="79" tpc="15" ticks="240"/>
+      </Measure>
+    <Measure number="38">
+      <BarLine/>
+      <LayoutBreak>
+        </LayoutBreak>
+      <Chord>
+        <ticklen>240</ticklen>
+        <Attribute>
+          <idx>3</idx>
+          <subtype>3</subtype>
+          <offset x="0.115385" y="-2.30769"/>
+          </Attribute>
+        <Note pitch="72" tpc="14"/>
+        <Note pitch="76" tpc="18"/>
+        </Chord>
+      <Note pitch="60" tpc="14" ticks="240"/>
+      <Chord>
+        <ticklen>240</ticklen>
+        <BeamMode>1</BeamMode>
+        <Attribute>
+          <idx>3</idx>
+          <subtype>3</subtype>
+          <offset x="0.576923" y="-1.96154"/>
+          </Attribute>
+        <Note pitch="71" tpc="19"/>
+        <Note pitch="74" tpc="16"/>
+        </Chord>
+      <Note pitch="58" tpc="12" ticks="240"/>
+      <Chord>
+        <ticklen>240</ticklen>
+        <BeamMode>1</BeamMode>
+        <Attribute>
+          <idx>3</idx>
+          <subtype>3</subtype>
+          <offset x="0.115385" y="-2.30769"/>
+          </Attribute>
+        <Note pitch="72" tpc="14"/>
+        <Note pitch="75" tpc="11"/>
+        </Chord>
+      <Note pitch="56" tpc="10" ticks="240"/>
+      </Measure>
+    <Measure number="39">
+      <BarLine/>
+      <Slur>
+        <startTick>48960</startTick>
+        <endTick>49200</endTick>
+        <SlurSegment no="0">
+          <o4 x="11.062" y="-5.01752"/>
+          </SlurSegment>
+        </Slur>
+      <Note pitch="55" tpc="15" ticks="240"/>
+      <Note pitch="62" tpc="16" ticks="240"/>
+      <Note pitch="65" tpc="13" ticks="240"/>
+      <Note pitch="71" tpc="19" ticks="240"/>
+      <Note pitch="76" tpc="18" ticks="240"/>
+      <Note pitch="79" tpc="15" ticks="240"/>
+      </Measure>
+    <Measure number="40">
+      <stretch>0.9</stretch>
+      <BarLine/>
+      <Chord>
+        <ticklen>240</ticklen>
+        <Attribute>
+          <idx>3</idx>
+          <subtype>3</subtype>
+          <offset x="2.59585e-07" y="-3.29224"/>
+          </Attribute>
+        <Note pitch="72" tpc="14"/>
+        <Note pitch="76" tpc="18"/>
+        </Chord>
+      <Note pitch="60" tpc="14" ticks="240"/>
+      <Chord>
+        <ticklen>240</ticklen>
+        <BeamMode>1</BeamMode>
+        <Attribute>
+          <idx>3</idx>
+          <subtype>3</subtype>
+          <offset x="2.59585e-07" y="-3.29224"/>
+          </Attribute>
+        <Note pitch="71" tpc="19"/>
+        <Note pitch="74" tpc="16"/>
+        </Chord>
+      <Note pitch="58" tpc="12" ticks="240"/>
+      <Chord>
+        <ticklen>240</ticklen>
+        <BeamMode>1</BeamMode>
+        <Attribute>
+          <idx>3</idx>
+          <subtype>3</subtype>
+          <offset x="2.59585e-07" y="-3.29224"/>
+          </Attribute>
+        <Note pitch="72" tpc="14"/>
+        <Note pitch="76" tpc="18"/>
+        </Chord>
+      <Note pitch="56" tpc="10" ticks="240"/>
+      </Measure>
+    <Measure number="41">
+      <stretch>0.9</stretch>
+      <BarLine/>
+      <Slur>
+        <startTick>51840</startTick>
+        <endTick>52080</endTick>
+        <SlurSegment no="0">
+          <o4 x="10.7979" y="-4.57739"/>
+          </SlurSegment>
+        </Slur>
+      <Note pitch="55" tpc="15" ticks="240"/>
+      <Note pitch="64" tpc="18" ticks="240"/>
+      <Note pitch="65" tpc="13" ticks="240"/>
+      <Note pitch="69" tpc="17" ticks="240"/>
+      <Note pitch="76" tpc="18" ticks="240"/>
+      <Note pitch="79" tpc="15" ticks="240"/>
+      </Measure>
+    <Measure number="42">
+      <stretch>0.9</stretch>
+      <BarLine/>
+      <TimeSig>
+        <subtype>264</subtype>
+        <den>8</den>
+        <nom1>4</nom1>
+        </TimeSig>
+      <Chord>
+        <ticklen>240</ticklen>
+        <StemDirection>down</StemDirection>
+        <Note pitch="60" tpc="14"/>
+        </Chord>
+      <Note pitch="64" tpc="18" ticks="240"/>
+      <Note pitch="71" tpc="19" ticks="240"/>
+      <Note pitch="72" tpc="14" ticks="240"/>
+      <Chord>
+        <voice>1</voice>
+        <tick>53280</tick>
+        <ticklen>960</ticklen>
+        <Attribute>
+          <idx>3</idx>
+          <subtype>3</subtype>
+          <offset x="0.19953" y="-5.6866"/>
+          <voice>1</voice>
+          </Attribute>
+        <StemDirection>up</StemDirection>
+        <Note>
+          <voice>1</voice>
+          <pitch>76</pitch>
+          <tpc>18</tpc>
+          </Note>
+        </Chord>
+      </Measure>
+    <Measure number="43">
+      <stretch>0.9</stretch>
+      <BarLine/>
+      <TimeSig>
+        <subtype>264</subtype>
+        <den>8</den>
+        <nom1>4</nom1>
+        </TimeSig>
+      <Chord>
+        <ticklen>240</ticklen>
+        <StemDirection>down</StemDirection>
+        <Note pitch="59" tpc="19"/>
+        </Chord>
+      <Note pitch="66" tpc="20" ticks="240"/>
+      <Note pitch="69" tpc="17" ticks="240"/>
+      <Note pitch="54" tpc="20" ticks="240"/>
+      <Chord>
+        <voice>1</voice>
+        <tick>54240</tick>
+        <ticklen>480</ticklen>
+        <Attribute>
+          <idx>3</idx>
+          <subtype>3</subtype>
+          <offset x="0.19953" y="-5.6866"/>
+          <voice>1</voice>
+          </Attribute>
+        <StemDirection>up</StemDirection>
+        <Note>
+          <voice>1</voice>
+          <pitch>76</pitch>
+          <tpc>18</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <voice>1</voice>
+        <ticklen>480</ticklen>
+        <Attribute>
+          <idx>3</idx>
+          <subtype>3</subtype>
+          <offset x="0.19953" y="-5.6866"/>
+          <voice>1</voice>
+          </Attribute>
+        <Note>
+          <voice>1</voice>
+          <pitch>69</pitch>
+          <tpc>17</tpc>
+          </Note>
+        </Chord>
+      </Measure>
+    <Measure number="44">
+      <stretch>0.9</stretch>
+      <BarLine/>
+      <TimeSig>
+        <subtype>392</subtype>
+        <den>8</den>
+        <nom1>6</nom1>
+        </TimeSig>
+      <Note pitch="55" tpc="15" ticks="240"/>
+      <Note pitch="59" tpc="19" ticks="240"/>
+      <Note pitch="65" tpc="13" ticks="240"/>
+      <Note pitch="67" tpc="15" ticks="240"/>
+      <Note pitch="69" tpc="17" ticks="240"/>
+      <Note pitch="71" tpc="19" ticks="240"/>
+      </Measure>
+    <Measure number="45">
+      <BarLine/>
+      <LayoutBreak>
+        <subtype>line</subtype>
+        </LayoutBreak>
+      <TimeSig>
+        <subtype>264</subtype>
+        <den>8</den>
+        <nom1>4</nom1>
+        </TimeSig>
+      <Chord>
+        <ticklen>240</ticklen>
+        <StemDirection>down</StemDirection>
+        <Note pitch="60" tpc="14"/>
+        </Chord>
+      <Note pitch="64" tpc="18" ticks="240"/>
+      <Note pitch="71" tpc="19" ticks="240"/>
+      <Note pitch="72" tpc="14" ticks="240"/>
+      <Chord>
+        <voice>1</voice>
+        <tick>56640</tick>
+        <ticklen>960</ticklen>
+        <Attribute>
+          <idx>3</idx>
+          <subtype>3</subtype>
+          <offset x="0.19953" y="-5.6866"/>
+          <voice>1</voice>
+          </Attribute>
+        <StemDirection>up</StemDirection>
+        <Note>
+          <voice>1</voice>
+          <pitch>76</pitch>
+          <tpc>18</tpc>
+          </Note>
+        </Chord>
+      </Measure>
+    <Measure number="46">
+      <BarLine/>
+      <Chord>
+        <ticklen>240</ticklen>
+        <StemDirection>down</StemDirection>
+        <Note pitch="59" tpc="19"/>
+        </Chord>
+      <Note pitch="66" tpc="20" ticks="240"/>
+      <Note pitch="69" tpc="17" ticks="240"/>
+      <Note pitch="54" tpc="20" ticks="240"/>
+      <Chord>
+        <voice>1</voice>
+        <tick>57600</tick>
+        <ticklen>480</ticklen>
+        <StemDirection>up</StemDirection>
+        <Note>
+          <voice>1</voice>
+          <pitch>74</pitch>
+          <tpc>16</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <voice>1</voice>
+        <ticklen>480</ticklen>
+        <Note>
+          <voice>1</voice>
+          <pitch>69</pitch>
+          <tpc>17</tpc>
+          </Note>
+        </Chord>
+      </Measure>
+    <Measure number="47">
+      <BarLine/>
+      <TimeSig>
+        <subtype>392</subtype>
+        <den>8</den>
+        <nom1>6</nom1>
+        </TimeSig>
+      <Rest>
+        <ticklen>1440</ticklen>
+        <BeamMode>4</BeamMode>
+        </Rest>
+      <Chord>
+        <tick>58800</tick>
+        <ticklen>240</ticklen>
+        <Note pitch="59" tpc="19"/>
+        </Chord>
+      <Note pitch="65" tpc="13" ticks="240"/>
+      <Note pitch="67" tpc="15" ticks="240"/>
+      <Note pitch="71" tpc="19" ticks="240"/>
+      <Note pitch="76" tpc="18" ticks="240"/>
+      </Measure>
+    <Measure number="48">
+      <BarLine/>
+      <Chord>
+        <ticklen>240</ticklen>
+        <StemDirection>down</StemDirection>
+        <Note pitch="57" tpc="17"/>
+        </Chord>
+      <Note pitch="76" tpc="18" ticks="240"/>
+      <Note pitch="72" tpc="14" ticks="240"/>
+      <Note pitch="67" tpc="15" ticks="240"/>
+      <Note pitch="64" tpc="18" ticks="240"/>
+      <Note pitch="59" tpc="19" ticks="240"/>
+      <Chord>
+        <voice>1</voice>
+        <tick>60000</tick>
+        <ticklen>1440</ticklen>
+        <StemDirection>up</StemDirection>
+        <Note>
+          <voice>1</voice>
+          <pitch>84</pitch>
+          <tpc>14</tpc>
+          </Note>
+        </Chord>
+      </Measure>
+    <Measure number="49">
+      <BarLine/>
+      <TimeSig>
+        <subtype>328</subtype>
+        <den>8</den>
+        <nom1>5</nom1>
+        </TimeSig>
+      <Note pitch="53" tpc="13" ticks="240"/>
+      <Note pitch="64" tpc="18" ticks="240"/>
+      <Note pitch="69" tpc="17" ticks="240"/>
+      <Note pitch="72" tpc="14" ticks="240"/>
+      <Note pitch="76" tpc="18" ticks="240"/>
+      </Measure>
+    <Measure number="50">
+      <BarLine/>
+      <TimeSig>
+        <subtype>392</subtype>
+        <den>8</den>
+        <nom1>6</nom1>
+        </TimeSig>
+      <Chord>
+        <ticklen>240</ticklen>
+        <StemDirection>down</StemDirection>
+        <Note pitch="57" tpc="17"/>
+        </Chord>
+      <Note pitch="76" tpc="18" ticks="240"/>
+      <Note pitch="72" tpc="14" ticks="240"/>
+      <Note pitch="67" tpc="15" ticks="240"/>
+      <Note pitch="64" tpc="18" ticks="240"/>
+      <Note pitch="59" tpc="19" ticks="240"/>
+      <Chord>
+        <voice>1</voice>
+        <tick>62640</tick>
+        <ticklen>1440</ticklen>
+        <StemDirection>up</StemDirection>
+        <Note>
+          <voice>1</voice>
+          <pitch>83</pitch>
+          <tpc>19</tpc>
+          </Note>
+        </Chord>
+      </Measure>
+    <Measure number="51">
+      <BarLine/>
+      <LayoutBreak>
+        <subtype>line</subtype>
+        </LayoutBreak>
+      <TimeSig>
+        <subtype>328</subtype>
+        <den>8</den>
+        <nom1>5</nom1>
+        </TimeSig>
+      <Chord>
+        <ticklen>240</ticklen>
+        <StemDirection>up</StemDirection>
+        <Note pitch="60" tpc="14"/>
+        </Chord>
+      <Note pitch="64" tpc="18" ticks="240"/>
+      <Note pitch="71" tpc="19" ticks="240"/>
+      <Note pitch="72" tpc="14" ticks="240"/>
+      <Note pitch="76" tpc="18" ticks="240"/>
+      </Measure>
+    <Measure number="52">
+      <BarLine/>
+      <TimeSig>
+        <subtype>392</subtype>
+        <den>8</den>
+        <nom1>6</nom1>
+        </TimeSig>
+      <Chord>
+        <ticklen>240</ticklen>
+        <StemDirection>down</StemDirection>
+        <Note pitch="55" tpc="15"/>
+        </Chord>
+      <Note pitch="62" tpc="16" ticks="240"/>
+      <Note pitch="65" tpc="13" ticks="240"/>
+      <Note pitch="72" tpc="14" ticks="240"/>
+      <Note pitch="74" tpc="16" ticks="240"/>
+      <Note pitch="79" tpc="15" ticks="240"/>
+      <Chord>
+        <voice>1</voice>
+        <tick>65280</tick>
+        <ticklen>960</ticklen>
+        <StemDirection>up</StemDirection>
+        <Note>
+          <voice>1</voice>
+          <pitch>81</pitch>
+          <tpc>17</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <voice>1</voice>
+        <ticklen>240</ticklen>
+        <StemDirection>up</StemDirection>
+        <Note>
+          <voice>1</voice>
+          <pitch>81</pitch>
+          <tpc>17</tpc>
+          <Tie>
+            </Tie>
+          </Note>
+        </Chord>
+      <Chord>
+        <voice>1</voice>
+        <ticklen>240</ticklen>
+        <Note>
+          <voice>1</voice>
+          <pitch>79</pitch>
+          <tpc>15</tpc>
+          </Note>
+        </Chord>
+      </Measure>
+    <Measure number="53">
+      <BarLine/>
+      <TimeSig>
+        <subtype>328</subtype>
+        <den>8</den>
+        <nom1>5</nom1>
+        </TimeSig>
+      <Note pitch="60" tpc="14" ticks="240"/>
+      <Note pitch="64" tpc="18" ticks="240"/>
+      <Note pitch="71" tpc="19" ticks="240"/>
+      <Note pitch="72" tpc="14" ticks="240"/>
+      <Note pitch="76" tpc="18" ticks="240"/>
+      <Chord>
+        <voice>1</voice>
+        <tick>66720</tick>
+        <ticklen>960</ticklen>
+        <StemDirection>up</StemDirection>
+        <Note>
+          <voice>1</voice>
+          <pitch>79</pitch>
+          <tpc>15</tpc>
+          </Note>
+        </Chord>
+      </Measure>
+    <Measure number="54">
+      <BarLine/>
+      <TimeSig>
+        <subtype>392</subtype>
+        <den>8</den>
+        <nom1>6</nom1>
+        </TimeSig>
+      <Chord>
+        <ticklen>240</ticklen>
+        <StemDirection>down</StemDirection>
+        <Note pitch="55" tpc="15"/>
+        </Chord>
+      <Note pitch="62" tpc="16" ticks="240"/>
+      <Note pitch="65" tpc="13" ticks="240"/>
+      <Note pitch="72" tpc="14" ticks="240"/>
+      <Note pitch="74" tpc="16" ticks="240"/>
+      <Note pitch="67" tpc="15" ticks="240"/>
+      <Chord>
+        <voice>1</voice>
+        <tick>67920</tick>
+        <ticklen>960</ticklen>
+        <StemDirection>up</StemDirection>
+        <Note>
+          <voice>1</voice>
+          <pitch>76</pitch>
+          <tpc>18</tpc>
+          </Note>
+        </Chord>
+      </Measure>
+    <Measure number="55">
+      <BarLine/>
+      <Chord>
+        <ticklen>240</ticklen>
+        <StemDirection>down</StemDirection>
+        <Note pitch="60" tpc="14"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Note pitch="64" tpc="18"/>
+        <Note pitch="69" tpc="17"/>
+        </Chord>
+      <Rest>
+        <offset x="0" y="2.15049"/>
+        <ticklen>120</ticklen>
+        <BeamMode>4</BeamMode>
+        </Rest>
+      <Chord>
+        <ticklen>240</ticklen>
+        <StemDirection>down</StemDirection>
+        <Note pitch="61" tpc="21"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Note pitch="64" tpc="18"/>
+        <Note pitch="67" tpc="15"/>
+        </Chord>
+      <Rest>
+        <offset x="0" y="2.00713"/>
+        <ticklen>120</ticklen>
+        <BeamMode>4</BeamMode>
+        </Rest>
+      <Chord>
+        <ticklen>240</ticklen>
+        <StemDirection>down</StemDirection>
+        <Note pitch="62" tpc="16"/>
+        </Chord>
+      <Note pitch="65" tpc="13" ticks="120"/>
+      <Rest>
+        <offset x="0" y="2.00713"/>
+        <ticklen>120</ticklen>
+        <BeamMode>4</BeamMode>
+        </Rest>
+      <Chord>
+        <voice>1</voice>
+        <tick>69360</tick>
+        <ticklen>480</ticklen>
+        <StemDirection>up</StemDirection>
+        <Note>
+          <voice>1</voice>
+          <pitch>72</pitch>
+          <tpc>14</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <voice>1</voice>
+        <ticklen>480</ticklen>
+        <StemDirection>up</StemDirection>
+        <Note>
+          <voice>1</voice>
+          <pitch>71</pitch>
+          <tpc>19</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <voice>1</voice>
+        <ticklen>480</ticklen>
+        <StemDirection>up</StemDirection>
+        <Note>
+          <voice>1</voice>
+          <pitch>70</pitch>
+          <tpc>12</tpc>
+          </Note>
+        </Chord>
+      </Measure>
+    <Measure number="56">
+      <BarLine/>
+      <LayoutBreak>
+        <subtype>line</subtype>
+        </LayoutBreak>
+      <Chord>
+        <ticklen>240</ticklen>
+        <StemDirection>down</StemDirection>
+        <Note pitch="63" tpc="11"/>
+        </Chord>
+      <Note pitch="67" tpc="15" ticks="120"/>
+      <Rest>
+        <offset x="0" y="2.05491"/>
+        <ticklen>120</ticklen>
+        <BeamMode>4</BeamMode>
+        </Rest>
+      <Chord>
+        <ticklen>240</ticklen>
+        <StemDirection>down</StemDirection>
+        <Note pitch="62" tpc="16"/>
+        </Chord>
+      <Note pitch="65" tpc="13" ticks="120"/>
+      <Rest>
+        <offset x="0" y="2.05491"/>
+        <ticklen>120</ticklen>
+        <BeamMode>4</BeamMode>
+        </Rest>
+      <Chord>
+        <ticklen>240</ticklen>
+        <StemDirection>down</StemDirection>
+        <Note pitch="61" tpc="9"/>
+        </Chord>
+      <Note pitch="66" tpc="20" ticks="120"/>
+      <Rest>
+        <offset x="0" y="2.15049"/>
+        <ticklen>120</ticklen>
+        <BeamMode>4</BeamMode>
+        </Rest>
+      <Chord>
+        <voice>1</voice>
+        <tick>70800</tick>
+        <ticklen>480</ticklen>
+        <Note>
+          <voice>1</voice>
+          <pitch>69</pitch>
+          <tpc>17</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <voice>1</voice>
+        <ticklen>480</ticklen>
+        <StemDirection>up</StemDirection>
+        <Note>
+          <voice>1</voice>
+          <pitch>70</pitch>
+          <tpc>24</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <voice>1</voice>
+        <ticklen>480</ticklen>
+        <StemDirection>up</StemDirection>
+        <Note>
+          <voice>1</voice>
+          <pitch>71</pitch>
+          <tpc>19</tpc>
+          </Note>
+        </Chord>
+      </Measure>
+    <Measure number="57">
+      <BarLine/>
+      <Chord>
+        <ticklen>240</ticklen>
+        <StemDirection>down</StemDirection>
+        <Note pitch="60" tpc="14"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Note pitch="64" tpc="18"/>
+        <Note pitch="69" tpc="17"/>
+        </Chord>
+      <Rest>
+        <offset x="0" y="2.05491"/>
+        <ticklen>120</ticklen>
+        <BeamMode>4</BeamMode>
+        </Rest>
+      <Chord>
+        <ticklen>240</ticklen>
+        <StemDirection>down</StemDirection>
+        <Note pitch="61" tpc="9"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Note pitch="64" tpc="18"/>
+        <Note pitch="67" tpc="15"/>
+        </Chord>
+      <Rest>
+        <offset x="0" y="2.05491"/>
+        <ticklen>120</ticklen>
+        <BeamMode>4</BeamMode>
+        </Rest>
+      <Chord>
+        <ticklen>240</ticklen>
+        <StemDirection>down</StemDirection>
+        <Note pitch="62" tpc="16"/>
+        </Chord>
+      <Note pitch="65" tpc="13" ticks="120"/>
+      <Rest>
+        <offset x="0" y="2.05491"/>
+        <ticklen>120</ticklen>
+        <BeamMode>4</BeamMode>
+        </Rest>
+      <Chord>
+        <voice>1</voice>
+        <tick>72240</tick>
+        <ticklen>480</ticklen>
+        <StemDirection>up</StemDirection>
+        <Note>
+          <voice>1</voice>
+          <pitch>72</pitch>
+          <tpc>14</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <voice>1</voice>
+        <ticklen>480</ticklen>
+        <StemDirection>up</StemDirection>
+        <Note>
+          <voice>1</voice>
+          <pitch>71</pitch>
+          <tpc>19</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <voice>1</voice>
+        <ticklen>480</ticklen>
+        <StemDirection>up</StemDirection>
+        <Note>
+          <voice>1</voice>
+          <pitch>70</pitch>
+          <tpc>12</tpc>
+          </Note>
+        </Chord>
+      </Measure>
+    <Measure number="58">
+      <stretch>0.9</stretch>
+      <BarLine/>
+      <Chord>
+        <ticklen>240</ticklen>
+        <StemDirection>down</StemDirection>
+        <Note pitch="63" tpc="11"/>
+        </Chord>
+      <Note pitch="67" tpc="15" ticks="120"/>
+      <Rest>
+        <offset x="0" y="2.00713"/>
+        <ticklen>120</ticklen>
+        <BeamMode>4</BeamMode>
+        </Rest>
+      <Chord>
+        <ticklen>240</ticklen>
+        <StemDirection>down</StemDirection>
+        <Note pitch="62" tpc="16"/>
+        </Chord>
+      <Note pitch="65" tpc="13" ticks="120"/>
+      <Rest>
+        <offset x="0" y="2.00713"/>
+        <ticklen>120</ticklen>
+        <BeamMode>4</BeamMode>
+        </Rest>
+      <Chord>
+        <ticklen>240</ticklen>
+        <StemDirection>down</StemDirection>
+        <Note pitch="61" tpc="9"/>
+        </Chord>
+      <Note pitch="66" tpc="20" ticks="120"/>
+      <Rest>
+        <offset x="0" y="2.1027"/>
+        <ticklen>120</ticklen>
+        <BeamMode>4</BeamMode>
+        </Rest>
+      <Chord>
+        <voice>1</voice>
+        <tick>73680</tick>
+        <ticklen>480</ticklen>
+        <Note>
+          <voice>1</voice>
+          <pitch>69</pitch>
+          <tpc>17</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <voice>1</voice>
+        <ticklen>480</ticklen>
+        <Note>
+          <voice>1</voice>
+          <pitch>70</pitch>
+          <tpc>24</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <voice>1</voice>
+        <ticklen>480</ticklen>
+        <StemDirection>up</StemDirection>
+        <Note>
+          <voice>1</voice>
+          <pitch>71</pitch>
+          <tpc>19</tpc>
+          </Note>
+        </Chord>
+      </Measure>
+    <Measure number="59">
+      <stretch>0.9</stretch>
+      <BarLine/>
+      <Chord>
+        <ticklen>240</ticklen>
+        <StemDirection>down</StemDirection>
+        <Note pitch="60" tpc="14"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Note pitch="64" tpc="18"/>
+        <Note pitch="69" tpc="17"/>
+        </Chord>
+      <Rest>
+        <offset x="0" y="2.00713"/>
+        <ticklen>120</ticklen>
+        <BeamMode>4</BeamMode>
+        </Rest>
+      <Chord>
+        <ticklen>240</ticklen>
+        <StemDirection>down</StemDirection>
+        <Note pitch="61" tpc="9"/>
+        </Chord>
+      <Chord>
+        <ticklen>120</ticklen>
+        <Note pitch="64" tpc="18"/>
+        <Note pitch="67" tpc="15"/>
+        </Chord>
+      <Rest>
+        <offset x="0" y="2.00713"/>
+        <ticklen>120</ticklen>
+        <BeamMode>4</BeamMode>
+        </Rest>
+      <Chord>
+        <ticklen>240</ticklen>
+        <StemDirection>down</StemDirection>
+        <Note pitch="62" tpc="16"/>
+        </Chord>
+      <Note pitch="65" tpc="13" ticks="120"/>
+      <Rest>
+        <offset x="0" y="2.05491"/>
+        <ticklen>120</ticklen>
+        <BeamMode>4</BeamMode>
+        </Rest>
+      <Chord>
+        <voice>1</voice>
+        <tick>75120</tick>
+        <ticklen>480</ticklen>
+        <StemDirection>up</StemDirection>
+        <Note>
+          <voice>1</voice>
+          <pitch>72</pitch>
+          <tpc>14</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <voice>1</voice>
+        <ticklen>480</ticklen>
+        <StemDirection>up</StemDirection>
+        <Note>
+          <voice>1</voice>
+          <pitch>71</pitch>
+          <tpc>19</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <voice>1</voice>
+        <ticklen>480</ticklen>
+        <StemDirection>up</StemDirection>
+        <Note>
+          <voice>1</voice>
+          <pitch>70</pitch>
+          <tpc>12</tpc>
+          </Note>
+        </Chord>
+      </Measure>
+    <Measure number="60">
+      <stretch>0.9</stretch>
+      <BarLine/>
+      <Chord>
+        <ticklen>240</ticklen>
+        <StemDirection>down</StemDirection>
+        <Note pitch="63" tpc="11"/>
+        </Chord>
+      <Note pitch="67" tpc="15" ticks="120"/>
+      <Rest>
+        <offset x="0" y="2.1027"/>
+        <ticklen>120</ticklen>
+        <BeamMode>4</BeamMode>
+        </Rest>
+      <Chord>
+        <ticklen>240</ticklen>
+        <StemDirection>down</StemDirection>
+        <Note pitch="62" tpc="16"/>
+        </Chord>
+      <Note pitch="65" tpc="13" ticks="120"/>
+      <Rest>
+        <offset x="0" y="2.00713"/>
+        <ticklen>120</ticklen>
+        <BeamMode>4</BeamMode>
+        </Rest>
+      <Chord>
+        <ticklen>240</ticklen>
+        <StemDirection>down</StemDirection>
+        <Note pitch="61" tpc="9"/>
+        </Chord>
+      <Note pitch="66" tpc="20" ticks="120"/>
+      <Rest>
+        <offset x="0" y="2.15049"/>
+        <ticklen>120</ticklen>
+        <BeamMode>4</BeamMode>
+        </Rest>
+      <Chord>
+        <voice>1</voice>
+        <tick>76560</tick>
+        <ticklen>480</ticklen>
+        <StemDirection>up</StemDirection>
+        <Note>
+          <voice>1</voice>
+          <pitch>69</pitch>
+          <tpc>17</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <voice>1</voice>
+        <ticklen>480</ticklen>
+        <StemDirection>up</StemDirection>
+        <Note>
+          <voice>1</voice>
+          <pitch>70</pitch>
+          <tpc>24</tpc>
+          </Note>
+        </Chord>
+      <Chord>
+        <voice>1</voice>
+        <ticklen>480</ticklen>
+        <StemDirection>up</StemDirection>
+        <Note>
+          <voice>1</voice>
+          <pitch>71</pitch>
+          <tpc>19</tpc>
+          </Note>
+        </Chord>
+      </Measure>
+    <Measure number="61">
+      <BarLine/>
+      <Chord>
+        <ticklen>1440</ticklen>
+        <Note pitch="55" tpc="15"/>
+        <Note pitch="59" tpc="19"/>
+        <Note pitch="65" tpc="13"/>
+        <Note pitch="67" tpc="15"/>
+        <Note pitch="71" tpc="19"/>
+        <Note pitch="76" tpc="18"/>
+        </Chord>
+      </Measure>
+    <Measure number="62">
+      <BarLine/>
+      <Chord>
+        <ticklen>1440</ticklen>
+        <Note pitch="59" tpc="19"/>
+        <Note pitch="62" tpc="16"/>
+        <Note pitch="69" tpc="17"/>
+        <Note pitch="74" tpc="16"/>
+        </Chord>
+      </Measure>
+    </Staff>
+  <cursorStaff>0</cursorStaff>
+  <cursorVoice>1</cursorVoice>
+  </museScore>

@@ -276,7 +276,7 @@ class Score : public QObject {
 
       void cmdAddText(int style);
       void upDown(bool up, bool octave);
-      Element* searchNote(int tick, int staffIdx) const;
+      Element* searchNote(int tick, int staffIdx, int voice) const;
 
       // undo/redo ops
       void endUndoRedo(Undo*);

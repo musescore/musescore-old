@@ -1074,7 +1074,7 @@ void Score::convertMidi(MidiFile* mf)
 
             part->setTrackName(part->longName().toPlainText());
             part->setMidiChannel(track->outChannel());
-            part->setMidiProgram(track->program);
+            part->setMidiProgram(track->program & 0x7f);  // only GM
             _parts.push_back(part);
 
             ++i;
@@ -1123,7 +1123,8 @@ void Score::convertMidi(MidiFile* mf)
             }
 
       tick = sigmap->bar2tick(startBar, 0, 0);
-printf("remove empty measures %d ticks\n", tick);
+if (tick)
+   printf("remove empty measures %d ticks\n", tick);
       mf->move(-tick);
 
       //---------------------------------------------------

@@ -76,8 +76,9 @@ SysStaff::~SysStaff()
 System::System(Score* s)
    : Element(s)
       {
-      barLine = new BarLine(s);
-      barLine->setParent(this);
+//      barLine = new BarLine(s);
+//      barLine->setParent(this);
+      barLine = 0;
       ml = new MeasureList;
       }
 
@@ -382,6 +383,15 @@ void System::layout2(ScoreLayout* layout)
       //---------------------------------------------------
       //    layout bars
       //---------------------------------------------------
+
+      if (staves > 1 && barLine == 0) {
+            barLine = new BarLine(score());
+            barLine->setParent(this);
+            }
+      else if (barLine) {
+            delete barLine;
+            barLine = 0;
+            }
 
       double staffY[staves];
       for (int i = 0; i < staves; ++i)

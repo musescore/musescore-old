@@ -417,7 +417,7 @@ void Score::cmdAddPitch(int note, bool addFlag)
             //
             // look for next note position
             //
-            cr = (ChordRest*)searchNote(cis->pos, cis->staff);
+            cr = (ChordRest*)searchNote(cis->pos, cis->staff, cis->voice);
             if (!cr || !cr->isChordRest()) {
                   cis->pos = -1;
                   return;
@@ -456,7 +456,6 @@ void Score::cmdAddPitch(int note, bool addFlag)
             setNote(cis->pos, staff(cis->staff), cis->voice, padState.pitch, len);
             cis->pos += len;
             }
-//      moveCursor();
       }
 
 //---------------------------------------------------------

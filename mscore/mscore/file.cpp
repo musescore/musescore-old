@@ -649,8 +649,11 @@ bool Score::loadFile(QFile* qf)
                               }
                         else if (tag == "showInvisible")
                               _showInvisible = i;
-                        else if (tag == "Symbols")
-                              symbolPalette->read(ee);
+                        else if (tag == "Symbols") {
+                              if (::symbolPalette == 0)
+                                    createSymbolPalette();
+                              ::symbolPalette->read(ee);
+                              }
                         else
                               domError(ee);
                         }

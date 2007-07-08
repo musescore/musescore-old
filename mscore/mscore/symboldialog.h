@@ -27,6 +27,7 @@ class Palette;
 class Element;
 
 extern Palette* symbolPalette;
+extern void createSymbolPalette();
 
 //---------------------------------------------------------
 //   SymbolDialog

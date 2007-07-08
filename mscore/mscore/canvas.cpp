@@ -307,8 +307,8 @@ void Canvas::mousePressEvent(QMouseEvent* ev)
       switch (state) {
             case NOTE_ENTRY:
                   if (!(keyState & Qt::AltModifier))  // Alt+move = drag canvas
-                        // _score->putNote(startMove, keyState & Qt::ShiftModifier);
-                        _score->putNote(startMove, Qt::ShiftModifier);
+                        _score->putNote(startMove, keyState & Qt::ShiftModifier);
+//                        _score->putNote(startMove, Qt::ShiftModifier);
                   break;
 
             case NORMAL:

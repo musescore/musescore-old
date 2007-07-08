@@ -58,7 +58,7 @@ enum ElementType {
       VOLTA,
       HAIRPIN_SEGMENT, OTTAVA_SEGMENT, PEDAL_SEGMENT, TRILL_SEGMENT,
       LAYOUT_BREAK,
-      HELP_LINE,
+      LEDGER_LINE,
       MEASURE, STAFF_LINES,
       CURSOR, SELECTION, LASSO, SHADOW_NOTE, RUBBERBAND,
       // not drawable elements:
