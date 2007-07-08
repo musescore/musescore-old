@@ -64,17 +64,6 @@ AttributeInfo NoteAttribute::atrList[] = {
 	};
 
 //---------------------------------------------------------
-//   HelpLine
-//---------------------------------------------------------
-
-HelpLine::HelpLine(Score* s)
-   : Line(s, false)
-      {
-      setLineWidth(style->helpLineWidth);
-      setLen(Spatium(2));
-      }
-
-//---------------------------------------------------------
 //   NoteAttribute
 //---------------------------------------------------------
 

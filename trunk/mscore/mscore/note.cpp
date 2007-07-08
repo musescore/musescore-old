@@ -623,7 +623,7 @@ void ShadowNote::draw(QPainter& p)
 
 //      if (c.intersects(r)) {
             p.translate(ap);
-            qreal lw = point(style->helpLineWidth);
+            qreal lw = point(style->ledgerLineWidth);
             QPen pen(preferences.selectColor[padState.voice].light(160));
             pen.setWidthF(lw);
             p.setPen(pen);
@@ -653,7 +653,7 @@ QRectF ShadowNote::bbox() const
       {
       QRectF b = symbols[quartheadSym].bbox();
       double x  = b.width()/2 - _spatium;
-      double lw = point(style->helpLineWidth);
+      double lw = point(style->ledgerLineWidth);
 
       QRectF r(0, -lw/2.0, 2 * _spatium, lw);
 

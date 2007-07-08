@@ -284,7 +284,7 @@ void PageListEditor::updateList()
                                                 new ElementItem(sei, chord->stem());
                                           foreach(NoteAttribute* a, *chord->getAttributes())
                                                 new ElementItem(sei, a);
-                                          foreach(HelpLine* h, *chord->getHelpLines())
+                                          foreach(LedgerLine* h, *chord->ledgerLines())
                                                 new ElementItem(sei, h);
                                           NoteList* notes = chord->noteList();
                                           for (iNote in = notes->begin(); in != notes->end(); ++in) {
@@ -632,7 +632,7 @@ void ShowChordWidget::setElement(Element* e)
             crb.attributes->addItem(item);
             }
       cb.helplineList->clear();
-      foreach(HelpLine* h, *chord->getHelpLines()) {
+      foreach(LedgerLine* h, *chord->ledgerLines()) {
             QString s;
             s.setNum(long(h), 16);
             QListWidgetItem* item = new QListWidgetItem(s, 0, long(h));

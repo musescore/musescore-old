@@ -79,23 +79,23 @@ typedef NoteList::const_iterator ciNote;
 typedef NoteList::const_reverse_iterator criNote;
 
 //---------------------------------------------------------
-//   HelpLine
+//   LedgerLine
 //---------------------------------------------------------
 
 /**
- Graphic representation of a helpline.
+ Graphic representation of a ledger line.
 */
 
-class HelpLine : public Line {
+class LedgerLine : public Line {
    public:
-      HelpLine(Score*);
-      HelpLine &operator=(const HelpLine&);
-      virtual HelpLine* clone() const { return new HelpLine(*this); }
-      virtual ElementType type() const { return HELP_LINE; }
+      LedgerLine(Score*);
+      LedgerLine &operator=(const LedgerLine&);
+      virtual LedgerLine* clone() const { return new LedgerLine(*this); }
+      virtual ElementType type() const { return LEDGER_LINE; }
       };
 
-typedef QList<HelpLine*>::iterator iHelpLine;
-typedef QList<HelpLine*>::const_iterator ciHelpLine;
+typedef QList<LedgerLine*>::iterator iLedgerLine;
+typedef QList<LedgerLine*>::const_iterator ciLedgerLine;
 
 //---------------------------------------------------------
 //   Chord
@@ -109,7 +109,7 @@ typedef QList<HelpLine*>::const_iterator ciHelpLine;
 
 class Chord : public ChordRest {
       NoteList notes;
-      QList<HelpLine*> helpLines;
+      QList<LedgerLine*> _ledgerLines;
       Stem* _stem;
       Hook* _hook;
       Direction _stemDirection;
@@ -120,7 +120,7 @@ class Chord : public ChordRest {
       virtual qreal upPos()   const;
       virtual qreal downPos() const;
       virtual qreal centerX() const;
-      void addHelpLine(double x, double y, int i);
+      void addLedgerLine(double x, double y, int i);
 
    public:
       Chord(Score*);
@@ -140,7 +140,7 @@ class Chord : public ChordRest {
       bool grace() const                     { return _grace; }
       void setGrace(bool g)                  { _grace = g; }
 
-      QList<HelpLine*>* getHelpLines() { return &helpLines; }
+      QList<LedgerLine*>* ledgerLines()      { return &_ledgerLines; }
 
       virtual void layoutStem(ScoreLayout*);
       NoteList* noteList()                   { return &notes; }
@@ -150,8 +150,6 @@ class Chord : public ChordRest {
       Note* upNote()                         { return notes.back(); }
       Note* downNote()                       { return notes.front(); }
       virtual int move() const;
-
-      QList<HelpLine*>* helpLineList() { return &helpLines; }
 
       Stem* stem()                           { return _stem; }
       void setStem(Stem* s);

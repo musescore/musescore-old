@@ -20,7 +20,7 @@
 
 /**
  \file
- Implementation of classes Chord, HelpLine, NoteList and Stem.
+ Implementation of classes Chord, LedgerLine, NoteList and Stem.
 */
 
 #include "chord.h"
@@ -220,8 +220,8 @@ QRectF Chord::bbox() const
       QRectF _bbox;
       for (ciNote i = notes.begin(); i != notes.end(); ++i)
             _bbox |= i->second->bbox().translated(i->second->pos());
-      for (ciHelpLine i = helpLines.begin(); i != helpLines.end(); ++i)
-            _bbox |= (*i)->bbox().translated((*i)->pos());
+      foreach(LedgerLine* l, _ledgerLines)
+            _bbox |= l->bbox().translated(l->pos());
       for (ciAttribute i = attributes.begin(); i != attributes.end(); ++i)
             _bbox |= (*i)->bbox().translated((*i)->pos());
       if (_hook)
@@ -328,12 +328,12 @@ void Chord::layoutStem(ScoreLayout* layout)
       }
 
 //---------------------------------------------------------
-//   addHelpLine
+//   addLedgerLine
 //---------------------------------------------------------
 
-void Chord::addHelpLine(double x, double y, int i)
+void Chord::addLedgerLine(double x, double y, int i)
       {
-      HelpLine* h = new HelpLine(score());
+      LedgerLine* h = new LedgerLine(score());
       h->setParent(this);
       double ho = 0.0;
       //
@@ -347,7 +347,7 @@ void Chord::addHelpLine(double x, double y, int i)
                   }
             }
       h->setPos(x + ho, y + _spatium * .5 * i);
-      helpLines.push_back(h);
+      _ledgerLines.push_back(h);
       }
 
 //---------------------------------------------------------
@@ -406,9 +406,9 @@ void Chord::layout(ScoreLayout* layout)
       //  process help lines
       //-----------------------------------------
 
-      for (iHelpLine l = helpLines.begin(); l != helpLines.end(); ++l)
+      for (iLedgerLine l = _ledgerLines.begin(); l != _ledgerLines.end(); ++l)
             delete *l;
-      helpLines.clear();
+      _ledgerLines.clear();
 
       //---------------------------------------------------
       //    process help lines for notes
@@ -436,9 +436,9 @@ void Chord::layout(ScoreLayout* layout)
                   y        -= s->staff(staffIdx())->bbox().y();
 
                   for (int i = -2; i >= uppos; i -= 2)
-                        addHelpLine(x, y, i);
+                        addLedgerLine(x, y, i);
                   for (int i = 10; i <= downpos; i += 2)
-                        addHelpLine(x, y, i);
+                        addLedgerLine(x, y, i);
                   }
             }
 
@@ -457,10 +457,10 @@ void Chord::layout(ScoreLayout* layout)
             x += headWidth/2 - _spatium;
 
             for (int i = -2; i >= uppos; i -= 2) {
-                  addHelpLine(x, 0.0, i);
+                  addLedgerLine(x, 0.0, i);
                   }
             for (int i = 10; i <= downpos; i += 2) {
-                  addHelpLine(x, 0.0, i);
+                  addLedgerLine(x, 0.0, i);
                   }
             }
 
@@ -488,9 +488,9 @@ void Chord::layout(ScoreLayout* layout)
                   y        -= s->staff(staffIdx())->bbox().y();
 
                   for (int i = -2; i >= uppos; i -= 2)
-                        addHelpLine(x, y, i);
+                        addLedgerLine(x, y, i);
                   for (int i = 10; i <= downpos; i += 2)
-                        addHelpLine(x, 0.0, i);
+                        addLedgerLine(x, 0.0, i);
                   }
             }
 
@@ -897,5 +897,16 @@ qreal Chord::centerX() const
             x += downnote->headWidth() * .5;
             }
       return x;
+      }
+
+//---------------------------------------------------------
+//   LedgerLine
+//---------------------------------------------------------
+
+LedgerLine::LedgerLine(Score* s)
+   : Line(s, false)
+      {
+      setLineWidth(style->ledgerLineWidth);
+      setLen(Spatium(2));
       }
 

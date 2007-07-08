@@ -140,7 +140,7 @@ Style defaultStyle = {
       1.3,              // measureSpacing
 
       Spatium(0.08),    // staff line width
-      Spatium(0.16),    // helpLineWidth;
+      Spatium(0.08),    // ledgerLineWidth;
       Spatium(1.6),     // akkoladeWidth;
       Spatium(5.5),     // akkoladeDistance;
       Spatium(0.13),    // prefixDistance
@@ -356,8 +356,8 @@ void loadStyle(QDomElement e)
                   ::style->noteBarDistance = Spatium(d);
             else if (tag == "staffLineWidth")
                   ::style->staffLineWidth = Spatium(d);
-            else if (tag == "helpLineWidth")
-                  ::style->helpLineWidth = Spatium(d);
+            else if (tag == "ledgerLineWidth")
+                  ::style->ledgerLineWidth = Spatium(d);
             else if (tag == "akkoladeWidth")
                   ::style->akkoladeWidth = Spatium(d);
             else if (tag == "akkoladeDistance")
@@ -462,15 +462,15 @@ void saveStyle(Xml& xml)
       xml.tag("barNoteDistance",        style->barNoteDistance.val());
       xml.tag("noteBarDistance",        style->noteBarDistance.val());
       xml.tag("staffLineWidth",         style->staffLineWidth.val());
-      xml.tag("helpLineWidth",          style->helpLineWidth.val());
+      xml.tag("ledgerLineWidth",        style->ledgerLineWidth.val());
       xml.tag("akkoladeWidth",          style->akkoladeWidth.val());
       xml.tag("prefixDistance",         style->prefixDistance.val());
       xml.tag("prefixNoteDistance",     style->prefixNoteDistance.val());
       xml.tag("beamWidth",              style->beamWidth.val());
       xml.tag("beamDistance",           style->beamDistance);
       xml.tag("beamMinLen",             style->beamMinLen.val());
-      xml.tag("beamMinSlope",        style->beamMinSlope);
-      xml.tag("beamMaxSlope",        style->beamMaxSlope);
+      xml.tag("beamMinSlope",           style->beamMinSlope);
+      xml.tag("beamMaxSlope",           style->beamMaxSlope);
       xml.tag("maxBeamTicks",           style->maxBeamTicks);
       xml.tag("dotNoteDistance",        style->dotNoteDistance.val());
       xml.tag("dotRestDistance",        style->dotRestDistance.val());

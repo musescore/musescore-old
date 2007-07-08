@@ -52,7 +52,7 @@ const char* elementNames[] = {
       "Volta",
       "HairpinSegment", "OttavaSegment", "PedalSegment", "TrillSegment",
       "LayoutBreak",
-      "HelpLine",
+      "LedgerLine",
       "Measure", "StaffLines",
       "Cursor", "Selection", "Lasso", "ShadowNote", "RubberBand",
       "Hairpin", "Ottava", "Pedal", "Trill",
@@ -855,8 +855,8 @@ int Element::readType(QDomElement& e, QPointF* dragOffset)
                   type = TRILL;
             else if (e.tagName() == "LayoutBreak")
                   type = LAYOUT_BREAK;
-            else if (e.tagName() == "HelpLine")
-                  type = HELP_LINE;
+            else if (e.tagName() == "LedgerLine")
+                  type = LEDGER_LINE;
             else if (e.tagName() == "Image")
                   type = IMAGE;
             else {

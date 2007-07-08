@@ -1529,7 +1529,6 @@ int main(int argc, char* argv[])
       QCoreApplication::setOrganizationName("MusE");
       QCoreApplication::setOrganizationDomain("muse.org");
       QCoreApplication::setApplicationName("MuseScore");
-//      preferences.createSymbolPalette();
 
 #ifdef __MINGW32__
       appDpiX = 75;

@@ -133,7 +133,7 @@ struct Style {
       double measureSpacing;
 
       Spatium staffLineWidth;
-      Spatium helpLineWidth;
+      Spatium ledgerLineWidth;
       Spatium akkoladeWidth;
       Spatium akkoladeDistance;
       Spatium prefixDistance;
