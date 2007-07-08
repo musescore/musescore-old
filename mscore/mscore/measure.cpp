@@ -342,13 +342,15 @@ void Measure::layoutNoteHeads(int staff)
                         continue;
                   Chord* chord   = (Chord*)e;
                   NoteList* nl   = chord->noteList();
-                  bool mirror    = false;   // start with head left from stem
+                  bool mirror    = false;
                   int tick       = chord->tick();
-                  int ll         = -1000;    // make sure top head is not mirrored
+                  int ll         = 1000;
+
                   int move1      = nl->front()->move();
                   Tuplet* tuplet = chord->tuplet();
 
-                  for (riNote in = nl->rbegin(); in != nl->rend(); ++in) {
+//                  for (riNote in = nl->rbegin(); in != nl->rend(); ++in) {
+                  for (iNote in = nl->begin(); in != nl->end(); ++in) {
                         Note* note  = in->second;
                         int pitch   = note->pitch();
                         if (drumset) {
@@ -408,7 +410,8 @@ void Measure::layoutNoteHeads(int staff)
                         line = 127 - line - 82 + clefTable[clef].yOffset;
                         note->setLine(line);
 
-                        if (mirror || (((line - ll) < 2) && move1 == move))
+                        // if (mirror || (((line - ll) < 2) && move1 == move))
+                        if (mirror || (((ll - line) < 2) && move1 == move))
                               mirror = !mirror;
 
                         move1 = move;
