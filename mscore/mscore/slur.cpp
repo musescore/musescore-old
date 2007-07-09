@@ -110,6 +110,13 @@ void SlurSegment::draw(QPainter& p)
       p.setBrush(color());
       p.drawPath(path);
       if (selected() && mode) {
+            // update grips
+            qreal w = 8.0 / p.matrix().m11();
+            qreal h = 8.0 / p.matrix().m22();
+            QRectF r(-w*.5, -h*.5, w, h);
+            for (int i = 0; i < 4; ++i)
+                  ups[i].r = r.translated(ups[i].p + ups[i].off * _spatium);
+
             qreal lw = 2.0/p.matrix().m11();
             QPen pen(Qt::blue);
             pen.setWidthF(lw);
@@ -136,9 +143,8 @@ void SlurSegment::updateGrips(const QMatrix& matrix)
       qreal h = 8.0 / matrix.m22();
       QRectF r(-w*.5, -h*.5, w, h);
 
-      for (int i = 0; i < 4; ++i) {
+      for (int i = 0; i < 4; ++i)
             ups[i].r = r.translated(ups[i].p + ups[i].off * _spatium);
-            }
       updatePath();
       }
 
@@ -157,15 +163,15 @@ bool SlurSegment::startEdit(QMatrix& matrix, const QPointF&)
 //   edit
 //---------------------------------------------------------
 
-bool SlurSegment::edit(QKeyEvent* ev)
+bool SlurSegment::edit(QMatrix& matrix, QKeyEvent* ev)
       {
       QPointF ppos(canvasPos());
 
       if ((ev->modifiers() & Qt::ShiftModifier)) {
             if (ev->key() == Qt::Key_Left)
-                  slur->prevSeg(canvasPos(), mode, ups[mode-1]);
+                  slur->prevSeg(canvasPos(), mode);
             else if (ev->key() == Qt::Key_Right)
-                  slur->nextSeg(canvasPos(), mode, ups[mode-1]);
+                  slur->nextSeg(canvasPos(), mode);
             return false;
             }
 
@@ -375,39 +381,10 @@ void SlurSegment::read(QDomElement e)
       }
 
 //---------------------------------------------------------
-//   contains
-//    return true if p is inside of bounding box of object
-//    p is relative to the coordinate system of parent()
-//---------------------------------------------------------
-
-#if 0
-bool SlurSegment::contains(const QPointF& p) const
-      {
-      QPointF pp(p);
-      pp -= pos();
-      QPointF ffp[4];
-      for (int i = 0; i < 4; ++i)
-            ffp[i] = ups[i].p + ups[i].off * _spatium;
-
-      QRectF r(ffp[0], QSizeF(ffp[1].x(), ffp[1].y()));
-      for (int i = 2; i < 4; ++i)
-            r |= QRectF(ffp[i], QSizeF(1, 1));
-      if (mode) {
-            for (int i = 0; i < 4; ++i)
-                  r |= ups[i].r;
-            }
-//      QRectF rr(r.expand(1));
-      if (r.contains(pp))
-            return true;
-      return false;
-      }
-#endif
-
-//---------------------------------------------------------
 //   layout
 //---------------------------------------------------------
 
-void SlurSegment::layout(ScoreLayout*, const QPointF& p1, const QPointF& p2, qreal b)
+void SlurSegment::layout(ScoreLayout* layout, const QPointF& p1, const QPointF& p2, qreal b)
       {
 // printf("SlurSegment %p %p layout\n", slur, this);
       bow = b;
@@ -441,6 +418,7 @@ void SlurSegment::layout(ScoreLayout*, const QPointF& p1, const QPointF& p2, qre
       ups[1].p = QPointF(x1, y1);
       ups[2].p = QPointF(x2, y2);
       updatePath();
+//      updateGrips(layout->matrix());
       }
 
 //---------------------------------------------------------
@@ -463,6 +441,17 @@ void SlurSegment::dump() const
             ups[1].off.x(), ups[1].off.y(),
             ups[2].off.x(), ups[2].off.y(),
             ups[3].off.x(), ups[3].off.y());
+      }
+
+//---------------------------------------------------------
+//   genPropertyMenu
+//---------------------------------------------------------
+
+bool SlurSegment::genPropertyMenu(QMenu* popup) const
+      {
+      QAction* a = popup->addAction(QT_TR_NOOP("Edit Mode"));
+      a->setData("edit");
+      return true;
       }
 
 //---------------------------------------------------------
@@ -644,62 +633,74 @@ Slur::~Slur()
 //   nextSeg
 //---------------------------------------------------------
 
-void Slur::nextSeg(const QPointF ppos, int mode, struct UP& ups)
+void Slur::nextSeg(const QPointF ppos, int mode)
       {
       if (mode != 1 && mode != 4)
             return;
-      int tick = mode == 1 ? _tick1 : _tick2;
-      Segment* seg = _score->tick2segment(tick);
-      seg = seg->next1();
+      int track;
+      Segment* seg;
+      if (mode == 1) {
+            seg   = _score->tick2segment(_tick1);
+            track = (_staff1->idx() * VOICES) + _voice1;
+            }
+      else {
+            seg = _score->tick2segment(_tick2);
+            track = (_staff2->idx() * VOICES) + _voice2;
+            }
+      while (seg) {
+            seg = seg->next1();
+            if (seg == 0)
+                  break;
+            if (seg->subtype() != Segment::SegChordRest)
+                  continue;
+            if (seg->element(track))
+                  break;
+            }
       if (seg == 0) {
             printf("no seg found\n");
             return;
             }
-      if (tick == seg->tick())
-            return;
-
-      System* s;
-      if (mode == 1) {
-            QPointF p(ups.p + ups.off * _spatium + ppos);
+      if (mode == 1)
             _tick1 = seg->tick();
-            ups.p = slurPos(_tick1, _staff1, _voice1, s);
-            }
-      else {
-            QPointF p(ups.p + ups.off * _spatium + ppos);
-            _tick2  = seg->tick();
-            ups.p = slurPos(_tick2, _staff2, _voice2, s);
-            }
+      else
+            _tick2 = seg->tick();
       }
 
 //---------------------------------------------------------
 //   prevSeg
 //---------------------------------------------------------
 
-void Slur::prevSeg(const QPointF ppos, int mode, struct UP& ups)
+void Slur::prevSeg(const QPointF ppos, int mode)
       {
       if (mode != 1 && mode != 4)
             return;
-      int tick = mode == 1 ? _tick1 : _tick2;
-      Segment* seg = _score->tick2segment(tick);
-      seg = seg->prev1();
+      int track;
+      Segment* seg;
+      if (mode == 1) {
+            seg   = _score->tick2segment(_tick1);
+            track = (_staff1->idx() * VOICES) + _voice1;
+            }
+      else {
+            seg = _score->tick2segment(_tick2);
+            track = (_staff2->idx() * VOICES) + _voice2;
+            }
+      while (seg) {
+            seg = seg->prev1();
+            if (seg == 0)
+                  break;
+            if (seg->subtype() != Segment::SegChordRest)
+                  continue;
+            if (seg->element(track))
+                  break;
+            }
       if (seg == 0) {
             printf("no seg found\n");
             return;
             }
-      if (tick == seg->tick())
-            return;
-
-      System* s;
-      if (mode == 1) {
-            QPointF p(ups.p + ups.off * _spatium + ppos);
+      if (mode == 1)
             _tick1 = seg->tick();
-            ups.p = slurPos(_tick1, _staff1, _voice1, s);
-            }
-      else {
-            QPointF p(ups.p + ups.off * _spatium + ppos);
-            _tick2  = seg->tick();
-            ups.p = slurPos(_tick2, _staff2, _voice2, s);
-            }
+      else
+            _tick2 = seg->tick();
       }
 
 //---------------------------------------------------------

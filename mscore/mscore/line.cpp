@@ -161,7 +161,7 @@ bool LineSegment::editDrag(Viewer* viewer, QPointF* start, const QPointF& d)
 //   edit
 //---------------------------------------------------------
 
-bool LineSegment::edit(QKeyEvent* ev)
+bool LineSegment::edit(QMatrix&, QKeyEvent* ev)
       {
       QPointF delta;
       switch (ev->key()) {

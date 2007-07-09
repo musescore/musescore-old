@@ -40,13 +40,6 @@
  * every sample.
  */
 
-# if defined(WITH_FLOATX)
-# define zap_almost_zero(sample) (((*(unsigned int*)&(sample))&0x7f800000) < 0x08000000)?0.0f:(sample)
-# else
-/* 1e-20 was chosen as an arbitrary (small) threshold. */
-#define zap_almost_zero(sample) fabs(sample)<1e-10 ? 0 : sample;
-#endif
-
 /* Denormalising part II:
  *
  * Another method fixes the problem cheaper: Use a small DC-offset in

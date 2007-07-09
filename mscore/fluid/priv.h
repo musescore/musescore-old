@@ -139,11 +139,7 @@
  *         BASIC TYPES
  */
 
-#if defined(WITH_FLOAT)
 typedef float fluid_real_t;
-#else
-typedef double fluid_real_t;
-#endif
 
 
 typedef enum {

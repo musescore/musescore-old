@@ -163,7 +163,7 @@ bool Accidental::startEdit(QMatrix&, const QPointF&)
 //   edit
 //---------------------------------------------------------
 
-bool Accidental::edit(QKeyEvent* ev)
+bool Accidental::edit(QMatrix&, QKeyEvent* ev)
       {
       int key = ev->key();
 

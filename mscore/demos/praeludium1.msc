@@ -33,7 +33,7 @@
     <barNoteDistance>1.5</barNoteDistance>
     <noteBarDistance>1</noteBarDistance>
     <staffLineWidth>0.08</staffLineWidth>
-    <helpLineWidth>0.16</helpLineWidth>
+    <ledgerLineWidth>0.08</ledgerLineWidth>
     <akkoladeWidth>1.6</akkoladeWidth>
     <prefixDistance>0.13</prefixDistance>
     <prefixNoteDistance>0.22</prefixNoteDistance>

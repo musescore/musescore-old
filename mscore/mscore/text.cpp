@@ -458,7 +458,7 @@ bool Text::startEdit(QMatrix&, const QPointF& p)
 //   edit
 //---------------------------------------------------------
 
-bool Text::edit(QKeyEvent* ev)
+bool Text::edit(QMatrix&, QKeyEvent* ev)
       {
       int key = ev->key();
       if (key == Qt::Key_F2) {

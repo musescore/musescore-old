@@ -199,7 +199,7 @@ bool Image::editDrag(Viewer*, QPointF*, const QPointF& d)
 //   edit
 //---------------------------------------------------------
 
-bool Image::edit(QKeyEvent* ev)
+bool Image::edit(QMatrix&, QKeyEvent* ev)
       {
       QPointF delta;
       switch (ev->key()) {

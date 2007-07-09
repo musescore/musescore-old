@@ -146,7 +146,7 @@ class Note : public Element {
       virtual Element* drop(const QPointF&, const QPointF&, int, const QDomElement&);
 
       virtual bool startEdit(QMatrix&, const QPointF&);
-      virtual bool edit(QKeyEvent*);
+      virtual bool edit(QMatrix&, QKeyEvent*);
       virtual void endEdit();
       bool isSimple(Xml&) const;
       };

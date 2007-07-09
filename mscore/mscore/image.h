@@ -40,7 +40,7 @@ class Image : public BSymbol {
       int mode;
 
       virtual bool startEdit(QMatrix&, const QPointF&);
-      virtual bool edit(QKeyEvent*);
+      virtual bool edit(QMatrix&, QKeyEvent*);
       virtual bool startEditDrag(Viewer*, const QPointF&);
       virtual bool editDrag(Viewer*, QPointF*, const QPointF&);
       virtual bool endEditDrag();

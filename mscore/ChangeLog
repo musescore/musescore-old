@@ -1,4 +1,6 @@
 9.7.7 (ws)
+      - call LedgerLine->layout() to compute correct bounding box needed
+        for redraw auf ledger lines
       - layout all beams before layout slurs
       - tick position are not saved in some situations
       - allow removal of notes/chords/rests if not voice 0

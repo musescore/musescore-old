@@ -71,10 +71,12 @@ class SlurSegment : public Element {
       virtual bool startEditDrag(Viewer*, const QPointF&);
       virtual bool editDrag(Viewer*, QPointF*, const QPointF&);
       virtual bool endEditDrag();
-      virtual bool edit(QKeyEvent* ev);
+      virtual bool edit(QMatrix&, QKeyEvent* ev);
 
       virtual void move(qreal xd, qreal yd) { move(QPointF(xd, yd)); }
       virtual void move(const QPointF& s);
+
+      virtual bool genPropertyMenu(QMenu*) const;
 
       SlurTie* slurTie() const     { return slur; }
       void setSlurTie(SlurTie* st) { slur = st; }
@@ -109,8 +111,8 @@ class SlurTie : public Element {
       void setSlurDirection(Direction d) { _slurDirection = d; }
 
       virtual void layout2(ScoreLayout*, const QPointF, int, struct UP&)  {}
-      virtual void nextSeg(const QPointF, int, struct UP&)  {}
-      virtual void prevSeg(const QPointF, int, struct UP&)  {}
+      virtual void nextSeg(const QPointF, int)  {}
+      virtual void prevSeg(const QPointF, int)  {}
       virtual void setSelected(bool f);
       virtual bool contains(const QPointF&) const { return false; }  // not selectable
 
@@ -140,8 +142,8 @@ class Slur : public SlurTie {
       virtual void read(Score*, QDomElement);
       virtual void layout(ScoreLayout*);
       virtual void layout2(ScoreLayout*, const QPointF, int, struct UP&);
-      virtual void nextSeg(const QPointF, int, struct UP&);
-      virtual void prevSeg(const QPointF, int, struct UP&);
+      virtual void nextSeg(const QPointF, int);
+      virtual void prevSeg(const QPointF, int);
       virtual QRectF bbox() const;
 
       void setStart(int t, Staff* staff, int voice);

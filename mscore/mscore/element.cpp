@@ -500,10 +500,11 @@ void Line::layout(ScoreLayout* layout)
       double spatium = layout->spatium();
       double w = _width.val() * spatium;
       double l = _len.val() * spatium;
+      double w2 = w * .5;
       if (vertical)
-            setbbox(QRectF(-w*.5, 0, w, l));
+            setbbox(QRectF(-w2, -w2, w, l + w));
       else
-            setbbox(QRectF(0, -w*.5, l, w));
+            setbbox(QRectF(-w2, -w2, l + w, w));
       }
 
 //---------------------------------------------------------

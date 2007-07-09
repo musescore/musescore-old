@@ -190,12 +190,12 @@ class Element {
       virtual QRectF drag(const QPointF& s);
       virtual void endDrag()                  {}
 
-      virtual bool startEdit(QMatrix&, const QPointF&)   { return false; }
-      virtual bool edit(QKeyEvent*)           { return false;}
-      virtual bool startEditDrag(Viewer*, const QPointF&)  { return false; }
+      virtual bool startEdit(QMatrix&, const QPointF&)         { return false; }
+      virtual bool edit(QMatrix&, QKeyEvent*)                  { return false;}
+      virtual bool startEditDrag(Viewer*, const QPointF&)      { return false; }
       virtual bool editDrag(Viewer*, QPointF*, const QPointF&) { return false; }
-      virtual bool endEditDrag()              { return false;}
-      virtual void endEdit()                  {}
+      virtual bool endEditDrag()                               { return false;}
+      virtual void endEdit()                                   {}
 
       Staff* staff() const                    { return _staff; }
       int staffIdx() const;
@@ -264,7 +264,7 @@ class Element {
       virtual void setSubtype(const QString& s) { setSubtype(s.toInt()); }
 
 /**
- entend property menu by elemement specific items
+ extend property menu by elemement specific items
  */
       virtual bool genPropertyMenu(QMenu*) const { return false; }
       virtual void propertyAction(const QString&) {}
