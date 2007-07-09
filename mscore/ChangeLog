@@ -1,3 +1,9 @@
+9.7.7 (ws)
+      - layout all beams before layout slurs
+      - tick position are not saved in some situations
+      - allow removal of notes/chords/rests if not voice 0
+      - double click on slur did not select slur; edit mode was
+        not visible
 7.7.7 (ws)
       - use current voice when entering notes with mouse
       - fix crash when deleting last measure
