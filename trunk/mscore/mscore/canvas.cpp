@@ -207,6 +207,10 @@ void Canvas::objectPopup(const QPoint& pos, Element* obj)
             _score->toggleInvisible(obj);
       else if (cmd == "color")
             _score->colorItem(obj);
+      else if (cmd == "edit") {
+            if (startEdit(obj))
+                  return;
+            }
       else
             obj->propertyAction(cmd);
       _score->endCmd(true);

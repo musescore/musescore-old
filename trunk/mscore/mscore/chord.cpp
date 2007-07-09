@@ -406,8 +406,8 @@ void Chord::layout(ScoreLayout* layout)
       //  process help lines
       //-----------------------------------------
 
-      for (iLedgerLine l = _ledgerLines.begin(); l != _ledgerLines.end(); ++l)
-            delete *l;
+      foreach(LedgerLine* l, _ledgerLines)
+            delete l;
       _ledgerLines.clear();
 
       //---------------------------------------------------
@@ -493,6 +493,9 @@ void Chord::layout(ScoreLayout* layout)
                         addLedgerLine(x, 0.0, i);
                   }
             }
+
+      foreach(LedgerLine* l, _ledgerLines)
+            l->layout(layout);
 
       //-----------------------------------------
       //  Note Attributes

@@ -821,9 +821,9 @@ void Score::startEdit(Element* element)
  Return true if end edit.
 */
 
-bool Score::edit(QKeyEvent* ev)
+bool Score::edit(QMatrix& matrix, QKeyEvent* ev)
       {
-      if ((ev->key() == Qt::Key_Escape) || editObject->edit(ev)) {
+      if ((ev->key() == Qt::Key_Escape) || editObject->edit(matrix, ev)) {
             endEdit();
             endCmd(true);
             return true;

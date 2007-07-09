@@ -1827,7 +1827,7 @@ void fluid_synth_kill_by_exclusive_class(fluid_synth_t* synth, fluid_voice_t* ne
   */
 
   int i;
-  int excl_class = _GEN(new_voice,GEN_EXCLUSIVECLASS);
+  int excl_class = _GEN(new_voice, GEN_EXCLUSIVECLASS);
 
   /* Check if the voice belongs to an exclusive class. In that case,
      previous notes from the same class are released. */

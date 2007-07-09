@@ -368,7 +368,7 @@ fluid_chorus_update(fluid_chorus_t* chorus)
   }
 
   /* The modulating LFO goes through a full period every x samples: */
-  chorus->modulation_period_samples = chorus->sample_rate / chorus->new_speed_Hz;
+  chorus->modulation_period_samples = lrint(chorus->sample_rate / chorus->new_speed_Hz);
 
   /* The variation in delay time is x: */
   modulation_depth_samples = (int)

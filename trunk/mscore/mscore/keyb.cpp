@@ -54,10 +54,10 @@ void Canvas::keyPressEvent(QKeyEvent* ev)
                         _score->lyricsReturn();
                   else if (ev->key() == Qt::Key_Minus)
                         _score->lyricsMinus();
-                  else if (_score->edit(ev))
+                  else if (_score->edit(_matrix, ev))
                         state = NORMAL;
                   }
-            else if (_score->edit(ev))
+            else if (_score->edit(_matrix, ev))
                   state = NORMAL;
             ev->accept();
             }

@@ -258,7 +258,7 @@ bool Bracket::editDrag(Viewer* v, QPointF*, const QPointF& delta)
 //   edit
 //---------------------------------------------------------
 
-bool Bracket::edit(QKeyEvent* ev)
+bool Bracket::edit(QMatrix&, QKeyEvent* ev)
       {
       if (editMode == 0)
             return false;

@@ -75,8 +75,8 @@ class ScoreLayout {
       //
       // generated objects by layout():
       //
-      PageList* _pages;        // pages are build from systems
-      QList<System*>* _systems;    // measures are akkumulated to systems
+      PageList* _pages;             // pages are build from systems
+      QList<System*>* _systems;     // measures are akkumulated to systems
 
       bool _needLayout;
 

@@ -477,8 +477,6 @@ System* ScoreLayout::layoutSystem(Measure*& im, System* system, qreal x, qreal y
 
             mwList.push_back(ww);
             double stretch = m->userStretch() * ::style->measureSpacing;
-// printf("layout min %f ww %f  wwStretch %f(%f) systemWidth %f\n",
-//    minWidth, ww, ww * stretch, point(::style->minMeasureWidth), systemWidth);
 
             ww *= stretch;
             if (ww < point(::style->minMeasureWidth))

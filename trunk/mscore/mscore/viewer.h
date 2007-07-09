@@ -30,9 +30,9 @@ class ScoreLayout;
 //---------------------------------------------------------
 
 class Viewer {
-      Score* _score;
 
    protected:
+      Score* _score;
 
       // the next elements are used during dragMove to give some visual
       // feedback:
@@ -54,6 +54,7 @@ class Viewer {
       Viewer();
       virtual ~Viewer() {}
       void setScore(Score* s) { _score = s; }
+      Score* score() const    { return _score; }
       ScoreLayout* layout();
       virtual void dataChanged(const QRectF&) = 0;
 

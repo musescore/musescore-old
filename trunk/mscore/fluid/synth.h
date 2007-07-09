@@ -45,11 +45,7 @@
 #define FLUID_NUM_PROGRAMS      129
 #define DRUM_INST_MASK         ((unsigned int)0x80000000)
 
-#if defined(WITH_FLOAT)
 #define FLUID_SAMPLE_FORMAT     FLUID_SAMPLE_FLOAT
-#else
-#define FLUID_SAMPLE_FORMAT     FLUID_SAMPLE_DOUBLE
-#endif
 
 
 /***************************************************************

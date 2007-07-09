@@ -752,7 +752,7 @@ bool Note::startEdit(QMatrix&, const QPointF&)
 //   edit
 //---------------------------------------------------------
 
-bool Note::edit(QKeyEvent* ev)
+bool Note::edit(QMatrix&, QKeyEvent* ev)
       {
       int key = ev->key();
 

@@ -160,12 +160,6 @@
 /* Version number of package */
 #define VERSION "1.0.8"
 
-/* Define to do all DSP in single floating point precision */
-#define WITH_FLOAT 1
-
-/* Define to profile the DSP code */
-/* #undef WITH_PROFILING */
-
 /* Define to use the readline library for line editing */
 #define WITH_READLINE 1
 
