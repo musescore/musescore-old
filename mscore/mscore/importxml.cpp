@@ -273,7 +273,7 @@ void MusicXml::scorePartwise(QDomElement e)
                         }
                   }
             else if (tag == "defaults") {
-                  for (QDomElement ee = ee.firstChildElement(); !ee.isNull(); ee = ee.nextSiblingElement()) {
+                  for (QDomElement ee = e.firstChildElement(); !ee.isNull(); ee = ee.nextSiblingElement()) {
                         QString tag(ee.tagName());
                         if (tag == "scaling") {
                               double millimeter = _spatium/10.0;
