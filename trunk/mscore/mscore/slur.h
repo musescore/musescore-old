@@ -82,6 +82,7 @@ class SlurSegment : public Element {
       void write(Xml& xml, int no) const;
       void read(QDomElement);
       void dump() const;
+      int getMode() const { return mode; }
       };
 
 //---------------------------------------------------------

@@ -281,7 +281,7 @@ void Element::writeProperties(Xml& xml) const
       {
       xml.prop(properties(xml));
       if (_time.isValid() && (_time.tick() != xml.curTick))
-            score()->curTick = _time.tick();
+            xml.curTick = _time.tick();
       }
 
 //---------------------------------------------------------

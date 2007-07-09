@@ -794,9 +794,10 @@ void Score::startEdit(Element* element)
             if (idx == -1)
                   abort();
             editObject = newSlur->elements()->at(idx);
-
-
+            editObject->setSelected(false);
             select(editObject, 0, 0);
+            segment = (SlurSegment*)editObject;
+
             undoOp(UndoOp::RemoveElement, slur);
             undoAddElement(newSlur);
             }

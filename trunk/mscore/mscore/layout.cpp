@@ -190,6 +190,9 @@ void ScoreLayout::doLayout()
       //---------------------------------------------------
 
       for (Measure* m = first(); m; m = m->next()) {
+            m->layoutBeams(this);
+            }
+      for (Measure* m = first(); m; m = m->next()) {
             m->layout2(this);
             }
 
@@ -692,9 +695,11 @@ void ScoreLayout::connectTies()
                                     continue;
                               Note* nnote = searchTieNote(in->second, s, i);
                               if (nnote == 0)
-                                    printf("next note at %d(measure %d) for tie not found\n",
+                                    printf("next note at %d(measure %d) voice %d for tie not found\n",
                                        in->second->chord()->tick(),
-                                       m->no());
+                                       m->no(),
+                                       in->second->chord()->voice()
+                                       );
                               else {
                                     tie->setEndNote(nnote);
                                     nnote->setTieBack(tie);

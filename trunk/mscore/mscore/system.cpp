@@ -176,6 +176,7 @@ double System::layout(ScoreLayout* layout, const QPointF& p, double w)
       static const double instrumentNameOffset = 1;
       setPos(p);
       setWidth(w);
+      int nstaves  = _staves.size();
 
       //---------------------------------------------------
       //  find x position of staves
@@ -263,6 +264,14 @@ double System::layout(ScoreLayout* layout, const QPointF& p, double w)
             y += 4 * _spatium + s->distance();
             }
 
+      if (nstaves > 1 && barLine == 0) {
+            barLine = new BarLine(score());
+            barLine->setParent(this);
+            }
+      else if (nstaves <= 1 && barLine) {
+            delete barLine;
+            barLine = 0;
+            }
       if (barLine)
             barLine->setPos(x, 0);
 
@@ -271,7 +280,6 @@ double System::layout(ScoreLayout* layout, const QPointF& p, double w)
       //---------------------------------------------------
 
       is = sl->begin();
-      int nstaves  = _staves.size();
       for (staffIdx = 0; staffIdx < nstaves; ++staffIdx) {
             SysStaff* ss = _staves[staffIdx];
 
@@ -383,15 +391,6 @@ void System::layout2(ScoreLayout* layout)
       //---------------------------------------------------
       //    layout bars
       //---------------------------------------------------
-
-      if (staves > 1 && barLine == 0) {
-            barLine = new BarLine(score());
-            barLine->setParent(this);
-            }
-      else if (barLine) {
-            delete barLine;
-            barLine = 0;
-            }
 
       double staffY[staves];
       for (int i = 0; i < staves; ++i)

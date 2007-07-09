@@ -1003,13 +1003,28 @@ void Score::deleteItem(Element* el)
             case CHORD:
                   {
                   Chord* chord = (Chord*) el;
-                  Rest* rest   = new Rest(this, chord->tick(), chord->tickLen());
-                  rest->setStaff(el->staff());
-                  rest->setParent(chord->parent());
-                  removeElement(chord);
-                  undoOp(UndoOp::RemoveElement, chord);
-                  undoAddElement(rest);
+                  undoRemoveElement(chord);
+                  if (el->voice() == 0) {
+                        //
+                        // voice 0 chords are always replaced by rests
+                        //
+                        Rest* rest   = new Rest(this, chord->tick(), chord->tickLen());
+                        rest->setStaff(el->staff());
+                        rest->setParent(chord->parent());
+                        rest->setVoice(el->voice());
+                        undoAddElement(rest);
+                        }
                   }
+                  break;
+
+            case REST:
+                  //
+                  // only allow for voices != 0
+                  //    e.g. voice 0 rests cannot be removed
+                  //
+printf("delete rest voice %d\n", el->voice());
+                  if (el->voice() != 0)
+                        undoRemoveElement(el);
                   break;
 
             case MEASURE:
