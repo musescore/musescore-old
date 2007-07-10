@@ -995,7 +995,7 @@ void Canvas::paint(const QRect& rr)
       if (dropRectangle.isValid())
             p.fillRect(dropRectangle, QColor(80, 0, 0, 80));
       if (!dropAnchor.isNull()) {
-            QPen pen(QBrush(QColor(80, 0, 0)), 2.0, Qt::DotLine);
+            QPen pen(QBrush(QColor(80, 0, 0)), 2.0 / p.worldMatrix().m11(), Qt::DotLine);
             p.setPen(pen);
             p.drawLine(dropAnchor);
             }

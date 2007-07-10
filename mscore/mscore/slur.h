@@ -45,7 +45,6 @@ class SlurSegment : public Element {
       QPainterPath path;
 
       SlurTie* slur;
-      RubberBand* rb;
       qreal bow;
 
       int mode;         // 0-4  0 - normal
@@ -53,6 +52,7 @@ class SlurSegment : public Element {
       virtual QRectF bbox() const;
       void updatePath();
       void updateGrips(const QMatrix&);
+      void setDropAnchor(Viewer* viewer);
 
    public:
       SlurSegment(SlurTie*);
@@ -97,8 +97,6 @@ class SlurTie : public Element {
       ElementList segments;
       Direction _slurDirection;
 
-      QPointF slurPos(int tick, Staff* staff, int voice, System*& s);
-
    public:
       SlurTie(Score*);
       SlurTie(const SlurTie&);
@@ -111,17 +109,16 @@ class SlurTie : public Element {
       void setSlurDirection(Direction d) { _slurDirection = d; }
 
       virtual void layout2(ScoreLayout*, const QPointF, int, struct UP&)  {}
-      virtual void nextSeg(const QPointF, int)  {}
-      virtual void prevSeg(const QPointF, int)  {}
       virtual void setSelected(bool f);
       virtual bool contains(const QPointF&) const { return false; }  // not selectable
 
-      ElementList* elements()         { return &segments;      }
+      ElementList* elements()             { return &segments;      }
       virtual void add(Element* s);
       virtual void remove(Element* s);
 
       void writeProperties(Xml& xml) const;
       bool readProperties(QDomElement);
+      QPointF slurPos(int tick, int track, System*& s);
       };
 
 //---------------------------------------------------------
@@ -129,9 +126,8 @@ class SlurTie : public Element {
 //---------------------------------------------------------
 
 class Slur : public SlurTie {
-      int _tick1, _tick2, _voice1, _voice2;
-      Staff* _staff1;
-      Staff* _staff2;
+      int _track1, _track2;
+      int _tick1, _tick2;
 
    public:
       Slur(Score*);
@@ -142,14 +138,19 @@ class Slur : public SlurTie {
       virtual void read(Score*, QDomElement);
       virtual void layout(ScoreLayout*);
       virtual void layout2(ScoreLayout*, const QPointF, int, struct UP&);
-      virtual void nextSeg(const QPointF, int);
-      virtual void prevSeg(const QPointF, int);
       virtual QRectF bbox() const;
 
-      void setStart(int t, Staff* staff, int voice);
-      void setEnd(int t, Staff* staff, int voice);
-      bool startsAt(int t, Staff* staff, int voice);
-      bool endsAt(int t, Staff* staff, int voice);
+      int tick1() const { return _tick1; }
+      int tick2() const { return _tick2; }
+      void setTick1(int val);
+      void setTick2(int val);
+      int track1() const { return _track1; }
+      int track2() const { return _track2; }
+
+      void setStart(int t, int track);
+      void setEnd(int t,   int track);
+      bool startsAt(int t, int track);
+      bool endsAt(int t,   int track);
       };
 
 //---------------------------------------------------------
@@ -162,7 +163,7 @@ class Tie : public SlurTie {
 
    public:
       Tie(Score*);
-      virtual Tie* clone() const   { return new Tie(*this); }
+      virtual Tie* clone() const    { return new Tie(*this); }
       virtual ElementType type() const { return TIE; }
       void setStartNote(Note* note);
       void setEndNote(Note* note)   { _endNote = note; }

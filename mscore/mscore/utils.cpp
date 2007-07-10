@@ -153,3 +153,49 @@ int getStaff(System* system, const QPointF& p)
       return -1;
       }
 
+//---------------------------------------------------------
+//   nextSeg
+//---------------------------------------------------------
+
+int Score::nextSeg(int tick, int track)
+      {
+      Segment* seg = tick2segment(tick);
+      while (seg) {
+            seg = seg->next1();
+            if (seg == 0)
+                  break;
+            if (seg->subtype() != Segment::SegChordRest)
+                  continue;
+            if (seg->element(track))
+                  break;
+            }
+      if (seg == 0) {
+            printf("no seg found\n");
+            return -1;
+            }
+      return seg->tick();
+      }
+
+//---------------------------------------------------------
+//   prevSeg
+//---------------------------------------------------------
+
+int Score::prevSeg(int tick, int track)
+      {
+      Segment* seg = tick2segment(tick);
+      while (seg) {
+            seg = seg->prev1();
+            if (seg == 0)
+                  break;
+            if (seg->subtype() != Segment::SegChordRest)
+                  continue;
+            if (seg->element(track))
+                  break;
+            }
+      if (seg == 0) {
+            printf("no seg found\n");
+            return -1;
+            }
+      return seg->tick();
+      }
+

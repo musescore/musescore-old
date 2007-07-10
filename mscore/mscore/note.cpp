@@ -445,6 +445,8 @@ QRectF Note::bbox() const
 bool Note::isSimple(Xml& xml) const
       {
       QList<Prop> pl = Element::properties(xml);
+      if (_accidental && !_accidental->userOff().isNull())
+            return false;
       return (pl.empty() && _fingering.empty() && _tieFor == 0 && _move == 0);
       }
 
@@ -463,12 +465,12 @@ void Note::write(Xml& xml) const
             xml.prop(pl);
             xml.tag("pitch", pitch());
             xml.tag("tpc", tpc());
-#if 0
-            if (_userAccidental != -1) {
-                  xml.tag("prefix", _userAccidental);
-                  xml.tag("line", _line);
-                  }
-#endif
+
+            if (_userAccidental)
+                  xml.tag("userAccidental", _userAccidental);
+            if (_accidental && !_accidental->userOff().isNull())
+                  _accidental->write(xml);
+
             foreach(const Text* f, _fingering)
                   f->write(xml);
             if (_tieFor)
@@ -555,6 +557,13 @@ void Note::read(QDomElement e)
                   f->read(e);
                   f->setParent(this);
                   _fingering.append(f);
+                  }
+            else if (tag == "userAccidental")
+                  _userAccidental = i;
+            else if (tag == "Accidental") {
+                  _accidental = new Accidental(score());
+                  _accidental->read(e);
+                  _accidental->setParent(this);
                   }
             else if (tag == "move")
                   _move = i;

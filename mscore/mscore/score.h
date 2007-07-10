@@ -411,6 +411,8 @@ class Score : public QObject {
       bool pos2TickAnchor(QPointF&, Staff*, int* tick, QPointF* anchor) const;
       void spell();
       void spell(Note*);
+      int nextSeg(int tick, int track);
+      int prevSeg(int tick, int track);
       };
 
 extern void setPadState(Element*);

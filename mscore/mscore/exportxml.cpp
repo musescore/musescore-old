@@ -303,7 +303,7 @@ void SlurHandler::doSlurStart(Chord* chord, Notations& notations, Xml& xml)
       for (ciElement ci = m->el()->begin(); ci != m->el()->end(); ++ci) {
             if ((*ci)->type() == SLUR) {
                   Slur* s = (Slur*) (*ci);
-                  if (s->startsAt(chord->tick(), chord->staff(), chord->voice())) {
+                  if (s->startsAt(chord->tick(), chord->track())) {
                         // check if on slur list (i.e. stop already seen)
                         int i = findSlur(s);
                         if (i >= 0) {
@@ -347,7 +347,7 @@ void SlurHandler::doSlurStop(Chord* chord, Notations& notations, Xml& xml)
       for (ciElement ci = m->el()->begin(); ci != m->el()->end(); ++ci) {
             if ((*ci)->type() == SLUR) {
                   Slur* s = (Slur*) (*ci);
-                  if (s->endsAt(chord->tick(), chord->staff(), chord->voice())) {
+                  if (s->endsAt(chord->tick(), chord->track())) {
                         // check if on slur list
                         int i = findSlur(s);
                         if (i < 0) {
@@ -367,8 +367,7 @@ void SlurHandler::doSlurStop(Chord* chord, Notations& notations, Xml& xml)
             }
       // search slur list for already started slur(s) stopping at this chord
       for (int i = 0; i < MAX_SLURS; ++i) {
-            if (slur[i] && slur[i]->endsAt(chord->tick(),
-                                           chord->staff(), chord->voice())) {
+            if (slur[i] && slur[i]->endsAt(chord->tick(), chord->track())) {
                   if (started[i]) {
                         slur[i] = 0;
                         started[i] = false;

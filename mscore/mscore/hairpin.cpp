@@ -35,11 +35,6 @@
 
 void HairpinSegment::draw(QPainter& p)
       {
-/*      printf("draw: ");
-      for (Element* e = this; e; e = e->parent())
-            printf("%s(%f,%f) ", e->name(), e->x(), e->y());
-      printf("\n");
-  */
       double h1 = point(style->hairpinHeight) * .5;
       double h2 = point(style->hairpinContHeight) * .5;
 
