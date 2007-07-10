@@ -96,6 +96,7 @@ class MusicXml {
       void xmlScorePart(QDomElement node, QString id);
       void xmlMeasure(Part*, QDomElement, int);
       void xmlAttributes(Measure*, int stave, QDomElement node);
+      void xmlLyric(Measure* measure, int staff, QDomElement e);
       void xmlNote(Measure*, int stave, QDomElement node);
 
    public:
