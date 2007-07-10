@@ -54,6 +54,7 @@
 #include "volta.h"
 #include "keysig.h"
 #include "pitchspelling.h"
+#include "layoutbreak.h"
 
 //---------------------------------------------------------
 //   xmlSetPitch
@@ -596,10 +597,14 @@ void MusicXml::xmlMeasure(Part* part, QDomElement e, int number)
                   if (pm == 0)
                         printf("ImportXml: warning: break on first measure\n");
                   else {
-                        if (newSystem == "yes")
-                              pm->setLineBreak(true);
-                        if (newPage == "yes")
-                              pm->prev()->setPageBreak(true);
+                        if (newSystem == "yes" || newPage == "yes") {
+                              LayoutBreak* lb = new LayoutBreak(score);
+                              lb->setStaff(score->staff(staff));
+                              lb->setSubtype(
+                                 newSystem == "yes" ? LAYOUT_BREAK_LINE : LAYOUT_BREAK_PAGE
+                                 );
+                              pm->add(lb);
+                              }
                         }
                   for (QDomElement ee = e.firstChildElement(); !ee.isNull(); ee = ee.nextSiblingElement()) {
                         if (ee.tagName() == "system-layout") {
@@ -1157,7 +1162,49 @@ void MusicXml::xmlAttributes(Measure* measure, int staff, QDomElement e)
                          beats.toLatin1().data(), beatType.toLatin1().data(),
                          timeSymbol.toLatin1().data());
             }
-}
+      }
+
+//---------------------------------------------------------
+//   xmlLyric
+//---------------------------------------------------------
+
+void MusicXml::xmlLyric(Measure* measure, int staff, QDomElement e)
+      {
+      int lyricNo = e.attribute(QString("number"), "1").toInt() - 1;
+      if (lyricNo > MAX_LYRICS)
+            printf("too much lyrics (>%d)\n", MAX_LYRICS);
+      Lyrics* l = new Lyrics(score);
+      l->setNo(lyricNo);
+      l->setTick(tick);
+
+      for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
+            if (e.tagName() == "syllabic") {
+                  if (e.text() == "single")
+                        l->setSyllabic(Lyrics::SINGLE);
+                  else if (e.text() == "begin")
+                        l->setSyllabic(Lyrics::BEGIN);
+                  else if (e.text() == "end")
+                        l->setSyllabic(Lyrics::END);
+                  else if (e.text() == "middle")
+                        l->setSyllabic(Lyrics::MIDDLE);
+                  else
+                        printf("unknown syllabic %s\n", qPrintable(e.text()));
+                  }
+            else if (e.tagName() == "text")
+                  l->setText(e.text());
+            else if (e.tagName() == "extend")
+                  ;
+            else if (e.tagName() == "end-line")
+                  ;
+            else if (e.tagName() == "end-paragraph")
+                  ;
+            else
+                  domError(e);
+            }
+      l->setStaff(score->staff(staff));
+      Segment* segment = measure->getSegment(l);
+      segment->add(l);
+      }
 
 //---------------------------------------------------------
 //   xmlNote
@@ -1177,9 +1224,6 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
       int duration = 0;
       bool rest    = false;
       int relStaff = 0;
-      QString lyric[MAX_LYRICS];
-      QString syllabic[MAX_LYRICS];
-      // BeamMode bm  = BEAM_NO;
       BeamMode bm  = BEAM_AUTO;
       Direction sd = AUTO;
       int dots     = 0;
@@ -1329,27 +1373,8 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
                   }
             else if (tag == "rest")
                   rest = true;
-            else if (tag == "lyric") {
-                  int lyricNo = e.attribute(QString("number"), "1").toInt() - 1;
-                  if (maxLyrics <= lyricNo)
-                        maxLyrics = lyricNo + 1;
-                  if (lyricNo > MAX_LYRICS)
-                        printf("too much lyrics (>%d)\n", MAX_LYRICS);
-                  for (QDomElement ee = e.firstChildElement(); !ee.isNull(); ee = ee.nextSiblingElement()) {
-                        if (ee.tagName() == "syllabic")
-                              syllabic[lyricNo] = ee.text();
-                        else if (ee.tagName() == "text")
-                              lyric[lyricNo] = ee.text();
-                        else if (ee.tagName() == "extend")
-                              ;
-                        else if (ee.tagName() == "end-line")
-                              ;
-                        else if (ee.tagName() == "end-paragraph")
-                              ;
-                        else
-                              domError(ee);
-                        }
-                  }
+            else if (tag == "lyric")
+                  xmlLyric(measure, relStaff + staff, e);
             else if (tag == "dot")
                   ++dots;
             else if (tag == "accidental") {
@@ -1612,29 +1637,6 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
 //                   score->staff(staff + relStaff), staff, relStaff);
             xmlSetPitch(note, tick, c, alter, octave, accidental);
 
-            for (int i = 0; i < MAX_LYRICS; ++i) {
-                  if (!lyric[i].isEmpty()) {
-                        Lyrics* l = new Lyrics(score);
-                        l->setText(lyric[i]);
-                        l->setTick(tick);
-                        l->setNo(i);
-                        Lyrics::Syllabic s = Lyrics::SINGLE;
-                        if (syllabic[i] == "single")
-                              ;
-                        else if (syllabic[i] == "begin")
-                              s = Lyrics::BEGIN;
-                        else if (syllabic[i] == "end")
-                              s = Lyrics::END;
-                        else if (syllabic[i] == "middle")
-                              s = Lyrics::MIDDLE;
-                        else
-                              printf("unknown syllabic %s\n", syllabic[i].toLatin1().data());
-                        l->setSyllabic(s);
-                        l->setStaff(score->staff(staff + relStaff));
-                        Segment* segment = measure->tick2segment(tick);
-                        segment->add(l);
-                        }
-                  }
             if (cr->beamMode() == BEAM_NO)
                   cr->setBeamMode(bm);
             ((Chord*)cr)->setStemDirection(sd);

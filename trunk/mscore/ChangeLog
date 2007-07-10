@@ -1,3 +1,5 @@
+10.7.7 (ws)
+      - fixed lyrics layout when lyrics are not in first staff
 9.7.7 (ws)
       - call LedgerLine->layout() to compute correct bounding box needed
         for redraw auf ledger lines

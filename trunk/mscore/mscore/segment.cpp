@@ -215,7 +215,7 @@ void Segment::add(Element* el)
             case CHORD:
             case REST:
                   {
-                  ChordRest* cr = (ChordRest*)el;
+//                  ChordRest* cr = (ChordRest*)el;
 //                  if (cr->tuplet())
 //                        cr->tuplet()->add(cr);
                   _elist[staffIdx * VOICES + el->voice()] = el;
@@ -280,6 +280,7 @@ Segment::SegmentType Segment::segmentType(int type)
       switch (type) {
             case CHORD:
             case REST:
+            case LYRICS:
                   return Segment::SegChordRest;
             case CLEF:
                   return Segment::SegClef;

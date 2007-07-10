@@ -439,10 +439,13 @@ void Measure::layout(ScoreLayout* layout, double width)
             return;
 
       double _spatium = layout->spatium();
-      int n = _score->nstaves();
-      double staffY[n];
-      for (int i = 0; i < n; ++i) {
+      int nstaves     = _score->nstaves();
+      double staffY[nstaves];
+      for (int i = 0; i < nstaves; ++i) {
             staffY[i] = system()->staff(i)->bbox().y();
+            //
+            // TODO: this value can change later!
+            //
             }
       setbbox(QRectF(0, 0, width, system()->height()));
 
@@ -452,8 +455,7 @@ void Measure::layout(ScoreLayout* layout, double width)
       //   layout Chords/Lyrics/Symbols/BeginRepeatBar
       //---------------------------------------------------
 
-      int st = _score->nstaves();
-      int tracks = st * VOICES;
+      int tracks = nstaves * VOICES;
       for (Segment* segment = first(); segment; segment = segment->next()) {
             for (int track = 0; track < tracks; ++track) {
                   Element* e = segment->element(track);
@@ -479,7 +481,7 @@ void Measure::layout(ScoreLayout* layout, double width)
                         barLine->setPos(barLine->pos().x(), y - point(::style->staffLineWidth) * .5);
                         }
                   }
-            for (int staff = 0; staff < st; ++staff) {
+            for (int staff = 0; staff < nstaves; ++staff) {
                   LyricsList* ll = segment->lyricsList(staff);
                   int line = 0;
                   for (iLyrics i = ll->begin(); i != ll->end(); ++i, ++line) {
@@ -491,11 +493,12 @@ void Measure::layout(ScoreLayout* layout, double width)
                         double noteHeadWidth = symbols[quartheadSym].width();
                         double lh = lyrics->lineSpacing();
                         double y  = lh * line + 6 * _spatium;
-                        lyrics->setPos(noteHeadWidth/2 - lyrics->bbox().width() * .5, y);
+                        lyrics->setPos(noteHeadWidth/2 - lyrics->bbox().width() * .5,
+                           y + staffY[staff]);
 
                         // increase staff distance if necessary
                         y += _spatium * 4;
-                        if ((staff+1) < st) {
+                        if ((staff+1) < nstaves) {
                               if (y > staves[staff].distance) {
                                     staves[staff].distance = y;
                                     }
@@ -503,9 +506,6 @@ void Measure::layout(ScoreLayout* layout, double width)
                         }
                   }
             }
-
-//      foreach(Tuplet* tuplet, _tuplets)
-//            tuplet->layout(layout);
 
       if (_noText)
             _noText->layout(layout);
@@ -799,7 +799,8 @@ void Measure::add(Element* el)
             case LAYOUT_BREAK:
                   for (iElement i = _sel.begin(); i != _sel.end(); ++i) {
                         if ((*i)->type() == LAYOUT_BREAK && (*i)->subtype() == el->subtype()) {
-                              printf("layout break already set\n");
+                              if (debugMode)
+                                    printf("warning: layout break already set\n");
                               delete el;
                               return;
                               }
@@ -1088,6 +1089,9 @@ void Measure::moveY(int staff, double dy)
                   if (e)
                         e->move(0, dy);
                   }
+            LyricsList* ll = segment->lyricsList(staff);
+            foreach(Lyrics* ly, *ll)
+                  ly->move(0, dy);
             }
       BarLine* barLine = staves[staff].endBarLine;
       if (barLine) {
