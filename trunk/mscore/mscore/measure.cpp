@@ -664,16 +664,13 @@ Chord* Measure::findChord(int tick, int staff, int voice, bool /*grace*/)
  Search for chord or rest at position \a tick at \a staff in \a voice.
 */
 
-ChordRest* Measure::findChordRest(int tick, Staff* staff, int voice, bool /*grace*/)
+ChordRest* Measure::findChordRest(int tick, int track)
       {
-      int staffIdx = _score->staves()->indexOf(staff);
-      if (staffIdx == -1)
-            return 0;
       for (Segment* seg = _first; seg; seg = seg->next()) {
             if (seg->tick() > tick)
                   return 0;
             if (seg->tick() == tick) {
-                  Element* el = seg->element(staffIdx * VOICES + voice);
+                  Element* el = seg->element(track);
                   if (el && (el->type() == CHORD || el->type() == REST)) {
                         return (ChordRest*)el;
                         }

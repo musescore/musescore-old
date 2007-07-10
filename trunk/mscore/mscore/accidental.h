@@ -48,6 +48,5 @@ class Accidental : public Compound {
       static int subtype2value(int);      // return effective pitch offset
       static int value2subtype(int);
       };
-
 #endif
 

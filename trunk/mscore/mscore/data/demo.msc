@@ -33,7 +33,7 @@
     <barNoteDistance>1.5</barNoteDistance>
     <noteBarDistance>1</noteBarDistance>
     <staffLineWidth>0.08</staffLineWidth>
-    <helpLineWidth>0.16</helpLineWidth>
+    <ledgerLineWidth>0.16</ledgerLineWidth>
     <akkoladeWidth>1.6</akkoladeWidth>
     <prefixDistance>0.13</prefixDistance>
     <prefixNoteDistance>0.22</prefixNoteDistance>
@@ -337,8 +337,8 @@ p, li { white-space: pre-wrap; }
       <Slur>
         <startTick>6720</startTick>
         <endTick>7200</endTick>
-        <startVoice>1</startVoice>
-        <endVoice>1</endVoice>
+        <startTrack>1</startTrack>
+        <endTrack>1</endTrack>
         <up>1</up>
         </Slur>
       <TimeSig>
@@ -410,8 +410,8 @@ p, li { white-space: pre-wrap; }
       <Slur>
         <startTick>7680</startTick>
         <endTick>8160</endTick>
-        <startVoice>1</startVoice>
-        <endVoice>1</endVoice>
+        <startTrack>1</startTrack>
+        <endTrack>1</endTrack>
         <up>1</up>
         </Slur>
       <TimeSig>

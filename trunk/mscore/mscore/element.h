@@ -22,6 +22,7 @@
 #define __ELEMENT_H__
 
 #include "xml.h"
+#include "globals.h"
 
 /**
  \file
@@ -201,6 +202,7 @@ class Element {
       int staffIdx() const;
       void setStaff(Staff* v)                 { _staff = v;    }
       int voice() const                       { return _voice; }
+      int track() const                       { return staffIdx() * VOICES + voice(); }
       void setVoice(int v)                    { _voice = v;    }
 
       virtual void add(Element*)    {}

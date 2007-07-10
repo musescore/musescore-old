@@ -682,23 +682,25 @@ void Score::cmdAddSlur()
             printf("no note selected\n");
             return;
             }
-
       Note* note    = (Note*)(e);
       Chord* chord  = note->chord();
       Staff* staff  = chord->staff();
-      ChordRest* el = nextChordRest(chord);
-      if (el == 0) {
-            printf("at end\n");
+      int voice     = chord->voice();
+
+      int track = chord->staffIdx() * VOICES + voice;
+      int tick2 = nextSeg(chord->tick(), track);
+
+      if (tick2 == 0) {
+            printf("cannot create slur: at end\n");
             return;
             }
-      int tick2 = el->tick();
-
       Slur* slur = new Slur(this);
       slur->setStaff(staff);
-      slur->setStart(chord->tick(), staff, chord->voice());
-      slur->setEnd(tick2, staff, chord->voice());
+      slur->setStart(chord->tick(), track);
+      slur->setEnd(tick2, track);
       slur->setParent(chord->measure());
       cmdAdd(slur);
+      slur->setSelected(true);
       select(slur, 0, 0);
       refresh |= slur->abbox();
       }

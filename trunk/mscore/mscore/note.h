@@ -59,6 +59,7 @@ class Note : public Element {
 
       int _pitch;             ///< Note pitch as midi value (0 - 127).
       int _tpc;               ///< tonal pitch class
+
       int _line;              ///< y-Position; 0 - top line.
       int _move;              ///< -1, 0, +1.
       int _userAccidental;    ///< editorial accidental type (0-15)

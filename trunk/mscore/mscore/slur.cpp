@@ -41,7 +41,6 @@ SlurSegment::SlurSegment(SlurTie* st)
       {
       slur = st;
       mode = 0;
-      rb   = new RubberBand(st->score());
       }
 
 SlurSegment::SlurSegment(const SlurSegment& b)
@@ -51,7 +50,6 @@ SlurSegment::SlurSegment(const SlurSegment& b)
             ups[i] = b.ups[i];
       path = b.path;
       slur = b.slur;
-      rb   = b.rb->clone();
       bow  = b.bow;
       mode = b.mode;
       }
@@ -62,7 +60,6 @@ SlurSegment::SlurSegment(const SlurSegment& b)
 
 SlurSegment::~SlurSegment()
       {
-      delete rb;
       }
 
 //---------------------------------------------------------
@@ -129,8 +126,6 @@ void SlurSegment::draw(QPainter& p)
                   p.drawRect(ups[i].r);
                   }
             }
-      if (showRubberBand && (mode == 1 || mode == 4))
-            rb->draw(p);
       }
 
 //---------------------------------------------------------
@@ -163,15 +158,30 @@ bool SlurSegment::startEdit(QMatrix& matrix, const QPointF&)
 //   edit
 //---------------------------------------------------------
 
-bool SlurSegment::edit(QMatrix& matrix, QKeyEvent* ev)
+bool SlurSegment::edit(QMatrix&, QKeyEvent* ev)
       {
+      if (slur->type() != SLUR)
+            return false;
+      Slur* sl = (Slur*) slur;
+
       QPointF ppos(canvasPos());
 
       if ((ev->modifiers() & Qt::ShiftModifier)) {
-            if (ev->key() == Qt::Key_Left)
-                  slur->prevSeg(canvasPos(), mode);
-            else if (ev->key() == Qt::Key_Right)
-                  slur->nextSeg(canvasPos(), mode);
+            int track1 = sl->track1();
+            int track2 = sl->track2();
+
+            if (ev->key() == Qt::Key_Left) {
+                  if (mode == 1)
+                        sl->setTick1(score()->prevSeg(sl->tick1(), track1));
+                  else if (mode == 4)
+                        sl->setTick2(score()->prevSeg(sl->tick2(), track2));
+                  }
+            else if (ev->key() == Qt::Key_Right) {
+                  if (mode == 1)
+                        sl->setTick1(score()->nextSeg(sl->tick1(), track1));
+                  else if (mode == 4)
+                        sl->setTick2(score()->nextSeg(sl->tick2(), track2));
+                  }
             return false;
             }
 
@@ -208,20 +218,6 @@ bool SlurSegment::edit(QMatrix& matrix, QKeyEvent* ev)
       int idx       = (mode-1) % 4;
       ups[idx].off += delta;
       ups[idx].r.translate(delta * _spatium);
-
-      if (mode == 1 || mode == 4) {
-//TODO            slur->layout2(canvasPos(), mode, ups[idx]);
-            if (!showRubberBand || (mode != 1 && mode != 4))
-                  return true;
-            QPointF ppos(canvasPos());
-            QPointF rp1, rp2;
-            rp1 = ups[idx].p + ups[idx].off * _spatium + ppos;
-            rp2 = ups[idx].p + ppos;
-            rb->set(rp1, rp2);
-            rp1 -= ppos;
-            rp2 -= ppos;
-//??            orBbox(QRectF(rp1, QSizeF(rp2.x() - rp1.x(), rp2.y() - rp1.y())));
-            }
       return false;
       }
 
@@ -235,18 +231,40 @@ void SlurSegment::endEdit()
       }
 
 //---------------------------------------------------------
+//   setDropAnchor
+//---------------------------------------------------------
+
+void SlurSegment::setDropAnchor(Viewer* viewer)
+      {
+      Slur* sl = (Slur*) slur;
+      QPointF anchor;
+      QPointF p;
+
+      p = ups[mode-1].pos();
+      System* s;
+      if (mode == 1)
+            anchor = sl->slurPos(sl->tick1(), sl->track1(), s);
+      else if (mode == 4)
+            anchor = sl->slurPos(sl->tick2(), sl->track2(), s);
+      else
+            return;
+      viewer->setDropAnchor(QLineF(anchor, p + canvasPos()));
+      }
+
+//---------------------------------------------------------
 //   startEditDrag
 //---------------------------------------------------------
 
-bool SlurSegment::startEditDrag(Viewer*, const QPointF& p)
+bool SlurSegment::startEditDrag(Viewer* viewer, const QPointF& p)
       {
+      if (slur->type() != SLUR)
+            return false;
       // search for the clicked grip
-      mode = 1;
-      for (int i = 0; i < 4; ++i) {
-            if (ups[i].r.contains(p)) {
+      for (mode = 1; mode < 5; ++mode) {
+            if (ups[mode-1].r.contains(p)) {
+                  setDropAnchor(viewer);
                   return true;
                   }
-            ++mode;
             }
       mode = 0;
       return false;
@@ -290,15 +308,7 @@ bool SlurSegment::editDrag(Viewer* viewer, QPointF*, const QPointF& delta)
             ups[2].p    = QPointF(x2, y2);
 
             updateGrips(viewer->matrix());
-
-            if (showRubberBand) {
-                  QPointF ppos(canvasPos());
-                  QPointF rp1( ups[n].p + ups[n].off * _spatium + ppos);
-                  QPointF rp2(ups[n].p + ppos);
-                  rb->set(rp1, rp2);
-                  QPointF ppp(rp2-ppos);
-                  //TODO bbox?
-                  }
+            setDropAnchor(viewer);
             }
       updatePath();
       return true;
@@ -384,7 +394,7 @@ void SlurSegment::read(QDomElement e)
 //   layout
 //---------------------------------------------------------
 
-void SlurSegment::layout(ScoreLayout* layout, const QPointF& p1, const QPointF& p2, qreal b)
+void SlurSegment::layout(ScoreLayout*, const QPointF& p1, const QPointF& p2, qreal b)
       {
 // printf("SlurSegment %p %p layout\n", slur, this);
       bow = b;
@@ -513,7 +523,7 @@ void SlurTie::remove(Element* s)
 //   slurPos
 //---------------------------------------------------------
 
-QPointF SlurTie::slurPos(int tick, Staff* staff, int voice, System*& s)
+QPointF SlurTie::slurPos(int tick, int track, System*& s)
       {
       Measure* m = _score->tick2measure(tick);
       if (m == 0) {
@@ -521,10 +531,10 @@ QPointF SlurTie::slurPos(int tick, Staff* staff, int voice, System*& s)
             return QPointF(0,0);
             }
       s = m->system();
-      ChordRest* cr = m->findChordRest(tick, staff, voice, false);
+      ChordRest* cr = m->findChordRest(tick, track);
       if (cr == 0) {
-            printf("SlurTie: cannot find chord/rest at tick:%d staff:%d voice:%d, measure %d-%d\n",
-               tick, staff->idx(), voice, m->tick(), m->tick() + m->tickLen());
+            printf("SlurTie: cannot find chord/rest at tick:%d track:%d, measure %d-%d\n",
+               tick, track, m->tick(), m->tick() + m->tickLen());
             return QPointF(0,0);
             }
 
@@ -613,10 +623,8 @@ Slur::Slur(Score* s)
       {
       _tick1  = 0;
       _tick2  = 0;
-      _staff1 = 0;
-      _staff2 = 0;
-      _voice1 = 0;
-      _voice2 = 0;
+      _track1 = 0;
+      _track2 = 0;
       }
 
 //---------------------------------------------------------
@@ -630,117 +638,61 @@ Slur::~Slur()
       }
 
 //---------------------------------------------------------
-//   nextSeg
+//   setTick1
 //---------------------------------------------------------
 
-void Slur::nextSeg(const QPointF ppos, int mode)
+void Slur::setTick1(int val)
       {
-      if (mode != 1 && mode != 4)
-            return;
-      int track;
-      Segment* seg;
-      if (mode == 1) {
-            seg   = _score->tick2segment(_tick1);
-            track = (_staff1->idx() * VOICES) + _voice1;
-            }
-      else {
-            seg = _score->tick2segment(_tick2);
-            track = (_staff2->idx() * VOICES) + _voice2;
-            }
-      while (seg) {
-            seg = seg->next1();
-            if (seg == 0)
-                  break;
-            if (seg->subtype() != Segment::SegChordRest)
-                  continue;
-            if (seg->element(track))
-                  break;
-            }
-      if (seg == 0) {
-            printf("no seg found\n");
-            return;
-            }
-      if (mode == 1)
-            _tick1 = seg->tick();
-      else
-            _tick2 = seg->tick();
+      if (val != -1)
+            _tick1 = val;
       }
 
 //---------------------------------------------------------
-//   prevSeg
+//   setTick2
 //---------------------------------------------------------
 
-void Slur::prevSeg(const QPointF ppos, int mode)
+void Slur::setTick2(int val)
       {
-      if (mode != 1 && mode != 4)
-            return;
-      int track;
-      Segment* seg;
-      if (mode == 1) {
-            seg   = _score->tick2segment(_tick1);
-            track = (_staff1->idx() * VOICES) + _voice1;
-            }
-      else {
-            seg = _score->tick2segment(_tick2);
-            track = (_staff2->idx() * VOICES) + _voice2;
-            }
-      while (seg) {
-            seg = seg->prev1();
-            if (seg == 0)
-                  break;
-            if (seg->subtype() != Segment::SegChordRest)
-                  continue;
-            if (seg->element(track))
-                  break;
-            }
-      if (seg == 0) {
-            printf("no seg found\n");
-            return;
-            }
-      if (mode == 1)
-            _tick1 = seg->tick();
-      else
-            _tick2 = seg->tick();
+      if (val != -1)
+            _tick2 = val;
       }
 
 //---------------------------------------------------------
 //   setStart
 //---------------------------------------------------------
 
-void Slur::setStart(int t, Staff* staff, int voice)
+void Slur::setStart(int t, int track)
       {
       _tick1  = t;
-      _staff1 = staff;
-      _voice1 = voice;
+      _track1 = track;
       }
 
 //---------------------------------------------------------
 //   setEnd
 //---------------------------------------------------------
 
-void Slur::setEnd(int t, Staff* staff, int voice)
+void Slur::setEnd(int t, int track)
       {
       _tick2  = t;
-      _staff2 = staff;
-      _voice2 = voice;
+      _track2 = track;
       }
 
 //---------------------------------------------------------
 //   startsAt
 //---------------------------------------------------------
 
-bool Slur::startsAt(int t, Staff* staff, int voice)
+bool Slur::startsAt(int t, int track)
       {
-      return ((_tick1 == t) && (_staff1 == staff) && (_voice1 == voice));
+      return ((_tick1 == t) && (_track1 == track));
       }
 
 //---------------------------------------------------------
 //   endsAt
 //---------------------------------------------------------
 
-bool Slur::endsAt(int t, Staff* staff, int voice)
+bool Slur::endsAt(int t, int track)
       {
-      return ((_tick2 == t) && (_staff2 == staff) && (_voice2 == voice));
+      return ((_tick2 == t) && (_track2 == track));
       }
 
 //---------------------------------------------------------
@@ -752,16 +704,10 @@ void Slur::write(Xml& xml) const
       xml.stag("Slur");
       xml.tag("startTick", _tick1);
       xml.tag("endTick", _tick2);
-      if (_voice1)
-            xml.tag("startVoice", _voice1);
-      if (_voice2)
-            xml.tag("endVoice", _voice2);
-      int s1 = _staff1->idx();
-      int s2 = _staff2->idx();
-      if (s1)
-            xml.tag("startStaff", s1);
-      if (s2)
-            xml.tag("endStaff", s2);
+      if (_track1)
+            xml.tag("startTrack", _track1);
+      if (_track2)
+            xml.tag("endTrack", _track2);
       SlurTie::writeProperties(xml);
       xml.etag();
       }
@@ -772,8 +718,6 @@ void Slur::write(Xml& xml) const
 
 void Slur::read(Score* score, QDomElement e)
       {
-      _staff1 = 0;
-      _staff2 = 0;
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             QString tag(e.tagName());
             QString val(e.text());
@@ -782,23 +726,13 @@ void Slur::read(Score* score, QDomElement e)
                   _tick1 = score->fileDivision(i);
             else if (tag == "endTick")
                   _tick2 = score->fileDivision(i);
-            else if (tag == "startVoice")
-                  _voice1 = i;
-            else if (tag == "endVoice")
-                  _voice2 = i;
-            else if (tag == "startStaff")
-                  _staff1 = score->staff(i);
-            else if (tag == "endStaff")
-                  _staff2 = score->staff(i);
-            else if (SlurTie::readProperties(e))
-                  ;
-            else
+            else if (tag == "startTrack")
+                  _track1 = i;
+            else if (tag == "endTrack")
+                  _track2 = i;
+            else if (!SlurTie::readProperties(e))
                   domError(e);
             }
-      if (_staff1 == 0)
-            _staff1 = score->staff(0);
-      if (_staff2 == 0)
-            _staff2 = score->staff(0);
       }
 
 //---------------------------------------------------------
@@ -807,8 +741,6 @@ void Slur::read(Score* score, QDomElement e)
 
 void Slur::layout(ScoreLayout* layout)
       {
-      if (_staff2 == 0)
-            return;
       double _spatium = layout->spatium();
       switch (_slurDirection) {
             case UP:    up = true; break;
@@ -825,10 +757,10 @@ void Slur::layout(ScoreLayout* layout)
                         up = true;
                         }
                   else {
-                        ChordRest* c1 = m1->findChordRest(_tick1, _staff1, _voice1, false);
+                        ChordRest* c1 = m1->findChordRest(_tick1, _track1);
                         if (c1 == 0) {
-                              printf("Slur-1: cannot find chord/rest at tick:%d staff:%d voice:%d, measure %d-%d\n",
-                                 _tick1, _staff1->idx(), _voice1, m1->tick(), m1->tick() + m1->tickLen());
+                              printf("Slur-1: cannot find chord/rest at tick:%d track:%d, measure %d-%d\n",
+                                 _tick1, _track1, m1->tick(), m1->tick() + m1->tickLen());
                               return;
                               }
 
@@ -837,10 +769,10 @@ void Slur::layout(ScoreLayout* layout)
                               printf("Slur: cannot find measure for tick %d\n", _tick2);
                               return;
                               }
-                        ChordRest* c2 = m2->findChordRest(_tick2, _staff2, _voice2, false);
+                        ChordRest* c2 = m2->findChordRest(_tick2, _track2);
                         if (c2 == 0) {
-                              printf("Slur-2: cannot find chord/rest at tick:%d staff:%d voice:%d, measure %d-%d\n",
-                                 _tick2, _staff2->idx(), _voice2, m2->tick(), m2->tick() + m2->tickLen());
+                              printf("Slur-2: cannot find chord/rest at tick:%d track:%d, measure %d-%d\n",
+                                 _tick2, _track2, m2->tick(), m2->tick() + m2->tickLen());
                               return;
                               }
                         if (c1->isUp())
@@ -855,8 +787,8 @@ void Slur::layout(ScoreLayout* layout)
       QPointF ppos(canvasPos());
       System *s1, *s2;
 
-      QPointF p1 = slurPos(_tick1, _staff1, _voice1, s1);
-      QPointF p2 = slurPos(_tick2, _staff2, _voice2, s2);
+      QPointF p1 = slurPos(_tick1, _track1, s1);
+      QPointF p2 = slurPos(_tick2, _track2, s2);
 
       QList<System*>* sl = layout->systems();
       iSystem is = sl->begin();
@@ -977,10 +909,10 @@ void Slur::layout2(ScoreLayout* layout, const QPointF ppos, int mode, struct UP&
 
       System* s;
       if (mode == 1) {
-            int tick = _score->snapNote(_tick1, p, _staff1->idx());
+            int tick = _score->snapNote(_tick1, p, _track1 / VOICES);
             if (tick != _tick1) {
                   _tick1     = tick;
-                  QPointF p2 = slurPos(_tick1, _staff1, _voice1, s);
+                  QPointF p2 = slurPos(_tick1, _track1, s);
                   ups.p      = p2 - ppos;    // relative to parent position
                   ups.off    = (p - p2) / _spatium;
                   }
@@ -989,17 +921,17 @@ void Slur::layout2(ScoreLayout* layout, const QPointF ppos, int mode, struct UP&
             //
             // search for nearest segment at p
             //
-            int tick = _score->snapNote(_tick2, p, _staff2->idx());
+            int tick = _score->snapNote(_tick2, p, _track2 / VOICES);
 
             //
             // if found new segment, and reference point is different,
             // then update ups.p and ups.off
             //
             if (tick != _tick2) {
-                  _tick2         = tick;
-                  QPointF p2         = slurPos(_tick2, _staff2, _voice2, s);
-                  ups.p   = p2 - ppos;    // relative to parent position
-                  ups.off = (p - p2) / _spatium;
+                  _tick2     = tick;
+                  QPointF p2 = slurPos(_tick2, _track2, s);
+                  ups.p      = p2 - ppos;    // relative to parent position
+                  ups.off    = (p - p2) / _spatium;
                   }
             }
       }

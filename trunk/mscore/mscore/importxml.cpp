@@ -1413,6 +1413,8 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
                         if (ee.tagName() == "slur") {
                               int slurNo   = ee.attribute(QString("number"), "1").toInt() - 1;
                               QString slurType = ee.attribute(QString("type"));
+
+                              int trk = (staff + relStaff) * VOICES;
                               if (slurType == "start") {
                                     bool endSlur = false;
                                     if (slur[slurNo] == 0)
@@ -1424,22 +1426,20 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
                                           slur[slurNo]->setSlurDirection(UP);
                                     else if (pl == "below")
                                           slur[slurNo]->setSlurDirection(DOWN);
-                                    Staff* stf = score->staff(staff + relStaff);
-                                    slur[slurNo]->setStart(tick, stf, voice);
-                                    slur[slurNo]->setStaff(stf);
+                                    slur[slurNo]->setStart(tick, trk + voice);
+                                    slur[slurNo]->setStaff(score->staff(staff + relStaff));
                                     slur[slurNo]->setParent(measure);
                                     score->addElement(slur[slurNo]);
                                     if (endSlur)
                                           slur[slurNo] = 0;
                                     }
                               else if (slurType == "stop") {
-                                    Staff* stf = score->staff(staff + relStaff);
                                     if (slur[slurNo] == 0) {
                                           slur[slurNo] = new Slur(score);
-                                          slur[slurNo]->setEnd(tick, stf, voice);
+                                          slur[slurNo]->setEnd(tick, trk + voice);
                                           }
                                     else {
-                                          slur[slurNo]->setEnd(tick, stf, voice);
+                                          slur[slurNo]->setEnd(tick, trk + voice);
                                           slur[slurNo] = 0;
                                           }
                                     }
