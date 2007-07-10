@@ -520,13 +520,22 @@ void MusicXml::xmlMeasure(Part* part, QDomElement e, int number)
 
       // search measure for tick
       Measure* measure = 0;
+      Measure* lastMeasure = 0;
       for (Measure* m = score->mainLayout()->first(); m; m = m->next()) {
+            lastMeasure = m;
             if (m->tick() == tick) {
                   measure = m;
                   break;
                   }
             }
       if (!measure) {
+            //
+            // DEBUG:
+            if (lastMeasure->tick() > tick) {
+                  printf("Measure at position %d not found!\n", tick);
+                  }
+            //
+
             measure  = new Measure(score);
             measure->setTick(tick);
             measure->setNo(number);
@@ -606,6 +615,8 @@ void MusicXml::xmlMeasure(Part* part, QDomElement e, int number)
                         if (ee.tagName() == "duration") {
                               int val = (ee.text().toInt() * ::division)/divisions;
                               tick += val;
+                              if (tick > maxtick)
+                                    maxtick = tick;
                               lastLen = val;    // ?
                               }
                         else if (ee.tagName() == "voice")
