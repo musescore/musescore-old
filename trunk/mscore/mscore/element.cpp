@@ -123,13 +123,18 @@ Element::Element(Score* s)
 int Element::staffIdx() const
       {
       return _score->staves().indexOf(_staff);
-//      return _staff ? _staff->idx() : -1;
       }
+
+//---------------------------------------------------------
+//   color
+//---------------------------------------------------------
 
 QColor Element::color() const
       {
+      if (score()->printing())
+            return _color;
       if (_selected)
-            return  preferences.selectColor[_voice];
+            return preferences.selectColor[_voice];
       if (_dropTarget)
             return preferences.dropColor;
       if (!_visible)

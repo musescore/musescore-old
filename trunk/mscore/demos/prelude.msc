@@ -3,8 +3,8 @@
   <Spatium>1.5</Spatium>
   <Division>480</Division>
   <Mag>0.973713</Mag>
-  <xoff>-932</xoff>
-  <yoff>-176</yoff>
+  <xoff>209</xoff>
+  <yoff>-52</yoff>
   <Style>
     <staffUpperBorder>8</staffUpperBorder>
     <staffLowerBorder>4</staffLowerBorder>
@@ -1028,6 +1028,10 @@
       <bracket type="-1" span="1"/>
       </Staff>
     <trackName>Gitarre</trackName>
+    <name>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-size:12pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;          &lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</name>
     <Instrument>
       <midiChannel>0</midiChannel>
       <midiProgram>24</midiProgram>
@@ -4821,7 +4825,6 @@ p, li { white-space: pre-wrap; }
         <Attribute>
           <idx>0</idx>
           <offset x="0.434762" y="-2.46365"/>
-          <selected>1</selected>
           </Attribute>
         <Note pitch="59" tpc="19"/>
         <Note pitch="62" tpc="16"/>
