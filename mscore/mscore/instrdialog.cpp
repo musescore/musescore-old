@@ -188,14 +188,12 @@ void InstrumentsDialog::genPartList()
 
       foreach(Part* p, *cs->parts()) {
             PartListItem* pli = new PartListItem(p, partiturList);
-            StaffList* sl = p->staves();
-            for (iStaff is = sl->begin(); is != sl->end(); ++is) {
+            foreach(Staff* s, *p->staves()) {
                   StaffListItem* sli = new StaffListItem(pli);
-                  Staff* s      = *is;
                   sli->staff    = s;
                   sli->setPartIdx(s->rstaff());
-                  sli->staffIdx = cs->staff(s);
-                  sli->setClef((*is)->clef()->clef(0));
+                  sli->staffIdx = s->idx();
+                  sli->setClef(s->clef()->clef(0));
                   }
             partiturList->setItemExpanded(pli, true);
             }
@@ -520,7 +518,7 @@ void MuseScore::editInstrList()
                               staff->setBracketSpan(0, t->staves);
                               }
                         part->staves()->push_back(staff);
-                        cs->staves()->insert(staffIdx + rstaff, staff);
+                        cs->staves().insert(staffIdx + rstaff, staff);
                         cs->undoOp(UndoOp::InsertStaff, staff, staffIdx+rstaff);
                         }
                   cs->cmdInsertPart(part, staffIdx);
@@ -534,7 +532,7 @@ void MuseScore::editInstrList()
                         if (sli->op == ITEM_DELETE) {
                               cs->mainLayout()->systems()->clear();
                               Staff* staff = sli->staff;
-                              int sidx = cs->staff(staff);
+                              int sidx = staff->idx();
                               int eidx = sidx + 1;
                               for (Measure* m = cs->mainLayout()->first(); m; m = m->next())
                                     m->cmdRemoveStaves(sidx, eidx);
@@ -566,7 +564,7 @@ void MuseScore::editInstrList()
       //
       //    sort staves
       //
-      StaffList dst;
+      QList<Staff*> dst;
       for (int idx = 0; (item = pl->topLevelItem(idx)); ++idx) {
             PartListItem* pli = (PartListItem*)item;
             if (pli->op == ITEM_DELETE)
@@ -581,23 +579,17 @@ void MuseScore::editInstrList()
             }
       QList<int> sl;
       QList<int> dl;
-      StaffList* src = cs->staves();
-      int idx = 0;
-      for (iStaff i = src->begin(); i != src->end(); ++i, ++idx)
+
+      for (int idx = 0; idx < cs->staves().size(); ++idx)
             sl.push_back(idx);
 
-      for (iStaff i = dst.begin(); i != dst.end(); ++i) {
+      for (QList<Staff*>::iterator i = dst.begin(); i != dst.end(); ++i) {
             Staff* staff = *i;
-            int idx = 0;
-            iStaff ii = src->begin();
-            for (; ii != src->end(); ++ii, ++idx) {
-                  if (*ii == staff) {
-                        dl.push_back(idx);
-                        break;
-                        }
-                  }
-            if (ii == src->end())
+            int idx = cs->staves().indexOf(staff);
+            if (idx == -1)
                   printf("staff in dialog(%p) not found in score\n", staff);
+            else
+                  dl.push_back(idx);
             }
 
       if (sl.size() != dl.size())
@@ -651,11 +643,11 @@ void Score::cmdRemovePart(Part* part)
             m->cmdRemoveStaves(sidx, eidx);
 
       int idx = eidx - 1;
-      for (iStaff i = _staves->begin() + idx; n > 0; --n, --idx, --i) {
+      for (QList<Staff*>::iterator i = _staves.begin() + idx; n > 0; --n, --idx, --i) {
             undoOp(UndoOp::RemoveStaff, *i, idx);
-            part->staves()->remove(*i);
+            part->staves()->removeAll(*i);
             }
-      _staves->erase(_staves->begin() + sidx, _staves->begin() + eidx);
+      _staves.erase(_staves.begin() + sidx, _staves.begin() + eidx);
       _parts.removeAt(_parts.indexOf(part));
       undoOp(UndoOp::RemovePart, part, sidx);
       }
@@ -695,7 +687,7 @@ void Score::removePart(Part* part)
 void Score::insertStaff(Staff* staff, int idx)
       {
       _layout->systems()->clear();  //??
-      _staves->insert(idx, staff);
+      _staves.insert(idx, staff);
       staff->part()->insertStaff(staff);
       }
 
@@ -706,7 +698,7 @@ void Score::insertStaff(Staff* staff, int idx)
 void Score::removeStaff(Staff* staff)
       {
       _layout->systems()->clear();  //??
-      _staves->remove(staff);
+      _staves.removeAll(staff);
       staff->part()->removeStaff(staff);
       }
 
@@ -719,25 +711,24 @@ void Score::sortStaves(QList<int> src, QList<int> dst)
       _layout->systems()->clear();  //??
       _parts.clear();
       Part* curPart = 0;
-      StaffList* dl = new StaffList;
+      QList<Staff*> dl;
       for (QList<int>::iterator i = dst.begin(); i != dst.end(); ++i) {
             int didx = *i;
             int sidx = 0;
             for (QList<int>::iterator ii = src.begin(); ii != src.end(); ++ii, ++sidx) {
                   if (didx == *ii) {
-                        Staff* staff = (*_staves)[sidx];
+                        Staff* staff = _staves[sidx];
                         if (staff->part() != curPart) {
                               curPart = staff->part();
                               curPart->staves()->clear();
                               _parts.push_back(curPart);
                               }
                         curPart->staves()->push_back(staff);
-                        dl->push_back(staff);
+                        dl.push_back(staff);
                         break;
                         }
                   }
             }
-      delete _staves;
       _staves = dl;
 
       for (Measure* m = _layout->first(); m; m = m->next()) {

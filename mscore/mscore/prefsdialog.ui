@@ -6,7 +6,7 @@
     <x>0</x>
     <y>0</y>
     <width>660</width>
-    <height>517</height>
+    <height>508</height>
    </rect>
   </property>
   <property name="windowTitle" >
@@ -31,7 +31,7 @@
    <item>
     <widget class="QTabWidget" name="General" >
      <property name="currentIndex" >
-      <number>4</number>
+      <number>0</number>
      </property>
      <widget class="QWidget" name="tab" >
       <attribute name="title" >
@@ -294,20 +294,6 @@
             </property>
             <property name="textFormat" >
              <enum>Qt::PlainText</enum>
-            </property>
-           </widget>
-          </item>
-          <item row="3" column="0" >
-           <widget class="QLabel" name="label_8" >
-            <property name="text" >
-             <string>Panel</string>
-            </property>
-           </widget>
-          </item>
-          <item row="3" column="1" >
-           <widget class="QCheckBox" name="panelShow" >
-            <property name="text" >
-             <string>show</string>
             </property>
            </widget>
           </item>

@@ -512,7 +512,7 @@ void Score::cmdAddInterval(int val)
 void Score::setNote(int tick, Staff* staff, int voice, int pitch, int len)
       {
       bool addTie  = padState.tie;
-      int staffIdx = _staves->indexOf(staff);
+      int staffIdx = staff->idx();
       int track    = staffIdx * VOICES + voice;
       Tie* tie     = 0;
       Note* note   = 0;
@@ -638,9 +638,9 @@ void Score::setNote(int tick, Staff* staff, int voice, int pitch, int len)
 
 void Score::setRest(int tick, Staff* st, int voice, int len)
       {
-      int staffIdx = staff(st);
-      int track = staffIdx * VOICES + voice;
-      int stick = tick;
+      int staffIdx = st->idx();
+      int track    = staffIdx * VOICES + voice;
+      int stick    = tick;
       Measure* measure = tick2measure(stick);
       if (measure == 0) {
             printf("setRest:  ...measure not found\n");

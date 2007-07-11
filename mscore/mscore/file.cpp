@@ -802,6 +802,7 @@ void Score::printFile()
       if (!pd.exec())
             return;
 
+      _printing = true;
       QPainter p(&printer);
       p.setRenderHint(QPainter::Antialiasing, true);
       p.setRenderHint(QPainter::TextAntialiasing, true);
@@ -847,6 +848,7 @@ void Score::printFile()
                   break;
             printer.newPage();
             }
+      _printing = false;
       DPI  = oldDPI;
       DPMM = DPI / INCH;                     // dots/mm
       mainLayout()->setPaintDevice(oldPaintDevice);

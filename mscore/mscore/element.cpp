@@ -122,9 +122,8 @@ Element::Element(Score* s)
 
 int Element::staffIdx() const
       {
-      if (_staff)
-            return _staff->idx();
-      return -1;
+      return _score->staves().indexOf(_staff);
+//      return _staff ? _staff->idx() : -1;
       }
 
 QColor Element::color() const

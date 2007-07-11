@@ -117,7 +117,6 @@ Preferences::Preferences()
       showPlayPanel      = false;
       showStatusBar      = true;
       showPad            = false;
-      showPanel          = false;
       padPos             = QPoint(100, 100);
       playPanelPos       = QPoint(100, 300);
       useAlsaAudio       = true;
@@ -183,7 +182,6 @@ void Preferences::write()
       s.setValue("showPlayPanel",   showPlayPanel);
 
       s.setValue("showPad",            showPad);
-      s.setValue("showPanel",          showPanel);
       s.setValue("useAlsaAudio",       useAlsaAudio);
       s.setValue("useJackAudio",       useJackAudio);
       s.setValue("alsaDevice",         alsaDevice);
@@ -245,7 +243,6 @@ void Preferences::read()
       showPlayPanel   = s.value("showPlayPanel", false).toBool();
 
       showPad            = s.value("showPad", false).toBool();
-      showPanel          = s.value("showPanel", false).toBool();
       useAlsaAudio       = s.value("useAlsaAudio", true).toBool();
       useJackAudio       = s.value("useJackAudio", false).toBool();
       alsaDevice         = s.value("alsaDevice", "default").toString();
@@ -374,7 +371,6 @@ PreferenceDialog::PreferenceDialog(QWidget* parent)
 
       navigatorShow->setChecked(preferences.showNavigator);
       keyPadShow->setChecked(preferences.showPad);
-      panelShow->setChecked(preferences.showPanel);
       playPanelShow->setChecked(preferences.showPlayPanel);
       keyPadX->setValue(preferences.padPos.x());
       keyPadY->setValue(preferences.padPos.y());
@@ -727,7 +723,6 @@ void PreferenceDialog::apply()
 
       preferences.showNavigator  = navigatorShow->isChecked();
       preferences.showPad        = keyPadShow->isChecked();
-      preferences.showPanel      = panelShow->isChecked();
       preferences.showPlayPanel  = playPanelShow->isChecked();
       preferences.padPos         = QPoint(keyPadX->value(), keyPadY->value());
       preferences.playPanelPos   = QPoint(playPanelX->value(), playPanelY->value());

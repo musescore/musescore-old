@@ -428,11 +428,11 @@ System* ScoreLayout::layoutSystem(Measure*& im, System* system, qreal x, qreal y
       //    find out how many measures fit in system
       //-------------------------------------------------------
 
-      int nm              = 0;
+      int nm              = 0;            // number of collected measures
       double systemWidth  = w - systemOffset;
       double minWidth     = 0;
+      double uStretch     = 0.0;
       QList<double> mwList;
-      double uStretch = 0.0;
 
       bool pageBreak = false;
 
@@ -460,20 +460,22 @@ System* ScoreLayout::layoutSystem(Measure*& im, System* system, qreal x, qreal y
                   // switch all clefs to small size
                   //
                   int nstaves = _score->nstaves();
-                  for (int i = 0; i < nstaves; ++i) {
-                        int strack = i * VOICES;
-                        for (Segment* seg = m->first(); seg; seg = seg->next()) {
+                  for (Segment* seg = m->first(); seg; seg = seg->next()) {
+                        if (seg->subtype() != Segment::SegClef)
+                              continue;
+                        for (int i = 0; i < nstaves; ++i) {
+                              int strack = i * VOICES;
                               Element* el = seg->element(strack);
                               if (el && el->type() == CLEF) {
                                     ((Clef*)el)->setSmall(true);
-                                    break;
                                     }
                               }
+                        break;
                         }
                   }
 
             MeasureWidth mw = m->layoutX(this, 1.0);
-            double ww = mw.stretchable;
+            double ww       = mw.stretchable;
 
             mwList.push_back(ww);
             double stretch = m->userStretch() * ::style->measureSpacing;

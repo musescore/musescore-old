@@ -1778,7 +1778,9 @@ int main(int argc, char* argv[])
       mscore->setCurrentScore(currentScore);
       mscore->showNavigator(preferences.showNavigator);
       mscore->showPad(preferences.showPad);
-      mscore->showPalette(preferences.showPanel);
+
+//      mscore->showPalette(preferences.showPanel);
+
       if (mscore->getKeyPad())
             mscore->getKeyPad()->move(preferences.padPos);
       mscore->showPlayPanel(preferences.showPlayPanel);
@@ -1946,6 +1948,7 @@ void MuseScore::writeSettings()
       settings.beginGroup("MainWindow");
       settings.setValue("size", size());
       settings.setValue("pos", pos());
+      settings.setValue("showPanel", paletteBox && paletteBox->isVisible());
       settings.endGroup();
       }
 
@@ -1959,6 +1962,7 @@ void MuseScore::readSettings()
       settings.beginGroup("MainWindow");
       resize(settings.value("size", QSize(950, 500)).toSize());
       move(settings.value("pos", QPoint(10, 10)).toPoint());
+      mscore->showPalette(settings.value("showPanel", "0").toBool());
       settings.endGroup();
       }
 

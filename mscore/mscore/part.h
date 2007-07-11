@@ -23,7 +23,6 @@
 
 class Instrument;
 class Xml;
-class StaffList;
 class Staff;
 class Score;
 
@@ -83,17 +82,17 @@ class Part {
       QTextDocument _longName;      ///< shown on first system
       QTextDocument _shortName;     ///< shown on followup systems
       Instrument _instrument;
-      StaffList* _staves;
+      QList<Staff*> _staves;
       QString _id;                  ///< used for MusicXml import
       bool _show;                   ///< show part in partitur if true
 
    public:
       Part(Score*);
-      ~Part();
+      ~Part() {}
       void read(Score*, QDomElement);
       void write(Xml& xml) const;
       int nstaves() const;
-      StaffList* staves() const                { return _staves; }
+      QList<Staff*>* staves()                  { return &_staves; }
       Staff* staff(int idx) const;
       void setId(const QString& s)             { _id = s; }
       QString id() const                       { return _id; }

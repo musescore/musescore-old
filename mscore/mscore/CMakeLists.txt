@@ -144,13 +144,13 @@ add_executable ( mscore
 if (CROSS_MINGW)
    set_target_properties( mscore
       PROPERTIES
-         COMPILE_FLAGS "-include ${PROJECT_BINARY_DIR}/all.h"
+         COMPILE_FLAGS "-include ${PROJECT_BINARY_DIR}/all.h ${QT_DEFINITIONS}"
          LINK_FLAGS "-L /home/ws/.wine/drive_c/MinGW/lib"
       )
 else (CROSS_MINGW)
    set_target_properties( mscore
       PROPERTIES
-         COMPILE_FLAGS "-include ${PROJECT_BINARY_DIR}/all.h"
+         COMPILE_FLAGS "-include ${PROJECT_BINARY_DIR}/all.h ${QT_DEFINITIONS}"
       )
 endif (CROSS_MINGW)
 

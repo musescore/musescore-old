@@ -547,9 +547,9 @@ again:
 void Score::addTimeSig(int tick, int timeSigSubtype)
       {
       Measure* measure = tick2measure(tick);
-      for (iStaff i = _staves->begin(); i != _staves->end(); ++i) {
+      foreach(Staff* staff, _staves) {
             TimeSig* nsig = new TimeSig(this, timeSigSubtype);
-            nsig->setStaff(*i);
+            nsig->setStaff(staff);
             nsig->setTick(tick);
             Segment::SegmentType st = Segment::segmentType(TIMESIG);
             Segment* seg = measure->findSegment(st, tick);
@@ -621,7 +621,7 @@ void Score::putNote(const QPointF& pos, bool addToChord)
             else
                   setNote(tick, staff, voice, pitch, len);
             }
-      cis->staff     = _staves->indexOf(staff);
+      cis->staff     = _staves.indexOf(staff);
       cis->voice     = voice;
       padState.pitch = pitch;
       cis->pos       = tick + len;

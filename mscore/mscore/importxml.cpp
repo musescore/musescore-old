@@ -408,7 +408,7 @@ void MusicXml::xmlScorePart(QDomElement e, QString id)
       score->parts()->push_back(part);
       Staff* staff = new Staff(score, part, 0);
       part->staves()->push_back(staff);
-      score->staves()->push_back(staff);
+      score->staves().push_back(staff);
       }
 
 //---------------------------------------------------------

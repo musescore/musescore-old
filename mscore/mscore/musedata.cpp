@@ -204,7 +204,7 @@ void MuseData::readNote(Part* part, const QString& s)
                   staffIdx = s.mid(23,1).toInt() - 1;
             }
       Staff* staff = part->staff(staffIdx);
-      int gstaff = score->staff(staff);
+      int gstaff   = staff->idx();
 
       int pitch = table[step] + alter + (octave + 1) * 12;
       if (pitch < 0)
@@ -443,7 +443,7 @@ void MuseData::readRest(Part* part, const QString& s)
                   staffIdx = s.mid(23,1).toInt() - 1;
             }
       Staff* staff = part->staff(staffIdx);
-      int gstaff = score->staff(staff);
+      int gstaff   = staff->idx();
 
       Rest* rest = new Rest(score, tick, ticks);
       chordRest = rest;
@@ -509,8 +509,7 @@ Measure* MuseData::createMeasure()
       Measure* measure  = new Measure(score);
       measure->setTick(curTick);
 
-      for (iStaff i = score->staves()->begin(); i != score->staves()->end(); ++i) {
-            Staff* s = *i;
+      foreach(Staff* s, score->staves()) {
 	      if (s->isTop()) {
       	      BarLine* barLine = new BarLine(score);
             	barLine->setStaff(s);
@@ -666,7 +665,7 @@ bool MuseData::read(const QString& name)
                   for (int i = 0; i < staves; ++i) {
                         Staff* staff = new Staff(score, mpart, i);
                         mpart->insertStaff(staff);
-                        score->staves()->push_back(staff);
+                        score->staves().push_back(staff);
                         if ((staves == 2) && (i == 0)) {
 printf("set bracket\n");
                               staff->setBracket(0, BRACKET_AKKOLADE);

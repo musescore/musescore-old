@@ -126,7 +126,6 @@ Score::Score()
       tempomap          = new TempoList;
       sigmap            = new SigList;
       sel               = new Selection(this);
-      _staves           = new StaffList;
       _dirty            = false;
       _saved            = false;
       sel->state        = SEL_NONE;
@@ -143,6 +142,7 @@ Score::Score()
       _pageOffset       = 0;
       undoActive        = false;
       _fileDivision     = division;
+      _printing         = false;
       clear();
       }
 
@@ -155,7 +155,6 @@ Score::~Score()
       delete tempomap;
       delete sigmap;
       delete sel;
-      delete _staves;
       delete _layout;
       }
 
@@ -211,9 +210,9 @@ void Score::clear()
       movementTitle   = "";
       _pageOffset     = 0;
 
-      for (iStaff i = _staves->begin(); i != _staves->end(); ++i)
-            delete *i;
-      _staves->clear();
+      foreach(Staff* staff, _staves)
+            delete staff;
+      _staves.clear();
       _layout->clear();
       foreach(Part* p, _parts)
             delete p;
@@ -284,16 +283,16 @@ void Score::write(Xml& xml)
       foreach(const Part* part, _parts)
             part->write(xml);
 
-      int staff = 0;
-      for (iStaff ip = _staves->begin(); ip != _staves->end(); ++ip, ++staff) {
-            xml.stag(QString("Staff id=\"%1\"").arg(staff+1));
+      for (int staffIdx = 0; staffIdx < _staves.size(); ++staffIdx) {
+            xml.stag(QString("Staff id=\"%1\"").arg(staffIdx + 1));
             int measureNumber = 1;
             xml.curTick = 0;
             for (Measure* m = _layout->first(); m; m = m->next()) {
-                  m->write(xml, measureNumber++, staff);
+                  m->write(xml, measureNumber++, staffIdx);
                   xml.curTick = m->tick() + sigmap->ticksMeasure(m->tick());
                   }
             xml.etag();
+            ++staffIdx;
             }
       }
 
@@ -325,9 +324,9 @@ void Score::addMeasure(Measure* m)
             int mtick = im->tick();
             int len   = im->tickLen();
             sigmap->insertTime(mtick, len);
-            for (iStaff i = _staves->begin(); i != _staves->end(); ++i) {
-                  (*i)->clef()->insertTime(mtick, len);
-                  (*i)->keymap()->insertTime(mtick, len);
+            foreach(Staff* staff, _staves) {
+                  staff->clef()->insertTime(mtick, len);
+                  staff->keymap()->insertTime(mtick, len);
                   }
             }
       _layout->insert(m, im);
@@ -345,9 +344,9 @@ void Score::removeMeasure(int tick)
             int mtick = im->tick();
             int len = im->tickLen();
             sigmap->removeTime(mtick, len);
-            for (iStaff i = _staves->begin(); i != _staves->end(); ++i) {
-                  (*i)->clef()->removeTime(mtick, len);
-                  (*i)->keymap()->removeTime(mtick, len);
+            foreach(Staff* staff, _staves) {
+                  staff->clef()->removeTime(mtick, len);
+                  staff->keymap()->removeTime(mtick, len);
                   }
             _layout->erase(im);
             fixTicks();
@@ -471,11 +470,11 @@ Measure* Score::pos2measure(const QPointF& p, int* tick, Staff** rst, int* pitch
                                                 }
                                           if (!ns || (pppp.x() < (segment->x() + (ns->x() - segment->x())/2.0))) {
                                                 i -= 1;
-                                                *rst = (*_staves)[i];
+                                                *rst = _staves[i];
                                                 if (tick)
                                                       *tick = segment->tick();
                                                 if (pitch) {
-                                                      Staff* s = (*_staves)[i];
+                                                      Staff* s = _staves[i];
                                                       int clef = s->clef()->clef(*tick);
                                                       *pitch = y2pitch(pppp.y()-staff->bbox().y(), clef);
                                                       }
@@ -514,7 +513,7 @@ Measure* Score::pos2measure(const QPointF& p, int* tick, Staff** rst, int* pitch
                                           }
                                     if (offset) {
                                           //??
-                                          int staffIdx = _staves->indexOf(*rst);
+                                          int staffIdx = _staves.indexOf(*rst);
                                           SysStaff* staff = s->staff(staffIdx);
                                           *offset = pppp - QPointF(segment->x(), staff->bbox().y());
                                           }
@@ -606,7 +605,7 @@ Measure* Score::pos2measure2(const QPointF& p, int* tick, Staff** rst, int* line
                                           }
                                     if (!ns || (pppp.x() < (segment->x() + (ns->x() - segment->x())/2.0))) {
                                           i     -= 1;
-                                          *rst   = (*_staves)[i];
+                                          *rst   = _staves[i];
                                           *tick  = segment->tick();
                                           *line  = lrint((pppp.y()-staff->bbox().y())/_spatium * 2);
                                           *seg   = segment;
@@ -642,19 +641,6 @@ int Score::staff(const Part* part) const
       }
 
 //---------------------------------------------------------
-//   staff
-//---------------------------------------------------------
-
-/**
- Return index for staff \a p in the staff list.
-*/
-
-int Score::staff(const Staff* p) const
-      {
-      return _staves->indexOf((Staff*)p);
-      }
-
-//---------------------------------------------------------
 //   part
 //---------------------------------------------------------
 
@@ -664,9 +650,9 @@ int Score::staff(const Staff* p) const
 
 Staff* Score::staff(int n) const
       {
-      if (n < int(_staves->size()))
-            return (*_staves)[n];
-      printf("staff %d out of range; %zd\n", n, _staves->size());
+      if (n < int(_staves.size()))
+            return _staves[n];
+      printf("staff %d out of range; %zd\n", n, _staves.size());
       return 0;
       }
 
@@ -1100,32 +1086,6 @@ int Measure::snapNote(int /*tick*/, const QPointF p, int staff) const
             s = ns;
             }
       return s->tick();
-      }
-
-//---------------------------------------------------------
-//   nstaves
-//---------------------------------------------------------
-
-/**
- Return number of staves in the staff list.
-*/
-
-int Score::nstaves() const
-      {
-      return _staves->size();
-      }
-
-//---------------------------------------------------------
-//   noStaves
-//---------------------------------------------------------
-
-/**
- Return true if the staff list is empty.
-*/
-
-bool Score::noStaves() const
-      {
-      return _staves->empty();
       }
 
 //---------------------------------------------------------
