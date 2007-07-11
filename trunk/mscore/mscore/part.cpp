@@ -37,17 +37,7 @@ Part::Part(Score* s)
       _longName.setDefaultFont(textStyles[TEXT_STYLE_INSTRUMENT_LONG].font());
       _shortName.setDefaultFont(textStyles[TEXT_STYLE_INSTRUMENT_SHORT].font());
       cs = s;
-      _staves = new StaffList;
       _show = true;
-      }
-
-//---------------------------------------------------------
-//   Part
-//---------------------------------------------------------
-
-Part::~Part()
-      {
-      delete _staves;
       }
 
 //---------------------------------------------------------
@@ -56,7 +46,7 @@ Part::~Part()
 
 Staff* Part::staff(int idx) const
       {
-      return (*_staves)[idx];
+      return _staves[idx];
       }
 
 //---------------------------------------------------------
@@ -72,8 +62,8 @@ void Part::read(Score* score, QDomElement e)
             if (tag == "Staff") {
                   Staff* staff = new Staff(score, this, rstaff);
                   staff->read(e);
-                  score->staves()->push_back(staff);
-                  _staves->push_back(staff);
+                  score->staves().push_back(staff);
+                  _staves.push_back(staff);
                   ++rstaff;
                   }
             else if (tag == "Instrument")
@@ -136,8 +126,8 @@ void Part::setShortName(const QTextDocument& s)
 void Part::write(Xml& xml) const
       {
       xml.stag("Part");
-      for (iStaff i = _staves->begin(); i != _staves->end(); ++i)
-            (*i)->write(xml);
+      foreach(const Staff* staff, _staves)
+            staff->write(xml);
       if (!_trackName.isEmpty())
             xml.tag("trackName", _trackName);
       if (!_longName.isEmpty())
@@ -156,7 +146,7 @@ void Part::write(Xml& xml) const
 
 int Part::nstaves() const
       {
-      return _staves->size();
+      return _staves.size();
       }
 
 //---------------------------------------------------------
@@ -165,7 +155,7 @@ int Part::nstaves() const
 
 void Part::setStaves(int n)
       {
-      int ns = _staves->size();
+      int ns = _staves.size();
       if (n < ns) {
             printf("Part::setStaves(): remove staves not implemented!\n");
             return;
@@ -173,8 +163,8 @@ void Part::setStaves(int n)
       int staffIdx = cs->staff(this) + ns;
       for (int i = ns; i < n; ++i) {
             Staff* staff = new Staff(cs, this, i);
-            _staves->push_back(staff);
-            cs->staves()->insert(cs->staves()->begin() + staffIdx, staff);
+            _staves.push_back(staff);
+            cs->staves().insert(staffIdx, staff);
             for (Measure* im = cs->mainLayout()->first(); im; im = im->next()) {
                   im->insertStaff1(staff, staffIdx);
                   }
@@ -275,13 +265,13 @@ void Instrument::read(QDomElement e)
 void Part::insertStaff(Staff* staff)
       {
       int idx = staff->rstaff();
-      if (idx > _staves->size())
-            idx = _staves->size();
-      _staves->insert(_staves->begin() + idx, staff);
+      if (idx > _staves.size())
+            idx = _staves.size();
+      _staves.insert(idx, staff);
       staff->setShow(_show);
       idx = 0;
-      for (iStaff i = _staves->begin(); i != _staves->end(); ++i, ++idx)
-            (*i)->setRstaff(idx);
+      foreach(Staff* staff, _staves)
+            staff->setRstaff(idx++);
       }
 
 //---------------------------------------------------------
@@ -290,10 +280,10 @@ void Part::insertStaff(Staff* staff)
 
 void Part::removeStaff(Staff* staff)
       {
-      _staves->remove(staff);
+      _staves.removeAll(staff);
       int idx = 0;
-      for (iStaff i = _staves->begin(); i != _staves->end(); ++i, ++idx)
-            (*i)->setRstaff(idx);
+      foreach(Staff* staff, _staves)
+            staff->setRstaff(idx++);
       }
 
 //---------------------------------------------------------
@@ -303,7 +293,7 @@ void Part::removeStaff(Staff* staff)
 void Part::setShow(bool val)
       {
       _show = val;
-      foreach(Staff* staff, *_staves)
+      foreach(Staff* staff, _staves)
             staff->setShow(_show);
       }
 

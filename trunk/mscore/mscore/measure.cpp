@@ -560,9 +560,8 @@ void Measure::layout2(ScoreLayout* layout)
 //      printf("Measure(%p)::layout2(): _sel.size = %d\n", this, _sel.size());
 
       foreach(Element* pel, _sel) {
-            int staff = _score->staff(pel->staff());
-
-            double y = system()->staff(staff)->bbox().y();
+            int staff = pel->staff()->idx();
+            double y  = system()->staff(staff)->bbox().y();
 
             switch(pel->type()) {
                   case VOLTA:
@@ -798,7 +797,6 @@ void Measure::add(Element* el)
                         if ((*i)->type() == LAYOUT_BREAK && (*i)->subtype() == el->subtype()) {
                               if (debugMode)
                                     printf("warning: layout break already set\n");
-                              delete el;
                               return;
                               }
                         }
@@ -872,7 +870,7 @@ void Measure::add(Element* el)
 
 void Measure::remove(Element* el)
       {
-      int staff = _score->staff(el->staff());
+      int staff = el->staff()->idx();
 
       switch(el->type()) {
             case SEGMENT:
@@ -1893,6 +1891,14 @@ Element* Measure::drop(const QPointF& p, const QPointF& /*offset*/, int type, co
                   {
                   LayoutBreak* lb = new LayoutBreak(score());
                   lb->read(e);
+                  if ((lb->subtype() == LAYOUT_BREAK_PAGE && _pageBreak)
+                     || (lb->subtype() == LAYOUT_BREAK_LINE && _lineBreak)) {
+                        //
+                        // if break already set
+                        //
+                        delete lb;
+                        break;
+                        }
                   lb->setStaff(staff);
                   lb->setParent(this);
                   score()->cmdAdd(lb);

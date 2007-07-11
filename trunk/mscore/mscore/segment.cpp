@@ -181,9 +181,10 @@ void Segment::add(Element* el)
       el->setParent(this);
       int staffIdx = el->staffIdx();
 
-// printf("Segment(%p)(t:%d)(%d)::add %s tracks %d, staff %d, track = %d\n",
-//   this, _type, el->tick(), el->name(), _elist.size(), staffIdx,
-//   staffIdx * VOICES + el->voice());
+      if (staffIdx == -1)
+            printf("Segment(%p)(t:%d)(%d)::add %s tracks %d, staff %d, track = %d\n",
+               this, subtype(), el->tick(), el->name(), _elist.size(), staffIdx,
+               staffIdx * VOICES + el->voice());
 
       switch(el->type()) {
             case LYRICS:

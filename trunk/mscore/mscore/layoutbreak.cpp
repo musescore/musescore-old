@@ -40,6 +40,8 @@ LayoutBreak::LayoutBreak(Score* score)
 
 void LayoutBreak::draw(QPainter& p)
       {
+      if (score()->printing())
+            return;
       QPen pen;
       if (selected())
             pen.setColor(preferences.selectColor[0]);

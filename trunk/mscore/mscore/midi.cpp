@@ -1030,7 +1030,7 @@ void Score::convertMidi(MidiFile* mf)
 
             Staff* s = new Staff(this, part, 0);
             part->insertStaff(s);
-            _staves->push_back(s);
+            _staves.push_back(s);
 
             if (track->isDrumTrack()) {
                   s->clef()->setClef(0, CLEF_PERC);
@@ -1043,7 +1043,7 @@ void Score::convertMidi(MidiFile* mf)
                         // form a piano part
                         Staff* ss = new Staff(this, part, 1);
                         part->insertStaff(ss);
-                        _staves->push_back(ss);
+                        _staves.push_back(ss);
 
                         s->clef()->setClef(0, CLEF_G);
                         s->setBracket(0, BRACKET_AKKOLADE);
@@ -1156,8 +1156,7 @@ if (tick)
             int tick = sigmap->bar2tick(i, 0, 0);
             measure->setTick(tick);
 
-            for (iStaff i = _staves->begin(); i != _staves->end(); ++i) {
-            	Staff* s = *i;
+            foreach(Staff* s, _staves) {
 	            if (s->isTop()) {
       	            BarLine* barLine = new BarLine(this);
             	      barLine->setStaff(s);

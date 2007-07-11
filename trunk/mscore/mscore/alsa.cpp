@@ -643,8 +643,6 @@ void AlsaAudio::alsaLoop()
       int rv = pthread_setschedparam(pthread_self(), SCHED_FIFO, &rt_param);
       if (rv == -1)
             perror("MuseScore: set realtime scheduler failed");
-      else
-            printf("MuseScore: running SCHED_FIFO\n");
 
       alsa->pcmStart();
       int size = alsa->fsize();

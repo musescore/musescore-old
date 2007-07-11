@@ -3,8 +3,8 @@
   <Spatium>1.5</Spatium>
   <Division>480</Division>
   <Mag>0.973713</Mag>
-  <xoff>-11</xoff>
-  <yoff>-432</yoff>
+  <xoff>-932</xoff>
+  <yoff>-176</yoff>
   <Style>
     <staffUpperBorder>8</staffUpperBorder>
     <staffLowerBorder>4</staffLowerBorder>
@@ -2268,8 +2268,8 @@ p, li { white-space: pre-wrap; }
       <Slur>
         <startTick>26880</startTick>
         <endTick>27840</endTick>
-        <startVoice>1</startVoice>
-        <endVoice>1</endVoice>
+        <startTrack>1</startTrack>
+        <endTrack>1</endTrack>
         <SlurSegment no="0">
           <o4 x="7.55852" y="1.63134"/>
           </SlurSegment>
@@ -2600,8 +2600,8 @@ p, li { white-space: pre-wrap; }
       <Slur>
         <startTick>32640</startTick>
         <endTick>33600</endTick>
-        <startVoice>1</startVoice>
-        <endVoice>1</endVoice>
+        <startTrack>1</startTrack>
+        <endTrack>1</endTrack>
         <SlurSegment no="0">
           <o1 x="1.59135" y="2.65225"/>
           <o4 x="1.16699" y="2.75834"/>
@@ -3508,14 +3508,6 @@ p, li { white-space: pre-wrap; }
           <o4 x="11.062" y="-5.01752"/>
           </SlurSegment>
         </Slur>
-      <Symbol>
-        <name>ufermata</name>
-        <offset x="105.048" y="57.7776"/>
-        </Symbol>
-      <Symbol>
-        <name>ufermata</name>
-        <offset x="115.299" y="58.3058"/>
-        </Symbol>
       <Note pitch="55" tpc="15" ticks="240"/>
       <Note pitch="62" tpc="16" ticks="240"/>
       <Note pitch="65" tpc="13" ticks="240"/>
@@ -3952,8 +3944,8 @@ p, li { white-space: pre-wrap; }
       <Slur>
         <startTick>65280</startTick>
         <endTick>66240</endTick>
-        <startVoice>1</startVoice>
-        <endVoice>1</endVoice>
+        <startTrack>1</startTrack>
+        <endTrack>1</endTrack>
         <SlurSegment no="0">
           <o1 x="1.14874" y="3.32529"/>
           <o4 x="-0.665058" y="2.90207"/>
@@ -3971,8 +3963,8 @@ p, li { white-space: pre-wrap; }
       <Slur>
         <startTick>66480</startTick>
         <endTick>66720</endTick>
-        <startVoice>1</startVoice>
-        <endVoice>1</endVoice>
+        <startTrack>1</startTrack>
+        <endTrack>1</endTrack>
         <SlurSegment no="0">
           <o1 x="1.11496" y="3.05582"/>
           <o2 x="0.289064" y="0.578128"/>
@@ -4054,8 +4046,8 @@ p, li { white-space: pre-wrap; }
       <Slur>
         <startTick>67680</startTick>
         <endTick>67920</endTick>
-        <startVoice>1</startVoice>
-        <endVoice>1</endVoice>
+        <startTrack>1</startTrack>
+        <endTrack>1</endTrack>
         <SlurSegment no="0">
           <o1 x="1.15626" y="3.09711"/>
           <o2 x="0.371654" y="0.619423"/>
@@ -4197,8 +4189,8 @@ p, li { white-space: pre-wrap; }
       <Slur>
         <startTick>69360</startTick>
         <endTick>69840</endTick>
-        <startVoice>1</startVoice>
-        <endVoice>1</endVoice>
+        <startTrack>1</startTrack>
+        <endTrack>1</endTrack>
         <SlurSegment no="0">
           <o1 x="1.68102" y="2.90357"/>
           <o2 x="-3.51485" y="-3.36203"/>
@@ -4413,8 +4405,8 @@ p, li { white-space: pre-wrap; }
       <Slur>
         <startTick>72240</startTick>
         <endTick>72720</endTick>
-        <startVoice>1</startVoice>
-        <endVoice>1</endVoice>
+        <startTrack>1</startTrack>
+        <endTrack>1</endTrack>
         <SlurSegment no="0">
           <o1 x="1.27084" y="2.28751"/>
           <o2 x="-4.3844" y="-1.46147"/>
@@ -4611,8 +4603,8 @@ p, li { white-space: pre-wrap; }
       <Slur>
         <startTick>75120</startTick>
         <endTick>75600</endTick>
-        <startVoice>1</startVoice>
-        <endVoice>1</endVoice>
+        <startTrack>1</startTrack>
+        <endTrack>1</endTrack>
         <SlurSegment no="0">
           <o1 x="1.33438" y="2.22397"/>
           <o2 x="-3.30419" y="-0.953131"/>
@@ -4806,6 +4798,10 @@ p, li { white-space: pre-wrap; }
         </Dynamic>
       <Chord>
         <ticklen>1440</ticklen>
+        <Attribute>
+          <idx>0</idx>
+          <offset x="0.434762" y="-2.46365"/>
+          </Attribute>
         <Note pitch="55" tpc="15"/>
         <Note pitch="59" tpc="19"/>
         <Note pitch="65" tpc="13"/>
@@ -4822,6 +4818,11 @@ p, li { white-space: pre-wrap; }
         </Dynamic>
       <Chord>
         <ticklen>1440</ticklen>
+        <Attribute>
+          <idx>0</idx>
+          <offset x="0.434762" y="-2.46365"/>
+          <selected>1</selected>
+          </Attribute>
         <Note pitch="59" tpc="19"/>
         <Note pitch="62" tpc="16"/>
         <Note pitch="69" tpc="17"/>
@@ -4829,6 +4830,6 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     </Staff>
-  <cursorStaff>-1</cursorStaff>
+  <cursorStaff>0</cursorStaff>
   <cursorVoice>0</cursorVoice>
   </museScore>

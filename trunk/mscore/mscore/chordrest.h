@@ -34,8 +34,6 @@ class Sym;
 enum BeamMode { BEAM_AUTO, BEAM_BEGIN, BEAM_MID, BEAM_END,
       BEAM_NO, BEAM_BEGIN32 };
 
-const int NOTE_ATTRIBUTES = 28;
-
 enum NoteAttributeIdx {
       UfermataSym,
       DfermataSym,
@@ -64,7 +62,8 @@ enum NoteAttributeIdx {
       UpPrallSym,
       DownPrallSym,
       UpMordentSym,
-      DownMordentSym
+      DownMordentSym,
+      NOTE_ATTRIBUTES
       };
 
 //---------------------------------------------------------

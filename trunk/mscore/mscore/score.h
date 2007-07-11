@@ -49,7 +49,6 @@ class Hairpin;
 class Undo;
 class EditTempo;
 class Part;
-class StaffList;
 class MidiFile;
 class ScoreLayout;
 class MidiTrack;
@@ -103,11 +102,12 @@ class Score : public QObject {
       ElementList startDragSelected;
 
       QList<Part*> _parts;
-      StaffList* _staves;
+      QList<Staff*> _staves;
 
       UndoList undoList;
       UndoList redoList;
 
+      bool _printing;   ///< True if we are drawing to a printer
       bool _playlistDirty;
       bool _dirty;      ///< Score data was modified.
       bool _saved;      ///< True if project was already saved; only on first
@@ -211,12 +211,12 @@ class Score : public QObject {
       void write(Xml&);
       void readStaff(QDomElement);
 
-      StaffList* staves() const     { return _staves; }
-      int nstaves() const;
+      QList<Staff*>& staves()       { return _staves; }
+      int nstaves() const           { return _staves.size(); }
+      bool noStaves() const         { return _staves.empty(); }
+
       int staff(const Part*) const;
-      int staff(const Staff*) const;
       Staff* staff(int n) const;
-      bool noStaves() const;
 
       void cmdInsertPart(Part*, int);
       void insertPart(Part*, int);
@@ -406,6 +406,7 @@ class Score : public QObject {
       bool created() const      { return _created; }
       bool saved() const        { return _saved; }
       void setSaved(bool v)     { _saved = v; }
+      bool printing() const     { return _printing; }
 
       QPointF tick2Anchor(int tick, int staffIdx) const;
       bool pos2TickAnchor(QPointF&, Staff*, int* tick, QPointF* anchor) const;

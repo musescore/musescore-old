@@ -185,10 +185,10 @@ double System::layout(ScoreLayout* layout, const QPointF& p, double w)
 
       double xoff2 = 0.0;         // x offset for instrument name
 
-      StaffList* sl = score()->staves();
-      iStaff is = sl->begin();
+      const QList<Staff*> sl = score()->staves();
+      QList<Staff*>::const_iterator is = sl.begin();
 
-      int bracketLevels = sl->front()->bracketLevels();
+      int bracketLevels = sl.front()->bracketLevels();
       double bracketWidth[bracketLevels];
       for (int i = 0; i < bracketLevels; ++i)
             bracketWidth[i] = 0.0;
@@ -279,7 +279,7 @@ double System::layout(ScoreLayout* layout, const QPointF& p, double w)
       //  layout brackets
       //---------------------------------------------------
 
-      is = sl->begin();
+      is = sl.begin();
       for (staffIdx = 0; staffIdx < nstaves; ++staffIdx) {
             SysStaff* ss = _staves[staffIdx];
 

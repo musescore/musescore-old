@@ -23,7 +23,7 @@
 
 /**
  \file
- Definition of classes Staff and StaffList.
+ Definition of classes Staff.
 */
 
 class Instrument;
@@ -70,6 +70,7 @@ class Staff {
       KeyList* _keymap;
       QList <BracketItem> _brackets;
       bool _show;             ///< derived from part->show()
+//      int _index;             ///< index in score->_staves
 
    public:
       Staff(Score*, Part*, int);
@@ -87,7 +88,8 @@ class Staff {
       int chorus() const;
       int rstaff() const             { return _rstaff; }
       int idx() const;
-      void setRstaff(int n)          { _rstaff = n; }
+//      void setIndex(int val)         { _index = val;   }
+      void setRstaff(int n)          { _rstaff = n;    }
       void read(QDomElement);
       void write(Xml& xml) const;
       Instrument* instrument() const;
@@ -105,21 +107,5 @@ class Staff {
       bool show() const              { return _show; }
       void setShow(bool val)         { _show = val; }
       };
-
-//---------------------------------------------------------
-//   StaffList
-//---------------------------------------------------------
-
-/**
- List of staves.
-*/
-
-class StaffList : public QList<Staff*> {
-   public:
-      void remove(Staff*);
-      };
-
-typedef StaffList::iterator iStaff;
-typedef StaffList::const_iterator ciStaff;
 #endif
 

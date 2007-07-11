@@ -30,6 +30,15 @@
 #include "segment.h"
 
 //---------------------------------------------------------
+//   idx
+//---------------------------------------------------------
+
+int Staff::idx() const
+      {
+      return _score->staves().indexOf((Staff*)this);  // ???
+      }
+
+//---------------------------------------------------------
 //   bracket
 //---------------------------------------------------------
 
@@ -91,7 +100,7 @@ void Staff::addBracket(BracketItem b)
             // create new bracket level
             //
 printf("create new bracket level\n");
-            foreach(Staff* s, *_score->staves()) {
+            foreach(Staff* s, _score->staves()) {
                   if (s == this)
                         s->_brackets.append(b);
                   else
@@ -194,6 +203,7 @@ Staff::Staff(Score* s, Part* p, int rs)
       _keymap = new KeyList;
       (*_keymap)[0] = 0;
       _show   = true;
+//      _index  = 0;
       }
 
 //---------------------------------------------------------
@@ -251,25 +261,6 @@ void Staff::read(QDomElement e)
             else
                   domError(e);
             }
-      }
-
-//---------------------------------------------------------
-//   remove
-//---------------------------------------------------------
-
-void StaffList::remove(Staff* p)
-      {
-      if (removeAll(p) < 1)
-            printf("StaffList::remove(%p): not found\n", p);
-      }
-
-//---------------------------------------------------------
-//   idx
-//---------------------------------------------------------
-
-int Staff::idx() const
-      {
-      return _score->staff(this);
       }
 
 //---------------------------------------------------------
@@ -451,4 +442,3 @@ void Staff::changeClef(int tick, int st)
             }
       _score->layout();
       }
-
