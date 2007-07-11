@@ -1518,6 +1518,7 @@ void ExportMusicXml::chord(Chord* chord, int staff, const LyricsList* ll)
             int octave;
             pitch2xml(note, c, alter, octave);
 
+          // pitch
             xml.stag("pitch");
             char buffer[2];
             buffer[0] = c;
@@ -1528,14 +1529,46 @@ void ExportMusicXml::chord(Chord* chord, int staff, const LyricsList* ll)
             xml.tag("octave", octave);
             xml.etag();
 
-            int acc = ACC_NONE;
+          // duration
+            xml.tag("duration", note->chord()->tickLen());
+
+          // voice
+            // for a single-staff part, staff is 0, which needs to be corrected
+            // to calculate the correct voice number
+            int voice = (staff-1) * VOICES + note->chord()->voice() + 1;
+            if (staff == 0)
+                  voice += VOICES;
+            xml.tag("voice", voice);
+
+          // type
+            int dots = 0;
+            Tuplet* t = note->chord()->tuplet();
+            int actNotes = 1;
+            int nrmNotes = 1;
+            if (t) {
+                  actNotes = t->actualNotes();
+                  nrmNotes = t->normalNotes();
+                  }
+
+            if (t) {
+                  xml.stag("time-modification");
+                  xml.tag("actual-notes", actNotes);
+                  xml.tag("normal-notes", nrmNotes);
+                  xml.etag();
+                  }
+
+            QString s = tick2xml(note->chord()->tickLen() * actNotes / nrmNotes, dots);
+            if (s.isEmpty()) {
+                  printf("no note type found for ticks %d\n",
+                     note->chord()->tickLen());
+                  }
+            xml.tag("type", s);
+            for (int ni = dots; ni > 0; ni--)
+                  xml.tagE("dot");
+
+          // accidental
             bool editorial = false;
-#if 0
-            if (note->userAccidental() != -1)
-                  acc = note->userAccidental();
-            else
-#endif
-                  acc = note->accidentalIdx();
+            int acc        = note->accidentalIdx();
             if (acc != ACC_NONE) {
                   if (6 <= acc && acc <= 10) {
                         acc -= 5;
@@ -1557,43 +1590,10 @@ void ExportMusicXml::chord(Chord* chord, int staff, const LyricsList* ll)
                         xml.tag("accidental", s);
                   }
 
-            xml.tag("duration", note->chord()->tickLen());
-
             if (note->tieBack())
                   xml.tagE("tie type=\"stop\"");
             if (note->tieFor())
                   xml.tagE("tie type=\"start\"");
-
-            // for a single-staff part, staff is 0, which needs to be corrected
-            // to calculate the correct voice number
-            int voice = (staff-1) * VOICES + note->chord()->voice() + 1;
-            if (staff == 0)
-                  voice += VOICES;
-            xml.tag("voice", voice);
-
-            int dots = 0;
-            Tuplet* t = note->chord()->tuplet();
-            int actNotes = 1;
-            int nrmNotes = 1;
-            if (t) {
-                  actNotes = t->actualNotes();
-                  nrmNotes = t->normalNotes();
-                  }
-            QString s = tick2xml(note->chord()->tickLen() * actNotes / nrmNotes, dots);
-            if (s.isEmpty()) {
-                  printf("no note type found for ticks %d\n",
-                     note->chord()->tickLen());
-                  }
-            xml.tag("type", s);
-            for (int ni = dots; ni > 0; ni--)
-                  xml.tagE("dot");
-
-            if (t) {
-                  xml.stag("time-modification");
-                  xml.tag("actual-notes", actNotes);
-                  xml.tag("normal-notes", nrmNotes);
-                  xml.etag();
-                  }
 
             // no stem for whole notes and beyond
             if (note->chord()->tickLen() < 4*division)

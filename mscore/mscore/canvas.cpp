@@ -1556,9 +1556,10 @@ void Canvas::drawElements(QPainter& p,const QList<Element*>& el)
             Element* e = el.at(i);
             e->itemDiscovered = 0;
 
-            if (!(e->visible() || score()->showInvisible()))
-                  continue;
-
+            if (!e->visible()) {
+                  if (score()->printing() || !score()->showInvisible())
+                        continue;
+                  }
 // printf("paint %s %f %f\n", e->name(), e->abbox().width(), e->abbox().height());
 
             p.save();
