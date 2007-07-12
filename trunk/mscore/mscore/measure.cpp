@@ -257,10 +257,10 @@ void Measure::push_front(Segment* e)
 void Measure::moveAll(double x, double y)
       {
       move(x, y);
-      for (iMStaff ib = staves.begin(); ib != staves.end(); ++ib) {
-            if (ib->endBarLine)
-                  ib->endBarLine->move(x, y);
-            }
+//      for (iMStaff ib = staves.begin(); ib != staves.end(); ++ib) {
+//            if (ib->endBarLine)
+//                  ib->endBarLine->move(x, y);
+//            }
       for (iElement i = _sel.begin(); i != _sel.end(); ++i)
             (*i)->move(x, y);
 
@@ -277,16 +277,6 @@ void Measure::moveAll(double x, double y)
             beam->move(x, y);
       foreach(Tuplet* t, _tuplets)
             t->move(x, y);
-      }
-
-//---------------------------------------------------------
-//   setEndBarLine
-//---------------------------------------------------------
-
-void Measure::setEndBarLine(BarLine* barLine)
-      {
-      barLine->setParent(this);
-      staves[barLine->staffIdx()].endBarLine = barLine;
       }
 
 //---------------------------------------------------------
@@ -441,12 +431,8 @@ void Measure::layout(ScoreLayout* layout, double width)
       double _spatium = layout->spatium();
       int nstaves     = _score->nstaves();
       double staffY[nstaves];
-      for (int i = 0; i < nstaves; ++i) {
+      for (int i = 0; i < nstaves; ++i)
             staffY[i] = system()->staff(i)->bbox().y();
-            //
-            // TODO: this value can change later!
-            //
-            }
       setbbox(QRectF(0, 0, width, system()->height()));
 
       layoutX(layout, width);
@@ -463,12 +449,8 @@ void Measure::layout(ScoreLayout* layout, double width)
                         continue;
                   if (e->isChordRest())
                         e->layout(layout);
+#if 0
                   else if (e->type() == BAR_LINE) {
-                        //
-                        // must be begin repeat bar
-                        // TODO: _no_ can also be a dotted bar in the middle
-                        //       of the measure
-                        //
                         BarLine* barLine = (BarLine*)e;
                         int staff = track / VOICES;
                         double y  = staffY[staff];
@@ -480,6 +462,7 @@ void Measure::layout(ScoreLayout* layout, double width)
                         barLine->setHeight(point(barLineLen));
                         barLine->setPos(barLine->pos().x(), y - point(::style->staffLineWidth) * .5);
                         }
+#endif
                   }
             for (int staff = 0; staff < nstaves; ++staff) {
                   LyricsList* ll = segment->lyricsList(staff);
@@ -506,7 +489,6 @@ void Measure::layout(ScoreLayout* layout, double width)
                         }
                   }
             }
-
       if (_noText)
             _noText->layout(layout);
       }
@@ -604,7 +586,7 @@ void Measure::layout2(ScoreLayout* layout)
          && !_irregular
          && (pn || ::style->showMeasureNumberOne)) {
             if (::style->measureNumberSystem) {
-                  if (system() && system()->measures() && system()->measures()->front() == this)
+                  if (system() && !system()->measures().empty() && system()->measures().front() == this)
                         ns = s;
                   }
             else if ((pn % ::style->measureNumberInterval) == 0)
@@ -740,6 +722,20 @@ Segment* Measure::getSegment(Element* e)
       }
 
 //---------------------------------------------------------
+//   getSegment
+//---------------------------------------------------------
+
+Segment* Measure::getSegment(Segment::SegmentType st, int t)
+      {
+      Segment* s = findSegment(st, t);
+      if (!s) {
+            s = createSegment(st, t);
+            add(s);
+            }
+      return s;
+      }
+
+//---------------------------------------------------------
 //   add
 //---------------------------------------------------------
 
@@ -837,9 +833,6 @@ void Measure::add(Element* el)
                   _sel.append(el);
                   break;
 
-            case BAR_LINE:
-                  staves[el->staffIdx()].endBarLine = (BarLine*)el;
-                  break;
             case OTTAVA:
             case PEDAL:
             case TRILL:
@@ -870,8 +863,6 @@ void Measure::add(Element* el)
 
 void Measure::remove(Element* el)
       {
-      int staff = el->staff()->idx();
-
       switch(el->type()) {
             case SEGMENT:
                   remove((Segment*)el);
@@ -954,7 +945,7 @@ void Measure::remove(Element* el)
                         }
                   printf("Measure::remove: %s %p not found\n", el->name(), el);
                   break;
-
+#if 0
             case BAR_LINE:
                   if (el->subtype() != START_REPEAT) {
                         if (staves[staff].endBarLine == el) {
@@ -966,7 +957,7 @@ void Measure::remove(Element* el)
                         }
                   printf("Measure::remove: BarLine %p not found\n", el);
                   break;
-
+#endif
             default:
                   printf("Measure::remove %s: not impl.\n", el->name());
                   break;
@@ -980,10 +971,10 @@ void Measure::remove(Element* el)
 void Measure::moveTicks(int diff)
       {
       setTick(tick() + diff);
-      for (iMStaff is = staves.begin(); is != staves.end(); ++is) {
-            if (is->endBarLine)
-                  is->endBarLine->setTick(is->endBarLine->tick() + diff);
-            }
+//      for (iMStaff is = staves.begin(); is != staves.end(); ++is) {
+//            if (is->endBarLine)
+//                  is->endBarLine->setTick(is->endBarLine->tick() + diff);
+//            }
       for (ciElement ii = _sel.begin(); ii != _sel.end(); ++ii)
             (*ii)->setTick((*ii)->tick() + diff);
       int staves = _score->nstaves();
@@ -1088,12 +1079,12 @@ void Measure::moveY(int staff, double dy)
             foreach(Lyrics* ly, *ll)
                   ly->move(0, dy);
             }
-      BarLine* barLine = staves[staff].endBarLine;
-      if (barLine) {
-            barLine->move(0, dy);
+      BarLine* bl = barLine(staff);
+      if (bl) {
+//            barLine->move(0, dy);
             if (_score->staff(staff)->isTopSplit()) {
                   Spatium barLineLen = Spatium(8) + ::style->staffDistance;
-                  barLine->setHeight(point(barLineLen));
+                  bl->setHeight(point(barLineLen));
                   }
             }
       foreach(Beam* beam, _beamList)
@@ -1199,29 +1190,21 @@ static double sff(double x, double xMin)
  Return width of measure, taking into account \a stretch.
 */
 
-MeasureWidth Measure::layoutX(ScoreLayout* layout, double stretch)
+void Measure::layoutX(ScoreLayout* layout, double stretch)
       {
       int nstaves = _score->nstaves();
       int tracks  = nstaves * VOICES;
 
       int segs = size();
 
-      if (nstaves == 0 || segs == 0)
-            return MeasureWidth(1.0, 0.0);
+      if (nstaves == 0 || segs == 0) {
+            _mw = MeasureWidth(1.0, 0.0);
+            return;
+            }
 
       //-----------------------------------------------------------------------
       //    remove empty segments
       //-----------------------------------------------------------------------
-/**/
-
-// LVIFIX: removing empty segments prevents redo of actions on elements stored in segments
-// (e.g. CLEF, CHORD, REST, TIMESIG).
-// Cause: redo restores the pointer from the segment to the element, but not does not
-// undo segment removal from the measure
-//
-// WS: this has now changed; undo/redo should create/delete segments; needs
-// further testing
-// removal at this place should not be necessary any more
 
 again:
       for (Segment* s = first(); s; s = s->next()) {
@@ -1233,27 +1216,27 @@ again:
                         }
                   }
             if (empty) {
-// printf("Measure::layoutX(): internal error: remove empty segment %p\n", s);
+//                  printf("Measure::layoutX(): note: remove empty segment %p\n", s);
                   remove(s);
                   goto again;
                   }
             }
 
       segs = size();
-      if (segs == 0)
-            return MeasureWidth(1.0, 0.0);
+      if (segs == 0) {
+            _mw = MeasureWidth(1.0, 0.0);
+            return;
+            }
 
       //-----------------------------------------------------------------------
       //    fill array of Spaces for all segments and staves
       //    spaces[0]      - left margin
-      //    spaces[segs+1] - right margin
-      //    xpos[segs+2]   - start of next measure (width of current measure)
+      //    // spaces[segs+1] - right margin
       //-----------------------------------------------------------------------
 
-      Space spaces[segs+2][nstaves];
-      double xpos[segs+3];
+      Space spaces[segs+1][nstaves];
       double ypos[tracks];
-      double width[segs+2];
+      double width[segs+1];
 
       int seg = 1;
       bool notesSeg = first()->subtype() == Segment::SegChordRest;
@@ -1269,9 +1252,8 @@ again:
                   notesSeg = true;
                   }
             if (s->subtype() == Segment::SegChordRest) {
-                  if (firstNoteRest) {
+                  if (firstNoteRest)
                         firstNoteRest = false;
-                        }
                   else
                         additionalExtra = point(::style->minNoteDistance);
                   }
@@ -1281,13 +1263,21 @@ again:
                   additionalExtra = point(::style->timesigLeftMargin);
             else if (s->subtype() == Segment::SegKeySig)
                   additionalExtra = point(::style->keysigLeftMargin);
+            else if (s->subtype() == Segment::SegEndBarLine)
+                  additionalExtra = point(::style->barNoteDistance);
+            else if (s->subtype() == Segment::SegTimeSigAnnounce) {
+                  // additionalExtra = point(::style->timesigLeftMargin);
+                  additionalMin   = point(Spatium(1.0));
+                  }
 
             for (int staffIdx = 0; staffIdx < nstaves; ++staffIdx) {
-                  double min = 0.0, extra = 0.0;
                   Staff* staff = score()->staff(staffIdx);
                   spaces[seg][staffIdx].setValid(false);
                   if (!staff->show())
                         continue;
+
+                  double min   = 0.0;
+                  double extra = 0.0;
                   for (int voice = 0; voice < VOICES; ++voice) {
                         Element* el  = s->element(staffIdx * VOICES + voice);
                         if (!el)
@@ -1301,6 +1291,7 @@ again:
                         if (extra1 > extra)
                               extra = extra1;
                         }
+
                   const LyricsList* ll = s->lyricsList(staffIdx);
                   for (ciLyrics l = ll->begin(); l != ll->end(); ++l) {
                         if (!*l)
@@ -1317,39 +1308,27 @@ again:
                   }
             }
       for (int staffIdx = 0; staffIdx < nstaves; ++staffIdx) {
-            Spatium lMargin;
+            Spatium min;
+            Spatium extra;
             switch(first()->subtype()) {
                   case Segment::SegClef:
-                        lMargin = ::style->clefLeftMargin;
+                        min = ::style->clefLeftMargin;
                         break;
                   case Segment::SegKeySig:
-                        lMargin = ::style->keysigLeftMargin;
+                        min = ::style->keysigLeftMargin;
                         break;
+                  case Segment::SegTimeSigAnnounce:
                   case Segment::SegTimeSig:
-                        lMargin = ::style->timesigLeftMargin;
+                        min = ::style->timesigLeftMargin;
                         break;
                   case Segment::SegChordRest:
-                        lMargin = ::style->barNoteDistance;
-                        break;
-                  case Segment::SegBarLine:
-                        lMargin = Spatium(0);
+                        min = ::style->barNoteDistance;
                         break;
                   }
-            spaces[0][staffIdx].setMin(point(lMargin));
-            spaces[0][staffIdx].setExtra(0.0);
+            spaces[0][staffIdx].setMin(point(min));
+            spaces[0][staffIdx].setExtra(point(extra));
             spaces[0][staffIdx].setValid(true);
-            double w;
-            BarLine* barLine = staves[staffIdx].endBarLine;
-            if (barLine)
-                  w = barLine->width();
-            else
-                  w = 0.0;
-            spaces[segs+1][staffIdx].setExtra(point(::style->noteBarDistance));
-            spaces[segs+1][staffIdx].setMin(w);
-            spaces[segs+1][staffIdx].setValid(true);
             }
-
-// #define DEBUG
 
 #ifdef DEBUG
       printf("Measure %d:1======== \n", _no);
@@ -1369,7 +1348,7 @@ again:
       //---------------------------------------------------
 
       for (int staffIdx = 0; staffIdx < nstaves; ++staffIdx) {
-            for (int seg = segs+1; seg > 0; --seg) {    // seg 0 cannot move any space
+            for (int seg = segs; seg > 0; --seg) {    // seg 0 cannot move any space
                   double extra = spaces[seg][staffIdx].extra();
                   if (extra < 0.00001)
                         continue;
@@ -1403,13 +1382,13 @@ again:
       //    populate width[] array
       //---------------------------------------------------
 
-      for (int seg = segs+1; seg >= 0; --seg) {
+      for (int seg = segs; seg >= 0; --seg) {
             double ww = 0.0;
             for (int staffIdx = 0; staffIdx < nstaves; ++staffIdx) {
                   if (!spaces[seg][staffIdx].valid())
                         continue;
                   double w = spaces[seg][staffIdx].min();
-                  for (int nseg = seg+1; nseg < segs+2; ++nseg) {
+                  for (int nseg = seg+1; nseg < segs+1; ++nseg) {
                         if (spaces[nseg][staffIdx].valid())
                               break;
                         w -= width[nseg];
@@ -1434,8 +1413,8 @@ again:
       //    equal width
       //---------------------------------------------------
 
-      int ticks[segs+2];
-      memset(ticks, 0, (segs+2) * sizeof(int));
+      int ticks[segs+1];
+      memset(ticks, 0, (segs + 1) * sizeof(int));
 
       //--------tick table for segments
       int minTick   = 100000;
@@ -1474,11 +1453,11 @@ again:
       // compute stretches:
 
       springs.clear();
-      double stretchList[segs+2];
+      double stretchList[segs + 1];
       double stretchSum   = 0.0;
       stretchList[0]      = 0.0;
-      stretchList[segs+1] = 0.0;
-      double minimum      = width[0] + width[segs+1];
+
+      double minimum = width[0];  // + width[segs+1];
       for (int i = 1; i < segs+1; ++i) {
             double str = 1.0;
             double d;
@@ -1517,8 +1496,13 @@ again:
             width[i->second.seg] = stretch;
             }
 
+      //-----------------------------------------------------------------------
+      //    xpos[segs+2]   - start of next measure (width of current measure)
+      //-----------------------------------------------------------------------
+
+      double xpos[segs+2];
       xpos[0] = 0.0;
-      for (int seg = 0; seg < segs+2; ++seg)
+      for (int seg = 0; seg < segs+1; ++seg)
             xpos[seg+1] = xpos[seg] + width[seg];
 
 #ifdef DEBUG
@@ -1545,11 +1529,11 @@ again:
       for (Segment* s = first(); s; s = s->next(), ++seg) {
             s->setPos(xpos[seg], 0.0);
             for (int staff = 0; staff < tracks; ++staff) {
-                  double y = ypos[staff/VOICES];
-                  QPointF pos(0.0, y);
                   Element* e = s->element(staff);
                   if (e == 0)
                         continue;
+                  double y = ypos[staff/VOICES];
+                  QPointF pos(0.0, y);
                   ElementType t = e->type();
                   if (t == REST) {
                         double y = ypos[staff/VOICES + ((Rest*)e)->move()];
@@ -1560,17 +1544,10 @@ again:
                         double yoffset = 0.0;   // hack for whole rest symbol
                         if (!_irregular && len == _score->sigmap->ticksMeasure(e->tick())) {
                               // center whole rest
-                              int idx = 0;
-                              for (Segment* s = _first; s; s = s->next(), ++idx) {
-                                    if (s->subtype() == Segment::SegChordRest)
-                                          break;
-                                    }
-                              double o = xpos[idx+1];
-                              double w = xpos[segs+2] - o;
-                              pos.setX(w/2.0 - e->width()/2.0);
+                              pos.setX(width[seg]);
                               yoffset = -_spatium;
                               }
-                        if (e->voice() == 1)
+                        if (e->voice() == 1)          // TODO: check ??
                               y += -1 * _spatium;
                         else
                               y += 2 * _spatium;
@@ -1596,12 +1573,15 @@ again:
                               e->setPos(- e->bbox().x() - xo + point(::style->timesigLeftMargin), y);
                         else if (t == KEYSIG)
                               e->setPos(- e->bbox().x() - xo + point(::style->keysigLeftMargin), y);
+                        else  if (s->subtype() == Segment::SegEndBarLine) {
+                              e->setPos(0.0, y);
+                              }
                         else
                               e->setPos(- e->bbox().x() - xo, y);
                         }
                   }
             }
-      return MeasureWidth(xpos[segs+2], 0.0);
+      _mw = MeasureWidth(xpos[segs + 1], 0.0);
       }
 
 //---------------------------------------------------------
@@ -1683,12 +1663,13 @@ void Measure::cmdAddStaves(int sStaff, int eStaff)
             if (staff->isTop()) {
                   barLine = new BarLine(score());
                   barLine->setParent(this);
+                  setEndBarLine(barLine);
                   }
             MStaff ms;
 
-            ms.endBarLine = barLine;
-            staves.insert(i, ms);
-            _score->undoOp(UndoOp::InsertMStaff, this, ms, i);
+//            ms.endBarLine = barLine;
+//            staves.insert(i, ms);
+//            _score->undoOp(UndoOp::InsertMStaff, this, ms, i);
 
             int tickLen = _score->sigmap->ticksMeasure(tick());
             Rest* rest = new Rest(score(), tick(), tickLen);
@@ -1737,14 +1718,15 @@ void Measure::insertStaff1(Staff* staff, int staffIdx)
       for (Segment* s = _first; s; s = s->next())
             s->insertStaff(staffIdx);
 
-      BarLine* barLine = 0;
       if (staff->isTop()) {
-            barLine = new BarLine(score());
-            barLine->setParent(this);
+            BarLine* bl = new BarLine(score());
+            bl->setParent(this);
+            bl->setStaff(staff);
+            setEndBarLine(bl);
             }
 
       MStaff ms;
-      ms.endBarLine = barLine;
+//      ms.endBarLine = barLine;
       ms.distance = point(staffIdx == 0 ? style->systemDistance : style->staffDistance);
       staves.insert(staves.begin()+staffIdx, ms);
       }
@@ -1907,13 +1889,13 @@ Element* Measure::drop(const QPointF& p, const QPointF& /*offset*/, int type, co
 
             case BAR_LINE:
                   {
-                  BarLine* barLine = new BarLine(score());
-                  barLine->read(e);
-                  int subtype = barLine->subtype();
-                  delete barLine;
+                  BarLine* bl = new BarLine(score());
+                  bl->read(e);
+                  int subtype = bl->subtype();
+                  delete bl;
 
                   for (int i = 0; i < staves.size(); ++i) {
-                        MStaff& s = staves[i];
+                        // MStaff& s = staves[i];
                         Staff* staff = score()->staff(i);
                         if (!staff->isTop())
                               continue;
@@ -1942,10 +1924,9 @@ Element* Measure::drop(const QPointF& p, const QPointF& /*offset*/, int type, co
                               bl = 0;
                               Measure* m = system()->prevMeasure(this);
                               if (m) {
-                                    MStaffList* sl = m->staffList();
-                                    MStaff& ms = (*sl)[i];
-                                    if (ms.endBarLine)
-                                          score()->cmdRemove(ms.endBarLine);
+                                    BarLine* bl = m->barLine(i);
+                                    if (bl)
+                                          score()->cmdRemove(bl);
                                     }
                               }
                         else {
@@ -1966,9 +1947,10 @@ Element* Measure::drop(const QPointF& p, const QPointF& /*offset*/, int type, co
                                                 }
                                           }
                                     }
-                              if (s.endBarLine)
-                                    score()->cmdRemove(s.endBarLine);
-                              BarLine* bl = new BarLine(score());
+                              BarLine* bl = barLine(i);
+                              if (bl)
+                                    score()->cmdRemove(bl);
+                              bl = new BarLine(score());
                               bl->setSubtype(subtype);
                               bl->setStaff(staff);
                               bl->setParent(this);
@@ -2133,9 +2115,9 @@ void Measure::write(Xml& xml, int no, int staff) const
                   xml.tag("stretch", _userStretch);
             }
 
-      const MStaff* ms = &staves[staff];
-      if (ms->endBarLine)
-            ms->endBarLine->write(xml);
+//      const MStaff* ms = &staves[staff];
+//      if (ms->endBarLine)
+//            ms->endBarLine->write(xml);
       for (ciElement i = _sel.begin(); i != _sel.end(); ++i) {
             if ((*i)->staff() == _score->staff(staff) && (*i)->type() != SLUR_SEGMENT)
                   (*i)->write(xml);
@@ -2184,9 +2166,9 @@ void Measure::write(Xml&xml) const
 
       for (int staffIdx = 0; staffIdx < _score->nstaves(); ++staffIdx) {
             xml.stag("Staff");
-            const MStaff* ms = &staves[staffIdx];
-            if (ms->endBarLine)
-                  ms->endBarLine->write(xml);
+//            const MStaff* ms = &staves[staffIdx];
+//            if (ms->endBarLine)
+//                  ms->endBarLine->write(xml);
             for (ciElement i = _sel.begin(); i != _sel.end(); ++i) {
                   if ((*i)->staff() == _score->staff(staffIdx) && (*i)->type() != SLUR_SEGMENT)
                         (*i)->write(xml);
@@ -2256,7 +2238,7 @@ void Measure::read(QDomElement e, int idx)
                         s->add(barLine);
                         }
                   else
-                        staves[idx].endBarLine = barLine;
+                        setEndBarLine(barLine);
                   }
             else if (tag == "Chord") {
                   Chord* chord = new Chord(score());
@@ -2621,5 +2603,37 @@ void Measure::collectElements(QList<Element*>& el)
 
       if (noText())
             el.append(noText());
+      }
+
+//---------------------------------------------------------
+//   barLine
+//---------------------------------------------------------
+
+BarLine* Measure::barLine(int staff) const
+      {
+      int track = staff * VOICES;
+      for (Segment* s = first(); s; s = s->next()) {
+            if (s->subtype() != Segment::SegEndBarLine)
+                  continue;
+            if (s->element(track))
+                  return (BarLine*)(s->element(track));
+            }
+      return 0;
+      }
+
+//---------------------------------------------------------
+//   setEndBarLine
+//---------------------------------------------------------
+
+void Measure::setEndBarLine(BarLine* ebl)
+      {
+      BarLine* bl = barLine(ebl->staffIdx());
+      if (bl) {
+            printf("Measure::setEndBarLine: already set\n");
+            return;
+            }
+      int t = tick() + tickLen();
+      Segment* seg = getSegment(Segment::SegEndBarLine, t);
+      seg->add(ebl);
       }
 

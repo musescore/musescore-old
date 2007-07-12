@@ -434,8 +434,7 @@ Measure* Score::pos2measure(const QPointF& p, int* tick, Staff** rst, int* pitch
                         continue;
                         }
                   QPointF ppp = pp - s->pos();   // system relative
-                  for (ciMeasure im = s->measures()->begin(); im != s->measures()->end(); ++im) {
-                        Measure* m = *im;
+                  foreach(Measure* m, s->measures()) {
                         if (ppp.x() > (m->x() + m->bbox().width()))
                               continue;
                         double sy1 = 0;
@@ -569,8 +568,7 @@ Measure* Score::pos2measure2(const QPointF& p, int* tick, Staff** rst, int* line
                         continue;
                         }
                   QPointF ppp = pp - s->pos();   // system relative
-                  for (ciMeasure im = s->measures()->begin(); im != s->measures()->end(); ++im) {
-                        Measure* m = *im;
+                  foreach(Measure* m, s->measures()) {
                         if (ppp.x() > (m->x() + m->bbox().width()))
                               continue;
                         double sy1 = 0;

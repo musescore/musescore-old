@@ -1,3 +1,6 @@
+12.7.7 (ws)
+      - new feature: automatically add cautionary time signatures at end of
+        systems
 10.7.7 (ws)
       - implement anchor help lines for slur editing
       - fixed lyrics layout when lyrics are not in first staff

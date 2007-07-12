@@ -712,12 +712,12 @@ void Score::cmdAddText(int subtype)
             printf("first create measure, then repeat operation\n");
             return;
             }
-      MeasureList* ml = sl->front()->measures();
-      if (ml == 0 || ml->empty()) {
+      const QList<Measure*>& ml = sl->front()->measures();
+      if (ml.empty()) {
             printf("first create measure, then repeat operation\n");
             return;
             }
-      Measure* measure = ml->front();
+      Measure* measure = ml.front();
 
       Text* s = new Text(this);
       s->setSubtype(subtype);

@@ -76,10 +76,7 @@ SysStaff::~SysStaff()
 System::System(Score* s)
    : Element(s)
       {
-//      barLine = new BarLine(s);
-//      barLine->setParent(this);
       barLine = 0;
-      ml = new MeasureList;
       }
 
 //---------------------------------------------------------
@@ -90,7 +87,6 @@ System::~System()
       {
       if (barLine)
             delete barLine;
-      delete ml;
       }
 
 //---------------------------------------------------------
@@ -346,17 +342,14 @@ void System::layout2(ScoreLayout* layout)
             else
                   setDistance(staffIdx, ::style->staffDistance);
             double dist = 0.0;
-            for (iMeasure im = ml->begin(); im != ml->end(); ++im) {
-                  Measure* m = *im;
+            foreach(Measure* m, ml)
                   dist = std::max(dist, m->distance(staffIdx));
-                  }
             if (dist > distance(staffIdx))
                  setDistance(staffIdx, dist);
             //
             //  layout lyrics separators
             //
-            for (iMeasure im = ml->begin(); im != ml->end(); ++im) {
-                  Measure* m = *im;
+            foreach(Measure* m, ml) {
                   for (Segment* s = m->first(); s; s = s->next()) {
                         LyricsList* ll = s->lyricsList(staffIdx);
                         if (!ll)
@@ -380,10 +373,8 @@ void System::layout2(ScoreLayout* layout)
             s->setbbox(QRectF(s->bbox().x(), y, s->bbox().width(), 4 * _spatium));
             // moveY measures
             if (staffIdx && dy != 0.0) {
-                  for (iMeasure im = ml->begin(); im != ml->end(); ++im) {
-                        Measure* m = *im;
+                  foreach(Measure* m, ml)
                         m->moveY(staffIdx, dy);
-                        }
                   }
             y += 4 * _spatium + s->distance();
             }
@@ -396,10 +387,9 @@ void System::layout2(ScoreLayout* layout)
       for (int i = 0; i < staves; ++i)
             staffY[i] = staff(i)->bbox().y();
 
-      for (iMeasure im = ml->begin(); im != ml->end(); ++im) {
-            Measure* m = *im;
+      foreach(Measure* m, ml) {
             QList<Part*>* pl = _score->parts();
-            double x  = m->width();
+            // double x  = m->width();
             int staff = 0;
             Spatium barLineLen(4);
             barLineLen += ::style->staffLineWidth;
@@ -409,7 +399,6 @@ void System::layout2(ScoreLayout* layout)
                         double y1 = staffY[staff];
                         double y2 = staffY[staff + p->nstaves() - 1] + point(barLineLen);
                         barLine->setHeight(y2 - y1);
-                        barLine->setPos(x - barLine->width(), y1 - point(::style->staffLineWidth) * .5);
                         }
                   staff += p->nstaves();
                   }
@@ -499,7 +488,7 @@ void SysStaff::move(double x, double y)
 
 void System::clear()
       {
-      ml->clear();
+      ml.clear();
       }
 
 //---------------------------------------------------------
@@ -619,12 +608,11 @@ void System::remove(Element* el)
 
 int System::snap(int tick, const QPointF p) const
       {
-      for (ciMeasure im = ml->begin(); im != ml->end(); ++im) {
-            Measure* m = *im;
+      foreach(const Measure* m, ml) {
             if (p.x() < m->x() + m->width())
                   return m->snap(tick, p - m->pos());
             }
-      return ml->back()->snap(tick, p-pos());
+      return ml.back()->snap(tick, p-pos());
       }
 
 //---------------------------------------------------------
@@ -633,46 +621,33 @@ int System::snap(int tick, const QPointF p) const
 
 int System::snapNote(int tick, const QPointF p, int staff) const
       {
-      for (ciMeasure im = ml->begin(); im != ml->end(); ++im) {
-            Measure* m = *im;
+      foreach(const Measure* m, ml) {
             if (p.x() < m->x() + m->width())
                   return m->snapNote(tick, p - m->pos(), staff);
             }
-      return ml->back()->snap(tick, p-pos());
+      return ml.back()->snap(tick, p-pos());
       }
 
 //---------------------------------------------------------
 //   prevMeasure
 //---------------------------------------------------------
 
-Measure* System::prevMeasure(Measure* m) const
+Measure* System::prevMeasure(const Measure* m) const
       {
-      for (iMeasure i = ml->begin(); i != ml->end(); ++i) {
-            if (*i == m) {
-                  if (i == ml->begin())
-                        return 0;
-                  --i;
-                  return *i;
-                  }
-            }
-      return 0;
+      if (m == ml.front())
+            return 0;
+      return m->prev();
       }
 
 //---------------------------------------------------------
 //   nextMeasure
 //---------------------------------------------------------
 
-Measure* System::nextMeasure(Measure* m) const
+Measure* System::nextMeasure(const Measure* m) const
       {
-      for (iMeasure i = ml->begin(); i != ml->end(); ++i) {
-            if (*i == m) {
-                  ++i;
-                  if (i == ml->end())
-                        return 0;
-                  return *i;
-                  }
-            }
-      return 0;
+      if (m == ml.back())
+            return 0;
+      return m->next();
       }
 
 //---------------------------------------------------------

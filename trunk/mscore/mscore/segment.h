@@ -48,6 +48,8 @@ typedef LyricsList::const_iterator ciLyrics;
  A Segment is typed, i.e. all Elements in a Segment are of the same type.
  All Elements also start at the same tick. The Segment can store one Element for
  each voice in each staff in the score. It also stores the lyrics for each staff.
+ Some elements (Clef, KeySig, TimeSig etc.) are assumed to always have voice zero
+ and can be found in _elist[staffIdx * VOICES];
 
  Segments are children of Measures and store Clefs, KeySigs, TimeSigs,
  BarLines and ChordRests.
@@ -56,13 +58,14 @@ typedef LyricsList::const_iterator ciLyrics;
 class Segment : public Element {
    public:
       enum SegmentType {
-            SegClef, SegKeySig, SegTimeSig, SegBarLine, SegChordRest
+            SegClef, SegKeySig, SegTimeSig, SegBarLine, SegChordRest,
+            SegEndBarLine, SegTimeSigAnnounce
             };
       static const char* segmentTypeNames[];
 
    private:
       QList<Element*> _elist;      ///< Element storage, size = staves * VOICES.
-      QList<LyricsList> _lyrics;   ///< Lyrics storage, size = staves.
+      QList<LyricsList> _lyrics;   ///< Lyrics storage, size  = staves.
 
       void init();
 

@@ -35,7 +35,6 @@ class BarLine;
 class Clef;
 class Page;
 class Text;
-class MeasureList;
 class Bracket;
 class Lyrics;
 class Segment;
@@ -85,7 +84,7 @@ typedef SysStaffList::const_iterator ciSysStaff;
 */
 
 class System : public Element {
-      MeasureList* ml;
+      QList<Measure*> ml;
       SysStaffList _staves;
       BarLine* barLine;       ///< Left hand bar, connects staves in system.
       bool _pageBreak;
@@ -113,7 +112,7 @@ class System : public Element {
       void layout2(ScoreLayout*);         ///< Called after Measure layout.
       void clear();                       ///< Clear measure list.
 
-      MeasureList* measures() const { return ml; }
+      QList<Measure*>& measures()          { return ml; }
 
       QRectF bboxStaff(int staff) const;
       SysStaffList* staves()               { return &_staves; }
@@ -133,8 +132,8 @@ class System : public Element {
       void setInstrumentNames();
       int snap(int tick, const QPointF p) const;
       int snapNote(int tick, const QPointF p, int staff) const;
-      Measure* prevMeasure(Measure*) const;
-      Measure* nextMeasure(Measure*) const;
+      Measure* prevMeasure(const Measure*) const;
+      Measure* nextMeasure(const Measure*) const;
       };
 
 typedef QList<System*>::iterator iSystem;

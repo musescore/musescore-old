@@ -675,14 +675,13 @@ bool Score::loadFile(QFile* qf)
                   Staff* sp = staff(i);
                   if (!sp->isTop())
                         continue;
-                  MStaffList* sl = m->staffList();
-                  MStaff& s = (*sl)[i];
-                  if (s.endBarLine != 0)
-                        continue;
-                  BarLine* barLine = new BarLine(this);
-                  barLine->setStaff(sp);
-                  barLine->setSubtype(NORMAL_BAR);
-                  m->add(barLine);
+                  BarLine* barLine = m->barLine(i);
+                  if (barLine == 0) {
+                        barLine = new BarLine(this);
+                        barLine->setStaff(sp);
+                        barLine->setSubtype(NORMAL_BAR);
+                        m->setEndBarLine(barLine);
+                        }
                   }
             }
       _layout->connectTies();
@@ -822,7 +821,7 @@ void Score::printFile()
             el.clear();
             page->collectElements(el);
             foreach(System* system, *page->systems()) {
-                  foreach(Measure* m, *system->measures()) {
+                  foreach(Measure* m, system->measures()) {
                         m->collectElements(el);
                         }
                   }

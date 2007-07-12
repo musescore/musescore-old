@@ -370,7 +370,7 @@ bool ScoreLayout::layoutPage(Page* page, Measure*& im, iSystem& is)
             qreal h = system->bbox().height() + point(::style->systemDistance);
             if (y + h >= ey) {  // system does not fit on page
                   // rollback
-                  im = system->measures()->front();
+                  im = system->measures().front();
                   --is;
                   break;
                   }
@@ -432,7 +432,6 @@ System* ScoreLayout::layoutSystem(Measure*& im, System* system, qreal x, qreal y
       double systemWidth  = w - systemOffset;
       double minWidth     = 0;
       double uStretch     = 0.0;
-      QList<double> mwList;
 
       bool pageBreak = false;
 
@@ -474,10 +473,9 @@ System* ScoreLayout::layoutSystem(Measure*& im, System* system, qreal x, qreal y
                         }
                   }
 
-            MeasureWidth mw = m->layoutX(this, 1.0);
-            double ww       = mw.stretchable;
+            m->layoutX(this, 1.0);
 
-            mwList.push_back(ww);
+            double ww      = m->layoutWidth().stretchable;
             double stretch = m->userStretch() * ::style->measureSpacing;
 
             ww *= stretch;
@@ -487,8 +485,9 @@ System* ScoreLayout::layoutSystem(Measure*& im, System* system, qreal x, qreal y
             if (minWidth + ww > systemWidth) {
                   // minimum is one measure
                   if (nm == 0) {
-                        minWidth  += ww;
-                        nm = 1;
+                        minWidth = systemWidth;
+                        uStretch = stretch;
+                        nm       = 1;
                         printf("warning: system too small (%f+%f) > %f\n",
                            minWidth, ww, systemWidth);
                         // bad things are happening here
@@ -496,12 +495,13 @@ System* ScoreLayout::layoutSystem(Measure*& im, System* system, qreal x, qreal y
                   break;
                   }
             ++nm;
-            minWidth  += ww;
-            uStretch  += stretch;
+            minWidth += ww;
+            uStretch += stretch;
             if (pageBreak || m->lineBreak())
                   break;
             }
       system->setPageBreak(pageBreak);
+
 
       //-------------------------------------------------------
       //    Round II
@@ -511,30 +511,47 @@ System* ScoreLayout::layoutSystem(Measure*& im, System* system, qreal x, qreal y
       //    uStretch is the accumulated userStretch
       //-------------------------------------------------------
 
-      minWidth = 0.0;
-      double totalWeight = 0.0;
       Measure* itt = im;
-      for (int i = 0; itt && (i < nm); ++i, itt = itt->next()) {
-            minWidth    += mwList[i];
-            totalWeight += itt->tickLen() * itt->userStretch();
+      for (int i = 0; i < nm; ++i, itt = itt->next())
+            system->measures().push_back(itt);
+      im = itt;
+
+      Measure* lm = system->measures().back();
+      SigEvent sig1 = _score->sigmap->timesig(lm->tick() + lm->tickLen() - 1);
+      SigEvent sig2 = _score->sigmap->timesig(lm->tick() + lm->tickLen());
+      if (!(sig1 == sig2)) {
+            int tick = lm->tick() + lm->tickLen();
+            Segment* s  = lm->getSegment(Segment::SegTimeSigAnnounce, tick);
+            int nstaves = score()->nstaves();
+            for (int staff = 0; staff < nstaves; ++staff) {
+                  if (s->element(staff * VOICES) == 0) {
+                        TimeSig* ts = new TimeSig(score(), sig2.denominator, sig2.nominator);
+                        ts->setStaff(score()->staff(staff));
+                        s->add(ts);
+                        }
+                  }
+            }
+
+      minWidth           = 0.0;
+      double totalWeight = 0.0;
+
+      foreach(Measure* m, system->measures()) {
+            minWidth    += m->layoutWidth().stretchable;
+            totalWeight += m->tickLen() * m->userStretch();
             }
 
       double rest = layoutDebug ? 0.0 : systemWidth - minWidth;
       QPointF pos(systemOffset, 0);
 
-      itt = im;
-      for (int i = 0; itt && (i < nm); ++i, itt = itt->next()) {
-            system->measures()->push_back(itt);
-            itt->setPos(pos);
-            double weight = itt->tickLen() * itt->userStretch();
-            double ww     = mwList[i] + rest * weight / totalWeight;
-            itt->layout(this, ww);
+      foreach(Measure* m, system->measures()) {
+            m->setPos(pos);
+            double weight = m->tickLen() * m->userStretch();
+            double ww     = m->layoutWidth().stretchable + rest * weight / totalWeight;
+            m->layout(this, ww);
             pos.rx() += ww;
             }
 
-      system->layout2(this);      // layout staff distances
-
-      im = itt;
+      system->layout2(this);      // layout staves vertical
       return system;
       }
 
