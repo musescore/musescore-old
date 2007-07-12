@@ -931,13 +931,8 @@ static inline unsigned long long cycles()
 
 void Canvas::paintEvent(QPaintEvent* ev)
       {
-// QRect r = ev->rect();
-// printf("Canvas::paintEvent() %d %d %d %d\n", r.x(), r.y(), r.width(), r.height());
-
-// unsigned long long now = cycles();
       QRect rr;
       if (_score->needLayout()) {
-// printf("paintEvent: do Layout\n");
             _score->doLayout();
             if (navigator)
                   navigator->layoutChanged();
@@ -954,17 +949,13 @@ void Canvas::paintEvent(QPaintEvent* ev)
             foreach(QRect r, vector) {
                   // refresh a little more:
                   rr = r.adjusted(-dx, -dy, 2 * dx, 2 * dy);
-// printf("   paintEvent() %d %d %d %d\n", rr.x(), rr.y(), rr.width(), rr.height());
                   paint(rr);
                   }
             }
-//      printf("redraw cycles %lld\n", (cycles() - now) / 1000000LL);
       }
 
 void Canvas::paint(const QRect& rr)
       {
-//  printf("Canvas::paint() %d %d %d %d\n", rr.x(), rr.y(), rr.width(), rr.height());
-
       QPainter p(this);
       p.setRenderHint(QPainter::Antialiasing, preferences.antialiasedDrawing);
 
@@ -980,7 +971,6 @@ void Canvas::paint(const QRect& rr)
       QRegion r1(rr);
       for (iPage ip = _layout->pages()->begin(); ip != _layout->pages()->end(); ++ip) {
             Page* page = *ip;
-//            page->draw(p);
             r1 -= _matrix.mapRect(page->abbox()).toRect();
             }
       p.setClipRect(fr);
@@ -1550,8 +1540,6 @@ Element* Canvas::elementAt(const QPointF& p)
 
 void Canvas::drawElements(QPainter& p,const QList<Element*>& el)
       {
-// printf("drawElements %d\n", el.size());
-
       for (int i = 0; i < el.size(); ++i) {
             Element* e = el.at(i);
             e->itemDiscovered = 0;
@@ -1560,8 +1548,6 @@ void Canvas::drawElements(QPainter& p,const QList<Element*>& el)
                   if (score()->printing() || !score()->showInvisible())
                         continue;
                   }
-// printf("paint %s %f %f\n", e->name(), e->abbox().width(), e->abbox().height());
-
             p.save();
             p.translate(e->canvasPos());
             p.setPen(QPen(e->color()));
@@ -1582,13 +1568,6 @@ void Canvas::drawElements(QPainter& p,const QList<Element*>& el)
                   qreal y = e->bbox().y();
                   p.drawLine(QLineF(x-w, y-h, x+w, y+h));
                   p.drawLine(QLineF(x+w, y-h, x-w, y+h));
-#if 0
-                  Element* seg = e->parent();
-                  if (e->type() == NOTE)
-                        seg = seg->parent();
-                  p.setPen(QPen(Qt::red, 0, Qt::SolidLine));
-                  p.drawRect(seg->bbox());
-#endif
                   }
             p.restore();
             }

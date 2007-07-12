@@ -210,6 +210,7 @@ void Score::select(Element* obj, int state, int staff)
             sel->tickEnd    = tickEnd;
 
             SelState selState = SEL_STAFF;
+
             if (state & Qt::ControlModifier)
                   selState = SEL_SYSTEM;
             else if ((state & Qt::ShiftModifier) && (sel->state == SEL_SYSTEM))
@@ -217,7 +218,7 @@ void Score::select(Element* obj, int state, int staff)
 
             if (selState == SEL_SYSTEM) {
                   sel->staffStart = 0;
-                  sel->staffEnd = nstaves();
+                  sel->staffEnd   = nstaves();
                   }
             if (sel->state != selState) {
                   sel->deselectAll(this);

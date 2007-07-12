@@ -236,11 +236,10 @@ void PageListEditor::updateList()
 
                   // SysStaffList* staffList = system->staves();
 
-                  MeasureList* ml = system->measures();
-                  for (iMeasure im = ml->begin(); im != ml->end(); ++im) {
-                        Measure* measure = *im;
+                  foreach (Measure* measure, system->measures()) {
                         ElementItem* mi = new ElementItem(si, measure);
 
+#if 0
                         MStaffList* sl = measure->staffList();
                         int staff = 0;
                         for (iMStaff i = sl->begin(); i != sl->end(); ++i, ++staff) {
@@ -249,6 +248,7 @@ void PageListEditor::updateList()
                                     new ElementItem(mi, ms->endBarLine);
                                     }
                               }
+#endif
 
                         foreach(Element* e, *measure->el()) {
                               switch(e->type()) {

@@ -47,7 +47,7 @@ class Viewer;
 //---------------------------------------------------------
 
 /**
- Return value for layoutX().
+ result of layoutX().
 */
 
 struct MeasureWidth {
@@ -70,12 +70,10 @@ struct MeasureWidth {
 */
 
 struct MStaff {
-      BarLine* endBarLine;
       double distance;
       double userDistance;
 
       MStaff() {
-            endBarLine = 0;
             distance = .0;
             userDistance = .0;
             }
@@ -117,6 +115,8 @@ class Measure : public Element {
       bool _lineBreak;        ///< Forced line break
       bool _pageBreak;        ///< Forced page break
       bool _irregular;        ///< Irregular measure, do not count
+
+      MeasureWidth _mw;
 
       void push_back(Segment* e);
       void push_front(Segment* e);
@@ -174,6 +174,8 @@ class Measure : public Element {
       void setLineBreak(bool v)        { _lineBreak = v;    }
       void setPageBreak(bool v)        { _pageBreak = v;    }
 
+      MeasureWidth& layoutWidth()      { return _mw;        }
+
       void addBeam(Beam* b);
 
       System* system() const        { return (System*)parent(); }
@@ -181,9 +183,9 @@ class Measure : public Element {
 
       ElementList* el()             { return &_sel; }
       const ElementList* el() const { return &_sel; }
-      BarLine* barLine(int staff) const     { return staves[staff].endBarLine;   }
+      BarLine* barLine(int staff) const;
 
-      MeasureWidth layoutX(ScoreLayout*, double stretch);
+      void layoutX(ScoreLayout*, double stretch);
       void layout(ScoreLayout*, double width);
       void moveY(int, double);
       void layout2(ScoreLayout*);
@@ -229,28 +231,13 @@ class Measure : public Element {
       int ending() const            { return _ending; }
       void setEnding(int r)         { _ending = r;    }
       Segment* getSegment(Element* el);
+      Segment* getSegment(Segment::SegmentType st, int tick);
       Segment* findSegment(Segment::SegmentType st, int t);
       Segment* createSegment(Segment::SegmentType st, int t);
       void setEndBarLine(BarLine* barLine);
       void cmdRemoveEmptySegment(Segment* s);
       void collectElements(QList<Element*>& el);
       };
-
-//---------------------------------------------------------
-//   MeasureList
-//---------------------------------------------------------
-
-/**
- List of measures.
-*/
-
-class MeasureList : public QList<Measure*> {
-   public:
-      MeasureList() {}
-      };
-
-typedef MeasureList::iterator iMeasure;
-typedef MeasureList::const_iterator ciMeasure;
 
 #endif
 

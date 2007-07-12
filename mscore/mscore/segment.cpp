@@ -201,28 +201,17 @@ void Segment::add(Element* el)
                   break;
 
             case BAR_LINE:
-                  if (el->subtype() != START_REPEAT) {
-                        (*measure()->staffList())[staffIdx].endBarLine = (BarLine*)el;
-                        if (el->subtype() == END_REPEAT)
-                              measure()->setEndRepeat(2);
-                        return;
-                        }
-                  measure()->setStartRepeat(true);
-                  if (_elist[staffIdx * VOICES + el->voice()])
+                  if (_elist[staffIdx * VOICES] + el->voice())
                         printf("%06d: segment slot already used\n", el->tick());
-                  _elist[staffIdx * VOICES + el->voice()] = el;
-                  break;
+                  if (el->subtype() == END_REPEAT)
+                        measure()->setEndRepeat(2);
+                  else if (el->subtype() == START_REPEAT)
+                        measure()->setStartRepeat(true);
+
+                  // fall through
 
             case CHORD:
             case REST:
-                  {
-//                  ChordRest* cr = (ChordRest*)el;
-//                  if (cr->tuplet())
-//                        cr->tuplet()->add(cr);
-                  _elist[staffIdx * VOICES + el->voice()] = el;
-                  }
-                  break;
-
             default:
                   _elist[staffIdx * VOICES + el->voice()] = el;
                   break;

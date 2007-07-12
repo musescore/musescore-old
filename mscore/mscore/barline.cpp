@@ -215,10 +215,20 @@ QRectF BarLine::bbox() const
                   dw = point(w);
                   break;
             default:
-            	dw = 0.0;
-            	break;
+                  printf("illegal bar line type\n");
+                  break;
             }
       return QRectF(0.0, 0.0, dw, _height);
+      }
+
+//---------------------------------------------------------
+//   space
+//---------------------------------------------------------
+
+void BarLine::space(double& min, double& extra) const
+      {
+      min   = width();
+      extra = 0.0;
       }
 
 //---------------------------------------------------------

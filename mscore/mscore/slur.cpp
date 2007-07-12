@@ -841,7 +841,7 @@ void Slur::layout(ScoreLayout* layout)
             // case 2: start segment
             else if (i == 0) {
                   System* system = *is;
-                  Measure* m = system->measures()->back();
+                  Measure* m = system->measures().back();
                   qreal x       = system->canvasPos().x() + system->bbox().width();
                   if (m != bs->parent()) {
                         bs->parent()->remove(bs);
@@ -854,7 +854,7 @@ void Slur::layout(ScoreLayout* layout)
             else if (i != 0 && *is != s2) {
 // printf("mid segment\n");
                   System* system = *is;
-                  Measure* m = system->measures()->front();
+                  Measure* m = system->measures().front();
                   if (m != bs->parent()) {
                         bs->parent()->remove(bs);
                         bs->setParent(m);
@@ -868,7 +868,7 @@ void Slur::layout(ScoreLayout* layout)
             // case 4: end segment
             else {
                   System* system = *is;
-                  Measure* m = system->measures()->front();
+                  Measure* m = system->measures().front();
                   if (m != bs->parent()) {
                         bs->parent()->remove(bs);
                         bs->setParent(m);
@@ -1077,7 +1077,7 @@ void Tie::layout(ScoreLayout* layout)
                   }
             // case 3: end segment
             else {
-                  Measure* m = (*is)->measures()->front();
+                  Measure* m = (*is)->measures().front();
                   bs->setParent(m);
                   bs->layout(layout, QPointF(p2.x()-2*_spatium, p2.y()), p2, bow);
                   }

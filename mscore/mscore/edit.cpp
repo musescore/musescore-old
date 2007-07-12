@@ -853,7 +853,7 @@ void Score::cmdAddBSymbol(BSymbol* s, const QPointF& pos, const QPointF& off)
                               return;
                               }
                         System* system = sl->front();
-                        Measure* m = system->measures()->front();
+                        Measure* m = system->measures().front();
                         if (m == 0) {
                               printf("addSymbol: cannot put symbol here: no measure in system\n");
                               delete s;
