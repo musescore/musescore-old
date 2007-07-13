@@ -31,6 +31,7 @@
 
 class Note;
 class Hook;
+class Arpeggio;
 
 //---------------------------------------------------------
 //   Stem
@@ -114,6 +115,7 @@ class Chord : public ChordRest {
       Hook* _hook;
       Direction _stemDirection;
       bool _grace;
+      Arpeggio* _arpeggio;
 
       void computeUp();
       void readSlur(QDomElement, int staff);
@@ -124,9 +126,10 @@ class Chord : public ChordRest {
 
    public:
       Chord(Score*);
+      ~Chord();
       Chord &operator=(const Chord&);
 
-      virtual Chord* clone() const { return new Chord(*this); }
+      virtual Chord* clone() const     { return new Chord(*this); }
       virtual ElementType type() const { return CHORD; }
 
       virtual void write(Xml& xml) const;
@@ -153,6 +156,7 @@ class Chord : public ChordRest {
 
       Stem* stem()                           { return _stem; }
       void setStem(Stem* s);
+
       virtual QPointF stemPos(bool, bool) const;
 
       Hook* hook()                           { return _hook; }
@@ -171,6 +175,4 @@ class Chord : public ChordRest {
       };
 
 #endif
-
-
 

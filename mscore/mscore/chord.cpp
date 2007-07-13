@@ -35,6 +35,7 @@
 #include "hook.h"
 #include "layout.h"
 #include "slur.h"
+#include "arpeggio.h"
 
 //---------------------------------------------------------
 //   Stem
@@ -98,6 +99,10 @@ int Chord::downLine() const
       return downNote()->line();
       }
 
+//---------------------------------------------------------
+//   Chord
+//---------------------------------------------------------
+
 Chord::Chord(Score* s)
    : ChordRest(s)
       {
@@ -106,6 +111,17 @@ Chord::Chord(Score* s)
       _hook          = 0;
       _stemDirection = AUTO;
       _grace         = false;
+      _arpeggio      = 0;
+      }
+
+//---------------------------------------------------------
+//   ~Chord
+//---------------------------------------------------------
+
+Chord::~Chord()
+      {
+      if (_arpeggio)
+            delete _arpeggio;
       }
 
 //---------------------------------------------------------
@@ -169,6 +185,8 @@ void Chord::add(Element* e)
             notes.add((Note*)e);
       else if (e->type() == ATTRIBUTE)
             attributes.push_back((NoteAttribute*)e);
+      else if (e->type() == ARPEGGIO)
+            _arpeggio = (Arpeggio*)e;
       }
 
 //---------------------------------------------------------
@@ -195,6 +213,9 @@ void Chord::remove(Element* e)
             else {
                   attributes.removeAt(idx);
                   }
+            }
+      else if (e->type() == ARPEGGIO) {
+            _arpeggio = 0;
             }
       }
 
