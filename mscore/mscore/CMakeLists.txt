@@ -138,7 +138,7 @@ add_executable ( mscore
       timedialog.cpp symboldialog.cpp trill.cpp tuplet.cpp shortcutcapturedialog.cpp
       undo.cpp utils.cpp xml.cpp timesig.cpp lyrics.cpp bsp.cpp
       viewer.cpp volta.cpp simplebutton.cpp image.cpp keyfinder.cpp
-      pitchspelling.cpp musedata.cpp keysig.cpp arpeggio.cpp
+      pitchspelling.cpp musedata.cpp keysig.cpp arpeggio.cpp breath.cpp
       )
 
 if (CROSS_MINGW)
@@ -181,7 +181,7 @@ if (NOT MINGW)
             )
 
       install_targets ( /bin mscore )
-endif (MINGW)
+endif (NOT MINGW)
 
 #======================================
 #     target xml2smf
@@ -198,5 +198,5 @@ if (NOT MINGW)
             )
 
       install_targets ( /bin mscore )
-endif (MINGW)
+endif (NOT MINGW)
 
