@@ -32,7 +32,8 @@
 #include "lyrics.h"
 
 const char* Segment::segmentTypeNames[] = {
-   "Clef", "Key Signature", "Time Signature", "Begin Repeat", "ChordRest"
+   "Clef", "Key Signature", "Time Signature", "Begin Repeat", "ChordRest",
+   "Breath", "Bar Line", "Time Sig Precaution"
    };
 
 //---------------------------------------------------------
@@ -212,6 +213,7 @@ void Segment::add(Element* el)
 
             case CHORD:
             case REST:
+            case BREATH:
             default:
                   _elist[staffIdx * VOICES + el->voice()] = el;
                   break;
@@ -250,9 +252,13 @@ void Segment::remove(Element* el)
             printf("Measure::remove: %s %p not found\n", el->name(), el);
             return;
             }
-      if (el->type() == BAR_LINE)
-            measure()->setStartRepeat(false);
+
+      if (el->type() == BAR_LINE) {
+            if (el->subtype() == START_REPEAT)
+                  measure()->setStartRepeat(false);
+            }
       _elist[staffIdx * VOICES + el->voice()] = 0;
+
       if (el->isChordRest()) {
             ChordRest* cr = (ChordRest*)el;
             if (cr->tuplet())

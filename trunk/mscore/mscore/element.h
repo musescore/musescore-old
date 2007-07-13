@@ -52,6 +52,7 @@ enum ElementType {
       ARPEGGIO,
       ACCIDENTAL, NOTE,
       CLEF, KEYSIG, TIMESIG, REST,
+      BREATH,
       IMAGE,
       TIE,
       ATTRIBUTE, DYNAMIC, PAGE, BEAM, HOOK, LYRICS,

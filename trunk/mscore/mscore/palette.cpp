@@ -677,7 +677,7 @@ void PaletteBoxButton::paintEvent(QPaintEvent* e)
 //---------------------------------------------------------
 
 PaletteBox::PaletteBox(QWidget* parent)
-   : QDockWidget(parent)
+   : QDockWidget(tr("Palettes"), parent)
       {
       // setMinimumWidth(180);
       setFixedWidth(180);

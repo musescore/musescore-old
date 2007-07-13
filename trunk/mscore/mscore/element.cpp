@@ -45,6 +45,7 @@ const char* elementNames[] = {
       "Arpeggio",
       "Accidental", "Note",
       "Clef", "KeySig", "TimeSig", "Rest",
+      "Breath",
       "Image",
       "Tie",
       "Attribute", "Dynamic", "Page", "Beam", "Hook", "Lyrics",
@@ -132,7 +133,7 @@ int Element::staffIdx() const
 
 QColor Element::color() const
       {
-      if (score()->printing())
+      if (score() && score()->printing())
             return _color;
       if (_selected)
             return preferences.selectColor[_voice];
