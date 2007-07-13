@@ -27,12 +27,10 @@ default:
             cd build;                               \
             echo "+calling cmake" ;                 \
             cmake ../mscore;                        \
+            make;                                   \
          else                                       \
-            echo "+entering build directory";       \
-            cd build;                               \
-         fi;                                        \
-      echo "+start top level make...";              \
-      make -f Makefile
+            cd build; make -f Makefile;             \
+         fi;
 
 release:
 	if test ! -d build;                           \
@@ -43,8 +41,9 @@ release:
             cd build;                               \
             echo "+calling cmake" ;                 \
             cmake -DCMAKE_BUILD_TYPE=RELEASE ../mscore;                        \
+            make -f Makefile;                       \
          else                                       \
-            echo "build directory does alread exist";       \
+            echo "build directory does already exist, please remove first";       \
             exit;                               \
          fi; \
          echo "release build is configured; now type make"
@@ -52,33 +51,26 @@ release:
 debug:
 	if test ! -d build;                           \
          then                                       \
-            echo "+creating build directory";       \
             mkdir build;                            \
-            echo "+entering build directory";       \
             cd build;                               \
-            echo "+calling cmake" ;                 \
-            cmake -DCMAKE_BUILD_TYPE=DEBUG ../mscore;                        \
+            cmake -DCMAKE_BUILD_TYPE=DEBUG;         \
+            make -f Makefile;                       \
          else                                       \
-            echo "build directory does alread exist";       \
+            echo "build directory does already exist, please remove first";       \
             exit;                               \
-         fi; \
-         echo "debug build is configured; now type make"
+         fi
 
 win32:
-	if test ! -d win32build;                           \
+	if test ! -d win32build;                      \
          then                                       \
-            echo "+creating build directory";       \
-            mkdir win32build;                            \
-            echo "+entering build directory";       \
-            cd win32build;                               \
-            echo "+calling cmake" ;                 \
-            cmake -DCMAKE_BUILD_TYPE=RLEASE -DCROSS_MINGW=ON ../mscore;                        \
+            mkdir win32build;                       \
+            cd win32build;                          \
+            cmake -DCMAKE_BUILD_TYPE=RELEASE -DCROSS_MINGW=ON ../mscore; \
+            make -f Makefile;                       \
          else                                       \
-            echo "build directory does alread exist";       \
+            echo "build directory does alread exist, please remove first";       \
             exit;                               \
-         fi; \
-         echo "win32 build is now configured;"
-
+         fi
 
 #
 # clean out of source build
@@ -109,4 +101,16 @@ install:
 package:
 	cd build; make package
 	mv build/mscore-*.sh .
+
+winp:
+	cp -af mscore/packaging win32build/
+	cp -af mscore/COPYING win32build/packaging
+	cd win32build; cp mscore/mscore packaging/mscore.exe
+	cd win32build; cp -af ../mscore/share packaging
+	cd win32build; cp -af ../mscore/demos packaging
+	wine C:\\\\Program\ Files\\NSIS\\makensisw \
+      z:\\\\home\\ws\\mscore\\mscore\\trunk\\win32build\\packaging\\mscore.nsi
+
+
+
 

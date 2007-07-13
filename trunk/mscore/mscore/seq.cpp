@@ -127,6 +127,7 @@ Seq::~Seq()
 
 void Seq::setScore(Score* s)
       {
+#ifndef __MINGW32__
       if (cs) {
             disconnect(cs, SIGNAL(selectionChanged(int)), this, SLOT(selectionChanged(int)));
             stop();
@@ -137,6 +138,7 @@ void Seq::setScore(Score* s)
       connect(cs, SIGNAL(selectionChanged(int)), SLOT(selectionChanged(int)));
       if (audio)
             setPos(0);
+#endif
       }
 
 //---------------------------------------------------------

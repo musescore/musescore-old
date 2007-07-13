@@ -138,7 +138,7 @@ add_executable ( mscore
       timedialog.cpp symboldialog.cpp trill.cpp tuplet.cpp shortcutcapturedialog.cpp
       undo.cpp utils.cpp xml.cpp timesig.cpp lyrics.cpp bsp.cpp
       viewer.cpp volta.cpp simplebutton.cpp image.cpp keyfinder.cpp
-      pitchspelling.cpp musedata.cpp keysig.cpp
+      pitchspelling.cpp musedata.cpp keysig.cpp arpeggio.cpp
       )
 
 if (CROSS_MINGW)
@@ -147,48 +147,56 @@ if (CROSS_MINGW)
          COMPILE_FLAGS "-include ${PROJECT_BINARY_DIR}/all.h ${QT_DEFINITIONS}"
          LINK_FLAGS "-L /home/ws/.wine/drive_c/MinGW/lib"
       )
+   target_link_libraries(mscore
+      fluid
+      awl
+      ${QT_LIBRARIES}
+      )
 else (CROSS_MINGW)
    set_target_properties( mscore
       PROPERTIES
          COMPILE_FLAGS "-include ${PROJECT_BINARY_DIR}/all.h ${QT_DEFINITIONS}"
       )
-endif (CROSS_MINGW)
-
-target_link_libraries(mscore
+   target_link_libraries(mscore
       ${QT_LIBRARIES}
       ${ALSA_LIB}
       ${JACK_LIB}
       fluid
       awl
       )
+endif (CROSS_MINGW)
 
 #======================================
 #     target smf2xml
 #======================================
 
-add_executable ( smf2xml smf2xml.cpp midifile.cpp xml.cpp sig.cpp)
+if (NOT MINGW)
+      add_executable ( smf2xml smf2xml.cpp midifile.cpp xml.cpp sig.cpp)
 
-target_link_libraries( smf2xml
-      ${QT_LIBRARIES}
-      )
-set_target_properties( smf2xml
-      PROPERTIES COMPILE_FLAGS "-include ${PROJECT_BINARY_DIR}/all.h"
-      )
+      target_link_libraries( smf2xml
+            ${QT_LIBRARIES}
+            )
+      set_target_properties( smf2xml
+            PROPERTIES COMPILE_FLAGS "-include ${PROJECT_BINARY_DIR}/all.h"
+            )
 
-install_targets ( /bin mscore )
+      install_targets ( /bin mscore )
+endif (MINGW)
 
 #======================================
 #     target xml2smf
 #======================================
 
-add_executable ( xml2smf xml2smf.cpp midifile.cpp xml.cpp sig.cpp)
+if (NOT MINGW)
+      add_executable ( xml2smf xml2smf.cpp midifile.cpp xml.cpp sig.cpp)
 
-target_link_libraries( xml2smf
-      ${QT_LIBRARIES}
-      )
-set_target_properties( xml2smf
-      PROPERTIES COMPILE_FLAGS "-include ${PROJECT_BINARY_DIR}/all.h"
-      )
+      target_link_libraries( xml2smf
+            ${QT_LIBRARIES}
+            )
+      set_target_properties( xml2smf
+            PROPERTIES COMPILE_FLAGS "-include ${PROJECT_BINARY_DIR}/all.h"
+            )
 
-install_targets ( /bin mscore )
+      install_targets ( /bin mscore )
+endif (MINGW)
 

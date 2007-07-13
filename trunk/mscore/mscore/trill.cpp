@@ -36,7 +36,6 @@ static const QChar TLC(0xe16f);
 void TrillSegment::draw(QPainter& p)
       {
       QRectF b1 = symbols[trillSym].bbox();
-//      qreal w1  = symbols[trillSym].width();
       QRectF b2 = symbols[trillelementSym].bbox();
       qreal w2  = symbols[trillelementSym].width();
       int n     = lrint((pos2().x() - (b1.width() - b2.x())) / w2);

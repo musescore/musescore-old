@@ -104,7 +104,8 @@ void Bracket::layout(ScoreLayout* layout)
             f.setFamily(s->family);
 
             //?!?:
-            double mmag   = DPI / double(QX11Info::appDpiX());
+            extern int appDpiX;
+            double mmag   = DPI / double(appDpiX);
             double mag = mmag * _spatium / (spatiumBase20 * DPI);
             f.setPointSizeF(20.0 * mag);
 

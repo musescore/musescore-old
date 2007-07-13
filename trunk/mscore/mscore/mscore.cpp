@@ -121,8 +121,10 @@ void MuseScore::closeEvent(QCloseEvent* ev)
       saveScoreList();
       writeSettings();
       seq->stop();
+#ifndef __MINGW32__
       while(!seq->isStopped())
             usleep(50000);
+#endif
       seq->exit();
       ev->accept();
       //
