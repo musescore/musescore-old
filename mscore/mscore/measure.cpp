@@ -63,6 +63,7 @@
 #include "beam.h"
 #include "pitchspelling.h"
 #include "keysig.h"
+#include "breath.h"
 
 //---------------------------------------------------------
 //   y2pitch
@@ -2249,6 +2250,15 @@ void Measure::read(QDomElement e, int idx)
                   Segment* s = getSegment(chord);
                   s->add(chord);
                   score()->curTick = chord->tick() + chord->tickLen();
+                  }
+            else if (tag == "Breath") {
+                  Breath* breath = new Breath(score());
+                  breath->setTick(score()->curTick);
+                  breath->setStaff(staff);
+                  breath->read(e);
+                  Segment* s = getSegment(Segment::SegBreath, breath->tick());
+                  s->add(breath);
+                  score()->curTick = breath->tick();
                   }
             else if (tag == "Note") {
                   Chord* chord = new Chord(score());

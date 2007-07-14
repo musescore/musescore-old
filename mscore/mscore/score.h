@@ -301,7 +301,7 @@ class Score : public QObject {
       // menu entry:
       void addBar(BarLine*, Measure*);
 
-      void cmdAddSlur();
+      Slur* cmdAddSlur();
       void cmdAddTie();
       void cmdAddHairpin(bool);
       void cmdAddStretch(double);

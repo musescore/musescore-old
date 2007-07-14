@@ -38,10 +38,8 @@ Beam::~Beam()
       //
       // delete all references from chords
       //
-      for (iChordRest i = elements.begin(); i != elements.end(); ++i) {
-            ChordRest* cr = i->second;
+      foreach(ChordRest* cr, elements)
             cr->setBeam(0);
-            }
       for (iBeamSegment i = beamSegments.begin();
          i != beamSegments.end(); ++i) {
             delete *i;
@@ -54,12 +52,9 @@ Beam::~Beam()
 
 void Beam::remove(ChordRest* a)
       {
-      for (iChordRest i = elements.begin(); i != elements.end(); ++i) {
-            if (i->second == a) {
-                  elements.erase(i);
-                  return;
-                  }
-            }
+      int idx = elements.indexOf(a);
+      if (idx != -1)
+            elements.removeAt(idx);
       }
 
 //---------------------------------------------------------
@@ -144,6 +139,12 @@ void Measure::layoutBeams(ScoreLayout* layout)
 
                   bool tooLong = cr->tickLen() >= division;
                   if (beam) {
+                        // end beam if there are chords/rests missing
+                        // in voice:
+                        ChordRest* le = beam->getElements().back();
+                        if (le->tick() + le->tickLen() != cr->tick()) {
+                              tooLong = true;
+                              }
                         int group = division;
                         int z, n;
                         _score->sigmap->timesig(cr->tick(), z, n);
@@ -155,22 +156,15 @@ void Measure::layoutBeams(ScoreLayout* layout)
                               group = division * 5 / 2;
                         else if (z == 6 && n == 8)
                               group = division * 6 / 2;
-                        else if (z == 4 && n == 4)
-                              group = division;
 
                         bool styleBreak = ((cr->tick() - tick()) % group) == 0;
                         if (styleBreak) {
                               // some experimental optimization
-                              ChordRestList* l = beam->getElements();
-                              if (l->size() == 2 && cr->tickLen() == l->back()->tickLen())
+                              const QList<ChordRest*> l = beam->getElements();
+                              if (l.size() == 2 && cr->tickLen() == l.back()->tickLen())
                                     styleBreak = false;
                               }
-                        bool hintBreak  = bm == BEAM_BEGIN || bm == BEAM_NO;
-
-                        bool mustBreak = (bm != BEAM_MID)
-                                      && (bm != BEAM_END)
-                                      && (styleBreak || tooLong || hintBreak);
-                        if (mustBreak) {
+                        if (styleBreak || tooLong || bm == BEAM_BEGIN || bm == BEAM_NO) {
                               beam->layout(layout);
                               beam = 0;
                               a1   = 0;
@@ -196,14 +190,11 @@ newBeam:
                         else if (bm == BEAM_BEGIN)
                               hint = true;
                         else if (bm == BEAM_AUTO) {
-                        	// dont automatically start beam at a rest
-                        	if (cr->type() == REST && a1 == 0)
-                              	hint = false;
-                              else if (a1 == 0) {
+                              if (a1 == 0) {
                                     //
                                     // start a new beam?
                                     //
-                        		int group = cr->tickLen();
+                        		int group = division;
                         		int z, n;
                         		_score->sigmap->timesig(cr->tick(), z, n);
 
@@ -211,7 +202,7 @@ newBeam:
                         		if (z == 9 && n == 8) {
                               		group = division * 3 / 2;
                                           }
-                                    if (cr->tick() % group)
+                                    if ((cr->tick() - tick()) % group)
                                           hint = false;
                                     }
                               }
@@ -251,31 +242,18 @@ newBeam:
       }
 
 //---------------------------------------------------------
-//   add
-//---------------------------------------------------------
-
-void ChordRestList::add(ChordRest* n)
-      {
-      std::multimap<const int, ChordRest*, std::less<int> >::insert(std::pair<const int, ChordRest*> (n->tick(), n));
-      }
-
-//---------------------------------------------------------
 //   xmlType
 //---------------------------------------------------------
 
 QString Beam::xmlType(ChordRest* cr) const
       {
-      for (ciChordRest i = elements.begin(); i != elements.end(); ++i) {
-            if (i->second == cr) {
-                  if (i == elements.begin())
-                        return QString("begin");
-                  ++i;
-                  if (i == elements.end())
-                        return QString("end");
-                  return QString("continue");
-                  }
-            }
-      printf("Beam::xmlType(): cannot find ChordRest\n");
+      if (cr == elements.front())
+            return QString("begin");
+      if (cr == elements.back())
+            return QString("end");
+      int idx = elements.indexOf(cr);
+      if (idx == -1)
+            printf("Beam::xmlType(): cannot find ChordRest\n");
       return QString("continue");
       }
 
@@ -313,8 +291,7 @@ void Beam::layout(ScoreLayout* layout)
       int move       = 0;
       int firstMove  = elements.front()->move();
 
-      for (iChordRest i = elements.begin(); i != elements.end(); ++i) {
-            ChordRest* cr = i->second;
+      foreach(ChordRest* cr, elements) {
             //
             // delete stem & hook for this chord
             //
@@ -356,8 +333,7 @@ void Beam::layout(ScoreLayout* layout)
       //       = -1    staff 1 - 2
       //       = 1     staff 2 - 1
 
-      for (iChordRest i = elements.begin(); i != elements.end(); ++i) {
-            ChordRest* cr = (ChordRest*)(i->second);
+      foreach(ChordRest* cr, elements) {
             if (move == 1)
                   cr->setUp(cr->move() == 0);
             else if (move == -1)
@@ -380,10 +356,10 @@ void Beam::layout(ScoreLayout* layout)
       int l1 = a1->line(a1->isUp());
       int l2 = a2->line(a2->isUp());
 
-      iChordRest i = elements.begin();
+      QList<ChordRest*>::iterator i = elements.begin();
       ++i;
       for (;;) {
-            ChordRest* cr = i->second;
+            ChordRest* cr = *i;
             ++i;
             if (i == elements.end())
                   break;
@@ -458,10 +434,10 @@ void Beam::layout(ScoreLayout* layout)
       double min = 1000;
       double max = -1000;
       int lmove = elements.front()->move();
-      for (iChordRest i = elements.begin(); i != elements.end(); ++i) {
-            if (i->second->type() != CHORD)
+      foreach(ChordRest* cr, elements) {
+            if (cr->type() != CHORD)
                   continue;
-            Chord* chord  = (Chord*)(i->second);
+            Chord* chord  = (Chord*)(cr);
             if (chord->move() != lmove)
                   break;
             QPointF npos(chord->stemPos(chord->isUp(), true) + chord->pos() + chord->segment()->pos());
@@ -540,10 +516,10 @@ void Beam::layout(ScoreLayout* layout)
             Note* nn1 = 0;
             Note* nn2 = 0;
             bool nn1r = false;
-            for (iChordRest i = elements.begin(); i != elements.end(); ++i) {
-                  if (i->second->type() != CHORD)
+            foreach(ChordRest* cr, elements) {
+                  if (cr->type() != CHORD)
                         continue;
-                  Chord* chord = (Chord*)(i->second);
+                  Chord* chord = (Chord*)(cr);
                   int tl = chord->tickLen();
                   if (tl > l) {
                         if (nn2) {
@@ -611,10 +587,10 @@ void Beam::layout(ScoreLayout* layout)
       //    stem Pos() is relative to Chord
       //---------------------------------------------------
 
-      for (iChordRest i = elements.begin(); i != elements.end(); ++i) {
-            if (i->second->type() != CHORD)
+      foreach(ChordRest* cr, elements) {
+            if (cr->type() != CHORD)
                   continue;
-            Chord* chord = (Chord*)(i->second);
+            Chord* chord = (Chord*)(cr);
 
             QPointF npos(chord->stemPos(chord->isUp(), false) + chord->pos() + chord->segment()->pos());
 

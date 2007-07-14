@@ -33,7 +33,7 @@ Arpeggio::Arpeggio(Score* s)
 //   layout
 //---------------------------------------------------------
 
-void Arpeggio::layout(ScoreLayout* layout)
+void Arpeggio::layout(ScoreLayout*)
       {
       }
 

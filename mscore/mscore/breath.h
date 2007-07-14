@@ -18,25 +18,32 @@
 //  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //=============================================================================
 
-#ifndef __ARPEGGIO_H__
-#define __ARPEGGIO_H__
+#ifndef __BREATH_H__
+#define __BREATH_H__
 
 #include "element.h"
 
 //---------------------------------------------------------
 //   Breath
+//    subtype() is index in symList
 //---------------------------------------------------------
 
 class Breath : public Element {
+      static const int breathSymbols = 4;
+      static int symList[breathSymbols];
 
    public:
       Breath(Score* s);
       virtual Breath* clone() const { return new Breath(*this); }
       virtual ElementType type() const { return BREATH; }
+      virtual void space(double& min, double& extra) const;
+      virtual QRectF bbox() const;
 
+      virtual void draw(QPainter&);
       virtual void layout(ScoreLayout*);
       virtual void write(Xml&) const;
       virtual void read(QDomElement);
+      virtual bool isMovable() const   { return true; }
       };
 
 #endif

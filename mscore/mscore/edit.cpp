@@ -675,12 +675,12 @@ void Canvas::modifyElement(Element* el)
 //    'S' typed on keyboard
 //---------------------------------------------------------
 
-void Score::cmdAddSlur()
+Slur* Score::cmdAddSlur()
       {
       Element* e = sel->element();
       if (!e || e->type() != NOTE) {
             printf("no note selected\n");
-            return;
+            return 0;
             }
       Note* note    = (Note*)(e);
       Chord* chord  = note->chord();
@@ -692,7 +692,7 @@ void Score::cmdAddSlur()
 
       if (tick2 == 0) {
             printf("cannot create slur: at end\n");
-            return;
+            return 0;
             }
       Slur* slur = new Slur(this);
       slur->setStaff(staff);
@@ -700,9 +700,12 @@ void Score::cmdAddSlur()
       slur->setEnd(tick2, track);
       slur->setParent(chord->measure());
       cmdAdd(slur);
-      slur->setSelected(true);
-      select(slur, 0, 0);
-      refresh |= slur->abbox();
+// select slur segment
+//      slur->setSelected(true);
+//      select(slur, 0, 0);
+//      refresh |= slur->abbox();
+
+      return slur;
       }
 
 //---------------------------------------------------------

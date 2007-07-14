@@ -37,6 +37,7 @@
 #include "staff.h"
 #include "viewer.h"
 #include "pitchspelling.h"
+#include "breath.h"
 
 int Note::noteHeads[HEAD_GROUPS][4] = {
       { wholeheadSym,         halfheadSym,         quartheadSym,    brevisheadSym},
@@ -679,7 +680,8 @@ QRectF ShadowNote::bbox() const
 
 bool Note::acceptDrop(Viewer* viewer, const QPointF&, int type, const QDomElement&) const
       {
-      if (type == ATTRIBUTE || type == TEXT || type == ACCIDENTAL) {
+      if (type == ATTRIBUTE || type == TEXT || type == ACCIDENTAL
+         || type == BREATH) {
             viewer->setDropTarget(this);
             return true;
             }
@@ -738,6 +740,25 @@ Element* Note::drop(const QPointF&, const QPointF&, int t, const QDomElement& no
                   int subtype = a->subtype();
                   delete a;
                   score()->addAccidental(this, subtype);
+                  }
+                  break;
+            case BREATH:
+                  {
+                  Breath* b = new Breath(score());
+                  b->read(node);
+                  int tick   = chord()->tick();
+                  b->setStaff(staff());
+                  Measure* m = chord()->segment()->measure();
+
+                  // TODO: insert automatically in all staves?
+
+                  Segment* seg = m->findSegment(Segment::SegBreath, tick);
+                  if (seg == 0) {
+                        seg = m->createSegment(Segment::SegBreath, tick);
+                        score()->undoAddElement(seg);
+                        }
+                  b->setParent(seg);
+                  score()->undoAddElement(b);
                   }
                   break;
 
