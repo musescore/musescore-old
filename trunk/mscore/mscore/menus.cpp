@@ -236,6 +236,7 @@ void MuseScore::showPalette(bool visible)
             for (int i = 0; i < 4; ++i) {
                   Arpeggio* a = new Arpeggio(0);
                   a->setSubtype(i);
+                  a->setHeight(_spatium * 4);
                   sp->addObject(i, a, tr("arpeggio"));
                   }
             paletteBox->addPalette(tr("Arpeggios"), sp);
@@ -247,7 +248,7 @@ void MuseScore::showPalette(bool visible)
             sp = new Palette(1, 4);
             sp->setGrid(45, 40);
 
-            for (int i = 0; i < 4; ++i) {
+            for (int i = 0; i < 2; ++i) {
                   Breath* a = new Breath(cs);
                   a->setSubtype(i);
                   sp->addObject(i, a, tr("breath"));

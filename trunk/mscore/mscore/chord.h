@@ -154,12 +154,13 @@ class Chord : public ChordRest {
       Note* downNote()                       { return notes.front(); }
       virtual int move() const;
 
-      Stem* stem()                           { return _stem; }
+      Stem* stem() const                     { return _stem; }
       void setStem(Stem* s);
+      Arpeggio* arpeggio() const             { return _arpeggio; }
 
       virtual QPointF stemPos(bool, bool) const;
 
-      Hook* hook()                           { return _hook; }
+      Hook* hook() const                     { return _hook; }
       void setHook(Hook* f);
 
       virtual void add(Element*);

@@ -100,6 +100,7 @@ class Note : public Element {
       int dots() const                { return _dots; }
 
       double headWidth() const;
+      double headHeight() const;
       int noteHead() const            { return _head;  }
       int headGroup() const           { return _headGroup; }
       void setHeadGroup(int val)      { _headGroup = val; }

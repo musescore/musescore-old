@@ -868,6 +868,8 @@ int Element::readType(QDomElement& e, QPointF* dragOffset)
                   type = IMAGE;
             else if (e.tagName() == "Breath")
                   type = BREATH;
+            else if (e.tagName() == "Arpeggio")
+                  type = ARPEGGIO;
             else {
                   domError(e);
                   type = 0;

@@ -28,15 +28,20 @@
 //---------------------------------------------------------
 
 class Arpeggio : public Element {
+      double _height;
 
    public:
       Arpeggio(Score* s);
       virtual Arpeggio* clone() const { return new Arpeggio(*this); }
       virtual ElementType type() const { return ARPEGGIO; }
+      virtual QRectF bbox() const;
 
+      virtual void draw(QPainter&);
       virtual void layout(ScoreLayout*);
       virtual void write(Xml&) const;
       virtual void read(QDomElement);
+
+      void setHeight(double);
       };
 
 #endif
