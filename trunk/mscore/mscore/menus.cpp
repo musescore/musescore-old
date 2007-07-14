@@ -46,6 +46,8 @@
 #include "symboldialog.h"
 #include "volta.h"
 #include "keysig.h"
+#include "breath.h"
+#include "arpeggio.h"
 
 static const char* keyNames[] = {
       "g-major, e-minor",     "ces",
@@ -67,7 +69,6 @@ void MuseScore::showPalette(bool visible)
       QAction* a = getAction("toggle-palette");
       if (paletteBox == 0) {
             paletteBox = new PaletteBox(this);
-//            connect(paletteBox, SIGNAL(visibilityChanged(bool)), a, SLOT(setChecked(bool)));
             connect(paletteBox, SIGNAL(paletteVisible(bool)), a, SLOT(setChecked(bool)));
             addDockWidget(Qt::LeftDockWidgetArea, paletteBox);
 
@@ -224,6 +225,35 @@ void MuseScore::showPalette(bool visible)
             sp->addObject(11, trill, tr("trill line"));
 
             paletteBox->addPalette(tr("Lines"), sp);
+
+            //-----------------------------------
+            //    Arpeggios
+            //-----------------------------------
+
+            sp = new Palette(1, 4);
+            sp->setGrid(45, 60);
+
+            for (int i = 0; i < 4; ++i) {
+                  Arpeggio* a = new Arpeggio(0);
+                  a->setSubtype(i);
+                  sp->addObject(i, a, tr("arpeggio"));
+                  }
+            paletteBox->addPalette(tr("Arpeggios"), sp);
+
+            //-----------------------------------
+            //    Symbols: Breath
+            //-----------------------------------
+
+            sp = new Palette(1, 4);
+            sp->setGrid(45, 40);
+
+            for (int i = 0; i < 4; ++i) {
+                  Breath* a = new Breath(cs);
+                  a->setSubtype(i);
+                  sp->addObject(i, a, tr("breath"));
+                  }
+
+            paletteBox->addPalette(tr("Breath"), sp);
 
             //-----------------------------------
             //    Brackets

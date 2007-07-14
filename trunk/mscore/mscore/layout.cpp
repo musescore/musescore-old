@@ -418,7 +418,8 @@ bool ScoreLayout::layoutPage(Page* page, Measure*& im, iSystem& is)
 
 System* ScoreLayout::layoutSystem(Measure*& im, System* system, qreal x, qreal y, qreal w)
       {
-      for (int i = system->staves()->size(); i < _score->nstaves(); ++i)
+      int nstaves = _score->nstaves();
+      for (int i = system->staves()->size(); i < nstaves; ++i)
             system->insertStaff(_score->staff(i), i);
 
       double systemOffset = system->layout(this, QPointF(x, y), w);
@@ -446,14 +447,23 @@ System* ScoreLayout::layoutSystem(Measure*& im, System* system, qreal x, qreal y
                   //
                   processSystemHeader(m);
                   }
-            else {
-                  // this happens for all measures but the first
-                  // because for every system we
-                  // look at least one measure ahead:
-                  //
-                  for (Segment* seg = m->first(); seg; seg = seg->next())
-                        seg->removeGeneratedElements();
+            //
+            // remove generated elements
+            //    assume: generated elements only live in voice 0
+            //    TODO: check if removed elements can be deleted
+            //
+            for (Segment* seg = m->first(); seg; seg = seg->next()) {
+                  for (int staffIdx = 0;  staffIdx < nstaves; ++staffIdx) {
+                        int track = staffIdx * VOICES;
+                        Element* el = seg->element(track);
+                        if (el && el->generated()) {
+                              if ((m != im) || (seg->subtype() == Segment::SegTimeSigAnnounce))
+                                    seg->setElement(track, 0);
+                              }
+                        }
+                  }
 
+            if (m != im) {
                   //
                   // if this is not the first measure in a system
                   // switch all clefs to small size
@@ -516,6 +526,9 @@ System* ScoreLayout::layoutSystem(Measure*& im, System* system, qreal x, qreal y
             system->measures().push_back(itt);
       im = itt;
 
+      //
+      //    add cautionary time signatures if needed
+      //
       Measure* lm = system->measures().back();
       SigEvent sig1 = _score->sigmap->timesig(lm->tick() + lm->tickLen() - 1);
       SigEvent sig2 = _score->sigmap->timesig(lm->tick() + lm->tickLen());
@@ -527,6 +540,7 @@ System* ScoreLayout::layoutSystem(Measure*& im, System* system, qreal x, qreal y
                   if (s->element(staff * VOICES) == 0) {
                         TimeSig* ts = new TimeSig(score(), sig2.denominator, sig2.nominator);
                         ts->setStaff(score()->staff(staff));
+                        ts->setGenerated(true);
                         s->add(ts);
                         }
                   }

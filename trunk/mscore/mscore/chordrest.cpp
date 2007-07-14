@@ -27,6 +27,7 @@
 #include "staff.h"
 #include "tuplet.h"
 #include "layout.h"
+#include "chordlist.h"
 
 //---------------------------------------------------------
 //   NoteAttribute::atrList
@@ -197,8 +198,24 @@ int ChordRest::beams() const
 QList<Prop> ChordRest::properties(Xml& xml) const
       {
       QList<Prop> pl = Element::properties(xml);
-      if (_beamMode != BEAM_AUTO)
-            pl.append(Prop("BeamMode", int(_beamMode)));
+      //
+      // BeamMode default:
+      //    REST  - BEAM_NO
+      //    CHORD - BEAM_AUTO
+      //
+      if ((type() == REST && _beamMode != BEAM_NO)
+         || (type() == CHORD && _beamMode != BEAM_AUTO)) {
+            QString s;
+            switch(_beamMode) {
+                  case BEAM_AUTO:    s = "auto"; break;
+                  case BEAM_BEGIN:   s = "begin"; break;
+                  case BEAM_MID:     s = "mid"; break;
+                  case BEAM_END:     s = "end"; break;
+                  case BEAM_NO:      s = "no"; break;
+                  case BEAM_BEGIN32: s = "begin32"; break;
+                  }
+            pl.append(Prop("BeamMode", s));
+            }
       if (_tuplet) {
             int idx = measure()->tuplets()->indexOf(_tuplet);
             if (idx == -1)
@@ -244,8 +261,24 @@ bool ChordRest::readProperties(QDomElement e)
       QString val(e.text());
       int i = val.toInt();
 
-      if (tag == "BeamMode")
-            _beamMode = BeamMode(i);
+      if (tag == "BeamMode") {
+            int bm = BEAM_AUTO;
+            if (val == "auto")
+                  bm = BEAM_AUTO;
+            else if (val == "begin")
+                  bm = BEAM_BEGIN;
+            else if (val == "mid")
+                  bm = BEAM_MID;
+            else if (val == "end")
+                  bm = BEAM_END;
+            else if (val == "no")
+                  bm = BEAM_NO;
+            else if (val == "begin32")
+                  bm = BEAM_BEGIN32;
+            else
+                  bm = i;
+            _beamMode = BeamMode(bm);
+            }
       else if (tag == "Attribute") {
             NoteAttribute* atr = new NoteAttribute(score());
             atr->read(e);
@@ -278,11 +311,12 @@ void ChordRest::layoutAttributes(ScoreLayout* layout)
       System* s  = m->system();
       int idx    = staff()->rstaff();
       qreal x    = centerX();
-      qreal sy   = _spatium;    // TODO: style parameter: fermata distance to top line
-                              // = _spatium
-      qreal chordTopY = upPos()   - point(style->propertyDistanceStem) - sy;
-      qreal chordBotY = downPos() + point(style->propertyDistanceHead) + sy;
-      qreal staffTopY = s->bboxStaff(idx).y() - pos().y() - sy;
+      qreal sy   = _spatium;      // TODO: style parameter: distance to top/bottom line
+      qreal sy2  = _spatium * .5; // TODO: style parameter: distance to top/bottom note
+
+      qreal chordTopY = upPos()   - point(style->propertyDistanceStem) - sy2;
+      qreal chordBotY = downPos() + point(style->propertyDistanceHead) + sy2;
+      qreal staffTopY = s->bboxStaff(idx).y() - pos().y()      - sy;
       qreal staffBotY = staffTopY + s->bboxStaff(idx).height() + sy;
 
       bool up     = isUp();
@@ -308,7 +342,7 @@ void ChordRest::layoutAttributes(ScoreLayout* layout)
                         qreal l = y / _spatium;
                         qreal delta = fabs(l - round(l));
                         if (delta < 0.4)
-                              y += _spatium * .5;
+                              y -= _spatium * .5;
                         }
                   a->setPos(x, y);
                   dyTop += (point(style->propertyDistance) + a->bbox().height());
@@ -322,7 +356,7 @@ void ChordRest::layoutAttributes(ScoreLayout* layout)
                         qreal l = y / _spatium;
                         qreal delta = fabs(l - round(l));
                         if (delta < 0.4)
-                              y -= _spatium * .5;
+                              y += _spatium * .5;
                         }
                   a->setPos(x, y);
                   dyBot += (point(style->propertyDistance) + a->bbox().height());
@@ -331,7 +365,7 @@ void ChordRest::layoutAttributes(ScoreLayout* layout)
 
       //
       //    pass 1
-      //    now place all attributes with anchor at staff top or bottom
+      //    now place all attributes with staff top or bottom anchor
       //
       if (chordTopY - dyTop > staffTopY)
             dyTop = 0;
@@ -359,4 +393,14 @@ void ChordRest::layoutAttributes(ScoreLayout* layout)
                   }
             }
       }
+
+//---------------------------------------------------------
+//   add
+//---------------------------------------------------------
+
+void ChordRestList::add(ChordRest* n)
+      {
+      std::multimap<const int, ChordRest*, std::less<int> >::insert(std::pair<const int, ChordRest*> (n->tick(), n));
+      }
+
 

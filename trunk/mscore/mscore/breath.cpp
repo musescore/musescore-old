@@ -19,6 +19,11 @@
 //=============================================================================
 
 #include "breath.h"
+#include "sym.h"
+
+int Breath::symList[Breath::breathSymbols] = {
+      rcommaSym, lcommaSym, rcommaSym, lcommaSym
+      };
 
 //---------------------------------------------------------
 //   Breath
@@ -33,7 +38,7 @@ Breath::Breath(Score* s)
 //   layout
 //---------------------------------------------------------
 
-void Breath::layout(ScoreLayout* layout)
+void Breath::layout(ScoreLayout*)
       {
       }
 
@@ -58,5 +63,33 @@ void Breath::read(QDomElement e)
             if (!Element::readProperties(e))
                   domError(e);
             }
+      }
+
+//---------------------------------------------------------
+//   draw
+//---------------------------------------------------------
+
+void Breath::draw(QPainter& p)
+      {
+      symbols[symList[subtype()]].draw(p);
+      }
+
+//---------------------------------------------------------
+//   space
+//---------------------------------------------------------
+
+void Breath::space(double& min, double& extra) const
+      {
+      min   = _spatium * 1.5;
+      extra = 0.0;
+      }
+
+//---------------------------------------------------------
+//   bbox
+//---------------------------------------------------------
+
+QRectF Breath::bbox() const
+      {
+      return symbols[symList[subtype()]].bbox();
       }
 

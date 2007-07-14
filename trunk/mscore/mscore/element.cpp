@@ -866,6 +866,8 @@ int Element::readType(QDomElement& e, QPointF* dragOffset)
                   type = LEDGER_LINE;
             else if (e.tagName() == "Image")
                   type = IMAGE;
+            else if (e.tagName() == "Breath")
+                  type = BREATH;
             else {
                   domError(e);
                   type = 0;

@@ -1123,8 +1123,25 @@ void Score::cmd(const QString& cmd)
                   pageEnd();
             else if (cmd == "add-tie")
                   cmdAddTie();
-            else if (cmd == "add-slur")
-                  cmdAddSlur();
+            else if (cmd == "add-slur") {
+                  Slur* slur = cmdAddSlur();
+                  //
+                  // start slur in edit mode
+                  //
+                  // slur->setSelected(true);
+                  if (slur) {
+                        slur->layout(mainLayout());
+                        ElementList* el = slur->elements();
+                        if (!el->isEmpty()) {
+printf("start edit\n");
+                              SlurSegment* ss = (SlurSegment*)el->front();
+                              if (canvas()->startEdit(ss)) {
+printf("  start edit\n");
+                                    return;
+                                    }
+                              }
+                        }
+                  }
             else if (cmd == "add-hairpin")
                   cmdAddHairpin(false);
             else if (cmd == "add-hairpin-reverse")

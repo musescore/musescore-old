@@ -50,18 +50,18 @@ typedef BeamSegmentList::const_iterator ciBeamSegment;
 //---------------------------------------------------------
 
 class Beam : public Element {
-      ChordRestList elements;
+      QList<ChordRest*> elements;
       BeamSegmentList beamSegments;
 
    public:
       Beam(Score* s) : Element(s) {}
       ~Beam();
-      virtual Beam* clone() const { return new Beam(*this); }
+      virtual Beam* clone() const      { return new Beam(*this); }
       virtual ElementType type() const { return BEAM; }
 
       void layout(ScoreLayout*);
-      void add(ChordRest* a) { elements.add(a); }
-      ChordRestList* getElements() { return &elements; }
+      void add(ChordRest* a)           { elements.append(a); }
+      QList<ChordRest*> getElements()  { return elements; }
       void remove(ChordRest* a);
       QString xmlType(ChordRest*) const;
       virtual void move(double, double);
