@@ -19,6 +19,7 @@
 //=============================================================================
 
 #include "arpeggio.h"
+#include "sym.h"
 
 //---------------------------------------------------------
 //   Arpeggio
@@ -60,3 +61,52 @@ void Arpeggio::read(QDomElement e)
             }
       }
 
+//---------------------------------------------------------
+//   setHeight
+//---------------------------------------------------------
+
+void Arpeggio::setHeight(double h)
+      {
+      _height = h;
+      }
+
+//---------------------------------------------------------
+//   bbox
+//---------------------------------------------------------
+
+QRectF Arpeggio::bbox() const
+      {
+      QRectF b = symbols[arpeggioSym].bbox();
+//      printf("====%f %f %f %f\n", b.x(), b.y(), b.height(), b.width());
+      return QRectF(0.0, 0.0, symbols[arpeggioSym].width(), _height);
+      }
+
+//---------------------------------------------------------
+//   draw
+//---------------------------------------------------------
+
+void Arpeggio::draw(QPainter& p)
+      {
+      double y;
+
+      double h1, h2, h3;
+
+      h1 = h2 = h3 = _spatium;
+
+      switch(subtype()) {
+            case 0:
+                  for (y = h1; y < _height+h1; y += h1)
+                        symbols[arpeggioSym].draw(p, 0.0, y);
+                  break;
+            case 1:
+                  symbols[arpeggioarrowupSym].draw(p, 0.0, h2);
+                  for (y = h2 + h1; y < _height + h1; y += h1)
+                        symbols[arpeggioSym].draw(p, 0.0, y);
+                  break;
+            case 2:
+                  for (y = h1; y < _height + h1 - h3; y += h1)
+                        symbols[arpeggioSym].draw(p, 0.0, y);
+                  symbols[arpeggioarrowdownSym].draw(p, 0.0, y);
+                  break;
+            }
+      }

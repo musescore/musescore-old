@@ -38,6 +38,7 @@
 #include "viewer.h"
 #include "pitchspelling.h"
 #include "breath.h"
+#include "arpeggio.h"
 
 int Note::noteHeads[HEAD_GROUPS][4] = {
       { wholeheadSym,         halfheadSym,         quartheadSym,    brevisheadSym},
@@ -104,6 +105,15 @@ Note::~Note()
 double Note::headWidth() const
       {
       return symbols[_head].width();
+      }
+
+//---------------------------------------------------------
+//   headHeight
+//---------------------------------------------------------
+
+double Note::headHeight() const
+      {
+      return symbols[_head].height();
       }
 
 //---------------------------------------------------------
@@ -681,7 +691,7 @@ QRectF ShadowNote::bbox() const
 bool Note::acceptDrop(Viewer* viewer, const QPointF&, int type, const QDomElement&) const
       {
       if (type == ATTRIBUTE || type == TEXT || type == ACCIDENTAL
-         || type == BREATH) {
+         || type == BREATH || type == ARPEGGIO) {
             viewer->setDropTarget(this);
             return true;
             }
@@ -761,6 +771,14 @@ Element* Note::drop(const QPointF&, const QPointF&, int t, const QDomElement& no
                   score()->undoAddElement(b);
                   }
                   break;
+            case ARPEGGIO:
+                  {
+                  Arpeggio* a = new Arpeggio(score());
+                  a->read(node);
+                  a->setParent(chord());
+                  a->setHeight(_spatium * 5);   //DEBUG
+                  score()->undoAddElement(a);
+                  }
 
             default:
                   break;

@@ -64,6 +64,7 @@
 #include "pitchspelling.h"
 #include "keysig.h"
 #include "breath.h"
+#include "arpeggio.h"
 
 //---------------------------------------------------------
 //   y2pitch
@@ -2550,6 +2551,9 @@ void Measure::collectElements(QList<Element*>& el)
                                     el.append(chord->hook());
                               if (chord->stem())
                                     el.append(chord->stem());
+                              if (chord->arpeggio())
+                                    el.append(chord->arpeggio());
+
                               foreach(LedgerLine* h, *chord->ledgerLines())
                                     el.append(h);
 

@@ -249,6 +249,8 @@ QRectF Chord::bbox() const
             _bbox |= _hook->bbox().translated(_hook->pos());
       if (_stem)
             _bbox |= _stem->bbox().translated(_stem->pos());
+      if (_arpeggio)
+            _bbox |= _arpeggio->bbox().translated(_arpeggio->pos());
       return _bbox;
       }
 
@@ -394,10 +396,11 @@ void Chord::layout(ScoreLayout* layout)
       int minMove = 1;
       int maxMove = -1;
 
+      double lx = 0.0;
       System* s = segment()->measure()->system();
       for (iNote in = notes.begin(); in != notes.end(); ++in) {
             Note* note = in->second;
-            double x = 0;
+            double x = 0.0;
 
             int move = note->move();
             if (move < minMove)
@@ -420,6 +423,8 @@ void Chord::layout(ScoreLayout* layout)
                   if (note->mirror())
                         x -= headWidth;
                   accidental->setPos(x, 0);
+                  if (x < lx)
+                        lx = x;
                   }
             }
 
@@ -523,24 +528,6 @@ void Chord::layout(ScoreLayout* layout)
       //-----------------------------------------
 
       layoutAttributes(layout);
-#if 0
-      double x = upnote->pos().x();
-      double y = upnote->pos().y();
-      double headHeight = upnote->height();
-      if (up) {
-            y -= point(style->propertyDistanceStem + Spatium(3.5));
-            x += headWidth;
-            }
-      else {
-            y -= (point(style->propertyDistanceHead) + headHeight/2);
-            x += headWidth * .5;
-            }
-
-      for (iAttribute ia = attributes.begin(); ia != attributes.end(); ++ia) {
-            (*ia)->setPos(x, y);
-            y -= (point(style->propertyDistance) + (*ia)->bbox().height());
-            }
-#endif
 
       //-----------------------------------------
       //  Fingering
@@ -557,6 +544,15 @@ void Chord::layout(ScoreLayout* layout)
                   // the second will also change position because their
                   // position in this list changes
                   }
+            }
+      if (_arpeggio) {
+            double headHeight = upnote->headHeight();
+            _arpeggio->layout(layout);
+            lx -= _arpeggio->width() + _spatium * .5;
+            double y = upNote()->pos().y() - headHeight * .5;
+            double h = downNote()->pos().y() - y;
+            _arpeggio->setHeight(h);
+            _arpeggio->setPos(lx, y);
             }
       }
 
@@ -676,6 +672,7 @@ void Chord::write(Xml& xml) const
          && note->isSimple(xml)
          && (_stemDirection == AUTO)
          && !_grace
+         && !_arpeggio
          ) {
             if (tick() != xml.curTick)
                   xml.tagE(QString("Note tick=\"%1\" pitch=\"%2\" tpc=\"%3\" ticks=\"%4\"")
@@ -696,6 +693,8 @@ void Chord::write(Xml& xml) const
                   }
             for (; in != notes.end(); ++in)
                   in->second->write(xml);
+            if (_arpeggio)
+                  _arpeggio->write(xml);
             xml.etag();
             }
       xml.curTick = tick() + tickLen();
@@ -803,6 +802,12 @@ void Chord::read(QDomElement e, int staffIdx)
                   else
                         _stemDirection = Direction(i);
                   }
+            else if (tag == "Arpeggio") {
+                  _arpeggio = new Arpeggio(score());
+                  _arpeggio->setStaff(staff());
+                  _arpeggio->read(e);
+                  _arpeggio->setParent(this);
+                  }
             else if (ChordRest::readProperties(e))
                   ;
             else if (tag == "Slur") {
@@ -828,9 +833,12 @@ void Chord::dump() const
 
 void Chord::space(double& min, double& extra) const
       {
-      extra = 0.0; // point(::style->minNoteDistance);
+      extra         = 0.0; // point(::style->minNoteDistance);
       double mirror = 0.0;
       double hw     = 0.0;
+
+      if (_arpeggio)
+            extra = _arpeggio->width() + _spatium * .5;
 
       for (ciNote i = notes.begin(); i != notes.end(); ++i) {
             Note* note = i->second;
@@ -845,7 +853,7 @@ void Chord::space(double& min, double& extra) const
                   else
                        prefixWidth += point(::style->prefixNoteDistance);
                   if (prefixWidth > extra)
-                        extra = prefixWidth;
+                        extra += prefixWidth;
                   }
             if (note->mirror()) {
                   if (isUp()) {
@@ -855,7 +863,7 @@ void Chord::space(double& min, double& extra) const
                   else {
                         // note head on left side of stem
                         if ((lhw + prefixWidth) > extra)
-                              extra = lhw + prefixWidth;
+                              extra += lhw + prefixWidth;
                         }
                   }
             }
