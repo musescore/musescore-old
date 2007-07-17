@@ -891,6 +891,7 @@ void Score::endDrag()
             origDragObject = 0;
             }
       layout();
+      _dragObject = 0;
       }
 
 //---------------------------------------------------------

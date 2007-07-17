@@ -717,56 +717,65 @@ void Score::cmdAddText(int subtype)
             printf("first create measure, then repeat operation\n");
             return;
             }
-      Measure* measure = ml.front();
+      Text* s = 0;
+      switch(subtype) {
+            case TEXT_TITLE:
+            case TEXT_SUBTITLE:
+            case TEXT_COMPOSER:
+            case TEXT_POET:
+                  {
+                  Measure* measure = ml.front();
+                  s = new Text(this);
+                  s->setSubtype(subtype);
+                  s->setText(s->subtypeName());
+                  s->setAnchorMeasure(measure);
+                  s->setParent(page);
+                  }
+                  break;
+            case TEXT_TRANSLATOR:
+            case TEXT_MEASURE_NUMBER:
+            case TEXT_PAGE_NUMBER_ODD:
+            case TEXT_PAGE_NUMBER_EVEN:
+            case TEXT_COPYRIGHT:
+            case TEXT_FINGERING:
+            case TEXT_INSTRUMENT_LONG:
+            case TEXT_INSTRUMENT_SHORT:
+            case TEXT_TEMPO:
+            case TEXT_LYRIC:
+            case TEXT_TUPLET:
+                  printf("add text type %d not supported\n", subtype);
+                  break;
 
-      Text* s = new Text(this);
-      s->setSubtype(subtype);
-      s->setText(s->subtypeName());
+            case TEXT_SYSTEM:
+                  {
+                  Element* el = sel->element();
+                  if (!el || (el->type() != NOTE && el->type() != REST)) {
+                        QMessageBox::information(0, "MuseScore: Text Entry",
+                        tr("No note or rest selected:\n"
+                           "please select a note or rest were you want to\n"
+                           "start text entry"));
+                        break;
+                        }
+                  if (el->type() == NOTE)
+                        el = el->parent();
+                  s = new Text(this);
+                  s->setStaff(el->staff());
+                  s->setSubtype(subtype);
+                  s->setText(s->subtypeName());
+                  s->setParent(((ChordRest*)el)->measure());
+                  s->setTick(el->tick());
+                  }
+                  break;
+            }
 
-      startCmd();
-      s->setAnchorMeasure(measure);
-      s->setParent(page);
-      undoAddElement(s);
-      layout();
-
-      select(s, 0, 0);
-      canvas()->startEdit(s);
-      }
-
-//---------------------------------------------------------
-//   cmdAddTitle
-//---------------------------------------------------------
-
-void Score::cmdAddTitle()
-      {
-      cmdAddText(TEXT_TITLE);
-      }
-
-//---------------------------------------------------------
-//   cmdAddSubtitle
-//---------------------------------------------------------
-
-void Score::cmdAddSubTitle()
-      {
-      cmdAddText(TEXT_SUBTITLE);
-      }
-
-//---------------------------------------------------------
-//   cmdAddComposer
-//---------------------------------------------------------
-
-void Score::cmdAddComposer()
-      {
-      cmdAddText(TEXT_COMPOSER);
-      }
-
-//---------------------------------------------------------
-//   cmdAddPoet
-//---------------------------------------------------------
-
-void Score::cmdAddPoet()
-      {
-      cmdAddText(TEXT_POET);
+      if (s) {
+            undoAddElement(s);
+            layout();
+            select(s, 0, 0);
+            canvas()->startEdit(s);
+            }
+      else
+            endCmd(true);
       }
 
 //---------------------------------------------------------
@@ -1403,8 +1412,6 @@ printf("  start edit\n");
                   }
             else if (cmd == "lyrics")
                   addLyrics();
-            else if (cmd == "expression")
-                  addExpression();
             else if (cmd == "technik")
                   addTechnik();
             else if (cmd == "tempo")
@@ -1413,6 +1420,16 @@ printf("  start edit\n");
                   addMetronome();
             else if (cmd == "pitch-spell")
                   spell();
+            else if (cmd == "title-text")
+                  return cmdAddText(TEXT_TITLE);
+            else if (cmd == "subtitle-text")
+                  return cmdAddText(TEXT_SUBTITLE);
+            else if (cmd == "composer-text")
+                  return cmdAddText(TEXT_COMPOSER);
+            else if (cmd == "poet-text")
+                  return cmdAddText(TEXT_POET);
+            else if (cmd == "system-text")
+                  return cmdAddText(TEXT_SYSTEM);
             endCmd(true);
             }
       }

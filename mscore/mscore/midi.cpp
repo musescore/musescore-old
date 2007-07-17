@@ -47,6 +47,7 @@
 #include "lyrics.h"
 #include "bracket.h"
 #include "keyfinder.h"
+#include "drumset.h"
 
 static unsigned const char gmOnMsg[] = { 0x7e, 0x7f, 0x09, 0x01 };
 static unsigned const char gsOnMsg[] = { 0x41, 0x10, 0x42, 0x12, 0x40, 0x00, 0x7f, 0x00, 0x41 };
@@ -1231,8 +1232,10 @@ void Score::convertTrack(MidiTrack* midiTrack, int staffIdx)
                         ++i;
                         continue;
                         }
-                  if (((MidiChord*)e)->voice() != voice)
+                  if (((MidiChord*)e)->voice() != voice) {
+                        ++i;
                         continue;
+                        }
                   //
                   // process pending notes
                   //
@@ -1254,6 +1257,7 @@ void Score::convertTrack(MidiTrack* midiTrack, int staffIdx)
                         chord->setTick(tick);
                         chord->setStaff(cstaff);
                         chord->setTickLen(len);
+                        chord->setVoice(voice);
                         Segment* s = measure->getSegment(chord);
                         s->add(chord);
 
@@ -1261,16 +1265,21 @@ void Score::convertTrack(MidiTrack* midiTrack, int staffIdx)
                               QList<MidiNote*>& nl = n->mc->notes();
                               for (int i = 0; i < nl.size(); ++i) {
                                     MidiNote* mn = nl[i];
-                                    if (drumset && !drumset->isValid(mn->pitch())) {
-printf("unmapped drum note 0x%02x %d\n", mn->pitch(), mn->pitch());
-                                          }
                         		Note* note = new Note(this);
                                     note->setPitch(mn->pitch());
                                     note->setTpc(mn->tpc());
                         		note->setStaff(cstaff);
                   	      	chord->add(note);
                                     note->setTick(tick);
-                                    note->setVoice(voice);
+
+                                    if (drumset) {
+                                          if (!drumset->isValid(mn->pitch())) {
+printf("unmapped drum note 0x%02x %d\n", mn->pitch(), mn->pitch());
+                                                }
+                                          else {
+                                                chord->setStemDirection(drumset->stemDirection(mn->pitch()));
+                                                }
+                                          }
 
                                     if (n->ties[i]) {
                                           n->ties[i]->setEndNote(note);

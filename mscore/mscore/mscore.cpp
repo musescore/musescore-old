@@ -49,6 +49,7 @@
 #include "layout.h"
 #include "palette.h"
 #include "part.h"
+#include "drumset.h"
 
 QTextStream cout(stdout);
 QTextStream eout(stderr);
@@ -266,7 +267,8 @@ MuseScore::MuseScore()
          << "chord-a" << "chord-b"
          << "stretch+" << "stretch-"
          << "instruments" << "clefs" << "keys" << "symbols" << "times" << "dynamics"
-         << "lyrics" << "fingering" << "expression" << "technik" << "tempo"
+         << "title-text" << "subtitle-text" << "composer-text" << "poet-text"
+         << "lyrics" << "fingering" << "system-text" << "technik" << "tempo"
          << "metronome" << "cut" << "copy" << "paste"
          << "beam-start" << "beam-mid" << "no-beam" << "beam32"
          << "file-open" << "file-new" << "file-template" << "file-save" << "file-save-as" << "file-close"
@@ -1138,12 +1140,14 @@ void MuseScore::setCurrentScore(int idx)
 //   signalHandler
 //---------------------------------------------------------
 
+#if 0
 static void signalHandler(int)
       {
       printf("fp exception\n");
 //      feclearexcept(fegetexcept());
       abort();
       }
+#endif
 
 //---------------------------------------------------------
 //   midiReceived
@@ -1153,46 +1157,6 @@ void MuseScore::midiReceived()
       {
       if (cs)
             cs->midiReceived();
-      }
-
-//---------------------------------------------------------
-//   cmdAddTitle
-//---------------------------------------------------------
-
-void MuseScore::cmdAddTitle()
-      {
-      if (cs)
-            cs->cmdAddTitle();
-      }
-
-//---------------------------------------------------------
-//   cmdAddSubTitle
-//---------------------------------------------------------
-
-void MuseScore::cmdAddSubTitle()
-      {
-      if (cs)
-            cs->cmdAddSubTitle();
-      }
-
-//---------------------------------------------------------
-//   cmdAddComposer
-//---------------------------------------------------------
-
-void MuseScore::cmdAddComposer()
-      {
-      if (cs)
-            cs->cmdAddComposer();
-      }
-
-//---------------------------------------------------------
-//   cmdAddPoet
-//---------------------------------------------------------
-
-void MuseScore::cmdAddPoet()
-      {
-      if (cs)
-            cs->cmdAddPoet();
       }
 
 //---------------------------------------------------------

@@ -26,8 +26,6 @@
 #include "style.h"
 #include "note.h"
 
-Drumset* smDrumset;           // standard midi drumset
-
 //---------------------------------------------------------
 //   Part
 //---------------------------------------------------------
@@ -296,83 +294,3 @@ void Part::setShow(bool val)
       foreach(Staff* staff, _staves)
             staff->setShow(_show);
       }
-
-//---------------------------------------------------------
-//   initDrumset
-//    initialize standard midi drumset
-//---------------------------------------------------------
-
-void initDrumset()
-      {
-      smDrumset = new Drumset;
-      for (int i = 0; i < 128; ++i) {
-            smDrumset->drum[i].notehead = -1;   // invalid entry
-            smDrumset->drum[i].line     = 0;
-            }
-      smDrumset->drum[35].notehead = HEAD_NORMAL;   // Acoustic Bass Drum
-      smDrumset->drum[35].line     = 7;
-
-      smDrumset->drum[36].notehead = HEAD_NORMAL;   // Bass Drum
-      smDrumset->drum[36].line     = 7;
-
-      smDrumset->drum[37].notehead = HEAD_CROSS;   // Side Stick
-      smDrumset->drum[37].line     = 3;
-
-      smDrumset->drum[38].notehead = HEAD_NORMAL;   // Snare (Acoustic)
-      smDrumset->drum[38].line     = 3;
-
-      smDrumset->drum[40].notehead = HEAD_NORMAL;   // Snare (Electric)
-      smDrumset->drum[40].line     = 3;
-
-      smDrumset->drum[41].notehead = HEAD_NORMAL;   // Tom 5
-      smDrumset->drum[41].line     = 5;
-
-      smDrumset->drum[42].notehead = HEAD_CROSS;   // Hi-Hat Closed
-      smDrumset->drum[42].line     = -1;
-
-      smDrumset->drum[43].notehead = HEAD_NORMAL;   // Tom 4
-      smDrumset->drum[43].line     = 5;
-
-      smDrumset->drum[44].notehead = HEAD_CROSS;   // Hi-Hat Pedal
-      smDrumset->drum[44].line     = 9;
-
-      smDrumset->drum[45].notehead = HEAD_NORMAL;   // Tom 3
-      smDrumset->drum[45].line     = 2;
-
-      smDrumset->drum[46].notehead = HEAD_CROSS;   // Hi-Hat Open
-      smDrumset->drum[46].line     = -1;
-
-      smDrumset->drum[47].notehead = HEAD_NORMAL;   // Tom 2
-      smDrumset->drum[47].line     = 1;
-
-      smDrumset->drum[48].notehead = HEAD_NORMAL;   // Tom 1
-      smDrumset->drum[48].line     = 0;
-
-      smDrumset->drum[49].notehead = HEAD_CROSS;   // Crash 1
-      smDrumset->drum[49].line     = -2;
-
-      smDrumset->drum[50].notehead = HEAD_NORMAL;   // Tom
-      smDrumset->drum[50].line     = 0;
-
-      smDrumset->drum[51].notehead = HEAD_CROSS;   // Ride
-      smDrumset->drum[51].line     = 0;
-
-      smDrumset->drum[52].notehead = HEAD_CROSS;   // China
-      smDrumset->drum[52].line     = -3;
-
-      smDrumset->drum[53].notehead = HEAD_DIAMOND;   // Ride (Bell)
-      smDrumset->drum[53].line     = 0;
-
-      smDrumset->drum[55].notehead = HEAD_CROSS;   // Ride (Bell)
-      smDrumset->drum[55].line     = -3;
-
-      smDrumset->drum[56].notehead = HEAD_TRIANGLE;   // Ride (Bell)
-      smDrumset->drum[56].line     = 1;
-
-      smDrumset->drum[57].notehead = HEAD_CROSS;   // Ride (Bell)
-      smDrumset->drum[57].line     = -3;
-
-      smDrumset->drum[59].notehead = HEAD_CROSS;   // Ride (Bell)
-      smDrumset->drum[59].line     = 2;
-      }
-

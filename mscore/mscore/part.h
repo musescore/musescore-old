@@ -21,33 +21,13 @@
 #ifndef __PART_H__
 #define __PART_H__
 
+#include "globals.h"
+
 class Instrument;
 class Xml;
 class Staff;
 class Score;
-
-//---------------------------------------------------------
-//   DrumInstrument
-//---------------------------------------------------------
-
-struct DrumInstrument {
-      int notehead;           ///< notehead symbol set
-      int line;               ///< place notehead onto this line
-      };
-
-//---------------------------------------------------------
-//   Drumset
-//    defines note heads and line position for all
-//    possible midi notes in a drumset
-//---------------------------------------------------------
-
-struct Drumset {
-      DrumInstrument drum[128];
-
-      bool isValid(int pitch) const  { return drum[pitch].notehead != -1; }
-      int noteHead(int pitch) const  { return drum[pitch].notehead;   }
-      int line(int pitch) const      { return drum[pitch].line;       }
-      };
+class Drumset;
 
 //---------------------------------------------------------
 //   Instrument
@@ -130,7 +110,5 @@ class Part {
       Score* score() const                     { return cs; }
       };
 
-extern Drumset* smDrumset;
-extern void initDrumset();
 #endif
 

@@ -31,6 +31,7 @@
 #include "layout.h"
 #include "style.h"
 #include "editinstrument.h"
+#include "drumset.h"
 
 QList<InstrumentTemplate*> instrumentTemplates;
 

@@ -116,6 +116,7 @@ void Text::setSubtype(int val)
             case TEXT_TEMPO:            setStyle(TEXT_STYLE_TEMPO); break;
             case TEXT_LYRIC:            setStyle(TEXT_STYLE_LYRIC); break;
             case TEXT_TUPLET:           setStyle(TEXT_STYLE_TUPLET); break;
+            case TEXT_SYSTEM:           setStyle(TEXT_STYLE_SYSTEM); break;
             }
       }
 
@@ -141,6 +142,7 @@ const QString Text::subtypeName() const
             case TEXT_TEMPO:            return "Tempo";
             case TEXT_LYRIC:            return "Lyric";
             case TEXT_TUPLET:           return "Tuplet";
+            case TEXT_SYSTEM:           return "System";
             }
       return "?";
       }
@@ -182,6 +184,8 @@ void Text::setSubtype(const QString& s)
             st = TEXT_LYRIC;
       else if (s == "Tuplet")
             st = TEXT_TUPLET;
+      else if (s == "System")
+            st = TEXT_SYSTEM;
       setSubtype(st);
       }
 

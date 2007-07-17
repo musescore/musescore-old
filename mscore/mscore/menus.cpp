@@ -535,17 +535,17 @@ QMenu* MuseScore::genCreateMenu()
       popup->addAction(tr("System Brackets..."), this, SLOT(bracketMenu()));
       popup->addAction(tr("Note Attributes..."), this, SLOT(noteAttributesMenu()));
       popup->addAction(tr("Accidentals..."),     this, SLOT(accidentalsMenu()));
-      popup->addAction(getAction("dynamics"));
 
       QMenu* text = popup->addMenu(tr("Text..."));
-      text->addAction(tr("Title"),        this, SLOT(cmdAddTitle()));
-      text->addAction(tr("Subtitle"),     this, SLOT(cmdAddSubTitle()));
-      text->addAction(tr("Composer"),     this, SLOT(cmdAddComposer()));
-      text->addAction(tr("Poet"),         this, SLOT(cmdAddPoet()));
+      text->addAction(getAction("title-text"));
+      text->addAction(getAction("subtitle-text"));
+      text->addAction(getAction("composer-text"));
+      text->addAction(getAction("poet-text"));
+      text->addAction(getAction("system-text"));
       text->addSeparator();
       text->addAction(getAction("lyrics"));
       text->addAction(getAction("fingering"));
-      text->addAction(getAction("expression"));
+      text->addAction(getAction("dynamics"));
       text->addAction(getAction("technik"));
       text->addAction(getAction("tempo"));
       text->addAction(getAction("metronome"));

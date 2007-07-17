@@ -1091,14 +1091,6 @@ Shortcut MuseScore::sc[] = {
          QT_TR_NOOP("Fingering")
          ),
       Shortcut(
-         "expression",
-         QT_TR_NOOP("Expression Palette"),
-         Qt::CTRL + Qt::Key_E,
-         Qt::WindowShortcut,
-         QT_TR_NOOP("Expression"),
-         QT_TR_NOOP("Expression")
-         ),
-      Shortcut(
          "technik",
          QT_TR_NOOP("Technik Palette"),
          Qt::CTRL + Qt::Key_T,
@@ -1122,6 +1114,12 @@ Shortcut MuseScore::sc[] = {
          QT_TR_NOOP("Metronome"),
          QT_TR_NOOP("Metronome")
          ),
+      Shortcut("system-text",   QT_TR_NOOP("Add System Text")),
+      Shortcut("title-text",    QT_TR_NOOP("Add Title")),
+      Shortcut("subtitle-text", QT_TR_NOOP("Add Subtitle")),
+      Shortcut("composer-text", QT_TR_NOOP("Add Composer")),
+      Shortcut("poet-text",     QT_TR_NOOP("Add Poet")),
+
       Shortcut(0, 0, 0),
       };
 
