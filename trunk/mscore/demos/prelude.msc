@@ -2,9 +2,9 @@
 <museScore version="1.0">
   <Spatium>1.5</Spatium>
   <Division>480</Division>
-  <Mag>2.52556</Mag>
-  <xoff>-4381</xoff>
-  <yoff>-1317</yoff>
+  <Mag>1.03717</Mag>
+  <xoff>-1071</xoff>
+  <yoff>-36</yoff>
   <Style>
     <staffUpperBorder>8</staffUpperBorder>
     <staffLowerBorder>4</staffLowerBorder>
@@ -1208,6 +1208,20 @@ p, li { white-space: pre-wrap; }
           <o4 x="15.4222" y="-5.07639"/>
           </SlurSegment>
         </Slur>
+      <Text>
+        <align>1</align>
+        <xoffset>0</xoffset>
+        <yoffset>-4</yoffset>
+        <anchor>tick</anchor>
+        <offsetType>spatium</offsetType>
+        <spatiumSizeDependent>1</spatiumSizeDependent>
+        <data>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-size:8.50394pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:10pt; font-weight:600;&quot;&gt;II______________&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
+        <subtype>System</subtype>
+        <offset x="-0.136054" y="5.71429"/>
+        </Text>
       <TimeSig>
         <subtype>392</subtype>
         <den>8</den>
@@ -1525,6 +1539,20 @@ p, li { white-space: pre-wrap; }
           </SlurSegment>
         <up>2</up>
         </Slur>
+      <Text>
+        <align>1</align>
+        <xoffset>0</xoffset>
+        <yoffset>-4</yoffset>
+        <anchor>tick</anchor>
+        <offsetType>spatium</offsetType>
+        <spatiumSizeDependent>1</spatiumSizeDependent>
+        <data>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-size:8.50394pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:10pt; font-weight:600;&quot;&gt;V________________&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
+        <subtype>System</subtype>
+        <offset x="-0.136054" y="-3.12925"/>
+        </Text>
       <TimeSig>
         <subtype>392</subtype>
         <den>8</den>
@@ -1628,6 +1656,20 @@ p, li { white-space: pre-wrap; }
           </SlurSegment>
         <up>2</up>
         </Slur>
+      <Text>
+        <align>1</align>
+        <xoffset>0</xoffset>
+        <yoffset>-4</yoffset>
+        <anchor>tick</anchor>
+        <offsetType>spatium</offsetType>
+        <spatiumSizeDependent>1</spatiumSizeDependent>
+        <data>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-size:8.50394pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:10pt; font-weight:600;&quot;&gt;V__________________&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
+        <subtype>System</subtype>
+        <offset x="-0.544218" y="-2.9932"/>
+        </Text>
       <TimeSig>
         <subtype>392</subtype>
         <den>8</den>
@@ -2327,6 +2369,20 @@ p, li { white-space: pre-wrap; }
           </SlurSegment>
         <up>2</up>
         </Slur>
+      <Text>
+        <align>1</align>
+        <xoffset>0</xoffset>
+        <yoffset>-4</yoffset>
+        <anchor>tick</anchor>
+        <offsetType>spatium</offsetType>
+        <spatiumSizeDependent>1</spatiumSizeDependent>
+        <data>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-size:8.50394pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:10pt; font-weight:600;&quot;&gt;II_____________&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
+        <subtype>System</subtype>
+        <offset x="-0.408163" y="-2.44898"/>
+        </Text>
       <Chord>
         <ticklen>240</ticklen>
         <StemDirection>down</StemDirection>
@@ -2614,6 +2670,20 @@ p, li { white-space: pre-wrap; }
           </SlurSegment>
         <up>1</up>
         </Slur>
+      <Text>
+        <align>1</align>
+        <xoffset>0</xoffset>
+        <yoffset>-4</yoffset>
+        <anchor>tick</anchor>
+        <offsetType>spatium</offsetType>
+        <spatiumSizeDependent>1</spatiumSizeDependent>
+        <data>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-size:8.50394pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:10pt; font-weight:600;&quot;&gt;III___________&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
+        <subtype>System</subtype>
+        <offset x="-0.816327" y="-2.58503"/>
+        </Text>
       <TimeSig>
         <subtype>264</subtype>
         <den>8</den>
@@ -2845,6 +2915,20 @@ p, li { white-space: pre-wrap; }
           </SlurSegment>
         <up>2</up>
         </Slur>
+      <Text>
+        <align>1</align>
+        <xoffset>0</xoffset>
+        <yoffset>-4</yoffset>
+        <anchor>tick</anchor>
+        <offsetType>spatium</offsetType>
+        <spatiumSizeDependent>1</spatiumSizeDependent>
+        <data>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-size:8.50394pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:10pt; font-weight:600;&quot;&gt;III____________&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
+        <subtype>System</subtype>
+        <offset x="-0.408163" y="-3.26531"/>
+        </Text>
       <Chord>
         <ticklen>240</ticklen>
         <StemDirection>down</StemDirection>
@@ -3446,7 +3530,37 @@ p, li { white-space: pre-wrap; }
     <Measure number="38">
       <LayoutBreak>
         </LayoutBreak>
+      <Text>
+        <align>1</align>
+        <xoffset>0</xoffset>
+        <yoffset>-4</yoffset>
+        <anchor>tick</anchor>
+        <offsetType>spatium</offsetType>
+        <spatiumSizeDependent>1</spatiumSizeDependent>
+        <data>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-size:8.50394pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:10pt; font-weight:600;&quot;&gt;III________&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
+        <subtype>System</subtype>
+        <offset x="-0.408163" y="-1.76871"/>
+        </Text>
+      <Text>
+        <align>1</align>
+        <xoffset>0</xoffset>
+        <yoffset>-4</yoffset>
+        <anchor>tick</anchor>
+        <offsetType>spatium</offsetType>
+        <spatiumSizeDependent>1</spatiumSizeDependent>
+        <data>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-size:8.50394pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:10pt; font-weight:600;&quot;&gt;IV__&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
+        <subtype>System</subtype>
+        <offset x="0.136054" y="-1.76871"/>
+        <tick>48480</tick>
+        </Text>
       <Chord>
+        <tick>47520</tick>
         <ticklen>240</ticklen>
         <Attribute>
           <idx>3</idx>
@@ -4202,7 +4316,23 @@ p, li { white-space: pre-wrap; }
           </SlurSegment>
         <up>1</up>
         </Slur>
+      <Text>
+        <align>1</align>
+        <xoffset>0</xoffset>
+        <yoffset>-4</yoffset>
+        <anchor>tick</anchor>
+        <offsetType>spatium</offsetType>
+        <spatiumSizeDependent>1</spatiumSizeDependent>
+        <data>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-size:8.50394pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:10pt; font-weight:600;&quot;&gt;III____&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
+        <subtype>System</subtype>
+        <offset x="0" y="-1.4966"/>
+        <tick>70320</tick>
+        </Text>
       <Chord>
+        <tick>69360</tick>
         <ticklen>240</ticklen>
         <StemDirection>down</StemDirection>
         <Note pitch="60" tpc="14"/>
@@ -4305,7 +4435,38 @@ p, li { white-space: pre-wrap; }
       <LayoutBreak>
         <subtype>line</subtype>
         </LayoutBreak>
+      <Text>
+        <align>1</align>
+        <xoffset>0</xoffset>
+        <yoffset>-4</yoffset>
+        <anchor>tick</anchor>
+        <offsetType>spatium</offsetType>
+        <spatiumSizeDependent>1</spatiumSizeDependent>
+        <data>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-size:8.50394pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:10pt; font-weight:600;&quot;&gt;III____&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
+        <subtype>System</subtype>
+        <offset x="0" y="-1.08844"/>
+        <tick>71280</tick>
+        </Text>
+      <Text>
+        <align>1</align>
+        <xoffset>0</xoffset>
+        <yoffset>-4</yoffset>
+        <anchor>tick</anchor>
+        <offsetType>spatium</offsetType>
+        <spatiumSizeDependent>1</spatiumSizeDependent>
+        <data>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-size:8.50394pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:10pt; font-weight:600;&quot;&gt;IV____&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
+        <subtype>System</subtype>
+        <offset x="0" y="-1.08844"/>
+        <tick>71760</tick>
+        </Text>
       <Chord>
+        <tick>70800</tick>
         <ticklen>240</ticklen>
         <StemDirection>down</StemDirection>
         <Note>

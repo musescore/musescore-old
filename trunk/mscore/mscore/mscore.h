@@ -104,7 +104,7 @@ class Shortcut {
       QAction* action;        //! cached action
 
       Shortcut();
-      Shortcut(const char* name, const char* d, const QKeySequence& k,
+      Shortcut(const char* name, const char* d, const QKeySequence& k = QKeySequence(),
          Qt::ShortcutContext cont = Qt::ApplicationShortcut,
          const char* txt = 0, const char* h = 0, QIcon* i = 0);
       Shortcut(const Shortcut& c);
@@ -229,10 +229,6 @@ class MuseScore : public QMainWindow {
       void noteAttributesMenu();
       void accidentalsMenu();
       void midiReceived();
-      void cmdAddTitle();
-      void cmdAddSubTitle();
-      void cmdAddComposer();
-      void cmdAddPoet();
       void cmdAppendMeasures();
       void resetUserStretch();
       void showLayoutBreakPalette();

@@ -174,10 +174,6 @@ class Score : public QObject {
 
    public slots:
       void printFile();
-      void cmdAddTitle();
-      void cmdAddSubTitle();
-      void cmdAddComposer();
-      void cmdAddPoet();
       void cmdAppendMeasure();
       void cmdAppendMeasures(int);
       void appendMeasures(int);

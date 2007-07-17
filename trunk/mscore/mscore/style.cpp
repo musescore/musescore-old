@@ -99,6 +99,9 @@ static const TextStyle defaultTextStyles[] = {
 
       TextStyle(QString("Tuplets"), ff,  8, false, false, false,
          ALIGN_HCENTER | ALIGN_VCENTER, ANCHOR_NOTE, 0, 0, OFFSET_SPATIUM),
+
+      TextStyle(QString("System"), ff,  10, false, false, false,
+         ALIGN_LEFT, ANCHOR_TICK, 0, -4.0, OFFSET_SPATIUM, true),
       };
 
 //---------------------------------------------------------

@@ -20,6 +20,9 @@
 
 #include "midifile.h"
 #include "xml.h"
+#include "part.h"
+#include "note.h"
+#include "drumset.h"
 
 extern QTextStream cout;
 extern QTextStream eout;
@@ -36,6 +39,8 @@ extern QTextStream eout;
 		      (((x)&0xFF0000)>>8) | \
 		      (((x)>>24)&0xFF))
 #endif
+
+Drumset* smDrumset;           // standard midi drumset
 
 static unsigned const char gmOnMsg[] = {
       0x7e,       // Non-Real Time header
@@ -1501,6 +1506,11 @@ void MidiTrack::findChords()
       EventList dl;
       int n = _events.size();
 
+      Drumset* drumset;
+      if (_drumTrack)
+            drumset = smDrumset;
+      else
+            drumset = 0;
       int jitter = 3;   // tick tolerance for note on/off
 
       for (int i = 0; i < n; ++i) {
@@ -1519,9 +1529,20 @@ void MidiTrack::findChords()
             chord->setOntime(ontime);
             chord->setDuration(note->duration());
             chord->notes().append(note);
+            int voice = 0;
+            chord->setVoice(voice);
             dl.append(chord);
             _events[i] = 0;
 
+            bool useDrumset = false;
+            if (drumset) {
+                  int pitch = note->pitch();
+                  if (drumset->isValid(pitch)) {
+                        useDrumset = true;
+                        voice = drumset->voice(pitch);
+                        chord->setVoice(voice);
+                        }
+                  }
             for (int k = i + 1; k < n; ++k) {
                   if (_events[k] == 0 || _events[k]->type() != ME_NOTE)
                         continue;
@@ -1530,8 +1551,17 @@ void MidiTrack::findChords()
                         break;
                   if (qAbs(nn->ontime() - ontime) > jitter || qAbs(nn->offtime() - offtime) > jitter)
                         continue;
-                  chord->notes().append(nn);
-                  _events[k] = 0;
+                  int pitch = nn->pitch();
+                  if (useDrumset) {
+                        if (drumset->isValid(pitch) && drumset->voice(pitch) == voice) {
+                              chord->notes().append(nn);
+                              _events[k] = 0;
+                              }
+                        }
+                  else {
+                        chord->notes().append(nn);
+                        _events[k] = 0;
+                        }
                   }
             }
       _events = dl;
@@ -1544,6 +1574,10 @@ void MidiTrack::findChords()
 
 int MidiTrack::separateVoices(int /*maxVoices*/)
       {
+      if (_drumTrack)
+            return 2;
+      return 1;
+#if 0
       int n = _events.size();
       for (int i = 0; i < n; ++i) {
             MidiEvent* e = _events[i];
@@ -1553,5 +1587,145 @@ int MidiTrack::separateVoices(int /*maxVoices*/)
             mc->setVoice(0);
             }
       return 1;
+#endif
       }
+
+//---------------------------------------------------------
+//   initDrumset
+//    initialize standard midi drumset
+//---------------------------------------------------------
+
+void initDrumset()
+      {
+      smDrumset = new Drumset;
+      for (int i = 0; i < 128; ++i) {
+            smDrumset->drum[i].notehead = -1;   // invalid entry
+            smDrumset->drum[i].line     = 0;
+            }
+      smDrumset->drum[35].notehead = HEAD_NORMAL;   // Acoustic Bass Drum
+      smDrumset->drum[35].line     = 7;
+      smDrumset->drum[35].stemDirection = DOWN;
+      smDrumset->drum[35].voice    = 1;
+
+      smDrumset->drum[36].notehead = HEAD_NORMAL;   // Bass Drum
+      smDrumset->drum[36].line     = 7;
+      smDrumset->drum[36].stemDirection = DOWN;
+      smDrumset->drum[36].voice    = 1;
+
+      smDrumset->drum[37].notehead = HEAD_CROSS;   // Side Stick
+      smDrumset->drum[37].line     = 3;
+      smDrumset->drum[37].stemDirection = UP;
+      smDrumset->drum[37].voice    = 0;
+
+      smDrumset->drum[38].notehead = HEAD_NORMAL;   // Snare (Acoustic)
+      smDrumset->drum[38].line     = 3;
+      smDrumset->drum[38].stemDirection = UP;
+      smDrumset->drum[38].voice    = 0;
+
+      smDrumset->drum[40].notehead = HEAD_NORMAL;   // Snare (Electric)
+      smDrumset->drum[40].line     = 3;
+      smDrumset->drum[40].stemDirection = UP;
+      smDrumset->drum[40].voice    = 0;
+
+      smDrumset->drum[41].notehead = HEAD_NORMAL;   // Tom 5
+      smDrumset->drum[41].line     = 5;
+      smDrumset->drum[41].stemDirection = UP;
+      smDrumset->drum[41].voice    = 0;
+
+      smDrumset->drum[42].notehead = HEAD_CROSS;   // Hi-Hat Closed
+      smDrumset->drum[42].line     = -1;
+      smDrumset->drum[42].stemDirection = UP;
+      smDrumset->drum[42].voice    = 0;
+
+      smDrumset->drum[43].notehead = HEAD_NORMAL;   // Tom 4
+      smDrumset->drum[43].line     = 5;
+      smDrumset->drum[43].stemDirection = DOWN;
+      smDrumset->drum[43].voice    = 1;
+
+      smDrumset->drum[44].notehead = HEAD_CROSS;   // Hi-Hat Pedal
+      smDrumset->drum[44].line     = 9;
+      smDrumset->drum[44].stemDirection = DOWN;
+      smDrumset->drum[44].voice    = 1;
+
+      smDrumset->drum[45].notehead = HEAD_NORMAL;   // Tom 3
+      smDrumset->drum[45].line     = 2;
+      smDrumset->drum[45].stemDirection = UP;
+      smDrumset->drum[45].voice    = 0;
+
+      smDrumset->drum[46].notehead = HEAD_CROSS;   // Hi-Hat Open
+      smDrumset->drum[46].line     = 1;
+      smDrumset->drum[46].stemDirection = UP;
+      smDrumset->drum[46].voice    = 0;
+
+      smDrumset->drum[47].notehead = HEAD_NORMAL;   // Tom 2
+      smDrumset->drum[47].line     = 1;
+      smDrumset->drum[47].stemDirection = UP;
+      smDrumset->drum[47].voice    = 0;
+
+      smDrumset->drum[48].notehead = HEAD_NORMAL;   // Tom 1
+      smDrumset->drum[48].line     = 0;
+      smDrumset->drum[48].stemDirection = UP;
+      smDrumset->drum[48].voice    = 0;
+
+      smDrumset->drum[49].notehead = HEAD_CROSS;   // Crash 1
+      smDrumset->drum[49].line     = -2;
+      smDrumset->drum[49].stemDirection = UP;
+      smDrumset->drum[49].voice    = 0;
+
+      smDrumset->drum[50].notehead = HEAD_NORMAL;   // Tom
+      smDrumset->drum[50].line     = 0;
+      smDrumset->drum[50].stemDirection = UP;
+      smDrumset->drum[50].voice    = 0;
+
+      smDrumset->drum[51].notehead = HEAD_CROSS;   // Ride
+      smDrumset->drum[51].line     = 0;
+      smDrumset->drum[51].stemDirection = UP;
+      smDrumset->drum[51].voice    = 0;
+
+      smDrumset->drum[52].notehead = HEAD_CROSS;   // China
+      smDrumset->drum[52].line     = -3;
+      smDrumset->drum[52].stemDirection = UP;
+      smDrumset->drum[52].voice    = 0;
+
+      smDrumset->drum[53].notehead = HEAD_DIAMOND;   // Ride (Bell)
+      smDrumset->drum[53].line     = 0;
+      smDrumset->drum[53].stemDirection = UP;
+      smDrumset->drum[53].voice    = 0;
+
+      smDrumset->drum[54].notehead = HEAD_DIAMOND;   // Tambourine
+      smDrumset->drum[54].line     = 2;
+      smDrumset->drum[54].stemDirection = UP;
+      smDrumset->drum[54].voice    = 0;
+
+      smDrumset->drum[55].notehead = HEAD_CROSS;   // Ride (Bell)
+      smDrumset->drum[55].line     = -3;
+      smDrumset->drum[55].stemDirection = UP;
+      smDrumset->drum[55].voice    = 0;
+
+      smDrumset->drum[56].notehead = HEAD_TRIANGLE;   // Ride (Bell)
+      smDrumset->drum[56].line     = 1;
+      smDrumset->drum[56].stemDirection = UP;
+      smDrumset->drum[56].voice    = 0;
+
+      smDrumset->drum[57].notehead = HEAD_CROSS;   // Ride (Bell)
+      smDrumset->drum[57].line     = -3;
+      smDrumset->drum[57].stemDirection = UP;
+      smDrumset->drum[57].voice    = 0;
+
+      smDrumset->drum[59].notehead = HEAD_CROSS;   // Ride (Bell)
+      smDrumset->drum[59].line     = 2;
+      smDrumset->drum[59].stemDirection = UP;
+      smDrumset->drum[59].voice    = 0;
+
+      smDrumset->drum[63].notehead = HEAD_CROSS;   // open high conga
+      smDrumset->drum[63].line     = 4;
+      smDrumset->drum[63].stemDirection = UP;
+      smDrumset->drum[63].voice    = 0;
+
+      smDrumset->drum[64].notehead = HEAD_CROSS;   // low conga
+      smDrumset->drum[64].line     = 6;
+      smDrumset->drum[64].stemDirection = UP;
+      smDrumset->drum[64].voice    = 0;
+      }
+
 

@@ -65,6 +65,7 @@
 #include "keysig.h"
 #include "breath.h"
 #include "arpeggio.h"
+#include "drumset.h"
 
 //---------------------------------------------------------
 //   y2pitch
@@ -554,13 +555,16 @@ void Measure::layout2(ScoreLayout* layout)
                         break;
                   case DYNAMIC:
                   case SYMBOL:
-                  case TEXT:
                   case TEMPO_TEXT:
                         {
                         pel->layout(layout);
                         double x = tick2pos(pel->tick());
                         pel->setPos(x, y);
                         }
+                        break;
+                  case TEXT:
+                        pel->layout(layout);
+                        pel->setPos(pel->pos() + QPointF(tick2pos(pel->tick()), y));
                         break;
                   case LAYOUT_BREAK:
                         pel->layout(layout);
@@ -773,7 +777,7 @@ void Measure::add(Element* el)
                   int st = el->subtype();
                   if (s) {
                         if (st == Segment::SegChordRest) {
-                              while (s && s->subtype() != Segment::SegChordRest && s->tick() == t)
+                              while (s && s->subtype() != st && s->tick() == t)
                                     s = s->next();
                               }
                         else {
@@ -2351,16 +2355,15 @@ void Measure::read(QDomElement e, int idx)
                   }
             else if (tag == "Text") {
                   Text* t = new Text(score());
+                  t->setTick(score()->curTick);
                   t->read(e);
                   if (t->anchor() != ANCHOR_PAGE) {
-                        if (!time().isValid())
-                              t->setTick(score()->curTick);
-                        else
-                              score()->curTick = t->tick();
+                        score()->curTick = t->tick();
                         t->setStaff(staff);
                         }
                   add(t);
                   }
+
             //-------------------------------------obsolete:
             else if (tag == "work-title") {
                   Text* t = new Text(score());

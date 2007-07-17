@@ -251,7 +251,6 @@ void Canvas::mousePressEvent(QMouseEvent* ev)
       mousePressed = true;
 
       bool b1 = ev->button() == Qt::LeftButton;
-      bool b2 = ev->button() == Qt::MidButton;
       bool b3 = ev->button() == Qt::RightButton;
 
       keyState = ev->modifiers();
@@ -310,30 +309,15 @@ void Canvas::mousePressEvent(QMouseEvent* ev)
             _score->startCmd();
       switch (state) {
             case NOTE_ENTRY:
-                  if (!(keyState & Qt::AltModifier))  // Alt+move = drag canvas
+                  if (keyState & Qt::ControlModifier) {
+                        dragCanvasState = true;
+                        setCursor(Qt::SizeAllCursor);
+                        }
+                  else
                         _score->putNote(startMove, keyState & Qt::ShiftModifier);
-//                        _score->putNote(startMove, Qt::ShiftModifier);
                   break;
 
             case NORMAL:
-                  //-----------------------------------------
-                  //  drag operation
-                  //-----------------------------------------
-
-                  if (b2 && (_score->sel->state == SEL_SINGLE)) {
-#if 0
-                        QDrag* drag = new QDrag(this);
-                        QMimeData* mimeData = new QMimeData;
-                        Element* el = symbols[currentSymbol];
-
-                        mimeData->setData(mimeSymbolFormat, el->mimeData());
-                        drag->setMimeData(mimeData);
-
-                        /*Qt::DropAction dropAction =*/ drag->start(Qt::CopyAction);
-#endif
-                        break;
-                        }
-
                   //-----------------------------------------
                   //  select operation
                   //-----------------------------------------
@@ -353,6 +337,10 @@ void Canvas::mousePressEvent(QMouseEvent* ev)
                               _score->select(element, keyState, _score->dragStaff);
                         else
                               _score->setDragObject(0);
+                        }
+                  else {
+                        dragCanvasState = true;
+                        setCursor(Qt::SizeAllCursor);
                         }
                   break;
 
@@ -452,11 +440,6 @@ void Canvas::mouseMoveEvent1(QMouseEvent* ev)
             _score->addRefresh(shadowNote->abbox());
             setShadowNote(p);
             _score->addRefresh(shadowNote->abbox());
-            }
-
-      if (!_score->dragObject() && !(keyState & Qt::ShiftModifier) && buttonState) {
-            dragCanvasState = true;
-            setCursor(Qt::SizeAllCursor);
             }
 
       QPointF delta = p - startMove;
