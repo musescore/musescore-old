@@ -104,19 +104,9 @@ void MuseScore::closeEvent(QCloseEvent* ev)
       {
       for (QList<Score*>::iterator i = scoreList.begin(); i != scoreList.end(); ++i) {
             Score* score = *i;
-            if (score->dirty()) {
-                  QString s(tr("%1 contains unsaved data\n"
-                    "Save Current Score?"));
-                  s = s.arg(score->projectName());
-                  int n = QMessageBox::warning(this, tr("MuseScore"),
-                     s,
-                     tr("&Save"), tr("&Nosave"), tr("&Abort"), 0, 2);
-                  if (n == 0)
-                        saveFile();
-                  else if (n == 2) {
-                        ev->ignore();
-                        return;
-                        }
+            if (checkDirty(score)) {
+                  ev->ignore();
+                  return;
                   }
             }
       saveScoreList();
@@ -945,7 +935,7 @@ void MuseScore::selectScore(QAction* action)
       {
       ProjectItem* item = (ProjectItem*)action->data().value<void*>();
       if (item) {
-            Score* score      = new Score();
+            Score* score = new Score();
             score->read(item->name);
             appendScore(score);
             tab->setCurrentIndex(scoreList.size() - 1);
@@ -1117,6 +1107,8 @@ void MuseScore::setCurrentScore(int idx)
 
       getAction("undo")->setEnabled(!cs->undoEmpty());
       getAction("redo")->setEnabled(!cs->redoEmpty());
+      getAction("file-save")->setEnabled(cs->fileInfo()->isWritable());
+
       visibleId->setChecked(cs->showInvisible());
 
       cs->setSpatium(cs->mainLayout()->spatium());
@@ -1744,8 +1736,6 @@ int main(int argc, char* argv[])
       mscore->setCurrentScore(currentScore);
       mscore->showNavigator(preferences.showNavigator);
       mscore->showPad(preferences.showPad);
-
-//      mscore->showPalette(preferences.showPanel);
 
       if (mscore->getKeyPad())
             mscore->getKeyPad()->move(preferences.padPos);

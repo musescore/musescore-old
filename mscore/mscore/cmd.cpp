@@ -1079,7 +1079,7 @@ void Score::moveDown(Note* note)
 
 void Score::cmdAddStretch(double val)
       {
-      if (sel->state != SEL_SYSTEM && sel->state != SEL_STAFF)
+      if (sel->state() != SEL_SYSTEM && sel->state() != SEL_STAFF)
             return;
       int startTick = sel->tickStart;
       int endTick   = sel->tickEnd;
@@ -1306,7 +1306,7 @@ printf("  start edit\n");
                   padToggle(PAD_BEAM32);
             else if (cmd == "pad-tie") {
                   padState.tie = !padState.tie;
-                  if (cis->pos == -1 && sel->state == SEL_SINGLE) {
+                  if (cis->pos == -1 && sel->state() == SEL_SINGLE) {
                         Element* el = sel->element();
                         if (el->type() == NOTE) {
                   		Tie* tie = new Tie(this);
@@ -1361,7 +1361,7 @@ printf("  start edit\n");
             else if (cmd == "stretch-")
                   cmdAddStretch(-0.1);
             else if (cmd == "cut") {
-                  if (sel->state == SEL_SINGLE) {
+                  if (sel->state() == SEL_SINGLE) {
                         QMimeData* mimeData = new QMimeData;
                         Element* el = sel->element();
                         mimeData->setData("application/mscore/symbol", el->mimeData(QPointF()));
@@ -1379,7 +1379,7 @@ printf("  start edit\n");
                   }
             else if (cmd == "paste") {
                   const QMimeData* ms = QApplication::clipboard()->mimeData();
-                  if (sel->state == SEL_SINGLE && ms && ms->hasFormat("application/mscore/symbol")) {
+                  if (sel->state() == SEL_SINGLE && ms && ms->hasFormat("application/mscore/symbol")) {
                         QByteArray data(ms->data("application/mscore/symbol"));
                         QDomDocument doc;
                         int line, column;
@@ -1395,13 +1395,13 @@ printf("  start edit\n");
                         sel->element()->drop(QPointF(), QPointF(), type, e);
                         addRefresh(sel->element()->abbox());
                         }
-                  else if (sel->state == SEL_STAFF && ms && ms->hasFormat("application/mscore/staff"))
+                  else if (sel->state() == SEL_STAFF && ms && ms->hasFormat("application/mscore/staff"))
                         pasteStaff(ms);
-                  else if (sel->state == SEL_SYSTEM && ms && ms->hasFormat("application/mscore/system")) {
+                  else if (sel->state() == SEL_SYSTEM && ms && ms->hasFormat("application/mscore/system")) {
                         printf("paste system\n");
                         }
                   else {
-                        printf("paste not supported: sel state %d ms %p\n", sel->state, ms);
+                        printf("paste not supported: sel state %d ms %p\n", sel->state(), ms);
                         if (ms) {
                               QStringList formats = ms->formats();
                               printf("Formate:\n");
@@ -1440,7 +1440,7 @@ printf("  start edit\n");
 
 void Score::pasteStaff(const QMimeData* ms)
       {
-      if (sel->state != SEL_STAFF) {
+      if (sel->state() != SEL_STAFF) {
             printf("  cannot paste to selection\n");
             return;
             }

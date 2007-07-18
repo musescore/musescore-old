@@ -734,9 +734,9 @@ Element* Note::drop(const QPointF&, const QPointF&, int t, const QDomElement& no
                   //
                   // override palette settings for text:
                   //
-                  QString s(f->getText());
-                  f->setSubtype(TEXT_FINGERING);
-                  f->setText(s);
+                  // QString s(f->getText());
+                  // f->setSubtype(TEXT_FINGERING);
+                  // f->setText(s);
 
                   f->setParent(this);
                   score()->select(f, 0, 0);
