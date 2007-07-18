@@ -641,8 +641,8 @@ void Canvas::modifyElement(Element* el)
             return;
             }
       Score* cs = el->score();
-      if (cs->sel->state != SEL_SINGLE) {
-            printf("modifyElement: cs->sel->state != SEL_SINGLE\n");
+      if (cs->sel->state() != SEL_SINGLE) {
+            printf("modifyElement: cs->sel->state() != SEL_SINGLE\n");
             delete el;
             return;
             }
@@ -1067,7 +1067,7 @@ void Score::cmdDeleteItem(Element* el)
 
 void Score::cmdDeleteSelection()
       {
-      if (sel->state == SEL_SYSTEM) {
+      if (sel->state() == SEL_SYSTEM) {
             Measure* is = tick2measure(sel->tickStart);
             if (is->next()) {
                   Measure* ie = tick2measure(sel->tickEnd);
@@ -1455,7 +1455,7 @@ void Score::colorItem(Element* element)
 
 void Score::pageBreak()
       {
-      if (sel->state != SEL_STAFF && sel->state != SEL_SYSTEM) {
+      if (sel->state() != SEL_STAFF && sel->state() != SEL_SYSTEM) {
             printf("no system selected!\n");
             return;
             }
@@ -1470,7 +1470,7 @@ void Score::pageBreak()
 
 void Score::systemBreak()
       {
-      if (sel->state != SEL_STAFF && sel->state != SEL_SYSTEM) {
+      if (sel->state() != SEL_STAFF && sel->state() != SEL_SYSTEM) {
             printf("no system selected!\n");
             return;
             }

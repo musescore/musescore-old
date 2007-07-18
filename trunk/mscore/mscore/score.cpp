@@ -128,7 +128,7 @@ Score::Score()
       sel               = new Selection(this);
       _dirty            = false;
       _saved            = false;
-      sel->state        = SEL_NONE;
+      sel->setState(SEL_NONE);
       editObject        = 0;
       origDragObject    = 0;
       _dragObject       = 0;
@@ -932,7 +932,7 @@ ChordRest* Score::setNoteEntry(bool val, bool step)
                         }
                   return cr;
                   }
-            if (sel->state == SEL_NONE || (el && el->type() != NOTE && !el->isChordRest())) {
+            if (sel->state() == SEL_NONE || (el && el->type() != NOTE && !el->isChordRest())) {
                   QMessageBox::information(0, "MuseScore: Note Entry",
                         tr("No note or rest selected:\n"
                            "please select a note or rest were you want to\n"

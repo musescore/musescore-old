@@ -51,7 +51,7 @@
 
 Element* Selection::element() const
       {
-      if (state == SEL_SINGLE)
+      if (_state == SEL_SINGLE)
             return _el.front();
       return 0;
       }
@@ -111,7 +111,7 @@ ChordRest* Selection::lastChordRest() const
 QRectF Selection::deselectAll(Score* cs)
       {
       QRectF r;
-      if (state == SEL_STAFF || state == SEL_SYSTEM)
+      if (_state == SEL_STAFF || _state == SEL_SYSTEM)
             cs->setUpdateAll();
       return clear();
       }
@@ -129,7 +129,7 @@ QRectF Selection::clear()
             r |= e->abbox();
             }
       _el.clear();
-      state = SEL_NONE;
+      _state = SEL_NONE;
       return r;
       }
 
@@ -173,10 +173,11 @@ void Score::deselect(Element* obj)
 void Score::select(Element* obj, int state, int staff)
       {
 // printf("select element <%s> staff %d\n", obj ? obj->name() : "", obj ? obj->staffIdx() : -1);
+
       if (!(state & Qt::ShiftModifier) || !obj) {
             refresh |= sel->deselectAll(this);
             if (!obj) {
-                  sel->state   = SEL_NONE;
+                  sel->setState(SEL_NONE);
                   padState.len = 0;
                   emit selectionChanged(int(SEL_NONE));
                   return;
@@ -192,12 +193,12 @@ void Score::select(Element* obj, int state, int staff)
             int staffEnd   = staff+1;
 
             if ((state & Qt::ShiftModifier)
-               && (sel->state == SEL_SYSTEM || sel->state == SEL_STAFF)) {
+               && (sel->state() == SEL_SYSTEM || sel->state() == SEL_STAFF)) {
                   if (sel->tickStart < tickStart)
                         tickStart = sel->tickStart;
                   if (sel->tickEnd > tickEnd)
                         tickEnd = sel->tickEnd;
-                  if (sel->state == SEL_STAFF) {
+                  if (sel->state() == SEL_STAFF) {
                         if (sel->staffStart < staffStart)
                               staffStart = sel->staffStart;
                         else if (sel->staffEnd > staffEnd)
@@ -213,23 +214,25 @@ void Score::select(Element* obj, int state, int staff)
 
             if (state & Qt::ControlModifier)
                   selState = SEL_SYSTEM;
-            else if ((state & Qt::ShiftModifier) && (sel->state == SEL_SYSTEM))
+            else if ((state & Qt::ShiftModifier) && (sel->state() == SEL_SYSTEM))
                   selState = SEL_SYSTEM;
 
             if (selState == SEL_SYSTEM) {
                   sel->staffStart = 0;
                   sel->staffEnd   = nstaves();
                   }
-            if (sel->state != selState) {
+            if (sel->state() != selState) {
                   sel->deselectAll(this);
-                  sel->state = selState;
-                  emit selectionChanged(int(sel->state));
+                  sel->setState(selState);
+                  emit selectionChanged(int(sel->state()));
                   }
             //
             //  select all elements in range
             //
             int startTrack = staffStart * VOICES;
             int endTrack   = staffEnd * VOICES;
+            if (sel->state() == SEL_SYSTEM)
+                  endTrack = nstaves() * VOICES;
 
             for (Measure* m = _layout->first(); m; m = m->next()) {
                   int ms = m->tick();
@@ -273,7 +276,7 @@ void Score::select(Element* obj, int state, int staff)
             cis->voice = obj->voice();   //TODO
             }
       ::setPadState(obj);
-      emit selectionChanged(int(sel->state));
+      emit selectionChanged(int(sel->state()));
       }
 
 //---------------------------------------------------------
@@ -318,7 +321,7 @@ void Score::searchSelectedElements()
                   }
             }
       sel->updateState();
-      emit selectionChanged(int(sel->state));
+      emit selectionChanged(int(sel->state()));
       }
 
 //---------------------------------------------------------
@@ -343,11 +346,11 @@ void Selection::update()
 void Selection::dump()
       {
       printf("Selection dump: ");
-      if (state == SEL_NONE) {
+      if (_state == SEL_NONE) {
             printf("NONE\n");
             return;
             }
-      if (state == SEL_SINGLE)
+      if (_state == SEL_SINGLE)
             printf("SINGLE\n");
       else
             printf("MULTI\n");
@@ -366,17 +369,22 @@ void Selection::dump()
 void Selection::updateState()
       {
       int n = _el.size();
-      if (n == 0)
-            state = SEL_NONE;
-      else if (n == 1) {
-            state = SEL_SINGLE;
-            Element* obj = element();
-            ::setPadState(obj);
-            cis->staff = obj->staffIdx();
-            cis->voice = obj->voice();   //TODO
+      if (_state == SEL_NONE || _state == SEL_SINGLE || _state == SEL_MULT) {
+            int n = _el.size();
+            if (n == 0)
+                  _state = SEL_NONE;
+            else if (n == 1) {
+                  _state = SEL_SINGLE;
+                  Element* obj = element();
+                  ::setPadState(obj);
+                  cis->staff = obj->staffIdx();
+                  cis->voice = obj->voice();   //TODO
+                  }
+            else
+                  _state = SEL_MULT;
             }
-      else
-            state = SEL_MULT;
+      else if (n == 0)
+            _state = SEL_NONE;
       }
 
 //---------------------------------------------------------
@@ -385,7 +393,7 @@ void Selection::updateState()
 
 const char* Selection::mimeType() const
       {
-      switch (state) {
+      switch (_state) {
             default:
             case SEL_NONE:
                   return 0;
@@ -407,7 +415,7 @@ const char* Selection::mimeType() const
 QByteArray Selection::mimeData() const
       {
       QByteArray a;
-      switch (state) {
+      switch (_state) {
             case SEL_SINGLE:
                   a = element()->mimeData(QPointF());
                   break;

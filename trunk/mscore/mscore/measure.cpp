@@ -1012,7 +1012,7 @@ void Measure::draw(QPainter& p)
       // draw selection:
       //-------------------------------
 
-      if (_score->sel->state != SEL_STAFF && _score->sel->state != SEL_SYSTEM)
+      if (_score->sel->state() != SEL_STAFF && _score->sel->state() != SEL_SYSTEM)
             return;
 
       int sstart = _score->sel->tickStart;
@@ -1026,8 +1026,11 @@ void Measure::draw(QPainter& p)
       p.setBrush(Qt::NoBrush);
       double x1 = bbox().x();
       double x2 = x1 + bbox().width();
-      if (_score->sel->state == SEL_SYSTEM) {
-            p.setPen(QPen(QColor(Qt::blue), 4, Qt::DotLine));
+      if (_score->sel->state() == SEL_SYSTEM) {
+            QPen pen(QColor(Qt::blue));
+            pen.setWidthF(3.0 / p.matrix().m11());
+            pen.setStyle(Qt::DotLine);
+            p.setPen(pen);
             double y1 = bbox().y() - _spatium;
             double y2 = y1 + bbox().height() + 2 * _spatium;
 

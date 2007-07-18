@@ -199,3 +199,67 @@ int Score::prevSeg(int tick, int track)
       return seg->tick();
       }
 
+//---------------------------------------------------------
+//   nextSeg1
+//---------------------------------------------------------
+
+int Score::nextSeg1(int tick, int& track)
+      {
+      Segment* seg   = tick2segment(tick);
+      int staffIdx   = track / VOICES;
+      int startTrack = staffIdx * VOICES;
+      int endTrack   = startTrack + VOICES;
+      while (seg) {
+            seg = seg->next1();
+            if (seg == 0)
+                  break;
+            if (seg->subtype() != Segment::SegChordRest)
+                  continue;
+            if (seg->element(track))
+                  break;
+            for (track = startTrack; track < endTrack; ++track) {
+                  if (seg->element(track))
+                        break;
+                  }
+            if (track < endTrack)
+                  break;
+            }
+      if (seg == 0) {
+            printf("no seg found\n");
+            return -1;
+            }
+      return seg->tick();
+      }
+
+//---------------------------------------------------------
+//   prevSeg1
+//---------------------------------------------------------
+
+int Score::prevSeg1(int tick, int& track)
+      {
+      Segment* seg   = tick2segment(tick);
+      int staffIdx   = track / VOICES;
+      int startTrack = staffIdx * VOICES;
+      int endTrack   = startTrack + VOICES;
+      while (seg) {
+            seg = seg->prev1();
+            if (seg == 0)
+                  break;
+            if (seg->subtype() != Segment::SegChordRest)
+                  continue;
+            if (seg->element(track))
+                  break;
+            for (track = startTrack; track < endTrack; ++track) {
+                  if (seg->element(track))
+                        break;
+                  }
+            if (track < endTrack)
+                  break;
+            }
+      if (seg == 0) {
+            printf("no seg found\n");
+            return -1;
+            }
+      return seg->tick();
+      }
+

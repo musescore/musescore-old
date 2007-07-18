@@ -1,3 +1,7 @@
+18.7.7 (ws)
+      - in slur edit mode shift+right/left positions to the next note/rest
+        of any voice
+      - do not try to save read only score files (demo file)
 17.7.7 (ws)
       - add new text element: system text
 14.7.7 (ws)

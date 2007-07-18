@@ -410,6 +410,8 @@ class Score : public QObject {
       void spell(Note*);
       int nextSeg(int tick, int track);
       int prevSeg(int tick, int track);
+      int nextSeg1(int tick, int& track);
+      int prevSeg1(int tick, int& track);
       };
 
 extern void setPadState(Element*);

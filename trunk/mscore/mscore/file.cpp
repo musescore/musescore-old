@@ -208,8 +208,15 @@ bool MuseScore::checkDirty(Score* s)
                tr("The current Score contains unsaved data\n"
                "Save Current Score?"),
                tr("&Save"), tr("&Nosave"), tr("&Abort"), 0, 2);
-            if (n == 0)
-                  s->saveFile();
+            if (n == 0) {
+                  if (s->fileInfo()->isWritable())
+                        s->saveFile();
+                  else {
+                        if (!saveAs())
+                              return true;
+                        }
+
+                  }
             else if (n == 2)
                   return true;
             }

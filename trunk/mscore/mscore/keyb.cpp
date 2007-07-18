@@ -138,7 +138,7 @@ void Score::padToggle(int n)
                   if (cis->pos != -1)
                         padState.rest = false;
                   }
-            if (cis->pos == -1 && sel->state == SEL_SINGLE) {
+            if (cis->pos == -1 && sel->state() == SEL_SINGLE) {
                   Element* el = sel->element();
                   if (el->type() == NOTE)
                         el = el->parent();

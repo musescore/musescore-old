@@ -169,19 +169,25 @@ bool SlurSegment::edit(QMatrix&, QKeyEvent* ev)
       if ((ev->modifiers() & Qt::ShiftModifier)) {
             int track1 = sl->track1();
             int track2 = sl->track2();
+            int tick1  = sl->tick1();
+            int tick2  = sl->tick2();
 
             if (ev->key() == Qt::Key_Left) {
                   if (mode == 1)
-                        sl->setTick1(score()->prevSeg(sl->tick1(), track1));
+                        tick1 = score()->prevSeg1(tick1, track1);
                   else if (mode == 4)
-                        sl->setTick2(score()->prevSeg(sl->tick2(), track2));
+                        tick2 = score()->prevSeg1(tick2, track2);
                   }
             else if (ev->key() == Qt::Key_Right) {
                   if (mode == 1)
-                        sl->setTick1(score()->nextSeg(sl->tick1(), track1));
+                        tick1 = score()->nextSeg1(tick1, track1);
                   else if (mode == 4)
-                        sl->setTick2(score()->nextSeg(sl->tick2(), track2));
+                        tick2 = score()->nextSeg1(tick2, track2);
                   }
+            sl->setTrack1(track1);
+            sl->setTrack2(track2);
+            sl->setTick1(tick1);
+            sl->setTick2(tick2);
             return false;
             }
 

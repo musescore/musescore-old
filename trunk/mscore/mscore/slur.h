@@ -146,6 +146,8 @@ class Slur : public SlurTie {
       void setTick2(int val);
       int track1() const { return _track1; }
       int track2() const { return _track2; }
+      void setTrack1(int val) { _track1 = val; }
+      void setTrack2(int val) { _track2 = val; }
 
       void setStart(int t, int track);
       void setEnd(int t,   int track);

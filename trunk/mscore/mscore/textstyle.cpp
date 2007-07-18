@@ -193,8 +193,9 @@ void TextStyleDialog::nameSelected(int n)
       f.setItalic(s->italic);
       f.setUnderline(s->underline);
       f.setBold(s->bold);
+      fontSample->clear();
       fontSample->setFont(f);
-      fontSample->setText(tr("Ich und du, Müllers Kuh"));
+      fontSample->setText(tr("Ich und du, Muellers Kuh..."));
       int i;
       for (i = 0; i < fonts; ++i) {
             QString ls = fontName->itemText(i);

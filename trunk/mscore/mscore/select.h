@@ -46,13 +46,16 @@ class Element;
 
 class Selection {
       Score* _score;
+      SelState _state;
       QList<Element*> _el;        // valid when SEL_SINGLE or SEL_MULT
 
       QByteArray staffMimeData() const;
 
    public:
-      Selection(Score* s)     { _score = s; }
-      SelState state;
+      Selection(Score* s)       { _score = s;    }
+      SelState state() const    { return _state; }
+      void setState(SelState s) { _state = s;    }
+
       int tickStart;          // selection start time tick
       int tickEnd;            // selection end time tick
       int staffStart;         // valid if selState is SEL_STAFF

@@ -465,7 +465,7 @@ void Canvas::mouseMoveEvent1(QMouseEvent* ev)
                         }
                   if (de && de->isMovable()) {
                         QPointF o;
-                        if (_score->sel->state == SEL_STAFF || _score->sel->state == SEL_SYSTEM) {
+                        if (_score->sel->state() == SEL_STAFF || _score->sel->state() == SEL_SYSTEM) {
                               double s(_score->dragSystem->distance(_score->dragStaff));
                               o = QPointF(0.0, mag() * s);
                               setState(DRAG_STAFF);
