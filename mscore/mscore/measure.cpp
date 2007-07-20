@@ -452,20 +452,6 @@ void Measure::layout(ScoreLayout* layout, double width)
                         continue;
                   if (e->isChordRest())
                         e->layout(layout);
-#if 0
-                  else if (e->type() == BAR_LINE) {
-                        BarLine* barLine = (BarLine*)e;
-                        int staff = track / VOICES;
-                        double y  = staffY[staff];
-                        bool split = _score->staff(staff)->isTopSplit();
-                        Spatium barLineLen(4);
-                        barLineLen += ::style->staffLineWidth;
-                        if (split)
-                              barLineLen += spatium(staffY[staff+1] - y);
-                        barLine->setHeight(point(barLineLen));
-                        barLine->setPos(barLine->pos().x(), y - point(::style->staffLineWidth) * .5);
-                        }
-#endif
                   }
             for (int staff = 0; staff < nstaves; ++staff) {
                   LyricsList* ll = segment->lyricsList(staff);
@@ -564,7 +550,7 @@ void Measure::layout2(ScoreLayout* layout)
                         break;
                   case TEXT:
                         pel->layout(layout);
-                        pel->setPos(pel->pos() + QPointF(tick2pos(pel->tick()), y));
+                        pel->setPos(pel->ipos() + QPointF(tick2pos(pel->tick()), y));
                         break;
                   case LAYOUT_BREAK:
                         pel->layout(layout);
@@ -1553,7 +1539,7 @@ again:
                         double yoffset = 0.0;   // hack for whole rest symbol
                         if (!_irregular && len == _score->sigmap->ticksMeasure(e->tick())) {
                               // center whole rest
-                              pos.setX(width[seg]);
+                              pos.setX((stretch - e->width()) * .5);
                               yoffset = -_spatium;
                               }
                         if (e->voice() == 1)          // TODO: check ??

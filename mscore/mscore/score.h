@@ -184,9 +184,9 @@ class Score : public QObject {
 
       void addLyrics();
       void addTempo();
-      void addTechnik();
+//      void addTechnik();
       void addMetronome();
-      void addExpression();
+//      void addExpression();
 
       void cmdTuplet(int);
       void midiReceived();
@@ -382,9 +382,7 @@ class Score : public QObject {
       bool redoEmpty() const;
       PageFormat* pageFormat() const;
       ScoreLayout* mainLayout() const { return _layout; }
-      QString filePath() const    { return info.filePath(); }
-      QFileInfo* fileInfo()       { return &info; }
-      QString projectName() const { return info.baseName(); }
+
       void addAttribute(Element*, NoteAttribute* atr);
 
       bool playlistDirty();
@@ -396,6 +394,10 @@ class Score : public QObject {
       bool saveFile();
       void adjustTime(int tick, Measure*);
 
+      QString filePath() const    { return info.filePath(); }
+      QFileInfo* fileInfo()       { return &info; }
+      QString projectName() const { return info.baseName(); }
+      bool isSavable() const;
       void setDirty(bool val = true);
       bool dirty() const        { return _dirty; }
       void setCreated(bool val) { _created = val; }

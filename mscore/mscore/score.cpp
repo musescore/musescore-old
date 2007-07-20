@@ -1285,6 +1285,10 @@ Note* nextNote(Note* n)
       return n;
       }
 
+//---------------------------------------------------------
+//   spell
+//---------------------------------------------------------
+
 void Score::spell(Note* note)
       {
       QList<Note*> notes;
@@ -1307,5 +1311,15 @@ void Score::spell(Note* note)
       int key = note->staff()->keymap()->key(0);
       int opt = ::computeWindow(notes, 0, 7, key + 7);
       note->setTpc(::tpc(3, note->pitch(), opt));
+      }
+
+//---------------------------------------------------------
+//   isSavable
+//---------------------------------------------------------
+
+bool Score::isSavable() const
+      {
+      // TODO: check if file can be created if it does not exist
+      return info.isWritable() || !info.exists();
       }
 

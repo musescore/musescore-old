@@ -71,6 +71,7 @@
 #include <QtGui/QToolBox>
 #include <QtGui/QToolButton>
 #include <QtGui/QTextBlock>
+#include <QtGui/QTextFrameFormat>
 #include <QtGui/QClipboard>
 #include <QtGui/QStatusBar>
 #include <QtGui/QSplashScreen>

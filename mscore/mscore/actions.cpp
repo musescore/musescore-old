@@ -1090,6 +1090,7 @@ Shortcut MuseScore::sc[] = {
          QT_TR_NOOP("Fingering..."),
          QT_TR_NOOP("Fingering")
          ),
+#if 0
       Shortcut(
          "technik",
          QT_TR_NOOP("Technik Palette"),
@@ -1098,6 +1099,7 @@ Shortcut MuseScore::sc[] = {
          QT_TR_NOOP("Technik"),
          QT_TR_NOOP("Technik")
          ),
+#endif
       Shortcut(
          "tempo",
          QT_TR_NOOP("Tempo Palette"),

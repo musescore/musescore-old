@@ -48,7 +48,12 @@ class Text : public Element {
       double _xoff, _yoff;
       Anchor _anchor;
       OffsetType _offsetType;
-      bool _sizeIsSpatiumDependent;        // size depends on _spatium unit
+      bool _sizeIsSpatiumDependent;       // size depends on _spatium unit
+      double _frameWidth;                 // unit: mm
+      double _marginWidth;                // unit: mm
+      double _paddingWidth;               // unit: mm
+      QColor _frameColor;
+      int _frameRound;
 
       QTextCursor* cursor;
       bool editMode;
@@ -64,7 +69,7 @@ class Text : public Element {
       virtual ~Text();
       Text &operator=(const Text&);
 
-      virtual Text* clone() const { return new Text(*this); }
+      virtual Text* clone() const      { return new Text(*this); }
       virtual ElementType type() const { return TEXT; }
 
       virtual const QString subtypeName() const;
@@ -83,6 +88,18 @@ class Text : public Element {
       void setStyle(int n);
       double xoff() const { return _xoff; }
       double yoff() const { return _yoff; }
+
+      double frameWidth() const   { return _frameWidth;   }
+      double marginWidth() const  { return _marginWidth;  }
+      double paddingWidth() const { return _paddingWidth; }
+      QColor frameColor() const   { return _frameColor;   }
+      int frameRound() const      { return _frameRound;   }
+
+      void setFrameWidth(double val)        { _frameWidth   = val; }
+      void setMarginWidth(double val)       { _marginWidth  = val; }
+      void setPaddingWidth(double val)      { _paddingWidth = val; }
+      void setFrameColor(const QColor& val) { _frameColor   = val; }
+      void setFrameRound(int val)           { _frameRound   = val; }
 
       virtual void draw(QPainter&);
 

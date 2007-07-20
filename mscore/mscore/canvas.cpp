@@ -1159,7 +1159,7 @@ void Canvas::dragMoveEvent(QDragMoveEvent* event)
                   {
                   Symbol* s = new Symbol(_score);
                   s->read(e);
-                  if (s->anchor() == ANCHOR_TICK) {
+                  if (s->anchor() == ANCHOR_STAFF) {
                         if (dragTimeAnchorElement(pos))
                               event->acceptProposedAction();
                         }

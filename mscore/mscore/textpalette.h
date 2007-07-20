@@ -48,10 +48,15 @@ class TextPalette : public QWidget, public Ui::TextPaletteBase {
       void fontChanged(const QFont&);
       void subscriptClicked(bool);
       void superscriptClicked(bool);
+      void borderChanged(double);
+      void marginChanged(double);
+      void paddingChanged(double);
+      void frameRoundChanged(int val);
+      void frameColorPressed();
 
    public:
       TextPalette(QWidget* parent);
-      void setText(Text* te) { _textElement = te; }
+      void setText(Text* te);
       void setCharFormat(const QTextCharFormat&);
       void setBlockFormat(const QTextBlockFormat&);
       };

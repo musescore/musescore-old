@@ -44,10 +44,10 @@ static const QString ff("Times New Roman");
 
 static const TextStyle defaultTextStyles[] = {
       TextStyle(QString("Symbols1"), QString("MScore"), 20, false, false, false,
-         ALIGN_LEFT,    ANCHOR_TICK, 0, 0, OFFSET_ABS),
+         ALIGN_LEFT,    ANCHOR_STAFF, 0, 0, OFFSET_ABS),
 
       TextStyle(QString("Symbols3"), QString("MScore"), 14, false, false, false,
-         ALIGN_LEFT,    ANCHOR_TICK, 0, 0, OFFSET_SPATIUM),
+         ALIGN_LEFT,    ANCHOR_STAFF, 0, 0, OFFSET_SPATIUM),
 
       TextStyle(QString("Title"), ff, 24, false, false, false,
          ALIGN_HCENTER | ALIGN_TOP, ANCHOR_PAGE, 0, MM(5), OFFSET_ABS),
@@ -62,7 +62,7 @@ static const TextStyle defaultTextStyles[] = {
          ALIGN_LEFT | ALIGN_TOP, ANCHOR_PAGE, 0, MM(10), OFFSET_ABS),
 
       TextStyle(QString("Lyrics"), ff, 11, false, false, false,
-         ALIGN_HCENTER | ALIGN_TOP, ANCHOR_TICK, 0, 7, OFFSET_SPATIUM),
+         ALIGN_HCENTER | ALIGN_TOP, ANCHOR_STAFF, 0, 7, OFFSET_SPATIUM),
 
       TextStyle(QString("Fingering"), ff,  8, false, false, false,
          ALIGN_HCENTER | ALIGN_VCENTER, ANCHOR_NOTE, 0, 0, OFFSET_SPATIUM),
@@ -73,35 +73,39 @@ static const TextStyle defaultTextStyles[] = {
          ALIGN_RIGHT | ALIGN_VCENTER, ANCHOR_SYSTEM, 0, 0, OFFSET_SPATIUM),
 
       TextStyle(QString("Dynamics"), ff, 12, false, true, false,
-         ALIGN_LEFT,    ANCHOR_TICK, 0, 6, OFFSET_SPATIUM),
+         ALIGN_LEFT,    ANCHOR_STAFF, 0, 6, OFFSET_SPATIUM),
       TextStyle(QString("Technik"), ff, 12, false, true, false,
-         ALIGN_LEFT,    ANCHOR_TICK, 0, 0, OFFSET_SPATIUM),
+         ALIGN_LEFT,    ANCHOR_STAFF, 0, 0, OFFSET_SPATIUM),
 /*12*/
       TextStyle(QString("Tempo"), ff, 10, true, false, false,
-         ALIGN_LEFT,    ANCHOR_TICK, 0, -2.0, OFFSET_SPATIUM, true),
+         ALIGN_LEFT,    ANCHOR_STAFF, 0, -2.0, OFFSET_SPATIUM, true),
       TextStyle(QString("Metronome"), ff, 12, true, false, false,
-         ALIGN_LEFT,    ANCHOR_TICK, 0, 0, OFFSET_SPATIUM),
+         ALIGN_LEFT,    ANCHOR_STAFF, 0, 0, OFFSET_SPATIUM),
       TextStyle(QString("Copyright"), ff, 8, true, false, false,
          ALIGN_HCENTER | ALIGN_BOTTOM,    ANCHOR_PAGE, 0, MM(1), OFFSET_ABS),
       TextStyle(QString("Measure Number"), ff, 8, false, false, false,
-         ALIGN_LEFT,    ANCHOR_TICK, -1.0, -2.2, OFFSET_SPATIUM),
+         ALIGN_LEFT,    ANCHOR_STAFF, -1.0, -2.2, OFFSET_SPATIUM),
 
       TextStyle(QString("Page Number Odd"), ff, 12, false, false, false,
          ALIGN_RIGHT | ALIGN_TOP, ANCHOR_PAGE, MM(0), MM(0), OFFSET_ABS),
+
       TextStyle(QString("Page Number Even"), ff, 12, false, false, false,
          ALIGN_LEFT | ALIGN_TOP, ANCHOR_PAGE, MM(0), MM(0), OFFSET_ABS),
 
       TextStyle(QString("Translator"), ff, 11, false, false, false,
-         ALIGN_HCENTER | ALIGN_TOP,    ANCHOR_TICK, 0, 6, OFFSET_SPATIUM),
+         ALIGN_HCENTER | ALIGN_TOP,    ANCHOR_STAFF, 0, 6, OFFSET_SPATIUM),
 
       TextStyle(QString("Dynamics1"), QString("MScore1"), 20, false, false, false,
-         ALIGN_LEFT, ANCHOR_TICK, 0, 0, OFFSET_SPATIUM),
+         ALIGN_LEFT, ANCHOR_STAFF, 0, 0, OFFSET_SPATIUM),
 
       TextStyle(QString("Tuplets"), ff,  8, false, false, false,
          ALIGN_HCENTER | ALIGN_VCENTER, ANCHOR_NOTE, 0, 0, OFFSET_SPATIUM),
 
       TextStyle(QString("System"), ff,  10, false, false, false,
-         ALIGN_LEFT, ANCHOR_TICK, 0, -4.0, OFFSET_SPATIUM, true),
+         ALIGN_LEFT, ANCHOR_STAFF, 0, -4.0, OFFSET_SPATIUM, true),
+
+      TextStyle(QString("Staff"), ff,  10, false, false, false,
+         ALIGN_LEFT, ANCHOR_STAFF, 0, -4.0, OFFSET_SPATIUM, true),
       };
 
 //---------------------------------------------------------
@@ -177,6 +181,25 @@ Style defaultStyle = {
       true,             // measureNumberSystem
       false,            // showMeasureNumberAllStaffs
       };
+
+//---------------------------------------------------------
+//   TextStyle
+//---------------------------------------------------------
+
+TextStyle::TextStyle(
+   QString _name, QString _family, int _size,
+   bool _bold, bool _italic, bool _underline,
+   int _align, Anchor _anchor,
+   double _xoff, double _yoff, OffsetType _ot, bool sd,
+   double fw, double mw, double pw, int fr, QColor co)
+   : name(_name), family(_family), size(_size), bold(_bold),
+   italic(_italic), underline(_underline),
+   align(_align), anchor(_anchor),
+   xoff(_xoff), yoff(_yoff), offsetType(_ot),
+   sizeIsSpatiumDependent(sd), frameWidth(fw), marginWidth(mw), paddingWidth(pw),
+   frameRound(fr), frameColor(co)
+      {
+      }
 
 //---------------------------------------------------------
 //   setDefaultStyle

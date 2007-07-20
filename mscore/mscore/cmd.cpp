@@ -121,11 +121,12 @@ void Score::cmdAdd(Element* e, const QPointF& pos, const QPointF& dragOffset)
 
       // calculate suitable endposition
       int tick2 = measure->last()->tick();
+      Measure* m2 = measure;
       while (tick2 <= tick) {
-            measure = measure->next();
-            if (measure == 0)
+            m2 = m2->next();
+            if (m2 == 0)
                   break;
-            tick2 = measure->tick();
+            tick2 = m2->tick();
             }
 
       switch(e->type()) {
@@ -177,9 +178,14 @@ void Score::cmdAdd(Element* e, const QPointF& pos, const QPointF& dragOffset)
                   break;
             case DYNAMIC:
                   {
+                  System* s    = measure->system();
+                  int staffIdx = staff->idx();
+                  QRectF sb(s->staff(staffIdx)->bbox());
+                  sb.translate(s->pos() + s->page()->pos());
+                  QPointF anchor(segment->abbox().x(), sb.topLeft().y());
                   e->setTick(tick);
                   e->layout(mainLayout());
-                  QPointF uo(pos - (e->ipos() + e->parent()->canvasPos()) - dragOffset);
+                  QPointF uo(pos - anchor - e->ipos() - dragOffset);
                   e->setUserOff(uo / _spatium);
                   }
                   break;
@@ -1142,10 +1148,8 @@ void Score::cmd(const QString& cmd)
                         slur->layout(mainLayout());
                         ElementList* el = slur->elements();
                         if (!el->isEmpty()) {
-printf("start edit\n");
                               SlurSegment* ss = (SlurSegment*)el->front();
                               if (canvas()->startEdit(ss)) {
-printf("  start edit\n");
                                     return;
                                     }
                               }
@@ -1179,7 +1183,6 @@ printf("  start edit\n");
                         cis->pos += len;
                         }
                   padState.rest = false;  // continue with normal note entry
-//                  moveCursor();
                   }
             else if (cmd == "pitch-up")
                   upDown(true, false);
@@ -1412,8 +1415,8 @@ printf("  start edit\n");
                   }
             else if (cmd == "lyrics")
                   addLyrics();
-            else if (cmd == "technik")
-                  addTechnik();
+//            else if (cmd == "technik")
+//                  addTechnik();
             else if (cmd == "tempo")
                   addTempo();
             else if (cmd == "metronome")

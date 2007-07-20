@@ -173,14 +173,10 @@ include_directories(
    )
 
 #
-# If the cmake version includes cpack, use it
+# create package target
 #
-IF(EXISTS "${CMAKE_ROOT}/Modules/CPack.cmake")
-
-  IF(EXISTS "${CMAKE_ROOT}/Modules/InstallRequiredSystemLibraries.cmake")
-      SET(CMAKE_INSTALL_MFC_LIBRARIES 1)
-      INCLUDE(InstallRequiredSystemLibraries)
-  ENDIF(EXISTS "${CMAKE_ROOT}/Modules/InstallRequiredSystemLibraries.cmake")
+include (CPack)
+include (InstallRequiredSystemLibraries)
 
   SET(CPACK_PACKAGE_DESCRIPTION_SUMMARY "MuseScore is a full featured WYSIWYG score editor")
   SET(CPACK_PACKAGE_VENDOR "Werner Schweer and Others")
@@ -190,15 +186,25 @@ IF(EXISTS "${CMAKE_ROOT}/Modules/CPack.cmake")
   SET(CPACK_PACKAGE_VERSION_MINOR "${Mscore_VERSION_MINOR}")
   SET(CPACK_PACKAGE_VERSION_PATCH "${Mscore_VERSION_PATCH}")
   SET(CPACK_PACKAGE_INSTALL_DIRECTORY "CMake ${CMake_VERSION_MAJOR}.${CMake_VERSION_MINOR}")
-  SET(CPACK_SOURCE_PACKAGE_FILE_NAME "${Mscore_INSTALL_NAME}")
 
-  SET(CPACK_SYSTEM_NAME ${CMAKE_SYSTEM_NAME})
+
+  IF(WIN32 AND NOT UNIX)
+      # There is a bug in NSI that does not handle full unix paths properly. Make
+      # sure there is at least one set of four (4) backlasshes.
+#      SET(CPACK_PACKAGE_ICON "${CMake_SOURCE_DIR}/Utilities/Release\\\\InstallIcon.bmp")
+      SET(CPACK_NSIS_INSTALLED_ICON_NAME "bin\\\\mscore.exe")
+      SET(CPACK_NSIS_DISPLAY_NAME "${CPACK_PACKAGE_INSTALL_DIRECTORY} MuseScore score typesetter")
+      SET(CPACK_NSIS_HELP_LINK "http:\\\\\\\\mscore.sourceforge.net")
+      SET(CPACK_NSIS_URL_INFO_ABOUT "http:\\\\\\\\mscore.sourceforge.net")
+      SET(CPACK_NSIS_CONTACT "we@seh.de")
+      SET(CPACK_NSIS_MODIFY_PATH ON)
+  ELSE(WIN32 AND NOT UNIX)
+      SET(CPACK_STRIP_FILES "bin/mscore")
+      SET(CPACK_SOURCE_STRIP_FILES "")
+  ENDIF(WIN32 AND NOT UNIX)
 
   SET(CPACK_PACKAGE_FILE_NAME "${CPACK_SOURCE_PACKAGE_FILE_NAME}-${CPACK_SYSTEM_NAME}")
-  SET(CPACK_STRIP_FILES "bin/mscore")
   SET(CPACK_PACKAGE_EXECUTABLES "mscore" "MuseScore")
-  INCLUDE(CPack)
-ENDIF(EXISTS "${CMAKE_ROOT}/Modules/CPack.cmake")
 
 add_custom_target(lupdate
    COMMAND ${PROJECT_SOURCE_DIR}/gen-qt-projectfile ${PROJECT_SOURCE_DIR} > mscore.pro

@@ -258,7 +258,7 @@ MuseScore::MuseScore()
          << "stretch+" << "stretch-"
          << "instruments" << "clefs" << "keys" << "symbols" << "times" << "dynamics"
          << "title-text" << "subtitle-text" << "composer-text" << "poet-text"
-         << "lyrics" << "fingering" << "system-text" << "technik" << "tempo"
+         << "lyrics" << "fingering" << "system-text" << "tempo"
          << "metronome" << "cut" << "copy" << "paste"
          << "beam-start" << "beam-mid" << "no-beam" << "beam32"
          << "file-open" << "file-new" << "file-template" << "file-save" << "file-save-as" << "file-close"
@@ -1107,7 +1107,7 @@ void MuseScore::setCurrentScore(int idx)
 
       getAction("undo")->setEnabled(!cs->undoEmpty());
       getAction("redo")->setEnabled(!cs->redoEmpty());
-      getAction("file-save")->setEnabled(cs->fileInfo()->isWritable());
+      getAction("file-save")->setEnabled(cs->isSavable());
 
       visibleId->setChecked(cs->showInvisible());
 

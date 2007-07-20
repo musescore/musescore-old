@@ -5,8 +5,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>519</width>
-    <height>161</height>
+    <width>670</width>
+    <height>332</height>
    </rect>
   </property>
   <property name="palette" >
@@ -77,388 +77,557 @@
    <string>MuseScore: Special Text Symbols</string>
   </property>
   <layout class="QVBoxLayout" >
-   <property name="margin" >
-    <number>9</number>
-   </property>
    <property name="spacing" >
     <number>6</number>
    </property>
+   <property name="leftMargin" >
+    <number>9</number>
+   </property>
+   <property name="topMargin" >
+    <number>9</number>
+   </property>
+   <property name="rightMargin" >
+    <number>9</number>
+   </property>
+   <property name="bottomMargin" >
+    <number>9</number>
+   </property>
    <item>
-    <widget class="QFrame" name="frame" >
-     <property name="sizePolicy" >
-      <sizepolicy vsizetype="Maximum" hsizetype="Preferred" >
-       <horstretch>0</horstretch>
-       <verstretch>0</verstretch>
-      </sizepolicy>
-     </property>
-     <property name="frameShape" >
-      <enum>QFrame::Box</enum>
-     </property>
-     <property name="frameShadow" >
-      <enum>QFrame::Raised</enum>
-     </property>
-     <property name="lineWidth" >
+    <widget class="QTabWidget" name="tabWidget" >
+     <property name="currentIndex" >
       <number>0</number>
      </property>
-     <layout class="QHBoxLayout" >
-      <property name="margin" >
-       <number>9</number>
-      </property>
-      <property name="spacing" >
-       <number>6</number>
-      </property>
-      <item>
-       <widget class="QToolButton" name="leftAlign" >
-        <property name="toolTip" >
-         <string>align left</string>
-        </property>
-        <property name="text" >
-         <string>...</string>
-        </property>
-        <property name="icon" >
-         <iconset resource="mscore.qrc" >:/data/text_left.svg</iconset>
-        </property>
-        <property name="iconSize" >
-         <size>
-          <width>24</width>
-          <height>24</height>
-         </size>
-        </property>
-        <property name="checkable" >
-         <bool>true</bool>
-        </property>
-        <property name="checked" >
-         <bool>true</bool>
-        </property>
-        <property name="autoExclusive" >
-         <bool>true</bool>
-        </property>
-        <property name="autoRaise" >
-         <bool>true</bool>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QToolButton" name="centerAlign" >
-        <property name="toolTip" >
-         <string>align center</string>
-        </property>
-        <property name="text" >
-         <string>...</string>
-        </property>
-        <property name="icon" >
-         <iconset resource="mscore.qrc" >:/data/text_center.svg</iconset>
-        </property>
-        <property name="iconSize" >
-         <size>
-          <width>24</width>
-          <height>24</height>
-         </size>
-        </property>
-        <property name="checkable" >
-         <bool>true</bool>
-        </property>
-        <property name="autoExclusive" >
-         <bool>true</bool>
-        </property>
-        <property name="autoRaise" >
-         <bool>true</bool>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QToolButton" name="rightAlign" >
-        <property name="toolTip" >
-         <string>align right</string>
-        </property>
-        <property name="text" >
-         <string>...</string>
-        </property>
-        <property name="icon" >
-         <iconset resource="mscore.qrc" >:/data/text_right.svg</iconset>
-        </property>
-        <property name="iconSize" >
-         <size>
-          <width>24</width>
-          <height>24</height>
-         </size>
-        </property>
-        <property name="checkable" >
-         <bool>true</bool>
-        </property>
-        <property name="autoExclusive" >
-         <bool>true</bool>
-        </property>
-        <property name="autoRaise" >
-         <bool>true</bool>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QToolButton" name="typefaceBold" >
-        <property name="toolTip" >
-         <string>bold</string>
-        </property>
-        <property name="text" >
-         <string>...</string>
-        </property>
-        <property name="icon" >
-         <iconset resource="mscore.qrc" >:/data/text_bold.svg</iconset>
-        </property>
-        <property name="iconSize" >
-         <size>
-          <width>24</width>
-          <height>24</height>
-         </size>
-        </property>
-        <property name="checkable" >
-         <bool>true</bool>
-        </property>
-        <property name="autoRaise" >
-         <bool>true</bool>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QToolButton" name="typefaceItalic" >
-        <property name="toolTip" >
-         <string>italic</string>
-        </property>
-        <property name="text" >
-         <string>...</string>
-        </property>
-        <property name="icon" >
-         <iconset resource="mscore.qrc" >:/data/text_italic.svg</iconset>
-        </property>
-        <property name="iconSize" >
-         <size>
-          <width>24</width>
-          <height>24</height>
-         </size>
-        </property>
-        <property name="checkable" >
-         <bool>true</bool>
-        </property>
-        <property name="autoRaise" >
-         <bool>true</bool>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QToolButton" name="typefaceUnderline" >
-        <property name="toolTip" >
-         <string>underline</string>
-        </property>
-        <property name="text" >
-         <string>...</string>
-        </property>
-        <property name="icon" >
-         <iconset resource="mscore.qrc" >:/data/text_under.svg</iconset>
-        </property>
-        <property name="iconSize" >
-         <size>
-          <width>24</width>
-          <height>24</height>
-         </size>
-        </property>
-        <property name="checkable" >
-         <bool>true</bool>
-        </property>
-        <property name="autoRaise" >
-         <bool>true</bool>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QToolButton" name="typefaceSubscript" >
-        <property name="toolTip" >
-         <string>subscript</string>
-        </property>
-        <property name="text" >
-         <string>...</string>
-        </property>
-        <property name="icon" >
-         <iconset resource="mscore.qrc" >:/data/subscript.svg</iconset>
-        </property>
-        <property name="iconSize" >
-         <size>
-          <width>24</width>
-          <height>24</height>
-         </size>
-        </property>
-        <property name="checkable" >
-         <bool>true</bool>
-        </property>
-        <property name="autoRaise" >
-         <bool>true</bool>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QToolButton" name="typefaceSuperscript" >
-        <property name="toolTip" >
-         <string>superscript</string>
-        </property>
-        <property name="text" >
-         <string>...</string>
-        </property>
-        <property name="icon" >
-         <iconset resource="mscore.qrc" >:/data/superscript.svg</iconset>
-        </property>
-        <property name="iconSize" >
-         <size>
-          <width>24</width>
-          <height>24</height>
-         </size>
-        </property>
-        <property name="checkable" >
-         <bool>true</bool>
-        </property>
-        <property name="autoRaise" >
-         <bool>true</bool>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QLabel" name="label" >
-        <property name="sizePolicy" >
-         <sizepolicy vsizetype="Fixed" hsizetype="Maximum" >
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
-        </property>
-        <property name="text" >
-         <string>Size:</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QDoubleSpinBox" name="typefaceSize" >
-        <property name="toolTip" >
-         <string>font size</string>
-        </property>
-        <property name="decimals" >
-         <number>1</number>
-        </property>
-        <property name="minimum" >
-         <double>3.000000000000000</double>
-        </property>
-        <property name="maximum" >
-         <double>400.000000000000000</double>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <spacer>
-        <property name="orientation" >
-         <enum>Qt::Horizontal</enum>
-        </property>
-        <property name="sizeHint" >
-         <size>
-          <width>16</width>
-          <height>33</height>
-         </size>
-        </property>
-       </spacer>
-      </item>
-      <item>
-       <widget class="QLabel" name="label_2" >
-        <property name="sizePolicy" >
-         <sizepolicy vsizetype="Fixed" hsizetype="Maximum" >
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
-        </property>
-        <property name="text" >
-         <string>Family:</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QFontComboBox" name="typefaceFamily" >
-        <property name="toolTip" >
-         <string>select font family</string>
-        </property>
-       </widget>
-      </item>
-     </layout>
-    </widget>
-   </item>
-   <item>
-    <widget class="QFrame" name="symbolBox" >
-     <property name="palette" >
-      <palette>
-       <active>
-        <colorrole role="Base" >
-         <brush brushstyle="SolidPattern" >
-          <color alpha="255" >
-           <red>255</red>
-           <green>255</green>
-           <blue>255</blue>
-          </color>
-         </brush>
-        </colorrole>
-        <colorrole role="Window" >
-         <brush brushstyle="SolidPattern" >
-          <color alpha="255" >
-           <red>147</red>
-           <green>158</green>
-           <blue>255</blue>
-          </color>
-         </brush>
-        </colorrole>
-       </active>
-       <inactive>
-        <colorrole role="Base" >
-         <brush brushstyle="SolidPattern" >
-          <color alpha="255" >
-           <red>255</red>
-           <green>255</green>
-           <blue>255</blue>
-          </color>
-         </brush>
-        </colorrole>
-        <colorrole role="Window" >
-         <brush brushstyle="SolidPattern" >
-          <color alpha="255" >
-           <red>147</red>
-           <green>158</green>
-           <blue>255</blue>
-          </color>
-         </brush>
-        </colorrole>
-       </inactive>
-       <disabled>
-        <colorrole role="Base" >
-         <brush brushstyle="SolidPattern" >
-          <color alpha="255" >
-           <red>147</red>
-           <green>158</green>
-           <blue>255</blue>
-          </color>
-         </brush>
-        </colorrole>
-        <colorrole role="Window" >
-         <brush brushstyle="SolidPattern" >
-          <color alpha="255" >
-           <red>147</red>
-           <green>158</green>
-           <blue>255</blue>
-          </color>
-         </brush>
-        </colorrole>
-       </disabled>
-      </palette>
-     </property>
-     <property name="autoFillBackground" >
-      <bool>true</bool>
-     </property>
-     <property name="frameShape" >
-      <enum>QFrame::StyledPanel</enum>
-     </property>
-     <property name="frameShadow" >
-      <enum>QFrame::Raised</enum>
-     </property>
+     <widget class="QWidget" name="tab" >
+      <attribute name="title" >
+       <string>Text</string>
+      </attribute>
+      <layout class="QVBoxLayout" >
+       <item>
+        <widget class="QFrame" name="frame" >
+         <property name="sizePolicy" >
+          <sizepolicy vsizetype="Maximum" hsizetype="Preferred" >
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="frameShape" >
+          <enum>QFrame::Box</enum>
+         </property>
+         <property name="frameShadow" >
+          <enum>QFrame::Raised</enum>
+         </property>
+         <property name="lineWidth" >
+          <number>0</number>
+         </property>
+         <layout class="QHBoxLayout" >
+          <property name="spacing" >
+           <number>6</number>
+          </property>
+          <property name="leftMargin" >
+           <number>9</number>
+          </property>
+          <property name="topMargin" >
+           <number>9</number>
+          </property>
+          <property name="rightMargin" >
+           <number>9</number>
+          </property>
+          <property name="bottomMargin" >
+           <number>9</number>
+          </property>
+          <item>
+           <widget class="QToolButton" name="leftAlign" >
+            <property name="toolTip" >
+             <string>align left</string>
+            </property>
+            <property name="text" >
+             <string>...</string>
+            </property>
+            <property name="icon" >
+             <iconset resource="mscore.qrc" >:/data/text_left.svg</iconset>
+            </property>
+            <property name="iconSize" >
+             <size>
+              <width>24</width>
+              <height>24</height>
+             </size>
+            </property>
+            <property name="checkable" >
+             <bool>true</bool>
+            </property>
+            <property name="checked" >
+             <bool>true</bool>
+            </property>
+            <property name="autoExclusive" >
+             <bool>true</bool>
+            </property>
+            <property name="autoRaise" >
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QToolButton" name="centerAlign" >
+            <property name="toolTip" >
+             <string>align center</string>
+            </property>
+            <property name="text" >
+             <string>...</string>
+            </property>
+            <property name="icon" >
+             <iconset resource="mscore.qrc" >:/data/text_center.svg</iconset>
+            </property>
+            <property name="iconSize" >
+             <size>
+              <width>24</width>
+              <height>24</height>
+             </size>
+            </property>
+            <property name="checkable" >
+             <bool>true</bool>
+            </property>
+            <property name="autoExclusive" >
+             <bool>true</bool>
+            </property>
+            <property name="autoRaise" >
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QToolButton" name="rightAlign" >
+            <property name="toolTip" >
+             <string>align right</string>
+            </property>
+            <property name="text" >
+             <string>...</string>
+            </property>
+            <property name="icon" >
+             <iconset resource="mscore.qrc" >:/data/text_right.svg</iconset>
+            </property>
+            <property name="iconSize" >
+             <size>
+              <width>24</width>
+              <height>24</height>
+             </size>
+            </property>
+            <property name="checkable" >
+             <bool>true</bool>
+            </property>
+            <property name="autoExclusive" >
+             <bool>true</bool>
+            </property>
+            <property name="autoRaise" >
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QToolButton" name="typefaceBold" >
+            <property name="toolTip" >
+             <string>bold</string>
+            </property>
+            <property name="text" >
+             <string>...</string>
+            </property>
+            <property name="icon" >
+             <iconset resource="mscore.qrc" >:/data/text_bold.svg</iconset>
+            </property>
+            <property name="iconSize" >
+             <size>
+              <width>24</width>
+              <height>24</height>
+             </size>
+            </property>
+            <property name="checkable" >
+             <bool>true</bool>
+            </property>
+            <property name="autoRaise" >
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QToolButton" name="typefaceItalic" >
+            <property name="toolTip" >
+             <string>italic</string>
+            </property>
+            <property name="text" >
+             <string>...</string>
+            </property>
+            <property name="icon" >
+             <iconset resource="mscore.qrc" >:/data/text_italic.svg</iconset>
+            </property>
+            <property name="iconSize" >
+             <size>
+              <width>24</width>
+              <height>24</height>
+             </size>
+            </property>
+            <property name="checkable" >
+             <bool>true</bool>
+            </property>
+            <property name="autoRaise" >
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QToolButton" name="typefaceUnderline" >
+            <property name="toolTip" >
+             <string>underline</string>
+            </property>
+            <property name="text" >
+             <string>...</string>
+            </property>
+            <property name="icon" >
+             <iconset resource="mscore.qrc" >:/data/text_under.svg</iconset>
+            </property>
+            <property name="iconSize" >
+             <size>
+              <width>24</width>
+              <height>24</height>
+             </size>
+            </property>
+            <property name="checkable" >
+             <bool>true</bool>
+            </property>
+            <property name="autoRaise" >
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QToolButton" name="typefaceSubscript" >
+            <property name="toolTip" >
+             <string>subscript</string>
+            </property>
+            <property name="text" >
+             <string>...</string>
+            </property>
+            <property name="icon" >
+             <iconset resource="mscore.qrc" >:/data/subscript.svg</iconset>
+            </property>
+            <property name="iconSize" >
+             <size>
+              <width>24</width>
+              <height>24</height>
+             </size>
+            </property>
+            <property name="checkable" >
+             <bool>true</bool>
+            </property>
+            <property name="autoRaise" >
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QToolButton" name="typefaceSuperscript" >
+            <property name="toolTip" >
+             <string>superscript</string>
+            </property>
+            <property name="text" >
+             <string>...</string>
+            </property>
+            <property name="icon" >
+             <iconset resource="mscore.qrc" >:/data/superscript.svg</iconset>
+            </property>
+            <property name="iconSize" >
+             <size>
+              <width>24</width>
+              <height>24</height>
+             </size>
+            </property>
+            <property name="checkable" >
+             <bool>true</bool>
+            </property>
+            <property name="autoRaise" >
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="label" >
+            <property name="sizePolicy" >
+             <sizepolicy vsizetype="Fixed" hsizetype="Maximum" >
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="text" >
+             <string>Size:</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QDoubleSpinBox" name="typefaceSize" >
+            <property name="sizePolicy" >
+             <sizepolicy vsizetype="Fixed" hsizetype="Preferred" >
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="toolTip" >
+             <string>font size</string>
+            </property>
+            <property name="decimals" >
+             <number>1</number>
+            </property>
+            <property name="minimum" >
+             <double>3.000000000000000</double>
+            </property>
+            <property name="maximum" >
+             <double>400.000000000000000</double>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <spacer>
+            <property name="orientation" >
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" >
+             <size>
+              <width>16</width>
+              <height>33</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item>
+           <widget class="QLabel" name="label_2" >
+            <property name="sizePolicy" >
+             <sizepolicy vsizetype="Fixed" hsizetype="Maximum" >
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="text" >
+             <string>Family:</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QFontComboBox" name="typefaceFamily" >
+            <property name="toolTip" >
+             <string>select font family</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="QFrame" name="symbolBox" >
+         <property name="palette" >
+          <palette>
+           <active>
+            <colorrole role="Base" >
+             <brush brushstyle="SolidPattern" >
+              <color alpha="255" >
+               <red>255</red>
+               <green>255</green>
+               <blue>255</blue>
+              </color>
+             </brush>
+            </colorrole>
+            <colorrole role="Window" >
+             <brush brushstyle="SolidPattern" >
+              <color alpha="255" >
+               <red>147</red>
+               <green>158</green>
+               <blue>255</blue>
+              </color>
+             </brush>
+            </colorrole>
+           </active>
+           <inactive>
+            <colorrole role="Base" >
+             <brush brushstyle="SolidPattern" >
+              <color alpha="255" >
+               <red>255</red>
+               <green>255</green>
+               <blue>255</blue>
+              </color>
+             </brush>
+            </colorrole>
+            <colorrole role="Window" >
+             <brush brushstyle="SolidPattern" >
+              <color alpha="255" >
+               <red>147</red>
+               <green>158</green>
+               <blue>255</blue>
+              </color>
+             </brush>
+            </colorrole>
+           </inactive>
+           <disabled>
+            <colorrole role="Base" >
+             <brush brushstyle="SolidPattern" >
+              <color alpha="255" >
+               <red>147</red>
+               <green>158</green>
+               <blue>255</blue>
+              </color>
+             </brush>
+            </colorrole>
+            <colorrole role="Window" >
+             <brush brushstyle="SolidPattern" >
+              <color alpha="255" >
+               <red>147</red>
+               <green>158</green>
+               <blue>255</blue>
+              </color>
+             </brush>
+            </colorrole>
+           </disabled>
+          </palette>
+         </property>
+         <property name="autoFillBackground" >
+          <bool>true</bool>
+         </property>
+         <property name="frameShape" >
+          <enum>QFrame::StyledPanel</enum>
+         </property>
+         <property name="frameShadow" >
+          <enum>QFrame::Raised</enum>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="tab_2" >
+      <attribute name="title" >
+       <string>Frame</string>
+      </attribute>
+      <layout class="QGridLayout" >
+       <item row="0" column="0" >
+        <widget class="QLabel" name="label_3" >
+         <property name="text" >
+          <string>margin width</string>
+         </property>
+         <property name="alignment" >
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="1" >
+        <widget class="QDoubleSpinBox" name="marginWidth" >
+         <property name="suffix" >
+          <string>mm</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="2" >
+        <widget class="QLabel" name="label_6" >
+         <property name="text" >
+          <string>border style</string>
+         </property>
+         <property name="alignment" >
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="4" >
+        <spacer>
+         <property name="orientation" >
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" >
+          <size>
+           <width>421</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item row="1" column="0" >
+        <widget class="QLabel" name="label_4" >
+         <property name="text" >
+          <string>frame width</string>
+         </property>
+         <property name="alignment" >
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="1" >
+        <widget class="QDoubleSpinBox" name="frameWidth" >
+         <property name="suffix" >
+          <string>mm</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="2" >
+        <widget class="QLabel" name="label_7" >
+         <property name="text" >
+          <string>frame color</string>
+         </property>
+         <property name="alignment" >
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="3" >
+        <widget class="QPushButton" name="frameColor" >
+         <property name="text" >
+          <string/>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="0" >
+        <widget class="QLabel" name="label_5" >
+         <property name="text" >
+          <string>padding width</string>
+         </property>
+         <property name="alignment" >
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="1" >
+        <widget class="QDoubleSpinBox" name="paddingWidth" >
+         <property name="suffix" >
+          <string>mm</string>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="1" >
+        <spacer>
+         <property name="orientation" >
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" >
+          <size>
+           <width>20</width>
+           <height>311</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item row="2" column="2" >
+        <widget class="QLabel" name="label_8" >
+         <property name="text" >
+          <string>frame rounding</string>
+         </property>
+         <property name="alignment" >
+          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="3" >
+        <widget class="QSpinBox" name="borderRounding" />
+       </item>
+       <item row="0" column="3" >
+        <widget class="QSpinBox" name="borderStyle" >
+         <property name="maximum" >
+          <number>10</number>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
     </widget>
    </item>
   </layout>
