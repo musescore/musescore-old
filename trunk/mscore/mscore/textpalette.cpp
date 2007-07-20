@@ -118,7 +118,6 @@ static SymCode pSymbols[] = {
 TextPalette::TextPalette(QWidget* parent)
    : QWidget(parent)
       {
-//      setWindowFlags(Qt::FramelessWindowHint | Qt::WindowStaysOnTopHint | Qt::Tool);
       setWindowFlags(Qt::Tool | Qt::FramelessWindowHint);
       setupUi(this);
       QGridLayout* gl = new QGridLayout;
@@ -156,6 +155,11 @@ TextPalette::TextPalette(QWidget* parent)
       connect(leftAlign, SIGNAL(clicked()), SLOT(setLeftAlign()));
       connect(rightAlign, SIGNAL(clicked()), SLOT(setRightAlign()));
       connect(centerAlign, SIGNAL(clicked()), SLOT(setHCenterAlign()));
+      connect(frameWidth, SIGNAL(valueChanged(double)),  SLOT(borderChanged(double)));
+      connect(marginWidth, SIGNAL(valueChanged(double)),  SLOT(marginChanged(double)));
+      connect(paddingWidth, SIGNAL(valueChanged(double)), SLOT(paddingChanged(double)));
+      connect(borderRounding, SIGNAL(valueChanged(int)), SLOT(frameRoundChanged(int)));
+      connect(frameColor, SIGNAL(pressed()), SLOT(frameColorPressed()));
       setFocusPolicy(Qt::NoFocus);
       }
 
@@ -313,5 +317,73 @@ void TextPalette::superscriptClicked(bool val)
       format.setVerticalAlignment(val ? QTextCharFormat::AlignSuperScript : QTextCharFormat::AlignNormal);
       _textElement->setCharFormat(format);
       mscore->activateWindow();
+      }
+
+//---------------------------------------------------------
+//   setText
+//---------------------------------------------------------
+
+void TextPalette::setText(Text* te)
+      {
+      _textElement = te;
+
+//      borderStyle->setValue(int(fformat.borderStyle()));
+      frameWidth->setValue(_textElement->frameWidth());
+      marginWidth->setValue(_textElement->marginWidth());
+      paddingWidth->setValue(_textElement->paddingWidth());
+      borderRounding->setValue(_textElement->frameRound());
+      }
+
+//---------------------------------------------------------
+//   borderChanged
+//---------------------------------------------------------
+
+void TextPalette::borderChanged(double val)
+      {
+      _textElement->setFrameWidth(val);
+      mscore->activateWindow();
+      }
+
+//---------------------------------------------------------
+//   marginChanged
+//---------------------------------------------------------
+
+void TextPalette::marginChanged(double val)
+      {
+      _textElement->setMarginWidth(val);
+      mscore->activateWindow();
+      }
+
+//---------------------------------------------------------
+//   paddingChanged
+//---------------------------------------------------------
+
+void TextPalette::paddingChanged(double val)
+      {
+      _textElement->setPaddingWidth(val);
+      mscore->activateWindow();
+      }
+
+//---------------------------------------------------------
+//   frameRoundChanged
+//---------------------------------------------------------
+
+void TextPalette::frameRoundChanged(int val)
+      {
+      _textElement->setFrameRound(val);
+      mscore->activateWindow();
+      }
+
+//---------------------------------------------------------
+//   frameColorPressed
+//---------------------------------------------------------
+
+void TextPalette::frameColorPressed()
+      {
+      QColor color = QColorDialog::getColor(_textElement->frameColor(), this);
+      if (color.isValid()) {
+            _textElement->setFrameColor(color);
+            mscore->activateWindow();
+            }
       }
 

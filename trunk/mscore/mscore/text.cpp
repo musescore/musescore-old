@@ -44,13 +44,18 @@ Text::Text(Score* s)
       _align                  = ALIGN_LEFT;
       _xoff                   = 0;
       _yoff                   = 0;
-      _anchor                 = ANCHOR_TICK;
+      _anchor                 = ANCHOR_STAFF;
       _offsetType             = OFFSET_SPATIUM;
       _sizeIsSpatiumDependent = true;
       editMode                = false;
       cursorPos               = 0;
       doc                     = new QTextDocument(0);
       cursor                  = 0;
+      _frameWidth             = 0.0;
+      _marginWidth            = 0.0;
+      _paddingWidth           = 1.0;
+      _frameColor             = QColor(Qt::black);
+      _frameRound             = 5;
       }
 
 Text::Text(const Text& e)
@@ -65,6 +70,12 @@ Text::Text(const Text& e)
       editMode                = e.editMode;
       cursorPos               = e.cursorPos;
       doc                     = e.doc->clone(0);
+      _frameWidth             = e._frameWidth;
+      _marginWidth            = e._marginWidth;
+      _paddingWidth           = e._paddingWidth;
+      _frameColor             = e._frameColor;
+      _frameRound             = e._frameRound;
+
       if (editMode) {
             cursor = new QTextCursor(doc);
             cursor->setPosition(cursorPos);
@@ -321,12 +332,17 @@ void Text::setStyle(int n)
       {
       TextStyle* s = &textStyles[n];
       doc->setDefaultFont(s->font());
-      _align       = s->align;
-      _xoff        = s->xoff;
-      _yoff        = s->yoff;
-      _anchor      = s->anchor;
-      _offsetType  = s->offsetType;
+      _align         = s->align;
+      _xoff          = s->xoff;
+      _yoff          = s->yoff;
+      _anchor        = s->anchor;
+      _offsetType    = s->offsetType;
       _sizeIsSpatiumDependent = s->sizeIsSpatiumDependent;
+      _frameWidth    = s->frameWidth;
+      _marginWidth   = s->marginWidth;
+      _paddingWidth  = s->paddingWidth;
+      _frameColor    = s->frameColor;
+      _frameRound    = s->frameRound;
       }
 
 //---------------------------------------------------------
@@ -377,7 +393,7 @@ void Text::writeProperties(Xml& xml) const
       const char* p = "?";
       switch(_anchor) {
             case ANCHOR_PAGE:     p = "page"; break;
-            case ANCHOR_TICK:     p = "tick"; break;
+            case ANCHOR_STAFF:    p = "staff"; break;
             case ANCHOR_NOTE:     p = "note"; break;
             case ANCHOR_SYSTEM:   p = "system"; break;
             }
@@ -414,8 +430,10 @@ bool Text::readProperties(QDomElement e)
       else if (tag == "anchor") {
             if (val == "page")
                   _anchor = ANCHOR_PAGE;
-            else if (val == "tick")
-                  _anchor = ANCHOR_TICK;
+            else if (val == "staff")
+                  _anchor = ANCHOR_STAFF;
+            else if (val == "tick")             // obsolete
+                  _anchor = ANCHOR_STAFF;
             else if (val == "note")
                   _anchor = ANCHOR_NOTE;
             else if (val == "system")
@@ -609,6 +627,7 @@ void Text::endEdit()
 
 void Text::draw(QPainter& p)
       {
+      double dpmm = double(p.device()->logicalDpiX()) / INCH;
       p.save();
       p.setRenderHint(QPainter::Antialiasing, true);
 
@@ -617,6 +636,25 @@ void Text::draw(QPainter& p)
       QColor color = p.pen().color();
       c.palette.setColor(QPalette::Text, color);
       doc->documentLayout()->draw(&p, c);
+
+      // draw border
+      if (_frameWidth > 0.0) {
+            QRectF f;
+            for (QTextBlock tb = doc->begin(); tb.isValid(); tb = tb.next()) {
+                  QTextLayout* tl = tb.layout();
+                  int n = tl->lineCount();
+                  for (int i = 0; i < n; ++i)
+                        f |= tl->lineAt(0).naturalTextRect().translated(tl->position());
+                  }
+            double w = _paddingWidth * dpmm;
+            f.adjust(-w, -w, w, w);
+            p.setPen(QPen(QBrush(_frameColor), _frameWidth * dpmm));
+            p.setBrush(QBrush(Qt::NoBrush));
+            int r2 = _frameRound * lrint((f.width() / f.height()));
+            if (r2 > 99)
+                  r2 = 99;
+            p.drawRoundRect(f, _frameRound, r2);
+            }
       p.restore();
       }
 

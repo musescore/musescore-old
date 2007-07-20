@@ -546,7 +546,7 @@ QMenu* MuseScore::genCreateMenu()
       text->addAction(getAction("lyrics"));
       text->addAction(getAction("fingering"));
       text->addAction(getAction("dynamics"));
-      text->addAction(getAction("technik"));
+//      text->addAction(getAction("technik"));
       text->addAction(getAction("tempo"));
       text->addAction(getAction("metronome"));
 

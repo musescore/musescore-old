@@ -214,7 +214,7 @@ SymbolDialog::SymbolDialog(QWidget* parent)
 
       QButtonGroup* bg = new QButtonGroup();
       bg->addButton(anchorPage, ANCHOR_PAGE);
-      bg->addButton(anchorTime, ANCHOR_TICK);
+      bg->addButton(anchorTime, ANCHOR_STAFF);
       bg->addButton(anchorNote, ANCHOR_NOTE);
       bg->addButton(anchorSystem, ANCHOR_SYSTEM);
       connect(bg, SIGNAL(buttonClicked(int)), SLOT(anchorClicked(int)));

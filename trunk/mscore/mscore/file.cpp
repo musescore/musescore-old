@@ -209,7 +209,7 @@ bool MuseScore::checkDirty(Score* s)
                "Save Current Score?"),
                tr("&Save"), tr("&Nosave"), tr("&Abort"), 0, 2);
             if (n == 0) {
-                  if (s->fileInfo()->isWritable())
+                  if (s->isSavable())
                         s->saveFile();
                   else {
                         if (!saveAs())

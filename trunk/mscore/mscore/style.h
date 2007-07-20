@@ -26,7 +26,7 @@
 enum Align  { ALIGN_LEFT=1, ALIGN_RIGHT=2, ALIGN_HCENTER=4, ALIGN_TOP=8,
       ALIGN_BOTTOM=16, ALIGN_VCENTER=32};
 
-enum Anchor { ANCHOR_PAGE, ANCHOR_TICK, ANCHOR_NOTE, ANCHOR_SYSTEM };
+enum Anchor { ANCHOR_PAGE, ANCHOR_STAFF, ANCHOR_NOTE, ANCHOR_SYSTEM };
 
 enum OffsetType { OFFSET_ABS, OFFSET_REL, OFFSET_SPATIUM };
 
@@ -54,7 +54,8 @@ enum TEXT_STYLE {
       TEXT_STYLE_TRANSLATOR,
       TEXT_STYLE_DYNAMICS1,
       TEXT_STYLE_TUPLET,
-      TEXT_STYLE_SYSTEM
+      TEXT_STYLE_SYSTEM,
+      TEXT_STYLE_STAFF
       };
 
 //---------------------------------------------------------
@@ -73,17 +74,18 @@ struct TextStyle {
       double xoff, yoff;                  // inch or spatium
       OffsetType offsetType;
       bool sizeIsSpatiumDependent;        // size depends on _spatium unit
+      double frameWidth;
+      double marginWidth;
+      double paddingWidth;
+      int frameRound;
+      QColor frameColor;
 
       TextStyle(QString _name, QString _family, int _size,
          bool _bold, bool _italic, bool _underline,
          int _align, Anchor _anchor,
-         double _xoff, double _yoff, OffsetType _ot, bool sd = false)
-         : name(_name), family(_family), size(_size), bold(_bold),
-           italic(_italic), underline(_underline),
-           align(_align), anchor(_anchor),
-           xoff(_xoff), yoff(_yoff), offsetType(_ot),
-           sizeIsSpatiumDependent(sd)
-            {}
+         double _xoff, double _yoff, OffsetType _ot, bool sd = false,
+         double fw = 0.0, double mw = 0.0, double pw = 0.0, int fr = 25,
+         QColor co = QColor(Qt::black));
       TextStyle() {}
       void write(Xml&) const;
       void read(QDomElement);

@@ -296,8 +296,14 @@ void Page::draw(QPainter& p)
 
 void Page::collectElements(QList<Element*>& el)
       {
-      foreach(Element* e, _elements)
-            el.append(e);
+      foreach(Element* e, _elements) {
+            //
+            // elements with anchorMeasure live in Measure()
+            // do not collect twice
+            //
+            if (!e->anchorMeasure())
+                  el.append(e);
+            }
       if (_copyright)
             el.append(_copyright);
       if (_pageNo)

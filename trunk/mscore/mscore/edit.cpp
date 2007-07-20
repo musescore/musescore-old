@@ -825,7 +825,7 @@ void Score::cmdAddBSymbol(BSymbol* s, const QPointF& pos, const QPointF& off)
       {
       s->setSelected(false);
 
-      if (s->anchor() == ANCHOR_TICK) {
+      if (s->anchor() == ANCHOR_STAFF) {
             Staff* staff = 0;
             int pitch, tick;
             QPointF offset;
@@ -1291,7 +1291,7 @@ void Score::addLyrics()
       canvas()->startEdit(lyrics);
       layout();
       }
-
+#if 0
 //---------------------------------------------------------
 //   addExpression
 //---------------------------------------------------------
@@ -1311,7 +1311,7 @@ void Score::addTechnik()
       printf("Not impl.: addTechnik()\n");
       endCmd(true);
       }
-
+#endif
 //---------------------------------------------------------
 //   cmdTuplet
 //---------------------------------------------------------
