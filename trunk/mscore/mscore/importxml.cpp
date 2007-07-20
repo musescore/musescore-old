@@ -421,34 +421,24 @@ void MusicXml::xmlScorePart(QDomElement e, QString id)
 
 void MusicXml::xmlPart(QDomElement e, QString id)
       {
-      QList<Part*>* pl = score->parts();
-      QList<Part*>::iterator i;
-      for (i = pl->begin(); i != pl->end(); ++i) {
-            if ((*i)->id() == id)
+      Part* part = 0;
+      foreach(Part* p, *score->parts()) {
+            if (p->id() == id) {
+                  part = p;
                   break;
+                  }
             }
-      if (i == pl->end()) {
+      if (part == 0) {
             printf("Import MusicXml:xmlPart: cannot find part %s\n", id.toLatin1().data());
             exit(-1);
             }
-      Part* part = *i;
-      tick = 0;
-      maxtick = 0;
+      tick           = 0;
+      maxtick        = 0;
       lastMeasureLen = 0;
 
-      int staves = score->nstaves();
       if (!score->mainLayout()->first()) {
             Measure* measure  = new Measure(score);
             measure->setTick(tick);
-
-            for (int staff = 0; staff < staves; ++staff) {
-                  Staff* instr = score->staff(staff);
-                  if (instr->isTop()) {
-                        BarLine* bar = new BarLine(score);
-                        bar->setStaff(instr);
-                        measure->setEndBarLine(bar);
-                        }
-                  }
             score->mainLayout()->push_back(measure);
             if (!title.isEmpty()) {
                   Text* text = new Text(score);
@@ -495,8 +485,20 @@ void MusicXml::xmlPart(QDomElement e, QString id)
             }
 
       for (; !e.isNull(); e = e.nextSiblingElement()) {
-            if (e.tagName() == "measure")
-                  xmlMeasure(part, e, e.attribute(QString("number")).toInt()-1);
+            if (e.tagName() == "measure") {
+                  Measure* measure = xmlMeasure(part, e, e.attribute(QString("number")).toInt()-1);
+                  if (part == score->parts()->front()) {
+                        int staves = score->nstaves();
+                        for (int staff = 0; staff < staves; ++staff) {
+                              Staff* instr = score->staff(staff);
+                              if (instr->isTop()) {
+                                    BarLine* bar = new BarLine(score);
+                                    bar->setStaff(instr);
+                                    measure->setEndBarLine(bar);
+                                    }
+                              }
+                        }
+                  }
 
             else
                   domError(e);
@@ -511,12 +513,12 @@ void MusicXml::xmlPart(QDomElement e, QString id)
  Read the MusicXML measure element.
  */
 
-void MusicXml::xmlMeasure(Part* part, QDomElement e, int number)
+Measure* MusicXml::xmlMeasure(Part* part, QDomElement e, int number)
       {
       int staves = score->nstaves();
       if (staves == 0) {
             printf("no staves!\n");
-            return;
+            return 0;
             }
 
       // search measure for tick
@@ -535,20 +537,9 @@ void MusicXml::xmlMeasure(Part* part, QDomElement e, int number)
             if (lastMeasure->tick() > tick) {
                   printf("Measure at position %d not found!\n", tick);
                   }
-            //
-
             measure  = new Measure(score);
             measure->setTick(tick);
             measure->setNo(number);
-
-            for (int staff = 0; staff < staves; ++staff) {
-                  Staff* staffp = score->staff(staff);
-                  if (staffp->isTop()) {
-                        BarLine* bar = new BarLine(score);
-                        bar->setStaff(staffp);
-                        measure->setEndBarLine(bar);
-                        }
-                  }
             score->mainLayout()->push_back(measure);
             }
 
@@ -732,24 +723,27 @@ void MusicXml::xmlMeasure(Part* part, QDomElement e, int number)
             else
                   domError(e);
             }
-      staves = part->nstaves();
-//      for (int rstaff = 0; rstaff < staves; ++rstaff)
-//            measure->layoutNoteHeads(staff + rstaff);
+      staves         = part->nstaves();
       int measureLen = maxtick - measure->tick();
-#if 1
+
       if (lastMeasureLen != measureLen) {
-            int z, n;
-            score->sigmap->timesig(measure->tick(), z, n);
-            int tm = ticks_measure(z, n);
-            if (measureLen != score->sigmap->ticksMeasure(measure->tick())) {
-                  score->sigmap->add(measure->tick(), measureLen, z, n);
+            SigList* sigmap = score->sigmap;
+            int tick        = measure->tick();
+            SigEvent se = sigmap->timesig(tick);
+
+            if (measureLen != sigmap->ticksMeasure(tick)) {
+                  SigEvent se = sigmap->timesig(tick);
+
+// printf("Add Sig %d  len %d  %d / %d\n", tick, measureLen, z, n);
+                  score->sigmap->add(tick, measureLen, se.nominator2, se.denominator2);
+                  int tm = ticks_measure(se.nominator, se.denominator);
                   if (tm != measureLen) {
                         if (!measure->irregular()) {
                             /* MusicXML's implicit means "don't print measure number",
                               set it only if explicitly requested, not when the measure length
                               is not what is expected. See MozartTrio.xml measures 12..13.
                             */
-                              measure->setIrregular(true);
+                            //  measure->setIrregular(true);
                             /*
                               printf("irregular Measure %d Len %d at %d   lastLen: %d -> should be: %d (tm=%d)\n",
                                  number, measure->tick(), maxtick,
@@ -759,9 +753,9 @@ void MusicXml::xmlMeasure(Part* part, QDomElement e, int number)
                         }
                   }
             }
-#endif
       lastMeasureLen = measureLen;
       tick = maxtick;
+      return measure;
       }
 
 //---------------------------------------------------------
@@ -981,7 +975,7 @@ void MusicXml::xmlAttributes(Measure* measure, int staff, QDomElement e)
                   for (QDomElement ee = e.firstChildElement(); !ee.isNull(); ee = ee.nextSiblingElement()) {
                         if (ee.tagName() == "fifths")
                               key = ee.text().toInt();
-                        else if (e.tagName() == "mode")
+                        else if (ee.tagName() == "mode")
                               domNotImplemented(ee);
                         else
                               domError(ee);
@@ -1050,7 +1044,7 @@ void MusicXml::xmlAttributes(Measure* measure, int staff, QDomElement e)
                   for (QDomElement ee = e.firstChildElement(); !ee.isNull(); ee = ee.nextSiblingElement()) {
                         if (ee.tagName() == "sign")
                               c = ee.text();
-                        else if (e.tagName() == "line")
+                        else if (ee.tagName() == "line")
                               line = ee.text().toInt();
                         else if (ee.tagName() == "clef-octave-change") {
                               i = ee.text().toInt();

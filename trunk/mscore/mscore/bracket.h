@@ -24,6 +24,7 @@
 #include "element.h"
 
 class Viewer;
+class System;
 
 // System Brackets
 enum { BRACKET_NORMAL, BRACKET_AKKOLADE, NO_BRACKET = -1};
@@ -54,6 +55,7 @@ class Bracket : public Element {
       void setSpan(int val) { _span = val; }
       int level() const     { return _level; }
       void setLevel(int v)  { _level = v; }
+      System* system() const { return (System*)parent(); }
 
       virtual QRectF bbox() const;
       virtual void setHeight(qreal);

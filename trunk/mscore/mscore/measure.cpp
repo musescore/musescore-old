@@ -2635,7 +2635,9 @@ void Measure::setEndBarLine(BarLine* ebl)
       {
       BarLine* bl = barLine(ebl->staffIdx());
       if (bl) {
-            printf("Measure::setEndBarLine: already set\n");
+            if (debugMode)
+                  printf("Measure::setEndBarLine: already set at %d (%d)\n",
+                     bl->tick(), tick() + tickLen());
             return;
             }
       int t = tick() + tickLen();

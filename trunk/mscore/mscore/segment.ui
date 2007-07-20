@@ -1,7 +1,4 @@
 <ui version="4.0" >
- <author></author>
- <comment></comment>
- <exportmacro></exportmacro>
  <class>SegmentBase</class>
  <widget class="QWidget" name="SegmentBase" >
   <property name="geometry" >
@@ -16,11 +13,20 @@
    <string>Form</string>
   </property>
   <layout class="QVBoxLayout" >
-   <property name="margin" >
-    <number>8</number>
-   </property>
    <property name="spacing" >
     <number>6</number>
+   </property>
+   <property name="leftMargin" >
+    <number>8</number>
+   </property>
+   <property name="topMargin" >
+    <number>8</number>
+   </property>
+   <property name="rightMargin" >
+    <number>8</number>
+   </property>
+   <property name="bottomMargin" >
+    <number>8</number>
    </property>
    <item>
     <widget class="QGroupBox" name="groupBox" >
@@ -31,10 +37,22 @@
       <bool>true</bool>
      </property>
      <layout class="QGridLayout" >
-      <property name="margin" >
+      <property name="leftMargin" >
        <number>8</number>
       </property>
-      <property name="spacing" >
+      <property name="topMargin" >
+       <number>8</number>
+      </property>
+      <property name="rightMargin" >
+       <number>8</number>
+      </property>
+      <property name="bottomMargin" >
+       <number>8</number>
+      </property>
+      <property name="horizontalSpacing" >
+       <number>6</number>
+      </property>
+      <property name="verticalSpacing" >
        <number>6</number>
       </property>
       <item row="2" column="0" >
@@ -53,9 +71,7 @@
       <item row="1" column="0" >
        <widget class="QComboBox" name="segmentType" >
         <property name="sizePolicy" >
-         <sizepolicy>
-          <hsizetype>1</hsizetype>
-          <vsizetype>0</vsizetype>
+         <sizepolicy vsizetype="Fixed" hsizetype="Minimum" >
           <horstretch>0</horstretch>
           <verstretch>0</verstretch>
          </sizepolicy>
@@ -88,6 +104,21 @@
           <string>Chord/Rest</string>
          </property>
         </item>
+        <item>
+         <property name="text" >
+          <string>Breath Segment</string>
+         </property>
+        </item>
+        <item>
+         <property name="text" >
+          <string>End Bar Line</string>
+         </property>
+        </item>
+        <item>
+         <property name="text" >
+          <string>Time Signature Announce</string>
+         </property>
+        </item>
        </widget>
       </item>
       <item rowspan="2" row="1" column="1" >
@@ -118,7 +149,6 @@
    </item>
   </layout>
  </widget>
- <pixmapfunction></pixmapfunction>
  <resources/>
  <connections/>
 </ui>
