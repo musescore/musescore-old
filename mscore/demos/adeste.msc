@@ -2,9 +2,9 @@
 <museScore version="1.0">
   <Spatium>1.76389</Spatium>
   <Division>480</Division>
-  <Mag>1.4641</Mag>
-  <xoff>17.9959</xoff>
-  <yoff>-281</yoff>
+  <Mag>0.715533</Mag>
+  <xoff>0</xoff>
+  <yoff>0</yoff>
   <Style>
     <staffUpperBorder>8</staffUpperBorder>
     <staffLowerBorder>4</staffLowerBorder>
@@ -29,7 +29,7 @@
     <spacing8>1.4</spacing8>
     <spacing4>1.8</spacing4>
     <spacing2>2.2</spacing2>
-    <measureSpacing>1.5</measureSpacing>
+    <measureSpacing>1.4</measureSpacing>
     <barNoteDistance>1.5</barNoteDistance>
     <noteBarDistance>1</noteBarDistance>
     <staffLineWidth>0.08</staffLineWidth>
@@ -75,10 +75,10 @@
     </page-layout>
   <siglist>
     <sig tick="0">
-      <nom>1</nom>
-      <denom>4</denom>
       <nom2>4</nom2>
       <denom2>4</denom2>
+      <nom>1</nom>
+      <denom>4</denom>
       </sig>
     <sig tick="480">
       <nom>4</nom>
@@ -160,26 +160,28 @@ p, li { white-space: pre-wrap; }
 &lt;p align=&quot;right&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;John F. Wade&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
         <subtype>Composer</subtype>
         </Text>
-      <BarLine/>
+      <KeySig>
+        <subtype>3</subtype>
+        </KeySig>
       <TimeSig>
         <subtype>260</subtype>
         <den>4</den>
         <nom1>4</nom1>
         </TimeSig>
-      <KeySig>
-        <subtype>3</subtype>
-        </KeySig>
       <Chord>
         <ticklen>480</ticklen>
         <Note>
           <tick>0</tick>
           <pitch>64</pitch>
+          <tpc>18</tpc>
           </Note>
         <Note>
           <tick>0</tick>
           <pitch>69</pitch>
+          <tpc>17</tpc>
           </Note>
         </Chord>
+      <BarLine/>
       <Lyrics>
         <data>A</data>
         <syllabic>begin</syllabic>
@@ -191,27 +193,26 @@ p, li { white-space: pre-wrap; }
         <no>1</no>
         <syllabic>begin</syllabic>
         <subtype>Lyric</subtype>
-        <tick>0</tick>
         </Lyrics>
       <Lyrics>
         <data>Er</data>
         <no>2</no>
         <syllabic>begin</syllabic>
         <subtype>Lyric</subtype>
-        <tick>0</tick>
         </Lyrics>
       </Measure>
     <Measure number="2">
-      <BarLine/>
       <Chord>
         <ticklen>960</ticklen>
         <Note>
           <tick>0</tick>
           <pitch>64</pitch>
+          <tpc>18</tpc>
           </Note>
         <Note>
           <tick>0</tick>
           <pitch>69</pitch>
+          <tpc>17</tpc>
           </Note>
         </Chord>
       <Chord>
@@ -219,6 +220,7 @@ p, li { white-space: pre-wrap; }
         <Note>
           <tick>0</tick>
           <pitch>64</pitch>
+          <tpc>18</tpc>
           </Note>
         </Chord>
       <Chord>
@@ -226,12 +228,15 @@ p, li { white-space: pre-wrap; }
         <Note>
           <tick>0</tick>
           <pitch>61</pitch>
+          <tpc>9</tpc>
           </Note>
         <Note>
           <tick>0</tick>
           <pitch>69</pitch>
+          <tpc>17</tpc>
           </Note>
         </Chord>
+      <BarLine/>
       <Chord>
         <voice>1</voice>
         <tick>1440</tick>
@@ -241,6 +246,7 @@ p, li { white-space: pre-wrap; }
           <voice>1</voice>
           <tick>0</tick>
           <pitch>64</pitch>
+          <tpc>18</tpc>
           </Note>
         </Chord>
       <Lyrics>
@@ -250,29 +256,10 @@ p, li { white-space: pre-wrap; }
         <tick>480</tick>
         </Lyrics>
       <Lyrics>
-        <data>te</data>
-        <syllabic>end</syllabic>
-        <subtype>Lyric</subtype>
-        <tick>1440</tick>
-        </Lyrics>
-      <Lyrics>
-        <data>tet</data>
-        <no>1</no>
-        <syllabic>end</syllabic>
-        <subtype>Lyric</subtype>
-        <tick>1440</tick>
-        </Lyrics>
-      <Lyrics>
-        <data>go</data>
-        <no>2</no>
-        <syllabic>end</syllabic>
-        <subtype>Lyric</subtype>
-        <tick>1440</tick>
-        </Lyrics>
-      <Lyrics>
         <data>fi</data>
         <syllabic>begin</syllabic>
         <subtype>Lyric</subtype>
+        <tick>1440</tick>
         </Lyrics>
       <Lyrics>
         <data>nunc</data>
@@ -286,16 +273,17 @@ p, li { white-space: pre-wrap; }
         </Lyrics>
       </Measure>
     <Measure number="3">
-      <BarLine/>
       <Chord>
         <ticklen>960</ticklen>
         <Note>
           <tick>0</tick>
           <pitch>64</pitch>
+          <tpc>18</tpc>
           </Note>
         <Note>
           <tick>0</tick>
           <pitch>71</pitch>
+          <tpc>19</tpc>
           </Note>
         </Chord>
       <Chord>
@@ -304,8 +292,10 @@ p, li { white-space: pre-wrap; }
         <Note>
           <tick>0</tick>
           <pitch>64</pitch>
+          <tpc>18</tpc>
           </Note>
         </Chord>
+      <BarLine/>
       <Chord>
         <voice>1</voice>
         <tick>3360</tick>
@@ -314,6 +304,7 @@ p, li { white-space: pre-wrap; }
           <voice>1</voice>
           <tick>0</tick>
           <pitch>64</pitch>
+          <tpc>18</tpc>
           </Note>
         </Chord>
       <Lyrics>
@@ -327,14 +318,12 @@ p, li { white-space: pre-wrap; }
         <no>1</no>
         <syllabic>begin</syllabic>
         <subtype>Lyric</subtype>
-        <tick>2400</tick>
         </Lyrics>
       <Lyrics>
         <data>na</data>
         <no>2</no>
         <syllabic>begin</syllabic>
         <subtype>Lyric</subtype>
-        <tick>2400</tick>
         </Lyrics>
       <Lyrics>
         <data>es,</data>
@@ -347,27 +336,26 @@ p, li { white-space: pre-wrap; }
         <no>1</no>
         <syllabic>end</syllabic>
         <subtype>Lyric</subtype>
-        <tick>3360</tick>
         </Lyrics>
       <Lyrics>
         <data>tus</data>
         <no>2</no>
         <syllabic>end</syllabic>
         <subtype>Lyric</subtype>
-        <tick>3360</tick>
         </Lyrics>
       </Measure>
     <Measure number="4">
-      <BarLine/>
       <Chord>
         <ticklen>480</ticklen>
         <Note>
           <tick>0</tick>
           <pitch>64</pitch>
+          <tpc>18</tpc>
           </Note>
         <Note>
           <tick>0</tick>
           <pitch>73</pitch>
+          <tpc>9</tpc>
           </Note>
         </Chord>
       <Chord>
@@ -375,10 +363,12 @@ p, li { white-space: pre-wrap; }
         <Note>
           <tick>0</tick>
           <pitch>64</pitch>
+          <tpc>18</tpc>
           </Note>
         <Note>
           <tick>0</tick>
           <pitch>71</pitch>
+          <tpc>19</tpc>
           </Note>
         </Chord>
       <Chord>
@@ -386,10 +376,12 @@ p, li { white-space: pre-wrap; }
         <Note>
           <tick>0</tick>
           <pitch>64</pitch>
+          <tpc>18</tpc>
           </Note>
         <Note>
           <tick>0</tick>
           <pitch>73</pitch>
+          <tpc>9</tpc>
           </Note>
         </Chord>
       <Chord>
@@ -397,12 +389,15 @@ p, li { white-space: pre-wrap; }
         <Note>
           <tick>0</tick>
           <pitch>64</pitch>
+          <tpc>18</tpc>
           </Note>
         <Note>
           <tick>0</tick>
           <pitch>74</pitch>
+          <tpc>16</tpc>
           </Note>
         </Chord>
+      <BarLine/>
       <Lyrics>
         <data>Lae</data>
         <syllabic>begin</syllabic>
@@ -414,14 +409,12 @@ p, li { white-space: pre-wrap; }
         <no>1</no>
         <syllabic>begin</syllabic>
         <subtype>Lyric</subtype>
-        <tick>4320</tick>
         </Lyrics>
       <Lyrics>
         <data>di</data>
         <no>2</no>
         <syllabic>begin</syllabic>
         <subtype>Lyric</subtype>
-        <tick>4320</tick>
         </Lyrics>
       <Lyrics>
         <data>rus</data>
@@ -435,7 +428,6 @@ p, li { white-space: pre-wrap; }
         <no>2</no>
         <syllabic>end</syllabic>
         <subtype>Lyric</subtype>
-        <tick>4800</tick>
         </Lyrics>
       <Lyrics>
         <data>ti</data>
@@ -448,14 +440,12 @@ p, li { white-space: pre-wrap; }
         <no>1</no>
         <syllabic>begin</syllabic>
         <subtype>Lyric</subtype>
-        <tick>5280</tick>
         </Lyrics>
       <Lyrics>
         <data>ho</data>
         <no>2</no>
         <syllabic>begin</syllabic>
         <subtype>Lyric</subtype>
-        <tick>5280</tick>
         </Lyrics>
       <Lyrics>
         <data>trium</data>
@@ -468,27 +458,26 @@ p, li { white-space: pre-wrap; }
         <no>1</no>
         <syllabic>middle</syllabic>
         <subtype>Lyric</subtype>
-        <tick>5760</tick>
         </Lyrics>
       <Lyrics>
         <data>di</data>
         <no>2</no>
         <syllabic>middle</syllabic>
         <subtype>Lyric</subtype>
-        <tick>5760</tick>
         </Lyrics>
       </Measure>
     <Measure number="5">
-      <BarLine/>
       <Chord>
         <ticklen>960</ticklen>
         <Note>
           <tick>0</tick>
           <pitch>64</pitch>
+          <tpc>18</tpc>
           </Note>
         <Note>
           <tick>0</tick>
           <pitch>73</pitch>
+          <tpc>9</tpc>
           </Note>
         </Chord>
       <Chord>
@@ -496,10 +485,12 @@ p, li { white-space: pre-wrap; }
         <Note>
           <tick>0</tick>
           <pitch>64</pitch>
+          <tpc>18</tpc>
           </Note>
         <Note>
           <tick>0</tick>
           <pitch>71</pitch>
+          <tpc>19</tpc>
           </Note>
         </Chord>
       <Chord>
@@ -507,12 +498,15 @@ p, li { white-space: pre-wrap; }
         <Note>
           <tick>0</tick>
           <pitch>61</pitch>
+          <tpc>9</tpc>
           </Note>
         <Note>
           <tick>0</tick>
           <pitch>69</pitch>
+          <tpc>17</tpc>
           </Note>
         </Chord>
+      <BarLine/>
       <Lyrics>
         <data>phan</data>
         <syllabic>middle</syllabic>
@@ -524,14 +518,12 @@ p, li { white-space: pre-wrap; }
         <no>1</no>
         <syllabic>middle</syllabic>
         <subtype>Lyric</subtype>
-        <tick>6240</tick>
         </Lyrics>
       <Lyrics>
         <data>er</data>
         <no>2</no>
         <syllabic>middle</syllabic>
         <subtype>Lyric</subtype>
-        <tick>6240</tick>
         </Lyrics>
       <Lyrics>
         <data>tes</data>
@@ -544,14 +536,12 @@ p, li { white-space: pre-wrap; }
         <no>1</no>
         <syllabic>end</syllabic>
         <subtype>Lyric</subtype>
-        <tick>7200</tick>
         </Lyrics>
       <Lyrics>
         <data>na</data>
         <no>2</no>
         <syllabic>end</syllabic>
         <subtype>Lyric</subtype>
-        <tick>7200</tick>
         </Lyrics>
       <Lyrics>
         <data>Ven</data>
@@ -562,55 +552,56 @@ p, li { white-space: pre-wrap; }
         <data>Can</data>
         <no>1</no>
         <subtype>Lyric</subtype>
-        <tick>7680</tick>
         </Lyrics>
       <Lyrics>
         <data>Ie</data>
         <no>2</no>
         <subtype>Lyric</subtype>
         <selected>1</selected>
-        <tick>7680</tick>
         </Lyrics>
       </Measure>
     </Staff>
   <Staff id="2">
     <Measure number="1">
-      <BarLine/>
       <Clef>
         <subtype>4</subtype>
         <offset x="0" y="1"/>
         </Clef>
+      <KeySig>
+        <subtype>3</subtype>
+        </KeySig>
       <TimeSig>
         <subtype>260</subtype>
         <den>4</den>
         <nom1>4</nom1>
         </TimeSig>
-      <KeySig>
-        <subtype>3</subtype>
-        </KeySig>
       <Chord>
         <ticklen>480</ticklen>
         <Note>
           <tick>0</tick>
           <pitch>45</pitch>
+          <tpc>17</tpc>
           </Note>
         <Note>
           <tick>0</tick>
           <pitch>61</pitch>
+          <tpc>9</tpc>
           </Note>
         </Chord>
+      <BarLine/>
       </Measure>
     <Measure number="2">
-      <BarLine/>
       <Chord>
         <ticklen>960</ticklen>
         <Note>
           <tick>0</tick>
           <pitch>45</pitch>
+          <tpc>17</tpc>
           </Note>
         <Note>
           <tick>0</tick>
           <pitch>61</pitch>
+          <tpc>9</tpc>
           </Note>
         </Chord>
       <Chord>
@@ -618,10 +609,12 @@ p, li { white-space: pre-wrap; }
         <Note>
           <tick>0</tick>
           <pitch>49</pitch>
+          <tpc>9</tpc>
           </Note>
         <Note>
           <tick>0</tick>
           <pitch>57</pitch>
+          <tpc>17</tpc>
           </Note>
         </Chord>
       <Chord>
@@ -629,24 +622,28 @@ p, li { white-space: pre-wrap; }
         <Note>
           <tick>0</tick>
           <pitch>45</pitch>
+          <tpc>17</tpc>
           </Note>
         <Note>
           <tick>0</tick>
           <pitch>57</pitch>
+          <tpc>17</tpc>
           </Note>
         </Chord>
+      <BarLine/>
       </Measure>
     <Measure number="3">
-      <BarLine/>
       <Chord>
         <ticklen>960</ticklen>
         <Note>
           <tick>0</tick>
           <pitch>52</pitch>
+          <tpc>18</tpc>
           </Note>
         <Note>
           <tick>0</tick>
           <pitch>56</pitch>
+          <tpc>10</tpc>
           </Note>
         </Chord>
       <Chord>
@@ -654,21 +651,24 @@ p, li { white-space: pre-wrap; }
         <Note>
           <tick>0</tick>
           <pitch>56</pitch>
+          <tpc>10</tpc>
           </Note>
         <Note>
           <tick>0</tick>
           <pitch>59</pitch>
+          <tpc>19</tpc>
           </Note>
         </Chord>
+      <BarLine/>
       </Measure>
     <Measure number="4">
-      <BarLine/>
       <Chord>
         <ticklen>480</ticklen>
         <StemDirection>up</StemDirection>
         <Note>
           <tick>0</tick>
           <pitch>57</pitch>
+          <tpc>17</tpc>
           </Note>
         </Chord>
       <Chord>
@@ -676,10 +676,12 @@ p, li { white-space: pre-wrap; }
         <Note>
           <tick>0</tick>
           <pitch>56</pitch>
+          <tpc>10</tpc>
           </Note>
         <Note>
           <tick>0</tick>
           <pitch>59</pitch>
+          <tpc>19</tpc>
           </Note>
         </Chord>
       <Chord>
@@ -687,6 +689,7 @@ p, li { white-space: pre-wrap; }
         <Note>
           <tick>0</tick>
           <pitch>57</pitch>
+          <tpc>17</tpc>
           </Note>
         </Chord>
       <Chord>
@@ -694,12 +697,15 @@ p, li { white-space: pre-wrap; }
         <Note>
           <tick>0</tick>
           <pitch>50</pitch>
+          <tpc>16</tpc>
           </Note>
         <Note>
           <tick>0</tick>
           <pitch>57</pitch>
+          <tpc>17</tpc>
           </Note>
         </Chord>
+      <BarLine/>
       <Chord>
         <voice>1</voice>
         <tick>4320</tick>
@@ -708,20 +714,22 @@ p, li { white-space: pre-wrap; }
           <voice>1</voice>
           <tick>0</tick>
           <pitch>57</pitch>
+          <tpc>17</tpc>
           </Note>
         </Chord>
       </Measure>
     <Measure number="5">
-      <BarLine/>
       <Chord>
         <ticklen>960</ticklen>
         <Note>
           <tick>0</tick>
           <pitch>52</pitch>
+          <tpc>18</tpc>
           </Note>
         <Note>
           <tick>0</tick>
           <pitch>57</pitch>
+          <tpc>17</tpc>
           </Note>
         </Chord>
       <Chord>
@@ -729,10 +737,12 @@ p, li { white-space: pre-wrap; }
         <Note>
           <tick>0</tick>
           <pitch>52</pitch>
+          <tpc>18</tpc>
           </Note>
         <Note>
           <tick>0</tick>
           <pitch>56</pitch>
+          <tpc>10</tpc>
           </Note>
         </Chord>
       <Chord>
@@ -740,12 +750,15 @@ p, li { white-space: pre-wrap; }
         <Note>
           <tick>0</tick>
           <pitch>54</pitch>
+          <tpc>20</tpc>
           </Note>
         <Note>
           <tick>0</tick>
           <pitch>57</pitch>
+          <tpc>17</tpc>
           </Note>
         </Chord>
+      <BarLine/>
       </Measure>
     </Staff>
   <cursorStaff>0</cursorStaff>

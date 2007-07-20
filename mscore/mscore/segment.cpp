@@ -180,6 +180,7 @@ void Segment::removeStaff(int staff)
 void Segment::add(Element* el)
       {
       el->setParent(this);
+      el->setTick(tick());    //DEBUG
       int staffIdx = el->staffIdx();
 
       if (staffIdx == -1)

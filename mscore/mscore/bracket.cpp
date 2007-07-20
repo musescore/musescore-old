@@ -289,36 +289,39 @@ bool Bracket::edit(QMatrix&, QKeyEvent* ev)
 bool Bracket::endEditDrag()
       {
       h2 += yoff * .5;
-
       qreal ay1 = canvasPos().y();
       qreal ay2 = ay1 + h2 * 2;
 
-      SysStaffList* sl = ((System*)parent())->staves();
-      int idx1 = 0;
-      int idx2 = -1;
-      int i    = 0;
+      int staffIdx1 = staffIdx();
+      int staffIdx2;
+      int n     = system()->staves()->size();
+      if (staffIdx1 + 1 >= n)
+            staffIdx2 = staffIdx1;
+      else {
+            qreal ay  = parent()->canvasPos().y();
+            System* s = system();
+            int n     = s->staves()->size() - 1;
 
-      qreal ay = parent()->canvasPos().y();
-      for (iSysStaff iss = sl->begin(); iss != sl->end(); ++iss, ++i) {
-            SysStaff* ss = *iss;
-            qreal y1 = ss->bbox().y() + ay;
-            qreal y2 = y1 + ss->bbox().height();
-            if (ay1 >= y1 && ay1 < y2)
-                  idx1 = i;
-            idx2 = i;
-            if (y2 > ay2)
-                  break;
+            qreal y = s->staff(staffIdx1)->bbox().y() + ay;
+            for (staffIdx2 = staffIdx1 + 1; staffIdx2 < n; ++staffIdx2) {
+                  qreal h = s->staff(staffIdx2)->bbox().y() + ay - y;
+printf(" %d: %f - %f - %f\n", staffIdx2, y, h, ay2);
+                  if (ay2 < (y + h * .5))
+                        break;
+                  y += h;
+                  }
+            staffIdx2 -= 1;
             }
-      if (idx2 == -1)
-            idx2 = i - 1;
 
-      qreal sy = (*(sl->begin() + idx1))->bbox().top();
-      qreal ey = (*(sl->begin() + idx2))->bbox().bottom();
-      h2 = (ey - sy) / 2.0;
+      qreal sy = system()->staff(staffIdx1)->bbox().top();
+      qreal ey = system()->staff(staffIdx2)->bbox().bottom();
+      h2 = (ey - sy) * .5;
 
       yoff = 0.0;
-      score()->staff(idx1)->setBracketSpan(_level, idx2 - idx1 + 1);
-      grip.moveTo(0.0, h2 *2);
+      int span = staffIdx2 - staffIdx1 + 1;
+printf("setBracketSpan: level %d span %d (%d-%d)\n", _level, span, staffIdx1, staffIdx2);
+      score()->staff(staffIdx1)->setBracketSpan(_level, span);
+      grip.moveTo(0.0, h2 * 2);
       return true;
       }
 
