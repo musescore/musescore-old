@@ -262,7 +262,6 @@ MuseScore::MuseScore()
          << "metronome" << "cut" << "copy" << "paste"
          << "beam-start" << "beam-mid" << "no-beam" << "beam32"
          << "file-open" << "file-new" << "file-template" << "file-save" << "file-save-as" << "file-close"
-         << "export-midi" << "export-xml" << "import-midi" << "import-xml"  << "import-muse"
          << "quit"
          << "toggle-statusbar" << "note-input" << "pitch-spell"
          ;
@@ -440,13 +439,6 @@ MuseScore::MuseScore()
       menuFile->addAction(getAction("file-save"));
       menuFile->addAction(getAction("file-save-as"));
       menuFile->addAction(getAction("file-close"));
-
-      menuFile->addSeparator();
-      menuFile->addAction(getAction("export-midi"));
-      menuFile->addAction(getAction("export-xml"));
-      menuFile->addAction(getAction("import-midi"));
-      menuFile->addAction(getAction("import-xml"));
-      menuFile->addAction(getAction("import-muse"));
 
       menuFile->addSeparator();
       menuFile->addAction(getAction("print"));
@@ -1256,48 +1248,6 @@ void MuseScore::editStyle()
       }
 
 //---------------------------------------------------------
-//   importMusicXml
-//---------------------------------------------------------
-
-void MuseScore::importMusicXml()
-      {
-      QString name = QFileDialog::getOpenFileName(
-         this,
-         tr("MuseScore: Import MusicXML"),
-         ".",
-         QString("MusicXml files (*.xml *.xml.gz *.xml.bz2);; All files (*)")
-         );
-      if (name.isEmpty())
-            return;
-      Score* score = new Score();
-      score->read(name);
-      score->setCreated(true);
-      appendScore(score);
-      tab->setCurrentIndex(scoreList.size() - 1);
-      }
-
-//---------------------------------------------------------
-//   importMuseData
-//---------------------------------------------------------
-
-void MuseScore::importMuseData()
-      {
-      QString name = QFileDialog::getOpenFileName(
-         this,
-         tr("MuseScore: Import MuseData"),
-         ".",
-         QString("MusicXml files (*.md);; All files (*)")
-         );
-      if (name.isEmpty())
-            return;
-      Score* score = new Score();
-      score->readMuseData(name);
-      score->setCreated(true);
-      appendScore(score);
-      tab->setCurrentIndex(scoreList.size() - 1);
-      }
-
-//---------------------------------------------------------
 //   showPlayPanel
 //---------------------------------------------------------
 
@@ -1790,16 +1740,6 @@ void MuseScore::cmd(QAction* a)
             newFile();
       else if (cmd == "file-template")
             newFileFromTemplate();
-      else if (cmd == "export-midi")
-            exportMidi();
-      else if (cmd == "export-xml")
-            exportMusicXml();
-      else if (cmd == "import-midi")
-            importMidi();
-      else if (cmd == "import-xml")
-            importMusicXml();
-      else if (cmd == "import-muse")
-            importMuseData();
       else if (cmd == "quit")
             close();
       else if (cmd == "fingering")

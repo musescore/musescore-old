@@ -74,6 +74,7 @@ class Seq : public QObject {
       Score* cs;
       bool running;                       // true if sequencer is available
       int state;                          // STOP, PLAY, START_PLAY
+      bool playlistChanged;
 
       Synth* synti;
       Audio* audio;

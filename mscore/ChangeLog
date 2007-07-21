@@ -1,3 +1,7 @@
+21.7.7 (ws)
+      - remove export and import from File menu. Export is handled in
+        "Save As" and import in "Load". Added export formats PostScript, PDF
+        and SVG to "Save As"
 20.7.7 (ws)
       - implement frames for text
       - fix printing of titel, subtitel etc.

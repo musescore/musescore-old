@@ -170,10 +170,11 @@ class SlurHandler {
       };
 
 //---------------------------------------------------------
-//   exportMusicXml
+//   ExportMusicXml
 //---------------------------------------------------------
 
-class ExportMusicXml : public SaveFile {
+class ExportMusicXml {
+      QFile f;
       Score* score;
       Xml xml;
       SlurHandler sh;
@@ -191,7 +192,7 @@ class ExportMusicXml : public SaveFile {
 
    public:
       ExportMusicXml(Score* s) { score = s; tick = 0; }
-      virtual bool saver();
+      bool write(const QString& name);
       void moveToTick(int t);
       void words(Text* text, int staff);
       void hairpin(Hairpin* hp, int staff, int tick);
@@ -806,16 +807,6 @@ static QString tick2xml(const int ticks, int& dots)
       }
 
 //---------------------------------------------------------
-//   exportMusicXml::export
-//---------------------------------------------------------
-
-void MuseScore::exportMusicXml()
-      {
-      ExportMusicXml em(cs);
-      em.save(this, QString("."), QString(".xml"), tr("MuseScore: Export as MusicXml"));
-      }
-
-//---------------------------------------------------------
 //   bar
 //---------------------------------------------------------
 
@@ -928,323 +919,6 @@ static Volta* findVolta(Measure* m)
                   }
             }
       return 0;
-      }
-
-//---------------------------------------------------------
-//  saver
-//---------------------------------------------------------
-
-/**
- Export MusicXML file.
-
- Return true on error.
- */
-
-bool ExportMusicXml::saver()
-      {
-      xml.setDevice(&f);
-      xml << "<?xml version=\"1.0\" encoding=\"ISO-8859-1\"?>\n";
-      xml << "<!DOCTYPE score-partwise PUBLIC \"-//Recordare//DTD MusicXML 1.0 Partwise//EN\" \"http://www.musicxml.org/dtds/partwise.dtd\">\n";
-      xml.stag("score-partwise");
-      xml.stag("work");
-
-      Measure* measure = score->mainLayout()->first();
-      ElementList* el = measure->pel();
-      for (iElement ie = el->begin(); ie != el->end(); ++ie) {
-            if ((*ie)->type() == TEXT) {
-                  Text* text = (Text*)(*ie);
-                  switch (text->subtype()) {
-                        case TEXT_TITLE:
-                              xml.tag("work-title", text->getText());
-                              break;
-                        case TEXT_SUBTITLE:
-                              xml.tag("work-number", text->getText());
-                              break;
-                        }
-                  }
-            }
-      xml.etag();
-
-      xml.stag("identification");
-      for (iElement ie = el->begin(); ie != el->end(); ++ie) {
-            if ((*ie)->type() == TEXT) {
-                  Text* text = (Text*)(*ie);
-                  switch (text->subtype()) {
-                        case TEXT_COMPOSER:
-                              xml.tag("creator", "type=\"composer\"", text->getText());
-                              break;
-                        case TEXT_POET:
-                              xml.tag("creator", "type=\"poet\"", text->getText());
-                              break;
-                        case TEXT_TRANSLATOR:
-                              xml.tag("creator", "type=\"creator\"", text->getText());
-                              break;
-                        }
-                  }
-            }
-
-      if (!score->rights.isEmpty())
-            xml.tag("rights", score->rights);
-      xml.stag("encoding");
-      xml.tag("software", QString("MuseScore ") + QString(VERSION));
-      xml.tag("encoding-date", QDate::currentDate().toString(Qt::ISODate));
-      xml.etag();
-      xml.etag();
-
-      xml.stag("part-list");
-      const QList<Part*>* il = score->parts();
-      for (int idx = 0; idx < il->size(); ++idx) {
-            Part* part = il->at(idx);
-            xml.stag(QString("score-part id=\"P%1\"").arg(idx+1));
-            xml.tag("part-name", part->longName().toPlainText());
-
-            xml.stag(QString("score-instrument id=\"P%1-I%2\"").arg(idx+1).arg(3));
-            xml.tag("instrument-name", part->longName().toPlainText());
-            xml.etag();
-
-            xml.stag(QString("midi-instrument id=\"P%1-I%2\"").arg(idx+1).arg(3));
-            xml.tag("midi-channel", part->midiChannel() + 1);
-            xml.tag("midi-program", part->midiProgram() + 1);
-            xml.etag();
-
-            xml.etag();
-            }
-      xml.etag();
-
-      for (int idx = 0; idx < il->size(); ++idx) {
-            Part* part = il->at(idx);
-            tick = 0;
-            xml.stag(QString("part id=\"P%1\"").arg(idx+1));
-
-            int staves = part->nstaves();
-            int strack = score->staff(part) * VOICES;
-            int etrack = strack + staves * VOICES;
-
-            DirectionsHandler dh(score);
-            dh.buildDirectionsList(part, strack, etrack);
-
-            int measureNo = 1;          // number of next regular measure
-            int irregularMeasureNo = 1; // number of next irregular measure
-            int pickupMeasureNo = 1;    // number of next pickup measure
-            Volta* volta = 0;           // volta in current measure(s)
-            for (Measure* m = score->mainLayout()->first(); m; m = m->next()) {
-                  // pickup and other irregular measures need special care
-                  if ((irregularMeasureNo + measureNo) == 2 && m->irregular()) {
-                        xml.stag("measure number=\"0\" implicit=\"yes\"");
-                        pickupMeasureNo++;
-                        }
-                  else if (m->irregular()) {
-                        xml.stag(QString("measure number=\"X%1\" implicit=\"yes\"").arg(irregularMeasureNo++));
-                        }
-                  else {
-                        xml.stag(QString("measure number=\"%1\"").arg(measureNo++));
-                        }
-
-                  if (m->prev() && m->prev()->lineBreak())
-                        xml.tagE("print new-system=\"yes\"");
-                  if (measureNo > 2 && m->prev()->pageBreak())
-                        xml.tagE("print new-page=\"yes\"");
-
-                  attr.start();
-                  dh.buildDirectionsList(m, false, part, strack, etrack);
-
-                  // barline left must be the first element in a measure
-                  volta = findVolta(m);
-                  barlineLeft(m, strack, etrack, volta);
-
-                  // output attributes with the first actual measure (pickup or regular)
-                  if ((irregularMeasureNo + measureNo + pickupMeasureNo) == 4) {
-                        attr.doAttr(xml, true);
-                        xml.tag("divisions", division);
-                        }
-                  // output attributes at start of measure: key, time
-                  KeySig* ksig = 0;
-                  TimeSig* tsig = 0;
-                  for (Segment* seg = m->first(); seg; seg = seg->next()) {
-                        if (seg->tick() > m->tick())
-                              break;
-                        Element* el = seg->element(strack);
-                        if (!el)
-                              continue;
-                        if (el->type() == KEYSIG)
-                              ksig = (KeySig*) el;
-                        else if (el->type() == TIMESIG)
-                              tsig = (TimeSig*) el;
-                        }
-                  if (ksig) {
-                        // output only keysig changes, not generated keysigs
-                        // at line beginning
-                        int ti = ksig->tick();
-                        //TODO_K
-                        KeyList* kl = score->staff(0)->keymap();
-                        int key = kl->key(ti);
-                        ciKeyEvent ci = kl->find(ti);
-                        if (ci != kl->end()) {
-                              keysig(key);
-                              }
-                        }
-                  else if (tick == 0)
-                        // always write a keysig at tick = 0
-                        keysig(0);
-                  if (tsig) {
-                        int z, n;
-                        score->sigmap->timesig(tsig->tick(), z, n);
-                        timesig(tsig);
-                        }
-                  // output attributes with the first actual measure (pickup or regular) only
-                  if ((irregularMeasureNo + measureNo + pickupMeasureNo) == 4) {
-                        if (staves > 1)
-                              xml.tag("staves", staves);
-                        }
-                  // output attribute at start of measure: clef
-                  for (Segment* seg = m->first(); seg; seg = seg->next()) {
-                        if (seg->tick() > m->tick())
-                              break;
-                        Element* el = seg->element(strack);
-                        if (!el)
-                              continue;
-                        if (el->type() == CLEF)
-                              for (int st = strack; st < etrack; st += VOICES) {
-                                    // sstaff - xml staff number, counting from 1 for this
-                                    // instrument
-                                    // special number 0 -> dont show staff number in
-                                    // xml output (because there is only one staff)
-
-                                    int sstaff = (staves > 1) ? st - strack + VOICES : 0;
-                                    sstaff /= VOICES;
-                                    // printf("strack=%d etrack=%d st=%d sstaff=%d\n", strack, etrack, st, sstaff);
-                                    el = seg->element(st);
-                                    if (el && el->type() == CLEF) {
-                                          // output only clef changes, not generated clefs
-                                          // at line beginning
-                                          int ti = el->tick();
-                                          int ct = ((Clef*)el)->subtype();
-                                          ClefList* cl = score->staff(st/VOICES)->clef();
-                                          ciClefEvent ci = cl->find(ti);
-                                          if (ci != cl->end()) {
-                                                clef(sstaff, ct);
-                                                }
-                                          }
-                                    }
-                        }
-
-                  for (int st = strack; st < etrack; ++st) {
-                        // sstaff - xml staff number, counting from 1 for this
-                        // instrument
-                        // special number 0 -> dont show staff number in
-                        // xml output (because there is only one staff)
-
-                        int sstaff = (staves > 1) ? st - strack + VOICES : 0;
-                        sstaff /= VOICES;
-                        // printf("strack=%d etrack=%d st=%d sstaff=%d\n", strack, etrack, st, sstaff);
-
-                        for (Segment* seg = m->first(); seg; seg = seg->next()) {
-                              Element* el = seg->element(st);
-                              if (!el)
-                                    continue;
-                              // must ignore start repeat to prevent spurious backup/forward
-                              if (el->type() == BAR_LINE && el->subtype() == START_REPEAT)
-                                    continue;
-                              if (tick != el->tick()) {
-                                    attr.doAttr(xml, false);
-                                    moveToTick(el->tick());
-                                    }
-                              tick += el->tickLen();
-                              dh.handleElement(this, el, sstaff, true);
-                              switch (el->type()) {
-                                    case CLEF:
-                                          {
-                                          // output only clef changes, not generated clefs
-                                          // at line beginning
-                                          // also ignore clefs at the start o a measure,
-                                          // these have already been output
-                                          int ti = el->tick();
-                                          int ct = ((Clef*)el)->subtype();
-                                          ClefList* cl = score->staff(st/VOICES)->clef();
-                                          ciClefEvent ci = cl->find(ti);
-                                          if (ci != cl->end() && el->tick() != m->tick()) {
-                                                clef(sstaff, ct);
-                                                }
-                                          }
-                                          break;
-                                    case KEYSIG:
-                                          {
-                                          /* ignore
-                                          // output only keysig changes, not generated keysigs
-                                          // at line beginning
-                                          int ti = el->tick();
-                                          int key = score->keymap->key(el->tick());
-                                          KeyList* kl = score->keymap;
-                                          ciKeyEvent ci = kl->find(ti);
-                                          if (ci != kl->end()) {
-                                                keysig(key);
-                                                }
-                                          */
-                                          }
-                                          break;
-                                    case TIMESIG:
-                                          {
-                                          /* ignore
-                                          // output only for staff 0
-                                          if (st == 0) {
-                                                int z, n;
-                                                score->sigmap->timesig(el->tick(), z, n);
-                                                timesig(z, n);
-                                                }
-                                          */
-                                          }
-                                          break;
-                                    case CHORD:
-                                          {
-                                          // note: in MuseScore there is one lyricslist for each staff
-                                          // MusicXML associates lyrics with notes in a specific voice
-                                          // (too) simple solution: output lyrics only for the first voice
-                                          const LyricsList* ll = 0;
-                                          if ((st % VOICES) == 0) ll = seg->lyricsList(st / VOICES);
-                                          chord((Chord*)el, sstaff, ll);
-                                          break;
-                                          }
-                                    case REST:
-                                          rest((Rest*)el, sstaff);
-                                          break;
-                                    case BAR_LINE:
-                                          // Following must be enforced (ref MusicXML barline.dtd):
-                                          // If location is left, it should be the first element in the measure;
-                                          // if location is right, it should be the last element.
-                                          // implementation note: START_REPEAT already written by barlineLeft()
-                                          // any bars left should be "middle"
-                                          if (el->subtype() != START_REPEAT)
-                                                bar((BarLine*) el);
-                                          break;
-
-                                    default:
-                                          printf("unknown type %s\n", el->name());
-                                          break;
-                                    }
-                              dh.handleElement(this, el, sstaff, false);
-                              }
-                        attr.stop(xml);
-                        if (!((st + 1) % VOICES)) {
-                              // sstaff may be 0, which causes a failed assertion (and abort)
-                              // in (*i)->staff(ssstaff - 1)
-                              // LVIFIX: find exact cause
-                              int ssstaff = sstaff > 0 ? sstaff : sstaff + 1;
-                              // printf("st=%d sstaff=%d ssstaff=%d\n", st, sstaff, ssstaff);
-                              dh.handleElements(this, part->staff(ssstaff - 1), m->tick(), m->tick() + m->tickLen(), sstaff);
-                              }
-                        }
-                  // move to end of measure (in case of incomplete last voice)
-                  moveToTick(m->tick() + m->tickLen());
-                  BarLine * b = m->barLine(score->staff(part));
-                  bar(b, volta, "right");
-                  xml.etag();
-                  }
-            xml.etag();
-            }
-
-      xml.etag();
-
-      return f.error() != QFile::NoError;
       }
 
 //---------------------------------------------------------
@@ -1904,3 +1578,336 @@ void ExportMusicXml::lyrics(const LyricsList* ll)
                   }
             }
       }
+
+//---------------------------------------------------------
+//  write
+//---------------------------------------------------------
+
+/**
+ Export MusicXML file.
+
+ Return false on error.
+ */
+
+bool ExportMusicXml::write(const QString& name)
+      {
+      f.setFileName(name);
+      if (!f.open(QIODevice::WriteOnly))
+            return false;
+
+      xml.setDevice(&f);
+      xml << "<?xml version=\"1.0\" encoding=\"ISO-8859-1\"?>\n";
+      xml << "<!DOCTYPE score-partwise PUBLIC \"-//Recordare//DTD MusicXML 1.0 Partwise//EN\" \"http://www.musicxml.org/dtds/partwise.dtd\">\n";
+      xml.stag("score-partwise");
+      xml.stag("work");
+
+      Measure* measure = score->mainLayout()->first();
+      ElementList* el = measure->pel();
+      for (iElement ie = el->begin(); ie != el->end(); ++ie) {
+            if ((*ie)->type() == TEXT) {
+                  Text* text = (Text*)(*ie);
+                  switch (text->subtype()) {
+                        case TEXT_TITLE:
+                              xml.tag("work-title", text->getText());
+                              break;
+                        case TEXT_SUBTITLE:
+                              xml.tag("work-number", text->getText());
+                              break;
+                        }
+                  }
+            }
+      xml.etag();
+
+      xml.stag("identification");
+      for (iElement ie = el->begin(); ie != el->end(); ++ie) {
+            if ((*ie)->type() == TEXT) {
+                  Text* text = (Text*)(*ie);
+                  switch (text->subtype()) {
+                        case TEXT_COMPOSER:
+                              xml.tag("creator", "type=\"composer\"", text->getText());
+                              break;
+                        case TEXT_POET:
+                              xml.tag("creator", "type=\"poet\"", text->getText());
+                              break;
+                        case TEXT_TRANSLATOR:
+                              xml.tag("creator", "type=\"creator\"", text->getText());
+                              break;
+                        }
+                  }
+            }
+
+      if (!score->rights.isEmpty())
+            xml.tag("rights", score->rights);
+      xml.stag("encoding");
+      xml.tag("software", QString("MuseScore ") + QString(VERSION));
+      xml.tag("encoding-date", QDate::currentDate().toString(Qt::ISODate));
+      xml.etag();
+      xml.etag();
+
+      xml.stag("part-list");
+      const QList<Part*>* il = score->parts();
+      for (int idx = 0; idx < il->size(); ++idx) {
+            Part* part = il->at(idx);
+            xml.stag(QString("score-part id=\"P%1\"").arg(idx+1));
+            xml.tag("part-name", part->longName().toPlainText());
+
+            xml.stag(QString("score-instrument id=\"P%1-I%2\"").arg(idx+1).arg(3));
+            xml.tag("instrument-name", part->longName().toPlainText());
+            xml.etag();
+
+            xml.stag(QString("midi-instrument id=\"P%1-I%2\"").arg(idx+1).arg(3));
+            xml.tag("midi-channel", part->midiChannel() + 1);
+            xml.tag("midi-program", part->midiProgram() + 1);
+            xml.etag();
+
+            xml.etag();
+            }
+      xml.etag();
+
+      for (int idx = 0; idx < il->size(); ++idx) {
+            Part* part = il->at(idx);
+            tick = 0;
+            xml.stag(QString("part id=\"P%1\"").arg(idx+1));
+
+            int staves = part->nstaves();
+            int strack = score->staff(part) * VOICES;
+            int etrack = strack + staves * VOICES;
+
+            DirectionsHandler dh(score);
+            dh.buildDirectionsList(part, strack, etrack);
+
+            int measureNo = 1;          // number of next regular measure
+            int irregularMeasureNo = 1; // number of next irregular measure
+            int pickupMeasureNo = 1;    // number of next pickup measure
+            Volta* volta = 0;           // volta in current measure(s)
+            for (Measure* m = score->mainLayout()->first(); m; m = m->next()) {
+                  // pickup and other irregular measures need special care
+                  if ((irregularMeasureNo + measureNo) == 2 && m->irregular()) {
+                        xml.stag("measure number=\"0\" implicit=\"yes\"");
+                        pickupMeasureNo++;
+                        }
+                  else if (m->irregular()) {
+                        xml.stag(QString("measure number=\"X%1\" implicit=\"yes\"").arg(irregularMeasureNo++));
+                        }
+                  else {
+                        xml.stag(QString("measure number=\"%1\"").arg(measureNo++));
+                        }
+
+                  if (m->prev() && m->prev()->lineBreak())
+                        xml.tagE("print new-system=\"yes\"");
+                  if (measureNo > 2 && m->prev()->pageBreak())
+                        xml.tagE("print new-page=\"yes\"");
+
+                  attr.start();
+                  dh.buildDirectionsList(m, false, part, strack, etrack);
+
+                  // barline left must be the first element in a measure
+                  volta = findVolta(m);
+                  barlineLeft(m, strack, etrack, volta);
+
+                  // output attributes with the first actual measure (pickup or regular)
+                  if ((irregularMeasureNo + measureNo + pickupMeasureNo) == 4) {
+                        attr.doAttr(xml, true);
+                        xml.tag("divisions", division);
+                        }
+                  // output attributes at start of measure: key, time
+                  KeySig* ksig = 0;
+                  TimeSig* tsig = 0;
+                  for (Segment* seg = m->first(); seg; seg = seg->next()) {
+                        if (seg->tick() > m->tick())
+                              break;
+                        Element* el = seg->element(strack);
+                        if (!el)
+                              continue;
+                        if (el->type() == KEYSIG)
+                              ksig = (KeySig*) el;
+                        else if (el->type() == TIMESIG)
+                              tsig = (TimeSig*) el;
+                        }
+                  if (ksig) {
+                        // output only keysig changes, not generated keysigs
+                        // at line beginning
+                        int ti = ksig->tick();
+                        //TODO_K
+                        KeyList* kl = score->staff(0)->keymap();
+                        int key = kl->key(ti);
+                        ciKeyEvent ci = kl->find(ti);
+                        if (ci != kl->end()) {
+                              keysig(key);
+                              }
+                        }
+                  else if (tick == 0)
+                        // always write a keysig at tick = 0
+                        keysig(0);
+                  if (tsig) {
+                        int z, n;
+                        score->sigmap->timesig(tsig->tick(), z, n);
+                        timesig(tsig);
+                        }
+                  // output attributes with the first actual measure (pickup or regular) only
+                  if ((irregularMeasureNo + measureNo + pickupMeasureNo) == 4) {
+                        if (staves > 1)
+                              xml.tag("staves", staves);
+                        }
+                  // output attribute at start of measure: clef
+                  for (Segment* seg = m->first(); seg; seg = seg->next()) {
+                        if (seg->tick() > m->tick())
+                              break;
+                        Element* el = seg->element(strack);
+                        if (!el)
+                              continue;
+                        if (el->type() == CLEF)
+                              for (int st = strack; st < etrack; st += VOICES) {
+                                    // sstaff - xml staff number, counting from 1 for this
+                                    // instrument
+                                    // special number 0 -> dont show staff number in
+                                    // xml output (because there is only one staff)
+
+                                    int sstaff = (staves > 1) ? st - strack + VOICES : 0;
+                                    sstaff /= VOICES;
+                                    // printf("strack=%d etrack=%d st=%d sstaff=%d\n", strack, etrack, st, sstaff);
+                                    el = seg->element(st);
+                                    if (el && el->type() == CLEF) {
+                                          // output only clef changes, not generated clefs
+                                          // at line beginning
+                                          int ti = el->tick();
+                                          int ct = ((Clef*)el)->subtype();
+                                          ClefList* cl = score->staff(st/VOICES)->clef();
+                                          ciClefEvent ci = cl->find(ti);
+                                          if (ci != cl->end()) {
+                                                clef(sstaff, ct);
+                                                }
+                                          }
+                                    }
+                        }
+
+                  for (int st = strack; st < etrack; ++st) {
+                        // sstaff - xml staff number, counting from 1 for this
+                        // instrument
+                        // special number 0 -> dont show staff number in
+                        // xml output (because there is only one staff)
+
+                        int sstaff = (staves > 1) ? st - strack + VOICES : 0;
+                        sstaff /= VOICES;
+                        // printf("strack=%d etrack=%d st=%d sstaff=%d\n", strack, etrack, st, sstaff);
+
+                        for (Segment* seg = m->first(); seg; seg = seg->next()) {
+                              Element* el = seg->element(st);
+                              if (!el)
+                                    continue;
+                              // must ignore start repeat to prevent spurious backup/forward
+                              if (el->type() == BAR_LINE && el->subtype() == START_REPEAT)
+                                    continue;
+                              if (tick != el->tick()) {
+                                    attr.doAttr(xml, false);
+                                    moveToTick(el->tick());
+                                    }
+                              tick += el->tickLen();
+                              dh.handleElement(this, el, sstaff, true);
+                              switch (el->type()) {
+                                    case CLEF:
+                                          {
+                                          // output only clef changes, not generated clefs
+                                          // at line beginning
+                                          // also ignore clefs at the start o a measure,
+                                          // these have already been output
+                                          int ti = el->tick();
+                                          int ct = ((Clef*)el)->subtype();
+                                          ClefList* cl = score->staff(st/VOICES)->clef();
+                                          ciClefEvent ci = cl->find(ti);
+                                          if (ci != cl->end() && el->tick() != m->tick()) {
+                                                clef(sstaff, ct);
+                                                }
+                                          }
+                                          break;
+                                    case KEYSIG:
+                                          {
+                                          /* ignore
+                                          // output only keysig changes, not generated keysigs
+                                          // at line beginning
+                                          int ti = el->tick();
+                                          int key = score->keymap->key(el->tick());
+                                          KeyList* kl = score->keymap;
+                                          ciKeyEvent ci = kl->find(ti);
+                                          if (ci != kl->end()) {
+                                                keysig(key);
+                                                }
+                                          */
+                                          }
+                                          break;
+                                    case TIMESIG:
+                                          {
+                                          /* ignore
+                                          // output only for staff 0
+                                          if (st == 0) {
+                                                int z, n;
+                                                score->sigmap->timesig(el->tick(), z, n);
+                                                timesig(z, n);
+                                                }
+                                          */
+                                          }
+                                          break;
+                                    case CHORD:
+                                          {
+                                          // note: in MuseScore there is one lyricslist for each staff
+                                          // MusicXML associates lyrics with notes in a specific voice
+                                          // (too) simple solution: output lyrics only for the first voice
+                                          const LyricsList* ll = 0;
+                                          if ((st % VOICES) == 0) ll = seg->lyricsList(st / VOICES);
+                                          chord((Chord*)el, sstaff, ll);
+                                          break;
+                                          }
+                                    case REST:
+                                          rest((Rest*)el, sstaff);
+                                          break;
+                                    case BAR_LINE:
+                                          // Following must be enforced (ref MusicXML barline.dtd):
+                                          // If location is left, it should be the first element in the measure;
+                                          // if location is right, it should be the last element.
+                                          // implementation note: START_REPEAT already written by barlineLeft()
+                                          // any bars left should be "middle"
+                                          if (el->subtype() != START_REPEAT)
+                                                bar((BarLine*) el);
+                                          break;
+
+                                    default:
+                                          printf("unknown type %s\n", el->name());
+                                          break;
+                                    }
+                              dh.handleElement(this, el, sstaff, false);
+                              }
+                        attr.stop(xml);
+                        if (!((st + 1) % VOICES)) {
+                              // sstaff may be 0, which causes a failed assertion (and abort)
+                              // in (*i)->staff(ssstaff - 1)
+                              // LVIFIX: find exact cause
+                              int ssstaff = sstaff > 0 ? sstaff : sstaff + 1;
+                              // printf("st=%d sstaff=%d ssstaff=%d\n", st, sstaff, ssstaff);
+                              dh.handleElements(this, part->staff(ssstaff - 1), m->tick(), m->tick() + m->tickLen(), sstaff);
+                              }
+                        }
+                  // move to end of measure (in case of incomplete last voice)
+                  moveToTick(m->tick() + m->tickLen());
+                  BarLine * b = m->barLine(score->staff(part));
+                  bar(b, volta, "right");
+                  xml.etag();
+                  }
+            xml.etag();
+            }
+
+      xml.etag();
+
+      return f.error() == QFile::NoError;
+      }
+
+//---------------------------------------------------------
+//   saveXml
+//    return false on error
+//---------------------------------------------------------
+
+bool Score::saveXml(const QString& name)
+      {
+      ExportMusicXml em(this);
+      return em.write(name);
+      }
+

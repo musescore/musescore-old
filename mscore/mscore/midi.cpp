@@ -638,7 +638,8 @@ static QString instrName(int type, int hbank, int lbank, int program)
 //   exportMidi
 //---------------------------------------------------------
 
-class ExportMidi : public SaveFile {
+class ExportMidi {
+      QFile f;
       Score* cs;
 
       void writeHeader();
@@ -646,18 +647,19 @@ class ExportMidi : public SaveFile {
    public:
       MidiFile mf;
 
-      ExportMidi(Score* s) : mf() { cs = s; }
-      virtual bool saver();
+      ExportMidi(Score* s) { cs = s; }
+      bool write(const QString& name);
       };
 
 //---------------------------------------------------------
 //   exportMidi
+//    return false on error
 //---------------------------------------------------------
 
-void MuseScore::exportMidi()
+bool Score::saveMidi(const QString& name)
       {
-      ExportMidi em(cs);
-      em.save(this, QString("."), QString(".mid"), tr("MuseScore: Export as Midi (SMF)"));
+      ExportMidi em(this);
+      return em.write(name);
       }
 
 //---------------------------------------------------------
@@ -788,13 +790,17 @@ void ExportMidi::writeHeader()
       }
 
 //---------------------------------------------------------
-//  saver
+//  write
 //    export midi file
-//    return true on error
+//    return false on error
 //---------------------------------------------------------
 
-bool ExportMidi::saver()
+bool ExportMidi::write(const QString& name)
       {
+      f.setFileName(name);
+      if (!f.open(QIODevice::WriteOnly))
+            return false;
+
       mf.setDivision(::division);
       mf.setFormat(1);
       MidiTrackList* tracks = mf.tracks();
@@ -910,7 +916,7 @@ bool ExportMidi::saver()
                   }
             ++partIdx;
             }
-      return mf.write(&f);
+      return !mf.write(&f);
       }
 
 //---------------------------------------------------------
@@ -923,26 +929,6 @@ class LoadMidi : public LoadFile {
       LoadMidi(Score*) : mf() {}
       virtual bool loader(QFile* f);
       };
-
-//---------------------------------------------------------
-//   importMidi
-//---------------------------------------------------------
-
-void MuseScore::importMidi()
-      {
-      QString fn = QFileDialog::getOpenFileName(
-         this, tr("MuseScore: Import Midi File"),
-         QString("."),
-         QString("Midi SMF Files (*.mid *.mid.gz *.mid.bz2);; All files (*)")
-         );
-      if (fn.isEmpty())
-            return;
-      Score* score = new Score();
-      score->read(fn);
-      score->setCreated(true);
-      appendScore(score);
-      tab->setCurrentIndex(scoreList.size() - 1);
-      }
 
 //---------------------------------------------------------
 //   importMidi

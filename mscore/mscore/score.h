@@ -372,6 +372,14 @@ class Score : public QObject {
       void convertMidi(MidiFile*);
       bool importMidi(const QString& name);
       bool importMuseData(const QString& name);
+
+      void print(QPrinter* printer);
+      bool saveXml(const QString& name);
+      bool saveMidi(const QString& name);
+      bool savePdf(const QString& name);
+      bool savePs(const QString& name);
+      bool saveSvg(const QString& name);
+
       ChordRest* getSelectedChordRest();
       int pos();
       Measure* tick2measure(int tick) const;

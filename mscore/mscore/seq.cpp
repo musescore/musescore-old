@@ -65,6 +65,7 @@ Seq* seq;
 Seq::Seq()
       {
       running  = false;
+      playlistChanged = false;
       cs = 0;
 
 #ifndef __MINGW32__
@@ -135,6 +136,7 @@ void Seq::setScore(Score* s)
                   usleep(100000);
             }
       cs = s;
+      playlistChanged = true;
       connect(cs, SIGNAL(selectionChanged(int)), SLOT(selectionChanged(int)));
       if (audio)
             setPos(0);
@@ -270,7 +272,7 @@ void Seq::rewindStart()
 
 void Seq::start()
       {
-      if (events.empty() || cs->playlistDirty()) {
+      if (events.empty() || cs->playlistDirty() || playlistChanged) {
             collectEvents();
             setPos(playTick);
             }

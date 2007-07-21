@@ -1012,51 +1012,6 @@ Shortcut MuseScore::sc[] = {
          ),
 
       Shortcut(
-         "export-midi",
-         QT_TR_NOOP("Export Midi"),
-         0,
-         Qt::WindowShortcut,
-         QT_TR_NOOP("Export Midi"),
-         QT_TR_NOOP("Export Midi"),
-         &fileSaveIcon
-         ),
-      Shortcut(
-         "export-xml",
-         QT_TR_NOOP("Export MusicXML"),
-         0,
-         Qt::WindowShortcut,
-         QT_TR_NOOP("Export MusicXML"),
-         QT_TR_NOOP("Export MusicXML"),
-         &fileSaveIcon
-         ),
-      Shortcut(
-         "import-midi",
-         QT_TR_NOOP("Import Midi"),
-         0,
-         Qt::WindowShortcut,
-         QT_TR_NOOP("Import Midi"),
-         QT_TR_NOOP("Import Midi"),
-         &fileOpenIcon
-         ),
-      Shortcut(
-         "import-xml",
-         QT_TR_NOOP("Import MusicXML"),
-         0,
-         Qt::WindowShortcut,
-         QT_TR_NOOP("Import MusicXML"),
-         QT_TR_NOOP("Import MusicXML"),
-         &fileOpenIcon
-         ),
-      Shortcut(
-         "import-muse",
-         QT_TR_NOOP("Import MuseData"),
-         0,
-         Qt::WindowShortcut,
-         QT_TR_NOOP("Import MuseData"),
-         QT_TR_NOOP("Import MuseData"),
-         &fileOpenIcon
-         ),
-      Shortcut(
          "quit",
          QT_TR_NOOP("Quit"),
          Qt::CTRL + Qt::Key_Q,

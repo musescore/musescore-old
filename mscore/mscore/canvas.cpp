@@ -253,7 +253,6 @@ void Canvas::mousePressEvent(QMouseEvent* ev)
       bool b1 = ev->button() == Qt::LeftButton;
       bool b3 = ev->button() == Qt::RightButton;
 
-      keyState = ev->modifiers();
       if (state == MAG) {
             if (b1)
                   mscore->incMag();
@@ -262,16 +261,16 @@ void Canvas::mousePressEvent(QMouseEvent* ev)
             return;
             }
 
-      buttonState = ev->button();
-      startMove   = imatrix.map(QPointF(ev->pos()));
-
+      keyState         = ev->modifiers();
+      buttonState      = ev->button();
+      startMove        = imatrix.map(QPointF(ev->pos()));
       Element* element = elementAt(startMove);
+
       _score->setDragObject(element);
 
       if (seq && mscore->playEnabled() && element && element->type() == NOTE) {
             Note* note = (Note*)element;
-            Staff* staff = note->staff();
-            seq->startNote(staff->midiChannel(), note->pitch(), 60);
+            seq->startNote(note->staff()->midiChannel(), note->pitch(), 60);
             }
 
       //-----------------------------------------
@@ -280,22 +279,19 @@ void Canvas::mousePressEvent(QMouseEvent* ev)
 
       if (b3) {
             if (element) {
-//                  if (!element->selected() && _score->sel->state != SEL_STAFF && _score->sel->state != SEL_SYSTEM) {
-                        ElementType type = element->type();
-                        _score->dragStaff = 0;  // WS
-                        if (type == MEASURE) {
-                              _score->dragSystem = (System*)(element->parent());
-                              _score->dragStaff  = getStaff(_score->dragSystem, startMove);
-                              }
-                        // As findSelectableElement may return a measure
-                        // when clicked "a little bit" above or below it, getStaff
-                        // may not find the staff and return -1, which would cause
-                        // select() to crash
-                        if (_score->dragStaff >= 0)
-                              _score->select(element, keyState, _score->dragStaff);
-//                        else
-                              _score->setDragObject(0);
-//                        }
+                  ElementType type = element->type();
+                  _score->dragStaff = 0;  // WS
+                  if (type == MEASURE) {
+                        _score->dragSystem = (System*)(element->parent());
+                        _score->dragStaff  = getStaff(_score->dragSystem, startMove);
+                        }
+                  // As findSelectableElement may return a measure
+                  // when clicked "a little bit" above or below it, getStaff
+                  // may not find the staff and return -1, which would cause
+                  // select() to crash
+                  if (_score->dragStaff >= 0)
+                        _score->select(element, keyState, _score->dragStaff);
+                  _score->setDragObject(0);
                   seq->stopNotes(); // stop now because we dont get a mouseRelease event
                   objectPopup(ev->globalPos(), element);
                   }
@@ -308,15 +304,6 @@ void Canvas::mousePressEvent(QMouseEvent* ev)
       if (state != EDIT)
             _score->startCmd();
       switch (state) {
-            case NOTE_ENTRY:
-                  if (keyState & Qt::ControlModifier) {
-                        dragCanvasState = true;
-                        setCursor(Qt::SizeAllCursor);
-                        }
-                  else
-                        _score->putNote(startMove, keyState & Qt::ShiftModifier);
-                  break;
-
             case NORMAL:
                   //-----------------------------------------
                   //  select operation
@@ -339,9 +326,22 @@ void Canvas::mousePressEvent(QMouseEvent* ev)
                               _score->setDragObject(0);
                         }
                   else {
+                        _score->select(0, 0, 0);
+                        // shift+drag selects "lasso mode"
+                        if (!(keyState & Qt::ShiftModifier)) {
+                              dragCanvasState = true;
+                              setCursor(Qt::SizeAllCursor);
+                              }
+                        }
+                  break;
+
+            case NOTE_ENTRY:
+                  if (keyState & Qt::ControlModifier) {
                         dragCanvasState = true;
                         setCursor(Qt::SizeAllCursor);
                         }
+                  else
+                        _score->putNote(startMove, keyState & Qt::ShiftModifier);
                   break;
 
             case EDIT:
@@ -435,13 +435,7 @@ void Canvas::mouseMoveEvent1(QMouseEvent* ev)
             return;
             }
 
-      QPointF p = imatrix.map(QPointF(ev->pos()));
-      if (state == NOTE_ENTRY) {
-            _score->addRefresh(shadowNote->abbox());
-            setShadowNote(p);
-            _score->addRefresh(shadowNote->abbox());
-            }
-
+      QPointF p     = imatrix.map(QPointF(ev->pos()));
       QPointF delta = p - startMove;
 
       switch (state) {
@@ -452,11 +446,11 @@ void Canvas::mouseMoveEvent1(QMouseEvent* ev)
                         return;
                   {
                   Element* de = _score->dragObject();
+printf("drag %s %x\n", de ? de->name() : "nix", keyState);
                   if (de && keyState == Qt::ShiftModifier) {
                         QDrag* drag = new QDrag(this);
                         QMimeData* mimeData = new QMimeData;
                         QPointF rpos(startMove - de->abbox().topLeft());
-// printf("drag %s: diff %f %f\n", de->name(), rpos.x(), rpos.y());
                         mimeData->setData(mimeSymbolFormat, de->mimeData(rpos));
                         drag->setMimeData(mimeData);
                         _score->endCmd(true);
@@ -516,6 +510,11 @@ void Canvas::mouseMoveEvent1(QMouseEvent* ev)
                   break;
 
             case NOTE_ENTRY:
+                  _score->addRefresh(shadowNote->abbox());
+                  setShadowNote(p);
+                  _score->addRefresh(shadowNote->abbox());
+                  break;
+
             case MAG:
                   break;
             }

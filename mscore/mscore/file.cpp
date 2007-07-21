@@ -159,43 +159,6 @@ bool LoadFile::load(const QString& name)
       }
 
 //---------------------------------------------------------
-//   SaveFile
-//---------------------------------------------------------
-
-bool SaveFile::save(QWidget* p, const QString& base, const QString& ext,
-   const QString& caption)
-      {
-      parent = p;
-      QString pattern("*");
-      pattern += ext;
-      _name = QFileDialog::getSaveFileName(parent, caption, base, pattern);
-
-      if (_name.isEmpty())
-            return true;
-      QFileInfo info(_name);
-
-      if (info.completeSuffix() == QString("")) {
-            _name += ext;
-            info.setFile(_name);
-            }
-      f.setFileName(_name);
-      if (!f.open(QIODevice::WriteOnly)) {
-            QString s = QWidget::tr("Open File\n") + _name + QWidget::tr("\nfailed: ")
-               + QString(strerror(errno));
-            QMessageBox::critical(parent, QWidget::tr("MuseScore: Open File"), s);
-            return true;
-            }
-      saver();
-      bool notOk = f.error() != QFile::NoError;
-      if (notOk) {
-            QString s = QString("Write failed: ") + QString(strerror(errno));
-            QMessageBox::critical(parent, QWidget::tr("MuseScore: Write"), s);
-            }
-      f.close();
-      return notOk;
-      }
-
-//---------------------------------------------------------
 //   checkDirty
 //    if dirty, save score
 //    return true on abort
@@ -244,7 +207,12 @@ void MuseScore::loadFile()
       QString fn = QFileDialog::getOpenFileName(
          this, tr("MuseScore: Load Score"),
          QString("."),
-         QString("Score files (*.msc);; MusicXml files (*.xml);; All files (*)")
+         tr("MuseScore Files (*.msc);;"
+            "MusicXml Files (*.xml);;"
+            "Standard Midi File Files (*.mid);;"
+            "Muse Data Files (*.md);;"
+            "All files (*)"
+            )
          );
       if (fn.isEmpty())
             return;
@@ -345,15 +313,64 @@ bool Score::saveFile()
 
 bool MuseScore::saveAs()
       {
+      if (!cs)
+            return false;
+      QString selectedFilter;
+      QStringList fl;
+
+      fl.append(tr("MuseScore Format (*.msc)"));
+      fl.append(tr("MusicXml Format (*.xml)"));
+      fl.append(tr("Standard Midi File (*.mid)"));
+      fl.append(tr("PDF File (*.pdf)"));
+      fl.append(tr("Postscript File (*.ps)"));
+      fl.append(tr("Scalable Vector Graphic (*.svg)"));
+
       QString fn = QFileDialog::getSaveFileName(
          this, tr("MuseScore: Save As"),
-         QString("."),
-         QString("*.msc")
+         ".",
+         fl.join(";;"),
+         &selectedFilter
          );
       if (fn.isEmpty())
             return false;
-      QFileInfo fi(fn);
-      return saveFile(fi);
+      if (selectedFilter == fl[0]) {
+            // save as mscore *.msc file
+            if (!fn.endsWith(".msc"))
+                  fn.append(".msc");
+            QFileInfo fi(fn);
+            return saveFile(fi);
+            }
+      if (selectedFilter == fl[1]) {
+            // save as MusicXML *.xml file
+            if (!fn.endsWith(".xml"))
+                  fn.append(".xml");
+            return cs->saveXml(fn);
+            }
+      if (selectedFilter == fl[2]) {
+            // save as midi file *.mid
+            if (!fn.endsWith(".mid"))
+                  fn.append(".mid");
+            return cs->saveMidi(fn);
+            }
+      if (selectedFilter == fl[3]) {
+            // save as pdf file *.pdf
+            if (!fn.endsWith(".pdf"))
+                  fn.append(".pdf");
+            return cs->savePdf(fn);
+            }
+      if (selectedFilter == fl[4]) {
+            // save as postscript file *.ps
+            if (!fn.endsWith(".ps"))
+                  fn.append(".ps");
+            return cs->savePs(fn);
+            }
+      if (selectedFilter == fl[5]) {
+            // save as svg file *.svg
+            if (!fn.endsWith(".svg"))
+                  fn.append(".svg");
+            return cs->saveSvg(fn);
+            }
+      return false;
       }
 
 //---------------------------------------------------------
@@ -527,27 +544,22 @@ bool LoadStyle::loader(QFile* qf)
 //   saveStyle
 //---------------------------------------------------------
 
-class SaveStyle : public SaveFile {
-   public:
-      virtual bool saver();
-      };
-
 void MuseScore::saveStyle()
       {
-      SaveStyle ls;
-      ls.save(this, QString("."), QString(".mss"), tr("MuseScore: Save Style"));
-      }
+      QString name = QFileDialog::getSaveFileName(
+         this, tr("MuseScore: Save Style"),
+         ".",
+         tr("MuseScore style file (*.mss)")
+         );
+      if (name.isEmpty())
+            return;
 
-bool SaveStyle::saver()
-      {
+      QFile f(name);
       Xml xml(&f);
       xml.header();
       xml.stag("museScore version=\"1.0\"");
-
       ::saveStyle(xml);
-
       xml.etag();
-      return false;
       }
 
 //---------------------------------------------------------
@@ -807,6 +819,132 @@ void Score::printFile()
       QPrintDialog pd(&printer, 0);
       if (!pd.exec())
             return;
+      print(&printer);
+      }
+
+//---------------------------------------------------------
+//   print
+//---------------------------------------------------------
+
+void Score::print(QPrinter* printer)
+      {
+      _printing = true;
+      QPainter p(printer);
+      p.setRenderHint(QPainter::Antialiasing, true);
+      p.setRenderHint(QPainter::TextAntialiasing, true);
+
+      qreal oldSpatium = _spatium;
+      double oldDPI = DPI;
+      DPI  = printer->logicalDpiX();          // drawing resolution
+      DPMM = DPI / INCH;                     // dots/mm
+      setSpatium(_spatium * DPI / oldDPI);
+      QPaintDevice* oldPaintDevice = mainLayout()->paintDevice();
+      mainLayout()->setPaintDevice(printer);
+      doLayout();
+
+      ElementList el;
+      for (ciPage ip = _layout->pages()->begin();;) {
+            Page* page = *ip;
+            el.clear();
+            page->collectElements(el);
+            foreach(System* system, *page->systems()) {
+                  foreach(Measure* m, system->measures()) {
+                        m->collectElements(el);
+                        }
+                  }
+            for (int i = 0; i < el.size(); ++i) {
+                  Element* e = el.at(i);
+                  if (!e->visible())
+                        continue;
+                  QPointF ap(e->canvasPos() - page->pos());
+                  p.translate(ap);
+                  p.setPen(QPen(e->color()));
+                  e->draw(p);
+                  //
+                  // HACK alert:
+                  //
+                  if (e->type() == TEXT) {
+                        Text* t = (Text*)e;
+                        t->getDoc()->documentLayout()->setPaintDevice(oldPaintDevice);
+                        }
+                  p.translate(-ap);
+                  }
+            ++ip;
+            if (ip == _layout->pages()->end())
+                  break;
+            printer->newPage();
+            }
+      _printing = false;
+      DPI  = oldDPI;
+      DPMM = DPI / INCH;                     // dots/mm
+      mainLayout()->setPaintDevice(oldPaintDevice);
+      setSpatium(oldSpatium);
+      layout();
+      p.end();
+      }
+
+//---------------------------------------------------------
+//   savePdf
+//---------------------------------------------------------
+
+bool Score::savePdf(const QString& name)
+      {
+      //
+      // HighResolution gives higher output quality
+      // but layout may be slightly different
+
+      QPrinter printer(QPrinter::HighResolution);
+      // QPrinter printer;
+      printer.setPageSize(paperSizes[pageFormat()->size].qtsize);
+      printer.setOrientation(pageFormat()->landscape ? QPrinter::Landscape : QPrinter::Portrait);
+      printer.setCreator("MuseScore Version: " VERSION);
+      printer.setFullPage(true);
+      printer.setColorMode(QPrinter::Color);
+      printer.setDocName(projectName());
+      printer.setDoubleSidedPrinting(pageFormat()->twosided);
+      printer.setOutputFormat(QPrinter::PdfFormat);
+      printer.setOutputFileName(name);
+
+      print(&printer);
+      return true;
+      }
+
+//---------------------------------------------------------
+//   savePs
+//---------------------------------------------------------
+
+bool Score::savePs(const QString& name)
+      {
+      //
+      // HighResolution gives higher output quality
+      // but layout may be slightly different
+
+      QPrinter printer(QPrinter::HighResolution);
+      // QPrinter printer;
+      printer.setPageSize(paperSizes[pageFormat()->size].qtsize);
+      printer.setOrientation(pageFormat()->landscape ? QPrinter::Landscape : QPrinter::Portrait);
+      printer.setCreator("MuseScore Version: " VERSION);
+      printer.setFullPage(true);
+      printer.setColorMode(QPrinter::Color);
+      printer.setDocName(projectName());
+      printer.setDoubleSidedPrinting(pageFormat()->twosided);
+      printer.setOutputFormat(QPrinter::PostScriptFormat);
+      printer.setOutputFileName(name);
+
+      print(&printer);
+      return true;
+      }
+
+//---------------------------------------------------------
+//   saveSvg
+//---------------------------------------------------------
+
+bool Score::saveSvg(const QString& name)
+      {
+      QSvgGenerator printer;
+      printer.setFileName(name);
+      printer.setResolution(1200);
+      printer.setSize(QSize(10000,10000));
 
       _printing = true;
       QPainter p(&printer);
@@ -852,7 +990,7 @@ void Score::printFile()
             ++ip;
             if (ip == _layout->pages()->end())
                   break;
-            printer.newPage();
+            break;
             }
       _printing = false;
       DPI  = oldDPI;
@@ -861,5 +999,5 @@ void Score::printFile()
       setSpatium(oldSpatium);
       layout();
       p.end();
+      return true;
       }
-
