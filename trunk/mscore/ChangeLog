@@ -1,4 +1,5 @@
 21.7.7 (ws)
+      - when switching score, sequencer was not always updated
       - remove export and import from File menu. Export is handled in
         "Save As" and import in "Load". Added export formats PostScript, PDF
         and SVG to "Save As"
