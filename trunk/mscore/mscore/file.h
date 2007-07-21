@@ -42,26 +42,5 @@ class LoadFile {
       QString name() const { return _name; }
       };
 
-//---------------------------------------------------------
-//   SaveFile
-//---------------------------------------------------------
-
-class SaveFile {
-      bool popenFlag;
-      QString _name;
-
-   protected:
-      QWidget* parent;
-      QFile f;
-
-   public:
-      SaveFile() {}
-      virtual ~SaveFile() {}
-      virtual bool saver() = 0;
-      bool save(QWidget* parent, const QString& base, const QString& ext,
-         const QString& caption);
-      QString name() const { return _name; }
-      };
-
 #endif
 

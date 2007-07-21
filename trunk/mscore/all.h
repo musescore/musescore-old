@@ -79,5 +79,6 @@
 #include <QtGui/QStylePainter>
 #include <QtGui/QStyleOptionButton>
 #include <QtSvg/QSvgRenderer>
+#include <QtSvg/QSvgGenerator>
 #endif
 
