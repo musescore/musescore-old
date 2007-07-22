@@ -223,6 +223,7 @@ newBeam:
                                           beam->add(a1);
                                           cr->setBeam(beam);
                                           beam->add(cr);
+                                          a1 = 0;
                                           }
                                     }
                               }

@@ -850,6 +850,7 @@ ShowClefWidget::ShowClefWidget()
 
       QHBoxLayout* hb = new QHBoxLayout;
       idx = new QSpinBox(this);
+      idx->setRange(0, 1000000);
       hb->addWidget(new QLabel(tr("Clef Type:"), this));
       hb->addWidget(idx);
       hb->addStretch(100);

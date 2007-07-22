@@ -301,7 +301,7 @@ bool Element::readProperties(QDomElement e)
       int i = val.toInt();
 
       if (tag == "tick") {
-            _time.setTick(score()->fileDivision(i));
+            setTick(score()->fileDivision(i));
             score()->curTick = _time.tick();
             }
       else if (tag == "subtype") {
