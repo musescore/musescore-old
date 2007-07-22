@@ -323,6 +323,7 @@ bool MuseScore::saveAs()
       fl.append(tr("Standard Midi File (*.mid)"));
       fl.append(tr("PDF File (*.pdf)"));
       fl.append(tr("Postscript File (*.ps)"));
+      fl.append(tr("PNG Bitmap Graphic (*.png)"));
       fl.append(tr("Scalable Vector Graphic (*.svg)"));
 
       QString fn = QFileDialog::getSaveFileName(
@@ -365,6 +366,12 @@ bool MuseScore::saveAs()
             return cs->savePs(fn);
             }
       if (selectedFilter == fl[5]) {
+            // save as png file *.png
+            if (!fn.endsWith(".png"))
+                  fn.append(".png");
+            return cs->savePng(fn);
+            }
+      if (selectedFilter == fl[6]) {
             // save as svg file *.svg
             if (!fn.endsWith(".svg"))
                   fn.append(".svg");
@@ -941,28 +948,28 @@ bool Score::savePs(const QString& name)
 
 bool Score::saveSvg(const QString& name)
       {
+      QRectF r = canvas()->lassoRect();
+      double x = r.x();
+      double y = r.y();
+      double w = r.width();
+      double h = r.height();
+
       QSvgGenerator printer;
       printer.setFileName(name);
-      printer.setResolution(1200);
-      printer.setSize(QSize(10000,10000));
+      printer.setSize(QSize(lrint(w), lrint(h)));
 
       _printing = true;
       QPainter p(&printer);
       p.setRenderHint(QPainter::Antialiasing, true);
       p.setRenderHint(QPainter::TextAntialiasing, true);
 
-      qreal oldSpatium = _spatium;
-      double oldDPI = DPI;
-      DPI  = printer.logicalDpiX();          // drawing resolution
-      DPMM = DPI / INCH;                     // dots/mm
-      setSpatium(_spatium * DPI / oldDPI);
-      QPaintDevice* oldPaintDevice = mainLayout()->paintDevice();
-      mainLayout()->setPaintDevice(&printer);
-      doLayout();
+      p.setClipRect(QRect(0, 0, lrint(w), lrint(h)));
+      p.setClipping(true);
+
+      QPointF offset(x, y);
 
       ElementList el;
-      for (ciPage ip = _layout->pages()->begin();;) {
-            Page* page = *ip;
+      foreach(Page* page, *_layout->pages()) {
             el.clear();
             page->collectElements(el);
             foreach(System* system, *page->systems()) {
@@ -974,30 +981,68 @@ bool Score::saveSvg(const QString& name)
                   Element* e = el.at(i);
                   if (!e->visible())
                         continue;
-                  QPointF ap(e->canvasPos() - page->pos());
+                  QPointF ap(e->canvasPos() - offset);
                   p.translate(ap);
                   p.setPen(QPen(e->color()));
                   e->draw(p);
-                  //
-                  // HACK alert:
-                  //
-                  if (e->type() == TEXT) {
-                        Text* t = (Text*)e;
-                        t->getDoc()->documentLayout()->setPaintDevice(oldPaintDevice);
-                        }
                   p.translate(-ap);
                   }
-            ++ip;
-            if (ip == _layout->pages()->end())
-                  break;
-            break;
             }
+
       _printing = false;
-      DPI  = oldDPI;
-      DPMM = DPI / INCH;                     // dots/mm
-      mainLayout()->setPaintDevice(oldPaintDevice);
-      setSpatium(oldSpatium);
-      layout();
       p.end();
       return true;
       }
+
+//---------------------------------------------------------
+//   savePng
+//---------------------------------------------------------
+
+bool Score::savePng(const QString& name)
+      {
+      QRectF r = canvas()->lassoRect();
+      double x = r.x();
+      double y = r.y();
+      double w = r.width();
+      double h = r.height();
+
+      QImage printer(lrint(w), lrint(h), QImage::Format_ARGB32_Premultiplied);
+      // QImage printer(lrint(w), lrint(h), QImage::Format_RGB32);
+      printer.fill(-1);
+
+      _printing = true;
+      QPainter p(&printer);
+      p.setRenderHint(QPainter::Antialiasing, true);
+      p.setRenderHint(QPainter::TextAntialiasing, true);
+
+      p.setClipRect(QRect(0, 0, lrint(w), lrint(h)));
+      p.setClipping(true);
+
+      QPointF offset(x, y);
+
+      ElementList el;
+      foreach(Page* page, *_layout->pages()) {
+            el.clear();
+            page->collectElements(el);
+            foreach(System* system, *page->systems()) {
+                  foreach(Measure* m, system->measures()) {
+                        m->collectElements(el);
+                        }
+                  }
+            for (int i = 0; i < el.size(); ++i) {
+                  Element* e = el.at(i);
+                  if (!e->visible())
+                        continue;
+                  QPointF ap(e->canvasPos() - offset);
+                  p.translate(ap);
+                  p.setPen(QPen(e->color()));
+                  e->draw(p);
+                  p.translate(-ap);
+                  }
+            }
+      _printing = false;
+      p.end();
+
+      return printer.save(name, "png");
+      }
+

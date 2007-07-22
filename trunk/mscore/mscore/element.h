@@ -374,7 +374,7 @@ class VSpacer : public Element {
 class Lasso : public Element {
    public:
       Lasso(Score*);
-      virtual Lasso* clone() const { return new Lasso(*this); }
+      virtual Lasso* clone() const       { return new Lasso(*this); }
       virtual ElementType type() const   { return LASSO; }
       virtual void draw(QPainter&);
       };

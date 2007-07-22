@@ -1,3 +1,5 @@
+22.7.7 (ws)
+      - added *.png export format
 21.7.7 (ws)
       - when switching score, sequencer was not always updated
       - remove export and import from File menu. Export is handled in
