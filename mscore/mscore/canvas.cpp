@@ -446,7 +446,6 @@ void Canvas::mouseMoveEvent1(QMouseEvent* ev)
                         return;
                   {
                   Element* de = _score->dragObject();
-printf("drag %s %x\n", de ? de->name() : "nix", keyState);
                   if (de && keyState == Qt::ShiftModifier) {
                         QDrag* drag = new QDrag(this);
                         QMimeData* mimeData = new QMimeData;
@@ -487,6 +486,7 @@ printf("drag %s %x\n", de ? de->name() : "nix", keyState);
                   QRectF r;
                   r.setCoords(startMove.x(), startMove.y(), p.x(), p.y());
                   lasso->setbbox(r);
+                  _lassoRect = lasso->abbox().normalized();
                   }
                   _score->addRefresh(lasso->abbox());
                   lassoSelect();
