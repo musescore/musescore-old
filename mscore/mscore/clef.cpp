@@ -80,7 +80,7 @@ Clef::Clef(Score* s, int i)
 void Clef::setSubtype(int st)
       {
       Element::setSubtype(st);
-      int val     = st & 0x7ff;
+      int val     = st & (~clefSmallBit);
       bool _small = st & clefSmallBit;
       double yoff = 0.0;
       double xoff = 0.0;

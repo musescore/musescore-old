@@ -174,9 +174,8 @@
 %----------------------------------------------------------
 
 \chapter{Einführung}
-   \section{Was ist \M?}
       \M\ ist ein WYSIWYG (What You See Is What You Get)
-      Programm zum Setzen und Drucken von Noten.
+      Musiknotations-Programm.
 
       \M\ ist ''Open Source'' Software und wird unter der GNU General
       Public License (GPL) veröffentlicht (siehe Anhang).
@@ -208,8 +207,6 @@ http://de.wikipedia.org/wiki/Adeste_Fideles
       \blank
       \externalfigure[adeste][scale=500]
       \blank
-
-      \subsection{Programmstart}
 
       Nach dem ersten Programmstart zeigt \M\ ein Demofile:
 
@@ -442,8 +439,8 @@ c Shift+a
             auf dem Canvas verschieben.
       \item durch tippen von \type{Strg+M} können weitere leere Takte
             angehängt werden
-      \item mit der Lupe aus der Werkzeugleiste läßt sich die Vergrößerung
-           des  Notenblattes verändern
+      \item \type{Strg+Scrollrad} wird die Notendarstellung vergrößert
+            bzw. verkleinert.
    \stopitemize
 
 \subsection{Drucken}
@@ -484,6 +481,7 @@ mscore <Optionen> <Dateiname>
       \index{Debug-Mode}
 
       Es gibt folgende Optionen:
+
             \startnarrower[left]
             \starttabulate
             \NC -v \NC gibt die aktuelle Versionsnummer von \M\ aus\NC\NR
@@ -491,7 +489,7 @@ mscore <Optionen> <Dateiname>
             \NC -s \NC startet \M\ ohne integrierten Software Synthesizer\NC\NR
             \NC -m \NC startete \M\ ohne MIDI Input Support\NC\NR
             \NC -L \NC startete \M\ im Layout-Debug Mode\NC\NR
-            \NC -i \NC alle Midi Input Events werden auf der Konsole protokolliert
+            \NC -i \NC alle Midi Input Events werden auf der Konsole protokolliert\NC\NR
             \stoptabulate
             \stopnarrower
 
@@ -506,6 +504,7 @@ mscore <Optionen> <Dateiname>
             \NC *.mss \NC \M\ Style\NC\NR
             \NC *.xml \NC MusicXML Datei\NC\NR
             \NC *.mid \NC MIDI--Datei\NC\NR
+            \NC *.md  \NC MuseData--Datei\NC\NR
             \stoptabulate
             \stopnarrower
       \index{Dateitypen}
@@ -544,25 +543,23 @@ mscore <Optionen> <Dateiname>
             näch\-stes müssen Instrumente und dann Leertakte
             erzeugt werden.\par
       \Opt{neue Partitur aus Template}\par
-      \Opt{Öffnen} öffnet eine Partitur. Es können gleichzeitig mehrere
-          Partituren geöffnet sein. Die aktuelle Partitur kann über
-          Karteireiter angewählt werden.\par
+      \Opt{Öffnen} zeigt einen Dateiauswahldialog, der es erlaubt, eine
+          weitere Partitur zu öffnen. Auch können verschiedene Dateiformate
+          importiert d.h. in eine \M\ Partitur umgewandelt werden.\index{Import}
+          Es können gleichzeitig mehrere Partituren geöffnet sein, die dann
+          über Karteireiter auswählbar sind.\par
       \Opt{Letzte Partituren} zeigt eine Liste der zuletzt bearbeiteten
         Partituren. Ein Click auf eine Partitur öffnet sie zur
         Bearbeitung.\par
       \Opt{Sichern} schreibt die aktuelle Partitur auf die
         Festplatte\par
       \Opt{Sichern unter} schreibt die aktuelle Partitur unter einem
-        zu wählenden Namen auf die Festplatte\par
+        zu wählenden Namen auf die Festplatte. Es erscheint ein Dateiauswahldialog
+        der es auch erlaubt, die Partitur in verschiedene Formate
+        zu exportieren.\index{Export}\par
       \Opt{Schließen} schließt die aktuelle Partitur und entfernt den
-        entsprechenden Karteireiter.\par
-      \Opt{Export Midi} Exportiert die aktuelle Partitur als
-        MIDI-Datei. \index{Midi-Datei}\par
-      \Opt{Export MusicXML} Exportiert die aktuelle Partitur als
-        MusicXML Datei. \index{MusicXML}\par
-      \Opt{Import Midi} Import eine MIDI-Datei und versucht, sie
-        als Partitur darzustellen.\par
-      \Opt{Import MusicXML} Importiert eine MusicXML Datei.\par
+        entsprechenden Karteireiter. ''Schließen'' ist nur aktiv, wenn
+        mehrere Partituren geöffnet sind.\par
       \Opt{Drucken (Strg+P)} druckt die aktuelle Partitur.
         \index{Drucken}\par
       \Opt{Quit} Beendet \M.\par
@@ -578,13 +575,15 @@ mscore <Optionen> <Dateiname>
       \startpacked
       \Opt{Undo} der letzte Bearbeitungsschritt wird rück\-gäng\-ig
                   gemacht. Es können beliebig viele Bearbeitungsschritte
-                  rückgängig gemacht werden.
+                  rück\-gängig gemacht werden.
 
-      \Opt{Redo}  ''Undo'' den letzte Undo Schritt.
+      \Opt{Redo}  Der Zustand vor dem letzten ''Undo'' wird wiederhergestellt.
 
-      \Opt{Cut}
+      \Opt{Cut}   Verschiebt die aktuell ausgewählten Elemente in die
+                  Zwischenablage.
 
-      \Opt{Copy}
+      \Opt{Copy}  Kopiert die aktuell ausgewählten Elemnte in die
+                  Zwischenablage.
 
       \Opt{Paste}
 

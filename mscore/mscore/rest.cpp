@@ -195,13 +195,11 @@ void Rest::read(QDomElement e)
             QString tag(e.tagName());
             QString val(e.text());
             int i = val.toInt();
-            if (tag == "len")
+            if (tag == "len")       // obsolete ?!
                   setTickLen(i);
             else if (tag == "move")
                   _move = i;
-            else if (ChordRest::readProperties(e))
-                  ;
-            else
+            else if (!ChordRest::readProperties(e))
                   domError(e);
             }
       }
