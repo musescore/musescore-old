@@ -338,10 +338,10 @@ void Score::processUndoOp(UndoOp* i, bool undo)
                   Note* note = (Note*)(i->obj);
                   int pitch  = note->pitch();
                   int tpc    = note->tpc();
-                  int acc    = note->accidentalIdx();
+                  int acc    = note->accidentalSubtype();
                   note->setPitch(i->val1);
                   note->setTpc(i->val2);
-                  note->setAccidental(i->val3);
+                  note->setAccidentalSubtype(i->val3);
                   i->val1 = pitch;
                   i->val2 = tpc;
                   i->val3 = acc;

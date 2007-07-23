@@ -227,6 +227,10 @@ class ShowNoteWidget : public ShowElementBase {
       void tieForClicked();
       void tieBackClicked();
       void accidentalClicked();
+      void tpcChanged(int);
+
+   signals:
+      void scoreChanged();
 
    public:
       ShowNoteWidget();

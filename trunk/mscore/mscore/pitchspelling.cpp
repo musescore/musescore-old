@@ -26,6 +26,8 @@
 #include "note.h"
 #include "key.h"
 #include "pitchspelling.h"
+#include "staff.h"
+#include "chord.h"
 
 //---------------------------------------------------------
 //   line2tpc
@@ -43,10 +45,13 @@ int line2tpc(int line, int prefix)
             2,  9, 16, 23, 30,  // D
             4, 11, 18, 25, 32,  // E
            -1,  6, 13, 20, 27,  // F
-            1,  8, 15, 22, 39,  // G
+            1,  8, 15, 22, 29,  // G
             3, 10, 17, 24, 31,  // A
             5, 12, 19, 26, 33,  // B
             };
+      int i = line * 5 + 2 + prefix;
+      if (i < 0 || (i >= int(sizeof(spellings)/sizeof(*spellings))))
+            abort();
       return spellings[line * 5 + 2 + prefix];
       };
 
@@ -56,7 +61,9 @@ int line2tpc(int line, int prefix)
 
 int tpc2pitch(int tpc)
       {
-      static int pitches[35] = {
+      tpc += 1;
+
+      static int pitches[] = {
 //line:     F   C   G   D   A   E   B
             3, -2,  5,  0,  7,  2,  9,     // bb
             4, -1,  6,  1,  8,  3, 10,     // b
@@ -64,7 +71,11 @@ int tpc2pitch(int tpc)
             6,  1,  8,  3, 10,  5, 12,     // #
             7,  2,  9,  4, 11,  6, 13      // ##
             };
-      return pitches[tpc+1];
+      if (tpc < 0 || tpc >= int(sizeof(pitches)/sizeof(*pitches))) {
+            printf("tpc %d >= %d\n", tpc, int(sizeof(pitches)/sizeof(*pitches)));
+            abort();
+            }
+      return pitches[tpc];
       }
 
 //---------------------------------------------------------
@@ -102,6 +113,7 @@ QString tpc2name(int tpc)
             case -1: s += "b";  break;
             case  1: s += "#";  break;
             case  2: s += "##"; break;
+            default: s += "??"; break;
             }
       return s;
       }
@@ -136,7 +148,7 @@ static const int tab2[24] = {
       20,  8,  // 66  F#  Gb
       27, 15,  // 67  F## G
       22, 10,  // 68  G#  Ab
-      39, 17,  // 69  G## A
+      29, 17,  // 69  G## A
       24, 12,  // 70  A#  Bb
       31,  7,  // 71  A## Cb
       };
@@ -152,7 +164,31 @@ int intervalPenalty[13] = {
 
 static const bool enharmonicSpelling[15][34] = {
       {
-  //  f  c  g  d  a  e  b
+//Ces f  c  g  d  a  e  b
+         1, 1, 1, 1, 1, 1, // bb
+      0, 0, 0, 0, 0, 0, 0, // b
+      1, 1, 1, 1, 1, 1, 1,
+      1, 1, 1, 1, 1, 1, 1, // #
+      1, 1, 1, 1, 1, 1, 1  // ##
+      },
+      {
+//Ges f  c  g  d  a  e  b
+         1, 1, 1, 1, 1, 1, // bb
+      1, 0, 0, 0, 0, 0, 0, // b
+      0, 1, 1, 1, 1, 1, 1,
+      1, 1, 1, 1, 1, 1, 1, // #
+      1, 1, 1, 1, 1, 1, 1  // ##
+      },
+      {
+//Des f  c  g  d  a  e  b
+         1, 1, 1, 1, 1, 1, // bb
+      1, 1, 0, 0, 0, 0, 0, // b
+      0, 0, 1, 1, 1, 1, 1,
+      1, 1, 1, 1, 1, 1, 1, // #
+      1, 1, 1, 1, 1, 1, 1  // ##
+      },
+      {
+//As  f  c  g  d  a  e  b
          1, 1, 1, 1, 1, 1, // bb
       1, 1, 0, 0, 0, 0, 0, // b
       0, 0, 0, 0, 0, 0, 0,
@@ -160,34 +196,10 @@ static const bool enharmonicSpelling[15][34] = {
       1, 1, 1, 1, 1, 1, 1  // ##
       },
       {
-  //  f  c  g  d  a  e  b
+//Es  f  c  g  d  a  e  b
          1, 1, 1, 1, 1, 1, // bb
       1, 1, 0, 0, 0, 0, 0, // b
-      0, 0, 0, 0, 0, 0, 0,
-      0, 0, 0, 0, 0, 1, 1, // #
-      1, 1, 1, 1, 1, 1, 1  // ##
-      },
-      {
-  //  f  c  g  d  a  e  b
-         1, 1, 1, 1, 1, 1, // bb
-      1, 1, 0, 0, 0, 0, 0, // b
-      0, 0, 0, 0, 0, 0, 0,
-      0, 0, 0, 0, 0, 1, 1, // #
-      1, 1, 1, 1, 1, 1, 1  // ##
-      },
-      {
-  //  f  c  g  d  a  e  b
-         1, 1, 1, 1, 1, 1, // bb
-      1, 1, 0, 0, 0, 0, 0, // b
-      0, 0, 0, 0, 0, 0, 0,
-      0, 0, 0, 0, 0, 1, 1, // #
-      1, 1, 1, 1, 1, 1, 1  // ##
-      },
-      {
-  //  f  c  g  d  a  e  b
-         1, 1, 1, 1, 1, 1, // bb
-      1, 1, 0, 0, 0, 0, 0, // b
-      0, 0, 0, 0, 0, 0, 0,
+      0, 0, 0, 0, 1, 1, 1,
       0, 0, 0, 0, 0, 1, 1, // #
       1, 1, 1, 1, 1, 1, 1  // ##
       },
@@ -200,11 +212,11 @@ static const bool enharmonicSpelling[15][34] = {
       1, 1, 1, 1, 1, 1, 1  // ##
       },
       {
-//F   f  c  g  d  a  e  b
+//F   f  c  g  d  a  e  b           // extra penalty for a# b
          1, 1, 1, 1, 1, 1, // bb
       1, 1, 0, 0, 0, 0, 0, // b
-      0, 0, 0, 0, 0, 0, 0,
-      0, 0, 0, 0, 0, 1, 1, // #
+      0, 0, 0, 0, 0, 0, 1,
+      0, 0, 0, 0, 1, 1, 1, // #
       1, 1, 1, 1, 1, 1, 1  // ##
       },
       {
@@ -216,60 +228,60 @@ static const bool enharmonicSpelling[15][34] = {
       1, 1, 1, 1, 1, 1, 1  // ##
       },
       {
-  //  f  c  g  d  a  e  b
+//G   f  c  g  d  a  e  b
          1, 1, 1, 1, 1, 1, // bb
-      1, 1, 0, 0, 0, 0, 0, // b
-      0, 0, 0, 0, 0, 0, 0,
+      1, 1, 1, 0, 0, 0, 0, // b
+      1, 0, 0, 0, 0, 0, 0,
       0, 0, 0, 0, 0, 1, 1, // #
       1, 1, 1, 1, 1, 1, 1  // ##
       },
       {
-  //  f  c  g  d  a  e  b
+//D   f  c  g  d  a  e  b
          1, 1, 1, 1, 1, 1, // bb
-      1, 1, 0, 0, 0, 0, 0, // b
-      0, 0, 0, 0, 0, 0, 0,
+      1, 1, 1, 1, 0, 0, 0, // b
+      1, 1, 0, 0, 0, 0, 0,
       0, 0, 0, 0, 0, 1, 1, // #
       1, 1, 1, 1, 1, 1, 1  // ##
       },
       {
-  //  f  c  g  d  a  e  b
+//A   f  c  g  d  a  e  b
          1, 1, 1, 1, 1, 1, // bb
-      1, 1, 0, 0, 0, 0, 0, // b
-      0, 0, 0, 0, 0, 0, 0,
+      1, 1, 1, 1, 1, 0, 0, // b
+      1, 1, 1, 0, 0, 0, 0,
       0, 0, 0, 0, 0, 1, 1, // #
       1, 1, 1, 1, 1, 1, 1  // ##
       },
       {
-  //  f  c  g  d  a  e  b
+//E   f  c  g  d  a  e  b
          1, 1, 1, 1, 1, 1, // bb
-      1, 1, 0, 0, 0, 0, 0, // b
-      0, 0, 0, 0, 0, 0, 0,
+      1, 1, 1, 1, 1, 1, 0, // b
+      1, 1, 1, 1, 0, 0, 0,
       0, 0, 0, 0, 0, 1, 1, // #
       1, 1, 1, 1, 1, 1, 1  // ##
       },
       {
-  //  f  c  g  d  a  e  b
+//H   f  c  g  d  a  e  b
          1, 1, 1, 1, 1, 1, // bb
-      1, 1, 0, 0, 0, 0, 0, // b
-      0, 0, 0, 0, 0, 0, 0,
+      1, 1, 1, 1, 1, 1, 1, // b
+      1, 1, 1, 1, 1, 0, 0,
       0, 0, 0, 0, 0, 1, 1, // #
       1, 1, 1, 1, 1, 1, 1  // ##
       },
       {
-  //  f  c  g  d  a  e  b
+//Fis f  c  g  d  a  e  b
          1, 1, 1, 1, 1, 1, // bb
-      1, 1, 0, 0, 0, 0, 0, // b
-      0, 0, 0, 0, 0, 0, 0,
-      0, 0, 0, 0, 0, 1, 1, // #
-      1, 1, 1, 1, 1, 1, 1  // ##
+      1, 1, 1, 1, 1, 1, 1, // b
+      100, 1, 1, 1, 1, 1, 0,
+      0, 0, 0, 0, 0, 0, 0, // #
+      0, 1, 1, 1, 1, 1, 1  // ##
       },
       {
-  //  f  c  g  d  a  e  b
+//Cis f  c  g  d  a  e  b
          1, 1, 1, 1, 1, 1, // bb
-      1, 1, 0, 0, 0, 0, 0, // b
-      0, 0, 0, 0, 0, 0, 0,
-      0, 0, 0, 0, 0, 1, 1, // #
-      1, 1, 1, 1, 1, 1, 1  // ##
+      1, 1, 0, 0, 0, 0, 0, // b  //Fis
+      100, 1, 1, 1, 1, 0, 0,
+      0, 0, 0, 0, 0, 0, 0, // #
+      0, 0, 1, 1, 1, 1, 1  // ##
       }
       };
 
@@ -279,6 +291,14 @@ static const bool enharmonicSpelling[15][34] = {
 
 static int penalty(int lof1, int lof2, int k)
       {
+      if (k < 0 || k >= 15) {
+            printf("illegal key %d >= 15\n", k);
+            abort();
+            }
+      if (lof1 < 0 || lof1 >= 34)
+            abort();
+      if (lof2 < 0 || lof2 >= 34)
+            abort();
       int penalty  = enharmonicSpelling[k][lof1] * 4 + enharmonicSpelling[k][lof2] * 4;
       int distance = lof2 > lof1 ? lof2 - lof1 : lof1 - lof2;
       if (distance > 12)
@@ -302,6 +322,9 @@ static int computeWindow(const QList<MidiNote*>& notes, int start, int end, int 
       int idx = -1;
       int pitch[10];
 
+      if (end >= 10)
+            abort();
+
       int i = start;
       int k = 0;
       while (i < end)
@@ -314,6 +337,8 @@ static int computeWindow(const QList<MidiNote*>& notes, int start, int end, int 
             int pa    = 0;
             int pb    = 0;
             int l     = pitch[0] * 2 + (i & 1);
+            if (l < 0 || l > (sizeof(tab1)/sizeof(*tab1)))
+                  abort();
             int lof1a = tab1[l];
             int lof1b = tab2[l];
 
@@ -321,6 +346,8 @@ static int computeWindow(const QList<MidiNote*>& notes, int start, int end, int 
                   int l = pitch[k] * 2 + ((i & (1 << k)) >> k);
                   int lof2a = tab1[l];
                   int lof2b = tab2[l];
+                  if (l < 0 || l > (sizeof(tab1)/sizeof(*tab1)))
+                        abort();
                   pa += penalty(lof1a, lof2a, keyIdx);
                   pb += penalty(lof1b, lof2b, keyIdx);
                   lof1a = lof2a;
@@ -343,36 +370,67 @@ static int computeWindow(const QList<MidiNote*>& notes, int start, int end, int 
       }
 
 //---------------------------------------------------------
+//   tpc
+//---------------------------------------------------------
+
+int tpc(int idx, int pitch, int opt)
+      {
+      const int* tab;
+      if (opt < 0) {
+            tab = tab2;
+            opt *= -1;
+            }
+      else
+            tab = tab1;
+      int i = (pitch % 12) * 2 + ((opt & (1 << idx)) >> idx);
+      if (i < 0 || i >= 24)
+            abort();
+      return tab[i];
+      }
+
+//---------------------------------------------------------
 //   computeWindow
 //---------------------------------------------------------
 
-int computeWindow(const QList<Note*>& notes, int start, int end, int keyIdx)
+int computeWindow(const QList<Note*>& notes, int start, int end)
       {
       int p   = 10000;
       int idx = -1;
       int pitch[10];
+      int key[10];
 
       int i = start;
       int k = 0;
-      while (i < end)
-            pitch[k++] = notes[i++]->pitch() % 12;
+      while (i < end) {
+            pitch[k] = notes[i]->pitch() % 12;
+            int tick= notes[i]->chord()->tick();
+            key[k]   = notes[i]->staff()->keymap()->key(tick) + 7;
+            ++k;
+            ++i;
+            }
 
-      for (; k < 10; ++k)
+      for (; k < 10; ++k) {
             pitch[k] = pitch[k-1];
+            key[k]   = key[k-1];
+            }
 
       for (int i = 0; i < 512; ++i) {
             int pa    = 0;
             int pb    = 0;
             int l     = pitch[0] * 2 + (i & 1);
+            if (l < 0 || l > (sizeof(tab1)/sizeof(*tab1)))
+                  abort();
             int lof1a = tab1[l];
             int lof1b = tab2[l];
 
             for (int k = 1; k < 10; ++k) {
                   int l = pitch[k] * 2 + ((i & (1 << k)) >> k);
+                  if (l < 0 || l > (sizeof(tab1)/sizeof(*tab1)))
+                        abort();
                   int lof2a = tab1[l];
                   int lof2b = tab2[l];
-                  pa += penalty(lof1a, lof2a, keyIdx);
-                  pb += penalty(lof1b, lof2b, keyIdx);
+                  pa += penalty(lof1a, lof2a, key[k]);
+                  pb += penalty(lof1b, lof2b, key[k]);
                   lof1a = lof2a;
                   lof1b = lof2b;
                   }
@@ -389,6 +447,17 @@ int computeWindow(const QList<Note*>& notes, int start, int end, int keyIdx)
                         }
                   }
             }
+/*      printf("compute window\n   ");
+      for (int i = 0; i < 10; ++i)
+            printf("%2d ", pitch[i]);
+      printf("\n   ");
+      for (int i = 0; i < 10; ++i)
+            printf("%2d ", key[i]);
+      printf("\n   ");
+      for (int i = 0; i < 10; ++i)
+            printf("%2d ", tpc(i, pitch[i], idx));
+      printf("\n");
+      */
       return idx;
       }
 
@@ -407,7 +476,7 @@ void spell(QList<MidiNote*>& notes, int key)
             int end = start + WINDOW;
             if (end > n)
                   end = n;
-            int opt = computeWindow(notes, start, end, key + 7);
+            int opt = computeWindow(notes, start, end, key);
             const int* tab;
             if (opt < 0) {
                   tab = tab2;
@@ -450,26 +519,10 @@ void spell(QList<MidiNote*>& notes, int key)
       }
 
 //---------------------------------------------------------
-//   tpc
-//---------------------------------------------------------
-
-int tpc(int idx, int pitch, int opt)
-      {
-      const int* tab;
-      if (opt < 0) {
-            tab = tab2;
-            opt *= -1;
-            }
-      else
-            tab = tab1;
-      return tab[(pitch % 12) * 2 + ((opt & (1 << idx)) >> idx)];
-      }
-
-//---------------------------------------------------------
 //   spell
 //---------------------------------------------------------
 
-void spell(QList<Note*>& notes, int key)
+void spell(QList<Note*>& notes)
       {
       int n = notes.size();
 
@@ -478,7 +531,7 @@ void spell(QList<Note*>& notes, int key)
             int end = start + WINDOW;
             if (end > n)
                   end = n;
-            int opt = computeWindow(notes, start, end, key + 7);
+            int opt = computeWindow(notes, start, end);
             const int* tab;
             if (opt < 0) {
                   tab = tab2;

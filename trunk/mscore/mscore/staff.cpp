@@ -272,6 +272,7 @@ void Staff::read(QDomElement e)
 
 void Staff::changeKeySig(int tick, int st)
       {
+      st &= 0xff;
       int ot = _keymap->key(tick);
       if (ot == st)
             return;                 // no change

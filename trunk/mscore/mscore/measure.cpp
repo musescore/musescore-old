@@ -342,7 +342,6 @@ void Measure::layoutNoteHeads(int staff)
                   int move1      = nl->front()->move();
                   Tuplet* tuplet = chord->tuplet();
 
-//                  for (riNote in = nl->rbegin(); in != nl->rend(); ++in) {
                   for (iNote in = nl->begin(); in != nl->end(); ++in) {
                         Note* note  = in->second;
                         int pitch   = note->pitch();
@@ -375,13 +374,13 @@ void Measure::layoutNoteHeads(int staff)
 
                         int accidental = 0;
                         if (note->userAccidental())
-                              accidental = note->userAccidental();
+                              accidental = Accidental::value2subtype(note->userAccidental());
                         else  {
-                              accidental = ((tpc + 1) / 7) - 2;
+                              int accVal = ((tpc + 1) / 7) - 2;
 
-                              if (accidental && !tversatz[line]) {
-                                    tversatz[line] = accidental;
-                                    switch(accidental) {
+                              if (accVal && !tversatz[line]) {
+                                    tversatz[line] = accVal;
+                                    switch(accVal) {
                                           case -2: accidental = ACC_FLAT2;  break;
                                           case -1: accidental = ACC_FLAT;   break;
                                           case  1: accidental = ACC_SHARP;  break;
@@ -389,9 +388,9 @@ void Measure::layoutNoteHeads(int staff)
                                           default: printf("bad accidental\n"); break;
                                           }
                                     }
-                              else if (accidental == tversatz[line])
+                              else if (accVal == tversatz[line])
                                     accidental = 0;
-                              else if (!accidental && tversatz[line]) {
+                              else if ((!accVal) && tversatz[line]) {
                                     tversatz[line] = 0;
                                     accidental = ACC_NATURAL;   // natural
                                     }
@@ -409,7 +408,7 @@ void Measure::layoutNoteHeads(int staff)
 
                         move1 = move;
                         note->setMirror(mirror);
-                        note->setAccidental(accidental);
+                        note->setAccidentalSubtype(accidental);
                         ll = line;
                         }
                   }

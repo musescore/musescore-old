@@ -116,9 +116,9 @@ class Note : public Element {
 
       int userAccidental() const      { return _userAccidental; }
 
-      int accidentalIdx() const       { return _accidental ? _accidental->subtype() : ACC_NONE; }
+      int accidentalSubtype() const   { return _accidental ? _accidental->subtype() : ACC_NONE; }
       Accidental* accidental() const  { return _accidental; }
-      void setAccidental(int);
+      void setAccidentalSubtype(int);
       void changeAccidental(int);
 
       int line() const                { return _line + _lineOffset;   }
