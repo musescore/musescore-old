@@ -188,6 +188,7 @@ PageListEditor::PageListEditor(Score* s)
       connect(slurView,     SIGNAL(elementChanged(Element*)), SLOT(setElement(Element*)));
       connect(tieView,      SIGNAL(elementChanged(Element*)), SLOT(setElement(Element*)));
       connect(tupletView,   SIGNAL(scoreChanged()), SLOT(layoutScore()));
+      connect(notePanel,    SIGNAL(scoreChanged()), SLOT(layoutScore()));
 
       connect(list, SIGNAL(currentItemChanged(QTreeWidgetItem*, QTreeWidgetItem*)),
          SLOT(itemChanged(QTreeWidgetItem*,QTreeWidgetItem*)));
@@ -204,6 +205,8 @@ PageListEditor::PageListEditor(Score* s)
 void PageListEditor::layoutScore()
       {
       cs->layout();
+      cs->setUpdateAll();
+      cs->end1();
       }
 
 //---------------------------------------------------------
@@ -729,6 +732,7 @@ ShowNoteWidget::ShowNoteWidget()
       connect(nb.tieBack, SIGNAL(clicked()), SLOT(tieBackClicked()));
       connect(nb.accidental, SIGNAL(clicked()), SLOT(accidentalClicked()));
       connect(nb.fingering, SIGNAL(itemClicked(QListWidgetItem*)), SLOT(gotoElement(QListWidgetItem*)));
+      connect(nb.tpc, SIGNAL(valueChanged(int)), SLOT(tpcChanged(int)));
       }
 
 //---------------------------------------------------------
@@ -760,6 +764,16 @@ void ShowNoteWidget::setElement(Element* e)
             QListWidgetItem* item = new QListWidgetItem(s, 0, long(text));
             nb.fingering->addItem(item);
             }
+      }
+
+//---------------------------------------------------------
+//   tpcChanged
+//---------------------------------------------------------
+
+void ShowNoteWidget::tpcChanged(int val)
+      {
+      ((Note*)element())->setTpc(val);
+      emit scoreChanged();
       }
 
 //---------------------------------------------------------

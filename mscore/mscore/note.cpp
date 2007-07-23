@@ -185,7 +185,7 @@ void Note::changeAccidental(int accType)
       _tpc      = line2tpc(line, acc1);
       _pitch    = tpc2pitch(_tpc) + (_pitch / 12) * 12;
       chord()->measure()->layoutNoteHeads(staffIdx());    // compute actual accidental
-      int acc2 = accidentalIdx();
+      int acc2  = accidentalSubtype();
       if (accType != Accidental::value2subtype(acc2))
             _userAccidental = accType;    // bracketed editorial accidental
       }
@@ -297,10 +297,10 @@ QPointF Note::stemPos(bool upFlag) const
       }
 
 //---------------------------------------------------------
-//   setAccidental
+//   setAccidentalSubtype
 //---------------------------------------------------------
 
-void Note::setAccidental(int pre)
+void Note::setAccidentalSubtype(int pre)
       {
       if (pre && !_tieBack) {
             if (!_accidental) {
@@ -308,7 +308,8 @@ void Note::setAccidental(int pre)
                   _accidental->setParent(this);
                   _accidental->setVoice(voice());
                   }
-            _accidental->setSubtype(_grace ? 100 + pre : pre);
+            pre &= pre & (~ACC_SMALL);
+            _accidental->setSubtype(_grace ? ACC_SMALL + pre : pre);
             }
       else if (_accidental) {
             delete _accidental;

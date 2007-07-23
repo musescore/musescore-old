@@ -56,12 +56,15 @@ void Accidental::setSubtype(int i)
       Symbol* s = new Symbol(score());
       switch(i) {
             default:
-            case  0: delete s; return;
-            case  1: s->setSym(sharpSym);      break;
-            case  2: s->setSym(flatSym);       break;
-            case  3: s->setSym(sharpsharpSym); break;
-            case  4: s->setSym(flatflatSym);   break;
-            case  5: s->setSym(naturalSym);    break;
+                  printf("illegal accidental %d\n", i);
+                  abort();
+
+            case  ACC_NONE:    delete s; return;
+            case  ACC_SHARP:   s->setSym(sharpSym);      break;
+            case  ACC_FLAT:    s->setSym(flatSym);       break;
+            case  ACC_SHARP2:  s->setSym(sharpsharpSym); break;
+            case  ACC_FLAT2:   s->setSym(flatflatSym);   break;
+            case  ACC_NATURAL: s->setSym(naturalSym);    break;
 
             case  6 ... 10:
                   {
@@ -85,31 +88,30 @@ void Accidental::setSubtype(int i)
                   }
                   return;
 
-            // small symbols:
-
             case 11: s->setSym(sharpSym);      break;
             case 12: s->setSym(flatSym);       break;
             case 13: s->setSym(sharpsharpSym); break;
             case 14: s->setSym(flatflatSym);   break;
             case 15: s->setSym(naturalSym);    break;
 
-            case 101: s->setSym(s_sharpSym);      break;
-            case 102: s->setSym(s_flatSym);       break;
-            case 103: s->setSym(s_sharpsharpSym); break;
-            case 104: s->setSym(s_flatflatSym);   break;
-            case 105: s->setSym(s_naturalSym);    break;
+            // small symbols:
+            case ACC_SMALL + ACC_SHARP:   s->setSym(s_sharpSym);      break;
+            case ACC_SMALL + ACC_FLAT:    s->setSym(s_flatSym);       break;
+            case ACC_SMALL + ACC_SHARP2:  s->setSym(s_sharpsharpSym); break;
+            case ACC_SMALL + ACC_FLAT2:   s->setSym(s_flatflatSym);   break;
+            case ACC_SMALL + ACC_NATURAL: s->setSym(s_naturalSym);    break;
 
-            case 106: s->setSym(s_sharpSym);      break;
-            case 107: s->setSym(s_flatSym);       break;
-            case 108: s->setSym(s_sharpsharpSym); break;
-            case 109: s->setSym(s_flatflatSym);   break;
-            case 110: s->setSym(s_naturalSym);    break;
+            case ACC_SMALL + ACC_SHARP + 5: s->setSym(s_sharpSym);      break;
+            case ACC_SMALL + 7: s->setSym(s_flatSym);       break;
+            case ACC_SMALL + 8: s->setSym(s_sharpsharpSym); break;
+            case ACC_SMALL + 9: s->setSym(s_flatflatSym);   break;
+            case ACC_SMALL + 10: s->setSym(s_naturalSym);    break;
 
-            case 111: s->setSym(s_sharpSym);      break;
-            case 112: s->setSym(s_flatSym);       break;
-            case 113: s->setSym(s_sharpsharpSym); break;
-            case 114: s->setSym(s_flatflatSym);   break;
-            case 115: s->setSym(s_naturalSym);    break;
+            case ACC_SMALL + 11: s->setSym(s_sharpSym);      break;
+            case ACC_SMALL + 12: s->setSym(s_flatSym);       break;
+            case ACC_SMALL + 13: s->setSym(s_sharpsharpSym); break;
+            case ACC_SMALL + 14: s->setSym(s_flatflatSym);   break;
+            case ACC_SMALL + 15: s->setSym(s_naturalSym);    break;
             }
       addElement(s, 0.0, 0.0);
       }
@@ -131,7 +133,12 @@ int Accidental::subtype2value(int st)
             0, 0, 0, 0, 0,  // () brackets
             0, 0, 0, 0, 0,  // [] brackets
             };
-      return preTab[st % 100];
+      st %= ACC_SMALL;
+
+      if (st < 0 || st >= (sizeof(preTab)/sizeof(*preTab)))
+            abort();
+
+      return preTab[st];
       }
 
 //---------------------------------------------------------
@@ -146,6 +153,9 @@ int Accidental::value2subtype(int v)
             case 2:  return ACC_SHARP2;
             case -1: return ACC_FLAT;
             case -2: return ACC_FLAT2;
+            default:
+                  printf("illegal accidental val %d\n", v);
+                  abort();
             }
       return 0;
       }

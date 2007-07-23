@@ -1199,7 +1199,6 @@ void Score::spell()
       {
       for (int i = 0; i < nstaves(); ++i) {
             QList<Note*> notes;
-            int key = staff(i)->keymap()->key(0);
             for(Measure* m = _layout->first(); m; m = m->next()) {
                   for (Segment* s = m->first(); s; s = s->next()) {
                         int strack = i * VOICES;
@@ -1217,7 +1216,7 @@ void Score::spell()
                               }
                         }
                   }
-            ::spell(notes, key);
+            ::spell(notes);
             }
       }
 
@@ -1236,8 +1235,8 @@ Note* prevNote(Note* n)
             return i->second;
             }
 
-      seg = seg->prev1();
-      int staff = n->staffIdx();
+//      seg            = seg->prev1();
+      int staff      = n->staffIdx();
       int startTrack = staff * VOICES + n->voice() - 1;
       int endTrack   = 0;
       while (seg) {
@@ -1266,8 +1265,8 @@ Note* nextNote(Note* n)
       ++i;
       if (i != nl->end())
             return i->second;
-      Segment* seg = chord->segment();
-      int staff = n->staffIdx();
+      Segment* seg   = chord->segment();
+      int staff      = n->staffIdx();
       int startTrack = staff * VOICES + n->voice() + 1;
       int endTrack   = staff * VOICES + VOICES;
       while (seg) {
@@ -1308,8 +1307,7 @@ void Score::spell(Note* note)
       nn = prevNote(nn);
       notes.prepend(nn);
 
-      int key = note->staff()->keymap()->key(0);
-      int opt = ::computeWindow(notes, 0, 7, key + 7);
+      int opt = ::computeWindow(notes, 0, 7);
       note->setTpc(::tpc(3, note->pitch(), opt));
       }
 

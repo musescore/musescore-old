@@ -1242,7 +1242,7 @@ void ExportMusicXml::chord(Chord* chord, int staff, const LyricsList* ll)
 
           // accidental
             bool editorial = false;
-            int acc        = note->accidentalIdx();
+            int acc        = note->accidentalSubtype();
             if (acc != ACC_NONE) {
                   if (6 <= acc && acc <= 10) {
                         acc -= 5;

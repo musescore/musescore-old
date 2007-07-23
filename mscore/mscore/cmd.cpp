@@ -381,21 +381,21 @@ void Score::endCmd(bool undo)
 
 //---------------------------------------------------------
 //   cmdAddPitch
+//    c d e f g a b entered:
+//       insert note or add note to chord
 //---------------------------------------------------------
 
 void Score::cmdAddPitch(int note, bool addFlag)
       {
-      // c d e f g a b entered: insert note or add note to chord
-      int octave = padState.pitch / 12;
       static int ptab[15][7] = {
-        //    c  d  e  f  g  a  b
-            { -1, 1, 3, 5, 6,  8, 10 },     // Bes
-            { -1, 2, 3, 5, 6,  8, 10 },     // Ges
-            {  0, 2, 3, 5, 6,  8, 10 },     // Des
-            {  0, 2, 3, 5, 7,  8, 10 },     // As
+//             c  d  e  f  g   a  b
+            { -1, 1, 3, 4, 6,  8, 10 },     // Bes
+            { -1, 1, 3, 5, 6,  8, 10 },     // Ges
+            {  0, 1, 3, 5, 6,  8, 10 },     // Des
+            {  0, 1, 3, 5, 7,  8, 10 },     // As
             {  0, 2, 3, 5, 7,  8, 10 },     // Es
             {  0, 2, 3, 5, 7,  9, 10 },     // B
-            {  0, 2, 4, 5, 7,  9, 11 },     // F
+            {  0, 2, 4, 5, 7,  9, 10 },     // F
             {  0, 2, 4, 5, 7,  9, 11 },     // C
             {  0, 2, 4, 6, 7,  9, 11 },     // G
             {  1, 2, 4, 6, 7,  9, 11 },     // D
@@ -406,6 +406,7 @@ void Score::cmdAddPitch(int note, bool addFlag)
             {  1, 3, 5, 6, 8, 10, 12 },     // Cis
             };
 
+      int octave    = padState.pitch / 12;
       ChordRest* cr = 0;
       if (cis->pos == -1) {
             //
@@ -428,6 +429,10 @@ void Score::cmdAddPitch(int note, bool addFlag)
                   cis->pos = -1;
                   return;
                   }
+            }
+      if (cis->pos == -1) {
+            printf("cmdAddPitch: pos not set\n");
+            return;
             }
 
       int key   = cr->staff()->keymap()->key(cis->pos) + 7;
@@ -603,9 +608,8 @@ void Score::setNote(int tick, Staff* staff, int voice, int pitch, int len)
                   }
             chord->setParent(seg);
             undoAddElement(chord);
-//            layout();
-//            measure->layoutNoteHeads(staffIdx);
             select(note, 0, 0);
+            spell(note);
 
             tick += noteLen;
 
@@ -962,7 +966,7 @@ void Score::addAccidental(Note* oNote, int accidental)
       i.obj   = oNote;
       i.val1  = oNote->pitch();
       i.val2  = oNote->tpc();
-      i.val3  = oNote->accidentalIdx();
+      i.val3  = oNote->accidentalSubtype();
       undoList.back()->push_back(i);
       oNote->changeAccidental(accidental);
       layout();

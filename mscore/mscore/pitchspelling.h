@@ -36,8 +36,8 @@ inline static int pitch2tpc(int pitch)
       }
 
 extern void spell(QList<MidiNote*>& notes, int);
-extern void spell(QList<Note*>& notes, int);
-extern int computeWindow(const QList<Note*>& notes, int start, int end, int keyIdx);
+extern void spell(QList<Note*>& notes);
+extern int computeWindow(const QList<Note*>& notes, int start, int end);
 extern int tpc(int idx, int pitch, int opt);
 extern int pitch2line(int pitch);
 extern QString tpc2name(int tpc);
