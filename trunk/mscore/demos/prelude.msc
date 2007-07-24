@@ -2,9 +2,9 @@
 <museScore version="1.0">
   <Spatium>1.5</Spatium>
   <Division>480</Division>
-  <Mag>1.03717</Mag>
-  <xoff>-1071</xoff>
-  <yoff>-36</yoff>
+  <Mag>4.76577</Mag>
+  <xoff>-5947</xoff>
+  <yoff>-1554</yoff>
   <Style>
     <staffUpperBorder>8</staffUpperBorder>
     <staffLowerBorder>4</staffLowerBorder>
@@ -1051,7 +1051,7 @@ p, li { white-space: pre-wrap; }
         <spatiumSizeDependent>0</spatiumSizeDependent>
         <data>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Arial&apos;; font-size:11pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Times New Roman&apos;; font-size:24pt;&quot;&gt;&lt;span style=&quot; font-size:10pt;&quot;&gt;In memoriam Alexandre Tansman&lt;/span&gt;&lt;/p&gt;
 &lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Times New Roman&apos;; font-size:10pt;&quot;&gt;&lt;span style=&quot; font-size:24pt;&quot;&gt;Prelude&lt;/span&gt;&lt;/p&gt;
 &lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Times New Roman&apos;; font-size:24pt;&quot;&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;For Guitar&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
@@ -1212,13 +1212,13 @@ p, li { white-space: pre-wrap; }
         <align>1</align>
         <xoffset>0</xoffset>
         <yoffset>-4</yoffset>
-        <anchor>tick</anchor>
+        <anchor>staff</anchor>
         <offsetType>spatium</offsetType>
         <spatiumSizeDependent>1</spatiumSizeDependent>
         <data>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-size:8.50394pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:10pt; font-weight:600;&quot;&gt;II______________&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-size:10pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:9pt;&quot;&gt;&lt;span style=&quot; font-size:10pt; font-weight:600;&quot;&gt;II______________&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
         <subtype>System</subtype>
         <offset x="-0.136054" y="5.71429"/>
         </Text>
@@ -1543,13 +1543,13 @@ p, li { white-space: pre-wrap; }
         <align>1</align>
         <xoffset>0</xoffset>
         <yoffset>-4</yoffset>
-        <anchor>tick</anchor>
+        <anchor>staff</anchor>
         <offsetType>spatium</offsetType>
         <spatiumSizeDependent>1</spatiumSizeDependent>
         <data>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-size:8.50394pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:10pt; font-weight:600;&quot;&gt;V________________&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-size:10pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:9pt;&quot;&gt;&lt;span style=&quot; font-size:10pt; font-weight:600;&quot;&gt;V________________&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
         <subtype>System</subtype>
         <offset x="-0.136054" y="-3.12925"/>
         </Text>
@@ -1614,7 +1614,6 @@ p, li { white-space: pre-wrap; }
         <tick>6480</tick>
         <ticklen>1440</ticklen>
         <Attribute>
-          <idx>3</idx>
           <subtype>3</subtype>
           <offset x="-0.176389" y="-5.64444"/>
           <voice>1</voice>
@@ -1660,13 +1659,13 @@ p, li { white-space: pre-wrap; }
         <align>1</align>
         <xoffset>0</xoffset>
         <yoffset>-4</yoffset>
-        <anchor>tick</anchor>
+        <anchor>staff</anchor>
         <offsetType>spatium</offsetType>
         <spatiumSizeDependent>1</spatiumSizeDependent>
         <data>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-size:8.50394pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:10pt; font-weight:600;&quot;&gt;V__________________&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-size:10pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:9pt;&quot;&gt;&lt;span style=&quot; font-size:10pt; font-weight:600;&quot;&gt;V__________________&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
         <subtype>System</subtype>
         <offset x="-0.544218" y="-2.9932"/>
         </Text>
@@ -1691,7 +1690,6 @@ p, li { white-space: pre-wrap; }
         <tick>9120</tick>
         <ticklen>1440</ticklen>
         <Attribute>
-          <idx>3</idx>
           <subtype>3</subtype>
           <offset x="-0.176389" y="-5.64444"/>
           <voice>1</voice>
@@ -1825,7 +1823,6 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <ticklen>240</ticklen>
         <Attribute>
-          <idx>3</idx>
           <subtype>3</subtype>
           <offset x="0.399225" y="0.33868"/>
           </Attribute>
@@ -1894,7 +1891,6 @@ p, li { white-space: pre-wrap; }
         <ticklen>240</ticklen>
         <BeamMode>begin</BeamMode>
         <Attribute>
-          <idx>3</idx>
           <subtype>3</subtype>
           <offset x="0.294858" y="0.296933"/>
           </Attribute>
@@ -1986,7 +1982,6 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <ticklen>240</ticklen>
         <Attribute>
-          <idx>3</idx>
           <subtype>3</subtype>
           <offset x="0.264583" y="-7.58472"/>
           </Attribute>
@@ -2026,7 +2021,6 @@ p, li { white-space: pre-wrap; }
         <ticklen>240</ticklen>
         <BeamMode>mid</BeamMode>
         <Attribute>
-          <idx>3</idx>
           <subtype>3</subtype>
           <offset x="-0.748137" y="-6.572"/>
           </Attribute>
@@ -2075,7 +2069,6 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <ticklen>240</ticklen>
         <Attribute>
-          <idx>3</idx>
           <subtype>3</subtype>
           <offset x="0.264583" y="-7.58472"/>
           </Attribute>
@@ -2137,7 +2130,6 @@ p, li { white-space: pre-wrap; }
         <tick>19920</tick>
         <ticklen>1440</ticklen>
         <Attribute>
-          <idx>3</idx>
           <subtype>3</subtype>
           <offset x="-0.308937" y="-5.4064"/>
           <voice>1</voice>
@@ -2200,7 +2192,6 @@ p, li { white-space: pre-wrap; }
         <tick>22560</tick>
         <ticklen>1440</ticklen>
         <Attribute>
-          <idx>3</idx>
           <subtype>3</subtype>
           <offset x="0" y="-5.77186"/>
           <voice>1</voice>
@@ -2233,7 +2224,6 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <ticklen>240</ticklen>
         <Attribute>
-          <idx>3</idx>
           <subtype>3</subtype>
           <offset x="0.124759" y="0.270312"/>
           </Attribute>
@@ -2245,7 +2235,6 @@ p, li { white-space: pre-wrap; }
         <ticklen>240</ticklen>
         <BeamMode>begin</BeamMode>
         <Attribute>
-          <idx>3</idx>
           <subtype>3</subtype>
           <offset x="0.191959" y="0.161526"/>
           </Attribute>
@@ -2263,7 +2252,6 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <ticklen>240</ticklen>
         <Attribute>
-          <idx>3</idx>
           <subtype>3</subtype>
           <offset x="0.508678" y="-7.503"/>
           </Attribute>
@@ -2285,7 +2273,6 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <ticklen>240</ticklen>
         <Attribute>
-          <idx>3</idx>
           <subtype>3</subtype>
           <offset x="0.508678" y="-7.503"/>
           </Attribute>
@@ -2300,7 +2287,6 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <ticklen>240</ticklen>
         <Attribute>
-          <idx>3</idx>
           <subtype>3</subtype>
           <offset x="0.254339" y="-8.52036"/>
           </Attribute>
@@ -2347,7 +2333,6 @@ p, li { white-space: pre-wrap; }
         <tick>26880</tick>
         <ticklen>960</ticklen>
         <Attribute>
-          <idx>3</idx>
           <subtype>3</subtype>
           <offset x="0.0950921" y="-5.98358"/>
           <voice>1</voice>
@@ -2373,13 +2358,13 @@ p, li { white-space: pre-wrap; }
         <align>1</align>
         <xoffset>0</xoffset>
         <yoffset>-4</yoffset>
-        <anchor>tick</anchor>
+        <anchor>staff</anchor>
         <offsetType>spatium</offsetType>
         <spatiumSizeDependent>1</spatiumSizeDependent>
         <data>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-size:8.50394pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:10pt; font-weight:600;&quot;&gt;II_____________&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-size:10pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:9pt;&quot;&gt;&lt;span style=&quot; font-size:10pt; font-weight:600;&quot;&gt;II_____________&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
         <subtype>System</subtype>
         <offset x="-0.408163" y="-2.44898"/>
         </Text>
@@ -2397,7 +2382,6 @@ p, li { white-space: pre-wrap; }
         <tick>27840</tick>
         <ticklen>480</ticklen>
         <Attribute>
-          <idx>3</idx>
           <subtype>3</subtype>
           <offset x="0.26976" y="-7.72119"/>
           <voice>1</voice>
@@ -2413,7 +2397,6 @@ p, li { white-space: pre-wrap; }
         <voice>1</voice>
         <ticklen>480</ticklen>
         <Attribute>
-          <idx>3</idx>
           <subtype>3</subtype>
           <offset x="-0.164263" y="-7.28717"/>
           <voice>1</voice>
@@ -2595,7 +2578,6 @@ p, li { white-space: pre-wrap; }
         <tick>30240</tick>
         <ticklen>480</ticklen>
         <Attribute>
-          <idx>3</idx>
           <subtype>3</subtype>
           <offset x="-0.308937" y="-5.4064"/>
           <voice>1</voice>
@@ -2611,7 +2593,6 @@ p, li { white-space: pre-wrap; }
         <voice>1</voice>
         <ticklen>480</ticklen>
         <Attribute>
-          <idx>3</idx>
           <subtype>3</subtype>
           <offset x="-0.308937" y="-5.4064"/>
           <voice>1</voice>
@@ -2674,13 +2655,13 @@ p, li { white-space: pre-wrap; }
         <align>1</align>
         <xoffset>0</xoffset>
         <yoffset>-4</yoffset>
-        <anchor>tick</anchor>
+        <anchor>staff</anchor>
         <offsetType>spatium</offsetType>
         <spatiumSizeDependent>1</spatiumSizeDependent>
         <data>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-size:8.50394pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:10pt; font-weight:600;&quot;&gt;III___________&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-size:10pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:9pt;&quot;&gt;&lt;span style=&quot; font-size:10pt; font-weight:600;&quot;&gt;III___________&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
         <subtype>System</subtype>
         <offset x="-0.816327" y="-2.58503"/>
         </Text>
@@ -2780,7 +2761,6 @@ p, li { white-space: pre-wrap; }
         <tick>32640</tick>
         <ticklen>960</ticklen>
         <Attribute>
-          <idx>3</idx>
           <subtype>3</subtype>
           <offset x="0.247187" y="-5.56032"/>
           <voice>1</voice>
@@ -2893,7 +2873,6 @@ p, li { white-space: pre-wrap; }
         <tick>33600</tick>
         <ticklen>960</ticklen>
         <Attribute>
-          <idx>3</idx>
           <subtype>3</subtype>
           <offset x="0.240033" y="-8.02233"/>
           <voice>1</voice>
@@ -2919,13 +2898,13 @@ p, li { white-space: pre-wrap; }
         <align>1</align>
         <xoffset>0</xoffset>
         <yoffset>-4</yoffset>
-        <anchor>tick</anchor>
+        <anchor>staff</anchor>
         <offsetType>spatium</offsetType>
         <spatiumSizeDependent>1</spatiumSizeDependent>
         <data>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-size:8.50394pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:10pt; font-weight:600;&quot;&gt;III____________&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-size:10pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:9pt;&quot;&gt;&lt;span style=&quot; font-size:10pt; font-weight:600;&quot;&gt;III____________&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
         <subtype>System</subtype>
         <offset x="-0.408163" y="-3.26531"/>
         </Text>
@@ -3020,7 +2999,6 @@ p, li { white-space: pre-wrap; }
         <tick>34560</tick>
         <ticklen>960</ticklen>
         <Attribute>
-          <idx>3</idx>
           <subtype>3</subtype>
           <offset x="0.240033" y="-8.02233"/>
           <voice>1</voice>
@@ -3110,7 +3088,6 @@ p, li { white-space: pre-wrap; }
         <tick>35520</tick>
         <ticklen>960</ticklen>
         <Attribute>
-          <idx>3</idx>
           <subtype>3</subtype>
           <offset x="0.240033" y="-6.42098"/>
           <voice>1</voice>
@@ -3146,7 +3123,6 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <ticklen>240</ticklen>
         <Attribute>
-          <idx>3</idx>
           <subtype>3</subtype>
           <offset x="0.0944561" y="0.566736"/>
           </Attribute>
@@ -3215,7 +3191,6 @@ p, li { white-space: pre-wrap; }
         <ticklen>240</ticklen>
         <BeamMode>begin</BeamMode>
         <Attribute>
-          <idx>3</idx>
           <subtype>3</subtype>
           <offset x="0.0944561" y="0.566736"/>
           </Attribute>
@@ -3287,7 +3262,6 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <ticklen>240</ticklen>
         <Attribute>
-          <idx>3</idx>
           <subtype>3</subtype>
           <offset x="-0.125941" y="-7.65094"/>
           </Attribute>
@@ -3309,7 +3283,6 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <ticklen>240</ticklen>
         <Attribute>
-          <idx>3</idx>
           <subtype>3</subtype>
           <offset x="-0.818619" y="-5.95073"/>
           </Attribute>
@@ -3320,7 +3293,6 @@ p, li { white-space: pre-wrap; }
         <ticklen>240</ticklen>
         <BeamMode>begin</BeamMode>
         <Attribute>
-          <idx>3</idx>
           <subtype>3</subtype>
           <offset x="0.0629707" y="-7.49351"/>
           </Attribute>
@@ -3353,7 +3325,6 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <ticklen>240</ticklen>
         <Attribute>
-          <idx>3</idx>
           <subtype>3</subtype>
           <offset x="-0.125941" y="0.47228"/>
           </Attribute>
@@ -3365,7 +3336,6 @@ p, li { white-space: pre-wrap; }
         <ticklen>240</ticklen>
         <BeamMode>begin</BeamMode>
         <Attribute>
-          <idx>3</idx>
           <subtype>3</subtype>
           <offset x="-0.125941" y="0.47228"/>
           </Attribute>
@@ -3380,7 +3350,6 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <ticklen>240</ticklen>
         <Attribute>
-          <idx>3</idx>
           <subtype>3</subtype>
           <offset x="0.512168" y="-7.60935"/>
           </Attribute>
@@ -3402,7 +3371,6 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <ticklen>240</ticklen>
         <Attribute>
-          <idx>3</idx>
           <subtype>3</subtype>
           <offset x="-0.827776" y="-7.19003"/>
           </Attribute>
@@ -3413,7 +3381,6 @@ p, li { white-space: pre-wrap; }
         <ticklen>240</ticklen>
         <BeamMode>begin</BeamMode>
         <Attribute>
-          <idx>3</idx>
           <subtype>3</subtype>
           <offset x="0.414974" y="-8.26351"/>
           </Attribute>
@@ -3423,7 +3390,6 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <ticklen>240</ticklen>
         <Attribute>
-          <idx>3</idx>
           <subtype>3</subtype>
           <offset x="-0.559135" y="-9.28893"/>
           </Attribute>
@@ -3534,13 +3500,13 @@ p, li { white-space: pre-wrap; }
         <align>1</align>
         <xoffset>0</xoffset>
         <yoffset>-4</yoffset>
-        <anchor>tick</anchor>
+        <anchor>staff</anchor>
         <offsetType>spatium</offsetType>
         <spatiumSizeDependent>1</spatiumSizeDependent>
         <data>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-size:8.50394pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:10pt; font-weight:600;&quot;&gt;III________&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-size:10pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:9pt;&quot;&gt;&lt;span style=&quot; font-size:10pt; font-weight:600;&quot;&gt;III________&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
         <subtype>System</subtype>
         <offset x="-0.408163" y="-1.76871"/>
         </Text>
@@ -3548,13 +3514,13 @@ p, li { white-space: pre-wrap; }
         <align>1</align>
         <xoffset>0</xoffset>
         <yoffset>-4</yoffset>
-        <anchor>tick</anchor>
+        <anchor>staff</anchor>
         <offsetType>spatium</offsetType>
         <spatiumSizeDependent>1</spatiumSizeDependent>
         <data>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-size:8.50394pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:10pt; font-weight:600;&quot;&gt;IV__&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-size:10pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:9pt;&quot;&gt;&lt;span style=&quot; font-size:10pt; font-weight:600;&quot;&gt;IV__&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
         <subtype>System</subtype>
         <offset x="0.136054" y="-1.76871"/>
         <tick>48480</tick>
@@ -3563,7 +3529,6 @@ p, li { white-space: pre-wrap; }
         <tick>47520</tick>
         <ticklen>240</ticklen>
         <Attribute>
-          <idx>3</idx>
           <subtype>3</subtype>
           <offset x="0.115385" y="-2.30769"/>
           </Attribute>
@@ -3575,7 +3540,6 @@ p, li { white-space: pre-wrap; }
         <ticklen>240</ticklen>
         <BeamMode>begin</BeamMode>
         <Attribute>
-          <idx>3</idx>
           <subtype>3</subtype>
           <offset x="0.576923" y="-1.96154"/>
           </Attribute>
@@ -3607,7 +3571,6 @@ p, li { white-space: pre-wrap; }
         <ticklen>240</ticklen>
         <BeamMode>begin</BeamMode>
         <Attribute>
-          <idx>3</idx>
           <subtype>3</subtype>
           <offset x="0.115385" y="-2.30769"/>
           </Attribute>
@@ -3638,7 +3601,6 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <ticklen>240</ticklen>
         <Attribute>
-          <idx>3</idx>
           <subtype>3</subtype>
           <offset x="2.59585e-07" y="-3.29224"/>
           </Attribute>
@@ -3650,7 +3612,6 @@ p, li { white-space: pre-wrap; }
         <ticklen>240</ticklen>
         <BeamMode>begin</BeamMode>
         <Attribute>
-          <idx>3</idx>
           <subtype>3</subtype>
           <offset x="2.59585e-07" y="-3.29224"/>
           </Attribute>
@@ -3662,7 +3623,6 @@ p, li { white-space: pre-wrap; }
         <ticklen>240</ticklen>
         <BeamMode>begin</BeamMode>
         <Attribute>
-          <idx>3</idx>
           <subtype>3</subtype>
           <offset x="2.59585e-07" y="-3.29224"/>
           </Attribute>
@@ -3718,7 +3678,6 @@ p, li { white-space: pre-wrap; }
         <tick>53280</tick>
         <ticklen>960</ticklen>
         <Attribute>
-          <idx>3</idx>
           <subtype>3</subtype>
           <offset x="0.19953" y="-5.6866"/>
           <voice>1</voice>
@@ -3760,7 +3719,6 @@ p, li { white-space: pre-wrap; }
         <tick>54240</tick>
         <ticklen>480</ticklen>
         <Attribute>
-          <idx>3</idx>
           <subtype>3</subtype>
           <offset x="0.19953" y="-5.6866"/>
           <voice>1</voice>
@@ -3776,7 +3734,6 @@ p, li { white-space: pre-wrap; }
         <voice>1</voice>
         <ticklen>480</ticklen>
         <Attribute>
-          <idx>3</idx>
           <subtype>3</subtype>
           <offset x="0.19953" y="-5.6866"/>
           <voice>1</voice>
@@ -3841,7 +3798,6 @@ p, li { white-space: pre-wrap; }
         <tick>56640</tick>
         <ticklen>960</ticklen>
         <Attribute>
-          <idx>3</idx>
           <subtype>3</subtype>
           <offset x="0.19953" y="-5.6866"/>
           <voice>1</voice>
@@ -3877,7 +3833,6 @@ p, li { white-space: pre-wrap; }
         <tick>57600</tick>
         <ticklen>480</ticklen>
         <Attribute>
-          <idx>3</idx>
           <subtype>3</subtype>
           <offset x="0.0378872" y="-5.72097"/>
           <voice>1</voice>
@@ -3893,7 +3848,6 @@ p, li { white-space: pre-wrap; }
         <voice>1</voice>
         <ticklen>480</ticklen>
         <Attribute>
-          <idx>3</idx>
           <subtype>3</subtype>
           <offset x="0.0378872" y="-5.72097"/>
           <voice>1</voice>
@@ -3954,7 +3908,6 @@ p, li { white-space: pre-wrap; }
         <tick>60000</tick>
         <ticklen>1440</ticklen>
         <Attribute>
-          <idx>3</idx>
           <subtype>3</subtype>
           <offset x="0.0378872" y="-5.72097"/>
           <voice>1</voice>
@@ -4017,7 +3970,6 @@ p, li { white-space: pre-wrap; }
         <tick>62640</tick>
         <ticklen>1440</ticklen>
         <Attribute>
-          <idx>3</idx>
           <subtype>3</subtype>
           <offset x="0.151549" y="-5.45576"/>
           <voice>1</voice>
@@ -4107,7 +4059,6 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <ticklen>240</ticklen>
         <Attribute>
-          <idx>3</idx>
           <subtype>3</subtype>
           <offset x="0.61757" y="-3.1124"/>
           </Attribute>
@@ -4119,7 +4070,6 @@ p, li { white-space: pre-wrap; }
         <tick>65280</tick>
         <ticklen>960</ticklen>
         <Attribute>
-          <idx>3</idx>
           <subtype>3</subtype>
           <offset x="0.0378872" y="-5.72097"/>
           <voice>1</voice>
@@ -4199,7 +4149,6 @@ p, li { white-space: pre-wrap; }
         <voice>1</voice>
         <ticklen>240</ticklen>
         <Attribute>
-          <idx>3</idx>
           <subtype>3</subtype>
           <offset x="0.182808" y="-5.86589"/>
           <voice>1</voice>
@@ -4278,7 +4227,6 @@ p, li { white-space: pre-wrap; }
         <voice>1</voice>
         <ticklen>240</ticklen>
         <Attribute>
-          <idx>3</idx>
           <subtype>3</subtype>
           <offset x="0.182808" y="-5.86589"/>
           <voice>1</voice>
@@ -4309,8 +4257,8 @@ p, li { white-space: pre-wrap; }
         <startTrack>1</startTrack>
         <endTrack>1</endTrack>
         <SlurSegment no="0">
-          <o1 x="1.68102" y="2.90357"/>
-          <o2 x="-3.51485" y="-3.36203"/>
+          <o1 x="2.01412" y="2.23736"/>
+          <o2 x="-5.43946" y="-3.17697"/>
           <o3 x="6.72406" y="-1.37538"/>
           <o4 x="37.0104" y="2.56325"/>
           </SlurSegment>
@@ -4320,15 +4268,15 @@ p, li { white-space: pre-wrap; }
         <align>1</align>
         <xoffset>0</xoffset>
         <yoffset>-4</yoffset>
-        <anchor>tick</anchor>
+        <anchor>staff</anchor>
         <offsetType>spatium</offsetType>
         <spatiumSizeDependent>1</spatiumSizeDependent>
         <data>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-size:8.50394pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:10pt; font-weight:600;&quot;&gt;III____&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-size:10pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:9pt;&quot;&gt;&lt;span style=&quot; font-size:10pt; font-weight:600;&quot;&gt;III____&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
         <subtype>System</subtype>
-        <offset x="0" y="-1.4966"/>
+        <offset x="-0.740233" y="-2.82902"/>
         <tick>70320</tick>
         </Text>
       <Chord>
@@ -4343,7 +4291,7 @@ p, li { white-space: pre-wrap; }
         <Note pitch="69" tpc="17"/>
         </Chord>
       <Rest>
-        <offset x="0" y="2.15049"/>
+        <offset x="0" y="1.96543"/>
         <ticklen>120</ticklen>
         </Rest>
       <Chord>
@@ -4439,13 +4387,13 @@ p, li { white-space: pre-wrap; }
         <align>1</align>
         <xoffset>0</xoffset>
         <yoffset>-4</yoffset>
-        <anchor>tick</anchor>
+        <anchor>staff</anchor>
         <offsetType>spatium</offsetType>
         <spatiumSizeDependent>1</spatiumSizeDependent>
         <data>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-size:8.50394pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:10pt; font-weight:600;&quot;&gt;III____&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-size:10pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:9pt;&quot;&gt;&lt;span style=&quot; font-size:10pt; font-weight:600;&quot;&gt;III____&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
         <subtype>System</subtype>
         <offset x="0" y="-1.08844"/>
         <tick>71280</tick>
@@ -4454,13 +4402,13 @@ p, li { white-space: pre-wrap; }
         <align>1</align>
         <xoffset>0</xoffset>
         <yoffset>-4</yoffset>
-        <anchor>tick</anchor>
+        <anchor>staff</anchor>
         <offsetType>spatium</offsetType>
         <spatiumSizeDependent>1</spatiumSizeDependent>
         <data>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-size:8.50394pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:10pt; font-weight:600;&quot;&gt;IV____&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-size:10pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:9pt;&quot;&gt;&lt;span style=&quot; font-size:10pt; font-weight:600;&quot;&gt;IV____&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
         <subtype>System</subtype>
         <offset x="0" y="-1.08844"/>
         <tick>71760</tick>
@@ -4624,7 +4572,6 @@ p, li { white-space: pre-wrap; }
         <tick>72240</tick>
         <ticklen>480</ticklen>
         <Attribute>
-          <idx>3</idx>
           <subtype>3</subtype>
           <offset x="0.0635421" y="-5.71878"/>
           <voice>1</voice>
@@ -4640,7 +4587,6 @@ p, li { white-space: pre-wrap; }
         <voice>1</voice>
         <ticklen>480</ticklen>
         <Attribute>
-          <idx>3</idx>
           <subtype>3</subtype>
           <offset x="0.31771" y="-6.86254"/>
           <voice>1</voice>
@@ -4656,7 +4602,6 @@ p, li { white-space: pre-wrap; }
         <voice>1</voice>
         <ticklen>480</ticklen>
         <Attribute>
-          <idx>3</idx>
           <subtype>3</subtype>
           <offset x="0.698962" y="-7.49796"/>
           <voice>1</voice>
@@ -4707,7 +4652,6 @@ p, li { white-space: pre-wrap; }
         <tick>73680</tick>
         <ticklen>480</ticklen>
         <Attribute>
-          <idx>3</idx>
           <subtype>3</subtype>
           <offset x="0.254168" y="-7.43442"/>
           <voice>1</voice>
@@ -4722,7 +4666,6 @@ p, li { white-space: pre-wrap; }
         <voice>1</voice>
         <ticklen>480</ticklen>
         <Attribute>
-          <idx>3</idx>
           <subtype>3</subtype>
           <offset x="0.31771" y="-6.86254"/>
           <voice>1</voice>
@@ -4737,7 +4680,6 @@ p, li { white-space: pre-wrap; }
         <voice>1</voice>
         <ticklen>480</ticklen>
         <Attribute>
-          <idx>3</idx>
           <subtype>3</subtype>
           <offset x="0.0635421" y="-5.71878"/>
           <voice>1</voice>
@@ -4809,7 +4751,6 @@ p, li { white-space: pre-wrap; }
         <tick>75120</tick>
         <ticklen>480</ticklen>
         <Attribute>
-          <idx>11</idx>
           <subtype>11</subtype>
           <offset x="0.31771" y="-5.01982"/>
           <voice>1</voice>
@@ -4825,7 +4766,6 @@ p, li { white-space: pre-wrap; }
         <voice>1</voice>
         <ticklen>480</ticklen>
         <Attribute>
-          <idx>11</idx>
           <subtype>11</subtype>
           <offset x="0.31771" y="-6.29066"/>
           <voice>1</voice>
@@ -4841,7 +4781,6 @@ p, li { white-space: pre-wrap; }
         <voice>1</voice>
         <ticklen>480</ticklen>
         <Attribute>
-          <idx>11</idx>
           <subtype>11</subtype>
           <offset x="0.254168" y="-6.86254"/>
           <voice>1</voice>
@@ -4892,7 +4831,6 @@ p, li { white-space: pre-wrap; }
         <tick>76560</tick>
         <ticklen>480</ticklen>
         <Attribute>
-          <idx>11</idx>
           <subtype>11</subtype>
           <offset x="0.508336" y="-6.41774"/>
           <voice>1</voice>
@@ -4908,7 +4846,6 @@ p, li { white-space: pre-wrap; }
         <voice>1</voice>
         <ticklen>480</ticklen>
         <Attribute>
-          <idx>11</idx>
           <subtype>11</subtype>
           <offset x="0.381252" y="-5.78232"/>
           <voice>1</voice>
@@ -4924,7 +4861,6 @@ p, li { white-space: pre-wrap; }
         <voice>1</voice>
         <ticklen>480</ticklen>
         <Attribute>
-          <idx>11</idx>
           <subtype>11</subtype>
           <offset x="0.0635418" y="-5.27399"/>
           <voice>1</voice>
@@ -4945,7 +4881,6 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <ticklen>1440</ticklen>
         <Attribute>
-          <idx>0</idx>
           <offset x="0.434762" y="-2.46365"/>
           </Attribute>
         <Note pitch="55" tpc="15"/>
@@ -4968,7 +4903,6 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <ticklen>1440</ticklen>
         <Attribute>
-          <idx>0</idx>
           <offset x="0.434762" y="-2.46365"/>
           </Attribute>
         <Note pitch="59" tpc="19"/>
@@ -4983,5 +4917,5 @@ p, li { white-space: pre-wrap; }
       </Measure>
     </Staff>
   <cursorStaff>0</cursorStaff>
-  <cursorVoice>0</cursorVoice>
+  <cursorVoice>1</cursorVoice>
   </museScore>
