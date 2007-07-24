@@ -536,14 +536,13 @@ void Beam::layout(ScoreLayout* layout)
                               // create broken segment
                               bs = new BeamSegment;
                               beamSegments.push_back(bs);
-                              double x2, x3;
+                              double x2 = nn1->stemPos(nn1->chord()->isUp()).x() + nn1->chord()->pos().x() + nn1->chord()->segment()->pos().x();
+                              double x3 = x2 + point(style->beamMinLen);
+
                               if (!nn1r) {
-                                    x3 = nn1->stemPos(nn1->chord()->isUp()).x() + nn1->chord()->pos().x() + nn1->chord()->segment()->pos().x();
-                                    x2 = x3 - point(style->beamMinLen);
-                                    }
-                              else {
-                                    x2 = nn1->stemPos(nn1->chord()->isUp()).x() + nn1->chord()->pos().x() + nn1->chord()->segment()->pos().x();
-                                    x3 = x2 + point(style->beamMinLen);
+                                    double tmp = x3;
+                                    x3 = x2;
+                                    x2 = tmp;
                                     }
 
                               bs->p1 = QPointF(x2, (x2 - x1) * slope + y1);
@@ -560,7 +559,7 @@ void Beam::layout(ScoreLayout* layout)
                         nn2 = n;
                   else {
                         nn1 = n;
-                        nn1r = i == elements.begin();
+                        nn1r = cr == elements.front();
                         }
                   }
             if (nn2) {

@@ -3,8 +3,8 @@
   <Spatium>1.76389</Spatium>
   <Division>480</Division>
   <Mag>1</Mag>
-  <xoff>-1.952</xoff>
-  <yoff>-251.676</yoff>
+  <xoff>61.048</xoff>
+  <yoff>46.324</yoff>
   <Style>
     <staffUpperBorder>8</staffUpperBorder>
     <staffLowerBorder>4</staffLowerBorder>
@@ -266,7 +266,7 @@
       <Note pitch="68" tpc="22" ticks="480"/>
       <Note pitch="70" tpc="24" ticks="480"/>
       <Note pitch="72" tpc="26" ticks="480"/>
-      <Note pitch="73" tpc="21" ticks="480"/>
+      <Note pitch="73" tpc="9" ticks="480"/>
       <BarLine/>
       </Measure>
     <Measure number="17">
@@ -394,7 +394,7 @@
       <Note pitch="66" tpc="8" ticks="480"/>
       <Note pitch="68" tpc="10" ticks="480"/>
       <Note pitch="70" tpc="12" ticks="480"/>
-      <Note pitch="71" tpc="7" ticks="480"/>
+      <Note pitch="71" tpc="19" ticks="480"/>
       <BarLine/>
       </Measure>
     <Measure number="31">
