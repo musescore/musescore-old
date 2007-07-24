@@ -108,7 +108,7 @@ class Note : public Element {
       int pitch() const               { return _pitch; }
       void setPitch(int val);
       int tpc() const                 { return _tpc; }
-      void setTpc(int v)              { _tpc = v;    }
+      void setTpc(int v);
       void changePitch(int val);
 
       int move() const                { return _move; }

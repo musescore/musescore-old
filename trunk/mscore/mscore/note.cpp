@@ -89,6 +89,16 @@ void Note::setPitch(int val)
       }
 
 //---------------------------------------------------------
+//   setTpc
+//---------------------------------------------------------
+
+void Note::setTpc(int v)
+      {
+      _tpc = v;
+      _userAccidental = 0;
+      }
+
+//---------------------------------------------------------
 //   Note
 //---------------------------------------------------------
 
@@ -186,7 +196,7 @@ void Note::changeAccidental(int accType)
       _pitch    = tpc2pitch(_tpc) + (_pitch / 12) * 12;
       chord()->measure()->layoutNoteHeads(staffIdx());    // compute actual accidental
       int acc2  = accidentalSubtype();
-      if (accType != Accidental::value2subtype(acc2))
+      if (accType != acc2)
             _userAccidental = accType;    // bracketed editorial accidental
       }
 
