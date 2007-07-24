@@ -2,15 +2,15 @@
 <museScore version="1.0">
   <Spatium>1.55</Spatium>
   <Division>480</Division>
-  <Mag>1.5</Mag>
-  <xoff>3</xoff>
-  <yoff>-5</yoff>
+  <Mag>1.49223</Mag>
+  <xoff>-1228</xoff>
+  <yoff>-780</yoff>
   <Style>
     <staffUpperBorder>8</staffUpperBorder>
     <staffLowerBorder>4</staffLowerBorder>
-    <staffDistance>6.5</staffDistance>
+    <staffDistance>7.5</staffDistance>
     <akkoladeDistance>5.5</akkoladeDistance>
-    <systemDistance>9.25</systemDistance>
+    <systemDistance>9.7</systemDistance>
     <minMeasureWidth>4</minMeasureWidth>
     <barWidth>0.16</barWidth>
     <doubleBarWidth>0.16</doubleBarWidth>
@@ -153,10 +153,9 @@ p, li { white-space: pre-wrap; }
         <spatiumSizeDependent>0</spatiumSizeDependent>
         <data>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Arial&apos;; font-size:11pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Times New Roman&apos;; font-size:24pt;&quot;&gt;Inventio 10&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
         </Text>
-      <BarLine/>
       <Note pitch="67" tpc="15" ticks="240"/>
       <Note pitch="71" tpc="19" ticks="240"/>
       <Note pitch="74" tpc="16" ticks="240"/>
@@ -166,13 +165,12 @@ p, li { white-space: pre-wrap; }
       <Note pitch="71" tpc="19" ticks="240"/>
       <Note pitch="67" tpc="15" ticks="240"/>
       <Note pitch="79" tpc="15" ticks="240"/>
+      <BarLine/>
       </Measure>
     <Measure number="2">
-      <BarLine/>
       <Chord>
         <ticklen>480</ticklen>
         <Attribute>
-          <idx>20</idx>
           <subtype>20</subtype>
           <offset x="0" y="-0.431973"/>
           </Attribute>
@@ -180,12 +178,12 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
-        <BeamMode>4</BeamMode>
+        <BeamMode>no</BeamMode>
         <Note pitch="74" tpc="16"/>
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
-        <BeamMode>1</BeamMode>
+        <BeamMode>begin</BeamMode>
         <Note pitch="81" tpc="17"/>
         </Chord>
       <Note pitch="78" tpc="20" ticks="240"/>
@@ -193,9 +191,12 @@ p, li { white-space: pre-wrap; }
       <Note pitch="81" tpc="17" ticks="240"/>
       <Note pitch="78" tpc="20" ticks="240"/>
       <Note pitch="74" tpc="16" ticks="240"/>
+      <BarLine/>
       </Measure>
     <Measure number="3">
-      <BarLine/>
+      <LayoutBreak>
+        <subtype>line</subtype>
+        </LayoutBreak>
       <Note pitch="79" tpc="15" ticks="240"/>
       <Note pitch="74" tpc="16" ticks="240"/>
       <Note pitch="71" tpc="19" ticks="240"/>
@@ -205,9 +206,9 @@ p, li { white-space: pre-wrap; }
       <Note pitch="77" tpc="13" ticks="240"/>
       <Note pitch="74" tpc="16" ticks="240"/>
       <Note pitch="71" tpc="19" ticks="240"/>
+      <BarLine/>
       </Measure>
     <Measure number="4">
-      <BarLine/>
       <Note pitch="76" tpc="18" ticks="240"/>
       <Note pitch="72" tpc="14" ticks="240"/>
       <Note pitch="69" tpc="17" ticks="240"/>
@@ -217,9 +218,9 @@ p, li { white-space: pre-wrap; }
       <Note pitch="76" tpc="18" ticks="240"/>
       <Note pitch="74" tpc="16" ticks="240"/>
       <Note pitch="72" tpc="14" ticks="240"/>
+      <BarLine/>
       </Measure>
     <Measure number="5">
-      <BarLine/>
       <Note pitch="74" tpc="16" ticks="240"/>
       <Note pitch="71" tpc="19" ticks="240"/>
       <Note pitch="67" tpc="15" ticks="240"/>
@@ -229,9 +230,12 @@ p, li { white-space: pre-wrap; }
       <Note pitch="74" tpc="16" ticks="240"/>
       <Note pitch="72" tpc="14" ticks="240"/>
       <Note pitch="71" tpc="19" ticks="240"/>
+      <BarLine/>
       </Measure>
     <Measure number="6">
-      <BarLine/>
+      <LayoutBreak>
+        <subtype>line</subtype>
+        </LayoutBreak>
       <Note pitch="72" tpc="14" ticks="240"/>
       <Note pitch="69" tpc="17" ticks="240"/>
       <Note pitch="66" tpc="20" ticks="240"/>
@@ -241,13 +245,12 @@ p, li { white-space: pre-wrap; }
       <Note pitch="72" tpc="14" ticks="240"/>
       <Note pitch="71" tpc="19" ticks="240"/>
       <Note pitch="69" tpc="17" ticks="240"/>
+      <BarLine/>
       </Measure>
     <Measure number="7">
-      <BarLine/>
       <Chord>
         <ticklen>240</ticklen>
         <Attribute>
-          <idx>21</idx>
           <subtype>21</subtype>
           <offset x="0" y="-1.90068"/>
           </Attribute>
@@ -261,25 +264,27 @@ p, li { white-space: pre-wrap; }
       <Note pitch="76" tpc="18" ticks="240"/>
       <Note pitch="71" tpc="19" ticks="240"/>
       <Note pitch="79" tpc="15" ticks="240"/>
+      <BarLine/>
       </Measure>
     <Measure number="8">
-      <BarLine/>
       <Note pitch="69" tpc="17" ticks="240"/>
       <Note pitch="71" tpc="19" ticks="240"/>
-      <Note pitch="73" tpc="9" ticks="240"/>
+      <Note pitch="73" tpc="21" ticks="240"/>
       <Note pitch="74" tpc="16" ticks="240"/>
       <Note pitch="69" tpc="17" ticks="240"/>
       <Note pitch="78" tpc="20" ticks="240"/>
       <Note pitch="74" tpc="16" ticks="240"/>
       <Note pitch="69" tpc="17" ticks="240"/>
       <Note pitch="78" tpc="20" ticks="240"/>
+      <BarLine/>
       </Measure>
     <Measure number="9">
-      <BarLine/>
+      <LayoutBreak>
+        <subtype>line</subtype>
+        </LayoutBreak>
       <Chord>
         <ticklen>720</ticklen>
         <Attribute>
-          <idx>21</idx>
           <subtype>21</subtype>
           <offset x="-0.441403" y="-1.00329"/>
           </Attribute>
@@ -296,9 +301,9 @@ p, li { white-space: pre-wrap; }
       <Note pitch="66" tpc="20" ticks="240"/>
       <Note pitch="67" tpc="15" ticks="240"/>
       <Note pitch="64" tpc="18" ticks="240"/>
+      <BarLine/>
       </Measure>
     <Measure number="10">
-      <BarLine/>
       <Note pitch="66" tpc="20" ticks="240"/>
       <Note pitch="67" tpc="15" ticks="240"/>
       <Note pitch="66" tpc="20" ticks="240"/>
@@ -308,13 +313,12 @@ p, li { white-space: pre-wrap; }
       <Note pitch="69" tpc="17" ticks="240"/>
       <Note pitch="71" tpc="19" ticks="240"/>
       <Note pitch="72" tpc="14" ticks="240"/>
+      <BarLine/>
       </Measure>
     <Measure number="11">
-      <BarLine/>
       <Chord>
         <ticklen>240</ticklen>
         <Attribute>
-          <idx>21</idx>
           <subtype>21</subtype>
           <offset x="0.220702" y="-2.67544"/>
           </Attribute>
@@ -328,29 +332,31 @@ p, li { white-space: pre-wrap; }
       <Note pitch="76" tpc="18" ticks="240"/>
       <Note pitch="78" tpc="20" ticks="240"/>
       <Note pitch="79" tpc="15" ticks="240"/>
+      <BarLine/>
       </Measure>
     <Measure number="12">
-      <BarLine/>
+      <LayoutBreak>
+        <subtype>line</subtype>
+        </LayoutBreak>
       <Chord>
         <ticklen>240</ticklen>
         <Attribute>
-          <idx>21</idx>
           <subtype>21</subtype>
           <offset x="0" y="-0.780338"/>
           </Attribute>
         <Note pitch="73" tpc="9"/>
         </Chord>
       <Note pitch="74" tpc="16" ticks="240"/>
-      <Note pitch="73" tpc="9" ticks="240"/>
+      <Note pitch="73" tpc="21" ticks="240"/>
       <Note pitch="71" tpc="19" ticks="240"/>
-      <Note pitch="73" tpc="9" ticks="240"/>
+      <Note pitch="73" tpc="21" ticks="240"/>
       <Note pitch="69" tpc="17" ticks="240"/>
       <Note pitch="79" tpc="15" ticks="240"/>
       <Note pitch="81" tpc="17" ticks="240"/>
       <Note pitch="83" tpc="19" ticks="240"/>
+      <BarLine/>
       </Measure>
     <Measure number="13">
-      <BarLine/>
       <Note pitch="81" tpc="17" ticks="240"/>
       <Note pitch="79" tpc="15" ticks="240"/>
       <Note pitch="78" tpc="20" ticks="240"/>
@@ -359,14 +365,13 @@ p, li { white-space: pre-wrap; }
       <Note pitch="74" tpc="16" ticks="240"/>
       <Note pitch="69" tpc="17" ticks="240"/>
       <Note pitch="74" tpc="16" ticks="240"/>
-      <Note pitch="73" tpc="9" ticks="240"/>
+      <Note pitch="73" tpc="21" ticks="240"/>
+      <BarLine/>
       </Measure>
     <Measure number="14">
-      <BarLine/>
       <Chord>
         <ticklen>720</ticklen>
         <Attribute>
-          <idx>21</idx>
           <subtype>21</subtype>
           <offset x="-0.331052" y="-0.891815"/>
           </Attribute>
@@ -374,31 +379,31 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Rest>
         <ticklen>480</ticklen>
-        <BeamMode>4</BeamMode>
         </Rest>
       <Rest>
         <ticklen>960</ticklen>
-        <BeamMode>4</BeamMode>
         </Rest>
+      <BarLine/>
       </Measure>
     <Measure number="15">
-      <BarLine/>
+      <LayoutBreak>
+        <subtype>line</subtype>
+        </LayoutBreak>
       <Note pitch="69" tpc="17" ticks="240"/>
-      <Note pitch="73" tpc="9" ticks="240"/>
+      <Note pitch="73" tpc="21" ticks="240"/>
       <Note pitch="76" tpc="18" ticks="240"/>
-      <Note pitch="73" tpc="9" ticks="240"/>
+      <Note pitch="73" tpc="21" ticks="240"/>
       <Note pitch="69" tpc="17" ticks="240"/>
       <Note pitch="76" tpc="18" ticks="240"/>
-      <Note pitch="73" tpc="9" ticks="240"/>
+      <Note pitch="73" tpc="21" ticks="240"/>
       <Note pitch="69" tpc="17" ticks="240"/>
       <Note pitch="79" tpc="15" ticks="240"/>
+      <BarLine/>
       </Measure>
     <Measure number="16">
-      <BarLine/>
       <Chord>
         <ticklen>720</ticklen>
         <Attribute>
-          <idx>20</idx>
           <subtype>20</subtype>
           <offset x="0" y="-0.557384"/>
           </Attribute>
@@ -407,15 +412,13 @@ p, li { white-space: pre-wrap; }
       <Note pitch="74" tpc="16" ticks="720"/>
       <Rest>
         <ticklen>240</ticklen>
-        <BeamMode>4</BeamMode>
         </Rest>
       <Rest>
         <ticklen>480</ticklen>
-        <BeamMode>4</BeamMode>
         </Rest>
+      <BarLine/>
       </Measure>
     <Measure number="17">
-      <BarLine/>
       <Note pitch="67" tpc="15" ticks="240"/>
       <Note pitch="71" tpc="19" ticks="240"/>
       <Note pitch="74" tpc="16" ticks="240"/>
@@ -425,9 +428,9 @@ p, li { white-space: pre-wrap; }
       <Note pitch="71" tpc="19" ticks="240"/>
       <Note pitch="67" tpc="15" ticks="240"/>
       <Note pitch="77" tpc="13" ticks="240"/>
+      <BarLine/>
       </Measure>
     <Measure number="18">
-      <BarLine/>
       <Note pitch="76" tpc="18" ticks="240"/>
       <Note pitch="72" tpc="14" ticks="240"/>
       <Note pitch="69" tpc="17" ticks="240"/>
@@ -437,9 +440,12 @@ p, li { white-space: pre-wrap; }
       <Note pitch="69" tpc="17" ticks="240"/>
       <Note pitch="71" tpc="19" ticks="240"/>
       <Note pitch="72" tpc="14" ticks="240"/>
+      <BarLine/>
       </Measure>
     <Measure number="19">
-      <BarLine/>
+      <LayoutBreak>
+        <subtype>line</subtype>
+        </LayoutBreak>
       <Note pitch="74" tpc="16" ticks="240"/>
       <Note pitch="71" tpc="19" ticks="240"/>
       <Note pitch="67" tpc="15" ticks="240"/>
@@ -449,13 +455,12 @@ p, li { white-space: pre-wrap; }
       <Note pitch="67" tpc="15" ticks="240"/>
       <Note pitch="69" tpc="17" ticks="240"/>
       <Note pitch="71" tpc="19" ticks="240"/>
+      <BarLine/>
       </Measure>
     <Measure number="20">
-      <BarLine/>
       <Chord>
         <ticklen>1440</ticklen>
         <Attribute>
-          <idx>20</idx>
           <subtype>20</subtype>
           <offset x="0" y="-1.78363"/>
           </Attribute>
@@ -475,9 +480,9 @@ p, li { white-space: pre-wrap; }
             </Tie>
           </Note>
         </Chord>
+      <BarLine/>
       </Measure>
     <Measure number="21">
-      <BarLine/>
       <Chord>
         <ticklen>1440</ticklen>
         <Note>
@@ -488,13 +493,15 @@ p, li { white-space: pre-wrap; }
           </Note>
         </Chord>
       <Note pitch="72" tpc="14" ticks="720"/>
+      <BarLine/>
       </Measure>
     <Measure number="22">
-      <BarLine/>
+      <LayoutBreak>
+        <subtype>line</subtype>
+        </LayoutBreak>
       <Chord>
         <ticklen>1440</ticklen>
         <Attribute>
-          <idx>20</idx>
           <subtype>20</subtype>
           <offset x="-0.331052" y="-1.89511"/>
           </Attribute>
@@ -514,9 +521,9 @@ p, li { white-space: pre-wrap; }
             </Tie>
           </Note>
         </Chord>
+      <BarLine/>
       </Measure>
     <Measure number="23">
-      <BarLine/>
       <Chord>
         <ticklen>1440</ticklen>
         <Note>
@@ -535,9 +542,9 @@ p, li { white-space: pre-wrap; }
             </Tie>
           </Note>
         </Chord>
+      <BarLine/>
       </Measure>
     <Measure number="24">
-      <BarLine/>
       <Note pitch="71" tpc="19" ticks="240"/>
       <Note pitch="76" tpc="18" ticks="240"/>
       <Note pitch="74" tpc="16" ticks="240"/>
@@ -547,9 +554,12 @@ p, li { white-space: pre-wrap; }
       <Note pitch="69" tpc="17" ticks="240"/>
       <Note pitch="71" tpc="19" ticks="240"/>
       <Note pitch="67" tpc="15" ticks="240"/>
+      <BarLine/>
       </Measure>
     <Measure number="25">
-      <BarLine/>
+      <LayoutBreak>
+        <subtype>line</subtype>
+        </LayoutBreak>
       <Note pitch="69" tpc="17" ticks="240"/>
       <Note pitch="72" tpc="14" ticks="240"/>
       <Note pitch="71" tpc="19" ticks="240"/>
@@ -559,13 +569,12 @@ p, li { white-space: pre-wrap; }
       <Note pitch="66" tpc="20" ticks="240"/>
       <Note pitch="67" tpc="15" ticks="240"/>
       <Note pitch="64" tpc="18" ticks="240"/>
+      <BarLine/>
       </Measure>
     <Measure number="26">
-      <BarLine/>
       <Chord>
         <ticklen>480</ticklen>
         <Attribute>
-          <idx>20</idx>
           <subtype>20</subtype>
           <offset x="-0.220702" y="-1.00329"/>
           </Attribute>
@@ -575,7 +584,6 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <ticklen>480</ticklen>
         <Attribute>
-          <idx>21</idx>
           <subtype>21</subtype>
           <offset x="-0.220702" y="-0.668861"/>
           </Attribute>
@@ -585,17 +593,16 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <ticklen>480</ticklen>
         <Attribute>
-          <idx>21</idx>
           <subtype>21</subtype>
           <offset x="-0.110351" y="-1.56068"/>
           </Attribute>
         <Note pitch="74" tpc="16"/>
         </Chord>
       <Note pitch="66" tpc="20" ticks="240"/>
+      <BarLine/>
       </Measure>
     <Measure number="27">
       <stretch>1.1</stretch>
-      <BarLine/>
       <Note pitch="67" tpc="15" ticks="240"/>
       <Note pitch="71" tpc="19" ticks="240"/>
       <Note pitch="74" tpc="16" ticks="240"/>
@@ -605,10 +612,13 @@ p, li { white-space: pre-wrap; }
       <Note pitch="71" tpc="19" ticks="240"/>
       <Note pitch="67" tpc="15" ticks="240"/>
       <Note pitch="79" tpc="15" ticks="240"/>
+      <BarLine/>
       </Measure>
     <Measure number="28">
       <stretch>1.1</stretch>
-      <BarLine/>
+      <LayoutBreak>
+        <subtype>line</subtype>
+        </LayoutBreak>
       <Note pitch="74" tpc="16" ticks="240"/>
       <Note pitch="78" tpc="20" ticks="240"/>
       <Note pitch="81" tpc="17" ticks="240"/>
@@ -618,10 +628,10 @@ p, li { white-space: pre-wrap; }
       <Note pitch="78" tpc="20" ticks="240"/>
       <Note pitch="74" tpc="16" ticks="240"/>
       <Note pitch="84" tpc="14" ticks="240"/>
+      <BarLine/>
       </Measure>
     <Measure number="29">
       <stretch>1.1</stretch>
-      <BarLine/>
       <Note pitch="83" tpc="19" ticks="240"/>
       <Note pitch="81" tpc="17" ticks="240"/>
       <Note pitch="79" tpc="15" ticks="240"/>
@@ -631,10 +641,10 @@ p, li { white-space: pre-wrap; }
       <Note pitch="74" tpc="16" ticks="240"/>
       <Note pitch="79" tpc="15" ticks="240"/>
       <Note pitch="78" tpc="20" ticks="240"/>
+      <BarLine/>
       </Measure>
     <Measure number="30">
       <stretch>1.1</stretch>
-      <BarLine/>
       <Note pitch="79" tpc="15" ticks="240"/>
       <Note pitch="78" tpc="20" ticks="240"/>
       <Note pitch="76" tpc="18" ticks="240"/>
@@ -644,9 +654,9 @@ p, li { white-space: pre-wrap; }
       <Note pitch="69" tpc="17" ticks="240"/>
       <Note pitch="71" tpc="19" ticks="240"/>
       <Note pitch="72" tpc="14" ticks="240"/>
+      <BarLine/>
       </Measure>
     <Measure number="31">
-      <BarLine/>
       <Note pitch="71" tpc="19" ticks="240"/>
       <Note pitch="69" tpc="17" ticks="240"/>
       <Note pitch="67" tpc="15" ticks="240"/>
@@ -656,15 +666,12 @@ p, li { white-space: pre-wrap; }
       <Note pitch="62" tpc="16" ticks="240"/>
       <Note pitch="67" tpc="15" ticks="240"/>
       <Note pitch="66" tpc="20" ticks="240"/>
+      <BarLine/>
       </Measure>
     <Measure number="32">
-      <BarLine>
-        <subtype>5</subtype>
-        <tick>7440</tick>
-        </BarLine>
       <Chord>
-        <tick>7440</tick>
         <ticklen>240</ticklen>
+        <BeamMode>begin</BeamMode>
         <Note pitch="67" tpc="15"/>
         </Chord>
       <Note pitch="62" tpc="16" ticks="240"/>
@@ -672,19 +679,19 @@ p, li { white-space: pre-wrap; }
       <Note pitch="55" tpc="15" ticks="720"/>
       <Rest>
         <ticklen>240</ticklen>
-        <BeamMode>4</BeamMode>
         </Rest>
       <Rest>
         <ticklen>480</ticklen>
-        <BeamMode>4</BeamMode>
         </Rest>
+      <BarLine>
+        <subtype>5</subtype>
+        </BarLine>
       </Measure>
     </Staff>
   <Staff id="2">
     <Measure number="1">
       <Rest>
         <ticklen>2160</ticklen>
-        <BeamMode>4</BeamMode>
         </Rest>
       </Measure>
     <Measure number="2">
@@ -702,7 +709,6 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <ticklen>480</ticklen>
         <Attribute>
-          <idx>20</idx>
           <subtype>20</subtype>
           <offset x="-0.0855219" y="-0.604762"/>
           </Attribute>
@@ -753,7 +759,6 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <ticklen>720</ticklen>
         <Attribute>
-          <idx>21</idx>
           <subtype>21</subtype>
           <offset x="-0.110351" y="-1.00329"/>
           </Attribute>
@@ -769,13 +774,12 @@ p, li { white-space: pre-wrap; }
       <Note pitch="52" tpc="18" ticks="240"/>
       <Note pitch="50" tpc="16" ticks="240"/>
       <Note pitch="52" tpc="18" ticks="240"/>
-      <Note pitch="49" tpc="9" ticks="240"/>
+      <Note pitch="49" tpc="21" ticks="240"/>
       </Measure>
     <Measure number="8">
       <Chord>
         <ticklen>720</ticklen>
         <Attribute>
-          <idx>21</idx>
           <subtype>21</subtype>
           <offset x="0.110351" y="-1.11477"/>
           </Attribute>
@@ -789,7 +793,7 @@ p, li { white-space: pre-wrap; }
       <Note pitch="54" tpc="20" ticks="240"/>
       <Note pitch="52" tpc="18" ticks="240"/>
       <Note pitch="50" tpc="16" ticks="240"/>
-      <Note pitch="49" tpc="9" ticks="240"/>
+      <Note pitch="49" tpc="21" ticks="240"/>
       <Note pitch="50" tpc="16" ticks="240"/>
       <Note pitch="47" tpc="19" ticks="240"/>
       </Measure>
@@ -799,16 +803,15 @@ p, li { white-space: pre-wrap; }
       <Note pitch="55" tpc="15" ticks="240"/>
       <Note pitch="57" tpc="17" ticks="240"/>
       <Note pitch="52" tpc="18" ticks="240"/>
-      <Note pitch="61" tpc="9" ticks="240"/>
+      <Note pitch="61" tpc="21" ticks="240"/>
       <Note pitch="57" tpc="17" ticks="240"/>
       <Note pitch="52" tpc="18" ticks="240"/>
-      <Note pitch="61" tpc="9" ticks="240"/>
+      <Note pitch="61" tpc="21" ticks="240"/>
       </Measure>
     <Measure number="10">
       <Chord>
         <ticklen>720</ticklen>
         <Attribute>
-          <idx>21</idx>
           <subtype>21</subtype>
           <offset x="0" y="-0.780338"/>
           </Attribute>
@@ -830,7 +833,6 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <ticklen>720</ticklen>
         <Attribute>
-          <idx>21</idx>
           <subtype>21</subtype>
           <offset x="0" y="-0.891815"/>
           </Attribute>
@@ -852,7 +854,6 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <ticklen>720</ticklen>
         <Attribute>
-          <idx>21</idx>
           <subtype>21</subtype>
           <offset x="0.110351" y="-0.891815"/>
           </Attribute>
@@ -868,7 +869,7 @@ p, li { white-space: pre-wrap; }
       <Note pitch="54" tpc="20" ticks="240"/>
       <Note pitch="52" tpc="18" ticks="240"/>
       <Note pitch="50" tpc="16" ticks="240"/>
-      <Note pitch="49" tpc="9" ticks="240"/>
+      <Note pitch="49" tpc="21" ticks="240"/>
       </Measure>
     <Measure number="13">
       <Note pitch="50" tpc="16" ticks="240"/>
@@ -895,20 +896,17 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <ticklen>720</ticklen>
         <Attribute>
-          <idx>20</idx>
           <subtype>20</subtype>
-          <offset x="0.441403" y="0.222954"/>
+          <offset x="0.202087" y="-0.215791"/>
           </Attribute>
         <Note pitch="61" tpc="9"/>
         </Chord>
       <Note pitch="57" tpc="17" ticks="720"/>
       <Rest>
         <ticklen>240</ticklen>
-        <BeamMode>4</BeamMode>
         </Rest>
       <Rest>
         <ticklen>480</ticklen>
-        <BeamMode>4</BeamMode>
         </Rest>
       </Measure>
     <Measure number="16">
@@ -926,7 +924,6 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <ticklen>720</ticklen>
         <Attribute>
-          <idx>20</idx>
           <subtype>20</subtype>
           <offset x="0.110351" y="-0.445907"/>
           </Attribute>
@@ -935,18 +932,15 @@ p, li { white-space: pre-wrap; }
       <Note pitch="55" tpc="15" ticks="720"/>
       <Rest>
         <ticklen>240</ticklen>
-        <BeamMode>4</BeamMode>
         </Rest>
       <Rest>
         <ticklen>480</ticklen>
-        <BeamMode>4</BeamMode>
         </Rest>
       </Measure>
     <Measure number="18">
       <Chord>
         <ticklen>720</ticklen>
         <Attribute>
-          <idx>21</idx>
           <subtype>21</subtype>
           <offset x="-0.220702" y="-0.557384"/>
           </Attribute>
@@ -968,7 +962,6 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <ticklen>720</ticklen>
         <Attribute>
-          <idx>21</idx>
           <subtype>21</subtype>
           <offset x="-0.110351" y="-0.557384"/>
           </Attribute>
@@ -999,14 +992,14 @@ p, li { white-space: pre-wrap; }
       </Measure>
     <Measure number="21">
       <Note pitch="50" tpc="16" ticks="240"/>
-      <Note pitch="53" tpc="13" ticks="240"/>
+      <Note pitch="54" tpc="20" ticks="240"/>
       <Note pitch="57" tpc="17" ticks="240"/>
       <Note pitch="62" tpc="16" ticks="240"/>
       <Note pitch="57" tpc="17" ticks="240"/>
-      <Note pitch="53" tpc="13" ticks="240"/>
+      <Note pitch="54" tpc="20" ticks="240"/>
       <Note pitch="50" tpc="16" ticks="240"/>
       <Note pitch="52" tpc="18" ticks="240"/>
-      <Note pitch="53" tpc="13" ticks="240"/>
+      <Note pitch="54" tpc="20" ticks="240"/>
       </Measure>
     <Measure number="22">
       <Note pitch="55" tpc="15" ticks="240"/>
@@ -1020,8 +1013,8 @@ p, li { white-space: pre-wrap; }
       <Note pitch="59" tpc="19" ticks="240"/>
       </Measure>
     <Measure number="23">
-      <Note pitch="54" tpc="20" ticks="240"/>
-      <Note pitch="57" tpc="17" ticks="240"/>
+      <Note pitch="52" tpc="18" ticks="240"/>
+      <Note pitch="55" tpc="15" ticks="240"/>
       <Note pitch="59" tpc="19" ticks="240"/>
       <Note pitch="64" tpc="18" ticks="240"/>
       <Note pitch="59" tpc="19" ticks="240"/>
@@ -1034,7 +1027,6 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <ticklen>1440</ticklen>
         <Attribute>
-          <idx>20</idx>
           <subtype>20</subtype>
           <offset x="-0.662105" y="-0.668861"/>
           </Attribute>
@@ -1139,7 +1131,6 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <ticklen>480</ticklen>
         <Attribute>
-          <idx>21</idx>
           <subtype>21</subtype>
           <offset x="0.110351" y="-1.00329"/>
           </Attribute>
@@ -1152,9 +1143,8 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <ticklen>480</ticklen>
         <Attribute>
-          <idx>21</idx>
           <subtype>21</subtype>
-          <offset x="0" y="-2.00658"/>
+          <offset x="0.114392" y="-0.862662"/>
           </Attribute>
         <Note pitch="50" tpc="16"/>
         </Chord>
@@ -1173,9 +1163,16 @@ p, li { white-space: pre-wrap; }
       <Note pitch="43" tpc="15" ticks="240"/>
       <Note pitch="47" tpc="19" ticks="240"/>
       <Note pitch="50" tpc="16" ticks="240"/>
-      <Note pitch="55" tpc="15" ticks="720"/>
+      <Chord>
+        <ticklen>720</ticklen>
+        <Note>
+          <selected>1</selected>
+          <pitch>55</pitch>
+          <tpc>15</tpc>
+          </Note>
+        </Chord>
       </Measure>
     </Staff>
-  <cursorStaff>-1</cursorStaff>
+  <cursorStaff>1</cursorStaff>
   <cursorVoice>0</cursorVoice>
   </museScore>

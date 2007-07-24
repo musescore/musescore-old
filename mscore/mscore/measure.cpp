@@ -374,25 +374,20 @@ void Measure::layoutNoteHeads(int staff)
 
                         int accidental = 0;
                         if (note->userAccidental())
-                              accidental = Accidental::value2subtype(note->userAccidental());
+                              accidental = note->userAccidental();
                         else  {
                               int accVal = ((tpc + 1) / 7) - 2;
-
-                              if (accVal && !tversatz[line]) {
+                              accidental = ACC_NONE;
+                              if (accVal != tversatz[line]) {
                                     tversatz[line] = accVal;
                                     switch(accVal) {
                                           case -2: accidental = ACC_FLAT2;  break;
                                           case -1: accidental = ACC_FLAT;   break;
                                           case  1: accidental = ACC_SHARP;  break;
                                           case  2: accidental = ACC_SHARP2; break;
+                                          case  0: accidental = ACC_NATURAL; break;
                                           default: printf("bad accidental\n"); break;
                                           }
-                                    }
-                              else if (accVal == tversatz[line])
-                                    accidental = 0;
-                              else if ((!accVal) && tversatz[line]) {
-                                    tversatz[line] = 0;
-                                    accidental = ACC_NATURAL;   // natural
                                     }
                               }
 

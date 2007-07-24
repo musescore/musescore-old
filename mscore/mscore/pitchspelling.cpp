@@ -150,7 +150,7 @@ static const int tab2[24] = {
       22, 10,  // 68  G#  Ab
       29, 17,  // 69  G## A
       24, 12,  // 70  A#  Bb
-      31,  7,  // 71  A## Cb
+      31, 19,  // 71  A## B
       };
 
 int intervalPenalty[13] = {
@@ -257,7 +257,7 @@ static const bool enharmonicSpelling[15][34] = {
       1, 1, 1, 1, 1, 1, 0, // b
       1, 1, 1, 1, 0, 0, 0,
       0, 0, 0, 0, 0, 1, 1, // #
-      1, 1, 1, 1, 1, 1, 1  // ##
+      0, 0, 1, 1, 1, 1, 1  // ##
       },
       {
 //H   f  c  g  d  a  e  b

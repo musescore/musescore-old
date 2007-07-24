@@ -3,8 +3,8 @@
   <Spatium>1.76389</Spatium>
   <Division>480</Division>
   <Mag>1</Mag>
-  <xoff>188.048</xoff>
-  <yoff>-268.676</yoff>
+  <xoff>-1.952</xoff>
+  <yoff>-251.676</yoff>
   <Style>
     <staffUpperBorder>8</staffUpperBorder>
     <staffLowerBorder>4</staffLowerBorder>
@@ -228,7 +228,7 @@
         </LayoutBreak>
       <Note pitch="68" tpc="22" ticks="480"/>
       <Note pitch="70" tpc="24" ticks="480"/>
-      <Note pitch="71" tpc="31" ticks="480"/>
+      <Note pitch="71" tpc="19" ticks="480"/>
       <Note pitch="73" tpc="21" ticks="480"/>
       <BarLine/>
       </Measure>
@@ -238,7 +238,7 @@
         </KeySig>
       <Note pitch="61" tpc="21" ticks="480"/>
       <Note pitch="63" tpc="23" ticks="480"/>
-      <Note pitch="65" tpc="13" ticks="480"/>
+      <Note pitch="65" tpc="25" ticks="480"/>
       <Note pitch="66" tpc="20" ticks="480"/>
       <BarLine/>
       </Measure>
@@ -255,7 +255,7 @@
         </KeySig>
       <Note pitch="61" tpc="21" ticks="480"/>
       <Note pitch="63" tpc="23" ticks="480"/>
-      <Note pitch="65" tpc="13" ticks="480"/>
+      <Note pitch="65" tpc="25" ticks="480"/>
       <Note pitch="66" tpc="20" ticks="480"/>
       <BarLine/>
       </Measure>
@@ -266,7 +266,7 @@
       <Note pitch="68" tpc="22" ticks="480"/>
       <Note pitch="70" tpc="24" ticks="480"/>
       <Note pitch="72" tpc="26" ticks="480"/>
-      <Note pitch="73" tpc="9" ticks="480"/>
+      <Note pitch="73" tpc="21" ticks="480"/>
       <BarLine/>
       </Measure>
     <Measure number="17">
@@ -417,7 +417,7 @@
     <Measure number="33">
       <Note pitch="61" tpc="21" ticks="480"/>
       <Note pitch="63" tpc="23" ticks="480"/>
-      <Note pitch="65" tpc="13" ticks="480"/>
+      <Note pitch="65" tpc="25" ticks="480"/>
       <Note pitch="66" tpc="20" ticks="480"/>
       <BarLine/>
       </Measure>
@@ -437,19 +437,9 @@
       </Measure>
     <Measure number="36">
       <Note pitch="66" tpc="20" ticks="480"/>
-      <Note pitch="65" tpc="13" ticks="480"/>
-      <Note pitch="65" tpc="13" ticks="480"/>
+      <Note pitch="65" tpc="25" ticks="480"/>
+      <Note pitch="65" tpc="25" ticks="480"/>
       <Note pitch="63" tpc="23" ticks="480"/>
-      <BarLine/>
-      </Measure>
-    <Measure number="37">
-      <Note pitch="61" tpc="21" ticks="480"/>
-      <Rest>
-        <ticklen>480</ticklen>
-        </Rest>
-      <Rest>
-        <ticklen>960</ticklen>
-        </Rest>
       <BarLine/>
       </Measure>
     </Staff>
