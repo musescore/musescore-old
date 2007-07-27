@@ -434,7 +434,7 @@ Measure* Score::pos2measure(const QPointF& p, int* tick, Staff** rst, int* pitch
                         }
                   QPointF ppp = pp - s->pos();   // system relative
                   foreach(Measure* m, s->measures()) {
-                        if (ppp.x() > (m->x() + m->bbox().width()))
+                        if (ppp.x() >= (m->x() + m->bbox().width()))
                               continue;
                         double sy1 = 0;
                         if (rst && *rst == 0) {
@@ -495,14 +495,16 @@ Measure* Score::pos2measure(const QPointF& p, int* tick, Staff** rst, int* pitch
                               for (Segment* segment = m->first(); segment; segment = segment->next()) {
                                     if (segment->subtype() != Segment::SegChordRest)
                                           continue;
-                                    bool found = segment->next() == 0;
-                                    if (!found) {
+                                    Segment* ns = segment->next();
+                                    while (ns && ns->subtype() != Segment::SegChordRest)
+                                          ns = ns->next();
+
+                                    if (ns) {
                                           double x1 = segment->x();
-                                          double x2 = segment->next()->x();
-                                          found = pppp.x() < (x1 + (x2 - x1) / 2);
+                                          double x2 = ns->x();
+                                          if (pppp.x() >= (x1 + (x2 - x1) / 2))
+                                                continue;
                                           }
-                                    if (!found)
-                                          continue;
                                     if (tick)
                                           *tick = segment->tick();
                                     if (pitch) {
@@ -804,15 +806,14 @@ void Score::startEdit(Element* element)
  Return true if end edit.
 */
 
-bool Score::edit(QMatrix& matrix, QKeyEvent* ev)
+bool Score::edit(QKeyEvent* ev)
       {
-      if ((ev->key() == Qt::Key_Escape) || editObject->edit(matrix, ev)) {
+      if ((ev->key() == Qt::Key_Escape) || editObject->edit(0, ev)) {
             endEdit();
             endCmd(true);
             return true;
             }
       endCmd(false);
-      layout();
       return false;
       }
 
@@ -851,8 +852,8 @@ void Score::endEdit()
                   }
             }
       layout();
-      editObject = 0;
       mscore->setState(STATE_NORMAL);
+      editObject = 0;
       }
 
 //---------------------------------------------------------
@@ -892,17 +893,6 @@ void Score::endDrag()
             }
       layout();
       _dragObject = 0;
-      }
-
-//---------------------------------------------------------
-//   dragEdit
-//---------------------------------------------------------
-
-void Score::dragEdit(Viewer* viewer, QPointF* startMove, const QPointF& fdelta)
-      {
-      refresh |= editObject->abbox();
-      editObject->editDrag(viewer, startMove, fdelta);
-      refresh |= editObject->abbox();
       }
 
 //---------------------------------------------------------
@@ -1183,8 +1173,10 @@ bool Score::pos2TickAnchor(QPointF& pos, Staff* staff, int* tick, QPointF* ancho
       {
       Segment* seg;
       Measure* m = pos2measure(pos, tick, &staff, 0, &seg, 0);
-      if (!m)
+      if (!m) {
+            printf("pos2TickAnchor: no measure found\n");
             return false;
+            }
       System* system = m->system();
       qreal y = system->staff(staff->idx())->bbox().y();
       *anchor = QPointF(seg->abbox().x(), y + system->canvasPos().y());

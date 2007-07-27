@@ -330,14 +330,13 @@ class Score : public QObject {
       void lyricsMinus();
 
       void startEdit(Element* element);
-      bool edit(QMatrix&, QKeyEvent* ev);
+      bool edit(QKeyEvent* ev);
       void endEdit();
 
       void startDrag();
       void drag(const QPointF&);
       void endDrag();
 
-      void dragEdit(Viewer*, QPointF* startMove, const QPointF& delta);
       void layoutPageHeader(Page*);
 
       void changeVoice(int);

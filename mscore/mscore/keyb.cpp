@@ -43,27 +43,73 @@
 
 void Canvas::keyPressEvent(QKeyEvent* ev)
       {
-// printf("key key:%x state:%x text:<%s>\n", ev->key(),
+//printf("key key:%x state:%x text:<%s>\n", ev->key(),
 //    int(ev->modifiers()), ev->text().toLatin1().data());
 
-      if (state == EDIT) {
-            if (_score->editObject->type() == LYRICS) {
-                  if (ev->key() == Qt::Key_Tab)
-                        _score->lyricsTab(ev->modifiers() & Qt::ControlModifier);
-                  else if (ev->key() == Qt::Key_Return)
-                        _score->lyricsReturn();
-                  else if (ev->key() == Qt::Key_Minus)
-                        _score->lyricsMinus();
-                  else if (_score->edit(_matrix, ev))
-                        state = NORMAL;
-                  }
-            else if (_score->edit(_matrix, ev))
-                  state = NORMAL;
-            ev->accept();
-            }
-      else {
+      if (state != EDIT && state != DRAG_EDIT) {
             ev->ignore();
+            return;
             }
+      if ((ev->key() == Qt::Key_Escape)) {
+            if (state == DRAG_EDIT)
+                  _score->editObject->endEditDrag();
+            setState(NORMAL);
+            _score->endCmd(true);
+            ev->accept();
+            return;
+            }
+      if (_score->editObject->type() == LYRICS) {
+            if (ev->key() == Qt::Key_Tab)
+                  _score->lyricsTab(ev->modifiers() & Qt::ControlModifier);
+            else if (ev->key() == Qt::Key_Return)
+                  _score->lyricsReturn();
+            else if (ev->key() == Qt::Key_Minus)
+                  _score->lyricsMinus();
+            else if (_score->edit(ev))
+                  setState(NORMAL);
+            ev->accept();
+            return;
+            }
+      if (ev->modifiers() & Qt::ShiftModifier) {
+            _score->editObject->edit(curGrip, ev);
+            updateGrips();
+            _score->endCmd(false);
+            return;
+            }
+      QPointF delta;
+      qreal val = 1.0;
+      if (ev->modifiers() & Qt::ControlModifier)
+            val = 0.1;
+      switch (ev->key()) {
+            case Qt::Key_Left:
+                  delta = QPointF(-val, 0);
+                  break;
+            case Qt::Key_Right:
+                  delta = QPointF(val, 0);
+                  break;
+            case Qt::Key_Up:
+                  delta = QPointF(0, -val);
+                  break;
+            case Qt::Key_Down:
+                  delta = QPointF(0, val);
+                  break;
+            case Qt::Key_Tab:
+                  if (curGrip < (grips-1))
+                        ++curGrip;
+                  else
+                        curGrip = 0;
+                  val = 0.0;
+                  break;
+            default:
+                  _score->editObject->edit(curGrip, ev);
+                  updateGrips();
+                  _score->endCmd(false);
+                  return;
+            }
+      _score->editObject->editDrag(curGrip, grip[curGrip].center(), delta);
+      updateGrips();
+      _score->endCmd(false);
+      ev->accept();
       }
 
 //---------------------------------------------------------

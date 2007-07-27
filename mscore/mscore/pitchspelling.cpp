@@ -322,7 +322,7 @@ static int computeWindow(const QList<MidiNote*>& notes, int start, int end, int 
       int idx = -1;
       int pitch[10];
 
-      if (end >= 10)
+      if ((end-start) >= 10 || start == end)
             abort();
 
       int i = start;
@@ -337,17 +337,17 @@ static int computeWindow(const QList<MidiNote*>& notes, int start, int end, int 
             int pa    = 0;
             int pb    = 0;
             int l     = pitch[0] * 2 + (i & 1);
-            if (l < 0 || l > (sizeof(tab1)/sizeof(*tab1)))
+            if ((l < 0) || (l >= int(sizeof(tab1)/sizeof(*tab1))))
                   abort();
             int lof1a = tab1[l];
             int lof1b = tab2[l];
 
             for (int k = 1; k < 10; ++k) {
                   int l = pitch[k] * 2 + ((i & (1 << k)) >> k);
+                  if ((l < 0) || (l >= int(sizeof(tab1)/sizeof(*tab1))))
+                        abort();
                   int lof2a = tab1[l];
                   int lof2b = tab2[l];
-                  if (l < 0 || l > (sizeof(tab1)/sizeof(*tab1)))
-                        abort();
                   pa += penalty(lof1a, lof2a, keyIdx);
                   pb += penalty(lof1b, lof2b, keyIdx);
                   lof1a = lof2a;
@@ -418,14 +418,14 @@ int computeWindow(const QList<Note*>& notes, int start, int end)
             int pa    = 0;
             int pb    = 0;
             int l     = pitch[0] * 2 + (i & 1);
-            if (l < 0 || l > (sizeof(tab1)/sizeof(*tab1)))
+            if (l < 0 || l > int(sizeof(tab1)/sizeof(*tab1)))
                   abort();
             int lof1a = tab1[l];
             int lof1b = tab2[l];
 
             for (int k = 1; k < 10; ++k) {
                   int l = pitch[k] * 2 + ((i & (1 << k)) >> k);
-                  if (l < 0 || l > (sizeof(tab1)/sizeof(*tab1)))
+                  if (l < 0 || l > int(sizeof(tab1)/sizeof(*tab1)))
                         abort();
                   int lof2a = tab1[l];
                   int lof2b = tab2[l];
@@ -467,6 +467,8 @@ int computeWindow(const QList<Note*>& notes, int start, int end)
 
 void spell(QList<MidiNote*>& notes, int key)
       {
+      key += 7;
+
       int n = notes.size();
       if (n == 0)
             return;

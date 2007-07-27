@@ -31,7 +31,6 @@ Image::Image(Score* s)
    : BSymbol(s)
       {
       _dirty = false;
-      mode   = NORMAL;
       setAnchor(ANCHOR_PAGE);
       }
 
@@ -42,24 +41,6 @@ Image::Image(Score* s)
 void Image::draw(QPainter& p)
       {
       p.drawImage(0, 0, buffer);
-      if (mode != NORMAL) {
-            qreal lw = 2.0/p.matrix().m11();
-            QPen pen(Qt::blue);
-            pen.setWidthF(lw);
-            p.setPen(pen);
-            if (mode == DRAG1) {
-                  p.setBrush(Qt::blue);
-                  p.drawRect(r1);
-                  p.setBrush(Qt::NoBrush);
-                  p.drawRect(r2);
-                  }
-            else {
-                  p.setBrush(Qt::NoBrush);
-                  p.drawRect(r1);
-                  p.setBrush(Qt::blue);
-                  p.drawRect(r2);
-                  }
-            }
       if (selected()) {
             p.setBrush(Qt::NoBrush);
             p.setPen(QPen(Qt::blue, 0, Qt::SolidLine));
@@ -130,47 +111,15 @@ QString Image::path() const
 
 QRectF Image::bbox() const
       {
-      QRectF r(0.0, 0.0, sz.width(), sz.height());
-      if (mode) {
-            r |= bbr1;
-            r |= bbr2;
-            }
-      return r;
+      return QRectF(0.0, 0.0, sz.width(), sz.height());
       }
 
 //---------------------------------------------------------
 //   startEdit
 //---------------------------------------------------------
 
-bool Image::startEdit(QMatrix& matrix, const QPointF&)
+bool Image::startEdit(const QPointF&)
       {
-      mode      = DRAG2;
-      qreal w   = 8.0 / matrix.m11();
-      qreal h   = 8.0 / matrix.m22();
-      QRectF r(-w/2, -h/2, w, h);
-      qreal lw  = 1.0 / matrix.m11();
-      QRectF br = r.adjusted(-lw, -lw, lw, lw);
-      QPointF pp1(sz.width(), sz.height() * .5);
-      QPointF pp2(sz.width() * .5, sz.height());
-      r1        = r.translated(pp1);
-      bbr1      = br.translated(pp1);
-      r2        = r.translated(pp2);
-      bbr2      = br.translated(pp2);
-      return true;
-      }
-
-//---------------------------------------------------------
-//   startEditDrag
-//---------------------------------------------------------
-
-bool Image::startEditDrag(Viewer*, const QPointF& p)
-      {
-      if (bbr1.contains(p))
-            mode = DRAG1;
-      else if (bbr2.contains(p))
-            mode = DRAG2;
-      else
-            return false;
       return true;
       }
 
@@ -178,70 +127,33 @@ bool Image::startEditDrag(Viewer*, const QPointF& p)
 //   editDrag
 //---------------------------------------------------------
 
-bool Image::editDrag(Viewer*, QPointF*, const QPointF& d)
+void Image::editDrag(int curGrip, const QPointF&, const QPointF& d)
       {
-      if (mode == DRAG1) {
-            QPointF delta(d.x(), 0);    // only x-axis move
-            r1.translate(delta);
-            bbr1.translate(delta);
+      if (curGrip == 0)
             sz.setWidth(sz.width() + d.x());
-            }
-      else {
-            QPointF delta(0, d.y());    // only y-axis move
-            r2.translate(delta);
-            bbr2.translate(delta);
+      else
             sz.setHeight(sz.height() + d.y());
-            }
-      return true;
       }
 
 //---------------------------------------------------------
-//   edit
+//   updateGrips
 //---------------------------------------------------------
 
-bool Image::edit(QMatrix&, QKeyEvent* ev)
+void Image::updateGrips(int* grips, QRectF* grip) const
       {
-      QPointF delta;
-      switch (ev->key()) {
-            case Qt::Key_Up:
-                  _userOff.ry() += -.3;
-                  break;
-            case Qt::Key_Down:
-                  _userOff.ry() += .3;
-                  break;
-            case Qt::Key_Left:
-                  delta = QPointF(-1, 0);
-                  break;
-            case Qt::Key_Right:
-                  delta = QPointF(1, 0);
-                  break;
-            case Qt::Key_Tab:
-                  if (mode == DRAG1)
-                        mode = DRAG2;
-                  else if (mode == DRAG2)
-                        mode = DRAG1;
-                  break;
-            }
-      if (mode == DRAG1) {
-            r1.moveTopLeft(r1.topLeft() + delta * _spatium);
-            bbr1.moveTopLeft(bbr1.topLeft() + delta * _spatium);
-            sz.setWidth(sz.width() + delta.x() * _spatium);
-            }
-      else if (mode == DRAG2) {
-            r2.moveTopLeft(r2.topLeft() + delta * _spatium);
-            bbr2.moveTopLeft(bbr2.topLeft() + delta * _spatium);
-            sz.setHeight(sz.height() + delta.y() * _spatium);
-            }
-      return false;
+      *grips = 2;
+      QRectF r(abbox());
+      grip[0].translate(QPointF(r.x() + r.width(), r.y() + r.height() * .5));
+      grip[1].translate(QPointF(r.x() + r.width() * .5, r.y() + r.height()));
       }
 
 //---------------------------------------------------------
-//   endEditDrag
+//   gripAnchor
 //---------------------------------------------------------
 
-bool Image::endEditDrag()
+QPointF Image::gripAnchor(int grip)
       {
-      return false;
+      return QPointF();
       }
 
 //---------------------------------------------------------
@@ -250,7 +162,6 @@ bool Image::endEditDrag()
 
 void Image::endEdit()
       {
-      mode = NORMAL;
       }
 
 //---------------------------------------------------------

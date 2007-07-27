@@ -61,7 +61,6 @@ void OttavaSegment::draw(QPainter& p)
       p.drawLine(QLineF(pp1, pp2));
       if (_segmentType == SEGMENT_SINGLE || _segmentType == SEGMENT_END)
             p.drawLine(QLineF(pp2, QPointF(pp2.x(), h)));
-      LineSegment::draw(p);
       }
 
 //---------------------------------------------------------
@@ -75,11 +74,6 @@ QRectF OttavaSegment::bbox() const
 
       qreal h1 = ottava()->textHeight;
       QRectF r(.0, -h1, pp2.x(), 2 * h1);
-
-      if (mode != NORMAL) {
-            r |= bbr1;
-            r |= bbr2;
-            }
       return r;
       }
 

@@ -801,7 +801,7 @@ Element* Note::drop(const QPointF&, const QPointF&, int t, const QDomElement& no
 //   startEdit
 //---------------------------------------------------------
 
-bool Note::startEdit(QMatrix&, const QPointF&)
+bool Note::startEdit(const QPointF&)
       {
       // TODO: visualization of edit mode
       return true;

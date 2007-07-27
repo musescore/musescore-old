@@ -147,7 +147,7 @@ class Note : public Element {
       virtual bool acceptDrop(Viewer*, const QPointF&, int, const QDomElement&) const;
       virtual Element* drop(const QPointF&, const QPointF&, int, const QDomElement&);
 
-      virtual bool startEdit(QMatrix&, const QPointF&);
+      virtual bool startEdit(const QPointF&);
       virtual bool edit(QMatrix&, QKeyEvent*);
       virtual void endEdit();
       bool isSimple(Xml&) const;

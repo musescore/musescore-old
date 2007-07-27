@@ -462,7 +462,7 @@ bool Text::readProperties(QDomElement e)
 //   startEdit
 //---------------------------------------------------------
 
-bool Text::startEdit(QMatrix&, const QPointF& p)
+bool Text::startEdit(const QPointF& p)
       {
       cursor = new QTextCursor(doc);
       cursor->setPosition(cursorPos);

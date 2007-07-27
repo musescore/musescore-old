@@ -32,7 +32,6 @@ class Score;
 struct UP {
       QPointF p;            // layout position relative to pos()
       QPointF off;          // user offset in spatium units
-      mutable QRectF r;   // "grips"
       QPointF pos() const { return p + off * _spatium; }
       };
 
@@ -47,31 +46,25 @@ class SlurSegment : public Element {
       SlurTie* slur;
       qreal bow;
 
-      int mode;         // 0-4  0 - normal
-
       virtual QRectF bbox() const;
       void updatePath();
-      void updateGrips(const QMatrix&);
-      void setDropAnchor(Viewer* viewer);
+//      void setDropAnchor(Viewer* viewer);
 
    public:
       SlurSegment(SlurTie*);
       SlurSegment(const SlurSegment&);
-      ~SlurSegment();
       virtual SlurSegment* clone() const { return new SlurSegment(*this); }
       virtual ElementType type() const { return SLUR_SEGMENT; }
 
       void layout(ScoreLayout*, const QPointF& p1, const QPointF& p2, qreal bow);
-      virtual void resetMode();
-
       virtual QPainterPath shape() const;
       virtual void draw(QPainter&);
-      virtual bool startEdit(QMatrix&, const QPointF&);
-      virtual void endEdit();
-      virtual bool startEditDrag(Viewer*, const QPointF&);
-      virtual bool editDrag(Viewer*, QPointF*, const QPointF&);
-      virtual bool endEditDrag();
-      virtual bool edit(QMatrix&, QKeyEvent* ev);
+
+      virtual bool startEdit(const QPointF&);
+      virtual void editDrag(int, const QPointF&, const QPointF&);
+      virtual bool edit(int, QKeyEvent*);
+      virtual void updateGrips(int*, QRectF*) const;
+      virtual QPointF gripAnchor(int grip);
 
       virtual void move(qreal xd, qreal yd) { move(QPointF(xd, yd)); }
       virtual void move(const QPointF& s);
@@ -84,7 +77,6 @@ class SlurSegment : public Element {
       void write(Xml& xml, int no) const;
       void read(QDomElement);
       void dump() const;
-      int getMode() const { return mode; }
       };
 
 //---------------------------------------------------------

@@ -1,3 +1,8 @@
+
+26.7.7 (ws)
+      - fix regression on midi import
+      - moved Element edit state to Viewer class; this avoids problems
+        with the navigator (when there are two viewers)
       ======== Version 0.6 released (Revision xxx) =============
 23.7.7 (ws)
       - fixed several bugs in pitch spelling routines

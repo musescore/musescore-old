@@ -58,6 +58,11 @@ class Canvas : public QFrame, public Viewer {
       bool dragCanvasState;
       bool mousePressed;
 
+      // editing mode
+      int curGrip;
+      QRectF grip[4];         // edit "grips"
+      int grips;              // number of used grips
+
       bool cursorIsBlinking;
 
       QPointF startMove;
@@ -111,6 +116,7 @@ class Canvas : public QFrame, public Viewer {
       bool dragTimeAnchorElement(const QPointF& pos);
       bool dragAboveMeasure(const QPointF& pos);
       bool dragAboveSystem(const QPointF& pos);
+      void updateGrips();
 
    private slots:
       void cursorBlink();

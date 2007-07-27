@@ -3,7 +3,7 @@
 //  Linux Music Score Editor
 //  $Id: slur.cpp,v 1.53 2006/03/28 14:58:58 wschweer Exp $
 //
-//  Copyright (C) 2002-2006 Werner Schweer (ws@seh.de)
+//  Copyright (C) 2002-2007 Werner Schweer (ws@seh.de)
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.
@@ -40,7 +40,6 @@ SlurSegment::SlurSegment(SlurTie* st)
    : Element(st->score())
       {
       slur = st;
-      mode = 0;
       }
 
 SlurSegment::SlurSegment(const SlurSegment& b)
@@ -51,24 +50,6 @@ SlurSegment::SlurSegment(const SlurSegment& b)
       path = b.path;
       slur = b.slur;
       bow  = b.bow;
-      mode = b.mode;
-      }
-
-//---------------------------------------------------------
-//   SlurSegment
-//---------------------------------------------------------
-
-SlurSegment::~SlurSegment()
-      {
-      }
-
-//---------------------------------------------------------
-//   resetMode
-//---------------------------------------------------------
-
-void SlurSegment::resetMode()
-      {
-      mode = 0;
       }
 
 //---------------------------------------------------------
@@ -79,7 +60,7 @@ void SlurSegment::updatePath()
       {
       QPointF pp[4];
       for (int i = 0; i < 4; ++i)
-            pp[i] = ups[i].p + ups[i].off * _spatium;
+            pp[i] = ups[i].pos();
       path = QPainterPath();
       QPointF t(0.0, _spatium * .08);    // thickness of slur
       path.moveTo(pp[0]);
@@ -106,51 +87,26 @@ void SlurSegment::draw(QPainter& p)
       {
       p.setBrush(color());
       p.drawPath(path);
-      if (selected() && mode) {
-            // update grips
-            qreal w = 8.0 / p.matrix().m11();
-            qreal h = 8.0 / p.matrix().m22();
-            QRectF r(-w*.5, -h*.5, w, h);
-            for (int i = 0; i < 4; ++i)
-                  ups[i].r = r.translated(ups[i].p + ups[i].off * _spatium);
-
-            qreal lw = 2.0/p.matrix().m11();
-            QPen pen(Qt::blue);
-            pen.setWidthF(lw);
-            p.setPen(pen);
-            for (int i = 0; i < 4; ++i) {
-                  if (i == (mode-1))
-                        p.setBrush(Qt::blue);
-                  else
-                        p.setBrush(Qt::NoBrush);
-                  p.drawRect(ups[i].r);
-                  }
-            }
       }
 
 //---------------------------------------------------------
 //   updateGrips
 //---------------------------------------------------------
 
-void SlurSegment::updateGrips(const QMatrix& matrix)
+void SlurSegment::updateGrips(int* n, QRectF* r) const
       {
-      qreal w = 8.0 / matrix.m11();
-      qreal h = 8.0 / matrix.m22();
-      QRectF r(-w*.5, -h*.5, w, h);
-
+      *n = 4;
+      QPointF p(canvasPos());
       for (int i = 0; i < 4; ++i)
-            ups[i].r = r.translated(ups[i].p + ups[i].off * _spatium);
-      updatePath();
+            r[i].translate(ups[i].pos() + p);
       }
 
 //---------------------------------------------------------
 //   startEdit
 //---------------------------------------------------------
 
-bool SlurSegment::startEdit(QMatrix& matrix, const QPointF&)
+bool SlurSegment::startEdit(const QPointF&)
       {
-      mode = 4;
-      updateGrips(matrix);
       return true;
       }
 
@@ -158,13 +114,11 @@ bool SlurSegment::startEdit(QMatrix& matrix, const QPointF&)
 //   edit
 //---------------------------------------------------------
 
-bool SlurSegment::edit(QMatrix&, QKeyEvent* ev)
+bool SlurSegment::edit(int curGrip, QKeyEvent* ev)
       {
       if (slur->type() != SLUR)
             return false;
       Slur* sl = (Slur*) slur;
-
-      QPointF ppos(canvasPos());
 
       if ((ev->modifiers() & Qt::ShiftModifier)) {
             int track1 = sl->track1();
@@ -173,123 +127,62 @@ bool SlurSegment::edit(QMatrix&, QKeyEvent* ev)
             int tick2  = sl->tick2();
 
             if (ev->key() == Qt::Key_Left) {
-                  if (mode == 1)
+                  if (curGrip == 0)
                         tick1 = score()->prevSeg1(tick1, track1);
-                  else if (mode == 4)
+                  else if (curGrip == 3)
                         tick2 = score()->prevSeg1(tick2, track2);
                   }
             else if (ev->key() == Qt::Key_Right) {
-                  if (mode == 1)
+                  if (curGrip == 0)
                         tick1 = score()->nextSeg1(tick1, track1);
-                  else if (mode == 4)
+                  else if (curGrip == 3)
                         tick2 = score()->nextSeg1(tick2, track2);
+                  }
+            else {
+                  ev->ignore();
+                  return false;
                   }
             sl->setTrack1(track1);
             sl->setTrack2(track2);
             sl->setTick1(tick1);
             sl->setTick2(tick2);
+            ev->accept();
             return false;
             }
-
-      QPointF delta;
-      qreal val = 1.0;
-      if (ev->modifiers() & Qt::ControlModifier)
-            val = 0.1;
       switch (ev->key()) {
-            case Qt::Key_Left:
-                  delta = QPointF(-val, 0);
-                  break;
-            case Qt::Key_Right:
-                  delta = QPointF(val, 0);
-                  break;
-            case Qt::Key_Up:
-                  delta = QPointF(0, -val);
-                  break;
-            case Qt::Key_Down:
-                  delta = QPointF(0, val);
-                  break;
-            case Qt::Key_Tab:
-                  if (mode < 4)
-                        ++mode;
-                  else
-                        mode = 1;
-                  break;
             case Qt::Key_X:
                   slur->setSlurDirection(slur->isUp() ? DOWN : UP);
+                  ev->accept();
                   break;
             }
-      if (mode == 0)
-            return false;
-
-      int idx       = (mode-1) % 4;
-      ups[idx].off += delta;
-      ups[idx].r.translate(delta * _spatium);
+      ev->ignore();
       return false;
       }
 
 //---------------------------------------------------------
-//   endEdit
+//   gripAnchor
 //---------------------------------------------------------
 
-void SlurSegment::endEdit()
-      {
-      mode = 0;
-      }
-
-//---------------------------------------------------------
-//   setDropAnchor
-//---------------------------------------------------------
-
-void SlurSegment::setDropAnchor(Viewer* viewer)
+QPointF SlurSegment::gripAnchor(int grip)
       {
       Slur* sl = (Slur*) slur;
-      QPointF anchor;
-      QPointF p;
-
-      p = ups[mode-1].pos();
       System* s;
-      if (mode == 1)
-            anchor = sl->slurPos(sl->tick1(), sl->track1(), s);
-      else if (mode == 4)
-            anchor = sl->slurPos(sl->tick2(), sl->track2(), s);
-      else
-            return;
-      viewer->setDropAnchor(QLineF(anchor, p + canvasPos()));
-      }
-
-//---------------------------------------------------------
-//   startEditDrag
-//---------------------------------------------------------
-
-bool SlurSegment::startEditDrag(Viewer* viewer, const QPointF& p)
-      {
-      if (slur->type() != SLUR)
-            return false;
-      // search for the clicked grip
-      for (mode = 1; mode < 5; ++mode) {
-            if (ups[mode-1].r.contains(p)) {
-                  setDropAnchor(viewer);
-                  return true;
-                  }
-            }
-      mode = 0;
-      return false;
+      if (grip == 0)
+            return sl->slurPos(sl->tick1(), sl->track1(), s);
+      else if (grip == 3)
+            return sl->slurPos(sl->tick2(), sl->track2(), s);
+      return QPointF();
       }
 
 //---------------------------------------------------------
 //   editDrag
 //---------------------------------------------------------
 
-bool SlurSegment::editDrag(Viewer* viewer, QPointF*, const QPointF& delta)
+void SlurSegment::editDrag(int curGrip, const QPointF&, const QPointF& delta)
       {
-      if (!mode)
-            return false;
-      int n = mode - 1;
+      ups[curGrip].off += (delta / _spatium);
 
-      ups[n].r.translate(delta);
-      ups[n].off += (delta / _spatium);
-
-      if (mode == 1 || mode == 4) {
+      if (curGrip == 0 || curGrip == 3) {
 //TODO            slur->layout2(canvasPos(), mode, ups[n]);
             //
             //  compute bezier help points
@@ -300,7 +193,7 @@ bool SlurSegment::editDrag(Viewer* viewer, QPointF*, const QPointF& delta)
             qreal xdelta = p3.x() - p0.x();
             if (xdelta == 0.0) {
                   printf("bad slur slope\n");
-                  return true;
+                  return;
                   }
 
             qreal d    = xdelta / 4.0;
@@ -312,12 +205,8 @@ bool SlurSegment::editDrag(Viewer* viewer, QPointF*, const QPointF& delta)
             qreal y2    = p0.y() + (x2-p0.x()) * slope + bow;
             ups[1].p    = QPointF(x1, y1);
             ups[2].p    = QPointF(x2, y2);
-
-            updateGrips(viewer->matrix());
-            setDropAnchor(viewer);
             }
       updatePath();
-      return true;
       }
 
 //---------------------------------------------------------
@@ -326,12 +215,7 @@ bool SlurSegment::editDrag(Viewer* viewer, QPointF*, const QPointF& delta)
 
 QRectF SlurSegment::bbox() const
       {
-      QRectF r(path.boundingRect());
-      if (mode) {
-            for (int i = 0; i < 4; ++i)
-                  r |= ups[i].r;
-            }
-      return r;
+      return path.boundingRect();
       }
 
 //---------------------------------------------------------
@@ -340,12 +224,7 @@ QRectF SlurSegment::bbox() const
 
 QPainterPath SlurSegment::shape() const
       {
-      QPainterPath p(path);
-      if (mode) {
-            for (int i = 0; i < 4; ++i)
-                  p.addRect(ups[i].r);
-            }
-      return p;
+      return path;
       }
 
 //---------------------------------------------------------
@@ -434,16 +313,6 @@ void SlurSegment::layout(ScoreLayout*, const QPointF& p1, const QPointF& p2, qre
       ups[1].p = QPointF(x1, y1);
       ups[2].p = QPointF(x2, y2);
       updatePath();
-//      updateGrips(layout->matrix());
-      }
-
-//---------------------------------------------------------
-//   endEditDrag
-//---------------------------------------------------------
-
-bool SlurSegment::endEditDrag()
-      {
-      return true;
       }
 
 //---------------------------------------------------------
@@ -905,8 +774,9 @@ QRectF Slur::bbox() const
 //    snap to next tick positions
 //---------------------------------------------------------
 
-void Slur::layout2(ScoreLayout* layout, const QPointF ppos, int mode, struct UP& ups)
+void Slur::layout2(ScoreLayout* /*layout*/, const QPointF /*ppos*/, int /*mode*/, struct UP& /*ups*/)
       {
+#if 0
       double _spatium = layout->spatium();
       //
       // compute absolute position of control point on canvas:
@@ -940,6 +810,7 @@ void Slur::layout2(ScoreLayout* layout, const QPointF ppos, int mode, struct UP&
                   ups.off    = (p - p2) / _spatium;
                   }
             }
+#endif
       }
 
 //---------------------------------------------------------

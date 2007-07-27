@@ -3,7 +3,7 @@
 //  Linux Music Score Editor
 //  $Id: canvas.cpp,v 1.80 2006/09/15 09:34:57 wschweer Exp $
 //
-//  Copyright (C) 2002-2006 Werner Schweer (ws@seh.de)
+//  Copyright (C) 2002-2007 Werner Schweer (ws@seh.de)
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.
@@ -61,9 +61,6 @@ Canvas::Canvas(QWidget* parent)
       setAttribute(Qt::WA_KeyCompression);
       setAttribute(Qt::WA_StaticContents);
       setAutoFillBackground(true);
-
-//      setFrameStyle(QFrame::Panel | QFrame::Raised);
-//      setLineWidth(10);
 
       navigator        = 0;
       _score           = 0;
@@ -345,15 +342,19 @@ void Canvas::mousePressEvent(QMouseEvent* ev)
                   break;
 
             case EDIT:
-                  if (_score->editObject->startEditDrag(this, startMove - _score->editObject->canvasPos())) {
-                        setState(DRAG_EDIT);
-                        update();
+                  for (int i = 0; i < grips; ++i) {
+                        if (grip[i].contains(startMove)) {
+                              curGrip = i;
+                              setState(DRAG_EDIT);
+                              break;
+                              }
                         }
+                  if (state == DRAG_EDIT)
+                        break;
                   else if (_score->editObject->mousePress(startMove))
                         update();
-                  else {
+                  else
                         setState(NORMAL);
-                        }
                   break;
 
             default:
@@ -487,6 +488,11 @@ void Canvas::mouseMoveEvent1(QMouseEvent* ev)
                   r.setCoords(startMove.x(), startMove.y(), p.x(), p.y());
                   lasso->setbbox(r);
                   _lassoRect = lasso->abbox().normalized();
+                  r = _matrix.mapRect(_lassoRect);
+                  QSize sz(r.size().toSize());
+                  QString s("%1 x %2");
+                  mscore->statusBar()->showMessage(
+                     s.arg(sz.width()).arg(sz.height()), 3000);
                   }
                   _score->addRefresh(lasso->abbox());
                   lassoSelect();
@@ -496,8 +502,13 @@ void Canvas::mouseMoveEvent1(QMouseEvent* ev)
                   break;
 
             case DRAG_EDIT:
-                  _score->dragEdit(this, &startMove, delta);
+                  {
+                  Element* e = _score->editObject;
+                  score()->addRefresh(e->abbox());
+                  e->editDrag(curGrip, startMove, delta);
+                  updateGrips();
                   startMove += delta;
+                  }
                   break;
 
             case DRAG_STAFF:
@@ -518,6 +529,32 @@ void Canvas::mouseMoveEvent1(QMouseEvent* ev)
             case MAG:
                   break;
             }
+      }
+
+//---------------------------------------------------------
+//   updateGrips
+//---------------------------------------------------------
+
+void Canvas::updateGrips()
+      {
+      Element* e = _score->editObject;
+      if (e == 0)
+            return;
+
+      qreal w = 8.0 / _matrix.m11();
+      qreal h = 8.0 / _matrix.m22();
+      QRectF r(-w*.5, -h*.5, w, h);
+      for (int i = 0; i < 4; ++i)
+            grip[i] = r;
+      e->updateGrips(&grips, grip);
+      for (int i = 0; i < 4; ++i)
+            score()->addRefresh(grip[i]);
+      QPointF anchor = e->gripAnchor(curGrip);
+      if (!anchor.isNull())
+            setDropAnchor(QLineF(anchor, grip[curGrip].center()));
+      else
+            setDropTarget(0); // this also resets dropAnchor
+      score()->addRefresh(e->abbox());
       }
 
 //---------------------------------------------------------
@@ -704,6 +741,7 @@ void Canvas::setState(State s)
       if (state == LASSO || s == LASSO)
             lasso->setVisible(s == LASSO);
       if ((state == EDIT) && (s != EDIT) && (s != DRAG_EDIT)) {
+            setDropTarget(0);
             _score->endEdit();
             }
       state = s;
@@ -781,10 +819,18 @@ void Canvas::resetStaffOffsets()
 
 bool Canvas::startEdit(Element* element)
       {
-      if (element->startEdit(_matrix, startMove)) {
+      if (element->startEdit(startMove)) {
             setFocus();
             _score->startEdit(element);
             setState(EDIT);
+            qreal w = 8.0 / _matrix.m11();
+            qreal h = 8.0 / _matrix.m22();
+            QRectF r(-w*.5, -h*.5, w, h);
+            for (int i = 0; i < 4; ++i)
+                  grip[i] = r;
+            _score->editObject->updateGrips(&grips, grip);
+            curGrip = grips-1;
+
             update();         // DEBUG
             return true;
             }
@@ -918,6 +964,8 @@ void Canvas::paintEvent(QPaintEvent* ev)
             _score->doLayout();
             if (navigator)
                   navigator->layoutChanged();
+            if (state == EDIT || state == DRAG_EDIT)
+                  updateGrips();
             rr.setRect(0, 0, width(), height());  // does not work because paintEvent
                                                   // is clipped?
             paint(rr);
@@ -970,6 +1018,17 @@ void Canvas::paint(const QRect& rr)
             QPen pen(QBrush(QColor(80, 0, 0)), 2.0 / p.worldMatrix().m11(), Qt::DotLine);
             p.setPen(pen);
             p.drawLine(dropAnchor);
+            }
+
+      if (state == EDIT || state == DRAG_EDIT) {
+            qreal lw = 2.0/p.matrix().m11();
+            QPen pen(Qt::blue);
+            pen.setWidthF(lw);
+            p.setPen(pen);
+            for (int i = 0; i < grips; ++i) {
+                  p.setBrush(i == curGrip ? QBrush(Qt::blue) : Qt::NoBrush);
+                  p.drawRect(grip[i]);
+                  }
             }
 
       p.setMatrixEnabled(false);

@@ -193,12 +193,13 @@ class Element {
       virtual QRectF drag(const QPointF& s);
       virtual void endDrag()                  {}
 
-      virtual bool startEdit(QMatrix&, const QPointF&)         { return false; }
-      virtual bool edit(QMatrix&, QKeyEvent*)                  { return false;}
-      virtual bool startEditDrag(Viewer*, const QPointF&)      { return false; }
-      virtual bool editDrag(Viewer*, QPointF*, const QPointF&) { return false; }
-      virtual bool endEditDrag()                               { return false;}
+      virtual bool startEdit(const QPointF&)                   { return false; }
+      virtual bool edit(int, QKeyEvent*)                       { return false; }
+      virtual void editDrag(int, const QPointF&, const QPointF&) {}
+      virtual void endEditDrag()                               {}
       virtual void endEdit()                                   {}
+      virtual void updateGrips(int*, QRectF*) const            {}
+      virtual QPointF gripAnchor(int)                          { return QPointF(); }
 
       Staff* staff() const                    { return _staff; }
       int staffIdx() const;
