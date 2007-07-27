@@ -34,18 +34,12 @@ class Image : public BSymbol {
       QSizeF sz;
       bool _dirty;
 
-      QRectF r1, r2, bbr1, bbr2;     // "grips" for dragging
-
-      enum { NORMAL, DRAG1, DRAG2 };
-      int mode;
-
-      virtual bool startEdit(QMatrix&, const QPointF&);
-      virtual bool edit(QMatrix&, QKeyEvent*);
-      virtual bool startEditDrag(Viewer*, const QPointF&);
-      virtual bool editDrag(Viewer*, QPointF*, const QPointF&);
-      virtual bool endEditDrag();
+      virtual bool startEdit(const QPointF&);
+      virtual void editDrag(int, const QPointF&, const QPointF&);
       virtual void endEdit();
       virtual void draw(QPainter&);
+      virtual void updateGrips(int*, QRectF*) const;
+      virtual QPointF gripAnchor(int grip);
 
    public:
       Image(Score*);

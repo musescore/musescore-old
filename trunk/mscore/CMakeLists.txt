@@ -64,11 +64,11 @@ set(CMAKE_SKIP_RULE_DEPENDENCY TRUE)
 
 # The Mscore version number.
 SET(Mscore_VERSION_MAJOR 0)
-SET(Mscore_VERSION_MINOR 5)
+SET(Mscore_VERSION_MINOR 7)
 SET(Mscore_VERSION_PATCH "0")
-SET(Mscore_VERSION       "0.6")
-SET(Mscore_VERSION_FULL  "0.6.0")
-SET(Mscore_INSTALL_NAME  "mscore-0.6")
+SET(Mscore_VERSION       "0.7")
+SET(Mscore_VERSION_FULL  "0.7.0")
+SET(Mscore_INSTALL_NAME  "mscore-0.7")
 
 include ( ${PROJECT_SOURCE_DIR}/cmake/UsePkgConfig1.cmake )
 include ( ${PROJECT_SOURCE_DIR}/cmake/TargetDoc.cmake)

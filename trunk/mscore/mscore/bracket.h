@@ -35,16 +35,12 @@ enum { BRACKET_NORMAL, BRACKET_AKKOLADE, NO_BRACKET = -1};
 
 class Bracket : public Element {
       int _span;
-      bool editMode;
       qreal h2;
 
       int _level;
 
       QPainterPath path;
-      QRectF grip;
       qreal yoff;
-
-      void updateGrips(QMatrix& matrix);
 
    public:
       Bracket(Score*);
@@ -66,12 +62,13 @@ class Bracket : public Element {
       virtual void read(QDomElement);
       virtual void layout(ScoreLayout*);
 
-      virtual bool startEdit(QMatrix&,const QPointF&);
-      virtual bool edit(QMatrix&, QKeyEvent*);
+      virtual bool startEdit(const QPointF&);
       virtual void endEdit();
-      virtual bool startEditDrag(Viewer*, const QPointF&);
-      virtual bool editDrag(Viewer*, QPointF*, const QPointF&);
-      virtual bool endEditDrag();
+      virtual void editDrag(int, const QPointF&, const QPointF&);
+      virtual void endEditDrag();
+      virtual void updateGrips(int*, QRectF*) const;
+      virtual QPointF gripAnchor(int grip);
+
       virtual bool acceptDrop(Viewer*, const QPointF&, int, const QDomElement&) const;
       virtual Element* drop(const QPointF&, const QPointF&, int, const QDomElement&);
       };

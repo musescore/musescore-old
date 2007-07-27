@@ -36,7 +36,6 @@ Bracket::Bracket(Score* s)
    : Element(s)
       {
       h2       = 0.0;
-      editMode = false;
       _span    = 1;
       _level   = 0;
       }
@@ -48,7 +47,6 @@ Bracket::Bracket(Score* s)
 void Bracket::setHeight(qreal h)
       {
       h2 = h * .5;
-//      layout();
       }
 
 //---------------------------------------------------------
@@ -72,14 +70,11 @@ double Bracket::width() const
 void Bracket::layout(ScoreLayout* layout)
       {
       double _spatium = layout->spatium();
-
       path = QPainterPath();
       if (h2 == 0.0)
             return;
 
-      qreal h = h2;
-      if (editMode)
-            h = h2 + yoff * .5;
+      qreal h = h2 + yoff * .5;
 
       if (subtype() == BRACKET_AKKOLADE) {
             qreal w         = point(style->akkoladeWidth);
@@ -126,15 +121,6 @@ void Bracket::draw(QPainter& p)
       {
       p.setBrush(p.pen().color());
       p.drawPath(path);
-
-      if (editMode) {
-            qreal lw = 2.0/p.matrix().m11();
-            QPen pen(Qt::blue);
-            pen.setWidthF(lw);
-            p.setPen(pen);
-            p.setBrush(Qt::blue);
-            p.drawRect(grip);
-            }
       }
 
 //---------------------------------------------------------
@@ -186,11 +172,9 @@ void Bracket::read(QDomElement e)
 //   startEdit
 //---------------------------------------------------------
 
-bool Bracket::startEdit(QMatrix& matrix, const QPointF&)
+bool Bracket::startEdit(const QPointF&)
       {
-      yoff     = 0.0;
-      editMode = true;
-      updateGrips(matrix);
+      yoff = 0.0;
       return true;
       }
 
@@ -198,13 +182,19 @@ bool Bracket::startEdit(QMatrix& matrix, const QPointF&)
 //   updateGrips
 //---------------------------------------------------------
 
-void Bracket::updateGrips(QMatrix& matrix)
+void Bracket::updateGrips(int* grips, QRectF* grip) const
       {
-      qreal w = 8.0 / matrix.m11();
-      qreal h = 8.0 / matrix.m22();
-      QRectF r(-w*.5, -h*.5, w, h);
+      *grips = 1;
+      grip[0].translate(QPointF(0.0, h2 * 2) + QPointF(0.0, yoff) + canvasPos());
+      }
 
-      grip = r.translated(QPointF(0.0, h2 * 2));
+//---------------------------------------------------------
+//   gripAnchor
+//---------------------------------------------------------
+
+QPointF Bracket::gripAnchor(int)
+      {
+      return QPointF();
       }
 
 //---------------------------------------------------------
@@ -214,18 +204,6 @@ void Bracket::updateGrips(QMatrix& matrix)
 void Bracket::endEdit()
       {
       endEditDrag();
-      editMode = false;
-      }
-
-//---------------------------------------------------------
-//   startEditDrag
-//---------------------------------------------------------
-
-bool Bracket::startEditDrag(Viewer*, const QPointF& p)
-      {
-      if (grip.contains(p))
-            return true;
-      return false;
       }
 
 //---------------------------------------------------------
@@ -234,78 +212,83 @@ bool Bracket::startEditDrag(Viewer*, const QPointF& p)
 
 QRectF Bracket::bbox() const
       {
-      QRectF b = path.boundingRect();
-      if (editMode)
-            b |= grip;
-      return b;
+      return path.boundingRect();
       }
 
 //---------------------------------------------------------
 //   editDrag
 //---------------------------------------------------------
 
-bool Bracket::editDrag(Viewer* v, QPointF*, const QPointF& delta)
+void Bracket::editDrag(int, const QPointF&, const QPointF& delta)
       {
-      if (!editMode)
-            return false;
       qreal dy = delta.y();
-      grip.translate(QPointF(0.0, dy));
       yoff += dy;
-      layout(v->layout());
-      return true;
-      }
 
-//---------------------------------------------------------
-//   edit
-//---------------------------------------------------------
+      qreal h = h2 + yoff * .5;
 
-bool Bracket::edit(QMatrix&, QKeyEvent* ev)
-      {
-      if (editMode == 0)
-            return false;
-      QPointF ppos(canvasPos());
+      path = QPainterPath();
+      if (subtype() == BRACKET_AKKOLADE) {
+            qreal w         = point(style->akkoladeWidth);
+            const double X1 =  2.0 * w;
+            const double X2 = -0.7096 * w;
+            const double X3 = -1.234 * w;
+            const double X4 =  1.734 * w;
 
-      qreal dy = 0.0;
-      qreal val = 1.0;
-      if (ev->modifiers() & Qt::ControlModifier)
-            val = 0.1;
-      switch (ev->key()) {
-            case Qt::Key_Up:
-                  dy = -val;
-                  break;
-            case Qt::Key_Down:
-                  dy = val;
-                  break;
+            path.moveTo(0, h);
+            path.cubicTo(X1,  h + h * .3359, X2,  h + h * .5089, w, 2 * h);
+            path.cubicTo(X3,  h + h * .5025, X4,  h + h * .2413, 0, h);
+            path.cubicTo(X1,  h - h * .3359, X2,  h - h * .5089, w, 0);
+            path.cubicTo(X3,  h - h * .5025, X4,  h - h * .2413, 0, h);
             }
-      grip.translate(QPointF(0.0, dy));
-      yoff += dy;
-      return false;
+      else if (subtype() == BRACKET_NORMAL) {
+            qreal w = point(style->bracketWidth);
+
+            TextStyle* s = &textStyles[TEXT_STYLE_SYMBOL1];
+            QChar up(0xe19c);
+            QChar down(0xe19d);
+            QFont f;
+            f.setFamily(s->family);
+
+            //?!?:
+            extern int appDpiX;
+            double mmag   = DPI / double(appDpiX);
+            double mag = mmag * _spatium / (spatiumBase20 * DPI);
+            f.setPointSizeF(20.0 * mag);
+
+            qreal o = _spatium * .27;
+            qreal slw = point(style->staffLineWidth);
+
+            path.addText(QPointF(0.0, -o), f, QString(up));
+            path.addText(QPointF(0.0, h * 2.0 + o), f, QString(down));
+            path.addRect(0.0, -slw * .5, w, h * 2.0 + slw);
+            }
       }
 
 //---------------------------------------------------------
 //   endEditDrag
+//    snap to nearest staff
 //---------------------------------------------------------
 
-bool Bracket::endEditDrag()
+void Bracket::endEditDrag()
       {
       h2 += yoff * .5;
+      yoff = 0.0;
+
       qreal ay1 = canvasPos().y();
       qreal ay2 = ay1 + h2 * 2;
 
       int staffIdx1 = staffIdx();
       int staffIdx2;
-      int n     = system()->staves()->size();
+      int n = system()->staves()->size();
       if (staffIdx1 + 1 >= n)
             staffIdx2 = staffIdx1;
       else {
             qreal ay  = parent()->canvasPos().y();
             System* s = system();
-            int n     = s->staves()->size() - 1;
 
             qreal y = s->staff(staffIdx1)->bbox().y() + ay;
             for (staffIdx2 = staffIdx1 + 1; staffIdx2 < n; ++staffIdx2) {
                   qreal h = s->staff(staffIdx2)->bbox().y() + ay - y;
-printf(" %d: %f - %f - %f\n", staffIdx2, y, h, ay2);
                   if (ay2 < (y + h * .5))
                         break;
                   y += h;
@@ -317,12 +300,8 @@ printf(" %d: %f - %f - %f\n", staffIdx2, y, h, ay2);
       qreal ey = system()->staff(staffIdx2)->bbox().bottom();
       h2 = (ey - sy) * .5;
 
-      yoff = 0.0;
       int span = staffIdx2 - staffIdx1 + 1;
-printf("setBracketSpan: level %d span %d (%d-%d)\n", _level, span, staffIdx1, staffIdx2);
       score()->staff(staffIdx1)->setBracketSpan(_level, span);
-      grip.moveTo(0.0, h2 * 2);
-      return true;
       }
 
 //---------------------------------------------------------

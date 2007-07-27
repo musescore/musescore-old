@@ -50,7 +50,6 @@ void PedalSegment::draw(QPainter& p)
       p.setPen(pen);
       p.drawLine(QLineF(pp1, pp2));
       p.drawLine(QLineF(pp2, QPointF(pp2.x(), -h)));
-      LineSegment::draw(p);
       }
 
 //---------------------------------------------------------
@@ -64,10 +63,6 @@ QRectF PedalSegment::bbox() const
 
       QPointF pp2(pos2());
       QRectF r(.0, -h1 * .5, pp2.x(), h1);
-      if (mode != NORMAL) {
-            r |= bbr1;
-            r |= bbr2;
-            }
       return r;
       }
 

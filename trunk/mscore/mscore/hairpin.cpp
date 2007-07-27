@@ -74,7 +74,6 @@ void HairpinSegment::draw(QPainter& p)
                         break;
                   }
             }
-      LineSegment::draw(p);
       }
 
 //---------------------------------------------------------
@@ -85,10 +84,6 @@ QRectF HairpinSegment::bbox() const
       {
       double h = point(style->hairpinHeight);
       QRectF r(.0, -h * .5, _p2.x(), h);
-      if (mode) {
-            r |= bbr1;
-            r |= bbr2;
-            }
       return r;
       }
 

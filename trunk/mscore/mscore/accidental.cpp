@@ -135,7 +135,7 @@ int Accidental::subtype2value(int st)
             };
       st %= ACC_SMALL;
 
-      if (st < 0 || st >= (sizeof(preTab)/sizeof(*preTab)))
+      if (st < 0 || st >= int(sizeof(preTab)/sizeof(*preTab)))
             abort();
 
       return preTab[st];
@@ -164,7 +164,7 @@ int Accidental::value2subtype(int v)
 //   startEdit
 //---------------------------------------------------------
 
-bool Accidental::startEdit(QMatrix&, const QPointF&)
+bool Accidental::startEdit(const QPointF&)
       {
       return true;
       }

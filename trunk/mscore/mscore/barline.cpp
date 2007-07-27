@@ -193,7 +193,7 @@ void BarLine::setSubtype(int t)
 QRectF BarLine::bbox() const
       {
       Spatium w = style->barWidth;
-      qreal dw;
+      qreal dw = 0.0;
 
       switch(subtype()) {
             case DOUBLE_BAR:

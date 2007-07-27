@@ -43,26 +43,22 @@ class LineSegment : public Element {
    protected:
       QPointF _p2;
       QPointF _userOff2;
+      QRectF r1, r2;
       SegmentType _segmentType;
-
-      QRectF r1, r2, bbr1, bbr2;     // "grips" for dragging
-
-      enum { NORMAL, DRAG1, DRAG2 };
-      int mode;
 
       virtual bool isMovable() const { return true; }
       virtual QRectF drag(const QPointF& s);
       virtual void endDrag();
-      virtual bool startEdit(QMatrix&, const QPointF&);
-      virtual bool edit(QMatrix&, QKeyEvent*);
-      virtual bool startEditDrag(Viewer*, const QPointF&);
-      virtual bool editDrag(Viewer*, QPointF*, const QPointF&);
-      virtual bool endEditDrag();
+      virtual bool startEdit(const QPointF&);
+      virtual void editDrag(int, const QPointF&, const QPointF&);
+      virtual void endEditDrag();
       virtual void endEdit();
+      virtual void updateGrips(int*, QRectF*) const;
+      virtual QPointF gripAnchor(int);
 
    public:
       LineSegment(Score* s);
-      virtual void draw(QPainter& p);
+      virtual void draw(QPainter& p) = 0;
       SLine* line() const                 { return (SLine*)parent(); }
       const QPointF& userOff2() const     { return _userOff2;  }
       void setUserOff2(const QPointF& o)  { _userOff2 = o;     }

@@ -34,53 +34,46 @@ LineSegment::LineSegment(Score* s)
    : Element(s)
       {
       _segmentType = SEGMENT_SINGLE;
-      mode  = NORMAL;
       }
 
 //---------------------------------------------------------
-//   draw
+//   updateGrips
 //---------------------------------------------------------
 
-void LineSegment::draw(QPainter& p)
+void LineSegment::updateGrips(int* grips, QRectF* grip) const
       {
-      if (mode != NORMAL) {
-            qreal lw = 2.0/p.matrix().m11();
-            QPen pen(Qt::blue);
-            pen.setWidthF(lw);
-            p.setPen(pen);
-            if (mode == DRAG1) {
-                  p.setBrush(Qt::blue);
-                  p.drawRect(r1);
-                  p.setBrush(Qt::NoBrush);
-                  p.drawRect(r2);
-                  }
-            else {
-                  p.setBrush(Qt::NoBrush);
-                  p.drawRect(r1);
-                  p.setBrush(Qt::blue);
-                  p.drawRect(r2);
-                  }
+      *grips = 2;
+      QPointF pp2(_p2 + _userOff2 * _spatium + canvasPos());
+      grip[1].translate(pp2);
+      grip[0].translate(canvasPos());
+      }
+
+//---------------------------------------------------------
+//   gripAnchor
+//---------------------------------------------------------
+
+QPointF LineSegment::gripAnchor(int curGrip)
+      {
+      int tick;
+      QPointF anchor;
+
+      if (curGrip == 0) {
+            QPointF pp1(canvasPos());
+            score()->pos2TickAnchor(pp1, staff(), &tick, &anchor);
             }
+      else {
+            QPointF pp2(_p2 + _userOff2 * _spatium + canvasPos());
+            score()->pos2TickAnchor(pp2, staff(), &tick, &anchor);
+            }
+      return anchor;
       }
 
 //---------------------------------------------------------
 //   startEdit
 //---------------------------------------------------------
 
-bool LineSegment::startEdit(QMatrix& matrix, const QPointF&)
+bool LineSegment::startEdit(const QPointF&)
       {
-      mode = DRAG2;
-      QPointF pp2(_p2 + _userOff2 * _spatium);
-
-      qreal w   = 8.0 / matrix.m11();
-      qreal h   = 8.0 / matrix.m22();
-      QRectF r(-w/2, -h/2, w, h);
-      qreal lw  = 1.0 / matrix.m11();
-      QRectF br = r.adjusted(-lw, -lw, lw, lw);
-      r1        = r;
-      bbr1      = br;
-      r2        = r.translated(pp2);
-      bbr2      = br.translated(pp2);
       return true;
       }
 
@@ -88,6 +81,7 @@ bool LineSegment::startEdit(QMatrix& matrix, const QPointF&)
 //   startEditDrag
 //---------------------------------------------------------
 
+#if 0
 bool LineSegment::startEditDrag(Viewer* viewer, const QPointF& p)
       {
       int tick1 = line()->tick();
@@ -110,25 +104,25 @@ bool LineSegment::startEditDrag(Viewer* viewer, const QPointF& p)
             }
       return true;
       }
+#endif
 
 //---------------------------------------------------------
 //   editDrag
 //---------------------------------------------------------
 
-bool LineSegment::editDrag(Viewer* viewer, QPointF* start, const QPointF& d)
+void LineSegment::editDrag(int curGrip, const QPointF& start, const QPointF& d)
       {
-      QPointF aapos(*start + d);
+      QPointF aapos(start + d);
       QPointF delta(d.x(), 0);    // only x-axis move
       int tick;
       QPointF anchor;
       score()->pos2TickAnchor(aapos, staff(), &tick, &anchor);
 
-      if (mode == DRAG1) {
+      if (curGrip == 0) {
             r2.translate(-delta);
-            bbr2.translate(-delta);
 
             QPointF apos(canvasPos() + delta);
-            viewer->setDropAnchor(QLineF(anchor, apos));
+//            viewer->setDropAnchor(QLineF(anchor, apos));
 
             if (_segmentType == SEGMENT_SINGLE || _segmentType == SEGMENT_BEGIN)
                   line()->setTick(tick);
@@ -143,10 +137,9 @@ bool LineSegment::editDrag(Viewer* viewer, QPointF* start, const QPointF& d)
             }
       else {
             r2.translate(delta);
-            bbr2.translate(delta);
 
             QPointF apos(canvasPos2() + delta);
-            viewer->setDropAnchor(QLineF(anchor, apos));;
+//            viewer->setDropAnchor(QLineF(anchor, apos));;
 
             if (_segmentType == SEGMENT_SINGLE || _segmentType == SEGMENT_END)
                   line()->setTick2(tick);
@@ -154,57 +147,15 @@ bool LineSegment::editDrag(Viewer* viewer, QPointF* start, const QPointF& d)
             setUserXoffset2((apos.x() - anchor.x()) / _spatium);
             setXpos2(anchor.x() - canvasPos().x());
             }
-      return true;
-      }
-
-//---------------------------------------------------------
-//   edit
-//---------------------------------------------------------
-
-bool LineSegment::edit(QMatrix&, QKeyEvent* ev)
-      {
-      QPointF delta;
-      switch (ev->key()) {
-            case Qt::Key_Up:
-                  _userOff.ry() += -.3;
-                  break;
-            case Qt::Key_Down:
-                  _userOff.ry() += .3;
-                  break;
-            case Qt::Key_Left:
-                  delta = QPointF(-1, 0);
-                  break;
-            case Qt::Key_Right:
-                  delta = QPointF(1, 0);
-                  break;
-            case Qt::Key_Tab:
-                  if (mode == DRAG1)
-                        mode = DRAG2;
-                  else if (mode == DRAG2)
-                        mode = DRAG1;
-                  break;
-            }
-      if (mode == DRAG1) {
-            setUserOff(userOff() + delta);
-            r1.moveTopLeft(r1.topLeft() + delta * _spatium);
-            bbr1.moveTopLeft(bbr1.topLeft() + delta * _spatium);
-            }
-      else if (mode == DRAG2) {
-            setUserOff2(userOff() + delta);
-            r2.moveTopLeft(r2.topLeft() + delta * _spatium);
-            bbr2.moveTopLeft(bbr2.topLeft() + delta * _spatium);
-            }
-      return false;
       }
 
 //---------------------------------------------------------
 //   endEditDrag
 //---------------------------------------------------------
 
-bool LineSegment::endEditDrag()
+void LineSegment::endEditDrag()
       {
       // TODO: must move to different Measure?
-      return false;
       }
 
 //---------------------------------------------------------
@@ -213,7 +164,6 @@ bool LineSegment::endEditDrag()
 
 void LineSegment::endEdit()
       {
-      mode = NORMAL;
       }
 
 //---------------------------------------------------------

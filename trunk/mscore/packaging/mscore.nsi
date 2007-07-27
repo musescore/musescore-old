@@ -7,12 +7,12 @@ SetCompressor /SOLID lzma
 
 Name "MuseScore"
 
-OutFile "MuseScore-06.exe"
-InstallDir $PROGRAMFILES\MuseScore_06
+OutFile "MuseScore-07.exe"
+InstallDir $PROGRAMFILES\MuseScore_07
 
 ; Registry key to check for directory (so if you install again, it will
 ; overwrite the old one automatically)
-InstallDirRegKey HKLM "Software\MuseScore_06" "Install_Dir"
+InstallDirRegKey HKLM "Software\MuseScore_07" "Install_Dir"
 
 ;--------------------------------------------------------
 Page license
@@ -25,7 +25,7 @@ UninstPage instfiles
 LicenseData "COPYING"
 LicenseForceSelection checkbox
 
-Section "mscore06 (required)"
+Section "mscore07 (required)"
    SectionIn RO
 
       SetOutPath $INSTDIR
@@ -78,7 +78,7 @@ Section "Uninstall"
 
   ; Remove registry keys
   DeleteRegKey HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\MuseScore_02"
-  DeleteRegKey HKLM SOFTWARE\MuseScore_02
+  DeleteRegKey HKLM SOFTWARE\MuseScore_07
 
   ; Remove files and uninstaller
   Delete $INSTDIR\mscore.exe

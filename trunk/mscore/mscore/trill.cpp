@@ -42,7 +42,6 @@ void TrillSegment::draw(QPainter& p)
 
       symbols[trillSym].draw(p, -b1.x(), 0);
       symbols[trillelementSym].draw(p, b1.width() - b2.x(), b2.y(), n);
-      LineSegment::draw(p);
       }
 
 //---------------------------------------------------------
@@ -53,10 +52,6 @@ QRectF TrillSegment::bbox() const
       {
       QRectF rr(symbols[trillSym].bbox());
       QRectF r(0.0, rr.y(), pos2().x(), rr.height());
-      if (mode != NORMAL) {
-            r |= bbr1;
-            r |= bbr2;
-            }
       return r;
       }
 
