@@ -1541,7 +1541,7 @@ void Canvas::wheelEvent(QWheelEvent* event)
       //
       // this is necessary at least for qt4.1:
       //
-      if ((dy < 0) && navigator->isVisible()) {
+      if ((dy < 0 || dx > 0) && navigator->isVisible()) {
 		QRect r(navigator->geometry());
 		r.translate(dx, dy);
 		update(r);

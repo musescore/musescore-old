@@ -330,7 +330,6 @@ class Score : public QObject {
       void lyricsMinus();
 
       void startEdit(Element* element);
-      bool edit(QKeyEvent* ev);
       void endEdit();
 
       void startDrag();

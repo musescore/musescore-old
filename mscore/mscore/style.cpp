@@ -106,6 +106,9 @@ static const TextStyle defaultTextStyles[] = {
 
       TextStyle(QString("Staff"), ff,  10, false, false, false,
          ALIGN_LEFT, ANCHOR_STAFF, 0, -4.0, OFFSET_SPATIUM, true),
+
+      TextStyle(QString("Chordname"), ff,  12, false, false, false,
+         ALIGN_HCENTER, ANCHOR_STAFF, 0, -5.0, OFFSET_SPATIUM, true),
       };
 
 //---------------------------------------------------------

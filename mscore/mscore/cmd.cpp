@@ -737,7 +737,6 @@ void Score::cmdAddText(int subtype)
                   Measure* measure = ml.front();
                   s = new Text(this);
                   s->setSubtype(subtype);
-                  s->setText(s->subtypeName());
                   s->setAnchorMeasure(measure);
                   s->setParent(page);
                   }
@@ -753,9 +752,11 @@ void Score::cmdAddText(int subtype)
             case TEXT_TEMPO:
             case TEXT_LYRIC:
             case TEXT_TUPLET:
+            default:
                   printf("add text type %d not supported\n", subtype);
                   break;
 
+            case TEXT_CHORD:
             case TEXT_SYSTEM:
                   {
                   Element* el = sel->element();
@@ -771,7 +772,6 @@ void Score::cmdAddText(int subtype)
                   s = new Text(this);
                   s->setStaff(el->staff());
                   s->setSubtype(subtype);
-                  s->setText(s->subtypeName());
                   s->setParent(((ChordRest*)el)->measure());
                   s->setTick(el->tick());
                   }
@@ -1437,6 +1437,8 @@ void Score::cmd(const QString& cmd)
                   return cmdAddText(TEXT_POET);
             else if (cmd == "system-text")
                   return cmdAddText(TEXT_SYSTEM);
+            else if (cmd == "chord-text")
+                  return cmdAddText(TEXT_CHORD);
             endCmd(true);
             }
       }

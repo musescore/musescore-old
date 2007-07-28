@@ -38,6 +38,7 @@ Bracket::Bracket(Score* s)
       h2       = 0.0;
       _span    = 1;
       _level   = 0;
+      yoff     = 0.0;
       }
 
 //---------------------------------------------------------
@@ -100,11 +101,11 @@ void Bracket::layout(ScoreLayout* layout)
 
             //?!?:
             extern int appDpiX;
-            double mmag   = DPI / double(appDpiX);
-            double mag = mmag * _spatium / (spatiumBase20 * DPI);
+            double mmag = DPI / double(appDpiX);
+            double mag  = mmag * _spatium / (spatiumBase20 * DPI);
             f.setPointSizeF(20.0 * mag);
 
-            qreal o = _spatium * .27;
+            qreal o   = _spatium * .27;
             qreal slw = point(style->staffLineWidth);
 
             path.addText(QPointF(0.0, -o), f, QString(up));
