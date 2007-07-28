@@ -104,7 +104,7 @@ class Text : public Element {
       virtual void draw(QPainter&);
 
       virtual bool startEdit(const QPointF&);
-      virtual bool edit(QMatrix&, QKeyEvent*);
+      virtual bool edit(int, QKeyEvent*);
       void addSymbol(const SymCode&);
       void setCharFormat(const QTextCharFormat&);
       void setBlockFormat(const QTextBlockFormat&);
