@@ -881,3 +881,35 @@ int Element::readType(QDomElement& e, QPointF* dragOffset)
       return type;
       }
 
+//---------------------------------------------------------
+//   startEdit
+//---------------------------------------------------------
+
+bool Element::startEdit(const QPointF&)
+      {
+      return !_generated;
+      }
+
+//---------------------------------------------------------
+//   editDrag
+//---------------------------------------------------------
+
+void Element::editDrag(int, const QPointF&, const QPointF& delta)
+      {
+      setUserOff(userOff() + delta / _spatium);
+      }
+
+//---------------------------------------------------------
+//   edit
+//    return true if event is accepted
+//---------------------------------------------------------
+
+bool Element::edit(int, QKeyEvent* ev)
+      {
+      if (ev->key() ==  Qt::Key_Home) {
+            setUserOff(QPoint());
+            return true;
+            }
+      return false;
+      }
+

@@ -70,10 +70,10 @@ void Canvas::keyPressEvent(QKeyEvent* ev)
             ev->accept();
             return;
             }
-      if (ev->modifiers() & Qt::ShiftModifier) {
-            _score->editObject->edit(curGrip, ev);
+      if (_score->editObject->edit(curGrip, ev)) {
             updateGrips();
             _score->endCmd(false);
+            ev->accept();
             return;
             }
       QPointF delta;
@@ -101,9 +101,7 @@ void Canvas::keyPressEvent(QKeyEvent* ev)
                   val = 0.0;
                   break;
             default:
-                  _score->editObject->edit(curGrip, ev);
-                  updateGrips();
-                  _score->endCmd(false);
+                  ev->ignore();
                   return;
             }
       _score->editObject->editDrag(curGrip, grip[curGrip].center(), delta);

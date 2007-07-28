@@ -1,4 +1,6 @@
-
+28.7.7 (ws)
+      - implement selections for text edit
+      - decorate text in edit mode with a frame
 26.7.7 (ws)
       - fix regression on midi import
       - moved Element edit state to Viewer class; this avoids problems
