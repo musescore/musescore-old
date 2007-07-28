@@ -43,14 +43,15 @@
 
 void Canvas::keyPressEvent(QKeyEvent* ev)
       {
-//printf("key key:%x state:%x text:<%s>\n", ev->key(),
+      int key = ev->key();
+//printf("key key:%x state:%x text:<%s>\n", key,
 //    int(ev->modifiers()), ev->text().toLatin1().data());
 
       if (state != EDIT && state != DRAG_EDIT) {
             ev->ignore();
             return;
             }
-      if ((ev->key() == Qt::Key_Escape)) {
+      if (key == Qt::Key_Escape) {
             if (state == DRAG_EDIT)
                   _score->editObject->endEditDrag();
             setState(NORMAL);
@@ -59,16 +60,24 @@ void Canvas::keyPressEvent(QKeyEvent* ev)
             return;
             }
       if (_score->editObject->type() == LYRICS) {
-            if (ev->key() == Qt::Key_Tab)
-                  _score->lyricsTab(ev->modifiers() & Qt::ControlModifier);
-            else if (ev->key() == Qt::Key_Return)
+            int found = false;
+            if (ev->key() == Qt::Key_Tab) {
+                  // TODO: shift+tab events are filtered by qt
+                  _score->lyricsTab(ev->modifiers() & Qt::ShiftModifier);
+                  found = true;
+                  }
+            else if (ev->key() == Qt::Key_Return) {
                   _score->lyricsReturn();
-            else if (ev->key() == Qt::Key_Minus)
+                  found = true;
+                  }
+            else if (ev->key() == Qt::Key_Minus) {
                   _score->lyricsMinus();
-            else if (_score->edit(ev))
-                  setState(NORMAL);
-            ev->accept();
-            return;
+                  found = true;
+                  }
+            if (found) {
+                  ev->accept();
+                  return;
+                  }
             }
       if (_score->editObject->edit(curGrip, ev)) {
             updateGrips();

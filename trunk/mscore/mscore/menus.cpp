@@ -541,7 +541,9 @@ QMenu* MuseScore::genCreateMenu()
       text->addAction(getAction("subtitle-text"));
       text->addAction(getAction("composer-text"));
       text->addAction(getAction("poet-text"));
+      text->addSeparator();
       text->addAction(getAction("system-text"));
+      text->addAction(getAction("chord-text"));
       text->addSeparator();
       text->addAction(getAction("lyrics"));
       text->addAction(getAction("fingering"));

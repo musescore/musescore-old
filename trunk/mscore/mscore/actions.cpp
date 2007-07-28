@@ -1071,11 +1071,54 @@ Shortcut MuseScore::sc[] = {
          QT_TR_NOOP("Metronome"),
          QT_TR_NOOP("Metronome")
          ),
-      Shortcut("system-text",   QT_TR_NOOP("Add System Text")),
-      Shortcut("title-text",    QT_TR_NOOP("Add Title")),
-      Shortcut("subtitle-text", QT_TR_NOOP("Add Subtitle")),
-      Shortcut("composer-text", QT_TR_NOOP("Add Composer")),
-      Shortcut("poet-text",     QT_TR_NOOP("Add Poet")),
+      Shortcut(
+         "system-text",
+         QT_TR_NOOP("Add System Text"),
+         0,
+         Qt::WindowShortcut,
+         QT_TR_NOOP("System Text"),
+         QT_TR_NOOP("Add System Text")
+         ),
+      Shortcut(
+         "title-text",
+         QT_TR_NOOP("Add Title"),
+         0,
+         Qt::WindowShortcut,
+         QT_TR_NOOP("Title"),
+         QT_TR_NOOP("Add Title Text")
+         ),
+      Shortcut(
+         "subtitle-text",
+         QT_TR_NOOP("Add Subtitle"),
+         0,
+         Qt::WindowShortcut,
+         QT_TR_NOOP("Subtitle"),
+         QT_TR_NOOP("Add Subtitle Text")
+         ),
+      Shortcut(
+         "composer-text",
+         QT_TR_NOOP("Add Composer"),
+         0,
+         Qt::WindowShortcut,
+         QT_TR_NOOP("Composer"),
+         QT_TR_NOOP("Add Composer Text")
+         ),
+      Shortcut(
+         "poet-text",
+         QT_TR_NOOP("Add Poet"),
+         0,
+         Qt::WindowShortcut,
+         QT_TR_NOOP("Poet"),
+         QT_TR_NOOP("Add Poet Text")
+         ),
+      Shortcut(
+         "chord-text",
+         QT_TR_NOOP("Add Chord Name"),
+         0,
+         Qt::WindowShortcut,
+         QT_TR_NOOP("Chord Name"),
+         QT_TR_NOOP("Add Chord Text")
+         ),
 
       Shortcut(0, 0, 0),
       };

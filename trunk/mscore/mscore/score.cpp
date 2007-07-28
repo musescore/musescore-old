@@ -799,25 +799,6 @@ void Score::startEdit(Element* element)
       }
 
 //---------------------------------------------------------
-//   edit
-//---------------------------------------------------------
-
-/**
- Return true if end edit.
-*/
-
-bool Score::edit(QKeyEvent* ev)
-      {
-      if ((ev->key() == Qt::Key_Escape) || editObject->edit(0, ev)) {
-            endEdit();
-            endCmd(true);
-            return true;
-            }
-      endCmd(false);
-      return false;
-      }
-
-//---------------------------------------------------------
 //   endEdit
 //---------------------------------------------------------
 

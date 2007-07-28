@@ -257,7 +257,7 @@ MuseScore::MuseScore()
          << "chord-a" << "chord-b"
          << "stretch+" << "stretch-"
          << "instruments" << "clefs" << "keys" << "symbols" << "times" << "dynamics"
-         << "title-text" << "subtitle-text" << "composer-text" << "poet-text"
+         << "title-text" << "subtitle-text" << "composer-text" << "poet-text" << "chord-text"
          << "lyrics" << "fingering" << "system-text" << "tempo"
          << "metronome" << "cut" << "copy" << "paste"
          << "beam-start" << "beam-mid" << "no-beam" << "beam32"

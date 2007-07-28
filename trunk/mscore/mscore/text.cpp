@@ -128,6 +128,11 @@ void Text::setSubtype(int val)
             case TEXT_LYRIC:            setStyle(TEXT_STYLE_LYRIC); break;
             case TEXT_TUPLET:           setStyle(TEXT_STYLE_TUPLET); break;
             case TEXT_SYSTEM:           setStyle(TEXT_STYLE_SYSTEM); break;
+            case TEXT_STAFF:            setStyle(TEXT_STYLE_STAFF); break;
+            case TEXT_CHORD:            setStyle(TEXT_STYLE_CHORD); break;
+            default:
+                  printf("unknown text subtype %d\n", val);
+                  break;
             }
       }
 

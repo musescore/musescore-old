@@ -3,8 +3,8 @@
   <Spatium>1.76389</Spatium>
   <Division>480</Division>
   <Mag>0.868743</Mag>
-  <xoff>10</xoff>
-  <yoff>10</yoff>
+  <xoff>-33</xoff>
+  <yoff>-34</yoff>
   <Style>
     <staffUpperBorder>8</staffUpperBorder>
     <staffLowerBorder>4</staffLowerBorder>
@@ -206,7 +206,7 @@ p, li { white-space: pre-wrap; }
         <key tick="0" idx="-1"/>
         </keylist>
       <bracket type="0" span="5"/>
-      <bracket type="1" span="3"/>
+      <bracket type="1" span="2"/>
       </Staff>
     <trackName>Violino 1.  di ripieno  </trackName>
     <name>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
@@ -333,7 +333,7 @@ p, li { white-space: pre-wrap; }
         <spatiumSizeDependent>0</spatiumSizeDependent>
         <data>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Arial&apos;; font-size:11pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Times New Roman&apos;; font-size:24pt;&quot;&gt;Brandenburg Concerto no. 2 in F Major&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
         </Text>
       <Text>
@@ -517,7 +517,6 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <ticklen>960</ticklen>
         <Attribute>
-          <idx>19</idx>
           <subtype>19</subtype>
           </Attribute>
         <StemDirection>down</StemDirection>
@@ -1273,7 +1272,6 @@ p, li { white-space: pre-wrap; }
         <ticklen>360</ticklen>
         <BeamMode>begin</BeamMode>
         <Attribute>
-          <idx>19</idx>
           <subtype>19</subtype>
           </Attribute>
         <StemDirection>down</StemDirection>
@@ -1728,7 +1726,6 @@ p, li { white-space: pre-wrap; }
         <ticklen>360</ticklen>
         <BeamMode>begin</BeamMode>
         <Attribute>
-          <idx>19</idx>
           <subtype>19</subtype>
           </Attribute>
         <StemDirection>down</StemDirection>
@@ -1893,7 +1890,6 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <ticklen>960</ticklen>
         <Attribute>
-          <idx>19</idx>
           <subtype>19</subtype>
           </Attribute>
         <StemDirection>down</StemDirection>
@@ -2000,7 +1996,6 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <ticklen>960</ticklen>
         <Attribute>
-          <idx>19</idx>
           <subtype>19</subtype>
           </Attribute>
         <StemDirection>down</StemDirection>
@@ -3424,7 +3419,6 @@ p, li { white-space: pre-wrap; }
         <ticklen>360</ticklen>
         <BeamMode>begin</BeamMode>
         <Attribute>
-          <idx>19</idx>
           <subtype>19</subtype>
           </Attribute>
         <StemDirection>down</StemDirection>
@@ -6143,7 +6137,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
-        <BeamMode>begin</BeamMode>
+        <BeamMode>mid</BeamMode>
         <StemDirection>down</StemDirection>
         <Note pitch="69" tpc="17"/>
         </Chord>
@@ -6161,7 +6155,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
-        <BeamMode>begin</BeamMode>
+        <BeamMode>mid</BeamMode>
         <StemDirection>down</StemDirection>
         <Note pitch="69" tpc="17"/>
         </Chord>
@@ -6206,7 +6200,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
-        <BeamMode>begin</BeamMode>
+        <BeamMode>mid</BeamMode>
         <StemDirection>down</StemDirection>
         <Note pitch="69" tpc="17"/>
         </Chord>
@@ -6224,7 +6218,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
-        <BeamMode>begin</BeamMode>
+        <BeamMode>mid</BeamMode>
         <StemDirection>down</StemDirection>
         <Note pitch="69" tpc="17"/>
         </Chord>
@@ -6254,7 +6248,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
-        <BeamMode>end</BeamMode>
+        <BeamMode>no</BeamMode>
         <StemDirection>down</StemDirection>
         <Note pitch="77" tpc="13"/>
         </Chord>
@@ -6697,7 +6691,6 @@ p, li { white-space: pre-wrap; }
         <ticklen>240</ticklen>
         <BeamMode>end</BeamMode>
         <Attribute>
-          <idx>6</idx>
           <subtype>6</subtype>
           </Attribute>
         <StemDirection>down</StemDirection>
@@ -6740,7 +6733,6 @@ p, li { white-space: pre-wrap; }
         <ticklen>240</ticklen>
         <BeamMode>end</BeamMode>
         <Attribute>
-          <idx>19</idx>
           <subtype>19</subtype>
           </Attribute>
         <StemDirection>down</StemDirection>
@@ -7118,7 +7110,6 @@ p, li { white-space: pre-wrap; }
         <ticklen>360</ticklen>
         <BeamMode>begin</BeamMode>
         <Attribute>
-          <idx>19</idx>
           <subtype>19</subtype>
           </Attribute>
         <StemDirection>down</StemDirection>
@@ -8805,7 +8796,6 @@ p, li { white-space: pre-wrap; }
         <ticklen>240</ticklen>
         <BeamMode>end</BeamMode>
         <Attribute>
-          <idx>6</idx>
           <subtype>6</subtype>
           </Attribute>
         <StemDirection>down</StemDirection>
@@ -10453,7 +10443,6 @@ p, li { white-space: pre-wrap; }
         <ticklen>240</ticklen>
         <BeamMode>end</BeamMode>
         <Attribute>
-          <idx>6</idx>
           <subtype>6</subtype>
           </Attribute>
         <StemDirection>down</StemDirection>
@@ -10548,7 +10537,6 @@ p, li { white-space: pre-wrap; }
         <ticklen>360</ticklen>
         <BeamMode>begin</BeamMode>
         <Attribute>
-          <idx>19</idx>
           <subtype>19</subtype>
           </Attribute>
         <StemDirection>down</StemDirection>
@@ -12322,7 +12310,6 @@ p, li { white-space: pre-wrap; }
         <ticklen>240</ticklen>
         <BeamMode>end</BeamMode>
         <Attribute>
-          <idx>6</idx>
           <subtype>6</subtype>
           </Attribute>
         <StemDirection>down</StemDirection>
@@ -14885,7 +14872,6 @@ p, li { white-space: pre-wrap; }
         <ticklen>240</ticklen>
         <BeamMode>end</BeamMode>
         <Attribute>
-          <idx>6</idx>
           <subtype>6</subtype>
           </Attribute>
         <StemDirection>down</StemDirection>
@@ -14974,7 +14960,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
-        <BeamMode>begin</BeamMode>
+        <BeamMode>mid</BeamMode>
         <StemDirection>down</StemDirection>
         <Note pitch="69" tpc="17"/>
         </Chord>
@@ -14992,7 +14978,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
-        <BeamMode>begin</BeamMode>
+        <BeamMode>mid</BeamMode>
         <StemDirection>down</StemDirection>
         <Note pitch="69" tpc="17"/>
         </Chord>
@@ -15037,7 +15023,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
-        <BeamMode>begin</BeamMode>
+        <BeamMode>mid</BeamMode>
         <StemDirection>down</StemDirection>
         <Note pitch="69" tpc="17"/>
         </Chord>
@@ -15055,7 +15041,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
-        <BeamMode>begin</BeamMode>
+        <BeamMode>mid</BeamMode>
         <StemDirection>down</StemDirection>
         <Note pitch="69" tpc="17"/>
         </Chord>
@@ -15085,7 +15071,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
-        <BeamMode>end</BeamMode>
+        <BeamMode>no</BeamMode>
         <StemDirection>down</StemDirection>
         <Note pitch="77" tpc="13"/>
         </Chord>
@@ -15528,7 +15514,6 @@ p, li { white-space: pre-wrap; }
         <ticklen>240</ticklen>
         <BeamMode>end</BeamMode>
         <Attribute>
-          <idx>6</idx>
           <subtype>6</subtype>
           </Attribute>
         <StemDirection>down</StemDirection>
@@ -15571,7 +15556,6 @@ p, li { white-space: pre-wrap; }
         <ticklen>240</ticklen>
         <BeamMode>end</BeamMode>
         <Attribute>
-          <idx>19</idx>
           <subtype>19</subtype>
           </Attribute>
         <StemDirection>down</StemDirection>
@@ -15807,7 +15791,6 @@ p, li { white-space: pre-wrap; }
         <ticklen>360</ticklen>
         <BeamMode>begin</BeamMode>
         <Attribute>
-          <idx>19</idx>
           <subtype>19</subtype>
           </Attribute>
         <StemDirection>down</StemDirection>
@@ -17197,7 +17180,6 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <ticklen>720</ticklen>
         <Attribute>
-          <idx>19</idx>
           <subtype>19</subtype>
           </Attribute>
         <StemDirection>down</StemDirection>
@@ -17407,7 +17389,6 @@ p, li { white-space: pre-wrap; }
         <ticklen>240</ticklen>
         <BeamMode>end</BeamMode>
         <Attribute>
-          <idx>6</idx>
           <subtype>6</subtype>
           </Attribute>
         <StemDirection>down</StemDirection>
@@ -18940,7 +18921,6 @@ p, li { white-space: pre-wrap; }
         <ticklen>240</ticklen>
         <BeamMode>end</BeamMode>
         <Attribute>
-          <idx>6</idx>
           <subtype>6</subtype>
           </Attribute>
         <StemDirection>down</StemDirection>
@@ -18989,7 +18969,6 @@ p, li { white-space: pre-wrap; }
         <ticklen>240</ticklen>
         <BeamMode>end</BeamMode>
         <Attribute>
-          <idx>19</idx>
           <subtype>19</subtype>
           </Attribute>
         <StemDirection>up</StemDirection>
@@ -19069,7 +19048,6 @@ p, li { white-space: pre-wrap; }
         <ticklen>360</ticklen>
         <BeamMode>begin</BeamMode>
         <Attribute>
-          <idx>19</idx>
           <subtype>19</subtype>
           </Attribute>
         <StemDirection>down</StemDirection>
@@ -20231,7 +20209,6 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <ticklen>720</ticklen>
         <Attribute>
-          <idx>19</idx>
           <subtype>19</subtype>
           </Attribute>
         <StemDirection>down</StemDirection>
@@ -20426,7 +20403,6 @@ p, li { white-space: pre-wrap; }
         <ticklen>240</ticklen>
         <BeamMode>end</BeamMode>
         <Attribute>
-          <idx>6</idx>
           <subtype>6</subtype>
           </Attribute>
         <StemDirection>down</StemDirection>
@@ -22934,7 +22910,6 @@ p, li { white-space: pre-wrap; }
         <ticklen>240</ticklen>
         <BeamMode>end</BeamMode>
         <Attribute>
-          <idx>6</idx>
           <subtype>6</subtype>
           </Attribute>
         <StemDirection>down</StemDirection>
@@ -23017,7 +22992,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
-        <BeamMode>begin</BeamMode>
+        <BeamMode>mid</BeamMode>
         <StemDirection>down</StemDirection>
         <Note pitch="69" tpc="17"/>
         </Chord>
@@ -23035,7 +23010,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
-        <BeamMode>begin</BeamMode>
+        <BeamMode>mid</BeamMode>
         <StemDirection>down</StemDirection>
         <Note pitch="69" tpc="17"/>
         </Chord>
@@ -23080,7 +23055,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
-        <BeamMode>begin</BeamMode>
+        <BeamMode>mid</BeamMode>
         <StemDirection>down</StemDirection>
         <Note pitch="69" tpc="17"/>
         </Chord>
@@ -23098,7 +23073,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
-        <BeamMode>begin</BeamMode>
+        <BeamMode>mid</BeamMode>
         <StemDirection>down</StemDirection>
         <Note pitch="69" tpc="17"/>
         </Chord>
@@ -23128,7 +23103,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
-        <BeamMode>end</BeamMode>
+        <BeamMode>no</BeamMode>
         <StemDirection>down</StemDirection>
         <Note pitch="77" tpc="13"/>
         </Chord>
@@ -23571,7 +23546,6 @@ p, li { white-space: pre-wrap; }
         <ticklen>240</ticklen>
         <BeamMode>end</BeamMode>
         <Attribute>
-          <idx>6</idx>
           <subtype>6</subtype>
           </Attribute>
         <StemDirection>down</StemDirection>
@@ -23614,7 +23588,6 @@ p, li { white-space: pre-wrap; }
         <ticklen>240</ticklen>
         <BeamMode>end</BeamMode>
         <Attribute>
-          <idx>19</idx>
           <subtype>19</subtype>
           </Attribute>
         <StemDirection>down</StemDirection>
@@ -23664,7 +23637,6 @@ p, li { white-space: pre-wrap; }
         <ticklen>360</ticklen>
         <BeamMode>begin</BeamMode>
         <Attribute>
-          <idx>19</idx>
           <subtype>19</subtype>
           </Attribute>
         <StemDirection>down</StemDirection>
@@ -25844,7 +25816,6 @@ p, li { white-space: pre-wrap; }
         <ticklen>240</ticklen>
         <BeamMode>end</BeamMode>
         <Attribute>
-          <idx>6</idx>
           <subtype>6</subtype>
           </Attribute>
         <StemDirection>down</StemDirection>
@@ -27580,7 +27551,6 @@ p, li { white-space: pre-wrap; }
         <ticklen>240</ticklen>
         <BeamMode>end</BeamMode>
         <Attribute>
-          <idx>6</idx>
           <subtype>6</subtype>
           </Attribute>
         <StemDirection>down</StemDirection>
@@ -27635,7 +27605,6 @@ p, li { white-space: pre-wrap; }
         <ticklen>240</ticklen>
         <BeamMode>end</BeamMode>
         <Attribute>
-          <idx>19</idx>
           <subtype>19</subtype>
           </Attribute>
         <StemDirection>up</StemDirection>
@@ -27896,7 +27865,6 @@ p, li { white-space: pre-wrap; }
         <ticklen>360</ticklen>
         <BeamMode>begin</BeamMode>
         <Attribute>
-          <idx>19</idx>
           <subtype>19</subtype>
           </Attribute>
         <StemDirection>down</StemDirection>
@@ -29641,7 +29609,6 @@ p, li { white-space: pre-wrap; }
         <ticklen>240</ticklen>
         <BeamMode>end</BeamMode>
         <Attribute>
-          <idx>6</idx>
           <subtype>6</subtype>
           </Attribute>
         <StemDirection>down</StemDirection>
@@ -31053,7 +31020,6 @@ p, li { white-space: pre-wrap; }
         <ticklen>240</ticklen>
         <BeamMode>end</BeamMode>
         <Attribute>
-          <idx>19</idx>
           <subtype>19</subtype>
           </Attribute>
         <StemDirection>up</StemDirection>
@@ -32208,7 +32174,6 @@ p, li { white-space: pre-wrap; }
         <ticklen>240</ticklen>
         <BeamMode>end</BeamMode>
         <Attribute>
-          <idx>6</idx>
           <subtype>6</subtype>
           </Attribute>
         <StemDirection>down</StemDirection>
@@ -32297,7 +32262,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
-        <BeamMode>begin</BeamMode>
+        <BeamMode>mid</BeamMode>
         <StemDirection>down</StemDirection>
         <Note pitch="69" tpc="17"/>
         </Chord>
@@ -32315,7 +32280,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
-        <BeamMode>begin</BeamMode>
+        <BeamMode>mid</BeamMode>
         <StemDirection>down</StemDirection>
         <Note pitch="69" tpc="17"/>
         </Chord>
@@ -32360,7 +32325,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
-        <BeamMode>begin</BeamMode>
+        <BeamMode>mid</BeamMode>
         <StemDirection>down</StemDirection>
         <Note pitch="69" tpc="17"/>
         </Chord>
@@ -32378,7 +32343,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
-        <BeamMode>begin</BeamMode>
+        <BeamMode>mid</BeamMode>
         <StemDirection>down</StemDirection>
         <Note pitch="69" tpc="17"/>
         </Chord>
@@ -32408,7 +32373,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
-        <BeamMode>end</BeamMode>
+        <BeamMode>no</BeamMode>
         <StemDirection>down</StemDirection>
         <Note pitch="77" tpc="13"/>
         </Chord>
@@ -32851,7 +32816,6 @@ p, li { white-space: pre-wrap; }
         <ticklen>240</ticklen>
         <BeamMode>end</BeamMode>
         <Attribute>
-          <idx>6</idx>
           <subtype>6</subtype>
           </Attribute>
         <StemDirection>down</StemDirection>
@@ -32894,7 +32858,6 @@ p, li { white-space: pre-wrap; }
         <ticklen>240</ticklen>
         <BeamMode>end</BeamMode>
         <Attribute>
-          <idx>19</idx>
           <subtype>19</subtype>
           </Attribute>
         <StemDirection>down</StemDirection>
@@ -34295,7 +34258,6 @@ p, li { white-space: pre-wrap; }
         <ticklen>240</ticklen>
         <BeamMode>end</BeamMode>
         <Attribute>
-          <idx>6</idx>
           <subtype>6</subtype>
           </Attribute>
         <StemDirection>down</StemDirection>
@@ -35553,7 +35515,6 @@ p, li { white-space: pre-wrap; }
         <ticklen>240</ticklen>
         <BeamMode>end</BeamMode>
         <Attribute>
-          <idx>6</idx>
           <subtype>6</subtype>
           </Attribute>
         <StemDirection>down</StemDirection>
@@ -36532,7 +36493,6 @@ p, li { white-space: pre-wrap; }
         <ticklen>240</ticklen>
         <BeamMode>end</BeamMode>
         <Attribute>
-          <idx>6</idx>
           <subtype>6</subtype>
           </Attribute>
         <StemDirection>down</StemDirection>
@@ -37227,7 +37187,6 @@ p, li { white-space: pre-wrap; }
         <ticklen>240</ticklen>
         <BeamMode>end</BeamMode>
         <Attribute>
-          <idx>19</idx>
           <subtype>19</subtype>
           </Attribute>
         <StemDirection>up</StemDirection>
@@ -38034,7 +37993,6 @@ p, li { white-space: pre-wrap; }
         <ticklen>240</ticklen>
         <BeamMode>end</BeamMode>
         <Attribute>
-          <idx>6</idx>
           <subtype>6</subtype>
           </Attribute>
         <StemDirection>down</StemDirection>
@@ -38123,7 +38081,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
-        <BeamMode>begin</BeamMode>
+        <BeamMode>mid</BeamMode>
         <StemDirection>up</StemDirection>
         <Note pitch="65" tpc="13"/>
         </Chord>
@@ -38141,7 +38099,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
-        <BeamMode>begin</BeamMode>
+        <BeamMode>mid</BeamMode>
         <StemDirection>up</StemDirection>
         <Note pitch="65" tpc="13"/>
         </Chord>
@@ -38186,7 +38144,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
-        <BeamMode>begin</BeamMode>
+        <BeamMode>mid</BeamMode>
         <StemDirection>up</StemDirection>
         <Note pitch="65" tpc="13"/>
         </Chord>
@@ -38204,7 +38162,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
-        <BeamMode>begin</BeamMode>
+        <BeamMode>mid</BeamMode>
         <StemDirection>up</StemDirection>
         <Note pitch="65" tpc="13"/>
         </Chord>
@@ -38234,7 +38192,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
-        <BeamMode>end</BeamMode>
+        <BeamMode>no</BeamMode>
         <StemDirection>up</StemDirection>
         <Note pitch="72" tpc="14"/>
         </Chord>
@@ -42897,7 +42855,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
-        <BeamMode>end</BeamMode>
+        <BeamMode>no</BeamMode>
         <StemDirection>down</StemDirection>
         <Note pitch="69" tpc="17"/>
         </Chord>
@@ -47969,7 +47927,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
-        <BeamMode>end</BeamMode>
+        <BeamMode>mid</BeamMode>
         <StemDirection>down</StemDirection>
         <Note pitch="55" tpc="15"/>
         </Chord>
@@ -47981,7 +47939,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
-        <BeamMode>end</BeamMode>
+        <BeamMode>no</BeamMode>
         <StemDirection>down</StemDirection>
         <Note pitch="53" tpc="13"/>
         </Chord>
@@ -53940,9 +53898,13 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>120</ticklen>
-        <BeamMode>end</BeamMode>
+        <BeamMode>mid</BeamMode>
         <StemDirection>down</StemDirection>
-        <Note pitch="55" tpc="15"/>
+        <Note>
+          <selected>1</selected>
+          <pitch>55</pitch>
+          <tpc>15</tpc>
+          </Note>
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
@@ -53952,7 +53914,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
-        <BeamMode>end</BeamMode>
+        <BeamMode>no</BeamMode>
         <StemDirection>down</StemDirection>
         <Note pitch="53" tpc="13"/>
         </Chord>
@@ -61146,6 +61108,6 @@ p, li { white-space: pre-wrap; }
       <BarLine/>
       </Measure>
     </Staff>
-  <cursorStaff>0</cursorStaff>
+  <cursorStaff>8</cursorStaff>
   <cursorVoice>0</cursorVoice>
   </museScore>

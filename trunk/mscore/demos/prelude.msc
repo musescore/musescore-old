@@ -2,9 +2,9 @@
 <museScore version="1.0">
   <Spatium>1.5</Spatium>
   <Division>480</Division>
-  <Mag>4.76577</Mag>
-  <xoff>-5947</xoff>
-  <yoff>-1554</yoff>
+  <Mag>5.9411</Mag>
+  <xoff>-8475</xoff>
+  <yoff>-2683</yoff>
   <Style>
     <staffUpperBorder>8</staffUpperBorder>
     <staffLowerBorder>4</staffLowerBorder>
@@ -4891,6 +4891,7 @@ p, li { white-space: pre-wrap; }
         <Note pitch="76" tpc="18"/>
         <Arpeggio>
           <subtype>1</subtype>
+          <offset x="0.176389" y="0"/>
           </Arpeggio>
         </Chord>
       <BarLine/>
@@ -4911,11 +4912,12 @@ p, li { white-space: pre-wrap; }
         <Note pitch="74" tpc="16"/>
         <Arpeggio>
           <subtype>1</subtype>
+          <offset x="0.176389" y="0"/>
           </Arpeggio>
         </Chord>
       <BarLine/>
       </Measure>
     </Staff>
   <cursorStaff>0</cursorStaff>
-  <cursorVoice>1</cursorVoice>
+  <cursorVoice>0</cursorVoice>
   </museScore>
