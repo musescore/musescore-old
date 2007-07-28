@@ -478,6 +478,7 @@ bool Text::startEdit(const QPointF& p)
 
 //---------------------------------------------------------
 //   edit
+//    return true if event is accepted
 //---------------------------------------------------------
 
 bool Text::edit(int, QKeyEvent* ev)
@@ -494,7 +495,7 @@ bool Text::edit(int, QKeyEvent* ev)
                   palette->setCharFormat(cursor->charFormat());
                   palette->setBlockFormat(cursor->blockFormat());
                   }
-            return false;
+            return true;
             }
       if (ev->modifiers() & Qt::CTRL) {
             switch (key) {
@@ -546,9 +547,13 @@ bool Text::edit(int, QKeyEvent* ev)
                         cursor->setCharFormat(f);
                         }
                         break;
+                  default:
+                        return false;
                   }
-            return false;
+            return true;
             }
+      QTextCursor::MoveMode mm = (ev->modifiers() & Qt::SHIFT)
+         ? QTextCursor::KeepAnchor : QTextCursor::MoveAnchor;
       switch (key) {
             case Qt::Key_Return:
                   cursor->insertText(QString("\r"));
@@ -563,27 +568,27 @@ bool Text::edit(int, QKeyEvent* ev)
                   break;
 
             case Qt::Key_Left:
-                  cursor->movePosition(QTextCursor::Left);
+                  cursor->movePosition(QTextCursor::Left, mm);
                   break;
 
             case Qt::Key_Right:
-                  cursor->movePosition(QTextCursor::Right);
+                  cursor->movePosition(QTextCursor::Right, mm);
                   break;
 
             case Qt::Key_Up:
-                  cursor->movePosition(QTextCursor::Up);
+                  cursor->movePosition(QTextCursor::Up, mm);
                   break;
 
             case Qt::Key_Down:
-                  cursor->movePosition(QTextCursor::Down);
+                  cursor->movePosition(QTextCursor::Down, mm);
                   break;
 
             case Qt::Key_Home:
-                  cursor->movePosition(QTextCursor::Start);
+                  cursor->movePosition(QTextCursor::Start, mm);
                   break;
 
             case Qt::Key_End:
-                  cursor->movePosition(QTextCursor::End);
+                  cursor->movePosition(QTextCursor::End, mm);
                   break;
 
             default:
@@ -594,7 +599,7 @@ bool Text::edit(int, QKeyEvent* ev)
             palette->setCharFormat(cursor->charFormat());
             palette->setBlockFormat(cursor->blockFormat());
             }
-      return false;
+      return true;
       }
 
 //---------------------------------------------------------
@@ -633,6 +638,12 @@ void Text::draw(QPainter& p)
 
       QAbstractTextDocumentLayout::PaintContext c;
       c.cursorPosition = editMode ? cursor->position() : -1;
+      if (cursor) {
+            QAbstractTextDocumentLayout::Selection sel;
+            sel.cursor = *cursor;
+            sel.format.setFontUnderline(true);
+            c.selections.append(sel);
+            }
       QColor color = p.pen().color();
       c.palette.setColor(QPalette::Text, color);
       doc->documentLayout()->draw(&p, c);
@@ -654,6 +665,21 @@ void Text::draw(QPainter& p)
             if (r2 > 99)
                   r2 = 99;
             p.drawRoundRect(f, _frameRound, r2);
+            }
+
+      if (editMode) {
+            QRectF f;
+            for (QTextBlock tb = doc->begin(); tb.isValid(); tb = tb.next()) {
+                  QTextLayout* tl = tb.layout();
+                  int n = tl->lineCount();
+                  for (int i = 0; i < n; ++i)
+                        f |= tl->lineAt(0).naturalTextRect().translated(tl->position());
+                  }
+            qreal w = 6.0 / p.matrix().m11();   // 6 pixel border
+            f.adjust(-w, -w, w, w);
+            p.setPen(QPen(QBrush(Qt::blue), w / 3.0));
+            p.setBrush(QBrush(Qt::NoBrush));
+            p.drawRect(f);
             }
       p.restore();
       }

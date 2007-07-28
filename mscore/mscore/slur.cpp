@@ -112,6 +112,7 @@ bool SlurSegment::startEdit(const QPointF&)
 
 //---------------------------------------------------------
 //   edit
+//    return true if event is accepted
 //---------------------------------------------------------
 
 bool SlurSegment::edit(int curGrip, QKeyEvent* ev)
@@ -139,23 +140,18 @@ bool SlurSegment::edit(int curGrip, QKeyEvent* ev)
                         tick2 = score()->nextSeg1(tick2, track2);
                   }
             else {
-                  ev->ignore();
                   return false;
                   }
             sl->setTrack1(track1);
             sl->setTrack2(track2);
             sl->setTick1(tick1);
             sl->setTick2(tick2);
-            ev->accept();
-            return false;
+            return true;
             }
-      switch (ev->key()) {
-            case Qt::Key_X:
-                  slur->setSlurDirection(slur->isUp() ? DOWN : UP);
-                  ev->accept();
-                  break;
+      if (ev->key() == Qt::Key_X) {
+            slur->setSlurDirection(slur->isUp() ? DOWN : UP);
+            return true;
             }
-      ev->ignore();
       return false;
       }
 
