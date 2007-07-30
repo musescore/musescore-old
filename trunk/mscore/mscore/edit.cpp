@@ -1097,6 +1097,75 @@ void Score::cmdDeleteSelection()
       }
 
 //---------------------------------------------------------
+//   chordTab
+//---------------------------------------------------------
+
+void Score::chordTab(bool back)
+      {
+      Text* cn         = (Text*)editObject;
+      Measure* measure = (Measure*)cn->parent();
+      Segment* segment = measure->tick2segment(cn->tick());
+      if (segment == 0) {
+            printf("chordTab: no segment\n");
+            return;
+            }
+      // int staff     = cn->staffIdx();
+
+      // search next chord
+      if (back) {
+            while ((segment = segment->prev1())) {
+                  if (segment->subtype() == Segment::SegChordRest)
+                        break;
+                  }
+            }
+      else {
+            while ((segment = segment->next1())) {
+                  if (segment->subtype() == Segment::SegChordRest)
+                        break;
+                  }
+            }
+      if (segment == 0) {
+            printf("no next segment\n");
+            return;
+            }
+
+      canvas()->setState(Canvas::NORMAL);
+      endCmd(true);
+
+      startCmd();
+
+      // search for next chord name
+
+      Text* ocn = cn;
+      cn        = 0;
+
+      measure         = segment->measure();
+      ElementList* el = measure->el();
+      foreach(Element* e, *el) {
+            if (e->type() == TEXT && e->subtype() == TEXT_CHORD
+               && e->tick() == segment->tick()) {
+                  cn = (Text*)e;
+                  break;
+                  }
+            }
+
+      if (!cn) {
+            cn = new Text(this);
+            cn->setSubtype(TEXT_CHORD);
+            cn->setTick(segment->tick());
+            cn->setStaff(ocn->staff());
+            cn->setParent(measure);
+            undoAddElement(cn);
+            }
+
+      select(cn, 0, 0);
+      canvas()->startEdit(cn);
+      ((Text*)editObject)->moveCursorToEnd();
+
+      layout();
+      }
+
+//---------------------------------------------------------
 //   lyricsTab
 //---------------------------------------------------------
 

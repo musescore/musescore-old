@@ -36,6 +36,7 @@
 #include "layout.h"
 #include "slur.h"
 #include "tuplet.h"
+#include "text.h"
 
 //---------------------------------------------------------
 //   Canvas::keyPressEvent
@@ -51,15 +52,16 @@ void Canvas::keyPressEvent(QKeyEvent* ev)
             ev->ignore();
             return;
             }
+      Element* e = _score->editObject;
       if (key == Qt::Key_Escape) {
             if (state == DRAG_EDIT)
-                  _score->editObject->endEditDrag();
+                  e->endEditDrag();
             setState(NORMAL);
             _score->endCmd(true);
             ev->accept();
             return;
             }
-      if (_score->editObject->type() == LYRICS) {
+      if (e->type() == LYRICS) {
             int found = false;
             if (ev->key() == Qt::Key_Space && !(ev->modifiers() & Qt::ControlModifier)) {
                   // TODO: shift+tab events are filtered by qt
@@ -79,7 +81,14 @@ void Canvas::keyPressEvent(QKeyEvent* ev)
                   return;
                   }
             }
-      if (_score->editObject->edit(curGrip, ev)) {
+      if (e->type() == TEXT && e->subtype() == TEXT_CHORD) {
+            if (ev->key() == Qt::Key_Space && !(ev->modifiers() & Qt::ControlModifier)) {
+                  _score->chordTab(ev->modifiers() & Qt::ShiftModifier);
+                  ev->accept();
+                  return;
+                  }
+            }
+      if (e->edit(curGrip, ev)) {
             updateGrips();
             _score->endCmd(false);
             ev->accept();
@@ -113,7 +122,7 @@ void Canvas::keyPressEvent(QKeyEvent* ev)
                   ev->ignore();
                   return;
             }
-      _score->editObject->editDrag(curGrip, grip[curGrip].center(), delta);
+      e->editDrag(curGrip, grip[curGrip].center(), delta);
       updateGrips();
       _score->endCmd(false);
       ev->accept();

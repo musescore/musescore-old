@@ -1,4 +1,9 @@
+      ======== Version 0.6.1 released =============
 30.7.7 (ws)
+      - In chord name edit mode "space" moves to the next chord,
+        "shift+space" moves to the previous chord similar to
+        lyrics edit mode.
+      - new shortcut for entering chord names: Ctrl+K
       - fix layout bugs after printing lyrics
       - change lyrics commands (lyrics edit mode):
             space       - go to next note
