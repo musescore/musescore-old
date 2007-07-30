@@ -160,10 +160,10 @@ QRectF Page::bbox() const
 void Page::layout(ScoreLayout* layout)
       {
       // add page number
-      if (::style->showPageNumber) {
+      if (score()->style()->showPageNumber) {
             int n = no() + 1 + _score->_pageOffset;
             int subtype = (n & 1) ? TEXT_PAGE_NUMBER_ODD : TEXT_PAGE_NUMBER_EVEN;
-            if ((n > 1) || ::style->showPageNumberOne) {
+            if ((n > 1) || score()->style()->showPageNumberOne) {
                   if (_pageNo == 0) {
                         _pageNo = new Text(score());
                         _pageNo->setSubtype(subtype);

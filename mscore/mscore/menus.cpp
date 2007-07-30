@@ -80,7 +80,7 @@ void MuseScore::showPalette(bool visible)
             sp->setGrid(45, 60);
             sp->showStaff(true);
             for (int i = 0; i < 15; ++i) {
-                  Clef* k = new ::Clef(0, i);
+                  Clef* k = new ::Clef(gscore, i);
                   sp->addObject(i,  k, tr(clefTable[i].name));
                   }
             paletteBox->addPalette(tr("Clefs"), sp);
@@ -93,16 +93,16 @@ void MuseScore::showPalette(bool visible)
             sp->setGrid(60, 45);
             sp->showStaff(true);
             for (int i = 0; i < 7; ++i) {
-                  KeySig* k = new KeySig(0);
+                  KeySig* k = new KeySig(gscore);
                   k->setSubtype(i+1);
                   sp->addObject(i,  k, keyNames[i*2]);
                   }
             for (int i = -7; i < 0; ++i) {
-                  KeySig* k = new KeySig(0);
+                  KeySig* k = new KeySig(gscore);
                   k->setSubtype(i & 0xff);
                   sp->addObject(14 + i,  k, keyNames[(7 + i) * 2 + 1]);
                   }
-            KeySig* k = new KeySig(0);
+            KeySig* k = new KeySig(gscore);
             k->setSubtype(0);
             sp->addObject(14,  k, keyNames[14]);
             paletteBox->addPalette(tr("Keys"), sp);
@@ -115,18 +115,18 @@ void MuseScore::showPalette(bool visible)
             sp->setGrid(60, 45);
             sp->showStaff(true);
 
-      	sp->addObject(0,   new TimeSig(0, 2, 2), "2/2");
-      	sp->addObject(1,   new TimeSig(0, 4, 2), "2/4");
-      	sp->addObject(2,   new TimeSig(0, 4, 3), "3/4");
-      	sp->addObject(3,   new TimeSig(0, 4, 4), "4/4");
-      	sp->addObject(4,   new TimeSig(0, 4, 5), "5/4");
-      	sp->addObject(5,   new TimeSig(0, 4, 6), "6/4");
-      	sp->addObject(6,   new TimeSig(0, 8, 3), "3/8");
-      	sp->addObject(7,   new TimeSig(0, 8, 6), "6/8");
-      	sp->addObject(8,   new TimeSig(0, 8, 9), "9/8");
-      	sp->addObject(9,   new TimeSig(0, 8, 12), "12/8");
-      	sp->addObject(10,  new TimeSig(0, TSIG_FOUR_FOUR), "4/4 common time");
-      	sp->addObject(11,  new TimeSig(0, TSIG_ALLA_BREVE), "(2+2)/4 alla breve");
+      	sp->addObject(0,   new TimeSig(gscore, 2, 2), "2/2");
+      	sp->addObject(1,   new TimeSig(gscore, 4, 2), "2/4");
+      	sp->addObject(2,   new TimeSig(gscore, 4, 3), "3/4");
+      	sp->addObject(3,   new TimeSig(gscore, 4, 4), "4/4");
+      	sp->addObject(4,   new TimeSig(gscore, 4, 5), "5/4");
+      	sp->addObject(5,   new TimeSig(gscore, 4, 6), "6/4");
+      	sp->addObject(6,   new TimeSig(gscore, 8, 3), "3/8");
+      	sp->addObject(7,   new TimeSig(gscore, 8, 6), "6/8");
+      	sp->addObject(8,   new TimeSig(gscore, 8, 9), "9/8");
+      	sp->addObject(9,   new TimeSig(gscore, 8, 12), "12/8");
+      	sp->addObject(10,  new TimeSig(gscore, TSIG_FOUR_FOUR), "4/4 common time");
+      	sp->addObject(11,  new TimeSig(gscore, TSIG_ALLA_BREVE), "(2+2)/4 alla breve");
             paletteBox->addPalette(tr("Time"), sp);
 
             //-----------------------------------
@@ -150,7 +150,7 @@ void MuseScore::showPalette(bool visible)
                   { END_REPEAT,    "End Repeat" },
                   };
             for (unsigned i = 0; i < sizeof(t)/sizeof(*t); ++i) {
-                  BarLine* b  = new BarLine(cs);
+                  BarLine* b  = new BarLine(gscore);
                   b->setHeight(point(Spatium(4)));
                   b->setSubtype(t[i].type);
                   sp->addObject(i,  b, t[i].name);
@@ -166,61 +166,61 @@ void MuseScore::showPalette(bool visible)
 
             double l = _spatium * 8;
 
-            Hairpin* gabel0 = new Hairpin(cs);
+            Hairpin* gabel0 = new Hairpin(gscore);
             gabel0->setSubtype(0);
             gabel0->setLen(l);
             sp->addObject(0, gabel0, tr("crescendo"));
 
-            Hairpin* gabel1 = new Hairpin(cs);
+            Hairpin* gabel1 = new Hairpin(gscore);
             gabel1->setSubtype(1);
             gabel1->setLen(l);
             sp->addObject(1, gabel1, tr("diminuendo"));
 
-            Volta* volta1 = new Volta(cs);
+            Volta* volta1 = new Volta(gscore);
             volta1->setLen(l);
             volta1->setSubtype(PRIMA_VOLTA);
             sp->addObject(2, volta1, tr("prima volta"));
 
-            Volta* volta2 = new Volta(cs);
+            Volta* volta2 = new Volta(gscore);
             volta2->setLen(l);
             volta2->setSubtype(SECONDA_VOLTA);
             sp->addObject(3, volta2, tr("seconda volta"));
 
-            Volta* volta3 = new Volta(cs);
+            Volta* volta3 = new Volta(gscore);
             volta3->setLen(l);
             volta3->setSubtype(TERZA_VOLTA);
             sp->addObject(4, volta3, tr("terza volta"));
 
-            Volta* volta4 = new Volta(cs);
+            Volta* volta4 = new Volta(gscore);
             volta4->setLen(l);
             volta4->setSubtype(SECONDA_VOLTA2);
             sp->addObject(5, volta4, tr("seconda volta"));
 
-            Ottava* ottava = new Ottava(cs);
+            Ottava* ottava = new Ottava(gscore);
             ottava->setSubtype(0);
             ottava->setLen(l);
             sp->addObject(6, ottava, tr("8va"));
 
-            ottava = new Ottava(cs);
+            ottava = new Ottava(gscore);
             ottava->setSubtype(1);
             ottava->setLen(l);
             sp->addObject(7, ottava, tr("15va"));
 
-            ottava = new Ottava(cs);
+            ottava = new Ottava(gscore);
             ottava->setSubtype(2);
             ottava->setLen(l);
             sp->addObject(8, ottava, tr("8vb"));
 
-            ottava = new Ottava(cs);
+            ottava = new Ottava(gscore);
             ottava->setSubtype(3);
             ottava->setLen(l);
             sp->addObject(9, ottava, tr("15vb"));
 
-            Pedal* pedal = new Pedal(cs);
+            Pedal* pedal = new Pedal(gscore);
             pedal->setLen(l);
             sp->addObject(10, pedal, tr("pedal"));
 
-            Trill* trill = new Trill(0);
+            Trill* trill = new Trill(gscore);
             trill->setLen(l);
             sp->addObject(11, trill, tr("trill line"));
 
@@ -234,7 +234,7 @@ void MuseScore::showPalette(bool visible)
             sp->setGrid(45, 60);
 
             for (int i = 0; i < 4; ++i) {
-                  Arpeggio* a = new Arpeggio(0);
+                  Arpeggio* a = new Arpeggio(gscore);
                   a->setSubtype(i);
                   a->setHeight(_spatium * 4);
                   sp->addObject(i, a, tr("arpeggio"));
@@ -249,7 +249,7 @@ void MuseScore::showPalette(bool visible)
             sp->setGrid(45, 40);
 
             for (int i = 0; i < 2; ++i) {
-                  Breath* a = new Breath(cs);
+                  Breath* a = new Breath(gscore);
                   a->setSubtype(i);
                   sp->addObject(i, a, tr("breath"));
                   }
@@ -263,9 +263,9 @@ void MuseScore::showPalette(bool visible)
             sp = new Palette(1, 4, .7);
             sp->setGrid(45, 60);
 
-            Bracket* b1 = new Bracket(cs);
+            Bracket* b1 = new Bracket(gscore);
             b1->setSubtype(BRACKET_NORMAL);
-            Bracket* b2 = new Bracket(cs);
+            Bracket* b2 = new Bracket(gscore);
             b2->setSubtype(BRACKET_AKKOLADE);
             b1->setHeight(_spatium * 7);
             b2->setHeight(_spatium * 7);
@@ -283,7 +283,7 @@ void MuseScore::showPalette(bool visible)
             sp->setGrid(45, 40);
 
             for (int i = 0; i < NOTE_ATTRIBUTES; ++i) {
-                  NoteAttribute* s = new NoteAttribute(cs);
+                  NoteAttribute* s = new NoteAttribute(gscore);
                   s->setSubtype(i);
                   sp->addObject(i, s, s->name());
 
@@ -298,7 +298,7 @@ void MuseScore::showPalette(bool visible)
             sp->setGrid(36, 36);
 
             for (int i = 1; i < 11; ++i) {
-                  Accidental* s = new Accidental(cs);
+                  Accidental* s = new Accidental(gscore);
                   s->setSubtype(i);
                   sp->addObject(i-1, s, s->name());
                   }
@@ -312,20 +312,20 @@ void MuseScore::showPalette(bool visible)
             sp->setGrid(90, 35);
 
             for (int i = 0; i < 27; ++i) {
-                  Dynamic* dynamic = new Dynamic(cs, i+1);
+                  Dynamic* dynamic = new Dynamic(gscore, i + 1);
                   sp->addObject(i, dynamic, dynamic->subtypeName());
                   }
-            Dynamic* d = new Dynamic(cs, "crescendo");
+            Dynamic* d = new Dynamic(gscore, "crescendo");
             sp->addObject(27, d,  "crescendo");
 
-            sp->addObject(28, new Dynamic(cs, "diminuendo"), "diminuendo");
-            sp->addObject(29, new Dynamic(cs, "dolce"),      "dolce");
-            sp->addObject(30, new Dynamic(cs, "espressivo"), "espessivo");
-            sp->addObject(31, new Dynamic(cs, "legato"),   "legato");
-            sp->addObject(32, new Dynamic(cs, "leggiero"), "leggiero");
-            sp->addObject(33, new Dynamic(cs, "marcato"),  "marcato");
-            sp->addObject(34, new Dynamic(cs, "mero"),     "mero");
-            sp->addObject(35, new Dynamic(cs, "molto"),    "molto");
+            sp->addObject(28, new Dynamic(gscore, "diminuendo"), "diminuendo");
+            sp->addObject(29, new Dynamic(gscore, "dolce"),      "dolce");
+            sp->addObject(30, new Dynamic(gscore, "espressivo"), "espessivo");
+            sp->addObject(31, new Dynamic(gscore, "legato"),   "legato");
+            sp->addObject(32, new Dynamic(gscore, "leggiero"), "leggiero");
+            sp->addObject(33, new Dynamic(gscore, "marcato"),  "marcato");
+            sp->addObject(34, new Dynamic(gscore, "mero"),     "mero");
+            sp->addObject(35, new Dynamic(gscore, "molto"),    "molto");
             paletteBox->addPalette(tr("Dynamics"), sp);
 
             //-----------------------------------
@@ -338,7 +338,7 @@ void MuseScore::showPalette(bool visible)
 
             const char finger[] = "012345pimac";
             for (unsigned i = 0; i < strlen(finger); ++i) {
-                  Text* k = new Text(0);
+                  Text* k = new Text(gscore);
                   k->setSubtype(TEXT_FINGERING);
                   k->setText(QString(finger[i]));
                   sp->addObject(i, k, QString("fingering %1").arg(finger[i]));
@@ -583,7 +583,7 @@ void MuseScore::clefMenu()
             sp->setGrid(60, 80);
             sp->showStaff(true);
             for (int i = 0; i < 15; ++i) {
-                  Clef* k = new ::Clef(0, i);
+                  Clef* k = new ::Clef(gscore, i);
                   sp->addObject(i,  k, tr(clefTable[i].name));
                   }
             }
@@ -605,19 +605,19 @@ void MuseScore::keyMenu()
             ((QScrollArea*)keyPalette)->setWidget(sp);
             sp->showStaff(true);
             for (int i = 0; i < 7; ++i) {
-                  KeySig* k = new KeySig(cs);
+                  KeySig* k = new KeySig(gscore);
                   k->setSubtype(i+1);
                   sp->addObject(i * 2,  k, keyNames[i*2]);
                   }
             for (int i = -7; i < 0; ++i) {
-                  KeySig* k = new KeySig(cs);
+                  KeySig* k = new KeySig(gscore);
                   k->setSubtype(i & 0xff);
                   sp->addObject((7 + i) * 2 + 1,  k, keyNames[(7 + i) * 2 + 1]);
                   }
-            KeySig* k = new KeySig(cs);
+            KeySig* k = new KeySig(gscore);
             k->setSubtype(0);
             sp->addObject(14,  k, keyNames[14]);
-            k = new KeySig(cs);
+            k = new KeySig(gscore);
             k->setSubtype(0);
             sp->addObject(15,  k, keyNames[14]);
             }
@@ -652,65 +652,65 @@ void MuseScore::lineMenu()
 
             double l = _spatium * 8;
 
-            Hairpin* gabel0 = new Hairpin(cs);
+            Hairpin* gabel0 = new Hairpin(gscore);
             gabel0->setSubtype(0);
             gabel0->setLen(l);
             sp->addObject(0, gabel0, tr("crescendo"));
 
-            Hairpin* gabel1 = new Hairpin(cs);
+            Hairpin* gabel1 = new Hairpin(gscore);
             gabel1->setSubtype(1);
             gabel1->setLen(l);
             sp->addObject(1, gabel1, tr("diminuendo"));
 
-            Volta* volta1 = new Volta(cs);
+            Volta* volta1 = new Volta(gscore);
             volta1->setLen(l);
             volta1->setSubtype(PRIMA_VOLTA);
             sp->addObject(4, volta1, tr("prima volta"));
 
-            Volta* volta2 = new Volta(cs);
+            Volta* volta2 = new Volta(gscore);
             volta2->setLen(l);
             volta2->setSubtype(SECONDA_VOLTA);
             sp->addObject(5, volta2, tr("seconda volta"));
 
-            Volta* volta3 = new Volta(cs);
+            Volta* volta3 = new Volta(gscore);
             volta3->setLen(l);
             volta3->setSubtype(TERZA_VOLTA);
             sp->addObject(6, volta3, tr("terza volta"));
 
-            Volta* volta4 = new Volta(cs);
+            Volta* volta4 = new Volta(gscore);
             volta4->setLen(l);
             volta4->setSubtype(SECONDA_VOLTA2);
             sp->addObject(7, volta4, tr("seconda volta"));
 
             //--------
 
-            Ottava* ottava = new Ottava(cs);
+            Ottava* ottava = new Ottava(gscore);
             ottava->setSubtype(0);
             ottava->setLen(l);
             sp->addObject(8, ottava, tr("8va"));
 
-            ottava = new Ottava(cs);
+            ottava = new Ottava(gscore);
             ottava->setSubtype(1);
             ottava->setLen(l);
             sp->addObject(9, ottava, tr("15va"));
 
-            ottava = new Ottava(cs);
+            ottava = new Ottava(gscore);
             ottava->setSubtype(2);
             ottava->setLen(l);
             sp->addObject(10, ottava, tr("8vb"));
 
-            ottava = new Ottava(cs);
+            ottava = new Ottava(gscore);
             ottava->setSubtype(3);
             ottava->setLen(l);
             sp->addObject(11, ottava, tr("15vb"));
 
             //-------
 
-            Pedal* pedal = new Pedal(cs);
+            Pedal* pedal = new Pedal(gscore);
             pedal->setLen(l);
             sp->addObject(12, pedal, tr("pedal"));
 
-            Trill* trill = new Trill(0);
+            Trill* trill = new Trill(gscore);
             trill->setLen(l);
             sp->addObject(13, trill, tr("trill line"));
 
@@ -732,9 +732,9 @@ void MuseScore::bracketMenu()
             ((QScrollArea*)bracketPalette)->setWidget(sp);
             sp->setGrid(40, 80);
 
-            Bracket* b1 = new Bracket(cs);
+            Bracket* b1 = new Bracket(gscore);
             b1->setSubtype(BRACKET_NORMAL);
-            Bracket* b2 = new Bracket(cs);
+            Bracket* b2 = new Bracket(gscore);
             b2->setSubtype(BRACKET_AKKOLADE);
             b1->setHeight(_spatium * 7);
             b2->setHeight(_spatium * 7);
@@ -761,7 +761,7 @@ void MuseScore::noteAttributesMenu()
             sp->setGrid(60, 60);
 
             for (int i = 0; i < NOTE_ATTRIBUTES; ++i) {
-                  NoteAttribute* s = new NoteAttribute(cs);
+                  NoteAttribute* s = new NoteAttribute(gscore);
                   s->setSubtype(i);
                   sp->addObject(i, s, s->name());
 
@@ -785,7 +785,7 @@ void MuseScore::accidentalsMenu()
             sp->setGrid(60, 60);
 
             for (int i = 0; i < 16; ++i) {
-                  Accidental* s = new Accidental(cs);
+                  Accidental* s = new Accidental(gscore);
                   s->setSubtype(i);
                   sp->addObject(i, s, s->name());
                   }
@@ -808,22 +808,22 @@ void MuseScore::dynamicsMenu()
             sp->setGrid(90, 40);
 
             for (int i = 0; i < 27; ++i) {
-                  Dynamic* dynamic = new Dynamic(cs, i+1);
+                  Dynamic* dynamic = new Dynamic(gscore, i+1);
                   sp->addObject(i, dynamic, dynamic->subtypeName());
                   }
-            Dynamic* d = new Dynamic(cs, "crescendo");
+            Dynamic* d = new Dynamic(gscore, "crescendo");
             sp->addObject(27, d,  "crescendo");
 
-            sp->addObject(28, new Dynamic(cs, "diminuendo"), "diminuendo");
-            sp->addObject(29, new Dynamic(cs, "dolce"),      "dolce");
-            sp->addObject(30, new Dynamic(cs, "espressivo"), "espessivo");
-            sp->addObject(31, new Dynamic(cs, "legato"),   "legato");
-            sp->addObject(32, new Dynamic(cs, "leggiero"), "leggiero");
-            sp->addObject(33, new Dynamic(cs, "marcato"),  "marcato");
-            sp->addObject(34, new Dynamic(cs, "mero"),     "mero");
-            sp->addObject(35, new Dynamic(cs, "molto"),    "molto");
-//            sp->addObject(36, new Dynamic(cs, "morendo"),  "morendo");
-//            sp->addObject(37, new Dynamic(cs, "calando"),  "calando");
+            sp->addObject(28, new Dynamic(gscore, "diminuendo"), "diminuendo");
+            sp->addObject(29, new Dynamic(gscore, "dolce"),      "dolce");
+            sp->addObject(30, new Dynamic(gscore, "espressivo"), "espessivo");
+            sp->addObject(31, new Dynamic(gscore, "legato"),   "legato");
+            sp->addObject(32, new Dynamic(gscore, "leggiero"), "leggiero");
+            sp->addObject(33, new Dynamic(gscore, "marcato"),  "marcato");
+            sp->addObject(34, new Dynamic(gscore, "mero"),     "mero");
+            sp->addObject(35, new Dynamic(gscore, "molto"),    "molto");
+//            sp->addObject(36, new Dynamic(gscore, "morendo"),  "morendo");
+//            sp->addObject(37, new Dynamic(gscore, "calando"),  "calando");
 
             }
       dynamicsPalette->show();
@@ -857,7 +857,7 @@ void MuseScore::barMenu()
                   { END_REPEAT,    "End Repeat" },
                   };
             for (unsigned i = 0; i < sizeof(t)/sizeof(*t); ++i) {
-                  BarLine* b  = new BarLine(cs);
+                  BarLine* b  = new BarLine(gscore);
                   b->setHeight(point(Spatium(4)));
                   b->setSubtype(t[i].type);
                   sp->addObject(i,  b, t[i].name);
@@ -886,7 +886,7 @@ void MuseScore::fingeringMenu()
             Text* k;
 
             for (unsigned i = 0; i < strlen(finger); ++i) {
-                  k = new Text(0);
+                  k = new Text(gscore);
                   k->setSubtype(TEXT_FINGERING);
                   k->setText(QString(finger[i]));
                   sp->addObject(i, k, QString("fingering %1").arg(finger[i]));
@@ -960,10 +960,10 @@ void MuseScore::showLayoutBreakPalette()
             Palette* sp = new Palette(1, 3);
             sa->setWidget(sp);
             sp->setGrid(80, 80);
-            LayoutBreak* lb = new LayoutBreak(cs);
+            LayoutBreak* lb = new LayoutBreak(gscore);
             lb->setSubtype(LAYOUT_BREAK_LINE);
             sp->addObject(0, lb, tr("break line"));
-            lb = new LayoutBreak(cs);
+            lb = new LayoutBreak(gscore);
             lb->setSubtype(LAYOUT_BREAK_PAGE);
             sp->addObject(1, lb, tr("break page"));
             }

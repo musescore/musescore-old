@@ -501,7 +501,9 @@ void StaffLines::read(QDomElement e)
 //---------------------------------------------------------
 
 class LoadStyle : public LoadFile {
+      Score* cs;
    public:
+      LoadStyle(Score* s) { cs = s; }
       virtual bool loader(QFile* f);
       };
 
@@ -511,7 +513,7 @@ class LoadStyle : public LoadFile {
 
 void MuseScore::loadStyle()
       {
-      LoadStyle ls;
+      LoadStyle ls(cs);
       ls.load(this, QString("."), QString("*.mss"), tr("MuseScore: load Style"));
       }
 
@@ -538,7 +540,7 @@ bool LoadStyle::loader(QFile* qf)
                         QString tag(ee.tagName());
                         QString val(ee.text());
                         if (tag == "Style")
-                              loadStyle(ee);
+                              cs->style()->loadStyle(ee);
                         else
                               domError(ee);
                         }
@@ -565,7 +567,7 @@ void MuseScore::saveStyle()
       Xml xml(&f);
       xml.header();
       xml.stag("museScore version=\"1.0\"");
-      ::saveStyle(xml);
+      cs->style()->saveStyle(xml);
       xml.etag();
       }
 
@@ -585,8 +587,6 @@ bool MuseScore::saveFile(QFile* f)
       xml.tag("Mag",  canvas->mag());
       xml.tag("xoff", canvas->xoffset());
       xml.tag("yoff", canvas->yoffset());
-
-      ::saveStyle(xml);       // should style really saved with score?
 
       if (::symbolPalette)
             ::symbolPalette->write(xml, "Symbols");
@@ -657,7 +657,7 @@ bool Score::loadFile(QFile* qf)
                         else if (tag == "showInvisible")
                               _showInvisible = i;
                         else if (tag == "Style")
-                              ::loadStyle(ee);
+                              _style->loadStyle(ee);
                         else if (tag == "page-layout")
                               pageFormat()->read(ee);
                         else if (tag == "instrument-group")

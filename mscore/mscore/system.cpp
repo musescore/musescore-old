@@ -338,9 +338,9 @@ void System::layout2(ScoreLayout* layout)
       for (int staffIdx = 0; staffIdx < staves; ++staffIdx) {
             Staff* staff = score()->staff(staffIdx);
             if (staff->isTopSplit())
-                  setDistance(staffIdx, ::style->accoladeDistance);
+                  setDistance(staffIdx, score()->style()->accoladeDistance);
             else
-                  setDistance(staffIdx, ::style->staffDistance);
+                  setDistance(staffIdx, score()->style()->staffDistance);
             double dist = 0.0;
             foreach(Measure* m, ml)
                   dist = std::max(dist, m->distance(staffIdx));
@@ -392,7 +392,7 @@ void System::layout2(ScoreLayout* layout)
             // double x  = m->width();
             int staff = 0;
             Spatium barLineLen(4);
-            barLineLen += ::style->staffLineWidth;
+            barLineLen += score()->style()->staffLineWidth;
             foreach(Part* p, *pl) {
                   BarLine* barLine = m->barLine(staff);
                   if (barLine) {

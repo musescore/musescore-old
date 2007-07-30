@@ -54,6 +54,7 @@
 #include "lyrics.h"
 #include "pitchspelling.h"
 
+Score* gscore;                 ///< system score, used for palettes etc.
 InputState inputState;
 InputState* cis;              ///<  = &inputState;
 
@@ -121,7 +122,8 @@ bool Score::needLayout() const
 
 Score::Score()
       {
-      _layout       = new ScoreLayout();
+      _layout           = new ScoreLayout();
+      _style            = new Style(defaultStyle);
       _layout->setScore(this);
       tempomap          = new TempoList;
       sigmap            = new SigList;
@@ -269,6 +271,7 @@ void Score::write(Xml& xml)
             endUndo();
             canvas()->setState(Canvas::NORMAL);  //calls endEdit()
             }
+      _style->saveStyle(xml);
       xml.tag("showInvisible", _showInvisible);
       pageFormat()->write(xml);
       if (!rights.isEmpty())
@@ -372,11 +375,11 @@ void Score::fixTicks()
       for (Measure* m = _layout->first(); m; m = m->next()) {
             if (m->no() != bar) {
                   m->setNo(bar);
-                  if (::style->showMeasureNumber) {
+                  if (_style->showMeasureNumber) {
                         m->setNoText("");
-                        if (bar != 0 || ::style->showMeasureNumberOne) {
-                              if (::style->measureNumberSystem
-                                 && (((bar+1) % ::style->measureNumberInterval) == 0)) {
+                        if (bar != 0 || _style->showMeasureNumberOne) {
+                              if (_style->measureNumberSystem
+                                 && (((bar+1) % _style->measureNumberInterval) == 0)) {
                                     QString s("%1");
                                     s.arg(bar+1);
                                     m->setNoText(s);

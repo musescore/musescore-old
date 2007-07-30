@@ -43,7 +43,7 @@ BarLine::BarLine(Score* s)
 
 void BarLine::draw(QPainter& p)
       {
-      qreal lw    = point(style->barWidth);
+      qreal lw    = point(score()->style()->barWidth);
       qreal h     = height();
 
       bool split = height() > (_spatium * 4.01);
@@ -61,20 +61,20 @@ void BarLine::draw(QPainter& p)
 
             case END_BAR:
                   {
-                  qreal lw2 = point(style->endBarWidth);
+                  qreal lw2 = point(score()->style()->endBarWidth);
 
                   p.drawLine(QLineF(lw*.5, 0.0, lw*.5, h));
                   pen.setWidthF(lw2);
                   p.setPen(pen);
-                  qreal x = point(style->endBarDistance) + lw2*.5 + lw;
+                  qreal x = point(score()->style()->endBarDistance) + lw2*.5 + lw;
                   p.drawLine(QLineF(x, 0.0, x, h));
                   }
                   break;
 
             case DOUBLE_BAR:
                   {
-                  qreal lw2 = point(style->doubleBarWidth);
-                  qreal d   = point(style->doubleBarDistance);
+                  qreal lw2 = point(score()->style()->doubleBarWidth);
+                  qreal d   = point(score()->style()->doubleBarDistance);
 
                   pen.setWidthF(lw2);
                   p.setPen(pen);
@@ -87,9 +87,9 @@ void BarLine::draw(QPainter& p)
 
             case START_REPEAT:
                   {
-                  qreal lw2  = point(style->endBarWidth);
-                  qreal lw22 = point(style->endBarWidth) / 2.0;
-                  qreal d1   = point(style->endBarDistance);
+                  qreal lw2  = point(score()->style()->endBarWidth);
+                  qreal lw22 = point(score()->style()->endBarWidth) / 2.0;
+                  qreal d1   = point(score()->style()->endBarDistance);
                   qreal dotw = symbols[dotSym].width();
                   qreal x2   =  dotw/2;
                   qreal x1   =  dotw + d1 + lw/2;
@@ -111,9 +111,9 @@ void BarLine::draw(QPainter& p)
 
             case END_REPEAT:
                   {
-                  qreal lw2  = point(style->endBarWidth);
-                  qreal lw22 = point(style->endBarWidth) / 2.0;
-                  qreal d1   = point(style->endBarDistance);
+                  qreal lw2  = point(score()->style()->endBarWidth);
+                  qreal lw22 = point(score()->style()->endBarWidth) / 2.0;
+                  qreal d1   = point(score()->style()->endBarDistance);
 
                   qreal dotw = symbols[dotSym].width();
                   qreal x0   =  dotw/2;
@@ -192,21 +192,21 @@ void BarLine::setSubtype(int t)
 
 QRectF BarLine::bbox() const
       {
-      Spatium w = style->barWidth;
+      Spatium w = score()->style()->barWidth;
       qreal dw = 0.0;
 
       switch(subtype()) {
             case DOUBLE_BAR:
-                  w  = style->doubleBarWidth * 2 + style->doubleBarDistance;
+                  w  = score()->style()->doubleBarWidth * 2 + score()->style()->doubleBarDistance;
                   dw = point(w);
                   break;
             case START_REPEAT:
             case END_REPEAT:
-                  w  += style->endBarWidth + 2 * style->endBarDistance;
+                  w  += score()->style()->endBarWidth + 2 * score()->style()->endBarDistance;
                   dw = point(w) + symbols[dotSym].width();
                   break;
             case END_BAR:
-                  w += style->endBarWidth + style->endBarDistance;
+                  w += score()->style()->endBarWidth + score()->style()->endBarDistance;
                   dw = point(w);
                   break;
             case BROKEN_BAR:

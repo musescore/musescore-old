@@ -2,9 +2,9 @@
 <museScore version="1.0">
   <Spatium>1.5</Spatium>
   <Division>480</Division>
-  <Mag>5.9411</Mag>
-  <xoff>-8475</xoff>
-  <yoff>-2683</yoff>
+  <Mag>1.42822</Mag>
+  <xoff>30</xoff>
+  <yoff>15</yoff>
   <Style>
     <staffUpperBorder>8</staffUpperBorder>
     <staffLowerBorder>4</staffLowerBorder>
@@ -1220,7 +1220,7 @@ p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-size:10pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:9pt;&quot;&gt;&lt;span style=&quot; font-size:10pt; font-weight:600;&quot;&gt;II______________&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
         <subtype>System</subtype>
-        <offset x="-0.136054" y="5.71429"/>
+        <offset x="-0.38306" y="11.2719"/>
         </Text>
       <TimeSig>
         <subtype>392</subtype>
@@ -1551,7 +1551,7 @@ p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-size:10pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:9pt;&quot;&gt;&lt;span style=&quot; font-size:10pt; font-weight:600;&quot;&gt;V________________&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
         <subtype>System</subtype>
-        <offset x="-0.136054" y="-3.12925"/>
+        <offset x="-0.0125511" y="-5.59931"/>
         </Text>
       <TimeSig>
         <subtype>392</subtype>
@@ -1667,7 +1667,7 @@ p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-size:10pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:9pt;&quot;&gt;&lt;span style=&quot; font-size:10pt; font-weight:600;&quot;&gt;V__________________&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
         <subtype>System</subtype>
-        <offset x="-0.544218" y="-2.9932"/>
+        <offset x="-0.791224" y="-6.08077"/>
         </Text>
       <TimeSig>
         <subtype>392</subtype>
@@ -1824,7 +1824,7 @@ p, li { white-space: pre-wrap; }
         <ticklen>240</ticklen>
         <Attribute>
           <subtype>3</subtype>
-          <offset x="0.399225" y="0.33868"/>
+          <offset x="0.0287164" y="0.832692"/>
           </Attribute>
         <Note>
           <pitch>60</pitch>
@@ -1892,7 +1892,7 @@ p, li { white-space: pre-wrap; }
         <BeamMode>begin</BeamMode>
         <Attribute>
           <subtype>3</subtype>
-          <offset x="0.294858" y="0.296933"/>
+          <offset x="0.171355" y="1.03795"/>
           </Attribute>
         <Note>
           <pitch>58</pitch>
@@ -2366,7 +2366,7 @@ p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-size:10pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:9pt;&quot;&gt;&lt;span style=&quot; font-size:10pt; font-weight:600;&quot;&gt;II_____________&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
         <subtype>System</subtype>
-        <offset x="-0.408163" y="-2.44898"/>
+        <offset x="-0.408163" y="-4.91904"/>
         </Text>
       <Chord>
         <ticklen>240</ticklen>
@@ -2663,7 +2663,7 @@ p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-size:10pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:9pt;&quot;&gt;&lt;span style=&quot; font-size:10pt; font-weight:600;&quot;&gt;III___________&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
         <subtype>System</subtype>
-        <offset x="-0.816327" y="-2.58503"/>
+        <offset x="-0.569321" y="-4.56108"/>
         </Text>
       <TimeSig>
         <subtype>264</subtype>
@@ -2906,7 +2906,7 @@ p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-size:10pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:9pt;&quot;&gt;&lt;span style=&quot; font-size:10pt; font-weight:600;&quot;&gt;III____________&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
         <subtype>System</subtype>
-        <offset x="-0.408163" y="-3.26531"/>
+        <offset x="-0.161157" y="-6.10588"/>
         </Text>
       <Chord>
         <ticklen>240</ticklen>
@@ -3508,7 +3508,7 @@ p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-size:10pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:9pt;&quot;&gt;&lt;span style=&quot; font-size:10pt; font-weight:600;&quot;&gt;III________&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
         <subtype>System</subtype>
-        <offset x="-0.408163" y="-1.76871"/>
+        <offset x="-0.655169" y="-3.49775"/>
         </Text>
       <Text>
         <align>1</align>
@@ -3522,7 +3522,7 @@ p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-size:10pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:9pt;&quot;&gt;&lt;span style=&quot; font-size:10pt; font-weight:600;&quot;&gt;IV__&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
         <subtype>System</subtype>
-        <offset x="0.136054" y="-1.76871"/>
+        <offset x="-0.357958" y="-3.74476"/>
         <tick>48480</tick>
         </Text>
       <Chord>

@@ -72,7 +72,7 @@ void Beam::draw(QPainter& p)
 
             QPointF ip1 = bs->p1;
             QPointF ip2 = bs->p2;
-            qreal lw2   = point(style->beamWidth) * .5;
+            qreal lw2   = point(score()->style()->beamWidth) * .5;
 
             QPolygonF a(4);
             a[0] = QPointF(ip1.x(), ip1.y()-lw2);
@@ -380,16 +380,16 @@ void Beam::layout(ScoreLayout* layout)
                           - (a1->pos().x() + a1->segment()->pos().x());
             if (dx) {
                   slope = (l2 - l1) * _spatium * .5 / dx;
-                  if (fabs(slope) < style->beamMinSlope) {
+                  if (fabs(slope) < score()->style()->beamMinSlope) {
                         cut = slope > 0.0 ? 0 : -1;
                         slope = 0;
                         }
-                  else if (slope > style->beamMaxSlope) {
-                        slope = style->beamMaxSlope;
+                  else if (slope > score()->style()->beamMaxSlope) {
+                        slope = score()->style()->beamMaxSlope;
                         cut = 1;
                         }
-                  else if (-slope > style->beamMaxSlope) {
-                        slope = -style->beamMaxSlope;
+                  else if (-slope > score()->style()->beamMaxSlope) {
+                        slope = -score()->style()->beamMaxSlope;
                         cut = -1;
                         }
                   }
@@ -405,7 +405,7 @@ void Beam::layout(ScoreLayout* layout)
             //   create top beam segment
             //---------------------------------------------
 
-      double xoffLeft  = point(style->stemWidth)/2;
+      double xoffLeft  = point(score()->style()->stemWidth)/2;
       double xoffRight = xoffLeft;
 
       QPointF p1s(a1->stemPos(a1->isUp(), false) + a1->pos() + a1->segment()->pos());
@@ -430,8 +430,8 @@ void Beam::layout(ScoreLayout* layout)
       // calculate min stem len
       //    adjust beam position if necessary
       //
-      double beamDist = point(style->beamDistance * style->beamWidth
-                        + style->beamWidth) * (upFlag ? 1.0 : -1.0);
+      double beamDist = point(score()->style()->beamDistance * score()->style()->beamWidth
+                        + score()->style()->beamWidth) * (upFlag ? 1.0 : -1.0);
       double min = 1000;
       double max = -1000;
       int lmove = elements.front()->move();
@@ -537,7 +537,7 @@ void Beam::layout(ScoreLayout* layout)
                               bs = new BeamSegment;
                               beamSegments.push_back(bs);
                               double x2 = nn1->stemPos(nn1->chord()->isUp()).x() + nn1->chord()->pos().x() + nn1->chord()->segment()->pos().x();
-                              double x3 = x2 + point(style->beamMinLen);
+                              double x3 = x2 + point(score()->style()->beamMinLen);
 
                               if (!nn1r) {
                                     double tmp = x3;
@@ -576,7 +576,7 @@ void Beam::layout(ScoreLayout* layout)
                   bs = new BeamSegment;
                   beamSegments.push_back(bs);
                   double x3 = nn1->stemPos(nn1->chord()->isUp()).x() + nn1->chord()->pos().x() + nn1->chord()->segment()->pos().x();
-                  double x2 = x3 - point(style->beamMinLen);
+                  double x2 = x3 - point(score()->style()->beamMinLen);
                   bs->p1 = QPointF(x2, (x2 - x1) * slope + y1);
                   bs->p2 = QPointF(x3, (x3 - x1) * slope + y1);
                   }

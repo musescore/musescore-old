@@ -169,13 +169,15 @@ struct Style {
       int measureNumberInterval;
       bool measureNumberSystem;
       bool measureNumberAllStaffs;
+
+      void loadStyle(QDomElement e);
+      void saveStyle(Xml& xml);
       };
+
+extern Style defaultStyle;
 
 extern void setDefaultStyle();
 extern void setTextStyle(const TextStyle& ts);
-extern void loadStyle(QDomElement);
-extern void saveStyle(Xml& xml);
 
-extern Style* style;
 extern TextStyleList textStyles;
 #endif

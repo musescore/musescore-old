@@ -328,7 +328,7 @@ double Page::addMeasure(ScoreLayout* layout, Measure* m, double y)
                   }
             }
       if (textFound)
-            y += point(::style->staffUpperBorder);
+            y += point(score()->style()->staffUpperBorder);
       return y;
       }
 
@@ -344,7 +344,7 @@ bool ScoreLayout::layoutPage(Page* page, Measure*& im, iSystem& is)
       // usable width of page:
       qreal w  = page->loWidth() - page->lm() - page->rm();
       qreal x  = page->lm();
-      qreal ey = page->loHeight() - page->bm() - point(::style->staffLowerBorder);
+      qreal ey = page->loHeight() - page->bm() - point(score()->style()->staffLowerBorder);
 
       page->systems()->clear();
       page->pel().clear();
@@ -367,7 +367,7 @@ bool ScoreLayout::layoutPage(Page* page, Measure*& im, iSystem& is)
             layoutSystem(im, system, x, y, w);
             system->setParent(page);
 
-            qreal h = system->bbox().height() + point(::style->systemDistance);
+            qreal h = system->bbox().height() + point(score()->style()->systemDistance);
             if (y + h >= ey) {  // system does not fit on page
                   // rollback
                   im = system->measures().front();
@@ -380,9 +380,9 @@ bool ScoreLayout::layoutPage(Page* page, Measure*& im, iSystem& is)
 
             double systemDistance;
             if (systemNo == 1)
-                  systemDistance = point(style->staffUpperBorder);
+                  systemDistance = point(score()->style()->staffUpperBorder);
             else
-                  systemDistance = point(style->systemDistance);
+                  systemDistance = point(score()->style()->systemDistance);
             system->move(0.0, systemDistance);
             y += h;
             if (system->pageBreak())
@@ -396,9 +396,9 @@ bool ScoreLayout::layoutPage(Page* page, Measure*& im, iSystem& is)
 
       double restHeight = ey - y;
       double ph = page->height()
-            - point(::style->staffLowerBorder + ::style->staffUpperBorder);
+            - point(score()->style()->staffLowerBorder + score()->style()->staffUpperBorder);
 
-      if (restHeight > (ph * ::style->pageFillLimit))
+      if (restHeight > (ph * score()->style()->pageFillLimit))
             return true;
 
       QList<System*>* sl   = page->systems();
@@ -486,11 +486,11 @@ System* ScoreLayout::layoutSystem(Measure*& im, System* system, qreal x, qreal y
             m->layoutX(this, 1.0);
 
             double ww      = m->layoutWidth().stretchable;
-            double stretch = m->userStretch() * ::style->measureSpacing;
+            double stretch = m->userStretch() * score()->style()->measureSpacing;
 
             ww *= stretch;
-            if (ww < point(::style->minMeasureWidth))
-                  ww = point(::style->minMeasureWidth);
+            if (ww < point(score()->style()->minMeasureWidth))
+                  ww = point(score()->style()->minMeasureWidth);
 
             if (minWidth + ww > systemWidth) {
                   // minimum is one measure

@@ -288,7 +288,7 @@ void Palette::paintEvent(QPaintEvent*)
       //
 
       QPen pen(QColor(Qt::black));
-      pen.setWidthF(::style->staffLineWidth.val() * PALETTE_SPATIUM);
+      pen.setWidthF(defaultStyle.staffLineWidth.val() * PALETTE_SPATIUM);
 
       for (int row = 0; row < rows; ++row) {
             for (int column = 0; column < columns; ++column) {
