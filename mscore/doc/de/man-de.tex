@@ -1067,15 +1067,36 @@ mscore <Optionen> <Dateiname>
 
             \startnarrower[left]
             \starttabulate[|l|p|]
-            \NC\bf Strg+L      \NC startet die Texteingabe. Ein Textcursor erscheint
+            \NC\bf Strg+L      \NC startet die Texteingabe. Ein Textblock erscheint
                                 unter der ausgewählten Note\NC\MR
-            \NC\bf Tab         \NC positioniert den Cursor zur nächsten Note
+            \NC\bf Leertaste    \NC positioniert den Cursor zur nächsten Note
                                    (nächste Silbe)\NC\MR
-            \NC\bf Strg+Tab    \NC positioniert den Cursor zur vorherigen Note
+            \NC\bf Shift+Leertaste \NC positioniert den Cursor zur vorherigen Note
                                    (vorherige Silbe)\NC\MR
             \NC\bf --          \NC positioniert den Cursor zur nächsten Silbe
                                    und verbindet beide Silben mit einer Linie\NC\MR
+            \NC\bf Ctrl+Leertaste \NC erstellt ein Leerzeichen im Liedtext\NC\MR
+            \NC\bf Ctrl+ --       \NC erstellt ein -- im Liedtext\NC\MR
+
             \NC\bf Return      \NC erzeugt eine weitere Liedtextzeile\NC\MR
+            \NC\bf ESC         \NC beendet den Eingabemode\NC\MR
+            \stoptabulate
+            \stopnarrower
+
+      \subsection{Akkordnamen}
+
+            Um einen Akkordnamen einzugeben muß zunächst eine Note
+            ausgewählt werden.
+
+            \startnarrower[left]
+            \starttabulate[|l|p|]
+            \NC\bf Strg+K      \NC startet die Texteingabe. Ein Textblock erscheint
+                                über der ausgewählten Note\NC\MR
+            \NC\bf Leertaste    \NC positioniert den Cursor zum nächsten Akkord \NC\MR
+            \NC\bf Shift+Leertaste \NC positioniert den Cursor zum vorherigen Akkord
+                                   \NC\MR
+            \NC\bf Ctrl+Leertaste \NC erstellt ein Leerzeichen im Akkordnamen\NC\MR
+
             \NC\bf ESC         \NC beendet den Eingabemode\NC\MR
             \stoptabulate
             \stopnarrower

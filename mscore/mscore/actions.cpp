@@ -1114,7 +1114,7 @@ Shortcut MuseScore::sc[] = {
       Shortcut(
          "chord-text",
          QT_TR_NOOP("Add Chord Name"),
-         0,
+         Qt::CTRL + Qt::Key_K,
          Qt::WindowShortcut,
          QT_TR_NOOP("Chord Name"),
          QT_TR_NOOP("Add Chord Text")
