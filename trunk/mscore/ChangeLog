@@ -1,5 +1,7 @@
       ======== Version 0.6.1 released =============
 30.7.7 (ws)
+      - Every Score() class now has its own Style(). This fixes
+        several bugs when there are more than one scores loaded.
       - In chord name edit mode "space" moves to the next chord,
         "shift+space" moves to the previous chord similar to
         lyrics edit mode.

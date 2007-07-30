@@ -36,6 +36,7 @@
 #include "layout.h"
 #include "slur.h"
 #include "arpeggio.h"
+#include "score.h"
 
 //---------------------------------------------------------
 //   Stem
@@ -53,7 +54,7 @@ Stem::Stem(Score* s)
 
 void Stem::draw(QPainter& p)
       {
-      qreal lw = point(::style->stemWidth);
+      qreal lw = point(score()->style()->stemWidth);
       QPen pen(p.pen());
       pen.setWidthF(lw);
       p.setPen(pen);
@@ -76,7 +77,7 @@ void Stem::setLen(const Spatium& l)
 
 QRectF Stem::bbox() const
       {
-      double w = point(::style->stemWidth);
+      double w = point(score()->style()->stemWidth);
       double l = point(_len);
       return QRectF(-w * .5, 0, w, l);
       }
@@ -343,7 +344,7 @@ void Chord::layoutStem(ScoreLayout* layout)
                   _hook->setParent(this);
                   }
             _hook->setIdx(hookIdx, _grace);
-            qreal lw = point(::style->stemWidth) * .5;
+            qreal lw = point(score()->style()->stemWidth) * .5;
             _hook->setPos(npos + QPointF(lw, up ? -lw : pstemLen));
             }
       else
@@ -416,7 +417,7 @@ void Chord::layout(ScoreLayout* layout)
             note->setPos(x, y);
             Accidental* accidental = note->accidental();
             if (accidental) {
-                  double x = - point(style->prefixNoteDistance);
+                  double x = - point(score()->style()->prefixNoteDistance);
                   if (_grace)
                         x /= 2;
                   x -= accidental->width(); // - accidental->bbox().x();
@@ -833,7 +834,7 @@ void Chord::dump() const
 
 void Chord::space(double& min, double& extra) const
       {
-      extra         = 0.0; // point(::style->minNoteDistance);
+      extra         = 0.0; // point(score()->style()->minNoteDistance);
       double mirror = 0.0;
       double hw     = 0.0;
 
@@ -849,9 +850,9 @@ void Chord::space(double& min, double& extra) const
             if (note->accidental()) {
                   prefixWidth = note->accidental()->width();
                   if (_grace)
-                       prefixWidth += point(::style->prefixNoteDistance)/2.0;
+                       prefixWidth += point(score()->style()->prefixNoteDistance)/2.0;
                   else
-                       prefixWidth += point(::style->prefixNoteDistance);
+                       prefixWidth += point(score()->style()->prefixNoteDistance);
                   if (prefixWidth > extra)
                         extra += prefixWidth;
                   }
@@ -938,7 +939,7 @@ qreal Chord::centerX() const
 LedgerLine::LedgerLine(Score* s)
    : Line(s, false)
       {
-      setLineWidth(style->ledgerLineWidth);
+      setLineWidth(score()->style()->ledgerLineWidth);
       setLen(Spatium(2));
       }
 

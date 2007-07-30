@@ -1,5 +1,9 @@
 Release 0.7 (svn)
 
+Release 0.6.1
+      This is a bugfix release. Most notably the crash when importing
+      a midi file is fixed.
+
 Release 0.6
       - text frames
       - arpeggio lines

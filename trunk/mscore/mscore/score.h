@@ -55,6 +55,7 @@ class MidiTrack;
 class BSymbol;
 class KeySig;
 
+struct Style;
 struct SigEvent;
 
 extern bool showRubberBand;
@@ -80,6 +81,7 @@ class ScoreView {
 class Score : public QObject {
       Q_OBJECT
 
+      Style* _style;
       QFileInfo info;
       bool _created;          ///< file is never saved, has generated name
 
@@ -422,8 +424,10 @@ class Score : public QObject {
       int prevSeg(int tick, int track);
       int nextSeg1(int tick, int& track);
       int prevSeg1(int tick, int& track);
+      Style* style() const { return _style; }
       };
 
+extern Score* gscore;
 extern void setPadState(Element*);
 extern void fixTicks();
 extern int y2pitch(double y, int clef);

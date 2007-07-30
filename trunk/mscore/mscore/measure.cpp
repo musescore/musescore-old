@@ -566,14 +566,14 @@ void Measure::layout2(ScoreLayout* layout)
       QString s = QString("%1").arg(pn + 1);
 
       QString ns;
-      if (::style->showMeasureNumber
+      if (score()->style()->showMeasureNumber
          && !_irregular
-         && (pn || ::style->showMeasureNumberOne)) {
-            if (::style->measureNumberSystem) {
+         && (pn || score()->style()->showMeasureNumberOne)) {
+            if (score()->style()->measureNumberSystem) {
                   if (system() && !system()->measures().empty() && system()->measures().front() == this)
                         ns = s;
                   }
-            else if ((pn % ::style->measureNumberInterval) == 0)
+            else if ((pn % score()->style()->measureNumberInterval) == 0)
                   ns = s;
             }
       _noText->setText(ns);
@@ -1065,7 +1065,7 @@ void Measure::moveY(int staff, double dy)
       BarLine* bl = barLine(staff);
       if (bl) {
             if (_score->staff(staff)->isTopSplit()) {
-                  Spatium barLineLen = Spatium(8) + ::style->staffDistance;
+                  Spatium barLineLen = Spatium(8) + score()->style()->staffDistance;
                   bl->setHeight(point(barLineLen));
                   }
             }
@@ -1184,6 +1184,8 @@ void Measure::layoutX(ScoreLayout* layout, double stretch)
             return;
             }
 
+      Style* style = score()->style();
+
       //-----------------------------------------------------------------------
       //    remove empty segments
       //-----------------------------------------------------------------------
@@ -1230,25 +1232,25 @@ again:
             double additionalMin   = 0.0;
             double additionalExtra = 0.0;
             if (!notesSeg && s->next() && s->next()->subtype() == Segment::SegChordRest) {
-                  additionalMin = point(::style->clefKeyRightMargin);
+                  additionalMin = point(style->clefKeyRightMargin);
                   notesSeg = true;
                   }
             if (s->subtype() == Segment::SegChordRest) {
                   if (firstNoteRest)
                         firstNoteRest = false;
                   else
-                        additionalExtra = point(::style->minNoteDistance);
+                        additionalExtra = point(style->minNoteDistance);
                   }
             else if (s->subtype() == Segment::SegClef)
-                  additionalExtra = point(::style->clefLeftMargin);
+                  additionalExtra = point(style->clefLeftMargin);
             else if (s->subtype() == Segment::SegTimeSig)
-                  additionalExtra = point(::style->timesigLeftMargin);
+                  additionalExtra = point(style->timesigLeftMargin);
             else if (s->subtype() == Segment::SegKeySig)
-                  additionalExtra = point(::style->keysigLeftMargin);
+                  additionalExtra = point(style->keysigLeftMargin);
             else if (s->subtype() == Segment::SegEndBarLine)
-                  additionalExtra = point(::style->barNoteDistance);
+                  additionalExtra = point(style->barNoteDistance);
             else if (s->subtype() == Segment::SegTimeSigAnnounce) {
-                  // additionalExtra = point(::style->timesigLeftMargin);
+                  // additionalExtra = point(style->timesigLeftMargin);
                   additionalMin   = point(Spatium(1.0));
                   }
 
@@ -1295,17 +1297,17 @@ again:
             Spatium extra;
             switch(first()->subtype()) {
                   case Segment::SegClef:
-                        min = ::style->clefLeftMargin;
+                        min = style->clefLeftMargin;
                         break;
                   case Segment::SegKeySig:
-                        min = ::style->keysigLeftMargin;
+                        min = style->keysigLeftMargin;
                         break;
                   case Segment::SegTimeSigAnnounce:
                   case Segment::SegTimeSig:
-                        min = ::style->timesigLeftMargin;
+                        min = style->timesigLeftMargin;
                         break;
                   case Segment::SegChordRest:
-                        min = ::style->barNoteDistance;
+                        min = style->barNoteDistance;
                         break;
                   }
             spaces[0][staffIdx].setMin(point(min));
@@ -1551,11 +1553,11 @@ again:
                   else {
                         double xo = spaces[seg][staff/VOICES].extra();
                         if (t == CLEF)
-                              e->setPos(-e->bbox().x() - xo + point(::style->clefLeftMargin), y);
+                              e->setPos(-e->bbox().x() - xo + point(style->clefLeftMargin), y);
                         else if (t == TIMESIG)
-                              e->setPos(- e->bbox().x() - xo + point(::style->timesigLeftMargin), y);
+                              e->setPos(- e->bbox().x() - xo + point(style->timesigLeftMargin), y);
                         else if (t == KEYSIG)
-                              e->setPos(- e->bbox().x() - xo + point(::style->keysigLeftMargin), y);
+                              e->setPos(- e->bbox().x() - xo + point(style->keysigLeftMargin), y);
                         else  if (s->subtype() == Segment::SegEndBarLine) {
                               e->setPos(0.0, y);
                               }
@@ -1709,7 +1711,7 @@ void Measure::insertStaff1(Staff* staff, int staffIdx)
             }
 
       MStaff ms;
-      ms.distance = point(staffIdx == 0 ? style->systemDistance : style->staffDistance);
+      ms.distance = point(staffIdx == 0 ? score()->style()->systemDistance : score()->style()->staffDistance);
       staves.insert(staves.begin()+staffIdx, ms);
       }
 
@@ -2191,7 +2193,7 @@ void Measure::read(QDomElement e, int idx)
       {
       for (int n = staves.size(); n <= idx; ++n) {
             MStaff s;
-            s.distance = point(n == 0 ? style->systemDistance : style->staffDistance);
+            s.distance = point(n == 0 ? score()->style()->systemDistance : score()->style()->staffDistance);
             s.userDistance = 0.0;
             staves.push_back(s);
             }

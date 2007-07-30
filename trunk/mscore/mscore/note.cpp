@@ -288,7 +288,7 @@ void Note::remove(Element* el)
 
 QPointF Note::stemPos(bool upFlag) const
       {
-      double sw = point(style->stemWidth) * .5;
+      double sw = point(score()->style()->stemWidth) * .5;
       double x = pos().x();
       double y = pos().y();
 
@@ -423,7 +423,7 @@ void Note::draw(QPainter& p)
                         y = _spatium * .5;
                   }
             for (int i = 1; i <= _dots; ++i)
-                  symbols[dotSym].draw(p, symbols[_head].width() + point(style->dotNoteDistance) * i, y);
+                  symbols[dotSym].draw(p, symbols[_head].width() + point(score()->style()->dotNoteDistance) * i, y);
             }
       }
 
@@ -451,7 +451,7 @@ QRectF Note::bbox() const
                   }
             for (int i = 1; i <= _dots; ++i) {
                   QRectF dot = symbols[dotSym].bbox();
-                  double xoff = symbols[_head].width() + point(style->dotNoteDistance) * i;
+                  double xoff = symbols[_head].width() + point(score()->style()->dotNoteDistance) * i;
                   dot.translate(xoff, y);
                   _bbox |= dot;
                   }
@@ -654,7 +654,7 @@ void ShadowNote::draw(QPainter& p)
 
 //      if (c.intersects(r)) {
             p.translate(ap);
-            qreal lw = point(style->ledgerLineWidth);
+            qreal lw = point(score()->style()->ledgerLineWidth);
             QPen pen(preferences.selectColor[padState.voice].light(160));
             pen.setWidthF(lw);
             p.setPen(pen);
@@ -684,7 +684,7 @@ QRectF ShadowNote::bbox() const
       {
       QRectF b = symbols[quartheadSym].bbox();
       double x  = b.width()/2 - _spatium;
-      double lw = point(style->ledgerLineWidth);
+      double lw = point(score()->style()->ledgerLineWidth);
 
       QRectF r(0, -lw/2.0, 2 * _spatium, lw);
 

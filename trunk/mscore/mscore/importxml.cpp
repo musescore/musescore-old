@@ -299,7 +299,7 @@ void MusicXml::scorePartwise(QDomElement e)
                                     if (tag == "system-margins")
                                           ;
                                     else if (tag == "system-distance") {
-                                          style->systemDistance = val;
+                                          score->style()->systemDistance = val;
                                           printf("system distance %f\n", val.val());
                                           }
                                     else if (tag == "top-system-distance")
@@ -313,7 +313,7 @@ void MusicXml::scorePartwise(QDomElement e)
                                     QString tag(eee.tagName());
                                     Spatium val(eee.text().toDouble() / 10.0);
                                     if (tag == "staff-distance")
-                                          style->staffDistance = val;
+                                          score->style()->staffDistance = val;
                                     else
                                           domError(eee);
                                     }

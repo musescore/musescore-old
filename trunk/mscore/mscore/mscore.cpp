@@ -77,6 +77,7 @@ double DPI, DPMM;
 
 QMap<QString, Shortcut*> shortcuts;
 
+
 //---------------------------------------------------------
 //   getSharePath
 //---------------------------------------------------------
@@ -1636,6 +1637,7 @@ int main(int argc, char* argv[])
       initDrumset();
 
       mscore = new MuseScore();
+      gscore = new Score;
       mscore->readSettings();
 
       int currentScore = 0;

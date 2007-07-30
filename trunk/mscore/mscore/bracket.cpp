@@ -58,9 +58,9 @@ double Bracket::width() const
       {
       double w;
       if (subtype() == BRACKET_AKKOLADE)
-            w = point(style->akkoladeWidth);
+            w = point(score()->style()->akkoladeWidth);
       else
-            w = point(style->bracketWidth + style->bracketDistance);
+            w = point(score()->style()->bracketWidth + score()->style()->bracketDistance);
       return w;
       }
 
@@ -78,7 +78,7 @@ void Bracket::layout(ScoreLayout* layout)
       qreal h = h2 + yoff * .5;
 
       if (subtype() == BRACKET_AKKOLADE) {
-            qreal w         = point(style->akkoladeWidth);
+            qreal w         = point(score()->style()->akkoladeWidth);
             const double X1 =  2.0 * w;
             const double X2 = -0.7096 * w;
             const double X3 = -1.234 * w;
@@ -91,7 +91,7 @@ void Bracket::layout(ScoreLayout* layout)
             path.cubicTo(X3,  h - h * .5025, X4,  h - h * .2413, 0, h);
             }
       else if (subtype() == BRACKET_NORMAL) {
-            qreal w = point(style->bracketWidth);
+            qreal w = point(score()->style()->bracketWidth);
 
             TextStyle* s = &textStyles[TEXT_STYLE_SYMBOL1];
             QChar up(0xe19c);
@@ -106,7 +106,7 @@ void Bracket::layout(ScoreLayout* layout)
             f.setPointSizeF(20.0 * mag);
 
             qreal o   = _spatium * .27;
-            qreal slw = point(style->staffLineWidth);
+            qreal slw = point(score()->style()->staffLineWidth);
 
             path.addText(QPointF(0.0, -o), f, QString(up));
             path.addText(QPointF(0.0, h * 2.0 + o), f, QString(down));
@@ -229,7 +229,7 @@ void Bracket::editDrag(int, const QPointF&, const QPointF& delta)
 
       path = QPainterPath();
       if (subtype() == BRACKET_AKKOLADE) {
-            qreal w         = point(style->akkoladeWidth);
+            qreal w         = point(score()->style()->akkoladeWidth);
             const double X1 =  2.0 * w;
             const double X2 = -0.7096 * w;
             const double X3 = -1.234 * w;
@@ -242,7 +242,7 @@ void Bracket::editDrag(int, const QPointF&, const QPointF& delta)
             path.cubicTo(X3,  h - h * .5025, X4,  h - h * .2413, 0, h);
             }
       else if (subtype() == BRACKET_NORMAL) {
-            qreal w = point(style->bracketWidth);
+            qreal w = point(score()->style()->bracketWidth);
 
             TextStyle* s = &textStyles[TEXT_STYLE_SYMBOL1];
             QChar up(0xe19c);
@@ -257,7 +257,7 @@ void Bracket::editDrag(int, const QPointF&, const QPointF& delta)
             f.setPointSizeF(20.0 * mag);
 
             qreal o = _spatium * .27;
-            qreal slw = point(style->staffLineWidth);
+            qreal slw = point(score()->style()->staffLineWidth);
 
             path.addText(QPointF(0.0, -o), f, QString(up));
             path.addText(QPointF(0.0, h * 2.0 + o), f, QString(down));

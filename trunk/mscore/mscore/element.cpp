@@ -434,7 +434,7 @@ StaffLines::StaffLines(Score* s)
 
 QRectF StaffLines::bbox() const
       {
-      qreal lw = point(::style->staffLineWidth);
+      qreal lw = point(score()->style()->staffLineWidth);
       return QRectF(0.0, -lw*.5, _width, (lines-1) * _spatium + lw);
       }
 
@@ -447,7 +447,7 @@ void StaffLines::draw(QPainter& p)
       QPointF _pos(0.0, 0.0);
 
       QPen pen(p.pen());
-      pen.setWidthF(point(style->staffLineWidth));
+      pen.setWidthF(point(score()->style()->staffLineWidth));
       pen.setCapStyle(Qt::FlatCap);
       p.setPen(pen);
 

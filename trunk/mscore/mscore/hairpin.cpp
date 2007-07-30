@@ -35,11 +35,11 @@
 
 void HairpinSegment::draw(QPainter& p)
       {
-      double h1 = point(style->hairpinHeight) * .5;
-      double h2 = point(style->hairpinContHeight) * .5;
+      double h1 = point(score()->style()->hairpinHeight) * .5;
+      double h2 = point(score()->style()->hairpinContHeight) * .5;
 
       QPen pen(p.pen());
-      pen.setWidthF(::style->hairpinWidth.point());
+      pen.setWidthF(score()->style()->hairpinWidth.point());
       p.setPen(pen);
 
       QPointF p2(pos2());
@@ -82,7 +82,7 @@ void HairpinSegment::draw(QPainter& p)
 
 QRectF HairpinSegment::bbox() const
       {
-      double h = point(style->hairpinHeight);
+      double h = point(score()->style()->hairpinHeight);
       QRectF r(.0, -h * .5, _p2.x(), h);
       return r;
       }

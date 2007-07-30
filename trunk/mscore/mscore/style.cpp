@@ -210,7 +210,7 @@ TextStyle::TextStyle(
 
 void setDefaultStyle()
       {
-      style = &defaultStyle;
+//      style = &defaultStyle;
       int n = sizeof(defaultTextStyles)/sizeof(*defaultTextStyles);
       textStyles.clear();
       for (int i = 0; i < n; ++i)
@@ -320,7 +320,7 @@ void setTextStyle(const TextStyle& ts)
 //   loadStyle
 //---------------------------------------------------------
 
-void loadStyle(QDomElement e)
+void Style::loadStyle(QDomElement e)
       {
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             QString tag(e.tagName());
@@ -334,117 +334,117 @@ void loadStyle(QDomElement e)
                   setTextStyle(ts);
                   }
             else if (tag == "staffUpperBorder")
-                  style->staffUpperBorder = Spatium(d);
+                  staffUpperBorder = Spatium(d);
             else if (tag == "staffLowerBorder")
-                  ::style->staffLowerBorder = Spatium(d);
+                  staffLowerBorder = Spatium(d);
             else if (tag == "staffDistance")
-                  ::style->staffDistance = Spatium(d);
+                  staffDistance = Spatium(d);
             else if (tag == "systemDistance")
-                  ::style->systemDistance = Spatium(d);
+                  systemDistance = Spatium(d);
             else if (tag == "minMeasureWidth")
-                  ::style->minMeasureWidth = Spatium(d);
+                  minMeasureWidth = Spatium(d);
             else if (tag == "barWidth")
-                  ::style->barWidth = Spatium(d);
+                  barWidth = Spatium(d);
             else if (tag == "doubleBarWidth")
-                  ::style->doubleBarWidth = Spatium(d);
+                  doubleBarWidth = Spatium(d);
             else if (tag == "endBarWidth")
-                  ::style->endBarWidth = Spatium(d);
+                  endBarWidth = Spatium(d);
             else if (tag == "doubleBarDistance")
-                  ::style->doubleBarDistance = Spatium(d);
+                  doubleBarDistance = Spatium(d);
             else if (tag == "endBarDistance")
-                  ::style->endBarDistance = Spatium(d);
+                  endBarDistance = Spatium(d);
             else if (tag == "bracketWidth")
-                  ::style->bracketWidth = Spatium(d);
+                  bracketWidth = Spatium(d);
             else if (tag == "bracketDistance")
-                  ::style->bracketDistance = Spatium(d);
+                  bracketDistance = Spatium(d);
             else if (tag == "clefLeftMargin")
-                  ::style->clefLeftMargin = Spatium(d);
+                  clefLeftMargin = Spatium(d);
             else if (tag == "keysigLeftMargin")
-                  ::style->keysigLeftMargin = Spatium(d);
+                  keysigLeftMargin = Spatium(d);
             else if (tag == "timesigLeftMargin")
-                  ::style->timesigLeftMargin = Spatium(d);
+                  timesigLeftMargin = Spatium(d);
             else if (tag == "clefKeyRightMargin")
-                  ::style->clefKeyRightMargin = Spatium(d);
+                  clefKeyRightMargin = Spatium(d);
             else if (tag == "stemWidth")
-                  ::style->stemWidth = Spatium(d);
+                  stemWidth = Spatium(d);
             else if (tag == "minNoteDistance")
-                  ::style->minNoteDistance = Spatium(d);
+                  minNoteDistance = Spatium(d);
             else if (tag == "spacing16")
-                  ::style->spacing16 = d;
+                  spacing16 = d;
             else if (tag == "spacing8")
-                  ::style->spacing8 = d;
+                  spacing8 = d;
             else if (tag == "spacing4")
-                  ::style->spacing4 = d;
+                  spacing4 = d;
             else if (tag == "spacing2")
-                  ::style->spacing2 = d;
+                  spacing2 = d;
             else if (tag == "measureSpacing")
-                  ::style->measureSpacing = d;
+                  measureSpacing = d;
             else if (tag == "barNoteDistance")
-                  ::style->barNoteDistance = Spatium(d);
+                  barNoteDistance = Spatium(d);
             else if (tag == "noteBarDistance")
-                  ::style->noteBarDistance = Spatium(d);
+                  noteBarDistance = Spatium(d);
             else if (tag == "staffLineWidth")
-                  ::style->staffLineWidth = Spatium(d);
+                  staffLineWidth = Spatium(d);
             else if (tag == "ledgerLineWidth")
-                  ::style->ledgerLineWidth = Spatium(d);
+                  ledgerLineWidth = Spatium(d);
             else if (tag == "akkoladeWidth")
-                  ::style->akkoladeWidth = Spatium(d);
+                  akkoladeWidth = Spatium(d);
             else if (tag == "akkoladeDistance")
-                  ::style->akkoladeDistance = Spatium(d);
+                  akkoladeDistance = Spatium(d);
             else if (tag == "prefixDistance")
-                  ::style->prefixDistance = Spatium(d);
+                  prefixDistance = Spatium(d);
             else if (tag == "prefixNoteDistance")
-                  ::style->prefixNoteDistance = Spatium(d);
+                  prefixNoteDistance = Spatium(d);
             else if (tag == "beamWidth")
-                  ::style->beamWidth = Spatium(d);
+                  beamWidth = Spatium(d);
             else if (tag == "beamDistance")
-                  ::style->beamDistance = d;
+                  beamDistance = d;
             else if (tag == "beamMinLen")
-                  ::style->beamMinLen = Spatium(d);
+                  beamMinLen = Spatium(d);
             else if (tag == "beamMinSlope")
-                  ::style->beamMinSlope = d;
+                  beamMinSlope = d;
             else if (tag == "beamMaxSlope")
-                  ::style->beamMaxSlope = d;
+                  beamMaxSlope = d;
             else if (tag == "maxBeamTicks")
-                  ::style->maxBeamTicks = i;
+                  maxBeamTicks = i;
             else if (tag == "dotNoteDistance")
-                  ::style->dotNoteDistance = Spatium(d);
+                  dotNoteDistance = Spatium(d);
             else if (tag == "dotRestDistance")
-                  ::style->dotRestDistance = Spatium(d);
+                  dotRestDistance = Spatium(d);
             else if (tag == "dotDotDistance")
-                  ::style->dotDotDistance = Spatium(d);
+                  dotDotDistance = Spatium(d);
             else if (tag == "propertyDistanceHead")
-                  ::style->propertyDistanceHead = Spatium(d);
+                  propertyDistanceHead = Spatium(d);
             else if (tag == "propertyDistanceStem")
-                  ::style->propertyDistanceStem = Spatium(d);
+                  propertyDistanceStem = Spatium(d);
             else if (tag == "propertyDistance")
-                  ::style->propertyDistance = Spatium(d);
+                  propertyDistance = Spatium(d);
             else if (tag == "ticklen2Width")
-                  ::style->ticklen2Width = d;
+                  ticklen2Width = d;
             else if (tag == "pageFillLimit")
-                  ::style->pageFillLimit = d;
+                  pageFillLimit = d;
             else if (tag == "hairpinHeight")
-                  ::style->hairpinHeight = Spatium(d);
+                  hairpinHeight = Spatium(d);
             else if (tag == "hairpinContHeight")
-                  ::style->hairpinContHeight = Spatium(d);
+                  hairpinContHeight = Spatium(d);
             else if (tag == "hairpinWidth")
-                  ::style->hairpinWidth = Spatium(d);
+                  hairpinWidth = Spatium(d);
             else if (tag == "showPageNumber")
-                  ::style->showPageNumber = i;
+                  showPageNumber = i;
             else if (tag == "showPageNumberOne")
-                  ::style->showPageNumberOne = i;
+                  showPageNumberOne = i;
             else if (tag == "pageNumberOddEven")
-                  ::style->pageNumberOddEven = i;
+                  pageNumberOddEven = i;
             else if (tag == "showMeasureNumber")
-                  ::style->showMeasureNumber = i;
+                  showMeasureNumber = i;
             else if (tag == "showMeasureNumberOne")
-                  ::style->showMeasureNumberOne = i;
+                  showMeasureNumberOne = i;
             else if (tag == "measureNumberInterval")
-                  ::style->measureNumberInterval = i;
+                  measureNumberInterval = i;
             else if (tag == "measureNumberSystem")
-                  ::style->measureNumberSystem = i;
+                  measureNumberSystem = i;
             else if (tag == "measureNumberAllStaffs")
-                  ::style->measureNumberAllStaffs = i;
+                  measureNumberAllStaffs = i;
             else
                   domError(e);
             }
@@ -454,73 +454,71 @@ void loadStyle(QDomElement e)
 //   saveStyle
 //---------------------------------------------------------
 
-void saveStyle(Xml& xml)
+void Style::saveStyle(Xml& xml)
       {
       xml.stag("Style");
-//DEBUG      for (iTextStyle i = textStyles.begin(); i != textStyles.end(); ++i)
-//           i->write(xml);
 
-      xml.tag("staffUpperBorder",       style->staffUpperBorder.val());
-      xml.tag("staffLowerBorder",       style->staffLowerBorder.val());
-      xml.tag("staffDistance",          style->staffDistance.val());
-      xml.tag("akkoladeDistance",       style->akkoladeDistance.val());
-      xml.tag("systemDistance",         style->systemDistance.val());
+      xml.tag("staffUpperBorder",       staffUpperBorder.val());
+      xml.tag("staffLowerBorder",       staffLowerBorder.val());
+      xml.tag("staffDistance",          staffDistance.val());
+      xml.tag("akkoladeDistance",       akkoladeDistance.val());
+      xml.tag("systemDistance",         systemDistance.val());
 
-      xml.tag("minMeasureWidth",        style->minMeasureWidth.val());
-      xml.tag("barWidth",               style->barWidth.val());
-      xml.tag("doubleBarWidth",         style->doubleBarWidth.val());
-      xml.tag("endBarWidth",            style->endBarWidth.val());
-      xml.tag("doubleBarDistance",      style->doubleBarDistance.val());
-      xml.tag("endBarDistance",         style->endBarDistance.val());
-      xml.tag("bracketWidth",           style->bracketWidth.val());
-      xml.tag("bracketDistance",        style->bracketDistance.val());
+      xml.tag("minMeasureWidth",        minMeasureWidth.val());
+      xml.tag("barWidth",               barWidth.val());
+      xml.tag("doubleBarWidth",         doubleBarWidth.val());
+      xml.tag("endBarWidth",            endBarWidth.val());
+      xml.tag("doubleBarDistance",      doubleBarDistance.val());
+      xml.tag("endBarDistance",         endBarDistance.val());
+      xml.tag("bracketWidth",           bracketWidth.val());
+      xml.tag("bracketDistance",        bracketDistance.val());
 
-      xml.tag("clefLeftMargin",         style->clefLeftMargin.val());
-      xml.tag("keysigLeftMargin",       style->keysigLeftMargin.val());
-      xml.tag("timesigLeftMargin",      style->timesigLeftMargin.val());
-      xml.tag("clefKeyRightMargin",     style->clefKeyRightMargin.val());
-      xml.tag("stemWidth",              style->stemWidth.val());
-      xml.tag("minNoteDistance",        style->minNoteDistance.val());
+      xml.tag("clefLeftMargin",         clefLeftMargin.val());
+      xml.tag("keysigLeftMargin",       keysigLeftMargin.val());
+      xml.tag("timesigLeftMargin",      timesigLeftMargin.val());
+      xml.tag("clefKeyRightMargin",     clefKeyRightMargin.val());
+      xml.tag("stemWidth",              stemWidth.val());
+      xml.tag("minNoteDistance",        minNoteDistance.val());
 
-      xml.tag("spacing16",              style->spacing16);
-      xml.tag("spacing8",               style->spacing8);
-      xml.tag("spacing4",               style->spacing4);
-      xml.tag("spacing2",               style->spacing2);
-      xml.tag("measureSpacing",         style->measureSpacing);
+      xml.tag("spacing16",              spacing16);
+      xml.tag("spacing8",               spacing8);
+      xml.tag("spacing4",               spacing4);
+      xml.tag("spacing2",               spacing2);
+      xml.tag("measureSpacing",         measureSpacing);
 
-      xml.tag("barNoteDistance",        style->barNoteDistance.val());
-      xml.tag("noteBarDistance",        style->noteBarDistance.val());
-      xml.tag("staffLineWidth",         style->staffLineWidth.val());
-      xml.tag("ledgerLineWidth",        style->ledgerLineWidth.val());
-      xml.tag("akkoladeWidth",          style->akkoladeWidth.val());
-      xml.tag("prefixDistance",         style->prefixDistance.val());
-      xml.tag("prefixNoteDistance",     style->prefixNoteDistance.val());
-      xml.tag("beamWidth",              style->beamWidth.val());
-      xml.tag("beamDistance",           style->beamDistance);
-      xml.tag("beamMinLen",             style->beamMinLen.val());
-      xml.tag("beamMinSlope",           style->beamMinSlope);
-      xml.tag("beamMaxSlope",           style->beamMaxSlope);
-      xml.tag("maxBeamTicks",           style->maxBeamTicks);
-      xml.tag("dotNoteDistance",        style->dotNoteDistance.val());
-      xml.tag("dotRestDistance",        style->dotRestDistance.val());
-      xml.tag("dotDotDistance",         style->dotDotDistance.val());
-      xml.tag("propertyDistanceHead",   style->propertyDistanceHead.val());
-      xml.tag("propertyDistanceStem",   style->propertyDistanceStem.val());
-      xml.tag("propertyDistance",       style->propertyDistance.val());
-      xml.tag("ticklen2Width",          style->ticklen2Width);
-      xml.tag("pageFillLimit",          style->pageFillLimit);
-      xml.tag("hairpinHeight",          style->hairpinHeight.val());
-      xml.tag("hairpinContHeight",      style->hairpinContHeight.val());
-      xml.tag("hairpinWidth",           style->hairpinWidth.val());
+      xml.tag("barNoteDistance",        barNoteDistance.val());
+      xml.tag("noteBarDistance",        noteBarDistance.val());
+      xml.tag("staffLineWidth",         staffLineWidth.val());
+      xml.tag("ledgerLineWidth",        ledgerLineWidth.val());
+      xml.tag("akkoladeWidth",          akkoladeWidth.val());
+      xml.tag("prefixDistance",         prefixDistance.val());
+      xml.tag("prefixNoteDistance",     prefixNoteDistance.val());
+      xml.tag("beamWidth",              beamWidth.val());
+      xml.tag("beamDistance",           beamDistance);
+      xml.tag("beamMinLen",             beamMinLen.val());
+      xml.tag("beamMinSlope",           beamMinSlope);
+      xml.tag("beamMaxSlope",           beamMaxSlope);
+      xml.tag("maxBeamTicks",           maxBeamTicks);
+      xml.tag("dotNoteDistance",        dotNoteDistance.val());
+      xml.tag("dotRestDistance",        dotRestDistance.val());
+      xml.tag("dotDotDistance",         dotDotDistance.val());
+      xml.tag("propertyDistanceHead",   propertyDistanceHead.val());
+      xml.tag("propertyDistanceStem",   propertyDistanceStem.val());
+      xml.tag("propertyDistance",       propertyDistance.val());
+      xml.tag("ticklen2Width",          ticklen2Width);
+      xml.tag("pageFillLimit",          pageFillLimit);
+      xml.tag("hairpinHeight",          hairpinHeight.val());
+      xml.tag("hairpinContHeight",      hairpinContHeight.val());
+      xml.tag("hairpinWidth",           hairpinWidth.val());
 
-      xml.tag("showPageNumber",         style->showPageNumber);
-      xml.tag("showPageNumberOne",      style->showPageNumberOne);
-      xml.tag("pageNumberOddEven",      style->pageNumberOddEven);
-      xml.tag("showMeasureNumber",      style->showMeasureNumber);
-      xml.tag("showMeasureNumberOne",   style->showMeasureNumberOne);
-      xml.tag("measureNumberInterval",  style->measureNumberInterval);
-      xml.tag("measureNumberAllStaffs", style->measureNumberAllStaffs);
-      xml.tag("measureNumberSystem",    style->measureNumberSystem);
+      xml.tag("showPageNumber",         showPageNumber);
+      xml.tag("showPageNumberOne",      showPageNumberOne);
+      xml.tag("pageNumberOddEven",      pageNumberOddEven);
+      xml.tag("showMeasureNumber",      showMeasureNumber);
+      xml.tag("showMeasureNumberOne",   showMeasureNumberOne);
+      xml.tag("measureNumberInterval",  measureNumberInterval);
+      xml.tag("measureNumberAllStaffs", measureNumberAllStaffs);
+      xml.tag("measureNumberSystem",    measureNumberSystem);
 
       xml.etag();
       }
