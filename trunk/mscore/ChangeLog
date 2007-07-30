@@ -1,3 +1,16 @@
+30.7.7 (ws)
+      - fix layout bugs after printing lyrics
+      - change lyrics commands (lyrics edit mode):
+            space       - go to next note
+            shift+space - go to previous note
+            ctrl+space  - enter space in lyric
+            ctrl+"-"    - enter "-"
+            -           - go to next note and connect with "-"
+        The previous used "tab" key is not available and used
+        for widget focus navigation etc.
+
+29.7.7 (ws)
+      - implement clipboard paste for text edit mode
 28.7.7 (ws)
       - implement selections for text edit
       - decorate text in edit mode with a frame

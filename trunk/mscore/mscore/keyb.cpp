@@ -61,7 +61,7 @@ void Canvas::keyPressEvent(QKeyEvent* ev)
             }
       if (_score->editObject->type() == LYRICS) {
             int found = false;
-            if (ev->key() == Qt::Key_Tab) {
+            if (ev->key() == Qt::Key_Space && !(ev->modifiers() & Qt::ControlModifier)) {
                   // TODO: shift+tab events are filtered by qt
                   _score->lyricsTab(ev->modifiers() & Qt::ShiftModifier);
                   found = true;
@@ -70,7 +70,7 @@ void Canvas::keyPressEvent(QKeyEvent* ev)
                   _score->lyricsReturn();
                   found = true;
                   }
-            else if (ev->key() == Qt::Key_Minus) {
+            else if (ev->key() == Qt::Key_Minus && !(ev->modifiers() & Qt::ControlModifier)) {
                   _score->lyricsMinus();
                   found = true;
                   }

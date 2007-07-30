@@ -271,9 +271,10 @@ void Text::layout(ScoreLayout* layout)
                   return;
                   }
             double w = page->loWidth() - page->lm() - page->rm();
-            doc->setTextWidth(w);
             tw = w;
             double h = page->loHeight() - page->tm() - page->bm();
+            doc->setTextWidth(w);
+//            doc->setPageSize(QSizeF(w, h));
 
             if (_offsetType == OFFSET_REL)
                   _off = QPointF(_xoff * w * 0.01, _yoff * h * 0.01);
@@ -476,7 +477,7 @@ bool Text::startEdit(const QPointF& p)
             palette->setCharFormat(cursor->charFormat());
             palette->setBlockFormat(cursor->blockFormat());
             }
-      mousePress(p);    // set cursor
+      setCursor(p);
       cursorPos = cursor->position();
       return true;
       }
@@ -489,6 +490,7 @@ bool Text::startEdit(const QPointF& p)
 bool Text::edit(int, QKeyEvent* ev)
       {
       int key = ev->key();
+
       if (key == Qt::Key_F2) {
             if (palette == 0)
                   palette = new TextPalette(score()->canvas());
@@ -502,7 +504,7 @@ bool Text::edit(int, QKeyEvent* ev)
                   }
             return true;
             }
-      if (ev->modifiers() & Qt::CTRL) {
+      if (ev->modifiers() & Qt::ControlModifier) {
             switch (key) {
                   case Qt::Key_B:   // toggle bold face
                         {
@@ -552,12 +554,11 @@ bool Text::edit(int, QKeyEvent* ev)
                         cursor->setCharFormat(f);
                         }
                         break;
-                  default:
-                        return false;
                   }
-            return true;
+            if (key != Qt::Key_Space && key != Qt::Key_Minus)
+                  return true;
             }
-      QTextCursor::MoveMode mm = (ev->modifiers() & Qt::SHIFT)
+      QTextCursor::MoveMode mm = (ev->modifiers() & Qt::ShiftModifier)
          ? QTextCursor::KeepAnchor : QTextCursor::MoveAnchor;
       switch (key) {
             case Qt::Key_Return:
@@ -594,6 +595,14 @@ bool Text::edit(int, QKeyEvent* ev)
 
             case Qt::Key_End:
                   cursor->movePosition(QTextCursor::End, mm);
+                  break;
+
+            case Qt::Key_Space:
+                  cursor->insertText(" ");
+                  break;
+
+            case Qt::Key_Minus:
+                  cursor->insertText("-");
                   break;
 
             default:
@@ -712,7 +721,7 @@ QPainterPath Text::shape() const
 
 double Text::lineSpacing() const
       {
-      QTextBlock tb = doc->begin();
+      QTextBlock tb   = doc->begin();
       QTextLayout* tl = tb.layout();
       QFontMetricsF fm(tl->font());
       return fm.lineSpacing();
@@ -763,20 +772,35 @@ void Text::setBlockFormat(const QTextBlockFormat& bf)
       }
 
 //---------------------------------------------------------
-//   mousePress
-//    set text cursor
+//   setCursor
 //---------------------------------------------------------
 
-bool Text::mousePress(const QPointF& p)
+bool Text::setCursor(const QPointF& p)
       {
-      QPointF pt = p - canvasPos();
-      bool inText = bbox().contains(pt);
-      if (!inText)
+      QPointF pt  = p - canvasPos();
+      if (!bbox().contains(pt))
             return false;
       int idx = doc->documentLayout()->hitTest(pt, Qt::FuzzyHit);
       if (idx == -1)
             return true;
       cursor->setPosition(idx);
+      return true;
+      }
+
+//---------------------------------------------------------
+//   mousePress
+//    set text cursor
+//---------------------------------------------------------
+
+bool Text::mousePress(const QPointF& p, QMouseEvent* ev)
+      {
+      if (!setCursor(p))
+            return false;
+
+      if (ev->button() == Qt::MidButton) {
+            QString txt = QApplication::clipboard()->text(QClipboard::Selection);
+            cursor->insertText(txt);
+            }
       return true;
       }
 
