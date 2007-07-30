@@ -1418,7 +1418,7 @@ void Score::cmd(const QString& cmd)
                         }
                   }
             else if (cmd == "lyrics")
-                  addLyrics();
+                  return addLyrics();
 //            else if (cmd == "technik")
 //                  addTechnik();
             else if (cmd == "tempo")

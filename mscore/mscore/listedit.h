@@ -298,6 +298,12 @@ class TextView : public ShowElementBase {
 
       Ui::TextBase tb;
 
+   private slots:
+      void textChanged();
+
+   signals:
+      void scoreChanged();
+
    public:
       TextView();
       virtual void setElement(Element*);

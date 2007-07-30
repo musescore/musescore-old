@@ -260,10 +260,6 @@ void Measure::push_front(Segment* e)
 void Measure::moveAll(double x, double y)
       {
       move(x, y);
-//      for (iMStaff ib = staves.begin(); ib != staves.end(); ++ib) {
-//            if (ib->endBarLine)
-//                  ib->endBarLine->move(x, y);
-//            }
       for (iElement i = _sel.begin(); i != _sel.end(); ++i)
             (*i)->move(x, y);
 
@@ -428,8 +424,10 @@ void Measure::layout(ScoreLayout* layout, double width)
       double _spatium = layout->spatium();
       int nstaves     = _score->nstaves();
       double staffY[nstaves];
-      for (int i = 0; i < nstaves; ++i)
-            staffY[i] = system()->staff(i)->bbox().y();
+      for (int staffIdx = 0; staffIdx < nstaves; ++staffIdx) {
+            staffY[staffIdx] = system()->staff(staffIdx)->bbox().y();
+            staves[staffIdx].distance = 0.0;
+            }
       setbbox(QRectF(0, 0, width, system()->height()));
 
       layoutX(layout, width);
@@ -957,10 +955,6 @@ void Measure::remove(Element* el)
 void Measure::moveTicks(int diff)
       {
       setTick(tick() + diff);
-//      for (iMStaff is = staves.begin(); is != staves.end(); ++is) {
-//            if (is->endBarLine)
-//                  is->endBarLine->setTick(is->endBarLine->tick() + diff);
-//            }
       for (ciElement ii = _sel.begin(); ii != _sel.end(); ++ii)
             (*ii)->setTick((*ii)->tick() + diff);
       int staves = _score->nstaves();
@@ -1070,7 +1064,6 @@ void Measure::moveY(int staff, double dy)
             }
       BarLine* bl = barLine(staff);
       if (bl) {
-//            barLine->move(0, dy);
             if (_score->staff(staff)->isTopSplit()) {
                   Spatium barLineLen = Spatium(8) + ::style->staffDistance;
                   bl->setHeight(point(barLineLen));
@@ -1285,7 +1278,8 @@ again:
                   for (ciLyrics l = ll->begin(); l != ll->end(); ++l) {
                         if (!*l)
                               continue;
-                        double lw = ((*l)->bbox().width() + _spatium * 0) / 2.0;
+                        (*l)->layout(layout);
+                        double lw = ((*l)->bbox().width() + _spatium * 0) * .5;
                         if (lw > min)
                               min = lw;
                         if (lw > extra)
@@ -1715,7 +1709,6 @@ void Measure::insertStaff1(Staff* staff, int staffIdx)
             }
 
       MStaff ms;
-//      ms.endBarLine = barLine;
       ms.distance = point(staffIdx == 0 ? style->systemDistance : style->staffDistance);
       staves.insert(staves.begin()+staffIdx, ms);
       }
@@ -2025,7 +2018,6 @@ void Measure::propertyAction(const QString& s)
                   ev1 = SigEvent();
             score()->undoChangeSig(t + newLen, ev1, oev);
             adjustToLen(oldLen, newLen);
-//            score()->layout();
             }
       }
 

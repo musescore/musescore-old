@@ -814,7 +814,8 @@ void Score::printFile()
       // but layout may be slightly different
 
       QPrinter printer(QPrinter::HighResolution);
-      // QPrinter printer;
+//      QPrinter printer;
+
       printer.setPageSize(paperSizes[pageFormat()->size].qtsize);
       printer.setOrientation(pageFormat()->landscape ? QPrinter::Landscape : QPrinter::Portrait);
       printer.setCreator("MuseScore Version: " VERSION);
@@ -841,9 +842,9 @@ void Score::print(QPrinter* printer)
       p.setRenderHint(QPainter::TextAntialiasing, true);
 
       qreal oldSpatium = _spatium;
-      double oldDPI = DPI;
-      DPI  = printer->logicalDpiX();          // drawing resolution
-      DPMM = DPI / INCH;                     // dots/mm
+      double oldDPI    = DPI;
+      DPI              = printer->logicalDpiX();          // drawing resolution
+      DPMM             = DPI / INCH;                     // dots/mm
       setSpatium(_spatium * DPI / oldDPI);
       QPaintDevice* oldPaintDevice = mainLayout()->paintDevice();
       mainLayout()->setPaintDevice(printer);
@@ -867,13 +868,6 @@ void Score::print(QPrinter* printer)
                   p.translate(ap);
                   p.setPen(QPen(e->color()));
                   e->draw(p);
-                  //
-                  // HACK alert:
-                  //
-                  if (e->type() == TEXT) {
-                        Text* t = (Text*)e;
-                        t->getDoc()->documentLayout()->setPaintDevice(oldPaintDevice);
-                        }
                   p.translate(-ap);
                   }
             ++ip;
@@ -881,13 +875,13 @@ void Score::print(QPrinter* printer)
                   break;
             printer->newPage();
             }
-      _printing = false;
-      DPI  = oldDPI;
-      DPMM = DPI / INCH;                     // dots/mm
-      mainLayout()->setPaintDevice(oldPaintDevice);
-      setSpatium(oldSpatium);
-      layout();
       p.end();
+      _printing = false;
+      DPI       = oldDPI;
+      DPMM      = DPI / INCH;                     // dots/mm
+      setSpatium(oldSpatium);
+      mainLayout()->setPaintDevice(oldPaintDevice);
+      layout();
       }
 
 //---------------------------------------------------------

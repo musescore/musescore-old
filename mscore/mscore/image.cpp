@@ -151,7 +151,7 @@ void Image::updateGrips(int* grips, QRectF* grip) const
 //   gripAnchor
 //---------------------------------------------------------
 
-QPointF Image::gripAnchor(int grip)
+QPointF Image::gripAnchor(int)
       {
       return QPointF();
       }

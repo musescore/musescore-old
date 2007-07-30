@@ -332,7 +332,7 @@ double System::layout(ScoreLayout* layout, const QPointF& p, double w)
 void System::layout2(ScoreLayout* layout)
       {
 // printf("System::layout2() %f\n", _spatium);
-      int staves = _staves.size();  // score()->nstaves();
+      int staves = _staves.size();
 
       qreal y = 0.0;
       for (int staffIdx = 0; staffIdx < staves; ++staffIdx) {
@@ -345,7 +345,7 @@ void System::layout2(ScoreLayout* layout)
             foreach(Measure* m, ml)
                   dist = std::max(dist, m->distance(staffIdx));
             if (dist > distance(staffIdx))
-                 setDistance(staffIdx, dist);
+                  setDistance(staffIdx, dist);
             //
             //  layout lyrics separators
             //

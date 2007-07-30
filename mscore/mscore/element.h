@@ -278,7 +278,7 @@ class Element {
  delivers mouseEvent to element in edit mode
  returns true if mouse event is accepted by element
  */
-      virtual bool mousePress(const QPointF&) { return false; }
+      virtual bool mousePress(const QPointF&, QMouseEvent*) { return false; }
 
       int itemDiscovered;     ///< helper flag for bsp
 

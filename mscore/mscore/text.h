@@ -58,6 +58,7 @@ class Text : public Element {
 
       QTextCursor* cursor;
       bool editMode;
+      bool setCursor(const QPointF& p);
 
    protected:
       QTextDocument* doc;
@@ -119,7 +120,7 @@ class Text : public Element {
       virtual void layout(ScoreLayout*);
       virtual QRectF bbox() const;
       virtual QPainterPath shape() const;
-      virtual bool mousePress(const QPointF&);
+      virtual bool mousePress(const QPointF&, QMouseEvent* ev);
       double lineSpacing() const;
       void moveCursorToEnd();
       };

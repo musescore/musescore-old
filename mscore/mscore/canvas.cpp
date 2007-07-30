@@ -342,6 +342,11 @@ void Canvas::mousePressEvent(QMouseEvent* ev)
                   break;
 
             case EDIT:
+                  if (ev->button() == Qt::MidButton) {
+                        // clipboard paste
+                        _score->editObject->mousePress(startMove, ev);
+                        break;
+                        }
                   for (int i = 0; i < grips; ++i) {
                         if (grip[i].contains(startMove)) {
                               curGrip = i;
@@ -351,7 +356,7 @@ void Canvas::mousePressEvent(QMouseEvent* ev)
                         }
                   if (state == DRAG_EDIT)
                         break;
-                  else if (_score->editObject->mousePress(startMove))
+                  else if (_score->editObject->mousePress(startMove, ev))
                         update();
                   else
                         setState(NORMAL);

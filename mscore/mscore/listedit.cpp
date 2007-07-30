@@ -945,6 +945,17 @@ TextView::TextView()
       tb.setupUi(page);
       layout->addWidget(page);
       layout->addStretch(10);
+      connect(tb.text, SIGNAL(textChanged()), SLOT(textChanged()));
+      }
+
+//---------------------------------------------------------
+//   textChanged
+//---------------------------------------------------------
+
+void TextView::textChanged()
+      {
+
+      emit scoreChanged();
       }
 
 //---------------------------------------------------------
@@ -960,10 +971,9 @@ void TextView::setElement(Element* e)
             TextStyle* s = &*i;
             tb.style->addItem(s->name);
             }
-//      tb.style->setCurrentIndex(te->style());
-      tb.text->setText(te->getText());
-//      tb.xoffset->setValue(te->styleOffset().x());
-//      tb.yoffset->setValue(te->styleOffset().y());
+      tb.text->setDocument(te->getDoc());
+      tb.xoffset->setValue(te->xoff());
+      tb.yoffset->setValue(te->yoff());
       }
 
 //---------------------------------------------------------
