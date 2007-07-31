@@ -2334,9 +2334,11 @@ void Measure::read(QDomElement e, int idx)
                   Text* t = new Text(score());
                   t->setTick(score()->curTick);
                   t->read(e);
+printf("%p Text anchor %d\n", t, t->anchor());
                   if (t->anchor() != ANCHOR_PAGE) {
                         score()->curTick = t->tick();
                         t->setStaff(staff);
+printf("%p setStaff %p\n", t, staff);
                         }
                   add(t);
                   }

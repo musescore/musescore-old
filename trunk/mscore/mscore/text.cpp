@@ -159,6 +159,11 @@ const QString Text::subtypeName() const
             case TEXT_LYRIC:            return "Lyric";
             case TEXT_TUPLET:           return "Tuplet";
             case TEXT_SYSTEM:           return "System";
+            case TEXT_STAFF:            return "Staff";
+            case TEXT_CHORD:            return "Chordname";
+            default:
+                  printf("unknown text subtype %d\n", subtype());
+                  break;
             }
       return "?";
       }
@@ -202,6 +207,12 @@ void Text::setSubtype(const QString& s)
             st = TEXT_TUPLET;
       else if (s == "System")
             st = TEXT_SYSTEM;
+      else if (s == "Staff")
+            st = TEXT_STAFF;
+      else if (s == "Chordname")
+            st = TEXT_CHORD;
+      else
+            printf("setSubtype: unknown type <%s>\n", qPrintable(s));
       setSubtype(st);
       }
 
@@ -274,7 +285,6 @@ void Text::layout(ScoreLayout* layout)
             tw = w;
             double h = page->loHeight() - page->tm() - page->bm();
             doc->setTextWidth(w);
-//            doc->setPageSize(QSizeF(w, h));
 
             if (_offsetType == OFFSET_REL)
                   _off = QPointF(_xoff * w * 0.01, _yoff * h * 0.01);
@@ -380,9 +390,11 @@ void Text::write(Xml& xml, const char* name) const
 void Text::read(QDomElement e)
       {
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
+            printf("  Text read anchor %d\n", _anchor);
             if (!readProperties(e))
                   domError(e);
             }
+      printf("end Text read anchor %d\n", _anchor);
       cursorPos = 0;
       }
 
@@ -434,6 +446,7 @@ bool Text::readProperties(QDomElement e)
       else if (tag == "yoffset")
             _yoff = val.toDouble();
       else if (tag == "anchor") {
+printf("text anchor <%s>\n", qPrintable(val));
             if (val == "page")
                   _anchor = ANCHOR_PAGE;
             else if (val == "staff")
@@ -446,6 +459,7 @@ bool Text::readProperties(QDomElement e)
                   _anchor = ANCHOR_SYSTEM;
             else
                   printf("Text::readProperties: unknown anchor: <%s>\n", val.toLocal8Bit().data());
+printf("%p text anchor %d\n", this, _anchor);
             }
       else if (tag == "offsetType") {
             if (val == "absolute")

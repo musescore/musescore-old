@@ -1,3 +1,6 @@
+31.7.7 (ws)
+      - Note entry mode was not working in 0.6.1 :-(
+
       ======== Version 0.6.1 released =============
 30.7.7 (ws)
       - Every Score() class now has its own Style(). This fixes
