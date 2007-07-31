@@ -76,8 +76,8 @@ Canvas::Canvas(QWidget* parent)
       setYoffset(30);
 
       state            = NORMAL;
-      cursor           = new Cursor(_score, 6);
-      shadowNote       = new ShadowNote(_score);
+      cursor           = 0;
+      shadowNote       = 0;
       cursorTimer      = new QTimer(this);
       buttonState      = 0;
       keyState         = 0;
@@ -85,12 +85,36 @@ Canvas::Canvas(QWidget* parent)
 
       connect(cursorTimer, SIGNAL(timeout()), SLOT(cursorBlink()));
       cursorTimer->start(500);
-      cursor->setVisible(false);
-      shadowNote->setVisible(false);
 
       if (debugMode)
             setMouseTracking(true);
       }
+
+//---------------------------------------------------------
+//   setScore
+//---------------------------------------------------------
+
+void Canvas::setScore(Score* s, ScoreLayout* l)
+      {
+      _score = s;
+      if (cursor == 0) {
+            cursor = new Cursor(_score, 6);
+            shadowNote = new ShadowNote(_score);
+            cursor->setVisible(false);
+            shadowNote->setVisible(false);
+            }
+      else {
+            cursor->setScore(_score);
+            shadowNote->setScore(_score);
+            }
+      Viewer::setScore(s);
+      _layout = l;
+      if (navigator) {
+            navigator->setScore(_score);
+            updateNavigator(false);
+            }
+      }
+
 
 //---------------------------------------------------------
 //   event
@@ -1043,21 +1067,6 @@ void Canvas::paint(const QRect& rr)
                   p.fillRect(rr, _bgColor);
             else
                   p.drawTiledPixmap(rr, *bgPixmap, rr.topLeft()-QPoint(lrint(xoffset()), lrint(yoffset())));
-            }
-      }
-
-//---------------------------------------------------------
-//   setScore
-//---------------------------------------------------------
-
-void Canvas::setScore(Score* s, ScoreLayout* l)
-      {
-      _score = s;
-      Viewer::setScore(s);
-      _layout = l;
-      if (navigator) {
-            navigator->setScore(_score);
-            updateNavigator(false);
             }
       }
 
