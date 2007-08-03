@@ -180,6 +180,7 @@ void Score::select(Element* obj, int state, int staff)
                   sel->setState(SEL_NONE);
                   padState.len = 0;
                   emit selectionChanged(int(SEL_NONE));
+                  updateAll = true;
                   return;
                   }
             }

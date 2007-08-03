@@ -561,10 +561,12 @@ int System::y2staff(qreal y) const
 
 void System::add(Element* el)
       {
-      SysStaff* ss = _staves[el->staffIdx()];
-      if (el->type() == TEXT && (el->subtype() == TEXT_INSTRUMENT_LONG || el->subtype() == TEXT_INSTRUMENT_SHORT))
+      if (el->type() == TEXT && (el->subtype() == TEXT_INSTRUMENT_LONG || el->subtype() == TEXT_INSTRUMENT_SHORT)) {
+            SysStaff* ss = _staves[el->staffIdx()];
             ss->instrumentName = (Text*)el;
+            }
       else if (el->type() == BRACKET) {
+            SysStaff* ss = _staves[el->staffIdx()];
             Bracket* b = (Bracket*)el;
             b->setParent(this);
             int level = b->level();
@@ -572,6 +574,8 @@ void System::add(Element* el)
             b->staff()->setBracket(level,   b->subtype());
             b->staff()->setBracketSpan(level, b->span());
             }
+      else if (el->type() == MEASURE)
+            score()->addMeasure((Measure*)el);
       }
 
 //---------------------------------------------------------
@@ -598,6 +602,8 @@ void System::remove(Element* el)
                   }
             printf("internal error: bracket not found\n");
             }
+      else if (el->type() == MEASURE)
+            score()->removeMeasure((Measure*)el);
       else
             printf("System::remove(%s) not implemented\n", el->name());
       }

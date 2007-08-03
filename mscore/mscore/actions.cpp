@@ -460,7 +460,7 @@ Shortcut MuseScore::sc[] = {
       Shortcut(
          "stretch+",
          QT_TR_NOOP("more stretch"),
-         Qt::Key_Plus,
+         Qt::SHIFT + Qt::Key_Plus,
          Qt::WindowShortcut,
          QT_TR_NOOP("Add more stretch"),
          QT_TR_NOOP("Add more stretch to selected measure")
@@ -468,7 +468,7 @@ Shortcut MuseScore::sc[] = {
       Shortcut(
          "stretch-",
          QT_TR_NOOP("less stretch"),
-         Qt::Key_Minus,
+         Qt::SHIFT + Qt::Key_Minus,
          Qt::WindowShortcut,
          QT_TR_NOOP("Add less stretch"),
          QT_TR_NOOP("Add less stretch to selected measure")
@@ -679,7 +679,21 @@ Shortcut MuseScore::sc[] = {
          QT_TR_NOOP("append measure"),
          Qt::CTRL+Qt::Key_B,
          Qt::WindowShortcut,
-         QT_TR_NOOP("Measure")
+         QT_TR_NOOP("Append Measure")
+         ),
+      Shortcut(
+         "append-measures",
+         QT_TR_NOOP("append measures"),
+         0,
+         Qt::WindowShortcut,
+         QT_TR_NOOP("Append Measures...")
+         ),
+      Shortcut(
+         "insert-measure",
+         QT_TR_NOOP("insert measure"),
+         0,
+         Qt::WindowShortcut,
+         QT_TR_NOOP("Insert Measure")
          ),
       Shortcut(
          "duplet",
@@ -768,7 +782,8 @@ Shortcut MuseScore::sc[] = {
       Shortcut(
          "pad-dot",
          QT_TR_NOOP("pad dot"),
-         Qt::ALT + Qt::Key_8,
+//         Qt::ALT + Qt::Key_8,
+         Qt::Key_Period,
          Qt::WindowShortcut,
          QT_TR_NOOP("dot"),
          QT_TR_NOOP("dot"),
@@ -777,7 +792,8 @@ Shortcut MuseScore::sc[] = {
       Shortcut(
          "pad-tie",
          QT_TR_NOOP("pad tie"),
-         Qt::ALT + Qt::Key_9,
+//         Qt::ALT + Qt::Key_9,
+         Qt::Key_Plus,
          Qt::WindowShortcut,
          QT_TR_NOOP("tie"),
          QT_TR_NOOP("tie"),

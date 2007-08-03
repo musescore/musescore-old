@@ -845,21 +845,6 @@ void Score::upDown(bool up, bool octave)
       }
 
 //---------------------------------------------------------
-//   cmdAppendMeasure
-//---------------------------------------------------------
-
-/**
- Append one measure.
-
- Keyboard callback, called from pulldown menu.
-*/
-
-void Score::cmdAppendMeasure()
-      {
-      cmdAppendMeasures(1);
-      }
-
-//---------------------------------------------------------
 //   cmdAppendMeasures
 //    - keyboard callback
 //    - called from pulldown menu
@@ -913,6 +898,42 @@ void Score::appendMeasures(int n)
             undoOp(UndoOp::InsertMeasure, measure);
             _layout->push_back(measure);
             }
+      layout();
+      }
+
+//---------------------------------------------------------
+//   insertMeasures
+//---------------------------------------------------------
+
+void Score::insertMeasures(int n)
+      {
+      if (sel->state() != SEL_STAFF && sel->state() != SEL_SYSTEM) {
+            QMessageBox::warning(0, "MuseScore",
+               tr("No Measure selected:\n"
+                  "please select a measure and try again"));
+            return;
+            }
+      int tick   = sel->tickStart;
+      int ticks  = sigmap->ticksMeasure(tick-1);
+      Measure* m = new Measure(this);
+      m->setTick(tick);
+      m->setTickLen(ticks);
+      for (int idx = 0; idx < nstaves(); ++idx) {
+            Rest* rest    = new Rest(this, tick, ticks);
+            Staff* staffp = staff(idx);
+            rest->setStaff(staffp);
+            Segment* s = m->getSegment(rest);
+            s->add(rest);
+            BarLine* barLine = 0;
+            if (staffp->isTop()) {
+                  barLine = new BarLine(this);
+                  barLine->setStaff(staffp);
+                  m->setEndBarLine(barLine);
+                  }
+            }
+      undoOp(UndoOp::InsertMeasure, m);
+      addMeasure(m);
+      select(0,0,0);
       layout();
       }
 
@@ -1132,6 +1153,8 @@ void Score::cmd(const QString& cmd)
             startCmd();
             if (cmd == "append-measure")
                   appendMeasures(1);
+            else if (cmd == "insert-measure")
+                  insertMeasures(1);
             else if (cmd == "page-prev")
                   pagePrev();
             else if (cmd == "page-next")

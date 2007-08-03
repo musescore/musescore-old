@@ -176,9 +176,9 @@ class Score : public QObject {
 
    public slots:
       void printFile();
-      void cmdAppendMeasure();
       void cmdAppendMeasures(int);
       void appendMeasures(int);
+      void insertMeasures(int);
       void padToggle(int n);
       void doUndo();
       void doRedo();
@@ -186,9 +186,7 @@ class Score : public QObject {
 
       void addLyrics();
       void addTempo();
-//      void addTechnik();
       void addMetronome();
-//      void addExpression();
 
       void cmdTuplet(int);
       void midiReceived();
@@ -226,7 +224,7 @@ class Score : public QObject {
       Part* part(int staff);
 
       void addMeasure(Measure*);
-      void removeMeasure(int tick);
+      void removeMeasure(Measure*);
 
       Measure* pos2measure(const QPointF&, int* tick, Staff** staff, int* pitch,
          Segment**, QPointF* offset) const;
@@ -252,6 +250,8 @@ class Score : public QObject {
       void undoOp(UndoOp::UndoType type, Element*, int idx);
       void undoOp(UndoOp::UndoType type, int a, int b);
       void undoChangeSig(int tick, const SigEvent& o, const SigEvent& n);
+      void undoChangeKey(Staff* staff, int tick, int o, int n);
+      void undoChangeClef(Staff* staff, int tick, int o, int n);
       void undoAddElement(Element* element);
       void undoRemoveElement(Element* element);
       void undoChangeMeasureLen(Measure* m, int tick);

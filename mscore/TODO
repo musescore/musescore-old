@@ -2,12 +2,7 @@ Features:
       - dotted rests
       - akkumulated empty measures
       - "Faulenzer Zeichen" (repeat symbols)
-      - rehearsal marks
       - implement voice detection algorithm for midi import
-      - allow insertion of arbitrary images
-            - scale images
-            - select anchor point
-      - allow insertion of scalable vector graphics
       ...
 
 Instruments

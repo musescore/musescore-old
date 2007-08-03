@@ -24,6 +24,8 @@
 class Xml;
 class Score;
 
+static const int NO_KEY = 1000000;
+
 //---------------------------------------------------------
 //   KeyList
 //    this list is instantiated for every Instrument

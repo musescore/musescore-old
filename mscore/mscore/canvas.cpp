@@ -1059,6 +1059,70 @@ void Canvas::paint(const QRect& rr)
                   p.drawRect(grip[i]);
                   }
             }
+      if (_score->sel->state() == SEL_STAFF || _score->sel->state() == SEL_SYSTEM) {
+            int sstart = _score->sel->tickStart;
+            int send   = _score->sel->tickEnd;
+
+            Measure* sm = _score->tick2measure(sstart);
+            Measure* em = _score->tick2measure(send);
+            p.setBrush(Qt::NoBrush);
+
+            if (_score->sel->state() == SEL_SYSTEM) {
+                  QPen pen(QColor(Qt::blue));
+                  pen.setWidthF(3.0 / p.matrix().m11());
+                  pen.setStyle(Qt::DotLine);
+                  p.setPen(pen);
+                  for (Measure* m = sm; m && (m != em);) {
+                        double x1 = m->abbox().x();
+                        double x2 = x1 + m->abbox().width();
+                        double y1 = m->abbox().y() - _spatium;
+                        double y2 = y1 + m->abbox().height() + 2 * _spatium;
+
+                        // is this measure start of selection?
+                        if (m == sm) {
+                              x1 -= _spatium;
+                              p.drawLine(QLineF(x1, y1, x1, y2));
+                              }
+                        m = m->next();
+                        // is this measure end of selection?
+                        if (m == em) {
+                              x2 += _spatium;
+                              p.drawLine(QLineF(x2, y1, x2, y2));
+                              }
+                        p.drawLine(QLineF(x1, y1, x2, y1));
+                        p.drawLine(QLineF(x1, y2, x2, y2));
+                        }
+                  }
+            else {
+                  QPen pen(QColor(Qt::blue));
+                  pen.setWidthF(2.0 / p.matrix().m11());
+                  pen.setStyle(Qt::SolidLine);
+                  p.setPen(pen);
+                  for (Measure* m = sm; m && (m != em);) {
+                        QRectF bb     = m->abbox();
+                        double x1     = bb.x();
+                        double x2     = x1 + bb.width();
+                        SysStaff* ss1 = m->system()->staff(_score->sel->staffStart);
+                        double y1     = ss1->bbox().y() - _spatium + bb.y();
+                        SysStaff* ss2 = m->system()->staff(_score->sel->staffEnd-1);
+                        double y2     = ss2->bbox().y() + ss2->bbox().height() + _spatium + bb.y();
+
+                        // is this measure start of selection?
+                        if (m == sm) {
+                              x1 -= _spatium;
+                              p.drawLine(QLineF(x1, y1, x1, y2));
+                              }
+                        m = m->next();
+                        // is this measure end of selection?
+                        if (m == em) {
+                              x2 += _spatium;
+                              p.drawLine(QLineF(x2, y1, x2, y2));
+                              }
+                        p.drawLine(QLineF(x1, y1, x2, y1));
+                        p.drawLine(QLineF(x1, y2, x2, y2));
+                        }
+                  }
+            }
 
       p.setMatrixEnabled(false);
       if (!r1.isEmpty()) {
@@ -1627,4 +1691,57 @@ void Canvas::drawElements(QPainter& p,const QList<Element*>& el)
             p.restore();
             }
       }
+
+//---------------------------------------------------------
+//   paintLasso
+//---------------------------------------------------------
+
+void Canvas::paintLasso(QPainter& p)
+      {
+      QRectF r = _matrix.mapRect(lassoRect());
+      double x = r.x();
+      double y = r.y();
+//      double w = r.width();
+//      double h = r.height();
+
+      QMatrix omatrix(_matrix);
+
+      _matrix.setMatrix(_matrix.m11(), _matrix.m12(), _matrix.m21(),
+         _matrix.m22(), _matrix.dx()-x, _matrix.dy()-y);
+      imatrix = _matrix.inverted();
+
+      p.setMatrix(_matrix);
+      p.setRenderHint(QPainter::Antialiasing, true);
+      p.setRenderHint(QPainter::TextAntialiasing, true);
+
+//      p.setClipRect(QRect(0, 0, lrint(w), lrint(h)));
+//      p.setClipping(true);
+
+      QList<Element*> el = _layout->items(QRectF(0.0, 0.0, 100000.0, 1000000.0));
+//      QList<Element*> el = _layout->items(r);
+      drawElements(p, el);
+      cursor->draw(p);
+
+      if (dropRectangle.isValid())
+            p.fillRect(dropRectangle, QColor(80, 0, 0, 80));
+      if (!dropAnchor.isNull()) {
+            QPen pen(QBrush(QColor(80, 0, 0)), 2.0 / p.worldMatrix().m11(), Qt::DotLine);
+            p.setPen(pen);
+            p.drawLine(dropAnchor);
+            }
+      if (state == EDIT || state == DRAG_EDIT) {
+            qreal lw = 2.0/p.matrix().m11();
+            QPen pen(Qt::blue);
+            pen.setWidthF(lw);
+            p.setPen(pen);
+            for (int i = 0; i < grips; ++i) {
+                  p.setBrush(i == curGrip ? QBrush(Qt::blue) : Qt::NoBrush);
+                  p.drawRect(grip[i]);
+                  }
+            }
+      _matrix = omatrix;
+      imatrix = _matrix.inverted();
+      p.end();
+      }
+
 

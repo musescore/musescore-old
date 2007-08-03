@@ -319,12 +319,13 @@ Part* Score::part(int n)
 
 void Score::addMeasure(Measure* m)
       {
-      int tick = m->tick();
+      int tick    = m->tick();
       Measure* im = tick2measure(tick);
 
       if (im) {
-            int mtick = im->tick();
-            int len   = im->tickLen();
+            int mtick = m->tick();
+            int len   = m->tickLen();
+printf("add Measure %d %d\n", mtick, len);
             sigmap->insertTime(mtick, len);
             foreach(Staff* staff, _staves) {
                   staff->clef()->insertTime(mtick, len);
@@ -339,22 +340,16 @@ void Score::addMeasure(Measure* m)
 //   removeMeasure
 //---------------------------------------------------------
 
-void Score::removeMeasure(int tick)
+void Score::removeMeasure(Measure* im)
       {
-      Measure* im = tick2measure(tick);
-      if (im && im->tick() == tick) {
-            int mtick = im->tick();
-            int len = im->tickLen();
-            sigmap->removeTime(mtick, len);
-            foreach(Staff* staff, _staves) {
-                  staff->clef()->removeTime(mtick, len);
-                  staff->keymap()->removeTime(mtick, len);
-                  }
-            _layout->erase(im);
-            fixTicks();
-            return;
+      sigmap->removeTime(im->tick(), im->tickLen());
+
+      foreach(Staff* staff, _staves) {
+            staff->clef()->removeTime(im->tick(), im->tickLen());
+            staff->keymap()->removeTime(im->tick(), im->tickLen());
             }
-      printf("no measure found at tick %d\n", tick);
+      _layout->erase(im);
+      fixTicks();
       }
 
 //---------------------------------------------------------

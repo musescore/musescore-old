@@ -1,3 +1,5 @@
+3.8.7  (ws)
+      - implemented measure insert/delete
 31.7.7 (ws)
       - Note entry mode was not working in 0.6.1 :-(
 

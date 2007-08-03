@@ -390,11 +390,9 @@ void Text::write(Xml& xml, const char* name) const
 void Text::read(QDomElement e)
       {
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
-            printf("  Text read anchor %d\n", _anchor);
             if (!readProperties(e))
                   domError(e);
             }
-      printf("end Text read anchor %d\n", _anchor);
       cursorPos = 0;
       }
 
@@ -446,7 +444,6 @@ bool Text::readProperties(QDomElement e)
       else if (tag == "yoffset")
             _yoff = val.toDouble();
       else if (tag == "anchor") {
-printf("text anchor <%s>\n", qPrintable(val));
             if (val == "page")
                   _anchor = ANCHOR_PAGE;
             else if (val == "staff")
@@ -459,7 +456,6 @@ printf("text anchor <%s>\n", qPrintable(val));
                   _anchor = ANCHOR_SYSTEM;
             else
                   printf("Text::readProperties: unknown anchor: <%s>\n", val.toLocal8Bit().data());
-printf("%p text anchor %d\n", this, _anchor);
             }
       else if (tag == "offsetType") {
             if (val == "absolute")

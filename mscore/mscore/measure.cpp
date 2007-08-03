@@ -954,9 +954,17 @@ void Measure::remove(Element* el)
 
 void Measure::moveTicks(int diff)
       {
+      foreach(Element* e, _sel) {
+            e->setTick(e->tick() + diff);
+            if (e->type() == SLUR) {
+                  Slur* slur = (Slur*)e;
+                  if (slur->tick1() >= tick())
+                        slur->setTick1(slur->tick1() + diff);
+                  if (slur->tick2() >= tick())
+                        slur->setTick2(slur->tick2() + diff);
+                  }
+            }
       setTick(tick() + diff);
-      for (ciElement ii = _sel.begin(); ii != _sel.end(); ++ii)
-            (*ii)->setTick((*ii)->tick() + diff);
       int staves = _score->nstaves();
       int tracks = staves * VOICES;
       for (Segment* segment = first(); segment; segment = segment->next()) {
@@ -973,76 +981,6 @@ void Measure::moveTicks(int diff)
                               (*i)->setTick((*i)->tick() + diff);
                         }
                   }
-            }
-      }
-
-//---------------------------------------------------------
-//   draw
-//---------------------------------------------------------
-
-void Measure::draw(QPainter& p)
-      {
-      //-------------------------------
-      // draw selection:
-      //-------------------------------
-
-      if (_score->sel->state() != SEL_STAFF && _score->sel->state() != SEL_SYSTEM)
-            return;
-
-      int sstart = _score->sel->tickStart;
-      int send   = _score->sel->tickEnd;
-      int mstart = tick();
-      int mend   = tick() + tickLen();
-
-      if (send <= mstart || sstart >= mend)
-            return;
-
-      p.setBrush(Qt::NoBrush);
-      double x1 = bbox().x();
-      double x2 = x1 + bbox().width();
-      if (_score->sel->state() == SEL_SYSTEM) {
-            QPen pen(QColor(Qt::blue));
-            pen.setWidthF(3.0 / p.matrix().m11());
-            pen.setStyle(Qt::DotLine);
-            p.setPen(pen);
-            double y1 = bbox().y() - _spatium;
-            double y2 = y1 + bbox().height() + 2 * _spatium;
-
-            // is this measure start of selection?
-            if (sstart >= mstart && sstart < mend) {
-                  x1 -= _spatium;
-                  p.drawLine(QLineF(x1, y1, x1, y2));
-                  }
-            // is this measure end of selection?
-            if (send > mstart && send <= mend) {
-                  x2 += _spatium;
-                  p.drawLine(QLineF(x2, y1, x2, y2));
-                  }
-            p.drawLine(QLineF(x1, y1, x2, y1));
-            p.drawLine(QLineF(x1, y2, x2, y2));
-            }
-      else {
-            QPen pen(QColor(Qt::blue));
-            pen.setWidthF(2.0 / p.matrix().m11());
-            pen.setStyle(Qt::SolidLine);
-            p.setPen(pen);
-            double y1 = system()->staff(_score->sel->staffStart)->bbox().y() - _spatium;
-            double y2 = system()->staff(_score->sel->staffEnd-1)->bbox().y()
-                        + system()->staff(_score->sel->staffEnd-1)->bbox().height()
-                        + _spatium;
-
-            // is this measure start of selection?
-            if (sstart >= mstart && sstart < mend) {
-                  x1 -= _spatium;
-                  p.drawLine(QLineF(x1, y1, x1, y2));
-                  }
-            // is this measure end of selection?
-            if (send > mstart && send <= mend) {
-                  x2 += _spatium;
-                  p.drawLine(QLineF(x2, y1, x2, y2));
-                  }
-            p.drawLine(QLineF(x1, y1, x2, y1));
-            p.drawLine(QLineF(x1, y2, x2, y2));
             }
       }
 
@@ -2334,11 +2272,9 @@ void Measure::read(QDomElement e, int idx)
                   Text* t = new Text(score());
                   t->setTick(score()->curTick);
                   t->read(e);
-printf("%p Text anchor %d\n", t, t->anchor());
                   if (t->anchor() != ANCHOR_PAGE) {
                         score()->curTick = t->tick();
                         t->setStaff(staff);
-printf("%p setStaff %p\n", t, staff);
                         }
                   add(t);
                   }
@@ -2506,7 +2442,7 @@ void Measure::read(QDomElement e)
 
 void Measure::collectElements(QList<Element*>& el)
       {
-      el.append(this);     // draw selection
+      el.append(this);     // to make measure clickable
       int staves = score()->nstaves();
       int tracks = staves * VOICES;
       for (Segment* s = first(); s; s = s->next()) {
