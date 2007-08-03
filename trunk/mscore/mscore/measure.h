@@ -3,7 +3,7 @@
 //  Linux Music Score Editor
 //  $Id: measure.h,v 1.40 2006/04/12 14:58:10 wschweer Exp $
 //
-//  Copyright (C) 2002-2006 Werner Schweer (ws@seh.de)
+//  Copyright (C) 2002-2007 Werner Schweer (ws@seh.de)
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.
@@ -127,8 +127,6 @@ class Measure : public Element {
       ~Measure();
       virtual Measure* clone() const { return new Measure(*this); }
       virtual ElementType type() const { return MEASURE; }
-
-      virtual void draw(QPainter&);
 
       virtual void read(QDomElement, int idx);
       virtual void write(Xml&, int, int) const;

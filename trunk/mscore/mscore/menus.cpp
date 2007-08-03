@@ -511,6 +511,24 @@ void MuseScore::showPalette(bool visible)
             sp->addObject(164, lettersSym);
             sp->addObject(165, letterzSym);
             paletteBox->addPalette(tr("Symbols"), sp);
+
+            //-----------------------------------
+            //    breaks
+            //-----------------------------------
+
+            sp = new Palette(1, 5, .7);
+            sp->setGrid(36, 36);
+            sp->setDrawGrid(true);
+
+            LayoutBreak* lb = new LayoutBreak(gscore);
+            lb->setSubtype(LAYOUT_BREAK_LINE);
+            sp->addObject(0, lb, tr("break line"));
+
+            lb = new LayoutBreak(gscore);
+            lb->setSubtype(LAYOUT_BREAK_PAGE);
+            sp->addObject(1, lb, tr("break page"));
+
+            paletteBox->addPalette(tr("Breaks"), sp);
             }
       paletteBox->setShown(visible);
       a->setChecked(visible);
@@ -525,8 +543,12 @@ QMenu* MuseScore::genCreateMenu()
       QMenu* popup = new QMenu(tr("&Create"));
 
       popup->addAction(getAction("instruments"));
-      popup->addAction(getAction("append-measure"));
-      popup->addAction(tr("Measures..."),        this, SLOT(cmdAppendMeasures()));
+
+      QMenu* measures = popup->addMenu(tr("Measures..."));
+      measures->addAction(getAction("append-measure"));
+      measures->addAction(getAction("append-measures"));
+      measures->addAction(getAction("insert-measure"));
+
       popup->addAction(tr("Barlines..."),        this, SLOT(barMenu()));
       popup->addAction(getAction("clefs"));
       popup->addAction(getAction("keys"));
@@ -548,7 +570,6 @@ QMenu* MuseScore::genCreateMenu()
       text->addAction(getAction("lyrics"));
       text->addAction(getAction("fingering"));
       text->addAction(getAction("dynamics"));
-//      text->addAction(getAction("technik"));
       text->addAction(getAction("tempo"));
       text->addAction(getAction("metronome"));
 

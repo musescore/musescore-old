@@ -159,7 +159,6 @@ int intervalPenalty[13] = {
 
 //---------------------------------------------------------
 //   enharmonicSpelling
-//    TODO: only key C and Bb is checked
 //---------------------------------------------------------
 
 static const bool enharmonicSpelling[15][34] = {

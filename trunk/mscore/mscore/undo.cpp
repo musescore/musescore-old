@@ -71,7 +71,8 @@ static const char* undoName[] = {
       "ChangeClef",
       "ChangeSig",
       "ChangeMeasureLen",
-      "ChangeElement"
+      "ChangeElement",
+      "ChangeKey"
       };
 
 static bool UNDO = false;
@@ -299,7 +300,7 @@ void Score::processUndoOp(UndoOp* i, bool undo)
                   break;
             case UndoOp::InsertMeasure:
                   if (undo)
-                        removeMeasure(i->measure->tick());
+                        removeMeasure(i->measure);
                   else
                         addMeasure(i->measure);
                   break;
@@ -307,7 +308,7 @@ void Score::processUndoOp(UndoOp* i, bool undo)
                   if (undo)
                         addMeasure(i->measure);
                   else
-                        removeMeasure(i->measure->tick());
+                        removeMeasure(i->measure);
                   break;
             case UndoOp::SortStaves:
                   if (undo)
@@ -435,6 +436,28 @@ void Score::processUndoOp(UndoOp* i, bool undo)
                               kl->erase(ik);
                               }
                         if (i->val3 != NO_CLEF)
+                              (*kl)[i->val1] = i->val3;
+                        }
+                  }
+                  break;
+            case UndoOp::ChangeKey:
+                  {
+                  KeyList* kl = i->staff->keymap();
+                  if (undo) {
+                        // remove new value if there is any
+                        if (i->val3 != NO_KEY) {
+                              iClefEvent ik = kl->find(i->val1);
+                              kl->erase(ik);
+                              }
+                        if (i->val2 != NO_KEY)
+                              (*kl)[i->val1] = i->val2;
+                        }
+                  else {
+                        if (i->val2 != NO_KEY) {
+                              iKeyEvent ik = kl->find(i->val1);
+                              kl->erase(ik);
+                              }
+                        if (i->val3 != NO_KEY)
                               (*kl)[i->val1] = i->val3;
                         }
                   }
@@ -733,6 +756,32 @@ void Score::undoChangeSig(int tick, const SigEvent& o, const SigEvent& n)
       i.val1 = tick;
       i.sig1 = o;
       i.sig2 = n;
+      undoList.back()->push_back(i);
+      processUndoOp(&i, false);
+      }
+
+void Score::undoChangeKey(Staff* staff, int tick, int o, int n)
+      {
+      checkUndoOp();
+      UndoOp i;
+      i.type = UndoOp::ChangeKey;
+      i.val1 = tick;
+      i.val1 = o;
+      i.val3 = n;
+      i.staff = staff;
+      undoList.back()->push_back(i);
+      processUndoOp(&i, false);
+      }
+
+void Score::undoChangeClef(Staff* staff, int tick, int o, int n)
+      {
+      checkUndoOp();
+      UndoOp i;
+      i.type = UndoOp::ChangeClef;
+      i.val1 = tick;
+      i.val1 = o;
+      i.val3 = n;
+      i.staff = staff;
       undoList.back()->push_back(i);
       processUndoOp(&i, false);
       }

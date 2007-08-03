@@ -530,10 +530,14 @@ again:
                         else {
                               // add rest to measure
                               int rtick = mtick - lendiff;
+                              Segment* seg = m->findSegment(Segment::SegChordRest, tick);
+                              if (seg == 0) {
+                                    seg = m->createSegment(Segment::SegChordRest, tick);
+                                    undoAddElement(seg);
+                                    }
                               rest = new Rest(this, rtick, lendiff);
                               rest->setStaff(staffp);
-                              // printf("add rest\n");
-                              m->add(rest);
+                              seg->add(rest);
                               }
                         }
                   }
@@ -962,7 +966,6 @@ void Score::deleteItem(Element* el)
                   if (el->subtype() == TEXT_INSTRUMENT_SHORT) {
                         el->staff()->part()->setShortName(QString());
                         _layout->setInstrumentNames();
-                        layout();
                         break;
                         }
 
@@ -1036,8 +1039,29 @@ printf("delete rest voice %d\n", el->voice());
             case MEASURE:
                   {
                   Measure* m = (Measure*)el;
-                  undoOp(UndoOp::RemoveMeasure, m);
-                  removeMeasure(m->tick());
+                  foreach(Element* e, *m->el()) {
+                        if (e->type() == SLUR)
+                              undoRemoveElement(e);
+                        }
+                  int tick = m->tick();
+                  int len  = m->tickLen();
+                  for (ciSigEvent i = sigmap->begin(); i != sigmap->end(); ++i) {
+                        if (i->first >= tick && (i->first < tick + len))
+                              undoChangeSig(i->first, i->second, SigEvent());
+                        }
+                  foreach(Staff* staff, _staves) {
+                        ClefList* cl = staff->clef();
+                        KeyList*  kl = staff->keymap();
+                        for (ciClefEvent i = cl->begin(); i != cl->end(); ++i) {
+                              if (i->first >= tick && (i->first < tick + len))
+                                    undoChangeClef(staff, i->first, i->second, NO_CLEF);
+                              }
+                        for (ciKeyEvent i = kl->begin(); i != kl->end(); ++i) {
+                              if (i->first >= tick && (i->first < tick + len))
+                                    undoChangeKey(staff, i->first, i->second, NO_KEY);
+                              }
+                        }
+                  undoRemoveElement(m);
                   }
                   break;
 
@@ -1058,6 +1082,7 @@ printf("delete rest voice %d\n", el->voice());
 void Score::cmdDeleteItem(Element* el)
       {
       deleteItem(el);
+      sel->elements()->clear();
       select(0, 0, 0);
       layout();
       }
@@ -1093,6 +1118,7 @@ void Score::cmdDeleteSelection()
                   }
             }
       sel->elements()->clear();
+      select(0, 0, 0);
       layout();
       }
 

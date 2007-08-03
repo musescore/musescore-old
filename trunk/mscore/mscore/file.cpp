@@ -994,49 +994,21 @@ bool Score::saveSvg(const QString& name)
 
 bool Score::savePng(const QString& name)
       {
-      QRectF r = canvas()->lassoRect();
-      double x = r.x();
-      double y = r.y();
+      QRectF r = canvas()->matrix().mapRect(canvas()->lassoRect());
       double w = r.width();
       double h = r.height();
-
       QImage printer(lrint(w), lrint(h), QImage::Format_ARGB32_Premultiplied);
-      // QImage printer(lrint(w), lrint(h), QImage::Format_RGB32);
+      printer.setDotsPerMeterX(lrint(DPMM * 1000.0));
+      printer.setDotsPerMeterY(lrint(DPMM * 1000.0));
       printer.fill(-1);
-
-      _printing = true;
       QPainter p(&printer);
-      p.setRenderHint(QPainter::Antialiasing, true);
-      p.setRenderHint(QPainter::TextAntialiasing, true);
-
-      p.setClipRect(QRect(0, 0, lrint(w), lrint(h)));
-      p.setClipping(true);
-
-      QPointF offset(x, y);
-
-      ElementList el;
-      foreach(Page* page, *_layout->pages()) {
-            el.clear();
-            page->collectElements(el);
-            foreach(System* system, *page->systems()) {
-                  foreach(Measure* m, system->measures()) {
-                        m->collectElements(el);
-                        }
-                  }
-            for (int i = 0; i < el.size(); ++i) {
-                  Element* e = el.at(i);
-                  if (!e->visible())
-                        continue;
-                  QPointF ap(e->canvasPos() - offset);
-                  p.translate(ap);
-                  p.setPen(QPen(e->color()));
-                  e->draw(p);
-                  p.translate(-ap);
-                  }
-            }
-      _printing = false;
-      p.end();
-
-      return printer.save(name, "png");
+      QPaintDevice* oldPaintDevice = mainLayout()->paintDevice();
+      mainLayout()->setPaintDevice(&printer);
+      doLayout();
+      canvas()->paintLasso(p);
+      bool rv = printer.save(name, "png");
+      mainLayout()->setPaintDevice(oldPaintDevice);
+      layout();
+      return rv;
       }
 

@@ -304,17 +304,37 @@ void ClefList::read(QDomElement e, Score* cs)
 //   removeTime
 //---------------------------------------------------------
 
-void ClefList::removeTime(int s, int e)
+void ClefList::removeTime(int tick, int len)
       {
-      erase(find(s), find(e));
+      ClefList tmp;
+      for (ciClefEvent i = begin(); i != end(); ++i) {
+            if (i->first >= tick) {
+                  if (i->first >= tick + len)
+                        tmp[i->first - len] = i->second;
+                  else
+                        printf("remove key event\n");
+                  }
+            else
+                  tmp[i->first] = i->second;
+            }
+      clear();
+      insert(tmp.begin(), tmp.end());
       }
 
 //---------------------------------------------------------
 //   insertTime
 //---------------------------------------------------------
 
-void ClefList::insertTime(int, int)
+void ClefList::insertTime(int tick, int len)
       {
-      printf("ClefList::insertTime(): not impl.\n");
+      ClefList tmp;
+      for (ciClefEvent i = begin(); i != end(); ++i) {
+            if (i->first >= tick)
+                  tmp[i->first + len] = i->second;
+            else
+                  tmp[i->first] = i->second;
+            }
+      clear();
+      insert(tmp.begin(), tmp.end());
       }
 

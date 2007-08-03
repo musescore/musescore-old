@@ -251,7 +251,8 @@ MuseScore::MuseScore()
          << "move-up" << "move-down" << "up-chord" << "down-chord"
          << "top-chord" << "bottom-chord" << "next-chord" << "prev-chord"
          << "next-measure" << "prev-measure" << "print" << "undo"
-         << "redo" << "append-measure" << "duplet" << "triplet" << "quintuplet"
+         << "redo" << "append-measure" << "append-measures" << "insert-measure"
+         << "duplet" << "triplet" << "quintuplet"
          << "note-c" << "note-d" << "note-e" << "note-f" << "note-g"
          << "note-a" << "note-b"
          << "chord-c" << "chord-d" << "chord-e" << "chord-f" << "chord-g"
@@ -1321,17 +1322,6 @@ void MuseScore::cmdAppendMeasures()
       }
 
 //---------------------------------------------------------
-//   cmdAppendMeasures
-//---------------------------------------------------------
-
-void MuseScore::cmdAppendMeasures(int n)
-      {
-      if (cs) {
-            cs->cmdAppendMeasures(n);
-            }
-      }
-
-//---------------------------------------------------------
 //   MeasuresDialog
 //---------------------------------------------------------
 
@@ -1348,7 +1338,8 @@ MeasuresDialog::MeasuresDialog(QWidget* parent)
 void MeasuresDialog::accept()
 	{
 	int n = measures->value();
-	mscore->cmdAppendMeasures(n);
+      if (mscore->currentScore())
+            mscore->currentScore()->cmdAppendMeasures(n);
       done(1);
 	}
 
@@ -1752,6 +1743,8 @@ void MuseScore::cmd(QAction* a)
             _statusBar->setShown(preferences.showStatusBar);
             preferences.write();
             }
+      else if (cmd == "append-measures")
+            cmdAppendMeasures();
       else {
             if (cs)
                   cs->cmd(cmd);

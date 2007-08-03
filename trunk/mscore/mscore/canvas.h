@@ -186,6 +186,7 @@ class Canvas : public QFrame, public Viewer {
       void updateNavigator(bool layoutChanged) const;
       Element* elementAt(const QPointF& pp);
       QRectF lassoRect() const { return _lassoRect; }
+      void paintLasso(QPainter& p);
       };
 
 extern int searchStaff(const Element* element);

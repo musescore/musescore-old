@@ -352,17 +352,39 @@ int SigEvent::read(QDomElement e, int division, int fileDivision)
 //   remove
 //---------------------------------------------------------
 
-void SigList::removeTime(int, int)
+void SigList::removeTime(int tick, int len)
       {
-      printf("SigList::removeTime(): not impl.\n");
+      SigList tmp;
+      for (ciSigEvent i = begin(); i != end(); ++i) {
+            if (i->first >= tick) {
+                  if (i->first >= tick + len)
+                        tmp.add(i->first - len, i->second);
+                  else
+                        printf("remove sig event\n");
+                  }
+            else
+                  tmp.add(i->first, i->second);
+            }
+      clear();
+      insert(tmp.begin(), tmp.end());
+      normalize();
       }
 
 //---------------------------------------------------------
 //   insert
 //---------------------------------------------------------
 
-void SigList::insertTime(int, int)
+void SigList::insertTime(int tick, int len)
       {
-      printf("SigList::insertTime(): not impl.\n");
+      SigList tmp;
+      for (ciSigEvent i = begin(); i != end(); ++i) {
+            if (i->first >= tick)
+                  tmp.add(i->first + len, i->second);
+            else
+                  tmp.add(i->first, i->second);
+            }
+      clear();
+      insert(tmp.begin(), tmp.end());
+      normalize();
       }
 

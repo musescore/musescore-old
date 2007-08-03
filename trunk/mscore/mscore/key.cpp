@@ -72,17 +72,37 @@ void KeyList::read(QDomElement e, Score* cs)
 //   insert
 //---------------------------------------------------------
 
-void KeyList::insertTime(int, int)
+void KeyList::insertTime(int tick, int len)
       {
-      printf("KeyList::insertTime(): not impl.\n");
+      KeyList tmp;
+      for (ciKeyEvent i = begin(); i != end(); ++i) {
+            if (i->first >= tick) {
+                  if (i->first >= tick + len)
+                        tmp[i->first - len] = i->second;
+                  else
+                        printf("remove key event\n");
+                  }
+            else
+                  tmp[i->first] = i->second;
+            }
+      clear();
+      insert(tmp.begin(), tmp.end());
       }
 
 //---------------------------------------------------------
 //   remove
 //---------------------------------------------------------
 
-void KeyList::removeTime(int, int)
+void KeyList::removeTime(int tick, int len)
       {
-      printf("KeyList::removeTime(): not impl.\n");
+      KeyList tmp;
+      for (ciKeyEvent i = begin(); i != end(); ++i) {
+            if (i->first >= tick)
+                  tmp[i->first + len] = i->second;
+            else
+                  tmp[i->first] = i->second;
+            }
+      clear();
+      insert(tmp.begin(), tmp.end());
       }
 
