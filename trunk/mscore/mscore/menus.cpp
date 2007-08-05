@@ -77,7 +77,7 @@ void MuseScore::showPalette(bool visible)
             //-----------------------------------
 
             Palette* sp = new Palette(4, 4, .8);
-            sp->setGrid(45, 60);
+            sp->setGrid(42, 60);
             sp->showStaff(true);
             for (int i = 0; i < 15; ++i) {
                   Clef* k = new ::Clef(gscore, i);
@@ -90,7 +90,7 @@ void MuseScore::showPalette(bool visible)
             //-----------------------------------
 
             sp = new Palette(5, 3, .8);
-            sp->setGrid(60, 45);
+            sp->setGrid(56, 45);
             sp->showStaff(true);
             for (int i = 0; i < 7; ++i) {
                   KeySig* k = new KeySig(gscore);
@@ -112,7 +112,7 @@ void MuseScore::showPalette(bool visible)
             //-----------------------------------
 
             sp = new Palette(4, 3);
-            sp->setGrid(60, 45);
+            sp->setGrid(56, 45);
             sp->showStaff(true);
 
       	sp->addObject(0,   new TimeSig(gscore, 2, 2), "2/2");
@@ -134,7 +134,7 @@ void MuseScore::showPalette(bool visible)
             //-----------------------------------
 
             sp = new Palette(2, 4);
-            sp->setGrid(45, 50);
+            sp->setGrid(42, 50);
             sp->showStaff(true);
 
             struct {
@@ -162,9 +162,9 @@ void MuseScore::showPalette(bool visible)
             //-----------------------------------
 
             sp = new Palette(6, 2);
-            sp->setGrid(90, 30);
+            sp->setGrid(84, 30);
 
-            double l = _spatium * 8;
+            double l = _spatium * 7;
 
             Hairpin* gabel0 = new Hairpin(gscore);
             gabel0->setSubtype(0);
@@ -231,7 +231,7 @@ void MuseScore::showPalette(bool visible)
             //-----------------------------------
 
             sp = new Palette(1, 4);
-            sp->setGrid(45, 60);
+            sp->setGrid(42, 60);
 
             for (int i = 0; i < 4; ++i) {
                   Arpeggio* a = new Arpeggio(gscore);
@@ -246,7 +246,7 @@ void MuseScore::showPalette(bool visible)
             //-----------------------------------
 
             sp = new Palette(1, 4);
-            sp->setGrid(45, 40);
+            sp->setGrid(42, 40);
 
             for (int i = 0; i < 2; ++i) {
                   Breath* a = new Breath(gscore);
@@ -261,7 +261,7 @@ void MuseScore::showPalette(bool visible)
             //-----------------------------------
 
             sp = new Palette(1, 4, .7);
-            sp->setGrid(45, 60);
+            sp->setGrid(42, 60);
 
             Bracket* b1 = new Bracket(gscore);
             b1->setSubtype(BRACKET_NORMAL);
@@ -280,7 +280,7 @@ void MuseScore::showPalette(bool visible)
             //-----------------------------------
 
             sp = new Palette((NOTE_ATTRIBUTES+3) / 4, 4);
-            sp->setGrid(45, 40);
+            sp->setGrid(42, 40);
 
             for (int i = 0; i < NOTE_ATTRIBUTES; ++i) {
                   NoteAttribute* s = new NoteAttribute(gscore);
@@ -295,7 +295,7 @@ void MuseScore::showPalette(bool visible)
             //-----------------------------------
 
             sp = new Palette(2, 5);
-            sp->setGrid(36, 36);
+            sp->setGrid(33, 36);
 
             for (int i = 1; i < 11; ++i) {
                   Accidental* s = new Accidental(gscore);
@@ -309,7 +309,7 @@ void MuseScore::showPalette(bool visible)
             //-----------------------------------
 
             sp = new Palette(18, 2);
-            sp->setGrid(90, 35);
+            sp->setGrid(84, 35);
 
             for (int i = 0; i < 27; ++i) {
                   Dynamic* dynamic = new Dynamic(gscore, i + 1);
@@ -333,7 +333,7 @@ void MuseScore::showPalette(bool visible)
             //-----------------------------------
 
             sp = new Palette(2, 6, 1.5);
-            sp->setGrid(30, 30);
+            sp->setGrid(28, 30);
             sp->setDrawGrid(true);
 
             const char finger[] = "012345pimac";
@@ -350,7 +350,7 @@ void MuseScore::showPalette(bool visible)
             //-----------------------------------
 
             sp = new Palette(42, 4);
-            sp->setGrid(45, 45);
+            sp->setGrid(42, 45);
             sp->setDrawGrid(true);
             sp->addObject(0, wholerestSym);
             sp->addObject(1, halfrestSym);
@@ -516,8 +516,8 @@ void MuseScore::showPalette(bool visible)
             //    breaks
             //-----------------------------------
 
-            sp = new Palette(1, 5, .7);
-            sp->setGrid(36, 36);
+            sp = new Palette(1, 4, .7);
+            sp->setGrid(42, 36);
             sp->setDrawGrid(true);
 
             LayoutBreak* lb = new LayoutBreak(gscore);
@@ -924,18 +924,15 @@ void MuseScore::fingeringMenu()
 void Score::addTempo()
       {
       Element* e = sel->element();
-      if (!e) {
-            printf("no element selected\n");
-            endCmd(true);
+      if (!e || (e->type() != NOTE && e->type() != REST)) {
+            QMessageBox::information(0, "MuseScore: Text Entry",
+               tr("No note or rest selected:\n"
+                  "please select a note or rest were you want to\n"
+                  "set tempo."));
             return;
             }
       if (e->type() == NOTE)
             e = e->parent();
-      if (e->type() != CHORD && e->type() != REST) {
-            printf("no Chord/Rest selected\n");
-            endCmd(true);
-            return;
-            }
       Measure* m = ((ChordRest*)e)->segment()->measure();
       int tick = e->tick();
       if (editTempo == 0)
@@ -943,8 +940,6 @@ void Score::addTempo()
       int rv = editTempo->exec();
       if (rv == 1) {
             double bpm = editTempo->bpm();
-printf("tempo at %d(%s)  %s %f\n",
-   e->tick(), e->name(), editTempo->text().toLatin1().data(), editTempo->bpm());
             tempomap->addTempo(tick, int(60000000.0/double(bpm)));
             TempoText* tt = new TempoText(this);
             tt->setTick(tick);
@@ -954,7 +949,6 @@ printf("tempo at %d(%s)  %s %f\n",
             tt->setParent(m);
             cmdAdd(tt);
             refresh |= tt->abbox();
-            endCmd(true);
             }
       }
 

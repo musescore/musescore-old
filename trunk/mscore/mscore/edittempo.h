@@ -34,6 +34,7 @@ class EditTempo : public QDialog, private Ui::EditTempoBase {
 
    private slots:
       void selectTempo(int);
+      void itemDoubleClicked(QListWidgetItem*);
 
    public:
       EditTempo(QWidget* parent);

@@ -353,6 +353,7 @@ void Canvas::mousePressEvent(QMouseEvent* ev)
                               dragCanvasState = true;
                               setCursor(Qt::SizeAllCursor);
                               }
+                        update();
                         }
                   break;
 

@@ -71,10 +71,24 @@ EditTempo::EditTempo(QWidget* parent)
    : QDialog(parent)
       {
       setupUi(this);
-      for (unsigned i = 0; i < sizeof(tempos)/sizeof(*tempos); ++i)
-            tempoList->addItem(tempos[i].name);
+      for (unsigned i = 0; i < sizeof(tempos)/sizeof(*tempos); ++i) {
+            QListWidgetItem* item = new QListWidgetItem(tempos[i].name, tempoList);
+            item->setData(Qt::UserRole, i);
+            }
       selectTempo(3);
       connect(tempoList, SIGNAL(currentRowChanged(int)), SLOT(selectTempo(int)));
+      connect(tempoList, SIGNAL(itemDoubleClicked(QListWidgetItem*)), SLOT(itemDoubleClicked(QListWidgetItem*)));
+      }
+
+//---------------------------------------------------------
+//   itemDoubleClicked
+//---------------------------------------------------------
+
+void EditTempo::itemDoubleClicked(QListWidgetItem* item)
+      {
+      int idx = item->data(Qt::UserRole).toInt();
+      selectTempo(idx);
+      accept();
       }
 
 //---------------------------------------------------------

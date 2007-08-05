@@ -63,12 +63,13 @@ set(CMAKE_BUILD_WITH_INSTALL_RPATH ON)
 set(CMAKE_SKIP_RULE_DEPENDENCY TRUE)
 
 # The Mscore version number.
-SET(Mscore_VERSION_MAJOR 0)
-SET(Mscore_VERSION_MINOR 7)
-SET(Mscore_VERSION_PATCH "0")
-SET(Mscore_VERSION       "0.7")
-SET(Mscore_VERSION_FULL  "0.7.1")
-SET(Mscore_INSTALL_NAME  "mscore-0.7")
+SET(Mscore_VERSION_MAJOR  "0")
+SET(Mscore_VERSION_MINOR  "7")
+SET(Mscore_VERSION_PATCH  "0")
+
+SET(Mscore_VERSION       "${Mscore_VERSION_MAJOR}.${Mscore_VERSION_MINOR}")
+SET(Mscore_VERSION_FULL  "${Mscore_VERSION}.${Mscore_VERSION_PATCH}")
+SET(Mscore_INSTALL_NAME  "mscore-${Mscore_VERSION}")
 
 include ( ${PROJECT_SOURCE_DIR}/cmake/UsePkgConfig1.cmake )
 include ( ${PROJECT_SOURCE_DIR}/cmake/TargetDoc.cmake)
@@ -175,18 +176,17 @@ include_directories(
 #
 # create package target
 #
-include (CPack)
 include (InstallRequiredSystemLibraries)
 
   SET(CPACK_PACKAGE_DESCRIPTION_SUMMARY "MuseScore is a full featured WYSIWYG score editor")
   SET(CPACK_PACKAGE_VENDOR "Werner Schweer and Others")
   SET(CPACK_PACKAGE_DESCRIPTION_FILE "${CMAKE_CURRENT_SOURCE_DIR}/COPYING")
   SET(CPACK_RESOURCE_FILE_LICENSE "${CMAKE_CURRENT_SOURCE_DIR}/COPYING")
+
   SET(CPACK_PACKAGE_VERSION_MAJOR "${Mscore_VERSION_MAJOR}")
   SET(CPACK_PACKAGE_VERSION_MINOR "${Mscore_VERSION_MINOR}")
   SET(CPACK_PACKAGE_VERSION_PATCH "${Mscore_VERSION_PATCH}")
   SET(CPACK_PACKAGE_INSTALL_DIRECTORY "CMake ${CMake_VERSION_MAJOR}.${CMake_VERSION_MINOR}")
-
 
   IF(WIN32 AND NOT UNIX)
       # There is a bug in NSI that does not handle full unix paths properly. Make
@@ -199,12 +199,27 @@ include (InstallRequiredSystemLibraries)
       SET(CPACK_NSIS_CONTACT "we@seh.de")
       SET(CPACK_NSIS_MODIFY_PATH ON)
   ELSE(WIN32 AND NOT UNIX)
-      SET(CPACK_STRIP_FILES "bin/mscore")
+      SET(CPACK_STRIP_FILES "mscore")
       SET(CPACK_SOURCE_STRIP_FILES "")
   ENDIF(WIN32 AND NOT UNIX)
 
-  SET(CPACK_PACKAGE_FILE_NAME "${CPACK_SOURCE_PACKAGE_FILE_NAME}-${CPACK_SYSTEM_NAME}")
-  SET(CPACK_PACKAGE_EXECUTABLES "mscore" "MuseScore")
+  SET(CPACK_SOURCE_PACKAGE_FILE_NAME "mscore")
+  SET(CPACK_PACKAGE_FILE_NAME     "${CPACK_SOURCE_PACKAGE_FILE_NAME}-${Mscore_VERSION_FULL}")
+  SET(CPACK_PACKAGE_EXECUTABLES   "mscore" "MuseScore")
+
+  set(DEBIAN_PACKAGE_NAME         "mscore")
+  set(DEBIAN_PACKAGE_VERSION      "${Mscore_VERSION_FULL}-0ubuntu0.1")
+  set(DEBIAN_PACKAGE_ARCHITECTURE "i386")
+  set(DEBIAN_PACKAGE_DEPENDS      "libqt4-core (>= 4.3), libqt4-gui (>= 4.3)")
+message("Depends1: ${DEBIAN_PACKAGE_DEPENDS}")
+  set(DEBIAN_PACKAGE_MAINTAINER   "ws@seh.de")
+  set(CPACK_PACKAGE_CONTACT       "ws@seh.de")
+  set(CPACK_GENERATOR             "DEB;TBZ2")
+  set(CPACK_DEB "on")
+
+  include (CPack)
+message("Depends2: ${DEBIAN_PACKAGE_DEPENDS}")
+
 
 add_custom_target(lupdate
    COMMAND ${PROJECT_SOURCE_DIR}/gen-qt-projectfile ${PROJECT_SOURCE_DIR} > mscore.pro
@@ -217,5 +232,4 @@ add_custom_target(lrelease
    COMMAND lrelease ${PROJECT_BINARY_DIR}/mscore.pro
    WORKING_DIRECTORY ${PROJECT_BINARY_DIR}
    )
-
 
