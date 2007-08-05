@@ -77,8 +77,10 @@ static const TextStyle defaultTextStyles[] = {
       TextStyle(QString("Technik"), ff, 12, false, true, false,
          ALIGN_LEFT,    ANCHOR_STAFF, 0, 0, OFFSET_SPATIUM),
 /*12*/
-      TextStyle(QString("Tempo"), ff, 10, true, false, false,
-         ALIGN_LEFT,    ANCHOR_STAFF, 0, -2.0, OFFSET_SPATIUM, true),
+
+      TextStyle(QString("Tempo"), ff, 12, true, false, false,
+         ALIGN_LEFT,    ANCHOR_STAFF, 0, -5.0, OFFSET_SPATIUM, true),
+
       TextStyle(QString("Metronome"), ff, 12, true, false, false,
          ALIGN_LEFT,    ANCHOR_STAFF, 0, 0, OFFSET_SPATIUM),
       TextStyle(QString("Copyright"), ff, 8, true, false, false,

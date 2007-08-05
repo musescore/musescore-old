@@ -305,6 +305,129 @@ static void initLineList(char* ll, int key)
       }
 
 //---------------------------------------------------------
+//   layoutChord
+//---------------------------------------------------------
+
+void Measure::layoutChord(Chord* chord, char* tversatz)
+      {
+      Drumset* drumset = _score->part(chord->staffIdx())->drumset();
+      NoteList* nl     = chord->noteList();
+      int tick         = chord->tick();
+      int ll           = 1000;      // line distance to previous note head
+
+      int move1      = nl->front()->move();
+      Tuplet* tuplet = chord->tuplet();
+
+      QList<Note*> notes;
+      for (iNote in = nl->begin(); in != nl->end(); ++in)
+            notes.append(in->second);
+
+      bool mirror = false;                 // notehead position relative to stem
+      int nNotes  = notes.size();
+      for (int i = 0; i < nNotes; ++i) {
+            Note* note  = notes[i];
+            int pitch   = note->pitch();
+            if (drumset) {
+                  if (!drumset->isValid(pitch)) {
+                        printf("unmapped drum note %d\n", pitch);
+                        }
+                  else {
+                        note->setHeadGroup(drumset->noteHead(pitch));
+                        note->setLine(drumset->line(pitch));
+                        note->setHead(tuplet ? tuplet->baseLen() : chord->tickLen());
+                        continue;
+                        }
+                  }
+
+            note->setHead(tuplet ? tuplet->baseLen() : chord->tickLen());
+            int move = note->move();
+            int clef = note->staff()->clef()->clef(tick);
+
+            //
+            // compute accidental
+            //
+            int tpc        = note->tpc();
+            int line       = tpc2line(tpc) + (pitch/12) * 7;
+            int tpcPitch   = tpc2pitch(tpc);
+            if (tpcPitch < 0)
+                  line += 7;
+            else
+                  line -= (tpcPitch/12)*7;
+
+            int accidental = 0;
+            if (note->userAccidental())
+                  accidental = note->userAccidental();
+            else  {
+                  int accVal = ((tpc + 1) / 7) - 2;
+                  accidental = ACC_NONE;
+                  if (accVal != tversatz[line]) {
+                        tversatz[line] = accVal;
+                        switch(accVal) {
+                              case -2: accidental = ACC_FLAT2;  break;
+                              case -1: accidental = ACC_FLAT;   break;
+                              case  1: accidental = ACC_SHARP;  break;
+                              case  2: accidental = ACC_SHARP2; break;
+                              case  0: accidental = ACC_NATURAL; break;
+                              default: printf("bad accidental\n"); break;
+                              }
+                        }
+                  }
+
+            //
+            // calculate the real note line depending on clef
+            //
+            line = 127 - line - 82 + clefTable[clef].yOffset;
+            note->setLine(line);
+
+            if (mirror || (((ll - line) < 2) && move1 == move))
+                  mirror = !mirror;
+
+            if ((nNotes >= 3) && (i == (nNotes-1)) && mirror && !notes[i-2]->mirror()) {
+                  notes[i-1]->setMirror(true);
+                  mirror = false;
+                  }
+            note->setMirror(mirror);
+            note->setAccidentalSubtype(accidental);
+            move1 = move;
+            ll    = line;
+            }
+
+      //---------------------------------------------------
+      //    layout accidentals
+      //---------------------------------------------------
+
+      int ll2    = -1000;      // line distance to previous accidental
+      int ll3    = -1000;
+      int accCol = 0;
+      for (int i = nNotes-1; i >= 0; --i) {
+            Note* note     = notes[i];
+            Accidental* ac = note->accidental();
+            if (!ac)
+                  continue;
+            int line    = note->line();
+            bool mirror = note->mirror();
+            if ((line - ll2) <= 4) {
+                  if (accCol == 0 || ((line - ll3) <= 4))
+                        ++accCol;
+                  else
+                        --accCol;
+                  }
+            if (accCol > 5)
+                  accCol = 0;
+            double x = - point(score()->style()->prefixNoteDistance);
+            if (note->grace())
+                  x *= .5;
+            x  -= ac->width();
+            x  *= (accCol + 1);
+            if (mirror)
+                  x -= note->headWidth();
+            ac->setPos(x, 0);
+            ll3 = ll2;
+            ll2 = line;
+            }
+      }
+
+//---------------------------------------------------------
 //   layoutNoteHeads
 //---------------------------------------------------------
 
@@ -320,8 +443,6 @@ void Measure::layoutNoteHeads(int staff)
       int key  = _score->staff(staff)->keymap()->key(tick());
       initLineList(tversatz, key);
 
-      Drumset* drumset = _score->part(staff)->drumset();
-
       for (Segment* segment = first(); segment; segment = segment->next()) {
             int startTrack = staff * VOICES;
             int endTrack   = startTrack + VOICES;
@@ -330,78 +451,7 @@ void Measure::layoutNoteHeads(int staff)
                   if (e == 0 || e->type() != CHORD)
                         continue;
                   Chord* chord   = (Chord*)e;
-                  NoteList* nl   = chord->noteList();
-                  bool mirror    = false;
-                  int tick       = chord->tick();
-                  int ll         = 1000;
-
-                  int move1      = nl->front()->move();
-                  Tuplet* tuplet = chord->tuplet();
-
-                  for (iNote in = nl->begin(); in != nl->end(); ++in) {
-                        Note* note  = in->second;
-                        int pitch   = note->pitch();
-                        if (drumset) {
-                              if (!drumset->isValid(pitch)) {
-                                    printf("unmapped drum note %d\n", pitch);
-                                    }
-                              else {
-                                    note->setHeadGroup(drumset->noteHead(pitch));
-                                    note->setLine(drumset->line(pitch));
-                                    note->setHead(tuplet ? tuplet->baseLen() : chord->tickLen());
-                                    continue;
-                                    }
-                              }
-
-                        note->setHead(tuplet ? tuplet->baseLen() : chord->tickLen());
-                        int move = note->move();
-                        int clef = note->staff()->clef()->clef(tick);
-
-                        //
-                        // compute accidental
-                        //
-                        int tpc        = note->tpc();
-                        int line       = tpc2line(tpc) + (pitch/12) * 7;
-                        int tpcPitch   = tpc2pitch(tpc);
-                        if (tpcPitch < 0)
-                              line += 7;
-                        else
-                              line -= (tpcPitch/12)*7;
-
-                        int accidental = 0;
-                        if (note->userAccidental())
-                              accidental = note->userAccidental();
-                        else  {
-                              int accVal = ((tpc + 1) / 7) - 2;
-                              accidental = ACC_NONE;
-                              if (accVal != tversatz[line]) {
-                                    tversatz[line] = accVal;
-                                    switch(accVal) {
-                                          case -2: accidental = ACC_FLAT2;  break;
-                                          case -1: accidental = ACC_FLAT;   break;
-                                          case  1: accidental = ACC_SHARP;  break;
-                                          case  2: accidental = ACC_SHARP2; break;
-                                          case  0: accidental = ACC_NATURAL; break;
-                                          default: printf("bad accidental\n"); break;
-                                          }
-                                    }
-                              }
-
-                        //
-                        // calculate the real note line depending on clef
-                        //
-                        line = 127 - line - 82 + clefTable[clef].yOffset;
-                        note->setLine(line);
-
-                        // if (mirror || (((line - ll) < 2) && move1 == move))
-                        if (mirror || (((ll - line) < 2) && move1 == move))
-                              mirror = !mirror;
-
-                        move1 = move;
-                        note->setMirror(mirror);
-                        note->setAccidentalSubtype(accidental);
-                        ll = line;
-                        }
+                  layoutChord(chord, tversatz);
                   }
             }
       }
@@ -534,12 +584,6 @@ void Measure::layout2(ScoreLayout* layout)
                   case DYNAMIC:
                   case SYMBOL:
                   case TEMPO_TEXT:
-                        {
-                        pel->layout(layout);
-                        double x = tick2pos(pel->tick());
-                        pel->setPos(x, y);
-                        }
-                        break;
                   case TEXT:
                         pel->layout(layout);
                         pel->setPos(pel->ipos() + QPointF(tick2pos(pel->tick()), y));
@@ -1253,19 +1297,6 @@ again:
             spaces[0][staffIdx].setValid(true);
             }
 
-#ifdef DEBUG
-      printf("Measure %d:1======== \n", _no);
-      for (int staffIdx = 0; staffIdx < nstaves; ++staffIdx) {
-            for (int seg = 0; seg < segs+2; ++seg) {
-                  if (spaces[seg][staffIdx].valid())
-                        printf("%3.1f+%3.1f ", spaces[seg][staffIdx].min(), spaces[seg][staffIdx].extra());
-                  else
-                        printf("    -    ");
-                  }
-            printf("          \n");
-            }
-#endif
-
       //---------------------------------------------------
       //    move extra space to previous cells
       //---------------------------------------------------
@@ -1289,18 +1320,7 @@ again:
                         spaces[tseg][staffIdx].addMin(extra);
                   }
             }
-#ifdef DEBUG
-      printf("after move space:\n");
-      for (int staff = 0; staff < nstaves; ++staff) {
-            for (int seg = 0; seg < segs+2; ++seg) {
-                  if (spaces[seg][staff].valid())
-                        printf("%3.1f+%3.1f ", spaces[seg][staff].min(), spaces[seg][staff].extra());
-                  else
-                        printf("     -     ");
-                  }
-            printf("          \n");
-            }
-#endif
+
       //---------------------------------------------------
       //    populate width[] array
       //---------------------------------------------------
@@ -1323,13 +1343,6 @@ again:
                   }
             width[seg] = ww;
             }
-
-#ifdef DEBUG
-      printf("Measure %d: segment width\n   ", _no);
-      for (int i = 0; i < segs+2; ++i)
-            printf("%3.1f   ", width[i]);
-      printf("\n");
-#endif
 
       //---------------------------------------------------
       //    segments with equal duration should have
@@ -1364,14 +1377,6 @@ again:
                   ticks[i] = nticks;
                   }
             }
-#ifdef DEBUG
-      if (_no == DEBUG) {
-            printf("ticks:    ");
-            for (int i = 0; i < segs+2; ++i)
-                  printf("%d ", ticks[i]);
-            printf("\n");
-            }
-#endif
 
       // compute stretches:
 
@@ -1398,14 +1403,6 @@ again:
             minimum += width[i];
             springs.insert(std::pair<double, Spring>(d, Spring(i, stretchList[i], width[i])));
             }
-#ifdef DEBUG
-      if (_no == DEBUG) {
-            printf("stretch:    ");
-            for (int i = 0; i < segs+2; ++i)
-                  printf("%3.1f ", stretchList[i]);
-            printf("\n");
-            }
-#endif
 
       //---------------------------------------------------
       //    distribute "stretch" to segments
@@ -1428,14 +1425,11 @@ again:
       for (int seg = 0; seg < segs+1; ++seg)
             xpos[seg+1] = xpos[seg] + width[seg];
 
-#ifdef DEBUG
-      if (_no == DEBUG) {
-            printf("a.stretch ");
-            for (int seg = 0; seg < segs+2; ++seg)
-                  printf("%3.1f(%3.1f) ", xpos[seg], width[seg]);
-            printf("\n");
+      if (stretch == 1.0) {
+            // printf("this is pass 1\n");
+            _mw = MeasureWidth(xpos[segs + 1], 0.0);
+            return;
             }
-#endif
 
       //---------------------------------------------------
       //    populate ypos[] array
@@ -1462,12 +1456,13 @@ again:
                         double y = ypos[staff/VOICES + ((Rest*)e)->move()];
                         int len = e->tickLen();
                         //
-                        // center symbol if its a whole rest
+                        // center symbol if its a measure rest
                         //
-                        double yoffset = 0.0;   // hack for whole rest symbol
+                        double yoffset = 0.0;
                         if (!_irregular && len == _score->sigmap->ticksMeasure(e->tick())) {
-                              // center whole rest
-                              pos.setX((stretch - e->width()) * .5);
+                              // on pass 2 stretch is the real width of the measure
+                              // its assumed that s is the last segment in the measure
+                              pos.setX((stretch - s->x() - e->width()) * .5);
                               yoffset = -_spatium;
                               }
                         if (e->voice() == 1)          // TODO: check ??

@@ -199,6 +199,7 @@ class Measure : public Element {
       void removeMStaff(MStaff staff, int idx);
 
       void layoutBeams(ScoreLayout*);
+      void layoutChord(Chord* chord, char*);
       void layoutNoteHeads(int staff);
 
       void moveTicks(int diff);

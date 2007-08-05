@@ -1,3 +1,12 @@
+5.8.7  (ws)
+      - enhanced accidental layout
+      - another try to center whole measure rests
+4.8.7  (ws)
+      - give warning if no note/rest is selected when
+        trying to add tempo
+      - fix tempo text layout
+      - tempo menu: implement double click for list
+      - better note head positioning in chords
 3.8.7  (ws)
       - implemented measure insert/delete
 31.7.7 (ws)

@@ -141,7 +141,7 @@ void Clef::setSubtype(int st)
                   yoff = 1.0;
                   Symbol* number = new Symbol(score());
                   number->setSym(clefOneSym);
-                  addElement(number, .0, 3.5 * _spatium);
+                  addElement(number, .0, 4.5 * _spatium);
                   number = new Symbol(score());
                   number->setSym(clefFiveSym);
                   addElement(number, .8 * _spatium, 4.5 * _spatium);

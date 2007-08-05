@@ -749,7 +749,6 @@ void Score::cmdAddText(int subtype)
             case TEXT_FINGERING:
             case TEXT_INSTRUMENT_LONG:
             case TEXT_INSTRUMENT_SHORT:
-            case TEXT_TEMPO:
             case TEXT_LYRIC:
             case TEXT_TUPLET:
             default:

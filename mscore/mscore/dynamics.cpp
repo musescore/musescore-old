@@ -191,14 +191,3 @@ const QString Dynamic::subtypeName() const
       return dynList[subtype()].tag;
       }
 
-//---------------------------------------------------------
-//   layout
-//    override Text()->layout()
-//---------------------------------------------------------
-
-void Dynamic::layout(ScoreLayout* layout)
-      {
-      doc->documentLayout()->setPaintDevice(layout->paintDevice());
-      doc->setUseDesignMetrics(true);
-      }
-

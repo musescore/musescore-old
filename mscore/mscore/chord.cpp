@@ -417,13 +417,17 @@ void Chord::layout(ScoreLayout* layout)
             note->setPos(x, y);
             Accidental* accidental = note->accidental();
             if (accidental) {
+#if 0
                   double x = - point(score()->style()->prefixNoteDistance);
                   if (_grace)
                         x /= 2;
-                  x -= accidental->width(); // - accidental->bbox().x();
+                  x -= accidental->width();
                   if (note->mirror())
                         x -= headWidth;
                   accidental->setPos(x, 0);
+#else
+                  double x = accidental->x();
+#endif
                   if (x < lx)
                         lx = x;
                   }
@@ -848,7 +852,8 @@ void Chord::space(double& min, double& extra) const
                   hw = lhw;
             double prefixWidth  = 0.0;
             if (note->accidental()) {
-                  prefixWidth = note->accidental()->width();
+//                  prefixWidth = note->accidental()->width();
+                  prefixWidth = -note->accidental()->x() - 1.3;   // HACK
                   if (_grace)
                        prefixWidth += point(score()->style()->prefixNoteDistance)/2.0;
                   else

@@ -1,4 +1,9 @@
 Release 0.7 (svn)
+      - better note head positioning in chords
+      - measure insert/delete function
+
+      As usual this release also contains many bug fixes and code
+      cleanups.
 
 Release 0.6.1
       This is a bugfix release. Most notably the crash when importing

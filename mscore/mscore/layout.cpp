@@ -145,10 +145,9 @@ void ScoreLayout::doLayout()
 // printf("do layout\n");
 
       int n = _score->nstaves();
-      for (int i = 0; i < n; ++i) {
-            for (Element* m = _measures.first(); m; m = m->next()) {
-                  ((Measure*)m)->layoutNoteHeads(i);
-                  }
+      for (int staffIdx = 0; staffIdx < n; ++staffIdx) {
+            for (Element* m = _measures.first(); m; m = m->next())
+                  ((Measure*)m)->layoutNoteHeads(staffIdx);
             }
 
       Measure* im = (Measure*)(_measures.first());
