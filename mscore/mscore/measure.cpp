@@ -875,9 +875,17 @@ void Measure::add(Element* el)
 // printf("measure(%p) add slur segment %p\n", this, el);
                   _sel.append(el);
                   break;
+
+            case BAR_LINE:
+                  {
+                  Segment* seg = getSegment(Segment::SegEndBarLine, tick() + tickLen());
+                  seg->add(el);
+                  }
+                  break;
+
             default:
                   printf("Measure::add(%s) not impl.\n", el->name());
-                  abort();
+                  break;
             }
       }
 
