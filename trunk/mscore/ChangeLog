@@ -1,3 +1,5 @@
+7.8.7 (ws)
+      - fix regression setting irregular measures
 6.8.7 (ws)
       - implement: drag bar line to measure
       - new key accelerator for insert measure: "Insert"

@@ -480,15 +480,12 @@ void Score::processUndoOp(UndoOp* i, bool undo)
                   break;
             case UndoOp::ChangeMeasureLen:
                   {
-printf("%p:+val1 ist %d\n", i, i->val1);
                   Measure* m = i->measure;
                   int ot = m->tickLen();
-printf("  Change Measure Len %d -> %d\n", ot, i->val1);
                   m->setTickLen(i->val1);
                   if (m->next())
                         adjustTime(m->tick() + i->val1, m->next());
                   i->val1 = ot;
-printf("  val1 ist %d %d\n", ot, i->val1);
                   }
                   break;
             }
