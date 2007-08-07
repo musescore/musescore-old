@@ -1984,9 +1984,8 @@ void Measure::adjustToLen(int, int nl)
 
       for (Segment* s = first(); s;) {
             if (s->subtype() == Segment::SegChordRest) {
-                  crs = s;
                   Segment* ns = s->next();
-                  if (ns)
+                  if (ns && (ns->subtype() == Segment::SegChordRest))
                         score()->undoRemoveElement(s);
                   else
                         crs = s;
@@ -2010,6 +2009,8 @@ void Measure::adjustToLen(int, int nl)
                   score()->undoAddElement(rest);
                   }
             }
+      else
+            printf("Measure::adjustToLen: no chord/rest segment!\n");
       }
 
 //---------------------------------------------------------
