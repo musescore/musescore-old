@@ -34,6 +34,7 @@
 #include "ui_dynamic.h"
 #include "ui_tuplet.h"
 #include "ui_slurtie.h"
+#include "ui_slur.h"
 
 class ShowElementBase;
 class Element;
@@ -172,6 +173,9 @@ class MeasureView : public ShowElementBase {
       Q_OBJECT;
 
       Ui::MeasureBase mb;
+
+   private slots:
+      void elementClicked(QTreeWidgetItem* item);
 
    public:
       MeasureView();
@@ -408,6 +412,7 @@ class SlurView : public ShowElementBase {
       Q_OBJECT;
 
       Ui::SlurTieBase st;
+      Ui::SlurBase sb;
 
    private slots:
       void segmentClicked(QTreeWidgetItem* item);

@@ -691,9 +691,18 @@ Shortcut MuseScore::sc[] = {
       Shortcut(
          "insert-measure",
          QT_TR_NOOP("insert measure"),
+// Added by DK 05.08.2007
          Qt::Key_Insert,
          Qt::WindowShortcut,
          QT_TR_NOOP("Insert Measure")
+         ),
+// Insert Measures added by DK 06.08.2007
+      Shortcut(
+         "insert-measures",
+         QT_TR_NOOP("insert measures"),
+         Qt::CTRL+Qt::Key_Insert,
+         Qt::WindowShortcut,
+         QT_TR_NOOP("Insert Measures...")
          ),
       Shortcut(
          "duplet",

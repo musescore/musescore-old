@@ -23,6 +23,8 @@
 
 #include "globals.h"
 #include "ui_measuresdialog.h"
+//Added by DK 06.08.07
+#include "ui_insertmeasuresdialog.h"
 
 class Canvas;
 class Element;
@@ -51,6 +53,21 @@ enum {
       STATE_NORMAL,
       STATE_NOTE_ENTRY,
       STATE_EDIT
+      };
+
+//---------------------------------------------------------
+//   InsertMeasuresDialog
+//   Added by DK, 05.08.07
+//---------------------------------------------------------
+
+class InsertMeasuresDialog : public QDialog, public Ui::InsertMeasuresDialogBase {
+      Q_OBJECT
+
+   private slots:
+      virtual void accept();
+
+   public:
+      InsertMeasuresDialog(QWidget* parent = 0);
       };
 
 //---------------------------------------------------------
@@ -145,6 +162,9 @@ class MuseScore : public QMainWindow {
       InstrumentsDialog* instrList;
       TextStyleDialog* textStyleDialog;
       MeasuresDialog* measuresDialog;
+// Added by DK, 05.08.07
+      InsertMeasuresDialog* insertMeasuresDialog;
+
       PlayPanel* playPanel;
       InstrumentListEditor* iledit;
       PageListEditor* pageListEdit;
@@ -225,6 +245,8 @@ class MuseScore : public QMainWindow {
       void accidentalsMenu();
       void midiReceived();
       void cmdAppendMeasures();
+// Added by DK, 05.08.07
+      void cmdInsertMeasures();
       void resetUserStretch();
       void showLayoutBreakPalette();
       void resetUserOffsets();

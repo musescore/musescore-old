@@ -77,6 +77,42 @@ double DPI, DPMM;
 
 QMap<QString, Shortcut*> shortcuts;
 
+//---------------------------------------------------------
+// cmdInsertMeasure
+// Added by DK 05.08.07
+//---------------------------------------------------------
+
+void MuseScore::cmdInsertMeasures()
+      {
+	if (cs) {
+		insertMeasuresDialog = new InsertMeasuresDialog;
+		insertMeasuresDialog->show();
+            }
+      }
+
+//---------------------------------------------------------
+// InsertMeasuresDialog
+// Added by DK 05.08.07
+//---------------------------------------------------------
+
+InsertMeasuresDialog::InsertMeasuresDialog(QWidget* parent)
+   : QDialog(parent)
+      {
+	setupUi(this);
+      }
+
+//---------------------------------------------------------
+// Insert Measure -->   accept
+// Added by DK 05.08.07
+//---------------------------------------------------------
+
+void InsertMeasuresDialog::accept()
+      {
+	int n = insmeasures->value();
+	if (mscore->currentScore())
+            mscore->currentScore()->cmdInsertMeasures(n);
+	done(1);
+      }
 
 //---------------------------------------------------------
 //   getSharePath
@@ -204,6 +240,8 @@ MuseScore::MuseScore()
       playPanel             = 0;
       preferenceDialog      = 0;
       measuresDialog        = 0;
+// Added by DK 05.08.07
+      insertMeasuresDialog  = 0;
       iledit                = 0;
       pageListEdit          = 0;
       measureListEdit       = 0;
@@ -251,7 +289,7 @@ MuseScore::MuseScore()
          << "move-up" << "move-down" << "up-chord" << "down-chord"
          << "top-chord" << "bottom-chord" << "next-chord" << "prev-chord"
          << "next-measure" << "prev-measure" << "print" << "undo"
-         << "redo" << "append-measure" << "append-measures" << "insert-measure"
+         << "redo" << "append-measure" << "append-measures" << "insert-measure" << "insert-measures"
          << "duplet" << "triplet" << "quintuplet"
          << "note-c" << "note-d" << "note-e" << "note-f" << "note-g"
          << "note-a" << "note-b"
@@ -1536,12 +1574,14 @@ int main(int argc, char* argv[])
       int fontId = QFontDatabase::addApplicationFont(":/fonts/mscore_20.otf");
       if (fontId == -1) {
             fprintf(stderr, "Mscore: fatal error: cannot load internal font\n");
-            exit(-1);
+            if (!debugMode)
+                  exit(-1);
             }
       fontId = QFontDatabase::addApplicationFont(":/fonts/mscore1_20.otf");
       if (fontId == -1) {
             fprintf(stderr, "Mscore: fatal error: cannot load internal font\n");
-            exit(-1);
+            if (!debugMode)
+                  exit(-1);
             }
 
       seq = new Seq();
@@ -1745,6 +1785,8 @@ void MuseScore::cmd(QAction* a)
             }
       else if (cmd == "append-measures")
             cmdAppendMeasures();
+      else if (cmd == "insert-measures")
+            cmdInsertMeasures();
       else {
             if (cs)
                   cs->cmd(cmd);

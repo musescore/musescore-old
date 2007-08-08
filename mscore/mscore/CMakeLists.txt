@@ -55,6 +55,7 @@ include_directories(
       )
 
 QT4_WRAP_UI (ui_headers
+      insertmeasuresdialog.ui
       barline.ui
       chord.ui
       chordrest.ui
@@ -83,6 +84,7 @@ QT4_WRAP_UI (ui_headers
       tuplet.ui
       shortcutcapturedialog.ui
       slurtie.ui
+      slur.ui
       )
 
 QT4_WRAP_CPP (mocs

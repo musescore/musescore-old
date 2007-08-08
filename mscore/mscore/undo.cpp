@@ -481,7 +481,7 @@ void Score::processUndoOp(UndoOp* i, bool undo)
             case UndoOp::ChangeMeasureLen:
                   {
                   Measure* m = i->measure;
-                  int ot = m->tickLen();
+                  int ot     = m->tickLen();
                   m->setTickLen(i->val1);
                   if (m->next())
                         adjustTime(m->tick() + i->val1, m->next());

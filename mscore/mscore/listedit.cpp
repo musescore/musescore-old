@@ -409,9 +409,7 @@ void PageListEditor::itemChanged(QTreeWidgetItem* i, QTreeWidgetItem*)
             case BAR_LINE: ew = barLineView;  break;
             case DYNAMIC:  ew = dynamicView;  break;
             case TUPLET:   ew = tupletView;   break;
-            case SLUR:
-                  ew = slurView;
-                  break;
+            case SLUR:     ew = slurView;     break;
             case TIE:      ew = tieView;      break;
             case TEXT:
                   ew = textView;
@@ -500,6 +498,8 @@ MeasureView::MeasureView()
       mb.setupUi(seg);
       layout->addWidget(seg);
       layout->addStretch(10);
+      connect(mb.sel, SIGNAL(itemClicked(QTreeWidgetItem*,int)), SLOT(elementClicked(QTreeWidgetItem*)));
+      connect(mb.pel, SIGNAL(itemClicked(QTreeWidgetItem*,int)), SLOT(elementClicked(QTreeWidgetItem*)));
       seg->show();
       }
 
@@ -526,6 +526,34 @@ void MeasureView::setElement(Element* e)
       mb.startRepeat->setChecked(m->startRepeat());
       mb.endRepeat->setValue(m->endRepeat());
       mb.ending->setValue(m->ending());
+      mb.sel->clear();
+      foreach(const Element* e, *m->el()) {
+            QTreeWidgetItem* item = new QTreeWidgetItem;
+            item->setText(0, e->name());
+            item->setText(1, QString("%1").arg(e->subtype()));
+            void* p = (void*) e;
+            item->setData(0, Qt::UserRole, QVariant::fromValue<void*>(p));
+            mb.sel->addTopLevelItem(item);
+            }
+      mb.pel->clear();
+      foreach(const Element* e, *m->pel()) {
+            QTreeWidgetItem* item = new QTreeWidgetItem;
+            item->setText(0, e->name());
+            item->setText(1, QString("%1").arg(e->subtype()));
+            void* p = (void*) e;
+            item->setData(0, Qt::UserRole, QVariant::fromValue<void*>(p));
+            mb.pel->addTopLevelItem(item);
+            }
+      }
+
+//---------------------------------------------------------
+//   elementClicked
+//---------------------------------------------------------
+
+void MeasureView::elementClicked(QTreeWidgetItem* item)
+      {
+      Element* e = (Element*)item->data(0, Qt::UserRole).value<void*>();
+      emit elementChanged(e);
       }
 
 //---------------------------------------------------------
@@ -1338,24 +1366,17 @@ void ShowElementBase::offsetyChanged(double val)
       }
 
 //---------------------------------------------------------
-//   segmentClicked
-//---------------------------------------------------------
-
-void SlurView::segmentClicked(QTreeWidgetItem* item)
-      {
-      Element* e = (Element*)item->data(0, Qt::UserRole).value<void*>();
-      emit elementChanged(e);
-      }
-
-//---------------------------------------------------------
 //   SlurView
 //---------------------------------------------------------
 
 SlurView::SlurView()
    : ShowElementBase()
       {
+      QWidget* slurTie = new QWidget;
+      st.setupUi(slurTie);
       QWidget* slur = new QWidget;
-      st.setupUi(slur);
+      sb.setupUi(slur);
+      layout->addWidget(slurTie);
       layout->addWidget(slur);
       layout->addStretch(10);
       connect(st.segments, SIGNAL(itemClicked(QTreeWidgetItem*,int)), SLOT(segmentClicked(QTreeWidgetItem*)));
@@ -1375,12 +1396,28 @@ void SlurView::setElement(Element* e)
       foreach(const Element* e, *el) {
             QTreeWidgetItem* item = new QTreeWidgetItem;
             item->setText(0, QString("%1").arg((unsigned long)e, 8, 16));
-item->setText(1, "klops");
             item->setData(0, Qt::UserRole, QVariant::fromValue<void*>((void*)e));
             st.segments->addTopLevelItem(item);
             }
       st.upFlag->setChecked(slur->isUp());
       st.direction->setCurrentIndex(slur->slurDirection());
+
+      sb.tick1->setValue(slur->tick1());
+      sb.staff1->setValue(slur->track1() / VOICES);
+      sb.voice1->setValue(slur->track1() % VOICES);
+      sb.tick2->setValue(slur->tick2());
+      sb.staff2->setValue(slur->track2() / VOICES);
+      sb.voice2->setValue(slur->track2() % VOICES);
+      }
+
+//---------------------------------------------------------
+//   segmentClicked
+//---------------------------------------------------------
+
+void SlurView::segmentClicked(QTreeWidgetItem* item)
+      {
+      Element* e = (Element*)item->data(0, Qt::UserRole).value<void*>();
+      emit elementChanged(e);
       }
 
 //---------------------------------------------------------
