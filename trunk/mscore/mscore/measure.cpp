@@ -1940,7 +1940,9 @@ void Measure::propertyAction(const QString& s)
             IrregularMeasureDialog im(this);
             if (!im.exec())
                   return;
+
             SigList* sl = score()->sigmap;
+
             int t = tick();
             SigEvent oev = sl->timesig(t);
             SigEvent nev = im.sig();
@@ -1953,7 +1955,9 @@ void Measure::propertyAction(const QString& s)
             iSigEvent i = sl->find(t);
             if (i != sl->end())
                   ev1 = i->second;
+
             score()->undoChangeSig(t, ev1, nev);
+
             i = sl->find(t + newLen);
             if (i != sl->end())
                   ev1 = i->second;
@@ -1970,47 +1974,44 @@ void Measure::propertyAction(const QString& s)
 //    new len
 //---------------------------------------------------------
 
-void Measure::adjustToLen(int, int nl)
+void Measure::adjustToLen(int ol, int nl)
       {
       //
       // Plan B: remove all elements and replace with
       //         measure rest
       //
-
       score()->undoChangeMeasureLen(this, nl);
 
-      Segment* crs = 0;
-      int staves = score()->nstaves();
-
       for (Segment* s = first(); s;) {
-            if (s->subtype() == Segment::SegChordRest) {
-                  Segment* ns = s->next();
-                  if (ns && (ns->subtype() == Segment::SegChordRest))
-                        score()->undoRemoveElement(s);
-                  else
-                        crs = s;
-                  s = ns;
-                  }
-            else
-                  s = s->next();
+            Segment* ns = s->next();
+            if (s->subtype() == Segment::SegChordRest)
+                  score()->undoRemoveElement(s);
+            s = ns;
             }
-      if (crs) {
-            int tracks = staves * VOICES;
-            for (int i = 0; i < tracks; ++i) {
-                  Element* el = crs->element(i);
-                  if (el)
-                        score()->undoRemoveElement(el);
-                  }
-            for (int i = 0; i < staves; ++i) {
-                  Rest* rest = new Rest(score(), crs->tick(), nl);
-                  rest->setStaff(score()->staff(i));
-                  rest->setTickLen(nl);
-                  rest->setParent(crs);
-                  score()->undoAddElement(rest);
-                  }
+      foreach(Element* e, _sel) {
+            if (e->type() != SLUR_SEGMENT)
+                  score()->undoRemoveElement(e);
             }
-      else
-            printf("Measure::adjustToLen: no chord/rest segment!\n");
+
+      int diff  = nl - ol;
+      int mtick = tick() + nl;
+      _score->sigmap->insertTime(mtick, diff);
+      foreach(Staff* staff, _score->staves()) {
+            staff->clef()->insertTime(mtick, diff);
+            staff->keymap()->insertTime(mtick, diff);
+            }
+
+      Segment* s = new Segment(this, tick());
+      s->setSubtype(Segment::SegChordRest);
+      score()->undoAddElement(s);
+
+      int staves = score()->nstaves();
+      for (int i = 0; i < staves; ++i) {
+            Rest* rest = new Rest(score(), tick(), nl);
+            rest->setStaff(score()->staff(i));
+            rest->setParent(s);
+            score()->undoAddElement(rest);
+            }
       }
 
 //---------------------------------------------------------

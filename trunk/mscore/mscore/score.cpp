@@ -325,7 +325,6 @@ void Score::addMeasure(Measure* m)
       if (im) {
             int mtick = m->tick();
             int len   = m->tickLen();
-printf("add Measure %d %d\n", mtick, len);
             sigmap->insertTime(mtick, len);
             foreach(Staff* staff, _staves) {
                   staff->clef()->insertTime(mtick, len);
@@ -1114,12 +1113,11 @@ bool Score::playlistDirty()
 
 void Score::adjustTime(int tick, Measure* m)
       {
+      int delta = tick - m->tick();
+      if (delta == 0)
+            return;
       while (m) {
-            m->setTick(tick);
-            int delta = m->first()->tick() - tick;
-            for (Segment* s = m->first(); s; s = s->next()) {
-                  s->setTime(s->tick() - delta);
-                  }
+            m->moveTicks(delta);
             tick += m->tickLen();
             m = m->next();
             }

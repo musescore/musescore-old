@@ -1,28 +1,19 @@
 <ui version="4.0" >
- <author></author>
- <comment></comment>
- <exportmacro></exportmacro>
  <class>MeasureBase</class>
  <widget class="QWidget" name="MeasureBase" >
   <property name="geometry" >
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>547</width>
-    <height>293</height>
+    <width>467</width>
+    <height>355</height>
    </rect>
   </property>
   <property name="windowTitle" >
    <string>Form</string>
   </property>
-  <layout class="QVBoxLayout" >
-   <property name="margin" >
-    <number>9</number>
-   </property>
-   <property name="spacing" >
-    <number>6</number>
-   </property>
-   <item>
+  <layout class="QGridLayout" >
+   <item row="0" column="0" colspan="2" >
     <widget class="QGroupBox" name="MeasureBase_2" >
      <property name="title" >
       <string>Measure</string>
@@ -31,19 +22,40 @@
       <bool>true</bool>
      </property>
      <layout class="QGridLayout" >
-      <property name="margin" >
+      <property name="leftMargin" >
        <number>9</number>
       </property>
-      <property name="spacing" >
+      <property name="topMargin" >
+       <number>9</number>
+      </property>
+      <property name="rightMargin" >
+       <number>9</number>
+      </property>
+      <property name="bottomMargin" >
+       <number>9</number>
+      </property>
+      <property name="horizontalSpacing" >
+       <number>6</number>
+      </property>
+      <property name="verticalSpacing" >
        <number>6</number>
       </property>
       <item row="4" column="0" colspan="6" >
        <layout class="QHBoxLayout" >
-        <property name="margin" >
-         <number>0</number>
-        </property>
         <property name="spacing" >
          <number>6</number>
+        </property>
+        <property name="leftMargin" >
+         <number>0</number>
+        </property>
+        <property name="topMargin" >
+         <number>0</number>
+        </property>
+        <property name="rightMargin" >
+         <number>0</number>
+        </property>
+        <property name="bottomMargin" >
+         <number>0</number>
         </property>
         <item>
          <widget class="QCheckBox" name="lineBreak" >
@@ -202,9 +214,50 @@
      </layout>
     </widget>
    </item>
+   <item row="1" column="0" >
+    <widget class="QLabel" name="label_11" >
+     <property name="text" >
+      <string>Tick Elements:</string>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="1" >
+    <widget class="QLabel" name="label_12" >
+     <property name="text" >
+      <string>Page Elements:</string>
+     </property>
+    </widget>
+   </item>
+   <item row="2" column="0" >
+    <widget class="QTreeWidget" name="sel" >
+     <column>
+      <property name="text" >
+       <string>Element</string>
+      </property>
+     </column>
+     <column>
+      <property name="text" >
+       <string>Subtype</string>
+      </property>
+     </column>
+    </widget>
+   </item>
+   <item row="2" column="1" >
+    <widget class="QTreeWidget" name="pel" >
+     <column>
+      <property name="text" >
+       <string>Element</string>
+      </property>
+     </column>
+     <column>
+      <property name="text" >
+       <string>Subtype</string>
+      </property>
+     </column>
+    </widget>
+   </item>
   </layout>
  </widget>
- <pixmapfunction></pixmapfunction>
  <resources/>
  <connections/>
 </ui>

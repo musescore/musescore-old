@@ -179,6 +179,8 @@ class Score : public QObject {
       void cmdAppendMeasures(int);
       void appendMeasures(int);
       void insertMeasures(int);
+// Added by DK, 06.08.07
+      void cmdInsertMeasures(int);
       void padToggle(int n);
       void doUndo();
       void doRedo();

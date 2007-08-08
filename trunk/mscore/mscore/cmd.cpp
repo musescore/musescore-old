@@ -901,39 +901,62 @@ void Score::appendMeasures(int n)
       }
 
 //---------------------------------------------------------
+//   cmdInsertMeasures
+//    - keyboard callback
+//    - called from pulldown menu
+// Added from cmdAppendMeasures by DK 06.08.07
+//---------------------------------------------------------
+
+void Score::cmdInsertMeasures(int n)
+      {
+      startCmd();
+      insertMeasures(n);
+      endCmd(true);
+      }
+
+//---------------------------------------------------------
 //   insertMeasures
+//  Changed by DK 05.08.07, loop for inserting "n"
+//    Measures to be added
+//    (loopcounter ino -- insert numbers)
 //---------------------------------------------------------
 
 void Score::insertMeasures(int n)
       {
-      if (sel->state() != SEL_STAFF && sel->state() != SEL_SYSTEM) {
-            QMessageBox::warning(0, "MuseScore",
-               tr("No Measure selected:\n"
-                  "please select a measure and try again"));
-            return;
+	if (sel->state() != SEL_STAFF && sel->state() != SEL_SYSTEM) {
+		QMessageBox::warning(0, "MuseScore",
+			tr("No Measure selected:\n"
+			"please select a measure and try again"));
+		return;
             }
-      int tick   = sel->tickStart;
-      int ticks  = sigmap->ticksMeasure(tick-1);
-      Measure* m = new Measure(this);
-      m->setTick(tick);
-      m->setTickLen(ticks);
-      for (int idx = 0; idx < nstaves(); ++idx) {
-            Rest* rest    = new Rest(this, tick, ticks);
-            Staff* staffp = staff(idx);
-            rest->setStaff(staffp);
-            Segment* s = m->getSegment(rest);
-            s->add(rest);
-            BarLine* barLine = 0;
-            if (staffp->isTop()) {
-                  barLine = new BarLine(this);
-                  barLine->setStaff(staffp);
-                  m->setEndBarLine(barLine);
-                  }
+
+	int tick   = sel->tickStart;
+	int ticks  = sigmap->ticksMeasure(tick-1);
+// Loop added by DK 05.08.07
+	for (int ino = 0; ino < n; ++ino) {
+		Measure* m = new Measure(this);
+		m->setTick(tick);
+		m->setTickLen(ticks);
+		for (int idx = 0; idx < nstaves(); ++idx) {
+			Rest* rest    = new Rest(this, tick, ticks);
+			Staff* staffp = staff(idx);
+			rest->setStaff(staffp);
+			Segment* s = m->getSegment(rest);
+			s->add(rest);
+			BarLine* barLine = 0;
+			if (staffp->isTop()) {
+				barLine = new BarLine(this);
+				barLine->setStaff(staffp);
+				m->setEndBarLine(barLine);
+			      }
+//printf ("In Insert Measures : %p , idx %d, nstaves %d, ino %d, n %d\n",
+//		m, idx, nstaves(), ino, n );
+		      }
+            addMeasure(m);
+	      undoOp(UndoOp::InsertMeasure, m);
             }
-      undoOp(UndoOp::InsertMeasure, m);
-      addMeasure(m);
       select(0,0,0);
-      layout();
+	layout();
       }
 
 //---------------------------------------------------------
@@ -1153,7 +1176,7 @@ void Score::cmd(const QString& cmd)
             if (cmd == "append-measure")
                   appendMeasures(1);
             else if (cmd == "insert-measure")
-                  insertMeasures(1);
+		  insertMeasures(1);
             else if (cmd == "page-prev")
                   pagePrev();
             else if (cmd == "page-next")
