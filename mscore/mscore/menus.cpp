@@ -567,6 +567,7 @@ QMenu* MuseScore::genCreateMenu()
       text->addSeparator();
       text->addAction(getAction("system-text"));
       text->addAction(getAction("chord-text"));
+      text->addAction(getAction("rehearsalmark-text"));
       text->addSeparator();
       text->addAction(getAction("lyrics"));
       text->addAction(getAction("fingering"));
@@ -960,7 +961,6 @@ void Score::addTempo()
 void Score::addMetronome()
       {
       printf("addMetronome: not implemented\n");
-      endCmd(true);
       }
 
 //---------------------------------------------------------

@@ -79,7 +79,6 @@ const QRectF Sym::bbox() const
 double Sym::width() const
       {
       double m = _spatium / (spatiumBase20 * FMAG * 1200.0);
-//      return _bbox.width() * m;
       return _width * m;
       }
 

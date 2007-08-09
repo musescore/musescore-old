@@ -85,8 +85,15 @@ class Score : public QObject {
       QFileInfo info;
       bool _created;          ///< file is never saved, has generated name
 
+      // the following variables are reset on startCmd()
+      //   modified during cmd processing and used in endCmd() to
+      //   determine what to layout and what to repaint:
+
       QRectF refresh;
       bool updateAll;
+      Measure* layoutStart;   ///< start a relayout at this measure
+      bool layoutAll;         ///< do a complete relayout
+
       Qt::KeyboardModifiers keyState;
 
       QList<Viewer*> viewer;
@@ -116,6 +123,7 @@ class Score : public QObject {
                         ///< save a backup file will be created, subsequent
                         ///< saves will not overwrite the backup file.
 
+      bool cmdActive;
       int _fileDivision; ///< division of current loading *.msc file
 
       ChordRest* nextChordRest(ChordRest*);
@@ -143,7 +151,6 @@ class Score : public QObject {
       void move(const QString& cmd);
 
    public:
-      bool undoActive;
       int curTick;      // used for read()/write() optimization
 
       //---------------------------------------------------
@@ -237,8 +244,6 @@ class Score : public QObject {
       void addViewer(Viewer* v);
       void clearViewer();
 
-      void startUndo();
-      void endUndo();
       void undoOp(QList<int> si, QList<int> di);
       void undoOp(UndoOp::UndoType type, Measure* m);
       void undoOp(UndoOp::UndoType type, Measure*, int, int);
@@ -270,9 +275,9 @@ class Score : public QObject {
 
       void searchSelectedElements();
 
-      void layout();
       bool needLayout() const;
       void doLayout();
+      void reLayout(Measure*);
 
       void cmdAddText(int style);
       void upDown(bool up, bool octave);
@@ -318,17 +323,20 @@ class Score : public QObject {
       void putNote(const QPointF& pos, bool addToChord);
       void setPadState();
 
+      void startCmd();
       void start();
       void end();
-      void end1();
-      void startCmd();
-      void endCmd(bool undo);
+      void endCmd();
+
       void cmdAdd(Element*);
       void cmdRemove(Element*);
       void update(const QRectF&);
 
       void setUpdateAll()              { updateAll = true; }
-      void addRefresh(const QRectF& r) { refresh |= r; }
+      void setLayoutAll(bool val)      { layoutAll = val;  }
+      void setLayoutStart(Measure* m)  { layoutStart = m;  }
+      void addRefresh(const QRectF& r) { refresh |= r;     }
+
       void chordTab(bool back);
       void lyricsTab(bool back);
       void lyricsReturn();

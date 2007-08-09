@@ -130,6 +130,7 @@ void Text::setSubtype(int val)
             case TEXT_SYSTEM:           setStyle(TEXT_STYLE_SYSTEM); break;
             case TEXT_STAFF:            setStyle(TEXT_STYLE_STAFF); break;
             case TEXT_CHORD:            setStyle(TEXT_STYLE_CHORD); break;
+            case TEXT_REHEARSAL_MARK:   setStyle(TEXT_STYLE_REHEARSAL_MARK); break;
             default:
                   printf("unknown text subtype %d\n", val);
                   break;
@@ -161,6 +162,7 @@ const QString Text::subtypeName() const
             case TEXT_SYSTEM:           return "System";
             case TEXT_STAFF:            return "Staff";
             case TEXT_CHORD:            return "Chordname";
+            case TEXT_REHEARSAL_MARK:   return "RehearsalMark";
             default:
                   printf("unknown text subtype %d\n", subtype());
                   break;
@@ -211,6 +213,8 @@ void Text::setSubtype(const QString& s)
             st = TEXT_STAFF;
       else if (s == "Chordname")
             st = TEXT_CHORD;
+      else if (s == "RehearsalMark")
+            st = TEXT_REHEARSAL_MARK;
       else
             printf("setSubtype: unknown type <%s>\n", qPrintable(s));
       setSubtype(st);
@@ -755,7 +759,8 @@ void Text::addSymbol(const SymCode& s)
             }
       else
             cursor->insertText(s.code);
-      score()->endCmd(false);
+      score()->setLayoutAll(true);
+      score()->end();
       }
 
 //---------------------------------------------------------
@@ -778,7 +783,7 @@ void Text::setBlockFormat(const QTextBlockFormat& bf)
       if (!cursor)
             return;
       cursor->setBlockFormat(bf);
-      score()->layout();
+      score()->setLayoutAll(true);
       }
 
 //---------------------------------------------------------

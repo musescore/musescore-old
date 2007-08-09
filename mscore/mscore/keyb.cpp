@@ -57,7 +57,7 @@ void Canvas::keyPressEvent(QKeyEvent* ev)
             if (state == DRAG_EDIT)
                   e->endEditDrag();
             setState(NORMAL);
-            _score->endCmd(true);
+            _score->endCmd();
             ev->accept();
             return;
             }
@@ -90,7 +90,7 @@ void Canvas::keyPressEvent(QKeyEvent* ev)
             }
       if (e->edit(curGrip, ev)) {
             updateGrips();
-            _score->endCmd(false);
+            _score->end();
             ev->accept();
             return;
             }
@@ -124,7 +124,7 @@ void Canvas::keyPressEvent(QKeyEvent* ev)
             }
       e->editDrag(curGrip, grip[curGrip].center(), delta);
       updateGrips();
-      _score->endCmd(false);
+      _score->end();
       ev->accept();
       }
 

@@ -748,6 +748,6 @@ void Score::readMuseData(QString name)
             if (!measure->irregular())
                   ++measureNo;
             }
-      layout();
+      layoutAll = true;
       }
 

@@ -56,7 +56,8 @@ enum TEXT_STYLE {
       TEXT_STYLE_TUPLET,
       TEXT_STYLE_SYSTEM,
       TEXT_STYLE_STAFF,
-      TEXT_STYLE_CHORD
+      TEXT_STYLE_CHORD,
+      TEXT_STYLE_REHEARSAL_MARK
       };
 
 //---------------------------------------------------------

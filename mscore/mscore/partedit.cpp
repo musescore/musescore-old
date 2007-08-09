@@ -222,8 +222,7 @@ void PartEdit::soloChanged(bool val)
 void PartEdit::showPartChanged(bool val)
       {
       part->setShow(val);
-      part->score()->layout();
-      part->score()->setUpdateAll();
+      part->score()->setLayoutAll(true);
       part->score()->end();
       }
 

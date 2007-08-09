@@ -66,7 +66,9 @@
 void Score::start()
       {
       refresh.setRect(0.0,0.0,0.0,0.0);
-      updateAll = false;
+      updateAll   = false;
+      layoutStart = 0;          ///< start a relayout at this measure
+      layoutAll   = false;      ///< do a complete relayout
       }
 
 //---------------------------------------------------------
@@ -80,10 +82,82 @@ void Score::start()
 
 void Score::startCmd()
       {
-//      printf("startCmd()\n");
       start();
-      startUndo();
+      layoutAll = true;       // debug
+
+      // Start collecting low-level undo operations for a
+      // user-visible undo action.
+
+      if (cmdActive) {
+            if (debugMode)
+                  fprintf(stderr, "Score::startCmd(): cmd already active\n");
+            return;
+            }
+      undoList.push_back(new Undo(*cis, sel));
+      cmdActive = true;
       }
+
+//---------------------------------------------------------
+//   endCmd
+//---------------------------------------------------------
+
+/**
+ End a GUI command by (if \a undo) ending a user-visble undo
+ and (always) updating the redraw area.
+*/
+
+void Score::endCmd()
+      {
+      if (!cmdActive) {
+            if (debugMode)
+                  fprintf(stderr, "endCmd: no cmd active\n");
+            end();
+            return;
+            }
+
+      if (undoList.back()->empty()) {
+            // nothing to undo
+            delete undoList.back();
+            undoList.pop_back();
+            }
+      else {
+            setDirty(true);
+            for (iUndo i = redoList.begin(); i != redoList.end(); ++i)
+                  delete *i;
+            redoList.clear();
+            getAction("undo")->setEnabled(true);
+            getAction("redo")->setEnabled(false);
+            }
+      cmdActive = false;
+      end();
+      }
+
+//---------------------------------------------------------
+//   end
+//---------------------------------------------------------
+
+/**
+ Update the redraw area.
+*/
+void Score::end()
+      {
+      if (layoutAll) {
+            updateAll = true;
+            _layout->layout();
+            }
+      else if (layoutStart)
+            reLayout(layoutStart);
+
+      if (updateAll) {
+            foreach(Viewer* v, viewer)
+                  v->updateAll(this);
+            updateAll = false;
+            }
+      else
+            update(refresh);
+      setPadState();
+      }
+
 
 //---------------------------------------------------------
 //   cmdAdd
@@ -93,7 +167,7 @@ void Score::cmdAdd(Element* e)
       {
       e->setSelected(false);
       undoAddElement(e);
-      layout();
+      layoutAll = true;
       }
 
 //---------------------------------------------------------
@@ -113,7 +187,7 @@ void Score::cmdAdd(Element* e, const QPointF& pos, const QPointF& dragOffset)
       if (measure == 0) {
             printf("cmdAdd: cannot put object here\n");
             delete e;
-            endCmd(true);
+            endCmd();
             return;
             }
       e->setStaff(staff);
@@ -194,7 +268,7 @@ void Score::cmdAdd(Element* e, const QPointF& pos, const QPointF& dragOffset)
             }
       cmdAdd(e);
       select(e, 0, 0);
-      endCmd(true);
+      endCmd();
       }
 
 //---------------------------------------------------------
@@ -318,7 +392,6 @@ void Score::cmdRemove(Element* e)
                   undoRemoveElement(e);
                   break;
             }
-      layout();
       }
 
 //---------------------------------------------------------
@@ -330,53 +403,6 @@ void Score::update(const QRectF& r)
       foreach(Viewer* v, viewer)
             v->dataChanged(r);
       updateAll = false;
-      }
-
-//---------------------------------------------------------
-//   end
-//---------------------------------------------------------
-
-/**
- Update the redraw area.
-*/
-void Score::end()
-      {
-      layout();   // DEBUG
-      if (updateAll) {
-            foreach(Viewer* v, viewer)
-                  v->updateAll(this);
-            updateAll = false;
-            }
-      else
-            update(refresh);
-      }
-
-void Score::end1()
-      {
-      if (updateAll) {
-            foreach(Viewer* v, viewer)
-                  v->updateAll(this);
-            updateAll = false;
-            }
-      else
-            update(refresh);
-      }
-
-//---------------------------------------------------------
-//   endCmd
-//---------------------------------------------------------
-
-/**
- End a GUI command by (if \a undo) ending a user-visble undo
- and (always) updating the redraw area.
-*/
-
-void Score::endCmd(bool undo)
-      {
-      if (undo)
-            endUndo();
-      end();
-      setPadState();
       }
 
 //---------------------------------------------------------
@@ -703,7 +729,7 @@ void Score::setRest(int tick, Staff* st, int voice, int len)
       if (noteLen - len > 0) {
             setRest(tick + len, noteLen - len, st, voice, measure);
             }
-      layout();
+      layoutAll = true;
       }
 
 //---------------------------------------------------------
@@ -714,7 +740,7 @@ void Score::cmdAddText(int subtype)
       {
       if (editObject) {
             endEdit();
-            endCmd(true);
+            endCmd();
             }
       Page* page = _layout->pages()->front();
       QList<System*>* sl = page->systems();
@@ -757,6 +783,7 @@ void Score::cmdAddText(int subtype)
 
             case TEXT_CHORD:
             case TEXT_SYSTEM:
+            case TEXT_REHEARSAL_MARK:
                   {
                   Element* el = sel->element();
                   if (!el || (el->type() != NOTE && el->type() != REST)) {
@@ -779,12 +806,12 @@ void Score::cmdAddText(int subtype)
 
       if (s) {
             undoAddElement(s);
-            layout();
+            layoutAll = true;
             select(s, 0, 0);
             canvas()->startEdit(s);
             }
       else
-            endCmd(true);
+            endCmd();
       }
 
 //---------------------------------------------------------
@@ -840,7 +867,7 @@ void Score::upDown(bool up, bool octave)
             }
       padState.pitch = newPitch;
       sel->updateState();     // accidentals may have changed
-      layout();
+      layoutAll = true;
       }
 
 //---------------------------------------------------------
@@ -859,7 +886,7 @@ void Score::cmdAppendMeasures(int n)
       {
       startCmd();
       appendMeasures(n);
-      endCmd(true);
+      endCmd();
       }
 
 //---------------------------------------------------------
@@ -897,7 +924,7 @@ void Score::appendMeasures(int n)
             undoOp(UndoOp::InsertMeasure, measure);
             _layout->push_back(measure);
             }
-      layout();
+      layoutAll = true;
       }
 
 //---------------------------------------------------------
@@ -911,7 +938,7 @@ void Score::cmdInsertMeasures(int n)
       {
       startCmd();
       insertMeasures(n);
-      endCmd(true);
+      endCmd();
       }
 
 //---------------------------------------------------------
@@ -956,7 +983,7 @@ void Score::insertMeasures(int n)
 	      undoOp(UndoOp::InsertMeasure, m);
             }
       select(0,0,0);
-	layout();
+	layoutAll = true;
       }
 
 //---------------------------------------------------------
@@ -1012,7 +1039,7 @@ void Score::addAccidental(Note* oNote, int accidental)
       i.val3  = oNote->accidentalSubtype();
       undoList.back()->push_back(i);
       oNote->changeAccidental(accidental);
-      layout();
+      layoutAll = true;
       }
 
 //---------------------------------------------------------
@@ -1066,8 +1093,8 @@ void Score::resetUserOffsets()
       QList<Element*> el = *sel->elements();
       for (iElement i = el.begin(); i != el.end(); ++i)
             (*i)->setUserOff(QPointF(0.0, 0.0));
-      layout();
-      endCmd(true);
+      layoutAll = true;
+      endCmd();
       }
 
 //---------------------------------------------------------
@@ -1079,7 +1106,7 @@ void Score::resetUserStretch()
       for (Measure* m = _layout->first(); m; m = m->next())
             m->setUserStretch(1.0);
       setDirty();
-      layout();
+      layoutAll = true;
       }
 
 //---------------------------------------------------------
@@ -1098,8 +1125,7 @@ void Score::moveUp(Note* note)
             }
 
       note->setMove(note->move() - 1);
-//      note->chord()->segment()->measure()->layoutNoteHeads(staff(note->staff()));
-      layout();
+      layoutAll = true;
       }
 
 //---------------------------------------------------------
@@ -1121,8 +1147,7 @@ void Score::moveDown(Note* note)
             return;
             }
       note->setMove(note->move() + 1);
-//      note->chord()->segment()->measure()->layoutNoteHeads(staffIdx);
-      layout();
+      layoutAll = true;
       }
 
 //---------------------------------------------------------
@@ -1145,7 +1170,7 @@ void Score::cmdAddStretch(double val)
             stretch += val;
             im->setUserStretch(stretch);
             }
-      layout();
+      layoutAll = true;
       }
 
 //---------------------------------------------------------
@@ -1156,20 +1181,28 @@ void Score::cmd(const QString& cmd)
       {
       if (debugMode)
             printf("cmd <%s>\n", cmd.toLatin1().data());
+
       if (editObject) {                          // in edit mode?
-            endUndo();
+            endCmd();
             canvas()->setState(Canvas::NORMAL);  //calls endEdit()
             }
       if (cmd == "print")
             printFile();
-      else if (cmd == "undo")
+      else if (cmd == "undo") {
+            start();
             doUndo();
-      else if (cmd == "redo")
+            end();
+            }
+      else if (cmd == "redo") {
+            start();
             doRedo();
+            end();
+            }
       else if (cmd == "note-input") {
+            start();
             setNoteEntry(true, false);
             padState.rest = false;
-            endCmd(false);
+            end();
             }
       else {
             startCmd();
@@ -1464,8 +1497,6 @@ void Score::cmd(const QString& cmd)
                   }
             else if (cmd == "lyrics")
                   return addLyrics();
-//            else if (cmd == "technik")
-//                  addTechnik();
             else if (cmd == "tempo")
                   addTempo();
             else if (cmd == "metronome")
@@ -1484,7 +1515,11 @@ void Score::cmd(const QString& cmd)
                   return cmdAddText(TEXT_SYSTEM);
             else if (cmd == "chord-text")
                   return cmdAddText(TEXT_CHORD);
-            endCmd(true);
+            else if (cmd == "rehearsalmark-text")
+                  return cmdAddText(TEXT_REHEARSAL_MARK);
+            else
+                  printf("unknown cmd <%s>\n", qPrintable(cmd));
+            endCmd();
             }
       }
 

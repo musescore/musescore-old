@@ -80,6 +80,16 @@ void Score::doLayout()
       }
 
 //---------------------------------------------------------
+//   reLayout
+//---------------------------------------------------------
+
+void Score::reLayout(Measure* m)
+      {
+      _layout->reLayout(m);
+      moveCursor();
+      }
+
+//---------------------------------------------------------
 //   pageFormat
 //---------------------------------------------------------
 
@@ -95,16 +105,6 @@ PageFormat* Score::pageFormat() const
 void Score::setSpatium(double v)
       {
       _layout->setSpatium(v);
-      }
-
-//---------------------------------------------------------
-//   layout
-//---------------------------------------------------------
-
-void Score::layout()
-      {
-      updateAll = true;
-      _layout->layout();
       }
 
 //---------------------------------------------------------
@@ -142,9 +142,9 @@ Score::Score()
       editTempo         = 0;
       updateAll         = false;
       _pageOffset       = 0;
-      undoActive        = false;
       _fileDivision     = division;
       _printing         = false;
+      cmdActive         = false;
       clear();
       }
 
@@ -258,7 +258,7 @@ void Score::read(QString name)
             if (!measure->irregular())
                   ++measureNo;
             }
-      layout();
+      layoutAll = true;
       }
 
 //---------------------------------------------------------
@@ -268,7 +268,7 @@ void Score::read(QString name)
 void Score::write(Xml& xml)
       {
       if (editObject) {                          // in edit mode?
-            endUndo();
+            endCmd();
             canvas()->setState(Canvas::NORMAL);  //calls endEdit()
             }
       _style->saveStyle(xml);
@@ -792,7 +792,7 @@ void Score::startEdit(Element* element)
             select(editObject, 0, 0);
             }
       updateAll = true;
-      endCmd(false);
+      end();
       }
 
 //---------------------------------------------------------
@@ -829,7 +829,7 @@ void Score::endEdit()
                   measure->remove(lyrics);
                   }
             }
-      layout();
+      layoutAll = true;
       mscore->setState(STATE_NORMAL);
       editObject = 0;
       }
@@ -869,7 +869,7 @@ void Score::endDrag()
             sel->add(_dragObject);
             origDragObject = 0;
             }
-      layout();
+      layoutAll = true;
       _dragObject = 0;
       }
 
@@ -986,7 +986,8 @@ void Score::midiNoteReceived(int pitch, bool chord)
                   moveCursor();
                   }
             }
-      endCmd(true);
+      layoutAll = false;
+      endCmd();
       }
 
 //---------------------------------------------------------
@@ -1078,9 +1079,11 @@ bool Score::redoEmpty() const
 
 void Score::setShowInvisible(bool v)
       {
+      start();
       _showInvisible = v;
-      updateAll = true;
-      endCmd(false);
+      updateAll      = true;
+      layoutAll      = false;
+      end();
       }
 
 //---------------------------------------------------------
@@ -1203,8 +1206,6 @@ Note* prevNote(Note* n)
             --i;
             return i->second;
             }
-
-//      seg            = seg->prev1();
       int staff      = n->staffIdx();
       int startTrack = staff * VOICES + n->voice() - 1;
       int endTrack   = 0;

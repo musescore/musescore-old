@@ -298,6 +298,7 @@ MuseScore::MuseScore()
          << "stretch+" << "stretch-"
          << "instruments" << "clefs" << "keys" << "symbols" << "times" << "dynamics"
          << "title-text" << "subtitle-text" << "composer-text" << "poet-text" << "chord-text"
+         << "rehearsalmark-text"
          << "lyrics" << "fingering" << "system-text" << "tempo"
          << "metronome" << "cut" << "copy" << "paste"
          << "beam-start" << "beam-mid" << "no-beam" << "beam32"
@@ -1154,8 +1155,8 @@ void MuseScore::setCurrentScore(int idx)
       if (playPanel)
             playPanel->setScore(cs);
 
-      cs->endCmd(false);
-      cs->layout();
+      cs->setLayoutAll(true);
+      cs->end();
 
       connect(cs, SIGNAL(selectionChanged(int)), SLOT(selectionChanged(int)));
       }
@@ -1246,9 +1247,9 @@ void MuseScore::pageSettingsChanged()
       {
 //TODO      cs->pages()->update();
       setMag(cs->mag());
-      cs->layout();
       canvas->updateNavigator(true);
-      cs->endCmd(false);
+      cs->setLayoutAll(true);
+      cs->end();
       }
 
 //---------------------------------------------------------

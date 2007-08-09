@@ -352,7 +352,7 @@ void Staff::changeKeySig(int tick, int st)
             keysig->setParent(s);
             _score->undoAddElement(keysig);
             }
-      _score->layout();
+      _score->setLayoutAll(true);
       }
 
 //---------------------------------------------------------
@@ -441,5 +441,5 @@ void Staff::changeClef(int tick, int st)
             clef->setParent(s);
             _score->undoAddElement(clef);
             }
-      _score->layout();
+      _score->setLayoutAll(true);
       }
