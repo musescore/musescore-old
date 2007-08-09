@@ -758,3 +758,12 @@ void ScoreLayout::insert(Measure* im, Measure* m)
       _measures.insert(im, m);
       }
 
+//---------------------------------------------------------
+//   reLayout
+//---------------------------------------------------------
+
+void ScoreLayout::reLayout(Measure*)
+      {
+      printf("reLayout\n");
+      }
+

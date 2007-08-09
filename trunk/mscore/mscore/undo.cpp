@@ -101,63 +101,6 @@ Undo::Undo(const InputState& is, const Selection* s)
       }
 
 //---------------------------------------------------------
-//    startUndo
-//---------------------------------------------------------
-
-/**
- Start collecting low-level undo operations for a user-visible undo action.
-
- Called at the start of a GUI command.
-*/
-
-void Score::startUndo()
-      {
-      if (undoActive) {
-            fprintf(stderr, "startUndo: already active\n");
-            if (debugMode)
-                  abort();
-            return;
-            }
-      undoList.push_back(new Undo(*cis, sel));
-      undoActive = true;
-      }
-
-//---------------------------------------------------------
-//   endUndo
-//---------------------------------------------------------
-
-/**
- Stop collecting low-level undo operations for a user-visible undo action.
-
- Called at the end of a GUI command.
-*/
-
-void Score::endUndo()
-      {
-      if (!undoActive) {
-            fprintf(stderr, "endUndo: not active\n");
-            if (debugMode)
-                  abort();
-            return;
-            }
-//      printf("end undo: %d actions\n", undoList.back()->size());
-      if (undoList.back()->empty()) {
-            // nothing to undo
-            delete undoList.back();
-            undoList.pop_back();
-            }
-      else {
-            setDirty(true);
-            for (iUndo i = redoList.begin(); i != redoList.end(); ++i)
-                  delete *i;
-            redoList.clear();
-            getAction("undo")->setEnabled(true);
-            getAction("redo")->setEnabled(false);
-            }
-      undoActive = false;
-      }
-
-//---------------------------------------------------------
 //   doUndo
 //---------------------------------------------------------
 
@@ -522,8 +465,6 @@ void Score::endUndoRedo(Undo* undo)
 
       *sel = undo->selection;
       sel->update();
-      layout();
-      endCmd(false);
       }
 
 //---------------------------------------------------------
@@ -536,8 +477,8 @@ void Score::endUndoRedo(Undo* undo)
 
 void Score::checkUndoOp()
       {
-      if (!undoActive) {
-            fprintf(stderr, "undoOp: undo not started\n");
+      if (!cmdActive) {
+            fprintf(stderr, "undoOp: cmd not started\n");
             if (debugMode)
                   abort();
             }
@@ -822,7 +763,6 @@ void Score::addElement(Element* element)
                                     break;
                                     }
                               }
-//                        measure->layoutNoteHeads(staffIdx);
                         if (endFound)
                               break;
                         }
@@ -835,13 +775,7 @@ void Score::addElement(Element* element)
             // but only after fixing redo for elements contained in segments
 
             // fixup all accidentals
-/*            for (Measure* m = _layout->first(); m; m = m->next()) {
-                  for (int staffIdx = 0; staffIdx < nstaves(); ++staffIdx) {
-                              m->layoutNoteHeads(staffIdx);
-                        }
-                  }
- */
-            layout();
+            layoutAll = true;
             }
       }
 
@@ -885,7 +819,6 @@ void Score::removeElement(Element* element)
                                     break;
                                     }
                               }
-//                        measure->layoutNoteHeads(staffIdx);
                         if (endFound)
                               break;
                         }
@@ -898,22 +831,7 @@ void Score::removeElement(Element* element)
             sigmap->del(element->tick());
             }
       else if (element->type() == KEYSIG) {
-            // remove entry from keymap
-//            element->staff()->keymap()->erase(element->tick());
-            // fixup all accidentals
-/*            for (Measure* m = _layout->first(); m; m = m->next()) {
-                  for (int staffIdx = 0; staffIdx < nstaves(); ++staffIdx) {
-                              m->layoutNoteHeads(staffIdx);
-                        }
-                  }
- */
-            layout();
+            layoutAll = true;
             }
-/*      else if (element->type() == SLUR_SEGMENT) {
-            SlurSegment* ss = (SlurSegment*)element;
-            SlurTie* slur = ss->slurTie();
-            slur->remove(element);
-            }
-      */
       }
 

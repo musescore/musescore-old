@@ -1,3 +1,6 @@
+9.8.7 (ws)
+      - added "rehearsal mark" text type & style
+      - cleanups for cmd handling
 8.8.7
       - extend list view for Measure() and Slur()
       - added new command to insert n measures (Dieter Krause)

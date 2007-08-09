@@ -92,6 +92,7 @@ class ScoreLayout {
       void setScore(Score*);
       void layout()                           { _needLayout = true; }
       void doLayout();
+      void reLayout(Measure*);
       Score* score() const                    { return _score; }
       double spatium() const                  { return _spatium; }
       void setSpatium(double v)               { _spatium = v; }

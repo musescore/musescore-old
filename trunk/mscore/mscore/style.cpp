@@ -104,13 +104,17 @@ static const TextStyle defaultTextStyles[] = {
          ALIGN_HCENTER | ALIGN_VCENTER, ANCHOR_NOTE, 0, 0, OFFSET_SPATIUM),
 
       TextStyle(QString("System"), ff,  10, false, false, false,
-         ALIGN_LEFT, ANCHOR_STAFF, 0, -4.0, OFFSET_SPATIUM, true),
+         ALIGN_LEFT, ANCHOR_SYSTEM, 0, -4.0, OFFSET_SPATIUM, true),
 
       TextStyle(QString("Staff"), ff,  10, false, false, false,
          ALIGN_LEFT, ANCHOR_STAFF, 0, -4.0, OFFSET_SPATIUM, true),
 
       TextStyle(QString("Chordname"), ff,  12, false, false, false,
          ALIGN_HCENTER, ANCHOR_STAFF, 0, -5.0, OFFSET_SPATIUM, true),
+
+      TextStyle(QString("Rehearsal Mark"), ff,  14, true, false, false,
+         ALIGN_HCENTER, ANCHOR_SYSTEM, 0, -7.0, OFFSET_SPATIUM, true,
+         0.3, 1.0, 1.0, 20, Qt::black),
       };
 
 //---------------------------------------------------------

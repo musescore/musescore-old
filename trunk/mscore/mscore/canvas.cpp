@@ -234,7 +234,7 @@ void Canvas::objectPopup(const QPoint& pos, Element* obj)
             }
       else
             obj->propertyAction(cmd);
-      _score->endCmd(true);
+      _score->endCmd();
       }
 
 //---------------------------------------------------------
@@ -404,7 +404,7 @@ void Canvas::mouseDoubleClickEvent(QMouseEvent* ev)
       if (element) {
             _score->startCmd();
             if (!startEdit(element))
-                  _score->endCmd(true);
+                  _score->endCmd();
             }
       else
             mousePressEvent(ev);
@@ -423,7 +423,7 @@ void Canvas::mouseMoveEvent(QMouseEvent* ev)
                   QMimeData* mimeData = new QMimeData;
                   mimeData->setData(mimeType, _score->sel->mimeData());
                   drag->setMimeData(mimeData);
-                  _score->endCmd(true);
+                  _score->endCmd();
                   drag->start(Qt::CopyAction);
                   return;
                   }
@@ -432,9 +432,8 @@ void Canvas::mouseMoveEvent(QMouseEvent* ev)
       if (dragCanvasState)
            return;
       if (state == LASSO || state == DRAG_EDIT || state == NOTE_ENTRY)
-            _score->end1();
-      else
-            _score->endCmd(false);      // update display but dont end undo
+            _score->setLayoutAll(false);  // DEBUG
+      _score->end();
       }
 
 //---------------------------------------------------------
@@ -483,7 +482,7 @@ void Canvas::mouseMoveEvent1(QMouseEvent* ev)
                         QPointF rpos(startMove - de->abbox().topLeft());
                         mimeData->setData(mimeSymbolFormat, de->mimeData(rpos));
                         drag->setMimeData(mimeData);
-                        _score->endCmd(true);
+                        _score->endCmd();
                         drag->start(Qt::CopyAction);
                         break;
                         }
@@ -597,7 +596,7 @@ void Canvas::mouseReleaseEvent(QMouseEvent* ev)
             dragCanvasState = false;
             setState(state);        // reset cursor pixmap
             mousePressed = false;
-            _score->endUndo();
+            _score->endCmd();
             return;
             }
       if (!mousePressed) {
@@ -623,7 +622,7 @@ void Canvas::mouseReleaseEvent(QMouseEvent* ev)
       mouseReleaseEvent1(ev);
       // here we can be in state EDIT again
       if (state != EDIT)
-            _score->endCmd(true);
+            _score->endCmd();
       }
 
 //---------------------------------------------------------
@@ -640,7 +639,7 @@ void Canvas::mouseReleaseEvent1(QMouseEvent* /*ev*/)
                   setDropTarget(0); // this also resets dropRectangle and dropAnchor
                   _score->addRefresh(_score->editObject->abbox());
                   setState(EDIT);
-                  _score->endCmd(false);
+                  _score->end();
                   break;
 
             case LASSO:
@@ -655,7 +654,7 @@ void Canvas::mouseReleaseEvent1(QMouseEvent* /*ev*/)
                   break;
 
             case DRAG_STAFF:
-                  _score->layout();
+                  _score->setLayoutAll(true);
                   setState(NORMAL);
                   break;
 
@@ -1361,7 +1360,7 @@ void Canvas::dropEvent(QDropEvent* event)
                   s->setAnchor(ANCHOR_PAGE);
                   score()->cmdAddBSymbol(s, pos, dragOffset);
                   event->acceptProposedAction();
-                  score()->endCmd(true);
+                  score()->endCmd();
                   setDropTarget(0); // this also resets dropRectangle and dropAnchor
                   setState(NORMAL);
                   return;
@@ -1414,7 +1413,7 @@ void Canvas::dropEvent(QDropEvent* event)
                   s->read(e);
                   score()->cmdAddBSymbol(s, pos, dragOffset);
                   event->acceptProposedAction();
-                  score()->endCmd(true);
+                  score()->endCmd();
                   }
                   break;
             case IMAGE:
@@ -1445,7 +1444,7 @@ void Canvas::dropEvent(QDropEvent* event)
                         score()->cmdAddBSymbol(image, pos, dragOffset);
                         event->acceptProposedAction();
                         }
-                  score()->endCmd(true);
+                  score()->endCmd();
                   }
                   break;
             case PEDAL:
@@ -1484,7 +1483,7 @@ void Canvas::dropEvent(QDropEvent* event)
                               _score->addRefresh(dropElement->abbox());
                               }
                         event->acceptProposedAction();
-                        _score->endCmd(true);
+                        _score->endCmd();
                         }
                   else
                         printf("cannot drop here\n");

@@ -479,8 +479,9 @@ void MuseScore::editInstrList()
       //
       // process modified partitur list
       //
-      QTreeWidget* pl = instrList->partiturList;
       cs->startCmd();
+
+      QTreeWidget* pl = instrList->partiturList;
       Part* part   = 0;
       int staffIdx = 0;
       int rstaff   = 0;
@@ -608,8 +609,8 @@ void MuseScore::editInstrList()
             cs->sortStaves(sl, dl);
             cs->undoOp(sl, dl);
             }
-      cs->layout();
-      cs->endCmd(true);
+      cs->setLayoutAll(true);
+      cs->endCmd();
       }
 
 //---------------------------------------------------------

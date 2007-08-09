@@ -881,7 +881,7 @@ void Score::print(QPrinter* printer)
       DPMM      = DPI / INCH;                     // dots/mm
       setSpatium(oldSpatium);
       mainLayout()->setPaintDevice(oldPaintDevice);
-      layout();
+      layoutAll = true;
       }
 
 //---------------------------------------------------------
@@ -1008,7 +1008,7 @@ bool Score::savePng(const QString& name)
       canvas()->paintLasso(p);
       bool rv = printer.save(name, "png");
       mainLayout()->setPaintDevice(oldPaintDevice);
-      layout();
+      layoutAll = true;
       return rv;
       }
 

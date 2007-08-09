@@ -332,7 +332,7 @@ void PageSettings::ok()
 
 void PageSettings::done(int val)
       {
-      cs->layout();     // HACK
+      cs->setLayoutAll(true);     // HACK
       QDialog::done(val);
       }
 

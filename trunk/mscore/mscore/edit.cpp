@@ -257,7 +257,7 @@ printf("Score::addKeySig===\n");
 #endif
             sig = 0;
             }
-      layout();
+      layoutAll = true;
       return sig;
       }
 
@@ -305,7 +305,7 @@ void Score::removeClef(Clef* clef)
             }
 
       removeElement(clef);
-      layout();
+      layoutAll = true;
       }
 
 //---------------------------------------------------------
@@ -369,7 +369,7 @@ Element* Score::addClef(Clef* clef)
             }
       clef->setParent(seg);
       addElement(clef);
-      layout();
+      layoutAll = true;
       return clef;
       }
 
@@ -446,7 +446,7 @@ void Score::changeTimeSig(int tick, int timeSigSubtype)
                         removeElement(sig);
                         undoAddElement(nsig);
                         }
-                  layout();
+                  layoutAll = true;
                   }
             else {
                   // add symbol
@@ -565,7 +565,7 @@ void Score::addTimeSig(int tick, int timeSigSubtype)
             nsig->setParent(seg);
             undoAddElement(nsig);
             }
-      layout();
+      layoutAll = true;
       }
 
 //---------------------------------------------------------
@@ -672,7 +672,7 @@ void Canvas::modifyElement(Element* el)
                   delete el;
                   return;
             }
-      cs->layout();
+      cs->setLayoutAll(true);
       }
 
 //---------------------------------------------------------
@@ -753,7 +753,7 @@ void Score::cmdAddTie()
       tie->setStaff(staff);
       note->setTieFor(tie);
       _layout->connectTies();
-      layout();
+      layoutAll = true;
       select(tie, 0, 0);
       }
 
@@ -794,7 +794,7 @@ void Score::cmdSetBeamMode(int mode)
       if (cr == 0)
             return;
       cr->setBeamMode(BeamMode(mode));
-      layout();
+      layoutAll = true;
       }
 
 //---------------------------------------------------------
@@ -819,7 +819,7 @@ void Score::cmdFlipStemDirection()
             selectNoteSlurMessage();
             return;
             }
-      layout();
+      layoutAll = true;
       }
 
 //---------------------------------------------------------
@@ -960,7 +960,7 @@ void Score::deleteItem(Element* el)
                   if (el->subtype() == TEXT_INSTRUMENT_LONG) {
                         el->staff()->part()->setLongName(QString());
                         _layout->setInstrumentNames();
-                        layout();
+                        layoutAll = true;
                         break;
                         }
                   if (el->subtype() == TEXT_INSTRUMENT_SHORT) {
@@ -982,7 +982,6 @@ void Score::deleteItem(Element* el)
             case KEYSIG:
             case IMAGE:
                   cmdRemove(el);
-                  updateAll = true;
                   break;
 
             case OTTAVA_SEGMENT:
@@ -1084,7 +1083,7 @@ void Score::cmdDeleteItem(Element* el)
       deleteItem(el);
       sel->elements()->clear();
       select(0, 0, 0);
-      layout();
+      layoutAll = true;
       }
 
 //---------------------------------------------------------
@@ -1119,7 +1118,7 @@ void Score::cmdDeleteSelection()
             }
       sel->elements()->clear();
       select(0, 0, 0);
-      layout();
+      layoutAll = true;
       }
 
 //---------------------------------------------------------
@@ -1156,7 +1155,7 @@ void Score::chordTab(bool back)
             }
 
       canvas()->setState(Canvas::NORMAL);
-      endCmd(true);
+      endCmd();
 
       startCmd();
 
@@ -1188,7 +1187,7 @@ void Score::chordTab(bool back)
       canvas()->startEdit(cn);
       ((Text*)editObject)->moveCursorToEnd();
 
-      layout();
+      setLayoutAll(true);
       }
 
 //---------------------------------------------------------
@@ -1230,7 +1229,7 @@ void Score::lyricsTab(bool back)
                   oldLyrics->setSyllabic(Lyrics::END);
                   break;
             }
-      endCmd(true);
+      endCmd();
 
       startCmd();
       LyricsList* ll = segment->lyricsList(staff);
@@ -1264,7 +1263,7 @@ void Score::lyricsTab(bool back)
       canvas()->startEdit(lyrics);
       ((Lyrics*)editObject)->moveCursorToEnd();
 
-      layout();
+      layoutAll = true;
       }
 
 //---------------------------------------------------------
@@ -1279,7 +1278,7 @@ void Score::lyricsMinus()
       int track        = staff * VOICES;
 
       canvas()->setState(Canvas::NORMAL);
-      endCmd(true);
+      endCmd();
 
       // search next chord
       while ((segment = segment->next1())) {
@@ -1323,7 +1322,7 @@ void Score::lyricsMinus()
       canvas()->startEdit(lyrics);
       ((Lyrics*)editObject)->moveCursorToEnd();
 
-      layout();
+      setLayoutAll(true);
       }
 
 //---------------------------------------------------------
@@ -1336,7 +1335,7 @@ void Score::lyricsReturn()
       Segment* segment = (Segment*)(lyrics->parent());
 
       canvas()->setState(Canvas::NORMAL);
-      endCmd(true);
+      endCmd();
 
       startCmd();
 
@@ -1351,7 +1350,7 @@ void Score::lyricsReturn()
       select(lyrics, 0, 0);
       canvas()->startEdit(lyrics);
 
-      layout();
+      setLayoutAll(true);
       }
 
 //---------------------------------------------------------
@@ -1363,7 +1362,7 @@ void Score::addLyrics()
       {
       Note* e = getSelectedNote();
       if (e == 0) {
-            endCmd(true);
+            endCmd();
             return;
             }
 
@@ -1385,29 +1384,9 @@ void Score::addLyrics()
       undoAddElement(lyrics);
       select(lyrics, 0, 0);
       canvas()->startEdit(lyrics);
-      layout();
-      }
-#if 0
-//---------------------------------------------------------
-//   addExpression
-//---------------------------------------------------------
-
-void Score::addExpression()
-      {
-      printf("Not impl.: addExpression()\n");
-      endCmd(true);
+      setLayoutAll(true);
       }
 
-//---------------------------------------------------------
-//   addTechnik
-//---------------------------------------------------------
-
-void Score::addTechnik()
-      {
-      printf("Not impl.: addTechnik()\n");
-      endCmd(true);
-      }
-#endif
 //---------------------------------------------------------
 //   cmdTuplet
 //---------------------------------------------------------
@@ -1508,7 +1487,7 @@ void Score::cmdTuplet(int n)
             rest->setParent(seg);
             undoAddElement(rest);
             }
-      layout();
+      layoutAll = true;
       }
 
 //---------------------------------------------------------
@@ -1520,7 +1499,7 @@ void Score::changeVoice(int voice)
       padState.voice = voice;
       if (cis->voice != voice) {
             cis->voice = voice;
-            layout();
+            layoutAll = true;
             // moveCursor();
             }
       }
@@ -1559,7 +1538,7 @@ void Score::pageBreak()
             }
       Measure* m = tick2measure(sel->tickStart);
       m->setPageBreak(!m->pageBreak());
-      layout();
+      layoutAll = true;
       }
 
 //---------------------------------------------------------
@@ -1574,6 +1553,6 @@ void Score::systemBreak()
             }
       Measure* m = tick2measure(sel->tickStart);
       m->setLineBreak(!m->lineBreak());
-      layout();
+      layoutAll = true;
       }
 

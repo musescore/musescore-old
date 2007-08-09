@@ -187,7 +187,7 @@ void Score::importMusicXml(const QString& name)
       MusicXml musicxml(lx.doc());
       musicxml.import(this);
       _layout->connectTies();
-      layout();
+      layoutAll = true;
       _created = true;
       }
 

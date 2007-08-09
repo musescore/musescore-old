@@ -1145,6 +1145,15 @@ Shortcut MuseScore::sc[] = {
          QT_TR_NOOP("Add Chord Text")
          ),
 
+      Shortcut(
+         "rehearsalmark-text",
+         QT_TR_NOOP("Add Rehearsal Mark"),
+         Qt::CTRL + Qt::Key_M,
+         Qt::WindowShortcut,
+         QT_TR_NOOP("Rehearsal Mark"),
+         QT_TR_NOOP("Add Rehearsal Mark")
+         ),
+
       Shortcut(0, 0, 0),
       };
 

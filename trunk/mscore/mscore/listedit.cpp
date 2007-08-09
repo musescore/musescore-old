@@ -204,9 +204,8 @@ PageListEditor::PageListEditor(Score* s)
 
 void PageListEditor::layoutScore()
       {
-      cs->layout();
-      cs->setUpdateAll();
-      cs->end1();
+      cs->setLayoutAll(true);
+      cs->end();
       }
 
 //---------------------------------------------------------
@@ -732,7 +731,7 @@ void ShowChordWidget::upChanged(bool val)
 void ShowChordWidget::beamModeChanged(int n)
       {
       ((Chord*)element())->setBeamMode(BeamMode(n));
-      element()->score()->layout();
+      element()->score()->setLayoutAll(true);
       }
 
 //---------------------------------------------------------
