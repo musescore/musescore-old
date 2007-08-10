@@ -178,7 +178,7 @@ endif (CROSS_MINGW)
 #======================================
 
 if (NOT MINGW)
-      add_executable ( smf2xml smf2xml.cpp midifile.cpp xml.cpp sig.cpp)
+      add_executable ( smf2xml smf2xml.cpp midifile.cpp xml.cpp sig.cpp drumset.cpp)
 
       target_link_libraries( smf2xml
             ${QT_LIBRARIES}
@@ -195,7 +195,7 @@ endif (NOT MINGW)
 #======================================
 
 if (NOT MINGW)
-      add_executable ( xml2smf xml2smf.cpp midifile.cpp xml.cpp sig.cpp)
+      add_executable ( xml2smf xml2smf.cpp midifile.cpp xml.cpp sig.cpp drumset.cpp)
 
       target_link_libraries( xml2smf
             ${QT_LIBRARIES}

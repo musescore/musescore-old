@@ -1207,7 +1207,8 @@ void Score::convertTrack(MidiTrack* midiTrack, int staffIdx)
       Staff* cstaff = staff(staffIdx);
 	const EventList el = midiTrack->events();
 
-      Drumset* drumset = part(staffIdx)->drumset();
+      Drumset* drumset = cstaff->part()->drumset();
+      bool useDrumset  = cstaff->part()->useDrumset();
 
       for (int voice = 0; voice < voices; ++voice) {
             QList<MNote*> notes;
@@ -1258,7 +1259,7 @@ void Score::convertTrack(MidiTrack* midiTrack, int staffIdx)
                   	      	chord->add(note);
                                     note->setTick(tick);
 
-                                    if (drumset) {
+                                    if (useDrumset) {
                                           if (!drumset->isValid(mn->pitch())) {
 printf("unmapped drum note 0x%02x %d\n", mn->pitch(), mn->pitch());
                                                 }

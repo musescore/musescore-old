@@ -229,6 +229,10 @@ void Instrument::write(Xml& xml) const
             xml.tag("maxPitch", maxPitch);
       if (pitchOffset)
             xml.tag("transposition", pitchOffset);
+      if (useDrumset) {
+            xml.tag("useDrumset", useDrumset);
+            drumset->save(xml);
+            }
       xml.etag();
       }
 
@@ -264,6 +268,13 @@ void Instrument::read(QDomElement e)
                   maxPitch = i;
             else if (tag == "transposition")
                   pitchOffset = i;
+            else if (tag == "useDrumset") {
+                  useDrumset = i;
+                  if (useDrumset)
+                        drumset = new Drumset(*smDrumset);
+                  }
+            else if (tag == "Drum")
+                  drumset->load(e);
             else
                   domError(e);
             }
