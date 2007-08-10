@@ -70,7 +70,6 @@ class Staff {
       KeyList* _keymap;
       QList <BracketItem> _brackets;
       bool _show;             ///< derived from part->show()
-//      int _index;             ///< index in score->_staves
 
    public:
       Staff(Score*, Part*, int);
@@ -88,7 +87,6 @@ class Staff {
       int chorus() const;
       int rstaff() const             { return _rstaff; }
       int idx() const;
-//      void setIndex(int val)         { _index = val;   }
       void setRstaff(int n)          { _rstaff = n;    }
       void read(QDomElement);
       void write(Xml& xml) const;

@@ -85,6 +85,8 @@ QT4_WRAP_UI (ui_headers
       shortcutcapturedialog.ui
       slurtie.ui
       slur.ui
+      editdrumset.ui
+      editstaff.ui
       )
 
 QT4_WRAP_CPP (mocs
@@ -112,6 +114,8 @@ QT4_WRAP_CPP (mocs
       symboldialog.h
       shortcutcapturedialog.h
       simplebutton.h greendotbutton.h recordbutton.h
+      editdrumset.h
+      editstaff.h
       )
 
 QT4_ADD_RESOURCES (qrc_files mscore.qrc)
@@ -141,6 +145,7 @@ add_executable ( mscore
       undo.cpp utils.cpp xml.cpp timesig.cpp lyrics.cpp bsp.cpp
       viewer.cpp volta.cpp simplebutton.cpp image.cpp keyfinder.cpp
       pitchspelling.cpp musedata.cpp keysig.cpp arpeggio.cpp breath.cpp
+      editdrumset.cpp editstaff.cpp drumset.cpp
       )
 
 if (CROSS_MINGW)

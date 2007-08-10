@@ -25,6 +25,7 @@
 #include "layout.h"
 #include "style.h"
 #include "note.h"
+#include "drumset.h"
 
 //---------------------------------------------------------
 //   Part
@@ -188,6 +189,18 @@ Instrument::Instrument()
       maxPitch    = 127;
       pitchOffset = 0;
       drumset     = 0;
+      useDrumset  = false;
+      }
+
+//---------------------------------------------------------
+//   setUseDrumset
+//---------------------------------------------------------
+
+void Part::setUseDrumset(bool val)
+      {
+      _instrument.useDrumset = val;
+      if (val && _instrument.drumset == 0)
+            _instrument.drumset = new Drumset(*smDrumset);
       }
 
 //---------------------------------------------------------

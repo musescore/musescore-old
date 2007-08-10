@@ -38,6 +38,26 @@
  Create Symbol palette with \a r rows and \a c columns
 */
 
+Palette::Palette(QWidget* parent)
+   : QWidget(parent)
+      {
+      extraMag      = 1.0;
+      staff         = false;
+      rows          = 1;
+      columns       = 1;
+      currentIdx    = 0;
+      selectedIdx   = -1;
+      symbols       = new Element*[rows*columns];
+      names         = new QString[rows*columns];
+
+      for (int i = 0; i < rows*columns; ++i)
+            symbols[i] = 0;
+      setGrid(50, 60);
+      _drawGrid      = false;
+      _showSelection = false;
+      setMouseTracking(true);
+      }
+
 Palette::Palette(int r, int c, qreal mag)
       {
       extraMag      = mag;
@@ -59,8 +79,8 @@ Palette::Palette(int r, int c, qreal mag)
 
 Palette::~Palette()
       {
-      delete symbols;
-      delete names;
+      delete[] symbols;
+      delete[] names;
       }
 
 //---------------------------------------------------------

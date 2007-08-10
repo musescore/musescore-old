@@ -46,6 +46,7 @@ struct Instrument {
       int  maxPitch;
       int  pitchOffset;
       Drumset* drumset;
+      bool useDrumset;
 
       Instrument();
       void read(QDomElement);
@@ -89,8 +90,12 @@ class Part {
       void setMidiProgram(int val)             { _instrument.midiProgram = val;  }
       void setMinPitch(int val)                { _instrument.minPitch = val;     }
       void setMaxPitch(int val)                { _instrument.maxPitch = val;     }
+
       void setDrumset(Drumset* ds)             { _instrument.drumset = ds;       }
-      Drumset* drumset()                       { return _instrument.drumset;     }
+      Drumset* drumset() const                 { return _instrument.drumset;     }
+      bool useDrumset() const                  { return _instrument.useDrumset;  }
+      void setUseDrumset(bool val);
+
       int midiChannel() const                  { return _instrument.midiChannel; }
       int midiProgram() const                  { return _instrument.midiProgram; }
       int minPitch() const                     { return _instrument.minPitch;    }

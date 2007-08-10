@@ -46,6 +46,9 @@
 #include "hairpin.h"
 #include "image.h"
 #include "globals.h"
+#include "part.h"
+#include "editdrumset.h"
+#include "editstaff.h"
 
 //---------------------------------------------------------
 //   Canvas
@@ -238,6 +241,44 @@ void Canvas::objectPopup(const QPoint& pos, Element* obj)
       }
 
 //---------------------------------------------------------
+//   staffPopup
+//---------------------------------------------------------
+
+void Canvas::staffPopup(const QPoint& pos, Staff* staff)
+      {
+      QMenu* popup = new QMenu(this);
+      popup->setSeparatorsCollapsible(false);
+
+      QAction* a = popup->addSeparator();
+      a->setText(tr("Staff"));
+
+      a = popup->addAction(tr("Drumset..."));
+      a->setData("edit-drumset");
+      a->setEnabled(staff->part()->drumset() != 0);
+
+      popup->addSeparator();
+      a = popup->addAction(tr("Properties"));
+      a->setData("props");
+
+      a = popup->exec(pos);
+      if (a == 0)
+            return;
+      QString cmd(a->data().toString());
+
+      _score->startCmd();
+      if (cmd == "edit-drumset") {
+            EditDrumset drumsetEdit(staff->part()->drumset(), this);
+            drumsetEdit.exec();
+            }
+      else if (cmd == "props") {
+            EditStaff staffEdit(staff, this);
+            staffEdit.exec();
+            }
+      _score->setLayoutAll(true);
+      _score->endCmd();
+      }
+
+//---------------------------------------------------------
 //   resizeEvent
 //---------------------------------------------------------
 
@@ -313,8 +354,29 @@ void Canvas::mousePressEvent(QMouseEvent* ev)
                   if (_score->dragStaff >= 0)
                         _score->select(element, keyState, _score->dragStaff);
                   _score->setDragObject(0);
-                  seq->stopNotes(); // stop now because we dont get a mouseRelease event
-                  objectPopup(ev->globalPos(), element);
+                  seq->stopNotes();       // stop now because we dont get a mouseRelease event
+                  switch(_score->sel->state()) {
+                        case SEL_NONE:
+                              break;
+                        case SEL_SINGLE:
+                        case SEL_MULT:
+                              objectPopup(ev->globalPos(), element);
+                              break;
+                        case SEL_SYSTEM:
+                              printf("system popup\n");
+                              break;
+                        case SEL_STAFF:
+                              {
+                              Staff* staff = 0;
+                              int pitch;
+                              Segment* seg;
+                              QPointF offset;
+                              int tick;
+                              _score->pos2measure(startMove, &tick, &staff, &pitch, &seg, &offset);
+                              staffPopup(ev->globalPos(), staff);
+                              }
+                              break;
+                        }
                   }
             else {
                   canvasPopup(ev->globalPos());
