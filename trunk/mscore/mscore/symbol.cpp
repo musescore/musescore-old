@@ -68,8 +68,6 @@ void Symbol::write(Xml& xml) const
       {
       xml.stag("Symbol");
       xml.tag("name", symbols[_sym].name());
-//      xml.tag("x", pos().x());
-//      xml.tag("y", pos().y());
       Element::writeProperties(xml);
       xml.etag();
       }
@@ -99,13 +97,7 @@ void Symbol::read(QDomElement e)
                         s = 0;
                         }
                   }
-            else if (Element::readProperties(e))
-                  ;
-//            else if (tag == "x")
-//                  pos.setX(val.toDouble());
-//            else if (tag == "y")
-//                  pos.setY(val.toDouble());
-            else
+            else if (!Element::readProperties(e))
                   domError(e);
             }
       if (s == -1) {

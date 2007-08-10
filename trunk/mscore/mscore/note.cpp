@@ -55,6 +55,28 @@ int Note::smallNoteHeads[HEAD_GROUPS][4] = {
       };
 
 //---------------------------------------------------------
+//   NoteHead
+//---------------------------------------------------------
+
+NoteHead::NoteHead(Score* s)
+   : Symbol(s)
+      {
+      }
+
+//---------------------------------------------------------
+//   write
+//---------------------------------------------------------
+
+void NoteHead::write(Xml& xml) const
+      {
+      xml.stag("NoteHead");
+      xml.tag("name", symbols[_sym].name());
+      Element::writeProperties(xml);
+      xml.etag();
+      Element::write(xml);
+      }
+
+//---------------------------------------------------------
 //   Note
 //---------------------------------------------------------
 
@@ -702,7 +724,7 @@ QRectF ShadowNote::bbox() const
 bool Note::acceptDrop(Viewer* viewer, const QPointF&, int type, const QDomElement&) const
       {
       if (type == ATTRIBUTE || type == TEXT || type == ACCIDENTAL
-         || type == BREATH || type == ARPEGGIO) {
+         || type == BREATH || type == ARPEGGIO || type == NOTEHEAD) {
             viewer->setDropTarget(this);
             return true;
             }
@@ -790,6 +812,21 @@ Element* Note::drop(const QPointF&, const QPointF&, int t, const QDomElement& no
                   a->setHeight(_spatium * 5);   //DEBUG
                   score()->undoAddElement(a);
                   }
+                  break;
+            case NOTEHEAD:
+                  {
+                  Symbol* s = new Symbol(score());
+                  s->read(node);
+                  switch(s->sym()) {
+                        case quartheadSym:    _headGroup = 0; break;
+                        case crossedheadSym:  _headGroup = 1; break;
+                        case diamondheadSym:  _headGroup = 2; break;
+                        case triangleheadSym: _headGroup = 3; break;
+                        default: printf("unknown note head\n"); break;
+                        }
+                  delete s;
+                  }
+                  break;
 
             default:
                   break;

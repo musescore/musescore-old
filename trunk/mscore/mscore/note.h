@@ -28,6 +28,7 @@
 
 #include "globals.h"
 #include "element.h"
+#include "symbol.h"
 #include "accidental.h"
 
 class Tie;
@@ -43,6 +44,20 @@ class Viewer;
 enum {
       HEAD_NORMAL, HEAD_CROSS, HEAD_DIAMOND, HEAD_TRIANGLE,
       HEAD_GROUPS
+      };
+
+//---------------------------------------------------------
+//   NoteHead
+//---------------------------------------------------------
+
+class NoteHead : public Symbol {
+
+   public:
+      NoteHead(Score*);
+      NoteHead &operator=(const NoteHead&);
+      virtual NoteHead* clone() const  { return new NoteHead(*this); }
+      virtual ElementType type() const { return NOTEHEAD; }
+      virtual void write(Xml& xml) const;
       };
 
 //---------------------------------------------------------

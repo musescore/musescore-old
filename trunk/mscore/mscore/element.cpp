@@ -57,6 +57,7 @@ const char* elementNames[] = {
       "LedgerLine",
       "Measure", "StaffLines",
       "Cursor", "Selection", "Lasso", "ShadowNote", "RubberBand",
+      "NoteHead",
       "Hairpin", "Ottava", "Pedal", "Trill",
       "Segment", "System", "Compound", "Chord", "Slur",
       };
@@ -870,6 +871,8 @@ int Element::readType(QDomElement& e, QPointF* dragOffset)
                   type = BREATH;
             else if (e.tagName() == "Arpeggio")
                   type = ARPEGGIO;
+            else if (e.tagName() == "NoteHead")
+                  type = NOTEHEAD;
             else {
                   domError(e);
                   type = 0;
