@@ -64,6 +64,7 @@ enum ElementType {
       LEDGER_LINE,
       MEASURE, STAFF_LINES,
       CURSOR, SELECTION, LASSO, SHADOW_NOTE, RUBBERBAND,
+      NOTEHEAD,
       // not drawable elements:
       HAIRPIN, OTTAVA, PEDAL, TRILL,
       SEGMENT, SYSTEM, COMPOUND, CHORD, SLUR

@@ -346,6 +346,32 @@ void MuseScore::showPalette(bool visible)
             paletteBox->addPalette(tr("Fingering"), sp);
 
             //-----------------------------------
+            //    Noteheads
+            //-----------------------------------
+
+            sp = new Palette(1, 4, 1.5);
+            sp->setGrid(42, 40);
+            sp->setDrawGrid(true);
+
+            NoteHead* nh = new NoteHead(gscore);
+            nh->setSym(quartheadSym);
+            sp->addObject(0, nh, QString("normal"));
+
+            nh = new NoteHead(gscore);
+            nh->setSym(crossedheadSym);
+            sp->addObject(1, nh, QString("crossed"));
+
+            nh = new NoteHead(gscore);
+            nh->setSym(diamondheadSym);
+            sp->addObject(2, nh, QString("diamond"));
+
+            nh = new NoteHead(gscore);
+            nh->setSym(triangleheadSym);
+            sp->addObject(3, nh, QString("triangle"));
+
+            paletteBox->addPalette(tr("NoteHeads"), sp);
+
+            //-----------------------------------
             //    Symbols
             //-----------------------------------
 
