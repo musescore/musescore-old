@@ -88,6 +88,7 @@ class Canvas : public QFrame, public Viewer {
 
       void canvasPopup(const QPoint&);
       void objectPopup(const QPoint&, Element*);
+      void staffPopup(const QPoint&, Staff*);
 
       void saveChord(Xml&);
 

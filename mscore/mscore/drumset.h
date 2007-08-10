@@ -21,11 +21,16 @@
 #ifndef __DRUMSET_H__
 #define __DRUMSET_H__
 
+#include "globals.h"
+
+class Xml;
+
 //---------------------------------------------------------
 //   DrumInstrument
 //---------------------------------------------------------
 
 struct DrumInstrument {
+      QString name;
       int notehead;           ///< notehead symbol set
       int line;               ///< place notehead onto this line
       int voice;
@@ -41,11 +46,15 @@ struct DrumInstrument {
 struct Drumset {
       DrumInstrument drum[128];
 
-      bool isValid(int pitch) const      { return drum[pitch].notehead != -1; }
-      int noteHead(int pitch) const      { return drum[pitch].notehead;       }
-      int line(int pitch) const          { return drum[pitch].line;           }
-      int voice(int pitch) const         { return drum[pitch].voice;          }
+      bool isValid(int pitch) const            { return drum[pitch].notehead != -1; }
+      int noteHead(int pitch) const            { return drum[pitch].notehead;       }
+      int line(int pitch) const                { return drum[pitch].line;           }
+      int voice(int pitch) const               { return drum[pitch].voice;          }
       Direction stemDirection(int pitch) const { return drum[pitch].stemDirection;  }
+      const QString& name(int pitch) const     { return drum[pitch].name;           }
+      void save(Xml&);
+      void load(QDomElement);
+      void clear();
       };
 
 extern Drumset* smDrumset;

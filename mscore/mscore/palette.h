@@ -97,6 +97,7 @@ class Palette : public QWidget {
       void droppedElement(Element*);
 
    public:
+      Palette(QWidget* parent = 0);
       Palette(int rows, int columns, qreal mag = 1.0);
       ~Palette();
       void addObject(int idx, Element*, const QString& name);

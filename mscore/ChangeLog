@@ -1,3 +1,5 @@
+10.8.7 (ws)
+      - implemented drumset editor
 9.8.7 (ws)
       - added "rehearsal mark" text type & style
       - cleanups for cmd handling
