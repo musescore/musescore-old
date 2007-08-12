@@ -1,3 +1,5 @@
+12.8.7 (ws)
+      - regression: add missing relayout after undo/redo
 10.8.7 (ws)
       - add notehead palette
       - implemented drumset editor
