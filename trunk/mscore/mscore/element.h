@@ -168,6 +168,7 @@ class Element {
 
       virtual QRectF bbox() const             { return _bbox;           }
       virtual double height() const           { return bbox().height(); }
+      virtual void setHeight(qreal v)         { return _bbox.setHeight(v); }
       virtual double width() const            { return bbox().width();  }
       QRectF abbox() const                    { return bbox().translated(canvasPos()); }
       virtual void setbbox(const QRectF& r)   { _bbox = r;              }

@@ -478,6 +478,9 @@ void Measure::layout(ScoreLayout* layout, double width)
             staffY[staffIdx] = system()->staff(staffIdx)->bbox().y();
             staves[staffIdx].distance = 0.0;
             }
+
+      // height of boundingRect will be set
+      // in System::layout2()
       setbbox(QRectF(0, 0, width, system()->height()));
 
       layoutX(layout, width);

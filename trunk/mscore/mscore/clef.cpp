@@ -308,11 +308,11 @@ void ClefList::removeTime(int tick, int len)
       {
       ClefList tmp;
       for (ciClefEvent i = begin(); i != end(); ++i) {
-            if (i->first >= tick) {
+            if ((i->first >= tick) && (tick != 0)) {
                   if (i->first >= tick + len)
                         tmp[i->first - len] = i->second;
                   else
-                        printf("remove key event\n");
+                        printf("remove clef event\n");
                   }
             else
                   tmp[i->first] = i->second;
@@ -329,7 +329,7 @@ void ClefList::insertTime(int tick, int len)
       {
       ClefList tmp;
       for (ciClefEvent i = begin(); i != end(); ++i) {
-            if (i->first >= tick)
+            if ((i->first >= tick) && (tick != 0))
                   tmp[i->first + len] = i->second;
             else
                   tmp[i->first] = i->second;

@@ -122,6 +122,7 @@ bool Score::needLayout() const
 
 Score::Score()
       {
+      info.setFile("");
       _layout           = new ScoreLayout();
       _style            = new Style(defaultStyle);
       _layout->setScore(this);
