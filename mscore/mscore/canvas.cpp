@@ -241,39 +241,69 @@ void Canvas::objectPopup(const QPoint& pos, Element* obj)
       }
 
 //---------------------------------------------------------
-//   staffPopup
+//   measurePopup
 //---------------------------------------------------------
 
-void Canvas::staffPopup(const QPoint& pos, Staff* staff)
+void Canvas::measurePopup(const QPoint& pos, Measure* obj)
       {
+      Staff* staff = 0;
+      int pitch;
+      Segment* seg;
+      QPointF offset;
+      int tick;
+      _score->pos2measure(pos, &tick, &staff, &pitch, &seg, &offset);
+
       QMenu* popup = new QMenu(this);
       popup->setSeparatorsCollapsible(false);
 
       QAction* a = popup->addSeparator();
       a->setText(tr("Staff"));
-
-      a = popup->addAction(tr("Drumset..."));
+      a = popup->addAction(tr("Edit Drumset..."));
       a->setData("edit-drumset");
       a->setEnabled(staff->part()->drumset() != 0);
-
-      popup->addSeparator();
       a = popup->addAction(tr("Properties"));
-      a->setData("props");
+      a->setData("staff-properties");
 
+      a = popup->addSeparator();
+      a->setText(tr("Measure"));
+      popup->addAction(getAction("cut"));
+      popup->addAction(getAction("copy"));
+      popup->addAction(getAction("paste"));
+      popup->addSeparator();
+
+      if (obj->genPropertyMenu(popup))
+            popup->addSeparator();
+      a = popup->addAction(tr("Properties"));
+      a->setData("measure-properties");
       a = popup->exec(pos);
       if (a == 0)
             return;
       QString cmd(a->data().toString());
-
+      if (cmd == "cut" || cmd =="copy" || cmd == "paste") {
+            // these actions are already activated
+            return;
+            }
       _score->startCmd();
-      if (cmd == "edit-drumset") {
+      if (cmd == "measure-properties")
+            mscore->showElementContext(obj);
+      else if (cmd == "invisible")
+            _score->toggleInvisible(obj);
+      else if (cmd == "color")
+            _score->colorItem(obj);
+      else if (cmd == "edit") {
+            if (startEdit(obj))
+                  return;
+            }
+      else if (cmd == "edit-drumset") {
             EditDrumset drumsetEdit(staff->part()->drumset(), this);
             drumsetEdit.exec();
             }
-      else if (cmd == "props") {
+      else if (cmd == "staff-properties") {
             EditStaff staffEdit(staff, this);
             staffEdit.exec();
             }
+      else
+            obj->propertyAction(cmd);
       _score->setLayoutAll(true);
       _score->endCmd();
       }
@@ -342,7 +372,7 @@ void Canvas::mousePressEvent(QMouseEvent* ev)
       if (b3) {
             if (element) {
                   ElementType type = element->type();
-                  _score->dragStaff = 0;  // WS
+                  _score->dragStaff = 0;
                   if (type == MEASURE) {
                         _score->dragSystem = (System*)(element->parent());
                         _score->dragStaff  = getStaff(_score->dragSystem, startMove);
@@ -355,27 +385,11 @@ void Canvas::mousePressEvent(QMouseEvent* ev)
                         _score->select(element, keyState, _score->dragStaff);
                   _score->setDragObject(0);
                   seq->stopNotes();       // stop now because we dont get a mouseRelease event
-                  switch(_score->sel->state()) {
-                        case SEL_NONE:
-                              break;
-                        case SEL_SINGLE:
-                        case SEL_MULT:
-                              objectPopup(ev->globalPos(), element);
-                              break;
-                        case SEL_SYSTEM:
-                              printf("system popup\n");
-                              break;
-                        case SEL_STAFF:
-                              {
-                              Staff* staff = 0;
-                              int pitch;
-                              Segment* seg;
-                              QPointF offset;
-                              int tick;
-                              _score->pos2measure(startMove, &tick, &staff, &pitch, &seg, &offset);
-                              staffPopup(ev->globalPos(), staff);
-                              }
-                              break;
+                  if (type == MEASURE) {
+                        measurePopup(ev->globalPos(), (Measure*)element);
+                        }
+                  else {
+                        objectPopup(ev->globalPos(), element);
                         }
                   }
             else {

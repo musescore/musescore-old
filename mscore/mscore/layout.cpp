@@ -142,8 +142,6 @@ void ScoreLayout::doLayout()
       ::_spatium = _spatium;        // needed for preview
       _needLayout = false;
 
-// printf("do layout\n");
-
       int n = _score->nstaves();
       for (int staffIdx = 0; staffIdx < n; ++staffIdx) {
             for (Element* m = _measures.first(); m; m = m->next())
@@ -155,8 +153,21 @@ void ScoreLayout::doLayout()
       iSystem  is = _systems->begin();
 
       if (im == 0) {
-            if (_pages->empty())
-                  addPage();
+            foreach(Page* page, *_pages)
+                  delete page;
+            _pages->clear();
+
+            Page* page = addPage();
+            _pages->update();
+
+            //---------------------------------------------------
+            //    clear bspTree
+            //---------------------------------------------------
+
+            QRectF r = page->abbox();
+            el.clear();
+            int depth = intmaxlog(el.size());
+            bspTree.initialize(r, depth);
             return;
             }
 
@@ -171,8 +182,7 @@ void ScoreLayout::doLayout()
                   ip = _pages->end();
                   }
             else {
-                  page = *ip;
-                  ++ip;
+                  page = *ip++;
                   }
             _pages->update();
 

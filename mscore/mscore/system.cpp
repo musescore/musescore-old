@@ -387,21 +387,25 @@ void System::layout2(ScoreLayout* layout)
       for (int i = 0; i < staves; ++i)
             staffY[i] = staff(i)->bbox().y();
 
+      qreal systemHeight = staff(staves-1)->bbox().bottom();
+      setHeight(systemHeight);
+
       foreach(Measure* m, ml) {
             QList<Part*>* pl = _score->parts();
             // double x  = m->width();
-            int staff = 0;
+            int staffIdx = 0;
             Spatium barLineLen(4);
             barLineLen += score()->style()->staffLineWidth;
             foreach(Part* p, *pl) {
-                  BarLine* barLine = m->barLine(staff);
+                  BarLine* barLine = m->barLine(staffIdx);
                   if (barLine) {
-                        double y1 = staffY[staff];
-                        double y2 = staffY[staff + p->nstaves() - 1] + point(barLineLen);
+                        double y1 = staffY[staffIdx];
+                        double y2 = staffY[staffIdx + p->nstaves() - 1] + point(barLineLen);
                         barLine->setHeight(y2 - y1);
                         }
-                  staff += p->nstaves();
+                  staffIdx += p->nstaves();
                   }
+            m->setHeight(systemHeight);
             }
 
       if (barLine)
