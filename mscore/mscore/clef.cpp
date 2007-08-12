@@ -55,7 +55,7 @@ const ClefInfo clefTable[] = {
 /*NC*/      ClefInfo("C",   4,  0,  -4,  41, "Tenor Clef"),          // CLEF_C4
 
 /*NC*/      ClefInfo("TAB", 5,  0,   0,   0, "Tablature"),
-/*NC*/      ClefInfo("PERC", 4,  -2,   -26,   19, "Percussion")
+      ClefInfo("PERC", 2,   0,  0,  45, "Percussion")
       };
 
 //---------------------------------------------------------

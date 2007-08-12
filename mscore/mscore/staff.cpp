@@ -367,6 +367,12 @@ void Staff::changeClef(int tick, int st)
       if (ot == st)
             return;                 // no change
 
+      // automatically turn this part into a drum part
+      // if clef at tick zero is changed to percussion clef
+
+      if (tick == 0 && st == CLEF_PERC)
+            part()->setUseDrumset(true);
+
       int oval = NO_CLEF;
       iClefEvent ki = _clef->find(tick);
       if (ki != _clef->end()) {

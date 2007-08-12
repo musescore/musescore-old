@@ -1191,11 +1191,13 @@ void Score::cmd(const QString& cmd)
       else if (cmd == "undo") {
             start();
             doUndo();
+            setLayoutAll(true);
             end();
             }
       else if (cmd == "redo") {
             start();
             doRedo();
+            setLayoutAll(true);
             end();
             }
       else if (cmd == "note-input") {

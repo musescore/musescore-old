@@ -110,6 +110,8 @@ Undo::Undo(const InputState& is, const Selection* s)
 
 void Score::doUndo()
       {
+      if (debugMode)
+            printf("doUndo\n");
       Selection oSel(*sel);
       InputState oIs(*cis);
       sel->deselectAll(this);
@@ -132,6 +134,8 @@ void Score::doUndo()
       endUndoRedo(u);
       u->inputState = oIs;
       u->selection  = oSel;
+      if (debugMode)
+            printf("  end doUndo\n");
       }
 
 //---------------------------------------------------------
@@ -144,6 +148,8 @@ void Score::doUndo()
 
 void Score::doRedo()
       {
+      if (debugMode)
+            printf("doRedo\n");
       Selection oSel(*sel);
       InputState oIs(*cis);
       sel->deselectAll(this);
@@ -164,6 +170,8 @@ void Score::doRedo()
       endUndoRedo(u);
       u->inputState = oIs;
       u->selection  = oSel;
+      if (debugMode)
+            printf("  end doRedo\n");
       }
 
 //---------------------------------------------------------
@@ -178,7 +186,8 @@ void Score::processUndoOp(UndoOp* i, bool undo)
       {
       UNDO = true;
 
-// printf("Score::processUndoOp(i->type=%s, undo=%d)\n", i->name(), undo);
+      if (debugMode)
+            printf("Score::processUndoOp(i->type=%s, undo=%d)\n", i->name(), undo);
 
       switch (i->type) {
             case UndoOp::RemoveElement:
