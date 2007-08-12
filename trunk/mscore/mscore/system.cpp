@@ -397,11 +397,17 @@ void System::layout2(ScoreLayout* layout)
             Spatium barLineLen(4);
             barLineLen += score()->style()->staffLineWidth;
             foreach(Part* p, *pl) {
-                  BarLine* barLine = m->barLine(staffIdx);
-                  if (barLine) {
-                        double y1 = staffY[staffIdx];
-                        double y2 = staffY[staffIdx + p->nstaves() - 1] + point(barLineLen);
-                        barLine->setHeight(y2 - y1);
+                  int track = staffIdx * VOICES;
+                  for (Segment* s = m->first(); s; s = s->next()) {
+                        if ((s->subtype() != Segment::SegEndBarLine)
+                           && (s->subtype() != Segment::SegBarLine))
+                              continue;
+                        if (s->element(track)) {
+                              BarLine* barLine = (BarLine*)(s->element(track));
+                              double y1 = staffY[staffIdx];
+                              double y2 = staffY[staffIdx + p->nstaves() - 1] + point(barLineLen);
+                              barLine->setHeight(y2 - y1);
+                              }
                         }
                   staffIdx += p->nstaves();
                   }
