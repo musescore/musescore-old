@@ -1,6 +1,7 @@
 Release 0.7 (svn)
       - better note head positioning in chords
       - measure insert/delete function
+      - drumset editor
 
       As usual this release also contains many bug fixes and code
       cleanups.
