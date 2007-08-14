@@ -32,11 +32,11 @@
          </instrument>
       <instrument>
          <name>B<symbol name="flat"/> Clarinet</name>
-         <short-name>B<symbol name="flat"/> Cl.</short-name>
+         <short-name>B<symbol name="flat"/>Cl.</short-name>
          </instrument>
       <instrument>
          <name>E<symbol name="flat"/> Clarinet</name>
-         <short-name>E<symbol name="flat"/> Cl.</short-name>
+         <short-name>E<symbol name="flat"/>Cl.</short-name>
          </instrument>
       <instrument>
          <name>A Clarinet</name>
@@ -131,6 +131,14 @@
          <clef>14</clef>
          </instrument>
       </instrument-group>
+      <instrument>
+         <name>Triangle</name>
+         <short-name>Trgl.</short-name>
+         <drumset>1</drumset>
+         <clef>14</clef>
+         <stafflines>1</stafflines>
+         </instrument>
+      </instrument-group>
 
    <instrument-group name="Guitars">
       <instrument>
@@ -179,8 +187,16 @@
          <name>Piano</name>
          <short-name>Pno.</short-name>
          <staves>2</staves>
-         <clef id="1">0</clef>
-         <clef id="2">4</clef>
+         <clef staff="1">0</clef>
+         <clef staff="2">4</clef>
+         <bracket>1</bracket>
+         </instrument>
+      <instrument>
+         <name>Organ</name>
+         <short-name>Or.</short-name>
+         <staves>2</staves>
+         <clef staff="1">0</clef>
+         <clef staff="2">4</clef>
          <bracket>1</bracket>
          </instrument>
       </instrument-group>

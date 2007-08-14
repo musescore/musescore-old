@@ -59,8 +59,11 @@ static void readInstrument(const QString& group, QDomElement e)
 
       t.group       = group;
       t.staves      = 1;
-      for (int i = 0; i < MAX_STAVES; ++i)
+      for (int i = 0; i < MAX_STAVES; ++i) {
             t.clefIdx[i] = 0;
+            t.staffLines[i] = 5;
+            t.smallStaff[i] = false;
+            }
       t.bracket     = -1;
       t.midiProgram = 0;
       t.minPitch    = 0;
@@ -68,7 +71,6 @@ static void readInstrument(const QString& group, QDomElement e)
       t.transpose   = 0;
       t.useDrumset  = false;
 
-      int clefIdx = 0;
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             QString tag(e.tagName());
             QString val(e.text());
@@ -80,10 +82,22 @@ static void readInstrument(const QString& group, QDomElement e)
             else if (tag == "staves")
                   t.staves = i;
             else if (tag == "clef") {
-                  t.clefIdx[clefIdx] = i;
-                  ++clefIdx;
-                  if (clefIdx >= MAX_STAVES)
-                        clefIdx = MAX_STAVES-1;
+                  int idx = e.attribute("staff", "1").toInt() - 1;
+                  if (idx >= MAX_STAVES)
+                        idx = MAX_STAVES-1;
+                  t.clefIdx[idx] = i;
+                  }
+            else if (tag == "stafflines") {
+                  int idx = e.attribute("staff", "1").toInt() - 1;
+                  if (idx >= MAX_STAVES)
+                        idx = MAX_STAVES-1;
+                  t.staffLines[idx] = i;
+                  }
+            else if (tag == "stafflines") {
+                  int idx = e.attribute("staff", "1").toInt() - 1;
+                  if (idx >= MAX_STAVES)
+                        idx = MAX_STAVES-1;
+                  t.smallStaff[idx] = i;
                   }
             else if (tag == "bracket")
                   t.bracket = i;
@@ -477,7 +491,8 @@ bool MuseScore::saveFile(QFileInfo& info)
 void StaffLines::write(Xml& xml) const
       {
       xml.stag("Staff");
-      xml.tag("lines", lines);
+      if (lines() != 5)
+            xml.tag("lines", lines());
       Element::writeProperties(xml);
       xml.etag();
       }
@@ -491,7 +506,7 @@ void StaffLines::read(QDomElement e)
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             QString tag(e.tagName());
             if (tag == "lines")
-                  lines = e.text().toInt();
+                  setLines(e.text().toInt());
             else if (!Element::readProperties(e))
                   domError(e);
             }

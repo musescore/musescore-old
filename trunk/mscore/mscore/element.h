@@ -64,7 +64,7 @@ enum ElementType {
       LEDGER_LINE,
       MEASURE, STAFF_LINES,
       CURSOR, SELECTION, LASSO, SHADOW_NOTE, RUBBERBAND,
-      NOTEHEAD,
+      NOTEHEAD, TREMOLO, REPEAT_MEASURE,
       // not drawable elements:
       HAIRPIN, OTTAVA, PEDAL, TRILL,
       SEGMENT, SYSTEM, COMPOUND, CHORD, SLUR
@@ -319,17 +319,18 @@ typedef ElementList::const_iterator ciElement;
 class StaffLines : public Element {
       // Spatium lineWidth;
       qreal _width;
-      int lines;
 
    public:
       StaffLines(Score*);
       virtual StaffLines* clone() const    { return new StaffLines(*this); }
-      virtual ElementType type() const { return STAFF_LINES; }
-      void setWidth(qreal v)           { _width = v; }
+      virtual ElementType type() const     { return STAFF_LINES; }
+      void setWidth(qreal v)               { _width = v;         }
       virtual QRectF bbox() const;
       virtual void draw(QPainter&);
       virtual void write(Xml& xml) const;
       virtual void read(QDomElement);
+      int lines() const                    { return subtype(); }
+      void setLines(int val)               { setSubtype(val);  }
       };
 
 //---------------------------------------------------------

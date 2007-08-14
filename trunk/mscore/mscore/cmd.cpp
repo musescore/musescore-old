@@ -450,14 +450,14 @@ void Score::cmdAddPitch(int note, bool addFlag)
             //
             // look for next note position
             //
+            Measure* m = tick2measure(cis->pos);
+            m->createVoice(cis->staff * VOICES + cis->voice);
             cr = (ChordRest*)searchNote(cis->pos, cis->staff, cis->voice);
-            if (!cr || !cr->isChordRest()) {
+            if (!cr || !cr->isChordRest())
                   cis->pos = -1;
-                  return;
-                  }
             }
       if (cis->pos == -1) {
-            printf("cmdAddPitch: pos not set\n");
+            printf("cmdAddPitch: pos not set, or no chord rest found\n");
             return;
             }
 
@@ -581,6 +581,8 @@ void Score::setNote(int tick, Staff* staff, int voice, int pitch, int len)
                         ChordRest* cr = (ChordRest*)element;
                         tuplet        = cr->tuplet();
                         l             = cr->tickLen();
+                        if (l == 0 && element->type() == REST)    // whole measure rest?
+                              l = measure->tickLen();
                         if (tuplet)
                               tuplet->remove(cr);
                         segment->setElement(track, 0);
@@ -639,12 +641,8 @@ void Score::setNote(int tick, Staff* staff, int voice, int pitch, int len)
 
             tick += noteLen;
 
-            if (len < 0) {
-                  if (voice == 0) {
-                        // only for first voice: fill with rest
-                        setRest(tick, -len, staff, voice, measure);
-                        }
-                  }
+            if (len < 0)
+                  setRest(tick, -len, staff, voice, measure);
             if (len <= 0)
                   break;
             //
@@ -702,6 +700,8 @@ void Score::setRest(int tick, Staff* st, int voice, int len)
                   if (tuplet)
                         tuplet->remove(cr);
                   l = cr->tickLen();
+                  if (l == 0)
+                        l = measure->tickLen();
                   segment->setElement(track, 0);
                   undoOp(UndoOp::RemoveElement, element);
                   }
@@ -965,7 +965,7 @@ void Score::insertMeasures(int n)
 		m->setTick(tick);
 		m->setTickLen(ticks);
 		for (int idx = 0; idx < nstaves(); ++idx) {
-			Rest* rest    = new Rest(this, tick, ticks);
+			Rest* rest    = new Rest(this, tick, 0);  // whole measure rest
 			Staff* staffp = staff(idx);
 			rest->setStaff(staffp);
 			Segment* s = m->getSegment(rest);

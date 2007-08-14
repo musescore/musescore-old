@@ -39,6 +39,7 @@
 #include "pitchspelling.h"
 #include "breath.h"
 #include "arpeggio.h"
+#include "tremolo.h"
 
 int Note::noteHeads[HEAD_GROUPS][4] = {
       { wholeheadSym,         halfheadSym,         quartheadSym,    brevisheadSym},
@@ -724,7 +725,7 @@ QRectF ShadowNote::bbox() const
 bool Note::acceptDrop(Viewer* viewer, const QPointF&, int type, const QDomElement&) const
       {
       if (type == ATTRIBUTE || type == TEXT || type == ACCIDENTAL
-         || type == BREATH || type == ARPEGGIO || type == NOTEHEAD) {
+         || type == BREATH || type == ARPEGGIO || type == NOTEHEAD || type == TREMOLO) {
             viewer->setDropTarget(this);
             return true;
             }
@@ -825,6 +826,14 @@ Element* Note::drop(const QPointF&, const QPointF&, int t, const QDomElement& no
                         default: printf("unknown note head\n"); break;
                         }
                   delete s;
+                  }
+                  break;
+            case TREMOLO:
+                  {
+                  Tremolo* tremolo = new Tremolo(score());
+                  tremolo->read(node);
+                  tremolo->setParent(chord());
+                  score()->undoAddElement(tremolo);
                   }
                   break;
 

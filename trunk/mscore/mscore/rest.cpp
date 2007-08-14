@@ -70,15 +70,11 @@ void Rest::setSym(int s)
 void Rest::setTickLen(int i)
       {
       Element::setTickLen(i);
-      // if rest spans measure:
-#if 0 // TODO: whole rest symbol
-      Measure* m = measure();
-      int ticksMeasure = m->score()->sigmap->ticksMeasure(tick());
-      if (ticksMeasure == tickLen()) {
+      if (i == 0) {
             setSym(wholerestSym);
+printf("set whole measure rest\n");
             return;
             }
-#endif
       if (i <= division/32)
             setSym(hundredtwentyeighthrestSym);
       else if (i <= division/16)

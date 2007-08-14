@@ -70,6 +70,8 @@ class Staff {
       KeyList* _keymap;
       QList <BracketItem> _brackets;
       bool _show;             ///< derived from part->show()
+      int _lines;
+      bool _small;
 
    public:
       Staff(Score*, Part*, int);
@@ -98,12 +100,16 @@ class Staff {
       void setBracketSpan(int idx, int val);
       int bracketLevels() const      { return _brackets.size(); }
       void addBracket(BracketItem);
-      KeyList* keymap() const        { return _keymap;      }
-      ClefList* clef() const         { return _clef; }
+      KeyList* keymap() const        { return _keymap; }
+      ClefList* clef() const         { return _clef;   }
       void changeKeySig(int tick, int st);
       void changeClef(int tick, int st);
-      bool show() const              { return _show; }
-      void setShow(bool val)         { _show = val; }
+      bool show() const              { return _show;   }
+      void setShow(bool val)         { _show = val;    }
+      bool small() const             { return _small;  }
+      void setSmall(bool val)        { _small = val;   }
+      int lines() const              { return _lines;  }
+      void setLines(int val)         { _lines = val;   }
       };
 #endif
 
