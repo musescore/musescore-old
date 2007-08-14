@@ -48,6 +48,8 @@
 #include "keysig.h"
 #include "breath.h"
 #include "arpeggio.h"
+#include "tremolo.h"
+#include "repeat.h"
 
 static const char* keyNames[] = {
       "g-major, e-minor",     "ces",
@@ -372,6 +374,48 @@ void MuseScore::showPalette(bool visible)
             paletteBox->addPalette(tr("NoteHeads"), sp);
 
             //-----------------------------------
+            //    Tremolo
+            //-----------------------------------
+
+            sp = new Palette(1, 4, 1.0);
+            sp->setGrid(42, 40);
+            sp->setDrawGrid(true);
+
+            for (int i = 0; i < 3; ++i) {
+                  Tremolo* tremolo = new Tremolo(gscore);
+                  tremolo->setSubtype(i);
+                  sp->addObject(i, tremolo, QString("normal"));
+                  }
+            paletteBox->addPalette(tr("Tremolo"), sp);
+
+            //-----------------------------------
+            //    Misc
+            //-----------------------------------
+
+            sp = new Palette(1, 4, 1.5);
+            sp->setGrid(42, 40);
+            sp->setDrawGrid(true);
+
+            paletteBox->addPalette(tr("Misc"), sp);
+
+            //-----------------------------------
+            //    breaks
+            //-----------------------------------
+
+            sp = new Palette(1, 4, .7);
+            sp->setGrid(42, 36);
+            sp->setDrawGrid(true);
+
+            LayoutBreak* lb = new LayoutBreak(gscore);
+            lb->setSubtype(LAYOUT_BREAK_LINE);
+            sp->addObject(0, lb, tr("break line"));
+
+            lb = new LayoutBreak(gscore);
+            lb->setSubtype(LAYOUT_BREAK_PAGE);
+            sp->addObject(1, lb, tr("break page"));
+
+            paletteBox->addPalette(tr("Breaks"), sp);
+            //-----------------------------------
             //    Symbols
             //-----------------------------------
 
@@ -537,24 +581,6 @@ void MuseScore::showPalette(bool visible)
             sp->addObject(164, lettersSym);
             sp->addObject(165, letterzSym);
             paletteBox->addPalette(tr("Symbols"), sp);
-
-            //-----------------------------------
-            //    breaks
-            //-----------------------------------
-
-            sp = new Palette(1, 4, .7);
-            sp->setGrid(42, 36);
-            sp->setDrawGrid(true);
-
-            LayoutBreak* lb = new LayoutBreak(gscore);
-            lb->setSubtype(LAYOUT_BREAK_LINE);
-            sp->addObject(0, lb, tr("break line"));
-
-            lb = new LayoutBreak(gscore);
-            lb->setSubtype(LAYOUT_BREAK_PAGE);
-            sp->addObject(1, lb, tr("break page"));
-
-            paletteBox->addPalette(tr("Breaks"), sp);
             }
       paletteBox->setShown(visible);
       a->setChecked(visible);

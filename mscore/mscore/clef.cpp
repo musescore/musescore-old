@@ -74,12 +74,12 @@ Clef::Clef(Score* s, int i)
       }
 
 //---------------------------------------------------------
-//   setSubtype
+//   layout
 //---------------------------------------------------------
 
-void Clef::setSubtype(int st)
+void Clef::layout(ScoreLayout*)
       {
-      Element::setSubtype(st);
+      int st      = subtype();
       int val     = st & (~clefSmallBit);
       bool _small = st & clefSmallBit;
       double yoff = 0.0;
@@ -170,11 +170,11 @@ void Clef::setSubtype(int st)
                   break;
             case CLEF_TAB:
                   symbol->setSym(_small ? ctabclefSym : tabclefSym);
-                  yoff = 2.0;
+                  yoff = 2.0; //(staff()->lines() - 1) * 0.5;
                   break;
             case CLEF_PERC:
                   symbol->setSym(_small ? cpercussionclefSym : percussionclefSym);
-                  yoff = 2.0;
+                  yoff = 2.0;   //(staff()->lines() - 1) * 0.5;
                   break;
             }
       addElement(symbol, .0, .0);

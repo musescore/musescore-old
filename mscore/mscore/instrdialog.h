@@ -41,6 +41,8 @@ struct InstrumentTemplate {
       QString shortName;
       int staves;             // 1 <= MAX_STAVES
       int clefIdx[MAX_STAVES];
+      int staffLines[MAX_STAVES];
+      int smallStaff[MAX_STAVES];
       int bracket;            // bracket type (NO_BRACKET)
       int midiProgram;
       int minPitch;

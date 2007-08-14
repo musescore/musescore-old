@@ -203,7 +203,8 @@ Staff::Staff(Score* s, Part* p, int rs)
       _keymap = new KeyList;
       (*_keymap)[0] = 0;
       _show   = true;
-//      _index  = 0;
+      _lines  = 5;
+      _small  = false;
       }
 
 //---------------------------------------------------------
@@ -232,6 +233,8 @@ int Staff::key(int tick) const
 void Staff::write(Xml& xml) const
       {
       xml.stag("Staff");
+      xml.tag("lines", lines());
+      xml.tag("small", small());
       _clef->write(xml, "cleflist");
       _keymap->write(xml, "keylist");
       foreach(const BracketItem& i, _brackets) {
@@ -248,7 +251,11 @@ void Staff::read(QDomElement e)
       {
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             QString tag(e.tagName());
-            if (tag == "cleflist")
+            if (tag == "lines")
+                  setLines(e.text().toInt());
+            else if (tag == "small")
+                  setSmall(e.text().toInt());
+            else if (tag == "cleflist")
                   _clef->read(e, _score);
             else if (tag == "keylist")
                   _keymap->read(e, _score);

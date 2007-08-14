@@ -57,7 +57,7 @@ const char* elementNames[] = {
       "LedgerLine",
       "Measure", "StaffLines",
       "Cursor", "Selection", "Lasso", "ShadowNote", "RubberBand",
-      "NoteHead",
+      "NoteHead", "Tremolo", "RepeatMeasure",
       "Hairpin", "Ottava", "Pedal", "Trill",
       "Segment", "System", "Compound", "Chord", "Slur",
       };
@@ -425,7 +425,7 @@ void ElementList::add(Element* e)
 StaffLines::StaffLines(Score* s)
    : Element(s)
       {
-      lines = 5;
+      setLines(5);
       _width = 1.0;      // dummy
       }
 
@@ -435,8 +435,13 @@ StaffLines::StaffLines(Score* s)
 
 QRectF StaffLines::bbox() const
       {
+      int l = lines() - 1;
       qreal lw = point(score()->style()->staffLineWidth);
-      return QRectF(0.0, -lw*.5, _width, (lines-1) * _spatium + lw);
+
+      if (l == 0)
+            return QRectF(0.0, - 2.0 * _spatium - lw*.5, _width, 4 * _spatium + lw);
+      else
+            return QRectF(0.0, -lw*.5, _width, l * _spatium + lw);
       }
 
 //---------------------------------------------------------
@@ -454,9 +459,18 @@ void StaffLines::draw(QPainter& p)
 
       qreal x1 = _pos.x();
       qreal x2 = x1 + width();
-      for (int i = 0; i < lines; ++i) {
-            qreal y = _pos.y() + i * _spatium;
+
+      qreal y = _pos.y() + 2 * _spatium;
+
+      if (lines() == 1) {
+            qreal y = _pos.y() + 2 * _spatium;
             p.drawLine(QLineF(x1, y, x2, y));
+            }
+      else {
+            for (int i = 0; i < lines(); ++i) {
+                  qreal y = _pos.y() + i * _spatium;
+                  p.drawLine(QLineF(x1, y, x2, y));
+                  }
             }
       }
 
@@ -873,6 +887,10 @@ int Element::readType(QDomElement& e, QPointF* dragOffset)
                   type = ARPEGGIO;
             else if (e.tagName() == "NoteHead")
                   type = NOTEHEAD;
+            else if (e.tagName() == "Tremolo")
+                  type = TREMOLO;
+            else if (e.tagName() == "RepeatMeasure")
+                  type = REPEAT_MEASURE;
             else {
                   domError(e);
                   type = 0;

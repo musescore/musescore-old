@@ -515,6 +515,8 @@ void MuseScore::editInstrList()
                         staff->setRstaff(rstaff);
                         ++rstaff;
                         staff->clef()->setClef(0, sli->clef());
+                        staff->setLines(t->staffLines[cidx]);
+                        staff->setSmall(t->smallStaff[cidx]);
                         if (cidx == 0) {
                               staff->setBracket(0, t->bracket);
                               staff->setBracketSpan(0, t->staves);

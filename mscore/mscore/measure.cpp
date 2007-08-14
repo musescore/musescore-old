@@ -65,6 +65,7 @@
 #include "keysig.h"
 #include "breath.h"
 #include "arpeggio.h"
+#include "tremolo.h"
 #include "drumset.h"
 
 //---------------------------------------------------------
@@ -1465,12 +1466,11 @@ again:
                   ElementType t = e->type();
                   if (t == REST) {
                         double y = ypos[staff/VOICES + ((Rest*)e)->move()];
-                        int len = e->tickLen();
                         //
-                        // center symbol if its a measure rest
+                        // center symbol if its a whole measure rest
                         //
                         double yoffset = 0.0;
-                        if (!_irregular && len == _score->sigmap->ticksMeasure(e->tick())) {
+                        if (!_irregular && (e->tickLen() == 0)) {
                               // on pass 2 stretch is the real width of the measure
                               // its assumed that s is the last segment in the measure
                               pos.setX((stretch - s->x() - e->width()) * .5);
@@ -2479,6 +2479,8 @@ void Measure::collectElements(QList<Element*>& el)
                                     el.append(chord->stem());
                               if (chord->arpeggio())
                                     el.append(chord->arpeggio());
+                              if (chord->tremolo())
+                                    el.append(chord->tremolo());
 
                               foreach(LedgerLine* h, *chord->ledgerLines())
                                     el.append(h);
@@ -2577,5 +2579,29 @@ void Measure::setEndBarLine(BarLine* ebl)
       int t = tick() + tickLen();
       Segment* seg = getSegment(Segment::SegEndBarLine, t);
       seg->add(ebl);
+      }
+
+//---------------------------------------------------------
+//   createVoice
+//    Create a voice on demand by filling the measure
+//    with a whole measure rest.
+//    Check if there are any chord/rests in track; if
+//    not create a whole measure rest
+//---------------------------------------------------------
+
+void Measure::createVoice(int track)
+      {
+      for (Segment* s = first(); s; s = s->next()) {
+            if (s->subtype() != Segment::SegChordRest)
+                  continue;
+            if (s->element(track) == 0) {
+                  Rest* rest = new Rest(score(), tick(), 0);
+                  rest->setStaff(score()->staff(track / VOICES));
+                  rest->setParent(s);
+                  rest->setVoice(track % VOICES);
+                  score()->undoAddElement(rest);
+                  }
+            break;
+            }
       }
 

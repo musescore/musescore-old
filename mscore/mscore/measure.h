@@ -236,6 +236,7 @@ class Measure : public Element {
       void setEndBarLine(BarLine* barLine);
       void cmdRemoveEmptySegment(Segment* s);
       void collectElements(QList<Element*>& el);
+      void createVoice(int track);
       };
 
 #endif

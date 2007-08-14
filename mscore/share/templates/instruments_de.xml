@@ -136,6 +136,13 @@
          <clef>14</clef>
          <drumset>1</drumset>
          </instrument>
+      <instrument>
+         <name>Triangle</name>
+         <short-name>Trgl.</short-name>
+         <drumset>1</drumset>
+         <clef>14</clef>
+         <stafflines>1</stafflines>
+         </instrument>
       </instrument-group>
 
    <instrument-group name="Gitarren">
@@ -185,16 +192,16 @@
          <name>Piano</name>
          <short-name>Pno.</short-name>
          <staves>2</staves>
-         <clef id="1">0</clef>
-         <clef id="2">4</clef>
+         <clef staff="1">0</clef>
+         <clef staff="2">4</clef>
          <bracket>1</bracket>
          </instrument>
       <instrument>
          <name>Orgel</name>
          <short-name>Or.</short-name>
          <staves>2</staves>
-         <clef id="1">0</clef>
-         <clef id="2">4</clef>
+         <clef staff="1">0</clef>
+         <clef staff="2">4</clef>
          <bracket>1</bracket>
          </instrument>
       </instrument-group>

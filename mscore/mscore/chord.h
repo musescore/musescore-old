@@ -32,6 +32,7 @@
 class Note;
 class Hook;
 class Arpeggio;
+class Tremolo;
 
 //---------------------------------------------------------
 //   Stem
@@ -116,6 +117,7 @@ class Chord : public ChordRest {
       Direction _stemDirection;
       bool _grace;
       Arpeggio* _arpeggio;
+      Tremolo* _tremolo;
 
       void computeUp();
       void readSlur(QDomElement, int staff);
@@ -157,6 +159,7 @@ class Chord : public ChordRest {
       Stem* stem() const                     { return _stem; }
       void setStem(Stem* s);
       Arpeggio* arpeggio() const             { return _arpeggio; }
+      Tremolo* tremolo() const               { return _tremolo;  }
 
       virtual QPointF stemPos(bool, bool) const;
 

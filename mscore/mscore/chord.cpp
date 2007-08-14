@@ -37,6 +37,7 @@
 #include "slur.h"
 #include "arpeggio.h"
 #include "score.h"
+#include "tremolo.h"
 
 //---------------------------------------------------------
 //   Stem
@@ -113,6 +114,7 @@ Chord::Chord(Score* s)
       _stemDirection = AUTO;
       _grace         = false;
       _arpeggio      = 0;
+      _tremolo       = 0;
       }
 
 //---------------------------------------------------------
@@ -123,6 +125,8 @@ Chord::~Chord()
       {
       if (_arpeggio)
             delete _arpeggio;
+      if (_tremolo)
+            delete _tremolo;
       }
 
 //---------------------------------------------------------
@@ -188,6 +192,10 @@ void Chord::add(Element* e)
             attributes.push_back((NoteAttribute*)e);
       else if (e->type() == ARPEGGIO)
             _arpeggio = (Arpeggio*)e;
+      else if (e->type() == TREMOLO)
+            _tremolo = (Tremolo*)e;
+      else
+            printf("Chord::add: unknown element\n");
       }
 
 //---------------------------------------------------------
@@ -215,9 +223,12 @@ void Chord::remove(Element* e)
                   attributes.removeAt(idx);
                   }
             }
-      else if (e->type() == ARPEGGIO) {
+      else if (e->type() == ARPEGGIO)
             _arpeggio = 0;
-            }
+      else if (e->type() == TREMOLO)
+            _tremolo = 0;
+      else
+            printf("Chord::remove: unknown element\n");
       }
 
 //---------------------------------------------------------
@@ -289,6 +300,7 @@ void Chord::layoutStem(ScoreLayout* layout)
       int hookIdx;
       Spatium stemLen;
 
+      bool hasStem = true;
       if (_grace) {
             stemLen = Spatium(2.5);
             hookIdx = 1;
@@ -312,25 +324,58 @@ void Chord::layoutStem(ScoreLayout* layout)
             else if (ticks < division*4)  // < 1/1
                   hookIdx = 0;
             else {
-                  setStem(0);
-                  return;
+                  hookIdx = 0;
+                  hasStem = false;
                   }
             }
 
+      int extraStemLen = hookIdx - 2;
+      if (_tremolo) {
+            int extraStemLen2 = _tremolo->subtype();
+            if (hookIdx == 0)
+                  extraStemLen2 -= 1;
+            if (extraStemLen2 > extraStemLen)
+                  extraStemLen = extraStemLen2;
+            }
+
+      if (extraStemLen > 0)
+            stemLen += extraStemLen *Spatium(0.5);
+
       double headCorrection = 0.2;
 
-      stemLen += Spatium((downpos - uppos) * .5 - headCorrection);
-      if (!_stem) {
-            _stem = new Stem(score());
-            _stem->setParent(this);
-            }
-      _stem->setLen(stemLen);
-
+      stemLen        += Spatium((downpos - uppos) * .5 - headCorrection);
       double pstemLen = point(stemLen);
-      QPointF npos = stemPos(up, false);
+      QPointF npos    = stemPos(up, false);
       if (up)
             npos += QPointF(0, -pstemLen);
-      _stem->setPos(npos);
+
+      if (hasStem) {
+            if (!_stem) {
+                  _stem = new Stem(score());
+                  _stem->setParent(this);
+                  }
+            _stem->setLen(stemLen);
+            _stem->setPos(npos);
+            }
+      else
+            setStem(0);
+
+      //-----------------------------------------
+      //    process tremolo
+      //-----------------------------------------
+
+      if (_tremolo) {
+            _tremolo->layout(layout);
+            qreal x  = npos.x();
+            if (!hasStem) {
+                  // center tremolo above note
+                  x = upnote->x() + upnote->headWidth() * .5;
+                  }
+            qreal y  = npos.y();
+            qreal h  = pstemLen;
+            qreal th = _tremolo->bbox().height();
+            _tremolo->setPos(x, y + h * .5 - th * .5);
+            }
 
       //-----------------------------------------
       //  process hook
@@ -345,7 +390,8 @@ void Chord::layoutStem(ScoreLayout* layout)
                   }
             _hook->setIdx(hookIdx, _grace);
             qreal lw = point(score()->style()->stemWidth) * .5;
-            _hook->setPos(npos + QPointF(lw, up ? -lw : pstemLen));
+            QPointF p = npos + QPointF(lw, up ? -lw : pstemLen);
+            _hook->setPos(p);
             }
       else
             setHook(0);
@@ -678,6 +724,7 @@ void Chord::write(Xml& xml) const
          && (_stemDirection == AUTO)
          && !_grace
          && !_arpeggio
+         && !_tremolo
          ) {
             if (tick() != xml.curTick)
                   xml.tagE(QString("Note tick=\"%1\" pitch=\"%2\" tpc=\"%3\" ticks=\"%4\"")
@@ -700,6 +747,8 @@ void Chord::write(Xml& xml) const
                   in->second->write(xml);
             if (_arpeggio)
                   _arpeggio->write(xml);
+            if (_tremolo)
+                  _tremolo->write(xml);
             xml.etag();
             }
       xml.curTick = tick() + tickLen();
@@ -758,12 +807,9 @@ void Chord::readNote(QDomElement e, int staffIdx)
                   }
             else if (tag == "move")
                   note->setMove(i);
-            else if (ChordRest::readProperties(e))
-                  ;
-            else if (tag == "Slur") {
+            else if (tag == "Slur")
                   readSlur(e, staffIdx);
-                  }
-            else
+            else if (!ChordRest::readProperties(e))
                   domError(e);
             }
       note->setParent(this);
@@ -812,6 +858,12 @@ void Chord::read(QDomElement e, int staffIdx)
                   _arpeggio->setStaff(staff());
                   _arpeggio->read(e);
                   _arpeggio->setParent(this);
+                  }
+            else if (tag == "Tremolo") {
+                  _tremolo = new Tremolo(score());
+                  _tremolo->setStaff(staff());
+                  _tremolo->read(e);
+                  _tremolo->setParent(this);
                   }
             else if (ChordRest::readProperties(e))
                   ;

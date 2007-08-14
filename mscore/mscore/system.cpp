@@ -104,10 +104,11 @@ QRectF System::bboxStaff(int staff) const
 //   insertStaff
 //---------------------------------------------------------
 
-SysStaff* System::insertStaff(Staff*, int idx)
+SysStaff* System::insertStaff(Staff* s, int idx)
       {
       SysStaff* staff = new SysStaff;
       staff->sstaff   = new StaffLines(score());
+      staff->sstaff->setLines(s->lines());
       staff->sstaff->setParent(this);
       insertSysStaff(staff, idx);
       setInstrumentName(idx);

@@ -51,10 +51,10 @@ class Clef : public Compound {
       virtual ElementType type() const { return CLEF; }
 
       void setSmall(bool val);
-      virtual void setSubtype(int st);
       virtual void space(double& min, double& extra) const;
       virtual bool acceptDrop(Viewer*, const QPointF&, int, const QDomElement&) const;
       virtual Element* drop(const QPointF&, const QPointF&, int, const QDomElement&);
+      virtual void layout(ScoreLayout*);
       };
 
 //---------------------------------------------------------
