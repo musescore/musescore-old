@@ -325,3 +325,16 @@ void Segment::removeGeneratedElements()
             }
       }
 
+//---------------------------------------------------------
+//   isEmpty
+//---------------------------------------------------------
+
+bool Segment::isEmpty() const
+      {
+      foreach(const Element* e, _elist) {
+            if (e)
+                  return false;
+            }
+      // TODO: check for lyrics?
+      return true;
+      }

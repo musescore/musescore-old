@@ -103,6 +103,7 @@ class Segment : public Element {
       static SegmentType segmentType(int type);
       void setTime(int tick);
       void removeGeneratedElements();
+      bool isEmpty() const;
       };
 
 #endif
