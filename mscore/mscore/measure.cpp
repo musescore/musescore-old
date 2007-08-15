@@ -1186,14 +1186,7 @@ void Measure::layoutX(ScoreLayout* layout, double stretch)
 
 again:
       for (Segment* s = first(); s; s = s->next()) {
-            bool empty = true;
-            for (int track = 0; track < tracks; ++track) {
-                  if (s->element(track)) {
-                        empty = false;
-                        break;
-                        }
-                  }
-            if (empty) {
+            if (s->isEmpty()) {
 //                  printf("Measure::layoutX(): note: remove empty segment %p\n", s);
                   remove(s);
                   goto again;

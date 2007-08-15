@@ -909,7 +909,7 @@ void Score::appendMeasures(int n)
             measure->setTick(tick);
 
             for (int idx = 0; idx < nstaves(); ++idx) {
-                  Rest* rest = new Rest(this, tick, sigmap->ticksMeasure(tick));
+                  Rest* rest = new Rest(this, tick, 0);
                   Staff* staffp = staff(idx);
                   rest->setStaff(staffp);
                   Segment* s = measure->getSegment(rest);

@@ -1106,6 +1106,53 @@ void Score::cmdDeleteSelection()
             else
                   deleteItem(is);
             }
+      else if (sel->state() == SEL_STAFF) {
+            Measure* is = tick2measure(sel->tickStart);
+            Measure* ie = tick2measure(sel->tickEnd);
+            for (Measure* m = is; m && m != ie; m = m->next()) {
+                  for (int staffIdx = sel->staffStart; staffIdx < sel->staffEnd; ++staffIdx) {
+                        bool rmFlag = false;
+                        for (Segment* s = m->first(); s; s = s->next()) {
+                              if (s->subtype() == Segment::SegEndBarLine
+                                 || s->subtype() == Segment::SegTimeSigAnnounce
+                                 || s->subtype() == Segment::SegBarLine)
+                                    continue;
+                              if (s->subtype() == Segment::SegChordRest)
+                                    rmFlag = true;
+                              if (rmFlag) {
+                                    int strack = staffIdx * VOICES;
+                                    int etrack = strack + VOICES;
+                                    for (int track = strack; track < etrack; ++track) {
+                                          Element* el = s->element(track);
+                                          if (el)
+                                                undoRemoveElement(el);
+                                          }
+                                    }
+                              if (s->isEmpty()) {
+                                    undoRemoveElement(s);
+                                    }
+                              }
+                        //
+                        // add whole measure rest
+                        //
+
+                        Segment* seg  = m->findSegment(Segment::SegChordRest, m->tick());
+                        if (seg == 0) {
+                              seg = m->createSegment(Segment::SegChordRest, m->tick());
+                              undoAddElement(seg);
+                              }
+                        Rest* rest    = new Rest(this, m->tick(), 0);
+                        Staff* staffp = staff(staffIdx);
+                        rest->setStaff(staffp);
+                        rest->setParent(seg);
+                        undoAddElement(rest);
+                        foreach(Element* el, *m->el()) {
+                              if (el->type() == SLUR && el->staffIdx() == staffIdx)
+                                    undoRemoveElement(el);
+                              }
+                        }
+                  }
+            }
       else {
             // deleteItem modifies sel->elements() list,
             // so we need a local copy:
