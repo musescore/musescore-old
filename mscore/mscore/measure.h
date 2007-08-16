@@ -225,7 +225,7 @@ class Measure : public Element {
       bool startRepeat() const      { return _startRepeat; }
       void setStartRepeat(bool val) { _startRepeat = val; }
       int endRepeat() const         { return _endRepeat; }
-      void setEndRepeat(bool val)   { _endRepeat = val; }
+      void setEndRepeat(int val)    { _endRepeat = val; }
 
       int ending() const            { return _ending; }
       void setEnding(int r)         { _ending = r;    }
