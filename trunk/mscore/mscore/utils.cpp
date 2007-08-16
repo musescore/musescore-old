@@ -90,6 +90,9 @@ Measure* Score::tick2measure(int tick) const
             int l  = m->tickLen();
             if (tick >= st && tick < (st+l))
                   return m;
+            // hack:
+            if (m->next() == 0 && tick <= (st+l))
+                  return m;
             }
       printf("tick2measure %d not found\n", tick);
       int idx = 0;
@@ -99,6 +102,7 @@ Measure* Score::tick2measure(int tick) const
             printf("(%d)   %d - %d\n", idx, st, st+l);
             ++idx;
             }
+      abort();
       return 0;
       }
 

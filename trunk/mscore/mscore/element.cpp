@@ -460,8 +460,6 @@ void StaffLines::draw(QPainter& p)
       qreal x1 = _pos.x();
       qreal x2 = x1 + width();
 
-      qreal y = _pos.y() + 2 * _spatium;
-
       if (lines() == 1) {
             qreal y = _pos.y() + 2 * _spatium;
             p.drawLine(QLineF(x1, y, x2, y));

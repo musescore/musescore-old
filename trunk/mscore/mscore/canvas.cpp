@@ -252,6 +252,10 @@ void Canvas::measurePopup(const QPoint& pos, Measure* obj)
       QPointF offset;
       int tick;
       _score->pos2measure(pos, &tick, &staff, &pitch, &seg, &offset);
+      if (staff == 0) {
+            printf("Canvas::measurePopup: staff == 0 !\n");
+            return;
+            }
 
       QMenu* popup = new QMenu(this);
       popup->setSeparatorsCollapsible(false);
@@ -1141,6 +1145,7 @@ void Canvas::paint(const QRect& rr)
 
             Measure* sm = _score->tick2measure(sstart);
             Measure* em = _score->tick2measure(send);
+
             p.setBrush(Qt::NoBrush);
 
             if (_score->sel->state() == SEL_SYSTEM) {
