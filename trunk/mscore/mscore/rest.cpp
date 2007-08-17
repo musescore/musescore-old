@@ -72,7 +72,6 @@ void Rest::setTickLen(int i)
       Element::setTickLen(i);
       if (i == 0) {
             setSym(wholerestSym);
-printf("set whole measure rest\n");
             return;
             }
       if (i <= division/32)
