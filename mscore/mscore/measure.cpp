@@ -475,6 +475,7 @@ void Measure::layout(ScoreLayout* layout, double width)
       double _spatium = layout->spatium();
       int nstaves     = _score->nstaves();
       double staffY[nstaves];
+
       for (int staffIdx = 0; staffIdx < nstaves; ++staffIdx) {
             staffY[staffIdx] = system()->staff(staffIdx)->bbox().y();
             staves[staffIdx].distance = 0.0;
@@ -1584,17 +1585,16 @@ void Measure::cmdAddStaves(int sStaff, int eStaff)
             BarLine* barLine = 0;
             if (staff->isTop()) {
                   barLine = new BarLine(score());
+                  barLine->setStaff(_score->staff(i));
                   barLine->setParent(this);
                   setEndBarLine(barLine);
                   }
             MStaff ms;
 
-//            ms.endBarLine = barLine;
-//            staves.insert(i, ms);
-//            _score->undoOp(UndoOp::InsertMStaff, this, ms, i);
+            staves.insert(i, ms);
+            _score->undoOp(UndoOp::InsertMStaff, this, ms, i);
 
-            int tickLen = _score->sigmap->ticksMeasure(tick());
-            Rest* rest = new Rest(score(), tick(), tickLen);
+            Rest* rest = new Rest(score(), tick(), 0);
             rest->setStaff(staff);
             Segment* s = findSegment(Segment::SegChordRest, tick());
             rest->setParent(s);
