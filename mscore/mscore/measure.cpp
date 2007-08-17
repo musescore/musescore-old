@@ -67,6 +67,7 @@
 #include "arpeggio.h"
 #include "tremolo.h"
 #include "drumset.h"
+#include "repeat.h"
 
 //---------------------------------------------------------
 //   y2pitch
@@ -311,7 +312,9 @@ static void initLineList(char* ll, int key)
 
 void Measure::layoutChord(Chord* chord, char* tversatz)
       {
-      Drumset* drumset = _score->part(chord->staffIdx())->drumset();
+      Drumset* drumset = 0;
+      if (chord->staff()->part()->useDrumset())
+            drumset = chord->staff()->part()->drumset();
       NoteList* nl     = chord->noteList();
       int tick         = chord->tick();
       int ll           = 1000;      // line distance to previous note head
@@ -746,12 +749,7 @@ Segment* Measure::createSegment(Segment::SegmentType st, int t)
 Segment* Measure::getSegment(Element* e)
       {
       Segment::SegmentType st = Segment::segmentType(e->type());
-      Segment* s = findSegment(st, e->tick());
-      if (!s) {
-            s = createSegment(st, e->tick());
-            add(s);
-            }
-      return s;
+      return getSegment(st, e->tick());
       }
 
 //---------------------------------------------------------
@@ -1476,6 +1474,10 @@ again:
                               y += 2 * _spatium;
                         e->setPos(pos.x(), y + yoffset);
                         }
+                  else if (t == REPEAT_MEASURE) {
+                        e->setPos((stretch - s->x() - e->width()) * .5,
+                           ypos[staff/VOICES] + _spatium);
+                        }
                   else if (t == CHORD) {
                         int move = 0; // TODO ((ChordRest*)e)->translate();
                         double y = ypos[staff/VOICES + move];
@@ -1688,6 +1690,7 @@ bool Measure::acceptDrop(Viewer* viewer, const QPointF& p, int type,
       switch(type) {
             case BRACKET:
             case LAYOUT_BREAK:
+            case REPEAT_MEASURE:
                   viewer->setDropRectangle(r);
                   return true;
 
@@ -1891,6 +1894,55 @@ Element* Measure::drop(const QPointF& p, const QPointF& /*offset*/, int type, co
 #endif
                               }
                         }
+                  }
+                  break;
+
+            case REPEAT_MEASURE:
+                  {
+                  //
+                  // see also cmdDeleteSelection()
+                  //
+                  _score->select(0, 0, 0);
+                  bool rmFlag = false;
+                  for (Segment* s = first(); s; s = s->next()) {
+                        if (s->subtype() == Segment::SegEndBarLine
+                           || s->subtype() == Segment::SegTimeSigAnnounce
+                           || s->subtype() == Segment::SegBarLine)
+                              continue;
+                        if (s->subtype() == Segment::SegChordRest)
+                              rmFlag = true;
+                        if (rmFlag) {
+                              int strack = idx * VOICES;
+                              int etrack = strack + VOICES;
+                              for (int track = strack; track < etrack; ++track) {
+                                    Element* el = s->element(track);
+                                    if (el)
+                                          _score->undoRemoveElement(el);
+                                    }
+                              }
+                        if (s->isEmpty()) {
+                              _score->undoRemoveElement(s);
+                              }
+                        }
+                  //
+                  // add repeat measure
+                  //
+
+                  Segment* seg = findSegment(Segment::SegChordRest, tick());
+                  if (seg == 0) {
+                        seg = createSegment(Segment::SegChordRest, tick());
+                        _score->undoAddElement(seg);
+                        }
+                  RepeatMeasure* rm = new RepeatMeasure(_score);
+                  rm->setTick(tick());
+                  rm->setStaff(staff);
+                  rm->setParent(seg);
+                  _score->undoAddElement(rm);
+                  foreach(Element* el, _sel) {
+                        if (el->type() == SLUR && el->staffIdx() == idx)
+                              _score->undoRemoveElement(el);
+                        }
+                  _score->select(rm, 0, 0);
                   }
                   break;
 
@@ -2200,6 +2252,16 @@ void Measure::read(QDomElement e, int idx)
                   Segment* s = getSegment(rest);
                   s->add(rest);
                   score()->curTick = rest->tick() + rest->tickLen();
+                  }
+            else if (tag == "RepeatMeasure") {
+                  RepeatMeasure* rm = new RepeatMeasure(score());
+                  rm->setTick(score()->curTick);    // set default tick position
+                  rm->setParent(this);
+                  rm->setStaff(staff);
+                  rm->read(e);
+                  Segment* s = getSegment(Segment::SegChordRest, rm->tick());
+                  s->add(rm);
+                  score()->curTick = rm->tick() + rm->tickLen();
                   }
             else if (tag == "Clef") {
                   Clef* clef = new Clef(score());

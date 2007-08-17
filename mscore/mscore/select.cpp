@@ -232,8 +232,10 @@ void Score::select(Element* obj, int state, int staff)
             //
             int startTrack = staffStart * VOICES;
             int endTrack   = staffEnd * VOICES;
-            if (sel->state() == SEL_SYSTEM)
+            if (sel->state() == SEL_SYSTEM) {
+                  startTrack = 0;
                   endTrack = nstaves() * VOICES;
+                  }
 
             for (Measure* m = _layout->first(); m; m = m->next()) {
                   int ms = m->tick();

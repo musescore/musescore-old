@@ -1145,6 +1145,8 @@ void Canvas::paint(const QRect& rr)
 
             Measure* sm = _score->tick2measure(sstart);
             Measure* em = _score->tick2measure(send);
+            if (em->tick() != send)       // hack for last measure
+                  em = 0;
 
             p.setBrush(Qt::NoBrush);
 

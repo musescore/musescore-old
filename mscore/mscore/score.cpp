@@ -406,6 +406,7 @@ void Score::fixTicks()
 Measure* Score::pos2measure(const QPointF& p, int* tick, Staff** rst, int* pitch,
    Segment** seg, QPointF* offset) const
       {
+printf("====pos2measure staff %p %p\n", rst, rst ? *rst : 0);
       int voice = padState.voice;
 
       for (ciPage ip = _layout->pages()->begin(); ip != _layout->pages()->end(); ++ip) {
@@ -478,6 +479,7 @@ Measure* Score::pos2measure(const QPointF& p, int* tick, Staff** rst, int* pitch
                                                       *offset = pppp - QPointF(segment->x(), staff->bbox().y());
                                                 if (seg)
                                                       *seg = segment;
+printf("====Staff %d\n", i);
                                                 return m;
                                                 }
                                           }
