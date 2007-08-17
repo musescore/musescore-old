@@ -1107,6 +1107,7 @@ void Score::cmdDeleteSelection()
                   deleteItem(is);
             }
       else if (sel->state() == SEL_STAFF) {
+            select(0, 0, 0);
             Measure* is = tick2measure(sel->tickStart);
             Measure* ie = tick2measure(sel->tickEnd);
             for (Measure* m = is; m && m != ie; m = m->next()) {
@@ -1151,7 +1152,10 @@ void Score::cmdDeleteSelection()
                                     undoRemoveElement(el);
                               }
                         }
+                  select(m, Qt::ShiftModifier, 0);
                   }
+            layoutAll = true;
+            return;
             }
       else {
             // deleteItem modifies sel->elements() list,
