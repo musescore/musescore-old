@@ -27,14 +27,18 @@
 //   RepeatMeasure
 //---------------------------------------------------------
 
-class RepeatMeasure : public Symbol {
+class RepeatMeasure : public Element {
+      QPainterPath path;
 
    public:
       RepeatMeasure(Score*);
       RepeatMeasure &operator=(const RepeatMeasure&);
       virtual RepeatMeasure* clone() const  { return new RepeatMeasure(*this); }
       virtual ElementType type() const { return REPEAT_MEASURE; }
+      virtual void draw(QPainter&);
+      virtual void layout(ScoreLayout*);
       virtual void write(Xml& xml) const;
+      virtual void read(QDomElement);
       };
 
 #endif

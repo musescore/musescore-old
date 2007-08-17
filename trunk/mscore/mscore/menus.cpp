@@ -396,6 +396,9 @@ void MuseScore::showPalette(bool visible)
             sp->setGrid(42, 40);
             sp->setDrawGrid(true);
 
+            RepeatMeasure* rm = new RepeatMeasure(gscore);
+            sp->addObject(0, rm, tr("repeat measure"));
+
             paletteBox->addPalette(tr("Misc"), sp);
 
             //-----------------------------------

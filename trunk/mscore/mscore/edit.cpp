@@ -1107,6 +1107,9 @@ void Score::cmdDeleteSelection()
                   deleteItem(is);
             }
       else if (sel->state() == SEL_STAFF) {
+            //
+            // see also measure->drop() REPEAT_MEASURE
+            //
             select(0, 0, 0);
             Measure* is = tick2measure(sel->tickStart);
             Measure* ie = tick2measure(sel->tickEnd);

@@ -492,7 +492,7 @@ bool Note::isSimple(Xml& xml) const
       QList<Prop> pl = Element::properties(xml);
       if (_accidental && !_accidental->userOff().isNull())
             return false;
-      return (pl.empty() && _fingering.empty() && _tieFor == 0 && _move == 0);
+      return (pl.empty() && _fingering.empty() && _tieFor == 0 && _move == 0 && _headGroup == 0);
       }
 
 //---------------------------------------------------------
@@ -522,6 +522,8 @@ void Note::write(Xml& xml) const
                   _tieFor->write(xml);
             if (_move)
                   xml.tag("move", _move);
+            if (_headGroup != 0)
+                  xml.tag("head", _headGroup);
             xml.etag();
             }
       }
@@ -603,6 +605,8 @@ void Note::read(QDomElement e)
                   f->setParent(this);
                   _fingering.append(f);
                   }
+            else if (tag == "head")
+                  _headGroup = i;
             else if (tag == "userAccidental")
                   _userAccidental = i;
             else if (tag == "Accidental") {

@@ -46,6 +46,7 @@ const char* elementNames[] = {
       "Accidental", "Note",
       "Clef", "KeySig", "TimeSig", "Rest",
       "Breath",
+      "RepeatMeasure",
       "Image",
       "Tie",
       "Attribute", "Dynamic", "Page", "Beam", "Hook", "Lyrics",
@@ -57,7 +58,7 @@ const char* elementNames[] = {
       "LedgerLine",
       "Measure", "StaffLines",
       "Cursor", "Selection", "Lasso", "ShadowNote", "RubberBand",
-      "NoteHead", "Tremolo", "RepeatMeasure",
+      "NoteHead", "Tremolo",
       "Hairpin", "Ottava", "Pedal", "Trill",
       "Segment", "System", "Compound", "Chord", "Slur",
       };

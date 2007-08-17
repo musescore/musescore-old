@@ -19,15 +19,51 @@
 //=============================================================================
 
 #include "repeat.h"
+#include "layout.h"
 
 //---------------------------------------------------------
 //   RepeatMeasure
 //---------------------------------------------------------
 
 RepeatMeasure::RepeatMeasure(Score* score)
-   : Symbol(score)
+   : Element(score)
       {
+      }
 
+//---------------------------------------------------------
+//   draw
+//---------------------------------------------------------
+
+void RepeatMeasure::draw(QPainter& p)
+      {
+      p.setBrush(p.pen().color());
+      p.drawPath(path);
+      }
+
+//---------------------------------------------------------
+//   layout
+//---------------------------------------------------------
+
+void RepeatMeasure::layout(ScoreLayout* layout)
+      {
+      double sp  = layout->spatium();
+
+      double w   = sp * 2.0;
+      double h   = sp * 2.0;
+      double lw  = sp * .30;  // line width
+      double r   = sp * .15;  // dot radius
+
+      path       = QPainterPath();
+
+      path.moveTo(w - lw, 0.0);
+      path.lineTo(w,  0.0);
+      path.lineTo(lw,  h);
+      path.lineTo(0.0, h);
+      path.closeSubpath();
+      path.addEllipse(QRectF(w * .25 - r, h * .25 - r, r * 2.0, r * 2.0 ));
+      path.addEllipse(QRectF(w * .75 - r, h * .75 - r, r * 2.0, r * 2.0 ));
+
+      setbbox(path.boundingRect());
       }
 
 //---------------------------------------------------------
@@ -36,5 +72,21 @@ RepeatMeasure::RepeatMeasure(Score* score)
 
 void RepeatMeasure::write(Xml& xml) const
       {
+      xml.stag(name());
+      Element::writeProperties(xml);
+      xml.etag();
       }
+
+//---------------------------------------------------------
+//   read
+//---------------------------------------------------------
+
+void RepeatMeasure::read(QDomElement e)
+      {
+      for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
+            if (!Element::readProperties(e))
+                  domError(e);
+            }
+      }
+
 

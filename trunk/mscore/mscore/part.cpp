@@ -273,8 +273,11 @@ void Instrument::read(QDomElement e)
                   if (useDrumset)
                         drumset = new Drumset(*smDrumset);
                   }
-            else if (tag == "Drum")
+            else if (tag == "Drum") {
+                  if (drumset == 0)
+                        drumset = new Drumset(*smDrumset);
                   drumset->load(e);
+                  }
             else
                   domError(e);
             }
