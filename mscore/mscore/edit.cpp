@@ -1110,11 +1110,13 @@ void Score::cmdDeleteSelection()
             //
             // see also measure->drop() REPEAT_MEASURE
             //
+            int sstaff = sel->staffStart;
+            int estaff = sel->staffEnd;
             select(0, 0, 0);
             Measure* is = tick2measure(sel->tickStart);
             Measure* ie = tick2measure(sel->tickEnd);
             for (Measure* m = is; m && m != ie; m = m->next()) {
-                  for (int staffIdx = sel->staffStart; staffIdx < sel->staffEnd; ++staffIdx) {
+                  for (int staffIdx = sstaff; staffIdx < estaff; ++staffIdx) {
                         bool rmFlag = false;
                         for (Segment* s = m->first(); s; s = s->next()) {
                               if (s->subtype() == Segment::SegEndBarLine
@@ -1155,7 +1157,10 @@ void Score::cmdDeleteSelection()
                                     undoRemoveElement(el);
                               }
                         }
-                  select(m, Qt::ShiftModifier, 0);
+                  }
+            for (Measure* m = is; m && m != ie; m = m->next()) {
+                  for (int staffIdx = sstaff; staffIdx < estaff; ++staffIdx)
+                        select(m, Qt::ShiftModifier, staffIdx);
                   }
             layoutAll = true;
             return;
