@@ -30,6 +30,7 @@
 EditStyle::EditStyle(QWidget* parent)
    : QDialog(parent)
       {
+      setModal(true);
       setupUi(this);
       pageList->setCurrentRow(0);
       connect(buttonOk, SIGNAL(clicked()), this, SLOT(ok()));
@@ -53,15 +54,15 @@ void EditStyle::ok()
 void EditStyle::apply()
       {
       Style* style = cs->style();
-      style->staffUpperBorder = Spatium(staffUpperBorder->value());
-      style->staffLowerBorder = Spatium(staffLowerBorder->value());
-      style->staffDistance    = Spatium(staffDistance->value());
-      style->accoladeDistance = Spatium(akkoladeDistance->value());
-      style->systemDistance   = Spatium(systemDistance->value());
-      style->measureSpacing   = measureSpacing->value();
-      style->minNoteDistance  = Spatium(minNoteDistance->value());
-      style->barNoteDistance  = Spatium(barNoteDistance->value());
-      style->noteBarDistance  = Spatium(noteBarDistance->value());
+      style->staffUpperBorder       = Spatium(staffUpperBorder->value());
+      style->staffLowerBorder       = Spatium(staffLowerBorder->value());
+      style->staffDistance          = Spatium(staffDistance->value());
+      style->accoladeDistance       = Spatium(akkoladeDistance->value());
+      style->systemDistance         = Spatium(systemDistance->value());
+      style->measureSpacing         = measureSpacing->value();
+      style->minNoteDistance        = Spatium(minNoteDistance->value());
+      style->barNoteDistance        = Spatium(barNoteDistance->value());
+      style->noteBarDistance        = Spatium(noteBarDistance->value());
 
       style->showPageNumber         = showPageNumber->isChecked();
       style->showPageNumberOne      = showFirstPageNumber->isChecked();
@@ -71,6 +72,12 @@ void EditStyle::apply()
       style->measureNumberInterval  = intervalMeasureNumber->value();
       style->measureNumberSystem    = showEverySystemMeasureNumber->isChecked();
       style->measureNumberAllStaffs = showAllStaffsMeasureNumber->isChecked();
+
+      style->clefLeftMargin         = Spatium(clefLeftMargin->value());
+      style->keysigLeftMargin       = Spatium(keysigLeftMargin->value());
+      style->timesigLeftMargin      = Spatium(timesigLeftMargin->value());
+      style->clefKeyRightMargin     = Spatium(clefKeyRightMargin->value());
+
       cs->startCmd();
       cs->setLayoutAll(true);
       cs->endCmd();
@@ -103,4 +110,9 @@ void EditStyle::setValues(Score* s)
       showIntervalMeasureNumber->setChecked(!style->measureNumberSystem);
       showAllStaffsMeasureNumber->setChecked(style->measureNumberAllStaffs);
       showEverySystemMeasureNumber->setChecked(style->measureNumberSystem);
+
+      clefLeftMargin->setValue(style->clefLeftMargin.val());
+      keysigLeftMargin->setValue(style->keysigLeftMargin.val());
+      timesigLeftMargin->setValue(style->timesigLeftMargin.val());
+      clefKeyRightMargin->setValue(style->clefKeyRightMargin.val());
       }

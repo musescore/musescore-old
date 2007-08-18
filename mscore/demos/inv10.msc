@@ -3,8 +3,8 @@
   <Spatium>1.55</Spatium>
   <Division>480</Division>
   <Mag>1.49223</Mag>
-  <xoff>-1228</xoff>
-  <yoff>-780</yoff>
+  <xoff>-1200</xoff>
+  <yoff>-170</yoff>
   <Style>
     <staffUpperBorder>8</staffUpperBorder>
     <staffLowerBorder>4</staffLowerBorder>
@@ -91,6 +91,8 @@
     </tempolist>
   <Part>
     <Staff>
+      <lines>5</lines>
+      <small>0</small>
       <cleflist>
         <clef tick="0" idx="0"/>
         </cleflist>
@@ -100,6 +102,8 @@
       <bracket type="1" span="2"/>
       </Staff>
     <Staff>
+      <lines>5</lines>
+      <small>0</small>
       <cleflist>
         <clef tick="0" idx="4"/>
         </cleflist>
@@ -691,7 +695,7 @@ p, li { white-space: pre-wrap; }
   <Staff id="2">
     <Measure number="1">
       <Rest>
-        <ticklen>2160</ticklen>
+        <ticklen>0</ticklen>
         </Rest>
       </Measure>
     <Measure number="2">
@@ -1163,14 +1167,7 @@ p, li { white-space: pre-wrap; }
       <Note pitch="43" tpc="15" ticks="240"/>
       <Note pitch="47" tpc="19" ticks="240"/>
       <Note pitch="50" tpc="16" ticks="240"/>
-      <Chord>
-        <ticklen>720</ticklen>
-        <Note>
-          <selected>1</selected>
-          <pitch>55</pitch>
-          <tpc>15</tpc>
-          </Note>
-        </Chord>
+      <Note pitch="55" tpc="15" ticks="720"/>
       </Measure>
     </Staff>
   <cursorStaff>1</cursorStaff>

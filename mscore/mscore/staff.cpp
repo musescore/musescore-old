@@ -18,6 +18,8 @@
 //  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //=============================================================================
 
+#include <assert.h>
+
 #include "globals.h"
 #include "staff.h"
 #include "part.h"
@@ -279,7 +281,8 @@ void Staff::read(QDomElement e)
 
 void Staff::changeKeySig(int tick, int st)
       {
-      st &= 0xff;
+      assert(st >= -7 && st <= 7);
+
       int ot = _keymap->key(tick);
       if (ot == st)
             return;                 // no change

@@ -1780,7 +1780,11 @@ Element* Measure::drop(const QPointF& p, const QPointF& /*offset*/, int type, co
                   {
                   KeySig* ks = new KeySig(score());
                   ks->read(e);
-                  int newSig = char(ks->subtype() & 0xff);
+                  char newSig = ks->subtype() & 0xff;
+                  if (newSig < -7 || newSig > 7) {
+                        printf("illegal keysig %d\n", newSig);
+                        abort();
+                        }
                   staff->changeKeySig(tick(), newSig);
                   delete ks;
                   }

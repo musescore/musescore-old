@@ -13,19 +13,40 @@
    <string>MuseScore: Edit Style</string>
   </property>
   <layout class="QGridLayout" >
-   <property name="margin" >
+   <property name="leftMargin" >
     <number>8</number>
    </property>
-   <property name="spacing" >
+   <property name="topMargin" >
+    <number>8</number>
+   </property>
+   <property name="rightMargin" >
+    <number>8</number>
+   </property>
+   <property name="bottomMargin" >
+    <number>8</number>
+   </property>
+   <property name="horizontalSpacing" >
+    <number>6</number>
+   </property>
+   <property name="verticalSpacing" >
     <number>6</number>
    </property>
    <item row="1" column="0" colspan="2" >
     <layout class="QHBoxLayout" >
-     <property name="margin" >
-      <number>0</number>
-     </property>
      <property name="spacing" >
       <number>6</number>
+     </property>
+     <property name="leftMargin" >
+      <number>0</number>
+     </property>
+     <property name="topMargin" >
+      <number>0</number>
+     </property>
+     <property name="rightMargin" >
+      <number>0</number>
+     </property>
+     <property name="bottomMargin" >
+      <number>0</number>
      </property>
      <item>
       <widget class="QPushButton" name="buttonApply" >
@@ -66,9 +87,7 @@
    <item row="0" column="0" >
     <widget class="QListWidget" name="pageList" >
      <property name="sizePolicy" >
-      <sizepolicy>
-       <hsizetype>4</hsizetype>
-       <vsizetype>7</vsizetype>
+      <sizepolicy vsizetype="Expanding" hsizetype="Maximum" >
        <horstretch>0</horstretch>
        <verstretch>0</verstretch>
       </sizepolicy>
@@ -96,22 +115,32 @@
    <item row="0" column="1" >
     <widget class="QStackedWidget" name="stackedWidget" >
      <property name="sizePolicy" >
-      <sizepolicy>
-       <hsizetype>7</hsizetype>
-       <vsizetype>7</vsizetype>
+      <sizepolicy vsizetype="Expanding" hsizetype="Expanding" >
        <horstretch>0</horstretch>
        <verstretch>0</verstretch>
       </sizepolicy>
      </property>
      <property name="currentIndex" >
-      <number>2</number>
+      <number>1</number>
      </property>
      <widget class="QWidget" name="page2" >
       <layout class="QGridLayout" >
-       <property name="margin" >
+       <property name="leftMargin" >
         <number>8</number>
        </property>
-       <property name="spacing" >
+       <property name="topMargin" >
+        <number>8</number>
+       </property>
+       <property name="rightMargin" >
+        <number>8</number>
+       </property>
+       <property name="bottomMargin" >
+        <number>8</number>
+       </property>
+       <property name="horizontalSpacing" >
+        <number>6</number>
+       </property>
+       <property name="verticalSpacing" >
         <number>6</number>
        </property>
        <item row="4" column="2" >
@@ -202,9 +231,7 @@
        <item row="4" column="0" >
         <widget class="QLabel" name="label_5" >
          <property name="sizePolicy" >
-          <sizepolicy>
-           <hsizetype>5</hsizetype>
-           <vsizetype>5</vsizetype>
+          <sizepolicy vsizetype="Preferred" hsizetype="Preferred" >
            <horstretch>0</horstretch>
            <verstretch>0</verstretch>
           </sizepolicy>
@@ -224,28 +251,49 @@
      </widget>
      <widget class="QWidget" name="page3" >
       <layout class="QGridLayout" >
-       <property name="margin" >
-        <number>8</number>
-       </property>
-       <property name="spacing" >
-        <number>6</number>
-       </property>
-       <item row="3" column="2" >
-        <widget class="QLabel" name="label_17" >
+       <item row="0" column="0" >
+        <widget class="QLabel" name="label_11" >
          <property name="text" >
-          <string>spaces</string>
+          <string>spacing (1=tight)</string>
          </property>
         </widget>
        </item>
-       <item row="2" column="2" >
-        <widget class="QLabel" name="label_16" >
-         <property name="text" >
-          <string>spaces</string>
+       <item row="0" column="1" >
+        <widget class="QDoubleSpinBox" name="measureSpacing" >
+         <property name="minimum" >
+          <double>1.000000000000000</double>
          </property>
         </widget>
+       </item>
+       <item row="1" column="0" >
+        <widget class="QLabel" name="label_12" >
+         <property name="text" >
+          <string>left margin</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="1" >
+        <widget class="QDoubleSpinBox" name="barNoteDistance" />
        </item>
        <item row="1" column="2" >
         <widget class="QLabel" name="label_15" >
+         <property name="text" >
+          <string>spaces</string>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="0" >
+        <widget class="QLabel" name="label_13" >
+         <property name="text" >
+          <string>min. right margin</string>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="1" >
+        <widget class="QDoubleSpinBox" name="noteBarDistance" />
+       </item>
+       <item row="2" column="2" >
+        <widget class="QLabel" name="label_16" >
          <property name="text" >
           <string>spaces</string>
          </property>
@@ -258,52 +306,93 @@
          </property>
         </widget>
        </item>
-       <item row="2" column="0" >
-        <widget class="QLabel" name="label_13" >
-         <property name="text" >
-          <string>min. right margin</string>
-         </property>
-        </widget>
-       </item>
-       <item row="1" column="0" >
-        <widget class="QLabel" name="label_12" >
-         <property name="text" >
-          <string>left margin</string>
-         </property>
-        </widget>
-       </item>
-       <item row="0" column="0" >
-        <widget class="QLabel" name="label_11" >
-         <property name="text" >
-          <string>spacing (1=tight)</string>
-         </property>
-        </widget>
-       </item>
        <item row="3" column="1" >
         <widget class="QDoubleSpinBox" name="minNoteDistance" />
        </item>
-       <item row="2" column="1" >
-        <widget class="QDoubleSpinBox" name="noteBarDistance" />
-       </item>
-       <item row="1" column="1" >
-        <widget class="QDoubleSpinBox" name="barNoteDistance" />
-       </item>
-       <item row="0" column="1" >
-        <widget class="QDoubleSpinBox" name="measureSpacing" >
-         <property name="minimum" >
-          <double>1.000000000000000</double>
+       <item row="3" column="2" >
+        <widget class="QLabel" name="label_17" >
+         <property name="text" >
+          <string>spaces</string>
          </property>
         </widget>
        </item>
        <item row="4" column="0" >
+        <widget class="QLabel" name="label_18" >
+         <property name="text" >
+          <string>clef left margin</string>
+         </property>
+        </widget>
+       </item>
+       <item row="4" column="1" >
+        <widget class="QDoubleSpinBox" name="clefLeftMargin" />
+       </item>
+       <item row="4" column="2" >
+        <widget class="QLabel" name="label_22" >
+         <property name="text" >
+          <string>spaces</string>
+         </property>
+        </widget>
+       </item>
+       <item row="5" column="0" >
+        <widget class="QLabel" name="label_19" >
+         <property name="text" >
+          <string>keysig left margin</string>
+         </property>
+        </widget>
+       </item>
+       <item row="5" column="1" >
+        <widget class="QDoubleSpinBox" name="keysigLeftMargin" />
+       </item>
+       <item row="5" column="2" >
+        <widget class="QLabel" name="label_23" >
+         <property name="text" >
+          <string>spaces</string>
+         </property>
+        </widget>
+       </item>
+       <item row="6" column="0" >
+        <widget class="QLabel" name="label_20" >
+         <property name="text" >
+          <string>timesig left margin</string>
+         </property>
+        </widget>
+       </item>
+       <item row="6" column="1" >
+        <widget class="QDoubleSpinBox" name="timesigLeftMargin" />
+       </item>
+       <item row="6" column="2" >
+        <widget class="QLabel" name="label_24" >
+         <property name="text" >
+          <string>spaces</string>
+         </property>
+        </widget>
+       </item>
+       <item row="7" column="0" >
+        <widget class="QLabel" name="label_21" >
+         <property name="text" >
+          <string>clef/key right margin</string>
+         </property>
+        </widget>
+       </item>
+       <item row="7" column="1" >
+        <widget class="QDoubleSpinBox" name="clefKeyRightMargin" />
+       </item>
+       <item row="7" column="2" >
+        <widget class="QLabel" name="label_25" >
+         <property name="text" >
+          <string>spaces</string>
+         </property>
+        </widget>
+       </item>
+       <item row="8" column="1" colspan="2" >
         <spacer>
          <property name="orientation" >
           <enum>Qt::Vertical</enum>
          </property>
          <property name="sizeHint" >
           <size>
-           <width>20</width>
-           <height>40</height>
+           <width>115</width>
+           <height>31</height>
           </size>
          </property>
         </spacer>
@@ -312,11 +401,20 @@
      </widget>
      <widget class="QWidget" name="page1" >
       <layout class="QVBoxLayout" >
-       <property name="margin" >
-        <number>8</number>
-       </property>
        <property name="spacing" >
         <number>6</number>
+       </property>
+       <property name="leftMargin" >
+        <number>8</number>
+       </property>
+       <property name="topMargin" >
+        <number>8</number>
+       </property>
+       <property name="rightMargin" >
+        <number>8</number>
+       </property>
+       <property name="bottomMargin" >
+        <number>8</number>
        </property>
        <item>
         <widget class="QGroupBox" name="showPageNumber" >
@@ -327,10 +425,22 @@
           <bool>true</bool>
          </property>
          <layout class="QGridLayout" >
-          <property name="margin" >
+          <property name="leftMargin" >
            <number>9</number>
           </property>
-          <property name="spacing" >
+          <property name="topMargin" >
+           <number>9</number>
+          </property>
+          <property name="rightMargin" >
+           <number>9</number>
+          </property>
+          <property name="bottomMargin" >
+           <number>9</number>
+          </property>
+          <property name="horizontalSpacing" >
+           <number>6</number>
+          </property>
+          <property name="verticalSpacing" >
            <number>6</number>
           </property>
           <item row="1" column="0" >
@@ -375,10 +485,22 @@
           <bool>true</bool>
          </property>
          <layout class="QGridLayout" >
-          <property name="margin" >
+          <property name="leftMargin" >
            <number>8</number>
           </property>
-          <property name="spacing" >
+          <property name="topMargin" >
+           <number>8</number>
+          </property>
+          <property name="rightMargin" >
+           <number>8</number>
+          </property>
+          <property name="bottomMargin" >
+           <number>8</number>
+          </property>
+          <property name="horizontalSpacing" >
+           <number>6</number>
+          </property>
+          <property name="verticalSpacing" >
            <number>6</number>
           </property>
           <item row="0" column="1" >
