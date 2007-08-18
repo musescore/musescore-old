@@ -528,5 +528,3 @@ void Style::saveStyle(Xml& xml)
 
       xml.etag();
       }
-
-
