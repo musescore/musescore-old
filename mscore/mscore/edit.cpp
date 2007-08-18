@@ -1030,7 +1030,6 @@ void Score::deleteItem(Element* el)
                   // only allow for voices != 0
                   //    e.g. voice 0 rests cannot be removed
                   //
-printf("delete rest voice %d\n", el->voice());
                   if (el->voice() != 0)
                         undoRemoveElement(el);
                   break;
@@ -1067,6 +1066,11 @@ printf("delete rest voice %d\n", el->voice());
             case ACCIDENTAL:
                   addAccidental((Note*)(el->parent()), ACC_NONE);
                   break;
+
+            case TIE:
+                  cmdRemove(el);
+                  break;
+
 
             default:
                   printf("delete %s: not implemented\n", el->name());
