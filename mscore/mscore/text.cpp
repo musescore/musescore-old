@@ -79,6 +79,8 @@ Text::Text(const Text& e)
       if (editMode) {
             cursor = new QTextCursor(doc);
             cursor->setPosition(cursorPos);
+            cursor->setBlockFormat(e.cursor->blockFormat());
+            cursor->setCharFormat(e.cursor->charFormat());
             }
       else
             cursor = 0;
@@ -329,13 +331,15 @@ void Text::setText(const QString& s)
       cursor.movePosition(QTextCursor::Start);
       if (_align) {
             QTextBlockFormat bf = cursor.blockFormat();
+            Qt::Alignment alignment = 0;
             if (_align & ALIGN_HCENTER)
-                  bf.setAlignment(Qt::AlignHCenter);
+                  alignment |= Qt::AlignHCenter;
             else if (_align & ALIGN_LEFT)
-                  bf.setAlignment(Qt::AlignLeft);
+                  alignment |= Qt::AlignLeft;
             else if (_align & ALIGN_RIGHT)
-                  bf.setAlignment(Qt::AlignRight);
+                  alignment |= Qt::AlignRight;
 
+            bf.setAlignment(alignment);
             cursor.setBlockFormat(bf);
             }
       QTextCharFormat tf = cursor.charFormat();
@@ -487,12 +491,27 @@ bool Text::startEdit(const QPointF& p)
       cursor = new QTextCursor(doc);
       cursor->setPosition(cursorPos);
       editMode = true;
+      setCursor(p);
+      cursorPos = cursor->position();
+
+      if (cursorPos == 0 && _align) {
+            QTextBlockFormat bf = cursor->blockFormat();
+            Qt::Alignment alignment = 0;
+            if (_align & ALIGN_HCENTER)
+                  alignment |= Qt::AlignHCenter;
+            else if (_align & ALIGN_LEFT)
+                  alignment |= Qt::AlignLeft;
+            else if (_align & ALIGN_RIGHT)
+                  alignment |= Qt::AlignRight;
+            bf.setAlignment(alignment);
+            setBlockFormat(bf);
+            }
+      //never true?
       if (palette) {
             palette->setCharFormat(cursor->charFormat());
             palette->setBlockFormat(cursor->blockFormat());
             }
-      setCursor(p);
-      cursorPos = cursor->position();
+
       return true;
       }
 
