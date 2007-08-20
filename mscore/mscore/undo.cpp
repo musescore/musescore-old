@@ -67,7 +67,7 @@ static const char* undoName[] = {
       "ChangeColor",       "ChangePitch",
       "ChangeSubtype",     "AddAccidental",
       "FlipStemDirection", "FlipSlurDirection",
-      "ChangeTimeSig",     "ChangeKeySig",
+      "ChangeKeySig",
       "ChangeClef",
       "ChangeSig",
       "ChangeMeasureLen",
@@ -331,9 +331,6 @@ void Score::processUndoOp(UndoOp* i, bool undo)
                   }
                   break;
 
-            case UndoOp::ChangeTimeSig:
-                  printf("UndoOp::ChangeTimeSig: todo\n");
-                  break;
             case UndoOp::InsertStaves:
                   if (undo)
                         i->measure->removeStaves(i->val1, i->val2);

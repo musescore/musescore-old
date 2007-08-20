@@ -45,6 +45,12 @@ struct SigEvent {
       SigEvent(int, int, int, int); ///< set irregular event
       bool operator==(const SigEvent& e) const;
       bool valid() const { return nominator > 0; }
+      QString print() const {
+            if (valid())
+                  return QString("%1/%2").arg(nominator).arg(denominator);
+            else
+                  return QString("void");
+            }
       };
 
 //---------------------------------------------------------
