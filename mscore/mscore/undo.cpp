@@ -186,8 +186,11 @@ void Score::processUndoOp(UndoOp* i, bool undo)
       {
       UNDO = true;
 
-      if (debugMode)
+      if (debugMode) {
             printf("Score::processUndoOp(i->type=%s, undo=%d)\n", i->name(), undo);
+            if (i->type == UndoOp::RemoveElement)
+                  printf("   %s\n", i->obj->name());
+            }
 
       switch (i->type) {
             case UndoOp::RemoveElement:
@@ -430,11 +433,42 @@ void Score::processUndoOp(UndoOp* i, bool undo)
             case UndoOp::ChangeMeasureLen:
                   {
                   Measure* m = i->measure;
-                  int ot     = m->tickLen();
-                  m->setTickLen(i->val1);
+                  int ol     = m->tickLen();
+                  int nl     = i->val1;
+                  m->setTickLen(nl);
+
+                  //
+                  // move EndBarLin and TimeSigAnnounce
+                  // to end of measure:
+                  //
+                  int staves = nstaves();
+                  int endTick = m->tick() + nl;
+                  for (Segment* segment = m->first(); segment; segment = segment->next()) {
+                        if (segment->subtype() != Segment::SegEndBarLine
+                           && segment->subtype() != Segment::SegTimeSigAnnounce)
+                              continue;
+                        segment->setTick(endTick);
+                        for (int track = 0; track < staves*VOICES; ++track) {
+                              if (segment->element(track))
+                                    segment->element(track)->setTick(endTick);
+                              }
+                        }
+                  int diff   = nl - ol;
+                  int mtick;
+                  if (diff < 0)
+                        mtick = m->tick() + ol;
+                  else
+                        mtick = m->tick() + nl;
+
+                  sigmap->insertTime(mtick, diff);
+                  foreach(Staff* staff, _staves) {
+                        staff->clef()->insertTime(mtick, diff);
+                        staff->keymap()->insertTime(mtick, diff);
+                        }
+
                   if (m->next())
                         adjustTime(m->tick() + i->val1, m->next());
-                  i->val1 = ot;
+                  i->val1 = ol;
                   }
                   break;
             }
@@ -457,7 +491,7 @@ void Score::endUndoRedo(Undo* undo)
 
       *cis = undo->inputState;
 
-      if (cis->pos == -1) {
+      if (!noteEntryMode()) {
             // no input state
             canvas()->setState(Canvas::NORMAL);
             mscore->setState(STATE_NORMAL);

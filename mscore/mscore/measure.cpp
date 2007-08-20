@@ -802,8 +802,11 @@ void Measure::add(Element* el)
                   int st = el->subtype();
                   if (s) {
                         if (st == Segment::SegChordRest) {
-                              while (s && s->subtype() != st && s->tick() == t)
+                              while (s && s->subtype() != st && s->tick() == t) {
+                                    if (s->subtype() == Segment::SegEndBarLine)
+                                          break;
                                     s = s->next();
+                                    }
                               }
                         else {
                               while (s && s->subtype() <= st) {
@@ -1968,13 +1971,8 @@ Element* Measure::drop(const QPointF& p, const QPointF& /*offset*/, int type, co
 
 void Measure::cmdRemoveEmptySegment(Segment* s)
       {
-      int tracks = _score->nstaves() * VOICES;
-      for (int track = 0; track < tracks; ++track) {
-            if (s->element(track))
-                  return;
-            }
-      _score->undoOp(UndoOp::RemoveElement, s);
-      remove(s);
+      if (s->isEmpty())
+            _score->undoRemoveElement(s);
       }
 
 //---------------------------------------------------------
@@ -2034,42 +2032,67 @@ void Measure::propertyAction(const QString& s)
 
 void Measure::adjustToLen(int ol, int nl)
       {
-      //
-      // Plan B: remove all elements and replace with
-      //         measure rest
-      //
-      score()->undoChangeMeasureLen(this, nl);
-
-      for (Segment* s = first(); s;) {
-            Segment* ns = s->next();
-            if (s->subtype() == Segment::SegChordRest)
-                  score()->undoRemoveElement(s);
-            s = ns;
-            }
-      foreach(Element* e, _sel) {
-            if (e->type() != SLUR_SEGMENT)
-                  score()->undoRemoveElement(e);
-            }
-
-      int diff  = nl - ol;
-      int mtick = tick() + nl;
-      _score->sigmap->insertTime(mtick, diff);
-      foreach(Staff* staff, _score->staves()) {
-            staff->clef()->insertTime(mtick, diff);
-            staff->keymap()->insertTime(mtick, diff);
-            }
-
-      Segment* s = new Segment(this, tick());
-      s->setSubtype(Segment::SegChordRest);
-      score()->undoAddElement(s);
-
       int staves = score()->nstaves();
-      for (int i = 0; i < staves; ++i) {
-            Rest* rest = new Rest(score(), tick(), nl);
-            rest->setStaff(score()->staff(i));
-            rest->setParent(s);
-            score()->undoAddElement(rest);
+      int diff   = nl - ol;
+
+      for (int staffIdx = 0; staffIdx < staves; ++staffIdx) {
+            Staff* staffp = score()->staff(staffIdx);
+            int rests  = 0;
+            Rest* rest = 0;
+            for (Segment* segment = first(); segment; segment = segment->next()) {
+                  int strack = staffIdx * VOICES;
+                  int etrack = strack + VOICES;
+                  for (int track = strack; track < etrack; ++track) {
+                        Element* e = segment->element(track);
+                        if (e && e->type() == REST) {
+                              ++rests;
+                              rest = (Rest*)e;
+                              }
+
+                        }
+                  }
+            // printf("rests = %d\n", rests);
+            if (rests == 1) {
+                  rest->setTickLen(0);    // whole measure rest
+                  }
+            else {
+                  int strack = staffIdx * VOICES;
+                  int etrack = strack + VOICES;
+
+                  for (int trk = strack; trk < etrack; ++trk) {
+                        int n = diff;
+                        if (n < 0)  {
+                              for (Segment* segment = last(); segment;) {
+                                    Segment* pseg = segment->prev();
+                                    Element* e = segment->element(trk);
+                                    if (e && (e->type() == CHORD || e->type() == REST)) {
+                                          n += e->tickLen();
+                                          score()->undoRemoveElement(e);
+                                          if (segment->isEmpty())
+                                                score()->undoRemoveElement(segment);
+                                          if (n >= 0)
+                                                break;
+                                          }
+                                    segment = pseg;
+                                    }
+                              }
+                        if (n > 0) {
+                              // add rest to measure
+                              int rtick = tick() + tickLen() - n;
+                              Segment* seg = findSegment(Segment::SegChordRest, rtick);
+                              if (seg == 0) {
+                                    seg = createSegment(Segment::SegChordRest, rtick);
+                                    score()->undoAddElement(seg);
+                                    }
+                              rest = new Rest(score(), rtick, n);
+                              rest->setStaff(staffp);
+                              rest->setVoice(trk % VOICES);
+                              seg->add(rest);
+                              }
+                        }
+                  }
             }
+      score()->undoChangeMeasureLen(this, nl);
       }
 
 //---------------------------------------------------------
