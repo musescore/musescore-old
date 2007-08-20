@@ -1005,6 +1005,7 @@ void Measure::remove(Element* el)
 
 //---------------------------------------------------------
 //   moveTicks
+//    also adjust endBarLine if measure len has changed
 //---------------------------------------------------------
 
 void Measure::moveTicks(int diff)
@@ -1023,17 +1024,22 @@ void Measure::moveTicks(int diff)
       int staves = _score->nstaves();
       int tracks = staves * VOICES;
       for (Segment* segment = first(); segment; segment = segment->next()) {
-            segment->setTick(segment->tick() + diff);
+            int ltick;
+            if (segment->subtype() == Segment::SegEndBarLine)
+                  ltick = tick() + tickLen();
+            else
+                  ltick = segment->tick() + diff;
+            segment->setTick(ltick);
             for (int track = 0; track < tracks; ++track) {
                   Element* e = segment->element(track);
                   if (e)
-                        e->setTick(e->tick() + diff);
+                        e->setTick(ltick);
                   }
             for (int staff = 0; staff < staves; ++staff) {
                   const LyricsList* ll = segment->lyricsList(staff);
                   for (ciLyrics i = ll->begin(); i != ll->end(); ++i) {
                         if (*i)
-                              (*i)->setTick((*i)->tick() + diff);
+                              (*i)->setTick(ltick);
                         }
                   }
             }

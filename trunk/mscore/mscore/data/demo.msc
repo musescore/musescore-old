@@ -3,8 +3,8 @@
   <Spatium>1.625</Spatium>
   <Division>480</Division>
   <Mag>0.953323</Mag>
-  <xoff>41</xoff>
-  <yoff>38</yoff>
+  <xoff>12</xoff>
+  <yoff>11</yoff>
   <Style>
     <staffUpperBorder>8</staffUpperBorder>
     <staffLowerBorder>4</staffLowerBorder>
@@ -128,6 +128,8 @@
     </tempolist>
   <Part>
     <Staff>
+      <lines>5</lines>
+      <small>0</small>
       <cleflist>
         <clef tick="0" idx="0"/>
         <clef tick="7680" idx="0"/>
@@ -138,6 +140,8 @@
       <bracket type="1" span="2"/>
       </Staff>
     <Staff>
+      <lines>5</lines>
+      <small>0</small>
       <cleflist>
         <clef tick="0" idx="4"/>
         </cleflist>
@@ -218,7 +222,6 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <ticklen>480</ticklen>
         <Attribute>
-          <idx>8</idx>
           <subtype>8</subtype>
           <offset x="0.196899" y="0.0992187"/>
           </Attribute>
@@ -227,7 +230,6 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <ticklen>480</ticklen>
         <Attribute>
-          <idx>8</idx>
           <subtype>8</subtype>
           </Attribute>
         <Note pitch="65" tpc="13"/>
@@ -235,7 +237,6 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <ticklen>480</ticklen>
         <Attribute>
-          <idx>8</idx>
           <subtype>8</subtype>
           </Attribute>
         <Note pitch="70" tpc="12"/>
@@ -243,7 +244,6 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <ticklen>240</ticklen>
         <Attribute>
-          <idx>8</idx>
           <subtype>8</subtype>
           </Attribute>
         <Note pitch="72" tpc="14"/>
@@ -252,7 +252,6 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <ticklen>480</ticklen>
         <Attribute>
-          <idx>8</idx>
           <subtype>8</subtype>
           </Attribute>
         <Note pitch="74" tpc="16"/>
@@ -280,7 +279,6 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <ticklen>240</ticklen>
         <Attribute>
-          <idx>8</idx>
           <subtype>8</subtype>
           </Attribute>
         <Note pitch="72" tpc="14"/>
@@ -289,7 +287,6 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <ticklen>480</ticklen>
         <Attribute>
-          <idx>8</idx>
           <subtype>8</subtype>
           </Attribute>
         <Note pitch="74" tpc="16"/>
@@ -297,7 +294,6 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <ticklen>480</ticklen>
         <Attribute>
-          <idx>8</idx>
           <subtype>8</subtype>
           </Attribute>
         <Note pitch="70" tpc="12"/>
@@ -305,7 +301,6 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <ticklen>480</ticklen>
         <Attribute>
-          <idx>8</idx>
           <subtype>8</subtype>
           </Attribute>
         <Note pitch="72" tpc="14"/>
@@ -313,7 +308,6 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <ticklen>480</ticklen>
         <Attribute>
-          <idx>8</idx>
           <subtype>8</subtype>
           </Attribute>
         <Note pitch="67" tpc="15"/>
@@ -321,7 +315,6 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <ticklen>480</ticklen>
         <Attribute>
-          <idx>8</idx>
           <subtype>8</subtype>
           </Attribute>
         <Note pitch="65" tpc="13"/>
@@ -512,7 +505,6 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <ticklen>480</ticklen>
         <Attribute>
-          <idx>8</idx>
           <subtype>8</subtype>
           </Attribute>
         <Note pitch="65" tpc="13"/>
@@ -520,7 +512,6 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <ticklen>480</ticklen>
         <Attribute>
-          <idx>8</idx>
           <subtype>8</subtype>
           </Attribute>
         <Note pitch="67" tpc="15"/>
@@ -528,7 +519,6 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <ticklen>480</ticklen>
         <Attribute>
-          <idx>8</idx>
           <subtype>8</subtype>
           </Attribute>
         <Note pitch="62" tpc="16"/>
@@ -536,7 +526,6 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <ticklen>240</ticklen>
         <Attribute>
-          <idx>8</idx>
           <subtype>8</subtype>
           </Attribute>
         <Note pitch="65" tpc="13"/>
@@ -545,7 +534,6 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <ticklen>480</ticklen>
         <Attribute>
-          <idx>8</idx>
           <subtype>8</subtype>
           </Attribute>
         <Note pitch="60" tpc="14"/>
@@ -585,7 +573,6 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <ticklen>240</ticklen>
         <Attribute>
-          <idx>8</idx>
           <subtype>8</subtype>
           </Attribute>
         <Note pitch="67" tpc="15"/>
@@ -594,7 +581,6 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <ticklen>480</ticklen>
         <Attribute>
-          <idx>8</idx>
           <subtype>8</subtype>
           </Attribute>
         <Note pitch="65" tpc="13"/>
@@ -658,7 +644,6 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <ticklen>480</ticklen>
         <Attribute>
-          <idx>8</idx>
           <subtype>8</subtype>
           </Attribute>
         <Note pitch="65" tpc="13"/>
@@ -666,7 +651,6 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <ticklen>480</ticklen>
         <Attribute>
-          <idx>8</idx>
           <subtype>8</subtype>
           </Attribute>
         <Note pitch="67" tpc="15"/>
@@ -674,7 +658,6 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <ticklen>480</ticklen>
         <Attribute>
-          <idx>8</idx>
           <subtype>8</subtype>
           </Attribute>
         <Note pitch="62" tpc="16"/>
@@ -682,7 +665,6 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <ticklen>240</ticklen>
         <Attribute>
-          <idx>8</idx>
           <subtype>8</subtype>
           </Attribute>
         <Note pitch="65" tpc="13"/>
@@ -691,7 +673,6 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <ticklen>480</ticklen>
         <Attribute>
-          <idx>8</idx>
           <subtype>8</subtype>
           </Attribute>
         <Note pitch="63" tpc="11"/>
@@ -734,7 +715,6 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <ticklen>240</ticklen>
         <Attribute>
-          <idx>8</idx>
           <subtype>8</subtype>
           <offset x="-0.0142169" y="-0.0302857"/>
           </Attribute>
@@ -1791,7 +1771,7 @@ p, li { white-space: pre-wrap; }
         <nom1>5</nom1>
         </TimeSig>
       <Rest>
-        <ticklen>2400</ticklen>
+        <ticklen>0</ticklen>
         </Rest>
       </Measure>
     <Measure number="2">
@@ -1801,7 +1781,7 @@ p, li { white-space: pre-wrap; }
         <nom1>6</nom1>
         </TimeSig>
       <Rest>
-        <ticklen>2880</ticklen>
+        <ticklen>0</ticklen>
         </Rest>
       </Measure>
     <Measure number="3">
@@ -1880,7 +1860,7 @@ p, li { white-space: pre-wrap; }
         <nom1>5</nom1>
         </TimeSig>
       <Rest>
-        <ticklen>2400</ticklen>
+        <ticklen>0</ticklen>
         </Rest>
       </Measure>
     <Measure number="6">
@@ -1923,7 +1903,7 @@ p, li { white-space: pre-wrap; }
         <nom1>5</nom1>
         </TimeSig>
       <Rest>
-        <ticklen>2400</ticklen>
+        <ticklen>0</ticklen>
         </Rest>
       </Measure>
     <Measure number="8">
@@ -2036,8 +2016,8 @@ p, li { white-space: pre-wrap; }
         </TimeSig>
       <Chord>
         <ticklen>960</ticklen>
-        <Note pitch="30" tpc="8"/>
-        <Note pitch="42" tpc="8"/>
+        <Note pitch="30" tpc="20"/>
+        <Note pitch="42" tpc="20"/>
         </Chord>
       <Chord>
         <ticklen>480</ticklen>
@@ -2046,13 +2026,13 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Chord>
         <ticklen>480</ticklen>
-        <Note pitch="30" tpc="8"/>
-        <Note pitch="42" tpc="8"/>
+        <Note pitch="30" tpc="20"/>
+        <Note pitch="42" tpc="20"/>
         </Chord>
       <Chord>
         <ticklen>240</ticklen>
-        <Note pitch="42" tpc="8"/>
-        <Note pitch="54" tpc="8"/>
+        <Note pitch="42" tpc="20"/>
+        <Note pitch="54" tpc="20"/>
         </Chord>
       <Rest>
         <ticklen>240</ticklen>
@@ -2444,7 +2424,6 @@ p, li { white-space: pre-wrap; }
         <Note pitch="53" tpc="13"/>
         </Chord>
       <Breath>
-        <selected>1</selected>
         </Breath>
       <Chord>
         <ticklen>480</ticklen>
@@ -2491,11 +2470,7 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <ticklen>480</ticklen>
         <Note pitch="46" tpc="12"/>
-        <Note>
-          <selected>1</selected>
-          <pitch>58</pitch>
-          <tpc>12</tpc>
-          </Note>
+        <Note pitch="58" tpc="12"/>
         </Chord>
       </Measure>
     </Staff>
