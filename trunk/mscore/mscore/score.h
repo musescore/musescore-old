@@ -81,6 +81,8 @@ class ScoreView {
 class Score : public QObject {
       Q_OBJECT
 
+      bool _noteEntryMode;
+
       Style* _style;
       QFileInfo info;
       bool _created;          ///< file is never saved, has generated name
@@ -435,6 +437,7 @@ class Score : public QObject {
       int nextSeg1(int tick, int& track);
       int prevSeg1(int tick, int& track);
       Style* style() const { return _style; }
+      bool noteEntryMode() const { return _noteEntryMode; }
       };
 
 extern Score* gscore;

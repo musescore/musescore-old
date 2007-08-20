@@ -122,6 +122,7 @@ bool Score::needLayout() const
 
 Score::Score()
       {
+      _noteEntryMode    = false;
       info.setFile("");
       _layout           = new ScoreLayout();
       _style            = new Style(defaultStyle);
@@ -889,7 +890,7 @@ ChordRest* Score::setNoteEntry(bool val, bool step)
       ChordRest* cr = 0;
       if (val) {
             Element* el = sel->element();
-            if (cis->pos != -1) {     // already in note entry mode
+            if (noteEntryMode()) {     // already in note entry mode
                   if (el) {
                         if (el->type() == NOTE)
                               el = el->parent();
@@ -939,19 +940,17 @@ ChordRest* Score::setNoteEntry(bool val, bool step)
                   else
                         cis->pos += cr->tickLen();
                   }
-            }
-      else {
-            padState.len = 0;
-            cis->pos = -1;
-            setPadState();
-            }
-      if (cis->pos == -1) {
-            canvas()->setState(Canvas::NORMAL);
-            mscore->setState(STATE_NORMAL);
-            }
-      else {
+            _noteEntryMode = true;
             canvas()->setState(Canvas::NOTE_ENTRY);
             mscore->setState(STATE_NOTE_ENTRY);
+            }
+      else {
+            padState.len   = 0;
+            cis->pos       = -1;
+            _noteEntryMode = false;
+            setPadState();
+            canvas()->setState(Canvas::NORMAL);
+            mscore->setState(STATE_NORMAL);
             }
       moveCursor();
       return cr;
@@ -973,10 +972,9 @@ void Score::midiReceived()
 void Score::midiNoteReceived(int pitch, bool chord)
       {
       startCmd();
-      if (cis->pos == -1) {
+      if (!noteEntryMode())
             setNoteEntry(true, false);
-            }
-      if (cis->pos != -1) {
+      if (noteEntryMode()) {
             int len = padState.tickLen;
             if (chord) {
                   Note* on = getSelectedNote();
@@ -1120,8 +1118,6 @@ bool Score::playlistDirty()
 void Score::adjustTime(int tick, Measure* m)
       {
       int delta = tick - m->tick();
-      if (delta == 0)
-            return;
       while (m) {
             m->moveTicks(delta);
             tick += m->tickLen();

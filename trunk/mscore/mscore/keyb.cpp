@@ -197,10 +197,10 @@ void Score::padToggle(int n)
                   // if in "note enter" mode, reset
                   // rest flag
                   //
-                  if (cis->pos != -1)
+                  if (noteEntryMode())
                         padState.rest = false;
                   }
-            if (cis->pos == -1 && sel->state() == SEL_SINGLE) {
+            if (!noteEntryMode() && sel->state() == SEL_SINGLE) {
                   Element* el = sel->element();
                   if (el->type() == NOTE)
                         el = el->parent();

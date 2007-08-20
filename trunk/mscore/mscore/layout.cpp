@@ -542,7 +542,7 @@ System* ScoreLayout::layoutSystem(Measure*& im, System* system, qreal x, qreal y
       SigEvent sig1 = _score->sigmap->timesig(lm->tick() + lm->tickLen() - 1);
       SigEvent sig2 = _score->sigmap->timesig(lm->tick() + lm->tickLen());
       if (!(sig1 == sig2)) {
-            int tick = lm->tick() + lm->tickLen();
+            int tick    = lm->tick() + lm->tickLen();
             Segment* s  = lm->getSegment(Segment::SegTimeSigAnnounce, tick);
             int nstaves = score()->nstaves();
             for (int staff = 0; staff < nstaves; ++staff) {

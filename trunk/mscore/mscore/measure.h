@@ -120,7 +120,6 @@ class Measure : public Element {
 
       void push_back(Segment* e);
       void push_front(Segment* e);
-      void adjustToLen(int, int);
 
    public:
       Measure(Score*);
@@ -237,6 +236,7 @@ class Measure : public Element {
       void cmdRemoveEmptySegment(Segment* s);
       void collectElements(QList<Element*>& el);
       void createVoice(int track);
+      void adjustToLen(int, int);
       };
 
 #endif

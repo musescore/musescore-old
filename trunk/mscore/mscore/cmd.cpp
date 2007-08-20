@@ -434,7 +434,7 @@ void Score::cmdAddPitch(int note, bool addFlag)
 
       int octave    = padState.pitch / 12;
       ChordRest* cr = 0;
-      if (cis->pos == -1) {
+      if (!noteEntryMode()) {
             //
             // start note entry mode at current selected
             // note/rest
@@ -454,9 +454,9 @@ void Score::cmdAddPitch(int note, bool addFlag)
             m->createVoice(cis->staff * VOICES + cis->voice);
             cr = (ChordRest*)searchNote(cis->pos, cis->staff, cis->voice);
             if (!cr || !cr->isChordRest())
-                  cis->pos = -1;
+                  setNoteEntry(false, false);
             }
-      if (cis->pos == -1) {
+      if (!noteEntryMode()) {
             printf("cmdAddPitch: pos not set, or no chord rest found\n");
             return;
             }
@@ -1244,14 +1244,14 @@ void Score::cmd(const QString& cmd)
             else if (cmd == "add-hairpin-reverse")
                   cmdAddHairpin(true);
             else if (cmd == "escape") {
-                  if (cis->pos != -1)
+                  if (noteEntryMode())
                         setNoteEntry(false, false);
                   select(0, 0, 0);
                   }
             else if (cmd == "delete")
                   cmdDeleteSelection();
             else if (cmd == "rest") {
-                  if (cis->pos == -1) {
+                  if (!noteEntryMode()) {
                         setNoteEntry(true, true);
                         Element* el = sel->element();
                         if (el) {
@@ -1261,7 +1261,7 @@ void Score::cmd(const QString& cmd)
                                     cis->pos = ((ChordRest*)el)->tick();
                               }
                         }
-                  if (cis->pos != -1) {
+                  if (noteEntryMode()) {
                         int len = padState.tickLen;
                         setRest(cis->pos, staff(cis->staff), cis->voice, len);
                         cis->pos += len;
@@ -1393,7 +1393,7 @@ void Score::cmd(const QString& cmd)
                   padToggle(PAD_BEAM32);
             else if (cmd == "pad-tie") {
                   padState.tie = !padState.tie;
-                  if (cis->pos == -1 && sel->state() == SEL_SINGLE) {
+                  if (!noteEntryMode() && sel->state() == SEL_SINGLE) {
                         Element* el = sel->element();
                         if (el->type() == NOTE) {
                   		Tie* tie = new Tie(this);
@@ -1664,9 +1664,8 @@ void Score::move(const QString& cmd)
                         el = ((Chord*)el)->upNote();
                   select(el, 0, 0);
                   adjustCanvasPosition(el);
-                  if (canvas()->getState() == Canvas::NOTE_ENTRY) {
+                  if (noteEntryMode()) {
                         cis->pos = tick;
-//                        moveCursor();
                         }
                   }
             }

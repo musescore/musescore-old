@@ -490,84 +490,12 @@ void Score::changeTimeSig(int tick, int timeSigSubtype)
       // modify measures
       //---------------------------------------------
 
-      int mtick = 0;
       for (Measure* m = _layout->first(); m; m = m->next()) {
-            int tickdiff = mtick - m->tick();
-            int mtickLen = sigmap->ticksMeasure(mtick);
-            int lendiff  = mtickLen - m->tickLen();
-            m->setTickLen(mtickLen);
-            m->moveTicks(tickdiff);   // move even if tickdiff == 0 to adjust endBarLine
-
-            mtick += mtickLen;
-            if (lendiff == 0)
+            int newLen = sigmap->ticksMeasure(m->tick());
+            int oldLen = m->tickLen();
+            if (newLen == oldLen)
                   continue;
-
-            int insertTick;
-            if (lendiff < 0)
-                  insertTick = mtick - lendiff;
-            else
-                  insertTick = mtick;
-            sigmap->insertTime(insertTick, lendiff);
-            foreach(Staff* staff, _staves) {
-                  staff->clef()->insertTime(insertTick, lendiff);
-                  staff->keymap()->insertTime(insertTick, lendiff);
-                  }
-
-            for (int staffIdx = 0; staffIdx < staves; ++staffIdx) {
-                  Staff* staffp = staff(staffIdx);
-                  int rests  = 0;
-                  Rest* rest = 0;
-                  for (Segment* segment = m->first(); segment; segment = segment->next()) {
-                        int strack = staffIdx * VOICES;
-                        int etrack = strack + VOICES;
-                        for (int track = strack; track < etrack; ++track) {
-                              Element* e = segment->element(track);
-                              if (e && e->type() == REST) {
-                                    ++rests;
-                                    rest = (Rest*)e;
-                                    }
-
-                              }
-                        }
-                  // printf("rests = %d\n", rests);
-                  if (rests == 1) {
-                        rest->setTickLen(0);    // whole measure rest
-                        }
-                  else {
-                        int strack = staffIdx * VOICES;
-                        int etrack = strack + VOICES;
-
-                        for (int trk = strack; trk < etrack; ++trk) {
-                              int n = lendiff;
-                              if (n < 0)  {
-                                    for (Segment* segment = m->last(); segment;) {
-                                          Segment* pseg = segment->prev();
-                                          Element* e = segment->element(trk);
-                                          if (e && (e->type() == CHORD || e->type() == REST)) {
-                                                n += e->tickLen();
-                                                undoRemoveElement(e);
-                                                if (n >= 0)
-                                                      break;
-                                                }
-                                          segment = pseg;
-                                          }
-                                    }
-                              if (n > 0) {
-                                    // add rest to measure
-                                    int rtick = m->tick() + m->tickLen() - n;
-                                    Segment* seg = m->findSegment(Segment::SegChordRest, rtick);
-                                    if (seg == 0) {
-                                          seg = m->createSegment(Segment::SegChordRest, rtick);
-                                          undoAddElement(seg);
-                                          }
-                                    rest = new Rest(this, rtick, n);
-                                    rest->setStaff(staffp);
-                                    rest->setVoice(trk % VOICES);
-                                    seg->add(rest);
-                                    }
-                              }
-                        }
-                  }
+            m->adjustToLen(oldLen, newLen);
             }
       if (nSig.valid())
             addTimeSig(tick, timeSigSubtype);

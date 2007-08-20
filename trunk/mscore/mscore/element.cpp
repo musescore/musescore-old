@@ -719,7 +719,7 @@ void Lasso::draw(QPainter& p)
 
 void Element::dump() const
       {
-      printf("---Element type %s, pos(%4.2f,%4.2f)\n"
+      printf("---Element: %s, pos(%4.2f,%4.2f)\n"
          "   bbox(%g,%g,%g,%g)\n"
          "   abox(%g,%g,%g,%g)\n"
          "  parent: %p\n",
