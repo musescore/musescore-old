@@ -71,6 +71,7 @@ struct UndoOp {
             ChangeMeasureLen,
             ChangeElement,
             ChangeKey,
+            InsertTime
             };
       UndoType type;
       Element* obj;

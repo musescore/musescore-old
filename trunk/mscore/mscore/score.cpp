@@ -323,16 +323,6 @@ void Score::addMeasure(Measure* m)
       {
       int tick    = m->tick();
       Measure* im = tick2measure(tick);
-
-      if (im) {
-            int mtick = m->tick();
-            int len   = m->tickLen();
-            sigmap->insertTime(mtick, len);
-            foreach(Staff* staff, _staves) {
-                  staff->clef()->insertTime(mtick, len);
-                  staff->keymap()->insertTime(mtick, len);
-                  }
-            }
       _layout->insert(m, im);
       fixTicks();
       }
@@ -343,14 +333,31 @@ void Score::addMeasure(Measure* m)
 
 void Score::removeMeasure(Measure* im)
       {
-      sigmap->removeTime(im->tick(), im->tickLen());
-
-      foreach(Staff* staff, _staves) {
-            staff->clef()->removeTime(im->tick(), im->tickLen());
-            staff->keymap()->removeTime(im->tick(), im->tickLen());
-            }
       _layout->erase(im);
       fixTicks();
+      }
+
+//---------------------------------------------------------
+//   insertTime
+//---------------------------------------------------------
+
+void Score::insertTime(int tick, int len)
+      {
+      if (len < 0) {
+            len = -len;
+            sigmap->removeTime(tick, len);
+            foreach(Staff* staff, _staves) {
+                  staff->clef()->removeTime(tick, len);
+                  staff->keymap()->removeTime(tick, len);
+                  }
+            }
+      else {
+            sigmap->insertTime(tick, len);
+            foreach(Staff* staff, _staves) {
+                  staff->clef()->insertTime(tick, len);
+                  staff->keymap()->insertTime(tick, len);
+                  }
+            }
       }
 
 //---------------------------------------------------------
@@ -360,8 +367,10 @@ void Score::removeMeasure(Measure* im)
 /**
  Recalculate all ticks and measure numbers.
 
- This is needed after inserting or removing a
- measure.
+ This is needed after
+      - inserting or removing a measure.
+      - changing the sigmap
+      - after inserting/deleting time (changes the sigmap)
 */
 
 void Score::fixTicks()
@@ -387,9 +396,8 @@ void Score::fixTicks()
                   ++bar;
             int mtick = m->tick();
             int diff  = tick - mtick;
+// printf("fixTicks %d  %5d + %3d  len %3d\n", m->no(), mtick, diff, sigmap->ticksMeasure(tick));
             tick += sigmap->ticksMeasure(tick);
-            if (diff == 0)
-                  continue;
             m->moveTicks(diff);
             }
       }
@@ -1118,6 +1126,8 @@ bool Score::playlistDirty()
 void Score::adjustTime(int tick, Measure* m)
       {
       int delta = tick - m->tick();
+      if (delta == 0)
+            return;
       while (m) {
             m->moveTicks(delta);
             tick += m->tickLen();

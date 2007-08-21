@@ -58,7 +58,9 @@ typedef LyricsList::const_iterator ciLyrics;
 class Segment : public Element {
    public:
       enum SegmentType {
-            SegClef, SegKeySig, SegTimeSig, SegBarLine, SegChordRest,
+            SegClef, SegKeySig, SegTimeSig,
+            SegBarLine,       // usually a start repeat in first measure of system
+            SegChordRest,
             SegBreath,
             SegEndBarLine, SegTimeSigAnnounce
             };

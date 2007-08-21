@@ -499,6 +499,7 @@ void Score::changeTimeSig(int tick, int timeSigSubtype)
             }
       if (nSig.valid())
             addTimeSig(tick, timeSigSubtype);
+      fixTicks();
       }
 
 //---------------------------------------------------------
@@ -997,25 +998,8 @@ void Score::deleteItem(Element* el)
                         if (e->type() == SLUR)
                               undoRemoveElement(e);
                         }
-                  int tick = m->tick();
-                  int len  = m->tickLen();
-                  for (ciSigEvent i = sigmap->begin(); i != sigmap->end(); ++i) {
-                        if (i->first >= tick && (i->first < tick + len))
-                              undoChangeSig(i->first, i->second, SigEvent());
-                        }
-                  foreach(Staff* staff, _staves) {
-                        ClefList* cl = staff->clef();
-                        KeyList*  kl = staff->keymap();
-                        for (ciClefEvent i = cl->begin(); i != cl->end(); ++i) {
-                              if (i->first >= tick && (i->first < tick + len))
-                                    undoChangeClef(staff, i->first, i->second, NO_CLEF);
-                              }
-                        for (ciKeyEvent i = kl->begin(); i != kl->end(); ++i) {
-                              if (i->first >= tick && (i->first < tick + len))
-                                    undoChangeKey(staff, i->first, i->second, NO_KEY);
-                              }
-                        }
                   undoRemoveElement(m);
+                  cmdRemoveTime(m->tick(), m->tickLen());
                   }
                   break;
 
@@ -1031,6 +1015,31 @@ void Score::deleteItem(Element* el)
             default:
                   printf("delete %s: not implemented\n", el->name());
             }
+      }
+
+//---------------------------------------------------------
+//   cmdRemoveTime
+//---------------------------------------------------------
+
+void Score::cmdRemoveTime(int tick, int len)
+      {
+      for (ciSigEvent i = sigmap->begin(); i != sigmap->end(); ++i) {
+            if (i->first >= tick && (i->first < tick + len))
+                  undoChangeSig(i->first, i->second, SigEvent());
+            }
+      foreach(Staff* staff, _staves) {
+            ClefList* cl = staff->clef();
+            KeyList*  kl = staff->keymap();
+            for (ciClefEvent i = cl->begin(); i != cl->end(); ++i) {
+                  if (i->first >= tick && (i->first < tick + len))
+                        undoChangeClef(staff, i->first, i->second, NO_CLEF);
+                  }
+            for (ciKeyEvent i = kl->begin(); i != kl->end(); ++i) {
+                  if (i->first >= tick && (i->first < tick + len))
+                        undoChangeKey(staff, i->first, i->second, NO_KEY);
+                  }
+            }
+      undoInsertTime(tick, -len);
       }
 
 //---------------------------------------------------------

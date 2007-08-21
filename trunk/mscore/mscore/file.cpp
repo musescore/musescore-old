@@ -286,7 +286,6 @@ bool Score::saveFile()
             QMessageBox::critical(mscore, tr("MuseScore: Open File"), s);
             return false;
             }
-//      temp.open();
       bool rv = mscore->saveFile(&temp);
 
       if (!rv)

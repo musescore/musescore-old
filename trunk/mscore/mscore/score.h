@@ -265,6 +265,7 @@ class Score : public QObject {
       void undoRemoveElement(Element* element);
       void undoChangeMeasureLen(Measure* m, int tick);
       void undoChangeElement(Element* oldElement, Element* newElement);
+      void undoInsertTime(int tick, int len);
 
       void setNote(int tick, Staff* staff, int voice, int pitch, int len);
       int clefOffset(int tick, Staff*) const;
@@ -438,6 +439,8 @@ class Score : public QObject {
       int prevSeg1(int tick, int& track);
       Style* style() const { return _style; }
       bool noteEntryMode() const { return _noteEntryMode; }
+      void insertTime(int tick, int len);
+      void cmdRemoveTime(int tick, int len);
       };
 
 extern Score* gscore;
