@@ -72,7 +72,8 @@ static const char* undoName[] = {
       "ChangeSig",
       "ChangeMeasureLen",
       "ChangeElement",
-      "ChangeKey"
+      "ChangeKey",
+      "InsertTime"
       };
 
 static bool UNDO = false;
@@ -87,6 +88,10 @@ static bool UNDO = false;
 
 const char* UndoOp::name() const
       {
+      if (type >= int(sizeof(undoName)/sizeof(*undoName))) {
+            printf("\n illegal undo type %d\n", type);
+            return "???";
+            }
       return undoName[type];
       }
 
@@ -428,6 +433,7 @@ void Score::processUndoOp(UndoOp* i, bool undo)
                         if (i->sig2.valid())
                               sigmap->add(i->val1, i->sig2);
                         }
+                  fixTicks();
                   }
                   break;
             case UndoOp::ChangeMeasureLen:
@@ -453,24 +459,18 @@ void Score::processUndoOp(UndoOp* i, bool undo)
                                     segment->element(track)->setTick(endTick);
                               }
                         }
-                  int diff   = nl - ol;
-                  int mtick;
-                  if (diff < 0)
-                        mtick = m->tick() + ol;
-                  else
-                        mtick = m->tick() + nl;
-
-                  sigmap->insertTime(mtick, diff);
-                  foreach(Staff* staff, _staves) {
-                        staff->clef()->insertTime(mtick, diff);
-                        staff->keymap()->insertTime(mtick, diff);
-                        }
-
-                  if (m->next())
-                        adjustTime(m->tick() + i->val1, m->next());
                   i->val1 = ol;
                   }
                   break;
+
+            case UndoOp::InsertTime:
+                  if (undo)
+                        insertTime(i->val1, -i->val2);
+                  else
+                        insertTime(i->val1, i->val2);
+                  fixTicks();
+                  break;
+
             }
       UNDO = FALSE;
       }
@@ -558,7 +558,7 @@ void Score::undoOp(UndoOp::UndoType type, Element* object)
       }
 
 //---------------------------------------------------------
-//   undoOp
+//   undoAddElement
 //---------------------------------------------------------
 
 void Score::undoAddElement(Element* element)
@@ -567,6 +567,21 @@ void Score::undoAddElement(Element* element)
       UndoOp i;
       i.type = UndoOp::AddElement;
       i.obj  = element;
+      processUndoOp(&i, false);
+      undoList.back()->push_back(i);
+      }
+
+//---------------------------------------------------------
+//   undoInsertTime
+//---------------------------------------------------------
+
+void Score::undoInsertTime(int tick, int len)
+      {
+      checkUndoOp();
+      UndoOp i;
+      i.type = UndoOp::InsertTime;
+      i.val1  = tick;
+      i.val2  = len;
       processUndoOp(&i, false);
       undoList.back()->push_back(i);
       }

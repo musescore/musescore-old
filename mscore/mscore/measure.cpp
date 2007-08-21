@@ -1028,21 +1028,23 @@ void Measure::moveTicks(int diff)
       int tracks = staves * VOICES;
       for (Segment* segment = first(); segment; segment = segment->next()) {
             int ltick;
-            if (segment->subtype() == Segment::SegEndBarLine)
+            if ((segment->subtype() == Segment::SegEndBarLine)
+               || (segment->subtype() == Segment::SegTimeSigAnnounce))
                   ltick = tick() + tickLen();
             else
                   ltick = segment->tick() + diff;
             segment->setTick(ltick);
+
             for (int track = 0; track < tracks; ++track) {
                   Element* e = segment->element(track);
                   if (e)
-                        e->setTick(ltick);
+                        e->setTick(e->tick() + diff);
                   }
             for (int staff = 0; staff < staves; ++staff) {
                   const LyricsList* ll = segment->lyricsList(staff);
                   for (ciLyrics i = ll->begin(); i != ll->end(); ++i) {
                         if (*i)
-                              (*i)->setTick(ltick);
+                              (*i)->setTick((*i)->tick() + diff);
                         }
                   }
             }
@@ -1997,30 +1999,40 @@ void Measure::propertyAction(const QString& s)
             if (!im.exec())
                   return;
 
+            score()->select(0, 0, 0);
             SigList* sl = score()->sigmap;
 
-            int t = tick();
-            SigEvent oev = sl->timesig(t);
-            SigEvent nev = im.sig();
-            if (oev == nev)
+            SigEvent oev = sl->timesig(tick());
+            SigEvent newEvent = im.sig();
+            if (oev == newEvent)
                   return;
+
             int oldLen = oev.ticks;
-            int newLen = nev.ticks;
+            int newLen = newEvent.ticks;
 
-            SigEvent ev1;
-            iSigEvent i = sl->find(t);
+            SigEvent oldEvent;
+            iSigEvent i = sl->find(tick());
             if (i != sl->end())
-                  ev1 = i->second;
+                  oldEvent = i->second;
 
-            score()->undoChangeSig(t, ev1, nev);
+            printf("1.change sig at %d %s -> %s\n", tick(),
+               qPrintable(oldEvent.print()),
+               qPrintable(newEvent.print()));
+            score()->undoChangeSig(tick(), oldEvent, newEvent);
 
-            i = sl->find(t + newLen);
-            if (i != sl->end())
-                  ev1 = i->second;
-            else
-                  ev1 = SigEvent();
-            score()->undoChangeSig(t + newLen, ev1, oev);
+            //
+            // change back to nominal values if there is
+            // not already another TimeSig
+            //
+            i = sl->find(tick() + oldLen);
+            if (i == sl->end()) {
+                  printf("2.add sig at %d %s\n", tick() + newLen,
+                     qPrintable(oev.print()));
+                  score()->undoChangeSig(tick() + newLen, SigEvent(), oev);
+                  }
             adjustToLen(oldLen, newLen);
+            score()->fixTicks();
+            score()->select(this, 0, 0);
             }
       }
 
@@ -2093,6 +2105,19 @@ void Measure::adjustToLen(int ol, int nl)
                   }
             }
       score()->undoChangeMeasureLen(this, nl);
+      if (diff < 0) {
+            //
+            //  CHECK: do not remove all slurs
+            //
+            foreach(Element* e, _sel) {
+                  if (e->type() == SLUR)
+                        score()->undoRemoveElement(e);
+                  }
+printf("remove time at %d len %d\n", tick() + nl, -diff);
+            score()->cmdRemoveTime(tick() + nl, -diff);
+            }
+      else
+            score()->undoInsertTime(tick() + ol, diff);
       }
 
 //---------------------------------------------------------
