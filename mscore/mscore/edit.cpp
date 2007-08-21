@@ -938,6 +938,8 @@ void Score::deleteItem(Element* el)
             case CLEF:
             case KEYSIG:
             case IMAGE:
+            case TIE:
+            case TEMPO_TEXT:
                   cmdRemove(el);
                   break;
 
@@ -1006,11 +1008,6 @@ void Score::deleteItem(Element* el)
             case ACCIDENTAL:
                   addAccidental((Note*)(el->parent()), ACC_NONE);
                   break;
-
-            case TIE:
-                  cmdRemove(el);
-                  break;
-
 
             default:
                   printf("delete %s: not implemented\n", el->name());
