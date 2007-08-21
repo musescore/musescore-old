@@ -388,6 +388,15 @@ void Score::cmdRemove(Element* e)
                   }
                   break;
 
+            case TEMPO_TEXT:
+                  {
+                  TempoText* tt = (TempoText*)e;
+                  int tick = tt->tick();
+                  double tempo = tt->tempo();
+                  undoRemoveElement(tt);
+                  }
+                  break;
+
             default:
                   undoRemoveElement(e);
                   break;
