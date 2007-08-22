@@ -776,8 +776,12 @@ void ExportMidi::writeHeader()
       TempoList* tempomap = cs->tempomap;
       for (iTEvent it = tempomap->begin(); it != tempomap->end(); ++it) {
             MidiMeta* ev = new MidiMeta;
-            ev->setOntime(it->second->tick);
-            int tempo     = it->second->tempo;
+            ev->setOntime(it->first);
+            //
+            // compute midi tempo: microseconds / quarter note
+            //
+            int tempo = lrint((1.0 / it->second.tempo) * 1000000.0);
+
             ev->setMetaType(META_TEMPO);
             ev->setLen(3);
             unsigned char* data = new unsigned char[3];

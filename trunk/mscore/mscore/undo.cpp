@@ -70,6 +70,7 @@ static const char* undoName[] = {
       "ChangeKeySig",
       "ChangeClef",
       "ChangeSig",
+      "ChangeTempo",
       "ChangeMeasureLen",
       "ChangeElement",
       "ChangeKey",
@@ -404,7 +405,10 @@ void Score::processUndoOp(UndoOp* i, bool undo)
                         // remove new value if there is any
                         if (i->val3 != NO_KEY) {
                               iClefEvent ik = kl->find(i->val1);
-                              kl->erase(ik);
+                              if (ik == kl->end())
+                                    printf("UndoOp::ChangeKey1: not found\n");
+                              else
+                                    kl->erase(ik);
                               }
                         if (i->val2 != NO_KEY)
                               (*kl)[i->val1] = i->val2;
@@ -412,7 +416,10 @@ void Score::processUndoOp(UndoOp* i, bool undo)
                   else {
                         if (i->val2 != NO_KEY) {
                               iKeyEvent ik = kl->find(i->val1);
-                              kl->erase(ik);
+                              if (ik == kl->end())
+                                    printf("UndoOp::ChangeKey2: not found\n");
+                              else
+                                    kl->erase(ik);
                               }
                         if (i->val3 != NO_KEY)
                               (*kl)[i->val1] = i->val3;
@@ -434,6 +441,22 @@ void Score::processUndoOp(UndoOp* i, bool undo)
                               sigmap->add(i->val1, i->sig2);
                         }
                   fixTicks();
+                  }
+                  break;
+            case UndoOp::ChangeTempo:
+                  {
+                  if (undo) {
+                        if (i->t2.valid())
+                              tempomap->delTempo(i->val1);
+                        if (i->t1.valid())
+                              tempomap->addTempo(i->val1, i->t1);
+                        }
+                  else {
+                        if (i->t1.valid())
+                              tempomap->delTempo(i->val1);
+                        if (i->t2.valid())
+                              tempomap->addTempo(i->val1, i->t2);
+                        }
                   }
                   break;
             case UndoOp::ChangeMeasureLen:
@@ -749,6 +772,19 @@ void Score::undoChangeSig(int tick, const SigEvent& o, const SigEvent& n)
       i.val1 = tick;
       i.sig1 = o;
       i.sig2 = n;
+      undoList.back()->push_back(i);
+      processUndoOp(&i, false);
+      }
+
+void Score::undoChangeTempo(int tick, const TEvent& o, const TEvent& n)
+      {
+printf("undoChangeTempo\n");
+      checkUndoOp();
+      UndoOp i;
+      i.type = UndoOp::ChangeTempo;
+      i.val1 = tick;
+      i.t1 = o;
+      i.t2 = n;
       undoList.back()->push_back(i);
       processUndoOp(&i, false);
       }

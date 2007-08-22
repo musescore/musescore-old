@@ -1021,18 +1021,22 @@ void Score::deleteItem(Element* el)
 void Score::cmdRemoveTime(int tick, int len)
       {
       for (ciSigEvent i = sigmap->begin(); i != sigmap->end(); ++i) {
-            if (i->first >= tick && (i->first < tick + len))
+            if (i->first >= tick && (i->first < tick + len) && i->first != 0)
                   undoChangeSig(i->first, i->second, SigEvent());
+            }
+      for (ciTEvent i = tempomap->begin(); i != tempomap->end(); ++i) {
+            if (i->first >= tick && (i->first < tick + len))
+                  undoChangeTempo(i->first, i->second, TEvent());
             }
       foreach(Staff* staff, _staves) {
             ClefList* cl = staff->clef();
             KeyList*  kl = staff->keymap();
             for (ciClefEvent i = cl->begin(); i != cl->end(); ++i) {
-                  if (i->first >= tick && (i->first < tick + len))
+                  if (i->first >= tick && (i->first < tick + len) && i->first != 0)
                         undoChangeClef(staff, i->first, i->second, NO_CLEF);
                   }
             for (ciKeyEvent i = kl->begin(); i != kl->end(); ++i) {
-                  if (i->first >= tick && (i->first < tick + len))
+                  if (i->first >= tick && (i->first < tick + len) && i->first != 0)
                         undoChangeKey(staff, i->first, i->second, NO_KEY);
                   }
             }

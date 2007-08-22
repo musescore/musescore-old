@@ -1,3 +1,7 @@
+22.8.7 (ws)
+      - complete implementation of time insert/remove; this includes change
+        of time signature and insert/delete measures
+      - change tempo definition from usec/beat to beats/second
 18.8.7 (ws)
       - new demo: Inventio 13; BWV 784; J.S. Bach
       - new: delete tie

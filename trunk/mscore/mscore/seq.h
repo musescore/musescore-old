@@ -60,9 +60,6 @@ typedef EList::iterator iEvent;
 typedef EList::const_iterator ciEvent;
 typedef std::pair <iEvent, iEvent> EventRange;
 
-typedef std::map<int, Event, std::less<int> > AList;
-typedef AList::iterator aEvent;
-
 //---------------------------------------------------------
 //   Seq
 //    sequencer
@@ -82,10 +79,10 @@ class Seq : public QObject {
       int sigFd;                          // pipe fd for messages to gui
 
       EList events;                       // playlist
-      AList _activeNotes;                 // currently sounding notes
+      QList<Event> _activeNotes;          // currently sounding notes
       int playFrame;
-      int playTick;
       ciEvent playPos, guiPos;
+
       int endTick;
 
       float _volume;
@@ -131,7 +128,7 @@ class Seq : public QObject {
       bool isStopped() const    { return state == STOP; }
       void process(unsigned, float*, float*);
       std::list<QString> inputPorts();
-      AList& activeNotes()      { return _activeNotes; }
+//      AList& activeNotes()      { return _activeNotes; }
       int sampleRate() const;
       int getEndTick() const    { return endTick; }
       float volume() const      {  return _volume; }
