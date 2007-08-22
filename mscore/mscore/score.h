@@ -259,6 +259,7 @@ class Score : public QObject {
       void undoOp(UndoOp::UndoType type, Element*, int idx);
       void undoOp(UndoOp::UndoType type, int a, int b);
       void undoChangeSig(int tick, const SigEvent& o, const SigEvent& n);
+      void undoChangeTempo(int tick, const TEvent& o, const TEvent& n);
       void undoChangeKey(Staff* staff, int tick, int o, int n);
       void undoChangeClef(Staff* staff, int tick, int o, int n);
       void undoAddElement(Element* element);

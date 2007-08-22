@@ -21,8 +21,6 @@
 #ifndef __TEMPO_H__
 #define __TEMPO_H__
 
-#include "ipmap.h"
-
 #ifndef MAX_TICK
 #define MAX_TICK (0x7fffffff/100)
 #endif
@@ -35,41 +33,43 @@ class Score;
 //---------------------------------------------------------
 
 struct TEvent {
-      int tempo;
-      int tick;            // new tempo at tick
-      double time;         // precomputed time for tick in sec
+      double tempo;     // beats per second
+      double time;      // precomputed time for tick in sec
 
-      int read(QDomElement, Score*);
+      int read(QDomElement);
       void write(Xml&, int) const;
 
-      TEvent() { }
-      TEvent(int t, int tk) {
+      TEvent() {
+            tempo = 0.0;
+            }
+      TEvent(double t) {
             tempo = t;
-            tick = tk;
             time = 0.0;
             }
+      bool valid() const { return tempo != 0.0; }
       };
 
 //---------------------------------------------------------
 //   TempoList
 //---------------------------------------------------------
 
-typedef pstl::ipmap<TEvent* >::iterator iTEvent;
-typedef pstl::ipmap<TEvent* >::const_iterator ciTEvent;
-typedef pstl::ipmap<TEvent* >::reverse_iterator riTEvent;
-typedef pstl::ipmap<TEvent* >::const_reverse_iterator criTEvent;
+typedef std::map<int, TEvent>::iterator iTEvent;
+typedef std::map<int, TEvent>::const_iterator ciTEvent;
+typedef std::map<int, TEvent>::reverse_iterator riTEvent;
+typedef std::map<int, TEvent>::const_reverse_iterator criTEvent;
 
-class TempoList : public pstl::ipmap<TEvent* > {
+class TempoList : public std::map<int, TEvent> {
       int _tempoSN;           // serial no to track tempo changes
       bool useList;
-      int _tempo;             // tempo if not using tempo list
+      double _tempo;          // tempo if not using tempo list
       int _relTempo;          // rel. tempo (100 == 1.0)
 
       void normalize();
-      void add(int tick, int tempo);
-      void change(int tick, int newTempo);
+      void add(int tick, double tempo);
+      void change(int tick, double newTempo);
       void del(iTEvent);
       void del(int tick);
+      void add(int t, const TEvent&);
 
    public:
       TempoList();
@@ -79,23 +79,26 @@ class TempoList : public pstl::ipmap<TEvent* > {
       void write(Xml&) const;
       void dump() const;
 
-      int tempo(int tick) const;
+      double tempo(int tick) const;
+
       double tick2time(int tick, int* sn = 0) const;
       double tick2timeLC(int tick, int* sn) const;
       double tick2time(int tick, double time, int* sn) const;
       int time2tick(double time, int* sn = 0) const;
       int time2tick(double time, int tick, int* sn) const;
       int tempoSN() const { return _tempoSN; }
-      void setTempo(int tick, int newTempo);
-      void addTempo(int t, int tempo);
+      void setTempo(int tick, double newTempo);
+      void addTempo(int t, double tempo);
+      void addTempo(int tick, const TEvent& ev);
       void delTempo(int tick);
-      void changeTempo(int tick, int newTempo);
+      void changeTempo(int tick, double newTempo);
       bool setMasterFlag(int tick, bool val);
       int tick2samples(int tick);
       int samples2tick(int samples);
       void setRelTempo(int val);
       int relTempo() const { return _relTempo; }
+      void removeTime(int start, int len);
+      void insertTime(int start, int len);
       };
 
-extern TempoList tempomap;
 #endif

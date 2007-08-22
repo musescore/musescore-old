@@ -2113,7 +2113,6 @@ void Measure::adjustToLen(int ol, int nl)
                   if (e->type() == SLUR)
                         score()->undoRemoveElement(e);
                   }
-printf("remove time at %d len %d\n", tick() + nl, -diff);
             score()->cmdRemoveTime(tick() + nl, -diff);
             }
       else

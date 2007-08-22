@@ -30,6 +30,7 @@
 #include "measure.h"
 #include "input.h"
 #include "sig.h"
+#include "tempo.h"
 
 class ElementList;
 class Element;
@@ -68,6 +69,7 @@ struct UndoOp {
             ChangeKeySig,
             ChangeClef,
             ChangeSig,
+            ChangeTempo,
             ChangeMeasureLen,
             ChangeElement,
             ChangeKey,
@@ -88,6 +90,7 @@ struct UndoOp {
       int val1, val2, val3;
       QColor color;
       SigEvent sig1, sig2;
+      TEvent t1, t2;
 
       const char* name() const;
       };

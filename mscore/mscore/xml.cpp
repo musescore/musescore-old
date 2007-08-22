@@ -136,7 +136,7 @@ void Xml::netag(const char* s)
 //    <mops>value</mops>
 //---------------------------------------------------------
 
-void Xml::tag(const char* name, QVariant data)
+void Xml::tag(const QString& name, QVariant data)
       {
       putLevel();
       switch(data.type()) {

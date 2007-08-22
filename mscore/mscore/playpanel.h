@@ -54,7 +54,7 @@ class PlayPanel : public QWidget, private Ui::PlayPanelBase {
       void setStop(bool val);
       void setPlay(bool val);
 
-      void setTempo(int);
+      void setTempo(double);
       void setRelTempo(int);
 
       void setVolume(float);

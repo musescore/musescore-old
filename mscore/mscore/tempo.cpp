@@ -29,8 +29,7 @@
 
 TempoList::TempoList()
       {
-      _tempo    = 500000;
-      insert(std::pair<const int, TEvent*> (MAX_TICK, new TEvent(_tempo, 0)));
+      _tempo    = 120.0;
       _tempoSN  = 1;
       _relTempo = 100;
       useList   = true;
@@ -40,18 +39,19 @@ TempoList::TempoList()
 //   add
 //---------------------------------------------------------
 
-void TempoList::add(int tick, int tempo)
+void TempoList::add(int tick, double tempo)
       {
-      iTEvent e = upper_bound(tick);
-      if (tick == e->second->tick)
-            e->second->tempo = tempo;
-      else {
-            TEvent* ne = e->second;
-            TEvent* ev = new TEvent(ne->tempo, ne->tick);
-            ne->tempo  = tempo;
-            ne->tick   = tick;
-            insert(std::pair<const int, TEvent*> (tick, ev));
-            }
+      iTEvent e = find(tick);
+      if (e != end())
+            e->second.tempo = tempo;
+      else
+            insert(std::pair<const int, TEvent> (tick, TEvent(tempo)));
+      normalize();
+      }
+
+void TempoList::add(int tick, const TEvent& ev)
+      {
+      (*this)[tick] = ev;
       normalize();
       }
 
@@ -62,10 +62,12 @@ void TempoList::add(int tick, int tempo)
 void TempoList::normalize()
       {
       double time = 0;
+      int tick    = 0;
       for (iTEvent e = begin(); e != end(); ++e) {
-            e->second->time = time;
-            int delta = e->first - e->second->tick;
-            time += double(delta) / (division * _relTempo * 10000.0/e->second->tempo);
+            e->second.time = time;
+            double delta = double(e->first - tick);
+            time += delta / (division * e->second.tempo * _relTempo * 0.01);
+            tick = e->first;
             }
       }
 
@@ -76,11 +78,9 @@ void TempoList::normalize()
 void TempoList::dump() const
       {
       printf("\nTempoList:\n");
-      for (ciTEvent i = begin(); i != end(); ++i) {
-            printf("%6d %06d Tempo %6d %f\n",
-               i->first, i->second->tick, i->second->tempo,
-               i->second->time);
-            }
+      for (ciTEvent i = begin(); i != end(); ++i)
+            printf("%6d tempo: %f time: %f\n",
+               i->first, i->second.tempo, i->second.time);
       }
 
 //---------------------------------------------------------
@@ -89,10 +89,7 @@ void TempoList::dump() const
 
 void TempoList::clear()
       {
-      for (iTEvent i = begin(); i != end(); ++i)
-            delete i->second;
-      pstl::ipmap<TEvent* >::clear();
-      insert(std::pair<const int, TEvent*> (MAX_TICK, new TEvent(500000, 0)));
+      std::map<int,TEvent>::clear();
       ++_tempoSN;
       }
 
@@ -100,15 +97,22 @@ void TempoList::clear()
 //   tempo
 //---------------------------------------------------------
 
-int TempoList::tempo(int tick) const
+double TempoList::tempo(int tick) const
       {
       if (useList) {
-            ciTEvent i = upper_bound(tick);
+            if (empty())
+                  return 120.0;
+            ciTEvent i = lower_bound(tick);
             if (i == end()) {
-                  printf("no TEMPO\n");
-                  return 1000;
+                  --i;
+                  return i->second.tempo;
                   }
-            return i->second->tempo;
+            if (i->first == tick)
+                  return i->second.tempo;
+            if (i == begin())
+                  return 120.0;
+            --i;
+            return i->second.tempo;
             }
       else
             return _tempo;
@@ -120,26 +124,16 @@ int TempoList::tempo(int tick) const
 
 void TempoList::del(int tick)
       {
-// printf("TempoList::del(%d)\n", tick);
       iTEvent e = find(tick);
       if (e == end()) {
-            printf("TempoList::del(%d): not found\n", tick);
+            printf("TempoList::del event at (%d): not found\n", tick);
             return;
             }
       del(e);
-      ++_tempoSN;
       }
 
 void TempoList::del(iTEvent e)
       {
-      iTEvent ne = e;
-      ++ne;
-      if (ne == end()) {
-            printf("TempoList::del() HALLO\n");
-            return;
-            }
-      ne->second->tempo = e->second->tempo;
-      ne->second->tick  = e->second->tick;
       erase(e);
       normalize();
       ++_tempoSN;
@@ -149,10 +143,10 @@ void TempoList::del(iTEvent e)
 //   change
 //---------------------------------------------------------
 
-void TempoList::change(int tick, int newTempo)
+void TempoList::change(int tick, double newTempo)
       {
       iTEvent e = find(tick);
-      e->second->tempo = newTempo;
+      e->second.tempo = newTempo;
       normalize();
       ++_tempoSN;
       }
@@ -163,9 +157,8 @@ void TempoList::change(int tick, int newTempo)
 //    & slave mode tempo changes
 //---------------------------------------------------------
 
-void TempoList::setTempo(int tick, int newTempo)
+void TempoList::setTempo(int tick, double newTempo)
       {
-// printf("set tempo useList:%d %d, diff %3d\n", useList, newTempo, newTempo-_tempo);
       if (useList)
             add(tick, newTempo);
       else
@@ -188,9 +181,15 @@ void TempoList::setRelTempo(int val)
 //   addTempo
 //---------------------------------------------------------
 
-void TempoList::addTempo(int t, int tempo)
+void TempoList::addTempo(int t, double tempo)
       {
       add(t, tempo);
+      ++_tempoSN;
+      }
+
+void TempoList::addTempo(int tick, const TEvent& ev)
+      {
+      add(tick, ev);
       ++_tempoSN;
       }
 
@@ -208,7 +207,7 @@ void TempoList::delTempo(int tick)
 //   changeTempo
 //---------------------------------------------------------
 
-void TempoList::changeTempo(int tick, int newTempo)
+void TempoList::changeTempo(int tick, double newTempo)
       {
       change(tick, newTempo);
       ++_tempoSN;
@@ -253,17 +252,42 @@ int TempoList::time2tick(double time, int t, int* sn) const
 
 double TempoList::tick2time(int tick, int* sn) const
       {
-      double t;
+      double time  = 0.0;
+      double delta = double(tick);
+      double tempo = 120.0;
+
       if (useList) {
-            ciTEvent i = upper_bound(tick);
-            int delta = tick - i->second->tick;
-            t = i->second->time + double(delta) / (division * _relTempo * 10000.0 / i->second->tempo);
+            if (!empty()) {
+                  int ptick  = 0;
+                  ciTEvent e = lower_bound(tick);
+                  if (e == end()) {
+                        ciTEvent pe = e;
+                        --pe;
+                        ptick = pe->first;
+                        tempo = pe->second.tempo;
+                        time  = pe->second.time;
+                        }
+                  else if (e->first == tick) {
+                        ptick = tick;
+                        tempo = e->second.tempo;
+                        time  = e->second.time;
+                        }
+                  else if (e != begin()) {
+                        ciTEvent pe = e;
+                        --pe;
+                        ptick = pe->first;
+                        tempo = pe->second.tempo;
+                        time  = pe->second.time;
+                        }
+                  delta = double(tick - ptick);
+                  }
             }
       else
-            t = (double(tick) * double(_tempo)) / (double(division) * _relTempo * 10000.0);
+            tempo = _tempo;
       if (sn)
             *sn = _tempoSN;
-      return t;
+      time += delta / (division * tempo * _relTempo * 0.01);
+      return time;
       }
 
 //---------------------------------------------------------
@@ -272,24 +296,23 @@ double TempoList::tick2time(int tick, int* sn) const
 
 int TempoList::time2tick(double time, int* sn) const
       {
-      int tick;
+      int tick     = 0;
+      double delta = time;
+      double tempo = _tempo;
+
       if (useList) {
-            ciTEvent e;
-            for (e = begin(); e != end();) {
-                  ciTEvent ee = e;
-                  ++ee;
-                  if (ee == end())
+            delta = 0.0;
+            tempo = 120.0;
+            for (ciTEvent e = begin(); e != end(); ++e) {
+                  if (time < e->second.time)
                         break;
-                  if (time < ee->second->time)
-                        break;
-                  e = ee;
+                  delta = e->second.time;
+                  tempo = e->second.tempo;
+                  tick  = e->first;
                   }
-            int te = e->second->tempo;
-            double dtime = time - e->second->time;
-            tick = e->second->tick + lrint(dtime * _relTempo * division * 10000.0 / te);
+            delta = time - delta;
             }
-      else
-            tick = lrint(time * _relTempo * division * 10000.0 / double(_tempo));
+      tick += lrint(delta * _relTempo * 0.01 * division * tempo);
       if (sn)
             *sn = _tempoSN;
       return tick;
@@ -305,7 +328,7 @@ void TempoList::write(Xml& xml) const
       if (_relTempo != 100)
             xml.tag("relTempo", _relTempo);
       for (ciTEvent i = begin(); i != end(); ++i)
-            i->second->write(xml, i->first);
+            i->second.write(xml, i->first);
       xml.etag();
       }
 
@@ -315,17 +338,17 @@ void TempoList::write(Xml& xml) const
 
 void TempoList::read(QDomElement e, Score* cs)
       {
-      _tempo = e.attribute("fix","500000").toInt();
+      _tempo = e.attribute("fix","120.0").toDouble();
 
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             if (e.tagName() == "tempo") {
-                  TEvent* t = new TEvent();
-                  unsigned tick = t->read(e, cs);
+                  TEvent t;
+                  unsigned tick = t.read(e);
                   tick = cs->fileDivision(tick);
                   iTEvent pos = find(tick);
                   if (pos != end())
                         erase(pos);
-                  insert(std::pair<const int, TEvent*> (tick, t));
+                  insert(std::pair<const int, TEvent> (tick, t));
                   }
             else if (e.tagName() == "relTempo")
                   _relTempo = e.text().toInt();
@@ -342,30 +365,59 @@ void TempoList::read(QDomElement e, Score* cs)
 
 void TEvent::write(Xml& xml, int at) const
       {
-      xml.stag(QString("tempo at=\"%1\"").arg(at));
-      xml.tag("tick", tick);
-      xml.tag("val", tempo);
-      xml.etag();
+      xml.tag(QString("tempo tick=\"%1\"").arg(at), QVariant(tempo));
       }
 
 //---------------------------------------------------------
 //   TEvent::read
 //---------------------------------------------------------
 
-int TEvent::read(QDomElement e, Score* cs)
+int TEvent::read(QDomElement e)
       {
       int at = e.attribute("tick", "0").toInt();
-
-      for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
-            QString tag(e.tagName());
-            QString val(e.text());
-            int i = val.toInt();
-            if (tag == "tick")
-                  tick = cs->fileDivision(i);
-            else if (tag == "val")
-                  tempo = i;
-            else
-                  domError(e);
-            }
+      tempo  = e.text().toDouble();
       return at;
       }
+
+//---------------------------------------------------------
+//   remove
+//---------------------------------------------------------
+
+void TempoList::removeTime(int tick, int len)
+      {
+      TempoList tmp;
+      for (ciTEvent i = begin(); i != end(); ++i) {
+            if ((i->first >= tick) && (tick != 0)) {
+                  if (i->first >= tick + len)
+                        tmp.add(i->first - len, i->second);
+                  else
+                        printf("remove tempo event\n");
+                  }
+            else
+                  tmp.add(i->first, i->second);
+            }
+      std::map<int,TEvent>::clear();
+      insert(tmp.begin(), tmp.end());
+      normalize();
+      ++_tempoSN;
+      }
+
+//---------------------------------------------------------
+//   insert
+//---------------------------------------------------------
+
+void TempoList::insertTime(int tick, int len)
+      {
+      TempoList tmp;
+      for (ciTEvent i = begin(); i != end(); ++i) {
+            if ((i->first >= tick) && (tick != 0))
+                  tmp.add(i->first + len, i->second);
+            else
+                  tmp.add(i->first, i->second);
+            }
+      std::map<int,TEvent>::clear();
+      insert(tmp.begin(), tmp.end());
+      normalize();
+      ++_tempoSN;
+      }
+

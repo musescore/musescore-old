@@ -274,7 +274,7 @@ void Seq::start()
       {
       if (events.empty() || cs->playlistDirty() || playlistChanged) {
             collectEvents();
-            setPos(playTick);
+            setPos(0);
             }
       audio->startTransport();
       heartBeatTimer->start(100);
@@ -373,7 +373,7 @@ void MuseScore::seqStopped()
             playPanel->setStop(true);
             playPanel->setPlay(false);
             }
-      seq->activeNotes().clear();
+//      seq->activeNotes().clear();
       PlayPanel* pp = mscore->getPlayPanel();
       if (pp)
             pp->enableSeek(true);
@@ -426,10 +426,8 @@ void Seq::seqMessage(int fd)
 void Seq::stopTransport()
       {
       // send note off events
-      for (iEvent i = _activeNotes.begin(); i != _activeNotes.end(); ++i) {
-//            printf("stop note %d\n", i->second.val1);
-            synti->playNote(i->second.channel, i->second.val1, 0);
-            }
+      foreach(const Event& e, _activeNotes)
+            synti->playNote(e.channel, e.val1, 0);
       toGui('0');
       state = STOP;
       }
@@ -458,18 +456,14 @@ void Seq::process(unsigned frames, float* lbuffer, float* rbuffer)
       {
       int jackState = audio->getState();
 
-      if (state == START_PLAY && jackState == PLAY) {
+      if (state == START_PLAY && jackState == PLAY)
             startTransport();
-            }
-      else if (state == PLAY && jackState == STOP) {
+      else if (state == PLAY && jackState == STOP)
             stopTransport();
-            }
-      else if (state == START_PLAY && jackState == STOP) {
+      else if (state == START_PLAY && jackState == STOP)
             stopTransport();
-            }
-      else if (state == STOP && jackState == PLAY) {
+      else if (state == STOP && jackState == PLAY)
             startTransport();
-            }
       else if (state != jackState)
             printf("JACK: state transition %d -> %d ?\n",
                state, jackState);
@@ -490,6 +484,10 @@ void Seq::process(unsigned frames, float* lbuffer, float* rbuffer)
                         int tick = frame2tick(playFrame);
                         cs->tempomap->setRelTempo(msg.data1);
                         playFrame = tick2frame(tick);
+                        int ntick = frame2tick(playFrame);
+                        if (tick != ntick) {
+                              printf("TempoChange: tick %d != ntick %d\n", tick, ntick);
+                              }
                         }
                         break;
 
@@ -510,48 +508,49 @@ void Seq::process(unsigned frames, float* lbuffer, float* rbuffer)
                   }
             }
 
-      bool eof = false;
       if (state == PLAY) {
             //
-            // collect events
+            // collect events for one segment
             //
-            ciEvent s        = playPos;
-            int endFrameTick = frame2tick(playFrame + frames);
-            ciEvent e        = events.lower_bound(endFrameTick);
-            for (ciEvent i = s; i != e; ++i)
-                  pe.insert(*i);
-            eof = (e == events.end());
-            playPos = e;
+            ciEvent e = events.lower_bound(frame2tick(playFrame + frames));
+            for (; playPos != e; ++playPos)
+                  pe.insert(*playPos);
 
-            int cpos  = playFrame;
-            int ctick = frame2tick(cpos);
             for (ciEvent i = pe.begin(); i != pe.end(); ++i) {
-                  if (ctick < i->first) {
-                        int f = tick2frame(i->first);
-                        int n = f - cpos;
+                  int f = tick2frame(i->first);
+
+                  if (f > playFrame) {
+                        int n = f - playFrame;
+                        if (n < 0 || n > int(frames)) {
+                              printf("bad n %d\n", n);
+                              n = frames;
+                              }
                         synti->process(n, l, r);
-                        l += n;
-                        r += n;
-                        cpos = f;
+                        l         += n;
+                        r         += n;
+                        playFrame += n;
+                        frames    -= n;
                         }
                   int channel = i->second.channel;
                   int type    = i->second.type;
                   if (type == 0x90) {
-                        int key     = (channel << 8) | i->second.val1;
-                        if (i->second.val2) {
-                              // note on:
-                              _activeNotes.insert(std::pair<const int, Event> (key, i->second));
+                        if (i->second.val2) {         // note on:
+                              _activeNotes.prepend(i->second);
+                              synti->playNote(channel, i->second.val1, i->second.val2);
                               }
                         else {
-                              // note off; dont "play" note off until a note on was send
-                              aEvent ia = _activeNotes.find(key);
-                              if (ia == _activeNotes.end()) {
-                                    printf("note %d not found\n", key & 0xff);
-                                    continue;
+                              bool found = false;
+                              for (QList<Event>::iterator k = _activeNotes.begin(); k != _activeNotes.end(); ++k) {
+                                    if (k->channel == i->second.channel && k->val1 == i->second.val1) {
+                                          _activeNotes.erase(k);
+                                          synti->playNote(channel, i->second.val1, 0);
+                                          found = true;
+                                          break;
+                                          }
                                     }
-                              _activeNotes.erase(ia);
+                              if (!found)
+                                    printf("note off not in active list: %d %d\n", channel, i->second.val1);
                               }
-                        synti->playNote(channel, i->second.val1, i->second.val2);
                         }
                   else if (type == 0xb0)
                         synti->setController(channel, i->second.val1, i->second.val2);
@@ -559,10 +558,11 @@ void Seq::process(unsigned frames, float* lbuffer, float* rbuffer)
                         printf("bad event type %x\n", type);
 
                   }
-            playFrame += frames;
-            if (cpos < playFrame)
-                  synti->process(playFrame - cpos, l, r);
-            if (eof)
+            if (frames) {
+                  synti->process(frames, l, r);
+                  playFrame += frames;
+                  }
+            if (playPos == events.end())
                   audio->stopTransport();
             }
       else {
@@ -722,7 +722,7 @@ void Seq::setRelTempo(int relTempo)
       msg.data1 = relTempo;
       sendMessage(msg);
 
-      int tempo = cs->tempomap->tempo(playPos->first) * 100 / relTempo;
+      double tempo = cs->tempomap->tempo(playPos->first) * relTempo * 0.01;
 
       PlayPanel* pp = mscore->getPlayPanel();
       if (pp) {
@@ -739,7 +739,6 @@ void Seq::setPos(int tick)
       {
       if (state != STOP)
             return;
-      playTick  = tick;
       playFrame = tick2frame(tick);
       playPos   = events.lower_bound(tick);
       guiPos    = playPos;

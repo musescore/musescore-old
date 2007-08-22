@@ -346,6 +346,7 @@ void Score::insertTime(int tick, int len)
       if (len < 0) {
             len = -len;
             sigmap->removeTime(tick, len);
+            tempomap->removeTime(tick, len);
             foreach(Staff* staff, _staves) {
                   staff->clef()->removeTime(tick, len);
                   staff->keymap()->removeTime(tick, len);
@@ -353,6 +354,7 @@ void Score::insertTime(int tick, int len)
             }
       else {
             sigmap->insertTime(tick, len);
+            tempomap->insertTime(tick, len);
             foreach(Staff* staff, _staves) {
                   staff->clef()->insertTime(tick, len);
                   staff->keymap()->insertTime(tick, len);

@@ -75,10 +75,11 @@ void PlayPanel::setEndpos(int val)
 //   setTempo
 //---------------------------------------------------------
 
-void PlayPanel::setTempo(int val)
+void PlayPanel::setTempo(double val)
       {
-      int tempo = int(60000000.0 / double(val));
-      tempoLabel->setText(QString("%1 bpm").arg(tempo, 3));
+//      int tempo = int(60000000.0 / double(val));
+//      tempoLabel->setText(QString("%1 bpm").arg(tempo, 3));
+      tempoLabel->setText(QString("%1 bpm").arg(val * 60.0, 3));
       }
 
 //---------------------------------------------------------
