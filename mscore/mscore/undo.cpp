@@ -524,8 +524,6 @@ void Score::endUndoRedo(Undo* undo)
             canvas()->setState(Canvas::NOTE_ENTRY);
             mscore->setState(STATE_NOTE_ENTRY);
             }
-      moveCursor();
-
       *sel = undo->selection;
       sel->update();
       }

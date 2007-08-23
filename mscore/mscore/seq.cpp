@@ -274,8 +274,11 @@ void Seq::start()
       {
       if (events.empty() || cs->playlistDirty() || playlistChanged) {
             collectEvents();
-            setPos(0);
             }
+      int tick = cs->pos();
+      if (tick == -1)
+            tick = 0;
+      setPos(tick);
       audio->startTransport();
       heartBeatTimer->start(100);
       }
@@ -351,6 +354,11 @@ void MuseScore::seqStarted()
       PlayPanel* pp = mscore->getPlayPanel();
       if (pp)
             pp->enableSeek(false);
+      setState(STATE_PLAY);
+      foreach(Viewer* v, cs->getViewer()) {
+            v->setCursorOn(true);
+            v->moveCursor(0, 0);
+            }
       }
 
 //---------------------------------------------------------
@@ -365,19 +373,28 @@ void MuseScore::seqStopped()
       a->blockSignals(true);
       a->setChecked(true);
       a->blockSignals(false);
+
       a = getAction("play");
       a->blockSignals(true);
       a->setChecked(false);
       a->blockSignals(false);
+
       if (playPanel) {
             playPanel->setStop(true);
             playPanel->setPlay(false);
             }
-//      seq->activeNotes().clear();
       PlayPanel* pp = mscore->getPlayPanel();
       if (pp)
             pp->enableSeek(true);
       connect(cs, SIGNAL(selectionChanged(int)), this, SLOT(selectionChanged(int)));
+      setState(STATE_NORMAL);
+      foreach(Viewer* v, cs->getViewer()) {
+            v->setCursorOn(false);
+            }
+      cs->start();
+      cs->setLayoutAll(false);
+      cs->setUpdateAll();
+      cs->end();
       }
 
 //---------------------------------------------------------
@@ -399,17 +416,40 @@ void Seq::seqMessage(int fd)
       for (int i = 0; i < n; ++i) {
             switch(buffer[i]) {
                   case '0':         // STOP
+                        {
                         heartBeatTimer->stop();
-                        if (!events.empty()) {
-                              iEvent e = events.end();
-                              --e;
-                              cs->select(e->second.note, 0, 0);
+                        emit stopped();
+
+                        // code from heart beat:
+                        Note* note = 0;
+                        for (ciEvent i = guiPos; i != playPos; ++i) {
+                              if (i->second.type == ME_NOTEON) {
+                                    i->second.note->setSelected(i->second.val2 != 0);
+                                    cs->addRefresh(i->second.note->abbox());
+                                    if (i->second.val2)
+                                          note = i->second.note;
+                                    }
+                              }
+                        if (note == 0) {
+                              for (ciEvent i = playPos; i != events.end(); ++i) {
+                                    if (i->second.type == ME_NOTEON) {
+                                          note = i->second.note;
+                                          break;
+                                          }
+                                    }
+                              }
+                        if (note) {
+
+                              cs->select(note, 0, 0);
                               }
                         emit stopped();
+                        }
                         break;
+
                   case '1':         // PLAY
                         emit started();
                         break;
+
                   default:
                         printf("MScore::Seq:: unknown seq msg %d\n", buffer[i]);
                         break;
@@ -426,8 +466,11 @@ void Seq::seqMessage(int fd)
 void Seq::stopTransport()
       {
       // send note off events
-      foreach(const Event& e, _activeNotes)
+      foreach(const Event& e, _activeNotes) {
             synti->playNote(e.channel, e.val1, 0);
+            e.note->setSelected(false);
+            }
+      _activeNotes.clear();
       toGui('0');
       state = STOP;
       }
@@ -442,10 +485,11 @@ void Seq::startTransport()
       {
       // dont start transport, if we have nothing to play
       //
-      if (endTick) {
-            toGui('1');
-            state = PLAY;
-            }
+      if (endTick == 0)
+            return;
+
+      toGui('1');
+      state = PLAY;
       }
 
 //---------------------------------------------------------
@@ -484,10 +528,6 @@ void Seq::process(unsigned frames, float* lbuffer, float* rbuffer)
                         int tick = frame2tick(playFrame);
                         cs->tempomap->setRelTempo(msg.data1);
                         playFrame = tick2frame(tick);
-                        int ntick = frame2tick(playFrame);
-                        if (tick != ntick) {
-                              printf("TempoChange: tick %d != ntick %d\n", tick, ntick);
-                              }
                         }
                         break;
 
@@ -533,9 +573,9 @@ void Seq::process(unsigned frames, float* lbuffer, float* rbuffer)
                         }
                   int channel = i->second.channel;
                   int type    = i->second.type;
-                  if (type == 0x90) {
+                  if (type == ME_NOTEON) {
                         if (i->second.val2) {         // note on:
-                              _activeNotes.prepend(i->second);
+                              _activeNotes.append(i->second);
                               synti->playNote(channel, i->second.val1, i->second.val2);
                               }
                         else {
@@ -554,8 +594,10 @@ void Seq::process(unsigned frames, float* lbuffer, float* rbuffer)
                         }
                   else if (type == 0xb0)
                         synti->setController(channel, i->second.val1, i->second.val2);
-                  else
+                  else {
                         printf("bad event type %x\n", type);
+                        abort();
+                        }
 
                   }
             if (frames) {
@@ -569,9 +611,9 @@ void Seq::process(unsigned frames, float* lbuffer, float* rbuffer)
             for (ciEvent i = pe.begin(); i != pe.end(); ++i) {
                   int channel = i->second.channel;
                   int type    = i->second.type;
-                  if (type == 0x90)
+                  if (type == ME_NOTEON)
                         synti->playNote(channel, i->second.val1, i->second.val2);
-                  else if (type == 0xb0)
+                  else if (type == ME_CONTROLLER)
                         synti->setController(channel, i->second.val1, i->second.val2);
                   }
             synti->process(frames, l, r);
@@ -641,7 +683,7 @@ void Seq::collectEvents()
 
                                           unsigned tick = chord->tick();
                                           Event ev;
-                                          ev.type       = 0x90; // note on
+                                          ev.type       = ME_NOTEON;
                                           ev.val1       = note->pitch() + part->pitchOffset();
                                           if (ev.val1 > 127)
                                                 ev.val1 = 127;
@@ -687,11 +729,18 @@ void Seq::heartBeat()
             return;
 
       cs->start();
+      Note* note = 0;
       for (ciEvent i = guiPos; i != playPos; ++i) {
-            if (i->second.val2 == 0)       // note off
-                  cs->deselect(i->second.note);
-            else
-                  cs->select(i->second.note, Qt::ShiftModifier, 0);
+            if (i->second.type == ME_NOTEON) {
+                  i->second.note->setSelected(i->second.val2 != 0);
+                  cs->addRefresh(i->second.note->abbox());
+                  if (i->second.val2)
+                        note = i->second.note;
+                  }
+            }
+      if (note) {
+            foreach(Viewer* v, cs->getViewer())
+                  v->moveCursor(note->chord()->segment());
             }
       cs->setLayoutAll(false);      // DEBUG
       cs->end();
@@ -772,7 +821,7 @@ void Seq::startNote(int channel, int pitch, int velo)
             return;
       SeqMsg msg;
       msg.id    = SEQ_PLAY;
-      msg.data1 = 0x90 | channel;
+      msg.data1 = ME_NOTEON | channel;
       msg.data2 = pitch;
       msg.data3 = velo;
       sendMessage(msg);

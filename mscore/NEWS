@@ -2,6 +2,9 @@ Release 0.7 (svn)
       - better note head positioning in chords
       - measure insert/delete function
       - drumset editor
+      - tremolo
+      - repeat measure symbol
+      - changable note heads
 
       As usual this release also contains many bug fixes and code
       cleanups.

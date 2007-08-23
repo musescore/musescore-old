@@ -148,16 +148,17 @@ void Score::end()
       else if (layoutStart)
             reLayout(layoutStart);
 
-      if (updateAll) {
-            foreach(Viewer* v, viewer)
+      foreach(Viewer* v, viewer) {
+            if (noteEntryMode())
+                  v->moveCursor(cis->pos, cis->staff * VOICES + cis->voice);
+            if (updateAll)
                   v->updateAll(this);
-            updateAll = false;
+            else
+                  v->dataChanged(refresh);
             }
-      else
-            update(refresh);
+      updateAll = false;
       setPadState();
       }
-
 
 //---------------------------------------------------------
 //   cmdAdd
@@ -390,10 +391,13 @@ void Score::cmdRemove(Element* e)
 
             case TEMPO_TEXT:
                   {
-                  TempoText* tt = (TempoText*)e;
-                  int tick = tt->tick();
-                  double tempo = tt->tempo();
-                  undoRemoveElement(tt);
+                  int tick = e->tick();
+                  iTEvent i = tempomap->find(tick);
+                  if (i != tempomap->end())
+                        undoChangeTempo(tick, i->second, TEvent());
+                  else
+                        printf("remove tempotext: tempo event at %d not found\n", tick);
+                  undoRemoveElement(e);
                   }
                   break;
 
@@ -401,17 +405,6 @@ void Score::cmdRemove(Element* e)
                   undoRemoveElement(e);
                   break;
             }
-      }
-
-//---------------------------------------------------------
-//   update
-//---------------------------------------------------------
-
-void Score::update(const QRectF& r)
-      {
-      foreach(Viewer* v, viewer)
-            v->dataChanged(r);
-      updateAll = false;
       }
 
 //---------------------------------------------------------

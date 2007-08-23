@@ -23,7 +23,6 @@
 
 #include "globals.h"
 #include "ui_measuresdialog.h"
-//Added by DK 06.08.07
 #include "ui_insertmeasuresdialog.h"
 
 class Canvas;
@@ -49,10 +48,15 @@ class MagBox;
 extern QString mscoreGlobalShare;
 static const int PROJECT_LIST_LEN = 6;
 
+//
+// MuseScore _state
+//
+
 enum {
       STATE_NORMAL,
       STATE_NOTE_ENTRY,
-      STATE_EDIT
+      STATE_EDIT,
+      STATE_PLAY
       };
 
 //---------------------------------------------------------
@@ -134,6 +138,7 @@ class Shortcut {
 class MuseScore : public QMainWindow {
       Q_OBJECT
 
+      int _state;
       Score* cs;              // current score
       Canvas* canvas;
       QVBoxLayout* layout;
@@ -162,7 +167,6 @@ class MuseScore : public QMainWindow {
       InstrumentsDialog* instrList;
       TextStyleDialog* textStyleDialog;
       MeasuresDialog* measuresDialog;
-// Added by DK, 05.08.07
       InsertMeasuresDialog* insertMeasuresDialog;
 
       PlayPanel* playPanel;
@@ -245,7 +249,6 @@ class MuseScore : public QMainWindow {
       void accidentalsMenu();
       void midiReceived();
       void cmdAppendMeasures();
-// Added by DK, 05.08.07
       void cmdInsertMeasures();
       void resetUserStretch();
       void showLayoutBreakPalette();

@@ -364,12 +364,12 @@ MuseScore::MuseScore()
       a->setCheckable(true);
       a->setChecked(true);
       transportAction->addAction(a);
-      connect(a, SIGNAL(toggled(bool)), this, SLOT(setStop(bool)));
+      connect(a, SIGNAL(triggered(bool)), this, SLOT(setStop(bool)));
 
       a = getAction("play");
       a->setCheckable(true);
       transportAction->addAction(a);
-      connect(a, SIGNAL(toggled(bool)), this, SLOT(setPlay(bool)));
+      connect(a, SIGNAL(triggered(bool)), this, SLOT(setPlay(bool)));
 
       //---------------------------------------------------
       //    File Action
@@ -1822,6 +1822,7 @@ void MuseScore::clipboardChanged()
 
 void MuseScore::setState(int val)
       {
+      _state = val;
       switch(val) {
             case STATE_NORMAL:
                   _modeText->hide();
@@ -1832,6 +1833,10 @@ void MuseScore::setState(int val)
                   break;
             case STATE_EDIT:
                   _modeText->setText(tr("edit mode"));
+                  _modeText->show();
+                  break;
+            case STATE_PLAY:
+                  _modeText->setText(tr("play"));
                   _modeText->show();
                   break;
             }

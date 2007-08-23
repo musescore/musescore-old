@@ -34,6 +34,7 @@
 #include "symbol.h"
 #include "clef.h"
 #include "layout.h"
+#include "viewer.h"
 
 extern bool debugMode;
 extern bool showInvisible;
@@ -663,13 +664,14 @@ void Compound::clear()
 //   Cursor
 //---------------------------------------------------------
 
-Cursor::Cursor(Score* s, double l)
+Cursor::Cursor(Score* s, Viewer* v)
    : Element(s)
       {
-      dlen      = l;
-      lineWidth = .4;
+      viewer    = v;
       _on       = false;
       _blink    = true;
+      double w  = 2.0 / viewer->matrix().m11();
+      setbbox(QRectF(0.0, 0.0, w, 6 * _spatium));
       }
 
 //---------------------------------------------------------
@@ -680,12 +682,7 @@ void Cursor::draw(QPainter& p)
       {
       if (!(_on && _blink))
             return;
-      QPen pen(preferences.selectColor[voice()]);
-      pen.setWidthF(2.0 / p.matrix().m11());
-      p.setPen(pen);
-
-      QPointF pt(pos());
-      p.drawLine(QLineF(pt.x(), pt.y(), pt.x(), pt.y() + dlen * _spatium));
+      p.fillRect(abbox(), QBrush(preferences.selectColor[voice()]));
       }
 
 //---------------------------------------------------------
