@@ -24,6 +24,7 @@
 class Score;
 class Element;
 class ScoreLayout;
+class Segment;
 
 //---------------------------------------------------------
 //   Viewer
@@ -58,12 +59,14 @@ class Viewer {
       ScoreLayout* layout();
       virtual void dataChanged(const QRectF&) = 0;
 
-      virtual QRectF moveCursor() = 0;
       virtual void updateAll(Score*) = 0;
       void setDropRectangle(const QRectF&);
       void setDropTarget(const Element*);
       void setDropAnchor(const QLineF&);
       const QMatrix& matrix() const { return _matrix; }
+      virtual void moveCursor(int, int) {}
+      virtual void moveCursor(Segment*) {}
+      virtual void setCursorOn(bool) {}
       };
 
 #endif

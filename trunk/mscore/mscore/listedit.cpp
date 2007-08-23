@@ -1290,7 +1290,7 @@ void ShowElementBase::selectedClicked(bool val)
             el->score()->select(el, Qt::ShiftModifier, 0);
       else
             el->score()->deselect(el);
-      el->score()->update(r | el->abbox());
+      el->score()->addRefresh(r | el->abbox());
       }
 
 //---------------------------------------------------------
@@ -1301,7 +1301,7 @@ void ShowElementBase::visibleClicked(bool val)
       {
       QRectF r(el->abbox());
       el->setVisible(val);
-      el->score()->update(r | el->abbox());
+      el->score()->addRefresh(r | el->abbox());
       }
 
 //---------------------------------------------------------
@@ -1350,7 +1350,7 @@ void ShowElementBase::offsetxChanged(double val)
       el->setUserXoffset(val);
 //      Element* e = el;
 //TODO      while ((e = e->parent()))
-      el->score()->update(r | el->abbox());
+      el->score()->addRefresh(r | el->abbox());
       }
 
 //---------------------------------------------------------
@@ -1361,7 +1361,7 @@ void ShowElementBase::offsetyChanged(double val)
       {
       QRectF r(el->abbox());
       el->setUserYoffset(val);
-      el->score()->update(r | el->abbox());
+      el->score()->addRefresh(r | el->abbox());
       }
 
 //---------------------------------------------------------

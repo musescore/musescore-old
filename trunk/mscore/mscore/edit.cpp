@@ -587,8 +587,6 @@ void Score::putNote(const QPointF& pos, bool addToChord)
       cis->voice     = voice;
       padState.pitch = pitch;
       cis->pos       = tick + len;
-
-      moveCursor();
       }
 
 //---------------------------------------------------------

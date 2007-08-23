@@ -134,7 +134,6 @@ class Score : public QObject {
       ChordRest* prevMeasure(ChordRest*);
       void cmdSetBeamMode(int);
       void cmdFlipStemDirection();
-      void moveCursor();
       Note* getSelectedNote();
       void pageNext();
       void pagePrev();
@@ -334,7 +333,6 @@ class Score : public QObject {
 
       void cmdAdd(Element*);
       void cmdRemove(Element*);
-      void update(const QRectF&);
 
       void setUpdateAll()              { updateAll = true; }
       void setLayoutAll(bool val)      { layoutAll = val;  }
@@ -442,6 +440,7 @@ class Score : public QObject {
       bool noteEntryMode() const { return _noteEntryMode; }
       void insertTime(int tick, int len);
       void cmdRemoveTime(int tick, int len);
+      QList<Viewer*> getViewer() { return viewer; }
       };
 
 extern Score* gscore;

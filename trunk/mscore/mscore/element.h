@@ -339,22 +339,20 @@ class StaffLines : public Element {
 //---------------------------------------------------------
 
 class Cursor : public Element {
-   protected:
-      double dlen;
-      double lineWidth;
+      Viewer* viewer;
       bool _blink;
       bool _on;
 
    public:
-      Cursor(Score*, double l);
-      virtual Cursor* clone() const { return new Cursor(*this); }
+      Cursor(Score*, Viewer*);
+      virtual Cursor* clone() const    { return new Cursor(*this); }
       virtual ElementType type() const { return CURSOR; }
-
       virtual void draw(QPainter&);
-      void setOn(bool f)  { _on = f; }
-      bool isOn() const   { return _on; }
-      void blink()        { _blink = !_blink; }
-      void noBlinking()   { _blink = true; }
+
+      void setOn(bool f)      { _on = f; }
+      bool isOn() const       { return _on; }
+      void blink()            { _blink = !_blink; }
+      void noBlinking()       { _blink = true; }
       };
 
 //---------------------------------------------------------

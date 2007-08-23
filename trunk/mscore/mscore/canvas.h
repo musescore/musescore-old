@@ -36,6 +36,7 @@ class ShadowNote;
 class Navigator;
 class Cursor;
 class ElementList;
+class Segment;
 
 //---------------------------------------------------------
 //   Canvas
@@ -63,14 +64,12 @@ class Canvas : public QFrame, public Viewer {
       QRectF grip[4];         // edit "grips"
       int grips;              // number of used grips
 
-      bool cursorIsBlinking;
-
       QPointF startMove;
 
       //--input state:
       Cursor* cursor;
-      ShadowNote* shadowNote;
       QTimer* cursorTimer;    // blink timer
+      ShadowNote* shadowNote;
 
       Lasso* lasso;           ///< temporarily drawn lasso selection
       QRectF _lassoRect;
@@ -83,7 +82,7 @@ class Canvas : public QFrame, public Viewer {
       //============================================
 
       virtual void paintEvent(QPaintEvent*);
-      void paint(const QRect& r);
+      void paint(const QRect&, QPainter&);
       virtual void updateAll(Score*) { update(); }
 
       void canvasPopup(const QPoint&);
@@ -146,7 +145,9 @@ class Canvas : public QFrame, public Viewer {
 
       void modifyElement(Element* obj);
 
-      virtual QRectF moveCursor();
+      virtual void moveCursor(int, int);
+      virtual void moveCursor(Segment*);
+      virtual void setCursorOn(bool);
       void clearScore();
 
       virtual void dataChanged(const QRectF&);

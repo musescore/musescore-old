@@ -76,7 +76,6 @@ bool showRubberBand = true;
 void Score::doLayout()
       {
       _layout->doLayout();
-      moveCursor();
       }
 
 //---------------------------------------------------------
@@ -86,7 +85,6 @@ void Score::doLayout()
 void Score::reLayout(Measure* m)
       {
       _layout->reLayout(m);
-      moveCursor();
       }
 
 //---------------------------------------------------------
@@ -147,6 +145,7 @@ Score::Score()
       _fileDivision     = division;
       _printing         = false;
       cmdActive         = false;
+      _playlistDirty    = false;
       clear();
       }
 
@@ -178,16 +177,6 @@ void Score::addViewer(Viewer* v)
 void Score::clearViewer()
       {
       viewer.clear();
-      }
-
-//---------------------------------------------------------
-//   moveCursor
-//---------------------------------------------------------
-
-void Score::moveCursor()
-      {
-      for (QList<Viewer*>::iterator i = viewer.begin(); i != viewer.end(); ++i)
-            refresh |= (*i)->moveCursor();
       }
 
 //---------------------------------------------------------
@@ -951,6 +940,10 @@ ChordRest* Score::setNoteEntry(bool val, bool step)
                         cis->pos += cr->tickLen();
                   }
             _noteEntryMode = true;
+            foreach(Viewer* v, viewer) {
+                  v->setCursorOn(true);
+                  v->moveCursor(cis->pos, cis->staff * VOICES + cis->voice);
+                  }
             canvas()->setState(Canvas::NOTE_ENTRY);
             mscore->setState(STATE_NOTE_ENTRY);
             }
@@ -959,10 +952,11 @@ ChordRest* Score::setNoteEntry(bool val, bool step)
             cis->pos       = -1;
             _noteEntryMode = false;
             setPadState();
+            foreach(Viewer* v, viewer)
+                  v->setCursorOn(false);
             canvas()->setState(Canvas::NORMAL);
             mscore->setState(STATE_NORMAL);
             }
-      moveCursor();
       return cr;
       }
 
@@ -994,7 +988,6 @@ void Score::midiNoteReceived(int pitch, bool chord)
             else {
                   setNote(cis->pos, staff(cis->staff), cis->voice, pitch, len);
                   cis->pos += len;
-                  moveCursor();
                   }
             }
       layoutAll = false;

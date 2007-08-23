@@ -72,7 +72,6 @@ Canvas::Canvas(QWidget* parent)
       _fgColor         = Qt::white;
       fgPixmap         = 0;
       bgPixmap         = 0;
-      cursorIsBlinking = preferences.cursorBlink;
       lasso            = new Lasso(_score);
 
       setXoffset(30);
@@ -87,7 +86,8 @@ Canvas::Canvas(QWidget* parent)
       mousePressed     = false;
 
       connect(cursorTimer, SIGNAL(timeout()), SLOT(cursorBlink()));
-      cursorTimer->start(500);
+      if (preferences.cursorBlink)
+            cursorTimer->start(500);
 
       if (debugMode)
             setMouseTracking(true);
@@ -101,7 +101,7 @@ void Canvas::setScore(Score* s, ScoreLayout* l)
       {
       _score = s;
       if (cursor == 0) {
-            cursor = new Cursor(_score, 6);
+            cursor = new Cursor(_score, this);
             shadowNote = new ShadowNote(_score);
             cursor->setVisible(false);
             shadowNote->setVisible(false);
@@ -117,7 +117,6 @@ void Canvas::setScore(Score* s, ScoreLayout* l)
             updateNavigator(false);
             }
       }
-
 
 //---------------------------------------------------------
 //   event
@@ -137,24 +136,16 @@ bool Canvas::event(QEvent* ev)
 
 //---------------------------------------------------------
 //   cursorBlink
+//    cursor timer slot
 //---------------------------------------------------------
 
 void Canvas::cursorBlink()
       {
-      bool update = false;
-      if (preferences.cursorBlink != cursorIsBlinking) {
-            cursorIsBlinking = preferences.cursorBlink;
-            if (!cursorIsBlinking) {
-                  cursor->noBlinking();
-                  update = true;
-                  }
+      if (!preferences.cursorBlink) {
+            cursor->noBlinking();
+            cursorTimer->stop();
             }
-      if (cursorIsBlinking) {
-            cursor->blink();
-            update = true;
-            }
-      if (update)
-            redraw(cursor->abbox());
+      cursor->blink();
       }
 
 //---------------------------------------------------------
@@ -164,8 +155,10 @@ void Canvas::cursorBlink()
 Canvas::~Canvas()
       {
       delete lasso;
-      delete cursor;
-      delete shadowNote;
+      if (cursor)
+            delete cursor;
+      if (shadowNote)
+            delete shadowNote;
       }
 
 //---------------------------------------------------------
@@ -961,54 +954,58 @@ void Canvas::clearScore()
 
 //---------------------------------------------------------
 //   moveCursor
-//    move cursor and set visible
-//    if (tick == -1) hide cursor
 //---------------------------------------------------------
 
-QRectF Canvas::moveCursor()
+void Canvas::moveCursor(int tick, int track)
       {
-      QRectF refresh;
-
-      cursor->setVoice(cis->voice);
-      int staff = cis->staff;
-      int tick  = cis->pos;
-      if (cursor->isOn()) {
-            refresh |= cursor->abbox();
+      if (track == -1) {
+            track = 0;
             }
-      if (tick == -1) {
-            cursor->setOn(false);
-            return refresh;
-            }
-      if (staff == -1) {
-            printf("cannot set Cursor to staff -1\n");
-            return refresh;
-            }
-      cursor->setOn(true);
+      int staff = track / VOICES;
+      cursor->setVoice(track % VOICES);
       cursor->setTick(tick);
+      cursor->setStaff(_score->staff(staff));
 
-      for (int i = 0; i < 2; ++i) {
-            Segment* segment = _score->tick2segment(tick);
-            if (segment) {
-                  if (i)
-                        return refresh;
-                  //
-                  // we cannot exec next code after appendMeasure();
-                  // the new measure has no System because doLayout()
-                  // was not called at this moment:
-                  //
-                  _score->adjustCanvasPosition(segment);
-                  System* system = segment->measure()->system();
-                  double x = segment->canvasPos().x();
-                  double y = system->bboxStaff(staff).y() + system->canvasPos().y();
-                  refresh |= cursor->abbox();
-                  cursor->setPos(x - _spatium, y - _spatium);
-                  refresh |= cursor->abbox();
-                  return refresh;
-                  }
-            _score->appendMeasures(1);
+      Segment* segment = _score->tick2segment(cursor->tick());
+      if (segment) {
+//            _score->adjustCanvasPosition(segment);
+            System* system = segment->measure()->system();
+            double x = segment->canvasPos().x();
+            double y = system->bboxStaff(staff).y() + system->canvasPos().y();
+            _score->addRefresh(cursor->abbox());
+            cursor->setPos(x - _spatium, y - _spatium);
+            _score->addRefresh(cursor->abbox());
+            cursor->setHeight(6.0 * _spatium);
+            return;
             }
-      printf("cursor position not found for tick %d\n", tick);
-      return refresh;
+      // _score->appendMeasures(1);
+      printf("cursor position not found for tick %d, append new measure\n", cursor->tick());
+      }
+
+void Canvas::moveCursor(Segment* segment)
+      {
+      System* system = segment->measure()->system();
+      double x = segment->canvasPos().x();
+
+      double y = system->bboxStaff(0).y() + system->canvasPos().y();
+      double y2 = system->bboxStaff(_score->nstaves()-1).y() + system->canvasPos().y();
+      cursor->setHeight(y2 - y + 6.0 * _spatium);
+
+      qreal d = _spatium * .5;
+
+      _score->addRefresh(cursor->abbox().adjusted(-d, -d, 2.0 * d, 2.0 * d));
+      cursor->setPos(x - _spatium, y - _spatium);
+      _score->addRefresh(cursor->abbox());
+      }
+
+//---------------------------------------------------------
+//   setCursorOn
+//---------------------------------------------------------
+
+void Canvas::setCursorOn(bool val)
+      {
+      if (cursor)
+            cursor->setOn(val);
       }
 
 //---------------------------------------------------------
@@ -1068,40 +1065,47 @@ static inline unsigned long long cycles()
 
 void Canvas::paintEvent(QPaintEvent* ev)
       {
-      QRect rr;
+      QPainter p(this);
+      p.setRenderHint(QPainter::Antialiasing, preferences.antialiasedDrawing);
+
+      QRegion region;
       if (_score->needLayout()) {
             _score->doLayout();
             if (navigator)
                   navigator->layoutChanged();
+            if (_score->noteEntryMode())
+                  moveCursor(cis->pos, cis->staff * VOICES + cis->voice);
             if (state == EDIT || state == DRAG_EDIT)
                   updateGrips();
-            rr.setRect(0, 0, width(), height());  // does not work because paintEvent
-                                                  // is clipped?
-            paint(rr);
+            region = QRegion(0, 0, width(), height());
             }
-      else {
+      else
+            region = ev->region();
+
+      QVector<QRect> vector = region.rects();
+      foreach(QRect r, vector) {
+            // refresh a little more:
             int dx = lrint(_matrix.m11());
             int dy = lrint(_matrix.m22());
-
-            const QRegion& region = ev->region();
-            QVector<QRect> vector = region.rects();
-            foreach(QRect r, vector) {
-                  // refresh a little more:
-                  rr = r.adjusted(-dx, -dy, 2 * dx, 2 * dy);
-                  paint(rr);
-                  }
+            r.adjust(-dx, -dy, 2 * dx, 2 * dy);
+            paint(r, p);
             }
+
+      p.setMatrix(_matrix);
+      p.setClipping(false);
+
+      cursor->draw(p);
+      lasso->draw(p);
+      shadowNote->draw(p);
       }
 
 //---------------------------------------------------------
 //   paint
 //---------------------------------------------------------
 
-void Canvas::paint(const QRect& rr)
+void Canvas::paint(const QRect& rr, QPainter& p)
       {
-      QPainter p(this);
-      p.setRenderHint(QPainter::Antialiasing, preferences.antialiasedDrawing);
-
+      p.save();
       if (fgPixmap == 0 || fgPixmap->isNull())
             p.fillRect(rr, _fgColor);
       else {
@@ -1120,10 +1124,6 @@ void Canvas::paint(const QRect& rr)
 
       QList<Element*> ell = _layout->items(fr);
       drawElements(p, ell);
-
-      lasso->draw(p);
-      cursor->draw(p);
-      shadowNote->draw(p);
 
       if (dropRectangle.isValid())
             p.fillRect(dropRectangle, QColor(80, 0, 0, 80));
@@ -1220,6 +1220,7 @@ void Canvas::paint(const QRect& rr)
             else
                   p.drawTiledPixmap(rr, *bgPixmap, rr.topLeft()-QPoint(lrint(xoffset()), lrint(yoffset())));
             }
+      p.restore();
       }
 
 //---------------------------------------------------------
