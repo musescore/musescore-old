@@ -3,7 +3,7 @@
 //  Linux Music Score Editor
 //  $Id: pedal.h,v 1.2 2006/03/02 17:08:40 wschweer Exp $
 //
-//  Copyright (C) 2002-2006 Werner Schweer (ws@seh.de)
+//  Copyright (C) 2002-2007 Werner Schweer and others
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.

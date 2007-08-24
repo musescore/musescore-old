@@ -3,7 +3,7 @@
 //  Linux Music Score Editor
 //  $Id: mscore.h,v 1.54 2006/04/12 14:58:10 wschweer Exp $
 //
-//  Copyright (C) 2002-2007 Werner Schweer (ws@seh.de)
+//  Copyright (C) 2002-2007 Werner Schweer and others
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.
@@ -114,7 +114,6 @@ class TabBar : public QTabBar {
 
 class Shortcut {
    public:
-
       const char* xml;        //! xml tag name for configuration file
       QString descr;          //! descriptor, shown in editor
       QKeySequence key;       //! shortcut
@@ -232,8 +231,6 @@ class MuseScore : public QMainWindow {
       void startInstrumentListEditor();
       void startPageListEditor();
       void preferencesChanged();
-      void setStop(bool);
-      void setPlay(bool);
       void editStyle();
       void saveStyle();
       void loadStyle();
@@ -290,6 +287,7 @@ class MuseScore : public QMainWindow {
       Score* currentScore() const { return cs; }
       void setState(int);
       static Shortcut sc[];
+      static Shortcut scSeq[];
       void incMag();
       void decMag();
       void setMag(double);
@@ -335,6 +333,7 @@ extern MuseScore* mscore;
 
 extern QAction* getAction(const char*);
 extern QMap<QString, Shortcut*> shortcuts;
+extern QMap<QString, Shortcut*> shortcutsSeq;
 
 #endif
 

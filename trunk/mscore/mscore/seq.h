@@ -3,7 +3,7 @@
 //  Linux Music Score Editor
 //  $Id: seq.h,v 1.20 2006/03/02 17:08:43 wschweer Exp $
 //
-//  Copyright (C) 2002-2006 Werner Schweer (ws@seh.de)
+//  Copyright (C) 2002-2007 Werner Schweer and others
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.
@@ -33,7 +33,7 @@ class Painter;
 //    message format for gui -> sequencer messages
 //---------------------------------------------------------
 
-enum { SEQ_TEMPO_CHANGE, SEQ_PLAY };
+enum { SEQ_TEMPO_CHANGE, SEQ_PLAY, SEQ_SEEK };
 
 struct SeqMsg {
       int id;
@@ -97,6 +97,7 @@ class Seq : public QObject {
       void startTransport();
       int frame2tick(int frame) const;
       int tick2frame(int tick) const;
+      void setPos(int);
 
    private slots:
       void seqMessage(int fd);
@@ -109,7 +110,7 @@ class Seq : public QObject {
       void rewindStart();
       void setVolume(float);
       void setRelTempo(int);
-      void setPos(int);
+      void seek(int);
 
    signals:
       void started();
@@ -128,7 +129,6 @@ class Seq : public QObject {
       bool isStopped() const    { return state == STOP; }
       void process(unsigned, float*, float*);
       std::list<QString> inputPorts();
-//      AList& activeNotes()      { return _activeNotes; }
       int sampleRate() const;
       int getEndTick() const    { return endTick; }
       float volume() const      {  return _volume; }

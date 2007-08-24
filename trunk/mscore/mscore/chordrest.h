@@ -3,7 +3,7 @@
 //  Linux Music Score Editor
 //  $Id: chordrest.h,v 1.4 2006/03/03 21:47:11 wschweer Exp $
 //
-//  Copyright (C) 2002-2006 Werner Schweer (ws@seh.de)
+//  Copyright (C) 2002-2007 Werner Schweer and others
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.

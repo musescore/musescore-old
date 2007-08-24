@@ -22,6 +22,8 @@
 #include "sig.h"
 #include "score.h"
 #include "seq.h"
+#include "layout.h"
+#include "mscore.h"
 
 const int MIN_VOL = -60;
 const int MAX_VOL = 10;
@@ -35,7 +37,6 @@ PlayPanel::PlayPanel(QWidget* parent)
       {
       setupUi(this);
       volumeSlider->setRange(MIN_VOL * 1000, MAX_VOL * 1000);
-      posSlider->setRange(0, seq->getEndTick());
       tempoSlider->setValue(tempoSlider->maximum() + tempoSlider->minimum() - 100);
 
       int lineStep = (MAX_VOL - MIN_VOL) * 10;
@@ -43,12 +44,12 @@ PlayPanel::PlayPanel(QWidget* parent)
       volumeSlider->setPageStep(lineStep * 10);
       volumeSlider->setInvertedAppearance(true);  // cannot be set from designer
 
+      stopButton->setDefaultAction(getAction("stop"));
+      playButton->setDefaultAction(getAction("play"));
+      rewindButton->setDefaultAction(getAction("rewind"));
+
       connect(volumeSlider, SIGNAL(sliderMoved(int)), SLOT(volumeChanged(int)));
       connect(posSlider,    SIGNAL(sliderMoved(int)), SLOT(posChanged(int)));
-
-      connect(rewindButton, SIGNAL(clicked()),        SIGNAL(rewindTriggered()));
-      connect(stopButton,   SIGNAL(toggled(bool)),    SIGNAL(stopToggled(bool)));
-      connect(playButton,   SIGNAL(toggled(bool)),    SIGNAL(playToggled(bool)));
       connect(tempoSlider,  SIGNAL(sliderMoved(int)), SIGNAL(relTempoChanged(int)));
       }
 
@@ -60,6 +61,18 @@ void PlayPanel::closeEvent(QCloseEvent* ev)
       {
       emit closed();
       QWidget::closeEvent(ev);
+      }
+
+//---------------------------------------------------------
+//   setScore
+//---------------------------------------------------------
+
+void PlayPanel::setScore(Score* s)
+      {
+      cs = s;
+      Measure* lm = cs->mainLayout()->last();
+      if (lm)
+            setEndpos(lm->tick() + lm->tickLen());
       }
 
 //---------------------------------------------------------
@@ -77,9 +90,8 @@ void PlayPanel::setEndpos(int val)
 
 void PlayPanel::setTempo(double val)
       {
-//      int tempo = int(60000000.0 / double(val));
-//      tempoLabel->setText(QString("%1 bpm").arg(tempo, 3));
-      tempoLabel->setText(QString("%1 bpm").arg(val * 60.0, 3));
+      int tempo = lrint(val * 60.0);
+      tempoLabel->setText(QString("%1 bpm").arg(tempo, 3));
       }
 
 //---------------------------------------------------------
@@ -130,28 +142,6 @@ void PlayPanel::posChanged(int val)
       }
 
 //---------------------------------------------------------
-//   setStop
-//---------------------------------------------------------
-
-void PlayPanel::setStop(bool val)
-      {
-      stopButton->blockSignals(true);
-      stopButton->setChecked(val);
-      stopButton->blockSignals(false);
-      }
-
-//---------------------------------------------------------
-//   setPlay
-//---------------------------------------------------------
-
-void PlayPanel::setPlay(bool val)
-      {
-      playButton->blockSignals(true);
-      playButton->setChecked(val);
-      playButton->blockSignals(false);
-      }
-
-//---------------------------------------------------------
 //   heartBeat
 //---------------------------------------------------------
 
@@ -163,14 +153,5 @@ void PlayPanel::heartBeat(int tickpos)
       sprintf(buffer, "%03d.%02d", bar+1, beat+1);
       posLabel->setText(QString(buffer));
       posSlider->setValue(tickpos);
-      }
-
-//---------------------------------------------------------
-//   enableSeek
-//---------------------------------------------------------
-
-void PlayPanel::enableSeek(bool val)
-      {
-      posSlider->setEnabled(val);
       }
 

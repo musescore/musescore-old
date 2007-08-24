@@ -3,7 +3,7 @@
 //  Linux Music Score Editor
 //  $Id: score.h,v 1.21 2006/04/12 14:58:10 wschweer Exp $
 //
-//  Copyright (C) 2002-2006 Werner Schweer (ws@seh.de)
+//  Copyright (C) 2002-2007 Werner Schweer and others
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.
@@ -124,6 +124,7 @@ class Score : public QObject {
       bool _saved;      ///< True if project was already saved; only on first
                         ///< save a backup file will be created, subsequent
                         ///< saves will not overwrite the backup file.
+      int _playPos;     ///< sequencer seek position
 
       bool cmdActive;
       int _fileDivision; ///< division of current loading *.msc file
@@ -440,7 +441,9 @@ class Score : public QObject {
       bool noteEntryMode() const { return _noteEntryMode; }
       void insertTime(int tick, int len);
       void cmdRemoveTime(int tick, int len);
-      QList<Viewer*> getViewer() { return viewer; }
+      QList<Viewer*> getViewer() { return viewer;   }
+      int playPos() const        { return _playPos; }
+      void setPlayPos(int val)   { _playPos = val;  }
       };
 
 extern Score* gscore;

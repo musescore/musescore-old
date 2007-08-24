@@ -1208,6 +1208,8 @@ void Score::cmd(const QString& cmd)
             padState.rest = false;
             end();
             }
+      else if (cmd == "toggle-pause")
+            printf("toggle pause\n");
       else {
             startCmd();
             if (cmd == "append-measure")

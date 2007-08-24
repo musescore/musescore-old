@@ -1,3 +1,6 @@
+24.8.7 (ws)
+      - implement "seek" for sequencer
+      - cleanups for sequencer
 22.8.7 (ws)
       - complete implementation of time insert/remove; this includes change
         of time signature and insert/delete measures

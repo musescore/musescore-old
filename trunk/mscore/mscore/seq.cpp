@@ -139,7 +139,7 @@ void Seq::setScore(Score* s)
       playlistChanged = true;
       connect(cs, SIGNAL(selectionChanged(int)), SLOT(selectionChanged(int)));
       if (audio)
-            setPos(0);
+            seek(0);
 #endif
       }
 
@@ -153,7 +153,7 @@ void Seq::selectionChanged(int mode)
             return;
       int tick = cs->pos();
       if (tick != -1)
-            setPos(tick);
+            seek(tick);
       }
 
 //---------------------------------------------------------
@@ -206,9 +206,8 @@ bool Seq::init()
 
 void Seq::exit()
       {
-      if (audio) {
+      if (audio)
             audio->stop();
-            }
       }
 
 //---------------------------------------------------------
@@ -262,7 +261,7 @@ bool Seq::loadSoundFont(const QString& s)
 
 void Seq::rewindStart()
       {
-      setPos(0);
+      seek(0);
       }
 
 //---------------------------------------------------------
@@ -272,13 +271,11 @@ void Seq::rewindStart()
 
 void Seq::start()
       {
-      if (events.empty() || cs->playlistDirty() || playlistChanged) {
+      if (!audio)
+            return;
+      if (events.empty() || cs->playlistDirty() || playlistChanged)
             collectEvents();
-            }
-      int tick = cs->pos();
-      if (tick == -1)
-            tick = 0;
-      setPos(tick);
+      seek(cs->playPos());
       audio->startTransport();
       heartBeatTimer->start(100);
       }
@@ -290,43 +287,9 @@ void Seq::start()
 
 void Seq::stop()
       {
-      if (audio) {
-            audio->stopTransport();
-            }
-      }
-
-//---------------------------------------------------------
-//   setStop
-//    called from button toggled
-//---------------------------------------------------------
-
-void MuseScore::setStop(bool f)
-      {
-      if (!f) {
-            getAction("stop")->setChecked(true);
-            if (playPanel)
-                  playPanel->setStop(true);
-            }
-      else {
-            seq->stop();
-            }
-      }
-
-//---------------------------------------------------------
-//   setPlay
-//    called from button toggled
-//---------------------------------------------------------
-
-void MuseScore::setPlay(bool f)
-      {
-      if (!f) {
-            getAction("play")->setChecked(true);
-            if (playPanel)
-                  playPanel->setPlay(true);
-            }
-      else {
-            seq->start();
-            }
+      if (!audio)
+            return;
+      audio->stopTransport();
       }
 
 //---------------------------------------------------------
@@ -335,30 +298,9 @@ void MuseScore::setPlay(bool f)
 
 void MuseScore::seqStarted()
       {
-      disconnect(cs, SIGNAL(selectionChanged(int)), this, SLOT(selectionChanged(int)));
-
-      QAction* a = getAction("stop");
-      a->blockSignals(true);
-      a->setChecked(false);
-      a->blockSignals(false);
-
-      a = getAction("play");
-      a->blockSignals(true);
-      a->setChecked(true);
-      a->blockSignals(false);
-
-      if (playPanel) {
-            playPanel->setStop(false);
-            playPanel->setPlay(true);
-            }
-      PlayPanel* pp = mscore->getPlayPanel();
-      if (pp)
-            pp->enableSeek(false);
       setState(STATE_PLAY);
-      foreach(Viewer* v, cs->getViewer()) {
+      foreach(Viewer* v, cs->getViewer())
             v->setCursorOn(true);
-            v->moveCursor(0, 0);
-            }
       }
 
 //---------------------------------------------------------
@@ -369,28 +311,9 @@ void MuseScore::seqStarted()
 
 void MuseScore::seqStopped()
       {
-      QAction* a = getAction("stop");
-      a->blockSignals(true);
-      a->setChecked(true);
-      a->blockSignals(false);
-
-      a = getAction("play");
-      a->blockSignals(true);
-      a->setChecked(false);
-      a->blockSignals(false);
-
-      if (playPanel) {
-            playPanel->setStop(true);
-            playPanel->setPlay(false);
-            }
-      PlayPanel* pp = mscore->getPlayPanel();
-      if (pp)
-            pp->enableSeek(true);
-      connect(cs, SIGNAL(selectionChanged(int)), this, SLOT(selectionChanged(int)));
       setState(STATE_NORMAL);
-      foreach(Viewer* v, cs->getViewer()) {
+      foreach(Viewer* v, cs->getViewer())
             v->setCursorOn(false);
-            }
       cs->start();
       cs->setLayoutAll(false);
       cs->setUpdateAll();
@@ -439,8 +362,8 @@ void Seq::seqMessage(int fd)
                                     }
                               }
                         if (note) {
-
                               cs->select(note, 0, 0);
+                              cs->setPlayPos(note->chord()->tick());
                               }
                         emit stopped();
                         }
@@ -542,6 +465,10 @@ void Seq::process(unsigned frames, float* lbuffer, float* rbuffer)
                         pe.insert(std::pair<const unsigned, Event> (0, ev));
                         }
                         break;
+                  case SEQ_SEEK:
+                        setPos(msg.data1);
+                        break;
+
                   default:
                         printf("unknown seq msg %d\n", msg.id);
                         break;
@@ -552,7 +479,8 @@ void Seq::process(unsigned frames, float* lbuffer, float* rbuffer)
             //
             // collect events for one segment
             //
-            ciEvent e = events.lower_bound(frame2tick(playFrame + frames));
+            int t = frame2tick(playFrame + frames);
+            ciEvent e = events.lower_bound(t);
             for (; playPos != e; ++playPos)
                   pe.insert(*playPos);
 
@@ -579,17 +507,13 @@ void Seq::process(unsigned frames, float* lbuffer, float* rbuffer)
                               synti->playNote(channel, i->second.val1, i->second.val2);
                               }
                         else {
-                              bool found = false;
                               for (QList<Event>::iterator k = _activeNotes.begin(); k != _activeNotes.end(); ++k) {
                                     if (k->channel == i->second.channel && k->val1 == i->second.val1) {
                                           _activeNotes.erase(k);
                                           synti->playNote(channel, i->second.val1, 0);
-                                          found = true;
                                           break;
                                           }
                                     }
-                              if (!found)
-                                    printf("note off not in active list: %d %d\n", channel, i->second.val1);
                               }
                         }
                   else if (type == 0xb0)
@@ -604,8 +528,9 @@ void Seq::process(unsigned frames, float* lbuffer, float* rbuffer)
                   synti->process(frames, l, r);
                   playFrame += frames;
                   }
-            if (playPos == events.end())
+            if (playPos == events.end()) {
                   audio->stopTransport();
+                  }
             }
       else {
             for (ciEvent i = pe.begin(); i != pe.end(); ++i) {
@@ -707,12 +632,13 @@ void Seq::collectEvents()
                   ++staffIdx;
                   }
             }
-      Measure* lm = cs->mainLayout()->last();
-      if (lm) {
-            endTick   = lm->tick() + lm->tickLen();
-            PlayPanel* pp = mscore->getPlayPanel();
-            if (pp)
+      PlayPanel* pp = mscore->getPlayPanel();
+      if (pp) {
+            Measure* lm = cs->mainLayout()->last();
+            if (lm) {
+                  endTick = lm->tick() + lm->tickLen();
                   pp->setEndpos(endTick);
+                  }
             }
       }
 
@@ -786,14 +712,31 @@ void Seq::setRelTempo(int relTempo)
 
 void Seq::setPos(int tick)
       {
-      if (state != STOP)
-            return;
+      // send note off events
+      foreach(const Event& e, _activeNotes) {
+            synti->playNote(e.channel, e.val1, 0);
+            e.note->setSelected(false);
+            }
+      _activeNotes.clear();
       playFrame = tick2frame(tick);
       playPos   = events.lower_bound(tick);
       guiPos    = playPos;
+      }
+
+//---------------------------------------------------------
+//   seek
+//---------------------------------------------------------
+
+void Seq::seek(int tick)
+      {
       PlayPanel* pp = mscore->getPlayPanel();
       if (pp)
             pp->heartBeat(tick);
+      cs->setPlayPos(tick);
+      SeqMsg msg;
+      msg.id    = SEQ_SEEK;
+      msg.data1 = tick;
+      sendMessage(msg);
       }
 
 //---------------------------------------------------------

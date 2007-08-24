@@ -40,13 +40,11 @@ QString appStyleSheet(
       "Pad *             { background-color: rgb(220, 220, 220) }\n"
       "PaletteBoxButton  { background-color: rgb(215, 215, 215) }\n"
       "PaletteBox        { background-color: rgb(230, 230, 230) }\n"
+      "PlayPanel QLabel#posLabel { font-size: 28pt; font-family: \"Arial black\" }\n"
+      "PlayPanel QLabel#tempoLabel { font-size: 10pt; font-family: \"Arial black\" }\n"
+      "PlayPanel QLabel#relTempo { font-size: 10pt; font-family: \"Arial black\" }\n"
       );
-/*
-QString appStyleSheet(
-      "Pad *           { background-color: rgb(176, 190, 242) }\n"
-      "PaletteBox *    { background-color: rgb(176, 190, 242) }\n"
-      );
-  */
+
 //---------------------------------------------------------
 //   buttons2stemDir
 //    convert checked button to StemDirection
