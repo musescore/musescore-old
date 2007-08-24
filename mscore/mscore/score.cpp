@@ -202,6 +202,7 @@ void Score::clear()
       movementNumber  = "";
       movementTitle   = "";
       _pageOffset     = 0;
+      _playPos        = 0;
 
       foreach(Staff* staff, _staves)
             delete staff;
@@ -755,10 +756,12 @@ int Measure::snap(int tick, const QPointF p) const
 
 void Score::startEdit(Element* element)
       {
+#if 0
       foreach (Shortcut* s, shortcuts) {
             if (s->action)
                   s->action->setShortcut(0);
             }
+#endif
       if (element->type() == SLUR_SEGMENT) {
             //
             // we must clone the whole slur with all segments
@@ -804,10 +807,12 @@ void Score::startEdit(Element* element)
 
 void Score::endEdit()
       {
+#if 0
       foreach (Shortcut* s, shortcuts) {
             if (s->action)
                   s->action->setShortcut(s->key);
             }
+#endif
       refresh |= editObject->bbox();
       editObject->endEdit();
       refresh |= editObject->bbox();

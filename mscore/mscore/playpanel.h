@@ -3,7 +3,7 @@
 //  Linux Music Score Editor
 //  $Id: playpanel.h,v 1.8 2006/03/02 17:08:41 wschweer Exp $
 //
-//  Copyright (C) 2002-2006 Werner Schweer (ws@seh.de)
+//  Copyright (C) 2002-2007 Werner Schweer and others
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.
@@ -44,23 +44,17 @@ class PlayPanel : public QWidget, private Ui::PlayPanelBase {
       void posChange(int);
       void volChange(float);
       void closed();
-      void stopToggled(bool);
-      void playToggled(bool);
-      void rewindTriggered();
 
    public:
       PlayPanel(QWidget* parent = 0);
       void heartBeat(int pos);
-      void setStop(bool val);
-      void setPlay(bool val);
 
       void setTempo(double);
       void setRelTempo(int);
 
       void setVolume(float);
       void setEndpos(int);
-      void enableSeek(bool);
-      void setScore(Score* s) { cs = s; }
+      void setScore(Score* s);
       };
 
 #endif

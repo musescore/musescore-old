@@ -3,7 +3,7 @@
 //  Linux Music Score Editor
 //  $Id: mscore.cpp,v 1.105 2006/09/15 09:34:57 wschweer Exp $
 //
-//  Copyright (C) 2002-2006 Werner Schweer (ws@seh.de)
+//  Copyright (C) 2002-2007 Werner Schweer (ws@seh.de) and other
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.
@@ -76,10 +76,10 @@ int appDpiY = 75;
 double DPI, DPMM;
 
 QMap<QString, Shortcut*> shortcuts;
+QMap<QString, Shortcut*> shortcutsSeq;
 
 //---------------------------------------------------------
 // cmdInsertMeasure
-// Added by DK 05.08.07
 //---------------------------------------------------------
 
 void MuseScore::cmdInsertMeasures()
@@ -92,7 +92,6 @@ void MuseScore::cmdInsertMeasures()
 
 //---------------------------------------------------------
 // InsertMeasuresDialog
-// Added by DK 05.08.07
 //---------------------------------------------------------
 
 InsertMeasuresDialog::InsertMeasuresDialog(QWidget* parent)
@@ -103,7 +102,6 @@ InsertMeasuresDialog::InsertMeasuresDialog(QWidget* parent)
 
 //---------------------------------------------------------
 // Insert Measure -->   accept
-// Added by DK 05.08.07
 //---------------------------------------------------------
 
 void InsertMeasuresDialog::accept()
@@ -155,45 +153,16 @@ void MuseScore::closeEvent(QCloseEvent* ev)
 #endif
       seq->exit();
       ev->accept();
+      if (preferences.dirty)
+            preferences.write();
+
       //
       // close all toplevel windows
       //
-      if (pageListEdit)
-            pageListEdit->close();
-      if (playPanel)
-            playPanel->close();
-      if (symbolDialog)
-            symbolDialog->close();
-      if (clefPalette)
-            clefPalette->close();
-      if (keyPalette)
-            keyPalette->close();
-      if (timePalette)
-            timePalette->close();
-      if (linePalette)
-            linePalette->close();
-      if (bracketPalette)
-            bracketPalette->close();
-      if (barPalette)
-            barPalette->close();
-      if (fingeringPalette)
-            fingeringPalette->close();
-      if (noteAttributesPalette)
-            noteAttributesPalette->close();
-      if (accidentalsPalette)
-            accidentalsPalette->close();
-      if (dynamicsPalette)
-            dynamicsPalette->close();
-      if (layoutBreakPalette)
-            layoutBreakPalette->close();
-      if (preferenceDialog)
-            preferenceDialog->close();
-      if (iledit)
-            iledit->close();
-      if (editStyleWin)
-            editStyleWin->close();
-      if (preferences.dirty)
-            preferences.write();
+      foreach(QWidget* w, qApp->topLevelWidgets()) {
+            if (w != this)
+                  w->close();
+            }
       }
 
 //---------------------------------------------------------
@@ -240,7 +209,6 @@ MuseScore::MuseScore()
       playPanel             = 0;
       preferenceDialog      = 0;
       measuresDialog        = 0;
-// Added by DK 05.08.07
       insertMeasuresDialog  = 0;
       iledit                = 0;
       pageListEdit          = 0;
@@ -311,6 +279,29 @@ MuseScore::MuseScore()
             addAction(a);
             ag->addAction(a);
             }
+      // add sequencer shortcuts
+      foreach (Shortcut* s, shortcutsSeq) {
+            QAction* a = new QAction(s->xml, mscore);
+            s->action = a;
+            a->setData(s->xml);
+            // a->setShortcut(s->key);    // will be set in Sequencer mode
+            a->setShortcutContext(s->context);
+            if (!s->help.isEmpty()) {
+                  a->setToolTip(s->help);
+                  a->setWhatsThis(s->help);
+                  }
+            else {
+                  a->setToolTip(s->descr);
+                  a->setWhatsThis(s->descr);
+                  }
+            if (!s->text.isEmpty())
+                  a->setText(s->text);
+            if (s->icon)
+                  a->setIcon(*s->icon);
+            addAction(a);
+            ag->addAction(a);
+            }
+
       connect(ag, SIGNAL(triggered(QAction*)), SLOT(cmd(QAction*)));
 
       QWidget* mainWindow = new QWidget;
@@ -357,19 +348,18 @@ MuseScore::MuseScore()
       transportAction->setExclusive(true);
 
       a = getAction("rewind");
-      transportAction->addAction(a);
       connect(a, SIGNAL(triggered()), seq, SLOT(rewindStart()));
 
       a = getAction("stop");
       a->setCheckable(true);
       a->setChecked(true);
       transportAction->addAction(a);
-      connect(a, SIGNAL(triggered(bool)), this, SLOT(setStop(bool)));
+      connect(a, SIGNAL(triggered(bool)), seq, SLOT(stop()));
 
       a = getAction("play");
       a->setCheckable(true);
       transportAction->addAction(a);
-      connect(a, SIGNAL(triggered(bool)), this, SLOT(setPlay(bool)));
+      connect(a, SIGNAL(triggered(bool)), seq, SLOT(start()));
 
       //---------------------------------------------------
       //    File Action
@@ -1301,19 +1291,12 @@ void MuseScore::showPlayPanel(bool visible)
             playPanel = new PlayPanel(this);
             connect(playPanel, SIGNAL(volChange(float)),    seq, SLOT(setVolume(float)));
             connect(playPanel, SIGNAL(relTempoChanged(int)),seq, SLOT(setRelTempo(int)));
-            connect(playPanel, SIGNAL(posChange(int)),      seq, SLOT(setPos(int)));
-            connect(playPanel, SIGNAL(rewindTriggered()),   seq, SLOT(rewindStart()));
+            connect(playPanel, SIGNAL(posChange(int)),      seq, SLOT(seek(int)));
             connect(playPanel, SIGNAL(closed()),                 SLOT(closePlayPanel()));
-            connect(playPanel, SIGNAL(stopToggled(bool)),        SLOT(setStop(bool)));
-            connect(playPanel, SIGNAL(playToggled(bool)),        SLOT(setPlay(bool)));
 
-            bool playing = seq->isPlaying();
-            playPanel->setStop(!playing);
-            playPanel->setPlay(playing);
             playPanel->setVolume(seq->volume());
             playPanel->setTempo(cs->tempomap->tempo(0));
             playPanel->setRelTempo(cs->tempomap->relTempo());
-            playPanel->enableSeek(!seq->isPlaying());
             playPanel->setEndpos(seq->getEndTick());
             playPanel->setScore(cs);
             }
@@ -1520,6 +1503,11 @@ int main(int argc, char* argv[])
             if (MuseScore::sc[i].xml == 0)
                   break;
             shortcuts[MuseScore::sc[i].xml] = new Shortcut(MuseScore::sc[i]);
+            }
+      for (unsigned i = 0;; ++i) {
+            if (MuseScore::scSeq[i].xml == 0)
+                  break;
+            shortcutsSeq[MuseScore::sc[i].xml] = new Shortcut(MuseScore::scSeq[i]);
             }
       preferences.read();
 
@@ -1822,9 +1810,20 @@ void MuseScore::clipboardChanged()
 
 void MuseScore::setState(int val)
       {
-      _state = val;
       switch(val) {
             case STATE_NORMAL:
+                  // enable normal shortcuts
+                  foreach (Shortcut* s, shortcuts) {
+                        if (s->action)
+                              s->action->setShortcut(s->key);
+                        }
+                  if (_state == STATE_PLAY) {
+                        // disable sequencer shortcuts
+                        foreach (Shortcut* s, shortcutsSeq) {
+                              if (s->action)
+                                    s->action->setShortcut(0);
+                              }
+                        }
                   _modeText->hide();
                   break;
             case STATE_NOTE_ENTRY:
@@ -1832,14 +1831,37 @@ void MuseScore::setState(int val)
                   _modeText->show();
                   break;
             case STATE_EDIT:
+                  if (_state == STATE_NORMAL) {
+                        // disable normal shortcuts
+                        foreach (Shortcut* s, shortcuts) {
+                              if (s->action)
+                                    s->action->setShortcut(0);
+                              }
+                        }
                   _modeText->setText(tr("edit mode"));
                   _modeText->show();
                   break;
             case STATE_PLAY:
+                  if (_state == STATE_NORMAL) {
+                        // disable normal shortcuts
+                        foreach (Shortcut* s, shortcuts) {
+                              if (s->action)
+                                    s->action->setShortcut(0);
+                              }
+                        }
+                  // enable sequencer shortcuts
+printf("set state play\n");
+                  foreach (Shortcut* s, shortcutsSeq) {
+                        if (s->action) {
+                              printf("add shortcut %s\n", s->xml);
+                              s->action->setShortcut(s->key);
+                              }
+                        }
                   _modeText->setText(tr("play"));
                   _modeText->show();
                   break;
             }
+      _state = val;
       }
 
 //---------------------------------------------------------

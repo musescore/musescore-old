@@ -1157,3 +1157,15 @@ Shortcut MuseScore::sc[] = {
       Shortcut(0, 0, 0),
       };
 
+Shortcut MuseScore::scSeq[] = {
+      Shortcut(
+         "toggle-pause",
+         QT_TR_NOOP("toggle pause"),
+         Qt::Key_Space,
+         Qt::WindowShortcut,
+         QT_TR_NOOP("toggle pause"),
+         QT_TR_NOOP("toggle pause")
+         ),
+      Shortcut(0, 0, 0),
+      };
+
