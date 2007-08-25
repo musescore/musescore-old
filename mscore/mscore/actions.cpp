@@ -1097,7 +1097,7 @@ Shortcut MuseScore::sc[] = {
          QT_TR_NOOP("Palette")
          ),
       Shortcut(
-         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT,
+         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT | STATE_PLAY,
          "toggle-playpanel",
          QT_TR_NOOP("Play Panel"),
          Qt::Key_F11,

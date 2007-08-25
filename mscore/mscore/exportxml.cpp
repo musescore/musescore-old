@@ -1259,7 +1259,7 @@ void ExportMusicXml::chord(Chord* chord, int staff, const LyricsList* ll)
                               printf("unknown accidental %d\n", acc);
                         }
                   if (editorial)
-                        xml.tag("accidental", "editorial=\"yes\"", s);
+                        xml.tag("accidental editorial=\"yes\"", s);
                   else
                         xml.tag("accidental", s);
                   }
@@ -1285,7 +1285,7 @@ void ExportMusicXml::chord(Chord* chord, int staff, const LyricsList* ll)
 
             if (i == nl->begin() && chord->beam()) {
                   QString s = chord->beam()->xmlType(chord);
-                  xml.tag("beam", "number=\"1\"", s);
+                  xml.tag("beam number=\"1\"", s);
                   }
 
             Notations notations;
@@ -1624,13 +1624,13 @@ bool ExportMusicXml::write(const QString& name)
                   Text* text = (Text*)(*ie);
                   switch (text->subtype()) {
                         case TEXT_COMPOSER:
-                              xml.tag("creator", "type=\"composer\"", text->getText());
+                              xml.tag("creator type=\"composer\"", text->getText());
                               break;
                         case TEXT_POET:
-                              xml.tag("creator", "type=\"poet\"", text->getText());
+                              xml.tag("creator type=\"poet\"", text->getText());
                               break;
                         case TEXT_TRANSLATOR:
-                              xml.tag("creator", "type=\"creator\"", text->getText());
+                              xml.tag("creator type=\"creator\"", text->getText());
                               break;
                         }
                   }

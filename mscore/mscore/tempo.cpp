@@ -61,13 +61,15 @@ void TempoList::add(int tick, const TEvent& ev)
 
 void TempoList::normalize()
       {
-      double time = 0;
-      int tick    = 0;
+      double time  = 0;
+      int tick     = 0;
+      double tempo = 2.0;
       for (iTEvent e = begin(); e != end(); ++e) {
+            int delta = e->first - tick;
+            time += double(delta) / (division * tempo * _relTempo * 0.01);
             e->second.time = time;
-            double delta = double(e->first - tick);
-            time += delta / (division * e->second.tempo * _relTempo * 0.01);
             tick = e->first;
+            tempo = e->second.tempo;
             }
       }
 
@@ -99,23 +101,21 @@ void TempoList::clear()
 
 double TempoList::tempo(int tick) const
       {
-      if (useList) {
-            if (empty())
-                  return 2.0;
-            ciTEvent i = lower_bound(tick);
-            if (i == end()) {
-                  --i;
-                  return i->second.tempo;
-                  }
-            if (i->first == tick)
-                  return i->second.tempo;
-            if (i == begin())
-                  return 2.0;
+      if (!useList)
+            return _tempo;
+      if (empty())
+            return 2.0;
+      ciTEvent i = lower_bound(tick);
+      if (i == end()) {
             --i;
             return i->second.tempo;
             }
-      else
-            return _tempo;
+      if (i->first == tick)
+            return i->second.tempo;
+      if (i == begin())
+            return 2.0;
+      --i;
+      return i->second.tempo;
       }
 
 //---------------------------------------------------------
@@ -304,7 +304,7 @@ int TempoList::time2tick(double time, int* sn) const
             delta = 0.0;
             tempo = 2.0;
             for (ciTEvent e = begin(); e != end(); ++e) {
-                  if (time < e->second.time)
+                  if (e->second.time >= time)
                         break;
                   delta = e->second.time;
                   tempo = e->second.tempo;

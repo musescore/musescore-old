@@ -996,13 +996,13 @@ void Score::addTempo()
             editTempo = new EditTempo(0);
       int rv = editTempo->exec();
       if (rv == 1) {
-            double bpm = editTempo->bpm();
-            tempomap->addTempo(tick, int(60000000.0/double(bpm)));
+            double bps = editTempo->bpm() / 60.0;
+            tempomap->addTempo(tick, bps);
             TempoText* tt = new TempoText(this);
             tt->setTick(tick);
             tt->setStaff(e->staff());
             tt->setText(editTempo->text());
-            tt->setTempo(bpm);
+            tt->setTempo(bps);
             tt->setParent(m);
             cmdAdd(tt);
             refresh |= tt->abbox();
