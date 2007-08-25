@@ -138,6 +138,8 @@ void Xml::netag(const char* s)
 
 void Xml::tag(const QString& name, QVariant data)
       {
+      QString ename(name.split(' ')[0]);
+
       putLevel();
       switch(data.type()) {
             case QVariant::Bool:
@@ -145,17 +147,17 @@ void Xml::tag(const QString& name, QVariant data)
             case QVariant::Int:
                   *this << "<" << name << ">";
                   *this << data.toInt();
-                  *this << "</" << name << ">\n";
+                  *this << "</" << ename << ">\n";
                   break;
             case QVariant::Double:
                   *this << "<" << name << ">";
                   *this << data.value<double>();
-                  *this << "</" << name << ">\n";
+                  *this << "</" << ename << ">\n";
                   break;
             case QVariant::String:
                   *this << "<" << name << ">";
                   *this << xmlString(data.value<QString>());
-                  *this << "</" << name << ">\n";
+                  *this << "</" << ename << ">\n";
                   break;
             case QVariant::Color:
                   {
@@ -187,11 +189,13 @@ void Xml::tag(const QString& name, QVariant data)
             }
       }
 
+#if 0
 void Xml::tag(const char* name, const QString& attributes, const QString& s)
       {
       putLevel();
       *this << "<" << name << " " << attributes << ">" << s << "</" << name << ">\n";
       }
+#endif
 
 void Xml::tag(const char* name, const QWidget* g)
       {

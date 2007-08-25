@@ -518,8 +518,8 @@ void Seq::process(unsigned frames, float* lbuffer, float* rbuffer)
                   if (f > playFrame) {
                         int n = f - playFrame;
                         if (n < 0 || n > int(frames)) {
-                              printf("bad n %d\n", n);
-                              n = frames;
+                              printf("Seq: at %d bad n %d(>%d) = %d - %d\n", i->first, n, frames, f, playFrame);
+                              break;
                               }
                         synti->process(n, l, r);
                         l         += n;

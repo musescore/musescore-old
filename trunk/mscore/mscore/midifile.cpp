@@ -148,11 +148,11 @@ void MidiMeta::dump(Xml& xml) const
       {
       switch(metaType()) {
             case META_TRACK_NAME:
-                  xml.tag("TrackName",  QString("tick=\"%1\"").arg(ontime()), QString((char*)(data())));
+                  xml.tag(QString("TrackName tick=\"%1\"").arg(ontime()), QString((char*)(data())));
                   break;
 
             case META_LYRIC:
-                  xml.tag("Lyric",  QString("tick=\"%1\"").arg(ontime()), QString((char*)(data())));
+                  xml.tag(QString("Lyric tick=\"%1\"").arg(ontime()), QString((char*)(data())));
                   break;
 
             case META_KEY_SIGNATURE:
@@ -169,8 +169,7 @@ void MidiMeta::dump(Xml& xml) const
                         }
                   QString sex(_data[1] ? "Minor" : "Major");
                   QString keyName(keyTable[key]);
-                  xml.tag("Key",
-                     QString("tick=\"%1\" key=\"%2\" sex=\"%3\"").arg(ontime()).arg(_data[0]).arg(_data[1]),
+                  xml.tag(QString("Key tick=\"%1\" key=\"%2\" sex=\"%3\"").arg(ontime()).arg(_data[0]).arg(_data[1]),
                      QString("%1 %2").arg(keyName).arg(sex));
                   }
                   break;

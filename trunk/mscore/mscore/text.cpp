@@ -846,7 +846,7 @@ TempoText::TempoText(Score* s)
    : Text(s)
       {
       setSubtype(TEXT_TEMPO);
-      _tempo = 120.0;
+      _tempo = 2.0;
       }
 
 //---------------------------------------------------------
