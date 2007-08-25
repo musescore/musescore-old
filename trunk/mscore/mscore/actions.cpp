@@ -27,6 +27,7 @@
 
 Shortcut MuseScore::sc[] = {
       Shortcut(
+         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT | STATE_PLAY,
          "file-open",
          QT_TR_NOOP("file open"),
          Qt::CTRL+Qt::Key_O,
@@ -36,6 +37,7 @@ Shortcut MuseScore::sc[] = {
          &fileOpenIcon
          ),
       Shortcut(
+         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT | STATE_PLAY,
          "file-save",
          QT_TR_NOOP("file save"),
          Qt::CTRL+Qt::Key_S,
@@ -45,6 +47,7 @@ Shortcut MuseScore::sc[] = {
          &fileSaveIcon
          ),
       Shortcut(
+         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT | STATE_PLAY,
          "file-save-as",
          QT_TR_NOOP("file save as"),
          0,
@@ -54,6 +57,7 @@ Shortcut MuseScore::sc[] = {
          &fileSaveIcon
          ),
       Shortcut(
+         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT | STATE_PLAY,
          "file-close",
          QT_TR_NOOP("file close"),
          Qt::CTRL+Qt::Key_W,
@@ -63,6 +67,7 @@ Shortcut MuseScore::sc[] = {
          &fileSaveIcon
          ),
       Shortcut(
+         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT | STATE_PLAY,
          "file-new",
          QT_TR_NOOP("file new"),
          0,
@@ -72,6 +77,7 @@ Shortcut MuseScore::sc[] = {
          &fileNewIcon
          ),
       Shortcut(
+         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT | STATE_PLAY,
          "file-template",
          QT_TR_NOOP("file new from template"),
          Qt::CTRL+Qt::Key_N,
@@ -80,8 +86,8 @@ Shortcut MuseScore::sc[] = {
          QT_TR_NOOP("Create new score from template"),
          &fileNewIcon
          ),
-
       Shortcut(
+         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT | STATE_PLAY,
          "print",
          QT_TR_NOOP("print"),
          Qt::CTRL+Qt::Key_P,
@@ -91,6 +97,7 @@ Shortcut MuseScore::sc[] = {
          &printIcon
          ),
       Shortcut(
+         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT,
          "undo",
          QT_TR_NOOP("undo"),
          Qt::CTRL+Qt::Key_Z,        // QKeySequence::Undo,
@@ -100,6 +107,7 @@ Shortcut MuseScore::sc[] = {
          &undoIcon
          ),
       Shortcut(
+         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT,
          "redo",
          QT_TR_NOOP("redo"),
          Qt::CTRL+Qt::SHIFT+Qt::Key_Z,    // QKeySequence::Redo,
@@ -109,6 +117,7 @@ Shortcut MuseScore::sc[] = {
          &redoIcon
          ),
       Shortcut(
+         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT,
          "cut",
          QT_TR_NOOP("cut"),
          Qt::CTRL+Qt::Key_X,        // QKeySequence::Cut,
@@ -118,6 +127,7 @@ Shortcut MuseScore::sc[] = {
          &cutIcon
          ),
       Shortcut(
+         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT,
          "copy",
          QT_TR_NOOP("copy"),
          Qt::CTRL+Qt::Key_C,        // QKeySequence::Copy,
@@ -127,6 +137,7 @@ Shortcut MuseScore::sc[] = {
          &copyIcon
          ),
       Shortcut(
+         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT,
          "paste",
          QT_TR_NOOP("paste"),
          Qt::CTRL+Qt::Key_V,        // QKeySequence::Paste,
@@ -136,6 +147,7 @@ Shortcut MuseScore::sc[] = {
          &pasteIcon
          ),
       Shortcut(
+         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT,
          "instruments",
          QT_TR_NOOP("show instruments dialog"),
          Qt::Key_I,
@@ -144,6 +156,7 @@ Shortcut MuseScore::sc[] = {
          QT_TR_NOOP("Show Instruments Dialog")
          ),
       Shortcut(
+         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT,
          "clefs",
          QT_TR_NOOP("show clefs palette"),
          Qt::Key_Y,
@@ -153,6 +166,7 @@ Shortcut MuseScore::sc[] = {
          &clefIcon
          ),
       Shortcut(
+         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT,
          "keys",
          QT_TR_NOOP("show keys palette"),
          Qt::Key_K,
@@ -162,6 +176,7 @@ Shortcut MuseScore::sc[] = {
          &sharpIcon
          ),
       Shortcut(
+         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT,
          "symbols",
          QT_TR_NOOP("show symbols palette"),
          Qt::Key_Z,
@@ -170,6 +185,7 @@ Shortcut MuseScore::sc[] = {
          QT_TR_NOOP("Show Symbols Palette")
          ),
       Shortcut(
+         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT,
          "times",
          QT_TR_NOOP("show time palette"),
          Qt::Key_T,
@@ -178,6 +194,7 @@ Shortcut MuseScore::sc[] = {
          QT_TR_NOOP("Show Time Palette")
          ),
       Shortcut(
+         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT,
          "dynamics",
          QT_TR_NOOP("show dynamics palette"),
          Qt::Key_L,
@@ -186,6 +203,7 @@ Shortcut MuseScore::sc[] = {
          QT_TR_NOOP("Show Dynamics Palette")
          ),
       Shortcut(
+         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT,
          "note-input",
          QT_TR_NOOP("note input"),
          Qt::Key_N,
@@ -194,6 +212,7 @@ Shortcut MuseScore::sc[] = {
          QT_TR_NOOP("Note Input Mode")
          ),
       Shortcut(
+         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT,
          "pitch-spell",
          QT_TR_NOOP("pitch spell"),
          0,
@@ -202,6 +221,7 @@ Shortcut MuseScore::sc[] = {
          QT_TR_NOOP("Pitch spell")
          ),
       Shortcut(
+         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT,
          "interval1",
          QT_TR_NOOP("enter unison above"),
          Qt::Key_1,
@@ -210,6 +230,7 @@ Shortcut MuseScore::sc[] = {
          QT_TR_NOOP("Enter Unison above")
          ),
       Shortcut(
+         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT,
          "interval2",
          QT_TR_NOOP("enter second above"),
          Qt::Key_2,
@@ -218,6 +239,7 @@ Shortcut MuseScore::sc[] = {
          QT_TR_NOOP("Enter Second above")
          ),
       Shortcut(
+         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT,
          "interval3",
          QT_TR_NOOP("enter third above"),
          Qt::Key_3,
@@ -226,6 +248,7 @@ Shortcut MuseScore::sc[] = {
          QT_TR_NOOP("Enter Third above")
          ),
       Shortcut(
+         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT,
          "interval4",
          QT_TR_NOOP("enter fourth above"),
          Qt::Key_4,
@@ -234,6 +257,7 @@ Shortcut MuseScore::sc[] = {
          QT_TR_NOOP("Enter Fourth above")
          ),
       Shortcut(
+         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT,
          "interval5",
          QT_TR_NOOP("enter fifth above"),
          Qt::Key_5,
@@ -242,6 +266,7 @@ Shortcut MuseScore::sc[] = {
          QT_TR_NOOP("Enter Fifth above")
          ),
       Shortcut(
+         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT,
          "interval6",
          QT_TR_NOOP("enter sixth above"),
          Qt::Key_6,
@@ -250,6 +275,7 @@ Shortcut MuseScore::sc[] = {
          QT_TR_NOOP("Enter Sixth above")
          ),
       Shortcut(
+         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT,
          "interval7",
          QT_TR_NOOP("enter seventh above"),
          Qt::Key_7,
@@ -258,6 +284,7 @@ Shortcut MuseScore::sc[] = {
          QT_TR_NOOP("Enter Seventh above")
          ),
       Shortcut(
+         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT,
          "interval8",
          QT_TR_NOOP("enter octave above"),
          Qt::Key_8,
@@ -266,6 +293,7 @@ Shortcut MuseScore::sc[] = {
          QT_TR_NOOP("Enter Octave above")
          ),
       Shortcut(
+         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT,
          "interval9",
          QT_TR_NOOP("enter ninth above"),
          Qt::Key_9,
@@ -274,6 +302,7 @@ Shortcut MuseScore::sc[] = {
          QT_TR_NOOP("Enter Ninth above")
          ),
       Shortcut(
+         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT,
          "interval-2",
          QT_TR_NOOP("enter second below"),
          Qt::SHIFT + Qt::Key_2,
@@ -282,6 +311,7 @@ Shortcut MuseScore::sc[] = {
          QT_TR_NOOP("Enter Second below")
          ),
       Shortcut(
+         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT,
          "interval-3",
          QT_TR_NOOP("enter third below"),
          Qt::SHIFT + Qt::Key_3,
@@ -290,6 +320,7 @@ Shortcut MuseScore::sc[] = {
          QT_TR_NOOP("Enter Third below")
          ),
       Shortcut(
+         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT,
          "interval-4",
          QT_TR_NOOP("enter fourth below"),
          Qt::SHIFT + Qt::Key_4,
@@ -298,6 +329,7 @@ Shortcut MuseScore::sc[] = {
          QT_TR_NOOP("Enter Fourth below")
          ),
       Shortcut(
+         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT,
          "interval-5",
          QT_TR_NOOP("enter fifth below"),
          Qt::SHIFT + Qt::Key_5,
@@ -306,6 +338,7 @@ Shortcut MuseScore::sc[] = {
          QT_TR_NOOP("Enter Fifth below")
          ),
       Shortcut(
+         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT,
          "interval-6",
          QT_TR_NOOP("enter sixth below"),
          Qt::SHIFT + Qt::Key_6,
@@ -314,6 +347,7 @@ Shortcut MuseScore::sc[] = {
          QT_TR_NOOP("Enter Sixth below")
          ),
       Shortcut(
+         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT,
          "interval-7",
          QT_TR_NOOP("enter seventh below"),
          Qt::SHIFT + Qt::Key_7,
@@ -322,6 +356,7 @@ Shortcut MuseScore::sc[] = {
          QT_TR_NOOP("Enter Seventh below")
          ),
       Shortcut(
+         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT,
          "interval-8",
          QT_TR_NOOP("enter octave below"),
          Qt::SHIFT + Qt::Key_8,
@@ -330,6 +365,7 @@ Shortcut MuseScore::sc[] = {
          QT_TR_NOOP("Enter Octave below")
          ),
       Shortcut(
+         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT,
          "interval-9",
          QT_TR_NOOP("enter ninth below"),
          Qt::SHIFT + Qt::Key_9,
@@ -338,6 +374,7 @@ Shortcut MuseScore::sc[] = {
          QT_TR_NOOP("Enter Ninth below")
          ),
       Shortcut(
+         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT,
          "note-a",
          QT_TR_NOOP("enter note a"),
          Qt::Key_A,
@@ -346,6 +383,7 @@ Shortcut MuseScore::sc[] = {
          QT_TR_NOOP("Enter Note A")
          ),
       Shortcut(
+         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT,
          "note-b",
          QT_TR_NOOP("enter note b"),
          Qt::Key_B,
@@ -354,6 +392,7 @@ Shortcut MuseScore::sc[] = {
          QT_TR_NOOP("Enter Note B")
          ),
       Shortcut(
+         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT,
          "note-c",
          QT_TR_NOOP("enter note c"),
          Qt::Key_C,
@@ -362,6 +401,7 @@ Shortcut MuseScore::sc[] = {
          QT_TR_NOOP("Enter Note C")
          ),
       Shortcut(
+         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT,
          "note-d",
          QT_TR_NOOP("enter note d"),
          Qt::Key_D,
@@ -370,6 +410,7 @@ Shortcut MuseScore::sc[] = {
          QT_TR_NOOP("Enter Note D")
          ),
       Shortcut(
+         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT,
          "note-e",
          QT_TR_NOOP("enter note e"),
          Qt::Key_E,
@@ -378,6 +419,7 @@ Shortcut MuseScore::sc[] = {
          QT_TR_NOOP("Enter Note E")
          ),
       Shortcut(
+         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT,
          "note-f",
          QT_TR_NOOP("enter note f"),
          Qt::Key_F,
@@ -386,6 +428,7 @@ Shortcut MuseScore::sc[] = {
          QT_TR_NOOP("Enter Note F")
          ),
       Shortcut(
+         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT,
          "note-g",
          QT_TR_NOOP("enter note g"),
          Qt::Key_G,
@@ -394,6 +437,7 @@ Shortcut MuseScore::sc[] = {
          QT_TR_NOOP("Enter Note G")
          ),
       Shortcut(
+         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT,
          "chord-a",
          QT_TR_NOOP("add a to chord"),
          Qt::SHIFT + Qt::Key_A,
@@ -402,6 +446,7 @@ Shortcut MuseScore::sc[] = {
          QT_TR_NOOP("Add note A to chord")
          ),
       Shortcut(
+         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT,
          "chord-b",
          QT_TR_NOOP("add b to chord"),
          Qt::SHIFT + Qt::Key_B,
@@ -410,6 +455,7 @@ Shortcut MuseScore::sc[] = {
          QT_TR_NOOP("Add note B to chord")
          ),
       Shortcut(
+         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT,
          "chord-c",
          QT_TR_NOOP("add c to chord"),
          Qt::SHIFT + Qt::Key_C,
@@ -418,6 +464,7 @@ Shortcut MuseScore::sc[] = {
          QT_TR_NOOP("Add note C to chord")
          ),
       Shortcut(
+         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT,
          "chord-d",
          QT_TR_NOOP("add d to chord"),
          Qt::SHIFT + Qt::Key_D,
@@ -426,6 +473,7 @@ Shortcut MuseScore::sc[] = {
          QT_TR_NOOP("Add note D to chord")
          ),
       Shortcut(
+         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT,
          "chord-e",
          QT_TR_NOOP("add e to chord"),
          Qt::SHIFT + Qt::Key_E,
@@ -434,6 +482,7 @@ Shortcut MuseScore::sc[] = {
          QT_TR_NOOP("Add note E to chord")
          ),
       Shortcut(
+         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT,
          "chord-f",
          QT_TR_NOOP("add f to chord"),
          Qt::SHIFT + Qt::Key_F,
@@ -442,6 +491,7 @@ Shortcut MuseScore::sc[] = {
          QT_TR_NOOP("Add note F to chord")
          ),
       Shortcut(
+         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT,
          "chord-g",
          QT_TR_NOOP("add g to chord"),
          Qt::SHIFT + Qt::Key_G,
@@ -450,6 +500,7 @@ Shortcut MuseScore::sc[] = {
          QT_TR_NOOP("Add note G to chord")
          ),
       Shortcut(
+         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT,
          "rest",
          QT_TR_NOOP("enter rest"),
          Qt::Key_Space,
@@ -458,6 +509,7 @@ Shortcut MuseScore::sc[] = {
          QT_TR_NOOP("enter rest")
          ),
       Shortcut(
+         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT,
          "stretch+",
          QT_TR_NOOP("more stretch"),
          Qt::SHIFT + Qt::Key_Plus,
@@ -466,6 +518,7 @@ Shortcut MuseScore::sc[] = {
          QT_TR_NOOP("Add more stretch to selected measure")
          ),
       Shortcut(
+         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT,
          "stretch-",
          QT_TR_NOOP("less stretch"),
          Qt::SHIFT + Qt::Key_Minus,
@@ -474,6 +527,7 @@ Shortcut MuseScore::sc[] = {
          QT_TR_NOOP("Add less stretch to selected measure")
          ),
       Shortcut(
+         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT,
          "flip",
          QT_TR_NOOP("flip stem"),
          Qt::Key_X,
@@ -483,6 +537,7 @@ Shortcut MuseScore::sc[] = {
          &flipIcon
          ),
       Shortcut(
+         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT,
          "pitch-up",
          QT_TR_NOOP("up"),
          Qt::Key_Up,
@@ -491,6 +546,7 @@ Shortcut MuseScore::sc[] = {
          QT_TR_NOOP("up")
          ),
       Shortcut(
+         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT,
          "pitch-up-octave",
          QT_TR_NOOP("up+ctrl"),
          Qt::CTRL + Qt::Key_Up,
@@ -499,6 +555,7 @@ Shortcut MuseScore::sc[] = {
          QT_TR_NOOP("up+ctrl")
          ),
       Shortcut(
+         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT,
          "up-chord",
          QT_TR_NOOP("up note in chord"),
          Qt::ALT+Qt::Key_Up,
@@ -507,6 +564,7 @@ Shortcut MuseScore::sc[] = {
          QT_TR_NOOP("goto higher pitched note in chord")
          ),
       Shortcut(
+         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT,
          "top-chord",
          QT_TR_NOOP("goto top note in chord"),
          Qt::ALT+Qt::CTRL+Qt::Key_Up,
@@ -515,6 +573,7 @@ Shortcut MuseScore::sc[] = {
          QT_TR_NOOP("goto top note in chord")
          ),
       Shortcut(
+         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT,
          "move-up",
          QT_TR_NOOP("move up"),
          Qt::SHIFT+Qt::CTRL+Qt::Key_Up,
@@ -523,6 +582,7 @@ Shortcut MuseScore::sc[] = {
          QT_TR_NOOP("up+shift+ctrl")
          ),
       Shortcut(
+         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT,
          "pitch-down",
          QT_TR_NOOP("pitch down"),
          Qt::Key_Down,
@@ -531,6 +591,7 @@ Shortcut MuseScore::sc[] = {
          QT_TR_NOOP("down")
          ),
       Shortcut(
+         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT,
          "pitch-down-octave",
          QT_TR_NOOP("pitch down octave"),
          Qt::CTRL + Qt::Key_Down,
@@ -539,6 +600,7 @@ Shortcut MuseScore::sc[] = {
          QT_TR_NOOP("down+ctrl")
          ),
       Shortcut(
+         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT,
          "down-chord",
          QT_TR_NOOP("down note in chord"),
          Qt::ALT+Qt::Key_Down,
@@ -547,6 +609,7 @@ Shortcut MuseScore::sc[] = {
          QT_TR_NOOP("goto lower pitched note in chord")
          ),
       Shortcut(
+         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT,
          "bottom-chord",
          QT_TR_NOOP("goto bottom note in chord"),
          Qt::ALT+Qt::CTRL+Qt::Key_Down,
@@ -555,6 +618,7 @@ Shortcut MuseScore::sc[] = {
          QT_TR_NOOP("goto bottom note in chord")
          ),
       Shortcut(
+         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT,
          "move-down",
          QT_TR_NOOP("move down"),
          Qt::SHIFT+Qt::CTRL+Qt::Key_Down,
@@ -563,6 +627,7 @@ Shortcut MuseScore::sc[] = {
          QT_TR_NOOP("down+shift+ctrl")
          ),
       Shortcut(
+         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT,
          "prev-chord",
          QT_TR_NOOP("previous chord"),
          Qt::Key_Left,
@@ -571,6 +636,7 @@ Shortcut MuseScore::sc[] = {
          QT_TR_NOOP("left")
          ),
       Shortcut(
+         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT,
          "prev-measure",
          QT_TR_NOOP("previous measure"),
          Qt::CTRL+Qt::Key_Left,
@@ -579,6 +645,7 @@ Shortcut MuseScore::sc[] = {
          QT_TR_NOOP("left+ctrl")
          ),
       Shortcut(
+         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT,
          "next-chord",
          QT_TR_NOOP("next chord"),
          Qt::Key_Right,
@@ -587,6 +654,7 @@ Shortcut MuseScore::sc[] = {
          QT_TR_NOOP("right")
          ),
       Shortcut(
+         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT,
          "next-measure",
          QT_TR_NOOP("next measure"),
          Qt::CTRL+Qt::Key_Right,
@@ -595,6 +663,7 @@ Shortcut MuseScore::sc[] = {
          QT_TR_NOOP("right+ctrl")
          ),
       Shortcut(
+         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT,
          "page-prev",
          QT_TR_NOOP("page-prev"),
          Qt::Key_PageUp,
@@ -603,6 +672,7 @@ Shortcut MuseScore::sc[] = {
          QT_TR_NOOP("")
          ),
       Shortcut(
+         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT,
          "page-next",
          QT_TR_NOOP("page-next"),
          Qt::Key_PageDown,
@@ -611,6 +681,7 @@ Shortcut MuseScore::sc[] = {
          QT_TR_NOOP("")
          ),
       Shortcut(
+         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT,
          "page-top",
          QT_TR_NOOP("page-top"),
          Qt::Key_Home,
@@ -619,6 +690,7 @@ Shortcut MuseScore::sc[] = {
          QT_TR_NOOP("")
          ),
       Shortcut(
+         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT,
          "page-end",
          QT_TR_NOOP("page-end"),
          Qt::Key_End,
@@ -627,6 +699,7 @@ Shortcut MuseScore::sc[] = {
          QT_TR_NOOP("")
          ),
       Shortcut(
+         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT,
          "add-tie",
          QT_TR_NOOP("add tie"),
          Qt::SHIFT+Qt::Key_S,
@@ -635,6 +708,7 @@ Shortcut MuseScore::sc[] = {
          QT_TR_NOOP("")
          ),
       Shortcut(
+         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT,
          "add-slur",
          QT_TR_NOOP("add slur"),
          Qt::Key_S,
@@ -643,6 +717,7 @@ Shortcut MuseScore::sc[] = {
          QT_TR_NOOP("")
          ),
       Shortcut(
+         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT,
          "add-hairpin",
          QT_TR_NOOP("crescendo"),
          Qt::Key_H,
@@ -651,6 +726,7 @@ Shortcut MuseScore::sc[] = {
          QT_TR_NOOP("")
          ),
       Shortcut(
+         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT,
          "add-hairpin-reverse",
          QT_TR_NOOP("decrescendo"),
          Qt::SHIFT+Qt::Key_H,
@@ -659,6 +735,7 @@ Shortcut MuseScore::sc[] = {
          QT_TR_NOOP("")
          ),
       Shortcut(
+         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT | STATE_PLAY,
          "escape",
          QT_TR_NOOP("ESCAPE"),
          Qt::Key_Escape,
@@ -667,6 +744,7 @@ Shortcut MuseScore::sc[] = {
          QT_TR_NOOP("")
          ),
       Shortcut(
+         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT,
          "delete",
          QT_TR_NOOP("delete"),
          Qt::Key_Delete,
@@ -675,6 +753,7 @@ Shortcut MuseScore::sc[] = {
          QT_TR_NOOP("")
          ),
       Shortcut(
+         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT,
          "append-measure",
          QT_TR_NOOP("append measure"),
          Qt::CTRL+Qt::Key_B,
@@ -682,6 +761,7 @@ Shortcut MuseScore::sc[] = {
          QT_TR_NOOP("Append Measure")
          ),
       Shortcut(
+         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT,
          "append-measures",
          QT_TR_NOOP("append measures"),
          0,
@@ -689,15 +769,15 @@ Shortcut MuseScore::sc[] = {
          QT_TR_NOOP("Append Measures...")
          ),
       Shortcut(
+         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT,
          "insert-measure",
          QT_TR_NOOP("insert measure"),
-// Added by DK 05.08.2007
          Qt::Key_Insert,
          Qt::WindowShortcut,
          QT_TR_NOOP("Insert Measure")
          ),
-// Insert Measures added by DK 06.08.2007
       Shortcut(
+         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT,
          "insert-measures",
          QT_TR_NOOP("insert measures"),
          Qt::CTRL+Qt::Key_Insert,
@@ -705,6 +785,7 @@ Shortcut MuseScore::sc[] = {
          QT_TR_NOOP("Insert Measures...")
          ),
       Shortcut(
+         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT,
          "duplet",
          QT_TR_NOOP("duplet"),
          Qt::CTRL+Qt::Key_2,
@@ -712,6 +793,7 @@ Shortcut MuseScore::sc[] = {
          QT_TR_NOOP("Duplet")
          ),
       Shortcut(
+         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT,
          "triplet",
          QT_TR_NOOP("triplet"),
          Qt::CTRL+Qt::Key_3,
@@ -719,6 +801,7 @@ Shortcut MuseScore::sc[] = {
          QT_TR_NOOP("Triplet")
          ),
       Shortcut(
+         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT,
          "quintuplet",
          QT_TR_NOOP("Quintuplet"),
          Qt::CTRL+Qt::Key_5,
@@ -726,6 +809,7 @@ Shortcut MuseScore::sc[] = {
          QT_TR_NOOP("Quintuplet")
          ),
       Shortcut(
+         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT,
          "pad-note-1",
          QT_TR_NOOP("pad note 1/1"),
          Qt::ALT + Qt::Key_6,
@@ -735,6 +819,7 @@ Shortcut MuseScore::sc[] = {
          &noteIcon
          ),
       Shortcut(
+         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT,
          "pad-note-2",
          QT_TR_NOOP("pad note 1/2"),
          Qt::ALT + Qt::Key_7,
@@ -744,6 +829,7 @@ Shortcut MuseScore::sc[] = {
          &note2Icon
          ),
       Shortcut(
+         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT,
          "pad-note-4",
          QT_TR_NOOP("pad note 1/4"),
          Qt::ALT + Qt::Key_1,
@@ -753,6 +839,7 @@ Shortcut MuseScore::sc[] = {
          &note4Icon
          ),
       Shortcut(
+         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT,
          "pad-note-8",
          QT_TR_NOOP("pad note 1/8"),
          Qt::ALT + Qt::Key_2,
@@ -762,6 +849,7 @@ Shortcut MuseScore::sc[] = {
          &note8Icon
          ),
       Shortcut(
+         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT,
          "pad-note-16",
          QT_TR_NOOP("pad note 1/16"),
          Qt::ALT + Qt::Key_3,
@@ -771,6 +859,7 @@ Shortcut MuseScore::sc[] = {
          &note16Icon
          ),
       Shortcut(
+         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT,
          "pad-note-32",
          QT_TR_NOOP("pad note 1/32"),
          Qt::ALT + Qt::Key_4,
@@ -780,6 +869,7 @@ Shortcut MuseScore::sc[] = {
          &note32Icon
          ),
       Shortcut(
+         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT,
          "pad-note-64",
          QT_TR_NOOP("pad note 1/64"),
          Qt::ALT + Qt::Key_5,
@@ -789,9 +879,9 @@ Shortcut MuseScore::sc[] = {
          &note64Icon
          ),
       Shortcut(
+         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT,
          "pad-dot",
          QT_TR_NOOP("pad dot"),
-//         Qt::ALT + Qt::Key_8,
          Qt::Key_Period,
          Qt::WindowShortcut,
          QT_TR_NOOP("dot"),
@@ -799,9 +889,9 @@ Shortcut MuseScore::sc[] = {
          &dotIcon
          ),
       Shortcut(
+         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT,
          "pad-tie",
          QT_TR_NOOP("pad tie"),
-//         Qt::ALT + Qt::Key_9,
          Qt::Key_Plus,
          Qt::WindowShortcut,
          QT_TR_NOOP("tie"),
@@ -809,6 +899,7 @@ Shortcut MuseScore::sc[] = {
          &plusIcon
          ),
       Shortcut(
+         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT,
          "pad-rest",
          QT_TR_NOOP("pad rest"),
          0,
@@ -818,6 +909,7 @@ Shortcut MuseScore::sc[] = {
          &quartrestIcon
          ),
       Shortcut(
+         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT,
          "pad-sharp2",
          QT_TR_NOOP("double sharp"),
          0,
@@ -827,6 +919,7 @@ Shortcut MuseScore::sc[] = {
          &sharpsharpIcon
          ),
       Shortcut(
+         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT,
          "pad-sharp",
          QT_TR_NOOP("sharp"),
          0,
@@ -836,6 +929,7 @@ Shortcut MuseScore::sc[] = {
          &sharpIcon
          ),
       Shortcut(
+         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT,
          "pad-nat",
          QT_TR_NOOP("natural"),
          0,
@@ -845,6 +939,7 @@ Shortcut MuseScore::sc[] = {
          &naturalIcon
          ),
       Shortcut(
+         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT,
          "pad-flat",
          QT_TR_NOOP("flat"),
          0,
@@ -854,6 +949,7 @@ Shortcut MuseScore::sc[] = {
          &flatIcon
          ),
       Shortcut(
+         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT,
          "pad-flat2",
          QT_TR_NOOP("double flat"),
          0,
@@ -863,6 +959,7 @@ Shortcut MuseScore::sc[] = {
          &flatflatIcon
          ),
       Shortcut(
+         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT,
          "voice-1",
          QT_TR_NOOP("voice 1"),
          QKeySequence(Qt::CTRL+Qt::Key_I, Qt::CTRL+Qt::Key_1),
@@ -872,6 +969,7 @@ Shortcut MuseScore::sc[] = {
          &voiceIcons[0]
          ),
       Shortcut(
+         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT,
          "voice-2",
          QT_TR_NOOP("voice 2"),
          QKeySequence(Qt::CTRL+Qt::Key_I, Qt::CTRL+Qt::Key_2),
@@ -881,6 +979,7 @@ Shortcut MuseScore::sc[] = {
          &voiceIcons[1]
          ),
       Shortcut(
+         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT,
          "voice-3",
          QT_TR_NOOP("voice 3"),
          QKeySequence(Qt::CTRL+Qt::Key_I, Qt::CTRL+Qt::Key_3),
@@ -890,6 +989,7 @@ Shortcut MuseScore::sc[] = {
          &voiceIcons[2]
          ),
       Shortcut(
+         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT,
          "voice-4",
          QT_TR_NOOP("voice 4"),
          QKeySequence(Qt::CTRL+Qt::Key_I, Qt::CTRL+Qt::Key_4),
@@ -899,6 +999,7 @@ Shortcut MuseScore::sc[] = {
          &voiceIcons[3]
          ),
       Shortcut(
+         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT,
          "midi-on",
          QT_TR_NOOP("midi input in"),
          0,
@@ -908,6 +1009,7 @@ Shortcut MuseScore::sc[] = {
          &midiinIcon
          ),
       Shortcut(
+         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT,
          "sound-on",
          QT_TR_NOOP("editing sound on"),
          0,
@@ -917,6 +1019,7 @@ Shortcut MuseScore::sc[] = {
          &speakerIcon
          ),
       Shortcut(
+         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT,
          "rewind",
          QT_TR_NOOP("player rewind"),
          0,
@@ -926,17 +1029,9 @@ Shortcut MuseScore::sc[] = {
          &startIcon
          ),
       Shortcut(
-         "stop",
-         QT_TR_NOOP("player stop"),
-         0,
-         Qt::WindowShortcut,
-         QT_TR_NOOP("Stop"),
-         QT_TR_NOOP("stop sequencer"),
-         &stopIcon
-         ),
-      Shortcut(
+         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT,
          "play",
-         QT_TR_NOOP("plaser play"),
+         QT_TR_NOOP("player play"),
          0,
          Qt::WindowShortcut,
          QT_TR_NOOP("Play"),
@@ -944,6 +1039,7 @@ Shortcut MuseScore::sc[] = {
          &playIcon
          ),
       Shortcut(
+         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT,
          "beam-start",
          QT_TR_NOOP("beam start"),
          0,
@@ -953,6 +1049,7 @@ Shortcut MuseScore::sc[] = {
          &sbeamIcon
          ),
       Shortcut(
+         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT,
          "beam-mid",
          QT_TR_NOOP("beam mid"),
          0,
@@ -962,6 +1059,7 @@ Shortcut MuseScore::sc[] = {
          &mbeamIcon
          ),
       Shortcut(
+         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT,
          "no-beam",
          QT_TR_NOOP("no beam"),
          0,
@@ -971,6 +1069,7 @@ Shortcut MuseScore::sc[] = {
          &nbeamIcon
          ),
       Shortcut(
+         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT,
          "beam32",
          QT_TR_NOOP("beam 32"),
          0,
@@ -980,6 +1079,7 @@ Shortcut MuseScore::sc[] = {
          &beam32Icon
          ),
       Shortcut(
+         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT,
          "toggle-pad",
          QT_TR_NOOP("Pad"),
          Qt::Key_F10,
@@ -988,6 +1088,7 @@ Shortcut MuseScore::sc[] = {
          QT_TR_NOOP("Pad")
          ),
       Shortcut(
+         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT,
          "toggle-palette",
          QT_TR_NOOP("Palette"),
          Qt::Key_F9,
@@ -996,6 +1097,7 @@ Shortcut MuseScore::sc[] = {
          QT_TR_NOOP("Palette")
          ),
       Shortcut(
+         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT,
          "toggle-playpanel",
          QT_TR_NOOP("Play Panel"),
          Qt::Key_F11,
@@ -1004,6 +1106,7 @@ Shortcut MuseScore::sc[] = {
          QT_TR_NOOP("Play Panel")
          ),
       Shortcut(
+         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT,
          "toggle-navigator",
          QT_TR_NOOP("Navigator"),
          Qt::Key_F12,
@@ -1012,6 +1115,7 @@ Shortcut MuseScore::sc[] = {
          QT_TR_NOOP("Navigator")
          ),
       Shortcut(
+         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT,
          "toggle-transport",
          QT_TR_NOOP("Transport Toolbar"),
          0,
@@ -1020,6 +1124,7 @@ Shortcut MuseScore::sc[] = {
          QT_TR_NOOP("")
          ),
       Shortcut(
+         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT,
          "toggle-noteinput",
          QT_TR_NOOP("Note Input Toolbar"),
          0,
@@ -1028,6 +1133,7 @@ Shortcut MuseScore::sc[] = {
          QT_TR_NOOP("")
          ),
       Shortcut(
+         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT,
          "toggle-statusbar",
          QT_TR_NOOP("Status Bar"),
          0,
@@ -1037,6 +1143,7 @@ Shortcut MuseScore::sc[] = {
          ),
 
       Shortcut(
+         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT,
          "quit",
          QT_TR_NOOP("Quit"),
          Qt::CTRL + Qt::Key_Q,
@@ -1046,6 +1153,7 @@ Shortcut MuseScore::sc[] = {
          &exitIcon
          ),
       Shortcut(
+         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT,
          "mag",
          QT_TR_NOOP("Mag"),
          0,
@@ -1055,6 +1163,7 @@ Shortcut MuseScore::sc[] = {
          &viewmagIcon
          ),
       Shortcut(
+         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT,
          "lyrics",
          QT_TR_NOOP("Lyrics"),
          Qt::CTRL + Qt::Key_L,
@@ -1063,6 +1172,7 @@ Shortcut MuseScore::sc[] = {
          QT_TR_NOOP("Lyrics")
          ),
       Shortcut(
+         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT,
          "fingering",
          QT_TR_NOOP("Fingering Palette"),
          0,
@@ -1070,17 +1180,8 @@ Shortcut MuseScore::sc[] = {
          QT_TR_NOOP("Fingering..."),
          QT_TR_NOOP("Fingering")
          ),
-#if 0
       Shortcut(
-         "technik",
-         QT_TR_NOOP("Technik Palette"),
-         Qt::CTRL + Qt::Key_T,
-         Qt::WindowShortcut,
-         QT_TR_NOOP("Technik"),
-         QT_TR_NOOP("Technik")
-         ),
-#endif
-      Shortcut(
+         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT,
          "tempo",
          QT_TR_NOOP("Tempo Palette"),
          Qt::CTRL+Qt::ALT + Qt::Key_T,
@@ -1089,6 +1190,7 @@ Shortcut MuseScore::sc[] = {
          QT_TR_NOOP("Tempo")
          ),
       Shortcut(
+         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT,
          "metronome",
          QT_TR_NOOP("Metronome"),
          Qt::CTRL+Qt::ALT + Qt::Key_M,
@@ -1097,6 +1199,7 @@ Shortcut MuseScore::sc[] = {
          QT_TR_NOOP("Metronome")
          ),
       Shortcut(
+         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT,
          "system-text",
          QT_TR_NOOP("Add System Text"),
          0,
@@ -1105,6 +1208,7 @@ Shortcut MuseScore::sc[] = {
          QT_TR_NOOP("Add System Text")
          ),
       Shortcut(
+         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT,
          "title-text",
          QT_TR_NOOP("Add Title"),
          0,
@@ -1113,6 +1217,7 @@ Shortcut MuseScore::sc[] = {
          QT_TR_NOOP("Add Title Text")
          ),
       Shortcut(
+         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT,
          "subtitle-text",
          QT_TR_NOOP("Add Subtitle"),
          0,
@@ -1121,6 +1226,7 @@ Shortcut MuseScore::sc[] = {
          QT_TR_NOOP("Add Subtitle Text")
          ),
       Shortcut(
+         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT,
          "composer-text",
          QT_TR_NOOP("Add Composer"),
          0,
@@ -1129,6 +1235,7 @@ Shortcut MuseScore::sc[] = {
          QT_TR_NOOP("Add Composer Text")
          ),
       Shortcut(
+         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT,
          "poet-text",
          QT_TR_NOOP("Add Poet"),
          0,
@@ -1137,6 +1244,7 @@ Shortcut MuseScore::sc[] = {
          QT_TR_NOOP("Add Poet Text")
          ),
       Shortcut(
+         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT,
          "chord-text",
          QT_TR_NOOP("Add Chord Name"),
          Qt::CTRL + Qt::Key_K,
@@ -1144,8 +1252,8 @@ Shortcut MuseScore::sc[] = {
          QT_TR_NOOP("Chord Name"),
          QT_TR_NOOP("Add Chord Text")
          ),
-
       Shortcut(
+         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT,
          "rehearsalmark-text",
          QT_TR_NOOP("Add Rehearsal Mark"),
          Qt::CTRL + Qt::Key_M,
@@ -1154,17 +1262,69 @@ Shortcut MuseScore::sc[] = {
          QT_TR_NOOP("Add Rehearsal Mark")
          ),
 
-      Shortcut(0, 0, 0),
-      };
-
-Shortcut MuseScore::scSeq[] = {
       Shortcut(
-         "toggle-pause",
-         QT_TR_NOOP("toggle pause"),
+         STATE_PLAY,
+         "pause",
+         QT_TR_NOOP("toggle break"),
          Qt::Key_Space,
          Qt::WindowShortcut,
-         QT_TR_NOOP("toggle pause"),
-         QT_TR_NOOP("toggle pause")
+         QT_TR_NOOP("Break"),
+         QT_TR_NOOP("toggle break"),
+         &pauseIcon
+         ),
+      Shortcut(
+         STATE_PLAY,
+         "play-prev-chord",
+         QT_TR_NOOP("previous chord"),
+         Qt::Key_Left,
+         Qt::WindowShortcut,
+         QT_TR_NOOP("left chord"),
+         QT_TR_NOOP("left chord")
+         ),
+      Shortcut(
+         STATE_PLAY,
+         "play-prev-measure",
+         QT_TR_NOOP("previous measure"),
+         Qt::CTRL+Qt::Key_Left,
+         Qt::WindowShortcut,
+         QT_TR_NOOP("previous measure"),
+         QT_TR_NOOP("prev measure")
+         ),
+      Shortcut(
+         STATE_PLAY,
+         "play-next-chord",
+         QT_TR_NOOP("next chord"),
+         Qt::Key_Right,
+         Qt::WindowShortcut,
+         QT_TR_NOOP("next chord"),
+         QT_TR_NOOP("next chord")
+         ),
+      Shortcut(
+         STATE_PLAY,
+         "play-next-measure",
+         QT_TR_NOOP("next measure"),
+         Qt::CTRL+Qt::Key_Right,
+         Qt::WindowShortcut,
+         QT_TR_NOOP("next measure"),
+         QT_TR_NOOP("next measure")
+         ),
+      Shortcut(
+         STATE_PLAY,
+         "seek-begin",
+         QT_TR_NOOP("seek to begin"),
+         Qt::Key_Home,
+         Qt::WindowShortcut,
+         QT_TR_NOOP(""),
+         QT_TR_NOOP("")
+         ),
+      Shortcut(
+         STATE_PLAY,
+         "seek-end",
+         QT_TR_NOOP("seek to end"),
+         Qt::Key_End,
+         Qt::WindowShortcut,
+         QT_TR_NOOP(""),
+         QT_TR_NOOP("")
          ),
       Shortcut(0, 0, 0),
       };

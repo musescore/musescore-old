@@ -1208,8 +1208,24 @@ void Score::cmd(const QString& cmd)
             padState.rest = false;
             end();
             }
-      else if (cmd == "toggle-pause")
-            printf("toggle pause\n");
+      else if (cmd == "pause")
+            seq->pause();
+      else if (cmd == "play")
+            seq->start();
+      else if (cmd == "rewind")
+            seq->rewindStart();
+      else if (cmd == "play-next-measure")
+            seq->nextMeasure();
+      else if (cmd == "play-next-chord")
+            seq->nextChord();
+      else if (cmd == "play-prev-measure")
+            seq->prevMeasure();
+      else if (cmd == "play-prev-chord")
+            seq->prevChord();
+      else if (cmd == "seek-begin")
+            seq->rewindStart();
+      else if (cmd == "seek-end")
+            seq->seekEnd();
       else {
             startCmd();
             if (cmd == "append-measure")

@@ -76,7 +76,6 @@ int appDpiY = 75;
 double DPI, DPMM;
 
 QMap<QString, Shortcut*> shortcuts;
-QMap<QString, Shortcut*> shortcutsSeq;
 
 //---------------------------------------------------------
 // cmdInsertMeasure
@@ -185,7 +184,6 @@ void MuseScore::preferencesChanged()
                   printf("no valid pixmap %s\n", preferences.fgWallpaper.toLatin1().data());
             canvas->setForeground(pm);
             }
-      transportAction->setEnabled(seq->isRunning());
       transportId->setChecked(seq->isRunning());
       transportTools->setShown(seq->isRunning());
       getAction("midi-on")->setEnabled(preferences.enableMidiInput);
@@ -239,8 +237,6 @@ MuseScore::MuseScore()
       _statusBar = new QStatusBar;
       _statusBar->addPermanentWidget(_modeText, 0);
       setStatusBar(_statusBar);
-      setState(STATE_NORMAL);
-//      _statusBar->setShown(preferences.showStatusBar);
 
       QAction* a;
 
@@ -273,31 +269,13 @@ MuseScore::MuseScore()
          << "file-open" << "file-new" << "file-template" << "file-save" << "file-save-as" << "file-close"
          << "quit"
          << "toggle-statusbar" << "note-input" << "pitch-spell"
+         << "rewind" << "play" << "pause"
+         << "play-next-measure" << "play-next-chord" << "play-prev-measure" << "play-prev-chord"
+         << "seek-begin" << "seek-end"
          ;
+
       foreach(const QString s, sl) {
             QAction* a = getAction(s.toLatin1().data());
-            addAction(a);
-            ag->addAction(a);
-            }
-      // add sequencer shortcuts
-      foreach (Shortcut* s, shortcutsSeq) {
-            QAction* a = new QAction(s->xml, mscore);
-            s->action = a;
-            a->setData(s->xml);
-            // a->setShortcut(s->key);    // will be set in Sequencer mode
-            a->setShortcutContext(s->context);
-            if (!s->help.isEmpty()) {
-                  a->setToolTip(s->help);
-                  a->setWhatsThis(s->help);
-                  }
-            else {
-                  a->setToolTip(s->descr);
-                  a->setWhatsThis(s->descr);
-                  }
-            if (!s->text.isEmpty())
-                  a->setText(s->text);
-            if (s->icon)
-                  a->setIcon(*s->icon);
             addAction(a);
             ag->addAction(a);
             }
@@ -344,22 +322,10 @@ MuseScore::MuseScore()
       a->setChecked(_speakerEnabled);
       connect(a, SIGNAL(triggered(bool)), SLOT(speakerToggled(bool)));
 
-      transportAction = new QActionGroup(this);
-      transportAction->setExclusive(true);
-
-      a = getAction("rewind");
-      connect(a, SIGNAL(triggered()), seq, SLOT(rewindStart()));
-
-      a = getAction("stop");
-      a->setCheckable(true);
-      a->setChecked(true);
-      transportAction->addAction(a);
-      connect(a, SIGNAL(triggered(bool)), seq, SLOT(stop()));
-
       a = getAction("play");
       a->setCheckable(true);
-      transportAction->addAction(a);
-      connect(a, SIGNAL(triggered(bool)), seq, SLOT(start()));
+      a = getAction("pause");
+      a->setCheckable(true);
 
       //---------------------------------------------------
       //    File Action
@@ -386,7 +352,7 @@ MuseScore::MuseScore()
       transportTools->addAction(getAction("midi-on"));
       transportTools->addSeparator();
       transportTools->addAction(getAction("rewind"));
-      transportTools->addAction(getAction("stop"));
+      transportTools->addAction(getAction("pause"));
       transportTools->addAction(getAction("play"));
 
       a = getAction("mag");
@@ -660,6 +626,7 @@ MuseScore::MuseScore()
       QClipboard* cb = QApplication::clipboard();
       connect(cb, SIGNAL(dataChanged()), SLOT(clipboardChanged()));
       connect(cb, SIGNAL(selectionChanged()), SLOT(clipboardChanged()));
+      setState(STATE_NORMAL);
       }
 
 //---------------------------------------------------------
@@ -1504,11 +1471,6 @@ int main(int argc, char* argv[])
                   break;
             shortcuts[MuseScore::sc[i].xml] = new Shortcut(MuseScore::sc[i]);
             }
-      for (unsigned i = 0;; ++i) {
-            if (MuseScore::scSeq[i].xml == 0)
-                  break;
-            shortcutsSeq[MuseScore::sc[i].xml] = new Shortcut(MuseScore::scSeq[i]);
-            }
       preferences.read();
 
       QSplashScreen* sc = 0;
@@ -1810,20 +1772,17 @@ void MuseScore::clipboardChanged()
 
 void MuseScore::setState(int val)
       {
+      foreach (Shortcut* s, shortcuts) {
+            if (s->action) {
+                  if (s->state & val)
+                        s->action->setShortcut(s->key);
+                  else
+                        s->action->setShortcut(0);
+                  }
+            }
+
       switch(val) {
             case STATE_NORMAL:
-                  // enable normal shortcuts
-                  foreach (Shortcut* s, shortcuts) {
-                        if (s->action)
-                              s->action->setShortcut(s->key);
-                        }
-                  if (_state == STATE_PLAY) {
-                        // disable sequencer shortcuts
-                        foreach (Shortcut* s, shortcutsSeq) {
-                              if (s->action)
-                                    s->action->setShortcut(0);
-                              }
-                        }
                   _modeText->hide();
                   break;
             case STATE_NOTE_ENTRY:
@@ -1831,34 +1790,15 @@ void MuseScore::setState(int val)
                   _modeText->show();
                   break;
             case STATE_EDIT:
-                  if (_state == STATE_NORMAL) {
-                        // disable normal shortcuts
-                        foreach (Shortcut* s, shortcuts) {
-                              if (s->action)
-                                    s->action->setShortcut(0);
-                              }
-                        }
                   _modeText->setText(tr("edit mode"));
                   _modeText->show();
                   break;
             case STATE_PLAY:
-                  if (_state == STATE_NORMAL) {
-                        // disable normal shortcuts
-                        foreach (Shortcut* s, shortcuts) {
-                              if (s->action)
-                                    s->action->setShortcut(0);
-                              }
-                        }
-                  // enable sequencer shortcuts
-printf("set state play\n");
-                  foreach (Shortcut* s, shortcutsSeq) {
-                        if (s->action) {
-                              printf("add shortcut %s\n", s->xml);
-                              s->action->setShortcut(s->key);
-                              }
-                        }
                   _modeText->setText(tr("play"));
                   _modeText->show();
+                  break;
+            default:
+                  printf("MuseScore::setState: illegal state %d\n", val);
                   break;
             }
       _state = val;
@@ -1870,6 +1810,7 @@ printf("set state play\n");
 
 Shortcut::Shortcut()
       {
+      state   = STATE_NORMAL;
       xml     = 0;
       key     = 0;
       context = Qt::WindowShortcut;
@@ -1877,10 +1818,9 @@ Shortcut::Shortcut()
       action  = 0;
       }
 
-Shortcut::Shortcut(const char* name, const char* d, const QKeySequence& k,
-   Qt::ShortcutContext cont,
-   const char* txt, const char* h, QIcon* i)
-   : descr(d), key(k), context(cont), text(txt), help(h)
+Shortcut::Shortcut(int s, const char* name, const char* d, const QKeySequence& k,
+   Qt::ShortcutContext cont, const char* txt, const char* h, QIcon* i)
+   : state(s), descr(d), key(k), context(cont), text(txt), help(h)
       {
       xml    = name;
       icon   = i;
@@ -1889,6 +1829,7 @@ Shortcut::Shortcut(const char* name, const char* d, const QKeySequence& k,
 
 Shortcut::Shortcut(const Shortcut& c)
       {
+      state   = c.state;
       xml     = c.xml;
       key     = c.key;
       context = c.context;
@@ -1900,7 +1841,7 @@ Shortcut::Shortcut(const Shortcut& c)
       }
 
 //---------------------------------------------------------
-//   writeSettings
+//   writeSet
 //---------------------------------------------------------
 
 void MuseScore::writeSettings()
