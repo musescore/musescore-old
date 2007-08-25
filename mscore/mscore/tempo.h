@@ -61,7 +61,7 @@ typedef std::map<int, TEvent>::const_reverse_iterator criTEvent;
 class TempoList : public std::map<int, TEvent> {
       int _tempoSN;           // serial no to track tempo changes
       bool useList;
-      double _tempo;          // tempo if not using tempo list
+      double _tempo;          // tempo if not using tempo list (beats per second)
       int _relTempo;          // rel. tempo (100 == 1.0)
 
       void normalize();
