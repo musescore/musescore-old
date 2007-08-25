@@ -435,20 +435,34 @@ PreferenceDialog::PreferenceDialog(QWidget* parent)
 void PreferenceDialog::updateSCListView()
       {
       shortcutList->clear();
+      QTreeWidgetItem* stateNormal = new QTreeWidgetItem;
+      stateNormal->setFlags(Qt::ItemIsEnabled);
+      stateNormal->setText(0, tr("Normal State"));
+      stateNormal->setExpanded(true);
+      shortcutList->addTopLevelItem(stateNormal);
+      QTreeWidgetItem* statePlay = new QTreeWidgetItem;
+      statePlay->setFlags(Qt::ItemIsEnabled);
+      statePlay->setText(0, tr("Play State"));
+      statePlay->setExpanded(true);
+      shortcutList->addTopLevelItem(statePlay);
+
       foreach (Shortcut* s, localShortcuts) {
-            if (s) {
-                  QTreeWidgetItem* newItem = new QTreeWidgetItem;
-                  newItem->setText(0, s->descr);
-                  newItem->setIcon(0, *s->icon);
-                  QKeySequence seq = s->key;
-                  newItem->setText(1, s->key.toString(QKeySequence::NativeText));
-                  newItem->setData(0, Qt::UserRole, s->xml);
-                  shortcutList->addTopLevelItem(newItem);
-                  // does not work:
-                  // QBrush brush = newItem->background(1);
-                  // brush.setColor(brush.color().dark(200));
-                  // newItem->setBackground(0, brush);
+            if (!s)
+                  continue;
+            QTreeWidgetItem* newItem;
+            if (s->state == STATE_NORMAL)
+                  newItem = new QTreeWidgetItem(stateNormal);
+            else if (s->state == STATE_PLAY)
+                  newItem = new QTreeWidgetItem(statePlay);
+            else {
+                  printf("PreferenceDialog::updateSCListView(): illegal shortcut state\n");
+                  return;
                   }
+            newItem->setText(0, s->descr);
+            newItem->setIcon(0, *s->icon);
+            QKeySequence seq = s->key;
+            newItem->setText(1, s->key.toString(QKeySequence::NativeText));
+            newItem->setData(0, Qt::UserRole, s->xml);
             }
       shortcutList->resizeColumnToContents(0);
       }
@@ -460,6 +474,7 @@ void PreferenceDialog::updateSCListView()
 
 void PreferenceDialog::resetShortcutClicked()
       {
+      printf("resetShortcutClicked\n");
       }
 
 //---------------------------------------------------------
@@ -470,9 +485,12 @@ void PreferenceDialog::clearShortcutClicked()
       {
       QTreeWidgetItem* active = shortcutList->currentItem();
       if (active) {
-            Shortcut* s = localShortcuts[active->data(0, Qt::UserRole).toString()];
-            s->key = 0;
-            active->setText(1, s->key.toString(QKeySequence::NativeText));
+            QString str = active->data(0, Qt::UserRole).toString();
+            if (!str.isEmpty()) {
+                  Shortcut* s = localShortcuts[str];
+                  s->key = 0;
+                  active->setText(1, s->key.toString(QKeySequence::NativeText));
+                  }
             }
       }
 
@@ -483,7 +501,10 @@ void PreferenceDialog::clearShortcutClicked()
 void PreferenceDialog::defineShortcutClicked()
       {
       QTreeWidgetItem* active = shortcutList->currentItem();
-      Shortcut* s = localShortcuts[active->data(0, Qt::UserRole).toString()];
+      QString str = active->data(0, Qt::UserRole).toString();
+      if (str.isEmpty())
+            return;
+      Shortcut* s = localShortcuts[str];
       ShortcutCaptureDialog sc(s, this);
       if (sc.exec()) {
             s->key = sc.getKey();
@@ -861,8 +882,8 @@ QAction* getAction(const char* id)
             return 0;
             }
       if (s->action == 0) {
-            QAction* a = new QAction(s->xml, mscore); // ->getCanvas());
-            s->action = a;
+            QAction* a = new QAction(s->xml, mscore);
+            s->action  = a;
             a->setData(s->xml);
             a->setShortcut(s->key);
             a->setShortcutContext(s->context);
@@ -881,3 +902,4 @@ QAction* getAction(const char* id)
             }
       return s->action;
       }
+

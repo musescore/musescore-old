@@ -72,6 +72,7 @@ class Seq : public QObject {
       bool running;                       // true if sequencer is available
       int state;                          // STOP, PLAY, START_PLAY
       bool playlistChanged;
+      bool pauseState;
 
       Synth* synti;
       Audio* audio;
@@ -105,9 +106,6 @@ class Seq : public QObject {
       void selectionChanged(int);
 
    public slots:
-      void start();
-      void stop();
-      void rewindStart();
       void setVolume(float);
       void setRelTempo(int);
       void seek(int);
@@ -121,6 +119,16 @@ class Seq : public QObject {
 
       Seq();
       ~Seq();
+      void start();
+      void stop();
+      void pause();
+      void rewindStart();
+      void seekEnd();
+      void nextMeasure();
+      void nextChord();
+      void prevMeasure();
+      void prevChord();
+
       bool loadSoundFont(const QString&);
       bool init();
       void exit();

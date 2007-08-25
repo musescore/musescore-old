@@ -1,3 +1,13 @@
+25.8.7 (ws)
+      - implement "play mode"; in playmode the following shortcuts
+        are aktiv:
+            Space         toggle start/stop
+            Key_Left      seek to previous chord
+            Key_Right     seek to next chord
+            Ctrl+KeyLeft  seek to previous measure
+            Ctrl+KeyRight seek to next measure
+            Key_Home      rewind to start
+      - implement "pause" for sequencer
 24.8.7 (ws)
       - implement "seek" for sequencer
       - cleanups for sequencer

@@ -31,7 +31,7 @@
    <item>
     <widget class="QTabWidget" name="General" >
      <property name="currentIndex" >
-      <number>0</number>
+      <number>6</number>
      </property>
      <widget class="QWidget" name="tab" >
       <attribute name="title" >
@@ -3441,17 +3441,14 @@
          <property name="alternatingRowColors" >
           <bool>true</bool>
          </property>
-         <property name="indentation" >
-          <number>0</number>
-         </property>
          <property name="rootIsDecorated" >
-          <bool>false</bool>
+          <bool>true</bool>
          </property>
          <property name="uniformRowHeights" >
           <bool>true</bool>
          </property>
          <property name="itemsExpandable" >
-          <bool>false</bool>
+          <bool>true</bool>
          </property>
          <property name="allColumnsShowFocus" >
           <bool>true</bool>

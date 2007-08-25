@@ -64,7 +64,9 @@ Seq* seq;
 
 Seq::Seq()
       {
-      running  = false;
+      running    = false;
+      pauseState = false;
+
       playlistChanged = false;
       cs = 0;
 
@@ -273,11 +275,16 @@ void Seq::start()
       {
       if (!audio)
             return;
-      if (events.empty() || cs->playlistDirty() || playlistChanged)
-            collectEvents();
-      seek(cs->playPos());
-      audio->startTransport();
-      heartBeatTimer->start(100);
+      if (state == PLAY || state == START_PLAY)
+            audio->stopTransport();
+      else {
+            if (events.empty() || cs->playlistDirty() || playlistChanged)
+                  collectEvents();
+            seek(cs->playPos());
+            heartBeatTimer->start(100);
+            if (!pauseState)
+                  audio->startTransport();
+            }
       }
 
 //---------------------------------------------------------
@@ -288,8 +295,28 @@ void Seq::start()
 void Seq::stop()
       {
       if (!audio)
+            audio->stopTransport();
+      }
+
+//---------------------------------------------------------
+//   pause
+//    called from gui thread
+//---------------------------------------------------------
+
+void Seq::pause()
+      {
+      if (!audio)
             return;
-      audio->stopTransport();
+
+      QAction* a = getAction("pause");
+      int pstate = a->isChecked();
+      if (state == PLAY && pstate)  {
+            pauseState = pstate;
+            audio->stopTransport();
+            }
+      else if (state == STOP && pauseState)
+            audio->startTransport();
+      pauseState = state;
       }
 
 //---------------------------------------------------------
@@ -394,7 +421,8 @@ void Seq::stopTransport()
             e.note->setSelected(false);
             }
       _activeNotes.clear();
-      toGui('0');
+      if (!pauseState)
+            toGui('0');
       state = STOP;
       }
 
@@ -410,8 +438,8 @@ void Seq::startTransport()
       //
       if (endTick == 0)
             return;
-
-      toGui('1');
+      if (!pauseState)
+            toGui('1');
       state = PLAY;
       }
 
@@ -649,10 +677,22 @@ void Seq::collectEvents()
 
 void Seq::heartBeat()
       {
-      if (state == Seq::STOP)
-            return;
       if (guiPos == playPos)
             return;
+      if (guiPos == events.end()) {
+            // special case seek:
+            guiPos = playPos;
+            if (guiPos->second.type == ME_NOTEON) {
+                  cs->start();
+                  Note* note = guiPos->second.note;
+                  foreach(Viewer* v, cs->getViewer())
+                        v->moveCursor(note->chord()->segment());
+                  cs->setLayoutAll(false);      // DEBUG
+                  cs->end();
+                  }
+            return;
+            }
+
 
       cs->start();
       Note* note = 0;
@@ -720,7 +760,7 @@ void Seq::setPos(int tick)
       _activeNotes.clear();
       playFrame = tick2frame(tick);
       playPos   = events.lower_bound(tick);
-      guiPos    = playPos;
+      guiPos    = events.end();     // special case so signal heartBeat a seek
       }
 
 //---------------------------------------------------------
@@ -807,5 +847,122 @@ void Seq::setController(int channel, int ctrl, int data) const
       msg.data2 = ctrl;
       msg.data3 = data;
       sendMessage(msg);
+      }
+
+//---------------------------------------------------------
+//   nextMeasure
+//---------------------------------------------------------
+
+void Seq::nextMeasure()
+      {
+      ciEvent i = playPos;
+      Note* note = 0;
+      for (;;) {
+            if (i->second.type == ME_NOTEON) {
+                  note = i->second.note;
+                  break;
+                  }
+            if (i == events.begin())
+                  break;
+            --i;
+            }
+      if (!note)
+            return;
+      Measure* m = note->chord()->segment()->measure();
+      m = m->next();
+      if (m)
+            seek(m->tick());
+      }
+
+//---------------------------------------------------------
+//   nextChord
+//---------------------------------------------------------
+
+void Seq::nextChord()
+      {
+      ciEvent i = playPos;
+      Note* note = 0;
+      for (;;) {
+            if (i->second.type == ME_NOTEON) {
+                  note = i->second.note;
+                  break;
+                  }
+            if (i == events.begin())
+                  break;
+            --i;
+            }
+      if (!note)
+            return;
+      Segment* s = note->chord()->segment();
+      while ((s = s->next1())) {
+            if (s->subtype() == Segment::SegChordRest) {
+                  seek(s->tick());
+                  break;
+                  }
+            }
+      }
+
+//---------------------------------------------------------
+//   prevMeasure
+//---------------------------------------------------------
+
+void Seq::prevMeasure()
+      {
+      ciEvent i = playPos;
+      Note* note = 0;
+      for (;;) {
+            if (i->second.type == ME_NOTEON) {
+                  note = i->second.note;
+                  break;
+                  }
+            if (i == events.begin())
+                  break;
+            --i;
+            }
+      if (!note)
+            return;
+      Measure* m = note->chord()->segment()->measure();
+      m = m->prev();
+      if (m)
+            seek(m->tick());
+      }
+
+//---------------------------------------------------------
+//   prevChord
+//---------------------------------------------------------
+
+void Seq::prevChord()
+      {
+      ciEvent i = playPos;
+      Note* note = 0;
+      if (i == events.begin())
+            return;
+      for (;;) {
+            if (i->second.type == ME_NOTEON) {
+                  note = i->second.note;
+                  break;
+                  }
+            if (i == events.begin())
+                  break;
+            --i;
+            }
+      if (!note)
+            return;
+      Segment* s = note->chord()->segment();
+      while ((s = s->prev1())) {
+            if (s->subtype() == Segment::SegChordRest) {
+                  seek(s->tick());
+                  break;
+                  }
+            }
+      }
+
+//---------------------------------------------------------
+//   seekEnd
+//---------------------------------------------------------
+
+void Seq::seekEnd()
+      {
+      printf("seek to end\n");
       }
 

@@ -2585,18 +2585,12 @@
          <property name="text" >
           <string>Rewind</string>
          </property>
-         <property name="icon" >
-          <iconset resource="mscore.qrc" >:/data/start.svg</iconset>
-         </property>
         </widget>
        </item>
        <item>
-        <widget class="QToolButton" name="stopButton" >
+        <widget class="QToolButton" name="pauseButton" >
          <property name="text" >
-          <string>Stop</string>
-         </property>
-         <property name="icon" >
-          <iconset resource="mscore.qrc" >:/data/stop.svg</iconset>
+          <string>Pause</string>
          </property>
          <property name="checkable" >
           <bool>true</bool>
@@ -2607,9 +2601,6 @@
         <widget class="QToolButton" name="playButton" >
          <property name="text" >
           <string>Play</string>
-         </property>
-         <property name="icon" >
-          <iconset resource="mscore.qrc" >:/data/play.svg</iconset>
          </property>
          <property name="checkable" >
           <bool>true</bool>

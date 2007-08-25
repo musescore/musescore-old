@@ -53,10 +53,10 @@ static const int PROJECT_LIST_LEN = 6;
 //
 
 enum {
-      STATE_NORMAL,
-      STATE_NOTE_ENTRY,
-      STATE_EDIT,
-      STATE_PLAY
+      STATE_NORMAL     = 1,
+      STATE_NOTE_ENTRY = 2,
+      STATE_EDIT       = 4,
+      STATE_PLAY       = 8
       };
 
 //---------------------------------------------------------
@@ -114,6 +114,7 @@ class TabBar : public QTabBar {
 
 class Shortcut {
    public:
+      int state;              //! shortcut is valid in this Mscore state
       const char* xml;        //! xml tag name for configuration file
       QString descr;          //! descriptor, shown in editor
       QKeySequence key;       //! shortcut
@@ -124,7 +125,7 @@ class Shortcut {
       QAction* action;        //! cached action
 
       Shortcut();
-      Shortcut(const char* name, const char* d, const QKeySequence& k = QKeySequence(),
+      Shortcut(int state, const char* name, const char* d, const QKeySequence& k = QKeySequence(),
          Qt::ShortcutContext cont = Qt::ApplicationShortcut,
          const char* txt = 0, const char* h = 0, QIcon* i = 0);
       Shortcut(const Shortcut& c);
@@ -149,7 +150,6 @@ class MuseScore : public QMainWindow {
       QMenu* openRecent;
 
       MagBox* mag;
-      QActionGroup* transportAction;
 
       QAction* playId;
       QAction* navigatorId;
@@ -333,7 +333,6 @@ extern MuseScore* mscore;
 
 extern QAction* getAction(const char*);
 extern QMap<QString, Shortcut*> shortcuts;
-extern QMap<QString, Shortcut*> shortcutsSeq;
 
 #endif
 
