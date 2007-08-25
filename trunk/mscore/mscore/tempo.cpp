@@ -29,7 +29,7 @@
 
 TempoList::TempoList()
       {
-      _tempo    = 120.0;
+      _tempo    = 2.0;
       _tempoSN  = 1;
       _relTempo = 100;
       useList   = true;
@@ -101,7 +101,7 @@ double TempoList::tempo(int tick) const
       {
       if (useList) {
             if (empty())
-                  return 120.0;
+                  return 2.0;
             ciTEvent i = lower_bound(tick);
             if (i == end()) {
                   --i;
@@ -110,7 +110,7 @@ double TempoList::tempo(int tick) const
             if (i->first == tick)
                   return i->second.tempo;
             if (i == begin())
-                  return 120.0;
+                  return 2.0;
             --i;
             return i->second.tempo;
             }
@@ -254,7 +254,7 @@ double TempoList::tick2time(int tick, int* sn) const
       {
       double time  = 0.0;
       double delta = double(tick);
-      double tempo = 120.0;
+      double tempo = 2.0;
 
       if (useList) {
             if (!empty()) {
@@ -302,7 +302,7 @@ int TempoList::time2tick(double time, int* sn) const
 
       if (useList) {
             delta = 0.0;
-            tempo = 120.0;
+            tempo = 2.0;
             for (ciTEvent e = begin(); e != end(); ++e) {
                   if (time < e->second.time)
                         break;
@@ -338,7 +338,7 @@ void TempoList::write(Xml& xml) const
 
 void TempoList::read(QDomElement e, Score* cs)
       {
-      _tempo = e.attribute("fix","120.0").toDouble();
+      _tempo = e.attribute("fix","2.0").toDouble();
 
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             if (e.tagName() == "tempo") {
