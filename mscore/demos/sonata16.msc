@@ -80,16 +80,6 @@
       <denom>4</denom>
       </sig>
     </siglist>
-  <tempolist fix="500000">
-    <tempo at="0">
-      <tick>0</tick>
-      <val>500000</val>
-      </tempo>
-    <tempo at="21474836">
-      <tick>0</tick>
-      <val>500000</val>
-      </tempo>
-    </tempolist>
   <Part>
     <Staff>
       <lines>5</lines>

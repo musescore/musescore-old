@@ -99,6 +99,7 @@ class Seq : public QObject {
       int frame2tick(int frame) const;
       int tick2frame(int tick) const;
       void setPos(int);
+      void playEvent(const Event& event);
 
    private slots:
       void seqMessage(int fd);
