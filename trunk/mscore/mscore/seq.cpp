@@ -295,7 +295,8 @@ void Seq::start()
 void Seq::stop()
       {
       if (!audio)
-            audio->stopTransport();
+            return;
+      audio->stopTransport();
       }
 
 //---------------------------------------------------------
@@ -444,11 +445,44 @@ void Seq::startTransport()
       }
 
 //---------------------------------------------------------
+//   playEvent
+//    send one event to the synthesizer
+//---------------------------------------------------------
+
+void Seq::playEvent(const Event& event)
+      {
+      int channel = event.channel;
+      int type    = event.type;
+      if (type == ME_NOTEON) {
+            if (event.val2) {         // note on:
+                  _activeNotes.append(event);
+                  synti->playNote(channel, event.val1, event.val2);
+                  }
+            else {
+                  for (QList<Event>::iterator k = _activeNotes.begin(); k != _activeNotes.end(); ++k) {
+                        if (k->channel == channel && k->val1 == event.val1) {
+                              _activeNotes.erase(k);
+                              synti->playNote(channel, event.val1, 0);
+                              break;
+                              }
+                        }
+                  }
+            }
+      else if (type == 0xb0)
+            synti->setController(channel, event.val1, event.val2);
+      else {
+            printf("bad event type %x\n", type);
+            abort();
+            }
+      }
+
+//---------------------------------------------------------
 //   process
 //---------------------------------------------------------
 
-void Seq::process(unsigned frames, float* lbuffer, float* rbuffer)
+void Seq::process(unsigned n, float* lbuffer, float* rbuffer)
       {
+      int frames = n;
       int jackState = audio->getState();
 
       if (state == START_PLAY && jackState == PLAY)
@@ -466,8 +500,6 @@ void Seq::process(unsigned frames, float* lbuffer, float* rbuffer)
       float* l = lbuffer;
       float* r = rbuffer;
 
-      EList pe;   // events to play in this cycle
-
       //
       // read messages from gui
       //
@@ -484,13 +516,12 @@ void Seq::process(unsigned frames, float* lbuffer, float* rbuffer)
 
                   case SEQ_PLAY:
                         {
-                        Event ev;
-                        ev.type    = msg.data1 & 0xf0;
-                        ev.channel = msg.data1 & 0xf;
-                        ev.val1    = msg.data2;
-                        ev.val2    = msg.data3;
-                        ev.note    = 0;
-                        pe.insert(std::pair<const unsigned, Event> (0, ev));
+                        int channel = msg.data1 & 0xf;
+                        int type    = msg.data1 & 0xf0;
+                        if (type == ME_NOTEON)
+                              synti->playNote(channel, msg.data2, msg.data3);
+                        else if (type == ME_CONTROLLER)
+                              synti->setController(channel, msg.data2, msg.data3);
                         }
                         break;
                   case SEQ_SEEK:
@@ -507,50 +538,24 @@ void Seq::process(unsigned frames, float* lbuffer, float* rbuffer)
             //
             // collect events for one segment
             //
-            int t = frame2tick(playFrame + frames);
-            ciEvent e = events.lower_bound(t);
-            for (; playPos != e; ++playPos)
-                  pe.insert(*playPos);
+            int endFrame = playFrame + frames;
+            for (; playPos != events.end(); ++playPos) {
+                  int f = tick2frame(playPos->first);
+                  if (f >= endFrame)
+                        break;
 
-            for (ciEvent i = pe.begin(); i != pe.end(); ++i) {
-                  int f = tick2frame(i->first);
-
-                  if (f > playFrame) {
-                        int n = f - playFrame;
-                        if (n < 0 || n > int(frames)) {
-                              printf("Seq: at %d bad n %d(>%d) = %d - %d\n", i->first, n, frames, f, playFrame);
-                              break;
-                              }
-                        synti->process(n, l, r);
-                        l         += n;
-                        r         += n;
-                        playFrame += n;
-                        frames    -= n;
+                  int n = f - playFrame;
+                  if (n < 0 || n > int(frames)) {
+                        printf("Seq: at %d bad n %d(>%d) = %d - %d\n",
+                           playPos->first, n, frames, f, playFrame);
+                        break;
                         }
-                  int channel = i->second.channel;
-                  int type    = i->second.type;
-                  if (type == ME_NOTEON) {
-                        if (i->second.val2) {         // note on:
-                              _activeNotes.append(i->second);
-                              synti->playNote(channel, i->second.val1, i->second.val2);
-                              }
-                        else {
-                              for (QList<Event>::iterator k = _activeNotes.begin(); k != _activeNotes.end(); ++k) {
-                                    if (k->channel == i->second.channel && k->val1 == i->second.val1) {
-                                          _activeNotes.erase(k);
-                                          synti->playNote(channel, i->second.val1, 0);
-                                          break;
-                                          }
-                                    }
-                              }
-                        }
-                  else if (type == 0xb0)
-                        synti->setController(channel, i->second.val1, i->second.val2);
-                  else {
-                        printf("bad event type %x\n", type);
-                        abort();
-                        }
-
+                  synti->process(n, l, r);
+                  l         += n;
+                  r         += n;
+                  playFrame += n;
+                  frames    -= n;
+                  playEvent(playPos->second);
                   }
             if (frames) {
                   synti->process(frames, l, r);
@@ -560,20 +565,11 @@ void Seq::process(unsigned frames, float* lbuffer, float* rbuffer)
                   audio->stopTransport();
                   }
             }
-      else {
-            for (ciEvent i = pe.begin(); i != pe.end(); ++i) {
-                  int channel = i->second.channel;
-                  int type    = i->second.type;
-                  if (type == ME_NOTEON)
-                        synti->playNote(channel, i->second.val1, i->second.val2);
-                  else if (type == ME_CONTROLLER)
-                        synti->setController(channel, i->second.val1, i->second.val2);
-                  }
+      else
             synti->process(frames, l, r);
-            }
 
       // apply volume:
-      for (unsigned i = 0; i < frames; ++i) {
+      for (unsigned i = 0; i < n; ++i) {
             lbuffer[i] *= _volume;
             rbuffer[i] *= _volume;
             }
