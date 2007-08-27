@@ -33,6 +33,7 @@
 #include "staff.h"
 #include "navigator.h"
 #include "chord.h"
+#include "rest.h"
 #include "page.h"
 #include "xml.h"
 #include "text.h"
@@ -353,6 +354,7 @@ void Canvas::mousePressEvent(QMouseEvent* ev)
       keyState         = ev->modifiers();
       buttonState      = ev->button();
       startMove        = imatrix.map(QPointF(ev->pos()));
+
       Element* element = elementAt(startMove);
 
       _score->setDragObject(element);
@@ -1097,6 +1099,11 @@ void Canvas::paintEvent(QPaintEvent* ev)
       cursor->draw(p);
       lasso->draw(p);
       shadowNote->draw(p);
+      if (!dropAnchor.isNull()) {
+            QPen pen(QBrush(QColor(80, 0, 0)), 2.0 / p.worldMatrix().m11(), Qt::DotLine);
+            p.setPen(pen);
+            p.drawLine(dropAnchor);
+            }
       }
 
 //---------------------------------------------------------
@@ -1127,11 +1134,6 @@ void Canvas::paint(const QRect& rr, QPainter& p)
 
       if (dropRectangle.isValid())
             p.fillRect(dropRectangle, QColor(80, 0, 0, 80));
-      if (!dropAnchor.isNull()) {
-            QPen pen(QBrush(QColor(80, 0, 0)), 2.0 / p.worldMatrix().m11(), Qt::DotLine);
-            p.setPen(pen);
-            p.drawLine(dropAnchor);
-            }
 
       if (state == EDIT || state == DRAG_EDIT) {
             qreal lw = 2.0/p.matrix().m11();
@@ -1335,6 +1337,12 @@ bool Canvas::dragAboveSystem(const QPointF& pos)
 
 void Canvas::dragMoveEvent(QDragMoveEvent* event)
       {
+      _score->start();
+      _score->setLayoutAll(false);
+
+      // convert window to canvas position
+      QPointF pos(imatrix.map(QPointF(event->pos())));
+
       if (event->mimeData()->hasUrls()) {
             QList<QUrl>ul = event->mimeData()->urls();
             QUrl u = ul.front();
@@ -1346,14 +1354,23 @@ void Canvas::dragMoveEvent(QDragMoveEvent* event)
                      && fi.suffix() != "xpm"
                      )
                         return;
+                  //
+                  // special drop target Note
+                  //
+                  Element* el = elementAt(pos);
+                  if (el && (el->type() == NOTE || el->type() == REST))
+                        setDropTarget(el);
+                  else
+                        setDropTarget(0);
                   event->acceptProposedAction();
                   }
-            }
-      if (!event->mimeData()->hasFormat(mimeSymbolFormat))
+            _score->end();
             return;
-
-      // convert window to canvas position
-      QPointF pos(imatrix.map(QPointF(event->pos())));
+            }
+      if (!event->mimeData()->hasFormat(mimeSymbolFormat)) {
+            _score->end();
+            return;
+            }
 
       QByteArray data(event->mimeData()->data(mimeSymbolFormat));
       QDomDocument doc;
@@ -1447,7 +1464,25 @@ void Canvas::dropEvent(QDropEvent* event)
                   _score->startCmd();
                   s->setPath(u.path());
                   s->setAnchor(ANCHOR_PAGE);
-                  score()->cmdAddBSymbol(s, pos, dragOffset);
+                  Element* el = elementAt(pos);
+                  if (el && (el->type() == NOTE || el->type() == REST)) {
+                        s->setAnchor(ANCHOR_STAFF);
+                        s->setStaff(el->staff());
+                        if (el->type() == NOTE) {
+                              Note* note = (Note*)el;
+                              s->setTick(note->chord()->tick());
+                              s->setParent(note->chord()->segment()->measure());
+                              }
+                        else  {
+                              Rest* rest = (Rest*)el;
+                              s->setTick(rest->tick());
+                              s->setParent(rest->segment()->measure());
+                              }
+                        score()->undoAddElement(s);
+                        }
+                  else
+                        score()->cmdAddBSymbol(s, pos, dragOffset);
+
                   event->acceptProposedAction();
                   score()->endCmd();
                   setDropTarget(0); // this also resets dropRectangle and dropAnchor
@@ -1735,10 +1770,16 @@ Element* Canvas::elementAt(const QPointF& p)
       if (el.empty())
             return 0;
       qSort(el.begin(), el.end(), elementLower);
-/*      printf("elementAt: %f %f\n", p.x(), p.y());
-      foreach(Element* e, el)
-            printf("  %s\n", e->name());
-      */
+
+      // if p hit more than one element, give back
+      // the element after the selected one;
+
+      int n = el.size();
+      for (int i = 0; i < n; ++i) {
+            if (el[i]->selected() && (i < (n-1))) {
+                  return el.at(i + 1);
+                  }
+            }
       return el.at(0);
       }
 

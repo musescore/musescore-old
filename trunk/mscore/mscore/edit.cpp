@@ -1083,6 +1083,8 @@ void Score::cmdDeleteSelection()
             select(0, 0, 0);
             Measure* is = tick2measure(sel->tickStart);
             Measure* ie = tick2measure(sel->tickEnd);
+            if (is == ie)
+                  ie = 0;
             for (Measure* m = is; m && m != ie; m = m->next()) {
                   for (int staffIdx = sstaff; staffIdx < estaff; ++staffIdx) {
                         bool rmFlag = false;

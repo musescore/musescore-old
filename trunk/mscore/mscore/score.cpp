@@ -229,15 +229,18 @@ void Score::read(QString name)
       _saved = false;
       info.setFile(name);
 
-      if (info.completeSuffix() == "xml") {
+      if (info.completeSuffix() == "xml")
             importMusicXml(name);
-            }
       else if (info.completeSuffix().toLower() == "mid") {
             if (!importMidi(name))
                   return;
             }
       else if (info.completeSuffix() == "md") {
             if (!importMuseData(name))
+                  return;
+            }
+      else if (info.completeSuffix() == "ly") {
+            if (!importLilypond(name))
                   return;
             }
       else {
@@ -407,7 +410,6 @@ void Score::fixTicks()
 Measure* Score::pos2measure(const QPointF& p, int* tick, Staff** rst, int* pitch,
    Segment** seg, QPointF* offset) const
       {
-printf("====pos2measure staff %p %p\n", rst, rst ? *rst : 0);
       int voice = padState.voice;
 
       for (ciPage ip = _layout->pages()->begin(); ip != _layout->pages()->end(); ++ip) {
@@ -480,7 +482,6 @@ printf("====pos2measure staff %p %p\n", rst, rst ? *rst : 0);
                                                       *offset = pppp - QPointF(segment->x(), staff->bbox().y());
                                                 if (seg)
                                                       *seg = segment;
-printf("====Staff %d\n", i);
                                                 return m;
                                                 }
                                           }

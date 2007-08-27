@@ -98,10 +98,13 @@ void Viewer::setDropRectangle(const QRectF& r)
 void Viewer::setDropAnchor(const QLineF& l)
       {
       if (!dropAnchor.isNull()) {
+            qreal w = 2 / _matrix.m11();
             QRectF r;
             r.setTopLeft(dropAnchor.p1());
             r.setBottomRight(dropAnchor.p2());
-            _score->addRefresh(r.normalized());
+            r = r.normalized();
+            r.adjust(-w, -w, 2*w, 2*w);
+            _score->addRefresh(r);
             }
       if (dropTarget) {
             dropTarget->setDropTarget(false);
@@ -114,10 +117,13 @@ void Viewer::setDropAnchor(const QLineF& l)
             }
       dropAnchor = l;
       if (!dropAnchor.isNull()) {
+            qreal w = 2 / _matrix.m11();
             QRectF r;
             r.setTopLeft(dropAnchor.p1());
             r.setBottomRight(dropAnchor.p2());
-            _score->addRefresh(r.normalized());
+            r = r.normalized();
+            r.adjust(-w, -w, 2*w, 2*w);
+            _score->addRefresh(r);
             }
       }
 

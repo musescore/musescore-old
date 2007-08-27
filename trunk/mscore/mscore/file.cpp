@@ -226,6 +226,7 @@ void MuseScore::loadFile()
             "MusicXml Files (*.xml);;"
             "Standard Midi File Files (*.mid);;"
             "Muse Data Files (*.md);;"
+            "Lilypond Files (*.ly);;"
             "All files (*)"
             )
          );
@@ -896,7 +897,7 @@ void Score::print(QPrinter* printer)
       DPMM      = DPI / INCH;                     // dots/mm
       setSpatium(oldSpatium);
       mainLayout()->setPaintDevice(oldPaintDevice);
-      layoutAll = true;
+      doLayout();
       }
 
 //---------------------------------------------------------

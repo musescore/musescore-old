@@ -732,22 +732,3 @@ bool Score::importMuseData(const QString& name)
       return true;
       }
 
-//---------------------------------------------------------
-//   readMuseData
-//---------------------------------------------------------
-
-void Score::readMuseData(QString name)
-      {
-      info.setFile(name);
-      _fileDivision = ::division;
-      importMuseData(name);
-      int measureNo = 0;
-      for (Element* m = _layout->first(); m; m = m->next()) {
-            Measure* measure = (Measure*)m;
-            measure->setNo(measureNo);
-            if (!measure->irregular())
-                  ++measureNo;
-            }
-      layoutAll = true;
-      }
-

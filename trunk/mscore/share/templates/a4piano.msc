@@ -2,9 +2,9 @@
 <museScore version="1.0">
   <Spatium>1.5</Spatium>
   <Division>480</Division>
-  <Mag>0.5</Mag>
-  <xoff>93.5</xoff>
-  <yoff>40</yoff>
+  <Mag>1.27106</Mag>
+  <xoff>11</xoff>
+  <yoff>18</yoff>
   <Style>
     <staffUpperBorder>8</staffUpperBorder>
     <staffLowerBorder>4</staffLowerBorder>
@@ -79,18 +79,12 @@
       <denom>4</denom>
       </sig>
     </siglist>
-  <tempolist fix="500000">
-    <tempo at="0">
-      <tick>0</tick>
-      <val>500000</val>
-      </tempo>
-    <tempo at="21474836">
-      <tick>0</tick>
-      <val>500000</val>
-      </tempo>
+  <tempolist fix="2">
     </tempolist>
   <Part>
     <Staff>
+      <lines>5</lines>
+      <small>0</small>
       <cleflist>
         <clef tick="0" idx="0"/>
         </cleflist>
@@ -100,6 +94,8 @@
       <bracket type="1" span="2"/>
       </Staff>
     <Staff>
+      <lines>5</lines>
+      <small>0</small>
       <cleflist>
         <clef tick="0" idx="4"/>
         </cleflist>
@@ -108,10 +104,6 @@
         </keylist>
       </Staff>
     <trackName>Piano</trackName>
-    <name>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
-p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-size:12pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Piano&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</name>
     <shortName>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-size:12pt; font-weight:400; font-style:normal;&quot;&gt;
@@ -126,57 +118,49 @@ p, li { white-space: pre-wrap; }
     </Part>
   <Staff id="1">
     <Measure number="1">
-      <BarLine/>
       <Rest>
-        <ticklen>1920</ticklen>
-        <BeamMode>4</BeamMode>
+        <ticklen>0</ticklen>
         </Rest>
+      <BarLine/>
       </Measure>
     <Measure number="2">
-      <BarLine/>
       <Rest>
-        <ticklen>1920</ticklen>
-        <BeamMode>4</BeamMode>
+        <ticklen>0</ticklen>
         </Rest>
+      <BarLine/>
       </Measure>
     <Measure number="3">
-      <BarLine/>
       <Rest>
-        <ticklen>1920</ticklen>
-        <BeamMode>4</BeamMode>
+        <ticklen>0</ticklen>
         </Rest>
+      <BarLine/>
       </Measure>
     <Measure number="4">
-      <BarLine/>
       <Rest>
-        <ticklen>1920</ticklen>
-        <BeamMode>4</BeamMode>
+        <ticklen>0</ticklen>
         </Rest>
+      <BarLine/>
       </Measure>
     </Staff>
   <Staff id="2">
     <Measure number="1">
       <Rest>
-        <ticklen>1920</ticklen>
-        <BeamMode>4</BeamMode>
+        <ticklen>0</ticklen>
         </Rest>
       </Measure>
     <Measure number="2">
       <Rest>
-        <ticklen>1920</ticklen>
-        <BeamMode>4</BeamMode>
+        <ticklen>0</ticklen>
         </Rest>
       </Measure>
     <Measure number="3">
       <Rest>
-        <ticklen>1920</ticklen>
-        <BeamMode>4</BeamMode>
+        <ticklen>0</ticklen>
         </Rest>
       </Measure>
     <Measure number="4">
       <Rest>
-        <ticklen>1920</ticklen>
-        <BeamMode>4</BeamMode>
+        <ticklen>0</ticklen>
         </Rest>
       </Measure>
     </Staff>

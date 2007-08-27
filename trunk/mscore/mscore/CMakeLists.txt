@@ -146,6 +146,7 @@ add_executable ( mscore
       viewer.cpp volta.cpp simplebutton.cpp image.cpp keyfinder.cpp
       pitchspelling.cpp musedata.cpp keysig.cpp arpeggio.cpp breath.cpp
       editdrumset.cpp editstaff.cpp drumset.cpp tremolo.cpp repeat.cpp
+      lilypond.cpp
       )
 
 if (CROSS_MINGW)

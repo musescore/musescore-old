@@ -870,17 +870,29 @@ void readShortcuts()
       }
 
 //---------------------------------------------------------
-//   getAction
-//    returns action for shortcut
+//   getShortcut
 //---------------------------------------------------------
 
-QAction* getAction(const char* id)
+Shortcut* getShortcut(const char* id)
       {
       Shortcut* s = shortcuts.value(id);
       if (s == 0) {
             printf("internal error: shortcut <%s> not found\n", id);
             return 0;
             }
+      return s;
+      }
+
+//---------------------------------------------------------
+//   getAction
+//    returns action for shortcut
+//---------------------------------------------------------
+
+QAction* getAction(const char* id)
+      {
+      Shortcut* s = getShortcut(id);
+      if (s == 0)
+            return 0;
       if (s->action == 0) {
             QAction* a = new QAction(s->xml, mscore);
             s->action  = a;

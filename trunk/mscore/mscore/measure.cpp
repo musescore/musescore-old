@@ -580,32 +580,30 @@ void Measure::layout2(ScoreLayout* layout)
       {
 //      printf("Measure(%p)::layout2(): _sel.size = %d\n", this, _sel.size());
 
-      foreach(Element* pel, _sel) {
-            int staff = pel->staff()->idx();
+      foreach(Element* element, _sel) {
+            int staff = element->staff()->idx();
             double y  = system()->staff(staff)->bbox().y();
+            element->layout(layout);
 
-            switch(pel->type()) {
-                  case VOLTA:
-                  case OTTAVA:
-                        pel->layout(layout);
+            switch(element->type()) {
+                  case IMAGE:
+                        element->setPos(QPointF(tick2pos(element->tick()), y));
                         break;
                   case DYNAMIC:
                   case SYMBOL:
                   case TEMPO_TEXT:
                   case TEXT:
-                        pel->layout(layout);
-                        pel->setPos(pel->ipos() + QPointF(tick2pos(pel->tick()), y));
+                        element->setPos(element->ipos()
+                           + QPointF(tick2pos(element->tick()), y));
                         break;
                   case LAYOUT_BREAK:
-                        pel->layout(layout);
-                        pel->setPos(
-                           bbox().width() - pel->bbox().width() - _spatium,
-                           - pel->bbox().height() - _spatium);
+                        element->setPos(
+                           bbox().width() - element->bbox().width() - _spatium,
+                           - element->bbox().height() - _spatium);
                         break;
                   case SLUR:
                         // slur->layout() messes with add()/remove()
                   default:
-                        pel->layout(layout);
                         break;
                   }
 
@@ -875,6 +873,7 @@ void Measure::add(Element* el)
             case SYMBOL:
             case TEXT:
             case TEMPO_TEXT:
+            case IMAGE:
                   _sel.append(el);
                   break;
             case SLUR_SEGMENT:
