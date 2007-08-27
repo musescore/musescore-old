@@ -729,7 +729,8 @@ QRectF ShadowNote::bbox() const
 bool Note::acceptDrop(Viewer* viewer, const QPointF&, int type, const QDomElement&) const
       {
       if (type == ATTRIBUTE || type == TEXT || type == ACCIDENTAL
-         || type == BREATH || type == ARPEGGIO || type == NOTEHEAD || type == TREMOLO) {
+         || type == BREATH || type == ARPEGGIO || type == NOTEHEAD
+         || type == TREMOLO || type == IMAGE) {
             viewer->setDropTarget(this);
             return true;
             }

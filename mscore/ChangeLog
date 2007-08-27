@@ -1,3 +1,7 @@
+27.8.7 (ws)
+      - dragging an image to a note or rest bounds the image to this
+        time position (anchor = ANCHOR_STAFF)
+      - fix crash after print
 25.8.7 (ws)
       - implement "play mode"; in playmode the following shortcuts
         are aktiv:

@@ -331,6 +331,7 @@ class MagBox : public QComboBox {
 extern QMenu* genCreateMenu(QWidget* parent);
 extern MuseScore* mscore;
 
+extern Shortcut* getShortcut(const char* id);
 extern QAction* getAction(const char*);
 extern QMap<QString, Shortcut*> shortcuts;
 

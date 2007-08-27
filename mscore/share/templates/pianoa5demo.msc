@@ -79,18 +79,12 @@
       <denom>4</denom>
       </sig>
     </siglist>
-  <tempolist fix="500000">
-    <tempo at="0">
-      <tick>0</tick>
-      <val>500000</val>
-      </tempo>
-    <tempo at="21474836">
-      <tick>0</tick>
-      <val>500000</val>
-      </tempo>
+  <tempolist fix="2">
     </tempolist>
   <Part>
     <Staff>
+      <lines>5</lines>
+      <small>0</small>
       <cleflist>
         <clef tick="0" idx="0"/>
         </cleflist>
@@ -100,6 +94,8 @@
       <bracket type="1" span="2"/>
       </Staff>
     <Staff>
+      <lines>5</lines>
+      <small>0</small>
       <cleflist>
         <clef tick="0" idx="4"/>
         </cleflist>
@@ -121,57 +117,49 @@ p, li { white-space: pre-wrap; }
     </Part>
   <Staff id="1">
     <Measure number="1">
-      <BarLine/>
       <Rest>
-        <ticklen>1920</ticklen>
-        <BeamMode>4</BeamMode>
+        <ticklen>0</ticklen>
         </Rest>
+      <BarLine/>
       </Measure>
     <Measure number="2">
-      <BarLine/>
       <Rest>
-        <ticklen>1920</ticklen>
-        <BeamMode>4</BeamMode>
+        <ticklen>0</ticklen>
         </Rest>
+      <BarLine/>
       </Measure>
     <Measure number="3">
-      <BarLine/>
       <Rest>
-        <ticklen>1920</ticklen>
-        <BeamMode>4</BeamMode>
+        <ticklen>0</ticklen>
         </Rest>
+      <BarLine/>
       </Measure>
     <Measure number="4">
-      <BarLine/>
       <Rest>
-        <ticklen>1920</ticklen>
-        <BeamMode>4</BeamMode>
+        <ticklen>0</ticklen>
         </Rest>
+      <BarLine/>
       </Measure>
     </Staff>
   <Staff id="2">
     <Measure number="1">
       <Rest>
-        <ticklen>1920</ticklen>
-        <BeamMode>4</BeamMode>
+        <ticklen>0</ticklen>
         </Rest>
       </Measure>
     <Measure number="2">
       <Rest>
-        <ticklen>1920</ticklen>
-        <BeamMode>4</BeamMode>
+        <ticklen>0</ticklen>
         </Rest>
       </Measure>
     <Measure number="3">
       <Rest>
-        <ticklen>1920</ticklen>
-        <BeamMode>4</BeamMode>
+        <ticklen>0</ticklen>
         </Rest>
       </Measure>
     <Measure number="4">
       <Rest>
-        <ticklen>1920</ticklen>
-        <BeamMode>4</BeamMode>
+        <ticklen>0</ticklen>
         </Rest>
       </Measure>
     </Staff>

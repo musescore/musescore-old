@@ -1699,6 +1699,11 @@ int main(int argc, char* argv[])
 void MuseScore::cmd(QAction* a)
       {
       QString cmd(a->data().toString());
+      Shortcut* sc = getShortcut(cmd.toAscii().data());
+      if ((sc->state & _state) == 0) {
+            printf("cmd <%s> not valid in state %d\n", qPrintable(cmd), _state);
+            return;
+            }
 
       if (cmd == "instruments")
             editInstrList();

@@ -1227,6 +1227,10 @@ void Score::cmd(const QString& cmd)
       else if (cmd == "seek-end")
             seq->seekEnd();
       else {
+            if (cmdActive) {
+                  printf("Score::cmd(): cmd already active\n");
+                  return;
+                  }
             startCmd();
             if (cmd == "append-measure")
                   appendMeasures(1);
