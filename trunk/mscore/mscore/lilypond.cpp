@@ -24,8 +24,20 @@
 #include "part.h"
 #include "staff.h"
 #include "note.h"
+#include "rest.h"
 #include "chord.h"
 #include "barline.h"
+
+//---------------------------------------------------------
+//   LNote
+//---------------------------------------------------------
+
+struct LNote {
+      int pitch;
+      int len;
+
+      LNote(int p, int l) : pitch(p), len(l) {}
+      };
 
 //---------------------------------------------------------
 //   Lilypond
@@ -40,14 +52,28 @@ class Lilypond {
       Part* part;
       Staff* staff;
       Measure* measure;
+      int relpitch;
+      int curLen;
 
       bool lookup(char c);
       char lookup();
       void error(const char* txt);
-      void scanNote(char c);
+      LNote scanNote();
+      void addNote(const LNote&);
+      void addRest();
+      void scanRest();
+      void scanCmd();
+      void cmdRelative();
+      void cmdTime();
+      void cmdClef();
+      void createMeasure();
 
    public:
-      Lilypond(Score* s) { score = s; }
+      Lilypond(Score* s) {
+            score    = s;
+            relpitch = -1;
+            curLen   = division;
+            }
       bool read(const QString&);
       void convert();
       };
@@ -124,20 +150,11 @@ char Lilypond::lookup()
 //   scanNote
 //---------------------------------------------------------
 
-void Lilypond::scanNote(char c)
+LNote Lilypond::scanNote()
       {
+      char c    = lookup();
       int pitch = 48;
 
-      int octave = 0;
-      for (;;) {
-            ++cp;
-            if (*cp == ' ' || *cp == '\n')
-                  break;
-            if (*cp == '\'')
-                  ++octave;
-            }
-
-      pitch += octave * 12;
       switch (c) {
             case 'a':   pitch += 9; break;
             case 'b':   pitch += 11; break;
@@ -147,7 +164,105 @@ void Lilypond::scanNote(char c)
             case 'f':   pitch += 5; break;
             case 'g':   pitch += 7; break;
             }
+      ++cp;
+      printf("scanNote pitch %d relpitch %d\n", pitch, relpitch);
+      if (relpitch > 0) {
+            if (pitch < relpitch) {
+                  while ((relpitch - pitch) > 5)
+                        pitch += 12;
+                  }
+            else if (pitch > relpitch) {
+                  while ((pitch - relpitch) > 5)
+                        pitch -= 12;
+                  }
+            }
+      int octave = 0;
+      for (;;) {
+            if (*cp == ' ' || *cp == '\n')
+                  break;
+            if (*cp == '\'') {
+                  ++octave;
+                  ++cp;
+                  }
+            else if (*cp == ',') {
+                  --octave;
+                  ++cp;
+                  }
+            else if (isalnum(*cp)) {
+                  char buffer[16];
+                  char* d = buffer;
+                  while (isalnum(*cp))
+                        *d++ = *cp++;
+                  *d = 0;
+                  int len = atoi(buffer);
+                  switch(len) {
+                        case 1:  curLen = division * 4; break;
+                        case 2:  curLen = division * 2; break;
+                        case 4:  curLen = division;     break;
+                        case 8:  curLen = division / 2; break;
+                        case 16: curLen = division / 4; break;
+                        case 32: curLen = division / 8; break;
+                        case 64: curLen = division / 16; break;
+                        default:
+                              printf("illegal note len %d\n", len);
+                              break;
+                        }
+                  }
+            else if (*cp == '.') {
+                  curLen += (curLen / 2);
+                  ++cp;
+                  }
+            }
+      pitch += octave * 12;
+      if (relpitch > 0)
+            relpitch = pitch;
+      return LNote(pitch, curLen);
+      }
 
+//---------------------------------------------------------
+//   scanRest
+//---------------------------------------------------------
+
+void Lilypond::scanRest()
+      {
+      ++cp;
+      for (;;) {
+            if (*cp == ' ' || *cp == '\n')
+                  break;
+            if (isalnum(*cp)) {
+                  char buffer[16];
+                  char* d = buffer;
+                  while (isalnum(*cp))
+                        *d++ = *cp++;
+                  *d = 0;
+                  int len = atoi(buffer);
+                  switch(len) {
+                        case 1:  curLen = division * 4; break;
+                        case 2:  curLen = division * 2; break;
+                        case 4:  curLen = division;     break;
+                        case 8:  curLen = division / 2; break;
+                        case 16: curLen = division / 4; break;
+                        case 32: curLen = division / 8; break;
+                        case 64: curLen = division / 16; break;
+                        default:
+                              printf("illegal note len %d\n", len);
+                              break;
+                        }
+                  }
+            else if (*cp == '.') {
+                  curLen += (curLen / 2);
+                  ++cp;
+                  }
+            }
+      }
+
+//---------------------------------------------------------
+//   createMeasure
+//    create new measure if necessary
+//---------------------------------------------------------
+
+void Lilypond::createMeasure()
+      {
       if (tick >= measure->tick() + measure->tickLen()) {
             BarLine* barLine = new BarLine(score);
             barLine->setParent(measure);
@@ -159,6 +274,15 @@ void Lilypond::scanNote(char c)
             measure->setTickLen(division * 4);
             score->mainLayout()->push_back(measure);
             }
+      }
+
+//---------------------------------------------------------
+//   addNote
+//---------------------------------------------------------
+
+void Lilypond::addNote(const LNote& lnote)
+      {
+      createMeasure();
 
       Segment* segment = new Segment(measure);
       segment->setSubtype(Segment::SegChordRest);
@@ -169,18 +293,93 @@ void Lilypond::scanNote(char c)
       Chord* chord = new Chord(score);
       chord->setStaff(staff);
       chord->setParent(segment);
-      chord->setTickLen(division);
+      chord->setTickLen(lnote.len);
       chord->setTick(tick);
 
       segment->add(chord);
 
-      Note* note   = new Note(score);
-      note->setPitch(pitch);
+      Note* note = new Note(score);
+      note->setPitch(lnote.pitch);
       note->setParent(chord);
       note->setStaff(staff);
-      note->setTickLen(division);
+      note->setTickLen(lnote.len);
       chord->add(note);
-      tick += division;
+      tick += lnote.len;
+      }
+
+//---------------------------------------------------------
+//   addRest
+//---------------------------------------------------------
+
+void Lilypond::addRest()
+      {
+      createMeasure();
+
+      Segment* segment = new Segment(measure);
+      segment->setSubtype(Segment::SegChordRest);
+      segment->setTick(tick);
+      segment->setParent(measure);
+      measure->add(segment);
+
+      Rest* rest = new Rest(score);
+      rest->setStaff(staff);
+      rest->setParent(segment);
+      rest->setTickLen(curLen);
+      rest->setTick(tick);
+
+      segment->add(rest);
+      tick += curLen;
+      }
+
+//---------------------------------------------------------
+//   cmdRelative
+//---------------------------------------------------------
+
+void Lilypond::cmdRelative()
+      {
+      LNote note = scanNote();
+      relpitch   = note.pitch;
+printf("cmdRelative %d\n", relpitch);
+      }
+
+//---------------------------------------------------------
+//   cmdTime
+//---------------------------------------------------------
+
+void Lilypond::cmdTime()
+      {
+      printf("cmdTime\n");
+      }
+
+//---------------------------------------------------------
+//   cmdClef
+//---------------------------------------------------------
+
+void Lilypond::cmdClef()
+      {
+      printf("cmdClef\n");
+      }
+
+//---------------------------------------------------------
+//   scanCmd
+//---------------------------------------------------------
+
+void Lilypond::scanCmd()
+      {
+      char buffer[32];
+      char* d = buffer;
+      while (*cp && *cp != ' ' && *cp != '\n')
+            *d++ = *cp++;
+      *d = 0;
+      if (strcmp(buffer, "relative") == 0)
+            cmdRelative();
+      else if (strcmp(buffer, "time") == 0)
+            cmdTime();
+      else if (strcmp(buffer, "clef") == 0)
+            cmdClef();
+
+      else
+            error("unknown cmd");
       }
 
 //---------------------------------------------------------
@@ -205,22 +404,28 @@ void Lilypond::convert()
       measure->setTickLen(division * 4);
       score->mainLayout()->push_back(measure);
 
+      char c = lookup();
+      if (c == '\\') {
+            ++cp;
+            scanCmd();
+            }
       if (!lookup('{'))
             error("{ expected");
       ++cp;
       for (char c = lookup(); c && c != '}'; c = lookup()) {
             switch(c) {
-                  case 'a':
-                  case 'b':
-                  case 'c':
-                  case 'd':
-                  case 'e':
-                  case 'f':
-                  case 'g':
-                        scanNote(c);
+                  case 'a' ... 'g':
+                        {
+                        LNote note = scanNote();
+                        addNote(note);
+                        }
+                        break;
+                  case 'r':
+                        scanRest();
+                        addRest();
                         break;
                   default:
-                        error("unexpected char");
+                        printf("unexpected char <%c>\n", c);
                         ++cp;
                         break;
                   }
