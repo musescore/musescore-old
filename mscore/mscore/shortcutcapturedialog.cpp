@@ -3,6 +3,7 @@
 //  Linux Music Score Editor
 //  $Id:$
 //
+//  Copyright (C) 2002-2007 Werner Schweer and others
 //  Copyright (C) 2003 Mathias Lundgren (lunar_shuttle@users.sourceforge.net)
 //
 //  This program is free software; you can redistribute it and/or modify
