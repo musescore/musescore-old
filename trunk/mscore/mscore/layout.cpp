@@ -3,7 +3,7 @@
 //  Linux Music Score Editor
 //  $Id: layout.cpp,v 1.61 2006/09/08 19:37:08 lvinken Exp $
 //
-//  Copyright (C) 2002-2006 Werner Schweer (ws@seh.de)
+//  Copyright (C) 2002-2007 Werner Schweer and others
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.
