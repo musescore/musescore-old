@@ -1,0 +1,90 @@
+:link     { color: #091cef; }
+:visited  { color: #091cef; }
+:hover    { color: #091c00; background: #f9e909; }
+
+h1.head {
+   margin: 0.05em 0.3em;
+   font-family: Arial, helvetica, sans-serif;
+   color: #091cef;
+   }
+
+td.head {
+   background: #aec3e8;
+   color: #091cef;
+}
+td.nav {
+   background: #aec3e8;
+   color: #000;
+   }
+
+td.ld {
+   background: #aec3e8;
+   valign: top;
+   width: 60;
+   font-weight: bold;
+   font-size: small;
+   }
+td.lh {
+   background: #aec3e8;
+   }
+td.lb {
+   background: #ced1e2;
+   }
+
+h3.navhead {
+   margin-top: 0.2em;
+   margin-bottom: 0em;
+   font-size: 10pt;
+   font-family: Verdana, Geneva, Arial, sans-serif;
+   }
+
+.navlink {
+   font-size: small;
+   font-family: Verdana, Geneva, Arial, sans-serif;
+   }
+
+body  {
+   background: #efefef;
+   color: #000000;
+   font-family: Arial, Geneva;
+   font-size: 12pt;
+   }
+
+p, input {
+	font-family: Arial, Geneva;
+	font-size: 10pt;
+}
+
+b {
+	font-family: Arial, Geneva;
+	font-size: 10pt;
+	font-weight: bold;
+}
+
+h1 {
+	font-family: Arial, Geneva;
+	font-size: 24pt;
+	font-weight: bold;
+}
+h2 {
+	font-family: Arial, Geneva;
+	font-size: 18pt;
+	font-weight: bold;
+}
+
+a {
+	font-family: Arial, Geneva;
+	font-size: 12pt;
+}
+
+th {
+	font-family: Arial, Geneva;
+	font-size: 10pt;
+
+}
+
+td {
+      font-family: Arial, Geneva;
+	font-size: 12pt;
+      color: #000000;
+      }
