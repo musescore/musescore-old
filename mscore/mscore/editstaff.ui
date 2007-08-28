@@ -5,8 +5,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>344</width>
-    <height>250</height>
+    <width>357</width>
+    <height>294</height>
    </rect>
   </property>
   <property name="windowTitle" >
@@ -22,12 +22,6 @@
       <bool>true</bool>
      </property>
      <layout class="QGridLayout" >
-      <property name="horizontalSpacing" >
-       <number>20</number>
-      </property>
-      <property name="verticalSpacing" >
-       <number>15</number>
-      </property>
       <item row="0" column="0" >
        <widget class="QLabel" name="label" >
         <property name="sizePolicy" >
@@ -83,8 +77,8 @@
         </property>
         <property name="sizeHint" >
          <size>
-          <width>20</width>
-          <height>40</height>
+          <width>106</width>
+          <height>41</height>
          </size>
         </property>
        </spacer>
@@ -101,14 +95,35 @@
       <bool>true</bool>
      </property>
      <layout class="QGridLayout" >
+      <item row="0" column="0" >
+       <widget class="QLabel" name="label_2" >
+        <property name="text" >
+         <string>Play Transposition (Semitones)</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1" >
+       <widget class="QSpinBox" name="transposition" >
+        <property name="minimum" >
+         <number>-127</number>
+        </property>
+       </widget>
+      </item>
       <item row="1" column="0" >
+       <widget class="QCheckBox" name="showStaff" >
+        <property name="text" >
+         <string>Show</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="0" >
        <widget class="QCheckBox" name="useDrumset" >
         <property name="text" >
          <string>Use Drumset</string>
         </property>
        </widget>
       </item>
-      <item row="1" column="1" >
+      <item row="2" column="1" >
        <widget class="QPushButton" name="editDrumset" >
         <property name="sizePolicy" >
          <sizepolicy vsizetype="Preferred" hsizetype="Minimum" >
@@ -118,13 +133,6 @@
         </property>
         <property name="text" >
          <string>Edit Drumset...</string>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="0" >
-       <widget class="QCheckBox" name="showStaff" >
-        <property name="text" >
-         <string>Show</string>
         </property>
        </widget>
       </item>
