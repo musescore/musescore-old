@@ -340,6 +340,7 @@ bool MuseScore::saveAs()
       fl.append(tr("Postscript File (*.ps)"));
       fl.append(tr("PNG Bitmap Graphic (*.png)"));
       fl.append(tr("Scalable Vector Graphic (*.svg)"));
+      fl.append(tr("Lilypond Format (*.ly)"));
 
       QString fn = QFileDialog::getSaveFileName(
          this, tr("MuseScore: Save As"),
@@ -391,6 +392,12 @@ bool MuseScore::saveAs()
             if (!fn.endsWith(".svg"))
                   fn.append(".svg");
             return cs->saveSvg(fn);
+            }
+      if (selectedFilter == fl[7]) {
+            // save as lilypond file *.ly
+            if (!fn.endsWith(".ly"))
+                  fn.append(".ly");
+            return cs->saveLilypond(fn);
             }
       return false;
       }

@@ -1,3 +1,5 @@
+28.8.7 (ws)
+      - first code for lilypond export
 27.8.7 (ws)
       - dragging an image to a note or rest bounds the image to this
         time position (anchor = ANCHOR_STAFF)
