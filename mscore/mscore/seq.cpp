@@ -18,6 +18,8 @@
 //  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //=============================================================================
 
+#include "repeat2.h"
+
 #include "seq.h"
 #include "mscore.h"
 #include "fluid.h"
@@ -428,7 +430,7 @@ void Seq::stopTransport()
       }
 
 //---------------------------------------------------------
-//   startTransport
+//   startTranspor
 //    JACK has started
 //    executed in realtime environment
 //---------------------------------------------------------
@@ -535,6 +537,7 @@ void Seq::process(unsigned n, float* lbuffer, float* rbuffer)
             }
 
       if (state == PLAY) {
+
             //
             // collect events for one segment
             //
@@ -586,6 +589,8 @@ void Seq::collectEvents()
       int staffIdx = 0;
       int gateTime = 80;  // 100 - legato (100%)
 
+
+
       foreach(Part* part, *cs->parts()) {
             int channel = part->midiChannel();
             setController(channel, CTRL_PROGRAM, part->midiProgram());
@@ -594,9 +599,14 @@ void Seq::collectEvents()
             setController(channel, CTRL_CHORUS_SEND, part->chorus());
             setController(channel, CTRL_PAN, part->pan());
 
+
             for (int i = 0; i < part->staves()->size(); ++i) {
+
+                  // create stack for repeats and jumps, added by DK. 23.08.07
+                  RepeatStack* rs = new RepeatStack();
+
                   QList<OttavaE> ol;
-                  for (Measure* m = cs->mainLayout()->first(); m; m = m->next()) {
+                  for (Measure* m = cs->mainLayout()->first(); m; m = m->next()) 
                         foreach(Element* e, *m->el()) {
                               if (e->type() == OTTAVA) {
                                     Ottava* ottava = (Ottava*)e;
@@ -607,8 +617,14 @@ void Seq::collectEvents()
                                     ol.append(oe);
                                     }
                               }
-                        }
-                  for (Measure* m = cs->mainLayout()->first(); m; m = m->next()) {
+                  // Loop changed, "m = m->next()" moved to the end of loop, 
+                  // by DK. 23.08.07              
+                  for (Measure* m = cs->mainLayout()->first(); m;) { 
+
+                        // push each measure for checking of any of repeat or jumps,
+                        // added by DK.23.08.07
+                        rs->push(m);
+
                         for (int voice = 0; voice < VOICES; ++voice) {
                               for (Segment* seg = m->first(); seg; seg = seg->next()) {
                                     Element* el = seg->element(staffIdx * VOICES + voice);
@@ -616,6 +632,7 @@ void Seq::collectEvents()
                                           continue;
                                     Chord* chord = (Chord*)el;
                                     NoteList* nl = chord->noteList();
+                                    
 
                                     for (iNote in = nl->begin(); in != nl->end(); ++in) {
                                           Note* note = in->second;
@@ -631,6 +648,7 @@ void Seq::collectEvents()
                                           len += (note->chord()->tickLen() * gateTime / 100);
 
                                           unsigned tick = chord->tick();
+
                                           Event ev;
                                           ev.type       = ME_NOTEON;
                                           ev.val1       = note->pitch() + part->pitchOffset();
@@ -645,17 +663,39 @@ void Seq::collectEvents()
                                           ev.val2       = 60;
                                           ev.note       = note;
                                           ev.channel    = channel;
-                                          events.insert(std::pair<const unsigned, Event> (tick, ev));
+                                          // added rtickOffSet , by DK. 23.08.07
+                                          events.insert(std::pair<const unsigned, Event> (tick+rtickOffSet, ev));
 
                                           ev.val2 = 0;
-                                          events.insert(std::pair<const unsigned, Event> (tick+len, ev));
+                                          events.insert(std::pair<const unsigned, Event> (tick+rtickOffSet+len, ev));
+
                                           }
+
                                     }
                               }
+
+                        // Don't forget to save measure, because pop may change it,
+                        // returned m may differ from the original, new start measure 
+                        // of "repeat", 0 means nothing to repeat continue with next measure
+                        // functions push and pop are in repeat2.h/cpp files, by DK. 23.08.07 
+                        Measure* ms = m;
+                        m = rs->pop(m);
+                        if ( m != 0 )
+                              continue;
+                        else
+                              m = ms;
+
+                        m = m->next();
+
                         }
                   ++staffIdx;
+                  // delete repeat Stackelemente, added by DK. 23.08.07
+                  if (rs)
+                        rs->delStackElement(rs);              
                   }
+
             }
+
       PlayPanel* pp = mscore->getPlayPanel();
       if (pp) {
             Measure* lm = cs->mainLayout()->last();
@@ -664,6 +704,8 @@ void Seq::collectEvents()
                   pp->setEndpos(endTick);
                   }
             }
+
+printf ("leave collectEvents\n" );
       }
 
 //---------------------------------------------------------

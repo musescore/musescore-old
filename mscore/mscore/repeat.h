@@ -22,6 +22,7 @@
 #define __REPEAT_H__
 
 #include "symbol.h"
+#include "measure.h"
 
 //---------------------------------------------------------
 //   RepeatMeasure
@@ -40,6 +41,7 @@ class RepeatMeasure : public Element {
       virtual void write(Xml& xml) const;
       virtual void read(QDomElement);
       };
+
 
 #endif
 
