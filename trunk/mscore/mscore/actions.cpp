@@ -1243,7 +1243,7 @@ Shortcut MuseScore::sc[] = {
          ),
 
       Shortcut(
-         STATE_NORMAL | STATE_NOTE_ENTRY,
+         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_PLAY,
          "play",
          QT_TR_NOOP("player play"),
          0,
@@ -1253,7 +1253,7 @@ Shortcut MuseScore::sc[] = {
          &playIcon
          ),
       Shortcut(
-         STATE_PLAY,
+         STATE_PLAY | STATE_PLAY,
          "pause",
          QT_TR_NOOP("toggle break"),
          Qt::Key_Space,
@@ -1308,7 +1308,7 @@ Shortcut MuseScore::sc[] = {
          QT_TR_NOOP("")
          ),
       Shortcut(
-         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT,
+         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT | STATE_PLAY,
          "rewind",
          QT_TR_NOOP("player rewind"),
          0,

@@ -38,6 +38,7 @@ EditStaff::EditStaff(Staff* s, QWidget* parent)
       editDrumset->setEnabled(staff->part()->useDrumset());
       lines->setValue(staff->lines());
       small->setChecked(staff->small());
+      transposition->setValue(staff->part()->pitchOffset());
 
       connect(buttonBox, SIGNAL(clicked(QAbstractButton*)), this, SLOT(bboxClicked(QAbstractButton*)));
       connect(editDrumset, SIGNAL(clicked()), SLOT(editDrumsetClicked()));
@@ -78,6 +79,7 @@ void EditStaff::apply()
       {
       staff->part()->setShow(showStaff->isChecked());
       staff->part()->setUseDrumset(useDrumset->isChecked());
+      staff->part()->setPitchOffset(transposition->value());
       editDrumset->setEnabled(staff->part()->useDrumset());
       staff->setLines(lines->value());
       staff->setSmall(small->isChecked());

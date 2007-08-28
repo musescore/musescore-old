@@ -298,6 +298,7 @@ void Seq::stop()
       {
       if (!audio)
             return;
+printf("stop Transport\n");
       audio->stopTransport();
       }
 
@@ -606,7 +607,7 @@ void Seq::collectEvents()
                   RepeatStack* rs = new RepeatStack();
 
                   QList<OttavaE> ol;
-                  for (Measure* m = cs->mainLayout()->first(); m; m = m->next()) 
+                  for (Measure* m = cs->mainLayout()->first(); m; m = m->next())
                         foreach(Element* e, *m->el()) {
                               if (e->type() == OTTAVA) {
                                     Ottava* ottava = (Ottava*)e;
@@ -617,9 +618,9 @@ void Seq::collectEvents()
                                     ol.append(oe);
                                     }
                               }
-                  // Loop changed, "m = m->next()" moved to the end of loop, 
-                  // by DK. 23.08.07              
-                  for (Measure* m = cs->mainLayout()->first(); m;) { 
+                  // Loop changed, "m = m->next()" moved to the end of loop,
+                  // by DK. 23.08.07
+                  for (Measure* m = cs->mainLayout()->first(); m;) {
 
                         // push each measure for checking of any of repeat or jumps,
                         // added by DK.23.08.07
@@ -632,7 +633,7 @@ void Seq::collectEvents()
                                           continue;
                                     Chord* chord = (Chord*)el;
                                     NoteList* nl = chord->noteList();
-                                    
+
 
                                     for (iNote in = nl->begin(); in != nl->end(); ++in) {
                                           Note* note = in->second;
@@ -675,9 +676,9 @@ void Seq::collectEvents()
                               }
 
                         // Don't forget to save measure, because pop may change it,
-                        // returned m may differ from the original, new start measure 
+                        // returned m may differ from the original, new start measure
                         // of "repeat", 0 means nothing to repeat continue with next measure
-                        // functions push and pop are in repeat2.h/cpp files, by DK. 23.08.07 
+                        // functions push and pop are in repeat2.h/cpp files, by DK. 23.08.07
                         Measure* ms = m;
                         m = rs->pop(m);
                         if ( m != 0 )
@@ -691,7 +692,7 @@ void Seq::collectEvents()
                   ++staffIdx;
                   // delete repeat Stackelemente, added by DK. 23.08.07
                   if (rs)
-                        rs->delStackElement(rs);              
+                        rs->delStackElement(rs);
                   }
 
             }
