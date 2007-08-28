@@ -394,6 +394,7 @@ class Score : public QObject {
       bool savePs(const QString& name);
       bool savePng(const QString& name);
       bool saveSvg(const QString& name);
+      bool saveLilypond(const QString& name);
 
       ChordRest* getSelectedChordRest();
       int pos();
