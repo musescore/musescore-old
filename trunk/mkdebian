@@ -4,7 +4,7 @@
 #     this script tries to produce a fake debian package
 #
 
-VERSION="0.4"
+VERSION="0.7"
 
 echo "creating fake *.deb package"
 mkdir debian
@@ -42,7 +42,7 @@ echo "Architecture: i386" >> control
 echo "Essential: no" >> control
 echo "Installed-Size: 10000000" >> control
 echo "Maintainer: ws<ws@seh.de>" >> control
-echo "Depends: libqt4-core (>= 4.2), libqt4-gui (>= 4.2)" >> control
+echo "Depends: libqt4-core (>= 4.3), libqt4-gui (>= 4.3)" >> control
 echo "Description: music score editor" >> control
 echo "   music score editor" >> control
 

@@ -3,7 +3,7 @@
 #  Linux Music Score Editor
 #  $Id:$
 #
-#  Copyright (C) 2002-2006 by Werner Schweer and others
+#  Copyright (C) 2002-2007 by Werner Schweer and others
 #
 #  This program is free software; you can redistribute it and/or modify
 #  it under the terms of the GNU General Public License version 2.
@@ -21,11 +21,8 @@
 default:
 	if test ! -d build;                           \
          then                                       \
-            echo "+creating build directory";       \
             mkdir build;                            \
-            echo "+entering build directory";       \
             cd build;                               \
-            echo "+calling cmake" ;                 \
             cmake ../mscore;                        \
             make;                                   \
          else                                       \
@@ -35,18 +32,14 @@ default:
 release:
 	if test ! -d build;                           \
          then                                       \
-            echo "+creating build directory";       \
             mkdir build;                            \
-            echo "+entering build directory";       \
             cd build;                               \
-            echo "+calling cmake" ;                 \
-            cmake -DCMAKE_BUILD_TYPE=RELEASE ../mscore;                        \
+            cmake -DCMAKE_BUILD_TYPE=RELEASE ../mscore; \
             make -f Makefile;                       \
          else                                       \
             echo "build directory does already exist, please remove first";       \
             exit;                               \
-         fi; \
-         echo "release build is configured; now type make"
+         fi;
 
 debug:
 	if test ! -d build;                           \
@@ -85,10 +78,10 @@ clean:
 
 dist:
 	mkdir mscore.dist
-	cd mscore.dist; svn co https://mscore.svn.sourceforge.net/svnroot/mscore/trunk mscore-0.6.0
+	cd mscore.dist; svn co https://mscore.svn.sourceforge.net/svnroot/mscore/trunk mscore-0.7.0
 	cd mscore.dist; find . -name .svn -print0 | xargs -0 /bin/rm -rf
-	cd mscore.dist; tar cvfj mscore-0.6.0.tar.bz2 mscore-0.6.0
-	mv mscore.dist/mscore-0.6.0.tar.bz2 .
+	cd mscore.dist; tar cvfj mscore-0.7.0.tar.bz2 mscore-0.7.0
+	mv mscore.dist/mscore-0.7.0.tar.bz2 .
 
 install:
 	cd build; make install
@@ -110,7 +103,4 @@ winp:
 	cd win32build; cp -af ../mscore/demos packaging
 	wine C:\\\\Program\ Files\\NSIS\\makensisw \
       z:\\\\home\\ws\\mscore\\mscore\\trunk\\win32build\\packaging\\mscore.nsi
-
-
-
 
