@@ -22,6 +22,9 @@
 //  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //=============================================================================
 
+#ifndef __REPEAT2_H__
+#define __REPEAT2_H__
+
 #include "measure.h"
 
 
@@ -78,9 +81,6 @@ class RepeatStack {
       Measure* getStartMeasure () { return _startm; } 
       void setEndMeasure(Measure* m) { _endm = m; }
       Measure* getEndMeasure () { return _endm; }
-      RepeatStack* searchActSlot(Measure*,int);
-      RepeatStack* searchInActSlot(Measure*,int,int);
-      RepeatStack* searchSpecSlot(Measure*,int,int);
       RepeatStack* searchSlot(Measure*);   
       RepeatStack* setNewSlot(Measure*);         
       void setTickOffset(int t) { _tickOffs = t; }
@@ -95,4 +95,4 @@ extern int rtickOffSet;
 extern int rloopCounter;
 extern int raddTickLen;
 
-
+#endif
