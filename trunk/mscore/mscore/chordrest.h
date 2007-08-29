@@ -63,6 +63,9 @@ enum NoteAttributeIdx {
       DownPrallSym,
       UpMordentSym,
       DownMordentSym,
+      SegnoSym,
+      CodaSym,
+      VarcodaSym,
       NOTE_ATTRIBUTES
       };
 
