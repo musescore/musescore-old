@@ -35,6 +35,9 @@
 #include "clef.h"
 #include "keysig.h"
 #include "key.h"
+#include "page.h"
+#include "text.h"
+#include "slur.h"
 
 //---------------------------------------------------------
 //   ExportLy
@@ -46,11 +49,13 @@ class ExportLy {
       QTextStream os;
       int level;        // indent level
       int curTicks;
+      bool slur;
 
       void indent();
       int getLen(int ticks, int* dots);
       void writeLen(int);
       QString tpc2name(int tpc);
+      void checkSlur(int, int);
 
       void writeScore();
       void writeMeasure(Measure*, int);
@@ -65,6 +70,7 @@ class ExportLy {
             score  = s;
             level  = 0;
             curTicks = division;
+            slur   = false;
             }
       bool write(const QString& name);
       };
@@ -113,7 +119,7 @@ void ExportLy::writeClef(int clef)
             case CLEF_C4:
             case CLEF_TAB:
             case CLEF_PERC:
-                  os << "treble"; break;
+                  os << "treble"; break;        // TODO
                   break;
             }
       os << " ";
@@ -219,6 +225,102 @@ void ExportLy::writeChord(Chord* c)
       if (nl->size() > 1)
             os << ">";
       writeLen(c->tickLen());
+      foreach(NoteAttribute* a, *c->getAttributes()) {
+            switch(a->subtype()) {
+                  case UfermataSym:
+                        os << "\\fermata";
+                        break;
+                  case DfermataSym:
+                        break;
+                  case ThumbSym:
+                        os << "\\thumb";
+                        break;
+                  case SforzatoaccentSym:
+                        break;
+                  case EspressivoSym:
+                        os << "\\espressivo";
+                        break;
+                  case StaccatoSym:
+                        os << "\\staccato";
+                        break;
+                  case UstaccatissimoSym:
+                        os << "\\staccatissimo";
+                        break;
+                  case DstaccatissimoSym:
+                        break;
+                  case TenutoSym:
+                        os << "\\tenuto";
+                        break;
+                  case UportatoSym:
+                        os << "\\portato";
+                        break;
+                  case DportatoSym:
+                        break;
+                  case UmarcatoSym:
+                        os << "\\markato";
+                        break;
+                  case DmarcatoSym:
+                        break;
+                  case OuvertSym:
+                        break;
+                  case PlusstopSym:
+                        os << "\\stopped";
+                        break;
+                  case UpbowSym:
+                        os << "\\upbow";
+                        break;
+                  case DownbowSym:
+                        os << "\\downbow";
+                        break;
+                  case ReverseturnSym:
+                        os << "\\reverseturn";
+                        break;
+                  case TurnSym:
+                        os << "\\turn";
+                        break;
+                  case TrillSym:
+                        os << "\\trill";
+                        break;
+                  case PrallSym:
+                        os << "\\prall";
+                        break;
+                  case MordentSym:
+                        os << "\\mordent";
+                        break;
+                  case PrallPrallSym:
+                        os << "\\prallprall";
+                        break;
+                  case PrallMordentSym:
+                        os << "\\prallmordent";
+                        break;
+                  case UpPrallSym:
+                        os << "\\prallup";
+                        break;
+                  case DownPrallSym:
+                        os << "\\pralldown";
+                        break;
+                  case UpMordentSym:
+                        os << "\\upmordent";
+                        break;
+                  case DownMordentSym:
+                        os << "\\downmordent";
+                        break;
+                  case SegnoSym:
+                        os << "\\segno";
+                        break;
+                  case CodaSym:
+                        os << "\\coda";
+                        break;
+                  case VarcodaSym:
+                        os << "\\varcoda";
+                        break;
+                  default:
+                        printf("unsupported note attribute %d\n", a->subtype());
+                        break;
+                  }
+            }
+      checkSlur(c->tick(), c->staffIdx() * VOICES + c->voice());
+
       os << " ";
       }
 
@@ -310,8 +412,10 @@ void ExportLy::writeRest(int tick, int l, int type)
 
 void ExportLy::writeMeasure(Measure* m, int staffIdx)
       {
+      os << "% measure " << m->no()+1 << "\n";
       bool voiceActive[4];
 
+      indent();
       for (int voice = 0; voice < VOICES; ++voice) {
             voiceActive[voice] = false;
 
@@ -380,8 +484,10 @@ void ExportLy::writeMeasure(Measure* m, int staffIdx)
                               tick += l;
                               }
                               break;
-                        case BAR_LINE:
+                        case BAR_LINE:    // automatically set by lilypond
+                              break;
                         case BREATH:
+                              os << "\\breathe ";
                               break;
                         default:
                               printf("Export Lilypond: unsupported element <%s>\n", e->name());
@@ -433,7 +539,6 @@ void ExportLy::writeScore()
                   writeKeySig(staff->keymap()->key(0));
                   for(Measure* m = score->mainLayout()->first(); m; m = m->next()) {
                         os << "\n";
-                        indent();
                         writeMeasure(m, staffIdx);
                         }
                   os << "\n";
@@ -469,15 +574,111 @@ bool ExportLy::write(const QString& name)
             "%   created by MuseScore Version: " << VERSION << "\n"
             "%=============================================\n"
             "\n"
-            "\\version \"2.10.5\"\n";
+            "\\version \"2.10.5\"\n";     // target lilypond version
 
+      //---------------------------------------------------
+      //    Page format
+      //---------------------------------------------------
+
+      PageFormat* pf = score->pageFormat();
+      os << "#(set-default-paper-size ";
+      switch(pf->size) {
+            default:
+            case  0: os << "\"a4\""; break;
+            case  2: os << "\"letter\""; break;
+            case  8: os << "\"a3\""; break;
+            case  9: os << "\"a5\""; break;
+            case 10: os << "\"a6\""; break;
+            case 29: os << "\"11x17\""; break;
+            }
+      if (pf->landscape)
+            os << " 'landscape";
+      os << ")\n";
+
+      double lw = pf->width() - pf->evenLeftMargin - pf->evenRightMargin;
+      os << "\\paper {\n"
+            "  line-width    = " << lw * INCH << "\\mm\n"
+            "  left-margin   = " << pf->evenLeftMargin * INCH << "\\mm\n"
+            "  top-margin    = " << pf->evenTopMargin * INCH << "\\mm\n"
+            "  bottom-margin = " << pf->evenBottomMargin * INCH << "\\mm\n"
+            "  }\n\n";
+
+      //---------------------------------------------------
+      //    score
+      //---------------------------------------------------
+
+      os << "\\book {\n";
+      ++level;
+
+      indent();
+      os << "\\header {\n";
+      ++level;
+      const Measure* m = score->mainLayout()->first();
+      foreach(const Element* e, *m->pel()) {
+            if (e->type() != TEXT)
+                  continue;
+            QString s = ((Text*)e)->getText();
+            indent();
+            switch(e->subtype()) {
+                  case TEXT_TITLE:
+                        os << "title = ";
+                        break;
+                  case TEXT_SUBTITLE:
+                        os << "subtitle = ";
+                        break;
+                  case TEXT_COMPOSER:
+                        os << "composer = ";
+                        break;
+                  case TEXT_POET:
+                        os << "poet = ";
+                        break;
+                  default:
+                        printf("text-type %d not supported\n", e->subtype());
+                        os << "subtitle = ";
+                        break;
+                  }
+            os << "\"" << s << "\"\n";
+            }
+      indent();
+      os << "}\n";
+      --level;
+
+      indent();
       os << "\\score {\n";
       ++level;
+
       writeScore();
       --level;
-      os << "  }\n";
+      indent();
+      os << "}\n";
+      --level;
+      indent();
+      os << "}\n";
 
       f.close();
       return f.error() == QFile::NoError;
+      }
+
+//---------------------------------------------------------
+//   checkSlur
+//---------------------------------------------------------
+
+void ExportLy::checkSlur(int tick, int track)
+      {
+      for (const Measure* m = score->mainLayout()->first(); m; m = m->next()) {
+            foreach(Element* e, *m->el()) {
+                  if (e->type() != SLUR)
+                        continue;
+                  Slur* s = (Slur*)e;
+                  if ((s->tick1() == tick) && (s->track1() == track)) {
+                        os << "(";
+printf("startSlur %d-%d  %d-%d\n", tick, track, s->tick2(), s->track2());
+                        }
+                  if ((s->tick2() == tick) && (s->track2() == track)) {
+                        os << ")";
+printf("endSlur %d-%d  %d-%d\n", s->tick1(), s->track1(), tick, track);
+                        }
+                  }
+            }
       }
 

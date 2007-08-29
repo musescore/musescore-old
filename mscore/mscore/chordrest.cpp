@@ -65,6 +65,9 @@ AttributeInfo NoteAttribute::atrList[] = {
 	{ downmordentSym,    QString("downmordent"),     A_TOP_STAFF },
       { ufermataSym,       QString("upfermata"),       A_TOP_STAFF },
       { dfermataSym,       QString("downfermata"),     A_TOP_STAFF },
+      { segnoSym,          QString("segno"),           A_TOP_STAFF },
+      { codaSym,           QString("coda"),            A_TOP_STAFF },
+      { varcodaSym,        QString("varcoda"),         A_TOP_STAFF },
 	};
 
 //---------------------------------------------------------
