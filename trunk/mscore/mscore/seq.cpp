@@ -277,8 +277,17 @@ void Seq::start()
       {
       if (!audio)
             return;
-      if (state == PLAY || state == START_PLAY)
-            audio->stopTransport();
+      QAction* a = getAction("play");
+      if (!a->isChecked()) {
+            if (!pauseState)
+                  audio->stopTransport();
+            else {
+                  guiStop();
+                  QAction* a = getAction("pause");
+                  a->setChecked(false);
+                  pauseState = false;
+                  }
+            }
       else {
             if (events.empty() || cs->playlistDirty() || playlistChanged)
                   collectEvents();
@@ -286,6 +295,8 @@ void Seq::start()
             heartBeatTimer->start(100);
             if (!pauseState)
                   audio->startTransport();
+            else
+                  emit started();
             }
       }
 
@@ -298,7 +309,6 @@ void Seq::stop()
       {
       if (!audio)
             return;
-printf("stop Transport\n");
       audio->stopTransport();
       }
 
@@ -320,7 +330,7 @@ void Seq::pause()
             }
       else if (state == STOP && pauseState)
             audio->startTransport();
-      pauseState = state;
+      pauseState = pstate;
       }
 
 //---------------------------------------------------------
@@ -352,6 +362,43 @@ void MuseScore::seqStopped()
       }
 
 //---------------------------------------------------------
+//   guiStop
+//---------------------------------------------------------
+
+void Seq::guiStop()
+      {
+      heartBeatTimer->stop();
+      if (!pauseState) {
+            QAction* a = getAction("play");
+            a->setChecked(false);
+            }
+
+      // code from heart beat:
+      Note* note = 0;
+      for (ciEvent i = guiPos; i != playPos; ++i) {
+            if (i->second.type == ME_NOTEON) {
+                  i->second.note->setSelected(i->second.val2 != 0);
+                  cs->addRefresh(i->second.note->abbox());
+                  if (i->second.val2)
+                        note = i->second.note;
+                  }
+            }
+      if (note == 0) {
+            for (ciEvent i = playPos; i != events.end(); ++i) {
+                  if (i->second.type == ME_NOTEON) {
+                        note = i->second.note;
+                        break;
+                        }
+                  }
+            }
+      if (note) {
+            cs->select(note, 0, 0);
+            cs->setPlayPos(note->chord()->tick());
+            }
+      emit stopped();
+      }
+
+//---------------------------------------------------------
 //   seqSignal
 //    sequencer message to GUI
 //    execution environment: gui thread
@@ -370,34 +417,7 @@ void Seq::seqMessage(int fd)
       for (int i = 0; i < n; ++i) {
             switch(buffer[i]) {
                   case '0':         // STOP
-                        {
-                        heartBeatTimer->stop();
-                        emit stopped();
-
-                        // code from heart beat:
-                        Note* note = 0;
-                        for (ciEvent i = guiPos; i != playPos; ++i) {
-                              if (i->second.type == ME_NOTEON) {
-                                    i->second.note->setSelected(i->second.val2 != 0);
-                                    cs->addRefresh(i->second.note->abbox());
-                                    if (i->second.val2)
-                                          note = i->second.note;
-                                    }
-                              }
-                        if (note == 0) {
-                              for (ciEvent i = playPos; i != events.end(); ++i) {
-                                    if (i->second.type == ME_NOTEON) {
-                                          note = i->second.note;
-                                          break;
-                                          }
-                                    }
-                              }
-                        if (note) {
-                              cs->select(note, 0, 0);
-                              cs->setPlayPos(note->chord()->tick());
-                              }
-                        emit stopped();
-                        }
+                        guiStop();
                         break;
 
                   case '1':         // PLAY

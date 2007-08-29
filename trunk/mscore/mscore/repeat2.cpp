@@ -7,11 +7,11 @@
 //
 //  Copyright (C) 2007- Dieter Krause (dikrau@users.sourceforge.net)
 //
-// repeat2: contains function to handel single and multiple repeats/loops 
+// repeat2: contains function to handel single and multiple repeats/loops
 //          in a partiture
 //          Depands on repeat2.h --> class and function definition
 //                  and measure.h
-//  
+//
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.
@@ -38,28 +38,28 @@ int   rtickOffSet;
 
 
 
-RepeatStack::RepeatStack() 
+RepeatStack::RepeatStack()
       {
       firstStack = init();
       setNoOffElements(0);
       rtickOffSet = 0;
       }
 
-void RepeatStack::setNoOffElements(int n) 
+void RepeatStack::setNoOffElements(int n)
       {
       firstStack->_noOffElements = n;
       }
 
-int RepeatStack::getNoOffElements() 
+int RepeatStack::getNoOffElements()
       {
       return firstStack->_noOffElements;
       }
 
-RepeatStack* RepeatStack::init() 
+RepeatStack* RepeatStack::init()
       {
       RepeatStack* n = new RepeatStack(*this);
       if ( n <= 0 )
-            abort();      
+            abort();
       n->setPrev(0);
       n->setNext(0);
       n->setLoopCount(0);
@@ -73,7 +73,7 @@ RepeatStack* RepeatStack::init()
 //******************************************************
 // function push, put measure and other infos on stack
 //******************************************************
-int RepeatStack::push(Measure* m) 
+int RepeatStack::push(Measure* m)
       {
       RepeatStack* p = 0;
 
@@ -86,12 +86,12 @@ int RepeatStack::push(Measure* m)
       p = searchSlot(m);
       if (!p || (!getNoOffElements()&&!p->getStartMeasure())) {
             if (m->prev() == 0)
-                  type = CAPO;            
+                  type = CAPO;
             else if (m->startRepeat())
                   type = NORMAL;
             //Add more types here, may be segno or something else
-            if (type == 0)            
-                  return ret; 
+            if (type == 0)
+                  return ret;
 
             p = setNewSlot(m);
             p->setRepeatType(type);
@@ -100,7 +100,7 @@ int RepeatStack::push(Measure* m)
             type = p->getRepeatType();
 
 
-      int a = p->getActive();      
+      int a = p->getActive();
       switch (type) {
             case NORMAL:
             case CAPO:
@@ -111,10 +111,10 @@ int RepeatStack::push(Measure* m)
                         rloopCounter = p->getLoopCount();
                         }
                   if (a == FALSE) {
-                        if (rloopCounter < p->getLoopCount()) 
+                        if (rloopCounter < p->getLoopCount())
                               // increment LoopCount
                               rloopCounter++;
-                        }                      
+                        }
                         break;
                   }
             default:
@@ -143,7 +143,7 @@ RepeatStack* RepeatStack::setNewSlot(Measure* m)
             n->setPrev(0);
             rloopCounter = 1;
             setNoOffElements(1);
-            }                        
+            }
       n->setLoopCount(1);
       n->setStartMeasure(m);
       n->setEndMeasure(0);
@@ -155,7 +155,7 @@ RepeatStack* RepeatStack::setNewSlot(Measure* m)
 // function pop, get measure and other infos from stack
 //******************************************************
 
-Measure* RepeatStack::pop(Measure* m) 
+Measure* RepeatStack::pop(Measure* m)
       {
       Measure* ret = 0;
       RepeatStack* p;
@@ -171,16 +171,16 @@ Measure* RepeatStack::pop(Measure* m)
       p = searchSlot(0);
       if (!p)
             return 0;
-      type = p->getRepeatType();  
+      type = p->getRepeatType();
 
       switch (p->getActive()) {
-            case FALSE:            
+            case FALSE:
                   {
                   if (rloopCounter == p->getLoopCount()) {
                         rloopCounter = 1;
                         p->setActive(0x04);
                         }
-                        ret = 0;  
+                        ret = 0;
                         break;
                   }
             case TRUE:
@@ -223,7 +223,7 @@ RepeatStack* RepeatStack::searchSlot(Measure* m)
             }
       else {
             while (p != 0) {
-                  if (p->getStartMeasure() == m) { 
+                  if (p->getStartMeasure() == m) {
                         ret = p;
                         break;
                         }
@@ -237,20 +237,12 @@ RepeatStack* RepeatStack::searchSlot(Measure* m)
       return ret;
       }
 
-bool RepeatStack::delStackElement(RepeatStack* de) 
+bool RepeatStack::delStackElement(RepeatStack* de)
       {
       delete de;
       return TRUE;
       }
 
-RepeatStack::~RepeatStack() 
+RepeatStack::~RepeatStack()
       {
       }
-
-            
-
-
-      
-      
-
-
