@@ -852,14 +852,14 @@ void Measure::add(Element* el)
             case VOLTA:
                   switch(el->subtype()) {
                         case PRIMA_VOLTA:
-                              _ending = 0;
+                              _ending = 1; // value changed by DK. 28.08.07
                               break;
                         case SECONDA_VOLTA:
                         case SECONDA_VOLTA2:
-                              _ending = 1;
+                              _ending = 2; // value changed by DK. 28.08.07
                               break;
                         case TERZA_VOLTA:
-                              _ending = 2;
+                              _ending = 3; // value changed by DK. 28.08.07
                               break;
                         };
                   _sel.append(el);
@@ -2138,8 +2138,7 @@ void Measure::write(Xml& xml, int no, int staff) const
             if (_endRepeat)
                   xml.tag("endRepeat", _endRepeat);
             if (_ending)
-                  xml.tag("ending", _ending);
-            if (_irregular)
+                  xml.tag("ending", (_ending-1)); //changed by DK. 28.08.07
                   xml.tagE("irregular");
             if (_userStretch != 1.0)
                   xml.tag("stretch", _userStretch);
@@ -2190,7 +2189,7 @@ void Measure::write(Xml&xml) const
             (*ie)->write(xml);
       xml.tag("startRepeat", _startRepeat);
       xml.tag("endRepeat", _endRepeat);
-      xml.tag("ending", _ending);
+      xml.tag("ending", (_ending-1)); //changed by DK. 28.08.07
       xml.tagE("irregular");
       xml.tag("stretch", _userStretch);
 
@@ -2486,7 +2485,7 @@ void Measure::read(QDomElement e, int idx)
             else if (tag == "endRepeat")
                   _endRepeat = val.toInt();
             else if (tag == "ending")
-                  _ending = val.toInt();
+                  _ending = (val.toInt()+1); //changed by DK. 28.08.07
             else if (tag == "Image") {
                   // look ahead for image type
                   QString path;
@@ -2536,7 +2535,7 @@ void Measure::read(QDomElement e)
             else if (tag == "endRepeat")
                   _endRepeat = val.toInt();
             else if (tag == "ending")
-                  _ending = val.toInt();
+                  _ending = (val.toInt()+1); // changed by DK. 28.08.07
             else if (tag == "irregular")
                   _irregular = true;
             else if (tag == "stretch")
