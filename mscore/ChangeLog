@@ -1,3 +1,6 @@
+30.8.7 (lv)
+      - removed spurious <forward><duration>1</duration></forward>
+        from MusicXML export
 30.8.7 (dk)
       - replay of simple Volta prima and secunda implented, works with the simple implentation
         as exist in mscore at the time

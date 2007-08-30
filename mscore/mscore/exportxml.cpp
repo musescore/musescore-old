@@ -1802,7 +1802,8 @@ bool ExportMusicXml::write(const QString& name)
                                     attr.doAttr(xml, false);
                                     moveToTick(el->tick());
                                     }
-                              tick += el->tickLen();
+                              if (el->isChordRest())
+                                    tick += el->tickLen();
                               dh.handleElement(this, el, sstaff, true);
                               switch (el->type()) {
                                     case CLEF:
