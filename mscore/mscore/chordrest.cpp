@@ -57,14 +57,12 @@ AttributeInfo NoteAttribute::atrList[] = {
       { trillSym,          QString("trill"),           A_TOP_STAFF },
       { prallSym,          QString("prall"),           A_TOP_STAFF },
       { mordentSym,        QString("mordent"),         A_TOP_STAFF },
-      { prallprallSym,     QString("prall prall"),     A_TOP_STAFF },
-      { prallmordentSym,   QString("prall mordent"),   A_TOP_STAFF },
+      { prallprallSym,     QString("prallprall"),      A_TOP_STAFF },
+      { prallmordentSym,   QString("prallmordent"),    A_TOP_STAFF },
       { upprallSym,        QString("upprall"),         A_TOP_STAFF },
 	{ downprallSym,      QString("downprall"),       A_TOP_STAFF },
 	{ upmordentSym,      QString("upmordent"),       A_TOP_STAFF },
 	{ downmordentSym,    QString("downmordent"),     A_TOP_STAFF },
-      { ufermataSym,       QString("upfermata"),       A_TOP_STAFF },
-      { dfermataSym,       QString("downfermata"),     A_TOP_STAFF },
       { segnoSym,          QString("segno"),           A_TOP_STAFF },
       { codaSym,           QString("coda"),            A_TOP_STAFF },
       { varcodaSym,        QString("varcoda"),         A_TOP_STAFF },
@@ -77,16 +75,6 @@ AttributeInfo NoteAttribute::atrList[] = {
 NoteAttribute::NoteAttribute(Score* s)
    : Symbol(s)
       {
-      }
-
-//---------------------------------------------------------
-//   NoteAttribute
-//---------------------------------------------------------
-
-NoteAttribute::NoteAttribute(Score* s, int idx)
-   : Symbol(s)
-      {
-      setSubtype(idx);
       }
 
 //---------------------------------------------------------
@@ -151,6 +139,34 @@ NoteAttribute* ChordRest::hasAttribute(const NoteAttribute* a)
                   return *l;
             }
       return 0;
+      }
+
+//---------------------------------------------------------
+//   subtypeName
+//---------------------------------------------------------
+
+const QString NoteAttribute::subtypeName() const
+      {
+      return atrList[subtype()].name;
+      }
+
+//---------------------------------------------------------
+//   setSubtype
+//---------------------------------------------------------
+
+void NoteAttribute::setSubtype(const QString& s)
+      {
+      if (s[0].isDigit()) {         // for backward compatibility
+            setSubtype(s.toInt());
+            return;
+            }
+      for (int i = 0; i < NOTE_ATTRIBUTES; ++i) {
+            if (atrList[i].name == s) {
+                  setSubtype(i);
+                  return;
+                  }
+            }
+      printf("NoteAttribute <%s> unknown\n", qPrintable(s));
       }
 
 //---------------------------------------------------------

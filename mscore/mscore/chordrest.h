@@ -101,7 +101,6 @@ class NoteAttribute : public Symbol {
 
    public:
       NoteAttribute(Score*);
-      NoteAttribute(Score*, int);
       NoteAttribute &operator=(const NoteAttribute&);
 
       virtual NoteAttribute* clone() const { return new NoteAttribute(*this); }
@@ -114,6 +113,8 @@ class NoteAttribute : public Symbol {
       QString name() const { return atrList[subtype()].name; }
 
       static AttributeInfo atrList[];
+      virtual const QString subtypeName() const;
+      virtual void setSubtype(const QString& s);
       };
 
 typedef QList<NoteAttribute*>::iterator iAttribute;

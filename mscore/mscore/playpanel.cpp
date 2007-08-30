@@ -35,6 +35,7 @@ const int MAX_VOL = 10;
 PlayPanel::PlayPanel(QWidget* parent)
    : QWidget(parent, Qt::Dialog)
       {
+      cachedTickPosition = -1;
       setupUi(this);
       volumeSlider->setRange(MIN_VOL * 1000, MAX_VOL * 1000);
       tempoSlider->setValue(tempoSlider->maximum() + tempoSlider->minimum() - 100);
@@ -145,13 +146,16 @@ void PlayPanel::posChanged(int val)
 //   heartBeat
 //---------------------------------------------------------
 
-void PlayPanel::heartBeat(int tickpos)
+void PlayPanel::heartBeat(int relTickpos, int absTickpos)
       {
+      if (cachedTickPosition == absTickpos)
+            return;
+      cachedTickPosition = absTickpos;
       int bar, beat, tick;
-      cs->sigmap->tickValues(tickpos, &bar, &beat, &tick);
+      cs->sigmap->tickValues(relTickpos, &bar, &beat, &tick);
       char buffer[32];
       sprintf(buffer, "%03d.%02d", bar+1, beat+1);
       posLabel->setText(QString(buffer));
-      posSlider->setValue(tickpos);
+      posSlider->setValue(absTickpos);
       }
 

@@ -281,14 +281,24 @@ void MuseScore::showPalette(bool visible)
             //    Attributes
             //-----------------------------------
 
-            sp = new Palette((NOTE_ATTRIBUTES+3) / 4, 4);
+            static const char* atrSyms[] = {
+                  "ufermata", "dfermata", "thumb", "sforzato",
+                  "espressivo", "staccato", "ustaccatissimo", "dstaccatissimo",
+                  "tenuto", "uportato", "dportato", "umarcato", "dmarcato",
+                  "ouvert", "plusstop", "upbow", "downbow", "reverseturn",
+                  "turn", "trill", "prall", "mordent", "prallprall",
+                  "prallmordent", "upprall", "downprall", "upmordent",
+	            "downmordent"
+                  };
+
+            unsigned nn = sizeof(atrSyms)/sizeof(*atrSyms);
+            sp = new Palette((nn + 3) / 4, 4);
             sp->setGrid(42, 40);
 
-            for (int i = 0; i < NOTE_ATTRIBUTES; ++i) {
+            for (unsigned i = 0; i < nn; ++i) {
                   NoteAttribute* s = new NoteAttribute(gscore);
-                  s->setSubtype(i);
-                  sp->addObject(i, s, s->name());
-
+                  s->setSubtype(atrSyms[i]);
+                  sp->addObject(i, s, s->subtypeName());
                   }
             paletteBox->addPalette(tr("Attributes"), sp);
 
@@ -310,24 +320,17 @@ void MuseScore::showPalette(bool visible)
             //    Dynamics
             //-----------------------------------
 
-            sp = new Palette(18, 2);
-            sp->setGrid(84, 35);
+            sp = new Palette(2, 4, .9);
+            sp->setGrid(42, 42);
 
-            for (int i = 0; i < 27; ++i) {
-                  Dynamic* dynamic = new Dynamic(gscore, i + 1);
+            static const char* dynS[] = {
+                  "ppp", "pp", "p", "mp", "mf", "f", "ff", "fff"
+                  };
+            for (unsigned i = 0; i < sizeof(dynS)/sizeof(*dynS); ++i) {
+                  Dynamic* dynamic = new Dynamic(gscore);
+                  dynamic->setSubtype(dynS[i]);
                   sp->addObject(i, dynamic, dynamic->subtypeName());
                   }
-            Dynamic* d = new Dynamic(gscore, "crescendo");
-            sp->addObject(27, d,  "crescendo");
-
-            sp->addObject(28, new Dynamic(gscore, "diminuendo"), "diminuendo");
-            sp->addObject(29, new Dynamic(gscore, "dolce"),      "dolce");
-            sp->addObject(30, new Dynamic(gscore, "espressivo"), "espessivo");
-            sp->addObject(31, new Dynamic(gscore, "legato"),   "legato");
-            sp->addObject(32, new Dynamic(gscore, "leggiero"), "leggiero");
-            sp->addObject(33, new Dynamic(gscore, "marcato"),  "marcato");
-            sp->addObject(34, new Dynamic(gscore, "mero"),     "mero");
-            sp->addObject(35, new Dynamic(gscore, "molto"),    "molto");
             paletteBox->addPalette(tr("Dynamics"), sp);
 
             //-----------------------------------
@@ -398,6 +401,15 @@ void MuseScore::showPalette(bool visible)
 
             RepeatMeasure* rm = new RepeatMeasure(gscore);
             sp->addObject(0, rm, tr("repeat measure"));
+            NoteAttribute* na = new NoteAttribute(gscore);
+            na->setSubtype("segno");
+            sp->addObject(1, na, na->name());
+            na = new NoteAttribute(gscore);
+            na->setSubtype("coda");
+            sp->addObject(2, na, na->name());
+            na = new NoteAttribute(gscore);
+            na->setSubtype("varcoda");
+            sp->addObject(3, na, na->name());
 
             paletteBox->addPalette(tr("Misc"), sp);
 
@@ -838,11 +850,19 @@ void MuseScore::noteAttributesMenu()
             ((QScrollArea*)noteAttributesPalette)->setWidget(sp);
             sp->setGrid(60, 60);
 
-            for (int i = 0; i < NOTE_ATTRIBUTES; ++i) {
+            static const char* syms[] = {
+                  "ufermata", "dfermata", "thumb", "sforzato",
+                  "espressivo", "staccato", "ustaccatissimo", "dstaccatissimo",
+                  "tenuto", "uportato", "dportato", "umarcato", "dmarcato",
+                  "ouvert", "plusstop", "upbow", "downbow", "reverseturn",
+                  "turn", "trill", "prall", "mordent", "prallprall",
+                  "prallmordent", "upprall", "downprall", "upmordent",
+	            "downmordent"
+                  };
+            for (unsigned i = 0; i < sizeof(syms)/sizeof(*syms); ++i) {
                   NoteAttribute* s = new NoteAttribute(gscore);
-                  s->setSubtype(i);
-                  sp->addObject(i, s, s->name());
-
+                  s->setSubtype(syms[i]);
+                  sp->addObject(i, s, s->subtypeName());
                   }
             }
       noteAttributesPalette->show();

@@ -1003,7 +1003,9 @@ void Score::addAttribute(int attr)
       foreach(Element* el, *sel->elements()) {
             if (el->type() != NOTE && el->type() != REST)
                   continue;
-            addAttribute(el, new NoteAttribute(this, attr));
+            NoteAttribute* na = new NoteAttribute(this);
+            na->setSubtype(attr);
+            addAttribute(el, na);
             }
       }
 
