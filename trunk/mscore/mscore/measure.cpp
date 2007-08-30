@@ -2138,7 +2138,7 @@ void Measure::write(Xml& xml, int no, int staff) const
             if (_endRepeat)
                   xml.tag("endRepeat", _endRepeat);
             if (_ending)
-                  xml.tag("ending", (_ending-1)); //changed by DK. 28.08.07
+                  xml.tag("ending", _ending-1); //changed by DK. 28.08.07
                   xml.tagE("irregular");
             if (_userStretch != 1.0)
                   xml.tag("stretch", _userStretch);
@@ -2189,7 +2189,7 @@ void Measure::write(Xml&xml) const
             (*ie)->write(xml);
       xml.tag("startRepeat", _startRepeat);
       xml.tag("endRepeat", _endRepeat);
-      xml.tag("ending", (_ending-1)); //changed by DK. 28.08.07
+      xml.tag("ending", _ending-1); //changed by DK. 28.08.07
       xml.tagE("irregular");
       xml.tag("stretch", _userStretch);
 
@@ -2485,7 +2485,7 @@ void Measure::read(QDomElement e, int idx)
             else if (tag == "endRepeat")
                   _endRepeat = val.toInt();
             else if (tag == "ending")
-                  _ending = (val.toInt()+1); //changed by DK. 28.08.07
+                  _ending = val.toInt()+1; //changed by DK. 28.08.07
             else if (tag == "Image") {
                   // look ahead for image type
                   QString path;
@@ -2535,7 +2535,7 @@ void Measure::read(QDomElement e)
             else if (tag == "endRepeat")
                   _endRepeat = val.toInt();
             else if (tag == "ending")
-                  _ending = (val.toInt()+1); // changed by DK. 28.08.07
+                  _ending = val.toInt()+1; // changed by DK. 28.08.07
             else if (tag == "irregular")
                   _irregular = true;
             else if (tag == "stretch")

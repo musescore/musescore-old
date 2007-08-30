@@ -35,7 +35,8 @@ enum
       SEGNO = 2,
       CODA = 3,
       CAPO = 4,
-      LOOP = 5      
+      LOOP = 5,
+      VOLTA1 = 6      
 };
 
 
@@ -49,7 +50,7 @@ class RepeatStack {
                           // inactive means the Element was called by pop(),
                           // or elements with the same measure but differend types
       int _loopCount;     
-      int _repeatType;    // type of repeat is, "unknown", "normal", "segno", "coda", "capo" 
+      int _repeatType;    // type of repeat is, "unknown", "normal", "segno", "coda", "capo", "volta" 
       Measure* _startm;   // Measure to start repeating with
       Measure* _endm;     // Measure to repeat to
       int _ticks2Add;     // added ticks while this measure is reached
@@ -81,13 +82,20 @@ class RepeatStack {
       Measure* getStartMeasure () { return _startm; } 
       void setEndMeasure(Measure* m) { _endm = m; }
       Measure* getEndMeasure () { return _endm; }
-      RepeatStack* searchSlot(Measure*);   
+
       RepeatStack* setNewSlot(Measure*);         
       void setTickOffset(int t) { _tickOffs = t; }
       int getTickOffset() { return _tickOffs; }
       void setTicks2Add(int t) { _ticks2Add = t; }
       int getTicks2Add() { return _ticks2Add; }
-
+      RepeatStack* getLastStartMeasure(Measure*);
+      RepeatStack* getLastEndMeasure(Measure*);
+      RepeatStack* getStartMeasure(Measure*);
+      RepeatStack* getLastSlot();   
+      RepeatStack* getLastActiveSlot();   
+      RepeatStack* getLastInactiveSlot();   
+      RepeatStack* getLastSpecialSlot();   
+      RepeatStack* getLastSlotByType(int);   
 };
 
 extern RepeatStack* firstStack;
