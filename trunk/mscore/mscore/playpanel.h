@@ -31,6 +31,7 @@ class Score;
 
 class PlayPanel : public QWidget, private Ui::PlayPanelBase {
       Q_OBJECT
+      int cachedTickPosition;
 
       Score* cs;
       virtual void closeEvent(QCloseEvent*);
@@ -47,7 +48,7 @@ class PlayPanel : public QWidget, private Ui::PlayPanelBase {
 
    public:
       PlayPanel(QWidget* parent = 0);
-      void heartBeat(int pos);
+      void heartBeat(int rpos, int apos);
 
       void setTempo(double);
       void setRelTempo(int);

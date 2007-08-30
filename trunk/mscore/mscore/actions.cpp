@@ -1253,11 +1253,11 @@ Shortcut MuseScore::sc[] = {
          &playIcon
          ),
       Shortcut(
-         STATE_NORMAL | STATE_PLAY,
+         STATE_PLAY,
          "pause",
          QT_TR_NOOP("toggle break"),
          Qt::Key_Space,
-         Qt::WindowShortcut,
+         Qt::ApplicationShortcut,
          QT_TR_NOOP("Break"),
          QT_TR_NOOP("toggle break"),
          &pauseIcon
@@ -1267,7 +1267,7 @@ Shortcut MuseScore::sc[] = {
          "play-prev-chord",
          QT_TR_NOOP("previous chord"),
          Qt::Key_Left,
-         Qt::WindowShortcut,
+         Qt::ApplicationShortcut,
          QT_TR_NOOP("left chord"),
          QT_TR_NOOP("left chord")
          ),
@@ -1276,7 +1276,7 @@ Shortcut MuseScore::sc[] = {
          "play-prev-measure",
          QT_TR_NOOP("previous measure"),
          Qt::CTRL+Qt::Key_Left,
-         Qt::WindowShortcut,
+         Qt::ApplicationShortcut,
          QT_TR_NOOP("previous measure"),
          QT_TR_NOOP("prev measure")
          ),
@@ -1285,7 +1285,7 @@ Shortcut MuseScore::sc[] = {
          "play-next-chord",
          QT_TR_NOOP("next chord"),
          Qt::Key_Right,
-         Qt::WindowShortcut,
+         Qt::ApplicationShortcut,
          QT_TR_NOOP("next chord"),
          QT_TR_NOOP("next chord")
          ),
@@ -1294,7 +1294,7 @@ Shortcut MuseScore::sc[] = {
          "play-next-measure",
          QT_TR_NOOP("next measure"),
          Qt::CTRL+Qt::Key_Right,
-         Qt::WindowShortcut,
+         Qt::ApplicationShortcut,
          QT_TR_NOOP("next measure"),
          QT_TR_NOOP("next measure")
          ),
@@ -1303,7 +1303,7 @@ Shortcut MuseScore::sc[] = {
          "seek-begin",
          QT_TR_NOOP("seek to begin"),
          Qt::Key_Home,
-         Qt::WindowShortcut,
+         Qt::ApplicationShortcut,
          QT_TR_NOOP(""),
          QT_TR_NOOP("")
          ),

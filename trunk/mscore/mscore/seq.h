@@ -48,7 +48,7 @@ struct SeqMsg {
 //---------------------------------------------------------
 
 struct Event {
-      int type;         // not used yet
+      int type;
       int channel;
       int val1;         // pitch
       int val2;         // velocity
