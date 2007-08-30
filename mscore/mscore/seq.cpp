@@ -609,6 +609,8 @@ void Seq::collectEvents()
 
       int staffIdx = 0;
       int gateTime = 80;  // 100 - legato (100%)
+      int jump = 0;
+
 
       foreach(Part* part, *cs->parts()) {
             int channel = part->midiChannel();
@@ -642,7 +644,19 @@ void Seq::collectEvents()
 
                         // push each measure for checking of any of repeat or jumps,
                         // added by DK.23.08.07
-                        rs->push(m);
+                        jump = rs->push(m);
+
+                        if (jump != 0) { // if set, jump "n"-measure for-/backward
+                              if (jump < 0) {
+                                    for (; jump < 0; jump++)
+                                          m = m->prev();
+                                    }
+                              else {
+                                    for (; jump > 0; jump--)                              
+                                          m = m->next();
+                                    }
+                              continue;
+                              }
 
                         for (int voice = 0; voice < VOICES; ++voice) {
                               for (Segment* seg = m->first(); seg; seg = seg->next()) {
@@ -689,7 +703,6 @@ void Seq::collectEvents()
                                           }
                                     }
                               }
-
                         // Don't forget to save measure, because pop may change it,
                         // returned m may differ from the original, new start measure
                         // of "repeat", 0 means nothing to repeat continue with next measure
