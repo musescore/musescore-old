@@ -4,7 +4,7 @@
   require("header.html");
   ?>
 <h4><a href="idx.php">MuseScore</a>
-   -- <a href="manual.php">Reference</a>
+   -- <a href="manual.php">Referenz</a>
    -- Create new Score</h4>
 
 <h5>Create new Score from Scratch</h5>

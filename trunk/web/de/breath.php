@@ -4,14 +4,14 @@
   require("header.html");
   ?>
 <h4><a href="idx.php">MuseScore</a>
-   -- <a href="manual.php">Reference</a>
-   -- Breath</h4>
+   -- <a href="manual.php">Referenz</a>
+   -- Atemzeichen</h4>
 
 <table>
 <tr><td>
-      To place a breath symbol drag it from the breath palette to
-      a note in the score. The breath symbol will be placed <i>before</i>
-      the note.
+      Um ein Atemzeichen zu setzen wird es von der Atemzeichenpalette auf eine
+      Note der Partitur gezogen. Das Atemzeichen wird dann <i>vor</i> die Note
+      gesetzt.
   </td>
   <td>
      <img src="../pic/breathpalette.png">
@@ -19,7 +19,7 @@
   </td>
   </table>
 
-Breath symbol in score: <img src="../pic/breath.png" align="center">
+Atemzeichen in Partitur: <img src="../pic/breath.png" align="center">
 
 <br>
 <?php require("trailer.html");  ?>
