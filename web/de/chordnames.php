@@ -4,22 +4,24 @@
   require("header.html");
   ?>
 <h4><a href="idx.php">MuseScore</a>
-   -- <a href="manual.php">Reference</a>
-   -- Chord Names</h4>
+   -- <a href="manual.php">Referenz</a>
+   -- Akkordnamen</h4>
 
-  Chord names can be entered by first selecting a note and then
-  pressing <code>&lt;<b>Ctrl+K</b>&gt;</code>. This creates a chord name text object
-  for the selected chord.
-
+  Akkordnamen können gesetzt werden, indem eine Note des Akkordes und dann
+  <code>&lt;<b>Ctrl+K</b>&gt;</code> gedrückt wird.
+  Dies erzeugt einen Akkordnamen und schaltet in den
+  <a href="textedit.php"><i>Editmodus</i></a>.
+  <br>
+  <br>
+  Zusätzlich stehen folgenden Kommandos zur Verfügung:
   <ul>
-    <li>Type <code>&lt;<b>space</b>&gt;</code> to move to the next chord.</li>
-    <li><code>&lt;<b>Shift+Space</b>&gt;</code> moves to the previous chord.</li>
-    <li><code>&lt;<b>Ctrl+Space</b>&gt;</code> enters a <code>&lt;<b>space</b>&gt;</code> into
-        the chord name text.
-        </li>
+    <li><code>&lt;<b>Leertaste</b>&gt;</code> positioniert auf den nächsten Akkord.</li>
+    <li><code>&lt;<b>Groß+Leertaste</b>&gt;</code> positioniert auf den vorherigen Akkord.</li>
+    <li><code>&lt;<b>Strg+Leertaste</b>&gt;</code> gibt ein <code>&lt;<b>Leerzeichen</b>&gt;</code>
+      ein </li>
     </ul>
 
-  Chord names can be <a href="textedit.php">edited</a> as normal text.
+  Akkordnamen können wie normaler Text <a href="textedit.php">editiert</a> werden.
 
 <?php require("trailer.html");  ?>
 

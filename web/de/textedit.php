@@ -4,34 +4,33 @@
   require("header.html");
   ?>
 <h4><a href="idx.php">MuseScore</a>
-   -- <a href="manual.php">Reference</a>
+   -- <a href="manual.php">Referenz</a>
    -- Text Editing</h4>
 
-  Double click on text to enter <i>edit mode</i>:
+  Ein Doppelclick auf einen Text startet den <i>edit mode</i>:
   <img src="../pic/textedit.png" align="center"><br>
   <br>
-  In text edit mode the following commands are available:
+  Im <i>edit mode</i> stehen folgende Kommandos zur Verfügung:
 
   <ul>
-    <li><code>&lt;<b>Ctrl+B</b>&gt;</code> toggles bold face</li>
-    <li><code>&lt;<b>Ctrl+I</b>&gt;</code> toggles italic</li>
-    <li><code>&lt;<b>Ctrl+U</b>&gt;</code> toggles underline</li>
-    <li><code>&lt;<b>Up</b>&gt;</code> start superscript or end subscript if in
-        subscript mode</li>
-    <li><code>&lt;<b>Down</b>&gt;</code> start subscript or end superscript if in
-       superscript mode</li>
-    <li>move cursor: <code>&lt;<b>Home</b>&gt; &lt;<b>End</b>&gt; &lt;<b>Left</b>&gt;
-       &lt;<b>Right</b>&gt;</code>
-    <li><code>&lt;<b>Backspace</b>&gt;</code> remove character left from cursor</li>
-    <li><code>&lt;<b>Delete</b>&gt;</code> remove character right from cursor</li>
-    <li><code>&lt;<b>Return</b>&gt;</code> start new line</li>
-    <li><code>&lt;<b>F2</b>&gt;</code> Show text palette. The text palette
-        can be used to enter special characters and symbols.</li>
+    <li><code>&lt;<b>Ctrl+B</b>&gt;</code> Fettschrift ein/aus</li>
+    <li><code>&lt;<b>Ctrl+I</b>&gt;</code> Kursivschrift ein/aus</li>
+    <li><code>&lt;<b>Ctrl+U</b>&gt;</code> Unterstreichen ein/aus</li>
+    <li><code>&lt;<b>Up</b>&gt;</code>Hochstellen</li>
+    <li><code>&lt;<b>Down</b>&gt;</code>Tiefstellen</li>
+    <li>Cursor bewegen: <code>&lt;<b>Pos1</b>&gt; &lt;<b>Ende</b>&gt; &lt;<b>Links</b>&gt;
+       &lt;<b>Rechts</b>&gt;</code>
+    <li><code>&lt;<b>Zurück</b>&gt;</code> löscht Zeichen links vom Cursor</li>
+    <li><code>&lt;<b>Delete</b>&gt;</code> löscht Zeichen rechts vom Cursor</li>
+    <li><code>&lt;<b>Return</b>&gt;</code> neue Zeile beginnen</li>
+    <li><code>&lt;<b>F2</b>&gt;</code> Zeigt die Textpalette. Die Textpalette kann
+        zur Eingabe von Zeichen und Symbolen verwendet werden, die nicht auf
+        der Tastatur verfügbar sind.</li>
     </ul>
 
       See also:
-            <a href="chordnames.php">Chord Names</a>,
-            <a href="lyrics.php">Lyrics</a>
+            <a href="chordnames.php">Akkordnamen</a>,
+            <a href="lyrics.php">Liedtext</a>
 
 <?php require("trailer.html");  ?>
 

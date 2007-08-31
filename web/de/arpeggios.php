@@ -4,13 +4,13 @@
   require("header.html");
   ?>
 <h4><a href="idx.php">MuseScore</a>
-   -- <a href="manual.php">Reference</a>
+   -- <a href="manual.php">Referenz</a>
    -- Arpeggios</h4>
 
 <table>
 <tr><td>
-      Arpeggios are set by dragging an arpeggio symbol from the arpeggio palette
-      to a note of a chord.
+      Arpeggios werden durch Ziehen eines Arpeggiosymbols von
+      der Arpeggiotabelle auf einen Notenkopf eines Akkords gesetzt.
   </td>
   <td>
      <img src="../pic/arpeggiopalette.png">

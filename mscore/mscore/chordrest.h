@@ -147,6 +147,7 @@ class ChordRest : public Element {
       bool isSimple(Xml&) const;
 
       Segment* segment() const      { return (Segment*)parent(); }
+      Measure* measure() const      { return (Measure*)(parent()->parent()); }
 
       void setBeamMode(BeamMode m);
       BeamMode beamMode() const     { return _beamMode; }
@@ -154,7 +155,6 @@ class ChordRest : public Element {
       Beam* beam() const            { return _beam; }
       void setTuplet(Tuplet* t)     { _tuplet = t; }
       Tuplet* tuplet() const        { return _tuplet; }
-      Measure* measure() const      { return (Measure*)(parent()->parent()); }
       int beams() const;
       virtual int move()      const = 0;
       virtual qreal upPos()   const = 0;

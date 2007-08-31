@@ -4,7 +4,7 @@
   require("header.html");
   ?>
 <h4><a href="idx.php">MuseScore</a>
-   -- <a href="manual.php">Reference</a>
+   -- <a href="manual.php">Referenz</a>
    -- Tuplets</h4>
 
 To create a triplet first create a note with a duration of the whole

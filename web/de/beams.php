@@ -4,15 +4,15 @@
   require("header.html");
   ?>
 <h4><a href="idx.php">MuseScore</a>
-   -- <a href="manual.php">Reference</a>
-   -- Beams</h4>
+   -- <a href="manual.php">Referenz</a>
+   -- Balken</h4>
 
 <table>
 <tr><td>
-      Beams are set automatically but the automatic setting can be
-      manually overridden. For this first select a note were you
-      want to change the beam behaviour and press the appropriate
-      button in the beam pad.
+      Balken werden automatisch gesetzt. Diese Automatik kann mit
+      manuell gesetzten Hinweisen gesteuert werden. Dazu wird die
+      Note selektiert deren Balkenverhalten geändert werden soll
+      und anschließend ein Button im Balken-Pad gedrückt.
   </td>
   <td>
      <img src="../pic/beampad.png">
@@ -23,19 +23,19 @@
 <table cellpadding="0" cellspacing="0">
   <tr><td><img src="../pic/beambutton1.png"></td>
     <td>&nbsp;&nbsp;</td>
-    <td>Start a beam at the selected note.</td>
+    <td>Beginnt einen Balken bei der selektierten Note.</td>
     </tr>
   <tr><td><img src="../pic/beambutton2.png"></td>
     <td>&nbsp;&nbsp;</td>
-    <td>Do not end a beam a the selected note.</td>
+    <td>Ein Balken wird an dieser Note nicht beendet.</td>
     </tr>
   <tr><td><img src="../pic/beambutton3.png"></td>
     <td>&nbsp;&nbsp;</td>
-    <td>Do not beam this note.</td>
+    <td>Diese Note soll nicht verbalkt werden.</td>
     </tr>
   <tr><td><img src="../pic/beambutton4.png"></td>
     <td>&nbsp;&nbsp;</td>
-    <td>Start a second level beam at the selected note.</td>
+    <td>Beginnt eine neue Balkenebene an dieser Note.</td>
     </tr>
 
   </table>
