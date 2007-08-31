@@ -350,6 +350,7 @@ bool MuseScore::saveAs()
          );
       if (fn.isEmpty())
             return false;
+
       if (selectedFilter == fl[0]) {
             // save as mscore *.msc file
             if (!fn.endsWith(".msc"))

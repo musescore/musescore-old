@@ -76,6 +76,8 @@ int appDpiY = 75;
 double DPI, DPMM;
 
 QMap<QString, Shortcut*> shortcuts;
+static bool converterMode = false;
+static const char* outFileName;
 
 //---------------------------------------------------------
 // cmdInsertMeasure
@@ -983,12 +985,13 @@ static void usage(const char* prog, const char*)
       {
       printVersion(prog);
       fprintf(stderr, "usage: %s flags scorefile\n   Flags:\n", prog);
-      fprintf(stderr, "   -v        print version\n");
-      fprintf(stderr, "   -d        debug mode\n");
-      fprintf(stderr, "   -s        no internal synthesizer\n");
-      fprintf(stderr, "   -m        no midi\n");
-      fprintf(stderr, "   -L        layout debug\n");
-      fprintf(stderr, "   -i        dump midi input\n");
+      fprintf(stderr, "   -v        print version\n"
+        "   -d        debug mode\n"
+        "   -s        no internal synthesizer\n"
+        "   -m        no midi\n"
+        "   -L        layout debug\n"
+        "   -i        dump midi input\n"
+        "   -o file   export to 'file'; format depends on file extension\n");
       }
 
 //---------------------------------------------------------
@@ -1432,7 +1435,7 @@ int main(int argc, char* argv[])
       _spatium = 20.0 / 72.0 * DPI / 4.0;
 
       int c;
-      while ((c = getopt(argc, argv, "vdLsmi")) != EOF) {
+      while ((c = getopt(argc, argv, "vdLsmio:")) != EOF) {
             switch (c) {
                   case 'v':
                         printVersion(argv[0]);
@@ -1451,6 +1454,10 @@ int main(int argc, char* argv[])
                         break;
                   case 'i':
                         dumpMidi = true;
+                        break;
+                  case 'o':
+                        converterMode = true;
+                        outFileName = optarg;
                         break;
                   default:
                         usage(argv[0], "bad argument");
@@ -1685,8 +1692,38 @@ int main(int argc, char* argv[])
             }
       mscore->getCanvas()->setFocus(Qt::OtherFocusReason);
       qApp->setStyleSheet(appStyleSheet);
-      mscore->show();
 
+      if (converterMode) {
+            QString fn(outFileName);
+            Score* cs = mscore->currentScore();
+
+            bool rv;
+            if (fn.endsWith(".msc")) {
+                  QFileInfo fi(fn);
+                  rv = mscore->saveFile(fi);
+                  }
+            else if (fn.endsWith(".xml"))
+                  rv = cs->saveXml(fn);
+            else if (fn.endsWith(".mid"))
+                  rv = cs->saveMidi(fn);
+            else if (fn.endsWith(".pdf"))
+                  rv = cs->savePdf(fn);
+            else if (fn.endsWith(".ps"))
+                  rv = cs->savePs(fn);
+            else if (fn.endsWith(".png"))
+                  rv = cs->savePng(fn);
+            else if (fn.endsWith(".svg"))
+                  rv = cs->saveSvg(fn);
+            else if (fn.endsWith(".ly"))
+                  rv = cs->saveLilypond(fn);
+            else {
+                  fprintf(stderr, "dont know how to convert to %s\n", outFileName);
+                  rv = false;
+                  }
+            exit(rv ? 0 : -1);
+            }
+
+      mscore->show();
       if (sc)
             sc->finish(mscore);
       return qApp->exec();
