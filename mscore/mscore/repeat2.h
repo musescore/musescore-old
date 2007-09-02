@@ -36,7 +36,9 @@ enum
       CODA = 3,
       CAPO = 4,
       LOOP = 5,
-      VOLTA1 = 6      
+      P_VOLTA = 6,
+      S_VOLTA = 7,      
+      T_VOLTA = 8                 
 };
 
 

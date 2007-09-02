@@ -257,6 +257,9 @@ void Segment::remove(Element* el)
       if (el->type() == BAR_LINE) {
             if (el->subtype() == START_REPEAT)
                   measure()->setStartRepeat(false);
+            // reset endRepeat , bug fix for remove/change End Barline. by DK. 02.09.07
+      if (el->subtype() == END_REPEAT)
+                  measure()->setEndRepeat(0);
             }
       _elist[staffIdx * VOICES + el->voice()] = 0;
 
