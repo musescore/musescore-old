@@ -27,7 +27,7 @@
 //=============================================================================
 //
 // TODO :
-// Add Volta, da capo, dal segno, fine, coda
+// Add Volta more comfortable, da capo, dal segno, fine, coda
 //
 #include "repeat2.h"
 #include "measure.h"
@@ -90,10 +90,14 @@ int RepeatStack::push(Measure* m)
             else if (m->startRepeat())
                   type = NORMAL;
             else if (m->ending() == 1)
-                  type = VOLTA1;
+                  type = P_VOLTA;
+            else if (m->ending() == 2)
+                  type = S_VOLTA;
+            else if (m->ending() == 3)
+                  type = T_VOLTA;
             //Add more types here, may be segno or something else
-            if (type == 0)            
-                  return ret; 
+//            if (type == 0)            
+//                  return ret; 
 
             p = setNewSlot(m);
             p->setRepeatType(type);
@@ -119,7 +123,7 @@ int RepeatStack::push(Measure* m)
                         }                      
                         break;
                   }
-            case VOLTA1:
+            case P_VOLTA:
                   {
                         if (a == true) { // first time
                               p->setTicks2Add(m->tickLen());
@@ -131,9 +135,47 @@ int RepeatStack::push(Measure* m)
                                     p->setEndMeasure(m);
                                     p->setTickOffset(p->getTicks2Add()+
                                                       m->tickLen());
-                                    rtickOffSet = rtickOffSet - p->getTicks2Add();
                                     p->setLoopCount(m->endRepeat());
                                     }
+                              rtickOffSet = rtickOffSet - p->getTicks2Add();
+                              ret = true;                                    
+                              }
+                        break;
+                  }
+            case S_VOLTA:
+                  {
+                        if (a == true) { // first time
+                              p->setTicks2Add(m->tickLen());
+                              p->setActive(false);
+                              }
+                        else { // second time
+                              p->setActive(0x04);
+                              if (m->endRepeat()) {
+                                    p->setEndMeasure(m);
+                                    p->setTickOffset(p->getTicks2Add()+
+                                                      m->tickLen());
+                                    p->setLoopCount(m->endRepeat());
+                                    }
+                              rtickOffSet = rtickOffSet - p->getTicks2Add();
+                              ret = true;                                    
+                              }
+                        break;
+                  }
+            case T_VOLTA:
+                  {
+                        if (a == true) { // first time
+                              p->setTicks2Add(m->tickLen());
+                              p->setActive(false);
+                              }
+                        else { // second time
+                              p->setActive(0x04);
+                              if (m->endRepeat()) {
+                                    p->setEndMeasure(m);
+                                    p->setTickOffset(p->getTicks2Add()+
+                                                      m->tickLen());
+                                    p->setLoopCount(m->endRepeat());
+                                    }
+                              rtickOffSet = rtickOffSet - p->getTicks2Add();
                               ret = true;                                    
                               }
                         break;
@@ -191,7 +233,6 @@ Measure* RepeatStack::pop(Measure* m)
             type = NORMAL;
       else
             return 0;
-      //Add more types here, may be segno or something else
       
       ret = m;
       p = getLastStartMeasure(m);
@@ -242,7 +283,7 @@ Measure* RepeatStack::pop(Measure* m)
                         lc = 1;
                         break;
                         }
-                  case VOLTA1:
+/*                  case VOLTA1:
                         {
                         if (p->getActive() == true) {
                               p->setActive(false);
@@ -264,7 +305,7 @@ Measure* RepeatStack::pop(Measure* m)
                               lc = 1;
                               }      
                         break;
-                        }
+                        }*/
                   default :
                         {
                         lc = 1;
@@ -309,7 +350,7 @@ RepeatStack* RepeatStack::getLastActiveSlot()
       for (p = firstStack; p->getNext() != 0; p = p->getNext())
             ;
       while (p) {
-            if (p->getActive() == true)
+            if (p->getActive() == true && p->getRepeatType() != 0)
                   break;
             p = p->getPrev();
             }
@@ -323,7 +364,7 @@ RepeatStack* RepeatStack::getLastInactiveSlot()
       for (p = firstStack; p->getNext() != 0; p = p->getNext())
             ;
       while (p) {
-            if (p->getActive() == false)
+            if (p->getActive() == false && p->getRepeatType() != 0)
                   break;
             p = p->getPrev();
             }
@@ -337,7 +378,7 @@ RepeatStack* RepeatStack::getLastSpecialSlot()
       for (p = firstStack; p->getNext() != 0; p = p->getNext())
             ;
       while (p) {
-            if (p->getActive() >= 0x02)
+            if (p->getActive() >= 0x02 && p->getRepeatType() != 0)
                   break;
             p = p->getPrev();
             }
