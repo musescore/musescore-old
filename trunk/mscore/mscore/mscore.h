@@ -47,6 +47,7 @@ class MagBox;
 
 extern QString mscoreGlobalShare;
 static const int PROJECT_LIST_LEN = 6;
+extern bool playRepeats;
 
 //
 // MuseScore _state
@@ -293,6 +294,7 @@ class MuseScore : public QMainWindow {
       void setMag(double);
       void readSettings();
       void writeSettings();
+      void repeatToggled(bool);
       };
 
 //---------------------------------------------------------

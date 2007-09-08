@@ -28,17 +28,18 @@
 #include "measure.h"
 
 
-enum
+enum // types for repeat
 { 
-      UNKNOWN = 0,
-      NORMAL = 1,
-      SEGNO = 2,
-      CODA = 3,
-      CAPO = 4,
-      LOOP = 5,
-      P_VOLTA = 6,
-      S_VOLTA = 7,      
-      T_VOLTA = 8                 
+      START_REPEAT = 1,
+      END_REPEAT = 2,
+      SEGNO = 4,
+      CODA = 8,
+      CAPO = 16,
+      LOOP = 32,
+      P_VOLTA = 64,
+      S_VOLTA = 128,      
+      T_VOLTA = 256,
+      NORMAL = 4096
 };
 
 
@@ -80,11 +81,11 @@ class RepeatStack {
       int getRepeatType() { return _repeatType; }
       void setNoOffElements(int);
       int getNoOffElements();
+      int checkType(Measure*);
       void setStartMeasure(Measure* m) { _startm = m; }
       Measure* getStartMeasure () { return _startm; } 
       void setEndMeasure(Measure* m) { _endm = m; }
       Measure* getEndMeasure () { return _endm; }
-
       RepeatStack* setNewSlot(Measure*);         
       void setTickOffset(int t) { _tickOffs = t; }
       int getTickOffset() { return _tickOffs; }
@@ -93,16 +94,21 @@ class RepeatStack {
       RepeatStack* getLastStartMeasure(Measure*);
       RepeatStack* getLastEndMeasure(Measure*);
       RepeatStack* getStartMeasure(Measure*);
+      RepeatStack* getSlot(Measure*,int);
       RepeatStack* getLastSlot();   
       RepeatStack* getLastActiveSlot();   
       RepeatStack* getLastInactiveSlot();   
       RepeatStack* getLastSpecialSlot();   
-      RepeatStack* getLastSlotByType(int);   
+      RepeatStack* getLastSlotByType(int); 
+      RepeatStack* getLastActiveSlotByType(int);
+      RepeatStack* getLastInActiveSlotByType(int);     
 };
 
 extern RepeatStack* firstStack;
 extern int rtickOffSet;
 extern int rloopCounter;
 extern int raddTickLen;
+extern bool repeatEachTime;
+//extern bool playRepeats;
 
 #endif

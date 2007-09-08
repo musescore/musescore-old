@@ -1,3 +1,7 @@
+8.9.7  (dk)
+      - added button to toggle between play repeats or not
+        switch all on or off, like repeats, Volta, and so on
+      - bug fix for remove End-Repeat, now value end_repeat set to zero if removed
 31.8.7 (ws)
       - added command line option "-o file"; this allows to use mscore as a
         file converter, usable for regression testing of import/export functions
