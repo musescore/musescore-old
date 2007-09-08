@@ -1214,6 +1214,12 @@ void Score::cmd(const QString& cmd)
             seq->pause();
       else if (cmd == "play")
             seq->start();
+      else if (cmd == "repeat") {
+            if (playRepeats == false)
+                  playRepeats = true;
+            else
+                  playRepeats = false;
+            }
       else if (cmd == "rewind")
             seq->rewindStart();
       else if (cmd == "play-next-measure")
@@ -1237,7 +1243,7 @@ void Score::cmd(const QString& cmd)
             if (cmd == "append-measure")
                   appendMeasures(1);
             else if (cmd == "insert-measure")
-		  insertMeasures(1);
+		      insertMeasures(1);
             else if (cmd == "page-prev")
                   pagePrev();
             else if (cmd == "page-next")

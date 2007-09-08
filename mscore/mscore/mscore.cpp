@@ -202,6 +202,7 @@ MuseScore::MuseScore()
       mscore = this;
       setIconSize(QSize(ICON_HEIGHT, ICON_HEIGHT));
       setWindowTitle(QString("MuseScore"));
+      playRepeats           = 0;
       cs                    = 0;
       textStyleDialog       = 0;
       editStyleWin          = 0;
@@ -271,7 +272,7 @@ MuseScore::MuseScore()
          << "file-open" << "file-new" << "file-template" << "file-save" << "file-save-as" << "file-close"
          << "quit"
          << "toggle-statusbar" << "note-input" << "pitch-spell"
-         << "rewind" << "play" << "pause"
+         << "rewind" << "play" << "pause" <<"repeat"
          << "play-next-measure" << "play-next-chord" << "play-prev-measure" << "play-prev-chord"
          << "seek-begin" << "seek-end"
          ;
@@ -328,6 +329,10 @@ MuseScore::MuseScore()
       a->setCheckable(true);
       a = getAction("pause");
       a->setCheckable(true);
+      a = getAction("repeat");
+      a->setCheckable(true);
+      repeatToggled(true);
+      a->setChecked(true);
 
       //---------------------------------------------------
       //    File Action
@@ -356,6 +361,8 @@ MuseScore::MuseScore()
       transportTools->addAction(getAction("rewind"));
       transportTools->addAction(getAction("pause"));
       transportTools->addAction(getAction("play"));
+      transportTools->addSeparator();
+      transportTools->addAction(getAction("repeat"));
 
       a = getAction("mag");
       fileTools->addAction(a);
@@ -1371,6 +1378,10 @@ bool MuseScore::playEnabled() const
       return preferences.playNotes && _speakerEnabled;
       }
 
+void MuseScore::repeatToggled(bool val)
+      {
+            playRepeats = val;
+      }
 //---------------------------------------------------------
 //   removeTab
 //---------------------------------------------------------

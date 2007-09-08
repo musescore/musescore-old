@@ -1326,6 +1326,16 @@ Shortcut MuseScore::sc[] = {
          QT_TR_NOOP(""),
          QT_TR_NOOP("")
          ),
+      Shortcut(
+         STATE_NORMAL,
+         "repeat",
+         QT_TR_NOOP("play repeats on"),
+         Qt::CTRL+Qt::Key_R,
+         Qt::WindowShortcut,
+         QT_TR_NOOP("Repeat"),
+         QT_TR_NOOP("play repeats on/off"),
+         &repeatIcon
+         ),
       Shortcut(0, 0, 0),
       };
 

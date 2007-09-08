@@ -31,10 +31,13 @@
 //
 #include "repeat2.h"
 #include "measure.h"
+#include "mscore.h"
 
 RepeatStack* firstStack;
 int   rloopCounter;
 int   rtickOffSet;
+bool  repeatEachTime;
+bool  playRepeats;
 
 
 
@@ -63,133 +66,116 @@ RepeatStack* RepeatStack::init()
       n->setPrev(0);
       n->setNext(0);
       n->setLoopCount(0);
-      n->setStartMeasure(0);
-      n->setEndMeasure(0);
+      n->setStartMeasure(0x00);
+      n->setEndMeasure(0x00);
       n->setActive(false);
-      n->setRepeatType(UNKNOWN);
+      n->setRepeatType(NORMAL);
+      n->setTicks2Add(0);
+      n->setTickOffset(0);
+      repeatEachTime = playRepeats;
       return (n);
       }
 
 //******************************************************
 // function push, put measure and other infos on stack
 //******************************************************
+
+
 int RepeatStack::push(Measure* m) 
       {
-      RepeatStack* p = 0;
+      RepeatStack* p = 0x00;
+      RepeatStack* pp = 0x00;
 
       int type = 0;
       int ret = false;
+      int loop = true;
 
       if ( firstStack == 0 ) // No Stack!!!!
             abort ();
+      if (!playRepeats)
+            return 0;
 
-      p = getStartMeasure(m);
-      if (!p || (!getNoOffElements()&&!p->getStartMeasure())) {
-            if (!m->prev())
-                  type = CAPO;            
-            else if (m->startRepeat())
-                  type = NORMAL;
-            else if (m->ending() == 1)
-                  type = P_VOLTA;
-            else if (m->ending() == 2)
-                  type = S_VOLTA;
-            else if (m->ending() == 3)
-                  type = T_VOLTA;
-            //Add more types here, may be segno or something else
-//            if (type == 0)            
-//                  return ret; 
-
-            p = setNewSlot(m);
-            p->setRepeatType(type);
+      type = checkType(m);
+      if (type&NORMAL) {
+            if ((p = getSlot(m,NORMAL)) == 0x00) {
+                  p = setNewSlot(m);
+                  p->setRepeatType(NORMAL);
+                  }
             }
-      else
-            type = p->getRepeatType();
 
-
-      int a = p->getActive();      
-      switch (type) {
-            case NORMAL:
-            case CAPO:
-                  {
-                  if (a == true) {
-                        p->setTicks2Add(m->tick());
-                        p->setTickOffset(0);
-                        rloopCounter = p->getLoopCount();
+      if (type&CAPO) { 
+            if ((p = getSlot(m,CAPO)) == 0x00) {
+                  p = setNewSlot(m);
+                  p->setRepeatType(CAPO);
+                  }
+            }  
+ 
+      if (type&START_REPEAT) { 
+            if ((p = getSlot(m,START_REPEAT)) == 0x00) {
+                  p = setNewSlot(m);
+                  p->setRepeatType(START_REPEAT);
+                  }
+            if (p->getActive() == true) {
+                  pp = getLastSlotByType(END_REPEAT);
+                  if (pp && pp->getEndMeasure() == p->getStartMeasure()) {
+                        p->setEndMeasure(pp->getStartMeasure());
                         }
-                  if (a == false) {
-                        if (rloopCounter < p->getLoopCount()) 
-                              // increment LoopCount
-                              rloopCounter++;
-                        }                      
-                        break;
+                  else {
+                        p->setTicks2Add(m->tick());
+                        p->setEndMeasure(0);
+                        }
                   }
-            case P_VOLTA:
-                  {
-                        if (a == true) { // first time
-                              p->setTicks2Add(m->tickLen());
-                              p->setActive(false);
-                              }
-                        else { // second time
-                              p->setActive(0x04);
-                              if (m->endRepeat()) {
-                                    p->setEndMeasure(m);
-                                    p->setTickOffset(p->getTicks2Add()+
-                                                      m->tickLen());
-                                    p->setLoopCount(m->endRepeat());
-                                    }
-                              rtickOffSet = rtickOffSet - p->getTicks2Add();
-                              ret = true;                                    
-                              }
-                        break;
+            else
+                  p->setLoopCount(p->getLoopCount()+1);
+            } 
+  
+      if (type&END_REPEAT) {
+            if ((p = getSlot(m,END_REPEAT)) == 0x00) {
+                  p = setNewSlot(m);
+                  p->setRepeatType(END_REPEAT);
                   }
-            case S_VOLTA:
-                  {
-                        if (a == true) { // first time
-                              p->setTicks2Add(m->tickLen());
-                              p->setActive(false);
-                              }
-                        else { // second time
-                              p->setActive(0x04);
-                              if (m->endRepeat()) {
-                                    p->setEndMeasure(m);
-                                    p->setTickOffset(p->getTicks2Add()+
-                                                      m->tickLen());
-                                    p->setLoopCount(m->endRepeat());
-                                    }
-                              rtickOffSet = rtickOffSet - p->getTicks2Add();
-                              ret = true;                                    
-                              }
-                        break;
+            if (p->getActive() == true) {
+                  pp = getLastActiveSlotByType(START_REPEAT);
+                  if (!pp)
+                        pp = getLastActiveSlotByType(CAPO);
+                  if (pp) {
+                        p->setEndMeasure(pp->getStartMeasure());
+                        pp->setEndMeasure(m);
+                        p->setTicks2Add(m->tick());
+                        p->setLoopCount(m->endRepeat());
+                        }
                   }
-            case T_VOLTA:
-                  {
-                        if (a == true) { // first time
-                              p->setTicks2Add(m->tickLen());
-                              p->setActive(false);
-                              }
-                        else { // second time
-                              p->setActive(0x04);
-                              if (m->endRepeat()) {
-                                    p->setEndMeasure(m);
-                                    p->setTickOffset(p->getTicks2Add()+
-                                                      m->tickLen());
-                                    p->setLoopCount(m->endRepeat());
-                                    }
-                              rtickOffSet = rtickOffSet - p->getTicks2Add();
-                              ret = true;                                    
-                              }
-                        break;
+            else {
+                  if (p->getLoopCount() > 0)
+                        p->setLoopCount(p->getLoopCount()-1);
                   }
-            default:
-                  break;
+            }
+
+      if (type&P_VOLTA) {
+            if ((p = getSlot(m,P_VOLTA)) == 0x00) {
+                  p = setNewSlot(m);
+                  p->setRepeatType(P_VOLTA);
+                  }
+            if (p->getActive() == true) { // first time
+                  p->setTicks2Add(m->tickLen());
+                  p->setActive(false);
+                  }
+            else { // second time
+                  p->setActive(true);
+                  ret = 1;
+                  p->setTickOffset(p->getTicks2Add()+
+                                   m->tickLen());
+                                   p->setLoopCount(m->endRepeat());
+                  rtickOffSet = rtickOffSet - p->getTicks2Add();
+                  }
             }
       return ret;
       }
 
 RepeatStack* RepeatStack::setNewSlot(Measure* m)
       {
-      RepeatStack* p;
-      RepeatStack* n;
+      RepeatStack* p = 0x00;
+      RepeatStack* n = 0x00;
 
       if (getNoOffElements() > 0) {
             n = init();
@@ -220,97 +206,65 @@ RepeatStack* RepeatStack::setNewSlot(Measure* m)
 
 Measure* RepeatStack::pop(Measure* m) 
       {
-      Measure* ret = 0;
-      RepeatStack* p;
-      int type;
+      Measure* ret = 0x00;
+      RepeatStack* p = 0x00;
+      RepeatStack* pp = 0x00;
+      int type = 0;
       bool lc = 0;
 
 
-      if (firstStack == 0) // No Stack!!!!
+      if (!firstStack) // No Stack!!!!
             abort ();
 
-      if (m->endRepeat())
-            type = NORMAL;
-      else
+      if (!playRepeats)
             return 0;
-      
+
       ret = m;
-      p = getLastStartMeasure(m);
-      if (!p)
-            p = getLastEndMeasure(m);
-      if (!p)
-            p = getLastSlotByType(type);
-      if (!p)
-            p = firstStack;      
-      if (!p)
-            return 0;
-      if (!type)      
-            type = p->getRepeatType();
-      while (!lc) {  
-            switch (type) {
-                  case CAPO:
-                  case NORMAL:
-                        {
-                        switch (p->getActive()) {
-                              case false:            
-                                    {
-                                    if (rloopCounter == p->getLoopCount()) {
-                                          rloopCounter = 1;
-                                          p->setActive(0x04);
-                                          }
-                                    ret = 0;  
-                                    break;
-                                    }
-                              case true:
-                                    {
-                                    p->setActive(false);
-                                    p->setEndMeasure(m);
-                                    p->setTickOffset((m->tick() - 
-                                                      p->getTicks2Add()) +
-                                                      m->tickLen());
-                                    p->setTicks2Add(p->getTickOffset());
-                                    rtickOffSet += p->getTickOffset();
-                                    p->setLoopCount(m->endRepeat());
-                                    ret = p->getStartMeasure();
-                                    break;
-                                    }
-                              default:
-                                    {
-                                    ret = 0;
-                                    break;
-                                    }
-                              }
-                        lc = 1;
-                        break;
-                        }
-/*                  case VOLTA1:
-                        {
-                        if (p->getActive() == true) {
-                              p->setActive(false);
-                              lc = 1;
-                              }
-                        else if (p->getActive() == false) {
-                                    p = getLastStartMeasure(m);
-                                    if (p) {
-                                          type = p->getRepeatType();
-                                          lc = 0;
-                                          }
-                                    else
-                                          lc = 1;
-                              ret = 0;
-                              lc = 1;
-                              }
-                        else {
-                              ret = 0;
-                              lc = 1;
-                              }      
-                        break;
-                        }*/
-                  default :
-                        {
-                        lc = 1;
-                        break;
-                        }
+
+      type = checkType(m);
+
+      if (type&NORMAL) {
+            ret = 0x00;
+            }
+
+      if (type&P_VOLTA) {
+            ret = 0x00;
+            }
+
+      if (type&S_VOLTA) {
+            ret = 0x00;
+            }
+
+      if (type&T_VOLTA) {
+            ret = 0x00;
+            }
+
+      if (type&CAPO) {
+            ret = 0x00;
+            }
+
+      if (type&START_REPEAT) {
+            ret = 0x00;
+            }
+
+      if (type&END_REPEAT) {
+            p = getSlot(m,END_REPEAT);
+            pp = getLastActiveSlotByType(START_REPEAT);
+            if (!pp)
+                  pp = getLastActiveSlotByType(CAPO);
+            if (p->getActive() == true) {
+                  p->setTickOffset((p->getTicks2Add() -
+                                    pp->getTicks2Add()) + 
+                                    m->tickLen());
+                  ret = p->getEndMeasure();
+                  rtickOffSet += p->getTickOffset();
+                  p->setLoopCount(p->getLoopCount()-1);
+                  p->setActive(false);
+                  pp->setActive(false);
+                  }                              
+            if (p->getLoopCount() <= 0) {
+                  p->setActive(0x04);
+                  ret = 0x00;
                   }
             }
       return ret;
@@ -318,7 +272,7 @@ Measure* RepeatStack::pop(Measure* m)
 
 RepeatStack* RepeatStack::getStartMeasure(Measure* m)
       {
-      RepeatStack* p;
+      RepeatStack* p = 0x00;
 
       p = firstStack;
       while (p != 0) {
@@ -329,14 +283,27 @@ RepeatStack* RepeatStack::getStartMeasure(Measure* m)
       return p;
       }
 
+RepeatStack* RepeatStack::getSlot(Measure* m, int type)
+      {
+      RepeatStack* p = 0x00;
+
+      p = firstStack;
+      while (p != 0) {
+           if (p->getStartMeasure() == m && p->getRepeatType() == type) 
+                  break;
+                  p = p->getNext();
+            }
+      return p;
+      }
+
 RepeatStack* RepeatStack::getLastSlotByType(int type)
       {
-      RepeatStack* p;
+      RepeatStack* p = 0x00;
 
       for (p = firstStack; p->getNext() != 0; p = p->getNext())
             ;
       while (p) {
-            if (p->getRepeatType() == type && p->getActive() == true)
+            if (p->getRepeatType() == type)
                   break;
             p = p->getPrev();
             }
@@ -345,12 +312,40 @@ RepeatStack* RepeatStack::getLastSlotByType(int type)
 
 RepeatStack* RepeatStack::getLastActiveSlot()
       {
-      RepeatStack* p;
+      RepeatStack* p = 0x00;
 
       for (p = firstStack; p->getNext() != 0; p = p->getNext())
             ;
       while (p) {
             if (p->getActive() == true && p->getRepeatType() != 0)
+                  break;
+            p = p->getPrev();
+            }
+      return p;
+      }
+
+RepeatStack* RepeatStack::getLastActiveSlotByType(int type)
+      {
+      RepeatStack* p;
+
+      for (p = firstStack; p->getNext() != 0; p = p->getNext())
+            ;
+      while (p) {
+            if (p->getActive() == true && p->getRepeatType() == type)
+                  break;
+            p = p->getPrev();
+            }
+      return p;
+      }
+
+RepeatStack* RepeatStack::getLastInActiveSlotByType(int type)
+      {
+      RepeatStack* p = 0x00;
+
+      for (p = firstStack; p->getNext() != 0; p = p->getNext())
+            ;
+      while (p) {
+            if (p->getActive() == false && p->getRepeatType() == type)
                   break;
             p = p->getPrev();
             }
@@ -373,7 +368,7 @@ RepeatStack* RepeatStack::getLastInactiveSlot()
 
 RepeatStack* RepeatStack::getLastSpecialSlot()
       {
-      RepeatStack* p;
+      RepeatStack* p = 0x00;
 
       for (p = firstStack; p->getNext() != 0; p = p->getNext())
             ;
@@ -387,12 +382,12 @@ RepeatStack* RepeatStack::getLastSpecialSlot()
 
 RepeatStack* RepeatStack::getLastStartMeasure(Measure* m)
       {
-      RepeatStack* p;
+      RepeatStack* p = 0x00;
 
       for (p = firstStack; p->getNext() != 0; p = p->getNext())
             ;
       while (p) {
-            if (p->getStartMeasure() == m && p == getLastActiveSlot())
+            if (p->getStartMeasure() == m) // && p == getLastActiveSlot())
                   break;
             p = p->getPrev();
             }
@@ -401,12 +396,12 @@ RepeatStack* RepeatStack::getLastStartMeasure(Measure* m)
 
 RepeatStack* RepeatStack::getLastEndMeasure(Measure* m)
       {
-      RepeatStack* p;
+      RepeatStack* p = 0x00;
 
       for (p = firstStack; p->getNext() != 0; p = p->getNext())
             ;
       while (p) {
-            if (p->getEndMeasure() == m && p == getLastInactiveSlot())
+            if (p->getEndMeasure() == m) // && p == getLastInactiveSlot())
                   break;
             p = p->getPrev();
             }
@@ -415,7 +410,7 @@ RepeatStack* RepeatStack::getLastEndMeasure(Measure* m)
          
 RepeatStack* RepeatStack::getLastSlot()
       {
-      RepeatStack* p;
+      RepeatStack* p = 0x00;
 
       for (p = firstStack; p->getNext() != 0; p = p->getNext())
             ;
@@ -432,6 +427,26 @@ RepeatStack::~RepeatStack()
       {
       }
 
+int RepeatStack::checkType(Measure* m)
+      {
+      int type = 0;
+
+      if (m->prev() == 0)
+            type |= CAPO;
+      if (m->startRepeat())
+            type |= START_REPEAT;      
+      if (m->endRepeat() > 0)
+            type |= END_REPEAT;
+      if (m->ending() == 1)
+            type |= P_VOLTA;
+      if (m->ending() == 2)
+            type |= S_VOLTA;
+      if (m->ending() == 3)
+            type |= T_VOLTA;
+      if (!type)
+            type |= NORMAL;
+      return type;
+      }
             
 
 

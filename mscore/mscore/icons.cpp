@@ -55,7 +55,7 @@ QIcon voiceIcons[VOICES];
 
 QIcon undoIcon, redoIcon, cutIcon, copyIcon, pasteIcon;
 QIcon printIcon, clefIcon;
-QIcon midiinIcon, speakerIcon, startIcon, playIcon, pauseIcon;
+QIcon midiinIcon, speakerIcon, startIcon, playIcon, pauseIcon, repeatIcon;
 QIcon sbeamIcon, mbeamIcon, nbeamIcon, beam32Icon;
 QIcon fileOpenIcon, fileNewIcon, fileSaveIcon, fileSaveAsIcon;
 QIcon exitIcon, viewmagIcon;
@@ -184,5 +184,6 @@ void genIcons()
       fileSaveAsIcon = QIcon(":/data/filesaveas.svg");
       exitIcon     = QIcon(":/data/exit.svg");
       viewmagIcon  = QIcon(":/data/viewmag.xpm");
+      repeatIcon   = QIcon(":/data/repeat.svg");
       }
 
