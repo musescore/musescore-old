@@ -6,35 +6,35 @@
 <!-- Main body -->
 <div class=mainbody>
 
-<h3>Articles:</h3>
+<h3>Atzikrl:</h3>
 
 <ul>
 <li><a href="http://www.linuxjournal.com/node/8972/print">Dave Phillips: At
 the Sounding Edge: Music Notation Software, the Final Installment</a>
 </ul>
 
-<h3>Other Score Typesetters or related Programs:</h3>
+<h3>Andere freie Notensatzprogramme oder verwandte Programme:</h3>
 
 <ul>
 <li><a href="http://lmuse.sourceforge.net/">MusE</a>
       Midi/Audio sequencer
 <li><a href="http://lilypond.org">LilyPond</a>
 <li><a href="http://noteedit.berlios.de">NoteEdit</a>
-   is a graphical frontend for LilyPond.</li>
+   ist ein grafisches Frontend für LilyPond.</li>
 <li><a href="http://canorus.berlios.de/wiki/index.php/Main_Page">Canorus</a>
-   sequel of NoteEdit</li>
+   Nachfolger von NoteEdit</li>
 <li><a href="http://www-ccrma.stanford.edu/CCRMA/Software/cmn/cmn.html">
      Common Music Notation</a></li>
 <li><a href="http://rosegardenmusic.com/">Rosegarden</a>
-      Midi/Audio sequencer and musical notation editor</li>
+      Midi/Audio Sequenzer und Notationsprogramm</li>
 </ul>
 
 <br>
 <h3>Tools:</h3>
 <ul>
    <li><a href="http://fontforge.sourceforge.net/">FontForge(fomerly PfaEdit)</a>
-     A postscript font editor; used by <i>MuseScore</i> to produce the
-     feta TrueType font.
+     ist ein Fonteditor. Der von <i>MuseScore</i> verwendete LilyPond feta Font wurde
+     mit diesem Programm editiert.
 </ul>
 
 

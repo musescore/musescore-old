@@ -5,11 +5,11 @@
   ?>
 <h4><a href="idx.php">MuseScore</a>
    -- <a href="manual.php">Referenz</a>
-   -- Drum Notation</h4>
+   -- Schlagzeugnotation</h4>
 
 <table>
 <tr><td>
-      Example drum notation:
+      Beispiel für Schlagzeugnotation:
   </td>
   <td>
      <img src="../pic/drum1.png">

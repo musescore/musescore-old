@@ -5,29 +5,30 @@
   ?>
 <h4><a href="idx.php">MuseScore</a>
    -- <a href="manual.php">Referenz</a>
-   -- Play Mode</h4>
+   -- Wiedergabemode</h4>
 
-<i>MuseScore</i> has an integrated sequencer and synthesizer to play
-your score.<br>
-By pressing the &lt;<b>Play</b>&gt; button you enter &lt;<i>Play</i>&gt;
-mode. In &lt;<i>Play</i>&gt mode the following commands are
-available:<br>
+<i>MuseScore</i> besitzt einen integrierten Sequenzer sowie einen
+Synthesizer, um die Partitur wiedergeben zu können.
+<br>
+Durch drücken des &lt;<b>Play</b>&gt; Buttons wird der &lt;<i>Playmodus</i>&gt;
+gestartet. Im &lt;<i>Playmodus</i>&gt sind die folgenden Kommandos verfügbar:
+<br>
 <br>
 <table cellspacing="0" cellpadding="0">
-<tr><td>&lt;<b>Space</b>&gt;</td><td>toggle stop/play</td></tr>
-<tr><td>&lt;<b>Left</b>&gt;</td><td> seek to previous chord</td></tr>
-<tr><td>&lt;<b>Right</b>&gt;</td><td> seek to next chord</td></tr>
-<tr><td>&lt;<b>Ctrl+Left</b>&gt;</td><td> seek to previous measure</td></tr>
-<tr><td>&lt;<b>Ctrl+Right</b>&gt;</td><td> seek to next measure</td></tr>
-<tr><td>&lt;<b>Home</b>&gt;</td><td>rewind start of score</td></tr>
-<tr><td>&lt;<b>F11</b>&gt;</td><td>toggle show play panel</td></tr>
+<tr><td>&lt;<b>Leertaste</b>&gt;</td><td>Stop/Play Taster</td></tr>
+<tr><td>&lt;<b>Links</b>&gt;</td><td> zum vorherigen Akkord</td></tr>
+<tr><td>&lt;<b>Rechts</b>&gt;</td><td> zum nächsten Akkord</td></tr>
+<tr><td>&lt;<b>Strg+Links</b>&gt;</td><td> zum vorherigen Takt</td></tr>
+<tr><td>&lt;<b>Strg+Rechts</b>&gt;</td><td> zum nächsten Takt</td></tr>
+<tr><td>&lt;<b>Pos1</b>&gt;</td><td>Zurück zum Anfang</td></tr>
+<tr><td>&lt;<b>F11</b>&gt;</td><td>zeigt das Playpanel</td></tr>
 </table>
 <br>
 
 <br>
-If you want to play other instruments than piano you have to
-change the <i>MuseScore</i> integrated <i>SoundFont</i> with a more
-capable one in the <i>Preferences</i> menu.
+Der voreingestellte Soundfont kann nur ein Instrument (Piano) spielen und
+klingt auch nicht so toll, ist dafür aber sehr klein. Besser klingende Soundfonts
+können unter Bearbeiten/Einstellungen/Midi konfiguriert werden.
 
 <?php require("trailer.html");  ?>
 

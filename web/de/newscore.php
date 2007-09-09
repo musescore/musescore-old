@@ -7,34 +7,35 @@
    -- <a href="manual.php">Referenz</a>
    -- Create new Score</h4>
 
-<h5>Create new Score from Scratch</h5>
-The menu entry &lt;<b>Score/New</b>&gt; create an empty
-new score. First you have to populate the empty sheet with instruments and
-then you can add empty measures.
+<h5>Neue Partitur erzeugen</h5>
+
+Der Menüeintrag &lt;<b>Partitur/Neu</b>&gt; erzeugt eine neue leere Partitur.
+Zunächst muß die leere Seite mit Instrumenten versehen werden, befor leere
+Takte erzeugt werden können.
       <ul>
-      <li>&lt;<b>I</b>&gt; popups the instrument menu</li>
-      <li>&lt;<b>Ctrl+B</b>&gt; appends an empty measure</li>
-      <li>then menu &lt;<b>Create/Measures</b>&gt; can be used to create
-         an arbitrary number of empty measures
+      <li>&lt;<b>I</b>&gt; zeigt das Instrumentenmenü</li>
+      <li>&lt;<b>Ctrl+B</b>&gt; hängt einen leeren neuen Takt an</li>
+      <li>das Menü &lt;<b>Erzeugen/Takte</b>&gt; ermöglicht das Erzeugen einer
+         beliebigen Anzahl leere Takte.
          </li>
       </ul>
 
-Next steps are usually:
-      <a href="clefs.php">set clef</a>,
-      <a href="keys.php">set key</a>,
-      <a href="timesig.php">set time signature</a>
+Die nächsten Schritte sind normalerweise:
+      <a href="clefs.php">Schlüssel wählen</a>,
+      <a href="keys.php">Tonart setzen</a>,
+      <a href="timesig.php">Taktart setzen</a>
 
+<h5>Neue Partitur aus Template erzeugen</h5>
 
-<h5>Create new Score from Template</h5>
+&lt;<b>N</b>&gt; zeigt das &lt;<b>Template</b>&gt; Menü.
 
-&lt;<b>N</b>&gt; popups the &lt;<b>Template</b>&gt; menu. Select a
-template and click &lt;<b>Ok</b>&gt;. This is the simplest way to create
-a new score. Note that template files are normal <i>MuseScore</i> files
-stored in the template folder.
+Wähle ein Template und bestätige mit &lt;<b>Ok</b>&gt;. Dies ist der einfachste
+Weg, um eine neue Partitur zu erzeugen. Templates sind normale <i>MuseScore</i> Dateien,
+die im Template-Verzeichnis stehen.
 
-<h5>Create new Score with the New Wizard</h5>
+<h5>Neue Tastatur mit dem Partitur-Wizard erzeugen</h5>
 
----the new wizard is not implemented yet---
+---diese Funktion ist noch nicht implementiert---
 
 <?php require("trailer.html");  ?>
 

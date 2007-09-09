@@ -7,22 +7,23 @@
    -- <a href="manual.php">Referenz</a>
    -- Tuplets</h4>
 
-To create a triplet first create a note with a duration of the whole
-triplet. Then select the note and press &lt;<b>Ctrl+3</b>&gt; to change
-it to a triplet. Similarly a &lt;<b>Ctrl+5</b>&gt; changes to note
-to a quintuplet.
+Eine Triole wird erstellt, indem zunächst eine Note mit der Dauer
+der kompletten Triole gesetzt wird. Selektieren sie die Note und
+geben dann &lt;<b>Ctrl+3</b>&gt; ein um die Note in eine Triole zu
+verwandeln. Entsprechend kann mit &lt;<b>Ctrl+5</b>&gt; eine Pentole
+erstellt werden.
 
 <table>
 <tr>
-  <td>First select a note:</td>
+  <td>Zunächst eine Note auswählen:</td>
   <td><img src="../pic/tuplet1.png" align="center"></td>
 </tr>
 <tr>
-  <td>&lt;<b>Ctrl+3</b>&gt; creates a triplet:</td>
+  <td>&lt;<b>Ctrl+3</b>&gt; erstellt eine Triole:</td>
   <td><img src="../pic/tuplet2.png" align="center"></td>
   </tr>
 <tr>
-  <td>which can be further edited</td>
+  <td>die weiter editiert werden kann</td>
   <td><img src="../pic/tuplet3.png" align="center"></td>
   </tr>
 

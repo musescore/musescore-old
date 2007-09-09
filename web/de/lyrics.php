@@ -8,25 +8,25 @@
    -- Lyrics</h4>
 
   <ul>
-    <li>First enter notes.</li>
-    <li>Select first note.</li>
-    <li>Type <code>&lt;<b>Ctrl+L</b>&gt;</code> and enter lyrics text for
-      first note.</li>
-    <li>Type <code>&lt;<b>space</b>&gt;</code> at end of word to go next
-       note.</li>
-    <li>Type <code>&lt;<b>-</b>&gt;</code> at end of syllable to go to next note.
-       The syllables are connected with a dash.
+    <li>Gib zuerst alle Noten ein.</li>
+    <li>Wähle die erste Note aus.</li>
+    <li>Gib <code>&lt;<b>Strg+L</b>&gt;</code> ein um in den Editmodus zu gelangen
+      und gib dann den Liedtext für die erste Note ein</li>
+    <li><code>&lt;<b>space</b>&gt;</code> positioniert auf die nächste Note.
        </li>
-    <li><code>&lt;<b>Shift+Space</b>&gt;</code> moves to the previous note.</li>
-    <li><code>&lt;<b>Ctrl+Space</b>&gt;</code> enters a <code>&lt;<b>space</b>&gt;</code> into
-        the lyrics text.
+    <li>Die Eingabe von <code>&lt;<b>-</b>&gt;</code> positioniert auf die Note und
+       verbindet die letzte Silbe mit der aktuellen mit einem Strich.
+       </li>
+    <li><code>&lt;<b>Umsch+Leertaste</b>&gt;</code> positioniert auf die vorherige Note.</li>
+    <li><code>&lt;<b>Strg+Space</b>&gt;</code> fügt ein <code>&lt;<b>Leerzeichen</b>&gt;</code>
+        in den Liedtext ein.
         </li>
-    <li><code>&lt;<b>Ctrl+Minus</b>&gt;</code> enters a <code>&lt;<b>-</b>&gt;</code> into
-        the lyrics text.
+    <li><code>&lt;<b>Strg+Minus</b>&gt;</code> fügt ein<code>&lt;<b>-</b>&gt;</code> in den
+        Liedtext ein.
         </li>
     </ul>
 
-  Lyrics can be <a href="textedit.php">edited</a> as normal text.
+  Liedtext kann wie normaler Text <a href="textedit.php">editiert</a> werden.
 
 <?php require("trailer.html");  ?>
 
