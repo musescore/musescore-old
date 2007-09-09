@@ -1,3 +1,6 @@
+9.9.7  (ws)
+      - add "doFormat()" before exporting with "-o" command line option
+      - do not init sequencer when in convert-mode
 8.9.7  (dk)
       - added button to toggle between play repeats or not
         switch all on or off, like repeats, Volta, and so on

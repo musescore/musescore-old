@@ -1554,10 +1554,14 @@ int main(int argc, char* argv[])
             }
 
       seq = new Seq();
-      if (!noSeq) {
-            if (seq->init()) {
-                  printf("sequencer init failed\n");
-                  noSeq = true;
+      if (converterMode)
+            noSeq = true;
+      else {
+            if (!noSeq) {
+                  if (seq->init()) {
+                        printf("sequencer init failed\n");
+                        noSeq = true;
+                        }
                   }
             }
       //
@@ -1707,6 +1711,7 @@ int main(int argc, char* argv[])
       if (converterMode) {
             QString fn(outFileName);
             Score* cs = mscore->currentScore();
+            cs->doLayout();
 
             bool rv;
             if (fn.endsWith(".msc")) {
