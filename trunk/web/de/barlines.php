@@ -5,12 +5,13 @@
   ?>
 <h4><a href="idx.php">MuseScore</a>
    -- <a href="manual.php">Referenz</a>
-   -- Barlines</h4>
+   -- Taktstriche</h4>
 
 <table>
 <tr><td>
-      Barlines are changed by dragging a barline symbol from the
-      barline palette to an barline in the score.
+      Taktstriche können durch Ziehen eines Taktstrichsysbols
+      von der Taktstrichpalette auf einen Taktstrich der Partitur
+      geändert werden.
   </td>
   <td>
      <img src="../pic/barlinepalette.png">

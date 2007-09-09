@@ -3,21 +3,21 @@
   $file="help.php";
   require("header.html");
   ?>
-<h3>Getting Involved:</h3>
+<h3>Mitmachen:</h3>
 
 <ul>
-      <li><b><a href="http://sourceforge.net/tracker/?group_id=109430&atid=653454">Bug Reports</a></b></li>
+      <li><b><a href="http://sourceforge.net/tracker/?group_id=109430&atid=653454">Fehler Reports</a></b></li>
       <li><b><a href="http://sourceforge.net/tracker/?group_id=109430&atid=653457">Feature Request</a></b></li>
       <li><b><a href="http://sourceforge.net/tracker/?group_id=109430&atid=653455">Support Requests</a></b></li>
-      <li><b>Translations</b><br>
-            If you like to contribute a translation of <i>MuseScore</i> please look at
-            <code>.../mscore/doc/README.translate</code> for more info.
+      <li><b>Übersetzungen</b><br>
+            Wenn ihr <i>MuseScore</i> in eine andere Sprache übersetzen wollt, lest
+            bitte die Datei <code>.../mscore/doc/README.translate</code>.
             </li>
-      <li> If you have suggestions, comments, patches, questions, problems or whatever
-          please mail me <a href=mailto:ws at seh.de>ws at seh.de</a>
-          or write to the <i>MuseScore</i>
+      <li>Bei Fragen, Anregungen, Kommentaren oder wasauchimmer schickt mir bitte eine Mail
+          an <a href=mailto:ws at seh.de>ws at seh.de</a>
+          oder schreibt an die <i>MuseScore</i>
           <a href="http://sourceforge.net/mailarchive/forum.php?forum_name=mscore-developer">mailing list</a>
-          (its called "mscore-developer" but don't worry if you are not a developer).
+          (Englisch)
 </ul>
 
 <?php require("trailer.html");  ?>

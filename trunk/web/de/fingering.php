@@ -5,14 +5,13 @@
   ?>
 <h4><a href="idx.php">MuseScore</a>
    -- <a href="manual.php">Referenz</a>
-   -- Fingering</h4>
+   -- Fingersatz</h4>
 
 <table>
 <tr><td>
-      Fingering can be added to notes by dragging a fingering character
-      from the fingering palette to a note head in the score. Fingerings
-      are normal text which can be <a href="textedit.php">edited</a> like
-      any other thext.
+      Um Fingersatz zu notieren wird ein Symbol der Fingersatzpalette
+      auf einen Notenkopf der Partitur gezogen. Fingersatz ist normaler
+      Text, der normal <a href="textedit.php">editiert</a> werden kann.
   </td>
   <td>
      <img src="../pic/fingeringspalette.png">

@@ -5,7 +5,7 @@
   ?>
 <h4><a href="idx.php">MuseScore</a>
    -- <a href="manual.php">Referenz</a>
-   -- Lines</h4>
+   -- Linien</h4>
 
 <table>
 <tr><td>

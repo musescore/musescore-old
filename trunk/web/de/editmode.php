@@ -5,77 +5,80 @@
   ?>
 <h4><a href="idx.php">MuseScore</a>
    -- <a href="manual.php">Referenz</a>
-   -- Edit Mode</h4>
+   -- Editiermodus</h4>
 
-Many elements in the score can be edited in &lt;<i><b>Edit Mode</b></i>&gt;:<br>
+Viele Elemente der Partitur können im &lt;<i><b>Edit Mode</b></i>&gt;:<br>
+editiert werden.
+
 <br>
 
 <table cellpadding="0" cellspacing="0">
  <tr>
-    <td>&lt;<b>Double Click</b>&gt;</td>
+    <td>&lt;<b>Doppelclick</b>&gt;</td>
     <td>&nbsp;&nbsp;</td>
-    <td> start &lt;<i><b>Edit Mode</b></i>&gt; </td>
+    <td> startet den &lt;<i><b>Editiermodus</b></i>&gt; </td>
     </tr>
  <tr>
     <td>&lt;<b>Escape</b>&gt;</td>
     <td>&nbsp;&nbsp;</td>
-    <td> end &lt;<i><b>Edit Mode</b></i>&gt; </td>
+    <td> beendet den &lt;<i><b>Editiermodus</b></i>&gt; </td>
     </tr>
  </table>
 <br>
 
-Some elements show <i>handles</i> in editmode which can be
-moved by mouse dragging or keyboard commands.<br>
+Einige Elemente zeigen im Editiermodus <i>Anfasser</i>, die mit
+der Maus oder mit Tastaturkommandos verschoben werden können.
 <br>
-<a href="slurs.php">Slur</a> in edit mode: <image src="slur4.png" align="center"><br>
 <br>
-Available keyboard commands:<br>
+<a href="slurs.php">Haltebogen</a> im Editiermodus: <image src="../pic/slur4.png" align="center"><br>
+<br>
+Verfügbare Tastaturkommandos:<br>
 <br>
 <table cellpadding="0" cellspacing="0">
-  <tr><td>&lt;<b>Left</b>&gt;</td>
+  <tr><td>&lt;<b>Linls</b>&gt;</td>
       <td>&nbsp;&nbsp</td>
-      <td>move handle left one Space</td>
+      <td>verschiebt Anfasser ein Spatium nach links</td>
     </tr>
-  <tr><td>&lt;<b>Right</b>&gt;</td>
+  <tr><td>&lt;<b>Rechts</b>&gt;</td>
       <td>&nbsp;&nbsp</td>
-      <td>move handle right one Space</td>
+      <td>vrschiebt Anfasser ein Spatium nach rechts</td>
     </tr>
-  <tr><td>&lt;<b>Up</b>&gt;</td>
+  <tr><td>&lt;<b>Hoch</b>&gt;</td>
       <td>&nbsp;&nbsp</td>
-      <td>move handle up one Space</td>
+      <td>verschiebt Anfasser ein Spatium nach oben</td>
     </tr>
-  <tr><td>&lt;<b>Down</b>&gt;</td>
+  <tr><td>&lt;<b>Tief</b>&gt;</td>
       <td>&nbsp;&nbsp</td>
-      <td>move handle down one Space</td>
+      <td>verschiebt Anfasser ein Spatium nach unten</td>
     </tr>
-  <tr><td>&lt;<b>Ctrl+Left</b>&gt;</td>
+  <tr><td>&lt;<b>Ctrl+Links</b>&gt;</td>
       <td>&nbsp;&nbsp</td>
-      <td>move handle left 0.1 Space</td>
+      <td>verschiebt Anfasser 0,1 * Spatium nach links</td>
     </tr>
-  <tr><td>&lt;<b>Ctrl+Right</b>&gt;</td>
+  <tr><td>&lt;<b>Ctrl+Rechts</b>&gt;</td>
       <td>&nbsp;&nbsp</td>
-      <td>move handle right 0.1 Space</td>
+      <td>verschiebt Anfasser 0,1 * Spatium nach rechts</td>
     </tr>
-  <tr><td>&lt;<b>Ctrl+Up</b>&gt;</td>
+  <tr><td>&lt;<b>Ctrl+Hoch</b>&gt;</td>
       <td>&nbsp;&nbsp</td>
-      <td>move handle up 0.1 Space</td>
+      <td>verschiebt Anfasser 0,1 * Spatium nach oben</td>
     </tr>
-  <tr><td>&lt;<b>Ctrl+Down</b>&gt;</td>
+  <tr><td>&lt;<b>Ctrl+Tief</b>&gt;</td>
       <td>&nbsp;&nbsp</td>
-      <td>move handle down 0.1 Space</td>
+      <td>verschiebt Anfasser 0,1 * Spatium nach unten</td>
     </tr>
   <tr><td>&lt;<b>Tab</b>&gt;</td>
       <td>&nbsp;&nbsp</td>
-      <td>goto next handle</td>
+      <td>gehe zum nächsten Anfasser</td>
     </tr>
 </table>
 
 <br>
-See also
-   <a href="textedit.php">Text Editing</a>,
-   <a href="slurs.php">Slurs</a>,
-   <a href="brackets.php">Brackets</a>,
-   <a href="lines.php">Lines</a>.
+Siehe auch
+   <a href="textedit.php">Texte Editieren</a>,
+   <a href="slurs.php">Bögen</a>,
+   <a href="brackets.php">Klammern</a>,
+   <a href="lines.php">Linien</a>.
 
 <?php require("trailer.html");  ?>
 

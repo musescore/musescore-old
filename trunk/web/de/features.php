@@ -9,7 +9,7 @@
 
   <tr>
     <td>
-      Automatic note head positioning in chords:
+      Automatische Anordnung der Notenköpfe in Akkorden:
       </td>
     <td>
       <img src="../pic/chord.png">
@@ -18,7 +18,7 @@
 
   <tr>
     <td>
-      Drum notation:
+      Drumnotation:
       </td>
     <td>
       <img src="../pic/drum1.png">

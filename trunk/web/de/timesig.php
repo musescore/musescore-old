@@ -5,7 +5,7 @@
   ?>
 <h4><a href="idx.php">MuseScore</a>
    -- <a href="manual.php">Referenz</a>
-   -- Time Signature</h4>
+   -- Taktart</h4>
 
 <table>
 <tr><td>
