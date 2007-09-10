@@ -1,3 +1,5 @@
+10.9.7  (ws)
+      - freeze "encodingDate" in MusicXML export in debugMode
 9.9.7  (ws)
       - add "doFormat()" before exporting with "-o" command line option
       - do not init sequencer when in convert-mode
