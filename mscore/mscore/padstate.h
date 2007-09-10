@@ -50,7 +50,5 @@ struct PadState {
 //    10 - (natural)       15 - [natural]
       };
 
-extern PadState padState;
-
 #endif
 

@@ -1,4 +1,5 @@
 10.9.7  (ws)
+      - move padState to Score()
       - freeze "encodingDate" in MusicXML export in debugMode
 9.9.7  (ws)
       - add "doFormat()" before exporting with "-o" command line option

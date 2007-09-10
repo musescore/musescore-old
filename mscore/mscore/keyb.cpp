@@ -138,31 +138,31 @@ void Score::padToggle(int n)
       {
       switch (n) {
             case PAD_NOTE1:
-                  padState.len = division * 4;
+                  _padState.len = division * 4;
                   break;
             case PAD_NOTE2:
-                  padState.len = division * 2;
+                  _padState.len = division * 2;
                   break;
             case PAD_NOTE4:
-                  padState.len = division;
+                  _padState.len = division;
                   break;
             case PAD_NOTE8:
-                  padState.len = division/2;
+                  _padState.len = division/2;
                   break;
             case PAD_NOTE16:
-                  padState.len = division/4;
+                  _padState.len = division/4;
                   break;
             case PAD_NOTE32:
-                  padState.len = division/8;
+                  _padState.len = division/8;
                   break;
             case PAD_NOTE64:
-                  padState.len = division/16;
+                  _padState.len = division/16;
                   break;
             case PAD_REST:
-                  padState.rest = !padState.rest;
+                  _padState.rest = !_padState.rest;
                   break;
             case PAD_DOT:
-                  padState.dot = !padState.dot;
+                  _padState.dot = !_padState.dot;
                   break;
             case PAD_ESCAPE:
                   canvas()->setState(Canvas::NORMAL);
@@ -192,13 +192,13 @@ void Score::padToggle(int n)
       setPadState();
       if (n >= PAD_NOTE1 && n <= PAD_DOT) {
             if (n >= PAD_NOTE1 && n <= PAD_NOTE64) {
-                  padState.dot = false;
+                  _padState.dot = false;
                   //
                   // if in "note enter" mode, reset
                   // rest flag
                   //
                   if (noteEntryMode())
-                        padState.rest = false;
+                        _padState.rest = false;
                   }
             if (!noteEntryMode() && sel->state() == SEL_SINGLE) {
                   Element* el = sel->element();
@@ -206,11 +206,11 @@ void Score::padToggle(int n)
                         el = el->parent();
                   if (el->isChordRest()) {
                         int tick = ((ChordRest*)el)->tick();
-                        int len = padState.tickLen;
-                        if (padState.rest)
+                        int len = _padState.tickLen;
+                        if (_padState.rest)
                               setRest(tick, _is.track, len);
                         else
-                              setNote(tick, _is.track, padState.pitch, len);
+                              setNote(tick, _is.track, _padState.pitch, len);
                         }
                   }
             }
@@ -220,11 +220,11 @@ void Score::padToggle(int n)
 //   setPadState
 //---------------------------------------------------------
 
-void setPadState(Element* obj)
+void Score::setPadState(Element* obj)
       {
       ElementType type = obj->type();
       int len = -1;
-      padState.tie = false;
+      _padState.tie = false;
 
       if (type == NOTE) {
             Note* note = (Note*)obj;
@@ -232,27 +232,27 @@ void setPadState(Element* obj)
             Tuplet* tuplet = chord->tuplet();
             len = tuplet ? tuplet->baseLen() : chord->tickLen();
             Accidental* prefix  = ((Note*)obj)->accidental();
-            padState.prefix = prefix ? prefix->subtype() : 0;
-            padState.rest   = false;
-            padState.voice  = obj->voice();
-            padState.pitch  = ((Note*)obj)->pitch();
-            padState.tie    = ((Note*)obj)->tieFor();
+            _padState.prefix = prefix ? prefix->subtype() : 0;
+            _padState.rest   = false;
+            _padState.voice  = obj->voice();
+            _padState.pitch  = ((Note*)obj)->pitch();
+            _padState.tie    = ((Note*)obj)->tieFor();
             }
       else if (type == REST) {
             Rest* rest = (Rest*)obj;
             Tuplet* tuplet = rest->tuplet();
             len = tuplet ? tuplet->baseLen() : rest->tickLen();
-            padState.prefix = 0;
-            padState.rest   = true;
-            padState.voice  = obj->voice();
+            _padState.prefix = 0;
+            _padState.rest   = true;
+            _padState.voice  = obj->voice();
             }
       else {
-            padState.rest   = false;
-            padState.len    = 0;
-            padState.prefix = 0;
+            _padState.rest   = false;
+            _padState.len    = 0;
+            _padState.prefix = 0;
             }
       if (len == -1) {
-            padState.dot = false;
+            _padState.dot = false;
             return;
             }
       struct nv {
@@ -271,12 +271,12 @@ void setPadState(Element* obj)
       for (unsigned int i = 0; i < sizeof(values)/sizeof(*values); ++i) {
             int n = values[i].ticks;
             if (len / n) {
-                  padState.len = n;
+                  _padState.len = n;
                   int rest     = len % n;
                   if (len <= (division * 4))
-                        padState.dot = (rest == n/2);
+                        _padState.dot = (rest == n/2);
                   else
-                        padState.dot = false;
+                        _padState.dot = false;
                   break;
                   }
             }
@@ -288,29 +288,29 @@ void setPadState(Element* obj)
 
 void Score::setPadState()
       {
-      getAction("pad-rest")->setChecked(padState.rest);
-      getAction("pad-dot")->setChecked(padState.dot);
-      getAction("pad-tie")->setChecked(padState.tie);
+      getAction("pad-rest")->setChecked(_padState.rest);
+      getAction("pad-dot")->setChecked(_padState.dot);
+      getAction("pad-tie")->setChecked(_padState.tie);
 
-      getAction("pad-note-1")->setChecked(padState.len == division * 4);
-      getAction("pad-note-2")->setChecked(padState.len == division*2);
-      getAction("pad-note-4")->setChecked(padState.len == division);
-      getAction("pad-note-8")->setChecked(padState.len == division/2);
-      getAction("pad-note-16")->setChecked(padState.len == division/4);
-      getAction("pad-note-32")->setChecked(padState.len == division/8);
-      getAction("pad-note-64")->setChecked(padState.len == division/16);
+      getAction("pad-note-1")->setChecked(_padState.len == division * 4);
+      getAction("pad-note-2")->setChecked(_padState.len == division*2);
+      getAction("pad-note-4")->setChecked(_padState.len == division);
+      getAction("pad-note-8")->setChecked(_padState.len == division/2);
+      getAction("pad-note-16")->setChecked(_padState.len == division/4);
+      getAction("pad-note-32")->setChecked(_padState.len == division/8);
+      getAction("pad-note-64")->setChecked(_padState.len == division/16);
 
-      getAction("pad-sharp2")->setChecked(padState.prefix == 3);
-      getAction("pad-sharp")->setChecked(padState.prefix == 1);
-      getAction("pad-nat")->setChecked(padState.prefix == 5);
-      getAction("pad-flat")->setChecked(padState.prefix == 2);
-      getAction("pad-flat2")->setChecked(padState.prefix == 4);
+      getAction("pad-sharp2")->setChecked(_padState.prefix == 3);
+      getAction("pad-sharp")->setChecked(_padState.prefix == 1);
+      getAction("pad-nat")->setChecked(_padState.prefix == 5);
+      getAction("pad-flat")->setChecked(_padState.prefix == 2);
+      getAction("pad-flat2")->setChecked(_padState.prefix == 4);
 
-      getAction("voice-1")->setChecked(padState.voice == 0);
-      getAction("voice-2")->setChecked(padState.voice == 1);
-      getAction("voice-3")->setChecked(padState.voice == 2);
-      getAction("voice-4")->setChecked(padState.voice == 3);
+      getAction("voice-1")->setChecked(_padState.voice == 0);
+      getAction("voice-2")->setChecked(_padState.voice == 1);
+      getAction("voice-3")->setChecked(_padState.voice == 2);
+      getAction("voice-4")->setChecked(_padState.voice == 3);
 
-      padState.tickLen = padState.len + (padState.dot ? padState.len/2 : 0);
+      _padState.tickLen = _padState.len + (_padState.dot ? _padState.len/2 : 0);
       }
 

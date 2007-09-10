@@ -187,6 +187,7 @@ Canvas* Score::canvas() const
 
 void Score::clear()
       {
+      _padState.pitch = 60;
       info.setFile("");
       _dirty          = false;
       _saved          = false;
@@ -284,8 +285,7 @@ void Score::write(Xml& xml)
                   }
             xml.etag();
             }
-      xml.tag("cursorStaff", _is.track / VOICES);
-      xml.tag("cursorVoice", _is.track % VOICES);
+      xml.tag("cursorTrack", _is.track);
       }
 
 //---------------------------------------------------------
@@ -405,7 +405,7 @@ void Score::fixTicks()
 Measure* Score::pos2measure(const QPointF& p, int* tick, Staff** rst, int* pitch,
    Segment** seg, QPointF* offset) const
       {
-      int voice = padState.voice;
+      int voice = _padState.voice;
 
       for (ciPage ip = _layout->pages()->begin(); ip != _layout->pages()->end(); ++ip) {
             const Page* page = *ip;
@@ -541,7 +541,7 @@ Measure* Score::pos2measure(const QPointF& p, int* tick, Staff** rst, int* pitch
 Measure* Score::pos2measure2(const QPointF& p, int* tick, Staff** rst, int* line,
    Segment** seg) const
       {
-      int voice = padState.voice;
+      int voice = _padState.voice;
 
       for (ciPage ip = _layout->pages()->begin(); ip != _layout->pages()->end(); ++ip) {
             const Page* page = *ip;
@@ -933,7 +933,7 @@ ChordRest* Score::setNoteEntry(bool val, bool step)
             mscore->setState(STATE_NOTE_ENTRY);
             }
       else {
-            padState.len   = 0;
+            _padState.len   = 0;
             _is.pos        = -1;
             _noteEntryMode = false;
             setPadState();
@@ -964,7 +964,7 @@ void Score::midiNoteReceived(int pitch, bool chord)
       if (!noteEntryMode())
             setNoteEntry(true, false);
       if (noteEntryMode()) {
-            int len = padState.tickLen;
+            int len = _padState.tickLen;
             if (chord) {
                   Note* on = getSelectedNote();
                   Note* n = addNote(on->chord(), pitch);

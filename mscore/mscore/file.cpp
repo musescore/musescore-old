@@ -661,10 +661,6 @@ bool Score::loadFile(QFile* qf)
                               sigmap->read(ee, division, _fileDivision);
                         else if (tag == "tempolist")
                               tempomap->read(ee, this);
-                        else if (tag == "cursorStaff")
-                              _is.track = i * VOICES;
-                        else if (tag == "cursorVoice")
-                              _is.track += i;
                         else if (tag == "Mag")
                               setMag(val.toDouble());
                         else if (tag == "xoff")
@@ -701,6 +697,12 @@ bool Score::loadFile(QFile* qf)
                                     createSymbolPalette();
                               ::symbolPalette->read(ee);
                               }
+                        else if (tag == "cursorTrack")
+                              _is.track = i;
+                        else if (tag == "cursorStaff")      // obsolete
+                              _is.track = i * VOICES;
+                        else if (tag == "cursorVoice")      // obsolete
+                              _is.track += i;
                         else
                               domError(ee);
                         }
