@@ -1,33 +1,25 @@
 Internationalization
 
-Currently MuseScore contains a mix of german and english.
-My english is not too good so its likely that MuseScore contains
-some bad/wrong musical terms. To fix this i need your help.
-
-If you want to contribute a translation the following hints
-may be of help to you:
+If you want to contribute a translation of MuseScore the following hints
+may be of help to you.
+The step for step instructions add the new language "french" to
+MuseScore (fr is the two-letter ISO 3166 country code for french):
 
 
 Step 1:
-      enter the MuseScore directory and edit the
-      file "mscore.pro"
+      Edit the script "gen-qt-projectfile":
+            Add a new language target by adding a line
+            below "echo "TRANSLATIONS =":
+               echo "     $1/share/locale/mscore_fr.ts \\"
 
-      Append a new target file name at "TRANSLATIONS"
-      e.g. change
-            TRANSLATIONS = mscore_de.ts
-      into
-            TRANSLATIONS = mscore_de.ts mscore_fr.ts
-      if you want to generate a french MuseScore version.
+      Execute the script to create a current "mscore.pro" file
+
+            ./gen-qt-projectfile
 
 Step 2:
-      start the Qt-Program "lupdate"
+      Enter the build directory and type:
 
-            lupdate mscore.pro
-
-      Maybe "lupdate" is not in your PATH and you must
-      specify the complete pathname "lupdate"
-      Example:
-            /usr/lib/qt4/bin/lupdate mscore.pro
+            make lupdate
 
       This generates the file "locale/mscore_fr.ts".
 
@@ -38,34 +30,35 @@ Step 3:
 
 Step 4:
      Save the edited file "mscore_fr.ts" from linguist and
-     start File->Release. This generates the file "locale/mscore_fr.qm"
+     in the build directory type
 
-      or
-
-      start the Qt program "lrelease"
-
-            lrelease mscore.pro
-
-      This generates all *.qm files.
+            make lrelease
 
 Step 5:
-      install the *.qm files: as superuser start "make install"
+      install the *.qm files: as superuser type
+
+            make install
+
+      or for all debian based systems type
+
+            sudo make install
 
 
 Step 6:
       Test:
             set the environment variable LC_ALL to the desired
             Language:
+
                   export LC_ALL=fr
 
-            Start mscore:
-                  mscore sonata16.msc
+            Start mscore to test:
+
+                  mscore
 
 
 share/templates/instruments.xml:
       The instruments definition file can be localized by
       supplying a translated instruments_xx.xml file,
       where xx is a two-letter ISO 3166 country code.
-
 
 

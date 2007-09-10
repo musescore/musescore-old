@@ -145,7 +145,7 @@ class Canvas : public QFrame, public Viewer {
 
       void modifyElement(Element* obj);
 
-      virtual void moveCursor(int, int);
+      virtual void moveCursor();
       virtual void moveCursor(Segment*);
       virtual void setCursorOn(bool);
       void clearScore();

@@ -275,8 +275,7 @@ void Score::select(Element* obj, int state, int staff)
             }
       else {
             sel->add(obj);
-            cis->staff = obj->staffIdx();
-            cis->voice = obj->voice();   //TODO
+            _is.track = obj->staffIdx() + obj->voice();
             }
       ::setPadState(obj);
       emit selectionChanged(int(sel->state()));
@@ -377,11 +376,12 @@ void Selection::updateState()
             if (n == 0)
                   _state = SEL_NONE;
             else if (n == 1) {
-                  _state = SEL_SINGLE;
-                  Element* obj = element();
-                  ::setPadState(obj);
-                  cis->staff = obj->staffIdx();
-                  cis->voice = obj->voice();   //TODO
+                  _state     = SEL_SINGLE;
+                  Element* e = element();
+                  if (e->type() == NOTE || e->type() == REST) {
+                        ::setPadState(e);
+                        e->score()->setInputTrack(e->track());
+                        }
                   }
             else
                   _state = SEL_MULT;

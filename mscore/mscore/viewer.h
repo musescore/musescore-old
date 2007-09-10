@@ -64,7 +64,7 @@ class Viewer {
       void setDropTarget(const Element*);
       void setDropAnchor(const QLineF&);
       const QMatrix& matrix() const { return _matrix; }
-      virtual void moveCursor(int, int) {}
+      virtual void moveCursor() {}
       virtual void moveCursor(Segment*) {}
       virtual void setCursorOn(bool) {}
       };

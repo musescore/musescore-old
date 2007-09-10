@@ -42,10 +42,10 @@ Note* Score::upAlt(Element* element)
       {
       Element* re = 0;
       if (element->type() == REST) {
-            if (cis->staff <= 0)
+            if (_is.track <= 0)
                   return 0;
-            --(cis->staff);
-            re = searchNote(((Rest*)element)->tick(), cis->staff, -1);
+            --(_is.track);
+            re = searchNote(((Rest*)element)->tick(), _is.track);
             }
       else {
             // find segment
@@ -105,10 +105,10 @@ Note* Score::downAlt(Element* element)
       Element* re = 0;
       int staves = nstaves();
       if (element->type() == REST) {
-            if ((cis->staff+1) >= staves)
+            if ((_is.track + 1) >= staves * VOICES)
                   return 0;
-            ++(cis->staff);
-            re = searchNote(((Rest*)element)->tick(), cis->staff, -1);
+            ++(_is.track);
+            re = searchNote(((Rest*)element)->tick(), _is.track);
             }
       else {
             // find segment

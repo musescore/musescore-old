@@ -119,7 +119,7 @@ void Score::doUndo()
       if (debugMode)
             printf("doUndo\n");
       Selection oSel(*sel);
-      InputState oIs(*cis);
+      InputState oIs(_is);
       sel->deselectAll(this);
       Undo* u = undoList.back();
       QMutableListIterator<UndoOp> i(*u);
@@ -157,7 +157,7 @@ void Score::doRedo()
       if (debugMode)
             printf("doRedo\n");
       Selection oSel(*sel);
-      InputState oIs(*cis);
+      InputState oIs(_is);
       sel->deselectAll(this);
       Undo* u = redoList.back();
       QMutableListIterator<UndoOp> i(*u);
@@ -512,7 +512,7 @@ void Score::endUndoRedo(Undo* undo)
       getAction("redo")->setEnabled(!redoList.empty());
       setDirty(true);
 
-      *cis = undo->inputState;
+      _is = undo->inputState;
 
       if (!noteEntryMode()) {
             // no input state

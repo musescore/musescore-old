@@ -28,10 +28,13 @@
 struct InputState {
       int pos;          // tick: current cursor position for input
                         //     -1 = not in note entry mode
-      int staff;        // current staff for input
-      int voice;        // current voice for input
+      int track;        // current track for input
+
+      InputState() {
+            pos = 0;
+            track = 0;
+            }
       };
 
-extern InputState* cis;        // current input state
 #endif
 

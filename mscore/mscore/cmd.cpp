@@ -93,7 +93,7 @@ void Score::startCmd()
                   fprintf(stderr, "Score::startCmd(): cmd already active\n");
             return;
             }
-      undoList.push_back(new Undo(*cis, sel));
+      undoList.push_back(new Undo(_is, sel));
       cmdActive = true;
       }
 
@@ -150,7 +150,7 @@ void Score::end()
 
       foreach(Viewer* v, viewer) {
             if (noteEntryMode())
-                  v->moveCursor(cis->pos, cis->staff * VOICES + cis->voice);
+                  v->moveCursor();
             if (updateAll)
                   v->updateAll(this);
             else
@@ -452,9 +452,9 @@ void Score::cmdAddPitch(int note, bool addFlag)
             //
             // look for next note position
             //
-            Measure* m = tick2measure(cis->pos);
-            m->createVoice(cis->staff * VOICES + cis->voice);
-            cr = (ChordRest*)searchNote(cis->pos, cis->staff, cis->voice);
+            Measure* m = tick2measure(_is.pos);
+            m->createVoice(_is.track);
+            cr = (ChordRest*)searchNote(_is.pos, _is.track);
             if (!cr || !cr->isChordRest())
                   setNoteEntry(false, false);
             }
@@ -463,7 +463,7 @@ void Score::cmdAddPitch(int note, bool addFlag)
             return;
             }
 
-      int key   = cr->staff()->keymap()->key(cis->pos) + 7;
+      int key   = cr->staff()->keymap()->key(_is.pos) + 7;
       int pitch = ptab[key][note];
 
       int delta = padState.pitch - (octave*12 + pitch);
@@ -492,8 +492,8 @@ void Score::cmdAddPitch(int note, bool addFlag)
             int len = padState.tickLen;
             if (cr->tuplet())
                   len = cr->tuplet()->noteLen();
-            setNote(cis->pos, staff(cis->staff), cis->voice, padState.pitch, len);
-            cis->pos += len;
+            setNote(_is.pos, _is.track, padState.pitch, len);
+            _is.pos += len;
             }
       }
 
@@ -548,13 +548,11 @@ void Score::cmdAddInterval(int val)
  Set note (\a pitch, \a len) at position \a tick / \a staff / \a voice.
 */
 
-void Score::setNote(int tick, Staff* staff, int voice, int pitch, int len)
+void Score::setNote(int tick, int track, int pitch, int len)
       {
-      bool addTie  = padState.tie;
-      int staffIdx = staff->idx();
-      int track    = staffIdx * VOICES + voice;
-      Tie* tie     = 0;
-      Note* note   = 0;
+      bool addTie    = padState.tie;
+      Tie* tie       = 0;
+      Note* note     = 0;
       Tuplet* tuplet = 0;
 
       while (len) {
@@ -608,11 +606,10 @@ void Score::setNote(int tick, Staff* staff, int voice, int pitch, int len)
 
             note = new Note(this);
             note->setPitch(pitch);
-            note->setStaff(staff);
+            note->setStaff(staff(track / VOICES));
 
             if (seq && mscore->playEnabled()) {
-                  Staff* staff = note->staff();
-                  seq->startNote(staff->midiChannel(), note->pitch(), 64);
+                  seq->startNote(note->staff()->midiChannel(), note->pitch(), 64);
                   }
 
             if (tie) {
@@ -621,11 +618,11 @@ void Score::setNote(int tick, Staff* staff, int voice, int pitch, int len)
                   }
             Chord* chord = new Chord(this);
             chord->setTick(tick);
-            chord->setVoice(voice);
-            chord->setStaff(staff);
+            chord->setVoice(track % VOICES);
+            chord->setStaff(staff(track / VOICES));
             chord->add(note);
             chord->setTickLen(noteLen);
-            chord->setStemDirection(preferences.stemDir[voice]);
+            chord->setStemDirection(preferences.stemDir[track % VOICES]);
             if (tuplet) {
                   chord->setTuplet(tuplet);
                   tuplet->add(chord);
@@ -644,7 +641,7 @@ void Score::setNote(int tick, Staff* staff, int voice, int pitch, int len)
             tick += noteLen;
 
             if (len < 0)
-                  setRest(tick, -len, staff, voice, measure);
+                  setRest(tick, -len, track, measure);
             if (len <= 0)
                   break;
             //
@@ -672,10 +669,8 @@ void Score::setNote(int tick, Staff* staff, int voice, int pitch, int len)
  Set rest(\a len) at position \a tick / \a staff / \a voice.
 */
 
-void Score::setRest(int tick, Staff* st, int voice, int len)
+void Score::setRest(int tick, int track, int len)
       {
-      int staffIdx = st->idx();
-      int track    = staffIdx * VOICES + voice;
       int stick    = tick;
       Measure* measure = tick2measure(stick);
       if (measure == 0) {
@@ -722,14 +717,14 @@ void Score::setRest(int tick, Staff* st, int voice, int len)
       if (noteLen < len)
             printf("setRest: cannot find segment! rest: %d\n", len - noteLen);
 
-      Rest* rest = setRest(tick, len, st, voice, measure);
+      Rest* rest = setRest(tick, len, track, measure);
       if (tuplet) {
             rest->setTuplet(tuplet);
             tuplet->add(rest);
             }
       select(rest, 0, 0);
       if (noteLen - len > 0) {
-            setRest(tick + len, noteLen - len, st, voice, measure);
+            setRest(tick + len, noteLen - len, track, measure);
             }
       layoutAll = true;
       }
@@ -1290,13 +1285,13 @@ void Score::cmd(const QString& cmd)
                               if (el->type() == NOTE)
                                     el = el->parent();
                               if (el->isChordRest())
-                                    cis->pos = ((ChordRest*)el)->tick();
+                                    _is.pos = ((ChordRest*)el)->tick();
                               }
                         }
                   if (noteEntryMode()) {
                         int len = padState.tickLen;
-                        setRest(cis->pos, staff(cis->staff), cis->voice, len);
-                        cis->pos += len;
+                        setRest(_is.pos, _is.track, len);
+                        _is.pos += len;
                         }
                   padState.rest = false;  // continue with normal note entry
                   }
@@ -1697,7 +1692,7 @@ void Score::move(const QString& cmd)
                   select(el, 0, 0);
                   adjustCanvasPosition(el);
                   if (noteEntryMode()) {
-                        cis->pos = tick;
+                        _is.pos = tick;
                         }
                   }
             }

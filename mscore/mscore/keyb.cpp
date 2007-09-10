@@ -208,9 +208,9 @@ void Score::padToggle(int n)
                         int tick = ((ChordRest*)el)->tick();
                         int len = padState.tickLen;
                         if (padState.rest)
-                              setRest(tick, staff(cis->staff), cis->voice, len);
+                              setRest(tick, _is.track, len);
                         else
-                              setNote(tick, staff(cis->staff), cis->voice, padState.pitch, len);
+                              setNote(tick, _is.track, padState.pitch, len);
                         }
                   }
             }

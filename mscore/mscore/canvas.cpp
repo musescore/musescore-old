@@ -958,14 +958,15 @@ void Canvas::clearScore()
 //   moveCursor
 //---------------------------------------------------------
 
-void Canvas::moveCursor(int tick, int track)
+void Canvas::moveCursor()
       {
+      int track = _score->inputTrack();
       if (track == -1) {
             track = 0;
             }
       int staff = track / VOICES;
       cursor->setVoice(track % VOICES);
-      cursor->setTick(tick);
+      cursor->setTick(_score->inputPos());
       cursor->setStaff(_score->staff(staff));
 
       Segment* segment = _score->tick2segment(cursor->tick());
@@ -1076,7 +1077,7 @@ void Canvas::paintEvent(QPaintEvent* ev)
             if (navigator)
                   navigator->layoutChanged();
             if (_score->noteEntryMode())
-                  moveCursor(cis->pos, cis->staff * VOICES + cis->voice);
+                  moveCursor();
             if (state == EDIT || state == DRAG_EDIT)
                   updateGrips();
             region = QRegion(0, 0, width(), height());

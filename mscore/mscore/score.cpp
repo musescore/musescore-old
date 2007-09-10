@@ -38,7 +38,6 @@
 #include "canvas.h"
 #include "segment.h"
 #include "xml.h"
-#include "input.h"
 #include "text.h"
 #include "note.h"
 #include "chord.h"
@@ -55,8 +54,6 @@
 #include "pitchspelling.h"
 
 Score* gscore;                 ///< system score, used for palettes etc.
-InputState inputState;
-InputState* cis;              ///<  = &inputState;
 
 QPoint scorePos(0,0);
 QSize  scoreSize(950, 500);
@@ -134,10 +131,6 @@ Score::Score()
       editObject        = 0;
       origDragObject    = 0;
       _dragObject       = 0;
-      cis               = &inputState;
-      cis->pos          = -1;
-      cis->staff        = 0;
-      cis->voice        = 0;
       keyState          = 0;
       editTempo         = 0;
       updateAll         = false;
@@ -291,6 +284,8 @@ void Score::write(Xml& xml)
                   }
             xml.etag();
             }
+      xml.tag("cursorStaff", _is.track / VOICES);
+      xml.tag("cursorVoice", _is.track % VOICES);
       }
 
 //---------------------------------------------------------
@@ -642,22 +637,6 @@ int Score::staff(const Part* part) const
       }
 
 //---------------------------------------------------------
-//   part
-//---------------------------------------------------------
-
-/**
- Return staff \a n in the staff list.
-*/
-
-Staff* Score::staff(int n) const
-      {
-      if (n < int(_staves.size()))
-            return _staves[n];
-      printf("staff %d out of range; %zd\n", n, _staves.size());
-      return 0;
-      }
-
-//---------------------------------------------------------
 //   readStaff
 //---------------------------------------------------------
 
@@ -902,9 +881,9 @@ ChordRest* Score::setNoteEntry(bool val, bool step)
                         if (!el->isChordRest())
                               return 0;
                         cr = (ChordRest*)el;
-                        if (cr->tick() == cis->pos) {
+                        if (cr->tick() == _is.pos) {
                               // int len = cr->tuplet() ? cr->tuplet()->noteLen() : cr->tickLen();
-                              cis->pos += cr->tickLen();
+                              _is.pos += cr->tickLen();
                               }
                         }
                   return cr;
@@ -938,24 +917,24 @@ ChordRest* Score::setNoteEntry(bool val, bool step)
             if (el->type() == NOTE)
                   el = el->parent();
             cr = (ChordRest*)el;
-            cis->pos = cr->tick();
+            _is.pos = cr->tick();
             if (step) {
                   if (cr->tuplet())
-                        cis->pos += cr->tuplet()->noteLen();
+                        _is.pos += cr->tuplet()->noteLen();
                   else
-                        cis->pos += cr->tickLen();
+                        _is.pos += cr->tickLen();
                   }
             _noteEntryMode = true;
             foreach(Viewer* v, viewer) {
                   v->setCursorOn(true);
-                  v->moveCursor(cis->pos, cis->staff * VOICES + cis->voice);
+                  v->moveCursor();
                   }
             canvas()->setState(Canvas::NOTE_ENTRY);
             mscore->setState(STATE_NOTE_ENTRY);
             }
       else {
             padState.len   = 0;
-            cis->pos       = -1;
+            _is.pos        = -1;
             _noteEntryMode = false;
             setPadState();
             foreach(Viewer* v, viewer)
@@ -992,8 +971,8 @@ void Score::midiNoteReceived(int pitch, bool chord)
                   select(n, 0, 0);
                   }
             else {
-                  setNote(cis->pos, staff(cis->staff), cis->voice, pitch, len);
-                  cis->pos += len;
+                  setNote(_is.pos, _is.track, pitch, len);
+                  _is.pos += len;
                   }
             }
       layoutAll = false;
