@@ -45,8 +45,8 @@ struct LNote {
 
 class Lilypond {
       Score* score;
-      QByteArray data;
-      char* cp;
+      QString data;
+      int ci;
       int line;
       int tick;
       Part* part;
@@ -55,8 +55,8 @@ class Lilypond {
       int relpitch;
       int curLen;
 
-      bool lookup(char c);
-      char lookup();
+      bool lookup(QChar c);
+      QChar lookup();
       void error(const char* txt);
       LNote scanNote();
       void addNote(const LNote&);
@@ -106,8 +106,9 @@ bool Lilypond::read(const QString& name)
             printf("cannot open file <%s>\n", qPrintable(name));
             return false;
             }
-      data = fp.readAll();
+      QByteArray ba = fp.readAll();
       fp.close();
+      data = QString::fromUtf8(ba.data());
       return true;
       }
 
@@ -124,26 +125,26 @@ void Lilypond::error(const char* txt)
 //   lookup
 //---------------------------------------------------------
 
-bool Lilypond::lookup(char c)
+bool Lilypond::lookup(QChar c)
       {
-      while (*cp) {
-            if (*cp == c)
+      while (!data[ci].isNull()) {
+            if (data[ci] == c)
                   return true;
-            if (*cp == '\n')
+            if (data[ci] == '\n')
                   ++line;
-            ++cp;
+            ++ci;
             }
       return false;
       }
 
-char Lilypond::lookup()
+QChar Lilypond::lookup()
       {
-      while (*cp) {
-            if (*cp != ' ' && *cp != '\n')
-                  return *cp;
-            ++cp;
+      while (data[ci].isSpace()) {
+            if (data[ci] == '\n')
+                  ++line;
+            ++ci;
             }
-      return false;
+      return data[ci];
       }
 
 //---------------------------------------------------------
@@ -152,10 +153,10 @@ char Lilypond::lookup()
 
 LNote Lilypond::scanNote()
       {
-      char c    = lookup();
+      QChar c   = lookup();
       int pitch = 48;
 
-      switch (c) {
+      switch (c.toAscii()) {
             case 'a':   pitch += 9; break;
             case 'b':   pitch += 11; break;
             case 'c':   break;
@@ -164,8 +165,8 @@ LNote Lilypond::scanNote()
             case 'f':   pitch += 5; break;
             case 'g':   pitch += 7; break;
             }
-      ++cp;
-      printf("scanNote pitch %d relpitch %d\n", pitch, relpitch);
+      ++ci;
+printf("scanNote pitch %d relpitch %d\n", pitch, relpitch);
       if (relpitch > 0) {
             if (pitch < relpitch) {
                   while ((relpitch - pitch) > 5)
@@ -178,23 +179,21 @@ LNote Lilypond::scanNote()
             }
       int octave = 0;
       for (;;) {
-            if (*cp == ' ' || *cp == '\n')
+            if (data[ci] == ' ' || data[ci] == '\n')
                   break;
-            if (*cp == '\'') {
+            if (data[ci] == '\'') {
                   ++octave;
-                  ++cp;
+                  ++ci;
                   }
-            else if (*cp == ',') {
+            else if (data[ci] == ',') {
                   --octave;
-                  ++cp;
+                  ++ci;
                   }
-            else if (isalnum(*cp)) {
-                  char buffer[16];
-                  char* d = buffer;
-                  while (isalnum(*cp))
-                        *d++ = *cp++;
-                  *d = 0;
-                  int len = atoi(buffer);
+            else if (data[ci].isLetterOrNumber()) {
+                  QString buffer;
+                  while (data[ci].isLetterOrNumber())
+                        buffer.append(data[ci++]);
+                  int len = buffer.toInt();
                   switch(len) {
                         case 1:  curLen = division * 4; break;
                         case 2:  curLen = division * 2; break;
@@ -208,9 +207,9 @@ LNote Lilypond::scanNote()
                               break;
                         }
                   }
-            else if (*cp == '.') {
+            else if (data[ci] == '.') {
                   curLen += (curLen / 2);
-                  ++cp;
+                  ++ci;
                   }
             }
       pitch += octave * 12;
@@ -225,17 +224,15 @@ LNote Lilypond::scanNote()
 
 void Lilypond::scanRest()
       {
-      ++cp;
+      ++ci;
       for (;;) {
-            if (*cp == ' ' || *cp == '\n')
+            if (data[ci] == ' ' || data[ci] == '\n')
                   break;
-            if (isalnum(*cp)) {
-                  char buffer[16];
-                  char* d = buffer;
-                  while (isalnum(*cp))
-                        *d++ = *cp++;
-                  *d = 0;
-                  int len = atoi(buffer);
+            if (data[ci].isLetterOrNumber()) {
+                  QString buffer;
+                  while (data[ci].isLetterOrNumber())
+                        buffer.append(data[ci++]);
+                  int len = buffer.toInt();
                   switch(len) {
                         case 1:  curLen = division * 4; break;
                         case 2:  curLen = division * 2; break;
@@ -249,9 +246,9 @@ void Lilypond::scanRest()
                               break;
                         }
                   }
-            else if (*cp == '.') {
+            else if (data[ci] == '.') {
                   curLen += (curLen / 2);
-                  ++cp;
+                  ++ci;
                   }
             }
       }
@@ -366,18 +363,15 @@ void Lilypond::cmdClef()
 
 void Lilypond::scanCmd()
       {
-      char buffer[32];
-      char* d = buffer;
-      while (*cp && *cp != ' ' && *cp != '\n')
-            *d++ = *cp++;
-      *d = 0;
-      if (strcmp(buffer, "relative") == 0)
+      QString buffer;
+      while (!data[ci].isNull() && data[ci] != ' ' && data[ci] != '\n')
+            buffer.append(data[ci++]);
+      if (buffer == "relative")
             cmdRelative();
-      else if (strcmp(buffer, "time") == 0)
+      else if (buffer == "time")
             cmdTime();
-      else if (strcmp(buffer, "clef") == 0)
+      else if (buffer == "clef")
             cmdClef();
-
       else
             error("unknown cmd");
       }
@@ -388,7 +382,7 @@ void Lilypond::scanCmd()
 
 void Lilypond::convert()
       {
-      cp   = data.data();
+      ci   = 0;
       line = 0;
       tick = 0;
 
@@ -404,16 +398,16 @@ void Lilypond::convert()
       measure->setTickLen(division * 4);
       score->mainLayout()->push_back(measure);
 
-      char c = lookup();
+      QChar c = lookup();
       if (c == '\\') {
-            ++cp;
+            ++ci;
             scanCmd();
             }
       if (!lookup('{'))
             error("{ expected");
-      ++cp;
-      for (char c = lookup(); c && c != '}'; c = lookup()) {
-            switch(c) {
+      ++ci;
+      for (QChar c = lookup(); !c.isNull() && c != '}'; c = lookup()) {
+            switch(c.toAscii()) {
                   case 'a' ... 'g':
                         {
                         LNote note = scanNote();
@@ -425,8 +419,8 @@ void Lilypond::convert()
                         addRest();
                         break;
                   default:
-                        printf("unexpected char <%c>\n", c);
-                        ++cp;
+                        printf("unexpected char <%c>\n", c.toAscii());
+                        ++ci;
                         break;
                   }
             }

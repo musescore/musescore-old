@@ -131,13 +131,13 @@ void Score::changeRest(Rest* rest, int /*tick*/, int len)
 //   setRest
 //---------------------------------------------------------
 
-Rest* Score::setRest(int tick, int len, Staff* staffp, int voice, Measure* measure)
+Rest* Score::setRest(int tick, int len, int track, Measure* measure)
       {
       Rest* rest = 0;
       if (len / (division*4)) {
             int nlen =  len % (division*4);
             if (nlen) {
-                  setRest(tick, nlen, staffp, voice, measure);
+                  setRest(tick, nlen, track, measure);
                   tick += nlen;
                   }
             rest = new Rest(this, tick, division*4);
@@ -145,7 +145,7 @@ Rest* Score::setRest(int tick, int len, Staff* staffp, int voice, Measure* measu
       else if (len / (division*2)) {
             int nlen =  len % (division*2);
             if (nlen) {
-                  setRest(tick, nlen, staffp, voice, measure);
+                  setRest(tick, nlen, track, measure);
                   tick += nlen;
                   }
             rest = new Rest(this, tick, division*2);
@@ -153,7 +153,7 @@ Rest* Score::setRest(int tick, int len, Staff* staffp, int voice, Measure* measu
       else if (len / division) {
             int nlen =  len % (division);
             if (nlen) {
-                  setRest(tick, nlen, staffp, voice, measure);
+                  setRest(tick, nlen, track, measure);
                   tick += nlen;
                   }
             rest = new Rest(this, tick, division);
@@ -161,7 +161,7 @@ Rest* Score::setRest(int tick, int len, Staff* staffp, int voice, Measure* measu
       else if (len / (division/2)) {
             int nlen = len % (division/2);
             if (nlen) {
-                  setRest(tick, nlen, staffp, voice, measure);
+                  setRest(tick, nlen, track, measure);
                   tick += nlen;
                   }
             rest = new Rest(this, tick, division/2);
@@ -169,7 +169,7 @@ Rest* Score::setRest(int tick, int len, Staff* staffp, int voice, Measure* measu
       else if (len / (division/4)) {
             int nlen = len % (division/4);
             if (nlen) {
-                  setRest(tick, nlen, staffp, voice, measure);
+                  setRest(tick, nlen, track, measure);
                   tick += nlen;
                   }
             rest = new Rest(this, tick, division/4);
@@ -177,7 +177,7 @@ Rest* Score::setRest(int tick, int len, Staff* staffp, int voice, Measure* measu
       else if (len / (division/8)) {
             int nlen = len % (division/8);
             if (nlen) {
-                  setRest(tick, nlen, staffp, voice, measure);
+                  setRest(tick, nlen, track, measure);
                   tick += nlen;
                   }
             rest = new Rest(this, tick, division/8);
@@ -185,7 +185,7 @@ Rest* Score::setRest(int tick, int len, Staff* staffp, int voice, Measure* measu
       else if (len / (division/16)) {
             int nlen = len % (division/16);
             if (nlen) {
-                  setRest(tick, nlen, staffp, voice, measure);
+                  setRest(tick, nlen, track, measure);
                   tick += nlen;
                   }
             rest = new Rest(this, tick, division/16);
@@ -193,14 +193,14 @@ Rest* Score::setRest(int tick, int len, Staff* staffp, int voice, Measure* measu
       else if (len / (division/32)) {
             int nlen = len % (division/32);
             if (nlen) {
-                  setRest(tick, nlen, staffp, voice, measure);
+                  setRest(tick, nlen, track, measure);
                   tick += nlen;
                   }
             rest = new Rest(this, tick, division/32);
             }
       if (rest) {
-            rest->setVoice(voice);
-            rest->setStaff(staffp);
+            rest->setVoice(track % VOICES);
+            rest->setStaff(staff(track / VOICES));
             Segment::SegmentType st = Segment::segmentType(rest->type());
             Segment* seg = measure->findSegment(st, tick);
             if (seg == 0) {
@@ -573,20 +573,19 @@ void Score::putNote(const QPointF& pos, bool addToChord)
                         }
                   }
             else {
-                  setNote(tick, staff, voice, pitch, len);
+                  setNote(tick, track, pitch, len);
                   }
             }
       else {
             // replace chord
             if (padState.rest)
-                  setRest(tick, staff, voice, len);
+                  setRest(tick, track, len);
             else
-                  setNote(tick, staff, voice, pitch, len);
+                  setNote(tick, track, pitch, len);
             }
-      cis->staff     = _staves.indexOf(staff);
-      cis->voice     = voice;
+      _is.track     = _staves.indexOf(staff) + voice;
       padState.pitch = pitch;
-      cis->pos       = tick + len;
+      _is.pos       = tick + len;
       }
 
 //---------------------------------------------------------
@@ -1526,10 +1525,9 @@ void Score::cmdTuplet(int n)
 void Score::changeVoice(int voice)
       {
       padState.voice = voice;
-      if (cis->voice != voice) {
-            cis->voice = voice;
+      if (_is.track % VOICES != voice) {
+            _is.track = (_is.track / VOICES) + voice;
             layoutAll = true;
-            // moveCursor();
             }
       }
 

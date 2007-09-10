@@ -617,9 +617,6 @@ bool MuseScore::saveFile(QFile* f)
 
       cs->write(xml);
 
-      xml.tag("cursorStaff", cis->staff);
-      xml.tag("cursorVoice", cis->voice);
-
       xml.etag();
       if (f->error() != QFile::NoError) {
             QString s = QString("Write File failed: ") + f->errorString();
@@ -665,9 +662,9 @@ bool Score::loadFile(QFile* qf)
                         else if (tag == "tempolist")
                               tempomap->read(ee, this);
                         else if (tag == "cursorStaff")
-                              cis->staff = i;
+                              _is.track = i * VOICES;
                         else if (tag == "cursorVoice")
-                              cis->voice = i;
+                              _is.track += i;
                         else if (tag == "Mag")
                               setMag(val.toDouble());
                         else if (tag == "xoff")

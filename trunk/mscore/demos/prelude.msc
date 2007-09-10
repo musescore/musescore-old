@@ -1012,6 +1012,8 @@
     </tempolist>
   <Part>
     <Staff>
+      <lines>5</lines>
+      <small>0</small>
       <cleflist>
         <clef tick="0" idx="0"/>
         </cleflist>
@@ -1044,7 +1046,7 @@ p, li { white-space: pre-wrap; }
         <spatiumSizeDependent>0</spatiumSizeDependent>
         <data>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Arial&apos;; font-size:11pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Times New Roman&apos;; font-size:24pt;&quot;&gt;&lt;span style=&quot; font-size:10pt;&quot;&gt;In memoriam Alexandre Tansman&lt;/span&gt;&lt;/p&gt;
 &lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Times New Roman&apos;; font-size:10pt;&quot;&gt;&lt;span style=&quot; font-size:24pt;&quot;&gt;Prelude&lt;/span&gt;&lt;/p&gt;
 &lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Times New Roman&apos;; font-size:24pt;&quot;&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;For Guitar&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
@@ -1062,6 +1064,7 @@ p, li { white-space: pre-wrap; }
 &lt;p align=&quot;right&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Dave Phillips 2005&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
         <subtype>Composer</subtype>
         </Text>
+      <irregular/>
       <Slur>
         <startTick>0</startTick>
         <endTick>240</endTick>
@@ -1194,6 +1197,7 @@ p, li { white-space: pre-wrap; }
       <BarLine/>
       </Measure>
     <Measure number="2">
+      <irregular/>
       <Slur>
         <startTick>1200</startTick>
         <endTick>1440</endTick>
@@ -1205,7 +1209,7 @@ p, li { white-space: pre-wrap; }
         <align>1</align>
         <xoffset>0</xoffset>
         <yoffset>-4</yoffset>
-        <anchor>staff</anchor>
+        <anchor>system</anchor>
         <offsetType>spatium</offsetType>
         <spatiumSizeDependent>1</spatiumSizeDependent>
         <data>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
@@ -1349,6 +1353,7 @@ p, li { white-space: pre-wrap; }
       <BarLine/>
       </Measure>
     <Measure number="3">
+      <irregular/>
       <Slur>
         <startTick>2640</startTick>
         <endTick>2880</endTick>
@@ -1380,6 +1385,7 @@ p, li { white-space: pre-wrap; }
       <BarLine/>
       </Measure>
     <Measure number="4">
+      <irregular/>
       <Slur>
         <startTick>3840</startTick>
         <endTick>4080</endTick>
@@ -1401,6 +1407,7 @@ p, li { white-space: pre-wrap; }
       <BarLine/>
       </Measure>
     <Measure number="5">
+      <irregular/>
       <LayoutBreak>
         <subtype>line</subtype>
         </LayoutBreak>
@@ -1524,6 +1531,7 @@ p, li { white-space: pre-wrap; }
       <BarLine/>
       </Measure>
     <Measure number="6">
+      <irregular/>
       <Slur>
         <startTick>6480</startTick>
         <endTick>6720</endTick>
@@ -1536,7 +1544,7 @@ p, li { white-space: pre-wrap; }
         <align>1</align>
         <xoffset>0</xoffset>
         <yoffset>-4</yoffset>
-        <anchor>staff</anchor>
+        <anchor>system</anchor>
         <offsetType>spatium</offsetType>
         <spatiumSizeDependent>1</spatiumSizeDependent>
         <data>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
@@ -1607,7 +1615,7 @@ p, li { white-space: pre-wrap; }
         <tick>6480</tick>
         <ticklen>1440</ticklen>
         <Attribute>
-          <subtype>3</subtype>
+          <subtype>sforzato</subtype>
           <offset x="-0.176389" y="-5.64444"/>
           <voice>1</voice>
           </Attribute>
@@ -1620,6 +1628,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     <Measure number="7">
+      <irregular/>
       <Slur>
         <startTick>7920</startTick>
         <endTick>8160</endTick>
@@ -1640,6 +1649,7 @@ p, li { white-space: pre-wrap; }
       <BarLine/>
       </Measure>
     <Measure number="8">
+      <irregular/>
       <Slur>
         <startTick>9120</startTick>
         <endTick>9360</endTick>
@@ -1652,7 +1662,7 @@ p, li { white-space: pre-wrap; }
         <align>1</align>
         <xoffset>0</xoffset>
         <yoffset>-4</yoffset>
-        <anchor>staff</anchor>
+        <anchor>system</anchor>
         <offsetType>spatium</offsetType>
         <spatiumSizeDependent>1</spatiumSizeDependent>
         <data>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
@@ -1683,7 +1693,7 @@ p, li { white-space: pre-wrap; }
         <tick>9120</tick>
         <ticklen>1440</ticklen>
         <Attribute>
-          <subtype>3</subtype>
+          <subtype>sforzato</subtype>
           <offset x="-0.176389" y="-5.64444"/>
           <voice>1</voice>
           </Attribute>
@@ -1696,6 +1706,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     <Measure number="9">
+      <irregular/>
       <Slur>
         <startTick>10560</startTick>
         <endTick>10800</endTick>
@@ -1720,6 +1731,7 @@ p, li { white-space: pre-wrap; }
       <BarLine/>
       </Measure>
     <Measure number="10">
+      <irregular/>
       <LayoutBreak>
         <subtype>line</subtype>
         </LayoutBreak>
@@ -1744,6 +1756,7 @@ p, li { white-space: pre-wrap; }
       <BarLine/>
       </Measure>
     <Measure number="11">
+      <irregular/>
       <Dynamic>
         <data>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
@@ -1775,6 +1788,7 @@ p, li { white-space: pre-wrap; }
       <BarLine/>
       </Measure>
     <Measure number="12">
+      <irregular/>
       <Slur>
         <startTick>14400</startTick>
         <endTick>14640</endTick>
@@ -1797,6 +1811,7 @@ p, li { white-space: pre-wrap; }
       <BarLine/>
       </Measure>
     <Measure number="13">
+      <irregular/>
       <Slur>
         <startTick>15840</startTick>
         <endTick>16080</endTick>
@@ -1816,7 +1831,7 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <ticklen>240</ticklen>
         <Attribute>
-          <subtype>3</subtype>
+          <subtype>sforzato</subtype>
           <offset x="0.0287164" y="0.832692"/>
           </Attribute>
         <Note>
@@ -1884,7 +1899,7 @@ p, li { white-space: pre-wrap; }
         <ticklen>240</ticklen>
         <BeamMode>begin</BeamMode>
         <Attribute>
-          <subtype>3</subtype>
+          <subtype>sforzato</subtype>
           <offset x="0.171355" y="1.03795"/>
           </Attribute>
         <Note>
@@ -1951,6 +1966,7 @@ p, li { white-space: pre-wrap; }
       <BarLine/>
       </Measure>
     <Measure number="14">
+      <irregular/>
       <Chord>
         <ticklen>240</ticklen>
         <Note>
@@ -1975,7 +1991,7 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <ticklen>240</ticklen>
         <Attribute>
-          <subtype>3</subtype>
+          <subtype>sforzato</subtype>
           <offset x="0.264583" y="-7.58472"/>
           </Attribute>
         <Note pitch="63" tpc="11"/>
@@ -2007,7 +2023,7 @@ p, li { white-space: pre-wrap; }
         <ticklen>240</ticklen>
         <BeamMode>mid</BeamMode>
         <Attribute>
-          <subtype>3</subtype>
+          <subtype>sforzato</subtype>
           <offset x="-0.748137" y="-6.572"/>
           </Attribute>
         <Note pitch="65" tpc="13"/>
@@ -2055,7 +2071,7 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <ticklen>240</ticklen>
         <Attribute>
-          <subtype>3</subtype>
+          <subtype>sforzato</subtype>
           <offset x="0.264583" y="-7.58472"/>
           </Attribute>
         <Note pitch="62" tpc="16"/>
@@ -2064,6 +2080,7 @@ p, li { white-space: pre-wrap; }
       <BarLine/>
       </Measure>
     <Measure number="15">
+      <irregular/>
       <LayoutBreak>
         <subtype>line</subtype>
         </LayoutBreak>
@@ -2087,6 +2104,7 @@ p, li { white-space: pre-wrap; }
       <BarLine/>
       </Measure>
     <Measure number="16">
+      <irregular/>
       <Slur>
         <startTick>19920</startTick>
         <endTick>20160</endTick>
@@ -2116,7 +2134,7 @@ p, li { white-space: pre-wrap; }
         <tick>19920</tick>
         <ticklen>1440</ticklen>
         <Attribute>
-          <subtype>3</subtype>
+          <subtype>sforzato</subtype>
           <offset x="-0.308937" y="-5.4064"/>
           <voice>1</voice>
           </Attribute>
@@ -2129,6 +2147,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     <Measure number="17">
+      <irregular/>
       <Slur>
         <startTick>21360</startTick>
         <endTick>21600</endTick>
@@ -2149,6 +2168,7 @@ p, li { white-space: pre-wrap; }
       <BarLine/>
       </Measure>
     <Measure number="18">
+      <irregular/>
       <Slur>
         <startTick>22560</startTick>
         <endTick>22800</endTick>
@@ -2178,7 +2198,7 @@ p, li { white-space: pre-wrap; }
         <tick>22560</tick>
         <ticklen>1440</ticklen>
         <Attribute>
-          <subtype>3</subtype>
+          <subtype>sforzato</subtype>
           <offset x="0" y="-5.77186"/>
           <voice>1</voice>
           </Attribute>
@@ -2191,6 +2211,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     <Measure number="19">
+      <irregular/>
       <Slur>
         <startTick>24000</startTick>
         <endTick>24240</endTick>
@@ -2210,7 +2231,7 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <ticklen>240</ticklen>
         <Attribute>
-          <subtype>3</subtype>
+          <subtype>sforzato</subtype>
           <offset x="0.124759" y="0.270312"/>
           </Attribute>
         <Note pitch="60" tpc="14"/>
@@ -2221,7 +2242,7 @@ p, li { white-space: pre-wrap; }
         <ticklen>240</ticklen>
         <BeamMode>begin</BeamMode>
         <Attribute>
-          <subtype>3</subtype>
+          <subtype>sforzato</subtype>
           <offset x="0.191959" y="0.161526"/>
           </Attribute>
         <Note pitch="58" tpc="12"/>
@@ -2231,6 +2252,7 @@ p, li { white-space: pre-wrap; }
       <BarLine/>
       </Measure>
     <Measure number="20">
+      <irregular/>
       <LayoutBreak>
         <subtype>line</subtype>
         </LayoutBreak>
@@ -2238,7 +2260,7 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <ticklen>240</ticklen>
         <Attribute>
-          <subtype>3</subtype>
+          <subtype>sforzato</subtype>
           <offset x="0.508678" y="-7.503"/>
           </Attribute>
         <Note pitch="63" tpc="11"/>
@@ -2252,7 +2274,7 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <ticklen>240</ticklen>
         <Attribute>
-          <subtype>3</subtype>
+          <subtype>sforzato</subtype>
           <offset x="0.508678" y="-7.503"/>
           </Attribute>
         <Note pitch="65" tpc="13"/>
@@ -2266,7 +2288,7 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <ticklen>240</ticklen>
         <Attribute>
-          <subtype>3</subtype>
+          <subtype>sforzato</subtype>
           <offset x="0.254339" y="-8.52036"/>
           </Attribute>
         <Note pitch="62" tpc="16"/>
@@ -2275,6 +2297,7 @@ p, li { white-space: pre-wrap; }
       <BarLine/>
       </Measure>
     <Measure number="21">
+      <irregular/>
       <Slur>
         <startTick>26880</startTick>
         <endTick>27840</endTick>
@@ -2312,7 +2335,7 @@ p, li { white-space: pre-wrap; }
         <tick>26880</tick>
         <ticklen>960</ticklen>
         <Attribute>
-          <subtype>3</subtype>
+          <subtype>sforzato</subtype>
           <offset x="0.0950921" y="-5.98358"/>
           <voice>1</voice>
           </Attribute>
@@ -2325,6 +2348,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     <Measure number="22">
+      <irregular/>
       <Slur>
         <startTick>27840</startTick>
         <endTick>28080</endTick>
@@ -2337,7 +2361,7 @@ p, li { white-space: pre-wrap; }
         <align>1</align>
         <xoffset>0</xoffset>
         <yoffset>-4</yoffset>
-        <anchor>staff</anchor>
+        <anchor>system</anchor>
         <offsetType>spatium</offsetType>
         <spatiumSizeDependent>1</spatiumSizeDependent>
         <data>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
@@ -2361,7 +2385,7 @@ p, li { white-space: pre-wrap; }
         <tick>27840</tick>
         <ticklen>480</ticklen>
         <Attribute>
-          <subtype>3</subtype>
+          <subtype>sforzato</subtype>
           <offset x="0.26976" y="-7.72119"/>
           <voice>1</voice>
           </Attribute>
@@ -2376,7 +2400,7 @@ p, li { white-space: pre-wrap; }
         <voice>1</voice>
         <ticklen>480</ticklen>
         <Attribute>
-          <subtype>3</subtype>
+          <subtype>sforzato</subtype>
           <offset x="-0.164263" y="-7.28717"/>
           <voice>1</voice>
           </Attribute>
@@ -2389,6 +2413,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     <Measure number="23">
+      <irregular/>
       <Slur>
         <startTick>28800</startTick>
         <endTick>29040</endTick>
@@ -2530,6 +2555,7 @@ p, li { white-space: pre-wrap; }
       <BarLine/>
       </Measure>
     <Measure number="24">
+      <irregular/>
       <Slur>
         <startTick>30240</startTick>
         <endTick>30480</endTick>
@@ -2557,7 +2583,7 @@ p, li { white-space: pre-wrap; }
         <tick>30240</tick>
         <ticklen>480</ticklen>
         <Attribute>
-          <subtype>3</subtype>
+          <subtype>sforzato</subtype>
           <offset x="-0.308937" y="-5.4064"/>
           <voice>1</voice>
           </Attribute>
@@ -2572,7 +2598,7 @@ p, li { white-space: pre-wrap; }
         <voice>1</voice>
         <ticklen>480</ticklen>
         <Attribute>
-          <subtype>3</subtype>
+          <subtype>sforzato</subtype>
           <offset x="-0.308937" y="-5.4064"/>
           <voice>1</voice>
           </Attribute>
@@ -2584,6 +2610,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     <Measure number="25">
+      <irregular/>
       <Slur>
         <startTick>31200</startTick>
         <endTick>31440</endTick>
@@ -2605,6 +2632,7 @@ p, li { white-space: pre-wrap; }
       <BarLine/>
       </Measure>
     <Measure number="26">
+      <irregular/>
       <LayoutBreak>
         <subtype>line</subtype>
         </LayoutBreak>
@@ -2634,7 +2662,7 @@ p, li { white-space: pre-wrap; }
         <align>1</align>
         <xoffset>0</xoffset>
         <yoffset>-4</yoffset>
-        <anchor>staff</anchor>
+        <anchor>system</anchor>
         <offsetType>spatium</offsetType>
         <spatiumSizeDependent>1</spatiumSizeDependent>
         <data>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
@@ -2740,7 +2768,7 @@ p, li { white-space: pre-wrap; }
         <tick>32640</tick>
         <ticklen>960</ticklen>
         <Attribute>
-          <subtype>3</subtype>
+          <subtype>sforzato</subtype>
           <offset x="0.247187" y="-5.56032"/>
           <voice>1</voice>
           </Attribute>
@@ -2753,6 +2781,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     <Measure number="27">
+      <irregular/>
       <Slur>
         <startTick>33600</startTick>
         <endTick>33840</endTick>
@@ -2852,7 +2881,7 @@ p, li { white-space: pre-wrap; }
         <tick>33600</tick>
         <ticklen>960</ticklen>
         <Attribute>
-          <subtype>3</subtype>
+          <subtype>sforzato</subtype>
           <offset x="0.240033" y="-8.02233"/>
           <voice>1</voice>
           </Attribute>
@@ -2865,6 +2894,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     <Measure number="28">
+      <irregular/>
       <Slur>
         <startTick>34560</startTick>
         <endTick>34800</endTick>
@@ -2877,7 +2907,7 @@ p, li { white-space: pre-wrap; }
         <align>1</align>
         <xoffset>0</xoffset>
         <yoffset>-4</yoffset>
-        <anchor>staff</anchor>
+        <anchor>system</anchor>
         <offsetType>spatium</offsetType>
         <spatiumSizeDependent>1</spatiumSizeDependent>
         <data>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
@@ -2978,7 +3008,7 @@ p, li { white-space: pre-wrap; }
         <tick>34560</tick>
         <ticklen>960</ticklen>
         <Attribute>
-          <subtype>3</subtype>
+          <subtype>sforzato</subtype>
           <offset x="0.240033" y="-8.02233"/>
           <voice>1</voice>
           </Attribute>
@@ -3005,6 +3035,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     <Measure number="29">
+      <irregular/>
       <Slur>
         <startTick>35520</startTick>
         <endTick>35760</endTick>
@@ -3067,7 +3098,7 @@ p, li { white-space: pre-wrap; }
         <tick>35520</tick>
         <ticklen>960</ticklen>
         <Attribute>
-          <subtype>3</subtype>
+          <subtype>sforzato</subtype>
           <offset x="0.240033" y="-6.42098"/>
           <voice>1</voice>
           </Attribute>
@@ -3080,6 +3111,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     <Measure number="30">
+      <irregular/>
       <Slur>
         <startTick>36480</startTick>
         <endTick>36720</endTick>
@@ -3102,7 +3134,7 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <ticklen>240</ticklen>
         <Attribute>
-          <subtype>3</subtype>
+          <subtype>sforzato</subtype>
           <offset x="0.0944561" y="0.566736"/>
           </Attribute>
         <Note>
@@ -3170,7 +3202,7 @@ p, li { white-space: pre-wrap; }
         <ticklen>240</ticklen>
         <BeamMode>begin</BeamMode>
         <Attribute>
-          <subtype>3</subtype>
+          <subtype>sforzato</subtype>
           <offset x="0.0944561" y="0.566736"/>
           </Attribute>
         <Note>
@@ -3237,11 +3269,12 @@ p, li { white-space: pre-wrap; }
       <BarLine/>
       </Measure>
     <Measure number="31">
+      <irregular/>
       <Note pitch="56" tpc="10" ticks="240"/>
       <Chord>
         <ticklen>240</ticklen>
         <Attribute>
-          <subtype>3</subtype>
+          <subtype>sforzato</subtype>
           <offset x="-0.125941" y="-7.65094"/>
           </Attribute>
         <Note pitch="63" tpc="11"/>
@@ -3255,7 +3288,7 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <ticklen>240</ticklen>
         <Attribute>
-          <subtype>3</subtype>
+          <subtype>sforzato</subtype>
           <offset x="-0.818619" y="-5.95073"/>
           </Attribute>
         <Note pitch="65" tpc="13"/>
@@ -3265,7 +3298,7 @@ p, li { white-space: pre-wrap; }
         <ticklen>240</ticklen>
         <BeamMode>begin</BeamMode>
         <Attribute>
-          <subtype>3</subtype>
+          <subtype>sforzato</subtype>
           <offset x="0.0629707" y="-7.49351"/>
           </Attribute>
         <Note pitch="62" tpc="16"/>
@@ -3275,6 +3308,7 @@ p, li { white-space: pre-wrap; }
       <BarLine/>
       </Measure>
     <Measure number="32">
+      <irregular/>
       <LayoutBreak>
         <subtype>line</subtype>
         </LayoutBreak>
@@ -3297,7 +3331,7 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <ticklen>240</ticklen>
         <Attribute>
-          <subtype>3</subtype>
+          <subtype>sforzato</subtype>
           <offset x="-0.125941" y="0.47228"/>
           </Attribute>
         <Note pitch="56" tpc="10"/>
@@ -3308,7 +3342,7 @@ p, li { white-space: pre-wrap; }
         <ticklen>240</ticklen>
         <BeamMode>begin</BeamMode>
         <Attribute>
-          <subtype>3</subtype>
+          <subtype>sforzato</subtype>
           <offset x="-0.125941" y="0.47228"/>
           </Attribute>
         <Note pitch="55" tpc="15"/>
@@ -3318,11 +3352,12 @@ p, li { white-space: pre-wrap; }
       <BarLine/>
       </Measure>
     <Measure number="33">
+      <irregular/>
       <Note pitch="56" tpc="10" ticks="240"/>
       <Chord>
         <ticklen>240</ticklen>
         <Attribute>
-          <subtype>3</subtype>
+          <subtype>sforzato</subtype>
           <offset x="0.512168" y="-7.60935"/>
           </Attribute>
         <Note pitch="63" tpc="11"/>
@@ -3336,7 +3371,7 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <ticklen>240</ticklen>
         <Attribute>
-          <subtype>3</subtype>
+          <subtype>sforzato</subtype>
           <offset x="-0.827776" y="-7.19003"/>
           </Attribute>
         <Note pitch="65" tpc="13"/>
@@ -3346,7 +3381,7 @@ p, li { white-space: pre-wrap; }
         <ticklen>240</ticklen>
         <BeamMode>begin</BeamMode>
         <Attribute>
-          <subtype>3</subtype>
+          <subtype>sforzato</subtype>
           <offset x="0.414974" y="-8.26351"/>
           </Attribute>
         <Note pitch="62" tpc="16"/>
@@ -3355,7 +3390,7 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <ticklen>240</ticklen>
         <Attribute>
-          <subtype>3</subtype>
+          <subtype>sforzato</subtype>
           <offset x="-0.559135" y="-9.28893"/>
           </Attribute>
         <Note pitch="58" tpc="12"/>
@@ -3365,6 +3400,7 @@ p, li { white-space: pre-wrap; }
       <BarLine/>
       </Measure>
     <Measure number="34">
+      <irregular/>
       <stretch>0.9</stretch>
       <Slur>
         <startTick>42240</startTick>
@@ -3390,6 +3426,7 @@ p, li { white-space: pre-wrap; }
       <BarLine/>
       </Measure>
     <Measure number="35">
+      <irregular/>
       <stretch>0.9</stretch>
       <Slur>
         <startTick>43440</startTick>
@@ -3412,6 +3449,7 @@ p, li { white-space: pre-wrap; }
       <BarLine/>
       </Measure>
     <Measure number="36">
+      <irregular/>
       <stretch>0.9</stretch>
       <Slur>
         <startTick>44880</startTick>
@@ -3437,6 +3475,7 @@ p, li { white-space: pre-wrap; }
       <BarLine/>
       </Measure>
     <Measure number="37">
+      <irregular/>
       <stretch>0.9</stretch>
       <Slur>
         <startTick>46080</startTick>
@@ -3459,13 +3498,14 @@ p, li { white-space: pre-wrap; }
       <BarLine/>
       </Measure>
     <Measure number="38">
+      <irregular/>
       <LayoutBreak>
         </LayoutBreak>
       <Text>
         <align>1</align>
         <xoffset>0</xoffset>
         <yoffset>-4</yoffset>
-        <anchor>staff</anchor>
+        <anchor>system</anchor>
         <offsetType>spatium</offsetType>
         <spatiumSizeDependent>1</spatiumSizeDependent>
         <data>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
@@ -3479,7 +3519,7 @@ p, li { white-space: pre-wrap; }
         <align>1</align>
         <xoffset>0</xoffset>
         <yoffset>-4</yoffset>
-        <anchor>staff</anchor>
+        <anchor>system</anchor>
         <offsetType>spatium</offsetType>
         <spatiumSizeDependent>1</spatiumSizeDependent>
         <data>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
@@ -3494,7 +3534,7 @@ p, li { white-space: pre-wrap; }
         <tick>47520</tick>
         <ticklen>240</ticklen>
         <Attribute>
-          <subtype>3</subtype>
+          <subtype>sforzato</subtype>
           <offset x="0.115385" y="-2.30769"/>
           </Attribute>
         <Note pitch="72" tpc="14"/>
@@ -3505,7 +3545,7 @@ p, li { white-space: pre-wrap; }
         <ticklen>240</ticklen>
         <BeamMode>begin</BeamMode>
         <Attribute>
-          <subtype>3</subtype>
+          <subtype>sforzato</subtype>
           <offset x="0.576923" y="-1.96154"/>
           </Attribute>
         <Note pitch="71" tpc="19"/>
@@ -3536,7 +3576,7 @@ p, li { white-space: pre-wrap; }
         <ticklen>240</ticklen>
         <BeamMode>begin</BeamMode>
         <Attribute>
-          <subtype>3</subtype>
+          <subtype>sforzato</subtype>
           <offset x="0.115385" y="-2.30769"/>
           </Attribute>
         <Note pitch="72" tpc="14"/>
@@ -3546,6 +3586,7 @@ p, li { white-space: pre-wrap; }
       <BarLine/>
       </Measure>
     <Measure number="39">
+      <irregular/>
       <Slur>
         <startTick>48960</startTick>
         <endTick>49200</endTick>
@@ -3562,11 +3603,12 @@ p, li { white-space: pre-wrap; }
       <BarLine/>
       </Measure>
     <Measure number="40">
+      <irregular/>
       <stretch>0.9</stretch>
       <Chord>
         <ticklen>240</ticklen>
         <Attribute>
-          <subtype>3</subtype>
+          <subtype>sforzato</subtype>
           <offset x="2.59585e-07" y="-3.29224"/>
           </Attribute>
         <Note pitch="72" tpc="14"/>
@@ -3577,7 +3619,7 @@ p, li { white-space: pre-wrap; }
         <ticklen>240</ticklen>
         <BeamMode>begin</BeamMode>
         <Attribute>
-          <subtype>3</subtype>
+          <subtype>sforzato</subtype>
           <offset x="2.59585e-07" y="-3.29224"/>
           </Attribute>
         <Note pitch="71" tpc="19"/>
@@ -3588,7 +3630,7 @@ p, li { white-space: pre-wrap; }
         <ticklen>240</ticklen>
         <BeamMode>begin</BeamMode>
         <Attribute>
-          <subtype>3</subtype>
+          <subtype>sforzato</subtype>
           <offset x="2.59585e-07" y="-3.29224"/>
           </Attribute>
         <Note pitch="72" tpc="14"/>
@@ -3598,6 +3640,7 @@ p, li { white-space: pre-wrap; }
       <BarLine/>
       </Measure>
     <Measure number="41">
+      <irregular/>
       <stretch>0.9</stretch>
       <Slur>
         <startTick>51840</startTick>
@@ -3615,6 +3658,7 @@ p, li { white-space: pre-wrap; }
       <BarLine/>
       </Measure>
     <Measure number="42">
+      <irregular/>
       <stretch>0.9</stretch>
       <Slur>
         <startTick>53280</startTick>
@@ -3643,7 +3687,7 @@ p, li { white-space: pre-wrap; }
         <tick>53280</tick>
         <ticklen>960</ticklen>
         <Attribute>
-          <subtype>3</subtype>
+          <subtype>sforzato</subtype>
           <offset x="0.19953" y="-5.6866"/>
           <voice>1</voice>
           </Attribute>
@@ -3656,6 +3700,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     <Measure number="43">
+      <irregular/>
       <stretch>0.9</stretch>
       <Slur>
         <startTick>54240</startTick>
@@ -3684,7 +3729,7 @@ p, li { white-space: pre-wrap; }
         <tick>54240</tick>
         <ticklen>480</ticklen>
         <Attribute>
-          <subtype>3</subtype>
+          <subtype>sforzato</subtype>
           <offset x="0.19953" y="-5.6866"/>
           <voice>1</voice>
           </Attribute>
@@ -3699,7 +3744,7 @@ p, li { white-space: pre-wrap; }
         <voice>1</voice>
         <ticklen>480</ticklen>
         <Attribute>
-          <subtype>3</subtype>
+          <subtype>sforzato</subtype>
           <offset x="0.19953" y="-5.6866"/>
           <voice>1</voice>
           </Attribute>
@@ -3711,6 +3756,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     <Measure number="44">
+      <irregular/>
       <stretch>0.9</stretch>
       <Slur>
         <startTick>55200</startTick>
@@ -3733,6 +3779,7 @@ p, li { white-space: pre-wrap; }
       <BarLine/>
       </Measure>
     <Measure number="45">
+      <irregular/>
       <LayoutBreak>
         <subtype>line</subtype>
         </LayoutBreak>
@@ -3763,7 +3810,7 @@ p, li { white-space: pre-wrap; }
         <tick>56640</tick>
         <ticklen>960</ticklen>
         <Attribute>
-          <subtype>3</subtype>
+          <subtype>sforzato</subtype>
           <offset x="0.19953" y="-5.6866"/>
           <voice>1</voice>
           </Attribute>
@@ -3776,6 +3823,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     <Measure number="46">
+      <irregular/>
       <Slur>
         <startTick>57600</startTick>
         <endTick>57840</endTick>
@@ -3798,7 +3846,7 @@ p, li { white-space: pre-wrap; }
         <tick>57600</tick>
         <ticklen>480</ticklen>
         <Attribute>
-          <subtype>3</subtype>
+          <subtype>sforzato</subtype>
           <offset x="0.0378872" y="-5.72097"/>
           <voice>1</voice>
           </Attribute>
@@ -3813,7 +3861,7 @@ p, li { white-space: pre-wrap; }
         <voice>1</voice>
         <ticklen>480</ticklen>
         <Attribute>
-          <subtype>3</subtype>
+          <subtype>sforzato</subtype>
           <offset x="0.0378872" y="-5.72097"/>
           <voice>1</voice>
           </Attribute>
@@ -3825,6 +3873,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     <Measure number="47">
+      <irregular/>
       <Slur>
         <startTick>58800</startTick>
         <endTick>59040</endTick>
@@ -3849,6 +3898,7 @@ p, li { white-space: pre-wrap; }
       <BarLine/>
       </Measure>
     <Measure number="48">
+      <irregular/>
       <Slur>
         <startTick>60000</startTick>
         <endTick>60240</endTick>
@@ -3873,7 +3923,7 @@ p, li { white-space: pre-wrap; }
         <tick>60000</tick>
         <ticklen>1440</ticklen>
         <Attribute>
-          <subtype>3</subtype>
+          <subtype>sforzato</subtype>
           <offset x="0.0378872" y="-5.72097"/>
           <voice>1</voice>
           </Attribute>
@@ -3886,6 +3936,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     <Measure number="49">
+      <irregular/>
       <Slur>
         <startTick>61440</startTick>
         <endTick>61680</endTick>
@@ -3906,6 +3957,7 @@ p, li { white-space: pre-wrap; }
       <BarLine/>
       </Measure>
     <Measure number="50">
+      <irregular/>
       <Slur>
         <startTick>62640</startTick>
         <endTick>62880</endTick>
@@ -3935,7 +3987,7 @@ p, li { white-space: pre-wrap; }
         <tick>62640</tick>
         <ticklen>1440</ticklen>
         <Attribute>
-          <subtype>3</subtype>
+          <subtype>sforzato</subtype>
           <offset x="0.151549" y="-5.45576"/>
           <voice>1</voice>
           </Attribute>
@@ -3948,6 +4000,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     <Measure number="51">
+      <irregular/>
       <LayoutBreak>
         <subtype>line</subtype>
         </LayoutBreak>
@@ -3975,6 +4028,7 @@ p, li { white-space: pre-wrap; }
       <BarLine/>
       </Measure>
     <Measure number="52">
+      <irregular/>
       <Slur>
         <startTick>65280</startTick>
         <endTick>66240</endTick>
@@ -4024,7 +4078,7 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <ticklen>240</ticklen>
         <Attribute>
-          <subtype>3</subtype>
+          <subtype>sforzato</subtype>
           <offset x="0.61757" y="-3.1124"/>
           </Attribute>
         <Note pitch="79" tpc="15"/>
@@ -4035,7 +4089,7 @@ p, li { white-space: pre-wrap; }
         <tick>65280</tick>
         <ticklen>960</ticklen>
         <Attribute>
-          <subtype>3</subtype>
+          <subtype>sforzato</subtype>
           <offset x="0.0378872" y="-5.72097"/>
           <voice>1</voice>
           </Attribute>
@@ -4067,6 +4121,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     <Measure number="53">
+      <irregular/>
       <Slur>
         <startTick>66720</startTick>
         <endTick>66960</endTick>
@@ -4114,7 +4169,7 @@ p, li { white-space: pre-wrap; }
         <voice>1</voice>
         <ticklen>240</ticklen>
         <Attribute>
-          <subtype>3</subtype>
+          <subtype>sforzato</subtype>
           <offset x="0.182808" y="-5.86589"/>
           <voice>1</voice>
           </Attribute>
@@ -4127,6 +4182,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     <Measure number="54">
+      <irregular/>
       <Dynamic>
         <subtype>p</subtype>
         <offset x="3.16612" y="6.07122"/>
@@ -4192,7 +4248,7 @@ p, li { white-space: pre-wrap; }
         <voice>1</voice>
         <ticklen>240</ticklen>
         <Attribute>
-          <subtype>3</subtype>
+          <subtype>sforzato</subtype>
           <offset x="0.182808" y="-5.86589"/>
           <voice>1</voice>
           </Attribute>
@@ -4205,6 +4261,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     <Measure number="55">
+      <irregular/>
       <HairPin>
         <tick2>77880</tick2>
         <Segment>
@@ -4233,7 +4290,7 @@ p, li { white-space: pre-wrap; }
         <align>1</align>
         <xoffset>0</xoffset>
         <yoffset>-4</yoffset>
-        <anchor>staff</anchor>
+        <anchor>system</anchor>
         <offsetType>spatium</offsetType>
         <spatiumSizeDependent>1</spatiumSizeDependent>
         <data>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
@@ -4345,6 +4402,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     <Measure number="56">
+      <irregular/>
       <LayoutBreak>
         <subtype>line</subtype>
         </LayoutBreak>
@@ -4352,7 +4410,7 @@ p, li { white-space: pre-wrap; }
         <align>1</align>
         <xoffset>0</xoffset>
         <yoffset>-4</yoffset>
-        <anchor>staff</anchor>
+        <anchor>system</anchor>
         <offsetType>spatium</offsetType>
         <spatiumSizeDependent>1</spatiumSizeDependent>
         <data>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
@@ -4367,7 +4425,7 @@ p, li { white-space: pre-wrap; }
         <align>1</align>
         <xoffset>0</xoffset>
         <yoffset>-4</yoffset>
-        <anchor>staff</anchor>
+        <anchor>system</anchor>
         <offsetType>spatium</offsetType>
         <spatiumSizeDependent>1</spatiumSizeDependent>
         <data>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
@@ -4473,6 +4531,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     <Measure number="57">
+      <irregular/>
       <Slur>
         <startTick>72240</startTick>
         <endTick>72720</endTick>
@@ -4537,7 +4596,7 @@ p, li { white-space: pre-wrap; }
         <tick>72240</tick>
         <ticklen>480</ticklen>
         <Attribute>
-          <subtype>3</subtype>
+          <subtype>sforzato</subtype>
           <offset x="0.0635421" y="-5.71878"/>
           <voice>1</voice>
           </Attribute>
@@ -4552,7 +4611,7 @@ p, li { white-space: pre-wrap; }
         <voice>1</voice>
         <ticklen>480</ticklen>
         <Attribute>
-          <subtype>3</subtype>
+          <subtype>sforzato</subtype>
           <offset x="0.31771" y="-6.86254"/>
           <voice>1</voice>
           </Attribute>
@@ -4567,7 +4626,7 @@ p, li { white-space: pre-wrap; }
         <voice>1</voice>
         <ticklen>480</ticklen>
         <Attribute>
-          <subtype>3</subtype>
+          <subtype>sforzato</subtype>
           <offset x="0.698962" y="-7.49796"/>
           <voice>1</voice>
           </Attribute>
@@ -4580,6 +4639,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     <Measure number="58">
+      <irregular/>
       <stretch>0.9</stretch>
       <Chord>
         <ticklen>240</ticklen>
@@ -4617,7 +4677,7 @@ p, li { white-space: pre-wrap; }
         <tick>73680</tick>
         <ticklen>480</ticklen>
         <Attribute>
-          <subtype>3</subtype>
+          <subtype>sforzato</subtype>
           <offset x="0.254168" y="-7.43442"/>
           <voice>1</voice>
           </Attribute>
@@ -4631,7 +4691,7 @@ p, li { white-space: pre-wrap; }
         <voice>1</voice>
         <ticklen>480</ticklen>
         <Attribute>
-          <subtype>3</subtype>
+          <subtype>sforzato</subtype>
           <offset x="0.31771" y="-6.86254"/>
           <voice>1</voice>
           </Attribute>
@@ -4645,7 +4705,7 @@ p, li { white-space: pre-wrap; }
         <voice>1</voice>
         <ticklen>480</ticklen>
         <Attribute>
-          <subtype>3</subtype>
+          <subtype>sforzato</subtype>
           <offset x="0.0635421" y="-5.71878"/>
           <voice>1</voice>
           </Attribute>
@@ -4658,6 +4718,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     <Measure number="59">
+      <irregular/>
       <stretch>0.9</stretch>
       <Slur>
         <startTick>75120</startTick>
@@ -4716,7 +4777,7 @@ p, li { white-space: pre-wrap; }
         <tick>75120</tick>
         <ticklen>480</ticklen>
         <Attribute>
-          <subtype>11</subtype>
+          <subtype>umarcato</subtype>
           <offset x="0.31771" y="-5.01982"/>
           <voice>1</voice>
           </Attribute>
@@ -4731,7 +4792,7 @@ p, li { white-space: pre-wrap; }
         <voice>1</voice>
         <ticklen>480</ticklen>
         <Attribute>
-          <subtype>11</subtype>
+          <subtype>umarcato</subtype>
           <offset x="0.31771" y="-6.29066"/>
           <voice>1</voice>
           </Attribute>
@@ -4746,7 +4807,7 @@ p, li { white-space: pre-wrap; }
         <voice>1</voice>
         <ticklen>480</ticklen>
         <Attribute>
-          <subtype>11</subtype>
+          <subtype>umarcato</subtype>
           <offset x="0.254168" y="-6.86254"/>
           <voice>1</voice>
           </Attribute>
@@ -4759,6 +4820,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     <Measure number="60">
+      <irregular/>
       <stretch>0.9</stretch>
       <Chord>
         <ticklen>240</ticklen>
@@ -4796,7 +4858,7 @@ p, li { white-space: pre-wrap; }
         <tick>76560</tick>
         <ticklen>480</ticklen>
         <Attribute>
-          <subtype>11</subtype>
+          <subtype>umarcato</subtype>
           <offset x="0.508336" y="-6.41774"/>
           <voice>1</voice>
           </Attribute>
@@ -4811,7 +4873,7 @@ p, li { white-space: pre-wrap; }
         <voice>1</voice>
         <ticklen>480</ticklen>
         <Attribute>
-          <subtype>11</subtype>
+          <subtype>umarcato</subtype>
           <offset x="0.381252" y="-5.78232"/>
           <voice>1</voice>
           </Attribute>
@@ -4826,7 +4888,7 @@ p, li { white-space: pre-wrap; }
         <voice>1</voice>
         <ticklen>480</ticklen>
         <Attribute>
-          <subtype>11</subtype>
+          <subtype>umarcato</subtype>
           <offset x="0.0635418" y="-5.27399"/>
           <voice>1</voice>
           </Attribute>
@@ -4839,6 +4901,7 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     <Measure number="61">
+      <irregular/>
       <Dynamic>
         <subtype>ff</subtype>
         <offset x="-0.405596" y="5.59582"/>
@@ -4862,6 +4925,7 @@ p, li { white-space: pre-wrap; }
       <BarLine/>
       </Measure>
     <Measure number="62">
+      <irregular/>
       <Dynamic>
         <subtype>mf</subtype>
         <offset x="-0.959098" y="5.71311"/>
@@ -4883,6 +4947,6 @@ p, li { white-space: pre-wrap; }
       <BarLine/>
       </Measure>
     </Staff>
-  <cursorStaff>-1</cursorStaff>
+  <cursorStaff>0</cursorStaff>
   <cursorVoice>0</cursorVoice>
   </museScore>

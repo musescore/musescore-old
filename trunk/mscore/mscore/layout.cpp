@@ -89,17 +89,17 @@ void ScoreLayout::setScore(Score* s)
 //    in staff
 //---------------------------------------------------------
 
-Element* Score::searchNote(int tick, int staff, int voice) const
+Element* Score::searchNote(int tick, int track) const
       {
       int startTrack, endTrack;
-      if (voice == -1) {
-            startTrack = staff * VOICES;
-            endTrack   = startTrack + VOICES;
-            }
-      else {
-            startTrack = staff * VOICES + voice;
+//      if (voice == -1) {
+//            startTrack = track;
+//            endTrack   = startTrack + VOICES;
+//            }
+//      else {
+            startTrack = track;
             endTrack   = startTrack + 1;
-            }
+//            }
 
       for (const Measure* measure = _layout->first(); measure; measure = measure->next()) {
             Element* ipe = 0;

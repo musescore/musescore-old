@@ -28,6 +28,7 @@
 
 #include "system.h"
 #include "undo.h"
+#include "input.h"
 
 class Page;
 class SigList;
@@ -81,6 +82,7 @@ class ScoreView {
 class Score : public QObject {
       Q_OBJECT
 
+      InputState _is;
       bool _noteEntryMode;
 
       Style* _style;
@@ -223,7 +225,7 @@ class Score : public QObject {
       bool noStaves() const         { return _staves.empty(); }
 
       int staff(const Part*) const;
-      Staff* staff(int n) const;
+      Staff* staff(int n) const     { return _staves[n]; }
 
       void cmdInsertPart(Part*, int);
       void insertPart(Part*, int);
@@ -268,10 +270,10 @@ class Score : public QObject {
       void undoChangeElement(Element* oldElement, Element* newElement);
       void undoInsertTime(int tick, int len);
 
-      void setNote(int tick, Staff* staff, int voice, int pitch, int len);
+      void setNote(int tick, int track, int pitch, int len);
       int clefOffset(int tick, Staff*) const;
-      Rest* setRest(int tick, int len, Staff*, int voice, Measure*);
-      void setRest(int tick, Staff*, int voice, int len);
+      Rest* setRest(int tick, int len, int track, Measure*);
+      void setRest(int tick, int track, int len);
       Canvas* canvas() const;
 
       void select(Element* obj, int state, int staff);
@@ -285,7 +287,7 @@ class Score : public QObject {
 
       void cmdAddText(int style);
       void upDown(bool up, bool octave);
-      Element* searchNote(int tick, int staffIdx, int voice) const;
+      Element* searchNote(int tick, int track) const;
 
       // undo/redo ops
       void endUndoRedo(Undo*);
@@ -442,9 +444,12 @@ class Score : public QObject {
       bool noteEntryMode() const { return _noteEntryMode; }
       void insertTime(int tick, int len);
       void cmdRemoveTime(int tick, int len);
-      QList<Viewer*> getViewer() { return viewer;   }
-      int playPos() const        { return _playPos; }
-      void setPlayPos(int val)   { _playPos = val;  }
+      QList<Viewer*> getViewer() { return viewer;    }
+      int playPos() const        { return _playPos;  }
+      void setPlayPos(int val)   { _playPos = val;   }
+      int inputPos() const       { return _is.pos;   }
+      int inputTrack() const     { return _is.track; }
+      void setInputTrack(int v)  { _is.track = v;    }
       };
 
 extern Score* gscore;
