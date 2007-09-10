@@ -178,7 +178,7 @@ void Score::select(Element* obj, int state, int staff)
             refresh |= sel->deselectAll(this);
             if (!obj) {
                   sel->setState(SEL_NONE);
-                  padState.len = 0;
+                  _padState.len = 0;
                   emit selectionChanged(int(SEL_NONE));
                   updateAll = true;
                   return;
@@ -266,7 +266,7 @@ void Score::select(Element* obj, int state, int staff)
 //                              }
 //                        }
                   }
-            padState.len = 0;
+            _padState.len = 0;
             return;
             }
       refresh |= obj->abbox();
@@ -277,7 +277,7 @@ void Score::select(Element* obj, int state, int staff)
             sel->add(obj);
             _is.track = obj->staffIdx() + obj->voice();
             }
-      ::setPadState(obj);
+      setPadState(obj);
       emit selectionChanged(int(sel->state()));
       }
 
@@ -379,7 +379,7 @@ void Selection::updateState()
                   _state     = SEL_SINGLE;
                   Element* e = element();
                   if (e->type() == NOTE || e->type() == REST) {
-                        ::setPadState(e);
+                        e->score()->setPadState(e);
                         e->score()->setInputTrack(e->track());
                         }
                   }

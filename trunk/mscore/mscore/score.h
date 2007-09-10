@@ -29,6 +29,7 @@
 #include "system.h"
 #include "undo.h"
 #include "input.h"
+#include "padstate.h"
 
 class Page;
 class SigList;
@@ -82,6 +83,7 @@ class ScoreView {
 class Score : public QObject {
       Q_OBJECT
 
+      PadState _padState;
       InputState _is;
       bool _noteEntryMode;
 
@@ -328,6 +330,7 @@ class Score : public QObject {
 
       void putNote(const QPointF& pos, bool addToChord);
       void setPadState();
+      void setPadState(Element* obj);
 
       void startCmd();
       void start();
@@ -450,10 +453,10 @@ class Score : public QObject {
       int inputPos() const       { return _is.pos;   }
       int inputTrack() const     { return _is.track; }
       void setInputTrack(int v)  { _is.track = v;    }
+      PadState* padState()       { return &_padState; }
       };
 
 extern Score* gscore;
-extern void setPadState(Element*);
 extern void fixTicks();
 extern int y2pitch(double y, int clef);
 extern int line2pitch(int line, int clef);

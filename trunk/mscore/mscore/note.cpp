@@ -682,7 +682,7 @@ void ShadowNote::draw(QPainter& p)
 //      if (c.intersects(r)) {
             p.translate(ap);
             qreal lw = point(score()->style()->ledgerLineWidth);
-            QPen pen(preferences.selectColor[padState.voice].light(160));
+            QPen pen(preferences.selectColor[score()->padState()->voice].light(160));
             pen.setWidthF(lw);
             p.setPen(pen);
 

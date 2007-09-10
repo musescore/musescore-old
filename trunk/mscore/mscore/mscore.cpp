@@ -54,7 +54,6 @@
 QTextStream cout(stdout);
 QTextStream eout(stderr);
 
-PadState padState;
 QString mscoreGlobalShare;
 
 static unsigned int startMag = 3;   // 100%, synchronize with canvas default
@@ -1426,7 +1425,6 @@ int main(int argc, char* argv[])
 //      feenableexcept(FE_DIVBYZERO | FE_INVALID | FE_OVERFLOW);
 //      signal(SIGFPE, signalHandler);
 
-      padState.pitch = 60;
       setDefaultStyle();
       QApplication app(argc, argv);
       QCoreApplication::setOrganizationName("MusE");

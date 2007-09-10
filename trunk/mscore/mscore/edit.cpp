@@ -541,8 +541,8 @@ void Score::putNote(const QPointF& pos, bool addToChord)
             return;
             }
 
-      int len   = padState.tickLen;
-      int voice = padState.voice;
+      int len   = _padState.tickLen;
+      int voice = _padState.voice;
       int track = staff->idx() * VOICES + voice;
 
       if (addToChord) {
@@ -578,13 +578,13 @@ void Score::putNote(const QPointF& pos, bool addToChord)
             }
       else {
             // replace chord
-            if (padState.rest)
+            if (_padState.rest)
                   setRest(tick, track, len);
             else
                   setNote(tick, track, pitch, len);
             }
       _is.track     = _staves.indexOf(staff) + voice;
-      padState.pitch = pitch;
+      _padState.pitch = pitch;
       _is.pos       = tick + len;
       }
 
@@ -1524,7 +1524,7 @@ void Score::cmdTuplet(int n)
 
 void Score::changeVoice(int voice)
       {
-      padState.voice = voice;
+      _padState.voice = voice;
       if (_is.track % VOICES != voice) {
             _is.track = (_is.track / VOICES) + voice;
             layoutAll = true;
