@@ -33,6 +33,7 @@ This reference describes the latest version in the subversion repository.<br>
 <a href="breaks.php">Page Breaks</a><br>
 <a href="playmode.php">Play Mode</a><br>
 <a href="slurs.php">Slurs</a><br>
+<a href="text.php">Text</a><br>
 <a href="textedit.php">Text Editing</a><br>
 <a href="ties.php">Ties</a><br>
 <a href="timesig.php">Time Signature</a><br>
