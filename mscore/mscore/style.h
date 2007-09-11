@@ -170,6 +170,8 @@ struct Style {
       bool measureNumberSystem;
       bool measureNumberAllStaffs;
 
+      Spatium lyricsDistance;
+
       void loadStyle(QDomElement e);
       void saveStyle(Xml& xml);
       };

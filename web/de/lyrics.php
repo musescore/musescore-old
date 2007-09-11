@@ -5,7 +5,7 @@
   ?>
 <h4><a href="idx.php">MuseScore</a>
    -- <a href="manual.php">Referenz</a>
-   -- Lyrics</h4>
+   -- Liedtext</h4>
 
   <ul>
     <li>Gib zuerst alle Noten ein.</li>
@@ -22,11 +22,17 @@
         in den Liedtext ein.
         </li>
     <li><code>&lt;<b>Strg+Minus</b>&gt;</code> fügt ein<code>&lt;<b>-</b>&gt;</code> in den
-        Liedtext ein.
+        Liedtext ein (Silbentrenner).
         </li>
     </ul>
 
+  <img src="../pic/lyrics.png" align="center">
+  <br>
+
   Liedtext kann wie normaler Text <a href="textedit.php">editiert</a> werden.
+  <br>
+  <br>
+  Siehe auch <a href="chordnames.php">Akkordnamen</a>.
 
 <?php require("trailer.html");  ?>
 

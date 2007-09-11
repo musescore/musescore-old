@@ -16,8 +16,8 @@ Note ersetzt. Die Dauer eines Taktes ist vorgegeben und ändert sich dadurch nic
 <br>
 
 <table cellspacing="0" cellpadding="0">
-<tr><td>&lt;<b>N</b>&gt;</td><td>enter &lt;<i>Noteneingabe</i>&gt; beginnen.</td></tr>
-<tr><td>&lt;<b>Escape</b>&gt;</td><td> <i>Note Edit</i>&gt; beenden.</td></tr>
+<tr><td>&lt;<b>N</b>&gt;</td><td> &nbsp;&nbsp;<i>Noteneingabemodus</i> starten.</td></tr>
+<tr><td>&lt;<b>Escape</b>&gt;</td><td> &nbsp;&nbsp;<i>Noteneingabemodus</i> beenden.</td></tr>
 </table>
 <br>
 

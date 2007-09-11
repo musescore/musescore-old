@@ -866,7 +866,7 @@ void Score::print(QPrinter* printer)
 
       qreal oldSpatium = _spatium;
       double oldDPI    = DPI;
-      DPI              = printer->logicalDpiX();          // drawing resolution
+      DPI              = printer->logicalDpiX();         // drawing resolution
       DPMM             = DPI / INCH;                     // dots/mm
       setSpatium(_spatium * DPI / oldDPI);
       QPaintDevice* oldPaintDevice = mainLayout()->paintDevice();
@@ -1020,18 +1020,28 @@ bool Score::savePng(const QString& name)
       QRectF r = canvas()->matrix().mapRect(canvas()->lassoRect());
       double w = r.width();
       double h = r.height();
+#if 0
+      // scaling of fonts does not work
+
       QImage printer(lrint(w), lrint(h), QImage::Format_ARGB32_Premultiplied);
       printer.setDotsPerMeterX(lrint(DPMM * 1000.0));
       printer.setDotsPerMeterY(lrint(DPMM * 1000.0));
-      printer.fill(-1);
+#else
+      QPixmap printer(lrint(w), lrint(h));
+#endif
+      printer.fill(QColor(0, 0, 0, 0));
+
       QPainter p(&printer);
       QPaintDevice* oldPaintDevice = mainLayout()->paintDevice();
       mainLayout()->setPaintDevice(&printer);
+
       doLayout();
+
       canvas()->paintLasso(p);
       bool rv = printer.save(name, "png");
+
       mainLayout()->setPaintDevice(oldPaintDevice);
-      layoutAll = true;
+      doLayout();
       return rv;
       }
 
