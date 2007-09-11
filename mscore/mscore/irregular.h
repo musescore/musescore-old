@@ -37,6 +37,7 @@ class IrregularMeasureDialog : public QDialog, private Ui::IrregularMeasureDialo
    public:
       IrregularMeasureDialog(Measure*, QWidget* parent = 0);
       SigEvent sig() const;
+      bool isIrregular() const;
       };
 
 #endif

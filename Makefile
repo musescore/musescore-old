@@ -37,7 +37,7 @@ release:
             cmake -DCMAKE_BUILD_TYPE=RELEASE ../mscore; \
             make -f Makefile;                       \
          else                                       \
-            echo "build directory does already exist, please remove first";       \
+            echo "build directory does already exist, please remove first with 'make clean'";       \
             exit;                               \
          fi;
 
@@ -49,7 +49,7 @@ debug:
             cmake -DCMAKE_BUILD_TYPE=DEBUG ../mscore;         \
             make -f Makefile;                       \
          else                                       \
-            echo "build directory does already exist, please remove first";       \
+            echo "build directory does already exist, please remove first with 'make clean'";       \
             exit;                               \
          fi
 

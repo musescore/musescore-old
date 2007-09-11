@@ -874,8 +874,6 @@
     </tempolist>
   <Part>
     <Staff>
-      <lines>5</lines>
-      <small>0</small>
       <cleflist>
         <clef tick="0" idx="0"/>
         </cleflist>
@@ -895,8 +893,6 @@
     </Part>
   <Part>
     <Staff>
-      <lines>5</lines>
-      <small>0</small>
       <cleflist>
         <clef tick="0" idx="4"/>
         </cleflist>
@@ -941,7 +937,6 @@ p, li { white-space: pre-wrap; }
 &lt;p align=&quot;right&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;John F. Wade&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
         <subtype>Composer</subtype>
         </Text>
-      <irregular/>
       <stretch>0.9</stretch>
       <KeySig>
         <subtype>3</subtype>
@@ -986,7 +981,6 @@ p, li { white-space: pre-wrap; }
         </Lyrics>
       </Measure>
     <Measure number="2">
-      <irregular/>
       <stretch>0.9</stretch>
       <Chord>
         <selected>1</selected>
@@ -1063,7 +1057,6 @@ p, li { white-space: pre-wrap; }
         </Lyrics>
       </Measure>
     <Measure number="3">
-      <irregular/>
       <stretch>0.9</stretch>
       <Chord>
         <selected>1</selected>
@@ -1140,7 +1133,6 @@ p, li { white-space: pre-wrap; }
         </Lyrics>
       </Measure>
     <Measure number="4">
-      <irregular/>
       <stretch>0.9</stretch>
       <Chord>
         <selected>1</selected>
@@ -1268,7 +1260,6 @@ p, li { white-space: pre-wrap; }
         </Lyrics>
       </Measure>
     <Measure number="5">
-      <irregular/>
       <Chord>
         <ticklen>960</ticklen>
         <Note>
@@ -1562,6 +1553,5 @@ p, li { white-space: pre-wrap; }
       <BarLine/>
       </Measure>
     </Staff>
-  <cursorStaff>0</cursorStaff>
-  <cursorVoice>0</cursorVoice>
+  <cursorTrack>0</cursorTrack>
   </museScore>

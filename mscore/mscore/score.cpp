@@ -409,10 +409,12 @@ Measure* Score::pos2measure(const QPointF& p, int* tick, Staff** rst, int* pitch
 
       for (ciPage ip = _layout->pages()->begin(); ip != _layout->pages()->end(); ++ip) {
             const Page* page = *ip;
-            if (!page->contains(p))
-                  continue;
-            QPointF pp = p - page->pos();  // transform to page relative
 
+            // if (!page->contains(p))
+            if (!page->abbox().contains(p))
+                  continue;
+
+            QPointF pp = p - page->pos();  // transform to page relative
             QList<System*>* sl = page->systems();
             double y1 = 0;
             for (ciSystem is = sl->begin(); is != sl->end();) {

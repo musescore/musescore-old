@@ -5,790 +5,6 @@
   <Mag>1.42822</Mag>
   <xoff>-162</xoff>
   <yoff>-202</yoff>
-  <Symbols>
-    <rows>11</rows>
-    <columns>16</columns>
-    <idx>0</idx>
-    <name>whole rest</name>
-    <Symbol>
-      <name>whole rest</name>
-      </Symbol>
-    <idx>1</idx>
-    <name>half rest</name>
-    <Symbol>
-      <name>half rest</name>
-      </Symbol>
-    <idx>2</idx>
-    <name>outside whole rest</name>
-    <Symbol>
-      <name>outside whole rest</name>
-      </Symbol>
-    <idx>3</idx>
-    <name>outside half rest</name>
-    <Symbol>
-      <name>outside half rest</name>
-      </Symbol>
-    <idx>4</idx>
-    <name>longa rest</name>
-    <Symbol>
-      <name>longa rest</name>
-      </Symbol>
-    <idx>5</idx>
-    <name>breve rest</name>
-    <Symbol>
-      <name>breve rest</name>
-      </Symbol>
-    <idx>6</idx>
-    <name>quart rest</name>
-    <Symbol>
-      <name>quart rest</name>
-      </Symbol>
-    <idx>7</idx>
-    <name>eight rest</name>
-    <Symbol>
-      <name>eight rest</name>
-      </Symbol>
-    <idx>8</idx>
-    <name>clas quart rest</name>
-    <Symbol>
-      <name>clas quart rest</name>
-      </Symbol>
-    <idx>9</idx>
-    <name>16&apos; rest</name>
-    <Symbol>
-      <name>16&apos; rest</name>
-      </Symbol>
-    <idx>10</idx>
-    <name>32&apos;  rest</name>
-    <Symbol>
-      <name>32&apos;  rest</name>
-      </Symbol>
-    <idx>11</idx>
-    <name>64&apos; rest</name>
-    <Symbol>
-      <name>64&apos; rest</name>
-      </Symbol>
-    <idx>12</idx>
-    <name>128&apos; rest</name>
-    <Symbol>
-      <name>128&apos; rest</name>
-      </Symbol>
-    <idx>16</idx>
-    <name>zero</name>
-    <Symbol>
-      <name>zero</name>
-      </Symbol>
-    <idx>17</idx>
-    <name>one</name>
-    <Symbol>
-      <name>one</name>
-      </Symbol>
-    <idx>18</idx>
-    <name>two</name>
-    <Symbol>
-      <name>two</name>
-      </Symbol>
-    <idx>19</idx>
-    <name>three</name>
-    <Symbol>
-      <name>three</name>
-      </Symbol>
-    <idx>20</idx>
-    <name>four</name>
-    <Symbol>
-      <name>four</name>
-      </Symbol>
-    <idx>21</idx>
-    <name>five</name>
-    <Symbol>
-      <name>five</name>
-      </Symbol>
-    <idx>22</idx>
-    <name>six</name>
-    <Symbol>
-      <name>six</name>
-      </Symbol>
-    <idx>23</idx>
-    <name>seven</name>
-    <Symbol>
-      <name>seven</name>
-      </Symbol>
-    <idx>24</idx>
-    <name>eight</name>
-    <Symbol>
-      <name>eight</name>
-      </Symbol>
-    <idx>25</idx>
-    <name>nine</name>
-    <Symbol>
-      <name>nine</name>
-      </Symbol>
-    <idx>31</idx>
-    <name>sharp</name>
-    <Symbol>
-      <name>sharp</name>
-      </Symbol>
-    <idx>32</idx>
-    <name>natural</name>
-    <Symbol>
-      <name>natural</name>
-      </Symbol>
-    <idx>33</idx>
-    <name>flat</name>
-    <Symbol>
-      <name>flat</name>
-      </Symbol>
-    <idx>34</idx>
-    <name>flat flat</name>
-    <Symbol>
-      <name>flat flat</name>
-      </Symbol>
-    <idx>35</idx>
-    <name>sharp sharp</name>
-    <Symbol>
-      <name>sharp sharp</name>
-      </Symbol>
-    <idx>36</idx>
-    <name>right parenthesis</name>
-    <Symbol>
-      <name>right parenthesis</name>
-      </Symbol>
-    <idx>37</idx>
-    <name>left parenthesis</name>
-    <Symbol>
-      <name>left parenthesis</name>
-      </Symbol>
-    <idx>38</idx>
-    <name>dot</name>
-    <Symbol>
-      <name>dot</name>
-      </Symbol>
-    <idx>39</idx>
-    <name>brevis head</name>
-    <Symbol>
-      <name>brevis head</name>
-      </Symbol>
-    <idx>40</idx>
-    <name>whole head</name>
-    <Symbol>
-      <name>whole head</name>
-      </Symbol>
-    <idx>41</idx>
-    <name>half head</name>
-    <Symbol>
-      <name>half head</name>
-      </Symbol>
-    <idx>42</idx>
-    <name>quart head</name>
-    <Symbol>
-      <name>quart head</name>
-      </Symbol>
-    <idx>43</idx>
-    <name>whole diamond head</name>
-    <Symbol>
-      <name>whole diamond head</name>
-      </Symbol>
-    <idx>44</idx>
-    <name>half diamond head</name>
-    <Symbol>
-      <name>half diamond head</name>
-      </Symbol>
-    <idx>45</idx>
-    <name>diamond head</name>
-    <Symbol>
-      <name>diamond head</name>
-      </Symbol>
-    <idx>46</idx>
-    <name>whole triangle head</name>
-    <Symbol>
-      <name>whole triangle head</name>
-      </Symbol>
-    <idx>47</idx>
-    <name>half triangle head</name>
-    <Symbol>
-      <name>half triangle head</name>
-      </Symbol>
-    <idx>48</idx>
-    <name>triangle head</name>
-    <Symbol>
-      <name>triangle head</name>
-      </Symbol>
-    <idx>49</idx>
-    <name>whole slash head</name>
-    <Symbol>
-      <name>whole slash head</name>
-      </Symbol>
-    <idx>50</idx>
-    <name>half slash head</name>
-    <Symbol>
-      <name>half slash head</name>
-      </Symbol>
-    <idx>51</idx>
-    <name>quart slash head</name>
-    <Symbol>
-      <name>quart slash head</name>
-      </Symbol>
-    <idx>52</idx>
-    <name>whole cross head</name>
-    <Symbol>
-      <name>whole cross head</name>
-      </Symbol>
-    <idx>53</idx>
-    <name>half cross head</name>
-    <Symbol>
-      <name>half cross head</name>
-      </Symbol>
-    <idx>54</idx>
-    <name>cross head</name>
-    <Symbol>
-      <name>cross head</name>
-      </Symbol>
-    <idx>55</idx>
-    <name>x circle head</name>
-    <Symbol>
-      <name>x circle head</name>
-      </Symbol>
-    <idx>57</idx>
-    <name>ufermata</name>
-    <Symbol>
-      <name>ufermata</name>
-      </Symbol>
-    <idx>58</idx>
-    <name>dfermata</name>
-    <Symbol>
-      <name>dfermata</name>
-      </Symbol>
-    <idx>59</idx>
-    <name>thumb</name>
-    <Symbol>
-      <name>thumb</name>
-      </Symbol>
-    <idx>60</idx>
-    <name>sforza to accent</name>
-    <Symbol>
-      <name>sforza to accent</name>
-      </Symbol>
-    <idx>61</idx>
-    <name>staccato</name>
-    <Symbol>
-      <name>staccato</name>
-      </Symbol>
-    <idx>62</idx>
-    <name>ustaccatissimo</name>
-    <Symbol>
-      <name>ustaccatissimo</name>
-      </Symbol>
-    <idx>63</idx>
-    <name>dstacattissimo</name>
-    <Symbol>
-      <name>dstacattissimo</name>
-      </Symbol>
-    <idx>64</idx>
-    <name>tenuto</name>
-    <Symbol>
-      <name>tenuto</name>
-      </Symbol>
-    <idx>65</idx>
-    <name>uportato</name>
-    <Symbol>
-      <name>uportato</name>
-      </Symbol>
-    <idx>66</idx>
-    <name>dportato</name>
-    <Symbol>
-      <name>dportato</name>
-      </Symbol>
-    <idx>67</idx>
-    <name>umarcato</name>
-    <Symbol>
-      <name>umarcato</name>
-      </Symbol>
-    <idx>68</idx>
-    <name>dmarcato</name>
-    <Symbol>
-      <name>dmarcato</name>
-      </Symbol>
-    <idx>69</idx>
-    <name>ouvert</name>
-    <Symbol>
-      <name>ouvert</name>
-      </Symbol>
-    <idx>70</idx>
-    <name>plus stop</name>
-    <Symbol>
-      <name>plus stop</name>
-      </Symbol>
-    <idx>71</idx>
-    <name>up bow</name>
-    <Symbol>
-      <name>up bow</name>
-      </Symbol>
-    <idx>72</idx>
-    <name>down bow</name>
-    <Symbol>
-      <name>down bow</name>
-      </Symbol>
-    <idx>73</idx>
-    <name>reverse turn</name>
-    <Symbol>
-      <name>reverse turn</name>
-      </Symbol>
-    <idx>74</idx>
-    <name>turn</name>
-    <Symbol>
-      <name>turn</name>
-      </Symbol>
-    <idx>75</idx>
-    <name>trill</name>
-    <Symbol>
-      <name>trill</name>
-      </Symbol>
-    <idx>76</idx>
-    <name>upedal heel</name>
-    <Symbol>
-      <name>upedal heel</name>
-      </Symbol>
-    <idx>77</idx>
-    <name>dpedalheel</name>
-    <Symbol>
-      <name>dpedalheel</name>
-      </Symbol>
-    <idx>78</idx>
-    <name>upedal toe</name>
-    <Symbol>
-      <name>upedal toe</name>
-      </Symbol>
-    <idx>79</idx>
-    <name>dpedal toe</name>
-    <Symbol>
-      <name>dpedal toe</name>
-      </Symbol>
-    <idx>80</idx>
-    <name>flageolet</name>
-    <Symbol>
-      <name>flageolet</name>
-      </Symbol>
-    <idx>81</idx>
-    <name>segno</name>
-    <Symbol>
-      <name>segno</name>
-      </Symbol>
-    <idx>82</idx>
-    <name>coda</name>
-    <Symbol>
-      <name>coda</name>
-      </Symbol>
-    <idx>83</idx>
-    <name>rcomma</name>
-    <Symbol>
-      <name>rcomma</name>
-      </Symbol>
-    <idx>84</idx>
-    <name>lcomma</name>
-    <Symbol>
-      <name>lcomma</name>
-      </Symbol>
-    <idx>85</idx>
-    <name>arpeggio</name>
-    <Symbol>
-      <name>arpeggio</name>
-      </Symbol>
-    <idx>86</idx>
-    <name>trillelement</name>
-    <Symbol>
-      <name>trillelement</name>
-      </Symbol>
-    <idx>87</idx>
-    <name>arpeggio arrow down</name>
-    <Symbol>
-      <name>arpeggio arrow down</name>
-      </Symbol>
-    <idx>88</idx>
-    <name>arpeggio arrow up</name>
-    <Symbol>
-      <name>arpeggio arrow up</name>
-      </Symbol>
-    <idx>89</idx>
-    <name>trill element</name>
-    <Symbol>
-      <name>trill element</name>
-      </Symbol>
-    <idx>90</idx>
-    <name>prall</name>
-    <Symbol>
-      <name>prall</name>
-      </Symbol>
-    <idx>91</idx>
-    <name>mordent</name>
-    <Symbol>
-      <name>mordent</name>
-      </Symbol>
-    <idx>92</idx>
-    <name>prall prall</name>
-    <Symbol>
-      <name>prall prall</name>
-      </Symbol>
-    <idx>93</idx>
-    <name>prall mordent</name>
-    <Symbol>
-      <name>prall mordent</name>
-      </Symbol>
-    <idx>94</idx>
-    <name>up prall</name>
-    <Symbol>
-      <name>up prall</name>
-      </Symbol>
-    <idx>95</idx>
-    <name>down prall</name>
-    <Symbol>
-      <name>down prall</name>
-      </Symbol>
-    <idx>96</idx>
-    <name>up mordent</name>
-    <Symbol>
-      <name>up mordent</name>
-      </Symbol>
-    <idx>97</idx>
-    <name>down mordent</name>
-    <Symbol>
-      <name>down mordent</name>
-      </Symbol>
-    <idx>98</idx>
-    <name>line prall</name>
-    <Symbol>
-      <name>line prall</name>
-      </Symbol>
-    <idx>99</idx>
-    <name>prall down</name>
-    <Symbol>
-      <name>prall down</name>
-      </Symbol>
-    <idx>101</idx>
-    <name>prall up</name>
-    <Symbol>
-      <name>prall up</name>
-      </Symbol>
-    <idx>102</idx>
-    <name>eight flag</name>
-    <Symbol>
-      <name>eight flag</name>
-      </Symbol>
-    <idx>103</idx>
-    <name>sixteenth flag</name>
-    <Symbol>
-      <name>sixteenth flag</name>
-      </Symbol>
-    <idx>104</idx>
-    <name>thirtysecond flag</name>
-    <Symbol>
-      <name>thirtysecond flag</name>
-      </Symbol>
-    <idx>105</idx>
-    <name>sixtyfour flag</name>
-    <Symbol>
-      <name>sixtyfour flag</name>
-      </Symbol>
-    <idx>106</idx>
-    <name>deight flag</name>
-    <Symbol>
-      <name>deight flag</name>
-      </Symbol>
-    <idx>107</idx>
-    <name>grace dash</name>
-    <Symbol>
-      <name>grace dash</name>
-      </Symbol>
-    <idx>108</idx>
-    <name>dgrace dash</name>
-    <Symbol>
-      <name>dgrace dash</name>
-      </Symbol>
-    <idx>109</idx>
-    <name>dsixteenth flag</name>
-    <Symbol>
-      <name>dsixteenth flag</name>
-      </Symbol>
-    <idx>110</idx>
-    <name>dthirtysecond flag</name>
-    <Symbol>
-      <name>dthirtysecond flag</name>
-      </Symbol>
-    <idx>111</idx>
-    <name>dsixtyfourth flag</name>
-    <Symbol>
-      <name>dsixtyfourth flag</name>
-      </Symbol>
-    <idx>112</idx>
-    <name>stem</name>
-    <Symbol>
-      <name>stem</name>
-      </Symbol>
-    <idx>113</idx>
-    <name>dstem</name>
-    <Symbol>
-      <name>dstem</name>
-      </Symbol>
-    <idx>114</idx>
-    <name>alto clef</name>
-    <Symbol>
-      <name>alto clef</name>
-      </Symbol>
-    <idx>115</idx>
-    <name>calto clef</name>
-    <Symbol>
-      <name>calto clef</name>
-      </Symbol>
-    <idx>116</idx>
-    <name>bass clef</name>
-    <Symbol>
-      <name>bass clef</name>
-      </Symbol>
-    <idx>117</idx>
-    <name>cbass clef</name>
-    <Symbol>
-      <name>cbass clef</name>
-      </Symbol>
-    <idx>118</idx>
-    <name>trebleclef</name>
-    <Symbol>
-      <name>trebleclef</name>
-      </Symbol>
-    <idx>119</idx>
-    <name>ctrebleclef</name>
-    <Symbol>
-      <name>ctrebleclef</name>
-      </Symbol>
-    <idx>120</idx>
-    <name>percussion clef</name>
-    <Symbol>
-      <name>percussion clef</name>
-      </Symbol>
-    <idx>121</idx>
-    <name>cpercussion clef</name>
-    <Symbol>
-      <name>cpercussion clef</name>
-      </Symbol>
-    <idx>122</idx>
-    <name>tab clef</name>
-    <Symbol>
-      <name>tab clef</name>
-      </Symbol>
-    <idx>123</idx>
-    <name>ctab clef</name>
-    <Symbol>
-      <name>ctab clef</name>
-      </Symbol>
-    <idx>124</idx>
-    <name>four four meter</name>
-    <Symbol>
-      <name>four four meter</name>
-      </Symbol>
-    <idx>125</idx>
-    <name>allabreve</name>
-    <Symbol>
-      <name>allabreve</name>
-      </Symbol>
-    <idx>126</idx>
-    <name>pedalasterisk</name>
-    <Symbol>
-      <name>pedalasterisk</name>
-      </Symbol>
-    <idx>127</idx>
-    <name>pedaldash</name>
-    <Symbol>
-      <name>pedaldash</name>
-      </Symbol>
-    <idx>128</idx>
-    <name>pedaldot</name>
-    <Symbol>
-      <name>pedaldot</name>
-      </Symbol>
-    <idx>129</idx>
-    <name>pedalP</name>
-    <Symbol>
-      <name>pedalP</name>
-      </Symbol>
-    <idx>130</idx>
-    <name>pedald</name>
-    <Symbol>
-      <name>pedald</name>
-      </Symbol>
-    <idx>131</idx>
-    <name>pedale</name>
-    <Symbol>
-      <name>pedale</name>
-      </Symbol>
-    <idx>132</idx>
-    <name>pedal ped</name>
-    <Symbol>
-      <name>pedal ped</name>
-      </Symbol>
-    <idx>133</idx>
-    <name>acc discant</name>
-    <Symbol>
-      <name>acc discant</name>
-      </Symbol>
-    <idx>134</idx>
-    <name>acc dot</name>
-    <Symbol>
-      <name>acc dot</name>
-      </Symbol>
-    <idx>135</idx>
-    <name>acc freebase</name>
-    <Symbol>
-      <name>acc freebase</name>
-      </Symbol>
-    <idx>136</idx>
-    <name>acc stdbase</name>
-    <Symbol>
-      <name>acc stdbase</name>
-      </Symbol>
-    <idx>137</idx>
-    <name>acc bayanbase</name>
-    <Symbol>
-      <name>acc bayanbase</name>
-      </Symbol>
-    <idx>138</idx>
-    <name>acc sb</name>
-    <Symbol>
-      <name>acc sb</name>
-      </Symbol>
-    <idx>139</idx>
-    <name>acc bb</name>
-    <Symbol>
-      <name>acc bb</name>
-      </Symbol>
-    <idx>140</idx>
-    <name>acc old ee</name>
-    <Symbol>
-      <name>acc old ee</name>
-      </Symbol>
-    <idx>141</idx>
-    <name>acc old ees</name>
-    <Symbol>
-      <name>acc old ees</name>
-      </Symbol>
-    <idx>142</idx>
-    <name>whole do head</name>
-    <Symbol>
-      <name>whole do head</name>
-      </Symbol>
-    <idx>143</idx>
-    <name>half do head</name>
-    <Symbol>
-      <name>half do head</name>
-      </Symbol>
-    <idx>144</idx>
-    <name>do head</name>
-    <Symbol>
-      <name>do head</name>
-      </Symbol>
-    <idx>145</idx>
-    <name>whole re head</name>
-    <Symbol>
-      <name>whole re head</name>
-      </Symbol>
-    <idx>146</idx>
-    <name>half re head</name>
-    <Symbol>
-      <name>half re head</name>
-      </Symbol>
-    <idx>147</idx>
-    <name>re head</name>
-    <Symbol>
-      <name>re head</name>
-      </Symbol>
-    <idx>148</idx>
-    <name>whole me head</name>
-    <Symbol>
-      <name>whole me head</name>
-      </Symbol>
-    <idx>149</idx>
-    <name>half me head</name>
-    <Symbol>
-      <name>half me head</name>
-      </Symbol>
-    <idx>150</idx>
-    <name>me head</name>
-    <Symbol>
-      <name>me head</name>
-      </Symbol>
-    <idx>151</idx>
-    <name>whole fa head</name>
-    <Symbol>
-      <name>whole fa head</name>
-      </Symbol>
-    <idx>152</idx>
-    <name>fau head</name>
-    <Symbol>
-      <name>fau head</name>
-      </Symbol>
-    <idx>153</idx>
-    <name>half fad head</name>
-    <Symbol>
-      <name>half fad head</name>
-      </Symbol>
-    <idx>154</idx>
-    <name>fad head</name>
-    <Symbol>
-      <name>fad head</name>
-      </Symbol>
-    <idx>155</idx>
-    <name>whole la head</name>
-    <Symbol>
-      <name>whole la head</name>
-      </Symbol>
-    <idx>156</idx>
-    <name>half la head</name>
-    <Symbol>
-      <name>half la head</name>
-      </Symbol>
-    <idx>157</idx>
-    <name>la head</name>
-    <Symbol>
-      <name>la head</name>
-      </Symbol>
-    <idx>158</idx>
-    <name>whole te head</name>
-    <Symbol>
-      <name>whole te head</name>
-      </Symbol>
-    <idx>159</idx>
-    <name>half te head</name>
-    <Symbol>
-      <name>half te head</name>
-      </Symbol>
-    <idx>160</idx>
-    <name>f</name>
-    <Symbol>
-      <name>f</name>
-      </Symbol>
-    <idx>161</idx>
-    <name>m</name>
-    <Symbol>
-      <name>m</name>
-      </Symbol>
-    <idx>162</idx>
-    <name>p</name>
-    <Symbol>
-      <name>p</name>
-      </Symbol>
-    <idx>163</idx>
-    <name>r</name>
-    <Symbol>
-      <name>r</name>
-      </Symbol>
-    <idx>164</idx>
-    <name>s</name>
-    <Symbol>
-      <name>s</name>
-      </Symbol>
-    <idx>165</idx>
-    <name>z</name>
-    <Symbol>
-      <name>z</name>
-      </Symbol>
-    </Symbols>
   <Style>
     <staffUpperBorder>8</staffUpperBorder>
     <staffLowerBorder>4</staffLowerBorder>
@@ -1012,8 +228,6 @@
     </tempolist>
   <Part>
     <Staff>
-      <lines>5</lines>
-      <small>0</small>
       <cleflist>
         <clef tick="0" idx="0"/>
         </cleflist>
@@ -1064,7 +278,6 @@ p, li { white-space: pre-wrap; }
 &lt;p align=&quot;right&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Dave Phillips 2005&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
         <subtype>Composer</subtype>
         </Text>
-      <irregular/>
       <Slur>
         <startTick>0</startTick>
         <endTick>240</endTick>
@@ -1197,7 +410,6 @@ p, li { white-space: pre-wrap; }
       <BarLine/>
       </Measure>
     <Measure number="2">
-      <irregular/>
       <Slur>
         <startTick>1200</startTick>
         <endTick>1440</endTick>
@@ -1353,7 +565,6 @@ p, li { white-space: pre-wrap; }
       <BarLine/>
       </Measure>
     <Measure number="3">
-      <irregular/>
       <Slur>
         <startTick>2640</startTick>
         <endTick>2880</endTick>
@@ -1385,7 +596,6 @@ p, li { white-space: pre-wrap; }
       <BarLine/>
       </Measure>
     <Measure number="4">
-      <irregular/>
       <Slur>
         <startTick>3840</startTick>
         <endTick>4080</endTick>
@@ -1407,7 +617,6 @@ p, li { white-space: pre-wrap; }
       <BarLine/>
       </Measure>
     <Measure number="5">
-      <irregular/>
       <LayoutBreak>
         <subtype>line</subtype>
         </LayoutBreak>
@@ -1531,7 +740,6 @@ p, li { white-space: pre-wrap; }
       <BarLine/>
       </Measure>
     <Measure number="6">
-      <irregular/>
       <Slur>
         <startTick>6480</startTick>
         <endTick>6720</endTick>
@@ -1628,7 +836,6 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     <Measure number="7">
-      <irregular/>
       <Slur>
         <startTick>7920</startTick>
         <endTick>8160</endTick>
@@ -1649,7 +856,6 @@ p, li { white-space: pre-wrap; }
       <BarLine/>
       </Measure>
     <Measure number="8">
-      <irregular/>
       <Slur>
         <startTick>9120</startTick>
         <endTick>9360</endTick>
@@ -1706,7 +912,6 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     <Measure number="9">
-      <irregular/>
       <Slur>
         <startTick>10560</startTick>
         <endTick>10800</endTick>
@@ -1731,7 +936,6 @@ p, li { white-space: pre-wrap; }
       <BarLine/>
       </Measure>
     <Measure number="10">
-      <irregular/>
       <LayoutBreak>
         <subtype>line</subtype>
         </LayoutBreak>
@@ -1756,7 +960,6 @@ p, li { white-space: pre-wrap; }
       <BarLine/>
       </Measure>
     <Measure number="11">
-      <irregular/>
       <Dynamic>
         <data>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
@@ -1788,7 +991,6 @@ p, li { white-space: pre-wrap; }
       <BarLine/>
       </Measure>
     <Measure number="12">
-      <irregular/>
       <Slur>
         <startTick>14400</startTick>
         <endTick>14640</endTick>
@@ -1811,7 +1013,6 @@ p, li { white-space: pre-wrap; }
       <BarLine/>
       </Measure>
     <Measure number="13">
-      <irregular/>
       <Slur>
         <startTick>15840</startTick>
         <endTick>16080</endTick>
@@ -1966,7 +1167,6 @@ p, li { white-space: pre-wrap; }
       <BarLine/>
       </Measure>
     <Measure number="14">
-      <irregular/>
       <Chord>
         <ticklen>240</ticklen>
         <Note>
@@ -2080,7 +1280,6 @@ p, li { white-space: pre-wrap; }
       <BarLine/>
       </Measure>
     <Measure number="15">
-      <irregular/>
       <LayoutBreak>
         <subtype>line</subtype>
         </LayoutBreak>
@@ -2104,7 +1303,6 @@ p, li { white-space: pre-wrap; }
       <BarLine/>
       </Measure>
     <Measure number="16">
-      <irregular/>
       <Slur>
         <startTick>19920</startTick>
         <endTick>20160</endTick>
@@ -2147,7 +1345,6 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     <Measure number="17">
-      <irregular/>
       <Slur>
         <startTick>21360</startTick>
         <endTick>21600</endTick>
@@ -2168,7 +1365,6 @@ p, li { white-space: pre-wrap; }
       <BarLine/>
       </Measure>
     <Measure number="18">
-      <irregular/>
       <Slur>
         <startTick>22560</startTick>
         <endTick>22800</endTick>
@@ -2211,7 +1407,6 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     <Measure number="19">
-      <irregular/>
       <Slur>
         <startTick>24000</startTick>
         <endTick>24240</endTick>
@@ -2252,7 +1447,6 @@ p, li { white-space: pre-wrap; }
       <BarLine/>
       </Measure>
     <Measure number="20">
-      <irregular/>
       <LayoutBreak>
         <subtype>line</subtype>
         </LayoutBreak>
@@ -2297,7 +1491,6 @@ p, li { white-space: pre-wrap; }
       <BarLine/>
       </Measure>
     <Measure number="21">
-      <irregular/>
       <Slur>
         <startTick>26880</startTick>
         <endTick>27840</endTick>
@@ -2348,7 +1541,6 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     <Measure number="22">
-      <irregular/>
       <Slur>
         <startTick>27840</startTick>
         <endTick>28080</endTick>
@@ -2413,7 +1605,6 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     <Measure number="23">
-      <irregular/>
       <Slur>
         <startTick>28800</startTick>
         <endTick>29040</endTick>
@@ -2555,7 +1746,6 @@ p, li { white-space: pre-wrap; }
       <BarLine/>
       </Measure>
     <Measure number="24">
-      <irregular/>
       <Slur>
         <startTick>30240</startTick>
         <endTick>30480</endTick>
@@ -2610,7 +1800,6 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     <Measure number="25">
-      <irregular/>
       <Slur>
         <startTick>31200</startTick>
         <endTick>31440</endTick>
@@ -2632,7 +1821,6 @@ p, li { white-space: pre-wrap; }
       <BarLine/>
       </Measure>
     <Measure number="26">
-      <irregular/>
       <LayoutBreak>
         <subtype>line</subtype>
         </LayoutBreak>
@@ -2781,7 +1969,6 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     <Measure number="27">
-      <irregular/>
       <Slur>
         <startTick>33600</startTick>
         <endTick>33840</endTick>
@@ -2894,7 +2081,6 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     <Measure number="28">
-      <irregular/>
       <Slur>
         <startTick>34560</startTick>
         <endTick>34800</endTick>
@@ -3035,7 +2221,6 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     <Measure number="29">
-      <irregular/>
       <Slur>
         <startTick>35520</startTick>
         <endTick>35760</endTick>
@@ -3111,7 +2296,6 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     <Measure number="30">
-      <irregular/>
       <Slur>
         <startTick>36480</startTick>
         <endTick>36720</endTick>
@@ -3269,7 +2453,6 @@ p, li { white-space: pre-wrap; }
       <BarLine/>
       </Measure>
     <Measure number="31">
-      <irregular/>
       <Note pitch="56" tpc="10" ticks="240"/>
       <Chord>
         <ticklen>240</ticklen>
@@ -3308,7 +2491,6 @@ p, li { white-space: pre-wrap; }
       <BarLine/>
       </Measure>
     <Measure number="32">
-      <irregular/>
       <LayoutBreak>
         <subtype>line</subtype>
         </LayoutBreak>
@@ -3352,7 +2534,6 @@ p, li { white-space: pre-wrap; }
       <BarLine/>
       </Measure>
     <Measure number="33">
-      <irregular/>
       <Note pitch="56" tpc="10" ticks="240"/>
       <Chord>
         <ticklen>240</ticklen>
@@ -3400,7 +2581,6 @@ p, li { white-space: pre-wrap; }
       <BarLine/>
       </Measure>
     <Measure number="34">
-      <irregular/>
       <stretch>0.9</stretch>
       <Slur>
         <startTick>42240</startTick>
@@ -3426,7 +2606,6 @@ p, li { white-space: pre-wrap; }
       <BarLine/>
       </Measure>
     <Measure number="35">
-      <irregular/>
       <stretch>0.9</stretch>
       <Slur>
         <startTick>43440</startTick>
@@ -3449,7 +2628,6 @@ p, li { white-space: pre-wrap; }
       <BarLine/>
       </Measure>
     <Measure number="36">
-      <irregular/>
       <stretch>0.9</stretch>
       <Slur>
         <startTick>44880</startTick>
@@ -3475,7 +2653,6 @@ p, li { white-space: pre-wrap; }
       <BarLine/>
       </Measure>
     <Measure number="37">
-      <irregular/>
       <stretch>0.9</stretch>
       <Slur>
         <startTick>46080</startTick>
@@ -3498,7 +2675,6 @@ p, li { white-space: pre-wrap; }
       <BarLine/>
       </Measure>
     <Measure number="38">
-      <irregular/>
       <LayoutBreak>
         </LayoutBreak>
       <Text>
@@ -3586,7 +2762,6 @@ p, li { white-space: pre-wrap; }
       <BarLine/>
       </Measure>
     <Measure number="39">
-      <irregular/>
       <Slur>
         <startTick>48960</startTick>
         <endTick>49200</endTick>
@@ -3603,7 +2778,6 @@ p, li { white-space: pre-wrap; }
       <BarLine/>
       </Measure>
     <Measure number="40">
-      <irregular/>
       <stretch>0.9</stretch>
       <Chord>
         <ticklen>240</ticklen>
@@ -3640,7 +2814,6 @@ p, li { white-space: pre-wrap; }
       <BarLine/>
       </Measure>
     <Measure number="41">
-      <irregular/>
       <stretch>0.9</stretch>
       <Slur>
         <startTick>51840</startTick>
@@ -3658,7 +2831,6 @@ p, li { white-space: pre-wrap; }
       <BarLine/>
       </Measure>
     <Measure number="42">
-      <irregular/>
       <stretch>0.9</stretch>
       <Slur>
         <startTick>53280</startTick>
@@ -3700,7 +2872,6 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     <Measure number="43">
-      <irregular/>
       <stretch>0.9</stretch>
       <Slur>
         <startTick>54240</startTick>
@@ -3756,7 +2927,6 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     <Measure number="44">
-      <irregular/>
       <stretch>0.9</stretch>
       <Slur>
         <startTick>55200</startTick>
@@ -3779,7 +2949,6 @@ p, li { white-space: pre-wrap; }
       <BarLine/>
       </Measure>
     <Measure number="45">
-      <irregular/>
       <LayoutBreak>
         <subtype>line</subtype>
         </LayoutBreak>
@@ -3823,7 +2992,6 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     <Measure number="46">
-      <irregular/>
       <Slur>
         <startTick>57600</startTick>
         <endTick>57840</endTick>
@@ -3873,7 +3041,6 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     <Measure number="47">
-      <irregular/>
       <Slur>
         <startTick>58800</startTick>
         <endTick>59040</endTick>
@@ -3898,7 +3065,6 @@ p, li { white-space: pre-wrap; }
       <BarLine/>
       </Measure>
     <Measure number="48">
-      <irregular/>
       <Slur>
         <startTick>60000</startTick>
         <endTick>60240</endTick>
@@ -3936,7 +3102,6 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     <Measure number="49">
-      <irregular/>
       <Slur>
         <startTick>61440</startTick>
         <endTick>61680</endTick>
@@ -3957,7 +3122,6 @@ p, li { white-space: pre-wrap; }
       <BarLine/>
       </Measure>
     <Measure number="50">
-      <irregular/>
       <Slur>
         <startTick>62640</startTick>
         <endTick>62880</endTick>
@@ -4000,7 +3164,6 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     <Measure number="51">
-      <irregular/>
       <LayoutBreak>
         <subtype>line</subtype>
         </LayoutBreak>
@@ -4028,7 +3191,6 @@ p, li { white-space: pre-wrap; }
       <BarLine/>
       </Measure>
     <Measure number="52">
-      <irregular/>
       <Slur>
         <startTick>65280</startTick>
         <endTick>66240</endTick>
@@ -4121,7 +3283,6 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     <Measure number="53">
-      <irregular/>
       <Slur>
         <startTick>66720</startTick>
         <endTick>66960</endTick>
@@ -4182,7 +3343,6 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     <Measure number="54">
-      <irregular/>
       <Dynamic>
         <subtype>p</subtype>
         <offset x="3.16612" y="6.07122"/>
@@ -4261,7 +3421,6 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     <Measure number="55">
-      <irregular/>
       <HairPin>
         <tick2>77880</tick2>
         <Segment>
@@ -4402,7 +3561,6 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     <Measure number="56">
-      <irregular/>
       <LayoutBreak>
         <subtype>line</subtype>
         </LayoutBreak>
@@ -4531,7 +3689,6 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     <Measure number="57">
-      <irregular/>
       <Slur>
         <startTick>72240</startTick>
         <endTick>72720</endTick>
@@ -4639,7 +3796,6 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     <Measure number="58">
-      <irregular/>
       <stretch>0.9</stretch>
       <Chord>
         <ticklen>240</ticklen>
@@ -4718,7 +3874,6 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     <Measure number="59">
-      <irregular/>
       <stretch>0.9</stretch>
       <Slur>
         <startTick>75120</startTick>
@@ -4820,7 +3975,6 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     <Measure number="60">
-      <irregular/>
       <stretch>0.9</stretch>
       <Chord>
         <ticklen>240</ticklen>
@@ -4901,7 +4055,6 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     <Measure number="61">
-      <irregular/>
       <Dynamic>
         <subtype>ff</subtype>
         <offset x="-0.405596" y="5.59582"/>
@@ -4925,7 +4078,6 @@ p, li { white-space: pre-wrap; }
       <BarLine/>
       </Measure>
     <Measure number="62">
-      <irregular/>
       <Dynamic>
         <subtype>mf</subtype>
         <offset x="-0.959098" y="5.71311"/>
@@ -4947,6 +4099,5 @@ p, li { white-space: pre-wrap; }
       <BarLine/>
       </Measure>
     </Staff>
-  <cursorStaff>0</cursorStaff>
-  <cursorVoice>0</cursorVoice>
+  <cursorTrack>0</cursorTrack>
   </museScore>

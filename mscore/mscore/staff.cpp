@@ -235,8 +235,10 @@ int Staff::key(int tick) const
 void Staff::write(Xml& xml) const
       {
       xml.stag("Staff");
-      xml.tag("lines", lines());
-      xml.tag("small", small());
+      if (lines() != 5)
+            xml.tag("lines", lines());
+      if (small())
+            xml.tag("small", small());
       _clef->write(xml, "cleflist");
       _keymap->write(xml, "keylist");
       foreach(const BracketItem& i, _brackets) {
@@ -251,6 +253,8 @@ void Staff::write(Xml& xml) const
 
 void Staff::read(QDomElement e)
       {
+      setLines(5);
+      setSmall(false);
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             QString tag(e.tagName());
             if (tag == "lines")
