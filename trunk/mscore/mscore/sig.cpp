@@ -57,7 +57,6 @@ int ticks_measure(int z, int n)
 
 SigEvent::SigEvent(int z, int n)
       {
-      irregular    = false;
       nominator    = z;
       denominator  = n;
       nominator2   = z;
@@ -68,7 +67,6 @@ SigEvent::SigEvent(int z, int n)
 
 SigEvent::SigEvent(int z1, int n1, int z2, int n2)
       {
-      irregular    = z1 != z2 || n1 != n2;
       nominator    = z1;
       denominator  = n1;
       nominator2   = z2;
@@ -110,10 +108,6 @@ void SigList::add(int tick, const SigEvent& ev)
       (*this)[tick] = ev;
       normalize();
       }
-
-//---------------------------------------------------------
-//   add
-//---------------------------------------------------------
 
 void SigList::add(int tick, int ticks, int z2, int n2)
       {
@@ -166,13 +160,14 @@ void SigList::normalize()
       int bar  = 0;
       int tm   = ticks_measure(z, n);
 
-      for (iSigEvent e = begin(); e != end(); ++e) {
-            e->second.bar = bar + (e->first - tick) / tm;
-            bar           = e->second.bar;
-            tick          = e->first;
-            if (!e->second.irregular) {
-                  tm = ticks_measure(e->second.nominator, e->second.denominator);
-                  e->second.ticks = tm;
+      for (iSigEvent i = begin(); i != end(); ++i) {
+            SigEvent& e  = i->second;
+            e.bar        = bar + (i->first - tick) / tm;
+            bar          = e.bar;
+            tick         = i->first;
+            if (e.nominator == e.nominator2 && e.denominator == e.denominator2) {
+                  tm      = ticks_measure(e.nominator, e.denominator);
+                  e.ticks = tm;
                   }
             }
       }
@@ -302,7 +297,7 @@ void SigList::read(QDomElement e, int division, int fileDivision)
 void SigEvent::write(Xml& xml, int tick) const
       {
       xml.stag(QString("sig tick=\"%1\"").arg(tick));
-      if (irregular) {
+      if ((nominator2 != nominator) || (denominator2 != denominator)) {
             xml.tag("nom2", nominator2);
             xml.tag("denom2", denominator2);
             }
@@ -317,10 +312,11 @@ void SigEvent::write(Xml& xml, int tick) const
 
 int SigEvent::read(QDomElement e, int division, int fileDivision)
       {
-      irregular = false;
       int tick  = e.attribute("tick", "0").toInt();
       tick      = tick * division / fileDivision;
 
+      denominator2 = -1;
+      nominator2   = -1;
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             QString tag(e.tagName());
             int i = e.text().toInt();
@@ -329,18 +325,14 @@ int SigEvent::read(QDomElement e, int division, int fileDivision)
                   nominator = i;
             else if (tag == "denom")
                   denominator = i;
-            else if (tag == "nom2") {
+            else if (tag == "nom2")
                   nominator2 = i;
-                  irregular = true;
-                  }
-            else if (tag == "denom2") {
+            else if (tag == "denom2")
                   denominator2 = i;
-                  irregular = true;
-                  }
             else
                   domError(e);
             }
-      if (!irregular) {
+      if ((nominator2 == -1) || (denominator2 == -1)) {
             nominator2   = nominator;
             denominator2 = denominator;
             }

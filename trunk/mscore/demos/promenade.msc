@@ -120,8 +120,6 @@
     </tempolist>
   <Part>
     <Staff>
-      <lines>5</lines>
-      <small>0</small>
       <cleflist>
         <clef tick="0" idx="0"/>
         <clef tick="7680" idx="0"/>
@@ -132,8 +130,6 @@
       <bracket type="1" span="2"/>
       </Staff>
     <Staff>
-      <lines>5</lines>
-      <small>0</small>
       <cleflist>
         <clef tick="0" idx="4"/>
         </cleflist>
@@ -192,7 +188,6 @@ p, li { white-space: pre-wrap; }
         <subtype>Subtitle</subtype>
         <offset x="-0.437554" y="0.771701"/>
         </Text>
-      <irregular/>
       <Dynamic>
         <subtype>f</subtype>
         <offset x="-0.526386" y="2.72978"/>
@@ -254,7 +249,6 @@ p, li { white-space: pre-wrap; }
         </BarLine>
       </Measure>
     <Measure number="2">
-      <irregular/>
       <Slur>
         <startTick>2400</startTick>
         <endTick>2880</endTick>
@@ -318,7 +312,6 @@ p, li { white-space: pre-wrap; }
         </BarLine>
       </Measure>
     <Measure number="3">
-      <irregular/>
       <Slur>
         <startTick>6720</startTick>
         <endTick>7200</endTick>
@@ -397,7 +390,6 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     <Measure number="4">
-      <irregular/>
       <Slur>
         <startTick>7680</startTick>
         <endTick>8160</endTick>
@@ -483,7 +475,6 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     <Measure number="5">
-      <irregular/>
       <Slur>
         <startTick>12000</startTick>
         <endTick>12480</endTick>
@@ -540,7 +531,6 @@ p, li { white-space: pre-wrap; }
         </BarLine>
       </Measure>
     <Measure number="6">
-      <irregular/>
       <Slur>
         <startTick>12960</startTick>
         <endTick>13440</endTick>
@@ -624,7 +614,6 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     <Measure number="7">
-      <irregular/>
       <Slur>
         <startTick>17280</startTick>
         <endTick>17760</endTick>
@@ -681,7 +670,6 @@ p, li { white-space: pre-wrap; }
         </BarLine>
       </Measure>
     <Measure number="8">
-      <irregular/>
       <LayoutBreak>
         <subtype>line</subtype>
         </LayoutBreak>
@@ -762,7 +750,6 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     <Measure number="9">
-      <irregular/>
       <Chord>
         <ticklen>480</ticklen>
         <Note pitch="56" tpc="10"/>
@@ -829,7 +816,6 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     <Measure number="10">
-      <irregular/>
       <Chord>
         <ticklen>240</ticklen>
         <Note pitch="61" tpc="9"/>
@@ -903,7 +889,6 @@ p, li { white-space: pre-wrap; }
         </BarLine>
       </Measure>
     <Measure number="11">
-      <irregular/>
       <Slur>
         <startTick>28320</startTick>
         <endTick>28800</endTick>
@@ -1001,7 +986,6 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     <Measure number="12">
-      <irregular/>
       <TimeSig>
         <subtype>388</subtype>
         <den>4</den>
@@ -1073,7 +1057,6 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     <Measure number="13">
-      <irregular/>
       <Chord>
         <ticklen>240</ticklen>
         <Note pitch="65" tpc="13"/>
@@ -1149,7 +1132,6 @@ p, li { white-space: pre-wrap; }
       <BarLine/>
       </Measure>
     <Measure number="14">
-      <irregular/>
       <Chord>
         <ticklen>480</ticklen>
         <Note pitch="69" tpc="17"/>
@@ -1208,7 +1190,6 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     <Measure number="15">
-      <irregular/>
       <Chord>
         <ticklen>480</ticklen>
         <StemDirection>down</StemDirection>
@@ -1289,7 +1270,6 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     <Measure number="16">
-      <irregular/>
       <Chord>
         <ticklen>480</ticklen>
         <Note pitch="67" tpc="15"/>
@@ -1392,7 +1372,6 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     <Measure number="17">
-      <irregular/>
       <Chord>
         <ticklen>480</ticklen>
         <Note pitch="64" tpc="18"/>
@@ -1447,7 +1426,6 @@ p, li { white-space: pre-wrap; }
       <BarLine/>
       </Measure>
     <Measure number="18">
-      <irregular/>
       <Chord>
         <ticklen>480</ticklen>
         <Note pitch="60" tpc="14"/>
@@ -1492,7 +1470,6 @@ p, li { white-space: pre-wrap; }
       <BarLine/>
       </Measure>
     <Measure number="19">
-      <irregular/>
       <Chord>
         <ticklen>480</ticklen>
         <Note pitch="65" tpc="13"/>
@@ -1545,7 +1522,6 @@ p, li { white-space: pre-wrap; }
       <BarLine/>
       </Measure>
     <Measure number="20">
-      <irregular/>
       <LayoutBreak>
         <subtype>line</subtype>
         </LayoutBreak>
@@ -1583,7 +1559,6 @@ p, li { white-space: pre-wrap; }
       <BarLine/>
       </Measure>
     <Measure number="21">
-      <irregular/>
       <Chord>
         <ticklen>240</ticklen>
         <Note pitch="67" tpc="15"/>
@@ -1628,7 +1603,6 @@ p, li { white-space: pre-wrap; }
       <BarLine/>
       </Measure>
     <Measure number="22">
-      <irregular/>
       <Chord>
         <ticklen>480</ticklen>
         <Note pitch="58" tpc="12"/>
@@ -1683,7 +1657,6 @@ p, li { white-space: pre-wrap; }
       <BarLine/>
       </Measure>
     <Measure number="23">
-      <irregular/>
       <Chord>
         <ticklen>480</ticklen>
         <Note pitch="60" tpc="14"/>
@@ -1727,7 +1700,6 @@ p, li { white-space: pre-wrap; }
       <BarLine/>
       </Measure>
     <Measure number="24">
-      <irregular/>
       <Chord>
         <ticklen>240</ticklen>
         <Note pitch="60" tpc="14"/>
@@ -2490,6 +2462,5 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     </Staff>
-  <cursorStaff>1</cursorStaff>
-  <cursorVoice>0</cursorVoice>
+  <cursorTrack>4</cursorTrack>
   </museScore>

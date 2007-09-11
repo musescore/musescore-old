@@ -238,14 +238,14 @@ void Canvas::objectPopup(const QPoint& pos, Element* obj)
 //   measurePopup
 //---------------------------------------------------------
 
-void Canvas::measurePopup(const QPoint& pos, Measure* obj)
+void Canvas::measurePopup(const QPoint& gpos, Measure* obj)
       {
       Staff* staff = 0;
       int pitch;
       Segment* seg;
       QPointF offset;
-      int tick;
-      _score->pos2measure(pos, &tick, &staff, &pitch, &seg, &offset);
+      int tick = 0;
+      _score->pos2measure(startMove, &tick, &staff, &pitch, &seg, &offset);
       if (staff == 0) {
             printf("Canvas::measurePopup: staff == 0 !\n");
             return;
@@ -273,7 +273,7 @@ void Canvas::measurePopup(const QPoint& pos, Measure* obj)
             popup->addSeparator();
       a = popup->addAction(tr("Properties"));
       a->setData("measure-properties");
-      a = popup->exec(pos);
+      a = popup->exec(gpos);
       if (a == 0)
             return;
       QString cmd(a->data().toString());
@@ -351,9 +351,9 @@ void Canvas::mousePressEvent(QMouseEvent* ev)
             return;
             }
 
-      keyState         = ev->modifiers();
-      buttonState      = ev->button();
-      startMove        = imatrix.map(QPointF(ev->pos()));
+      keyState    = ev->modifiers();
+      buttonState = ev->button();
+      startMove   = imatrix.map(QPointF(ev->pos()));
 
       Element* element = elementAt(startMove);
 

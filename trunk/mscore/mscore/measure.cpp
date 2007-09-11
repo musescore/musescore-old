@@ -1998,6 +1998,8 @@ void Measure::propertyAction(const QString& s)
             if (!im.exec())
                   return;
 
+            setIrregular(im.isIrregular());     // TODO: shall we make this undoable?
+            score()->setDirty();
             score()->select(0, 0, 0);
             SigList* sl = score()->sigmap;
 
@@ -2139,14 +2141,12 @@ void Measure::write(Xml& xml, int no, int staff) const
                   xml.tag("endRepeat", _endRepeat);
             if (_ending)
                   xml.tag("ending", _ending-1); //changed by DK. 28.08.07
+            if (_irregular)
                   xml.tagE("irregular");
             if (_userStretch != 1.0)
                   xml.tag("stretch", _userStretch);
             }
 
-//      const MStaff* ms = &staves[staff];
-//      if (ms->endBarLine)
-//            ms->endBarLine->write(xml);
       for (ciElement i = _sel.begin(); i != _sel.end(); ++i) {
             if ((*i)->staff() == _score->staff(staff) && (*i)->type() != SLUR_SEGMENT)
                   (*i)->write(xml);
@@ -2180,7 +2180,7 @@ void Measure::write(Xml& xml, int no, int staff) const
 //   write
 //---------------------------------------------------------
 
-void Measure::write(Xml&xml) const
+void Measure::write(Xml& xml) const
       {
       xml.stag(QString("Measure tick=\"%1\"").arg(tick()));
       xml.curTick = tick();
@@ -2190,14 +2190,12 @@ void Measure::write(Xml&xml) const
       xml.tag("startRepeat", _startRepeat);
       xml.tag("endRepeat", _endRepeat);
       xml.tag("ending", _ending-1); //changed by DK. 28.08.07
-      xml.tagE("irregular");
+      if (_irregular)
+            xml.tagE("irregular");
       xml.tag("stretch", _userStretch);
 
       for (int staffIdx = 0; staffIdx < _score->nstaves(); ++staffIdx) {
             xml.stag("Staff");
-//            const MStaff* ms = &staves[staffIdx];
-//            if (ms->endBarLine)
-//                  ms->endBarLine->write(xml);
             for (ciElement i = _sel.begin(); i != _sel.end(); ++i) {
                   if ((*i)->staff() == _score->staff(staffIdx) && (*i)->type() != SLUR_SEGMENT)
                         (*i)->write(xml);

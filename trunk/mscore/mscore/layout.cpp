@@ -309,39 +309,6 @@ void ScoreLayout::processSystemHeader(Measure* m)
       }
 
 //---------------------------------------------------------
-//   addMeasure
-//---------------------------------------------------------
-
-double Page::addMeasure(ScoreLayout* layout, Measure* m, double y)
-      {
-      //---------------------------------------------------
-      //    collect page elements from measure
-      //---------------------------------------------------
-
-      ElementList sel = *(m->pel());
-      m->pel()->clear();
-      bool textFound = false;
-      for (iElement ie = sel.begin(); ie != sel.end(); ++ie) {
-            Element* el = *ie;
-            add(el);
-
-            el->layout(layout);
-            if (el->type() == TEXT) {
-                  Text* text = (Text*)el;
-                  if (text->anchor() == ANCHOR_PAGE) {
-                        // TODO: only collect top aligned page elements?
-                        if (el->pos().y() > y)
-                              y = el->pos().y();
-                        textFound = true;
-                        }
-                  }
-            }
-      if (textFound)
-            y += point(score()->style()->staffUpperBorder);
-      return y;
-      }
-
-//---------------------------------------------------------
 //   layoutPage
 //    return true, if next page must be relayouted
 //---------------------------------------------------------
@@ -587,7 +554,6 @@ Page* ScoreLayout::addPage()
       Page* page = new Page(this);
       page->setNo(_pages->size());
       _pages->push_back(page);
-//      _pages->update();
       return page;
       }
 

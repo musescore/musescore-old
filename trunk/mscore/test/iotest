@@ -27,6 +27,21 @@ rwtest() {
       testcount=$(($testcount+1))
       }
 
+rwtestXml() {
+      echo -n "testing load/save $1";
+      $MSCORE $1 -o mops.xml &> /dev/null
+      if diff -q $1 mops.xml &> /dev/null; then
+            echo -e "\r\t\t\t\t\t\t...OK";
+      else
+            echo -e "\r\t\t\t\t\t\t...FAILED";
+            failures=$(($failures+1));
+            echo "+++++++++DIFF++++++++++++++"
+            diff $1 mops.xml
+            echo "+++++++++++++++++++++++++++"
+      fi
+      testcount=$(($testcount+1))
+      }
+
 rwtest ../demos/promenade.msc
 rwtest ../demos/adeste.msc
 rwtest ../demos/inv10.msc
@@ -52,6 +67,8 @@ rwtest test7.msc
 rwtest testKeysig2.msc
 rwtest testTimesig2.msc
 rwtest tuplets.msc
+
+# rwtestXml testWedge1.xml
 
 echo
 echo "$testcount test(s), $failures failure(s)"

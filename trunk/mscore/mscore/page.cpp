@@ -47,7 +47,7 @@ Page::Page(ScoreLayout* s)
    : Element(s->score())
       {
       _layout    = s;
-      _no        = 0;  // n;
+      _no        = 0;
       _pageNo    = 0;
       _copyright = 0;
       _systems   = new QList<System*>;
@@ -134,13 +134,12 @@ void Page::appendSystem(System* s)
 void PageList::update()
       {
       double x = 0;
-      int no = 0;
+      int no   = 0;
       for (iPage ip = begin(); ip != end(); ++ip, ++no) {
             Page* page = *ip;
             page->setNo(no);
             page->setPos(x, 0);
             x += page->width() + ((no & 1) ? 1.0 : 50.0);
-//            page->layout();
             }
       }
 
@@ -331,6 +330,39 @@ void Page::collectElements(QList<Element*>& el)
                         el.append(st->instrumentName);
                   }
             }
+      }
+
+//---------------------------------------------------------
+//   addMeasure
+//---------------------------------------------------------
+
+double Page::addMeasure(ScoreLayout* layout, Measure* m, double y)
+      {
+      //---------------------------------------------------
+      //    collect page elements from measure
+      //---------------------------------------------------
+
+      ElementList sel = *(m->pel());
+      m->pel()->clear();
+      bool textFound = false;
+      for (iElement ie = sel.begin(); ie != sel.end(); ++ie) {
+            Element* el = *ie;
+            add(el);
+
+            el->layout(layout);
+            if (el->type() == TEXT) {
+                  Text* text = (Text*)el;
+                  if (text->anchor() == ANCHOR_PAGE) {
+                        // TODO: only collect top aligned page elements?
+                        if (el->pos().y() > y)
+                              y = el->pos().y();
+                        textFound = true;
+                        }
+                  }
+            }
+      if (textFound)
+            y += point(score()->style()->staffUpperBorder);
+      return y;
       }
 
 //---------------------------------------------------------

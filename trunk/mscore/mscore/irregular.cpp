@@ -53,3 +53,12 @@ SigEvent IrregularMeasureDialog::sig() const
       return e;
       }
 
+//---------------------------------------------------------
+//   isIrregular
+//---------------------------------------------------------
+
+bool IrregularMeasureDialog::isIrregular() const
+      {
+      return irregular->isChecked();
+      }
+
