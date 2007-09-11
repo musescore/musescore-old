@@ -33,6 +33,8 @@
 
   <br>
   <br>
-  See also <a href="chordnames.php">Chordnames</a>.
+  See also
+      <a href="text.php">Text</a>&nbsp;&nbsp;
+      <a href="chordnames.php">Chordnames</a>.
 <?php require("trailer.html");  ?>
 

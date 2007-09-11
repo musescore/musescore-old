@@ -20,9 +20,11 @@ the Sounding Edge: Music Notation Software, the Final Installment</a>
       Midi/Audio sequencer
 <li><a href="http://lilypond.org">LilyPond</a>
 <li><a href="http://noteedit.berlios.de">NoteEdit</a>
-   ist ein grafisches Frontend für LilyPond.</li>
+   ist ein grafisches Frontend für LilyPond von Jörg Anders.</li>
 <li><a href="http://canorus.berlios.de/wiki/index.php/Main_Page">Canorus</a>
    Nachfolger von NoteEdit</li>
+<li><a href="http://rnvs.informatik.tu-chemnitz.de/~jan/noteedit/noteedit.html">NtEd</a>
+     ist das neue WYSIWYG Notationsprogramm von Jörg Anders.
 <li><a href="http://www-ccrma.stanford.edu/CCRMA/Software/cmn/cmn.html">
      Common Music Notation</a></li>
 <li><a href="http://rosegardenmusic.com/">Rosegarden</a>
@@ -47,7 +49,7 @@ the Sounding Edge: Music Notation Software, the Final Installment</a>
       have a look at the <a href="http://www.linuxlinks.com/Software/Multimedia/Music_Notation/">
       MusicNotation</a> section.
    <li>Linux-Audio-Development(LAD) Mailing List:<br>
-      <a href="http://www.linuxdj.com/audio/lad/">
+      <a href="http://lad.linuxaudio.org/">
       <img src="../pic/ladbutton.gif" width="90" height="31" border="0"
       alt="Go to the Linux Audio Development Homepage" align="left">
       </a>
