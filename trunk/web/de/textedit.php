@@ -5,9 +5,9 @@
   ?>
 <h4><a href="idx.php">MuseScore</a>
    -- <a href="manual.php">Referenz</a>
-   -- Text Editing</h4>
+   -- Text Editieren</h4>
 
-  Ein Doppelclick auf einen Text startet den <i>edit mode</i>:
+  Ein Doppelclick auf einen Text startet den <i>Editiermodus</i>:
   <img src="../pic/textedit.png" align="center"><br>
   <br>
   Im <i>edit mode</i> stehen folgende Kommandos zur Verfügung:

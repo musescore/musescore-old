@@ -26,7 +26,13 @@
         </li>
     </ul>
 
+  <img src="../pic/lyrics.png" align="center">
+  <br>
+
   Lyrics can be <a href="textedit.php">edited</a> as normal text.
 
+  <br>
+  <br>
+  See also <a href="chordnames.php">Chordnames</a>.
 <?php require("trailer.html");  ?>
 

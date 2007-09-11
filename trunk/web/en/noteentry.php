@@ -15,7 +15,7 @@ does not change.<br>
 
 <table cellspacing="0" cellpadding="0">
 <tr><td>&lt;<b>N</b>&gt;</td><td>enter &lt;<i>Note Edit</i>&gt; mode.</td></tr>
-<tr><td>&lt;<b>Escape</b>&gt;</td><td> leave <i>Note Edit</i>&gt; mode.</td></tr>
+<tr><td>&lt;<b>Escape</b>&gt;</td><td> leave &lt;<i>Note Edit</i>&gt; mode.</td></tr>
 </table>
 <br>
 

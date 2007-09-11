@@ -7,8 +7,8 @@
    -- <a href="manual.php">Referenz</a>
    -- Akkordnamen</h4>
 
-  Akkordnamen können gesetzt werden, indem eine Note des Akkordes und dann
-  <code>&lt;<b>Ctrl+K</b>&gt;</code> gedrückt wird.
+  Akkordnamen können gesetzt werden, indem eine Note des Akkordes selektiert
+  und dann <code>&lt;<b>Ctrl+K</b>&gt;</code> gedrückt wird.
   Dies erzeugt einen Akkordnamen und schaltet in den
   <a href="textedit.php"><i>Editmodus</i></a>.
   <br>

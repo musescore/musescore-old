@@ -1832,8 +1832,6 @@ void Canvas::paintLasso(QPainter& p)
       QRectF r = _matrix.mapRect(lassoRect());
       double x = r.x();
       double y = r.y();
-//      double w = r.width();
-//      double h = r.height();
 
       QMatrix omatrix(_matrix);
 
@@ -1845,11 +1843,7 @@ void Canvas::paintLasso(QPainter& p)
       p.setRenderHint(QPainter::Antialiasing, true);
       p.setRenderHint(QPainter::TextAntialiasing, true);
 
-//      p.setClipRect(QRect(0, 0, lrint(w), lrint(h)));
-//      p.setClipping(true);
-
       QList<Element*> el = _layout->items(QRectF(0.0, 0.0, 100000.0, 1000000.0));
-//      QList<Element*> el = _layout->items(r);
       drawElements(p, el);
       cursor->draw(p);
 

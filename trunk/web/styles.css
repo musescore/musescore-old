@@ -1,6 +1,6 @@
 :link     { color: #091cef; }
 :visited  { color: #091cef; }
-:hover    { color: #091c00; background: #f9e909; }
+# :hover    { color: #091c00; background: #f9e909; }
 
 h1.head {
    margin: 0.05em 0.3em;
@@ -22,7 +22,7 @@ td.ld {
    valign: top;
    width: 60;
    font-weight: bold;
-   font-size: small;
+   font-size: 10pt;
    }
 td.lh {
    background: #aec3e8;
@@ -39,7 +39,7 @@ h3.navhead {
    }
 
 .navlink {
-   font-size: small;
+   font-size: 10pt;
    font-family: Verdana, Geneva, Arial, sans-serif;
    }
 

@@ -514,7 +514,7 @@ void Measure::layout(ScoreLayout* layout, double width)
                         // center to middle of notehead:
                         double noteHeadWidth = symbols[quartheadSym].width();
                         double lh = lyrics->lineSpacing();
-                        double y  = lh * line + 6 * _spatium;
+                        double y  = lh * line + point(score()->style()->lyricsDistance);
                         lyrics->setPos(noteHeadWidth/2 - lyrics->bbox().width() * .5,
                            y + staffY[staff]);
 

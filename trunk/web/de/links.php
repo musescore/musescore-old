@@ -6,7 +6,7 @@
 <!-- Main body -->
 <div class=mainbody>
 
-<h3>Atzikrl:</h3>
+<h3>Artikel:</h3>
 
 <ul>
 <li><a href="http://www.linuxjournal.com/node/8972/print">Dave Phillips: At
