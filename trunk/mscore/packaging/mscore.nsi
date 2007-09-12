@@ -30,11 +30,11 @@ Section "mscore07 (required)"
 
       SetOutPath $INSTDIR
       File mscore.exe
-      File C:\qt\4.3.0\bin\mingwm10.dll
-      File C:\qt\4.3.0\bin\QtGui4.dll
-      File C:\qt\4.3.0\bin\QtCore4.dll
-      File C:\qt\4.3.0\bin\QtSvg4.dll
-      File C:\qt\4.3.0\bin\QtXml4.dll
+      File /home/ws/.wine/drive_c/Qt/4.3.0/bin/mingwm10.dll
+      File /home/ws/.wine/drive_c/Qt\4.3.0\bin\QtGui4.dll
+      File /home/ws/.wine/drive_c/Qt\4.3.0\bin\QtCore4.dll
+      File /home/ws/.wine/drive_c/Qt\4.3.0\bin\QtSvg4.dll
+      File /home/ws/.wine/drive_c/Qt\4.3.0\bin\QtXml4.dll
       SetOutPath $INSTDIR\templates
       File share\templates\a4piano.msc
       File share\templates\pianoa5demo.msc

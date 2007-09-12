@@ -103,6 +103,5 @@ winp:
 	cd win32build; cp mscore/mscore.exe packaging/mscore.exe
 	cd win32build; cp -af ../mscore/share packaging
 	cd win32build; cp -af ../mscore/demos packaging
-	wine C:\\\\Program\ Files\\NSIS\\makensisw \
-      z:\\\\home\\ws\\mscore\\mscore\\trunk\\win32build\\packaging\\mscore.nsi
+	makensis win32build/packaging/mscore.nsi
 
