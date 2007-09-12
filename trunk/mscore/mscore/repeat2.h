@@ -33,12 +33,15 @@ enum // types for repeat
       START_REPEAT = 1,
       END_REPEAT = 2,
       SEGNO = 4,
-      CODA = 8,
-      CAPO = 16,
-      LOOP = 32,
-      P_VOLTA = 64,
-      S_VOLTA = 128,      
-      T_VOLTA = 256,
+      DASEGNO = 8,
+      CODA = 16,
+      D_CODA = 32, // dobble Coda
+      CAPO = 64,
+      DACAPO = 128,
+      LOOP = 256,
+      P_VOLTA = 512,
+      S_VOLTA = 1024,      
+      T_VOLTA = 2048,
       NORMAL = 4096
 };
 
