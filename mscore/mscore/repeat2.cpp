@@ -96,77 +96,134 @@ int RepeatStack::push(Measure* m)
             return 0;
 
       type = checkType(m);
-      if (type&NORMAL) {
-            if ((p = getSlot(m,NORMAL)) == 0x00) {
-                  p = setNewSlot(m);
-                  p->setRepeatType(NORMAL);
+      while (type) {
+            if (type&NORMAL) {
+                  if ((p = getSlot(m,NORMAL)) == 0x00) {
+                        p = setNewSlot(m);
+                        p->setRepeatType(NORMAL);
+                        }
+                  type &= ~(NORMAL);
                   }
-            }
 
-      if (type&CAPO) { 
-            if ((p = getSlot(m,CAPO)) == 0x00) {
-                  p = setNewSlot(m);
-                  p->setRepeatType(CAPO);
+            if (type&SEGNO) {
+                  if ((p = getSlot(m,SEGNO)) == 0x00) {
+                        p = setNewSlot(m);
+                        p->setRepeatType(SEGNO);
+                        }
+                  type &= ~(SEGNO);
                   }
-            }  
+
+            if (type&DASEGNO) {
+                  if ((p = getSlot(m,DASEGNO)) == 0x00) {
+                        p = setNewSlot(m);
+                        p->setRepeatType(DASEGNO);
+                        }
+                  type &= ~(DASEGNO);
+                  }
+
+            if (type&CODA) {
+                  if ((p = getSlot(m,CODA)) == 0x00) {
+                        p = setNewSlot(m);
+                        p->setRepeatType(CODA);
+                        }
+                  type &= ~(CODA);
+                  }
+
+            if (type&D_CODA) {
+                  if ((p = getSlot(m,D_CODA)) == 0x00) {
+                        p = setNewSlot(m);
+                        p->setRepeatType(D_CODA);
+                        }
+                  type &= ~(D_CODA);
+                  }
+
+            if (type&CAPO) { 
+                  if ((p = getSlot(m,CAPO)) == 0x00) {
+                        p = setNewSlot(m);
+                        p->setRepeatType(CAPO);
+                        }
+                  type &= ~(CAPO);
+                  } 
+
+            if (type&DACAPO) {
+                  if ((p = getSlot(m,DACAPO)) == 0x00) {
+                        p = setNewSlot(m);
+                        p->setRepeatType(DACAPO);
+                        }
+                  type &= ~(DACAPO);
+                  } 
  
-      if (type&START_REPEAT) { 
-            if ((p = getSlot(m,START_REPEAT)) == 0x00) {
-                  p = setNewSlot(m);
-                  p->setRepeatType(START_REPEAT);
-                  }
-            if (p->getActive() == true) {
-                  pp = getLastSlotByType(END_REPEAT);
-                  if (pp && pp->getEndMeasure() == p->getStartMeasure()) {
-                        p->setEndMeasure(pp->getStartMeasure());
+            if (type&START_REPEAT) { 
+                  if ((p = getSlot(m,START_REPEAT)) == 0x00) {
+                        p = setNewSlot(m);
+                        p->setRepeatType(START_REPEAT);
                         }
-                  else {
-                        p->setTicks2Add(m->tick());
-                        p->setEndMeasure(0);
+                  if (p->getActive() == true) {
+                        pp = getLastSlotByType(END_REPEAT);
+                        if (pp && pp->getEndMeasure() == p->getStartMeasure()) {
+                              p->setEndMeasure(pp->getStartMeasure());
+                              }
+                        else {
+                              p->setTicks2Add(m->tick());
+                              p->setEndMeasure(0);
+                              }
                         }
-                  }
-            else
-                  p->setLoopCount(p->getLoopCount()+1);
-            } 
+                  else
+                        p->setLoopCount(p->getLoopCount()+1);
+                  type &= ~(START_REPEAT);
+                  } 
   
-      if (type&END_REPEAT) {
-            if ((p = getSlot(m,END_REPEAT)) == 0x00) {
-                  p = setNewSlot(m);
-                  p->setRepeatType(END_REPEAT);
-                  }
-            if (p->getActive() == true) {
-                  pp = getLastActiveSlotByType(START_REPEAT);
-                  if (!pp)
-                        pp = getLastActiveSlotByType(CAPO);
-                  if (pp) {
-                        p->setEndMeasure(pp->getStartMeasure());
-                        pp->setEndMeasure(m);
-                        p->setTicks2Add(m->tick());
-                        p->setLoopCount(m->endRepeat());
+            if (type&END_REPEAT) {
+                  if ((p = getSlot(m,END_REPEAT)) == 0x00) {
+                        p = setNewSlot(m);
+                        p->setRepeatType(END_REPEAT);
                         }
+                        if (p->getActive() == true) {
+                              pp = getSlot(p->getEndMeasure(),START_REPEAT);
+                              if (!pp)
+                                    pp = getLastActiveSlotByType(START_REPEAT);
+                              if (!pp)
+                                    pp = getLastActiveSlotByType(CAPO);
+                              if (pp) {
+                                    p->setEndMeasure(pp->getStartMeasure());
+                                    pp->setEndMeasure(m);
+                                    p->setTicks2Add(m->tick());
+                                    p->setLoopCount(m->endRepeat());
+                                    }
+                              }
+                        else {
+                              if (p->getLoopCount() > 0)
+                                    p->setLoopCount(p->getLoopCount()-1);
+                             }
+                  type &= ~(END_REPEAT);
                   }
-            else {
-                  if (p->getLoopCount() > 0)
-                        p->setLoopCount(p->getLoopCount()-1);
-                  }
-            }
 
-      if (type&P_VOLTA) {
-            if ((p = getSlot(m,P_VOLTA)) == 0x00) {
-                  p = setNewSlot(m);
-                  p->setRepeatType(P_VOLTA);
+            if (type&P_VOLTA) {
+                  if ((p = getSlot(m,P_VOLTA)) == 0x00) {
+                        p = setNewSlot(m);
+                        p->setRepeatType(P_VOLTA);
+                        }
+                  if (p->getActive() == true) {
+                        // first time
+                        p->setTicks2Add(m->tickLen());
+                        p->setActive(false);
+                        }
+                  else { // second time
+                        p->setActive(0x04);
+                        ret = 1;
+                        p->setTickOffset(p->getTicks2Add()+
+                                         m->tickLen());
+                                         p->setLoopCount(m->endRepeat());
+                        rtickOffSet = rtickOffSet - p->getTicks2Add();
+                        }
+                  type &= ~(P_VOLTA);
                   }
-            if (p->getActive() == true) { // first time
-                  p->setTicks2Add(m->tickLen());
-                  p->setActive(false);
+
+            if (type&S_VOLTA) {
+                  type &= ~(S_VOLTA);
                   }
-            else { // second time
-                  p->setActive(true);
-                  ret = 1;
-                  p->setTickOffset(p->getTicks2Add()+
-                                   m->tickLen());
-                                   p->setLoopCount(m->endRepeat());
-                  rtickOffSet = rtickOffSet - p->getTicks2Add();
+            if (type&T_VOLTA) {
+                  type &= ~(T_VOLTA);
                   }
             }
       return ret;
@@ -223,48 +280,54 @@ Measure* RepeatStack::pop(Measure* m)
 
       type = checkType(m);
 
-      if (type&NORMAL) {
-            ret = 0x00;
-            }
-
-      if (type&P_VOLTA) {
-            ret = 0x00;
-            }
-
-      if (type&S_VOLTA) {
-            ret = 0x00;
-            }
-
-      if (type&T_VOLTA) {
-            ret = 0x00;
-            }
-
-      if (type&CAPO) {
-            ret = 0x00;
-            }
-
-      if (type&START_REPEAT) {
-            ret = 0x00;
-            }
-
-      if (type&END_REPEAT) {
-            p = getSlot(m,END_REPEAT);
-            pp = getLastActiveSlotByType(START_REPEAT);
-            if (!pp)
-                  pp = getLastActiveSlotByType(CAPO);
-            if (p->getActive() == true) {
-                  p->setTickOffset((p->getTicks2Add() -
-                                    pp->getTicks2Add()) + 
-                                    m->tickLen());
-                  ret = p->getEndMeasure();
-                  rtickOffSet += p->getTickOffset();
-                  p->setLoopCount(p->getLoopCount()-1);
-                  p->setActive(false);
-                  pp->setActive(false);
-                  }                              
-            if (p->getLoopCount() <= 0) {
-                  p->setActive(0x04);
+      while (type) {
+            if (type&NORMAL) {
                   ret = 0x00;
+                  type &= ~(NORMAL);
+                  }
+            if (type&P_VOLTA) {
+                  ret = 0x00;
+                  type &= ~(P_VOLTA);
+                  }
+            if (type&S_VOLTA) {
+                  ret = 0x00;
+                  type &= ~(S_VOLTA);
+                  }
+            if (type&T_VOLTA) {
+                  ret = 0x00;
+                  type &= ~(T_VOLTA);
+                  }
+            if (type&CAPO) {
+                  ret = 0x00;
+                  type &= ~(CAPO);
+                  }
+            if (type&START_REPEAT) {
+                  ret = 0x00;
+                  type &= ~(START_REPEAT);
+                  }
+            if (type&END_REPEAT) {
+                  p = getSlot(m,END_REPEAT);
+                  pp = getSlot(p->getEndMeasure(),START_REPEAT);
+                  if (!pp)
+                        pp = getLastActiveSlotByType(CAPO);     
+                  if (p->getActive() == true) {
+                        p->setTickOffset((p->getTicks2Add() -
+                                          pp->getTicks2Add()) + 
+                                          m->tickLen());
+                        ret = p->getEndMeasure();
+                        rtickOffSet += p->getTickOffset();
+                        p->setLoopCount(p->getLoopCount()-1);
+                        p->setActive(false);
+                        if (pp->getRepeatType() != CAPO)
+                              pp->setActive(false);
+                        else
+                              pp->setActive(true);                        
+                        }                              
+                  if (p->getLoopCount() <= 0) {
+                        p->setActive(0x04);
+                        ret = 0x00;
+                        }
+                  type &= ~(END_REPEAT);
                   }
             }
       return ret;
