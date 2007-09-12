@@ -18,7 +18,8 @@
 #  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 #=============================================================================
 
-add_library (fluid
+add_library (
+  fluid STATIC
   synth.cpp
   settings.cpp
   voice.cpp

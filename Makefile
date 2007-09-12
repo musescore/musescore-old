@@ -38,7 +38,6 @@ release:
             make -f Makefile;                       \
          else                                       \
             echo "build directory does already exist, please remove first with 'make clean'";       \
-            exit;                               \
          fi;
 
 debug:
@@ -50,19 +49,22 @@ debug:
             make -f Makefile;                       \
          else                                       \
             echo "build directory does already exist, please remove first with 'make clean'";       \
-            exit;                               \
          fi
 
 win32:
 	if test ! -d win32build;                      \
          then                                       \
             mkdir win32build;                       \
+      	if test ! -d win32install;              \
+               then                                 \
+                  mkdir win32install;               \
+            fi;                                     \
             cd win32build;                          \
-            cmake -DCMAKE_BUILD_TYPE=RELEASE -DCROSS_MINGW=ON ../mscore; \
+            cmake -DCMAKE_TOOLCHAIN_FILE=../mscore/cmake/mingw32.cmake -DCMAKE_INSTALL_PREFIX=../win32install -DCMAKE_BUILD_TYPE=RELEASE  ../mscore; \
             make -f Makefile;                       \
+            make install;                           \
          else                                       \
-            echo "build directory does alread exist, please remove first";       \
-            exit;                               \
+            echo "build directory win32build does alread exist, please remove first";       \
          fi
 
 #

@@ -23,38 +23,6 @@ CMAKE_MINIMUM_REQUIRED(VERSION 2.4.6)
 
 # cmake 2.4.3 does not install all.h and does not link against qtsvg
 
-# support for mingw cross compiling
-#  (incomplete, does not work now)
-#
-if (UNIX)
-      option (CROSS_MINGW "Cross compile using MinGW on linux" OFF)
-else (UNIX)
-      set (CROSS_MINGW OFF)
-endif (UNIX)
-
-if (CROSS_MINGW)
-      set (CMAKE_SYSTEM_NAME "Windows")
-      set (CMAKE_CXX_COMPILER  "i586-mingw32msvc-c++")
-
-      set (CMAKE_COMPILER_IS_GNUCXX 1)
-      set (CMAKE_C_COMPILER  "i586-mingw32msvc-gcc")
-      set (CMAKE_AR "i586-mingw32msvc-ar")
-      set (CMAKE_RANLIB "i586-mingw32msvc-ranlib")
-      set (CMAKE_SHARED_LIBRARY_LINK_C_FLAGS "1")
-      set (QT_INCLUDE_DIR "/home/ws/.wine/drive_c/Qt/4.3.0/include")
-      set (QT_LIBRARY_DIR "/home/ws/.wine/drive_c/Qt/4.3.0/lib")
-      set (QT_MKSPECS_DIR "/home/ws/.wine/drive_c/mkspecs")
-      set (WIN32 ON)
-      set (MINGW ON)
-      set (CMAKE_SHARED_LIBRARY_LINK_CXX_FLAGS)
-      set (CMAKE_SYSTEM_LIBRARY_PATH "~/.wine/drive_c/MinGW")
-      set (CMAKE_VERBOSE_MAKEFILE ON)
-      set (QT_X11_X11_LIBRARY "")
-      set (QT_X11_Xext_LIBRARY "")
-      set (QT_X11_m_LIBRARY "")
-      set (HAVE_PTHREAD OFF)
-ENDIF(CROSS_MINGW)
-
 # set(CMAKE_BUILD_TYPE DEBUG)
 # set(CMAKE_BUILD_TYPE RELEASE)
 
@@ -75,7 +43,7 @@ include ( ${PROJECT_SOURCE_DIR}/cmake/UsePkgConfig1.cmake )
 include ( ${PROJECT_SOURCE_DIR}/cmake/TargetDoc.cmake)
 
 # for debugging the make system uncomment next line:
-# set(CMAKE_VERBOSE_MAKEFILE ON)
+set(CMAKE_VERBOSE_MAKEFILE ON)
 
 ##
 ## Just print a notice if this is OS X
@@ -214,7 +182,11 @@ include (InstallRequiredSystemLibraries)
 message("Depends1: ${DEBIAN_PACKAGE_DEPENDS}")
   set(DEBIAN_PACKAGE_MAINTAINER   "ws@seh.de")
   set(CPACK_PACKAGE_CONTACT       "ws@seh.de")
+if (MINGW)
+  set(CPACK_GENERATOR             "NSIS")
+else (MINGW)
   set(CPACK_GENERATOR             "DEB;TBZ2")
+endif (MINGW)
   set(CPACK_DEB "on")
 
   include (CPack)

@@ -145,23 +145,24 @@ add_executable ( mscore
       undo.cpp utils.cpp xml.cpp timesig.cpp lyrics.cpp bsp.cpp
       viewer.cpp volta.cpp simplebutton.cpp image.cpp keyfinder.cpp
       pitchspelling.cpp musedata.cpp keysig.cpp arpeggio.cpp breath.cpp
-      editdrumset.cpp editstaff.cpp drumset.cpp tremolo.cpp repeat.cpp 
+      editdrumset.cpp editstaff.cpp drumset.cpp tremolo.cpp repeat.cpp
       repeat2.cpp
       lilypond.cpp exportly.cpp
       )
 
-if (CROSS_MINGW)
+if (MINGW)
    set_target_properties( mscore
       PROPERTIES
          COMPILE_FLAGS "-include ${PROJECT_BINARY_DIR}/all.h ${QT_DEFINITIONS}"
-         LINK_FLAGS "-L /home/ws/.wine/drive_c/MinGW/lib"
+#         LINK_FLAGS "-L /home/ws/.wine/drive_c/MinGW/lib -L /home/ws/.wine/drive_c/Qt/4.3.0/lib"
+         LINK_FLAGS "-L /home/ws/.wine/drive_c/Qt/4.3.0/lib"
       )
    target_link_libraries(mscore
       fluid
       awl
-      ${QT_LIBRARIES}
+      ${QT_mingw_LIBRARIES}
       )
-else (CROSS_MINGW)
+else (MINGW)
    set_target_properties( mscore
       PROPERTIES
          COMPILE_FLAGS "-include ${PROJECT_BINARY_DIR}/all.h ${QT_DEFINITIONS}"
@@ -173,7 +174,7 @@ else (CROSS_MINGW)
       fluid
       awl
       )
-endif (CROSS_MINGW)
+endif (MINGW)
 
 #======================================
 #     target smf2xml
