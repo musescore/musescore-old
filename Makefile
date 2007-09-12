@@ -100,7 +100,7 @@ package:
 winp:
 	cp -af mscore/packaging win32build/
 	cp -af mscore/COPYING win32build/packaging
-	cd win32build; cp mscore/mscore packaging/mscore.exe
+	cd win32build; cp mscore/mscore.exe packaging/mscore.exe
 	cd win32build; cp -af ../mscore/share packaging
 	cd win32build; cp -af ../mscore/demos packaging
 	wine C:\\\\Program\ Files\\NSIS\\makensisw \

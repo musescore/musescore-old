@@ -47,9 +47,11 @@ Section "mscore07 (required)"
       File share\wallpaper\paper3.png
       SetOutPath $INSTDIR\demos
       File demos\adeste.msc
+      File demos\bach-bc2.msc
       File demos\inv1.msc
       File demos\inv6.msc
       File demos\inv10.msc
+      File demos\inv13.msc
       File demos\praeludium1.msc
       File demos\prelude.msc
       File demos\promenade.msc
@@ -98,10 +100,13 @@ Section "Uninstall"
   RMDir "$INSTDIR\wallpaper"
 
   Delete $INSTDIR\demos\adeste.msc
+  Delete $INSTDIR\demos\bach-bc2.msc
   Delete $INSTDIR\demos\inv1.msc
   Delete $INSTDIR\demos\inv6.msc
   Delete $INSTDIR\demos\inv10.msc
+  Delete $INSTDIR\demos\inv13.msc
   Delete $INSTDIR\demos\praeludium1.msc
+  Delete $INSTDIR\demos\prelude.msc
   Delete $INSTDIR\demos\promenade.msc
   Delete $INSTDIR\demos\sonata16.msc
   Delete $INSTDIR\demos\sarabande.xml

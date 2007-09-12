@@ -1535,6 +1535,10 @@ int main(int argc, char* argv[])
       //
       //  load internal fonts
       //
+#ifdef __MINGW32__
+      QFontDatabase::addApplicationFont(":/fonts/mscore_20.otf");
+      QFontDatabase::addApplicationFont(":/fonts/mscore1_20.otf");
+#else
       int fontId = QFontDatabase::addApplicationFont(":/fonts/mscore_20.otf");
       if (fontId == -1) {
             fprintf(stderr, "Mscore: fatal error: cannot load internal font\n");
@@ -1547,7 +1551,7 @@ int main(int argc, char* argv[])
             if (!debugMode)
                   exit(-1);
             }
-
+#endif
       seq = new Seq();
       if (converterMode)
             noSeq = true;
