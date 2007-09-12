@@ -385,33 +385,5 @@ void initSymbols()
       symbols[note32Sym]                  = Sym("note 1/32",  0xe0fa, 0);
       symbols[note64Sym]                  = Sym("note 1/64",  0xe0fb, 0);
       symbols[dotdotSym]                  = Sym("dot dot",    0xe0fd, 0);
-
-#if 0
-// some debug output
-//      Sym* s = &symbols[clefEightSym];
-      Sym* s = &symbols[quartheadSym];
-      QFontMetricsF fm(s->font());
-      printf("screen metrics:  quart  l %f  w %f(%f,%f) r %f\n",
-         fm.leftBearing(s->code()), fm.width(s->code()),
-         s->width(), s->bbox().x(),
-         fm.rightBearing(s->code()));
-
-      QFont nf(s->font());
-      nf.setPointSizeF(s->font().pointSizeF() * 10.0);
-      fm = QFontMetricsF(nf);
-      printf("screen metrics10: quart l %f  w %f(%f,%f) r %f\n",
-         fm.leftBearing(s->code()), fm.width(s->code()),
-         s->width(), s->bbox().x(),
-         fm.rightBearing(s->code()));
-
-      QPrinter printer(QPrinter::HighResolution);
-      QFontMetricsF nfm(s->font(), &printer);
-      printf("printer metrics: quart  l %f  w %f(%f,%f) r %f\n",
-         nfm.leftBearing(s->code()),
-         nfm.width(s->code()),
-         nfm.boundingRect(s->code()).width(),
-         nfm.boundingRect(s->code()).x(),
-         nfm.rightBearing(s->code()));
-#endif
       }
 

@@ -1431,18 +1431,6 @@ int main(int argc, char* argv[])
       QCoreApplication::setOrganizationDomain("muse.org");
       QCoreApplication::setApplicationName("MuseScore");
 
-#ifdef __MINGW32__
-      appDpiX = 75;
-      appDpiY = 75;
-#else
-      appDpiX = QX11Info::appDpiX();
-      appDpiY = QX11Info::appDpiY();
-#endif
-      DPI  = appDpiX;     // drawing resolution
-      DPMM = DPI / INCH;  // dots/mm
-
-      _spatium = 20.0 / 72.0 * DPI / 4.0;
-
       int c;
       while ((c = getopt(argc, argv, "vdLsmio:")) != EOF) {
             switch (c) {
@@ -1477,6 +1465,15 @@ int main(int argc, char* argv[])
       ++argc;
 
       haveMidi = !initMidi();
+
+      QWidget wi(0);
+      appDpiX = wi.logicalDpiX();
+      appDpiY = wi.logicalDpiY();
+
+      DPI  = appDpiX;     // drawing resolution
+      DPMM = DPI / INCH;  // dots/mm
+
+      _spatium = 20.0 / 72.0 * DPI / 4.0;
 
       initSymbols();
       //
@@ -1570,65 +1567,6 @@ int main(int argc, char* argv[])
       setenv("LANG", "mops", 1);
 #endif
       QLocale::setDefault(QLocale(QLocale::C));
-
-      //-----------------------------------------
-      //  sanity check
-      //  check for score font
-      //-----------------------------------------
-
-#if 1
-      QFont f;
-      f.setFamily("MScore");
-      f.setPixelSize(20);
-      QFontInfo fi(f);
-
-      if (!fi.exactMatch()) {
-            //
-            // sometimes i do not get an exact match, but the
-            // Emmentaler font is found in the font database.
-            // I cannot find out why the font did not match. This
-            // happens for example with current cvs version of fontconfig.
-            //
-            // produce some debugging output:
-            //
-            printf("no exact match for font Mscore found (<%s><%d>)\n", fi.family().toLatin1().data(), fi.style());
-            QFontDatabase fdb;
-            QStringList families = fdb.families();
-            foreach (QString family, families) {
-                  if (family == "MScore") {
-                        printf("  found <%s>\n", family.toLatin1().data());
-                        QStringList styles = fdb.styles(family);
-                        foreach (QString style, styles) {
-                              printf("    Style <%s>\n", style.toLatin1().data());
-
-                              int w = fdb.weight(family, style);
-                              printf("      weight %d\n", w);
-
-                              bool b = fdb.isSmoothlyScalable(family, style);
-                              printf("      smooth scalable %d\n", b);
-
-                              b = fdb.isBitmapScalable(family, style);
-                              printf("      bitmap scalable %d\n", b);
-
-                              b = fdb.isScalable(family, style);
-                              printf("      scalable %d\n", b);
-
-                              b = fdb.isFixedPitch(family, style);
-                              printf("      fixedPitch %d\n", b);
-
-                              b = fdb.bold(family, style);
-                              printf("      bold %d\n", b);
-
-                              QList<int> sizes = fdb.smoothSizes(family, style);
-                              printf("      sizes: ");
-                              foreach (int s, sizes)
-                                    printf("%d ", s);
-                              printf("\n");
-                              }
-                        }
-                  }
-            }
-#endif
 
       //-------------------------------
       //  load scores

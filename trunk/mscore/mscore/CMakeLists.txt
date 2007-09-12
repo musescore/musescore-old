@@ -153,8 +153,7 @@ add_executable ( mscore
 if (MINGW)
    set_target_properties( mscore
       PROPERTIES
-         COMPILE_FLAGS "-include ${PROJECT_BINARY_DIR}/all.h ${QT_DEFINITIONS}"
-#         LINK_FLAGS "-L /home/ws/.wine/drive_c/MinGW/lib -L /home/ws/.wine/drive_c/Qt/4.3.0/lib"
+         COMPILE_FLAGS "-mwindows -include ${PROJECT_BINARY_DIR}/all.h ${QT_DEFINITIONS}"
          LINK_FLAGS "-L /home/ws/.wine/drive_c/Qt/4.3.0/lib"
       )
    target_link_libraries(mscore
