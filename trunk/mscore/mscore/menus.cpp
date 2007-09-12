@@ -293,7 +293,7 @@ void MuseScore::showPalette(bool visible)
 
             unsigned nn = sizeof(atrSyms)/sizeof(*atrSyms);
             sp = new Palette((nn + 3) / 4, 4);
-            sp->setGrid(42, 40);
+            sp->setGrid(42, 30);
 
             for (unsigned i = 0; i < nn; ++i) {
                   NoteAttribute* s = new NoteAttribute(gscore);
