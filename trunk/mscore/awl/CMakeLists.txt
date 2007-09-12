@@ -68,7 +68,7 @@ set_target_properties( awl
       "-include ${PROJECT_BINARY_DIR}/all.h"
    )
 
-if (NOT CROSS_MINGW)
+if (NOT MINGW)
 QT4_WRAP_CPP (mocs2
       aslider.h
       knob.h
@@ -99,4 +99,4 @@ set_target_properties( awlplugin
 target_link_libraries( awlplugin
       ""
       )
-endif (NOT CROSS_MINGW)
+endif (NOT MINGW)
