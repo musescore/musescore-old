@@ -188,8 +188,6 @@ if (NOT MINGW)
       set_target_properties( smf2xml
             PROPERTIES COMPILE_FLAGS "-include ${PROJECT_BINARY_DIR}/all.h"
             )
-
-      install_targets ( /bin mscore )
 endif (NOT MINGW)
 
 #======================================
@@ -205,7 +203,7 @@ if (NOT MINGW)
       set_target_properties( xml2smf
             PROPERTIES COMPILE_FLAGS "-include ${PROJECT_BINARY_DIR}/all.h"
             )
-
-      install_targets ( /bin mscore )
 endif (NOT MINGW)
+
+install_targets ( /bin mscore )
 
