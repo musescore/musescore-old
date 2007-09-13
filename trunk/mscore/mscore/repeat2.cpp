@@ -7,11 +7,11 @@
 //
 //  Copyright (C) 2007- Dieter Krause (dikrau@users.sourceforge.net)
 //
-// repeat2: contains function to handel single and multiple repeats/loops 
+// repeat2: contains function to handel single and multiple repeats/loops
 //          in a partiture
 //          Depands on repeat2.h --> class and function definition
 //                  and measure.h
-//  
+//
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.
@@ -41,28 +41,28 @@ bool  playRepeats;
 
 
 
-RepeatStack::RepeatStack() 
+RepeatStack::RepeatStack()
       {
       firstStack = init();
       setNoOffElements(0);
       rtickOffSet = 0;
       }
 
-void RepeatStack::setNoOffElements(int n) 
+void RepeatStack::setNoOffElements(int n)
       {
       firstStack->_noOffElements = n;
       }
 
-int RepeatStack::getNoOffElements() 
+int RepeatStack::getNoOffElements()
       {
       return firstStack->_noOffElements;
       }
 
-RepeatStack* RepeatStack::init() 
+RepeatStack* RepeatStack::init()
       {
       RepeatStack* n = new RepeatStack(*this);
       if ( n <= 0 )
-            abort();      
+            abort();
       n->setPrev(0);
       n->setNext(0);
       n->setLoopCount(0);
@@ -81,14 +81,14 @@ RepeatStack* RepeatStack::init()
 //******************************************************
 
 
-int RepeatStack::push(Measure* m) 
+int RepeatStack::push(Measure* m)
       {
       RepeatStack* p = 0x00;
       RepeatStack* pp = 0x00;
 
       int type = 0;
       int ret = false;
-      int loop = true;
+//      int loop = true;
 
       if ( firstStack == 0 ) // No Stack!!!!
             abort ();
@@ -137,13 +137,13 @@ int RepeatStack::push(Measure* m)
                   type &= ~(D_CODA);
                   }
 
-            if (type&CAPO) { 
+            if (type&CAPO) {
                   if ((p = getSlot(m,CAPO)) == 0x00) {
                         p = setNewSlot(m);
                         p->setRepeatType(CAPO);
                         }
                   type &= ~(CAPO);
-                  } 
+                  }
 
             if (type&DACAPO) {
                   if ((p = getSlot(m,DACAPO)) == 0x00) {
@@ -151,9 +151,9 @@ int RepeatStack::push(Measure* m)
                         p->setRepeatType(DACAPO);
                         }
                   type &= ~(DACAPO);
-                  } 
- 
-            if (type&START_REPEAT) { 
+                  }
+
+            if (type&START_REPEAT) {
                   if ((p = getSlot(m,START_REPEAT)) == 0x00) {
                         p = setNewSlot(m);
                         p->setRepeatType(START_REPEAT);
@@ -171,8 +171,8 @@ int RepeatStack::push(Measure* m)
                   else
                         p->setLoopCount(p->getLoopCount()+1);
                   type &= ~(START_REPEAT);
-                  } 
-  
+                  }
+
             if (type&END_REPEAT) {
                   if ((p = getSlot(m,END_REPEAT)) == 0x00) {
                         p = setNewSlot(m);
@@ -249,7 +249,7 @@ RepeatStack* RepeatStack::setNewSlot(Measure* m)
             n->setPrev(0);
             rloopCounter = 1;
             setNoOffElements(1);
-            }                        
+            }
       n->setLoopCount(1);
       n->setStartMeasure(m);
       n->setEndMeasure(0);
@@ -261,13 +261,13 @@ RepeatStack* RepeatStack::setNewSlot(Measure* m)
 // function pop, get measure and other infos from stack
 //******************************************************
 
-Measure* RepeatStack::pop(Measure* m) 
+Measure* RepeatStack::pop(Measure* m)
       {
       Measure* ret = 0x00;
       RepeatStack* p = 0x00;
       RepeatStack* pp = 0x00;
       int type = 0;
-      bool lc = 0;
+//      bool lc = 0;
 
 
       if (!firstStack) // No Stack!!!!
@@ -309,10 +309,10 @@ Measure* RepeatStack::pop(Measure* m)
                   p = getSlot(m,END_REPEAT);
                   pp = getSlot(p->getEndMeasure(),START_REPEAT);
                   if (!pp)
-                        pp = getLastActiveSlotByType(CAPO);     
+                        pp = getLastActiveSlotByType(CAPO);
                   if (p->getActive() == true) {
                         p->setTickOffset((p->getTicks2Add() -
-                                          pp->getTicks2Add()) + 
+                                          pp->getTicks2Add()) +
                                           m->tickLen());
                         ret = p->getEndMeasure();
                         rtickOffSet += p->getTickOffset();
@@ -321,8 +321,8 @@ Measure* RepeatStack::pop(Measure* m)
                         if (pp->getRepeatType() != CAPO)
                               pp->setActive(false);
                         else
-                              pp->setActive(true);                        
-                        }                              
+                              pp->setActive(true);
+                        }
                   if (p->getLoopCount() <= 0) {
                         p->setActive(0x04);
                         ret = 0x00;
@@ -339,7 +339,7 @@ RepeatStack* RepeatStack::getStartMeasure(Measure* m)
 
       p = firstStack;
       while (p != 0) {
-           if (p->getStartMeasure() == m) 
+           if (p->getStartMeasure() == m)
                   break;
                   p = p->getNext();
             }
@@ -352,7 +352,7 @@ RepeatStack* RepeatStack::getSlot(Measure* m, int type)
 
       p = firstStack;
       while (p != 0) {
-           if (p->getStartMeasure() == m && p->getRepeatType() == type) 
+           if (p->getStartMeasure() == m && p->getRepeatType() == type)
                   break;
                   p = p->getNext();
             }
@@ -470,7 +470,7 @@ RepeatStack* RepeatStack::getLastEndMeasure(Measure* m)
             }
       return p;
       }
-         
+
 RepeatStack* RepeatStack::getLastSlot()
       {
       RepeatStack* p = 0x00;
@@ -480,13 +480,13 @@ RepeatStack* RepeatStack::getLastSlot()
       return p;
       }
 
-bool RepeatStack::delStackElement(RepeatStack* de) 
+bool RepeatStack::delStackElement(RepeatStack* de)
       {
       delete de;
       return true;
       }
 
-RepeatStack::~RepeatStack() 
+RepeatStack::~RepeatStack()
       {
       }
 
@@ -497,7 +497,7 @@ int RepeatStack::checkType(Measure* m)
       if (m->prev() == 0)
             type |= CAPO;
       if (m->startRepeat())
-            type |= START_REPEAT;      
+            type |= START_REPEAT;
       if (m->endRepeat() > 0)
             type |= END_REPEAT;
       if (m->ending() == 1)
@@ -510,10 +510,3 @@ int RepeatStack::checkType(Measure* m)
             type |= NORMAL;
       return type;
       }
-            
-
-
-      
-      
-
-

@@ -413,7 +413,7 @@ void Score::changeTimeSig(int tick, int timeSigSubtype)
 
       int z, n;
       TimeSig::getSig(timeSigSubtype, &n, &z);
-      if (oz == z && on == n) {
+      if ((oz == z) && (on == n)) {
             //
             // check if there is already a time signature symbol
             //
@@ -442,12 +442,14 @@ void Score::changeTimeSig(int tick, int timeSigSubtype)
       if (i != sigmap->end()) {
             oSig = i->second;
             SigEvent e = sigmap->timesig(tick - 1);
-            if (e.nominator != z || e.denominator != n)
+            if ((tick == 0) || (e.nominator != z) || (e.denominator != n)) {
                   nSig = SigEvent(z, n);
+                  }
             }
       else {
             nSig = SigEvent(z, n);
             }
+
       undoChangeSig(tick, oSig, nSig);
 
       //---------------------------------------------
@@ -477,7 +479,7 @@ void Score::changeTimeSig(int tick, int timeSigSubtype)
                         if (e)
                               undoRemoveElement(e);
                         else
-                              printf("     +++no TimeSig\n");
+                              printf("     +++no TimeSig in Staff\n");
                         }
                   undoRemoveElement(segment);
                   if (etick > tick)
@@ -491,6 +493,7 @@ void Score::changeTimeSig(int tick, int timeSigSubtype)
       //---------------------------------------------
 
       for (Measure* m = _layout->first(); m; m = m->next()) {
+
             int newLen = sigmap->ticksMeasure(m->tick());
             int oldLen = m->tickLen();
             if (newLen == oldLen)

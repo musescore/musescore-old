@@ -154,7 +154,7 @@ if (MINGW)
    set_target_properties( mscore
       PROPERTIES
          COMPILE_FLAGS "-mwindows -include ${PROJECT_BINARY_DIR}/all.h ${QT_DEFINITIONS}"
-         LINK_FLAGS "-L /home/ws/.wine/drive_c/Qt/4.3.0/lib"
+         LINK_FLAGS "-L /home/ws/.wine/drive_c/Qt/4.3.1/lib"
       )
    target_link_libraries(mscore
       fluid

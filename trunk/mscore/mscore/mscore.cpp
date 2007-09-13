@@ -290,6 +290,7 @@ MuseScore::MuseScore()
       layout->setMargin(0);
       layout->setSpacing(0);
       tab = new TabBar;
+      tab->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
       QHBoxLayout* hbox = new QHBoxLayout;
       hbox->addWidget(tab);
       hbox->addStretch(100);

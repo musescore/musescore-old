@@ -27,7 +27,7 @@ class Viewer;
 
 enum BarType {
       NORMAL_BAR, DOUBLE_BAR, START_REPEAT, END_REPEAT,
-      BROKEN_BAR, END_BAR, INVISIBLE_BAR
+      BROKEN_BAR, END_BAR, END_START_REPEAT
       };
 
 //---------------------------------------------------------

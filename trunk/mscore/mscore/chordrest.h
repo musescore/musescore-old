@@ -63,9 +63,6 @@ enum NoteAttributeIdx {
       DownPrallSym,
       UpMordentSym,
       DownMordentSym,
-      SegnoSym,
-      CodaSym,
-      VarcodaSym,
       NOTE_ATTRIBUTES
       };
 
@@ -109,7 +106,6 @@ class NoteAttribute : public Symbol {
       virtual void setSubtype(int);
       virtual void read(QDomElement);
       virtual void write(Xml& xml) const;
-      virtual QRectF drag(const QPointF& s);
       QString name() const { return atrList[subtype()].name; }
 
       static AttributeInfo atrList[];

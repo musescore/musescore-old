@@ -44,7 +44,7 @@ BarLine::BarLine(Score* s)
 void BarLine::draw(QPainter& p)
       {
       qreal lw    = point(score()->style()->barWidth);
-      qreal h     = height();
+      qreal h     = height() - point(score()->style()->staffLineWidth) * .5;
 
       bool split = height() > (_spatium * 4.01);
 
@@ -135,7 +135,40 @@ void BarLine::draw(QPainter& p)
                   }
                   break;
 
-            case INVISIBLE_BAR:
+            case END_START_REPEAT:
+                  {
+                  qreal lw2  = point(score()->style()->endBarWidth);
+                  qreal lw22 = point(score()->style()->endBarWidth) / 2.0;
+                  qreal d1   = point(score()->style()->endBarDistance);
+
+                  qreal dotw = symbols[dotSym].width();
+                  qreal x0   =  dotw/2;
+                  qreal x1   =  dotw + d1 + lw/2;
+                  qreal x2   =  dotw + d1 + lw + d1 + lw22;
+                  qreal x3   =  dotw + d1 + lw + d1 + lw2 + d1 + lw/2;
+                  qreal x4   =  dotw + d1 + lw + d1 + lw2 + d1 + lw + d1 - dotw/2;
+
+                  symbols[dotSym].draw(p, x0, 1.5 * _spatium);
+                  symbols[dotSym].draw(p, x0, 2.5 * _spatium);
+                  symbols[dotSym].draw(p, x4, 1.5 * _spatium);
+                  symbols[dotSym].draw(p, x4, 2.5 * _spatium);
+                  if (split) {
+                        symbols[dotSym].draw(p, x0, h - 1.5 * _spatium);
+                        symbols[dotSym].draw(p, x0, h - 2.5 * _spatium);
+                        symbols[dotSym].draw(p, x4, h - 1.5 * _spatium);
+                        symbols[dotSym].draw(p, x4, h - 2.5 * _spatium);
+                        }
+
+                  p.drawLine(QLineF(x1, 0.0, x1, h));
+
+                  pen.setWidthF(lw2);
+                  p.setPen(pen);
+                  p.drawLine(QLineF(x2, 0.0, x2, h));
+
+                  pen.setWidthF(lw);
+                  p.setPen(pen);
+                  p.drawLine(QLineF(x3, 0.0, x3, h));
+                  }
                   break;
             }
       }
@@ -209,9 +242,12 @@ QRectF BarLine::bbox() const
                   w += score()->style()->endBarWidth + score()->style()->endBarDistance;
                   dw = point(w);
                   break;
+            case  END_START_REPEAT:
+                  w  += score()->style()->endBarWidth + 3 * score()->style()->endBarDistance;
+                  dw = point(w) + 2 * symbols[dotSym].width();
+                  break;
             case BROKEN_BAR:
             case NORMAL_BAR:
-            case INVISIBLE_BAR:
                   dw = point(w);
                   break;
             default:

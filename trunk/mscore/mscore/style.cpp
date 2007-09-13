@@ -83,8 +83,10 @@ static const TextStyle defaultTextStyles[] = {
 
       TextStyle(QString("Metronome"), ff, 12, true, false, false,
          ALIGN_LEFT,    ANCHOR_STAFF, 0, 0, OFFSET_SPATIUM),
+
       TextStyle(QString("Copyright"), ff, 8, true, false, false,
          ALIGN_HCENTER | ALIGN_BOTTOM,    ANCHOR_PAGE, 0, MM(1), OFFSET_ABS),
+
       TextStyle(QString("Measure Number"), ff, 8, false, false, false,
          ALIGN_LEFT,    ANCHOR_STAFF, -1.0, -2.2, OFFSET_SPATIUM),
 
@@ -115,6 +117,9 @@ static const TextStyle defaultTextStyles[] = {
       TextStyle(QString("Rehearsal Mark"), ff,  14, true, false, false,
          ALIGN_HCENTER, ANCHOR_SYSTEM, 0, -7.0, OFFSET_SPATIUM, true,
          0.3, 1.0, 1.0, 20, Qt::black),
+
+      TextStyle(QString("Repeat Text"), ff,  14, false, false, false,
+         ALIGN_HCENTER, ANCHOR_SYSTEM, 0, -5.0, OFFSET_SPATIUM, true),
       };
 
 //---------------------------------------------------------

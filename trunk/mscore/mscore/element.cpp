@@ -50,7 +50,7 @@ const char* elementNames[] = {
       "RepeatMeasure",
       "Image",
       "Tie",
-      "Attribute", "Dynamic", "Page", "Beam", "Hook", "Lyrics",
+      "Attribute", "Dynamic", "Page", "Beam", "Hook", "Lyrics", "Repeat",
       "Tuplet", "VSpacer",
       "TempoText",
       "Volta",
@@ -887,6 +887,8 @@ int Element::readType(QDomElement& e, QPointF* dragOffset)
                   type = TREMOLO;
             else if (e.tagName() == "RepeatMeasure")
                   type = REPEAT_MEASURE;
+            else if (e.tagName() == "Repeat")
+                  type = REPEAT;
             else {
                   domError(e);
                   type = 0;

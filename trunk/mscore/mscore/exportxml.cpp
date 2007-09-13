@@ -837,8 +837,8 @@ void ExportMusicXml::bar(const BarLine* bar, const Volta* volta, const QString& 
                   case END_BAR:
                         xml.tag("bar-style", QString("light-heavy"));
                         break;
-                  case INVISIBLE_BAR:
-                        xml.tag("bar-style", QString("none"));
+                  case END_START_REPEAT:
+/*TODO*/                        xml.tag("bar-style", QString("none"));
                         break;
                   default:
                         printf("ExportMusicXml::bar(): bar subtype %d not supported\n", bar->subtype());

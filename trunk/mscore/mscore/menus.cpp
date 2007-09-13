@@ -143,13 +143,13 @@ void MuseScore::showPalette(bool visible)
                   BarType type;
                   QString name;
                   } t[] = {
-                  { INVISIBLE_BAR, "invisible" },
-                  { BROKEN_BAR,    "broken" },
-                  { NORMAL_BAR,    "normal" },
-                  { END_BAR,       "End Bar" },
-                  { DOUBLE_BAR,    "Double Bar" },
-                  { START_REPEAT,  "Start Repeat" },
-                  { END_REPEAT,    "End Repeat" },
+                  { NORMAL_BAR,       "normal" },
+                  { BROKEN_BAR,       "broken" },
+                  { END_BAR,          "End Bar" },
+                  { DOUBLE_BAR,       "Double Bar" },
+                  { START_REPEAT,     "Start Repeat" },
+                  { END_REPEAT,       "End Repeat" },
+                  { END_START_REPEAT, "End-Start Repeat" },
                   };
             for (unsigned i = 0; i < sizeof(t)/sizeof(*t); ++i) {
                   BarLine* b  = new BarLine(gscore);
@@ -392,6 +392,30 @@ void MuseScore::showPalette(bool visible)
             paletteBox->addPalette(tr("Tremolo"), sp);
 
             //-----------------------------------
+            //    Repeats
+            //-----------------------------------
+
+            sp = new Palette(7, 2, 0.7);
+            sp->setGrid(84, 28);
+            sp->setDrawGrid(true);
+
+            RepeatMeasure* rm = new RepeatMeasure(gscore);
+            sp->addObject(0, rm, tr("repeat measure"));
+
+            const char* repeats[] = {
+                  "segno", "coda", "varcoda", "codetta",
+                  "daCapo", "daCapoAlFine", "daCapoAlCoda", "dalSegno",
+                  "dalSegnoAlFine", "dalSegnoAlCoda", "alSegno", "fine"
+                  };
+            for (unsigned i = 0; i < sizeof(repeats)/sizeof(*repeats); ++i) {
+                  Repeat* na = new Repeat(gscore);
+                  na->setSubtype(repeats[i]);
+                  sp->addObject(i + 1, na, na->subtypeName());
+                  }
+
+            paletteBox->addPalette(tr("Repeats"), sp);
+#if 0
+            //-----------------------------------
             //    Misc
             //-----------------------------------
 
@@ -412,7 +436,7 @@ void MuseScore::showPalette(bool visible)
             sp->addObject(3, na, na->name());
 
             paletteBox->addPalette(tr("Misc"), sp);
-
+#endif
             //-----------------------------------
             //    breaks
             //-----------------------------------
@@ -946,13 +970,13 @@ void MuseScore::barMenu()
                   BarType type;
                   QString name;
                   } t[] = {
-                  { INVISIBLE_BAR, "invisible" },
                   { BROKEN_BAR,    "broken" },
                   { NORMAL_BAR,    "normal" },
                   { END_BAR,       "End Bar" },
                   { DOUBLE_BAR,    "Double Bar" },
                   { START_REPEAT,  "Start Repeat" },
                   { END_REPEAT,    "End Repeat" },
+                  { END_START_REPEAT, "End-Start Repeat" },
                   };
             for (unsigned i = 0; i < sizeof(t)/sizeof(*t); ++i) {
                   BarLine* b  = new BarLine(gscore);
