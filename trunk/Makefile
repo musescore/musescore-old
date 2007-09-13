@@ -51,6 +51,12 @@ debug:
             echo "build directory does already exist, please remove first with 'make clean'";       \
          fi
 
+#
+#  win32
+#     cross compile windows package
+#     NOTE: there are some hardcoded path in CMake - files
+#           will probably only work on my setup (ws)
+#
 win32:
 	if test ! -d win32build;                      \
          then                                       \
@@ -63,6 +69,7 @@ win32:
             cmake -DCMAKE_TOOLCHAIN_FILE=../mscore/cmake/mingw32.cmake -DCMAKE_INSTALL_PREFIX=../win32install -DCMAKE_BUILD_TYPE=RELEASE  ../mscore; \
             make -f Makefile;                       \
             make install;                           \
+            make package;                           \
          else                                       \
             echo "build directory win32build does alread exist, please remove first";       \
          fi
@@ -75,7 +82,11 @@ clean:
 	-rm -rf build
 
 #
-# create source distribution
+# dist
+#     create source distribution
+#     - get current version from sourceforge
+#     - remove .svn directories
+#     - tar
 #
 
 dist:
@@ -96,3 +107,4 @@ install:
 package:
 	cd build; make package
 	mv build/mscore-*.sh .
+

@@ -78,8 +78,8 @@ QIcon symIcon(const SymCode& sc, int size, int width, int height)
       qreal x   = (width - w) / 2;
       qreal y   = ((height - h) / 2) - bb.y();
 
-      QImage image(width, height, QImage::Format_ARGB32_Premultiplied);
-      image.fill(qRgba(0, 0, 0, 0));
+      QPixmap image(width, height);
+      image.fill(QColor(255, 255, 255, 0));
 
       QPainter painter(&image);
       painter.setFont(f);
@@ -87,7 +87,7 @@ QIcon symIcon(const SymCode& sc, int size, int width, int height)
       painter.setPen(QPen(QColor(0, 0, 0, 255)));
       painter.drawText(QPointF(x, y), sc.code);
       painter.end();
-      return QIcon(QPixmap::fromImage(image));
+      return QIcon(image);
       }
 
 SymCode wholehead_Sym      (0xe103, TEXT_STYLE_DYNAMICS1);

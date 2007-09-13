@@ -161,6 +161,15 @@ if (MINGW)
       awl
       ${QT_mingw_LIBRARIES}
       )
+   install_targets ( /bin mscore )
+   install_files ( /bin .dll
+      /home/ws/.wine/drive_c/Qt/4.3.1/bin/mingwm10.dll
+      /home/ws/.wine/drive_c/Qt/4.3.1/bin/QtCore4.dll
+      /home/ws/.wine/drive_c/Qt/4.3.1/bin/QtGui4.dll
+      /home/ws/.wine/drive_c/Qt/4.3.1/bin/QtXml4.dll
+      /home/ws/.wine/drive_c/Qt/4.3.1/bin/QtSvg4.dll
+      )
+
 else (MINGW)
    set_target_properties( mscore
       PROPERTIES
@@ -173,6 +182,7 @@ else (MINGW)
       fluid
       awl
       )
+      install_targets ( /bin mscore )
 endif (MINGW)
 
 #======================================
@@ -204,6 +214,4 @@ if (NOT MINGW)
             PROPERTIES COMPILE_FLAGS "-include ${PROJECT_BINARY_DIR}/all.h"
             )
 endif (NOT MINGW)
-
-install_targets ( /bin mscore )
 
