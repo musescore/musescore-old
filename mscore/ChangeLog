@@ -1,4 +1,6 @@
 13.9.7 (ws)
+      - fixed windows cross compilation (due to some fixed paths this will
+        probably will only work on my system :-()
       - new class Repeat() which collects all symbols with special
         repeat semantic
       - new bar line type for end-start repeat

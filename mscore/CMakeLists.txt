@@ -3,7 +3,7 @@
 #  Linux Music Score Editor
 #  $Id:$
 #
-#  Copyright (C) 2002-2006 by Werner Schweer and others
+#  Copyright (C) 2002-2007 by Werner Schweer and others
 #
 #  This program is free software; you can redistribute it and/or modify
 #  it under the terms of the GNU General Public License version 2.
@@ -46,26 +46,13 @@ include ( ${PROJECT_SOURCE_DIR}/cmake/TargetDoc.cmake)
 # set(CMAKE_VERBOSE_MAKEFILE ON)
 
 ##
-## Just print a notice if this is OS X
-##
-if (APPLE)
-	message("OS X detected.")
-else (APPLE)
-	if (UNIX)
-		message("Unix (probably linux) detected")
-	endif(UNIX)
-
-endif (APPLE)
-
-##
 ##  look for Qt4
 ##
 
 set(QT_MIN_VERSION "4.3.0")
 set(QT_USE_QTXML TRUE)
 set(QT_USE_QTSVG TRUE)
-set(QT_USE_QTDESIGNER TRUE)
-set(QT_USE_QTNSPLUGIN TRUE)
+
 find_package(Qt4 4.3)
 if (NOT QT4_FOUND)
       message(FATAL_ERROR "Fatal error: QT (version >= 4.3.0) required.\n"
@@ -130,7 +117,7 @@ configure_file (
       ${PROJECT_BINARY_DIR}/config.h
       )
 
-subdirs(awl fluid mscore share doc)
+subdirs(awl fluid mscore share doc demos)
 
 include_directories(
    ${PROJECT_SOURCE_DIR}
