@@ -671,7 +671,7 @@ void Score::setNote(int tick, int track, int pitch, int len)
 
 void Score::setRest(int tick, int track, int len)
       {
-      int stick    = tick;
+      int stick = tick;
       Measure* measure = tick2measure(stick);
       if (measure == 0) {
             printf("setRest:  ...measure not found\n");

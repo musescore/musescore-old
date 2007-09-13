@@ -1,3 +1,8 @@
+13.9.7 (ws)
+      - new class Repeat() which collects all symbols with special
+        repeat semantic
+      - new bar line type for end-start repeat
+      - duplicate time signatures when inserting/appending new staff
 10.9.7  (ws)
       - move padState to Score()
       - freeze "encodingDate" in MusicXML export in debugMode

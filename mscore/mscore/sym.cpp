@@ -30,7 +30,8 @@ QVector<Sym> symbols(lastSym);
 
 static const double FMAG = 1.0;
 
-QPrinter* printer;
+QPrinter* printer = 0;
+static double printerDpi;
 
 //---------------------------------------------------------
 //   Sym
@@ -72,19 +73,19 @@ Sym::Sym(const char* name, const QChar& c, int f)
 
 const QRectF Sym::bbox() const
       {
-      double m = _spatium / (spatiumBase20 * FMAG * 1200.0);
+      double m = _spatium / (spatiumBase20 * FMAG * printerDpi);
       return QRectF(_bbox.topLeft() * m, _bbox.size() * m);
       }
 
 double Sym::width() const
       {
-      double m = _spatium / (spatiumBase20 * FMAG * 1200.0);
+      double m = _spatium / (spatiumBase20 * FMAG * printerDpi);
       return _width * m;
       }
 
 double Sym::height() const
       {
-      double m = _spatium / (spatiumBase20 * FMAG * 1200.0);
+      double m = _spatium / (spatiumBase20 * FMAG * printerDpi);
       return _bbox.height() * m;
       }
 
@@ -148,7 +149,10 @@ QFont Sym::font(double extraMag) const
 
 void initSymbols()
       {
-      printer = new QPrinter(QPrinter::HighResolution);
+      if (printer == 0) {
+            printer = new QPrinter(QPrinter::HighResolution);
+            printerDpi = double(printer->logicalDpiX());
+            }
 
       symbols[clefEightSym] = Sym("clef eight", 0x38, 2);
       symbols[clefOneSym]   = Sym("clef one",   0x31, 2);

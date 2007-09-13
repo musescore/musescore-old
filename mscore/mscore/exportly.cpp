@@ -305,6 +305,7 @@ void ExportLy::writeChord(Chord* c)
                   case DownMordentSym:
                         os << "\\downmordent";
                         break;
+#if 0 // TODO: this are now Repeat() elements
                   case SegnoSym:
                         os << "\\segno";
                         break;
@@ -314,6 +315,7 @@ void ExportLy::writeChord(Chord* c)
                   case VarcodaSym:
                         os << "\\varcoda";
                         break;
+#endif
                   default:
                         printf("unsupported note attribute %d\n", a->subtype());
                         break;

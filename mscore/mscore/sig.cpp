@@ -180,7 +180,7 @@ int SigList::ticksMeasure(int tick) const
       {
       ciSigEvent i = upper_bound(tick);
       if (empty() || i == begin()) {
-            printf("timesig(%d): not found\n", tick);
+            printf("SigList::ticksMeasure(): timesig(%d): not found\n", tick);
             return 4 * division;
             }
       --i;

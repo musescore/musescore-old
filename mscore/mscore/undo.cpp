@@ -915,10 +915,6 @@ void Score::removeElement(Element* element)
                         break;
                   }
             }
-      else if (element->type() == TIMESIG) {
-            // remove entry from siglist
-            sigmap->del(element->tick());
-            }
       else if (element->type() == KEYSIG) {
             layoutAll = true;
             }

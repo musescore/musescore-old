@@ -99,6 +99,7 @@ class Measure : public Element {
       bool _startRepeat;
       int _endRepeat;
       int _ending;
+      int _repeatFlags;       ///< or'd RepeatType's (see: repeat.h)
 
       MStaffList  staves;
       QList<Beam*>    _beamList;

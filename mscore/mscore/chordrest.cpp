@@ -63,9 +63,6 @@ AttributeInfo NoteAttribute::atrList[] = {
 	{ downprallSym,      QString("downprall"),       A_TOP_STAFF },
 	{ upmordentSym,      QString("upmordent"),       A_TOP_STAFF },
 	{ downmordentSym,    QString("downmordent"),     A_TOP_STAFF },
-      { segnoSym,          QString("segno"),           A_TOP_STAFF },
-      { codaSym,           QString("coda"),            A_TOP_STAFF },
-      { varcodaSym,        QString("varcoda"),         A_TOP_STAFF },
 	};
 
 //---------------------------------------------------------
@@ -75,19 +72,6 @@ AttributeInfo NoteAttribute::atrList[] = {
 NoteAttribute::NoteAttribute(Score* s)
    : Symbol(s)
       {
-      }
-
-//---------------------------------------------------------
-//   drag
-//    return update Rect relative to canvas
-//---------------------------------------------------------
-
-QRectF NoteAttribute::drag(const QPointF& s)
-      {
-      QRectF r = bbox().translated(canvasPos());
-      setUserOff(s / _spatium);
-      r |= bbox().translated(canvasPos());
-      return r;
       }
 
 //---------------------------------------------------------

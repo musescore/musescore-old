@@ -126,6 +126,7 @@ Measure::Measure(Score* s)
       _startRepeat = false;
       _endRepeat   = 0;
       _ending      = 0;
+      _repeatFlags = 0;
       _noOffset    = 0;
       _noText      = new Text(score());
       _noText->setSubtype(TEXT_MEASURE_NUMBER);
@@ -601,6 +602,9 @@ void Measure::layout2(ScoreLayout* layout)
                            bbox().width() - element->bbox().width() - _spatium,
                            - element->bbox().height() - _spatium);
                         break;
+                  case REPEAT:
+                        element->setPos(QPointF(0, -(_spatium * 4.0)));
+                        break;
                   case SLUR:
                         // slur->layout() messes with add()/remove()
                   default:
@@ -865,6 +869,10 @@ void Measure::add(Element* el)
                   _sel.append(el);
                   break;
 
+            case REPEAT:
+                  _repeatFlags |= el->subtype();
+                  // fall through
+
             case OTTAVA:
             case PEDAL:
             case TRILL:
@@ -951,8 +959,12 @@ void Measure::remove(Element* el)
                         printf("Measure(%p)::remove(%s,%p) not found\n",
                            this, el->name(), el);
                   break;
+
+            case REPEAT:
+                  _repeatFlags &= ~el->subtype();
+                  // fall through:
+
             case SLUR_SEGMENT:
-// printf("measure(%p) remove slur segment %p\n", this, el);
             case DYNAMIC:
             case HAIRPIN:
             case TEMPO_TEXT:
@@ -1378,11 +1390,16 @@ again:
                         if (nseg == 0 || nseg->subtype() == Segment::SegChordRest)
                               break;
                         }
-                  int nticks = (nseg ? nseg->tick() : ntick) - seg->tick();
+                  int nticks;
+                  if (nseg)
+                        nticks = nseg->tick() - seg->tick();
+                  else
+                        nticks = ntick - seg->tick();
                   if (nticks == 0) {
-                        printf("layoutX: nticks==0 size %d, idx %d, %d %d  %p %p types %d %d\n",
+                        printf("layoutX: nticks==0 tickLen %d <%s> size %d, idx %d, %d %d  %p %p nseg <%s>\n",
+                           tickLen(), seg->name(),
                            size(), i-1, seg->tick(), nseg ? nseg->tick() : 0, seg, nseg,
-                           seg->type(), nseg ? nseg->type() : 0);
+                           nseg ? nseg->name() : "nil");
                         }
                   else {
                         if (nticks < minTick)
@@ -1592,6 +1609,8 @@ void Measure::cmdAddStaves(int sStaff, int eStaff)
       _score->undoOp(UndoOp::InsertStaves, this, sStaff, eStaff);
       insertStaves(sStaff, eStaff);
 
+      Segment* ts = findSegment(Segment::SegTimeSig, tick());
+
       for (int i = sStaff; i < eStaff; ++i) {
             Staff* staff = _score->staff(i);
             BarLine* barLine = 0;
@@ -1610,7 +1629,14 @@ void Measure::cmdAddStaves(int sStaff, int eStaff)
             rest->setStaff(staff);
             Segment* s = findSegment(Segment::SegChordRest, tick());
             rest->setParent(s);
-            _score->undoAddElement(rest);
+            score()->undoAddElement(rest);
+
+            // replicate time signature
+            if (ts) {
+                  TimeSig* timesig = new TimeSig(*(TimeSig*)ts->element(0));
+                  timesig->setStaff(staff);
+                  score()->undoAddElement(timesig);
+                  }
             }
       }
 
@@ -1698,6 +1724,10 @@ bool Measure::acceptDrop(Viewer* viewer, const QPointF& p, int type,
       QRectF r(rr.x(), rrr.y(), rr.width(), rrr.height());
 
       switch(type) {
+            case REPEAT:
+                  viewer->setDropRectangle(rr);
+                  return true;
+
             case BRACKET:
             case LAYOUT_BREAK:
             case REPEAT_MEASURE:
@@ -1769,6 +1799,15 @@ Element* Measure::drop(const QPointF& p, const QPointF& /*offset*/, int type, co
       QPointF mrp = p - pos() - system()->pos() - system()->page()->pos();
 
       switch(ElementType(type)) {
+            case REPEAT:
+                  {
+                  Repeat* repeat = new Repeat(score());
+                  repeat->read(e);
+                  repeat->setParent(this);
+                  repeat->setStaff(score()->staff(0));
+                  score()->cmdAdd(repeat);
+                  }
+                  break;
             case BRACKET:
                   {
                   Bracket* bracket = new Bracket(score());
@@ -2051,6 +2090,7 @@ void Measure::adjustToLen(int ol, int nl)
       for (int staffIdx = 0; staffIdx < staves; ++staffIdx) {
             Staff* staffp = score()->staff(staffIdx);
             int rests  = 0;
+            int chords = 0;
             Rest* rest = 0;
             for (Segment* segment = first(); segment; segment = segment->next()) {
                   int strack = staffIdx * VOICES;
@@ -2061,11 +2101,12 @@ void Measure::adjustToLen(int ol, int nl)
                               ++rests;
                               rest = (Rest*)e;
                               }
-
+                        else if (e && e->type() == CHORD)
+                              ++chords;
                         }
                   }
             // printf("rests = %d\n", rests);
-            if (rests == 1) {
+            if (rests == 1 && chords == 0) {
                   rest->setTickLen(0);    // whole measure rest
                   }
             else {
@@ -2074,6 +2115,7 @@ void Measure::adjustToLen(int ol, int nl)
 
                   for (int trk = strack; trk < etrack; ++trk) {
                         int n = diff;
+                        bool rFlag = false;
                         if (n < 0)  {
                               for (Segment* segment = last(); segment;) {
                                     Segment* pseg = segment->prev();
@@ -2088,10 +2130,12 @@ void Measure::adjustToLen(int ol, int nl)
                                           }
                                     segment = pseg;
                                     }
+                              rFlag = true;
                               }
-                        if (n > 0) {
+                        int voice = trk % VOICES;
+                        if ((n > 0) && (rFlag || voice == 0)) {
                               // add rest to measure
-                              int rtick = tick() + tickLen() - n;
+                              int rtick = tick() + nl - n;
                               Segment* seg = findSegment(Segment::SegChordRest, rtick);
                               if (seg == 0) {
                                     seg = createSegment(Segment::SegChordRest, rtick);
@@ -2099,7 +2143,7 @@ void Measure::adjustToLen(int ol, int nl)
                                     }
                               rest = new Rest(score(), rtick, n);
                               rest->setStaff(staffp);
-                              rest->setVoice(trk % VOICES);
+                              rest->setVoice(voice);
                               seg->add(rest);
                               }
                         }
