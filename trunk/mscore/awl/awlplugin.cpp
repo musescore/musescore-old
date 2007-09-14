@@ -3,7 +3,7 @@
 //  Audio Widget Library
 //  $Id:$
 //
-//  Copyright (C) 2002-2006 by Werner Schweer and others
+//  Copyright (C) 2002-2007 by Werner Schweer and others
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.
@@ -22,6 +22,7 @@
 #include "awlplugin.h"
 #include "panknob.h"
 #include "midipanknob.h"
+#include "colorlabel.h"
 
 #include <QtCore/QtPlugin>
 #include <QtDesigner/QDesignerCustomWidgetInterface>
@@ -42,6 +43,12 @@ QWidget* MidiPanKnobPlugin::createWidget(QWidget* parent)
 	{
       return new Awl::MidiPanKnob(parent);
       }
+QWidget* ColorLabelPlugin::createWidget(QWidget* parent)
+	{
+      QWidget* w = new Awl::ColorLabel(parent);
+      w->setGeometry(0, 0, 50, 50);
+      return w;
+      }
 
 //---------------------------------------------------------
 //   customWidgets
@@ -55,6 +62,7 @@ QList<QDesignerCustomWidgetInterface*> AwlPlugins::customWidgets() const
                << new PanKnobPlugin
                << new MidiPanKnobPlugin
                << new KnobPlugin
+               << new ColorLabelPlugin
                ;
       return plugins;
 	}

@@ -279,13 +279,15 @@ void Seq::start()
             return;
       QAction* a = getAction("play");
       if (!a->isChecked()) {
-            if (!pauseState)
-                  audio->stopTransport();
-            else {
+            if (pauseState) {
                   guiStop();
                   QAction* a = getAction("pause");
                   a->setChecked(false);
                   pauseState = false;
+                  state = STOP;
+                  }
+            else {
+                  audio->stopTransport();
                   }
             }
       else {
@@ -321,15 +323,17 @@ void Seq::pause()
       {
       if (!audio)
             return;
-
       QAction* a = getAction("pause");
       int pstate = a->isChecked();
+      a = getAction("play");
+      int playState = a->isChecked();
       if (state == PLAY && pstate)  {
             pauseState = pstate;
             audio->stopTransport();
             }
-      else if (state == STOP && pauseState)
+      else if (state == STOP && pauseState && playState) {
             audio->startTransport();
+            }
       pauseState = pstate;
       }
 
@@ -652,7 +656,7 @@ void Seq::collectEvents()
                                           m = m->prev();
                                     }
                               else {
-                                    for (; jump > 0; jump--)                              
+                                    for (; jump > 0; jump--)
                                           m = m->next();
                                     }
                               continue;

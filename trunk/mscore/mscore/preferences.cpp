@@ -315,20 +315,13 @@ PreferenceDialog::PreferenceDialog(QWidget* parent)
       fgWallpaper->setText(preferences.fgWallpaper);
       bgWallpaper->setText(preferences.bgWallpaper);
 
-      QPalette p(fgColorLabel->palette());
-      p.setColor(QPalette::Background, preferences.fgColor);
-      fgColorLabel->setPalette(p);
-      p.setColor(QPalette::Background, preferences.bgColor);
-      bgColorLabel->setPalette(p);
+      fgColorLabel->setColor(preferences.fgColor);
+      bgColorLabel->setColor(preferences.bgColor);
 
-      p.setColor(QPalette::Background, preferences.selectColor[0]);
-      selectColorLabel1->setPalette(p);
-      p.setColor(QPalette::Background, preferences.selectColor[1]);
-      selectColorLabel2->setPalette(p);
-      p.setColor(QPalette::Background, preferences.selectColor[2]);
-      selectColorLabel3->setPalette(p);
-      p.setColor(QPalette::Background, preferences.selectColor[3]);
-      selectColorLabel4->setPalette(p);
+      selectColorLabel1->setColor(preferences.selectColor[0]);
+      selectColorLabel2->setColor(preferences.selectColor[1]);
+      selectColorLabel3->setColor(preferences.selectColor[2]);
+      selectColorLabel4->setColor(preferences.selectColor[3]);
 
       bgColorButton->setChecked(preferences.bgUseColor);
       bgWallpaperButton->setChecked(!preferences.bgUseColor);
@@ -450,9 +443,9 @@ void PreferenceDialog::updateSCListView()
             if (!s)
                   continue;
             QTreeWidgetItem* newItem;
-            if (s->state == STATE_NORMAL)
+            if (s->state & STATE_NORMAL)
                   newItem = new QTreeWidgetItem(stateNormal);
-            else if (s->state == STATE_PLAY)
+            else if (s->state & STATE_PLAY)
                   newItem = new QTreeWidgetItem(statePlay);
             else {
                   printf("PreferenceDialog::updateSCListView(): illegal shortcut state\n");
@@ -520,12 +513,9 @@ void PreferenceDialog::defineShortcutClicked()
 
 void PreferenceDialog::selectFgColor()
       {
-      QPalette p(fgColorLabel->palette());
-      QColor c = QColorDialog::getColor(p.color(QPalette::Background), this);
-      if (c.isValid()) {
-            p.setColor(QPalette::Background, c);
-            fgColorLabel->setPalette(p);
-            }
+      QColor c = QColorDialog::getColor(fgColorLabel->color(), this);
+      if (c.isValid())
+            fgColorLabel->setColor(c);
       }
 
 //---------------------------------------------------------
@@ -534,12 +524,9 @@ void PreferenceDialog::selectFgColor()
 
 void PreferenceDialog::selectBgColor()
       {
-      QPalette p(bgColorLabel->palette());
-      QColor c = QColorDialog::getColor(p.color(QPalette::Background), this);
-      if (c.isValid()) {
-            p.setColor(QPalette::Background, c);
-            bgColorLabel->setPalette(p);
-            }
+      QColor c = QColorDialog::getColor(bgColorLabel->color(), this);
+      if (c.isValid())
+            bgColorLabel->setColor(c);
       }
 
 //---------------------------------------------------------
@@ -548,12 +535,9 @@ void PreferenceDialog::selectBgColor()
 
 void PreferenceDialog::selectSelectColor1()
       {
-      QPalette p(selectColorLabel1->palette());
-      QColor c = QColorDialog::getColor(p.color(QPalette::Background), this);
-      if (c.isValid()) {
-            p.setColor(QPalette::Background, c);
-            selectColorLabel1->setPalette(p);
-            }
+      QColor c = QColorDialog::getColor(selectColorLabel1->color(), this);
+      if (c.isValid())
+            selectColorLabel1->setColor(c);
       }
 
 //---------------------------------------------------------
@@ -562,12 +546,9 @@ void PreferenceDialog::selectSelectColor1()
 
 void PreferenceDialog::selectSelectColor2()
       {
-      QPalette p(selectColorLabel2->palette());
-      QColor c = QColorDialog::getColor(p.color(QPalette::Background), this);
-      if (c.isValid()) {
-            p.setColor(QPalette::Background, c);
-            selectColorLabel2->setPalette(p);
-            }
+      QColor c = QColorDialog::getColor(selectColorLabel2->color(), this);
+      if (c.isValid())
+            selectColorLabel2->setColor(c);
       }
 
 //---------------------------------------------------------
@@ -576,12 +557,9 @@ void PreferenceDialog::selectSelectColor2()
 
 void PreferenceDialog::selectSelectColor3()
       {
-      QPalette p(selectColorLabel3->palette());
-      QColor c = QColorDialog::getColor(p.color(QPalette::Background), this);
-      if (c.isValid()) {
-            p.setColor(QPalette::Background, c);
-            selectColorLabel3->setPalette(p);
-            }
+      QColor c = QColorDialog::getColor(selectColorLabel3->color(), this);
+      if (c.isValid())
+            selectColorLabel3->setColor(c);
       }
 
 //---------------------------------------------------------
@@ -590,12 +568,9 @@ void PreferenceDialog::selectSelectColor3()
 
 void PreferenceDialog::selectSelectColor4()
       {
-      QPalette p(selectColorLabel4->palette());
-      QColor c = QColorDialog::getColor(p.color(QPalette::Background), this);
-      if (c.isValid()) {
-            p.setColor(QPalette::Background, c);
-            selectColorLabel4->setPalette(p);
-            }
+      QColor c = QColorDialog::getColor(selectColorLabel4->color(), this);
+      if (c.isValid())
+            selectColorLabel4->setColor(c);
       }
 
 //---------------------------------------------------------
@@ -712,17 +687,17 @@ void PreferenceDialog::buttonBoxClicked(QAbstractButton* button)
 
 void PreferenceDialog::apply()
       {
-      preferences.selectColor[0] = selectColorLabel1->palette().color(QPalette::Background);
-      preferences.selectColor[1] = selectColorLabel2->palette().color(QPalette::Background);
-      preferences.selectColor[2] = selectColorLabel3->palette().color(QPalette::Background);
-      preferences.selectColor[3] = selectColorLabel4->palette().color(QPalette::Background);
+      preferences.selectColor[0] = selectColorLabel1->color();
+      preferences.selectColor[1] = selectColorLabel2->color();
+      preferences.selectColor[2] = selectColorLabel3->color();
+      preferences.selectColor[3] = selectColorLabel4->color();
 
       preferences.cursorBlink = cursorBlink->isChecked();
       preferences.fgWallpaper = fgWallpaper->text();
       preferences.bgWallpaper = bgWallpaper->text();
 
-      preferences.fgColor = fgColorLabel->palette().color(QPalette::Background);
-      preferences.bgColor = bgColorLabel->palette().color(QPalette::Background);
+      preferences.fgColor = fgColorLabel->color();
+      preferences.bgColor = bgColorLabel->color();
 
       preferences.bgUseColor  = bgColorButton->isChecked();
       preferences.fgUseColor  = fgColorButton->isChecked();

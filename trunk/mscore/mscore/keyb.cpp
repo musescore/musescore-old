@@ -242,6 +242,10 @@ void Score::setPadState(Element* obj)
             Rest* rest = (Rest*)obj;
             Tuplet* tuplet = rest->tuplet();
             len = tuplet ? tuplet->baseLen() : rest->tickLen();
+
+            if (len == 0)           // whole measure rest?
+                  len = rest->segment()->measure()->tickLen();
+
             _padState.prefix = 0;
             _padState.rest   = true;
             _padState.voice  = obj->voice();
