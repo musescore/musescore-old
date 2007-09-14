@@ -2189,17 +2189,14 @@ void Measure::write(Xml& xml, int no, int staff) const
                   xml.tagE("irregular");
             if (_userStretch != 1.0)
                   xml.tag("stretch", _userStretch);
+            int id = 0;
+            foreach(Tuplet* tuplet, _tuplets)
+                  tuplet->write(xml, id++);
             }
 
       for (ciElement i = _sel.begin(); i != _sel.end(); ++i) {
             if ((*i)->staff() == _score->staff(staff) && (*i)->type() != SLUR_SEGMENT)
                   (*i)->write(xml);
-            }
-
-      int id = 0;
-      foreach(Tuplet* tuplet, _tuplets) {
-            if (staff == tuplet->staffIdx())
-                  tuplet->write(xml, id++);
             }
 
       for (int track = staff * VOICES; track < staff * VOICES + VOICES; ++track) {
@@ -2314,7 +2311,7 @@ void Measure::read(QDomElement e, int idx)
             else if (tag == "Chord") {
                   Chord* chord = new Chord(score());
                   chord->setTick(score()->curTick);   // set default tick position
-                  chord->setParent(this);       // only for reading tuplets
+                  chord->setParent(this);             // only for reading tuplets
                   chord->setStaff(staff);
                   chord->read(e, idx);
                   Segment* s = getSegment(chord);

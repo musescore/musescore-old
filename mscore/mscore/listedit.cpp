@@ -195,7 +195,7 @@ PageListEditor::PageListEditor(Score* s)
       connect(list, SIGNAL(itemExpanded(QTreeWidgetItem*)), SLOT(itemExpanded(QTreeWidgetItem*)));
       connect(list, SIGNAL(itemCollapsed(QTreeWidgetItem*)), SLOT(itemExpanded(QTreeWidgetItem*)));
       list->resizeColumnToContents(0);
-      resize(900, 300);
+      resize(1000, 300);
       }
 
 //---------------------------------------------------------
@@ -1224,7 +1224,6 @@ ShowElementBase::ShowElementBase()
       layout = new QVBoxLayout;
       setLayout(layout);
       layout->addWidget(elemView);
-      eb.color->setAutoFillBackground(true);
       connect(eb.nextButton,     SIGNAL(clicked()), SLOT(nextClicked()));
       connect(eb.previousButton, SIGNAL(clicked()), SLOT(previousClicked()));
       connect(eb.parentButton,   SIGNAL(clicked()), SLOT(parentClicked()));
@@ -1259,7 +1258,8 @@ void ShowElementBase::setElement(Element* e)
       eb.selected->setChecked(e->selected());
       eb.generated->setChecked(e->generated());
       eb.visible->setChecked(e->visible());
-      eb.voice->setValue(e->voice() + 1); // show 1-4
+      eb.voice->setValue(e->voice() + 1);    // show 1-4
+      eb.staff->setValue(e->staffIdx() + 1); // show 1-n
       eb.time->setValue(e->tick());
       eb.duration->setValue(e->tickLen());
       eb.posx->setValue(e->ipos().x());
@@ -1270,9 +1270,7 @@ void ShowElementBase::setElement(Element* e)
       eb.bboxy->setValue(e->bbox().y());
       eb.bboxw->setValue(e->bbox().width());
       eb.bboxh->setValue(e->bbox().height());
-      QPalette p(eb.color->palette());
-      p.setColor(QPalette::Window, e->color());
-      eb.color->setPalette(p);
+      eb.color->setColor(e->color());
       eb.nextButton->setEnabled(e->next());
       eb.previousButton->setEnabled(e->prev());
       eb.parentButton->setEnabled(e->parent());

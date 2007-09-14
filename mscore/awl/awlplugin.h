@@ -104,6 +104,20 @@ class MidiPanKnobPlugin : public QObject, public AwlPlugin {
       };
 
 //---------------------------------------------------------
+//   ColorLabelPlugin
+//---------------------------------------------------------
+
+class ColorLabelPlugin : public QObject, public AwlPlugin {
+      Q_OBJECT
+
+   public:
+     	ColorLabelPlugin(QObject* parent = 0) : QObject(parent) {}
+      QString includeFile() const { return "awl/colorlabel.h"; }
+      QString name() const { return "Awl::ColorLabel"; }
+      QWidget* createWidget(QWidget* parent);
+      };
+
+//---------------------------------------------------------
 //   AwlPlugins
 //---------------------------------------------------------
 

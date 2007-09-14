@@ -91,9 +91,6 @@ void Tuplet::layout(ScoreLayout* layout)
             return;
             }
 
-      qreal l1 = _spatium;          // bracket tip height
-      qreal l2 = _spatium * .5;     // bracket distance to note
-
       if (_elements.empty()) {
             printf("layout: not tuplet members\n");
             return;
@@ -123,33 +120,27 @@ void Tuplet::layout(ScoreLayout* layout)
 
       const ChordRest* cr1 = _elements.front();
       const ChordRest* cr2 = _elements.back();
-      Measure* measure     = cr1->measure();
       if (cr1->beam())
             _hasLine = false;
 
-      QPointF mp(measure->canvasPos());
       QPointF p1, p2;
       if (isUp) {
             if (cr1->type() == CHORD) {
                   Chord* chord1 = (Chord*)cr1;
                   Stem* stem = chord1->stem();
-                  QPointF p(stem->abbox().topLeft());
-                  p1 = p;
+                  p1 = QPointF(stem->abbox().topLeft());
                   }
             else {
-                  QPointF p(cr1->abbox().topLeft());
-                  p1 = p;
+                  p1 = QPointF(cr1->abbox().topLeft());
                   }
 
             if (cr2->type() == CHORD) {
                   Chord* chord2 = (Chord*)cr2;
-                  Stem* stem = chord2->stem();
-                  QPointF p(stem->abbox().topLeft());
-                  p2  = p;
+                  Stem* stem    = chord2->stem();
+                  p2            = QPointF(stem->abbox().topLeft());
                   }
             else  {
-                  QPointF p(cr2->abbox().topRight());
-                  p2 = p;
+                  p2 = QPointF(cr2->abbox().topRight());
                   if (p1.y() < p2.y())
                         p2.setY(p1.y());
                   else
@@ -184,6 +175,11 @@ void Tuplet::layout(ScoreLayout* layout)
                   }
             }
 
+      qreal l1 = _spatium;          // bracket tip height
+      qreal l2 = _spatium * .5;     // bracket distance to note
+
+      setPos(0.0, 0.0);
+      QPointF mp(parent()->canvasPos());
       p1 -= mp;
       p2 -= mp;
 
@@ -196,7 +192,7 @@ void Tuplet::layout(ScoreLayout* layout)
          - (l1 + l2) * (isUp ? 1.0 : -1.0);
 
       qreal numberWidth = _number->bbox().width();
-      _number->setPos(QPointF(x3 - numberWidth * .5, y3) - pos());
+      _number->setPos(QPointF(x3 - numberWidth * .5, y3) - ipos());
 
       if (_hasLine) {
             qreal slope = (p2.y() - p1.y()) / (p2.x() - p1.x());
@@ -204,12 +200,12 @@ void Tuplet::layout(ScoreLayout* layout)
             if (isUp) {
                   bracketL[0] = QPointF(p1.x(), p1.y() - l2);
                   bracketL[1] = QPointF(p1.x(), p1.y() - l1 - l2);
-                  qreal x = x3 - numberWidth * .5 - _spatium * .5;
-                  qreal y = p1.y() + (x - p1.x()) * slope;
+                  qreal x     = x3 - numberWidth * .5 - _spatium * .5;
+                  qreal y     = p1.y() + (x - p1.x()) * slope;
                   bracketL[2] = QPointF(x,   y - l1 - l2);
 
-                  x = x3 + numberWidth * .5 + _spatium * .5;
-                  y = p1.y() + (x - p1.x()) * slope;
+                  x           = x3 + numberWidth * .5 + _spatium * .5;
+                  y           = p1.y() + (x - p1.x()) * slope;
                   bracketR[0] = QPointF(x,   y - l1 - l2);
                   bracketR[1] = QPointF(p2.x(), p2.y() - l1 - l2);
                   bracketR[2] = QPointF(p2.x(), p2.y() - l2);
@@ -221,8 +217,8 @@ void Tuplet::layout(ScoreLayout* layout)
                   qreal y     = p1.y() + (x - p1.x()) * slope;
                   bracketL[2] = QPointF(x,   y + l1 + l2);
 
-                  x = x3 + numberWidth * .5 + _spatium * .5;
-                  y = p1.y() + (x - p1.x()) * slope;
+                  x           = x3 + numberWidth * .5 + _spatium * .5;
+                  y           = p1.y() + (x - p1.x()) * slope;
                   bracketR[0] = QPointF(x,   y + l1 + l2);
                   bracketR[1] = QPointF(p2.x(), p2.y() + l1 + l2);
                   bracketR[2] = QPointF(p2.x(), p2.y() + l2);
@@ -257,8 +253,6 @@ QRectF Tuplet::bbox() const
 void Tuplet::draw(QPainter& p)
       {
       if (_number) {
-            // ? p.setPen(QPen(Qt::NoPen));
-            // p.setBrush(_number->selected() ? preferences.selectColor[0] : Qt::black);
             p.save();
             p.translate(_number->pos());
             _number->draw(p);
@@ -271,15 +265,6 @@ void Tuplet::draw(QPainter& p)
                   p.drawPolyline(bracketR);
                   }
             }
-      }
-
-//---------------------------------------------------------
-//   move
-//---------------------------------------------------------
-
-void Tuplet::move(double x, double y)
-      {
-      Element::move(x, y);
       }
 
 //---------------------------------------------------------

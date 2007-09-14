@@ -71,11 +71,11 @@ QIcon symIcon(const SymCode& sc, int size, int width, int height)
       f.setPixelSize(size);
 
       QFontMetricsF fm(f);
-      QRectF bb(fm.boundingRect(sc.code));
+      QRectF bb(fm.tightBoundingRect(QString(sc.code)));
 
       qreal w   = bb.width();
       qreal h   = bb.height();
-      qreal x   = (width - w) / 2;
+      qreal x   = (width - w) / 2 - bb.x();
       qreal y   = ((height - h) / 2) - bb.y();
 
       QPixmap image(width, height);

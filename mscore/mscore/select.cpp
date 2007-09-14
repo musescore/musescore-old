@@ -275,7 +275,7 @@ void Score::select(Element* obj, int state, int staff)
             }
       else {
             sel->add(obj);
-            _is.track = obj->staffIdx() + obj->voice();
+            _is.track = obj->track();
             }
       setPadState(obj);
       emit selectionChanged(int(sel->state()));

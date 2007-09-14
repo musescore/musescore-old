@@ -24,6 +24,7 @@ QT4_WRAP_CPP (mocs
       panknob.h
       volknob.h
       midipanknob.h
+      colorlabel.h
       )
 
 add_custom_command(
@@ -61,6 +62,7 @@ add_library (
       panknob.cpp
       volknob.cpp
       midipanknob.cpp
+      colorlabel.cpp
       )
 
 set_target_properties( awl
@@ -76,6 +78,7 @@ QT4_WRAP_CPP (mocs2
       volknob.h
       midipanknob.h
       awlplugin.h
+      colorlabel.h
       )
 
 add_library (
@@ -89,6 +92,7 @@ add_library (
       panknob.cpp
       volknob.cpp
       midipanknob.cpp
+      colorlabel.cpp
       )
 
 set_target_properties( awlplugin

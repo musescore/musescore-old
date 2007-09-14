@@ -5,8 +5,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>578</width>
-    <height>348</height>
+    <width>648</width>
+    <height>307</height>
    </rect>
   </property>
   <property name="windowTitle" >
@@ -242,6 +242,19 @@
          </widget>
         </item>
         <item>
+         <widget class="QLabel" name="label_9" >
+          <property name="text" >
+           <string>Staff</string>
+          </property>
+          <property name="alignment" >
+           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QSpinBox" name="staff" />
+        </item>
+        <item>
          <widget class="QLabel" name="label_2" >
           <property name="text" >
            <string>Time</string>
@@ -310,18 +323,12 @@
          </widget>
         </item>
         <item>
-         <widget class="QLabel" name="color" >
-          <property name="frameShape" >
-           <enum>QFrame::Panel</enum>
-          </property>
-          <property name="frameShadow" >
-           <enum>QFrame::Sunken</enum>
-          </property>
-          <property name="lineWidth" >
-           <number>2</number>
-          </property>
-          <property name="text" >
-           <string>Color</string>
+         <widget class="Awl::ColorLabel" name="color" >
+          <property name="sizePolicy" >
+           <sizepolicy vsizetype="Fixed" hsizetype="Preferred" >
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
           </property>
          </widget>
         </item>
@@ -569,6 +576,13 @@
    </item>
   </layout>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>Awl::ColorLabel</class>
+   <extends>QFrame</extends>
+   <header>awl/colorlabel.h</header>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections/>
 </ui>

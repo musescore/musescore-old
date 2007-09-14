@@ -63,6 +63,7 @@ class Tuplet : public Element {
       virtual void add(Element*);
       virtual void remove(Element*);
 
+      Measure* measure() const     { return (Measure*)parent(); }
       bool hasNumber() const       { return _hasNumber;   }
       bool hasLine() const         { return _hasLine;     }
       void setHasNumber(bool val)  { _hasNumber = val;    }
@@ -82,7 +83,6 @@ class Tuplet : public Element {
       virtual void read(QDomElement);
       void write(Xml&, int) const;
 
-      virtual void move(double, double);
       virtual void draw(QPainter&);
       };
 

@@ -1,3 +1,14 @@
+14.9.7 (ws)
+      - more fixes for windows cross compilation, but there are at least
+        two showstoppers for the windows version:
+            - symbol bounding boxes are wrong (too big); this hopefully will be
+              fixed in qt4.4
+            - i could not manage to get the svg vector graphics work for unknown
+              reasons
+      - fixed quirk in start/stop/pause sequencer logic
+      - fixed shortcuts configuration
+      - added new class ColorLabel()
+      - fix note entry in second staff
 13.9.7 (ws)
       - fixed windows cross compilation (due to some fixed paths this will
         probably will only work on my system :-()

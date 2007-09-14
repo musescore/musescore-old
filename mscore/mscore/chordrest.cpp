@@ -293,10 +293,11 @@ bool ChordRest::readProperties(QDomElement e)
             // to measure; after inserting Chord or Rest into Measure
             // parent is Segment
             Measure* m    = (Measure*)parent();
-            _tuplet       = m->tuplets()->at(i);
+            _tuplet       = m->tuplets()->value(i);
             if (_tuplet == 0)
                   printf("ChordRest::readProperties(): tuplet not found\n");
-            _tuplet->add(this);
+            else
+                  _tuplet->add(this);
             }
       else
             return false;
