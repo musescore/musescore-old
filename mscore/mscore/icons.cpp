@@ -59,20 +59,20 @@ QIcon midiinIcon, speakerIcon, startIcon, playIcon, pauseIcon, repeatIcon;
 QIcon sbeamIcon, mbeamIcon, nbeamIcon, beam32Icon;
 QIcon fileOpenIcon, fileNewIcon, fileSaveIcon, fileSaveAsIcon;
 QIcon exitIcon, viewmagIcon;
+QIcon windowIcon;
 
 //---------------------------------------------------------
 //   symPixmap
 //---------------------------------------------------------
 
-QIcon symIcon(const SymCode& sc, int size, int width, int height)
+QIcon symIcon(const Sym& sc, int size, int width, int height)
       {
-      TextStyle* s = &textStyles[sc.style];
-      QFont f(s->family);
-      f.setPixelSize(size);
+      double iconSpatium = 1.3 * DPMM_DISPLAY;
 
-      QFontMetricsF fm(f);
-      QRectF bb(fm.boundingRect(sc.code));
+      double ospatium = _spatium;
+      _spatium  = iconSpatium * (size / 20.0);
 
+      QRectF bb = sc.bbox();
       qreal w   = bb.width();
       qreal h   = bb.height();
       qreal x   = (width - w) / 2 - bb.x();
@@ -82,11 +82,12 @@ QIcon symIcon(const SymCode& sc, int size, int width, int height)
       image.fill(QColor(255, 255, 255, 0));
 
       QPainter painter(&image);
-      painter.setFont(f);
       painter.setRenderHint(QPainter::TextAntialiasing, true);
       painter.setPen(QPen(QColor(0, 0, 0, 255)));
-      painter.drawText(QPointF(x, y), sc.code);
+      sc.draw(painter, x, y);
       painter.end();
+      _spatium = ospatium;
+
       return QIcon(image);
       }
 
@@ -119,26 +120,26 @@ SymCode flip_Sym           (0xe0fd, TEXT_STYLE_DYNAMICS1);
 
 void genIcons()
       {
-      noteIcon           = symIcon(wholehead_Sym);
-      note2Icon          = symIcon(note2_Sym);
-      note4Icon          = symIcon(note4_Sym);
-      note8Icon          = symIcon(note8_Sym);
-      note16Icon         = symIcon(note16_Sym);
-      note32Icon         = symIcon(note32_Sym);
-      note64Icon         = symIcon(note64_Sym);
-      naturalIcon        = symIcon(natural_Sym, 30);
-      sharpIcon          = symIcon(sharp_Sym, 30);
-      sharpsharpIcon     = symIcon(sharpsharp_Sym, 30);
-      flatIcon           = symIcon(flat_Sym, 30);
-      flatflatIcon       = symIcon(flatflat_Sym, 30);
-      quartrestIcon      = symIcon(quartrest_Sym, 30);
-      dotIcon            = symIcon(dot_Sym, 30);
-      dotdotIcon         = symIcon(dotdot_Sym, 30);
-      sforzatoaccentIcon = symIcon(sforzatoaccent_Sym);
-      staccatoIcon       = symIcon(staccato_Sym);
-      tenutoIcon         = symIcon(tenuto_Sym);
-      plusIcon           = symIcon(plus_Sym, 30);
-      clefIcon           = symIcon(trebleclef_Sym, 17);
+      noteIcon           = symIcon(symbols[wholeheadSym]);
+      note2Icon          = symIcon(symbols[note2Sym]);
+      note4Icon          = symIcon(symbols[note4Sym]);
+      note8Icon          = symIcon(symbols[note8Sym]);
+      note16Icon         = symIcon(symbols[note16Sym]);
+      note32Icon         = symIcon(symbols[note32Sym]);
+      note64Icon         = symIcon(symbols[note64Sym]);
+      naturalIcon        = symIcon(symbols[naturalSym], 30);
+      sharpIcon          = symIcon(symbols[sharpSym], 30);
+      sharpsharpIcon     = symIcon(symbols[sharpsharpSym], 30);
+      flatIcon           = symIcon(symbols[flatSym], 30);
+      flatflatIcon       = symIcon(symbols[flatflatSym], 30);
+      quartrestIcon      = symIcon(symbols[quartrestSym], 30);
+      dotIcon            = symIcon(symbols[dotSym], 30);
+      dotdotIcon         = symIcon(symbols[dotdotSym], 30);
+      sforzatoaccentIcon = symIcon(symbols[sforzatoaccentSym]);
+      staccatoIcon       = symIcon(symbols[staccatoSym]);
+      tenutoIcon         = symIcon(symbols[tenutoSym]);
+      plusIcon           = symIcon(symbols[plusSym], 30);
+      clefIcon           = symIcon(symbols[trebleclefSym], 17);
 
       static const char* vtext[VOICES] = { "1","2","3","4" };
       for (int i = 0; i < VOICES; ++i) {
@@ -160,7 +161,7 @@ void genIcons()
             painter.end();
             voiceIcons[i].addPixmap(image, QIcon::Normal, QIcon::On);
             }
-      flipIcon = symIcon(flip_Sym);
+      flipIcon = symIcon(symbols[flipSym]);
 
       cutIcon.addPixmap(QPixmap(editcut_xpm));
       copyIcon.addPixmap(QPixmap(editcopy_xpm));

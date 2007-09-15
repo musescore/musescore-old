@@ -126,6 +126,7 @@ TextPalette::TextPalette(QWidget* parent)
       symbolBox->setLayout(gl);
       QButtonGroup* sg = new QButtonGroup(this);
 
+#if 0
       for (unsigned i = 0; i < sizeof(pSymbols)/sizeof(*pSymbols); ++i) {
             if (pSymbols[i].code == 0)    // empty slot?
                   continue;
@@ -144,6 +145,7 @@ TextPalette::TextPalette(QWidget* parent)
             gl->addWidget(tb, i / 16, i % 16);
             sg->addButton(tb, i);
             }
+#endif
       connect(sg, SIGNAL(buttonClicked(int)), SLOT(symbolClicked(int)));
       connect(typefaceSize, SIGNAL(valueChanged(double)), SLOT(sizeChanged(double)));
       connect(typefaceBold, SIGNAL(clicked(bool)), SLOT(boldClicked(bool)));

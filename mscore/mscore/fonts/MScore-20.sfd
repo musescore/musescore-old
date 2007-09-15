@@ -10,14 +10,14 @@ UnderlinePosition: -99
 UnderlineWidth: 49
 Ascent: 600
 Descent: 400
-XUID: [1021 437 116440368 12789434]
+XUID: [1021 437 116440368 12789435]
 UniqueID: 4131153
 FSType: 0
 OS2Version: 2
 OS2_WeightWidthSlopeOnly: 0
 OS2_UseTypoMetrics: 1
 CreationTime: 1122244955
-ModificationTime: 1180523000
+ModificationTime: 1189857256
 PfmFamily: 17
 TTFWeight: 400
 TTFWidth: 5
@@ -55,7 +55,7 @@ NameList: Adobe Glyph List
 DisplaySize: -96
 AntiAlias: 1
 FitToEm: 1
-WinInfo: 57600 8 8
+WinInfo: 57584 8 8
 BeginPrivate: 8
 BlueValues 30 [-4 0 266 292 472 472 500 500]
 OtherBlues 11 [-146 -146]
@@ -67,7 +67,7 @@ StdVW 4 [28]
 ExpansionFactor 4 0.06
 EndPrivate
 TeXData: 1 0 0 262144 131072 87381 276824 1048576 87381 783286 444596 497025 792723 393216 433062 380633 303038 157286 324010 404750 52429 2506097 1059062 262144
-BeginChars: 65537 380
+BeginChars: 65537 381
 StartChar: .notdef
 Encoding: 65536 -1 0
 Width: 1000
@@ -1253,7 +1253,7 @@ StartChar: uniE0FC
 Encoding: 57596 57596 26
 Width: 327
 GlyphClass: 2
-Flags: HMW
+Flags: HMWO
 VStem: 294 34<116 874 874 992 992 998>
 Fore
 328 70 m 1
@@ -2514,7 +2514,7 @@ StartChar: accidentals.rightparen
 Encoding: 57623 57623 52
 Width: 116
 GlyphClass: 2
-Flags: HMWO
+Flags: HMW
 HStem: 224 40G<14.25 18.25>
 VStem: 61.25 52
 Fore
@@ -2538,7 +2538,7 @@ StartChar: accidentals.leftparen
 Encoding: 57624 57624 53
 Width: 116
 GlyphClass: 2
-Flags: HMWO
+Flags: HMW
 VStem: 2.74967 50
 Fore
 94.75 260 m 1
@@ -2712,7 +2712,7 @@ Fore
  216 -112 176 -128 140 -136 c 0
  124 -138 94 -138 82 -136 c 0
  40 -128 12 -104 3 -70 c 1
- -0 -60 -0 -36 1 -24 c 0
+ 0 -60 0 -36 1 -24 c 0
  12 16 40 56 80 88 c 0
  116 116 158 132 200 136 c 0
 EndSplineSet
@@ -16641,6 +16641,42 @@ Fore
  114 -38 100 -32 96 -22 c 1
  90 -16 88 -8 88 0 c 0
  88 16 98 32 114 36 c 0
+EndSplineSet
+EndChar
+StartChar: uniE0FF
+Encoding: 57599 57599 380
+Width: 345
+Flags: WO
+TeX: 0 0 0 0
+HStem: 104 32<244.237 284>
+VStem: 4 341<-88 997>
+Fore
+318 996 m 12
+ 324.513 987.716 338.086 1005.79 345 997 c 0
+ 349.287 991.546 342.469 92.5931 344 88 c 0
+ 348 76 348 54 344 38 c 0
+ 334 -8 316 -46 292 -72 c 0
+ 260 -104 200 -126 136 -132 c 0
+ 70 -140 40 -136 20 -116 c 0
+ 12 -108 8 -100 4 -88 c 0
+ 0 -76 0 -54 4 -38 c 0
+ 12 8 32 46 56 70 c 0
+ 68 84 80 92 104 104 c 0
+ 140 120 178 132 232 136 c 2
+ 268 136 l 2
+ 284 136 288 136 296 134 c 0
+ 310 130 308 134 316 126 c 0
+ 320.938 121.062 311.086 1004.79 318 996 c 12
+284 104 m 0
+ 270 108 256 104 228 90 c 0
+ 206 80 172 60 122 24 c 0
+ 68 -8 44 -30 36 -44 c 1
+ 32 -58 30 -72 36 -84 c 0
+ 46 -104 68 -112 92 -104 c 0
+ 116 -94 156 -72 224 -24 c 0
+ 278 8 302 30 310 44 c 0
+ 316 58 316 72 312 84 c 1
+ 304 96 296 100 284 104 c 0
 EndSplineSet
 EndChar
 EndChars

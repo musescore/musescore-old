@@ -51,13 +51,14 @@ extern QIcon midiinIcon, speakerIcon, startIcon, playIcon, pauseIcon, repeatIcon
 extern QIcon sbeamIcon, mbeamIcon, nbeamIcon, beam32Icon;
 extern QIcon fileOpenIcon, fileNewIcon, fileSaveIcon, fileSaveAsIcon;
 extern QIcon exitIcon, viewmagIcon;
+extern QIcon windowIcon;
 
-struct SymCode;
+class Sym;
 
 static const int ICON_HEIGHT = 24;
 static const int ICON_WIDTH  = 16;
 
-extern QIcon symIcon(const SymCode&, int size=20, int width=ICON_WIDTH, int height=ICON_HEIGHT);
+extern QIcon symIcon(const Sym&, int size=20, int width=ICON_WIDTH, int height=ICON_HEIGHT);
 
 #endif
 

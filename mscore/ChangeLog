@@ -1,3 +1,7 @@
+15.9.7 (ws)
+      - fixed windows version: added hack to provide windows version with fixed, hard
+        coded symbol bounding boxes; svg vector graphics works after installing
+        appropriate qt plugins
 14.9.7 (ws)
       - more fixes for windows cross compilation, but there are at least
         two showstoppers for the windows version:
