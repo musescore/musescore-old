@@ -44,6 +44,7 @@ testAccidentals1.xml     all supported accidentals including editorial
 testDirections1.xml      all supported direction types
 testDynamics1.xml        the "dynamics" directions from ppp to fff
 testDynamics2.xml        dynamics in a multi-part (voice and a piano) score
+testHello.xml            Recordare's "Hello World"
 testImplicitMeasure1.xml pickup measure
 testKeysig1.xml          change keysig from none to G major
 testNotesAttributes1.xml all note attributes supported by MusicXML import/export

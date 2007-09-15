@@ -1,3 +1,5 @@
+15.9.7 (lv)
+      - enhanced iotest and updated MusicXML testfiles, most work OK now
       ======== Version 0.7.0 released =============
 15.9.7 (ws)
       - fixed windows version: added hack to provide windows version with fixed, hard
