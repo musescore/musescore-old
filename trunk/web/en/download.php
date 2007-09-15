@@ -10,7 +10,9 @@
   <a href="http://sourceforge.net/project/showfiles.php?group_id=109430">SourceForge</a>.
   <br><br>
   <h3> Binaries</h3>
-  There are no binaries yet available.
+  <b>Windows: </b>
+     <a href="http://sourceforge.net/project/showfiles.php?group_id=109430">SourceForge</a>.
+     <br>(The window version has no sequencer and no synthesizer.)
 
   <h3> Subversion Sourcecode Repository</h3>
   The latest <i>MuseScore</i> code is always available in the

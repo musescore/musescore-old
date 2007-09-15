@@ -11,7 +11,10 @@
   <br><br>
 
   <h3> Binaries</h3>
-  Leider sind z.Z. noch keine Binaries verfügbar.
+  <b>Windows: </b><a href="http://sourceforge.net/project/showfiles.php?group_id=109430">SourceForge</a>.
+  <br>
+  (Die Windowsversion enthält z.Z. noch keinen Sequencer und keinen
+  Synthesizer.)
 
   <h3> Subversion Sourcecode Repository</h3>
   Der aktuellste <i>MuseScore</i> Code ist immer im SourceForge SVN
