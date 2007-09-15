@@ -1431,6 +1431,13 @@ int main(int argc, char* argv[])
       QCoreApplication::setOrganizationName("MusE");
       QCoreApplication::setOrganizationDomain("muse.org");
       QCoreApplication::setApplicationName("MuseScore");
+      qApp->setWindowIcon(windowIcon);
+
+#ifdef __MINGW32__
+      QFont font = qApp->font();
+      font.setFamily("Arial");
+      qApp->setFont(font);
+#endif
 
       int c;
       while ((c = getopt(argc, argv, "vdLsmio:")) != EOF) {

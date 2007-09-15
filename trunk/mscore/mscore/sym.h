@@ -262,6 +262,7 @@ enum {
 
       plusSym,
       flipSym,
+      note2Sym,
       note4Sym,
       note8Sym,
       note16Sym,
