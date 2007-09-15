@@ -43,7 +43,7 @@ include ( ${PROJECT_SOURCE_DIR}/cmake/UsePkgConfig1.cmake )
 include ( ${PROJECT_SOURCE_DIR}/cmake/TargetDoc.cmake)
 
 # for debugging the make system uncomment next line:
-set(CMAKE_VERBOSE_MAKEFILE ON)
+# set(CMAKE_VERBOSE_MAKEFILE ON)
 
 ##
 ##  look for Qt4
@@ -142,10 +142,11 @@ include (InstallRequiredSystemLibraries)
   SET(CPACK_PACKAGE_VERSION_MINOR "${Mscore_VERSION_MINOR}")
   SET(CPACK_PACKAGE_VERSION_PATCH "${Mscore_VERSION_PATCH}")
   SET(CPACK_PACKAGE_INSTALL_DIRECTORY "MuseScore ${Mscore_VERSION_MAJOR}.${Mscore_VERSION_MINOR}")
+  SET(CPACK_PACKAGE_ICON "${PROJECT_SOURCE_DIR}/mscore/data/mscore.bmp")
 
   IF(MINGW)
-      SET(CPACK_PACKAGE_ICON "${PROJECT_SOURCE_DIR}/mscore/data/mscore.bmp")
-      SET(CPACK_NSIS_INSTALLED_ICON_NAME "bin/mscore.exe")
+      SET(CPACK_NSIS_INSTALLED_ICON_NAME "${PROJECT_SOURCE_DIR}/mscore/data/mscore.bmp")
+#      SET(CPACK_NSIS_INSTALLED_ICON_NAME "bin/mscore.exe")
       SET(CPACK_NSIS_DISPLAY_NAME "${CPACK_PACKAGE_INSTALL_DIRECTORY} MuseScore score typesetter")
       SET(CPACK_NSIS_HELP_LINK "http://mscore.sourceforge.net")
       SET(CPACK_NSIS_URL_INFO_ABOUT "http://mscore.sourceforge.net")
@@ -175,7 +176,6 @@ endif (MINGW)
 
   include (CPack)
 message("Depends2: ${DEBIAN_PACKAGE_DEPENDS}")
-
 
 add_custom_target(lupdate
    COMMAND ${PROJECT_SOURCE_DIR}/gen-qt-projectfile ${PROJECT_SOURCE_DIR} > mscore.pro

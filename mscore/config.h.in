@@ -22,6 +22,7 @@
 #cmakedefine USE_JACK
 
 #define INSTALL_NAME     "${Mscore_INSTALL_NAME}"
-#define INSTPREFIX       "${CMAKE_INSTALL_PREFIX}"
+// #define INSTPREFIX       "${CMAKE_INSTALL_PREFIX}"
+#define INSTPREFIX       "${CPACK_PACKAGE_INSTALL_DIRECTORY}"
 #define VERSION          "${Mscore_VERSION_FULL}"
 

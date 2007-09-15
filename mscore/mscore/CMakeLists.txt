@@ -169,6 +169,15 @@ if (MINGW)
       /home/ws/.wine/drive_c/Qt/4.3.1/bin/QtXml4.dll
       /home/ws/.wine/drive_c/Qt/4.3.1/bin/QtSvg4.dll
       )
+   install_files ( /bin/iconengines .dll
+      /home/ws/.wine/drive_c/Qt/4.3.1/plugins/iconengines/qsvg4.dll
+      )
+   install_files ( /bin/imageformats .dll
+      /home/ws/.wine/drive_c/Qt/4.3.1/plugins/imageformats/qjpeg4.dll
+      /home/ws/.wine/drive_c/Qt/4.3.1/plugins/imageformats/qmng4.dll
+      /home/ws/.wine/drive_c/Qt/4.3.1/plugins/imageformats/qsvg4.dll
+      /home/ws/.wine/drive_c/Qt/4.3.1/plugins/imageformats/qtiff4.dll
+      )
 
 else (MINGW)
    set_target_properties( mscore

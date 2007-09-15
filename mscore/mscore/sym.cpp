@@ -53,7 +53,7 @@ Sym::Sym(const char* name, const QChar& c, int f)
             font = QFont("Times New Roman");
             font.setPointSizeF(8.0 * FMAG);
             }
-      _bbox   = QFontMetricsF(font, printer).tightBoundingRect(QString(_code));
+      _bbox   = QFontMetricsF(font, printer).boundingRect(_code);
       _width  = QFontMetricsF(font, printer).width(_code);
       }
 
