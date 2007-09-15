@@ -1,0 +1,79 @@
+Release 0.7 (svn)
+      - better note head positioning in chords
+      - measure insert/delete function
+      - drumset editor
+      - tremolo
+      - repeat measure symbol
+      - changable note heads
+
+      As usual this release also contains many bug fixes and code
+      cleanups.
+
+Release 0.6.1
+      This is a bugfix release. Most notably the crash when importing
+      a midi file is fixed.
+
+Release 0.6
+      - text frames
+      - arpeggio lines
+      - MuseData import (www.musedata.org)
+      - better automatic pitch spelling using context information
+      - automatic key detection on midi import
+      - configurable symbol palette
+      - new button to remove a score tab from the tab bar
+      - new dock widget which collects all palettes
+
+Release 0.5
+      - editing in the Mag combobox to enter arbitrary zoom factors is
+        now implemented
+      - the default application font is not hard coded anymore and can
+        be changed by external utilities (qtconfig)
+      - bracket editing with keyboard
+      - nested system brackets
+      - extended lyrics
+      - subscript and superscript for text
+      - irregular measures
+      - more cut&paste and drag&drop operations
+      - better visual feedback for some drag&drop operations
+      - the sequencer now interprets ottava and pedal lines. They are
+        are also exported to midi.
+      - some line object can now span several systems (ottava, pedal,
+        trill and hairpins)
+      - as usual many fixes, enhancements and internal code cleanups
+
+Release 0.4:
+      - configurable keyboard short cuts
+      - Instrument names and text can contain musical symbols
+      - added ALSA audio driver in addition to JACK driver
+      - many MusicXML fixes and enhancements
+      - enhanced midi import
+      - integrated music fonts, no font install necessary
+      - now uses unicode and utf8
+      - many fixes, enhancements and internal code cleanups
+      - many internal changes and code cleanups
+      - now using cmake as build system instead of autotools
+      - moved from cvs to svn
+
+Release 0.2:
+      Release 0.2 of MuseScore is a major feature release. Its based on
+      the brand new Qt4 gui library using its features like antialiased
+      screen drawings.
+
+      * new elements: volta brackets, ottava lines (8va---)
+        system brackets, pedal lines, trill lines
+      * drag & drop from symbol panels
+      * navigator panel
+      * page layout preview
+      * tabbed multiple document interface
+      * Mscore now uses the unmodified project lilypond "emmentaler" font.
+
+Release 0.1:
+      * integrated fluid software synthesizer for play function;
+        plays with JACK audio server
+      * Mscore now supports musicXml import/export. Only a subset is
+        currently supported.
+      * simple midi import/export
+      * midi input (step recording)
+      * some support for multiple voices in a staff
+      * new demo files
+      * numerous fixes and enhancements

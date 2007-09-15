@@ -1,0 +1,114 @@
+=================================================================
+      MuseScore Score Typesetter
+=================================================================
+
+This is a developer version of the Linux MusE Score Typesetter
+"MuseScore".
+
+MuseScore is distributed under the GNU General Public License (GPL).
+Please check out the file COPYING in this directory for more
+details.
+
+Features:
+      - WYSIWYG design, notes are entered on a "virtual notepaper"
+      - TrueType font(s) for printing & display allows for high quality
+        scaling to all sizes
+      - easy & fast note entry
+      - many editing functions
+      - MusicXML import/export
+      - Midi (SMF) import/export
+      - MuseData import
+      - Midi input for note entry
+      - integrated sequencer and software synthesizer to
+        play the score
+      - print or create pdf files
+
+Requirements:
+      - qt4 gui lib version qt4.3.x
+
+        Note that many linux distributions split packages into a user
+        and developer package and that you need to install both.
+
+      - ALSA Version 1.0 or newer (audio/midi input/output)
+
+      - CMake 2.4.6
+
+      - recommended: JACK audio server (audio output)
+
+Credits:
+      MuseScore uses the "Emmentaler" font from the lilypond project.
+
+Installation:
+      - unpack source distribution
+            tar xvofj mscore-x.x.x.tar.bz2
+
+      - make
+            cd mscore-x.x.x
+            make release
+            make
+
+      if something goes wrong, then remove the whole build subdirectory
+      with "make clean" and start new with "make"
+
+      - install as root user
+            sudo make install
+
+User Documentation:
+      Currently there is no complete documentation.
+      Some fragments are in the "mscore/doc/de" (german) directory.
+
+      Requirements:
+            - TeX with ConTeXt macro package
+              (as part of tetex 3.0 distribution)
+
+      Type
+            cd build
+            make doc
+
+      to generate man-de.pdf in build/doc/de.
+
+Program Documentation:
+
+      Type
+            cd build
+            make doxy
+
+      to generate the program documentation with DoxyGen.
+
+      Browse the documentation with your favourite html browser
+      at:
+            build/Doc/html/index.html
+
+
+Test:
+      Type
+            cd build/mscore
+            mscore
+
+      to start mscore. On first invocation a demofile
+      (Modeste Moussorgsky: Pictures of an exhibition: Promenade)
+      is shown. You probably want to change that in the
+      "preferences" dialog.
+
+=================================================================
+      Status
+=================================================================
+
+      MuseScore is in early beta state. That means you should not use
+      it for any mission critical work. It is incomplete and surely has
+      a lot of bugs. Also the save format (*.msc files) will most likely
+      change in future versions.
+
+=================================================================
+      Help needed
+=================================================================
+
+      We need your help!
+
+=================================================================
+      Contact
+=================================================================
+
+      Werner Schweer; ws@seh.de
+      http://mscore.sourceforge.net/
+

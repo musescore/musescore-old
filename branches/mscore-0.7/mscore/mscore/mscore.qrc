@@ -1,0 +1,64 @@
+<!DOCTYPE RCC>
+<RCC version="1.0">
+   <qresource>
+      <file>data/repeat.svg</file>
+      <file>data/paper1.png</file>
+      <file>data/paper2.png</file>
+      <file>data/paper3.png</file>
+      <file>data/text_bold.svg</file>
+      <file>data/text_italic.svg</file>
+      <file>data/text_left.svg</file>
+      <file>data/text_right.svg</file>
+      <file>data/text_center.svg</file>
+      <file>data/text_under.svg</file>
+      <file>data/exit.svg</file>
+      <file>data/hotkeys.svg</file>
+      <file>data/start.svg</file>
+      <file>data/pause.svg</file>
+      <file>data/play.svg</file>
+      <file>data/mbeam.xpm</file>
+      <file>data/sbeam.xpm</file>
+      <file>data/nbeam.xpm</file>
+      <file>data/beam32.xpm</file>
+      <file>data/plus.svg</file>
+      <file>data/minus.svg</file>
+      <file>data/tab_remove.png</file>
+      <file>data/fileopen.svg</file>
+      <file>data/filenew.svg</file>
+      <file>data/filesave.svg</file>
+      <file>data/filesaveas.svg</file>
+      <file>data/viewmag.xpm</file>
+      <file>data/subscript.svg</file>
+      <file>data/superscript.svg</file>
+      <file alias="fonts/mscore_20.otf">fonts/mscore_20.otf</file>
+      <file alias="fonts/mscore1_20.otf">fonts/mscore1_20.otf</file>
+      <file alias="data/instruments.xml">../share/templates/instruments.xml</file>
+      <file>data/splash.jpg</file>
+      <file>data/demo.msc</file>
+      <file>data/piano1.sf2</file>
+      <file>data/speaker.svg</file>
+      <file>data/midiin.svg</file>
+      <file>data/undo.svg</file>
+      <file>data/redo.svg</file>
+      <file>data/style.qss</file>
+      <file>data/greendot.svg</file>
+      <file>data/darkgreendot.svg</file>
+      <file>data/recordOn.svg</file>
+      <file>data/recordOff.svg</file>
+   </qresource>
+
+   <qresource lang="de">
+      <file alias="mscore.qm">../share/locale/mscore_de.qm</file>
+   </qresource>
+
+   <qresource lang="ru">
+      <file alias="mscore.qm">../share/locale/mscore_ru.qm</file>
+   </qresource>
+
+   <qresource lang="it">
+      <file alias="mscore.qm">../share/locale/mscore_it.qm</file>
+   </qresource>
+
+
+</RCC>
+

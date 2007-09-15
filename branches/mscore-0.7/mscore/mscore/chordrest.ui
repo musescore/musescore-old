@@ -1,0 +1,109 @@
+<ui version="4.0" >
+ <class>ChordRestBase</class>
+ <widget class="QWidget" name="ChordRestBase" >
+  <property name="geometry" >
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>282</width>
+    <height>207</height>
+   </rect>
+  </property>
+  <property name="windowTitle" >
+   <string>Form</string>
+  </property>
+  <layout class="QVBoxLayout" >
+   <item>
+    <widget class="QGroupBox" name="groupBox" >
+     <property name="title" >
+      <string>ChordRest</string>
+     </property>
+     <property name="flat" >
+      <bool>true</bool>
+     </property>
+     <layout class="QGridLayout" >
+      <item rowspan="2" row="0" column="0" >
+       <layout class="QVBoxLayout" >
+        <item>
+         <widget class="QPushButton" name="beamButton" >
+          <property name="text" >
+           <string>Beam</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="tupletButton" >
+          <property name="text" >
+           <string>Tuplet</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <spacer>
+          <property name="orientation" >
+           <enum>Qt::Vertical</enum>
+          </property>
+          <property name="sizeHint" >
+           <size>
+            <width>20</width>
+            <height>40</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+       </layout>
+      </item>
+      <item row="0" column="1" >
+       <widget class="QLabel" name="label_2" >
+        <property name="text" >
+         <string>Attributes:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1" >
+       <widget class="QListWidget" name="attributes" />
+      </item>
+      <item row="2" column="0" colspan="2" >
+       <layout class="QHBoxLayout" >
+        <property name="spacing" >
+         <number>6</number>
+        </property>
+        <property name="leftMargin" >
+         <number>0</number>
+        </property>
+        <property name="topMargin" >
+         <number>0</number>
+        </property>
+        <property name="rightMargin" >
+         <number>0</number>
+        </property>
+        <property name="bottomMargin" >
+         <number>0</number>
+        </property>
+        <item>
+         <widget class="QCheckBox" name="upFlag" >
+          <property name="text" >
+           <string>Up</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="label" >
+          <property name="text" >
+           <string>Beam Mode:</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QComboBox" name="beamMode" />
+        </item>
+       </layout>
+      </item>
+     </layout>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
