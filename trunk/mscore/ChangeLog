@@ -1,4 +1,5 @@
 16.9.7 (ws)
+      - updated russian translation from Alexandre Prokoudine
       - set translator before initializing shortcuts; this fixed translations
         for all shortcuts
 15.9.7 (lv)
