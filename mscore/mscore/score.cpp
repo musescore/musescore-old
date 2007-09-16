@@ -928,10 +928,8 @@ ChordRest* Score::setNoteEntry(bool val, bool step)
                         _is.pos += cr->tickLen();
                   }
             _noteEntryMode = true;
-            foreach(Viewer* v, viewer) {
+            foreach(Viewer* v, viewer)
                   v->setCursorOn(true);
-                  v->moveCursor();
-                  }
             canvas()->setState(Canvas::NOTE_ENTRY);
             mscore->setState(STATE_NOTE_ENTRY);
             }
@@ -978,7 +976,7 @@ void Score::midiNoteReceived(int pitch, bool chord)
                   _is.pos += len;
                   }
             }
-      layoutAll = false;
+      layoutAll = true;
       endCmd();
       }
 

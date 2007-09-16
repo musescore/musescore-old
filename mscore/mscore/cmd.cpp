@@ -149,8 +149,8 @@ void Score::end()
             reLayout(layoutStart);
 
       foreach(Viewer* v, viewer) {
-            if (noteEntryMode())
-                  v->moveCursor();
+//            if (noteEntryMode())
+//                  v->moveCursor();
             if (updateAll)
                   v->updateAll(this);
             else
@@ -558,9 +558,10 @@ void Score::setNote(int tick, int track, int pitch, int len)
       while (len) {
             int stick = tick;
             Measure* measure = tick2measure(stick);
-            if (measure == 0) {
-                  printf("setNote:  ...measure not found\n");
-                  return;
+            if (measure == 0 || (stick >= (measure->tick() + measure->tickLen()))) {
+                  measure = appendMeasure();
+                  if (measure == 0)
+                        return;
                   }
             Segment* segment = measure->first();
             int noteLen      = 0;
@@ -887,6 +888,36 @@ void Score::cmdAppendMeasures(int n)
       }
 
 //---------------------------------------------------------
+//   appendMeasure
+//---------------------------------------------------------
+
+Measure* Score::appendMeasure()
+      {
+      Measure* last = _layout->last();
+      int tick = last ? last->tick() + last->tickLen() : 0;
+      Measure* measure  = new Measure(this);
+      measure->setTick(tick);
+
+      for (int idx = 0; idx < nstaves(); ++idx) {
+            Rest* rest = new Rest(this, tick, 0);
+            Staff* staffp = staff(idx);
+            rest->setStaff(staffp);
+            Segment* s = measure->getSegment(rest);
+            s->add(rest);
+            BarLine* barLine = 0;
+            if (staffp->isTop()) {
+                  barLine = new BarLine(this);
+                  barLine->setStaff(staffp);
+                  measure->setEndBarLine(barLine);
+                  }
+            }
+      undoOp(UndoOp::InsertMeasure, measure);
+      _layout->push_back(measure);
+      layoutAll = true;
+      return measure;
+      }
+
+//---------------------------------------------------------
 //   appendMeasures
 //---------------------------------------------------------
 
@@ -899,29 +930,8 @@ void Score::appendMeasures(int n)
                   "first create some staves"));
             return;
             }
-      for (int i = 0; i < n; ++i) {
-            Measure* last = _layout->last();
-            int tick = last ? last->tick() + last->tickLen() : 0;
-            Measure* measure  = new Measure(this);
-            measure->setTick(tick);
-
-            for (int idx = 0; idx < nstaves(); ++idx) {
-                  Rest* rest = new Rest(this, tick, 0);
-                  Staff* staffp = staff(idx);
-                  rest->setStaff(staffp);
-                  Segment* s = measure->getSegment(rest);
-                  s->add(rest);
-                  BarLine* barLine = 0;
-                  if (staffp->isTop()) {
-                        barLine = new BarLine(this);
-                        barLine->setStaff(staffp);
-                        measure->setEndBarLine(barLine);
-                        }
-                  }
-            undoOp(UndoOp::InsertMeasure, measure);
-            _layout->push_back(measure);
-            }
-      layoutAll = true;
+      for (int i = 0; i < n; ++i)
+            appendMeasure();
       }
 
 //---------------------------------------------------------
