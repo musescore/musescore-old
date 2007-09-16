@@ -155,6 +155,7 @@ class Score : public QObject {
       void pasteStaff(const QMimeData* ms);
       void cmdReplaceElements(Measure* sm, Measure* dm, int staffIdx);
       void move(const QString& cmd);
+      Measure* appendMeasure();
 
    public:
       int curTick;      // used for read()/write() optimization

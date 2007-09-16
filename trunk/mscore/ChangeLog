@@ -1,4 +1,5 @@
 16.9.7 (ws)
+      - fixed crash, when reached score end in note entry mode
       - updated russian translation from Alexandre Prokoudine
       - set translator before initializing shortcuts; this fixed translations
         for all shortcuts
@@ -21,7 +22,7 @@
       - added new class ColorLabel()
       - fix note entry in second staff
 13.9.7 (ws)
-      - fixed windows cross compilation (due to some fixed paths this will
+      - fixed windows cross compilation (due to some fixed paths this
         probably will only work on my system :-()
       - new class Repeat() which collects all symbols with special
         repeat semantic
