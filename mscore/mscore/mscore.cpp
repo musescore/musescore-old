@@ -1484,15 +1484,6 @@ int main(int argc, char* argv[])
       _spatium = 20.0 / 72.0 * DPI / 4.0;
 
       initSymbols();
-      //
-      // initialize shortcut hash table
-      //
-      for (unsigned i = 0;; ++i) {
-            if (MuseScore::sc[i].xml == 0)
-                  break;
-            shortcuts[MuseScore::sc[i].xml] = new Shortcut(MuseScore::sc[i]);
-            }
-      preferences.read();
 
       QSplashScreen* sc = 0;
       if (preferences.showSplashScreen) {
@@ -1539,6 +1530,15 @@ int main(int argc, char* argv[])
                   }
             }
 
+      //
+      // initialize shortcut hash table
+      //
+      for (unsigned i = 0;; ++i) {
+            if (MuseScore::sc[i].xml == 0)
+                  break;
+            shortcuts[MuseScore::sc[i].xml] = new Shortcut(MuseScore::sc[i]);
+            }
+      preferences.read();
 
       //
       //  load internal fonts
@@ -1821,11 +1821,16 @@ Shortcut::Shortcut()
 
 Shortcut::Shortcut(int s, const char* name, const char* d, const QKeySequence& k,
    Qt::ShortcutContext cont, const char* txt, const char* h, QIcon* i)
-   : state(s), descr(d), key(k), context(cont), text(txt), help(h)
       {
-      xml    = name;
-      icon   = i;
-      action = 0;
+      state   = s;
+      xml     = name;
+      key     = k;
+      context = cont;
+      icon    = i;
+      action  = 0;
+      descr   = qApp->translate("MuseScore", d);
+      help    = qApp->translate("MuseScore", h);
+      text    = qApp->translate("MuseScore", txt);
       }
 
 Shortcut::Shortcut(const Shortcut& c)

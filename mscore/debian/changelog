@@ -1,0 +1,6 @@
+mscore (0.6.1-1) unstable; urgency=low
+
+  * Initial release (Closes: #nnnn)  <nnnn is the bug number of your ITP>
+
+ -- Junichi Uekawa <dancer@debian.org>  Tue, 14 Aug 2007 20:48:46 +0900
+
