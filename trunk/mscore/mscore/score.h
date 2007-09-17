@@ -31,6 +31,7 @@
 #include "input.h"
 #include "padstate.h"
 
+class TextStyle;
 class Page;
 class SigList;
 class PageFormat;
@@ -88,6 +89,8 @@ class Score : public QObject {
       bool _noteEntryMode;
 
       Style* _style;
+      QVector<TextStyle*> _textStyles;
+
       QFileInfo info;
       bool _created;          ///< file is never saved, has generated name
 
@@ -448,13 +451,16 @@ class Score : public QObject {
       bool noteEntryMode() const { return _noteEntryMode; }
       void insertTime(int tick, int len);
       void cmdRemoveTime(int tick, int len);
-      QList<Viewer*> getViewer() { return viewer;    }
-      int playPos() const        { return _playPos;  }
-      void setPlayPos(int val)   { _playPos = val;   }
-      int inputPos() const       { return _is.pos;   }
-      int inputTrack() const     { return _is.track; }
-      void setInputTrack(int v)  { _is.track = v;    }
-      PadState* padState()       { return &_padState; }
+      QList<Viewer*> getViewer()    { return viewer;    }
+      int playPos() const           { return _playPos;  }
+      void setPlayPos(int val)      { _playPos = val;   }
+      int inputPos() const          { return _is.pos;   }
+      int inputTrack() const        { return _is.track; }
+      void setInputTrack(int v)     { _is.track = v;    }
+      PadState* padState()          { return &_padState; }
+      TextStyle* textStyle(int idx) { return _textStyles[idx]; }
+      const QVector<TextStyle*>& textStyles() const { return _textStyles; }
+      void setTextStyles(QVector<TextStyle*>&s);
       };
 
 extern Score* gscore;

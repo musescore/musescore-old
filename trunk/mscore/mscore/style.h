@@ -57,14 +57,16 @@ enum TEXT_STYLE {
       TEXT_STYLE_STAFF,
       TEXT_STYLE_CHORD,
       TEXT_STYLE_REHEARSAL_MARK,
-      TEXT_STYLE_REPEAT
+      TEXT_STYLE_REPEAT,
+      TEXT_STYLES
       };
 
 //---------------------------------------------------------
 //   TextStyle
 //---------------------------------------------------------
 
-struct TextStyle {
+class TextStyle {
+   public:
       QString name;
       QString family;
       int size;
@@ -94,11 +96,26 @@ struct TextStyle {
       QFont font() const;
       QRectF bbox(const QString& s) const { return fontMetrics().boundingRect(s); }
       QFontMetricsF fontMetrics() const   { return QFontMetricsF(font()); }
+      bool operator!=(const TextStyle& s) const {
+            return s.name != name
+                || s.family != family
+                || s.size != size
+                || s.bold != bold
+                || s.italic != italic
+                || s.underline != underline
+                || s.align != align
+                || s.anchor != anchor
+                || s.xoff != xoff
+                || s.yoff != yoff
+                || s.offsetType != offsetType
+                || s.sizeIsSpatiumDependent != sizeIsSpatiumDependent
+                || s.frameWidth != frameWidth
+                || s.marginWidth != marginWidth
+                || s.paddingWidth != paddingWidth
+                || s.frameRound != frameRound
+                || s.frameColor != frameColor;
+            }
       };
-
-typedef std::vector<TextStyle> TextStyleList;
-typedef TextStyleList::iterator iTextStyle;
-typedef TextStyleList::const_iterator ciTextStyle;
 
 //---------------------------------------------------------
 //   Style
@@ -177,10 +194,10 @@ struct Style {
       void saveStyle(Xml& xml);
       };
 
+extern QVector<TextStyle> defaultTextStyles;
+extern const TextStyle defaultTextStyleArray[];
+
 extern Style defaultStyle;
-
 extern void setDefaultStyle();
-extern void setTextStyle(const TextStyle& ts);
 
-extern TextStyleList textStyles;
 #endif

@@ -24,13 +24,16 @@
 #include "style.h"
 #include "ui_textstyle.h"
 
+class Score;
+
 //---------------------------------------------------------
 //   TextStyleDialog
 //---------------------------------------------------------
 
 class TextStyleDialog : public QDialog, private Ui::TextStyleBase {
       Q_OBJECT
-      TextStyleList styles;
+      QVector<TextStyle*> styles;
+      Score* cs;
 
       int current;
       int fonts;        // number of font families in list
@@ -57,7 +60,8 @@ class TextStyleDialog : public QDialog, private Ui::TextStyleBase {
    signals:
 
    public:
-      TextStyleDialog(QWidget* parent);
+      TextStyleDialog(QWidget* parent, Score* );
+      ~TextStyleDialog();
       };
 
 #endif

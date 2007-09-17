@@ -525,6 +525,7 @@ void MeasureView::setElement(Element* e)
       mb.startRepeat->setChecked(m->startRepeat());
       mb.endRepeat->setValue(m->endRepeat());
       mb.ending->setValue(m->ending());
+      mb.repeatFlags->setText(QString("0x%1").arg(m->repeatFlags(), 6, 16, QChar('0')));
       mb.sel->clear();
       foreach(const Element* e, *m->el()) {
             QTreeWidgetItem* item = new QTreeWidgetItem;
@@ -994,10 +995,8 @@ void TextView::setElement(Element* e)
       Text* te = (Text*)e;
       ShowElementBase::setElement(e);
       tb.style->clear();
-      for (iTextStyle i = textStyles.begin(); i != textStyles.end(); ++i) {
-            TextStyle* s = &*i;
+      foreach(TextStyle* s, te->score()->textStyles())
             tb.style->addItem(s->name);
-            }
       tb.text->setDocument(te->getDoc());
       tb.xoffset->setValue(te->xoff());
       tb.yoffset->setValue(te->yoff());
@@ -1078,10 +1077,8 @@ void DynamicView::setElement(Element* e)
       Dynamic* dynamic = (Dynamic*)e;
 
       tb.style->clear();
-      for (iTextStyle i = textStyles.begin(); i != textStyles.end(); ++i) {
-            TextStyle* s = &*i;
+      foreach (TextStyle* s, dynamic->score()->textStyles())
             tb.style->addItem(s->name);
-            }
 //      tb.style->setCurrentIndex(dynamic->style());
       tb.text->setText(dynamic->getText());
 //      tb.xoffset->setValue(dynamic->styleOffset().x());

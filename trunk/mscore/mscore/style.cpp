@@ -31,18 +31,17 @@ Style* style;
 //  spatium = 20/4 points
 
 double _spatium;
+QVector<TextStyle> defaultTextStyles;
 
 //---------------------------------------------------------
 //   textStyles
 //---------------------------------------------------------
 
-TextStyleList textStyles;
-
 static const QString ff("Times New Roman");
 
 #define MM(x) ((x)/INCH)
 
-static const TextStyle defaultTextStyles[] = {
+const TextStyle defaultTextStyleArray[] = {
       TextStyle(QString("Symbols1"), QString("MScore"), 20, false, false, false,
          ALIGN_LEFT,    ANCHOR_STAFF, 0, 0, OFFSET_ABS),
 
@@ -118,8 +117,8 @@ static const TextStyle defaultTextStyles[] = {
          ALIGN_HCENTER, ANCHOR_SYSTEM, 0, -7.0, OFFSET_SPATIUM, true,
          0.3, 1.0, 1.0, 20, Qt::black),
 
-      TextStyle(QString("Repeat Text"), ff,  14, false, false, false,
-         ALIGN_HCENTER, ANCHOR_SYSTEM, 0, -5.0, OFFSET_SPATIUM, true),
+      TextStyle(QString("Repeat Text"), ff,  12, false, false, false,
+         ALIGN_HCENTER, ANCHOR_SYSTEM, 0, -4.5, OFFSET_SPATIUM, true),
       };
 
 //---------------------------------------------------------
@@ -223,11 +222,9 @@ TextStyle::TextStyle(
 
 void setDefaultStyle()
       {
-//      style = &defaultStyle;
-      int n = sizeof(defaultTextStyles)/sizeof(*defaultTextStyles);
-      textStyles.clear();
-      for (int i = 0; i < n; ++i)
-            textStyles.push_back(defaultTextStyles[i]);
+      defaultTextStyles.clear();
+      for (int i = 0; i < TEXT_STYLES; ++i)
+            defaultTextStyles.append(defaultTextStyleArray[i]);
       }
 
 //---------------------------------------------------------
@@ -255,8 +252,7 @@ QFont TextStyle::font() const
 
 void TextStyle::write(Xml& xml) const
       {
-      xml.stag("TextStyle");
-      xml.tag("name", name);
+      xml.stag(QString("TextStyle name=\"%1\"").arg(name));
       xml.tag("family", family);
       xml.tag("size", size);
       xml.tag("bold", bold);
@@ -287,9 +283,7 @@ void TextStyle::read(QDomElement e)
             QString val(e.text());
             int i = val.toInt();
 
-            if (tag == "name")
-                  name = val;
-            else if (tag == "family")
+            if (tag == "family")
                   family = val;
             else if (tag == "size")
                   size = i;
@@ -315,21 +309,6 @@ void TextStyle::read(QDomElement e)
       }
 
 //---------------------------------------------------------
-//   setTextStyle
-//---------------------------------------------------------
-
-void setTextStyle(const TextStyle& ts)
-      {
-      for (iTextStyle i = textStyles.begin(); i != textStyles.end(); ++i) {
-            if (i->name == ts.name) {
-                  *i = ts;
-                  return;
-                  }
-            }
-      textStyles.push_back(ts);
-      }
-
-//---------------------------------------------------------
 //   loadStyle
 //---------------------------------------------------------
 
@@ -341,12 +320,7 @@ void Style::loadStyle(QDomElement e)
             int i    = val.toInt();
             double d = val.toDouble();
 
-            if (tag == "TextStyle") {
-                  TextStyle ts;
-                  ts.read(e);
-                  setTextStyle(ts);
-                  }
-            else if (tag == "staffUpperBorder")
+            if (tag == "staffUpperBorder")
                   staffUpperBorder = Spatium(d);
             else if (tag == "staffLowerBorder")
                   staffLowerBorder = Spatium(d);

@@ -120,8 +120,13 @@ Score::Score()
       _noteEntryMode    = false;
       info.setFile("");
       _layout           = new ScoreLayout();
-      _style            = new Style(defaultStyle);
       _layout->setScore(this);
+      _style            = new Style(defaultStyle);
+
+      // deep copy of defaultTextStyles:
+      for (int i = 0; i < TEXT_STYLES; ++i)
+            _textStyles.append(new TextStyle(defaultTextStyles[i]));
+
       tempomap          = new TempoList;
       sigmap            = new SigList;
       sel               = new Selection(this);
@@ -152,6 +157,7 @@ Score::~Score()
       delete sigmap;
       delete sel;
       delete _layout;
+      delete _style;
       }
 
 //---------------------------------------------------------
@@ -261,6 +267,10 @@ void Score::write(Xml& xml)
             canvas()->setState(Canvas::NORMAL);  //calls endEdit()
             }
       _style->saveStyle(xml);
+      for (int i = 0; i < TEXT_STYLES; ++i) {
+            if (*_textStyles[i] != defaultTextStyleArray[i])
+                  _textStyles[i]->write(xml);
+            }
       xml.tag("showInvisible", _showInvisible);
       pageFormat()->write(xml);
       if (!rights.isEmpty())
@@ -1279,5 +1289,18 @@ bool Score::isSavable() const
       {
       // TODO: check if file can be created if it does not exist
       return info.isWritable() || !info.exists();
+      }
+
+//---------------------------------------------------------
+//   setTextStyles
+//---------------------------------------------------------
+
+void Score::setTextStyles(QVector<TextStyle*>& s)
+      {
+      foreach(TextStyle* ts, _textStyles)
+            delete ts;
+      _textStyles.clear();
+      foreach(TextStyle* ts, s)
+            _textStyles.append(new TextStyle(*ts));
       }
 

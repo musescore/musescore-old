@@ -33,8 +33,8 @@
 
 Part::Part(Score* s)
       {
-      _longName.setDefaultFont(textStyles[TEXT_STYLE_INSTRUMENT_LONG].font());
-      _shortName.setDefaultFont(textStyles[TEXT_STYLE_INSTRUMENT_SHORT].font());
+      _longName.setDefaultFont(s->textStyle(TEXT_STYLE_INSTRUMENT_LONG)->font());
+      _shortName.setDefaultFont(s->textStyle(TEXT_STYLE_INSTRUMENT_SHORT)->font());
       cs = s;
       _show = true;
       }

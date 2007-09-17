@@ -5,7 +5,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>467</width>
+    <width>512</width>
     <height>355</height>
    </rect>
   </property>
@@ -208,6 +208,20 @@
        <widget class="QLabel" name="label_9" >
         <property name="text" >
          <string>EndRep:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="1" >
+       <widget class="QLineEdit" name="repeatFlags" >
+        <property name="readOnly" >
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="0" >
+       <widget class="QLabel" name="label_13" >
+        <property name="text" >
+         <string>RepeatFLags:</string>
         </property>
        </widget>
       </item>

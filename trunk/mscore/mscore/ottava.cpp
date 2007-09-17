@@ -25,6 +25,7 @@
 #include "xml.h"
 #include "utils.h"
 #include "layout.h"
+#include "score.h"
 
 //---------------------------------------------------------
 //   draw
@@ -37,7 +38,7 @@ void OttavaSegment::draw(QPainter& p)
 
       QPointF pp2(pos2());
 
-      QFont f(textStyles[TEXT_STYLE_DYNAMICS].font());
+      QFont f(score()->textStyle(TEXT_STYLE_DYNAMICS)->font());
       p.setFont(f);
       QFontMetricsF fm(f);
       QString txt;
@@ -134,7 +135,7 @@ void Ottava::layout(ScoreLayout* layout)
 
       setPos(ipos().x(), y);
 
-      QFontMetricsF fm(textStyles[TEXT_STYLE_DYNAMICS].fontMetrics());
+      QFontMetricsF fm(score()->textStyle(TEXT_STYLE_DYNAMICS)->fontMetrics());
       qreal h1 = 0.0;
       int n = text.size();
       for (int i = 0; i < n; ++i) {

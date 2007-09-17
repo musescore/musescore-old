@@ -789,7 +789,7 @@ void MusicXml::direction(Measure* measure, int staff, QDomElement e)
       qreal ry = 0.0;
       qreal yoffset = 0.0;
       qreal xoffset = 0.0;
-      qreal size = textStyles[TEXT_STYLE_TECHNIK].size;
+      qreal size = score->textStyle(TEXT_STYLE_TECHNIK)->size;
       QString tempo = "";
 
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {

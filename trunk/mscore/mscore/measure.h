@@ -238,6 +238,7 @@ class Measure : public Element {
       void collectElements(QList<Element*>& el);
       void createVoice(int track);
       void adjustToLen(int, int);
+      int repeatFlags() const { return _repeatFlags; }
       };
 
 #endif
