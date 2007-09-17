@@ -23,6 +23,7 @@
 #include "layout.h"
 #include "system.h"
 #include "xml.h"
+#include "score.h"
 
 //---------------------------------------------------------
 //   draw
@@ -44,7 +45,7 @@ void Volta::draw(QPainter& p)
       if (subtype() != 4)
             p.drawLine(QLineF(_p2, p3));
 
-      TextStyle* s = &textStyles[TEXT_STYLE_TEMPO];
+      TextStyle* s = score()->textStyle(TEXT_STYLE_TEMPO);
       QFont f(s->family, s->size);
       f.setItalic(s->italic);
       f.setUnderline(s->underline);

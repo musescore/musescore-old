@@ -93,7 +93,7 @@ void Bracket::layout(ScoreLayout* layout)
       else if (subtype() == BRACKET_NORMAL) {
             qreal w = point(score()->style()->bracketWidth);
 
-            TextStyle* s = &textStyles[TEXT_STYLE_SYMBOL1];
+            TextStyle* s = score()->textStyle(TEXT_STYLE_SYMBOL1);
             QChar up(0xe19c);
             QChar down(0xe19d);
             QFont f;
@@ -244,7 +244,7 @@ void Bracket::editDrag(int, const QPointF&, const QPointF& delta)
       else if (subtype() == BRACKET_NORMAL) {
             qreal w = point(score()->style()->bracketWidth);
 
-            TextStyle* s = &textStyles[TEXT_STYLE_SYMBOL1];
+            TextStyle* s = score()->textStyle(TEXT_STYLE_SYMBOL1);
             QChar up(0xe19c);
             QChar down(0xe19d);
             QFont f;

@@ -603,7 +603,18 @@ void Measure::layout2(ScoreLayout* layout)
                            - element->bbox().height() - _spatium);
                         break;
                   case REPEAT:
-                        element->setPos(QPointF(0, -(_spatium * 4.0)));
+                        {
+                        TextStyle* st = score()->textStyle(TEXT_STYLE_REPEAT);
+                        double xo = st->xoff;
+                        double yo = st->yoff;
+                        if (st->offsetType == OFFSET_SPATIUM) {
+                              xo *= _spatium;
+                              yo *= _spatium;
+                              }
+                        xo -= element->width();
+                        xo += bbox().width();
+                        element->setPos(QPointF(xo, yo));
+                        }
                         break;
                   case SLUR:
                         // slur->layout() messes with add()/remove()

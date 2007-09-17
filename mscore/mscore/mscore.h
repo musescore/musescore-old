@@ -165,7 +165,6 @@ class MuseScore : public QMainWindow {
       QToolBar* voiceTools;
       EditStyle* editStyleWin;
       InstrumentsDialog* instrList;
-      TextStyleDialog* textStyleDialog;
       MeasuresDialog* measuresDialog;
       InsertMeasuresDialog* insertMeasuresDialog;
 
@@ -235,6 +234,7 @@ class MuseScore : public QMainWindow {
       void editStyle();
       void saveStyle();
       void loadStyle();
+      bool loadStyle(QFile* qf);
       void editTextStyle();
       void seqStarted();
       void seqStopped();

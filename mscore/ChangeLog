@@ -1,3 +1,9 @@
+17.9.7 (ws)
+      - add function: delete repeat text/symbols
+      - add TextStyles to saved style
+      - fixed saving style
+      - TextStyleDialog is now modal
+      - move textStyles to Score()
 16.9.7 (ws)
       - fixed crash, when reached score end in note entry mode
       - updated russian translation from Alexandre Prokoudine

@@ -537,23 +537,43 @@ class LoadStyle : public LoadFile {
 
 void MuseScore::loadStyle()
       {
-      LoadStyle ls(cs);
-      ls.load(this, QString("."), QString("*.mss"), tr("MuseScore: load Style"));
+      QString fn = QFileDialog::getOpenFileName(
+         this, tr("MuseScore: Load Style"),
+         QString("."),
+         tr("MuseScore Styles (*.mss);;"
+            "All files (*)"
+            )
+         );
+      if (fn.isEmpty())
+            return;
+      QFile f(fn);
+      if (!f.open(QIODevice::ReadOnly)) {
+            QMessageBox::warning(0,
+               QWidget::tr("MuseScore: load Style failed:"),
+               QString(strerror(errno)),
+               QString::null, QWidget::tr("Quit"), QString::null, 0, 1);
+            }
+      loadStyle(&f);
       }
 
 //---------------------------------------------------------
-//   loader
+//   loadStyle
 //    return true on error
 //---------------------------------------------------------
 
-bool LoadStyle::loader(QFile* qf)
+bool MuseScore::loadStyle(QFile* qf)
       {
       QDomDocument doc;
       int line, column;
       QString err;
       if (!doc.setContent(qf, false, &err, &line, &column)) {
-            error.sprintf("error reading file %s at line %d column %d: %s\n",
-               name().toLatin1().data(), line, column, err.toLatin1().data());
+            QString error;
+            error.sprintf("error reading style file %s at line %d column %d: %s\n",
+               qf->fileName().toLatin1().data(), line, column, err.toLatin1().data());
+            QMessageBox::warning(0,
+               QWidget::tr("MuseScore: load Style failed:"),
+               error,
+               QString::null, QWidget::tr("Quit"), QString::null, 0, 1);
             return true;
             }
 
@@ -565,6 +585,21 @@ bool LoadStyle::loader(QFile* qf)
                         QString val(ee.text());
                         if (tag == "Style")
                               cs->style()->loadStyle(ee);
+                        else if (tag == "TextStyle") {
+                              QString name = ee.attribute("name");
+                              TextStyle* s = 0;
+                              foreach(TextStyle* ts, cs->textStyles()) {
+                                    if (ts->name == name) {
+                                          s = ts;
+                                          break;
+                                          }
+                                    }
+                              if (s == 0) {
+                                    printf("new TextStyle <%s>\n", qPrintable(name));
+                                    }
+                              else
+                                    s->read(ee);
+                              }
                         else
                               domError(ee);
                         }
@@ -586,13 +621,31 @@ void MuseScore::saveStyle()
          );
       if (name.isEmpty())
             return;
+      QString ext(".mss");
+      QFileInfo info(name);
 
-      QFile f(name);
+      if (info.completeSuffix().isEmpty())
+            info.setFile(info.filePath() + ext);
+      QFile f(info.filePath());
+      if (!f.open(QIODevice::WriteOnly)) {
+            QString s = tr("Open Style File\n") + f.fileName() + tr("\nfailed: ")
+               + QString(strerror(errno));
+            QMessageBox::critical(mscore, tr("MuseScore: Open Style file"), s);
+            return;
+            }
+
       Xml xml(&f);
       xml.header();
       xml.stag("museScore version=\"1.0\"");
       cs->style()->saveStyle(xml);
+      foreach(TextStyle* ts, cs->textStyles())
+            ts->write(xml);
+
       xml.etag();
+      if (f.error() != QFile::NoError) {
+            QString s = QString("Write Style failed: ") + f.errorString();
+            QMessageBox::critical(this, tr("MuseScore: Write Style"), s);
+            }
       }
 
 //---------------------------------------------------------

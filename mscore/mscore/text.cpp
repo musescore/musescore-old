@@ -354,7 +354,7 @@ void Text::setText(const QString& s)
 
 void Text::setStyle(int n)
       {
-      TextStyle* s = &textStyles[n];
+      TextStyle* s   = score()->textStyle(n);
       doc->setDefaultFont(s->font());
       _align         = s->align;
       _xoff          = s->xoff;
@@ -771,7 +771,7 @@ void Text::addSymbol(const SymCode& s)
       if (s.style >= 0) {
             QTextCharFormat oFormat = cursor->charFormat();
             QTextCharFormat nFormat(oFormat);
-            nFormat.setFontFamily(textStyles[s.style].font().family());
+            nFormat.setFontFamily(score()->textStyle(s.style)->font().family());
             cursor->setCharFormat(nFormat);
             cursor->insertText(s.code);
             cursor->setCharFormat(oFormat);

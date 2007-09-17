@@ -203,7 +203,6 @@ MuseScore::MuseScore()
       setWindowTitle(QString("MuseScore"));
       playRepeats           = 0;
       cs                    = 0;
-      textStyleDialog       = 0;
       editStyleWin          = 0;
       instrList             = 0;
       playPanel             = 0;
@@ -1007,9 +1006,8 @@ static void usage(const char* prog, const char*)
 
 void MuseScore::editTextStyle()
       {
-      if (textStyleDialog == 0)
-            textStyleDialog = new TextStyleDialog(this);
-      textStyleDialog->show();
+      TextStyleDialog dialog(this, cs);
+      dialog.exec();
       }
 
 //---------------------------------------------------------

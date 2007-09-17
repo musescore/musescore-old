@@ -21,16 +21,20 @@
 #include "style.h"
 #include "textstyle.h"
 #include "globals.h"
+#include "score.h"
 
 //---------------------------------------------------------
 //   TextStyleDialog
 //---------------------------------------------------------
 
-TextStyleDialog::TextStyleDialog(QWidget* parent)
+TextStyleDialog::TextStyleDialog(QWidget* parent, Score* score)
    : QDialog(parent)
       {
       setupUi(this);
-      styles = textStyles;
+      cs = score;
+      foreach(TextStyle* ts, score->textStyles())
+            styles.append(new TextStyle(*ts));
+
       QFontDatabase fdb;
       QStringList families = fdb.families();
       fonts = 0;
@@ -43,10 +47,8 @@ TextStyleDialog::TextStyleDialog(QWidget* parent)
             }
       textNames->setSelectionMode(QListWidget::SingleSelection);
       textNames->clear();
-      for (iTextStyle i = styles.begin(); i != styles.end(); ++i) {
-            TextStyle* s = &*i;
+      foreach (TextStyle* s, styles)
             textNames->addItem(s->name);
-            }
 
       connect(textNames,     SIGNAL(currentRowChanged(int)), SLOT(nameSelected(int)));
       connect(buttonOk,      SIGNAL(clicked()), SLOT(ok()));
@@ -70,44 +72,55 @@ TextStyleDialog::TextStyleDialog(QWidget* parent)
       textNames->setCurrentItem(textNames->item(0));
       }
 
+//---------------------------------------------------------
+//   ~TextStyleDialog
+//---------------------------------------------------------
+
+TextStyleDialog::~TextStyleDialog()
+      {
+      foreach(TextStyle* ts, styles)
+            delete ts;
+      styles.clear();
+      }
+
 void TextStyleDialog::alignLeftH()
       {
-      TextStyle* s = &styles[current];
+      TextStyle* s = styles[current];
       s->align &= ~(ALIGN_LEFT | ALIGN_RIGHT | ALIGN_HCENTER);
       s->align |= ALIGN_LEFT;
       }
 
 void TextStyleDialog::alignRightH()
       {
-      TextStyle* s = &styles[current];
+      TextStyle* s = styles[current];
       s->align &= ~(ALIGN_LEFT | ALIGN_RIGHT | ALIGN_HCENTER);
       s->align |= ALIGN_RIGHT;
       }
 
 void TextStyleDialog::alignCenterH()
       {
-      TextStyle* s = &styles[current];
+      TextStyle* s = styles[current];
       s->align &= ~(ALIGN_LEFT | ALIGN_RIGHT | ALIGN_HCENTER);
       s->align |= ALIGN_HCENTER;
       }
 
 void TextStyleDialog::alignTopV()
       {
-      TextStyle* s = &styles[current];
+      TextStyle* s = styles[current];
       s->align &= ~(ALIGN_TOP | ALIGN_BOTTOM | ALIGN_VCENTER);
       s->align |= ALIGN_TOP;
       }
 
 void TextStyleDialog::alignBottomV()
       {
-      TextStyle* s = &styles[current];
+      TextStyle* s = styles[current];
       s->align &= ~(ALIGN_TOP | ALIGN_BOTTOM | ALIGN_VCENTER);
       s->align |= ALIGN_BOTTOM;
       }
 
 void TextStyleDialog::alignCenterV()
       {
-      TextStyle* s = &styles[current];
+      TextStyle* s = styles[current];
       s->align &= ~(ALIGN_TOP | ALIGN_BOTTOM | ALIGN_VCENTER);
       s->align |= ALIGN_VCENTER;
       }
@@ -118,7 +131,7 @@ void TextStyleDialog::alignCenterV()
 
 void TextStyleDialog::setUnitMM()
       {
-      TextStyle* s = &styles[current];
+      TextStyle* s = styles[current];
       s->offsetType = OFFSET_ABS;
       }
 
@@ -128,7 +141,7 @@ void TextStyleDialog::setUnitMM()
 
 void TextStyleDialog::setUnitPercent()
       {
-      TextStyle* s = &styles[current];
+      TextStyle* s = styles[current];
       s->offsetType = OFFSET_REL;
       }
 
@@ -138,7 +151,7 @@ void TextStyleDialog::setUnitPercent()
 
 void TextStyleDialog::setUnitSpace()
       {
-      TextStyle* s = &styles[current];
+      TextStyle* s = styles[current];
       s->offsetType = OFFSET_SPATIUM;
       }
 
@@ -150,7 +163,7 @@ void TextStyleDialog::nameSelected(int n)
       {
       if (current != -1)
             saveStyle(current);
-      TextStyle* s = &styles[n];
+      TextStyle* s = styles[n];
 
       fontBold->setChecked(s->bold);
       fontItalic->setChecked(s->italic);
@@ -251,7 +264,7 @@ void TextStyleDialog::fontNameChanged(int)
 
 void TextStyleDialog::saveStyle(int n)
       {
-      TextStyle* s = &styles[n];
+      TextStyle* s = styles[n];
       s->bold      = fontBold->isChecked();
       s->italic    = fontItalic->isChecked();
       s->underline = fontUnderline->isChecked();
@@ -289,7 +302,10 @@ void TextStyleDialog::ok()
 
 void TextStyleDialog::apply()
       {
+      cs->startCmd();
       saveStyle(current);
-      textStyles = styles;
+      cs->setTextStyles(styles);
+      cs->setLayoutAll(true);
+      cs->endCmd();
       }
 

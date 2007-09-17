@@ -21,6 +21,7 @@
 #include "repeat.h"
 #include "layout.h"
 #include "sym.h"
+#include "score.h"
 
 struct RepeatDict {
       int type;
@@ -178,7 +179,7 @@ void Repeat::setSubtype(const QString& s)
 
 void Repeat::draw(QPainter& p)
       {
-      TextStyle* ts = &textStyles[TEXT_STYLE_REPEAT];
+      TextStyle* ts = score()->textStyle(TEXT_STYLE_REPEAT);
       QFont font = ts->font();
       p.setFont(ts->font());
 
@@ -228,7 +229,7 @@ void Repeat::draw(QPainter& p)
 
 QRectF Repeat::bbox() const
       {
-      TextStyle* ts = &textStyles[TEXT_STYLE_REPEAT];
+      TextStyle* ts = score()->textStyle(TEXT_STYLE_REPEAT);
 
       QRectF bb;
       switch(subtype()) {
