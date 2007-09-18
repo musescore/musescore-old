@@ -120,12 +120,17 @@ QT4_WRAP_CPP (mocs
 
 QT4_ADD_RESOURCES (qrc_files mscore.qrc)
 
+if (MINGW)
+      set (resource_file ${PROJECT_BINARY_DIR}/resfile.o)
+endif (MINGW)
+
 add_executable ( mscore
       ${qrc_files}
       ${ui_headers}
       ${mocs}
       ${PROJECT_BINARY_DIR}/all.h
       ${PROJECT_BINARY_DIR}/all.h.pch
+      ${resource_file}
 
       actions.cpp accidental.cpp alsa.cpp barline.cpp beam.cpp
       bracket.cpp canvas.cpp chord.cpp chordrest.cpp clef.cpp
@@ -151,10 +156,20 @@ add_executable ( mscore
       )
 
 if (MINGW)
+   add_custom_command(
+      OUTPUT ${PROJECT_BINARY_DIR}/resfile.o
+      COMMAND wine windres -o ${PROJECT_BINARY_DIR}/resfile.o mscore.rc
+      DEPENDS ${PROJECT_SOURCE_DIR}/mscore/data/mscore.rc
+      WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/mscore/data
+      )
+   set_source_files_properties(
+      ${PROJECT_BINARY_DIR}/resfile.o
+      PROPERTIES generated true
+      )
    set_target_properties( mscore
       PROPERTIES
          COMPILE_FLAGS "-include ${PROJECT_BINARY_DIR}/all.h ${QT_DEFINITIONS} -DQT_SVG_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_CORE_LIB"
-         LINK_FLAGS "-mwindows -L /home/ws/.wine/drive_c/Qt/4.3.1/lib"
+         LINK_FLAGS "${PROJECT_BINARY_DIR}/resfile.o -mwindows -L /home/ws/.wine/drive_c/Qt/4.3.1/lib"
       )
    target_link_libraries(mscore
       fluid
@@ -191,7 +206,9 @@ else (MINGW)
       fluid
       awl
       )
-      install_targets ( /bin mscore )
+   install( TARGETS mscore RUNTIME DESTINATION bin )
+   install( FILES   data/mscore.png DESTINATION /usr/share/icons/hicolor/64x64/apps)
+
 endif (MINGW)
 
 #======================================

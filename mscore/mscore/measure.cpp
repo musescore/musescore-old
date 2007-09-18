@@ -611,23 +611,19 @@ void Measure::layout2(ScoreLayout* layout)
                               xo *= _spatium;
                               yo *= _spatium;
                               }
-                        xo -= element->width();
-                        xo += bbox().width();
                         switch (element->subtype()) {
                               case RepeatSegno:
                               case RepeatCoda:
                               case RepeatVarcoda:
                               case RepeatCodetta:
-                                    {
-                                    xo = element->width();
-                                    break;                                    
-                                    }
+                                    xo += element->width();
+                                    break;
                               case RepeatFine:
-                                    {
                                     yo = (yo*-1)+bbox().height();
                                     break;
-                                    }
                               default:
+                                    xo -= element->width();
+                                    xo += bbox().width();
                                     break;
                               }
                         element->setPos(QPointF(xo, yo));
