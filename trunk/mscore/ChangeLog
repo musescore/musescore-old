@@ -1,4 +1,9 @@
-18.9.7 (ws)
+18.9.7
+      (dk)
+      - changed position of sign "segno" and "coda's" to start of measure
+      - add testfile "RepeatTest1.msc", includes a couple of repeats in mixed
+        use
+      (ws)
       - expose beam properties in style editor
       - did not read Repeat() symbols
       (dk)
