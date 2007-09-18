@@ -57,7 +57,9 @@ find_package(Qt4 4.3)
 if (NOT QT4_FOUND)
       message(FATAL_ERROR "Fatal error: QT (version >= 4.3.0) required.\n"
          "Cmake tries to detect QT4 by searching for 'qmake' in your PATH\n"
-         "If you have QT4 installed, make sure qmake is found in your PATH."
+         "If you have QT4 installed, make sure qmake is found in your PATH.\n"
+         "If you compiled QT4 yourself make sure your new qmake ist found\n"
+         "_first_ in your PATH.\n"
          )
       endif (NOT QT4_FOUND)
 include(${QT_USE_FILE})
