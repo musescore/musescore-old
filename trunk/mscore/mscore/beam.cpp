@@ -381,10 +381,6 @@ void Beam::layout(ScoreLayout* layout)
                           - (a1->pos().x() + a1->segment()->pos().x());
             if (dx) {
                   slope = (l2 - l1) * _spatium * .5 / dx;
-printf("%f - %f - %f\n",
-  score()->style()->beamMinSlope,
-  slope,
-  score()->style()->beamMinSlope);
                   if (fabs(slope) < score()->style()->beamMinSlope) {
                         cut = slope > 0.0 ? 0 : -1;
                         slope = 0;
