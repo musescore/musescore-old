@@ -1,4 +1,5 @@
 18.9.7 (ws)
+      - expose beam properties in style editor
       - did not read Repeat() symbols
       (dk)
       - add D.C., D.C. al fine, D.S., D.S. al fine, fine
