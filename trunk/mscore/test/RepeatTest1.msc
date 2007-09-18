@@ -121,6 +121,8 @@ p, li { white-space: pre-wrap; }
     <Measure number="1">
       <Repeat>
         <subtype>fine</subtype>
+        <offset x="-0.15" y="-1.35"/>
+        <selected>1</selected>
         </Repeat>
       <Note pitch="65" tpc="13" ticks="480"/>
       <Note pitch="67" tpc="15" ticks="480"/>
@@ -195,7 +197,6 @@ p, li { white-space: pre-wrap; }
         </Repeat>
       <Volta>
         <subtype>1</subtype>
-        <selected>1</selected>
         </Volta>
       <Chord>
         <selected>1</selected>

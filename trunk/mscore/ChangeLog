@@ -1,6 +1,7 @@
 18.9.7
       (dk)
-      - changed position of sign "segno" and "coda's" to start of measure
+      - changed position of text "fine" to below the staff
+      - changed position of sign "segno" and "coda's" to start of a easure
       - add testfile "RepeatTest1.msc", includes a couple of repeats in mixed
         use
       (ws)
