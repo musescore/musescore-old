@@ -28,25 +28,33 @@
 #include "measure.h"
 
 
-enum // types for repeat
+enum RepTypes// types for repeat
 { 
       START_REPEAT = 1,
       END_REPEAT = 2,
       SEGNO = 4,
-      DASEGNO = 8,
+      DALSEGNO = 8,
       CODA = 16,
-      D_CODA = 32, // dobble Coda
-      CAPO = 64,
-      DACAPO = 128,
-      LOOP = 256,
-      P_VOLTA = 512,
-      S_VOLTA = 1024,      
-      T_VOLTA = 2048,
-      NORMAL = 4096
+      CODETTA = 32,
+      VARCODA = 64,
+      CAPO = 128,
+      DACAPO = 256,
+      ALCODA = 512,
+      P_VOLTA = 1024,
+      S_VOLTA = 2048,      
+      T_VOLTA = 4096,
+      FINE = 8192,
+      ALSEGNO = 16384,
+      NORMAL = 32768
 };
 
-
-
+enum LoopCounts 
+{
+      FIRSTTIME = 1,
+      SECONDTIME = 2,
+      THIRDTIME = 3,
+      FOURTHTIME = 4
+};
 class RepeatStack {
 
       RepeatStack* _prev; // Previouse Element
@@ -67,7 +75,8 @@ class RepeatStack {
       RepeatStack();
       ~RepeatStack();
 
-      int push(Measure*);
+//      int push(Measure*);
+      Measure* push(Measure*);
       Measure* pop(Measure*);
 
       RepeatStack* init();
@@ -103,8 +112,10 @@ class RepeatStack {
       RepeatStack* getLastInactiveSlot();   
       RepeatStack* getLastSpecialSlot();   
       RepeatStack* getLastSlotByType(int); 
+      RepeatStack* getSlotByType(int); 
       RepeatStack* getLastActiveSlotByType(int);
-      RepeatStack* getLastInActiveSlotByType(int);     
+      RepeatStack* getLastInActiveSlotByType(int); 
+      RepeatStack* getSlotByActiveAndType(int,int);    
 };
 
 extern RepeatStack* firstStack;
