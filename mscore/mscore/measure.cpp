@@ -622,6 +622,13 @@ void Measure::layout2(ScoreLayout* layout)
                                     xo = element->width();
                                     break;                                    
                                     }
+                              case RepeatFine:
+                                    {
+                                    yo = (yo*-1)+bbox().height();
+                                    break;
+                                    }
+                              default:
+                                    break;
                               }
                         element->setPos(QPointF(xo, yo));
                         }
