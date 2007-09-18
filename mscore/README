@@ -48,7 +48,7 @@ Installation:
             make
 
       if something goes wrong, then remove the whole build subdirectory
-      with "make clean" and start new with "make"
+      with "make clean" and start new with "make release"
 
       - install as root user
             sudo make install
