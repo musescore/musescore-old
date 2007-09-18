@@ -78,6 +78,12 @@ void EditStyle::apply()
       style->timesigLeftMargin      = Spatium(timesigLeftMargin->value());
       style->clefKeyRightMargin     = Spatium(clefKeyRightMargin->value());
 
+      style->beamWidth              = Spatium(beamWidth->value());
+      style->beamDistance           = beamDistance->value();
+      style->beamMinLen             = Spatium(beamMinLen->value());
+      style->beamMinSlope           = beamMinSlope->value();
+      style->beamMaxSlope           = beamMaxSlope->value();
+
       cs->startCmd();
       cs->setLayoutAll(true);
       cs->endCmd();
@@ -115,4 +121,10 @@ void EditStyle::setValues(Score* s)
       keysigLeftMargin->setValue(style->keysigLeftMargin.val());
       timesigLeftMargin->setValue(style->timesigLeftMargin.val());
       clefKeyRightMargin->setValue(style->clefKeyRightMargin.val());
+
+      beamWidth->setValue(style->beamWidth.val());
+      beamDistance->setValue(style->beamDistance);
+      beamMinLen->setValue(style->beamMinLen.val());
+      beamMinSlope->setValue(style->beamMinSlope);
+      beamMaxSlope->setValue(style->beamMaxSlope);
       }
