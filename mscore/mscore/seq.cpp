@@ -613,7 +613,6 @@ void Seq::collectEvents()
 
       int staffIdx = 0;
       int gateTime = 80;  // 100 - legato (100%)
-      int jump = 0;
 
 
       foreach(Part* part, *cs->parts()) {
@@ -646,22 +645,10 @@ void Seq::collectEvents()
                   // by DK. 23.08.07
                   for (Measure* m = cs->mainLayout()->first(); m;) {
 
-                        // push each measure for checking of any of repeat or jumps,
-                        // added by DK.23.08.07
-                        jump = rs->push(m);
+                        // push each measure for checking of any of repeat type or jumps,
+                        // returns the measure to processed with
 
-                        if (jump != 0) { // if set, jump "n"-measure for-/backward
-                              if (jump < 0) {
-                                    for (; jump < 0; jump++)
-                                          m = m->prev();
-                                    }
-                              else {
-                                    for (; jump > 0; jump--)
-                                          m = m->next();
-                                    }
-                              continue;
-                              }
-
+                        m = rs->push(m);
                         for (int voice = 0; voice < VOICES; ++voice) {
                               for (Segment* seg = m->first(); seg; seg = seg->next()) {
                                     Element* el = seg->element(staffIdx * VOICES + voice);
@@ -713,11 +700,10 @@ void Seq::collectEvents()
                         // functions push and pop are in repeat2.h/cpp files, by DK. 23.08.07
                         Measure* ms = m;
                         m = rs->pop(m);
-                        if ( m != 0 )
+                        if ( m > 0 && m->next() != 0)
                               continue;
-                        else
-                              m = ms;
-
+                        else if (m == 0) 
+                                    m = ms;
                         m = m->next();
 
                         }
