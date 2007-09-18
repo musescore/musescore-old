@@ -329,6 +329,7 @@ void Beam::layout(ScoreLayout* layout)
 // printf("   move %d  firstMove %d\n", move, firstMove);
 
       bool upFlag = upCount >= 0;
+
       //
       //  move = 0     no cross beaming
       //       = -1    staff 1 - 2

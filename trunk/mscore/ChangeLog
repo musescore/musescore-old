@@ -1,4 +1,6 @@
-18.9.7 (dk)
+18.9.7 (ws)
+      - did not read Repeat() symbols
+      (dk)
       - add D.C., D.C. al fine, D.S., D.S. al fine, fine
       - ToDo : all Coda, al segno, "Faulenzer"
 17.9.7 (ws)

@@ -42,6 +42,7 @@
 #include "lyrics.h"
 #include "image.h"
 #include "keysig.h"
+#include "beam.h"
 
 //---------------------------------------------------------
 //   selectNoteMessage
@@ -764,8 +765,42 @@ void Score::cmdFlipStemDirection()
       if (el && el->type() == NOTE) {
             Chord* chord = ((Note*)el)->chord();
 
-            chord->setStemDirection(chord->isUp() ? DOWN : UP);
-            undoOp(UndoOp::FlipStemDirection, chord);
+            if (chord->stemDirection() == AUTO)
+                  chord->setStemDirection(chord->isUp() ? DOWN : UP);
+            else
+                  chord->setStemDirection(chord->stemDirection() == UP ? DOWN : UP);
+            Direction dir = chord->stemDirection();
+            Beam* beam = chord->beam();
+            if (beam) {
+                  bool set = false;
+                  QList<ChordRest*> elements = beam->getElements();
+                  for (int i = 0; i < elements.size(); ++i) {
+                        ChordRest* cr = elements[i];
+                        if (!set) {
+                              if (cr->type() == CHORD) {
+                                    Chord* chord = (Chord*)cr;
+                                    if (chord->stemDirection() != dir) {
+                                          chord->setStemDirection(dir);
+                                          undoOp(UndoOp::SetStemDirection, chord, int(dir));
+                                          }
+                                    set = true;
+                                    }
+                              }
+                        else {
+                              if (cr->type() == CHORD) {
+                                    Chord* chord = (Chord*)cr;
+                                    if (chord->stemDirection() != AUTO) {
+                                          chord->setStemDirection(AUTO);
+                                          undoOp(UndoOp::SetStemDirection, chord, int(AUTO));
+                                          }
+                                    }
+                              }
+                        }
+
+                  }
+            else {
+                  undoOp(UndoOp::SetStemDirection, chord, int(dir));
+                  }
             }
       else if (el && el->type() == SLUR_SEGMENT) {
             SlurTie* slur = ((SlurSegment*) el)->slurTie();
