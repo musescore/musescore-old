@@ -64,7 +64,7 @@ struct UndoOp {
             ChangePitch,
             ChangeSubtype,
             ChangeAccidental,
-            FlipStemDirection,
+            SetStemDirection,
             FlipSlurDirection,
             ChangeKeySig,
             ChangeClef,

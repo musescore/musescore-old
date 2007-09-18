@@ -66,7 +66,7 @@ static const char* undoName[] = {
       "SortStaves",        "ToggleInvisible",
       "ChangeColor",       "ChangePitch",
       "ChangeSubtype",     "AddAccidental",
-      "FlipStemDirection", "FlipSlurDirection",
+      "SetStemDirection", "FlipSlurDirection",
       "ChangeKeySig",
       "ChangeClef",
       "ChangeSig",
@@ -309,10 +309,12 @@ void Score::processUndoOp(UndoOp* i, bool undo)
                   i->val3 = acc;
                   }
                   break;
-            case UndoOp::FlipStemDirection:
+            case UndoOp::SetStemDirection:
                   {
                   Chord* chord = (Chord*)(i->obj);
-                  chord->setStemDirection(chord->isUp() ? DOWN : UP);
+                  Direction dir = chord->stemDirection();
+                  chord->setStemDirection((Direction)i->val1);
+                  i->val1 = (int)dir;
                   }
                   break;
             case UndoOp::FlipSlurDirection:
@@ -554,14 +556,13 @@ void Score::checkUndoOp()
 //   undoOp
 //---------------------------------------------------------
 
-void Score::undoOp(UndoOp::UndoType type, Element* object, int idx)
+void Score::undoOp(UndoOp::UndoType type, Element* object, int val)
       {
-//      printf("Score::undoOp(type=%d, el=%p, idx=%d)\n", type, object, idx);
       checkUndoOp();
       UndoOp i;
       i.type = type;
       i.obj  = object;
-      i.val1 = idx;
+      i.val1 = val;
       undoList.back()->push_back(i);
       }
 

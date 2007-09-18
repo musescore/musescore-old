@@ -2530,6 +2530,12 @@ void Measure::read(QDomElement e, int idx)
                   tuplet->setStaff(staff);
                   add(tuplet);
                   }
+            else if (tag == "Repeat") {
+                  Repeat* repeat = new Repeat(score());
+                  repeat->setStaff(staff);
+                  repeat->read(e);
+                  add(repeat);
+                  }
             else if (tag == "startRepeat")
                   _startRepeat = val.toInt();
             else if (tag == "endRepeat")
