@@ -195,10 +195,12 @@ Measure* RepeatStack::push(Measure* m)
                         p = setNewSlot(m);
                         p->setRepeatType(CAPO);
                         }
+                        if ((pp = getSlotByType(DACAPO))) {
+                              pp->setEndMeasure(m);
+                              }    
                   p->setTicks2Add(m->tick());
                   type &= ~(CAPO);
                   }
-
 
             if (type&P_VOLTA) {
                   if ((p = getSlot(m,P_VOLTA)) == 0x00) {
