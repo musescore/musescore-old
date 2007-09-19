@@ -33,7 +33,7 @@ set(CMAKE_SKIP_RULE_DEPENDENCY TRUE)
 # The Mscore version number.
 SET(Mscore_VERSION_MAJOR  "0")
 SET(Mscore_VERSION_MINOR  "7")
-SET(Mscore_VERSION_PATCH  "0")
+SET(Mscore_VERSION_PATCH  "1")
 
 SET(Mscore_VERSION       "${Mscore_VERSION_MAJOR}.${Mscore_VERSION_MINOR}")
 SET(Mscore_VERSION_FULL  "${Mscore_VERSION}.${Mscore_VERSION_PATCH}")
