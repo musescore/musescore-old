@@ -619,7 +619,7 @@ void Measure::layout2(ScoreLayout* layout)
                                     break;
                               case RepeatFine:
                                     yo = (yo*-1)+bbox().height();
-                                    break;
+                                    xo -= (element->width()*.5);
                               default:
                                     xo -= element->width();
                                     xo += bbox().width();
