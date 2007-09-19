@@ -43,19 +43,21 @@ class RepeatMeasure : public Element {
       };
 
 enum RepeatType {
-      RepeatNo = 0,
-      RepeatSegno = 1,
-      RepeatCoda  = 2,
-      RepeatVarcoda  = 4,
-      RepeatCodetta = 8,
-      RepeatDacapo = 16,
-      RepeatDacapoAlFine = 32,
-      RepeatDacapoAlCoda = 64,
-      RepeatDalSegno = 128,
-      RepeatDalSegnoAlFine = 256,
-      RepeatDalSegnoAlCoda = 512,
-      RepeatAlSegno = 1024,
-      RepeatFine = 2048
+      RepeatNo             = 0,
+      RepeatSegno          = 1 << 0,
+      RepeatCoda           = 1 << 1,
+      RepeatVarcoda        = 1 << 2,
+      RepeatCodetta        = 1 << 3,
+      RepeatDacapo         = 1 << 4,
+      RepeatDacapoAlFine   = 1 << 5,
+      RepeatDacapoAlCoda   = 1 << 6,
+      RepeatDalSegno       = 1 << 7,
+      RepeatDalSegnoAlFine = 1 << 8,
+      RepeatDalSegnoAlCoda = 1 << 9,
+      RepeatAlSegno        = 1 << 10,
+      RepeatFine           = 1 << 11,
+      RepeatStart          = 1 << 12,
+      RepeatEnd            = 1 << 13
       };
 
 //---------------------------------------------------------

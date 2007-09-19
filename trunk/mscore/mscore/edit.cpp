@@ -1132,7 +1132,7 @@ void Score::cmdDeleteSelection()
                         for (Segment* s = m->first(); s; s = s->next()) {
                               if (s->subtype() == Segment::SegEndBarLine
                                  || s->subtype() == Segment::SegTimeSigAnnounce
-                                 || s->subtype() == Segment::SegBarLine)
+                                 || s->subtype() == Segment::SegStartRepeatBarLine)
                                     continue;
                               if (s->subtype() == Segment::SegChordRest)
                                     rmFlag = true;

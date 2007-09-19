@@ -114,13 +114,13 @@ Measure* RepeatStack::push(Measure* m)
                         p = setNewSlot(m);
                         p->setRepeatType(FINE);
                         p->setLoopCount(2);
-                        }                       
+                        }
                   if ((type&(DACAPO|DALSEGNO))) {
                         if (p) {
                               p->setActive(SECONDTIME);
-                              p->setLoopCount(p->getLoopCount()-1); 
+                              p->setLoopCount(p->getLoopCount()-1);
                               }
-                        }          
+                        }
                   type &= ~(FINE);
                   }
 
@@ -160,16 +160,16 @@ Measure* RepeatStack::push(Measure* m)
                   if ((p = getSlot(m,DACAPO)) == 0x00) {
                         p = setNewSlot(m);
                         p->setRepeatType(DACAPO);
-                        }  
+                        }
                   if (p->getActive() == FIRSTTIME) {
                         p->setStartMeasure(m);
                         p->setTicks2Add(m->tick());
                         if ((pp = getSlotByType(CAPO))) {
                               p->setEndMeasure(pp->getStartMeasure());
                               pp->setEndMeasure(m);
-                              }      
-                        p->setLoopCount(2);    
-                        }                  
+                              }
+                        p->setLoopCount(2);
+                        }
                   type &= ~(DACAPO);
                   }
 
@@ -197,7 +197,7 @@ Measure* RepeatStack::push(Measure* m)
                         }
                         if ((pp = getSlotByType(DACAPO))) {
                               pp->setEndMeasure(m);
-                              }    
+                              }
                   p->setTicks2Add(m->tick());
                   type &= ~(CAPO);
                   }
@@ -250,12 +250,12 @@ Measure* RepeatStack::push(Measure* m)
                         p->setLoopCount(p->getLoopCount()-1);
                         ret = p->getEndMeasure();
                         rtickOffSet = rtickOffSet - p->getTicks2Add();
-                        p->setActive(THIRDTIME);                 
+                        p->setActive(THIRDTIME);
                         }
                   type &= ~(P_VOLTA);
-                  } 
- 
-            if (type&START_REPEAT) { 
+                  }
+
+            if (type&START_REPEAT) {
                   if ((p = getSlot(m,START_REPEAT)) == 0x00) {
                         p = setNewSlot(m);
                         p->setRepeatType(START_REPEAT);
@@ -408,9 +408,9 @@ Measure* RepeatStack::pop(Measure* m)
                   }
             if (type&DACAPO) {
                   p =getSlot(m,DACAPO);
-                  pp = getSlot(p->getEndMeasure(),CAPO);             
+                  pp = getSlot(p->getEndMeasure(),CAPO);
                   if (pp) {
-                        if (p->getActive() == FIRSTTIME) {      
+                        if (p->getActive() == FIRSTTIME) {
                               p->setTickOffset((p->getTicks2Add() -
                                                 pp->getTicks2Add()) +
                                                 m->tickLen());
@@ -422,7 +422,7 @@ Measure* RepeatStack::pop(Measure* m)
                                     p->setActive(FIRSTTIME);
                               else
                                     p->setActive(THIRDTIME);
-                              ret = 0x00;                              
+                              ret = 0x00;
                               }
                         else {
                               p->setLoopCount(p->getLoopCount()-1);
@@ -448,18 +448,18 @@ Measure* RepeatStack::pop(Measure* m)
                                     p->setActive(FIRSTTIME);
                              else
                                     p->setActive(THIRDTIME);
-                              ret = 0x00;                              
+                              ret = 0x00;
                               }
                         else {
                               p->setLoopCount(p->getLoopCount()-1);
                               rtickOffSet += p->getTickOffset();
                               ret = p->getEndMeasure();
-                              }                 
+                              }
                         }
                   else { // here if no "segno" before "dal segno"
                         if (p->getPrev())
                               p->getPrev()->setNext(p->getNext());
-                        if (p->getNext())                        
+                        if (p->getNext())
                               p->getNext()->setPrev(p->getPrev());
                         delStackElement(p);
                         ret = 0x00;
@@ -492,7 +492,7 @@ Measure* RepeatStack::pop(Measure* m)
                               p->setActive(FIRSTTIME);
                         else
                               p->setActive(THIRDTIME);
-                        ret = 0x00;                              
+                        ret = 0x00;
                         }
                   else {
                         p->setLoopCount(p->getLoopCount()-1);
@@ -696,7 +696,7 @@ int RepeatStack::checkType(Measure* m)
 
       if (m->prev() == 0)
             type |= CAPO;
-      if (m->startRepeat())
+      if (m->repeatFlags() & RepeatStart)
             type |= START_REPEAT;
       if (m->endRepeat() > 0)
             type |= END_REPEAT;

@@ -96,9 +96,8 @@ class Measure : public Element {
       Segment* _last;         ///< Last item of segment list
       int _size;              ///< Number of items on segment list
 
-      bool _startRepeat;
-      int _endRepeat;
-      int _ending;
+      int _endRepeat;         ///< end repeat marker und repeat count
+      int _ending;            ///< ending alternativ for repeat
       int _repeatFlags;       ///< or'd RepeatType's (see: repeat.h)
 
       MStaffList  staves;
@@ -222,8 +221,6 @@ class Measure : public Element {
       virtual bool acceptDrop(Viewer*, const QPointF&, int, const QDomElement&) const;
       virtual Element* drop(const QPointF&, const QPointF&, int, const QDomElement&);
 
-      bool startRepeat() const      { return _startRepeat; }
-      void setStartRepeat(bool val) { _startRepeat = val; }
       int endRepeat() const         { return _endRepeat; }
       void setEndRepeat(int val)    { _endRepeat = val; }
 
@@ -233,12 +230,18 @@ class Measure : public Element {
       Segment* getSegment(Segment::SegmentType st, int tick);
       Segment* findSegment(Segment::SegmentType st, int t);
       Segment* createSegment(Segment::SegmentType st, int t);
+
       void setEndBarLine(BarLine* barLine);
       void cmdRemoveEmptySegment(Segment* s);
       void collectElements(QList<Element*>& el);
       void createVoice(int track);
       void adjustToLen(int, int);
-      int repeatFlags() const { return _repeatFlags; }
+      int repeatFlags() const      { return _repeatFlags; }
+      void setRepeatFlags(int val) { _repeatFlags = val; }
+      void setEndBarLineType(int, bool);
+      int endBarLineType() const;
+      BarLine* endBarLine() const;
+      void setStartRepeatBarLine(bool);
       };
 
 #endif

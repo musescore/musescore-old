@@ -761,31 +761,6 @@ bool Score::loadFile(QFile* qf)
                         }
                   }
             }
-
-      //
-      // create missing barlines
-      //
-      for (Measure* m = _layout->first(); m; m = m->next()) {
-            //
-            // dont create barline if next measure is
-            //    a begin reapeat measure
-            //
-            if (m->next() && m->next()->startRepeat())
-                  continue;
-            int n = nstaves();
-            for (int i = 0; i < n; ++i) {
-                  Staff* sp = staff(i);
-                  if (!sp->isTop())
-                        continue;
-                  BarLine* barLine = m->barLine(i);
-                  if (barLine == 0) {
-                        barLine = new BarLine(this);
-                        barLine->setStaff(sp);
-                        barLine->setSubtype(NORMAL_BAR);
-                        m->setEndBarLine(barLine);
-                        }
-                  }
-            }
       _layout->connectTies();
       searchSelectedElements();
       _fileDivision = division;

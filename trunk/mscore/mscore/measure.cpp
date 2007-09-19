@@ -123,7 +123,6 @@ Measure::Measure(Score* s)
       _pageBreak   = false;
       _no          = 0;
       _irregular   = false;
-      _startRepeat = false;
       _endRepeat   = 0;
       _ending      = 0;
       _repeatFlags = 0;
@@ -1022,19 +1021,7 @@ void Measure::remove(Element* el)
                         }
                   printf("Measure::remove: %s %p not found\n", el->name(), el);
                   break;
-#if 0
-            case BAR_LINE:
-                  if (el->subtype() != START_REPEAT) {
-                        if (staves[staff].endBarLine == el) {
-                              staves[staff].endBarLine = 0;
-                              if (el->subtype() != END_REPEAT)
-                                    _endRepeat = 0;
-                              }
-                        break;
-                        }
-                  printf("Measure::remove: BarLine %p not found\n", el);
-                  break;
-#endif
+
             default:
                   printf("Measure::remove %s: not impl.\n", el->name());
                   break;
@@ -1637,13 +1624,6 @@ void Measure::cmdAddStaves(int sStaff, int eStaff)
 
       for (int i = sStaff; i < eStaff; ++i) {
             Staff* staff = _score->staff(i);
-            BarLine* barLine = 0;
-            if (staff->isTop()) {
-                  barLine = new BarLine(score());
-                  barLine->setStaff(_score->staff(i));
-                  barLine->setParent(this);
-                  setEndBarLine(barLine);
-                  }
             MStaff ms;
 
             staves.insert(i, ms);
@@ -1697,17 +1677,10 @@ void Measure::insertStaff(Staff* staff, int staffIdx)
 //   insertStaff1
 //---------------------------------------------------------
 
-void Measure::insertStaff1(Staff* staff, int staffIdx)
+void Measure::insertStaff1(Staff* /*staff*/, int staffIdx)
       {
       for (Segment* s = _first; s; s = s->next())
             s->insertStaff(staffIdx);
-
-      if (staff->isTop()) {
-            BarLine* bl = new BarLine(score());
-            bl->setParent(this);
-            bl->setStaff(staff);
-            setEndBarLine(bl);
-            }
 
       MStaff ms;
       ms.distance = point(staffIdx == 0 ? score()->style()->systemDistance : score()->style()->staffDistance);
@@ -1892,85 +1865,36 @@ Element* Measure::drop(const QPointF& p, const QPointF& /*offset*/, int type, co
                   {
                   BarLine* bl = new BarLine(score());
                   bl->read(e);
-                  int subtype = bl->subtype();
-                  delete bl;
-
-                  for (int i = 0; i < staves.size(); ++i) {
-                        // MStaff& s = staves[i];
-                        Staff* staff = score()->staff(i);
-                        if (!staff->isTop())
-                              continue;
-                        if (subtype == START_REPEAT) {
-                              for (Segment* s = _first; s != _last; s = s->next()) {
-                                    if (s->subtype() == Segment::SegBarLine) {
-                                          Element* e = s->element(i * VOICES);
-                                          if (e && e->type() == BAR_LINE && e->subtype() == START_REPEAT) {
-                                                // BarLine already there,
-                                                // do nothing
-                                                return 0;
-                                                }
-                                          }
-                                    }
-                              Segment::SegmentType st = Segment::SegBarLine;
-                              Segment* seg = findSegment(st, tick());
-                              if (seg == 0) {
-                                    seg = createSegment(st, tick());
-                                    score()->undoAddElement(seg);
-                                    }
-                              BarLine* bl = new BarLine(score());
-                              bl->setSubtype(subtype);
-                              bl->setStaff(staff);
-                              bl->setParent(seg);
-                              score()->cmdAdd(bl);
-                              bl = 0;
-                              Measure* m = system()->prevMeasure(this);
-                              if (m) {
-                                    BarLine* bl = m->barLine(i);
-                                    if (bl)
-                                          score()->cmdRemove(bl);
-                                    }
-                              }
-                        else {
-                              //
-                              // if next measure is a start repeat, look for a
-                              // start repeat barline and remove it
-                              //
-                              Measure* m = system()->nextMeasure(this);
-                              if (m && m->startRepeat()) {
-                                    for (Segment* s = m->first(); s != m->last(); s = s->next()) {
-                                          if (s->subtype() == Segment::SegBarLine) {
-                                                Element* e = s->element(i * VOICES);
-                                                if (e && e->type() == BAR_LINE && e->subtype() == START_REPEAT) {
-                                                      score()->cmdRemove(e);
-                                                      m->cmdRemoveEmptySegment(s);
-                                                      break;
-                                                      }
-                                                }
-                                          }
-                                    }
-                              BarLine* bl = barLine(i);
+                  switch(bl->subtype()) {
+                        case END_BAR:
+                        case NORMAL_BAR:
+                        case DOUBLE_BAR:
+                        case BROKEN_BAR:
+                              {
+                              score()->undoChangeRepeatFlags(this, _repeatFlags & ~RepeatEnd);
+                              if (next())
+                                    score()->undoChangeRepeatFlags(next(), next()->repeatFlags() & ~RepeatStart);
+                              score()->undoChangeEndBarLine(this, bl->subtype());
+                              BarLine* bl = endBarLine();
                               if (bl)
-                                    score()->cmdRemove(bl);
-                              bl = new BarLine(score());
-                              bl->setSubtype(subtype);
-                              bl->setStaff(staff);
-                              bl->setParent(this);
-                              score()->cmdAdd(bl);
-#if 0
-                              for (Segment* s = _first; s != _last; s = s->next()) {
-                                    if (s->type() == Segment::SegBarLine) {
-                                          Element* e = s->element(i * VOICES);
-                                          if (e && e->type() == BAR_LINE) {
-                                                if (e->subtype() == START_REPEAT) {
-                                                      }
-                                                score()->cmdRemove(e);
-                                                break;
-                                                }
-                                          }
-                                    }
-#endif
+                                    bl->setGenerated(false);
                               }
+                              break;
+                        case START_REPEAT:
+                              score()->undoChangeRepeatFlags(this, _repeatFlags | RepeatStart);
+                              break;
+                        case END_REPEAT:
+                              score()->undoChangeRepeatFlags(this, _repeatFlags | RepeatEnd);
+                              if (next())
+                                    score()->undoChangeRepeatFlags(next(), next()->repeatFlags() & ~RepeatStart);
+                              break;
+                        case END_START_REPEAT:
+                              score()->undoChangeRepeatFlags(this, _repeatFlags | RepeatEnd);
+                              if (next())
+                                    score()->undoChangeRepeatFlags(next(), next()->repeatFlags() | RepeatStart);
+                              break;
                         }
+                  delete bl;
                   }
                   break;
 
@@ -1984,7 +1908,7 @@ Element* Measure::drop(const QPointF& p, const QPointF& /*offset*/, int type, co
                   for (Segment* s = first(); s; s = s->next()) {
                         if (s->subtype() == Segment::SegEndBarLine
                            || s->subtype() == Segment::SegTimeSigAnnounce
-                           || s->subtype() == Segment::SegBarLine)
+                           || s->subtype() == Segment::SegStartRepeatBarLine)
                               continue;
                         if (s->subtype() == Segment::SegChordRest)
                               rmFlag = true;
@@ -2203,9 +2127,9 @@ void Measure::write(Xml& xml, int no, int staff) const
       if (staff == 0) {
             for (ciElement ie = _pel.begin(); ie != _pel.end(); ++ie)
                   (*ie)->write(xml);
-            if (_startRepeat)
-                  xml.tag("startRepeat", _startRepeat);
-            if (_endRepeat)
+            if (_repeatFlags & RepeatStart)
+                  xml.tagE("startRepeat");
+            if (_repeatFlags & RepeatEnd)
                   xml.tag("endRepeat", _endRepeat);
             if (_ending)
                   xml.tag("ending", _ending-1); //changed by DK. 28.08.07
@@ -2252,8 +2176,10 @@ void Measure::write(Xml& xml) const
 
       for (ciElement ie = _pel.begin(); ie != _pel.end(); ++ie)
             (*ie)->write(xml);
-      xml.tag("startRepeat", _startRepeat);
-      xml.tag("endRepeat", _endRepeat);
+      if (_repeatFlags & RepeatStart)
+            xml.tagE("startRepeat");
+      if (_repeatFlags & RepeatEnd)
+            xml.tag("endRepeat", _endRepeat);
       xml.tag("ending", _ending-1); //changed by DK. 28.08.07
       if (_irregular)
             xml.tagE("irregular");
@@ -2322,15 +2248,12 @@ void Measure::read(QDomElement e, int idx)
             if (tag == "BarLine") {
                   BarLine* barLine = new BarLine(score());
                   barLine->setParent(this);
-                  barLine->setStaff(staff);
                   barLine->read(e);
-                  if (barLine->subtype() == START_REPEAT) {
-                        barLine->setTick(tick());
-                        Segment* s = getSegment(barLine);
-                        s->add(barLine);
-                        }
-                  else
-                        setEndBarLine(barLine);
+                  setEndBarLineType(barLine->subtype(), false);
+                  delete barLine;
+                  barLine = endBarLine();
+                  if (barLine)
+                        barLine->setGenerated(false);
                   }
             else if (tag == "Chord") {
                   Chord* chord = new Chord(score());
@@ -2550,9 +2473,11 @@ void Measure::read(QDomElement e, int idx)
                   add(repeat);
                   }
             else if (tag == "startRepeat")
-                  _startRepeat = val.toInt();
-            else if (tag == "endRepeat")
+                  _repeatFlags |= RepeatStart;
+            else if (tag == "endRepeat") {
                   _endRepeat = val.toInt();
+                  _repeatFlags |= RepeatEnd;
+                  }
             else if (tag == "ending")
                   _ending = val.toInt()+1; //changed by DK. 28.08.07
             else if (tag == "Image") {
@@ -2600,9 +2525,11 @@ void Measure::read(QDomElement e)
                   ++staffIdx;
                   }
             else if (tag == "startRepeat")
-                  _startRepeat = val.toInt();
-            else if (tag == "endRepeat")
+                  _repeatFlags |= RepeatStart;
+            else if (tag == "endRepeat") {
                   _endRepeat = val.toInt();
+                  _repeatFlags |= RepeatEnd;
+                  }
             else if (tag == "ending")
                   _ending = val.toInt()+1; // changed by DK. 28.08.07
             else if (tag == "irregular")
@@ -2781,6 +2708,99 @@ void Measure::createVoice(int track)
                   score()->undoAddElement(rest);
                   }
             break;
+            }
+      }
+
+//---------------------------------------------------------
+//   setEndBarLineType
+//---------------------------------------------------------
+
+void Measure::setEndBarLineType(int type, bool generated)
+      {
+      QList<Part*>* pl = score()->parts();
+      foreach(Part* part, *pl) {
+            Staff* staff = part->staff(0);
+            int track = staff->idx() * VOICES;
+            bool found = false;
+            for (Segment* s = first(); s; s = s->next()) {
+                  if (s->subtype() != Segment::SegEndBarLine)
+                        continue;
+                  if (s->element(track)) {
+                        BarLine* bar = (BarLine*)(s->element(track));
+                        bar->setSubtype(type);
+                        bar->setGenerated(generated);
+                        found = true;
+                        }
+                  break;
+                  }
+            if (!found) {
+                  BarLine* bl = new BarLine(score());
+                  bl->setStaff(staff);
+                  bl->setSubtype(type);
+                  bl->setGenerated(generated);
+                  Segment* seg = getSegment(Segment::SegEndBarLine, tick() + tickLen());
+                  seg->add(bl);
+                  }
+            }
+      }
+
+//---------------------------------------------------------
+//   endBarLine
+//---------------------------------------------------------
+
+BarLine* Measure::endBarLine() const
+      {
+      for (const Segment* s = first(); s; s = s->next()) {
+            if (s->subtype() != Segment::SegEndBarLine)
+                  continue;
+            if (s->element(0))
+                  return (BarLine*)(s->element(0));
+            }
+      return 0;
+      }
+
+//---------------------------------------------------------
+//   endBarLineType
+//---------------------------------------------------------
+
+int Measure::endBarLineType() const
+      {
+      BarLine* bl = endBarLine();
+      if (bl)
+            return bl->subtype();
+      return NORMAL_BAR;
+      }
+
+//---------------------------------------------------------
+//   setStartRepeatBarLine
+//---------------------------------------------------------
+
+void Measure::setStartRepeatBarLine(bool val)
+      {
+      QList<Part*>* pl = score()->parts();
+      foreach(Part* part, *pl) {
+            int track = score()->staff(part) * VOICES;
+            bool found = false;
+            for (Segment* s = first(); s; s = s->next()) {
+                  if (s->subtype() != Segment::SegStartRepeatBarLine)
+                        continue;
+                  if (s->element(track)) {
+                        found = true;
+                        if (!val) {
+                              delete s->element(track);
+                              s->setElement(track, 0);
+                              break;
+                              }
+                        }
+                  }
+            if (!found && val) {
+                  BarLine* bl = new BarLine(score());
+                  bl->setStaff(part->staff(track/VOICES));
+                  bl->setSubtype(START_REPEAT);
+                  bl->setGenerated(true);
+                  Segment* seg = getSegment(Segment::SegStartRepeatBarLine, tick());
+                  seg->add(bl);
+                  }
             }
       }
 
