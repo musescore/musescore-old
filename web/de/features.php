@@ -6,7 +6,6 @@
 <h4>Features</h4>
 
 <table>
-
   <tr>
     <td>
       Automatische Anordnung der Notenköpfe in Akkorden:
