@@ -1,3 +1,7 @@
+19.9.7 (ws)
+      - fixed note entry with mouse for tuplets
+      - another try to fix geometry problem of tab widget, when there are more
+        than one scores loaded (not reproducible here)
 18.9.7
       (dk)
       - changed position of text "fine" to below the staff
