@@ -300,6 +300,7 @@ MuseScore::MuseScore()
       connect(removeTabButton, SIGNAL(clicked()), SLOT(removeTab()));
 
       canvas = new Canvas;
+      canvas->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
       layout->addLayout(hbox);
       layout->addWidget(canvas);
 

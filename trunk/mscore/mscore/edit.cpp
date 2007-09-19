@@ -582,14 +582,17 @@ void Score::putNote(const QPointF& pos, bool addToChord)
             }
       else {
             // replace chord
+            ChordRest* cr = (ChordRest*)searchNote(tick, track);
+            if (cr && cr->tuplet())
+                  len = cr->tuplet()->noteLen();
             if (_padState.rest)
                   setRest(tick, track, len);
             else
                   setNote(tick, track, pitch, len);
             }
-      _is.track     = _staves.indexOf(staff) + voice;
+      _is.track       = _staves.indexOf(staff) + voice;
       _padState.pitch = pitch;
-      _is.pos       = tick + len;
+      _is.pos         = tick + len;
       }
 
 //---------------------------------------------------------
