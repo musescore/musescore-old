@@ -48,6 +48,7 @@
 #include "key.h"
 #include "mscore.h"
 #include "canvas.h"
+#include "barline.h"
 
 extern Measure* tick2measure(int tick);
 
@@ -74,7 +75,9 @@ static const char* undoName[] = {
       "ChangeMeasureLen",
       "ChangeElement",
       "ChangeKey",
-      "InsertTime"
+      "InsertTime",
+      "ChangeRepeatFlags",
+      "ChangeEndBarLine"
       };
 
 static bool UNDO = false;
@@ -122,10 +125,9 @@ void Score::doUndo()
       InputState oIs(_is);
       sel->deselectAll(this);
       Undo* u = undoList.back();
-      QMutableListIterator<UndoOp> i(*u);
-      i.toBack();
-      while (i.hasPrevious()) {
-            UndoOp* op = &i.previous();
+      int n = u->size();
+      for (int i = n-1; i >= 0; --i) {
+            UndoOp* op = &(*u)[i];
             processUndoOp(op, true);
             if (op->type == UndoOp::ChangeAccidental) {
                   // HACK:
@@ -160,9 +162,9 @@ void Score::doRedo()
       InputState oIs(_is);
       sel->deselectAll(this);
       Undo* u = redoList.back();
-      QMutableListIterator<UndoOp> i(*u);
-      while (i.hasNext()) {
-            UndoOp* op = &i.next();
+      int n = u->size();
+      for (int i = n-1; i >= 0; --i) {
+            UndoOp* op = &(*u)[i];
             processUndoOp(op, false);
             if (op->type == UndoOp::ChangeAccidental) {
                   // HACK:
@@ -496,6 +498,19 @@ void Score::processUndoOp(UndoOp* i, bool undo)
                   fixTicks();
                   break;
 
+            case UndoOp::ChangeRepeatFlags:
+                  {
+                  int tmp = i->measure->repeatFlags();
+                  i->measure->setRepeatFlags(i->val1);
+                  i->val1 = tmp;
+                  }
+            case UndoOp::ChangeEndBarLine:
+                  {
+                  int tmp = i->measure->endBarLineType();
+                  i->measure->setEndBarLineType(i->val1, i->val1 != NORMAL_BAR);
+                  i->val1 = tmp;
+                  }
+                  break;
             }
       UNDO = FALSE;
       }
@@ -589,8 +604,8 @@ void Score::undoAddElement(Element* element)
       UndoOp i;
       i.type = UndoOp::AddElement;
       i.obj  = element;
-      processUndoOp(&i, false);
       undoList.back()->push_back(i);
+      processUndoOp(&undoList.back()->back(), false);
       }
 
 //---------------------------------------------------------
@@ -604,8 +619,8 @@ void Score::undoInsertTime(int tick, int len)
       i.type = UndoOp::InsertTime;
       i.val1  = tick;
       i.val2  = len;
-      processUndoOp(&i, false);
       undoList.back()->push_back(i);
+      processUndoOp(&undoList.back()->back(), false);
       }
 
 //---------------------------------------------------------
@@ -618,8 +633,8 @@ void Score::undoRemoveElement(Element* element)
       UndoOp i;
       i.type = UndoOp::RemoveElement;
       i.obj  = element;
-      processUndoOp(&i, false);
       undoList.back()->push_back(i);
+      processUndoOp(&undoList.back()->back(), false);
       }
 
 //---------------------------------------------------------
@@ -633,8 +648,8 @@ void Score::undoChangeMeasureLen(Measure* m, int tick)
       i.type     = UndoOp::ChangeMeasureLen;
       i.measure  = m;
       i.val1     = tick;
-      processUndoOp(&i, false);
       undoList.back()->push_back(i);
+      processUndoOp(&undoList.back()->back(), false);
       }
 
 //---------------------------------------------------------
@@ -648,8 +663,8 @@ void Score::undoChangeElement(Element* oldElement, Element* newElement)
       i.type     = UndoOp::ChangeElement;
       i.obj      = oldElement;
       i.obj2     = newElement;
-      processUndoOp(&i, false);
       undoList.back()->push_back(i);
+      processUndoOp(&undoList.back()->back(), false);
       }
 
 //---------------------------------------------------------
@@ -772,12 +787,11 @@ void Score::undoChangeSig(int tick, const SigEvent& o, const SigEvent& n)
       i.sig1 = o;
       i.sig2 = n;
       undoList.back()->push_back(i);
-      processUndoOp(&i, false);
+      processUndoOp(&undoList.back()->back(), false);
       }
 
 void Score::undoChangeTempo(int tick, const TEvent& o, const TEvent& n)
       {
-printf("undoChangeTempo\n");
       checkUndoOp();
       UndoOp i;
       i.type = UndoOp::ChangeTempo;
@@ -785,7 +799,7 @@ printf("undoChangeTempo\n");
       i.t1 = o;
       i.t2 = n;
       undoList.back()->push_back(i);
-      processUndoOp(&i, false);
+      processUndoOp(&undoList.back()->back(), false);
       }
 
 void Score::undoChangeKey(Staff* staff, int tick, int o, int n)
@@ -798,7 +812,7 @@ void Score::undoChangeKey(Staff* staff, int tick, int o, int n)
       i.val3 = n;
       i.staff = staff;
       undoList.back()->push_back(i);
-      processUndoOp(&i, false);
+      processUndoOp(&undoList.back()->back(), false);
       }
 
 void Score::undoChangeClef(Staff* staff, int tick, int o, int n)
@@ -811,7 +825,29 @@ void Score::undoChangeClef(Staff* staff, int tick, int o, int n)
       i.val3 = n;
       i.staff = staff;
       undoList.back()->push_back(i);
-      processUndoOp(&i, false);
+      processUndoOp(&undoList.back()->back(), false);
+      }
+
+void Score::undoChangeRepeatFlags(Measure* m, int flags)
+      {
+      checkUndoOp();
+      UndoOp i;
+      i.type = UndoOp::ChangeRepeatFlags;
+      i.measure = m;
+      i.val1 = flags;
+      undoList.back()->push_back(i);
+      processUndoOp(&undoList.back()->back(), false);
+      }
+
+void Score::undoChangeEndBarLine(Measure* m, int flags)
+      {
+      checkUndoOp();
+      UndoOp i;
+      i.type = UndoOp::ChangeEndBarLine;
+      i.measure = m;
+      i.val1 = flags;
+      undoList.back()->push_back(i);
+      processUndoOp(&undoList.back()->back(), false);
       }
 
 //---------------------------------------------------------

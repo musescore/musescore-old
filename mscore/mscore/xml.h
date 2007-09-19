@@ -63,11 +63,8 @@ class Xml : public QTextStream {
       void prop(QList<Prop> pl) { foreach(Prop p, pl) prop(p); }
 
       void tag(const QString& name, QVariant data);
-//      void tag(const char* name, double v)         { tag(name, QVariant(v)); }
-//      void tag(const char* name, qreal v)          { tag(name, QVariant(double(v))); }
       void tag(const char* name, const char* s)    { tag(name, QVariant(s)); }
       void tag(const char* name, const QString& s) { tag(name, QVariant(s)); }
-//      void tag(const char* name, const QString&, const QString&);
       void tag(const char* name, const QWidget*);
 
       void dump(int len, const unsigned char* p);

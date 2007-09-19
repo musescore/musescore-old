@@ -904,12 +904,6 @@ Measure* Score::appendMeasure()
             rest->setStaff(staffp);
             Segment* s = measure->getSegment(rest);
             s->add(rest);
-            BarLine* barLine = 0;
-            if (staffp->isTop()) {
-                  barLine = new BarLine(this);
-                  barLine->setStaff(staffp);
-                  measure->setEndBarLine(barLine);
-                  }
             }
       undoOp(UndoOp::InsertMeasure, measure);
       _layout->push_back(measure);
@@ -966,7 +960,7 @@ void Score::insertMeasures(int n)
 
 	int tick   = sel->tickStart;
 	int ticks  = sigmap->ticksMeasure(tick-1);
-// Loop added by DK 05.08.07
+
 	for (int ino = 0; ino < n; ++ino) {
 		Measure* m = new Measure(this);
 		m->setTick(tick);
@@ -977,14 +971,6 @@ void Score::insertMeasures(int n)
 			rest->setStaff(staffp);
 			Segment* s = m->getSegment(rest);
 			s->add(rest);
-			BarLine* barLine = 0;
-			if (staffp->isTop()) {
-				barLine = new BarLine(this);
-				barLine->setStaff(staffp);
-				m->setEndBarLine(barLine);
-			      }
-//printf ("In Insert Measures : %p , idx %d, nstaves %d, ino %d, n %d\n",
-//		m, idx, nstaves(), ino, n );
 		      }
             addMeasure(m);
 	      undoOp(UndoOp::InsertMeasure, m);

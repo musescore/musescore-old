@@ -35,6 +35,8 @@
 #include "note.h"
 #include "slur.h"
 #include "keysig.h"
+#include "barline.h"
+#include "repeat.h"
 
 //---------------------------------------------------------
 //   intmaxlog
@@ -429,6 +431,8 @@ System* ScoreLayout::layoutSystem(Measure*& im, System* system, qreal x, qreal y
             //    TODO: check if removed elements can be deleted
             //
             for (Segment* seg = m->first(); seg; seg = seg->next()) {
+                  if (seg->subtype() == Segment::SegEndBarLine)
+                        continue;
                   for (int staffIdx = 0;  staffIdx < nstaves; ++staffIdx) {
                         int track = staffIdx * VOICES;
                         Element* el = seg->element(track);
@@ -518,6 +522,43 @@ System* ScoreLayout::layoutSystem(Measure*& im, System* system, qreal x, qreal y
                         ts->setStaff(score()->staff(staff));
                         ts->setGenerated(true);
                         s->add(ts);
+                        }
+                  }
+            }
+
+      //
+      //    compute repeat bar lines
+      //
+      const QList<Measure*>& ml = system->measures();
+      int n                     = ml.size();
+      for (int i = 0; i < n; ++i) {
+            Measure* m = ml[i];
+            if (i == (n-1)) {
+                  if (m->repeatFlags() & RepeatEnd)
+                        m->setEndBarLineType(END_REPEAT, true);
+                  else {
+                        BarLine* bl = m->endBarLine();
+                        if (bl == 0 || bl->generated())
+                              m->setEndBarLineType(NORMAL_BAR, true);
+                        }
+                  }
+            else {
+                  if ((i == 0) && (m->repeatFlags() & RepeatStart))
+                        m->setStartRepeatBarLine(true);
+                  else
+                        m->setStartRepeatBarLine(false);
+                  if (m->repeatFlags() & RepeatEnd) {
+                        if (m->next()->repeatFlags() & RepeatStart)
+                              m->setEndBarLineType(END_START_REPEAT, true);
+                        else
+                              m->setEndBarLineType(END_REPEAT, true);
+                        }
+                  else if (m->next()->repeatFlags() & RepeatStart)
+                        m->setEndBarLineType(START_REPEAT, true);
+                  else {
+                        BarLine* bl = m->endBarLine();
+                        if (bl == 0 || bl->generated())
+                              m->setEndBarLineType(NORMAL_BAR, true);
                         }
                   }
             }

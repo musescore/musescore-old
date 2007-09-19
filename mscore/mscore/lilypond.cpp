@@ -261,11 +261,6 @@ void Lilypond::scanRest()
 void Lilypond::createMeasure()
       {
       if (tick >= measure->tick() + measure->tickLen()) {
-            BarLine* barLine = new BarLine(score);
-            barLine->setParent(measure);
-            barLine->setStaff(staff);
-            measure->setEndBarLine(barLine);
-
             measure = new Measure(score);
             measure->setTick(tick);
             measure->setTickLen(division * 4);
@@ -424,9 +419,5 @@ void Lilypond::convert()
                         break;
                   }
             }
-      BarLine* barLine = new BarLine(score);
-      barLine->setParent(measure);
-      barLine->setStaff(staff);
-      measure->setEndBarLine(barLine);
       }
 

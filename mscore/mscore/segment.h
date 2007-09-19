@@ -59,7 +59,7 @@ class Segment : public Element {
    public:
       enum SegmentType {
             SegClef, SegKeySig, SegTimeSig,
-            SegBarLine,       // usually a start repeat in first measure of system
+            SegStartRepeatBarLine,
             SegChordRest,
             SegBreath,
             SegEndBarLine, SegTimeSigAnnounce

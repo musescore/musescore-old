@@ -486,20 +486,8 @@ void MusicXml::xmlPart(QDomElement e, QString id)
 
       for (; !e.isNull(); e = e.nextSiblingElement()) {
             if (e.tagName() == "measure") {
-                  Measure* measure = xmlMeasure(part, e, e.attribute(QString("number")).toInt()-1);
-                  if (part == score->parts()->front()) {
-                        int staves = score->nstaves();
-                        for (int staff = 0; staff < staves; ++staff) {
-                              Staff* instr = score->staff(staff);
-                              if (instr->isTop()) {
-                                    BarLine* bar = new BarLine(score);
-                                    bar->setStaff(instr);
-                                    measure->setEndBarLine(bar);
-                                    }
-                              }
-                        }
+                  xmlMeasure(part, e, e.attribute(QString("number")).toInt()-1);
                   }
-
             else
                   domError(e);
             }

@@ -401,7 +401,7 @@ void System::layout2(ScoreLayout* layout)
                   int track = staffIdx * VOICES;
                   for (Segment* s = m->first(); s; s = s->next()) {
                         if ((s->subtype() != Segment::SegEndBarLine)
-                           && (s->subtype() != Segment::SegBarLine))
+                           && (s->subtype() != Segment::SegStartRepeatBarLine))
                               continue;
                         if (s->element(track)) {
                               BarLine* barLine = (BarLine*)(s->element(track));

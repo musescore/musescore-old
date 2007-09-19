@@ -1,4 +1,5 @@
 19.9.7 (ws)
+      - reorganized BarLine's
       - fixed note entry with mouse for tuplets
       - another try to fix geometry problem of tab widget, when there are more
         than one scores loaded (not reproducible here)
