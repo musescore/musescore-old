@@ -28,8 +28,6 @@
 #include "audio.h"
 #include "config.h"
 
-#ifdef USE_ALSA
-
 #define ALSA_PCM_NEW_HW_PARAMS_API
 #define ALSA_PCM_NEW_SW_PARAMS_API
 
@@ -106,7 +104,6 @@ class AlsaAudio : public Audio {
       volatile int runAlsa;
       int state;
       bool seekflag;
-      unsigned pos;
       double startTime;
 
       void registerClient();
@@ -132,42 +129,6 @@ class AlsaAudio : public Audio {
       void alsaLoop();
       void write(int n, void* l, void* r);
       };
-
-#else
-//---------------------------------------------------------
-//   AlsaAudio
-//    dummy
-//---------------------------------------------------------
-
-class AlsaAudio : public Audio {
-
-   public:
-      AlsaAudio() {}
-      virtual ~AlsaAudio() {}
-      virtual bool init() { return true; }
-      void* registerPort(const char*) { return 0; }
-      void unregisterPort(void*) {}
-      virtual std::list<QString> inputPorts() {
-            std::list<QString> a;
-            return a;
-            }
-      virtual bool start() { return false; }
-      virtual bool stop()  { return false; }
-      void connect(void*, void*) {}
-      void disconnect(void*, void*) {}
-      virtual bool isRealtime() const   { return false; }
-      virtual void startTransport() {}
-      virtual void stopTransport()  {}
-      virtual int getState()        { return 0; }
-      virtual int sampleRate() const { return 48000; }
-      };
-
-
-#endif
-
-extern bool initMidi();
-extern int getMidiReadFd();
-void readMidiEvent();
 
 #endif
 

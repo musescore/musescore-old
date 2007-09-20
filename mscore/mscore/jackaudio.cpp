@@ -20,7 +20,6 @@
 
 #include "jackaudio.h"
 
-#ifdef USE_JACK
 #include "preferences.h"
 #include "synti.h"
 #include "score.h"
@@ -396,6 +395,4 @@ int JackAudio::getState()
                   return Seq::STOP;
             }
       }
-
-#endif
 

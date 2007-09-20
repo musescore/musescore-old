@@ -39,7 +39,7 @@
 #include "sym.h"
 #include "padids.h"
 #include "pad.h"
-#include "alsa.h"
+// #include "alsa.h"
 #include "pagesettings.h"
 #include "listedit.h"
 #include "editstyle.h"

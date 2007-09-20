@@ -122,6 +122,9 @@ QT4_ADD_RESOURCES (qrc_files mscore.qrc)
 
 if (MINGW)
       set (resource_file ${PROJECT_BINARY_DIR}/resfile.o)
+      set (AUDIO pa.cpp)
+else (MINGW)
+      set (AUDIO jackaudio.cpp alsa.cpp)
 endif (MINGW)
 
 add_executable ( mscore
@@ -132,11 +135,11 @@ add_executable ( mscore
       ${PROJECT_BINARY_DIR}/all.h.pch
       ${resource_file}
 
-      actions.cpp accidental.cpp alsa.cpp barline.cpp beam.cpp
+      actions.cpp accidental.cpp barline.cpp beam.cpp
       bracket.cpp canvas.cpp chord.cpp chordrest.cpp clef.cpp
       cmd.cpp dynamics.cpp edit.cpp editinstrument.cpp editstyle.cpp
       edittempo.cpp element.cpp exportxml.cpp file.cpp fluid.cpp
-      hairpin.cpp icons.cpp importxml.cpp instrdialog.cpp jackaudio.cpp
+      hairpin.cpp icons.cpp importxml.cpp instrdialog.cpp
       key.cpp keyb.cpp layout.cpp layoutbreak.cpp line.cpp listedit.cpp
       measure.cpp menus.cpp midifile.cpp midi.cpp mscore.cpp
       mtime.cpp navigate.cpp navigator.cpp note.cpp ottava.cpp
@@ -153,6 +156,7 @@ add_executable ( mscore
       editdrumset.cpp editstaff.cpp drumset.cpp tremolo.cpp repeat.cpp
       repeat2.cpp
       lilypond.cpp exportly.cpp
+      ${AUDIO}
       )
 
 if (MINGW)
@@ -169,12 +173,13 @@ if (MINGW)
    set_target_properties( mscore
       PROPERTIES
          COMPILE_FLAGS "-include ${PROJECT_BINARY_DIR}/all.h ${QT_DEFINITIONS} -DQT_SVG_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_CORE_LIB"
-         LINK_FLAGS "${PROJECT_BINARY_DIR}/resfile.o -mwindows -L /home/ws/.wine/drive_c/Qt/4.3.1/lib"
+         LINK_FLAGS "${PROJECT_BINARY_DIR}/resfile.o -mwindows -L /home/ws/.wine/drive_c/Qt/4.3.1/lib -L /home/ws/mscore/portaudio/lib"
       )
    target_link_libraries(mscore
       fluid
       awl
       ${QT_mingw_LIBRARIES}
+      portaudio
       )
    install_targets ( /bin mscore )
    install_files ( /bin .dll
@@ -183,6 +188,7 @@ if (MINGW)
       /home/ws/.wine/drive_c/Qt/4.3.1/bin/QtGui4.dll
       /home/ws/.wine/drive_c/Qt/4.3.1/bin/QtXml4.dll
       /home/ws/.wine/drive_c/Qt/4.3.1/bin/QtSvg4.dll
+      /home/ws/mscore/portaudio/bin/portaudio.dll
       )
    install_files ( /bin/iconengines .dll
       /home/ws/.wine/drive_c/Qt/4.3.1/plugins/iconengines/qsvg4.dll

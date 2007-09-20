@@ -1969,7 +1969,7 @@ void Measure::cmdRemoveEmptySegment(Segment* s)
 
 bool Measure::genPropertyMenu(QMenu* popup) const
       {
-      QAction* a = popup->addAction(QT_TR_NOOP("set irregular"));
+      QAction* a = popup->addAction(QT_TR_NOOP("set irregular..."));
       a->setData("irregular");
       return true;
       }
@@ -2003,9 +2003,9 @@ void Measure::propertyAction(const QString& s)
             if (i != sl->end())
                   oldEvent = i->second;
 
-            printf("1.change sig at %d %s -> %s\n", tick(),
-               qPrintable(oldEvent.print()),
-               qPrintable(newEvent.print()));
+//            printf("1.change sig at %d %s -> %s\n", tick(),
+//               qPrintable(oldEvent.print()),
+//               qPrintable(newEvent.print()));
             score()->undoChangeSig(tick(), oldEvent, newEvent);
 
             //
@@ -2014,8 +2014,8 @@ void Measure::propertyAction(const QString& s)
             //
             i = sl->find(tick() + oldLen);
             if (i == sl->end()) {
-                  printf("2.add sig at %d %s\n", tick() + newLen,
-                     qPrintable(oev.print()));
+//                  printf("2.add sig at %d %s\n", tick() + newLen,
+//                     qPrintable(oev.print()));
                   score()->undoChangeSig(tick() + newLen, SigEvent(), oev);
                   }
             adjustToLen(oldLen, newLen);
@@ -2779,8 +2779,9 @@ void Measure::setStartRepeatBarLine(bool val)
       {
       QList<Part*>* pl = score()->parts();
       foreach(Part* part, *pl) {
-            int track = score()->staff(part) * VOICES;
-            bool found = false;
+            Staff* staff = part->staff(0);
+            int track    = staff->idx() * VOICES;
+            bool found   = false;
             for (Segment* s = first(); s; s = s->next()) {
                   if (s->subtype() != Segment::SegStartRepeatBarLine)
                         continue;
@@ -2795,7 +2796,7 @@ void Measure::setStartRepeatBarLine(bool val)
                   }
             if (!found && val) {
                   BarLine* bl = new BarLine(score());
-                  bl->setStaff(part->staff(track/VOICES));
+                  bl->setStaff(staff);
                   bl->setSubtype(START_REPEAT);
                   bl->setGenerated(true);
                   Segment* seg = getSegment(Segment::SegStartRepeatBarLine, tick());

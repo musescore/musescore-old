@@ -23,7 +23,7 @@
  Implementation of classes ElemList (complete) and Score (partial).
 */
 
-#include "alsa.h"
+// #include "alsa.h"
 #include "score.h"
 #include "key.h"
 #include "sig.h"
