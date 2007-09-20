@@ -24,7 +24,6 @@
 #include "config.h"
 #include "audio.h"
 
-#ifdef USE_JACK
 #include <jack/jack.h>
 
 //---------------------------------------------------------
@@ -61,39 +60,6 @@ class JackAudio : public Audio {
       virtual int sampleRate() const { return _sampleRate; }
       };
 
-#else
-
-//---------------------------------------------------------
-//   JackAudio
-//---------------------------------------------------------
-
-class JackAudio : public Audio {
-   public:
-      JackAudio() {}
-      virtual ~JackAudio() {}
-      virtual bool init() { return true; }
-      void* registerPort(const char*) { return 0; }
-      void unregisterPort(void*) {}
-      virtual std::list<QString> inputPorts() {
-            std::list<QString> a;
-            return a;
-            }
-      virtual bool start() { return false; }
-      virtual bool stop()  { return false; }
-      int framePos() const { return 0; }
-      void connect(void*, void*) {}
-      void disconnect(void*, void*) {}
-      float* getLBuffer(long) { return 0; }
-      float* getRBuffer(long) { return 0; }
-      virtual bool isRealtime() const   { return false; }
-      virtual void startTransport() {}
-      virtual void stopTransport()  {}
-      virtual int getState()        { return 0; }
-      virtual int sampleRate() const { return 48000; }
-      };
-
 #endif
-#endif
-
 
 

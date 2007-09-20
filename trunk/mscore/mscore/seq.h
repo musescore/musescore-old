@@ -138,6 +138,7 @@ class Seq : public QObject {
       bool isPlaying() const    { return state == PLAY; }
       bool isStopped() const    { return state == STOP; }
       void process(unsigned, float*, float*);
+      void process(unsigned, float*);
       std::list<QString> inputPorts();
       int sampleRate() const;
       int getEndTick() const    { return endTick; }
@@ -153,5 +154,8 @@ class Seq : public QObject {
 
 extern Seq* seq;
 extern void initSequencer();
+extern void readMidiEvent();
+extern bool initMidi();
+extern int getMidiReadFd();
 #endif
 

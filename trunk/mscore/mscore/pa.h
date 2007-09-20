@@ -1,7 +1,7 @@
 //=============================================================================
-//  MusE Score
+//  MuseScore
 //  Linux Music Score Editor
-//  $Id: fluid.h,v 1.6 2006/03/02 17:08:34 wschweer Exp $
+//  $Id:$
 //
 //  Copyright (C) 2002-2007 Werner Schweer and others
 //
@@ -18,36 +18,44 @@
 //  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //=============================================================================
 
-#ifndef __FLUID_H__
-#define __FLUID_H__
+#ifndef __PORTAUDIO_H__
+#define __PORTAUDIO_H__
 
 #include "config.h"
-#include "synti.h"
-#include "fluid/fluidsynth.h"
+#include "audio.h"
 
 //---------------------------------------------------------
-//   ISynth
+//   Portaudio
 //---------------------------------------------------------
 
-class ISynth : public Synth {
-      _fluid_synth_t* _fluidsynth;
+class Portaudio : public Audio {
+      bool initialized;
+      int _sampleRate;
 
-      mutable fluid_sfont_t* fluid_font;
-      mutable MidiPatch patch;
-
-      char* sfont;
-      int fontId;
+      int state;
+      bool seekflag;
+      unsigned pos;
+      double startTime;
 
    public:
-      ISynth();
-      ~ISynth() {}
-      virtual bool init(int sampleRate);
-      virtual bool loadSoundFont(const QString&);
-      virtual void process(unsigned, float*, float*);
-      virtual void process(unsigned, float*);
-      virtual void playNote(int channel, int pitch, int velo);
-      virtual bool setController(int ch, int ctrl, int val);
-      virtual const MidiPatch* getPatchInfo(int ch, const MidiPatch* p) const;
+      Portaudio();
+      virtual ~Portaudio();
+      virtual bool init();
+      void* registerPort(const char* name);
+      void unregisterPort(void* p);
+      virtual std::list<QString> inputPorts();
+      virtual bool start();
+      virtual bool stop();
+      int framePos() const;
+      void connect(void*, void*);
+      void disconnect(void* src, void* dst);
+      float* getLBuffer(long n);
+      float* getRBuffer(long n);
+      virtual bool isRealtime() const   { return false; }
+      virtual void startTransport();
+      virtual void stopTransport();
+      virtual int getState();
+      virtual int sampleRate() const { return _sampleRate; }
       };
 
 #endif

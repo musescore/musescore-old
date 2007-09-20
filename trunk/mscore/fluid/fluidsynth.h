@@ -829,8 +829,9 @@ FLUIDSYNTH_API int fluid_synth_write_s16(fluid_synth_t* synth, int len,
    *  \returns 0 if no error occured, non-zero otherwise
    */
 
-FLUIDSYNTH_API void fluid_synth_write_float(fluid_synth_t* synth, int len,
+void fluid_synth_write_float(fluid_synth_t* synth, int len,
    float* lout, float* rout);
+void fluid_synth_write_float(fluid_synth_t* synth, int len, float* out);
 
   /** Generate a number of samples. This function implements the
    *  default interface defined in fluidsynth/audio.h. This function

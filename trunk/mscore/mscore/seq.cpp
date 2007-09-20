@@ -23,8 +23,15 @@
 #include "seq.h"
 #include "mscore.h"
 #include "fluid.h"
+#ifdef USE_JACK
 #include "jackaudio.h"
+#endif
+#ifdef USE_ALSA
 #include "alsa.h"
+#endif
+#ifdef __MINGW32__
+#include "pa.h"
+#endif
 #include "slur.h"
 #include "score.h"
 #include "segment.h"
@@ -57,7 +64,6 @@ enum {
       ME_STOP       = 0xfc,
       };
 
-
 Seq* seq;
 
 //---------------------------------------------------------
@@ -72,7 +78,6 @@ Seq::Seq()
       playlistChanged = false;
       cs = 0;
 
-#ifndef __MINGW32__
       endTick  = 0;
       state    = STOP;
       synti    = new ISynth();
@@ -113,7 +118,6 @@ Seq::Seq()
       heartBeatTimer = new QTimer(this);
       connect(heartBeatTimer, SIGNAL(timeout()), this, SLOT(heartBeat()));
       heartBeatTimer->stop();
-#endif
       }
 
 //---------------------------------------------------------
@@ -132,19 +136,17 @@ Seq::~Seq()
 
 void Seq::setScore(Score* s)
       {
-#ifndef __MINGW32__
       if (cs) {
             disconnect(cs, SIGNAL(selectionChanged(int)), this, SLOT(selectionChanged(int)));
             stop();
-            while (state != STOP)
-                  usleep(100000);
+//TODO            while (state != STOP)
+//                  usleep(100000);
             }
       cs = s;
       playlistChanged = true;
       connect(cs, SIGNAL(selectionChanged(int)), SLOT(selectionChanged(int)));
       if (audio)
             seek(0);
-#endif
       }
 
 //---------------------------------------------------------
@@ -177,6 +179,15 @@ bool Seq::isRealtime() const
 bool Seq::init()
       {
       audio = 0;
+#ifdef __MINGW32__
+      audio = new Portaudio;
+      if (audio->init()) {
+            printf("no audio output found\n");
+            delete audio;
+            audio = 0;
+            }
+#endif
+#ifdef USE_JACK
       if (preferences.useJackAudio) {
             audio = new JackAudio;
             if (audio->init()) {
@@ -185,6 +196,8 @@ bool Seq::init()
                   audio = 0;
                   }
             }
+#endif
+#ifdef USE_ALSA
       if (audio == 0 && preferences.useAlsaAudio) {
             audio = new AlsaAudio;
             if (audio->init()) {
@@ -193,9 +206,11 @@ bool Seq::init()
                   audio = 0;
                   }
             }
+#endif
       if (audio == 0)
             return true;
-      if (synti->init(audio->sampleRate())) {
+      int sr = audio->sampleRate();
+      if (synti->init(sr)) {
             printf("Synti init failed\n");
             return true;
             }
@@ -220,7 +235,9 @@ void Seq::exit()
 
 int Seq::sampleRate() const
       {
-      return audio->sampleRate();
+      if (audio)
+            return audio->sampleRate();
+      return 44100;
       }
 
 //---------------------------------------------------------
@@ -247,7 +264,10 @@ int Seq::tick2frame(int tick) const
 
 std::list<QString> Seq::inputPorts()
       {
-      return audio->inputPorts();
+      if (audio)
+            return audio->inputPorts();
+      std::list<QString> a;
+      return a;
       }
 
 //---------------------------------------------------------
@@ -507,6 +527,102 @@ void Seq::playEvent(const Event& event)
 //   process
 //---------------------------------------------------------
 
+void Seq::process(unsigned n, float* buffer)
+      {
+      int frames = n;
+      int jackState = audio->getState();
+
+      if (state == START_PLAY && jackState == PLAY)
+            startTransport();
+      else if (state == PLAY && jackState == STOP)
+            stopTransport();
+      else if (state == START_PLAY && jackState == STOP)
+            stopTransport();
+      else if (state == STOP && jackState == PLAY)
+            startTransport();
+      else if (state != jackState)
+            printf("Seq: state transition %d -> %d ?\n",
+               state, jackState);
+
+      float* l = buffer;
+
+      //
+      // read messages from gui
+      //
+      SeqMsg msg;
+      while (read(fromThreadFdr, &msg, sizeof(SeqMsg)) == sizeof(SeqMsg)) {
+            switch(msg.id) {
+                  case SEQ_TEMPO_CHANGE:
+                        {
+                        int tick = frame2tick(playFrame);
+                        cs->tempomap->setRelTempo(msg.data1);
+                        playFrame = tick2frame(tick);
+                        }
+                        break;
+
+                  case SEQ_PLAY:
+                        {
+                        int channel = msg.data1 & 0xf;
+                        int type    = msg.data1 & 0xf0;
+                        if (type == ME_NOTEON)
+                              synti->playNote(channel, msg.data2, msg.data3);
+                        else if (type == ME_CONTROLLER)
+                              synti->setController(channel, msg.data2, msg.data3);
+                        }
+                        break;
+                  case SEQ_SEEK:
+                        setPos(msg.data1);
+                        break;
+
+                  default:
+                        printf("unknown seq msg %d\n", msg.id);
+                        break;
+                  }
+            }
+
+      if (state == PLAY) {
+
+            //
+            // collect events for one segment
+            //
+            int endFrame = playFrame + frames;
+            for (; playPos != events.end(); ++playPos) {
+                  int f = tick2frame(playPos->first);
+                  if (f >= endFrame)
+                        break;
+
+                  int n = f - playFrame;
+                  if (n < 0 || n > int(frames)) {
+                        printf("Seq: at %d bad n %d(>%d) = %d - %d\n",
+                           playPos->first, n, frames, f, playFrame);
+                        break;
+                        }
+                  synti->process(n, l);
+                  l         += n;
+                  playFrame += n;
+                  frames    -= n;
+                  playEvent(playPos->second);
+                  }
+            if (frames) {
+                  synti->process(frames, l);
+                  playFrame += frames;
+                  }
+            if (playPos == events.end()) {
+                  audio->stopTransport();
+                  }
+            }
+      else
+            synti->process(frames, l);
+
+      // apply volume:
+      for (unsigned i = 0; i < n * 2; ++i)
+            buffer[i] *= _volume;
+      }
+
+//---------------------------------------------------------
+//   process
+//---------------------------------------------------------
+
 void Seq::process(unsigned n, float* lbuffer, float* rbuffer)
       {
       int frames = n;
@@ -702,7 +818,7 @@ void Seq::collectEvents()
                         m = rs->pop(m);
                         if ( m > 0 && m->next() != 0)
                               continue;
-                        else if (m == 0) 
+                        else if (m == 0)
                                     m = ms;
                         m = m->next();
 
