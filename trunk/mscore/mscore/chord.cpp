@@ -1000,3 +1000,47 @@ LedgerLine::LedgerLine(Score* s)
       setLen(Spatium(2));
       }
 
+//---------------------------------------------------------
+//   readSlur
+//---------------------------------------------------------
+
+void Chord::readSlur(QDomElement e, int /*staff*/)
+      {
+      int type = 0;         // 0 - begin, 1 - end
+      Placement placement = PLACE_AUTO;
+
+      QString s = e.attribute("type", "");
+      if (s == "begin")
+            type = 0;
+      else if (s == "end")
+            type = 1;
+      else
+            printf("Chord::readSlur: unknown type <%s>\n", s.toLatin1().data());
+
+//      int number = e.attribute("number", "0").toInt();
+      s = e.attribute("placement", "");
+      if (s == "auto")
+            placement = PLACE_AUTO;
+      else if (s == "above")
+            placement = PLACE_ABOVE;
+      else if (s == "below")
+            placement = PLACE_BELOW;
+#if 0 //TODO
+      XmlSlur* xs = &(xml.slurs[number]);
+      if (type == 0) {
+            xs->tick = tick();
+            xs->placement = placement;
+            xs->voice = voice();
+            }
+      else {
+            Slur* slur = new Slur(score());
+            slur->setUpMode(xs->placement);
+
+            slur->setStart(xs->tick, staff);
+            slur->setEnd(tick(), staff);
+            measure()->add(slur);
+            }
+#endif
+      }
+
+
