@@ -86,18 +86,9 @@ bool ISynth::loadSoundFont(const QString& sfont)
 //   process
 //---------------------------------------------------------
 
-void ISynth::process(unsigned n, float* l, float* r)
+void ISynth::process(unsigned n, float* l, float* r, int stride)
       {
-      fluid_synth_write_float(_fluidsynth, n, l, r);
-      }
-
-//---------------------------------------------------------
-//   process
-//---------------------------------------------------------
-
-void ISynth::process(unsigned n, float* l)
-      {
-      fluid_synth_write_float(_fluidsynth, n, l);
+      fluid_synth_write_float(_fluidsynth, n, l, r, stride);
       }
 
 //---------------------------------------------------------

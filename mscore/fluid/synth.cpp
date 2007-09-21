@@ -1549,7 +1549,7 @@ void fluid_synth_set_chorus(fluid_synth_t* synth, int nr, double level,
 /*
  *  fluid_synth_write_float
  */
-void fluid_synth_write_float(fluid_synth_t* synth, int len, float* lout, float* rout)
+void fluid_synth_write_float(fluid_synth_t* synth, int len, float* lout, float* rout, int stride)
       {
       fluid_real_t* left_in  = synth->left_buf[0];
       fluid_real_t* right_in = synth->right_buf[0];
@@ -1561,28 +1561,10 @@ void fluid_synth_write_float(fluid_synth_t* synth, int len, float* lout, float* 
                   fluid_synth_one_block(synth);
                   l = 0;
                   }
-            lout[i] = left_in[l];
-            rout[i] = right_in[l];
-            }
-      synth->cur = l;
-      }
-
-/*
- *  fluid_synth_write_float
- */
-void fluid_synth_write_float(fluid_synth_t* synth, int len, float* out)
-      {
-      fluid_real_t* left_in  = synth->left_buf[0];
-      fluid_real_t* right_in = synth->right_buf[0];
-
-      int l = synth->cur;
-      for (int i = 0; i < len; i++, l++) {
-            if (l == FLUID_BUFSIZE) {
-                  fluid_synth_one_block(synth);
-                  l = 0;
-                  }
-            *out++ = left_in[l];
-            *out++ = right_in[l];
+            *lout = left_in[l];
+            *rout = right_in[l];
+            lout += stride;
+            rout += stride;
             }
       synth->cur = l;
       }

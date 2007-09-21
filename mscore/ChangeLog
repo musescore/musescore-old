@@ -2,6 +2,7 @@
       (dk)
       - implemented seconda volta
       (ws)
+      - fixed: read back TextStyle's from *msc files
       - fixed: read back tpc note values from *.msc files
       - added portaudio audio driver to support windows audio
 19.9.7 (ws)

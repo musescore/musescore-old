@@ -124,7 +124,8 @@ if (MINGW)
       set (resource_file ${PROJECT_BINARY_DIR}/resfile.o)
       set (AUDIO pa.cpp)
 else (MINGW)
-      set (AUDIO jackaudio.cpp alsa.cpp)
+#      set (AUDIO jackaudio.cpp alsa.cpp)
+      set (AUDIO jackaudio.cpp alsa.cpp pa.cpp)
 endif (MINGW)
 
 add_executable ( mscore
@@ -210,6 +211,7 @@ else (MINGW)
       ${ALSA_LIB}
       ${JACK_LIB}
       fluid
+      portaudio
       awl
       )
    install( TARGETS mscore RUNTIME DESTINATION bin )
