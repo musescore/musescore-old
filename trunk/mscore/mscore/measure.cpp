@@ -615,10 +615,11 @@ void Measure::layout2(ScoreLayout* layout)
                               case RepeatCoda:
                               case RepeatVarcoda:
                               case RepeatCodetta:
-                                    xo += element->width();
+                                    xo += (element->width()*.5);
+                                    yo += (element->bbox().height()*-.5);
                                     break;
                               case RepeatFine:
-                                    yo = (yo*-1)+bbox().height();
+                                    yo = (yo*-1)+(bbox().height()*.5)+(element->bbox().height());
                                     xo -= (element->width()*.5);
                               default:
                                     xo -= element->width();

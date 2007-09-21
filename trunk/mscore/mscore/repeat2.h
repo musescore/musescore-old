@@ -30,8 +30,9 @@
 
 enum RepTypes// types for repeat
 { 
-      START_REPEAT = 1,
-      END_REPEAT = 2,
+      NO = 0,
+      START = 1,
+      END = 2,
       SEGNO = 4,
       DALSEGNO = 8,
       CODA = 16,
@@ -59,7 +60,7 @@ class RepeatStack {
 
       RepeatStack* _prev; // Previouse Element
       RepeatStack* _next; // Next Element
-      int _noOffElements; // Number off All Elements on Stack, correct value only in firstStack*
+      int _noOffElements; // Number off All Elements on Stack
       int _active;        // Indicates wether the Element is active (only pushed) or inactive
                           // inactive means the Element was called by pop(),
                           // or elements with the same measure but differend types

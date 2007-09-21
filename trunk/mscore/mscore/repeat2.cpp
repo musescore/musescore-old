@@ -30,6 +30,8 @@
 // Add Volta more comfortable, da capo, dal segno, fine, coda
 //
 #include "repeat2.h"
+#include "element.h"
+#include "symbol.h"
 #include "repeat.h"
 #include "measure.h"
 #include "mscore.h"
@@ -114,13 +116,19 @@ Measure* RepeatStack::push(Measure* m)
                         p = setNewSlot(m);
                         p->setRepeatType(FINE);
                         p->setLoopCount(2);
-                        }
+                        }               
                   if ((type&(DACAPO|DALSEGNO))) {
                         if (p) {
                               p->setActive(SECONDTIME);
                               p->setLoopCount(p->getLoopCount()-1);
                               }
                         }
+                  else { 
+                        if (m != p->getStartMeasure()) { 
+                        // only one fine allowed, the last is the winner
+                              p->setStartMeasure(m);
+                              }
+                        } 
                   type &= ~(FINE);
                   }
 
@@ -140,35 +148,41 @@ Measure* RepeatStack::push(Measure* m)
                   }
 
             if (type&DALSEGNO) {
-                  if ((p = getSlot(m,DALSEGNO)) == 0x00) {
-                        p = setNewSlot(m);
-                        p->setRepeatType(DALSEGNO);
-                        }
-                  if (p->getActive() == FIRSTTIME) {
-                        p->setStartMeasure(m);
-                        p->setTicks2Add(m->tick());
-                        if ((pp = getSlotByType(SEGNO))) {
-                              p->setEndMeasure(pp->getStartMeasure());
-                              pp->setEndMeasure(m);
+            // D.S. and RepeatEnd does not make sense, ignore D.S.  
+                  if (!(type&END)) {
+                        if ((p = getSlot(m,DALSEGNO)) == 0x00) {
+                              p = setNewSlot(m);
+                              p->setRepeatType(DALSEGNO);
                               }
-                        p->setLoopCount(2);
+                        if (p->getActive() == FIRSTTIME) {
+                              p->setStartMeasure(m);
+                              p->setTicks2Add(m->tick());
+                              if ((pp = getSlotByType(SEGNO))) {
+                                    p->setEndMeasure(pp->getStartMeasure());
+                                    pp->setEndMeasure(m);
+                                    }
+                              p->setLoopCount(2);
+                              }
                         }
                   type &= ~(DALSEGNO);
                   }
 
             if (type&DACAPO) {
-                  if ((p = getSlot(m,DACAPO)) == 0x00) {
-                        p = setNewSlot(m);
-                        p->setRepeatType(DACAPO);
-                        }
-                  if (p->getActive() == FIRSTTIME) {
-                        p->setStartMeasure(m);
-                        p->setTicks2Add(m->tick());
-                        if ((pp = getSlotByType(CAPO))) {
-                              p->setEndMeasure(pp->getStartMeasure());
-                              pp->setEndMeasure(m);
+            // D.C. and RepeatEnd does not make sense, ignore D.C. 
+                  if (!(type&END)) {
+                        if ((p = getSlot(m,DACAPO)) == 0x00) {
+                              p = setNewSlot(m);
+                              p->setRepeatType(DACAPO);
                               }
-                        p->setLoopCount(2);
+                        if (p->getActive() == FIRSTTIME) {
+                              p->setStartMeasure(m);
+                              p->setTicks2Add(m->tick());
+                              if ((pp = getSlotByType(CAPO))) {
+                                    p->setEndMeasure(pp->getStartMeasure());
+                                    pp->setEndMeasure(m);
+                                    }
+                              p->setLoopCount(2);
+                              }
                         }
                   type &= ~(DACAPO);
                   }
@@ -202,6 +216,64 @@ Measure* RepeatStack::push(Measure* m)
                   type &= ~(CAPO);
                   }
 
+            if (type&S_VOLTA) {
+                  if ((p = getSlot(m,S_VOLTA)) == 0x00) {
+                        p = setNewSlot(m);
+                        p->setRepeatType(S_VOLTA);
+                        p->setLoopCount(2);
+                        }
+                  if (repeatEachTime && p->getActive() == THIRDTIME) {
+                        pp = p->getNext();
+                        while (pp) {
+                              if (pp->getRepeatType() == S_VOLTA) {
+                                    pp->setActive(FIRSTTIME);
+                                    if (pp->getStartMeasure()->endRepeat()) {
+                                          getSlot(pp->getStartMeasure(),END)->setActive(FIRSTTIME);
+                                          getSlot(pp->getStartMeasure(),END)->setLoopCount(2);
+                                          }
+                                    pp = pp->getNext();
+                                    }
+                              else
+                                    break;
+                              }
+                        p->setActive(FIRSTTIME);
+                        p->setLoopCount(2);
+                        }                                 
+                  if (p->getActive() == FIRSTTIME) {
+                        // check end of seconda volta
+                        int tl = 0;
+                        for (mm = m; mm;) {
+                              if (mm->ending() != 2) {
+                                    p->setEndMeasure(mm);
+                                    break;
+                                    }
+                              tl += m->tickLen();
+                              mm = mm->next();
+                              }
+                        p->setTicks2Add(tl);
+                        if (!mm)
+                              p->setEndMeasure(m);
+                        p->setLoopCount(p->getLoopCount()-1);
+                        p->setActive(SECONDTIME);
+                        mm = m->prev();
+                        // if the measure before was end of repeat and prima volta,
+                        // accept this as a part of the repeat-loop and in this case
+                        // the first time is to take as second time, play the part
+                        if ((!mm) || 
+                              (!((mm && mm->repeatFlags() & RepeatEnd) 
+                               && mm->ending() == 1))) {
+                              ret = p->getEndMeasure();
+                              rtickOffSet = rtickOffSet - p->getTicks2Add();
+                              push(ret);
+                              }
+                        }                              
+                  else {
+                        p->setLoopCount(p->getLoopCount()-1);
+                        p->setActive(THIRDTIME);
+                        }
+                  type &= ~(S_VOLTA);
+                  }
+
             if (type&P_VOLTA) {
                   if ((p = getSlot(m,P_VOLTA)) == 0x00) {
                         p = setNewSlot(m);
@@ -209,8 +281,8 @@ Measure* RepeatStack::push(Measure* m)
                         p->setLoopCount(2);
                         }
                   if (repeatEachTime && p->getActive() == THIRDTIME) {
-                        if (type&END_REPEAT) {
-                              pp = getSlot(m,END_REPEAT);
+                        if (type&END) {
+                              pp = getSlot(m,END);
                               pp->setActive(FIRSTTIME);
                               pp->setLoopCount(1);
                               }
@@ -219,8 +291,8 @@ Measure* RepeatStack::push(Measure* m)
                               if (pp->getRepeatType() == P_VOLTA) {
                                     pp->setActive(FIRSTTIME);
                                     if (pp->getStartMeasure()->endRepeat()) {
-                                          getSlot(pp->getStartMeasure(),END_REPEAT)->setActive(FIRSTTIME);
-                                          getSlot(pp->getStartMeasure(),END_REPEAT)->setLoopCount(1);
+                                          getSlot(pp->getStartMeasure(),END)->setActive(FIRSTTIME);
+                                          getSlot(pp->getStartMeasure(),END)->setLoopCount(1);
                                           }
                                     pp = pp->getNext();
                                     }
@@ -231,7 +303,6 @@ Measure* RepeatStack::push(Measure* m)
                         }
                   if (p->getActive() == FIRSTTIME) {
                         // check end of prima volta
-                        // at the time it's 'this'->next() measure
                         int tl = 0;
                         for (mm = m; mm;) {
                               if (mm->ending() != 1) {
@@ -255,15 +326,15 @@ Measure* RepeatStack::push(Measure* m)
                   type &= ~(P_VOLTA);
                   }
 
-            if (type&START_REPEAT) {
-                  if ((p = getSlot(m,START_REPEAT)) == 0x00) {
+            if (type&START) {
+                  if ((p = getSlot(m,START)) == 0x00) {
                         p = setNewSlot(m);
-                        p->setRepeatType(START_REPEAT);
+                        p->setRepeatType(START);
                         }
                   if (repeatEachTime)
                         p->setActive(FIRSTTIME);
                   if (p->getActive() == FIRSTTIME) {
-                        pp = getLastSlotByType(END_REPEAT);
+                        pp = getLastSlotByType(END);
                         if (pp && pp->getEndMeasure() == p->getStartMeasure()) {
                               p->setEndMeasure(pp->getStartMeasure());
                               }
@@ -274,18 +345,18 @@ Measure* RepeatStack::push(Measure* m)
                         }
                   else
                         p->setLoopCount(p->getLoopCount()+1);
-                  type &= ~(START_REPEAT);
+                  type &= ~(START);
                   }
 
-            if (type&END_REPEAT) {
-                  if ((p = getSlot(m,END_REPEAT)) == 0x00) {
+            if (type&END) {
+                  if ((p = getSlot(m,END)) == 0x00) {
                         p = setNewSlot(m);
-                        p->setRepeatType(END_REPEAT);
+                        p->setRepeatType(END);
                         }
                         if (p->getActive() == FIRSTTIME) {
-                              pp = getSlot(p->getEndMeasure(),START_REPEAT);
+                              pp = getSlot(p->getEndMeasure(),START);
                               if (!pp)
-                                    pp = getLastActiveSlotByType(START_REPEAT);
+                                    pp = getLastActiveSlotByType(START);
                               if (!pp)
                                     pp = getSlotByType(CAPO);
                               if (pp) {
@@ -295,17 +366,10 @@ Measure* RepeatStack::push(Measure* m)
                                     p->setLoopCount(m->endRepeat());
                                     }
                               }
-                  type &= ~(END_REPEAT);
+                  type &= ~(END);
                   }
 
-            if (type&S_VOLTA) {
-                  if ((p = getSlot(m,S_VOLTA)) == 0x00) {
-                        p = setNewSlot(m);
-                        p->setRepeatType(S_VOLTA);
-                        }
-                  pp = getLastActiveSlotByType(P_VOLTA);
-                  type &= ~(S_VOLTA);
-                  }
+
             if (type&T_VOLTA) {
                   type &= ~(T_VOLTA);
                   }
@@ -367,6 +431,14 @@ Measure* RepeatStack::pop(Measure* m)
                   ret = 0x00;
                   type &= ~(NORMAL);
                   }
+            if (type&CAPO) {
+                  ret = 0x00;
+                  type &= ~(CAPO);
+                  }
+            if (type&SEGNO) {
+                  ret = 0x00;
+                  type &= ~(SEGNO);
+                  }
             if (type&FINE) {
                   ret = 0x00;
                   if ((p = getSlotByType(FINE)) != 0x00) {
@@ -382,15 +454,21 @@ Measure* RepeatStack::pop(Measure* m)
                   }
             if (type&P_VOLTA) {
                   p = getSlot(m,P_VOLTA);
-                  if (p->getActive() == FIRSTTIME) {
+                  if (p && p->getActive() == FIRSTTIME) {
                         p->setActive(SECONDTIME);
-                        p->setTickOffset(p->getTicks2Add()+
-                                         m->tickLen());
+/*                        p->setTickOffset(p->getTicks2Add()+
+                                         m->tickLen()); */
                         }
                   ret = 0x00;
                   type &= ~(P_VOLTA);
                   }
             if (type&S_VOLTA) {
+                  p = getSlot(m,S_VOLTA);
+                  if (p && p->getActive() == FIRSTTIME) {
+                        p->setActive(SECONDTIME);
+/*                        p->setTickOffset(p->getTicks2Add()+
+                                         m->tickLen());*/
+                        }
                   ret = 0x00;
                   type &= ~(S_VOLTA);
                   }
@@ -398,87 +476,85 @@ Measure* RepeatStack::pop(Measure* m)
                   ret = 0x00;
                   type &= ~(T_VOLTA);
                   }
-            if (type&CAPO) {
-                  ret = 0x00;
-                  type &= ~(CAPO);
-                  }
-            if (type&SEGNO) {
-                  ret = 0x00;
-                  type &= ~(SEGNO);
-                  }
             if (type&DACAPO) {
-                  p =getSlot(m,DACAPO);
-                  pp = getSlot(p->getEndMeasure(),CAPO);
-                  if (pp) {
-                        if (p->getActive() == FIRSTTIME) {
-                              p->setTickOffset((p->getTicks2Add() -
-                                                pp->getTicks2Add()) +
-                                                m->tickLen());
-                              ret = p->getEndMeasure();
-                              p->setActive(SECONDTIME);
-                              }
-                        if (p->getLoopCount() <= 1) {
-                              if (repeatEachTime)
-                                    p->setActive(FIRSTTIME);
-                              else
-                                    p->setActive(THIRDTIME);
-                              ret = 0x00;
-                              }
-                        else {
-                              p->setLoopCount(p->getLoopCount()-1);
-                              rtickOffSet += p->getTickOffset();
-                              ret = p->getEndMeasure();
+            // D.C. and RepeatEnd does not make sense, ignore D.C.  
+                  if (!(type&END)) {
+                        p =getSlot(m,DACAPO);
+                        pp = getSlot(p->getEndMeasure(),CAPO);
+                        if (pp) {
+                              if (p->getActive() == FIRSTTIME) {
+                                    p->setTickOffset((p->getTicks2Add() -
+                                                      pp->getTicks2Add()) +
+                                                      m->tickLen());
+                                    ret = p->getEndMeasure();
+                                    p->setActive(SECONDTIME);
+                                    }
+                              if (p->getLoopCount() <= 1) {
+                                    if (repeatEachTime)
+                                          p->setActive(FIRSTTIME);
+                                    else
+                                          p->setActive(THIRDTIME);
+                                    ret = 0x00;
+                                    }
+                              else {
+                                    p->setLoopCount(p->getLoopCount()-1);
+                                    rtickOffSet += p->getTickOffset();
+                                    ret = p->getEndMeasure();
+                                    }
                               }
                         }
                   type &= ~(DACAPO);
                   }
             if (type&DALSEGNO) {
-                  p = getSlot(m,DALSEGNO);
-                  pp = getSlot(p->getEndMeasure(),SEGNO);
-                  if (pp) {
-                        if (p->getActive() == FIRSTTIME) {
-                              p->setTickOffset((p->getTicks2Add() -
-                                                pp->getTicks2Add()) +
-                                                m->tickLen());
-                              ret = p->getEndMeasure();
-                              p->setActive(SECONDTIME);
+            // D.S. and RepeatEnd does not make sense, ignore D.S.  
+                  if (!(type&END)) {
+                        p = getSlot(m,DALSEGNO);
+                        pp = getSlot(p->getEndMeasure(),SEGNO);
+                        if (pp) {
+                              if (p->getActive() == FIRSTTIME) {
+                                    p->setTickOffset((p->getTicks2Add() -
+                                                      pp->getTicks2Add()) +
+                                                      m->tickLen());
+                                    ret = p->getEndMeasure();
+                                    p->setActive(SECONDTIME);
+                                    }
+                              if (p->getLoopCount() <= 1) {
+                                    if (repeatEachTime)
+                                          p->setActive(FIRSTTIME);
+                                   else
+                                          p->setActive(THIRDTIME);
+                                    ret = 0x00;
+                                    }
+                              else {
+                                    p->setLoopCount(p->getLoopCount()-1);
+                                    rtickOffSet += p->getTickOffset();
+                                    ret = p->getEndMeasure();
+                                    }
                               }
-                        if (p->getLoopCount() <= 1) {
-                              if (repeatEachTime)
-                                    p->setActive(FIRSTTIME);
-                             else
-                                    p->setActive(THIRDTIME);
+                        else { // here if no "segno" before "dal segno"
+                              if (p->getPrev())
+                                    p->getPrev()->setNext(p->getNext());
+                              if (p->getNext())
+                                    p->getNext()->setPrev(p->getPrev());
+                              delStackElement(p);
                               ret = 0x00;
                               }
-                        else {
-                              p->setLoopCount(p->getLoopCount()-1);
-                              rtickOffSet += p->getTickOffset();
-                              ret = p->getEndMeasure();
-                              }
-                        }
-                  else { // here if no "segno" before "dal segno"
-                        if (p->getPrev())
-                              p->getPrev()->setNext(p->getNext());
-                        if (p->getNext())
-                              p->getNext()->setPrev(p->getPrev());
-                        delStackElement(p);
-                        ret = 0x00;
                         }
                   type &= ~(DALSEGNO);
                   }
-            if (type&START_REPEAT) {
-                  p = getSlot(m,START_REPEAT);
+            if (type&START) {
+                  p = getSlot(m,START);
                   if (p->getActive() == THIRDTIME && repeatEachTime) {
                         p->setActive(FIRSTTIME);
-                        pp = getSlot(p->getEndMeasure(),END_REPEAT);
+                        pp = getSlot(p->getEndMeasure(),END);
                         pp->setActive(FIRSTTIME);
                         }
                   ret = 0x00;
-                  type &= ~(START_REPEAT);
+                  type &= ~(START);
                   }
-            if (type&END_REPEAT) {
-                  p = getSlot(m,END_REPEAT);
-                  pp = getSlot(p->getEndMeasure(),START_REPEAT);
+            if (type&END) {
+                  p = getSlot(m,END);
+                  pp = getSlot(p->getEndMeasure(),START);
                   if (!pp)
                         pp = getSlotByType(CAPO);
                   if (p->getActive() == FIRSTTIME) {
@@ -499,7 +575,7 @@ Measure* RepeatStack::pop(Measure* m)
                         rtickOffSet += p->getTickOffset();
                         ret = p->getEndMeasure();
                         }
-                  type &= ~(END_REPEAT);
+                  type &= ~(END);
                   }
             }
       return ret;
@@ -694,12 +770,13 @@ int RepeatStack::checkType(Measure* m)
       {
       int type = 0;
 
+//      if ((m->first()->ElementType()) == RepeatMeasure)
+//            ;
+
       if (m->prev() == 0)
             type |= CAPO;
-      if (m->repeatFlags() & RepeatStart)
-            type |= START_REPEAT;
       if (m->endRepeat() > 0)
-            type |= END_REPEAT;
+            type |= END;
       if (m->ending() == 1)
             type |= P_VOLTA;
       if (m->ending() == 2)
@@ -707,29 +784,31 @@ int RepeatStack::checkType(Measure* m)
       if (m->ending() == 3)
             type |= T_VOLTA;
 
-      if (m->repeatFlags() == RepeatSegno)
+      if (m->repeatFlags() & RepeatStart)
+            type |= START;
+      if (m->repeatFlags() & RepeatSegno)
             type |= SEGNO;
-      if (m->repeatFlags() == RepeatCoda)
+      if (m->repeatFlags() & RepeatCoda)
             type |= CODA;
-      if (m->repeatFlags() == RepeatVarcoda)
+      if (m->repeatFlags() & RepeatVarcoda)
             type |= VARCODA;
-      if (m->repeatFlags() == RepeatCodetta)
+      if (m->repeatFlags() & RepeatCodetta)
             type |= CODETTA;
-      if (m->repeatFlags() == RepeatDacapo)
+      if (m->repeatFlags() & RepeatDacapo)
             type |= DACAPO;
-      if (m->repeatFlags() == RepeatDacapoAlFine)
+      if (m->repeatFlags() & RepeatDacapoAlFine)
             type |= (DACAPO | FINE);
-      if (m->repeatFlags() == RepeatDacapoAlCoda)
+      if (m->repeatFlags() & RepeatDacapoAlCoda)
             type |= (DACAPO | ALCODA);
-      if (m->repeatFlags() == RepeatDalSegno)
+      if (m->repeatFlags() & RepeatDalSegno)
             type |= DALSEGNO;
-      if (m->repeatFlags() == RepeatDalSegnoAlFine)
+      if (m->repeatFlags() & RepeatDalSegnoAlFine)
             type |= (DALSEGNO | FINE);
-      if (m->repeatFlags() == RepeatDalSegnoAlCoda)
+      if (m->repeatFlags() & RepeatDalSegnoAlCoda)
             type |= (DALSEGNO | ALCODA);
-      if (m->repeatFlags() == RepeatAlSegno)
+      if (m->repeatFlags() & RepeatAlSegno)
             type |= ALSEGNO;
-      if (m->repeatFlags() == RepeatFine)
+      if (m->repeatFlags() & RepeatFine)
             type |= FINE;
       if (!type)
             type |= NORMAL;
