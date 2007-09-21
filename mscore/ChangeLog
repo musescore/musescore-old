@@ -6,7 +6,7 @@
       - fixed: another tuplet entry bug
       - fixed: read back TextStyle's from *msc files
       - fixed: read back tpc note values from *.msc files
-      - added portaudio audio driver to support windows audio
+      - added portaudio audio driver
 19.9.7 (ws)
       - reorganized BarLine's
       - fixed note entry with mouse for tuplets

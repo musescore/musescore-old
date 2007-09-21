@@ -210,8 +210,8 @@ else (MINGW)
       ${QT_LIBRARIES}
       ${ALSA_LIB}
       ${JACK_LIB}
+      ${PORTAUDIO_LIB}
       fluid
-      portaudio
       awl
       )
    install( TARGETS mscore RUNTIME DESTINATION bin )

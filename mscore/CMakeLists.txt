@@ -100,7 +100,6 @@ endif (APPLE OR MINGW)
 ##
 
 if (MINGW)
-      message("no JACK in MINGW build")
       set (USE_JACK 0)
 else (MINGW)
       PKGCONFIG (jack 0.98.0 JACK_INCDIR JACK_LIBDIR JACK_LIB JACK_CPP )
@@ -110,6 +109,16 @@ if (JACK_INCDIR)
 	message("Jack detected")
       set ( USE_JACK 1 )
 endif (JACK_INCDIR)
+
+##
+## portaudio
+##
+
+PKGCONFIG (portaudio-2.0 19 PORTAUDIO_INCDIR PORAUDIO_LIBDIR PORTAUDIO_LIB PORTAUDIO_CPP )
+if (PORTAUDIO_INCDIR)
+	message("portaudio detected")
+      set ( USE_PORTAUDIO 1 )
+endif (PORTAUDIO_INCDIR)
 
 #
 # produce config.h file

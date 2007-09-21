@@ -29,7 +29,7 @@
 #ifdef USE_ALSA
 #include "alsa.h"
 #endif
-#ifdef __MINGW32__
+#ifdef USE_PORTAUDIO
 #include "pa.h"
 #endif
 
@@ -154,23 +154,6 @@ bool Seq::init()
       {
       audio = 0;
 
-#if 0
-      audio = new Portaudio;
-      if (audio->init()) {
-            printf("no audio output found\n");
-            delete audio;
-            audio = 0;
-            }
-#endif
-
-#ifdef __MINGW32__
-      audio = new Portaudio;
-      if (audio->init()) {
-            printf("no audio output found\n");
-            delete audio;
-            audio = 0;
-            }
-#endif
 #ifdef USE_JACK
       if (preferences.useJackAudio) {
             audio = new JackAudio;
@@ -179,6 +162,8 @@ bool Seq::init()
                   delete audio;
                   audio = 0;
                   }
+            else
+                  useJACK = true;
             }
 #endif
 #ifdef USE_ALSA
@@ -189,8 +174,23 @@ bool Seq::init()
                   delete audio;
                   audio = 0;
                   }
+            else
+                  useALSA = true;
             }
 #endif
+#ifdef USE_PORTAUDIO
+      if (audio == 0 && preferences.usePortaudioAudio) {
+            audio = new Portaudio;
+            if (audio->init()) {
+                  printf("no audio output found\n");
+                  delete audio;
+                  audio = 0;
+                  }
+            else
+                  usePortaudio = true;
+            }
+#endif
+
       if (audio == 0)
             return true;
       int sr = audio->sampleRate();
@@ -566,8 +566,8 @@ void Seq::process(unsigned n, float* lbuffer, float* rbuffer, int stride)
                         break;
                         }
                   synti->process(n, l, r, stride);
-                  l         += n;
-                  r         += n;
+                  l         += n * stride;
+                  r         += n * stride;
                   playFrame += n;
                   frames    -= n;
                   playEvent(playPos->second);
