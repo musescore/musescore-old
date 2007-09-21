@@ -68,10 +68,12 @@ struct Preferences {
       QPoint playPanelPos;
       bool useAlsaAudio;
       bool useJackAudio;
+      bool usePortaudioAudio;
       QString alsaDevice;
       int alsaSampleRate;
       int alsaPeriodSize;
       int alsaFragments;
+      int portaudioDevice;
       QColor layoutBreakColor;
       bool antialiasedDrawing;
       SessionStart sessionStart;
@@ -122,6 +124,7 @@ class PreferenceDialog : public QDialog, private Ui::PrefsDialogBase {
       void resetShortcutClicked();
       void clearShortcutClicked();
       void defineShortcutClicked();
+      void portaudioApiActivated(int idx);
 
    signals:
       void preferencesChanged();
@@ -132,4 +135,5 @@ class PreferenceDialog : public QDialog, private Ui::PrefsDialogBase {
 
 extern Preferences preferences;
 extern QString appStyleSheet;
+extern bool useALSA, useJACK, usePortaudio;
 #endif

@@ -28,15 +28,12 @@
 
 PaStream* stream;
 
-/* This routine will be called by the PortAudio engine when audio is needed.
-** It may called at interrupt level on some machines so don't do anything
-** that could mess up the system like calling malloc() or free().
-*/
+//---------------------------------------------------------
+//   paCallback
+//---------------------------------------------------------
 
-int paCallback(const void* /*in*/, void* out, long unsigned frames,
-   const PaStreamCallbackTimeInfo* timeInfo,
-   PaStreamCallbackFlags statusFlags,
-   void *)
+int paCallback(const void*, void* out, long unsigned frames,
+   const PaStreamCallbackTimeInfo*, PaStreamCallbackFlags, void *)
       {
       float* op = (float*)out;
       seq->process((unsigned)frames, op, op+1, 2);
@@ -52,9 +49,8 @@ Portaudio::Portaudio()
       {
       _sampleRate = 44100;
       initialized = false;
-      state     = Seq::STOP;
-      seekflag  = false;
-//      startTime = curTime();
+      state       = Seq::STOP;
+      seekflag    = false;
       }
 
 //---------------------------------------------------------
@@ -82,26 +78,72 @@ bool Portaudio::init()
 
       initialized = true;
 
-      PaHostApiIndex apis = Pa_GetHostApiCount();
-      PaHostApiIndex defaultApi = Pa_GetDefaultHostApi();
-
-      printf("Portaudio: host api count %d, default api %d\n", apis, defaultApi);
-      for (PaHostApiIndex i = 0; i < apis; ++i) {
-            const PaHostApiInfo* info = Pa_GetHostApiInfo(i);
-            printf("Portaudio: api <%s> %d devices (default %d %d)\n",
-               info->name, info->deviceCount, info->defaultInputDevice,
-               info->defaultOutputDevice);
-            }
+      PaDeviceIndex idx = preferences.portaudioDevice;
+      if (idx == -1)
+            idx = Pa_GetDefaultOutputDevice();
 
       /* Open an audio I/O stream. */
-      err = Pa_OpenDefaultStream(&stream, 0, 2, paFloat32, double(_sampleRate), 256,
-              paCallback, (void*)this);
+      struct PaStreamParameters out;
+
+      out.device = idx;
+      out.channelCount = 2;
+      out.sampleFormat = paFloat32;
+      out.suggestedLatency = 0.100;
+      out.hostApiSpecificStreamInfo = 0;
+
+      err = Pa_OpenStream(&stream, 0, &out,
+            double(_sampleRate),
+            0,
+            0,
+            paCallback,
+            (void*)this);
 
       if (err != paNoError) {
             printf("Portaudio open default stream failed: %s\n", Pa_GetErrorText(err));
             return true;
             }
       return false;
+      }
+
+//---------------------------------------------------------
+//   apiList
+//---------------------------------------------------------
+
+QStringList Portaudio::apiList() const
+      {
+      QStringList al;
+
+      PaHostApiIndex apis = Pa_GetHostApiCount();
+      for (PaHostApiIndex i = 0; i < apis; ++i) {
+            const PaHostApiInfo* info = Pa_GetHostApiInfo(i);
+            al.append(info->name);
+            }
+      return al;
+      }
+
+//---------------------------------------------------------
+//   deviceList
+//---------------------------------------------------------
+
+QStringList Portaudio::deviceList(int apiIdx)
+      {
+      QStringList dl;
+      const PaHostApiInfo* info = Pa_GetHostApiInfo(apiIdx);
+      for (int i = 0; i < info->deviceCount; ++i) {
+            PaDeviceIndex idx = Pa_HostApiDeviceIndexToDeviceIndex(apiIdx, i);
+            const PaDeviceInfo* di = Pa_GetDeviceInfo(idx);
+            dl.append(di->name);
+            }
+      return dl;
+      }
+
+//---------------------------------------------------------
+//   deviceIndex
+//---------------------------------------------------------
+
+int Portaudio::deviceIndex(int apiIdx, int apiDevIdx)
+      {
+      return Pa_HostApiDeviceIndexToDeviceIndex(apiIdx, apiDevIdx);
       }
 
 //---------------------------------------------------------

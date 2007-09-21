@@ -18,6 +18,7 @@
 //  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //=============================================================================
 
+#include "config.h"
 #include "xml.h"
 #include "score.h"
 #include "mscore.h"
@@ -32,9 +33,12 @@
 #include "canvas.h"
 #include "sym.h"
 #include "palette.h"
+#include "pa.h"
 
 extern void writeShortcuts();
 extern void readShortcuts();
+
+bool useALSA = false, useJACK = false, usePortaudio = false;
 
 QString appStyleSheet(
       "Pad *             { background-color: rgb(220, 220, 220) }\n"
@@ -119,10 +123,12 @@ Preferences::Preferences()
       playPanelPos       = QPoint(100, 300);
       useAlsaAudio       = true;
       useJackAudio       = true;
+      usePortaudioAudio  = true;
       alsaDevice         = "default";
       alsaSampleRate     = 48000;
       alsaPeriodSize     = 1024;
       alsaFragments      = 3;
+      portaudioDevice    = -1;
       soundFont          = ":/data/piano1.sf2";
       layoutBreakColor   = Qt::green;
       antialiasedDrawing = true;
@@ -182,10 +188,12 @@ void Preferences::write()
       s.setValue("showPad",            showPad);
       s.setValue("useAlsaAudio",       useAlsaAudio);
       s.setValue("useJackAudio",       useJackAudio);
+      s.setValue("usePortaudioAudio",  usePortaudioAudio);
       s.setValue("alsaDevice",         alsaDevice);
       s.setValue("alsaSampleRate",     alsaSampleRate);
       s.setValue("alsaPeriodSize",     alsaPeriodSize);
       s.setValue("alsaFragments",      alsaFragments);
+      s.setValue("portaudioDevice",    portaudioDevice);
       s.setValue("layoutBreakColor",   layoutBreakColor);
       s.setValue("antialiasedDrawing", antialiasedDrawing);
       s.setValue("imagePath",          imagePath);
@@ -243,10 +251,12 @@ void Preferences::read()
       showPad            = s.value("showPad", false).toBool();
       useAlsaAudio       = s.value("useAlsaAudio", true).toBool();
       useJackAudio       = s.value("useJackAudio", false).toBool();
+      usePortaudioAudio  = s.value("usePortaudioAudio", false).toBool();
       alsaDevice         = s.value("alsaDevice", "default").toString();
       alsaSampleRate     = s.value("alsaSampleRate", 48000).toInt();
       alsaPeriodSize     = s.value("alsaPeriodSize", 1024).toInt();
       alsaFragments      = s.value("alsaFragments", 3).toInt();
+      portaudioDevice    = s.value("portaudioDevice", -1).toInt();
       layoutBreakColor   = s.value("layoutBreakColor", QColor(Qt::green)).value<QColor>();
       antialiasedDrawing = s.value("antialiasedDrawing", true).toBool();
       imagePath          = s.value("imagePath", "~/mscore/images").toString();
@@ -297,6 +307,15 @@ PreferenceDialog::PreferenceDialog(QWidget* parent)
       {
       setupUi(this);
 
+#ifndef USE_JACK
+      jackDriver->setEnabled(false);
+#endif
+#ifndef USE_ALSA
+      alsaDriver->setEnabled(false);
+#endif
+#ifndef USE_PORTAUDIO
+      portaudioDriver->setEnabled(false);
+#endif
       connect(buttonBox, SIGNAL(clicked(QAbstractButton*)), SLOT(buttonBoxClicked(QAbstractButton*)));
       cursorBlink->setChecked(preferences.cursorBlink);
 
@@ -370,6 +389,7 @@ PreferenceDialog::PreferenceDialog(QWidget* parent)
 
       alsaDriver->setChecked(preferences.useAlsaAudio);
       jackDriver->setChecked(preferences.useJackAudio);
+      portaudioDriver->setChecked(preferences.usePortaudioAudio);
       alsaDevice->setText(preferences.alsaDevice);
 
       int index = alsaSampleRate->findText(QString("%1").arg(preferences.alsaSampleRate));
@@ -400,6 +420,19 @@ PreferenceDialog::PreferenceDialog(QWidget* parent)
             }
       updateSCListView();
 
+
+      //
+      // initialize portaudio
+      //
+      if (usePortaudio) {
+            Portaudio* audio = (Portaudio*)seq->audioDriver();
+            QStringList apis = audio->apiList();
+            portaudioApi->addItems(apis);
+            QStringList devices = audio->deviceList(0);
+            portaudioDevice->addItems(devices);
+            connect(portaudioApi, SIGNAL(activated(int)), SLOT(portaudioApiActivated(int)));
+            }
+
       connect(fgColorSelect,      SIGNAL(clicked()), SLOT(selectFgColor()));
       connect(bgColorSelect,      SIGNAL(clicked()), SLOT(selectBgColor()));
       connect(selectColorSelect1, SIGNAL(clicked()), SLOT(selectSelectColor1()));
@@ -419,6 +452,18 @@ PreferenceDialog::PreferenceDialog(QWidget* parent)
       connect(resetShortcut, SIGNAL(clicked()), SLOT(resetShortcutClicked()));
       connect(clearShortcut, SIGNAL(clicked()), SLOT(clearShortcutClicked()));
       connect(defineShortcut, SIGNAL(clicked()), SLOT(defineShortcutClicked()));
+      }
+
+//---------------------------------------------------------
+//   portaudioApiActivated
+//---------------------------------------------------------
+
+void PreferenceDialog::portaudioApiActivated(int idx)
+      {
+      Portaudio* audio = (Portaudio*)seq->audioDriver();
+      QStringList devices = audio->deviceList(idx);
+      portaudioDevice->clear();
+      portaudioDevice->addItems(devices);
       }
 
 //---------------------------------------------------------
@@ -721,13 +766,18 @@ void PreferenceDialog::apply()
       preferences.padPos         = QPoint(keyPadX->value(), keyPadY->value());
       preferences.playPanelPos   = QPoint(playPanelX->value(), playPanelY->value());
 
-      preferences.useAlsaAudio   = alsaDriver->isChecked();
-      preferences.useJackAudio   = jackDriver->isChecked();
-      preferences.alsaDevice     = alsaDevice->text();
-      preferences.alsaSampleRate = alsaSampleRate->currentText().toInt();
-      preferences.alsaPeriodSize = alsaPeriodSize->currentText().toInt();
-      preferences.alsaFragments  = alsaFragments->value();
+      preferences.useAlsaAudio       = alsaDriver->isChecked();
+      preferences.useJackAudio       = jackDriver->isChecked();
+      preferences.usePortaudioAudio  = portaudioDriver->isChecked();
+      preferences.alsaDevice         = alsaDevice->text();
+      preferences.alsaSampleRate     = alsaSampleRate->currentText().toInt();
+      preferences.alsaPeriodSize     = alsaPeriodSize->currentText().toInt();
+      preferences.alsaFragments      = alsaFragments->value();
       preferences.antialiasedDrawing = drawAntialiased->isChecked();
+      Portaudio* audio = (Portaudio*)seq->audioDriver();
+
+      preferences.portaudioDevice = audio->deviceIndex(portaudioApi->currentIndex(),
+         portaudioDevice->currentIndex());
 
       if (lastSession->isChecked())
             preferences.sessionStart = LAST_SESSION;

@@ -56,6 +56,10 @@ class Portaudio : public Audio {
       virtual void stopTransport();
       virtual int getState();
       virtual int sampleRate() const { return _sampleRate; }
+
+      QStringList apiList() const;
+      QStringList deviceList(int apiIdx);
+      int deviceIndex(int apiIdx, int apiDevIdx);
       };
 
 #endif

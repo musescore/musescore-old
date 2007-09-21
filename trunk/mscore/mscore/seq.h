@@ -151,6 +151,7 @@ class Seq : public QObject {
       void setController(int, int, int);
       void setScore(Score* s);
       Synth* synth() const  { return synti; }
+      Audio* audioDriver() const { return audio; }
       };
 
 extern Seq* seq;

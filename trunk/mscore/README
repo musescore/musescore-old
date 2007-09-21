@@ -35,6 +35,9 @@ Requirements:
 
       - recommended: JACK audio server (audio output)
 
+      - recommended: portaudio 19
+        (required for windows version)
+
 Credits:
       MuseScore uses the "Emmentaler" font from the lilypond project.
 
