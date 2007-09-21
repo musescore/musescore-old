@@ -265,7 +265,7 @@ static int processAudio(jack_nframes_t frames, void* p)
       JackAudio* audio = (JackAudio*)p;
       float* lbuffer = audio->getLBuffer(frames);
       float* rbuffer = audio->getRBuffer(frames);
-      seq->process((unsigned)frames, lbuffer, rbuffer);
+      seq->process((unsigned)frames, lbuffer, rbuffer, 1);
       return 0;
       }
 

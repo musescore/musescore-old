@@ -830,9 +830,9 @@ FLUIDSYNTH_API int fluid_synth_write_s16(fluid_synth_t* synth, int len,
    */
 
 void fluid_synth_write_float(fluid_synth_t* synth, int len,
-   float* lout, float* rout);
-void fluid_synth_write_float(fluid_synth_t* synth, int len, float* out);
+   float* lout, float* rout, int stride);
 
+#if 0
   /** Generate a number of samples. This function implements the
    *  default interface defined in fluidsynth/audio.h. This function
    *  ignores the input buffers and expects at least two output
@@ -860,7 +860,7 @@ typedef int (*fluid_audio_callback_t)(fluid_synth_t* synth, int len,
 
 
 
-
+#endif
 
   /*
    *  Synthesizer's interface to handle SoundFont loaders

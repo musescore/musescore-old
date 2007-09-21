@@ -33,9 +33,13 @@ PaStream* stream;
 ** that could mess up the system like calling malloc() or free().
 */
 
-int paCallback(void* /*in*/, void* out, long unsigned frames, PaTimestamp, void*)
+int paCallback(const void* /*in*/, void* out, long unsigned frames,
+   const PaStreamCallbackTimeInfo* timeInfo,
+   PaStreamCallbackFlags statusFlags,
+   void *)
       {
-      seq->process((unsigned)frames, (float*)out);
+      float* op = (float*)out;
+      seq->process((unsigned)frames, op, op+1, 2);
       return 0;
       }
 
@@ -71,20 +75,32 @@ Portaudio::~Portaudio()
 bool Portaudio::init()
       {
       PaError err = Pa_Initialize();
-      if (err != paNoError)
-            goto error;
+      if (err != paNoError) {
+            printf("Portaudio initialize failed: %s\n", Pa_GetErrorText(err));
+            return true;
+            }
 
       initialized = true;
 
+      PaHostApiIndex apis = Pa_GetHostApiCount();
+      PaHostApiIndex defaultApi = Pa_GetDefaultHostApi();
+
+      printf("Portaudio: host api count %d, default api %d\n", apis, defaultApi);
+      for (PaHostApiIndex i = 0; i < apis; ++i) {
+            const PaHostApiInfo* info = Pa_GetHostApiInfo(i);
+            printf("Portaudio: api <%s> %d devices (default %d %d)\n",
+               info->name, info->deviceCount, info->defaultInputDevice,
+               info->defaultOutputDevice);
+            }
+
       /* Open an audio I/O stream. */
-      err = Pa_OpenDefaultStream(&stream, 0, 2, paFloat32, double(_sampleRate), 256, 2,
+      err = Pa_OpenDefaultStream(&stream, 0, 2, paFloat32, double(_sampleRate), 256,
               paCallback, (void*)this);
 
-      if (err != paNoError)
+      if (err != paNoError) {
+            printf("Portaudio open default stream failed: %s\n", Pa_GetErrorText(err));
             return true;
-
-   error:
-      printf("Portaudio initialize failed: %s\n", Pa_GetErrorText(err));
+            }
       return false;
       }
 
@@ -193,6 +209,7 @@ int Portaudio::getState()
       return state;
       }
 
+#ifdef __MINGW32__
 //---------------------------------------------------------
 //   readMidiEvent
 //---------------------------------------------------------
@@ -219,4 +236,5 @@ int getMidiReadFd()
       {
       return -1;
       }
+#endif
 

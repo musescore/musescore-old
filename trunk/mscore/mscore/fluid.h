@@ -43,8 +43,7 @@ class ISynth : public Synth {
       ~ISynth() {}
       virtual bool init(int sampleRate);
       virtual bool loadSoundFont(const QString&);
-      virtual void process(unsigned, float*, float*);
-      virtual void process(unsigned, float*);
+      virtual void process(unsigned, float*, float*, int);
       virtual void playNote(int channel, int pitch, int velo);
       virtual bool setController(int ch, int ctrl, int val);
       virtual const MidiPatch* getPatchInfo(int ch, const MidiPatch* p) const;

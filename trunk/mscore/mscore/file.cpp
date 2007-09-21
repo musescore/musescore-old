@@ -524,17 +524,6 @@ void StaffLines::read(QDomElement e)
 //   loadStyle
 //---------------------------------------------------------
 
-class LoadStyle : public LoadFile {
-      Score* cs;
-   public:
-      LoadStyle(Score* s) { cs = s; }
-      virtual bool loader(QFile* f);
-      };
-
-//---------------------------------------------------------
-//   loadStyle
-//---------------------------------------------------------
-
 void MuseScore::loadStyle()
       {
       QString fn = QFileDialog::getOpenFileName(
@@ -728,6 +717,21 @@ bool Score::loadFile(QFile* qf)
                               _showInvisible = i;
                         else if (tag == "Style")
                               _style->loadStyle(ee);
+                        else if (tag == "TextStyle") {
+                              QString name = ee.attribute("name");
+                              TextStyle* s = 0;
+                              foreach(TextStyle* ts, textStyles()) {
+                                    if (ts->name == name) {
+                                          s = ts;
+                                          break;
+                                          }
+                                    }
+                              if (s == 0) {
+                                    printf("new TextStyle <%s>\n", qPrintable(name));
+                                    }
+                              else
+                                    s->read(ee);
+                              }
                         else if (tag == "page-layout")
                               pageFormat()->read(ee);
                         else if (tag == "instrument-group")

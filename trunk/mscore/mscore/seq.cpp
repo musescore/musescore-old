@@ -32,6 +32,7 @@
 #ifdef __MINGW32__
 #include "pa.h"
 #endif
+
 #include "slur.h"
 #include "score.h"
 #include "segment.h"
@@ -85,39 +86,10 @@ Seq::Seq()
       _volume  = 1.0;
       playPos  = events.begin();
 
-      //---------------------------------------------------
-      //  pipe for asynchronous gui to sequencer
-      //  messages
-      //---------------------------------------------------
-
-      int filedes[2];         // 0 - reading   1 - writing
-      if (pipe(filedes) == -1) {
-            perror("creating pipe0");
-            ::exit(-1);
-            }
-      // pipe for gui -> sequencer
-      fromThreadFdr = filedes[0];
-      fromThreadFdw = filedes[1];
-      int rv = fcntl(fromThreadFdw, F_SETFL, O_NONBLOCK);
-      if (rv == -1)
-            perror("set pipe write O_NONBLOCK");
-      rv = fcntl(fromThreadFdr, F_SETFL, O_NONBLOCK);
-      if (rv == -1)
-            perror("set pipe read O_NONBLOCK");
-
-      //
-      // pipe for asynchronous sequencer to gui messages
-      //
-      if (pipe(filedes) == -1) {
-            perror("creating pipe1");
-            ::exit(-1);
-            }
-      sigFd = filedes[1];
-      QSocketNotifier* ss = new QSocketNotifier(filedes[0], QSocketNotifier::Read);
-      connect(ss, SIGNAL(activated(int)), this, SLOT(seqMessage(int)));
       heartBeatTimer = new QTimer(this);
       connect(heartBeatTimer, SIGNAL(timeout()), this, SLOT(heartBeat()));
       heartBeatTimer->stop();
+      connect(this, SIGNAL(toGui(int)), this, SLOT(seqMessage(int)), Qt::QueuedConnection);
       }
 
 //---------------------------------------------------------
@@ -139,8 +111,10 @@ void Seq::setScore(Score* s)
       if (cs) {
             disconnect(cs, SIGNAL(selectionChanged(int)), this, SLOT(selectionChanged(int)));
             stop();
-//TODO            while (state != STOP)
-//                  usleep(100000);
+#ifndef __MINGW32__
+            while (state != STOP)
+                  usleep(100000);
+#endif
             }
       cs = s;
       playlistChanged = true;
@@ -179,6 +153,16 @@ bool Seq::isRealtime() const
 bool Seq::init()
       {
       audio = 0;
+
+#if 0
+      audio = new Portaudio;
+      if (audio->init()) {
+            printf("no audio output found\n");
+            delete audio;
+            audio = 0;
+            }
+#endif
+
 #ifdef __MINGW32__
       audio = new Portaudio;
       if (audio->init()) {
@@ -428,30 +412,20 @@ void Seq::guiStop()
 //    execution environment: gui thread
 //---------------------------------------------------------
 
-void Seq::seqMessage(int fd)
+void Seq::seqMessage(int msg)
       {
-      char buffer[16];
+      switch(msg) {
+            case '0':         // STOP
+                  guiStop();
+                  break;
 
-      int n = ::read(fd, buffer, 16);
-      if (n < 0) {
-            printf("MScore::Seq: seqMessage(): READ PIPE failed: %s\n",
-               strerror(errno));
-            return;
-            }
-      for (int i = 0; i < n; ++i) {
-            switch(buffer[i]) {
-                  case '0':         // STOP
-                        guiStop();
-                        break;
+            case '1':         // PLAY
+                  emit started();
+                  break;
 
-                  case '1':         // PLAY
-                        emit started();
-                        break;
-
-                  default:
-                        printf("MScore::Seq:: unknown seq msg %d\n", buffer[i]);
-                        break;
-                  }
+            default:
+                  printf("MScore::Seq:: unknown seq msg %d\n", msg);
+                  break;
             }
       }
 
@@ -470,7 +444,7 @@ void Seq::stopTransport()
             }
       _activeNotes.clear();
       if (!pauseState)
-            toGui('0');
+            emit toGui('0');
       state = STOP;
       }
 
@@ -487,7 +461,7 @@ void Seq::startTransport()
       if (endTick == 0)
             return;
       if (!pauseState)
-            toGui('1');
+            emit toGui('1');
       state = PLAY;
       }
 
@@ -527,103 +501,7 @@ void Seq::playEvent(const Event& event)
 //   process
 //---------------------------------------------------------
 
-void Seq::process(unsigned n, float* buffer)
-      {
-      int frames = n;
-      int jackState = audio->getState();
-
-      if (state == START_PLAY && jackState == PLAY)
-            startTransport();
-      else if (state == PLAY && jackState == STOP)
-            stopTransport();
-      else if (state == START_PLAY && jackState == STOP)
-            stopTransport();
-      else if (state == STOP && jackState == PLAY)
-            startTransport();
-      else if (state != jackState)
-            printf("Seq: state transition %d -> %d ?\n",
-               state, jackState);
-
-      float* l = buffer;
-
-      //
-      // read messages from gui
-      //
-      SeqMsg msg;
-      while (read(fromThreadFdr, &msg, sizeof(SeqMsg)) == sizeof(SeqMsg)) {
-            switch(msg.id) {
-                  case SEQ_TEMPO_CHANGE:
-                        {
-                        int tick = frame2tick(playFrame);
-                        cs->tempomap->setRelTempo(msg.data1);
-                        playFrame = tick2frame(tick);
-                        }
-                        break;
-
-                  case SEQ_PLAY:
-                        {
-                        int channel = msg.data1 & 0xf;
-                        int type    = msg.data1 & 0xf0;
-                        if (type == ME_NOTEON)
-                              synti->playNote(channel, msg.data2, msg.data3);
-                        else if (type == ME_CONTROLLER)
-                              synti->setController(channel, msg.data2, msg.data3);
-                        }
-                        break;
-                  case SEQ_SEEK:
-                        setPos(msg.data1);
-                        break;
-
-                  default:
-                        printf("unknown seq msg %d\n", msg.id);
-                        break;
-                  }
-            }
-
-      if (state == PLAY) {
-
-            //
-            // collect events for one segment
-            //
-            int endFrame = playFrame + frames;
-            for (; playPos != events.end(); ++playPos) {
-                  int f = tick2frame(playPos->first);
-                  if (f >= endFrame)
-                        break;
-
-                  int n = f - playFrame;
-                  if (n < 0 || n > int(frames)) {
-                        printf("Seq: at %d bad n %d(>%d) = %d - %d\n",
-                           playPos->first, n, frames, f, playFrame);
-                        break;
-                        }
-                  synti->process(n, l);
-                  l         += n;
-                  playFrame += n;
-                  frames    -= n;
-                  playEvent(playPos->second);
-                  }
-            if (frames) {
-                  synti->process(frames, l);
-                  playFrame += frames;
-                  }
-            if (playPos == events.end()) {
-                  audio->stopTransport();
-                  }
-            }
-      else
-            synti->process(frames, l);
-
-      // apply volume:
-      for (unsigned i = 0; i < n * 2; ++i)
-            buffer[i] *= _volume;
-      }
-
-//---------------------------------------------------------
-//   process
-//---------------------------------------------------------
-
-void Seq::process(unsigned n, float* lbuffer, float* rbuffer)
+void Seq::process(unsigned n, float* lbuffer, float* rbuffer, int stride)
       {
       int frames = n;
       int jackState = audio->getState();
@@ -643,11 +521,9 @@ void Seq::process(unsigned n, float* lbuffer, float* rbuffer)
       float* l = lbuffer;
       float* r = rbuffer;
 
-      //
-      // read messages from gui
-      //
-      SeqMsg msg;
-      while (read(fromThreadFdr, &msg, sizeof(SeqMsg)) == sizeof(SeqMsg)) {
+      QMutexLocker locker(&mutex);
+      while (!toSeq.isEmpty()) {
+            SeqMsg msg = toSeq.dequeue();
             switch(msg.id) {
                   case SEQ_TEMPO_CHANGE:
                         {
@@ -670,15 +546,10 @@ void Seq::process(unsigned n, float* lbuffer, float* rbuffer)
                   case SEQ_SEEK:
                         setPos(msg.data1);
                         break;
-
-                  default:
-                        printf("unknown seq msg %d\n", msg.id);
-                        break;
                   }
             }
 
       if (state == PLAY) {
-
             //
             // collect events for one segment
             //
@@ -694,7 +565,7 @@ void Seq::process(unsigned n, float* lbuffer, float* rbuffer)
                            playPos->first, n, frames, f, playFrame);
                         break;
                         }
-                  synti->process(n, l, r);
+                  synti->process(n, l, r, stride);
                   l         += n;
                   r         += n;
                   playFrame += n;
@@ -702,7 +573,7 @@ void Seq::process(unsigned n, float* lbuffer, float* rbuffer)
                   playEvent(playPos->second);
                   }
             if (frames) {
-                  synti->process(frames, l, r);
+                  synti->process(frames, l, r, stride);
                   playFrame += frames;
                   }
             if (playPos == events.end()) {
@@ -710,12 +581,14 @@ void Seq::process(unsigned n, float* lbuffer, float* rbuffer)
                   }
             }
       else
-            synti->process(frames, l, r);
+            synti->process(frames, l, r, stride);
 
       // apply volume:
       for (unsigned i = 0; i < n; ++i) {
-            lbuffer[i] *= _volume;
-            rbuffer[i] *= _volume;
+            *lbuffer *= _volume;
+            *rbuffer *= _volume;
+            lbuffer += stride;
+            rbuffer += stride;
             }
       }
 
@@ -901,9 +774,9 @@ void Seq::setVolume(float val)
 void Seq::setRelTempo(int relTempo)
       {
       SeqMsg msg;
-      msg.id    = SEQ_TEMPO_CHANGE;
       msg.data1 = relTempo;
-      sendMessage(msg);
+      msg.id    = SEQ_TEMPO_CHANGE;
+      guiToSeq(msg);
 
       double tempo = cs->tempomap->tempo(playPos->first) * relTempo * 0.01;
 
@@ -937,30 +810,11 @@ void Seq::setPos(int tick)
 
 void Seq::seek(int tick)
       {
-/*      PlayPanel* pp = mscore->getPlayPanel();
-      if (pp)
-            pp->heartBeat(tick);
- */
       cs->setPlayPos(tick);
       SeqMsg msg;
-      msg.id    = SEQ_SEEK;
       msg.data1 = tick;
-      sendMessage(msg);
-      }
-
-//---------------------------------------------------------
-//   sendMessage
-//    send Message to sequencer
-//---------------------------------------------------------
-
-void Seq::sendMessage(SeqMsg& msg) const
-      {
-      if (!running)
-            return;
-      if (write(fromThreadFdw, &msg, sizeof(SeqMsg)) != sizeof(SeqMsg)) {
-            fprintf(stderr, "sendMessage to sequencer failed: %s\n",
-               strerror(errno));
-            }
+      msg.id    = SEQ_SEEK;
+      guiToSeq(msg);
       }
 
 //---------------------------------------------------------
@@ -972,11 +826,12 @@ void Seq::startNote(int channel, int pitch, int velo)
       if (state != STOP)
             return;
       SeqMsg msg;
-      msg.id    = SEQ_PLAY;
       msg.data1 = ME_NOTEON | channel;
       msg.data2 = pitch;
       msg.data3 = velo;
-      sendMessage(msg);
+      msg.id    = SEQ_PLAY;
+      guiToSeq(msg);
+
       Event event;
       event.type = ME_NOTEON;
       event.channel = channel;
@@ -994,11 +849,11 @@ void Seq::stopNotes()
       foreach(const Event& event, eventList) {
             if (event.type == ME_NOTEON) {
                   SeqMsg msg;
-                  msg.id    = SEQ_PLAY;
                   msg.data1 = event.type | event.channel;
                   msg.data2 = event.val1;
                   msg.data3 = 0;
-                  sendMessage(msg);
+                  msg.id    = SEQ_PLAY;
+                  guiToSeq(msg);
                   }
             }
       eventList.clear();
@@ -1008,14 +863,14 @@ void Seq::stopNotes()
 //   setController
 //---------------------------------------------------------
 
-void Seq::setController(int channel, int ctrl, int data) const
+void Seq::setController(int channel, int ctrl, int data)
       {
       SeqMsg msg;
-      msg.id    = SEQ_PLAY;
       msg.data1 = 0xb0 | channel;
       msg.data2 = ctrl;
       msg.data3 = data;
-      sendMessage(msg);
+      msg.id    = SEQ_PLAY;
+      guiToSeq(msg);
       }
 
 //---------------------------------------------------------
@@ -1115,5 +970,15 @@ void Seq::prevChord()
 void Seq::seekEnd()
       {
       printf("seek to end\n");
+      }
+
+//---------------------------------------------------------
+//   guiToSeq
+//---------------------------------------------------------
+
+void Seq::guiToSeq(const SeqMsg& msg)
+      {
+      QMutexLocker locker(&mutex);
+      toSeq.enqueue(msg);
       }
 

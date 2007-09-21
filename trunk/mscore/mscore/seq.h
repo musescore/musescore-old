@@ -33,7 +33,7 @@ class Painter;
 //    message format for gui -> sequencer messages
 //---------------------------------------------------------
 
-enum { SEQ_TEMPO_CHANGE, SEQ_PLAY, SEQ_SEEK };
+enum { SEQ_NO_MESSAGE, SEQ_TEMPO_CHANGE, SEQ_PLAY, SEQ_SEEK };
 
 struct SeqMsg {
       int id;
@@ -74,10 +74,11 @@ class Seq : public QObject {
       bool playlistChanged;
       bool pauseState;
 
+      mutable QMutex mutex;
+      QQueue<SeqMsg> toSeq;
+
       Synth* synti;
       Audio* audio;
-      int fromThreadFdw, fromThreadFdr;   // message pipe
-      int sigFd;                          // pipe fd for messages to gui
 
       EList events;                       // playlist
       QList<Event> _activeNotes;          // currently sounding notes
@@ -92,7 +93,6 @@ class Seq : public QObject {
 
       QList<Event> eventList;
 
-      int toGui(char c) { return write(sigFd, &c, 1); }
       void collectEvents();
       void stopTransport();
       void startTransport();
@@ -101,9 +101,10 @@ class Seq : public QObject {
       void setPos(int);
       void playEvent(const Event& event);
       void guiStop();
+      void guiToSeq(const SeqMsg& msg);
 
    private slots:
-      void seqMessage(int fd);
+      void seqMessage(int msg);
       void heartBeat();
       void selectionChanged(int);
 
@@ -115,6 +116,7 @@ class Seq : public QObject {
    signals:
       void started();
       void stopped();
+      int toGui(int);
 
    public:
       enum { STOP, PLAY, START_PLAY };
@@ -137,8 +139,7 @@ class Seq : public QObject {
       bool isRunning() const    { return running; }
       bool isPlaying() const    { return state == PLAY; }
       bool isStopped() const    { return state == STOP; }
-      void process(unsigned, float*, float*);
-      void process(unsigned, float*);
+      void process(unsigned, float*, float*, int stride);
       std::list<QString> inputPorts();
       int sampleRate() const;
       int getEndTick() const    { return endTick; }
@@ -147,7 +148,7 @@ class Seq : public QObject {
       void sendMessage(SeqMsg&) const;
       void startNote(int, int, int);
       void stopNotes();
-      void setController(int, int, int) const;
+      void setController(int, int, int);
       void setScore(Score* s);
       Synth* synth() const  { return synti; }
       };
