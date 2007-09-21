@@ -109,7 +109,6 @@ void Note::setPitch(int val)
       {
       _pitch = val;
       _tpc   = pitch2tpc(_pitch);
-printf("Note::setPitch %d tpc %d\n", _pitch, _tpc);
       }
 
 //---------------------------------------------------------
@@ -120,7 +119,6 @@ void Note::setTpc(int v)
       {
       _tpc = v;
       _userAccidental = 0;
-printf("Note::setTpc %d\n", _tpc);
       }
 
 //---------------------------------------------------------
@@ -219,7 +217,6 @@ void Note::changeAccidental(int accType)
       int line  = tpc2line(_tpc);
       _tpc      = line2tpc(line, acc1);
       _pitch    = tpc2pitch(_tpc) + (_pitch / 12) * 12;
-printf("Note::changeAccidental pitch %d tpc %d\n", _pitch, _tpc);
       chord()->measure()->layoutNoteHeads(staffIdx());    // compute actual accidental
       int acc2  = accidentalSubtype();
       if (accType != acc2)
@@ -584,7 +581,6 @@ void Note::read(QDomElement e)
       if (tpcVal != -100)
             _tpc = tpcVal;
       else {
-printf("read note tpc %d\n", -1);
             _tpc = pitch2tpc(_pitch);
             }
       }
