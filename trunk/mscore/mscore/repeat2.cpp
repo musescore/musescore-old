@@ -189,10 +189,6 @@ Measure* RepeatStack::push(Measure* m)
 
 
             if (type&CODA) {
-                  if ((p = getSlot(m,CODA)) == 0x00) {
-                        p = setNewSlot(m);
-                        p->setRepeatType(CODA);
-                        }
                   type &= ~(CODA);
                   }
 
