@@ -863,8 +863,9 @@ void Score::undoChangeEndBarLine(Measure* m, int flags)
 
 void Score::addElement(Element* element)
       {
-//printf("Score::addElement %p %s parent %s\n",
-//  element, element->name(), element->parent()->name());
+      if (debugMode)
+            printf("   Score::addElement %p %s parent %s\n",
+               element, element->name(), element->parent()->name());
 
       element->parent()->add(element);
 
@@ -920,8 +921,9 @@ void Score::removeElement(Element* element)
       {
       Element* parent = element->parent();
 
-// printf("Score::removeElement %p %s parent %p %s\n",
-//   element, element->name(), parent, parent->name());
+      if (debugMode)
+            printf("   Score::removeElement %p %s parent %p %s\n",
+               element, element->name(), parent, parent->name());
 
       parent->remove(element);
       if (element->type() == CLEF) {
