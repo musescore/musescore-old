@@ -626,7 +626,7 @@ void Score::setNote(int tick, int track, int pitch, int len)
             chord->setStemDirection(preferences.stemDir[track % VOICES]);
             if (tuplet) {
                   chord->setTuplet(tuplet);
-                  tuplet->add(chord);
+//                  tuplet->add(chord);
                   }
             Segment::SegmentType st = Segment::segmentType(chord->type());
             Segment* seg = measure->findSegment(st, tick);
@@ -721,7 +721,7 @@ void Score::setRest(int tick, int track, int len)
       Rest* rest = setRest(tick, len, track, measure);
       if (tuplet) {
             rest->setTuplet(tuplet);
-            tuplet->add(rest);
+//            tuplet->add(rest);
             }
       select(rest, 0, 0);
       if (noteLen - len > 0) {

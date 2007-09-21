@@ -2,6 +2,8 @@
       (dk)
       - implemented seconda volta
       (ws)
+      - fixed: undo create tuplet
+      - fixed: another tuplet entry bug
       - fixed: read back TextStyle's from *msc files
       - fixed: read back tpc note values from *.msc files
       - added portaudio audio driver to support windows audio

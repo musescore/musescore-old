@@ -1498,14 +1498,16 @@ void Score::cmdTuplet(int n)
 
       int voice    = chord->voice();
       Staff* staff = chord->staff();
-      int staffIdx = chord->staffIdx();
-      int track    = staffIdx * VOICES + voice;
+//      int staffIdx = chord->staffIdx();
+//      int track    = staffIdx * VOICES + voice;
       int tick     = chord->tick();
       int pitch    = note->pitch();
 
       Segment* segment = chord->segment();
-      segment->setElement(track, 0);
+      undoRemoveElement(chord);
       undoOp(UndoOp::RemoveElement, chord);
+      if (segment->isEmpty())
+            undoRemoveElement(segment);
 
       Tuplet* tuplet = new Tuplet(this);
       tuplet->setNormalNotes(normalNotes);
@@ -1521,13 +1523,14 @@ void Score::cmdTuplet(int n)
       note = new Note(this);
       note->setPitch(pitch);
       note->setStaff(staff);
+
       chord = new Chord(this);
       chord->setTick(tick);
       chord->setTuplet(tuplet);
-      tuplet->add(chord);
       chord->setVoice(voice);
       chord->setStaff(staff);
       chord->add(note);
+
       chord->setTickLen(ticks);
       Segment::SegmentType st = Segment::segmentType(chord->type());
       Segment* seg = measure->findSegment(st, tick);
@@ -1537,14 +1540,13 @@ void Score::cmdTuplet(int n)
             }
       chord->setParent(seg);
       undoAddElement(chord);
-//      measure->layoutNoteHeads(staffIdx);
 
       for (int i = 0; i < (actualNotes-1); ++i) {
             tick += ticks;
             Rest* rest = new Rest(this);
             rest->setTick(tick);
             rest->setTuplet(tuplet);
-            tuplet->add(rest);
+//            tuplet->add(rest);
             rest->setVoice(voice);
             rest->setStaff(staff);
             rest->setTickLen(ticks);

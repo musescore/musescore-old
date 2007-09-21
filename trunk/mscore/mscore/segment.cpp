@@ -202,25 +202,17 @@ void Segment::add(Element* el)
                   }
                   break;
 
-            case BAR_LINE:
-#if 0
-                  if (_elist[staffIdx * VOICES] + el->voice())
-                        printf("%06d: segment slot already used\n", el->tick());
-                  if (el->subtype() == END_REPEAT)
-                        measure()->setEndRepeat(2);
-                  else if (el->subtype() == START_REPEAT)
-                        measure()->setStartRepeat(true);
-                  else if (el->subtype() == END_START_REPEAT) {
-                        measure()->setStartRepeat(true);
-                        if (measure()->prev())
-                              measure()->prev()->setEndRepeat(2);
-                        }
-
-                  // fall through
-#endif
             case CHORD:
             case REST:
+                  {
+                  ChordRest* cr = (ChordRest*)el;
+                  if (cr->tuplet())
+                        cr->tuplet()->add(cr);
+                  }
+                  // fall through
+
             case BREATH:
+            case BAR_LINE:
             default:
                   _elist[staffIdx * VOICES + el->voice()] = el;
                   break;
@@ -259,20 +251,6 @@ void Segment::remove(Element* el)
             printf("Measure::remove: %s %p not found\n", el->name(), el);
             return;
             }
-#if 0
-      if (el->type() == BAR_LINE) {
-            if (el->subtype() == START_REPEAT)
-                  measure()->setStartRepeat(false);
-            else if (el->subtype() == END_REPEAT)
-                  // reset endRepeat , bug fix for remove/change End Barline. by DK. 02.09.07
-                  measure()->setEndRepeat(0);
-            else if (el->subtype() == END_START_REPEAT) {
-                  measure()->setStartRepeat(false);
-                  if (measure()->prev())
-                        measure()->prev()->setEndRepeat(0);
-                  }
-            }
-#endif
       _elist[staffIdx * VOICES + el->voice()] = 0;
 
       if (el->isChordRest()) {

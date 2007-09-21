@@ -205,8 +205,11 @@ void Score::padToggle(int n)
                   if (el->type() == NOTE)
                         el = el->parent();
                   if (el->isChordRest()) {
-                        int tick = ((ChordRest*)el)->tick();
+                        ChordRest* cr = (ChordRest*)el;
+                        int tick = cr->tick();
                         int len = _padState.tickLen;
+                        if (cr->tuplet())
+                              len = cr->tuplet()->noteLen();
                         if (_padState.rest)
                               setRest(tick, _is.track, len);
                         else
