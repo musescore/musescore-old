@@ -109,6 +109,7 @@ void Note::setPitch(int val)
       {
       _pitch = val;
       _tpc   = pitch2tpc(_pitch);
+printf("Note::setPitch %d tpc %d\n", _pitch, _tpc);
       }
 
 //---------------------------------------------------------
@@ -119,6 +120,7 @@ void Note::setTpc(int v)
       {
       _tpc = v;
       _userAccidental = 0;
+printf("Note::setTpc %d\n", _tpc);
       }
 
 //---------------------------------------------------------
@@ -217,6 +219,7 @@ void Note::changeAccidental(int accType)
       int line  = tpc2line(_tpc);
       _tpc      = line2tpc(line, acc1);
       _pitch    = tpc2pitch(_tpc) + (_pitch / 12) * 12;
+printf("Note::changeAccidental pitch %d tpc %d\n", _pitch, _tpc);
       chord()->measure()->layoutNoteHeads(staffIdx());    // compute actual accidental
       int acc2  = accidentalSubtype();
       if (accType != acc2)
@@ -529,49 +532,6 @@ void Note::write(Xml& xml) const
       }
 
 //---------------------------------------------------------
-//   readSlur
-//---------------------------------------------------------
-
-void Chord::readSlur(QDomElement e, int /*staff*/)
-      {
-      int type = 0;         // 0 - begin, 1 - end
-      Placement placement = PLACE_AUTO;
-
-      QString s = e.attribute("type", "");
-      if (s == "begin")
-            type = 0;
-      else if (s == "end")
-            type = 1;
-      else
-            printf("Chord::readSlur: unknown type <%s>\n", s.toLatin1().data());
-
-//      int number = e.attribute("number", "0").toInt();
-      s = e.attribute("placement", "");
-      if (s == "auto")
-            placement = PLACE_AUTO;
-      else if (s == "above")
-            placement = PLACE_ABOVE;
-      else if (s == "below")
-            placement = PLACE_BELOW;
-#if 0 //TODO
-      XmlSlur* xs = &(xml.slurs[number]);
-      if (type == 0) {
-            xs->tick = tick();
-            xs->placement = placement;
-            xs->voice = voice();
-            }
-      else {
-            Slur* slur = new Slur(score());
-            slur->setUpMode(xs->placement);
-
-            slur->setStart(xs->tick, staff);
-            slur->setEnd(tick(), staff);
-            measure()->add(slur);
-            }
-#endif
-      }
-
-//---------------------------------------------------------
 //   Note::read
 //---------------------------------------------------------
 
@@ -580,7 +540,7 @@ void Note::read(QDomElement e)
       int ptch = e.attribute("pitch", "-1").toInt();
       if (ptch != -1)
             _pitch = ptch;
-      int tpcVal = -100;
+      int tpcVal = e.attribute("tpc", "-100").toInt();
 
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             QString tag(e.tagName());
@@ -624,8 +584,8 @@ void Note::read(QDomElement e)
       if (tpcVal != -100)
             _tpc = tpcVal;
       else {
-            int val = e.attribute("tpc", "-1").toInt();
-            _tpc = val != -1 ? val : pitch2tpc(_pitch);
+printf("read note tpc %d\n", -1);
+            _tpc = pitch2tpc(_pitch);
             }
       }
 
