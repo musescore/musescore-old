@@ -3,8 +3,8 @@
   <Spatium>1.76389</Spatium>
   <Division>480</Division>
   <Mag>1</Mag>
-  <xoff>7</xoff>
-  <yoff>-36</yoff>
+  <xoff>13</xoff>
+  <yoff>7</yoff>
   <Style>
     <staffUpperBorder>8</staffUpperBorder>
     <staffLowerBorder>4</staffLowerBorder>
@@ -64,6 +64,18 @@
     <measureNumberSystem>1</measureNumberSystem>
     <lyricsDistance>6.5</lyricsDistance>
     </Style>
+  <TextStyle name="Repeat Text">
+    <family>Times New Roman</family>
+    <size>12</size>
+    <bold>0</bold>
+    <italic>0</italic>
+    <underline>0</underline>
+    <align>4</align>
+    <anchor>3</anchor>
+    <offsetType>2</offsetType>
+    <xoffset>0</xoffset>
+    <yoffset>-1.5</yoffset>
+    </TextStyle>
   <showInvisible>1</showInvisible>
   <page-layout>
     <pageFormat>A4</pageFormat>
@@ -121,7 +133,6 @@ p, li { white-space: pre-wrap; }
     <Measure number="1">
       <Repeat>
         <subtype>fine</subtype>
-        <offset x="-0.15" y="-1.35"/>
         </Repeat>
       <Note pitch="65" tpc="13" ticks="480"/>
       <Note pitch="67" tpc="15" ticks="480"/>
@@ -129,11 +140,12 @@ p, li { white-space: pre-wrap; }
       <Note pitch="74" tpc="16" ticks="480"/>
       </Measure>
     <Measure number="2">
-      <startRepeat>1</startRepeat>
+      <startRepeat/>
       <Note pitch="67" tpc="15" ticks="480"/>
       <Note pitch="69" tpc="17" ticks="480"/>
       <Note pitch="69" tpc="17" ticks="480"/>
       <Note pitch="67" tpc="15" ticks="480"/>
+      <BarLine/>
       </Measure>
     <Measure number="3">
       <ending>0</ending>
@@ -144,6 +156,7 @@ p, li { white-space: pre-wrap; }
       <Note pitch="67" tpc="15" ticks="480"/>
       <Note pitch="65" tpc="13" ticks="480"/>
       <Note pitch="67" tpc="15" ticks="480"/>
+      <BarLine/>
       </Measure>
     <Measure number="4">
       <endRepeat>2</endRepeat>
@@ -168,6 +181,7 @@ p, li { white-space: pre-wrap; }
       <Note pitch="72" tpc="14" ticks="240"/>
       <Note pitch="71" tpc="19" ticks="240"/>
       <Note pitch="67" tpc="15" ticks="240"/>
+      <BarLine/>
       </Measure>
     <Measure number="6">
       <endRepeat>2</endRepeat>
@@ -183,7 +197,7 @@ p, li { white-space: pre-wrap; }
         </Volta>
       <Repeat>
         <subtype>segno</subtype>
-        <offset x="2.16" y="-0.509999"/>
+        <offset x="2.55" y="0.45"/>
         </Repeat>
       <Chord>
         <selected>1</selected>
@@ -208,6 +222,7 @@ p, li { white-space: pre-wrap; }
       <Rest>
         <ticklen>480</ticklen>
         </Rest>
+      <BarLine/>
       </Measure>
     <Measure number="8">
       <Repeat>
@@ -223,7 +238,7 @@ p, li { white-space: pre-wrap; }
       <Note pitch="69" tpc="17" ticks="240"/>
       </Measure>
     <Measure number="9">
-      <startRepeat>1</startRepeat>
+      <startRepeat/>
       <endRepeat>2</endRepeat>
       <TimeSig>
         <subtype>196</subtype>
@@ -235,8 +250,6 @@ p, li { white-space: pre-wrap; }
       <Note pitch="71" tpc="19" ticks="480"/>
       </Measure>
     <Measure number="10">
-      <startRepeat>1</startRepeat>
-      <endRepeat>2</endRepeat>
       <Repeat>
         <subtype>daCapoAlFine</subtype>
         </Repeat>
@@ -244,6 +257,9 @@ p, li { white-space: pre-wrap; }
       <Note pitch="71" tpc="19" ticks="480"/>
       <Note pitch="74" tpc="16" ticks="480"/>
       <Note pitch="71" tpc="19" ticks="480"/>
+      <BarLine>
+        <subtype>5</subtype>
+        </BarLine>
       </Measure>
     </Staff>
   <cursorTrack>0</cursorTrack>
