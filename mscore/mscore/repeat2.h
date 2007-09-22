@@ -65,7 +65,7 @@ class RepeatStack {
                           // inactive means the Element was called by pop(),
                           // or elements with the same measure but differend types
       int _loopCount;     
-      int _repeatType;    // type of repeat is, "unknown", "normal", "segno", "coda", "capo", "volta" 
+      int _repeatType;    // type of repeat is
       Measure* _startm;   // Measure to start repeating with
       Measure* _endm;     // Measure to repeat to
       int _ticks2Add;     // added ticks while this measure is reached
@@ -76,7 +76,6 @@ class RepeatStack {
       RepeatStack();
       ~RepeatStack();
 
-//      int push(Measure*);
       Measure* push(Measure*);
       Measure* pop(Measure*);
 
@@ -104,6 +103,8 @@ class RepeatStack {
       int getTickOffset() { return _tickOffs; }
       void setTicks2Add(int t) { _ticks2Add = t; }
       int getTicks2Add() { return _ticks2Add; }
+      Measure* searchCoda(Measure*,int);
+      Measure* searchCodetta(Measure*,int);
       RepeatStack* getLastStartMeasure(Measure*);
       RepeatStack* getLastEndMeasure(Measure*);
       RepeatStack* getStartMeasure(Measure*);
@@ -124,6 +125,5 @@ extern int rtickOffSet;
 extern int rloopCounter;
 extern int raddTickLen;
 extern bool repeatEachTime;
-//extern bool playRepeats;
 
 #endif

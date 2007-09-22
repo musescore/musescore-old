@@ -187,9 +187,28 @@ Measure* RepeatStack::push(Measure* m)
                   type &= ~(DACAPO);
                   }
 
-
             if (type&CODA) {
+                  if ((p = getSlot(m,CODA)) == 0x00) {
+                        p = setNewSlot(m);
+                        p->setRepeatType(CODA);
+                        }
+                  if (p->getActive() == FIRSTTIME) {
+                        p->setTicks2Add(m->tick());
+                        p->setStartMeasure(m); 
+                        }
                   type &= ~(CODA);
+                  }
+
+            if (type&ALCODA) {
+                  if ((p = getSlot(m,ALCODA)) == 0x00) {
+                        mm = searchCoda(m,-1);
+                        if (mm) {
+                              p = setNewSlot(m);
+                              p->setRepeatType(ALCODA);
+                              p->setEndMeasure(mm);
+                              }
+                        }
+                  type &= ~(ALCODA);
                   }
 
             if (type&CODETTA) {
@@ -197,6 +216,7 @@ Measure* RepeatStack::push(Measure* m)
                         p = setNewSlot(m);
                         p->setRepeatType(CODETTA);
                         }
+                  p->setTicks2Add(m->tick());
                   type &= ~(CODETTA);
                   }
 
@@ -408,6 +428,7 @@ RepeatStack* RepeatStack::setNewSlot(Measure* m)
 Measure* RepeatStack::pop(Measure* m)
       {
       Measure* ret = 0x00;
+      Measure* mm = 0x00;
       RepeatStack* p = 0x00;
       RepeatStack* pp = 0x00;
       int type = 0;
@@ -423,14 +444,46 @@ Measure* RepeatStack::pop(Measure* m)
       type = checkType(m);
 
       while (type) {
+            if (type&CAPO) { //MUST be the first, don't change position at top
+                  ret = 0x00;
+                  type &= ~(CAPO);
+                  }
             if (type&NORMAL) {
                   ret = 0x00;
                   type &= ~(NORMAL);
                   }
-            if (type&CAPO) {
+            if (type&CODA) {
+                  p = getSlot(m,CODA);
                   ret = 0x00;
-                  type &= ~(CAPO);
+                  if (p && p->getActive() == FIRSTTIME) {
+                        p->setActive(SECONDTIME);
+                        }
+                  else {
+                        pp = getSlotByType(ALCODA);
+                        if (pp) {
+                              mm = searchCodetta(m->next(),1);
+                              if (mm) {
+                                    mm = push(mm);
+                                    pp = getSlot(mm,CODETTA);
+                                    p->setEndMeasure(pp->getStartMeasure());
+                                    pp->setEndMeasure(p->getStartMeasure());
+                                    p->setActive(THIRDTIME);
+                                    p->setTicks2Add(p->getTicks2Add()+m->tickLen());
+                                    rtickOffSet -= (pp->getTicks2Add()-p->getTicks2Add());
+                                    ret = p->getEndMeasure();
+                                    }
+                              }
+                        }
+                  type &= ~(CODA);
                   }
+            if (type&CODETTA) {
+                  ret = 0x00;
+                  type &= ~(CODETTA);
+                  }
+            if (type&ALCODA) {
+                  ret = 0x00;
+                  type &= ~(ALCODA);
+                  }         
             if (type&SEGNO) {
                   ret = 0x00;
                   type &= ~(SEGNO);
@@ -452,8 +505,6 @@ Measure* RepeatStack::pop(Measure* m)
                   p = getSlot(m,P_VOLTA);
                   if (p && p->getActive() == FIRSTTIME) {
                         p->setActive(SECONDTIME);
-/*                        p->setTickOffset(p->getTicks2Add()+
-                                         m->tickLen()); */
                         }
                   ret = 0x00;
                   type &= ~(P_VOLTA);
@@ -462,8 +513,6 @@ Measure* RepeatStack::pop(Measure* m)
                   p = getSlot(m,S_VOLTA);
                   if (p && p->getActive() == FIRSTTIME) {
                         p->setActive(SECONDTIME);
-/*                        p->setTickOffset(p->getTicks2Add()+
-                                         m->tickLen());*/
                         }
                   ret = 0x00;
                   type &= ~(S_VOLTA);
@@ -575,6 +624,36 @@ Measure* RepeatStack::pop(Measure* m)
                   }
             }
       return ret;
+      }
+
+Measure* RepeatStack::searchCoda(Measure* m, int dir) {
+      Measure* mm;
+
+      mm = m;
+      while (mm) {
+            if ((mm->repeatFlags()&RepeatCoda))
+                  break;
+            if (dir == 1)
+                  mm = mm->next();
+            if (dir == -1)
+                  mm = mm->prev();
+            }
+      return mm;
+      }
+
+Measure* RepeatStack::searchCodetta(Measure* m, int dir) {
+      Measure* mm;
+
+      mm = m;
+      while (mm) {
+            if ((mm->repeatFlags()&RepeatCodetta))
+                  break;
+            if (dir == 1)
+                  mm = mm->next();
+            if (dir == -1)
+                  mm = mm->prev();
+            }
+      return mm;
       }
 
 RepeatStack* RepeatStack::getStartMeasure(Measure* m)
@@ -766,8 +845,6 @@ int RepeatStack::checkType(Measure* m)
       {
       int type = 0;
 
-//      if ((m->first()->ElementType()) == RepeatMeasure)
-//            ;
 
       if (m->prev() == 0)
             type |= CAPO;
