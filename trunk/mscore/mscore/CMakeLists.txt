@@ -171,10 +171,11 @@ if (MINGW)
       ${PROJECT_BINARY_DIR}/resfile.o
       PROPERTIES generated true
       )
+   # Windows: add -mconsole to get a console window for debug output
    set_target_properties( mscore
       PROPERTIES
          COMPILE_FLAGS "-include ${PROJECT_BINARY_DIR}/all.h ${QT_DEFINITIONS} -DQT_SVG_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_CORE_LIB"
-         LINK_FLAGS "${PROJECT_BINARY_DIR}/resfile.o -mwindows -mconsole -L /home/ws/.wine/drive_c/Qt/4.3.1/lib -L /home/ws/mscore/portaudio/lib"
+         LINK_FLAGS "${PROJECT_BINARY_DIR}/resfile.o -mwindows -L /home/ws/.wine/drive_c/Qt/4.3.1/lib -L /home/ws/mscore/portaudio/lib"
       )
    target_link_libraries(mscore
       fluid
