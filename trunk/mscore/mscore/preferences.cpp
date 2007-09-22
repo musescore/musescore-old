@@ -121,9 +121,15 @@ Preferences::Preferences()
       showPad            = false;
       padPos             = QPoint(100, 100);
       playPanelPos       = QPoint(100, 300);
-      useAlsaAudio       = true;
-      useJackAudio       = true;
+#ifdef __MINGW32__
+      useAlsaAudio       = false;
+      useJackAudio       = false;
       usePortaudioAudio  = true;
+#else
+      useAlsaAudio       = true;
+      useJackAudio       = false;
+      usePortaudioAudio  = false;
+#endif
       alsaDevice         = "default";
       alsaSampleRate     = 48000;
       alsaPeriodSize     = 1024;

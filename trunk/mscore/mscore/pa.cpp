@@ -79,7 +79,7 @@ bool Portaudio::init()
       initialized = true;
 
       PaDeviceIndex idx = preferences.portaudioDevice;
-      if (idx == -1)
+      if (idx < 0)
             idx = Pa_GetDefaultOutputDevice();
 
       /* Open an audio I/O stream. */
@@ -99,7 +99,7 @@ bool Portaudio::init()
             (void*)this);
 
       if (err != paNoError) {
-            printf("Portaudio open default stream failed: %s\n", Pa_GetErrorText(err));
+            printf("Portaudio open stream %d failed: %s\n", idx, Pa_GetErrorText(err));
             return true;
             }
       return false;
