@@ -30,6 +30,7 @@
 #include "barline.h"
 #include "part.h"
 #include "lyrics.h"
+#include "repeat.h"
 
 const char* Segment::segmentTypeNames[] = {
    "Clef", "Key Signature", "Time Signature", "Begin Repeat", "ChordRest",
@@ -182,11 +183,7 @@ void Segment::add(Element* el)
       el->setParent(this);
       el->setTick(tick());    //DEBUG
       int staffIdx = el->staffIdx();
-
-      if (staffIdx == -1)
-            printf("Segment(%p)(t:%d)(%d)::add %s tracks %d, staff %d, track = %d\n",
-               this, subtype(), el->tick(), el->name(), _elist.size(), staffIdx,
-               staffIdx * VOICES + el->voice());
+      int track    = staffIdx * VOICES + el->voice();
 
       switch(el->type()) {
             case LYRICS:
@@ -202,6 +199,11 @@ void Segment::add(Element* el)
                   }
                   break;
 
+            case REPEAT_MEASURE:
+                  measure()->setRepeatFlags(measure()->repeatFlags() | RepeatMeasureFlag);
+                  _elist[track] = el;
+                  break;
+
             case CHORD:
             case REST:
                   {
@@ -209,12 +211,13 @@ void Segment::add(Element* el)
                   if (cr->tuplet())
                         cr->tuplet()->add(cr);
                   }
-                  // fall through
+                  _elist[track] = el;
+                  break;
 
             case BREATH:
             case BAR_LINE:
             default:
-                  _elist[staffIdx * VOICES + el->voice()] = el;
+                  _elist[track] = el;
                   break;
             }
       }
@@ -225,38 +228,54 @@ void Segment::add(Element* el)
 
 void Segment::remove(Element* el)
       {
-// printf("Segment::remove %s\n", el->name());
       int staffIdx = el->staffIdx();
-      if (el->type() == LYRICS) {
-            LyricsList& ll = _lyrics[staffIdx];
-            for (int i = 0; i < ll.size(); ++i) {
-                  if (ll[i] == el) {
-                        ll[i] = 0;
-                        //
-                        // remove entry if last or rest of list
-                        // is empty
-                        //
-                        int n = 1;
-                        ++i;
-                        for (; i < ll.size(); ++i) {
-                              if (ll[i])
-                                    return;
-                              ++n;
+      int track    = staffIdx * VOICES + el->voice();
+
+      switch(el->type()) {
+            case LYRICS:
+                  {
+                  LyricsList& ll = _lyrics[staffIdx];
+                  for (int i = 0; i < ll.size(); ++i) {
+                        if (ll[i] == el) {
+                              ll[i] = 0;
+                              //
+                              // remove entry if last or rest of list
+                              // is empty
+                              //
+                              int n = 1;
+                              ++i;
+                              for (; i < ll.size(); ++i) {
+                                    if (ll[i])
+                                          return;
+                                    ++n;
+                                    }
+                              for (int i = 0; i < n; ++i)
+                                    ll.removeLast();
+                              return;
                               }
-                        for (int i = 0; i < n; ++i)
-                              ll.removeLast();
-                        return;
                         }
                   }
-            printf("Measure::remove: %s %p not found\n", el->name(), el);
-            return;
-            }
-      _elist[staffIdx * VOICES + el->voice()] = 0;
+                  printf("Measure::remove: %s %p not found\n", el->name(), el);
+                  break;
 
-      if (el->isChordRest()) {
-            ChordRest* cr = (ChordRest*)el;
-            if (cr->tuplet())
-                  cr->tuplet()->remove(cr);
+            case CHORD:
+            case REST:
+                  {
+                  ChordRest* cr = (ChordRest*)el;
+                  if (cr->tuplet())
+                        cr->tuplet()->remove(cr);
+                  _elist[track] = 0;
+                  }
+                  break;
+
+            case REPEAT_MEASURE:
+                  measure()->setRepeatFlags(measure()->repeatFlags() & ~RepeatMeasureFlag);
+                  _elist[track] = 0;
+                  break;
+
+            default:
+                  _elist[track] = 0;
+                  break;
             }
       }
 

@@ -1,3 +1,5 @@
+23.9.7 (ws)
+      - added RepeatMeasureFlag to _repeatFlags in Measure()
 21.9.7
       (dk)
       - implemented seconda volta
