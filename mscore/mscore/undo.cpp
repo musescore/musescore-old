@@ -124,26 +124,28 @@ void Score::doUndo()
       Selection oSel(*sel);
       InputState oIs(_is);
       sel->deselectAll(this);
-      Undo* u = undoList.back();
-      int n = u->size();
-      for (int i = n-1; i >= 0; --i) {
-            UndoOp* op = &(*u)[i];
-            processUndoOp(op, true);
-            if (op->type == UndoOp::ChangeAccidental) {
-                  // HACK:
-                  // selection is not valid anymore because changeAccidental()
-                  // changes the selected Accidental element
-                  // u->selection.clear();
-                  oSel.clear();
+      if (!undoList.isEmpty()) {
+            Undo* u = undoList.back();
+            int n = u->size();
+            for (int i = n-1; i >= 0; --i) {
+                  UndoOp* op = &(*u)[i];
+                  processUndoOp(op, true);
+                  if (op->type == UndoOp::ChangeAccidental) {
+                        // HACK:
+                        // selection is not valid anymore because changeAccidental()
+                        // changes the selected Accidental element
+                        // u->selection.clear();
+                        oSel.clear();
+                        }
                   }
+            redoList.push_back(u); // put item on redo list
+            undoList.pop_back();
+            endUndoRedo(u);
+            u->inputState = oIs;
+            u->selection  = oSel;
+            if (debugMode)
+                  printf("  end doUndo\n");
             }
-      redoList.push_back(u); // put item on redo list
-      undoList.pop_back();
-      endUndoRedo(u);
-      u->inputState = oIs;
-      u->selection  = oSel;
-      if (debugMode)
-            printf("  end doUndo\n");
       }
 
 //---------------------------------------------------------
