@@ -1485,7 +1485,7 @@ int main(int argc, char* argv[])
       initSymbols();
 
       QSplashScreen* sc = 0;
-      if (preferences.showSplashScreen) {
+      if (!converterMode && preferences.showSplashScreen) {
             QPixmap pm(":/data/splash.jpg");
             sc = new QSplashScreen(pm);
             sc->setWindowFlags(Qt::FramelessWindowHint | Qt::WindowStaysOnTopHint);

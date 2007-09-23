@@ -57,7 +57,8 @@ enum RepeatType {
       RepeatAlSegno        = 1 << 10,
       RepeatFine           = 1 << 11,
       RepeatStart          = 1 << 12,
-      RepeatEnd            = 1 << 13
+      RepeatEnd            = 1 << 13,
+      RepeatMeasureFlag    = 1 << 14
       };
 
 //---------------------------------------------------------
