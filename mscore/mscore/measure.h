@@ -173,8 +173,6 @@ class Measure : public Element {
 
       MeasureWidth& layoutWidth()      { return _mw;        }
 
-      void addBeam(Beam* b);
-
       System* system() const        { return (System*)parent(); }
       void setSystem(System* s)     { setParent((Element*)s);   }
 
@@ -198,6 +196,7 @@ class Measure : public Element {
       void removeMStaff(MStaff staff, int idx);
 
       void layoutBeams(ScoreLayout*);
+      void layoutBeams1(ScoreLayout*);
       void layoutChord(Chord* chord, char*);
       void layoutNoteHeads(int staff);
 

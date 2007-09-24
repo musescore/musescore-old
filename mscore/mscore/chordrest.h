@@ -157,6 +157,7 @@ class ChordRest : public Element {
       virtual qreal downPos() const = 0;
       virtual qreal centerX() const = 0;
 
+      virtual void layoutStem1(ScoreLayout*)     {}
       virtual void layoutStem(ScoreLayout*)     {}
       virtual int upLine() const    { return 0;}
       virtual int downLine() const  { return 8;}

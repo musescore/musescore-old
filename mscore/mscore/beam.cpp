@@ -98,12 +98,12 @@ void Beam::move(double x, double y)
       }
 
 //---------------------------------------------------------
-//   layoutBeams
-//    layout beams and stems
+//   layoutBeams1
 //    auto - beamer
+//    called before layout spacing of notes
 //---------------------------------------------------------
 
-void Measure::layoutBeams(ScoreLayout* layout)
+void Measure::layoutBeams1(ScoreLayout* layout)
       {
       foreach(Beam* beam, _beamList)
             delete beam;
@@ -119,11 +119,11 @@ void Measure::layoutBeams(ScoreLayout* layout)
                         continue;
                   if (e->type() == CLEF) {
                         if (beam) {
-                              beam->layout(layout);
+                              beam->layout1(layout);
                               beam = 0;
                               }
                         if (a1) {
-                              a1->layoutStem(layout);
+                              a1->layoutStem1(layout);
                               a1 = 0;
                               }
                         continue;
@@ -165,7 +165,7 @@ void Measure::layoutBeams(ScoreLayout* layout)
                                     styleBreak = false;
                               }
                         if (styleBreak || tooLong || bm == BEAM_BEGIN || bm == BEAM_NO) {
-                              beam->layout(layout);
+                              beam->layout1(layout);
                               beam = 0;
                               a1   = 0;
                               goto newBeam;
@@ -176,7 +176,7 @@ void Measure::layoutBeams(ScoreLayout* layout)
 
                               // is this the last beam element?
                               if (bm == BEAM_END) {
-                                    beam->layout(layout);
+                                    beam->layout1(layout);
                                     beam = 0;
                                     a1   = 0;
                                     }
@@ -212,13 +212,14 @@ newBeam:
                                     }
                               else {
                                     if (bm == BEAM_BEGIN) {
-                                          a1->layoutStem(layout);
+                                          a1->layoutStem1(layout);
                                           a1 = cr;
                                           }
                                     else {
                                           beam = new Beam(score());
                                           beam->setStaff(a1->staff());
-                                          addBeam(beam);
+                                          beam->setParent(this);
+                                          _beamList.push_back(beam);
                                           a1->setBeam(beam);
                                           beam->add(a1);
                                           cr->setBeam(beam);
@@ -228,17 +229,42 @@ newBeam:
                                     }
                               }
                         else {
-                              cr->layoutStem(layout);
+                              cr->layoutStem1(layout);
                               if (a1)
-                                    a1->layoutStem(layout);
+                                    a1->layoutStem1(layout);
                               a1 = 0;
                               }
                         }
                   }
             if (beam)
-                  beam->layout(layout);
+                  beam->layout1(layout);
             else if (a1)
-                  a1->layoutStem(layout);
+                  a1->layoutStem1(layout);
+            }
+      }
+
+//---------------------------------------------------------
+//   layoutBeams
+//    auto - beamer
+//    called after layout spacing of notes
+//---------------------------------------------------------
+
+void Measure::layoutBeams(ScoreLayout* layout)
+      {
+      foreach(Beam* beam, _beamList)
+            beam->layout(layout);
+
+      int tracks = _score->nstaves() * VOICES;
+      for (int track = 0; track < tracks; ++track) {
+            for (Segment* segment = first(); segment; segment = segment->next()) {
+                  Element* e = segment->element(track);
+                  if (e && e->isChordRest()) {
+                        ChordRest* cr = (ChordRest*) e;
+                        if (cr->beam())
+                              continue;
+                        cr->layoutStem(layout);
+                        }
+                  }
             }
       }
 
@@ -259,17 +285,35 @@ QString Beam::xmlType(ChordRest* cr) const
       }
 
 //---------------------------------------------------------
+//   layout1
+//---------------------------------------------------------
+
+void Beam::layout1(ScoreLayout* layout)
+      {
+      //delete old segments
+      for (iBeamSegment i = beamSegments.begin(); i != beamSegments.end(); ++i)
+            delete *i;
+      beamSegments.clear();
+
+      //
+      // delete stem & hook for all chords
+      //
+      foreach(ChordRest* cr, elements) {
+            if (cr->type() == CHORD) {
+                  Chord* chord = (Chord*)cr;
+                  chord->setStem(0);
+                  chord->setHook(0);
+                  }
+            }
+      }
+
+//---------------------------------------------------------
 //   layout
 //---------------------------------------------------------
 
 void Beam::layout(ScoreLayout* layout)
       {
       double _spatium = layout->spatium();
-
-      //delete old segments
-      for (iBeamSegment i = beamSegments.begin(); i != beamSegments.end(); ++i)
-            delete *i;
-      beamSegments.clear();
 
       //---------------------------------------------------
       //   calculate direction of beam
@@ -293,16 +337,11 @@ void Beam::layout(ScoreLayout* layout)
       int firstMove  = elements.front()->move();
 
       foreach(ChordRest* cr, elements) {
-            //
-            // delete stem & hook for this chord
-            //
             if (cr->type() == CHORD) {
                   c2 = (Chord*)(cr);
                   if (c1 == 0)
                         c1 = c2;
                   Chord* chord = c2;
-                  chord->setStem(0);
-                  chord->setHook(0);
                   //
                   // if only one stem direction is manually set it
                   // determines if beams are up or down
@@ -474,27 +513,25 @@ void Beam::layout(ScoreLayout* layout)
       bs->p1  = p1;
       bs->p2  = p2;
 
-//      if (maxTickLen > division/2 + division/4) {
-            if (maxTickLen <= division/16) {       // 1/64     24
-                  bs = new BeamSegment(p1, p2);
-                  bs->move(0, beamDist * 3);
-                  beamSegments.push_back(bs);
-                  }
-            if (maxTickLen <= division/8) {        // 1/32   48
-                  bs = new BeamSegment(p1, p2);
-                  bs->move(0, beamDist * 2);
-                  beamSegments.push_back(bs);
-                  }
-            if (maxTickLen <= division/4+division/8) {   //       144
-                  bs = new BeamSegment(p1, p2);
-                  bs->move(0, beamDist);
-                  beamSegments.push_back(bs);
-                  }
-//            }
+      if (maxTickLen <= division/16) {       // 1/64     24
+            bs = new BeamSegment(p1, p2);
+            bs->move(0, beamDist * 3);
+            beamSegments.push_back(bs);
+            }
+      if (maxTickLen <= division/8) {        // 1/32   48
+            bs = new BeamSegment(p1, p2);
+            bs->move(0, beamDist * 2);
+            beamSegments.push_back(bs);
+            }
+      if (maxTickLen <= division/4+division/8) {   //       144
+            bs = new BeamSegment(p1, p2);
+            bs->move(0, beamDist);
+            beamSegments.push_back(bs);
+            }
 
-            //---------------------------------------------
-            //   create broken/short beam segments
-            //---------------------------------------------
+      //---------------------------------------------
+      //   create broken/short beam segments
+      //---------------------------------------------
 
       int l = maxTickLen;
       if (l > division/4)
@@ -593,18 +630,16 @@ void Beam::layout(ScoreLayout* layout)
                   continue;
             Chord* chord = (Chord*)(cr);
 
-            QPointF npos(chord->stemPos(chord->isUp(), false) + chord->pos() + chord->segment()->pos());
-
             Stem* stem = chord->stem();
             if (!stem) {
                   stem = new Stem(score());
                   chord->setStem(stem);
                   }
 
+            QPointF npos(chord->stemPos(chord->isUp(), false) + chord->pos() + chord->segment()->pos());
             double x2 = npos.x();
-            double xd = x2 - x1;
             double y1 = npos.y();
-            double y2 = p1.y() + xd * slope;
+            double y2 = p1.y() + (x2 - x1) * slope;
 
             double stemLen = chord->isUp() ? (y1 - y2) : (y2 - y1);
             stem->setLen(spatium(stemLen));

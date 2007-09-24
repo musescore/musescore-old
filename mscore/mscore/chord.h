@@ -147,6 +147,7 @@ class Chord : public ChordRest {
 
       QList<LedgerLine*>* ledgerLines()      { return &_ledgerLines; }
 
+      virtual void layoutStem1(ScoreLayout*);
       virtual void layoutStem(ScoreLayout*);
       NoteList* noteList()                   { return &notes; }
       const NoteList* noteList() const       { return &notes; }
