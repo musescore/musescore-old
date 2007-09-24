@@ -59,7 +59,9 @@ class Beam : public Element {
       virtual Beam* clone() const      { return new Beam(*this); }
       virtual ElementType type() const { return BEAM; }
 
+      void layout1(ScoreLayout*);
       void layout(ScoreLayout*);
+
       void add(ChordRest* a)           { elements.append(a); }
       QList<ChordRest*> getElements()  { return elements; }
       void remove(ChordRest* a);

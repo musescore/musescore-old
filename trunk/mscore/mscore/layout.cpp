@@ -197,13 +197,11 @@ void ScoreLayout::doLayout()
             }
 
       //---------------------------------------------------
-      //   pass II:  place ties & slurs & hairpins
+      //   pass II:  place ties & slurs & hairpins & beams
       //---------------------------------------------------
 
       for (Measure* m = first(); m; m = m->next()) {
             m->layoutBeams(this);
-            }
-      for (Measure* m = first(); m; m = m->next()) {
             m->layout2(this);
             }
 
@@ -463,6 +461,7 @@ System* ScoreLayout::layoutSystem(Measure*& im, System* system, qreal x, qreal y
                         }
                   }
 
+            m->layoutBeams1(this);  // find hooks
             m->layoutX(this, 1.0);
 
             double ww      = m->layoutWidth().stretchable;

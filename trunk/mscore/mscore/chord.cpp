@@ -267,6 +267,140 @@ QRectF Chord::bbox() const
       }
 
 //---------------------------------------------------------
+//   layoutStem1
+//    called before layout spacing of notes
+//    set hook if necessary to get right note width for next
+//       pass
+//---------------------------------------------------------
+
+/**
+ Layout chord stem and hook.
+*/
+
+void Chord::layoutStem1(ScoreLayout* layout)
+      {
+      double _spatium = layout->spatium();
+      System* s      = segment()->measure()->system();
+      if (s == 0)       //DEBUG
+            return;
+      double sy      = s->staff(staffIdx())->bbox().y();
+      Note* upnote   = upNote();
+      Note* downnote = downNote();
+
+      double uppos   = s->staff(staffIdx() + upnote->move())->bbox().y();
+            uppos    = (uppos - sy)/_spatium * 2.0 + upnote->line();
+
+      double downpos = s->staff(staffIdx() + downnote->move())->bbox().y();
+            downpos  = (downpos - sy)/_spatium * 2.0 + downnote->line();
+
+      //-----------------------------------------
+      //  process stem
+      //-----------------------------------------
+
+      bool up = isUp();
+
+      int ticks = tuplet() ? tuplet()->baseLen() : tickLen();
+      int hookIdx;
+      Spatium stemLen;
+
+      bool hasStem = true;
+      if (_grace) {
+            stemLen = Spatium(2.5);
+            hookIdx = 1;
+            }
+      else {
+            stemLen = Spatium((up ? uppos - 3 : 3 - downpos) / 2.0);
+            if (stemLen < Spatium(3.5))
+                  stemLen = Spatium(3.5);
+            if (ticks < division/16)
+                  hookIdx = 5;
+            else if (ticks < division/8)
+                  hookIdx = 4;
+            else if (ticks < division/4)
+                  hookIdx = 3;
+            else if (ticks < division/2)
+                  hookIdx = 2;
+            else if (ticks < division)
+                  hookIdx = 1;
+            else if (ticks < division*2)
+                  hookIdx = 0;
+            else if (ticks < division*4)  // < 1/1
+                  hookIdx = 0;
+            else {
+                  hookIdx = 0;
+                  hasStem = false;
+                  }
+            }
+
+      int extraStemLen = hookIdx - 2;
+      if (_tremolo) {
+            int extraStemLen2 = _tremolo->subtype();
+            if (hookIdx == 0)
+                  extraStemLen2 -= 1;
+            if (extraStemLen2 > extraStemLen)
+                  extraStemLen = extraStemLen2;
+            }
+
+      if (extraStemLen > 0)
+            stemLen += extraStemLen *Spatium(0.5);
+
+      double headCorrection = 0.2;
+
+      stemLen        += Spatium((downpos - uppos) * .5 - headCorrection);
+      double pstemLen = point(stemLen);
+      QPointF npos    = stemPos(up, false);
+      if (up)
+            npos += QPointF(0, -pstemLen);
+
+      if (hasStem) {
+            if (!_stem) {
+                  _stem = new Stem(score());
+                  _stem->setParent(this);
+                  }
+            _stem->setLen(stemLen);
+            _stem->setPos(npos);
+            }
+      else
+            setStem(0);
+
+      //-----------------------------------------
+      //    process tremolo
+      //-----------------------------------------
+
+      if (_tremolo) {
+            _tremolo->layout(layout);
+            qreal x  = npos.x();
+            if (!hasStem) {
+                  // center tremolo above note
+                  x = upnote->x() + upnote->headWidth() * .5;
+                  }
+            qreal y  = npos.y();
+            qreal h  = pstemLen;
+            qreal th = _tremolo->bbox().height();
+            _tremolo->setPos(x, y + h * .5 - th * .5);
+            }
+
+      //-----------------------------------------
+      //  process hook
+      //-----------------------------------------
+
+      if (hookIdx) {
+            if (!up)
+                  hookIdx = -hookIdx;
+            if (!_hook) {
+                  _hook = new Hook(score());
+                  _hook->setParent(this);
+                  }
+            _hook->setIdx(hookIdx, _grace);
+            qreal lw = point(score()->style()->stemWidth) * .5;
+            QPointF p = npos + QPointF(lw, up ? -lw : pstemLen);
+            _hook->setPos(p);
+            }
+      else
+            setHook(0);
+      }
+
+//---------------------------------------------------------
 //   layoutStem
 //---------------------------------------------------------
 

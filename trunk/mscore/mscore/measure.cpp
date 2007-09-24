@@ -1096,22 +1096,12 @@ void Measure::moveY(int staff, double dy)
                   bl->setHeight(point(barLineLen));
                   }
             }
-      foreach(Beam* beam, _beamList)
-            beam->move(0, dy);
+//      foreach(Beam* beam, _beamList)
+//            beam->move(0, dy);
       foreach(Tuplet* tuplet, _tuplets)
             tuplet->move(0, dy);
       if (_noText)
             _noText->move(0, dy);
-      }
-
-//---------------------------------------------------------
-//   addBeam
-//---------------------------------------------------------
-
-void Measure::addBeam(Beam* b)
-      {
-      b->setParent(this);
-      _beamList.push_back(b);
       }
 
 //---------------------------------------------------------
