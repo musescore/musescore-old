@@ -687,7 +687,6 @@ bool Note::acceptDrop(Viewer* viewer, const QPointF&, int type, const QDomElemen
       if (type == ATTRIBUTE || type == TEXT || type == ACCIDENTAL
          || type == BREATH || type == ARPEGGIO || type == NOTEHEAD
          || type == TREMOLO || type == IMAGE) {
-printf("Note::acceptDrop: %d\n", type);
             viewer->setDropTarget(this);
             return true;
             }

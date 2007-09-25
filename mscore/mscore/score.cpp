@@ -144,6 +144,7 @@ Score::Score()
       _printing         = false;
       cmdActive         = false;
       _playlistDirty    = false;
+      rights            = 0;
       clear();
       }
 
@@ -153,6 +154,8 @@ Score::Score()
 
 Score::~Score()
       {
+      if (rights)
+            delete rights;
       delete tempomap;
       delete sigmap;
       delete sel;
@@ -198,7 +201,9 @@ void Score::clear()
       _dirty          = false;
       _saved          = false;
       _created        = false;
-      rights          = "";
+      if (rights)
+            delete rights;
+      rights          = 0;
       movementNumber  = "";
       movementTitle   = "";
       _pageOffset     = 0;
@@ -273,8 +278,8 @@ void Score::write(Xml& xml)
             }
       xml.tag("showInvisible", _showInvisible);
       pageFormat()->write(xml);
-      if (!rights.isEmpty())
-            xml.tag("rights", rights);
+      if (rights)
+            xml.tag("rights", rights->toHtml());
       if (!movementNumber.isEmpty())
             xml.tag("movement-number", movementNumber);
       if (!movementTitle.isEmpty())
@@ -749,12 +754,6 @@ int Measure::snap(int tick, const QPointF p) const
 
 void Score::startEdit(Element* element)
       {
-#if 0
-      foreach (Shortcut* s, shortcuts) {
-            if (s->action)
-                  s->action->setShortcut(0);
-            }
-#endif
       if (element->type() == SLUR_SEGMENT) {
             //
             // we must clone the whole slur with all segments
@@ -800,12 +799,6 @@ void Score::startEdit(Element* element)
 
 void Score::endEdit()
       {
-#if 0
-      foreach (Shortcut* s, shortcuts) {
-            if (s->action)
-                  s->action->setShortcut(s->key);
-            }
-#endif
       refresh |= editObject->bbox();
       editObject->endEdit();
       refresh |= editObject->bbox();
@@ -1302,5 +1295,19 @@ void Score::setTextStyles(QVector<TextStyle*>& s)
       _textStyles.clear();
       foreach(TextStyle* ts, s)
             _textStyles.append(new TextStyle(*ts));
+      }
+
+//---------------------------------------------------------
+//   setCopyright
+//---------------------------------------------------------
+
+void Score::setCopyright(QTextDocument* doc)
+      {
+      if (rights) {
+            delete rights;
+            rights = 0;
+            }
+      if (doc)
+            rights = doc->clone();
       }
 

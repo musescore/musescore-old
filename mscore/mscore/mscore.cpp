@@ -263,7 +263,7 @@ MuseScore::MuseScore()
          << "stretch+" << "stretch-"
          << "instruments" << "clefs" << "keys" << "symbols" << "times" << "dynamics"
          << "title-text" << "subtitle-text" << "composer-text" << "poet-text" << "chord-text"
-         << "rehearsalmark-text"
+         << "rehearsalmark-text" << "copyright-text"
          << "lyrics" << "fingering" << "system-text" << "tempo"
          << "metronome" << "cut" << "copy" << "paste"
          << "beam-start" << "beam-mid" << "no-beam" << "beam32"
@@ -1758,10 +1758,10 @@ void MuseScore::clipboardChanged()
 //      foreach(QString s, formats)
 //            printf("format <%s>\n", s.toLatin1().data());
 
-      bool flag = ms->hasFormat("application/mscore/symbol")
-            ||    ms->hasFormat("application/mscore/staff")
-            ||    ms->hasFormat("application/mscore/system")
-            ||    ms->hasFormat("application/mscore/symbols");
+      bool flag = ms->hasFormat(mimeSymbolFormat)
+            ||    ms->hasFormat(mimeStaffListFormat)
+            ||    ms->hasFormat(mimeMeasureListFormat)
+            ||    ms->hasFormat(mimeSymbolListFormat);
       // TODO: depends on selection state
       getAction("paste")->setEnabled(flag);
       }

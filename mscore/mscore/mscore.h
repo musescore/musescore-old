@@ -287,6 +287,7 @@ class MuseScore : public QMainWindow {
       bool playEnabled() const;
       Score* currentScore() const { return cs; }
       void setState(int);
+      int state() const { return _state; }
       static Shortcut sc[];
       static Shortcut scSeq[];
       void incMag();

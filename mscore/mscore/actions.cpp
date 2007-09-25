@@ -1225,6 +1225,15 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
+         "copyright-text",
+         QT_TR_NOOP("Add Copyright"),
+         0,
+         Qt::WindowShortcut,
+         QT_TR_NOOP("Copyright"),
+         QT_TR_NOOP("Add Copyright Text")
+         ),
+      Shortcut(
+         STATE_NORMAL | STATE_NOTE_ENTRY,
          "chord-text",
          QT_TR_NOOP("Add Chord Name"),
          Qt::CTRL + Qt::Key_K,

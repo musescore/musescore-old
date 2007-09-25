@@ -28,6 +28,9 @@ extern bool noMidi;           ///< Dont use midi; cmd line option.
 extern bool dumpMidi;         ///< debug option: dump midi input
 
 static const QString mimeSymbolFormat("application/mscore/symbol");
+static const QString mimeSymbolListFormat("application/mscore/symbollist");
+static const QString mimeStaffListFormat("application/mscore/stafflist");
+static const QString mimeMeasureListFormat("application/mscore/measurelist");
 
 static const qreal INCH = 25.4;
 static const qreal PPI  = 72.0;     // printer points per inch

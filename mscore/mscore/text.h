@@ -80,6 +80,8 @@ class Text : public Element {
 
       void setText(const QString& s);
       QString getText() const;
+      QString getHtml() const;
+      void setHtml(const QString&);
       void setDoc(const QTextDocument&);
       QTextDocument* getDoc() const { return doc; }
 

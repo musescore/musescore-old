@@ -263,8 +263,11 @@ void MusicXml::scorePartwise(QDomElement e)
                               else
                                     printf("unknown creator <%s>\n", type.toLatin1().data());
                               }
-                        else if (e.tagName() == "rights")
-                              score->rights = ee.text();
+                        else if (e.tagName() == "rights") {
+                              QTextDocument* doc = new QTextDocument(0);
+                              doc->setPlainText(ee.text());
+                              score->setCopyright(doc);
+                              }
                         else if (ee.tagName() == "encoding")
                               domNotImplemented(ee);
                         else if (e.tagName() == "source")

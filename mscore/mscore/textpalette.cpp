@@ -41,7 +41,7 @@ static SymCode pSymbols[] = {
       SymCode(0, 0),
       SymCode(0, 0),
       SymCode(0, 0),
-      SymCode(0, 0),
+      SymCode(0xa9, -1),
       SymCode(0x00c0, -1),
       SymCode(0x00c1, -1),
       SymCode(0x00c2, -1),
@@ -126,26 +126,28 @@ TextPalette::TextPalette(QWidget* parent)
       symbolBox->setLayout(gl);
       QButtonGroup* sg = new QButtonGroup(this);
 
-#if 0
       for (unsigned i = 0; i < sizeof(pSymbols)/sizeof(*pSymbols); ++i) {
             if (pSymbols[i].code == 0)    // empty slot?
                   continue;
             QToolButton* tb = new QToolButton;
-            // tb->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
             tb->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
             tb->setFixedSize(40, 40);
+
             SymCode sc(pSymbols[i]);
             if (sc.style == -1)
                   tb->setText(sc.code);
             else {
-                  QIcon icon = symIcon(sc, 25, 35, 35);
-                  tb->setIconSize(QSize(35, 35));
-                  tb->setIcon(icon);
+                  const Sym* sym = findSymbol(sc.code, 0);
+                  if (sym) {
+                        QIcon icon = symIcon(*sym, 25, 35, 35);
+                        tb->setIconSize(QSize(35, 35));
+                        tb->setIcon(icon);
+                        }
                   }
             gl->addWidget(tb, i / 16, i % 16);
             sg->addButton(tb, i);
             }
-#endif
+
       connect(sg, SIGNAL(buttonClicked(int)), SLOT(symbolClicked(int)));
       connect(typefaceSize, SIGNAL(valueChanged(double)), SLOT(sizeChanged(double)));
       connect(typefaceBold, SIGNAL(clicked(bool)), SLOT(boldClicked(bool)));

@@ -765,11 +765,18 @@ void Score::cmdAddText(int subtype)
                   s->setParent(page);
                   }
                   break;
+            case TEXT_COPYRIGHT:
+                  {
+                  s = new Text(this);
+                  s->setParent(page);
+                  s->setSubtype(subtype);
+                  }
+                  break;
+
             case TEXT_TRANSLATOR:
             case TEXT_MEASURE_NUMBER:
             case TEXT_PAGE_NUMBER_ODD:
             case TEXT_PAGE_NUMBER_EVEN:
-            case TEXT_COPYRIGHT:
             case TEXT_FINGERING:
             case TEXT_INSTRUMENT_LONG:
             case TEXT_INSTRUMENT_SHORT:
@@ -974,6 +981,7 @@ void Score::insertMeasures(int n)
 		      }
             addMeasure(m);
 	      undoOp(UndoOp::InsertMeasure, m);
+            undoInsertTime(tick, ticks);
             }
       select(0,0,0);
 	layoutAll = true;
@@ -1474,14 +1482,14 @@ void Score::cmd(const QString& cmd)
                   if (sel->state() == SEL_SINGLE) {
                         QMimeData* mimeData = new QMimeData;
                         Element* el = sel->element();
-                        mimeData->setData("application/mscore/symbol", el->mimeData(QPointF()));
+                        mimeData->setData(mimeSymbolFormat, el->mimeData(QPointF()));
                         QApplication::clipboard()->setMimeData(mimeData);
                         deleteItem(el);
                         }
                   }
             else if (cmd == "copy") {
-                  const char* mimeType = sel->mimeType();
-                  if (mimeType) {
+                  QString mimeType = sel->mimeType();
+                  if (!mimeType.isEmpty()) {
                         QMimeData* mimeData = new QMimeData;
                         mimeData->setData(mimeType, sel->mimeData());
                         QApplication::clipboard()->setMimeData(mimeData);
@@ -1489,8 +1497,8 @@ void Score::cmd(const QString& cmd)
                   }
             else if (cmd == "paste") {
                   const QMimeData* ms = QApplication::clipboard()->mimeData();
-                  if (sel->state() == SEL_SINGLE && ms && ms->hasFormat("application/mscore/symbol")) {
-                        QByteArray data(ms->data("application/mscore/symbol"));
+                  if (sel->state() == SEL_SINGLE && ms && ms->hasFormat(mimeSymbolFormat)) {
+                        QByteArray data(ms->data(mimeSymbolFormat));
                         QDomDocument doc;
                         int line, column;
                         QString err;
@@ -1505,9 +1513,9 @@ void Score::cmd(const QString& cmd)
                         sel->element()->drop(QPointF(), QPointF(), type, e);
                         addRefresh(sel->element()->abbox());
                         }
-                  else if (sel->state() == SEL_STAFF && ms && ms->hasFormat("application/mscore/staff"))
+                  else if (sel->state() == SEL_STAFF && ms && ms->hasFormat(mimeStaffListFormat))
                         pasteStaff(ms);
-                  else if (sel->state() == SEL_SYSTEM && ms && ms->hasFormat("application/mscore/system")) {
+                  else if (sel->state() == SEL_SYSTEM && ms && ms->hasFormat(mimeMeasureListFormat)) {
                         printf("paste system\n");
                         }
                   else {
@@ -1536,6 +1544,8 @@ void Score::cmd(const QString& cmd)
                   return cmdAddText(TEXT_COMPOSER);
             else if (cmd == "poet-text")
                   return cmdAddText(TEXT_POET);
+            else if (cmd == "copyright-text")
+                  return cmdAddText(TEXT_COPYRIGHT);
             else if (cmd == "system-text")
                   return cmdAddText(TEXT_SYSTEM);
             else if (cmd == "chord-text")
@@ -1559,7 +1569,6 @@ void Score::pasteStaff(const QMimeData* ms)
             return;
             }
       int tickStart  = sel->tickStart;
-      int staffStart = sel->staffStart;
 
       Measure* measure;
       for (measure = _layout->first(); measure; measure = measure->next()) {
@@ -1570,8 +1579,7 @@ void Score::pasteStaff(const QMimeData* ms)
             printf("  cannot find measure\n");
             return;
             }
-
-      QByteArray data(ms->data("application/mscore/staff"));
+      QByteArray data(ms->data(mimeStaffListFormat));
       QDomDocument doc;
       int line, column;
       QString err;
@@ -1579,8 +1587,17 @@ void Score::pasteStaff(const QMimeData* ms)
             printf("error reading paste data\n");
             return;
             }
+      pasteStaff(doc.documentElement(), measure, sel->staffStart);
+      }
+
+//---------------------------------------------------------
+//   pasteStaff
+//---------------------------------------------------------
+
+void Score::pasteStaff(QDomElement e, Measure* measure, int staffStart)
+      {
       int srcStaffStart = -1;
-      for (QDomElement e = doc.documentElement(); !e.isNull(); e = e.nextSiblingElement()) {
+      for (; !e.isNull(); e = e.nextSiblingElement()) {
             if (e.tagName() == "Staff") {
                   Measure* m = measure;
                   int staffIdx = e.attribute("id", "0").toInt();

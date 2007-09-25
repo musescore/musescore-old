@@ -1712,6 +1712,11 @@ bool Measure::acceptDrop(Viewer* viewer, const QPointF& p, int type,
       QRectF r(rr.x(), rrr.y(), rr.width(), rrr.height());
 
       switch(type) {
+            case STAFF_LIST:
+                  viewer->setDropRectangle(r);
+                  return true;
+
+            case MEASURE_LIST:
             case REPEAT:
                   viewer->setDropRectangle(rr);
                   return true;
@@ -1719,6 +1724,7 @@ bool Measure::acceptDrop(Viewer* viewer, const QPointF& p, int type,
             case BRACKET:
             case LAYOUT_BREAK:
             case REPEAT_MEASURE:
+            case MEASURE:
                   viewer->setDropRectangle(r);
                   return true;
 
@@ -1787,6 +1793,16 @@ Element* Measure::drop(const QPointF& p, const QPointF& /*offset*/, int type, co
       QPointF mrp = p - pos() - system()->pos() - system()->page()->pos();
 
       switch(ElementType(type)) {
+            case MEASURE_LIST:
+                  printf("drop measureList or StaffList\n");
+                  break;
+
+            case STAFF_LIST:
+                  {
+                  score()->pasteStaff(e, this, idx);
+                  }
+                  break;
+
             case REPEAT:
                   {
                   Repeat* repeat = new Repeat(score());
