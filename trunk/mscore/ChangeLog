@@ -1,4 +1,8 @@
 25.9.7 (ws)
+      - fix insert measure(s)
+      - implemented measure drag&drop
+      - make copyright text editable
+      - added "Copyright" text menu entry
       - fix printing of multiline Lyrics
 24.9.7 (ws)
       - splitted beam layout to get the right note spacing in one layout pass

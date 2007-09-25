@@ -1636,8 +1636,8 @@ bool ExportMusicXml::write(const QString& name)
                   }
             }
 
-      if (!score->rights.isEmpty())
-            xml.tag("rights", score->rights);
+      if (score->rights)
+            xml.tag("rights", score->rights->toPlainText());
       xml.stag("encoding");
       xml.tag("software", QString("MuseScore ") + QString(VERSION));
       if (debugMode)

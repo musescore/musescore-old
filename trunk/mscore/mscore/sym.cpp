@@ -309,6 +309,19 @@ printf("sym not found\n");
       }
 
 //---------------------------------------------------------
+//   findSymbol
+//---------------------------------------------------------
+
+const Sym* findSymbol(QChar code, int fontId)
+      {
+      foreach(const Sym& s, symbols) {
+            if (s.code() == code && s.getFontId() == fontId)
+                  return &s;
+            }
+      return 0;
+      }
+
+//---------------------------------------------------------
 //   bbox
 //    BUG:
 //      For unknown reasons i cannot get the right font

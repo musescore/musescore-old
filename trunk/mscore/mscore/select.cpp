@@ -394,20 +394,20 @@ void Selection::updateState()
 //   mimeType
 //---------------------------------------------------------
 
-const char* Selection::mimeType() const
+QString Selection::mimeType() const
       {
       switch (_state) {
             default:
             case SEL_NONE:
-                  return 0;
+                  return QString();
             case SEL_SINGLE:
-                  return "application/mscore/symbol";
+                  return mimeSymbolFormat;
             case SEL_MULT:
-                  return "application/mscore/symbols";
+                  return mimeSymbolListFormat;
             case SEL_STAFF:
-                  return "application/mscore/staff";
+                  return mimeStaffListFormat;
             case SEL_SYSTEM:
-                  return "application/mscore/system";
+                  return mimeMeasureListFormat;
             }
       }
 

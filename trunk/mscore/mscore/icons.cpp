@@ -87,7 +87,6 @@ QIcon symIcon(const Sym& sc, int size, int width, int height)
       sc.draw(painter, x, y);
       painter.end();
       _spatium = ospatium;
-
       return QIcon(image);
       }
 

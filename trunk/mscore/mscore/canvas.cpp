@@ -492,8 +492,8 @@ void Canvas::mouseDoubleClickEvent(QMouseEvent* ev)
 void Canvas::mouseMoveEvent(QMouseEvent* ev)
       {
       if (buttonState == Qt::MidButton) {
-            const char* mimeType = _score->sel->mimeType();
-            if (mimeType) {
+            QString mimeType = _score->sel->mimeType();
+            if (!mimeType.isEmpty()) {
                   QDrag* drag = new QDrag(this);
                   QMimeData* mimeData = new QMimeData;
                   mimeData->setData(mimeType, _score->sel->mimeData());
@@ -552,14 +552,28 @@ void Canvas::mouseMoveEvent1(QMouseEvent* ev)
                   {
                   Element* de = _score->dragObject();
                   if (de && keyState == Qt::ShiftModifier) {
-                        QDrag* drag = new QDrag(this);
-                        QMimeData* mimeData = new QMimeData;
-                        QPointF rpos(startMove - de->abbox().topLeft());
-                        mimeData->setData(mimeSymbolFormat, de->mimeData(rpos));
-                        drag->setMimeData(mimeData);
-                        _score->endCmd();
-                        drag->start(Qt::CopyAction);
-                        break;
+                        if (de->type() == MEASURE) {
+                              QString mimeType = _score->sel->mimeType();
+                              if (!mimeType.isEmpty()) {
+                                    QDrag* drag = new QDrag(this);
+                                    QMimeData* mimeData = new QMimeData;
+                                    mimeData->setData(mimeType, score()->sel->mimeData());
+                                    drag->setMimeData(mimeData);
+                                    _score->endCmd();
+                                    drag->start(Qt::CopyAction);
+                                    break;
+                                    }
+                              }
+                        else {
+                              QDrag* drag = new QDrag(this);
+                              QMimeData* mimeData = new QMimeData;
+                              QPointF rpos(startMove - de->abbox().topLeft());
+                              mimeData->setData(mimeSymbolFormat, de->mimeData(rpos));
+                              drag->setMimeData(mimeData);
+                              _score->endCmd();
+                              drag->start(Qt::CopyAction);
+                              break;
+                              }
                         }
                   if (de && de->isMovable()) {
                         QPointF o;
@@ -1368,12 +1382,30 @@ void Canvas::dragMoveEvent(QDragMoveEvent* event)
             _score->end();
             return;
             }
-      if (!event->mimeData()->hasFormat(mimeSymbolFormat)) {
+      const QMimeData* md = event->mimeData();
+      QByteArray data;
+      int etype;
+      if (md->hasFormat(mimeSymbolFormat)) {
+            etype = ELEMENT;
+            data = md->data(mimeSymbolFormat);
+            }
+      else if (md->hasFormat(mimeSymbolListFormat)) {
+            etype = ELEMENT_LIST;
+            data = md->data(mimeSymbolListFormat);
+            }
+      else if (md->hasFormat(mimeStaffListFormat)) {
+            etype = STAFF_LIST;
+            data = md->data(mimeStaffListFormat);
+            }
+      else if (md->hasFormat(mimeMeasureListFormat)) {
+            etype = MEASURE_LIST;
+            data = md->data(mimeMeasureListFormat);
+            }
+      else {
             _score->end();
             return;
             }
 
-      QByteArray data(event->mimeData()->data(mimeSymbolFormat));
       QDomDocument doc;
       int line, column;
       QString err;
@@ -1383,57 +1415,73 @@ void Canvas::dragMoveEvent(QDragMoveEvent* event)
                   return;
             }
       QDomElement e = doc.documentElement();
-      QPointF dragOffset;
-      int type = Element::readType(e, &dragOffset);
-      switch(type) {
-            case VOLTA:
-                  if (dragAboveSystem(pos))
-                        event->acceptProposedAction();
-                  break;
-            case PEDAL:
-            case DYNAMIC:
-            case OTTAVA:
-            case TRILL:
-            case HAIRPIN:
-                  if (dragTimeAnchorElement(pos))
-                        event->acceptProposedAction();
-                  break;
-            case SYMBOL:
-                  {
-                  Symbol* s = new Symbol(_score);
-                  s->read(e);
-                  if (s->anchor() == ANCHOR_STAFF) {
+
+      if (etype == ELEMENT) {
+            QPointF dragOffset;
+            int type = Element::readType(e, &dragOffset);
+            switch(type) {
+                  case VOLTA:
+                        if (dragAboveSystem(pos))
+                              event->acceptProposedAction();
+                        break;
+                  case PEDAL:
+                  case DYNAMIC:
+                  case OTTAVA:
+                  case TRILL:
+                  case HAIRPIN:
                         if (dragTimeAnchorElement(pos))
                               event->acceptProposedAction();
+                        break;
+                  case SYMBOL:
+                        {
+                        Symbol* s = new Symbol(_score);
+                        s->read(e);
+                        if (s->anchor() == ANCHOR_STAFF) {
+                              if (dragTimeAnchorElement(pos))
+                                    event->acceptProposedAction();
+                              }
+                        delete s;
                         }
-                  delete s;
-                  }
-                  break;
-            case IMAGE:
-                  event->acceptProposedAction();
-                  break;
+                        break;
+                  case IMAGE:
+                        event->acceptProposedAction();
+                        break;
 
-            default:
-                  {
-                  Element* el = elementAt(pos);
-                  if (el) {
-                        bool accept = el->acceptDrop(this, pos, type, e);
-                        if (accept) {
-                              event->acceptProposedAction();
+                  default:
+                        {
+                        Element* el = elementAt(pos);
+                        if (el) {
+                              bool accept = el->acceptDrop(this, pos, type, e);
+                              if (accept) {
+                                    event->acceptProposedAction();
+                                    }
+                              else {
+                                    if (debugMode)
+                                          printf("ignore drop of %s(%d)\n", elementNames[type], type);
+                                    event->ignore();
+                                    setDropTarget(0);
+                                    }
                               }
                         else {
-                              if (debugMode)
-                                    printf("ignore drop of %s(%d)\n", elementNames[type], type);
                               event->ignore();
                               setDropTarget(0);
                               }
                         }
-                  else {
-                        event->ignore();
-                        setDropTarget(0);
-                        }
+                        break;
                   }
-                  break;
+            _score->end();
+            return;
+            }
+      Element* el = elementAt(pos);
+      if (el == 0 || el->type() != MEASURE) {
+            _score->end();
+            return;
+            }
+      else if (etype == ELEMENT_LIST) {
+            printf("accept drop element list\n");
+            }
+      else if (etype == STAFF_LIST || etype == MEASURE_LIST) {
+            el->acceptDrop(this, pos, etype, e);
             }
       _score->end();
       }
@@ -1491,12 +1539,34 @@ void Canvas::dropEvent(QDropEvent* event)
                   return;
                   }
             }
-      else if (!event->mimeData()->hasFormat(mimeSymbolFormat)) {
+
+//      printf("DROP <%s>\n", data.data());
+
+      const QMimeData* md = event->mimeData();
+      QByteArray data;
+      int etype;
+      if (md->hasFormat(mimeSymbolFormat)) {
+            etype = ELEMENT;
+            data = md->data(mimeSymbolFormat);
+            }
+      else if (md->hasFormat(mimeSymbolListFormat)) {
+            etype = ELEMENT_LIST;
+            data = md->data(mimeSymbolListFormat);
+            }
+      else if (md->hasFormat(mimeStaffListFormat)) {
+            etype = STAFF_LIST;
+            data = md->data(mimeStaffListFormat);
+            }
+      else if (md->hasFormat(mimeMeasureListFormat)) {
+            etype = MEASURE_LIST;
+            data = md->data(mimeMeasureListFormat);
+            }
+      else {
             printf("cannot drop this object: unknown mime type\n");
+            _score->end();
             return;
             }
 
-      QByteArray data(event->mimeData()->data(mimeSymbolFormat));
       QDomDocument doc;
       int line, column;
       QString err;
@@ -1505,115 +1575,141 @@ void Canvas::dropEvent(QDropEvent* event)
             return;
             }
       QDomElement e = doc.documentElement();
-      int type = Element::readType(e, &dragOffset);
+      if (etype == ELEMENT) {
+            int type = Element::readType(e, &dragOffset);
 
-      switch(type) {
-            case VOLTA:
-                  {
-                  Volta* volta = new Volta(score());
-                  volta->read(e);
-                  score()->cmdAdd(volta, pos, dragOffset);
-                  event->acceptProposedAction();
-                  }
-                  break;
-            case OTTAVA:
-                  {
-                  Ottava* ottava = new Ottava(score());
-                  ottava->read(e);
-                  score()->cmdAdd(ottava, pos, dragOffset);
-                  event->acceptProposedAction();
-                  }
-                  break;
-            case TRILL:
-                  {
-                  Trill* trill = new Trill(score());
-                  score()->cmdAdd(trill, pos, dragOffset);
-                  event->acceptProposedAction();
-                  }
-                  break;
-            case SYMBOL:
-                  {
-                  _score->startCmd();
-                  Symbol* s = new Symbol(score());
-                  s->read(e);
-                  score()->cmdAddBSymbol(s, pos, dragOffset);
-                  event->acceptProposedAction();
-                  score()->endCmd();
-                  }
-                  break;
-            case IMAGE:
-                  {
-                  _score->startCmd();
-                  // look ahead for image type
-                  QString path;
-                  for (QDomElement ee = e.firstChildElement(); !ee.isNull(); ee = ee.nextSiblingElement()) {
-                        QString tag(ee.tagName());
-                        if (tag == "path") {
-                              path = ee.text();
-                              break;
-                              }
-                        }
-                  Image* image = 0;
-                  if (path.endsWith(".svg"))
-                        image = new SvgImage(score());
-                  else if (path.endsWith(".jpg")
-                     || path.endsWith(".png")
-                     || path.endsWith(".xpm")
-                        )
-                        image = new RasterImage(score());
-                  else {
-                        printf("unknown image format <%s>\n", path.toLatin1().data());
-                        }
-                  if (image) {
-                        image->read(e);
-                        score()->cmdAddBSymbol(image, pos, dragOffset);
+            switch(type) {
+                  case VOLTA:
+                        {
+                        Volta* volta = new Volta(score());
+                        volta->read(e);
+                        score()->cmdAdd(volta, pos, dragOffset);
                         event->acceptProposedAction();
                         }
-                  score()->endCmd();
-                  }
-                  break;
-            case PEDAL:
-                  {
-                  Pedal* pedal = new Pedal(score());
-                  pedal->read(e);
-                  score()->cmdAdd(pedal, pos, dragOffset);
-                  event->acceptProposedAction();
-                  }
-                  break;
-            case HAIRPIN:
-                  {
-                  Hairpin* hairpin = new Hairpin(score());
-                  hairpin->read(e);
-                  score()->cmdAdd(hairpin, pos, dragOffset);
-                  }
-                  break;
-            case DYNAMIC:
-                  {
-                  Dynamic* dynamic = new Dynamic(score());
-                  dynamic->read(e);
-                  _score->cmdAdd(dynamic, pos, dragOffset);
-                  event->acceptProposedAction();
-                  }
-                  break;
-            default:
-                  {
-                  Element* el = elementAt(pos);
-                  if (el) {
+                        break;
+                  case OTTAVA:
+                        {
+                        Ottava* ottava = new Ottava(score());
+                        ottava->read(e);
+                        score()->cmdAdd(ottava, pos, dragOffset);
+                        event->acceptProposedAction();
+                        }
+                        break;
+                  case TRILL:
+                        {
+                        Trill* trill = new Trill(score());
+                        score()->cmdAdd(trill, pos, dragOffset);
+                        event->acceptProposedAction();
+                        }
+                        break;
+                  case SYMBOL:
+                        {
                         _score->startCmd();
-                        _score->addRefresh(el->abbox());
-                        Element* dropElement = el->drop(pos, dragOffset, type, e);
-                        _score->addRefresh(el->abbox());
-                        if (dropElement) {
-                              _score->select(dropElement, 0, 0);
-                              _score->addRefresh(dropElement->abbox());
-                              }
+                        Symbol* s = new Symbol(score());
+                        s->read(e);
+                        score()->cmdAddBSymbol(s, pos, dragOffset);
                         event->acceptProposedAction();
-                        _score->endCmd();
+                        score()->endCmd();
                         }
-                  else
-                        printf("cannot drop here\n");
+                        break;
+                  case IMAGE:
+                        {
+                        _score->startCmd();
+                        // look ahead for image type
+                        QString path;
+                        for (QDomElement ee = e.firstChildElement(); !ee.isNull(); ee = ee.nextSiblingElement()) {
+                              QString tag(ee.tagName());
+                              if (tag == "path") {
+                                    path = ee.text();
+                                    break;
+                                    }
+                              }
+                        Image* image = 0;
+                        if (path.endsWith(".svg"))
+                              image = new SvgImage(score());
+                        else if (path.endsWith(".jpg")
+                           || path.endsWith(".png")
+                           || path.endsWith(".xpm")
+                              )
+                              image = new RasterImage(score());
+                        else {
+                              printf("unknown image format <%s>\n", path.toLatin1().data());
+                              }
+                        if (image) {
+                              image->read(e);
+                              score()->cmdAddBSymbol(image, pos, dragOffset);
+                              event->acceptProposedAction();
+                              }
+                        score()->endCmd();
+                        }
+                        break;
+                  case PEDAL:
+                        {
+                        Pedal* pedal = new Pedal(score());
+                        pedal->read(e);
+                        score()->cmdAdd(pedal, pos, dragOffset);
+                        event->acceptProposedAction();
+                        }
+                        break;
+                  case HAIRPIN:
+                        {
+                        Hairpin* hairpin = new Hairpin(score());
+                        hairpin->read(e);
+                        score()->cmdAdd(hairpin, pos, dragOffset);
+                        }
+                        break;
+                  case DYNAMIC:
+                        {
+                        Dynamic* dynamic = new Dynamic(score());
+                        dynamic->read(e);
+                        _score->cmdAdd(dynamic, pos, dragOffset);
+                        event->acceptProposedAction();
+                        }
+                        break;
+                  default:
+                        {
+                        Element* el = elementAt(pos);
+                        if (el) {
+                              _score->startCmd();
+                              _score->addRefresh(el->abbox());
+                              Element* dropElement = el->drop(pos, dragOffset, type, e);
+                              _score->addRefresh(el->abbox());
+                              if (dropElement) {
+                                    _score->select(dropElement, 0, 0);
+                                    _score->addRefresh(dropElement->abbox());
+                                    }
+                              event->acceptProposedAction();
+                              _score->endCmd();
+                              }
+                        else
+                              printf("cannot drop here\n");
+                        }
+                        break;
                   }
-                  break;
+            setDropTarget(0);
+            setState(NORMAL);
+            return;
+            }
+      Element* el = elementAt(pos);
+      if (el == 0 || el->type() != MEASURE) {
+            setDropTarget(0);
+            setState(NORMAL);
+            return;
+            }
+      if (etype == ELEMENT_LIST) {
+            printf("drop element list\n");
+            }
+      else if (etype == STAFF_LIST || etype == MEASURE_LIST) {
+            _score->startCmd();
+            _score->addRefresh(el->abbox());
+            Element* dropElement = el->drop(pos, dragOffset, etype, e);
+            _score->addRefresh(el->abbox());
+            if (dropElement) {
+                  _score->select(dropElement, 0, 0);
+                  _score->addRefresh(dropElement->abbox());
+                  }
+            event->acceptProposedAction();
+            _score->endCmd();
             }
       setDropTarget(0); // this also resets dropRectangle and dropAnchor
       setState(NORMAL);
@@ -1626,7 +1722,10 @@ void Canvas::dropEvent(QDropEvent* event)
 void Canvas::dragEnterEvent(QDragEnterEvent* event)
       {
       const QMimeData* data = event->mimeData();
-      if (data->hasFormat(mimeSymbolFormat))
+      if (data->hasFormat(mimeSymbolFormat)
+         || data->hasFormat(mimeSymbolListFormat)
+         || data->hasFormat(mimeStaffListFormat)
+         || data->hasFormat(mimeMeasureListFormat))
             event->acceptProposedAction();
       else if (data->hasUrls()) {
             QList<QUrl>ul = data->urls();

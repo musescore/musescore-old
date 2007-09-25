@@ -101,9 +101,16 @@ double Page::loHeight() const
 
 void Page::add(Element* el)
       {
-      el->setParent(this);
-      _elements.push_back(el);
-      el->anchorMeasure()->add(el);
+      if (el->type() == TEXT && el->subtype() == TEXT_COPYRIGHT) {
+            Text* text = (Text*) el;
+            score()->setCopyright(text->getDoc());
+            _copyright = text;
+            }
+      else {
+            el->setParent(this);
+            _elements.push_back(el);
+            el->anchorMeasure()->add(el);
+            }
       }
 
 //---------------------------------------------------------
@@ -112,8 +119,17 @@ void Page::add(Element* el)
 
 void Page::remove(Element* el)
       {
-      _elements.removeAll(el);
-      el->anchorMeasure()->remove(el);
+      if (el->type() == TEXT && el->subtype() == TEXT_COPYRIGHT) {
+            score()->setCopyright(0);
+            if (_copyright) {
+//                  delete _copyright;
+                  _copyright = 0;
+                  }
+            }
+      else {
+            _elements.removeAll(el);
+            el->anchorMeasure()->remove(el);
+            }
       }
 
 //---------------------------------------------------------
@@ -186,20 +202,26 @@ void Page::layout(ScoreLayout* layout)
             }
 
       // add copyright to page
-      if (!_score->rights.isEmpty()) {
-            if (_copyright == 0) {
-                  _copyright = new Text(score());
-                  _copyright->setSubtype(TEXT_COPYRIGHT);
-                  _copyright->setParent(this);
-                  }
-            if (_copyright->getText() != _score->rights) {
-                  _copyright->setText(_score->rights);
+      if (mscore->state() == STATE_EDIT) {      // for special case: edit copyright
+            if (_copyright)
                   _copyright->layout(layout);
-                  }
             }
-      else if (_copyright) {
-            delete _copyright;
-            _copyright = 0;
+      else {
+            if (_score->rights) {
+                  if (_copyright == 0) {
+                        _copyright = new Text(score());
+                        _copyright->setSubtype(TEXT_COPYRIGHT);
+                        _copyright->setParent(this);
+                        }
+                  if (_copyright->getText() != _score->rights->toHtml()) {
+                        _copyright->setHtml(_score->rights->toHtml());
+                        _copyright->layout(layout);
+                        }
+                  }
+            else if (_copyright) {
+                  delete _copyright;
+                  _copyright = 0;
+                  }
             }
       }
 

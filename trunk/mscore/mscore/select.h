@@ -74,7 +74,7 @@ class Selection {
       void update();
       void updateState();
       void dump();
-      const char* mimeType() const;
+      QString mimeType() const;
       QByteArray mimeData() const;
       };
 

@@ -68,7 +68,9 @@ enum ElementType {
       NOTEHEAD, TREMOLO,
       // not drawable elements:
       HAIRPIN, OTTAVA, PEDAL, TRILL,
-      SEGMENT, SYSTEM, COMPOUND, CHORD, SLUR
+      SEGMENT, SYSTEM, COMPOUND, CHORD, SLUR,
+      // special types for drag& drop:
+      ELEMENT, ELEMENT_LIST, STAFF_LIST, MEASURE_LIST
       };
 
 extern const char* elementNames[];  // for debugging

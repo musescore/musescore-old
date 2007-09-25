@@ -54,6 +54,7 @@ class Sym {
       double width() const;
       double height() const;
       QChar code() const           { return _code;   }
+      int getFontId() const        { return fontId;  }
       void setCode(const QChar& c) { _code = c;      }
       void draw(QPainter& painter, qreal x, qreal y, int n) const;
       void draw(QPainter& painter, qreal x, qreal y) const;
@@ -285,5 +286,7 @@ enum {
 
       lastSym
       };
+
+extern const Sym* findSymbol(QChar code, int fontId);
 #endif
 

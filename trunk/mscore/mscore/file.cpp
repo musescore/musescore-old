@@ -738,8 +738,11 @@ bool Score::loadFile(QFile* qf)
                               pageFormat()->read(ee);
                         else if (tag == "instrument-group")
                               readInstrumentGroup(ee);
-                        else if (tag == "rights")
-                              rights = val;
+                        else if (tag == "rights") {
+                              if (rights == 0)
+                                    rights = new QTextDocument(0);
+                              rights->setHtml(val);
+                              }
                         else if (tag == "movement-number")
                               movementNumber = val;
                         else if (tag == "movement-title")

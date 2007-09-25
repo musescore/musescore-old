@@ -252,12 +252,21 @@ bool Text::isEmpty() const
       }
 
 //---------------------------------------------------------
-//   text
+//   getText
 //---------------------------------------------------------
 
 QString Text::getText() const
       {
       return doc->toPlainText();
+      }
+
+//---------------------------------------------------------
+//   getHtml
+//---------------------------------------------------------
+
+QString Text::getHtml() const
+      {
+      return doc->toHtml();
       }
 
 //---------------------------------------------------------
@@ -346,6 +355,15 @@ void Text::setText(const QString& s)
       tf.setFont(doc->defaultFont());
       cursor.setBlockCharFormat(tf);
       cursor.insertText(s);
+      }
+
+//---------------------------------------------------------
+//   setHtml
+//---------------------------------------------------------
+
+void Text::setHtml(const QString& s)
+      {
+      doc->setHtml(s);
       }
 
 //---------------------------------------------------------
@@ -523,7 +541,6 @@ bool Text::startEdit(const QPointF& p)
 bool Text::edit(int, QKeyEvent* ev)
       {
       int key = ev->key();
-
       if (key == Qt::Key_F2) {
             if (palette == 0)
                   palette = new TextPalette(score()->canvas());
@@ -671,6 +688,9 @@ void Text::endEdit()
       delete cursor;
       cursor = 0;
       editMode = false;
+      if (subtype() == TEXT_COPYRIGHT) {
+            score()->setCopyright(doc);
+            }
       }
 
 //---------------------------------------------------------

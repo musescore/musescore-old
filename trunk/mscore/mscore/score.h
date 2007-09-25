@@ -156,7 +156,6 @@ class Score : public QObject {
       void convertTrack(MidiTrack*, int);
       void checkUndoOp();
       void pasteStaff(const QMimeData* ms);
-      void cmdReplaceElements(Measure* sm, Measure* dm, int staffIdx);
       void move(const QString& cmd);
       Measure* appendMeasure();
 
@@ -169,7 +168,7 @@ class Score : public QObject {
 
       QString movementNumber;
       QString movementTitle;
-      QString rights;
+      QTextDocument* rights;
 
       int _pageOffset;              ///< Offset for page numbers.
 
@@ -239,6 +238,7 @@ class Score : public QObject {
       void removePart(Part*);
       void insertStaff(Staff*, int);
       void removeStaff(Staff*);
+      void cmdReplaceElements(Measure* sm, Measure* dm, int staffIdx);
 
       Part* part(int staff);
 
@@ -463,6 +463,8 @@ class Score : public QObject {
       TextStyle* textStyle(int idx) { return _textStyles[idx]; }
       const QVector<TextStyle*>& textStyles() const { return _textStyles; }
       void setTextStyles(QVector<TextStyle*>&s);
+      void setCopyright(QTextDocument*);
+      void pasteStaff(QDomElement e, Measure* measure, int staffIdx);
       };
 
 extern Score* gscore;

@@ -211,7 +211,7 @@ void Palette::mouseMoveEvent(QMouseEvent* ev)
 
             rpos /= mag;
 
-            mimeData->setData("application/mscore/symbol", el->mimeData(rpos));
+            mimeData->setData(mimeSymbolFormat, el->mimeData(rpos));
             drag->setMimeData(mimeData);
 
             int srcIdx = currentIdx;
