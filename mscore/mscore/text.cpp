@@ -754,10 +754,12 @@ QPainterPath Text::shape() const
 
 double Text::lineSpacing() const
       {
+      extern double printerMag;
+
       QTextBlock tb   = doc->begin();
       QTextLayout* tl = tb.layout();
       QFontMetricsF fm(tl->font());
-      return fm.lineSpacing();
+      return fm.lineSpacing() * printerMag;     // HACK
       }
 
 //---------------------------------------------------------
