@@ -49,6 +49,8 @@
 #include "palette.h"
 #include "symboldialog.h"
 
+double printerMag = 1.0;
+
 //---------------------------------------------------------
 //   readInstrument
 //---------------------------------------------------------
@@ -899,6 +901,10 @@ void Score::print(QPrinter* printer)
       qreal oldSpatium = _spatium;
       double oldDPI    = DPI;
       DPI              = printer->logicalDpiX();         // drawing resolution
+
+//HACK:
+printerMag = DPI / oldDPI;
+
       DPMM             = DPI / INCH;                     // dots/mm
       setSpatium(_spatium * DPI / oldDPI);
       QPaintDevice* oldPaintDevice = mainLayout()->paintDevice();
@@ -932,6 +938,7 @@ void Score::print(QPrinter* printer)
             }
       p.end();
       _printing = false;
+printerMag = 1.0;
       DPI       = oldDPI;
       DPMM      = DPI / INCH;                     // dots/mm
       setSpatium(oldSpatium);
