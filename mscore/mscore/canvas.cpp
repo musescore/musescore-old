@@ -1266,7 +1266,7 @@ void Canvas::setViewRect(const QRectF& r)
       }
 
 //---------------------------------------------------------
-//   dragMovePageElement
+//   dragTimeAnchorElement
 //---------------------------------------------------------
 
 bool Canvas::dragTimeAnchorElement(const QPointF& pos)
@@ -1282,6 +1282,27 @@ bool Canvas::dragTimeAnchorElement(const QPointF& pos)
             QRectF sb(s->staff(staffIdx)->bbox());
             sb.translate(s->pos() + s->page()->pos());
             QPointF anchor(seg->abbox().x(), sb.topLeft().y());
+            setDropAnchor(QLineF(pos, anchor));
+            return true;
+            }
+      setDropTarget(0);
+      return false;
+      }
+
+//---------------------------------------------------------
+//   dragMeasureAnchorElement
+//---------------------------------------------------------
+
+bool Canvas::dragMeasureAnchorElement(const QPointF& pos)
+      {
+      int tick;
+      Measure* m = _score->pos2measure3(pos, &tick);
+      if (m) {
+            QPointF anchor;
+            if (m->tick() == tick)
+                  anchor = m->abbox().topLeft();
+            else
+                  anchor = m->abbox().topRight();
             setDropAnchor(QLineF(pos, anchor));
             return true;
             }
@@ -1421,7 +1442,7 @@ void Canvas::dragMoveEvent(QDragMoveEvent* event)
             int type = Element::readType(e, &dragOffset);
             switch(type) {
                   case VOLTA:
-                        if (dragAboveSystem(pos))
+                        if (dragMeasureAnchorElement(pos))
                               event->acceptProposedAction();
                         break;
                   case PEDAL:

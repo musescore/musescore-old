@@ -35,6 +35,8 @@
 #include "ui_tuplet.h"
 #include "ui_slurtie.h"
 #include "ui_slur.h"
+#include "ui_line.h"
+#include "ui_linesegment.h"
 
 class ShowElementBase;
 class Element;
@@ -71,6 +73,8 @@ class PageListEditor : public QWidget {
       ShowElementBase* tupletView;
       ShowElementBase* slurView;
       ShowElementBase* tieView;
+      ShowElementBase* voltaView;
+      ShowElementBase* voltaSegmentView;
 
       bool searchElement(QTreeWidgetItem* pi, Element* el);
 
@@ -436,6 +440,37 @@ class TieView : public ShowElementBase {
 
    public:
       TieView();
+      virtual void setElement(Element*);
+      };
+
+//---------------------------------------------------------
+//   VoltaView
+//---------------------------------------------------------
+
+class VoltaView : public ShowElementBase {
+      Q_OBJECT;
+
+      Ui::SLineBase lb;
+
+   private slots:
+      void segmentClicked(QTreeWidgetItem* item);
+
+   public:
+      VoltaView();
+      virtual void setElement(Element*);
+      };
+
+//---------------------------------------------------------
+//   VoltaSegmentView
+//---------------------------------------------------------
+
+class VoltaSegmentView : public ShowElementBase {
+      Q_OBJECT;
+
+      Ui::LineSegmentBase lb;
+
+   public:
+      VoltaSegmentView();
       virtual void setElement(Element*);
       };
 

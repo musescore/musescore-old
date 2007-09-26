@@ -986,6 +986,7 @@ void Score::deleteItem(Element* el)
             case HAIRPIN_SEGMENT:
             case TRILL_SEGMENT:
             case PEDAL_SEGMENT:
+            case VOLTA_SEGMENT:
                   {
                   SLine* l = (SLine*)el->parent();
                   foreach(LineSegment* seg, l->lineSegments())

@@ -67,7 +67,7 @@ class Bracket : public Element {
       virtual void editDrag(int, const QPointF&, const QPointF&);
       virtual void endEditDrag();
       virtual void updateGrips(int*, QRectF*) const;
-      virtual QPointF gripAnchor(int grip);
+      virtual QPointF gripAnchor(int grip) const;
 
       virtual bool acceptDrop(Viewer*, const QPointF&, int, const QDomElement&) const;
       virtual Element* drop(const QPointF&, const QPointF&, int, const QDomElement&);

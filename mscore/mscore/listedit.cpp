@@ -41,6 +41,8 @@
 #include "slur.h"
 #include "layout.h"
 #include "lyrics.h"
+#include "volta.h"
+#include "line.h"
 
 //---------------------------------------------------------
 //   ElementItem
@@ -149,6 +151,8 @@ PageListEditor::PageListEditor(Score* s)
       tupletView   = new TupletView;
       slurView     = new SlurView;
       tieView      = new TieView;
+      voltaView    = new VoltaView;
+      voltaSegmentView = new VoltaSegmentView;
 
       stack->addWidget(pagePanel);
       stack->addWidget(systemPanel);
@@ -168,6 +172,8 @@ PageListEditor::PageListEditor(Score* s)
       stack->addWidget(tupletView);
       stack->addWidget(slurView);
       stack->addWidget(tieView);
+      stack->addWidget(voltaView);
+      stack->addWidget(voltaSegmentView);
 
       connect(pagePanel,    SIGNAL(elementChanged(Element*)), SLOT(setElement(Element*)));
       connect(systemPanel,  SIGNAL(elementChanged(Element*)), SLOT(setElement(Element*)));
@@ -187,6 +193,8 @@ PageListEditor::PageListEditor(Score* s)
       connect(tupletView,   SIGNAL(elementChanged(Element*)), SLOT(setElement(Element*)));
       connect(slurView,     SIGNAL(elementChanged(Element*)), SLOT(setElement(Element*)));
       connect(tieView,      SIGNAL(elementChanged(Element*)), SLOT(setElement(Element*)));
+      connect(voltaView,    SIGNAL(elementChanged(Element*)), SLOT(setElement(Element*)));
+      connect(voltaSegmentView, SIGNAL(elementChanged(Element*)), SLOT(setElement(Element*)));
       connect(tupletView,   SIGNAL(scoreChanged()), SLOT(layoutScore()));
       connect(notePanel,    SIGNAL(scoreChanged()), SLOT(layoutScore()));
 
@@ -258,13 +266,14 @@ void PageListEditor::updateList()
                                     case OTTAVA:
                                     case PEDAL:
                                     case TRILL:
+                                    case VOLTA:
                                           {
                                           ElementList eel;
                                           ((SLine*)e)->collectElements(eel);
                                           foreach(Element* e, eel)
                                                 new ElementItem(mi, e);
                                           }
-                                          break;
+                                          // fall through:
                                     default:
                                           new ElementItem(mi, e);
                                           break;
@@ -410,6 +419,8 @@ void PageListEditor::itemChanged(QTreeWidgetItem* i, QTreeWidgetItem*)
             case TUPLET:   ew = tupletView;   break;
             case SLUR:     ew = slurView;     break;
             case TIE:      ew = tieView;      break;
+            case VOLTA:    ew = voltaView;    break;
+            case VOLTA_SEGMENT: ew = voltaSegmentView; break;
             case TEXT:
                   ew = textView;
                   break;
@@ -1457,6 +1468,79 @@ item->setText(1, "klops");
             }
       st.upFlag->setChecked(tie->isUp());
       st.direction->setCurrentIndex(tie->slurDirection());
+      }
+
+//---------------------------------------------------------
+//   segmentClicked
+//---------------------------------------------------------
+
+void VoltaView::segmentClicked(QTreeWidgetItem* item)
+      {
+      Element* e = (Element*)item->data(0, Qt::UserRole).value<void*>();
+      emit elementChanged(e);
+      }
+
+//---------------------------------------------------------
+//   VoltaView
+//---------------------------------------------------------
+
+VoltaView::VoltaView()
+   : ShowElementBase()
+      {
+      QWidget* w = new QWidget;
+      lb.setupUi(w);
+      layout->addWidget(w);
+      layout->addStretch(10);
+      connect(lb.segments, SIGNAL(itemClicked(QTreeWidgetItem*,int)), SLOT(segmentClicked(QTreeWidgetItem*)));
+      }
+
+//---------------------------------------------------------
+//   setElement
+//---------------------------------------------------------
+
+void VoltaView::setElement(Element* e)
+      {
+      Volta* volta = (Volta*)e;
+      ShowElementBase::setElement(e);
+
+      lb.tick2->setValue(volta->tick2());
+      lb.segments->clear();
+      const QList<LineSegment*>& el = volta->lineSegments();
+      foreach(const Element* e, el) {
+            QTreeWidgetItem* item = new QTreeWidgetItem;
+            item->setText(0, QString("%1").arg((unsigned long)e, 8, 16));
+            item->setData(0, Qt::UserRole, QVariant::fromValue<void*>((void*)e));
+            lb.segments->addTopLevelItem(item);
+            }
+      }
+
+//---------------------------------------------------------
+//   VoltaSegmentView
+//---------------------------------------------------------
+
+VoltaSegmentView::VoltaSegmentView()
+   : ShowElementBase()
+      {
+      QWidget* w = new QWidget;
+      lb.setupUi(w);
+      layout->addWidget(w);
+      layout->addStretch(10);
+      }
+
+//---------------------------------------------------------
+//   setElement
+//---------------------------------------------------------
+
+void VoltaSegmentView::setElement(Element* e)
+      {
+      VoltaSegment* vs = (VoltaSegment*)e;
+      ShowElementBase::setElement(e);
+
+      lb.segmentType->setCurrentIndex(vs->subtype());
+      lb.pos2x->setValue(vs->pos2().x());
+      lb.pos2y->setValue(vs->pos2().y());
+      lb.offset2x->setValue(vs->userOff2().x());
+      lb.offset2y->setValue(vs->userOff2().y());
       }
 
 

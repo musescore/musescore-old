@@ -248,6 +248,8 @@ class Score : public QObject {
       Measure* pos2measure(const QPointF&, int* tick, Staff** staff, int* pitch,
          Segment**, QPointF* offset) const;
       Measure* pos2measure2(const QPointF&, int* tick, Staff** staff, int* pitch, Segment**) const;
+      Measure* pos2measure3(const QPointF& p, int* tick) const;
+
       int snap(int tick, const QPointF) const;
       int snapNote(int tick, const QPointF, int staff) const;
 
@@ -442,7 +444,7 @@ class Score : public QObject {
       bool printing() const     { return _printing; }
 
       QPointF tick2Anchor(int tick, int staffIdx) const;
-      bool pos2TickAnchor(QPointF&, Staff*, int* tick, QPointF* anchor) const;
+      bool pos2TickAnchor(const QPointF&, Staff*, int* tick, QPointF* anchor) const;
       void spell();
       void spell(Note*);
       int nextSeg(int tick, int track);

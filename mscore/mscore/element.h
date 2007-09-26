@@ -61,6 +61,7 @@ enum ElementType {
       TEMPO_TEXT,
       VOLTA,
       HAIRPIN_SEGMENT, OTTAVA_SEGMENT, PEDAL_SEGMENT, TRILL_SEGMENT,
+      VOLTA_SEGMENT,
       LAYOUT_BREAK,
       LEDGER_LINE,
       MEASURE, STAFF_LINES,
@@ -204,7 +205,7 @@ class Element {
       virtual void endEditDrag()                               {}
       virtual void endEdit()                                   {}
       virtual void updateGrips(int* grips, QRectF*) const      { *grips = 0;       }
-      virtual QPointF gripAnchor(int)                          { return QPointF(); }
+      virtual QPointF gripAnchor(int) const   { return QPointF(); }
 
       Staff* staff() const                    { return _staff; }
       int staffIdx() const;

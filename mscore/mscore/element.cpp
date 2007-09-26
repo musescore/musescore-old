@@ -55,6 +55,7 @@ const char* elementNames[] = {
       "TempoText",
       "Volta",
       "HairpinSegment", "OttavaSegment", "PedalSegment", "TrillSegment",
+      "VoltaSegment",
       "LayoutBreak",
       "LedgerLine",
       "Measure", "StaffLines",

@@ -29,10 +29,13 @@
 //   draw
 //---------------------------------------------------------
 
-void Volta::draw(QPainter& p)
+void VoltaSegment::draw(QPainter& p)
       {
+      QPointF _p1;
+      QPointF _p2(pos2());
+
       qreal voltaLineWidth = _spatium * .18;
-      qreal h              = _spatium * 1.8;
+      qreal h              = _spatium * 1.9;
 
       QPointF p0(_p1.x(), h);
       QPointF p3(_p2.x(), h);
@@ -45,7 +48,7 @@ void Volta::draw(QPainter& p)
       if (subtype() != 4)
             p.drawLine(QLineF(_p2, p3));
 
-      TextStyle* s = score()->textStyle(TEXT_STYLE_TEMPO);
+      TextStyle* s = score()->textStyle(TEXT_STYLE_VOLTA);
       QFont f(s->family, s->size);
       f.setItalic(s->italic);
       f.setUnderline(s->underline);
@@ -54,7 +57,7 @@ void Volta::draw(QPainter& p)
 
       QPointF tp(p0.x() + _spatium * .5, p0.y());
 
-      switch(subtype()) {
+      switch(volta()->subtype()) {
             default:
             case PRIMA_VOLTA:
                   p.drawText(tp, "1.");
@@ -70,12 +73,53 @@ void Volta::draw(QPainter& p)
       }
 
 //---------------------------------------------------------
-//   setLen
+//   bbox
 //---------------------------------------------------------
 
-void Volta::setLen(qreal l)
+QRectF VoltaSegment::bbox() const
       {
-      _p2.setX(l);
+      qreal voltaHeight   = _spatium * 1.8;
+      return QRectF(0.0, 0.0, pos2().x(), voltaHeight);
+      }
+
+//---------------------------------------------------------
+//   gripAnchor
+//---------------------------------------------------------
+
+QPointF VoltaSegment::gripAnchor(int curGrip) const
+      {
+      int tick;
+      QPointF anchor;
+
+      if (curGrip == 0) {
+            QPointF pp1(canvasPos());
+            Measure* m = score()->pos2measure3(pp1, &tick);
+            anchor = QPointF(m->abbox().topLeft());
+            }
+      else {
+            QPointF pp2(_p2 + _userOff2 * _spatium + canvasPos());
+            Measure* m = score()->pos2measure3(pp2, &tick);
+            if (tick != m->tick())
+                  anchor = QPointF(m->abbox().topRight());
+            else
+                  anchor = QPointF(m->abbox().topLeft());
+            }
+      return anchor;
+      }
+
+//---------------------------------------------------------
+//   pos2anchor
+//---------------------------------------------------------
+
+QPointF VoltaSegment::pos2anchor(const QPointF& pos, int* tick) const
+      {
+      Measure* m = score()->pos2measure3(pos, tick);
+      QPointF anchor;
+      if (*tick != m->tick())
+            anchor = QPointF(m->abbox().topRight());
+      else
+            anchor = QPointF(m->abbox().topLeft());
+      return anchor;
       }
 
 //---------------------------------------------------------
@@ -84,34 +128,7 @@ void Volta::setLen(qreal l)
 
 void Volta::layout(ScoreLayout* layout)
       {
-      if (!parent())
-            return;
-      double _spatium = layout->spatium();
-      qreal voltaHeight   = _spatium * 1.8;
-      qreal voltaDistance = _spatium * .7;
-
-      Measure* measure = (Measure*)parent();
-      System* system   = measure->system();
-      SysStaff* sstaff = system->staff(staffIdx());
-      qreal y  = sstaff->bbox().top();
-      qreal x2 = measure->width() - _spatium * .5;
-
-      _p1.setX(0.0);
-      _p1.setY(0.0);
-      _p2.setX(x2);
-      _p2.setY(0.0);
-
-      setPos(0.0, y - (voltaHeight + voltaDistance));
-      }
-
-//---------------------------------------------------------
-//   bbox
-//---------------------------------------------------------
-
-QRectF Volta::bbox() const
-      {
-      qreal voltaHeight   = _spatium * 1.8;
-      return QRectF(0.0, 0.0, _p2.x() - _p1.x(), voltaHeight);
+      SLine::layout(layout);
       }
 
 //---------------------------------------------------------
@@ -121,7 +138,7 @@ QRectF Volta::bbox() const
 void Volta::write(Xml& xml) const
       {
       xml.stag("Volta");
-      Element::writeProperties(xml);
+      SLine::writeProperties(xml);
       xml.etag();
       }
 
@@ -132,9 +149,32 @@ void Volta::write(Xml& xml) const
 void Volta::read(QDomElement e)
       {
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
-            if (!Element::readProperties(e))
+            if (!SLine::readProperties(e))
                   domError(e);
             }
+      }
+
+//---------------------------------------------------------
+//   createSegment
+//---------------------------------------------------------
+
+LineSegment* Volta::createSegment()
+      {
+      VoltaSegment* seg = new VoltaSegment(score());
+      seg->setParent(this);
+      seg->setStaff(staff());
+      return seg;
+      }
+
+//---------------------------------------------------------
+//   tick2pos
+//---------------------------------------------------------
+
+QPointF Volta::tick2pos(int tick, System** system)
+      {
+      Measure* m = score()->tick2measure(tick);
+      *system = m->system();
+      return m->canvasPos();
       }
 
 

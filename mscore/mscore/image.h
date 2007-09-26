@@ -39,7 +39,7 @@ class Image : public BSymbol {
       virtual void endEdit();
       virtual void draw(QPainter&);
       virtual void updateGrips(int*, QRectF*) const;
-      virtual QPointF gripAnchor(int grip);
+      virtual QPointF gripAnchor(int grip) const;
 
    public:
       Image(Score*);

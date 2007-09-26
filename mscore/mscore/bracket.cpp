@@ -193,7 +193,7 @@ void Bracket::updateGrips(int* grips, QRectF* grip) const
 //   gripAnchor
 //---------------------------------------------------------
 
-QPointF Bracket::gripAnchor(int)
+QPointF Bracket::gripAnchor(int) const
       {
       return QPointF();
       }

@@ -64,7 +64,7 @@ class SlurSegment : public Element {
       virtual void editDrag(int, const QPointF&, const QPointF&);
       virtual bool edit(int, QKeyEvent*);
       virtual void updateGrips(int*, QRectF*) const;
-      virtual QPointF gripAnchor(int grip);
+      virtual QPointF gripAnchor(int grip) const;
 
       virtual void move(qreal xd, qreal yd) { move(QPointF(xd, yd)); }
       virtual void move(const QPointF& s);

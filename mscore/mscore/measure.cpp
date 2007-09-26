@@ -2631,6 +2631,7 @@ void Measure::collectElements(QList<Element*>& el)
                   case OTTAVA:
                   case PEDAL:
                   case TRILL:
+                  case VOLTA:
                         ((SLine*)e)->collectElements(el);
                         break;
                   default:

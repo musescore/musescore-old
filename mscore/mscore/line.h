@@ -24,6 +24,7 @@
 #include "element.h"
 
 class SLine;
+class System;
 
 //---------------------------------------------------------
 //   LineSegment
@@ -54,7 +55,8 @@ class LineSegment : public Element {
       virtual void endEditDrag();
       virtual void endEdit();
       virtual void updateGrips(int*, QRectF*) const;
-      virtual QPointF gripAnchor(int);
+      virtual QPointF gripAnchor(int) const;
+      virtual QPointF pos2anchor(const QPointF& pos, int* tick) const;
 
    public:
       LineSegment(Score* s);
@@ -97,6 +99,7 @@ class SLine : public Element {
       virtual void change(Element* o, Element* n);
       virtual QRectF bbox() const;
       QList<LineSegment*> lineSegments() { return segments; }
+      virtual QPointF tick2pos(int tick, System** system);
       };
 
 typedef QList<LineSegment*>::iterator iLineSegment;

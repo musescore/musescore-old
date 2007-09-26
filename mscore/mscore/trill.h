@@ -53,7 +53,6 @@ class Trill : public SLine {
       virtual ElementType type() const { return TRILL; }
 
       virtual void layout(ScoreLayout*);
-      virtual void setSubtype(int val);
       virtual void write(Xml&) const;
       virtual void read(QDomElement);
       virtual LineSegment* createSegment();

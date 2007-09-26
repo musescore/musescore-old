@@ -21,10 +21,28 @@
 #ifndef __VOLTA_H__
 #define __VOLTA_H__
 
-#include "element.h"
+#include "line.h"
 
 class Score;
 class Xml;
+class Volta;
+
+//---------------------------------------------------------
+//   VoltaSegment
+//---------------------------------------------------------
+
+class VoltaSegment : public LineSegment {
+   protected:
+   public:
+      VoltaSegment(Score* s) : LineSegment(s) {}
+      Volta* volta() const                { return (Volta*)parent(); }
+      virtual ElementType type() const    { return VOLTA_SEGMENT; }
+      virtual VoltaSegment* clone() const { return new VoltaSegment(*this); }
+      virtual void draw(QPainter&);
+      virtual QRectF bbox() const;
+      virtual QPointF gripAnchor(int) const;
+      QPointF pos2anchor(const QPointF& pos, int* tick) const;
+      };
 
 //---------------------------------------------------------
 //   Volta
@@ -35,20 +53,16 @@ enum {
       PRIMA_VOLTA = 1, SECONDA_VOLTA, TERZA_VOLTA, SECONDA_VOLTA2
       };
 
-class Volta : public Element {
-      QPointF _p1, _p2;
-
+class Volta : public SLine {
    public:
-      Volta(Score* s) : Element(s) {}
+      Volta(Score* s) : SLine(s) {}
       virtual Volta* clone() const { return new Volta(*this); }
       virtual ElementType type() const { return VOLTA; }
-      virtual void draw(QPainter&);
       virtual void layout(ScoreLayout*);
-      void setLen(qreal);
       virtual void write(Xml&) const;
       virtual void read(QDomElement);
-      virtual QRectF bbox() const;
-      virtual bool isMovable() const { return true; }
+      virtual LineSegment* createSegment();
+      virtual QPointF tick2pos(int tick, System** system);
       };
 
 #endif
