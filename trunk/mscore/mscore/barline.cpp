@@ -55,6 +55,15 @@ void BarLine::draw(QPainter& p)
 
       switch(subtype()) {
             case BROKEN_BAR:
+                  {
+                  QPen pen(p.pen());
+                  pen.setStyle(Qt::DashLine);
+                  QVector<qreal> dashes;
+                  dashes << _spatium * .5 << _spatium * .5;
+                  pen.setDashPattern(dashes);
+                  p.setPen(pen);
+                  }
+
             case NORMAL_BAR:
                   p.drawLine(QLineF(lw*.5, 0.0, lw*.5, h));
                   break;

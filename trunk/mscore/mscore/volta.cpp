@@ -45,7 +45,7 @@ void VoltaSegment::draw(QPainter& p)
       p.setPen(pen);
       p.drawLine(QLineF(p0, _p1));
       p.drawLine(QLineF(_p1, _p2));
-      if (subtype() != 4)
+      if (volta()->subtype() != SECONDA_VOLTA2)
             p.drawLine(QLineF(_p2, p3));
 
       TextStyle* s = score()->textStyle(TEXT_STYLE_VOLTA);
