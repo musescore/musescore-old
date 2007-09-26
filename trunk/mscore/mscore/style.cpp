@@ -119,6 +119,9 @@ const TextStyle defaultTextStyleArray[] = {
 
       TextStyle(QString("Repeat Text"), ff,  12, false, false, false,
          ALIGN_HCENTER, ANCHOR_SYSTEM, 0, -4.5, OFFSET_SPATIUM, true),
+
+      TextStyle(QString("Volta"), ff, 11, true, false, false,
+         ALIGN_LEFT,    ANCHOR_STAFF, 0, -5.0, OFFSET_SPATIUM, true),
       };
 
 //---------------------------------------------------------

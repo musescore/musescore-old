@@ -54,6 +54,7 @@
 #include "pedal.h"
 #include "hairpin.h"
 #include "keysig.h"
+#include "volta.h"
 
 //---------------------------------------------------------
 //   start
@@ -206,6 +207,17 @@ void Score::cmdAdd(Element* e, const QPointF& pos, const QPointF& dragOffset)
 
       switch(e->type()) {
             case VOLTA:
+                  {
+                  Volta* volta = (Volta*)e;
+                  int tick;
+                  Measure* m = pos2measure3(pos, &tick);
+                  volta->setTick(m->tick());
+                  volta->setTick2(m->tick() + m->tickLen());
+                  volta->layout(mainLayout());
+                  LineSegment* ls = volta->lineSegments().front();
+                  QPointF uo(pos - ls->canvasPos() - dragOffset);
+                  ls->setUserOff(uo / _spatium);
+                  }
                   break;
             case PEDAL:
                   {

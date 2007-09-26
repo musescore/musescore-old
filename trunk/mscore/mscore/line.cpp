@@ -52,10 +52,10 @@ void LineSegment::updateGrips(int* grips, QRectF* grip) const
 //   gripAnchor
 //---------------------------------------------------------
 
-QPointF LineSegment::gripAnchor(int curGrip)
+QPointF LineSegment::gripAnchor(int curGrip) const
       {
-      int tick;
       QPointF anchor;
+      int tick;
 
       if (curGrip == 0) {
             QPointF pp1(canvasPos());
@@ -78,33 +78,15 @@ bool LineSegment::startEdit(const QPointF&)
       }
 
 //---------------------------------------------------------
-//   startEditDrag
+//   pos2anchor
 //---------------------------------------------------------
 
-#if 0
-bool LineSegment::startEditDrag(Viewer* viewer, const QPointF& p)
+QPointF LineSegment::pos2anchor(const QPointF& pos, int* tick) const
       {
-      int tick1 = line()->tick();
-      int tick2 = line()->tick2();
-
-      if (bbr1.contains(p)) {
-            mode = DRAG1;
-            QPointF anchor1 = score()->tick2Anchor(tick1, staffIdx());
-            QLineF l(anchor1, canvasPos());
-            viewer->setDropAnchor(l);
-            }
-      else if (bbr2.contains(p)) {
-            mode = DRAG2;
-            QPointF anchor2 = score()->tick2Anchor(tick2, staffIdx());
-            QLineF l(anchor2, canvasPos2());
-            viewer->setDropAnchor(l);
-            }
-      else {
-            return false;
-            }
-      return true;
+      QPointF anchor;
+      score()->pos2TickAnchor(pos, staff(), tick, &anchor);
+      return anchor;
       }
-#endif
 
 //---------------------------------------------------------
 //   editDrag
@@ -115,14 +97,12 @@ void LineSegment::editDrag(int curGrip, const QPointF& start, const QPointF& d)
       QPointF aapos(start + d);
       QPointF delta(d.x(), 0);    // only x-axis move
       int tick;
-      QPointF anchor;
-      score()->pos2TickAnchor(aapos, staff(), &tick, &anchor);
+      QPointF anchor = pos2anchor(aapos, &tick);
 
       if (curGrip == 0) {
             r2.translate(-delta);
 
             QPointF apos(canvasPos() + delta);
-//            viewer->setDropAnchor(QLineF(anchor, apos));
 
             if (_segmentType == SEGMENT_SINGLE || _segmentType == SEGMENT_BEGIN)
                   line()->setTick(tick);
@@ -131,7 +111,7 @@ void LineSegment::editDrag(int curGrip, const QPointF& start, const QPointF& d)
             setUserXoffset((apos.x() - anchor.x()) / _spatium);
             setXpos(anchor.x() - parent()->canvasPos().x());
 
-            score()->pos2TickAnchor(apos2, staff(), &tick, &anchor);
+            anchor = pos2anchor(apos2, &tick);
             _p2.setX(anchor.x() - canvasPos().x());
             _userOff2.setX((apos2.x() - anchor.x()) / _spatium);
             }
@@ -139,7 +119,6 @@ void LineSegment::editDrag(int curGrip, const QPointF& start, const QPointF& d)
             r2.translate(delta);
 
             QPointF apos(canvasPos2() + delta);
-//            viewer->setDropAnchor(QLineF(anchor, apos));;
 
             if (_segmentType == SEGMENT_SINGLE || _segmentType == SEGMENT_END)
                   line()->setTick2(tick);
@@ -209,6 +188,17 @@ void SLine::setTick2(int t)
       }
 
 //---------------------------------------------------------
+//   tick2pos
+//---------------------------------------------------------
+
+QPointF SLine::tick2pos(int tick, System** system)
+      {
+      Segment* seg = _score->tick2segment(tick);
+      *system = seg->measure()->system();
+      return seg->canvasPos();
+      }
+
+//---------------------------------------------------------
 //   layout
 //    compute segments from tick1 tick2
 //---------------------------------------------------------
@@ -226,17 +216,10 @@ void SLine::layout(ScoreLayout* layout)
             return;
             }
 
-      Segment* seg1 = _score->tick2segment(tick());
-      Segment* seg2 = _score->tick2segment(_tick2);
-      if (seg1 == 0 || seg2 == 0) {
-            printf("SLine Layout: seg not found\n");
-            return;
-            }
-      System* system1 = seg1->measure()->system();
-      System* system2 = seg2->measure()->system();
-
-      QPointF ppos(parent()->canvasPos());
-      QPointF p1 = seg1->canvasPos() - ppos; //  - ipos();
+      System* system1;
+      System* system2;
+      QPointF p1 = tick2pos(tick(), &system1) - parent()->canvasPos();
+      QPointF p2 = tick2pos(_tick2, &system2) - parent()->canvasPos();
 
       iSystem is = layout->systems()->begin();
       while (is != layout->systems()->end()) {
@@ -250,7 +233,6 @@ void SLine::layout(ScoreLayout* layout)
                   break;
             }
       if (segmentsNeeded != segments.size()) {
-printf("segments needed %d  but there are %d\n", segmentsNeeded, segments.size());
             // if line break changes do a complete re-layout;
             // this especially removes all user editing
 
@@ -262,19 +244,14 @@ printf("segments needed %d  but there are %d\n", segmentsNeeded, segments.size()
 
       int seg = 0;
       for (; is != layout->systems()->end(); ++is, ++seg) {
-            if (seg >= segments.size()) {
-                  printf("create new line segment\n");
+            if (seg >= segments.size())
                   segments.append(createSegment());
-                  }
             LineSegment* hps = segments[seg];
-            if (seg == 0) {
+            if (seg == 0)
                   hps->setPos(p1);
-                  }
-            else {
+            else
                   hps->setPos((*is)->canvasPos() - parent()->canvasPos());
-                  }
             if (*is == system2) {
-                  QPointF p2 = seg2->canvasPos() - hps->canvasPos();
                   hps->setXpos2(p2.x());
                   break;
                   }

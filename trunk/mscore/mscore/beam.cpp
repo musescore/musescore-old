@@ -288,7 +288,7 @@ QString Beam::xmlType(ChordRest* cr) const
 //   layout1
 //---------------------------------------------------------
 
-void Beam::layout1(ScoreLayout* layout)
+void Beam::layout1(ScoreLayout* /*layout*/)
       {
       //delete old segments
       for (iBeamSegment i = beamSegments.begin(); i != beamSegments.end(); ++i)

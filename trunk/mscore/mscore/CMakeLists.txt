@@ -55,67 +55,20 @@ include_directories(
       )
 
 QT4_WRAP_UI (ui_headers
-      insertmeasuresdialog.ui
-      barline.ui
-      chord.ui
-      chordrest.ui
-      editinstrument.ui
-      editstyle.ui
-      edittempo.ui
-      element.ui
-      hairpin.ui
-      instrdialog.ui
-      measure.ui
-      measuresdialog.ui
-      note.ui
-      page.ui
-      pagesettings.ui
-      partedit.ui
-      playpanel.ui
-      prefsdialog.ui
-      irregular.ui
-      segment.ui
-      text.ui
-      textpalette.ui
-      textstyle.ui
-      timedialog.ui
-      symboldialog.ui
-      dynamic.ui
-      tuplet.ui
-      shortcutcapturedialog.ui
-      slurtie.ui
-      slur.ui
-      editdrumset.ui
-      editstaff.ui
+      insertmeasuresdialog.ui barline.ui chord.ui chordrest.ui editinstrument.ui editstyle.ui
+      edittempo.ui element.ui hairpin.ui instrdialog.ui measure.ui measuresdialog.ui
+      note.ui page.ui pagesettings.ui partedit.ui playpanel.ui prefsdialog.ui
+      irregular.ui segment.ui text.ui textpalette.ui textstyle.ui timedialog.ui
+      symboldialog.ui dynamic.ui tuplet.ui shortcutcapturedialog.ui slurtie.ui
+      slur.ui editdrumset.ui editstaff.ui line.ui linesegment.ui
       )
 
 QT4_WRAP_CPP (mocs
-      canvas.h
-      editinstrument.h
-      editstyle.h
-      edittempo.h
-      instrdialog.h
-      listedit.h
-      mscore.h
-      navigator.h
-      pad.h
-      pagesettings.h
-      palette.h
-      partedit.h
-      playpanel.h
-      preferences.h
-      irregular.h
-      preview.h
-      score.h
-      seq.h
-      textpalette.h
-      textstyle.h
-      timedialog.h
-      symboldialog.h
-      shortcutcapturedialog.h
-      simplebutton.h greendotbutton.h recordbutton.h
-      editdrumset.h
-      editstaff.h
+      canvas.h editinstrument.h editstyle.h edittempo.h instrdialog.h listedit.h
+      mscore.h navigator.h pad.h pagesettings.h palette.h partedit.h playpanel.h
+      preferences.h irregular.h preview.h score.h seq.h textpalette.h textstyle.h
+      timedialog.h symboldialog.h shortcutcapturedialog.h simplebutton.h
+      greendotbutton.h recordbutton.h editdrumset.h editstaff.h
       )
 
 QT4_ADD_RESOURCES (qrc_files mscore.qrc)
@@ -155,8 +108,7 @@ add_executable ( mscore
       viewer.cpp volta.cpp simplebutton.cpp image.cpp keyfinder.cpp
       pitchspelling.cpp musedata.cpp keysig.cpp arpeggio.cpp breath.cpp
       editdrumset.cpp editstaff.cpp drumset.cpp tremolo.cpp repeat.cpp
-      repeat2.cpp
-      lilypond.cpp exportly.cpp
+      repeat2.cpp lilypond.cpp exportly.cpp
       ${AUDIO}
       )
 

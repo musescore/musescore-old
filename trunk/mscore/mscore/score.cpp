@@ -636,6 +636,60 @@ Measure* Score::pos2measure2(const QPointF& p, int* tick, Staff** rst, int* line
       }
 
 //---------------------------------------------------------
+//   pos2measure3
+//---------------------------------------------------------
+
+/**
+ Return nearest measure start for canvas relative position \a p.
+*/
+
+Measure* Score::pos2measure3(const QPointF& p, int* tick) const
+      {
+      for (ciPage ip = _layout->pages()->begin(); ip != _layout->pages()->end(); ++ip) {
+            const Page* page = *ip;
+            if (!page->contains(p))
+                  continue;
+            QPointF pp = p - page->pos();  // transform to page relative
+
+            QList<System*>* sl = page->systems();
+            double y1 = 0;
+            for (ciSystem is = sl->begin(); is != sl->end();) {
+                  double y2;
+                  System* s = *is;
+                  ++is;
+                  if (is != sl->end()) {
+                        double sy2 = s->y() + s->bbox().height();
+                        y2 = sy2 + ((*is)->y() - sy2)/2;
+                        }
+                  else
+                        y2 = page->height();
+                  if (pp.y() > y2) {
+                        y1 = y2;
+                        continue;
+                        }
+                  QPointF ppp = pp - s->pos();   // system relative
+                  foreach(Measure* m, s->measures()) {
+                        if (ppp.x() > (m->x() + m->bbox().width()))
+                              continue;
+                        if (ppp.x() < (m->x() + m->bbox().width()*.5)) {
+                              *tick = m->tick();
+                              return m;
+                              }
+                        else if (m->next()) {
+                              *tick = m->next()->tick();
+                              return m->next();
+                              }
+                        else {
+                              *tick = m->tick() + m->tickLen();
+                              return m;
+                              }
+                        }
+                  }
+            }
+      return 0;
+      }
+
+//---------------------------------------------------------
 //   staff
 //---------------------------------------------------------
 
@@ -1142,7 +1196,7 @@ QPointF Score::tick2Anchor(int tick, int staffIdx) const
 //    return false if no anchor found
 //---------------------------------------------------------
 
-bool Score::pos2TickAnchor(QPointF& pos, Staff* staff, int* tick, QPointF* anchor) const
+bool Score::pos2TickAnchor(const QPointF& pos, Staff* staff, int* tick, QPointF* anchor) const
       {
       Segment* seg;
       Measure* m = pos2measure(pos, tick, &staff, 0, &seg, 0);

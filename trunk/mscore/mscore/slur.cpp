@@ -159,7 +159,7 @@ bool SlurSegment::edit(int curGrip, QKeyEvent* ev)
 //   gripAnchor
 //---------------------------------------------------------
 
-QPointF SlurSegment::gripAnchor(int grip)
+QPointF SlurSegment::gripAnchor(int grip) const
       {
       Slur* sl = (Slur*) slur;
       System* s;

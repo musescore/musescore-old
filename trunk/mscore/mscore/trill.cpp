@@ -66,31 +66,12 @@ Trill::Trill(Score* s)
       }
 
 //---------------------------------------------------------
-//   setSubtype
-//---------------------------------------------------------
-
-void Trill::setSubtype(int val)
-      {
-      Element::setSubtype(val);
-      }
-
-//---------------------------------------------------------
 //   layout
 //---------------------------------------------------------
 
 void Trill::layout(ScoreLayout* layout)
       {
       SLine::layout(layout);
-      if (!parent())
-            return;
-#if 0
-      qreal trillDistance = _spatium * 2.5;
-      Measure* measure = (Measure*)parent();
-      System* system   = measure->system();
-      SysStaff* sstaff = system->staff(staffIdx());
-      qreal y = sstaff->bbox().top() - trillDistance;
-      setPos(ipos().x(), y);
-#endif
       }
 
 //---------------------------------------------------------

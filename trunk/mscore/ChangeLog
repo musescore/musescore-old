@@ -1,3 +1,6 @@
+26.9.7 (ws)
+      - add special text style for volta text
+      - volta's are now editable and can span several measures
 25.9.7 (ws)
       - fix insert measure(s)
       - implemented measure drag&drop
