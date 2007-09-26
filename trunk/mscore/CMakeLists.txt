@@ -118,9 +118,10 @@ PKGCONFIG (portaudio-2.0 19 PORTAUDIO_INCDIR PORAUDIO_LIBDIR PORTAUDIO_LIB PORTA
 if (PORTAUDIO_INCDIR)
 	message("portaudio detected")
       set ( USE_PORTAUDIO 1 )
+else (PORTAUDIO_INCDIR)
+      message(FATAL_ERROR "Fatal error: package portaudio-2.0 Version 19 not found (package portaudio19-dev)\n")
 endif (PORTAUDIO_INCDIR)
 
-#
 # produce config.h file
 #
 configure_file (

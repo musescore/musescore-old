@@ -1,4 +1,5 @@
 26.9.7 (ws)
+      - package portaudio-19 is now required
       - fix drawing of "broken" barline
       - add special text style for volta text
       - volta's are now editable and can span several measures
