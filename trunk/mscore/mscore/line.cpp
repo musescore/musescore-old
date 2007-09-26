@@ -155,7 +155,7 @@ QRectF LineSegment::drag(const QPointF& s)
       QPointF newOffset(s / _spatium);
       QPointF diff(userOff() - newOffset);
       setUserOff(newOffset);
-      setUserXoffset2(userOff2().x() - diff.x());
+//??      setUserXoffset2(userOff2().x() - diff.x());
       return abbox() | r;
       }
 
@@ -194,7 +194,7 @@ void SLine::setTick2(int t)
 QPointF SLine::tick2pos(int tick, System** system)
       {
       Segment* seg = _score->tick2segment(tick);
-      *system = seg->measure()->system();
+      *system      = seg->measure()->system();
       return seg->canvasPos();
       }
 
@@ -244,19 +244,20 @@ void SLine::layout(ScoreLayout* layout)
 
       int seg = 0;
       for (; is != layout->systems()->end(); ++is, ++seg) {
+            System* system = *is;
             if (seg >= segments.size())
                   segments.append(createSegment());
             LineSegment* hps = segments[seg];
             if (seg == 0)
                   hps->setPos(p1);
             else
-                  hps->setPos((*is)->canvasPos() - parent()->canvasPos());
-            if (*is == system2) {
+                  hps->setPos(system->canvasPos() - parent()->canvasPos());
+            if (system == system2) {
                   hps->setXpos2(p2.x());
                   break;
                   }
-            hps->setXpos2((*is)->canvasPos().x()
-               + (*is)->bbox().width()
+            hps->setXpos2(system->canvasPos().x()
+               + system->bbox().width()
                - _spatium * 0.5
                - hps->canvasPos().x()
                );
