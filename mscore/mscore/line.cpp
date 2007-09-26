@@ -393,7 +393,7 @@ void SLine::add(Element* e)
 
 void SLine::remove(Element*)
       {
-      printf("SLine::remove=========\n");
+printf("SLine::remove=========\n");
       segments.clear();
       }
 

@@ -48,6 +48,18 @@ struct PadState {
 //    8 - (double sharp)   13 - [double sharp]
 //    9 - (double flat)    14 - [double flat]
 //    10 - (natural)       15 - [natural]
+
+      PadState() {
+            dot     = false;
+            len     = 480;
+            tickLen = 480;
+            rest    = false;
+            pad     = 0;
+            voice   = 0;
+            pitch   = 60;
+            prefix  = 0;
+            tie     = false;
+            }
       };
 
 #endif
