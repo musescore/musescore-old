@@ -119,7 +119,8 @@ if (PORTAUDIO_INCDIR)
 	message("portaudio detected")
       set ( USE_PORTAUDIO 1 )
 else (PORTAUDIO_INCDIR)
-      message(FATAL_ERROR "Fatal error: package portaudio-2.0 Version 19 not found (package portaudio19-dev)\n")
+      message("optional package portaudio-2.0 Version 19 not found (package portaudio19-dev)\n")
+      set ( USE_PORTAUDIO 0 )
 endif (PORTAUDIO_INCDIR)
 
 # produce config.h file
