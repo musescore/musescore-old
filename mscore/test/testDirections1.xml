@@ -8,8 +8,8 @@
   <identification>
     <creator type="composer">Leon Vinken</creator>
     <encoding>
-      <software>MuseScore 0.4.0</software>
-      <encoding-date>2006-10-22</encoding-date>
+      <software>MuseScore 0.7.0</software>
+      <encoding-date>2007-09-10</encoding-date>
       </encoding>
     </identification>
   <part-list>
@@ -27,16 +27,19 @@
   <part id="P1">
     <measure number="1">
       <attributes>
-        <divisions>384</divisions>
-        <staves>1</staves>
-        <clef number="1">
-          <sign>G</sign>
-          <line>2</line>
-          </clef>
+        <divisions>480</divisions>
+        <key>
+          <fifths>0</fifths>
+          <mode>major</mode>
+          </key>
         <time>
           <beats>4</beats>
           <beat-type>4</beat-type>
           </time>
+        <clef>
+          <sign>G</sign>
+          <line>2</line>
+          </clef>
         </attributes>
       <direction placement="above">
         <direction-type>
@@ -48,7 +51,7 @@
           <step>G</step>
           <octave>4</octave>
           </pitch>
-        <duration>384</duration>
+        <duration>480</duration>
         <voice>1</voice>
         <type>quarter</type>
         <stem>up</stem>
@@ -58,7 +61,7 @@
           <step>A</step>
           <octave>4</octave>
           </pitch>
-        <duration>384</duration>
+        <duration>480</duration>
         <voice>1</voice>
         <type>quarter</type>
         <stem>up</stem>
@@ -73,7 +76,7 @@
           <step>B</step>
           <octave>4</octave>
           </pitch>
-        <duration>384</duration>
+        <duration>480</duration>
         <voice>1</voice>
         <type>quarter</type>
         <stem>down</stem>
@@ -83,7 +86,7 @@
           <step>C</step>
           <octave>5</octave>
           </pitch>
-        <duration>384</duration>
+        <duration>480</duration>
         <voice>1</voice>
         <type>quarter</type>
         <stem>down</stem>
@@ -100,7 +103,7 @@
           <step>G</step>
           <octave>4</octave>
           </pitch>
-        <duration>384</duration>
+        <duration>480</duration>
         <voice>1</voice>
         <type>quarter</type>
         <stem>up</stem>
@@ -115,7 +118,7 @@
           <step>A</step>
           <octave>4</octave>
           </pitch>
-        <duration>384</duration>
+        <duration>480</duration>
         <voice>1</voice>
         <type>quarter</type>
         <stem>up</stem>
@@ -130,7 +133,7 @@
           <step>B</step>
           <octave>4</octave>
           </pitch>
-        <duration>384</duration>
+        <duration>480</duration>
         <voice>1</voice>
         <type>quarter</type>
         <stem>down</stem>
@@ -145,7 +148,7 @@
           <step>C</step>
           <octave>5</octave>
           </pitch>
-        <duration>384</duration>
+        <duration>480</duration>
         <voice>1</voice>
         <type>quarter</type>
         <stem>down</stem>
@@ -164,7 +167,7 @@
           <step>G</step>
           <octave>4</octave>
           </pitch>
-        <duration>384</duration>
+        <duration>480</duration>
         <voice>1</voice>
         <type>quarter</type>
         <stem>up</stem>
@@ -174,7 +177,7 @@
           <step>A</step>
           <octave>4</octave>
           </pitch>
-        <duration>384</duration>
+        <duration>480</duration>
         <voice>1</voice>
         <type>quarter</type>
         <stem>up</stem>
@@ -191,7 +194,7 @@
           <step>B</step>
           <octave>4</octave>
           </pitch>
-        <duration>384</duration>
+        <duration>480</duration>
         <voice>1</voice>
         <type>quarter</type>
         <stem>down</stem>
@@ -201,7 +204,7 @@
           <step>C</step>
           <octave>5</octave>
           </pitch>
-        <duration>384</duration>
+        <duration>480</duration>
         <voice>1</voice>
         <type>quarter</type>
         <stem>down</stem>
@@ -213,7 +216,7 @@
           <step>G</step>
           <octave>4</octave>
           </pitch>
-        <duration>384</duration>
+        <duration>480</duration>
         <voice>1</voice>
         <type>quarter</type>
         <stem>up</stem>
@@ -228,7 +231,7 @@
           <step>A</step>
           <octave>4</octave>
           </pitch>
-        <duration>384</duration>
+        <duration>480</duration>
         <voice>1</voice>
         <type>quarter</type>
         <stem>up</stem>
@@ -238,7 +241,7 @@
           <step>B</step>
           <octave>4</octave>
           </pitch>
-        <duration>384</duration>
+        <duration>480</duration>
         <voice>1</voice>
         <type>quarter</type>
         <stem>down</stem>
@@ -253,7 +256,7 @@
           <step>C</step>
           <octave>5</octave>
           </pitch>
-        <duration>384</duration>
+        <duration>480</duration>
         <voice>1</voice>
         <type>quarter</type>
         <stem>down</stem>
@@ -265,7 +268,7 @@
           <step>G</step>
           <octave>4</octave>
           </pitch>
-        <duration>384</duration>
+        <duration>480</duration>
         <voice>1</voice>
         <type>quarter</type>
         <stem>up</stem>
@@ -280,7 +283,7 @@
           <step>A</step>
           <octave>4</octave>
           </pitch>
-        <duration>384</duration>
+        <duration>480</duration>
         <voice>1</voice>
         <type>quarter</type>
         <stem>up</stem>
@@ -290,7 +293,7 @@
           <step>B</step>
           <octave>4</octave>
           </pitch>
-        <duration>384</duration>
+        <duration>480</duration>
         <voice>1</voice>
         <type>quarter</type>
         <stem>down</stem>
@@ -305,7 +308,7 @@
           <step>C</step>
           <octave>5</octave>
           </pitch>
-        <duration>384</duration>
+        <duration>480</duration>
         <voice>1</voice>
         <type>quarter</type>
         <stem>down</stem>
