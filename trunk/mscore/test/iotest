@@ -73,8 +73,9 @@ rwtestAllMsc() {
       }
 
 rwtestAllXml() {
-#      rwtestXml testAccidentals1.xml
-#      rwtestXml testDirections1.xml
+      rwtestXml testAccidentals1.xml
+#      rwtestXml testAccidentals2.xml
+      rwtestXml testDirections1.xml
       rwtestXml testDynamics1.xml
       rwtestXml testDynamics2.xml
       rwtestXml testHello.xml
@@ -85,7 +86,7 @@ rwtestAllXml() {
       rwtestXml testTimesig1.xml
       rwtestXml testTimesig3.xml
       rwtestXml testVoicePiano1.xml
-#      rwtestXml testWedge1.xml
+      rwtestXml testWedge1.xml
       rwtestXml testWords1.xml
       }
 

@@ -1639,11 +1639,14 @@ bool ExportMusicXml::write(const QString& name)
       if (score->rights)
             xml.tag("rights", score->rights->toPlainText());
       xml.stag("encoding");
-      xml.tag("software", QString("MuseScore ") + QString(VERSION));
-      if (debugMode)
+      if (debugMode) {
+            xml.tag("software", QString("MuseScore 0.7.0"));
             xml.tag("encoding-date", QString("2007-09-10"));
-      else
+            }
+      else {
+            xml.tag("software", QString("MuseScore ") + QString(VERSION));
             xml.tag("encoding-date", QDate::currentDate().toString(Qt::ISODate));
+            }
       xml.etag();
       xml.etag();
 

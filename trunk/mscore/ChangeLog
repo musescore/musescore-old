@@ -1,3 +1,6 @@
+29.9.7 (lv)
+      - fixed MusicXML testfiles
+      - new testfile testAccidentals2.xml
 28.9.7 (ws)
       - make portaudio optional
 26.9.7 (ws)

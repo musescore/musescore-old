@@ -2,14 +2,14 @@
 <!DOCTYPE score-partwise PUBLIC "-//Recordare//DTD MusicXML 1.0 Partwise//EN" "http://www.musicxml.org/dtds/partwise.dtd">
 <score-partwise>
   <work>
-    <work-title>Wedge 1</work-title>
+    <work-title>Accidentals 2</work-title>
     <work-number>MuseScore testfile</work-number>
     </work>
   <identification>
     <creator type="composer">Leon Vinken</creator>
     <encoding>
-      <software>MuseScore 0.7.0</software>
-      <encoding-date>2007-09-10</encoding-date>
+      <software>MuseScore 0.4.0</software>
+      <encoding-date>2007-01-22</encoding-date>
       </encoding>
     </identification>
   <part-list>
@@ -33,7 +33,7 @@
           <mode>major</mode>
           </key>
         <time>
-          <beats>4</beats>
+          <beats>3</beats>
           <beat-type>4</beat-type>
           </time>
         <clef>
@@ -43,31 +43,6 @@
         </attributes>
       <note>
         <pitch>
-          <step>E</step>
-          <octave>4</octave>
-          </pitch>
-        <duration>480</duration>
-        <voice>1</voice>
-        <type>quarter</type>
-        <stem>up</stem>
-        </note>
-      <direction placement="above">
-        <direction-type>
-          <wedge type="crescendo"/>
-          </direction-type>
-        </direction>
-      <note>
-        <pitch>
-          <step>F</step>
-          <octave>4</octave>
-          </pitch>
-        <duration>480</duration>
-        <voice>1</voice>
-        <type>quarter</type>
-        <stem>up</stem>
-        </note>
-      <note>
-        <pitch>
           <step>G</step>
           <octave>4</octave>
           </pitch>
@@ -79,20 +54,36 @@
       <note>
         <pitch>
           <step>A</step>
+          <alter>1</alter>
           <octave>4</octave>
           </pitch>
+        <accidental>sharp</accidental>
         <duration>480</duration>
         <voice>1</voice>
         <type>quarter</type>
         <stem>up</stem>
         </note>
+      <note>
+        <pitch>
+          <step>B</step>
+          <alter>-1</alter>
+          <octave>4</octave>
+          </pitch>
+        <accidental>flat</accidental>
+        <duration>480</duration>
+        <voice>1</voice>
+        <type>quarter</type>
+        <stem>down</stem>
+        </note>
       </measure>
     <measure number="2">
       <note>
         <pitch>
-          <step>B</step>
-          <octave>4</octave>
+          <step>C</step>
+          <alter>2</alter>
+          <octave>5</octave>
           </pitch>
+        <accidental>double-sharp</accidental>
         <duration>480</duration>
         <voice>1</voice>
         <type>quarter</type>
@@ -100,9 +91,11 @@
         </note>
       <note>
         <pitch>
-          <step>C</step>
+          <step>D</step>
+          <alter>-2</alter>
           <octave>5</octave>
           </pitch>
+        <accidental>flat-flat</accidental>
         <duration>480</duration>
         <voice>1</voice>
         <type>quarter</type>
@@ -113,21 +106,7 @@
           <step>D</step>
           <octave>5</octave>
           </pitch>
-        <duration>480</duration>
-        <voice>1</voice>
-        <type>quarter</type>
-        <stem>down</stem>
-        </note>
-      <direction placement="above">
-        <direction-type>
-          <wedge type="stop"/>
-          </direction-type>
-        </direction>
-      <note>
-        <pitch>
-          <step>E</step>
-          <octave>5</octave>
-          </pitch>
+        <accidental>natural</accidental>
         <duration>480</duration>
         <voice>1</voice>
         <type>quarter</type>
@@ -137,31 +116,6 @@
     <measure number="3">
       <note>
         <pitch>
-          <step>E</step>
-          <octave>4</octave>
-          </pitch>
-        <duration>480</duration>
-        <voice>1</voice>
-        <type>quarter</type>
-        <stem>up</stem>
-        </note>
-      <direction placement="below">
-        <direction-type>
-          <wedge type="diminuendo"/>
-          </direction-type>
-        </direction>
-      <note>
-        <pitch>
-          <step>F</step>
-          <octave>4</octave>
-          </pitch>
-        <duration>480</duration>
-        <voice>1</voice>
-        <type>quarter</type>
-        <stem>up</stem>
-        </note>
-      <note>
-        <pitch>
           <step>G</step>
           <octave>4</octave>
           </pitch>
@@ -173,20 +127,36 @@
       <note>
         <pitch>
           <step>A</step>
+          <alter>1</alter>
           <octave>4</octave>
           </pitch>
+        <accidental editorial="yes">sharp</accidental>
         <duration>480</duration>
         <voice>1</voice>
         <type>quarter</type>
         <stem>up</stem>
         </note>
+      <note>
+        <pitch>
+          <step>B</step>
+          <alter>-1</alter>
+          <octave>4</octave>
+          </pitch>
+        <accidental editorial="yes">flat</accidental>
+        <duration>480</duration>
+        <voice>1</voice>
+        <type>quarter</type>
+        <stem>down</stem>
+        </note>
       </measure>
     <measure number="4">
       <note>
         <pitch>
-          <step>B</step>
-          <octave>4</octave>
+          <step>C</step>
+          <alter>2</alter>
+          <octave>5</octave>
           </pitch>
+        <accidental editorial="yes">double-sharp</accidental>
         <duration>480</duration>
         <voice>1</voice>
         <type>quarter</type>
@@ -194,9 +164,11 @@
         </note>
       <note>
         <pitch>
-          <step>C</step>
+          <step>D</step>
+          <alter>-2</alter>
           <octave>5</octave>
           </pitch>
+        <accidental editorial="yes">flat-flat</accidental>
         <duration>480</duration>
         <voice>1</voice>
         <type>quarter</type>
@@ -207,21 +179,7 @@
           <step>D</step>
           <octave>5</octave>
           </pitch>
-        <duration>480</duration>
-        <voice>1</voice>
-        <type>quarter</type>
-        <stem>down</stem>
-        </note>
-      <direction placement="below">
-        <direction-type>
-          <wedge type="stop"/>
-          </direction-type>
-        </direction>
-      <note>
-        <pitch>
-          <step>E</step>
-          <octave>5</octave>
-          </pitch>
+        <accidental editorial="yes">natural</accidental>
         <duration>480</duration>
         <voice>1</voice>
         <type>quarter</type>
