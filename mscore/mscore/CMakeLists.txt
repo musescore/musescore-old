@@ -77,8 +77,11 @@ if (MINGW)
       set (resource_file ${PROJECT_BINARY_DIR}/resfile.o)
       set (AUDIO pa.cpp)
 else (MINGW)
-#      set (AUDIO jackaudio.cpp alsa.cpp)
-      set (AUDIO jackaudio.cpp alsa.cpp pa.cpp)
+      if (USE_PORTAUDIO)
+            set (AUDIO jackaudio.cpp alsa.cpp pa.cpp)
+      else (USE_PORTAUDIO)
+            set (AUDIO jackaudio.cpp alsa.cpp)
+      endif (USE_PORTAUDIO)
 endif (MINGW)
 
 add_executable ( mscore
