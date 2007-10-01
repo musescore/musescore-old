@@ -430,6 +430,7 @@ PreferenceDialog::PreferenceDialog(QWidget* parent)
       //
       // initialize portaudio
       //
+#ifdef USE_PORTAUDIO
       if (usePortaudio) {
             Portaudio* audio = (Portaudio*)seq->audioDriver();
             QStringList apis = audio->apiList();
@@ -438,7 +439,7 @@ PreferenceDialog::PreferenceDialog(QWidget* parent)
             portaudioDevice->addItems(devices);
             connect(portaudioApi, SIGNAL(activated(int)), SLOT(portaudioApiActivated(int)));
             }
-
+#endif
       connect(fgColorSelect,      SIGNAL(clicked()), SLOT(selectFgColor()));
       connect(bgColorSelect,      SIGNAL(clicked()), SLOT(selectBgColor()));
       connect(selectColorSelect1, SIGNAL(clicked()), SLOT(selectSelectColor1()));
@@ -466,10 +467,12 @@ PreferenceDialog::PreferenceDialog(QWidget* parent)
 
 void PreferenceDialog::portaudioApiActivated(int idx)
       {
+#ifdef USE_PORTAUDIO
       Portaudio* audio = (Portaudio*)seq->audioDriver();
       QStringList devices = audio->deviceList(idx);
       portaudioDevice->clear();
       portaudioDevice->addItems(devices);
+#endif
       }
 
 //---------------------------------------------------------
@@ -780,11 +783,11 @@ void PreferenceDialog::apply()
       preferences.alsaPeriodSize     = alsaPeriodSize->currentText().toInt();
       preferences.alsaFragments      = alsaFragments->value();
       preferences.antialiasedDrawing = drawAntialiased->isChecked();
+#ifdef USE_PORTAUDIO
       Portaudio* audio = (Portaudio*)seq->audioDriver();
-
       preferences.portaudioDevice = audio->deviceIndex(portaudioApi->currentIndex(),
          portaudioDevice->currentIndex());
-
+#endif
       if (lastSession->isChecked())
             preferences.sessionStart = LAST_SESSION;
       else if (newSession->isChecked())
