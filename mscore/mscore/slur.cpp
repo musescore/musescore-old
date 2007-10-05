@@ -434,6 +434,7 @@ void SlurTie::change(Element* o, Element* n)
             printf("SlurTie: cannot change %p\n", o);
             return;
             }
+      n->setParent(this);
       segments[idx] = (SlurSegment*)n;
       }
 
@@ -453,7 +454,6 @@ QPointF SlurTie::slurPos(int tick, int track, System*& s)
       if (cr == 0) {
             printf("SlurTie: cannot find chord/rest at tick:%d track:%d, measure %d-%d\n",
                tick, track, m->tick(), m->tick() + m->tickLen());
-abort();
             return QPointF(0,0);
             }
 
@@ -788,50 +788,6 @@ QRectF Slur::bbox() const
       foreach(SlurSegment* ss, segments)
             r |= ss->abbox().translated(canvasPos());
       return r;
-      }
-
-//---------------------------------------------------------
-//   layout2
-//    snap to next tick positions
-//---------------------------------------------------------
-
-void Slur::layout2(ScoreLayout* /*layout*/, const QPointF /*ppos*/, int /*mode*/, struct UP& /*ups*/)
-      {
-#if 0
-      double _spatium = layout->spatium();
-      //
-      // compute absolute position of control point on canvas:
-      //
-      QPointF p(ups.p + ups.off * _spatium + ppos);
-
-      System* s;
-      if (mode == 1) {
-            int tick = _score->snapNote(_tick1, p, _track1 / VOICES);
-            if (tick != _tick1) {
-                  _tick1     = tick;
-                  QPointF p2 = slurPos(_tick1, _track1, s);
-                  ups.p      = p2 - ppos;    // relative to parent position
-                  ups.off    = (p - p2) / _spatium;
-                  }
-            }
-      else if (mode == 4) {
-            //
-            // search for nearest segment at p
-            //
-            int tick = _score->snapNote(_tick2, p, _track2 / VOICES);
-
-            //
-            // if found new segment, and reference point is different,
-            // then update ups.p and ups.off
-            //
-            if (tick != _tick2) {
-                  _tick2     = tick;
-                  QPointF p2 = slurPos(_tick2, _track2, s);
-                  ups.p      = p2 - ppos;    // relative to parent position
-                  ups.off    = (p - p2) / _spatium;
-                  }
-            }
-#endif
       }
 
 //---------------------------------------------------------
