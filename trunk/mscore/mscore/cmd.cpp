@@ -1273,9 +1273,9 @@ void Score::cmd(const QString& cmd)
                   // slur->setSelected(true);
                   if (slur) {
                         slur->layout(mainLayout());
-                        ElementList* el = slur->elements();
+                        QList<SlurSegment*>* el = slur->elements();
                         if (!el->isEmpty()) {
-                              SlurSegment* ss = (SlurSegment*)el->front();
+                              SlurSegment* ss = el->front();
                               if (canvas()->startEdit(ss)) {
                                     return;
                                     }

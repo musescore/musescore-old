@@ -51,13 +51,22 @@ static inline int intmaxlog(int n)
 //   ScoreLayout
 //---------------------------------------------------------
 
-ScoreLayout::ScoreLayout()
+ScoreLayout::ScoreLayout(Score* score)
+   : Element(score)
       {
       _spatium     = ::_spatium;
       _pageFormat  = new PageFormat;
       _systems     = new QList<System*>;
       _pages       = new PageList;
       _paintDevice = 0;
+
+      //DEBUG:
+      _spatium = ::_spatium;
+      _systems->clear();
+      _pages->clear();
+      _needLayout = false;
+      _pageFormat = new PageFormat;
+      _paintDevice = _score->canvas();
       }
 
 ScoreLayout::~ScoreLayout()
@@ -70,13 +79,13 @@ ScoreLayout::~ScoreLayout()
             delete _pages;
       }
 
+#if 0
 //---------------------------------------------------------
 //   setScore
 //---------------------------------------------------------
 
 void ScoreLayout::setScore(Score* s)
       {
-      _score = s;
       _spatium = ::_spatium;
       _systems->clear();
       _pages->clear();
@@ -84,6 +93,7 @@ void ScoreLayout::setScore(Score* s)
       _pageFormat = new PageFormat;
       _paintDevice = _score->canvas();
       }
+#endif
 
 //---------------------------------------------------------
 //   searchNote
@@ -167,9 +177,7 @@ void ScoreLayout::doLayout()
             //---------------------------------------------------
 
             QRectF r = page->abbox();
-            el.clear();
-            int depth = intmaxlog(el.size());
-            bspTree.initialize(r, depth);
+            bspTree.initialize(r, 0);
             return;
             }
 
@@ -204,6 +212,8 @@ void ScoreLayout::doLayout()
             m->layoutBeams(this);
             m->layout2(this);
             }
+      foreach(Element* el, _gel)
+            el->layout(this);
 
       //---------------------------------------------------
       //    remove remaining pages and systems
@@ -222,13 +232,22 @@ void ScoreLayout::doLayout()
       //---------------------------------------------------
 
       QRectF r;
-      el.clear();
+      QList<Element*> el;
       for(Measure* m = first(); m; m = m->next())
             m->collectElements(el);
       for (iPage ip = _pages->begin(); ip != _pages->end(); ++ip) {
             Page* page = *ip;
             r |= page->abbox();
             page->collectElements(el);
+            }
+      foreach (Element* element, _gel) {
+            if (element->type() == SLUR) {
+                  Slur* slur = (Slur*)element;
+                  foreach(Element* e, *slur->elements())
+                        el.append(e);
+                  }
+            else
+                  el.append(element);
             }
       int depth = intmaxlog(el.size());
       bspTree.initialize(r, depth);
@@ -461,6 +480,7 @@ System* ScoreLayout::layoutSystem(Measure*& im, System* system, qreal x, qreal y
                         }
                   }
 
+            m->setEndBarLineType(NORMAL_BAR, true);   // DEBUG
             m->layoutBeams1(this);  // find hooks
             m->layoutX(this, 1.0);
 
@@ -556,8 +576,12 @@ System* ScoreLayout::layoutSystem(Measure*& im, System* system, qreal x, qreal y
                         m->setEndBarLineType(START_REPEAT, true);
                   else {
                         BarLine* bl = m->endBarLine();
-                        if (bl == 0 || bl->generated())
-                              m->setEndBarLineType(NORMAL_BAR, true);
+                        if (bl == 0 || bl->generated()) {
+                              if (bl == 0)
+                                    m->setEndBarLineType(NORMAL_BAR, true);
+                              else
+                                    bl->setSubtype(NORMAL_BAR);
+                              }
                         }
                   }
             }
@@ -783,3 +807,23 @@ void ScoreLayout::reLayout(Measure*)
       printf("reLayout\n");
       }
 
+//---------------------------------------------------------
+//   add
+//---------------------------------------------------------
+
+void ScoreLayout::add(Element* el)
+      {
+      el->setParent(this);
+      _gel.append(el);
+      }
+
+//---------------------------------------------------------
+//   remove
+//---------------------------------------------------------
+
+void ScoreLayout::remove(Element* el)
+      {
+      int idx = _gel.indexOf(el);
+      if (idx == -1)
+            printf("ScoreLayout::remove(): element not found\n");
+      }

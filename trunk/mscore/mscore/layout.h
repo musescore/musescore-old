@@ -23,6 +23,7 @@
 
 #include "bsp.h"
 #include "measure.h"
+#include "element.h"
 
 class Score;
 class PageFormat;
@@ -60,18 +61,16 @@ class ElemList {
 //   ScoreLayout
 //---------------------------------------------------------
 
-class ScoreLayout {
-      Score* _score;
+class ScoreLayout : public Element {
       double _spatium;
       PageFormat* _pageFormat;
       QPaintDevice* _paintDevice;
-      ElementList el;
       BspTree bspTree;
 
       //
       // modified by layout()
-
-      ElemList _measures;           // here are the notes
+      //
+      ElemList _measures;     // here are the notes
       //
       // generated objects by layout():
       //
@@ -85,11 +84,15 @@ class ScoreLayout {
       System* layoutSystem(Measure*& im, System*, qreal x, qreal y, qreal w);
       void processSystemHeader(Measure* m);
 
-   public:
-      ScoreLayout();
-      ~ScoreLayout();
+   protected:
+      QList<Element*> _gel;   // global elements: Slur, SLine
 
-      void setScore(Score*);
+   public:
+      ScoreLayout(Score*);
+      ~ScoreLayout();
+      virtual ElementType type() const     { return LAYOUT; }
+      virtual Element* clone() const       { abort(); }
+
       void layout()                           { _needLayout = true; }
       void doLayout();
       void reLayout(Measure*);
@@ -113,7 +116,12 @@ class ScoreLayout {
       QList<Element*> items(const QPointF& p) { return bspTree.items(p); }
       void setInstrumentNames();
       void connectTies();
-      };
+      QList<Element*>* gel()                  { return &_gel; }
 
+      virtual void add(Element*);
+      virtual void remove(Element*);
+
+      friend class Score;
+      };
 #endif
 

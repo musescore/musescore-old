@@ -280,21 +280,21 @@ void Note::remove(Element* el)
                         printf("Note::remove: fingering not found\n");
                   }
                   break;
-
+#if 0 // TODO
 	      case TIE:
                   {
                   Tie* tie = (Tie*) el;
                   setTieFor(0);
                   if (tie->endNote())
                         tie->endNote()->setTieBack(0);
-            	ElementList* el = tie->elements();
+            	QList<SlurSegment*>* el = tie->elements();
                   for (iElement i = el->begin(); i != el->end(); ++i) {
       	            score()->removeElement(*i);
                         }
                   el->clear();
                   }
                   break;
-
+#endif
             case ACCIDENTAL:
                   _accidental = 0;
                   break;

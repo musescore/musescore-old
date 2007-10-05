@@ -42,16 +42,15 @@ struct UP {
 class SlurSegment : public Element {
       struct UP ups[4];
       QPainterPath path;
-
-      SlurTie* slur;
       qreal bow;
+      SegmentType _segmentType;
+      System* _system;
 
       virtual QRectF bbox() const;
       void updatePath();
-//      void setDropAnchor(Viewer* viewer);
 
    public:
-      SlurSegment(SlurTie*);
+      SlurSegment(Score*);
       SlurSegment(const SlurSegment&);
       virtual SlurSegment* clone() const { return new SlurSegment(*this); }
       virtual ElementType type() const { return SLUR_SEGMENT; }
@@ -71,12 +70,13 @@ class SlurSegment : public Element {
 
       virtual bool genPropertyMenu(QMenu*) const;
 
-      SlurTie* slurTie() const     { return slur; }
-      void setSlurTie(SlurTie* st) { slur = st; }
+      SlurTie* slurTie() const     { return (SlurTie*)parent(); }
 
       void write(Xml& xml, int no) const;
       void read(QDomElement);
       void dump() const;
+      void setSegmentType(SegmentType s)  { _segmentType = s;  }
+      void setSystem(System* s)           { _system = s;       }
       };
 
 //---------------------------------------------------------
@@ -86,7 +86,7 @@ class SlurSegment : public Element {
 class SlurTie : public Element {
    protected:
       bool up;
-      ElementList segments;
+      QList<SlurSegment*> segments;
       Direction _slurDirection;
 
    public:
@@ -104,9 +104,10 @@ class SlurTie : public Element {
       virtual void setSelected(bool f);
       virtual bool contains(const QPointF&) const { return false; }  // not selectable
 
-      ElementList* elements()             { return &segments;      }
+      QList<SlurSegment*>* elements()             { return &segments;      }
       virtual void add(Element* s);
       virtual void remove(Element* s);
+      virtual void change(Element* o, Element* n);
 
       void writeProperties(Xml& xml) const;
       bool readProperties(QDomElement);
@@ -127,7 +128,7 @@ class Slur : public SlurTie {
       virtual Slur* clone() const      { return new Slur(*this); }
       virtual ElementType type() const { return SLUR; }
       virtual void write(Xml& xml) const;
-      virtual void read(Score*, QDomElement);
+      virtual void read(QDomElement);
       virtual void layout(ScoreLayout*);
       virtual void layout2(ScoreLayout*, const QPointF, int, struct UP&);
       virtual QRectF bbox() const;

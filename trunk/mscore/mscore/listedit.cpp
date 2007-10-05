@@ -223,6 +223,18 @@ void PageListEditor::layoutScore()
 void PageListEditor::updateList()
       {
       list->clear();
+      ElementItem* li = new ElementItem(list, cs->mainLayout());
+      foreach(Element* el, *cs->gel()) {
+            if (el->type() == SLUR) {
+                  ElementItem* se = new ElementItem(li, el);
+                  Slur* slur = (Slur*)el;
+                  foreach(Element* el1, *slur->elements())
+                        new ElementItem(se, el1);
+                  }
+            else
+                  new ElementItem(li, el);
+            }
+
       PageList* pl = cs->mainLayout()->pages();
       int staves = cs->nstaves();
       int tracks = staves * VOICES;
@@ -1396,7 +1408,7 @@ void SlurView::setElement(Element* e)
       ShowElementBase::setElement(e);
 
       st.segments->clear();
-      ElementList* el = slur->elements();
+      QList<SlurSegment*>* el = slur->elements();
       foreach(const Element* e, *el) {
             QTreeWidgetItem* item = new QTreeWidgetItem;
             item->setText(0, QString("%1").arg((unsigned long)e, 8, 16));
@@ -1458,7 +1470,7 @@ void TieView::setElement(Element* e)
       ShowElementBase::setElement(e);
 
       st.segments->clear();
-      ElementList* el = tie->elements();
+      QList<SlurSegment*>* el = tie->elements();
       foreach(const Element* e, *el) {
             QTreeWidgetItem* item = new QTreeWidgetItem;
             item->setText(0, QString("%1").arg((unsigned long)e, 8, 16));

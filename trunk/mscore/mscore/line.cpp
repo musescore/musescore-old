@@ -54,18 +54,9 @@ void LineSegment::updateGrips(int* grips, QRectF* grip) const
 
 QPointF LineSegment::gripAnchor(int curGrip) const
       {
-      QPointF anchor;
-      int tick;
-
-      if (curGrip == 0) {
-            QPointF pp1(canvasPos());
-            score()->pos2TickAnchor(pp1, staff(), &tick, &anchor);
-            }
-      else {
-            QPointF pp2(_p2 + _userOff2 * _spatium + canvasPos());
-            score()->pos2TickAnchor(pp2, staff(), &tick, &anchor);
-            }
-      return anchor;
+      int tick = curGrip == 0 ? line()->tick() : line()->tick2();
+      System* system;
+      return line()->tick2pos(tick, &system);
       }
 
 //---------------------------------------------------------
@@ -118,10 +109,10 @@ void LineSegment::editDrag(int curGrip, const QPointF& start, const QPointF& d)
       else {
             r2.translate(delta);
 
-            QPointF apos(canvasPos2() + delta);
-
             if (_segmentType == SEGMENT_SINGLE || _segmentType == SEGMENT_END)
                   line()->setTick2(tick);
+
+            QPointF apos(canvasPos2() + delta);
 
             setUserXoffset2((apos.x() - anchor.x()) / _spatium);
             setXpos2(anchor.x() - canvasPos().x());
@@ -205,6 +196,7 @@ QPointF SLine::tick2pos(int tick, System** system)
 
 void SLine::layout(ScoreLayout* layout)
       {
+printf("SLine::layout\n");
       if (!parent()) {
             //
             // when used in a palette, SLine has no parent and
@@ -232,50 +224,58 @@ void SLine::layout(ScoreLayout* layout)
             if (*iis == system2)
                   break;
             }
-      if (segmentsNeeded != segments.size()) {
-            // if line break changes do a complete re-layout;
-            // this especially removes all user editing
 
-            // TODO: selected segments?
-            foreach(LineSegment* seg, segments)
-                  delete seg;
-            segments.clear();
+      int segCount = segments.size();
+      if (segmentsNeeded != segCount) {
+            // TODO: undo/redo ?
+            if (segmentsNeeded > segCount) {
+                  int n = segmentsNeeded - segCount;
+                  for (int i = 0; i < n; ++i)
+                        segments.append(createSegment());
+                  }
+            else {
+                  int n = segCount - segmentsNeeded;
+                  for (int i = 0; i < n; ++i) {
+                        LineSegment* seg = segments.takeLast();
+                        delete seg;
+                        }
+                  }
+            segCount = segments.size();
             }
-
-      int seg = 0;
-      for (; is != layout->systems()->end(); ++is, ++seg) {
-            System* system = *is;
-            if (seg >= segments.size())
-                  segments.append(createSegment());
-            LineSegment* hps = segments[seg];
-            if (seg == 0)
-                  hps->setPos(p1);
+      int segIdx = 0;
+      foreach(System* system, *layout->systems()) {
+            LineSegment* seg = segments[segIdx];
+            if (segIdx == 0)
+                  seg->setPos(p1);
             else
-                  hps->setPos(system->canvasPos() - parent()->canvasPos());
+                  seg->setPos(system->canvasPos() - parent()->canvasPos());
             if (system == system2) {
-                  hps->setXpos2(p2.x());
+                  seg->setXpos2(p2.x());
                   break;
                   }
-            hps->setXpos2(system->canvasPos().x()
+            seg->setXpos2(system->canvasPos().x()
                + system->bbox().width()
                - _spatium * 0.5
-               - hps->canvasPos().x()
+               - seg->canvasPos().x()
                );
+            ++segIdx;
             }
 
-      int idx = 0;
-      int n = segments.size();
-      foreach(LineSegment* seg, segments) {
-            ++idx;
-            if (n == 1)
-                  seg->setSegmentType(LineSegment::SEGMENT_SINGLE);
-            else if (idx == 1)
-                  seg->setSegmentType(LineSegment::SEGMENT_BEGIN);
-            else if (idx == n)
-                  seg->setSegmentType(LineSegment::SEGMENT_END);
-            else
-                  seg->setSegmentType(LineSegment::SEGMENT_MIDDLE);
-            seg->layout(layout);
+      if (segCount == 1) {
+            segments[0]->setSegmentType(SEGMENT_SINGLE);
+            segments[0]->layout(layout);
+            }
+      else {
+            for (int idx = 0; idx < segCount; ++idx) {
+                  LineSegment* seg = segments[idx];
+                  if (idx == 0)
+                        seg->setSegmentType(SEGMENT_BEGIN);
+                  else if (idx == (segCount-1))
+                        seg->setSegmentType(SEGMENT_END);
+                  else
+                        seg->setSegmentType(SEGMENT_MIDDLE);
+                  seg->layout(layout);
+                  }
             }
       }
 

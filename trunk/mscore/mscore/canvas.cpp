@@ -728,6 +728,7 @@ void Canvas::mouseReleaseEvent1(QMouseEvent* /*ev*/)
                   setDropTarget(0); // this also resets dropRectangle and dropAnchor
                   _score->addRefresh(_score->editObject->abbox());
                   setState(EDIT);
+                  _score->setLayoutAll(true);
                   _score->end();
                   break;
 

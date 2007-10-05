@@ -67,7 +67,7 @@ static const char* undoName[] = {
       "SortStaves",        "ToggleInvisible",
       "ChangeColor",       "ChangePitch",
       "ChangeSubtype",     "AddAccidental",
-      "SetStemDirection", "FlipSlurDirection",
+      "SetStemDirection",  "FlipSlurDirection",
       "ChangeKeySig",
       "ChangeClef",
       "ChangeSig",

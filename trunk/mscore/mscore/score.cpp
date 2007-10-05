@@ -119,8 +119,7 @@ Score::Score()
       {
       _noteEntryMode    = false;
       info.setFile("");
-      _layout           = new ScoreLayout();
-      _layout->setScore(this);
+      _layout           = new ScoreLayout(this);
       _style            = new Style(defaultStyle);
 
       // deep copy of defaultTextStyles:
@@ -289,7 +288,8 @@ void Score::write(Xml& xml)
       tempomap->write(xml);
       foreach(const Part* part, _parts)
             part->write(xml);
-
+      foreach(Element* el, _layout->_gel)
+            el->write(xml);
       for (int staffIdx = 0; staffIdx < _staves.size(); ++staffIdx) {
             xml.stag(QString("Staff id=\"%1\"").arg(staffIdx + 1));
             int measureNumber = 1;
@@ -808,6 +808,7 @@ int Measure::snap(int tick, const QPointF p) const
 
 void Score::startEdit(Element* element)
       {
+#if 0
       if (element->type() == SLUR_SEGMENT) {
             //
             // we must clone the whole slur with all segments
@@ -836,13 +837,14 @@ void Score::startEdit(Element* element)
             undoAddElement(newSlur);
             }
       else {
+#endif
             origEditObject = element;
             editObject     = element->clone();
             editObject->setSelected(false);
             origEditObject->resetMode();
             undoChangeElement(origEditObject, editObject);
             select(editObject, 0, 0);
-            }
+//            }
       updateAll = true;
       end();
       }
@@ -1363,5 +1365,14 @@ void Score::setCopyright(QTextDocument* doc)
             }
       if (doc)
             rights = doc->clone();
+      }
+
+//---------------------------------------------------------
+//   gel
+//---------------------------------------------------------
+
+QList<Element*>* Score::gel()
+      {
+      return _layout->gel();
       }
 

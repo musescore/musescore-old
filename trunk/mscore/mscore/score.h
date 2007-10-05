@@ -112,12 +112,9 @@ class Score : public QObject {
 
       bool _showInvisible;
 
-      Element* _paletteObject;
-
       EditTempo* editTempo;
       Element* origDragObject;
       Element* _dragObject;
-      ElementList startDragSelected;
 
       QList<Part*> _parts;
       QList<Staff*> _staves;
@@ -370,7 +367,6 @@ class Score : public QObject {
       void changeVoice(int);
       ChordRest* setNoteEntry(bool on, bool step);
 
-      Element* paletteObject() const { return _paletteObject; }
       void colorItem(Element*);
       void adjustCanvasPosition(Element*);
       Element* dragObject() const    { return _dragObject; }
@@ -467,6 +463,7 @@ class Score : public QObject {
       void setTextStyles(QVector<TextStyle*>&s);
       void setCopyright(QTextDocument*);
       void pasteStaff(QDomElement e, Measure* measure, int staffIdx);
+      QList<Element*>* gel();
       };
 
 extern Score* gscore;
