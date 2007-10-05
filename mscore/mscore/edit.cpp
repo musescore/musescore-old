@@ -664,13 +664,8 @@ Slur* Score::cmdAddSlur()
       slur->setStaff(staff);
       slur->setStart(chord->tick(), track);
       slur->setEnd(tick2, track);
-      slur->setParent(chord->measure());
+      slur->setParent(_layout);
       cmdAdd(slur);
-// select slur segment
-//      slur->setSelected(true);
-//      select(slur, 0, 0);
-//      refresh |= slur->abbox();
-
       return slur;
       }
 

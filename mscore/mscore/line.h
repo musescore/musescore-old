@@ -22,6 +22,7 @@
 #define __LINE_H__
 
 #include "element.h"
+#include "globals.h"
 
 class SLine;
 class System;
@@ -36,11 +37,6 @@ class System;
 //---------------------------------------------------------
 
 class LineSegment : public Element {
-   public:
-      enum SegmentType {
-            SEGMENT_SINGLE, SEGMENT_BEGIN, SEGMENT_MIDDLE, SEGMENT_END
-            };
-
    protected:
       QPointF _p2;
       QPointF _userOff2;

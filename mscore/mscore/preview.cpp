@@ -43,7 +43,7 @@ PagePreview::PagePreview(QWidget* parent)
 void PagePreview::setScore(Score* s)
       {
       _score = s;
-      _layout = new ScoreLayout;
+      _layout = new ScoreLayout(_score);
       ScoreLayout* ol = _score->mainLayout();
       _layout->setSpatium(ol->spatium());
       _layout->setPageFormat(*(ol->pageFormat()));

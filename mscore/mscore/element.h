@@ -71,7 +71,7 @@ enum ElementType {
       HAIRPIN, OTTAVA, PEDAL, TRILL,
       SEGMENT, SYSTEM, COMPOUND, CHORD, SLUR,
       // special types for drag& drop:
-      ELEMENT, ELEMENT_LIST, STAFF_LIST, MEASURE_LIST
+      ELEMENT, ELEMENT_LIST, STAFF_LIST, MEASURE_LIST, LAYOUT
       };
 
 extern const char* elementNames[];  // for debugging

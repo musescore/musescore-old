@@ -50,6 +50,10 @@ enum DurationType {
       D_16TH, D_HALF, D_WHOLE, D_BREVE, D_LONG
       };
 
+enum SegmentType {
+      SEGMENT_SINGLE, SEGMENT_BEGIN, SEGMENT_MIDDLE, SEGMENT_END
+      };
+
 const int VOICES = 4;
 const int MAX_STAVES = 4;
 

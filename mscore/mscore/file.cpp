@@ -48,6 +48,7 @@
 #include "barline.h"
 #include "palette.h"
 #include "symboldialog.h"
+#include "slur.h"
 
 double printerMag = 1.0;
 
@@ -765,6 +766,13 @@ bool Score::loadFile(QFile* qf)
                               _is.track = i * VOICES;
                         else if (tag == "cursorVoice")      // obsolete
                               _is.track += i;
+                        else if (tag == "Slur") {
+                              Slur* slur = new Slur(this);
+                              slur->setTick(0);
+                              slur->setStaff(0);
+                              slur->read(ee);
+                              _layout->add(slur);
+                              }
                         else
                               domError(ee);
                         }

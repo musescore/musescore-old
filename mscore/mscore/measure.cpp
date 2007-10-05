@@ -629,8 +629,6 @@ void Measure::layout2(ScoreLayout* layout)
                         element->setPos(QPointF(xo, yo));
                         }
                         break;
-                  case SLUR:
-                        // slur->layout() messes with add()/remove()
                   default:
                         break;
                   }
@@ -866,16 +864,6 @@ void Measure::add(Element* el)
                         }
                   _sel.push_back(el);
                   break;
-            case SLUR:
-                  {
-                  SlurTie* s = (SlurTie*)el;
-                  ElementList* sl = s->elements();
-                  for (iElement i = sl->begin(); i != sl->end(); ++i) {
-                        _sel.append(*i);
-                        }
-                  }
-                  _sel.append(el);
-                  break;
 
             case VOLTA:
                   switch(el->subtype()) {
@@ -906,10 +894,6 @@ void Measure::add(Element* el)
             case TEXT:
             case TEMPO_TEXT:
             case IMAGE:
-                  _sel.append(el);
-                  break;
-            case SLUR_SEGMENT:
-// printf("measure(%p) add slur segment %p\n", this, el);
                   _sel.append(el);
                   break;
 
@@ -964,18 +948,6 @@ void Measure::remove(Element* el)
                         printf("Measure(%p)::remove(%s,%p) not found\n",
                            this, el->name(), el);
                   break;
-            case SLUR:
-                  {
-                  Slur* s = (Slur*)el;
-                  ElementList* sl = s->elements();
-                  for (iElement i = sl->begin(); i != sl->end(); ++i) {
-                        remove(*i);
-                        }
-                  if (!_sel.remove(s))
-                        printf("Measure(%p)::remove(%s,%p) not found\n",
-                           this, el->name(), el);
-                  }
-                  break;
 
             case VOLTA:
                   _ending = 0;
@@ -988,7 +960,6 @@ void Measure::remove(Element* el)
                   _repeatFlags &= ~el->subtype();
                   // fall through:
 
-            case SLUR_SEGMENT:
             case DYNAMIC:
             case HAIRPIN:
             case TEMPO_TEXT:
@@ -1036,16 +1007,8 @@ void Measure::remove(Element* el)
 
 void Measure::moveTicks(int diff)
       {
-      foreach(Element* e, _sel) {
+      foreach(Element* e, _sel)
             e->setTick(e->tick() + diff);
-            if (e->type() == SLUR) {
-                  Slur* slur = (Slur*)e;
-                  if (slur->tick1() >= tick())
-                        slur->setTick1(slur->tick1() + diff);
-                  if (slur->tick2() >= tick())
-                        slur->setTick2(slur->tick2() + diff);
-                  }
-            }
       setTick(tick() + diff);
       int staves = _score->nstaves();
       int tracks = staves * VOICES;
@@ -1304,7 +1267,6 @@ again:
             }
       for (int staffIdx = 0; staffIdx < nstaves; ++staffIdx) {
             Spatium min;
-            Spatium extra;
             switch(first()->subtype()) {
                   case Segment::SegClef:
                         min = style->clefLeftMargin;
@@ -1320,8 +1282,8 @@ again:
                         min = style->barNoteDistance;
                         break;
                   }
-            spaces[0][staffIdx].setMin(point(min));
-            spaces[0][staffIdx].setExtra(point(extra));
+            spaces[0][staffIdx].setMin(min.point());
+            spaces[0][staffIdx].setExtra(0);
             spaces[0][staffIdx].setValid(true);
             }
 
@@ -2149,9 +2111,9 @@ void Measure::write(Xml& xml, int no, int staff) const
                   tuplet->write(xml, id++);
             }
 
-      for (ciElement i = _sel.begin(); i != _sel.end(); ++i) {
-            if ((*i)->staff() == _score->staff(staff) && (*i)->type() != SLUR_SEGMENT)
-                  (*i)->write(xml);
+      foreach (const Element* el, _sel) {
+            if (el->staff() == _score->staff(staff))
+                  el->write(xml);
             }
 
       for (int track = staff * VOICES; track < staff * VOICES + VOICES; ++track) {
@@ -2348,13 +2310,13 @@ void Measure::read(QDomElement e, int idx)
                   add(dyn);
                   score()->curTick = dyn->tick();
                   }
-            else if (tag == "Slur") {
+            else if (tag == "Slur") {                 // obsolete
                   Slur* slur = new Slur(score());
                   slur->setTick(score()->curTick);
                   slur->setStaff(staff);
-                  slur->setParent(this);
-                  slur->read(_score, e);
-                  add(slur);
+                  slur->setParent(score()->mainLayout());
+                  slur->read(e);
+                  slur->parent()->add(slur);
                   score()->curTick = slur->tick();
                   }
             else if (tag == "HairPin") {

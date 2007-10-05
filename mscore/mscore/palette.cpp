@@ -282,7 +282,7 @@ void Palette::addObject(int idx, int symIdx)
 void Palette::paintEvent(QPaintEvent*)
       {
       qreal mag = PALETTE_SPATIUM * extraMag / _spatium;
-      ScoreLayout layout;
+      ScoreLayout layout(gscore);
       layout.setSpatium(_spatium);
       layout.setPaintDevice(this);
 
