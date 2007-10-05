@@ -196,7 +196,6 @@ QPointF SLine::tick2pos(int tick, System** system)
 
 void SLine::layout(ScoreLayout* layout)
       {
-printf("SLine::layout\n");
       if (!parent()) {
             //
             // when used in a palette, SLine has no parent and
@@ -224,14 +223,12 @@ printf("SLine::layout\n");
             if (*iis == system2)
                   break;
             }
-
       int segCount = segments.size();
       if (segmentsNeeded != segCount) {
-            // TODO: undo/redo ?
             if (segmentsNeeded > segCount) {
                   int n = segmentsNeeded - segCount;
                   for (int i = 0; i < n; ++i)
-                        segments.append(createSegment());
+                        add(createSegment());
                   }
             else {
                   int n = segCount - segmentsNeeded;
@@ -243,7 +240,8 @@ printf("SLine::layout\n");
             segCount = segments.size();
             }
       int segIdx = 0;
-      foreach(System* system, *layout->systems()) {
+      for (iSystem iis = is; iis != layout->systems()->end(); ++iis) {
+            System* system = *iis;
             LineSegment* seg = segments[segIdx];
             if (segIdx == 0)
                   seg->setPos(p1);
@@ -385,6 +383,7 @@ void SLine::collectElements(QList<Element*>& el)
 
 void SLine::add(Element* e)
       {
+      e->setParent(this);
       segments.append((LineSegment*) e);
       }
 
@@ -394,7 +393,6 @@ void SLine::add(Element* e)
 
 void SLine::remove(Element*)
       {
-printf("SLine::remove=========\n");
       segments.clear();
       }
 
@@ -402,16 +400,15 @@ printf("SLine::remove=========\n");
 //   change
 //---------------------------------------------------------
 
-void SLine::change(Element* os, Element* ns)
+void SLine::change(Element* o, Element* n)
       {
-      int n = segments.size();
-      for (int i = 0; i < n; ++i) {
-            if (segments[i] == os) {
-                  segments[i] = (LineSegment*)ns;
-                  return;
-                  }
+      int idx = segments.indexOf((LineSegment*)o);
+      if (idx == -1) {
+            printf("SLine: cannot change %p\n", o);
+            return;
             }
-      printf("SLine::change: segment not found\n");
+      n->setParent(this);
+      segments[idx] = (LineSegment*)n;
       }
 
 //---------------------------------------------------------

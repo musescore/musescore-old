@@ -130,7 +130,6 @@ class Slur : public SlurTie {
       virtual void write(Xml& xml) const;
       virtual void read(QDomElement);
       virtual void layout(ScoreLayout*);
-      virtual void layout2(ScoreLayout*, const QPointF, int, struct UP&);
       virtual QRectF bbox() const;
 
       int tick1() const { return _tick1; }

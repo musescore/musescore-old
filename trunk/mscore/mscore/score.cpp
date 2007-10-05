@@ -808,43 +808,12 @@ int Measure::snap(int tick, const QPointF p) const
 
 void Score::startEdit(Element* element)
       {
-#if 0
-      if (element->type() == SLUR_SEGMENT) {
-            //
-            // we must clone the whole slur with all segments
-            //
-            SlurSegment* segment = (SlurSegment*)element;
-            SlurTie* slur        = segment->slurTie();
-            SlurTie* newSlur     = (SlurTie*)slur->clone();
-            segment->resetMode();
-
-            removeElement(slur);
-            origEditObject = element;
-
-            //
-            // find editObject (the right segment) in the
-            // cloned slur
-            //
-            int idx = slur->elements()->indexOf(segment);
-            if (idx == -1)
-                  abort();
-            editObject = newSlur->elements()->at(idx);
-            editObject->setSelected(false);
-            select(editObject, 0, 0);
-            segment = (SlurSegment*)editObject;
-
-            undoOp(UndoOp::RemoveElement, slur);
-            undoAddElement(newSlur);
-            }
-      else {
-#endif
-            origEditObject = element;
-            editObject     = element->clone();
-            editObject->setSelected(false);
-            origEditObject->resetMode();
-            undoChangeElement(origEditObject, editObject);
-            select(editObject, 0, 0);
-//            }
+      origEditObject = element;
+      editObject     = element->clone();
+      editObject->setSelected(false);
+      origEditObject->resetMode();
+      undoChangeElement(origEditObject, editObject);
+      select(editObject, 0, 0);
       updateAll = true;
       end();
       }
