@@ -121,16 +121,16 @@ void Ottava::setSubtype(int val)
 
 void Ottava::layout(ScoreLayout* layout)
       {
-      double _spatium = layout->spatium();
       SLine::layout(layout);
 
+      double _spatium = layout->spatium();
       qreal ottavaDistance = _spatium * 3.5;
       qreal y = 0.0;
       if (parent()) {
-            Measure* measure = (Measure*)parent();
-            System* system   = measure->system();
-            SysStaff* sstaff = system->staff(staffIdx());
-            y = sstaff->bbox().top() - ottavaDistance;
+//            System* system   = measure->system();
+//            int idx = staffIdx();
+//            SysStaff* sstaff = system->staff(idx);
+//            y = sstaff->bbox().top() - ottavaDistance;
             }
 
       setPos(ipos().x(), y);
@@ -179,5 +179,6 @@ LineSegment* Ottava::createLineSegment()
       seg->setStaff(staff());
       return seg;
       }
+
 
 

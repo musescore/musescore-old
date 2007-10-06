@@ -2509,20 +2509,8 @@ void Measure::collectElements(QList<Element*>& el)
                   }
             }
       foreach(Element* e, _sel) {
-            if (!e->staff()->show())
-                  continue;
-            switch(e->type()) {
-                  case HAIRPIN:
-                  case OTTAVA:
-                  case PEDAL:
-                  case TRILL:
-                  case VOLTA:
-                        ((SLine*)e)->collectElements(el);
-                        break;
-                  default:
-                        el.append(e);
-                        break;
-                  }
+            if (e->staff()->show())
+                  el.append(e);
             }
       foreach(Element* e, _pel) {
             el.append(e);
