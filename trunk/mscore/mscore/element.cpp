@@ -139,6 +139,8 @@ int Element::staffIdx() const
 
 void Element::setTrack(int track)
       {
+      if (track < 0)
+            return;
       setVoice(track % VOICES);
       setStaff(score()->staff(track / VOICES));
       }

@@ -1294,6 +1294,8 @@ void ShowElementBase::setElement(Element* e)
       eb.duration->setValue(e->tickLen());
       eb.posx->setValue(e->ipos().x());
       eb.posy->setValue(e->ipos().y());
+      eb.cposx->setValue(e->canvasPos().x());
+      eb.cposy->setValue(e->canvasPos().y());
       eb.offsetx->setValue(e->userOff().x());
       eb.offsety->setValue(e->userOff().y());
       eb.bboxx->setValue(e->bbox().x());
