@@ -176,7 +176,6 @@ void Ottava::read(QDomElement e)
 LineSegment* Ottava::createLineSegment()
       {
       LineSegment* seg = new OttavaSegment(score());
-      seg->setParent(this);
       seg->setStaff(staff());
       return seg;
       }

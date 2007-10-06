@@ -120,7 +120,7 @@ void Hairpin::read(QDomElement e)
 void Hairpin::layout(ScoreLayout* layout)
       {
       SLine::layout(layout);
-      setPos(ipos().x(), 6 * layout->spatium());
+      setPos(ipos().x(), 7 * layout->spatium());
       }
 
 //---------------------------------------------------------
@@ -130,7 +130,6 @@ void Hairpin::layout(ScoreLayout* layout)
 LineSegment* Hairpin::createLineSegment()
       {
       LineSegment* seg = new HairpinSegment(score());
-      seg->setParent(this);
       seg->setStaff(staff());
       return seg;
       }

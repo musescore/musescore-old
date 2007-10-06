@@ -112,16 +112,31 @@ bool LineSegment::edit(int curGrip, QKeyEvent* ev)
             int tick2 = line()->tick2();
 
             if (ev->key() == Qt::Key_Left) {
-                  if (curGrip == 0)
+                  if (curGrip == 0) {
                         tick1 = score()->prevSeg1(tick1, track);
-                  else if (curGrip == 1)
+                        }
+                  else if (curGrip == 1) {
+                        int segments = line()->lineSegments().size();
                         tick2 = score()->prevSeg1(tick2, track);
+                        line()->setTick2(tick2);
+                        line()->layout(score()->mainLayout());
+                        if (line()->lineSegments().size() != segments) {
+                              score()->changeLineSegment(true);
+                              }
+                        return true;
+                        }
                   }
             else if (ev->key() == Qt::Key_Right) {
                   if (curGrip == 0)
                         tick1 = score()->nextSeg1(tick1, track);
-                  else if (curGrip == 1)
+                  else if (curGrip == 1) {
+                        int segments = line()->lineSegments().size();
                         tick2 = score()->nextSeg1(tick2, track);
+                        line()->setTick2(tick2);
+                        line()->layout(score()->mainLayout());
+                        if (line()->lineSegments().size() != segments)
+                              score()->changeLineSegment(true);
+                        }
                   }
             else {
                   return false;
@@ -269,12 +284,11 @@ void SLine::layout(ScoreLayout* layout)
                   int n = segCount - segmentsNeeded;
                   for (int i = 0; i < n; ++i) {
                         LineSegment* seg = segments.takeLast();
-                        delete seg;
+                        // delete seg;   // DEBUG: will be used later
                         }
                   }
             segCount = segmentsNeeded;
             }
-
       int segIdx = 0;
       for (int i = sysIdx1; i <= sysIdx2; ++i, ++segIdx) {
             System* system   = (*systems)[i];
@@ -286,31 +300,26 @@ void SLine::layout(ScoreLayout* layout)
                   // single segment
                   seg->setSegmentType(SEGMENT_SINGLE);
                   seg->setPos(p1);
-                  seg->setXpos2(p2.x());
+                  seg->setXpos2(p2.x() - p1.x());
                   }
             else if (i == sysIdx1) {
                   // start segment
                   seg->setSegmentType(SEGMENT_BEGIN);
                   seg->setPos(p1);
-                  seg->setXpos2(sp.x()
-                     + system->bbox().width()
-                     - _spatium * 0.5
-                     - seg->canvasPos().x());
+                  seg->setXpos2(sp.x() + system->bbox().width()
+                     - _spatium * 0.5 - p1.x());
                   }
             else if (i > 0 && i != sysIdx2) {
                   // middle segment
                   seg->setSegmentType(SEGMENT_MIDDLE);
                   seg->setPos(sp);
-                  seg->setXpos2(sp.x()
-                     + system->bbox().width()
-                     - _spatium * 0.5
-                     - seg->canvasPos().x());
+                  seg->setXpos2(system->bbox().width() - _spatium * 0.5);
                   }
             else if (i == sysIdx2) {
                   // end segment
                   seg->setSegmentType(SEGMENT_END);
                   seg->setPos(sp);
-                  seg->setXpos2(p2.x());
+                  seg->setXpos2(p2.x() - sp.x());
                   }
             seg->layout(layout);
             }

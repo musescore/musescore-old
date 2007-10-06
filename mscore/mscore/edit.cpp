@@ -1405,6 +1405,29 @@ void Score::lyricsReturn()
       }
 
 //---------------------------------------------------------
+//   changeLineSegment
+//    switch to first/last LineSegment while editing
+//---------------------------------------------------------
+
+void Score::changeLineSegment(bool last)
+      {
+      LineSegment* segment = (LineSegment*)editObject;
+
+      LineSegment* newSegment;
+      if (last)
+            newSegment = segment->line()->lineSegments().back();
+      else
+            newSegment = segment->line()->lineSegments().front();
+
+      canvas()->setState(Canvas::NORMAL);
+      endCmd();
+
+      startCmd();
+      canvas()->startEdit(newSegment);
+      layoutAll = true;
+      }
+
+//---------------------------------------------------------
 //   addLyrics
 //    called from Keyboard Accelerator & menue
 //---------------------------------------------------------

@@ -99,6 +99,9 @@
         </item>
         <item>
          <spacer>
+          <property name="spacerName" stdset="0" >
+           <string/>
+          </property>
           <property name="orientation" >
            <enum>Qt::Horizontal</enum>
           </property>
@@ -185,6 +188,9 @@
         </item>
         <item>
          <spacer>
+          <property name="spacerName" stdset="0" >
+           <string/>
+          </property>
           <property name="orientation" >
            <enum>Qt::Horizontal</enum>
           </property>
@@ -385,7 +391,34 @@
          </widget>
         </item>
         <item>
+         <widget class="QLabel" name="label_10" >
+          <property name="text" >
+           <string>CPos</string>
+          </property>
+          <property name="alignment" >
+           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QDoubleSpinBox" name="cposx" >
+          <property name="maximum" >
+           <double>1000000.000000000000000</double>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QDoubleSpinBox" name="cposy" >
+          <property name="maximum" >
+           <double>1000000.000000000000000</double>
+          </property>
+         </widget>
+        </item>
+        <item>
          <spacer>
+          <property name="spacerName" stdset="0" >
+           <string/>
+          </property>
           <property name="orientation" >
            <enum>Qt::Horizontal</enum>
           </property>
@@ -581,6 +614,7 @@
    <class>Awl::ColorLabel</class>
    <extends>QFrame</extends>
    <header>awl/colorlabel.h</header>
+   <container>1</container>
   </customwidget>
  </customwidgets>
  <resources/>
