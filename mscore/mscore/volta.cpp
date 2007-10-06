@@ -155,10 +155,10 @@ void Volta::read(QDomElement e)
       }
 
 //---------------------------------------------------------
-//   createSegment
+//   createLineSegment
 //---------------------------------------------------------
 
-LineSegment* Volta::createSegment()
+LineSegment* Volta::createLineSegment()
       {
       VoltaSegment* seg = new VoltaSegment(score());
       seg->setParent(this);

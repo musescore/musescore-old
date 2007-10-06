@@ -42,12 +42,14 @@ class LineSegment : public Element {
       QPointF _userOff2;
       QRectF r1, r2;
       SegmentType _segmentType;
+      System* _system;
 
       virtual bool isMovable() const { return true; }
       virtual QRectF drag(const QPointF& s);
       virtual void endDrag();
       virtual bool startEdit(const QPointF&);
       virtual void editDrag(int, const QPointF&, const QPointF&);
+      virtual bool edit(int, QKeyEvent*);
       virtual void endEditDrag();
       virtual void endEdit();
       virtual void updateGrips(int*, QRectF*) const;
@@ -64,8 +66,8 @@ class LineSegment : public Element {
       void setPos2(const QPointF& p)      { _p2 = p;     }
       void setXpos2(qreal x)              { _p2.setX(x); }
       QPointF pos2() const                { return _p2 + _userOff2 * _spatium; }
-      QPointF canvasPos2() const          { return _p2 + _userOff2 * _spatium + canvasPos(); }
       void setSegmentType(SegmentType s)  { _segmentType = s;  }
+      void setSystem(System* s)           { _system = s;       }
       };
 
 //---------------------------------------------------------
@@ -87,9 +89,9 @@ class SLine : public Element {
       virtual void layout(ScoreLayout*);
       bool readProperties(QDomElement node);
       void writeProperties(Xml& xml) const;
-      virtual LineSegment* createSegment() = 0;
+      virtual LineSegment* createLineSegment() = 0;
       void setLen(double l);
-      void collectElements(QList<Element*>& el);
+      virtual void collectElements(QList<Element*>& el);
       virtual void add(Element*);
       virtual void remove(Element*);
       virtual void change(Element* o, Element* n);

@@ -937,15 +937,6 @@ Element* Score::addSlur(Slur* /*slur*/, const QPointF& /*pos*/)
 void Score::deleteItem(Element* el)
       {
       switch(el->type()) {
-            case SLUR_SEGMENT:
-                  {
-                  SlurTie* s = ((SlurSegment*)el)->slurTie();
-                  s->parent()->remove(s);
-                  undoOp(UndoOp::RemoveElement, s);
-                  updateAll = true;
-                  }
-                  break;
-
             case TEXT:
                   if (el->subtype() == TEXT_INSTRUMENT_LONG) {
                         el->staff()->part()->setLongName(QString());
@@ -962,7 +953,6 @@ void Score::deleteItem(Element* el)
             case SYMBOL:
             case COMPOUND:
             case DYNAMIC:
-            case SLUR:
             case LYRICS:
             case ATTRIBUTE:
             case BRACKET:
@@ -982,13 +972,10 @@ void Score::deleteItem(Element* el)
             case TRILL_SEGMENT:
             case PEDAL_SEGMENT:
             case VOLTA_SEGMENT:
-                  {
-                  SLine* l = (SLine*)el->parent();
-                  foreach(LineSegment* seg, l->lineSegments())
-                        undoRemoveElement(seg);
-                  undoRemoveElement(l);
-                  }
+            case SLUR_SEGMENT:
+                  undoRemoveElement(el->parent());
                   break;
+
             case NOTE:
                   {
                   Chord* chord = (Chord*)(el->parent());
@@ -1177,8 +1164,6 @@ void Score::cmdDeleteSelection()
             // so we need a local copy:
             foreach(Element* e, *sel->elements()) {
                   e->setSelected(false);  // in case item is not deleted
-                  if (e->type() == SLUR_SEGMENT)
-                        e = ((SlurSegment*)e)->slurTie();
                   deleteItem(e);
                   }
             }

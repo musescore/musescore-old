@@ -73,7 +73,7 @@ class Ottava : public SLine {
       virtual void setSubtype(int val);
       virtual void write(Xml&) const;
       virtual void read(QDomElement);
-      virtual LineSegment* createSegment();
+      virtual LineSegment* createLineSegment();
       int pitchShift() const { return _pitchShift; }
       };
 

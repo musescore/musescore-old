@@ -170,10 +170,10 @@ void Ottava::read(QDomElement e)
       }
 
 //---------------------------------------------------------
-//   createSegment
+//   createLineSegment
 //---------------------------------------------------------
 
-LineSegment* Ottava::createSegment()
+LineSegment* Ottava::createLineSegment()
       {
       LineSegment* seg = new OttavaSegment(score());
       seg->setParent(this);

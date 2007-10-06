@@ -112,6 +112,7 @@ class SlurTie : public Element {
       void writeProperties(Xml& xml) const;
       bool readProperties(QDomElement);
       QPointF slurPos(int tick, int track, System*& s);
+      virtual void collectElements(QList<Element*>& el);
       };
 
 //---------------------------------------------------------

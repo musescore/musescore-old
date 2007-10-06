@@ -532,6 +532,16 @@ bool SlurTie::readProperties(QDomElement e)
       }
 
 //---------------------------------------------------------
+//   collectElements
+//---------------------------------------------------------
+
+void SlurTie::collectElements(QList<Element*>& el)
+      {
+      foreach(SlurSegment* seg, segments)
+            el.append(seg);
+      }
+
+//---------------------------------------------------------
 //   Slur
 //---------------------------------------------------------
 
@@ -737,7 +747,7 @@ void Slur::layout(ScoreLayout* layout)
       else if (nsegs < onsegs) {
             for (unsigned i = nsegs; i < onsegs; ++i) {
                   SlurSegment* s = (SlurSegment*)(segments.takeLast());
-                  remove(s);
+                  delete s;
                   }
             }
 

@@ -1,3 +1,5 @@
+6.10.7 (ws)
+      - redesign of SLine() elements, moved to score->_gel
 5.10.7 (ws)
       - redesign of slurs, moved to score->_gel
 29.9.7 (lv)

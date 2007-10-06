@@ -212,6 +212,7 @@ class Element {
       void setStaff(Staff* v)                 { _staff = v;    }
       int voice() const                       { return _voice; }
       int track() const                       { return staffIdx() * VOICES + voice(); }
+      void setTrack(int val);
       void setVoice(int v)                    { _voice = v;    }
 
       virtual void add(Element*)    {}
@@ -289,6 +290,7 @@ class Element {
       int itemDiscovered;     ///< helper flag for bsp
 
       virtual QList<Prop> properties(Xml&) const;
+      virtual void collectElements(QList<Element*>& el) { el.append(this); }
       };
 
 //---------------------------------------------------------

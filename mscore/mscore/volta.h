@@ -61,7 +61,7 @@ class Volta : public SLine {
       virtual void layout(ScoreLayout*);
       virtual void write(Xml&) const;
       virtual void read(QDomElement);
-      virtual LineSegment* createSegment();
+      virtual LineSegment* createLineSegment();
       virtual QPointF tick2pos(int tick, System** system);
       };
 

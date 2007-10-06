@@ -231,6 +231,17 @@ void PageListEditor::updateList()
                   foreach(Element* el1, *slur->elements())
                         new ElementItem(se, el1);
                   }
+            else if (el->type() == HAIRPIN
+               || el->type() == OTTAVA
+               || el->type() == PEDAL
+               || el->type() == TRILL
+               || el->type() == SLUR
+               ) {
+                  ElementItem* se = new ElementItem(li, el);
+                  SLine* line = (SLine*)el;
+                  foreach(LineSegment* ls, line->lineSegments())
+                        new ElementItem(se, ls);
+                  }
             else
                   new ElementItem(li, el);
             }
