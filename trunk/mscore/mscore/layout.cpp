@@ -240,15 +240,9 @@ void ScoreLayout::doLayout()
             r |= page->abbox();
             page->collectElements(el);
             }
-      foreach (Element* element, _gel) {
-            if (element->type() == SLUR) {
-                  Slur* slur = (Slur*)element;
-                  foreach(Element* e, *slur->elements())
-                        el.append(e);
-                  }
-            else
-                  el.append(element);
-            }
+      foreach (Element* element, _gel)
+            element->collectElements(el);
+
       int depth = intmaxlog(el.size());
       bspTree.initialize(r, depth);
       for (int i = 0; i < el.size(); ++i) {
@@ -826,4 +820,6 @@ void ScoreLayout::remove(Element* el)
       int idx = _gel.indexOf(el);
       if (idx == -1)
             printf("ScoreLayout::remove(): element not found\n");
+      else
+            _gel.removeAt(idx);
       }

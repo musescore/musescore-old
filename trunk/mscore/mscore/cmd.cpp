@@ -193,7 +193,7 @@ void Score::cmdAdd(Element* e, const QPointF& pos, const QPointF& dragOffset)
             return;
             }
       e->setStaff(staff);
-      e->setParent(measure);
+      e->setParent(_layout);
 
       // calculate suitable endposition
       int tick2 = measure->last()->tick();

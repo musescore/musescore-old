@@ -123,10 +123,10 @@ void Pedal::read(QDomElement e)
       }
 
 //---------------------------------------------------------
-//   createSegment
+//   createLineSegment
 //---------------------------------------------------------
 
-LineSegment* Pedal::createSegment()
+LineSegment* Pedal::createLineSegment()
       {
       LineSegment* seg = new PedalSegment(score());
       seg->setParent(this);

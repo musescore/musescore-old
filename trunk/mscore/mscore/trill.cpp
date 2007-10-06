@@ -98,10 +98,10 @@ void Trill::read(QDomElement e)
       }
 
 //---------------------------------------------------------
-//   createSegment
+//   createLineSegment
 //---------------------------------------------------------
 
-LineSegment* Trill::createSegment()
+LineSegment* Trill::createLineSegment()
       {
       TrillSegment* seg = new TrillSegment(score());
       seg->setParent(this);

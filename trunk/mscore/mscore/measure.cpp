@@ -885,10 +885,6 @@ void Measure::add(Element* el)
                   _repeatFlags |= el->subtype();
                   // fall through
 
-            case OTTAVA:
-            case PEDAL:
-            case TRILL:
-            case HAIRPIN:
             case DYNAMIC:
             case SYMBOL:
             case TEXT:
@@ -961,13 +957,9 @@ void Measure::remove(Element* el)
                   // fall through:
 
             case DYNAMIC:
-            case HAIRPIN:
             case TEMPO_TEXT:
             case TEXT:
             case SYMBOL:
-            case OTTAVA:
-            case PEDAL:
-            case TRILL:
             case IMAGE:
                   if (!_sel.remove(el)) {
                         if (!_pel.remove(el))
@@ -2310,23 +2302,6 @@ void Measure::read(QDomElement e, int idx)
                   add(dyn);
                   score()->curTick = dyn->tick();
                   }
-            else if (tag == "Slur") {                 // obsolete
-                  Slur* slur = new Slur(score());
-                  slur->setTick(score()->curTick);
-                  slur->setStaff(staff);
-                  slur->setParent(score()->mainLayout());
-                  slur->read(e);
-                  slur->parent()->add(slur);
-                  score()->curTick = slur->tick();
-                  }
-            else if (tag == "HairPin") {
-                  Hairpin* hairpin = new Hairpin(score());
-                  hairpin->setTick(score()->curTick);
-                  hairpin->setStaff(staff);
-                  hairpin->read(e);
-                  add(hairpin);
-                  score()->curTick = hairpin->tick();
-                  }
             else if (tag == "Lyrics") {
                   Lyrics* lyrics = new Lyrics(score());
                   lyrics->setTick(score()->curTick);
@@ -2351,27 +2326,6 @@ void Measure::read(QDomElement e, int idx)
                         }
                   add(t);
                   }
-
-            //-------------------------------------obsolete:
-            else if (tag == "work-title") {
-                  Text* t = new Text(score());
-                  t->setSubtype(TEXT_TITLE);
-                  t->read(e);
-                  add(t);
-                  }
-            else if (tag == "creator-composer") {
-                  Text* t = new Text(score());
-                  t->setSubtype(TEXT_COMPOSER);
-                  t->read(e);
-                  add(t);
-                  }
-            else if (tag == "work-number") {
-                  Text* t = new Text(score());
-                  t->setSubtype(TEXT_SUBTITLE);
-                  t->read(e);
-                  add(t);
-                  }
-            //-------------------------------------
             else if (tag == "Tempo") {
                   TempoText* t = new TempoText(score());
                   t->setTick(score()->curTick);
@@ -2387,37 +2341,6 @@ void Measure::read(QDomElement e, int idx)
                   sym->read(e);
                   add(sym);
                   score()->curTick = sym->tick();
-                  }
-            else if (tag == "Ottava") {
-                  Ottava* ottava = new Ottava(score());
-                  ottava->setTick(score()->curTick);
-                  ottava->setStaff(staff);
-                  ottava->read(e);
-                  add(ottava);
-                  score()->curTick = ottava->tick();
-                  }
-            else if (tag == "Volta") {
-                  Volta* volta = new Volta(score());
-                  volta->setTick(score()->curTick);
-                  volta->setStaff(staff);
-                  volta->read(e);
-                  add(volta);
-                  score()->curTick = volta->tick();
-                  }
-            else if (tag == "Trill") {
-                  Trill* trill = new Trill(score());
-                  trill->setTick(score()->curTick);
-                  trill->setStaff(staff);
-                  trill->read(e);
-                  add(trill);
-                  }
-            else if (tag == "Pedal") {
-                  Pedal* pedal = new Pedal(score());
-                  pedal->setTick(score()->curTick);
-                  pedal->setStaff(staff);
-                  pedal->read(e);
-                  add(pedal);
-                  score()->curTick = pedal->tick();
                   }
             else if (tag == "stretch")
                   _userStretch = val.toDouble();

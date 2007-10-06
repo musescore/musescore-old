@@ -49,6 +49,11 @@
 #include "palette.h"
 #include "symboldialog.h"
 #include "slur.h"
+#include "hairpin.h"
+#include "ottava.h"
+#include "pedal.h"
+#include "trill.h"
+#include "volta.h"
 
 double printerMag = 1.0;
 
@@ -768,10 +773,33 @@ bool Score::loadFile(QFile* qf)
                               _is.track += i;
                         else if (tag == "Slur") {
                               Slur* slur = new Slur(this);
-                              slur->setTick(0);
-                              slur->setStaff(0);
                               slur->read(ee);
                               _layout->add(slur);
+                              }
+                        else if (tag == "HairPin") {
+                              Hairpin* hairpin = new Hairpin(this);
+                              hairpin->read(ee);
+                              _layout->add(hairpin);
+                              }
+                        else if (tag == "Ottava") {
+                              Ottava* ottava = new Ottava(this);
+                              ottava->read(ee);
+                              _layout->add(ottava);
+                              }
+                        else if (tag == "Volta") {
+                              Volta* volta = new Volta(this);
+                              volta->read(ee);
+                              _layout->add(volta);
+                              }
+                        else if (tag == "Trill") {
+                              Trill* trill = new Trill(this);
+                              trill->read(ee);
+                              _layout->add(trill);
+                              }
+                        else if (tag == "Pedal") {
+                              Pedal* pedal = new Pedal(this);
+                              pedal->read(ee);
+                              _layout->add(pedal);
                               }
                         else
                               domError(ee);
