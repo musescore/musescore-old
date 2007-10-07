@@ -231,12 +231,7 @@ void PageListEditor::updateList()
                   foreach(Element* el1, *slur->elements())
                         new ElementItem(se, el1);
                   }
-            else if (el->type() == HAIRPIN
-               || el->type() == OTTAVA
-               || el->type() == PEDAL
-               || el->type() == TRILL
-               || el->type() == SLUR
-               ) {
+            else if (el->isSLine()) {
                   ElementItem* se = new ElementItem(li, el);
                   SLine* line = (SLine*)el;
                   foreach(LineSegment* ls, line->lineSegments())
@@ -283,25 +278,8 @@ void PageListEditor::updateList()
                               }
 #endif
 
-                        foreach(Element* e, *measure->el()) {
-                              switch(e->type()) {
-                                    case HAIRPIN:
-                                    case OTTAVA:
-                                    case PEDAL:
-                                    case TRILL:
-                                    case VOLTA:
-                                          {
-                                          ElementList eel;
-                                          ((SLine*)e)->collectElements(eel);
-                                          foreach(Element* e, eel)
-                                                new ElementItem(mi, e);
-                                          }
-                                          // fall through:
-                                    default:
-                                          new ElementItem(mi, e);
-                                          break;
-                                    }
-                              }
+                        foreach(Element* e, *measure->el())
+                              new ElementItem(mi, e);
 
                         for (Segment* segment = measure->first(); segment; segment = segment->next()) {
                               ElementItem* segItem = new ElementItem(mi, segment);
