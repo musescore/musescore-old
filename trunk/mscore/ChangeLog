@@ -1,3 +1,5 @@
+7.10.7 (ws)
+      - don't build manuals on default; fix for newer texexec
 6.10.7 (ws)
       - redesign of SLine() elements, moved to score->_gel
 5.10.7 (ws)
