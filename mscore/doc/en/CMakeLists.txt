@@ -26,11 +26,11 @@ add_custom_command (
       ARGS  --language=en --verbose --batch --pdf
             --path=${CMAKE_CURRENT_SOURCE_DIR}
             --result=man-en.pdf
-            man-en.tex
+            ${CMAKE_CURRENT_SOURCE_DIR}/man-en.tex
       WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
       )
 
-add_custom_target ( man-en ALL
+add_custom_target ( man
       DEPENDS man-en.pdf
       )
 

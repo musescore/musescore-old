@@ -23,14 +23,14 @@ add_custom_command (
       DEPENDS
             ${CMAKE_CURRENT_SOURCE_DIR}/man-de.tex
       COMMAND ${TEXEXEC_PATH}/texexec
-      ARGS  --language=en --verbose --batch --pdf
+      ARGS  --language=de --verbose --batch --pdf
             --path=${CMAKE_CURRENT_SOURCE_DIR}
             --result=man-de.pdf
-            man-de.tex
+            ${CMAKE_CURRENT_SOURCE_DIR}/man-de.tex
       WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
       )
 
-add_custom_target ( man-de ALL
+add_custom_target ( man
       DEPENDS man-de.pdf
       )
 
