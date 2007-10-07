@@ -5,8 +5,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>527</width>
-    <height>174</height>
+    <width>399</width>
+    <height>108</height>
    </rect>
   </property>
   <property name="windowTitle" >
@@ -37,68 +37,6 @@
       <bool>true</bool>
      </property>
      <layout class="QVBoxLayout" >
-      <item>
-       <widget class="QLabel" name="label" >
-        <property name="font" >
-         <font>
-          <weight>75</weight>
-          <bold>true</bold>
-         </font>
-        </property>
-        <property name="text" >
-         <string>Slur Begin</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <layout class="QHBoxLayout" >
-        <item>
-         <widget class="QLabel" name="label_2" >
-          <property name="text" >
-           <string>Staff:</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QSpinBox" name="staff1" >
-          <property name="readOnly" >
-           <bool>true</bool>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QLabel" name="label_3" >
-          <property name="text" >
-           <string>Voice:</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QSpinBox" name="voice1" >
-          <property name="readOnly" >
-           <bool>true</bool>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QLabel" name="label_4" >
-          <property name="text" >
-           <string>Tick:</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QSpinBox" name="tick1" >
-          <property name="readOnly" >
-           <bool>true</bool>
-          </property>
-          <property name="maximum" >
-           <number>999999</number>
-          </property>
-         </widget>
-        </item>
-       </layout>
-      </item>
       <item>
        <widget class="QLabel" name="label_8" >
         <property name="font" >

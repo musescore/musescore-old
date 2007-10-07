@@ -1409,9 +1409,6 @@ void SlurView::setElement(Element* e)
       st.upFlag->setChecked(slur->isUp());
       st.direction->setCurrentIndex(slur->slurDirection());
 
-      sb.tick1->setValue(slur->tick1());
-      sb.staff1->setValue(slur->track1() / VOICES);
-      sb.voice1->setValue(slur->track1() % VOICES);
       sb.tick2->setValue(slur->tick2());
       sb.staff2->setValue(slur->track2() / VOICES);
       sb.voice2->setValue(slur->track2() % VOICES);

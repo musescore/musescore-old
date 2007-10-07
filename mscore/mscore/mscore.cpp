@@ -1484,6 +1484,15 @@ int main(int argc, char* argv[])
 
       initSymbols();
 
+      //
+      // initialize shortcut hash table
+      //
+      for (unsigned i = 0;; ++i) {
+            if (MuseScore::sc[i].xml == 0)
+                  break;
+            shortcuts[MuseScore::sc[i].xml] = new Shortcut(MuseScore::sc[i]);
+            }
+      preferences.read();
       QSplashScreen* sc = 0;
       if (!converterMode && preferences.showSplashScreen) {
             QPixmap pm(":/data/splash.jpg");
@@ -1528,16 +1537,6 @@ int main(int argc, char* argv[])
                      QLocale::system().name().toLatin1().data());
                   }
             }
-
-      //
-      // initialize shortcut hash table
-      //
-      for (unsigned i = 0;; ++i) {
-            if (MuseScore::sc[i].xml == 0)
-                  break;
-            shortcuts[MuseScore::sc[i].xml] = new Shortcut(MuseScore::sc[i]);
-            }
-      preferences.read();
 
       //
       //  load internal fonts

@@ -54,11 +54,13 @@ class SlurSegment : public Element {
       SlurSegment(const SlurSegment&);
       virtual SlurSegment* clone() const { return new SlurSegment(*this); }
       virtual ElementType type() const { return SLUR_SEGMENT; }
+      virtual bool isMovable() const { return true; }
 
       void layout(ScoreLayout*, const QPointF& p1, const QPointF& p2, qreal bow);
       virtual QPainterPath shape() const;
       virtual void draw(QPainter&);
 
+      virtual QRectF drag(const QPointF& s);
       virtual bool startEdit(const QPointF&);
       virtual void editDrag(int, const QPointF&, const QPointF&);
       virtual bool edit(int, QKeyEvent*);
@@ -120,8 +122,8 @@ class SlurTie : public Element {
 //---------------------------------------------------------
 
 class Slur : public SlurTie {
-      int _track1, _track2;
-      int _tick1, _tick2;
+      int _track2;
+      int _tick2;
 
    public:
       Slur(Score*);
@@ -133,13 +135,9 @@ class Slur : public SlurTie {
       virtual void layout(ScoreLayout*);
       virtual QRectF bbox() const;
 
-      int tick1() const { return _tick1; }
-      int tick2() const { return _tick2; }
-      void setTick1(int val);
+      int tick2() const       { return _tick2; }
       void setTick2(int val);
-      int track1() const { return _track1; }
-      int track2() const { return _track2; }
-      void setTrack1(int val) { _track1 = val; }
+      int track2() const      { return _track2; }
       void setTrack2(int val) { _track2 = val; }
 
       void setStart(int t, int track);

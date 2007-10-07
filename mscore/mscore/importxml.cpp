@@ -1413,7 +1413,7 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
                                           slur[slurNo]->setSlurDirection(DOWN);
                                     slur[slurNo]->setStart(tick, trk + voice);
                                     slur[slurNo]->setStaff(score->staff(staff + relStaff));
-                                    slur[slurNo]->setParent(measure);
+                                    slur[slurNo]->setParent(score->mainLayout());
                                     score->addElement(slur[slurNo]);
                                     if (endSlur)
                                           slur[slurNo] = 0;

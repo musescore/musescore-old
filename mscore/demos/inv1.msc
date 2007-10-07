@@ -112,6 +112,14 @@
       <reverb>30</reverb>
       </Instrument>
     </Part>
+      <Slur>
+        <startTick>22560</startTick>
+        <endTick>23040</endTick>
+      <Slur>
+        <startTick>27840</startTick>
+        <endTick>28800</endTick>
+        </Slur>
+
   <Staff id="1">
     <Measure number="1">
       <Text>
@@ -947,10 +955,6 @@ p, li { white-space: pre-wrap; }
       <BarLine/>
       </Measure>
     <Measure number="12">
-      <Slur>
-        <startTick>22560</startTick>
-        <endTick>23040</endTick>
-        </Slur>
       <Chord>
         <ticklen>240</ticklen>
         <BeamMode>begin</BeamMode>
@@ -1183,10 +1187,6 @@ p, li { white-space: pre-wrap; }
       <BarLine/>
       </Measure>
     <Measure number="15">
-      <Slur>
-        <startTick>27840</startTick>
-        <endTick>28800</endTick>
-        </Slur>
       <Chord>
         <ticklen>120</ticklen>
         <BeamMode>begin</BeamMode>

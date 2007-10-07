@@ -129,9 +129,9 @@ bool SlurSegment::edit(int curGrip, QKeyEvent* ev)
               || (_segmentType == SEGMENT_END && curGrip == 3)
             )
          ) {
-            int track1 = sl->track1();
+            int track1 = sl->track();
             int track2 = sl->track2();
-            int tick1  = sl->tick1();
+            int tick1  = sl->tick();
             int tick2  = sl->tick2();
 
             if (ev->key() == Qt::Key_Left) {
@@ -149,9 +149,9 @@ bool SlurSegment::edit(int curGrip, QKeyEvent* ev)
             else {
                   return false;
                   }
-            sl->setTrack1(track1);
+            sl->setTrack(track1);
             sl->setTrack2(track2);
-            sl->setTick1(tick1);
+            sl->setTick(tick1);
             sl->setTick2(tick2);
             return true;
             }
@@ -175,13 +175,13 @@ QPointF SlurSegment::gripAnchor(int grip) const
       switch(_segmentType) {
             case SEGMENT_SINGLE:
                   if (grip == 0)
-                        return sl->slurPos(sl->tick1(), sl->track1(), s);
+                        return sl->slurPos(sl->tick(), sl->track(), s);
                   else if (grip == 3)
                         return sl->slurPos(sl->tick2(), sl->track2(), s);
                   return QPointF();
             case SEGMENT_BEGIN:
                   if (grip == 0)
-                        return sl->slurPos(sl->tick1(), sl->track1(), s);
+                        return sl->slurPos(sl->tick(), sl->track(), s);
                   else if (grip == 3)
                         return _system->abbox().topRight();
                   break;
@@ -233,6 +233,19 @@ void SlurSegment::editDrag(int curGrip, const QPointF&, const QPointF& delta)
             ups[2].p    = QPointF(x2, y2);
             }
       updatePath();
+      }
+
+//---------------------------------------------------------
+//   drag
+//---------------------------------------------------------
+
+QRectF SlurSegment::drag(const QPointF& s)
+      {
+      QRectF r(abbox());
+      QPointF newOffset(s / _spatium);
+      QPointF diff(userOff() - newOffset);
+      setUserOff(newOffset);
+      return abbox() | r;
       }
 
 //---------------------------------------------------------
@@ -492,6 +505,7 @@ QPointF SlurTie::slurPos(int tick, int track, System*& s)
 
 void SlurTie::writeProperties(Xml& xml) const
       {
+      Element::writeProperties(xml);
       int idx = 0;
       foreach(SlurSegment* ss, segments)
             ss->write(xml, idx++);
@@ -526,7 +540,7 @@ bool SlurTie::readProperties(QDomElement e)
             }
       else if (tag == "up")
             _slurDirection = Direction(val.toInt());
-      else
+      else if (!Element::readProperties(e))
             return false;
       return true;
       }
@@ -548,9 +562,7 @@ void SlurTie::collectElements(QList<Element*>& el)
 Slur::Slur(Score* s)
    : SlurTie(s)
       {
-      _tick1  = 0;
       _tick2  = 0;
-      _track1 = 0;
       _track2 = 0;
       }
 
@@ -562,16 +574,6 @@ Slur::~Slur()
       {
       foreach(SlurSegment* ss, segments)
             delete ss;
-      }
-
-//---------------------------------------------------------
-//   setTick1
-//---------------------------------------------------------
-
-void Slur::setTick1(int val)
-      {
-      if (val != -1)
-            _tick1 = val;
       }
 
 //---------------------------------------------------------
@@ -590,8 +592,8 @@ void Slur::setTick2(int val)
 
 void Slur::setStart(int t, int track)
       {
-      _tick1  = t;
-      _track1 = track;
+      setTick(t);
+      setTrack(track);
       }
 
 //---------------------------------------------------------
@@ -608,9 +610,9 @@ void Slur::setEnd(int t, int track)
 //   startsAt
 //---------------------------------------------------------
 
-bool Slur::startsAt(int t, int track)
+bool Slur::startsAt(int tk, int tr)
       {
-      return ((_tick1 == t) && (_track1 == track));
+      return ((tick() == tk) && (track() == tr));
       }
 
 //---------------------------------------------------------
@@ -629,12 +631,11 @@ bool Slur::endsAt(int t, int track)
 void Slur::write(Xml& xml) const
       {
       xml.stag("Slur");
-      xml.tag("startTick", _tick1);
-      xml.tag("endTick", _tick2);
-      if (_track1)
-            xml.tag("startTrack", _track1);
+      xml.tag("tick2", _tick2);
+      if (track())
+            xml.tag("track", track());
       if (_track2)
-            xml.tag("endTrack", _track2);
+            xml.tag("track2", _track2);
       SlurTie::writeProperties(xml);
       xml.etag();
       }
@@ -645,18 +646,25 @@ void Slur::write(Xml& xml) const
 
 void Slur::read(QDomElement e)
       {
+      setTrack(0);      // set staff
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             QString tag(e.tagName());
             QString val(e.text());
             int i = val.toInt();
-            if (tag == "startTick")
-                  _tick1 = score()->fileDivision(i);
-            else if (tag == "endTick")
+            if (tag == "tick2")
                   _tick2 = score()->fileDivision(i);
-            else if (tag == "startTrack")
-                  _track1 = i;
-            else if (tag == "endTrack")
+            else if (tag == "track")
+                  setTrack(i);
+            else if (tag == "track2")
                   _track2 = i;
+            else if (tag == "startTick")        // obsolete
+                  setTick(i);
+            else if (tag == "endTick")          // obsolete
+                  setTick2(i);
+            else if (tag == "startTrack")       // obsolete
+                  setTrack(i);
+            else if (tag == "endTrack")         // obsolete
+                  setTrack2(i);
             else if (!SlurTie::readProperties(e))
                   domError(e);
             }
@@ -668,26 +676,30 @@ void Slur::read(QDomElement e)
 
 void Slur::layout(ScoreLayout* layout)
       {
+      if (staff() == 0) {
+            printf("Slur::layout: no staff\n");
+//            return;
+            }
       double _spatium = layout->spatium();
       switch (_slurDirection) {
             case UP:    up = true; break;
             case DOWN:  up = false; break;
             case AUTO:
                   {
-                  Measure* m1 = _score->tick2measure(_tick1);
+                  Measure* m1 = _score->tick2measure(tick());
                   if (m1 == 0) {
-                        printf("Slur: cannot find measure for tick %d\n", _tick1);
+                        printf("Slur: cannot find measure for tick %d\n", tick());
                         return;
                         }
-                  if ((_tick2 - _tick1) > m1->tickLen()) {
+                  if ((_tick2 - tick()) > m1->tickLen()) {
                         // long slurs are always above
                         up = true;
                         }
                   else {
-                        ChordRest* c1 = m1->findChordRest(_tick1, _track1);
+                        ChordRest* c1 = m1->findChordRest(tick(), track());
                         if (c1 == 0) {
                               printf("Slur-1: cannot find chord/rest at tick:%d track:%d, measure %d-%d\n",
-                                 _tick1, _track1, m1->tick(), m1->tick() + m1->tickLen());
+                                 tick(), track(), m1->tick(), m1->tick() + m1->tickLen());
                               return;
                               }
 
@@ -713,7 +725,7 @@ void Slur::layout(ScoreLayout* layout)
 
       System *s1, *s2;
 
-      QPointF p1 = slurPos(_tick1, _track1, s1);
+      QPointF p1 = slurPos(tick(), track(), s1);
       QPointF p2 = slurPos(_tick2, _track2, s2);
 
       QList<System*>* sl = layout->systems();
@@ -752,7 +764,7 @@ void Slur::layout(ScoreLayout* layout)
             }
 
       qreal bow = up ? 2*-_spatium : 2*_spatium;
-      for (int i = 0; is != layout->systems()->end(); ++i, ++is) {
+      for (int i = 0; is != sl->end(); ++i, ++is) {
             System* system  = *is;
             SlurSegment* segment = segments[i];
             segment->setSystem(system);
@@ -886,8 +898,9 @@ void Tie::layout(ScoreLayout* layout)
       QPointF p1 = _startNote->canvasPos() + off1;
       QPointF p2 = _endNote->canvasPos()   + off2;
 
-      iSystem is = layout->systems()->begin();
-      while (is != layout->systems()->end()) {
+      QList<System*>* systems = layout->systems();
+      iSystem is = systems->begin();
+      while (is != systems->end()) {
             if (*is == s1)
                   break;
             ++is;
@@ -899,49 +912,59 @@ void Tie::layout(ScoreLayout* layout)
       //    user offsets (drags) are retained
       //---------------------------------------------------------
 
-      unsigned nsegs = 1;
-      for (iSystem iis = is; (iis != layout->systems()->end()) && (*iis != s2); ++iis)
-            ++nsegs;
+      int sysIdx1             = systems->indexOf(s1);
+      int sysIdx2             = systems->indexOf(s2, sysIdx1);
+      unsigned nsegs          = sysIdx2 - sysIdx1 + 1;
+      unsigned onsegs         = segments.size();
 
-      unsigned onsegs = segments.size();
-      QList<SlurSegment*> segments1 = segments;
-      foreach (SlurSegment* ss, segments1) {
-            Element* pa = ss->parent();
-            pa->remove(ss);
-            }
-      segments.clear();
       if (nsegs != onsegs) {
-            foreach(SlurSegment* ss, segments1)
-                  delete ss;
-            segments1.clear();
-            for (unsigned i = 0; i < nsegs; ++i) {
-                  SlurSegment* s = new SlurSegment(score());
-                  s->setParent(this);
-                  segments1.push_back(s);
+            if (nsegs > onsegs) {
+                  int n = nsegs - onsegs;
+                  for (int i = 0; i < n; ++i) {
+                        SlurSegment* s = new SlurSegment(score());
+                        s->setParent(this);
+                        segments.append(s);
+                        }
+                  }
+            else {
+                  int n = onsegs - nsegs;
+                  for (int i = 0; i < n; ++i) {
+                        /* LineSegment* seg = */ segments.takeLast();
+                        // delete seg;   // DEBUG: will be used later
+                        }
                   }
             }
 
       qreal bow = up ? -_spatium : _spatium;
-      for (int i = 0; is != layout->systems()->end(); ++i, ++is) {
-            System* system = *is;
+
+      for (int i = 0; i < nsegs; ++i, ++is) {
+            System* system  = *is;
+            SlurSegment* segment = segments[i];
+            segment->setSystem(system);
             QPointF sp(system->canvasPos());
-            SlurSegment* bs = segments1[i];
+
             // case 1: one segment
             if (s1 == s2) {
-                  bs->layout(layout, p1, p2, bow);
+                  segment->layout(layout, p1, p2, bow);
+                  segment->setSegmentType(SEGMENT_SINGLE);
                   }
             // case 2: start segment
             else if (i == 0) {
-                  bs->layout(layout, p1, QPointF(p1.x()+2*_spatium, p1.y()), bow);
+                  qreal x = sp.x() + system->bbox().width();
+                  segment->layout(layout, p1, QPointF(x, p1.y()), bow);
+                  segment->setSegmentType(SEGMENT_BEGIN);
                   }
-            // case 3: end segment
+            // case 3: middle segment
+            else if (i != 0 && system != s2) {
+                  // cannot happen
+                  abort();
+                  }
+            // case 4: end segment
             else {
-                  bs->layout(layout, QPointF(p2.x()-2*_spatium, p2.y()), p2, bow);
+                  qreal x = sp.x();
+                  segment->layout(layout, QPointF(x, p2.y()), p2, bow);
+                  segment->setSegmentType(SEGMENT_END);
                   }
-            segments.push_back(bs);
-            bs->parent()->add(bs);  // puts segment also on segments list
-            if (*is == s2)
-                  break;
             }
       }
 

@@ -672,13 +672,13 @@ void ExportLy::checkSlur(int tick, int track)
                   if (e->type() != SLUR)
                         continue;
                   Slur* s = (Slur*)e;
-                  if ((s->tick1() == tick) && (s->track1() == track)) {
+                  if ((s->tick() == tick) && (s->track() == track)) {
                         os << "(";
 printf("startSlur %d-%d  %d-%d\n", tick, track, s->tick2(), s->track2());
                         }
                   if ((s->tick2() == tick) && (s->track2() == track)) {
                         os << ")";
-printf("endSlur %d-%d  %d-%d\n", s->tick1(), s->track1(), tick, track);
+printf("endSlur %d-%d  %d-%d\n", s->tick(), s->track(), tick, track);
                         }
                   }
             }
