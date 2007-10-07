@@ -304,7 +304,7 @@ QList<Prop> Element::properties(Xml& xml) const
 void Element::writeProperties(Xml& xml) const
       {
       xml.prop(properties(xml));
-      if (_time.isValid() && (_time.tick() != xml.curTick))
+      if (_time.isValid() && (_time.tick() != xml.curTick || debugMode))
             xml.curTick = _time.tick();
       }
 

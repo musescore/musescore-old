@@ -176,4 +176,25 @@ QPointF Volta::tick2pos(int tick, System** system)
       return m->canvasPos();
       }
 
+//---------------------------------------------------------
+//   setSubtype
+//---------------------------------------------------------
 
+void Volta::setSubtype(int val)
+      {
+      Element::setSubtype(val);
+
+      switch(subtype()) {
+            default:
+            case PRIMA_VOLTA:
+                  _endings.append(1);
+                  break;
+            case SECONDA_VOLTA:
+            case SECONDA_VOLTA2:
+                  _endings.append(2);
+                  break;
+            case TERZA_VOLTA:
+                  _endings.append(3);
+                  break;
+            }
+      }

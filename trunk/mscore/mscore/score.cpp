@@ -53,6 +53,7 @@
 #include "lyrics.h"
 #include "pitchspelling.h"
 #include "line.h"
+#include "volta.h"
 
 Score* gscore;                 ///< system score, used for palettes etc.
 
@@ -1382,5 +1383,30 @@ void Score::setCopyright(QTextDocument* doc)
 QList<Element*>* Score::gel()
       {
       return _layout->gel();
+      }
+
+const QList<Element*>* Score::gel() const
+      {
+      return _layout->gel();
+      }
+
+//---------------------------------------------------------
+//   isVolta
+//---------------------------------------------------------
+
+bool Score::isVolta(int tick, int repeat) const
+      {
+      foreach(const Element* el, *gel()) {
+            if (el->type() == VOLTA) {
+                  const Volta* volta = (Volta*)el;
+                  if (tick >= volta->tick() && tick < volta->tick2()) {
+                        foreach(int ending, volta->endings()) {
+                              if (ending == repeat)
+                                    return true;
+                              }
+                        }
+                  }
+            }
+      return false;
       }
 

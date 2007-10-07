@@ -465,6 +465,8 @@ class Score : public QObject {
       void setCopyright(QTextDocument*);
       void pasteStaff(QDomElement e, Measure* measure, int staffIdx);
       QList<Element*>* gel();
+      const QList<Element*>* gel() const;
+      bool isVolta(int tick, int repeat) const;
       };
 
 extern Score* gscore;

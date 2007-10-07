@@ -117,6 +117,7 @@ class ScoreLayout : public Element {
       void setInstrumentNames();
       void connectTies();
       QList<Element*>* gel()                  { return &_gel; }
+      const QList<Element*>* gel() const      { return &_gel; }
 
       virtual void add(Element*);
       virtual void remove(Element*);
