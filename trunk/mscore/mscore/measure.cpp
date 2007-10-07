@@ -2395,6 +2395,11 @@ void Measure::read(QDomElement e, int idx)
                         add(image);
                         }
                   }
+            else if (tag == "Slur") {           // obsolete
+                  Slur* slur = new Slur(score());
+                  slur->read(e);
+                  score()->mainLayout()->add(slur);
+                  }
             else
                   domError(e);
             }

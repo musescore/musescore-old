@@ -226,6 +226,7 @@
   <tempolist fix="1.5">
     <tempo tick="0">1.5</tempo>
     </tempolist>
+
   <Part>
     <Staff>
       <cleflist>
@@ -249,6 +250,495 @@ p, li { white-space: pre-wrap; }
       <reverb>30</reverb>
       </Instrument>
     </Part>
+      <Slur>
+        <tick>0</tick>
+        <tick2>240</tick2>
+        </Slur>
+      <Slur>
+        <tick>1200</tick>
+        <tick2>1440</tick2>
+        <SlurSegment no="0">
+          <o4 x="15.4222" y="-5.07639"/>
+          </SlurSegment>
+        </Slur>
+      <Slur>
+        <tick>2640</tick>
+        <tick2>2880</tick2>
+        <SlurSegment no="0">
+          <o4 x="11.8181" y="-3.35139"/>
+          </SlurSegment>
+        </Slur>
+      <Slur>
+        <tick>3840</tick>
+        <tick2>4080</tick2>
+        <SlurSegment no="0">
+          <o4 x="15.5222" y="-4.85069"/>
+          </SlurSegment>
+        </Slur>
+      <Slur>
+        <tick>5280</tick>
+        <tick2>5520</tick2>
+        <SlurSegment no="0">
+          <o4 x="11.774" y="-3.39549"/>
+          </SlurSegment>
+        </Slur>
+      <Slur>
+        <tick>6480</tick>
+        <tick2>6720</tick2>
+        <SlurSegment no="0">
+          <o4 x="14.2875" y="0.132292"/>
+          </SlurSegment>
+        <up>2</up>
+        </Slur>
+      <Slur>
+        <tick>7920</tick>
+        <tick2>8160</tick2>
+        <SlurSegment no="0">
+          <o4 x="11.3771" y="-3.43958"/>
+          </SlurSegment>
+        </Slur>
+      <Slur>
+        <tick>9120</tick>
+        <tick2>9360</tick2>
+        <SlurSegment no="0">
+          <o4 x="14.6403" y="-0.0881944"/>
+          </SlurSegment>
+        <up>2</up>
+        </Slur>
+      <Slur>
+        <tick>10560</tick>
+        <tick2>10800</tick2>
+        <SlurSegment no="0">
+          <o4 x="11.3863" y="-3.33736"/>
+          </SlurSegment>
+        </Slur>
+      <Slur>
+        <tick>11760</tick>
+        <tick2>12000</tick2>
+        <SlurSegment no="0">
+          <o4 x="15.1163" y="-4.95696"/>
+          </SlurSegment>
+        </Slur>
+      <Slur>
+        <tick>13200</tick>
+        <tick2>13440</tick2>
+        <SlurSegment no="0">
+          <o4 x="11.0941" y="-3.63508"/>
+          </SlurSegment>
+        </Slur>
+      <Slur>
+        <tick>14400</tick>
+        <tick2>14640</tick2>
+        <SlurSegment no="0">
+          <o3 x="0.59011" y="0.755341"/>
+          <o4 x="14.8236" y="-4.90971"/>
+          </SlurSegment>
+        </Slur>
+      <Slur>
+        <tick>15840</tick>
+        <tick2>16080</tick2>
+        <SlurSegment no="0">
+          <o2 x="0.313101" y="-0.521836"/>
+          <o4 x="4.25818" y="-1.21066"/>
+          </SlurSegment>
+        </Slur>
+      <Slur>
+        <tick>16560</tick>
+        <tick2>16800</tick2>
+        <SlurSegment no="0">
+          <o2 x="0.0417468" y="-0.709696"/>
+          <o4 x="4.04944" y="-1.23153"/>
+          </SlurSegment>
+        </Slur>
+      <Slur>
+        <tick>18720</tick>
+        <tick2>18960</tick2>
+        <SlurSegment no="0">
+          <o4 x="11.1733" y="-3.43489"/>
+          </SlurSegment>
+        </Slur>
+      <Slur>
+        <tick>19920</tick>
+        <tick2>20160</tick2>
+        <SlurSegment no="0">
+          <o4 x="14.1309" y="-0.142162"/>
+          </SlurSegment>
+        <up>2</up>
+        </Slur>
+      <Slur>
+        <tick>21360</tick>
+        <tick2>21600</tick2>
+        <SlurSegment no="0">
+          <o4 x="10.7475" y="-3.52563"/>
+          </SlurSegment>
+        </Slur>
+      <Slur>
+        <tick>22560</tick>
+        <tick2>22800</tick2>
+        <SlurSegment no="0">
+          <o4 x="13.9319" y="-0.142162"/>
+          </SlurSegment>
+        <up>2</up>
+        </Slur>
+      <Slur>
+        <tick>24000</tick>
+        <tick2>24240</tick2>
+        <SlurSegment no="0">
+          <o2 x="0.810936" y="-0.70697"/>
+          <o4 x="3.95071" y="-1.20601"/>
+          </SlurSegment>
+        </Slur>
+      <Slur>
+        <tick>24720</tick>
+        <tick2>24960</tick2>
+        <SlurSegment no="0">
+          <o2 x="0.956489" y="-0.873316"/>
+          <o4 x="3.90913" y="-1.16442"/>
+          </SlurSegment>
+        </Slur>
+      <Slur>
+        <tick>26880</tick>
+        <tick2>27840</tick2>
+        <track>1</track>
+        <track2>1</track2>
+        <SlurSegment no="0">
+          <o4 x="7.55852" y="1.63134"/>
+          </SlurSegment>
+        <up>1</up>
+        </Slur>
+      <Slur>
+        <tick>26880</tick>
+        <tick2>27120</tick2>
+        <SlurSegment no="0">
+          <o4 x="6.98393" y="-2.13558"/>
+          </SlurSegment>
+        <up>2</up>
+        </Slur>
+      <Slur>
+        <tick>27840</tick>
+        <tick2>28080</tick2>
+        <SlurSegment no="0">
+          <o4 x="7.5034" y="-1.66533e-16"/>
+          </SlurSegment>
+        <up>2</up>
+        </Slur>
+      <Slur>
+        <tick>28800</tick>
+        <tick2>29040</tick2>
+        <SlurSegment no="0">
+          <o4 x="14.2565" y="-4.84835"/>
+          </SlurSegment>
+        </Slur>
+      <Slur>
+        <tick>30240</tick>
+        <tick2>30480</tick2>
+        <SlurSegment no="0">
+          <o4 x="8.48461" y="-5.55112e-17"/>
+          </SlurSegment>
+        <up>2</up>
+        </Slur>
+      <Slur>
+        <tick>31200</tick>
+        <tick2>31440</tick2>
+        <SlurSegment no="0">
+          <o4 x="14.2565" y="-4.84835"/>
+          </SlurSegment>
+        </Slur>
+      <Slur>
+        <tick>32640</tick>
+        <tick2>32880</tick2>
+        <SlurSegment no="0">
+          <o4 x="7.12077" y="-0.390179"/>
+          </SlurSegment>
+        <up>2</up>
+        </Slur>
+      <Slur>
+        <tick>32640</tick>
+        <tick2>33600</tick2>
+        <track>1</track>
+        <track2>1</track2>
+        <SlurSegment no="0">
+          <o1 x="1.59135" y="2.65225"/>
+          <o4 x="1.16699" y="2.75834"/>
+          </SlurSegment>
+        <SlurSegment no="1">
+          <o4 x="34.4435" y="1.84581"/>
+          </SlurSegment>
+        <up>1</up>
+        </Slur>
+      <Slur>
+        <tick>33600</tick>
+        <tick2>33840</tick2>
+        <SlurSegment no="0">
+          <o4 x="7.80837" y="-0.346339"/>
+          </SlurSegment>
+        <up>2</up>
+        </Slur>
+      <Slur>
+        <tick>34560</tick>
+        <tick2>34800</tick2>
+        <SlurSegment no="0">
+          <o4 x="8.28065" y="-0.157427"/>
+          </SlurSegment>
+        <up>2</up>
+        </Slur>
+      <Slur>
+        <tick>35520</tick>
+        <tick2>35760</tick2>
+        <SlurSegment no="0">
+          <o4 x="7.55648" y="-0.40931"/>
+          </SlurSegment>
+        <up>2</up>
+        </Slur>
+      <Slur>
+        <tick>36480</tick>
+        <tick2>36720</tick2>
+        <SlurSegment no="0">
+          <o4 x="3.30596" y="-0.913075"/>
+          </SlurSegment>
+        </Slur>
+      <Slur>
+        <tick>37200</tick>
+        <tick2>37440</tick2>
+        <SlurSegment no="0">
+          <o4 x="3.24299" y="-1.88912"/>
+          </SlurSegment>
+        </Slur>
+      <Slur>
+        <tick>39360</tick>
+        <tick2>39600</tick2>
+        <SlurSegment no="0">
+          <o2 x="0.47228" y="-0.535251"/>
+          <o4 x="3.52636" y="-1.19644"/>
+          </SlurSegment>
+        </Slur>
+      <Slur>
+        <tick>40080</tick>
+        <tick2>40320</tick2>
+        <SlurSegment no="0">
+          <o2 x="0.629707" y="-0.40931"/>
+          <o4 x="3.33745" y="-2.01506"/>
+          </SlurSegment>
+        </Slur>
+      <Slur>
+        <tick>42240</tick>
+        <tick2>42480</tick2>
+        <SlurSegment no="0">
+          <o4 x="8.51411" y="-3.47342"/>
+          </SlurSegment>
+        </Slur>
+      <Slur>
+        <tick>43440</tick>
+        <tick2>43680</tick2>
+        <SlurSegment no="0">
+          <o4 x="11.4792" y="-4.8289"/>
+          </SlurSegment>
+        </Slur>
+      <Slur>
+        <tick>44880</tick>
+        <tick2>45120</tick2>
+        <SlurSegment no="0">
+          <o4 x="8.59883" y="-3.55814"/>
+          </SlurSegment>
+        </Slur>
+      <Slur>
+        <tick>46080</tick>
+        <tick2>46320</tick2>
+        <SlurSegment no="0">
+          <o4 x="11.2023" y="-4.96466"/>
+          </SlurSegment>
+        </Slur>
+      <Slur>
+        <tick>48960</tick>
+        <tick2>49200</tick2>
+        <SlurSegment no="0">
+          <o4 x="11.062" y="-5.01752"/>
+          </SlurSegment>
+        </Slur>
+      <Slur>
+        <tick>51840</tick>
+        <tick2>52080</tick2>
+        <SlurSegment no="0">
+          <o4 x="10.7979" y="-4.57739"/>
+          </SlurSegment>
+        </Slur>
+      <Slur>
+        <tick>53280</tick>
+        <tick2>53520</tick2>
+        <SlurSegment no="0">
+          <o4 x="5.50883" y="-2.59239"/>
+          </SlurSegment>
+        <up>2</up>
+        </Slur>
+      <Slur>
+        <tick>54240</tick>
+        <tick2>54480</tick2>
+        <SlurSegment no="0">
+          <o4 x="6.78652" y="-0.547791"/>
+          </SlurSegment>
+        <up>2</up>
+        </Slur>
+      <Slur>
+        <tick>55200</tick>
+        <tick2>55440</tick2>
+        <SlurSegment no="0">
+          <o4 x="10.9034" y="-3.71965"/>
+          </SlurSegment>
+        </Slur>
+      <Slur>
+        <tick>56640</tick>
+        <tick2>56880</tick2>
+        <SlurSegment no="0">
+          <o4 x="5.66466" y="-3.13757"/>
+          </SlurSegment>
+        <up>2</up>
+        </Slur>
+      <Slur>
+        <tick>57600</tick>
+        <tick2>57840</tick2>
+        <SlurSegment no="0">
+          <o4 x="7.76688" y="-0.189436"/>
+          </SlurSegment>
+        <up>2</up>
+        </Slur>
+      <Slur>
+        <tick>58800</tick>
+        <tick2>59040</tick2>
+        <SlurSegment no="0">
+          <o4 x="9.88856" y="-3.10675"/>
+          </SlurSegment>
+        </Slur>
+      <Slur>
+        <tick>60000</tick>
+        <tick2>60240</tick2>
+        <SlurSegment no="0">
+          <o4 x="12.6164" y="-0.568308"/>
+          </SlurSegment>
+        <up>2</up>
+        </Slur>
+      <Slur>
+        <tick>61440</tick>
+        <tick2>61680</tick2>
+        <SlurSegment no="0">
+          <o4 x="9.69913" y="-3.59929"/>
+          </SlurSegment>
+        </Slur>
+      <Slur>
+        <tick>62640</tick>
+        <tick2>62880</tick2>
+        <SlurSegment no="0">
+          <o4 x="12.7035" y="-0.491886"/>
+          </SlurSegment>
+        <up>2</up>
+        </Slur>
+      <Slur>
+        <tick>64080</tick>
+        <tick2>64320</tick2>
+        <SlurSegment no="0">
+          <o4 x="9.7094" y="-3.65706"/>
+          </SlurSegment>
+        </Slur>
+      <Slur>
+        <tick>65280</tick>
+        <tick2>66240</tick2>
+        <track>1</track>
+        <track2>1</track2>
+        <SlurSegment no="0">
+          <o1 x="1.14874" y="3.32529"/>
+          <o4 x="-0.665058" y="2.90207"/>
+          </SlurSegment>
+        <up>1</up>
+        </Slur>
+      <Slur>
+        <tick>65280</tick>
+        <tick2>65520</tick2>
+        <SlurSegment no="0">
+          <o4 x="11.9106" y="-4.47402"/>
+          </SlurSegment>
+        <up>2</up>
+        </Slur>
+      <Slur>
+        <tick>66480</tick>
+        <tick2>66720</tick2>
+        <track>1</track>
+        <track2>1</track2>
+        <SlurSegment no="0">
+          <o1 x="1.11496" y="3.05582"/>
+          <o2 x="0.289064" y="0.578128"/>
+          <o3 x="0" y="0.702012"/>
+          <o4 x="-0.495538" y="3.26229"/>
+          </SlurSegment>
+        <up>1</up>
+        </Slur>
+      <Slur>
+        <tick>66720</tick>
+        <tick2>66960</tick2>
+        <SlurSegment no="0">
+          <o4 x="9.37393" y="-3.221"/>
+          </SlurSegment>
+        <up>2</up>
+        </Slur>
+      <Slur>
+        <tick>67680</tick>
+        <tick2>67920</tick2>
+        <track>1</track>
+        <track2>1</track2>
+        <SlurSegment no="0">
+          <o1 x="1.15626" y="3.09711"/>
+          <o2 x="0.371654" y="0.619423"/>
+          <o3 x="0" y="0.536833"/>
+          <o4 x="-0.0412948" y="2.93193"/>
+          </SlurSegment>
+        <up>1</up>
+        </Slur>
+      <Slur>
+        <tick>67920</tick>
+        <tick2>68160</tick2>
+        <SlurSegment no="0">
+          <o4 x="12.9666" y="-0.247769"/>
+          </SlurSegment>
+        <up>2</up>
+        </Slur>
+      <Slur>
+        <tick>69360</tick>
+        <tick2>69840</tick2>
+        <track>1</track>
+        <track2>1</track2>
+        <SlurSegment no="0">
+          <o1 x="2.01412" y="2.23736"/>
+          <o2 x="-5.43946" y="-3.17697"/>
+          <o3 x="6.72406" y="-1.37538"/>
+          <o4 x="37.0104" y="2.56325"/>
+          </SlurSegment>
+        <up>1</up>
+        </Slur>
+      <Slur>
+        <tick>72240</tick>
+        <tick2>72720</tick2>
+        <track>1</track>
+        <track2>1</track2>
+        <SlurSegment no="0">
+          <o1 x="1.27084" y="2.28751"/>
+          <o2 x="-4.3844" y="-1.46147"/>
+          <o3 x="0.953131" y="-2.4146"/>
+          <o4 x="34.4398" y="2.73231"/>
+          </SlurSegment>
+        <up>1</up>
+        </Slur>
+      <Slur>
+        <tick>75120</tick>
+        <tick2>75600</tick2>
+        <track>1</track>
+        <track2>1</track2>
+        <SlurSegment no="0">
+          <o1 x="1.33438" y="2.22397"/>
+          <o2 x="-3.30419" y="-0.953131"/>
+          <o3 x="2.16043" y="-1.65209"/>
+          <o4 x="34.1221" y="2.66877"/>
+          </SlurSegment>
+        <up>1</up>
+        </Slur>
+
   <Staff id="1">
     <Measure number="1">
       <Text>
@@ -278,13 +768,6 @@ p, li { white-space: pre-wrap; }
 &lt;p align=&quot;right&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Dave Phillips 2005&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
         <subtype>Composer</subtype>
         </Text>
-      <Slur>
-        <startTick>0</startTick>
-        <endTick>240</endTick>
-        <SlurSegment no="0">
-          <o4 x="11.6403" y="-3.4"/>
-          </SlurSegment>
-        </Slur>
       <Dynamic>
         <subtype>f</subtype>
         <offset x="-0.790478" y="2.79612"/>
@@ -410,13 +893,6 @@ p, li { white-space: pre-wrap; }
       <BarLine/>
       </Measure>
     <Measure number="2">
-      <Slur>
-        <startTick>1200</startTick>
-        <endTick>1440</endTick>
-        <SlurSegment no="0">
-          <o4 x="15.4222" y="-5.07639"/>
-          </SlurSegment>
-        </Slur>
       <Text>
         <align>1</align>
         <xoffset>0</xoffset>
@@ -565,13 +1041,6 @@ p, li { white-space: pre-wrap; }
       <BarLine/>
       </Measure>
     <Measure number="3">
-      <Slur>
-        <startTick>2640</startTick>
-        <endTick>2880</endTick>
-        <SlurSegment no="0">
-          <o4 x="11.8181" y="-3.35139"/>
-          </SlurSegment>
-        </Slur>
       <Dynamic>
         <data>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
@@ -596,13 +1065,6 @@ p, li { white-space: pre-wrap; }
       <BarLine/>
       </Measure>
     <Measure number="4">
-      <Slur>
-        <startTick>3840</startTick>
-        <endTick>4080</endTick>
-        <SlurSegment no="0">
-          <o4 x="15.5222" y="-4.85069"/>
-          </SlurSegment>
-        </Slur>
       <TimeSig>
         <subtype>392</subtype>
         <den>8</den>
@@ -620,13 +1082,6 @@ p, li { white-space: pre-wrap; }
       <LayoutBreak>
         <subtype>line</subtype>
         </LayoutBreak>
-      <Slur>
-        <startTick>5280</startTick>
-        <endTick>5520</endTick>
-        <SlurSegment no="0">
-          <o4 x="11.774" y="-3.39549"/>
-          </SlurSegment>
-        </Slur>
       <TimeSig>
         <subtype>328</subtype>
         <den>8</den>
@@ -740,14 +1195,6 @@ p, li { white-space: pre-wrap; }
       <BarLine/>
       </Measure>
     <Measure number="6">
-      <Slur>
-        <startTick>6480</startTick>
-        <endTick>6720</endTick>
-        <SlurSegment no="0">
-          <o4 x="14.2875" y="0.132292"/>
-          </SlurSegment>
-        <up>2</up>
-        </Slur>
       <Text>
         <align>1</align>
         <xoffset>0</xoffset>
@@ -836,13 +1283,6 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     <Measure number="7">
-      <Slur>
-        <startTick>7920</startTick>
-        <endTick>8160</endTick>
-        <SlurSegment no="0">
-          <o4 x="11.3771" y="-3.43958"/>
-          </SlurSegment>
-        </Slur>
       <TimeSig>
         <subtype>328</subtype>
         <den>8</den>
@@ -856,14 +1296,6 @@ p, li { white-space: pre-wrap; }
       <BarLine/>
       </Measure>
     <Measure number="8">
-      <Slur>
-        <startTick>9120</startTick>
-        <endTick>9360</endTick>
-        <SlurSegment no="0">
-          <o4 x="14.6403" y="-0.0881944"/>
-          </SlurSegment>
-        <up>2</up>
-        </Slur>
       <Text>
         <align>1</align>
         <xoffset>0</xoffset>
@@ -912,13 +1344,6 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     <Measure number="9">
-      <Slur>
-        <startTick>10560</startTick>
-        <endTick>10800</endTick>
-        <SlurSegment no="0">
-          <o4 x="11.3863" y="-3.33736"/>
-          </SlurSegment>
-        </Slur>
       <TimeSig>
         <subtype>328</subtype>
         <den>8</den>
@@ -939,13 +1364,6 @@ p, li { white-space: pre-wrap; }
       <LayoutBreak>
         <subtype>line</subtype>
         </LayoutBreak>
-      <Slur>
-        <startTick>11760</startTick>
-        <endTick>12000</endTick>
-        <SlurSegment no="0">
-          <o4 x="15.1163" y="-4.95696"/>
-          </SlurSegment>
-        </Slur>
       <TimeSig>
         <subtype>392</subtype>
         <den>8</den>
@@ -967,13 +1385,6 @@ p, li { white-space: pre-wrap; }
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;come prima&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
         <offset x="-1.94192" y="12.1487"/>
         </Dynamic>
-      <Slur>
-        <startTick>13200</startTick>
-        <endTick>13440</endTick>
-        <SlurSegment no="0">
-          <o4 x="11.0941" y="-3.63508"/>
-          </SlurSegment>
-        </Slur>
       <TimeSig>
         <subtype>328</subtype>
         <den>8</den>
@@ -991,14 +1402,6 @@ p, li { white-space: pre-wrap; }
       <BarLine/>
       </Measure>
     <Measure number="12">
-      <Slur>
-        <startTick>14400</startTick>
-        <endTick>14640</endTick>
-        <SlurSegment no="0">
-          <o3 x="0.59011" y="0.755341"/>
-          <o4 x="14.8236" y="-4.90971"/>
-          </SlurSegment>
-        </Slur>
       <TimeSig>
         <subtype>392</subtype>
         <den>8</den>
@@ -1013,22 +1416,6 @@ p, li { white-space: pre-wrap; }
       <BarLine/>
       </Measure>
     <Measure number="13">
-      <Slur>
-        <startTick>15840</startTick>
-        <endTick>16080</endTick>
-        <SlurSegment no="0">
-          <o2 x="0.313101" y="-0.521836"/>
-          <o4 x="4.25818" y="-1.21066"/>
-          </SlurSegment>
-        </Slur>
-      <Slur>
-        <startTick>16560</startTick>
-        <endTick>16800</endTick>
-        <SlurSegment no="0">
-          <o2 x="0.0417468" y="-0.709696"/>
-          <o4 x="4.04944" y="-1.23153"/>
-          </SlurSegment>
-        </Slur>
       <Chord>
         <ticklen>240</ticklen>
         <Attribute>
@@ -1283,13 +1670,6 @@ p, li { white-space: pre-wrap; }
       <LayoutBreak>
         <subtype>line</subtype>
         </LayoutBreak>
-      <Slur>
-        <startTick>18720</startTick>
-        <endTick>18960</endTick>
-        <SlurSegment no="0">
-          <o4 x="11.1733" y="-3.43489"/>
-          </SlurSegment>
-        </Slur>
       <TimeSig>
         <subtype>328</subtype>
         <den>8</den>
@@ -1303,14 +1683,6 @@ p, li { white-space: pre-wrap; }
       <BarLine/>
       </Measure>
     <Measure number="16">
-      <Slur>
-        <startTick>19920</startTick>
-        <endTick>20160</endTick>
-        <SlurSegment no="0">
-          <o4 x="14.1309" y="-0.142162"/>
-          </SlurSegment>
-        <up>2</up>
-        </Slur>
       <TimeSig>
         <subtype>392</subtype>
         <den>8</den>
@@ -1345,13 +1717,6 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     <Measure number="17">
-      <Slur>
-        <startTick>21360</startTick>
-        <endTick>21600</endTick>
-        <SlurSegment no="0">
-          <o4 x="10.7475" y="-3.52563"/>
-          </SlurSegment>
-        </Slur>
       <TimeSig>
         <subtype>328</subtype>
         <den>8</den>
@@ -1365,14 +1730,6 @@ p, li { white-space: pre-wrap; }
       <BarLine/>
       </Measure>
     <Measure number="18">
-      <Slur>
-        <startTick>22560</startTick>
-        <endTick>22800</endTick>
-        <SlurSegment no="0">
-          <o4 x="13.9319" y="-0.142162"/>
-          </SlurSegment>
-        <up>2</up>
-        </Slur>
       <TimeSig>
         <subtype>392</subtype>
         <den>8</den>
@@ -1407,22 +1764,6 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     <Measure number="19">
-      <Slur>
-        <startTick>24000</startTick>
-        <endTick>24240</endTick>
-        <SlurSegment no="0">
-          <o2 x="0.810936" y="-0.70697"/>
-          <o4 x="3.95071" y="-1.20601"/>
-          </SlurSegment>
-        </Slur>
-      <Slur>
-        <startTick>24720</startTick>
-        <endTick>24960</endTick>
-        <SlurSegment no="0">
-          <o2 x="0.956489" y="-0.873316"/>
-          <o4 x="3.90913" y="-1.16442"/>
-          </SlurSegment>
-        </Slur>
       <Chord>
         <ticklen>240</ticklen>
         <Attribute>
@@ -1491,24 +1832,6 @@ p, li { white-space: pre-wrap; }
       <BarLine/>
       </Measure>
     <Measure number="21">
-      <Slur>
-        <startTick>26880</startTick>
-        <endTick>27840</endTick>
-        <startTrack>1</startTrack>
-        <endTrack>1</endTrack>
-        <SlurSegment no="0">
-          <o4 x="7.55852" y="1.63134"/>
-          </SlurSegment>
-        <up>1</up>
-        </Slur>
-      <Slur>
-        <startTick>26880</startTick>
-        <endTick>27120</endTick>
-        <SlurSegment no="0">
-          <o4 x="6.98393" y="-2.13558"/>
-          </SlurSegment>
-        <up>2</up>
-        </Slur>
       <TimeSig>
         <subtype>264</subtype>
         <den>8</den>
@@ -1541,14 +1864,6 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     <Measure number="22">
-      <Slur>
-        <startTick>27840</startTick>
-        <endTick>28080</endTick>
-        <SlurSegment no="0">
-          <o4 x="7.5034" y="-1.66533e-16"/>
-          </SlurSegment>
-        <up>2</up>
-        </Slur>
       <Text>
         <align>1</align>
         <xoffset>0</xoffset>
@@ -1605,13 +1920,6 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     <Measure number="23">
-      <Slur>
-        <startTick>28800</startTick>
-        <endTick>29040</endTick>
-        <SlurSegment no="0">
-          <o4 x="14.2565" y="-4.84835"/>
-          </SlurSegment>
-        </Slur>
       <TimeSig>
         <subtype>392</subtype>
         <den>8</den>
@@ -1746,14 +2054,6 @@ p, li { white-space: pre-wrap; }
       <BarLine/>
       </Measure>
     <Measure number="24">
-      <Slur>
-        <startTick>30240</startTick>
-        <endTick>30480</endTick>
-        <SlurSegment no="0">
-          <o4 x="8.48461" y="-5.55112e-17"/>
-          </SlurSegment>
-        <up>2</up>
-        </Slur>
       <TimeSig>
         <subtype>264</subtype>
         <den>8</den>
@@ -1800,13 +2100,6 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     <Measure number="25">
-      <Slur>
-        <startTick>31200</startTick>
-        <endTick>31440</endTick>
-        <SlurSegment no="0">
-          <o4 x="14.2565" y="-4.84835"/>
-          </SlurSegment>
-        </Slur>
       <TimeSig>
         <subtype>392</subtype>
         <den>8</den>
@@ -1824,28 +2117,6 @@ p, li { white-space: pre-wrap; }
       <LayoutBreak>
         <subtype>line</subtype>
         </LayoutBreak>
-      <Slur>
-        <startTick>32640</startTick>
-        <endTick>32880</endTick>
-        <SlurSegment no="0">
-          <o4 x="7.12077" y="-0.390179"/>
-          </SlurSegment>
-        <up>2</up>
-        </Slur>
-      <Slur>
-        <startTick>32640</startTick>
-        <endTick>33600</endTick>
-        <startTrack>1</startTrack>
-        <endTrack>1</endTrack>
-        <SlurSegment no="0">
-          <o1 x="1.59135" y="2.65225"/>
-          <o4 x="1.16699" y="2.75834"/>
-          </SlurSegment>
-        <SlurSegment no="1">
-          <o4 x="34.4435" y="1.84581"/>
-          </SlurSegment>
-        <up>1</up>
-        </Slur>
       <Text>
         <align>1</align>
         <xoffset>0</xoffset>
@@ -1969,14 +2240,6 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     <Measure number="27">
-      <Slur>
-        <startTick>33600</startTick>
-        <endTick>33840</endTick>
-        <SlurSegment no="0">
-          <o4 x="7.80837" y="-0.346339"/>
-          </SlurSegment>
-        <up>2</up>
-        </Slur>
       <Chord>
         <ticklen>240</ticklen>
         <StemDirection>down</StemDirection>
@@ -2081,14 +2344,6 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     <Measure number="28">
-      <Slur>
-        <startTick>34560</startTick>
-        <endTick>34800</endTick>
-        <SlurSegment no="0">
-          <o4 x="8.28065" y="-0.157427"/>
-          </SlurSegment>
-        <up>2</up>
-        </Slur>
       <Text>
         <align>1</align>
         <xoffset>0</xoffset>
@@ -2221,14 +2476,6 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     <Measure number="29">
-      <Slur>
-        <startTick>35520</startTick>
-        <endTick>35760</endTick>
-        <SlurSegment no="0">
-          <o4 x="7.55648" y="-0.40931"/>
-          </SlurSegment>
-        <up>2</up>
-        </Slur>
       <Chord>
         <ticklen>240</ticklen>
         <StemDirection>down</StemDirection>
@@ -2296,20 +2543,6 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     <Measure number="30">
-      <Slur>
-        <startTick>36480</startTick>
-        <endTick>36720</endTick>
-        <SlurSegment no="0">
-          <o4 x="3.30596" y="-0.913075"/>
-          </SlurSegment>
-        </Slur>
-      <Slur>
-        <startTick>37200</startTick>
-        <endTick>37440</endTick>
-        <SlurSegment no="0">
-          <o4 x="3.24299" y="-1.88912"/>
-          </SlurSegment>
-        </Slur>
       <TimeSig>
         <subtype>392</subtype>
         <den>8</den>
@@ -2494,22 +2727,6 @@ p, li { white-space: pre-wrap; }
       <LayoutBreak>
         <subtype>line</subtype>
         </LayoutBreak>
-      <Slur>
-        <startTick>39360</startTick>
-        <endTick>39600</endTick>
-        <SlurSegment no="0">
-          <o2 x="0.47228" y="-0.535251"/>
-          <o4 x="3.52636" y="-1.19644"/>
-          </SlurSegment>
-        </Slur>
-      <Slur>
-        <startTick>40080</startTick>
-        <endTick>40320</endTick>
-        <SlurSegment no="0">
-          <o2 x="0.629707" y="-0.40931"/>
-          <o4 x="3.33745" y="-2.01506"/>
-          </SlurSegment>
-        </Slur>
       <Chord>
         <ticklen>240</ticklen>
         <Attribute>
@@ -2582,13 +2799,6 @@ p, li { white-space: pre-wrap; }
       </Measure>
     <Measure number="34">
       <stretch>0.9</stretch>
-      <Slur>
-        <startTick>42240</startTick>
-        <endTick>42480</endTick>
-        <SlurSegment no="0">
-          <o4 x="8.51411" y="-3.47342"/>
-          </SlurSegment>
-        </Slur>
       <TimeSig>
         <subtype>328</subtype>
         <den>8</den>
@@ -2607,13 +2817,6 @@ p, li { white-space: pre-wrap; }
       </Measure>
     <Measure number="35">
       <stretch>0.9</stretch>
-      <Slur>
-        <startTick>43440</startTick>
-        <endTick>43680</endTick>
-        <SlurSegment no="0">
-          <o4 x="11.4792" y="-4.8289"/>
-          </SlurSegment>
-        </Slur>
       <TimeSig>
         <subtype>392</subtype>
         <den>8</den>
@@ -2629,13 +2832,6 @@ p, li { white-space: pre-wrap; }
       </Measure>
     <Measure number="36">
       <stretch>0.9</stretch>
-      <Slur>
-        <startTick>44880</startTick>
-        <endTick>45120</endTick>
-        <SlurSegment no="0">
-          <o4 x="8.59883" y="-3.55814"/>
-          </SlurSegment>
-        </Slur>
       <TimeSig>
         <subtype>328</subtype>
         <den>8</den>
@@ -2654,13 +2850,6 @@ p, li { white-space: pre-wrap; }
       </Measure>
     <Measure number="37">
       <stretch>0.9</stretch>
-      <Slur>
-        <startTick>46080</startTick>
-        <endTick>46320</endTick>
-        <SlurSegment no="0">
-          <o4 x="11.2023" y="-4.96466"/>
-          </SlurSegment>
-        </Slur>
       <TimeSig>
         <subtype>392</subtype>
         <den>8</den>
@@ -2762,13 +2951,6 @@ p, li { white-space: pre-wrap; }
       <BarLine/>
       </Measure>
     <Measure number="39">
-      <Slur>
-        <startTick>48960</startTick>
-        <endTick>49200</endTick>
-        <SlurSegment no="0">
-          <o4 x="11.062" y="-5.01752"/>
-          </SlurSegment>
-        </Slur>
       <Note pitch="55" tpc="15" ticks="240"/>
       <Note pitch="62" tpc="16" ticks="240"/>
       <Note pitch="65" tpc="13" ticks="240"/>
@@ -2815,13 +2997,6 @@ p, li { white-space: pre-wrap; }
       </Measure>
     <Measure number="41">
       <stretch>0.9</stretch>
-      <Slur>
-        <startTick>51840</startTick>
-        <endTick>52080</endTick>
-        <SlurSegment no="0">
-          <o4 x="10.7979" y="-4.57739"/>
-          </SlurSegment>
-        </Slur>
       <Note pitch="55" tpc="15" ticks="240"/>
       <Note pitch="64" tpc="18" ticks="240"/>
       <Note pitch="65" tpc="13" ticks="240"/>
@@ -2832,14 +3007,6 @@ p, li { white-space: pre-wrap; }
       </Measure>
     <Measure number="42">
       <stretch>0.9</stretch>
-      <Slur>
-        <startTick>53280</startTick>
-        <endTick>53520</endTick>
-        <SlurSegment no="0">
-          <o4 x="5.50883" y="-2.59239"/>
-          </SlurSegment>
-        <up>2</up>
-        </Slur>
       <TimeSig>
         <subtype>264</subtype>
         <den>8</den>
@@ -2873,14 +3040,6 @@ p, li { white-space: pre-wrap; }
       </Measure>
     <Measure number="43">
       <stretch>0.9</stretch>
-      <Slur>
-        <startTick>54240</startTick>
-        <endTick>54480</endTick>
-        <SlurSegment no="0">
-          <o4 x="6.78652" y="-0.547791"/>
-          </SlurSegment>
-        <up>2</up>
-        </Slur>
       <TimeSig>
         <subtype>264</subtype>
         <den>8</den>
@@ -2928,13 +3087,6 @@ p, li { white-space: pre-wrap; }
       </Measure>
     <Measure number="44">
       <stretch>0.9</stretch>
-      <Slur>
-        <startTick>55200</startTick>
-        <endTick>55440</endTick>
-        <SlurSegment no="0">
-          <o4 x="10.9034" y="-3.71965"/>
-          </SlurSegment>
-        </Slur>
       <TimeSig>
         <subtype>392</subtype>
         <den>8</den>
@@ -2952,14 +3104,6 @@ p, li { white-space: pre-wrap; }
       <LayoutBreak>
         <subtype>line</subtype>
         </LayoutBreak>
-      <Slur>
-        <startTick>56640</startTick>
-        <endTick>56880</endTick>
-        <SlurSegment no="0">
-          <o4 x="5.66466" y="-3.13757"/>
-          </SlurSegment>
-        <up>2</up>
-        </Slur>
       <TimeSig>
         <subtype>264</subtype>
         <den>8</den>
@@ -2992,14 +3136,6 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     <Measure number="46">
-      <Slur>
-        <startTick>57600</startTick>
-        <endTick>57840</endTick>
-        <SlurSegment no="0">
-          <o4 x="7.76688" y="-0.189436"/>
-          </SlurSegment>
-        <up>2</up>
-        </Slur>
       <Chord>
         <ticklen>240</ticklen>
         <StemDirection>down</StemDirection>
@@ -3041,13 +3177,6 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     <Measure number="47">
-      <Slur>
-        <startTick>58800</startTick>
-        <endTick>59040</endTick>
-        <SlurSegment no="0">
-          <o4 x="9.88856" y="-3.10675"/>
-          </SlurSegment>
-        </Slur>
       <TimeSig>
         <subtype>392</subtype>
         <den>8</den>
@@ -3065,14 +3194,6 @@ p, li { white-space: pre-wrap; }
       <BarLine/>
       </Measure>
     <Measure number="48">
-      <Slur>
-        <startTick>60000</startTick>
-        <endTick>60240</endTick>
-        <SlurSegment no="0">
-          <o4 x="12.6164" y="-0.568308"/>
-          </SlurSegment>
-        <up>2</up>
-        </Slur>
       <Chord>
         <ticklen>240</ticklen>
         <StemDirection>down</StemDirection>
@@ -3102,13 +3223,6 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     <Measure number="49">
-      <Slur>
-        <startTick>61440</startTick>
-        <endTick>61680</endTick>
-        <SlurSegment no="0">
-          <o4 x="9.69913" y="-3.59929"/>
-          </SlurSegment>
-        </Slur>
       <TimeSig>
         <subtype>328</subtype>
         <den>8</den>
@@ -3122,14 +3236,6 @@ p, li { white-space: pre-wrap; }
       <BarLine/>
       </Measure>
     <Measure number="50">
-      <Slur>
-        <startTick>62640</startTick>
-        <endTick>62880</endTick>
-        <SlurSegment no="0">
-          <o4 x="12.7035" y="-0.491886"/>
-          </SlurSegment>
-        <up>2</up>
-        </Slur>
       <TimeSig>
         <subtype>392</subtype>
         <den>8</den>
@@ -3167,13 +3273,6 @@ p, li { white-space: pre-wrap; }
       <LayoutBreak>
         <subtype>line</subtype>
         </LayoutBreak>
-      <Slur>
-        <startTick>64080</startTick>
-        <endTick>64320</endTick>
-        <SlurSegment no="0">
-          <o4 x="9.7094" y="-3.65706"/>
-          </SlurSegment>
-        </Slur>
       <TimeSig>
         <subtype>328</subtype>
         <den>8</den>
@@ -3191,38 +3290,6 @@ p, li { white-space: pre-wrap; }
       <BarLine/>
       </Measure>
     <Measure number="52">
-      <Slur>
-        <startTick>65280</startTick>
-        <endTick>66240</endTick>
-        <startTrack>1</startTrack>
-        <endTrack>1</endTrack>
-        <SlurSegment no="0">
-          <o1 x="1.14874" y="3.32529"/>
-          <o4 x="-0.665058" y="2.90207"/>
-          </SlurSegment>
-        <up>1</up>
-        </Slur>
-      <Slur>
-        <startTick>65280</startTick>
-        <endTick>65520</endTick>
-        <SlurSegment no="0">
-          <o4 x="11.9106" y="-4.47402"/>
-          </SlurSegment>
-        <up>2</up>
-        </Slur>
-      <Slur>
-        <startTick>66480</startTick>
-        <endTick>66720</endTick>
-        <startTrack>1</startTrack>
-        <endTrack>1</endTrack>
-        <SlurSegment no="0">
-          <o1 x="1.11496" y="3.05582"/>
-          <o2 x="0.289064" y="0.578128"/>
-          <o3 x="0" y="0.702012"/>
-          <o4 x="-0.495538" y="3.26229"/>
-          </SlurSegment>
-        <up>1</up>
-        </Slur>
       <TimeSig>
         <subtype>392</subtype>
         <den>8</den>
@@ -3283,27 +3350,6 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     <Measure number="53">
-      <Slur>
-        <startTick>66720</startTick>
-        <endTick>66960</endTick>
-        <SlurSegment no="0">
-          <o4 x="9.37393" y="-3.221"/>
-          </SlurSegment>
-        <up>2</up>
-        </Slur>
-      <Slur>
-        <startTick>67680</startTick>
-        <endTick>67920</endTick>
-        <startTrack>1</startTrack>
-        <endTrack>1</endTrack>
-        <SlurSegment no="0">
-          <o1 x="1.15626" y="3.09711"/>
-          <o2 x="0.371654" y="0.619423"/>
-          <o3 x="0" y="0.536833"/>
-          <o4 x="-0.0412948" y="2.93193"/>
-          </SlurSegment>
-        <up>1</up>
-        </Slur>
       <TimeSig>
         <subtype>328</subtype>
         <den>8</den>
@@ -3348,14 +3394,6 @@ p, li { white-space: pre-wrap; }
         <offset x="3.16612" y="6.07122"/>
         <tick>69120</tick>
         </Dynamic>
-      <Slur>
-        <startTick>67920</startTick>
-        <endTick>68160</endTick>
-        <SlurSegment no="0">
-          <o4 x="12.9666" y="-0.247769"/>
-          </SlurSegment>
-        <up>2</up>
-        </Slur>
       <TimeSig>
         <subtype>392</subtype>
         <tick>67920</tick>
@@ -3421,30 +3459,6 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     <Measure number="55">
-      <HairPin>
-        <tick2>77880</tick2>
-        <Segment>
-          <off1 x="1.08269" y="5.41347"/>
-          <off2 x="1.93974" y="0"/>
-          </Segment>
-        <Segment>
-          <off1 x="1.08269" y="5.23302"/>
-          <off2 x="1.08269" y="0"/>
-          </Segment>
-        </HairPin>
-      <Slur>
-        <startTick>69360</startTick>
-        <endTick>69840</endTick>
-        <startTrack>1</startTrack>
-        <endTrack>1</endTrack>
-        <SlurSegment no="0">
-          <o1 x="2.01412" y="2.23736"/>
-          <o2 x="-5.43946" y="-3.17697"/>
-          <o3 x="6.72406" y="-1.37538"/>
-          <o4 x="37.0104" y="2.56325"/>
-          </SlurSegment>
-        <up>1</up>
-        </Slur>
       <Text>
         <align>1</align>
         <xoffset>0</xoffset>
@@ -3689,19 +3703,6 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     <Measure number="57">
-      <Slur>
-        <startTick>72240</startTick>
-        <endTick>72720</endTick>
-        <startTrack>1</startTrack>
-        <endTrack>1</endTrack>
-        <SlurSegment no="0">
-          <o1 x="1.27084" y="2.28751"/>
-          <o2 x="-4.3844" y="-1.46147"/>
-          <o3 x="0.953131" y="-2.4146"/>
-          <o4 x="34.4398" y="2.73231"/>
-          </SlurSegment>
-        <up>1</up>
-        </Slur>
       <Dynamic>
         <data>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
@@ -3875,19 +3876,6 @@ p, li { white-space: pre-wrap; }
       </Measure>
     <Measure number="59">
       <stretch>0.9</stretch>
-      <Slur>
-        <startTick>75120</startTick>
-        <endTick>75600</endTick>
-        <startTrack>1</startTrack>
-        <endTrack>1</endTrack>
-        <SlurSegment no="0">
-          <o1 x="1.33438" y="2.22397"/>
-          <o2 x="-3.30419" y="-0.953131"/>
-          <o3 x="2.16043" y="-1.65209"/>
-          <o4 x="34.1221" y="2.66877"/>
-          </SlurSegment>
-        <up>1</up>
-        </Slur>
       <Chord>
         <ticklen>240</ticklen>
         <StemDirection>down</StemDirection>

@@ -2,9 +2,9 @@
 <museScore version="1.0">
   <Spatium>1.625</Spatium>
   <Division>480</Division>
-  <Mag>0.953323</Mag>
-  <xoff>12</xoff>
-  <yoff>11</yoff>
+  <Mag>1.44403</Mag>
+  <xoff>-146</xoff>
+  <yoff>-557</yoff>
   <Style>
     <staffUpperBorder>8</staffUpperBorder>
     <staffLowerBorder>4</staffLowerBorder>
@@ -62,6 +62,7 @@
     <measureNumberInterval>5</measureNumberInterval>
     <measureNumberAllStaffs>0</measureNumberAllStaffs>
     <measureNumberSystem>1</measureNumberSystem>
+    <lyricsDistance>6.5</lyricsDistance>
     </Style>
   <showInvisible>1</showInvisible>
   <page-layout>
@@ -146,6 +147,75 @@
       <reverb>30</reverb>
       </Instrument>
     </Part>
+  <Slur>
+    <tick2>1920</tick2>
+    <tick>1440</tick>
+    </Slur>
+  <Slur>
+    <tick2>2880</tick2>
+    <tick>2400</tick>
+    </Slur>
+  <Slur>
+    <tick2>7200</tick2>
+    <track>1</track>
+    <track2>1</track2>
+    <voice>1</voice>
+    <tick>6720</tick>
+    <up>1</up>
+    </Slur>
+  <Slur>
+    <tick2>8160</tick2>
+    <track>1</track>
+    <track2>1</track2>
+    <voice>1</voice>
+    <tick>7680</tick>
+    <up>1</up>
+    </Slur>
+  <Slur>
+    <tick2>12480</tick2>
+    <tick>12000</tick>
+    </Slur>
+  <Slur>
+    <tick2>13440</tick2>
+    <tick>12960</tick>
+    </Slur>
+  <Slur>
+    <tick2>15360</tick2>
+    <track>1</track>
+    <voice>1</voice>
+    <tick>14880</tick>
+    <up>1</up>
+    </Slur>
+  <Slur>
+    <tick2>17760</tick2>
+    <tick>17280</tick>
+    </Slur>
+  <Slur>
+    <tick2>18720</tick2>
+    <tick>18240</tick>
+    <SlurSegment no="0">
+      <o1 x="-0.105941" y="-1.80099"/>
+      </SlurSegment>
+    </Slur>
+  <Slur>
+    <tick2>20640</tick2>
+    <track>1</track>
+    <voice>1</voice>
+    <tick>20160</tick>
+    <up>1</up>
+    </Slur>
+  <Slur>
+    <tick2>28800</tick2>
+    <track>1</track>
+    <voice>1</voice>
+    <tick>28320</tick>
+    <SlurSegment no="0">
+      <o1 x="-0.376872" y="0.242275"/>
+      <o2 x="0.107678" y="1.29213"/>
+      <o3 x="-0.296114" y="0.996019"/>
+      <o4 x="1.53441" y="6.43374"/>
+      </SlurSegment>
+    </Slur>
   <Staff id="1">
     <Measure number="1">
       <Text>
@@ -192,16 +262,6 @@ p, li { white-space: pre-wrap; }
         <subtype>f</subtype>
         <offset x="-0.526386" y="2.72978"/>
         </Dynamic>
-      <Slur>
-        <startTick>1440</startTick>
-        <endTick>1920</endTick>
-        <SlurSegment no="0">
-          <o1 x="0" y="-1"/>
-          <o2 x="0" y="0.4"/>
-          <o3 x="0" y="0.5"/>
-          <o4 x="0" y="-1"/>
-          </SlurSegment>
-        </Slur>
       <TimeSig>
         <subtype>324</subtype>
         <den>4</den>
@@ -244,21 +304,8 @@ p, li { white-space: pre-wrap; }
           </Attribute>
         <Note pitch="74" tpc="16"/>
         </Chord>
-      <BarLine>
-        <subtype>1</subtype>
-        </BarLine>
       </Measure>
     <Measure number="2">
-      <Slur>
-        <startTick>2400</startTick>
-        <endTick>2880</endTick>
-        <SlurSegment no="0">
-          <o1 x="0" y="-1"/>
-          <o2 x="0" y="0.4"/>
-          <o3 x="0" y="0.4"/>
-          <o4 x="0" y="-1"/>
-          </SlurSegment>
-        </Slur>
       <TimeSig>
         <subtype>388</subtype>
         <den>4</den>
@@ -307,18 +354,8 @@ p, li { white-space: pre-wrap; }
           </Attribute>
         <Note pitch="65" tpc="13"/>
         </Chord>
-      <BarLine>
-        <subtype>1</subtype>
-        </BarLine>
       </Measure>
     <Measure number="3">
-      <Slur>
-        <startTick>6720</startTick>
-        <endTick>7200</endTick>
-        <startTrack>1</startTrack>
-        <endTrack>1</endTrack>
-        <up>1</up>
-        </Slur>
       <TimeSig>
         <subtype>324</subtype>
         <den>4</den>
@@ -354,9 +391,6 @@ p, li { white-space: pre-wrap; }
         <Note pitch="65" tpc="13"/>
         <Note pitch="69" tpc="17"/>
         </Chord>
-      <BarLine>
-        <subtype>1</subtype>
-        </BarLine>
       <Chord>
         <voice>1</voice>
         <tick>6720</tick>
@@ -390,13 +424,6 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     <Measure number="4">
-      <Slur>
-        <startTick>7680</startTick>
-        <endTick>8160</endTick>
-        <startTrack>1</startTrack>
-        <endTrack>1</endTrack>
-        <up>1</up>
-        </Slur>
       <LayoutBreak>
         <subtype>line</subtype>
         </LayoutBreak>
@@ -441,7 +468,6 @@ p, li { white-space: pre-wrap; }
         <Note pitch="60" tpc="14"/>
         <Note pitch="65" tpc="13"/>
         </Chord>
-      <BarLine/>
       <Chord>
         <voice>1</voice>
         <tick>7680</tick>
@@ -475,16 +501,6 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     <Measure number="5">
-      <Slur>
-        <startTick>12000</startTick>
-        <endTick>12480</endTick>
-        <SlurSegment no="0">
-          <o1 x="-0.0368276" y="0.515587"/>
-          <o2 x="-0.465577" y="-0.778819"/>
-          <o3 x="-0.34735" y="-0.781538"/>
-          <o4 x="-1.31575" y="0.584218"/>
-          </SlurSegment>
-        </Slur>
       <TimeSig>
         <subtype>324</subtype>
         <den>4</den>
@@ -526,33 +542,8 @@ p, li { white-space: pre-wrap; }
           </Attribute>
         <Note pitch="60" tpc="14"/>
         </Chord>
-      <BarLine>
-        <subtype>1</subtype>
-        </BarLine>
       </Measure>
     <Measure number="6">
-      <Slur>
-        <startTick>12960</startTick>
-        <endTick>13440</endTick>
-        <SlurSegment no="0">
-          <o1 x="0" y="1"/>
-          <o2 x="0.1" y="-0.4"/>
-          <o3 x="0" y="-0.4"/>
-          <o4 x="0" y="0.6"/>
-          </SlurSegment>
-        </Slur>
-      <Slur>
-        <startTick>14880</startTick>
-        <endTick>15360</endTick>
-        <startTrack>1</startTrack>
-        <SlurSegment no="0">
-          <o1 x="0.62607" y="0.0368276"/>
-          <o2 x="0.589242" y="0.736552"/>
-          <o3 x="0.441931" y="0.662897"/>
-          <o4 x="0.589242" y="-0.0368276"/>
-          </SlurSegment>
-        <up>1</up>
-        </Slur>
       <TimeSig>
         <subtype>388</subtype>
         <den>4</den>
@@ -589,9 +580,6 @@ p, li { white-space: pre-wrap; }
         <Note pitch="65" tpc="13"/>
         </Chord>
       <Note pitch="65" tpc="13" ticks="480"/>
-      <BarLine>
-        <subtype>1</subtype>
-        </BarLine>
       <Chord>
         <voice>1</voice>
         <tick>14880</tick>
@@ -614,16 +602,6 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     <Measure number="7">
-      <Slur>
-        <startTick>17280</startTick>
-        <endTick>17760</endTick>
-        <SlurSegment no="0">
-          <o1 x="-0.0736552" y="0.742207"/>
-          <o2 x="0.0736552" y="-0.605104"/>
-          <o3 x="6.93889e-18" y="-0.752414"/>
-          <o4 x="0.478759" y="0.631724"/>
-          </SlurSegment>
-        </Slur>
       <TimeSig>
         <subtype>324</subtype>
         <den>4</den>
@@ -665,36 +643,11 @@ p, li { white-space: pre-wrap; }
           </Attribute>
         <Note pitch="63" tpc="11"/>
         </Chord>
-      <BarLine>
-        <subtype>1</subtype>
-        </BarLine>
       </Measure>
     <Measure number="8">
       <LayoutBreak>
         <subtype>line</subtype>
         </LayoutBreak>
-      <Slur>
-        <startTick>18240</startTick>
-        <endTick>18720</endTick>
-        <SlurSegment no="0">
-          <o1 x="-0.662897" y="-1.58359"/>
-          <o2 x="0.515587" y="0.736552"/>
-          <o3 x="0.0736552" y="0.662897"/>
-          <o4 x="0.14731" y="2.24648"/>
-          </SlurSegment>
-        </Slur>
-      <Slur>
-        <startTick>20160</startTick>
-        <endTick>20640</endTick>
-        <startTrack>1</startTrack>
-        <SlurSegment no="0">
-          <o1 x="0.883863" y="0.220966"/>
-          <o2 x="0.957518" y="0.515587"/>
-          <o3 x="1.36262" y="0.699725"/>
-          <o4 x="0.478759" y="0.294621"/>
-          </SlurSegment>
-        <up>1</up>
-        </Slur>
       <TimeSig>
         <subtype>388</subtype>
         <den>4</den>
@@ -727,7 +680,6 @@ p, li { white-space: pre-wrap; }
         <Note pitch="68" tpc="10"/>
         </Chord>
       <Note pitch="68" tpc="10" ticks="480"/>
-      <BarLine/>
       <Chord>
         <voice>1</voice>
         <tick>20160</tick>
@@ -790,7 +742,6 @@ p, li { white-space: pre-wrap; }
         <Note pitch="56" tpc="10"/>
         <Note pitch="68" tpc="10"/>
         </Chord>
-      <BarLine/>
       <Chord>
         <voice>1</voice>
         <tick>21120</tick>
@@ -884,22 +835,8 @@ p, li { white-space: pre-wrap; }
         <Note pitch="72" tpc="14"/>
         <Note pitch="75" tpc="11"/>
         </Chord>
-      <BarLine>
-        <subtype>1</subtype>
-        </BarLine>
       </Measure>
     <Measure number="11">
-      <Slur>
-        <startTick>28320</startTick>
-        <endTick>28800</endTick>
-        <startTrack>1</startTrack>
-        <SlurSegment no="0">
-          <o1 x="-0.405104" y="0.220966"/>
-          <o2 x="0.294621" y="0.77338"/>
-          <o3 x="0" y="1.10483"/>
-          <o4 x="1.43628" y="6.69972"/>
-          </SlurSegment>
-        </Slur>
       <TimeSig>
         <subtype>324</subtype>
         <den>4</den>
@@ -947,9 +884,6 @@ p, li { white-space: pre-wrap; }
         <Note pitch="58" tpc="12"/>
         <Note pitch="70" tpc="12"/>
         </Chord>
-      <BarLine>
-        <subtype>1</subtype>
-        </BarLine>
       <Chord>
         <voice>1</voice>
         <tick>26880</tick>
@@ -1031,7 +965,6 @@ p, li { white-space: pre-wrap; }
         <Note pitch="60" tpc="14"/>
         <Note pitch="72" tpc="14"/>
         </Chord>
-      <BarLine/>
       <Chord>
         <voice>1</voice>
         <tick>29280</tick>
@@ -1129,7 +1062,6 @@ p, li { white-space: pre-wrap; }
         <Note pitch="76" tpc="18"/>
         <Note pitch="79" tpc="15"/>
         </Chord>
-      <BarLine/>
       </Measure>
     <Measure number="14">
       <Chord>
@@ -1167,7 +1099,6 @@ p, li { white-space: pre-wrap; }
         <Note pitch="70" tpc="12"/>
         <Note pitch="74" tpc="16"/>
         </Chord>
-      <BarLine/>
       <Chord>
         <voice>1</voice>
         <tick>35040</tick>
@@ -1226,7 +1157,6 @@ p, li { white-space: pre-wrap; }
         <Note pitch="70" tpc="12"/>
         <Note pitch="74" tpc="16"/>
         </Chord>
-      <BarLine/>
       <Chord>
         <voice>1</voice>
         <tick>37920</tick>
@@ -1304,7 +1234,6 @@ p, li { white-space: pre-wrap; }
         <Note pitch="62" tpc="16"/>
         <Note pitch="65" tpc="13"/>
         </Chord>
-      <BarLine/>
       <Chord>
         <voice>1</voice>
         <tick>40800</tick>
@@ -1423,7 +1352,6 @@ p, li { white-space: pre-wrap; }
         <Note pitch="65" tpc="13"/>
         <Note pitch="70" tpc="12"/>
         </Chord>
-      <BarLine/>
       </Measure>
     <Measure number="18">
       <Chord>
@@ -1467,7 +1395,6 @@ p, li { white-space: pre-wrap; }
         <Note pitch="67" tpc="15"/>
         <Note pitch="79" tpc="15"/>
         </Chord>
-      <BarLine/>
       </Measure>
     <Measure number="19">
       <Chord>
@@ -1519,7 +1446,6 @@ p, li { white-space: pre-wrap; }
         <Note pitch="72" tpc="14"/>
         <Note pitch="77" tpc="13"/>
         </Chord>
-      <BarLine/>
       </Measure>
     <Measure number="20">
       <LayoutBreak>
@@ -1556,7 +1482,6 @@ p, li { white-space: pre-wrap; }
         </Breath>
       <Note pitch="67" tpc="15" ticks="480"/>
       <Note pitch="65" tpc="13" ticks="480"/>
-      <BarLine/>
       </Measure>
     <Measure number="21">
       <Chord>
@@ -1600,7 +1525,6 @@ p, li { white-space: pre-wrap; }
         <Note pitch="60" tpc="14"/>
         <Note pitch="65" tpc="13"/>
         </Chord>
-      <BarLine/>
       </Measure>
     <Measure number="22">
       <Chord>
@@ -1654,7 +1578,6 @@ p, li { white-space: pre-wrap; }
         <Note pitch="65" tpc="13"/>
         <Note pitch="70" tpc="12"/>
         </Chord>
-      <BarLine/>
       </Measure>
     <Measure number="23">
       <Chord>
@@ -1697,7 +1620,6 @@ p, li { white-space: pre-wrap; }
         <Note pitch="65" tpc="13"/>
         <Note pitch="70" tpc="12"/>
         </Chord>
-      <BarLine/>
       </Measure>
     <Measure number="24">
       <Chord>
@@ -1746,9 +1668,6 @@ p, li { white-space: pre-wrap; }
         <Note pitch="65" tpc="13"/>
         <Note pitch="70" tpc="12"/>
         </Chord>
-      <BarLine>
-        <subtype>5</subtype>
-        </BarLine>
       </Measure>
     </Staff>
   <Staff id="2">
@@ -2462,5 +2381,5 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     </Staff>
-  <cursorTrack>4</cursorTrack>
+  <cursorTrack>-4</cursorTrack>
   </museScore>

@@ -361,8 +361,8 @@ void Score::insertTime(int tick, int len)
             foreach(Element* el, _layout->_gel) {
                   if (el->type() == SLUR) {
                         Slur* s = (Slur*) el;
-                        if (s->tick1() >= tick + len)
-                              s->setTick1(s->tick1() - len);
+                        if (s->tick() >= tick + len)
+                              s->setTick(s->tick() - len);
                         if (s->tick2() >= tick + len)
                               s->setTick2(s->tick2() - len);
                         }
@@ -388,8 +388,8 @@ void Score::insertTime(int tick, int len)
             foreach(Element* el, _layout->_gel) {
                   if (el->type() == SLUR) {
                         Slur* s = (Slur*) el;
-                        if (s->tick1() >= tick + len)
-                              s->setTick1(s->tick1() + len);
+                        if (s->tick() >= tick + len)
+                              s->setTick(s->tick() + len);
                         if (s->tick2() >= tick + len)
                               s->setTick2(s->tick2() + len);
                         }
