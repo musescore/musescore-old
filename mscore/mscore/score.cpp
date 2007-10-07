@@ -52,6 +52,7 @@
 #include "tuplet.h"
 #include "lyrics.h"
 #include "pitchspelling.h"
+#include "line.h"
 
 Score* gscore;                 ///< system score, used for palettes etc.
 
@@ -347,6 +348,9 @@ void Score::removeMeasure(Measure* im)
 void Score::insertTime(int tick, int len)
       {
       if (len < 0) {
+            //
+            // remove time
+            //
             len = -len;
             sigmap->removeTime(tick, len);
             tempomap->removeTime(tick, len);
@@ -354,13 +358,48 @@ void Score::insertTime(int tick, int len)
                   staff->clef()->removeTime(tick, len);
                   staff->keymap()->removeTime(tick, len);
                   }
+            foreach(Element* el, _layout->_gel) {
+                  if (el->type() == SLUR) {
+                        Slur* s = (Slur*) el;
+                        if (s->tick1() >= tick + len)
+                              s->setTick1(s->tick1() - len);
+                        if (s->tick2() >= tick + len)
+                              s->setTick2(s->tick2() - len);
+                        }
+                  else if (el->isSLine()) {
+                        SLine* s = (SLine*) el;
+                        if (s->tick() >= tick + len)
+                              s->setTick(s->tick() - len);
+                        if (s->tick2() >= tick + len)
+                              s->setTick2(s->tick2() - len);
+                        }
+                  }
             }
       else {
+            //
+            // insert time
+            //
             sigmap->insertTime(tick, len);
             tempomap->insertTime(tick, len);
             foreach(Staff* staff, _staves) {
                   staff->clef()->insertTime(tick, len);
                   staff->keymap()->insertTime(tick, len);
+                  }
+            foreach(Element* el, _layout->_gel) {
+                  if (el->type() == SLUR) {
+                        Slur* s = (Slur*) el;
+                        if (s->tick1() >= tick + len)
+                              s->setTick1(s->tick1() + len);
+                        if (s->tick2() >= tick + len)
+                              s->setTick2(s->tick2() + len);
+                        }
+                  else if (el->isSLine()) {
+                        SLine* s = (SLine*) el;
+                        if (s->tick() >= tick + len)
+                              s->setTick(s->tick() + len);
+                        if (s->tick2() >= tick + len)
+                              s->setTick2(s->tick2() + len);
+                        }
                   }
             }
       }

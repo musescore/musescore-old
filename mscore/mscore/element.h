@@ -186,6 +186,10 @@ class Element {
       bool isChordRest() const {
             return type() == REST || type() == CHORD;
             }
+      bool isSLine() const {
+            return type() == HAIRPIN || type() == OTTAVA || type() == PEDAL
+               || type() == TRILL || type() == VOLTA;
+            }
 
       virtual void draw(QPainter&) {}
 

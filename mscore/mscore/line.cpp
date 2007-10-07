@@ -111,6 +111,10 @@ bool LineSegment::edit(int curGrip, QKeyEvent* ev)
             int tick1 = line()->tick();
             int tick2 = line()->tick2();
 
+            if (track > 4) {
+                  printf("illegal track, voice %d staffIdx %d\n", line()->voice(), line()->staffIdx());
+                  }
+
             if (ev->key() == Qt::Key_Left) {
                   if (curGrip == 0) {
                         tick1 = score()->prevSeg1(tick1, track);
@@ -283,7 +287,7 @@ void SLine::layout(ScoreLayout* layout)
             else {
                   int n = segCount - segmentsNeeded;
                   for (int i = 0; i < n; ++i) {
-                        LineSegment* seg = segments.takeLast();
+                        /* LineSegment* seg = */ segments.takeLast();
                         // delete seg;   // DEBUG: will be used later
                         }
                   }
