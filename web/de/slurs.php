@@ -38,7 +38,7 @@ sich auch der Haltbogen.
 <br>
 <br>
 Siehe auch
-      <a href="ties.php">Ties</a>,
+      <a href="ties.php">Bindebögen</a>,
       <a href="editmode.php">Edit Mode</a>.
 <?php require("trailer.html");  ?>
 

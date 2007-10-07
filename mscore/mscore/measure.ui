@@ -87,16 +87,6 @@
         </item>
        </layout>
       </item>
-      <item row="3" column="4" >
-       <widget class="QLabel" name="label_10" >
-        <property name="text" >
-         <string>Ending:</string>
-        </property>
-       </widget>
-      </item>
-      <item row="3" column="5" >
-       <widget class="QSpinBox" name="ending" />
-      </item>
       <item row="1" column="5" >
        <widget class="QSpinBox" name="measureNo" />
       </item>

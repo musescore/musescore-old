@@ -5,8 +5,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>648</width>
-    <height>307</height>
+    <width>561</width>
+    <height>198</height>
    </rect>
   </property>
   <property name="windowTitle" >
@@ -38,19 +38,19 @@
      </property>
      <layout class="QVBoxLayout" >
       <property name="spacing" >
-       <number>6</number>
+       <number>3</number>
       </property>
       <property name="leftMargin" >
-       <number>8</number>
+       <number>4</number>
       </property>
       <property name="topMargin" >
-       <number>8</number>
+       <number>4</number>
       </property>
       <property name="rightMargin" >
-       <number>8</number>
+       <number>4</number>
       </property>
       <property name="bottomMargin" >
-       <number>8</number>
+       <number>4</number>
       </property>
       <item>
        <layout class="QHBoxLayout" >
@@ -178,6 +178,12 @@
         </item>
         <item>
          <widget class="QSpinBox" name="subtype" >
+          <property name="sizePolicy" >
+           <sizepolicy vsizetype="Fixed" hsizetype="Preferred" >
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
           <property name="readOnly" >
            <bool>true</bool>
           </property>
@@ -236,6 +242,12 @@
         </item>
         <item>
          <widget class="QSpinBox" name="voice" >
+          <property name="sizePolicy" >
+           <sizepolicy vsizetype="Fixed" hsizetype="Preferred" >
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
           <property name="readOnly" >
            <bool>true</bool>
           </property>
@@ -258,7 +270,14 @@
          </widget>
         </item>
         <item>
-         <widget class="QSpinBox" name="staff" />
+         <widget class="QSpinBox" name="staff" >
+          <property name="sizePolicy" >
+           <sizepolicy vsizetype="Fixed" hsizetype="Preferred" >
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+         </widget>
         </item>
         <item>
          <widget class="QLabel" name="label_2" >
@@ -275,6 +294,12 @@
         </item>
         <item>
          <widget class="QSpinBox" name="time" >
+          <property name="sizePolicy" >
+           <sizepolicy vsizetype="Fixed" hsizetype="Preferred" >
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
           <property name="readOnly" >
            <bool>true</bool>
           </property>
@@ -307,6 +332,12 @@
         </item>
         <item>
          <widget class="QSpinBox" name="duration" >
+          <property name="sizePolicy" >
+           <sizepolicy vsizetype="Fixed" hsizetype="Preferred" >
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
           <property name="readOnly" >
            <bool>true</bool>
           </property>
@@ -372,6 +403,12 @@
         </item>
         <item>
          <widget class="QDoubleSpinBox" name="posx" >
+          <property name="sizePolicy" >
+           <sizepolicy vsizetype="Fixed" hsizetype="Preferred" >
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
           <property name="readOnly" >
            <bool>true</bool>
           </property>
@@ -382,6 +419,12 @@
         </item>
         <item>
          <widget class="QDoubleSpinBox" name="posy" >
+          <property name="sizePolicy" >
+           <sizepolicy vsizetype="Fixed" hsizetype="Preferred" >
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
           <property name="readOnly" >
            <bool>true</bool>
           </property>
@@ -402,6 +445,12 @@
         </item>
         <item>
          <widget class="QDoubleSpinBox" name="cposx" >
+          <property name="sizePolicy" >
+           <sizepolicy vsizetype="Fixed" hsizetype="Preferred" >
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
           <property name="maximum" >
            <double>1000000.000000000000000</double>
           </property>
@@ -409,6 +458,12 @@
         </item>
         <item>
          <widget class="QDoubleSpinBox" name="cposy" >
+          <property name="sizePolicy" >
+           <sizepolicy vsizetype="Fixed" hsizetype="Preferred" >
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
           <property name="maximum" >
            <double>1000000.000000000000000</double>
           </property>
@@ -445,6 +500,12 @@
         </item>
         <item>
          <widget class="QDoubleSpinBox" name="offsetx" >
+          <property name="sizePolicy" >
+           <sizepolicy vsizetype="Fixed" hsizetype="Preferred" >
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
           <property name="suffix" >
            <string> sp</string>
           </property>
@@ -461,6 +522,12 @@
         </item>
         <item>
          <widget class="QDoubleSpinBox" name="offsety" >
+          <property name="sizePolicy" >
+           <sizepolicy vsizetype="Fixed" hsizetype="Preferred" >
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
           <property name="suffix" >
            <string> sp</string>
           </property>
@@ -512,6 +579,12 @@
         </item>
         <item>
          <widget class="QDoubleSpinBox" name="bboxx" >
+          <property name="sizePolicy" >
+           <sizepolicy vsizetype="Fixed" hsizetype="Preferred" >
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
           <property name="readOnly" >
            <bool>true</bool>
           </property>
@@ -525,6 +598,12 @@
         </item>
         <item>
          <widget class="QDoubleSpinBox" name="bboxy" >
+          <property name="sizePolicy" >
+           <sizepolicy vsizetype="Fixed" hsizetype="Preferred" >
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
           <property name="readOnly" >
            <bool>true</bool>
           </property>
@@ -538,6 +617,12 @@
         </item>
         <item>
          <widget class="QDoubleSpinBox" name="bboxw" >
+          <property name="sizePolicy" >
+           <sizepolicy vsizetype="Fixed" hsizetype="Preferred" >
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
           <property name="readOnly" >
            <bool>true</bool>
           </property>

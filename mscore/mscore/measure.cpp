@@ -124,7 +124,6 @@ Measure::Measure(Score* s)
       _no          = 0;
       _irregular   = false;
       _endRepeat   = 0;
-      _ending      = 0;
       _repeatFlags = 0;
       _noOffset    = 0;
       _noText      = new Text(score());
@@ -865,22 +864,6 @@ void Measure::add(Element* el)
                   _sel.push_back(el);
                   break;
 
-            case VOLTA:
-                  switch(el->subtype()) {
-                        case PRIMA_VOLTA:
-                              _ending = 1; // value changed by DK. 28.08.07
-                              break;
-                        case SECONDA_VOLTA:
-                        case SECONDA_VOLTA2:
-                              _ending = 2; // value changed by DK. 28.08.07
-                              break;
-                        case TERZA_VOLTA:
-                              _ending = 3; // value changed by DK. 28.08.07
-                              break;
-                        };
-                  _sel.append(el);
-                  break;
-
             case REPEAT:
                   _repeatFlags |= el->subtype();
                   // fall through
@@ -940,13 +923,6 @@ void Measure::remove(Element* el)
                               _lineBreak = false;
                               break;
                         }
-                  if (!_sel.remove(el))
-                        printf("Measure(%p)::remove(%s,%p) not found\n",
-                           this, el->name(), el);
-                  break;
-
-            case VOLTA:
-                  _ending = 0;
                   if (!_sel.remove(el))
                         printf("Measure(%p)::remove(%s,%p) not found\n",
                            this, el->name(), el);
@@ -2092,8 +2068,6 @@ void Measure::write(Xml& xml, int no, int staff) const
                   xml.tagE("startRepeat");
             if (_repeatFlags & RepeatEnd)
                   xml.tag("endRepeat", _endRepeat);
-            if (_ending)
-                  xml.tag("ending", _ending-1); //changed by DK. 28.08.07
             if (_irregular)
                   xml.tagE("irregular");
             if (_userStretch != 1.0)
@@ -2141,7 +2115,6 @@ void Measure::write(Xml& xml) const
             xml.tagE("startRepeat");
       if (_repeatFlags & RepeatEnd)
             xml.tag("endRepeat", _endRepeat);
-      xml.tag("ending", _ending-1); //changed by DK. 28.08.07
       if (_irregular)
             xml.tagE("irregular");
       xml.tag("stretch", _userStretch);
@@ -2370,8 +2343,6 @@ void Measure::read(QDomElement e, int idx)
                   _endRepeat = val.toInt();
                   _repeatFlags |= RepeatEnd;
                   }
-            else if (tag == "ending")
-                  _ending = val.toInt()+1; //changed by DK. 28.08.07
             else if (tag == "Image") {
                   // look ahead for image type
                   QString path;
@@ -2427,8 +2398,6 @@ void Measure::read(QDomElement e)
                   _endRepeat = val.toInt();
                   _repeatFlags |= RepeatEnd;
                   }
-            else if (tag == "ending")
-                  _ending = val.toInt()+1; // changed by DK. 28.08.07
             else if (tag == "irregular")
                   _irregular = true;
             else if (tag == "stretch")

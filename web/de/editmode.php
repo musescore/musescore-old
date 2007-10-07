@@ -35,13 +35,13 @@ der Maus oder mit Tastaturkommandos verschoben werden können.
 Verfügbare Tastaturkommandos:<br>
 <br>
 <table cellpadding="0" cellspacing="0">
-  <tr><td>&lt;<b>Linls</b>&gt;</td>
+  <tr><td>&lt;<b>Links</b>&gt;</td>
       <td>&nbsp;&nbsp</td>
       <td>verschiebt Anfasser ein Spatium nach links</td>
     </tr>
   <tr><td>&lt;<b>Rechts</b>&gt;</td>
       <td>&nbsp;&nbsp</td>
-      <td>vrschiebt Anfasser ein Spatium nach rechts</td>
+      <td>verschiebt Anfasser ein Spatium nach rechts</td>
     </tr>
   <tr><td>&lt;<b>Hoch</b>&gt;</td>
       <td>&nbsp;&nbsp</td>
@@ -51,19 +51,19 @@ Verfügbare Tastaturkommandos:<br>
       <td>&nbsp;&nbsp</td>
       <td>verschiebt Anfasser ein Spatium nach unten</td>
     </tr>
-  <tr><td>&lt;<b>Ctrl+Links</b>&gt;</td>
+  <tr><td>&lt;<b>Strg+Links</b>&gt;</td>
       <td>&nbsp;&nbsp</td>
       <td>verschiebt Anfasser 0,1 * Spatium nach links</td>
     </tr>
-  <tr><td>&lt;<b>Ctrl+Rechts</b>&gt;</td>
+  <tr><td>&lt;<b>Strg+Rechts</b>&gt;</td>
       <td>&nbsp;&nbsp</td>
       <td>verschiebt Anfasser 0,1 * Spatium nach rechts</td>
     </tr>
-  <tr><td>&lt;<b>Ctrl+Hoch</b>&gt;</td>
+  <tr><td>&lt;<b>Strg+Hoch</b>&gt;</td>
       <td>&nbsp;&nbsp</td>
       <td>verschiebt Anfasser 0,1 * Spatium nach oben</td>
     </tr>
-  <tr><td>&lt;<b>Ctrl+Tief</b>&gt;</td>
+  <tr><td>&lt;<b>Strg+Tief</b>&gt;</td>
       <td>&nbsp;&nbsp</td>
       <td>verschiebt Anfasser 0,1 * Spatium nach unten</td>
     </tr>

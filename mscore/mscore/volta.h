@@ -54,6 +54,8 @@ enum {
       };
 
 class Volta : public SLine {
+      QList<int> _endings;
+
    public:
       Volta(Score* s) : SLine(s) {}
       virtual Volta* clone() const { return new Volta(*this); }
@@ -63,6 +65,8 @@ class Volta : public SLine {
       virtual void read(QDomElement);
       virtual LineSegment* createLineSegment();
       virtual QPointF tick2pos(int tick, System** system);
+      QList<int> endings() const { return _endings; }
+      virtual void setSubtype(int val);
       };
 
 #endif

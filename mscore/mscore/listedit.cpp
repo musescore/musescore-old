@@ -535,7 +535,6 @@ void MeasureView::setElement(Element* e)
       mb.pageBreak->setChecked(m->pageBreak());
       mb.irregular->setChecked(m->irregular());
       mb.endRepeat->setValue(m->endRepeat());
-      mb.ending->setValue(m->ending());
       mb.repeatFlags->setText(QString("0x%1").arg(m->repeatFlags(), 6, 16, QChar('0')));
       mb.sel->clear();
       foreach(const Element* e, *m->el()) {
