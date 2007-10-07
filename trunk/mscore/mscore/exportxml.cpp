@@ -1654,6 +1654,19 @@ bool ExportMusicXml::write(const QString& name)
       const QList<Part*>* il = score->parts();
       for (int idx = 0; idx < il->size(); ++idx) {
             Part* part = il->at(idx);
+/*
+            printf("part %d nstaves=%d\n", idx+1, part->nstaves());
+            for (int i = 0; i < part->nstaves(); i++) {
+                  Staff* st = part->staff(i);
+                  if (st) {
+                        printf(" staff %d brLevels=%d\n", i+1, st->bracketLevels());
+                        for (int j = 0; j < st->bracketLevels(); j++) {
+                              if (st->bracket(j) >= 0)
+                                    printf("  br=%d brSpan=%d\n", st->bracket(j), st->bracketSpan(j));
+                              }
+                        }
+                  }
+*/
             xml.stag(QString("score-part id=\"P%1\"").arg(idx+1));
             xml.tag("part-name", part->longName().toPlainText());
 
