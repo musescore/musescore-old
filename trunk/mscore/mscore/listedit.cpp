@@ -307,8 +307,12 @@ void PageListEditor::updateList()
                                                       }
                                                 foreach(Text* f, note->fingering())
                                                       new ElementItem(ni, f);
-                                                if (note->tieFor())
-                                                      new ElementItem(ni, note->tieFor());
+                                                if (note->tieFor()) {
+                                                      Tie* tie = note->tieFor();
+                                                      ElementItem* ti = new ElementItem(ni, tie);
+                                                      foreach(Element* el1, *tie->elements())
+                                                            new ElementItem(ti, el1);
+                                                      }
                                                 }
                                           }
                                     }
