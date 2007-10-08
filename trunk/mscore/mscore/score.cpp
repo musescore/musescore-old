@@ -54,6 +54,9 @@
 #include "pitchspelling.h"
 #include "line.h"
 #include "volta.h"
+#include "event.h"
+#include "repeat2.h"
+#include "ottava.h"
 
 Score* gscore;                 ///< system score, used for palettes etc.
 
@@ -1409,4 +1412,131 @@ bool Score::isVolta(int tick, int repeat) const
             }
       return false;
       }
+
+//---------------------------------------------------------
+//   collectMeasureEvents
+//---------------------------------------------------------
+
+void Score::collectMeasureEvents(QMap<int, Event>* events, Measure* m, int staffIdx, int tickOffset)
+      {
+      Part* prt       = part(staffIdx);
+      int pitchOffset = prt->pitchOffset();
+      int channel     = prt->midiChannel();
+
+      for (int voice = 0; voice < VOICES; ++voice) {
+            int track = staffIdx * VOICES + voice;
+            for (Segment* seg = m->first(); seg; seg = seg->next()) {
+                  Element* el = seg->element(track);
+                  if (!el || el->type() != CHORD)
+                        continue;
+                  Chord* chord = (Chord*)el;
+                  NoteList* nl = chord->noteList();
+                  int gateTime = 70;  // 100 - legato (100%)
+
+                  int tick        = chord->tick();
+                  int ottavaShift = 0;
+                  foreach(Element* e, *m->score()->gel()) {
+                        if (e->type() == OTTAVA) {
+                              Ottava* ottava = (Ottava*)e;
+                              int tick1 = ottava->tick();
+                              int tick2 = ottava->tick2();
+                              if (tick >= tick1 && tick < tick2) {
+                                    ottavaShift = ottava->pitchShift();
+                                    }
+                              }
+                        else if (e->type() == SLUR) {
+                              Slur* slur = (Slur*)e;
+                              int tick1 = slur->tick();
+                              int tick2 = slur->tick2();
+                              if (tick >= tick1 && tick < tick2 && slur->track() == track) {
+                                    gateTime = 90;
+                                    }
+
+                              }
+                        }
+                  foreach(NoteAttribute* a, *chord->getAttributes()) {
+                        switch(a->subtype()) {
+                              case TenutoSym:
+                                    gateTime = 100;
+                                    break;
+                              case StaccatoSym:
+                                    gateTime = 40;
+                                    break;
+                              default:
+                                    break;
+                              }
+                        }
+
+                  for (iNote in = nl->begin(); in != nl->end(); ++in) {
+                        Note* note = in->second;
+                        if (note->tieBack())
+                              continue;
+                        unsigned len = 0;
+                        while (note->tieFor()) {
+                              if (note->tieFor()->endNote() == 0)
+                                    break;
+                              len += note->chord()->tickLen();
+                              note = note->tieFor()->endNote();
+                              }
+                        len += (note->chord()->tickLen() * gateTime / 100);
+
+                        Event ev;
+                        ev.type = ME_NOTEON;
+                        ev.val1 = note->pitch() + pitchOffset + ottavaShift;
+                        if (ev.val1 > 127)
+                              ev.val1 = 127;
+                        ev.val2       = 60;
+                        ev.note       = note;
+                        ev.channel    = channel;
+                        events->insertMulti(tick + rtickOffSet + tickOffset, ev);
+
+                        ev.val2 = 0;
+                        events->insertMulti(tick + rtickOffSet + len + tickOffset, ev);
+                        }
+                  }
+            }
+      }
+
+//---------------------------------------------------------
+//   toEList
+//---------------------------------------------------------
+
+void Score::toEList(QMap<int, Event>* events, int tickOffset)
+      {
+      int staffIdx = 0;
+
+      foreach(Part* part, _parts) {
+            for (int i = 0; i < part->staves()->size(); ++i) {
+                  // create stack for repeats and jumps
+                  RepeatStack* rs = new RepeatStack();
+
+                  for (Measure* m = mainLayout()->first(); m;) {
+                        // push each measure for checking of any of repeat type or jumps,
+                        // returns the measure to processed with
+
+                        m = rs->push(m);
+
+                        collectMeasureEvents(events, m, staffIdx, tickOffset);
+
+                        // Don't forget to save measure, because pop may change it,
+                        // returned m may differ from the original, new start measure
+                        // of "repeat", 0 means nothing to repeat continue with next measure
+                        // functions push and pop are in repeat2.h/cpp file
+
+                        Measure* ms = m;
+                        m = rs->pop(m);
+                        if (m && m->next() != 0)
+                              continue;
+                        else if (m == 0)
+                              m = ms;
+                        m = m->next();
+                        }
+                  ++staffIdx;
+                  // delete repeat Stackelemente
+                  if (rs)
+                        rs->delStackElement(rs);
+                  }
+            }
+      }
+
 

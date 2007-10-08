@@ -48,23 +48,6 @@
 #include "part.h"
 #include "ottava.h"
 
-enum {
-      ME_NOTEOFF    = 0x80,
-      ME_NOTEON     = 0x90,
-      ME_POLYAFTER  = 0xa0,
-      ME_CONTROLLER = 0xb0,
-      ME_PROGRAM    = 0xc0,
-      ME_AFTERTOUCH = 0xd0,
-      ME_PITCHBEND  = 0xe0,
-      ME_SYSEX      = 0xf0,
-      ME_META       = 0xff,
-      ME_SONGPOS    = 0xf2,
-      ME_CLOCK      = 0xf8,
-      ME_START      = 0xfa,
-      ME_CONTINUE   = 0xfb,
-      ME_STOP       = 0xfc,
-      };
-
 Seq* seq;
 
 //---------------------------------------------------------
@@ -84,7 +67,7 @@ Seq::Seq()
       synti    = new ISynth();
       audio    = 0;
       _volume  = 1.0;
-      playPos  = events.begin();
+      playPos  = events.constBegin();
 
       heartBeatTimer = new QTimer(this);
       connect(heartBeatTimer, SIGNAL(timeout()), this, SLOT(heartBeat()));
@@ -383,18 +366,20 @@ void Seq::guiStop()
 
       // code from heart beat:
       Note* note = 0;
-      for (ciEvent i = guiPos; i != playPos; ++i) {
-            if (i->second.type == ME_NOTEON) {
-                  i->second.note->setSelected(i->second.val2 != 0);
-                  cs->addRefresh(i->second.note->abbox());
-                  if (i->second.val2)
-                        note = i->second.note;
+      for (QMap<int, Event>::const_iterator i = guiPos; i != playPos; ++i) {
+            const Event& e = i.value();
+            if (e.type == ME_NOTEON) {
+                  e.note->setSelected(e.val2 != 0);
+                  cs->addRefresh(e.note->abbox());
+                  if (e.val2)
+                        note = e.note;
                   }
             }
       if (note == 0) {
-            for (ciEvent i = playPos; i != events.end(); ++i) {
-                  if (i->second.type == ME_NOTEON) {
-                        note = i->second.note;
+            for (QMap<int, Event>::const_iterator i = playPos; i != events.constEnd(); ++i) {
+                  const Event& e = i.value();
+                  if (e.type == ME_NOTEON) {
+                        note = e.note;
                         break;
                         }
                   }
@@ -554,15 +539,15 @@ void Seq::process(unsigned n, float* lbuffer, float* rbuffer, int stride)
             // collect events for one segment
             //
             int endFrame = playFrame + frames;
-            for (; playPos != events.end(); ++playPos) {
-                  int f = tick2frame(playPos->first);
+            for (; playPos != events.constEnd(); ++playPos) {
+                  int f = tick2frame(playPos.key());
                   if (f >= endFrame)
                         break;
 
                   int n = f - playFrame;
                   if (n < 0 || n > int(frames)) {
                         printf("Seq: at %d bad n %d(>%d) = %d - %d\n",
-                           playPos->first, n, frames, f, playFrame);
+                           playPos.key(), n, frames, f, playFrame);
                         break;
                         }
                   synti->process(n, l, r, stride);
@@ -570,13 +555,13 @@ void Seq::process(unsigned n, float* lbuffer, float* rbuffer, int stride)
                   r         += n * stride;
                   playFrame += n;
                   frames    -= n;
-                  playEvent(playPos->second);
+                  playEvent(playPos.value());
                   }
             if (frames) {
                   synti->process(frames, l, r, stride);
                   playFrame += frames;
                   }
-            if (playPos == events.end()) {
+            if (playPos == events.constEnd()) {
                   audio->stopTransport();
                   }
             }
@@ -593,99 +578,12 @@ void Seq::process(unsigned n, float* lbuffer, float* rbuffer, int stride)
       }
 
 //---------------------------------------------------------
-//   collectMeasureEvents
-//---------------------------------------------------------
-
-void Seq::collectMeasureEvents(Measure* m, int staffIdx)
-      {
-      Part* part      = cs->part(staffIdx);
-      int pitchOffset = part->pitchOffset();
-      int channel     = part->midiChannel();
-
-      for (int voice = 0; voice < VOICES; ++voice) {
-            int track = staffIdx * VOICES + voice;
-            for (Segment* seg = m->first(); seg; seg = seg->next()) {
-                  Element* el = seg->element(track);
-                  if (!el || el->type() != CHORD)
-                        continue;
-                  Chord* chord = (Chord*)el;
-                  NoteList* nl = chord->noteList();
-                  int gateTime = 70;  // 100 - legato (100%)
-
-                  int tick        = chord->tick();
-                  int ottavaShift = 0;
-                  foreach(Element* e, *m->score()->gel()) {
-                        if (e->type() == OTTAVA) {
-                              Ottava* ottava = (Ottava*)e;
-                              int tick1 = ottava->tick();
-                              int tick2 = ottava->tick2();
-                              if (tick >= tick1 && tick < tick2) {
-                                    ottavaShift = ottava->pitchShift();
-                                    }
-                              }
-                        else if (e->type() == SLUR) {
-                              Slur* slur = (Slur*)e;
-                              int tick1 = slur->tick();
-                              int tick2 = slur->tick2();
-                              if (tick >= tick1 && tick < tick2 && slur->track() == track) {
-                                    gateTime = 90;
-                                    }
-
-                              }
-                        }
-                  foreach(NoteAttribute* a, *chord->getAttributes()) {
-                        switch(a->subtype()) {
-                              case TenutoSym:
-                                    gateTime = 100;
-                                    break;
-                              case StaccatoSym:
-                                    gateTime = 40;
-                                    break;
-                              default:
-                                    break;
-                              }
-                        }
-
-                  for (iNote in = nl->begin(); in != nl->end(); ++in) {
-                        Note* note = in->second;
-                        if (note->tieBack())
-                              continue;
-                        unsigned len = 0;
-                        while (note->tieFor()) {
-                              if (note->tieFor()->endNote() == 0)
-                                    break;
-                              len += note->chord()->tickLen();
-                              note = note->tieFor()->endNote();
-                              }
-                        len += (note->chord()->tickLen() * gateTime / 100);
-
-                        Event ev;
-                        ev.type = ME_NOTEON;
-                        ev.val1 = note->pitch() + pitchOffset + ottavaShift;
-                        if (ev.val1 > 127)
-                              ev.val1 = 127;
-                        ev.val2       = 60;
-                        ev.note       = note;
-                        ev.channel    = channel;
-                        // added rtickOffSet , by DK. 23.08.07
-                        events.insert(std::pair<const unsigned, Event> (tick+rtickOffSet, ev));
-
-                        ev.val2 = 0;
-                        events.insert(std::pair<const unsigned, Event> (tick+rtickOffSet+len, ev));
-                        }
-                  }
-            }
-      }
-
-//---------------------------------------------------------
 //   collectEvents
 //---------------------------------------------------------
 
 void Seq::collectEvents()
       {
       events.clear();
-
-      int staffIdx = 0;
 
       foreach(Part* part, *cs->parts()) {
             int channel = part->midiChannel();
@@ -694,50 +592,18 @@ void Seq::collectEvents()
             setController(channel, CTRL_REVERB_SEND, part->reverb());
             setController(channel, CTRL_CHORUS_SEND, part->chorus());
             setController(channel, CTRL_PAN, part->pan());
-
-
-            for (int i = 0; i < part->staves()->size(); ++i) {
-                  // create stack for repeats and jumps, added by DK. 23.08.07
-                  RepeatStack* rs = new RepeatStack();
-
-                  // Loop changed, "m = m->next()" moved to the end of loop,
-                  // by DK. 23.08.07
-                  for (Measure* m = cs->mainLayout()->first(); m;) {
-                        // push each measure for checking of any of repeat type or jumps,
-                        // returns the measure to processed with
-
-                        m = rs->push(m);
-
-                        collectMeasureEvents(m, staffIdx);
-
-                        // Don't forget to save measure, because pop may change it,
-                        // returned m may differ from the original, new start measure
-                        // of "repeat", 0 means nothing to repeat continue with next measure
-                        // functions push and pop are in repeat2.h/cpp files, by DK. 23.08.07
-                        Measure* ms = m;
-                        m = rs->pop(m);
-                        if (m > 0 && m->next() != 0)
-                              continue;
-                        else if (m == 0)
-                              m = ms;
-                        m = m->next();
-
-                        }
-                  ++staffIdx;
-                  // delete repeat Stackelemente, added by DK. 23.08.07
-                  if (rs)
-                        rs->delStackElement(rs);
-                  }
             }
+
+      cs->toEList(&events, 0);
 
       PlayPanel* pp = mscore->getPlayPanel();
       if (pp) {
             if (events.empty())
                   pp->setEndpos(0);
             else {
-                  iEvent e = events.end();
+                  QMap<int,Event>::const_iterator e = events.constEnd();
                   --e;
-                  endTick = e->first;
+                  endTick = e.key();
                   pp->setEndpos(endTick);
                   }
             }
@@ -754,22 +620,22 @@ void Seq::heartBeat()
             return;
       cs->start();
       Note* note = 0;
-      if (guiPos == events.end()) {
+      if (guiPos == events.constEnd()) {
             // special case seek:
             guiPos = playPos;
-            if (guiPos->second.type == ME_NOTEON) {
-                  note = guiPos->second.note;
+            if (guiPos.value().type == ME_NOTEON) {
+                  note = guiPos.value().note;
                   foreach(Viewer* v, cs->getViewer())
                         v->moveCursor(note->chord()->segment());
                   }
             }
       else {
-            for (ciEvent i = guiPos; i != playPos; ++i) {
-                  if (i->second.type == ME_NOTEON) {
-                        i->second.note->setSelected(i->second.val2 != 0);
-                        cs->addRefresh(i->second.note->abbox());
-                        if (i->second.val2)
-                              note = i->second.note;
+            for (QMap<int, Event>::const_iterator i = guiPos; i != playPos; ++i) {
+                  if (i.value().type == ME_NOTEON) {
+                        i.value().note->setSelected(i.value().val2 != 0);
+                        cs->addRefresh(i.value().note->abbox());
+                        if (i.value().val2)
+                              note = i.value().note;
                         }
                   }
             }
@@ -778,7 +644,7 @@ void Seq::heartBeat()
                   v->moveCursor(note->chord()->segment());
             PlayPanel* pp = mscore->getPlayPanel();
             if (pp)
-                  pp->heartBeat(note->chord()->tick(), guiPos->first);
+                  pp->heartBeat(note->chord()->tick(), guiPos.key());
             }
       cs->setLayoutAll(false);      // DEBUG
       cs->end();
@@ -805,7 +671,7 @@ void Seq::setRelTempo(int relTempo)
       msg.id    = SEQ_TEMPO_CHANGE;
       guiToSeq(msg);
 
-      double tempo = cs->tempomap->tempo(playPos->first) * relTempo * 0.01;
+      double tempo = cs->tempomap->tempo(playPos.key()) * relTempo * 0.01;
 
       PlayPanel* pp = mscore->getPlayPanel();
       if (pp) {
@@ -827,7 +693,7 @@ void Seq::setPos(int tick)
             }
       _activeNotes.clear();
       playFrame = tick2frame(tick);
-      playPos   = events.lower_bound(tick);
+      playPos   = events.lowerBound(tick);
       guiPos    = events.end();     // special case so signal heartBeat a seek
       }
 
@@ -906,11 +772,11 @@ void Seq::setController(int channel, int ctrl, int data)
 
 void Seq::nextMeasure()
       {
-      ciEvent i = playPos;
+      QMap<int,Event>::const_iterator i = playPos;
       Note* note = 0;
       for (;;) {
-            if (i->second.type == ME_NOTEON) {
-                  note = i->second.note;
+            if (i.value().type == ME_NOTEON) {
+                  note = i.value().note;
                   break;
                   }
             if (i == events.begin())
@@ -923,7 +789,7 @@ void Seq::nextMeasure()
       m = m->next();
       if (m) {
             int rtick = m->tick() - note->chord()->tick();
-            seek(playPos->first + rtick);
+            seek(playPos.key() + rtick);
             }
       }
 
@@ -933,10 +799,10 @@ void Seq::nextMeasure()
 
 void Seq::nextChord()
       {
-      int tick = playPos->first;
-      for (ciEvent i = playPos; i != events.end(); ++i) {
-            if (i->second.type == ME_NOTEON && i->first > tick && i->second.val2) {
-                  seek(i->first);
+      int tick = playPos.key();
+      for (QMap<int,Event>::const_iterator i = playPos; i != events.constEnd(); ++i) {
+            if (i.value().type == ME_NOTEON && i.key() > tick && i.value().val2) {
+                  seek(i.key());
                   break;
                   }
             }
@@ -948,11 +814,11 @@ void Seq::nextChord()
 
 void Seq::prevMeasure()
       {
-      ciEvent i = playPos;
+      QMap<int,Event>::const_iterator i = playPos;
       Note* note = 0;
       for (;;) {
-            if (i->second.type == ME_NOTEON) {
-                  note = i->second.note;
+            if (i.value().type == ME_NOTEON) {
+                  note = i.value().note;
                   break;
                   }
             if (i == events.begin())
@@ -965,7 +831,7 @@ void Seq::prevMeasure()
       m = m->prev();
       if (m) {
             int rtick = note->chord()->tick() - m->tick();
-            seek(playPos->first - rtick);
+            seek(playPos.key() - rtick);
             }
       else
             seek(0);
@@ -977,14 +843,14 @@ void Seq::prevMeasure()
 
 void Seq::prevChord()
       {
-      int tick  = playPos->first;
-      ciEvent i = playPos;
+      int tick  = playPos.key();
+      QMap<int,Event>::const_iterator i = playPos;
       for (;;) {
-            if (i->second.type == ME_NOTEON && i->first < tick && i->second.val2) {
-                  seek(i->first);
+            if (i.value().type == ME_NOTEON && i.key() < tick && i.value().val2) {
+                  seek(i.key());
                   break;
                   }
-            if (i == events.begin())
+            if (i == events.constBegin())
                   break;
             --i;
             }

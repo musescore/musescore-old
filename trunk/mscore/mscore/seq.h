@@ -21,6 +21,8 @@
 #ifndef __SEQ_H__
 #define __SEQ_H__
 
+#include "event.h"
+
 class Synth;
 class Audio;
 class Note;
@@ -44,24 +46,6 @@ struct SeqMsg {
       };
 
 //---------------------------------------------------------
-//   Event
-//    sequencer event type (note on, note off)
-//---------------------------------------------------------
-
-struct Event {
-      int type;
-      int channel;
-      int val1;         // pitch
-      int val2;         // velocity
-      Note* note;       // used to mark the currently played notes
-      };
-
-typedef std::multimap<int, Event, std::less<int> > EList;
-typedef EList::iterator iEvent;
-typedef EList::const_iterator ciEvent;
-typedef std::pair <iEvent, iEvent> EventRange;
-
-//---------------------------------------------------------
 //   Seq
 //    sequencer
 //---------------------------------------------------------
@@ -81,10 +65,10 @@ class Seq : public QObject {
       Synth* synti;
       Audio* audio;
 
-      EList events;                       // playlist
+      QMap<int, Event> events;            // playlist
       QList<Event> _activeNotes;          // currently sounding notes
       int playFrame;
-      ciEvent playPos, guiPos;
+      QMap<int, Event>::const_iterator playPos, guiPos;
 
       int endTick;
 

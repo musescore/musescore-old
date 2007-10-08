@@ -30,6 +30,7 @@
 #include "undo.h"
 #include "input.h"
 #include "padstate.h"
+#include "event.h"
 
 class TextStyle;
 class Page;
@@ -155,6 +156,7 @@ class Score : public QObject {
       void pasteStaff(const QMimeData* ms);
       void move(const QString& cmd);
       Measure* appendMeasure();
+      void collectMeasureEvents(QMap<int, Event>*, Measure*, int staffIdx, int tickOffset);
 
    public:
       int curTick;      // used for read()/write() optimization
@@ -467,6 +469,7 @@ class Score : public QObject {
       QList<Element*>* gel();
       const QList<Element*>* gel() const;
       bool isVolta(int tick, int repeat) const;
+      void toEList(QMap<int, Event>* events, int tickOffset);
       };
 
 extern Score* gscore;
