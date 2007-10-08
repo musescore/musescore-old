@@ -1764,7 +1764,7 @@ void MusicXml::addWedge(int no, int startTick, qreal rx, qreal ry, int subType)
  Called when the wedge stop is read. Wedge stop tick was unknown until this time.
  */
 
-void MusicXml::genWedge(int no, int endTick, Measure* measure, int staff)
+void MusicXml::genWedge(int no, int endTick, Measure* /*measure*/, int staff)
       {
       Hairpin* hp = new Hairpin(score);
 
@@ -1773,7 +1773,7 @@ void MusicXml::genWedge(int no, int endTick, Measure* measure, int staff)
       hp->setSubtype(wedgeList[no].subType);
       hp->setUserOff(QPointF(wedgeList[no].rx, wedgeList[no].ry));
       hp->setStaff(score->staff(staff));
-      measure->add(hp);
+      score->mainLayout()->add(hp);
 //      printf("gen wedge staff %d\n", staff);
       }
 
