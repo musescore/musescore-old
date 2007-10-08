@@ -279,9 +279,14 @@ void SlurSegment::write(Xml& xml, int no) const
                   break;
                   }
             }
+      if (!_userOff.isNull())
+            empty = false;
       if (empty)
             return;
+
       xml.stag(QString("SlurSegment no=\"%1\"").arg(no));
+      if (!_userOff.isNull())
+            xml.tag("offset", _userOff);
       if (!(ups[0].off.isNull()))
             xml.tag("o1", ups[0].off);
       if (!(ups[1].off.isNull()))
@@ -309,7 +314,7 @@ void SlurSegment::read(QDomElement e)
                   ups[2].off = readPoint(e);
             else if (tag == "o4")
                   ups[3].off = readPoint(e);
-            else
+            else if (!Element::readProperties(e))
                   domError(e);
             }
       }
@@ -937,7 +942,7 @@ void Tie::layout(ScoreLayout* layout)
 
       qreal bow = up ? -_spatium : _spatium;
 
-      for (int i = 0; i < nsegs; ++i, ++is) {
+      for (unsigned int i = 0; i < nsegs; ++i, ++is) {
             System* system  = *is;
             SlurSegment* segment = segments[i];
             segment->setSystem(system);

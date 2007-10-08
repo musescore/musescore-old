@@ -1,3 +1,5 @@
+8.10.7 (ws)
+      - use staccato, tenuto and slurs in playback
 7.10.7 (ws)
       - don't build manuals on default; fix for newer texexec
 6.10.7 (ws)
