@@ -2461,8 +2461,12 @@ void Measure::collectElements(QList<Element*>& el)
                               for (ciNote in = nl->begin(); in != nl->end(); ++in) {
                                     Note* note = in->second;
                                     el.append(note);
-                                    if (note->tieFor())
-                                          el.append(note->tieFor());
+                                    if (note->tieFor()) {
+                                          Tie* tie = note->tieFor();
+                                          el.append(tie);
+                                          foreach(SlurSegment* seg, *tie->elements())
+                                                el.append(seg);
+                                          }
                                     foreach(Text* f, note->fingering())
                                           el.append(f);
                                     if (note->accidental())

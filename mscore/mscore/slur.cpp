@@ -881,6 +881,7 @@ void Tie::layout(ScoreLayout* layout)
             return;
 
       double _spatium = layout->spatium();
+
       Chord* c1   = _startNote->chord();
       Measure* m1 = c1->measure();
       System* s1  = m1->system();
@@ -904,12 +905,6 @@ void Tie::layout(ScoreLayout* layout)
       QPointF p2 = _endNote->canvasPos()   + off2;
 
       QList<System*>* systems = layout->systems();
-      iSystem is = systems->begin();
-      while (is != systems->end()) {
-            if (*is == s1)
-                  break;
-            ++is;
-            }
       setPos(0, 0);
 
       //---------------------------------------------------------
@@ -917,10 +912,10 @@ void Tie::layout(ScoreLayout* layout)
       //    user offsets (drags) are retained
       //---------------------------------------------------------
 
-      int sysIdx1             = systems->indexOf(s1);
-      int sysIdx2             = systems->indexOf(s2, sysIdx1);
-      unsigned nsegs          = sysIdx2 - sysIdx1 + 1;
-      unsigned onsegs         = segments.size();
+      int sysIdx1      = systems->indexOf(s1);
+      int sysIdx2      = systems->indexOf(s2, sysIdx1);
+      unsigned nsegs   = sysIdx2 - sysIdx1 + 1;
+      unsigned onsegs  = segments.size();
 
       if (nsegs != onsegs) {
             if (nsegs > onsegs) {
@@ -942,11 +937,13 @@ void Tie::layout(ScoreLayout* layout)
 
       qreal bow = up ? -_spatium : _spatium;
 
-      for (unsigned int i = 0; i < nsegs; ++i, ++is) {
-            System* system  = *is;
+      p1 -= canvasPos();
+      p2 -= canvasPos();
+      for (unsigned int i = 0; i < nsegs; ++i) {
+            System* system       = (*systems)[sysIdx1++];
             SlurSegment* segment = segments[i];
             segment->setSystem(system);
-            QPointF sp(system->canvasPos());
+            QPointF sp(system->canvasPos() - canvasPos());
 
             // case 1: one segment
             if (s1 == s2) {
