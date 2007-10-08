@@ -1016,15 +1016,8 @@ void Score::deleteItem(Element* el)
                   break;
 
             case MEASURE:
-                  {
-                  Measure* m = (Measure*)el;
-                  foreach(Element* e, *m->el()) {
-                        if (e->type() == SLUR)
-                              undoRemoveElement(e);
-                        }
-                  undoRemoveElement(m);
-                  cmdRemoveTime(m->tick(), m->tickLen());
-                  }
+                  undoRemoveElement(el);
+                  cmdRemoveTime(el->tick(), el->tickLen());
                   break;
 
             case ACCIDENTAL:
@@ -1042,23 +1035,37 @@ void Score::deleteItem(Element* el)
 
 void Score::cmdRemoveTime(int tick, int len)
       {
+      int tick2 = tick + len;
+      foreach(Element* el, _layout->_gel) {
+            if (el->type() == SLUR) {
+                  Slur* s = (Slur*) el;
+                  if (s->tick() >= tick && s->tick2() < tick2)
+                        undoRemoveElement(el);
+                  }
+            else if (el->isSLine()) {
+                  SLine* s = (SLine*) el;
+                  if (s->tick() >= tick && s->tick2() < tick2)
+                        undoRemoveElement(el);
+                  }
+            }
+
       for (ciSigEvent i = sigmap->begin(); i != sigmap->end(); ++i) {
-            if (i->first >= tick && (i->first < tick + len) && i->first != 0)
+            if (i->first >= tick && (i->first < tick2) && i->first != 0)
                   undoChangeSig(i->first, i->second, SigEvent());
             }
       for (ciTEvent i = tempomap->begin(); i != tempomap->end(); ++i) {
-            if (i->first >= tick && (i->first < tick + len))
+            if (i->first >= tick && (i->first < tick2))
                   undoChangeTempo(i->first, i->second, TEvent());
             }
       foreach(Staff* staff, _staves) {
             ClefList* cl = staff->clef();
             KeyList*  kl = staff->keymap();
             for (ciClefEvent i = cl->begin(); i != cl->end(); ++i) {
-                  if (i->first >= tick && (i->first < tick + len) && i->first != 0)
+                  if (i->first >= tick && (i->first < tick2) && i->first != 0)
                         undoChangeClef(staff, i->first, i->second, NO_CLEF);
                   }
             for (ciKeyEvent i = kl->begin(); i != kl->end(); ++i) {
-                  if (i->first >= tick && (i->first < tick + len) && i->first != 0)
+                  if (i->first >= tick && (i->first < tick2) && i->first != 0)
                         undoChangeKey(staff, i->first, i->second, NO_KEY);
                   }
             }

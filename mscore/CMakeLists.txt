@@ -73,11 +73,6 @@ if (NOT TEXEXEC_PATH)
       message("texexec from ConTeXt package not found. Documentation will not be build")
 endif (NOT TEXEXEC_PATH)
 
-
-##
-## find doxygen
-##    TODO
-
 ##
 ## alsa >= 0.9.0
 ##
@@ -114,14 +109,18 @@ endif (JACK_INCDIR)
 ## portaudio
 ##
 
-PKGCONFIG (portaudio-2.0 19 PORTAUDIO_INCDIR PORAUDIO_LIBDIR PORTAUDIO_LIB PORTAUDIO_CPP )
-if (PORTAUDIO_INCDIR)
+if (MINGW)
+      set ( USE_PORTAUDIO 1 )
+else (MINGW)
+   PKGCONFIG (portaudio-2.0 19 PORTAUDIO_INCDIR PORAUDIO_LIBDIR PORTAUDIO_LIB PORTAUDIO_CPP )
+   if (PORTAUDIO_INCDIR)
 	message("portaudio detected")
       set ( USE_PORTAUDIO 1 )
-else (PORTAUDIO_INCDIR)
+   else (PORTAUDIO_INCDIR)
       message("optional package portaudio-2.0 Version 19 not found (package portaudio19-dev)\n")
       set ( USE_PORTAUDIO 0 )
-endif (PORTAUDIO_INCDIR)
+   endif (PORTAUDIO_INCDIR)
+endif (MINGW)
 
 # produce config.h file
 #

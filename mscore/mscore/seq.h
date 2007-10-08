@@ -27,6 +27,7 @@ class Note;
 class QTimer;
 class Score;
 class Painter;
+class Measure;
 
 //---------------------------------------------------------
 //   SeqMsg
@@ -94,6 +95,8 @@ class Seq : public QObject {
       QList<Event> eventList;
 
       void collectEvents();
+      void collectMeasureEvents(Measure*, int staffIdx);
+
       void stopTransport();
       void startTransport();
       int frame2tick(int frame) const;

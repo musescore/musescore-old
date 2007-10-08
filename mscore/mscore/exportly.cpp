@@ -38,6 +38,7 @@
 #include "page.h"
 #include "text.h"
 #include "slur.h"
+#include "beam.h"
 
 //---------------------------------------------------------
 //   ExportLy
@@ -50,6 +51,7 @@ class ExportLy {
       int level;        // indent level
       int curTicks;
       bool slur;
+      Direction stemDirection;
 
       void indent();
       int getLen(int ticks, int* dots);
@@ -71,6 +73,7 @@ class ExportLy {
             level  = 0;
             curTicks = division;
             slur   = false;
+            stemDirection = AUTO;
             }
       bool write(const QString& name);
       };
@@ -194,11 +197,22 @@ QString ExportLy::tpc2name(int tpc)
 
 void ExportLy::writeChord(Chord* c)
       {
-      Direction d = c->stemDirection();
-      if (d == UP)
-            os << "\\stemUp ";
-      else if (d == DOWN)
-            os << "\\stemDown ";
+      //
+      // only the stem direction of the first chord in a
+      // beamed chord group is relevant
+      //
+      if (c->beam() == 0 || c->beam()->getElements().front() == c) {
+            Direction d = c->stemDirection();
+            if (d != stemDirection) {
+                  stemDirection = d;
+                  if (d == UP)
+                        os << "\\stemUp ";
+                  else if (d == DOWN)
+                        os << "\\stemDown ";
+                  else if (d == AUTO)
+                        os << "\\stemNeutral ";
+                  }
+            }
 
       NoteList* nl = c->noteList();
       if (nl->size() > 1)
