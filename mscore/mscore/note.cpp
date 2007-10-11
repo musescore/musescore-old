@@ -682,7 +682,7 @@ QRectF ShadowNote::bbox() const
 //   acceptDrop
 //---------------------------------------------------------
 
-bool Note::acceptDrop(Viewer* viewer, const QPointF&, int type, const QDomElement&) const
+bool Note::acceptDrop(Viewer* viewer, const QPointF&, int type, int) const
       {
       if (type == ATTRIBUTE || type == TEXT || type == ACCIDENTAL
          || type == BREATH || type == ARPEGGIO || type == NOTEHEAD
@@ -697,14 +697,12 @@ bool Note::acceptDrop(Viewer* viewer, const QPointF&, int type, const QDomElemen
 //   drop
 //---------------------------------------------------------
 
-Element* Note::drop(const QPointF&, const QPointF&, int t, const QDomElement& node)
+Element* Note::drop(const QPointF&, const QPointF&, Element* e)
       {
-      switch(t) {
+      switch(e->type()) {
             case ATTRIBUTE:
                   {
-                  NoteAttribute* atr = new NoteAttribute(score());
-                  atr->read(node);
-                  atr->setSelected(false);
+                  NoteAttribute* atr = (NoteAttribute*)e;
                   Chord* cr = chord();
                   NoteAttribute* oa = cr->hasAttribute(atr);
                   if (oa) {
@@ -724,8 +722,7 @@ Element* Note::drop(const QPointF&, const QPointF&, int t, const QDomElement& no
                   }
             case TEXT:
                   {
-                  Text* f = new Text(score());
-                  f->read(node);
+                  Text* f = (Text*)e;
                   //
                   // override palette settings for text:
                   //
@@ -740,8 +737,7 @@ Element* Note::drop(const QPointF&, const QPointF&, int t, const QDomElement& no
                   }
             case ACCIDENTAL:
                   {
-                  Accidental* a = new Accidental(0);
-                  a->read(node);
+                  Accidental* a = (Accidental*)e;
                   int subtype = a->subtype();
                   delete a;
                   score()->addAccidental(this, subtype);
@@ -749,8 +745,7 @@ Element* Note::drop(const QPointF&, const QPointF&, int t, const QDomElement& no
                   break;
             case BREATH:
                   {
-                  Breath* b = new Breath(score());
-                  b->read(node);
+                  Breath* b = (Breath*)e;
                   int tick   = chord()->tick();
                   b->setStaff(staff());
                   Measure* m = chord()->segment()->measure();
@@ -768,8 +763,7 @@ Element* Note::drop(const QPointF&, const QPointF&, int t, const QDomElement& no
                   break;
             case ARPEGGIO:
                   {
-                  Arpeggio* a = new Arpeggio(score());
-                  a->read(node);
+                  Arpeggio* a = (Arpeggio*)e;
                   a->setParent(chord());
                   a->setHeight(_spatium * 5);   //DEBUG
                   score()->undoAddElement(a);
@@ -777,8 +771,7 @@ Element* Note::drop(const QPointF&, const QPointF&, int t, const QDomElement& no
                   break;
             case NOTEHEAD:
                   {
-                  Symbol* s = new Symbol(score());
-                  s->read(node);
+                  Symbol* s = (Symbol*)e;
                   switch(s->sym()) {
                         case quartheadSym:    _headGroup = 0; break;
                         case crossedheadSym:  _headGroup = 1; break;
@@ -791,14 +784,14 @@ Element* Note::drop(const QPointF&, const QPointF&, int t, const QDomElement& no
                   break;
             case TREMOLO:
                   {
-                  Tremolo* tremolo = new Tremolo(score());
-                  tremolo->read(node);
+                  Tremolo* tremolo = (Tremolo*)e;
                   tremolo->setParent(chord());
                   score()->undoAddElement(tremolo);
                   }
                   break;
 
             default:
+                  delete e;
                   break;
             }
       return 0;

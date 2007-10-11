@@ -176,11 +176,9 @@ void Score::cmdAdd(Element* e)
 //   cmdAdd
 //---------------------------------------------------------
 
-void Score::cmdAdd(Element* e, const QPointF& pos, const QPointF& dragOffset)
+void Score::cmdAdd1(Element* e, const QPointF& pos, const QPointF& dragOffset)
       {
       e->setSelected(false);
-      startCmd();
-
       Staff* staff = 0;
       int pitch, tick;
       QPointF offset;
@@ -189,7 +187,6 @@ void Score::cmdAdd(Element* e, const QPointF& pos, const QPointF& dragOffset)
       if (measure == 0) {
             printf("cmdAdd: cannot put object here\n");
             delete e;
-            endCmd();
             return;
             }
       e->setStaff(staff);
@@ -220,45 +217,15 @@ void Score::cmdAdd(Element* e, const QPointF& pos, const QPointF& dragOffset)
                   }
                   break;
             case PEDAL:
-                  {
-                  Pedal* pedal = (Pedal*)e;
-                  pedal->setTick(tick);
-                  pedal->setTick2(tick2);
-                  pedal->layout(mainLayout());
-                  LineSegment* ls = pedal->lineSegments().front();
-                  QPointF uo(pos - ls->canvasPos() - dragOffset);
-                  ls->setUserOff(uo / _spatium);
-                  }
-                  break;
             case OTTAVA:
-                  {
-                  Ottava* ottava = (Ottava*)e;
-                  ottava->setTick(tick);
-                  ottava->setTick2(tick2);
-                  ottava->layout(mainLayout());
-                  LineSegment* ls = ottava->lineSegments().front();
-                  QPointF uo(pos - ls->canvasPos() - dragOffset);
-                  ls->setUserOff(uo / _spatium);
-                  }
-                  break;
             case TRILL:
-                  {
-                  Trill* trill = (Trill*)e;
-                  trill->setTick(tick);
-                  trill->setTick2(tick2);
-                  trill->layout(mainLayout());
-                  LineSegment* ls = trill->lineSegments().front();
-                  QPointF uo(pos - ls->canvasPos() - dragOffset);
-                  ls->setUserOff(uo / _spatium);
-                  }
-                  break;
             case HAIRPIN:
                   {
-                  Hairpin* hairpin = (Hairpin*)e;
-                  e->setTick(tick);
-                  hairpin->setTick2(tick2);
-                  hairpin->layout(mainLayout());
-                  LineSegment* ls = hairpin->lineSegments().front();
+                  SLine* line = (SLine*)e;
+                  line->setTick(tick);
+                  line->setTick2(tick2);
+                  line->layout(mainLayout());
+                  LineSegment* ls = line->lineSegments().front();
                   QPointF uo(pos - ls->canvasPos() - dragOffset);
                   ls->setUserOff(uo / _spatium);
                   }
@@ -281,7 +248,6 @@ void Score::cmdAdd(Element* e, const QPointF& pos, const QPointF& dragOffset)
             }
       cmdAdd(e);
       select(e, 0, 0);
-      endCmd();
       }
 
 //---------------------------------------------------------
@@ -1520,9 +1486,11 @@ void Score::cmd(const QString& cmd)
                               }
                         QDomElement e = doc.documentElement();
                         QPointF dragOffset;
-                        int type      = Element::readType(e, &dragOffset);
+                        int type    = Element::readType(e, &dragOffset);
+                        Element* el = Element::create(type, this);
+                        el->read(e);
                         addRefresh(sel->element()->abbox());   // layout() ?!
-                        sel->element()->drop(QPointF(), QPointF(), type, e);
+                        sel->element()->drop(QPointF(), QPointF(), el);
                         addRefresh(sel->element()->abbox());
                         }
                   else if (sel->state() == SEL_STAFF && ms && ms->hasFormat(mimeStaffListFormat))

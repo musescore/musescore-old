@@ -1620,8 +1620,7 @@ void Measure::insertStaff1(Staff* /*staff*/, int staffIdx)
  and key- and timesig (allow drop if left of first chord or rest).
 */
 
-bool Measure::acceptDrop(Viewer* viewer, const QPointF& p, int type,
-   const QDomElement&) const
+bool Measure::acceptDrop(Viewer* viewer, const QPointF& p, int type, int) const
       {
       // convert p from canvas to measure relative position and take x and y coordinates
       QPointF mrp = p - pos() - system()->pos() - system()->page()->pos();
@@ -1710,7 +1709,7 @@ bool Measure::acceptDrop(Viewer* viewer, const QPointF& p, int type,
  Handle a dropped element at position \a pos of given element \a type and \a subtype.
 */
 
-Element* Measure::drop(const QPointF& p, const QPointF& /*offset*/, int type, const QDomElement& e)
+Element* Measure::drop(const QPointF& p, const QPointF& /*offset*/, Element* e)
       {
       // determine staff
       System* s = system();
@@ -1722,21 +1721,20 @@ Element* Measure::drop(const QPointF& p, const QPointF& /*offset*/, int type, co
       // convert p from canvas to measure relative position and take x coordinate
       QPointF mrp = p - pos() - system()->pos() - system()->page()->pos();
 
-      switch(ElementType(type)) {
+      switch(e->type()) {
             case MEASURE_LIST:
                   printf("drop measureList or StaffList\n");
+                  delete e;
                   break;
 
             case STAFF_LIST:
-                  {
-                  score()->pasteStaff(e, this, idx);
-                  }
+//TODO                  score()->pasteStaff(e, this, idx);
+                  delete e;
                   break;
 
             case REPEAT:
                   {
-                  Repeat* repeat = new Repeat(score());
-                  repeat->read(e);
+                  Repeat* repeat = (Repeat*)e;
                   repeat->setParent(this);
                   repeat->setStaff(score()->staff(0));
                   score()->cmdAdd(repeat);
@@ -1744,8 +1742,7 @@ Element* Measure::drop(const QPointF& p, const QPointF& /*offset*/, int type, co
                   break;
             case BRACKET:
                   {
-                  Bracket* bracket = new Bracket(score());
-                  bracket->read(e);
+                  Bracket* bracket = (Bracket*)e;
                   int subtype = bracket->subtype();
                   delete bracket;
                   staff->addBracket(BracketItem(subtype, 1));
@@ -1753,16 +1750,14 @@ Element* Measure::drop(const QPointF& p, const QPointF& /*offset*/, int type, co
                   break;
             case CLEF:
                   {
-                  Clef* clef = new Clef(score());
-                  clef->read(e);
+                  Clef* clef = (Clef*)e;
                   staff->changeClef(tick(), clef->subtype());
                   delete clef;
                   }
                   break;
             case KEYSIG:
                   {
-                  KeySig* ks = new KeySig(score());
-                  ks->read(e);
+                  KeySig* ks = (KeySig*)e;
                   char newSig = ks->subtype() & 0xff;
                   if (newSig < -7 || newSig > 7) {
                         printf("illegal keysig %d\n", newSig);
@@ -1774,16 +1769,14 @@ Element* Measure::drop(const QPointF& p, const QPointF& /*offset*/, int type, co
                   break;
             case TIMESIG:
                   {
-                  TimeSig* ts = new TimeSig(score());
-                  ts->read(e);
+                  TimeSig* ts = (TimeSig*)e;
                   score()->changeTimeSig(tick(), ts->subtype());
                   delete ts;
                   }
                   break;
             case LAYOUT_BREAK:
                   {
-                  LayoutBreak* lb = new LayoutBreak(score());
-                  lb->read(e);
+                  LayoutBreak* lb = (LayoutBreak*)e;
                   if ((lb->subtype() == LAYOUT_BREAK_PAGE && _pageBreak)
                      || (lb->subtype() == LAYOUT_BREAK_LINE && _lineBreak)) {
                         //
@@ -1800,8 +1793,7 @@ Element* Measure::drop(const QPointF& p, const QPointF& /*offset*/, int type, co
 
             case BAR_LINE:
                   {
-                  BarLine* bl = new BarLine(score());
-                  bl->read(e);
+                  BarLine* bl = (BarLine*)e;
                   switch(bl->subtype()) {
                         case END_BAR:
                         case NORMAL_BAR:
@@ -1837,6 +1829,7 @@ Element* Measure::drop(const QPointF& p, const QPointF& /*offset*/, int type, co
 
             case REPEAT_MEASURE:
                   {
+                  delete e;
                   //
                   // see also cmdDeleteSelection()
                   //
@@ -1885,6 +1878,7 @@ Element* Measure::drop(const QPointF& p, const QPointF& /*offset*/, int type, co
                   break;
 
             default:
+                  delete e;
                   break;
             }
       return 0;

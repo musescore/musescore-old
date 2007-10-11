@@ -231,7 +231,8 @@ class Element {
 
       // debug functions
       virtual void dump() const;
-      const char* name() const  { return elementNames[type()]; }
+      const char* name() const         { return elementNames[type()]; }
+      static const char* name(int val) { return elementNames[val];    }
       void dumpQPointF(const char*) const;
 
       bool operator>(const Element&) const;
@@ -256,7 +257,7 @@ class Element {
  Reimplemented by elements that accept drops. Used to change cursor shape while
  dragging to indicate drop targets.
 */
-      virtual bool acceptDrop(Viewer*, const QPointF&, int, const QDomElement&) const { return false; }
+      virtual bool acceptDrop(Viewer*, const QPointF&, int, int) const { return false; }
 
 /**
  Handle a dropped element at canvas relative \a pos of given element
@@ -264,7 +265,7 @@ class Element {
 
  Reimplemented by elements that accept drops.
 */
-      virtual Element* drop(const QPointF&, const QPointF&, int, const QDomElement&) { return 0;}
+      virtual Element* drop(const QPointF&, const QPointF&, Element*) { return 0;}
 
 /**
  Return a name for a \a subtype. Used for outputting xml data.
@@ -295,6 +296,8 @@ class Element {
 
       virtual QList<Prop> properties(Xml&) const;
       virtual void collectElements(QList<Element*>& el) { el.append(this); }
+
+      static Element* create(int type, Score*);
       };
 
 //---------------------------------------------------------

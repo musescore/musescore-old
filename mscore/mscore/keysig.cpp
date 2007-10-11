@@ -203,7 +203,7 @@ void KeySig::draw(QPainter& p)
 //   acceptDrop
 //---------------------------------------------------------
 
-bool KeySig::acceptDrop(Viewer* v, const QPointF&, int type, const QDomElement&) const
+bool KeySig::acceptDrop(Viewer* v, const QPointF&, int type, int) const
       {
       if (type == KEYSIG) {
             v->setDropTarget(this);
@@ -216,11 +216,10 @@ bool KeySig::acceptDrop(Viewer* v, const QPointF&, int type, const QDomElement&)
 //   drop
 //---------------------------------------------------------
 
-Element* KeySig::drop(const QPointF&, const QPointF&, int type, const QDomElement& e)
+Element* KeySig::drop(const QPointF&, const QPointF&, Element* e)
       {
-      if (type == KEYSIG) {
-            KeySig* k = new KeySig(0);
-            k->read(e);
+      if (e->type() == KEYSIG) {
+            KeySig* k = (KeySig*)e;
             int stype = k->subtype();
             delete k;
             int st = subtype();
@@ -231,6 +230,7 @@ Element* KeySig::drop(const QPointF&, const QPointF&, int type, const QDomElemen
                   }
             return this;
             }
+      delete e;
       return 0;
       }
 

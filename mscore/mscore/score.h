@@ -311,7 +311,7 @@ class Score : public QObject {
       void addTimeSig(int tick, int keySigSubtype);
       Element* addKeySig(KeySig*, const QPointF&);
 
-      void cmdAdd(Element* e, const QPointF& pos, const QPointF& dragOffset);
+      void cmdAdd1(Element* e, const QPointF& pos, const QPointF& dragOffset);
       void cmdAddBSymbol(BSymbol*, const QPointF&, const QPointF&);
 
       Element* cmdAddHairpin(Hairpin* atr, const QPointF& pos);
