@@ -454,9 +454,10 @@ void MuseScore::newFileFromTemplate()
          path,
          "Score templates (*.msc);; Any files (*)"
          );
+      if (fn.isEmpty())
+            return;
       Score* score = new Score;
-      if (!fn.isEmpty())
-            score->read(fn);
+      score->read(fn);
       score->fileInfo()->setFile(createDefaultName());
       score->setCreated(true);
       appendScore(score);
