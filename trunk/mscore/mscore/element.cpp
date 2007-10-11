@@ -35,6 +35,25 @@
 #include "clef.h"
 #include "layout.h"
 #include "viewer.h"
+#include "volta.h"
+#include "ottava.h"
+#include "trill.h"
+#include "pedal.h"
+#include "hairpin.h"
+#include "keysig.h"
+#include "timesig.h"
+#include "barline.h"
+#include "arpeggio.h"
+#include "breath.h"
+#include "bracket.h"
+#include "chordrest.h"
+#include "accidental.h"
+#include "dynamics.h"
+#include "text.h"
+#include "note.h"
+#include "tremolo.h"
+#include "layoutbreak.h"
+#include "repeat.h"
 
 extern bool debugMode;
 extern bool showInvisible;
@@ -469,8 +488,13 @@ void StaffLines::draw(QPainter& p)
       {
       QPointF _pos(0.0, 0.0);
 
+      p.save();
+      p.setRenderHint(QPainter::Antialiasing, false);
+
       QPen pen(p.pen());
       pen.setWidthF(point(score()->style()->staffLineWidth));
+      if (pen.widthF() * p.worldMatrix().m11() < 1.0)
+            pen.setWidth(0);
       pen.setCapStyle(Qt::FlatCap);
       p.setPen(pen);
 
@@ -487,6 +511,7 @@ void StaffLines::draw(QPainter& p)
                   p.drawLine(QLineF(x1, y, x2, y));
                   }
             }
+      p.restore();
       }
 
 //---------------------------------------------------------
@@ -634,7 +659,7 @@ void Compound::addElement(Element* e, double x, double y)
 
 QRectF Compound::bbox() const
       {
-      _bbox = QRectF(0,0,0,0);
+      _bbox = QRectF();
       for (ciElement i = elemente.begin(); i != elemente.end(); ++i) {
             const Element* e = *i;
             _bbox |= e->bbox().translated(e->pos());
@@ -735,7 +760,7 @@ void Element::dump() const
          "   bbox(%g,%g,%g,%g)\n"
          "   abox(%g,%g,%g,%g)\n"
          "  parent: %p\n",
-         elementNames[type()], _pos.x(), _pos.y(),
+         name(), _pos.x(), _pos.y(),
          _bbox.x(), _bbox.y(), _bbox.width(), _bbox.height(),
          abbox().x(), abbox().y(), abbox().width(), abbox().height(),
          parent());
@@ -913,6 +938,84 @@ int Element::readType(QDomElement& e, QPointF* dragOffset)
                   break;
             }
       return type;
+      }
+
+//---------------------------------------------------------
+//   create
+//    Element factory
+//---------------------------------------------------------
+
+Element* Element::create(int type, Score* score)
+      {
+      Element* el = 0;
+      switch(type) {
+            case VOLTA:
+                  el = new Volta(score);
+                  break;
+            case OTTAVA:
+                  el = new Ottava(score);
+                  break;
+            case TRILL:
+                  el = new Trill(score);
+                  break;
+            case PEDAL:
+                  el = new Pedal(score);
+                  break;
+            case HAIRPIN:
+                  el = new Hairpin(score);
+                  break;
+            case CLEF:
+                  el = new Clef(score);
+                  break;
+            case KEYSIG:
+                  el = new KeySig(score);
+                  break;
+            case TIMESIG:
+                  el = new TimeSig(score);
+                  break;
+            case BAR_LINE:
+                  el = new BarLine(score);
+                  break;
+            case ARPEGGIO:
+                  el = new Arpeggio(score);
+                  break;
+            case BREATH:
+                  el = new Breath(score);
+                  break;
+            case BRACKET:
+                  el = new Bracket(score);
+                  break;
+            case ATTRIBUTE:
+                  el = new NoteAttribute(score);
+                  break;
+            case ACCIDENTAL:
+                  el = new Accidental(score);
+                  break;
+            case DYNAMIC:
+                  el = new Dynamic(score);
+                  break;
+            case TEXT:
+                  el = new Text(score);
+                  break;
+            case NOTEHEAD:
+                  el = new NoteHead(score);
+                  break;
+            case TREMOLO:
+                  el = new Tremolo(score);
+                  break;
+            case LAYOUT_BREAK:
+                  el = new LayoutBreak(score);
+                  break;
+            case REPEAT:
+                  el = new Repeat(score);
+                  break;
+            case REPEAT_MEASURE:
+                  el = new RepeatMeasure(score);
+                  break;
+            default:
+                  break;
+            }
+      return el;
       }
 
 //---------------------------------------------------------

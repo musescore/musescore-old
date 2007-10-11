@@ -280,11 +280,10 @@ void BarLine::space(double& min, double& extra) const
 //   acceptDrop
 //---------------------------------------------------------
 
-bool BarLine::acceptDrop(Viewer* viewer, const QPointF&, int type,
-   const QDomElement&) const
+bool BarLine::acceptDrop(Viewer* v, const QPointF&, int type, int) const
       {
       if (type == BAR_LINE) {
-            viewer->setDropTarget(this);
+            v->setDropTarget(this);
             return true;
             }
       return false;
@@ -294,14 +293,15 @@ bool BarLine::acceptDrop(Viewer* viewer, const QPointF&, int type,
 //   drop
 //---------------------------------------------------------
 
-Element* BarLine::drop(const QPointF&, const QPointF&, int type, const QDomElement& e)
+Element* BarLine::drop(const QPointF&, const QPointF&, Element* e)
       {
-      if (type != BAR_LINE)
+      if (e->type() != BAR_LINE) {
+            delete e;
             return 0;
+            }
       score()->cmdRemove(this);
 
-      BarLine* bl = new BarLine(score());
-      bl->read(e);
+      BarLine* bl = (BarLine*) e;
       bl->setParent(parent());
       bl->setStaff(staff());
       if (subtype() == bl->subtype()) {

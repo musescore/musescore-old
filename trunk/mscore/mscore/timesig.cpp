@@ -97,7 +97,7 @@ void TimeSig::getSig(int* n, int* z1, int* z2, int* z3, int* z4) const
 //   acceptDrop
 //---------------------------------------------------------
 
-bool TimeSig::acceptDrop(Viewer* viewer, const QPointF&, int type, const QDomElement&) const
+bool TimeSig::acceptDrop(Viewer* viewer, const QPointF&, int type, int) const
       {
       if (type == TIMESIG) {
             viewer->setDropTarget(this);
@@ -110,12 +110,11 @@ bool TimeSig::acceptDrop(Viewer* viewer, const QPointF&, int type, const QDomEle
 //   drop
 //---------------------------------------------------------
 
-Element* TimeSig::drop(const QPointF&, const QPointF&, int type, const QDomElement& e)
+Element* TimeSig::drop(const QPointF&, const QPointF&, Element* e)
       {
-      if (type == TIMESIG) {
-            TimeSig* ts = new TimeSig(score());
-            ts->read(e);
-            int stype = ts->subtype();
+      if (e->type() == TIMESIG) {
+            TimeSig* ts = (TimeSig*)e;
+            int stype   = ts->subtype();
             delete ts;
             int st = subtype();
             if (st != stype) {
@@ -125,6 +124,7 @@ Element* TimeSig::drop(const QPointF&, const QPointF&, int type, const QDomEleme
                   }
             return this;
             }
+      delete e;
       return 0;
       }
 

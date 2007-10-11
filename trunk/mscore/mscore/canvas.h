@@ -57,6 +57,8 @@ class Canvas : public QFrame, public Viewer {
       int buttonState;
       State state;
       bool dragCanvasState;
+      Element* dragElement;
+      QPointF dragOffset;
       bool mousePressed;
 
       // editing mode
@@ -102,7 +104,7 @@ class Canvas : public QFrame, public Viewer {
       virtual bool event(QEvent*);
 
       virtual void dragEnterEvent(QDragEnterEvent*);
-      virtual void dragLeaveEvent(QDragEnterEvent*);
+      virtual void dragLeaveEvent(QDragLeaveEvent*);
       virtual void dragMoveEvent(QDragMoveEvent*);
       virtual void dropEvent(QDropEvent*);
 

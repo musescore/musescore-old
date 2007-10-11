@@ -123,15 +123,15 @@ void Ottava::layout(ScoreLayout* layout)
       {
       SLine::layout(layout);
 
-      double _spatium = layout->spatium();
-      qreal ottavaDistance = _spatium * 3.5;
+//      double _spatium = layout->spatium();
+//      qreal ottavaDistance = _spatium * 3.5;
       qreal y = 0.0;
-      if (parent()) {
+//      if (parent()) {
 //            System* system   = measure->system();
 //            int idx = staffIdx();
 //            SysStaff* sstaff = system->staff(idx);
 //            y = sstaff->bbox().top() - ottavaDistance;
-            }
+//            }
 
       setPos(ipos().x(), y);
 

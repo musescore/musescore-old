@@ -130,7 +130,6 @@ QRectF System::bbox() const
                   continue;
             lastDist = distance(i);
             h += lastDist;
-// printf("add distance %f staff %d\n", distance(i), i);
             h    += _spatium * 4;
             }
       h -= lastDist;

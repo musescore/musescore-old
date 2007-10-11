@@ -309,7 +309,7 @@ void Bracket::endEditDrag()
 //   acceptDrop
 //---------------------------------------------------------
 
-bool Bracket::acceptDrop(Viewer* viewer, const QPointF&, int type, const QDomElement&) const
+bool Bracket::acceptDrop(Viewer* viewer, const QPointF&, int type, int) const
       {
       if (type == BRACKET) {
             viewer->setDropTarget(this);
@@ -322,12 +322,10 @@ bool Bracket::acceptDrop(Viewer* viewer, const QPointF&, int type, const QDomEle
 //   drop
 //---------------------------------------------------------
 
-Element* Bracket::drop(const QPointF&, const QPointF&, int type, const QDomElement& e)
+Element* Bracket::drop(const QPointF&, const QPointF&, Element* e)
       {
-      if (ElementType(type) == BRACKET) {
-            Bracket* b = new Bracket(score());
-            b->read(e);
-            b->setSelected(false);
+      if (e->type() == BRACKET) {
+            Bracket* b = (Bracket*)e;
             b->setParent(parent());
             b->setStaff(staff());
             b->setSpan(span());
@@ -336,6 +334,7 @@ Element* Bracket::drop(const QPointF&, const QPointF&, int type, const QDomEleme
             score()->cmdAdd(b);
             return b;
             }
+      delete e;
       return 0;
       }
 

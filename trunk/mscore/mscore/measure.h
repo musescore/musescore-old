@@ -216,8 +216,8 @@ class Measure : public Element {
       void sortStaves(QList<int>& src, QList<int>& dst);
 
       void dump() const;
-      virtual bool acceptDrop(Viewer*, const QPointF&, int, const QDomElement&) const;
-      virtual Element* drop(const QPointF&, const QPointF&, int, const QDomElement&);
+      virtual bool acceptDrop(Viewer*, const QPointF&, int, int) const;
+      virtual Element* drop(const QPointF&, const QPointF&, Element*);
 
       int endRepeat() const         { return _endRepeat; }
       void setEndRepeat(int val)    { _endRepeat = val; }

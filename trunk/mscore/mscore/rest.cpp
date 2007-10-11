@@ -133,14 +133,10 @@ void Rest::space(double& min, double& extra) const
 //   acceptDrop
 //---------------------------------------------------------
 
-bool Rest::acceptDrop(Viewer* viewer, const QPointF&, int type, const QDomElement& e) const
+bool Rest::acceptDrop(Viewer* viewer, const QPointF&, int type, int subtype) const
       {
       if (type != ATTRIBUTE)
             return false;
-      NoteAttribute* a = new NoteAttribute(0);
-      a->read(e);
-      int subtype = a->subtype();
-      delete a;
       if (subtype == UfermataSym || subtype == DfermataSym) {
             viewer->setDropTarget(this);
             return true;
@@ -152,12 +148,13 @@ bool Rest::acceptDrop(Viewer* viewer, const QPointF&, int type, const QDomElemen
 //   drop
 //---------------------------------------------------------
 
-Element* Rest::drop(const QPointF&, const QPointF&, int t, const QDomElement& e)
+Element* Rest::drop(const QPointF&, const QPointF&, Element* e)
       {
-      if (t != ATTRIBUTE)
+      if (e->type() != ATTRIBUTE) {
+            delete e;
             return 0;
-      NoteAttribute* atr = new NoteAttribute(score());
-      atr->read(e);
+            }
+      NoteAttribute* atr = (NoteAttribute*)e;
       int st = atr->subtype();
       if (!(st == UfermataSym || st == DfermataSym)) {
             delete atr;

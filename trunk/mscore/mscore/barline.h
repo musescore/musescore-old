@@ -51,8 +51,8 @@ class BarLine : public Element {
       virtual QRectF bbox() const;
       virtual void space(double& min, double& extra) const;
 
-      virtual bool acceptDrop(Viewer*, const QPointF&, int, const QDomElement&) const;
-      virtual Element* drop(const QPointF&, const QPointF&, int, const QDomElement&);
+      virtual bool acceptDrop(Viewer*, const QPointF&, int, int) const;
+      virtual Element* drop(const QPointF&, const QPointF&, Element*);
       void setHeight(qreal v) { _height = v; }
       };
 
