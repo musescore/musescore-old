@@ -1,4 +1,6 @@
-11.10.7 (ws)
+11.10.7 (lv)
+      - MusicXML export of system brackets
+       (ws)
       - better drag&drop visualization
 8.10.7 (ws)
       - use staccato, tenuto and slurs in playback
