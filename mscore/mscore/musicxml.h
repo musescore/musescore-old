@@ -44,8 +44,9 @@ struct MusicXmlWedge {
       qreal rx, ry;
       };
 
-const int MAX_LYRICS = 8;
-const int MAX_SLURS  = 8;
+const int MAX_LYRICS      = 8;
+const int MAX_PART_GROUPS = 8;
+const int MAX_SLURS       = 8;
 
 //---------------------------------------------------------
 //   MusicXml

@@ -63,6 +63,7 @@
 #include "lyrics.h"
 #include "volta.h"
 #include "keysig.h"
+#include "bracket.h"
 
 //---------------------------------------------------------
 //   attributes -- prints <attributes> tag when necessary
@@ -1405,6 +1406,29 @@ static void directionETag(Xml& xml, int staff, int offs = 0)
       }
 
 //---------------------------------------------------------
+//   partGroupStart
+//---------------------------------------------------------
+
+static void partGroupStart(Xml& xml, int number, int bracket)
+      {
+      xml.stag(QString("part-group type=\"start\" number=\"%1\"").arg(number));
+      QString br = "";
+      switch(bracket) {
+            case BRACKET_NORMAL:
+                  br = "bracket";
+                  break;
+            case BRACKET_AKKOLADE:
+                  br = "brace";
+                  break;
+            default:
+                  printf("bracket subtype %d not understood\n", bracket);
+                  }
+      if (br != "")
+            xml.tag("group-symbol", br);
+      xml.etag();
+      }
+
+//---------------------------------------------------------
 //   words
 //---------------------------------------------------------
 
@@ -1652,21 +1676,58 @@ bool ExportMusicXml::write(const QString& name)
 
       xml.stag("part-list");
       const QList<Part*>* il = score->parts();
+      int staffCount = 0;                       // count sum of # staves in parts
+      int partGroupEnd[MAX_PART_GROUPS];        // staff where part group ends
+      for (int i = 0; i < MAX_PART_GROUPS; i++)
+            partGroupEnd[i] = -1;
       for (int idx = 0; idx < il->size(); ++idx) {
             Part* part = il->at(idx);
 /*
-            printf("part %d nstaves=%d\n", idx+1, part->nstaves());
+            printf("part %d nstaves=%d (%d..%d)\n",
+                   idx+1, part->nstaves(), staffCount, staffCount+part->nstaves()-1);
             for (int i = 0; i < part->nstaves(); i++) {
                   Staff* st = part->staff(i);
                   if (st) {
                         printf(" staff %d brLevels=%d\n", i+1, st->bracketLevels());
                         for (int j = 0; j < st->bracketLevels(); j++) {
-                              if (st->bracket(j) >= 0)
-                                    printf("  br=%d brSpan=%d\n", st->bracket(j), st->bracketSpan(j));
+                              // if (st->bracket(j) >= 0)
+                                    printf("  j=%d br=%d brSpan=%d\n", j, st->bracket(j), st->bracketSpan(j));
                               }
                         }
                   }
 */
+            for (int i = 0; i < part->nstaves(); i++) {
+                  Staff* st = part->staff(i);
+                  if (st) {
+                        for (int j = 0; j < st->bracketLevels(); j++) {
+                              if (st->bracket(j) != NO_BRACKET) {
+                                    if (i == 0) {
+                                          // OK, found bracket in first staff of part
+                                          // filter out implicit brackets
+                                          if (st->bracketSpan(j) != part->nstaves()) {
+                                                // find part group number
+                                                int number = 0;
+                                                for (; number < MAX_PART_GROUPS; number++)
+                                                      if (partGroupEnd[number] == -1)
+                                                            break;
+                                                if (number < MAX_PART_GROUPS) {
+                                                      // printf("start number=%d end=%d\n", number + 1, idx + st->bracketSpan(j));
+                                                      partGroupStart(xml, number + 1, st->bracket(j));
+                                                      partGroupEnd[number] = idx + st->bracketSpan(j);
+                                                      }
+                                                else
+                                                      printf("no free part group number\n");
+                                                }
+                                          }
+                                    else {
+                                          // bracket in other staff not supported in MusicXML
+                                          printf("bracket starting in staff %d not supported\n", i + 1);
+                                          }
+                                    }
+                              }
+                        }
+                  }
+
             xml.stag(QString("score-part id=\"P%1\"").arg(idx+1));
             xml.tag("part-name", part->longName().toPlainText());
 
@@ -1680,6 +1741,17 @@ bool ExportMusicXml::write(const QString& name)
             xml.etag();
 
             xml.etag();
+            staffCount += part->nstaves();
+            for (int i = MAX_PART_GROUPS - 1; i >= 0; i--) {
+                  int end = partGroupEnd[i];
+                  if (end >= 0) {
+                        if (staffCount >= end) {
+                              // printf("end %d\n", i + 1);
+                              xml.tagE("part-group type=\"stop\" number=\"%d\"", i + 1);
+                              partGroupEnd[i] = -1;
+                              }
+                        }
+                  }
             }
       xml.etag();
 
