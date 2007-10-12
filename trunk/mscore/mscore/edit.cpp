@@ -964,6 +964,7 @@ void Score::deleteItem(Element* el)
             case TIE:
             case TEMPO_TEXT:
             case REPEAT:
+            case BREATH:
                   cmdRemove(el);
                   break;
 

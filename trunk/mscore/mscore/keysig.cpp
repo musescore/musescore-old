@@ -220,7 +220,7 @@ Element* KeySig::drop(const QPointF&, const QPointF&, Element* e)
       {
       if (e->type() == KEYSIG) {
             KeySig* k = (KeySig*)e;
-            int stype = k->subtype();
+            char stype = k->subtype() & 0xff;
             delete k;
             int st = subtype();
             if (st != stype) {

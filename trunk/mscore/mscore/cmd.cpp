@@ -154,8 +154,13 @@ void Score::end()
 //                  v->moveCursor();
             if (updateAll)
                   v->updateAll(this);
-            else
-                  v->dataChanged(refresh);
+            else {
+                  // update a little more:
+                  int dx = lrint(v->matrix().m11() + .5);
+                  int dy = lrint(v->matrix().m22() + .5);
+                  QRectF r(refresh.adjusted(-dx, -dy, 2 * dx, 2 * dy));
+                  v->dataChanged(r);
+                  }
             }
       updateAll = false;
       setPadState();
@@ -380,7 +385,14 @@ void Score::cmdRemove(Element* e)
                   break;
 
             default:
+                  {
+                  Segment* seg = 0;
+                  if (e->parent()->type() == SEGMENT)
+                        seg = (Segment*) e->parent();
                   undoRemoveElement(e);
+                  if (seg && seg->isEmpty())
+                        undoRemoveElement(seg);
+                  }
                   break;
             }
       }

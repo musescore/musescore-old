@@ -1103,13 +1103,8 @@ void Canvas::paintEvent(QPaintEvent* ev)
             region = ev->region();
 
       QVector<QRect> vector = region.rects();
-      foreach(QRect r, vector) {
-            // refresh a little more:
-            int dx = lrint(_matrix.m11());
-            int dy = lrint(_matrix.m22());
-            r.adjust(-dx, -dy, 2 * dx, 2 * dy);
+      foreach(QRect r, vector)
             paint(r, p);
-            }
 
       p.setMatrix(_matrix);
       p.setClipping(false);

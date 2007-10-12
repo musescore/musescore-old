@@ -1,6 +1,11 @@
+12.10.7 (ws)
+      - fix drag&drop of flat accidentals
+      - extending the update rectangle in paintEvent() does not work as painting
+        seems to be clipped there; moved to Score->end()
 11.10.7 (lv)
       - MusicXML export of system brackets
        (ws)
+      - implement delete breath symbol
       - better drag&drop visualization
 8.10.7 (ws)
       - use staccato, tenuto and slurs in playback
