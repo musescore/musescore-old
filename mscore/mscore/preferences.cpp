@@ -156,6 +156,7 @@ Preferences::Preferences()
       len6.type          = -1;
       len12.type         = -1;
       len24.type         = -1;
+      midiExpandRepeats  = true;
       };
 
 //---------------------------------------------------------
@@ -204,6 +205,7 @@ void Preferences::write()
       s.setValue("antialiasedDrawing", antialiasedDrawing);
       s.setValue("imagePath",          imagePath);
       s.setValue("showSplashScreen",   showSplashScreen);
+      s.setValue("midiExpandRepeats",  midiExpandRepeats);
       switch(sessionStart) {
             case LAST_SESSION:   s.setValue("sessionStart", "last"); break;
             case NEW_SESSION:    s.setValue("sessionStart", "new"); break;
@@ -267,6 +269,7 @@ void Preferences::read()
       antialiasedDrawing = s.value("antialiasedDrawing", true).toBool();
       imagePath          = s.value("imagePath", "~/mscore/images").toString();
       showSplashScreen   = s.value("showSplashScreen", true).toBool();
+      midiExpandRepeats  = s.value("midiExpandRepeats", true).toBool();
 
       QString ss(s.value("sessionStart", "score").toString());
       if (ss == "last")
@@ -413,6 +416,7 @@ PreferenceDialog::PreferenceDialog(QWidget* parent)
       sessionScore->setText(preferences.startScore);
       imagePath->setText(preferences.imagePath);
       showSplashScreen->setChecked(preferences.showSplashScreen);
+      expandRepeats->setChecked(preferences.midiExpandRepeats);
 
       //
       // initialize local shortcut table
@@ -797,6 +801,7 @@ void PreferenceDialog::apply()
       preferences.startScore         = sessionScore->text();
       preferences.imagePath          = imagePath->text();
       preferences.showSplashScreen   = showSplashScreen->isChecked();
+      preferences.midiExpandRepeats  = expandRepeats->isChecked();
 
       if (shortcutsChanged) {
             shortcutsChanged = false;

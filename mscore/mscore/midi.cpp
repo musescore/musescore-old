@@ -48,6 +48,7 @@
 #include "bracket.h"
 #include "keyfinder.h"
 #include "drumset.h"
+#include "preferences.h"
 
 static unsigned const char gmOnMsg[] = { 0x7e, 0x7f, 0x09, 0x01 };
 static unsigned const char gsOnMsg[] = { 0x41, 0x10, 0x42, 0x12, 0x40, 0x00, 0x7f, 0x00, 0x41 };
@@ -813,113 +814,38 @@ bool ExportMidi::write(const QString& name)
       for (int i = 0; i < nstaves; ++i)
             tracks->append(new MidiTrack(&mf));
 
-      int gateTime = 80;  // 100 - legato (100%)
-
       writeHeader();
 
-      int staffIdx = 0;
-      int partIdx  = 0;
-
       SigList* sigmap = cs->sigmap;
-      int tickOffset = sigmap->ticksMeasure(0);
+      int tickOffset  = sigmap->ticksMeasure(0);
 
-      foreach (Part* part, *cs->parts()) {
-            int channel  = part->midiChannel();
-
+      foreach (Staff* staff, cs->staves()) {
+            Part* part       = staff->part();
+            int channel      = part->midiChannel();
+            int staffIdx     = staff->idx();
             MidiTrack* track = tracks->at(staffIdx);
             track->setOutPort(0);
             track->setOutChannel(channel);
 
-            MidiController* ev = new MidiController(0, channel, CTRL_PROGRAM, part->midiProgram());
-            track->insert(ev);
-            ev = new MidiController(2, channel, CTRL_VOLUME, part->volume());
-            track->insert(ev);
-            ev = new MidiController(4, channel, CTRL_PANPOT, part->pan());
-            track->insert(ev);
-            ev = new MidiController(6, channel, CTRL_REVERB_SEND, part->reverb());
-            track->insert(ev);
-            ev = new MidiController(8, channel, CTRL_CHORUS_SEND, part->chorus());
-            track->insert(ev);
-
-            for (int i = 0; i < part->staves()->size(); ++i) {
-                  MidiTrack* track = tracks->at(staffIdx);
-                  track->setOutChannel(channel);
-
-                  QList<OttavaE> ol;
-                  for (Measure* m = cs->mainLayout()->first(); m; m = m->next()) {
-                        foreach(Element* e, *m->el()) {
-                              if (e->type() == OTTAVA) {
-                                    Ottava* ottava = (Ottava*)e;
-                                    OttavaE oe;
-                                    oe.offset = ottava->pitchShift();
-                                    oe.start  = ottava->tick();
-                                    oe.end    = ottava->tick2();
-                                    ol.append(oe);
-                                    }
-                              }
-                        }
-                  for (Measure* m = cs->mainLayout()->first(); m; m = m->next()) {
-                        for (int voice = 0; voice < VOICES; ++voice) {
-                              for (Segment* seg = m->first(); seg; seg = seg->next()) {
-                                    Element* el = seg->element(staffIdx * VOICES + voice);
-                                    if (el) {
-                                          if (el->type() != CHORD)
-                                                continue;
-                                          Chord* chord = (Chord*)el;
-                                          NoteList* nl = chord->noteList();
-
-                                          for (iNote in = nl->begin(); in != nl->end(); ++in) {
-                                                Note* note = in->second;
-                                                if (note->tieBack())
-                                                      continue;
-                                                unsigned len = 0;
-                                                while (note->tieFor()) {
-                                                      len += note->chord()->tickLen();
-                                                      note = note->tieFor()->endNote();
-                                                      }
-                                                len += (note->chord()->tickLen() * gateTime / 100);
-
-                                                unsigned tick = chord->tick();
-                                                len = len * gateTime / 100;
-                                                int pitch  = note->pitch();
-
-                                                foreach(OttavaE o, ol) {
-                                                      if (tick >= o.start && tick <= o.end) {
-                                                            pitch += o.offset;
-                                                            break;
-                                                            }
-                                                      }
-
-                                                MidiNoteOn* ev = new MidiNoteOn(tick + tickOffset, channel, pitch, 0x60);
-                                                track->insert(ev);
-                                                ev = new MidiNoteOn(tick + tickOffset + len, channel, pitch, 0);
-                                                track->insert(ev);
-                                                }
-                                          }
-                                    }
-                              }
-
-                        foreach(Element* e, *m->el())
-                              switch(e->type()) {
-                                    case PEDAL:
-                                          {
-                                          Pedal* pedal = (Pedal*)e;
-                                          MidiController* ev = new MidiController(pedal->tick() + tickOffset, channel,
-                                             CTRL_SUSTAIN, 0x7f);
-                                          track->insert(ev);
-                                          ev = new MidiController(pedal->tick2() + tickOffset, channel,
-                                             CTRL_SUSTAIN, 0);
-                                          track->insert(ev);
-                                          }
-                                          break;
-                                    default:
-                                          break;
-                              }
-                        }
-                  ++staffIdx;
+            if (staff->isTop()) {
+                  track->insert(new MidiController(0, channel, CTRL_PROGRAM,     part->midiProgram()));
+                  track->insert(new MidiController(2, channel, CTRL_VOLUME,      part->volume()));
+                  track->insert(new MidiController(4, channel, CTRL_PANPOT,      part->pan()));
+                  track->insert(new MidiController(6, channel, CTRL_REVERB_SEND, part->reverb()));
+                  track->insert(new MidiController(8, channel, CTRL_CHORUS_SEND, part->chorus()));
                   }
-            ++partIdx;
+            QMap<int, Event> events;
+            cs->toEList(&events, preferences.midiExpandRepeats, tickOffset, staffIdx);
+            for (QMap<int,Event>::const_iterator i = events.constBegin(); i != events.constEnd(); ++i) {
+                  if (i.value().type == ME_NOTEON) {
+                        track->insert(new MidiNoteOn(i.key(),
+                           i.value().channel, i.value().val1, i.value().val2));
+                        }
+                  else
+                        printf("writeMidi: unknown midi event 0x%02x\n", i.value().type);
+                  }
             }
+
       return !mf.write(&f);
       }
 

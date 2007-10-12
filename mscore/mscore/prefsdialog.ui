@@ -5,8 +5,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>670</width>
-    <height>601</height>
+    <width>529</width>
+    <height>512</height>
    </rect>
   </property>
   <property name="windowTitle" >
@@ -31,7 +31,7 @@
    <item>
     <widget class="QTabWidget" name="General" >
      <property name="currentIndex" >
-      <number>4</number>
+      <number>0</number>
      </property>
      <widget class="QWidget" name="tab" >
       <attribute name="title" >
@@ -802,12 +802,40 @@
         </spacer>
        </item>
        <item>
+        <widget class="QGroupBox" name="groupBox_8" >
+         <property name="sizePolicy" >
+          <sizepolicy vsizetype="Preferred" hsizetype="Preferred" >
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="title" >
+          <string>Export Midi</string>
+         </property>
+         <property name="flat" >
+          <bool>true</bool>
+         </property>
+         <layout class="QVBoxLayout" >
+          <item>
+           <widget class="QCheckBox" name="expandRepeats" >
+            <property name="text" >
+             <string>Expand Repeats</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
         <widget class="QGroupBox" name="rcGroup" >
          <property name="toolTip" >
           <string>enable midi remote control</string>
          </property>
          <property name="title" >
           <string>Midi Remote Control</string>
+         </property>
+         <property name="flat" >
+          <bool>true</bool>
          </property>
          <property name="checkable" >
           <bool>true</bool>
@@ -1308,25 +1336,154 @@
        <string>StemDir</string>
       </attribute>
       <layout class="QGridLayout" >
-       <property name="leftMargin" >
-        <number>9</number>
-       </property>
-       <property name="topMargin" >
-        <number>9</number>
-       </property>
-       <property name="rightMargin" >
-        <number>9</number>
-       </property>
-       <property name="bottomMargin" >
-        <number>9</number>
-       </property>
-       <property name="horizontalSpacing" >
-        <number>6</number>
-       </property>
-       <property name="verticalSpacing" >
-        <number>6</number>
-       </property>
-       <item row="1" column="0" >
+       <item row="0" column="2" >
+        <widget class="QLabel" name="label_22" >
+         <property name="text" >
+          <string>Voice 1</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="3" >
+        <widget class="QLabel" name="label_23" >
+         <property name="text" >
+          <string>Voice2</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="4" >
+        <widget class="QLabel" name="label_24" >
+         <property name="text" >
+          <string>Voice3</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="5" >
+        <widget class="QLabel" name="label_25" >
+         <property name="text" >
+          <string>Voice4</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="2" colspan="4" >
+        <widget class="Line" name="line" >
+         <property name="orientation" >
+          <enum>Qt::Horizontal</enum>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="0" >
+        <widget class="QLabel" name="upLabel" >
+         <property name="text" >
+          <string>Up</string>
+         </property>
+        </widget>
+       </item>
+       <item rowspan="3" row="2" column="1" >
+        <widget class="Line" name="line_2" >
+         <property name="orientation" >
+          <enum>Qt::Vertical</enum>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="2" >
+        <widget class="QRadioButton" name="upRadioButton1" >
+         <property name="text" >
+          <string/>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="3" >
+        <widget class="QRadioButton" name="upRadioButton2" >
+         <property name="text" >
+          <string/>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="4" >
+        <widget class="QRadioButton" name="upRadioButton3" >
+         <property name="text" >
+          <string/>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="5" >
+        <widget class="QRadioButton" name="upRadioButton4" >
+         <property name="text" >
+          <string/>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="0" >
+        <widget class="QLabel" name="autoLabel" >
+         <property name="text" >
+          <string>Auto</string>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="2" >
+        <widget class="QRadioButton" name="autoRadioButton1" >
+         <property name="text" >
+          <string/>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="3" >
+        <widget class="QRadioButton" name="autoRadioButton2" >
+         <property name="text" >
+          <string/>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="4" >
+        <widget class="QRadioButton" name="autoRadioButton3" >
+         <property name="text" >
+          <string/>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="5" >
+        <widget class="QRadioButton" name="autoRadioButton4" >
+         <property name="text" >
+          <string/>
+         </property>
+        </widget>
+       </item>
+       <item row="4" column="0" >
+        <widget class="QLabel" name="downLabel" >
+         <property name="text" >
+          <string>Down</string>
+         </property>
+        </widget>
+       </item>
+       <item row="4" column="2" >
+        <widget class="QRadioButton" name="downRadioButton1" >
+         <property name="text" >
+          <string/>
+         </property>
+        </widget>
+       </item>
+       <item row="4" column="3" >
+        <widget class="QRadioButton" name="downRadioButton2" >
+         <property name="text" >
+          <string/>
+         </property>
+        </widget>
+       </item>
+       <item row="4" column="4" >
+        <widget class="QRadioButton" name="downRadioButton3" >
+         <property name="text" >
+          <string/>
+         </property>
+        </widget>
+       </item>
+       <item row="4" column="5" >
+        <widget class="QRadioButton" name="downRadioButton4" >
+         <property name="text" >
+          <string/>
+         </property>
+        </widget>
+       </item>
+       <item row="5" column="0" >
         <spacer>
          <property name="orientation" >
           <enum>Qt::Vertical</enum>
@@ -1334,255 +1491,10 @@
          <property name="sizeHint" >
           <size>
            <width>20</width>
-           <height>191</height>
+           <height>221</height>
           </size>
          </property>
         </spacer>
-       </item>
-       <item row="0" column="4" >
-        <widget class="QGroupBox" name="voiceGroupBox4" >
-         <property name="title" >
-          <string>Voice 4</string>
-         </property>
-         <property name="flat" >
-          <bool>true</bool>
-         </property>
-         <layout class="QVBoxLayout" >
-          <property name="spacing" >
-           <number>6</number>
-          </property>
-          <property name="leftMargin" >
-           <number>9</number>
-          </property>
-          <property name="topMargin" >
-           <number>9</number>
-          </property>
-          <property name="rightMargin" >
-           <number>9</number>
-          </property>
-          <property name="bottomMargin" >
-           <number>9</number>
-          </property>
-          <item>
-           <widget class="QRadioButton" name="upRadioButton4" >
-            <property name="text" >
-             <string/>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QRadioButton" name="autoRadioButton4" >
-            <property name="text" >
-             <string/>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QRadioButton" name="downRadioButton4" >
-            <property name="text" >
-             <string/>
-            </property>
-           </widget>
-          </item>
-         </layout>
-        </widget>
-       </item>
-       <item row="0" column="3" >
-        <widget class="QGroupBox" name="voiceGroupBox3" >
-         <property name="title" >
-          <string>Voice 3</string>
-         </property>
-         <property name="flat" >
-          <bool>true</bool>
-         </property>
-         <layout class="QVBoxLayout" >
-          <property name="spacing" >
-           <number>6</number>
-          </property>
-          <property name="leftMargin" >
-           <number>9</number>
-          </property>
-          <property name="topMargin" >
-           <number>9</number>
-          </property>
-          <property name="rightMargin" >
-           <number>9</number>
-          </property>
-          <property name="bottomMargin" >
-           <number>9</number>
-          </property>
-          <item>
-           <widget class="QRadioButton" name="upRadioButton3" >
-            <property name="text" >
-             <string/>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QRadioButton" name="autoRadioButton3" >
-            <property name="text" >
-             <string/>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QRadioButton" name="downRadioButton3" >
-            <property name="text" >
-             <string/>
-            </property>
-           </widget>
-          </item>
-         </layout>
-        </widget>
-       </item>
-       <item row="0" column="0" >
-        <layout class="QVBoxLayout" >
-         <property name="spacing" >
-          <number>6</number>
-         </property>
-         <property name="leftMargin" >
-          <number>0</number>
-         </property>
-         <property name="topMargin" >
-          <number>0</number>
-         </property>
-         <property name="rightMargin" >
-          <number>0</number>
-         </property>
-         <property name="bottomMargin" >
-          <number>0</number>
-         </property>
-         <item>
-          <spacer>
-           <property name="orientation" >
-            <enum>Qt::Vertical</enum>
-           </property>
-           <property name="sizeHint" >
-            <size>
-             <width>20</width>
-             <height>40</height>
-            </size>
-           </property>
-          </spacer>
-         </item>
-         <item>
-          <widget class="QLabel" name="upLabel" >
-           <property name="text" >
-            <string>Up</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QLabel" name="autoLabel" >
-           <property name="text" >
-            <string>Auto</string>
-           </property>
-          </widget>
-         </item>
-         <item>
-          <widget class="QLabel" name="downLabel" >
-           <property name="text" >
-            <string>Down</string>
-           </property>
-          </widget>
-         </item>
-        </layout>
-       </item>
-       <item row="0" column="1" >
-        <widget class="QGroupBox" name="voiceGroupBox1" >
-         <property name="title" >
-          <string>Voice 1</string>
-         </property>
-         <property name="flat" >
-          <bool>true</bool>
-         </property>
-         <layout class="QVBoxLayout" >
-          <property name="spacing" >
-           <number>9</number>
-          </property>
-          <property name="leftMargin" >
-           <number>9</number>
-          </property>
-          <property name="topMargin" >
-           <number>9</number>
-          </property>
-          <property name="rightMargin" >
-           <number>9</number>
-          </property>
-          <property name="bottomMargin" >
-           <number>9</number>
-          </property>
-          <item>
-           <widget class="QRadioButton" name="upRadioButton1" >
-            <property name="text" >
-             <string/>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QRadioButton" name="autoRadioButton1" >
-            <property name="text" >
-             <string/>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QRadioButton" name="downRadioButton1" >
-            <property name="text" >
-             <string/>
-            </property>
-           </widget>
-          </item>
-         </layout>
-        </widget>
-       </item>
-       <item row="0" column="2" >
-        <widget class="QGroupBox" name="voiceGroupBox2" >
-         <property name="title" >
-          <string>Voice 2</string>
-         </property>
-         <property name="flat" >
-          <bool>true</bool>
-         </property>
-         <layout class="QVBoxLayout" >
-          <property name="spacing" >
-           <number>9</number>
-          </property>
-          <property name="leftMargin" >
-           <number>9</number>
-          </property>
-          <property name="topMargin" >
-           <number>9</number>
-          </property>
-          <property name="rightMargin" >
-           <number>9</number>
-          </property>
-          <property name="bottomMargin" >
-           <number>9</number>
-          </property>
-          <item>
-           <widget class="QRadioButton" name="upRadioButton2" >
-            <property name="text" >
-             <string/>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QRadioButton" name="autoRadioButton2" >
-            <property name="text" >
-             <string/>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QRadioButton" name="downRadioButton2" >
-            <property name="text" >
-             <string/>
-            </property>
-           </widget>
-          </item>
-         </layout>
-        </widget>
        </item>
       </layout>
      </widget>
@@ -1744,6 +1656,7 @@
    <class>Awl::ColorLabel</class>
    <extends>QFrame</extends>
    <header>awl/colorlabel.h</header>
+   <container>1</container>
   </customwidget>
   <customwidget>
    <class>GreendotButton</class>

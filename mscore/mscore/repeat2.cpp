@@ -42,8 +42,6 @@ int   rtickOffSet;
 bool  repeatEachTime;
 bool  playRepeats;
 
-
-
 RepeatStack::RepeatStack()
       {
       firstStack = init();

@@ -470,6 +470,7 @@ class Score : public QObject {
       const QList<Element*>* gel() const;
       bool isVolta(int tick, int repeat) const;
       void toEList(QMap<int, Event>* events, int tickOffset);
+      void toEList(QMap<int, Event>* events, bool expandRepeats, int tickOffset, int staffIdx);
       };
 
 extern Score* gscore;
