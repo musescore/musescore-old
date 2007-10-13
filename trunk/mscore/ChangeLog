@@ -1,3 +1,5 @@
+13.10.7 (lv)
+      - MusicXML export of arpeggios
 12.10.7 (ws)
       - fix drag&drop of flat accidentals
       - extending the update rectangle in paintEvent() does not work as painting

@@ -64,6 +64,7 @@
 #include "volta.h"
 #include "keysig.h"
 #include "bracket.h"
+#include "arpeggio.h"
 
 //---------------------------------------------------------
 //   attributes -- prints <attributes> tag when necessary
@@ -1166,6 +1167,33 @@ static void chordAttributes(Chord* chord, Notations& notations, Xml& xml)
       }
 
 //---------------------------------------------------------
+//   arpeggiate
+//---------------------------------------------------------
+
+// <notations>
+//   <arpeggiate direction="up"/>
+// </notations>
+
+static void arpeggiate(Arpeggio * arp, Xml& xml)
+      {
+      int st = arp->subtype();
+      switch(st) {
+            case 0:
+                  xml.tagE("arpeggiate");
+                  break;
+            case 1:
+                  xml.tagE("arpeggiate direction=\"up\"");
+                  break;
+            case 2:
+                  xml.tagE("arpeggiate direction=\"down\"");
+                  break;
+            default:
+                  printf("unknown arpeggio subtype %d\n", st);
+                  break;
+            }
+      }
+
+//---------------------------------------------------------
 //   chord
 //---------------------------------------------------------
 
@@ -1310,6 +1338,10 @@ void ExportMusicXml::chord(Chord* chord, int staff, const LyricsList* ll)
                   xml.stag("technical");
                   xml.tag("fingering", f->getText());
                   xml.etag();
+                  }
+            if (chord->arpeggio()) {
+                  notations.tag(xml);
+                  arpeggiate(chord->arpeggio(), xml);
                   }
             notations.etag(xml);
             // write lyrics (only for first note)
