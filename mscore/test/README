@@ -42,6 +42,7 @@ midi4.mid   single track, overlapping notes
 
 testAccidentals1.xml     accidentals sharp, flat, double sharp, double flat and natural
 testAccidentals2.xml     all supported accidentals including editorial
+testBarStyles.xml        bar styles light-light, light-heavy, heavy-light plus repeats
 testDirections1.xml      all supported direction types
 testDynamics1.xml        the "dynamics" directions from ppp to fff
 testDynamics2.xml        dynamics in a multi-part (voice and a piano) score
