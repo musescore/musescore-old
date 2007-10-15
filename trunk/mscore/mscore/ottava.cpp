@@ -138,29 +138,6 @@ void Ottava::layout(ScoreLayout* layout)
       }
 
 //---------------------------------------------------------
-//   write
-//---------------------------------------------------------
-
-void Ottava::write(Xml& xml) const
-      {
-      xml.stag("Ottava");
-      SLine::writeProperties(xml);
-      xml.etag();
-      }
-
-//---------------------------------------------------------
-//   read
-//---------------------------------------------------------
-
-void Ottava::read(QDomElement e)
-      {
-      for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
-            if (!SLine::readProperties(e))
-                  domError(e);
-            }
-      }
-
-//---------------------------------------------------------
 //   createLineSegment
 //---------------------------------------------------------
 

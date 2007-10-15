@@ -132,29 +132,6 @@ void Volta::layout(ScoreLayout* layout)
       }
 
 //---------------------------------------------------------
-//   write
-//---------------------------------------------------------
-
-void Volta::write(Xml& xml) const
-      {
-      xml.stag("Volta");
-      SLine::writeProperties(xml);
-      xml.etag();
-      }
-
-//---------------------------------------------------------
-//   read
-//---------------------------------------------------------
-
-void Volta::read(QDomElement e)
-      {
-      for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
-            if (!SLine::readProperties(e))
-                  domError(e);
-            }
-      }
-
-//---------------------------------------------------------
 //   createLineSegment
 //---------------------------------------------------------
 

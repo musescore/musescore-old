@@ -44,11 +44,11 @@ class OttavaSegment : public LineSegment {
 
    public:
       OttavaSegment(Score* s) : LineSegment(s) {}
-      virtual ElementType type() const { return OTTAVA_SEGMENT; }
+      virtual ElementType type() const     { return OTTAVA_SEGMENT; }
       virtual OttavaSegment* clone() const { return new OttavaSegment(*this); }
+      Ottava* ottava() const               { return (Ottava*)parent(); }
       virtual void draw(QPainter&);
       virtual QRectF bbox() const;
-      Ottava* ottava() const { return (Ottava*)parent(); }
       };
 
 //---------------------------------------------------------
@@ -71,8 +71,6 @@ class Ottava : public SLine {
       virtual ElementType type() const { return OTTAVA; }
       virtual void layout(ScoreLayout*);
       virtual void setSubtype(int val);
-      virtual void write(Xml&) const;
-      virtual void read(QDomElement);
       virtual LineSegment* createLineSegment();
       int pitchShift() const { return _pitchShift; }
       };

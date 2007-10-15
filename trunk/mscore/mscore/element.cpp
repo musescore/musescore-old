@@ -80,7 +80,7 @@ const char* elementNames[] = {
       "Measure", "StaffLines",
       "Cursor", "Selection", "Lasso", "ShadowNote", "RubberBand",
       "NoteHead", "Tremolo",
-      "Hairpin", "Ottava", "Pedal", "Trill",
+      "HairPin", "Ottava", "Pedal", "Trill",
       "Segment", "System", "Compound", "Chord", "Slur",
       "Element", "ElementList", "StaffList", "MeasureList",
       "Layout"

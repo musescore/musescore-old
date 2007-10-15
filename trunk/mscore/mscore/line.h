@@ -99,6 +99,8 @@ class SLine : public Element {
       virtual QRectF bbox() const;
       QList<LineSegment*> lineSegments() { return segments; }
       virtual QPointF tick2pos(int tick, int staff, System** system);
+      virtual void write(Xml&) const;
+      virtual void read(QDomElement);
       };
 
 typedef QList<LineSegment*>::iterator iLineSegment;

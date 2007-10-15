@@ -61,8 +61,6 @@ class Volta : public SLine {
       virtual Volta* clone() const { return new Volta(*this); }
       virtual ElementType type() const { return VOLTA; }
       virtual void layout(ScoreLayout*);
-      virtual void write(Xml&) const;
-      virtual void read(QDomElement);
       virtual LineSegment* createLineSegment();
       virtual QPointF tick2pos(int tick, System** system);
       QList<int> endings() const { return _endings; }
