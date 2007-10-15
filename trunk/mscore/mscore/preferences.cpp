@@ -469,7 +469,7 @@ PreferenceDialog::PreferenceDialog(QWidget* parent)
 //   portaudioApiActivated
 //---------------------------------------------------------
 
-void PreferenceDialog::portaudioApiActivated(int /*idx*/)
+void PreferenceDialog::portaudioApiActivated(int idx)
       {
 #ifdef USE_PORTAUDIO
       Portaudio* audio = (Portaudio*)seq->audioDriver();
