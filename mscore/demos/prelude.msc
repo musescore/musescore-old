@@ -764,12 +764,12 @@ p, li { white-space: pre-wrap; }
     <tick2>77880</tick2>
     <track>0</track>
     <Segment>
-      <off1 x="0.37556" y="4.00597"/>
+      <off1 x="-0.125186" y="3.88077"/>
       <off2 x="0" y="0"/>
       </Segment>
     <Segment>
-      <off1 x="3.63041" y="3.38004"/>
-      <off2 x="-156.456" y="0"/>
+      <off1 x="0.625931" y="4.00596"/>
+      <off2 x="0" y="0"/>
       </Segment>
     </HairPin>
   <Staff id="1">
