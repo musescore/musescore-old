@@ -389,7 +389,6 @@ bool SlurSegment::genPropertyMenu(QMenu* popup) const
 SlurTie::SlurTie(Score* s)
    : Element(s)
       {
-      setTick(0);
       _slurDirection = AUTO;
       up = true;
       }
@@ -568,6 +567,7 @@ void SlurTie::collectElements(QList<Element*>& el)
 Slur::Slur(Score* s)
    : SlurTie(s)
       {
+      setTick(0);
       _tick2  = 0;
       _track2 = 0;
       }
