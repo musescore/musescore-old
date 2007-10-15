@@ -118,6 +118,7 @@ void Dynamic::setSubtype(int idx)
 
 void Dynamic::endDrag()
       {
+#if 1
       int ntick;
       Staff* stf = staff();
       QPointF offset;
@@ -135,6 +136,7 @@ void Dynamic::endDrag()
             }
       else
             printf("Dynamic::endDrag(): measure not found\n");
+#endif
       }
 
 //---------------------------------------------------------

@@ -62,6 +62,7 @@
     <measureNumberInterval>5</measureNumberInterval>
     <measureNumberAllStaffs>0</measureNumberAllStaffs>
     <measureNumberSystem>1</measureNumberSystem>
+    <lyricsDistance>6.5</lyricsDistance>
     </Style>
   <showInvisible>1</showInvisible>
   <page-layout>
@@ -108,87 +109,73 @@ p, li { white-space: pre-wrap; }
       <reverb>30</reverb>
       </Instrument>
     </Part>
+  <Slur>
+    <tick2>2880</tick2>
+    <tick>1920</tick>
+    <SlurSegment no="0">
+      <o1 x="-0.24" y="3.6"/>
+      </SlurSegment>
+    </Slur>
+  <Slur>
+    <tick2>19200</tick2>
+    <tick>18240</tick>
+    </Slur>
   <Staff id="1">
     <Measure number="1">
       <Note pitch="60" tpc="14" ticks="960"/>
       <Note pitch="62" tpc="16" ticks="960"/>
-      <BarLine/>
       </Measure>
     <Measure number="2">
-      <Slur>
-        <startTick>1920</startTick>
-        <endTick>2880</endTick>
-        <SlurSegment no="0">
-          <o1 x="-0.24" y="3.6"/>
-          </SlurSegment>
-        </Slur>
       <Note pitch="64" tpc="18" ticks="960"/>
       <Note pitch="65" tpc="13" ticks="960"/>
-      <BarLine/>
       </Measure>
     <Measure number="3">
       <Note pitch="60" tpc="14" ticks="960"/>
       <Note pitch="62" tpc="16" ticks="960"/>
-      <BarLine/>
       </Measure>
     <Measure number="4">
       <Note pitch="64" tpc="18" ticks="960"/>
       <Note pitch="60" tpc="14" ticks="960"/>
-      <BarLine/>
       </Measure>
     <Measure number="5">
       <Note pitch="62" tpc="16" ticks="960"/>
       <Note pitch="64" tpc="18" ticks="960"/>
-      <BarLine/>
       </Measure>
     <Measure number="6">
       <Note pitch="60" tpc="14" ticks="960"/>
       <Note pitch="62" tpc="16" ticks="960"/>
-      <BarLine/>
       </Measure>
     <Measure number="7">
       <Note pitch="64" tpc="18" ticks="960"/>
       <Note pitch="60" tpc="14" ticks="960"/>
-      <BarLine/>
       </Measure>
     <Measure number="8">
       <Note pitch="62" tpc="16" ticks="960"/>
       <Note pitch="64" tpc="18" ticks="960"/>
-      <BarLine/>
       </Measure>
     <Measure number="9">
       <Note pitch="60" tpc="14" ticks="960"/>
       <Note pitch="62" tpc="16" ticks="960"/>
-      <BarLine/>
       </Measure>
     <Measure number="10">
-      <Slur>
-        <startTick>18240</startTick>
-        <endTick>19200</endTick>
-        </Slur>
       <Note pitch="64" tpc="18" ticks="960"/>
       <Note pitch="60" tpc="14" ticks="960"/>
-      <BarLine/>
       </Measure>
     <Measure number="11">
       <Note pitch="62" tpc="16" ticks="960"/>
       <Note pitch="64" tpc="18" ticks="960"/>
-      <BarLine/>
       </Measure>
     <Measure number="12">
       <Note pitch="60" tpc="14" ticks="960"/>
       <Note pitch="62" tpc="16" ticks="960"/>
-      <BarLine/>
       </Measure>
     <Measure number="13">
       <Note pitch="64" tpc="18" ticks="960"/>
       <Note pitch="60" tpc="14" ticks="960"/>
-      <BarLine/>
       </Measure>
     <Measure number="14">
       <Note pitch="62" tpc="16" ticks="960"/>
       <Note pitch="64" tpc="18" ticks="960"/>
-      <BarLine/>
       </Measure>
     </Staff>
   <cursorTrack>-4</cursorTrack>

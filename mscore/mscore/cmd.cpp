@@ -55,6 +55,7 @@
 #include "hairpin.h"
 #include "keysig.h"
 #include "volta.h"
+#include "dynamics.h"
 
 //---------------------------------------------------------
 //   start
@@ -237,15 +238,18 @@ void Score::cmdAdd1(Element* e, const QPointF& pos, const QPointF& dragOffset)
                   break;
             case DYNAMIC:
                   {
+                  Dynamic* dyn = (Dynamic*)e;
+                  dyn->setTick(tick);
+                  dyn->setParent(measure);
+
                   System* s    = measure->system();
                   int staffIdx = staff->idx();
                   QRectF sb(s->staff(staffIdx)->bbox());
                   sb.translate(s->pos() + s->page()->pos());
                   QPointF anchor(segment->abbox().x(), sb.topLeft().y());
-                  e->setTick(tick);
-                  e->layout(mainLayout());
+                  dyn->layout(mainLayout());
                   QPointF uo(pos - anchor - e->ipos() - dragOffset);
-                  e->setUserOff(uo / _spatium);
+                  dyn->setUserOff(uo / _spatium);
                   }
                   break;
             default:
@@ -1085,7 +1089,7 @@ void Score::resetUserOffsets()
       startCmd();
       QList<Element*> el = *sel->elements();
       for (iElement i = el.begin(); i != el.end(); ++i)
-            (*i)->setUserOff(QPointF(0.0, 0.0));
+            (*i)->resetUserOffsets();
       layoutAll = true;
       endCmd();
       }
@@ -1496,6 +1500,7 @@ void Score::cmd(const QString& cmd)
                               printf("error reading paste data\n");
                               return;
                               }
+                        docName = "--";
                         QDomElement e = doc.documentElement();
                         QPointF dragOffset;
                         int type    = Element::readType(e, &dragOffset);
@@ -1579,6 +1584,7 @@ void Score::pasteStaff(const QMimeData* ms)
             printf("error reading paste data\n");
             return;
             }
+      docName = "--";
       pasteStaff(doc.documentElement(), measure, sel->staffStart);
       }
 

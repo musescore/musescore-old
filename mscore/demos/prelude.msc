@@ -2,9 +2,9 @@
 <museScore version="1.0">
   <Spatium>1.5</Spatium>
   <Division>480</Division>
-  <Mag>1.42822</Mag>
-  <xoff>-162</xoff>
-  <yoff>-202</yoff>
+  <Mag>2.00731</Mag>
+  <xoff>-3198</xoff>
+  <yoff>-717</yoff>
   <Style>
     <staffUpperBorder>8</staffUpperBorder>
     <staffLowerBorder>4</staffLowerBorder>
@@ -62,6 +62,7 @@
     <measureNumberInterval>5</measureNumberInterval>
     <measureNumberAllStaffs>0</measureNumberAllStaffs>
     <measureNumberSystem>1</measureNumberSystem>
+    <lyricsDistance>6.5</lyricsDistance>
     </Style>
   <showInvisible>0</showInvisible>
   <page-layout>
@@ -226,7 +227,6 @@
   <tempolist fix="1.5">
     <tempo tick="0">1.5</tempo>
     </tempolist>
-
   <Part>
     <Staff>
       <cleflist>
@@ -250,495 +250,524 @@ p, li { white-space: pre-wrap; }
       <reverb>30</reverb>
       </Instrument>
     </Part>
-      <Slur>
-        <tick>0</tick>
-        <tick2>240</tick2>
-        </Slur>
-      <Slur>
-        <tick>1200</tick>
-        <tick2>1440</tick2>
-        <SlurSegment no="0">
-          <o4 x="15.4222" y="-5.07639"/>
-          </SlurSegment>
-        </Slur>
-      <Slur>
-        <tick>2640</tick>
-        <tick2>2880</tick2>
-        <SlurSegment no="0">
-          <o4 x="11.8181" y="-3.35139"/>
-          </SlurSegment>
-        </Slur>
-      <Slur>
-        <tick>3840</tick>
-        <tick2>4080</tick2>
-        <SlurSegment no="0">
-          <o4 x="15.5222" y="-4.85069"/>
-          </SlurSegment>
-        </Slur>
-      <Slur>
-        <tick>5280</tick>
-        <tick2>5520</tick2>
-        <SlurSegment no="0">
-          <o4 x="11.774" y="-3.39549"/>
-          </SlurSegment>
-        </Slur>
-      <Slur>
-        <tick>6480</tick>
-        <tick2>6720</tick2>
-        <SlurSegment no="0">
-          <o4 x="14.2875" y="0.132292"/>
-          </SlurSegment>
-        <up>2</up>
-        </Slur>
-      <Slur>
-        <tick>7920</tick>
-        <tick2>8160</tick2>
-        <SlurSegment no="0">
-          <o4 x="11.3771" y="-3.43958"/>
-          </SlurSegment>
-        </Slur>
-      <Slur>
-        <tick>9120</tick>
-        <tick2>9360</tick2>
-        <SlurSegment no="0">
-          <o4 x="14.6403" y="-0.0881944"/>
-          </SlurSegment>
-        <up>2</up>
-        </Slur>
-      <Slur>
-        <tick>10560</tick>
-        <tick2>10800</tick2>
-        <SlurSegment no="0">
-          <o4 x="11.3863" y="-3.33736"/>
-          </SlurSegment>
-        </Slur>
-      <Slur>
-        <tick>11760</tick>
-        <tick2>12000</tick2>
-        <SlurSegment no="0">
-          <o4 x="15.1163" y="-4.95696"/>
-          </SlurSegment>
-        </Slur>
-      <Slur>
-        <tick>13200</tick>
-        <tick2>13440</tick2>
-        <SlurSegment no="0">
-          <o4 x="11.0941" y="-3.63508"/>
-          </SlurSegment>
-        </Slur>
-      <Slur>
-        <tick>14400</tick>
-        <tick2>14640</tick2>
-        <SlurSegment no="0">
-          <o3 x="0.59011" y="0.755341"/>
-          <o4 x="14.8236" y="-4.90971"/>
-          </SlurSegment>
-        </Slur>
-      <Slur>
-        <tick>15840</tick>
-        <tick2>16080</tick2>
-        <SlurSegment no="0">
-          <o2 x="0.313101" y="-0.521836"/>
-          <o4 x="4.25818" y="-1.21066"/>
-          </SlurSegment>
-        </Slur>
-      <Slur>
-        <tick>16560</tick>
-        <tick2>16800</tick2>
-        <SlurSegment no="0">
-          <o2 x="0.0417468" y="-0.709696"/>
-          <o4 x="4.04944" y="-1.23153"/>
-          </SlurSegment>
-        </Slur>
-      <Slur>
-        <tick>18720</tick>
-        <tick2>18960</tick2>
-        <SlurSegment no="0">
-          <o4 x="11.1733" y="-3.43489"/>
-          </SlurSegment>
-        </Slur>
-      <Slur>
-        <tick>19920</tick>
-        <tick2>20160</tick2>
-        <SlurSegment no="0">
-          <o4 x="14.1309" y="-0.142162"/>
-          </SlurSegment>
-        <up>2</up>
-        </Slur>
-      <Slur>
-        <tick>21360</tick>
-        <tick2>21600</tick2>
-        <SlurSegment no="0">
-          <o4 x="10.7475" y="-3.52563"/>
-          </SlurSegment>
-        </Slur>
-      <Slur>
-        <tick>22560</tick>
-        <tick2>22800</tick2>
-        <SlurSegment no="0">
-          <o4 x="13.9319" y="-0.142162"/>
-          </SlurSegment>
-        <up>2</up>
-        </Slur>
-      <Slur>
-        <tick>24000</tick>
-        <tick2>24240</tick2>
-        <SlurSegment no="0">
-          <o2 x="0.810936" y="-0.70697"/>
-          <o4 x="3.95071" y="-1.20601"/>
-          </SlurSegment>
-        </Slur>
-      <Slur>
-        <tick>24720</tick>
-        <tick2>24960</tick2>
-        <SlurSegment no="0">
-          <o2 x="0.956489" y="-0.873316"/>
-          <o4 x="3.90913" y="-1.16442"/>
-          </SlurSegment>
-        </Slur>
-      <Slur>
-        <tick>26880</tick>
-        <tick2>27840</tick2>
-        <track>1</track>
-        <track2>1</track2>
-        <SlurSegment no="0">
-          <o4 x="7.55852" y="1.63134"/>
-          </SlurSegment>
-        <up>1</up>
-        </Slur>
-      <Slur>
-        <tick>26880</tick>
-        <tick2>27120</tick2>
-        <SlurSegment no="0">
-          <o4 x="6.98393" y="-2.13558"/>
-          </SlurSegment>
-        <up>2</up>
-        </Slur>
-      <Slur>
-        <tick>27840</tick>
-        <tick2>28080</tick2>
-        <SlurSegment no="0">
-          <o4 x="7.5034" y="-1.66533e-16"/>
-          </SlurSegment>
-        <up>2</up>
-        </Slur>
-      <Slur>
-        <tick>28800</tick>
-        <tick2>29040</tick2>
-        <SlurSegment no="0">
-          <o4 x="14.2565" y="-4.84835"/>
-          </SlurSegment>
-        </Slur>
-      <Slur>
-        <tick>30240</tick>
-        <tick2>30480</tick2>
-        <SlurSegment no="0">
-          <o4 x="8.48461" y="-5.55112e-17"/>
-          </SlurSegment>
-        <up>2</up>
-        </Slur>
-      <Slur>
-        <tick>31200</tick>
-        <tick2>31440</tick2>
-        <SlurSegment no="0">
-          <o4 x="14.2565" y="-4.84835"/>
-          </SlurSegment>
-        </Slur>
-      <Slur>
-        <tick>32640</tick>
-        <tick2>32880</tick2>
-        <SlurSegment no="0">
-          <o4 x="7.12077" y="-0.390179"/>
-          </SlurSegment>
-        <up>2</up>
-        </Slur>
-      <Slur>
-        <tick>32640</tick>
-        <tick2>33600</tick2>
-        <track>1</track>
-        <track2>1</track2>
-        <SlurSegment no="0">
-          <o1 x="1.59135" y="2.65225"/>
-          <o4 x="1.16699" y="2.75834"/>
-          </SlurSegment>
-        <SlurSegment no="1">
-          <o4 x="34.4435" y="1.84581"/>
-          </SlurSegment>
-        <up>1</up>
-        </Slur>
-      <Slur>
-        <tick>33600</tick>
-        <tick2>33840</tick2>
-        <SlurSegment no="0">
-          <o4 x="7.80837" y="-0.346339"/>
-          </SlurSegment>
-        <up>2</up>
-        </Slur>
-      <Slur>
-        <tick>34560</tick>
-        <tick2>34800</tick2>
-        <SlurSegment no="0">
-          <o4 x="8.28065" y="-0.157427"/>
-          </SlurSegment>
-        <up>2</up>
-        </Slur>
-      <Slur>
-        <tick>35520</tick>
-        <tick2>35760</tick2>
-        <SlurSegment no="0">
-          <o4 x="7.55648" y="-0.40931"/>
-          </SlurSegment>
-        <up>2</up>
-        </Slur>
-      <Slur>
-        <tick>36480</tick>
-        <tick2>36720</tick2>
-        <SlurSegment no="0">
-          <o4 x="3.30596" y="-0.913075"/>
-          </SlurSegment>
-        </Slur>
-      <Slur>
-        <tick>37200</tick>
-        <tick2>37440</tick2>
-        <SlurSegment no="0">
-          <o4 x="3.24299" y="-1.88912"/>
-          </SlurSegment>
-        </Slur>
-      <Slur>
-        <tick>39360</tick>
-        <tick2>39600</tick2>
-        <SlurSegment no="0">
-          <o2 x="0.47228" y="-0.535251"/>
-          <o4 x="3.52636" y="-1.19644"/>
-          </SlurSegment>
-        </Slur>
-      <Slur>
-        <tick>40080</tick>
-        <tick2>40320</tick2>
-        <SlurSegment no="0">
-          <o2 x="0.629707" y="-0.40931"/>
-          <o4 x="3.33745" y="-2.01506"/>
-          </SlurSegment>
-        </Slur>
-      <Slur>
-        <tick>42240</tick>
-        <tick2>42480</tick2>
-        <SlurSegment no="0">
-          <o4 x="8.51411" y="-3.47342"/>
-          </SlurSegment>
-        </Slur>
-      <Slur>
-        <tick>43440</tick>
-        <tick2>43680</tick2>
-        <SlurSegment no="0">
-          <o4 x="11.4792" y="-4.8289"/>
-          </SlurSegment>
-        </Slur>
-      <Slur>
-        <tick>44880</tick>
-        <tick2>45120</tick2>
-        <SlurSegment no="0">
-          <o4 x="8.59883" y="-3.55814"/>
-          </SlurSegment>
-        </Slur>
-      <Slur>
-        <tick>46080</tick>
-        <tick2>46320</tick2>
-        <SlurSegment no="0">
-          <o4 x="11.2023" y="-4.96466"/>
-          </SlurSegment>
-        </Slur>
-      <Slur>
-        <tick>48960</tick>
-        <tick2>49200</tick2>
-        <SlurSegment no="0">
-          <o4 x="11.062" y="-5.01752"/>
-          </SlurSegment>
-        </Slur>
-      <Slur>
-        <tick>51840</tick>
-        <tick2>52080</tick2>
-        <SlurSegment no="0">
-          <o4 x="10.7979" y="-4.57739"/>
-          </SlurSegment>
-        </Slur>
-      <Slur>
-        <tick>53280</tick>
-        <tick2>53520</tick2>
-        <SlurSegment no="0">
-          <o4 x="5.50883" y="-2.59239"/>
-          </SlurSegment>
-        <up>2</up>
-        </Slur>
-      <Slur>
-        <tick>54240</tick>
-        <tick2>54480</tick2>
-        <SlurSegment no="0">
-          <o4 x="6.78652" y="-0.547791"/>
-          </SlurSegment>
-        <up>2</up>
-        </Slur>
-      <Slur>
-        <tick>55200</tick>
-        <tick2>55440</tick2>
-        <SlurSegment no="0">
-          <o4 x="10.9034" y="-3.71965"/>
-          </SlurSegment>
-        </Slur>
-      <Slur>
-        <tick>56640</tick>
-        <tick2>56880</tick2>
-        <SlurSegment no="0">
-          <o4 x="5.66466" y="-3.13757"/>
-          </SlurSegment>
-        <up>2</up>
-        </Slur>
-      <Slur>
-        <tick>57600</tick>
-        <tick2>57840</tick2>
-        <SlurSegment no="0">
-          <o4 x="7.76688" y="-0.189436"/>
-          </SlurSegment>
-        <up>2</up>
-        </Slur>
-      <Slur>
-        <tick>58800</tick>
-        <tick2>59040</tick2>
-        <SlurSegment no="0">
-          <o4 x="9.88856" y="-3.10675"/>
-          </SlurSegment>
-        </Slur>
-      <Slur>
-        <tick>60000</tick>
-        <tick2>60240</tick2>
-        <SlurSegment no="0">
-          <o4 x="12.6164" y="-0.568308"/>
-          </SlurSegment>
-        <up>2</up>
-        </Slur>
-      <Slur>
-        <tick>61440</tick>
-        <tick2>61680</tick2>
-        <SlurSegment no="0">
-          <o4 x="9.69913" y="-3.59929"/>
-          </SlurSegment>
-        </Slur>
-      <Slur>
-        <tick>62640</tick>
-        <tick2>62880</tick2>
-        <SlurSegment no="0">
-          <o4 x="12.7035" y="-0.491886"/>
-          </SlurSegment>
-        <up>2</up>
-        </Slur>
-      <Slur>
-        <tick>64080</tick>
-        <tick2>64320</tick2>
-        <SlurSegment no="0">
-          <o4 x="9.7094" y="-3.65706"/>
-          </SlurSegment>
-        </Slur>
-      <Slur>
-        <tick>65280</tick>
-        <tick2>66240</tick2>
-        <track>1</track>
-        <track2>1</track2>
-        <SlurSegment no="0">
-          <o1 x="1.14874" y="3.32529"/>
-          <o4 x="-0.665058" y="2.90207"/>
-          </SlurSegment>
-        <up>1</up>
-        </Slur>
-      <Slur>
-        <tick>65280</tick>
-        <tick2>65520</tick2>
-        <SlurSegment no="0">
-          <o4 x="11.9106" y="-4.47402"/>
-          </SlurSegment>
-        <up>2</up>
-        </Slur>
-      <Slur>
-        <tick>66480</tick>
-        <tick2>66720</tick2>
-        <track>1</track>
-        <track2>1</track2>
-        <SlurSegment no="0">
-          <o1 x="1.11496" y="3.05582"/>
-          <o2 x="0.289064" y="0.578128"/>
-          <o3 x="0" y="0.702012"/>
-          <o4 x="-0.495538" y="3.26229"/>
-          </SlurSegment>
-        <up>1</up>
-        </Slur>
-      <Slur>
-        <tick>66720</tick>
-        <tick2>66960</tick2>
-        <SlurSegment no="0">
-          <o4 x="9.37393" y="-3.221"/>
-          </SlurSegment>
-        <up>2</up>
-        </Slur>
-      <Slur>
-        <tick>67680</tick>
-        <tick2>67920</tick2>
-        <track>1</track>
-        <track2>1</track2>
-        <SlurSegment no="0">
-          <o1 x="1.15626" y="3.09711"/>
-          <o2 x="0.371654" y="0.619423"/>
-          <o3 x="0" y="0.536833"/>
-          <o4 x="-0.0412948" y="2.93193"/>
-          </SlurSegment>
-        <up>1</up>
-        </Slur>
-      <Slur>
-        <tick>67920</tick>
-        <tick2>68160</tick2>
-        <SlurSegment no="0">
-          <o4 x="12.9666" y="-0.247769"/>
-          </SlurSegment>
-        <up>2</up>
-        </Slur>
-      <Slur>
-        <tick>69360</tick>
-        <tick2>69840</tick2>
-        <track>1</track>
-        <track2>1</track2>
-        <SlurSegment no="0">
-          <o1 x="2.01412" y="2.23736"/>
-          <o2 x="-5.43946" y="-3.17697"/>
-          <o3 x="6.72406" y="-1.37538"/>
-          <o4 x="37.0104" y="2.56325"/>
-          </SlurSegment>
-        <up>1</up>
-        </Slur>
-      <Slur>
-        <tick>72240</tick>
-        <tick2>72720</tick2>
-        <track>1</track>
-        <track2>1</track2>
-        <SlurSegment no="0">
-          <o1 x="1.27084" y="2.28751"/>
-          <o2 x="-4.3844" y="-1.46147"/>
-          <o3 x="0.953131" y="-2.4146"/>
-          <o4 x="34.4398" y="2.73231"/>
-          </SlurSegment>
-        <up>1</up>
-        </Slur>
-      <Slur>
-        <tick>75120</tick>
-        <tick2>75600</tick2>
-        <track>1</track>
-        <track2>1</track2>
-        <SlurSegment no="0">
-          <o1 x="1.33438" y="2.22397"/>
-          <o2 x="-3.30419" y="-0.953131"/>
-          <o3 x="2.16043" y="-1.65209"/>
-          <o4 x="34.1221" y="2.66877"/>
-          </SlurSegment>
-        <up>1</up>
-        </Slur>
-
+  <Slur>
+    <tick2>1440</tick2>
+    <tick>1200</tick>
+    <SlurSegment no="0">
+      <o4 x="15.4222" y="-5.07639"/>
+      </SlurSegment>
+    </Slur>
+  <Slur>
+    <tick2>2880</tick2>
+    <tick>2640</tick>
+    <SlurSegment no="0">
+      <o4 x="11.8181" y="-3.35139"/>
+      </SlurSegment>
+    </Slur>
+  <Slur>
+    <tick2>4080</tick2>
+    <tick>3840</tick>
+    <SlurSegment no="0">
+      <o4 x="15.5222" y="-4.85069"/>
+      </SlurSegment>
+    </Slur>
+  <Slur>
+    <tick2>5520</tick2>
+    <tick>5280</tick>
+    <SlurSegment no="0">
+      <o4 x="11.774" y="-3.39549"/>
+      </SlurSegment>
+    </Slur>
+  <Slur>
+    <tick2>6720</tick2>
+    <tick>6480</tick>
+    <SlurSegment no="0">
+      <o4 x="14.2875" y="0.132292"/>
+      </SlurSegment>
+    <up>2</up>
+    </Slur>
+  <Slur>
+    <tick2>8160</tick2>
+    <tick>7920</tick>
+    <SlurSegment no="0">
+      <o4 x="11.3771" y="-3.43958"/>
+      </SlurSegment>
+    </Slur>
+  <Slur>
+    <tick2>9360</tick2>
+    <tick>9120</tick>
+    <SlurSegment no="0">
+      <o4 x="14.6403" y="-0.0881944"/>
+      </SlurSegment>
+    <up>2</up>
+    </Slur>
+  <Slur>
+    <tick2>10800</tick2>
+    <tick>10560</tick>
+    <SlurSegment no="0">
+      <o4 x="11.3863" y="-3.33736"/>
+      </SlurSegment>
+    </Slur>
+  <Slur>
+    <tick2>12000</tick2>
+    <tick>11760</tick>
+    <SlurSegment no="0">
+      <o4 x="15.1163" y="-4.95696"/>
+      </SlurSegment>
+    </Slur>
+  <Slur>
+    <tick2>13440</tick2>
+    <tick>13200</tick>
+    <SlurSegment no="0">
+      <o4 x="11.0941" y="-3.63508"/>
+      </SlurSegment>
+    </Slur>
+  <Slur>
+    <tick2>14640</tick2>
+    <tick>14400</tick>
+    <SlurSegment no="0">
+      <o3 x="0.59011" y="0.755341"/>
+      <o4 x="14.8236" y="-4.90971"/>
+      </SlurSegment>
+    </Slur>
+  <Slur>
+    <tick2>16080</tick2>
+    <tick>15840</tick>
+    <SlurSegment no="0">
+      <o2 x="0.313101" y="-0.521836"/>
+      <o4 x="4.25818" y="-1.21066"/>
+      </SlurSegment>
+    </Slur>
+  <Slur>
+    <tick2>16800</tick2>
+    <tick>16560</tick>
+    <SlurSegment no="0">
+      <o2 x="0.0417468" y="-0.709696"/>
+      <o4 x="4.04944" y="-1.23153"/>
+      </SlurSegment>
+    </Slur>
+  <Slur>
+    <tick2>18960</tick2>
+    <tick>18720</tick>
+    <SlurSegment no="0">
+      <o4 x="11.1733" y="-3.43489"/>
+      </SlurSegment>
+    </Slur>
+  <Slur>
+    <tick2>20160</tick2>
+    <tick>19920</tick>
+    <SlurSegment no="0">
+      <o4 x="14.1309" y="-0.142162"/>
+      </SlurSegment>
+    <up>2</up>
+    </Slur>
+  <Slur>
+    <tick2>21600</tick2>
+    <tick>21360</tick>
+    <SlurSegment no="0">
+      <o4 x="10.7475" y="-3.52563"/>
+      </SlurSegment>
+    </Slur>
+  <Slur>
+    <tick2>22800</tick2>
+    <tick>22560</tick>
+    <SlurSegment no="0">
+      <o4 x="13.9319" y="-0.142162"/>
+      </SlurSegment>
+    <up>2</up>
+    </Slur>
+  <Slur>
+    <tick2>24240</tick2>
+    <tick>24000</tick>
+    <SlurSegment no="0">
+      <o2 x="0.810936" y="-0.70697"/>
+      <o4 x="3.95071" y="-1.20601"/>
+      </SlurSegment>
+    </Slur>
+  <Slur>
+    <tick2>24960</tick2>
+    <tick>24720</tick>
+    <SlurSegment no="0">
+      <o2 x="0.956489" y="-0.873316"/>
+      <o4 x="3.90913" y="-1.16442"/>
+      </SlurSegment>
+    </Slur>
+  <Slur>
+    <tick2>27840</tick2>
+    <track>1</track>
+    <track2>1</track2>
+    <voice>1</voice>
+    <tick>26880</tick>
+    <SlurSegment no="0">
+      <o4 x="7.55852" y="1.63134"/>
+      </SlurSegment>
+    <up>1</up>
+    </Slur>
+  <Slur>
+    <tick2>28080</tick2>
+    <tick>27840</tick>
+    <SlurSegment no="0">
+      <o4 x="7.5034" y="-1.66533e-16"/>
+      </SlurSegment>
+    <up>2</up>
+    </Slur>
+  <Slur>
+    <tick2>29040</tick2>
+    <tick>28800</tick>
+    <SlurSegment no="0">
+      <o4 x="14.2565" y="-4.84835"/>
+      </SlurSegment>
+    </Slur>
+  <Slur>
+    <tick2>30480</tick2>
+    <tick>30240</tick>
+    <SlurSegment no="0">
+      <o4 x="8.48461" y="-5.55112e-17"/>
+      </SlurSegment>
+    <up>2</up>
+    </Slur>
+  <Slur>
+    <tick2>31440</tick2>
+    <tick>31200</tick>
+    <SlurSegment no="0">
+      <o4 x="14.2565" y="-4.84835"/>
+      </SlurSegment>
+    </Slur>
+  <Slur>
+    <tick2>32880</tick2>
+    <tick>32640</tick>
+    <SlurSegment no="0">
+      <o4 x="7.12077" y="-0.390179"/>
+      </SlurSegment>
+    <up>2</up>
+    </Slur>
+  <Slur>
+    <tick2>33840</tick2>
+    <tick>33600</tick>
+    <SlurSegment no="0">
+      <o4 x="7.80837" y="-0.346339"/>
+      </SlurSegment>
+    <up>2</up>
+    </Slur>
+  <Slur>
+    <tick2>34800</tick2>
+    <tick>34560</tick>
+    <SlurSegment no="0">
+      <o4 x="8.28065" y="-0.157427"/>
+      </SlurSegment>
+    <up>2</up>
+    </Slur>
+  <Slur>
+    <tick2>35760</tick2>
+    <tick>35520</tick>
+    <SlurSegment no="0">
+      <o4 x="7.55648" y="-0.40931"/>
+      </SlurSegment>
+    <up>2</up>
+    </Slur>
+  <Slur>
+    <tick2>36720</tick2>
+    <tick>36480</tick>
+    <SlurSegment no="0">
+      <o4 x="3.30596" y="-0.913075"/>
+      </SlurSegment>
+    </Slur>
+  <Slur>
+    <tick2>37440</tick2>
+    <tick>37200</tick>
+    <SlurSegment no="0">
+      <o4 x="3.24299" y="-1.88912"/>
+      </SlurSegment>
+    </Slur>
+  <Slur>
+    <tick2>39600</tick2>
+    <tick>39360</tick>
+    <SlurSegment no="0">
+      <o2 x="0.47228" y="-0.535251"/>
+      <o4 x="3.52636" y="-1.19644"/>
+      </SlurSegment>
+    </Slur>
+  <Slur>
+    <tick2>40320</tick2>
+    <tick>40080</tick>
+    <SlurSegment no="0">
+      <o2 x="0.629707" y="-0.40931"/>
+      <o4 x="3.33745" y="-2.01506"/>
+      </SlurSegment>
+    </Slur>
+  <Slur>
+    <tick2>42480</tick2>
+    <tick>42240</tick>
+    <SlurSegment no="0">
+      <o4 x="8.51411" y="-3.47342"/>
+      </SlurSegment>
+    </Slur>
+  <Slur>
+    <tick2>43680</tick2>
+    <tick>43440</tick>
+    <SlurSegment no="0">
+      <o4 x="11.4792" y="-4.8289"/>
+      </SlurSegment>
+    </Slur>
+  <Slur>
+    <tick2>45120</tick2>
+    <tick>44880</tick>
+    <SlurSegment no="0">
+      <o4 x="8.59883" y="-3.55814"/>
+      </SlurSegment>
+    </Slur>
+  <Slur>
+    <tick2>46320</tick2>
+    <tick>46080</tick>
+    <SlurSegment no="0">
+      <o4 x="11.2023" y="-4.96466"/>
+      </SlurSegment>
+    </Slur>
+  <Slur>
+    <tick2>49200</tick2>
+    <tick>48960</tick>
+    <SlurSegment no="0">
+      <o4 x="11.062" y="-5.01752"/>
+      </SlurSegment>
+    </Slur>
+  <Slur>
+    <tick2>52080</tick2>
+    <tick>51840</tick>
+    <SlurSegment no="0">
+      <o4 x="10.7979" y="-4.57739"/>
+      </SlurSegment>
+    </Slur>
+  <Slur>
+    <tick2>53520</tick2>
+    <tick>53280</tick>
+    <SlurSegment no="0">
+      <o4 x="5.50883" y="-2.59239"/>
+      </SlurSegment>
+    <up>2</up>
+    </Slur>
+  <Slur>
+    <tick2>54480</tick2>
+    <tick>54240</tick>
+    <SlurSegment no="0">
+      <o4 x="6.78652" y="-0.547791"/>
+      </SlurSegment>
+    <up>2</up>
+    </Slur>
+  <Slur>
+    <tick2>55440</tick2>
+    <tick>55200</tick>
+    <SlurSegment no="0">
+      <o4 x="10.9034" y="-3.71965"/>
+      </SlurSegment>
+    </Slur>
+  <Slur>
+    <tick2>56880</tick2>
+    <tick>56640</tick>
+    <SlurSegment no="0">
+      <o4 x="5.66466" y="-3.13757"/>
+      </SlurSegment>
+    <up>2</up>
+    </Slur>
+  <Slur>
+    <tick2>57840</tick2>
+    <tick>57600</tick>
+    <SlurSegment no="0">
+      <o4 x="7.76688" y="-0.189436"/>
+      </SlurSegment>
+    <up>2</up>
+    </Slur>
+  <Slur>
+    <tick2>59040</tick2>
+    <tick>58800</tick>
+    <SlurSegment no="0">
+      <o4 x="9.88856" y="-3.10675"/>
+      </SlurSegment>
+    </Slur>
+  <Slur>
+    <tick2>60240</tick2>
+    <tick>60000</tick>
+    <SlurSegment no="0">
+      <o4 x="12.6164" y="-0.568308"/>
+      </SlurSegment>
+    <up>2</up>
+    </Slur>
+  <Slur>
+    <tick2>61680</tick2>
+    <tick>61440</tick>
+    <SlurSegment no="0">
+      <o4 x="9.69913" y="-3.59929"/>
+      </SlurSegment>
+    </Slur>
+  <Slur>
+    <tick2>62880</tick2>
+    <tick>62640</tick>
+    <SlurSegment no="0">
+      <o4 x="12.7035" y="-0.491886"/>
+      </SlurSegment>
+    <up>2</up>
+    </Slur>
+  <Slur>
+    <tick2>64320</tick2>
+    <tick>64080</tick>
+    <SlurSegment no="0">
+      <o4 x="9.7094" y="-3.65706"/>
+      </SlurSegment>
+    </Slur>
+  <Slur>
+    <tick2>66240</tick2>
+    <track>1</track>
+    <track2>1</track2>
+    <voice>1</voice>
+    <tick>65280</tick>
+    <SlurSegment no="0">
+      <o1 x="1.14874" y="3.32529"/>
+      <o4 x="-0.665058" y="2.90207"/>
+      </SlurSegment>
+    <up>1</up>
+    </Slur>
+  <Slur>
+    <tick2>66720</tick2>
+    <track>1</track>
+    <track2>1</track2>
+    <voice>1</voice>
+    <tick>66480</tick>
+    <SlurSegment no="0">
+      <o1 x="1.11496" y="3.05582"/>
+      <o2 x="0.289064" y="0.578128"/>
+      <o3 x="0" y="0.702012"/>
+      <o4 x="-0.495538" y="3.26229"/>
+      </SlurSegment>
+    <up>1</up>
+    </Slur>
+  <Slur>
+    <tick2>66960</tick2>
+    <tick>66720</tick>
+    <SlurSegment no="0">
+      <o4 x="9.37393" y="-3.221"/>
+      </SlurSegment>
+    <up>2</up>
+    </Slur>
+  <Slur>
+    <tick2>67920</tick2>
+    <track>1</track>
+    <track2>1</track2>
+    <voice>1</voice>
+    <tick>67680</tick>
+    <SlurSegment no="0">
+      <o1 x="1.15626" y="3.09711"/>
+      <o2 x="0.371654" y="0.619423"/>
+      <o3 x="0" y="0.536833"/>
+      <o4 x="-0.0412948" y="2.93193"/>
+      </SlurSegment>
+    <up>1</up>
+    </Slur>
+  <Slur>
+    <tick2>68160</tick2>
+    <tick>67920</tick>
+    <SlurSegment no="0">
+      <o4 x="12.9666" y="-0.247769"/>
+      </SlurSegment>
+    <up>2</up>
+    </Slur>
+  <Slur>
+    <tick2>69840</tick2>
+    <track>1</track>
+    <track2>1</track2>
+    <voice>1</voice>
+    <tick>69360</tick>
+    <SlurSegment no="0">
+      <o1 x="2.01412" y="2.23736"/>
+      <o2 x="-5.43946" y="-3.17697"/>
+      <o3 x="6.72406" y="-1.37538"/>
+      <o4 x="37.0104" y="2.56325"/>
+      </SlurSegment>
+    <up>1</up>
+    </Slur>
+  <Slur>
+    <tick2>72720</tick2>
+    <track>1</track>
+    <track2>1</track2>
+    <voice>1</voice>
+    <tick>72240</tick>
+    <SlurSegment no="0">
+      <o1 x="1.27084" y="2.28751"/>
+      <o2 x="-4.3844" y="-1.46147"/>
+      <o3 x="0.953131" y="-2.4146"/>
+      <o4 x="34.4398" y="2.73231"/>
+      </SlurSegment>
+    <up>1</up>
+    </Slur>
+  <Slur>
+    <tick2>75600</tick2>
+    <track>1</track>
+    <track2>1</track2>
+    <voice>1</voice>
+    <tick>75120</tick>
+    <SlurSegment no="0">
+      <o1 x="1.33438" y="2.22397"/>
+      <o2 x="-3.30419" y="-0.953131"/>
+      <o3 x="2.16043" y="-1.65209"/>
+      <o4 x="34.1221" y="2.66877"/>
+      </SlurSegment>
+    <up>1</up>
+    </Slur>
+  <Slur>
+    <tick2>960</tick2>
+    <tick>0</tick>
+    <SlurSegment no="0">
+      <o4 x="0.0141111" y="0"/>
+      </SlurSegment>
+    </Slur>
+  <Slur>
+    <tick2>35520</tick2>
+    <track>1</track>
+    <track2>1</track2>
+    <voice>1</voice>
+    <tick>32640</tick>
+    <SlurSegment no="0">
+      <offset x="0.849659" y="3.53458"/>
+      <o4 x="0.296333" y="0"/>
+      </SlurSegment>
+    <SlurSegment no="1">
+      <o4 x="-0.159996" y="1.22663"/>
+      </SlurSegment>
+    </Slur>
+  <Slur>
+    <tick2>54720</tick2>
+    <track>1</track>
+    <track2>1</track2>
+    <voice>1</voice>
+    <tick>53280</tick>
+    <SlurSegment no="0">
+      <o1 x="0.91388" y="0.91388"/>
+      <o4 x="-0.337381" y="-0.0702985"/>
+      </SlurSegment>
+    </Slur>
+  <Slur>
+    <tick2>58080</tick2>
+    <track>1</track>
+    <track2>1</track2>
+    <voice>1</voice>
+    <tick>56640</tick>
+    <SlurSegment no="0">
+      <o4 x="0.141111" y="0"/>
+      </SlurSegment>
+    <SlurSegment no="1">
+      <o1 x="0" y="-0.702985"/>
+      <o3 x="-0.140597" y="-1.40597"/>
+      <o4 x="-0.351492" y="1.89806"/>
+      </SlurSegment>
+    <up>1</up>
+    </Slur>
+  <HairPin>
+    <tick>69600</tick>
+    <tick2>72240</tick2>
+    <track>0</track>
+    <Segment>
+      <off1 x="-222.23" y="4.35"/>
+      <off2 x="0.282222" y="0"/>
+      </Segment>
+    </HairPin>
   <Staff id="1">
     <Measure number="1">
       <Text>
@@ -768,6 +797,10 @@ p, li { white-space: pre-wrap; }
 &lt;p align=&quot;right&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Dave Phillips 2005&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
         <subtype>Composer</subtype>
         </Text>
+      <Symbol>
+        <name>clef eight</name>
+        <offset x="128.065" y="127.884"/>
+        </Symbol>
       <Dynamic>
         <subtype>f</subtype>
         <offset x="-0.790478" y="2.79612"/>
@@ -890,7 +923,6 @@ p, li { white-space: pre-wrap; }
             </Text>
           </Note>
         </Chord>
-      <BarLine/>
       </Measure>
     <Measure number="2">
       <Text>
@@ -1038,7 +1070,6 @@ p, li { white-space: pre-wrap; }
             </Text>
           </Note>
         </Chord>
-      <BarLine/>
       </Measure>
     <Measure number="3">
       <Dynamic>
@@ -1062,7 +1093,6 @@ p, li { white-space: pre-wrap; }
       <Note pitch="71" tpc="19" ticks="240"/>
       <Note pitch="72" tpc="14" ticks="240"/>
       <Note pitch="76" tpc="18" ticks="240"/>
-      <BarLine/>
       </Measure>
     <Measure number="4">
       <TimeSig>
@@ -1076,7 +1106,6 @@ p, li { white-space: pre-wrap; }
       <Note pitch="72" tpc="14" ticks="240"/>
       <Note pitch="74" tpc="16" ticks="240"/>
       <Note pitch="79" tpc="15" ticks="240"/>
-      <BarLine/>
       </Measure>
     <Measure number="5">
       <LayoutBreak>
@@ -1192,7 +1221,6 @@ p, li { white-space: pre-wrap; }
             </Text>
           </Note>
         </Chord>
-      <BarLine/>
       </Measure>
     <Measure number="6">
       <Text>
@@ -1264,7 +1292,6 @@ p, li { white-space: pre-wrap; }
             </Text>
           </Note>
         </Chord>
-      <BarLine/>
       <Chord>
         <voice>1</voice>
         <tick>6480</tick>
@@ -1293,7 +1320,6 @@ p, li { white-space: pre-wrap; }
       <Note pitch="69" tpc="17" ticks="240"/>
       <Note pitch="72" tpc="14" ticks="240"/>
       <Note pitch="76" tpc="18" ticks="240"/>
-      <BarLine/>
       </Measure>
     <Measure number="8">
       <Text>
@@ -1325,7 +1351,6 @@ p, li { white-space: pre-wrap; }
       <Note pitch="67" tpc="15" ticks="240"/>
       <Note pitch="64" tpc="18" ticks="240"/>
       <Note pitch="59" tpc="19" ticks="240"/>
-      <BarLine/>
       <Chord>
         <voice>1</voice>
         <tick>9120</tick>
@@ -1358,7 +1383,6 @@ p, li { white-space: pre-wrap; }
       <Note pitch="71" tpc="19" ticks="240"/>
       <Note pitch="72" tpc="14" ticks="240"/>
       <Note pitch="76" tpc="18" ticks="240"/>
-      <BarLine/>
       </Measure>
     <Measure number="10">
       <LayoutBreak>
@@ -1375,7 +1399,6 @@ p, li { white-space: pre-wrap; }
       <Note pitch="72" tpc="14" ticks="240"/>
       <Note pitch="74" tpc="16" ticks="240"/>
       <Note pitch="79" tpc="15" ticks="240"/>
-      <BarLine/>
       </Measure>
     <Measure number="11">
       <Dynamic>
@@ -1399,7 +1422,6 @@ p, li { white-space: pre-wrap; }
       <Note pitch="71" tpc="19" ticks="240"/>
       <Note pitch="72" tpc="14" ticks="240"/>
       <Note pitch="76" tpc="18" ticks="240"/>
-      <BarLine/>
       </Measure>
     <Measure number="12">
       <TimeSig>
@@ -1413,7 +1435,6 @@ p, li { white-space: pre-wrap; }
       <Note pitch="72" tpc="14" ticks="240"/>
       <Note pitch="74" tpc="16" ticks="240"/>
       <Note pitch="79" tpc="15" ticks="240"/>
-      <BarLine/>
       </Measure>
     <Measure number="13">
       <Chord>
@@ -1551,7 +1572,6 @@ p, li { white-space: pre-wrap; }
             </Text>
           </Note>
         </Chord>
-      <BarLine/>
       </Measure>
     <Measure number="14">
       <Chord>
@@ -1664,7 +1684,6 @@ p, li { white-space: pre-wrap; }
         <Note pitch="62" tpc="16"/>
         <Note pitch="68" tpc="10"/>
         </Chord>
-      <BarLine/>
       </Measure>
     <Measure number="15">
       <LayoutBreak>
@@ -1680,7 +1699,6 @@ p, li { white-space: pre-wrap; }
       <Note pitch="69" tpc="17" ticks="240"/>
       <Note pitch="72" tpc="14" ticks="240"/>
       <Note pitch="76" tpc="18" ticks="240"/>
-      <BarLine/>
       </Measure>
     <Measure number="16">
       <TimeSig>
@@ -1698,7 +1716,6 @@ p, li { white-space: pre-wrap; }
       <Note pitch="67" tpc="15" ticks="240"/>
       <Note pitch="64" tpc="18" ticks="240"/>
       <Note pitch="59" tpc="19" ticks="240"/>
-      <BarLine/>
       <Chord>
         <voice>1</voice>
         <tick>19920</tick>
@@ -1727,7 +1744,6 @@ p, li { white-space: pre-wrap; }
       <Note pitch="69" tpc="17" ticks="240"/>
       <Note pitch="72" tpc="14" ticks="240"/>
       <Note pitch="76" tpc="18" ticks="240"/>
-      <BarLine/>
       </Measure>
     <Measure number="18">
       <TimeSig>
@@ -1745,7 +1761,6 @@ p, li { white-space: pre-wrap; }
       <Note pitch="67" tpc="15" ticks="240"/>
       <Note pitch="64" tpc="18" ticks="240"/>
       <Note pitch="59" tpc="19" ticks="240"/>
-      <BarLine/>
       <Chord>
         <voice>1</voice>
         <tick>22560</tick>
@@ -1768,7 +1783,7 @@ p, li { white-space: pre-wrap; }
         <ticklen>240</ticklen>
         <Attribute>
           <subtype>sforzato</subtype>
-          <offset x="0.124759" y="0.270312"/>
+          <offset x="0.124759" y="0.863124"/>
           </Attribute>
         <Note pitch="60" tpc="14"/>
         </Chord>
@@ -1779,13 +1794,12 @@ p, li { white-space: pre-wrap; }
         <BeamMode>begin</BeamMode>
         <Attribute>
           <subtype>sforzato</subtype>
-          <offset x="0.191959" y="0.161526"/>
+          <offset x="0.191959" y="0.754338"/>
           </Attribute>
         <Note pitch="58" tpc="12"/>
         </Chord>
       <Note pitch="62" tpc="16" ticks="240"/>
       <Note pitch="65" tpc="13" ticks="240"/>
-      <BarLine/>
       </Measure>
     <Measure number="20">
       <LayoutBreak>
@@ -1829,7 +1843,6 @@ p, li { white-space: pre-wrap; }
         <Note pitch="62" tpc="16"/>
         <Note pitch="68" tpc="10"/>
         </Chord>
-      <BarLine/>
       </Measure>
     <Measure number="21">
       <TimeSig>
@@ -1845,7 +1858,6 @@ p, li { white-space: pre-wrap; }
       <Note pitch="64" tpc="18" ticks="240"/>
       <Note pitch="71" tpc="19" ticks="240"/>
       <Note pitch="72" tpc="14" ticks="240"/>
-      <BarLine/>
       <Chord>
         <voice>1</voice>
         <tick>26880</tick>
@@ -1886,7 +1898,6 @@ p, li { white-space: pre-wrap; }
       <Note pitch="66" tpc="20" ticks="240"/>
       <Note pitch="69" tpc="17" ticks="240"/>
       <Note pitch="54" tpc="20" ticks="240"/>
-      <BarLine/>
       <Chord>
         <voice>1</voice>
         <tick>27840</tick>
@@ -2051,7 +2062,6 @@ p, li { white-space: pre-wrap; }
             </Text>
           </Note>
         </Chord>
-      <BarLine/>
       </Measure>
     <Measure number="24">
       <TimeSig>
@@ -2067,7 +2077,6 @@ p, li { white-space: pre-wrap; }
       <Note pitch="66" tpc="20" ticks="240"/>
       <Note pitch="69" tpc="17" ticks="240"/>
       <Note pitch="54" tpc="20" ticks="240"/>
-      <BarLine/>
       <Chord>
         <voice>1</voice>
         <tick>30240</tick>
@@ -2111,7 +2120,6 @@ p, li { white-space: pre-wrap; }
       <Note pitch="67" tpc="15" ticks="240"/>
       <Note pitch="71" tpc="19" ticks="240"/>
       <Note pitch="76" tpc="18" ticks="240"/>
-      <BarLine/>
       </Measure>
     <Measure number="26">
       <LayoutBreak>
@@ -2129,7 +2137,7 @@ p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-size:10pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:9pt;&quot;&gt;&lt;span style=&quot; font-size:10pt; font-weight:600;&quot;&gt;III___________&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
         <subtype>System</subtype>
-        <offset x="-0.569321" y="-4.56108"/>
+        <offset x="-0.57" y="-4.56"/>
         </Text>
       <TimeSig>
         <subtype>264</subtype>
@@ -2221,7 +2229,6 @@ p, li { white-space: pre-wrap; }
             </Text>
           </Note>
         </Chord>
-      <BarLine/>
       <Chord>
         <voice>1</voice>
         <tick>32640</tick>
@@ -2325,14 +2332,13 @@ p, li { white-space: pre-wrap; }
             </Text>
           </Note>
         </Chord>
-      <BarLine/>
       <Chord>
         <voice>1</voice>
         <tick>33600</tick>
         <ticklen>960</ticklen>
         <Attribute>
           <subtype>sforzato</subtype>
-          <offset x="0.240033" y="-8.02233"/>
+          <offset x="0.346697" y="-6.7957"/>
           <voice>1</voice>
           </Attribute>
         <StemDirection>up</StemDirection>
@@ -2356,7 +2362,7 @@ p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-size:10pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:9pt;&quot;&gt;&lt;span style=&quot; font-size:10pt; font-weight:600;&quot;&gt;III____________&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
         <subtype>System</subtype>
-        <offset x="-0.161157" y="-6.10588"/>
+        <offset x="-0.587812" y="-5.78589"/>
         </Text>
       <Chord>
         <ticklen>240</ticklen>
@@ -2443,14 +2449,13 @@ p, li { white-space: pre-wrap; }
             </Text>
           </Note>
         </Chord>
-      <BarLine/>
       <Chord>
         <voice>1</voice>
         <tick>34560</tick>
         <ticklen>960</ticklen>
         <Attribute>
           <subtype>sforzato</subtype>
-          <offset x="0.240033" y="-8.02233"/>
+          <offset x="0.400029" y="-6.95569"/>
           <voice>1</voice>
           </Attribute>
         <StemDirection>up</StemDirection>
@@ -2524,7 +2529,6 @@ p, li { white-space: pre-wrap; }
             </Text>
           </Note>
         </Chord>
-      <BarLine/>
       <Chord>
         <voice>1</voice>
         <tick>35520</tick>
@@ -2683,7 +2687,6 @@ p, li { white-space: pre-wrap; }
             </Text>
           </Note>
         </Chord>
-      <BarLine/>
       </Measure>
     <Measure number="31">
       <Note pitch="56" tpc="10" ticks="240"/>
@@ -2721,7 +2724,6 @@ p, li { white-space: pre-wrap; }
         <Note pitch="69" tpc="17"/>
         </Chord>
       <Note pitch="58" tpc="12" ticks="240"/>
-      <BarLine/>
       </Measure>
     <Measure number="32">
       <LayoutBreak>
@@ -2748,7 +2750,6 @@ p, li { white-space: pre-wrap; }
         </Chord>
       <Note pitch="59" tpc="19" ticks="240"/>
       <Note pitch="65" tpc="13" ticks="240"/>
-      <BarLine/>
       </Measure>
     <Measure number="33">
       <Note pitch="56" tpc="10" ticks="240"/>
@@ -2795,7 +2796,6 @@ p, li { white-space: pre-wrap; }
         <Note pitch="65" tpc="13"/>
         <Note pitch="67" tpc="15"/>
         </Chord>
-      <BarLine/>
       </Measure>
     <Measure number="34">
       <stretch>0.9</stretch>
@@ -2813,7 +2813,6 @@ p, li { white-space: pre-wrap; }
       <Note pitch="71" tpc="19" ticks="240"/>
       <Note pitch="72" tpc="14" ticks="240"/>
       <Note pitch="76" tpc="18" ticks="240"/>
-      <BarLine/>
       </Measure>
     <Measure number="35">
       <stretch>0.9</stretch>
@@ -2828,7 +2827,6 @@ p, li { white-space: pre-wrap; }
       <Note pitch="72" tpc="14" ticks="240"/>
       <Note pitch="74" tpc="16" ticks="240"/>
       <Note pitch="79" tpc="15" ticks="240"/>
-      <BarLine/>
       </Measure>
     <Measure number="36">
       <stretch>0.9</stretch>
@@ -2846,7 +2844,6 @@ p, li { white-space: pre-wrap; }
       <Note pitch="71" tpc="19" ticks="240"/>
       <Note pitch="72" tpc="14" ticks="240"/>
       <Note pitch="76" tpc="18" ticks="240"/>
-      <BarLine/>
       </Measure>
     <Measure number="37">
       <stretch>0.9</stretch>
@@ -2861,7 +2858,6 @@ p, li { white-space: pre-wrap; }
       <Note pitch="72" tpc="14" ticks="240"/>
       <Note pitch="74" tpc="16" ticks="240"/>
       <Note pitch="79" tpc="15" ticks="240"/>
-      <BarLine/>
       </Measure>
     <Measure number="38">
       <LayoutBreak>
@@ -2948,7 +2944,6 @@ p, li { white-space: pre-wrap; }
         <Note pitch="75" tpc="11"/>
         </Chord>
       <Note pitch="56" tpc="10" ticks="240"/>
-      <BarLine/>
       </Measure>
     <Measure number="39">
       <Note pitch="55" tpc="15" ticks="240"/>
@@ -2957,7 +2952,6 @@ p, li { white-space: pre-wrap; }
       <Note pitch="71" tpc="19" ticks="240"/>
       <Note pitch="76" tpc="18" ticks="240"/>
       <Note pitch="79" tpc="15" ticks="240"/>
-      <BarLine/>
       </Measure>
     <Measure number="40">
       <stretch>0.9</stretch>
@@ -2993,7 +2987,6 @@ p, li { white-space: pre-wrap; }
         <Note pitch="76" tpc="18"/>
         </Chord>
       <Note pitch="56" tpc="10" ticks="240"/>
-      <BarLine/>
       </Measure>
     <Measure number="41">
       <stretch>0.9</stretch>
@@ -3003,7 +2996,6 @@ p, li { white-space: pre-wrap; }
       <Note pitch="69" tpc="17" ticks="240"/>
       <Note pitch="76" tpc="18" ticks="240"/>
       <Note pitch="79" tpc="15" ticks="240"/>
-      <BarLine/>
       </Measure>
     <Measure number="42">
       <stretch>0.9</stretch>
@@ -3020,7 +3012,6 @@ p, li { white-space: pre-wrap; }
       <Note pitch="64" tpc="18" ticks="240"/>
       <Note pitch="71" tpc="19" ticks="240"/>
       <Note pitch="72" tpc="14" ticks="240"/>
-      <BarLine/>
       <Chord>
         <voice>1</voice>
         <tick>53280</tick>
@@ -3053,14 +3044,13 @@ p, li { white-space: pre-wrap; }
       <Note pitch="66" tpc="20" ticks="240"/>
       <Note pitch="69" tpc="17" ticks="240"/>
       <Note pitch="54" tpc="20" ticks="240"/>
-      <BarLine/>
       <Chord>
         <voice>1</voice>
         <tick>54240</tick>
         <ticklen>480</ticklen>
         <Attribute>
           <subtype>sforzato</subtype>
-          <offset x="0.19953" y="-5.6866"/>
+          <offset x="0.19953" y="-6.38958"/>
           <voice>1</voice>
           </Attribute>
         <StemDirection>up</StemDirection>
@@ -3075,7 +3065,7 @@ p, li { white-space: pre-wrap; }
         <ticklen>480</ticklen>
         <Attribute>
           <subtype>sforzato</subtype>
-          <offset x="0.19953" y="-5.6866"/>
+          <offset x="0.691619" y="-6.53018"/>
           <voice>1</voice>
           </Attribute>
         <Note>
@@ -3098,7 +3088,6 @@ p, li { white-space: pre-wrap; }
       <Note pitch="67" tpc="15" ticks="240"/>
       <Note pitch="69" tpc="17" ticks="240"/>
       <Note pitch="71" tpc="19" ticks="240"/>
-      <BarLine/>
       </Measure>
     <Measure number="45">
       <LayoutBreak>
@@ -3117,7 +3106,6 @@ p, li { white-space: pre-wrap; }
       <Note pitch="64" tpc="18" ticks="240"/>
       <Note pitch="71" tpc="19" ticks="240"/>
       <Note pitch="72" tpc="14" ticks="240"/>
-      <BarLine/>
       <Chord>
         <voice>1</voice>
         <tick>56640</tick>
@@ -3144,14 +3132,13 @@ p, li { white-space: pre-wrap; }
       <Note pitch="66" tpc="20" ticks="240"/>
       <Note pitch="69" tpc="17" ticks="240"/>
       <Note pitch="54" tpc="20" ticks="240"/>
-      <BarLine/>
       <Chord>
         <voice>1</voice>
         <tick>57600</tick>
         <ticklen>480</ticklen>
         <Attribute>
           <subtype>sforzato</subtype>
-          <offset x="0.0378872" y="-5.72097"/>
+          <offset x="0.529977" y="-7.26754"/>
           <voice>1</voice>
           </Attribute>
         <StemDirection>up</StemDirection>
@@ -3191,7 +3178,6 @@ p, li { white-space: pre-wrap; }
       <Note pitch="67" tpc="15" ticks="240"/>
       <Note pitch="71" tpc="19" ticks="240"/>
       <Note pitch="76" tpc="18" ticks="240"/>
-      <BarLine/>
       </Measure>
     <Measure number="48">
       <Chord>
@@ -3204,7 +3190,6 @@ p, li { white-space: pre-wrap; }
       <Note pitch="67" tpc="15" ticks="240"/>
       <Note pitch="64" tpc="18" ticks="240"/>
       <Note pitch="59" tpc="19" ticks="240"/>
-      <BarLine/>
       <Chord>
         <voice>1</voice>
         <tick>60000</tick>
@@ -3233,7 +3218,6 @@ p, li { white-space: pre-wrap; }
       <Note pitch="69" tpc="17" ticks="240"/>
       <Note pitch="72" tpc="14" ticks="240"/>
       <Note pitch="76" tpc="18" ticks="240"/>
-      <BarLine/>
       </Measure>
     <Measure number="50">
       <TimeSig>
@@ -3251,7 +3235,6 @@ p, li { white-space: pre-wrap; }
       <Note pitch="67" tpc="15" ticks="240"/>
       <Note pitch="64" tpc="18" ticks="240"/>
       <Note pitch="59" tpc="19" ticks="240"/>
-      <BarLine/>
       <Chord>
         <voice>1</voice>
         <tick>62640</tick>
@@ -3287,7 +3270,6 @@ p, li { white-space: pre-wrap; }
       <Note pitch="71" tpc="19" ticks="240"/>
       <Note pitch="72" tpc="14" ticks="240"/>
       <Note pitch="76" tpc="18" ticks="240"/>
-      <BarLine/>
       </Measure>
     <Measure number="52">
       <TimeSig>
@@ -3312,7 +3294,6 @@ p, li { white-space: pre-wrap; }
           </Attribute>
         <Note pitch="79" tpc="15"/>
         </Chord>
-      <BarLine/>
       <Chord>
         <voice>1</voice>
         <tick>65280</tick>
@@ -3360,7 +3341,6 @@ p, li { white-space: pre-wrap; }
       <Note pitch="71" tpc="19" ticks="240"/>
       <Note pitch="72" tpc="14" ticks="240"/>
       <Note pitch="76" tpc="18" ticks="240"/>
-      <BarLine/>
       <Chord>
         <voice>1</voice>
         <tick>66720</tick>
@@ -3430,7 +3410,6 @@ p, li { white-space: pre-wrap; }
             </Text>
           </Note>
         </Chord>
-      <BarLine/>
       <Chord>
         <voice>1</voice>
         <tick>67920</tick>
@@ -3513,7 +3492,6 @@ p, li { white-space: pre-wrap; }
         <offset x="0" y="2.00713"/>
         <ticklen>120</ticklen>
         </Rest>
-      <BarLine/>
       <Chord>
         <voice>1</voice>
         <tick>69360</tick>
@@ -3656,7 +3634,6 @@ p, li { white-space: pre-wrap; }
         <offset x="0" y="2.15049"/>
         <ticklen>120</ticklen>
         </Rest>
-      <BarLine/>
       <Chord>
         <voice>1</voice>
         <tick>70800</tick>
@@ -3748,7 +3725,6 @@ p, li { white-space: pre-wrap; }
         <offset x="0" y="2.05491"/>
         <ticklen>120</ticklen>
         </Rest>
-      <BarLine/>
       <Chord>
         <voice>1</voice>
         <tick>72240</tick>
@@ -3828,7 +3804,6 @@ p, li { white-space: pre-wrap; }
         <offset x="0" y="2.1027"/>
         <ticklen>120</ticklen>
         </Rest>
-      <BarLine/>
       <Chord>
         <voice>1</voice>
         <tick>73680</tick>
@@ -3914,7 +3889,6 @@ p, li { white-space: pre-wrap; }
         <offset x="0" y="2.05491"/>
         <ticklen>120</ticklen>
         </Rest>
-      <BarLine/>
       <Chord>
         <voice>1</voice>
         <tick>75120</tick>
@@ -3994,7 +3968,6 @@ p, li { white-space: pre-wrap; }
         <offset x="0" y="2.15049"/>
         <ticklen>120</ticklen>
         </Rest>
-      <BarLine/>
       <Chord>
         <voice>1</voice>
         <tick>76560</tick>
@@ -4063,7 +4036,6 @@ p, li { white-space: pre-wrap; }
           <offset x="0.176389" y="0"/>
           </Arpeggio>
         </Chord>
-      <BarLine/>
       </Measure>
     <Measure number="62">
       <Dynamic>
@@ -4084,8 +4056,7 @@ p, li { white-space: pre-wrap; }
           <offset x="0.176389" y="0"/>
           </Arpeggio>
         </Chord>
-      <BarLine/>
       </Measure>
     </Staff>
-  <cursorTrack>0</cursorTrack>
+  <cursorTrack>-4</cursorTrack>
   </museScore>

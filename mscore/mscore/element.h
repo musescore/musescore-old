@@ -297,6 +297,8 @@ class Element {
       virtual QList<Prop> properties(Xml&) const;
       virtual void collectElements(QList<Element*>& el) { el.append(this); }
 
+      virtual void resetUserOffsets() {  setUserOff(QPointF()); }
+
       static Element* create(int type, Score*);
       };
 

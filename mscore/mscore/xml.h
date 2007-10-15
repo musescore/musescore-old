@@ -72,6 +72,8 @@ class Xml : public QTextStream {
       static QString xmlString(const QString&);
       };
 
+
+extern QString docName;
 extern QPointF readPoint(QDomElement);
 extern QSizeF readSize(QDomElement);
 extern void domError(QDomElement node);

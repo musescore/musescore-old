@@ -168,6 +168,7 @@ bool LoadMusicXml::loader(QFile* qf)
             printf("error: %s\n", error.toLatin1().data());
             return true;
             }
+      docName = qf->fileName();
       return false;
       }
 

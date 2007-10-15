@@ -69,6 +69,7 @@ void PagePreview::setScore(Score* s)
                   printf("error reading internal data\n");
                   return;
                   }
+            docName = "--";
             QDomElement e = doc.documentElement();
             e = e.firstChildElement();
             nm->read(e);

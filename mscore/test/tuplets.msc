@@ -62,6 +62,7 @@
     <measureNumberInterval>5</measureNumberInterval>
     <measureNumberAllStaffs>0</measureNumberAllStaffs>
     <measureNumberSystem>1</measureNumberSystem>
+    <lyricsDistance>6.5</lyricsDistance>
     </Style>
   <showInvisible>0</showInvisible>
   <page-layout>
@@ -211,6 +212,26 @@ p, li { white-space: pre-wrap; }
           <subtype>Tuplet</subtype>
           </Number>
         </Tuplet>
+      <Tuplet id="4">
+        <hasNumber>1</hasNumber>
+        <hasLine>1</hasLine>
+        <baseLen>240</baseLen>
+        <normalNotes>2</normalNotes>
+        <actualNotes>3</actualNotes>
+        <Number>
+          <align>36</align>
+          <xoffset>0</xoffset>
+          <yoffset>0</yoffset>
+          <anchor>note</anchor>
+          <offsetType>spatium</offsetType>
+          <spatiumSizeDependent>0</spatiumSizeDependent>
+          <data>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-size:8pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;3&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
+          <subtype>Tuplet</subtype>
+          </Number>
+        </Tuplet>
       <TimeSig>
         <subtype>260</subtype>
         <den>4</den>
@@ -282,55 +303,30 @@ p, li { white-space: pre-wrap; }
         <ticklen>96</ticklen>
         <Tuplet>3</Tuplet>
         </Rest>
-      <BarLine/>
       </Measure>
     <Measure number="2">
       <Rest>
         <ticklen>0</ticklen>
         </Rest>
-      <BarLine/>
       </Measure>
     <Measure number="3">
       <Rest>
         <ticklen>0</ticklen>
         </Rest>
-      <BarLine/>
       </Measure>
     <Measure number="4">
       <Rest>
         <ticklen>0</ticklen>
         </Rest>
-      <BarLine/>
       </Measure>
     <Measure number="5">
       <Rest>
         <ticklen>0</ticklen>
         </Rest>
-      <BarLine/>
       </Measure>
     </Staff>
   <Staff id="2">
     <Measure number="1">
-      <Tuplet id="0">
-        <hasNumber>1</hasNumber>
-        <hasLine>1</hasLine>
-        <baseLen>240</baseLen>
-        <normalNotes>2</normalNotes>
-        <actualNotes>3</actualNotes>
-        <Number>
-          <align>36</align>
-          <xoffset>0</xoffset>
-          <yoffset>0</yoffset>
-          <anchor>note</anchor>
-          <offsetType>spatium</offsetType>
-          <spatiumSizeDependent>0</spatiumSizeDependent>
-          <data>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
-p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-size:8pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;3&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
-          <subtype>Tuplet</subtype>
-          </Number>
-        </Tuplet>
       <TimeSig>
         <subtype>260</subtype>
         <den>4</den>

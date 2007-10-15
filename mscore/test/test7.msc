@@ -62,6 +62,7 @@
     <measureNumberInterval>5</measureNumberInterval>
     <measureNumberAllStaffs>0</measureNumberAllStaffs>
     <measureNumberSystem>1</measureNumberSystem>
+    <lyricsDistance>6.5</lyricsDistance>
     </Style>
   <showInvisible>0</showInvisible>
   <page-layout>
@@ -179,41 +180,22 @@ p, li { white-space: pre-wrap; }
         </Rest>
       </Measure>
     <Measure number="2">
-      <startRepeat>1</startRepeat>
-      <BarLine>
-        <subtype>2</subtype>
-        </BarLine>
+      <startRepeat/>
       <Rest>
         <ticklen>0</ticklen>
         </Rest>
-      <BarLine/>
       </Measure>
     <Measure number="3">
       <endRepeat>2</endRepeat>
-      <ending>0</ending>
-      <Volta>
-        <subtype>1</subtype>
-        </Volta>
       <Rest>
         <ticklen>0</ticklen>
         </Rest>
-      <BarLine>
-        <subtype>3</subtype>
-        <tick>5760</tick>
-        </BarLine>
       </Measure>
     <Measure number="4">
-      <ending>1</ending>
-      <Volta>
-        <subtype>2</subtype>
-        </Volta>
       <Rest>
         <selected>1</selected>
         <ticklen>1920</ticklen>
         </Rest>
-      <BarLine>
-        <subtype>1</subtype>
-        </BarLine>
       </Measure>
     </Staff>
   <Staff id="2">
@@ -245,30 +227,19 @@ p, li { white-space: pre-wrap; }
         </Rest>
       </Measure>
     <Measure number="2">
-      <BarLine>
-        <subtype>2</subtype>
-        </BarLine>
       <Rest>
         <ticklen>0</ticklen>
         </Rest>
-      <BarLine/>
       </Measure>
     <Measure number="3">
       <Rest>
         <ticklen>0</ticklen>
         </Rest>
-      <BarLine>
-        <subtype>3</subtype>
-        <tick>5760</tick>
-        </BarLine>
       </Measure>
     <Measure number="4">
       <Rest>
         <ticklen>1920</ticklen>
         </Rest>
-      <BarLine>
-        <subtype>1</subtype>
-        </BarLine>
       </Measure>
     </Staff>
   <cursorTrack>0</cursorTrack>

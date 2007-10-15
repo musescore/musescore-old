@@ -574,7 +574,7 @@ bool MuseScore::loadStyle(QFile* qf)
                QString::null, QWidget::tr("Quit"), QString::null, 0, 1);
             return true;
             }
-
+      docName = qf->fileName();
       for (QDomElement e = doc.documentElement(); !e.isNull(); e = e.nextSiblingElement()) {
             if (e.tagName() == "museScore") {
                   // QString version = e.attribute(QString("version"));
@@ -700,6 +700,7 @@ bool Score::loadFile(QFile* qf)
 
       _fileDivision = 384;   // for compatibility with old mscore files
 
+      docName = qf->fileName();
       for (QDomElement e = doc.documentElement(); !e.isNull(); e = e.nextSiblingElement()) {
             if (e.tagName() == "museScore") {
                   for (QDomElement ee = e.firstChildElement(); !ee.isNull(); ee = ee.nextSiblingElement()) {
@@ -865,6 +866,7 @@ void MuseScore::loadInstrumentTemplates()
       int line, column;
       QString err;
       bool rv = doc.setContent(&qf, false, &err, &line, &column);
+      docName = qf.fileName();
       qf.close();
 
       if (!rv) {

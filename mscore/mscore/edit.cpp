@@ -648,10 +648,10 @@ Slur* Score::cmdAddSlur()
             printf("no note selected\n");
             return 0;
             }
-      Note* note    = (Note*)(e);
-      Chord* chord  = note->chord();
-      Staff* staff  = chord->staff();
-      int voice     = chord->voice();
+      Note* note   = (Note*)(e);
+      Chord* chord = note->chord();
+      Staff* staff = chord->staff();
+      int voice    = chord->voice();
 
       int track = chord->staffIdx() * VOICES + voice;
       int tick2 = nextSeg(chord->tick(), track);

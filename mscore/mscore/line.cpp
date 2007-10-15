@@ -55,32 +55,37 @@ void LineSegment::updateGrips(int* grips, QRectF* grip) const
 
 QPointF LineSegment::gripAnchor(int grip) const
       {
-      QPointF sp(_system->canvasPos());
+      int staffIdx = parent()->staffIdx();
+      QRectF sbb(_system->staff(staffIdx)->bbox());
+      QPointF sp(sbb.topLeft() + _system->canvasPos());
+
       System* s;  // dummy
       switch(_segmentType) {
             case SEGMENT_SINGLE:
                   if (grip == 0)
-                        return line()->tick2pos(line()->tick(), &s);
+                        return line()->tick2pos(line()->tick(), staffIdx, &s);
                   else if (grip == 1)
-                        return line()->tick2pos(line()->tick2(), &s);
+                        return line()->tick2pos(line()->tick2(), staffIdx, &s);
                   return QPointF();
             case SEGMENT_BEGIN:
                   if (grip == 0)
-                        return line()->tick2pos(line()->tick(), &s);
-                  else if (grip == 1)
-                        return _system->abbox().topRight();
-                  break;
+                        return line()->tick2pos(line()->tick(), staffIdx, &s);
+                  else if (grip == 1) {
+                        double x = sbb.width() + _system->canvasPos().x();
+                        return QPointF(x, sp.y());
+                        }
             case SEGMENT_MIDDLE:
                   if (grip == 0)
                         return sp;
-                  else if (grip == 1)
-                        return _system->abbox().topRight();
-                  break;
+                  else if (grip == 1) {
+                        double x = sbb.width() + _system->canvasPos().x();
+                        return QPointF(x, sp.y());
+                        }
             case SEGMENT_END:
                   if (grip == 0)
                         return sp;
                   else if (grip == 1)
-                        return line()->tick2pos(line()->tick2(), &s);
+                        return line()->tick2pos(line()->tick2(), staffIdx, &s);
                   break;
             }
       return QPointF();
@@ -209,6 +214,16 @@ QRectF LineSegment::drag(const QPointF& s)
       }
 
 //---------------------------------------------------------
+//   resetUserOffsets
+//---------------------------------------------------------
+
+void LineSegment::resetUserOffsets()
+      {
+      Element::resetUserOffsets();
+      setUserOff2(QPointF());
+      }
+
+//---------------------------------------------------------
 //   SLine
 //---------------------------------------------------------
 
@@ -232,11 +247,12 @@ void SLine::setTick2(int t)
 //   tick2pos
 //---------------------------------------------------------
 
-QPointF SLine::tick2pos(int tick, System** system)
+QPointF SLine::tick2pos(int tick, int staffIdx, System** system)
       {
       Segment* seg = _score->tick2segment(tick);
-      *system      = seg->measure()->system();
-      return seg->canvasPos();
+      System*  sys = seg->measure()->system();
+      *system = sys;
+      return QPointF(seg->canvasPos().x(), sys->staff(staffIdx)->bbox().y() + sys->canvasPos().y());
       }
 
 //---------------------------------------------------------
@@ -257,10 +273,13 @@ void SLine::layout(ScoreLayout* layout)
             return;
             }
 
+      setPos(QPointF());
+      setUserOff(QPointF());
       System* s1;
       System* s2;
-      QPointF p1 = tick2pos(tick(), &s1);
-      QPointF p2 = tick2pos(_tick2, &s2);
+      int staffI = staffIdx();
+      QPointF p1 = tick2pos(tick(), staffI, &s1);
+      QPointF p2 = tick2pos(_tick2, staffI, &s2);
 
       QList<System*>* systems = layout->systems();
 
@@ -289,7 +308,6 @@ void SLine::layout(ScoreLayout* layout)
             System* system   = (*systems)[i];
             LineSegment* seg = segments[segIdx];
             seg->setSystem(system);
-            QPointF sp(system->canvasPos());
 
             if (sysIdx1 == sysIdx2) {
                   // single segment
@@ -301,20 +319,19 @@ void SLine::layout(ScoreLayout* layout)
                   // start segment
                   seg->setSegmentType(SEGMENT_BEGIN);
                   seg->setPos(p1);
-                  seg->setXpos2(sp.x() + system->bbox().width()
-                     - _spatium * 0.5 - p1.x());
+                  seg->setXpos2(seg->gripAnchor(1).x() - p1.x());
                   }
             else if (i > 0 && i != sysIdx2) {
                   // middle segment
                   seg->setSegmentType(SEGMENT_MIDDLE);
-                  seg->setPos(sp);
-                  seg->setXpos2(system->bbox().width() - _spatium * 0.5);
+                  seg->setPos(seg->gripAnchor(0));
+                  seg->setXpos2(seg->gripAnchor(1).x() - seg->ipos().x());
                   }
             else if (i == sysIdx2) {
                   // end segment
                   seg->setSegmentType(SEGMENT_END);
-                  seg->setPos(sp);
-                  seg->setXpos2(p2.x() - sp.x());
+                  seg->setPos(seg->gripAnchor(0));
+                  seg->setXpos2(p2.x() - ipos().x());
                   }
             seg->layout(layout);
             }

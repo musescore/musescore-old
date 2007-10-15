@@ -123,16 +123,7 @@ void Ottava::layout(ScoreLayout* layout)
       {
       SLine::layout(layout);
 
-//      double _spatium = layout->spatium();
-//      qreal ottavaDistance = _spatium * 3.5;
-      qreal y = 0.0;
-//      if (parent()) {
-//            System* system   = measure->system();
-//            int idx = staffIdx();
-//            SysStaff* sstaff = system->staff(idx);
-//            y = sstaff->bbox().top() - ottavaDistance;
-//            }
-
+      qreal y = -3.0 * layout->spatium();
       setPos(ipos().x(), y);
 
       QFontMetricsF fm(score()->textStyle(TEXT_STYLE_DYNAMICS)->fontMetrics());
@@ -176,9 +167,5 @@ void Ottava::read(QDomElement e)
 LineSegment* Ottava::createLineSegment()
       {
       LineSegment* seg = new OttavaSegment(score());
-      seg->setStaff(staff());
       return seg;
       }
-
-
-

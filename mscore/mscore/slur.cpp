@@ -130,7 +130,7 @@ bool SlurSegment::edit(int curGrip, QKeyEvent* ev)
             )
          ) {
             int track1 = sl->track();
-            int track2 = sl->track2();
+            int track2 = track1;          // prefer same voice
             int tick1  = sl->tick();
             int tick2  = sl->tick2();
 
@@ -389,6 +389,7 @@ bool SlurSegment::genPropertyMenu(QMenu* popup) const
 SlurTie::SlurTie(Score* s)
    : Element(s)
       {
+      setTick(0);
       _slurDirection = AUTO;
       up = true;
       }

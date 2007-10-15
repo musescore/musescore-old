@@ -67,6 +67,8 @@ class LineSegment : public Element {
       QPointF pos2() const                { return _p2 + _userOff2 * _spatium; }
       void setSegmentType(SegmentType s)  { _segmentType = s;  }
       void setSystem(System* s)           { _system = s;       }
+      virtual void resetUserOffsets();
+      friend class SLine;
       };
 
 //---------------------------------------------------------
@@ -96,7 +98,7 @@ class SLine : public Element {
       virtual void change(Element* o, Element* n);
       virtual QRectF bbox() const;
       QList<LineSegment*> lineSegments() { return segments; }
-      virtual QPointF tick2pos(int tick, System** system);
+      virtual QPointF tick2pos(int tick, int staff, System** system);
       };
 
 typedef QList<LineSegment*>::iterator iLineSegment;

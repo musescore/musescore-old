@@ -179,7 +179,6 @@ p, li { white-space: pre-wrap; }
       <Note pitch="67" tpc="15" ticks="480"/>
       </Measure>
     <Measure number="3">
-      <ending>0</ending>
       <Note pitch="69" tpc="17" ticks="480"/>
       <Note pitch="67" tpc="15" ticks="480"/>
       <Note pitch="65" tpc="13" ticks="480"/>
@@ -187,14 +186,12 @@ p, li { white-space: pre-wrap; }
       </Measure>
     <Measure number="4">
       <endRepeat>2</endRepeat>
-      <ending>0</ending>
       <Note pitch="69" tpc="17" ticks="480"/>
       <Note pitch="72" tpc="14" ticks="480"/>
       <Note pitch="69" tpc="17" ticks="480"/>
       <Note pitch="72" tpc="14" ticks="480"/>
       </Measure>
     <Measure number="5">
-      <ending>1</ending>
       <Note pitch="69" tpc="17" ticks="480"/>
       <Note pitch="71" tpc="19" ticks="240"/>
       <Note pitch="72" tpc="14" ticks="240"/>
@@ -211,7 +208,6 @@ p, li { white-space: pre-wrap; }
         </Rest>
       </Measure>
     <Measure number="7">
-      <ending>0</ending>
       <Repeat>
         <subtype>segno</subtype>
         <offset x="2.55" y="0.45"/>
