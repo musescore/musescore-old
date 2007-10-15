@@ -2,9 +2,9 @@
 <museScore version="1.0">
   <Spatium>1.5</Spatium>
   <Division>480</Division>
-  <Mag>2.00731</Mag>
-  <xoff>-3198</xoff>
-  <yoff>-717</yoff>
+  <Mag>1.12721</Mag>
+  <xoff>-1174</xoff>
+  <yoff>-317</yoff>
   <Style>
     <staffUpperBorder>8</staffUpperBorder>
     <staffLowerBorder>4</staffLowerBorder>
@@ -761,11 +761,15 @@ p, li { white-space: pre-wrap; }
     </Slur>
   <HairPin>
     <tick>69600</tick>
-    <tick2>72240</tick2>
+    <tick2>77880</tick2>
     <track>0</track>
     <Segment>
-      <off1 x="-222.23" y="4.35"/>
-      <off2 x="0.282222" y="0"/>
+      <off1 x="0.37556" y="4.00597"/>
+      <off2 x="0" y="0"/>
+      </Segment>
+    <Segment>
+      <off1 x="3.63041" y="3.38004"/>
+      <off2 x="-156.456" y="0"/>
       </Segment>
     </HairPin>
   <Staff id="1">
@@ -4018,7 +4022,11 @@ p, li { white-space: pre-wrap; }
     <Measure number="61">
       <Dynamic>
         <subtype>ff</subtype>
-        <offset x="-0.405596" y="5.59582"/>
+        <offset x="-0.906343" y="5.59582"/>
+        </Dynamic>
+      <Dynamic>
+        <subtype>mf</subtype>
+        <offset x="8.36639" y="5.71311"/>
         </Dynamic>
       <Chord>
         <ticklen>1440</ticklen>
@@ -4038,10 +4046,6 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     <Measure number="62">
-      <Dynamic>
-        <subtype>mf</subtype>
-        <offset x="-0.959098" y="5.71311"/>
-        </Dynamic>
       <Chord>
         <ticklen>1440</ticklen>
         <Attribute>
