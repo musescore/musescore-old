@@ -331,7 +331,7 @@ void SLine::layout(ScoreLayout* layout)
                   // end segment
                   seg->setSegmentType(SEGMENT_END);
                   seg->setPos(seg->gripAnchor(0));
-                  seg->setXpos2(p2.x() - ipos().x());
+                  seg->setXpos2(p2.x() - seg->ipos().x());
                   }
             seg->layout(layout);
             }
