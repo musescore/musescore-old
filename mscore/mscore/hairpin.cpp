@@ -89,29 +89,6 @@ QRectF HairpinSegment::bbox() const
       }
 
 //---------------------------------------------------------
-//   write
-//---------------------------------------------------------
-
-void Hairpin::write(Xml& xml) const
-      {
-      xml.stag("HairPin");
-      SLine::writeProperties(xml);
-      xml.etag();
-      }
-
-//---------------------------------------------------------
-//   read
-//---------------------------------------------------------
-
-void Hairpin::read(QDomElement e)
-      {
-      for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
-            if (!SLine::readProperties(e))
-                  domError(e);
-            }
-      }
-
-//---------------------------------------------------------
 //   layout
 //    compute segments from tick() to _tick2
 //---------------------------------------------------------

@@ -488,3 +488,28 @@ QRectF SLine::bbox() const
       }
 
 
+//---------------------------------------------------------
+//   write
+//---------------------------------------------------------
+
+void SLine::write(Xml& xml) const
+      {
+      xml.stag(name());
+      SLine::writeProperties(xml);
+      xml.etag();
+      }
+
+//---------------------------------------------------------
+//   read
+//---------------------------------------------------------
+
+void SLine::read(QDomElement e)
+      {
+      setStaff(score()->staff(0));  // set default staff
+      for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
+            if (!SLine::readProperties(e))
+                  domError(e);
+            }
+      }
+
+
