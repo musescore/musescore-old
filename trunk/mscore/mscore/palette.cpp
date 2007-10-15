@@ -496,6 +496,7 @@ void Palette::dropEvent(QDropEvent* event)
                   printf("error reading drag data\n");
                   return;
                   }
+            docName = "--";
             QDomElement el = doc.documentElement();
             QPointF dragOffset;
             int type = Element::readType(el, &dragOffset);

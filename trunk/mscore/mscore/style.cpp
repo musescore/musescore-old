@@ -72,7 +72,8 @@ const TextStyle defaultTextStyleArray[] = {
          ALIGN_RIGHT | ALIGN_VCENTER, ANCHOR_SYSTEM, 0, 0, OFFSET_SPATIUM),
 
       TextStyle(QString("Dynamics"), ff, 12, false, true, false,
-         ALIGN_LEFT,    ANCHOR_STAFF, 0, 6, OFFSET_SPATIUM),
+         ALIGN_LEFT,    ANCHOR_STAFF, 0, 0, OFFSET_SPATIUM),
+
       TextStyle(QString("Technik"), ff, 12, false, true, false,
          ALIGN_LEFT,    ANCHOR_STAFF, 0, 0, OFFSET_SPATIUM),
 /*12*/

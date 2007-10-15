@@ -62,6 +62,7 @@
     <measureNumberInterval>5</measureNumberInterval>
     <measureNumberAllStaffs>0</measureNumberAllStaffs>
     <measureNumberSystem>1</measureNumberSystem>
+    <lyricsDistance>6.5</lyricsDistance>
     </Style>
   <showInvisible>0</showInvisible>
   <page-layout>
@@ -127,27 +128,23 @@ p, li { white-space: pre-wrap; }
       <Note pitch="68" tpc="10" ticks="480"/>
       <Note pitch="67" tpc="15" ticks="480"/>
       <Note pitch="66" tpc="20" ticks="480"/>
-      <BarLine/>
       </Measure>
     <Measure number="2">
       <Note pitch="69" tpc="17" ticks="480"/>
       <Note pitch="65" tpc="13" ticks="480"/>
       <Note pitch="67" tpc="15" ticks="480"/>
       <Note pitch="68" tpc="10" ticks="480"/>
-      <BarLine/>
       </Measure>
     <Measure number="3">
       <Note pitch="66" tpc="20" ticks="480"/>
       <Note pitch="69" tpc="17" ticks="480"/>
       <Note pitch="65" tpc="13" ticks="480"/>
       <Note pitch="67" tpc="15" ticks="480"/>
-      <BarLine/>
       </Measure>
     <Measure number="4">
       <Rest>
         <ticklen>1920</ticklen>
         </Rest>
-      <BarLine/>
       </Measure>
     </Staff>
   <cursorTrack>-4</cursorTrack>

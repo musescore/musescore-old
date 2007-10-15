@@ -62,6 +62,7 @@
     <measureNumberInterval>5</measureNumberInterval>
     <measureNumberAllStaffs>0</measureNumberAllStaffs>
     <measureNumberSystem>1</measureNumberSystem>
+    <lyricsDistance>6.5</lyricsDistance>
     </Style>
   <showInvisible>0</showInvisible>
   <page-layout>
@@ -122,14 +123,12 @@
       <Note pitch="62" tpc="16" ticks="480"/>
       <Note pitch="64" tpc="18" ticks="480"/>
       <Note pitch="65" tpc="13" ticks="480"/>
-      <BarLine/>
       </Measure>
     <Measure number="2">
       <Note pitch="67" tpc="15" ticks="480"/>
       <Note pitch="69" tpc="17" ticks="480"/>
       <Note pitch="71" tpc="19" ticks="480"/>
       <Note pitch="72" tpc="14" ticks="480"/>
-      <BarLine/>
       </Measure>
     <Measure number="3">
       <KeySig>
@@ -139,7 +138,6 @@
       <Note pitch="62" tpc="16" ticks="480"/>
       <Note pitch="64" tpc="18" ticks="480"/>
       <Note pitch="66" tpc="20" ticks="480"/>
-      <BarLine/>
       </Measure>
     <Measure number="4">
       <LayoutBreak>
@@ -149,7 +147,6 @@
       <Note pitch="69" tpc="17" ticks="480"/>
       <Note pitch="71" tpc="19" ticks="480"/>
       <Note pitch="72" tpc="14" ticks="480"/>
-      <BarLine/>
       </Measure>
     <Measure number="5">
       <KeySig>
@@ -159,14 +156,12 @@
       <Note pitch="62" tpc="16" ticks="480"/>
       <Note pitch="64" tpc="18" ticks="480"/>
       <Note pitch="66" tpc="20" ticks="480"/>
-      <BarLine/>
       </Measure>
     <Measure number="6">
       <Note pitch="67" tpc="15" ticks="480"/>
       <Note pitch="69" tpc="17" ticks="480"/>
       <Note pitch="71" tpc="19" ticks="480"/>
       <Note pitch="73" tpc="21" ticks="480"/>
-      <BarLine/>
       </Measure>
     <Measure number="7">
       <KeySig>
@@ -176,7 +171,6 @@
       <Note pitch="62" tpc="16" ticks="480"/>
       <Note pitch="64" tpc="18" ticks="480"/>
       <Note pitch="66" tpc="20" ticks="480"/>
-      <BarLine/>
       </Measure>
     <Measure number="8">
       <LayoutBreak>
@@ -186,7 +180,6 @@
       <Note pitch="69" tpc="17" ticks="480"/>
       <Note pitch="71" tpc="19" ticks="480"/>
       <Note pitch="73" tpc="21" ticks="480"/>
-      <BarLine/>
       </Measure>
     <Measure number="9">
       <KeySig>
@@ -196,14 +189,12 @@
       <Note pitch="63" tpc="23" ticks="480"/>
       <Note pitch="64" tpc="18" ticks="480"/>
       <Note pitch="66" tpc="20" ticks="480"/>
-      <BarLine/>
       </Measure>
     <Measure number="10">
       <Note pitch="68" tpc="22" ticks="480"/>
       <Note pitch="69" tpc="17" ticks="480"/>
       <Note pitch="71" tpc="19" ticks="480"/>
       <Note pitch="73" tpc="21" ticks="480"/>
-      <BarLine/>
       </Measure>
     <Measure number="11">
       <KeySig>
@@ -213,7 +204,6 @@
       <Note pitch="63" tpc="23" ticks="480"/>
       <Note pitch="64" tpc="18" ticks="480"/>
       <Note pitch="66" tpc="20" ticks="480"/>
-      <BarLine/>
       </Measure>
     <Measure number="12">
       <LayoutBreak>
@@ -223,7 +213,6 @@
       <Note pitch="70" tpc="24" ticks="480"/>
       <Note pitch="71" tpc="19" ticks="480"/>
       <Note pitch="73" tpc="21" ticks="480"/>
-      <BarLine/>
       </Measure>
     <Measure number="13">
       <KeySig>
@@ -233,14 +222,12 @@
       <Note pitch="63" tpc="23" ticks="480"/>
       <Note pitch="65" tpc="25" ticks="480"/>
       <Note pitch="66" tpc="20" ticks="480"/>
-      <BarLine/>
       </Measure>
     <Measure number="14">
       <Note pitch="68" tpc="22" ticks="480"/>
       <Note pitch="70" tpc="24" ticks="480"/>
       <Note pitch="71" tpc="19" ticks="480"/>
       <Note pitch="73" tpc="21" ticks="480"/>
-      <BarLine/>
       </Measure>
     <Measure number="15">
       <KeySig>
@@ -250,7 +237,6 @@
       <Note pitch="63" tpc="23" ticks="480"/>
       <Note pitch="65" tpc="25" ticks="480"/>
       <Note pitch="66" tpc="20" ticks="480"/>
-      <BarLine/>
       </Measure>
     <Measure number="16">
       <LayoutBreak>
@@ -260,7 +246,6 @@
       <Note pitch="70" tpc="24" ticks="480"/>
       <Note pitch="72" tpc="26" ticks="480"/>
       <Note pitch="73" tpc="9" ticks="480"/>
-      <BarLine/>
       </Measure>
     <Measure number="17">
       <KeySig>
@@ -270,14 +255,12 @@
       <Note pitch="62" tpc="16" ticks="480"/>
       <Note pitch="64" tpc="18" ticks="480"/>
       <Note pitch="65" tpc="13" ticks="480"/>
-      <BarLine/>
       </Measure>
     <Measure number="18">
       <Note pitch="67" tpc="15" ticks="480"/>
       <Note pitch="69" tpc="17" ticks="480"/>
       <Note pitch="70" tpc="12" ticks="480"/>
       <Note pitch="72" tpc="14" ticks="480"/>
-      <BarLine/>
       </Measure>
     <Measure number="19">
       <KeySig>
@@ -287,7 +270,6 @@
       <Note pitch="62" tpc="16" ticks="480"/>
       <Note pitch="63" tpc="11" ticks="480"/>
       <Note pitch="65" tpc="13" ticks="480"/>
-      <BarLine/>
       </Measure>
     <Measure number="20">
       <LayoutBreak>
@@ -297,7 +279,6 @@
       <Note pitch="69" tpc="17" ticks="480"/>
       <Note pitch="70" tpc="12" ticks="480"/>
       <Note pitch="72" tpc="14" ticks="480"/>
-      <BarLine/>
       </Measure>
     <Measure number="21">
       <KeySig>
@@ -307,14 +288,12 @@
       <Note pitch="62" tpc="16" ticks="480"/>
       <Note pitch="63" tpc="11" ticks="480"/>
       <Note pitch="65" tpc="13" ticks="480"/>
-      <BarLine/>
       </Measure>
     <Measure number="22">
       <Note pitch="67" tpc="15" ticks="480"/>
       <Note pitch="68" tpc="10" ticks="480"/>
       <Note pitch="70" tpc="12" ticks="480"/>
       <Note pitch="72" tpc="14" ticks="480"/>
-      <BarLine/>
       </Measure>
     <Measure number="23">
       <KeySig>
@@ -324,7 +303,6 @@
       <Note pitch="61" tpc="9" ticks="480"/>
       <Note pitch="63" tpc="11" ticks="480"/>
       <Note pitch="65" tpc="13" ticks="480"/>
-      <BarLine/>
       </Measure>
     <Measure number="24">
       <LayoutBreak>
@@ -334,7 +312,6 @@
       <Note pitch="68" tpc="10" ticks="480"/>
       <Note pitch="70" tpc="12" ticks="480"/>
       <Note pitch="72" tpc="14" ticks="480"/>
-      <BarLine/>
       </Measure>
     <Measure number="25">
       <KeySig>
@@ -344,14 +321,12 @@
       <Note pitch="61" tpc="9" ticks="480"/>
       <Note pitch="63" tpc="11" ticks="480"/>
       <Note pitch="65" tpc="13" ticks="480"/>
-      <BarLine/>
       </Measure>
     <Measure number="26">
       <Note pitch="66" tpc="8" ticks="480"/>
       <Note pitch="68" tpc="10" ticks="480"/>
       <Note pitch="70" tpc="12" ticks="480"/>
       <Note pitch="72" tpc="14" ticks="480"/>
-      <BarLine/>
       </Measure>
     <Measure number="27">
       <KeySig>
@@ -361,7 +336,6 @@
       <Note pitch="61" tpc="9" ticks="480"/>
       <Note pitch="63" tpc="11" ticks="480"/>
       <Note pitch="65" tpc="13" ticks="480"/>
-      <BarLine/>
       </Measure>
     <Measure number="28">
       <LayoutBreak>
@@ -371,7 +345,6 @@
       <Note pitch="68" tpc="10" ticks="480"/>
       <Note pitch="70" tpc="12" ticks="480"/>
       <Note pitch="71" tpc="7" ticks="480"/>
-      <BarLine/>
       </Measure>
     <Measure number="29">
       <KeySig>
@@ -381,14 +354,12 @@
       <Note pitch="61" tpc="9" ticks="480"/>
       <Note pitch="63" tpc="11" ticks="480"/>
       <Note pitch="64" tpc="6" ticks="480"/>
-      <BarLine/>
       </Measure>
     <Measure number="30">
       <Note pitch="66" tpc="8" ticks="480"/>
       <Note pitch="68" tpc="10" ticks="480"/>
       <Note pitch="70" tpc="12" ticks="480"/>
       <Note pitch="71" tpc="19" ticks="480"/>
-      <BarLine/>
       </Measure>
     <Measure number="31">
       <KeySig>
@@ -398,42 +369,36 @@
       <Note pitch="63" tpc="23" ticks="480"/>
       <Note pitch="65" tpc="25" ticks="480"/>
       <Note pitch="66" tpc="20" ticks="480"/>
-      <BarLine/>
       </Measure>
     <Measure number="32">
       <Note pitch="68" tpc="22" ticks="480"/>
       <Note pitch="70" tpc="24" ticks="480"/>
       <Note pitch="71" tpc="19" ticks="480"/>
       <Note pitch="73" tpc="21" ticks="480"/>
-      <BarLine/>
       </Measure>
     <Measure number="33">
       <Note pitch="61" tpc="21" ticks="480"/>
       <Note pitch="63" tpc="23" ticks="480"/>
       <Note pitch="65" tpc="25" ticks="480"/>
       <Note pitch="66" tpc="20" ticks="480"/>
-      <BarLine/>
       </Measure>
     <Measure number="34">
       <Note pitch="68" tpc="22" ticks="480"/>
       <Note pitch="70" tpc="24" ticks="480"/>
       <Note pitch="71" tpc="19" ticks="480"/>
       <Note pitch="73" tpc="21" ticks="480"/>
-      <BarLine/>
       </Measure>
     <Measure number="35">
       <Note pitch="73" tpc="21" ticks="480"/>
       <Note pitch="71" tpc="19" ticks="480"/>
       <Note pitch="70" tpc="24" ticks="480"/>
       <Note pitch="68" tpc="22" ticks="480"/>
-      <BarLine/>
       </Measure>
     <Measure number="36">
       <Note pitch="66" tpc="20" ticks="480"/>
       <Note pitch="65" tpc="25" ticks="480"/>
       <Note pitch="65" tpc="25" ticks="480"/>
       <Note pitch="63" tpc="23" ticks="480"/>
-      <BarLine/>
       </Measure>
     </Staff>
   <cursorTrack>-4</cursorTrack>

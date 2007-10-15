@@ -91,13 +91,14 @@ int main(int argc, char* argv[])
             case 2:
                   out = new QFile(argv[1 + optind]);
                   if (!out->open(QIODevice::WriteOnly)) {
-                        printf("cannot open output file <%s>: %s\n", argv[2], strerror(errno));
+                        printf("cannot open output file <%s>: %s\n", argv[optind+1], strerror(errno));
                         return -3;
                         }
             case 1:
-                  in = new QFile(argv[0 + optind]);
+                  in = new QFile(argv[optind]);
+                  docName = argv[optind];
                   if (!in->open(QIODevice::ReadOnly)) {
-                        printf("cannot open input file <%s>: %s\n", argv[1], strerror(errno));
+                        printf("cannot open input file <%s>: %s\n", argv[optind], strerror(errno));
                         return -4;
                         }
                   break;
@@ -109,6 +110,7 @@ int main(int argc, char* argv[])
                   break;
             }
       if (in == 0) {
+            docName = "stdin";
             in = new QFile;
             ((QFile*)in)->open(stdin, QIODevice::ReadOnly);
             }

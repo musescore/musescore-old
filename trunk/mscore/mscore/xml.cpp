@@ -21,6 +21,8 @@
 #include "xml.h"
 #include "globals.h"
 
+QString docName;
+
 //---------------------------------------------------------
 //   Xml
 //---------------------------------------------------------
@@ -294,6 +296,8 @@ static QString domElementPath(QDomElement e)
 void domError(QDomElement e)
       {
       QString s = domElementPath(e);
+      if (!docName.isEmpty())
+            fprintf(stderr, "<%s>:", qPrintable(docName));
       fprintf(stderr, "%s: Unknown Node <%s>, type %d\n",
          qPrintable(s), qPrintable(e.tagName()), e.nodeType());
       if (e.isText())
@@ -309,6 +313,8 @@ void domNotImplemented(QDomElement e)
       if (!debugMode)
             return;
       QString s = domElementPath(e);
+      if (!docName.isEmpty())
+            fprintf(stderr, "<%s>:", qPrintable(docName));
       fprintf(stderr, "%s: Node not implemented: <%s>, type %d\n",
          qPrintable(s), qPrintable(e.tagName()), e.nodeType());
       if (e.isText())

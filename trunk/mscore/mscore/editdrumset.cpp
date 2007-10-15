@@ -183,6 +183,7 @@ void EditDrumset::load()
             return;
             }
 
+      docName = name;
       nDrumset.clear();
       for (QDomElement e = doc.documentElement(); !e.isNull(); e = e.nextSiblingElement()) {
             if (e.tagName() == "museScore") {

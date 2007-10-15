@@ -62,6 +62,7 @@
     <measureNumberInterval>5</measureNumberInterval>
     <measureNumberAllStaffs>0</measureNumberAllStaffs>
     <measureNumberSystem>1</measureNumberSystem>
+    <lyricsDistance>6.5</lyricsDistance>
     </Style>
   <showInvisible>1</showInvisible>
   <page-layout>
@@ -190,7 +191,6 @@ p, li { white-space: pre-wrap; }
       <Note pitch="64" tpc="18" ticks="480"/>
       <Note pitch="62" tpc="16" ticks="480"/>
       <Note pitch="60" tpc="14" ticks="480"/>
-      <BarLine/>
       </Measure>
     <Measure number="2">
       <Chord>
@@ -235,7 +235,6 @@ p, li { white-space: pre-wrap; }
         <Note pitch="64" tpc="18"/>
         <Note pitch="67" tpc="15"/>
         </Chord>
-      <BarLine/>
       </Measure>
     <Measure number="3">
       <KeySig>
@@ -270,7 +269,6 @@ p, li { white-space: pre-wrap; }
       <Note pitch="59" tpc="19" ticks="480"/>
       <Note pitch="57" tpc="17" ticks="480"/>
       <Note pitch="55" tpc="15" ticks="480"/>
-      <BarLine/>
       </Measure>
     <Measure number="4">
       <Chord>
@@ -315,7 +313,6 @@ p, li { white-space: pre-wrap; }
         <Note pitch="71" tpc="19"/>
         <Note pitch="74" tpc="16"/>
         </Chord>
-      <BarLine/>
       </Measure>
     </Staff>
   <cursorTrack>0</cursorTrack>

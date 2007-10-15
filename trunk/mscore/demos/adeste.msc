@@ -177,7 +177,6 @@ p, li { white-space: pre-wrap; }
           <tpc>17</tpc>
           </Note>
         </Chord>
-      <BarLine/>
       <Lyrics>
         <data>A</data>
         <syllabic>begin</syllabic>
@@ -236,7 +235,6 @@ p, li { white-space: pre-wrap; }
           <tpc>17</tpc>
           </Note>
         </Chord>
-      <BarLine/>
       <Chord>
         <voice>1</voice>
         <selected>1</selected>
@@ -299,7 +297,6 @@ p, li { white-space: pre-wrap; }
           <tpc>18</tpc>
           </Note>
         </Chord>
-      <BarLine/>
       <Chord>
         <voice>1</voice>
         <selected>1</selected>
@@ -407,7 +404,6 @@ p, li { white-space: pre-wrap; }
           <tpc>16</tpc>
           </Note>
         </Chord>
-      <BarLine/>
       <Lyrics>
         <data>Lae</data>
         <syllabic>begin</syllabic>
@@ -516,7 +512,6 @@ p, li { white-space: pre-wrap; }
           <tpc>17</tpc>
           </Note>
         </Chord>
-      <BarLine/>
       <Lyrics>
         <data>phan</data>
         <syllabic>middle</syllabic>
@@ -597,7 +592,6 @@ p, li { white-space: pre-wrap; }
           <tpc>9</tpc>
           </Note>
         </Chord>
-      <BarLine/>
       </Measure>
     <Measure number="2">
       <Chord>
@@ -639,7 +633,6 @@ p, li { white-space: pre-wrap; }
           <tpc>17</tpc>
           </Note>
         </Chord>
-      <BarLine/>
       </Measure>
     <Measure number="3">
       <Chord>
@@ -668,7 +661,6 @@ p, li { white-space: pre-wrap; }
           <tpc>19</tpc>
           </Note>
         </Chord>
-      <BarLine/>
       </Measure>
     <Measure number="4">
       <Chord>
@@ -714,7 +706,6 @@ p, li { white-space: pre-wrap; }
           <tpc>17</tpc>
           </Note>
         </Chord>
-      <BarLine/>
       <Chord>
         <voice>1</voice>
         <tick>4320</tick>
@@ -767,7 +758,6 @@ p, li { white-space: pre-wrap; }
           <tpc>17</tpc>
           </Note>
         </Chord>
-      <BarLine/>
       </Measure>
     </Staff>
   <cursorTrack>0</cursorTrack>

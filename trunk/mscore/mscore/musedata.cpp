@@ -150,7 +150,7 @@ void MuseData::openSlur(int idx, int tick, Staff* staff, int voice)
       slur[idx] = new Slur(score);
       slur[idx]->setStart(tick, staff->idx() * VOICES + voice);
       slur[idx]->setStaff(staff);
-      slur[idx]->setParent(measure);
+      slur[idx]->setParent(score->mainLayout());
       score->addElement(slur[idx]);
       }
 
@@ -667,7 +667,6 @@ bool MuseData::read(const QString& name)
                         mpart->insertStaff(staff);
                         score->staves().push_back(staff);
                         if ((staves == 2) && (i == 0)) {
-printf("set bracket\n");
                               staff->setBracket(0, BRACKET_AKKOLADE);
                               staff->setBracketSpan(0, 2);
                               }

@@ -62,6 +62,7 @@
     <measureNumberInterval>5</measureNumberInterval>
     <measureNumberAllStaffs>0</measureNumberAllStaffs>
     <measureNumberSystem>1</measureNumberSystem>
+    <lyricsDistance>6.5</lyricsDistance>
     </Style>
   <showInvisible>1</showInvisible>
   <page-layout>
@@ -162,7 +163,6 @@ p, li { white-space: pre-wrap; }
       <Note pitch="67" tpc="15" ticks="120"/>
       <Note pitch="72" tpc="14" ticks="120"/>
       <Note pitch="76" tpc="18" ticks="120"/>
-      <BarLine/>
       </Measure>
     <Measure number="2">
       <Rest>
@@ -183,7 +183,6 @@ p, li { white-space: pre-wrap; }
       <Note pitch="69" tpc="17" ticks="120"/>
       <Note pitch="74" tpc="16" ticks="120"/>
       <Note pitch="77" tpc="13" ticks="120"/>
-      <BarLine/>
       </Measure>
     <Measure number="3">
       <Rest>
@@ -204,7 +203,6 @@ p, li { white-space: pre-wrap; }
       <Note pitch="67" tpc="15" ticks="120"/>
       <Note pitch="74" tpc="16" ticks="120"/>
       <Note pitch="77" tpc="13" ticks="120"/>
-      <BarLine/>
       </Measure>
     <Measure number="4">
       <Rest>
@@ -225,7 +223,6 @@ p, li { white-space: pre-wrap; }
       <Note pitch="67" tpc="15" ticks="120"/>
       <Note pitch="72" tpc="14" ticks="120"/>
       <Note pitch="76" tpc="18" ticks="120"/>
-      <BarLine/>
       </Measure>
     <Measure number="5">
       <Rest>
@@ -246,7 +243,6 @@ p, li { white-space: pre-wrap; }
       <Note pitch="69" tpc="17" ticks="120"/>
       <Note pitch="76" tpc="18" ticks="120"/>
       <Note pitch="81" tpc="17" ticks="120"/>
-      <BarLine/>
       </Measure>
     <Measure number="6">
       <Rest>
@@ -267,7 +263,6 @@ p, li { white-space: pre-wrap; }
       <Note pitch="66" tpc="20" ticks="120"/>
       <Note pitch="69" tpc="17" ticks="120"/>
       <Note pitch="74" tpc="16" ticks="120"/>
-      <BarLine/>
       </Measure>
     <Measure number="7">
       <Rest>
@@ -288,7 +283,6 @@ p, li { white-space: pre-wrap; }
       <Note pitch="67" tpc="15" ticks="120"/>
       <Note pitch="74" tpc="16" ticks="120"/>
       <Note pitch="79" tpc="15" ticks="120"/>
-      <BarLine/>
       </Measure>
     <Measure number="8">
       <Rest>
@@ -309,7 +303,6 @@ p, li { white-space: pre-wrap; }
       <Note pitch="64" tpc="18" ticks="120"/>
       <Note pitch="67" tpc="15" ticks="120"/>
       <Note pitch="72" tpc="14" ticks="120"/>
-      <BarLine/>
       </Measure>
     <Measure number="9">
       <Rest>
@@ -330,7 +323,6 @@ p, li { white-space: pre-wrap; }
       <Note pitch="64" tpc="18" ticks="120"/>
       <Note pitch="67" tpc="15" ticks="120"/>
       <Note pitch="72" tpc="14" ticks="120"/>
-      <BarLine/>
       </Measure>
     <Measure number="10">
       <Rest>
@@ -351,7 +343,6 @@ p, li { white-space: pre-wrap; }
       <Note pitch="62" tpc="16" ticks="120"/>
       <Note pitch="66" tpc="20" ticks="120"/>
       <Note pitch="72" tpc="14" ticks="120"/>
-      <BarLine/>
       </Measure>
     <Measure number="11">
       <Rest>
@@ -372,7 +363,6 @@ p, li { white-space: pre-wrap; }
       <Note pitch="62" tpc="16" ticks="120"/>
       <Note pitch="67" tpc="15" ticks="120"/>
       <Note pitch="71" tpc="19" ticks="120"/>
-      <BarLine/>
       </Measure>
     <Measure number="12">
       <Rest>
@@ -393,7 +383,6 @@ p, li { white-space: pre-wrap; }
       <Note pitch="64" tpc="18" ticks="120"/>
       <Note pitch="67" tpc="15" ticks="120"/>
       <Note pitch="73" tpc="9" ticks="120"/>
-      <BarLine/>
       </Measure>
     <Measure number="13">
       <Rest>
@@ -414,7 +403,6 @@ p, li { white-space: pre-wrap; }
       <Note pitch="62" tpc="16" ticks="120"/>
       <Note pitch="69" tpc="17" ticks="120"/>
       <Note pitch="74" tpc="16" ticks="120"/>
-      <BarLine/>
       </Measure>
     <Measure number="14">
       <Rest>
@@ -435,7 +423,6 @@ p, li { white-space: pre-wrap; }
       <Note pitch="62" tpc="16" ticks="120"/>
       <Note pitch="65" tpc="13" ticks="120"/>
       <Note pitch="71" tpc="19" ticks="120"/>
-      <BarLine/>
       </Measure>
     <Measure number="15">
       <Rest>
@@ -456,7 +443,6 @@ p, li { white-space: pre-wrap; }
       <Note pitch="60" tpc="14" ticks="120"/>
       <Note pitch="67" tpc="15" ticks="120"/>
       <Note pitch="72" tpc="14" ticks="120"/>
-      <BarLine/>
       </Measure>
     <Measure number="16">
       <Rest>
@@ -477,7 +463,6 @@ p, li { white-space: pre-wrap; }
       <Note pitch="57" tpc="17" ticks="120"/>
       <Note pitch="60" tpc="14" ticks="120"/>
       <Note pitch="65" tpc="13" ticks="120"/>
-      <BarLine/>
       </Measure>
     <Measure number="17">
       <Rest>
@@ -498,7 +483,6 @@ p, li { white-space: pre-wrap; }
       <Note pitch="57" tpc="17" ticks="120"/>
       <Note pitch="60" tpc="14" ticks="120"/>
       <Note pitch="65" tpc="13" ticks="120"/>
-      <BarLine/>
       </Measure>
     <Measure number="18">
       <Rest>
@@ -519,7 +503,6 @@ p, li { white-space: pre-wrap; }
       <Note pitch="55" tpc="15" ticks="120"/>
       <Note pitch="59" tpc="19" ticks="120"/>
       <Note pitch="65" tpc="13" ticks="120"/>
-      <BarLine/>
       </Measure>
     <Measure number="19">
       <Rest>
@@ -540,7 +523,6 @@ p, li { white-space: pre-wrap; }
       <Note pitch="55" tpc="15" ticks="120"/>
       <Note pitch="60" tpc="14" ticks="120"/>
       <Note pitch="64" tpc="18" ticks="120"/>
-      <BarLine/>
       </Measure>
     <Measure number="20">
       <Rest>
@@ -561,7 +543,6 @@ p, li { white-space: pre-wrap; }
       <Note pitch="58" tpc="12" ticks="120"/>
       <Note pitch="60" tpc="14" ticks="120"/>
       <Note pitch="64" tpc="18" ticks="120"/>
-      <BarLine/>
       </Measure>
     <Measure number="21">
       <Rest>
@@ -582,7 +563,6 @@ p, li { white-space: pre-wrap; }
       <Note pitch="57" tpc="17" ticks="120"/>
       <Note pitch="60" tpc="14" ticks="120"/>
       <Note pitch="64" tpc="18" ticks="120"/>
-      <BarLine/>
       </Measure>
     <Measure number="22">
       <Rest>
@@ -603,7 +583,6 @@ p, li { white-space: pre-wrap; }
       <Note pitch="57" tpc="17" ticks="120"/>
       <Note pitch="60" tpc="14" ticks="120"/>
       <Note pitch="63" tpc="11" ticks="120"/>
-      <BarLine/>
       </Measure>
     <Measure number="23">
       <Rest>
@@ -624,7 +603,6 @@ p, li { white-space: pre-wrap; }
       <Note pitch="59" tpc="19" ticks="120"/>
       <Note pitch="60" tpc="14" ticks="120"/>
       <Note pitch="62" tpc="16" ticks="120"/>
-      <BarLine/>
       </Measure>
     <Measure number="24">
       <Rest>
@@ -645,7 +623,6 @@ p, li { white-space: pre-wrap; }
       <Note pitch="55" tpc="15" ticks="120"/>
       <Note pitch="59" tpc="19" ticks="120"/>
       <Note pitch="62" tpc="16" ticks="120"/>
-      <BarLine/>
       </Measure>
     <Measure number="25">
       <Rest>
@@ -666,7 +643,6 @@ p, li { white-space: pre-wrap; }
       <Note pitch="55" tpc="15" ticks="120"/>
       <Note pitch="60" tpc="14" ticks="120"/>
       <Note pitch="64" tpc="18" ticks="120"/>
-      <BarLine/>
       </Measure>
     <Measure number="26">
       <Rest>
@@ -687,7 +663,6 @@ p, li { white-space: pre-wrap; }
       <Note pitch="55" tpc="15" ticks="120"/>
       <Note pitch="60" tpc="14" ticks="120"/>
       <Note pitch="65" tpc="13" ticks="120"/>
-      <BarLine/>
       </Measure>
     <Measure number="27">
       <Rest>
@@ -708,7 +683,6 @@ p, li { white-space: pre-wrap; }
       <Note pitch="55" tpc="15" ticks="120"/>
       <Note pitch="59" tpc="19" ticks="120"/>
       <Note pitch="65" tpc="13" ticks="120"/>
-      <BarLine/>
       </Measure>
     <Measure number="28">
       <Rest>
@@ -729,7 +703,6 @@ p, li { white-space: pre-wrap; }
       <Note pitch="57" tpc="17" ticks="120"/>
       <Note pitch="60" tpc="14" ticks="120"/>
       <Note pitch="66" tpc="20" ticks="120"/>
-      <BarLine/>
       </Measure>
     <Measure number="29">
       <Rest>
@@ -750,7 +723,6 @@ p, li { white-space: pre-wrap; }
       <Note pitch="55" tpc="15" ticks="120"/>
       <Note pitch="60" tpc="14" ticks="120"/>
       <Note pitch="67" tpc="15" ticks="120"/>
-      <BarLine/>
       </Measure>
     <Measure number="30">
       <Rest>
@@ -771,7 +743,6 @@ p, li { white-space: pre-wrap; }
       <Note pitch="55" tpc="15" ticks="120"/>
       <Note pitch="60" tpc="14" ticks="120"/>
       <Note pitch="65" tpc="13" ticks="120"/>
-      <BarLine/>
       </Measure>
     <Measure number="31">
       <Rest>
@@ -792,7 +763,6 @@ p, li { white-space: pre-wrap; }
       <Note pitch="55" tpc="15" ticks="120"/>
       <Note pitch="59" tpc="19" ticks="120"/>
       <Note pitch="65" tpc="13" ticks="120"/>
-      <BarLine/>
       </Measure>
     <Measure number="32">
       <Rest>
@@ -813,7 +783,6 @@ p, li { white-space: pre-wrap; }
       <Note pitch="55" tpc="15" ticks="120"/>
       <Note pitch="58" tpc="12" ticks="120"/>
       <Note pitch="64" tpc="18" ticks="120"/>
-      <BarLine/>
       </Measure>
     <Measure number="33">
       <Rest>
@@ -833,11 +802,9 @@ p, li { white-space: pre-wrap; }
       <Note pitch="50" tpc="16" ticks="120"/>
       <Note pitch="53" tpc="13" ticks="120"/>
       <Note pitch="50" tpc="16" ticks="120"/>
-      <BarLine/>
       </Measure>
     <Measure number="34">
       <Clef>
-        <subtype>4096</subtype>
         <offset x="0" y="3"/>
         </Clef>
       <Rest>
@@ -857,7 +824,6 @@ p, li { white-space: pre-wrap; }
       <Note pitch="65" tpc="13" ticks="120"/>
       <Note pitch="64" tpc="18" ticks="120"/>
       <Note pitch="62" tpc="16" ticks="120"/>
-      <BarLine/>
       </Measure>
     <Measure number="35">
       <Chord>
@@ -869,7 +835,6 @@ p, li { white-space: pre-wrap; }
         <Note pitch="67" tpc="15"/>
         <Note pitch="72" tpc="14"/>
         </Chord>
-      <BarLine/>
       </Measure>
     </Staff>
   <Staff id="2">

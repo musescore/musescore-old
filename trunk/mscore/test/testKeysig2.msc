@@ -62,6 +62,7 @@
     <measureNumberInterval>5</measureNumberInterval>
     <measureNumberAllStaffs>0</measureNumberAllStaffs>
     <measureNumberSystem>1</measureNumberSystem>
+    <lyricsDistance>6.5</lyricsDistance>
     </Style>
   <showInvisible>0</showInvisible>
   <page-layout>
@@ -170,7 +171,6 @@ p, li { white-space: pre-wrap; }
       <Rest>
         <ticklen>1920</ticklen>
         </Rest>
-      <BarLine/>
       </Measure>
     <Measure number="2">
       <KeySig>
@@ -179,7 +179,6 @@ p, li { white-space: pre-wrap; }
       <Rest>
         <ticklen>1920</ticklen>
         </Rest>
-      <BarLine/>
       </Measure>
     <Measure number="3">
       <KeySig>
@@ -188,7 +187,6 @@ p, li { white-space: pre-wrap; }
       <Rest>
         <ticklen>1920</ticklen>
         </Rest>
-      <BarLine/>
       </Measure>
     <Measure number="4">
       <KeySig>
@@ -197,7 +195,6 @@ p, li { white-space: pre-wrap; }
       <Rest>
         <ticklen>1920</ticklen>
         </Rest>
-      <BarLine/>
       </Measure>
     <Measure number="5">
       <KeySig>
@@ -206,7 +203,6 @@ p, li { white-space: pre-wrap; }
       <Rest>
         <ticklen>1920</ticklen>
         </Rest>
-      <BarLine/>
       </Measure>
     <Measure number="6">
       <KeySig>
@@ -215,7 +211,6 @@ p, li { white-space: pre-wrap; }
       <Rest>
         <ticklen>1920</ticklen>
         </Rest>
-      <BarLine/>
       </Measure>
     <Measure number="7">
       <KeySig>
@@ -224,7 +219,6 @@ p, li { white-space: pre-wrap; }
       <Rest>
         <ticklen>1920</ticklen>
         </Rest>
-      <BarLine/>
       </Measure>
     <Measure number="8">
       <KeySig>
@@ -233,7 +227,6 @@ p, li { white-space: pre-wrap; }
       <Rest>
         <ticklen>1920</ticklen>
         </Rest>
-      <BarLine/>
       </Measure>
     <Measure number="9">
       <KeySig>
@@ -242,7 +235,6 @@ p, li { white-space: pre-wrap; }
       <Rest>
         <ticklen>1920</ticklen>
         </Rest>
-      <BarLine/>
       </Measure>
     <Measure number="10">
       <KeySig>
@@ -251,7 +243,6 @@ p, li { white-space: pre-wrap; }
       <Rest>
         <ticklen>1920</ticklen>
         </Rest>
-      <BarLine/>
       </Measure>
     <Measure number="11">
       <KeySig>
@@ -260,7 +251,6 @@ p, li { white-space: pre-wrap; }
       <Rest>
         <ticklen>1920</ticklen>
         </Rest>
-      <BarLine/>
       </Measure>
     <Measure number="12">
       <KeySig>
@@ -269,13 +259,11 @@ p, li { white-space: pre-wrap; }
       <Rest>
         <ticklen>1920</ticklen>
         </Rest>
-      <BarLine/>
       </Measure>
     <Measure number="13">
       <Rest>
         <ticklen>1920</ticklen>
         </Rest>
-      <BarLine/>
       </Measure>
     <Measure number="14">
       <KeySig>
@@ -284,7 +272,6 @@ p, li { white-space: pre-wrap; }
       <Rest>
         <ticklen>1920</ticklen>
         </Rest>
-      <BarLine/>
       </Measure>
     <Measure number="15">
       <KeySig>
@@ -293,7 +280,6 @@ p, li { white-space: pre-wrap; }
       <Rest>
         <ticklen>1920</ticklen>
         </Rest>
-      <BarLine/>
       </Measure>
     <Measure number="16">
       <KeySig>
@@ -302,7 +288,6 @@ p, li { white-space: pre-wrap; }
       <Rest>
         <ticklen>1920</ticklen>
         </Rest>
-      <BarLine/>
       </Measure>
     <Measure number="17">
       <KeySig>
@@ -311,7 +296,6 @@ p, li { white-space: pre-wrap; }
       <Rest>
         <ticklen>1920</ticklen>
         </Rest>
-      <BarLine/>
       </Measure>
     <Measure number="18">
       <KeySig>
@@ -320,7 +304,6 @@ p, li { white-space: pre-wrap; }
       <Rest>
         <ticklen>1920</ticklen>
         </Rest>
-      <BarLine/>
       </Measure>
     <Measure number="19">
       <KeySig>
@@ -329,7 +312,6 @@ p, li { white-space: pre-wrap; }
       <Rest>
         <ticklen>1920</ticklen>
         </Rest>
-      <BarLine/>
       </Measure>
     <Measure number="20">
       <KeySig>
@@ -338,7 +320,6 @@ p, li { white-space: pre-wrap; }
       <Rest>
         <ticklen>1920</ticklen>
         </Rest>
-      <BarLine/>
       </Measure>
     <Measure number="21">
       <KeySig>
@@ -347,7 +328,6 @@ p, li { white-space: pre-wrap; }
       <Rest>
         <ticklen>1920</ticklen>
         </Rest>
-      <BarLine/>
       </Measure>
     <Measure number="22">
       <KeySig>
@@ -356,13 +336,11 @@ p, li { white-space: pre-wrap; }
       <Rest>
         <ticklen>1920</ticklen>
         </Rest>
-      <BarLine/>
       </Measure>
     <Measure number="23">
       <Rest>
         <ticklen>1920</ticklen>
         </Rest>
-      <BarLine/>
       </Measure>
     <Measure number="24">
       <KeySig>
@@ -371,7 +349,6 @@ p, li { white-space: pre-wrap; }
       <Rest>
         <ticklen>1920</ticklen>
         </Rest>
-      <BarLine/>
       </Measure>
     <Measure number="25">
       <KeySig>
@@ -380,7 +357,6 @@ p, li { white-space: pre-wrap; }
       <Rest>
         <ticklen>1920</ticklen>
         </Rest>
-      <BarLine/>
       </Measure>
     <Measure number="26">
       <KeySig>
@@ -389,7 +365,6 @@ p, li { white-space: pre-wrap; }
       <Rest>
         <ticklen>1920</ticklen>
         </Rest>
-      <BarLine/>
       </Measure>
     <Measure number="27">
       <KeySig>
@@ -398,7 +373,6 @@ p, li { white-space: pre-wrap; }
       <Rest>
         <ticklen>1920</ticklen>
         </Rest>
-      <BarLine/>
       </Measure>
     <Measure number="28">
       <KeySig>
@@ -407,13 +381,11 @@ p, li { white-space: pre-wrap; }
       <Rest>
         <ticklen>1920</ticklen>
         </Rest>
-      <BarLine/>
       </Measure>
     <Measure number="29">
       <Rest>
         <ticklen>1920</ticklen>
         </Rest>
-      <BarLine/>
       </Measure>
     <Measure number="30">
       <KeySig>
@@ -422,7 +394,6 @@ p, li { white-space: pre-wrap; }
       <Rest>
         <ticklen>1920</ticklen>
         </Rest>
-      <BarLine/>
       </Measure>
     <Measure number="31">
       <KeySig>
@@ -431,7 +402,6 @@ p, li { white-space: pre-wrap; }
       <Rest>
         <ticklen>1920</ticklen>
         </Rest>
-      <BarLine/>
       </Measure>
     <Measure number="32">
       <KeySig>
@@ -440,7 +410,6 @@ p, li { white-space: pre-wrap; }
       <Rest>
         <ticklen>1920</ticklen>
         </Rest>
-      <BarLine/>
       </Measure>
     <Measure number="33">
       <KeySig>
@@ -449,7 +418,6 @@ p, li { white-space: pre-wrap; }
       <Rest>
         <ticklen>1920</ticklen>
         </Rest>
-      <BarLine/>
       </Measure>
     <Measure number="34">
       <KeySig>
@@ -458,7 +426,6 @@ p, li { white-space: pre-wrap; }
       <Rest>
         <ticklen>1920</ticklen>
         </Rest>
-      <BarLine/>
       </Measure>
     <Measure number="35">
       <KeySig>
@@ -467,7 +434,6 @@ p, li { white-space: pre-wrap; }
       <Rest>
         <ticklen>1920</ticklen>
         </Rest>
-      <BarLine/>
       </Measure>
     <Measure number="36">
       <KeySig>
@@ -476,7 +442,6 @@ p, li { white-space: pre-wrap; }
       <Rest>
         <ticklen>1920</ticklen>
         </Rest>
-      <BarLine/>
       </Measure>
     <Measure number="37">
       <KeySig>
@@ -485,7 +450,6 @@ p, li { white-space: pre-wrap; }
       <Rest>
         <ticklen>1920</ticklen>
         </Rest>
-      <BarLine/>
       </Measure>
     <Measure number="38">
       <KeySig>
@@ -494,7 +458,6 @@ p, li { white-space: pre-wrap; }
       <Rest>
         <ticklen>1920</ticklen>
         </Rest>
-      <BarLine/>
       </Measure>
     <Measure number="39">
       <KeySig>
@@ -503,7 +466,6 @@ p, li { white-space: pre-wrap; }
       <Rest>
         <ticklen>1920</ticklen>
         </Rest>
-      <BarLine/>
       </Measure>
     <Measure number="40">
       <KeySig>
@@ -512,7 +474,6 @@ p, li { white-space: pre-wrap; }
       <Rest>
         <ticklen>1920</ticklen>
         </Rest>
-      <BarLine/>
       </Measure>
     <Measure number="41">
       <KeySig>
@@ -521,13 +482,11 @@ p, li { white-space: pre-wrap; }
       <Rest>
         <ticklen>1920</ticklen>
         </Rest>
-      <BarLine/>
       </Measure>
     <Measure number="42">
       <Rest>
         <ticklen>1920</ticklen>
         </Rest>
-      <BarLine/>
       </Measure>
     <Measure number="43">
       <KeySig>
@@ -536,7 +495,6 @@ p, li { white-space: pre-wrap; }
       <Rest>
         <ticklen>1920</ticklen>
         </Rest>
-      <BarLine/>
       </Measure>
     <Measure number="44">
       <KeySig>
@@ -545,31 +503,26 @@ p, li { white-space: pre-wrap; }
       <Rest>
         <ticklen>1920</ticklen>
         </Rest>
-      <BarLine/>
       </Measure>
     <Measure number="45">
       <Rest>
         <ticklen>1920</ticklen>
         </Rest>
-      <BarLine/>
       </Measure>
     <Measure number="46">
       <Rest>
         <ticklen>1920</ticklen>
         </Rest>
-      <BarLine/>
       </Measure>
     <Measure number="47">
       <Rest>
         <ticklen>1920</ticklen>
         </Rest>
-      <BarLine/>
       </Measure>
     <Measure number="48">
       <Rest>
         <ticklen>1920</ticklen>
         </Rest>
-      <BarLine/>
       </Measure>
     </Staff>
   <cursorTrack>-4</cursorTrack>

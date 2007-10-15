@@ -1543,30 +1543,28 @@ void Score::toEList(QMap<int, Event>* events, int tickOffset)
 
 void Score::toEList(QMap<int, Event>* events, bool expandRepeats, int tickOffset, int staffIdx)
       {
-      foreach(Part* part, _parts) {
-            RepeatStack rs;
-            for (Measure* m = mainLayout()->first(); m; m = m->next()) {
-                  // push each measure for checking of any of repeat type or jumps,
-                  // returns the measure to processed with
+      RepeatStack rs;
+      for (Measure* m = mainLayout()->first(); m; m = m->next()) {
+            // push each measure for checking of any of repeat type or jumps,
+            // returns the measure to processed with
 
-                  if (expandRepeats)
-                        m = rs.push(m);
+            if (expandRepeats)
+                  m = rs.push(m);
 
-                  collectMeasureEvents(events, m, staffIdx, tickOffset);
+            collectMeasureEvents(events, m, staffIdx, tickOffset);
 
-                  // Don't forget to save measure, because pop may change it,
-                  // returned m may differ from the original, new start measure
-                  // of "repeat", 0 means nothing to repeat continue with next measure
-                  // functions push and pop are in repeat2.h/cpp file
+            // Don't forget to save measure, because pop may change it,
+            // returned m may differ from the original, new start measure
+            // of "repeat", 0 means nothing to repeat continue with next measure
+            // functions push and pop are in repeat2.h/cpp file
 
-                  if (expandRepeats) {
-                        Measure* ms = m;
-                        m = rs.pop(m);
-                        if (m && m->next() != 0)
-                              continue;
-                        else if (m == 0)
-                              m = ms;
-                        }
+            if (expandRepeats) {
+                  Measure* ms = m;
+                  m = rs.pop(m);
+                  if (m && m->next() != 0)
+                        continue;
+                  else if (m == 0)
+                        m = ms;
                   }
             }
       }

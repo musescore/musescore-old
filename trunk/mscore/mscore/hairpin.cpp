@@ -84,7 +84,6 @@ QRectF HairpinSegment::bbox() const
       double h = point(score()->style()->hairpinHeight);
       QRectF r(0.0, -h * .5, pos2().x(), h);
       double w = score()->style()->hairpinWidth.point();
-//      r.adjust(-w, -w, w*2, w*2);
       r.adjust(-w*.5, -w*.5, w, w);
       return r;
       }
@@ -120,7 +119,7 @@ void Hairpin::read(QDomElement e)
 void Hairpin::layout(ScoreLayout* layout)
       {
       SLine::layout(layout);
-      setPos(ipos().x(), 7 * layout->spatium());
+      setPos(0.0, 7 * layout->spatium());
       }
 
 //---------------------------------------------------------
@@ -129,8 +128,6 @@ void Hairpin::layout(ScoreLayout* layout)
 
 LineSegment* Hairpin::createLineSegment()
       {
-      LineSegment* seg = new HairpinSegment(score());
-      seg->setStaff(staff());
-      return seg;
+      return new HairpinSegment(score());
       }
 

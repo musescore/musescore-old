@@ -2,9 +2,9 @@
 <museScore version="1.0">
   <Spatium>1.625</Spatium>
   <Division>480</Division>
-  <Mag>1.44403</Mag>
-  <xoff>-146</xoff>
-  <yoff>-557</yoff>
+  <Mag>0.843308</Mag>
+  <xoff>26</xoff>
+  <yoff>25</yoff>
   <Style>
     <staffUpperBorder>8</staffUpperBorder>
     <staffLowerBorder>4</staffLowerBorder>
@@ -150,10 +150,16 @@
   <Slur>
     <tick2>1920</tick2>
     <tick>1440</tick>
+    <SlurSegment no="0">
+      <offset x="-0.0765101" y="-1.07114"/>
+      </SlurSegment>
     </Slur>
   <Slur>
     <tick2>2880</tick2>
     <tick>2400</tick>
+    <SlurSegment no="0">
+      <offset x="-0.038255" y="-1.07114"/>
+      </SlurSegment>
     </Slur>
   <Slur>
     <tick2>7200</tick2>
@@ -174,10 +180,16 @@
   <Slur>
     <tick2>12480</tick2>
     <tick>12000</tick>
+    <SlurSegment no="0">
+      <offset x="-0.140943" y="0.466337"/>
+      </SlurSegment>
     </Slur>
   <Slur>
     <tick2>13440</tick2>
     <tick>12960</tick>
+    <SlurSegment no="0">
+      <offset x="0.0203371" y="0.833822"/>
+      </SlurSegment>
     </Slur>
   <Slur>
     <tick2>15360</tick2>

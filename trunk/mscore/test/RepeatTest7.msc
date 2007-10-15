@@ -158,14 +158,12 @@ p, li { white-space: pre-wrap; }
       </Measure>
     <Measure number="3">
       <endRepeat>2</endRepeat>
-      <ending>0</ending>
       <Note pitch="69" tpc="17" ticks="480"/>
       <Note pitch="72" tpc="14" ticks="480"/>
       <Note pitch="69" tpc="17" ticks="480"/>
       <Note pitch="72" tpc="14" ticks="480"/>
       </Measure>
     <Measure number="4">
-      <ending>1</ending>
       <Note pitch="69" tpc="17" ticks="480"/>
       <Note pitch="71" tpc="19" ticks="240"/>
       <Note pitch="72" tpc="14" ticks="240"/>

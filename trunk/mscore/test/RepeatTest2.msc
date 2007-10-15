@@ -171,7 +171,6 @@ p, li { white-space: pre-wrap; }
       <Note pitch="74" tpc="16" ticks="480"/>
       </Measure>
     <Measure number="2">
-      <ending>0</ending>
       <Repeat>
         <subtype>segno</subtype>
         </Repeat>
@@ -191,7 +190,6 @@ p, li { white-space: pre-wrap; }
       <Note pitch="67" tpc="15" ticks="480"/>
       </Measure>
     <Measure number="4">
-      <ending>1</ending>
       <Note pitch="69" tpc="17" ticks="480"/>
       <Note pitch="72" tpc="14" ticks="480"/>
       <Note pitch="69" tpc="17" ticks="480"/>

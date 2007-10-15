@@ -1402,6 +1402,7 @@ void Canvas::dragEnterEvent(QDragEnterEvent* event)
                      line, column, err.toLatin1().data(), a.data());
                   return;
                   }
+            docName = "--";
             QDomElement e = doc.documentElement();
 
             int type = Element::readType(e, &dragOffset);
@@ -1787,6 +1788,7 @@ void Canvas::dropEvent(QDropEvent* event)
             printf("error reading drag data\n");
             return;
             }
+      docName = "--";
       QDomElement e = doc.documentElement();
       Element* el = elementAt(pos);
       if (el == 0 || el->type() != MEASURE) {
