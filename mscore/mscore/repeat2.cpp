@@ -137,6 +137,46 @@ Measure* RepeatStack::push(Measure* m)
                   type &= ~(NORMAL);
                   }
 
+            if (type&REPEATMES) {
+                  if ((rp = rp->findRepElement(m,RepeatMeasureFlag)) != 0x00) {
+                        p = slot(m,REPEATMES);
+                        if (!p) {
+                              p = setNewSlot(m);
+                              p->setRepeatType(REPEATMES);
+                              p->setLoopCount((rp->cycle()));
+                              p->buildCycleList(p,(rp->cycleList()));
+                              p->setNo((rp->no()));
+                              p->setDestNo(rp->destNo());
+                              }
+                        p->setTickOffset(rtickOffSet);
+                        if (isInList(p,p->active())) {
+                              if (p->loopCount() > 1) {
+                                    p->setLoopCount(p->loopCount()-1);
+                                    }
+                              else {
+                                    p->setActive(p->active()+1); 
+                                    p->setLoopCount((rp->cycle()));
+                                    }
+                              ret = m;
+                              for (int i = 0; i < p->destNo(); i++)
+                                    ret = ret->prev();
+                              p->setTicks2Add(m->tick());
+                              rtickOffSet += (p->ticks2Add() - ret->tick());      
+                              }
+                        else {
+                              p->setActive(p->active()+1); 
+                              rtickOffSet += (p->ticks2Add() - ret->tick());      
+                              ret = m->next();
+                              if (ret) {
+                                    mm = push(ret); 
+                                    pp = slot(ret,NO);                            
+                                    rtickOffSet += (m->tickLen())*-1;
+                                    }
+                              }
+                        }
+                  type = 0;
+                  }  
+          
             if (type&FINE) {
                   if ((rp = rp->findRepElement(m,RepeatFine)) != 0x00) {
                         p = slotByType(FINE);
@@ -172,16 +212,18 @@ Measure* RepeatStack::push(Measure* m)
                               p = setNewSlot(m);
                               p->setRepeatType(SEGNO);
                               p->setNo((rp->no()));
+                              p->buildCycleList(p,rp->cycleList());
                               p->setDestNo(rp->destNo());
                               }
-                        if (p->active() == FIRSTTIME) {
+                        if (isInList(p,p->active())) {
                               p->setTicks2Add(m->tick());
                               p->setStartMeasure(m);
+                              p->setLoopCount((rp->cycle()));
                               if ((pp = slotByType(DALSEGNO))) {
                                     p->setEndMeasure(pp->startMeasure());
                                     }
+                              p->setTickOffset(rtickOffSet);
                               }
-                        p->setTickOffset(rtickOffSet);
                         }      
                   type &= ~(SEGNO);
                   }
@@ -216,45 +258,6 @@ Measure* RepeatStack::push(Measure* m)
                         }            
                   type &= ~(DALSEGNO);
                   }
-
-            if (type&REPEATMES) {
-                  if ((rp = rp->findRepElement(m,RepeatMeasureFlag)) != 0x00) {
-                        p = slot(m,REPEATMES);
-                        if (!p) {
-                              p = setNewSlot(m);
-                              p->setRepeatType(REPEATMES);
-                              p->setLoopCount((rp->cycle()));
-                              p->buildCycleList(p,(rp->cycleList()));
-                              p->setNo((rp->no()));
-                              p->setDestNo(rp->destNo());
-                              }
-                        if (p->active() == THIRDTIME && repeatEachTime) {
-                              p->setLoopCount((rp->cycle()));                       
-                              p->setActive(FIRSTTIME);
-                              }
-                        p->setTickOffset(rtickOffSet);
-//                        if (isInList(p,p->active())) {
-                        if (p->active() == FIRSTTIME) {
-                              ret = m->prev();
-                              if (p->loopCount() <= 1)
-                                    p->setActive(SECONDTIME);
-                              else
-                                    p->setLoopCount(p->loopCount()-1);
-                              p->setTicks2Add(m->tick());
-                              rtickOffSet += (p->ticks2Add() - ret->tick());
-                              }
-                        else {
-                              ret = m->next();
-                              if (ret) {
-                                    mm = push(ret); 
-                                    pp = slot(ret,NO);                            
-                                    p->setActive(THIRDTIME);
-                                    rtickOffSet = (pp->tickOffset() - m->tickLen());
-                                    }
-                              }      
-                        }
-                  type = 0;
-                  }            
 
             if (type&DACAPO) {
             // D.C. and RepeatEnd does not make sense, ignore D.C. 
@@ -591,13 +594,13 @@ Measure* RepeatStack::pop(Measure* m)
                   ret = 0x00;
                   type &= ~(CAPO);
                   }
+            if (type&REPEATMES) { // don't change position from here
+                  ret = 0x00;
+                  type = 0;
+                  }
             if (type&NORMAL) {
                   ret = 0x00;
                   type &= ~(NORMAL);
-                  }
-            if (type&REPEATMES) { // only at begin of measure
-                  ret = 0x00;
-                  type &= ~(REPEATMES);
                   }
             if (type&CODETTA) { // only at begin of measure 
                   ret = 0x00;
