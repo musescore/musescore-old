@@ -29,6 +29,7 @@
 #include "element.h"
 #include "segment.h"
 
+
 class Segment;
 class Xml;
 class System;
@@ -41,6 +42,7 @@ class Text;
 class ChordRest;
 class Score;
 class Viewer;
+
 
 //---------------------------------------------------------
 //   MeasureWidth
@@ -97,6 +99,7 @@ class Measure : public Element {
       int _size;              ///< Number of items on segment list
 
       int _endRepeat;         ///< end repeat marker und repeat count
+      int _ending;            ///< ending alternativ for repeat
       int _repeatFlags;       ///< or'd RepeatType's (see: repeat.h)
 
       MStaffList  staves;
@@ -222,6 +225,8 @@ class Measure : public Element {
       int endRepeat() const         { return _endRepeat; }
       void setEndRepeat(int val)    { _endRepeat = val; }
 
+      int ending() const            { return _ending; }
+      void setEnding(int r)         { _ending = r;    }
       Segment* getSegment(Element* el);
       Segment* getSegment(Segment::SegmentType st, int tick);
       Segment* findSegment(Segment::SegmentType st, int t);

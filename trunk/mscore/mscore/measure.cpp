@@ -68,6 +68,9 @@
 #include "tremolo.h"
 #include "drumset.h"
 #include "repeat.h"
+//Added by DK
+#include "repeatflag.h"
+//----------------------
 
 //---------------------------------------------------------
 //   y2pitch
@@ -611,10 +614,15 @@ void Measure::layout2(ScoreLayout* layout)
                               }
                         switch (element->subtype()) {
                               case RepeatSegno:
-                              case RepeatCoda:
-                              case RepeatVarcoda:
                               case RepeatCodetta:
                                     xo += (element->width()*.5);
+                                    yo += (element->bbox().height()*-.5);
+                                    break;
+                              // Position changed to end of measure, by DK
+                              case RepeatVarcoda:
+                              case RepeatCoda:
+                                    xo -= (element->width()*.5);
+                                    xo += bbox().width();
                                     yo += (element->bbox().height()*-.5);
                                     break;
                               case RepeatFine:
@@ -799,6 +807,7 @@ Segment* Measure::getSegment(Segment::SegmentType st, int t)
 
 void Measure::add(Element* el)
       {
+
       Staff* staffp = el->staff();
       if (el->type() != SEGMENT && staffp == 0) {
             _pel.push_back(el);
@@ -866,6 +875,9 @@ void Measure::add(Element* el)
 
             case REPEAT:
                   _repeatFlags |= el->subtype();
+                  // Added by DK.
+                  RepeatFlag().setMeasureRepeatFlag(el,0);
+                  //----------------------
                   // fall through
 
             case DYNAMIC:
@@ -879,6 +891,9 @@ void Measure::add(Element* el)
             case BAR_LINE:
                   {
                   Segment* seg = getSegment(Segment::SegEndBarLine, tick() + tickLen());
+                  // Added by DK.
+                  RepeatFlag().setMeasureRepeatFlag(el,0);
+                  //----------------------
                   seg->add(el);
                   }
                   break;
@@ -2570,6 +2585,8 @@ void Measure::createVoice(int track)
 
 void Measure::setEndBarLineType(int type, bool generated)
       {
+      // Added and changed by DK
+      BarLine* bl;
       QList<Part*>* pl = score()->parts();
       foreach(Part* part, *pl) {
             Staff* staff = part->staff(0);
@@ -2579,21 +2596,27 @@ void Measure::setEndBarLineType(int type, bool generated)
                   if (s->subtype() != Segment::SegEndBarLine)
                         continue;
                   if (s->element(track)) {
+                        bl = (BarLine*)(s->element(track));
+                        bl->setSubtype(type);
+                        bl->setGenerated(generated);
+/*
                         BarLine* bar = (BarLine*)(s->element(track));
                         bar->setSubtype(type);
                         bar->setGenerated(generated);
+*/
                         found = true;
                         }
                   break;
                   }
             if (!found) {
-                  BarLine* bl = new BarLine(score());
+                  /*BarLine**/ bl = new BarLine(score());
                   bl->setStaff(staff);
                   bl->setSubtype(type);
                   bl->setGenerated(generated);
                   Segment* seg = getSegment(Segment::SegEndBarLine, tick() + tickLen());
                   seg->add(bl);
                   }
+            RepeatFlag().setMeasureRepeatFlag((Element*)bl,type);
             }
       }
 

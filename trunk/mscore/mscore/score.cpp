@@ -57,6 +57,7 @@
 #include "event.h"
 #include "repeat2.h"
 #include "ottava.h"
+#include "barline.h"
 
 Score* gscore;                 ///< system score, used for palettes etc.
 
@@ -1505,17 +1506,39 @@ void Score::collectMeasureEvents(QMap<int, Event>* events, Measure* m, int staff
 void Score::toEList(QMap<int, Event>* events, int tickOffset)
       {
       int staffIdx = 0;
+      RepeatStack* rs = new RepeatStack();
       foreach(Part* part, _parts) {
             for (int i = 0; i < part->staves()->size(); ++i) {
-                  // create stack for repeats and jumps
-                  RepeatStack rs;
-
+                  // Added by DK
+                  // 1. step to collect repeats outside measure, like Coda, Segno.....
+                  for (Measure* m = mainLayout()->first(); m; m = m->next())
+                        foreach(Element* e, *m->el()) {
+                              if (e->type() == REPEAT || e->type() == VOLTA || 
+                                  e->type() == VOLTA_SEGMENT) {
+                                    rs->collectRepeats(e, m);
+                                    }
+                              }
+                  // 2. step to collect repeats inside measure
+                  for (Measure* m = mainLayout()->first(); m; m = m->next()) {
+                        for (Segment* seg = m->first(); seg; seg = seg->next()) {
+                              Element* el = seg->element(0);
+                              if ((el->type() == BAR_LINE /*&& 
+                                 (el->subtype() == END_REPEAT ||
+                                  el->subtype() == START_REPEAT ||
+                                  el->subtype() == END_START_REPEAT)*/) ||
+                                  el->type() == REPEAT_MEASURE) {
+                                    rs->collectRepeats(el,m);
+                                    }                                    
+                              }
+                        }
+                  //----------------------------------------------------------
                   for (Measure* m = mainLayout()->first(); m;) {
                         // push each measure for checking of any of repeat type or jumps,
                         // returns the measure to processed with
 
-                        m = rs.push(m);
-
+                        m = rs->push(m);
+                        if (m == 0) // A jump or repeat has reached and of partiture
+                              break;
                         collectMeasureEvents(events, m, staffIdx, tickOffset);
 
                         // Don't forget to save measure, because pop may change it,
@@ -1524,7 +1547,7 @@ void Score::toEList(QMap<int, Event>* events, int tickOffset)
                         // functions push and pop are in repeat2.h/cpp file
 
                         Measure* ms = m;
-                        m = rs.pop(m);
+                        m = rs->pop(m);
                         if (m && m->next() != 0)
                               continue;
                         else if (m == 0)
@@ -1543,13 +1566,41 @@ void Score::toEList(QMap<int, Event>* events, int tickOffset)
 
 void Score::toEList(QMap<int, Event>* events, bool expandRepeats, int tickOffset, int staffIdx)
       {
-      RepeatStack rs;
+
+      RepeatStack* rs = new RepeatStack();
+
+      // Added by DK
+      // 1. step to collect repeats outside measure, like Coda, Segno.....
+      for (Measure* m = mainLayout()->first(); m; m = m->next())
+            foreach(Element* e, *m->el()) {
+                  if (e->type() == REPEAT || e->type() == VOLTA || 
+                        e->type() == VOLTA_SEGMENT) {
+                        rs->collectRepeats(e, m);
+                        }
+                  }
+      // 2. step to collect repeats inside measure
+      for (Measure* m = mainLayout()->first(); m; m = m->next()) {
+           for (Segment* seg = m->first(); seg; seg = seg->next()) {
+                Element* el = seg->element(0);
+                if ((el->type() == BAR_LINE && 
+                      (el->subtype() == END_REPEAT ||
+                       el->subtype() == START_REPEAT ||
+                       el->subtype() == END_START_REPEAT)) ||
+                       el->type() == REPEAT_MEASURE) {
+                        rs->collectRepeats(el,m);
+                        }                                    
+                }
+          }
+          //----------------------------------------------------------
+
       for (Measure* m = mainLayout()->first(); m; m = m->next()) {
             // push each measure for checking of any of repeat type or jumps,
             // returns the measure to processed with
 
             if (expandRepeats)
-                  m = rs.push(m);
+                  m = rs->push(m);
+            if (m == 0) // A jump or repeat has reached and of partiture
+                  continue;
 
             collectMeasureEvents(events, m, staffIdx, tickOffset);
 
@@ -1560,7 +1611,7 @@ void Score::toEList(QMap<int, Event>* events, bool expandRepeats, int tickOffset
 
             if (expandRepeats) {
                   Measure* ms = m;
-                  m = rs.pop(m);
+                  m = rs->pop(m);
                   if (m && m->next() != 0)
                         continue;
                   else if (m == 0)

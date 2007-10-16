@@ -31,6 +31,9 @@
 #include "part.h"
 #include "lyrics.h"
 #include "repeat.h"
+// Added by DK
+#include "repeatflag.h"
+//------------------------
 
 const char* Segment::segmentTypeNames[] = {
    "Clef", "Key Signature", "Time Signature", "Begin Repeat", "ChordRest",
@@ -180,6 +183,7 @@ void Segment::removeStaff(int staff)
 
 void Segment::add(Element* el)
       {
+      RepeatFlag* rf;
       el->setParent(this);
       el->setTick(tick());    //DEBUG
       int staffIdx = el->staffIdx();
@@ -202,6 +206,9 @@ void Segment::add(Element* el)
             case REPEAT_MEASURE:
                   measure()->setRepeatFlags(measure()->repeatFlags() | RepeatMeasureFlag);
                   _elist[track] = el;
+                  // Added by DK
+                  rf->setMeasureRepeatFlag(el,0);
+                  //---------------------------------------                  
                   break;
 
             case CHORD:
