@@ -1,3 +1,6 @@
+16.10.7 (dk)
+      - added setup for repeats
+        not strongly tested
 14.10.7 (lv)
       - new testfile testBarStyles.xml
       - added pdf version of xml testfiles that import correctly

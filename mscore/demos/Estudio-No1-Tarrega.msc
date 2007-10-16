@@ -2749,7 +2749,7 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <ticklen>960</ticklen>
         <StemDirection>up</StemDirection>
-        <Note pitch="35" tpc="19"/>
+        <Note pitch="36" tpc="14"/>
         </Chord>
       <Chord>
         <ticklen>960</ticklen>
@@ -2761,7 +2761,11 @@ p, li { white-space: pre-wrap; }
       <Chord>
         <ticklen>960</ticklen>
         <StemDirection>up</StemDirection>
-        <Note pitch="35" tpc="19"/>
+        <Note>
+          <selected>1</selected>
+          <pitch>36</pitch>
+          <tpc>14</tpc>
+          </Note>
         </Chord>
       <Chord>
         <ticklen>960</ticklen>
@@ -2948,5 +2952,5 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     </Staff>
-  <cursorTrack>0</cursorTrack>
+  <cursorTrack>4</cursorTrack>
   </museScore>

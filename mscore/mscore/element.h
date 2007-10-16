@@ -40,6 +40,10 @@ class Score;
 class Sym;
 class ScoreLayout;
 class Viewer;
+// Added by DK
+class RepeatFlag;
+//--------------------------
+
 
 /**
   The value of this enum determines the "stacking order" the elements are
@@ -90,6 +94,9 @@ class Element {
       Element* _prev;
       Element* _parent;
       Measure* _anchorMeasure;
+      // Added by DK
+      RepeatFlag* _repeatFlag;
+      //--------------------------
 
       bool _selected;           ///< set if element is selected
       mutable bool _dropTarget; ///< true, if element accepts drops
@@ -137,6 +144,11 @@ class Element {
 
       Measure* anchorMeasure() const          { return _anchorMeasure; }
       void setAnchorMeasure(Measure* m)       { _anchorMeasure = m;    }
+
+      // Added by DK
+      RepeatFlag* repeatFlag()                { return _repeatFlag; }
+      void setRepeatFlag(RepeatFlag* r)       { _repeatFlag = r;    }
+      //----------------------------------------------------------------
 
       bool selected() const                   { return _selected;   }
       virtual void setSelected(bool f)        { _selected = f;      }
