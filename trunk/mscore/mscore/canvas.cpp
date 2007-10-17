@@ -193,7 +193,6 @@ void Canvas::objectPopup(const QPoint& pos, Element* obj)
                   obj->score()->select(obj, 0, 0);
             }
 
-
       QMenu* popup = new QMenu(this);
       popup->setSeparatorsCollapsible(false);
 
@@ -214,23 +213,20 @@ void Canvas::objectPopup(const QPoint& pos, Element* obj)
       popup->addSeparator();
 
       // Added by DK
-      if ( obj->type() == REPEAT || 
+      if ( obj->type() == REPEAT ||
             obj->type() == REPEAT_MEASURE ||
-            obj->type() == VOLTA ||
-            obj->type() == VOLTA_SEGMENT ||
-            (obj->type() == BAR_LINE && 
-                  (obj->subtype() == END_REPEAT || 
+            (obj->type() == BAR_LINE &&
+                  (obj->subtype() == END_REPEAT ||
                    obj->subtype() == START_REPEAT ||
-                   obj->subtype() == END_START_REPEAT)))
+                   obj->subtype() == END_START_REPEAT))) {
             if (RepeatFlag().genPropertyMenu(popup))
                   popup->addSeparator();
-      else
-      //--------------------------------------------------
-            if (obj->genPropertyMenu(popup))
-                  popup->addSeparator();
+            }
+      else if (obj->genPropertyMenu(popup))
+            popup->addSeparator();
 
-      a = popup->addAction(tr("Properties"));
-      a->setData("props");
+      a = popup->addAction(tr("Object Inspector"));
+      a->setData("list");
       a = popup->exec(pos);
       if (a == 0)
             return;
@@ -240,7 +236,7 @@ void Canvas::objectPopup(const QPoint& pos, Element* obj)
             return;
             }
       _score->startCmd();
-      if (cmd == "props")
+      if (cmd == "list")
             mscore->showElementContext(obj);
       else if (cmd == "invisible")
             _score->toggleInvisible(obj);
@@ -252,18 +248,17 @@ void Canvas::objectPopup(const QPoint& pos, Element* obj)
             }
       else {
             // Added by DK
-            if ( obj->type() == REPEAT || 
+            if ( obj->type() == REPEAT ||
                   obj->type() == REPEAT_MEASURE ||
-                  obj->type() == VOLTA ||
-                  obj->type() == VOLTA_SEGMENT ||
-                  (obj->type() == BAR_LINE && 
-                        (obj->subtype() == END_REPEAT || 
-                         obj->subtype() == START_REPEAT || 
-                         obj->subtype() == END_START_REPEAT)))
-                  RepeatFlag().propertyAction(cmd,obj);
-            else
-            //--------------------------------------------------
+                  (obj->type() == BAR_LINE &&
+                        (obj->subtype() == END_REPEAT ||
+                         obj->subtype() == START_REPEAT ||
+                         obj->subtype() == END_START_REPEAT))) {
+                  RepeatFlag().propertyAction(cmd, obj);
+                  }
+            else {
                   obj->propertyAction(cmd);
+                  }
             }
       _score->endCmd();
       }
@@ -305,13 +300,13 @@ void Canvas::measurePopup(const QPoint& gpos, Measure* obj)
       popup->addSeparator();
 
       // Added by DK
-      if ( obj->type() == REPEAT || 
+      if ( obj->type() == REPEAT ||
             obj->type() == REPEAT_MEASURE ||
             obj->type() == VOLTA ||
             obj->type() == VOLTA_SEGMENT ||
-            (obj->type() == BAR_LINE && 
-                  (obj->subtype() == END_REPEAT || 
-                   obj->subtype() == START_REPEAT || 
+            (obj->type() == BAR_LINE &&
+                  (obj->subtype() == END_REPEAT ||
+                   obj->subtype() == START_REPEAT ||
                    obj->subtype() == END_START_REPEAT)))
             if (RepeatFlag().genPropertyMenu(popup))
                   popup->addSeparator();
@@ -351,13 +346,13 @@ void Canvas::measurePopup(const QPoint& gpos, Measure* obj)
             }
       else {
             // Added by DK
-            if ( obj->type() == REPEAT || 
+            if ( obj->type() == REPEAT ||
                   obj->type() == REPEAT_MEASURE ||
                   obj->type() == VOLTA ||
                   obj->type() == VOLTA_SEGMENT ||
-                  (obj->type() == BAR_LINE && 
-                        (obj->subtype() == END_REPEAT || 
-                         obj->subtype() == START_REPEAT || 
+                  (obj->type() == BAR_LINE &&
+                        (obj->subtype() == END_REPEAT ||
+                         obj->subtype() == START_REPEAT ||
                          obj->subtype() == END_START_REPEAT)))
                   RepeatFlag().propertyAction(cmd,obj);
             else
@@ -539,7 +534,7 @@ void Canvas::mouseDoubleClickEvent(QMouseEvent* ev)
             return;
 
       Element* element = _score->dragObject();
-      
+
       if (element) {
             _score->startCmd();
 

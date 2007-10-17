@@ -25,6 +25,7 @@
 #include "xml.h"
 #include "utils.h"
 #include "sym.h"
+#include "layout.h"
 
 static const QChar TC(0xe161);
 static const QChar TLC(0xe16f);
@@ -72,6 +73,8 @@ Trill::Trill(Score* s)
 void Trill::layout(ScoreLayout* layout)
       {
       SLine::layout(layout);
+      qreal y = -2.0 * layout->spatium();
+      setPos(ipos().x(), y);
       }
 
 //---------------------------------------------------------

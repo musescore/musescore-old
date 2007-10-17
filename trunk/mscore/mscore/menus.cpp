@@ -180,22 +180,38 @@ void MuseScore::showPalette(bool visible)
 
             Volta* volta = new Volta(gscore);
             volta->setLen(l);
-            volta->setSubtype(PRIMA_VOLTA);
+            volta->setSubtype(Volta::VOLTA_CLOSED);
+            volta->setText("1.");
+            QList<int> il;
+            il.append(1);
+            volta->setEndings(il);
             sp->addObject(2, volta, tr("prima volta"));
 
             volta = new Volta(gscore);
             volta->setLen(l);
-            volta->setSubtype(SECONDA_VOLTA);
+            volta->setSubtype(Volta::VOLTA_CLOSED);
+            volta->setText("2.");
+            il.clear();
+            il.append(2);
+            volta->setEndings(il);
             sp->addObject(3, volta, tr("seconda volta"));
 
             volta = new Volta(gscore);
             volta->setLen(l);
-            volta->setSubtype(TERZA_VOLTA);
+            volta->setSubtype(Volta::VOLTA_CLOSED);
+            volta->setText("3.");
+            il.clear();
+            il.append(3);
+            volta->setEndings(il);
             sp->addObject(4, volta, tr("terza volta"));
 
             volta = new Volta(gscore);
             volta->setLen(l);
-            volta->setSubtype(SECONDA_VOLTA2);
+            volta->setSubtype(Volta::VOLTA_OPEN);
+            volta->setText("2.");
+            il.clear();
+            il.append(2);
+            volta->setEndings(il);
             sp->addObject(5, volta, tr("seconda volta 2"));
 
             Ottava* ottava = new Ottava(gscore);
@@ -777,25 +793,43 @@ void MuseScore::lineMenu()
             gabel1->setLen(l);
             sp->addObject(1, gabel1, tr("diminuendo"));
 
-            Volta* volta1 = new Volta(gscore);
-            volta1->setLen(l);
-            volta1->setSubtype(PRIMA_VOLTA);
-            sp->addObject(4, volta1, tr("prima volta"));
+            Volta* volta = new Volta(gscore);
+            volta->setLen(l);
+            volta->setText("1.");
+            QList<int> il;
+            il.clear();
+            il.append(1);
+            volta->setEndings(il);
+            volta->setSubtype(Volta::VOLTA_CLOSED);
 
-            Volta* volta2 = new Volta(gscore);
-            volta2->setLen(l);
-            volta2->setSubtype(SECONDA_VOLTA);
-            sp->addObject(5, volta2, tr("seconda volta"));
+            sp->addObject(4, volta, tr("prima volta"));
 
-            Volta* volta3 = new Volta(gscore);
-            volta3->setLen(l);
-            volta3->setSubtype(TERZA_VOLTA);
-            sp->addObject(6, volta3, tr("terza volta"));
+            volta = new Volta(gscore);
+            volta->setLen(l);
+            volta->setText("2.");
+            il.clear();
+            il.append(2);
+            volta->setEndings(il);
+            volta->setSubtype(Volta::VOLTA_CLOSED);
+            sp->addObject(5, volta, tr("seconda volta"));
 
-            Volta* volta4 = new Volta(gscore);
-            volta4->setLen(l);
-            volta4->setSubtype(SECONDA_VOLTA2);
-            sp->addObject(7, volta4, tr("seconda volta"));
+            volta = new Volta(gscore);
+            volta->setLen(l);
+            volta->setText("3.");
+            il.clear();
+            il.append(3);
+            volta->setEndings(il);
+            volta->setSubtype(Volta::VOLTA_CLOSED);
+            sp->addObject(6, volta, tr("terza volta"));
+
+            volta = new Volta(gscore);
+            volta->setLen(l);
+            volta->setText("2.");
+            il.clear();
+            il.append(2);
+            volta->setEndings(il);
+            volta->setSubtype(Volta::VOLTA_OPEN);
+            sp->addObject(7, volta, tr("seconda volta"));
 
             //--------
 
