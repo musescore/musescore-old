@@ -58,7 +58,7 @@ QT4_WRAP_UI (ui_headers
       insertmeasuresdialog.ui barline.ui chord.ui chordrest.ui editinstrument.ui editstyle.ui
       edittempo.ui element.ui hairpin.ui instrdialog.ui measure.ui measuresdialog.ui
       note.ui page.ui pagesettings.ui partedit.ui playpanel.ui prefsdialog.ui
-      irregular.ui segment.ui text.ui textpalette.ui textstyle.ui timedialog.ui
+      measureproperties.ui segment.ui text.ui textpalette.ui textstyle.ui timedialog.ui
       symboldialog.ui dynamic.ui tuplet.ui shortcutcapturedialog.ui slurtie.ui
       slur.ui editdrumset.ui editstaff.ui line.ui linesegment.ui repeatflagdialog.ui
       voltaproperties.ui
@@ -67,7 +67,7 @@ QT4_WRAP_UI (ui_headers
 QT4_WRAP_CPP (mocs
       canvas.h editinstrument.h editstyle.h edittempo.h instrdialog.h listedit.h
       mscore.h navigator.h pad.h pagesettings.h palette.h partedit.h playpanel.h
-      preferences.h irregular.h preview.h score.h seq.h textpalette.h textstyle.h
+      preferences.h measureproperties.h preview.h score.h seq.h textpalette.h textstyle.h
       timedialog.h symboldialog.h shortcutcapturedialog.h simplebutton.h
       greendotbutton.h recordbutton.h editdrumset.h editstaff.h repeatflagdialog.h
       voltaproperties.h
@@ -103,7 +103,7 @@ add_executable ( mscore
       measure.cpp menus.cpp midifile.cpp midi.cpp mscore.cpp
       mtime.cpp navigate.cpp navigator.cpp note.cpp ottava.cpp
       pad.cpp page.cpp pagesettings.cpp palette.cpp part.cpp
-      partedit.cpp pedal.cpp playpanel.cpp preferences.cpp irregular.cpp
+      partedit.cpp pedal.cpp playpanel.cpp preferences.cpp measureproperties.cpp
       preview.cpp rest.cpp score.cpp segment.cpp select.cpp
       seq.cpp sig.cpp slur.cpp staff.cpp style.cpp
       sym.cpp sym.h symbol.cpp symbol.h hook.cpp hook.h

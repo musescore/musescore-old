@@ -109,7 +109,7 @@ void ElementItem::init()
 PageListEditor::PageListEditor(Score* s)
    : QWidget()
       {
-      setWindowTitle(tr("MuseScore: List Edit"));
+      setWindowTitle(tr("MuseScore: Object Inspector"));
       cs = s;
       QHBoxLayout* hbox = new QHBoxLayout;
       setLayout(hbox);
@@ -538,7 +538,7 @@ void MeasureView::setElement(Element* e)
       mb.lineBreak->setChecked(m->lineBreak());
       mb.pageBreak->setChecked(m->pageBreak());
       mb.irregular->setChecked(m->irregular());
-      mb.endRepeat->setValue(m->endRepeat());
+      mb.endRepeat->setValue(m->repeatCount());
       mb.repeatFlags->setText(QString("0x%1").arg(m->repeatFlags(), 6, 16, QChar('0')));
       mb.sel->clear();
       foreach(const Element* e, *m->el()) {

@@ -18,17 +18,17 @@
 //  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //=============================================================================
 
-
-#include "irregular.h"
+#include "measureproperties.h"
 #include "measure.h"
 #include "sig.h"
 #include "score.h"
+#include "repeat.h"
 
 //---------------------------------------------------------
-//   IrregularMeasureDialog
+//   MeasureProperties
 //---------------------------------------------------------
 
-IrregularMeasureDialog::IrregularMeasureDialog(Measure* _m, QWidget* parent)
+MeasureProperties::MeasureProperties(Measure* _m, QWidget* parent)
    : QDialog(parent)
       {
       m = _m;
@@ -40,13 +40,16 @@ IrregularMeasureDialog::IrregularMeasureDialog(Measure* _m, QWidget* parent)
       nominalZ->setValue(ev.nominator2);
       nominalN->setValue(ev.denominator2);
       irregular->setChecked(m->irregular());
+      int n  = m->repeatCount();
+      count->setValue(n);
+      count->setEnabled(m->repeatFlags() & RepeatEnd);
       }
 
 //---------------------------------------------------------
 //   sig
 //---------------------------------------------------------
 
-SigEvent IrregularMeasureDialog::sig() const
+SigEvent MeasureProperties::sig() const
       {
       SigEvent e(actualZ->value(), actualN->value(),
          nominalZ->value(), nominalN->value());
@@ -57,8 +60,17 @@ SigEvent IrregularMeasureDialog::sig() const
 //   isIrregular
 //---------------------------------------------------------
 
-bool IrregularMeasureDialog::isIrregular() const
+bool MeasureProperties::isIrregular() const
       {
       return irregular->isChecked();
+      }
+
+//---------------------------------------------------------
+//   repeatCount
+//---------------------------------------------------------
+
+int MeasureProperties::repeatCount() const
+      {
+      return count->value();
       }
 

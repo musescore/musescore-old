@@ -54,7 +54,7 @@
 #include "layoutbreak.h"
 #include "page.h"
 #include "lyrics.h"
-#include "irregular.h"
+#include "measureproperties.h"
 #include "layout.h"
 #include "viewer.h"
 #include "volta.h"
@@ -126,7 +126,7 @@ Measure::Measure(Score* s)
       _pageBreak   = false;
       _no          = 0;
       _irregular   = false;
-      _endRepeat   = 0;
+      _repeatCount = 1;
       _repeatFlags = 0;
       _noOffset    = 0;
       _noText      = new Text(score());
@@ -1915,8 +1915,8 @@ void Measure::cmdRemoveEmptySegment(Segment* s)
 
 bool Measure::genPropertyMenu(QMenu* popup) const
       {
-      QAction* a = popup->addAction(QT_TR_NOOP("set irregular..."));
-      a->setData("irregular");
+      QAction* a = popup->addAction(QT_TR_NOOP("Properties..."));
+      a->setData("props");
       return true;
       }
 
@@ -1926,12 +1926,13 @@ bool Measure::genPropertyMenu(QMenu* popup) const
 
 void Measure::propertyAction(const QString& s)
       {
-      if (s == "irregular") {
-            IrregularMeasureDialog im(this);
+      if (s == "props") {
+            MeasureProperties im(this);
             if (!im.exec())
                   return;
 
             setIrregular(im.isIrregular());     // TODO: shall we make this undoable?
+            setRepeatCount(im.repeatCount());
             score()->setDirty();
             score()->select(0, 0, 0);
             SigList* sl = score()->sigmap;
@@ -1949,9 +1950,6 @@ void Measure::propertyAction(const QString& s)
             if (i != sl->end())
                   oldEvent = i->second;
 
-//            printf("1.change sig at %d %s -> %s\n", tick(),
-//               qPrintable(oldEvent.print()),
-//               qPrintable(newEvent.print()));
             score()->undoChangeSig(tick(), oldEvent, newEvent);
 
             //
@@ -1960,8 +1958,6 @@ void Measure::propertyAction(const QString& s)
             //
             i = sl->find(tick() + oldLen);
             if (i == sl->end()) {
-//                  printf("2.add sig at %d %s\n", tick() + newLen,
-//                     qPrintable(oev.print()));
                   score()->undoChangeSig(tick() + newLen, SigEvent(), oev);
                   }
             adjustToLen(oldLen, newLen);
@@ -2076,7 +2072,7 @@ void Measure::write(Xml& xml, int no, int staff) const
             if (_repeatFlags & RepeatStart)
                   xml.tagE("startRepeat");
             if (_repeatFlags & RepeatEnd)
-                  xml.tag("endRepeat", _endRepeat);
+                  xml.tag("endRepeat", _repeatCount);
             if (_irregular)
                   xml.tagE("irregular");
             if (_userStretch != 1.0)
@@ -2123,7 +2119,7 @@ void Measure::write(Xml& xml) const
       if (_repeatFlags & RepeatStart)
             xml.tagE("startRepeat");
       if (_repeatFlags & RepeatEnd)
-            xml.tag("endRepeat", _endRepeat);
+            xml.tag("endRepeat", _repeatCount);
       if (_irregular)
             xml.tagE("irregular");
       xml.tag("stretch", _userStretch);
@@ -2349,7 +2345,7 @@ void Measure::read(QDomElement e, int idx)
             else if (tag == "startRepeat")
                   _repeatFlags |= RepeatStart;
             else if (tag == "endRepeat") {
-                  _endRepeat = val.toInt();
+                  _repeatCount = val.toInt();
                   _repeatFlags |= RepeatEnd;
                   }
             else if (tag == "Image") {
@@ -2404,7 +2400,7 @@ void Measure::read(QDomElement e)
             else if (tag == "startRepeat")
                   _repeatFlags |= RepeatStart;
             else if (tag == "endRepeat") {
-                  _endRepeat = val.toInt();
+                  _repeatCount = val.toInt();
                   _repeatFlags |= RepeatEnd;
                   }
             else if (tag == "irregular")
