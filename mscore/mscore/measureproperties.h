@@ -18,26 +18,27 @@
 //  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //=============================================================================
 
-#ifndef __IRREGULAR_H__
-#define __IRREGULAR_H__
+#ifndef __MEASUREPROPERTIES_H__
+#define __MEASUREPROPERTIES_H__
 
-#include "ui_irregular.h"
+#include "ui_measureproperties.h"
 #include "sig.h"
 
 class Measure;
 
 //---------------------------------------------------------
-//   IrregularMeasureDialog
+//   MeasureProperties
 //---------------------------------------------------------
 
-class IrregularMeasureDialog : public QDialog, private Ui::IrregularMeasureDialogBase {
+class MeasureProperties : public QDialog, private Ui::MeasurePropertiesBase {
       Q_OBJECT
       Measure* m;
 
    public:
-      IrregularMeasureDialog(Measure*, QWidget* parent = 0);
+      MeasureProperties(Measure*, QWidget* parent = 0);
       SigEvent sig() const;
       bool isIrregular() const;
+      int repeatCount() const;
       };
 
 #endif

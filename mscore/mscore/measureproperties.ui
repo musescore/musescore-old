@@ -1,6 +1,6 @@
 <ui version="4.0" >
- <class>IrregularMeasureDialogBase</class>
- <widget class="QDialog" name="IrregularMeasureDialogBase" >
+ <class>MeasurePropertiesBase</class>
+ <widget class="QDialog" name="MeasurePropertiesBase" >
   <property name="windowModality" >
    <enum>Qt::WindowModal</enum>
   </property>
@@ -8,12 +8,12 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>400</width>
-    <height>300</height>
+    <width>292</width>
+    <height>293</height>
    </rect>
   </property>
   <property name="windowTitle" >
-   <string>MuseScore: irregular Measure</string>
+   <string>MuseScore: Measure Properties</string>
   </property>
   <layout class="QVBoxLayout" >
    <item>
@@ -79,13 +79,26 @@
       <item row="1" column="3" >
        <widget class="QSpinBox" name="actualN" />
       </item>
+      <item row="0" column="4" >
+       <spacer>
+        <property name="orientation" >
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeHint" >
+         <size>
+          <width>40</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
      </layout>
     </widget>
    </item>
    <item>
     <widget class="QGroupBox" name="groupBox_2" >
      <property name="title" >
-      <string>other Properties</string>
+      <string>Other</string>
      </property>
      <property name="flat" >
       <bool>true</bool>
@@ -93,13 +106,43 @@
      <layout class="QGridLayout" >
       <item row="0" column="0" >
        <widget class="QCheckBox" name="irregular" >
+        <property name="toolTip" >
+         <string>do not count</string>
+        </property>
         <property name="text" >
          <string>irregular</string>
         </property>
        </widget>
       </item>
+      <item row="1" column="0" >
+       <widget class="QLabel" name="label_5" >
+        <property name="text" >
+         <string>Repeat Count</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1" >
+       <widget class="QSpinBox" name="count" >
+        <property name="minimum" >
+         <number>1</number>
+        </property>
+       </widget>
+      </item>
      </layout>
     </widget>
+   </item>
+   <item>
+    <spacer>
+     <property name="orientation" >
+      <enum>Qt::Vertical</enum>
+     </property>
+     <property name="sizeHint" >
+      <size>
+       <width>20</width>
+       <height>40</height>
+      </size>
+     </property>
+    </spacer>
    </item>
    <item>
     <widget class="QDialogButtonBox" name="dialogButtonBox" >
@@ -118,7 +161,7 @@
   <connection>
    <sender>dialogButtonBox</sender>
    <signal>accepted()</signal>
-   <receiver>IrregularMeasureDialogBase</receiver>
+   <receiver>MeasurePropertiesBase</receiver>
    <slot>accept()</slot>
    <hints>
     <hint type="sourcelabel" >
@@ -134,7 +177,7 @@
   <connection>
    <sender>dialogButtonBox</sender>
    <signal>rejected()</signal>
-   <receiver>IrregularMeasureDialogBase</receiver>
+   <receiver>MeasurePropertiesBase</receiver>
    <slot>reject()</slot>
    <hints>
     <hint type="sourcelabel" >

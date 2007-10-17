@@ -289,7 +289,7 @@ void Canvas::measurePopup(const QPoint& gpos, Measure* obj)
       a = popup->addAction(tr("Edit Drumset..."));
       a->setData("edit-drumset");
       a->setEnabled(staff->part()->drumset() != 0);
-      a = popup->addAction(tr("Properties"));
+      a = popup->addAction(tr("Properties..."));
       a->setData("staff-properties");
 
       a = popup->addSeparator();
@@ -299,24 +299,12 @@ void Canvas::measurePopup(const QPoint& gpos, Measure* obj)
       popup->addAction(getAction("paste"));
       popup->addSeparator();
 
-      // Added by DK
-      if ( obj->type() == REPEAT ||
-            obj->type() == REPEAT_MEASURE ||
-            obj->type() == VOLTA ||
-            obj->type() == VOLTA_SEGMENT ||
-            (obj->type() == BAR_LINE &&
-                  (obj->subtype() == END_REPEAT ||
-                   obj->subtype() == START_REPEAT ||
-                   obj->subtype() == END_START_REPEAT)))
-            if (RepeatFlag().genPropertyMenu(popup))
-                  popup->addSeparator();
-      else
-      //--------------------------------------------------
-            if (obj->genPropertyMenu(popup))
-                  popup->addSeparator();
+      if (obj->genPropertyMenu(popup))
+            popup->addSeparator();
 
-      a = popup->addAction(tr("Properties"));
-      a->setData("measure-properties");
+      a = popup->addAction(tr("Object Inspector"));
+      a->setData("list");
+
       a = popup->exec(gpos);
       if (a == 0)
             return;
@@ -326,7 +314,7 @@ void Canvas::measurePopup(const QPoint& gpos, Measure* obj)
             return;
             }
       _score->startCmd();
-      if (cmd == "measure-properties")
+      if (cmd == "list")
             mscore->showElementContext(obj);
       else if (cmd == "invisible")
             _score->toggleInvisible(obj);
@@ -344,21 +332,8 @@ void Canvas::measurePopup(const QPoint& gpos, Measure* obj)
             EditStaff staffEdit(staff, this);
             staffEdit.exec();
             }
-      else {
-            // Added by DK
-            if ( obj->type() == REPEAT ||
-                  obj->type() == REPEAT_MEASURE ||
-                  obj->type() == VOLTA ||
-                  obj->type() == VOLTA_SEGMENT ||
-                  (obj->type() == BAR_LINE &&
-                        (obj->subtype() == END_REPEAT ||
-                         obj->subtype() == START_REPEAT ||
-                         obj->subtype() == END_START_REPEAT)))
-                  RepeatFlag().propertyAction(cmd,obj);
-            else
-            //--------------------------------------------------
-                  obj->propertyAction(cmd);
-            }
+      else
+            obj->propertyAction(cmd);
       _score->setLayoutAll(true);
       _score->endCmd();
       }

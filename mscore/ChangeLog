@@ -1,4 +1,6 @@
 17.10.7 (ws)
+      - added property "repeat count" to measure properties dialog
+      - Renamed "irregular.*" to "measureproperties.*"
       - extend Volta: text and repeat list are now editable
       - Added a "Properties" entry and dialog to Volta element.
       - Renamed "Properties" in Element popup to "Object Inspector".
