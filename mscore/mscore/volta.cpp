@@ -24,6 +24,7 @@
 #include "system.h"
 #include "xml.h"
 #include "score.h"
+#include "voltaproperties.h"
 
 //---------------------------------------------------------
 //   draw
@@ -45,7 +46,7 @@ void VoltaSegment::draw(QPainter& p)
       p.setPen(pen);
       p.drawLine(QLineF(p0, _p1));
       p.drawLine(QLineF(_p1, _p2));
-      if (volta()->subtype() != SECONDA_VOLTA2)
+      if (volta()->subtype() == Volta::VOLTA_CLOSED)
             p.drawLine(QLineF(_p2, p3));
 
       TextStyle* s = score()->textStyle(TEXT_STYLE_VOLTA);
@@ -56,20 +57,7 @@ void VoltaSegment::draw(QPainter& p)
       p.setFont(f);
 
       QPointF tp(p0.x() + _spatium * .5, p0.y());
-
-      switch(volta()->subtype()) {
-            default:
-            case PRIMA_VOLTA:
-                  p.drawText(tp, "1.");
-                  break;
-            case SECONDA_VOLTA:
-            case SECONDA_VOLTA2:
-                  p.drawText(tp, "2.");
-                  break;
-            case TERZA_VOLTA:
-                  p.drawText(tp, "3.");
-                  break;
-            }
+      p.drawText(tp, volta()->text());
       }
 
 //---------------------------------------------------------
@@ -83,31 +71,6 @@ QRectF VoltaSegment::bbox() const
       }
 
 //---------------------------------------------------------
-//   gripAnchor
-//---------------------------------------------------------
-
-QPointF VoltaSegment::gripAnchor(int curGrip) const
-      {
-      int tick;
-      QPointF anchor;
-
-      if (curGrip == 0) {
-            QPointF pp1(canvasPos());
-            Measure* m = score()->pos2measure3(pp1, &tick);
-            anchor = QPointF(m->abbox().topLeft());
-            }
-      else {
-            QPointF pp2(_p2 + _userOff2 * _spatium + canvasPos());
-            Measure* m = score()->pos2measure3(pp2, &tick);
-            if (tick != m->tick())
-                  anchor = QPointF(m->abbox().topRight());
-            else
-                  anchor = QPointF(m->abbox().topLeft());
-            }
-      return anchor;
-      }
-
-//---------------------------------------------------------
 //   pos2anchor
 //---------------------------------------------------------
 
@@ -115,11 +78,111 @@ QPointF VoltaSegment::pos2anchor(const QPointF& pos, int* tick) const
       {
       Measure* m = score()->pos2measure3(pos, tick);
       QPointF anchor;
+      if (m == m->system()->measures().front())
+            m = m->prev();
       if (*tick != m->tick())
             anchor = QPointF(m->abbox().topRight());
       else
             anchor = QPointF(m->abbox().topLeft());
       return anchor;
+      }
+
+//---------------------------------------------------------
+//   genPropertyMenu
+//---------------------------------------------------------
+
+bool VoltaSegment::genPropertyMenu(QMenu* popup) const
+      {
+      QAction* a = popup->addAction(QT_TR_NOOP("Properties..."));
+      a->setData("props");
+      return true;
+      }
+
+//---------------------------------------------------------
+//   propertyAction
+//---------------------------------------------------------
+
+void VoltaSegment::propertyAction(const QString& s)
+      {
+      if (s == "props") {
+            VoltaProperties vp;
+            vp.setText(volta()->text());
+            vp.setEndings(volta()->endings());
+            int rv = vp.exec();
+            if (rv) {
+                  QString txt  = vp.getText();
+                  QList<int> l = vp.getEndings();
+                  if (txt != volta()->text())
+                        score()->undoChangeVoltaText(volta(), txt);
+                  if (l != volta()->endings())
+                        score()->undoChangeVoltaEnding(volta(), l);
+                  }
+            }
+      }
+
+//---------------------------------------------------------
+//   edit
+//    return true if event is accepted
+//---------------------------------------------------------
+
+bool VoltaSegment::edit(int curGrip, QKeyEvent* ev)
+      {
+      if ((ev->modifiers() & Qt::ShiftModifier)
+         && ((_segmentType == SEGMENT_SINGLE)
+              || (_segmentType == SEGMENT_BEGIN && curGrip == 0)
+              || (_segmentType == SEGMENT_END && curGrip == 1)
+         )) {
+            int tick1 = line()->tick();
+            int tick2 = line()->tick2();
+
+            Measure* m1 = score()->tick2measure(tick1);
+            Measure* m2 = score()->tick2measure(tick2);
+            if (ev->key() == Qt::Key_Left && m1->prev()) {
+                  if (curGrip == 0)
+                        tick1 = m1->prev()->tick();
+                  else if (curGrip == 1) {
+                        int segments = line()->lineSegments().size();
+                        tick2 = m2->prev()->tick();
+                        if (tick2 <= tick1)
+                              return true;
+                        line()->setTick2(tick2);
+                        line()->layout(score()->mainLayout());
+                        if (line()->lineSegments().size() != segments)
+                              score()->changeLineSegment(true);
+                        }
+                  }
+            else if (ev->key() == Qt::Key_Right) {
+                  if (curGrip == 0) {
+                        tick1 = m1->tick() + m1->tickLen();
+                        if (tick1 >= tick2)
+                              return true;
+                        }
+                  else if (curGrip == 1) {
+                        int segments = line()->lineSegments().size();
+                        tick2 = m2->tick() + m2->tickLen();
+                        line()->setTick2(tick2);
+                        line()->layout(score()->mainLayout());
+                        if (line()->lineSegments().size() != segments)
+                              score()->changeLineSegment(true);
+                        }
+                  }
+            line()->setTick(tick1);
+            line()->setTick2(tick2);
+            return true;
+            }
+      return false;
+      }
+
+
+//---------------------------------------------------------
+//   Volta
+//---------------------------------------------------------
+
+Volta::Volta(Score* s)
+   : SLine(s)
+      {
+      _text = "1.";
+      _endings.append(1);
       }
 
 //---------------------------------------------------------
@@ -129,6 +192,8 @@ QPointF VoltaSegment::pos2anchor(const QPointF& pos, int* tick) const
 void Volta::layout(ScoreLayout* layout)
       {
       SLine::layout(layout);
+      qreal y = -3.0 * layout->spatium();
+      setPos(ipos().x(), y);
       }
 
 //---------------------------------------------------------
@@ -146,32 +211,60 @@ LineSegment* Volta::createLineSegment()
 //   tick2pos
 //---------------------------------------------------------
 
-QPointF Volta::tick2pos(int tick, System** system)
+QPointF Volta::tick2pos(int grip, int tick, int staffIdx, System** system)
       {
       Measure* m = score()->tick2measure(tick);
-      *system = m->system();
-      return m->canvasPos();
+      System* s = m->system();
+      if ((grip == 1) && (m == s->measures().front())) {
+            m = m->prev();
+            s = m->system();
+            *system = s;
+            return QPointF(m->canvasPos().x() + m->width(), s->staff(staffIdx)->bbox().y() + s->canvasPos().y());
+            }
+      *system = s;
+      return QPointF(m->canvasPos().x(), s->staff(staffIdx)->bbox().y() + s->canvasPos().y());
       }
 
 //---------------------------------------------------------
-//   setSubtype
+//   write
 //---------------------------------------------------------
 
-void Volta::setSubtype(int val)
+void Volta::write(Xml& xml) const
       {
-      Element::setSubtype(val);
+      xml.stag(name());
+      SLine::writeProperties(xml);
+      xml.tag("text", _text);
+      QString s;
+      foreach(int i, _endings) {
+            if (!s.isEmpty())
+                  s += ", ";
+            s += QString("%1").arg(i);
+            }
+      xml.tag("endings", s);
+      xml.etag();
+      }
 
-      switch(subtype()) {
-            default:
-            case PRIMA_VOLTA:
-                  _endings.append(1);
-                  break;
-            case SECONDA_VOLTA:
-            case SECONDA_VOLTA2:
-                  _endings.append(2);
-                  break;
-            case TERZA_VOLTA:
-                  _endings.append(3);
-                  break;
+//---------------------------------------------------------
+//   read
+//---------------------------------------------------------
+
+void Volta::read(QDomElement e)
+      {
+      setStaff(score()->staff(0));  // set default staff
+      for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
+            QString tag(e.tagName());
+            if (tag == "text")
+                  _text = e.text();
+            else if (tag == "endings") {
+                  QString s = e.text();
+                  QStringList sl = s.split(",", QString::SkipEmptyParts);
+                  _endings.clear();
+                  foreach(QString l, sl) {
+                        int i = l.simplified().toInt();
+                        _endings.append(i);
+                        }
+                  }
+            else if (!SLine::readProperties(e))
+                  domError(e);
             }
       }

@@ -61,6 +61,7 @@ QT4_WRAP_UI (ui_headers
       irregular.ui segment.ui text.ui textpalette.ui textstyle.ui timedialog.ui
       symboldialog.ui dynamic.ui tuplet.ui shortcutcapturedialog.ui slurtie.ui
       slur.ui editdrumset.ui editstaff.ui line.ui linesegment.ui repeatflagdialog.ui
+      voltaproperties.ui
       )
 
 QT4_WRAP_CPP (mocs
@@ -69,6 +70,7 @@ QT4_WRAP_CPP (mocs
       preferences.h irregular.h preview.h score.h seq.h textpalette.h textstyle.h
       timedialog.h symboldialog.h shortcutcapturedialog.h simplebutton.h
       greendotbutton.h recordbutton.h editdrumset.h editstaff.h repeatflagdialog.h
+      voltaproperties.h
       )
 
 QT4_ADD_RESOURCES (qrc_files mscore.qrc)
@@ -112,6 +114,7 @@ add_executable ( mscore
       pitchspelling.cpp musedata.cpp keysig.cpp arpeggio.cpp breath.cpp
       editdrumset.cpp editstaff.cpp drumset.cpp tremolo.cpp repeat.cpp
       repeat2.cpp lilypond.cpp exportly.cpp repeatflag.cpp repeatflagdialog.cpp
+      voltaproperties.cpp
       ${AUDIO}
       )
 

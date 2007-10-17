@@ -58,6 +58,7 @@ class ScoreLayout;
 class MidiTrack;
 class BSymbol;
 class KeySig;
+class Volta;
 
 struct Style;
 struct SigEvent;
@@ -278,6 +279,8 @@ class Score : public QObject {
       void undoInsertTime(int tick, int len);
       void undoChangeRepeatFlags(Measure*, int);
       void undoChangeEndBarLine(Measure*, int);
+      void undoChangeVoltaEnding(Volta* volta, const QList<int>& l);
+      void undoChangeVoltaText(Volta* volta, const QString& s);
 
       void setNote(int tick, int track, int pitch, int len);
       int clefOffset(int tick, Staff*) const;

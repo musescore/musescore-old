@@ -75,7 +75,9 @@ struct UndoOp {
             ChangeKey,
             InsertTime,
             ChangeRepeatFlags,
-            ChangeEndBarLine
+            ChangeEndBarLine,
+            ChangeVoltaEnding,
+            ChangeVoltaText
             };
       UndoType type;
       Element* obj;
@@ -93,6 +95,7 @@ struct UndoOp {
       QColor color;
       SigEvent sig1, sig2;
       TEvent t1, t2;
+      QString s;
 
       const char* name() const;
       };

@@ -1,11 +1,9 @@
 //=============================================================================
 //  MusE Score
 //  Linux Music Score Editor
-//  Copyright (C) 2002-2006 Werner Schweer (ws@seh.de)
+//  $Id: element.h,v 1.58 2006/04/12 14:58:10 wschweer Exp $
 //
-//  $Id: repeatflagdialog.cpp,v 1.00 2007/08/23 14:00:00 dikrau Exp $
-//
-//  Copyright (C) 2007- Dieter Krause (dikrau@users.sourceforge.net)
+//  Copyright (C) 2002-2007 Werner Schweer and others
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.
@@ -19,36 +17,25 @@
 //  along with this program; if not, write to the Free Software
 //  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //=============================================================================
-//
 
+#ifndef __VOLTAPROPERTIES_H__
+#define __VOLTAPROPERTIES_H__
 
-#include "repeatflagdialog.h"
-#include "repeatflag.h"
+#include "ui_voltaproperties.h"
 
+//---------------------------------------------------------
+//   VoltaProperties
+//---------------------------------------------------------
 
-void RepeatFlagDialog::accept()
-      {
-      RepeatFlag* rf;
-      Element* el;
+class VoltaProperties : public QDialog, public Ui::VoltaPropertyBase {
+      Q_OBJECT
 
-      el = actElement;
-      rf = el->repeatFlag();
+   public:
+      VoltaProperties(QWidget* parent = 0);
+      QString getText() const        { return text->text(); }
+      void setText(const QString& s) { text->setText(s); }
+      QList<int> getEndings() const;
+      void setEndings(const QList<int>& l);
+      };
 
-      rf->setCycle(cycles->value());
-      rf->setNo(no->value());
-      rf->setDestNo(destno->value());
-      rf->setCycleList(cyclesToPlay->text());
-
-      done(1);
-      }
-
-RepeatFlagDialog::RepeatFlagDialog(QWidget* parent)
-      : QDialog(parent)
-      {
-	setupUi(this);
-      }
-
-RepeatFlagDialog::~RepeatFlagDialog()
-      {
-      }
-
+#endif

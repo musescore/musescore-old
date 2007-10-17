@@ -49,6 +49,7 @@
 #include "mscore.h"
 #include "canvas.h"
 #include "barline.h"
+#include "volta.h"
 
 extern Measure* tick2measure(int tick);
 
@@ -77,7 +78,8 @@ static const char* undoName[] = {
       "ChangeKey",
       "InsertTime",
       "ChangeRepeatFlags",
-      "ChangeEndBarLine"
+      "ChangeEndBarLine",
+      "ChangeVoltaEnding", "ChangeVoltaText"
       };
 
 static bool UNDO = false;
@@ -513,6 +515,22 @@ void Score::processUndoOp(UndoOp* i, bool undo)
                   i->val1 = tmp;
                   }
                   break;
+            case UndoOp::ChangeVoltaEnding:
+                  {
+                  Volta* volta = (Volta*)i->obj;
+                  QList<int> l = volta->endings();
+                  volta->setEndings(i->si);
+                  i->si = l;
+                  }
+                  break;
+            case UndoOp::ChangeVoltaText:
+                  {
+                  Volta* volta = (Volta*)i->obj;
+                  QString s = volta->text();
+                  volta->setText(i->s);
+                  i->s = s;
+                  }
+                  break;
             }
       UNDO = FALSE;
       }
@@ -848,6 +866,36 @@ void Score::undoChangeEndBarLine(Measure* m, int flags)
       i.type = UndoOp::ChangeEndBarLine;
       i.measure = m;
       i.val1 = flags;
+      undoList.back()->push_back(i);
+      processUndoOp(&undoList.back()->back(), false);
+      }
+
+//---------------------------------------------------------
+//   undoChangeVoltaEnding
+//---------------------------------------------------------
+
+void Score::undoChangeVoltaEnding(Volta* volta, const QList<int>& l)
+      {
+      checkUndoOp();
+      UndoOp i;
+      i.type = UndoOp::ChangeVoltaEnding;
+      i.obj  = volta;
+      i.si   = l;
+      undoList.back()->push_back(i);
+      processUndoOp(&undoList.back()->back(), false);
+      }
+
+//---------------------------------------------------------
+//   undoChangeVoltaText
+//---------------------------------------------------------
+
+void Score::undoChangeVoltaText(Volta* volta, const QString& s)
+      {
+      checkUndoOp();
+      UndoOp i;
+      i.type = UndoOp::ChangeVoltaText;
+      i.obj  = volta;
+      i.s    = s;
       undoList.back()->push_back(i);
       processUndoOp(&undoList.back()->back(), false);
       }

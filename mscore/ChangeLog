@@ -1,3 +1,9 @@
+17.10.7 (ws)
+      - extend Volta: text and repeat list are now editable
+      - Added a "Properties" entry and dialog to Volta element.
+      - Renamed "Properties" in Element popup to "Object Inspector".
+        The "Object Inspector" is used for debugging purposes and is maybe useful
+        for "Wizard" users. Changes in the "Object Inspector" are not undoable.
 16.10.7 (dk)
       - added setup for repeats
         not strongly tested

@@ -63,13 +63,13 @@ QPointF LineSegment::gripAnchor(int grip) const
       switch(_segmentType) {
             case SEGMENT_SINGLE:
                   if (grip == 0)
-                        return line()->tick2pos(line()->tick(), staffIdx, &s);
+                        return line()->tick2pos(grip, line()->tick(), staffIdx, &s);
                   else if (grip == 1)
-                        return line()->tick2pos(line()->tick2(), staffIdx, &s);
+                        return line()->tick2pos(grip, line()->tick2(), staffIdx, &s);
                   return QPointF();
             case SEGMENT_BEGIN:
                   if (grip == 0)
-                        return line()->tick2pos(line()->tick(), staffIdx, &s);
+                        return line()->tick2pos(grip, line()->tick(), staffIdx, &s);
                   else if (grip == 1) {
                         double x = sbb.width() + _system->canvasPos().x();
                         return QPointF(x, sp.y());
@@ -85,7 +85,7 @@ QPointF LineSegment::gripAnchor(int grip) const
                   if (grip == 0)
                         return sp;
                   else if (grip == 1)
-                        return line()->tick2pos(line()->tick2(), staffIdx, &s);
+                        return line()->tick2pos(grip, line()->tick2(), staffIdx, &s);
                   break;
             }
       return QPointF();
@@ -116,28 +116,26 @@ bool LineSegment::edit(int curGrip, QKeyEvent* ev)
             int tick1 = line()->tick();
             int tick2 = line()->tick2();
 
-            if (track > 4) {
-                  printf("illegal track, voice %d staffIdx %d\n", line()->voice(), line()->staffIdx());
-                  }
-
             if (ev->key() == Qt::Key_Left) {
-                  if (curGrip == 0) {
+                  if (curGrip == 0)
                         tick1 = score()->prevSeg1(tick1, track);
-                        }
                   else if (curGrip == 1) {
                         int segments = line()->lineSegments().size();
                         tick2 = score()->prevSeg1(tick2, track);
+                        if (tick2 > tick1)
+                              return true;
                         line()->setTick2(tick2);
                         line()->layout(score()->mainLayout());
-                        if (line()->lineSegments().size() != segments) {
+                        if (line()->lineSegments().size() != segments)
                               score()->changeLineSegment(true);
-                              }
-                        return true;
                         }
                   }
             else if (ev->key() == Qt::Key_Right) {
-                  if (curGrip == 0)
+                  if (curGrip == 0) {
                         tick1 = score()->nextSeg1(tick1, track);
+                        if (tick1 >= tick2)
+                              return true;
+                        }
                   else if (curGrip == 1) {
                         int segments = line()->lineSegments().size();
                         tick2 = score()->nextSeg1(tick2, track);
@@ -146,9 +144,6 @@ bool LineSegment::edit(int curGrip, QKeyEvent* ev)
                         if (line()->lineSegments().size() != segments)
                               score()->changeLineSegment(true);
                         }
-                  }
-            else {
-                  return false;
                   }
             line()->setTick(tick1);
             line()->setTick2(tick2);
@@ -247,7 +242,7 @@ void SLine::setTick2(int t)
 //   tick2pos
 //---------------------------------------------------------
 
-QPointF SLine::tick2pos(int tick, int staffIdx, System** system)
+QPointF SLine::tick2pos(int, int tick, int staffIdx, System** system)
       {
       Segment* seg = _score->tick2segment(tick);
       System*  sys = seg->measure()->system();
@@ -278,8 +273,8 @@ void SLine::layout(ScoreLayout* layout)
       System* s1;
       System* s2;
       int staffI = staffIdx();
-      QPointF p1 = tick2pos(tick(), staffI, &s1);
-      QPointF p2 = tick2pos(_tick2, staffI, &s2);
+      QPointF p1 = tick2pos(0, tick(), staffI, &s1);
+      QPointF p2 = tick2pos(1, _tick2, staffI, &s2);
 
       QList<System*>* systems = layout->systems();
 

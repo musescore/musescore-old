@@ -98,7 +98,7 @@ class SLine : public Element {
       virtual void change(Element* o, Element* n);
       virtual QRectF bbox() const;
       QList<LineSegment*> lineSegments() { return segments; }
-      virtual QPointF tick2pos(int tick, int staff, System** system);
+      virtual QPointF tick2pos(int grip, int tick, int staff, System** system);
       virtual void write(Xml&) const;
       virtual void read(QDomElement);
       };
