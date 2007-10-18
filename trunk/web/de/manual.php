@@ -132,12 +132,14 @@ im Subersion Repository.
   </tr>
 
   <tr>
-    <td><a href="accidentals.php">Vorzeichen</a></td>
-    <td></td>
     <td><a href="invisible.php">Unsichtbare Elemente</a></td>
+    <td></td>
+    <td><a href="accidentals.php">Vorzeichen</a></td>
   </tr>
 
   <tr>
+    <td><a href="volta.php">Volta</a></td>
+    <td></td>
     <td><a href="breaks.php">Zeilenumbrüche</a></td>
   </tr>
 
