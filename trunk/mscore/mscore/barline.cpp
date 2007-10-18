@@ -299,16 +299,16 @@ Element* BarLine::drop(const QPointF&, const QPointF&, Element* e)
             delete e;
             return 0;
             }
-      score()->cmdRemove(this);
-
+      if (e->subtype() == subtype()) {
+            delete e;
+            return 0;
+            }
       BarLine* bl = (BarLine*) e;
       bl->setParent(parent());
       bl->setStaff(staff());
-      if (subtype() == bl->subtype()) {
-            delete bl;
-            return 0;
-            }
-      score()->cmdAdd(bl);
+      bl->setTick(e->tick());
+      score()->undoRemoveElement(this);
+      score()->undoAddElement(bl);
       return bl;
       }
 
