@@ -1,3 +1,5 @@
+18.10.7 (ws)
+      - updated italian translation from Angelo Contardi
 17.10.7 (ws)
       - added property "repeat count" to measure properties dialog
       - Renamed "irregular.*" to "measureproperties.*"

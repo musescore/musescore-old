@@ -474,7 +474,9 @@ System* ScoreLayout::layoutSystem(Measure*& im, System* system, qreal x, qreal y
                         }
                   }
 
-            m->setEndBarLineType(NORMAL_BAR, true);   // DEBUG
+            BarLine* bl = m->endBarLine();
+            if (bl == 0)
+                  m->setEndBarLineType(NORMAL_BAR, true);
             m->layoutBeams1(this);  // find hooks
             m->layoutX(this, 1.0);
 

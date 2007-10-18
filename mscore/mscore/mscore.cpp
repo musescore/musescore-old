@@ -1485,6 +1485,27 @@ int main(int argc, char* argv[])
       initSymbols();
 
       //
+      // set translator before preferences are read to get
+      //    translations for all shortcuts
+      //
+      static QTranslator translator;
+      QFile ft(":mscore.qm");
+      if (ft.exists()) {
+            if (debugMode)
+                  printf("locale file found\n");
+            if (translator.load(":/mscore.qm")) {
+                  if (debugMode)
+                        printf("locale file loaded\n");
+                  }
+            qApp->installTranslator(&translator);
+            }
+      else {
+            if (debugMode) {
+                  printf("locale file not found for locale <%s>\n",
+                     QLocale::system().name().toLatin1().data());
+                  }
+            }
+      //
       // initialize shortcut hash table
       //
       for (unsigned i = 0;; ++i) {
@@ -1518,24 +1539,6 @@ int main(int argc, char* argv[])
       mscoreGlobalShare = getSharePath();
       if (debugMode) {
             printf("global share: <%s>\n", mscoreGlobalShare.toLocal8Bit().data());
-            }
-
-      static QTranslator translator;
-      QFile ft(":mscore.qm");
-      if (ft.exists()) {
-            if (debugMode)
-                  printf("locale file found\n");
-            if (translator.load(":/mscore.qm")) {
-                  if (debugMode)
-                        printf("locale file loaded\n");
-                  }
-            qApp->installTranslator(&translator);
-            }
-      else {
-            if (debugMode) {
-                  printf("locale file not found for locale <%s>\n",
-                     QLocale::system().name().toLatin1().data());
-                  }
             }
 
       //
