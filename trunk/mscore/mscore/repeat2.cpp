@@ -1046,6 +1046,7 @@ void RepeatStack::buildCycleList(RepeatStack* p,QString s)
 
 bool RepeatStack::collectRepeats(Element* e,Measure* m)
       {
+#if 0       // WS
       RepList* rl;
       RepList* rlf;
       bool found;
@@ -1091,6 +1092,7 @@ bool RepeatStack::collectRepeats(Element* e,Measure* m)
             }
       if (found)
             rlf->setRepeatFlag(rf->repeatFlag());
+#endif
       return true;
       }
 
@@ -1115,11 +1117,6 @@ RepList::RepList()
 RepList::~RepList()
       {
       }
-
-
-
-
-
 
 
 

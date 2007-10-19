@@ -520,6 +520,7 @@ System* ScoreLayout::layoutSystem(Measure*& im, System* system, qreal x, qreal y
       for (int i = 0; i < nm; ++i, itt = itt->next())
             system->measures().push_back(itt);
       im = itt;
+      bool needRelayout = false;
 
       //
       //    add cautionary time signatures if needed
@@ -537,6 +538,7 @@ System* ScoreLayout::layoutSystem(Measure*& im, System* system, qreal x, qreal y
                         ts->setStaff(score()->staff(staff));
                         ts->setGenerated(true);
                         s->add(ts);
+                        needRelayout = true;
                         }
                   }
             }
@@ -550,42 +552,44 @@ System* ScoreLayout::layoutSystem(Measure*& im, System* system, qreal x, qreal y
             Measure* m = ml[i];
             if (i == (n-1)) {
                   if (m->repeatFlags() & RepeatEnd)
-                        m->setEndBarLineType(END_REPEAT, true);
+                        needRelayout |= m->setEndBarLineType(END_REPEAT, true);
                   else {
                         BarLine* bl = m->endBarLine();
                         if (bl == 0 || bl->generated())
-                              m->setEndBarLineType(NORMAL_BAR, true);
+                              needRelayout |= m->setEndBarLineType(NORMAL_BAR, true);
                         }
                   }
             else {
-                  if ((i == 0) && (m->repeatFlags() & RepeatStart))
-                        m->setStartRepeatBarLine(true);
-                  else
-                        m->setStartRepeatBarLine(false);
+                  needRelayout |= m->setStartRepeatBarLine((i == 0) && (m->repeatFlags() & RepeatStart));
                   if (m->repeatFlags() & RepeatEnd) {
                         if (m->next()->repeatFlags() & RepeatStart)
-                              m->setEndBarLineType(END_START_REPEAT, true);
+                              needRelayout |= m->setEndBarLineType(END_START_REPEAT, true);
                         else
-                              m->setEndBarLineType(END_REPEAT, true);
+                              needRelayout |= m->setEndBarLineType(END_REPEAT, true);
                         }
                   else if (m->next()->repeatFlags() & RepeatStart)
-                        m->setEndBarLineType(START_REPEAT, true);
+                        needRelayout |= m->setEndBarLineType(START_REPEAT, true);
                   else {
                         BarLine* bl = m->endBarLine();
                         if (bl == 0 || bl->generated()) {
                               if (bl == 0)
-                                    m->setEndBarLineType(NORMAL_BAR, true);
-                              else
-                                    bl->setSubtype(NORMAL_BAR);
+                                    needRelayout |= m->setEndBarLineType(NORMAL_BAR, true);
+                              else {
+                                    if (bl->subtype() != NORMAL_BAR) {
+                                          bl->setSubtype(NORMAL_BAR);
+                                          needRelayout = true;
+                                          }
+                                    }
                               }
                         }
                   }
             }
-
       minWidth           = 0.0;
       double totalWeight = 0.0;
 
       foreach(Measure* m, system->measures()) {
+            if (needRelayout)
+                  m->layoutX(this, 1.0);
             minWidth    += m->layoutWidth().stretchable;
             totalWeight += m->tickLen() * m->userStretch();
             }

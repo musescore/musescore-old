@@ -7,7 +7,7 @@
    </h4>
 
 Diese Referenz bezieht sich immer auf die lezte <i>MuseScore</i> Version
-im Subersion Repository.
+im Subversion Repository.
 <br>
 <br>
 <table>
@@ -140,6 +140,9 @@ im Subersion Repository.
   <tr>
     <td><a href="volta.php">Volta</a></td>
     <td></td>
+    <td><a href="repeats.php">Wiederholungen</a></td>
+
+  <tr>
     <td><a href="breaks.php">Zeilenumbrüche</a></td>
   </tr>
 

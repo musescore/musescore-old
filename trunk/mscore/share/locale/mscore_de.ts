@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS><TS version="1.1" language="de">
-<defaultcodec></defaultcodec>
 <context>
     <name>BarLineBase</name>
     <message>
@@ -1485,12 +1484,12 @@ failed: </source>
         <translation>Handbuch</translation>
     </message>
     <message>
-        <location filename="../../mscore/mscore.cpp" line="1788"/>
+        <location filename="../../mscore/mscore.cpp" line="1791"/>
         <source>note entry mode</source>
         <translation>Noteneingabemode</translation>
     </message>
     <message>
-        <location filename="../../mscore/mscore.cpp" line="1792"/>
+        <location filename="../../mscore/mscore.cpp" line="1795"/>
         <source>edit mode</source>
         <translation>Editmode</translation>
     </message>
@@ -2582,107 +2581,107 @@ failed: </source>
     <message>
         <location filename="../../mscore/actions.cpp" line="249"/>
         <source>Enter Third above</source>
-        <translation type="unfinished"></translation>
+        <translation>Terz darüber eingeben</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="253"/>
         <source>enter fourth above</source>
-        <translation type="unfinished"></translation>
+        <translation>Quarte darüber eingeben</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="256"/>
         <source>Fourth above</source>
-        <translation type="unfinished"></translation>
+        <translation>Quarte darüber</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="258"/>
         <source>Enter Fourth above</source>
-        <translation type="unfinished"></translation>
+        <translation>Quarte darüber eingeben</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="262"/>
         <source>enter fifth above</source>
-        <translation type="unfinished"></translation>
+        <translation>Quinte darüber eingeben</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="265"/>
         <source>Fifth above</source>
-        <translation type="unfinished"></translation>
+        <translation>Quinte darüber</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="267"/>
         <source>Enter Fifth above</source>
-        <translation type="unfinished"></translation>
+        <translation>Quinte darüber eingeben</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="271"/>
         <source>enter sixth above</source>
-        <translation type="unfinished"></translation>
+        <translation>Septime darüber eingeben</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="274"/>
         <source>Sixth above</source>
-        <translation type="unfinished"></translation>
+        <translation>Septime darüber</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="276"/>
         <source>Enter Sixth above</source>
-        <translation type="unfinished"></translation>
+        <translation>Septime darüber eingeben</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="280"/>
         <source>enter seventh above</source>
-        <translation type="unfinished"></translation>
+        <translation>Sexte nach oben eingeben</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="283"/>
         <source>Seventh above</source>
-        <translation type="unfinished"></translation>
+        <translation>Sexte nach oben</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="285"/>
         <source>Enter Seventh above</source>
-        <translation type="unfinished"></translation>
+        <translation>Sexte nach oben eingeben</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="298"/>
         <source>enter ninth above</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="301"/>
         <source>Ninth above</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="303"/>
         <source>Enter Ninth above</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="307"/>
         <source>enter second below</source>
-        <translation type="unfinished"></translation>
+        <translation>Sekunde nach unten eingeben</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="310"/>
         <source>Second below</source>
-        <translation type="unfinished"></translation>
+        <translation>Sekunde nach unten</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="312"/>
         <source>Enter Second below</source>
-        <translation type="unfinished"></translation>
+        <translation>Sekunde nach unten eingeben</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="316"/>
         <source>enter third below</source>
-        <translation type="unfinished"></translation>
+        <translation>Terz nach unten eingeben</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="319"/>
         <source>Third below</source>
-        <translation type="unfinished"></translation>
+        <translation>Terz nach unten</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="321"/>
@@ -2692,77 +2691,77 @@ failed: </source>
     <message>
         <location filename="../../mscore/actions.cpp" line="325"/>
         <source>enter fourth below</source>
-        <translation type="unfinished"></translation>
+        <translation>Terz nach unten eingeben</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="328"/>
         <source>Fourth below</source>
-        <translation type="unfinished"></translation>
+        <translation>Quarte nach unten</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="330"/>
         <source>Enter Fourth below</source>
-        <translation type="unfinished"></translation>
+        <translation>Quarte nach unten eingeben</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="334"/>
         <source>enter fifth below</source>
-        <translation type="unfinished"></translation>
+        <translation>Quinte nach unten eingeben</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="337"/>
         <source>Fifth below</source>
-        <translation type="unfinished"></translation>
+        <translation>Quinte nach unten</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="339"/>
         <source>Enter Fifth below</source>
-        <translation type="unfinished"></translation>
+        <translation>Quinte nach unten eingeben</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="343"/>
         <source>enter sixth below</source>
-        <translation type="unfinished"></translation>
+        <translation>Sexte nach unten eingeben</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="346"/>
         <source>Sixth below</source>
-        <translation type="unfinished"></translation>
+        <translation>Sexte nach unten</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="348"/>
         <source>Enter Sixth below</source>
-        <translation type="unfinished"></translation>
+        <translation>Sexte nach unten eingeben</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="352"/>
         <source>enter seventh below</source>
-        <translation type="unfinished"></translation>
+        <translation>Septime nach unten eingeben</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="355"/>
         <source>Seventh below</source>
-        <translation type="unfinished"></translation>
+        <translation>Septime nach unten</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="357"/>
         <source>Enter Seventh below</source>
-        <translation type="unfinished"></translation>
+        <translation>Septime nach unten eingeben</translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="370"/>
         <source>enter ninth below</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="373"/>
         <source>Ninth below</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="375"/>
         <source>Enter Ninth below</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="790"/>
@@ -3145,7 +3144,7 @@ failed: </source>
         <translation>Umbrüche</translation>
     </message>
     <message>
-        <location filename="../../mscore/mscore.cpp" line="1796"/>
+        <location filename="../../mscore/mscore.cpp" line="1799"/>
         <source>play</source>
         <translation>Play</translation>
     </message>
@@ -3163,11 +3162,6 @@ failed: </source>
         <location filename="../../mscore/menus.cpp" line="432"/>
         <source>Repeats</source>
         <translation>Wiederholungen</translation>
-    </message>
-    <message>
-        <location filename="../../mscore/actions.cpp" line="1337"/>
-        <source></source>
-        <translation></translation>
     </message>
     <message>
         <location filename="../../mscore/actions.cpp" line="1229"/>
@@ -3215,6 +3209,11 @@ failed: </source>
         <location filename="../../mscore/menus.cpp" line="215"/>
         <source>seconda volta 2</source>
         <translation>Sekunda Volta 2</translation>
+    </message>
+    <message>
+        <location filename="../../mscore/actions.cpp" line="1337"/>
+        <source></source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -4203,7 +4202,7 @@ Bitte benutze den Instrumentdialog, um zunächst einige Notenzeilen
 (Instrumente) anzulegen.</translation>
     </message>
     <message>
-        <location filename="../../mscore/score.cpp" line="970"/>
+        <location filename="../../mscore/score.cpp" line="971"/>
         <source>No note or rest selected:
 please select a note or rest were you want to
 start note entry</source>

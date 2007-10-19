@@ -40,6 +40,8 @@ struct UP {
 //---------------------------------------------------------
 
 class SlurSegment : public Element {
+      Q_DECLARE_TR_FUNCTIONS(SlurSegment)
+
       struct UP ups[4];
       QPainterPath path;
       qreal bow;

@@ -29,7 +29,7 @@
 #include "barline.h"
 
 Element* actElement;
- 
+
 void RepeatFlag::setRepeatFlagProps(Element* e, RepeatFlag* rf)
       {
       QString en;
@@ -56,39 +56,40 @@ void RepeatFlag::setRepeatFlagProps(Element* e, RepeatFlag* rf)
 
 	RepeatFlagDialog* repeatFlagDialog = new RepeatFlagDialog();
 
-      repeatFlagDialog->repeatTypeName->setText(en); 
+      repeatFlagDialog->repeatTypeName->setText(en);
       repeatFlagDialog->cycles->setValue(rf->cycle());
       repeatFlagDialog->no->setValue(rf->no());
-      repeatFlagDialog->cyclesToPlay->setText(rf->cycleList());  
-      repeatFlagDialog->destno->setValue(rf->destNo());  
+      repeatFlagDialog->cyclesToPlay->setText(rf->cycleList());
+      repeatFlagDialog->destno->setValue(rf->destNo());
 	repeatFlagDialog->show();
       }
 
-RepeatFlag::RepeatFlag() 
+RepeatFlag::RepeatFlag()
       {
-      setDefaults(this);     
+      setDefaults(this);
       }
 
 void RepeatFlag::setDefaults (RepeatFlag* rf)
-      {     
+      {
       rf->setRepeatFlag(0);
       rf->setNo(1);
       rf->setCycle(2);
       rf->setDestNo(1);
-      rf->setCycleList("1");           
+      rf->setCycleList("1");
       }
 
 RepeatFlag::~RepeatFlag()
       {
       }
-        
+
 
 void RepeatFlag::setMeasureRepeatFlag(Element* el, int type)
       {
+#if 0       // ws
       int flag;
 
- 
-      flag = el->subtype();     
+
+      flag = el->subtype();
       if (!el->repeatFlag()) {
             RepeatFlag* rf = new RepeatFlag();
             setDefaults(rf);
@@ -111,10 +112,11 @@ void RepeatFlag::setMeasureRepeatFlag(Element* el, int type)
                         default:
                               break;
                         }
-                  }                     
+                  }
             rf->setRepeatFlag(flag);
             el->setRepeatFlag(rf);
             }
+#endif
       }
 
 
@@ -135,6 +137,7 @@ bool RepeatFlag::genPropertyMenu(QMenu* popup) const
 
 void RepeatFlag::propertyAction(const QString& s, Element* el)
       {
+#if 0 // WS
       RepeatFlag* rf;
 
       if (s == "sets") {
@@ -144,6 +147,7 @@ void RepeatFlag::propertyAction(const QString& s, Element* el)
                   setRepeatFlagProps(el,rf);
                   }
             }
+#endif
       }
 
 RepeatFlag* RepeatFlag::findRepElement(Measure* m, int rtype)
@@ -178,5 +182,5 @@ RepeatFlag* RepeatFlag::findCodettaElement(int n)
             }
       return 0x00;
       }
-      
+
 

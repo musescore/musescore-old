@@ -32,7 +32,8 @@ class Volta;
 //---------------------------------------------------------
 
 class VoltaSegment : public LineSegment {
-   protected:
+      Q_DECLARE_TR_FUNCTIONS(Measure)
+
    public:
       VoltaSegment(Score* s) : LineSegment(s) {}
       Volta* volta() const                { return (Volta*)parent(); }

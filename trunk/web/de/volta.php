@@ -47,17 +47,20 @@ gestrichelte Linie von der logischen Voltaposition zur aktuellen Position.
       Volta gespielt werden soll. Gibt es mehrere Wiederholungen und soll die
       Volta in mehreren Wiederholungen gespielt werden, dann müssen sie einzeln
       per Komma getrennt aufgeführt werden.
-      <br><br>
-      <b>Text</b><br>
-      Über den Eigenschaften Dialog läßt sich ein beliebiger Text für die
-      Volta einstellen. Der Text sollte natürlich mit der Liste der Wiederholungen
-      korrespondieren.
      </td>
-  <td valign="top">
+  <td valign="center">
      <img src="../pic/volta3.png">
      </td>
   </tr>
 </table>
 <br>
+<b>Text</b><br>
+  Über den Eigenschaften Dialog läßt sich ein beliebiger Text für die
+  Volta einstellen. Der Text sollte natürlich mit der Liste der Wiederholungen
+  korrespondieren.
+<br>
+<br>
 <img src="../pic/volta4.png" align="center">
+
+<?php require("trailer.html");  ?>
 

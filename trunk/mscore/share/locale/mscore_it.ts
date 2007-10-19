@@ -1631,12 +1631,12 @@ fallito: </translation>
         <translation> Guida MuseScore non trovata in:</translation>
     </message>
     <message>
-        <location filename="../../mscore/mscore.cpp" line="1788"/>
+        <location filename="../../mscore/mscore.cpp" line="1791"/>
         <source>note entry mode</source>
         <translation>Modalità Inserimento Note</translation>
     </message>
     <message>
-        <location filename="../../mscore/mscore.cpp" line="1792"/>
+        <location filename="../../mscore/mscore.cpp" line="1795"/>
         <source>edit mode</source>
         <translation>Modalità di Modifica</translation>
     </message>
@@ -3146,7 +3146,7 @@ fallito: </translation>
         <translation>Interruzioni</translation>
     </message>
     <message>
-        <location filename="../../mscore/mscore.cpp" line="1796"/>
+        <location filename="../../mscore/mscore.cpp" line="1799"/>
         <source>play</source>
         <translation>Riproduci</translation>
     </message>
@@ -4222,7 +4222,7 @@ fallito: </translation>
         <translation>MuseScore: Apri File</translation>
     </message>
     <message>
-        <location filename="../../mscore/score.cpp" line="970"/>
+        <location filename="../../mscore/score.cpp" line="971"/>
         <source>No note or rest selected:
 please select a note or rest were you want to
 start note entry</source>
