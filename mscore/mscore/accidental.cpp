@@ -114,6 +114,7 @@ void Accidental::setSubtype(int i)
             case ACC_SMALL + 15: s->setSym(s_naturalSym);    break;
             }
       addElement(s, 0.0, 0.0);
+      setMag(mag());
       }
 
 //---------------------------------------------------------

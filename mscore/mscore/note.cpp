@@ -40,6 +40,7 @@
 #include "breath.h"
 #include "arpeggio.h"
 #include "tremolo.h"
+#include "chordproperties.h"
 
 int Note::noteHeads[HEAD_GROUPS][4] = {
       { wholeheadSym,         halfheadSym,         quartheadSym,    brevisheadSym},
@@ -86,7 +87,6 @@ Note::Note(Score* s)
       {
       _pitch          = 0;
       _durationType   = D_QUARTER;
-      _grace          = false;
       _accidental     = 0;
       _mirror         = false;
       _line           = 0;
@@ -99,6 +99,7 @@ Note::Note(Score* s)
       _head           = 0;
       _tpc            = -1;
       _headGroup      = 0;
+      _small          = false;
       }
 
 //---------------------------------------------------------
@@ -137,7 +138,7 @@ Note::~Note()
 
 double Note::headWidth() const
       {
-      return symbols[_head].width();
+      return symbols[_head].width() * _mag;
       }
 
 //---------------------------------------------------------
@@ -146,7 +147,7 @@ double Note::headWidth() const
 
 double Note::headHeight() const
       {
-      return symbols[_head].height();
+      return symbols[_head].height() * _mag;
       }
 
 //---------------------------------------------------------
@@ -232,6 +233,7 @@ void Note::add(Element* el)
 	el->setParent(this);
       switch(el->type()) {
             case TEXT:
+                  el->setMag(mag());
                   _fingering.append((Text*) el);
                   break;
             case TIE:
@@ -244,6 +246,7 @@ void Note::add(Element* el)
                   break;
             case ACCIDENTAL:
                   _accidental = (Accidental*)el;
+                  _accidental->setMag(_mag);
                   break;
             default:
                   printf("Note::add() not impl. %s\n", el->name());
@@ -319,7 +322,7 @@ QPointF Note::stemPos(bool upFlag) const
             upFlag = !upFlag;
       qreal xo = symbols[_head].bbox().x();
       if (upFlag) {
-            x += symbols[_head].width() - sw;
+            x += symbols[_head].width() * _mag - sw;
             y -= _spatium * .2;
             }
       else {
@@ -338,11 +341,10 @@ void Note::setAccidentalSubtype(int pre)
       if (pre && !_tieBack) {
             if (!_accidental) {
                   _accidental = new Accidental(score());
-                  _accidental->setParent(this);
-                  _accidental->setVoice(voice());
+                  add(_accidental);
                   }
             pre &= pre & (~ACC_SMALL);
-            _accidental->setSubtype(_grace ? ACC_SMALL + pre : pre);
+            _accidental->setSubtype(_small ? ACC_SMALL + pre : pre);
             }
       else if (_accidental) {
             delete _accidental;
@@ -388,7 +390,7 @@ void Note::setHead(int ticks)
             if (ticks % (2 * division))
                   _dots = 1;
             }
-      if (_grace)
+      if (_small)
             _head = smallNoteHeads[_headGroup][headType];
       else
             _head = noteHeads[_headGroup][headType];
@@ -422,7 +424,7 @@ void Note::setType(DurationType t)
                   headType = 3;
                   break;
             }
-      if (_grace)
+      if (_small)
             _head = smallNoteHeads[_headGroup][headType];
       else
             _head = noteHeads[_headGroup][headType];
@@ -434,19 +436,19 @@ void Note::setType(DurationType t)
 
 void Note::draw(QPainter& p)
       {
-      symbols[_head].draw(p);
+      symbols[_head].draw(p, _mag);
 
       if (_dots) {
             double y = 0;
             // do not draw dots on line
             if (_line >= 0 && (_line & 1) == 0) {
                   if (chord()->isUp())
-                        y = -_spatium *.5;
+                        y = -_spatium *.5 * _mag;
                   else
-                        y = _spatium * .5;
+                        y = _spatium * .5 * _mag;
                   }
             for (int i = 1; i <= _dots; ++i)
-                  symbols[dotSym].draw(p, symbols[_head].width() + point(score()->style()->dotNoteDistance) * i, y);
+                  symbols[dotSym].draw(p, _mag, symbols[_head].width() + point(score()->style()->dotNoteDistance) * i, y);
             }
       }
 
@@ -456,31 +458,7 @@ void Note::draw(QPainter& p)
 
 QRectF Note::bbox() const
       {
-      QRectF _bbox = symbols[_head].bbox();
-#if 0
-      if (_tieFor)
-            _bbox |= _tieFor->bbox().translated(_tieFor->pos());
-      if (_accidental)
-            _bbox |= _accidental->bbox().translated(_accidental->pos());
-      foreach(const Text* f, _fingering)
-            _bbox |= f->bbox().translated(f->pos());
-      if (_dots) {
-            double y = 0;
-            if ((_line & 1) == 0) {
-                  if (chord()->isUp())
-                        y = -_spatium *.5;
-                  else
-                        y = _spatium * .5;
-                  }
-            for (int i = 1; i <= _dots; ++i) {
-                  QRectF dot = symbols[dotSym].bbox();
-                  double xoff = symbols[_head].width() + point(score()->style()->dotNoteDistance) * i;
-                  dot.translate(xoff, y);
-                  _bbox |= dot;
-                  }
-            }
-#endif
-      return _bbox;
+      return symbols[_head].bbox();
       }
 
 //---------------------------------------------------------
@@ -492,7 +470,9 @@ bool Note::isSimple(Xml& xml) const
       QList<Prop> pl = Element::properties(xml);
       if (_accidental && !_accidental->userOff().isNull())
             return false;
-      return (pl.empty() && _fingering.empty() && _tieFor == 0 && _move == 0 && _headGroup == 0);
+      return (pl.empty() && _fingering.empty() && _tieFor == 0 && _move == 0
+         && _headGroup == 0
+         && _small == false);
       }
 
 //---------------------------------------------------------
@@ -524,6 +504,8 @@ void Note::write(Xml& xml) const
                   xml.tag("move", _move);
             if (_headGroup != 0)
                   xml.tag("head", _headGroup);
+            if (_small)
+                  xml.tag("small", _small);
             xml.etag();
             }
       }
@@ -569,10 +551,12 @@ void Note::read(QDomElement e)
             else if (tag == "Accidental") {
                   _accidental = new Accidental(score());
                   _accidental->read(e);
-                  _accidental->setParent(this);
+                  add(_accidental);
                   }
             else if (tag == "move")
                   _move = i;
+            else if (tag == "small")
+                  _small = i;
             else if (Element::readProperties(e))
                   ;
             else
@@ -796,3 +780,57 @@ Element* Note::drop(const QPointF&, const QPointF&, Element* e)
             }
       return 0;
       }
+
+//---------------------------------------------------------
+//   genPropertyMenu
+//---------------------------------------------------------
+
+bool Note::genPropertyMenu(QMenu* popup) const
+      {
+      QAction* a = popup->addSeparator();
+      a->setText(tr("Chord"));
+      a = popup->addAction(tr("Properties..."));
+      a->setData("props");
+      return true;
+      }
+
+//---------------------------------------------------------
+//   propertyAction
+//---------------------------------------------------------
+
+void Note::propertyAction(const QString& s)
+      {
+      if (s == "props") {
+            ChordProperties vp;
+            vp.setSmall(chord()->small());
+            int rv = vp.exec();
+            if (rv) {
+                  bool val = vp.small();
+                  if (val != chord()->small())
+                        score()->undoChangeChordRestSize(chord(), val);
+                  }
+            }
+      }
+
+//---------------------------------------------------------
+//   setSmall
+//---------------------------------------------------------
+
+void Note::setSmall(bool val)
+      {
+      _small = val;
+      // TODO: implement chord size
+      setMag(_small ? .7 : 1.0);
+      }
+
+//---------------------------------------------------------
+//   setMag
+//---------------------------------------------------------
+
+void Note::setMag(double val)
+      {
+      _mag = val;
+      if (_accidental)
+            _accidental->setMag(_mag);
+      }
+

@@ -370,6 +370,16 @@ void Sym::draw(QPainter& painter, qreal x, qreal y) const
 //   draw
 //---------------------------------------------------------
 
+void Sym::draw(QPainter& painter, double mag, qreal x, qreal y) const
+      {
+      painter.setFont(font(mag));
+      painter.drawText(QPointF(x, y), QString(_code));
+      }
+
+//---------------------------------------------------------
+//   draw
+//---------------------------------------------------------
+
 void Sym::draw(QPainter& painter, qreal x, qreal y, int n) const
       {
       painter.setFont(font());
@@ -383,6 +393,16 @@ void Sym::draw(QPainter& painter, qreal x, qreal y, int n) const
 void Sym::draw(QPainter& painter) const
       {
       painter.setFont(font());
+      painter.drawText(QPointF(0,0), QString(_code));
+      }
+
+//---------------------------------------------------------
+//   draw
+//---------------------------------------------------------
+
+void Sym::draw(QPainter& painter, double mag) const
+      {
+      painter.setFont(font(mag));
       painter.drawText(QPointF(0,0), QString(_code));
       }
 

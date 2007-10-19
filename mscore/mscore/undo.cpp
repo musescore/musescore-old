@@ -79,7 +79,8 @@ static const char* undoName[] = {
       "InsertTime",
       "ChangeRepeatFlags",
       "ChangeEndBarLine",
-      "ChangeVoltaEnding", "ChangeVoltaText"
+      "ChangeVoltaEnding", "ChangeVoltaText",
+      "ChangeChordRestSize"
       };
 
 static bool UNDO = false;
@@ -531,6 +532,14 @@ void Score::processUndoOp(UndoOp* i, bool undo)
                   i->s = s;
                   }
                   break;
+            case UndoOp::ChangeChordRestSize:
+                  {
+                  ChordRest* cr = (ChordRest*)i->obj;
+                  bool small = cr->small();
+                  cr->setSmall(i->val1);
+                  i->val1 = small;
+                  }
+                  break;
             }
       UNDO = FALSE;
       }
@@ -896,6 +905,21 @@ void Score::undoChangeVoltaText(Volta* volta, const QString& s)
       i.type = UndoOp::ChangeVoltaText;
       i.obj  = volta;
       i.s    = s;
+      undoList.back()->push_back(i);
+      processUndoOp(&undoList.back()->back(), false);
+      }
+
+//---------------------------------------------------------
+//   undoChangeChordRestSize
+//---------------------------------------------------------
+
+void Score::undoChangeChordRestSize(ChordRest* cr, bool small)
+      {
+      checkUndoOp();
+      UndoOp i;
+      i.type = UndoOp::ChangeChordRestSize;
+      i.obj  = cr;
+      i.val1 = small;
       undoList.back()->push_back(i);
       processUndoOp(&undoList.back()->back(), false);
       }

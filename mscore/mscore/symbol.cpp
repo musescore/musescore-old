@@ -1,7 +1,7 @@
 //=============================================================================
 //  MuseScore
 //  Linux Music Score Editor
-//  $Id: element.cpp,v 1.79 2006/04/12 14:58:10 wschweer Exp $
+//  $Id:$
 //
 //  Copyright (C) 2002-2007 Werner Schweer and others
 //
@@ -48,7 +48,7 @@ void Symbol::setSym(int s)
 
 void Symbol::draw(QPainter& p)
       {
-      symbols[_sym].draw(p);
+      symbols[_sym].draw(p, _mag);
       }
 
 //---------------------------------------------------------
@@ -57,7 +57,8 @@ void Symbol::draw(QPainter& p)
 
 QRectF Symbol::bbox() const
       {
-      return symbols[_sym].bbox();
+      QRectF r = symbols[_sym].bbox();
+      return QRectF(r.x() * _mag, r.y() * _mag, r.width() * _mag, r.height() * _mag);
       }
 
 //---------------------------------------------------------

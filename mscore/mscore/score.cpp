@@ -1662,6 +1662,7 @@ struct RepeatLoop {
 //          - repeats
 //          - volta
 //          - d.c. al fine
+//          - d.s. al fine
 //---------------------------------------------------------
 
 void Score::toEList(QMap<int, Event>* events, bool expandRepeats, int offset, int staffIdx)

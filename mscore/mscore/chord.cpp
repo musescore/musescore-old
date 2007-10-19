@@ -55,7 +55,7 @@ Stem::Stem(Score* s)
 
 void Stem::draw(QPainter& p)
       {
-      qreal lw = point(score()->style()->stemWidth);
+      qreal lw = point(score()->style()->stemWidth) * _mag;
       QPen pen(p.pen());
       pen.setWidthF(lw);
       p.setPen(pen);
@@ -355,6 +355,7 @@ void Chord::layoutStem1(ScoreLayout* layout)
       if (hasStem) {
             if (!_stem) {
                   _stem = new Stem(score());
+                  _stem->setMag(_mag);
                   _stem->setParent(this);
                   }
             _stem->setLen(stemLen);
@@ -486,6 +487,7 @@ void Chord::layoutStem(ScoreLayout* layout)
       if (hasStem) {
             if (!_stem) {
                   _stem = new Stem(score());
+                  _stem->setMag(_mag);
                   _stem->setParent(this);
                   }
             _stem->setLen(stemLen);
@@ -562,6 +564,8 @@ void Chord::layout(ScoreLayout* layout)
       {
       if (notes.empty())
             return;
+      setMag(small() ? .7 : 1.0);
+
       double _spatium = layout->spatium();
       Note* upnote     = notes.back();
       double headWidth = upnote->headWidth();
@@ -581,6 +585,8 @@ void Chord::layout(ScoreLayout* layout)
       System* s = segment()->measure()->system();
       for (iNote in = notes.begin(); in != notes.end(); ++in) {
             Note* note = in->second;
+            note->setMag(mag() * (note->small() ? .7 : 1.0));
+
             double x = 0.0;
 
             int move = note->move();
@@ -595,6 +601,7 @@ void Chord::layout(ScoreLayout* layout)
             if (note->mirror())
                   x += up ? headWidth : - headWidth;
             note->setPos(x, y);
+//TODO: !?
             Accidental* accidental = note->accidental();
             if (accidental) {
 #if 0
@@ -606,7 +613,7 @@ void Chord::layout(ScoreLayout* layout)
                         x -= headWidth;
                   accidental->setPos(x, 0);
 #else
-                  double x = accidental->x();
+                  double x = accidental->x() * _mag;
 #endif
                   if (x < lx)
                         lx = x;
@@ -894,10 +901,10 @@ void Chord::write(Xml& xml) const
 
 void Chord::readNote(QDomElement e, int staffIdx)
       {
-      Note* note    = new Note(score());
-      int ptch      = e.attribute("pitch", "-1").toInt();
-      int ticks     = e.attribute("ticks", "-1").toInt();
-      int tpc       = e.attribute("tpc", "-1").toInt();
+      Note* note = new Note(score());
+      int ptch   = e.attribute("pitch", "-1").toInt();
+      int ticks  = e.attribute("ticks", "-1").toInt();
+      int tpc    = e.attribute("tpc", "-1").toInt();
 
       if (ticks != -1)
             setTickLen(ticks);
@@ -907,9 +914,7 @@ void Chord::readNote(QDomElement e, int staffIdx)
             QString val(e.text());
             int i = val.toInt();
 
-            if (tag == "GraceNote")
-                  _grace = i;
-            else if (tag == "StemDirection") {
+            if (tag == "StemDirection") {
                   if (val == "up")
                         _stemDirection = UP;
                   else if (val == "down")
@@ -947,7 +952,6 @@ void Chord::readNote(QDomElement e, int staffIdx)
                   domError(e);
             }
       note->setParent(this);
-      note->setGrace(_grace);
       note->setStaff(staff());
       note->setVoice(voice());
       if (ptch != -1)
@@ -971,7 +975,6 @@ void Chord::read(QDomElement e, int staffIdx)
             if (tag == "Note") {
                   Note* note = new Note(score());
                   note->setParent(this);
-                  note->setGrace(_grace);
                   note->setStaff(staff());
                   note->setVoice(voice());
                   note->read(e);
@@ -1177,4 +1180,22 @@ void Chord::readSlur(QDomElement e, int /*staff*/)
 #endif
       }
 
+//---------------------------------------------------------
+//   setMag
+//---------------------------------------------------------
+
+void Chord::setMag(double val)
+      {
+      _mag = val;
+      foreach(LedgerLine* ll, _ledgerLines)
+            ll->setMag(_mag);
+      if (_stem)
+            _stem->setMag(_mag);
+      if (_hook)
+            _hook->setMag(_mag);
+      if (_arpeggio)
+            _arpeggio->setMag(_mag);
+      if (_tremolo)
+            _tremolo->setMag(_mag);
+      }
 

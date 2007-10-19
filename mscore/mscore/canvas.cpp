@@ -50,10 +50,8 @@
 #include "part.h"
 #include "editdrumset.h"
 #include "editstaff.h"
-// Added by DK
 #include "repeatflag.h"
 #include "barline.h"
-//----------------------------
 
 //---------------------------------------------------------
 //   Canvas
@@ -210,6 +208,7 @@ void Canvas::objectPopup(const QPoint& pos, Element* obj)
       a->setData("invisible");
       a = popup->addAction(tr("Color..."));
       a->setData("color");
+      obj->genPropertyMenu(popup);
       popup->addSeparator();
 
       // Added by DK
@@ -222,8 +221,6 @@ void Canvas::objectPopup(const QPoint& pos, Element* obj)
             if (RepeatFlag().genPropertyMenu(popup))
                   popup->addSeparator();
             }
-      else if (obj->genPropertyMenu(popup))
-            popup->addSeparator();
 
       a = popup->addAction(tr("Object Inspector"));
       a->setData("list");
