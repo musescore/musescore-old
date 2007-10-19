@@ -1583,7 +1583,6 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
       else {
             char c     = step[0].toLatin1();
             Note* note = new Note(score);
-            note->setGrace(grace);
 
             // xmlSetPitch(note, tick, c, alter, octave, accidental);
 
@@ -1619,6 +1618,8 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
                   s->add(cr);
                   }
             cr->add(note);
+            if (grace)
+                  cr->setSmall(grace);
 //            printf("staff for new note: %p (staff=%d, relStaff=%d)\n",
 //                   score->staff(staff + relStaff), staff, relStaff);
             xmlSetPitch(note, tick, c, alter, octave, accidental);

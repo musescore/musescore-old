@@ -69,6 +69,8 @@ class NoteHead : public Symbol {
 */
 
 class Note : public Element {
+      Q_DECLARE_TR_FUNCTIONS(Measure)
+
       static int noteHeads[HEAD_GROUPS][4];
       static int smallNoteHeads[HEAD_GROUPS][4];
 
@@ -83,7 +85,6 @@ class Note : public Element {
       int _head;              ///< Note head.
       int _headGroup;
       DurationType _durationType;
-      bool _grace;
       bool _mirror;           ///< True if note is mirrored at stem.
       int _dots;
       QList<Text*> _fingering;
@@ -91,7 +92,8 @@ class Note : public Element {
       Tie* _tieFor;
       Tie* _tieBack;
 
-      int _lineOffset;  ///< Used during mouse dragging.
+      int _lineOffset;        ///< Used during mouse dragging.
+      bool _small;
 
       virtual bool isMovable() const { return true; }
       virtual QRectF drag(const QPointF& s);
@@ -105,8 +107,6 @@ class Note : public Element {
       virtual ElementType type() const { return NOTE; }
 
       virtual QRectF bbox() const;
-      bool grace() const              { return _grace; }
-      void setGrace(bool val)         { _grace = val;  }
 
       void setHead(int);
       int totalTicks() const;
@@ -162,7 +162,14 @@ class Note : public Element {
       virtual bool acceptDrop(Viewer*, const QPointF&, int, int) const;
       virtual Element* drop(const QPointF&, const QPointF&, Element*);
 
+      virtual bool genPropertyMenu(QMenu*) const;
+      virtual void propertyAction(const QString&);
+
       bool isSimple(Xml&) const;
+
+      bool small() const                        { return _small; }
+      void setSmall(bool val);
+      virtual void setMag(double val);
       };
 
 //---------------------------------------------------------

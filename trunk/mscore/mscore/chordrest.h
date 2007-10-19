@@ -129,6 +129,7 @@ class ChordRest : public Element {
       BeamMode _beamMode;
       Tuplet* _tuplet;
       bool _up;
+      bool _small;
 
       void layoutAttributes(ScoreLayout*);
 
@@ -157,16 +158,18 @@ class ChordRest : public Element {
       virtual qreal downPos() const = 0;
       virtual qreal centerX() const = 0;
 
-      virtual void layoutStem1(ScoreLayout*)     {}
+      virtual void layoutStem1(ScoreLayout*)    {}
       virtual void layoutStem(ScoreLayout*)     {}
-      virtual int upLine() const    { return 0;}
-      virtual int downLine() const  { return 8;}
-      virtual int line(bool up) const { return up ? upLine() : downLine(); }
+      virtual int upLine() const                { return 0;}
+      virtual int downLine() const              { return 8;}
+      virtual int line(bool up) const           { return up ? upLine() : downLine(); }
       virtual QPointF stemPos(bool, bool) const { return pos(); }    // point to connect stem
-      bool isUp() const             { return _up; }
-      void setUp(bool val)          { _up = val; }
-      QList<NoteAttribute*>* getAttributes() { return &attributes; }
+      bool isUp() const                         { return _up; }
+      void setUp(bool val)                      { _up = val; }
+      QList<NoteAttribute*>* getAttributes()    { return &attributes; }
       NoteAttribute* hasAttribute(const NoteAttribute*);
+      bool small() const                        { return _small; }
+      void setSmall(bool val);
       };
 
 #endif

@@ -162,6 +162,7 @@ ChordRest::ChordRest(Score* s)
       {
       _beam     = 0;
       _tuplet   = 0;
+      _small    = false;
       _beamMode = BEAM_AUTO;
       }
 
@@ -227,6 +228,8 @@ QList<Prop> ChordRest::properties(Xml& xml) const
             else
                   pl.append(Prop("Tuplet", idx));
             }
+      if (_small)
+            pl.append(Prop("small", _small));
       return pl;
       }
 
@@ -299,9 +302,22 @@ bool ChordRest::readProperties(QDomElement e)
             else
                   _tuplet->add(this);
             }
+      else if (tag == "small")
+            _small = i;
       else
             return false;
       return true;
+      }
+
+//---------------------------------------------------------
+//   setSmall
+//---------------------------------------------------------
+
+void ChordRest::setSmall(bool val)
+      {
+      _small = val;
+      // TODO: implement staff size
+      _mag = _small ? .7 : 1.0;
       }
 
 //---------------------------------------------------------
@@ -407,5 +423,3 @@ void ChordRestList::add(ChordRest* n)
       {
       std::multimap<const int, ChordRest*, std::less<int> >::insert(std::pair<const int, ChordRest*> (n->tick(), n));
       }
-
-

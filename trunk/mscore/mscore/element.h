@@ -41,7 +41,7 @@ class Sym;
 class ScoreLayout;
 class Viewer;
 // Added by DK
-class RepeatFlag;
+// class RepeatFlag;
 //--------------------------
 
 
@@ -126,6 +126,7 @@ class Element {
                                 ///< valid after call to layout()
 
       mutable MTime _duration;  ///< Note: lazy evaluation
+      double _mag;              ///< 1.0
 
    public:
       Element(Score*);
@@ -312,6 +313,9 @@ class Element {
       virtual void resetUserOffsets() {  setUserOff(QPointF()); }
 
       static Element* create(int type, Score*);
+
+      double mag() const                        { return _mag;   }
+      virtual void setMag(double val)           { _mag = val;    }
       };
 
 //---------------------------------------------------------
@@ -456,6 +460,7 @@ class Compound : public Element {
       virtual void setSelected(bool f);
       virtual void setVisible(bool);
       virtual QRectF bbox() const;
+      virtual void setMag(double val);
       };
 
 //---------------------------------------------------------

@@ -8,7 +8,7 @@
 //
 //  Copyright (C) 2007- Dieter Krause (dikrau@users.sourceforge.net)
 //
-//  repeatflag.h: contains class, function definition and detailed Information 
+//  repeatflag.h: contains class, function definition and detailed Information
 //  about a type of repeat
 //
 //  This program is free software; you can redistribute it and/or modify
@@ -27,14 +27,13 @@
 #ifndef __REPEATFLAG_H__
 #define __REPEATFLAG_H__
 
-
-
-#include "measure.h"
 #include "repeat2.h"
 #include "repeatflagdialog.h"
 
+class Measure;
+
 class RepeatFlag {
-      
+
 
       int _repeatFlag;              // type of repeat
       int _no;                      // numeration of Flag
@@ -50,7 +49,7 @@ public:
 
       bool genPropertyMenu(QMenu* menu) const;
       void propertyAction(const QString&,Element*);
-      
+
       void setRepeatFlag(int f) { _repeatFlag = f; }
       int repeatFlag() { return _repeatFlag; }
       void setNo(int n) { _no = n; }
@@ -73,4 +72,5 @@ public:
       };
 
 extern Element* actElement;
-#endif      
+#endif
+

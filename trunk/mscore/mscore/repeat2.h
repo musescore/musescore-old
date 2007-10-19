@@ -25,13 +25,17 @@
 #ifndef __REPEAT2_H__
 #define __REPEAT2_H__
 
-#include "measure.h"
-#include "repeatflag.h"
+// #include "repeatflag.h"
+
+class Measure;
+class RepeatStack;
+class RepeatFlag;
+class Element;
 
 #define MAXCYCLE 15
 
 enum RepTypes// types for repeat
-{ 
+{
       NO          = 0,
       START       = 1<<1,
       END         = 1<<2,
@@ -44,7 +48,7 @@ enum RepTypes// types for repeat
       DACAPO      = 1<<8,
       ALCODA      = 1<<9,
       P_VOLTA     = 1<<10,
-      S_VOLTA     = 1<<11,      
+      S_VOLTA     = 1<<11,
       T_VOLTA     = 1<<12,
       FINE        = 1<<13,
       ALSEGNO     = 1<<14,
@@ -52,7 +56,7 @@ enum RepTypes// types for repeat
       NORMAL      = 1<<16
 };
 
-enum LoopCounts 
+enum LoopCounts
 {
       FIRSTTIME = 1,
       SECONDTIME = 2,
@@ -92,12 +96,12 @@ class RepeatStack {
       int _repeatType;    // type of repeat
       Measure* _startm;   // Measure to start with
       Measure* _endm;     // Measure to end with
-      int _ticks2Add;     // add ticks to 
+      int _ticks2Add;     // add ticks to
       int _tickOffs;      // previouse Offset
       int _cycleList[MAXCYCLE]; // list of cycles, build from RepeatFlag::_cycleList
-      int _no;            // element no., get from RepeatFlag::_no 
+      int _no;            // element no., get from RepeatFlag::_no
       int _destno;        // destination number from RepeatFlag::_destno
-      
+
 
     public:
       RepeatStack();
@@ -111,7 +115,7 @@ class RepeatStack {
       void setNext(RepeatStack* rn) { _next = rn; }
       RepeatStack* next() { return _next; }
       void setPrev(RepeatStack* rn) { _prev = rn; }
-      RepeatStack* prev() { return _prev; } 
+      RepeatStack* prev() { return _prev; }
       void setActive(int s) { _active = s; }
       int active() { return _active; }
       void setLoopCount(int n) { _loopCount = n; }
@@ -124,10 +128,10 @@ class RepeatStack {
       int noOffElements();
       int checkType(Measure*);
       void setStartMeasure(Measure* m) { _startm = m; }
-      Measure* startMeasure () { return _startm; } 
+      Measure* startMeasure () { return _startm; }
       void setEndMeasure(Measure* m) { _endm = m; }
       Measure* endMeasure () { return _endm; }
-      RepeatStack* setNewSlot(Measure*);         
+      RepeatStack* setNewSlot(Measure*);
       void setTickOffset(int t) { _tickOffs = t; }
       int tickOffset() { return _tickOffs; }
       void setTicks2Add(int t) { _ticks2Add = t; }
@@ -151,15 +155,15 @@ class RepeatStack {
       RepeatStack* slotEndMeasureByType(Measure*,int);
       RepeatStack* startMeasure(Measure*);
       RepeatStack* slot(Measure*,int);
-      RepeatStack* lastSlot();   
-      RepeatStack* lastActiveSlot();   
-      RepeatStack* lastInactiveSlot();   
-      RepeatStack* lastSpecialSlot();   
-      RepeatStack* lastSlotByType(int); 
-      RepeatStack* slotByType(int); 
+      RepeatStack* lastSlot();
+      RepeatStack* lastActiveSlot();
+      RepeatStack* lastInactiveSlot();
+      RepeatStack* lastSpecialSlot();
+      RepeatStack* lastSlotByType(int);
+      RepeatStack* slotByType(int);
       RepeatStack* lastActiveSlotByType(int);
-      RepeatStack* lastInActiveSlotByType(int); 
-      RepeatStack* slotByActiveAndType(int,int);    
+      RepeatStack* lastInActiveSlotByType(int);
+      RepeatStack* slotByActiveAndType(int,int);
 };
 
 extern RepList* rList;

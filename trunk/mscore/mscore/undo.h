@@ -77,7 +77,8 @@ struct UndoOp {
             ChangeRepeatFlags,
             ChangeEndBarLine,
             ChangeVoltaEnding,
-            ChangeVoltaText
+            ChangeVoltaText,
+            ChangeChordRestSize
             };
       UndoType type;
       Element* obj;

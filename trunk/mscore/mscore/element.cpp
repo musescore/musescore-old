@@ -141,6 +141,7 @@ Element::Element(Score* s)
       _score = s;
       init();
       setSubtype(0);
+      _mag = 1.0;
       // Added by DK
 //      setRepeatFlag(0x00);
       //--------------------------
@@ -701,6 +702,17 @@ void Compound::clear()
       for (ciElement i = elemente.begin(); i != elemente.end(); ++i)
             delete *i;
       elemente.clear();
+      }
+
+//---------------------------------------------------------
+//   setMag
+//---------------------------------------------------------
+
+void Compound::setMag(double val)
+      {
+      for (ciElement i = elemente.begin(); i != elemente.end(); ++i)
+            (*i)->setMag(val);
+      _mag = val;
       }
 
 //---------------------------------------------------------

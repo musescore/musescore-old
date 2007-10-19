@@ -177,6 +177,7 @@ class Chord : public ChordRest {
       virtual int downLine() const;
       virtual void space(double& min, double& extra) const;
       void readNote(QDomElement node, int staffIdx);
+      virtual void setMag(double val);
       };
 
 #endif

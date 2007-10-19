@@ -281,6 +281,7 @@ class Score : public QObject {
       void undoChangeEndBarLine(Measure*, int);
       void undoChangeVoltaEnding(Volta* volta, const QList<int>& l);
       void undoChangeVoltaText(Volta* volta, const QString& s);
+      void undoChangeChordRestSize(ChordRest* cr, bool small);
 
       void setNote(int tick, int track, int pitch, int len);
       int clefOffset(int tick, Staff*) const;
