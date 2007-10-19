@@ -80,6 +80,7 @@ win32:
 
 clean:
 	-rm -rf build
+	-rm -rf win32build win32install
 
 #
 # dist
@@ -107,9 +108,7 @@ install:
 
 package:
 	cd build; make package
-	mv build/mscore-*.sh .
 
 man:
 	cd build; make man
-	mv build/mscore-*.sh .
 

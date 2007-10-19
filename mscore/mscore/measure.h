@@ -94,6 +94,8 @@ typedef MStaffList::const_iterator ciMStaff;
 */
 
 class Measure : public Element {
+      Q_DECLARE_TR_FUNCTIONS(Measure)
+
       Segment* _first;        ///< First item of segment list
       Segment* _last;         ///< Last item of segment list
       int _size;              ///< Number of items on segment list
@@ -236,10 +238,10 @@ class Measure : public Element {
       void adjustToLen(int, int);
       int repeatFlags() const      { return _repeatFlags; }
       void setRepeatFlags(int val) { _repeatFlags = val; }
-      void setEndBarLineType(int, bool);
+      bool setEndBarLineType(int, bool);
       int endBarLineType() const;
       BarLine* endBarLine() const;
-      void setStartRepeatBarLine(bool);
+      bool setStartRepeatBarLine(bool);
       };
 
 #endif

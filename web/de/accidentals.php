@@ -16,7 +16,7 @@
       sie auch die Note selektieren und dann:
      <br><br>
   </td>
-  <td>
+  <td valign="top">
      <img src="../pic/accidentalspalette.png">
      </tr>
   </td>

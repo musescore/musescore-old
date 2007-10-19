@@ -113,9 +113,10 @@ add_executable ( mscore
       viewer.cpp volta.cpp simplebutton.cpp image.cpp keyfinder.cpp
       pitchspelling.cpp musedata.cpp keysig.cpp arpeggio.cpp breath.cpp
       editdrumset.cpp editstaff.cpp drumset.cpp tremolo.cpp repeat.cpp
-      repeat2.cpp lilypond.cpp exportly.cpp repeatflag.cpp repeatflagdialog.cpp
+      lilypond.cpp exportly.cpp repeatflag.cpp repeatflagdialog.cpp
       voltaproperties.cpp
       ${AUDIO}
+      repeat2.cpp
       )
 
 if (MINGW)

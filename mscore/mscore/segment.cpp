@@ -31,9 +31,6 @@
 #include "part.h"
 #include "lyrics.h"
 #include "repeat.h"
-// Added by DK
-#include "repeatflag.h"
-//------------------------
 
 const char* Segment::segmentTypeNames[] = {
    "Clef", "Key Signature", "Time Signature", "Begin Repeat", "ChordRest",
@@ -183,7 +180,6 @@ void Segment::removeStaff(int staff)
 
 void Segment::add(Element* el)
       {
-      RepeatFlag* rf;
       el->setParent(this);
       el->setTick(tick());    //DEBUG
       int staffIdx = el->staffIdx();
@@ -206,9 +202,6 @@ void Segment::add(Element* el)
             case REPEAT_MEASURE:
                   measure()->setRepeatFlags(measure()->repeatFlags() | RepeatMeasureFlag);
                   _elist[track] = el;
-                  // Added by DK
-                  rf->setMeasureRepeatFlag(el,0);
-                  //---------------------------------------                  
                   break;
 
             case CHORD:
@@ -221,8 +214,23 @@ void Segment::add(Element* el)
                   _elist[track] = el;
                   break;
 
-            case BREATH:
             case BAR_LINE:
+                  {
+                  int flags = measure()->repeatFlags();
+                  if (el->subtype() == START_REPEAT) {
+                        if (measure()->next())
+                              measure()->next()->setRepeatFlags(flags | RepeatStart);
+                        }
+                  else if (el->subtype() == END_REPEAT)
+                        measure()->setRepeatFlags(flags | RepeatEnd);
+                  else if (el->subtype() == END_START_REPEAT) {
+                        measure()->setRepeatFlags(flags | RepeatEnd);
+                        if (measure()->next())
+                              measure()->next()->setRepeatFlags(flags | RepeatStart);
+                        }
+                  }
+                  _elist[track] = el;
+                  break;
             default:
                   _elist[track] = el;
                   break;
@@ -278,6 +286,23 @@ void Segment::remove(Element* el)
             case REPEAT_MEASURE:
                   measure()->setRepeatFlags(measure()->repeatFlags() & ~RepeatMeasureFlag);
                   _elist[track] = 0;
+                  break;
+
+            case BAR_LINE:
+                  {
+                  int flags = measure()->repeatFlags();
+                  if (el->subtype() == START_REPEAT) {
+                        if (measure()->next())
+                              measure()->next()->setRepeatFlags(flags & ~RepeatStart);
+                        }
+                  else if (el->subtype() == END_REPEAT)
+                        measure()->setRepeatFlags(flags & ~RepeatEnd);
+                  else if (el->subtype() == END_START_REPEAT) {
+                        if (measure()->next())
+                              measure()->next()->setRepeatFlags(flags & ~RepeatStart);
+                        measure()->setRepeatFlags(flags & ~RepeatEnd);
+                        }
+                  }
                   break;
 
             default:

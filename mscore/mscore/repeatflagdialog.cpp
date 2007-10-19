@@ -28,6 +28,7 @@
 
 void RepeatFlagDialog::accept()
       {
+#if 0   // WS
       RepeatFlag* rf;
       Element* el;
 
@@ -38,7 +39,7 @@ void RepeatFlagDialog::accept()
       rf->setNo(no->value());
       rf->setDestNo(destno->value());
       rf->setCycleList(cyclesToPlay->text());
-
+#endif
       done(1);
       }
 

@@ -142,7 +142,7 @@ Element::Element(Score* s)
       init();
       setSubtype(0);
       // Added by DK
-      setRepeatFlag(0x00);
+//      setRepeatFlag(0x00);
       //--------------------------
       }
 

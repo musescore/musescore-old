@@ -55,6 +55,7 @@
 #include "line.h"
 #include "volta.h"
 #include "event.h"
+#include "repeat.h"
 #include "repeat2.h"
 #include "ottava.h"
 #include "barline.h"
@@ -1408,10 +1409,11 @@ bool Score::isVolta(int tick, int repeat) const
                               if (ending == repeat)
                                     return true;
                               }
+                        return false;
                         }
                   }
             }
-      return false;
+      return true;      // return true if no volta found
       }
 
 //---------------------------------------------------------
@@ -1498,67 +1500,7 @@ void Score::collectMeasureEvents(QMap<int, Event>* events, Measure* m, int staff
             }
       }
 
-//---------------------------------------------------------
-//   toEList
-//    export score to event list
-//---------------------------------------------------------
-
-void Score::toEList(QMap<int, Event>* events, int tickOffset)
-      {
-      int staffIdx = 0;
-      RepeatStack* rs = new RepeatStack();
-      foreach(Part* part, _parts) {
-            for (int i = 0; i < part->staves()->size(); ++i) {
-                  // Added by DK
-                  // 1. step to collect repeats outside measure, like Coda, Segno.....
-                  for (Measure* m = mainLayout()->first(); m; m = m->next())
-                        foreach(Element* e, *m->el()) {
-                              if (e->type() == REPEAT || e->type() == VOLTA || 
-                                  e->type() == VOLTA_SEGMENT) {
-                                    rs->collectRepeats(e, m);
-                                    }
-                              }
-                  // 2. step to collect repeats inside measure
-                  for (Measure* m = mainLayout()->first(); m; m = m->next()) {
-                        for (Segment* seg = m->first(); seg; seg = seg->next()) {
-                              Element* el = seg->element(0);
-                              if ((el->type() == BAR_LINE /*&& 
-                                 (el->subtype() == END_REPEAT ||
-                                  el->subtype() == START_REPEAT ||
-                                  el->subtype() == END_START_REPEAT)*/) ||
-                                  el->type() == REPEAT_MEASURE) {
-                                    rs->collectRepeats(el,m);
-                                    }                                    
-                              }
-                        }
-                  //----------------------------------------------------------
-                  for (Measure* m = mainLayout()->first(); m;) {
-                        // push each measure for checking of any of repeat type or jumps,
-                        // returns the measure to processed with
-
-                        m = rs->push(m);
-                        if (m == 0) // A jump or repeat has reached and of partiture
-                              break;
-                        collectMeasureEvents(events, m, staffIdx, tickOffset);
-
-                        // Don't forget to save measure, because pop may change it,
-                        // returned m may differ from the original, new start measure
-                        // of "repeat", 0 means nothing to repeat continue with next measure
-                        // functions push and pop are in repeat2.h/cpp file
-
-                        Measure* ms = m;
-                        m = rs->pop(m);
-                        if (m && m->next() != 0)
-                              continue;
-                        else if (m == 0)
-                              m = ms;
-                        m = m->next();
-                        }
-                  ++staffIdx;
-                  }
-            }
-      }
-
+#if 0
 //---------------------------------------------------------
 //   toEList
 //    export score to event list
@@ -1573,7 +1515,7 @@ void Score::toEList(QMap<int, Event>* events, bool expandRepeats, int tickOffset
       // 1. step to collect repeats outside measure, like Coda, Segno.....
       for (Measure* m = mainLayout()->first(); m; m = m->next())
             foreach(Element* e, *m->el()) {
-                  if (e->type() == REPEAT || e->type() == VOLTA || 
+                  if (e->type() == REPEAT || e->type() == VOLTA ||
                         e->type() == VOLTA_SEGMENT) {
                         rs->collectRepeats(e, m);
                         }
@@ -1582,13 +1524,13 @@ void Score::toEList(QMap<int, Event>* events, bool expandRepeats, int tickOffset
       for (Measure* m = mainLayout()->first(); m; m = m->next()) {
            for (Segment* seg = m->first(); seg; seg = seg->next()) {
                 Element* el = seg->element(0);
-                if ((el->type() == BAR_LINE && 
+                if ((el->type() == BAR_LINE &&
                       (el->subtype() == END_REPEAT ||
                        el->subtype() == START_REPEAT ||
                        el->subtype() == END_START_REPEAT)) ||
                        el->type() == REPEAT_MEASURE) {
                         rs->collectRepeats(el,m);
-                        }                                    
+                        }
                 }
           }
           //----------------------------------------------------------
@@ -1619,4 +1561,180 @@ void Score::toEList(QMap<int, Event>* events, bool expandRepeats, int tickOffset
                   }
             }
       }
+
+//---------------------------------------------------------
+//   toEList
+//    export score to event list
+//---------------------------------------------------------
+
+void Score::toEList(QMap<int, Event>* events, int tickOffset)
+      {
+      int staffIdx = 0;
+      RepeatStack* rs = new RepeatStack();
+      foreach(Part* part, _parts) {
+            for (int i = 0; i < part->staves()->size(); ++i) {
+                  // Added by DK
+                  // 1. step to collect repeats outside measure, like Coda, Segno.....
+                  for (Measure* m = mainLayout()->first(); m; m = m->next())
+                        foreach(Element* e, *m->el()) {
+                              if (e->type() == REPEAT || e->type() == VOLTA ||
+                                  e->type() == VOLTA_SEGMENT) {
+                                    rs->collectRepeats(e, m);
+                                    }
+                              }
+                  // 2. step to collect repeats inside measure
+                  for (Measure* m = mainLayout()->first(); m; m = m->next()) {
+                        for (Segment* seg = m->first(); seg; seg = seg->next()) {
+                              Element* el = seg->element(0);
+                              if ((el->type() == BAR_LINE /*&&
+                                 (el->subtype() == END_REPEAT ||
+                                  el->subtype() == START_REPEAT ||
+                                  el->subtype() == END_START_REPEAT)*/) ||
+                                  el->type() == REPEAT_MEASURE) {
+                                    rs->collectRepeats(el,m);
+                                    }
+                              }
+                        }
+                  //----------------------------------------------------------
+                  for (Measure* m = mainLayout()->first(); m;) {
+                        // push each measure for checking of any of repeat type or jumps,
+                        // returns the measure to processed with
+
+                        m = rs->push(m);
+                        if (m == 0) // A jump or repeat has reached and of partiture
+                              break;
+                        collectMeasureEvents(events, m, staffIdx, tickOffset);
+
+                        // Don't forget to save measure, because pop may change it,
+                        // returned m may differ from the original, new start measure
+                        // of "repeat", 0 means nothing to repeat continue with next measure
+                        // functions push and pop are in repeat2.h/cpp file
+
+                        Measure* ms = m;
+                        m = rs->pop(m);
+                        if (m && m->next() != 0)
+                              continue;
+                        else if (m == 0)
+                              m = ms;
+                        m = m->next();
+                        }
+                  ++staffIdx;
+                  }
+            }
+      }
+#else
+
+//---------------------------------------------------------
+//   toEList
+//    export score to event list
+//---------------------------------------------------------
+
+void Score::toEList(QMap<int, Event>* events, int offset)
+      {
+      bool expandRepeats = getAction("repeat")->isChecked();
+      int staffIdx   = 0;
+      foreach(Part* part, _parts) {
+            for (int i = 0; i < part->staves()->size(); ++i) {
+                  toEList(events, expandRepeats, offset, staffIdx);
+                  ++staffIdx;
+                  }
+            }
+      }
+
+//---------------------------------------------------------
+//   RepeatLoop
+//---------------------------------------------------------
+
+struct RepeatLoop {
+      enum LoopType { LOOP_REPEAT, LOOP_FINE };
+
+      Measure* m;
+      int count;
+      LoopType type;
+
+      RepeatLoop() {}
+      RepeatLoop(Measure* _m, LoopType ltype) : m(_m), count(0), type(ltype) {}
+      };
+
+//---------------------------------------------------------
+//   toEList
+//    implements:
+//          - repeats
+//          - volta
+//          - d.c. al fine
+//---------------------------------------------------------
+
+void Score::toEList(QMap<int, Event>* events, bool expandRepeats, int offset, int staffIdx)
+      {
+      rtickOffSet = 0;  // DEBUG
+      if (!expandRepeats) {
+            for (Measure* m = mainLayout()->first(); m; m = m->next())
+                  collectMeasureEvents(events, m, staffIdx, offset);
+            return;
+            }
+      QStack<RepeatLoop> rstack;
+      int tickOffset = 0;
+
+      Measure* fm = mainLayout()->first();
+      for (Measure* m = fm; m;) {
+            if ((m->repeatFlags() & RepeatStart) && (rstack.isEmpty() || (rstack.top().m != m)))
+                  rstack.push(RepeatLoop(m, RepeatLoop::LOOP_REPEAT));
+
+            if (!rstack.isEmpty() && !isVolta(m->tick(), rstack.top().count + 1))
+                  tickOffset -= m->tickLen();   // skip this measure
+            else
+                  collectMeasureEvents(events, m, staffIdx, tickOffset + offset);
+
+            if ((m->repeatFlags() & RepeatEnd)
+               && !rstack.isEmpty()
+               && rstack.top().type == RepeatLoop::LOOP_REPEAT) {
+                  //
+                  // increment repeat count
+                  //
+                  if (++rstack.top().count < m->repeatCount()) {
+                        //
+                        // goto start of loop, fix tickOffset
+                        //
+                        tickOffset += m->tick() + m->tickLen() - rstack.top().m->tick();
+                        m = rstack.top().m;
+                        continue;
+                        }
+                  rstack.pop();     // end this loop
+                  }
+            if (m->repeatFlags() & RepeatDacapoAlFine) {
+                  rstack.push(RepeatLoop(m, RepeatLoop::LOOP_FINE));
+                  tickOffset += m->tick() + m->tickLen();
+                  m = fm;
+                  continue;
+                  }
+            if (m->repeatFlags() & RepeatDalSegnoAlFine) {
+                  // search for segno
+                  Measure* mm = fm;
+                  for (; mm; mm = mm->next()) {
+                        if (mm->repeatFlags() & RepeatSegno)
+                              break;
+                        }
+                  if (mm) {
+                        rstack.push(RepeatLoop(m, RepeatLoop::LOOP_FINE));
+                        tickOffset += m->tick() + m->tickLen() - mm->tick();
+                        m = mm;
+                        continue;
+                        }
+                  else {
+                        printf("no segno found\n");
+                        }
+                  }
+            if (m->repeatFlags() & RepeatFine) {
+                  if (!rstack.isEmpty() && rstack.top().type == RepeatLoop::LOOP_FINE) {
+                        rstack.pop();
+                        break;
+                        }
+                  }
+            m = m->next();
+            }
+      if (!rstack.isEmpty())
+            printf("repeat stack not empty!\n");
+      }
+
+#endif
 

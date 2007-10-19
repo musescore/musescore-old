@@ -126,7 +126,7 @@ Measure::Measure(Score* s)
       _pageBreak   = false;
       _no          = 0;
       _irregular   = false;
-      _repeatCount = 1;
+      _repeatCount = 2;
       _repeatFlags = 0;
       _noOffset    = 0;
       _noText      = new Text(score());
@@ -626,8 +626,9 @@ void Measure::layout2(ScoreLayout* layout)
                                     yo += (element->bbox().height()*-.5);
                                     break;
                               case RepeatFine:
-                                    yo = (yo*-1)+(bbox().height()*.5)+(element->bbox().height());
-                                    xo -= (element->width()*.5);
+                                    yo = 0; // (yo * -1) + bbox().height(); // *.5)+(element->bbox().height());
+                                    xo = bbox().width() - element->width();
+                                    break;
                               default:
                                     xo -= element->width();
                                     xo += bbox().width();
@@ -1915,7 +1916,7 @@ void Measure::cmdRemoveEmptySegment(Segment* s)
 
 bool Measure::genPropertyMenu(QMenu* popup) const
       {
-      QAction* a = popup->addAction(QT_TR_NOOP("Properties..."));
+      QAction* a = popup->addAction(tr("Properties..."));
       a->setData("props");
       return true;
       }
@@ -2577,43 +2578,43 @@ void Measure::createVoice(int track)
 
 //---------------------------------------------------------
 //   setEndBarLineType
+//    return true if bar line type actually changed
 //---------------------------------------------------------
 
-void Measure::setEndBarLineType(int type, bool generated)
+bool Measure::setEndBarLineType(int type, bool generated)
       {
-      // Added and changed by DK
+      bool changed = false;
       BarLine* bl;
       QList<Part*>* pl = score()->parts();
       foreach(Part* part, *pl) {
             Staff* staff = part->staff(0);
-            int track = staff->idx() * VOICES;
-            bool found = false;
+            int track    = staff->idx() * VOICES;
+            bool found   = false;
             for (Segment* s = first(); s; s = s->next()) {
                   if (s->subtype() != Segment::SegEndBarLine)
                         continue;
                   if (s->element(track)) {
                         bl = (BarLine*)(s->element(track));
-                        bl->setSubtype(type);
-                        bl->setGenerated(generated);
-/*
-                        BarLine* bar = (BarLine*)(s->element(track));
-                        bar->setSubtype(type);
-                        bar->setGenerated(generated);
-*/
+                        if (bl->subtype() != type) {
+                              bl->setSubtype(type);
+                              bl->setGenerated(generated);
+                              changed = true;
+                              }
                         found = true;
                         }
                   break;
                   }
             if (!found) {
-                  /*BarLine**/ bl = new BarLine(score());
+                  bl = new BarLine(score());
                   bl->setStaff(staff);
                   bl->setSubtype(type);
                   bl->setGenerated(generated);
                   Segment* seg = getSegment(Segment::SegEndBarLine, tick() + tickLen());
                   seg->add(bl);
+                  changed = true;
                   }
-            RepeatFlag().setMeasureRepeatFlag((Element*)bl,type);
             }
+      return changed;
       }
 
 //---------------------------------------------------------
@@ -2645,10 +2646,12 @@ int Measure::endBarLineType() const
 
 //---------------------------------------------------------
 //   setStartRepeatBarLine
+//    return true if bar line type changed
 //---------------------------------------------------------
 
-void Measure::setStartRepeatBarLine(bool val)
+bool Measure::setStartRepeatBarLine(bool val)
       {
+      bool changed = false;
       QList<Part*>* pl = score()->parts();
       foreach(Part* part, *pl) {
             Staff* staff = part->staff(0);
@@ -2662,6 +2665,7 @@ void Measure::setStartRepeatBarLine(bool val)
                         if (!val) {
                               delete s->element(track);
                               s->setElement(track, 0);
+                              changed = true;
                               break;
                               }
                         }
@@ -2673,7 +2677,9 @@ void Measure::setStartRepeatBarLine(bool val)
                   bl->setGenerated(true);
                   Segment* seg = getSegment(Segment::SegStartRepeatBarLine, tick());
                   seg->add(bl);
+                  changed = true;
                   }
             }
+      return changed;
       }
 

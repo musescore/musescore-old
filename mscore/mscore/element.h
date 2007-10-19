@@ -95,7 +95,7 @@ class Element {
       Element* _parent;
       Measure* _anchorMeasure;
       // Added by DK
-      RepeatFlag* _repeatFlag;
+//      RepeatFlag* _repeatFlag;
       //--------------------------
 
       bool _selected;           ///< set if element is selected
@@ -146,8 +146,8 @@ class Element {
       void setAnchorMeasure(Measure* m)       { _anchorMeasure = m;    }
 
       // Added by DK
-      RepeatFlag* repeatFlag()                { return _repeatFlag; }
-      void setRepeatFlag(RepeatFlag* r)       { _repeatFlag = r;    }
+//      RepeatFlag* repeatFlag()                { return _repeatFlag; }
+//      void setRepeatFlag(RepeatFlag* r)       { _repeatFlag = r;    }
       //----------------------------------------------------------------
 
       bool selected() const                   { return _selected;   }

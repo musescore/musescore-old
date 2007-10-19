@@ -1715,12 +1715,12 @@ failed: </source>
         <translation>Руководство</translation>
     </message>
     <message>
-        <location filename="../../mscore/mscore.cpp" line="1788"/>
+        <location filename="../../mscore/mscore.cpp" line="1791"/>
         <source>note entry mode</source>
         <translation>Режим ввода нот</translation>
     </message>
     <message>
-        <location filename="../../mscore/mscore.cpp" line="1792"/>
+        <location filename="../../mscore/mscore.cpp" line="1795"/>
         <source>edit mode</source>
         <translation>Режим правки</translation>
     </message>
@@ -3160,7 +3160,7 @@ failed: </source>
         <translation>Разрывы</translation>
     </message>
     <message>
-        <location filename="../../mscore/mscore.cpp" line="1796"/>
+        <location filename="../../mscore/mscore.cpp" line="1799"/>
         <source>play</source>
         <translation type="unfinished"></translation>
     </message>
@@ -4218,7 +4218,7 @@ first create some staves</source>
 для создания нотоносцев</translation>
     </message>
     <message>
-        <location filename="../../mscore/score.cpp" line="970"/>
+        <location filename="../../mscore/score.cpp" line="971"/>
         <source>No note or rest selected:
 please select a note or rest were you want to
 start note entry</source>

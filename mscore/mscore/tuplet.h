@@ -38,6 +38,8 @@ class Text;
 //------------------------------------------------------------------------
 
 class Tuplet : public Element {
+      Q_DECLARE_TR_FUNCTIONS(Tuplet)
+
       ChordRestList _elements;
       bool _hasNumber;
       bool _hasLine;
