@@ -31,6 +31,7 @@
 #include "part.h"
 #include "lyrics.h"
 #include "repeat.h"
+#include "staff.h"
 
 const char* Segment::segmentTypeNames[] = {
    "Clef", "Key Signature", "Time Signature", "Begin Repeat", "ChordRest",
@@ -181,6 +182,8 @@ void Segment::removeStaff(int staff)
 void Segment::add(Element* el)
       {
       el->setParent(this);
+      el->setMag(el->staff()->small() ? 0.7 : 1.0);
+
       el->setTick(tick());    //DEBUG
       int staffIdx = el->staffIdx();
       int track    = staffIdx * VOICES + el->voice();
@@ -208,6 +211,8 @@ void Segment::add(Element* el)
             case REST:
                   {
                   ChordRest* cr = (ChordRest*)el;
+                  if (cr->small())
+                        cr->setMag(cr->mag() * .7);
                   if (cr->tuplet())
                         cr->tuplet()->add(cr);
                   }

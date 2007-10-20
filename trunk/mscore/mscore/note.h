@@ -69,7 +69,7 @@ class NoteHead : public Symbol {
 */
 
 class Note : public Element {
-      Q_DECLARE_TR_FUNCTIONS(Measure)
+      Q_DECLARE_TR_FUNCTIONS(Note)
 
       static int noteHeads[HEAD_GROUPS][4];
       static int smallNoteHeads[HEAD_GROUPS][4];
@@ -166,9 +166,6 @@ class Note : public Element {
       virtual void propertyAction(const QString&);
 
       bool isSimple(Xml&) const;
-
-      bool small() const                        { return _small; }
-      void setSmall(bool val);
       virtual void setMag(double val);
       };
 

@@ -338,21 +338,21 @@ const Sym* findSymbol(QChar code, int fontId)
 //      Qt4.2.2
 //---------------------------------------------------------
 
-const QRectF Sym::bbox() const
+const QRectF Sym::bbox(double mag) const
       {
-      double m = _spatium / (spatiumBase20 * FMAG * printerDpi);
+      double m = _spatium * mag / (spatiumBase20 * FMAG * printerDpi);
       return QRectF(_bbox.topLeft() * m, _bbox.size() * m);
       }
 
-double Sym::width() const
+double Sym::width(double mag) const
       {
-      double m = _spatium / (spatiumBase20 * FMAG * printerDpi);
+      double m = _spatium * mag / (spatiumBase20 * FMAG * printerDpi);
       return _width * m;
       }
 
-double Sym::height() const
+double Sym::height(double mag) const
       {
-      double m = _spatium / (spatiumBase20 * FMAG * printerDpi);
+      double m = _spatium * mag / (spatiumBase20 * FMAG * printerDpi);
       return _bbox.height() * m;
       }
 

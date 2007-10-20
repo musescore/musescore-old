@@ -475,7 +475,7 @@ StaffLines::StaffLines(Score* s)
 
 QRectF StaffLines::bbox() const
       {
-      int l = lines() - 1;
+      int l    = lines() - 1;
       qreal lw = point(score()->style()->staffLineWidth);
 
       if (l == 0)
@@ -496,7 +496,7 @@ void StaffLines::draw(QPainter& p)
       p.setRenderHint(QPainter::Antialiasing, false);
 
       QPen pen(p.pen());
-      pen.setWidthF(point(score()->style()->staffLineWidth));
+      pen.setWidthF(point(score()->style()->staffLineWidth) * _mag);
       if (pen.widthF() * p.worldMatrix().m11() < 1.0)
             pen.setWidth(0);
       pen.setCapStyle(Qt::FlatCap);
@@ -511,7 +511,7 @@ void StaffLines::draw(QPainter& p)
             }
       else {
             for (int i = 0; i < lines(); ++i) {
-                  qreal y = _pos.y() + i * _spatium;
+                  qreal y = _pos.y() + i * _spatium * _mag;
                   p.drawLine(QLineF(x1, y, x2, y));
                   }
             }

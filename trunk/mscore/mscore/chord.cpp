@@ -38,6 +38,7 @@
 #include "arpeggio.h"
 #include "score.h"
 #include "tremolo.h"
+#include "staff.h"
 
 //---------------------------------------------------------
 //   Stem
@@ -301,17 +302,11 @@ void Chord::layoutStem1(ScoreLayout* layout)
 
       int ticks = tuplet() ? tuplet()->baseLen() : tickLen();
       int hookIdx;
-      Spatium stemLen;
 
       bool hasStem = true;
-      if (_grace) {
-            stemLen = Spatium(2.5);
+      if (_grace)
             hookIdx = 1;
-            }
       else {
-            stemLen = Spatium((up ? uppos - 3 : 3 - downpos) / 2.0);
-            if (stemLen < Spatium(3.5))
-                  stemLen = Spatium(3.5);
             if (ticks < division/16)
                   hookIdx = 5;
             else if (ticks < division/8)
@@ -332,54 +327,15 @@ void Chord::layoutStem1(ScoreLayout* layout)
                   }
             }
 
-      int extraStemLen = hookIdx - 2;
-      if (_tremolo) {
-            int extraStemLen2 = _tremolo->subtype();
-            if (hookIdx == 0)
-                  extraStemLen2 -= 1;
-            if (extraStemLen2 > extraStemLen)
-                  extraStemLen = extraStemLen2;
-            }
-
-      if (extraStemLen > 0)
-            stemLen += extraStemLen *Spatium(0.5);
-
-      double headCorrection = 0.2;
-
-      stemLen        += Spatium((downpos - uppos) * .5 - headCorrection);
-      double pstemLen = point(stemLen);
-      QPointF npos    = stemPos(up, false);
-      if (up)
-            npos += QPointF(0, -pstemLen);
-
       if (hasStem) {
             if (!_stem) {
                   _stem = new Stem(score());
                   _stem->setMag(_mag);
                   _stem->setParent(this);
                   }
-            _stem->setLen(stemLen);
-            _stem->setPos(npos);
             }
       else
             setStem(0);
-
-      //-----------------------------------------
-      //    process tremolo
-      //-----------------------------------------
-
-      if (_tremolo) {
-            _tremolo->layout(layout);
-            qreal x  = npos.x();
-            if (!hasStem) {
-                  // center tremolo above note
-                  x = upnote->x() + upnote->headWidth() * .5;
-                  }
-            qreal y  = npos.y();
-            qreal h  = pstemLen;
-            qreal th = _tremolo->bbox().height();
-            _tremolo->setPos(x, y + h * .5 - th * .5);
-            }
 
       //-----------------------------------------
       //  process hook
@@ -391,11 +347,9 @@ void Chord::layoutStem1(ScoreLayout* layout)
             if (!_hook) {
                   _hook = new Hook(score());
                   _hook->setParent(this);
+                  _hook->setMag(_mag);
                   }
             _hook->setIdx(hookIdx, _grace);
-            qreal lw = point(score()->style()->stemWidth) * .5;
-            QPointF p = npos + QPointF(lw, up ? -lw : pstemLen);
-            _hook->setPos(p);
             }
       else
             setHook(0);
@@ -419,11 +373,13 @@ void Chord::layoutStem(ScoreLayout* layout)
       Note* upnote   = upNote();
       Note* downnote = downNote();
 
+      double staffMag = staff()->small() ? 0.7 : 1.0;
+
       double uppos   = s->staff(staffIdx() + upnote->move())->bbox().y();
-            uppos    = (uppos - sy)/_spatium * 2.0 + upnote->line();
+            uppos    = (uppos - sy)/_spatium * 2.0 * staffMag + upnote->line() * staffMag;
 
       double downpos = s->staff(staffIdx() + downnote->move())->bbox().y();
-            downpos  = (downpos - sy)/_spatium * 2.0 + downnote->line();
+            downpos  = (downpos - sy)/_spatium * 2.0 * staffMag + downnote->line() * staffMag;
 
       //-----------------------------------------
       //  process stem
@@ -437,13 +393,14 @@ void Chord::layoutStem(ScoreLayout* layout)
 
       bool hasStem = true;
       if (_grace) {
-            stemLen = Spatium(2.5);
+            stemLen = Spatium(2.5 * _mag);
             hookIdx = 1;
             }
       else {
-            stemLen = Spatium((up ? uppos - 3 : 3 - downpos) / 2.0);
-            if (stemLen < Spatium(3.5))
-                  stemLen = Spatium(3.5);
+            stemLen = Spatium((up ? uppos - 3.0 * staffMag : 3.0 * staffMag - downpos) * .5);
+            Spatium normalLen(3.5 * staffMag);
+            if (stemLen < normalLen)
+                  stemLen = normalLen;
             if (ticks < division/16)
                   hookIdx = 5;
             else if (ticks < division/8)
@@ -474,7 +431,7 @@ void Chord::layoutStem(ScoreLayout* layout)
             }
 
       if (extraStemLen > 0)
-            stemLen += extraStemLen *Spatium(0.5);
+            stemLen += extraStemLen * Spatium(0.5 * staffMag);
 
       double headCorrection = 0.2;
 
@@ -485,11 +442,6 @@ void Chord::layoutStem(ScoreLayout* layout)
             npos += QPointF(0, -pstemLen);
 
       if (hasStem) {
-            if (!_stem) {
-                  _stem = new Stem(score());
-                  _stem->setMag(_mag);
-                  _stem->setParent(this);
-                  }
             _stem->setLen(stemLen);
             _stem->setPos(npos);
             }
@@ -520,10 +472,6 @@ void Chord::layoutStem(ScoreLayout* layout)
       if (hookIdx) {
             if (!up)
                   hookIdx = -hookIdx;
-            if (!_hook) {
-                  _hook = new Hook(score());
-                  _hook->setParent(this);
-                  }
             _hook->setIdx(hookIdx, _grace);
             qreal lw = point(score()->style()->stemWidth) * .5;
             QPointF p = npos + QPointF(lw, up ? -lw : pstemLen);
@@ -540,6 +488,12 @@ void Chord::layoutStem(ScoreLayout* layout)
 void Chord::addLedgerLine(double x, double y, int i)
       {
       LedgerLine* h = new LedgerLine(score());
+      double staffMag = 1.0;
+      Spatium len = h->len();
+      if (staff()->small()) {
+            staffMag = 0.7;
+            len *= 0.7;
+            }
       h->setParent(this);
       double ho = 0.0;
       //
@@ -549,10 +503,11 @@ void Chord::addLedgerLine(double x, double y, int i)
             Note* n = in->second;
             if (n->line() >= (i-1) && n->line() <= (i+1) && n->accidental()) {
                   ho = _spatium * .25;
-                  h->setLen(h->len() - Spatium(.25));
+                  len -= Spatium(.25) * staffMag;
                   }
             }
-      h->setPos(x + ho, y + _spatium * .5 * i);
+      h->setLen(len);
+      h->setPos(x + ho, y + _spatium * .5 * i * staffMag);
       _ledgerLines.push_back(h);
       }
 
@@ -564,7 +519,6 @@ void Chord::layout(ScoreLayout* layout)
       {
       if (notes.empty())
             return;
-      setMag(small() ? .7 : 1.0);
 
       double _spatium = layout->spatium();
       Note* upnote     = notes.back();
@@ -583,9 +537,10 @@ void Chord::layout(ScoreLayout* layout)
 
       double lx = 0.0;
       System* s = segment()->measure()->system();
+      double staffMag = staff()->small() ? 0.7 : 1.0;
       for (iNote in = notes.begin(); in != notes.end(); ++in) {
             Note* note = in->second;
-            note->setMag(mag() * (note->small() ? .7 : 1.0));
+            note->setMag(mag());
 
             double x = 0.0;
 
@@ -596,7 +551,7 @@ void Chord::layout(ScoreLayout* layout)
                   maxMove = move;
             double y = s->staff(staffIdx() + move)->bbox().y();
             y        -= s->staff(staffIdx())->bbox().y();
-            y        += in->second->line() * _spatium * .5;
+            y        += in->second->line() * _spatium * .5 * staffMag;
 
             if (note->mirror())
                   x += up ? headWidth : - headWidth;
@@ -648,7 +603,7 @@ void Chord::layout(ScoreLayout* layout)
                   }
             if (uppos < 0 || downpos >= 10) {
                   double x = upnote->pos().x();
-                  x += headWidth/2 - _spatium;
+                  x += headWidth/2 - _spatium * staffMag;
 
                   double y = s->staff(staffIdx() - 1)->bbox().y();
                   y        -= s->staff(staffIdx())->bbox().y();
@@ -672,7 +627,7 @@ void Chord::layout(ScoreLayout* layout)
             }
       if (uppos < 0 || downpos >= 10) {
             double x = upnote->pos().x();
-            x += headWidth/2 - _spatium;
+            x += headWidth/2 - _spatium * staffMag;
 
             for (int i = -2; i >= uppos; i -= 2) {
                   addLedgerLine(x, 0.0, i);
@@ -700,7 +655,7 @@ void Chord::layout(ScoreLayout* layout)
                   }
             if (uppos < 0 || downpos >= 10) {
                   double x = upnote->pos().x();
-                  x += headWidth/2 - _spatium;
+                  x += headWidth/2 - _spatium * staffMag;
 
                   double y = s->staff(staffIdx() + 1)->bbox().y();
                   y        -= s->staff(staffIdx())->bbox().y();

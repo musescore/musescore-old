@@ -24,6 +24,7 @@
 #include "style.h"
 #include "staff.h"
 #include "viewer.h"
+#include "restproperties.h"
 
 //---------------------------------------------------------
 //   Rest
@@ -51,7 +52,7 @@ Rest::Rest(Score* s, int tick, int len)
 
 void Rest::draw(QPainter& p)
       {
-      symbols[_sym].draw(p);
+      symbols[_sym].draw(p, _mag);
       }
 
 //---------------------------------------------------------
@@ -232,6 +233,7 @@ void Rest::remove(Element* e)
 void Rest::layout(ScoreLayout* l)
       {
       layoutAttributes(l);
+      _mag = _small ? 0.7 : 1.0;
       }
 
 //---------------------------------------------------------
@@ -273,4 +275,34 @@ qreal Rest::downPos() const
       return symbols[_sym].bbox().y() + symbols[_sym].height();
       }
 
+//---------------------------------------------------------
+//   genPropertyMenu
+//---------------------------------------------------------
+
+bool Rest::genPropertyMenu(QMenu* popup) const
+      {
+      QAction* a = popup->addSeparator();
+      a->setText(tr("Rest"));
+      a = popup->addAction(tr("Properties..."));
+      a->setData("props");
+      return true;
+      }
+
+//---------------------------------------------------------
+//   propertyAction
+//---------------------------------------------------------
+
+void Rest::propertyAction(const QString& s)
+      {
+      if (s == "props") {
+            RestProperties vp;
+            vp.setSmall(small());
+            int rv = vp.exec();
+            if (rv) {
+                  bool val = vp.small();
+                  if (val != small())
+                        score()->undoChangeChordRestSize(this, val);
+                  }
+            }
+      }
 

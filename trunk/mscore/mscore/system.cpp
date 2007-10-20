@@ -52,6 +52,7 @@ SysStaff::SysStaff()
       {
       idx             = 0;
       sstaff          = 0;
+
       instrumentName  = 0;
       }
 
@@ -109,6 +110,7 @@ SysStaff* System::insertStaff(Staff* s, int idx)
       SysStaff* staff = new SysStaff;
       staff->sstaff   = new StaffLines(score());
       staff->sstaff->setLines(s->lines());
+      staff->sstaff->setMag(s->small() ? 0.7 : 1.0);
       staff->sstaff->setParent(this);
       insertSysStaff(staff, idx);
       setInstrumentName(idx);
@@ -253,11 +255,12 @@ double System::layout(ScoreLayout* layout, const QPointF& p, double w)
                   s->setbbox(QRectF());
                   continue;
                   }
+            double staffMag = staff->small() ? 0.7 : 1.0;
             StaffLines* sstaff = s->sstaff;
             sstaff->setPos(x, y);
             sstaff->setWidth(w - x);
-            s->setbbox(QRectF(x, y, w, 4 * _spatium));
-            y += 4 * _spatium + s->distance();
+            s->setbbox(QRectF(x, y, w, 4 * _spatium * staffMag));
+            y += 4 * _spatium + s->distance() * staffMag;
             }
 
       if (nstaves > 1 && barLine == 0) {
@@ -337,6 +340,7 @@ void System::layout2(ScoreLayout* layout)
       qreal y = 0.0;
       for (int staffIdx = 0; staffIdx < staves; ++staffIdx) {
             Staff* staff = score()->staff(staffIdx);
+            double staffMag = staff->small() ? 0.7 : 1.0;
             if (staff->isTopSplit())
                   setDistance(staffIdx, score()->style()->accoladeDistance);
             else
@@ -368,15 +372,15 @@ void System::layout2(ScoreLayout* layout)
                   continue;
                   }
             StaffLines* sstaff = s->sstaff;
-            double dy = y - sstaff->ipos().y();
+            double dy          = y - sstaff->ipos().y();
             sstaff->setPos(sstaff->ipos().x(), y);
-            s->setbbox(QRectF(s->bbox().x(), y, s->bbox().width(), 4 * _spatium));
+            s->setbbox(QRectF(s->bbox().x(), y, s->bbox().width(), 4 * _spatium * staffMag));
             // moveY measures
             if (staffIdx && dy != 0.0) {
                   foreach(Measure* m, ml)
                         m->moveY(staffIdx, dy);
                   }
-            y += 4 * _spatium + s->distance();
+            y += 4 * _spatium * staffMag + s->distance();
             }
 
       //---------------------------------------------------
@@ -394,10 +398,12 @@ void System::layout2(ScoreLayout* layout)
             QList<Part*>* pl = _score->parts();
             // double x  = m->width();
             int staffIdx = 0;
-            Spatium barLineLen(4);
+            Spatium barLineLen(4.0);
             barLineLen += score()->style()->staffLineWidth;
             foreach(Part* p, *pl) {
                   int track = staffIdx * VOICES;
+                  double staffMag = score()->staff(staffIdx)->small() ? 0.7 : 1.0;
+                  Spatium barLineLen(4.0 * staffMag);
                   for (Segment* s = m->first(); s; s = s->next()) {
                         if ((s->subtype() != Segment::SegEndBarLine)
                            && (s->subtype() != Segment::SegStartRepeatBarLine))
