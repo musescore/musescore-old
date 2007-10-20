@@ -301,11 +301,10 @@ int SlurHandler::findSlur(Slur* s)
 
 void SlurHandler::doSlurStart(Chord* chord, Notations& notations, Xml& xml)
       {
-      // search measure for slur(s) starting at this chord
-      Measure* m = (Measure*) chord->parent()->parent();
-      for (ciElement ci = m->el()->begin(); ci != m->el()->end(); ++ci) {
-            if ((*ci)->type() == SLUR) {
-                  Slur* s = (Slur*) (*ci);
+      // search for slur(s) starting at this chord
+      foreach(Element* el, *(chord->score()->gel())) {
+            if (el->type() == SLUR) {
+                  Slur* s = (Slur*) el;
                   if (s->startsAt(chord->tick(), chord->track())) {
                         // check if on slur list (i.e. stop already seen)
                         int i = findSlur(s);
@@ -345,11 +344,10 @@ void SlurHandler::doSlurStart(Chord* chord, Notations& notations, Xml& xml)
 
 void SlurHandler::doSlurStop(Chord* chord, Notations& notations, Xml& xml)
       {
-      // search measure for slur(s) stopping at this chord but not on slur list yet
-      Measure* m = (Measure*) chord->parent()->parent();
-      for (ciElement ci = m->el()->begin(); ci != m->el()->end(); ++ci) {
-            if ((*ci)->type() == SLUR) {
-                  Slur* s = (Slur*) (*ci);
+      // search for slur(s) stopping at this chord but not on slur list yet
+      foreach(Element* el, *(chord->score()->gel())) {
+            if (el->type() == SLUR) {
+                  Slur* s = (Slur*) el;
                   if (s->endsAt(chord->tick(), chord->track())) {
                         // check if on slur list
                         int i = findSlur(s);
@@ -617,6 +615,63 @@ static DirectionsAnchor* findMatchInPart(int tick, Staff* st, Score* sc, Part* p
 
 void DirectionsHandler::buildDirectionsList(Part* p, int strack, int etrack)
       {
+      // part-level elements stored in the score layout
+      foreach(Element* dir, *(cs->gel())) {
+            DirectionsAnchor* da = 0;
+            switch(dir->type()) {
+                  case HAIRPIN:
+                        {
+                        Hairpin* hp = (Hairpin*) dir;
+                        da = findMatchInPart(hp->tick(), hp->staff(), cs, p, strack, etrack);
+                        if (da) {
+                              da->setDirect(dir);
+                              storeAnchor(da);
+                              }
+                        da = findMatchInPart(hp->tick2(), hp->staff(), cs, p, strack, etrack);
+                        if (da) {
+                              da->setDirect(dir);
+                              storeAnchor(da);
+                              }
+                        }
+                        break;
+                  case OTTAVA:
+                        {
+                        Ottava* ot = (Ottava*) dir;
+                        da = findMatchInPart(ot->tick(), ot->staff(), cs, p, strack, etrack);
+                        if (da) {
+                              da->setDirect(dir);
+                              storeAnchor(da);
+                              }
+                        da = findMatchInPart(ot->tick2(), ot->staff(), cs, p, strack, etrack);
+                        if (da) {
+                              da->setDirect(dir);
+                              storeAnchor(da);
+                              }
+                        }
+                        break;
+                  case PEDAL:
+                        {
+                        Pedal* pd = (Pedal*) dir;
+                        da = findMatchInPart(pd->tick(), pd->staff(), cs, p, strack, etrack);
+                        if (da) {
+                              da->setDirect(dir);
+                              storeAnchor(da);
+                              }
+                        da = findMatchInPart(pd->tick2(), pd->staff(), cs, p, strack, etrack);
+                        if (da) {
+                              da->setDirect(dir);
+                              storeAnchor(da);
+                              }
+                        }
+                        break;
+                  default:
+                        // all others silently ignored
+                        // printf("DirectionsHandler::buildDirectionsList: direction type %s not implemented\n",
+                        //        elementNames[dir->type()]);
+                        break;
+                  }
+            }
+      // part-level elements stored in measures
       for (Measure* m = cs->mainLayout()->first(); m; m = m->next())
             buildDirectionsList(m, true, p, strack, etrack);
       }
@@ -647,55 +702,10 @@ void DirectionsHandler::buildDirectionsList(Measure* m, bool dopart, Part* p, in
                                     }
                         }
                         break;
-                  case HAIRPIN:
-                        if (dopart) {
-                              Hairpin* hp = (Hairpin*) dir;
-                              da = findMatchInPart(hp->tick(), hp->staff(), cs, p, strack, etrack);
-                              if (da) {
-                                    da->setDirect(dir);
-                                    storeAnchor(da);
-                                    }
-                              da = findMatchInPart(hp->tick2(), hp->staff(), cs, p, strack, etrack);
-                              if (da) {
-                                    da->setDirect(dir);
-                                    storeAnchor(da);
-                                    }
-                        }
-                        break;
-                  case OTTAVA:
-                        if (dopart) {
-                              Ottava* ot = (Ottava*) dir;
-                              da = findMatchInPart(ot->tick(), ot->staff(), cs, p, strack, etrack);
-                              if (da) {
-                                    da->setDirect(dir);
-                                    storeAnchor(da);
-                                    }
-                              da = findMatchInPart(ot->tick2(), ot->staff(), cs, p, strack, etrack);
-                              if (da) {
-                                    da->setDirect(dir);
-                                    storeAnchor(da);
-                                    }
-                        }
-                        break;
-                  case PEDAL:
-                        if (dopart) {
-                              Pedal* pd = (Pedal*) dir;
-                              da = findMatchInPart(pd->tick(), pd->staff(), cs, p, strack, etrack);
-                              if (da) {
-                                    da->setDirect(dir);
-                                    storeAnchor(da);
-                                    }
-                              da = findMatchInPart(pd->tick2(), pd->staff(), cs, p, strack, etrack);
-                              if (da) {
-                                    da->setDirect(dir);
-                                    storeAnchor(da);
-                                    }
-                        }
-                        break;
                   default:
                         // all others silently ignored
                         // printf("DirectionsHandler::buildDirectionsList: direction type %s not implemented\n",
-                        //       elementNames[dir->type()]);
+                        //        elementNames[dir->type()]);
                         break;
                   }
             }
@@ -1650,6 +1660,19 @@ bool ExportMusicXml::write(const QString& name)
       f.setFileName(name);
       if (!f.open(QIODevice::WriteOnly))
             return false;
+
+/*
+printf("gel contains:\n");
+foreach(Element* el, *(score->gel())) {
+      printf("%p type=%d(%s) tick=%d track=%d",
+             el, el->type(), elementNames[el->type()], el->tick(), el->track());
+      if (el->type() == SLUR) {
+           Slur * s = (Slur *) el;
+           printf(" tick2=%d track2=%d", s->tick2(), s->track2());
+           }
+      printf("\n");
+      }
+*/
 
       xml.setDevice(&f);
       xml << "<?xml version=\"1.0\" encoding=\"ISO-8859-1\"?>\n";
