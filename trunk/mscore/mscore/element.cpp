@@ -396,6 +396,15 @@ void Element::read(QDomElement e)
       }
 
 //---------------------------------------------------------
+//   setMag
+//---------------------------------------------------------
+
+void Element::setMag(double val)
+      {
+      _mag = val;
+      }
+
+//---------------------------------------------------------
 //   remove
 //---------------------------------------------------------
 
@@ -496,7 +505,7 @@ void StaffLines::draw(QPainter& p)
       p.setRenderHint(QPainter::Antialiasing, false);
 
       QPen pen(p.pen());
-      pen.setWidthF(point(score()->style()->staffLineWidth) * _mag);
+      pen.setWidthF(point(score()->style()->staffLineWidth) * mag());
       if (pen.widthF() * p.worldMatrix().m11() < 1.0)
             pen.setWidth(0);
       pen.setCapStyle(Qt::FlatCap);
@@ -511,7 +520,7 @@ void StaffLines::draw(QPainter& p)
             }
       else {
             for (int i = 0; i < lines(); ++i) {
-                  qreal y = _pos.y() + i * _spatium * _mag;
+                  qreal y = _pos.y() + i * _spatium * mag();
                   p.drawLine(QLineF(x1, y, x2, y));
                   }
             }
@@ -712,7 +721,7 @@ void Compound::setMag(double val)
       {
       for (ciElement i = elemente.begin(); i != elemente.end(); ++i)
             (*i)->setMag(val);
-      _mag = val;
+      Element::setMag(val);
       }
 
 //---------------------------------------------------------

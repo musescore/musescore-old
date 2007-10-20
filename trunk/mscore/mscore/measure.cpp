@@ -2225,7 +2225,7 @@ void Measure::read(QDomElement e, int idx)
             else if (tag == "Rest") {
                   Rest* rest = new Rest(score());
                   rest->setTick(score()->curTick);    // set default tick position
-                  rest->setParent(this);        // only for reading tuplets
+                  rest->setParent(this);              // only for reading tuplets
                   rest->setStaff(staff);
                   rest->read(e);
                   Segment* s = getSegment(rest);

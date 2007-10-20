@@ -109,6 +109,7 @@ class Element {
       Staff* _staff;
       MTime _time;
       QColor _color;
+      double _mag;              ///< 1.0
 
       void init();
 
@@ -126,7 +127,6 @@ class Element {
                                 ///< valid after call to layout()
 
       mutable MTime _duration;  ///< Note: lazy evaluation
-      double _mag;              ///< 1.0
 
    public:
       Element(Score*);
@@ -315,7 +315,7 @@ class Element {
       static Element* create(int type, Score*);
 
       double mag() const                        { return _mag;   }
-      virtual void setMag(double val)           { _mag = val;    }
+      virtual void setMag(double val);
       };
 
 //---------------------------------------------------------

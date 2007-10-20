@@ -48,7 +48,7 @@ void Symbol::setSym(int s)
 
 void Symbol::draw(QPainter& p)
       {
-      symbols[_sym].draw(p, _mag);
+      symbols[_sym].draw(p, mag());
       }
 
 //---------------------------------------------------------
@@ -58,7 +58,7 @@ void Symbol::draw(QPainter& p)
 QRectF Symbol::bbox() const
       {
       QRectF r = symbols[_sym].bbox();
-      return QRectF(r.x() * _mag, r.y() * _mag, r.width() * _mag, r.height() * _mag);
+      return QRectF(r.x() * mag(), r.y() * mag(), r.width() * mag(), r.height() * mag());
       }
 
 //---------------------------------------------------------

@@ -56,7 +56,7 @@ Stem::Stem(Score* s)
 
 void Stem::draw(QPainter& p)
       {
-      qreal lw = point(score()->style()->stemWidth) * _mag;
+      qreal lw = point(score()->style()->stemWidth) * mag();
       QPen pen(p.pen());
       pen.setWidthF(lw);
       p.setPen(pen);
@@ -330,7 +330,7 @@ void Chord::layoutStem1(ScoreLayout* layout)
       if (hasStem) {
             if (!_stem) {
                   _stem = new Stem(score());
-                  _stem->setMag(_mag);
+                  _stem->setMag(mag());
                   _stem->setParent(this);
                   }
             }
@@ -347,7 +347,7 @@ void Chord::layoutStem1(ScoreLayout* layout)
             if (!_hook) {
                   _hook = new Hook(score());
                   _hook->setParent(this);
-                  _hook->setMag(_mag);
+                  _hook->setMag(mag());
                   }
             _hook->setIdx(hookIdx, _grace);
             }
@@ -393,7 +393,7 @@ void Chord::layoutStem(ScoreLayout* layout)
 
       bool hasStem = true;
       if (_grace) {
-            stemLen = Spatium(2.5 * _mag);
+            stemLen = Spatium(2.5 * mag());
             hookIdx = 1;
             }
       else {
@@ -568,7 +568,7 @@ void Chord::layout(ScoreLayout* layout)
                         x -= headWidth;
                   accidental->setPos(x, 0);
 #else
-                  double x = accidental->x() * _mag;
+                  double x = accidental->x() * mag();
 #endif
                   if (x < lx)
                         lx = x;
@@ -1141,16 +1141,16 @@ void Chord::readSlur(QDomElement e, int /*staff*/)
 
 void Chord::setMag(double val)
       {
-      _mag = val;
+      Element::setMag(val);
       foreach(LedgerLine* ll, _ledgerLines)
-            ll->setMag(_mag);
+            ll->setMag(mag());
       if (_stem)
-            _stem->setMag(_mag);
+            _stem->setMag(mag());
       if (_hook)
-            _hook->setMag(_mag);
+            _hook->setMag(mag());
       if (_arpeggio)
-            _arpeggio->setMag(_mag);
+            _arpeggio->setMag(mag());
       if (_tremolo)
-            _tremolo->setMag(_mag);
+            _tremolo->setMag(mag());
       }
 
