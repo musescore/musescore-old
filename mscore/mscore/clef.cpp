@@ -177,10 +177,10 @@ void Clef::layout(ScoreLayout*)
                   yoff = 2.0;   //(staff()->lines() - 1) * 0.5;
                   break;
             }
-      yoff *= _mag;
+      yoff *= mag();
       addElement(symbol, .0, .0);
       setUserOff(QPointF(xoff, yoff));
-      setMag(_mag);
+      setMag(mag());
       }
 
 //---------------------------------------------------------

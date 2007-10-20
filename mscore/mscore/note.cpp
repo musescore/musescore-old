@@ -138,7 +138,7 @@ Note::~Note()
 
 double Note::headWidth() const
       {
-      return symbols[_head].width(_mag);
+      return symbols[_head].width(mag());
       }
 
 //---------------------------------------------------------
@@ -147,7 +147,7 @@ double Note::headWidth() const
 
 double Note::headHeight() const
       {
-      return symbols[_head].height(_mag);
+      return symbols[_head].height(mag());
       }
 
 //---------------------------------------------------------
@@ -246,7 +246,7 @@ void Note::add(Element* el)
                   break;
             case ACCIDENTAL:
                   _accidental = (Accidental*)el;
-                  _accidental->setMag(_mag);
+                  _accidental->setMag(mag());
                   break;
             default:
                   printf("Note::add() not impl. %s\n", el->name());
@@ -314,15 +314,15 @@ void Note::remove(Element* el)
 
 QPointF Note::stemPos(bool upFlag) const
       {
-      double sw = point(score()->style()->stemWidth) * .5 * _mag;
+      double sw = point(score()->style()->stemWidth) * .5 * mag();
       double x  = pos().x();
       double y  = pos().y();
 
       if (_mirror)
             upFlag = !upFlag;
-      qreal yo = _spatium * .2 * _mag;
+      qreal yo = _spatium * .2 * mag();
       if (upFlag) {
-            x += symbols[_head].width(_mag) - sw;
+            x += symbols[_head].width(mag()) - sw;
             y -= yo;
             }
       else {
@@ -436,19 +436,19 @@ void Note::setType(DurationType t)
 
 void Note::draw(QPainter& p)
       {
-      symbols[_head].draw(p, _mag);
+      symbols[_head].draw(p, mag());
 
       if (_dots) {
             double y = 0;
             // do not draw dots on line
             if (_line >= 0 && (_line & 1) == 0) {
                   if (chord()->isUp())
-                        y = -_spatium *.5 * _mag;
+                        y = -_spatium *.5 * mag();
                   else
-                        y = _spatium * .5 * _mag;
+                        y = _spatium * .5 * mag();
                   }
             for (int i = 1; i <= _dots; ++i)
-                  symbols[dotSym].draw(p, _mag, symbols[_head].width() + point(score()->style()->dotNoteDistance) * i, y);
+                  symbols[dotSym].draw(p, mag(), symbols[_head].width() + point(score()->style()->dotNoteDistance) * i, y);
             }
       }
 
@@ -818,8 +818,8 @@ void Note::propertyAction(const QString& s)
 
 void Note::setMag(double val)
       {
-      _mag = val;
+      Element::setMag(val);
       if (_accidental)
-            _accidental->setMag(_mag);
+            _accidental->setMag(val);
       }
 

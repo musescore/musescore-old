@@ -1287,6 +1287,7 @@ void ShowElementBase::setElement(Element* e)
       eb.previousButton->setEnabled(e->prev());
       eb.parentButton->setEnabled(e->parent());
       eb.anchorButton->setEnabled(e->anchorMeasure());
+      eb.mag->setValue(e->mag());
       }
 
 //---------------------------------------------------------

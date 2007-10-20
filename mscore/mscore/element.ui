@@ -5,7 +5,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>561</width>
+    <width>645</width>
     <height>198</height>
    </rect>
   </property>
@@ -99,9 +99,6 @@
         </item>
         <item>
          <spacer>
-          <property name="spacerName" stdset="0" >
-           <string/>
-          </property>
           <property name="orientation" >
            <enum>Qt::Horizontal</enum>
           </property>
@@ -194,9 +191,6 @@
         </item>
         <item>
          <spacer>
-          <property name="spacerName" stdset="0" >
-           <string/>
-          </property>
           <property name="orientation" >
            <enum>Qt::Horizontal</enum>
           </property>
@@ -471,9 +465,6 @@
         </item>
         <item>
          <spacer>
-          <property name="spacerName" stdset="0" >
-           <string/>
-          </property>
           <property name="orientation" >
            <enum>Qt::Horizontal</enum>
           </property>
@@ -644,6 +635,23 @@
           </property>
           <property name="maximum" >
            <double>100000.000000000000000</double>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="label_11" >
+          <property name="text" >
+           <string>Mag</string>
+          </property>
+          <property name="alignment" >
+           <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QDoubleSpinBox" name="mag" >
+          <property name="value" >
+           <double>1.000000000000000</double>
           </property>
          </widget>
         </item>

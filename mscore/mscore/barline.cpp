@@ -53,13 +53,15 @@ void BarLine::draw(QPainter& p)
       pen.setCapStyle(Qt::FlatCap);
       p.setPen(pen);
 
+      double ld = _spatium * mag();       // actual line distance
+
       switch(subtype()) {
             case BROKEN_BAR:
                   {
                   QPen pen(p.pen());
                   pen.setStyle(Qt::DashLine);
                   QVector<qreal> dashes;
-                  dashes << _spatium * .5 << _spatium * .5;
+                  dashes << ld * .5 << ld * .5;
                   pen.setDashPattern(dashes);
                   p.setPen(pen);
                   }
@@ -104,11 +106,11 @@ void BarLine::draw(QPainter& p)
                   qreal x1   =  dotw + d1 + lw/2;
                   qreal x0   =  dotw + d1 + lw + d1 + lw22;
 
-                  symbols[dotSym].draw(p, x0, 1.5 * _spatium);
-                  symbols[dotSym].draw(p, x0, 2.5 * _spatium);
+                  symbols[dotSym].draw(p, mag(), x0, 1.5 * ld);
+                  symbols[dotSym].draw(p, mag(), x0, 2.5 * ld);
                   if (split) {
-                        symbols[dotSym].draw(p, x0, h - 1.5 * _spatium);
-                        symbols[dotSym].draw(p, x0, h - 2.5 * _spatium);
+                        symbols[dotSym].draw(p, mag(), x0, h - 1.5 * ld);
+                        symbols[dotSym].draw(p, mag(), x0, h - 2.5 * ld);
                         }
 
                   p.drawLine(QLineF(x1, 0.0, x1, h));
@@ -129,11 +131,11 @@ void BarLine::draw(QPainter& p)
                   qreal x1   =  dotw + d1 + lw/2;
                   qreal x2   =  dotw + d1 + lw + d1 + lw22;
 
-                  symbols[dotSym].draw(p, x0, 1.5 * _spatium);
-                  symbols[dotSym].draw(p, x0, 2.5 * _spatium);
+                  symbols[dotSym].draw(p, mag(), x0, 1.5 * ld);
+                  symbols[dotSym].draw(p, mag(), x0, 2.5 * ld);
                   if (split) {
-                        symbols[dotSym].draw(p, x0, h - 1.5 * _spatium);
-                        symbols[dotSym].draw(p, x0, h - 2.5 * _spatium);
+                        symbols[dotSym].draw(p, mag(), x0, h - 1.5 * ld);
+                        symbols[dotSym].draw(p, mag(), x0, h - 2.5 * ld);
                         }
 
                   p.drawLine(QLineF(x1, 0.0, x1, h));
@@ -157,15 +159,15 @@ void BarLine::draw(QPainter& p)
                   qreal x3   =  dotw + d1 + lw + d1 + lw2 + d1 + lw/2;
                   qreal x4   =  dotw + d1 + lw + d1 + lw2 + d1 + lw + d1 - dotw/2;
 
-                  symbols[dotSym].draw(p, x0, 1.5 * _spatium);
-                  symbols[dotSym].draw(p, x0, 2.5 * _spatium);
-                  symbols[dotSym].draw(p, x4, 1.5 * _spatium);
-                  symbols[dotSym].draw(p, x4, 2.5 * _spatium);
+                  symbols[dotSym].draw(p, mag(), x0, 1.5 * ld);
+                  symbols[dotSym].draw(p, mag(), x0, 2.5 * ld);
+                  symbols[dotSym].draw(p, mag(), x4, 1.5 * ld);
+                  symbols[dotSym].draw(p, mag(), x4, 2.5 * ld);
                   if (split) {
-                        symbols[dotSym].draw(p, x0, h - 1.5 * _spatium);
-                        symbols[dotSym].draw(p, x0, h - 2.5 * _spatium);
-                        symbols[dotSym].draw(p, x4, h - 1.5 * _spatium);
-                        symbols[dotSym].draw(p, x4, h - 2.5 * _spatium);
+                        symbols[dotSym].draw(p, mag(), x0, h - ld);
+                        symbols[dotSym].draw(p, mag(), x0, h - ld);
+                        symbols[dotSym].draw(p, mag(), x4, h - ld);
+                        symbols[dotSym].draw(p, mag(), x4, h - ld);
                         }
 
                   p.drawLine(QLineF(x1, 0.0, x1, h));

@@ -52,7 +52,7 @@ Rest::Rest(Score* s, int tick, int len)
 
 void Rest::draw(QPainter& p)
       {
-      symbols[_sym].draw(p, _mag);
+      symbols[_sym].draw(p, mag());
       }
 
 //---------------------------------------------------------
@@ -233,7 +233,6 @@ void Rest::remove(Element* e)
 void Rest::layout(ScoreLayout* l)
       {
       layoutAttributes(l);
-      _mag = _small ? 0.7 : 1.0;
       }
 
 //---------------------------------------------------------
