@@ -1,6 +1,9 @@
-20.10.7 (lv)
+20.10.7 (ws)
+      - first code for "small" staves
+        (lv)
       - MusicXML export of hairpins, ottavas, pedal lines and slurs
 19.10.7 (ws)
+      - added "small" property for rests
       - implemented "small" property for notes/chords
 18.10.7 (ws)
       - updated italian translation from Angelo Contardi

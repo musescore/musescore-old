@@ -421,8 +421,6 @@ void Measure::layoutChord(Chord* chord, char* tversatz)
             if (accCol > 5)
                   accCol = 0;
             double x = - point(score()->style()->prefixNoteDistance) * ac->mag();
-            if (note->small())
-                  x *= .5;
             x  -= ac->width();
             x  *= (accCol + 1);
             if (mirror)

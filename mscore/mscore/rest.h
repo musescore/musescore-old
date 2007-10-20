@@ -28,6 +28,8 @@
 //---------------------------------------------------------
 
 class Rest : public ChordRest {
+      Q_DECLARE_TR_FUNCTIONS(Rest)
+
       int _sym;
       int _move;              // -1, 0, +1
 
@@ -61,6 +63,8 @@ class Rest : public ChordRest {
       virtual Element* drop(const QPointF&, const QPointF&, Element*);
       virtual void layout(ScoreLayout*);
       virtual QRectF bbox() const;
+      virtual bool genPropertyMenu(QMenu*) const;
+      virtual void propertyAction(const QString&);
       };
 
 #endif

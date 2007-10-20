@@ -316,8 +316,9 @@ bool ChordRest::readProperties(QDomElement e)
 void ChordRest::setSmall(bool val)
       {
       _small = val;
-      // TODO: implement staff size
       _mag = _small ? .7 : 1.0;
+      if (staff()->small())
+            _mag *= .7;
       }
 
 //---------------------------------------------------------

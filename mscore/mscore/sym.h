@@ -50,9 +50,9 @@ class Sym {
 
       QFont font(double mag = 1.0) const;
       const char* name() const { return _name; }
-      const QRectF bbox() const;
-      double width() const;
-      double height() const;
+      const QRectF bbox(double mag = 1.0) const;
+      double width(double mag = 1.0) const;
+      double height(double mag = 1.0) const;
       QChar code() const           { return _code;   }
       int getFontId() const        { return fontId;  }
       void setCode(const QChar& c) { _code = c;      }

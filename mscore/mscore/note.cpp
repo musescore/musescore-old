@@ -138,7 +138,7 @@ Note::~Note()
 
 double Note::headWidth() const
       {
-      return symbols[_head].width() * _mag;
+      return symbols[_head].width(_mag);
       }
 
 //---------------------------------------------------------
@@ -147,7 +147,7 @@ double Note::headWidth() const
 
 double Note::headHeight() const
       {
-      return symbols[_head].height() * _mag;
+      return symbols[_head].height(_mag);
       }
 
 //---------------------------------------------------------
@@ -314,22 +314,22 @@ void Note::remove(Element* el)
 
 QPointF Note::stemPos(bool upFlag) const
       {
-      double sw = point(score()->style()->stemWidth) * .5;
-      double x = pos().x();
-      double y = pos().y();
+      double sw = point(score()->style()->stemWidth) * .5 * _mag;
+      double x  = pos().x();
+      double y  = pos().y();
 
       if (_mirror)
             upFlag = !upFlag;
-      qreal xo = symbols[_head].bbox().x();
+      qreal yo = _spatium * .2 * _mag;
       if (upFlag) {
-            x += symbols[_head].width() * _mag - sw;
-            y -= _spatium * .2;
+            x += symbols[_head].width(_mag) - sw;
+            y -= yo;
             }
       else {
             x += sw;
-            y += _spatium * .2;
+            y += yo;
             }
-      return QPointF(x + xo, y);
+      return QPointF(x, y);
       }
 
 //---------------------------------------------------------
@@ -810,17 +810,6 @@ void Note::propertyAction(const QString& s)
                         score()->undoChangeChordRestSize(chord(), val);
                   }
             }
-      }
-
-//---------------------------------------------------------
-//   setSmall
-//---------------------------------------------------------
-
-void Note::setSmall(bool val)
-      {
-      _small = val;
-      // TODO: implement chord size
-      setMag(_small ? .7 : 1.0);
       }
 
 //---------------------------------------------------------
