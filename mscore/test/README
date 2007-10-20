@@ -27,6 +27,11 @@ slur2.msc
 testKeysig2.msc
 testTimesig2.msc
 
+testsmall.msc
+      - small note, chord, rest, hook, stem
+      - small staff
+            - small chord in small staff
+
 -------------------------------------------------
       MIDI Testfiles
 -------------------------------------------------
