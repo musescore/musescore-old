@@ -210,18 +210,6 @@ void Canvas::objectPopup(const QPoint& pos, Element* obj)
       a->setData("color");
       obj->genPropertyMenu(popup);
       popup->addSeparator();
-
-      // Added by DK
-      if ( obj->type() == REPEAT ||
-            obj->type() == REPEAT_MEASURE ||
-            (obj->type() == BAR_LINE &&
-                  (obj->subtype() == END_REPEAT ||
-                   obj->subtype() == START_REPEAT ||
-                   obj->subtype() == END_START_REPEAT))) {
-            if (RepeatFlag().genPropertyMenu(popup))
-                  popup->addSeparator();
-            }
-
       a = popup->addAction(tr("Object Inspector"));
       a->setData("list");
       a = popup->exec(pos);
@@ -243,20 +231,8 @@ void Canvas::objectPopup(const QPoint& pos, Element* obj)
             if (startEdit(obj))
                   return;
             }
-      else {
-            // Added by DK
-            if ( obj->type() == REPEAT ||
-                  obj->type() == REPEAT_MEASURE ||
-                  (obj->type() == BAR_LINE &&
-                        (obj->subtype() == END_REPEAT ||
-                         obj->subtype() == START_REPEAT ||
-                         obj->subtype() == END_START_REPEAT))) {
-                  RepeatFlag().propertyAction(cmd, obj);
-                  }
-            else {
-                  obj->propertyAction(cmd);
-                  }
-            }
+      else
+            obj->propertyAction(cmd);
       _score->endCmd();
       }
 

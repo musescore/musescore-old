@@ -339,7 +339,7 @@ void System::layout2(ScoreLayout* layout)
 
       qreal y = 0.0;
       for (int staffIdx = 0; staffIdx < staves; ++staffIdx) {
-            Staff* staff = score()->staff(staffIdx);
+            Staff* staff    = score()->staff(staffIdx);
             double staffMag = staff->small() ? 0.7 : 1.0;
             if (staff->isTopSplit())
                   setDistance(staffIdx, score()->style()->accoladeDistance);
@@ -398,8 +398,7 @@ void System::layout2(ScoreLayout* layout)
             QList<Part*>* pl = _score->parts();
             // double x  = m->width();
             int staffIdx = 0;
-            Spatium barLineLen(4.0);
-            barLineLen += score()->style()->staffLineWidth;
+            // barLineLen += score()->style()->staffLineWidth;
             foreach(Part* p, *pl) {
                   int track = staffIdx * VOICES;
                   double staffMag = score()->staff(staffIdx)->small() ? 0.7 : 1.0;
