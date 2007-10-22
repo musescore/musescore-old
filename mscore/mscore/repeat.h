@@ -66,6 +66,8 @@ enum RepeatType {
 //---------------------------------------------------------
 
 class Repeat : public Element {
+      Q_DECLARE_TR_FUNCTIONS(Measure)
+
       static QMap<QString, int> mapSI;
       static QMap<int, QString> mapIS;
       static bool initialized;
@@ -86,6 +88,9 @@ class Repeat : public Element {
 
       virtual const QString subtypeName() const;
       virtual void setSubtype(const QString& s);
+
+      virtual bool genPropertyMenu(QMenu*) const;
+      virtual void propertyAction(const QString&);
       };
 
 #endif

@@ -22,6 +22,7 @@
 #include "layout.h"
 #include "sym.h"
 #include "score.h"
+#include "repeatproperties.h"
 
 struct RepeatDict {
       int type;
@@ -272,5 +273,33 @@ QRectF Repeat::bbox() const
                   break;
             }
       return bb;
+      }
+
+//---------------------------------------------------------
+//   genPropertyMenu
+//---------------------------------------------------------
+
+bool Repeat::genPropertyMenu(QMenu* popup) const
+      {
+      QAction* a = popup->addAction(tr("Properties..."));
+      a->setData("props");
+printf("genPropertyMEnu\n");
+      return true;
+      }
+
+//---------------------------------------------------------
+//   propertyAction
+//---------------------------------------------------------
+
+void Repeat::propertyAction(const QString& s)
+      {
+      if (s == "props") {
+printf("propertyAction\n");
+            RepeatProperties rp;
+            int rv = rp.exec();
+            if (rv) {
+                  printf("OK\n");
+                  }
+            }
       }
 

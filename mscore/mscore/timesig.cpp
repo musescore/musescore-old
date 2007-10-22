@@ -250,9 +250,9 @@ void TimeSig::draw(QPainter& p)
       if (st == 0)
             return;
       if (st ==  TSIG_FOUR_FOUR)
-            symbols[fourfourmeterSym].draw(p, 0.0, 2.0 * _spatium);
+            symbols[fourfourmeterSym].draw(p, mag(), 0.0, 2.0 * _spatium * mag());
       else if (st == TSIG_ALLA_BREVE)
-            symbols[allabreveSym].draw(p, 0.0, 2.0 * _spatium);
+            symbols[allabreveSym].draw(p, mag(), 0.0, 2.0 * _spatium * mag());
       else {
             int n, z1, z2, z3, z4;
             getSig(&n, &z1, &z2, &z3, &z4);
@@ -264,14 +264,14 @@ void TimeSig::draw(QPainter& p)
             if (z4)
                   zs += QString("+%1").arg(z4);
             QString ns = QString("%1").arg(n);
-            p.setFont(symbols[allabreveSym].font());
+            p.setFont(symbols[allabreveSym].font(mag()));
 
-            QRectF r(0.0, 0.0 * _spatium, 0.0, 0.0);
+            QRectF r(0.0, 0.0 * _spatium , 0.0, 0.0);
             QRectF rz = p.boundingRect(r, Qt::AlignLeft | Qt::TextDontClip, zs);
             QRectF rn = p.boundingRect(r, Qt::AlignLeft | Qt::TextDontClip, ns);
 
-            p.drawText(QPointF(0.0, 2.0 * _spatium), zs);
-            p.drawText(QPointF((rz.width()-rn.width())*.5, 4.0 * _spatium), ns);
+            p.drawText(QPointF(0.0, 2.0 * _spatium * mag()), zs);
+            p.drawText(QPointF((rz.width()-rn.width())*.5, 4.0 * _spatium * mag()), ns);
             }
       }
 

@@ -151,23 +151,24 @@ void KeySig::draw(QPainter& p)
       char t1     = subtype() & 0xff;
       char t2     = (subtype() & 0xff00) >> 8;
       qreal xo    = 0.0;
+      double ld   = _spatium * mag();
 
       switch(t2) {
-            case 7: ns->draw(p, 6.0 * _spatium, (yoff + 2.0) * _spatium); xo += 1.0;
-            case 6: ns->draw(p, 5.0 * _spatium, (yoff + .5) * _spatium);  xo += 1.0;
-            case 5: ns->draw(p, 4.0 * _spatium, (yoff + 2.5) * _spatium); xo += 1.0;
-            case 4: ns->draw(p, 3.0 * _spatium, (yoff + 1.0) * _spatium); xo += 1.0;
-            case 3: ns->draw(p, 2.0 * _spatium, (yoff - .5) * _spatium);  xo += 1.0;
-            case 2: ns->draw(p, 1.0 * _spatium, (yoff + 1.5) * _spatium); xo += 1.0;
-            case 1: ns->draw(p, 0.0, yoff * _spatium);                    xo += 1.5;
+            case 7: ns->draw(p, mag(), 6.0 * ld, (yoff + 2.0) * ld); xo += 1.0;
+            case 6: ns->draw(p, mag(), 5.0 * ld, (yoff + 0.5) * ld); xo += 1.0;
+            case 5: ns->draw(p, mag(), 4.0 * ld, (yoff + 2.5) * ld); xo += 1.0;
+            case 4: ns->draw(p, mag(), 3.0 * ld, (yoff + 1.0) * ld); xo += 1.0;
+            case 3: ns->draw(p, mag(), 2.0 * ld, (yoff - 0.5) * ld); xo += 1.0;
+            case 2: ns->draw(p, mag(), 1.0 * ld, (yoff + 1.5) * ld); xo += 1.0;
+            case 1: ns->draw(p, mag(), 0.0, yoff * ld);              xo += 1.5;
                   break;
-            case -7: ns->draw(p, 6.0 * _spatium, (yoff + 3.5) * _spatium); xo += 1.0;
-            case -6: ns->draw(p, 5.0 * _spatium, (yoff + 1.5) * _spatium); xo += 1.0;
-            case -5: ns->draw(p, 4.0 * _spatium, (yoff + 3.0) * _spatium); xo += 1.0;
-            case -4: ns->draw(p, 3.0 * _spatium, (yoff + 1.0) * _spatium); xo += 1.0;
-            case -3: ns->draw(p, 2.0 * _spatium, (yoff + 2.5) * _spatium); xo += 1.0;
-            case -2: ns->draw(p, 1.0 * _spatium, (yoff + 0.5) * _spatium); xo += 1.0;
-            case -1: ns->draw(p, 0.0 * _spatium, (yoff + 2.0) * _spatium); xo += 1.5;
+            case -7: ns->draw(p, mag(), 6.0 * ld, (yoff + 3.5) * ld); xo += 1.0;
+            case -6: ns->draw(p, mag(), 5.0 * ld, (yoff + 1.5) * ld); xo += 1.0;
+            case -5: ns->draw(p, mag(), 4.0 * ld, (yoff + 3.0) * ld); xo += 1.0;
+            case -4: ns->draw(p, mag(), 3.0 * ld, (yoff + 1.0) * ld); xo += 1.0;
+            case -3: ns->draw(p, mag(), 2.0 * ld, (yoff + 2.5) * ld); xo += 1.0;
+            case -2: ns->draw(p, mag(), 1.0 * ld, (yoff + 0.5) * ld); xo += 1.0;
+            case -1: ns->draw(p, mag(), 0.0 * ld, (yoff + 2.0) * ld); xo += 1.5;
             case 0:
                   break;
             default:
@@ -176,21 +177,21 @@ void KeySig::draw(QPainter& p)
             }
 
       switch(t1) {
-            case 7:     ss->draw(p, (xo + 6.0) * _spatium, (yoff + 2.0) * _spatium);
-            case 6:     ss->draw(p, (xo + 5.0) * _spatium, (yoff + 0.5) * _spatium);
-            case 5:     ss->draw(p, (xo + 4.0) * _spatium, (yoff + 2.5) * _spatium);
-            case 4:     ss->draw(p, (xo + 3.0) * _spatium, (yoff + 1.0) * _spatium);
-            case 3:     ss->draw(p, (xo + 2.0) * _spatium, (yoff - 0.5) * _spatium);
-            case 2:     ss->draw(p, (xo + 1.0) * _spatium, (yoff + 1.5) * _spatium);
-            case 1:     ss->draw(p, (xo + 0.0) * _spatium, (yoff) * _spatium);
+            case 7:     ss->draw(p, mag(), (xo + 6.0) * ld, (yoff + 2.0) * ld);
+            case 6:     ss->draw(p, mag(), (xo + 5.0) * ld, (yoff + 0.5) * ld);
+            case 5:     ss->draw(p, mag(), (xo + 4.0) * ld, (yoff + 2.5) * ld);
+            case 4:     ss->draw(p, mag(), (xo + 3.0) * ld, (yoff + 1.0) * ld);
+            case 3:     ss->draw(p, mag(), (xo + 2.0) * ld, (yoff - 0.5) * ld);
+            case 2:     ss->draw(p, mag(), (xo + 1.0) * ld, (yoff + 1.5) * ld);
+            case 1:     ss->draw(p, mag(), (xo + 0.0) * ld, (yoff)       * ld);
                   break;
-            case -7:    fs->draw(p, (xo + 6.0) * _spatium, (yoff + 3.5) * _spatium);
-            case -6:    fs->draw(p, (xo + 5.0) * _spatium, (yoff + 1.5) * _spatium);
-            case -5:    fs->draw(p, (xo + 4.0) * _spatium, (yoff + 3.0) * _spatium);
-            case -4:    fs->draw(p, (xo + 3.0) * _spatium, (yoff + 1.0) * _spatium);
-            case -3:    fs->draw(p, (xo + 2.0) * _spatium, (yoff + 2.5) * _spatium);
-            case -2:    fs->draw(p, (xo + 1.0) * _spatium, (yoff + 0.5) * _spatium);
-            case -1:    fs->draw(p, (xo + 0.0) * _spatium, (yoff + 2.0) * _spatium);
+            case -7:    fs->draw(p, mag(), (xo + 6.0) * ld, (yoff + 3.5) * ld);
+            case -6:    fs->draw(p, mag(), (xo + 5.0) * ld, (yoff + 1.5) * ld);
+            case -5:    fs->draw(p, mag(), (xo + 4.0) * ld, (yoff + 3.0) * ld);
+            case -4:    fs->draw(p, mag(), (xo + 3.0) * ld, (yoff + 1.0) * ld);
+            case -3:    fs->draw(p, mag(), (xo + 2.0) * ld, (yoff + 2.5) * ld);
+            case -2:    fs->draw(p, mag(), (xo + 1.0) * ld, (yoff + 0.5) * ld);
+            case -1:    fs->draw(p, mag(), (xo + 0.0) * ld, (yoff + 2.0) * ld);
             case 0:
                   break;
             default:
