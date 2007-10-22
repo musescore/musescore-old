@@ -115,14 +115,12 @@ Element* TimeSig::drop(const QPointF&, const QPointF&, Element* e)
       if (e->type() == TIMESIG) {
             TimeSig* ts = (TimeSig*)e;
             int stype   = ts->subtype();
-            delete ts;
             int st = subtype();
             if (st != stype) {
                   // change timesig applies to all staves, can't simply set subtype
                   // for this one only
                   score()->changeTimeSig(tick(), stype);
                   }
-            return this;
             }
       delete e;
       return 0;

@@ -333,7 +333,6 @@ void Score::processUndoOp(UndoOp* i, bool undo)
             case UndoOp::ChangeSubtype:
                   {
                   int st = i->obj->subtype();
-                  // int t = i->obj->type();
                   i->obj->setSubtype(i->val1);
                   i->val1 = st;
                   }
@@ -692,6 +691,21 @@ void Score::undoChangeElement(Element* oldElement, Element* newElement)
       i.type     = UndoOp::ChangeElement;
       i.obj      = oldElement;
       i.obj2     = newElement;
+      undoList.back()->push_back(i);
+      processUndoOp(&undoList.back()->back(), false);
+      }
+
+//---------------------------------------------------------
+//   undoChangeSubtype
+//---------------------------------------------------------
+
+void Score::undoChangeSubtype(Element* element, int st)
+      {
+      checkUndoOp();
+      UndoOp i;
+      i.type     = UndoOp::ChangeSubtype;
+      i.obj      = element;
+      i.val1     = st;
       undoList.back()->push_back(i);
       processUndoOp(&undoList.back()->back(), false);
       }
