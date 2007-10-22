@@ -429,8 +429,15 @@ void Score::changeTimeSig(int tick, int timeSigSubtype)
                               break;
                               }
                         }
-                  if (ts)
+                  if (ts) {
+                        for (int staffIdx = 0; staffIdx < _staves.size(); ++staffIdx) {
+                              int track = staffIdx * VOICES;
+                              Element* e = ts->element(track);
+                              if (e && e->subtype() != timeSigSubtype)
+                                    undoChangeSubtype(e, timeSigSubtype);
+                              }
                         return;
+                        }
                   }
             // no: we have to add a symbol
             addTimeSig(tick, timeSigSubtype);
