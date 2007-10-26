@@ -114,7 +114,7 @@ PageListEditor::PageListEditor(Score* s)
       QHBoxLayout* hbox = new QHBoxLayout;
       setLayout(hbox);
 
-      QSplitter* split  = new QSplitter;
+      split = new QSplitter;
       split->setOpaqueResize(true);
 
       hbox->addWidget(split);
@@ -203,7 +203,26 @@ PageListEditor::PageListEditor(Score* s)
       connect(list, SIGNAL(itemExpanded(QTreeWidgetItem*)), SLOT(itemExpanded(QTreeWidgetItem*)));
       connect(list, SIGNAL(itemCollapsed(QTreeWidgetItem*)), SLOT(itemExpanded(QTreeWidgetItem*)));
       list->resizeColumnToContents(0);
-      resize(1000, 300);
+      QSettings settings;
+      settings.beginGroup("Inspector");
+      split->restoreState(settings.value("splitter").toByteArray());
+      resize(settings.value("size", QSize(1000, 500)).toSize());
+      move(settings.value("pos", QPoint(10, 10)).toPoint());
+      settings.endGroup();
+      }
+
+//---------------------------------------------------------
+//   ~PageListEditor
+//---------------------------------------------------------
+
+PageListEditor::~PageListEditor()
+      {
+      QSettings settings;
+      settings.beginGroup("Inspector");
+      settings.setValue("size", size());
+      settings.setValue("pos", pos());
+      settings.setValue("splitter", split->saveState());
+      settings.endGroup();
       }
 
 //---------------------------------------------------------

@@ -100,6 +100,7 @@ Note::Note(Score* s)
       _tpc            = -1;
       _headGroup      = 0;
       _small          = false;
+      _hidden         = false;
       }
 
 //---------------------------------------------------------
@@ -436,7 +437,8 @@ void Note::setType(DurationType t)
 
 void Note::draw(QPainter& p)
       {
-      symbols[_head].draw(p, mag());
+      if (!_hidden)
+            symbols[_head].draw(p, mag());
 
       if (_dots) {
             double y = 0;

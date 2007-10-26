@@ -120,7 +120,6 @@ class Chord : public ChordRest {
       Tremolo* _tremolo;
 
       void computeUp();
-      void readSlur(QDomElement, int staff);
       virtual qreal upPos()   const;
       virtual qreal downPos() const;
       virtual qreal centerX() const;

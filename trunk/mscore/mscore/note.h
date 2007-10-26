@@ -82,7 +82,7 @@ class Note : public Element {
       int _userAccidental;    ///< editorial accidental type (0-15)
       Accidental* _accidental;
 
-      int _head;              ///< Note head.
+      int _head;              ///< note head symbol number
       int _headGroup;
       DurationType _durationType;
       bool _mirror;           ///< True if note is mirrored at stem.
@@ -94,6 +94,9 @@ class Note : public Element {
 
       int _lineOffset;        ///< Used during mouse dragging.
       bool _small;
+      bool _hidden;           ///< markes this note as the hidden one if there are
+                              ///< overlapping notes; hidden notes are not played
+                              ///< and heads are not shown
 
       virtual bool isMovable() const { return true; }
       virtual QRectF drag(const QPointF& s);
@@ -167,6 +170,9 @@ class Note : public Element {
 
       bool isSimple(Xml&) const;
       virtual void setMag(double val);
+
+      bool hidden() const           { return _hidden; }
+      void setHidden(bool val)      { _hidden = val;  }
       };
 
 //---------------------------------------------------------

@@ -1472,6 +1472,8 @@ void Score::collectMeasureEvents(QMap<int, Event>* events, Measure* m, int staff
 
                   for (iNote in = nl->begin(); in != nl->end(); ++in) {
                         Note* note = in->second;
+                        if (note->hidden())       // do not play overlapping notes
+                              continue;
                         if (note->tieBack())
                               continue;
                         unsigned len = 0;
