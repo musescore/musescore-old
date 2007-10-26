@@ -45,6 +45,7 @@ class DoubleLabel;
 class Score;
 
 class ShowNoteWidget;
+// class QSplitter;
 
 //---------------------------------------------------------
 //   PageListEditor
@@ -55,6 +56,8 @@ class PageListEditor : public QWidget {
 
       QStackedWidget* stack;
       QTreeWidget* list;
+      QSplitter* split;
+
       ShowElementBase* pagePanel;
       ShowElementBase* systemPanel;
       ShowElementBase* measurePanel;
@@ -91,6 +94,7 @@ class PageListEditor : public QWidget {
 
    public:
       PageListEditor(Score*);
+      ~PageListEditor();
 	void updateList();
       };
 

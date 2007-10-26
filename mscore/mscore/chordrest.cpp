@@ -315,13 +315,11 @@ bool ChordRest::readProperties(QDomElement e)
 
 void ChordRest::setSmall(bool val)
       {
-printf("ChordRest setSmall %d  %f  staff %d\n", val, mag(), staff()->small());
       _small = val;
       double m   = _small ? .7 : 1.0;
       if (staff()->small())
             m *= .7;
       setMag(m);
-printf("    mag %f\n", m);
       }
 
 //---------------------------------------------------------

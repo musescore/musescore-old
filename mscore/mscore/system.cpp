@@ -420,7 +420,7 @@ void System::layout2(ScoreLayout* layout)
             }
 
       if (barLine)
-            barLine->setHeight(bbox().height());
+            barLine->setHeight(systemHeight);
 
       //---------------------------------------------------
       //  layout brackets

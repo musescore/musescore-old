@@ -116,6 +116,7 @@ class ScoreLayout : public Element {
       QList<Element*> items(const QPointF& p) { return bspTree.items(p); }
       void setInstrumentNames();
       void connectTies();
+      void searchHiddenNotes();
       QList<Element*>* gel()                  { return &_gel; }
       const QList<Element*>* gel() const      { return &_gel; }
 

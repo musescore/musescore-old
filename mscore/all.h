@@ -57,6 +57,7 @@
 #include <QtGui/QKeyEvent>
 #include <QtGui/QMenu>
 #include <QtGui/QMenuBar>
+#include <QtGui/QSplitter>
 #ifndef __MINGW32__
 #include <QtGui/QX11Info>
 #endif

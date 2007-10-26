@@ -781,6 +781,48 @@ void ScoreLayout::connectTies()
       }
 
 //---------------------------------------------------------
+//   searchHiddenNotes
+//---------------------------------------------------------
+
+void ScoreLayout::searchHiddenNotes()
+      {
+      int staves = _score->nstaves();
+      for (Measure* m = first(); m; m = m->next()) {
+            for (Segment* s = m->first(); s; s = s->next()) {
+                  if (s->subtype() != Segment::SegChordRest)
+                        continue;
+                  for (int staffIdx = 0; staffIdx < staves; ++staffIdx) {
+                        for (int voice = 0; voice < VOICES; ++voice) {
+                              Element* el = s->element(staffIdx * VOICES + voice);
+                              if (el == 0 || el->type() != CHORD)
+                                    continue;
+                              NoteList* nl = ((Chord*)el)->noteList();
+                              for (iNote in = nl->begin(); in != nl->end(); ++in) {
+                                    Note* note = in->second;
+                                    for (int v2 = voice; v2 < VOICES; ++v2) {
+                                          Element* e = s->element(staffIdx * VOICES + v2);
+                                          if (e == 0 || e->type() != CHORD)
+                                                continue;
+                                          NoteList* nl2 = ((Chord*)e)->noteList();
+                                          for (iNote in2 = nl2->begin(); in2 != nl2->end(); ++in2) {
+                                                Note* note2 = in2->second;
+                                                if (note2->hidden())
+                                                      continue;
+                                                if (note2->pitch() == note->pitch()) {
+                                                      if (e->tickLen() > el->tickLen())
+                                                            note->setHidden(true);
+                                                      }
+                                                }
+                                          }
+                                    }
+                              }
+                        }
+                  }
+            }
+      }
+
+
+//---------------------------------------------------------
 //   erase
 //---------------------------------------------------------
 

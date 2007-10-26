@@ -809,6 +809,7 @@ bool Score::loadFile(QFile* qf)
                   }
             }
       _layout->connectTies();
+      _layout->searchHiddenNotes();
       searchSelectedElements();
       _fileDivision = division;
       return false;

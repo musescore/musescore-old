@@ -109,7 +109,7 @@ class Element {
       Staff* _staff;
       MTime _time;
       QColor _color;
-      double _mag;              ///< 1.0
+      double _mag;              ///< standard magnification (derived value)
 
       void init();
 
