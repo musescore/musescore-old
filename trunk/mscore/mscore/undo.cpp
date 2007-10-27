@@ -80,7 +80,8 @@ static const char* undoName[] = {
       "ChangeRepeatFlags",
       "ChangeEndBarLine",
       "ChangeVoltaEnding", "ChangeVoltaText",
-      "ChangeChordRestSize"
+      "ChangeChordRestSize",
+      "ChangeNoteHead"
       };
 
 static bool UNDO = false;
@@ -539,6 +540,14 @@ void Score::processUndoOp(UndoOp* i, bool undo)
                   i->val1 = small;
                   }
                   break;
+            case UndoOp::ChangeNoteHead:
+                  {
+                  Note* note = (Note*)i->obj;
+                  int headGroup = note->headGroup();
+                  note->setHeadGroup(i->val1);
+                  i->val1 = headGroup;
+                  }
+                  break;
             }
       UNDO = FALSE;
       }
@@ -706,6 +715,21 @@ void Score::undoChangeSubtype(Element* element, int st)
       i.type     = UndoOp::ChangeSubtype;
       i.obj      = element;
       i.val1     = st;
+      undoList.back()->push_back(i);
+      processUndoOp(&undoList.back()->back(), false);
+      }
+
+//---------------------------------------------------------
+//   undoChangeNoteHead
+//---------------------------------------------------------
+
+void Score::undoChangeNoteHead(Note* note, int group)
+      {
+      checkUndoOp();
+      UndoOp i;
+      i.type     = UndoOp::ChangeNoteHead;
+      i.obj      = note;
+      i.val1     = group;
       undoList.back()->push_back(i);
       processUndoOp(&undoList.back()->back(), false);
       }

@@ -758,14 +758,17 @@ Element* Note::drop(const QPointF&, const QPointF&, Element* e)
             case NOTEHEAD:
                   {
                   Symbol* s = (Symbol*)e;
+                  int group = _headGroup;
                   switch(s->sym()) {
-                        case quartheadSym:    _headGroup = 0; break;
-                        case crossedheadSym:  _headGroup = 1; break;
-                        case diamondheadSym:  _headGroup = 2; break;
-                        case triangleheadSym: _headGroup = 3; break;
+                        case quartheadSym:    group = 0; break;
+                        case crossedheadSym:  group = 1; break;
+                        case diamondheadSym:  group = 2; break;
+                        case triangleheadSym: group = 3; break;
                         default: printf("unknown note head\n"); break;
                         }
                   delete s;
+                  if (group != _headGroup)
+                        score()->undoChangeNoteHead(this, group);
                   }
                   break;
             case TREMOLO:
