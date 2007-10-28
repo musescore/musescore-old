@@ -787,6 +787,20 @@ void Score::readStaff(QDomElement e)
                   measure->read(e, staff);
                   curTick = measure->tick() + sigmap->ticksMeasure(measure->tick());
                   }
+            else if (tag == "HBox") {
+                  Measure* measure = new Measure(this);
+                  measure->setSubtype(MEASURE_HBOX);
+                  _layout->push_back(measure);
+                  measure->setTick(curTick);
+                  measure->read(e, staff);
+                  }
+            else if (tag == "VBox") {
+                  Measure* measure = new Measure(this);
+                  measure->setSubtype(MEASURE_VBOX);
+                  _layout->push_back(measure);
+                  measure->setTick(curTick);
+                  measure->read(e, staff);
+                  }
             else
                   domError(e);
             }

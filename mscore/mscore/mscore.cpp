@@ -255,6 +255,7 @@ MuseScore::MuseScore()
          << "top-chord" << "bottom-chord" << "next-chord" << "prev-chord"
          << "next-measure" << "prev-measure" << "print" << "undo"
          << "redo" << "append-measure" << "append-measures" << "insert-measure" << "insert-measures"
+         << "insert-hbox" << "insert-vbox"
          << "duplet" << "triplet" << "quintuplet"
          << "note-c" << "note-d" << "note-e" << "note-f" << "note-g"
          << "note-a" << "note-b"
@@ -416,7 +417,6 @@ MuseScore::MuseScore()
             QColor c(preferences.selectColor[i].light(180));
             pal.setColor(QPalette::Window, preferences.selectColor[i].light(180));
             pal.setColor(QPalette::Button, preferences.selectColor[i].light(150));
-//            pal.setColor(QPalette::BrightText, preferences.selectColor[i].light(140));
             tb->setPalette(pal);
             entryTools->addWidget(tb);
             ++i;

@@ -786,6 +786,22 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
+         "insert-hbox",
+         QT_TR_NOOP("insert hbox"),
+         0,
+         Qt::WindowShortcut,
+         QT_TR_NOOP("Insert HBox")
+         ),
+      Shortcut(
+         STATE_NORMAL | STATE_NOTE_ENTRY,
+         "insert-vbox",
+         QT_TR_NOOP("insert vbox"),
+         0,
+         Qt::WindowShortcut,
+         QT_TR_NOOP("Insert VBox")
+         ),
+      Shortcut(
+         STATE_NORMAL | STATE_NOTE_ENTRY,
          "duplet",
          QT_TR_NOOP("duplet"),
          Qt::CTRL+Qt::Key_2,

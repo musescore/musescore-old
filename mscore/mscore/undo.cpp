@@ -782,7 +782,7 @@ void Score::undoOp(UndoOp::UndoType type, Staff* staff, int idx)
       undoList.back()->push_back(i);
       }
 
-void Score::undoOp(UndoOp::UndoType type, Measure* m, MStaff s, int staff)
+void Score::undoOp(UndoOp::UndoType type, Measure* m, MStaff* s, int staff)
       {
       checkUndoOp();
       UndoOp i;

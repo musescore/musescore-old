@@ -87,7 +87,7 @@ struct UndoOp {
 
       Part* part;
       Staff* staff;
-      MStaff mstaff;
+      MStaff* mstaff;
       System* system;
       Measure* measure;
       Segment* segment;

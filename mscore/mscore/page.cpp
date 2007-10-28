@@ -346,8 +346,6 @@ void Page::collectElements(QList<Element*>& el)
                         if (b)
                               el.append(b);
                         }
-                  if (st->sstaff)
-                        el.append(st->sstaff);
                   if (st->instrumentName)
                         el.append(st->instrumentName);
                   }

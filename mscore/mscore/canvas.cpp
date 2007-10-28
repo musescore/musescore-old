@@ -1188,7 +1188,7 @@ void Canvas::paint(const QRect& rr, QPainter& p)
                   pen.setWidthF(3.0 / p.matrix().m11());
                   pen.setStyle(Qt::DotLine);
                   p.setPen(pen);
-                  for (Measure* m = sm; m && (m != em);) {
+                  for (Measure* m = sm; m && (m != em); m = m->next()) {
                         double x1 = m->abbox().x();
                         double x2 = x1 + m->abbox().width();
                         double y1 = m->abbox().y() - _spatium;
@@ -1199,11 +1199,13 @@ void Canvas::paint(const QRect& rr, QPainter& p)
                               x1 -= _spatium;
                               p.drawLine(QLineF(x1, y1, x1, y2));
                               }
-                        m = m->next();
                         // is this measure end of selection?
-                        if (m == em) {
+                        if (((m->tick() + m->tickLen()) >= send) || (m->next() == em)) {
                               x2 += _spatium;
                               p.drawLine(QLineF(x2, y1, x2, y2));
+                              p.drawLine(QLineF(x1, y1, x2, y1));
+                              p.drawLine(QLineF(x1, y2, x2, y2));
+                              break;
                               }
                         p.drawLine(QLineF(x1, y1, x2, y1));
                         p.drawLine(QLineF(x1, y2, x2, y2));
@@ -1214,7 +1216,7 @@ void Canvas::paint(const QRect& rr, QPainter& p)
                   pen.setWidthF(2.0 / p.matrix().m11());
                   pen.setStyle(Qt::SolidLine);
                   p.setPen(pen);
-                  for (Measure* m = sm; m && (m != em);) {
+                  for (Measure* m = sm; m && (m != em); m = m->next()) {
                         QRectF bb     = m->abbox();
                         double x1     = bb.x();
                         double x2     = x1 + bb.width();
@@ -1228,11 +1230,13 @@ void Canvas::paint(const QRect& rr, QPainter& p)
                               x1 -= _spatium;
                               p.drawLine(QLineF(x1, y1, x1, y2));
                               }
-                        m = m->next();
                         // is this measure end of selection?
-                        if (m == em) {
+                        if (((m->tick() + m->tickLen()) >= send) || (m->next() == em)) {
                               x2 += _spatium;
                               p.drawLine(QLineF(x2, y1, x2, y2));
+                              p.drawLine(QLineF(x1, y1, x2, y1));
+                              p.drawLine(QLineF(x1, y2, x2, y2));
+                              break;
                               }
                         p.drawLine(QLineF(x1, y1, x2, y1));
                         p.drawLine(QLineF(x1, y2, x2, y2));

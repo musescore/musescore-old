@@ -32,7 +32,7 @@ enum SelState {
       SEL_SINGLE,       // a single object is selected
       SEL_MULT,         // more than one object is selected
       SEL_STAFF,        // a range in one or more staffs is selected
-      SEL_SYSTEM        // a system range ("passage") is selected
+      SEL_SYSTEM,       // a system range ("passage") is selected
       };
 
 class Page;
@@ -47,7 +47,7 @@ class Element;
 class Selection {
       Score* _score;
       SelState _state;
-      QList<Element*> _el;        // valid when SEL_SINGLE or SEL_MULT
+      QList<Element*> _el;        // valid in mode SEL_SINGLE and SEL_MULT
 
       QByteArray staffMimeData() const;
 
