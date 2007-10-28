@@ -51,8 +51,6 @@
 SysStaff::SysStaff()
       {
       idx             = 0;
-      sstaff          = 0;
-
       instrumentName  = 0;
       }
 
@@ -64,8 +62,6 @@ SysStaff::~SysStaff()
       {
       foreach(Bracket* b, brackets)
             delete b;
-      if (sstaff)
-            delete sstaff;
       if (instrumentName)
             delete instrumentName;
       }
@@ -105,13 +101,9 @@ QRectF System::bboxStaff(int staff) const
 //   insertStaff
 //---------------------------------------------------------
 
-SysStaff* System::insertStaff(Staff* s, int idx)
+SysStaff* System::insertStaff(Staff* /*s*/, int idx)
       {
       SysStaff* staff = new SysStaff;
-      staff->sstaff   = new StaffLines(score());
-      staff->sstaff->setLines(s->lines());
-      staff->sstaff->setMag(s->small() ? 0.7 : 1.0);
-      staff->sstaff->setParent(this);
       insertSysStaff(staff, idx);
       setInstrumentName(idx);
       return staff;
@@ -246,8 +238,8 @@ double System::layout(ScoreLayout* layout, const QPointF& p, double w)
       for (int i = 0; i < bracketLevels; ++i)
             x += bracketWidth[i];
 
-      qreal y = 0.0;
       int staffIdx = 0;
+
       for (iSysStaff is = _staves.begin(); is != _staves.end(); ++is, ++staffIdx) {
             SysStaff* s    = *is;
             Staff* staff = score()->staff(staffIdx);
@@ -256,11 +248,7 @@ double System::layout(ScoreLayout* layout, const QPointF& p, double w)
                   continue;
                   }
             double staffMag = staff->small() ? 0.7 : 1.0;
-            StaffLines* sstaff = s->sstaff;
-            sstaff->setPos(x, y);
-            sstaff->setWidth(w - x);
-            s->setbbox(QRectF(x, y, w, 4 * _spatium * staffMag));
-            y += 4 * _spatium + s->distance() * staffMag;
+            s->setbbox(QRectF(x, 0.0, w, 4 * _spatium * staffMag));
             }
 
       if (nstaves > 1 && barLine == 0) {
@@ -354,6 +342,9 @@ void System::layout2(ScoreLayout* layout)
             //  layout lyrics separators
             //
             foreach(Measure* m, ml) {
+                  MStaff* ms = m->staffList()->at(staffIdx);
+                  if (ms->lines)
+                        ms->lines->setPos(QPointF(0.0, 0.0));
                   for (Segment* s = m->first(); s; s = s->next()) {
                         LyricsList* ll = s->lyricsList(staffIdx);
                         if (!ll)
@@ -371,14 +362,11 @@ void System::layout2(ScoreLayout* layout)
                   s->setbbox(QRectF());
                   continue;
                   }
-            StaffLines* sstaff = s->sstaff;
-            double dy          = y - sstaff->ipos().y();
-            sstaff->setPos(sstaff->ipos().x(), y);
             s->setbbox(QRectF(s->bbox().x(), y, s->bbox().width(), 4 * _spatium * staffMag));
             // moveY measures
-            if (staffIdx && dy != 0.0) {
+            if (y != 0.0) {
                   foreach(Measure* m, ml)
-                        m->moveY(staffIdx, dy);
+                        m->moveY(staffIdx, y);
                   }
             y += 4 * _spatium * staffMag + s->distance();
             }
@@ -485,7 +473,7 @@ void System::layout2(ScoreLayout* layout)
 void SysStaff::move(double x, double y)
       {
       _bbox.translate(x, y);
-      sstaff->move(x, y);
+  //    sstaff->move(x, y);
 
       foreach(Bracket* b, brackets)
             b->move(x, y);

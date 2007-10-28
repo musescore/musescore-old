@@ -748,7 +748,7 @@ void Score::sortStaves(QList<int> src, QList<int> dst)
 
 void Measure::sortStaves(QList<int>& src, QList<int>& dst)
       {
-      MStaffList ms;
+      QList<MStaff*> ms;
       for (QList<int>::iterator i = dst.begin(); i != dst.end(); ++i) {
             int didx = *i;
             int sidx = 0;

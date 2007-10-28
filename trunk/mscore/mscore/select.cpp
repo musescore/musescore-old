@@ -185,7 +185,7 @@ void Score::select(Element* obj, int state, int staff)
                   }
             }
 
-      if (obj->type() == MEASURE) {
+      if (obj->type() == MEASURE && obj->subtype() == MEASURE_NORMAL) {
             refresh       |= QRectF(0, 0, 10000, 10000);   // hack
             Measure* m     = (Measure*)obj;
             int tickStart  = m->tick();

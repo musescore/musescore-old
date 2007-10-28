@@ -656,6 +656,8 @@ QMenu* MuseScore::genCreateMenu()
       measures->addAction(getAction("append-measures"));
       measures->addAction(getAction("insert-measure"));
       measures->addAction(getAction("insert-measures"));
+      measures->addAction(getAction("insert-hbox"));
+      measures->addAction(getAction("insert-vbox"));
 
       popup->addAction(tr("Barlines..."),        this, SLOT(barMenu()));
       popup->addAction(getAction("clefs"));

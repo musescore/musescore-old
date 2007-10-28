@@ -939,7 +939,7 @@ void Score::appendMeasures(int n)
 void Score::cmdInsertMeasures(int n)
       {
       startCmd();
-      insertMeasures(n);
+      insertMeasures(n, MEASURE_NORMAL);
       endCmd();
       }
 
@@ -950,7 +950,7 @@ void Score::cmdInsertMeasures(int n)
 //    (loopcounter ino -- insert numbers)
 //---------------------------------------------------------
 
-void Score::insertMeasures(int n)
+void Score::insertMeasures(int n, int subtype)
       {
 	if (sel->state() != SEL_STAFF && sel->state() != SEL_SYSTEM) {
 		QMessageBox::warning(0, "MuseScore",
@@ -964,6 +964,7 @@ void Score::insertMeasures(int n)
 
 	for (int ino = 0; ino < n; ++ino) {
 		Measure* m = new Measure(this);
+            m->setSubtype(subtype);
 		m->setTick(tick);
 		m->setTickLen(ticks);
 		for (int idx = 0; idx < nstaves(); ++idx) {
@@ -1236,7 +1237,11 @@ void Score::cmd(const QString& cmd)
             if (cmd == "append-measure")
                   appendMeasures(1);
             else if (cmd == "insert-measure")
-		      insertMeasures(1);
+		      insertMeasures(1, MEASURE_NORMAL);
+            else if (cmd == "insert-hbox")
+		      insertMeasures(1, MEASURE_HBOX);
+            else if (cmd == "insert-vbox")
+		      insertMeasures(1, MEASURE_VBOX);
             else if (cmd == "page-prev")
                   pagePrev();
             else if (cmd == "page-next")

@@ -74,23 +74,22 @@ struct MeasureWidth {
 struct MStaff {
       double distance;
       double userDistance;
+      StaffLines*  lines;
 
-      MStaff() {
-            distance = .0;
-            userDistance = .0;
-            }
+      MStaff();
+      ~MStaff();
       };
 
-typedef QList<MStaff> MStaffList;
-typedef MStaffList::iterator iMStaff;
-typedef MStaffList::const_iterator ciMStaff;
+/**
+  Measure subtypes
+*/
 
-//---------------------------------------------------------
-//   Measure
-//---------------------------------------------------------
+enum {
+      MEASURE_NORMAL, MEASURE_HBOX, MEASURE_VBOX
+      };
 
 /**
- One measure in a system.
+      One measure in a system.
 */
 
 class Measure : public Element {
@@ -103,7 +102,7 @@ class Measure : public Element {
       int _repeatCount;       ///< end repeat marker und repeat count
       int _repeatFlags;       ///< or'd RepeatType's (see: repeat.h)
 
-      MStaffList  staves;
+      QList<MStaff*>  staves;
       QList<Beam*>    _beamList;
       QList<Tuplet*>  _tuplets;
       ElementList _pel;       ///< Page relative elements (i.e. text)
@@ -133,7 +132,9 @@ class Measure : public Element {
       virtual void read(QDomElement, int idx);
       virtual void write(Xml&, int, int) const;
       virtual void write(Xml&) const;
+      void writeBox(Xml&) const;
       virtual void read(QDomElement);
+      void readBox(QDomElement);
 
       virtual bool isMovable() const { return false; }
       virtual void add(Element*);
@@ -141,7 +142,17 @@ class Measure : public Element {
       virtual bool genPropertyMenu(QMenu*) const;
       virtual void propertyAction(const QString&);
 
-      MStaffList* staffList()          { return &staves;      }
+      virtual bool startEdit(const QPointF&);
+      virtual bool edit(int, QKeyEvent*);
+      virtual void editDrag(int, const QPointF&, const QPointF&);
+      virtual void endEditDrag();
+      virtual void endEdit();
+      virtual void updateGrips(int* grips, QRectF*) const;
+      virtual QPointF gripAnchor(int) const;
+
+      virtual void draw(QPainter&);
+
+      QList<MStaff*>* staffList()      { return &staves;      }
       QList<Beam*>* beamList()         { return &_beamList;   }
       QList<Tuplet*>* tuplets()        { return &_tuplets;    }
 
@@ -156,8 +167,8 @@ class Measure : public Element {
       void   setNoText(const QString& s);
       void   setNo(int n)              { _no = n;             }
       void   setNoOffset(int n)        { _noOffset = n;       }
-      double distance(int i) const     { return staves[i].distance; }
-      double userDistance(int i) const { return staves[i].userDistance; }
+      double distance(int i) const     { return staves[i]->distance; }
+      double userDistance(int i) const { return staves[i]->userDistance; }
 
       int size() const                 { return _size;       }
       virtual int tickLen() const;
@@ -195,8 +206,8 @@ class Measure : public Element {
 
       void insertStaff(Staff*, int staff);
       void insertStaff1(Staff*, int);
-      void insertMStaff(MStaff staff, int idx);
-      void removeMStaff(MStaff staff, int idx);
+      void insertMStaff(MStaff* staff, int idx);
+      void removeMStaff(MStaff* staff, int idx);
 
       void layoutBeams(ScoreLayout*);
       void layoutBeams1(ScoreLayout*);

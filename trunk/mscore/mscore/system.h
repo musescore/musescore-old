@@ -51,12 +51,10 @@ class ScoreLayout;
 class SysStaff {
       QRectF _bbox;           ///< Bbox of StaffLines.
       Spatium _distance;      ///< distance to next staff
-      double _mag;
 
    public:
       int idx;
       QList<Bracket*> brackets;
-      StaffLines*  sstaff;
       Text* instrumentName;
 
       const QRectF& bbox() const      { return _bbox; }
