@@ -1,7 +1,9 @@
+3.11.7 (lv)
+      - MusicXML export of repeats
 28.10.7 (ws)
       - added special "measures" hbox and vbox
       - moved StaffLines from SysStaff to MStaff
-      (lv)
+        (lv)
       - new testfile testRepeats1.xml
 27.10.7 (ws)
       - undo/redo change notehead

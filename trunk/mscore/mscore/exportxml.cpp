@@ -65,6 +65,7 @@
 #include "keysig.h"
 #include "bracket.h"
 #include "arpeggio.h"
+#include "repeat.h"
 
 //---------------------------------------------------------
 //   attributes -- prints <attributes> tag when necessary
@@ -1646,6 +1647,119 @@ void ExportMusicXml::lyrics(const LyricsList* ll)
       }
 
 //---------------------------------------------------------
+//   directionRepeat
+//---------------------------------------------------------
+
+// LVIFIX: TODO tocoda is missing
+// LVIFIX: TODO coda and segno should be numbered uniquely
+// LVIFIX: TODO RepeatAlSegno is missing
+
+static void directionRepeat(Xml& xml, int st)
+      {
+      QString words = "";
+      QString type  = "";
+      QString sound = "";
+      if (st == RepeatCoda) {
+            type = "coda";
+            sound = "coda=\"1\"";
+            }
+      else if (st == RepeatSegno) {
+            type = "segno";
+            sound = "segno=\"1\"";
+            }
+      else if (st == RepeatDacapo) {
+            words = "D.C.";
+            sound = "dacapo=\"yes\"";
+            }
+      else if (st == RepeatDacapoAlFine) {
+            words = "D.C. al Fine";
+            sound = "dacapo=\"yes\"";
+            }
+      else if (st == RepeatDacapoAlCoda) {
+            words = "D.C. al Coda";
+            sound = "dacapo=\"yes\"";
+            }
+      else if (st == RepeatDalSegno) {
+            words = "D.S.";
+            sound = "dalsegno=\"1\"";
+            }
+      else if (st == RepeatDalSegnoAlFine) {
+            words = "D.S. al Fine";
+            sound = "dalsegno=\"1\"";
+            }
+      else if (st == RepeatDalSegnoAlCoda) {
+            words = "D.S. al Coda";
+            sound = "dalsegno=\"1\"";
+            }
+      else if (st == RepeatFine) {
+            words = "Fine";
+            sound = "fine=\"yes\"";
+            }
+      else
+            printf("repeat subtype=%d not implemented\n", st);
+      if (sound != "") {
+            xml.stag("direction placement=\"above\"");
+            xml.stag("direction-type");
+            if (type != "") xml.tagE(type);
+            if (words != "") xml.tag("words", words);
+            xml.etag();
+            if (sound != "") xml.tagE(QString("sound ") + sound);
+            xml.etag();
+            }
+      }
+
+//---------------------------------------------------------
+//  repeatAtMeasureStart
+//---------------------------------------------------------
+
+static void repeatAtMeasureStart(Xml& xml, Attributes& attr, Measure* m)
+      {
+      // loop over all measure relative elements in this measure looking for REPEATS
+      for (ciElement ci = m->el()->begin(); ci != m->el()->end(); ++ci) {
+            Element* dir = *ci;
+            if (dir->type() == REPEAT) {
+                  // filter out the repeats at measure start
+                  int st = dir->subtype();
+                  if (   st == RepeatSegno
+                     ) {
+                        attr.doAttr(xml, false);
+                        directionRepeat(xml, st);
+                        }
+                  }
+            }
+      }
+
+//---------------------------------------------------------
+//  repeatAtMeasureStop
+//---------------------------------------------------------
+
+static void repeatAtMeasureStop(Xml& xml, Measure* m)
+      {
+      // loop over all measure relative elements in this measure looking for REPEATS
+      for (ciElement ci = m->el()->begin(); ci != m->el()->end(); ++ci) {
+            Element* dir = *ci;
+            if (dir->type() == REPEAT) {
+                  // filter out the repeats at measure stop
+                  int st = dir->subtype();
+                  if (   st == RepeatCoda
+                      || st == RepeatVarcoda
+                      || st == RepeatCodetta
+                      || st == RepeatDacapo
+                      || st == RepeatDacapoAlFine
+                      || st == RepeatDacapoAlCoda
+                      || st == RepeatDalSegno
+                      || st == RepeatDalSegnoAlFine
+                      || st == RepeatDalSegnoAlCoda
+                      || st == RepeatAlSegno
+                      || st == RepeatFine
+//                      || st == Repeat
+                     )
+                        directionRepeat(xml, st);
+                  }
+            }
+      }
+
+//---------------------------------------------------------
 //  write
 //---------------------------------------------------------
 
@@ -1927,6 +2041,11 @@ foreach(Element* el, *(score->gel())) {
                                     }
                         }
 
+                  // MuseScore limitation: repeats are always in the first part
+                  // and are implicitly placed at either measure start or stop
+                  if (idx == 0)
+                        repeatAtMeasureStart(xml, attr, m);
+
                   for (int st = strack; st < etrack; ++st) {
                         // sstaff - xml staff number, counting from 1 for this
                         // instrument
@@ -2035,6 +2154,8 @@ foreach(Element* el, *(score->gel())) {
                         }
                   // move to end of measure (in case of incomplete last voice)
                   moveToTick(m->tick() + m->tickLen());
+                  if (idx == 0)
+                        repeatAtMeasureStop(xml, m);
                   BarLine * b = m->barLine(score->staff(part));
                   bar(b, volta, "right");
                   xml.etag();
