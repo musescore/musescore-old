@@ -54,6 +54,7 @@ testDynamics2.xml        dynamics in a multi-part (voice and a piano) score
 testHello.xml            Recordare's "Hello World"
 testImplicitMeasure1.xml pickup measure
 testKeysig1.xml          change keysig from none to G major
+testLines1.xml           ottava, pedal and trill lines
 testNotesAttributes1.xml all note attributes supported by MusicXML import/export
 testNotesRests1.xml      all note and rest types, including some dotted
 testRepeats1.xml         coda, segno and friends
