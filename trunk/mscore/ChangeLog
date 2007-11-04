@@ -1,3 +1,6 @@
+4.11.7 (lv)
+      - new testfile testLines1.xml, including png version of what it should
+        look like after import
 3.11.7 (lv)
       - MusicXML export of repeats
 28.10.7 (ws)
