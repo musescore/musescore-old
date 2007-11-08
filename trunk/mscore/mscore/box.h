@@ -30,20 +30,17 @@
 
 
 //---------------------------------------------------------
-//   HBox
+//   Box
 //---------------------------------------------------------
 
-class HBox : public MeasureBase {
-      double _boxWidth;
+class Box : public MeasureBase {
+
+      double _boxWidth;       // only valid for HBox
+      double _boxHeight;      // only valid for VBox
+      bool editMode;
 
    public:
-      HBox(Score*);
-      virtual HBox* clone() const      { return new HBox(*this); }
-      virtual ElementType type() const { return HBOX;       }
-      double boxWidth() const          { return _boxWidth;  }
-      void setBoxWidth(double val)     { _boxWidth = val;   }
-      virtual void write(Xml&, int) const;
-      virtual void read(QDomElement);
+      Box(Score*);
       virtual void draw(QPainter& p) const;
 
       virtual bool startEdit(const QPointF&);
@@ -52,37 +49,38 @@ class HBox : public MeasureBase {
       virtual void endEditDrag();
       virtual void endEdit();
       virtual void updateGrips(int* grips, QRectF*) const;
-      virtual QPointF gripAnchor(int) const;
+      virtual void layout(ScoreLayout*);
+      virtual void write(Xml&, int) const;
+      virtual void read(QDomElement);
+
+      double boxWidth() const          { return _boxWidth;  }
+      void setBoxWidth(double val)     { _boxWidth = val;   }
+      double boxHeight() const         { return _boxHeight; }
+      void setBoxHeight(double val)    { _boxHeight = val;  }
+      };
+
+//---------------------------------------------------------
+//   HBox
+//---------------------------------------------------------
+
+class HBox : public Box {
+   public:
+      HBox(Score* score) : Box(score) {}
+      virtual HBox* clone() const      { return new HBox(*this); }
+      virtual ElementType type() const { return HBOX;       }
       };
 
 //---------------------------------------------------------
 //   VBox
 //---------------------------------------------------------
 
-class VBox : public MeasureBase {
-      double _boxHeight;
-      bool editMode;
+class VBox : public Box {
 
    public:
-      VBox(Score*);
+      VBox(Score* score) : Box(score) {}
       virtual VBox* clone() const      { return new VBox(*this); }
       virtual ElementType type() const { return VBOX;       }
-      double boxHeight() const         { return _boxHeight; }
-      void setBoxHeight(double val)    { _boxHeight = val;  }
-      virtual void write(Xml&, int) const;
-      virtual void read(QDomElement);
-      virtual void draw(QPainter& p) const;
-      virtual void layout(ScoreLayout*);
-
-      virtual bool startEdit(const QPointF&);
-      virtual bool edit(int, QKeyEvent*);
-      virtual void editDrag(int, const QPointF&, const QPointF&);
-      virtual void endEditDrag();
-      virtual void endEdit();
-      virtual void updateGrips(int* grips, QRectF*) const;
-      virtual QPointF gripAnchor(int) const;
       };
-
 
 #endif
 

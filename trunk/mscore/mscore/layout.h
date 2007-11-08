@@ -95,8 +95,8 @@ class ScoreLayout : public Element {
    public:
       ScoreLayout(Score*);
       ~ScoreLayout();
-      virtual ElementType type() const     { return LAYOUT; }
-      virtual Element* clone() const       { abort(); }
+      virtual ElementType type() const        { return LAYOUT; }
+      virtual Element* clone() const          { abort(); }
 
       void layout()                           { _needLayout = true; }
       void doLayout();

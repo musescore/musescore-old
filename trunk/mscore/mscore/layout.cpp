@@ -343,7 +343,6 @@ bool ScoreLayout::layoutPage()
                         }
                   curMeasure->setPos(QPointF(0.0, 0.0));
                   curMeasure->setbbox(QRectF(0, 0, w, box->boxHeight()));
-printf("layout vbox %f\n", box->boxHeight());
                   system->setPos(QPointF(x, y));
                   system->setbbox(curMeasure->bbox());
 
@@ -749,6 +748,8 @@ void MeasureBaseList::change(MeasureBase* ob, MeasureBase* nb)
             _last = nb;
       if (ob == _first)
             _first = nb;
+      foreach(Element* e, *nb->el())
+            e->setParent(nb);
       }
 
 //---------------------------------------------------------

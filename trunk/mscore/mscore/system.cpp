@@ -634,7 +634,7 @@ void System::remove(Element* el)
 
 void System::change(Element* o, Element* n)
       {
-      if (o->type() == MEASURE || o->type() == VBOX || o->type() == HBOX)
+      if (o->type() == VBOX || o->type() == HBOX)
             score()->mainLayout()->change((MeasureBase*)o, (MeasureBase*)n);
       else {
             remove(o);

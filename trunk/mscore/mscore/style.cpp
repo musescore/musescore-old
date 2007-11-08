@@ -49,16 +49,16 @@ const TextStyle defaultTextStyleArray[] = {
          ALIGN_LEFT,    ANCHOR_STAFF, 0, 0, OFFSET_SPATIUM),
 
       TextStyle(QString("Title"), ff, 24, false, false, false,
-         ALIGN_HCENTER | ALIGN_TOP, ANCHOR_PAGE, 0, MM(5), OFFSET_ABS),
+         ALIGN_HCENTER | ALIGN_TOP, ANCHOR_PAGE, 0, MM(0), OFFSET_ABS),
 
       TextStyle(QString("Subtitle"), ff, 14, false, false, false,
          ALIGN_HCENTER | ALIGN_TOP, ANCHOR_PAGE, 0, MM(15), OFFSET_ABS),
 
       TextStyle(QString("Composer"), ff, 12, false, false, false,
-         ALIGN_RIGHT | ALIGN_BOTTOM, ANCHOR_PAGE, 0, MM(15), OFFSET_ABS),
+         ALIGN_RIGHT | ALIGN_BOTTOM, ANCHOR_PAGE, 0, MM(0), OFFSET_ABS),
 
       TextStyle(QString("Poet"), ff, 12, false, false, false,
-         ALIGN_LEFT | ALIGN_BOTTOM, ANCHOR_PAGE, 0, MM(10), OFFSET_ABS),
+         ALIGN_LEFT | ALIGN_BOTTOM, ANCHOR_PAGE, 0, MM(0), OFFSET_ABS),
 
       TextStyle(QString("Lyrics"), ff, 11, false, false, false,
          ALIGN_HCENTER | ALIGN_TOP, ANCHOR_STAFF, 0, 7, OFFSET_SPATIUM),
