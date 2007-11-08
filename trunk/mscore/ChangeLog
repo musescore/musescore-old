@@ -1,4 +1,6 @@
-8.11.7 (ws)
+8.11.7 (lv)
+      - new testfile testTremolo.xml
+       (ws)
       - Title, Subtitle, Poet and Composer are moved from Measure to VBox
       - moved Element->_prev and Element->_next to MeasureBase and Segment
       - changed HBox, VBox and Measure into subclasses of new class MeasureBase
