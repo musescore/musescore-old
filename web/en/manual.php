@@ -61,6 +61,10 @@ This reference describes the latest version in the subversion repository.<br>
     <td><a href="fingering.php">Fingering</a></td>
   </tr>
   <tr>
+    <td><a href="frames.php">Frames</a></td>
+    <td></td>
+  </tr>
+  <tr>
     <td><a href="import.php">Import</a></td>
     <td></td>
     <td><a href="instrumentname.php">Instrumentname</a></td>
@@ -88,6 +92,9 @@ This reference describes the latest version in the subversion repository.<br>
   <tr>
     <td><a href="playmode.php">Play Mode</a></td>
     <td></td>
+    <td><a href="repeats.php">Repeats</a></td>
+  </tr>
+  <tr>
     <td><a href="slurs.php">Slurs</a></td>
   </tr>
   <tr>

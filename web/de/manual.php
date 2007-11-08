@@ -86,7 +86,12 @@ im Subversion Repository.
   <tr>
     <td><a href="noteentry.php">Pausen Eingeben</a></td>
     <td></td>
+    <td><a href="frames.php">Rahmen</a></td>
+  </tr>
+
+  <tr>
     <td><a href="drumnotation.php">Schlagzeugnotation</a></td>
+    <td></td>
   </tr>
 
   <tr>
