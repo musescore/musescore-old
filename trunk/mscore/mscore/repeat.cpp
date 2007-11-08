@@ -283,7 +283,6 @@ bool Repeat::genPropertyMenu(QMenu* popup) const
       {
       QAction* a = popup->addAction(tr("Properties..."));
       a->setData("props");
-printf("genPropertyMEnu\n");
       return true;
       }
 
@@ -294,7 +293,6 @@ printf("genPropertyMEnu\n");
 void Repeat::propertyAction(const QString& s)
       {
       if (s == "props") {
-printf("propertyAction\n");
             RepeatProperties rp;
             int rv = rp.exec();
             if (rv) {

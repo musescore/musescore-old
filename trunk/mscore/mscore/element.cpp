@@ -402,6 +402,36 @@ void Element::setMag(double val)
       }
 
 //---------------------------------------------------------
+//   genPropertyMenu
+//---------------------------------------------------------
+
+bool Element::genPropertyMenu(QMenu* popup) const
+      {
+      QAction* a;
+      if (visible())
+            a = popup->addAction(tr("Set Invisible"));
+      else
+            a = popup->addAction(tr("Set Visible"));
+      a->setData("invisible");
+      a = popup->addAction(tr("Color..."));
+      a->setData("color");
+      return true;
+      }
+
+//---------------------------------------------------------
+//   propertyAction
+//---------------------------------------------------------
+
+void Element::propertyAction(const QString& s)
+      {
+      if (s == "invisible")
+            score()->toggleInvisible(this);
+      else if (s == "color") {
+            score()->colorItem(this);
+            }
+      }
+
+//---------------------------------------------------------
 //   remove
 //---------------------------------------------------------
 

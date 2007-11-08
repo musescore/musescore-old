@@ -336,9 +336,6 @@ bool ScoreLayout::layoutPage()
             if (curMeasure->type() == VBOX) {
                   VBox* box = (VBox*) curMeasure;
                   if (y + box->boxHeight() > ey) {
-                        // rollback
-                        curMeasure = system->measures().front();
-                        --curSystem;
                         break;
                         }
                   curMeasure->setPos(QPointF(0.0, 0.0));
