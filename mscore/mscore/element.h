@@ -87,6 +87,8 @@ extern const char* elementNames[];  // for debugging
 //---------------------------------------------------------
 
 class Element {
+      Q_DECLARE_TR_FUNCTIONS(Element)
+
       Element* _parent;
 
       bool _selected;           ///< set if element is selected
@@ -275,8 +277,8 @@ class Element {
 /**
  extend property menu by elemement specific items
  */
-      virtual bool genPropertyMenu(QMenu*) const { return false; }
-      virtual void propertyAction(const QString&) {}
+      virtual bool genPropertyMenu(QMenu*) const;
+      virtual void propertyAction(const QString&);
 
 /**
  delivers mouseEvent to element in edit mode

@@ -200,14 +200,6 @@ void Canvas::objectPopup(const QPoint& pos, Element* obj)
       popup->addAction(getAction("copy"));
       popup->addAction(getAction("paste"));
       popup->addSeparator();
-
-      if (obj->visible())
-            a = popup->addAction(tr("Set Invisible"));
-      else
-            a = popup->addAction(tr("Set Visible"));
-      a->setData("invisible");
-      a = popup->addAction(tr("Color..."));
-      a->setData("color");
       obj->genPropertyMenu(popup);
       popup->addSeparator();
       a = popup->addAction(tr("Object Inspector"));
@@ -223,10 +215,6 @@ void Canvas::objectPopup(const QPoint& pos, Element* obj)
       _score->startCmd();
       if (cmd == "list")
             mscore->showElementContext(obj);
-      else if (cmd == "invisible")
-            _score->toggleInvisible(obj);
-      else if (cmd == "color")
-            _score->colorItem(obj);
       else if (cmd == "edit") {
             if (startEdit(obj))
                   return;

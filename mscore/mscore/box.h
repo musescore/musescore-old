@@ -80,6 +80,8 @@ class VBox : public Box {
       VBox(Score* score) : Box(score) {}
       virtual VBox* clone() const      { return new VBox(*this); }
       virtual ElementType type() const { return VBOX;       }
+      virtual bool genPropertyMenu(QMenu*) const;
+      virtual void propertyAction(const QString&);
       };
 
 #endif

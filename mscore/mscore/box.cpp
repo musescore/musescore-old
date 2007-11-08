@@ -21,6 +21,7 @@
 #include "box.h"
 #include "text.h"
 #include "score.h"
+#include "mscore.h"
 
 //---------------------------------------------------------
 //   Box
@@ -158,5 +159,50 @@ void Box::read(QDomElement e)
             else
                   domError(e);
             }
+      }
+
+//---------------------------------------------------------
+//   genPropertyMenu
+//---------------------------------------------------------
+
+bool VBox::genPropertyMenu(QMenu* popup) const
+      {
+      QMenu* textMenu = popup->addMenu(tr("Add Text"));
+      QAction* a = getAction("title-text");
+      a->blockSignals(true);
+      textMenu->addAction(a);
+      a = getAction("subtitle-text");
+      a->blockSignals(true);
+      textMenu->addAction(a);
+      a = getAction("composer-text");
+      a->blockSignals(true);
+      textMenu->addAction(a);
+      a = getAction("poet-text");
+      a->blockSignals(true);
+      textMenu->addAction(a);
+      return true;
+      }
+
+//---------------------------------------------------------
+//   propertyAction
+//---------------------------------------------------------
+
+void VBox::propertyAction(const QString& cmd)
+      {
+      printf("VBox:propertyAction <%s>\n", qPrintable(cmd));
+
+      if (cmd == "title-text") {
+            Text* s = new Text(score());
+            s->setSubtype(TEXT_TITLE);
+            s->setParent(this);
+            s->setText("Title");
+            score()->undoAddElement(s);
+            score()->setLayoutAll(true);
+            score()->select(s, 0, 0);
+            }
+      getAction("title-text")->blockSignals(false);
+      getAction("subtitle-text")->blockSignals(false);
+      getAction("composer-text")->blockSignals(false);
+      getAction("poet-text")->blockSignals(false);
       }
 
