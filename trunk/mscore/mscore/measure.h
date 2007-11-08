@@ -28,7 +28,7 @@
 
 #include "element.h"
 #include "segment.h"
-
+#include "measurebase.h"
 
 class Segment;
 class Xml;
@@ -42,26 +42,6 @@ class Text;
 class ChordRest;
 class Score;
 class Viewer;
-
-
-//---------------------------------------------------------
-//   MeasureWidth
-//---------------------------------------------------------
-
-/**
- result of layoutX().
-*/
-
-struct MeasureWidth {
-      double stretchable;
-      double nonStretchable;
-
-      MeasureWidth() {}
-      MeasureWidth(double a, double b) {
-            stretchable = a;
-            nonStretchable = b;
-            }
-      };
 
 //---------------------------------------------------------
 //   MStaff
@@ -81,18 +61,10 @@ struct MStaff {
       };
 
 /**
-  Measure subtypes
-*/
-
-enum {
-      MEASURE_NORMAL, MEASURE_HBOX, MEASURE_VBOX
-      };
-
-/**
       One measure in a system.
 */
 
-class Measure : public Element {
+class Measure : public MeasureBase {
       Q_DECLARE_TR_FUNCTIONS(Measure)
 
       Segment* _first;        ///< First item of segment list
@@ -105,20 +77,13 @@ class Measure : public Element {
       QList<MStaff*>  staves;
       QList<Beam*>    _beamList;
       QList<Tuplet*>  _tuplets;
-      ElementList _pel;       ///< Page relative elements (i.e. text)
-      ElementList _sel;       ///< Measure(/tick) relative elements: with defined start time
-                              ///< but outside the staff
 
       int    _no;             ///< Measure number, counting from zero
       int    _noOffset;       ///< Offset to measure number
       Text* _noText;          ///< Measure number text object
 
       double _userStretch;
-      bool _lineBreak;        ///< Forced line break
-      bool _pageBreak;        ///< Forced page break
       bool _irregular;        ///< Irregular measure, do not count
-
-      MeasureWidth _mw;
 
       void push_back(Segment* e);
       void push_front(Segment* e);
@@ -126,11 +91,11 @@ class Measure : public Element {
    public:
       Measure(Score*);
       ~Measure();
-      virtual Measure* clone() const { return new Measure(*this); }
+      virtual Measure* clone() const   { return new Measure(*this); }
       virtual ElementType type() const { return MEASURE; }
 
       virtual void read(QDomElement, int idx);
-      virtual void write(Xml&, int, int) const;
+      virtual void write(Xml&, int) const;
       virtual void write(Xml&) const;
       void writeBox(Xml&) const;
       virtual void read(QDomElement);
@@ -142,22 +107,9 @@ class Measure : public Element {
       virtual bool genPropertyMenu(QMenu*) const;
       virtual void propertyAction(const QString&);
 
-      virtual bool startEdit(const QPointF&);
-      virtual bool edit(int, QKeyEvent*);
-      virtual void editDrag(int, const QPointF&, const QPointF&);
-      virtual void endEditDrag();
-      virtual void endEdit();
-      virtual void updateGrips(int* grips, QRectF*) const;
-      virtual QPointF gripAnchor(int) const;
-
-      virtual void draw(QPainter&);
-
       QList<MStaff*>* staffList()      { return &staves;      }
       QList<Beam*>* beamList()         { return &_beamList;   }
       QList<Tuplet*>* tuplets()        { return &_tuplets;    }
-
-      ElementList* pel()               { return &_pel;        }
-      const ElementList* pel() const   { return &_pel;        }
 
       int    no() const                { return _no;          }
       bool   irregular() const         { return _irregular;   }
@@ -167,8 +119,8 @@ class Measure : public Element {
       void   setNoText(const QString& s);
       void   setNo(int n)              { _no = n;             }
       void   setNoOffset(int n)        { _noOffset = n;       }
-      double distance(int i) const     { return staves[i]->distance; }
-      double userDistance(int i) const { return staves[i]->userDistance; }
+      virtual double distance(int i) const     { return staves[i]->distance; }
+      virtual double userDistance(int i) const { return staves[i]->userDistance; }
 
       int size() const                 { return _size;       }
       virtual int tickLen() const;
@@ -179,19 +131,8 @@ class Measure : public Element {
       bool empty()                     { return _first == 0; }
 
       double userStretch() const       { return _userStretch; }
-      bool lineBreak() const           { return _lineBreak; }
-      bool pageBreak() const           { return _pageBreak; }
       void setUserStretch(double v)    { _userStretch = v;  }
-      void setLineBreak(bool v)        { _lineBreak = v;    }
-      void setPageBreak(bool v)        { _pageBreak = v;    }
 
-      MeasureWidth& layoutWidth()      { return _mw;        }
-
-      System* system() const        { return (System*)parent(); }
-      void setSystem(System* s)     { setParent((Element*)s);   }
-
-      ElementList* el()             { return &_sel; }
-      const ElementList* el() const { return &_sel; }
       BarLine* barLine(int staff) const;
 
       void layoutX(ScoreLayout*, double stretch);
@@ -214,16 +155,13 @@ class Measure : public Element {
       void layoutChord(Chord* chord, char*);
       void layoutNoteHeads(int staff);
 
-      void moveTicks(int diff);
+      virtual void moveTicks(int diff);
       void insert(Segment* ns, Segment* s);
 
       void cmdRemoveStaves(int s, int e);
       void cmdAddStaves(int s, int e);
       void removeStaves(int s, int e);
       void insertStaves(int s, int e);
-
-      Measure* next() const { return (Measure*)Element::next(); }
-      Measure* prev() const { return (Measure*)Element::prev(); }
 
       double tick2pos(int) const;
       Segment* tick2segment(int) const;
@@ -244,7 +182,7 @@ class Measure : public Element {
 
       void setEndBarLine(BarLine* barLine);
       void cmdRemoveEmptySegment(Segment* s);
-      void collectElements(QList<Element*>& el);
+      void collectElements(QList<const Element*>& el) const;
       void createVoice(int track);
       void adjustToLen(int, int);
       int repeatFlags() const      { return _repeatFlags; }

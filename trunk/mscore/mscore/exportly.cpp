@@ -553,9 +553,11 @@ void ExportLy::writeScore()
                   indent();
                   writeClef(staff->clef()->clef(0));
                   writeKeySig(staff->keymap()->key(0));
-                  for(Measure* m = score->mainLayout()->first(); m; m = m->next()) {
+                  for (MeasureBase* m = score->mainLayout()->first(); m; m = m->next()) {
+                        if (m->type() != MEASURE)
+                              continue;
                         os << "\n";
-                        writeMeasure(m, staffIdx);
+                        writeMeasure((Measure*)m, staffIdx);
                         }
                   os << "\n";
                   indent();
@@ -629,8 +631,8 @@ bool ExportLy::write(const QString& name)
       indent();
       os << "\\header {\n";
       ++level;
-      const Measure* m = score->mainLayout()->first();
-      foreach(const Element* e, *m->pel()) {
+      const MeasureBase* m = score->mainLayout()->first();
+      foreach(const Element* e, *m->el()) {
             if (e->type() != TEXT)
                   continue;
             QString s = ((Text*)e)->getText();
@@ -681,7 +683,10 @@ bool ExportLy::write(const QString& name)
 
 void ExportLy::checkSlur(int tick, int track)
       {
-      for (const Measure* m = score->mainLayout()->first(); m; m = m->next()) {
+      for (const MeasureBase* mb = score->mainLayout()->first(); mb; mb = mb->next()) {
+            if (mb->type() != MEASURE)
+                  continue;
+            Measure* m = (Measure*) mb;
             foreach(Element* e, *m->el()) {
                   if (e->type() != SLUR)
                         continue;

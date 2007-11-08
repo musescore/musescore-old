@@ -115,9 +115,9 @@ add_executable ( mscore
       editdrumset.cpp editstaff.cpp drumset.cpp tremolo.cpp repeat.cpp
       lilypond.cpp exportly.cpp repeatflag.cpp repeatflagdialog.cpp
       voltaproperties.cpp chordproperties.cpp restproperties.cpp
-      repeatproperties.cpp
-      ${AUDIO}
+      repeatproperties.cpp box.cpp measurebase.cpp
       repeat2.cpp
+      ${AUDIO}
       )
 
 if (MINGW)

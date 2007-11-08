@@ -34,7 +34,7 @@ static const QChar TLC(0xe16f);
 //   draw
 //---------------------------------------------------------
 
-void TrillSegment::draw(QPainter& p)
+void TrillSegment::draw(QPainter& p) const
       {
       QRectF b1 = symbols[trillSym].bbox();
       QRectF b2 = symbols[trillelementSym].bbox();

@@ -185,7 +185,7 @@ void Score::select(Element* obj, int state, int staff)
                   }
             }
 
-      if (obj->type() == MEASURE && obj->subtype() == MEASURE_NORMAL) {
+      if (obj->type() == MEASURE) {
             refresh       |= QRectF(0, 0, 10000, 10000);   // hack
             Measure* m     = (Measure*)obj;
             int tickStart  = m->tick();
@@ -237,24 +237,27 @@ void Score::select(Element* obj, int state, int staff)
                   endTrack = nstaves() * VOICES;
                   }
 
-            for (Measure* m = _layout->first(); m; m = m->next()) {
-                  int ms = m->tick();
-                  int me = ms + m->tickLen();
+            for (MeasureBase* mb = _layout->first(); mb; mb = mb->next()) {
+                  int ms = mb->tick();
+                  int me = ms + mb->tickLen();
                   if (me < tickStart)
                         continue;
                   if (ms >= tickEnd)
                         break;
-                  for (int st = startTrack; st < endTrack; ++st) {
-                        for (Segment* segment = m->first(); segment; segment = segment->next()) {
-                              if (segment->tick() < tickStart)
-                                    continue;
-                              if (segment->tick() >= tickEnd)
-                                    break;
-                              Element* e = segment->element(st);
-                              if (!e)
-                                    continue;
-                              e->setSelected(true);
-                              sel->elements()->append(e);
+                  if (mb->type() == MEASURE) {
+                        Measure* m = (Measure*)mb;
+                        for (int st = startTrack; st < endTrack; ++st) {
+                              for (Segment* segment = m->first(); segment; segment = segment->next()) {
+                                    if (segment->tick() < tickStart)
+                                          continue;
+                                    if (segment->tick() >= tickEnd)
+                                          break;
+                                    Element* e = segment->element(st);
+                                    if (!e)
+                                          continue;
+                                    e->setSelected(true);
+                                    sel->elements()->append(e);
+                                    }
                               }
                         }
 //                  for (int st = sbar; st < ebar; ++st) {
@@ -289,13 +292,13 @@ void Canvas::lassoSelect()
       {
       _score->select(0, 0, 0);
       QRectF lr(lasso->abbox().normalized());
-      QList<Element*> el = _layout->items(lr);
+      QList<const Element*> el = _layout->items(lr);
       for (int i = 0; i < el.size(); ++i) {
-            Element* e = el.at(i);
+            const Element* e = el.at(i);
             e->itemDiscovered = 0;
             if (lr.contains(e->abbox())) {
                   if (e->type() != MEASURE)
-                        _score->select(e, Qt::ShiftModifier, 0);
+                        _score->select(const_cast<Element*>(e), Qt::ShiftModifier, 0);
                   }
             }
       }
@@ -311,15 +314,15 @@ void Canvas::lassoSelect()
 
 void Score::searchSelectedElements()
       {
-      ElementList l;
-      for(Measure* m = _layout->first(); m; m = m->next())
+      QList<const Element*> l;
+      for(MeasureBase* m = _layout->first(); m; m = m->next())
             m->collectElements(l);
-      for (iPage ip = _layout->pages()->begin(); ip != _layout->pages()->end(); ++ip)
-            (*ip)->collectElements(l);
+      foreach(const Page* page, _layout->pages())
+            page->collectElements(l);
       sel->clear();
-      foreach(Element* e, l) {
+      foreach(const Element* e, l) {
             if (e->selected()) {
-                  sel->append(e);
+                  sel->append(const_cast<Element*>(e));
                   }
             }
       sel->updateState();
@@ -450,14 +453,14 @@ QByteArray Selection::staffMimeData() const
 
       for (int staffIdx = staffStart; staffIdx < staffEnd; ++staffIdx) {
             xml.stag(QString("Staff id=\"%1\"").arg(staffIdx));
-            for (Measure* m = _score->mainLayout()->first(); m; m = m->next()) {
+            for (MeasureBase* m = _score->mainLayout()->first(); m; m = m->next()) {
                   int ms = m->tick();
                   int me = ms + m->tickLen();
                   if (me <= tickStart)
                         continue;
                   if (ms >= tickEnd)
                         break;
-                  m->write(xml, 0, staffIdx);
+                  m->write(xml, staffIdx);
                   }
             xml.etag();
             }

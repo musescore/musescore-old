@@ -62,9 +62,9 @@ class Selection {
       int staffEnd;           // valid if selState is SEL_STAFF
       QRectF lasso;
 
-      QList<Element*>* elements() { return &_el; }
+      QList<Element*>* elements()      { return &_el; }
       void add(Element*);
-      void append(Element* el)   { _el.append(el); }
+      void append(Element* el)         { _el.append(el); }
       QRectF deselectAll(Score*);
       void remove(Element*);
       QRectF clear();

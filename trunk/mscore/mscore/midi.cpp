@@ -670,11 +670,11 @@ bool Score::saveMidi(const QString& name)
 void ExportMidi::writeHeader()
       {
       MidiTrack* track  = mf.tracks()->front();
-      Measure* measure  = cs->mainLayout()->first();
+      MeasureBase* measure  = cs->mainLayout()->first();
 
-      foreach (const Element* e, *measure->pel()) {
+      foreach (const Element* e, *measure->el()) {
             if (e->type() == TEXT) {
-                  Text* text = (Text*)(e);
+                  const Text* text = (const Text*)(e);
                   QString str = text->getText();
                   int len     = str.length() + 1;
                   unsigned char* data = new unsigned char[len];

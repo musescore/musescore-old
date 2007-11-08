@@ -295,7 +295,6 @@ class MuseScore : public QMainWindow {
       void setMag(double);
       void readSettings();
       void writeSettings();
-      void repeatToggled(bool);
       };
 
 //---------------------------------------------------------

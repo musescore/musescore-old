@@ -69,6 +69,7 @@
 #include "drumset.h"
 #include "repeat.h"
 #include "repeatflag.h"
+#include "box.h"
 
 //---------------------------------------------------------
 //   y2pitch
@@ -123,7 +124,7 @@ MStaff::~MStaff()
 //---------------------------------------------------------
 
 Measure::Measure(Score* s)
-   : Element(s)
+   : MeasureBase(s)
       {
       _first  = 0;
       _last   = 0;
@@ -132,17 +133,14 @@ Measure::Measure(Score* s)
       int n = _score->nstaves();
       for (int staffIdx = 0; staffIdx < n; ++staffIdx) {
             MStaff* s = new MStaff;
-            if (subtype() == MEASURE_NORMAL) {
-                  Staff* staff = score()->staff(staffIdx);
-                  s->lines     = new StaffLines(score());
-                  s->lines->setLines(staff->lines());
-                  s->lines->setMag(staff->small() ? 0.7 : 1.0);
-                  s->lines->setParent(this);
-                  }
+            Staff* staff = score()->staff(staffIdx);
+            s->lines     = new StaffLines(score());
+            s->lines->setLines(staff->lines());
+            s->lines->setMag(staff->small() ? 0.7 : 1.0);
+            s->lines->setParent(this);
             staves.push_back(s);
             }
 
-      setTickLen(-1);
       _userStretch = 1.0;     // ::style->measureSpacing;
       _lineBreak   = false;
       _pageBreak   = false;
@@ -286,7 +284,7 @@ void Measure::push_front(Segment* e)
 void Measure::moveAll(double x, double y)
       {
       move(x, y);
-      for (iElement i = _sel.begin(); i != _sel.end(); ++i)
+      for (iElement i = _el.begin(); i != _el.end(); ++i)
             (*i)->move(x, y);
 
       int staves = _score->nstaves();
@@ -513,18 +511,10 @@ void Measure::layout(ScoreLayout* layout, double width)
       layoutX(layout, width);
 
       //---------------------------------------------------
-      //   layout Chords/Lyrics/Symbols/BeginRepeatBar
+      //   layout Lyrics
       //---------------------------------------------------
 
-      int tracks = nstaves * VOICES;
       for (Segment* segment = first(); segment; segment = segment->next()) {
-            for (int track = 0; track < tracks; ++track) {
-                  Element* e = segment->element(track);
-                  if (e == 0)
-                        continue;
-                  if (e->isChordRest())
-                        e->layout(layout);
-                  }
             for (int staff = 0; staff < nstaves; ++staff) {
                   LyricsList* ll = segment->lyricsList(staff);
                   int line = 0;
@@ -600,18 +590,18 @@ double Measure::tick2pos(int tck) const
 
 void Measure::layout2(ScoreLayout* layout)
       {
-//      printf("Measure(%p)::layout2(): _sel.size = %d\n", this, _sel.size());
-
-      if (subtype() != MEASURE_NORMAL)
-            return;
-
       foreach(const MStaff* ms, staves) {
             StaffLines* lines = ms->lines;
             lines->setWidth(width());
             }
-      foreach(Element* element, _sel) {
-            int staff = element->staff()->idx();
-            double y  = system()->staff(staff)->bbox().y();
+      foreach(Element* element, _el) {
+            int staff = -1;
+            double y  = 0.0;
+            if (element->staff()) {
+                  staff = element->staff()->idx();
+                  y = system()->staff(staff)->bbox().y();
+                  }
+
             element->layout(layout);
 
             switch(element->type()) {
@@ -667,7 +657,6 @@ void Measure::layout2(ScoreLayout* layout)
                   default:
                         break;
                   }
-
             }
 
       //
@@ -835,13 +824,6 @@ Segment* Measure::getSegment(Segment::SegmentType st, int t)
 
 void Measure::add(Element* el)
       {
-
-      Staff* staffp = el->staff();
-      if (el->type() != SEGMENT && staffp == 0) {
-            _pel.push_back(el);
-            el->setAnchorMeasure(this);
-            return;
-            }
       el->setParent(this);
       int t = el->tick();
       ElementType type = el->type();
@@ -851,8 +833,7 @@ void Measure::add(Element* el)
 
       switch (type) {
             case BEAM:
-                  _pel.push_back(el);
-                  el->setAnchorMeasure(this);
+                  _el.push_back(el);
                   break;
             case SEGMENT:
                   {
@@ -883,7 +864,7 @@ void Measure::add(Element* el)
                   _tuplets.append((Tuplet*)el);
                   break;
             case LAYOUT_BREAK:
-                  for (iElement i = _sel.begin(); i != _sel.end(); ++i) {
+                  for (iElement i = _el.begin(); i != _el.end(); ++i) {
                         if ((*i)->type() == LAYOUT_BREAK && (*i)->subtype() == el->subtype()) {
                               if (debugMode)
                                     printf("warning: layout break already set\n");
@@ -898,14 +879,11 @@ void Measure::add(Element* el)
                               _lineBreak = true;
                               break;
                         }
-                  _sel.push_back(el);
+                  _el.push_back(el);
                   break;
 
             case REPEAT:
                   _repeatFlags |= el->subtype();
-                  // Added by DK.
-                  RepeatFlag().setMeasureRepeatFlag(el,0);
-                  //----------------------
                   // fall through
 
             case DYNAMIC:
@@ -913,17 +891,7 @@ void Measure::add(Element* el)
             case TEXT:
             case TEMPO_TEXT:
             case IMAGE:
-                  _sel.append(el);
-                  break;
-
-            case BAR_LINE:
-                  {
-                  Segment* seg = getSegment(Segment::SegEndBarLine, tick() + tickLen());
-                  // Added by DK.
-                  RepeatFlag().setMeasureRepeatFlag(el,0);
-                  //----------------------
-                  seg->add(el);
-                  }
+                  _el.append(el);
                   break;
 
             default:
@@ -966,7 +934,7 @@ void Measure::remove(Element* el)
                               _lineBreak = false;
                               break;
                         }
-                  if (!_sel.remove(el))
+                  if (!_el.remove(el))
                         printf("Measure(%p)::remove(%s,%p) not found\n",
                            this, el->name(), el);
                   break;
@@ -980,10 +948,9 @@ void Measure::remove(Element* el)
             case TEXT:
             case SYMBOL:
             case IMAGE:
-                  if (!_sel.remove(el)) {
-                        if (!_pel.remove(el))
-                              printf("Measure(%p)::remove(%s,%p) not found\n",
-                                 this, el->name(), el);
+                  if (!_el.remove(el)) {
+                        printf("Measure(%p)::remove(%s,%p) not found\n",
+                           this, el->name(), el);
                         }
                   break;
 
@@ -1018,7 +985,7 @@ void Measure::remove(Element* el)
 
 void Measure::moveTicks(int diff)
       {
-      foreach(Element* e, _sel)
+      foreach(Element* e, _el)
             e->setTick(e->tick() + diff);
       setTick(tick() + diff);
       int staves = _score->nstaves();
@@ -1167,13 +1134,6 @@ static double sff(double x, double xMin)
 
 void Measure::layoutX(ScoreLayout* layout, double stretch)
       {
-      if (subtype() == MEASURE_HBOX) {
-            double w = _spatium * 5.0;
-            if (stretch > w)
-                  w = stretch;
-            _mw = MeasureWidth(w, 0.0);     //DEBUG
-            return;
-            }
       int nstaves = _score->nstaves();
       int tracks  = nstaves * VOICES;
 
@@ -1509,9 +1469,8 @@ again:
                               e->setPos(- e->bbox().x() - xo + point(style->timesigLeftMargin), y);
                         else if (t == KEYSIG)
                               e->setPos(- e->bbox().x() - xo + point(style->keysigLeftMargin), y);
-                        else  if (s->subtype() == Segment::SegEndBarLine) {
+                        else  if (s->subtype() == Segment::SegEndBarLine)
                               e->setPos(0.0, y);
-                              }
                         else
                               e->setPos(- e->bbox().x() - xo, y);
                         }
@@ -1656,12 +1615,10 @@ void Measure::insertStaff1(Staff* staff, int staffIdx)
             s->insertStaff(staffIdx);
 
       MStaff* ms = new MStaff;
-      if (subtype() == MEASURE_NORMAL) {
-            ms->lines   = new StaffLines(score());
-            ms->lines->setLines(staff->lines());
-            ms->lines->setMag(staff->small() ? 0.7 : 1.0);
-            ms->lines->setParent(this);
-            }
+      ms->lines   = new StaffLines(score());
+      ms->lines->setLines(staff->lines());
+      ms->lines->setMag(staff->small() ? 0.7 : 1.0);
+      ms->lines->setParent(this);
       ms->distance = point(staffIdx == 0 ? score()->style()->systemDistance : score()->style()->staffDistance);
       staves.insert(staves.begin()+staffIdx, ms);
       }
@@ -1860,7 +1817,7 @@ Element* Measure::drop(const QPointF& p, const QPointF& /*offset*/, Element* e)
                               {
                               score()->undoChangeRepeatFlags(this, _repeatFlags & ~RepeatEnd);
                               if (next())
-                                    score()->undoChangeRepeatFlags(next(), next()->repeatFlags() & ~RepeatStart);
+                                    score()->undoChangeRepeatFlags((Measure*)next(), ((Measure*)next())->repeatFlags() & ~RepeatStart);  //TODO: MeasureBase
                               score()->undoChangeEndBarLine(this, bl->subtype());
                               BarLine* bl = endBarLine();
                               if (bl)
@@ -1873,12 +1830,12 @@ Element* Measure::drop(const QPointF& p, const QPointF& /*offset*/, Element* e)
                         case END_REPEAT:
                               score()->undoChangeRepeatFlags(this, _repeatFlags | RepeatEnd);
                               if (next())
-                                    score()->undoChangeRepeatFlags(next(), next()->repeatFlags() & ~RepeatStart);
+                                    score()->undoChangeRepeatFlags((Measure*)next(), ((Measure*)next())->repeatFlags() & ~RepeatStart); //TODO: MeasureBase
                               break;
                         case END_START_REPEAT:
                               score()->undoChangeRepeatFlags(this, _repeatFlags | RepeatEnd);
                               if (next())
-                                    score()->undoChangeRepeatFlags(next(), next()->repeatFlags() | RepeatStart);
+                                    score()->undoChangeRepeatFlags((Measure*)next(), ((Measure*)next())->repeatFlags() | RepeatStart); //TODO: MeasureBase
                               break;
                         }
                   delete bl;
@@ -1927,7 +1884,7 @@ Element* Measure::drop(const QPointF& p, const QPointF& /*offset*/, Element* e)
                   rm->setStaff(staff);
                   rm->setParent(seg);
                   _score->undoAddElement(rm);
-                  foreach(Element* el, _sel) {
+                  foreach(Element* el, _el) {
                         if (el->type() == SLUR && el->staffIdx() == idx)
                               _score->undoRemoveElement(el);
                         }
@@ -2087,7 +2044,7 @@ void Measure::adjustToLen(int ol, int nl)
             //
             //  CHECK: do not remove all slurs
             //
-            foreach(Element* e, _sel) {
+            foreach(Element* e, _el) {
                   if (e->type() == SLUR)
                         score()->undoRemoveElement(e);
                   }
@@ -2098,59 +2055,18 @@ void Measure::adjustToLen(int ol, int nl)
       }
 
 //---------------------------------------------------------
-//   writeBox
-//---------------------------------------------------------
-
-void Measure::writeBox(Xml& xml) const
-      {
-      if (subtype() == MEASURE_HBOX)
-            xml.stag("HBox");
-      else if (subtype() == MEASURE_VBOX)
-            xml.stag("VBox");
-      xml.etag();
-      }
-
-//---------------------------------------------------------
-//   readBox
-//---------------------------------------------------------
-
-void Measure::readBox(QDomElement e)
-      {
-      int curTickPos = e.attribute("tick", "0").toInt();
-      setTick(curTickPos);
-      for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
-            QString tag(e.tagName());
-            QString val(e.text());
-            if (tag == "xxx") {
-                  }
-            else
-                  domError(e);
-            }
-      }
-
-//---------------------------------------------------------
 //   write
 //---------------------------------------------------------
 
-void Measure::write(Xml& xml, int no, int staff) const
+void Measure::write(Xml& xml, int staff) const
       {
-      if (subtype() && staff)     // hbox and vbox are output only in staff 0
-            return;
-
-      if (subtype()) {
-            writeBox(xml);
-            return;
-            }
-
       if (xml.curTick != tick())
-            xml.stag(QString("Measure number=\"%1\" tick=\"%2\"").arg(no).arg(tick()));
+            xml.stag(QString("Measure number=\"%1\" tick=\"%2\"").arg(_no + 1).arg(tick()));
       else
-            xml.stag(QString("Measure number=\"%1\"").arg(no));
+            xml.stag(QString("Measure number=\"%1\"").arg(_no + 1));
       xml.curTick = tick();
 
       if (staff == 0) {
-            for (ciElement ie = _pel.begin(); ie != _pel.end(); ++ie)
-                  (*ie)->write(xml);
             if (_repeatFlags & RepeatStart)
                   xml.tagE("startRepeat");
             if (_repeatFlags & RepeatEnd)
@@ -2164,8 +2080,8 @@ void Measure::write(Xml& xml, int no, int staff) const
                   tuplet->write(xml, id++);
             }
 
-      foreach (const Element* el, _sel) {
-            if (el->staff() == _score->staff(staff))
+      foreach (const Element* el, _el) {
+            if ((el->staff() == _score->staff(staff)) || (el->staff() == 0 && staff == 0))
                   el->write(xml);
             }
 
@@ -2196,8 +2112,6 @@ void Measure::write(Xml& xml) const
       xml.stag(QString("Measure tick=\"%1\"").arg(tick()));
       xml.curTick = tick();
 
-      for (ciElement ie = _pel.begin(); ie != _pel.end(); ++ie)
-            (*ie)->write(xml);
       if (_repeatFlags & RepeatStart)
             xml.tagE("startRepeat");
       if (_repeatFlags & RepeatEnd)
@@ -2208,7 +2122,7 @@ void Measure::write(Xml& xml) const
 
       for (int staffIdx = 0; staffIdx < _score->nstaves(); ++staffIdx) {
             xml.stag("Staff");
-            for (ciElement i = _sel.begin(); i != _sel.end(); ++i) {
+            for (ciElement i = _el.begin(); i != _el.end(); ++i) {
                   if ((*i)->staff() == _score->staff(staffIdx) && (*i)->type() != SLUR_SEGMENT)
                         (*i)->write(xml);
                   }
@@ -2384,7 +2298,27 @@ void Measure::read(QDomElement e, int idx)
                         score()->curTick = t->tick();
                         t->setStaff(staff);
                         }
-                  add(t);
+                  switch(t->subtype()) {
+                        case TEXT_TITLE:
+                        case TEXT_SUBTITLE:
+                        case TEXT_COMPOSER:
+                        case TEXT_POET:
+                              // for backward compatibility:
+                              {
+                              ScoreLayout* layout = score()->mainLayout();
+                              MeasureBase* measure = layout->first();
+                              if (measure->type() != VBOX) {
+                                    measure = new VBox(score());
+                                    measure->setTick(0);
+                                    layout->insert(measure, layout->first());
+                                    }
+                              measure->add(t);
+                              }
+                              break;
+                        default:
+                              add(t);
+                              break;
+                        }
                   }
             else if (tag == "Tempo") {
                   TempoText* t = new TempoText(score());
@@ -2507,8 +2441,9 @@ void Measure::read(QDomElement e)
 //   collectElements
 //---------------------------------------------------------
 
-void Measure::collectElements(QList<Element*>& el)
+void Measure::collectElements(QList<const Element*>& el) const
       {
+      MeasureBase::collectElements(el);
       el.append(this);     // to make measure clickable
 
       foreach(const MStaff* ms, staves) {
@@ -2579,12 +2514,9 @@ void Measure::collectElements(QList<Element*>& el)
                         el.append(e);
                   }
             }
-      foreach(Element* e, _sel) {
-            if (e->staff()->show())
+      foreach(Element* e, _el) {
+            if (!e->staff() || e->staff()->show())
                   el.append(e);
-            }
-      foreach(Element* e, _pel) {
-            el.append(e);
             }
       foreach(Beam* b, _beamList) {
             if (b->staff()->show())
@@ -2769,82 +2701,3 @@ bool Measure::setStartRepeatBarLine(bool val)
             }
       return changed;
       }
-
-//---------------------------------------------------------
-//   startEdit
-//---------------------------------------------------------
-
-bool Measure::startEdit(const QPointF&)
-      {
-      if (subtype() == MEASURE_NORMAL)
-            return false;
-      return true;
-      }
-
-//---------------------------------------------------------
-//   edit
-//---------------------------------------------------------
-
-bool Measure::edit(int, QKeyEvent*)
-      {
-      return false;
-      }
-
-//---------------------------------------------------------
-//   editDrag
-//---------------------------------------------------------
-
-void Measure::editDrag(int, const QPointF&, const QPointF&)
-      {
-      }
-
-//---------------------------------------------------------
-//   endEditDrag
-//---------------------------------------------------------
-
-void Measure::endEditDrag()
-      {
-      }
-
-//---------------------------------------------------------
-//   endEdit
-//---------------------------------------------------------
-
-void Measure::endEdit()
-      {
-      }
-
-//---------------------------------------------------------
-//   updateGrips
-//---------------------------------------------------------
-
-void Measure::updateGrips(int* grips, QRectF* grip) const
-      {
-      *grips = 1;
-      QPointF p(canvasPos());
-      grip[0].translate(QPointF(p.x() + width(), p.y() + height() * .5));
-      }
-
-//---------------------------------------------------------
-//   gripAnchor
-//---------------------------------------------------------
-
-QPointF Measure::gripAnchor(int) const
-      {
-      return QPointF();
-      }
-
-//---------------------------------------------------------
-//   draw
-//---------------------------------------------------------
-
-void Measure::draw(QPainter& p)
-      {
-      if (subtype() == MEASURE_NORMAL)
-            return;
-      if (selected()) {
-            p.drawRect(bbox());
-            }
-      }
-
-

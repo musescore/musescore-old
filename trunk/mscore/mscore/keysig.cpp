@@ -141,7 +141,7 @@ void KeySig::layout(ScoreLayout*)
 //   set
 //---------------------------------------------------------
 
-void KeySig::draw(QPainter& p)
+void KeySig::draw(QPainter& p) const
       {
       double yoff = yoffset();
       Sym* ss     = &symbols[sharpSym];

@@ -112,6 +112,8 @@ void Segment::init()
             _elist.push_back(0);
       for (int i = 0; i < staves; ++i)
             _lyrics.push_back(LyricsList());
+      _prev = 0;
+      _next = 0;
       }
 
 //---------------------------------------------------------
@@ -127,10 +129,14 @@ Segment* Segment::next1() const
       {
       if (next())
             return next();
-      Measure* m = measure()->next();
-      if (m)
-            return m->first();
-      return 0;
+      MeasureBase* m = measure();
+      for (;;) {
+            m = m->next();
+            if (m == 0)
+                  return 0;
+            if (m->type() == MEASURE)
+                  return ((Measure*)m)->first();
+            }
       }
 
 //---------------------------------------------------------
@@ -146,10 +152,14 @@ Segment* Segment::prev1() const
       {
       if (prev())
             return prev();
-      Measure* m = measure()->prev();
-      if (m)
-            return m->last();
-      return 0;
+      MeasureBase* m = measure();
+      for (;;) {
+            m = m->prev();
+            if (m == 0)
+                  return 0;
+            if (m->type() == MEASURE)
+                  return ((Measure*)m)->last();
+            }
       }
 
 //---------------------------------------------------------
@@ -223,15 +233,21 @@ void Segment::add(Element* el)
                   {
                   int flags = measure()->repeatFlags();
                   if (el->subtype() == START_REPEAT) {
-                        if (measure()->next())
-                              measure()->next()->setRepeatFlags(flags | RepeatStart);
+                        MeasureBase* mb = measure();
+                        while (mb->next() && mb->next()->type() != MEASURE)
+                              mb = mb->next();
+                        if (mb->next())
+                              ((Measure*)mb->next())->setRepeatFlags(flags | RepeatStart);
                         }
                   else if (el->subtype() == END_REPEAT)
                         measure()->setRepeatFlags(flags | RepeatEnd);
                   else if (el->subtype() == END_START_REPEAT) {
                         measure()->setRepeatFlags(flags | RepeatEnd);
-                        if (measure()->next())
-                              measure()->next()->setRepeatFlags(flags | RepeatStart);
+                        MeasureBase* mb = measure();
+                        while (mb->next() && mb->next()->type() != MEASURE)
+                              mb = mb->next();
+                        if (mb->next())
+                              ((Measure*)mb->next())->setRepeatFlags(flags | RepeatStart);
                         }
                   }
                   _elist[track] = el;
@@ -297,14 +313,20 @@ void Segment::remove(Element* el)
                   {
                   int flags = measure()->repeatFlags();
                   if (el->subtype() == START_REPEAT) {
-                        if (measure()->next())
-                              measure()->next()->setRepeatFlags(flags & ~RepeatStart);
+                        MeasureBase* mb = measure();
+                        while (mb->next() && mb->next()->type() != MEASURE)
+                              mb = mb->next();
+                        if (mb->next())
+                              ((Measure*)mb->next())->setRepeatFlags(flags & ~RepeatStart);
                         }
                   else if (el->subtype() == END_REPEAT)
                         measure()->setRepeatFlags(flags & ~RepeatEnd);
                   else if (el->subtype() == END_START_REPEAT) {
-                        if (measure()->next())
-                              measure()->next()->setRepeatFlags(flags & ~RepeatStart);
+                        MeasureBase* mb = measure();
+                        while (mb->next() && mb->next()->type() != MEASURE)
+                              mb = mb->next();
+                        if (mb->next())
+                              ((Measure*)mb->next())->setRepeatFlags(flags & ~RepeatStart);
                         measure()->setRepeatFlags(flags & ~RepeatEnd);
                         }
                   }

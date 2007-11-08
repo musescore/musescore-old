@@ -317,7 +317,10 @@ void Staff::changeKeySig(int tick, int st)
       //    then its unnecessary and must be removed
       //---------------------------------------------
 
-      for (Measure* m = measure; m; m = m->next()) {
+      for (MeasureBase* mb = measure; mb; mb = mb->next()) {
+            if (mb->type() != MEASURE)
+                  continue;
+            Measure* m = (Measure*)mb;
             bool found = false;
             for (Segment* segment = m->first(); segment; segment = segment->next()) {
                   if (segment->subtype() != Segment::SegKeySig)
@@ -413,7 +416,10 @@ void Staff::changeClef(int tick, int st)
       //    then its unnecessary and must be removed
       //---------------------------------------------
 
-      for (Measure* m = measure; m; m = m->next()) {
+      for (MeasureBase* mb = measure; mb; mb = mb->next()) {
+            if (mb->type() != MEASURE)
+                  continue;
+            Measure* m = (Measure*)mb;
             bool found = false;
             for (Segment* segment = m->first(); segment; segment = segment->next()) {
                   if (segment->subtype() != Segment::SegClef)

@@ -49,7 +49,7 @@ class Lyrics : public Text {
       Syllabic syllabic() const     { return _syllabic; }
       virtual void add(Element*);
       virtual void remove(Element*);
-      virtual void draw(QPainter&);
+      virtual void draw(QPainter&) const;
       Line* separator() const       { return _separator; }
       void setSeparator(Line* l)    { _separator = l; }
       };

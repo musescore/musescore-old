@@ -516,7 +516,7 @@ void Canvas::mouseMoveEvent(QMouseEvent* ev)
       mouseMoveEvent1(ev);
       if (dragCanvasState)
            return;
-      if (state == LASSO || state == DRAG_EDIT || state == NOTE_ENTRY)
+      if (state == LASSO || state == NOTE_ENTRY)
             _score->setLayoutAll(false);  // DEBUG
       _score->end();
       }
@@ -632,6 +632,7 @@ void Canvas::mouseMoveEvent1(QMouseEvent* ev)
 
             case DRAG_EDIT:
                   {
+                  _score->setLayoutAll(false);
                   Element* e = _score->editObject;
                   score()->addRefresh(e->abbox());
                   e->editDrag(curGrip, startMove, delta);
@@ -1149,13 +1150,11 @@ void Canvas::paint(const QRect& rr, QPainter& p)
       QRectF fr = imatrix.mapRect(QRectF(rr));
 
       QRegion r1(rr);
-      for (iPage ip = _layout->pages()->begin(); ip != _layout->pages()->end(); ++ip) {
-            Page* page = *ip;
+      foreach (const Page* page, _layout->pages())
             r1 -= _matrix.mapRect(page->abbox()).toRect();
-            }
       p.setClipRect(fr);
 
-      QList<Element*> ell = _layout->items(fr);
+      QList<const Element*> ell = _layout->items(fr);
       drawElements(p, ell);
 
       if (dropRectangle.isValid())
@@ -1188,7 +1187,7 @@ void Canvas::paint(const QRect& rr, QPainter& p)
                   pen.setWidthF(3.0 / p.matrix().m11());
                   pen.setStyle(Qt::DotLine);
                   p.setPen(pen);
-                  for (Measure* m = sm; m && (m != em); m = m->next()) {
+                  for (MeasureBase* m = sm; m && (m != em); m = m->next()) {
                         double x1 = m->abbox().x();
                         double x2 = x1 + m->abbox().width();
                         double y1 = m->abbox().y() - _spatium;
@@ -1216,7 +1215,7 @@ void Canvas::paint(const QRect& rr, QPainter& p)
                   pen.setWidthF(2.0 / p.matrix().m11());
                   pen.setStyle(Qt::SolidLine);
                   p.setPen(pen);
-                  for (Measure* m = sm; m && (m != em); m = m->next()) {
+                  for (MeasureBase* m = sm; m && (m != em); m = m->next()) {
                         QRectF bb     = m->abbox();
                         double x1     = bb.x();
                         double x2     = x1 + bb.width();
@@ -1290,8 +1289,9 @@ bool Canvas::dragTimeAnchorElement(const QPointF& pos)
       Segment* seg;
       QPointF offset;
       int tick;
-      Measure* m = _score->pos2measure(pos, &tick, &staff, 0, &seg, &offset);
-      if (m) {
+      MeasureBase* mb = _score->pos2measure(pos, &tick, &staff, 0, &seg, &offset);
+      if (mb && mb->type() == MEASURE) {
+            Measure* m = (Measure*)mb;
             System* s = m->system();
             int staffIdx = staff->idx();
             QRectF sb(s->staff(staffIdx)->bbox());
@@ -1335,8 +1335,9 @@ bool Canvas::dragAboveMeasure(const QPointF& pos)
       Segment* seg;
       QPointF offset;
       int tick;
-      Measure* m = _score->pos2measure(pos, &tick, &staff, 0, &seg, &offset);
-      if (m) {
+      MeasureBase* mb = _score->pos2measure(pos, &tick, &staff, 0, &seg, &offset);
+      if (mb && mb->type() == MEASURE) {
+            Measure* m = (Measure*)mb;
             System* s = m->system();
             int staffIdx = staff->idx();
 
@@ -1362,8 +1363,8 @@ bool Canvas::dragAboveSystem(const QPointF& pos)
       Segment* seg;
       QPointF offset;
       int tick;
-      Measure* m = _score->pos2measure(pos, &tick, &staff, 0, &seg, &offset);
-      if (m) {
+      MeasureBase* m = _score->pos2measure(pos, &tick, &staff, 0, &seg, &offset);
+      if (m && m->type() == MEASURE) {
             System* s = m->system();
             int staffIdx = staff->idx();
             if (staffIdx) {
@@ -1945,7 +1946,7 @@ static bool elementLower(const Element* e1, const Element* e2)
 
 Element* Canvas::elementAt(const QPointF& p)
       {
-      QList<Element*> el = _layout->items(p);
+      QList<const Element*> el = _layout->items(p);
       if (el.empty())
             return 0;
       qSort(el.begin(), el.end(), elementLower);
@@ -1956,20 +1957,20 @@ Element* Canvas::elementAt(const QPointF& p)
       int n = el.size();
       for (int i = 0; i < n; ++i) {
             if (el[i]->selected() && (i < (n-1))) {
-                  return el.at(i + 1);
+                  return const_cast<Element*>(el.at(i + 1));
                   }
             }
-      return el.at(0);
+      return const_cast<Element*>(el.at(0));
       }
 
 //---------------------------------------------------------
 //   drawElements
 //---------------------------------------------------------
 
-void Canvas::drawElements(QPainter& p,const QList<Element*>& el)
+void Canvas::drawElements(QPainter& p,const QList<const Element*>& el)
       {
       for (int i = 0; i < el.size(); ++i) {
-            Element* e = el.at(i);
+            const Element* e = el.at(i);
             e->itemDiscovered = 0;
 
             if (!e->visible()) {
@@ -2021,7 +2022,7 @@ void Canvas::paintLasso(QPainter& p)
       p.setRenderHint(QPainter::Antialiasing, true);
       p.setRenderHint(QPainter::TextAntialiasing, true);
 
-      QList<Element*> el = _layout->items(QRectF(0.0, 0.0, 100000.0, 1000000.0));
+      QList<const Element*> el = _layout->items(QRectF(0.0, 0.0, 100000.0, 1000000.0));
       drawElements(p, el);
       cursor->draw(p);
 

@@ -221,33 +221,12 @@
    <item row="1" column="0" >
     <widget class="QLabel" name="label_11" >
      <property name="text" >
-      <string>Tick Elements:</string>
-     </property>
-    </widget>
-   </item>
-   <item row="1" column="1" >
-    <widget class="QLabel" name="label_12" >
-     <property name="text" >
-      <string>Page Elements:</string>
+      <string>Elements:</string>
      </property>
     </widget>
    </item>
    <item row="2" column="0" >
     <widget class="QTreeWidget" name="sel" >
-     <column>
-      <property name="text" >
-       <string>Element</string>
-      </property>
-     </column>
-     <column>
-      <property name="text" >
-       <string>Subtype</string>
-      </property>
-     </column>
-    </widget>
-   </item>
-   <item row="2" column="1" >
-    <widget class="QTreeWidget" name="pel" >
      <column>
       <property name="text" >
        <string>Element</string>

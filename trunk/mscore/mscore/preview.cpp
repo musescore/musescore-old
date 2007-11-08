@@ -48,7 +48,7 @@ void PagePreview::setScore(Score* s)
       _layout->setSpatium(ol->spatium());
       _layout->setPageFormat(*(ol->pageFormat()));
 
-      for (Measure* m = ol->first(); m; m = m->next()) {
+      for (MeasureBase* m = ol->first(); m; m = m->next()) {
             //
             // HACK:
             // create deep copy of Measure
@@ -57,7 +57,7 @@ void PagePreview::setScore(Score* s)
             QMimeData* mimeData = new QMimeData;
             mimeData->setData(mimeType, m->mimeData(QPointF()));
 
-            Measure* nm = new Measure(_score);
+            MeasureBase* nm = m->clone();
             QByteArray data(mimeData->data(mimeType));
 
 // printf("DATA\n%s\n", data.data());
@@ -87,7 +87,7 @@ void PagePreview::setScore(Score* s)
 PagePreview::~PagePreview()
       {
       if (_layout) {
-            for (Measure* m = _layout->first(); m; m = m->next())
+            for (MeasureBase* m = _layout->first(); m; m = m->next())
                   delete m;
             delete _layout;
             }
@@ -122,7 +122,7 @@ void PagePreview::resizeEvent(QResizeEvent*)
 
 void PagePreview::layout()
       {
-      _layout->pages()->update();
+//TODO?      _layout->pages().update();
       _layout->doLayout();
       update();
       }
@@ -151,23 +151,23 @@ void PagePreview::paintEvent(QPaintEvent* ev)
       p.setRenderHint(QPainter::Antialiasing, true);
 
       p.fillRect(rr, _fgColor);
-      if (_layout->pages()->empty())
+      if (_layout->pages().empty())
             return;
 
       p.setMatrix(matrix);
 
       QRegion r1(rr);
-      Page* page = _layout->pages()->front();
+      Page* page = _layout->pages().front();
       QRectF pbbox(page->abbox());
       r1 -= matrix.mapRect(pbbox).toRect();
       p.translate(page->pos());
       page->draw(p);
 
       QRectF fr = matrix.inverted().mapRect(QRectF(rr));
-      QList<Element*> ell = _layout->items(fr);
+      QList<const Element*> ell = _layout->items(fr);
 
       for (int i = 0; i < ell.size(); ++i) {
-            Element* e = ell.at(i);
+            const Element* e = ell.at(i);
             e->itemDiscovered = 0;
 
             if (!(e->visible() || _score->showInvisible()))

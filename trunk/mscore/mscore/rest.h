@@ -48,7 +48,7 @@ class Rest : public ChordRest {
 
       virtual void setTickLen(int l);
       virtual void dump() const;
-      virtual void draw(QPainter&);
+      virtual void draw(QPainter&) const;
       virtual void write(Xml& xml) const;
       virtual void read(QDomElement);
       virtual void add(Element*);

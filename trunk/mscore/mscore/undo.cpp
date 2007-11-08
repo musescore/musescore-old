@@ -257,15 +257,15 @@ void Score::processUndoOp(UndoOp* i, bool undo)
                   break;
             case UndoOp::InsertMStaff:
                   if (undo)
-                        i->measure->removeMStaff(i->mstaff, i->val1);
+                        ((Measure*)i->measure)->removeMStaff(i->mstaff, i->val1);
                   else
-                        i->measure->insertMStaff(i->mstaff, i->val1);
+                        ((Measure*)i->measure)->insertMStaff(i->mstaff, i->val1);
                   break;
             case UndoOp::RemoveMStaff:
                   if (undo)
-                        i->measure->insertMStaff(i->mstaff, i->val1);
+                        ((Measure*)i->measure)->insertMStaff(i->mstaff, i->val1);
                   else
-                        i->measure->removeMStaff(i->mstaff, i->val1);
+                        ((Measure*)i->measure)->removeMStaff(i->mstaff, i->val1);
                   break;
             case UndoOp::InsertMeasure:
                   if (undo)
@@ -351,15 +351,15 @@ void Score::processUndoOp(UndoOp* i, bool undo)
 
             case UndoOp::InsertStaves:
                   if (undo)
-                        i->measure->removeStaves(i->val1, i->val2);
+                        ((Measure*)i->measure)->removeStaves(i->val1, i->val2);
                   else
-                        i->measure->insertStaves(i->val1, i->val2);
+                        ((Measure*)i->measure)->insertStaves(i->val1, i->val2);
                   break;
             case UndoOp::RemoveStaves:
                   if (undo)
-                        i->measure->insertStaves(i->val1, i->val2);
+                        ((Measure*)i->measure)->insertStaves(i->val1, i->val2);
                   else
-                        i->measure->removeStaves(i->val1, i->val2);
+                        ((Measure*)i->measure)->removeStaves(i->val1, i->val2);
                   break;
 
             case UndoOp::ChangeKeySig:
@@ -470,7 +470,7 @@ void Score::processUndoOp(UndoOp* i, bool undo)
                   break;
             case UndoOp::ChangeMeasureLen:
                   {
-                  Measure* m = i->measure;
+                  Measure* m = (Measure*)i->measure;
                   int ol     = m->tickLen();
                   int nl     = i->val1;
                   m->setTickLen(nl);
@@ -505,14 +505,14 @@ void Score::processUndoOp(UndoOp* i, bool undo)
 
             case UndoOp::ChangeRepeatFlags:
                   {
-                  int tmp = i->measure->repeatFlags();
-                  i->measure->setRepeatFlags(i->val1);
+                  int tmp = ((Measure*)i->measure)->repeatFlags();
+                  ((Measure*)i->measure)->setRepeatFlags(i->val1);
                   i->val1 = tmp;
                   }
             case UndoOp::ChangeEndBarLine:
                   {
-                  int tmp = i->measure->endBarLineType();
-                  i->measure->setEndBarLineType(i->val1, i->val1 != NORMAL_BAR);
+                  int tmp = ((Measure*)i->measure)->endBarLineType();
+                  ((Measure*)i->measure)->setEndBarLineType(i->val1, i->val1 != NORMAL_BAR);
                   i->val1 = tmp;
                   }
                   break;
@@ -793,7 +793,7 @@ void Score::undoOp(UndoOp::UndoType type, Measure* m, MStaff* s, int staff)
       undoList.back()->push_back(i);
       }
 
-void Score::undoOp(UndoOp::UndoType type, Measure* m)
+void Score::undoOp(UndoOp::UndoType type, MeasureBase* m)
       {
       checkUndoOp();
       UndoOp i;
@@ -991,7 +991,10 @@ void Score::addElement(Element* element)
             //-----------------------------------------------
 
             bool endFound = false;
-            for (Measure* measure = _layout->first(); measure; measure = measure->next()) {
+            for (MeasureBase* mb = _layout->first(); mb; mb = mb->next()) {
+                  if (mb->type() != MEASURE)
+                        continue;
+                  Measure* measure = (Measure*)mb;
                   for (Segment* segment = measure->first(); segment; segment = segment->next()) {
                         int startTrack = staffIdx * VOICES;
                         int endTrack   = startTrack + VOICES;
@@ -1048,7 +1051,10 @@ void Score::removeElement(Element* element)
             //-----------------------------------------------
 
             bool endFound = false;
-            for (Measure* measure = _layout->first(); measure; measure = measure->next()) {
+            for (MeasureBase* mb = _layout->first(); mb; mb = mb->next()) {
+                  if (mb->type() != MEASURE)
+                        continue;
+                  Measure* measure = (Measure*)mb;
                   for (Segment* segment = measure->first(); segment; segment = segment->next()) {
                         int startTrack = staffIdx * VOICES;
                         int endTrack   = startTrack + VOICES;

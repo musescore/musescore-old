@@ -71,7 +71,7 @@ void PlayPanel::closeEvent(QCloseEvent* ev)
 void PlayPanel::setScore(Score* s)
       {
       cs = s;
-      Measure* lm = cs->mainLayout()->last();
+      MeasureBase* lm = cs->mainLayout()->last();
       if (lm)
             setEndpos(lm->tick() + lm->tickLen());
       }

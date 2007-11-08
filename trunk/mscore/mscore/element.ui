@@ -91,13 +91,6 @@
          </widget>
         </item>
         <item>
-         <widget class="QPushButton" name="anchorButton" >
-          <property name="text" >
-           <string>Anchor</string>
-          </property>
-         </widget>
-        </item>
-        <item>
          <spacer>
           <property name="orientation" >
            <enum>Qt::Horizontal</enum>

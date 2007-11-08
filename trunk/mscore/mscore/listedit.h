@@ -123,10 +123,7 @@ class ShowElementBase : public QWidget {
       Element* el;
 
    private slots:
-      void nextClicked();
-      void previousClicked();
       void parentClicked();
-      void anchorClicked();
       void offsetxChanged(double);
       void offsetyChanged(double);
       void selectedClicked(bool);

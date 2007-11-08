@@ -31,7 +31,7 @@
 //   draw
 //---------------------------------------------------------
 
-void PedalSegment::draw(QPainter& p)
+void PedalSegment::draw(QPainter& p) const
       {
       qreal ottavaLineWidth    = _spatium * .18;
       qreal ottavaTextDistance = _spatium * .5;

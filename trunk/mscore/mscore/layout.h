@@ -27,34 +27,34 @@
 
 class Score;
 class PageFormat;
-class PageList;
 class Page;
 class Measure;
 class QPaintDevice;
 class System;
 
 //---------------------------------------------------------
-//   ElemList
+//   MeasureBaseList
 //---------------------------------------------------------
 
-class ElemList {
+class MeasureBaseList {
       int _size;
-      Element* _first;
-      Element* _last;
+      MeasureBase* _first;
+      MeasureBase* _last;
 
    public:
-      ElemList() {
+      MeasureBaseList() {
             _first = 0;
             _last  = 0;
             _size  = 0;
             };
-      Element* first() const { return _first; }
-      Element* last()  const { return _last; }
+      MeasureBase* first() const { return _first; }
+      MeasureBase* last()  const { return _last; }
       void clear()           { _first = _last = 0; }
-      void push_back(Element* e);
-      void push_front(Element* e);
-      void insert(Element*, Element*);
-      void erase(Element*);
+      void push_back(MeasureBase* e);
+      void push_front(MeasureBase* e);
+      void insert(MeasureBase*, MeasureBase*);
+      void erase(MeasureBase*);
+      void change(MeasureBase* o, MeasureBase* n);
       };
 
 //---------------------------------------------------------
@@ -70,19 +70,24 @@ class ScoreLayout : public Element {
       //
       // modified by layout()
       //
-      ElemList _measures;     // here are the notes
+      MeasureBaseList _measures;           // here are the notes
       //
       // generated objects by layout():
       //
-      PageList* _pages;             // pages are build from systems
-      QList<System*>* _systems;     // measures are akkumulated to systems
+      QList<Page*> _pages;          // pages are build from systems
+      QList<System*> _systems;      // measures are akkumulated to systems
 
       bool _needLayout;
 
       Page* addPage();
-      bool layoutPage(Page* page, Measure*& im, QList<System*>::iterator& is);
-      System* layoutSystem(Measure*& im, System*, qreal x, qreal y, qreal w);
+      bool layoutPage();
+      System* layoutSystem(qreal x, qreal y, qreal w);
       void processSystemHeader(Measure* m);
+
+      // values used during doLayout:
+      int curPage;
+      int curSystem;
+      MeasureBase* curMeasure;
 
    protected:
       QList<Element*> _gel;   // global elements: Slur, SLine
@@ -101,19 +106,22 @@ class ScoreLayout : public Element {
       void setSpatium(double v)               { _spatium = v; }
       PageFormat* pageFormat() const          { return _pageFormat; }
       void setPageFormat(const PageFormat& pf);
-      PageList* pages() const                 { return _pages; }
-      QList<System*>* systems() const         { return _systems; }
+      QList<Page*> pages() const              { return _pages; }
+      QList<System*>* systems()               { return &_systems; }
       bool needLayout() const                 { return _needLayout; }
-      Measure* first() const                  { return (Measure*)_measures.first(); }
-      Measure* last()  const                  { return (Measure*)_measures.last();  }
-      void push_back(Measure* el)             { _measures.push_back((Element*)el);  }
+
+      MeasureBase* first() const              { return _measures.first(); }
+      MeasureBase* last()  const              { return _measures.last();  }
+      void push_back(MeasureBase* el)         { _measures.push_back(el);  }
       void clear()                            { _measures.clear(); }
-      void erase(Measure* im);
-      void insert(Measure* im, Measure* m);
+      void erase(MeasureBase* im);
+      void insert(MeasureBase* im, MeasureBase* m);
+      void change(MeasureBase* o, MeasureBase* n) { _measures.change(o, n); }
+
       void setPaintDevice(QPaintDevice* d)    { _paintDevice = d; }
       QPaintDevice* paintDevice() const       { return _paintDevice; }
-      QList<Element*> items(const QRectF& r)  { return bspTree.items(r); }
-      QList<Element*> items(const QPointF& p) { return bspTree.items(p); }
+      QList<const Element*> items(const QRectF& r)  { return bspTree.items(r); }
+      QList<const Element*> items(const QPointF& p) { return bspTree.items(p); }
       void setInstrumentNames();
       void connectTies();
       void searchHiddenNotes();

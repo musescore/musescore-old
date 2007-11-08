@@ -36,7 +36,7 @@ class Arpeggio : public Element {
       virtual ElementType type() const { return ARPEGGIO; }
       virtual QRectF bbox() const;
 
-      virtual void draw(QPainter&);
+      virtual void draw(QPainter&) const;
       virtual void layout(ScoreLayout*);
       virtual void write(Xml&) const;
       virtual void read(QDomElement);

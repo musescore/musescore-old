@@ -487,7 +487,10 @@ void MuseData::readBackup(const QString& s)
 Measure* MuseData::createMeasure()
       {
       ScoreLayout* la = score->mainLayout();
-      for (Measure* m = la->first(); m; m = m->next()) {
+      for (MeasureBase* mb = la->first(); mb; mb = mb->next()) {
+            if (mb->type() != MEASURE)
+                  continue;
+            Measure* m = (Measure*)mb;
             int st = m->tick();
             int l  = m->tickLen();
             if (curTick == st)

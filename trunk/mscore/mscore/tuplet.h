@@ -85,7 +85,7 @@ class Tuplet : public Element {
       virtual void read(QDomElement);
       void write(Xml&, int) const;
 
-      virtual void draw(QPainter&);
+      virtual void draw(QPainter&) const;
       };
 
 #endif

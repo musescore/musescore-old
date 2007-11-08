@@ -56,6 +56,7 @@
 #include "keysig.h"
 #include "volta.h"
 #include "dynamics.h"
+#include "box.h"
 
 //---------------------------------------------------------
 //   start
@@ -189,22 +190,25 @@ void Score::cmdAdd1(Element* e, const QPointF& pos, const QPointF& dragOffset)
       int pitch, tick;
       QPointF offset;
       Segment* segment;
-      Measure* measure = pos2measure(pos, &tick, &staff, &pitch, &segment, &offset);
-      if (measure == 0) {
+      MeasureBase* mb = pos2measure(pos, &tick, &staff, &pitch, &segment, &offset);
+      if (mb == 0 || mb->type() != MEASURE) {
             printf("cmdAdd: cannot put object here\n");
             delete e;
             return;
             }
+      Measure* measure = (Measure*)mb;
       e->setStaff(staff);
       e->setParent(_layout);
 
       // calculate suitable endposition
       int tick2 = measure->last()->tick();
-      Measure* m2 = measure;
+      MeasureBase* m2 = measure;
       while (tick2 <= tick) {
             m2 = m2->next();
             if (m2 == 0)
                   break;
+            if (m2->type() != MEASURE)
+                  continue;
             tick2 = m2->tick();
             }
 
@@ -295,7 +299,10 @@ void Score::cmdRemove(Element* e)
                   undoOp(UndoOp::ChangeClef, staff, nki->first, oval, -1000);
 
                   tick = nki->first;
-                  for (Measure* m = measure; m; m = m->next()) {
+                  for (MeasureBase* mb = measure; mb; mb = mb->next()) {
+                        if (mb->type() != MEASURE)
+                              continue;
+                        Measure* m = (Measure*)mb;
                         bool found = false;
                         for (Segment* segment = m->first(); segment; segment = segment->next()) {
                               if (segment->subtype() != Segment::SegClef)
@@ -350,7 +357,10 @@ void Score::cmdRemove(Element* e)
                   undoOp(UndoOp::ChangeKeySig, staff, nki->first, oval, -1000);
 
                   tick = nki->first;
-                  for (Measure* m = measure; m; m = m->next()) {
+                  for (MeasureBase* mb = measure; mb; mb = mb->next()) {
+                        if (mb->type() != MEASURE)
+                              continue;
+                        Measure* m = (Measure*)mb;
                         bool found = false;
                         for (Segment* segment = m->first(); segment; segment = segment->next()) {
                               if (segment->subtype() != Segment::SegKeySig)
@@ -734,13 +744,13 @@ void Score::cmdAddText(int subtype)
             endEdit();
             endCmd();
             }
-      Page* page = _layout->pages()->front();
-      QList<System*>* sl = page->systems();
+      Page* page = _layout->pages().front();
+      const QList<System*>* sl = page->systems();
       if (sl == 0 || sl->empty()) {
             printf("first create measure, then repeat operation\n");
             return;
             }
-      const QList<Measure*>& ml = sl->front()->measures();
+      const QList<MeasureBase*>& ml = sl->front()->measures();
       if (ml.empty()) {
             printf("first create measure, then repeat operation\n");
             return;
@@ -752,11 +762,16 @@ void Score::cmdAddText(int subtype)
             case TEXT_COMPOSER:
             case TEXT_POET:
                   {
-                  Measure* measure = ml.front();
+                  MeasureBase* measure = ml.front();
+                  if (measure->type() != VBOX) {
+                        measure = new VBox(this);
+                        measure->setTick(0);
+                        addMeasure(measure);
+	                  undoOp(UndoOp::InsertMeasure, measure);
+                        }
                   s = new Text(this);
                   s->setSubtype(subtype);
-                  s->setAnchorMeasure(measure);
-                  s->setParent(page);
+                  s->setParent(measure);
                   }
                   break;
             case TEXT_COPYRIGHT:
@@ -824,7 +839,7 @@ void Score::cmdAddText(int subtype)
 void Score::upDown(bool up, bool octave)
       {
       ElementList el;
-      foreach(Element* e, *sel->elements()) {
+      foreach(const Element* e, *sel->elements()) {
             if (e->type() != NOTE)
                   continue;
             Note* note = (Note*)e;
@@ -894,7 +909,7 @@ void Score::cmdAppendMeasures(int n)
 
 Measure* Score::appendMeasure()
       {
-      Measure* last = _layout->last();
+      MeasureBase* last = _layout->last();
       int tick = last ? last->tick() + last->tickLen() : 0;
       Measure* measure  = new Measure(this);
       measure->setTick(tick);
@@ -939,7 +954,7 @@ void Score::appendMeasures(int n)
 void Score::cmdInsertMeasures(int n)
       {
       startCmd();
-      insertMeasures(n, MEASURE_NORMAL);
+      insertMeasures(n, MEASURE);
       endCmd();
       }
 
@@ -950,7 +965,7 @@ void Score::cmdInsertMeasures(int n)
 //    (loopcounter ino -- insert numbers)
 //---------------------------------------------------------
 
-void Score::insertMeasures(int n, int subtype)
+void Score::insertMeasures(int n, int type)
       {
 	if (sel->state() != SEL_STAFF && sel->state() != SEL_SYSTEM) {
 		QMessageBox::warning(0, "MuseScore",
@@ -959,24 +974,32 @@ void Score::insertMeasures(int n, int subtype)
 		return;
             }
 
-	int tick   = sel->tickStart;
-	int ticks  = sigmap->ticksMeasure(tick-1);
+	int tick  = sel->tickStart;
+	int ticks = sigmap->ticksMeasure(tick-1);
 
 	for (int ino = 0; ino < n; ++ino) {
-		Measure* m = new Measure(this);
-            m->setSubtype(subtype);
+		MeasureBase* m;
+            if (type == MEASURE)
+                  m = new Measure(this);
+            else if (type == HBOX)
+                  m = new HBox(this);
+            else if (type == VBOX)
+                  m = new VBox(this);
 		m->setTick(tick);
-		m->setTickLen(ticks);
-		for (int idx = 0; idx < nstaves(); ++idx) {
-			Rest* rest    = new Rest(this, tick, 0);  // whole measure rest
-			Staff* staffp = staff(idx);
-			rest->setStaff(staffp);
-			Segment* s = m->getSegment(rest);
-			s->add(rest);
+            if (type == MEASURE) {
+      		m->setTickLen(ticks);
+	      	for (int idx = 0; idx < nstaves(); ++idx) {
+		      	Rest* rest    = new Rest(this, tick, 0);  // whole measure rest
+      			Staff* staffp = staff(idx);
+	      		rest->setStaff(staffp);
+		      	Segment* s = ((Measure*)m)->getSegment(rest);
+			      s->add(rest);
+		            }
 		      }
             addMeasure(m);
 	      undoOp(UndoOp::InsertMeasure, m);
-            undoInsertTime(tick, ticks);
+            if (type == MEASURE)
+                  undoInsertTime(tick, ticks);
             }
       select(0,0,0);
 	layoutAll = true;
@@ -1101,8 +1124,10 @@ void Score::resetUserOffsets()
 
 void Score::resetUserStretch()
       {
-      for (Measure* m = _layout->first(); m; m = m->next())
-            m->setUserStretch(1.0);
+      for (MeasureBase* m = _layout->first(); m; m = m->next()) {
+            if (m->type() == MEASURE)
+                  ((Measure*)m)->setUserStretch(1.0);
+            }
       setDirty();
       layoutAll = true;
       }
@@ -1113,7 +1138,7 @@ void Score::resetUserStretch()
 
 void Score::moveUp(Note* note)
       {
-      int rstaff   = note->staff()->rstaff();
+      int rstaff = note->staff()->rstaff();
 
       if (note->move() == -1) {
             return;
@@ -1159,14 +1184,16 @@ void Score::cmdAddStretch(double val)
             return;
       int startTick = sel->tickStart;
       int endTick   = sel->tickEnd;
-      for (Measure* im = _layout->first(); im; im = im->next()) {
-            if (im->tick() < startTick)
+      for (MeasureBase* m = _layout->first(); m; m = m->next()) {
+            if (m->type() != MEASURE)
                   continue;
-            if (im->tick() >= endTick)
+            if (m->tick() < startTick)
+                  continue;
+            if (m->tick() >= endTick)
                   break;
-            double stretch = im->userStretch();
+            double stretch = ((Measure*)m)->userStretch();
             stretch += val;
-            im->setUserStretch(stretch);
+            ((Measure*)m)->setUserStretch(stretch);
             }
       layoutAll = true;
       }
@@ -1208,12 +1235,8 @@ void Score::cmd(const QString& cmd)
             seq->pause();
       else if (cmd == "play")
             seq->start();
-      else if (cmd == "repeat") {
-            if (playRepeats == false)
-                  playRepeats = true;
-            else
-                  playRepeats = false;
-            }
+      else if (cmd == "repeat")
+            preferences.playRepeats = !preferences.playRepeats;
       else if (cmd == "rewind")
             seq->rewindStart();
       else if (cmd == "play-next-measure")
@@ -1237,11 +1260,11 @@ void Score::cmd(const QString& cmd)
             if (cmd == "append-measure")
                   appendMeasures(1);
             else if (cmd == "insert-measure")
-		      insertMeasures(1, MEASURE_NORMAL);
+		      insertMeasures(1, MEASURE);
             else if (cmd == "insert-hbox")
-		      insertMeasures(1, MEASURE_HBOX);
+		      insertMeasures(1, HBOX);
             else if (cmd == "insert-vbox")
-		      insertMeasures(1, MEASURE_VBOX);
+		      insertMeasures(1, VBOX);
             else if (cmd == "page-prev")
                   pagePrev();
             else if (cmd == "page-next")
@@ -1572,10 +1595,14 @@ void Score::pasteStaff(const QMimeData* ms)
             }
       int tickStart  = sel->tickStart;
 
-      Measure* measure;
-      for (measure = _layout->first(); measure; measure = measure->next()) {
-            if (measure->tick() == tickStart)
+      Measure* measure = 0;
+      for (MeasureBase* e = _layout->first(); e; e = e->next()) {
+            if (e->type() != MEASURE)
+                  continue;
+            if (e->tick() == tickStart) {
+                  measure = (Measure*)e;
                   break;
+                  }
             }
       if (measure->tick() != tickStart) {
             printf("  cannot find measure\n");
@@ -1613,7 +1640,7 @@ void Score::pasteStaff(QDomElement e, Measure* measure, int staffStart)
                               sm->read(ee, staffIdx);
                               cmdReplaceElements(sm, m, staffIdx);
                               delete sm;
-                              m = m->next();
+                              m = (Measure*)(m->next());
                               if (m == 0)
                                     break;
                               }

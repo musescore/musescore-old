@@ -164,8 +164,11 @@ void Part::setStaves(int n)
             Staff* staff = new Staff(cs, this, i);
             _staves.push_back(staff);
             cs->staves().insert(staffIdx, staff);
-            for (Measure* im = cs->mainLayout()->first(); im; im = im->next()) {
-                  im->insertStaff1(staff, staffIdx);
+            for (MeasureBase* mb = cs->mainLayout()->first(); mb; mb = mb->next()) {
+                  if (mb->type() != MEASURE)
+                        continue;
+                  Measure* m = (Measure*)mb;
+                  m->insertStaff1(staff, staffIdx);
                   }
             ++staffIdx;
             }

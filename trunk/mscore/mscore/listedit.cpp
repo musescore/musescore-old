@@ -260,20 +260,15 @@ void PageListEditor::updateList()
                   new ElementItem(li, el);
             }
 
-      PageList* pl = cs->mainLayout()->pages();
-      int staves = cs->nstaves();
-      int tracks = staves * VOICES;
-      for (iPage ip = pl->begin(); ip != pl->end(); ++ip) {
-            Page* page = *ip;
+//      int staves = cs->nstaves();
+//      int tracks = staves * VOICES;
+      foreach(Page* page, cs->mainLayout()->pages()) {
             ElementItem* pi = new ElementItem(list, page);
 
             if (page->copyright())
                   new ElementItem(pi, page->copyright());
             if (page->pageNo())
                   new ElementItem(pi, page->pageNo());
-
-            foreach(Element* el, page->pel())
-                  new ElementItem(pi, el);
 
             foreach(System* system, *page->systems()) {
                   ElementItem* si = new ElementItem(pi, system);
@@ -283,7 +278,7 @@ void PageListEditor::updateList()
 
                   // SysStaffList* staffList = system->staves();
 
-                  foreach (Measure* measure, system->measures()) {
+                  foreach (MeasureBase* measure, system->measures()) {
                         ElementItem* mi = new ElementItem(si, measure);
 
 #if 0
@@ -300,6 +295,7 @@ void PageListEditor::updateList()
                         foreach(Element* e, *measure->el())
                               new ElementItem(mi, e);
 
+#if 0 // TODO MeasureBase
                         for (Segment* segment = measure->first(); segment; segment = segment->next()) {
                               ElementItem* segItem = new ElementItem(mi, segment);
                               for (int track = 0; track < tracks; ++track) {
@@ -348,6 +344,7 @@ void PageListEditor::updateList()
                               if (tuplet->number())
                                     new ElementItem(item, tuplet->number());
                               }
+#endif
                         }
                   }
             }
@@ -482,7 +479,6 @@ ShowPageWidget::ShowPageWidget()
       pb.setupUi(page);
       layout->addWidget(page);
       layout->addStretch(10);
-      connect(pb.elementList, SIGNAL(itemClicked(QListWidgetItem*)), SLOT(itemClicked(QListWidgetItem*)));
       }
 
 //---------------------------------------------------------
@@ -494,11 +490,6 @@ void ShowPageWidget::setElement(Element* e)
       Page* p = (Page*)e;
       ShowElementBase::setElement(e);
       pb.pageNo->setValue(p->no());
-      pb.elementList->clear();
-      foreach(Element* el, p->pel()) {
-            ElementListWidgetItem* item = new ElementListWidgetItem(el);
-            pb.elementList->addItem(item);
-            }
       }
 
 //---------------------------------------------------------
@@ -533,7 +524,6 @@ MeasureView::MeasureView()
       layout->addWidget(seg);
       layout->addStretch(10);
       connect(mb.sel, SIGNAL(itemClicked(QTreeWidgetItem*,int)), SLOT(elementClicked(QTreeWidgetItem*)));
-      connect(mb.pel, SIGNAL(itemClicked(QTreeWidgetItem*,int)), SLOT(elementClicked(QTreeWidgetItem*)));
       seg->show();
       }
 
@@ -550,7 +540,6 @@ void MeasureView::setElement(Element* e)
       mb.staves->setValue(m->staffList()->size());
       mb.beams->setValue(m->beamList()->size());
       mb.tuplets->setValue(m->tuplets()->size());
-      mb.pageElements->setValue(m->pel()->size());
       mb.measureNo->setValue(m->no());
       mb.noOffset->setValue(m->noOffset());
       mb.stretch->setValue(m->userStretch());
@@ -567,15 +556,6 @@ void MeasureView::setElement(Element* e)
             void* p = (void*) e;
             item->setData(0, Qt::UserRole, QVariant::fromValue<void*>(p));
             mb.sel->addTopLevelItem(item);
-            }
-      mb.pel->clear();
-      foreach(const Element* e, *m->pel()) {
-            QTreeWidgetItem* item = new QTreeWidgetItem;
-            item->setText(0, e->name());
-            item->setText(1, QString("%1").arg(e->subtype()));
-            void* p = (void*) e;
-            item->setData(0, Qt::UserRole, QVariant::fromValue<void*>(p));
-            mb.pel->addTopLevelItem(item);
             }
       }
 
@@ -1253,10 +1233,7 @@ ShowElementBase::ShowElementBase()
       layout = new QVBoxLayout;
       setLayout(layout);
       layout->addWidget(elemView);
-      connect(eb.nextButton,     SIGNAL(clicked()), SLOT(nextClicked()));
-      connect(eb.previousButton, SIGNAL(clicked()), SLOT(previousClicked()));
       connect(eb.parentButton,   SIGNAL(clicked()), SLOT(parentClicked()));
-      connect(eb.anchorButton,   SIGNAL(clicked()), SLOT(anchorClicked()));
       connect(eb.offsetx,        SIGNAL(valueChanged(double)), SLOT(offsetxChanged(double)));
       connect(eb.offsety,        SIGNAL(valueChanged(double)), SLOT(offsetyChanged(double)));
       connect(eb.selected,       SIGNAL(clicked(bool)), SLOT(selectedClicked(bool)));
@@ -1302,10 +1279,7 @@ void ShowElementBase::setElement(Element* e)
       eb.bboxw->setValue(e->bbox().width());
       eb.bboxh->setValue(e->bbox().height());
       eb.color->setColor(e->color());
-      eb.nextButton->setEnabled(e->next());
-      eb.previousButton->setEnabled(e->prev());
       eb.parentButton->setEnabled(e->parent());
-      eb.anchorButton->setEnabled(e->anchorMeasure());
       eb.mag->setValue(e->mag());
       }
 
@@ -1335,39 +1309,12 @@ void ShowElementBase::visibleClicked(bool val)
       }
 
 //---------------------------------------------------------
-//   nextClicked
-//---------------------------------------------------------
-
-void ShowElementBase::nextClicked()
-      {
-      emit elementChanged(el->next());
-      }
-
-//---------------------------------------------------------
-//   previousClicked
-//---------------------------------------------------------
-
-void ShowElementBase::previousClicked()
-      {
-      emit elementChanged(el->prev());
-      }
-
-//---------------------------------------------------------
 //   parentClicked
 //---------------------------------------------------------
 
 void ShowElementBase::parentClicked()
       {
       emit elementChanged(el->parent());
-      }
-
-//---------------------------------------------------------
-//   anchorClicked
-//---------------------------------------------------------
-
-void ShowElementBase::anchorClicked()
-      {
-      emit elementChanged(el->anchorMeasure());
       }
 
 //---------------------------------------------------------

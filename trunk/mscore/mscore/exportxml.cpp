@@ -584,7 +584,10 @@ static DirectionsAnchor* findMatchInMeasure(int tick, Staff* st, Measure* m, Par
 
 static DirectionsAnchor* findSpecificMatchInPart(int tick, Staff* st, bool start, Score* sc, int strack, int etrack)
       {
-      for (Measure* m = sc->mainLayout()->first(); m; m = m->next()) {
+      for (MeasureBase* mb = sc->mainLayout()->first(); mb; mb = mb->next()) {
+            if (mb->type() != MEASURE)
+                  continue;
+            Measure* m = (Measure*)mb;
             DirectionsAnchor* da = findSpecificMatchInMeasure(tick, st, start, m, strack, etrack);
             if (da)
                   return da;
@@ -673,8 +676,12 @@ void DirectionsHandler::buildDirectionsList(Part* p, int strack, int etrack)
                   }
             }
       // part-level elements stored in measures
-      for (Measure* m = cs->mainLayout()->first(); m; m = m->next())
+      for (MeasureBase* mb = cs->mainLayout()->first(); mb; mb = mb->next()) {
+            if (mb->type() != MEASURE)
+                  continue;
+            Measure* m = (Measure*)mb;
             buildDirectionsList(m, true, p, strack, etrack);
+            }
       }
 
 //---------------------------------------------------------
@@ -1794,11 +1801,10 @@ foreach(Element* el, *(score->gel())) {
       xml.stag("score-partwise");
       xml.stag("work");
 
-      Measure* measure = score->mainLayout()->first();
-      ElementList* el = measure->pel();
-      for (iElement ie = el->begin(); ie != el->end(); ++ie) {
-            if ((*ie)->type() == TEXT) {
-                  Text* text = (Text*)(*ie);
+      const MeasureBase* measure = score->mainLayout()->first();
+      foreach(const Element* element, *measure->el()) {
+            if (element->type() == TEXT) {
+                  const Text* text = (const Text*)element;
                   switch (text->subtype()) {
                         case TEXT_TITLE:
                               xml.tag("work-title", text->getText());
@@ -1812,9 +1818,9 @@ foreach(Element* el, *(score->gel())) {
       xml.etag();
 
       xml.stag("identification");
-      for (iElement ie = el->begin(); ie != el->end(); ++ie) {
-            if ((*ie)->type() == TEXT) {
-                  Text* text = (Text*)(*ie);
+      foreach(const Element* element, *measure->el()) {
+            if (element->type() == TEXT) {
+                  const Text* text = (const Text*)element;
                   switch (text->subtype()) {
                         case TEXT_COMPOSER:
                               xml.tag("creator type=\"composer\"", text->getText());
@@ -1940,7 +1946,10 @@ foreach(Element* el, *(score->gel())) {
             int irregularMeasureNo = 1; // number of next irregular measure
             int pickupMeasureNo = 1;    // number of next pickup measure
             Volta* volta = 0;           // volta in current measure(s)
-            for (Measure* m = score->mainLayout()->first(); m; m = m->next()) {
+            for (MeasureBase* mb = score->mainLayout()->first(); mb; mb = mb->next()) {
+                  if (mb->type() != MEASURE)
+                        continue;
+                  Measure* m = (Measure*)mb;
                   // pickup and other irregular measures need special care
                   if ((irregularMeasureNo + measureNo) == 2 && m->irregular()) {
                         xml.stag("measure number=\"0\" implicit=\"yes\"");
@@ -1953,9 +1962,9 @@ foreach(Element* el, *(score->gel())) {
                         xml.stag(QString("measure number=\"%1\"").arg(measureNo++));
                         }
 
-                  if (m->prev() && m->prev()->lineBreak())
+                  if (m->prev() && ((Measure*)m->prev())->lineBreak())  // TODO: MeasureBase
                         xml.tagE("print new-system=\"yes\"");
-                  if (measureNo > 2 && m->prev()->pageBreak())
+                  if (measureNo > 2 && ((Measure*)m->prev())->pageBreak())    // TODO: MeasureBase
                         xml.tagE("print new-page=\"yes\"");
 
                   attr.start();

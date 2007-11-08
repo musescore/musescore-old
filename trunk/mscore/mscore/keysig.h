@@ -41,7 +41,7 @@ class KeySig : public Element {
    public:
       KeySig(Score*);
       virtual KeySig* clone() const { return new KeySig(*this); }
-      virtual void draw(QPainter&);
+      virtual void draw(QPainter&) const;
       virtual ElementType type() const { return KEYSIG; }
       virtual bool acceptDrop(Viewer*, const QPointF&, int, int) const;
       virtual Element* drop(const QPointF&, const QPointF&, Element*);

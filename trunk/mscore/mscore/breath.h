@@ -39,7 +39,7 @@ class Breath : public Element {
       virtual void space(double& min, double& extra) const;
       virtual QRectF bbox() const;
 
-      virtual void draw(QPainter&);
+      virtual void draw(QPainter&) const;
       virtual void layout(ScoreLayout*);
       virtual void write(Xml&) const;
       virtual void read(QDomElement);

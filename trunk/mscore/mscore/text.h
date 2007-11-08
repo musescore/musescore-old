@@ -105,7 +105,7 @@ class Text : public Element {
       void setFrameColor(const QColor& val) { _frameColor   = val; }
       void setFrameRound(int val)           { _frameRound   = val; }
 
-      virtual void draw(QPainter&);
+      virtual void draw(QPainter&) const;
 
       virtual bool startEdit(const QPointF&);
       virtual bool edit(int, QKeyEvent*);

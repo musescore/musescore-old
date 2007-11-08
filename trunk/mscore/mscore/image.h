@@ -30,14 +30,14 @@
 class Image : public BSymbol {
    protected:
       QString _path;
-      QImage buffer;                ///< cached rendering
+      mutable QImage buffer;        ///< cached rendering
       QSizeF sz;
-      bool _dirty;
+      mutable bool _dirty;
 
       virtual bool startEdit(const QPointF&);
       virtual void editDrag(int, const QPointF&, const QPointF&);
       virtual void endEdit();
-      virtual void draw(QPainter&);
+      virtual void draw(QPainter&) const;
       virtual void updateGrips(int*, QRectF*) const;
       virtual QPointF gripAnchor(int grip) const;
 
@@ -63,7 +63,7 @@ class RasterImage : public Image {
       RasterImage(Score*);
       ~RasterImage();
       virtual RasterImage* clone() const;
-      virtual void draw(QPainter&);
+      virtual void draw(QPainter&) const;
       virtual void setPath(const QString& s);
       };
 
@@ -78,7 +78,7 @@ class SvgImage : public Image {
       SvgImage(Score*);
       ~SvgImage();
       virtual SvgImage* clone() const;
-      virtual void draw(QPainter&);
+      virtual void draw(QPainter&) const;
       virtual void setPath(const QString& s);
       };
 

@@ -38,7 +38,7 @@ Image::Image(Score* s)
 //   draw
 //---------------------------------------------------------
 
-void Image::draw(QPainter& p)
+void Image::draw(QPainter& p) const
       {
       p.drawImage(0, 0, buffer);
       if (selected()) {
@@ -193,7 +193,7 @@ SvgImage* SvgImage::clone() const
 //   draw
 //---------------------------------------------------------
 
-void SvgImage::draw(QPainter& p)
+void SvgImage::draw(QPainter& p) const
       {
       if (!doc)
             return;
@@ -254,7 +254,7 @@ RasterImage* RasterImage::clone() const
 //   draw
 //---------------------------------------------------------
 
-void RasterImage::draw(QPainter& p)
+void RasterImage::draw(QPainter& p) const
       {
       QSizeF sf(sz.width() * p.device()->logicalDpiX() / mscore->logicalDpiX(),
               sz.height() * p.device()->logicalDpiY() / mscore->logicalDpiY());

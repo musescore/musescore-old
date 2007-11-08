@@ -415,7 +415,7 @@ void SLine::setLen(double l)
 //   draw
 //---------------------------------------------------------
 
-void SLine::draw(QPainter& p)
+void SLine::draw(QPainter& p) const
       {
       foreach(LineSegment* seg, segments) {
             p.save();
@@ -429,9 +429,9 @@ void SLine::draw(QPainter& p)
 //   collectElements
 //---------------------------------------------------------
 
-void SLine::collectElements(QList<Element*>& el)
+void SLine::collectElements(QList<const Element*>& el) const
       {
-      foreach(LineSegment* seg, segments)
+      foreach(const LineSegment* seg, segments)
             el.append(seg);
       }
 

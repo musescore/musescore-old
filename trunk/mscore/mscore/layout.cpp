@@ -37,6 +37,7 @@
 #include "keysig.h"
 #include "barline.h"
 #include "repeat.h"
+#include "box.h"
 
 //---------------------------------------------------------
 //   intmaxlog
@@ -56,14 +57,12 @@ ScoreLayout::ScoreLayout(Score* score)
       {
       _spatium     = ::_spatium;
       _pageFormat  = new PageFormat;
-      _systems     = new QList<System*>;
-      _pages       = new PageList;
       _paintDevice = 0;
 
       //DEBUG:
       _spatium = ::_spatium;
-      _systems->clear();
-      _pages->clear();
+      _systems.clear();
+      _pages.clear();
       _needLayout = false;
       _pageFormat = new PageFormat;
       _paintDevice = _score->canvas();
@@ -73,27 +72,7 @@ ScoreLayout::~ScoreLayout()
       {
       if (_pageFormat)
             delete _pageFormat;
-      if (_systems)
-            delete _systems;
-      if (_pages)
-            delete _pages;
       }
-
-#if 0
-//---------------------------------------------------------
-//   setScore
-//---------------------------------------------------------
-
-void ScoreLayout::setScore(Score* s)
-      {
-      _spatium = ::_spatium;
-      _systems->clear();
-      _pages->clear();
-      _needLayout = false;
-      _pageFormat = new PageFormat;
-      _paintDevice = _score->canvas();
-      }
-#endif
 
 //---------------------------------------------------------
 //   searchNote
@@ -103,17 +82,13 @@ void ScoreLayout::setScore(Score* s)
 
 Element* Score::searchNote(int tick, int track) const
       {
-      int startTrack, endTrack;
-//      if (voice == -1) {
-//            startTrack = track;
-//            endTrack   = startTrack + VOICES;
-//            }
-//      else {
-            startTrack = track;
-            endTrack   = startTrack + 1;
-//            }
+      int startTrack = track;
+      int endTrack   = startTrack + 1;
 
-      for (const Measure* measure = _layout->first(); measure; measure = measure->next()) {
+      for (const MeasureBase* mb = _layout->first(); mb; mb = mb->next()) {
+            if (mb->type() != MEASURE)
+                  continue;
+            Measure* measure = (Measure*)mb;
             Element* ipe = 0;
             for (int track = startTrack; track < endTrack; ++track) {
                   for (Segment* segment = measure->first(); segment; segment = segment->next()) {
@@ -154,23 +129,14 @@ void ScoreLayout::doLayout()
       ::_spatium = _spatium;        // needed for preview
       _needLayout = false;
 
-      int n = _score->nstaves();
-      for (int staffIdx = 0; staffIdx < n; ++staffIdx) {
-            for (Element* m = _measures.first(); m; m = m->next())
-                  ((Measure*)m)->layoutNoteHeads(staffIdx);
-            }
-
-      Measure* im = (Measure*)(_measures.first());
-      iPage    ip = _pages->begin();
-      iSystem  is = _systems->begin();
-
-      if (im == 0) {
-            foreach(Page* page, *_pages)
+      if (first() == 0) {
+            foreach(Page* page, _pages)
                   delete page;
-            _pages->clear();
+            _pages.clear();
 
             Page* page = addPage();
-            _pages->update();
+            page->setNo(0);
+            page->setPos(0.0, 0.0);
 
             //---------------------------------------------------
             //    clear bspTree
@@ -181,24 +147,32 @@ void ScoreLayout::doLayout()
             return;
             }
 
+      for (int staffIdx = 0; staffIdx < _score->nstaves(); ++staffIdx) {
+            for (MeasureBase* mb = first(); mb; mb = mb->next()) {
+                  if (mb->type() != MEASURE)
+                        continue;
+                  Measure* m = (Measure*)mb;
+                  m->layoutNoteHeads(staffIdx);
+                  }
+            }
+
       //-----------------------------------------
       //    pass I:  process pages
       //-----------------------------------------
 
-      while (im) {
-            Page* page;
-            if (ip == _pages->end()) {
-                  page = addPage();
-                  ip = _pages->end();
-                  }
-            else {
-                  page = *ip++;
-                  }
-            _pages->update();
+      curMeasure = first();
+      curSystem  = 0;
+      for (curPage = 0; curMeasure; curPage++) {
+            Page* page = curPage >= _pages.size() ? addPage() : _pages[curPage];
+            page->setNo(curPage);
+            double x = (curPage == 0) ? 0.0 : _pages[curPage - 1]->pos().x()
+                        + page->width() + ((curPage & 1) ? 1.0 : 50.0);
+            page->setPos(x, 0.0);
 
-            Measure* om = im;
-            layoutPage(page, im, is);
-            if (im == om) {
+            MeasureBase* om = curMeasure;
+            if (!layoutPage())
+                  break;
+            if (curMeasure == om) {
                   printf("empty page?\n");
                   break;
                   }
@@ -208,7 +182,10 @@ void ScoreLayout::doLayout()
       //   pass II:  place ties & slurs & hairpins & beams
       //---------------------------------------------------
 
-      for (Measure* m = first(); m; m = m->next()) {
+      for (MeasureBase* mb = first(); mb; mb = mb->next()) {
+            if (mb->type() != MEASURE)
+                  continue;
+            Measure* m = (Measure*)mb;
             m->layoutBeams(this);
             m->layout2(this);
             }
@@ -219,34 +196,37 @@ void ScoreLayout::doLayout()
       //    remove remaining pages and systems
       //---------------------------------------------------
 
-      for (iPage i = ip; i != _pages->end(); ++i)
-            delete *i;
-      _pages->erase(ip, _pages->end());
+      int n = _pages.size() - curPage - 1;
+      for (int i = 0; i < n; ++i) {
+            delete _pages[curPage];
+            _pages.removeLast();
+            }
 
-      for (iSystem i = is; i != _systems->end(); ++i)
-            delete *i;
-      _systems->erase(is, _systems->end());
+      n = _systems.size() - curSystem - 1;
+      for (int i = 0; i < n; ++i) {
+            delete _systems[curSystem];
+            _pages.removeLast();
+            }
 
       //---------------------------------------------------
       //    rebuild bspTree
       //---------------------------------------------------
 
       QRectF r;
-      QList<Element*> el;
-      for(Measure* m = first(); m; m = m->next())
+      QList<const Element*> el;
+      for (const MeasureBase* m = first(); m; m = m->next())
             m->collectElements(el);
-      for (iPage ip = _pages->begin(); ip != _pages->end(); ++ip) {
-            Page* page = *ip;
+      foreach(const Page* page, _pages) {
             r |= page->abbox();
             page->collectElements(el);
             }
-      foreach (Element* element, _gel)
+      foreach (const Element* element, _gel)
             element->collectElements(el);
 
       int depth = intmaxlog(el.size());
       bspTree.initialize(r, depth);
       for (int i = 0; i < el.size(); ++i) {
-            Element* e = el.at(i);
+            const Element* e = el.at(i);
             bspTree.insert(e);
             }
       }
@@ -326,8 +306,10 @@ void ScoreLayout::processSystemHeader(Measure* m)
 //    return true, if next page must be relayouted
 //---------------------------------------------------------
 
-bool ScoreLayout::layoutPage(Page* page, Measure*& im, iSystem& is)
+bool ScoreLayout::layoutPage()
       {
+      Page* page = _pages[curPage];
+
       page->layout(this);
 
       // usable width of page:
@@ -335,35 +317,59 @@ bool ScoreLayout::layoutPage(Page* page, Measure*& im, iSystem& is)
       qreal x  = page->lm();
       qreal ey = page->loHeight() - page->bm() - point(score()->style()->staffLowerBorder);
 
-      page->systems()->clear();
-      page->pel().clear();
-      qreal y = page->addMeasure(this, im, page->tm());
+      page->clear();
+      qreal y = page->tm();
 
       int systemNo = 0;
-      while (im) {
+      while (curMeasure) {
             // get next system:
             System* system;
-            if (is == _systems->end()) {
+            if (curSystem >= _systems.size()) {
                   system = new System(_score);
-                  _systems->push_back(system);
-                  is = _systems->end();
+                  _systems.append(system);
                   }
             else {
-                  system = *is++;
+                  system = _systems[curSystem];
                   system->clear();   // remove measures from system
                   }
 
-            layoutSystem(im, system, x, y, w);
+            if (curMeasure->type() == VBOX) {
+                  VBox* box = (VBox*) curMeasure;
+                  if (y + box->boxHeight() > ey) {
+                        // rollback
+                        curMeasure = system->measures().front();
+                        --curSystem;
+                        break;
+                        }
+                  curMeasure->setPos(QPointF(0.0, 0.0));
+                  curMeasure->setbbox(QRectF(0, 0, w, box->boxHeight()));
+printf("layout vbox %f\n", box->boxHeight());
+                  system->setPos(QPointF(x, y));
+                  system->setbbox(curMeasure->bbox());
+
+                  curMeasure->layout(this);
+
+                  curMeasure->setParent(system);
+                  system->measures().push_back(curMeasure);
+                  page->appendSystem(system);
+
+                  curMeasure = curMeasure->next();
+                  ++curSystem;
+                  y += box->boxHeight();
+                  continue;
+                  }
+            layoutSystem(x, y, w);
             system->setParent(page);
 
             qreal h = system->bbox().height() + point(score()->style()->systemDistance);
             if (y + h >= ey) {  // system does not fit on page
                   // rollback
-                  im = system->measures().front();
-                  --is;
+                  curMeasure = system->measures().front();
+                  --curSystem;
                   break;
                   }
             page->appendSystem(system);
+            ++curSystem;
 
             //  move system vertically to final position:
 
@@ -390,13 +396,11 @@ bool ScoreLayout::layoutPage(Page* page, Measure*& im, iSystem& is)
       if (restHeight > (ph * score()->style()->pageFillLimit))
             return true;
 
-      QList<System*>* sl   = page->systems();
-      int systems      = sl->size();
-      double extraDist = restHeight / (systems-1);
-      y                = 0;
-      for (iSystem i = sl->begin(); i != sl->end(); ++i) {
-            (*i)->move(0, y);
-            y += extraDist;
+      double dist = restHeight / (page->systems()->size() - 1);
+      y = 0;
+      foreach(System* system, *page->systems()) {
+            system->move(0, y);
+            y += dist;
             }
       return true;
       }
@@ -405,8 +409,10 @@ bool ScoreLayout::layoutPage(Page* page, Measure*& im, iSystem& is)
 //   layoutSystem
 //---------------------------------------------------------
 
-System* ScoreLayout::layoutSystem(Measure*& im, System* system, qreal x, qreal y, qreal w)
+System* ScoreLayout::layoutSystem(qreal x, qreal y, qreal w)
       {
+      System* system = _systems[curSystem];
+
       int nstaves = _score->nstaves();
       for (int i = system->staves()->size(); i < nstaves; ++i)
             system->insertStaff(_score->staff(i), i);
@@ -425,16 +431,21 @@ System* ScoreLayout::layoutSystem(Measure*& im, System* system, qreal x, qreal y
 
       bool pageBreak = false;
 
-      for (Measure* m = im; m; m = m->next()) {
+      for (MeasureBase* mb = curMeasure; mb; mb = mb->next()) {
+            if (mb->type() != MEASURE) {
+                  continue;
+                  }
+            Measure* m = (Measure*)mb;
             pageBreak = m->pageBreak();
 
             m->setSystem(system);   // needed by m->layout()
-            if (m == im) {
+            if (m == curMeasure) {
                   //
                   // special handling for first measure in a system:
                   // add generated clef and key signature
                   //
-                  processSystemHeader(m);
+                  if (m->type() == MEASURE)
+                        processSystemHeader((Measure*)m);
                   }
             //
             // remove generated elements
@@ -448,19 +459,19 @@ System* ScoreLayout::layoutSystem(Measure*& im, System* system, qreal x, qreal y
                         int track = staffIdx * VOICES;
                         Element* el = seg->element(track);
                         if (el && el->generated()) {
-                              if ((m != im) || (seg->subtype() == Segment::SegTimeSigAnnounce))
+                              if ((m != curMeasure) || (seg->subtype() == Segment::SegTimeSigAnnounce))
                                     seg->setElement(track, 0);
                               }
                         }
                   }
 
-            if (m != im) {
+            if (m != curMeasure) {
                   //
                   // if this is not the first measure in a system
                   // switch all clefs to small size
                   //
                   int nstaves = _score->nstaves();
-                  for (Segment* seg = m->first(); seg; seg = seg->next()) {
+                  for (Segment* seg = ((Measure*)m)->first(); seg; seg = seg->next()) {   //TODO:MeasureBase
                         if (seg->subtype() != Segment::SegClef)
                               continue;
                         for (int i = 0; i < nstaves; ++i) {
@@ -474,12 +485,14 @@ System* ScoreLayout::layoutSystem(Measure*& im, System* system, qreal x, qreal y
                         }
                   }
 
-            BarLine* bl = m->endBarLine();
-            if (bl == 0)
-                  m->setEndBarLineType(NORMAL_BAR, true);
-            m->layoutBeams1(this);  // find hooks
-            m->layoutX(this, 1.0);
+            if (curMeasure->type() == MEASURE) {
+                  BarLine* bl = m->endBarLine();
+                  if (bl == 0)
+                        m->setEndBarLineType(NORMAL_BAR, true);
+                  m->layoutBeams1(this);  // find hooks
+                  }
 
+            m->layoutX(this, 1.0);
             double ww      = m->layoutWidth().stretchable;
             double stretch = m->userStretch() * score()->style()->measureSpacing;
 
@@ -502,7 +515,7 @@ System* ScoreLayout::layoutSystem(Measure*& im, System* system, qreal x, qreal y
             ++nm;
             minWidth += ww;
             uStretch += stretch;
-            if (pageBreak || m->lineBreak())
+            if (pageBreak || m->lineBreak() || (m->next() && m->next()->type() == VBOX))
                   break;
             }
       system->setPageBreak(pageBreak);
@@ -516,16 +529,16 @@ System* ScoreLayout::layoutSystem(Measure*& im, System* system, qreal x, qreal y
       //    uStretch is the accumulated userStretch
       //-------------------------------------------------------
 
-      Measure* itt = im;
+      MeasureBase* itt = curMeasure;
       for (int i = 0; i < nm; ++i, itt = itt->next())
-            system->measures().push_back(itt);
-      im = itt;
+            system->measures().append(itt);
+      curMeasure = itt;
       bool needRelayout = false;
 
       //
       //    add cautionary time signatures if needed
       //
-      Measure* lm = system->measures().back();
+      Measure* lm   = (Measure*)(system->measures().back());      // TODO: MEasureBase
       SigEvent sig1 = _score->sigmap->timesig(lm->tick() + lm->tickLen() - 1);
       SigEvent sig2 = _score->sigmap->timesig(lm->tick() + lm->tickLen());
       if (!(sig1 == sig2)) {
@@ -546,10 +559,14 @@ System* ScoreLayout::layoutSystem(Measure*& im, System* system, qreal x, qreal y
       //
       //    compute repeat bar lines
       //
-      const QList<Measure*>& ml = system->measures();
+      const QList<MeasureBase*>& ml = system->measures();
       int n                     = ml.size();
       for (int i = 0; i < n; ++i) {
-            Measure* m = ml[i];
+            MeasureBase* mb = ml[i];
+            if (mb->type() != MEASURE)
+                  continue;
+            Measure* m = (Measure*)mb;
+
             if (i == (n-1)) {
                   if (m->repeatFlags() & RepeatEnd)
                         needRelayout |= m->setEndBarLineType(END_REPEAT, true);
@@ -562,12 +579,12 @@ System* ScoreLayout::layoutSystem(Measure*& im, System* system, qreal x, qreal y
             else {
                   needRelayout |= m->setStartRepeatBarLine((i == 0) && (m->repeatFlags() & RepeatStart));
                   if (m->repeatFlags() & RepeatEnd) {
-                        if (m->next()->repeatFlags() & RepeatStart)
+                        if (((Measure*)m->next())->repeatFlags() & RepeatStart)     //TODO: MeasureBase
                               needRelayout |= m->setEndBarLineType(END_START_REPEAT, true);
                         else
                               needRelayout |= m->setEndBarLineType(END_REPEAT, true);
                         }
-                  else if (m->next()->repeatFlags() & RepeatStart)
+                  else if (((Measure*)m->next())->repeatFlags() & RepeatStart)      //TODO: MeasureBase
                         needRelayout |= m->setEndBarLineType(START_REPEAT, true);
                   else {
                         BarLine* bl = m->endBarLine();
@@ -587,7 +604,10 @@ System* ScoreLayout::layoutSystem(Measure*& im, System* system, qreal x, qreal y
       minWidth           = 0.0;
       double totalWeight = 0.0;
 
-      foreach(Measure* m, system->measures()) {
+      foreach(MeasureBase* mb, system->measures()) {
+            if (mb->type() != MEASURE)
+                  continue;
+            Measure* m = (Measure*)mb;
             if (needRelayout)
                   m->layoutX(this, 1.0);
             minWidth    += m->layoutWidth().stretchable;
@@ -597,7 +617,10 @@ System* ScoreLayout::layoutSystem(Measure*& im, System* system, qreal x, qreal y
       double rest = layoutDebug ? 0.0 : systemWidth - minWidth;
       QPointF pos(systemOffset, 0);
 
-      foreach(Measure* m, system->measures()) {
+      foreach(MeasureBase* mb, system->measures()) {
+            if (mb->type() != MEASURE)
+                  continue;
+            Measure* m = (Measure*)mb;
             m->setPos(pos);
             double weight = m->tickLen() * m->userStretch();
             double ww     = m->layoutWidth().stretchable + rest * weight / totalWeight;
@@ -616,8 +639,8 @@ System* ScoreLayout::layoutSystem(Measure*& im, System* system, qreal x, qreal y
 Page* ScoreLayout::addPage()
       {
       Page* page = new Page(this);
-      page->setNo(_pages->size());
-      _pages->push_back(page);
+      page->setNo(_pages.size());
+      _pages.push_back(page);
       return page;
       }
 
@@ -634,7 +657,7 @@ void ScoreLayout::setPageFormat(const PageFormat& pf)
 //   push_back
 //---------------------------------------------------------
 
-void ElemList::push_back(Element* e)
+void MeasureBaseList::push_back(MeasureBase* e)
       {
       ++_size;
       if (_last) {
@@ -654,7 +677,7 @@ void ElemList::push_back(Element* e)
 //   push_front
 //---------------------------------------------------------
 
-void ElemList::push_front(Element* e)
+void MeasureBaseList::push_front(MeasureBase* e)
       {
       ++_size;
       if (_first) {
@@ -675,7 +698,7 @@ void ElemList::push_front(Element* e)
 //    insert e before el
 //---------------------------------------------------------
 
-void ElemList::insert(Element* e, Element* el)
+void MeasureBaseList::insert(MeasureBase* e, MeasureBase* el)
       {
       if (el == 0) {
             push_back(e);
@@ -696,7 +719,7 @@ void ElemList::insert(Element* e, Element* el)
 //   erase
 //---------------------------------------------------------
 
-void ElemList::erase(Element* el)
+void MeasureBaseList::erase(MeasureBase* el)
       {
       --_size;
       if (el->prev())
@@ -708,6 +731,24 @@ void ElemList::erase(Element* el)
             el->next()->setPrev(el->prev());
       else
             _last = el->prev();
+      }
+
+//---------------------------------------------------------
+//   change
+//---------------------------------------------------------
+
+void MeasureBaseList::change(MeasureBase* ob, MeasureBase* nb)
+      {
+      nb->setPrev(ob->prev());
+      nb->setNext(ob->next());
+      if (ob->prev())
+            ob->prev()->setNext(nb);
+      if (ob->next())
+            ob->next()->setPrev(nb);
+      if (ob == _last)
+            _last = nb;
+      if (ob == _first)
+            _first = nb;
       }
 
 //---------------------------------------------------------
@@ -752,7 +793,10 @@ static Note* searchTieNote(Note* note, Segment* segment, int track)
 void ScoreLayout::connectTies()
       {
       int tracks = _score->nstaves() * VOICES;
-      for (Measure* m = first(); m; m = m->next()) {
+      for (MeasureBase* mb = first(); mb; mb = mb->next()) {
+            if (mb->type() != MEASURE)
+                  continue;
+            Measure* m = (Measure*)mb;
             for (Segment* s = m->first(); s; s = s->next()) {
                   for (int i = 0; i < tracks; ++i) {
                         Element* el = s->element(i);
@@ -787,7 +831,10 @@ void ScoreLayout::connectTies()
 void ScoreLayout::searchHiddenNotes()
       {
       int staves = _score->nstaves();
-      for (Measure* m = first(); m; m = m->next()) {
+      for (MeasureBase* mb = first(); mb; mb = mb->next()) {
+            if (mb->type() != MEASURE)
+                  continue;
+            Measure* m = (Measure*)mb;
             for (Segment* s = m->first(); s; s = s->next()) {
                   if (s->subtype() != Segment::SegChordRest)
                         continue;
@@ -826,7 +873,7 @@ void ScoreLayout::searchHiddenNotes()
 //   erase
 //---------------------------------------------------------
 
-void ScoreLayout::erase(Measure* im)
+void ScoreLayout::erase(MeasureBase* im)
       {
       _measures.erase(im);
       }
@@ -835,7 +882,7 @@ void ScoreLayout::erase(Measure* im)
 //   insert
 //---------------------------------------------------------
 
-void ScoreLayout::insert(Measure* im, Measure* m)
+void ScoreLayout::insert(MeasureBase* im, MeasureBase* m)
       {
       _measures.insert(im, m);
       }

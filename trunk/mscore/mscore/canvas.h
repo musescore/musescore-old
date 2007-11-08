@@ -114,7 +114,7 @@ class Canvas : public QFrame, public Viewer {
       Note* searchTieNote(Note* note);
 
       void setShadowNote(const QPointF&);
-      void drawElements(QPainter& p,const QList<Element*>& el);
+      void drawElements(QPainter& p,const QList<const Element*>& el);
       bool dragTimeAnchorElement(const QPointF& pos);
       bool dragMeasureAnchorElement(const QPointF& pos);
       bool dragAboveMeasure(const QPointF& pos);

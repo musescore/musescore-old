@@ -106,7 +106,7 @@ void Lyrics::remove(Element*)
 //   draw
 //---------------------------------------------------------
 
-void Lyrics::draw(QPainter& p)
+void Lyrics::draw(QPainter& p) const
       {
       Text::draw(p);
       if (_separator) {

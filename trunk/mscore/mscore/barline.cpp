@@ -41,7 +41,7 @@ BarLine::BarLine(Score* s)
 //   draw
 //---------------------------------------------------------
 
-void BarLine::draw(QPainter& p)
+void BarLine::draw(QPainter& p) const
       {
       qreal lw    = point(score()->style()->barWidth);
       qreal h     = height() - point(score()->style()->staffLineWidth) * .5;

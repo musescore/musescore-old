@@ -219,7 +219,7 @@ void Note::changeAccidental(int accType)
       int line  = tpc2line(_tpc);
       _tpc      = line2tpc(line, acc1);
       _pitch    = tpc2pitch(_tpc) + (_pitch / 12) * 12;
-      chord()->measure()->layoutNoteHeads(staffIdx());    // compute actual accidental
+//?      chord()->measure()->layoutNoteHeads(staffIdx());    // compute actual accidental
       int acc2  = accidentalSubtype();
       if (accType != acc2)
             _userAccidental = accType;    // bracketed editorial accidental
@@ -435,7 +435,7 @@ void Note::setType(DurationType t)
 //   draw
 //---------------------------------------------------------
 
-void Note::draw(QPainter& p)
+void Note::draw(QPainter& p) const
       {
       if (!_hidden)
             symbols[_head].draw(p, mag());
@@ -611,7 +611,7 @@ ShadowNote::ShadowNote(Score* s)
 //   draw
 //---------------------------------------------------------
 
-void ShadowNote::draw(QPainter& p)
+void ShadowNote::draw(QPainter& p) const
       {
       if (!visible())
             return;
