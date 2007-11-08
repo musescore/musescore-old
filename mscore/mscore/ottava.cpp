@@ -31,7 +31,7 @@
 //   draw
 //---------------------------------------------------------
 
-void OttavaSegment::draw(QPainter& p)
+void OttavaSegment::draw(QPainter& p) const
       {
       qreal ottavaLineWidth    = _spatium * .18;
       qreal ottavaTextDistance = _spatium * .5;

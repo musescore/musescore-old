@@ -85,7 +85,7 @@ QRectF Arpeggio::bbox() const
 //   draw
 //---------------------------------------------------------
 
-void Arpeggio::draw(QPainter& p)
+void Arpeggio::draw(QPainter& p) const
       {
       double y;
 

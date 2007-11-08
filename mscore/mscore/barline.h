@@ -45,7 +45,7 @@ class BarLine : public Element {
       virtual ElementType type() const { return BAR_LINE; }
       virtual void write(Xml& xml) const;
       virtual void read(QDomElement);
-      virtual void draw(QPainter&);
+      virtual void draw(QPainter&) const;
       virtual void dump() const;
       virtual void setSubtype(int t);
       virtual QRectF bbox() const;

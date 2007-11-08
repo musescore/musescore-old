@@ -39,7 +39,6 @@
 #include "sym.h"
 #include "padids.h"
 #include "pad.h"
-// #include "alsa.h"
 #include "pagesettings.h"
 #include "listedit.h"
 #include "editstyle.h"
@@ -201,7 +200,6 @@ MuseScore::MuseScore()
       mscore = this;
       setIconSize(QSize(ICON_HEIGHT, ICON_HEIGHT));
       setWindowTitle(QString("MuseScore"));
-      playRepeats           = 0;
       cs                    = 0;
       editStyleWin          = 0;
       instrList             = 0;
@@ -332,7 +330,6 @@ MuseScore::MuseScore()
       a->setCheckable(true);
       a = getAction("repeat");
       a->setCheckable(true);
-      repeatToggled(true);
       a->setChecked(true);
 
       //---------------------------------------------------
@@ -363,7 +360,9 @@ MuseScore::MuseScore()
       transportTools->addAction(getAction("pause"));
       transportTools->addAction(getAction("play"));
       transportTools->addSeparator();
-      transportTools->addAction(getAction("repeat"));
+      a = getAction("repeat");
+      a->setChecked(preferences.playRepeats);
+      transportTools->addAction(a);
 
       a = getAction("mag");
       fileTools->addAction(a);
@@ -1377,10 +1376,6 @@ bool MuseScore::playEnabled() const
       return preferences.playNotes && _speakerEnabled;
       }
 
-void MuseScore::repeatToggled(bool val)
-      {
-            playRepeats = val;
-      }
 //---------------------------------------------------------
 //   removeTab
 //---------------------------------------------------------

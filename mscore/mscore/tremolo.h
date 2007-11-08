@@ -38,7 +38,7 @@ class Tremolo : public Element {
       Tremolo &operator=(const Tremolo&);
       virtual Tremolo* clone() const  { return new Tremolo(*this); }
       virtual ElementType type() const { return TREMOLO; }
-      virtual void draw(QPainter&);
+      virtual void draw(QPainter&) const;
       virtual void layout(ScoreLayout*);
       virtual void write(Xml& xml) const;
       virtual void read(QDomElement);

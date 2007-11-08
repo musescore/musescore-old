@@ -769,10 +769,6 @@ bool Score::loadFile(QFile* qf)
                               }
                         else if (tag == "cursorTrack")
                               _is.track = i;
-                        else if (tag == "cursorStaff")      // obsolete
-                              _is.track = i * VOICES;
-                        else if (tag == "cursorVoice")      // obsolete
-                              _is.track += i;
                         else if (tag == "Slur") {
                               Slur* slur = new Slur(this);
                               slur->read(ee);
@@ -954,18 +950,17 @@ printerMag = DPI / oldDPI;
       mainLayout()->setPaintDevice(printer);
       doLayout();
 
-      ElementList el;
-      for (ciPage ip = _layout->pages()->begin();;) {
-            Page* page = *ip;
+      QList<const Element*> el;
+      foreach (const Page* page, _layout->pages()) {
             el.clear();
             page->collectElements(el);
             foreach(System* system, *page->systems()) {
-                  foreach(Measure* m, system->measures()) {
+                  foreach(MeasureBase* m, system->measures()) {
                         m->collectElements(el);
                         }
                   }
             for (int i = 0; i < el.size(); ++i) {
-                  Element* e = el.at(i);
+                  const Element* e = el[i];
                   if (!e->visible())
                         continue;
                   QPointF ap(e->canvasPos() - page->pos());
@@ -974,9 +969,6 @@ printerMag = DPI / oldDPI;
                   e->draw(p);
                   p.translate(-ap);
                   }
-            ++ip;
-            if (ip == _layout->pages()->end())
-                  break;
             printer->newPage();
             }
       p.end();
@@ -1067,17 +1059,17 @@ bool Score::saveSvg(const QString& name)
 
       QPointF offset(x, y);
 
-      ElementList el;
-      foreach(Page* page, *_layout->pages()) {
+      QList<const Element*> el;
+      foreach(const Page* page, _layout->pages()) {
             el.clear();
             page->collectElements(el);
             foreach(System* system, *page->systems()) {
-                  foreach(Measure* m, system->measures()) {
+                  foreach(MeasureBase* m, system->measures()) {
                         m->collectElements(el);
                         }
                   }
             for (int i = 0; i < el.size(); ++i) {
-                  Element* e = el.at(i);
+                  const Element* e = el[i];
                   if (!e->visible())
                         continue;
                   QPointF ap(e->canvasPos() - offset);

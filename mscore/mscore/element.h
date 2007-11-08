@@ -40,10 +40,6 @@ class Score;
 class Sym;
 class ScoreLayout;
 class Viewer;
-// Added by DK
-// class RepeatFlag;
-//--------------------------
-
 
 /**
   The value of this enum determines the "stacking order" the elements are
@@ -75,7 +71,8 @@ enum ElementType {
       HAIRPIN, OTTAVA, PEDAL, TRILL,
       SEGMENT, SYSTEM, COMPOUND, CHORD, SLUR,
       // special types for drag& drop:
-      ELEMENT, ELEMENT_LIST, STAFF_LIST, MEASURE_LIST, LAYOUT
+      ELEMENT, ELEMENT_LIST, STAFF_LIST, MEASURE_LIST, LAYOUT,
+      HBOX, VBOX
       };
 
 extern const char* elementNames[];  // for debugging
@@ -90,13 +87,7 @@ extern const char* elementNames[];  // for debugging
 //---------------------------------------------------------
 
 class Element {
-      Element* _next;
-      Element* _prev;
       Element* _parent;
-      Measure* _anchorMeasure;
-      // Added by DK
-//      RepeatFlag* _repeatFlag;
-      //--------------------------
 
       bool _selected;           ///< set if element is selected
       mutable bool _dropTarget; ///< true, if element accepts drops
@@ -136,20 +127,8 @@ class Element {
 
       Score* score() const                    { return _score;  }
       void setScore(Score* s)                 { _score = s;     }
-      Element* next() const                   { return _next;   }
-      void setNext(Element* e)                { _next = e;      }
-      Element* prev() const                   { return _prev;   }
-      void setPrev(Element* e)                { _prev = e;      }
       Element* parent() const                 { return _parent; }
       void setParent(Element* e)              { _parent = e;    }
-
-      Measure* anchorMeasure() const          { return _anchorMeasure; }
-      void setAnchorMeasure(Measure* m)       { _anchorMeasure = m;    }
-
-      // Added by DK
-//      RepeatFlag* repeatFlag()                { return _repeatFlag; }
-//      void setRepeatFlag(RepeatFlag* r)       { _repeatFlag = r;    }
-      //----------------------------------------------------------------
 
       bool selected() const                   { return _selected;   }
       virtual void setSelected(bool f)        { _selected = f;      }
@@ -204,7 +183,7 @@ class Element {
                || type() == TRILL || type() == VOLTA;
             }
 
-      virtual void draw(QPainter&) {}
+      virtual void draw(QPainter&) const {}
 
       void writeProperties(Xml& xml) const;
       bool readProperties(QDomElement);
@@ -305,10 +284,10 @@ class Element {
  */
       virtual bool mousePress(const QPointF&, QMouseEvent*) { return false; }
 
-      int itemDiscovered;     ///< helper flag for bsp
+      mutable int itemDiscovered;     ///< helper flag for bsp
 
       virtual QList<Prop> properties(Xml&) const;
-      virtual void collectElements(QList<Element*>& el) { el.append(this); }
+      virtual void collectElements(QList<const Element*>& el) const { el.append(this); }
 
       virtual void resetUserOffsets() {  setUserOff(QPointF()); }
 
@@ -357,7 +336,7 @@ class StaffLines : public Element {
       virtual ElementType type() const     { return STAFF_LINES; }
       void setWidth(qreal v)               { _width = v;         }
       virtual QRectF bbox() const;
-      virtual void draw(QPainter&);
+      virtual void draw(QPainter&) const;
       virtual void write(Xml& xml) const;
       virtual void read(QDomElement);
       int lines() const                    { return subtype(); }
@@ -377,7 +356,7 @@ class Cursor : public Element {
       Cursor(Score*, Viewer*);
       virtual Cursor* clone() const    { return new Cursor(*this); }
       virtual ElementType type() const { return CURSOR; }
-      virtual void draw(QPainter&);
+      virtual void draw(QPainter&) const;
 
       void setOn(bool f)      { _on = f; }
       bool isOn() const       { return _on; }
@@ -397,7 +376,7 @@ class VSpacer : public Element {
       VSpacer(Score*, double h);
       virtual VSpacer* clone() const { return new VSpacer(*this); }
       virtual ElementType type() const { return VSPACER; }
-      virtual void draw(QPainter&);
+      virtual void draw(QPainter&) const;
       };
 
 //---------------------------------------------------------
@@ -409,7 +388,7 @@ class Lasso : public Element {
       Lasso(Score*);
       virtual Lasso* clone() const       { return new Lasso(*this); }
       virtual ElementType type() const   { return LASSO; }
-      virtual void draw(QPainter&);
+      virtual void draw(QPainter&) const;
       };
 
 //---------------------------------------------------------
@@ -432,7 +411,7 @@ class Line : public Element {
       virtual ElementType type() const { return LINE; }
       virtual void layout(ScoreLayout*);
 
-      virtual void draw(QPainter&);
+      virtual void draw(QPainter&) const;
       void writeProperties(Xml& xml) const;
       bool readProperties(QDomElement);
       void dump() const;
@@ -454,7 +433,7 @@ class Compound : public Element {
       Compound(Score*);
       virtual ElementType type() const = 0;
 
-      virtual void draw(QPainter&);
+      virtual void draw(QPainter&) const;
       virtual void addElement(Element*, double x, double y);
       void clear();
       virtual void setSelected(bool f);
@@ -474,7 +453,7 @@ class RubberBand : public Element {
       RubberBand(Score* s) : Element(s) {}
       virtual RubberBand* clone() const { return new RubberBand(*this); }
       virtual ElementType type() const { return RUBBERBAND; }
-      virtual void draw(QPainter&);
+      virtual void draw(QPainter&) const;
 
       void set(const QPointF& p1, const QPointF& p2) { _p1 = p1; _p2 = p2; }
       QPointF p1() const { return _p1; }

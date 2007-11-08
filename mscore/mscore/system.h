@@ -39,6 +39,7 @@ class Bracket;
 class Lyrics;
 class Segment;
 class ScoreLayout;
+class MeasureBase;
 
 //---------------------------------------------------------
 //   SysStaff
@@ -83,7 +84,7 @@ typedef SysStaffList::const_iterator ciSysStaff;
 */
 
 class System : public Element {
-      QList<Measure*> ml;
+      QList<MeasureBase*> ml;
       SysStaffList _staves;
       BarLine* barLine;       ///< Left hand bar, connects staves in system.
       bool _pageBreak;
@@ -96,7 +97,7 @@ class System : public Element {
    public:
       System(Score*);
       ~System();
-      virtual System* clone() const { return new System(*this); }
+      virtual System* clone() const    { return new System(*this); }
       virtual ElementType type() const { return SYSTEM; }
 
       virtual QRectF bbox() const;
@@ -104,6 +105,7 @@ class System : public Element {
 
       virtual void add(Element*);
       virtual void remove(Element*);
+      virtual void change(Element* o, Element* n);
 
       Page* page() const                 { return (Page*)parent(); }
 
@@ -111,11 +113,11 @@ class System : public Element {
       void layout2(ScoreLayout*);         ///< Called after Measure layout.
       void clear();                       ///< Clear measure list.
 
-      QList<Measure*>& measures()          { return ml; }
+      QList<MeasureBase*>& measures()      { return ml; }
 
       QRectF bboxStaff(int staff) const;
       SysStaffList* staves()               { return &_staves; }
-      SysStaff* staff(int n)               { return _staves[n]; }
+      SysStaff* staff(int n) const         { return _staves.value(n); }
 
       double distance(int n) const         { return _staves[n]->distance(); }
       void setDistance(int n, double v)    { _staves[n]->setDistance(v); }
@@ -131,8 +133,8 @@ class System : public Element {
       void setInstrumentNames();
       int snap(int tick, const QPointF p) const;
       int snapNote(int tick, const QPointF p, int staff) const;
-      Measure* prevMeasure(const Measure*) const;
-      Measure* nextMeasure(const Measure*) const;
+      MeasureBase* prevMeasure(const MeasureBase*) const;
+      MeasureBase* nextMeasure(const MeasureBase*) const;
       };
 
 typedef QList<System*>::iterator iSystem;

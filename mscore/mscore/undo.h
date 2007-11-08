@@ -89,7 +89,7 @@ struct UndoOp {
       Staff* staff;
       MStaff* mstaff;
       System* system;
-      Measure* measure;
+      MeasureBase* measure;
       Segment* segment;
       QList<int> si;
       QList<int> di;

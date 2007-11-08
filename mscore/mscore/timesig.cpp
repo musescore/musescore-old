@@ -242,7 +242,7 @@ QRectF TimeSig::bbox() const
 //   draw
 //---------------------------------------------------------
 
-void TimeSig::draw(QPainter& p)
+void TimeSig::draw(QPainter& p) const
       {
       int st = subtype();
       if (st == 0)

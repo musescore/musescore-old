@@ -27,6 +27,8 @@
 #ifndef __REPEATFLAG_H__
 #define __REPEATFLAG_H__
 
+#if 0       // TODO: MeasureBase
+
 #include "repeat2.h"
 #include "repeatflagdialog.h"
 
@@ -72,5 +74,6 @@ public:
       };
 
 extern Element* actElement;
+#endif
 #endif
 

@@ -157,6 +157,7 @@ Preferences::Preferences()
       len12.type         = -1;
       len24.type         = -1;
       midiExpandRepeats  = true;
+      playRepeats  = true;
       };
 
 //---------------------------------------------------------
@@ -206,6 +207,7 @@ void Preferences::write()
       s.setValue("imagePath",          imagePath);
       s.setValue("showSplashScreen",   showSplashScreen);
       s.setValue("midiExpandRepeats",  midiExpandRepeats);
+      s.setValue("playRepeats",        playRepeats);
       switch(sessionStart) {
             case LAST_SESSION:   s.setValue("sessionStart", "last"); break;
             case NEW_SESSION:    s.setValue("sessionStart", "new"); break;
@@ -270,6 +272,7 @@ void Preferences::read()
       imagePath          = s.value("imagePath", "~/mscore/images").toString();
       showSplashScreen   = s.value("showSplashScreen", true).toBool();
       midiExpandRepeats  = s.value("midiExpandRepeats", true).toBool();
+      playRepeats        = s.value("playRepeats", true).toBool();
 
       QString ss(s.value("sessionStart", "score").toString());
       if (ss == "last")
@@ -469,7 +472,7 @@ PreferenceDialog::PreferenceDialog(QWidget* parent)
 //   portaudioApiActivated
 //---------------------------------------------------------
 
-void PreferenceDialog::portaudioApiActivated(int idx)
+void PreferenceDialog::portaudioApiActivated(int /*idx*/)
       {
 #ifdef USE_PORTAUDIO
       Portaudio* audio = (Portaudio*)seq->audioDriver();

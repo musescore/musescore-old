@@ -84,6 +84,7 @@ struct Preferences {
       MidiRemote len1, len2, len4, len8, len16, len32;
       MidiRemote len3, len6, len12, len24;
       bool midiExpandRepeats;
+      bool playRepeats;
 
       bool dirty;
 

@@ -85,7 +85,7 @@ void SlurSegment::move(const QPointF& s)
 //   draw
 //---------------------------------------------------------
 
-void SlurSegment::draw(QPainter& p)
+void SlurSegment::draw(QPainter& p) const
       {
       p.setBrush(color());
       p.drawPath(path);
@@ -554,9 +554,9 @@ bool SlurTie::readProperties(QDomElement e)
 //   collectElements
 //---------------------------------------------------------
 
-void SlurTie::collectElements(QList<Element*>& el)
+void SlurTie::collectElements(QList<const Element*>& el) const
       {
-      foreach(SlurSegment* seg, segments)
+      foreach(const SlurSegment* seg, segments)
             el.append(seg);
       }
 

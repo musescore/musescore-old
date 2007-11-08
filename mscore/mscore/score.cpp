@@ -20,7 +20,7 @@
 
 /**
  \file
- Implementation of classes ElemList (complete) and Score (partial).
+ Implementation of class Score (partial).
 */
 
 // #include "alsa.h"
@@ -59,6 +59,7 @@
 #include "repeat2.h"
 #include "ottava.h"
 #include "barline.h"
+#include "box.h"
 
 Score* gscore;                 ///< system score, used for palettes etc.
 
@@ -227,7 +228,7 @@ void Score::clear()
       sigmap->add(0, 4, 4);
       tempomap->clear();
       _layout->systems()->clear();
-      _layout->pages()->clear();
+      _layout->pages().clear();
       sel->clear();
       }
 
@@ -258,8 +259,10 @@ void Score::read(QString name)
             loadMsc(name);
             }
       int measureNo = 0;
-      for (Element* m = _layout->first(); m; m = m->next()) {
-            Measure* measure = (Measure*)m;
+      for (MeasureBase* mb = _layout->first(); mb; mb = mb->next()) {
+            if (mb->type() != MEASURE)
+                  continue;
+            Measure* measure = (Measure*)mb;
             measure->setNo(measureNo);
             if (!measure->irregular())
                   ++measureNo;
@@ -299,11 +302,12 @@ void Score::write(Xml& xml)
             el->write(xml);
       for (int staffIdx = 0; staffIdx < _staves.size(); ++staffIdx) {
             xml.stag(QString("Staff id=\"%1\"").arg(staffIdx + 1));
-            int measureNumber = 1;
             xml.curTick = 0;
-            for (Measure* m = _layout->first(); m; m = m->next()) {
-                  m->write(xml, measureNumber++, staffIdx);
-                  xml.curTick = m->tick() + sigmap->ticksMeasure(m->tick());
+            for (MeasureBase* m = _layout->first(); m; m = m->next()) {
+                  if (m->type() == MEASURE || staffIdx == 0)
+                        m->write(xml, staffIdx);
+                  if (m->type() == MEASURE)
+                        xml.curTick = m->tick() + sigmap->ticksMeasure(m->tick());
                   }
             xml.etag();
             }
@@ -329,19 +333,20 @@ Part* Score::part(int n)
 //   addMeasure
 //---------------------------------------------------------
 
-void Score::addMeasure(Measure* m)
+void Score::addMeasure(MeasureBase* m)
       {
       int tick    = m->tick();
-      Measure* im = tick2measure(tick);
+      MeasureBase* im = tick2measureBase(tick);
       _layout->insert(m, im);
-      fixTicks();
+      if (m->type() == MEASURE)
+            fixTicks();
       }
 
 //---------------------------------------------------------
 //   removeMeasure
 //---------------------------------------------------------
 
-void Score::removeMeasure(Measure* im)
+void Score::removeMeasure(MeasureBase* im)
       {
       _layout->erase(im);
       fixTicks();
@@ -427,7 +432,12 @@ void Score::fixTicks()
       {
       int bar  = 0;
       int tick = 0;
-      for (Measure* m = _layout->first(); m; m = m->next()) {
+      for (MeasureBase* mb = _layout->first(); mb; mb = mb->next()) {
+            if (mb->type() != MEASURE) {
+                  mb->setTick(tick);
+                  continue;
+                  }
+            Measure* m = (Measure*)mb;
             if (m->no() != bar) {
                   m->setNo(bar);
                   if (_style->showMeasureNumber) {
@@ -446,7 +456,6 @@ void Score::fixTicks()
                   ++bar;
             int mtick = m->tick();
             int diff  = tick - mtick;
-// printf("fixTicks %d  %5d + %3d  len %3d\n", m->no(), mtick, diff, sigmap->ticksMeasure(tick));
             tick += sigmap->ticksMeasure(tick);
             m->moveTicks(diff);
             }
@@ -462,21 +471,19 @@ void Score::fixTicks()
  If *rst != 0, then staff is fixed.
 */
 
-Measure* Score::pos2measure(const QPointF& p, int* tick, Staff** rst, int* pitch,
+MeasureBase* Score::pos2measure(const QPointF& p, int* tick, Staff** rst, int* pitch,
    Segment** seg, QPointF* offset) const
       {
 //      int voice = _padState.voice;            ?!?
       int voice = 0; // _padState.voice;
 
-      for (ciPage ip = _layout->pages()->begin(); ip != _layout->pages()->end(); ++ip) {
-            const Page* page = *ip;
-
+      foreach (const Page* page, _layout->pages()) {
             // if (!page->contains(p))
             if (!page->abbox().contains(p))
                   continue;
 
             QPointF pp = p - page->pos();  // transform to page relative
-            QList<System*>* sl = page->systems();
+            const QList<System*>* sl = page->systems();
             double y1 = 0;
             for (ciSystem is = sl->begin(); is != sl->end();) {
                   double y2;
@@ -493,9 +500,12 @@ Measure* Score::pos2measure(const QPointF& p, int* tick, Staff** rst, int* pitch
                         continue;
                         }
                   QPointF ppp = pp - s->pos();   // system relative
-                  foreach(Measure* m, s->measures()) {
-                        if (ppp.x() >= (m->x() + m->bbox().width()))
+                  foreach(MeasureBase* mb, s->measures()) {
+                        if (ppp.x() >= (mb->x() + mb->bbox().width()))
                               continue;
+                        if (mb->type() != MEASURE)
+                              return mb;
+                        Measure* m = (Measure*)mb;
                         double sy1 = 0;
                         if (rst && *rst == 0) {
                               for (int i = 0; i < nstaves();) {
@@ -606,13 +616,12 @@ Measure* Score::pos2measure2(const QPointF& p, int* tick, Staff** rst, int* line
       {
       int voice = _padState.voice;
 
-      for (ciPage ip = _layout->pages()->begin(); ip != _layout->pages()->end(); ++ip) {
-            const Page* page = *ip;
+      foreach(const Page* page, _layout->pages()) {
             if (!page->contains(p))
                   continue;
             QPointF pp = p - page->pos();  // transform to page relative
 
-            QList<System*>* sl = page->systems();
+            const QList<System*>* sl = page->systems();
             double y1 = 0;
             for (ciSystem is = sl->begin(); is != sl->end();) {
                   double y2;
@@ -629,7 +638,10 @@ Measure* Score::pos2measure2(const QPointF& p, int* tick, Staff** rst, int* line
                         continue;
                         }
                   QPointF ppp = pp - s->pos();   // system relative
-                  foreach(Measure* m, s->measures()) {
+                  foreach(MeasureBase* mb, s->measures()) {
+                        if (mb->type() != MEASURE)
+                              continue;
+                        Measure* m = (Measure*)mb;
                         if (ppp.x() > (m->x() + m->bbox().width()))
                               continue;
                         double sy1 = 0;
@@ -690,13 +702,12 @@ Measure* Score::pos2measure2(const QPointF& p, int* tick, Staff** rst, int* line
 
 Measure* Score::pos2measure3(const QPointF& p, int* tick) const
       {
-      for (ciPage ip = _layout->pages()->begin(); ip != _layout->pages()->end(); ++ip) {
-            const Page* page = *ip;
+      foreach(const Page* page, _layout->pages()) {
             if (!page->contains(p))
                   continue;
             QPointF pp = p - page->pos();  // transform to page relative
 
-            QList<System*>* sl = page->systems();
+            const QList<System*>* sl = page->systems();
             double y1 = 0;
             for (ciSystem is = sl->begin(); is != sl->end();) {
                   double y2;
@@ -713,20 +724,27 @@ Measure* Score::pos2measure3(const QPointF& p, int* tick) const
                         continue;
                         }
                   QPointF ppp = pp - s->pos();   // system relative
-                  foreach(Measure* m, s->measures()) {
+                  foreach(MeasureBase* m, s->measures()) {
+                        if (m->type() != MEASURE)
+                              continue;
                         if (ppp.x() > (m->x() + m->bbox().width()))
                               continue;
                         if (ppp.x() < (m->x() + m->bbox().width()*.5)) {
                               *tick = m->tick();
-                              return m;
-                              }
-                        else if (m->next()) {
-                              *tick = m->next()->tick();
-                              return m->next();
+                              return (Measure*)m;
                               }
                         else {
-                              *tick = m->tick() + m->tickLen();
-                              return m;
+                              MeasureBase* pm = m;
+                              while (m && m->next() && m->next()->type() != MEASURE)
+                                    m = m->next();
+                              if (m) {
+                                    *tick = m->tick();
+                                    return (Measure*)m;
+                                    }
+                              else {
+                                    *tick = pm->tick() + pm->tickLen();
+                                    return (Measure*) pm;
+                                    }
                               }
                         }
                   }
@@ -759,47 +777,52 @@ int Score::staff(const Part* part) const
 
 void Score::readStaff(QDomElement e)
       {
-      Measure* im = _layout->first();
-      int staff   = e.attribute("id", "1").toInt() - 1;
+      MeasureBase* mb = _layout->first();
+      int staff       = e.attribute("id", "1").toInt() - 1;
 
       int curTick = 0;
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             QString tag(e.tagName());
 
             if (tag == "Measure") {
-                  Measure* measure;
+                  Measure* measure = 0;
                   if (staff == 0) {
                         measure = new Measure(this);
+                        measure->setTick(curTick);
                         _layout->push_back(measure);
                         }
                   else {
-                        if (im) {
-                              measure = im;
-                              im = im->next();
+                        while (mb) {
+                              if (mb->type() != MEASURE) {
+                                    mb = mb->next();
+                                    }
+                              else {
+                                    measure = (Measure*)mb;
+                                    mb      = mb->next();
+                                    break;
+                                    }
                               }
-                        else {
+                        if (measure == 0) {
                               printf("Score::readStaff(): missing measure!\n");
                               measure = new Measure(this);
+                              measure->setTick(curTick);
                               _layout->push_back(measure);
                               }
                         }
-                  measure->setTick(curTick);
                   measure->read(e, staff);
-                  curTick = measure->tick() + sigmap->ticksMeasure(measure->tick());
+                  curTick = measure->tick() + measure->tickLen();
                   }
             else if (tag == "HBox") {
-                  Measure* measure = new Measure(this);
-                  measure->setSubtype(MEASURE_HBOX);
-                  _layout->push_back(measure);
-                  measure->setTick(curTick);
-                  measure->read(e, staff);
+                  HBox* hbox = new HBox(this);
+                  hbox->setTick(curTick);
+                  hbox->read(e);
+                  _layout->push_back(hbox);
                   }
             else if (tag == "VBox") {
-                  Measure* measure = new Measure(this);
-                  measure->setSubtype(MEASURE_VBOX);
-                  _layout->push_back(measure);
-                  measure->setTick(curTick);
-                  measure->read(e, staff);
+                  VBox* vbox = new VBox(this);
+                  vbox->setTick(curTick);
+                  vbox->read(e);
+                  _layout->push_back(vbox);
                   }
             else
                   domError(e);
@@ -812,12 +835,11 @@ void Score::readStaff(QDomElement e)
 
 int Score::snap(int tick, const QPointF p) const
       {
-      for (iPage ip = _layout->pages()->begin(); ip != _layout->pages()->end(); ++ip) {
-            Page* page = *ip;
+      foreach(const Page* page, _layout->pages()) {
             if (!page->contains(p))
                   continue;
             QPointF rp = p - page->pos();  // transform to page relative
-            QList<System*>* sl = page->systems();
+            const QList<System*>* sl = page->systems();
             double y = 0.0;
             for (ciSystem is = sl->begin(); is != sl->end(); ++is) {
                   System* system = *is;
@@ -1074,12 +1096,11 @@ void Score::midiNoteReceived(int pitch, bool chord)
 
 int Score::snapNote(int tick, const QPointF p, int staff) const
       {
-      for (iPage ip = _layout->pages()->begin(); ip != _layout->pages()->end(); ++ip) {
-            Page* page = *ip;
+      foreach(const Page* page, _layout->pages()) {
             if (!page->contains(p))
                   continue;
             QPointF rp = p - page->pos();  // transform to page relative
-            QList<System*>* sl = page->systems();
+            const QList<System*>* sl = page->systems();
             double y = 0.0;
             for (ciSystem is = sl->begin(); is != sl->end(); ++is) {
                   System* system = *is;
@@ -1191,7 +1212,7 @@ bool Score::playlistDirty()
 //    according to new start time
 //---------------------------------------------------------
 
-void Score::adjustTime(int tick, Measure* m)
+void Score::adjustTime(int tick, MeasureBase* m)
       {
       int delta = tick - m->tick();
       if (delta == 0)
@@ -1229,8 +1250,8 @@ QPointF Score::tick2Anchor(int tick, int staffIdx) const
 bool Score::pos2TickAnchor(const QPointF& pos, Staff* staff, int* tick, QPointF* anchor) const
       {
       Segment* seg;
-      Measure* m = pos2measure(pos, tick, &staff, 0, &seg, 0);
-      if (!m) {
+      MeasureBase* m = pos2measure(pos, tick, &staff, 0, &seg, 0);
+      if (!m || m->type() != MEASURE) {
             printf("pos2TickAnchor: no measure found\n");
             return false;
             }
@@ -1248,7 +1269,10 @@ void Score::spell()
       {
       for (int i = 0; i < nstaves(); ++i) {
             QList<Note*> notes;
-            for(Measure* m = _layout->first(); m; m = m->next()) {
+            for(MeasureBase* mb = _layout->first(); mb; mb = mb->next()) {
+                  if (mb->type() != MEASURE)
+                        continue;
+                  Measure* m = (Measure*)mb;
                   for (Segment* s = m->first(); s; s = s->next()) {
                         int strack = i * VOICES;
                         int etrack = strack + VOICES;
@@ -1507,10 +1531,10 @@ void Score::collectMeasureEvents(QMap<int, Event>* events, Measure* m, int staff
                         ev.val2       = 60;
                         ev.note       = note;
                         ev.channel    = channel;
-                        events->insertMulti(tick + rtickOffSet + tickOffset, ev);
+                        events->insertMulti(tick + tickOffset, ev);
 
                         ev.val2 = 0;
-                        events->insertMulti(tick + rtickOffSet + len + tickOffset, ev);
+                        events->insertMulti(tick + len + tickOffset, ev);
                         }
                   }
             }
@@ -1664,12 +1688,12 @@ void Score::toEList(QMap<int, Event>* events, int offset)
 struct RepeatLoop {
       enum LoopType { LOOP_REPEAT, LOOP_FINE };
 
-      Measure* m;
+      MeasureBase* m;
       int count;
       LoopType type;
 
       RepeatLoop() {}
-      RepeatLoop(Measure* _m, LoopType ltype) : m(_m), count(0), type(ltype) {}
+      RepeatLoop(MeasureBase* _m, LoopType ltype) : m(_m), count(0), type(ltype) {}
       };
 
 //---------------------------------------------------------
@@ -1683,17 +1707,24 @@ struct RepeatLoop {
 
 void Score::toEList(QMap<int, Event>* events, bool expandRepeats, int offset, int staffIdx)
       {
-      rtickOffSet = 0;  // DEBUG
       if (!expandRepeats) {
-            for (Measure* m = mainLayout()->first(); m; m = m->next())
-                  collectMeasureEvents(events, m, staffIdx, offset);
+            for (MeasureBase* mb = mainLayout()->first(); mb; mb = mb->next()) {
+                  if (mb->type() != MEASURE)
+                        continue;
+                  collectMeasureEvents(events, (Measure*)mb, staffIdx, offset);
+                  }
             return;
             }
       QStack<RepeatLoop> rstack;
       int tickOffset = 0;
 
-      Measure* fm = mainLayout()->first();
-      for (Measure* m = fm; m;) {
+      MeasureBase* fm = mainLayout()->first();
+      for (MeasureBase* mb = fm; mb;) {
+            if (mb->type() != MEASURE) {
+                  mb = mb->next();
+                  continue;
+                  }
+            Measure* m = (Measure*)mb;
             if ((m->repeatFlags() & RepeatStart) && (rstack.isEmpty() || (rstack.top().m != m)))
                   rstack.push(RepeatLoop(m, RepeatLoop::LOOP_REPEAT));
 
@@ -1713,7 +1744,7 @@ void Score::toEList(QMap<int, Event>* events, bool expandRepeats, int offset, in
                         // goto start of loop, fix tickOffset
                         //
                         tickOffset += m->tick() + m->tickLen() - rstack.top().m->tick();
-                        m = rstack.top().m;
+                        mb = rstack.top().m;
                         continue;
                         }
                   rstack.pop();     // end this loop
@@ -1721,20 +1752,22 @@ void Score::toEList(QMap<int, Event>* events, bool expandRepeats, int offset, in
             if (m->repeatFlags() & RepeatDacapoAlFine) {
                   rstack.push(RepeatLoop(m, RepeatLoop::LOOP_FINE));
                   tickOffset += m->tick() + m->tickLen();
-                  m = fm;
+                  mb = fm;
                   continue;
                   }
             if (m->repeatFlags() & RepeatDalSegnoAlFine) {
                   // search for segno
-                  Measure* mm = fm;
+                  MeasureBase* mm = fm;
                   for (; mm; mm = mm->next()) {
-                        if (mm->repeatFlags() & RepeatSegno)
+                        if (mm->type() != MEASURE)
+                              continue;
+                        if (((Measure*)mm)->repeatFlags() & RepeatSegno)
                               break;
                         }
                   if (mm) {
                         rstack.push(RepeatLoop(m, RepeatLoop::LOOP_FINE));
                         tickOffset += m->tick() + m->tickLen() - mm->tick();
-                        m = mm;
+                        mb = mm;
                         continue;
                         }
                   else {
@@ -1747,7 +1780,7 @@ void Score::toEList(QMap<int, Event>* events, bool expandRepeats, int offset, in
                         break;
                         }
                   }
-            m = m->next();
+            mb = mb->next();
             }
       if (!rstack.isEmpty())
             printf("repeat stack not empty!\n");

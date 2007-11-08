@@ -250,7 +250,7 @@ QRectF Tuplet::bbox() const
 //   draw
 //---------------------------------------------------------
 
-void Tuplet::draw(QPainter& p)
+void Tuplet::draw(QPainter& p) const
       {
       if (_number) {
             p.save();

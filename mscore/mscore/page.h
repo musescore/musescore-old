@@ -74,22 +74,21 @@ struct PageFormat {
 
 class Page : public Element {
       ScoreLayout* _layout;
-      QList<System*>* _systems;
+      QList<System*> _systems;
       int _no;                            // page number
       Text* _pageNo;
       Text* _copyright;
-      QList<Element*> _elements;
 
    public:
       Page(ScoreLayout*);
-      ~Page();
       virtual Page* clone() const        { return new Page(*this); }
       virtual ElementType type() const   { return PAGE; }
       virtual QRectF bbox() const;
 
-      QList<System*>* systems() const     { return _systems;   }
+      const QList<System*>* systems() const { return &_systems;   }
+      QList<System*>* systems()             { return &_systems;   }
+
       void appendSystem(System* s);
-      double addMeasure(ScoreLayout*, Measure*, double);
 
       int no() const                     { return _no;        }
       void setNo(int n)                  { _no = n;           }
@@ -102,31 +101,15 @@ class Page : public Element {
       double loWidth() const;
       double loHeight() const;
 
-      QList<Element*>& pel()             { return _elements; }
-      const QList<Element*>& pel() const { return _elements; }
       Text* pageNo() const               { return _pageNo;    }
       Text* copyright() const            { return _copyright; }
 
-      virtual void add(Element*);
-      virtual void remove(Element* el);
       void layout(ScoreLayout*);
 
-      virtual void draw(QPainter&p);
-      void collectElements(QList<Element*>& el);
+      virtual void draw(QPainter&p) const;
+      void collectElements(QList<const Element*>& el) const;
+      void clear();
       };
-
-//---------------------------------------------------------
-//   PageList
-//---------------------------------------------------------
-
-class PageList : public QList<Page*> {
-   public:
-      PageList() {}
-      void update();
-      };
-
-typedef PageList::iterator iPage;
-typedef PageList::const_iterator ciPage;
 
 extern const PaperSize paperSizes[];
 extern int paperSizeNameToIndex(const QString&);

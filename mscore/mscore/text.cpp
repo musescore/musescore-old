@@ -289,27 +289,21 @@ void Text::layout(ScoreLayout* layout)
 
       double tw = bbox().width();
       double th = bbox().height();
-      double x = 0.0, y = 0.0;
+      double x  = 0.0;
+      double y = 0.0;
       if (_anchor == ANCHOR_PAGE) {
-            Page* page = (Page*)parent();
-            if (parent()->type() != PAGE) {
-                  printf("fatal: text parent is not PAGE <%s>\n", getText().toLocal8Bit().data());
-                  return;
-                  }
-            double w = page->loWidth() - page->lm() - page->rm();
-            tw = w;
-            double h = page->loHeight() - page->tm() - page->bm();
+            double w = parent()->width();
+            double h = parent()->height();
             doc->setTextWidth(w);
 
             if (_offsetType == OFFSET_REL)
                   _off = QPointF(_xoff * w * 0.01, _yoff * h * 0.01);
-            x = page->lm();
             if (_align & ALIGN_TOP)
-                  y = page->tm();
+                  y = 0.0;
             else if (_align & ALIGN_BOTTOM)
-                  y = page->tm() + h;
+                  y = h - th;
             else if (_align & ALIGN_VCENTER)
-                  y = page->tm() + h * .5 - th * .5;
+                  y = h * .5 - th * .5;
             }
       else {
             if (_align & ALIGN_LEFT)
@@ -697,7 +691,7 @@ void Text::endEdit()
 //   Text::draw
 //---------------------------------------------------------
 
-void Text::draw(QPainter& p)
+void Text::draw(QPainter& p) const
       {
       double dpmm = double(p.device()->logicalDpiX()) / INCH;
       p.save();

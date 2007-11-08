@@ -83,7 +83,7 @@ const char* elementNames[] = {
       "HairPin", "Ottava", "Pedal", "Trill",
       "Segment", "System", "Compound", "Chord", "Slur",
       "Element", "ElementList", "StaffList", "MeasureList",
-      "Layout"
+      "Layout", "HBox", "VBox"
       };
 
 //---------------------------------------------------------
@@ -113,10 +113,7 @@ Element::~Element()
 
 void Element::init()
       {
-      _prev       = 0;
-      _next       = 0;
       _parent     = 0;
-      _anchorMeasure = 0;
       _selected   = false;
       _dropTarget = false;
       _visible    = true;
@@ -497,7 +494,7 @@ QRectF StaffLines::bbox() const
 //   draw
 //---------------------------------------------------------
 
-void StaffLines::draw(QPainter& p)
+void StaffLines::draw(QPainter& p) const
       {
       QPointF _pos(0.0, 0.0);
 
@@ -585,7 +582,7 @@ void Line::layout(ScoreLayout* layout)
 //   draw
 //---------------------------------------------------------
 
-void Line::draw(QPainter& p)
+void Line::draw(QPainter& p) const
       {
       QPen pen(p.pen());
       pen.setWidthF(point(_width));
@@ -641,7 +638,7 @@ Compound::Compound(Score* s)
 //   draw
 //---------------------------------------------------------
 
-void Compound::draw(QPainter& p)
+void Compound::draw(QPainter& p) const
       {
       foreach(Element* e, elemente) {
             QPointF pt(e->pos());
@@ -742,7 +739,7 @@ Cursor::Cursor(Score* s, Viewer* v)
 //   draw
 //---------------------------------------------------------
 
-void Cursor::draw(QPainter& p)
+void Cursor::draw(QPainter& p) const
       {
       if (!(_on && _blink))
             return;
@@ -763,7 +760,7 @@ Lasso::Lasso(Score* s)
 //   draw
 //---------------------------------------------------------
 
-void Lasso::draw(QPainter& p)
+void Lasso::draw(QPainter& p) const
       {
       p.setBrush(Qt::NoBrush);
       QPen pen(QColor(preferences.selectColor[0]));
@@ -794,7 +791,7 @@ void Element::dump() const
 //   RubberBand::draw
 //---------------------------------------------------------
 
-void RubberBand::draw(QPainter& p)
+void RubberBand::draw(QPainter& p) const
       {
       if (!showRubberBand)
             return;
@@ -816,7 +813,7 @@ VSpacer::VSpacer(Score* s, double h)
 //   draw
 //---------------------------------------------------------
 
-void VSpacer::draw(QPainter&)
+void VSpacer::draw(QPainter&) const
       {
 //      int lw       = lrint(.5 * tf->mag() * _spatium);
 //      int len      = lrint(height * tf->mag() * _spatium);

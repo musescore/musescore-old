@@ -158,7 +158,7 @@ class Note : public Element {
       Chord* chord() const            { return (Chord*)parent(); }
       void setChord(Chord* a)         { setParent((Element*)a);    }
 
-      virtual void draw(QPainter&);
+      virtual void draw(QPainter&) const;
       virtual void read(QDomElement);
       virtual void write(Xml& xml) const;
       QPointF stemPos(bool upFlag) const;    ///< Point to connect stem.
@@ -194,7 +194,7 @@ class ShadowNote : public Element {
       int line() const                  { return _line;   }
       void setLine(int n)               { _line = n;      }
       virtual QRectF bbox() const;
-      virtual void draw(QPainter& p);
+      virtual void draw(QPainter& p) const;
       };
 
 #endif

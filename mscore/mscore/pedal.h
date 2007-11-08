@@ -36,7 +36,7 @@ class PedalSegment : public LineSegment {
       Pedal* pedal() const                { return (Pedal*)parent(); }
       virtual ElementType type() const    { return PEDAL_SEGMENT; }
       virtual PedalSegment* clone() const { return new PedalSegment(*this); }
-      virtual void draw(QPainter&);
+      virtual void draw(QPainter&) const;
       virtual QRectF bbox() const;
       };
 

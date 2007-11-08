@@ -57,7 +57,7 @@ class LineSegment : public Element {
 
    public:
       LineSegment(Score* s);
-      virtual void draw(QPainter& p) = 0;
+      virtual void draw(QPainter& p) const = 0;
       SLine* line() const                 { return (SLine*)parent(); }
       const QPointF& userOff2() const     { return _userOff2;  }
       void setUserOff2(const QPointF& o)  { _userOff2 = o;     }
@@ -84,7 +84,7 @@ class SLine : public Element {
 
    public:
       SLine(Score* s);
-      virtual void draw(QPainter& p);
+      virtual void draw(QPainter& p) const;
       void setTick2(int t);
       int tick2() const    { return _tick2; }
       virtual void layout(ScoreLayout*);
@@ -92,7 +92,7 @@ class SLine : public Element {
       void writeProperties(Xml& xml) const;
       virtual LineSegment* createLineSegment() = 0;
       void setLen(double l);
-      virtual void collectElements(QList<Element*>& el);
+      virtual void collectElements(QList<const Element*>& el) const;
       virtual void add(Element*);
       virtual void remove(Element*);
       virtual void change(Element* o, Element* n);

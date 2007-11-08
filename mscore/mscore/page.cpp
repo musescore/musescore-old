@@ -50,12 +50,6 @@ Page::Page(ScoreLayout* s)
       _no        = 0;
       _pageNo    = 0;
       _copyright = 0;
-      _systems   = new QList<System*>;
-      }
-
-Page::~Page()
-      {
-      delete _systems;
       }
 
 //---------------------------------------------------------
@@ -96,67 +90,13 @@ double Page::loHeight() const
       }
 
 //---------------------------------------------------------
-//   add Element
-//---------------------------------------------------------
-
-void Page::add(Element* el)
-      {
-      if (el->type() == TEXT && el->subtype() == TEXT_COPYRIGHT) {
-            Text* text = (Text*) el;
-            score()->setCopyright(text->getDoc());
-            _copyright = text;
-            }
-      else {
-            el->setParent(this);
-            _elements.push_back(el);
-            el->anchorMeasure()->add(el);
-            }
-      }
-
-//---------------------------------------------------------
-//   remove Element
-//---------------------------------------------------------
-
-void Page::remove(Element* el)
-      {
-      if (el->type() == TEXT && el->subtype() == TEXT_COPYRIGHT) {
-            score()->setCopyright(0);
-            if (_copyright) {
-//                  delete _copyright;
-                  _copyright = 0;
-                  }
-            }
-      else {
-            _elements.removeAll(el);
-            el->anchorMeasure()->remove(el);
-            }
-      }
-
-//---------------------------------------------------------
 //   appendSystem
 //---------------------------------------------------------
 
 void Page::appendSystem(System* s)
       {
       s->setParent(this);
-      _systems->push_back(s);
-      }
-
-//---------------------------------------------------------
-//   update
-//    update bounding box and page position
-//---------------------------------------------------------
-
-void PageList::update()
-      {
-      double x = 0;
-      int no   = 0;
-      for (iPage ip = begin(); ip != end(); ++ip, ++no) {
-            Page* page = *ip;
-            page->setNo(no);
-            page->setPos(x, 0);
-            x += page->width() + ((no & 1) ? 1.0 : 50.0);
-            }
+      _systems.append(s);
       }
 
 //---------------------------------------------------------
@@ -230,7 +170,7 @@ void Page::layout(ScoreLayout* layout)
 //    bounding rectange fr is relative to page QPointF
 //---------------------------------------------------------
 
-void Page::draw(QPainter& p)
+void Page::draw(QPainter& p) const
       {
       QRectF r = bbox();
       qreal x1 = r.x();
@@ -315,25 +255,14 @@ void Page::draw(QPainter& p)
 //    collect all visible elements
 //---------------------------------------------------------
 
-void Page::collectElements(QList<Element*>& el)
+void Page::collectElements(QList<const Element*>& el) const
       {
-      foreach(Element* e, _elements) {
-            //
-            // elements with anchorMeasure live in Measure()
-            // do not collect twice
-            //
-            if (!e->anchorMeasure())
-                  el.append(e);
-            }
       if (_copyright)
             el.append(_copyright);
       if (_pageNo)
             el.append(_pageNo);
-      QList<System*>* sl = systems();
       int staves = score()->nstaves();
-
-      for (ciSystem is = sl->begin(); is != sl->end(); ++is) {
-            System* s = *is;
+      foreach(const System* s, _systems) {
             if (s->getBarLine())
                   el.append(s->getBarLine());
             for (int i = 0; i < staves; ++i) {
@@ -350,39 +279,6 @@ void Page::collectElements(QList<Element*>& el)
                         el.append(st->instrumentName);
                   }
             }
-      }
-
-//---------------------------------------------------------
-//   addMeasure
-//---------------------------------------------------------
-
-double Page::addMeasure(ScoreLayout* layout, Measure* m, double y)
-      {
-      //---------------------------------------------------
-      //    collect page elements from measure
-      //---------------------------------------------------
-
-      ElementList sel = *(m->pel());
-      m->pel()->clear();
-      bool textFound = false;
-      for (iElement ie = sel.begin(); ie != sel.end(); ++ie) {
-            Element* el = *ie;
-            add(el);
-
-            el->layout(layout);
-            if (el->type() == TEXT) {
-                  Text* text = (Text*)el;
-                  if (text->anchor() == ANCHOR_PAGE) {
-                        // TODO: only collect top aligned page elements?
-                        if (el->pos().y() > y)
-                              y = el->pos().y();
-                        textFound = true;
-                        }
-                  }
-            }
-      if (textFound)
-            y += point(score()->style()->staffUpperBorder);
-      return y;
       }
 
 //---------------------------------------------------------
@@ -547,5 +443,14 @@ void PageFormat::write(Xml& xml)
       xml.etag();
 
       xml.etag();
+      }
+
+//---------------------------------------------------------
+//   clear
+//---------------------------------------------------------
+
+void Page::clear()
+      {
+      _systems.clear();
       }
 

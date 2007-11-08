@@ -60,7 +60,7 @@ class SlurSegment : public Element {
 
       void layout(ScoreLayout*, const QPointF& p1, const QPointF& p2, qreal bow);
       virtual QPainterPath shape() const;
-      virtual void draw(QPainter&);
+      virtual void draw(QPainter&) const;
 
       virtual QRectF drag(const QPointF& s);
       virtual bool startEdit(const QPointF&);
@@ -116,7 +116,7 @@ class SlurTie : public Element {
       void writeProperties(Xml& xml) const;
       bool readProperties(QDomElement);
       QPointF slurPos(int tick, int track, System*& s);
-      virtual void collectElements(QList<Element*>& el);
+      virtual void collectElements(QList<const Element*>& el) const;
       };
 
 //---------------------------------------------------------

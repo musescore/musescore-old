@@ -36,7 +36,7 @@ class RepeatMeasure : public Element {
       RepeatMeasure &operator=(const RepeatMeasure&);
       virtual RepeatMeasure* clone() const  { return new RepeatMeasure(*this); }
       virtual ElementType type() const      { return REPEAT_MEASURE; }
-      virtual void draw(QPainter&);
+      virtual void draw(QPainter&) const;
       virtual void layout(ScoreLayout*);
       virtual void write(Xml& xml) const;
       virtual void read(QDomElement);
@@ -80,7 +80,7 @@ class Repeat : public Element {
       virtual Repeat* clone() const    { return new Repeat(*this); }
       virtual ElementType type() const { return REPEAT; }
 
-      virtual void draw(QPainter&);
+      virtual void draw(QPainter&) const;
       virtual QRectF bbox() const;
 
       virtual void read(QDomElement);

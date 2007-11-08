@@ -215,12 +215,14 @@ ChordRest* Score::nextMeasure(ChordRest* element)
       if (!element)
             return 0;
 
-      Measure* measure = element->measure()->next();
+      MeasureBase* measure = element->measure()->next();
+      while (measure && measure->type() != MEASURE)
+            measure = measure->next();
       if (!measure)
             return 0;
       int staff = element->staffIdx();
 
-      for (Segment* seg = measure->first(); seg; seg = seg->next()) {
+      for (Segment* seg = ((Measure*)measure)->first(); seg; seg = seg->next()) {
             int etrack = (staff+1) * VOICES;
             for (int track = staff * VOICES; track < etrack; ++track) {
                   Element* pel = seg->element(track);
@@ -241,12 +243,14 @@ ChordRest* Score::prevMeasure(ChordRest* element)
       if (!element)
             return 0;
 
-      Measure* measure = element->measure()->prev();
+      MeasureBase* measure = element->measure()->prev();
+      while (measure && measure->type() != MEASURE)
+            measure = measure->prev();
       if (!measure)
             return 0;
       int staff = element->staffIdx();
 
-      for (Segment* seg = measure->first(); seg; seg = seg->next()) {
+      for (Segment* seg = ((Measure*)measure)->first(); seg; seg = seg->next()) {
             int etrack = (staff+1) * VOICES;
             for (int track = staff * VOICES; track < etrack; ++track) {
                   Element* pel = seg->element(track);
@@ -313,9 +317,9 @@ void Score::adjustCanvasPosition(Element* el)
 
 void Score::pageNext()
       {
-      if (_layout->pages()->empty())
+      if (_layout->pages().empty())
             return;
-      Page* page = _layout->pages()->back();
+      Page* page = _layout->pages().back();
       qreal mag  = canvas()->xMag();
       qreal x    = canvas()->xoffset() - page->width() * mag;
       qreal lx   = 10.0 - page->canvasPos().x() * mag;
@@ -332,9 +336,9 @@ void Score::pageNext()
 
 void Score::pagePrev()
       {
-      if (_layout->pages()->empty())
+      if (_layout->pages().empty())
             return;
-      Page* page = _layout->pages()->back();
+      Page* page = _layout->pages().back();
       qreal x = canvas()->xoffset() + page->width() * canvas()->xMag();
       if (x > 10.0)
             x = 10.0;
@@ -360,9 +364,9 @@ void Score::pageTop()
 
 void Score::pageEnd()
       {
-      if (_layout->pages()->empty())
+      if (_layout->pages().empty())
             return;
-      Page* lastPage = _layout->pages()->back();
+      Page* lastPage = _layout->pages().back();
       QPointF p(lastPage->canvasPos());
       qreal mag = canvas()->xMag();
       canvas()->setOffset(10.0 - p.x() * mag, 10.0);

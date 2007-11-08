@@ -61,7 +61,7 @@ void Beam::remove(ChordRest* a)
 //   draw
 //---------------------------------------------------------
 
-void Beam::draw(QPainter& p)
+void Beam::draw(QPainter& p) const
       {
       p.setPen(QPen(Qt::NoPen));
       p.setBrush(selected() ? preferences.selectColor[0] : Qt::black);

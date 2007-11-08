@@ -1,3 +1,7 @@
+8.11.7 (ws)
+      - Title, Subtitle, Poet and Composer are moved from Measure to VBox
+      - moved Element->_prev and Element->_next to MeasureBase and Segment
+      - changed HBox, VBox and Measure into subclasses of new class MeasureBase
 4.11.7 (lv)
       - new testfile testLines1.xml, including png version of what it should
         look like after import

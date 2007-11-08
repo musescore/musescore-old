@@ -39,7 +39,7 @@ class VoltaSegment : public LineSegment {
       Volta* volta() const                { return (Volta*)parent(); }
       virtual ElementType type() const    { return VOLTA_SEGMENT; }
       virtual VoltaSegment* clone() const { return new VoltaSegment(*this); }
-      virtual void draw(QPainter&);
+      virtual void draw(QPainter&) const;
       virtual QRectF bbox() const;
       virtual bool edit(int, QKeyEvent*);
       virtual bool genPropertyMenu(QMenu*) const;

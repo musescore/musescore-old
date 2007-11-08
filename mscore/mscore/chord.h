@@ -52,7 +52,7 @@ class Stem : public Element {
 
       virtual Stem* clone() const { return new Stem(*this); }
       virtual ElementType type() const { return STEM; }
-      virtual void draw(QPainter& p);
+      virtual void draw(QPainter& p) const;
       void setLen(const Spatium&);
       virtual QRectF bbox() const;
       };

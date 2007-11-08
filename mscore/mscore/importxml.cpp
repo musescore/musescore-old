@@ -516,7 +516,10 @@ Measure* MusicXml::xmlMeasure(Part* part, QDomElement e, int number)
       // search measure for tick
       Measure* measure = 0;
       Measure* lastMeasure = 0;
-      for (Measure* m = score->mainLayout()->first(); m; m = m->next()) {
+      for (MeasureBase* mb = score->mainLayout()->first(); mb; mb = mb->next()) {
+            if (mb->type() != MEASURE)
+                  continue;
+            Measure* m = (Measure*)mb;
             lastMeasure = m;
             if (m->tick() == tick) {
                   measure = m;
@@ -576,7 +579,7 @@ Measure* MusicXml::xmlMeasure(Part* part, QDomElement e, int number)
                   //
                   // in MScore the break happens _after_ the marked measure:
                   //
-                  Measure* pm = measure->prev();
+                  Measure* pm = (Measure*)(measure->prev());      // TODO: MeasureBase
                   if (pm == 0)
                         printf("ImportXml: warning: break on first measure\n");
                   else {

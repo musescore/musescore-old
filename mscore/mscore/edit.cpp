@@ -279,7 +279,10 @@ void Score::removeClef(Clef* clef)
       //    remove unnessesary clef symbols
       //---------------------------------------------
 
-      for (Measure* m = _layout->first(); m; m = m->next()) {
+      for (MeasureBase* mb = _layout->first(); mb; mb = mb->next()) {
+            if (mb->type() != MEASURE)
+                  continue;
+            Measure* m = (Measure*)mb;
             if ((m->tick()+m->tickLen()) < tick)
                   continue;
             for (Segment* segment = m->first(); segment; segment = segment->next()) {
@@ -326,7 +329,10 @@ Element* Score::addClef(Clef* clef)
       //    remove unnessesary clef symbols
       //---------------------------------------------
 
-      for (Measure* m = _layout->first(); m; m = m->next()) {
+      for (MeasureBase* mb = _layout->first(); mb; mb = mb->next()) {
+            if (mb->type() != MEASURE)
+                  continue;
+            Measure* m = (Measure*)mb;
             if ((m->tick()+m->tickLen()) < tick)
                   continue;
             for (Segment* segment = m->first(); segment; segment = segment->next()) {
@@ -419,7 +425,10 @@ void Score::changeTimeSig(int tick, int timeSigSubtype)
             // check if there is already a time signature symbol
             //
             Segment* ts = 0;
-            for (Measure* m = _layout->first(); m; m = m->next()) {
+            for (MeasureBase* mb = _layout->first(); mb; mb = mb->next()) {
+                  if (mb->type() != MEASURE)
+                        continue;
+                  Measure* m = (Measure*)mb;
                   for (Segment* segment = m->first(); segment; segment = segment->next()) {
                         if (segment->subtype() != Segment::SegTimeSig)
                               continue;
@@ -465,7 +474,14 @@ void Score::changeTimeSig(int tick, int timeSigSubtype)
       //---------------------------------------------
 
       int staves = nstaves();
-      for (Segment* segment = _layout->first()->first(); segment;) {
+      Segment* segment = 0;
+      for (MeasureBase* mb = _layout->first(); mb; mb = mb->next()) {
+            if (mb->type() == MEASURE) {
+                  segment = ((Measure*)mb)->first();
+                  break;
+                  }
+            }
+      for (; segment;) {
             Segment* nseg = segment->next1();
             if (segment->subtype() != Segment::SegTimeSig) {
                   segment = nseg;
@@ -500,8 +516,10 @@ void Score::changeTimeSig(int tick, int timeSigSubtype)
       // modify measures
       //---------------------------------------------
 
-      for (Measure* m = _layout->first(); m; m = m->next()) {
-
+      for (MeasureBase* mb = _layout->first(); mb; mb = mb->next()) {
+            if (mb->type() != MEASURE)
+                  continue;
+            Measure* m = (Measure*)mb;
             int newLen = sigmap->ticksMeasure(m->tick());
             int oldLen = m->tickLen();
             if (newLen == oldLen)
@@ -545,12 +563,13 @@ void Score::putNote(const QPointF& pos, bool addToChord)
       {
       int tick, pitch;
       Staff* staff = 0;
-      Measure* m = pos2measure(pos, &tick, &staff, &pitch, 0, 0);
+      MeasureBase* mb = pos2measure(pos, &tick, &staff, &pitch, 0, 0);
 
-      if (m == 0 || pitch < 0 || pitch > 127) {
+      if (mb == 0 || mb->type() != MEASURE || pitch < 0 || pitch > 127) {
             printf("cannot put note/rest at this position, bad pitch %d!\n", pitch);
             return;
             }
+      Measure* m = (Measure*)mb;
 
       int len   = _padState.tickLen;
       int voice = _padState.voice;
@@ -833,8 +852,8 @@ void Score::cmdAddBSymbol(BSymbol* s, const QPointF& pos, const QPointF& off)
             QPointF offset;
             Segment* segment;
 
-            Measure* measure = pos2measure(pos, &tick, &staff, &pitch, &segment, &offset);
-            if (measure == 0) {
+            MeasureBase* measure = pos2measure(pos, &tick, &staff, &pitch, &segment, &offset);
+            if (measure == 0 || measure->type() != MEASURE) {
                   printf("addSymbol: cannot put symbol here: no measure\n");
                   delete s;
                   return;
@@ -848,17 +867,16 @@ void Score::cmdAddBSymbol(BSymbol* s, const QPointF& pos, const QPointF& off)
             }
       else if (s->anchor() == ANCHOR_PAGE) {
             bool foundPage = false;
-            for (ciPage ip = _layout->pages()->begin(); ip != _layout->pages()->end(); ++ip) {
-                  const Page* page = *ip;
+            foreach (Page* page, _layout->pages()) {
                   if (page->contains(pos)) {
-                        QList<System*>* sl = page->systems();
+                        const QList<System*>* sl = page->systems();
                         if (sl->isEmpty()) {
                               printf("addSymbol: cannot put symbol here: no system on page\n");
                               delete s;
                               return;
                               }
                         System* system = sl->front();
-                        Measure* m = system->measures().front();
+                        MeasureBase* m = system->measures().front();
                         if (m == 0) {
                               printf("addSymbol: cannot put symbol here: no measure in system\n");
                               delete s;
@@ -899,8 +917,8 @@ Element* Score::cmdAddHairpin(Hairpin* pin, const QPointF& pos)
       int pitch, tick1;
       QPointF offset;
       Segment* segment;
-      Measure* measure = pos2measure(pos, &tick1, &staff, &pitch, &segment, &offset);
-      if (measure == 0) {
+      MeasureBase* measure = pos2measure(pos, &tick1, &staff, &pitch, &segment, &offset);
+      if (measure == 0 || measure->type() != MEASURE) {
             printf("addHairpin: cannot put object here\n");
             delete pin;
             return 0;
@@ -1105,7 +1123,7 @@ void Score::cmdDeleteSelection()
                   Measure* ie = tick2measure(sel->tickEnd);
                   if (ie) {
                         do {
-                              ie = ie->prev();
+                              ie = (Measure*)(ie->prev());        // TODO: MeasureBase
                               deleteItem(ie);
                               } while (ie != is);
                         }
@@ -1124,7 +1142,11 @@ void Score::cmdDeleteSelection()
             Measure* ie = tick2measure(sel->tickEnd);
             if (is == ie)
                   ie = 0;
-            for (Measure* m = is; m && m != ie; m = m->next()) {
+            for (MeasureBase* mb = is; mb && mb != ie; mb = mb->next()) {
+                  if (mb->type() != MEASURE)
+                        continue;
+                  Measure* m = (Measure*)mb;
+
                   for (int staffIdx = sstaff; staffIdx < estaff; ++staffIdx) {
                         bool rmFlag = false;
                         for (Segment* s = m->first(); s; s = s->next()) {
@@ -1167,7 +1189,7 @@ void Score::cmdDeleteSelection()
                               }
                         }
                   }
-            for (Measure* m = is; m && m != ie; m = m->next()) {
+            for (MeasureBase* m = is; m && m != ie; m = m->next()) {
                   for (int staffIdx = sstaff; staffIdx < estaff; ++staffIdx)
                         select(m, Qt::ShiftModifier, staffIdx);
                   }

@@ -23,7 +23,7 @@
 
 /**
  \file
- Definition of ElemList and Score classes.
+ Definition of Score class.
 */
 
 #include "system.h"
@@ -241,10 +241,10 @@ class Score : public QObject {
 
       Part* part(int staff);
 
-      void addMeasure(Measure*);
-      void removeMeasure(Measure*);
+      void addMeasure(MeasureBase*);
+      void removeMeasure(MeasureBase*);
 
-      Measure* pos2measure(const QPointF&, int* tick, Staff** staff, int* pitch,
+      MeasureBase* pos2measure(const QPointF&, int* tick, Staff** staff, int* pitch,
          Segment**, QPointF* offset) const;
       Measure* pos2measure2(const QPointF&, int* tick, Staff** staff, int* pitch, Segment**) const;
       Measure* pos2measure3(const QPointF& p, int* tick) const;
@@ -256,7 +256,7 @@ class Score : public QObject {
       void clearViewer();
 
       void undoOp(QList<int> si, QList<int> di);
-      void undoOp(UndoOp::UndoType type, Measure* m);
+      void undoOp(UndoOp::UndoType type, MeasureBase* m);
       void undoOp(UndoOp::UndoType type, Measure*, int, int);
       void undoOp(UndoOp::UndoType type, Measure* m, MStaff* s, int staff);
       void undoOp(UndoOp::UndoType type, Staff* staff, int idx);
@@ -416,6 +416,7 @@ class Score : public QObject {
       ChordRest* getSelectedChordRest();
       int pos();
       Measure* tick2measure(int tick) const;
+      MeasureBase* tick2measureBase(int tick) const;
       Segment* tick2segment(int tick) const;
       QPointF tick2pos(int tick, int staff);
       void fixTicks();
@@ -433,7 +434,7 @@ class Score : public QObject {
       Element* editElement() const { return editObject; }
       int fileDivision(int t) const { return (t * division + _fileDivision/2) / _fileDivision; }
       bool saveFile();
-      void adjustTime(int tick, Measure*);
+      void adjustTime(int tick, MeasureBase*);
 
       QString filePath() const    { return info.filePath(); }
       QFileInfo* fileInfo()       { return &info; }

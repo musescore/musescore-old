@@ -21,7 +21,8 @@
 //  along with this program; if not, write to the Free Software
 //  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //=============================================================================
-//
+
+#if 0       // TODO: MeasureBase
 
 #include "repeatflag.h"
 #include "repeat.h"
@@ -183,4 +184,5 @@ RepeatFlag* RepeatFlag::findCodettaElement(int n)
       return 0x00;
       }
 
+#endif
 

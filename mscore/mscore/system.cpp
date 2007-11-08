@@ -62,8 +62,10 @@ SysStaff::~SysStaff()
       {
       foreach(Bracket* b, brackets)
             delete b;
+      brackets.clear();
       if (instrumentName)
             delete instrumentName;
+      instrumentName = 0;
       }
 
 //---------------------------------------------------------
@@ -334,14 +336,18 @@ void System::layout2(ScoreLayout* layout)
             else
                   setDistance(staffIdx, score()->style()->staffDistance);
             double dist = 0.0;
-            foreach(Measure* m, ml)
+            foreach(MeasureBase* m, ml)
                   dist = std::max(dist, m->distance(staffIdx));
             if (dist > distance(staffIdx))
                   setDistance(staffIdx, dist);
             //
             //  layout lyrics separators
             //
-            foreach(Measure* m, ml) {
+            foreach(MeasureBase* mb, ml) {
+                  if (mb->type() != MEASURE)
+                        continue;
+                  Measure* m = (Measure*)mb;
+
                   MStaff* ms = m->staffList()->at(staffIdx);
                   if (ms->lines)
                         ms->lines->setPos(QPointF(0.0, 0.0));
@@ -365,8 +371,10 @@ void System::layout2(ScoreLayout* layout)
             s->setbbox(QRectF(s->bbox().x(), y, s->bbox().width(), 4 * _spatium * staffMag));
             // moveY measures
             if (y != 0.0) {
-                  foreach(Measure* m, ml)
-                        m->moveY(staffIdx, y);
+                  foreach(MeasureBase* m, ml) {
+                        if (m->type() == MEASURE)
+                              ((Measure*)m)->moveY(staffIdx, y);
+                        }
                   }
             y += 4 * _spatium * staffMag + s->distance();
             }
@@ -382,11 +390,12 @@ void System::layout2(ScoreLayout* layout)
       qreal systemHeight = staff(staves-1)->bbox().bottom();
       setHeight(systemHeight);
 
-      foreach(Measure* m, ml) {
+      foreach(MeasureBase* mb, ml) {
+            if (mb->type() != MEASURE)
+                  continue;
+            Measure* m = (Measure*)mb;
             QList<Part*>* pl = _score->parts();
-            // double x  = m->width();
             int staffIdx = 0;
-            // barLineLen += score()->style()->staffLineWidth;
             foreach(Part* p, *pl) {
                   int track = staffIdx * VOICES;
                   double staffMag = score()->staff(staffIdx)->small() ? 0.7 : 1.0;
@@ -492,6 +501,12 @@ void SysStaff::move(double x, double y)
 void System::clear()
       {
       ml.clear();
+      foreach(SysStaff* ss, _staves)
+            delete ss;
+      _staves.clear();
+      if (barLine)
+            delete barLine;
+      barLine = 0;
       }
 
 //---------------------------------------------------------
@@ -577,8 +592,10 @@ void System::add(Element* el)
             b->staff()->setBracket(level,   b->subtype());
             b->staff()->setBracketSpan(level, b->span());
             }
-      else if (el->type() == MEASURE)
-            score()->addMeasure((Measure*)el);
+//      else if (el->type() == MEASURE)
+//            score()->addMeasure((Measure*)el);
+      else
+            printf("System::add(%s) not implemented\n", el->name());
       }
 
 //---------------------------------------------------------
@@ -605,10 +622,24 @@ void System::remove(Element* el)
                   }
             printf("internal error: bracket not found\n");
             }
-      else if (el->type() == MEASURE)
-            score()->removeMeasure((Measure*)el);
+//      else if (el->type() == MEASURE)
+//            score()->removeMeasure((Measure*)el);
       else
             printf("System::remove(%s) not implemented\n", el->name());
+      }
+
+//---------------------------------------------------------
+//   change
+//---------------------------------------------------------
+
+void System::change(Element* o, Element* n)
+      {
+      if (o->type() == MEASURE || o->type() == VBOX || o->type() == HBOX)
+            score()->mainLayout()->change((MeasureBase*)o, (MeasureBase*)n);
+      else {
+            remove(o);
+            add(n);
+            }
       }
 
 //---------------------------------------------------------
@@ -617,11 +648,11 @@ void System::remove(Element* el)
 
 int System::snap(int tick, const QPointF p) const
       {
-      foreach(const Measure* m, ml) {
+      foreach(const MeasureBase* m, ml) {
             if (p.x() < m->x() + m->width())
-                  return m->snap(tick, p - m->pos());
+                  return ((Measure*)m)->snap(tick, p - m->pos()); //TODO: MeasureBase
             }
-      return ml.back()->snap(tick, p-pos());
+      return ((Measure*)ml.back())->snap(tick, p-pos());          //TODO: MeasureBase
       }
 
 //---------------------------------------------------------
@@ -630,18 +661,18 @@ int System::snap(int tick, const QPointF p) const
 
 int System::snapNote(int tick, const QPointF p, int staff) const
       {
-      foreach(const Measure* m, ml) {
+      foreach(const MeasureBase* m, ml) {
             if (p.x() < m->x() + m->width())
-                  return m->snapNote(tick, p - m->pos(), staff);
+                  return ((Measure*)m)->snapNote(tick, p - m->pos(), staff);  //TODO: MeasureBase
             }
-      return ml.back()->snap(tick, p-pos());
+      return ((Measure*)ml.back())->snap(tick, p-pos());          // TODO: MeasureBase
       }
 
 //---------------------------------------------------------
 //   prevMeasure
 //---------------------------------------------------------
 
-Measure* System::prevMeasure(const Measure* m) const
+MeasureBase* System::prevMeasure(const MeasureBase* m) const
       {
       if (m == ml.front())
             return 0;
@@ -652,7 +683,7 @@ Measure* System::prevMeasure(const Measure* m) const
 //   nextMeasure
 //---------------------------------------------------------
 
-Measure* System::nextMeasure(const Measure* m) const
+MeasureBase* System::nextMeasure(const MeasureBase* m) const
       {
       if (m == ml.back())
             return 0;

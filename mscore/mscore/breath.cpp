@@ -69,7 +69,7 @@ void Breath::read(QDomElement e)
 //   draw
 //---------------------------------------------------------
 
-void Breath::draw(QPainter& p)
+void Breath::draw(QPainter& p) const
       {
       symbols[symList[subtype()]].draw(p);
       }

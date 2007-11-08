@@ -46,7 +46,7 @@ void Symbol::setSym(int s)
 //   Symbol::draw
 //---------------------------------------------------------
 
-void Symbol::draw(QPainter& p)
+void Symbol::draw(QPainter& p) const
       {
       symbols[_sym].draw(p, mag());
       }

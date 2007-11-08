@@ -56,6 +56,9 @@ typedef LyricsList::const_iterator ciLyrics;
 */
 
 class Segment : public Element {
+      Segment* _next;
+      Segment* _prev;
+
    public:
       enum SegmentType {
             SegClef, SegKeySig, SegTimeSig,
@@ -78,8 +81,11 @@ class Segment : public Element {
       virtual Segment* clone() const    { return new Segment(*this); }
       virtual ElementType type() const  { return SEGMENT; }
 
-      Segment* next() const             { return (Segment*)Element::next(); }
-      Segment* prev() const             { return (Segment*)Element::prev(); }
+      Segment* next() const             { return _next;   }
+      void setNext(Segment* e)          { _next = e;      }
+      Segment* prev() const             { return _prev;   }
+      void setPrev(Segment* e)          { _prev = e;      }
+
       Segment* next1() const;
       Segment* prev1() const;
 

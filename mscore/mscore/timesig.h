@@ -54,7 +54,7 @@ class TimeSig : public Element {
       virtual TimeSig* clone() const { return new TimeSig(*this); }
       virtual ElementType type() const { return TIMESIG; }
       virtual void setSubtype(int val);
-      virtual void draw(QPainter&);
+      virtual void draw(QPainter&) const;
       virtual void write(Xml& xml) const;
       virtual void read(QDomElement);
       void getSig(int* n, int* z1) const;

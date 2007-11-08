@@ -31,9 +31,9 @@
 class InsertItemBspTreeVisitor : public BspTreeVisitor
       {
    public:
-      Element* item;
+      const Element* item;
 
-      void visit(QList<Element*> *items) {
+      void visit(QList<const Element*> *items) {
             items->prepend(item);
             }
       };
@@ -45,9 +45,9 @@ class InsertItemBspTreeVisitor : public BspTreeVisitor
 class RemoveItemBspTreeVisitor : public BspTreeVisitor
       {
    public:
-      Element* item;
+      const Element* item;
 
-      void visit(QList<Element*> *items) {
+      void visit(QList<const Element*> *items) {
             items->removeAll(item);
             }
       };
@@ -59,11 +59,11 @@ class RemoveItemBspTreeVisitor : public BspTreeVisitor
 class FindItemBspTreeVisitor : public BspTreeVisitor
       {
    public:
-      QList<Element*>* foundItems;
+      QList<const Element*>* foundItems;
 
-      void visit(QList<Element*>* items) {
+      void visit(QList<const Element*>* items) {
             for (int i = 0; i < items->size(); ++i) {
-                  Element* item = items->at(i);
+                  const Element* item = items->at(i);
                   if (!item->itemDiscovered) {
                         item->itemDiscovered = 1;
                         foundItems->prepend(item);
@@ -102,7 +102,7 @@ void BspTree::initialize(const QRectF& rect, int depth)
       nodes.resize((1 << (depth + 1)) - 1);
       nodes.fill(Node());
       leaves.resize(1 << depth);
-      leaves.fill(QList<Element*>());
+      leaves.fill(QList<const Element*>());
 
       initialize(rect, depth, 0);
       }
@@ -122,7 +122,7 @@ void BspTree::clear()
 //   insert
 //---------------------------------------------------------
 
-void BspTree::insert(Element* element)
+void BspTree::insert(const Element* element)
       {
       insertVisitor->item = element;
       climbTree(insertVisitor, element->abbox());
@@ -132,7 +132,7 @@ void BspTree::insert(Element* element)
 //   remove
 //---------------------------------------------------------
 
-void BspTree::remove(Element* element)
+void BspTree::remove(const Element* element)
       {
       removeVisitor->item = element;
       climbTree(removeVisitor, element->abbox());
@@ -142,13 +142,13 @@ void BspTree::remove(Element* element)
 //   remove
 //---------------------------------------------------------
 
-void BspTree::remove(const QSet<Element*>& items)
+void BspTree::remove(const QSet<const Element*>& items)
       {
       for (int i = 0; i < leaves.size(); ++i) {
-            QList<Element*> newItemList;
-            const QList<Element*>& oldItemList = leaves[i];
+            QList<const Element*> newItemList;
+            QList<const Element*>& oldItemList = leaves[i];
             for (int j = 0; j < oldItemList.size(); ++j) {
-                  Element* item = oldItemList.at(j);
+                  const Element* item = oldItemList.at(j);
                   if (!items.contains(item))
                         newItemList << item;
                   }
@@ -160,9 +160,9 @@ void BspTree::remove(const QSet<Element*>& items)
 //   items
 //---------------------------------------------------------
 
-QList<Element*> BspTree::items(const QRectF& rect)
+QList<const Element*> BspTree::items(const QRectF& rect)
       {
-      QList<Element*> tmp;
+      QList<const Element*> tmp;
       findVisitor->foundItems = &tmp;
       climbTree(findVisitor, rect);
       return tmp;
@@ -172,15 +172,15 @@ QList<Element*> BspTree::items(const QRectF& rect)
 //   items
 //---------------------------------------------------------
 
-QList<Element*> BspTree::items(const QPointF& pos)
+QList<const Element*> BspTree::items(const QPointF& pos)
       {
-      QList<Element*> tmp;
+      QList<const Element*> tmp;
       findVisitor->foundItems = &tmp;
       climbTree(findVisitor, pos);
 
-      QList<Element*> l;
+      QList<const Element*> l;
       for (int i = 0; i < tmp.size(); ++i) {
-            Element* e = tmp.at(i);
+            const Element* e = tmp.at(i);
             e->itemDiscovered = 0;
             if (e->contains(pos))
                   l.append(e);

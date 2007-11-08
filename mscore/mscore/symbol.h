@@ -41,7 +41,7 @@ class Symbol : public BSymbol {
       void setSym(int);
       int sym() const { return _sym;  }
 
-      virtual void draw(QPainter&);
+      virtual void draw(QPainter&) const;
       virtual void write(Xml& xml) const;
       virtual void read(QDomElement);
       virtual QRectF bbox() const;

@@ -540,8 +540,12 @@ void MuseScore::editInstrList()
                               Staff* staff = sli->staff;
                               int sidx = staff->idx();
                               int eidx = sidx + 1;
-                              for (Measure* m = cs->mainLayout()->first(); m; m = m->next())
+                              for (MeasureBase* mb = cs->mainLayout()->first(); mb; mb = mb->next()) {
+                                    if (mb->type() != MEASURE)
+                                          continue;
+                                    Measure* m = (Measure*)mb;
                                     m->cmdRemoveStaves(sidx, eidx);
+                                    }
                               cs->undoOp(UndoOp::RemoveStaff, staff, sidx);
                               cs->removeStaff(staff);
                               }
@@ -555,8 +559,12 @@ void MuseScore::editInstrList()
                               cs->insertStaff(staff, staffIdx);
                               cs->undoOp(UndoOp::InsertStaff, staff, staffIdx);
 
-                              for (Measure* m = cs->mainLayout()->first(); m; m = m->next())
+                              for (MeasureBase* mb = cs->mainLayout()->first(); mb; mb = mb->next()) {
+                                    if (mb->type() != MEASURE)
+                                          continue;
+                                    Measure* m = (Measure*)mb;
                                     m->cmdAddStaves(staffIdx, staffIdx+1);
+                                    }
 
                               ++staffIdx;
                               }
@@ -629,8 +637,12 @@ void Score::cmdInsertPart(Part* part, int staffIdx)
 
       int sidx = staff(part);
       int eidx = sidx + part->nstaves();
-      for (Measure* m = _layout->first(); m; m = m->next())
+      for (MeasureBase* mb = _layout->first(); mb; mb = mb->next()) {
+            if (mb->type() != MEASURE)
+                  continue;
+            Measure* m = (Measure*)mb;
             m->cmdAddStaves(sidx, eidx);
+            }
       }
 
 //---------------------------------------------------------
@@ -645,8 +657,12 @@ void Score::cmdRemovePart(Part* part)
       int n    = part->nstaves();
       int eidx = sidx + n;
 
-      for (Measure* m = _layout->first(); m; m = m->next())
+      for (MeasureBase* mb = _layout->first(); mb; mb = mb->next()) {
+            if (mb->type() != MEASURE)
+                  continue;
+            Measure* m = (Measure*)mb;
             m->cmdRemoveStaves(sidx, eidx);
+            }
 
       int idx = eidx - 1;
       for (QList<Staff*>::iterator i = _staves.begin() + idx; n > 0; --n, --idx, --i) {
@@ -737,7 +753,10 @@ void Score::sortStaves(QList<int> src, QList<int> dst)
             }
       _staves = dl;
 
-      for (Measure* m = _layout->first(); m; m = m->next()) {
+      for (MeasureBase* mb = _layout->first(); mb; mb = mb->next()) {
+            if (mb->type() != MEASURE)
+                  continue;
+            Measure* m = (Measure*)mb;
             m->sortStaves(src, dst);
             }
       }

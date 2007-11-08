@@ -27,6 +27,8 @@
 //=============================================================================
 //
 
+#if 0       // TODO: MeasureBase
+
 #include "repeat2.h"
 #include "element.h"
 #include "symbol.h"
@@ -1120,4 +1122,5 @@ RepList::~RepList()
 
 
 
+#endif
 

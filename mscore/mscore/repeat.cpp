@@ -61,7 +61,7 @@ RepeatMeasure::RepeatMeasure(Score* score)
 //   draw
 //---------------------------------------------------------
 
-void RepeatMeasure::draw(QPainter& p)
+void RepeatMeasure::draw(QPainter& p) const
       {
       p.setBrush(p.pen().color());
       p.drawPath(path);
@@ -178,7 +178,7 @@ void Repeat::setSubtype(const QString& s)
 //   draw
 //---------------------------------------------------------
 
-void Repeat::draw(QPainter& p)
+void Repeat::draw(QPainter& p) const
       {
       TextStyle* ts = score()->textStyle(TEXT_STYLE_REPEAT);
       QFont font = ts->font();

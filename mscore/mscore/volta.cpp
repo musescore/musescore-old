@@ -30,7 +30,7 @@
 //   draw
 //---------------------------------------------------------
 
-void VoltaSegment::draw(QPainter& p)
+void VoltaSegment::draw(QPainter& p) const
       {
       QPointF _p1;
       QPointF _p2(pos2());
@@ -78,8 +78,13 @@ QPointF VoltaSegment::pos2anchor(const QPointF& pos, int* tick) const
       {
       Measure* m = score()->pos2measure3(pos, tick);
       QPointF anchor;
-      if (m == m->system()->measures().front())
-            m = m->prev();
+      if (m == m->system()->measures().front()) {
+            MeasureBase* mb = m;
+            do {
+                  mb = mb->prev();
+                  } while (mb && mb->type() != MEASURE);
+            m = (Measure*)mb;
+            }
       if (*tick != m->tick())
             anchor = QPointF(m->abbox().topRight());
       else
@@ -216,7 +221,11 @@ QPointF Volta::tick2pos(int grip, int tick, int staffIdx, System** system)
       Measure* m = score()->tick2measure(tick);
       System* s = m->system();
       if ((grip == 1) && (m == s->measures().front())) {
-            m = m->prev();
+            MeasureBase* mb = m;
+            do {
+                  mb = mb->prev();
+                  } while (mb && mb->type() != MEASURE);
+            m = (Measure*)mb;
             s = m->system();
             *system = s;
             return QPointF(m->canvasPos().x() + m->width(), s->staff(staffIdx)->bbox().y() + s->canvasPos().y());

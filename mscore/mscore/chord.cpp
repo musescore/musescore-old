@@ -54,7 +54,7 @@ Stem::Stem(Score* s)
 //   draw
 //---------------------------------------------------------
 
-void Stem::draw(QPainter& p)
+void Stem::draw(QPainter& p) const
       {
       qreal lw = point(score()->style()->stemWidth) * mag();
       QPen pen(p.pen());
