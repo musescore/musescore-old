@@ -27,7 +27,7 @@ Many elements in the score can be edited in &lt;<i><b>Edit Mode</b></i>&gt;:<br>
 Some elements show <i>handles</i> in editmode which can be
 moved by mouse dragging or keyboard commands.<br>
 <br>
-<a href="slurs.php">Slur</a> in edit mode: <image src="slur4.png" align="center"><br>
+<a href="slurs.php">Slur</a> in edit mode: <image src="../pic/slur4.png" align="center"><br>
 <br>
 Available keyboard commands:<br>
 <br>
