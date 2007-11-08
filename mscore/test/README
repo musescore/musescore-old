@@ -62,6 +62,7 @@ testSystemBrackets1.xml  system brackets (single staff parts)
 testSystemBrackets2.xml  system brackets in a two piano piece
 testTimesig1.xml         all supported simple time signatures
 testTimesig3.xml         the more difficult time signatures
+testTremolo.xml          tremolo
 testVoicePiano1.xml      score with both a voice and a piano part
 testWedge1.xml           crescendo and diminuendo wedges
 testWords1.xml           the "words" direction
