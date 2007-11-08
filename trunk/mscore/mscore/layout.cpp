@@ -364,11 +364,9 @@ bool ScoreLayout::layoutPage()
             if (y + h >= ey) {  // system does not fit on page
                   // rollback
                   curMeasure = system->measures().front();
-                  --curSystem;
                   break;
                   }
             page->appendSystem(system);
-            ++curSystem;
 
             //  move system vertically to final position:
 
@@ -379,6 +377,7 @@ bool ScoreLayout::layoutPage()
                   systemDistance = point(score()->style()->systemDistance);
             system->move(0.0, systemDistance);
             y += h;
+            ++curSystem;
             if (system->pageBreak())
                   break;
             }
