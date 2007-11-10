@@ -66,6 +66,7 @@
 #include "bracket.h"
 #include "arpeggio.h"
 #include "repeat.h"
+#include "tremolo.h"
 
 //---------------------------------------------------------
 //   attributes -- prints <attributes> tag when necessary
@@ -703,6 +704,12 @@ void DirectionsHandler::buildDirectionsList(Measure* m, bool dopart, Part* p, in
                   case TEMPO_TEXT:
                   case TEXT:
                         if (!dopart) {
+                              // LVIFIX 20071110 TODO
+                              // Even though they are moved to from measure to vbox, the elements
+                              // Title, Subtitle, Poet and Composer show up here. As their staff
+                              // is null, that causes a segfault in findMatchInMeasure.
+                              if (dir->staff())
+                              // END LVIFIX 20071110 TODO
                               da = findMatchInMeasure(dir->tick(), dir->staff(), m, p, strack, etrack);
                               if (da) {
                                     da->setDirect(dir);
@@ -1181,6 +1188,25 @@ static void chordAttributes(Chord* chord, Notations& notations, Xml& xml)
                         break;
                   }
             }
+            if (chord->tremolo()) {
+                  printf("tremolo st=%d\n", ((Element *) chord->tremolo())->subtype());
+                  Tremolo * tr = chord->tremolo();
+                  int st = tr->subtype();
+                  switch (st) {
+                        case TREMOLO_1:
+                              xml.tag("tremolo", "1");
+                              break;
+                        case TREMOLO_2:
+                              xml.tag("tremolo", "2");
+                              break;
+                        case TREMOLO_3:
+                              xml.tag("tremolo", "3");
+                              break;
+                  default:
+                              printf("unknown tremolo %d\n", st);
+                              break;
+                  }
+                  }
             ornaments.etag(xml);
       }
 
@@ -1195,7 +1221,7 @@ static void chordAttributes(Chord* chord, Notations& notations, Xml& xml)
 static void arpeggiate(Arpeggio * arp, Xml& xml)
       {
       int st = arp->subtype();
-      switch(st) {
+      switch (st) {
             case 0:
                   xml.tagE("arpeggiate");
                   break;
@@ -1505,7 +1531,10 @@ void ExportMusicXml::tempoText(TempoText* text, int staff)
 void ExportMusicXml::words(Text* text, int staff)
       {
       directionTag(xml, attr, text);
-      xml.tag("words", text->getText());
+      if (text->subtypeName() == "RehearsalMark")
+            xml.tag("rehearsal", text->getText());
+      else
+            xml.tag("words", text->getText());
       directionETag(xml, staff, text->mxmlOff());
       }
 
@@ -2145,8 +2174,12 @@ foreach(Element* el, *(score->gel())) {
                                                 bar((BarLine*) el);
                                           break;
 
+                                    // LVIFIX TODO: support breath mark, which is stored in a separate segment by mscore,
+                                    // and is note/notations/articulations/breathmark in MusicXML. It is not clear if
+                                    // the breath mark applies to the previous or next note. Furthermore, MusicXML supports
+                                    // only one type of breath mark while mscore has two different types.
                                     default:
-                                          printf("unknown type %s\n", el->name());
+                                          printf("ExportMusicXml::write unknown segment type %s\n", el->name());
                                           break;
                                     }
                               dh.handleElement(this, el, sstaff, false);
