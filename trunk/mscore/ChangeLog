@@ -1,3 +1,6 @@
+10.11.7 (lv)
+      - MusicXML export of rehearsal marks and tremoloes
+      - fixed MusicXML export crash when score contains Title, Subtitle, Poet or Composer
 8.11.7 (lv)
       - new testfile testTremolo.xml
        (ws)
