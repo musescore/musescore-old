@@ -159,6 +159,19 @@ class Ornaments {
       };
 
 //---------------------------------------------------------
+//   technical -- prints <technical> tag when necessary
+//---------------------------------------------------------
+
+class Technical {
+      bool technicalPrinted;
+
+   public:
+      Technical() { technicalPrinted = false; }
+      void tag(Xml& xml);
+      void etag(Xml& xml);
+      };
+
+//---------------------------------------------------------
 //   slur handler -- prints <slur> tags
 //---------------------------------------------------------
 
@@ -271,6 +284,28 @@ void Ornaments::etag(Xml& xml)
       if (ornamentsPrinted)
             xml.etag();
       ornamentsPrinted = false;
+      }
+
+//---------------------------------------------------------
+//   tag
+//---------------------------------------------------------
+
+void Technical::tag(Xml& xml)
+      {
+      if (!technicalPrinted)
+            xml.stag("technical");
+      technicalPrinted = true;
+      }
+
+//---------------------------------------------------------
+//   etag
+//---------------------------------------------------------
+
+void Technical::etag(Xml& xml)
+      {
+      if (technicalPrinted)
+            xml.etag();
+      technicalPrinted = false;
       }
 
 //---------------------------------------------------------
@@ -1063,7 +1098,7 @@ static void tupletStartStop(ChordRest* cr, Notations& notations, Xml& xml)
 //   chordAttributes
 //---------------------------------------------------------
 
-static void chordAttributes(Chord* chord, Notations& notations, Xml& xml)
+static void chordAttributes(Chord* chord, Notations& notations, Technical& technical, Xml& xml)
       {
       QList<NoteAttribute*>* na = chord->getAttributes();
       // first output the fermatas
@@ -1128,11 +1163,17 @@ static void chordAttributes(Chord* chord, Notations& notations, Xml& xml)
                         xml.tagE("strong-accent type=\"up\"");
                         }
                         break;
+                  case ReverseturnSym:
                   case TurnSym:
                   case TrillSym:
                   case PrallSym:
                   case MordentSym:
                         // ignore, handled with ornaments
+                        break;
+                  case PlusstopSym:
+                  case UpbowSym:
+                  case DownbowSym:
+                        // ignore, handled with technical
                         break;
                   default:
                         printf("unknown chord attribute %s\n", (*ia)->name().toLatin1().data());
@@ -1140,7 +1181,7 @@ static void chordAttributes(Chord* chord, Notations& notations, Xml& xml)
                   }
             }
             articulations.etag(xml);
-      // and finally the attributes whose elements are children of <ornaments>
+      // then the attributes whose elements are children of <ornaments>
       Ornaments ornaments;
       for (ciAttribute ia = na->begin(); ia != na->end(); ++ia) {
             switch ((*ia)->subtype()) {
@@ -1154,6 +1195,13 @@ static void chordAttributes(Chord* chord, Notations& notations, Xml& xml)
                   case DmarcatoSym:
                   case UmarcatoSym:
                         // ignore, already handled
+                        break;
+                  case ReverseturnSym:
+                        {
+                        notations.tag(xml);
+                        ornaments.tag(xml);
+                        xml.tagE("inverted-turn");
+                        }
                         break;
                   case TurnSym:
                         {
@@ -1183,6 +1231,11 @@ static void chordAttributes(Chord* chord, Notations& notations, Xml& xml)
                         xml.tagE("mordent");
                         }
                         break;
+                  case PlusstopSym:
+                  case UpbowSym:
+                  case DownbowSym:
+                        // ignore, handled with technical
+                        break;
                   default:
                         printf("unknown chord attribute %s\n", (*ia)->name().toLatin1().data());
                         break;
@@ -1202,12 +1255,42 @@ static void chordAttributes(Chord* chord, Notations& notations, Xml& xml)
                         case TREMOLO_3:
                               xml.tag("tremolo", "3");
                               break;
-                  default:
+                        default:
                               printf("unknown tremolo %d\n", st);
                               break;
-                  }
+                        }
                   }
             ornaments.etag(xml);
+      // and finally the attributes whose elements are children of <technical>
+      for (ciAttribute ia = na->begin(); ia != na->end(); ++ia) {
+            switch ((*ia)->subtype()) {
+                  case PlusstopSym:
+                        {
+                        notations.tag(xml);
+                        technical.tag(xml);
+                        xml.tagE("stopped");
+                        }
+                        break;
+                  case UpbowSym:
+                        {
+                        notations.tag(xml);
+                        technical.tag(xml);
+                        xml.tagE("up-bow");
+                        }
+                        break;
+                  case DownbowSym:
+                        {
+                        notations.tag(xml);
+                        technical.tag(xml);
+                        xml.tagE("down-bow");
+                        }
+                        break;
+                  default:
+                        // others silently ignored
+                        // printf("unknown chord attribute %s\n", (*ia)->name().toLatin1().data());
+                        break;
+                  }
+            }
       }
 
 //---------------------------------------------------------
@@ -1362,6 +1445,7 @@ void ExportMusicXml::chord(Chord* chord, int staff, const LyricsList* ll)
                   }
 
             Notations notations;
+            Technical technical;
             if (note->tieBack()) {
                   notations.tag(xml);
                   xml.tagE("tied type=\"stop\"");
@@ -1375,14 +1459,14 @@ void ExportMusicXml::chord(Chord* chord, int staff, const LyricsList* ll)
                   tupletStartStop(chord, notations, xml);
                   sh.doSlurStop(chord, notations, xml);
                   sh.doSlurStart(chord, notations, xml);
-                  chordAttributes(chord, notations, xml);
+                  chordAttributes(chord, notations, technical, xml);
                   }
             foreach (const Text* f, note->fingering()) {
                   notations.tag(xml);
-                  xml.stag("technical");
+                  technical.tag(xml);
                   xml.tag("fingering", f->getText());
-                  xml.etag();
                   }
+            technical.etag(xml);
             if (chord->arpeggio()) {
                   notations.tag(xml);
                   arpeggiate(chord->arpeggio(), xml);

@@ -1,6 +1,8 @@
 10.11.7 (lv)
-      - MusicXML export of rehearsal marks and tremoloes
+      - MusicXML export of rehearsal marks, tremoloes, plusstop, upbow, downbow
+        and reverse turn
       - fixed MusicXML export crash when score contains Title, Subtitle, Poet or Composer
+      - new testfile testNoteAttributes2.xml
 8.11.7 (lv)
       - new testfile testTremolo.xml
        (ws)
