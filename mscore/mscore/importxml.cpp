@@ -55,6 +55,7 @@
 #include "keysig.h"
 #include "pitchspelling.h"
 #include "layoutbreak.h"
+#include "tremolo.h"
 
 //---------------------------------------------------------
 //   xmlSetPitch
@@ -1237,8 +1238,13 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
       bool turn = false;
       bool mordent = false;
       bool invertedMordent = false;
+      bool invertedTurn = false;
+      bool stopped = false;
+      bool upbow = false;
+      bool downbow = false;
       int actualNotes = 1;
       int normalNotes = 1;
+      int tremolo = 0;
 
       for (; !e.isNull(); e = e.nextSiblingElement()) {
             QString tag(e.tagName());
@@ -1493,12 +1499,16 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
                               for (QDomElement eee = ee.firstChildElement(); !eee.isNull(); eee = eee.nextSiblingElement()) {
                                     if (eee.tagName() == "trill-mark")
                                           trillMark = true;
+                                    else if (eee.tagName() == "inverted-turn")
+                                          invertedTurn = true;
                                     else if (eee.tagName() == "turn")
                                           turn = true;
                                     else if (eee.tagName() == "inverted-mordent")
                                           invertedMordent = true;
                                     else if (eee.tagName() == "mordent")
                                           mordent = true;
+                                    else if (eee.tagName() == "tremolo")
+                                          tremolo = eee.text().toInt();
                                     else if (eee.tagName() == "accidental-mark")
                                           domNotImplemented(eee);
                                     else if (eee.tagName() == "delayed-turn")
@@ -1517,6 +1527,12 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
                                           domNotImplemented(eee);
                                     else if (eee.tagName() == "pull-off")
                                           domNotImplemented(eee);
+                                    else if (eee.tagName() == "stopped")
+                                          stopped = true;
+                                    else if (eee.tagName() == "up-bow")
+                                          upbow = true;
+                                    else if (eee.tagName() == "down-bow")
+                                          downbow = true;
                                     else
                                           domError(eee);
                                     }
@@ -1668,6 +1684,11 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
             na->setSubtype(TrillSym);
             cr->add(na);
             }
+      if (invertedTurn) {
+            NoteAttribute* na = new NoteAttribute(score);
+            na->setSubtype(ReverseturnSym);
+            cr->add(na);
+            }
       if (turn) {
             NoteAttribute* na = new NoteAttribute(score);
             na->setSubtype(TurnSym);
@@ -1703,6 +1724,21 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
             na->setSubtype(TenutoSym);
             cr->add(na);
             }
+      if (stopped) {
+            NoteAttribute* na = new NoteAttribute(score);
+            na->setSubtype(PlusstopSym);
+            cr->add(na);
+            }
+      if (upbow) {
+            NoteAttribute* na = new NoteAttribute(score);
+            na->setSubtype(UpbowSym);
+            cr->add(na);
+            }
+      if (downbow) {
+            NoteAttribute* na = new NoteAttribute(score);
+            na->setSubtype(DownbowSym);
+            cr->add(na);
+            }
       if (!tupletType.isEmpty()) {
             if (tupletType == "start") {
                   tuplet = new Tuplet(score);
@@ -1728,6 +1764,17 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
       if (tuplet) {
             cr->setTuplet(tuplet);
             tuplet->add(cr);
+            }
+      if (tremolo) {
+            if (tremolo == 1 || tremolo == 2 || tremolo == 3) {
+                  Tremolo * t = new Tremolo(score);
+                  if (tremolo == 1) t->setSubtype(TREMOLO_1);
+                  if (tremolo == 2) t->setSubtype(TREMOLO_2);
+                  if (tremolo == 3) t->setSubtype(TREMOLO_3);
+                  cr->add(t);
+                  }
+            else
+                  printf("unknown tremolo type %d\n", tremolo);
             }
 
       lastLen = ticks;

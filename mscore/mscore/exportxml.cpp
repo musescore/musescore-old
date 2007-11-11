@@ -1242,17 +1242,22 @@ static void chordAttributes(Chord* chord, Notations& notations, Technical& techn
                   }
             }
             if (chord->tremolo()) {
-                  printf("tremolo st=%d\n", ((Element *) chord->tremolo())->subtype());
                   Tremolo * tr = chord->tremolo();
                   int st = tr->subtype();
                   switch (st) {
                         case TREMOLO_1:
+                              notations.tag(xml);
+                              ornaments.tag(xml);
                               xml.tag("tremolo", "1");
                               break;
                         case TREMOLO_2:
+                              notations.tag(xml);
+                              ornaments.tag(xml);
                               xml.tag("tremolo", "2");
                               break;
                         case TREMOLO_3:
+                              notations.tag(xml);
+                              ornaments.tag(xml);
                               xml.tag("tremolo", "3");
                               break;
                         default:
