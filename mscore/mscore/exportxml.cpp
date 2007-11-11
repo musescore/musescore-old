@@ -1885,6 +1885,31 @@ static void repeatAtMeasureStop(Xml& xml, Measure* m)
       }
 
 //---------------------------------------------------------
+//  work -- write the <work> element
+//  note that order must be work-number, work-title
+//---------------------------------------------------------
+
+static void work(Xml& xml, const MeasureBase* measure)
+      {
+      xml.stag("work");
+      foreach(const Element* element, *measure->el()) {
+            if (element->type() == TEXT) {
+                  const Text* text = (const Text*)element;
+                  if (text->subtype() == TEXT_SUBTITLE)
+                        xml.tag("work-number", text->getText());
+                  }
+            }
+      foreach(const Element* element, *measure->el()) {
+            if (element->type() == TEXT) {
+                  const Text* text = (const Text*)element;
+                  if (text->subtype() == TEXT_TITLE)
+                        xml.tag("work-title", text->getText());
+                  }
+            }
+      xml.etag();
+      }
+
+//---------------------------------------------------------
 //  write
 //---------------------------------------------------------
 
@@ -1917,23 +1942,9 @@ foreach(Element* el, *(score->gel())) {
       xml << "<?xml version=\"1.0\" encoding=\"ISO-8859-1\"?>\n";
       xml << "<!DOCTYPE score-partwise PUBLIC \"-//Recordare//DTD MusicXML 1.0 Partwise//EN\" \"http://www.musicxml.org/dtds/partwise.dtd\">\n";
       xml.stag("score-partwise");
-      xml.stag("work");
 
       const MeasureBase* measure = score->mainLayout()->first();
-      foreach(const Element* element, *measure->el()) {
-            if (element->type() == TEXT) {
-                  const Text* text = (const Text*)element;
-                  switch (text->subtype()) {
-                        case TEXT_TITLE:
-                              xml.tag("work-title", text->getText());
-                              break;
-                        case TEXT_SUBTITLE:
-                              xml.tag("work-number", text->getText());
-                              break;
-                        }
-                  }
-            }
-      xml.etag();
+      work(xml, measure);
 
       xml.stag("identification");
       foreach(const Element* element, *measure->el()) {
