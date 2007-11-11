@@ -56,6 +56,7 @@
 #include "pitchspelling.h"
 #include "layoutbreak.h"
 #include "tremolo.h"
+#include "box.h"
 
 //---------------------------------------------------------
 //   xmlSetPitch
@@ -442,50 +443,50 @@ void MusicXml::xmlPart(QDomElement e, QString id)
       lastMeasureLen = 0;
 
       if (!score->mainLayout()->first()) {
-            Measure* measure  = new Measure(score);
-            measure->setTick(tick);
-            score->mainLayout()->push_back(measure);
+            VBox* vbox  = new VBox(score);
+            vbox->setTick(tick);
+            score->mainLayout()->push_back(vbox);
             if (!title.isEmpty()) {
                   Text* text = new Text(score);
                   text->setSubtype(TEXT_TITLE);
                   text->setText(title);
-                  measure->add(text);
+                  vbox->add(text);
                   }
             else if (!score->movementTitle.isEmpty()) {
                   Text* text = new Text(score);
                   text->setSubtype(TEXT_TITLE);
                   text->setText(score->movementTitle);
-                  measure->add(text);
+                  vbox->add(text);
                   }
             if (!subTitle.isEmpty()) {
                   Text* text = new Text(score);
                   text->setSubtype(TEXT_SUBTITLE);
                   text->setText(subTitle);
-                  measure->add(text);
+                  vbox->add(text);
                   }
             else if (!score->movementNumber.isEmpty()) {
                   Text* text = new Text(score);
                   text->setSubtype(TEXT_SUBTITLE);
                   text->setText(score->movementNumber);
-                  measure->add(text);
+                  vbox->add(text);
                   }
             if (!composer.isEmpty()) {
                   Text* text = new Text(score);
                   text->setSubtype(TEXT_COMPOSER);
                   text->setText(composer);
-                  measure->add(text);
+                  vbox->add(text);
                   }
             if (!poet.isEmpty()) {
                   Text* text = new Text(score);
                   text->setSubtype(TEXT_POET);
                   text->setText(poet);
-                  measure->add(text);
+                  vbox->add(text);
                   }
             if (!translator.isEmpty()) {
                   Text* text = new Text(score);
                   text->setSubtype(TEXT_TRANSLATOR);
                   text->setText(translator);
-                  measure->add(text);
+                  vbox->add(text);
                   }
             }
 
@@ -530,7 +531,7 @@ Measure* MusicXml::xmlMeasure(Part* part, QDomElement e, int number)
       if (!measure) {
             //
             // DEBUG:
-            if (lastMeasure->tick() > tick) {
+            if (lastMeasure && lastMeasure->tick() > tick) {
                   printf("Measure at position %d not found!\n", tick);
                   }
             measure  = new Measure(score);
