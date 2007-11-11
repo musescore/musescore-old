@@ -1,4 +1,5 @@
 11.11.7 (lv)
+      - fixed MusicXML import of Title, Subtitle, Poet and Composer
       - fixed MusicXML export order of work-number and work-title
       - MusicXML import of tremoloes, plusstop, upbow, downbow and reverse turn
       - fixed MusicXML copyright and tremolo export
