@@ -97,6 +97,7 @@
         <voice>1</voice>
         <type>eighth</type>
         <stem>down</stem>
+        <beam number="1">begin</beam>
         <notations>
           <ornaments>
             <tremolo>2</tremolo>
@@ -112,6 +113,7 @@
         <voice>1</voice>
         <type>16th</type>
         <stem>down</stem>
+        <beam number="1">continue</beam>
         <notations>
           <ornaments>
             <tremolo>1</tremolo>
@@ -127,6 +129,7 @@
         <voice>1</voice>
         <type>32nd</type>
         <stem>down</stem>
+        <beam number="1">continue</beam>
         </note>
       <note>
         <pitch>
@@ -137,6 +140,7 @@
         <voice>1</voice>
         <type>64th</type>
         <stem>down</stem>
+        <beam number="1">end</beam>
         </note>
       <note>
         <rest/>
