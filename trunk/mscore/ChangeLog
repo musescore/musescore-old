@@ -1,7 +1,8 @@
 11.11.7 (lv)
+      - fixed MusicXML export order of work-number and work-title
       - MusicXML import of tremoloes, plusstop, upbow, downbow and reverse turn
-      - fixed MusicXML tremolo export
-      - updated (some) MusicXML testfiles as suggested by xmllint
+      - fixed MusicXML copyright and tremolo export
+      - updated MusicXML testfiles as suggested by xmllint
 10.11.7 (lv)
       - MusicXML export of rehearsal marks, tremoloes, plusstop, upbow, downbow
         and reverse turn

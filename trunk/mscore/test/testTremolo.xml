@@ -6,7 +6,8 @@
     <work-title>Tremolo</work-title>
     </work>
   <identification>
-    <creator type="composer">Leon Vinken</creator>
+    <creator type="composer">Vinken</creator>
+    <creator type="poet">Leon</creator>
     <rights>Public Domain</rights>
     <encoding>
       <software>MuseScore 0.7.0</software>
