@@ -1,3 +1,5 @@
+13.11.7 (lv)
+      - MusicXML import of segno, coda and rehearsal mark
 11.11.7 (lv)
       - fixed MusicXML import of Title, Subtitle, Poet and Composer
       - fixed MusicXML export order of work-number and work-title
