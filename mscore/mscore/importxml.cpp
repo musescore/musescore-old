@@ -57,6 +57,7 @@
 #include "layoutbreak.h"
 #include "tremolo.h"
 #include "box.h"
+#include "repeat.h"
 
 //---------------------------------------------------------
 //   xmlSetPitch
@@ -788,6 +789,15 @@ void MusicXml::direction(Measure* measure, int staff, QDomElement e)
       qreal xoffset = 0.0;
       qreal size = score->textStyle(TEXT_STYLE_TECHNIK)->size;
       QString tempo = "";
+      QString rehearsal = "";
+      QString sndCapo = "";
+      QString sndCoda = "";
+      QString sndDacapo = "";
+      QString sndDalsegno = "";
+      QString sndSegno = "";
+      QString sndFine = "";
+      bool coda = false;
+      bool segno = false;
 
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             if (e.tagName() == "direction-type") {
@@ -807,6 +817,9 @@ void MusicXml::direction(Measure* measure, int staff, QDomElement e)
                               weight = ee.attribute(QString("font-weight"));
                               if (ee.hasAttribute("font-size"))
                                     size = ee.attribute("font-size").toDouble();
+                              }
+                        else if (dirType == "rehearsal") {
+                              rehearsal = ee.text();
                               }
                         else if (dirType == "pedal") {
                               type = ee.attribute(QString("type"));
@@ -832,14 +845,25 @@ void MusicXml::direction(Measure* measure, int staff, QDomElement e)
                               domNotImplemented(ee);
                         else if (dirType == "octave-shift")
                               domNotImplemented(ee);
+                        else if (dirType == "coda")
+                              coda = true;
                         else if (dirType == "segno")
-                              domNotImplemented(ee);
+                              segno = true;
                         else
                               domError(ee);
                         }
                   }
             else if (e.tagName() == "sound") {
                   // attr: dynamics, tempo
+// LVIFIX: TODO tocoda is missing
+// LVIFIX: TODO coda and segno should be numbered uniquely
+// LVIFIX: TODO RepeatAlSegno is missing
+                  sndCapo = e.attribute("capo");
+                  sndCoda = e.attribute("coda");
+                  sndDacapo = e.attribute("dacapo");
+                  sndDalsegno = e.attribute("dalsegno");
+                  sndFine = e.attribute("fine");
+                  sndSegno = e.attribute("segno");
                   tempo = e.attribute("tempo");
                   }
             else if (e.tagName() == "offset")
@@ -852,11 +876,25 @@ void MusicXml::direction(Measure* measure, int staff, QDomElement e)
                   }
             else
                   domError(e);
-            }
+            } // for (e = e.firstChildElement(); ...
       if (placement == "above")
             ry -= 2;
       else
             ry += 2;
+
+      if (coda) {
+            Repeat* r = new Repeat(score);
+            r->setSubtype("coda");
+            r->setStaff(score->staff(staff + rstaff));
+            measure->add(r);
+            }
+
+      if (segno) {
+            Repeat* r = new Repeat(score);
+            r->setSubtype("segno");
+            r->setStaff(score->staff(staff + rstaff));
+            measure->add(r);
+            }
 
       if (dirType == "words") {
             // LVIFIX: tempotext font is incorrect
@@ -877,6 +915,21 @@ void MusicXml::direction(Measure* measure, int staff, QDomElement e)
                   }
             else
                   t->setText(txt);
+            if (placement == "above")
+                  ry -= 3;
+            else
+                  ry += t->bbox().height()/_spatium - 2.3;
+
+            t->setUserOff(QPointF(rx + xoffset, ry + yoffset));
+            t->setMxmlOff(offset);
+            t->setStaff(score->staff(staff + rstaff));
+            measure->add(t);
+            }
+      else if (dirType == "rehearsal") {
+            Text* t = new Text(score);
+            t->setSubtype(TEXT_REHEARSAL_MARK);
+            t->setTick(tick);
+            t->setText(rehearsal);
             if (placement == "above")
                   ry -= 3;
             else
