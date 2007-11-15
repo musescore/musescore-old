@@ -70,10 +70,6 @@ class SysStaff {
       ~SysStaff();
       };
 
-typedef QList<SysStaff*> SysStaffList;
-typedef SysStaffList::iterator iSysStaff;
-typedef SysStaffList::const_iterator ciSysStaff;
-
 //---------------------------------------------------------
 //   System
 //---------------------------------------------------------
@@ -85,11 +81,14 @@ typedef SysStaffList::const_iterator ciSysStaff;
 
 class System : public Element {
       QList<MeasureBase*> ml;
-      SysStaffList _staves;
+      QList<SysStaff*> _staves;
       BarLine* barLine;       ///< Left hand bar, connects staves in system.
       bool _pageBreak;
-//      qreal _width;
       qreal _leftMargin;      ///< left margin for instrument name, brackets etc.
+      bool _firstSystem;      ///< used to decide between long and short instrument
+                              ///< names; set by score()->doLayout()
+
+      bool _vbox;             ///< contains only one VBox in ml
 
       void setInstrumentName(int staff);
       void setDistance(int n, Spatium v)   { _staves[n]->setDistance(v); }
@@ -100,9 +99,6 @@ class System : public Element {
       ~System();
       virtual System* clone() const    { return new System(*this); }
       virtual ElementType type() const { return SYSTEM; }
-
-//      virtual QRectF bbox() const;
-//      void setWidth(qreal v)  { _width = v; }
 
       virtual void add(Element*);
       virtual void remove(Element*);
@@ -117,26 +113,30 @@ class System : public Element {
       QList<MeasureBase*>& measures()      { return ml; }
 
       QRectF bboxStaff(int staff) const;
-      SysStaffList* staves()               { return &_staves; }
-      SysStaff* staff(int n) const         { return _staves.value(n); }
+      QList<SysStaff*>* staves()           { return &_staves;   }
+      SysStaff* staff(int n) const         { return _staves[n]; }
 
       double distance(int n) const         { return _staves[n]->distance(); }
       void setDistance(int n, double v)    { _staves[n]->setDistance(v); }
       bool pageBreak() const               { return _pageBreak; }
       void setPageBreak(bool val)          { _pageBreak = val; }
 
-      SysStaff* insertStaff(Staff*, int);
-      void insertSysStaff(SysStaff*, int);
+      SysStaff* insertStaff(int);
       SysStaff* removeStaff(int);
 
-      BarLine* getBarLine() const         { return barLine; }
+      BarLine* getBarLine() const          { return barLine; }
       int y2staff(qreal y) const;
       void setInstrumentNames();
       int snap(int tick, const QPointF p) const;
       int snapNote(int tick, const QPointF p, int staff) const;
+
       MeasureBase* prevMeasure(const MeasureBase*) const;
       MeasureBase* nextMeasure(const MeasureBase*) const;
-      double leftMargin() const { return _leftMargin; }
+
+      double leftMargin() const   { return _leftMargin; }
+      void setFirstSystem(bool v) { _firstSystem = v;   }
+      bool isVbox() const         { return _vbox;       }
+      void setVbox(bool v)        { _vbox = v;          }
       };
 
 typedef QList<System*>::iterator iSystem;

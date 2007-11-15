@@ -263,6 +263,8 @@ void Page::collectElements(QList<const Element*>& el) const
             el.append(_pageNo);
       int staves = score()->nstaves();
       foreach(const System* s, _systems) {
+            if (s->isVbox())
+                  continue;
             if (s->getBarLine())
                   el.append(s->getBarLine());
             for (int i = 0; i < staves; ++i) {

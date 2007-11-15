@@ -75,9 +75,11 @@ SysStaff::~SysStaff()
 System::System(Score* s)
    : Element(s)
       {
-      barLine     = 0;
-      _leftMargin = 0.0;
-      _pageBreak  = false;
+      barLine      = 0;
+      _leftMargin  = 0.0;
+      _pageBreak   = false;
+      _firstSystem = false;
+      _vbox        = false;
       }
 
 //---------------------------------------------------------
@@ -96,8 +98,10 @@ System::~System()
 
 QRectF System::bboxStaff(int staff) const
       {
-      if (staff >= int(_staves.size()))
+      if (staff >= int(_staves.size())) {
+            printf("System: bad sysStaff idx %d, size %d, vbox %d\n", staff, _staves.size(), _vbox);
             abort();
+            }
       return _staves[staff]->bbox();
       }
 
@@ -105,47 +109,15 @@ QRectF System::bboxStaff(int staff) const
 //   insertStaff
 //---------------------------------------------------------
 
-SysStaff* System::insertStaff(Staff* /*s*/, int idx)
+SysStaff* System::insertStaff(int idx)
       {
+//      if (_vbox)
+//            return 0;
       SysStaff* staff = new SysStaff;
-      insertSysStaff(staff, idx);
-      setInstrumentName(idx);
+      _staves.insert(idx, staff);
+      if (!_vbox)
+            setInstrumentName(idx);
       return staff;
-      }
-
-#if 0
-//---------------------------------------------------------
-//   bbox
-//---------------------------------------------------------
-
-QRectF System::bbox() const
-      {
-      double h   = 0;
-      int n      = _staves.size();
-      double lastDist = 0.0;
-      for (int i = 0; i < n; ++i) {
-            Staff* staff = score()->staff(i);
-            if (!staff->show())
-                  continue;
-            lastDist = distance(i);
-            h += lastDist;
-            h    += _spatium * 4;
-            }
-      h -= lastDist;
-      return QRectF(0.0, 0.0, _width, h);
-      }
-#endif
-
-//---------------------------------------------------------
-//   insertStaff
-//---------------------------------------------------------
-
-void System::insertSysStaff(SysStaff* staff, int idx)
-      {
-      if (idx >= int(_staves.size()))
-            _staves.push_back(staff);
-      else
-            _staves.insert(_staves.begin()+idx, staff);
       }
 
 //---------------------------------------------------------
@@ -154,9 +126,7 @@ void System::insertSysStaff(SysStaff* staff, int idx)
 
 SysStaff* System::removeStaff(int idx)
       {
-      SysStaff* staff = _staves[idx];
-      _staves.erase(_staves.begin()+idx);
-      return staff;
+      return _staves.takeAt(idx);
       }
 
 //---------------------------------------------------------
@@ -169,6 +139,8 @@ SysStaff* System::removeStaff(int idx)
 
 void System::layout(ScoreLayout* layout)
       {
+      if (isVbox())                 // ignore vbox
+            return;
       static const double instrumentNameOffset = 1.0;
       int nstaves  = _staves.size();
 
@@ -319,6 +291,9 @@ void System::layout(ScoreLayout* layout)
 
 void System::layout2(ScoreLayout* layout)
       {
+      if (isVbox())                 // ignore vbox
+            return;
+
       int staves = _staves.size();
 
       qreal y = 0.0;
@@ -362,7 +337,8 @@ void System::layout2(ScoreLayout* layout)
                   s->setbbox(QRectF());
                   continue;
                   }
-            s->setbbox(QRectF(s->bbox().x(), y, s->bbox().width(), 4 * _spatium * staffMag));
+            double sHeight = 4 * _spatium * staffMag;
+            s->setbbox(QRectF(_leftMargin, y, width() - _leftMargin, sHeight));
             // moveY measures
             if (y != 0.0) {
                   foreach(MeasureBase* m, ml) {
@@ -370,7 +346,7 @@ void System::layout2(ScoreLayout* layout)
                               ((Measure*)m)->moveY(staffIdx, y);
                         }
                   }
-            y += 4 * _spatium * staffMag + s->distance();
+            y += sHeight + s->distance();
             }
 
       //---------------------------------------------------
@@ -509,6 +485,7 @@ void System::clear()
 
 void System::setInstrumentNames()
       {
+printf("setInstrumentNames\n");
       for (int staff = 0; staff < score()->nstaves(); ++staff)
             setInstrumentName(staff);
       }
@@ -519,14 +496,17 @@ void System::setInstrumentNames()
 
 void System::setInstrumentName(int idx)
       {
+      if (isVbox())                 // ignore vbox
+            return;
+
       Score* cs = score();
-      Staff* s = cs->staff(idx);
+      Staff* s  = cs->staff(idx);
       if (!s->isTop())
             return;
       SysStaff* staff = _staves[idx];
       if (staff->instrumentName == 0)
             staff->instrumentName = new Text(cs);
-      if (cs->mainLayout()->systems() && !cs->mainLayout()->systems()->empty() && cs->mainLayout()->systems()->front() == this) {
+      if (_firstSystem) {
             staff->instrumentName->setSubtype(TEXT_INSTRUMENT_LONG);
             staff->instrumentName->setDoc(s->longName());
             }
@@ -555,14 +535,13 @@ int System::y2staff(qreal y) const
       {
       y -= pos().y();
       int idx = 0;
-      for (ciSysStaff i = _staves.begin(); i != _staves.end(); ++i, ++idx) {
-            qreal t = (*i)->bbox().top();
-            qreal b = (*i)->bbox().bottom();
+      foreach(SysStaff* s, _staves) {
+            qreal t = s->bbox().top();
+            qreal b = s->bbox().bottom();
             qreal y1 = t - 0.6 * (b - t);
             qreal y2 = b + 0.6 * (b - t);
-            if (y >= y1 && y < y2) {
+            if (y >= y1 && y < y2)
                   return idx;
-                  }
             }
       return -1;
       }
