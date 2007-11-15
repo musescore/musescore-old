@@ -138,6 +138,8 @@ p, li { white-space: pre-wrap; }
       <off1 x="0.141566" y="-3.19348"/>
       <off2 x="-2.4" y="0"/>
       </Segment>
+    <text>1.</text>
+    <endings>1</endings>
     </Volta>
   <Volta>
     <subtype>2</subtype>
@@ -148,9 +150,12 @@ p, li { white-space: pre-wrap; }
       <off1 x="-0.633276" y="-3.2398"/>
       <off2 x="0.6" y="0"/>
       </Segment>
+    <text>1.</text>
+    <endings>1</endings>
     </Volta>
   <Staff id="1">
-    <Measure number="1">
+    <VBox>
+      <height>154.333</height>
       <Text>
         <align>12</align>
         <xoffset>0</xoffset>
@@ -165,6 +170,8 @@ p, li { white-space: pre-wrap; }
 &lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;This is an error made as an example to show the order process repeats.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
         <subtype>Subtitle</subtype>
         </Text>
+      </VBox>
+    <Measure number="1">
       <Note pitch="65" tpc="13" ticks="480"/>
       <Note pitch="67" tpc="15" ticks="480"/>
       <Note pitch="69" tpc="17" ticks="480"/>
@@ -272,5 +279,5 @@ p, li { white-space: pre-wrap; }
       <Note pitch="71" tpc="19" ticks="480"/>
       </Measure>
     </Staff>
-  <cursorTrack>0</cursorTrack>
+  <cursorTrack>-4</cursorTrack>
   </museScore>

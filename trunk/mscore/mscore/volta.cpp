@@ -225,10 +225,15 @@ QPointF Volta::tick2pos(int grip, int tick, int staffIdx, System** system)
             do {
                   mb = mb->prev();
                   } while (mb && mb->type() != MEASURE);
-            m = (Measure*)mb;
-            s = m->system();
-            *system = s;
-            return QPointF(m->canvasPos().x() + m->width(), s->staff(staffIdx)->bbox().y() + s->canvasPos().y());
+            if (mb) {
+                  m = (Measure*)mb;
+                  s = m->system();
+                  *system = s;
+                  return QPointF(m->canvasPos().x() + m->width(), s->staff(staffIdx)->bbox().y() + s->canvasPos().y());
+                  }
+            else {
+                  printf("Volta::tick2pos(%d,%d) measure==zero\n", grip, tick);
+                  }
             }
       *system = s;
       return QPointF(m->canvasPos().x(), s->staff(staffIdx)->bbox().y() + s->canvasPos().y());
@@ -277,3 +282,4 @@ void Volta::read(QDomElement e)
                   domError(e);
             }
       }
+

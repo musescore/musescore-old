@@ -189,6 +189,7 @@ void ScoreLayout::doLayout()
             m->layoutBeams(this);
             m->layout2(this);
             }
+
       foreach(Element* el, _gel)
             el->layout(this);
 
@@ -278,6 +279,9 @@ void ScoreLayout::processSystemHeader(Measure* m)
                         }
                   }
             if (!hasKeysig) {
+                  //
+                  // create missing key signature
+                  //
                   int idx = staff->keymap()->key(tick);
                   if (idx) {
                         KeySig* ks = new KeySig(_score);
@@ -290,6 +294,9 @@ void ScoreLayout::processSystemHeader(Measure* m)
                         }
                   }
             if (!hasClef) {
+                  //
+                  // create missing clef
+                  //
                   int idx = staff->clef()->clef(tick);
                   Clef* cs = new Clef(_score, idx);
                   cs->setStaff(staff);
@@ -305,7 +312,7 @@ void ScoreLayout::processSystemHeader(Measure* m)
 //   getNextSystem
 //---------------------------------------------------------
 
-System* ScoreLayout::getNextSystem()
+System* ScoreLayout::getNextSystem(bool isFirstSystem, bool isVbox)
       {
       System* system;
       if (curSystem >= _systems.size()) {
@@ -316,9 +323,13 @@ System* ScoreLayout::getNextSystem()
             system = _systems[curSystem];
             system->clear();   // remove measures from system
             }
-      int nstaves = _score->nstaves();
-      for (int i = system->staves()->size(); i < nstaves; ++i)
-            system->insertStaff(_score->staff(i), i);
+      system->setFirstSystem(isFirstSystem);
+      system->setVbox(isVbox);
+      if (!isVbox) {
+            int nstaves = _score->nstaves();
+            for (int i = system->staves()->size(); i < nstaves; ++i)
+                  system->insertStaff(i);
+            }
       return system;
       }
 
@@ -345,7 +356,7 @@ bool ScoreLayout::layoutPage()
       bool firstSystem = true;
       while (curMeasure) {
             if (curMeasure->type() == VBOX) {
-                  System* system = getNextSystem();
+                  System* system = getNextSystem(false, true);
                   VBox* box = (VBox*) curMeasure;
                   if (y + box->boxHeight() > ey) {
                         break;
@@ -366,35 +377,37 @@ bool ScoreLayout::layoutPage()
                   y += box->boxHeight() + systemDistance;
                   }
             else {
-                  if (firstSystem)
+                  bool isFirstSystem = false;
+                  if (firstSystem) {
                         y += point(score()->style()->staffUpperBorder);
+                        if (curPage == 0)
+                              isFirstSystem = true;
+                        }
                   int cs            = curSystem;
                   MeasureBase* cm   = curMeasure;
-                  QList<System*> sl = layoutSystemRow(x, y, w);
+                  QList<System*> sl = layoutSystemRow(x, y, w, isFirstSystem);
                   if (sl.isEmpty()) {
-                        printf("layoutSystemRow gives zero\n");
+                        printf("layoutSystemRow returns zero systems\n");
                         abort();
                         }
-                  foreach(System* system, sl)
-                        page->appendSystem(system);
 
                   qreal h = sl.front()->bbox().height() + systemDistance;
-                  if (y + h > ey) {  // system does not fit on page
-                        // rollback
+                  if (y + h > ey) {
+                        // system does not fit on page: rollback
                         curMeasure = cm;
                         curSystem  = cs;
-                        page->systems()->takeLast();
                         break;
                         }
 
-                  foreach (System* system, sl)
+                  foreach (System* system, sl) {
+                        page->appendSystem(system);
                         system->setYpos(y);
-                  y += h;
-                  if (sl.back()->pageBreak()) {
-                        break;
                         }
+                  y += h;
+                  if (sl.back()->pageBreak())
+                        break;
+                  firstSystem = false;
                   }
-            firstSystem = false;
             }
 
       //-----------------------------------------------------------------------
@@ -422,9 +435,9 @@ bool ScoreLayout::layoutPage()
 //   layoutSystem1
 //---------------------------------------------------------
 
-bool ScoreLayout::layoutSystem1(double& minWidth, double w)
+bool ScoreLayout::layoutSystem1(double& minWidth, double w, bool isFirstSystem)
       {
-      System* system = getNextSystem();
+      System* system = getNextSystem(isFirstSystem, false);
 
       minWidth = 0.0;
       system->layout(this);
@@ -514,14 +527,14 @@ bool ScoreLayout::layoutSystem1(double& minWidth, double w)
 //    x, y  position of row on page
 //---------------------------------------------------------
 
-QList<System*> ScoreLayout::layoutSystemRow(qreal x, qreal y, qreal rowWidth)
+QList<System*> ScoreLayout::layoutSystemRow(qreal x, qreal y, qreal rowWidth, bool isFirstSystem)
       {
       QList<System*> sl;
 
       double ww = rowWidth;
       double minWidth;
       for (bool a = true; a;) {
-            a = layoutSystem1(minWidth, ww);
+            a = layoutSystem1(minWidth, ww, isFirstSystem);
             sl.append(_systems[curSystem]);
             ++curSystem;
             ww -= minWidth;
@@ -537,88 +550,89 @@ QList<System*> ScoreLayout::layoutSystemRow(qreal x, qreal y, qreal rowWidth)
 
       bool needRelayout = false;
 
-#if 0
-      //
-      //    add cautionary time signatures if needed
-      //
 
-      MeasureBase* lm = system->measures().back();
-      int tick        = lm->tick() + lm->tickLen();
-      SigEvent sig1   = _score->sigmap->timesig(tick - 1);
-      SigEvent sig2   = _score->sigmap->timesig(tick);
+      foreach(System* system, sl) {
+            //
+            //    add cautionary time signatures if needed
+            //
 
-      if (!(sig1 == sig2)) {
-            while (lm && lm->type() != MEASURE)
-                  lm = lm->prev();
-            if (lm) {
-                  Measure* m = (Measure*)lm;
-                  Segment* s  = m->getSegment(Segment::SegTimeSigAnnounce, tick);
-                  int nstaves = score()->nstaves();
-                  for (int staff = 0; staff < nstaves; ++staff) {
-                        if (s->element(staff * VOICES) == 0) {
-                              TimeSig* ts = new TimeSig(score(), sig2.denominator, sig2.nominator);
-                              ts->setStaff(score()->staff(staff));
-                              ts->setGenerated(true);
-                              s->add(ts);
-                              needRelayout = true;
+            MeasureBase* lm = system->measures().back();
+            int tick        = lm->tick() + lm->tickLen();
+            SigEvent sig1   = _score->sigmap->timesig(tick - 1);
+            SigEvent sig2   = _score->sigmap->timesig(tick);
+
+            if (!(sig1 == sig2)) {
+                  while (lm && lm->type() != MEASURE)
+                        lm = lm->prev();
+                  if (lm) {
+                        Measure* m = (Measure*)lm;
+                        Segment* s  = m->getSegment(Segment::SegTimeSigAnnounce, tick);
+                        int nstaves = score()->nstaves();
+                        for (int staff = 0; staff < nstaves; ++staff) {
+                              if (s->element(staff * VOICES) == 0) {
+                                    TimeSig* ts = new TimeSig(score(), sig2.denominator, sig2.nominator);
+                                    ts->setStaff(score()->staff(staff));
+                                    ts->setGenerated(true);
+                                    s->add(ts);
+                                    needRelayout = true;
+                                    }
                               }
                         }
                   }
-            }
 
-      //
-      //    compute repeat bar lines
-      //
-      const QList<MeasureBase*>& ml = system->measures();
-      int n                     = ml.size();
-      for (int i = 0; i < n; ++i) {
-            MeasureBase* mb = ml[i];
-            if (mb->type() != MEASURE)
-                  continue;
-            Measure* m = (Measure*)mb;
+            //
+            //    compute repeat bar lines
+            //
+            const QList<MeasureBase*>& ml = system->measures();
+            int n                     = ml.size();
+            for (int i = 0; i < n; ++i) {
+                  MeasureBase* mb = ml[i];
+                  if (mb->type() != MEASURE)
+                        continue;
+                  Measure* m = (Measure*)mb;
 
-            if (i == (n-1)) {
-                  if (m->repeatFlags() & RepeatEnd)
-                        needRelayout |= m->setEndBarLineType(END_REPEAT, true);
-                  else {
-                        BarLine* bl = m->endBarLine();
-                        if (bl == 0 || bl->generated())
-                              needRelayout |= m->setEndBarLineType(NORMAL_BAR, true);
-                        }
-                  }
-            else {
-                  MeasureBase* mb = m->next();
-                  while (mb->type() != MEASURE && (mb != ml[n-1]))
-                        mb = mb->next();
-                  Measure* nm = 0;
-                  if (mb->type() == MEASURE)
-                        nm = (Measure*)mb;
-
-                  needRelayout |= m->setStartRepeatBarLine((i == 0) && (m->repeatFlags() & RepeatStart));
-                  if (m->repeatFlags() & RepeatEnd) {
-                        if (nm && (nm->repeatFlags() & RepeatStart))
-                              needRelayout |= m->setEndBarLineType(END_START_REPEAT, true);
-                        else
+                  if (i == (n-1)) {
+                        if (m->repeatFlags() & RepeatEnd)
                               needRelayout |= m->setEndBarLineType(END_REPEAT, true);
-                        }
-                  else if (nm && (nm->repeatFlags() & RepeatStart))
-                        needRelayout |= m->setEndBarLineType(START_REPEAT, true);
-                  else {
-                        BarLine* bl = m->endBarLine();
-                        if (bl == 0 || bl->generated()) {
-                              if (bl == 0)
+                        else {
+                              BarLine* bl = m->endBarLine();
+                              if (bl == 0 || bl->generated())
                                     needRelayout |= m->setEndBarLineType(NORMAL_BAR, true);
-                              else {
-                                    if (bl->subtype() != NORMAL_BAR) {
-                                          bl->setSubtype(NORMAL_BAR);
-                                          needRelayout = true;
+                              }
+                        }
+                  else {
+                        MeasureBase* mb = m->next();
+                        while (mb->type() != MEASURE && (mb != ml[n-1]))
+                              mb = mb->next();
+                        Measure* nm = 0;
+                        if (mb->type() == MEASURE)
+                              nm = (Measure*)mb;
+
+                        needRelayout |= m->setStartRepeatBarLine((i == 0) && (m->repeatFlags() & RepeatStart));
+                        if (m->repeatFlags() & RepeatEnd) {
+                              if (nm && (nm->repeatFlags() & RepeatStart))
+                                    needRelayout |= m->setEndBarLineType(END_START_REPEAT, true);
+                              else
+                                    needRelayout |= m->setEndBarLineType(END_REPEAT, true);
+                              }
+                        else if (nm && (nm->repeatFlags() & RepeatStart))
+                              needRelayout |= m->setEndBarLineType(START_REPEAT, true);
+                        else {
+                              BarLine* bl = m->endBarLine();
+                              if (bl == 0 || bl->generated()) {
+                                    if (bl == 0)
+                                          needRelayout |= m->setEndBarLineType(NORMAL_BAR, true);
+                                    else {
+                                          if (bl->subtype() != NORMAL_BAR) {
+                                                bl->setSubtype(NORMAL_BAR);
+                                                needRelayout = true;
+                                                }
                                           }
                                     }
                               }
                         }
                   }
             }
-#endif
 
       minWidth           = 0.0;
       double totalWeight = 0.0;
@@ -641,8 +655,6 @@ QList<System*> ScoreLayout::layoutSystemRow(qreal x, qreal y, qreal rowWidth)
       double rest = layoutDebug ? 0.0 : rowWidth - minWidth;
       double xx = 0.0;
       foreach(System* system, sl) {
-            system->layout2(this);      // layout staves vertical
-
             QPointF pos(system->leftMargin(), 0);
 
             foreach(MeasureBase* mb, system->measures()) {
@@ -663,6 +675,7 @@ QList<System*> ScoreLayout::layoutSystemRow(qreal x, qreal y, qreal rowWidth)
             system->setPos(xx + x, y);
             double w = pos.x();
             system->setWidth(w);
+            system->layout2(this);      // layout staves vertical
             xx += w;
             }
       return sl;
