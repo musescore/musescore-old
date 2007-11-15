@@ -133,6 +133,9 @@ void Text::setSubtype(int val)
             case TEXT_STAFF:            setStyle(TEXT_STYLE_STAFF); break;
             case TEXT_CHORD:            setStyle(TEXT_STYLE_CHORD); break;
             case TEXT_REHEARSAL_MARK:   setStyle(TEXT_STYLE_REHEARSAL_MARK); break;
+            case TEXT_REPEAT:           setStyle(TEXT_STYLE_REPEAT); break;
+            case TEXT_VOLTA:            setStyle(TEXT_STYLE_VOLTA); break;
+            case TEXT_FRAME:            setStyle(TEXT_STYLE_FRAME); break;
             default:
                   printf("unknown text subtype %d\n", val);
                   break;
@@ -165,6 +168,9 @@ const QString Text::subtypeName() const
             case TEXT_STAFF:            return "Staff";
             case TEXT_CHORD:            return "Chordname";
             case TEXT_REHEARSAL_MARK:   return "RehearsalMark";
+            case TEXT_REPEAT:           return "Repeat";
+            case TEXT_VOLTA:            return "Volta";
+            case TEXT_FRAME:            return "Frame";
             default:
                   printf("unknown text subtype %d\n", subtype());
                   break;
@@ -217,6 +223,12 @@ void Text::setSubtype(const QString& s)
             st = TEXT_CHORD;
       else if (s == "RehearsalMark")
             st = TEXT_REHEARSAL_MARK;
+      else if (s == "Repeat")
+            st = TEXT_REPEAT;
+      else if (s == "Volta")
+            st = TEXT_VOLTA;
+      else if (s == "Frame")
+            st = TEXT_FRAME;
       else
             printf("setSubtype: unknown type <%s>\n", qPrintable(s));
       setSubtype(st);

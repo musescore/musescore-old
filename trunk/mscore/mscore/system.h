@@ -88,7 +88,8 @@ class System : public Element {
       SysStaffList _staves;
       BarLine* barLine;       ///< Left hand bar, connects staves in system.
       bool _pageBreak;
-      qreal _width;
+//      qreal _width;
+      qreal _leftMargin;      ///< left margin for instrument name, brackets etc.
 
       void setInstrumentName(int staff);
       void setDistance(int n, Spatium v)   { _staves[n]->setDistance(v); }
@@ -100,8 +101,8 @@ class System : public Element {
       virtual System* clone() const    { return new System(*this); }
       virtual ElementType type() const { return SYSTEM; }
 
-      virtual QRectF bbox() const;
-      void setWidth(qreal v)  { _width = v; }
+//      virtual QRectF bbox() const;
+//      void setWidth(qreal v)  { _width = v; }
 
       virtual void add(Element*);
       virtual void remove(Element*);
@@ -109,7 +110,7 @@ class System : public Element {
 
       Page* page() const                 { return (Page*)parent(); }
 
-      double layout(ScoreLayout*, const QPointF&, double);
+      virtual void layout(ScoreLayout*);
       void layout2(ScoreLayout*);         ///< Called after Measure layout.
       void clear();                       ///< Clear measure list.
 
@@ -135,6 +136,7 @@ class System : public Element {
       int snapNote(int tick, const QPointF p, int staff) const;
       MeasureBase* prevMeasure(const MeasureBase*) const;
       MeasureBase* nextMeasure(const MeasureBase*) const;
+      double leftMargin() const { return _leftMargin; }
       };
 
 typedef QList<System*>::iterator iSystem;

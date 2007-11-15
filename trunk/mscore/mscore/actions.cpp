@@ -1204,6 +1204,15 @@ Shortcut MuseScore::sc[] = {
          QT_TR_NOOP("Add System Text")
          ),
       Shortcut(
+         STATE_NORMAL,
+         "frame-text",
+         QT_TR_NOOP("Add Text"),
+         0,
+         Qt::WindowShortcut,
+         QT_TR_NOOP("Frame Text"),
+         QT_TR_NOOP("Add Text")
+         ),
+      Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
          "title-text",
          QT_TR_NOOP("Add Title"),
@@ -1266,7 +1275,6 @@ Shortcut MuseScore::sc[] = {
          QT_TR_NOOP("Rehearsal Mark"),
          QT_TR_NOOP("Add Rehearsal Mark")
          ),
-
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY | STATE_PLAY,
          "play",
