@@ -123,6 +123,9 @@ const TextStyle defaultTextStyleArray[] = {
 
       TextStyle(QString("Volta"), ff, 11, true, false, false,
          ALIGN_LEFT,    ANCHOR_STAFF, 0, -5.0, OFFSET_SPATIUM, true),
+
+      TextStyle(QString("Frame"), ff, 11, true, false, false,
+         ALIGN_LEFT,    ANCHOR_PAGE, 0, 0, OFFSET_SPATIUM, true),
       };
 
 //---------------------------------------------------------

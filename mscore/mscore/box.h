@@ -28,6 +28,7 @@
 
 #include "measurebase.h"
 
+class BarLine;
 
 //---------------------------------------------------------
 //   Box
@@ -64,10 +65,21 @@ class Box : public MeasureBase {
 //---------------------------------------------------------
 
 class HBox : public Box {
+
    public:
-      HBox(Score* score) : Box(score) {}
+      HBox(Score* score);
+      ~HBox();
       virtual HBox* clone() const      { return new HBox(*this); }
       virtual ElementType type() const { return HBOX;       }
+
+      virtual void layout(ScoreLayout*);
+      virtual void collectElements(QList<const Element*>& el) const;
+
+      virtual bool acceptDrop(Viewer*, const QPointF&, int, int) const;
+      virtual Element* drop(const QPointF&, const QPointF&, Element*);
+
+      virtual bool genPropertyMenu(QMenu*) const;
+      virtual void propertyAction(const QString&);
       };
 
 //---------------------------------------------------------
@@ -80,6 +92,7 @@ class VBox : public Box {
       VBox(Score* score) : Box(score) {}
       virtual VBox* clone() const      { return new VBox(*this); }
       virtual ElementType type() const { return VBOX;       }
+
       virtual bool genPropertyMenu(QMenu*) const;
       virtual void propertyAction(const QString&);
       };

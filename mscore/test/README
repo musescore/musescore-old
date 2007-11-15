@@ -32,6 +32,11 @@ testsmall.msc
       - small staff
             - small chord in small staff
 
+coda.msc
+      - horizontal frame
+      - coda1, coda2
+
+
 -------------------------------------------------
       MIDI Testfiles
 -------------------------------------------------

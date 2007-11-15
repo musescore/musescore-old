@@ -81,8 +81,10 @@ class ScoreLayout : public Element {
 
       Page* addPage();
       bool layoutPage();
-      System* layoutSystem(qreal x, qreal y, qreal w);
+      bool layoutSystem1(double& minWidth, double w);
+      QList<System*> layoutSystemRow(qreal x, qreal y, qreal w);
       void processSystemHeader(Measure* m);
+      System* getNextSystem();
 
       // values used during doLayout:
       int curPage;

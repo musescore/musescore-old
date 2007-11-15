@@ -75,7 +75,9 @@ SysStaff::~SysStaff()
 System::System(Score* s)
    : Element(s)
       {
-      barLine = 0;
+      barLine     = 0;
+      _leftMargin = 0.0;
+      _pageBreak  = false;
       }
 
 //---------------------------------------------------------
@@ -111,6 +113,7 @@ SysStaff* System::insertStaff(Staff* /*s*/, int idx)
       return staff;
       }
 
+#if 0
 //---------------------------------------------------------
 //   bbox
 //---------------------------------------------------------
@@ -131,6 +134,7 @@ QRectF System::bbox() const
       h -= lastDist;
       return QRectF(0.0, 0.0, _width, h);
       }
+#endif
 
 //---------------------------------------------------------
 //   insertStaff
@@ -163,11 +167,9 @@ SysStaff* System::removeStaff(int idx)
  Layout the System.
 */
 
-double System::layout(ScoreLayout* layout, const QPointF& p, double w)
+void System::layout(ScoreLayout* layout)
       {
-      static const double instrumentNameOffset = 1;
-      setPos(p);
-      setWidth(w);
+      static const double instrumentNameOffset = 1.0;
       int nstaves  = _staves.size();
 
       //---------------------------------------------------
@@ -177,19 +179,16 @@ double System::layout(ScoreLayout* layout, const QPointF& p, double w)
 
       double xoff2 = 0.0;         // x offset for instrument name
 
-      const QList<Staff*> sl = score()->staves();
-      QList<Staff*>::const_iterator is = sl.begin();
-
-      int bracketLevels = sl.front()->bracketLevels();
+      int bracketLevels = score()->staff(0)->bracketLevels();
       double bracketWidth[bracketLevels];
       for (int i = 0; i < bracketLevels; ++i)
             bracketWidth[i] = 0.0;
 
-      for (iSysStaff iss = _staves.begin(); iss != _staves.end(); ++iss, ++is) {
-            Staff* s = *is;
+      for (int staffIdx = 0; staffIdx < nstaves; ++staffIdx) {
+            Staff* s = score()->staff(staffIdx);
             if (!s->show())
                   continue;
-            SysStaff* ss = *iss;
+            SysStaff* ss = _staves[staffIdx];
             if (bracketLevels < ss->brackets.size()) {
                   for (int i = bracketLevels; i < ss->brackets.size(); ++i) {
                         Bracket* b = ss->brackets.takeLast();
@@ -236,21 +235,19 @@ double System::layout(ScoreLayout* layout, const QPointF& p, double w)
       //  layout  SysStaff and StaffLines
       //---------------------------------------------------
 
-      qreal x = xoff2;
+      _leftMargin = xoff2;
       for (int i = 0; i < bracketLevels; ++i)
-            x += bracketWidth[i];
+            _leftMargin += bracketWidth[i];
 
-      int staffIdx = 0;
-
-      for (iSysStaff is = _staves.begin(); is != _staves.end(); ++is, ++staffIdx) {
-            SysStaff* s    = *is;
+      for (int staffIdx = 0; staffIdx < nstaves; ++staffIdx) {
+            SysStaff* s  = _staves[staffIdx];
             Staff* staff = score()->staff(staffIdx);
             if (!staff->show()) {
                   s->setbbox(QRectF());
                   continue;
                   }
             double staffMag = staff->small() ? 0.7 : 1.0;
-            s->setbbox(QRectF(x, 0.0, w, 4 * _spatium * staffMag));
+            s->setbbox(QRectF(_leftMargin, 0.0, 0.0, 4 * _spatium * staffMag));
             }
 
       if (nstaves > 1 && barLine == 0) {
@@ -262,14 +259,13 @@ double System::layout(ScoreLayout* layout, const QPointF& p, double w)
             barLine = 0;
             }
       if (barLine)
-            barLine->setPos(x, 0);
+            barLine->setPos(_leftMargin, 0);
 
       //---------------------------------------------------
       //  layout brackets
       //---------------------------------------------------
 
-      is = sl.begin();
-      for (staffIdx = 0; staffIdx < nstaves; ++staffIdx) {
+      for (int staffIdx = 0; staffIdx < nstaves; ++staffIdx) {
             SysStaff* ss = _staves[staffIdx];
 
             double xo = 0.0;
@@ -288,7 +284,7 @@ double System::layout(ScoreLayout* layout, const QPointF& p, double w)
                         b->setSpan(nstaves - staffIdx);
                         }
                   qreal ey = _staves[staffIdx + b->span() - 1]->bbox().bottom();
-                  b->setPos(x - xo, sy);
+                  b->setPos(_leftMargin - xo, sy);
                   b->setHeight(ey - sy);
                   }
             }
@@ -313,7 +309,6 @@ double System::layout(ScoreLayout* layout, const QPointF& p, double w)
                   }
             idx += nstaves;
             }
-      return x;
       }
 
 //---------------------------------------------------------
@@ -324,7 +319,6 @@ double System::layout(ScoreLayout* layout, const QPointF& p, double w)
 
 void System::layout2(ScoreLayout* layout)
       {
-// printf("System::layout2() %f\n", _spatium);
       int staves = _staves.size();
 
       qreal y = 0.0;

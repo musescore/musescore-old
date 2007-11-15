@@ -22,6 +22,9 @@
 #include "text.h"
 #include "score.h"
 #include "mscore.h"
+#include "barline.h"
+#include "repeat.h"
+#include "viewer.h"
 
 //---------------------------------------------------------
 //   Box
@@ -51,7 +54,7 @@ void Box::layout(ScoreLayout* layout)
 
 void Box::draw(QPainter& p) const
       {
-      if (selected() || editMode) {
+      if (selected() || editMode || dropTarget()) {
             p.drawRect(bbox());
             }
       }
@@ -141,7 +144,7 @@ void Box::write(Xml& xml, int) const
 
 void Box::read(QDomElement e)
       {
-      int curTickPos = e.attribute("tick", "0").toInt();
+      int curTickPos = e.attribute("tick", QString("%1").arg(score()->curTick)).toInt();
       setTick(curTickPos);
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             QString tag(e.tagName());
@@ -152,12 +155,107 @@ void Box::read(QDomElement e)
                   _boxWidth = val.toDouble();
             else if (tag == "Text") {
                   Text* t = new Text(score());
-                  t->setTick(score()->curTick);
+                  t->setTick(curTickPos);
                   t->read(e);
                   add(t);
                   }
+            else if (tag == "Repeat") {
+                  Repeat* repeat = new Repeat(score());
+                  repeat->setTick(curTickPos);
+                  repeat->read(e);
+                  add(repeat);
+                  }
             else
                   domError(e);
+            }
+      }
+//---------------------------------------------------------
+//   HBox
+//---------------------------------------------------------
+
+HBox::HBox(Score* score)
+   : Box(score)
+      {
+      }
+
+HBox::~HBox()
+      {
+      }
+
+//---------------------------------------------------------
+//   collectElements
+//---------------------------------------------------------
+
+void HBox::collectElements(QList<const Element*>& el) const
+      {
+      MeasureBase::collectElements(el);
+      }
+
+//---------------------------------------------------------
+//   layout
+//---------------------------------------------------------
+
+void HBox::layout(ScoreLayout*)
+      {
+      setbbox(QRectF(0.0, 0.0, boxWidth(), system()->height()));
+      }
+
+//---------------------------------------------------------
+//   acceptDrop
+//---------------------------------------------------------
+
+bool HBox::acceptDrop(Viewer* viewer, const QPointF&, int type, int subtype) const
+      {
+      if (type == REPEAT &&
+         (subtype == RepeatCoda || subtype == RepeatCodetta || subtype == RepeatVarcoda)
+         ) {
+            viewer->setDropTarget(this);
+            return true;
+            }
+      return false;
+      }
+
+//---------------------------------------------------------
+//   drop
+//---------------------------------------------------------
+
+Element* HBox::drop(const QPointF&, const QPointF&, Element* e)
+      {
+      printf("HBox::drop %s\n", e->name());
+      e->setParent(this);
+      score()->select(e, 0, 0);
+      score()->cmdAdd(e);
+      return e;
+      }
+
+//---------------------------------------------------------
+//   genPropertyMenu
+//---------------------------------------------------------
+
+bool HBox::genPropertyMenu(QMenu* popup) const
+      {
+      QMenu* textMenu = popup->addMenu(tr("Add Text"));
+      QAction* a = getAction("frame-text");
+      textMenu->addAction(a);
+      return true;
+      }
+
+//---------------------------------------------------------
+//   propertyAction
+//---------------------------------------------------------
+
+void HBox::propertyAction(const QString& cmd)
+      {
+      printf("VBox:propertyAction <%s>\n", qPrintable(cmd));
+
+      if (cmd == "frame-text") {
+            Text* s = new Text(score());
+            s->setSubtype(TEXT_FRAME);
+            s->setParent(this);
+            s->setText("frame");          // debug
+            score()->undoAddElement(s);
+            score()->setLayoutAll(true);
+            score()->select(s, 0, 0);
             }
       }
 
