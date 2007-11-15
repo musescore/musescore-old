@@ -58,6 +58,7 @@
 #include "tremolo.h"
 #include "box.h"
 #include "repeat.h"
+#include "qregexp.h"
 
 //---------------------------------------------------------
 //   xmlSetPitch
@@ -770,8 +771,21 @@ Measure* MusicXml::xmlMeasure(Part* part, QDomElement e, int number)
 // even though the DTD does not mention it, practically speaking
 // offset and relative-x are mutually exclusive
 
+// Typical example:
+// <direction placement="above">
+//   <direction-type>
+//      <words>Fine</words>
+//      </direction-type>
+//   <sound fine="yes"/>
+//   </direction>
+
+// Note: multiple direction-type (and multiple words) elements may be present,
+// and at least one direction-type must be present but sound is optional and
+// at most one can be present.
+
 void MusicXml::direction(Measure* measure, int staff, QDomElement e)
       {
+//      printf("MusicXml::direction\n");
       QString placement = e.attribute("placement");
 
       QString dirType;
@@ -882,21 +896,67 @@ void MusicXml::direction(Measure* measure, int staff, QDomElement e)
       else
             ry += 2;
 
-      if (coda) {
+/*
+      printf(" tempo=%s txt=%s coda=%d segno=%d sndCapo=%s sndCoda=%s"
+             " sndDacapo=%s sndDalsegno=%s sndFine=%s sndSegno=%s\n",
+             tempo.toLatin1().data(),
+             txt.toLatin1().data(),
+             coda,
+             segno,
+             sndCapo.toLatin1().data(),
+             sndCoda.toLatin1().data(),
+             sndDacapo.toLatin1().data(),
+             sndDalsegno.toLatin1().data(),
+             sndFine.toLatin1().data(),
+             sndSegno.toLatin1().data()
+            );
+*/
+
+      // Try to recognize the various repeats
+      QString repeat = "";
+      // Easy cases first
+      if (coda) repeat = "coda";
+      if (segno) repeat = "segno";
+      // As sound may be missing, next do a wild-card match with known repeat texts
+      QString lowerTxt = txt.toLower();
+      QRegExp daCapo("d\\.? *c\\.?|da *capo");
+      QRegExp daCapoAlFine("d\\.? *c\\.? *al *fine|da *capo *al *fine");
+      QRegExp daCapoAlCoda("d\\.? *c\\.? *al *coda|da *capo *al *coda");
+      QRegExp dalSegno("d\\.? *s\\.?|d[ae]l *segno");
+      QRegExp dalSegnoAlFine("d\\.? *s\\.? *al *fine|d[ae]l *segno *al *fine");
+      QRegExp dalSegnoAlCoda("d\\.? *s\\.? *al *coda|d[ae]l *segno *al *coda");
+      QRegExp fine("fine");
+      if (daCapo.exactMatch(lowerTxt)) repeat = "daCapo";
+      if (daCapoAlFine.exactMatch(lowerTxt)) repeat = "daCapoAlFine";
+      if (daCapoAlCoda.exactMatch(lowerTxt)) repeat = "DaCapoAlCoda";
+      if (dalSegno.exactMatch(lowerTxt)) repeat = "dalSegno";
+      if (dalSegnoAlFine.exactMatch(lowerTxt)) repeat = "dalSegnoAlFine";
+      if (dalSegnoAlCoda.exactMatch(lowerTxt)) repeat = "dalSegnoAlCoda";
+      if (fine.exactMatch(lowerTxt)) repeat = "fine";
+      // If that did not work, try to recognize a sound attribute
+      if (repeat == "" && sndCoda != "") repeat = "coda";
+      if (repeat == "" && sndDacapo != "") repeat = "daCapo";
+      if (repeat == "" && sndDalsegno != "") repeat = "dalSegno";
+      if (repeat == "" && sndFine != "") repeat = "fine";
+      if (repeat == "" && sndSegno != "") repeat = "segno";
+      // If a repeat was found, assume words is no longer needed
+      if (repeat != "") txt = "";
+
+/*
+      printf(" txt=%s repeat=%s\n",
+             txt.toLatin1().data(),
+             repeat.toLatin1().data()
+            );
+*/
+
+      if (repeat != "") {
             Repeat* r = new Repeat(score);
-            r->setSubtype("coda");
+            r->setSubtype(repeat);
             r->setStaff(score->staff(staff + rstaff));
             measure->add(r);
             }
 
-      if (segno) {
-            Repeat* r = new Repeat(score);
-            r->setSubtype("segno");
-            r->setStaff(score->staff(staff + rstaff));
-            measure->add(r);
-            }
-
-      if (dirType == "words") {
+      if (dirType == "words" && (txt != "" || tempo != "")) {
             // LVIFIX: tempotext font is incorrect
             // printf("words txt='%s' tempo='%s'\n", txt.toLatin1().data(), tempo.toLatin1().data());
             Text* t;
