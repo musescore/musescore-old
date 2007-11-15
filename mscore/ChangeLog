@@ -1,4 +1,6 @@
-15.11.7 (ws)
+15.11.7 (lv)
+      - MusicXML import of repeats
+        (ws)
       - new testfile "coda.msc" uses HBox to separate two codas
       - layout implementation of horizontal frame (HBox). A hbox breaks a system, which
         can result in more than one system in a row.
