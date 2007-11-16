@@ -993,6 +993,11 @@ void Score::deleteItem(Element* el)
                   cmdRemove(el);
                   break;
 
+            case HBOX:
+            case VBOX:
+                  undoRemoveElement(el);
+                  break;
+
             case OTTAVA_SEGMENT:
             case HAIRPIN_SEGMENT:
             case TRILL_SEGMENT:

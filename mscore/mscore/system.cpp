@@ -476,7 +476,10 @@ void System::clear()
       _staves.clear();
       if (barLine)
             delete barLine;
-      barLine = 0;
+      barLine      = 0;
+      _vbox        = false;
+      _firstSystem = false;
+      _pageBreak   = false;
       }
 
 //---------------------------------------------------------
@@ -485,7 +488,6 @@ void System::clear()
 
 void System::setInstrumentNames()
       {
-printf("setInstrumentNames\n");
       for (int staff = 0; staff < score()->nstaves(); ++staff)
             setInstrumentName(staff);
       }
@@ -565,8 +567,8 @@ void System::add(Element* el)
             b->staff()->setBracket(level,   b->subtype());
             b->staff()->setBracketSpan(level, b->span());
             }
-//      else if (el->type() == MEASURE)
-//            score()->addMeasure((Measure*)el);
+      else if (el->type() == MEASURE || el->type() == HBOX || el->type() == VBOX)
+            score()->addMeasure((MeasureBase*)el);
       else
             printf("System::add(%s) not implemented\n", el->name());
       }
@@ -595,8 +597,8 @@ void System::remove(Element* el)
                   }
             printf("internal error: bracket not found\n");
             }
-//      else if (el->type() == MEASURE)
-//            score()->removeMeasure((Measure*)el);
+      else if (el->type() == MEASURE || el->type() == HBOX || el->type() == VBOX)
+            score()->removeMeasure((MeasureBase*)el);
       else
             printf("System::remove(%s) not implemented\n", el->name());
       }
