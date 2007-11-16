@@ -114,6 +114,7 @@ class System : public Element {
 
       QRectF bboxStaff(int staff) const;
       QList<SysStaff*>* staves()           { return &_staves;   }
+      const QList<SysStaff*>* staves() const { return &_staves;   }
       SysStaff* staff(int n) const         { return _staves[n]; }
 
       double distance(int n) const         { return _staves[n]->distance(); }

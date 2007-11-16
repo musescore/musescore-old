@@ -258,6 +258,11 @@ void Page::collectElements(QList<const Element*>& el) const
       foreach(const System* s, _systems) {
             if (s->isVbox())
                   continue;
+            if (s->staves()->size() != staves) {
+                  printf("System %p SysStaff size != staves %d %d\n",
+                     s, s->staves()->size(), staves);
+                  abort();
+                  }
             if (s->getBarLine())
                   el.append(s->getBarLine());
             for (int i = 0; i < staves; ++i) {

@@ -111,8 +111,6 @@ QRectF System::bboxStaff(int staff) const
 
 SysStaff* System::insertStaff(int idx)
       {
-//      if (_vbox)
-//            return 0;
       SysStaff* staff = new SysStaff;
       _staves.insert(idx, staff);
       if (!_vbox)
