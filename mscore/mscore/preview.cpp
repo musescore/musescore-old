@@ -23,6 +23,7 @@
 #include "page.h"
 #include "globals.h"
 #include "layout.h"
+#include "box.h"
 
 //---------------------------------------------------------
 //   PagePreview
@@ -57,7 +58,15 @@ void PagePreview::setScore(Score* s)
             QMimeData* mimeData = new QMimeData;
             mimeData->setData(mimeType, m->mimeData(QPointF()));
 
-            MeasureBase* nm = m->clone();
+            MeasureBase* nm = 0;
+            switch(m->type()) {
+                  case MEASURE:     nm = new Measure(s); break;
+                  case HBOX:        nm = new HBox(s); break;
+                  case VBOX:        nm = new VBox(s); break;
+                  default:
+                        printf("PagePreview::setScore: bad type\n");
+                        break;
+                  }
             QByteArray data(mimeData->data(mimeType));
 
 // printf("DATA\n%s\n", data.data());

@@ -133,8 +133,8 @@ const TextStyle defaultTextStyleArray[] = {
 //---------------------------------------------------------
 
 Style defaultStyle = {
-      Spatium(8.0),   // staffUpperBorder
-      Spatium(4.0),   // staffLowerBorder
+      Spatium(7.0),   // staffUpperBorder
+      Spatium(7.0),   // staffLowerBorder
       Spatium(6.5),   // staffDistance
       Spatium(6.5),   // accoladeDistance
       Spatium(9.25),  // systemDistance

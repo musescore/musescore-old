@@ -1101,3 +1101,21 @@ bool Element::edit(int, QKeyEvent* ev)
       return false;
       }
 
+//---------------------------------------------------------
+//   add
+//---------------------------------------------------------
+
+void Element::add(Element* e)
+      {
+      printf("cannot add %s to %s\n", e->name(), name());
+      }
+
+//---------------------------------------------------------
+//   remove
+//---------------------------------------------------------
+
+void Element::remove(Element* e)
+      {
+      printf("cannot remove %s from %s\n", e->name(), name());
+      }
+

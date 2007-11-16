@@ -85,6 +85,7 @@ class ScoreLayout : public Element {
       QList<System*> layoutSystemRow(qreal x, qreal y, qreal w, bool);
       void processSystemHeader(Measure* m);
       System* getNextSystem(bool, bool);
+      void getCurPage();
 
       // values used during doLayout:
       int curPage;

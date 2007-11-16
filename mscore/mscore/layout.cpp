@@ -135,6 +135,7 @@ void ScoreLayout::doLayout()
             _pages.clear();
 
             Page* page = addPage();
+            page->layout(this);
             page->setNo(0);
             page->setPos(0.0, 0.0);
 
@@ -163,12 +164,7 @@ void ScoreLayout::doLayout()
       curMeasure = first();
       curSystem  = 0;
       for (curPage = 0; curMeasure; curPage++) {
-            Page* page = curPage >= _pages.size() ? addPage() : _pages[curPage];
-            page->setNo(curPage);
-            double x = (curPage == 0) ? 0.0 : _pages[curPage - 1]->pos().x()
-                        + page->width() + ((curPage & 1) ? 1.0 : 50.0);
-            page->setPos(x, 0.0);
-
+            getCurPage();
             MeasureBase* om = curMeasure;
             if (!layoutPage())
                   break;
@@ -334,6 +330,20 @@ System* ScoreLayout::getNextSystem(bool isFirstSystem, bool isVbox)
       }
 
 //---------------------------------------------------------
+//   getCurPage
+//---------------------------------------------------------
+
+void ScoreLayout::getCurPage()
+      {
+      Page* page = curPage >= _pages.size() ? addPage() : _pages[curPage];
+      page->setNo(curPage);
+      page->layout(this);
+      double x = (curPage == 0) ? 0.0 : _pages[curPage - 1]->pos().x()
+         + page->width() + ((curPage & 1) ? 1.0 : 50.0);
+      page->setPos(x, 0.0);
+      }
+
+//---------------------------------------------------------
 //   layoutPage
 //    return true, if next page must be relayouted
 //---------------------------------------------------------
@@ -341,8 +351,6 @@ System* ScoreLayout::getNextSystem(bool isFirstSystem, bool isVbox)
 bool ScoreLayout::layoutPage()
       {
       Page* page = _pages[curPage];
-
-      page->layout(this);
 
       // usable width of page:
       qreal w  = page->loWidth() - page->lm() - page->rm();
@@ -354,6 +362,7 @@ bool ScoreLayout::layoutPage()
       const double systemDistance = point(score()->style()->systemDistance);
 
       bool firstSystem = true;
+      int rows = 0;
       while (curMeasure) {
             if (curMeasure->type() == VBOX) {
                   System* system = getNextSystem(false, true);
@@ -374,7 +383,8 @@ bool ScoreLayout::layoutPage()
 
                   curMeasure = curMeasure->next();
                   ++curSystem;
-                  y += box->boxHeight() + systemDistance;
+                  y += box->boxHeight();
+                  ++rows;
                   }
             else {
                   bool isFirstSystem = false;
@@ -391,7 +401,7 @@ bool ScoreLayout::layoutPage()
                         abort();
                         }
 
-                  qreal h = sl.front()->bbox().height() + systemDistance;
+                  qreal h = sl.front()->bbox().height();
                   if (y + h > ey) {
                         // system does not fit on page: rollback
                         curMeasure = cm;
@@ -403,10 +413,11 @@ bool ScoreLayout::layoutPage()
                         page->appendSystem(system);
                         system->setYpos(y);
                         }
-                  y += h;
+                  y += (h + systemDistance);
                   if (sl.back()->pageBreak())
                         break;
                   firstSystem = false;
+                  ++rows;
                   }
             }
 
@@ -415,18 +426,26 @@ bool ScoreLayout::layoutPage()
       // then insert space between staffs to fill page
       //-----------------------------------------------------------------------
 
-      double restHeight = ey - y;
+      double restHeight = ey - y + systemDistance;
       double ph = page->height()
             - point(score()->style()->staffLowerBorder + score()->style()->staffUpperBorder);
 
       if (restHeight > (ph * score()->style()->pageFillLimit))
             return true;
 
-      double dist = restHeight / (page->systems()->size() - 1);
+      double dist = restHeight / (rows - 1);
       y = 0;
-      foreach(System* system, *page->systems()) {
+      int n = page->systems()->size();
+      for (int i = 0; ;) {
+            System* system = page->systems()->at(i);
+            double yy = system->pos().y();
             system->move(0, y);
-            y += dist;
+            ++i;
+            if (i >= n)
+                  break;
+            System* nsystem = page->systems()->at(i);
+            if (nsystem->pos().y() != yy)
+                  y += dist;                    // next system row
             }
       return true;
       }
@@ -675,7 +694,12 @@ QList<System*> ScoreLayout::layoutSystemRow(qreal x, qreal y, qreal rowWidth, bo
             system->setPos(xx + x, y);
             double w = pos.x();
             system->setWidth(w);
-            system->layout2(this);      // layout staves vertical
+            system->layout2(this);
+            foreach(MeasureBase* mb, system->measures()) {
+                  if (mb->type() == HBOX) {
+                        mb->setHeight(system->height());
+                        }
+                  }
             xx += w;
             }
       return sl;
