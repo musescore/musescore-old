@@ -193,13 +193,13 @@ void ScoreLayout::doLayout()
       //    remove remaining pages and systems
       //---------------------------------------------------
 
-      int n = _pages.size() - curPage - 1;
+      int n = _pages.size() - curPage;
       for (int i = 0; i < n; ++i) {
             Page* page = _pages.takeLast();
             delete page;
             }
 
-      n = _systems.size() - curSystem - 1;
+      n = _systems.size() - curSystem;
       for (int i = 0; i < n; ++i) {
             System* system = _systems.takeLast();
             delete system;

@@ -3,14 +3,14 @@
   <Spatium>1.5</Spatium>
   <Division>480</Division>
   <Mag>1.12721</Mag>
-  <xoff>-1174</xoff>
-  <yoff>-317</yoff>
+  <xoff>23</xoff>
+  <yoff>24</yoff>
   <Style>
-    <staffUpperBorder>8</staffUpperBorder>
-    <staffLowerBorder>4</staffLowerBorder>
-    <staffDistance>7.5</staffDistance>
+    <staffUpperBorder>7</staffUpperBorder>
+    <staffLowerBorder>7</staffLowerBorder>
+    <staffDistance>8.5</staffDistance>
     <akkoladeDistance>5.5</akkoladeDistance>
-    <systemDistance>16.5</systemDistance>
+    <systemDistance>16.25</systemDistance>
     <minMeasureWidth>4</minMeasureWidth>
     <barWidth>0.16</barWidth>
     <doubleBarWidth>0.16</doubleBarWidth>
@@ -773,7 +773,8 @@ p, li { white-space: pre-wrap; }
       </Segment>
     </HairPin>
   <Staff id="1">
-    <Measure number="1">
+    <VBox>
+      <height>125.916</height>
       <Text>
         <align>12</align>
         <xoffset>0</xoffset>
@@ -789,9 +790,9 @@ p, li { white-space: pre-wrap; }
 &lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Times New Roman&apos;; font-size:24pt;&quot;&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;For Guitar&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
         </Text>
       <Text>
-        <align>10</align>
+        <align>18</align>
         <xoffset>0</xoffset>
-        <yoffset>0.590551</yoffset>
+        <yoffset>0</yoffset>
         <anchor>page</anchor>
         <offsetType>absolute</offsetType>
         <spatiumSizeDependent>0</spatiumSizeDependent>
@@ -801,6 +802,8 @@ p, li { white-space: pre-wrap; }
 &lt;p align=&quot;right&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Dave Phillips 2005&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
         <subtype>Composer</subtype>
         </Text>
+      </VBox>
+    <Measure number="1">
       <Symbol>
         <name>clef eight</name>
         <offset x="128.065" y="127.884"/>
