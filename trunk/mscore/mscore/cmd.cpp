@@ -1640,7 +1640,11 @@ void Score::pasteStaff(QDomElement e, Measure* measure, int staffStart)
                               sm->read(ee, staffIdx);
                               cmdReplaceElements(sm, m, staffIdx);
                               delete sm;
-                              m = (Measure*)(m->next());
+                              MeasureBase* mb = m;
+                              do {
+                                    mb = mb->next();
+                                    } while (mb->type() != MEASURE);
+                              m = (Measure*)mb;
                               if (m == 0)
                                     break;
                               }

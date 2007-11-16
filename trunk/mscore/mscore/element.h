@@ -214,8 +214,8 @@ class Element {
       void setTrack(int val);
       void setVoice(int v)                    { _voice = v;    }
 
-      virtual void add(Element*)    {}
-      virtual void remove(Element*) {}
+      virtual void add(Element*);
+      virtual void remove(Element*);
       virtual void change(Element* o, Element* n) {
             remove(o);
             add(n);

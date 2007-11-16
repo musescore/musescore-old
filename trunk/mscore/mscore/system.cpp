@@ -348,6 +348,8 @@ void System::layout2(ScoreLayout* layout)
                   }
             y += sHeight + s->distance();
             }
+      qreal systemHeight = staff(staves-1)->bbox().bottom();
+      setHeight(systemHeight);
 
       //---------------------------------------------------
       //    layout bars
@@ -356,9 +358,6 @@ void System::layout2(ScoreLayout* layout)
       double staffY[staves];
       for (int i = 0; i < staves; ++i)
             staffY[i] = staff(i)->bbox().y();
-
-      qreal systemHeight = staff(staves-1)->bbox().bottom();
-      setHeight(systemHeight);
 
       foreach(MeasureBase* mb, ml) {
             if (mb->type() != MEASURE)
@@ -544,6 +543,7 @@ int System::y2staff(qreal y) const
             qreal y2 = b + 0.6 * (b - t);
             if (y >= y1 && y < y2)
                   return idx;
+            ++idx;
             }
       return -1;
       }

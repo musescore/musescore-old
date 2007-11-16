@@ -492,22 +492,18 @@ void Measure::layoutNoteHeads(int staff)
 
 void Measure::layout(ScoreLayout* layout, double width)
       {
-      if (first() == 0)
-            return;
-
       double _spatium = layout->spatium();
+
       int nstaves     = _score->nstaves();
       double staffY[nstaves];
-
       for (int staffIdx = 0; staffIdx < nstaves; ++staffIdx) {
             staffY[staffIdx] = system()->staff(staffIdx)->bbox().y();
             staves[staffIdx]->distance = 0.0;
             }
 
-      // height of boundingRect will be set
-      // in System::layout2()
-      setbbox(QRectF(0, 0, width, system()->height()));
+      // height of boundingRect will be set in system->layout2()
 
+      setbbox(QRectF(0.0, 0.0, width, 0.0));
       layoutX(layout, width);
 
       //---------------------------------------------------
@@ -1743,6 +1739,7 @@ Element* Measure::drop(const QPointF& p, const QPointF& /*offset*/, Element* e)
                   break;
 
             case STAFF_LIST:
+printf("drop staffList\n");
 //TODO                  score()->pasteStaff(e, this, idx);
                   delete e;
                   break;

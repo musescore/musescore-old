@@ -100,20 +100,13 @@ void Page::appendSystem(System* s)
       }
 
 //---------------------------------------------------------
-//   bbox
-//---------------------------------------------------------
-
-QRectF Page::bbox() const
-      {
-      return QRectF(0, 0, loWidth(), loHeight());
-      }
-
-//---------------------------------------------------------
 //   layout
 //---------------------------------------------------------
 
 void Page::layout(ScoreLayout* layout)
       {
+      setbbox(QRectF(0.0, 0.0, loWidth(), loHeight()));
+
       // add page number
       if (score()->style()->showPageNumber) {
             int n = no() + 1 + _score->_pageOffset;
@@ -155,8 +148,8 @@ void Page::layout(ScoreLayout* layout)
                         }
                   if (_copyright->getText() != _score->rights->toHtml()) {
                         _copyright->setHtml(_score->rights->toHtml());
-                        _copyright->layout(layout);
                         }
+                  _copyright->layout(layout);
                   }
             else if (_copyright) {
                   delete _copyright;

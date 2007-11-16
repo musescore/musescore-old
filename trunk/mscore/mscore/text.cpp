@@ -302,20 +302,26 @@ void Text::layout(ScoreLayout* layout)
       double tw = bbox().width();
       double th = bbox().height();
       double x  = 0.0;
-      double y = 0.0;
+      double y  = 0.0;
       if (_anchor == ANCHOR_PAGE) {
             double w = parent()->width();
             double h = parent()->height();
             doc->setTextWidth(w);
-
+            if (parent()->type() == PAGE) {
+                  Page* page = (Page*)parent();
+                  x = page->lm();
+                  y = page->tm();
+                  w -= (page->lm() + page->rm());
+                  h -= (page->tm() + page->bm());
+                  }
             if (_offsetType == OFFSET_REL)
                   _off = QPointF(_xoff * w * 0.01, _yoff * h * 0.01);
             if (_align & ALIGN_TOP)
-                  y = 0.0;
+                  ;
             else if (_align & ALIGN_BOTTOM)
-                  y = h - th;
+                  y += (h - th);
             else if (_align & ALIGN_VCENTER)
-                  y = h * .5 - th * .5;
+                  y += (h * .5 - th * .5);
             }
       else {
             if (_align & ALIGN_LEFT)

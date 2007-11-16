@@ -1172,7 +1172,7 @@ void Canvas::paint(const QRect& rr, QPainter& p)
 
             if (_score->sel->state() == SEL_SYSTEM) {
                   QPen pen(QColor(Qt::blue));
-                  pen.setWidthF(3.0 / p.matrix().m11());
+                  pen.setWidthF(2.0 / p.matrix().m11());
                   pen.setStyle(Qt::DotLine);
                   p.setPen(pen);
                   for (MeasureBase* m = sm; m && (m != em); m = m->next()) {
@@ -1781,7 +1781,6 @@ void Canvas::dropEvent(QDropEvent* event)
             _score->end();
             return;
             }
-
       QDomDocument doc;
       int line, column;
       QString err;

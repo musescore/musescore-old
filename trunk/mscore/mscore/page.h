@@ -83,10 +83,9 @@ class Page : public Element {
       Page(ScoreLayout*);
       virtual Page* clone() const        { return new Page(*this); }
       virtual ElementType type() const   { return PAGE; }
-      virtual QRectF bbox() const;
 
-      const QList<System*>* systems() const { return &_systems;   }
-      QList<System*>* systems()             { return &_systems;   }
+      const QList<System*>* systems() const  { return &_systems;   }
+      QList<System*>* systems()              { return &_systems;   }
 
       void appendSystem(System* s);
 

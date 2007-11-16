@@ -25,6 +25,7 @@
 #include "barline.h"
 #include "repeat.h"
 #include "viewer.h"
+#include "canvas.h"
 
 //---------------------------------------------------------
 //   Box
@@ -55,6 +56,9 @@ void Box::layout(ScoreLayout* layout)
 void Box::draw(QPainter& p) const
       {
       if (selected() || editMode || dropTarget()) {
+            QPen pen(QColor(Qt::blue));
+            pen.setWidthF(2.0 / p.matrix().m11());
+            p.setPen(pen);
             p.drawRect(bbox());
             }
       }
@@ -246,16 +250,14 @@ bool HBox::genPropertyMenu(QMenu* popup) const
 
 void HBox::propertyAction(const QString& cmd)
       {
-      printf("VBox:propertyAction <%s>\n", qPrintable(cmd));
-
       if (cmd == "frame-text") {
             Text* s = new Text(score());
             s->setSubtype(TEXT_FRAME);
             s->setParent(this);
-            s->setText("frame");          // debug
             score()->undoAddElement(s);
-            score()->setLayoutAll(true);
             score()->select(s, 0, 0);
+            score()->canvas()->startEdit(s);
+            score()->setLayoutAll(true);
             }
       }
 
@@ -266,18 +268,23 @@ void HBox::propertyAction(const QString& cmd)
 bool VBox::genPropertyMenu(QMenu* popup) const
       {
       QMenu* textMenu = popup->addMenu(tr("Add Text"));
+
       QAction* a = getAction("title-text");
       a->blockSignals(true);
       textMenu->addAction(a);
+
       a = getAction("subtitle-text");
       a->blockSignals(true);
       textMenu->addAction(a);
+
       a = getAction("composer-text");
       a->blockSignals(true);
       textMenu->addAction(a);
+
       a = getAction("poet-text");
       a->blockSignals(true);
       textMenu->addAction(a);
+
       return true;
       }
 
@@ -287,16 +294,29 @@ bool VBox::genPropertyMenu(QMenu* popup) const
 
 void VBox::propertyAction(const QString& cmd)
       {
-      printf("VBox:propertyAction <%s>\n", qPrintable(cmd));
-
+      Text* s = 0;
       if (cmd == "title-text") {
-            Text* s = new Text(score());
+            s = new Text(score());
             s->setSubtype(TEXT_TITLE);
+            }
+      else if (cmd == "subtitle-text") {
+            s = new Text(score());
+            s->setSubtype(TEXT_SUBTITLE);
+            }
+      else if (cmd == "composer-text") {
+            s = new Text(score());
+            s->setSubtype(TEXT_COMPOSER);
+            }
+      else if (cmd == "poet-text") {
+            s = new Text(score());
+            s->setSubtype(TEXT_POET);
+            }
+      if (s) {
             s->setParent(this);
-            s->setText("Title");
             score()->undoAddElement(s);
-            score()->setLayoutAll(true);
             score()->select(s, 0, 0);
+            score()->canvas()->startEdit(s);
+            score()->setLayoutAll(true);
             }
       getAction("title-text")->blockSignals(false);
       getAction("subtitle-text")->blockSignals(false);
