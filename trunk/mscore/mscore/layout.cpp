@@ -199,14 +199,14 @@ void ScoreLayout::doLayout()
 
       int n = _pages.size() - curPage - 1;
       for (int i = 0; i < n; ++i) {
-            delete _pages[curPage];
-            _pages.removeLast();
+            Page* page = _pages.takeLast();
+            delete page;
             }
 
       n = _systems.size() - curSystem - 1;
       for (int i = 0; i < n; ++i) {
-            delete _systems[curSystem];
-            _pages.removeLast();
+            System* system = _systems.takeLast();
+            delete system;
             }
 
       //---------------------------------------------------
@@ -773,9 +773,8 @@ void MeasureBaseList::erase(MeasureBase* el)
       --_size;
       if (el->prev())
             el->prev()->setNext(el->next());
-      else {
+      else
             _first = el->next();
-            }
       if (el->next())
             el->next()->setPrev(el->prev());
       else

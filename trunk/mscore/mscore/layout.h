@@ -49,7 +49,7 @@ class MeasureBaseList {
             };
       MeasureBase* first() const { return _first; }
       MeasureBase* last()  const { return _last; }
-      void clear()           { _first = _last = 0; }
+      void clear()               { _first = _last = 0; }
       void push_back(MeasureBase* e);
       void push_front(MeasureBase* e);
       void insert(MeasureBase*, MeasureBase*);
