@@ -91,7 +91,7 @@ void Box::editDrag(int, const QPointF&, const QPointF& d)
       if (type() == VBOX)
             _boxHeight += d.y();
       else
-            _boxWidth += d.y();
+            _boxWidth += d.x();
       score()->setLayoutAll(true);
       }
 

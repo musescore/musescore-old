@@ -472,15 +472,17 @@ PreferenceDialog::PreferenceDialog(QWidget* parent)
 //   portaudioApiActivated
 //---------------------------------------------------------
 
-void PreferenceDialog::portaudioApiActivated(int /*idx*/)
-      {
 #ifdef USE_PORTAUDIO
+void PreferenceDialog::portaudioApiActivated(int idx)
+      {
       Portaudio* audio = (Portaudio*)seq->audioDriver();
       QStringList devices = audio->deviceList(idx);
       portaudioDevice->clear();
       portaudioDevice->addItems(devices);
-#endif
       }
+#else
+void PreferenceDialog::portaudioApiActivated(int)  {}
+#endif
 
 //---------------------------------------------------------
 //   updateSCListView
