@@ -544,7 +544,7 @@ void MusicXml::xmlPart(QDomElement e, QString id)
       if (!score->mainLayout()->first()) {
             VBox* vbox  = new VBox(score);
             vbox->setTick(tick);
-            score->mainLayout()->push_back(vbox);
+            score->mainLayout()->add(vbox);
             if (!title.isEmpty()) {
                   Text* text = new Text(score);
                   text->setSubtype(TEXT_TITLE);
@@ -636,7 +636,7 @@ Measure* MusicXml::xmlMeasure(Part* part, QDomElement e, int number)
             measure  = new Measure(score);
             measure->setTick(tick);
             measure->setNo(number);
-            score->mainLayout()->push_back(measure);
+            score->mainLayout()->add(measure);
             }
 
       // initialize voice list

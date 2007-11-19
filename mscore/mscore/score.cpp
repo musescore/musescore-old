@@ -337,7 +337,8 @@ void Score::addMeasure(MeasureBase* m)
       {
       int tick    = m->tick();
       MeasureBase* im = tick2measureBase(tick);
-      _layout->insert(m, im);
+      m->setNext(im);
+      _layout->add(m);
       if (m->type() == MEASURE)
             fixTicks();
       }
@@ -348,7 +349,7 @@ void Score::addMeasure(MeasureBase* m)
 
 void Score::removeMeasure(MeasureBase* im)
       {
-      _layout->erase(im);
+      _layout->remove(im);
       fixTicks();
       }
 
@@ -789,7 +790,7 @@ void Score::readStaff(QDomElement e)
                   if (staff == 0) {
                         measure = new Measure(this);
                         measure->setTick(curTick);
-                        _layout->push_back(measure);
+                        _layout->add(measure);
                         }
                   else {
                         while (mb) {
@@ -806,7 +807,7 @@ void Score::readStaff(QDomElement e)
                               printf("Score::readStaff(): missing measure!\n");
                               measure = new Measure(this);
                               measure->setTick(curTick);
-                              _layout->push_back(measure);
+                              _layout->add(measure);
                               }
                         }
                   measure->read(e, staff);
@@ -816,13 +817,13 @@ void Score::readStaff(QDomElement e)
                   HBox* hbox = new HBox(this);
                   hbox->setTick(curTick);
                   hbox->read(e);
-                  _layout->push_back(hbox);
+                  _layout->add(hbox);
                   }
             else if (tag == "VBox") {
                   VBox* vbox = new VBox(this);
                   vbox->setTick(curTick);
                   vbox->read(e);
-                  _layout->push_back(vbox);
+                  _layout->add(vbox);
                   }
             else
                   domError(e);

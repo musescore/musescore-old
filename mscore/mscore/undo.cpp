@@ -979,6 +979,11 @@ void Score::addElement(Element* element)
             printf("   Score::addElement %p %s parent %s\n",
                element, element->name(), element->parent()->name());
 
+      if (element->type() == MEASURE || element->type() == HBOX || element->type() == VBOX) {
+            _layout->add(element);
+            return;
+            }
+
       element->parent()->add(element);
 
       if (element->type() == CLEF) {
@@ -1040,6 +1045,13 @@ void Score::removeElement(Element* element)
             printf("   Score::removeElement %p %s parent %p %s\n",
                element, element->name(), parent, parent->name());
 
+      // special for MEASURE, HBOX, VBOX
+      // their parent is not static
+
+      if (element->type() == MEASURE || element->type() == HBOX || element->type() == VBOX) {
+            _layout->remove(element);
+            return;
+            }
       parent->remove(element);
       if (element->type() == CLEF) {
             Clef* clef   = (Clef*)element;

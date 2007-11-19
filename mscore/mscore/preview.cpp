@@ -82,7 +82,7 @@ void PagePreview::setScore(Score* s)
             QDomElement e = doc.documentElement();
             e = e.firstChildElement();
             nm->read(e);
-            _layout->push_back(nm);
+            _layout->add(nm);
             }
       _layout->setScore(s);
       setMag();

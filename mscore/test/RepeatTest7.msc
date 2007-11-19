@@ -126,6 +126,8 @@ p, li { white-space: pre-wrap; }
       <off1 x="0.0536813" y="-4.51164"/>
       <off2 x="-1.68" y="0"/>
       </Segment>
+    <text>1.</text>
+    <endings>1</endings>
     </Volta>
   <Volta>
     <subtype>2</subtype>
@@ -136,6 +138,8 @@ p, li { white-space: pre-wrap; }
       <off1 x="0.151074" y="-4.43375"/>
       <off2 x="-0.24" y="0"/>
       </Segment>
+    <text>1.</text>
+    <endings>1</endings>
     </Volta>
   <Staff id="1">
     <Measure number="1">

@@ -148,8 +148,16 @@ void Box::write(Xml& xml, int) const
 
 void Box::read(QDomElement e)
       {
-      int curTickPos = e.attribute("tick", QString("%1").arg(score()->curTick)).toInt();
-      setTick(curTickPos);
+      score()->curTick = tick();
+
+      int curTickPos = 0;
+      int ct = e.attribute("tick", "-1").toInt();
+      if (ct >= 0) {
+            curTickPos = ct;
+            setTick(curTickPos);
+            }
+      score()->curTick = tick();
+
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             QString tag(e.tagName());
             QString val(e.text());

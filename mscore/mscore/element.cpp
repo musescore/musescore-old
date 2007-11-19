@@ -139,9 +139,6 @@ Element::Element(Score* s)
       init();
       setSubtype(0);
       _mag = 1.0;
-      // Added by DK
-//      setRepeatFlag(0x00);
-      //--------------------------
       }
 
 //---------------------------------------------------------

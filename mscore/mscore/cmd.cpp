@@ -922,7 +922,8 @@ Measure* Score::appendMeasure()
             s->add(rest);
             }
       undoOp(UndoOp::InsertMeasure, measure);
-      _layout->push_back(measure);
+      measure->setNext(0);
+      _layout->add(measure);
       layoutAll = true;
       return measure;
       }
