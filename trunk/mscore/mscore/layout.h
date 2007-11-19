@@ -41,6 +41,9 @@ class MeasureBaseList {
       MeasureBase* _first;
       MeasureBase* _last;
 
+      void push_back(MeasureBase* e);
+      void push_front(MeasureBase* e);
+
    public:
       MeasureBaseList() {
             _first = 0;
@@ -50,10 +53,8 @@ class MeasureBaseList {
       MeasureBase* first() const { return _first; }
       MeasureBase* last()  const { return _last; }
       void clear()               { _first = _last = 0; }
-      void push_back(MeasureBase* e);
-      void push_front(MeasureBase* e);
-      void insert(MeasureBase*, MeasureBase*);
-      void erase(MeasureBase*);
+      void add(MeasureBase*);
+      void remove(MeasureBase*);
       void change(MeasureBase* o, MeasureBase* n);
       };
 
@@ -115,24 +116,23 @@ class ScoreLayout : public Element {
 
       MeasureBase* first() const              { return _measures.first(); }
       MeasureBase* last()  const              { return _measures.last();  }
-      void push_back(MeasureBase* el)         { _measures.push_back(el);  }
       void clear()                            { _measures.clear(); }
-      void erase(MeasureBase* im);
-      void insert(MeasureBase* im, MeasureBase* m);
-      void change(MeasureBase* o, MeasureBase* n) { _measures.change(o, n); }
 
-      void setPaintDevice(QPaintDevice* d)    { _paintDevice = d; }
-      QPaintDevice* paintDevice() const       { return _paintDevice; }
+      void setPaintDevice(QPaintDevice* d)          { _paintDevice = d; }
+      QPaintDevice* paintDevice() const             { return _paintDevice; }
       QList<const Element*> items(const QRectF& r)  { return bspTree.items(r); }
       QList<const Element*> items(const QPointF& p) { return bspTree.items(p); }
+
       void setInstrumentNames();
       void connectTies();
       void searchHiddenNotes();
+
       QList<Element*>* gel()                  { return &_gel; }
       const QList<Element*>* gel() const      { return &_gel; }
 
       virtual void add(Element*);
       virtual void remove(Element*);
+      virtual void change(Element* o, Element* n);
 
       friend class Score;
       };

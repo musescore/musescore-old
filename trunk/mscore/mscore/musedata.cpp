@@ -519,7 +519,7 @@ Measure* MuseData::createMeasure()
 	            measure->setEndBarLine(barLine);
       	      }
             }
-      la->push_back(measure);
+      la->add(measure);
       return measure;
       }
 

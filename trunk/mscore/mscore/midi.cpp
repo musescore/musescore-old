@@ -1080,7 +1080,7 @@ if (tick)
 	                  measure->setEndBarLine(barLine);
       	            }
                   }
-      	_layout->push_back(measure);
+      	_layout->add(measure);
             }
 
 	foreach (MidiTrack* midiTrack, *tracks)

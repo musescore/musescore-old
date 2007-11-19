@@ -2307,7 +2307,8 @@ void Measure::read(QDomElement e, int idx)
                               if (measure->type() != VBOX) {
                                     measure = new VBox(score());
                                     measure->setTick(0);
-                                    layout->insert(measure, layout->first());
+                                    measure->setNext(layout->first());
+                                    layout->add(measure);
                                     }
                               measure->add(t);
                               }

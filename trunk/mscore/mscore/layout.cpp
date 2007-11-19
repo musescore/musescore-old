@@ -767,12 +767,13 @@ void MeasureBaseList::push_front(MeasureBase* e)
       }
 
 //---------------------------------------------------------
-//   insert
-//    insert e before el
+//   add
+//    insert e before e->next()
 //---------------------------------------------------------
 
-void MeasureBaseList::insert(MeasureBase* e, MeasureBase* el)
+void MeasureBaseList::add(MeasureBase* e)
       {
+      MeasureBase* el = e->next();
       if (el == 0) {
             push_back(e);
             return;
@@ -792,7 +793,7 @@ void MeasureBaseList::insert(MeasureBase* e, MeasureBase* el)
 //   erase
 //---------------------------------------------------------
 
-void MeasureBaseList::erase(MeasureBase* el)
+void MeasureBaseList::remove(MeasureBase* el)
       {
       --_size;
       if (el->prev())
@@ -942,25 +943,6 @@ void ScoreLayout::searchHiddenNotes()
             }
       }
 
-
-//---------------------------------------------------------
-//   erase
-//---------------------------------------------------------
-
-void ScoreLayout::erase(MeasureBase* im)
-      {
-      _measures.erase(im);
-      }
-
-//---------------------------------------------------------
-//   insert
-//---------------------------------------------------------
-
-void ScoreLayout::insert(MeasureBase* im, MeasureBase* m)
-      {
-      _measures.insert(im, m);
-      }
-
 //---------------------------------------------------------
 //   reLayout
 //---------------------------------------------------------
@@ -976,8 +958,13 @@ void ScoreLayout::reLayout(Measure*)
 
 void ScoreLayout::add(Element* el)
       {
-      el->setParent(this);
-      _gel.append(el);
+      if (el->type() == MEASURE || el->type() == HBOX || el->type() == VBOX) {
+            _measures.add((MeasureBase*)el);
+            }
+      else {
+            el->setParent(this);
+            _gel.append(el);
+            }
       }
 
 //---------------------------------------------------------
@@ -986,9 +973,29 @@ void ScoreLayout::add(Element* el)
 
 void ScoreLayout::remove(Element* el)
       {
-      int idx = _gel.indexOf(el);
-      if (idx == -1)
-            printf("ScoreLayout::remove(): element not found\n");
-      else
-            _gel.removeAt(idx);
+      if (el->type() == MEASURE || el->type() == HBOX || el->type() == VBOX) {
+            _measures.remove((MeasureBase*)el);
+            }
+      else {
+            int idx = _gel.indexOf(el);
+            if (idx == -1)
+                  printf("ScoreLayout::remove(): element not found\n");
+            else
+                  _gel.removeAt(idx);
+            }
       }
+
+//---------------------------------------------------------
+//   change
+//---------------------------------------------------------
+
+void ScoreLayout::change(Element* o, Element* n)
+      {
+      if (n->type() == MEASURE || n->type() == HBOX || n->type() == VBOX)
+            _measures.change((MeasureBase*)o, (MeasureBase*)n);
+      else {
+            remove(o);
+            add(n);
+            }
+      }
+

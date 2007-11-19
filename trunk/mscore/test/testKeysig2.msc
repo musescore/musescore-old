@@ -142,7 +142,8 @@
       </Instrument>
     </Part>
   <Staff id="1">
-    <Measure number="1">
+    <VBox>
+      <height>83.3333</height>
       <Text>
         <align>12</align>
         <xoffset>0</xoffset>
@@ -168,6 +169,8 @@ p, li { white-space: pre-wrap; }
 &lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Key Signatures&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
         <subtype>Subtitle</subtype>
         </Text>
+      </VBox>
+    <Measure number="1">
       <Rest>
         <ticklen>1920</ticklen>
         </Rest>

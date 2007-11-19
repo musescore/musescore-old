@@ -454,3 +454,32 @@ void Page::clear()
       _systems.clear();
       }
 
+//---------------------------------------------------------
+//   add
+//---------------------------------------------------------
+
+void Page::add(Element* e)
+      {
+      if (e->type() == TEXT && e->subtype() == TEXT_COPYRIGHT) {
+            e->setParent(this);
+            _copyright = (Text*)e;
+            }
+      else {
+            printf("cannot add %s to %s\n", e->name(), name());
+            }
+      }
+
+//---------------------------------------------------------
+//   remove
+//---------------------------------------------------------
+
+void Page::remove(Element* e)
+      {
+      if (e->type() == TEXT && e->subtype() == TEXT_COPYRIGHT) {
+            if (_copyright == e)
+                  _copyright = 0;
+            }
+      else {
+            printf("cannot remove %s from %s\n", e->name(), name());
+            }
+      }

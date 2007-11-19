@@ -84,7 +84,7 @@ const TextStyle defaultTextStyleArray[] = {
       TextStyle(QString("Metronome"), ff, 12, true, false, false,
          ALIGN_LEFT,    ANCHOR_STAFF, 0, 0, OFFSET_SPATIUM),
 
-      TextStyle(QString("Copyright"), ff, 8, true, false, false,
+      TextStyle(QString("Copyright"), ff, 8, false, false, false,
          ALIGN_HCENTER | ALIGN_BOTTOM,    ANCHOR_PAGE, 0, MM(1), OFFSET_ABS),
 
       TextStyle(QString("Measure Number"), ff, 8, false, false, false,

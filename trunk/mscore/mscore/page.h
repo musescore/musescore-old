@@ -84,6 +84,9 @@ class Page : public Element {
       virtual Page* clone() const        { return new Page(*this); }
       virtual ElementType type() const   { return PAGE; }
 
+      virtual void add(Element*);
+      virtual void remove(Element*);
+
       const QList<System*>* systems() const  { return &_systems;   }
       QList<System*>* systems()              { return &_systems;   }
 

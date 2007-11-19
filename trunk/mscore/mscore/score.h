@@ -158,6 +158,31 @@ class Score : public QObject {
       void move(const QString& cmd);
       Measure* appendMeasure();
       void collectMeasureEvents(QMap<int, Event>*, Measure*, int staffIdx, int tickOffset);
+      void padToggle(int n);
+      void appendMeasures(int);
+      void insertMeasures(int, int);
+
+      void cmdAddPitch(int, bool);
+      void cmdAddInterval(int);
+      void pageBreak();
+      void systemBreak();
+
+      void printFile();
+      void addLyrics();
+      void addTempo();
+      void addMetronome();
+
+   public slots:
+      void doUndo();
+      void doRedo();
+      void processUndoOp(UndoOp*, bool);
+
+      void midiReceived();
+      void resetUserOffsets();
+      void resetUserStretch();
+
+   signals:
+      void selectionChanged(int);
 
    public:
       int curTick;      // used for read()/write() optimization
@@ -187,34 +212,15 @@ class Score : public QObject {
       System* dragSystem;     ///< Valid if DRAG_STAFF.
       int dragStaff;
 
-      void cmdAddPitch(int, bool);
-      void cmdAddInterval(int);
-
-   public slots:
-      void printFile();
       void cmdAppendMeasures(int);
-      void appendMeasures(int);
-      void insertMeasures(int, int);
       void cmdInsertMeasures(int);
-      void padToggle(int n);
-      void doUndo();
-      void doRedo();
-      void processUndoOp(UndoOp*, bool);
-
-      void addLyrics();
-      void addTempo();
-      void addMetronome();
-
-      void cmdTuplet(int);
-      void midiReceived();
-      void resetUserOffsets();
-      void resetUserStretch();
-
-      void pageBreak();
-      void systemBreak();
-
-   signals:
-      void selectionChanged(int);
+      bool noStaves() const         { return _staves.empty(); }
+      void insertPart(Part*, int);
+      void removePart(Part*);
+      void insertStaff(Staff*, int);
+      void removeStaff(Staff*);
+      void addMeasure(MeasureBase*);
+      void removeMeasure(MeasureBase*);
 
    public:
       Score();
@@ -226,23 +232,16 @@ class Score : public QObject {
 
       QList<Staff*>& staves()       { return _staves; }
       int nstaves() const           { return _staves.size(); }
-      bool noStaves() const         { return _staves.empty(); }
 
       int staff(const Part*) const;
       Staff* staff(int n) const     { return _staves[n]; }
 
+      void cmdTuplet(int);
       void cmdInsertPart(Part*, int);
-      void insertPart(Part*, int);
       void cmdRemovePart(Part*);
-      void removePart(Part*);
-      void insertStaff(Staff*, int);
-      void removeStaff(Staff*);
       void cmdReplaceElements(Measure* sm, Measure* dm, int staffIdx);
 
       Part* part(int staff);
-
-      void addMeasure(MeasureBase*);
-      void removeMeasure(MeasureBase*);
 
       MeasureBase* pos2measure(const QPointF&, int* tick, Staff** staff, int* pitch,
          Segment**, QPointF* offset) const;

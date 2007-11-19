@@ -115,7 +115,8 @@
       </Instrument>
     </Part>
   <Staff id="1">
-    <Measure number="1">
+    <VBox>
+      <height>121.333</height>
       <Text>
         <align>12</align>
         <xoffset>0</xoffset>
@@ -129,6 +130,8 @@ p, li { white-space: pre-wrap; }
 &lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Times New Roman&apos;; font-size:24pt;&quot;&gt;Chromatische Tonleiter&lt;/p&gt;
 &lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Times New Roman&apos;; font-size:24pt;&quot;&gt;Test&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
         </Text>
+      </VBox>
+    <Measure number="1">
       <Note pitch="60" tpc="14" ticks="480"/>
       <Note pitch="61" tpc="21" ticks="480"/>
       <Note pitch="62" tpc="16" ticks="480"/>
