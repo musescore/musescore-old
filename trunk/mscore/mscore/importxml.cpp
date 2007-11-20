@@ -345,6 +345,27 @@ void MusicXml::scorePartwise(QDomElement e)
             else
                   domError(e);
             }
+
+      // add bracket where required
+      const QList<Part*>* il = score->parts();
+      // add bracket to multi-staff parts
+      /* LVIFIX TODO is this necessary ?
+      for (int idx = 0; idx < il->size(); ++idx) {
+            Part* part = il->at(idx);
+            printf("part %d staves=%d\n", idx, part->nstaves());
+            if (part->nstaves() > 1)
+                  part->staff(0)->addBracket(BracketItem(BRACKET_AKKOLADE, part->nstaves()));
+            }
+      */
+      for (int i = 0; i < (int) partGroupList.size(); i++) {
+            MusicXmlPartGroup* pg = partGroupList[i];
+            // determine span in staves
+            int stavesSpan = 0;
+            for (int j = 0; j < pg->span; j++)
+                  stavesSpan += il->at(pg->start + j)->nstaves();
+            // and add bracket
+            il->at(pg->start)->staff(0)->addBracket(BracketItem(pg->type, stavesSpan));
+            }
       }
 
 //---------------------------------------------------------
@@ -400,7 +421,8 @@ static void partGroupStart(MusicXmlPartGroup* (&pgs)[MAX_PART_GROUPS], int n, in
  To generate brackets, the span in staves must also be known.
  */
 
-static void partGroupStop(MusicXmlPartGroup* (&pgs)[MAX_PART_GROUPS], int n, int p)
+static void partGroupStop(MusicXmlPartGroup* (&pgs)[MAX_PART_GROUPS], int n, int p,
+                          std::vector<MusicXmlPartGroup*> &pgl)
       {
 //      printf("partGroupStop number=%d part=%d\n", n, p);
       if (n < 0 || n >= MAX_PART_GROUPS) {
@@ -414,10 +436,9 @@ static void partGroupStop(MusicXmlPartGroup* (&pgs)[MAX_PART_GROUPS], int n, int
             }
 
       pgs[n]->span = p - pgs[n]->start;
-      printf("part-group number=%d start=%d span=%d type=%d\n",
-             n, pgs[n]->start, pgs[n]->span, pgs[n]->type);
-      // LVIFIX TODO add pg[n] to a vector for safe storage until later
-      // (staff size in staves is unknown at this time)
+//      printf("part-group number=%d start=%d span=%d type=%d\n",
+//             n, pgs[n]->start, pgs[n]->span, pgs[n]->type);
+      pgl.push_back(pgs[n]);
       pgs[n] = 0;
       }
 
@@ -454,7 +475,7 @@ void MusicXml::xmlPartList(QDomElement e)
                   if (type == "start")
                         partGroupStart(partGroups, number, scoreParts, symbol);
                   else if (type == "stop")
-                        partGroupStop(partGroups, number, scoreParts);
+                        partGroupStop(partGroups, number, scoreParts, partGroupList);
                   else
                         printf("Import MusicXml:xmlPartList: part-group type '%s' not supported\n",
                                type.toLatin1().data());
