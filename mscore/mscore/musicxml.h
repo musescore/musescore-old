@@ -90,6 +90,7 @@ class MusicXml {
       QString translator;
 
       std::vector<MusicXmlWedge> wedgeList;
+      std::vector<MusicXmlPartGroup*> partGroupList;
 
       //-----------------------------
 
