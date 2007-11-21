@@ -1401,12 +1401,19 @@ void ExportMusicXml::chord(Chord* chord, int staff, const LyricsList* ll)
             for (int ni = dots; ni > 0; ni--)
                   xml.tagE("dot");
 
-          // accidental
+            // accidental
+            // Note: in Binchois.xml two accidentals have parentheses which are encoded
+            // as editorial="yes". Wikipedia calls this a cautionary accidental.
+            // Brackets/parenthese are controlled by the level-display entity (DTD 1.1)
             bool editorial = false;
             int acc        = note->accidentalSubtype();
             if (acc != ACC_NONE) {
                   if (6 <= acc && acc <= 10) {
                         acc -= 5;
+                        editorial = true;
+                        }
+                  else if (11 <= acc && acc <= 15) {
+                        acc -= 10;
                         editorial = true;
                         }
                   QString s;

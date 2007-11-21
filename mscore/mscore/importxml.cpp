@@ -1460,6 +1460,7 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
       int alter  = 0;
       int octave = 4;
       int accidental = 0;
+      bool editorial = false;
       DurationType durationType = D_QUARTER;
       bool trillMark = false;
       QString strongAccentType;
@@ -1605,7 +1606,8 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
             else if (tag == "dot")
                   ++dots;
             else if (tag == "accidental") {
-                  QString editorial = e.attribute(QString("editorial"));
+                  if (e.attribute(QString("editorial")) == "yes")
+                        editorial = true;
                   if (s == "natural")
                         accidental = 5;
                   else if (s == "flat")
@@ -1632,8 +1634,6 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
                         ;
                   else
                         printf("unknown accidental %s\n", s.toLatin1().data());
-                  if (1 <= accidental && accidental <= 5 && editorial == "yes")
-                        accidental += 5;
                   }
             else if (tag == "notations") {
                   for (QDomElement ee = e.firstChildElement(); !ee.isNull(); ee = ee.nextSiblingElement()) {
@@ -1874,6 +1874,8 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
 //            printf("staff for new note: %p (staff=%d, relStaff=%d)\n",
 //                   score->staff(staff + relStaff), staff, relStaff);
             xmlSetPitch(note, tick, c, alter, octave, accidental);
+            if (accidental && editorial)
+                  note->changeAccidental(accidental + 5);
 
             if (cr->beamMode() == BEAM_NO)
                   cr->setBeamMode(bm);

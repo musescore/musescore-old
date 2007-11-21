@@ -1,3 +1,6 @@
+21.11.7 (lv)
+      - MusicXML import of editorial accidentals
+      - fixed export of editorial accidentals in .msc
 20.11.7 (lv)
       - MusicXML import of part-groups
 19.11.7 (ws)

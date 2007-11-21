@@ -474,7 +474,8 @@ bool Note::isSimple(Xml& xml) const
             return false;
       return (pl.empty() && _fingering.empty() && _tieFor == 0 && _move == 0
          && _headGroup == 0
-         && _small == false);
+         && _small == false
+         && _userAccidental == 0);
       }
 
 //---------------------------------------------------------
