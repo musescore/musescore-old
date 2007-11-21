@@ -131,8 +131,8 @@ int Accidental::subtype2value(int st)
             2,  // ACC_SHARP2
             -2, // ACC_FLAT2
             0,  // ACC_NAT
-            0, 0, 0, 0, 0,  // () brackets
-            0, 0, 0, 0, 0,  // [] brackets
+            1, -1, 2, -2, 0,  // () brackets
+            1, -1, 2, -2, 0,  // [] brackets
             };
       st %= ACC_SMALL;
 
