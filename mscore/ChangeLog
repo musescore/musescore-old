@@ -1,3 +1,6 @@
+25.11.7 (lv)
+      - fixed MusicXML import/export of barstyles and voltas
+      - new testfile testVolta1.xml
 21.11.7 (lv)
       - MusicXML import of editorial accidentals
       - fixed export of editorial accidentals in .msc

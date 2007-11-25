@@ -96,27 +96,6 @@ static void xmlSetPitch(Note* n, int /*tick*/, char step, int alter, int octave,
       }
 
 //---------------------------------------------------------
-//   xml2voltaType
-//---------------------------------------------------------
-
-/**
- Convert MusicXML ending number to volta subtype
- and return subtype (1..3) or 0 on failure
- */
-
-static int xml2voltaType(QString en)
-      {
-      int res = 0;
-      if (en == "1")
-            res = 1;
-      else if (en == "2")
-            res = 2;
-      else if (en == "3")
-            res = 3;
-      return res;
-      }
-
-//---------------------------------------------------------
 //   MusicXml
 //---------------------------------------------------------
 
@@ -793,9 +772,7 @@ Measure* MusicXml::xmlMeasure(Part* part, QDomElement e, int number)
                               printf("unsupported bar type <%s>\n", barStyle.toLatin1().data());
                         barLine->setStaff(score->staff(staff));
                         if (barLine->subtype() == START_REPEAT) {
-                              barLine->setTick(measure->tick());
-                              Segment* s = measure->getSegment(barLine);
-                              s->add(barLine);
+                              measure->setRepeatFlags(RepeatStart);
                               }
                         else
                               measure->setEndBarLine(barLine);
@@ -806,24 +783,30 @@ Measure* MusicXml::xmlMeasure(Part* part, QDomElement e, int number)
                         else if (endingType.isEmpty())
                               printf("ImportXml: warning: empty ending type\n");
                         else {
-                              int subtype = xml2voltaType(endingNumber);
-                              if (!subtype)
-                                    printf("ImportXml: warning: unsupported ending type <%s>\n",
-                                            endingType.toLatin1().data());
+                              int iEendingNumber = endingNumber.toInt();
+                              if (iEendingNumber <= 0)
+                                    printf("ImportXml: warning: unsupported ending number <%s>\n",
+                                            endingNumber.toLatin1().data());
                               else {
                                     if (endingType == "start") {
                                           Volta* volta = new Volta(score);
                                           volta->setStaff(score->staff(staff));
-                                          volta->setSubtype(subtype);
-                                          measure->add(volta);
+                                          volta->setTick(tick);
+                                          volta->setText(endingNumber);
+                                          // LVIFIX TODO also support endings "1, 2" and "1 - 3"
+                                          volta->endings().clear();
+                                          volta->endings().append(iEendingNumber);
+                                          score->mainLayout()->add(volta);
                                           lastVolta = volta;
                                           }
                                     else if (endingType == "stop") {
+                                          lastVolta->setTick2(tick);
+                                          lastVolta->setSubtype(Volta::VOLTA_CLOSED);
                                           lastVolta = 0;
                                           }
                                     else if (endingType == "discontinue") {
-                                          if ((subtype == 2) && lastVolta && (lastVolta->subtype() == 2))
-                                                lastVolta->setSubtype(4);
+                                          lastVolta->setTick2(tick);
+                                          lastVolta->setSubtype(Volta::VOLTA_OPEN);
                                           lastVolta = 0;
                                           }
                                     else

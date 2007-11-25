@@ -70,6 +70,7 @@ testTimesig1.xml         all supported simple time signatures
 testTimesig3.xml         the more difficult time signatures
 testTremolo.xml          tremolo
 testVoicePiano1.xml      score with both a voice and a piano part
+testVolta1.xml           simple (one-measure) volta's
 testWedge1.xml           crescendo and diminuendo wedges
 testWords1.xml           the "words" direction
 
