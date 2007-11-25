@@ -56,7 +56,7 @@ enum ElementType {
       REPEAT_MEASURE,
       IMAGE,
       TIE,
-/*18*/ATTRIBUTE, DYNAMIC, PAGE, BEAM, HOOK, LYRICS, REPEAT,
+/*18*/ATTRIBUTE, DYNAMIC, PAGE, BEAM, HOOK, LYRICS, MARKER, JUMP,
       TUPLET, VSPACER,
       TEMPO_TEXT,
       VOLTA,
@@ -197,6 +197,7 @@ class Element {
       virtual bool isMovable() const          { return false; }
       virtual QRectF drag(const QPointF& s);
       virtual void endDrag()                  {}
+      virtual QLineF dragAnchor() const      { return QLineF(); }
 
       virtual bool startEdit(const QPointF&);
       virtual bool edit(int, QKeyEvent*);

@@ -21,8 +21,9 @@
 #ifndef __REPEAT_H__
 #define __REPEAT_H__
 
-#include "symbol.h"
-#include "measure.h"
+#include "text.h"
+
+class Score;
 
 //---------------------------------------------------------
 //   RepeatMeasure
@@ -42,55 +43,63 @@ class RepeatMeasure : public Element {
       virtual void read(QDomElement);
       };
 
-enum RepeatType {
-      RepeatNo             = 0,
-      RepeatSegno          = 1 << 0,
-      RepeatCoda           = 1 << 1,
-      RepeatVarcoda        = 1 << 2,
-      RepeatCodetta        = 1 << 3,
-      RepeatDacapo         = 1 << 4,
-      RepeatDacapoAlFine   = 1 << 5,
-      RepeatDacapoAlCoda   = 1 << 6,
-      RepeatDalSegno       = 1 << 7,
-      RepeatDalSegnoAlFine = 1 << 8,
-      RepeatDalSegnoAlCoda = 1 << 9,
-      RepeatAlSegno        = 1 << 10,
-      RepeatFine           = 1 << 11,
-      RepeatStart          = 1 << 12,
-      RepeatEnd            = 1 << 13,
-      RepeatMeasureFlag    = 1 << 14
-      };
-
 //---------------------------------------------------------
-//   Repeat
+//   Marker
 //---------------------------------------------------------
 
-class Repeat : public Element {
-      Q_DECLARE_TR_FUNCTIONS(Measure)
+class Marker : public Text {
+      Q_DECLARE_TR_FUNCTIONS(Marker)
 
-      static QMap<QString, int> mapSI;
-      static QMap<int, QString> mapIS;
-      static bool initialized;
-
-      virtual bool isMovable() const { return true; }
+      QString _label;               ///< referenced from Jump() element
+      virtual bool isMovable() const   { return true; }
 
    public:
-      Repeat(Score*);
+      Marker(Score*);
 
-      virtual Repeat* clone() const    { return new Repeat(*this); }
-      virtual ElementType type() const { return REPEAT; }
-
-      virtual void draw(QPainter&) const;
-      virtual QRectF bbox() const;
+      virtual Marker* clone() const    { return new Marker(*this); }
+      virtual ElementType type() const { return MARKER; }
 
       virtual void read(QDomElement);
       virtual void write(Xml& xml) const;
 
-      virtual const QString subtypeName() const;
-      virtual void setSubtype(const QString& s);
+      virtual bool genPropertyMenu(QMenu*) const;
+      virtual void propertyAction(const QString&);
+
+      QString label() const            { return _label; }
+      void setLabel(const QString& s)  { _label = s; }
+      };
+
+//---------------------------------------------------------
+//   Jump
+//---------------------------------------------------------
+
+class Jump : public Text {
+      Q_DECLARE_TR_FUNCTIONS(Jump)
+
+      QString _jumpTo;
+      QString _playUntil;
+      QString _continueAt;
+
+      virtual bool isMovable() const { return true; }
+
+   public:
+      Jump(Score*);
+
+      virtual Jump* clone() const      { return new Jump(*this); }
+      virtual ElementType type() const { return JUMP; }
+
+      virtual void read(QDomElement);
+      virtual void write(Xml& xml) const;
 
       virtual bool genPropertyMenu(QMenu*) const;
       virtual void propertyAction(const QString&);
+
+      QString jumpTo()               const { return _jumpTo;     }
+      QString playUntil()            const { return _playUntil;  }
+      QString continueAt()           const { return _continueAt; }
+      void setJumpTo(const QString& s)     { _jumpTo = s;        }
+      void setPlayUntil(const QString& s)  { _playUntil = s;     }
+      void setContinueAt(const QString& s) { _continueAt = s;    }
       };
 
 #endif

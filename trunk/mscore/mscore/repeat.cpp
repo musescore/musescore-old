@@ -22,31 +22,56 @@
 #include "layout.h"
 #include "sym.h"
 #include "score.h"
-#include "repeatproperties.h"
+#include "jumpproperties.h"
+#include "markerproperties.h"
 
-struct RepeatDict {
-      int type;
-      const char* name;
-      };
+//---------------------------------------------------------
+//   JumpProperties
+//---------------------------------------------------------
 
-static RepeatDict rdict[] = {
-      { RepeatSegno,          "segno"           },
-      { RepeatCoda,           "coda"            },
-      { RepeatVarcoda,        "varcoda"         },
-      { RepeatCodetta,        "codetta"         },
-      { RepeatDacapo,         "daCapo"          },
-      { RepeatDacapoAlFine,   "daCapoAlFine"    },
-      { RepeatDacapoAlCoda,   "daCapoAlCoda"    },
-      { RepeatDalSegno,       "dalSegno"        },
-      { RepeatDalSegnoAlFine, "dalSegnoAlFine"  },
-      { RepeatDalSegnoAlCoda, "dalSegnoAlCoda"  },
-      { RepeatAlSegno,        "alSegno"         },
-      { RepeatFine,           "fine"            },
-      };
+JumpProperties::JumpProperties(Jump* jp, QWidget* parent)
+   : QDialog(parent)
+      {
+      jump = jp;
+      setupUi(this);
+      jumpTo->setText(jump->jumpTo());
+      playUntil->setText(jump->playUntil());
+      continueAt->setText(jump->continueAt());
+      connect(this, SIGNAL(accepted()), SLOT(saveValues()));
+      }
 
-QMap<QString, int> Repeat::mapSI;
-QMap<int, QString> Repeat::mapIS;
-bool Repeat::initialized = false;
+//---------------------------------------------------------
+//   saveValues
+//---------------------------------------------------------
+
+void JumpProperties::saveValues()
+      {
+      jump->setJumpTo(jumpTo->text());
+      jump->setPlayUntil(playUntil->text());
+      jump->setContinueAt(continueAt->text());
+      }
+
+//---------------------------------------------------------
+//   MarkerProperties
+//---------------------------------------------------------
+
+MarkerProperties::MarkerProperties(Marker* mk, QWidget* parent)
+   : QDialog(parent)
+      {
+      marker = mk;
+      setupUi(this);
+      label->setText(marker->label());
+      connect(this, SIGNAL(accepted()), SLOT(saveValues()));
+      }
+
+//---------------------------------------------------------
+//   saveValues
+//---------------------------------------------------------
+
+void MarkerProperties::saveValues()
+      {
+      marker->setLabel(label->text());
+      }
 
 //---------------------------------------------------------
 //   RepeatMeasure
@@ -118,29 +143,28 @@ void RepeatMeasure::read(QDomElement e)
       }
 
 //---------------------------------------------------------
-//   Repeat
+//   Marker
 //---------------------------------------------------------
 
-Repeat::Repeat(Score* s)
-   : Element(s)
+Marker::Marker(Score* s)
+   : Text(s)
       {
-      if (!initialized) {
-            for (unsigned int i = 0; i < sizeof(rdict)/sizeof(*rdict); ++i) {
-                  mapSI[rdict[i].name] = rdict[i].type;
-                  mapIS[rdict[i].type] = rdict[i].name;
-                  }
-            }
+      setSubtype(TEXT_REPEAT);
       }
 
 //---------------------------------------------------------
 //   read
 //---------------------------------------------------------
 
-void Repeat::read(QDomElement e)
+void Marker::read(QDomElement e)
       {
+      setAlign(0);
+      setAnchor(ANCHOR_PARENT);
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             QString tag(e.tagName());
-            if (!Element::readProperties(e))
+            if (tag == "label")
+                  _label = e.text();
+            else if (!Text::readProperties(e))
                   domError(e);
             }
       }
@@ -149,137 +173,19 @@ void Repeat::read(QDomElement e)
 //   write
 //---------------------------------------------------------
 
-void Repeat::write(Xml& xml) const
+void Marker::write(Xml& xml) const
       {
-      xml.stag("Repeat");
-      Element::writeProperties(xml);
+      xml.stag(name());
+      Text::writeProperties(xml);
+      xml.tag("label", _label);
       xml.etag();
-      }
-
-//---------------------------------------------------------
-//   subtypeName
-//---------------------------------------------------------
-
-const QString Repeat::subtypeName() const
-      {
-      return mapIS[subtype()];
-      }
-
-//---------------------------------------------------------
-//   setSubtype
-//---------------------------------------------------------
-
-void Repeat::setSubtype(const QString& s)
-      {
-      Element::setSubtype(mapSI[s]);
-      }
-
-//---------------------------------------------------------
-//   draw
-//---------------------------------------------------------
-
-void Repeat::draw(QPainter& p) const
-      {
-      TextStyle* ts = score()->textStyle(TEXT_STYLE_REPEAT);
-      QFont font = ts->font();
-      p.setFont(ts->font());
-
-      switch(subtype()) {
-            case RepeatSegno:
-                  symbols[segnoSym].draw(p);
-                  break;
-            case RepeatCoda:
-                  symbols[codaSym].draw(p);
-                  break;
-            case RepeatVarcoda:
-                  symbols[varcodaSym].draw(p);
-                  break;
-            case RepeatCodetta:
-                  symbols[codaSym].draw(p, 0.0, 0.0, 2);
-                  break;
-            case RepeatDacapo:
-                  p.drawText(0, 0, "D.C.");
-                  break;
-            case RepeatDacapoAlFine:
-                  p.drawText(0, 0, "D.C. al fine");
-                  break;
-            case RepeatDacapoAlCoda:
-                  p.drawText(0, 0, "D.C. al coda");
-                  break;
-            case RepeatDalSegno:
-                  p.drawText(0, 0, "D.S.");
-                  break;
-            case RepeatDalSegnoAlFine:
-                  p.drawText(0, 0, "D.S. al fine");
-                  break;
-            case RepeatDalSegnoAlCoda:
-                  p.drawText(0, 0, "D.S. al coda");
-                  break;
-            case RepeatAlSegno:
-                  p.drawText(0, 0, "al segno");
-                  break;
-            case RepeatFine:
-                  p.drawText(0, 0, "fine");
-                  break;
-            }
-      }
-
-//---------------------------------------------------------
-//   bbox
-//---------------------------------------------------------
-
-QRectF Repeat::bbox() const
-      {
-      TextStyle* ts = score()->textStyle(TEXT_STYLE_REPEAT);
-
-      QRectF bb;
-      switch(subtype()) {
-            case RepeatSegno:
-                  bb = symbols[segnoSym].bbox();
-                  break;
-            case RepeatCoda:
-                  bb = symbols[codaSym].bbox();
-                  break;
-            case RepeatVarcoda:
-                  bb = symbols[varcodaSym].bbox();
-                  break;
-            case RepeatCodetta:
-                  bb = symbols[segnoSym].bbox();
-                  bb |= bb.translated(symbols[segnoSym].width(), 0.0);
-                  break;
-            case RepeatDacapo:
-                  bb = ts->bbox("D.C.");
-                  break;
-            case RepeatDacapoAlFine:
-                  bb = ts->bbox("D.C. al fine");
-                  break;
-            case RepeatDacapoAlCoda:
-                  bb = ts->bbox("D.C. al coda");
-                  break;
-            case RepeatDalSegno:
-                  bb = ts->bbox("D.S.");
-                  break;
-            case RepeatDalSegnoAlFine:
-                  bb = ts->bbox("D.S. al fine");
-                  break;
-            case RepeatDalSegnoAlCoda:
-                  bb = ts->bbox("D.S. al coda");
-                  break;
-            case RepeatAlSegno:
-                  bb = ts->bbox("al segno");
-                  break;
-            case RepeatFine:
-                  bb = ts->bbox("fine");
-                  break;
-            }
-      return bb;
       }
 
 //---------------------------------------------------------
 //   genPropertyMenu
 //---------------------------------------------------------
 
-bool Repeat::genPropertyMenu(QMenu* popup) const
+bool Marker::genPropertyMenu(QMenu* popup) const
       {
       QAction* a = popup->addAction(tr("Properties..."));
       a->setData("props");
@@ -290,10 +196,81 @@ bool Repeat::genPropertyMenu(QMenu* popup) const
 //   propertyAction
 //---------------------------------------------------------
 
-void Repeat::propertyAction(const QString& s)
+void Marker::propertyAction(const QString& s)
       {
       if (s == "props") {
-            RepeatProperties rp;
+            MarkerProperties rp(this);
+            int rv = rp.exec();
+            if (rv) {
+                  printf("OK\n");
+                  }
+            }
+      }
+
+//---------------------------------------------------------
+//   Jump
+//---------------------------------------------------------
+
+Jump::Jump(Score* s)
+   : Text(s)
+      {
+      setSubtype(TEXT_REPEAT);
+      }
+
+//---------------------------------------------------------
+//   read
+//---------------------------------------------------------
+
+void Jump::read(QDomElement e)
+      {
+      setAlign(0);
+      setAnchor(ANCHOR_PARENT);
+      for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
+            QString tag(e.tagName());
+            if (tag == "jumpTo")
+                  _jumpTo = e.text();
+            else if (tag == "playUntil")
+                  _playUntil = e.text();
+            else if (tag == "continueAt")
+                  _continueAt = e.text();
+            else if (!Text::readProperties(e))
+                  domError(e);
+            }
+      }
+
+//---------------------------------------------------------
+//   write
+//---------------------------------------------------------
+
+void Jump::write(Xml& xml) const
+      {
+      xml.stag(name());
+      Text::writeProperties(xml);
+      xml.tag("jumpTo", _jumpTo);
+      xml.tag("playUntil", _playUntil);
+      xml.tag("continueAt", _continueAt);
+      xml.etag();
+      }
+
+//---------------------------------------------------------
+//   genPropertyMenu
+//---------------------------------------------------------
+
+bool Jump::genPropertyMenu(QMenu* popup) const
+      {
+      QAction* a = popup->addAction(tr("Properties..."));
+      a->setData("props");
+      return true;
+      }
+
+//---------------------------------------------------------
+//   propertyAction
+//---------------------------------------------------------
+
+void Jump::propertyAction(const QString& s)
+      {
+      if (s == "props") {
+            JumpProperties rp(this);
             int rv = rp.exec();
             if (rv) {
                   printf("OK\n");

@@ -54,7 +54,6 @@ class TextStyleDialog : public QDialog, private Ui::TextStyleBase {
       void alignBottomV();
       void alignCenterV();
       void setUnitMM();
-      void setUnitPercent();
       void setUnitSpace();
 
    signals:

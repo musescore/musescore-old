@@ -171,16 +171,11 @@ void Box::read(QDomElement e)
                   t->read(e);
                   add(t);
                   }
-            else if (tag == "Repeat") {
-                  Repeat* repeat = new Repeat(score());
-                  repeat->setTick(curTickPos);
-                  repeat->read(e);
-                  add(repeat);
-                  }
             else
                   domError(e);
             }
       }
+
 //---------------------------------------------------------
 //   HBox
 //---------------------------------------------------------
@@ -218,12 +213,6 @@ void HBox::layout(ScoreLayout*)
 
 bool HBox::acceptDrop(Viewer* viewer, const QPointF&, int type, int subtype) const
       {
-      if (type == REPEAT &&
-         (subtype == RepeatCoda || subtype == RepeatCodetta || subtype == RepeatVarcoda)
-         ) {
-            viewer->setDropTarget(this);
-            return true;
-            }
       return false;
       }
 
@@ -233,7 +222,7 @@ bool HBox::acceptDrop(Viewer* viewer, const QPointF&, int type, int subtype) con
 
 Element* HBox::drop(const QPointF&, const QPointF&, Element* e)
       {
-      printf("HBox::drop %s\n", e->name());
+printf("HBox::drop %s\n", e->name());
       e->setParent(this);
       score()->select(e, 0, 0);
       score()->cmdAdd(e);

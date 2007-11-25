@@ -3,7 +3,7 @@
 //  Linux Music Score Editor
 //  $Id:$
 //
-//  Copyright (C) 2004-2007 Werner Schweer and others
+//  Copyright (C) 2002-2007 Werner Schweer and others
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.
@@ -18,33 +18,27 @@
 //  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //=============================================================================
 
-#ifndef __ACCIDENTAL_H__
-#define __ACCIDENTAL_H__
+#ifndef __JUMPPROPERTIES_H__
+#define __JUMPPROPERTIES_H__
 
-/**
- \file
- Definition of class Accidental
-*/
+#include "ui_jumpproperties.h"
 
-#include "element.h"
-
-// Accidental Subtype Values
-
-enum { ACC_NONE, ACC_SHARP, ACC_FLAT, ACC_SHARP2, ACC_FLAT2, ACC_NATURAL,
-       ACC_SMALL = 0x100};
+class Jump;
 
 //---------------------------------------------------------
-//   Accidental
+//   JumpProperties
 //---------------------------------------------------------
 
-class Accidental : public Compound {
+class JumpProperties : public QDialog, public Ui::JumpPropertyBase {
+      Q_OBJECT
+
+      Jump* jump;
+
+   private slots:
+      void saveValues();
+
    public:
-      Accidental(Score*);
-      virtual Accidental* clone() const { return new Accidental(*this); }
-      virtual ElementType type() const  { return ACCIDENTAL; }
-      virtual void setSubtype(int v);
-      static int subtype2value(int);      // return effective pitch offset
-      static int value2subtype(int);
+      JumpProperties(Jump*, QWidget* parent = 0);
       };
-#endif
 
+#endif

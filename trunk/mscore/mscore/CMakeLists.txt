@@ -62,6 +62,7 @@ QT4_WRAP_UI (ui_headers
       symboldialog.ui dynamic.ui tuplet.ui shortcutcapturedialog.ui slurtie.ui
       slur.ui editdrumset.ui editstaff.ui line.ui linesegment.ui repeatflagdialog.ui
       voltaproperties.ui chordproperties.ui restproperties.ui repeatproperties.ui
+      jumpproperties.ui markerproperties.ui
       )
 
 QT4_WRAP_CPP (mocs
@@ -71,6 +72,7 @@ QT4_WRAP_CPP (mocs
       timedialog.h symboldialog.h shortcutcapturedialog.h simplebutton.h
       greendotbutton.h recordbutton.h editdrumset.h editstaff.h repeatflagdialog.h
       voltaproperties.h chordproperties.h restproperties.h repeatproperties.h
+      jumpproperties.h markerproperties.h
       )
 
 QT4_ADD_RESOURCES (qrc_files mscore.qrc)

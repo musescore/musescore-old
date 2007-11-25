@@ -40,93 +40,97 @@ QVector<TextStyle> defaultTextStyles;
 static const QString ff("Times New Roman");
 
 #define MM(x) ((x)/INCH)
+#define OA     OFFSET_ABS
+#define OS     OFFSET_SPATIUM
 
 const TextStyle defaultTextStyleArray[] = {
       TextStyle(QString("Symbols1"), QString("MScore"), 20, false, false, false,
-         ALIGN_LEFT,    ANCHOR_STAFF, 0, 0, OFFSET_ABS),
+         ALIGN_LEFT, ANCHOR_STAFF),
 
       TextStyle(QString("Symbols3"), QString("MScore"), 14, false, false, false,
-         ALIGN_LEFT,    ANCHOR_STAFF, 0, 0, OFFSET_SPATIUM),
+         ALIGN_LEFT,    ANCHOR_STAFF),
 
       TextStyle(QString("Title"), ff, 24, false, false, false,
-         ALIGN_HCENTER | ALIGN_TOP, ANCHOR_PAGE, 0, MM(0), OFFSET_ABS),
+         ALIGN_HCENTER | ALIGN_TOP, ANCHOR_PARENT, 0, 0, OA, 50, 0),
 
       TextStyle(QString("Subtitle"), ff, 14, false, false, false,
-         ALIGN_HCENTER | ALIGN_TOP, ANCHOR_PAGE, 0, MM(15), OFFSET_ABS),
+         ALIGN_HCENTER | ALIGN_TOP, ANCHOR_PARENT, 0, MM(15), OA),
 
       TextStyle(QString("Composer"), ff, 12, false, false, false,
-         ALIGN_RIGHT | ALIGN_BOTTOM, ANCHOR_PAGE, 0, MM(0), OFFSET_ABS),
+         ALIGN_RIGHT | ALIGN_BOTTOM, ANCHOR_PARENT),
 
       TextStyle(QString("Poet"), ff, 12, false, false, false,
-         ALIGN_LEFT | ALIGN_BOTTOM, ANCHOR_PAGE, 0, MM(0), OFFSET_ABS),
+         ALIGN_LEFT | ALIGN_BOTTOM, ANCHOR_PARENT),
 
       TextStyle(QString("Lyrics"), ff, 11, false, false, false,
-         ALIGN_HCENTER | ALIGN_TOP, ANCHOR_STAFF, 0, 7, OFFSET_SPATIUM),
+         ALIGN_HCENTER | ALIGN_TOP, ANCHOR_STAFF, 0, 7),
 
       TextStyle(QString("Fingering"), ff,  8, false, false, false,
-         ALIGN_HCENTER | ALIGN_VCENTER, ANCHOR_NOTE, 0, 0, OFFSET_SPATIUM),
+         ALIGN_CENTER, ANCHOR_PARENT),
 
       TextStyle(QString("InstrumentsLong"),   ff, 12, false, false, false,
-         ALIGN_RIGHT | ALIGN_VCENTER, ANCHOR_SYSTEM, 0, 0, OFFSET_SPATIUM),
+         ALIGN_RIGHT | ALIGN_VCENTER, ANCHOR_MEASURE),
+
       TextStyle(QString("InstrumentsShort"),   ff, 12, false, false, false,
-         ALIGN_RIGHT | ALIGN_VCENTER, ANCHOR_SYSTEM, 0, 0, OFFSET_SPATIUM),
+         ALIGN_RIGHT | ALIGN_VCENTER, ANCHOR_MEASURE),
 
-      TextStyle(QString("Dynamics"), ff, 12, false, true, false,
-         ALIGN_LEFT,    ANCHOR_STAFF, 0, 0, OFFSET_SPATIUM),
+      TextStyle(QString("Dynamics"), ff, 12, false, true, false, ALIGN_LEFT, ANCHOR_STAFF),
+      TextStyle(QString("Technik"), ff, 12, false, true, false, ALIGN_LEFT, ANCHOR_STAFF),
 
-      TextStyle(QString("Technik"), ff, 12, false, true, false,
-         ALIGN_LEFT,    ANCHOR_STAFF, 0, 0, OFFSET_SPATIUM),
 /*12*/
-
       TextStyle(QString("Tempo"), ff, 12, true, false, false,
-         ALIGN_LEFT,    ANCHOR_STAFF, 0, -5.0, OFFSET_SPATIUM, true),
+         ALIGN_LEFT,    ANCHOR_STAFF, 0, -5.0, OS, 0, 0, true),
 
       TextStyle(QString("Metronome"), ff, 12, true, false, false,
-         ALIGN_LEFT,    ANCHOR_STAFF, 0, 0, OFFSET_SPATIUM),
+         ALIGN_LEFT,    ANCHOR_STAFF),
 
       TextStyle(QString("Copyright"), ff, 8, false, false, false,
-         ALIGN_HCENTER | ALIGN_BOTTOM,    ANCHOR_PAGE, 0, MM(1), OFFSET_ABS),
+         ALIGN_HCENTER | ALIGN_BOTTOM,    ANCHOR_PARENT, 0, MM(1)),
 
       TextStyle(QString("Measure Number"), ff, 8, false, false, false,
-         ALIGN_LEFT,    ANCHOR_STAFF, -1.0, -2.2, OFFSET_SPATIUM),
+         ALIGN_LEFT,    ANCHOR_STAFF, -1.0, -2.2),
 
       TextStyle(QString("Page Number Odd"), ff, 12, false, false, false,
-         ALIGN_RIGHT | ALIGN_TOP, ANCHOR_PAGE, MM(0), MM(0), OFFSET_ABS),
+         ALIGN_RIGHT | ALIGN_TOP, ANCHOR_PARENT),
 
       TextStyle(QString("Page Number Even"), ff, 12, false, false, false,
-         ALIGN_LEFT | ALIGN_TOP, ANCHOR_PAGE, MM(0), MM(0), OFFSET_ABS),
+         ALIGN_LEFT | ALIGN_TOP, ANCHOR_PARENT),
 
       TextStyle(QString("Translator"), ff, 11, false, false, false,
-         ALIGN_HCENTER | ALIGN_TOP,    ANCHOR_STAFF, 0, 6, OFFSET_SPATIUM),
+         ALIGN_HCENTER | ALIGN_TOP,    ANCHOR_STAFF, 0, 6),
 
       TextStyle(QString("Dynamics1"), QString("MScore1"), 20, false, false, false,
-         ALIGN_LEFT, ANCHOR_STAFF, 0, 0, OFFSET_SPATIUM),
+         ALIGN_LEFT, ANCHOR_STAFF),
 
       TextStyle(QString("Tuplets"), ff,  8, false, false, false,
-         ALIGN_HCENTER | ALIGN_VCENTER, ANCHOR_NOTE, 0, 0, OFFSET_SPATIUM),
+         ALIGN_CENTER, ANCHOR_PARENT),
 
       TextStyle(QString("System"), ff,  10, false, false, false,
-         ALIGN_LEFT, ANCHOR_SYSTEM, 0, -4.0, OFFSET_SPATIUM, true),
+         ALIGN_LEFT, ANCHOR_MEASURE, 0, -4.0, OS, 0, 0, true),
 
       TextStyle(QString("Staff"), ff,  10, false, false, false,
-         ALIGN_LEFT, ANCHOR_STAFF, 0, -4.0, OFFSET_SPATIUM, true),
+         ALIGN_LEFT, ANCHOR_STAFF, 0, -4.0, OS, 0, 0, true),
 
       TextStyle(QString("Chordname"), ff,  12, false, false, false,
-         ALIGN_HCENTER, ANCHOR_STAFF, 0, -5.0, OFFSET_SPATIUM, true),
+         ALIGN_HCENTER, ANCHOR_STAFF, 0, -5.0, OS, 0, 0, true),
 
       TextStyle(QString("Rehearsal Mark"), ff,  14, true, false, false,
-         ALIGN_HCENTER, ANCHOR_SYSTEM, 0, -7.0, OFFSET_SPATIUM, true,
+         ALIGN_HCENTER, ANCHOR_MEASURE, 0, -7.0, OS, 0, 0, true,
          0.3, 1.0, 1.0, 20, Qt::black),
 
       TextStyle(QString("Repeat Text"), ff,  12, false, false, false,
-         ALIGN_HCENTER, ANCHOR_SYSTEM, 0, -4.5, OFFSET_SPATIUM, true),
+         ALIGN_HCENTER, ANCHOR_MEASURE, 0, 0, OS, 0, 0, true),
 
       TextStyle(QString("Volta"), ff, 11, true, false, false,
-         ALIGN_LEFT,    ANCHOR_STAFF, 0, -5.0, OFFSET_SPATIUM, true),
+         ALIGN_LEFT,    ANCHOR_STAFF, 0, -5.0, OS, 0, 0, true),
 
       TextStyle(QString("Frame"), ff, 11, true, false, false,
-         ALIGN_LEFT,    ANCHOR_PAGE, 0, 0, OFFSET_SPATIUM, true),
+         ALIGN_LEFT,    ANCHOR_PARENT, 0, 0, OS, 0, 0, true),
       };
+
+#undef MM
+#undef OA
+#undef OS
 
 //---------------------------------------------------------
 //   defaultStyle
@@ -212,12 +216,14 @@ TextStyle::TextStyle(
    QString _name, QString _family, int _size,
    bool _bold, bool _italic, bool _underline,
    int _align, Anchor _anchor,
-   double _xoff, double _yoff, OffsetType _ot, bool sd,
+   double _xoff, double _yoff, OffsetType _ot, double _rxoff, double _ryoff,
+   bool sd,
    double fw, double mw, double pw, int fr, QColor co)
+
    : name(_name), family(_family), size(_size), bold(_bold),
    italic(_italic), underline(_underline),
    align(_align), anchor(_anchor),
-   xoff(_xoff), yoff(_yoff), offsetType(_ot),
+   xoff(_xoff), yoff(_yoff), offsetType(_ot), rxoff(_rxoff), ryoff(_ryoff),
    sizeIsSpatiumDependent(sd), frameWidth(fw), marginWidth(mw), paddingWidth(pw),
    frameRound(fr), frameColor(co)
       {
@@ -268,7 +274,7 @@ void TextStyle::write(Xml& xml) const
       xml.tag("align", align);
       xml.tag("anchor", anchor);
       xml.tag("offsetType", offsetType);
-      if (offsetType == OFFSET_ABS || offsetType == OFFSET_REL) {
+      if (offsetType == OFFSET_ABS) {
             xml.tag("xoffset", xoff * INCH);
             xml.tag("yoffset", yoff * INCH);
             }
@@ -276,6 +282,8 @@ void TextStyle::write(Xml& xml) const
             xml.tag("xoffset", xoff);
             xml.tag("yoffset", yoff);
             }
+      xml.tag("rxoffset", rxoff);
+      xml.tag("ryoffset", ryoff);
       xml.etag();
       }
 
@@ -308,10 +316,18 @@ void TextStyle::read(QDomElement e)
                   xoff = val.toDouble();
             else if (tag == "yoffset")
                   yoff = val.toDouble();
+            else if (tag == "rxoffset")
+                  rxoff = val.toDouble();
+            else if (tag == "ryoffset")
+                  ryoff = val.toDouble();
             else if (tag == "offsetType")
                   offsetType = (OffsetType)i;
             else
                   domError(e);
+            }
+      if (offsetType == OFFSET_ABS) {
+            xoff /= INCH;
+            yoff /= INCH;
             }
       }
 

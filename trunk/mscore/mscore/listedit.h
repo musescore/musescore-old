@@ -94,7 +94,7 @@ class PageListEditor : public QWidget {
 
    public:
       PageListEditor(Score*);
-      ~PageListEditor();
+      void writeSettings();
 	void updateList();
       };
 

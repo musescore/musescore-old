@@ -411,48 +411,64 @@ void MuseScore::showPalette(bool visible)
             //    Repeats
             //-----------------------------------
 
-            sp = new Palette(7, 2, 0.7);
+            sp = new Palette(7, 2, 0.8);
             sp->setGrid(84, 28);
             sp->setDrawGrid(true);
 
             RepeatMeasure* rm = new RepeatMeasure(gscore);
             sp->addObject(0, rm, tr("repeat measure"));
 
-            const char* repeats[] = {
-                  "segno", "coda", "varcoda", "codetta",
-                  "daCapo", "daCapoAlFine", "daCapoAlCoda", "dalSegno",
-                  "dalSegnoAlFine", "dalSegnoAlCoda", "alSegno", "fine"
-                  };
-            for (unsigned i = 0; i < sizeof(repeats)/sizeof(*repeats); ++i) {
-                  Repeat* na = new Repeat(gscore);
-                  na->setSubtype(repeats[i]);
-                  sp->addObject(i + 1, na, na->subtypeName());
-                  }
+            Marker* mk = new Marker(gscore);
+            mk->setHtml(symToHtml(symbols[segnoSym]));
+            mk->setLabel("segno");
+            sp->addObject(1, mk, tr("Segno"));
+
+            mk = new Marker(gscore);
+            mk->setHtml(symToHtml(symbols[codaSym]));
+            mk->setLabel("coda");
+            sp->addObject(2, mk, tr("Coda"));
+
+            mk = new Marker(gscore);
+            mk->setHtml(symToHtml(symbols[varcodaSym]));
+            mk->setLabel("varcoda");
+            sp->addObject(3, mk, tr("VarCoda"));
+
+            mk = new Marker(gscore);
+            mk->setHtml(symToHtml(symbols[codaSym], symbols[codaSym]));
+            mk->setLabel("codetta");
+            sp->addObject(4, mk, tr("Codetta"));
+
+            mk = new Marker(gscore);
+            mk->setText("Fine");
+            mk->setLabel("fine");
+            mk->setRXoff(100.0);                 // to end of measure
+            mk->setAlign(ALIGN_HCENTER | ALIGN_BOTTOM);
+            sp->addObject(5, mk, tr("Fine"));
+
+            Jump* jp = new Jump(gscore);
+            jp->setText("D.C.");
+            jp->setJumpTo("start");
+            jp->setPlayUntil("end");
+            sp->addObject(6, jp, tr("da Capo"));
+
+            jp = new Jump(gscore);
+            jp->setText("D.C. al Fine");
+            jp->setJumpTo("start");
+            jp->setPlayUntil("fine");
+            sp->addObject(7, jp, tr("da Capo al Fine"));
+
+            jp = new Jump(gscore);
+            jp->setText("D.C. al Coda");
+            jp->setJumpTo("start");
+            jp->setPlayUntil("coda");
+            jp->setContinueAt("coda");
+            sp->addObject(8, jp, tr("da Capo al Coda"));
+
+//                  "dalSegno",
+//                  "dalSegnoAlFine", "dalSegnoAlCoda", "alSegno"
 
             paletteBox->addPalette(tr("Repeats"), sp);
-#if 0
-            //-----------------------------------
-            //    Misc
-            //-----------------------------------
 
-            sp = new Palette(1, 4, 1.5);
-            sp->setGrid(42, 40);
-            sp->setDrawGrid(true);
-
-            RepeatMeasure* rm = new RepeatMeasure(gscore);
-            sp->addObject(0, rm, tr("repeat measure"));
-            NoteAttribute* na = new NoteAttribute(gscore);
-            na->setSubtype("segno");
-            sp->addObject(1, na, na->name());
-            na = new NoteAttribute(gscore);
-            na->setSubtype("coda");
-            sp->addObject(2, na, na->name());
-            na = new NoteAttribute(gscore);
-            na->setSubtype("varcoda");
-            sp->addObject(3, na, na->name());
-
-            paletteBox->addPalette(tr("Misc"), sp);
-#endif
             //-----------------------------------
             //    breaks
             //-----------------------------------

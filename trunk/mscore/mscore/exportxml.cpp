@@ -1785,6 +1785,7 @@ void ExportMusicXml::lyrics(const LyricsList* ll)
 // LVIFIX: TODO coda and segno should be numbered uniquely
 // LVIFIX: TODO RepeatAlSegno is missing
 
+#if 0 // WS-REPEAT
 static void directionRepeat(Xml& xml, int st)
       {
       QString words = "";
@@ -1838,6 +1839,7 @@ static void directionRepeat(Xml& xml, int st)
             xml.etag();
             }
       }
+#endif
 
 //---------------------------------------------------------
 //  repeatAtMeasureStart
@@ -1845,6 +1847,7 @@ static void directionRepeat(Xml& xml, int st)
 
 static void repeatAtMeasureStart(Xml& xml, Attributes& attr, Measure* m)
       {
+#if 0 // WS-REPEAT
       // loop over all measure relative elements in this measure looking for REPEATS
       for (ciElement ci = m->el()->begin(); ci != m->el()->end(); ++ci) {
             Element* dir = *ci;
@@ -1858,6 +1861,7 @@ static void repeatAtMeasureStart(Xml& xml, Attributes& attr, Measure* m)
                         }
                   }
             }
+#endif
       }
 
 //---------------------------------------------------------
@@ -1866,6 +1870,7 @@ static void repeatAtMeasureStart(Xml& xml, Attributes& attr, Measure* m)
 
 static void repeatAtMeasureStop(Xml& xml, Measure* m)
       {
+#if 0 // WS-REPEAT
       // loop over all measure relative elements in this measure looking for REPEATS
       for (ciElement ci = m->el()->begin(); ci != m->el()->end(); ++ci) {
             Element* dir = *ci;
@@ -1888,6 +1893,7 @@ static void repeatAtMeasureStop(Xml& xml, Measure* m)
                         directionRepeat(xml, st);
                   }
             }
+#endif
       }
 
 //---------------------------------------------------------

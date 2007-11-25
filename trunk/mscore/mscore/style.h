@@ -23,11 +23,33 @@
 
 #include "spatium.h"
 
-enum Align      { ALIGN_LEFT=1, ALIGN_RIGHT=2, ALIGN_HCENTER=4, ALIGN_TOP=8,
-                  ALIGN_BOTTOM=16, ALIGN_VCENTER=32};
+enum Align { ALIGN_LEFT    = 0,
+             ALIGN_RIGHT   = 1,
+             ALIGN_HCENTER = 2,
+             ALIGN_TOP     = 0,
+             ALIGN_BOTTOM  = 4,
+             ALIGN_VCENTER = 8
+      };
 
-enum Anchor     { ANCHOR_PAGE, ANCHOR_STAFF, ANCHOR_NOTE, ANCHOR_SYSTEM };
-enum OffsetType { OFFSET_ABS, OFFSET_REL, OFFSET_SPATIUM };
+static const int ALIGN_CENTER = ALIGN_HCENTER | ALIGN_VCENTER;
+
+
+enum Anchor {
+      ANCHOR_PARENT,    ///< anchor is topleft of parent boundingRect
+      ANCHOR_MEASURE,   ///< anchor is topleft of measure boundingRect
+      ANCHOR_STAFF,     ///< top of staff, left of measure
+      ANCHOR_SEGMENT,   ///< top of staff, left of segment
+      };
+
+enum OffsetType {
+      OFFSET_ABS,       ///< offset in point units
+      OFFSET_SPATIUM    ///< offset in space units
+      };
+
+// to move Anchor to right of measure set
+//    OffsetType = OFFSET_REL
+//    offset     = 100
+
 
 class Xml;
 
@@ -77,9 +99,11 @@ class TextStyle {
       bool underline;
       int align;
       Anchor anchor;
-      double xoff, yoff;                  // inch or spatium
+      double xoff, yoff;                  // absolute offset: inch or spatium
       OffsetType offsetType;
-      bool sizeIsSpatiumDependent;        // size depends on _spatium unit
+      double rxoff, ryoff;                // relative offset: % of parent width/height
+      bool sizeIsSpatiumDependent;        // text point size depends on _spatium unit
+
       double frameWidth;
       double marginWidth;
       double paddingWidth;
@@ -89,9 +113,12 @@ class TextStyle {
       TextStyle(QString _name, QString _family, int _size,
          bool _bold, bool _italic, bool _underline,
          int _align, Anchor _anchor,
-         double _xoff, double _yoff, OffsetType _ot, bool sd = false,
+         double _xoff = 0, double _yoff = 0, OffsetType _ot = OFFSET_SPATIUM,
+         double _rxoff = 0, double _ryoff = 0,
+         bool sd = false,
          double fw = 0.0, double mw = 0.0, double pw = 0.0, int fr = 25,
          QColor co = QColor(Qt::black));
+
       TextStyle() {}
       void write(Xml&) const;
       void read(QDomElement);
@@ -109,6 +136,8 @@ class TextStyle {
                 || s.anchor != anchor
                 || s.xoff != xoff
                 || s.yoff != yoff
+                || s.rxoff != rxoff
+                || s.ryoff != ryoff
                 || s.offsetType != offsetType
                 || s.sizeIsSpatiumDependent != sizeIsSpatiumDependent
                 || s.frameWidth != frameWidth

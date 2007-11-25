@@ -1,3 +1,7 @@
+25.11.7 (ws)
+      - split Repeat() Element into Jump() and Marker(); make them a subclass
+        of text which allows for editing
+      - changed semantic and implementation of text layout & alignment
 25.11.7 (lv)
       - fixed MusicXML import/export of barstyles and voltas
       - new testfile testVolta1.xml

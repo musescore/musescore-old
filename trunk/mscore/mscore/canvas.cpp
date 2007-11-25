@@ -635,7 +635,17 @@ void Canvas::mouseMoveEvent1(QMouseEvent* ev)
                   break;
 
             case DRAG_OBJ:
+                  {
                   _score->drag(delta);
+                  Element* e = _score->getSelectedElement();
+                  if (e) {
+                        QLineF anchor = e->dragAnchor();
+                        if (!anchor.isNull())
+                              setDropAnchor(anchor);
+                        else
+                              setDropTarget(0); // this also resets dropAnchor
+                        }
+                  }
                   break;
 
             case NOTE_ENTRY:
@@ -740,6 +750,7 @@ void Canvas::mouseReleaseEvent1(QMouseEvent* /*ev*/)
             case DRAG_OBJ:
                   setState(NORMAL);
                   _score->endDrag();
+                  setDropTarget(0); // this also resets dropAnchor
                   break;
 
             case DRAG_STAFF:
@@ -1395,6 +1406,8 @@ void Canvas::dragEnterEvent(QDragEnterEvent* event)
             event->acceptProposedAction();
 
             QByteArray a = data->data(mimeSymbolFormat);
+
+// printf("DRAG<%s>\n", a.data());
             QDomDocument doc;
             int line, column;
             QString err;
@@ -1456,7 +1469,8 @@ void Canvas::dragEnterEvent(QDragEnterEvent* event)
                   case NOTEHEAD:
                   case TREMOLO:
                   case LAYOUT_BREAK:
-                  case REPEAT:
+                  case MARKER:
+                  case JUMP:
                   case REPEAT_MEASURE:
                         el = Element::create(type, score());
                         break;
@@ -1555,7 +1569,8 @@ void Canvas::dragMoveEvent(QDragMoveEvent* event)
                   case NOTEHEAD:
                   case TREMOLO:
                   case LAYOUT_BREAK:
-                  case REPEAT:
+                  case MARKER:
+                  case JUMP:
                   case REPEAT_MEASURE:
                         {
                         Element* el = elementAt(pos);
@@ -1682,7 +1697,8 @@ void Canvas::dropEvent(QDropEvent* event)
                   case NOTEHEAD:
                   case TREMOLO:
                   case LAYOUT_BREAK:
-                  case REPEAT:
+                  case MARKER:
+                  case JUMP:
                   case REPEAT_MEASURE:
                         {
                         Element* el = elementAt(pos);
@@ -1731,7 +1747,7 @@ void Canvas::dropEvent(QDropEvent* event)
                         return;
                   _score->startCmd();
                   s->setPath(u.path());
-                  s->setAnchor(ANCHOR_PAGE);
+                  s->setAnchor(ANCHOR_PARENT);
                   Element* el = elementAt(pos);
                   if (el && (el->type() == NOTE || el->type() == REST)) {
                         s->setAnchor(ANCHOR_STAFF);
@@ -1781,6 +1797,7 @@ void Canvas::dropEvent(QDropEvent* event)
             _score->end();
             return;
             }
+
       QDomDocument doc;
       int line, column;
       QString err;
@@ -1975,13 +1992,14 @@ void Canvas::drawElements(QPainter& p,const QList<const Element*>& el)
                   //
                   p.setBrush(Qt::NoBrush);
                   p.setPen(QPen(Qt::blue, 0, Qt::SolidLine));
-                  // p.drawRect(e->bbox());
                   p.drawPath(e->shape());
+                p.setPen(QPen(Qt::red, 0, Qt::SolidLine));
+                p.drawRect(e->bbox());
                   p.setPen(QPen(Qt::red, 0, Qt::SolidLine));
-                  qreal w = e->bbox().width() / 4.0;
-                  qreal h = e->bbox().height() / 4.0;
-                  qreal x = e->bbox().x();
-                  qreal y = e->bbox().y();
+                  qreal w = 5.0 / p.matrix().m11();
+                  qreal h = w;
+                  qreal x = 0; // e->bbox().x();
+                  qreal y = 0; // e->bbox().y();
                   p.drawLine(QLineF(x-w, y-h, x+w, y+h));
                   p.drawLine(QLineF(x+w, y-h, x-w, y+h));
                   }
