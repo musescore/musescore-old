@@ -776,12 +776,7 @@ p, li { white-space: pre-wrap; }
     <VBox>
       <height>125.916</height>
       <Text>
-        <align>12</align>
-        <xoffset>0</xoffset>
-        <yoffset>0.19685</yoffset>
-        <anchor>page</anchor>
-        <offsetType>absolute</offsetType>
-        <spatiumSizeDependent>0</spatiumSizeDependent>
+        <subtype>Title</subtype>
         <data>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
@@ -790,17 +785,11 @@ p, li { white-space: pre-wrap; }
 &lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Times New Roman&apos;; font-size:24pt;&quot;&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;For Guitar&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
         </Text>
       <Text>
-        <align>18</align>
-        <xoffset>0</xoffset>
-        <yoffset>0</yoffset>
-        <anchor>page</anchor>
-        <offsetType>absolute</offsetType>
-        <spatiumSizeDependent>0</spatiumSizeDependent>
+        <subtype>Composer</subtype>
         <data>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-size:12pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p align=&quot;right&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Dave Phillips 2005&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
-        <subtype>Composer</subtype>
         </Text>
       </VBox>
     <Measure number="1">
@@ -831,17 +820,11 @@ p, li { white-space: pre-wrap; }
           <pitch>60</pitch>
           <tpc>14</tpc>
           <Text>
-            <align>36</align>
-            <xoffset>0</xoffset>
-            <yoffset>0</yoffset>
-            <anchor>note</anchor>
-            <offsetType>spatium</offsetType>
-            <spatiumSizeDependent>0</spatiumSizeDependent>
+            <subtype>Fingering</subtype>
             <data>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-size:8pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:7pt;&quot;&gt;3&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
-            <subtype>Fingering</subtype>
             <offset x="-1.41111" y="-7.49653"/>
             </Text>
           </Note>
@@ -852,17 +835,11 @@ p, li { white-space: pre-wrap; }
           <pitch>64</pitch>
           <tpc>18</tpc>
           <Text>
-            <align>36</align>
-            <xoffset>0</xoffset>
-            <yoffset>0</yoffset>
-            <anchor>note</anchor>
-            <offsetType>spatium</offsetType>
-            <spatiumSizeDependent>0</spatiumSizeDependent>
+            <subtype>Fingering</subtype>
             <data>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-size:8pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:7pt;&quot;&gt;2&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
-            <subtype>Fingering</subtype>
             <offset x="-1.94028" y="-6.96736"/>
             </Text>
           </Note>
@@ -873,17 +850,11 @@ p, li { white-space: pre-wrap; }
           <pitch>71</pitch>
           <tpc>19</tpc>
           <Text>
-            <align>36</align>
-            <xoffset>0</xoffset>
-            <yoffset>0</yoffset>
-            <anchor>note</anchor>
-            <offsetType>spatium</offsetType>
-            <spatiumSizeDependent>0</spatiumSizeDependent>
+            <subtype>Fingering</subtype>
             <data>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-size:8pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:7pt;&quot;&gt;4&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
-            <subtype>Fingering</subtype>
             <offset x="-1.94028" y="-6.35"/>
             </Text>
           </Note>
@@ -894,17 +865,11 @@ p, li { white-space: pre-wrap; }
           <pitch>72</pitch>
           <tpc>14</tpc>
           <Text>
-            <align>36</align>
-            <xoffset>0</xoffset>
-            <yoffset>0</yoffset>
-            <anchor>note</anchor>
-            <offsetType>spatium</offsetType>
-            <spatiumSizeDependent>0</spatiumSizeDependent>
+            <subtype>Fingering</subtype>
             <data>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-size:8pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:7pt;&quot;&gt;1&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
-            <subtype>Fingering</subtype>
             <offset x="-1.5875" y="-6.87917"/>
             </Text>
           </Note>
@@ -915,17 +880,11 @@ p, li { white-space: pre-wrap; }
           <pitch>76</pitch>
           <tpc>18</tpc>
           <Text>
-            <align>36</align>
-            <xoffset>0</xoffset>
-            <yoffset>0</yoffset>
-            <anchor>note</anchor>
-            <offsetType>spatium</offsetType>
-            <spatiumSizeDependent>0</spatiumSizeDependent>
+            <subtype>Fingering</subtype>
             <data>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-size:8pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:7pt;&quot;&gt;0&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
-            <subtype>Fingering</subtype>
             <offset x="-2.11667" y="-6.79097"/>
             </Text>
           </Note>
@@ -933,17 +892,11 @@ p, li { white-space: pre-wrap; }
       </Measure>
     <Measure number="2">
       <Text>
-        <align>1</align>
-        <xoffset>0</xoffset>
-        <yoffset>-4</yoffset>
-        <anchor>system</anchor>
-        <offsetType>spatium</offsetType>
-        <spatiumSizeDependent>1</spatiumSizeDependent>
+        <subtype>System</subtype>
         <data>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-size:10pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:9pt;&quot;&gt;&lt;span style=&quot; font-size:10pt; font-weight:600;&quot;&gt;II______________&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
-        <subtype>System</subtype>
         <offset x="-0.38306" y="11.2719"/>
         </Text>
       <TimeSig>
@@ -957,17 +910,11 @@ p, li { white-space: pre-wrap; }
           <pitch>55</pitch>
           <tpc>15</tpc>
           <Text>
-            <align>36</align>
-            <xoffset>0</xoffset>
-            <yoffset>0</yoffset>
-            <anchor>note</anchor>
-            <offsetType>spatium</offsetType>
-            <spatiumSizeDependent>0</spatiumSizeDependent>
+            <subtype>Fingering</subtype>
             <data>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-size:8pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:7pt;&quot;&gt;1&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
-            <subtype>Fingering</subtype>
             <offset x="-1.49931" y="-9.17222"/>
             </Text>
           </Note>
@@ -978,17 +925,11 @@ p, li { white-space: pre-wrap; }
           <pitch>62</pitch>
           <tpc>16</tpc>
           <Text>
-            <align>36</align>
-            <xoffset>0</xoffset>
-            <yoffset>0</yoffset>
-            <anchor>note</anchor>
-            <offsetType>spatium</offsetType>
-            <spatiumSizeDependent>0</spatiumSizeDependent>
+            <subtype>Fingering</subtype>
             <data>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-size:8pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:7pt;&quot;&gt;3&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
-            <subtype>Fingering</subtype>
             <offset x="-1.85208" y="-7.40834"/>
             </Text>
           </Note>
@@ -999,17 +940,11 @@ p, li { white-space: pre-wrap; }
           <pitch>65</pitch>
           <tpc>13</tpc>
           <Text>
-            <align>36</align>
-            <xoffset>0</xoffset>
-            <yoffset>0</yoffset>
-            <anchor>note</anchor>
-            <offsetType>spatium</offsetType>
-            <spatiumSizeDependent>0</spatiumSizeDependent>
+            <subtype>Fingering</subtype>
             <data>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-size:8pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:7pt;&quot;&gt;1&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
-            <subtype>Fingering</subtype>
             <offset x="-1.5875" y="-6.87917"/>
             </Text>
           </Note>
@@ -1020,17 +955,11 @@ p, li { white-space: pre-wrap; }
           <pitch>72</pitch>
           <tpc>14</tpc>
           <Text>
-            <align>36</align>
-            <xoffset>0</xoffset>
-            <yoffset>0</yoffset>
-            <anchor>note</anchor>
-            <offsetType>spatium</offsetType>
-            <spatiumSizeDependent>0</spatiumSizeDependent>
+            <subtype>Fingering</subtype>
             <data>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-size:8pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:7pt;&quot;&gt;4&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
-            <subtype>Fingering</subtype>
             <offset x="-1.94028" y="-6.35"/>
             </Text>
           </Note>
@@ -1041,17 +970,11 @@ p, li { white-space: pre-wrap; }
           <pitch>74</pitch>
           <tpc>16</tpc>
           <Text>
-            <align>36</align>
-            <xoffset>0</xoffset>
-            <yoffset>0</yoffset>
-            <anchor>note</anchor>
-            <offsetType>spatium</offsetType>
-            <spatiumSizeDependent>0</spatiumSizeDependent>
+            <subtype>Fingering</subtype>
             <data>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-size:8pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:7pt;&quot;&gt;1&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
-            <subtype>Fingering</subtype>
             <offset x="-1.5875" y="-6.87917"/>
             </Text>
           </Note>
@@ -1062,17 +985,11 @@ p, li { white-space: pre-wrap; }
           <pitch>79</pitch>
           <tpc>15</tpc>
           <Text>
-            <align>36</align>
-            <xoffset>0</xoffset>
-            <yoffset>0</yoffset>
-            <anchor>note</anchor>
-            <offsetType>spatium</offsetType>
-            <spatiumSizeDependent>0</spatiumSizeDependent>
+            <subtype>Fingering</subtype>
             <data>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-size:8pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:7pt;&quot;&gt;1&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
-            <subtype>Fingering</subtype>
             <offset x="-1.5875" y="-6.87917"/>
             </Text>
           </Note>
@@ -1129,17 +1046,11 @@ p, li { white-space: pre-wrap; }
           <pitch>53</pitch>
           <tpc>13</tpc>
           <Text>
-            <align>36</align>
-            <xoffset>0</xoffset>
-            <yoffset>0</yoffset>
-            <anchor>note</anchor>
-            <offsetType>spatium</offsetType>
-            <spatiumSizeDependent>0</spatiumSizeDependent>
+            <subtype>Fingering</subtype>
             <data>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-size:8pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:7pt;&quot;&gt;1&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
-            <subtype>Fingering</subtype>
             <offset x="-1.41111" y="-9.87778"/>
             </Text>
           </Note>
@@ -1150,17 +1061,11 @@ p, li { white-space: pre-wrap; }
           <pitch>64</pitch>
           <tpc>18</tpc>
           <Text>
-            <align>36</align>
-            <xoffset>0</xoffset>
-            <yoffset>0</yoffset>
-            <anchor>note</anchor>
-            <offsetType>spatium</offsetType>
-            <spatiumSizeDependent>0</spatiumSizeDependent>
+            <subtype>Fingering</subtype>
             <data>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-size:8pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:7pt;&quot;&gt;3&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
-            <subtype>Fingering</subtype>
             <offset x="-1.67569" y="-6.87917"/>
             </Text>
           </Note>
@@ -1171,17 +1076,11 @@ p, li { white-space: pre-wrap; }
           <pitch>69</pitch>
           <tpc>17</tpc>
           <Text>
-            <align>36</align>
-            <xoffset>0</xoffset>
-            <yoffset>0</yoffset>
-            <anchor>note</anchor>
-            <offsetType>spatium</offsetType>
-            <spatiumSizeDependent>0</spatiumSizeDependent>
+            <subtype>Fingering</subtype>
             <data>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-size:8pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:7pt;&quot;&gt;4&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
-            <subtype>Fingering</subtype>
             <offset x="-2.02847" y="-6.35"/>
             </Text>
           </Note>
@@ -1192,17 +1091,11 @@ p, li { white-space: pre-wrap; }
           <pitch>72</pitch>
           <tpc>14</tpc>
           <Text>
-            <align>36</align>
-            <xoffset>0</xoffset>
-            <yoffset>0</yoffset>
-            <anchor>note</anchor>
-            <offsetType>spatium</offsetType>
-            <spatiumSizeDependent>0</spatiumSizeDependent>
+            <subtype>Fingering</subtype>
             <data>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-size:8pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:7pt;&quot;&gt;2&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
-            <subtype>Fingering</subtype>
             <offset x="-2.02847" y="-6.87917"/>
             </Text>
           </Note>
@@ -1213,17 +1106,11 @@ p, li { white-space: pre-wrap; }
           <pitch>76</pitch>
           <tpc>18</tpc>
           <Text>
-            <align>36</align>
-            <xoffset>0</xoffset>
-            <yoffset>0</yoffset>
-            <anchor>note</anchor>
-            <offsetType>spatium</offsetType>
-            <spatiumSizeDependent>0</spatiumSizeDependent>
+            <subtype>Fingering</subtype>
             <data>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-size:8pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:7pt;&quot;&gt;0&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
-            <subtype>Fingering</subtype>
             <offset x="-1.85208" y="-7.49653"/>
             </Text>
           </Note>
@@ -1231,17 +1118,11 @@ p, li { white-space: pre-wrap; }
       </Measure>
     <Measure number="6">
       <Text>
-        <align>1</align>
-        <xoffset>0</xoffset>
-        <yoffset>-4</yoffset>
-        <anchor>system</anchor>
-        <offsetType>spatium</offsetType>
-        <spatiumSizeDependent>1</spatiumSizeDependent>
+        <subtype>System</subtype>
         <data>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-size:10pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:9pt;&quot;&gt;&lt;span style=&quot; font-size:10pt; font-weight:600;&quot;&gt;V________________&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
-        <subtype>System</subtype>
         <offset x="-0.0125511" y="-5.59931"/>
         </Text>
       <TimeSig>
@@ -1263,17 +1144,11 @@ p, li { white-space: pre-wrap; }
           <pitch>64</pitch>
           <tpc>18</tpc>
           <Text>
-            <align>36</align>
-            <xoffset>0</xoffset>
-            <yoffset>0</yoffset>
-            <anchor>note</anchor>
-            <offsetType>spatium</offsetType>
-            <spatiumSizeDependent>0</spatiumSizeDependent>
+            <subtype>Fingering</subtype>
             <data>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-size:8pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;3&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
-            <subtype>Fingering</subtype>
             <offset x="-1.88077" y="0.289349"/>
             </Text>
           </Note>
@@ -1284,17 +1159,11 @@ p, li { white-space: pre-wrap; }
           <pitch>59</pitch>
           <tpc>19</tpc>
           <Text>
-            <align>36</align>
-            <xoffset>0</xoffset>
-            <yoffset>0</yoffset>
-            <anchor>note</anchor>
-            <offsetType>spatium</offsetType>
-            <spatiumSizeDependent>0</spatiumSizeDependent>
+            <subtype>Fingering</subtype>
             <data>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-size:8pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;2&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
-            <subtype>Fingering</subtype>
             <offset x="-2.02544" y="0.434023"/>
             </Text>
           </Note>
@@ -1330,17 +1199,11 @@ p, li { white-space: pre-wrap; }
       </Measure>
     <Measure number="8">
       <Text>
-        <align>1</align>
-        <xoffset>0</xoffset>
-        <yoffset>-4</yoffset>
-        <anchor>system</anchor>
-        <offsetType>spatium</offsetType>
-        <spatiumSizeDependent>1</spatiumSizeDependent>
+        <subtype>System</subtype>
         <data>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-size:10pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:9pt;&quot;&gt;&lt;span style=&quot; font-size:10pt; font-weight:600;&quot;&gt;V__________________&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
-        <subtype>System</subtype>
         <offset x="-0.791224" y="-6.08077"/>
         </Text>
       <TimeSig>
@@ -1454,17 +1317,11 @@ p, li { white-space: pre-wrap; }
           <pitch>60</pitch>
           <tpc>14</tpc>
           <Text>
-            <align>36</align>
-            <xoffset>0</xoffset>
-            <yoffset>0</yoffset>
-            <anchor>note</anchor>
-            <offsetType>spatium</offsetType>
-            <spatiumSizeDependent>0</spatiumSizeDependent>
+            <subtype>Fingering</subtype>
             <data>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-size:8pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;4&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
-            <subtype>Fingering</subtype>
             <offset x="-1.54469" y="-8.18683"/>
             </Text>
           </Note>
@@ -1475,17 +1332,11 @@ p, li { white-space: pre-wrap; }
           <pitch>63</pitch>
           <tpc>11</tpc>
           <Text>
-            <align>36</align>
-            <xoffset>0</xoffset>
-            <yoffset>0</yoffset>
-            <anchor>note</anchor>
-            <offsetType>spatium</offsetType>
-            <spatiumSizeDependent>0</spatiumSizeDependent>
+            <subtype>Fingering</subtype>
             <data>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-size:8pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;2&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
-            <subtype>Fingering</subtype>
             <offset x="-1.69915" y="-7.10555"/>
             </Text>
           </Note>
@@ -1496,17 +1347,11 @@ p, li { white-space: pre-wrap; }
           <pitch>67</pitch>
           <tpc>15</tpc>
           <Text>
-            <align>36</align>
-            <xoffset>0</xoffset>
-            <yoffset>0</yoffset>
-            <anchor>note</anchor>
-            <offsetType>spatium</offsetType>
-            <spatiumSizeDependent>0</spatiumSizeDependent>
+            <subtype>Fingering</subtype>
             <data>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-size:8pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;1&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
-            <subtype>Fingering</subtype>
             <offset x="-1.69915" y="-6.48768"/>
             </Text>
           </Note>
@@ -1522,17 +1367,11 @@ p, li { white-space: pre-wrap; }
           <pitch>58</pitch>
           <tpc>12</tpc>
           <Text>
-            <align>36</align>
-            <xoffset>0</xoffset>
-            <yoffset>0</yoffset>
-            <anchor>note</anchor>
-            <offsetType>spatium</offsetType>
-            <spatiumSizeDependent>0</spatiumSizeDependent>
+            <subtype>Fingering</subtype>
             <data>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-size:8pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;4&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
-            <subtype>Fingering</subtype>
             <offset x="-1.54469" y="-8.18683"/>
             </Text>
           </Note>
@@ -1543,17 +1382,11 @@ p, li { white-space: pre-wrap; }
           <pitch>62</pitch>
           <tpc>16</tpc>
           <Text>
-            <align>36</align>
-            <xoffset>0</xoffset>
-            <yoffset>0</yoffset>
-            <anchor>note</anchor>
-            <offsetType>spatium</offsetType>
-            <spatiumSizeDependent>0</spatiumSizeDependent>
+            <subtype>Fingering</subtype>
             <data>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-size:8pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;3&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
-            <subtype>Fingering</subtype>
             <offset x="-1.85362" y="-7.26002"/>
             </Text>
           </Note>
@@ -1564,17 +1397,11 @@ p, li { white-space: pre-wrap; }
           <pitch>65</pitch>
           <tpc>13</tpc>
           <Text>
-            <align>36</align>
-            <xoffset>0</xoffset>
-            <yoffset>0</yoffset>
-            <anchor>note</anchor>
-            <offsetType>spatium</offsetType>
-            <spatiumSizeDependent>0</spatiumSizeDependent>
+            <subtype>Fingering</subtype>
             <data>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-size:8pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;1&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
-            <subtype>Fingering</subtype>
             <offset x="-1.69915" y="-6.48768"/>
             </Text>
           </Note>
@@ -1587,17 +1414,11 @@ p, li { white-space: pre-wrap; }
           <pitch>56</pitch>
           <tpc>10</tpc>
           <Text>
-            <align>36</align>
-            <xoffset>0</xoffset>
-            <yoffset>0</yoffset>
-            <anchor>note</anchor>
-            <offsetType>spatium</offsetType>
-            <spatiumSizeDependent>0</spatiumSizeDependent>
+            <subtype>Fingering</subtype>
             <data>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-size:8pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;1&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
-            <subtype>Fingering</subtype>
             <offset x="-1.69915" y="-8.65024"/>
             </Text>
           </Note>
@@ -1618,17 +1439,11 @@ p, li { white-space: pre-wrap; }
           <pitch>56</pitch>
           <tpc>10</tpc>
           <Text>
-            <align>36</align>
-            <xoffset>0</xoffset>
-            <yoffset>0</yoffset>
-            <anchor>note</anchor>
-            <offsetType>spatium</offsetType>
-            <spatiumSizeDependent>0</spatiumSizeDependent>
+            <subtype>Fingering</subtype>
             <data>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-size:8pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;2&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
-            <subtype>Fingering</subtype>
             <offset x="-1.85362" y="-8.95917"/>
             </Text>
           </Note>
@@ -1645,17 +1460,11 @@ p, li { white-space: pre-wrap; }
           <pitch>67</pitch>
           <tpc>15</tpc>
           <Text>
-            <align>36</align>
-            <xoffset>0</xoffset>
-            <yoffset>0</yoffset>
-            <anchor>note</anchor>
-            <offsetType>spatium</offsetType>
-            <spatiumSizeDependent>0</spatiumSizeDependent>
+            <subtype>Fingering</subtype>
             <data>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-size:8pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;0&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
-            <subtype>Fingering</subtype>
             <offset x="-2.57699" y="-7.94646"/>
             </Text>
           </Note>
@@ -1667,17 +1476,11 @@ p, li { white-space: pre-wrap; }
           <pitch>58</pitch>
           <tpc>12</tpc>
           <Text>
-            <align>36</align>
-            <xoffset>0</xoffset>
-            <yoffset>0</yoffset>
-            <anchor>note</anchor>
-            <offsetType>spatium</offsetType>
-            <spatiumSizeDependent>0</spatiumSizeDependent>
+            <subtype>Fingering</subtype>
             <data>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-size:8pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;1&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
-            <subtype>Fingering</subtype>
             <offset x="-1.39021" y="-8.18683"/>
             </Text>
           </Note>
@@ -1884,17 +1687,11 @@ p, li { white-space: pre-wrap; }
       </Measure>
     <Measure number="22">
       <Text>
-        <align>1</align>
-        <xoffset>0</xoffset>
-        <yoffset>-4</yoffset>
-        <anchor>system</anchor>
-        <offsetType>spatium</offsetType>
-        <spatiumSizeDependent>1</spatiumSizeDependent>
+        <subtype>System</subtype>
         <data>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-size:10pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:9pt;&quot;&gt;&lt;span style=&quot; font-size:10pt; font-weight:600;&quot;&gt;II_____________&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
-        <subtype>System</subtype>
         <offset x="-0.408163" y="-4.91904"/>
         </Text>
       <Chord>
@@ -1949,17 +1746,11 @@ p, li { white-space: pre-wrap; }
           <pitch>55</pitch>
           <tpc>15</tpc>
           <Text>
-            <align>36</align>
-            <xoffset>0</xoffset>
-            <yoffset>0</yoffset>
-            <anchor>note</anchor>
-            <offsetType>spatium</offsetType>
-            <spatiumSizeDependent>0</spatiumSizeDependent>
+            <subtype>Fingering</subtype>
             <data>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-size:8pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;2&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
-            <subtype>Fingering</subtype>
             <offset x="-1.59142" y="-9.25916"/>
             </Text>
           </Note>
@@ -1970,17 +1761,11 @@ p, li { white-space: pre-wrap; }
           <pitch>59</pitch>
           <tpc>19</tpc>
           <Text>
-            <align>36</align>
-            <xoffset>0</xoffset>
-            <yoffset>0</yoffset>
-            <anchor>note</anchor>
-            <offsetType>spatium</offsetType>
-            <spatiumSizeDependent>0</spatiumSizeDependent>
+            <subtype>Fingering</subtype>
             <data>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-size:8pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;1&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
-            <subtype>Fingering</subtype>
             <offset x="-1.6229" y="-8.30264"/>
             </Text>
           </Note>
@@ -1991,17 +1776,11 @@ p, li { white-space: pre-wrap; }
           <pitch>65</pitch>
           <tpc>13</tpc>
           <Text>
-            <align>36</align>
-            <xoffset>0</xoffset>
-            <yoffset>0</yoffset>
-            <anchor>note</anchor>
-            <offsetType>spatium</offsetType>
-            <spatiumSizeDependent>0</spatiumSizeDependent>
+            <subtype>Fingering</subtype>
             <data>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-size:8pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;3&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
-            <subtype>Fingering</subtype>
             <offset x="-1.78631" y="-6.82441"/>
             </Text>
           </Note>
@@ -2012,17 +1791,11 @@ p, li { white-space: pre-wrap; }
           <pitch>67</pitch>
           <tpc>15</tpc>
           <Text>
-            <align>36</align>
-            <xoffset>0</xoffset>
-            <yoffset>0</yoffset>
-            <anchor>note</anchor>
-            <offsetType>spatium</offsetType>
-            <spatiumSizeDependent>0</spatiumSizeDependent>
+            <subtype>Fingering</subtype>
             <data>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-size:8pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;0&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
-            <subtype>Fingering</subtype>
             <offset x="-1.59142" y="-7.37839"/>
             </Text>
           </Note>
@@ -2033,17 +1806,11 @@ p, li { white-space: pre-wrap; }
           <pitch>71</pitch>
           <tpc>19</tpc>
           <Text>
-            <align>36</align>
-            <xoffset>0</xoffset>
-            <yoffset>0</yoffset>
-            <anchor>note</anchor>
-            <offsetType>spatium</offsetType>
-            <spatiumSizeDependent>0</spatiumSizeDependent>
+            <subtype>Fingering</subtype>
             <data>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-size:8pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;0&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
-            <subtype>Fingering</subtype>
             <offset x="-1.73609" y="-7.52307"/>
             </Text>
           </Note>
@@ -2054,17 +1821,11 @@ p, li { white-space: pre-wrap; }
           <pitch>76</pitch>
           <tpc>18</tpc>
           <Text>
-            <align>36</align>
-            <xoffset>0</xoffset>
-            <yoffset>0</yoffset>
-            <anchor>note</anchor>
-            <offsetType>spatium</offsetType>
-            <spatiumSizeDependent>0</spatiumSizeDependent>
+            <subtype>Fingering</subtype>
             <data>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-size:8pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;0&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
-            <subtype>Fingering</subtype>
             <offset x="-2.17012" y="-6.79969"/>
             </Text>
           </Note>
@@ -2133,17 +1894,11 @@ p, li { white-space: pre-wrap; }
         <subtype>line</subtype>
         </LayoutBreak>
       <Text>
-        <align>1</align>
-        <xoffset>0</xoffset>
-        <yoffset>-4</yoffset>
-        <anchor>system</anchor>
-        <offsetType>spatium</offsetType>
-        <spatiumSizeDependent>1</spatiumSizeDependent>
+        <subtype>System</subtype>
         <data>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-size:10pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:9pt;&quot;&gt;&lt;span style=&quot; font-size:10pt; font-weight:600;&quot;&gt;III___________&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
-        <subtype>System</subtype>
         <offset x="-0.57" y="-4.56"/>
         </Text>
       <TimeSig>
@@ -2158,17 +1913,11 @@ p, li { white-space: pre-wrap; }
           <pitch>63</pitch>
           <tpc>11</tpc>
           <Text>
-            <align>36</align>
-            <xoffset>0</xoffset>
-            <yoffset>0</yoffset>
-            <anchor>note</anchor>
-            <offsetType>spatium</offsetType>
-            <spatiumSizeDependent>0</spatiumSizeDependent>
+            <subtype>Fingering</subtype>
             <data>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-size:8pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;4&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
-            <subtype>Fingering</subtype>
             <offset x="-2.69874" y="4.48706"/>
             </Text>
           </Note>
@@ -2179,17 +1928,11 @@ p, li { white-space: pre-wrap; }
           <pitch>67</pitch>
           <tpc>15</tpc>
           <Text>
-            <align>36</align>
-            <xoffset>0</xoffset>
-            <yoffset>0</yoffset>
-            <anchor>note</anchor>
-            <offsetType>spatium</offsetType>
-            <spatiumSizeDependent>0</spatiumSizeDependent>
+            <subtype>Fingering</subtype>
             <data>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-size:8pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;3&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
-            <subtype>Fingering</subtype>
             <offset x="-2.8288" y="6.5355"/>
             </Text>
           </Note>
@@ -2200,17 +1943,11 @@ p, li { white-space: pre-wrap; }
           <pitch>70</pitch>
           <tpc>12</tpc>
           <Text>
-            <align>36</align>
-            <xoffset>0</xoffset>
-            <yoffset>0</yoffset>
-            <anchor>note</anchor>
-            <offsetType>spatium</offsetType>
-            <spatiumSizeDependent>0</spatiumSizeDependent>
+            <subtype>Fingering</subtype>
             <data>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-size:8pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;4&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
-            <subtype>Fingering</subtype>
             <offset x="-2.34108" y="7.44592"/>
             </Text>
           </Note>
@@ -2221,17 +1958,11 @@ p, li { white-space: pre-wrap; }
           <pitch>60</pitch>
           <tpc>14</tpc>
           <Text>
-            <align>36</align>
-            <xoffset>0</xoffset>
-            <yoffset>0</yoffset>
-            <anchor>note</anchor>
-            <offsetType>spatium</offsetType>
-            <spatiumSizeDependent>0</spatiumSizeDependent>
+            <subtype>Fingering</subtype>
             <data>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-size:8pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;1&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
-            <subtype>Fingering</subtype>
             <offset x="-2.1785" y="4.38952"/>
             </Text>
           </Note>
@@ -2261,17 +1992,11 @@ p, li { white-space: pre-wrap; }
           <pitch>62</pitch>
           <tpc>16</tpc>
           <Text>
-            <align>36</align>
-            <xoffset>0</xoffset>
-            <yoffset>0</yoffset>
-            <anchor>note</anchor>
-            <offsetType>spatium</offsetType>
-            <spatiumSizeDependent>0</spatiumSizeDependent>
+            <subtype>Fingering</subtype>
             <data>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-size:8pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;2&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
-            <subtype>Fingering</subtype>
             <offset x="-2.77071" y="3.77824"/>
             </Text>
           </Note>
@@ -2282,17 +2007,11 @@ p, li { white-space: pre-wrap; }
           <pitch>67</pitch>
           <tpc>15</tpc>
           <Text>
-            <align>36</align>
-            <xoffset>0</xoffset>
-            <yoffset>0</yoffset>
-            <anchor>note</anchor>
-            <offsetType>spatium</offsetType>
-            <spatiumSizeDependent>0</spatiumSizeDependent>
+            <subtype>Fingering</subtype>
             <data>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-size:8pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;3&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
-            <subtype>Fingering</subtype>
             <offset x="-2.83368" y="6.4545"/>
             </Text>
           </Note>
@@ -2303,17 +2022,11 @@ p, li { white-space: pre-wrap; }
           <pitch>70</pitch>
           <tpc>12</tpc>
           <Text>
-            <align>36</align>
-            <xoffset>0</xoffset>
-            <yoffset>0</yoffset>
-            <anchor>note</anchor>
-            <offsetType>spatium</offsetType>
-            <spatiumSizeDependent>0</spatiumSizeDependent>
+            <subtype>Fingering</subtype>
             <data>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-size:8pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;4&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
-            <subtype>Fingering</subtype>
             <offset x="-2.32992" y="7.80837"/>
             </Text>
           </Note>
@@ -2324,17 +2037,11 @@ p, li { white-space: pre-wrap; }
           <pitch>58</pitch>
           <tpc>12</tpc>
           <Text>
-            <align>36</align>
-            <xoffset>0</xoffset>
-            <yoffset>0</yoffset>
-            <anchor>note</anchor>
-            <offsetType>spatium</offsetType>
-            <spatiumSizeDependent>0</spatiumSizeDependent>
+            <subtype>Fingering</subtype>
             <data>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-size:8pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;3&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
-            <subtype>Fingering</subtype>
             <offset x="-2.67626" y="3.46339"/>
             </Text>
           </Note>
@@ -2358,17 +2065,11 @@ p, li { white-space: pre-wrap; }
       </Measure>
     <Measure number="28">
       <Text>
-        <align>1</align>
-        <xoffset>0</xoffset>
-        <yoffset>-4</yoffset>
-        <anchor>system</anchor>
-        <offsetType>spatium</offsetType>
-        <spatiumSizeDependent>1</spatiumSizeDependent>
+        <subtype>System</subtype>
         <data>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-size:10pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:9pt;&quot;&gt;&lt;span style=&quot; font-size:10pt; font-weight:600;&quot;&gt;III____________&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
-        <subtype>System</subtype>
         <offset x="-0.587812" y="-5.78589"/>
         </Text>
       <Chord>
@@ -2378,17 +2079,11 @@ p, li { white-space: pre-wrap; }
           <pitch>60</pitch>
           <tpc>14</tpc>
           <Text>
-            <align>36</align>
-            <xoffset>0</xoffset>
-            <yoffset>0</yoffset>
-            <anchor>note</anchor>
-            <offsetType>spatium</offsetType>
-            <spatiumSizeDependent>0</spatiumSizeDependent>
+            <subtype>Fingering</subtype>
             <data>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-size:8pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;1&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
-            <subtype>Fingering</subtype>
             <offset x="-2.42437" y="3.8727"/>
             </Text>
           </Note>
@@ -2399,17 +2094,11 @@ p, li { white-space: pre-wrap; }
           <pitch>67</pitch>
           <tpc>15</tpc>
           <Text>
-            <align>36</align>
-            <xoffset>0</xoffset>
-            <yoffset>0</yoffset>
-            <anchor>note</anchor>
-            <offsetType>spatium</offsetType>
-            <spatiumSizeDependent>0</spatiumSizeDependent>
+            <subtype>Fingering</subtype>
             <data>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-size:8pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;4&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
-            <subtype>Fingering</subtype>
             <offset x="-2.64477" y="6.86381"/>
             </Text>
           </Note>
@@ -2420,17 +2109,11 @@ p, li { white-space: pre-wrap; }
           <pitch>70</pitch>
           <tpc>12</tpc>
           <Text>
-            <align>36</align>
-            <xoffset>0</xoffset>
-            <yoffset>0</yoffset>
-            <anchor>note</anchor>
-            <offsetType>spatium</offsetType>
-            <spatiumSizeDependent>0</spatiumSizeDependent>
+            <subtype>Fingering</subtype>
             <data>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-size:8pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;1&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
-            <subtype>Fingering</subtype>
             <offset x="-2.55031" y="8.09174"/>
             </Text>
           </Note>
@@ -2441,17 +2124,11 @@ p, li { white-space: pre-wrap; }
           <pitch>56</pitch>
           <tpc>10</tpc>
           <Text>
-            <align>36</align>
-            <xoffset>0</xoffset>
-            <yoffset>0</yoffset>
-            <anchor>note</anchor>
-            <offsetType>spatium</offsetType>
-            <spatiumSizeDependent>0</spatiumSizeDependent>
+            <subtype>Fingering</subtype>
             <data>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-size:8pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;2&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
-            <subtype>Fingering</subtype>
             <offset x="-2.86517" y="3.27448"/>
             </Text>
           </Note>
@@ -2471,17 +2148,11 @@ p, li { white-space: pre-wrap; }
           <pitch>75</pitch>
           <tpc>11</tpc>
           <Text>
-            <align>36</align>
-            <xoffset>0</xoffset>
-            <yoffset>0</yoffset>
-            <anchor>note</anchor>
-            <offsetType>spatium</offsetType>
-            <spatiumSizeDependent>0</spatiumSizeDependent>
+            <subtype>Fingering</subtype>
             <data>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-size:8pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;3&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
-            <subtype>Fingering</subtype>
             <offset x="-0.607619" y="-3.10655"/>
             </Text>
           </Note>
@@ -2500,17 +2171,11 @@ p, li { white-space: pre-wrap; }
           <pitch>70</pitch>
           <tpc>12</tpc>
           <Text>
-            <align>36</align>
-            <xoffset>0</xoffset>
-            <yoffset>0</yoffset>
-            <anchor>note</anchor>
-            <offsetType>spatium</offsetType>
-            <spatiumSizeDependent>0</spatiumSizeDependent>
+            <subtype>Fingering</subtype>
             <data>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-size:8pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;3&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
-            <subtype>Fingering</subtype>
             <offset x="-1.79467" y="1.92061"/>
             </Text>
           </Note>
@@ -2521,17 +2186,11 @@ p, li { white-space: pre-wrap; }
           <pitch>60</pitch>
           <tpc>14</tpc>
           <Text>
-            <align>36</align>
-            <xoffset>0</xoffset>
-            <yoffset>0</yoffset>
-            <anchor>note</anchor>
-            <offsetType>spatium</offsetType>
-            <spatiumSizeDependent>0</spatiumSizeDependent>
+            <subtype>Fingering</subtype>
             <data>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-size:8pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;2&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
-            <subtype>Fingering</subtype>
             <offset x="-1.16496" y="0.314854"/>
             </Text>
           </Note>
@@ -2569,17 +2228,11 @@ p, li { white-space: pre-wrap; }
           <pitch>56</pitch>
           <tpc>10</tpc>
           <Text>
-            <align>36</align>
-            <xoffset>0</xoffset>
-            <yoffset>0</yoffset>
-            <anchor>note</anchor>
-            <offsetType>spatium</offsetType>
-            <spatiumSizeDependent>0</spatiumSizeDependent>
+            <subtype>Fingering</subtype>
             <data>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-size:8pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;3&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
-            <subtype>Fingering</subtype>
             <offset x="-2.29843" y="-8.40659"/>
             </Text>
           </Note>
@@ -2590,17 +2243,11 @@ p, li { white-space: pre-wrap; }
           <pitch>60</pitch>
           <tpc>14</tpc>
           <Text>
-            <align>36</align>
-            <xoffset>0</xoffset>
-            <yoffset>0</yoffset>
-            <anchor>note</anchor>
-            <offsetType>spatium</offsetType>
-            <spatiumSizeDependent>0</spatiumSizeDependent>
+            <subtype>Fingering</subtype>
             <data>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-size:8pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;2&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
-            <subtype>Fingering</subtype>
             <offset x="-1.98358" y="-7.43054"/>
             </Text>
           </Note>
@@ -2611,17 +2258,11 @@ p, li { white-space: pre-wrap; }
           <pitch>64</pitch>
           <tpc>18</tpc>
           <Text>
-            <align>36</align>
-            <xoffset>0</xoffset>
-            <yoffset>0</yoffset>
-            <anchor>note</anchor>
-            <offsetType>spatium</offsetType>
-            <spatiumSizeDependent>0</spatiumSizeDependent>
+            <subtype>Fingering</subtype>
             <data>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-size:8pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;1&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
-            <subtype>Fingering</subtype>
             <offset x="-1.82615" y="-6.39153"/>
             </Text>
           </Note>
@@ -2637,17 +2278,11 @@ p, li { white-space: pre-wrap; }
           <pitch>55</pitch>
           <tpc>15</tpc>
           <Text>
-            <align>36</align>
-            <xoffset>0</xoffset>
-            <yoffset>0</yoffset>
-            <anchor>note</anchor>
-            <offsetType>spatium</offsetType>
-            <spatiumSizeDependent>0</spatiumSizeDependent>
+            <subtype>Fingering</subtype>
             <data>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-size:8pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;2&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
-            <subtype>Fingering</subtype>
             <offset x="-1.95209" y="-8.97333"/>
             </Text>
           </Note>
@@ -2658,17 +2293,11 @@ p, li { white-space: pre-wrap; }
           <pitch>59</pitch>
           <tpc>19</tpc>
           <Text>
-            <align>36</align>
-            <xoffset>0</xoffset>
-            <yoffset>0</yoffset>
-            <anchor>note</anchor>
-            <offsetType>spatium</offsetType>
-            <spatiumSizeDependent>0</spatiumSizeDependent>
+            <subtype>Fingering</subtype>
             <data>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-size:8pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;1&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
-            <subtype>Fingering</subtype>
             <offset x="-1.98358" y="-7.87134"/>
             </Text>
           </Note>
@@ -2679,17 +2308,11 @@ p, li { white-space: pre-wrap; }
           <pitch>65</pitch>
           <tpc>13</tpc>
           <Text>
-            <align>36</align>
-            <xoffset>0</xoffset>
-            <yoffset>0</yoffset>
-            <anchor>note</anchor>
-            <offsetType>spatium</offsetType>
-            <spatiumSizeDependent>0</spatiumSizeDependent>
+            <subtype>Fingering</subtype>
             <data>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-size:8pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;3&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
-            <subtype>Fingering</subtype>
             <offset x="-1.88912" y="-6.0137"/>
             </Text>
           </Note>
@@ -2870,31 +2493,19 @@ p, li { white-space: pre-wrap; }
       <LayoutBreak>
         </LayoutBreak>
       <Text>
-        <align>1</align>
-        <xoffset>0</xoffset>
-        <yoffset>-4</yoffset>
-        <anchor>system</anchor>
-        <offsetType>spatium</offsetType>
-        <spatiumSizeDependent>1</spatiumSizeDependent>
+        <subtype>System</subtype>
         <data>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-size:10pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:9pt;&quot;&gt;&lt;span style=&quot; font-size:10pt; font-weight:600;&quot;&gt;III________&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
-        <subtype>System</subtype>
         <offset x="-0.655169" y="-3.49775"/>
         </Text>
       <Text>
-        <align>1</align>
-        <xoffset>0</xoffset>
-        <yoffset>-4</yoffset>
-        <anchor>system</anchor>
-        <offsetType>spatium</offsetType>
-        <spatiumSizeDependent>1</spatiumSizeDependent>
+        <subtype>System</subtype>
         <data>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-size:10pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:9pt;&quot;&gt;&lt;span style=&quot; font-size:10pt; font-weight:600;&quot;&gt;IV__&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
-        <subtype>System</subtype>
         <offset x="-0.357958" y="-3.74476"/>
         <tick>48480</tick>
         </Text>
@@ -2925,17 +2536,11 @@ p, li { white-space: pre-wrap; }
           <pitch>58</pitch>
           <tpc>12</tpc>
           <Text>
-            <align>36</align>
-            <xoffset>0</xoffset>
-            <yoffset>0</yoffset>
-            <anchor>note</anchor>
-            <offsetType>spatium</offsetType>
-            <spatiumSizeDependent>0</spatiumSizeDependent>
+            <subtype>Fingering</subtype>
             <data>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-size:8pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;4&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
-            <subtype>Fingering</subtype>
             <offset x="-2.06861" y="0"/>
             </Text>
           </Note>
@@ -3402,17 +3007,11 @@ p, li { white-space: pre-wrap; }
           <pitch>67</pitch>
           <tpc>15</tpc>
           <Text>
-            <align>36</align>
-            <xoffset>0</xoffset>
-            <yoffset>0</yoffset>
-            <anchor>note</anchor>
-            <offsetType>spatium</offsetType>
-            <spatiumSizeDependent>0</spatiumSizeDependent>
+            <subtype>Fingering</subtype>
             <data>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-size:8pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;2&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
-            <subtype>Fingering</subtype>
             <offset x="-1.44879" y="1.3813"/>
             </Text>
           </Note>
@@ -3446,17 +3045,11 @@ p, li { white-space: pre-wrap; }
       </Measure>
     <Measure number="55">
       <Text>
-        <align>1</align>
-        <xoffset>0</xoffset>
-        <yoffset>-4</yoffset>
-        <anchor>system</anchor>
-        <offsetType>spatium</offsetType>
-        <spatiumSizeDependent>1</spatiumSizeDependent>
+        <subtype>System</subtype>
         <data>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-size:10pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:9pt;&quot;&gt;&lt;span style=&quot; font-size:10pt; font-weight:600;&quot;&gt;III____&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
-        <subtype>System</subtype>
         <offset x="-0.740233" y="-2.82902"/>
         <tick>70320</tick>
         </Text>
@@ -3509,17 +3102,11 @@ p, li { white-space: pre-wrap; }
           <pitch>72</pitch>
           <tpc>14</tpc>
           <Text>
-            <align>36</align>
-            <xoffset>0</xoffset>
-            <yoffset>0</yoffset>
-            <anchor>note</anchor>
-            <offsetType>spatium</offsetType>
-            <spatiumSizeDependent>0</spatiumSizeDependent>
+            <subtype>Fingering</subtype>
             <data>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-size:8pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;1&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
-            <subtype>Fingering</subtype>
             <offset x="-2.61326" y="-6.76937"/>
             </Text>
           </Note>
@@ -3533,17 +3120,11 @@ p, li { white-space: pre-wrap; }
           <pitch>71</pitch>
           <tpc>19</tpc>
           <Text>
-            <align>36</align>
-            <xoffset>0</xoffset>
-            <yoffset>0</yoffset>
-            <anchor>note</anchor>
-            <offsetType>spatium</offsetType>
-            <spatiumSizeDependent>0</spatiumSizeDependent>
+            <subtype>Fingering</subtype>
             <data>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-size:8pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;0&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
-            <subtype>Fingering</subtype>
             <offset x="-1.85208" y="-7.49653"/>
             </Text>
           </Note>
@@ -3564,32 +3145,20 @@ p, li { white-space: pre-wrap; }
         <subtype>line</subtype>
         </LayoutBreak>
       <Text>
-        <align>1</align>
-        <xoffset>0</xoffset>
-        <yoffset>-4</yoffset>
-        <anchor>system</anchor>
-        <offsetType>spatium</offsetType>
-        <spatiumSizeDependent>1</spatiumSizeDependent>
+        <subtype>System</subtype>
         <data>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-size:10pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:9pt;&quot;&gt;&lt;span style=&quot; font-size:10pt; font-weight:600;&quot;&gt;III____&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
-        <subtype>System</subtype>
         <offset x="0" y="-1.08844"/>
         <tick>71280</tick>
         </Text>
       <Text>
-        <align>1</align>
-        <xoffset>0</xoffset>
-        <yoffset>-4</yoffset>
-        <anchor>system</anchor>
-        <offsetType>spatium</offsetType>
-        <spatiumSizeDependent>1</spatiumSizeDependent>
+        <subtype>System</subtype>
         <data>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-size:10pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:9pt;&quot;&gt;&lt;span style=&quot; font-size:10pt; font-weight:600;&quot;&gt;IV____&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
-        <subtype>System</subtype>
         <offset x="0" y="-1.08844"/>
         <tick>71760</tick>
         </Text>
@@ -3601,17 +3170,11 @@ p, li { white-space: pre-wrap; }
           <pitch>63</pitch>
           <tpc>11</tpc>
           <Text>
-            <align>36</align>
-            <xoffset>0</xoffset>
-            <yoffset>0</yoffset>
-            <anchor>note</anchor>
-            <offsetType>spatium</offsetType>
-            <spatiumSizeDependent>0</spatiumSizeDependent>
+            <subtype>Fingering</subtype>
             <data>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-size:8pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;4&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
-            <subtype>Fingering</subtype>
             <offset x="-2.19616" y="3.96783"/>
             </Text>
           </Note>
@@ -3650,17 +3213,11 @@ p, li { white-space: pre-wrap; }
           <pitch>69</pitch>
           <tpc>17</tpc>
           <Text>
-            <align>36</align>
-            <xoffset>0</xoffset>
-            <yoffset>0</yoffset>
-            <anchor>note</anchor>
-            <offsetType>spatium</offsetType>
-            <spatiumSizeDependent>0</spatiumSizeDependent>
+            <subtype>Fingering</subtype>
             <data>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-size:8pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;4&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
-            <subtype>Fingering</subtype>
             <offset x="-2.77584" y="-5.45201"/>
             </Text>
           </Note>
