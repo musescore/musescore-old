@@ -202,8 +202,8 @@ class ExportMusicXml {
       void clef(int staff, int clef);
       void timesig(TimeSig* tsig);
       void keysig(int key);
-      void bar(const BarLine* bar, const Volta* volta=0, const QString& dir="");
-      void barlineLeft(Measure* m, int strack, int etrack, Volta* volta);
+      void barlineLeft(Measure* m);
+      void barlineRight(Measure* m);
       void pitch2xml(Note* note, char& c, int& alter, int& octave);
       void lyrics(const LyricsList* ll);
 
@@ -869,118 +869,117 @@ static QString tick2xml(const int ticks, int& dots)
       }
 
 //---------------------------------------------------------
-//   bar
+//   findVolta -- find volta starting in measure m
 //---------------------------------------------------------
 
-void ExportMusicXml::bar(const BarLine* bar, const Volta* volta, const QString& dir)
+static Volta* findVolta(Measure* m, bool left)
       {
-      if (!bar && !volta)
-            return;
-      if (bar && (bar->subtype() == NORMAL_BAR) && !volta)
-            return;
-      attr.doAttr(xml, false);
-      xml.stag(QString("barline location=\"%1\"").arg(dir));
-      if (bar && (bar->subtype() != NORMAL_BAR)) {
-            switch(bar->subtype()) {
-                  case DOUBLE_BAR:
-                        xml.tag("bar-style", QString("light-light"));
+      foreach(Element* el, *(m->score()->gel())) {
+            if (el->type() == VOLTA) {
+                  Volta* v = (Volta*) el;
+                  if ((left && v->tick() == m->tick())
+                      || (!left && v->tick2() == (m->tick() + m->tickLen()))) {
+                        return v;
+                        }
+                  }
+            }
+      return 0;
+      }
+
+//---------------------------------------------------------
+//   ending
+//---------------------------------------------------------
+
+static void ending(Xml& xml, Volta* v, bool left)
+      {
+      QString number = "";
+      QString type = "";
+      foreach(int i, v->endings()) {
+            if (!number.isEmpty())
+                  number += ", ";
+            number += QString("%1").arg(i);
+            }
+      if (left) {
+            type = "start";
+            }
+      else {
+            int st = v->subtype();
+            switch (st) {
+                  case Volta::VOLTA_OPEN:
+                        type = "discontinue";
                         break;
-                  case START_REPEAT:
-                        xml.tag("bar-style", QString("heavy-light"));
-                        xml.tagE("repeat direction=\"forward\"");
-                        break;
-                  case END_REPEAT:
-                        xml.tag("bar-style", QString("light-heavy"));
-                        xml.tagE("repeat direction=\"backward\"");
-                        break;
-                  case BROKEN_BAR:
-                        xml.tag("bar-style", QString("dotted"));
-                        break;
-                  case END_BAR:
-                        xml.tag("bar-style", QString("light-heavy"));
-                        break;
-                  case END_START_REPEAT:
-/*TODO*/                        xml.tag("bar-style", QString("none"));
+                  case Volta::VOLTA_CLOSED:
+                        type = "stop";
                         break;
                   default:
-                        printf("ExportMusicXml::bar(): bar subtype %d not supported\n", bar->subtype());
+                        printf("unknown volta subtype %d\n", st);
+                        type = "unknown";
                         break;
                   }
             }
-      if (volta && (dir == "left")) {
-            switch(volta->subtype()) {
-                  case 1:
-                        xml.tagE("ending type=\"start\" number=\"1\"");
-                        break;
-                  case 2:
-                  case 4:
-                        xml.tagE("ending type=\"start\" number=\"2\"");
-                        break;
-                  case 3:
-                        xml.tagE("ending type=\"start\" number=\"3\"");
-                        break;
-                  default:
-                        printf("ExportMusicXml::bar(): volta subtype %d not supported\n", volta->subtype());
-                        break;
-                  }
-            }
-      if (volta && (dir == "right")) {
-            switch(volta->subtype()) {
-                  case 1:
-                        xml.tagE("ending type=\"stop\" number=\"1\"");
-                        break;
-                  case 2:
-                        xml.tagE("ending type=\"stop\" number=\"2\"");
-                        break;
-                  case 3:
-                        xml.tagE("ending type=\"stop\" number=\"3\"");
-                        break;
-                  case 4:
-                        xml.tagE("ending type=\"discontinue\" number=\"2\"");
-                        break;
-                  default:
-                        printf("ExportMusicXml::bar(): volta subtype %d not supported\n", volta->subtype());
-                        break;
-                  }
-            }
-      xml.etag();
+            xml.tagE("ending number=\"%s\" type=\"%s\"",
+                     number.toLatin1().data(),
+                     type.toLatin1().data());
       }
 
 //---------------------------------------------------------
 //   barlineLeft -- search for and handle barline left
 //---------------------------------------------------------
 
-void ExportMusicXml::barlineLeft(Measure* m, int strack, int etrack, Volta* volta)
+void ExportMusicXml::barlineLeft(Measure* m)
       {
-      for (int st = strack; st < etrack; ++st)
-            for (Segment* seg = m->first(); seg; seg = seg->next()) {
-                  Element* el = seg->element(st);
-                  if (!el)
-                        continue;
-                  if (el->type() == BAR_LINE)
-                        if (el->subtype() == START_REPEAT) {
-                              bar((BarLine*) el, volta, "left");
-                              return;   // assume only one start repeat
-                              }
-                  }
-      // if no barline found, volta still needs to be handled
-      bar(0, volta, "left");
+      bool rs = m->repeatFlags() & RepeatStart;
+      Volta* volta = findVolta(m, true);
+      if (!rs && !volta) return;
+      attr.doAttr(xml, false);
+      xml.stag(QString("barline location=\"left\""));
+      if (rs) {
+            xml.tag("bar-style", QString("heavy-light"));
+            xml.tagE("repeat direction=\"forward\"");
+            }
+      if (volta) {
+            ending(xml, volta, true);
+            }
+      xml.etag();
       }
 
 //---------------------------------------------------------
-//   findVolta -- find volta in measure m
+//   barlineRight -- search for and handle barline right
 //---------------------------------------------------------
 
-static Volta* findVolta(Measure* m)
+void ExportMusicXml::barlineRight(Measure* m)
       {
-      // loop over all measure relative elements in this measure
-      for (ciElement ci = m->el()->begin(); ci != m->el()->end(); ++ci) {
-            Element* dir = *ci;
-            if (dir->type() == VOLTA) {
-                  return (Volta*) dir;
+      int bst = m->endBarLineType();
+      bool needBarStyle = (bst != NORMAL_BAR && bst != START_REPEAT);
+      Volta* volta = findVolta(m, false);
+      if (!needBarStyle && !volta)
+            return;
+      xml.stag(QString("barline location=\"right\""));
+      if (needBarStyle) {
+            switch(bst) {
+                  case DOUBLE_BAR:
+                        xml.tag("bar-style", QString("light-light"));
+                        break;
+                  case END_REPEAT:
+                        xml.tag("bar-style", QString("light-heavy"));
+                        break;
+                  case BROKEN_BAR:
+                        xml.tag("bar-style", QString("dotted"));
+                        break;
+                  case END_BAR:
+                  case END_START_REPEAT:
+                        xml.tag("bar-style", QString("light-heavy"));
+                        break;
+                  default:
+                        printf("ExportMusicXml::bar(): bar subtype %d not supported\n", bst);
+                        break;
                   }
             }
-      return 0;
+      if (volta)
+            ending(xml, volta, false);
+      if (bst == END_REPEAT || bst == END_START_REPEAT)
+            xml.tagE("repeat direction=\"backward\"");
+      xml.etag();
       }
 
 //---------------------------------------------------------
@@ -1941,6 +1940,11 @@ foreach(Element* el, *(score->gel())) {
            Slur * s = (Slur *) el;
            printf(" tick2=%d track2=%d", s->tick2(), s->track2());
            }
+      if (el->type() == VOLTA) {
+           Volta * v = (Volta *) el;
+           printf(" tick2=%d text=%s endings=", v->tick2(), v->text().toLatin1().data());
+           foreach(int i, v->endings()) printf(" %d", i);
+           }
       printf("\n");
       }
 */
@@ -2081,7 +2085,6 @@ foreach(Element* el, *(score->gel())) {
             int measureNo = 1;          // number of next regular measure
             int irregularMeasureNo = 1; // number of next irregular measure
             int pickupMeasureNo = 1;    // number of next pickup measure
-            Volta* volta = 0;           // volta in current measure(s)
             for (MeasureBase* mb = score->mainLayout()->first(); mb; mb = mb->next()) {
                   if (mb->type() != MEASURE)
                         continue;
@@ -2107,8 +2110,7 @@ foreach(Element* el, *(score->gel())) {
                   dh.buildDirectionsList(m, false, part, strack, etrack);
 
                   // barline left must be the first element in a measure
-                  volta = findVolta(m);
-                  barlineLeft(m, strack, etrack, volta);
+                  barlineLeft(m);
 
                   // output attributes with the first actual measure (pickup or regular)
                   if ((irregularMeasureNo + measureNo + pickupMeasureNo) == 4) {
@@ -2277,8 +2279,9 @@ foreach(Element* el, *(score->gel())) {
                                           // if location is right, it should be the last element.
                                           // implementation note: START_REPEAT already written by barlineLeft()
                                           // any bars left should be "middle"
-                                          if (el->subtype() != START_REPEAT)
-                                                bar((BarLine*) el);
+                                          // TODO: print barline only if middle
+                                          // if (el->subtype() != START_REPEAT)
+                                          //       bar((BarLine*) el);
                                           break;
 
                                     // LVIFIX TODO: support breath mark, which is stored in a separate segment by mscore,
@@ -2305,8 +2308,9 @@ foreach(Element* el, *(score->gel())) {
                   moveToTick(m->tick() + m->tickLen());
                   if (idx == 0)
                         repeatAtMeasureStop(xml, m);
-                  BarLine * b = m->barLine(score->staff(part));
-                  bar(b, volta, "right");
+                  // note: don't use "m->repeatFlags() & RepeatEnd" here, because more
+                  // barline types need to be handled besides repeat end ("light-heavy")
+                  barlineRight(m);
                   xml.etag();
                   }
             xml.etag();
