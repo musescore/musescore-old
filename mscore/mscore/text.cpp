@@ -41,10 +41,12 @@ TextPalette* palette;
 Text::Text(Score* s)
    : Element(s)
       {
-      _align                  = ALIGN_LEFT;
+      _align                  = 0;
       _xoff                   = 0;
       _yoff                   = 0;
-      _anchor                 = ANCHOR_STAFF;
+      _rxoff                  = 0;
+      _ryoff                  = 0;
+      _anchor                 = ANCHOR_PARENT;
       _offsetType             = OFFSET_SPATIUM;
       _sizeIsSpatiumDependent = true;
       editMode                = false;
@@ -64,6 +66,8 @@ Text::Text(const Text& e)
       _align                  = e._align;
       _xoff                   = e._xoff;
       _yoff                   = e._yoff;
+      _rxoff                  = e._rxoff;
+      _ryoff                  = e._ryoff;
       _anchor                 = e._anchor;
       _offsetType             = e._offsetType;
       _sizeIsSpatiumDependent = e._sizeIsSpatiumDependent;
@@ -110,36 +114,46 @@ void Text::setDoc(const QTextDocument& d)
 void Text::setSubtype(int val)
       {
       Element::setSubtype(val);
-      //
-      // set default values:
-      //
-      switch (val) {
-            case TEXT_TITLE:            setStyle(TEXT_STYLE_TITLE); break;
-            case TEXT_SUBTITLE:         setStyle(TEXT_STYLE_SUBTITLE); break;
-            case TEXT_COMPOSER:         setStyle(TEXT_STYLE_COMPOSER); break;
-            case TEXT_POET:             setStyle(TEXT_STYLE_POET); break;
-            case TEXT_TRANSLATOR:       setStyle(TEXT_STYLE_TRANSLATOR); break;
-            case TEXT_MEASURE_NUMBER:   setStyle(TEXT_STYLE_MEASURE_NUMBER); break;
-            case TEXT_PAGE_NUMBER_ODD:  setStyle(TEXT_STYLE_PAGE_NUMBER_ODD); break;
-            case TEXT_PAGE_NUMBER_EVEN: setStyle(TEXT_STYLE_PAGE_NUMBER_EVEN); break;
-            case TEXT_COPYRIGHT:        setStyle(TEXT_STYLE_COPYRIGHT); break;
-            case TEXT_FINGERING:        setStyle(TEXT_STYLE_FINGERING); break;
-            case TEXT_INSTRUMENT_LONG:  setStyle(TEXT_STYLE_INSTRUMENT_LONG); break;
-            case TEXT_INSTRUMENT_SHORT: setStyle(TEXT_STYLE_INSTRUMENT_SHORT); break;
-            case TEXT_TEMPO:            setStyle(TEXT_STYLE_TEMPO); break;
-            case TEXT_LYRIC:            setStyle(TEXT_STYLE_LYRIC); break;
-            case TEXT_TUPLET:           setStyle(TEXT_STYLE_TUPLET); break;
-            case TEXT_SYSTEM:           setStyle(TEXT_STYLE_SYSTEM); break;
-            case TEXT_STAFF:            setStyle(TEXT_STYLE_STAFF); break;
-            case TEXT_CHORD:            setStyle(TEXT_STYLE_CHORD); break;
-            case TEXT_REHEARSAL_MARK:   setStyle(TEXT_STYLE_REHEARSAL_MARK); break;
-            case TEXT_REPEAT:           setStyle(TEXT_STYLE_REPEAT); break;
-            case TEXT_VOLTA:            setStyle(TEXT_STYLE_VOLTA); break;
-            case TEXT_FRAME:            setStyle(TEXT_STYLE_FRAME); break;
+      setStyle(style());
+      }
+
+//---------------------------------------------------------
+//   style
+//---------------------------------------------------------
+
+TextStyle* Text::style() const
+      {
+      int st = -1;
+      switch (subtype()) {
+            case TEXT_TITLE:            st = TEXT_STYLE_TITLE; break;
+            case TEXT_SUBTITLE:         st = TEXT_STYLE_SUBTITLE; break;
+            case TEXT_COMPOSER:         st = TEXT_STYLE_COMPOSER; break;
+            case TEXT_POET:             st = TEXT_STYLE_POET; break;
+            case TEXT_TRANSLATOR:       st = TEXT_STYLE_TRANSLATOR; break;
+            case TEXT_MEASURE_NUMBER:   st = TEXT_STYLE_MEASURE_NUMBER; break;
+            case TEXT_PAGE_NUMBER_ODD:  st = TEXT_STYLE_PAGE_NUMBER_ODD; break;
+            case TEXT_PAGE_NUMBER_EVEN: st = TEXT_STYLE_PAGE_NUMBER_EVEN; break;
+            case TEXT_COPYRIGHT:        st = TEXT_STYLE_COPYRIGHT; break;
+            case TEXT_FINGERING:        st = TEXT_STYLE_FINGERING; break;
+            case TEXT_INSTRUMENT_LONG:  st = TEXT_STYLE_INSTRUMENT_LONG; break;
+            case TEXT_INSTRUMENT_SHORT: st = TEXT_STYLE_INSTRUMENT_SHORT; break;
+            case TEXT_TEMPO:            st = TEXT_STYLE_TEMPO; break;
+            case TEXT_LYRIC:            st = TEXT_STYLE_LYRIC; break;
+            case TEXT_TUPLET:           st = TEXT_STYLE_TUPLET; break;
+            case TEXT_SYSTEM:           st = TEXT_STYLE_SYSTEM; break;
+            case TEXT_STAFF:            st = TEXT_STYLE_STAFF; break;
+            case TEXT_CHORD:            st = TEXT_STYLE_CHORD; break;
+            case TEXT_REHEARSAL_MARK:   st = TEXT_STYLE_REHEARSAL_MARK; break;
+            case TEXT_REPEAT:           st = TEXT_STYLE_REPEAT; break;
+            case TEXT_VOLTA:            st = TEXT_STYLE_VOLTA; break;
+            case TEXT_FRAME:            st = TEXT_STYLE_FRAME; break;
             default:
-                  printf("unknown text subtype %d\n", val);
+                  printf("unknown text subtype %d\n", subtype());
                   break;
             }
+      if (st != -1)
+            return score()->textStyle(st);
+      return 0;
       }
 
 //---------------------------------------------------------
@@ -235,17 +249,6 @@ void Text::setSubtype(const QString& s)
       }
 
 //---------------------------------------------------------
-//   bbox
-//---------------------------------------------------------
-
-QRectF Text::bbox() const
-      {
-//      doc->documentLayout()->setPaintDevice(score()->scoreLayout()->paintDevice());
-      _bbox = QRectF(0.0, 0.0, doc->size().width(), doc->size().height());
-      return _bbox;
-      }
-
-//---------------------------------------------------------
 //   resetMode
 //---------------------------------------------------------
 
@@ -292,53 +295,28 @@ void Text::layout(ScoreLayout* layout)
 
       doc->documentLayout()->setPaintDevice(layout->paintDevice());
       doc->setUseDesignMetrics(true);
+      setbbox(QRectF(QPointF(), doc->documentLayout()->documentSize()));
 
-      QPointF _off(QPointF(_xoff, _yoff));
+      QPointF o(QPointF(_xoff, _yoff));
       if (_offsetType == OFFSET_SPATIUM)
-            _off *= _spatium;
+            o *= _spatium;
       else
-            _off *= DPI;
+            o *= DPI;
+      o += QPointF(_rxoff * parent()->width() * 0.01, _ryoff * parent()->height() * 0.01);
 
-      double tw = bbox().width();
-      double th = bbox().height();
+      double tw = width();
+      double th = height();
       double x  = 0.0;
       double y  = 0.0;
-      if (_anchor == ANCHOR_PAGE) {
-            double w = parent()->width();
-            double h = parent()->height();
-            doc->setTextWidth(w);
-            if (parent()->type() == PAGE) {
-                  Page* page = (Page*)parent();
-                  x = page->lm();
-                  y = page->tm();
-                  w -= (page->lm() + page->rm());
-                  h -= (page->tm() + page->bm());
-                  }
-            if (_offsetType == OFFSET_REL)
-                  _off = QPointF(_xoff * w * 0.01, _yoff * h * 0.01);
-            if (_align & ALIGN_TOP)
-                  ;
-            else if (_align & ALIGN_BOTTOM)
-                  y += (h - th);
-            else if (_align & ALIGN_VCENTER)
-                  y += (h * .5 - th * .5);
-            }
-      else {
-            if (_align & ALIGN_LEFT)
-                  ;
-            else if (_align & ALIGN_RIGHT)
-                  x  = -tw;
-            else if (_align & ALIGN_HCENTER)
-                  x  = -(tw *.5);
-            if (_align & ALIGN_TOP)
-                  ;
-            else if (_align & ALIGN_BOTTOM)
-                  y = -th;
-            else if (_align & ALIGN_VCENTER) {
-                  y = -(th * .5) - bbox().y();
-                  }
-            }
-      setPos(x + _off.x(), y + _off.y());
+      if (_align & ALIGN_BOTTOM)
+            y = -th;
+      else if (_align & ALIGN_VCENTER)
+            y = -(th * .5);
+      if (_align & ALIGN_RIGHT)
+            x = -tw;
+      else if (_align & ALIGN_HCENTER)
+            x = -(tw * .5);
+      setPos(x + o.x(), y + o.y());
       }
 
 //---------------------------------------------------------
@@ -350,19 +328,6 @@ void Text::setText(const QString& s)
       doc->clear();
       QTextCursor cursor(doc);
       cursor.movePosition(QTextCursor::Start);
-      if (_align) {
-            QTextBlockFormat bf = cursor.blockFormat();
-            Qt::Alignment alignment = 0;
-            if (_align & ALIGN_HCENTER)
-                  alignment |= Qt::AlignHCenter;
-            else if (_align & ALIGN_LEFT)
-                  alignment |= Qt::AlignLeft;
-            else if (_align & ALIGN_RIGHT)
-                  alignment |= Qt::AlignRight;
-
-            bf.setAlignment(alignment);
-            cursor.setBlockFormat(bf);
-            }
       QTextCharFormat tf = cursor.charFormat();
       tf.setFont(doc->defaultFont());
       cursor.setBlockCharFormat(tf);
@@ -382,13 +347,16 @@ void Text::setHtml(const QString& s)
 //   setStyle
 //---------------------------------------------------------
 
-void Text::setStyle(int n)
+void Text::setStyle(const TextStyle* s)
       {
-      TextStyle* s   = score()->textStyle(n);
+      if (s == 0)
+            return;
       doc->setDefaultFont(s->font());
       _align         = s->align;
       _xoff          = s->xoff;
       _yoff          = s->yoff;
+      _rxoff         = s->rxoff;
+      _ryoff         = s->ryoff;
       _anchor        = s->anchor;
       _offsetType    = s->offsetType;
       _sizeIsSpatiumDependent = s->sizeIsSpatiumDependent;
@@ -427,6 +395,8 @@ void Text::write(Xml& xml, const char* name) const
 
 void Text::read(QDomElement e)
       {
+      _align  = 0;
+      _anchor = ANCHOR_PARENT;
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             if (!readProperties(e))
                   domError(e);
@@ -440,28 +410,59 @@ void Text::read(QDomElement e)
 
 void Text::writeProperties(Xml& xml) const
       {
-      xml.tag("align", _align);
-      xml.tag("xoffset", _xoff);
-      xml.tag("yoffset", _yoff);
+      Element::writeProperties(xml);
 
-      const char* p = "?";
-      switch(_anchor) {
-            case ANCHOR_PAGE:     p = "page"; break;
-            case ANCHOR_STAFF:    p = "staff"; break;
-            case ANCHOR_NOTE:     p = "note"; break;
-            case ANCHOR_SYSTEM:   p = "system"; break;
+      // write all properties which are different from style
+
+      TextStyle* st = style();
+
+      if (_align != st->align) {
+if (subtype() == TEXT_TITLE)
+      printf("Title align %x style %x\n", _align, st->align);
+
+            if (_align & (ALIGN_RIGHT | ALIGN_HCENTER)) {          // default is ALIGN_LEFT
+                  xml.tag("halign", (_align & ALIGN_RIGHT) ? "right" : "center");
+                  }
+            if (_align & (ALIGN_BOTTOM | ALIGN_VCENTER)) {        // default is ALIGN_TOP
+                  xml.tag("valign", (_align & ALIGN_BOTTOM) ? "bottom" : "center");
+                  }
             }
-      xml.tag("anchor", p);
-      switch(_offsetType) {
-            case OFFSET_ABS:        p = "absolute"; break;
-            case OFFSET_REL:        p = "relative"; break;
-            case OFFSET_SPATIUM:    p = "spatium"; break;
+      if (_xoff != st->xoff)
+            xml.tag("xoffset", _xoff);
+      if (_yoff != st->yoff)
+            xml.tag("yoffset", _yoff);
+      if (_rxoff != st->rxoff)
+            xml.tag("rxoffset", _rxoff);
+      if (_ryoff != st->ryoff)
+            xml.tag("ryoffset", _ryoff);
+
+      if (_anchor != st->anchor) {
+            const char* p = 0;
+            switch(_anchor) {
+                  case ANCHOR_PARENT:                    break;   // default
+                  case ANCHOR_MEASURE:    p = "measure"; break;
+                  case ANCHOR_STAFF:      p = "staff";   break;
+                  case ANCHOR_SEGMENT:    p = "segment"; break;
+                  }
+            if (p)
+                  xml.tag("anchor", p);
             }
-      xml.tag("offsetType", p);
-      xml.tag("spatiumSizeDependent", _sizeIsSpatiumDependent);
+
+      if (_offsetType != st->offsetType) {
+            const char* p = 0;
+            switch(_offsetType) {
+                  case OFFSET_SPATIUM:                    break;
+                  case OFFSET_ABS:        p = "absolute"; break;
+                  }
+            if (p)
+                  xml.tag("offsetType", p);
+            }
+
+      if (!_sizeIsSpatiumDependent && _sizeIsSpatiumDependent != st->sizeIsSpatiumDependent)
+            xml.tag("spatiumSizeDependent", _sizeIsSpatiumDependent);
+
       QString s = doc->toHtml("utf8");
       xml.tag("data", s);
-      Element::writeProperties(xml);
       }
 
 //---------------------------------------------------------
@@ -475,35 +476,51 @@ bool Text::readProperties(QDomElement e)
 
       if (tag == "data")
             doc->setHtml(val);
-      else if (tag == "align")
+      else if (tag == "align")            // obsolete
             _align = val.toInt();
+      else if (tag == "halign") {
+            if (val == "center")
+                  _align |= ALIGN_HCENTER;
+            else if (val == "right")
+                  _align |= ALIGN_RIGHT;
+            else
+                  printf("Text::readProperties: unknown alignment: <%s>\n", qPrintable(val));
+            }
+      else if (tag == "valign") {
+            if (val == "center")
+                  _align |= ALIGN_VCENTER;
+            else if (val == "bottom")
+                  _align |= ALIGN_BOTTOM;
+            else
+                  printf("Text::readProperties: unknown alignment: <%s>\n", qPrintable(val));
+            }
       else if (tag == "xoffset")
             _xoff = val.toDouble();
       else if (tag == "yoffset")
             _yoff = val.toDouble();
+      else if (tag == "rxoffset")
+            _rxoff = val.toDouble();
+      else if (tag == "ryoffset")
+            _ryoff = val.toDouble();
       else if (tag == "anchor") {
-            if (val == "page")
-                  _anchor = ANCHOR_PAGE;
+            if (val == "parent")
+                  _anchor = ANCHOR_PARENT;
+            else if (val == "measure")
+                  _anchor = ANCHOR_MEASURE;
             else if (val == "staff")
                   _anchor = ANCHOR_STAFF;
-            else if (val == "tick")             // obsolete
-                  _anchor = ANCHOR_STAFF;
-            else if (val == "note")
-                  _anchor = ANCHOR_NOTE;
-            else if (val == "system")
-                  _anchor = ANCHOR_SYSTEM;
+            else if (val == "segment")
+                  _anchor = ANCHOR_SEGMENT;
             else
-                  printf("Text::readProperties: unknown anchor: <%s>\n", val.toLocal8Bit().data());
+                  printf("Text::readProperties: unknown anchor: <%s>\n", qPrintable(val));
             }
       else if (tag == "offsetType") {
             if (val == "absolute")
                   _offsetType = OFFSET_ABS;
-            else if (val == "relative")
-                  _offsetType = OFFSET_REL;
             else if (val == "spatium")
                   _offsetType = OFFSET_SPATIUM;
             else
-                  printf("Text::readProperties: unknown offset type: <%s>\n", val.toLocal8Bit().data());
+                  printf("Text::readProperties: unknown offset type: <%s>\n", qPrintable(val));
             }
       else if (tag == "spatiumSizeDependent")
             _sizeIsSpatiumDependent = val.toInt();
@@ -776,6 +793,7 @@ QPainterPath Text::shape() const
             int n = tl->lineCount();
             for (int i = 0; i < n; ++i)
                   pp.addRect(tl->lineAt(0).naturalTextRect().translated(tl->position()));
+                  //pp.addRect(tl->lineAt(0).rect().translated(tl->position()));
             }
       return pp;
       }
@@ -911,3 +929,24 @@ void TempoText::read(QDomElement e)
       cursorPos = 0;
       }
 
+//---------------------------------------------------------
+//   dragAnchor
+//---------------------------------------------------------
+
+QLineF Text::dragAnchor() const
+      {
+      QPointF p1(parent()->abbox().topLeft());
+      double tw = width();
+      double th = height();
+      double x  = 0.0;
+      double y  = 0.0;
+      if (_align & ALIGN_BOTTOM)
+            y = th;
+      else if (_align & ALIGN_VCENTER)
+            y = (th * .5);
+      if (_align & ALIGN_RIGHT)
+            x = tw;
+      else if (_align & ALIGN_HCENTER)
+            x = (tw * .5);
+      return QLineF(p1, QPointF(x, y) + canvasPos());
+      }

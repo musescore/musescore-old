@@ -172,6 +172,8 @@ class Score : public QObject {
       void addTempo();
       void addMetronome();
 
+      MeasureBase* searchLabel(const QString& s, MeasureBase* start = 0);
+
    public slots:
       void doUndo();
       void doRedo();
@@ -412,7 +414,8 @@ class Score : public QObject {
       bool saveSvg(const QString& name);
       bool saveLilypond(const QString& name);
 
-      ChordRest* getSelectedChordRest();
+      ChordRest* getSelectedChordRest() const;
+      Element* getSelectedElement() const { return sel->element(); }
       int pos();
       Measure* tick2measure(int tick) const;
       MeasureBase* tick2measureBase(int tick) const;

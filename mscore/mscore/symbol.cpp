@@ -29,7 +29,7 @@
 Symbol::Symbol(Score* s)
    : BSymbol(s)
       {
-      setAnchor(ANCHOR_PAGE);
+      setAnchor(ANCHOR_PARENT);
       _sym = 0;
       }
 

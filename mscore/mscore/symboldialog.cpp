@@ -213,10 +213,10 @@ SymbolDialog::SymbolDialog(QWidget* parent)
       l->addWidget(sa);
 
       QButtonGroup* bg = new QButtonGroup();
-      bg->addButton(anchorPage, ANCHOR_PAGE);
+      bg->addButton(anchorPage, ANCHOR_PARENT);
       bg->addButton(anchorTime, ANCHOR_STAFF);
-      bg->addButton(anchorNote, ANCHOR_NOTE);
-      bg->addButton(anchorSystem, ANCHOR_SYSTEM);
+      bg->addButton(anchorNote, ANCHOR_PARENT);
+      bg->addButton(anchorSystem, ANCHOR_MEASURE);
       connect(bg, SIGNAL(buttonClicked(int)), SLOT(anchorClicked(int)));
       anchorPage->setChecked(true);
 

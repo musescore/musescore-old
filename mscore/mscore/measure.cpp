@@ -616,40 +616,13 @@ void Measure::layout2(ScoreLayout* layout)
                            bbox().width() - element->bbox().width() - _spatium,
                            - element->bbox().height() - _spatium);
                         break;
-                  case REPEAT:
-                        {
-                        TextStyle* st = score()->textStyle(TEXT_STYLE_REPEAT);
-                        double xo = st->xoff;
-                        double yo = st->yoff;
-                        if (st->offsetType == OFFSET_SPATIUM) {
-                              xo *= _spatium;
-                              yo *= _spatium;
-                              }
-                        switch (element->subtype()) {
-                              case RepeatSegno:
-                              case RepeatCodetta:
-                                    xo += (element->width()*.5);
-                                    yo += (element->bbox().height()*-.5);
-                                    break;
-                              // Position changed to end of measure, by DK
-                              case RepeatVarcoda:
-                              case RepeatCoda:
-                                    xo -= (element->width()*.5);
-                                    xo += bbox().width();
-                                    yo += (element->bbox().height()*-.5);
-                                    break;
-                              case RepeatFine:
-                                    yo = 0; // (yo * -1) + bbox().height(); // *.5)+(element->bbox().height());
-                                    xo = bbox().width() - element->width();
-                                    break;
-                              default:
-                                    xo -= element->width();
-                                    xo += bbox().width();
-                                    break;
-                              }
-                        element->setPos(QPointF(xo, yo));
-                        }
+
+                  case MARKER:      // TODO
                         break;
+
+                  case JUMP:        // TODO
+                        break;
+
                   default:
                         break;
                   }
@@ -824,8 +797,8 @@ void Measure::add(Element* el)
       int t = el->tick();
       ElementType type = el->type();
 
-// printf("measure %p: add %s %p, staff %d staves %d\n",
-//      this, el->name(), el, staffIdx, staves.size());
+//      if (debugMode)
+//            printf("measure %p(%d): add %s %p\n", this, _no, el->name(), el);
 
       switch (type) {
             case BEAM:
@@ -878,10 +851,10 @@ void Measure::add(Element* el)
                   _el.push_back(el);
                   break;
 
-            case REPEAT:
-                  _repeatFlags |= el->subtype();
-                  // fall through
+            case JUMP:
+                  _repeatFlags |= RepeatJump;
 
+            case MARKER:
             case DYNAMIC:
             case SYMBOL:
             case TEXT:
@@ -935,10 +908,10 @@ void Measure::remove(Element* el)
                            this, el->name(), el);
                   break;
 
-            case REPEAT:
-                  _repeatFlags &= ~el->subtype();
-                  // fall through:
+            case JUMP:
+                  _repeatFlags &= ~RepeatJump;
 
+            case MARKER:
             case DYNAMIC:
             case TEMPO_TEXT:
             case TEXT:
@@ -1657,7 +1630,8 @@ bool Measure::acceptDrop(Viewer* viewer, const QPointF& p, int type, int) const
                   return true;
 
             case MEASURE_LIST:
-            case REPEAT:
+            case JUMP:
+            case MARKER:
                   viewer->setDropRectangle(rr);
                   return true;
 
@@ -1744,29 +1718,24 @@ printf("drop staffList\n");
                   delete e;
                   break;
 
-            case REPEAT:
-                  {
-                  Repeat* repeat = (Repeat*)e;
-                  repeat->setParent(this);
-                  repeat->setStaff(score()->staff(0));
-                  score()->cmdAdd(repeat);
-                  }
+            case MARKER:
+            case JUMP:
+                  e->setParent(this);
+                  e->setStaff(score()->staff(0));
+                  score()->cmdAdd(e);
+printf("drop marker/jump in measure %d\n", _no);
                   break;
+
             case BRACKET:
-                  {
-                  Bracket* bracket = (Bracket*)e;
-                  int subtype = bracket->subtype();
-                  delete bracket;
-                  staff->addBracket(BracketItem(subtype, 1));
-                  }
+                  staff->addBracket(BracketItem(e->subtype(), 1));
+                  delete e;
                   break;
+
             case CLEF:
-                  {
-                  Clef* clef = (Clef*)e;
-                  staff->changeClef(tick(), clef->subtype());
-                  delete clef;
-                  }
+                  staff->changeClef(tick(), e->subtype());
+                  delete e;
                   break;
+
             case KEYSIG:
                   {
                   KeySig* ks = (KeySig*)e;
@@ -1779,13 +1748,12 @@ printf("drop staffList\n");
                   delete ks;
                   }
                   break;
+
             case TIMESIG:
-                  {
-                  TimeSig* ts = (TimeSig*)e;
-                  score()->changeTimeSig(tick(), ts->subtype());
-                  delete ts;
-                  }
+                  score()->changeTimeSig(tick(), e->subtype());
+                  delete e;
                   break;
+
             case LAYOUT_BREAK:
                   {
                   LayoutBreak* lb = (LayoutBreak*)e;
@@ -2291,10 +2259,9 @@ void Measure::read(QDomElement e, int idx)
                   Text* t = new Text(score());
                   t->setTick(score()->curTick);
                   t->read(e);
-                  if (t->anchor() != ANCHOR_PAGE) {
+                  if (t->anchor() != ANCHOR_PARENT)
                         score()->curTick = t->tick();
-                        t->setStaff(staff);
-                        }
+                  t->setStaff(staff);
                   switch(t->subtype()) {
                         case TEXT_TITLE:
                         case TEXT_SUBTITLE:
@@ -2350,11 +2317,17 @@ void Measure::read(QDomElement e, int idx)
                   tuplet->setStaff(staff);
                   add(tuplet);
                   }
-            else if (tag == "Repeat") {
-                  Repeat* repeat = new Repeat(score());
-                  repeat->setStaff(staff);
-                  repeat->read(e);
-                  add(repeat);
+            else if (tag == "Marker") {
+                  Marker* marker = new Marker(score());
+                  marker->setStaff(staff);
+                  marker->read(e);
+                  add(marker);
+                  }
+            else if (tag == "Jump") {
+                  Jump* jump = new Jump(score());
+                  jump->setStaff(staff);
+                  jump->read(e);
+                  add(jump);
                   }
             else if (tag == "startRepeat")
                   _repeatFlags |= RepeatStart;
@@ -2424,10 +2397,8 @@ void Measure::read(QDomElement e)
             else if (tag == "Text") {
                   Text* t = new Text(score());
                   t->read(e);
-                  if (t->anchor() != ANCHOR_PAGE) {
-                        t->setTick(curTickPos);
-                        t->setStaff(0);
-                        }
+                  t->setTick(curTickPos);
+                  t->setStaff(0);
                   add(t);
                   }
             else

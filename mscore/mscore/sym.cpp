@@ -431,6 +431,60 @@ QFont Sym::font(double extraMag) const
       }
 
 //---------------------------------------------------------
+//   symToHtml
+//    transform symbol into html code suitable
+//    for QDocument->setHtml()
+//---------------------------------------------------------
+
+QString symToHtml(const Sym& s)
+      {
+      QFont f = s.font();
+      double size = f.pointSizeF();
+
+      return QString(
+      "<data>"
+        "<html>"
+          "<head>"
+            "<meta name=\"qrichtext\" content=\"1\" >"
+            "<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf8\" />"
+            "<style type=\"text/css\">"
+              "p, li { white-space: pre-wrap; }"
+              "</style>"
+            "</head>"
+          "<body style=\" font-family:'MScore'; font-size:%1pt;\">"
+            "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">"
+                "&#%2;"
+              "</p>"
+            "</body>"
+          "</html>"
+      "</data>").arg(size).arg(s.code().unicode());
+      }
+
+QString symToHtml(const Sym& s1, const Sym& s2)
+      {
+      QFont f = s1.font();
+      double size = f.pointSizeF();
+
+      return QString(
+      "<data>"
+        "<html>"
+          "<head>"
+            "<meta name=\"qrichtext\" content=\"1\" >"
+            "<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf8\" />"
+            "<style type=\"text/css\">"
+              "p, li { white-space: pre-wrap; }"
+              "</style>"
+            "</head>"
+          "<body style=\" font-family:'MScore'; font-size:%1pt;\">"
+            "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">"
+                "&#%2;&#%3;"
+              "</p>"
+            "</body>"
+          "</html>"
+      "</data>").arg(size).arg(s1.code().unicode()).arg(s2.code().unicode());
+      }
+
+//---------------------------------------------------------
 //   initSymbols
 //---------------------------------------------------------
 
@@ -582,7 +636,8 @@ void initSymbols()
       symbols[caltoclefSym]               = Sym("calto clef",               0xe18a, 0);
       symbols[bassclefSym]                = Sym("bass clef",                0xe18b, 0);
       symbols[cbassclefSym]               = Sym("cbass clef",               0xe18c, 0);
-/*122*/      symbols[trebleclefSym]              = Sym("trebleclef",               0xe18d, 0);   //G-Clef
+/*122*/
+      symbols[trebleclefSym]              = Sym("trebleclef",               0xe18d, 0);   //G-Clef
       symbols[ctrebleclefSym]             = Sym("ctrebleclef",              0xe18e, 0);
       symbols[percussionclefSym]          = Sym("percussion clef",          0xe18f, 0);
       symbols[cpercussionclefSym]         = Sym("cpercussion clef",         0xe190, 0);

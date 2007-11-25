@@ -59,7 +59,7 @@ class Xml : public QTextStream {
       void ntag(const char* name);
       void netag(const char* name);
 
-      void prop(const Prop& p) { tag(p.name, p.data); }
+      void prop(const Prop& p)  { tag(p.name, p.data); }
       void prop(QList<Prop> pl) { foreach(Prop p, pl) prop(p); }
 
       void tag(const QString& name, QVariant data);

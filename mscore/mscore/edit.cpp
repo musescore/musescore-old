@@ -91,7 +91,7 @@ Note* Score::getSelectedNote()
 //   getSelectedChordRest
 //---------------------------------------------------------
 
-ChordRest* Score::getSelectedChordRest()
+ChordRest* Score::getSelectedChordRest() const
       {
       Element* el = sel->element();
       if (el) {
@@ -865,7 +865,7 @@ void Score::cmdAddBSymbol(BSymbol* s, const QPointF& pos, const QPointF& off)
             s->setStaff(staff);
             s->setParent(measure);
             }
-      else if (s->anchor() == ANCHOR_PAGE) {
+      else if (s->anchor() == ANCHOR_PARENT) {
             bool foundPage = false;
             foreach (Page* page, _layout->pages()) {
                   if (page->contains(pos)) {
@@ -988,7 +988,8 @@ void Score::deleteItem(Element* el)
             case IMAGE:
             case TIE:
             case TEMPO_TEXT:
-            case REPEAT:
+            case MARKER:
+            case JUMP:
             case BREATH:
                   cmdRemove(el);
                   break;

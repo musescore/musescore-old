@@ -1541,130 +1541,6 @@ void Score::collectMeasureEvents(QMap<int, Event>* events, Measure* m, int staff
             }
       }
 
-#if 0
-//---------------------------------------------------------
-//   toEList
-//    export score to event list
-//---------------------------------------------------------
-
-void Score::toEList(QMap<int, Event>* events, bool expandRepeats, int tickOffset, int staffIdx)
-      {
-
-      RepeatStack* rs = new RepeatStack();
-
-      // Added by DK
-      // 1. step to collect repeats outside measure, like Coda, Segno.....
-      for (Measure* m = mainLayout()->first(); m; m = m->next())
-            foreach(Element* e, *m->el()) {
-                  if (e->type() == REPEAT || e->type() == VOLTA ||
-                        e->type() == VOLTA_SEGMENT) {
-                        rs->collectRepeats(e, m);
-                        }
-                  }
-      // 2. step to collect repeats inside measure
-      for (Measure* m = mainLayout()->first(); m; m = m->next()) {
-           for (Segment* seg = m->first(); seg; seg = seg->next()) {
-                Element* el = seg->element(0);
-                if ((el->type() == BAR_LINE &&
-                      (el->subtype() == END_REPEAT ||
-                       el->subtype() == START_REPEAT ||
-                       el->subtype() == END_START_REPEAT)) ||
-                       el->type() == REPEAT_MEASURE) {
-                        rs->collectRepeats(el,m);
-                        }
-                }
-          }
-          //----------------------------------------------------------
-
-      for (Measure* m = mainLayout()->first(); m; m = m->next()) {
-            // push each measure for checking of any of repeat type or jumps,
-            // returns the measure to processed with
-
-            if (expandRepeats)
-                  m = rs->push(m);
-            if (m == 0) // A jump or repeat has reached and of partiture
-                  continue;
-
-            collectMeasureEvents(events, m, staffIdx, tickOffset);
-
-            // Don't forget to save measure, because pop may change it,
-            // returned m may differ from the original, new start measure
-            // of "repeat", 0 means nothing to repeat continue with next measure
-            // functions push and pop are in repeat2.h/cpp file
-
-            if (expandRepeats) {
-                  Measure* ms = m;
-                  m = rs->pop(m);
-                  if (m && m->next() != 0)
-                        continue;
-                  else if (m == 0)
-                        m = ms;
-                  }
-            }
-      }
-
-//---------------------------------------------------------
-//   toEList
-//    export score to event list
-//---------------------------------------------------------
-
-void Score::toEList(QMap<int, Event>* events, int tickOffset)
-      {
-      int staffIdx = 0;
-      RepeatStack* rs = new RepeatStack();
-      foreach(Part* part, _parts) {
-            for (int i = 0; i < part->staves()->size(); ++i) {
-                  // Added by DK
-                  // 1. step to collect repeats outside measure, like Coda, Segno.....
-                  for (Measure* m = mainLayout()->first(); m; m = m->next())
-                        foreach(Element* e, *m->el()) {
-                              if (e->type() == REPEAT || e->type() == VOLTA ||
-                                  e->type() == VOLTA_SEGMENT) {
-                                    rs->collectRepeats(e, m);
-                                    }
-                              }
-                  // 2. step to collect repeats inside measure
-                  for (Measure* m = mainLayout()->first(); m; m = m->next()) {
-                        for (Segment* seg = m->first(); seg; seg = seg->next()) {
-                              Element* el = seg->element(0);
-                              if ((el->type() == BAR_LINE /*&&
-                                 (el->subtype() == END_REPEAT ||
-                                  el->subtype() == START_REPEAT ||
-                                  el->subtype() == END_START_REPEAT)*/) ||
-                                  el->type() == REPEAT_MEASURE) {
-                                    rs->collectRepeats(el,m);
-                                    }
-                              }
-                        }
-                  //----------------------------------------------------------
-                  for (Measure* m = mainLayout()->first(); m;) {
-                        // push each measure for checking of any of repeat type or jumps,
-                        // returns the measure to processed with
-
-                        m = rs->push(m);
-                        if (m == 0) // A jump or repeat has reached and of partiture
-                              break;
-                        collectMeasureEvents(events, m, staffIdx, tickOffset);
-
-                        // Don't forget to save measure, because pop may change it,
-                        // returned m may differ from the original, new start measure
-                        // of "repeat", 0 means nothing to repeat continue with next measure
-                        // functions push and pop are in repeat2.h/cpp file
-
-                        Measure* ms = m;
-                        m = rs->pop(m);
-                        if (m && m->next() != 0)
-                              continue;
-                        else if (m == 0)
-                              m = ms;
-                        m = m->next();
-                        }
-                  ++staffIdx;
-                  }
-            }
-      }
-#else
-
 //---------------------------------------------------------
 //   toEList
 //    export score to event list
@@ -1687,15 +1563,49 @@ void Score::toEList(QMap<int, Event>* events, int offset)
 //---------------------------------------------------------
 
 struct RepeatLoop {
-      enum LoopType { LOOP_REPEAT, LOOP_FINE };
+      enum LoopType { LOOP_REPEAT, LOOP_JUMP };
 
-      MeasureBase* m;
-      int count;
       LoopType type;
+      MeasureBase* m;   // start measure of LOOP_REPEAT
+      int count;
+      QString stop, cont;
 
       RepeatLoop() {}
-      RepeatLoop(MeasureBase* _m, LoopType ltype) : m(_m), count(0), type(ltype) {}
+      RepeatLoop(MeasureBase* _m)  {
+            m     = _m;
+            count = 0;
+            type  = LOOP_REPEAT;
+            }
+      RepeatLoop(const QString s, const QString c)
+         : stop(s), cont(c)
+            {
+            type = LOOP_JUMP;
+            }
       };
+
+//---------------------------------------------------------
+//   searchLabel
+//---------------------------------------------------------
+
+MeasureBase* Score::searchLabel(const QString& s, MeasureBase* start)
+      {
+      if (s == "start")
+            return mainLayout()->first();
+      else if (s == "end")
+            ;
+      if (start == 0)
+            start = mainLayout()->first();
+      for (MeasureBase* m = start; m; m = m->next()) {
+            foreach(const Element* e, *m->el()) {
+                  if (e->type() == MARKER) {
+                        Marker* marker = (Marker*)e;
+                        if (marker->label() == s)
+                              return m;
+                        }
+                  }
+            }
+      return 0;
+      }
 
 //---------------------------------------------------------
 //   toEList
@@ -1708,6 +1618,7 @@ struct RepeatLoop {
 
 void Score::toEList(QMap<int, Event>* events, bool expandRepeats, int offset, int staffIdx)
       {
+printf("========toEList\n");
       if (!expandRepeats) {
             for (MeasureBase* mb = mainLayout()->first(); mb; mb = mb->next()) {
                   if (mb->type() != MEASURE)
@@ -1727,65 +1638,82 @@ void Score::toEList(QMap<int, Event>* events, bool expandRepeats, int offset, in
                   }
             Measure* m = (Measure*)mb;
             if ((m->repeatFlags() & RepeatStart) && (rstack.isEmpty() || (rstack.top().m != m)))
-                  rstack.push(RepeatLoop(m, RepeatLoop::LOOP_REPEAT));
+                  rstack.push(RepeatLoop(m));
 
             if (!rstack.isEmpty() && !isVolta(m->tick(), rstack.top().count + 1))
                   tickOffset -= m->tickLen();   // skip this measure
             else
                   collectMeasureEvents(events, m, staffIdx, tickOffset + offset);
 
-            if ((m->repeatFlags() & RepeatEnd)
-               && !rstack.isEmpty()
-               && rstack.top().type == RepeatLoop::LOOP_REPEAT) {
-                  //
-                  // increment repeat count
-                  //
-                  if (++rstack.top().count < m->repeatCount()) {
-                        //
-                        // goto start of loop, fix tickOffset
-                        //
-                        tickOffset += m->tick() + m->tickLen() - rstack.top().m->tick();
-                        mb = rstack.top().m;
-                        continue;
+            if (rstack.isEmpty()) {
+                  // Jumps are only accepted outside of other repeats
+                  if (m->repeatFlags() & RepeatJump) {
+                        Jump* s = 0;
+                        foreach(Element* e, *m->el()) {
+                              if (e->type() == JUMP) {
+                                    s = (Jump*)e;
+                                    break;
+                                    }
+                              }
+                        if (s) {
+                              const QString& jumpTo = s->jumpTo();
+                              MeasureBase* nmb = searchLabel(jumpTo);
+                              if (nmb) {
+                                    rstack.push(RepeatLoop(s->playUntil(), s->continueAt()));
+printf("JUMP <%s> <%s> <%s>\n",
+   qPrintable(jumpTo),
+   qPrintable(s->playUntil()),
+   qPrintable(s->continueAt()));
+                                    tickOffset += m->tick() + m->tickLen() - nmb->tick();
+                                    mb = nmb;
+                                    continue;
+                                    }
+                              else
+                                    printf("JUMP: label <%s> not found\n",
+                                       qPrintable(jumpTo));
+                              }
+                        else
+                              printf("Jump not found\n");
                         }
-                  rstack.pop();     // end this loop
                   }
-            if (m->repeatFlags() & RepeatDacapoAlFine) {
-                  rstack.push(RepeatLoop(m, RepeatLoop::LOOP_FINE));
-                  tickOffset += m->tick() + m->tickLen();
-                  mb = fm;
-                  continue;
-                  }
-            if (m->repeatFlags() & RepeatDalSegnoAlFine) {
-                  // search for segno
-                  MeasureBase* mm = fm;
-                  for (; mm; mm = mm->next()) {
-                        if (mm->type() != MEASURE)
+            else if (rstack.top().type == RepeatLoop::LOOP_REPEAT) {
+                  if (m->repeatFlags() & RepeatEnd) {
+                        //
+                        // increment repeat count
+                        //
+                        if (++rstack.top().count < m->repeatCount()) {
+                              //
+                              // goto start of loop, fix tickOffset
+                              //
+                              mb = rstack.top().m;
+                              tickOffset += m->tick() + m->tickLen() - mb->tick();
                               continue;
-                        if (((Measure*)mm)->repeatFlags() & RepeatSegno)
-                              break;
-                        }
-                  if (mm) {
-                        rstack.push(RepeatLoop(m, RepeatLoop::LOOP_FINE));
-                        tickOffset += m->tick() + m->tickLen() - mm->tick();
-                        mb = mm;
-                        continue;
-                        }
-                  else {
-                        printf("no segno found\n");
+                              }
+                        rstack.pop();     // end this loop
                         }
                   }
-            if (m->repeatFlags() & RepeatFine) {
-                  if (!rstack.isEmpty() && rstack.top().type == RepeatLoop::LOOP_FINE) {
-                        rstack.pop();
-                        break;
+            else if (rstack.top().type == RepeatLoop::LOOP_JUMP) {
+                  MeasureBase* m = searchLabel(rstack.top().stop);
+                  if (m == mb) {
+printf("  label <%s> found\n", qPrintable(rstack.top().stop));
+                        if (m->next() == 0)
+                              break;
+                        MeasureBase* nmb = searchLabel(rstack.top().cont, m->next());
+                        if (nmb)
+                              tickOffset += m->tick() + m->tickLen() - nmb->tick();
+                        mb = nmb;
+                        rstack.pop();     // end this loop
+                        continue;
                         }
                   }
             mb = mb->next();
             }
-      if (!rstack.isEmpty())
-            printf("repeat stack not empty!\n");
+      if (!rstack.isEmpty()) {
+            if (rstack.top().type == RepeatLoop::LOOP_JUMP
+               && rstack.top().stop == "end")
+                  ;
+            else
+                  printf("repeat stack not empty!\n");
+            }
       }
-
-#endif
 

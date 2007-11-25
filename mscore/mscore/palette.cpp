@@ -482,7 +482,7 @@ void Palette::dropEvent(QDropEvent* event)
                   qreal mag = PALETTE_SPATIUM * extraMag / _spatium;
                   s->setPath(u.path());
                   s->setSize(QSizeF(hgrid / mag, hgrid / mag));
-                  s->setAnchor(ANCHOR_PAGE);
+                  s->setAnchor(ANCHOR_PARENT);
                   e = s;
                   name = s->path();
                   }

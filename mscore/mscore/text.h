@@ -30,7 +30,7 @@ struct SymCode;
 extern TextPalette* palette;
 
 enum {
-      TEXT_TITLE, TEXT_SUBTITLE, TEXT_COMPOSER, TEXT_POET,
+      TEXT_TITLE=1, TEXT_SUBTITLE, TEXT_COMPOSER, TEXT_POET,
       TEXT_TRANSLATOR, TEXT_MEASURE_NUMBER,
       TEXT_PAGE_NUMBER_ODD, TEXT_PAGE_NUMBER_EVEN,
       TEXT_COPYRIGHT, TEXT_FINGERING,
@@ -48,6 +48,7 @@ enum {
 class Text : public Element {
       int _align;
       double _xoff, _yoff;
+      double _rxoff, _ryoff;
       Anchor _anchor;
       OffsetType _offsetType;
       bool _sizeIsSpatiumDependent;       // size depends on _spatium unit
@@ -64,6 +65,7 @@ class Text : public Element {
    protected:
       QTextDocument* doc;
       int cursorPos;
+      TextStyle* style() const;
 
    public:
       Text(Score*);
@@ -87,24 +89,36 @@ class Text : public Element {
       QTextDocument* getDoc() const { return doc; }
 
       virtual void resetMode();
-      Anchor anchor() const { return _anchor; }
-
       bool isEmpty() const;
-      void setStyle(int n);
-      double xoff() const { return _xoff; }
-      double yoff() const { return _yoff; }
+      void setStyle(const TextStyle*);
 
-      double frameWidth() const   { return _frameWidth;   }
-      double marginWidth() const  { return _marginWidth;  }
-      double paddingWidth() const { return _paddingWidth; }
-      QColor frameColor() const   { return _frameColor;   }
-      int frameRound() const      { return _frameRound;   }
+      double frameWidth() const             { return _frameWidth;   }
+      double marginWidth() const            { return _marginWidth;  }
+      double paddingWidth() const           { return _paddingWidth; }
+      QColor frameColor() const             { return _frameColor;   }
+      int frameRound() const                { return _frameRound;   }
 
-      void setFrameWidth(double val)        { _frameWidth   = val; }
-      void setMarginWidth(double val)       { _marginWidth  = val; }
-      void setPaddingWidth(double val)      { _paddingWidth = val; }
-      void setFrameColor(const QColor& val) { _frameColor   = val; }
-      void setFrameRound(int val)           { _frameRound   = val; }
+      void setFrameWidth(double val)        { _frameWidth   = val;  }
+      void setMarginWidth(double val)       { _marginWidth  = val;  }
+      void setPaddingWidth(double val)      { _paddingWidth = val;  }
+      void setFrameColor(const QColor& val) { _frameColor   = val;  }
+      void setFrameRound(int val)           { _frameRound   = val;  }
+
+      int align() const                     { return _align;        }
+      Anchor anchor() const                 { return _anchor;       }
+      OffsetType offsetType() const         { return _offsetType;   }
+      double xoff() const                   { return _xoff;         }
+      double yoff() const                   { return _yoff;         }
+      double rxoff() const                  { return _rxoff;        }
+      double ryoff() const                  { return _ryoff;        }
+
+      void setAlign(int val)                { _align = val;         }
+      void setXoff(double val)              { _xoff  = val;         }
+      void setYoff(double val)              { _yoff  = val;         }
+      void setRXoff(double val)             { _rxoff  = val;        }
+      void setRYoff(double val)             { _ryoff  = val;        }
+      void setAnchor(Anchor val)            { _anchor = val;        }
+      void setOffsetType(OffsetType val)    { _offsetType = val;    }
 
       virtual void draw(QPainter&) const;
 
@@ -121,11 +135,15 @@ class Text : public Element {
       void writeProperties(Xml& xml) const;
       bool readProperties(QDomElement node);
       virtual void layout(ScoreLayout*);
-      virtual QRectF bbox() const;
       virtual QPainterPath shape() const;
       virtual bool mousePress(const QPointF&, QMouseEvent* ev);
       double lineSpacing() const;
       void moveCursorToEnd();
+
+      virtual QLineF dragAnchor() const;
+
+      QFont defaultFont() const { return doc->defaultFont(); }
+      void setDefaultFont(QFont f) { doc->setDefaultFont(f); }
       };
 
 //---------------------------------------------------------

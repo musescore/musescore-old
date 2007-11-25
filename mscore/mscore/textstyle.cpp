@@ -65,7 +65,6 @@ TextStyleDialog::TextStyleDialog(QWidget* parent, Score* score)
       connect(bottomV,       SIGNAL(clicked()), SLOT(alignBottomV()));
       connect(centerV,       SIGNAL(clicked()), SLOT(alignCenterV()));
       connect(unitMM,        SIGNAL(clicked()), SLOT(setUnitMM()));
-      connect(unitPercent,   SIGNAL(clicked()), SLOT(setUnitPercent()));
       connect(unitSpace,     SIGNAL(clicked()), SLOT(setUnitSpace()));
 
       current = -1;
@@ -136,16 +135,6 @@ void TextStyleDialog::setUnitMM()
       }
 
 //---------------------------------------------------------
-//   setUnitPercent
-//---------------------------------------------------------
-
-void TextStyleDialog::setUnitPercent()
-      {
-      TextStyle* s = styles[current];
-      s->offsetType = OFFSET_REL;
-      }
-
-//---------------------------------------------------------
 //   setUnitSpace
 //---------------------------------------------------------
 
@@ -189,11 +178,6 @@ void TextStyleDialog::nameSelected(int n)
             xOffset->setValue(s->xoff/DPMM);
             yOffset->setValue(s->yoff/DPMM);
             unitMM->setChecked(true);
-            }
-      if (s->offsetType == OFFSET_REL) {
-            xOffset->setValue(s->xoff);
-            yOffset->setValue(s->yoff);
-            unitPercent->setChecked(true);
             }
       else if (s->offsetType == OFFSET_SPATIUM) {
             xOffset->setValue(s->xoff);

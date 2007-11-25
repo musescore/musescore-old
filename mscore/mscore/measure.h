@@ -60,6 +60,14 @@ struct MStaff {
       ~MStaff();
       };
 
+enum {
+      RepeatEnd         = 1,
+      RepeatStart       = 2,
+      RepeatMeasureFlag = 4,
+      RepeatJump        = 8
+      };
+
+
 /**
       One measure in a system.
 */
@@ -72,7 +80,7 @@ class Measure : public MeasureBase {
       int _size;              ///< Number of items on segment list
 
       int _repeatCount;       ///< end repeat marker und repeat count
-      int _repeatFlags;       ///< or'd RepeatType's (see: repeat.h)
+      int _repeatFlags;       ///< or'd RepeatType's
 
       QList<MStaff*>  staves;
       QList<Beam*>    _beamList;

@@ -1051,10 +1051,30 @@ void MusicXml::direction(Measure* measure, int staff, QDomElement e)
 */
 
       if (repeat != "") {
-            Repeat* r = new Repeat(score);
-            r->setSubtype(repeat);
-            r->setStaff(score->staff(staff + rstaff));
-            measure->add(r);
+            if (repeat == "fine") {
+                  Marker* m = new Marker(score);
+                  m->setLabel("fine");
+                  m->setText("Fine");
+                  m->setStaff(score->staff(staff + rstaff));
+                  measure->add(m);
+                  }
+            else if (repeat == "segno") {
+                  Marker* m = new Marker(score);
+                  m->setLabel("segno");
+                  m->setHtml(symToHtml(symbols[segnoSym]));
+                  m->setStaff(score->staff(staff + rstaff));
+                  measure->add(m);
+                  }
+            else if (repeat == "daCapo") {
+                  Jump* jp = new Jump(score);
+                  jp->setJumpTo("start");
+                  jp->setPlayUntil("end");
+                  jp->setStaff(score->staff(staff + rstaff));
+                  measure->add(jp);
+                  }
+#if 0 // WS-REPEAT
+            implement more
+#endif
             }
 
       if (dirType == "words" && (txt != "" || tempo != "")) {
@@ -1064,14 +1084,15 @@ void MusicXml::direction(Measure* measure, int staff, QDomElement e)
             if (tempo != "") {
                   t = new TempoText(score);
                   ((TempoText*) t)->setTempo(tempo.toDouble());
-                  t->setStyle(TEXT_STYLE_TEMPO);
                   }
             else
                   t = new Text(score);
-                  t->setStyle(TEXT_STYLE_TECHNIK);
+                  t->setStyle(score->textStyle(TEXT_STYLE_TECHNIK));
             t->setTick(tick);
             if (weight == "bold") {
-                  // Text text(txt, TEXT_STYLE_TECHNIK, true, size);
+                  QFont f = t->defaultFont();
+                  f.setBold(true);
+                  t->setDefaultFont(f);
                   t->setText(txt);
                   }
             else

@@ -1,7 +1,7 @@
 //=============================================================================
 //  MusE Score
 //  Linux Music Score Editor
-//  $Id: seq.h,v 1.20 2006/03/02 17:08:43 wschweer Exp $
+//  $Id:$
 //
 //  Copyright (C) 2002-2007 Werner Schweer and others
 //

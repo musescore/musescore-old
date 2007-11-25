@@ -145,6 +145,9 @@ void MuseScore::closeEvent(QCloseEvent* ev)
             }
       saveScoreList();
       writeSettings();
+      if (pageListEdit)
+            pageListEdit->writeSettings();
+
       seq->stop();
 #ifndef __MINGW32__
       while(!seq->isStopped())
@@ -1843,7 +1846,7 @@ Shortcut::Shortcut(const Shortcut& c)
       }
 
 //---------------------------------------------------------
-//   writeSet
+//   writeSettings
 //---------------------------------------------------------
 
 void MuseScore::writeSettings()

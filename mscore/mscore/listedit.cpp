@@ -212,10 +212,10 @@ PageListEditor::PageListEditor(Score* s)
       }
 
 //---------------------------------------------------------
-//   ~PageListEditor
+//   writeSettings
 //---------------------------------------------------------
 
-PageListEditor::~PageListEditor()
+void PageListEditor::writeSettings()
       {
       QSettings settings;
       settings.beginGroup("Inspector");
@@ -260,8 +260,8 @@ void PageListEditor::updateList()
                   new ElementItem(li, el);
             }
 
-//      int staves = cs->nstaves();
-//      int tracks = staves * VOICES;
+      int staves = cs->nstaves();
+      int tracks = staves * VOICES;
       foreach(Page* page, cs->mainLayout()->pages()) {
             ElementItem* pi = new ElementItem(list, page);
 
@@ -278,24 +278,15 @@ void PageListEditor::updateList()
 
                   // SysStaffList* staffList = system->staves();
 
-                  foreach (MeasureBase* measure, system->measures()) {
-                        ElementItem* mi = new ElementItem(si, measure);
+                  foreach (MeasureBase* mb, system->measures()) {
+                        ElementItem* mi = new ElementItem(si, mb);
 
-#if 0
-                        MStaffList* sl = measure->staffList();
-                        int staff = 0;
-                        for (iMStaff i = sl->begin(); i != sl->end(); ++i, ++staff) {
-                              MStaff* ms = &*i;
-                              if (ms->endBarLine) {
-                                    new ElementItem(mi, ms->endBarLine);
-                                    }
-                              }
-#endif
-
-                        foreach(Element* e, *measure->el())
+                        foreach(Element* e, *mb->el())
                               new ElementItem(mi, e);
 
-#if 0 // TODO MeasureBase
+                        if (mb->type() != MEASURE)
+                              continue;
+                        Measure* measure = (Measure*) mb;
                         for (Segment* segment = measure->first(); segment; segment = segment->next()) {
                               ElementItem* segItem = new ElementItem(mi, segment);
                               for (int track = 0; track < tracks; ++track) {
@@ -344,7 +335,6 @@ void PageListEditor::updateList()
                               if (tuplet->number())
                                     new ElementItem(item, tuplet->number());
                               }
-#endif
                         }
                   }
             }
@@ -424,24 +414,26 @@ void PageListEditor::itemChanged(QTreeWidgetItem* i, QTreeWidgetItem*)
       setWindowTitle(QString("MuseScore: List Edit: ") + el->name());
       ShowElementBase* ew = 0;
       switch (el->type()) {
-            case PAGE:     ew = pagePanel;    break;
-            case SYSTEM:   ew = systemPanel;  break;
-            case MEASURE:  ew = measurePanel; break;
-            case CHORD:    ew = chordPanel;   break;
-            case NOTE:     ew = notePanel;    break;
-            case REST:     ew = restPanel;    break;
-            case CLEF:     ew = clefPanel;    break;
-            case TIMESIG:  ew = timesigPanel; break;
-            case KEYSIG:   ew = keysigPanel;  break;
-            case SEGMENT:  ew = segmentView;  break;
-            case HAIRPIN:  ew = hairpinView;  break;
-            case BAR_LINE: ew = barLineView;  break;
-            case DYNAMIC:  ew = dynamicView;  break;
-            case TUPLET:   ew = tupletView;   break;
-            case SLUR:     ew = slurView;     break;
-            case TIE:      ew = tieView;      break;
-            case VOLTA:    ew = voltaView;    break;
+            case PAGE:          ew = pagePanel;    break;
+            case SYSTEM:        ew = systemPanel;  break;
+            case MEASURE:       ew = measurePanel; break;
+            case CHORD:         ew = chordPanel;   break;
+            case NOTE:          ew = notePanel;    break;
+            case REST:          ew = restPanel;    break;
+            case CLEF:          ew = clefPanel;    break;
+            case TIMESIG:       ew = timesigPanel; break;
+            case KEYSIG:        ew = keysigPanel;  break;
+            case SEGMENT:       ew = segmentView;  break;
+            case HAIRPIN:       ew = hairpinView;  break;
+            case BAR_LINE:      ew = barLineView;  break;
+            case DYNAMIC:       ew = dynamicView;  break;
+            case TUPLET:        ew = tupletView;   break;
+            case SLUR:          ew = slurView;     break;
+            case TIE:           ew = tieView;      break;
+            case VOLTA:         ew = voltaView;    break;
             case VOLTA_SEGMENT: ew = voltaSegmentView; break;
+            case MARKER:
+            case JUMP:
             case TEXT:
                   ew = textView;
                   break;
@@ -1006,12 +998,13 @@ void TextView::setElement(Element* e)
       {
       Text* te = (Text*)e;
       ShowElementBase::setElement(e);
-      tb.style->clear();
-      foreach(TextStyle* s, te->score()->textStyles())
-            tb.style->addItem(s->name);
       tb.text->setDocument(te->getDoc());
       tb.xoffset->setValue(te->xoff());
       tb.yoffset->setValue(te->yoff());
+      tb.rxoffset->setValue(te->rxoff());
+      tb.ryoffset->setValue(te->ryoff());
+      tb.offsetType->setCurrentIndex(int(te->offsetType()));
+      tb.anchor->setCurrentIndex(int(te->anchor()));
       }
 
 //---------------------------------------------------------
@@ -1088,10 +1081,9 @@ void DynamicView::setElement(Element* e)
       {
       Dynamic* dynamic = (Dynamic*)e;
 
-      tb.style->clear();
-      foreach (TextStyle* s, dynamic->score()->textStyles())
-            tb.style->addItem(s->name);
-//      tb.style->setCurrentIndex(dynamic->style());
+//      tb.style->clear();
+//      foreach (TextStyle* s, dynamic->score()->textStyles())
+//            tb.style->addItem(s->name);
       tb.text->setText(dynamic->getText());
 //      tb.xoffset->setValue(dynamic->styleOffset().x());
 //      tb.yoffset->setValue(dynamic->styleOffset().y());

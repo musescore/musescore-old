@@ -69,7 +69,7 @@ const char* elementNames[] = {
       "RepeatMeasure",
       "Image",
       "Tie",
-      "Attribute", "Dynamic", "Page", "Beam", "Hook", "Lyrics", "Repeat",
+      "Attribute", "Dynamic", "Page", "Beam", "Hook", "Lyrics", "Marker", "Jump",
       "Tuplet", "VSpacer",
       "TempoText",
       "Volta",
@@ -975,8 +975,10 @@ int Element::readType(QDomElement& e, QPointF* dragOffset)
                   type = TREMOLO;
             else if (e.tagName() == "RepeatMeasure")
                   type = REPEAT_MEASURE;
-            else if (e.tagName() == "Repeat")
-                  type = REPEAT;
+            else if (e.tagName() == "Jump")
+                  type = JUMP;
+            else if (e.tagName() == "Marker")
+                  type = MARKER;
             else {
                   domError(e);
                   type = 0;
@@ -1054,8 +1056,11 @@ Element* Element::create(int type, Score* score)
             case LAYOUT_BREAK:
                   el = new LayoutBreak(score);
                   break;
-            case REPEAT:
-                  el = new Repeat(score);
+            case MARKER:
+                  el = new Marker(score);
+                  break;
+            case JUMP:
+                  el = new Jump(score);
                   break;
             case REPEAT_MEASURE:
                   el = new RepeatMeasure(score);
