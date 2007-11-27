@@ -59,6 +59,7 @@
 #include "box.h"
 #include "repeat.h"
 #include "qregexp.h"
+#include "ottava.h"
 
 //---------------------------------------------------------
 //   xmlSetPitch
@@ -195,6 +196,7 @@ void MusicXml::import(Score* s)
       for (int i = 0; i < MAX_SLURS; ++i)
             slur[i] = 0;
       tuplet = 0;
+      ottava = 0;
 
       for (QDomElement e = doc->documentElement(); !e.isNull(); e = e.nextSiblingElement()) {
             if (e.tagName() == "score-partwise")
@@ -913,6 +915,7 @@ void MusicXml::direction(Measure* measure, int staff, QDomElement e)
       QString sndFine = "";
       bool coda = false;
       bool segno = false;
+      int ottavasize = 0;
 
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             if (e.tagName() == "direction-type") {
@@ -958,8 +961,10 @@ void MusicXml::direction(Measure* measure, int staff, QDomElement e)
                               domNotImplemented(ee);
                         else if (dirType == "metronome")
                               domNotImplemented(ee);
-                        else if (dirType == "octave-shift")
-                              domNotImplemented(ee);
+                        else if (dirType == "octave-shift") {
+                              type       = ee.attribute(QString("type"));
+                              ottavasize = ee.attribute(QString("size"), "0").toInt();
+                              }
                         else if (dirType == "coda")
                               coda = true;
                         else if (dirType == "segno")
@@ -1171,6 +1176,61 @@ void MusicXml::direction(Measure* measure, int staff, QDomElement e)
                   addWedge(0, tick, rx, ry, 1);
             else
                   printf("unknown wedge type: %s\n", type.toLatin1().data());
+            }
+      else if (dirType == "octave-shift") {
+            printf("octave-shift type=%s size=%d\n", type.toLatin1().data(), ottavasize);
+            if (type == "down") {
+                  if (ottava) {
+                        printf("overlapping octave-shift not supported\n");
+                        delete ottava;
+                        ottava = 0;
+                        }
+                  else {
+                        ottava = new Ottava(score);
+                        ottava->setStaff(score->staff(staff + rstaff));
+                        ottava->setTick(tick);
+                        if (ottavasize == 8)
+                              ottava->setSubtype(0);
+                        else if (ottavasize == 15)
+                              ottava->setSubtype(1);
+                        else {
+                              printf("unknown octave-shift size %d\n", ottavasize);
+                              delete ottava;
+                              ottava = 0;
+                              }
+                        }
+                  }
+            else if (type == "up") {
+                  if (ottava) {
+                        printf("overlapping octave-shift not supported\n");
+                        delete ottava;
+                        ottava = 0;
+                        }
+                  else {
+                        ottava = new Ottava(score);
+                        ottava->setStaff(score->staff(staff + rstaff));
+                        ottava->setTick(tick);
+                        if (ottavasize == 8)
+                              ottava->setSubtype(2);
+                        else if (ottavasize == 15)
+                              ottava->setSubtype(3);
+                        else {
+                              printf("unknown octave-shift size %d\n", ottavasize);
+                              delete ottava;
+                              ottava = 0;
+                              }
+                        }
+                  }
+            else if (type == "stop") {
+                  if (!ottava) {
+                        printf("octave-shift stop without start\n");
+                        }
+                  else {
+                        ottava->setTick2(tick);
+                        score->mainLayout()->add(ottava);
+                        ottava = 0;
+                        }
+                  }
             }
       }
 
