@@ -36,6 +36,7 @@ class Slur;
 class Part;
 class Score;
 class Note;
+class Ottava;
 
 struct MusicXmlWedge {
       int number;
@@ -91,6 +92,8 @@ class MusicXml {
 
       std::vector<MusicXmlWedge> wedgeList;
       std::vector<MusicXmlPartGroup*> partGroupList;
+
+      Ottava* ottava;   ///< Current ottava
 
       //-----------------------------
 

@@ -1,3 +1,5 @@
+27.11.7 (lv)
+      - MusicXML import/export of ottavas, but not completely OK yet
 25.11.7 (ws)
       - split Repeat() Element into Jump() and Marker(); make them a subclass
         of text which allows for editing

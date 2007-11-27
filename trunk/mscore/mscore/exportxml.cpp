@@ -1655,9 +1655,9 @@ void ExportMusicXml::hairpin(Hairpin* hp, int staff, int tick)
 
 void ExportMusicXml::ottava(Ottava* ot, int staff, int tick)
       {
+      int st = ot->subtype();
       directionTag(xml, attr, ot);
       if (ot->tick() == tick) {
-            int st = ot->subtype();
             char* sz = 0;
             char* tp = 0;
             switch(st) {
@@ -1683,8 +1683,14 @@ void ExportMusicXml::ottava(Ottava* ot, int staff, int tick)
             if (sz && tp)
                   xml.tagE("octave-shift type=\"%s\" size=\"%s\"", tp, sz);
             }
-      else
-            xml.tagE("octave-shift type=\"stop\"");
+      else {
+            if (st == 0 || st == 2)
+                  xml.tagE("octave-shift type=\"stop\" size=\"8\"");
+            else if (st == 1 || st == 3)
+                  xml.tagE("octave-shift type=\"stop\" size=\"15\"");
+            else
+                  printf("ottava subtype %d not understood\n", st);
+            }
       directionETag(xml, staff);
       }
 
@@ -1942,6 +1948,10 @@ printf("gel contains:\n");
 foreach(Element* el, *(score->gel())) {
       printf("%p type=%d(%s) tick=%d track=%d",
              el, el->type(), elementNames[el->type()], el->tick(), el->track());
+      if (el->type() == OTTAVA) {
+           Ottava * o = (Ottava *) el;
+           printf(" tick2=%d", o->tick2());
+           }
       if (el->type() == SLUR) {
            Slur * s = (Slur *) el;
            printf(" tick2=%d track2=%d", s->tick2(), s->track2());
