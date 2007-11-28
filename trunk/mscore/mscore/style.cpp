@@ -88,7 +88,7 @@ const TextStyle defaultTextStyleArray[] = {
          ALIGN_HCENTER | ALIGN_BOTTOM,    ANCHOR_PARENT, 0, MM(1)),
 
       TextStyle(QString("Measure Number"), ff, 8, false, false, false,
-         ALIGN_LEFT,    ANCHOR_STAFF, -1.0, -2.2),
+         ALIGN_LEFT,    ANCHOR_PARENT, -1.0, -2.2, OS),
 
       TextStyle(QString("Page Number Odd"), ff, 12, false, false, false,
          ALIGN_RIGHT | ALIGN_TOP, ANCHOR_PARENT),
@@ -119,7 +119,7 @@ const TextStyle defaultTextStyleArray[] = {
          0.3, 1.0, 1.0, 20, Qt::black),
 
       TextStyle(QString("Repeat Text"), ff,  12, false, false, false,
-         ALIGN_HCENTER, ANCHOR_MEASURE, 0, 0, OS, 0, 0, true),
+         ALIGN_HCENTER | ALIGN_BASELINE, ANCHOR_MEASURE, 0, -2.0, OS, 100, 0, true),
 
       TextStyle(QString("Volta"), ff, 11, true, false, false,
          ALIGN_LEFT,    ANCHOR_STAFF, 0, -5.0, OS, 0, 0, true),

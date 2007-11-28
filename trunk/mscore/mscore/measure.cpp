@@ -536,8 +536,8 @@ void Measure::layout(ScoreLayout* layout, double width)
                         }
                   }
             }
-      if (_noText)
-            _noText->layout(layout);
+//      if (_noText)
+//            _noText->layout(layout);
       }
 
 //---------------------------------------------------------

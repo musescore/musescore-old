@@ -70,8 +70,9 @@ class Xml : public QTextStream {
       void dump(int len, const unsigned char* p);
 
       static QString xmlString(const QString&);
+      static void htmlToString(QDomElement, int level, QString*);
+      static QString htmlToString(QDomElement);
       };
-
 
 extern QString docName;
 extern QPointF readPoint(QDomElement);

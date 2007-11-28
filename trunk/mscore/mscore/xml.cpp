@@ -58,7 +58,7 @@ void Xml::putLevel()
 
 void Xml::header()
       {
-      *this << "<?xml version=\"1.0\" encoding=\"utf8\"?>\n";
+      *this << "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n";
       }
 
 //---------------------------------------------------------
@@ -319,5 +319,37 @@ void domNotImplemented(QDomElement e)
          qPrintable(s), qPrintable(e.tagName()), e.nodeType());
       if (e.isText())
             fprintf(stderr, "  text node <%s>\n", qPrintable(e.toText().data()));
+      }
+
+//---------------------------------------------------------
+//   htmlToString
+//---------------------------------------------------------
+
+void Xml::htmlToString(QDomElement e, int level, QString* s)
+      {
+      *s += QString("<%1").arg(e.tagName());
+      QDomNamedNodeMap map = e.attributes();
+      int n = map.size();
+      for (int i = 0; i < n; ++i) {
+            QDomAttr a = map.item(i).toAttr();
+            *s += QString(" %1=\"%2\"").arg(a.name()).arg(a.value());
+            }
+      *s += ">";
+      ++level;
+      for (QDomNode ee = e.firstChild(); !ee.isNull(); ee = ee.nextSibling()) {
+            if (ee.nodeType() == QDomNode::ElementNode)
+                  htmlToString(ee.toElement(), level, s);
+            else if (ee.nodeType() == QDomNode::TextNode)
+                  *s += ee.toText().data();
+            }
+      *s += QString("</%1>").arg(e.tagName());
+      --level;
+      }
+
+QString Xml::htmlToString(QDomElement e)
+      {
+      QString s;
+      htmlToString(e, 0, &s);
+      return s;
       }
 

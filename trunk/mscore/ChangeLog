@@ -1,3 +1,6 @@
+28.11.7 (ws)
+      - fix various regressions
+      - inline html text description into *.msc files
 27.11.7 (lv)
       - MusicXML import/export of ottavas, but not completely OK yet
 25.11.7 (ws)
