@@ -200,10 +200,7 @@ void Marker::propertyAction(const QString& s)
       {
       if (s == "props") {
             MarkerProperties rp(this);
-            int rv = rp.exec();
-            if (rv) {
-                  printf("OK\n");
-                  }
+            rp.exec();
             }
       }
 
@@ -271,10 +268,7 @@ void Jump::propertyAction(const QString& s)
       {
       if (s == "props") {
             JumpProperties rp(this);
-            int rv = rp.exec();
-            if (rv) {
-                  printf("OK\n");
-                  }
+            rp.exec();
             }
       }
 

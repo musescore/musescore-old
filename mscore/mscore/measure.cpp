@@ -616,13 +616,6 @@ void Measure::layout2(ScoreLayout* layout)
                            bbox().width() - element->bbox().width() - _spatium,
                            - element->bbox().height() - _spatium);
                         break;
-
-                  case MARKER:      // TODO
-                        break;
-
-                  case JUMP:        // TODO
-                        break;
-
                   default:
                         break;
                   }
@@ -1723,7 +1716,6 @@ printf("drop staffList\n");
                   e->setParent(this);
                   e->setStaff(score()->staff(0));
                   score()->cmdAdd(e);
-printf("drop marker/jump in measure %d\n", _no);
                   break;
 
             case BRACKET:

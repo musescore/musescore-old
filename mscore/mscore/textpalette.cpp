@@ -34,9 +34,9 @@ static SymCode pSymbols[] = {
       SymCode(0xe0f9, TEXT_STYLE_DYNAMICS1),    // note16_Sym
       SymCode(0xe0fa, TEXT_STYLE_DYNAMICS1),    // note32_Sym
       SymCode(0xe0fb, TEXT_STYLE_DYNAMICS1),    // note64_Sym
-      SymCode(0xe168, TEXT_STYLE_SYMBOL1),      // coda
-      SymCode(0xe169, TEXT_STYLE_SYMBOL1),      // varcoda
-      SymCode(0, 0),
+      SymCode(0xe168, TEXT_STYLE_DYNAMICS1),      // coda
+      SymCode(0xe169, TEXT_STYLE_DYNAMICS1),      // varcoda
+      SymCode(0xe167, TEXT_STYLE_DYNAMICS1),      // segno
       SymCode(0, 0),
       SymCode(0, 0),
       SymCode(0, 0),
