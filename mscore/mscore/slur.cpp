@@ -377,6 +377,7 @@ void SlurSegment::dump() const
 
 bool SlurSegment::genPropertyMenu(QMenu* popup) const
       {
+      Element::genPropertyMenu(popup);
       QAction* a = popup->addAction(tr("Edit Mode"));
       a->setData("edit");
       return true;

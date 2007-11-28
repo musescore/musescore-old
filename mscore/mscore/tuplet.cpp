@@ -366,6 +366,7 @@ void Tuplet::remove(Element* e)
 
 bool Tuplet::genPropertyMenu(QMenu* popup) const
       {
+      Element::genPropertyMenu(popup);
       QAction* a = popup->addAction(tr("Show number"));
       a->setData("number");
       a->setCheckable(true);
@@ -382,6 +383,7 @@ void Tuplet::propertyAction(const QString& s)
       if (s == "number") {
             _hasNumber = !_hasNumber;
             }
-//TODO      layout();
+      else
+            Element::propertyAction(s);
       }
 

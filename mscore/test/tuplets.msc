@@ -1,10 +1,10 @@
-<?xml version="1.0" encoding="utf8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <museScore version="1.0">
   <Spatium>1.76389</Spatium>
   <Division>480</Division>
   <Mag>1</Mag>
-  <xoff>0</xoff>
-  <yoff>0</yoff>
+  <xoff>8</xoff>
+  <yoff>21</yoff>
   <Style>
     <staffUpperBorder>8</staffUpperBorder>
     <staffLowerBorder>4</staffLowerBorder>
@@ -122,16 +122,11 @@ p, li { white-space: pre-wrap; }
     <VBox>
       <height>83.3333</height>
       <Text>
-        <align>12</align>
-        <xoffset>0</xoffset>
-        <yoffset>0.19685</yoffset>
-        <anchor>page</anchor>
-        <offsetType>absolute</offsetType>
-        <spatiumSizeDependent>0</spatiumSizeDependent>
-        <data>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+        <subtype>Title</subtype>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Times New Roman&apos;; font-size:24pt;&quot;&gt;Tuplets&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
+</style></head><body style=" font-family:'Times New Roman'; font-size:24pt; font-weight:400; font-style:normal;">
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Tuplets</p></body></html>
         </Text>
       </VBox>
     <Measure number="1">
@@ -142,17 +137,11 @@ p, li { white-space: pre-wrap; }
         <normalNotes>2</normalNotes>
         <actualNotes>3</actualNotes>
         <Number>
-          <align>36</align>
-          <xoffset>0</xoffset>
-          <yoffset>0</yoffset>
-          <anchor>note</anchor>
-          <offsetType>spatium</offsetType>
-          <spatiumSizeDependent>0</spatiumSizeDependent>
-          <data>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
-p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-size:8pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:6pt;&quot;&gt;3&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
           <subtype>Tuplet</subtype>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-size:8pt; font-weight:400; font-style:normal;">
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:6pt;">3</p></body></html>
           </Number>
         </Tuplet>
       <Tuplet id="1">
@@ -162,17 +151,11 @@ p, li { white-space: pre-wrap; }
         <normalNotes>2</normalNotes>
         <actualNotes>3</actualNotes>
         <Number>
-          <align>36</align>
-          <xoffset>0</xoffset>
-          <yoffset>0</yoffset>
-          <anchor>note</anchor>
-          <offsetType>spatium</offsetType>
-          <spatiumSizeDependent>0</spatiumSizeDependent>
-          <data>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
-p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-size:8pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:6pt;&quot;&gt;3&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
           <subtype>Tuplet</subtype>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-size:8pt; font-weight:400; font-style:normal;">
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:6pt;">3</p></body></html>
           </Number>
         </Tuplet>
       <Tuplet id="2">
@@ -182,17 +165,11 @@ p, li { white-space: pre-wrap; }
         <normalNotes>2</normalNotes>
         <actualNotes>3</actualNotes>
         <Number>
-          <align>36</align>
-          <xoffset>0</xoffset>
-          <yoffset>0</yoffset>
-          <anchor>note</anchor>
-          <offsetType>spatium</offsetType>
-          <spatiumSizeDependent>0</spatiumSizeDependent>
-          <data>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
-p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-size:8pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:6pt;&quot;&gt;3&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
           <subtype>Tuplet</subtype>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-size:8pt; font-weight:400; font-style:normal;">
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:6pt;">3</p></body></html>
           </Number>
         </Tuplet>
       <Tuplet id="3">
@@ -202,17 +179,11 @@ p, li { white-space: pre-wrap; }
         <normalNotes>4</normalNotes>
         <actualNotes>5</actualNotes>
         <Number>
-          <align>36</align>
-          <xoffset>0</xoffset>
-          <yoffset>0</yoffset>
-          <anchor>note</anchor>
-          <offsetType>spatium</offsetType>
-          <spatiumSizeDependent>0</spatiumSizeDependent>
-          <data>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
-p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-size:8pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;5&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
           <subtype>Tuplet</subtype>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-size:8pt; font-weight:400; font-style:normal;">
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">5</p></body></html>
           </Number>
         </Tuplet>
       <Tuplet id="4">
@@ -222,17 +193,11 @@ p, li { white-space: pre-wrap; }
         <normalNotes>2</normalNotes>
         <actualNotes>3</actualNotes>
         <Number>
-          <align>36</align>
-          <xoffset>0</xoffset>
-          <yoffset>0</yoffset>
-          <anchor>note</anchor>
-          <offsetType>spatium</offsetType>
-          <spatiumSizeDependent>0</spatiumSizeDependent>
-          <data>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
-p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-size:8pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p align=&quot;center&quot; style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;3&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
           <subtype>Tuplet</subtype>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-size:8pt; font-weight:400; font-style:normal;">
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">3</p></body></html>
           </Number>
         </Tuplet>
       <TimeSig>

@@ -793,6 +793,7 @@ Element* Note::drop(const QPointF&, const QPointF&, Element* e)
 
 bool Note::genPropertyMenu(QMenu* popup) const
       {
+      Element::genPropertyMenu(popup);
       QAction* a = popup->addSeparator();
       a->setText(tr("Chord"));
       a = popup->addAction(tr("Properties..."));
@@ -816,6 +817,8 @@ void Note::propertyAction(const QString& s)
                         score()->undoChangeChordRestSize(chord(), val);
                   }
             }
+      else
+            Element::propertyAction(s);
       }
 
 //---------------------------------------------------------

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <museScore version="1.0">
   <Spatium>1.76389</Spatium>
   <Division>480</Division>
@@ -112,9 +112,6 @@ p, li { white-space: pre-wrap; }
   <Slur>
     <tick2>2880</tick2>
     <tick>1920</tick>
-    <SlurSegment no="0">
-      <o1 x="-0.24" y="3.6"/>
-      </SlurSegment>
     </Slur>
   <Slur>
     <tick2>19200</tick2>

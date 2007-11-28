@@ -1,10 +1,10 @@
-<?xml version="1.0" encoding="utf8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <museScore version="1.0">
   <Spatium>1.5</Spatium>
   <Division>480</Division>
-  <Mag>2</Mag>
-  <xoff>-59</xoff>
-  <yoff>-73</yoff>
+  <Mag>1.458</Mag>
+  <xoff>20</xoff>
+  <yoff>32</yoff>
   <Style>
     <staffUpperBorder>8</staffUpperBorder>
     <staffLowerBorder>4</staffLowerBorder>

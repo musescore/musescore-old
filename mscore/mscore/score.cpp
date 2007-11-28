@@ -1618,7 +1618,6 @@ MeasureBase* Score::searchLabel(const QString& s, MeasureBase* start)
 
 void Score::toEList(QMap<int, Event>* events, bool expandRepeats, int offset, int staffIdx)
       {
-printf("========toEList\n");
       if (!expandRepeats) {
             for (MeasureBase* mb = mainLayout()->first(); mb; mb = mb->next()) {
                   if (mb->type() != MEASURE)
@@ -1660,10 +1659,6 @@ printf("========toEList\n");
                               MeasureBase* nmb = searchLabel(jumpTo);
                               if (nmb) {
                                     rstack.push(RepeatLoop(s->playUntil(), s->continueAt()));
-printf("JUMP <%s> <%s> <%s>\n",
-   qPrintable(jumpTo),
-   qPrintable(s->playUntil()),
-   qPrintable(s->continueAt()));
                                     tickOffset += m->tick() + m->tickLen() - nmb->tick();
                                     mb = nmb;
                                     continue;
@@ -1695,7 +1690,6 @@ printf("JUMP <%s> <%s> <%s>\n",
             else if (rstack.top().type == RepeatLoop::LOOP_JUMP) {
                   MeasureBase* m = searchLabel(rstack.top().stop);
                   if (m == mb) {
-printf("  label <%s> found\n", qPrintable(rstack.top().stop));
                         if (m->next() == 0)
                               break;
                         MeasureBase* nmb = searchLabel(rstack.top().cont, m->next());

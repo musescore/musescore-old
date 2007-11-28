@@ -36,6 +36,9 @@ coda.msc
       - horizontal frame
       - coda1, coda2
 
+Repeat1.msc
+Repeat2.msc       currently broken due to changes in repeat handling
+
 
 -------------------------------------------------
       MIDI Testfiles

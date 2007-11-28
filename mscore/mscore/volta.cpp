@@ -98,6 +98,7 @@ QPointF VoltaSegment::pos2anchor(const QPointF& pos, int* tick) const
 
 bool VoltaSegment::genPropertyMenu(QMenu* popup) const
       {
+      Element::genPropertyMenu(popup);
       QAction* a = popup->addAction(tr("Properties..."));
       a->setData("props");
       return true;
@@ -123,6 +124,8 @@ void VoltaSegment::propertyAction(const QString& s)
                         score()->undoChangeVoltaEnding(volta(), l);
                   }
             }
+      else
+            Element::propertyAction(s);
       }
 
 //---------------------------------------------------------

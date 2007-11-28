@@ -280,6 +280,7 @@ qreal Rest::downPos() const
 
 bool Rest::genPropertyMenu(QMenu* popup) const
       {
+      Element::genPropertyMenu(popup);
       QAction* a = popup->addSeparator();
       a->setText(tr("Rest"));
       a = popup->addAction(tr("Properties..."));
@@ -303,5 +304,7 @@ void Rest::propertyAction(const QString& s)
                         score()->undoChangeChordRestSize(this, val);
                   }
             }
+      else
+            Element::propertyAction(s);
       }
 
