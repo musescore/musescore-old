@@ -421,26 +421,31 @@ void MuseScore::showPalette(bool visible)
             Marker* mk = new Marker(gscore);
             mk->setHtml(symToHtml(symbols[segnoSym]));
             mk->setLabel("segno");
+            mk->setRXoff(0.0);                  // move to start of measure
             sp->addObject(1, mk, tr("Segno"));
 
             mk = new Marker(gscore);
             mk->setHtml(symToHtml(symbols[codaSym]));
             mk->setLabel("coda");
+            mk->setRXoff(0.0);                  // move to start of measure
             sp->addObject(2, mk, tr("Coda"));
 
             mk = new Marker(gscore);
             mk->setHtml(symToHtml(symbols[varcodaSym]));
             mk->setLabel("varcoda");
+            mk->setRXoff(0.0);                  // move to start of measure
             sp->addObject(3, mk, tr("VarCoda"));
 
             mk = new Marker(gscore);
             mk->setHtml(symToHtml(symbols[codaSym], symbols[codaSym]));
             mk->setLabel("codetta");
+            mk->setRXoff(0.0);                  // move to start of measure
             sp->addObject(4, mk, tr("Codetta"));
 
             mk = new Marker(gscore);
             mk->setText("Fine");
             mk->setLabel("fine");
+            mk->setRXoff(100.0);                  // move to end of measure
             sp->addObject(5, mk, tr("Fine"));
 
             Jump* jp = new Jump(gscore);
@@ -462,8 +467,21 @@ void MuseScore::showPalette(bool visible)
             jp->setContinueAt("coda");
             sp->addObject(8, jp, tr("da Capo al Coda"));
 
+            jp = new Jump(gscore);
+            jp->setText("D.S. al Coda");
+            jp->setJumpTo("segno");
+            jp->setPlayUntil("coda");
+            jp->setContinueAt("coda");
+            sp->addObject(9, jp, tr("D.S al Coda"));
+
+            jp = new Jump(gscore);
+            jp->setText("D.S. al Fine");
+            jp->setJumpTo("segno");
+            jp->setPlayUntil("fine");
+            sp->addObject(10, jp, tr("D.S al Fine"));
+
 //                  "dalSegno",
-//                  "dalSegnoAlFine", "dalSegnoAlCoda", "alSegno"
+//                  "alSegno"
 
             paletteBox->addPalette(tr("Repeats"), sp);
 
