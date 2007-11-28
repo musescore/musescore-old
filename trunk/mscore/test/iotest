@@ -60,14 +60,17 @@ rwtestAllMsc() {
       rwtest accidental1.msc
       rwtest accidental2.msc
       rwtest chromatic.msc
+      rwtest coda.msc
       rwtest crossbeams.msc
       rwtest RepeatTest6.msc
+      rwtest RepeatTest7.msc
       rwtest scales1.msc
       rwtest slur2.msc
       rwtest test1.msc
       rwtest test2.msc
       rwtest test7.msc
       rwtest testKeysig2.msc
+      rwtest testsmall.msc
       rwtest testTimesig2.msc
       rwtest tuplets.msc
       }

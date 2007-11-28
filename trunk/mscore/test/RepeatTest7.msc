@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <museScore version="1.0">
   <Spatium>1.76389</Spatium>
   <Division>480</Division>
@@ -122,10 +122,6 @@ p, li { white-space: pre-wrap; }
     <tick>3840</tick>
     <tick2>5760</tick2>
     <track>0</track>
-    <Segment>
-      <off1 x="0.0536813" y="-4.51164"/>
-      <off2 x="-1.68" y="0"/>
-      </Segment>
     <text>1.</text>
     <endings>1</endings>
     </Volta>
@@ -134,12 +130,8 @@ p, li { white-space: pre-wrap; }
     <tick>5760</tick>
     <tick2>7680</tick2>
     <track>0</track>
-    <Segment>
-      <off1 x="0.151074" y="-4.43375"/>
-      <off2 x="-0.24" y="0"/>
-      </Segment>
-    <text>1.</text>
-    <endings>1</endings>
+    <text>2.</text>
+    <endings>2</endings>
     </Volta>
   <Staff id="1">
     <Measure number="1">
