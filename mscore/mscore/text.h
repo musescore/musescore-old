@@ -66,6 +66,7 @@ class Text : public Element {
       QTextDocument* doc;
       int cursorPos;
       TextStyle* style() const;
+      qreal basePosition() const;
 
    public:
       Text(Score*);

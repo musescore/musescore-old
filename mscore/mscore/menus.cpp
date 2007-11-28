@@ -441,8 +441,6 @@ void MuseScore::showPalette(bool visible)
             mk = new Marker(gscore);
             mk->setText("Fine");
             mk->setLabel("fine");
-            mk->setRXoff(100.0);                 // to end of measure
-            mk->setAlign(ALIGN_HCENTER | ALIGN_BOTTOM);
             sp->addObject(5, mk, tr("Fine"));
 
             Jump* jp = new Jump(gscore);

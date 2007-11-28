@@ -52,6 +52,12 @@ Text::Text(Score* s)
       editMode                = false;
       cursorPos               = 0;
       doc                     = new QTextDocument(0);
+
+      QTextOption to = doc->defaultTextOption();
+      to.setUseDesignMetrics(true);
+      to.setWrapMode(QTextOption::NoWrap);
+      doc->setDefaultTextOption(to);
+
       cursor                  = 0;
       _frameWidth             = 0.0;
       _marginWidth            = 0.0;
@@ -290,12 +296,12 @@ QString Text::getHtml() const
 
 void Text::layout(ScoreLayout* layout)
       {
-      if (parent() == 0)
-            return;
-
       doc->documentLayout()->setPaintDevice(layout->paintDevice());
       doc->setUseDesignMetrics(true);
       setbbox(QRectF(QPointF(), doc->documentLayout()->documentSize()));
+
+      if (parent() == 0)
+            return;
 
       QPointF o(QPointF(_xoff, _yoff));
       if (_offsetType == OFFSET_SPATIUM)
@@ -305,6 +311,7 @@ void Text::layout(ScoreLayout* layout)
       o += QPointF(_rxoff * parent()->width() * 0.01, _ryoff * parent()->height() * 0.01);
 
       double tw = width();
+      doc->setTextWidth(tw);  // this enables hcenter alignment for multiline text
       double th = height();
       double x  = 0.0;
       double y  = 0.0;
@@ -312,6 +319,9 @@ void Text::layout(ScoreLayout* layout)
             y = -th;
       else if (_align & ALIGN_VCENTER)
             y = -(th * .5);
+      else if (_align & ALIGN_BASELINE) {
+            y = -basePosition();
+            }
       if (_align & ALIGN_RIGHT)
             x = -tw;
       else if (_align & ALIGN_HCENTER)
@@ -328,6 +338,11 @@ void Text::setText(const QString& s)
       doc->clear();
       QTextCursor cursor(doc);
       cursor.movePosition(QTextCursor::Start);
+      if (_align & ALIGN_HCENTER) {
+            QTextBlockFormat bf = cursor.blockFormat();
+            bf.setAlignment(Qt::AlignHCenter);
+            cursor.setBlockFormat(bf);
+            }
       QTextCharFormat tf = cursor.charFormat();
       tf.setFont(doc->defaultFont());
       cursor.setBlockCharFormat(tf);
@@ -417,14 +432,16 @@ void Text::writeProperties(Xml& xml) const
       TextStyle* st = style();
 
       if (_align != st->align) {
-if (subtype() == TEXT_TITLE)
-      printf("Title align %x style %x\n", _align, st->align);
-
             if (_align & (ALIGN_RIGHT | ALIGN_HCENTER)) {          // default is ALIGN_LEFT
                   xml.tag("halign", (_align & ALIGN_RIGHT) ? "right" : "center");
                   }
-            if (_align & (ALIGN_BOTTOM | ALIGN_VCENTER)) {        // default is ALIGN_TOP
-                  xml.tag("valign", (_align & ALIGN_BOTTOM) ? "bottom" : "center");
+            if (_align & (ALIGN_BOTTOM | ALIGN_VCENTER | ALIGN_BASELINE)) {        // default is ALIGN_TOP
+                  if (_align & ALIGN_BOTTOM)
+                        xml.tag("valign", "bottom");
+                  else if (_align & ALIGN_VCENTER)
+                        xml.tag("valign", "center");
+                  else if (_align & ALIGN_BASELINE)
+                        xml.tag("valign", "baseline");
                   }
             }
       if (_xoff != st->xoff)
@@ -461,8 +478,7 @@ if (subtype() == TEXT_TITLE)
       if (!_sizeIsSpatiumDependent && _sizeIsSpatiumDependent != st->sizeIsSpatiumDependent)
             xml.tag("spatiumSizeDependent", _sizeIsSpatiumDependent);
 
-      QString s = doc->toHtml("utf8");
-      xml.tag("data", s);
+      xml << doc->toHtml("UTF-8") << '\n';
       }
 
 //---------------------------------------------------------
@@ -474,8 +490,12 @@ bool Text::readProperties(QDomElement e)
       QString tag(e.tagName());
       QString val(e.text());
 
-      if (tag == "data")
+      if (tag == "data")                  // obsolete
             doc->setHtml(val);
+      else if (tag == "html") {
+            QString s = Xml::htmlToString(e);
+            doc->setHtml(s);
+            }
       else if (tag == "align")            // obsolete
             _align = val.toInt();
       else if (tag == "halign") {
@@ -491,6 +511,8 @@ bool Text::readProperties(QDomElement e)
                   _align |= ALIGN_VCENTER;
             else if (val == "bottom")
                   _align |= ALIGN_BOTTOM;
+            else if (val == "baseline")
+                  _align |= ALIGN_BASELINE;
             else
                   printf("Text::readProperties: unknown alignment: <%s>\n", qPrintable(val));
             }
@@ -793,9 +815,23 @@ QPainterPath Text::shape() const
             int n = tl->lineCount();
             for (int i = 0; i < n; ++i)
                   pp.addRect(tl->lineAt(0).naturalTextRect().translated(tl->position()));
-                  //pp.addRect(tl->lineAt(0).rect().translated(tl->position()));
             }
       return pp;
+      }
+
+//---------------------------------------------------------
+//   basePosition
+//    returns ascent of first text line in first block
+//---------------------------------------------------------
+
+qreal Text::basePosition() const
+      {
+      for (QTextBlock tb = doc->begin(); tb.isValid(); tb = tb.next()) {
+            const QTextLayout* tl = tb.layout();
+            if (tl->lineCount())
+                  return tl->lineAt(0).ascent() + tl->position().y();
+            }
+      return 0.0;
       }
 
 //---------------------------------------------------------
@@ -944,6 +980,8 @@ QLineF Text::dragAnchor() const
             y = th;
       else if (_align & ALIGN_VCENTER)
             y = (th * .5);
+      else if (_align & ALIGN_BASELINE)
+            y = basePosition();
       if (_align & ALIGN_RIGHT)
             x = tw;
       else if (_align & ALIGN_HCENTER)

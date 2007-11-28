@@ -328,7 +328,6 @@ void Palette::paintEvent(QPaintEvent*)
                   if (el == 0)
                         continue;
                   el->layout(&layout);
-
                   if (staff) {
                         qreal y = r.y() + vgrid / 2 - dy;
                         qreal x = r.x() + 7;
