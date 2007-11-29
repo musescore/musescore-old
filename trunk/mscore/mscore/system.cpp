@@ -552,14 +552,13 @@ int System::y2staff(qreal y) const
 
 void System::add(Element* el)
       {
+      el->setParent(this);
       if (el->type() == TEXT && (el->subtype() == TEXT_INSTRUMENT_LONG || el->subtype() == TEXT_INSTRUMENT_SHORT)) {
-            SysStaff* ss = _staves[el->staffIdx()];
-            ss->instrumentName = (Text*)el;
+            _staves[el->staffIdx()]->instrumentName = (Text*)el;
             }
       else if (el->type() == BRACKET) {
             SysStaff* ss = _staves[el->staffIdx()];
-            Bracket* b = (Bracket*)el;
-            b->setParent(this);
+            Bracket* b   = (Bracket*)el;
             int level = b->level();
             ss->brackets[level] = b;
             b->staff()->setBracket(level,   b->subtype());
@@ -577,10 +576,8 @@ void System::add(Element* el)
 
 void System::remove(Element* el)
       {
-// printf("System::remove: %s staff %d\n", el->name(), el->staffIdx());
       if (el->type() == TEXT && (el->subtype() == TEXT_INSTRUMENT_LONG || el->subtype() == TEXT_INSTRUMENT_SHORT)) {
-            SysStaff* staff = _staves[el->staffIdx()];
-            staff->instrumentName = 0;
+            _staves[el->staffIdx()]->instrumentName = 0;
             }
       else if (el->type() == BRACKET) {
             SysStaff* staff = _staves[el->staffIdx()];

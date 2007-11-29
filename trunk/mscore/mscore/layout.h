@@ -123,6 +123,9 @@ class ScoreLayout : public Element {
       QList<const Element*> items(const QRectF& r)  { return bspTree.items(r); }
       QList<const Element*> items(const QPointF& p) { return bspTree.items(p); }
 
+      void insertBsp(Element* e)                    { bspTree.insert(e); }
+      void removeBsp(Element* e)                    { bspTree.remove(e); }
+
       void setInstrumentNames();
       void connectTies();
       void searchHiddenNotes();

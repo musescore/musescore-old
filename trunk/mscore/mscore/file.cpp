@@ -764,7 +764,7 @@ bool Score::loadFile(QFile* qf)
                               movementTitle = val;
                         else if (tag == "Part") {
                               Part* part = new Part(this);
-                              part->read(this, ee);
+                              part->read(ee);
                               parts()->push_back(part);
                               }
                         else if (tag == "showInvisible")

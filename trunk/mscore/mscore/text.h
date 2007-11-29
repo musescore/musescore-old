@@ -58,8 +58,8 @@ class Text : public Element {
       QColor _frameColor;
       int _frameRound;
 
-      QTextCursor* cursor;
       bool editMode;
+      QTextCursor* cursor;
       bool setCursor(const QPointF& p);
 
    protected:

@@ -35,8 +35,8 @@ Part::Part(Score* s)
       {
       _longName.setDefaultFont(s->textStyle(TEXT_STYLE_INSTRUMENT_LONG)->font());
       _shortName.setDefaultFont(s->textStyle(TEXT_STYLE_INSTRUMENT_SHORT)->font());
-      cs = s;
-      _show = true;
+      _score = s;
+      _show  = true;
       }
 
 //---------------------------------------------------------
@@ -52,23 +52,23 @@ Staff* Part::staff(int idx) const
 //   read
 //---------------------------------------------------------
 
-void Part::read(Score* score, QDomElement e)
+void Part::read(QDomElement e)
       {
       int rstaff = 0;
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             QString tag(e.tagName());
             QString val(e.text());
             if (tag == "Staff") {
-                  Staff* staff = new Staff(score, this, rstaff);
+                  Staff* staff = new Staff(_score, this, rstaff);
                   staff->read(e);
-                  score->staves().push_back(staff);
+                  _score->staves().push_back(staff);
                   _staves.push_back(staff);
                   ++rstaff;
                   }
             else if (tag == "Instrument")
                   _instrument.read(e);
             else if (tag == "name") {
-                  if (cs->mscVersion() <= 101)
+                  if (_score->mscVersion() <= 101)
                         _longName.setHtml(val);
                   else {
                         for (QDomElement ee = e.firstChildElement(); !ee.isNull(); ee = ee.nextSiblingElement()) {
@@ -80,7 +80,7 @@ void Part::read(Score* score, QDomElement e)
                         }
                   }
             else if (tag == "shortName") {
-                  if (cs->mscVersion() <= 101)
+                  if (_score->mscVersion() <= 101)
                         _shortName.setHtml(val);
                   else {
                         for (QDomElement ee = e.firstChildElement(); !ee.isNull(); ee = ee.nextSiblingElement()) {
@@ -184,12 +184,12 @@ void Part::setStaves(int n)
             printf("Part::setStaves(): remove staves not implemented!\n");
             return;
             }
-      int staffIdx = cs->staff(this) + ns;
+      int staffIdx = _score->staff(this) + ns;
       for (int i = ns; i < n; ++i) {
-            Staff* staff = new Staff(cs, this, i);
+            Staff* staff = new Staff(_score, this, i);
             _staves.push_back(staff);
-            cs->staves().insert(staffIdx, staff);
-            for (MeasureBase* mb = cs->mainLayout()->first(); mb; mb = mb->next()) {
+            _score->staves().insert(staffIdx, staff);
+            for (MeasureBase* mb = _score->mainLayout()->first(); mb; mb = mb->next()) {
                   if (mb->type() != MEASURE)
                         continue;
                   Measure* m = (Measure*)mb;
