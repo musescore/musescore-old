@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<museScore version="1.0">
+<museScore version="1.1">
   <Spatium>1.76389</Spatium>
   <Division>480</Division>
   <Mag>0.715533</Mag>
@@ -129,7 +129,7 @@
     </Part>
   <Staff id="1">
     <VBox>
-      <height>83.3333</height>
+      <height>10</height>
       <Text>
         <subtype>Title</subtype>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><style type="text/css">

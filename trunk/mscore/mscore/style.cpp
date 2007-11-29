@@ -69,10 +69,10 @@ const TextStyle defaultTextStyleArray[] = {
          ALIGN_CENTER, ANCHOR_PARENT),
 
       TextStyle(QString("InstrumentsLong"),   ff, 12, false, false, false,
-         ALIGN_RIGHT | ALIGN_VCENTER, ANCHOR_MEASURE),
+         ALIGN_RIGHT | ALIGN_VCENTER, ANCHOR_PARENT),
 
       TextStyle(QString("InstrumentsShort"),   ff, 12, false, false, false,
-         ALIGN_RIGHT | ALIGN_VCENTER, ANCHOR_MEASURE),
+         ALIGN_RIGHT | ALIGN_VCENTER, ANCHOR_PARENT),
 
       TextStyle(QString("Dynamics"), ff, 12, false, true, false, ALIGN_LEFT, ANCHOR_STAFF),
       TextStyle(QString("Technik"), ff, 12, false, true, false, ALIGN_LEFT, ANCHOR_STAFF),

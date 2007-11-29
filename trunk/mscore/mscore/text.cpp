@@ -297,8 +297,7 @@ QString Text::getHtml() const
 void Text::layout(ScoreLayout* layout)
       {
       doc->documentLayout()->setPaintDevice(layout->paintDevice());
-      doc->setUseDesignMetrics(true);
-      setbbox(QRectF(QPointF(), doc->documentLayout()->documentSize()));
+      setbbox(QRectF(QPointF(), doc->size()));
 
       if (parent() == 0)
             return;
@@ -310,18 +309,22 @@ void Text::layout(ScoreLayout* layout)
             o *= DPI;
       o += QPointF(_rxoff * parent()->width() * 0.01, _ryoff * parent()->height() * 0.01);
 
-      double tw = width();
-      doc->setTextWidth(tw);  // this enables hcenter alignment for multiline text
+      doc->setTextWidth(1000000.0);       //!? qt bug?
+
+      double tw = doc->idealWidth();
+      doc->setTextWidth(tw);
+      setbbox(QRectF(QPointF(), doc->size()));
+
       double th = height();
-      double x  = 0.0;
-      double y  = 0.0;
+      double x  = 0.0, y = 0.0;
+
       if (_align & ALIGN_BOTTOM)
             y = -th;
       else if (_align & ALIGN_VCENTER)
             y = -(th * .5);
-      else if (_align & ALIGN_BASELINE) {
+      else if (_align & ALIGN_BASELINE)
             y = -basePosition();
-            }
+
       if (_align & ALIGN_RIGHT)
             x = -tw;
       else if (_align & ALIGN_HCENTER)
@@ -591,6 +594,8 @@ bool Text::startEdit(const QPointF& p)
 
 bool Text::edit(int, QKeyEvent* ev)
       {
+      score()->setLayoutAll(false);
+      score()->addRefresh(abbox().adjusted(-6, -6, 12, 12));
       int key = ev->key();
       if (key == Qt::Key_F2) {
             if (palette == 0)
@@ -714,6 +719,8 @@ bool Text::edit(int, QKeyEvent* ev)
             palette->setCharFormat(cursor->charFormat());
             palette->setBlockFormat(cursor->blockFormat());
             }
+      layout(score()->mainLayout());
+      score()->addRefresh(abbox().adjusted(-6, -6, 12, 12));
       return true;
       }
 

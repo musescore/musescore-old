@@ -577,7 +577,11 @@ bool MuseScore::loadStyle(QFile* qf)
       docName = qf->fileName();
       for (QDomElement e = doc.documentElement(); !e.isNull(); e = e.nextSiblingElement()) {
             if (e.tagName() == "museScore") {
-                  // QString version = e.attribute(QString("version"));
+                  /*
+                  QString version = e.attribute(QString("version"));
+                  QStringList sl = version.split('.');
+                  _mscVersion = sl[0].toInt() * 100 + sl[1].toInt();
+                  */
                   for (QDomElement ee = e.firstChildElement(); !ee.isNull();  ee = ee.nextSiblingElement()) {
                         QString tag(ee.tagName());
                         QString val(ee.text());
@@ -634,7 +638,7 @@ void MuseScore::saveStyle()
 
       Xml xml(&f);
       xml.header();
-      xml.stag("museScore version=\"1.0\"");
+      xml.stag("museScore version=\"" MSC_VERSION "\"");
       cs->style()->saveStyle(xml);
       foreach(TextStyle* ts, cs->textStyles())
             ts->write(xml);
@@ -655,7 +659,7 @@ bool MuseScore::saveFile(QFile* f)
       {
       Xml xml(f);
       xml.header();
-      xml.stag("museScore version=\"1.0\"");
+      xml.stag("museScore version=\"" MSC_VERSION "\"");
 
       xml.tag("Spatium", _spatium / DPMM);
       xml.tag("Division", division);
@@ -703,6 +707,9 @@ bool Score::loadFile(QFile* qf)
       docName = qf->fileName();
       for (QDomElement e = doc.documentElement(); !e.isNull(); e = e.nextSiblingElement()) {
             if (e.tagName() == "museScore") {
+                  QString version = e.attribute(QString("version"));
+                  QStringList sl = version.split('.');
+                  _mscVersion = sl[0].toInt() * 100 + sl[1].toInt();
                   for (QDomElement ee = e.firstChildElement(); !ee.isNull(); ee = ee.nextSiblingElement()) {
                         QString tag(ee.tagName());
                         QString val(ee.text());

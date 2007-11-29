@@ -36,8 +36,8 @@ class BarLine;
 
 class Box : public MeasureBase {
 
-      double _boxWidth;       // only valid for HBox
-      double _boxHeight;      // only valid for VBox
+      Spatium _boxWidth;       // only valid for HBox
+      Spatium _boxHeight;      // only valid for VBox
       bool editMode;
 
    public:
@@ -54,10 +54,10 @@ class Box : public MeasureBase {
       virtual void write(Xml&, int) const;
       virtual void read(QDomElement);
 
-      double boxWidth() const          { return _boxWidth;  }
-      void setBoxWidth(double val)     { _boxWidth = val;   }
-      double boxHeight() const         { return _boxHeight; }
-      void setBoxHeight(double val)    { _boxHeight = val;  }
+      Spatium boxWidth() const        { return _boxWidth;  }
+      void setBoxWidth(Spatium val)   { _boxWidth = val;   }
+      Spatium boxHeight() const       { return _boxHeight; }
+      void setBoxHeight(Spatium val)  { _boxHeight = val;  }
       };
 
 //---------------------------------------------------------
@@ -92,6 +92,8 @@ class VBox : public Box {
       VBox(Score* score) : Box(score) {}
       virtual VBox* clone() const      { return new VBox(*this); }
       virtual ElementType type() const { return VBOX;       }
+
+      virtual void layout(ScoreLayout*);
 
       virtual bool genPropertyMenu(QMenu*) const;
       virtual void propertyAction(const QString&);
