@@ -35,8 +35,8 @@ Box::Box(Score* score)
    : MeasureBase(score)
       {
       editMode   = false;
-      _boxWidth  = 5 * _spatium;
-      _boxHeight = 10 * _spatium;
+      _boxWidth  = Spatium(5.0);
+      _boxHeight = Spatium(10.0);
       }
 
 //---------------------------------------------------------
@@ -134,9 +134,9 @@ void Box::write(Xml& xml, int) const
       {
       xml.stag(name());
       if (type() == VBOX)
-            xml.tag("height", _boxHeight);
+            xml.tag("height", _boxHeight.val());
       else if (type() == HBOX)
-            xml.tag("width", _boxWidth);
+            xml.tag("width", _boxWidth.val());
       foreach (const Element* el, _el)
             el->write(xml);
       xml.etag();
@@ -161,10 +161,18 @@ void Box::read(QDomElement e)
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             QString tag(e.tagName());
             QString val(e.text());
-            if (tag == "height")
-                  _boxHeight = val.toDouble();
-            else if (tag == "width")
-                  _boxWidth = val.toDouble();
+            if (tag == "height") {
+                  double v = val.toDouble();
+                  if (score()->mscVersion() <= 100)
+                        v /= _spatium;
+                  _boxHeight = Spatium(v);
+                  }
+            else if (tag == "width") {
+                  double v = val.toDouble();
+                  if (score()->mscVersion() <= 100)
+                        v /= _spatium;
+                  _boxWidth = Spatium(v);
+                  }
             else if (tag == "Text") {
                   Text* t = new Text(score());
                   t->setTick(curTickPos);
@@ -202,16 +210,17 @@ void HBox::collectElements(QList<const Element*>& el) const
 //   layout
 //---------------------------------------------------------
 
-void HBox::layout(ScoreLayout*)
+void HBox::layout(ScoreLayout* layout)
       {
-      setbbox(QRectF(0.0, 0.0, boxWidth(), system()->height()));
+      setbbox(QRectF(0.0, 0.0, boxWidth().point(), system()->height()));
+      Box::layout(layout);
       }
 
 //---------------------------------------------------------
 //   acceptDrop
 //---------------------------------------------------------
 
-bool HBox::acceptDrop(Viewer* viewer, const QPointF&, int type, int subtype) const
+bool HBox::acceptDrop(Viewer*, const QPointF&, int, int) const
       {
       return false;
       }
@@ -222,7 +231,6 @@ bool HBox::acceptDrop(Viewer* viewer, const QPointF&, int type, int subtype) con
 
 Element* HBox::drop(const QPointF&, const QPointF&, Element* e)
       {
-printf("HBox::drop %s\n", e->name());
       e->setParent(this);
       score()->select(e, 0, 0);
       score()->cmdAdd(e);
@@ -320,4 +328,16 @@ void VBox::propertyAction(const QString& cmd)
       getAction("composer-text")->blockSignals(false);
       getAction("poet-text")->blockSignals(false);
       }
+
+//---------------------------------------------------------
+//   layout
+//---------------------------------------------------------
+
+void VBox::layout(ScoreLayout* layout)
+      {
+      setPos(QPointF());      // !?
+      setbbox(QRectF(0.0, 0.0, system()->width(), boxHeight().point()));
+      Box::layout(layout);
+      }
+
 

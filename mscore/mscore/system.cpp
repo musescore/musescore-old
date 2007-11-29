@@ -139,7 +139,7 @@ void System::layout(ScoreLayout* layout)
       {
       if (isVbox())                 // ignore vbox
             return;
-      static const double instrumentNameOffset = 1.0;
+      static const Spatium instrumentNameOffset(1.0);
       int nstaves  = _staves.size();
 
       //---------------------------------------------------
@@ -195,7 +195,7 @@ void System::layout(ScoreLayout* layout)
                   }
             if (ss->instrumentName && !ss->instrumentName->isEmpty()) {
                   ss->instrumentName->layout(layout);
-                  double w = ss->instrumentName->width() + instrumentNameOffset * _spatium;
+                  double w = ss->instrumentName->width() + instrumentNameOffset.point();
                   if (w > xoff2)
                         xoff2 = w;
                   }
@@ -274,7 +274,7 @@ void System::layout(ScoreLayout* layout)
                   double y1 = s->bbox().top();
                   double y2 = staff(idx + nstaves - 1)->bbox().bottom();
                   double y  = y1 + (y2 - y1) * .5 - s->instrumentName->bbox().height() * .5;
-                  double d  = instrumentNameOffset * _spatium + s->instrumentName->bbox().width();
+                  double d  = instrumentNameOffset.point() + s->instrumentName->bbox().width();
                   s->instrumentName->setPos(xoff2 - d, y);
                   }
             idx += nstaves;
@@ -468,9 +468,9 @@ void SysStaff::move(double x, double y)
 void System::clear()
       {
       ml.clear();
-      foreach(SysStaff* ss, _staves)
-            delete ss;
-      _staves.clear();
+//      foreach(SysStaff* ss, _staves)
+//            delete ss;
+//      _staves.clear();
       if (barLine)
             delete barLine;
       barLine      = 0;

@@ -325,6 +325,9 @@ System* ScoreLayout::getNextSystem(bool isFirstSystem, bool isVbox)
             int nstaves = _score->nstaves();
             for (int i = system->staves()->size(); i < nstaves; ++i)
                   system->insertStaff(i);
+            for (int i = nstaves; i < system->staves()->size(); ++i) {
+                  system->removeStaff(nstaves);
+                  }
             }
       return system;
       }
@@ -366,25 +369,27 @@ bool ScoreLayout::layoutPage()
       while (curMeasure) {
             if (curMeasure->type() == VBOX) {
                   System* system = getNextSystem(false, true);
-                  VBox* box = (VBox*) curMeasure;
-                  if (y + box->boxHeight() > ey) {
+
+                  foreach(SysStaff* ss, *system->staves())
+                        delete ss;
+                  system->staves()->clear();
+
+                  system->setWidth(w);
+                  VBox* vbox = (VBox*) curMeasure;
+                  vbox->setParent(system);
+                  vbox->layout(this);
+                  double bh = vbox->height();
+                  if (y + bh > ey)
                         break;
-                        }
-                  curMeasure->setPos(QPointF(0.0, 0.0));
-                  curMeasure->setbbox(QRectF(0, 0, w, box->boxHeight()));
                   system->setPos(QPointF(x, y));
-                  system->setbbox(curMeasure->bbox());
+                  system->setHeight(vbox->height());
 
-                  curMeasure->layout(this);
-
-                  curMeasure->setParent(system);
-                  system->measures().push_back(curMeasure);
+                  system->measures().push_back(vbox);
                   page->appendSystem(system);
 
                   curMeasure = curMeasure->next();
                   ++curSystem;
-                  y += box->boxHeight();
-                  ++rows;
+                  y += bh;
                   }
             else {
                   bool isFirstSystem = false;
@@ -417,8 +422,8 @@ bool ScoreLayout::layoutPage()
                   if (sl.back()->pageBreak())
                         break;
                   firstSystem = false;
-                  ++rows;
                   }
+            ++rows;
             }
 
       //-----------------------------------------------------------------------
@@ -473,7 +478,7 @@ bool ScoreLayout::layoutSystem1(double& minWidth, double w, bool isFirstSystem)
             double stretch = 0.0;
 
             if (curMeasure->type() == HBOX) {
-                  ww = ((Box*)curMeasure)->boxWidth();
+                  ww = ((Box*)curMeasure)->boxWidth().point();
                   if (!isFirstMeasure)
                         continueFlag = true;    //try to put another system on current row
                   }
@@ -659,7 +664,7 @@ QList<System*> ScoreLayout::layoutSystemRow(qreal x, qreal y, qreal rowWidth, bo
       foreach(System* system, sl) {
             foreach (MeasureBase* mb, system->measures()) {
                   if (mb->type() == HBOX)
-                        minWidth += ((Box*)mb)->boxWidth();
+                        minWidth += ((Box*)mb)->boxWidth().point();
                   else {
                         Measure* m = (Measure*)mb;
                         if (needRelayout)
@@ -686,7 +691,7 @@ QList<System*> ScoreLayout::layoutSystemRow(qreal x, qreal y, qreal rowWidth, bo
                         m->layout(this, ww);
                         }
                   else if (mb->type() == HBOX) {
-                        ww = ((Box*)mb)->boxWidth();
+                        ww = ((Box*)mb)->boxWidth().point();
                         mb->layout(this);
                         }
                   pos.rx() += ww;

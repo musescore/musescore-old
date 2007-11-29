@@ -21,6 +21,8 @@
 #ifndef __GLOBALS_H__
 #define __GLOBALS_H__
 
+#define MSC_VERSION     "1.2"
+
 extern bool debugMode;
 extern bool layoutDebug;
 extern bool noSeq;            ///< Dont use sequencer; cmd line option.

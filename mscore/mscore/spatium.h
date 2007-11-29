@@ -49,8 +49,16 @@ class Spatium {
             _val += a._val;
             return *this;
             }
+      Spatium& operator+=(double a) {
+            _val += (a / _spatium);
+            return *this;
+            }
       Spatium& operator-=(Spatium a) {
             _val -= a._val;
+            return *this;
+            }
+      Spatium& operator-=(double a) {
+            _val -= (a / _spatium);
             return *this;
             }
       Spatium& operator/=(double d) {

@@ -67,13 +67,32 @@ void Part::read(Score* score, QDomElement e)
                   }
             else if (tag == "Instrument")
                   _instrument.read(e);
-            else if (tag == "name")
-                  _longName.setHtml(val);
-            else if (tag == "shortName")
-                  _shortName.setHtml(val);
+            else if (tag == "name") {
+                  if (cs->mscVersion() <= 101)
+                        _longName.setHtml(val);
+                  else {
+                        for (QDomElement ee = e.firstChildElement(); !ee.isNull(); ee = ee.nextSiblingElement()) {
+                              if (ee.tagName() == "html")
+                                    _longName.setHtml(Xml::htmlToString(ee));
+                              else
+                                    domError(ee);
+                              }
+                        }
+                  }
+            else if (tag == "shortName") {
+                  if (cs->mscVersion() <= 101)
+                        _shortName.setHtml(val);
+                  else {
+                        for (QDomElement ee = e.firstChildElement(); !ee.isNull(); ee = ee.nextSiblingElement()) {
+                              if (ee.tagName() == "html")
+                                    _shortName.setHtml(Xml::htmlToString(ee));
+                              else
+                                    domError(ee);
+                              }
+                        }
+                  }
             else if (tag == "trackName") {
                   _trackName = val;
-//printf("trackName <%s>\n", val.toLocal8Bit().data());
                   }
             else if (tag == "show")
                   _show = val.toInt();
@@ -129,10 +148,16 @@ void Part::write(Xml& xml) const
             staff->write(xml);
       if (!_trackName.isEmpty())
             xml.tag("trackName", _trackName);
-      if (!_longName.isEmpty())
-            xml.tag("name", _longName.toHtml("utf8"));
-      if (!_shortName.isEmpty())
-            xml.tag("shortName", _shortName.toHtml("utf8"));
+      if (!_longName.isEmpty()) {
+            xml.stag("name");
+            xml << _longName.toHtml("UTF-8") << '\n';
+            xml.etag();
+            }
+      if (!_shortName.isEmpty()) {
+            xml.stag("shortName");
+            xml << _shortName.toHtml("UTF-8") << '\n';
+            xml.etag();
+            }
       if (!_show)
             xml.tag("show", _show);
       _instrument.write(xml);

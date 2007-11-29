@@ -134,6 +134,7 @@ class Score : public QObject {
 
       bool cmdActive;
       int _fileDivision; ///< division of current loading *.msc file
+      int _mscVersion;   ///< version of current loading *.msc file
 
       ChordRest* nextChordRest(ChordRest*);
       ChordRest* prevChordRest(ChordRest*);
@@ -479,6 +480,7 @@ class Score : public QObject {
       bool isVolta(int tick, int repeat) const;
       void toEList(QMap<int, Event>* events, int tickOffset);
       void toEList(QMap<int, Event>* events, bool expandRepeats, int tickOffset, int staffIdx);
+      int mscVersion() const { return _mscVersion; }
       };
 
 extern Score* gscore;
