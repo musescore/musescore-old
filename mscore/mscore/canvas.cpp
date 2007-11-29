@@ -1985,6 +1985,9 @@ void Canvas::drawElements(QPainter& p,const QList<const Element*>& el)
             p.translate(e->canvasPos());
             p.setPen(QPen(e->color()));
             e->draw(p);
+// if (e->type() == TEXT && e->subtype() == TEXT_INSTRUMENT_LONG)
+//   printf("text %p <%s> %f %f\n",
+//      e, qPrintable(((Text*)e)->getText()), e->canvasPos().x(), e->canvasPos().y());
             if (debugMode && e->selected()) {
                   //
                   //  draw bounding box rectangle for all

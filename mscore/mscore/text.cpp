@@ -77,14 +77,14 @@ Text::Text(const Text& e)
       _anchor                 = e._anchor;
       _offsetType             = e._offsetType;
       _sizeIsSpatiumDependent = e._sizeIsSpatiumDependent;
-      editMode                = e.editMode;
-      cursorPos               = e.cursorPos;
-      doc                     = e.doc->clone(0);
       _frameWidth             = e._frameWidth;
       _marginWidth            = e._marginWidth;
       _paddingWidth           = e._paddingWidth;
       _frameColor             = e._frameColor;
       _frameRound             = e._frameRound;
+      editMode                = e.editMode;
+      cursorPos               = e.cursorPos;
+      doc                     = e.doc->clone(0);
 
       if (editMode) {
             cursor = new QTextCursor(doc);
@@ -330,6 +330,12 @@ void Text::layout(ScoreLayout* layout)
       else if (_align & ALIGN_HCENTER)
             x = -(tw * .5);
       setPos(x + o.x(), y + o.y());
+
+// if (subtype() == TEXT_INSTRUMENT_LONG)
+//   printf("Text %p <%s> layout %f %f - %f %f\n",
+//    this,
+//    qPrintable(doc->toPlainText()), canvasPos().x(), canvasPos().y(),
+//    parent()->canvasPos().x(), parent()->canvasPos().y());
       }
 
 //---------------------------------------------------------
@@ -594,7 +600,8 @@ bool Text::startEdit(const QPointF& p)
 
 bool Text::edit(int, QKeyEvent* ev)
       {
-      score()->setLayoutAll(false);
+//      score()->setLayoutAll(false);
+score()->setLayoutAll(true);
       score()->addRefresh(abbox().adjusted(-6, -6, 12, 12));
       int key = ev->key();
       if (key == Qt::Key_F2) {
@@ -719,8 +726,8 @@ bool Text::edit(int, QKeyEvent* ev)
             palette->setCharFormat(cursor->charFormat());
             palette->setBlockFormat(cursor->blockFormat());
             }
-      layout(score()->mainLayout());
-      score()->addRefresh(abbox().adjusted(-6, -6, 12, 12));
+//      layout(score()->mainLayout());
+      score()->addRefresh(abbox().adjusted(-6, -6, 12, 12));      // HACK
       return true;
       }
 

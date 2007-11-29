@@ -58,7 +58,7 @@ struct Instrument {
 //---------------------------------------------------------
 
 class Part {
-      Score* cs;
+      Score* _score;
       QString _trackName;           ///< used in tracklist
       QTextDocument _longName;      ///< shown on first system
       QTextDocument _shortName;     ///< shown on followup systems
@@ -70,7 +70,7 @@ class Part {
    public:
       Part(Score*);
       ~Part() {}
-      void read(Score*, QDomElement);
+      void read(QDomElement);
       void write(Xml& xml) const;
       int nstaves() const;
       QList<Staff*>* staves()                  { return &_staves; }
@@ -112,7 +112,7 @@ class Part {
       Instrument* instrument()                 { return &_instrument; }
       bool show() const                        { return _show; }
       void setShow(bool val);
-      Score* score() const                     { return cs; }
+      Score* score() const                     { return _score; }
       };
 
 #endif
