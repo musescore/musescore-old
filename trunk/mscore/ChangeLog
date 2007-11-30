@@ -1,3 +1,7 @@
+30.11.7 (ws)
+      - fix display of boxes in preview window
+      - fix editing of instrument names
+      - inline html text for instrument names
 28.11.7 (ws)
       - fix various regressions
       - inline html text description into *.msc files

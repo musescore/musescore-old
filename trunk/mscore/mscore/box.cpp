@@ -130,7 +130,7 @@ void Box::updateGrips(int* grips, QRectF* grip) const
 //   write
 //---------------------------------------------------------
 
-void Box::write(Xml& xml, int) const
+void Box::write(Xml& xml) const
       {
       xml.stag(name());
       if (type() == VBOX)

@@ -51,7 +51,6 @@ void PagePreview::setScore(Score* s)
 
       for (MeasureBase* m = ol->first(); m; m = m->next()) {
             //
-            // HACK:
             // create deep copy of Measure
             //
             static const char* mimeType = "application/mscore/measure";
