@@ -98,7 +98,7 @@ class Element {
 
       int _subtype;
 
-      int _voice;               ///< 0 - VOICES
+      int _voice;               ///< 0 < VOICES
       Staff* _staff;
       MTime _time;
       QColor _color;
@@ -197,7 +197,7 @@ class Element {
       virtual bool isMovable() const          { return false; }
       virtual QRectF drag(const QPointF& s);
       virtual void endDrag()                  {}
-      virtual QLineF dragAnchor() const      { return QLineF(); }
+      virtual QLineF dragAnchor() const       { return QLineF(); }
 
       virtual bool startEdit(const QPointF&);
       virtual bool edit(int, QKeyEvent*);
