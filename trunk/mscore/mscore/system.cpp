@@ -357,6 +357,7 @@ void System::layout2(ScoreLayout* layout)
       for (int i = 0; i < staves; ++i)
             staffY[i] = staff(i)->bbox().y();
 
+      qreal staffLineWidth = point(score()->style()->staffLineWidth);
       foreach(MeasureBase* mb, ml) {
             if (mb->type() != MEASURE)
                   continue;
@@ -375,7 +376,7 @@ void System::layout2(ScoreLayout* layout)
                               BarLine* barLine = (BarLine*)(s->element(track));
                               double y1 = staffY[staffIdx];
                               double y2 = staffY[staffIdx + p->nstaves() - 1] + point(barLineLen);
-                              barLine->setHeight(y2 - y1);
+                              barLine->setHeight((y2 - y1) + staffLineWidth * .5);
                               }
                         }
                   staffIdx += p->nstaves();
@@ -384,7 +385,7 @@ void System::layout2(ScoreLayout* layout)
             }
 
       if (barLine)
-            barLine->setHeight(systemHeight);
+            barLine->setHeight(systemHeight + staffLineWidth * .5);
 
       //---------------------------------------------------
       //  layout brackets
@@ -449,8 +450,6 @@ void System::layout2(ScoreLayout* layout)
 void SysStaff::move(double x, double y)
       {
       _bbox.translate(x, y);
-  //    sstaff->move(x, y);
-
       foreach(Bracket* b, brackets)
             b->move(x, y);
       if (instrumentName)
@@ -468,12 +467,9 @@ void SysStaff::move(double x, double y)
 void System::clear()
       {
       ml.clear();
-//      foreach(SysStaff* ss, _staves)
-//            delete ss;
-//      _staves.clear();
-      if (barLine)
-            delete barLine;
-      barLine      = 0;
+//      if (barLine)
+//            delete barLine;
+//      barLine      = 0;
       _vbox        = false;
       _firstSystem = false;
       _pageBreak   = false;
