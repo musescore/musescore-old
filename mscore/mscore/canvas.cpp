@@ -400,7 +400,7 @@ void Canvas::mousePressEvent(QMouseEvent* ev)
 
                   if (element) {
                         ElementType type = element->type();
-                        _score->dragStaff = 0;  // WS
+                        _score->dragStaff = 0;
                         if (type == MEASURE) {
                               _score->dragSystem = (System*)(element->parent());
                               _score->dragStaff  = getStaff(_score->dragSystem, startMove);

@@ -831,38 +831,6 @@ void Score::readStaff(QDomElement e)
       }
 
 //---------------------------------------------------------
-//   snap
-//---------------------------------------------------------
-
-int Score::snap(int tick, const QPointF p) const
-      {
-      foreach(const Page* page, _layout->pages()) {
-            if (!page->contains(p))
-                  continue;
-            QPointF rp = p - page->pos();  // transform to page relative
-            const QList<System*>* sl = page->systems();
-            double y = 0.0;
-            for (ciSystem is = sl->begin(); is != sl->end(); ++is) {
-                  System* system = *is;
-                  ciSystem nis = is;
-                  ++nis;
-                  if (nis == sl->end()) {
-                        return system->snap(tick, rp - system->pos());
-                        }
-                  System* nsystem = *nis;
-                  double nexty = nsystem->y();
-                  double gap = nexty - y - system->height();
-                  nexty -= gap/2.0;
-                  if (p.y() >= y && p.y() < nexty) {
-                        return system->snap(tick, rp - system->pos());
-                        }
-                  }
-            }
-      printf("snapSegment: nothing found\n");
-      return tick;
-      }
-
-//---------------------------------------------------------
 //   pos2sel
 //---------------------------------------------------------
 
@@ -1089,7 +1057,7 @@ void Score::midiNoteReceived(int pitch, bool chord)
       layoutAll = true;
       endCmd();
       }
-
+#if 0
 //---------------------------------------------------------
 //   snapNote
 //    p - absolute position
@@ -1123,6 +1091,7 @@ int Score::snapNote(int tick, const QPointF p, int staff) const
       printf("snapNote: nothing found\n");
       return tick;
       }
+#endif
 
 //---------------------------------------------------------
 //   snapNote
@@ -1224,7 +1193,7 @@ void Score::adjustTime(int tick, MeasureBase* m)
             m = m->next();
             }
       }
-
+#if 0
 //---------------------------------------------------------
 //   tick2Anchor
 //    return anchor position for tick in global
@@ -1239,6 +1208,7 @@ QPointF Score::tick2Anchor(int tick, int staffIdx) const
       qreal y = system->staff(staffIdx)->bbox().y() + system->canvasPos().y();
       return QPointF(x, y);
       }
+#endif
 
 //---------------------------------------------------------
 //   pos2TickAnchor

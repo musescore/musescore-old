@@ -568,7 +568,7 @@ void Chord::layout(ScoreLayout* layout)
                         x -= headWidth;
                   accidental->setPos(x, 0);
 #else
-                  double x = accidental->x() * mag();
+                  x = accidental->x() * mag();
 #endif
                   if (x < lx)
                         lx = x;

@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<museScore version="1.1">
+<museScore version="1.2">
   <Spatium>1.76389</Spatium>
   <Division>480</Division>
-  <Mag>0.715533</Mag>
-  <xoff>0</xoff>
-  <yoff>0</yoff>
+  <Mag>0.995934</Mag>
+  <xoff>10</xoff>
+  <yoff>11</yoff>
   <Style>
     <staffUpperBorder>7</staffUpperBorder>
     <staffLowerBorder>7</staffLowerBorder>
@@ -669,6 +669,10 @@ p, li { white-space: pre-wrap; }
           <tick>0</tick>
           <pitch>56</pitch>
           <tpc>10</tpc>
+          <Accidental>
+            <subtype>2</subtype>
+            <offset x="-1.08" y="0"/>
+            </Accidental>
           </Note>
         <Note>
           <tick>0</tick>

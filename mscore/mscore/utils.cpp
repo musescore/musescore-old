@@ -148,21 +148,6 @@ Segment* Score::tick2segment(int tick) const
       }
 
 //---------------------------------------------------------
-//   tick2pos
-//    returned QPointF is relative to measure
-//---------------------------------------------------------
-
-QPointF Score::tick2pos(int tick, int /*staff*/)
-      {
-      Segment* seg = tick2segment(tick);
-      if (seg) {
-            return QPointF(seg->x(), 0);
-            }
-      else
-            return QPointF();
-      }
-
-//---------------------------------------------------------
 //   getStaff
 //---------------------------------------------------------
 
@@ -185,29 +170,6 @@ int Score::nextSeg(int tick, int track)
       Segment* seg = tick2segment(tick);
       while (seg) {
             seg = seg->next1();
-            if (seg == 0)
-                  break;
-            if (seg->subtype() != Segment::SegChordRest)
-                  continue;
-            if (seg->element(track))
-                  break;
-            }
-      if (seg == 0) {
-            printf("no seg found\n");
-            return -1;
-            }
-      return seg->tick();
-      }
-
-//---------------------------------------------------------
-//   prevSeg
-//---------------------------------------------------------
-
-int Score::prevSeg(int tick, int track)
-      {
-      Segment* seg = tick2segment(tick);
-      while (seg) {
-            seg = seg->prev1();
             if (seg == 0)
                   break;
             if (seg->subtype() != Segment::SegChordRest)
