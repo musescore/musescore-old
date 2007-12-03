@@ -165,8 +165,6 @@ class Score : public QObject {
 
       void cmdAddPitch(int, bool);
       void cmdAddInterval(int);
-      void pageBreak();
-      void systemBreak();
 
       void printFile();
       void addLyrics();
@@ -251,9 +249,6 @@ class Score : public QObject {
       Measure* pos2measure2(const QPointF&, int* tick, Staff** staff, int* pitch, Segment**) const;
       Measure* pos2measure3(const QPointF& p, int* tick) const;
 
-      int snap(int tick, const QPointF) const;
-      int snapNote(int tick, const QPointF, int staff) const;
-
       void addViewer(Viewer* v);
       void clearViewer();
 
@@ -314,33 +309,24 @@ class Score : public QObject {
       void addElement(Element*);
       void removeElement(Element*);
 
-      Element* addClef(Clef*);
       void addTimeSig(int tick, int keySigSubtype);
-      Element* addKeySig(KeySig*, const QPointF&);
 
       void cmdAdd1(Element* e, const QPointF& pos, const QPointF& dragOffset);
       void cmdAddBSymbol(BSymbol*, const QPointF&, const QPointF&);
 
       Element* cmdAddHairpin(Hairpin* atr, const QPointF& pos);
-      Element* addSlur(Slur* atr, const QPointF& pos);
       Note* addNote(Chord*, int pitch);
-
-      // menu entry:
-      void addBar(BarLine*, Measure*);
 
       Slur* cmdAddSlur();
       void cmdAddTie();
       void cmdAddHairpin(bool);
       void cmdAddStretch(double);
 
-      void removeClef(Clef*);
       void deleteItem(Element*);
-      void cmdDeleteItem(Element*);
       void cmdDeleteSelection();
       void toggleInvisible(Element* obj);
 
       void changeRest(Rest* rest, int tick, int len);
-      void changeStaff(Staff* staff, int idx);
 
       void putNote(const QPointF& pos, bool addToChord);
       void setPadState();
@@ -371,8 +357,6 @@ class Score : public QObject {
       void startDrag();
       void drag(const QPointF&);
       void endDrag();
-
-      void layoutPageHeader(Page*);
 
       void changeVoice(int);
       ChordRest* setNoteEntry(bool on, bool step);
@@ -421,7 +405,6 @@ class Score : public QObject {
       Measure* tick2measure(int tick) const;
       MeasureBase* tick2measureBase(int tick) const;
       Segment* tick2segment(int tick) const;
-      QPointF tick2pos(int tick, int staff);
       void fixTicks();
       bool undoEmpty() const;
       bool redoEmpty() const;
@@ -434,7 +417,6 @@ class Score : public QObject {
       void changeTimeSig(int tick, int st);
 
       void cmd(const QString&);
-      Element* editElement() const { return editObject; }
       int fileDivision(int t) const { return (t * division + _fileDivision/2) / _fileDivision; }
       bool saveFile();
       void adjustTime(int tick, MeasureBase*);
@@ -451,12 +433,10 @@ class Score : public QObject {
       void setSaved(bool v)     { _saved = v; }
       bool printing() const     { return _printing; }
 
-      QPointF tick2Anchor(int tick, int staffIdx) const;
       bool pos2TickAnchor(const QPointF&, Staff*, int* tick, QPointF* anchor) const;
       void spell();
       void spell(Note*);
       int nextSeg(int tick, int track);
-      int prevSeg(int tick, int track);
       int nextSeg1(int tick, int& track);
       int prevSeg1(int tick, int& track);
       Style* style() const { return _style; }

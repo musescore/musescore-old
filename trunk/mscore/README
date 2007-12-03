@@ -64,11 +64,14 @@ User Documentation:
             - TeX with ConTeXt macro package
               (as part of tetex 3.0 distribution)
 
-      Type
+              For ubuntu/kubuntu you need to install the package "tetex-extra" in
+              addition to the normal tetex packages.
+
+      Build:
             cd build
             make doc
 
-      to generate man-de.pdf in build/doc/de.
+            This generates man-de.pdf in build/doc/de.
 
 Program Documentation:
 
