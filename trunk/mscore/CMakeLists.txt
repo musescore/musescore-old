@@ -26,6 +26,11 @@ CMAKE_MINIMUM_REQUIRED(VERSION 2.4.6)
 # set(CMAKE_BUILD_TYPE DEBUG)
 # set(CMAKE_BUILD_TYPE RELEASE)
 
+set(USE_GLOBAL_FLUID TRUE)
+if (MINGW)
+      set(USE_GLOBAL_FLUID FALSE)
+endif (MINGW)
+
 set(CMAKE_INCLUDE_CURRENT_DIR TRUE)
 set(CMAKE_BUILD_WITH_INSTALL_RPATH ON)
 set(CMAKE_SKIP_RULE_DEPENDENCY TRUE)
@@ -62,7 +67,19 @@ if (NOT QT4_FOUND)
          "_first_ in your PATH.\n"
          )
       endif (NOT QT4_FOUND)
+
 include(${QT_USE_FILE})
+
+##
+## look for fluidsynth
+if (USE_GLOBAL_FLUID)
+      PKGCONFIG ( fluidsynth 1.0.0 FLUID_INCDIR FLUID_LIBDIR FLUID_LIB FLUID_CPP )
+      if (NOT FLUID_INCDIR)
+	      message (FATAL_ERROR "FluidSynth >= 1.0.0 required")
+      else (NOT FLUID_INCDIR)
+	      message ("FluidSynth detected.")
+      endif (NOT FLUID_INCDIR)
+endif (USE_GLOBAL_FLUID)
 
 ##
 ## find texexec (ConTeXt)
@@ -140,7 +157,11 @@ if (NOT MINGW)
       install( FILES ${PROJECT_BINARY_DIR}/mscore.desktop DESTINATION /usr/share/applications)
 endif (NOT MINGW)
 
-subdirs(awl fluid mscore share doc demos)
+if (USE_GLOBAL_FLUID)
+      subdirs(awl mscore share doc demos)
+else (USE_GLOBAL_FLUID)
+      subdirs(awl fluid mscore share doc demos)
+endif (USE_GLOBAL_FLUID)
 
 include_directories(
    ${PROJECT_SOURCE_DIR}
@@ -150,6 +171,9 @@ include_directories(
    ${ALSA_INCDIR}
    ${JACK_INCDIR}
    )
+if (USE_GLOBAL_FLUID)
+      include_directories(${FLUID_INCDIR})
+endif (USE_GLOBAL_FLUID)
 
 #
 # create package target
@@ -187,8 +211,14 @@ include (InstallRequiredSystemLibraries)
   set(DEBIAN_PACKAGE_NAME         "mscore")
   set(DEBIAN_PACKAGE_VERSION      "${Mscore_VERSION_FULL}-0ubuntu0.1")
   set(DEBIAN_PACKAGE_ARCHITECTURE "i386")
-  set(DEBIAN_PACKAGE_DEPENDS      "libqt4-core (>= 4.3), libqt4-gui (>= 4.3)")
-  set(DEBIAN_PACKAGE_MAINTAINER   "ws@seh.de")
+
+  if (USE_GLOBAL_FLUID)
+    set(DEBIAN_PACKAGE_DEPENDS      "libqt4-core (>= 4.3), libqt4-gui (>= 4.3), libfluidsynth-dev (>= 1.0.0)")
+  else (USE_GLOBAL_FLUID)
+    set(DEBIAN_PACKAGE_DEPENDS      "libqt4-core (>= 4.3), libqt4-gui (>= 4.3)")
+  endif (USE_GLOBAL_FLUID)
+
+  set(DEBIAN_PACKAGE_MAINTAINER   "tsmithe@ubuntu.com")
   set(CPACK_PACKAGE_CONTACT       "ws@seh.de")
 if (MINGW)
   set(CPACK_GENERATOR             "NSIS")
@@ -198,7 +228,6 @@ endif (MINGW)
   set(CPACK_DEB "on")
 
   include (CPack)
-message("Depends2: ${DEBIAN_PACKAGE_DEPENDS}")
 
 add_custom_target(lupdate
    COMMAND ${PROJECT_SOURCE_DIR}/gen-qt-projectfile ${PROJECT_SOURCE_DIR} > mscore.pro

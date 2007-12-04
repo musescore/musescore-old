@@ -73,7 +73,11 @@ bool ISynth::loadSoundFont(const QString& sfont)
       {
       if (fontId != -1)
             fluid_synth_sfunload(_fluidsynth, fontId, true);
+#ifdef USE_GLOBAL_FLUID
+      fontId = fluid_synth_sfload(_fluidsynth, qPrintable(sfont), true);
+#else
       fontId = fluid_synth_sfload(_fluidsynth, sfont, true);
+#endif
       if (fontId == -1) {
             fprintf(stderr, "ISynth: %s", fluid_synth_error(_fluidsynth));
             return true;
@@ -88,7 +92,11 @@ bool ISynth::loadSoundFont(const QString& sfont)
 
 void ISynth::process(unsigned n, float* l, float* r, int stride)
       {
-      fluid_synth_write_float(_fluidsynth, n, l, r, stride);
+#ifdef USE_GLOBAL_FLUID
+      fluid_synth_write_float(_fluidsynth, n, l, 0, 1, r, 0, 1);
+#else
+      fluid_synth_write_float(_fluidsynth, n, l, r);
+#endif
       }
 
 //---------------------------------------------------------

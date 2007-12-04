@@ -1,3 +1,7 @@
+4.12.7 (ws)
+      - added cmake configuration option to remove local fluid synth and
+        use system fluid library instead using patch from Toby Smithe
+      - allow definition of midiprogram in instrument definition file
 30.11.7 (ws)
       - fix display of boxes in preview window
       - fix editing of instrument names

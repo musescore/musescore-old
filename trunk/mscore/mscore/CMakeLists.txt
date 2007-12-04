@@ -49,10 +49,13 @@ set_source_files_properties(
 
 include_directories(
       ${CMAKE_CURRENT_BINARY_DIR}
-      ${PROJECT_SOURCE_DIR}/fluid
       ${PROJECT_SOURCE_DIR}/awl
       ${PROJECT_SOURCE_DIR}
       )
+if (NOT USE_GLOBAL_FLUID)
+      include_directories(${PROJECT_SOURCE_DIR}/fluid)
+endif (NOT USE_GLOBAL_FLUID)
+
 
 QT4_WRAP_UI (ui_headers
       insertmeasuresdialog.ui barline.ui chord.ui chordrest.ui editinstrument.ui editstyle.ui
@@ -169,14 +172,26 @@ else (MINGW)
       PROPERTIES
          COMPILE_FLAGS "-include ${PROJECT_BINARY_DIR}/all.h ${QT_DEFINITIONS}"
       )
-   target_link_libraries(mscore
-      ${QT_LIBRARIES}
-      ${ALSA_LIB}
-      ${JACK_LIB}
-      ${PORTAUDIO_LIB}
-      fluid
-      awl
-      )
+   if (USE_GLOBAL_FLUID)
+         target_link_libraries(mscore
+            ${QT_LIBRARIES}
+            ${ALSA_LIB}
+            ${JACK_LIB}
+            ${PORTAUDIO_LIB}
+            ${FLUID_LIB}
+            awl
+            )
+   else (USE_GLOBAL_FLUID)
+         target_link_libraries(mscore
+            ${QT_LIBRARIES}
+            ${ALSA_LIB}
+            ${JACK_LIB}
+            ${PORTAUDIO_LIB}
+            fluid
+            awl
+            )
+   else (USE_GLOBAL_FLUID)
+
    install( TARGETS mscore RUNTIME DESTINATION bin )
    install( FILES   data/mscore.png DESTINATION /usr/share/icons/hicolor/64x64/apps)
 
