@@ -1,4 +1,6 @@
 4.12.7 (ws)
+      - added framework for portuguese translation
+      - addes man page from Toby Smithe
       - added cmake configuration option to remove local fluid synth and
         use system fluid library instead using patch from Toby Smithe
       - allow definition of midiprogram in instrument definition file

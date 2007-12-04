@@ -193,7 +193,7 @@ else (MINGW)
    else (USE_GLOBAL_FLUID)
 
    install( TARGETS mscore RUNTIME DESTINATION bin )
-   install( FILES   data/mscore.png DESTINATION /usr/share/icons/hicolor/64x64/apps)
+   install( FILES   data/mscore.png DESTINATION /usr/share/pixmaps)
 
 endif (MINGW)
 

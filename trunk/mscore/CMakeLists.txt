@@ -153,7 +153,6 @@ configure_file (
       ${PROJECT_BINARY_DIR}/mscore.desktop
       )
 if (NOT MINGW)
-      install( FILES ${PROJECT_BINARY_DIR}/mscore.desktop DESTINATION ~/Desktop)
       install( FILES ${PROJECT_BINARY_DIR}/mscore.desktop DESTINATION /usr/share/applications)
 endif (NOT MINGW)
 
