@@ -358,7 +358,7 @@ void System::layout2(ScoreLayout* layout)
             staffY[i] = staff(i)->bbox().y();
 
       qreal staffLineWidth = point(score()->style()->staffLineWidth);
-      foreach(MeasureBase* mb, ml) {
+      foreach (MeasureBase* mb, ml) {
             if (mb->type() != MEASURE)
                   continue;
             Measure* m = (Measure*)mb;

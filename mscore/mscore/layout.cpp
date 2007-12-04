@@ -514,11 +514,8 @@ bool ScoreLayout::layoutSystem1(double& minWidth, double w, bool isFirstSystem)
                               }
                         }
 
-                  BarLine* bl = m->endBarLine();
-                  if (bl == 0)
-                        m->setEndBarLineType(NORMAL_BAR, true);
+                  m->createEndBarLines();
                   m->layoutBeams1(this);  // find hooks
-
 
                   m->layoutX(this, 1.0);
                   ww      = m->layoutWidth().stretchable;
@@ -617,12 +614,9 @@ QList<System*> ScoreLayout::layoutSystemRow(qreal x, qreal y, qreal rowWidth, bo
 
                   if (i == (n-1)) {
                         if (m->repeatFlags() & RepeatEnd)
-                              needRelayout |= m->setEndBarLineType(END_REPEAT, true);
-                        else {
-                              BarLine* bl = m->endBarLine();
-                              if (bl == 0 || bl->generated())
-                                    needRelayout |= m->setEndBarLineType(NORMAL_BAR, true);
-                              }
+                              m->setEndBarLineType(END_REPEAT, true);
+                        else
+                              m->setEndBarLineType(NORMAL_BAR, true);
                         }
                   else {
                         MeasureBase* mb = m->next();
@@ -635,26 +629,16 @@ QList<System*> ScoreLayout::layoutSystemRow(qreal x, qreal y, qreal rowWidth, bo
                         needRelayout |= m->setStartRepeatBarLine((i == 0) && (m->repeatFlags() & RepeatStart));
                         if (m->repeatFlags() & RepeatEnd) {
                               if (nm && (nm->repeatFlags() & RepeatStart))
-                                    needRelayout |= m->setEndBarLineType(END_START_REPEAT, true);
+                                    m->setEndBarLineType(END_START_REPEAT, true);
                               else
-                                    needRelayout |= m->setEndBarLineType(END_REPEAT, true);
+                                    m->setEndBarLineType(END_REPEAT, true);
                               }
                         else if (nm && (nm->repeatFlags() & RepeatStart))
-                              needRelayout |= m->setEndBarLineType(START_REPEAT, true);
-                        else {
-                              BarLine* bl = m->endBarLine();
-                              if (bl == 0 || bl->generated()) {
-                                    if (bl == 0)
-                                          needRelayout |= m->setEndBarLineType(NORMAL_BAR, true);
-                                    else {
-                                          if (bl->subtype() != NORMAL_BAR) {
-                                                bl->setSubtype(NORMAL_BAR);
-                                                needRelayout = true;
-                                                }
-                                          }
-                                    }
-                              }
+                              m->setEndBarLineType(START_REPEAT, true);
+                        else
+                              m->setEndBarLineType(NORMAL_BAR, true);
                         }
+                  needRelayout |= m->createEndBarLines();
                   }
             }
 

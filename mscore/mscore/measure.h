@@ -93,6 +93,9 @@ class Measure : public MeasureBase {
       double _userStretch;
       bool _irregular;        ///< Irregular measure, do not count
 
+      int _endBarLineType;
+      bool _endBarLineGenerated;
+
       void push_back(Segment* e);
       void push_front(Segment* e);
 
@@ -141,8 +144,6 @@ class Measure : public MeasureBase {
       double userStretch() const       { return _userStretch; }
       void setUserStretch(double v)    { _userStretch = v;  }
 
-      BarLine* barLine(int staff) const;
-
       void layoutX(ScoreLayout*, double stretch);
       void layout(ScoreLayout*, double width);
       void moveY(int, double);
@@ -188,17 +189,22 @@ class Measure : public MeasureBase {
       Segment* findSegment(Segment::SegmentType st, int t);
       Segment* createSegment(Segment::SegmentType st, int t);
 
-      void setEndBarLine(BarLine* barLine);
+//      BarLine* barLine(int staff) const;
+      bool createEndBarLines();
+      void setEndBarLineType(int val, bool g) {
+            _endBarLineType = val;
+            _endBarLineGenerated = g;
+            }
+      int endBarLineType() const { return _endBarLineType; }
+
+      bool setStartRepeatBarLine(bool);
+
       void cmdRemoveEmptySegment(Segment* s);
       void collectElements(QList<const Element*>& el) const;
       void createVoice(int track);
       void adjustToLen(int, int);
       int repeatFlags() const      { return _repeatFlags; }
       void setRepeatFlags(int val) { _repeatFlags = val; }
-      bool setEndBarLineType(int, bool);
-      int endBarLineType() const;
-      BarLine* endBarLine() const;
-      bool setStartRepeatBarLine(bool);
       };
 
 #endif

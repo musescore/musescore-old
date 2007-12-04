@@ -512,6 +512,7 @@ Measure* MuseData::createMeasure()
       Measure* measure  = new Measure(score);
       measure->setTick(curTick);
 
+#if 0
       foreach(Staff* s, score->staves()) {
 	      if (s->isTop()) {
       	      BarLine* barLine = new BarLine(score);
@@ -519,6 +520,7 @@ Measure* MuseData::createMeasure()
 	            measure->setEndBarLine(barLine);
       	      }
             }
+#endif
       la->add(measure);
       return measure;
       }

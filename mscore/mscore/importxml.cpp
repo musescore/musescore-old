@@ -777,7 +777,7 @@ Measure* MusicXml::xmlMeasure(Part* part, QDomElement e, int number)
                               measure->setRepeatFlags(RepeatStart);
                               }
                         else
-                              measure->setEndBarLine(barLine);
+/*WS*/                        measure->setEndBarLineType(barLine->subtype(), false);
                         }
                   if (!(endingNumber.isEmpty() && endingType.isEmpty())) {
                         if (endingNumber.isEmpty())

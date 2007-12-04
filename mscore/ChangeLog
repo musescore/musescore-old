@@ -1,4 +1,6 @@
 4.12.7 (ws)
+      - regression fix for add instrument + undo + redo
+      - added extended instrument list from Alex Stone
       - added framework for portuguese translation
       - addes man page from Toby Smithe
       - added cmake configuration option to remove local fluid synth and

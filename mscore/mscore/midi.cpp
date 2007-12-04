@@ -1073,6 +1073,7 @@ if (tick)
             int tick = sigmap->bar2tick(i, 0, 0);
             measure->setTick(tick);
 
+#if 0
             foreach(Staff* s, _staves) {
 	            if (s->isTop()) {
       	            BarLine* barLine = new BarLine(this);
@@ -1080,6 +1081,7 @@ if (tick)
 	                  measure->setEndBarLine(barLine);
       	            }
                   }
+#endif
       	_layout->add(measure);
             }
 
