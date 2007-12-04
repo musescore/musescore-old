@@ -196,6 +196,10 @@ void Segment::add(Element* el)
 
       el->setTick(tick());    //DEBUG
       int staffIdx = el->staffIdx();
+      if (staffIdx == -1) {
+            printf("staff not found\n");
+            abort();
+            }
       int track    = staffIdx * VOICES + el->voice();
 
       switch(el->type()) {

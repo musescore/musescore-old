@@ -132,7 +132,7 @@ Measure::Measure(Score* s)
 
       int n = _score->nstaves();
       for (int staffIdx = 0; staffIdx < n; ++staffIdx) {
-            MStaff* s = new MStaff;
+            MStaff* s    = new MStaff;
             Staff* staff = score()->staff(staffIdx);
             s->lines     = new StaffLines(score());
             s->lines->setLines(staff->lines());
@@ -152,6 +152,8 @@ Measure::Measure(Score* s)
       _noText      = new Text(score());
       _noText->setSubtype(TEXT_MEASURE_NUMBER);
       _noText->setParent(this);
+      _endBarLineType = NORMAL_BAR;
+      _endBarLineGenerated = true;
       }
 
 //---------------------------------------------------------
@@ -992,6 +994,7 @@ void Measure::moveY(int staff, double dy)
             foreach(Lyrics* ly, *ll)
                   ly->move(0, dy);
             }
+#if 0 // TODO
       BarLine* bl = barLine(staff);
       if (bl) {
             if (_score->staff(staff)->isTopSplit()) {
@@ -999,6 +1002,7 @@ void Measure::moveY(int staff, double dy)
                   bl->setHeight(point(barLineLen));
                   }
             }
+#endif
       foreach(Tuplet* tuplet, _tuplets)
             tuplet->move(0, dy);
       if (_noText)
@@ -1518,10 +1522,14 @@ void Measure::cmdAddStaves(int sStaff, int eStaff)
 
       for (int i = sStaff; i < eStaff; ++i) {
             Staff* staff = _score->staff(i);
-            MStaff* ms = new MStaff;
+            MStaff* ms   = new MStaff;
+            ms->lines    = new StaffLines(score());
+            ms->lines->setLines(staff->lines());
+            ms->lines->setMag(staff->small() ? 0.7 : 1.0);
+            ms->lines->setParent(this);
 
             staves.insert(i, ms);
-            _score->undoOp(UndoOp::InsertMStaff, this, ms, i);
+            score()->undoOp(UndoOp::InsertMStaff, this, ms, i);
 
             Rest* rest = new Rest(score(), tick(), 0);
             rest->setStaff(staff);
@@ -1776,9 +1784,7 @@ printf("drop staffList\n");
                               if (next())
                                     score()->undoChangeRepeatFlags((Measure*)next(), ((Measure*)next())->repeatFlags() & ~RepeatStart);  //TODO: MeasureBase
                               score()->undoChangeEndBarLine(this, bl->subtype());
-                              BarLine* bl = endBarLine();
-                              if (bl)
-                                    bl->setGenerated(false);
+                              _endBarLineGenerated = false;
                               }
                               break;
                         case START_REPEAT:
@@ -2119,7 +2125,12 @@ void Measure::write(Xml& xml) const
 void Measure::read(QDomElement e, int idx)
       {
       for (int n = staves.size(); n <= idx; ++n) {
-            MStaff* s = new MStaff;
+            MStaff* s    = new MStaff;
+            Staff* staff = score()->staff(idx);
+            s->lines     = new StaffLines(score());
+            s->lines->setLines(staff->lines());
+            s->lines->setMag(staff->small() ? 0.7 : 1.0);
+            s->lines->setParent(this);
             s->distance = point(n == 0 ? score()->style()->systemDistance : score()->style()->staffDistance);
             s->userDistance = 0.0;
             staves.append(s);
@@ -2142,10 +2153,8 @@ void Measure::read(QDomElement e, int idx)
                   barLine->setParent(this);
                   barLine->read(e);
                   setEndBarLineType(barLine->subtype(), false);
+                  _endBarLineGenerated = false;
                   delete barLine;
-                  barLine = endBarLine();
-                  if (barLine)
-                        barLine->setGenerated(false);
                   }
             else if (tag == "Chord") {
                   Chord* chord = new Chord(score());
@@ -2483,12 +2492,6 @@ void Measure::collectElements(QList<const Element*>& el) const
             if (b->staff()->show())
                   el.append(b);
             }
-      for (int staffIdx = 0; staffIdx < staves; ++staffIdx) {
-            BarLine* b = barLine(staffIdx);
-            // the system barline has no staff()
-            if (b && (!b->staff() || b->staff()->show()))
-                  el.append(b);
-            }
       foreach(Tuplet* tuplet, _tuplets) {
             if (tuplet->staff()->show())
                   el.append(tuplet);
@@ -2496,40 +2499,6 @@ void Measure::collectElements(QList<const Element*>& el) const
 
       if (noText())
             el.append(noText());
-      }
-
-//---------------------------------------------------------
-//   barLine
-//---------------------------------------------------------
-
-BarLine* Measure::barLine(int staff) const
-      {
-      int track = staff * VOICES;
-      for (Segment* s = first(); s; s = s->next()) {
-            if (s->subtype() != Segment::SegEndBarLine)
-                  continue;
-            if (s->element(track))
-                  return (BarLine*)(s->element(track));
-            }
-      return 0;
-      }
-
-//---------------------------------------------------------
-//   setEndBarLine
-//---------------------------------------------------------
-
-void Measure::setEndBarLine(BarLine* ebl)
-      {
-      BarLine* bl = barLine(ebl->staffIdx());
-      if (bl) {
-            if (debugMode)
-                  printf("Measure::setEndBarLine: already set at %d (%d)\n",
-                     bl->tick(), tick() + tickLen());
-            return;
-            }
-      int t = tick() + tickLen();
-      Segment* seg = getSegment(Segment::SegEndBarLine, t);
-      seg->add(ebl);
       }
 
 //---------------------------------------------------------
@@ -2554,74 +2523,6 @@ void Measure::createVoice(int track)
                   }
             break;
             }
-      }
-
-//---------------------------------------------------------
-//   setEndBarLineType
-//    return true if bar line type actually changed
-//---------------------------------------------------------
-
-bool Measure::setEndBarLineType(int type, bool generated)
-      {
-      bool changed = false;
-      BarLine* bl;
-      QList<Part*>* pl = score()->parts();
-      foreach(Part* part, *pl) {
-            Staff* staff = part->staff(0);
-            int track    = staff->idx() * VOICES;
-            bool found   = false;
-            for (Segment* s = first(); s; s = s->next()) {
-                  if (s->subtype() != Segment::SegEndBarLine)
-                        continue;
-                  if (s->element(track)) {
-                        bl = (BarLine*)(s->element(track));
-                        if (bl->subtype() != type) {
-                              bl->setSubtype(type);
-                              bl->setGenerated(generated);
-                              changed = true;
-                              }
-                        found = true;
-                        }
-                  break;
-                  }
-            if (!found) {
-                  bl = new BarLine(score());
-                  bl->setStaff(staff);
-                  bl->setSubtype(type);
-                  bl->setGenerated(generated);
-                  Segment* seg = getSegment(Segment::SegEndBarLine, tick() + tickLen());
-                  seg->add(bl);
-                  changed = true;
-                  }
-            }
-      return changed;
-      }
-
-//---------------------------------------------------------
-//   endBarLine
-//---------------------------------------------------------
-
-BarLine* Measure::endBarLine() const
-      {
-      for (const Segment* s = first(); s; s = s->next()) {
-            if (s->subtype() != Segment::SegEndBarLine)
-                  continue;
-            if (s->element(0))
-                  return (BarLine*)(s->element(0));
-            }
-      return 0;
-      }
-
-//---------------------------------------------------------
-//   endBarLineType
-//---------------------------------------------------------
-
-int Measure::endBarLineType() const
-      {
-      BarLine* bl = endBarLine();
-      if (bl)
-            return bl->subtype();
-      return NORMAL_BAR;
       }
 
 //---------------------------------------------------------
@@ -2662,3 +2563,45 @@ bool Measure::setStartRepeatBarLine(bool val)
             }
       return changed;
       }
+
+//---------------------------------------------------------
+//   createEndBarLines
+//    actually create or modify barlines
+//---------------------------------------------------------
+
+bool Measure::createEndBarLines()
+      {
+      bool changed = false;
+      BarLine* bl;
+      QList<Part*>* pl = score()->parts();
+      foreach(Part* part, *pl) {
+            Staff* staff = part->staff(0);
+            int track    = staff->idx() * VOICES;
+            bool found   = false;
+            for (Segment* s = first(); s; s = s->next()) {
+                  if (s->subtype() != Segment::SegEndBarLine)
+                        continue;
+                  if (s->element(track)) {
+                        bl = (BarLine*)(s->element(track));
+                        if (bl->subtype() != _endBarLineType) {
+                              bl->setSubtype(_endBarLineType);
+                              changed = true;
+                              }
+                        bl->setGenerated(_endBarLineGenerated);
+                        found = true;
+                        }
+                  break;
+                  }
+            if (!found) {
+                  bl = new BarLine(score());
+                  bl->setStaff(staff);
+                  bl->setSubtype(_endBarLineType);
+                  bl->setGenerated(_endBarLineGenerated);
+                  Segment* seg = getSegment(Segment::SegEndBarLine, tick() + tickLen());
+                  seg->add(bl);
+                  changed = true;
+                  }
+            }
+      return changed;
+      }
+

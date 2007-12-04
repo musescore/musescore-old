@@ -169,7 +169,8 @@ void Score::doRedo()
       sel->deselectAll(this);
       Undo* u = redoList.back();
       int n = u->size();
-      for (int i = n-1; i >= 0; --i) {
+//      for (int i = n-1; i >= 0; --i) {
+      for (int i = 0; i < n; ++i) {
             UndoOp* op = &(*u)[i];
             processUndoOp(op, false);
             if (op->type == UndoOp::ChangeAccidental) {
