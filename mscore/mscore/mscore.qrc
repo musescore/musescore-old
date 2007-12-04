@@ -59,6 +59,9 @@
       <file alias="mscore.qm">../share/locale/mscore_it.qm</file>
    </qresource>
 
+   <qresource lang="pt">
+      <file alias="mscore.qm">../share/locale/mscore_pt.qm</file>
+   </qresource>
 
 </RCC>
 

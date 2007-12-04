@@ -23,7 +23,12 @@
 
 #include "config.h"
 #include "synti.h"
+
+#ifdef USE_GLOBAL_FLUID
+#include <fluidsynth.h>
+#else
 #include "fluid/fluidsynth.h"
+#endif
 
 //---------------------------------------------------------
 //   ISynth

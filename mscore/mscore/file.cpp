@@ -115,9 +115,10 @@ static void readInstrument(const QString& group, QDomElement e)
                   t.maxPitch = i;
             else if (tag == "transpose")
                   t.transpose = i;
-            else if (tag == "drumset") {
+            else if (tag == "drumset")
                   t.useDrumset = i;
-                  }
+            else if (tag == "midiprogram")
+                  t.midiProgram = i;
             else
                   domError(e);
             }

@@ -3,7 +3,8 @@
 echo "TRANSLATIONS = \\"
 echo "      $1/share/locale/mscore_de.ts \\"
 echo "      $1/share/locale/mscore_ru.ts \\"
-echo "      $1/share/locale/mscore_it.ts"
+echo "      $1/share/locale/mscore_it.ts \\"
+echo "      $1/share/locale/mscore_pt.ts"
 
 echo "FORMS = \\"
 uis=`find $1/mscore -name "*.ui"`

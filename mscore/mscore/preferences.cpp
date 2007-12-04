@@ -135,7 +135,13 @@ Preferences::Preferences()
       alsaPeriodSize     = 1024;
       alsaFragments      = 3;
       portaudioDevice    = -1;
+
+#ifdef USE_GLOBAL_FLUID
+      soundFont          = INSTPREFIX "/piano1.sf2";
+#else
       soundFont          = ":/data/piano1.sf2";
+#endif
+
       layoutBreakColor   = Qt::green;
       antialiasedDrawing = true;
       sessionStart       = SCORE_SESSION;
@@ -249,7 +255,12 @@ void Preferences::read()
       playNotes       = s.value("playNotes", true).toBool();
       lPort           = s.value("lPort").toString();
       rPort           = s.value("rPort").toString();
+
+#ifdef USE_GLOBAL_FLUID
+      soundFont       = s.value("soundFont", INSTPREFIX "/piano1.sf2").toString();
+#else
       soundFont       = s.value("soundFont", ":/data/piano1.sf2").toString();
+#endif
       stemDir[0]      = (Direction)s.value("stemDirection1", AUTO).toInt();
       stemDir[1]      = (Direction)s.value("stemDirection2", AUTO).toInt();
       stemDir[2]      = (Direction)s.value("stemDirection3", AUTO).toInt();
