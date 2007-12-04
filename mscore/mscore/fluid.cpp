@@ -18,8 +18,6 @@
 //  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //=============================================================================
 
-#include "config.h"
-
 #include "preferences.h"
 #include "fluid.h"
 #include "score.h"
@@ -95,7 +93,7 @@ void ISynth::process(unsigned n, float* l, float* r, int stride)
 #ifdef USE_GLOBAL_FLUID
       fluid_synth_write_float(_fluidsynth, n, l, 0, 1, r, 0, 1);
 #else
-      fluid_synth_write_float(_fluidsynth, n, l, r);
+      fluid_synth_write_float(_fluidsynth, n, l, r, stride);
 #endif
       }
 

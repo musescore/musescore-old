@@ -87,29 +87,6 @@ struct _fluid_voice_t
 	fluid_sample_t* sample;
 	int check_sample_sanity_flag;   /* Flag that initiates, that sample-related parameters
 					   have to be checked. */
-#if 0
-	/* Instead of keeping a pointer to a fluid_sample_t structure,
-	 * I think it would be better to copy the sample data in the
-	 * voice structure. SoundFont loader then do not have to
-	 * allocate and maintain the fluid_sample_t structure. [PH]
-	 *
-	 * The notify callback may be used also for streaming samples.
-	 */
-	short* sample_data;             /* pointer to the sample data */
-	int sample_data_offset;         /* the offset of data[0] in the whole sample */
-	int sample_data_length;         /* the length of the data array */
-	unsigned int sample_start;
-	unsigned int sample_end;
-	unsigned int sample_loopstart;
-	unsigned int sample_loopend;
-	unsigned int sample_rate;
-	int sample_origpitch;
-	int sample_pitchadj;
-	int sample_type;
-	int (*sample_notify)(fluid_voice_t* voice, int reason);
-	void* sample_userdata;
-#endif
-
 	/* basic parameters */
 	fluid_real_t output_rate;        /* the sample rate of the synthesizer */
 
@@ -118,10 +95,6 @@ struct _fluid_voice_t
 
 	fluid_real_t amp;                /* the linear amplitude */
 	fluid_phase_t phase;             /* the phase of the sample wave */
-
-#if 0
-	fluid_real_t incr;               /* the phase increment for the next 64 samples [NEW, PH] */
-#endif
 
 	/* basic parameters */
 	fluid_real_t pitch;              /* the pitch in midicents */
