@@ -318,12 +318,29 @@ Element* BarLine::drop(const QPointF&, const QPointF&, Element* e)
       int type = e->type();
       int st   = e->subtype();
       delete e;
-      if (type != BAR_LINE || st == subtype()) {
-            printf("%d %d %d\n", type, subtype(), st);
+      if (type != BAR_LINE || st == subtype())
             return 0;
-            }
       Measure* m = segment()->measure();
       score()->undoChangeEndBarLineType(m, st);
+      MeasureBase* mnb = m->next();
+      while (mnb && mnb->type() != MEASURE)
+            mnb = mnb->next();
+      Measure* mn = (Measure*)mnb;
+
+      if (st == START_REPEAT && mn)
+            mn->setRepeatFlags(mn->repeatFlags() | RepeatStart);
+      else if (st == END_REPEAT)
+            m->setRepeatFlags(m->repeatFlags() | RepeatEnd);
+      else if (st == END_START_REPEAT) {
+            if (mn)
+                  mn->setRepeatFlags(mn->repeatFlags() | RepeatStart);
+            m->setRepeatFlags(m->repeatFlags() | RepeatEnd);
+            }
+      else {
+            if (mn)
+                  mn->setRepeatFlags(mn->repeatFlags() & ~RepeatStart);
+            m->setRepeatFlags(m->repeatFlags() & ~RepeatEnd);
+            }
       return 0;
       }
 
