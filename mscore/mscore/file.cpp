@@ -683,21 +683,32 @@ bool MuseScore::saveFile(QFile* f)
       }
 
 //---------------------------------------------------------
-//   loadFile
-//    return true on error
+//   loadMsc
+//    return true if file not found or error loading
 //---------------------------------------------------------
 
-bool Score::loadFile(QFile* qf)
+bool Score::loadMsc(QString name)
       {
+      QString ext(".msc");
+
+      info.setFile(name);
+      if (info.completeSuffix() == "") {
+            name += ext;
+            info.setFile(name);
+            }
+      QFile f(name);
+      if (!f.open(QIODevice::ReadOnly))
+            return true;
+
       QDomDocument doc;
       int line, column;
       QString err;
       QXmlSimpleReader reader;
-      QXmlInputSource  source(qf);
+      QXmlInputSource  source(&f);
       if (!doc.setContent(&source, &reader, &err, &line, &column)) {
             QString s;
             s.sprintf("error reading file %s at line %d column %d: %s\n",
-               qf->fileName().toLatin1().data(), line, column, err.toLatin1().data());
+               f.fileName().toLatin1().data(), line, column, err.toLatin1().data());
 
             QMessageBox::critical(mscore, tr("MuseScore: Read File"), s);
             return true;
@@ -705,7 +716,7 @@ bool Score::loadFile(QFile* qf)
 
       _fileDivision = 384;   // for compatibility with old mscore files
 
-      docName = qf->fileName();
+      docName = f.fileName();
       for (QDomElement e = doc.documentElement(); !e.isNull(); e = e.nextSiblingElement()) {
             if (e.tagName() == "museScore") {
                   QString version = e.attribute(QString("version"));
@@ -816,29 +827,9 @@ bool Score::loadFile(QFile* qf)
       _layout->searchHiddenNotes();
       searchSelectedElements();
       _fileDivision = division;
-      return false;
-      }
 
-//---------------------------------------------------------
-//   loadMsc
-//    return true if file not found or error loading
-//---------------------------------------------------------
-
-bool Score::loadMsc(QString name)
-      {
-      QString ext(".msc");
-
-      info.setFile(name);
-      if (info.completeSuffix() == "") {
-            name += ext;
-            info.setFile(name);
-            }
-      QFile f(name);
-      if (!f.open(QIODevice::ReadOnly))
-            return true;
-      bool rv = loadFile(&f);
       f.close();
-      return rv;
+      return false;
       }
 
 //---------------------------------------------------------

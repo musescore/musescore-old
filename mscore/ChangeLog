@@ -1,3 +1,5 @@
+6.12.7 (ws)
+      - the hight of barlines is now editable
 4.12.7 (ws)
       - regression fix for add instrument + undo + redo
       - added extended instrument list from Alex Stone

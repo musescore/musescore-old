@@ -2572,36 +2572,54 @@ bool Measure::setStartRepeatBarLine(bool val)
 bool Measure::createEndBarLines()
       {
       bool changed = false;
-      BarLine* bl;
-      QList<Part*>* pl = score()->parts();
-      foreach(Part* part, *pl) {
-            Staff* staff = part->staff(0);
-            int track    = staff->idx() * VOICES;
-            bool found   = false;
-            for (Segment* s = first(); s; s = s->next()) {
-                  if (s->subtype() != Segment::SegEndBarLine)
-                        continue;
-                  if (s->element(track)) {
+
+      int track = 0;
+      foreach (Staff* staff, score()->staves()) {
+            Segment* s;
+            BarLine* bl = 0;
+            for (s = first(); s; s = s->next()) {
+                  if (s->subtype() == Segment::SegEndBarLine) {
                         bl = (BarLine*)(s->element(track));
-                        if (bl->subtype() != _endBarLineType) {
-                              bl->setSubtype(_endBarLineType);
-                              changed = true;
-                              }
-                        bl->setGenerated(_endBarLineGenerated);
-                        found = true;
+                        break;
                         }
-                  break;
                   }
-            if (!found) {
-                  bl = new BarLine(score());
-                  bl->setStaff(staff);
-                  bl->setSubtype(_endBarLineType);
+            if (staff->barLineSpan() == 0) {
+                  if (bl) {
+                        delete bl;
+                        bl = 0;
+                        s->setElement(track, 0);
+                        }
+                  }
+            else {
+                  if (bl == 0) {
+                        bl = new BarLine(score());
+                        bl->setStaff(staff);
+                        Segment* seg = getSegment(Segment::SegEndBarLine, tick() + tickLen());
+                        seg->add(bl);
+                        changed = true;
+                        }
+                  }
+            if (bl) {
+                  if (bl->subtype() != _endBarLineType) {
+                        bl->setSubtype(_endBarLineType);
+                        changed = true;
+                        }
                   bl->setGenerated(_endBarLineGenerated);
-                  Segment* seg = getSegment(Segment::SegEndBarLine, tick() + tickLen());
-                  seg->add(bl);
-                  changed = true;
+                  bl->setSpan(staff->barLineSpan());
                   }
+            track += VOICES;
             }
+
       return changed;
+      }
+
+//---------------------------------------------------------
+//   setEndBarLineType
+//---------------------------------------------------------
+
+void Measure::setEndBarLineType(int val, bool g)
+      {
+      _endBarLineType = val;
+      _endBarLineGenerated = g;
       }
 

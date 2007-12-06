@@ -198,15 +198,16 @@ int Staff::chorus() const
 
 Staff::Staff(Score* s, Part* p, int rs)
       {
-      _score  = s;
-      _rstaff = rs;
-      _part   = p;
-      _clef   = new ClefList;
-      _keymap = new KeyList;
+      _score        = s;
+      _rstaff       = rs;
+      _part         = p;
+      _clef         = new ClefList;
+      _keymap       = new KeyList;
       (*_keymap)[0] = 0;
-      _show   = true;
-      _lines  = 5;
-      _small  = false;
+      _show         = true;
+      _lines        = 5;
+      _small        = false;
+      _barLineSpan  = 1;
       }
 
 //---------------------------------------------------------
@@ -244,6 +245,8 @@ void Staff::write(Xml& xml) const
       foreach(const BracketItem& i, _brackets) {
             xml.tagE("bracket type=\"%d\" span=\"%d\"", i._bracket, i._bracketSpan);
             }
+      if (_barLineSpan != 1)
+            xml.tag("barLineSpan", _barLineSpan);
       xml.etag();
       }
 
@@ -271,6 +274,8 @@ void Staff::read(QDomElement e)
                   b._bracketSpan = e.attribute("span", "0").toInt();
                   _brackets.append(b);
                   }
+            else if (tag == "barLineSpan")
+                  _barLineSpan = e.text().toInt();
             else
                   domError(e);
             }
@@ -469,3 +474,13 @@ void Staff::changeClef(int tick, int st)
             }
       _score->setLayoutAll(true);
       }
+
+//---------------------------------------------------------
+//   setBarLineSpan
+//---------------------------------------------------------
+
+void Staff::setBarLineSpan(int val)
+      {
+      _barLineSpan = val;
+      }
+

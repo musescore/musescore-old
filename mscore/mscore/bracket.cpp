@@ -286,11 +286,12 @@ void Bracket::endEditDrag()
       else {
             qreal ay  = parent()->canvasPos().y();
             System* s = system();
+            qreal y   = s->staff(staffIdx1)->bbox().y() + ay;
+            qreal h1  = s->staff(staffIdx1)->bbox().height();
 
-            qreal y = s->staff(staffIdx1)->bbox().y() + ay;
             for (staffIdx2 = staffIdx1 + 1; staffIdx2 < n; ++staffIdx2) {
                   qreal h = s->staff(staffIdx2)->bbox().y() + ay - y;
-                  if (ay2 < (y + h * .5))
+                  if (ay2 < (y + (h + h1) * .5))
                         break;
                   y += h;
                   }

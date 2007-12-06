@@ -615,7 +615,7 @@ QList<System*> ScoreLayout::layoutSystemRow(qreal x, qreal y, qreal rowWidth, bo
                   if (i == (n-1)) {
                         if (m->repeatFlags() & RepeatEnd)
                               m->setEndBarLineType(END_REPEAT, true);
-                        else
+                        else if (m->endBarLineGenerated())
                               m->setEndBarLineType(NORMAL_BAR, true);
                         }
                   else {
@@ -635,7 +635,7 @@ QList<System*> ScoreLayout::layoutSystemRow(qreal x, qreal y, qreal rowWidth, bo
                               }
                         else if (nm && (nm->repeatFlags() & RepeatStart))
                               m->setEndBarLineType(START_REPEAT, true);
-                        else
+                        else if (m->endBarLineGenerated())
                               m->setEndBarLineType(NORMAL_BAR, true);
                         }
                   needRelayout |= m->createEndBarLines();

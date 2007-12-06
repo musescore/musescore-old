@@ -872,9 +872,9 @@ void Score::upDown(bool up, bool octave)
                   newPitch = 127;
 
             UndoOp i;
-            i.type  = UndoOp::ChangePitch;
-            i.obj   = oNote;
-            i.val1  = oNote->pitch();
+            i.type     = UndoOp::ChangePitch;
+            i.element1 = oNote;
+            i.val1     = oNote->pitch();
             undoList.back()->push_back(i);
 
             oNote->changePitch(newPitch);
@@ -1054,11 +1054,11 @@ void Score::addAccidental(int idx)
 void Score::addAccidental(Note* oNote, int accidental)
       {
       UndoOp i;
-      i.type  = UndoOp::ChangeAccidental;
-      i.obj   = oNote;
-      i.val1  = oNote->pitch();
-      i.val2  = oNote->tpc();
-      i.val3  = oNote->accidentalSubtype();
+      i.type     = UndoOp::ChangeAccidental;
+      i.element1 = oNote;
+      i.val1     = oNote->pitch();
+      i.val2     = oNote->tpc();
+      i.val3     = oNote->accidentalSubtype();
       undoList.back()->push_back(i);
       oNote->changeAccidental(accidental);
       layoutAll = true;

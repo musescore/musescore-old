@@ -81,7 +81,9 @@ static const char* undoName[] = {
       "ChangeEndBarLine",
       "ChangeVoltaEnding", "ChangeVoltaText",
       "ChangeChordRestSize",
-      "ChangeNoteHead"
+      "ChangeNoteHead",
+      "ChangeEndBarLineType",
+      "ChangeBarLineSpan"
       };
 
 static bool UNDO = false;
@@ -204,21 +206,21 @@ void Score::processUndoOp(UndoOp* i, bool undo)
       if (debugMode) {
             printf("Score::processUndoOp(i->type=%s, undo=%d)\n", i->name(), undo);
             if (i->type == UndoOp::RemoveElement)
-                  printf("   %s\n", i->obj->name());
+                  printf("   %s\n", i->element1->name());
             }
 
       switch (i->type) {
             case UndoOp::RemoveElement:
                   if (undo)
-                        addElement(i->obj);
+                        addElement(i->element1);
                   else
-                        removeElement(i->obj);
+                        removeElement(i->element1);
                   break;
             case UndoOp::AddElement:
                   if (undo)
-                        removeElement(i->obj);
+                        removeElement(i->element1);
                   else
-                        addElement(i->obj);
+                        addElement(i->element1);
                   break;
             case UndoOp::InsertPart:
                   if (undo)
@@ -287,18 +289,18 @@ void Score::processUndoOp(UndoOp* i, bool undo)
                         sortStaves(i->si, i->di);
                   break;
             case UndoOp::ToggleInvisible:
-                  i->obj->setVisible(!i->obj->visible());
+                  i->element1->setVisible(!i->element1->visible());
                   break;
             case UndoOp::ChangeColor:
                   {
-                  QColor color = i->obj->color();
-                  i->obj->setColor(i->color);
+                  QColor color = i->element1->color();
+                  i->element1->setColor(i->color);
                   i->color = color;
                   }
                   break;
             case UndoOp::ChangePitch:
                   {
-                  Note* note = (Note*)(i->obj);
+                  Note* note = (Note*)(i->element1);
                   int pitch  = note->pitch();
                   note->changePitch(i->val1);
                   i->val1 = pitch;
@@ -306,7 +308,7 @@ void Score::processUndoOp(UndoOp* i, bool undo)
                   break;
             case UndoOp::ChangeAccidental:
                   {
-                  Note* note = (Note*)(i->obj);
+                  Note* note = (Note*)(i->element1);
                   int pitch  = note->pitch();
                   int tpc    = note->tpc();
                   int acc    = note->accidentalSubtype();
@@ -320,7 +322,7 @@ void Score::processUndoOp(UndoOp* i, bool undo)
                   break;
             case UndoOp::SetStemDirection:
                   {
-                  Chord* chord = (Chord*)(i->obj);
+                  Chord* chord = (Chord*)(i->element1);
                   Direction dir = chord->stemDirection();
                   chord->setStemDirection((Direction)i->val1);
                   i->val1 = (int)dir;
@@ -328,25 +330,25 @@ void Score::processUndoOp(UndoOp* i, bool undo)
                   break;
             case UndoOp::FlipSlurDirection:
                   {
-                  SlurTie* slur = (SlurTie*)(i->obj);
+                  SlurTie* slur = (SlurTie*)(i->element1);
                   slur->setSlurDirection(slur->isUp() ? DOWN : UP);
                   }
                   break;
             case UndoOp::ChangeSubtype:
                   {
-                  int st = i->obj->subtype();
-                  i->obj->setSubtype(i->val1);
+                  int st = i->element1->subtype();
+                  i->element1->setSubtype(i->val1);
                   i->val1 = st;
                   }
                   break;
 
             case UndoOp::ChangeElement:
-                  i->obj->parent()->change(i->obj, i->obj2);
+                  i->element1->parent()->change(i->element1, i->element2);
                   {
                   // swap
-                  Element* e = i->obj;
-                  i->obj = i->obj2;
-                  i->obj2 = e;
+                  Element* e = i->element1;
+                  i->element1 = i->element2;
+                  i->element2 = e;
                   }
                   break;
 
@@ -519,7 +521,7 @@ void Score::processUndoOp(UndoOp* i, bool undo)
                   break;
             case UndoOp::ChangeVoltaEnding:
                   {
-                  Volta* volta = (Volta*)i->obj;
+                  Volta* volta = (Volta*)i->element1;
                   QList<int> l = volta->endings();
                   volta->setEndings(i->si);
                   i->si = l;
@@ -527,7 +529,7 @@ void Score::processUndoOp(UndoOp* i, bool undo)
                   break;
             case UndoOp::ChangeVoltaText:
                   {
-                  Volta* volta = (Volta*)i->obj;
+                  Volta* volta = (Volta*)i->element1;
                   QString s = volta->text();
                   volta->setText(i->s);
                   i->s = s;
@@ -535,7 +537,7 @@ void Score::processUndoOp(UndoOp* i, bool undo)
                   break;
             case UndoOp::ChangeChordRestSize:
                   {
-                  ChordRest* cr = (ChordRest*)i->obj;
+                  ChordRest* cr = (ChordRest*)i->element1;
                   bool small = cr->small();
                   cr->setSmall(i->val1);
                   i->val1 = small;
@@ -543,10 +545,26 @@ void Score::processUndoOp(UndoOp* i, bool undo)
                   break;
             case UndoOp::ChangeNoteHead:
                   {
-                  Note* note = (Note*)i->obj;
+                  Note* note = (Note*)i->element1;
                   int headGroup = note->headGroup();
                   note->setHeadGroup(i->val1);
                   i->val1 = headGroup;
+                  }
+                  break;
+            case UndoOp::ChangeEndBarLineType:
+                  {
+                  Measure* m = (Measure*)i->measure;
+                  int typ    = m->endBarLineType();
+                  m->setEndBarLineType(i->val1, false);
+                  i->val1 = typ;
+                  }
+                  break;
+            case UndoOp::ChangeBarLineSpan:
+                  {
+                  int span = i->staff->barLineSpan();
+printf("UndoOp::ChangeBarLineSpan %d  %d - %d\n", i->staff->idx(), span, i->val1);
+                  i->staff->setBarLineSpan(i->val1);
+                  i->val1 = span;
                   }
                   break;
             }
@@ -614,7 +632,7 @@ void Score::undoOp(UndoOp::UndoType type, Element* object, int val)
       checkUndoOp();
       UndoOp i;
       i.type = type;
-      i.obj  = object;
+      i.element1 = object;
       i.val1 = val;
       undoList.back()->push_back(i);
       }
@@ -628,7 +646,7 @@ void Score::undoOp(UndoOp::UndoType type, Element* object)
       checkUndoOp();
       UndoOp i;
       i.type = type;
-      i.obj  = object;
+      i.element1 = object;
       undoList.back()->push_back(i);
       }
 
@@ -641,7 +659,7 @@ void Score::undoAddElement(Element* element)
       checkUndoOp();
       UndoOp i;
       i.type = UndoOp::AddElement;
-      i.obj  = element;
+      i.element1 = element;
       undoList.back()->push_back(i);
       processUndoOp(&undoList.back()->back(), false);
       }
@@ -670,7 +688,7 @@ void Score::undoRemoveElement(Element* element)
       checkUndoOp();
       UndoOp i;
       i.type = UndoOp::RemoveElement;
-      i.obj  = element;
+      i.element1 = element;
       undoList.back()->push_back(i);
       processUndoOp(&undoList.back()->back(), false);
       }
@@ -699,8 +717,8 @@ void Score::undoChangeElement(Element* oldElement, Element* newElement)
       checkUndoOp();
       UndoOp i;
       i.type     = UndoOp::ChangeElement;
-      i.obj      = oldElement;
-      i.obj2     = newElement;
+      i.element1 = oldElement;
+      i.element2 = newElement;
       undoList.back()->push_back(i);
       processUndoOp(&undoList.back()->back(), false);
       }
@@ -714,7 +732,7 @@ void Score::undoChangeSubtype(Element* element, int st)
       checkUndoOp();
       UndoOp i;
       i.type     = UndoOp::ChangeSubtype;
-      i.obj      = element;
+      i.element1 = element;
       i.val1     = st;
       undoList.back()->push_back(i);
       processUndoOp(&undoList.back()->back(), false);
@@ -729,8 +747,38 @@ void Score::undoChangeNoteHead(Note* note, int group)
       checkUndoOp();
       UndoOp i;
       i.type     = UndoOp::ChangeNoteHead;
-      i.obj      = note;
+      i.element1 = note;
       i.val1     = group;
+      undoList.back()->push_back(i);
+      processUndoOp(&undoList.back()->back(), false);
+      }
+
+//---------------------------------------------------------
+//   undoChangeEndBarLineType
+//---------------------------------------------------------
+
+void Score::undoChangeEndBarLineType(Measure* m, int subtype)
+      {
+      checkUndoOp();
+      UndoOp i;
+      i.type     = UndoOp::ChangeEndBarLineType;
+      i.measure  = m;
+      i.val1     = subtype;
+      undoList.back()->push_back(i);
+      processUndoOp(&undoList.back()->back(), false);
+      }
+
+//---------------------------------------------------------
+//   undoChangeBarLineSpan
+//---------------------------------------------------------
+
+void Score::undoChangeBarLineSpan(Staff* staff, int span)
+      {
+      checkUndoOp();
+      UndoOp i;
+      i.type  = UndoOp::ChangeBarLineSpan;
+      i.staff = staff;
+      i.val1  = span;
       undoList.back()->push_back(i);
       processUndoOp(&undoList.back()->back(), false);
       }
@@ -744,7 +792,7 @@ void Score::undoOp(UndoOp::UndoType type, Element* object, const QColor& color)
       checkUndoOp();
       UndoOp i;
       i.type  = type;
-      i.obj   = object;
+      i.element1 = object;
       i.color = color;
       undoList.back()->push_back(i);
       }
@@ -927,7 +975,7 @@ void Score::undoChangeVoltaEnding(Volta* volta, const QList<int>& l)
       checkUndoOp();
       UndoOp i;
       i.type = UndoOp::ChangeVoltaEnding;
-      i.obj  = volta;
+      i.element1 = volta;
       i.si   = l;
       undoList.back()->push_back(i);
       processUndoOp(&undoList.back()->back(), false);
@@ -942,7 +990,7 @@ void Score::undoChangeVoltaText(Volta* volta, const QString& s)
       checkUndoOp();
       UndoOp i;
       i.type = UndoOp::ChangeVoltaText;
-      i.obj  = volta;
+      i.element1 = volta;
       i.s    = s;
       undoList.back()->push_back(i);
       processUndoOp(&undoList.back()->back(), false);
@@ -957,7 +1005,7 @@ void Score::undoChangeChordRestSize(ChordRest* cr, bool small)
       checkUndoOp();
       UndoOp i;
       i.type = UndoOp::ChangeChordRestSize;
-      i.obj  = cr;
+      i.element1 = cr;
       i.val1 = small;
       undoList.back()->push_back(i);
       processUndoOp(&undoList.back()->back(), false);

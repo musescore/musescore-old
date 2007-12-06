@@ -280,6 +280,8 @@ class Score : public QObject {
       void undoChangeChordRestSize(ChordRest* cr, bool small);
       void undoChangeSubtype(Element* element, int st);
       void undoChangeNoteHead(Note*, int group);
+      void undoChangeEndBarLineType(Measure*, int);
+      void undoChangeBarLineSpan(Staff*, int);
 
       void setNote(int tick, int track, int pitch, int len);
       int clefOffset(int tick, Staff*) const;
@@ -383,7 +385,7 @@ class Score : public QObject {
       void setShowInvisible(bool v);
 
       bool loadMsc(QString name);
-      bool loadFile(QFile* f);
+//      bool loadFile(QFile* f);
       void importMusicXml(const QString&);
       void convertMidi(MidiFile*);
       bool importMidi(const QString& name);

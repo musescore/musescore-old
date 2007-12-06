@@ -24,6 +24,7 @@
 #include "element.h"
 
 class Viewer;
+class Segment;
 
 enum BarType {
       NORMAL_BAR, DOUBLE_BAR, START_REPEAT, END_REPEAT,
@@ -35,25 +36,34 @@ enum BarType {
 //---------------------------------------------------------
 
 class BarLine : public Element {
-      qreal _height;
+      int _span;
+      qreal yoff;
+
+      double getY2() const;
 
    public:
       BarLine(Score*);
       BarLine &operator=(const BarLine&);
 
-      virtual BarLine* clone() const { return new BarLine(*this); }
+      virtual BarLine* clone() const   { return new BarLine(*this); }
       virtual ElementType type() const { return BAR_LINE; }
       virtual void write(Xml& xml) const;
       virtual void read(QDomElement);
       virtual void draw(QPainter&) const;
-      virtual void dump() const;
-      virtual void setSubtype(int t);
       virtual QRectF bbox() const;
       virtual void space(double& min, double& extra) const;
 
       virtual bool acceptDrop(Viewer*, const QPointF&, int, int) const;
       virtual Element* drop(const QPointF&, const QPointF&, Element*);
-      void setHeight(qreal v) { _height = v; }
+      void setSpan(int val)    { _span = val;  }
+      int span() const         { return _span; }
+      Segment* segment() const { return (Segment*)parent(); }
+
+      virtual bool startEdit(const QPointF&);
+      virtual void endEdit();
+      virtual void editDrag(int, const QPointF&, const QPointF&);
+      virtual void endEditDrag();
+      virtual void updateGrips(int*, QRectF*) const;
       };
 
 #endif

@@ -221,7 +221,8 @@ void System::layout(ScoreLayout* layout)
             }
 
       if (nstaves > 1 && barLine == 0) {
-            barLine = new BarLine(score());
+            barLine = new Line(score(), true);
+            barLine->setLineWidth(score()->style()->barWidth);
             barLine->setParent(this);
             }
       else if (nstaves <= 1 && barLine) {
@@ -349,43 +350,14 @@ void System::layout2(ScoreLayout* layout)
       qreal systemHeight = staff(staves-1)->bbox().bottom();
       setHeight(systemHeight);
 
-      //---------------------------------------------------
-      //    layout bars
-      //---------------------------------------------------
-
       double staffY[staves];
       for (int i = 0; i < staves; ++i)
             staffY[i] = staff(i)->bbox().y();
 
-      qreal staffLineWidth = point(score()->style()->staffLineWidth);
-      foreach (MeasureBase* mb, ml) {
-            if (mb->type() != MEASURE)
-                  continue;
-            Measure* m = (Measure*)mb;
-            QList<Part*>* pl = _score->parts();
-            int staffIdx = 0;
-            foreach(Part* p, *pl) {
-                  int track = staffIdx * VOICES;
-                  double staffMag = score()->staff(staffIdx)->small() ? 0.7 : 1.0;
-                  Spatium barLineLen(4.0 * staffMag);
-                  for (Segment* s = m->first(); s; s = s->next()) {
-                        if ((s->subtype() != Segment::SegEndBarLine)
-                           && (s->subtype() != Segment::SegStartRepeatBarLine))
-                              continue;
-                        if (s->element(track)) {
-                              BarLine* barLine = (BarLine*)(s->element(track));
-                              double y1 = staffY[staffIdx];
-                              double y2 = staffY[staffIdx + p->nstaves() - 1] + point(barLineLen);
-                              barLine->setHeight((y2 - y1) + staffLineWidth * .5);
-                              }
-                        }
-                  staffIdx += p->nstaves();
-                  }
-            m->setHeight(systemHeight);
+      if (barLine) {
+            barLine->setLen(Spatium(systemHeight / _spatium));
+            barLine->layout(layout);
             }
-
-      if (barLine)
-            barLine->setHeight(systemHeight + staffLineWidth * .5);
 
       //---------------------------------------------------
       //  layout brackets
@@ -467,9 +439,6 @@ void SysStaff::move(double x, double y)
 void System::clear()
       {
       ml.clear();
-//      if (barLine)
-//            delete barLine;
-//      barLine      = 0;
       _vbox        = false;
       _firstSystem = false;
       _pageBreak   = false;
