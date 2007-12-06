@@ -32,12 +32,10 @@
 
 class Segment;
 class Xml;
-class System;
 class Beam;
 class Tuplet;
 class Staff;
 class Chord;
-class BarLine;
 class Text;
 class ChordRest;
 class Score;
@@ -189,15 +187,11 @@ class Measure : public MeasureBase {
       Segment* findSegment(Segment::SegmentType st, int t);
       Segment* createSegment(Segment::SegmentType st, int t);
 
-//      BarLine* barLine(int staff) const;
       bool createEndBarLines();
-      void setEndBarLineType(int val, bool g) {
-            _endBarLineType = val;
-            _endBarLineGenerated = g;
-            }
+      void setEndBarLineType(int val, bool g);
       int endBarLineType() const { return _endBarLineType; }
-
       bool setStartRepeatBarLine(bool);
+      bool endBarLineGenerated() const { return _endBarLineGenerated; }
 
       void cmdRemoveEmptySegment(Segment* s);
       void collectElements(QList<const Element*>& el) const;

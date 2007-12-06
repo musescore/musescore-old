@@ -21,7 +21,10 @@
 #ifndef __GLOBALS_H__
 #define __GLOBALS_H__
 
-#define MSC_VERSION     "1.2"
+#define MSC_VERSION     "1.3"
+
+// History:
+//    1.3   added staff->_barLineSpan
 
 extern bool debugMode;
 extern bool layoutDebug;

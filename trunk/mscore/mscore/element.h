@@ -170,7 +170,7 @@ class Element {
       virtual double width() const            { return bbox().width();     }
       virtual void setWidth(qreal v)          { return _bbox.setWidth(v);  }
       QRectF abbox() const                    { return bbox().translated(canvasPos()); }
-      virtual void setbbox(const QRectF& r)   { _bbox = r;                 }
+      virtual void setbbox(const QRectF& r) const   { _bbox = r;                 }
       virtual bool contains(const QPointF& p) const;
       virtual QPainterPath shape() const;
       bool intersects(const QRectF& r) const;

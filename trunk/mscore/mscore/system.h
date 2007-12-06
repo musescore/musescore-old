@@ -31,7 +31,6 @@
 
 class Staff;
 class StaffLines;
-class BarLine;
 class Clef;
 class Page;
 class Text;
@@ -82,7 +81,7 @@ class SysStaff {
 class System : public Element {
       QList<MeasureBase*> ml;
       QList<SysStaff*> _staves;
-      BarLine* barLine;       ///< Left hand bar, connects staves in system.
+      Line* barLine;          ///< Left hand bar, connects staves in system.
       bool _pageBreak;
       qreal _leftMargin;      ///< left margin for instrument name, brackets etc.
       bool _firstSystem;      ///< used to decide between long and short instrument
@@ -125,7 +124,7 @@ class System : public Element {
       SysStaff* insertStaff(int);
       SysStaff* removeStaff(int);
 
-      BarLine* getBarLine() const          { return barLine; }
+      Line* getBarLine() const             { return barLine; }
       int y2staff(qreal y) const;
       void setInstrumentNames();
       int snap(int tick, const QPointF p) const;

@@ -79,14 +79,16 @@ struct UndoOp {
             ChangeVoltaEnding,
             ChangeVoltaText,
             ChangeChordRestSize,
-            ChangeNoteHead
+            ChangeNoteHead,
+            ChangeEndBarLineType,
+            ChangeBarLineSpan,
             };
       UndoType type;
-      Element* obj;
-      Element* obj2;
+      Element* element1;
+      Element* element2;
 
-      Part* part;
-      Staff* staff;
+      Part*   part;
+      Staff*  staff;
       MStaff* mstaff;
       System* system;
       MeasureBase* measure;

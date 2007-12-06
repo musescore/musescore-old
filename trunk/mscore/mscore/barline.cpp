@@ -26,6 +26,7 @@
 #include "score.h"
 #include "sym.h"
 #include "viewer.h"
+#include "staff.h"
 
 //---------------------------------------------------------
 //   BarLine
@@ -35,6 +36,34 @@ BarLine::BarLine(Score* s)
    : Element(s)
       {
       setSubtype(NORMAL_BAR);
+      _span = 1;
+      yoff  = 0.0;
+      }
+
+//---------------------------------------------------------
+//   getY2
+//---------------------------------------------------------
+
+double BarLine::getY2() const
+      {
+      int staffIdx1 = staffIdx();
+      int staffIdx2 = staffIdx1 + _span - 1;
+      qreal y2;
+
+      if (parent() && parent()->type() == SEGMENT) {
+            Segment* segment = (Segment*)parent();
+            Measure* measure = segment->measure();
+            System* system = measure->system();
+            y2 = system->staff(staffIdx2)->bbox().y() - system->staff(staffIdx1)->bbox().y();
+            double staffMag = staff()->small() ? 0.7 : 1.0;
+            Spatium barLineLen(4.0 * staffMag);
+            y2 += barLineLen.point();
+            }
+      else
+            y2 = 4.0 * _spatium;    // for use in palette
+
+      y2 += yoff;
+      return y2;
       }
 
 //---------------------------------------------------------
@@ -43,10 +72,8 @@ BarLine::BarLine(Score* s)
 
 void BarLine::draw(QPainter& p) const
       {
-      qreal lw    = point(score()->style()->barWidth);
-      qreal h     = height() - point(score()->style()->staffLineWidth) * .5;
-
-      bool split = height() > (_spatium * 4.01);
+      qreal lw = point(score()->style()->barWidth);
+      qreal y2 = getY2();
 
       QPen pen(color());
       pen.setWidthF(lw);
@@ -67,32 +94,35 @@ void BarLine::draw(QPainter& p) const
                   }
 
             case NORMAL_BAR:
-                  p.drawLine(QLineF(lw*.5, 0.0, lw*.5, h));
+                  p.drawLine(QLineF(lw * .5, 0.0, lw * .5, y2));
                   break;
 
             case END_BAR:
                   {
                   qreal lw2 = point(score()->style()->endBarWidth);
+                  qreal d   = point(score()->style()->endBarDistance);
 
-                  p.drawLine(QLineF(lw*.5, 0.0, lw*.5, h));
+                  p.drawLine(QLineF(lw*.5, 0.0, lw*.5, y2));
                   pen.setWidthF(lw2);
                   p.setPen(pen);
-                  qreal x = point(score()->style()->endBarDistance) + lw2*.5 + lw;
-                  p.drawLine(QLineF(x, 0.0, x, h));
+                  qreal x = d + lw2 * .5 + lw;
+                  p.drawLine(QLineF(x, 0.0, x, y2));
+                  lw = lw + d + lw2;
                   }
                   break;
 
             case DOUBLE_BAR:
                   {
-                  qreal lw2 = point(score()->style()->doubleBarWidth);
-                  qreal d   = point(score()->style()->doubleBarDistance);
+                  lw      = point(score()->style()->doubleBarWidth);
+                  qreal d = point(score()->style()->doubleBarDistance);
 
-                  pen.setWidthF(lw2);
+                  pen.setWidthF(lw);
                   p.setPen(pen);
-                  qreal x = lw2/2;
-                  p.drawLine(QLineF(x, 0.0, x, h));
-                  x += d + lw2;
-                  p.drawLine(QLineF(x, 0.0, x, h));
+                  qreal x = lw * .5;
+                  p.drawLine(QLineF(x, 0.0, x, y2));
+                  x += d + lw;
+                  p.drawLine(QLineF(x, 0.0, x, y2));
+                  lw = 2 * lw + d;
                   }
                   break;
 
@@ -108,15 +138,16 @@ void BarLine::draw(QPainter& p) const
 
                   symbols[dotSym].draw(p, mag(), x0, 1.5 * ld);
                   symbols[dotSym].draw(p, mag(), x0, 2.5 * ld);
-                  if (split) {
-                        symbols[dotSym].draw(p, mag(), x0, h - 1.5 * ld);
-                        symbols[dotSym].draw(p, mag(), x0, h - 2.5 * ld);
+                  if (_span == 2) {
+                        symbols[dotSym].draw(p, mag(), x0, y2 - 1.5 * ld);
+                        symbols[dotSym].draw(p, mag(), x0, y2 - 2.5 * ld);
                         }
 
-                  p.drawLine(QLineF(x1, 0.0, x1, h));
+                  p.drawLine(QLineF(x1, 0.0, x1, y2));
                   pen.setWidthF(lw2);
                   p.setPen(pen);
-                  p.drawLine(QLineF(x2, 0.0, x2, h));
+                  p.drawLine(QLineF(x2, 0.0, x2, y2));
+                  lw = x2;
                   }
                   break;
 
@@ -133,16 +164,17 @@ void BarLine::draw(QPainter& p) const
 
                   symbols[dotSym].draw(p, mag(), x0, 1.5 * ld);
                   symbols[dotSym].draw(p, mag(), x0, 2.5 * ld);
-                  if (split) {
-                        symbols[dotSym].draw(p, mag(), x0, h - 1.5 * ld);
-                        symbols[dotSym].draw(p, mag(), x0, h - 2.5 * ld);
+                  if (_span == 2) {
+                        symbols[dotSym].draw(p, mag(), x0, y2 - 1.5 * ld);
+                        symbols[dotSym].draw(p, mag(), x0, y2 - 2.5 * ld);
                         }
 
-                  p.drawLine(QLineF(x1, 0.0, x1, h));
+                  p.drawLine(QLineF(x1, 0.0, x1, y2));
 
                   pen.setWidthF(lw2);
                   p.setPen(pen);
-                  p.drawLine(QLineF(x2, 0.0, x2, h));
+                  p.drawLine(QLineF(x2, 0.0, x2, y2));
+                  lw = x2;
                   }
                   break;
 
@@ -163,25 +195,27 @@ void BarLine::draw(QPainter& p) const
                   symbols[dotSym].draw(p, mag(), x0, 2.5 * ld);
                   symbols[dotSym].draw(p, mag(), x4, 1.5 * ld);
                   symbols[dotSym].draw(p, mag(), x4, 2.5 * ld);
-                  if (split) {
-                        symbols[dotSym].draw(p, mag(), x0, h - ld);
-                        symbols[dotSym].draw(p, mag(), x0, h - ld);
-                        symbols[dotSym].draw(p, mag(), x4, h - ld);
-                        symbols[dotSym].draw(p, mag(), x4, h - ld);
+                  if (_span == 2) {
+                        symbols[dotSym].draw(p, mag(), x0, y2 - ld);
+                        symbols[dotSym].draw(p, mag(), x0, y2 - ld);
+                        symbols[dotSym].draw(p, mag(), x4, y2 - ld);
+                        symbols[dotSym].draw(p, mag(), x4, y2 - ld);
                         }
 
-                  p.drawLine(QLineF(x1, 0.0, x1, h));
+                  p.drawLine(QLineF(x1, 0.0, x1, y2));
 
                   pen.setWidthF(lw2);
                   p.setPen(pen);
-                  p.drawLine(QLineF(x2, 0.0, x2, h));
+                  p.drawLine(QLineF(x2, 0.0, x2, y2));
 
                   pen.setWidthF(lw);
                   p.setPen(pen);
-                  p.drawLine(QLineF(x3, 0.0, x3, h));
+                  p.drawLine(QLineF(x3, 0.0, x3, y2));
+                  lw = x2;
                   }
                   break;
             }
+      setbbox(QRectF(0.0, 0.0, lw, y2).adjusted(-lw * .5, 0.0, lw, 0.0));
       }
 
 //---------------------------------------------------------
@@ -213,31 +247,14 @@ void BarLine::read(QDomElement e)
       }
 
 //---------------------------------------------------------
-//   dump
-//---------------------------------------------------------
-
-void BarLine::dump() const
-      {
-      Element::dump();
-      }
-
-//---------------------------------------------------------
-//   setSubtype
-//---------------------------------------------------------
-
-void BarLine::setSubtype(int t)
-      {
-      Element::setSubtype(t);
-      }
-
-//---------------------------------------------------------
 //   bbox
 //---------------------------------------------------------
 
 QRectF BarLine::bbox() const
       {
+      qreal y2  = getY2();
       Spatium w = score()->style()->barWidth;
-      qreal dw = 0.0;
+      qreal dw  = 0.0;
 
       switch(subtype()) {
             case DOUBLE_BAR:
@@ -265,8 +282,9 @@ QRectF BarLine::bbox() const
                   printf("illegal bar line type\n");
                   break;
             }
-      return QRectF(0.0, 0.0, dw, _height);
+      return QRectF(0.0, 0.0, dw, y2);
       }
+
 
 //---------------------------------------------------------
 //   space
@@ -297,20 +315,111 @@ bool BarLine::acceptDrop(Viewer* v, const QPointF&, int type, int) const
 
 Element* BarLine::drop(const QPointF&, const QPointF&, Element* e)
       {
-      if (e->type() != BAR_LINE) {
-            delete e;
+      int type = e->type();
+      int st   = e->subtype();
+      delete e;
+      if (type != BAR_LINE || st == subtype()) {
+            printf("%d %d %d\n", type, subtype(), st);
             return 0;
             }
-      if (e->subtype() == subtype()) {
-            delete e;
-            return 0;
+      Measure* m = segment()->measure();
+      score()->undoChangeEndBarLineType(m, st);
+      return 0;
+      }
+
+//---------------------------------------------------------
+//   startEdit
+//---------------------------------------------------------
+
+bool BarLine::startEdit(const QPointF&)
+      {
+      yoff = 0.0;
+      return true;
+      }
+
+//---------------------------------------------------------
+//   updateGrips
+//---------------------------------------------------------
+
+void BarLine::updateGrips(int* grips, QRectF* grip) const
+      {
+      *grips   = 1;
+      qreal lw = point(score()->style()->barWidth);
+      qreal y2 = getY2();
+      grip[0].translate(QPointF(lw * .5, y2) + canvasPos());
+      }
+
+//---------------------------------------------------------
+//   endEdit
+//---------------------------------------------------------
+
+void BarLine::endEdit()
+      {
+      if (staff()->barLineSpan() == _span)
+            return;
+
+      int idx1 = staffIdx();
+
+      if (_span > staff()->barLineSpan()) {
+            int idx2 = idx1 + _span;
+            for (int idx = idx1 + 1; idx < idx2; ++idx)
+                  score()->undoChangeBarLineSpan(score()->staff(idx), 0);
             }
-      BarLine* bl = (BarLine*) e;
-      bl->setParent(parent());
-      bl->setStaff(staff());
-      bl->setTick(e->tick());
-      score()->undoRemoveElement(this);
-      score()->undoAddElement(bl);
-      return bl;
+      else {
+            int idx1 = staffIdx() + _span;
+            int idx2 = staffIdx() + staff()->barLineSpan();
+            for (int idx = idx1; idx < idx2; ++idx)
+                  score()->undoChangeBarLineSpan(score()->staff(idx), 1);
+            }
+      score()->undoChangeBarLineSpan(staff(), _span);
+      }
+
+//---------------------------------------------------------
+//   editDrag
+//---------------------------------------------------------
+
+void BarLine::editDrag(int, const QPointF&, const QPointF& delta)
+      {
+      qreal dy = delta.y();
+      yoff += dy;
+      }
+
+//---------------------------------------------------------
+//   endEditDrag
+//    snap to nearest staff
+//---------------------------------------------------------
+
+void BarLine::endEditDrag()
+      {
+      double h2 = getY2();
+      yoff      = 0.0;
+      qreal ay1 = canvasPos().y();
+      qreal ay2 = ay1 + h2;
+
+      int staffIdx1 = staffIdx();
+      int staffIdx2;
+      Segment* segment = (Segment*)parent();
+      Measure* measure = segment->measure();
+      System* s = measure->system();
+      int n = s->staves()->size();
+      if (staffIdx1 + 1 >= n)
+            staffIdx2 = staffIdx1;
+      else {
+            qreal ay = s->canvasPos().y();
+            qreal y  = s->staff(staffIdx1)->bbox().y() + ay;
+            qreal h1 = s->staff(staffIdx1)->bbox().height();
+
+            for (staffIdx2 = staffIdx1 + 1; staffIdx2 < n; ++staffIdx2) {
+                  qreal h = s->staff(staffIdx2)->bbox().y() + ay - y;
+                  if (ay2 < (y + (h + h1) * .5))
+                        break;
+                  y += h;
+                  }
+            staffIdx2 -= 1;
+            }
+      int newSpan = staffIdx2 - staffIdx1 + 1;
+      if (newSpan != _span) {
+            _span = newSpan;
+            }
       }
 

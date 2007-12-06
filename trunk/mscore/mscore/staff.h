@@ -69,6 +69,7 @@ class Staff {
       ClefList* _clef;
       KeyList* _keymap;
       QList <BracketItem> _brackets;
+      int _barLineSpan;       ///< 0 - no bar line, 1 - span this staff, ...
       bool _show;             ///< derived from part->show()
       int _lines;
       bool _small;
@@ -110,6 +111,8 @@ class Staff {
       void setSmall(bool val)        { _small = val;   }
       int lines() const              { return _lines;  }
       void setLines(int val)         { _lines = val;   }
+      int barLineSpan() const        { return _barLineSpan; }
+      void setBarLineSpan(int val);
       };
 #endif
 

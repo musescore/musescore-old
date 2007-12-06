@@ -267,6 +267,19 @@ void Score::read(QString name)
             if (!measure->irregular())
                   ++measureNo;
             }
+      if (_mscVersion < 103) {
+            foreach(Staff* staff, _staves) {
+                  Part* part = staff->part();
+                  if (part->staves()->size() == 1)
+                        staff->setBarLineSpan(1);
+                  else {
+                        if (staff == part->staves()->front())
+                              staff->setBarLineSpan(part->staves()->size());
+                        else
+                              staff->setBarLineSpan(0);
+                        }
+                  }
+            }
       layoutAll = true;
       }
 
