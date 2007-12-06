@@ -18,23 +18,28 @@
 #  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 #=============================================================================
 
+PREFIX="/usr/local"
+
 default:
 	if test ! -d build;                           \
          then                                       \
             mkdir build;                            \
             cd build;                               \
-            cmake ../mscore;                        \
+            cmake -DCMAKE_INSTALL_PREFIX="${PREFIX}"  \
+            	../mscore;                          \
             make;                                   \
          else                                       \
             cd build; make -f Makefile;             \
          fi;
 
 release:
-	if test ! -d build;                           \
+	if test ! -d build;                         \
          then                                       \
             mkdir build;                            \
             cd build;                               \
-            cmake -DCMAKE_BUILD_TYPE=RELEASE ../mscore; \
+            cmake -DCMAKE_BUILD_TYPE=RELEASE	    \
+            	  -DCMAKE_INSTALL_PREFIX="${PREFIX}" \
+            	   ../mscore; 			    \
             make -f Makefile;                       \
          else                                       \
             echo "build directory does already exist, please remove first with 'make clean'";       \
