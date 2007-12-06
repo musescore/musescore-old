@@ -385,7 +385,6 @@ class Score : public QObject {
       void setShowInvisible(bool v);
 
       bool loadMsc(QString name);
-//      bool loadFile(QFile* f);
       void importMusicXml(const QString&);
       void convertMidi(MidiFile*);
       bool importMidi(const QString& name);
@@ -463,6 +462,8 @@ class Score : public QObject {
       void toEList(QMap<int, Event>* events, int tickOffset);
       void toEList(QMap<int, Event>* events, bool expandRepeats, int tickOffset, int staffIdx);
       int mscVersion() const { return _mscVersion; }
+
+      Selection* selection() const { return sel; }
       };
 
 extern Score* gscore;

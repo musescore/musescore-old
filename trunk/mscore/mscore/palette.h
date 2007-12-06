@@ -81,6 +81,7 @@ class Palette : public QWidget {
       void redraw(const QRect&);
       virtual void paintEvent(QPaintEvent*);
       virtual void mousePressEvent(QMouseEvent*);
+      virtual void mouseDoubleClickEvent(QMouseEvent*);
       virtual void mouseMoveEvent(QMouseEvent*);
       virtual void leaveEvent(QEvent*);
       virtual bool event(QEvent*);
