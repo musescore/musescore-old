@@ -1,4 +1,6 @@
 6.12.7 (ws)
+      - double click on an palette symbol now acts like dropping this symbol
+        to all selected elements (as suggested by Luis Pato)
       - the hight of barlines is now editable
 4.12.7 (ws)
       - regression fix for add instrument + undo + redo

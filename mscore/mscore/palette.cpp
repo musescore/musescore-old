@@ -19,6 +19,7 @@
 //=============================================================================
 
 #include "palette.h"
+#include "mscore.h"
 #include "element.h"
 #include "style.h"
 #include "spatium.h"
@@ -160,6 +161,35 @@ void Palette::mousePressEvent(QMouseEvent* ev)
                   selectedIdx = i;
                   }
             }
+      }
+
+//---------------------------------------------------------
+//   mouseDoubleClickEvent
+//---------------------------------------------------------
+
+void Palette::mouseDoubleClickEvent(QMouseEvent* ev)
+      {
+      int i               = idx(ev->pos());
+      Score* score        = mscore->currentScore();
+      Selection* sel      = score->selection();
+      QList<Element*>* el = sel->elements();
+      if (el->isEmpty())
+            return;
+
+      QMimeData* mimeData = new QMimeData;
+      Element* element    = symbols[i];
+      Viewer* viewer      = score->getViewer().front();
+      mimeData->setData(mimeSymbolFormat, element->mimeData(QPointF()));
+      QPointF pt;
+
+      score->startCmd();
+      foreach(Element* e, *el) {
+            if (e->acceptDrop(viewer, pt, element->type(), element->subtype())) {
+                  Element* ne = element->clone();
+                  e->drop(pt, pt, ne);
+                  }
+            }
+      score->endCmd();
       }
 
 //---------------------------------------------------------
