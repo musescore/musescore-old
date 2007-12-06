@@ -3,135 +3,118 @@
   $file="manual.php";
   require("header.html");
   ?>
-<h4><a href="index.php">MuseScore</a> -- <a href="manual.php">Reference</a>
-   </h4>
-
-This reference describes the latest version in the subversion repository.<br>
-<br>
+<h4><a href="idx.php">MuseScore</a> -- Index</h4>
 <table>
-
   <tr>
-    <td><a href="accidentals.php">Accidentals</a></td>
+    <td><a href="accidentals">Accidentals</a></td>
     <td>&nbsp;&nbsp;&nbsp;</td>
-    <td><a href="arpeggios.php">Arpeggios</a></td>
+    <td><a href="noteentry">Enter Rests</a></td>
+    <td/>
+    <td><a href="pictures">Pictures</a></td>
   </tr>
   <tr>
-    <td><a href="barlines.php">Barlines</a></td>
+    <td><a href="arpeggios">Arpeggios</a></td>
+    <td/>
+    <td><a href="excerpts">Excerpts</a></td>
+    <td/>
+    <td><a href="playmode">Play Mode</a></td>
+  </tr>
+  <tr>
+    <td><a href="barlines">Barlines</a></td>
+    <td/>
+    <td><a href="export">Export</a></td>
+    <td/>
+    <td><a href="repeats">Repeats</a></td>
+  </tr>
+  <tr>
+    <td><a href="beams">Beams</a></td>
+    <td/>
+    <td><a href="fingering">Fingering</a></td>
+    <td/>
+    <td><a href="slurs">Slurs</a></td>
+  </tr>
+  <tr>
+    <td><a href="brackets">Brackets</a></td>
+    <td/>
+    <td><a href="frames">Frames</a></td>
+    <td/>
+    <td><a href="soundfont">Soundfonts</a></td>
+  </tr>
+  <tr>
+    <td><a href="breath">Breath</a></td>
+    <td/>
+    <td><a href="import">Import</a></td>
+    <td/>
+    <td><a href="stretch">Stretch Measures</a></td>
+  </tr>
+  <tr>
+    <td><a href="chordnames">Chord Names</a></td>
+    <td/>
+    <td><a href="instrumentname">Instrumentname</a></td>
+    <td/>
+    <td><a href="tempo">Tempo</a></td>
+  </tr>
+  <tr>
+    <td><a href="noteentry">Chords</a></td>
+    <td/>
+    <td><a href="staff">Instruments</a></td>
+    <td/>
+    <td><a href="textedit">Text Editing</a></td>
+  </tr>
+  <tr>
+    <td><a href="clefs">Clefs</a></td>
+    <td/>
+    <td><a href="invisible">Invisible Elements</a></td>
+    <td/>
+    <td><a href="ties">Ties</a></td>
+  </tr>
+  <tr>
+    <td><a href="color">Color</a></td>
+    <td/>
+    <td><a href="keys">Keys</a></td>
+    <td/>
+    <td><a href="timesig">Time Signature</a></td>
+  </tr>
+  <tr>
+    <td><a href="newscore">Create New Score</a></td>
+    <td/>
+    <td><a href="breaks">Line Breaks</a></td>
+    <td/>
+    <td><a href="tuplets">Triplets</a></td>
+  </tr>
+  <tr>
+    <td><a href="drumnotation">Drum notation</a></td>
+    <td/>
+    <td><a href="lines">Lines</a></td>
+    <td/>
+    <td><a href="tuplets">Tuplets</a></td>
+  </tr>
+  <tr>
+    <td><a href="dynamics">Dynamics</a></td>
+    <td/>
+    <td><a href="lyrics">Lyrics</a></td>
+    <td/>
+    <td><a href="undo">Undo/Redo</a></td>
+  </tr>
+  <tr>
+    <td><a href="editmode">Edit Mode</a></td>
+    <td/>
+    <td><a href="measures">Measures</a></td>
+    <td/>
+    <td><a href="voices">Voices</a></td>
+  </tr>
+  <tr>
+    <td><a href="noteentry">Enter Chords</a></td>
+    <td/>
+    <td><a href="breaks">Page Breaks</a></td>
+    <td/>
+    <td><a href="volta">Volta</a></td>
+  </tr>
+  <tr>
+    <td><a href="noteentry">Enter Notes</a></td>
+    <td/>
+    <td><a href="palette">Palettes</a></td>
+    <td/>
     <td></td>
-    <td><a href="beams.php">Beams</a></td>
   </tr>
-  <tr>
-    <td><a href="brackets.php">Brackets</a></td>
-    <td></td>
-    <td><a href="breath.php">Breath</a></td>
-  </tr>
-  <tr>
-    <td><a href="noteentry.php">Chords</a></td>
-    <td></td>
-    <td><a href="chordnames.php">Chord Names</a></td>
-  </tr>
-  <tr>
-    <td><a href="clefs.php">Clefs</a></td>
-    <td></td>
-    <td><a href="color.php">Color</a></td>
-  </tr>
-  <tr>
-    <td><a href="newscore.php">Create new Score</a></td>
-    <td></td>
-    <td><a href="drumnotation.php">Drum notation</a></td>
-  </tr>
-  <tr>
-    <td><a href="dynamics.php">Dynamics</a></td>
-    <td></td>
-    <td><a href="editmode.php">Edit Mode</a></td>
-  </tr>
-  <tr>
-    <td><a href="excerpts.php">Excerpts</a></td>
-    <td></td>
-    <td><a href="noteentry.php">Enter Chords</a></td>
-  </tr>
-  <tr>
-    <td><a href="noteentry.php">Enter Notes</a></td>
-    <td></td>
-    <td><a href="noteentry.php">Enter Rests</a></td>
-  </tr>
-  <tr>
-    <td><a href="export.php">Export</a></td>
-    <td></td>
-    <td><a href="fingering.php">Fingering</a></td>
-  </tr>
-  <tr>
-    <td><a href="frames.php">Frames</a></td>
-    <td></td>
-  </tr>
-  <tr>
-    <td><a href="import.php">Import</a></td>
-    <td></td>
-    <td><a href="instrumentname.php">Instrumentname</a></td>
-  </tr>
-  <tr>
-    <td><a href="invisible.php">Invisible Elements</a></td>
-    <td></td>
-    <td><a href="keys.php">Keys</a></td>
-  </tr>
-  <tr>
-    <td><a href="lines.php">Lines</a></td>
-    <td></td>
-    <td><a href="breaks.php">Line Breaks</a></td>
-  </tr>
-  <tr>
-    <td><a href="lyrics.php">Lyrics</a></td>
-    <td></td>
-    <td><a href="measures.php">Measures</a></td>
-  </tr>
-  <tr>
-    <td><a href="breaks.php">Page Breaks</a></td>
-    <td></td>
-    <td><a href="pictures.php">Pictures</a></td>
-  </tr>
-  <tr>
-    <td><a href="playmode.php">Play Mode</a></td>
-    <td></td>
-    <td><a href="repeats.php">Repeats</a></td>
-  </tr>
-  <tr>
-    <td><a href="slurs.php">Slurs</a></td>
-  </tr>
-  <tr>
-    <td><a href="soundfont.php">Soundfont</a></td>
-    <td></td>
-    <td><a href="staff.php">Staves</a></td>
-  </tr>
-  <tr>
-    <td><a href="stretch.php">Stretch Measures</a></td>
-    <td></td>
-    <td><a href="tempo.php">Tempo</a></td>
-  </tr>
-  <tr>
-    <td><a href="text.php">Text</a></td>
-    <td></td>
-    <td><a href="textedit.php">Text Editing</a></td>
-  </tr>
-  <tr>
-    <td><a href="ties.php">Ties</a></td>
-    <td></td>
-    <td><a href="timesig.php">Time Signature</a></td>
-  </tr>
-  <tr>
-    <td><a href="tuplets.php">Triplets</a></td>
-    <td></td>
-    <td><a href="tuplets.php">Tuplets</a></td>
-  </tr>
-  <tr>
-    <td><a href="undo.php">Undo/Redo</a></td>
-    <td></td>
-    <td><a href="voices.php">Voices</a></td>
-  </tr>
-  <tr>
-    <td><a href="volta.php">Volta</a></td>
-  </tr>
-
 </table>
-
-<?php require("trailer.html");  ?>
-
