@@ -1,3 +1,5 @@
+7.12.7 (ws)
+      - added portuguese translations from Luis Pato
 6.12.7 (ws)
       - double click on an palette symbol now acts like dropping this symbol
         to all selected elements (as suggested by Luis Pato)

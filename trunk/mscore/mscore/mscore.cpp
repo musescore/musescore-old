@@ -1490,10 +1490,10 @@ int main(int argc, char* argv[])
       QFile ft(":mscore.qm");
       if (ft.exists()) {
             if (debugMode)
-                  printf("locale file found\n");
+                  printf("locale file <:mscore.qm> found\n");
             if (translator.load(":/mscore.qm")) {
                   if (debugMode)
-                        printf("locale file loaded\n");
+                        printf("locale file <:/mscore.qm> loaded\n");
                   }
             qApp->installTranslator(&translator);
             }
