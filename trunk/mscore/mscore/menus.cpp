@@ -419,65 +419,43 @@ void MuseScore::showPalette(bool visible)
             sp->addObject(0, rm, tr("repeat measure"));
 
             Marker* mk = new Marker(gscore);
-            mk->setHtml(symToHtml(symbols[segnoSym]));
-            mk->setLabel("segno");
-            mk->setRXoff(0.0);                  // move to start of measure
+            mk->setMarkerType(MARKER_SEGNO);
             sp->addObject(1, mk, tr("Segno"));
 
             mk = new Marker(gscore);
-            mk->setHtml(symToHtml(symbols[codaSym]));
-            mk->setLabel("coda");
-            mk->setRXoff(0.0);                  // move to start of measure
+            mk->setMarkerType(MARKER_CODA);
             sp->addObject(2, mk, tr("Coda"));
 
             mk = new Marker(gscore);
-            mk->setHtml(symToHtml(symbols[varcodaSym]));
-            mk->setLabel("varcoda");
-            mk->setRXoff(0.0);                  // move to start of measure
+            mk->setMarkerType(MARKER_VARCODA);
             sp->addObject(3, mk, tr("VarCoda"));
 
             mk = new Marker(gscore);
-            mk->setHtml(symToHtml(symbols[codaSym], symbols[codaSym]));
-            mk->setLabel("codetta");
-            mk->setRXoff(0.0);                  // move to start of measure
+            mk->setMarkerType(MARKER_CODETTA);
             sp->addObject(4, mk, tr("Codetta"));
 
             mk = new Marker(gscore);
-            mk->setText("Fine");
-            mk->setLabel("fine");
-            mk->setRXoff(100.0);                  // move to end of measure
+            mk->setMarkerType(MARKER_FINE);
             sp->addObject(5, mk, tr("Fine"));
 
             Jump* jp = new Jump(gscore);
-            jp->setText("D.C.");
-            jp->setJumpTo("start");
-            jp->setPlayUntil("end");
+            jp->setJumpType(JUMP_DC);
             sp->addObject(6, jp, tr("da Capo"));
 
             jp = new Jump(gscore);
-            jp->setText("D.C. al Fine");
-            jp->setJumpTo("start");
-            jp->setPlayUntil("fine");
+            jp->setJumpType(JUMP_DC_AL_FINE);
             sp->addObject(7, jp, tr("da Capo al Fine"));
 
             jp = new Jump(gscore);
-            jp->setText("D.C. al Coda");
-            jp->setJumpTo("start");
-            jp->setPlayUntil("coda");
-            jp->setContinueAt("coda");
+            jp->setJumpType(JUMP_DC_AL_CODA);
             sp->addObject(8, jp, tr("da Capo al Coda"));
 
             jp = new Jump(gscore);
-            jp->setText("D.S. al Coda");
-            jp->setJumpTo("segno");
-            jp->setPlayUntil("coda");
-            jp->setContinueAt("coda");
+            jp->setJumpType(JUMP_DS_AL_CODA);
             sp->addObject(9, jp, tr("D.S al Coda"));
 
             jp = new Jump(gscore);
-            jp->setText("D.S. al Fine");
-            jp->setJumpTo("segno");
-            jp->setPlayUntil("fine");
+            jp->setJumpType(JUMP_DS_AL_FINE);
             sp->addObject(10, jp, tr("D.S al Fine"));
 
 //                  "dalSegno",

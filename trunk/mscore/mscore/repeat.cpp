@@ -153,6 +153,72 @@ Marker::Marker(Score* s)
       }
 
 //---------------------------------------------------------
+//   setMarkerType
+//---------------------------------------------------------
+
+void Marker::setMarkerType(int t)
+      {
+      switch(t) {
+            case MARKER_SEGNO:
+                  setHtml(symToHtml(symbols[segnoSym]));
+                  setLabel("segno");
+                  setRXoff(0.0);                  // move to start of measure
+                  break;
+
+            case MARKER_CODA:
+                  setHtml(symToHtml(symbols[codaSym]));
+                  setLabel("coda");
+                  setRXoff(0.0);                  // move to start of measure
+                  break;
+
+            case MARKER_VARCODA:
+                  setHtml(symToHtml(symbols[varcodaSym]));
+                  setLabel("varcoda");
+                  setRXoff(0.0);                  // move to start of measure
+                  break;
+
+            case MARKER_CODETTA:
+                  setHtml(symToHtml(symbols[codaSym], symbols[codaSym]));
+                  setLabel("codetta");
+                  setRXoff(0.0);                  // move to start of measure
+                  break;
+
+            case MARKER_FINE:
+                  setText("Fine");
+                  setLabel("fine");
+                  setRXoff(100.0);                  // move to end of measure
+                  break;
+
+            case MARKER_USER:
+                  break;
+
+            default:
+                  printf("unknown marker type %d\n", t);
+                  break;
+            }
+      }
+
+//---------------------------------------------------------
+//   markerType
+//---------------------------------------------------------
+
+int Marker::markerType() const
+      {
+      if (_label == "segno")
+            return MARKER_SEGNO;
+      else if (_label == "coda")
+            return MARKER_CODA;
+      else if (_label == "varcoda")
+            return MARKER_VARCODA;
+      else if (_label == "codetta")
+            return MARKER_CODETTA;
+      else if (_label == "fine")
+            return MARKER_FINE;
+      else
+            return MARKER_USER;
+      }
+
+//---------------------------------------------------------
 //   read
 //---------------------------------------------------------
 
@@ -215,6 +281,73 @@ Jump::Jump(Score* s)
    : Text(s)
       {
       setSubtype(TEXT_REPEAT);
+      }
+
+//---------------------------------------------------------
+//   setJumpType
+//---------------------------------------------------------
+
+void Jump::setJumpType(int t)
+      {
+      switch(t) {
+            case JUMP_DC:
+                  setText("D.C.");
+                  setJumpTo("start");
+                  setPlayUntil("end");
+                  break;
+
+            case JUMP_DC_AL_FINE:
+                  setText("D.C. al Fine");
+                  setJumpTo("start");
+                  setPlayUntil("fine");
+                  break;
+
+            case JUMP_DC_AL_CODA:
+                  setText("D.C. al Coda");
+                  setJumpTo("start");
+                  setPlayUntil("coda");
+                  setContinueAt("coda");
+                  break;
+
+            case JUMP_DS_AL_CODA:
+                  setText("D.S. al Coda");
+                  setJumpTo("segno");
+                  setPlayUntil("coda");
+                  setContinueAt("coda");
+                  break;
+
+            case JUMP_DS_AL_FINE:
+                  setText("D.S. al Fine");
+                  setJumpTo("segno");
+                  setPlayUntil("fine");
+                  break;
+
+            case JUMP_USER:
+                  break;
+
+            default:
+                  printf("unknown jump type\n");
+                  break;
+            }
+      }
+
+//---------------------------------------------------------
+//   jumpType
+//---------------------------------------------------------
+
+int Jump::jumpType() const
+      {
+      if (_jumpTo == "start" && _playUntil == "end" && _continueAt == "")
+            return JUMP_DC;
+      else if (_jumpTo == "start" && _playUntil == "fine" && _continueAt == "")
+            return JUMP_DC_AL_FINE;
+      else if (_jumpTo == "start" && _playUntil == "coda" && _continueAt == "coda")
+            return JUMP_DC_AL_CODA;
+      else if (_jumpTo == "segno" && _playUntil == "coda" && _continueAt == "coda")
+            return JUMP_DS_AL_CODA;
+      else if (_jumpTo == "segno" && _playUntil == "fine" && _continueAt == "")
+            return JUMP_DS_AL_FINE;
+      return JUMP_USER;
       }
 
 //---------------------------------------------------------

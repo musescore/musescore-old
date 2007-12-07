@@ -43,6 +43,15 @@ class RepeatMeasure : public Element {
       virtual void read(QDomElement);
       };
 
+enum {
+      MARKER_SEGNO,
+      MARKER_CODA,
+      MARKER_VARCODA,
+      MARKER_CODETTA,
+      MARKER_FINE,
+      MARKER_USER
+      };
+
 //---------------------------------------------------------
 //   Marker
 //---------------------------------------------------------
@@ -56,6 +65,9 @@ class Marker : public Text {
    public:
       Marker(Score*);
 
+      void setMarkerType(int t);
+      int markerType() const;
+
       virtual Marker* clone() const    { return new Marker(*this); }
       virtual ElementType type() const { return MARKER; }
 
@@ -67,6 +79,15 @@ class Marker : public Text {
 
       QString label() const            { return _label; }
       void setLabel(const QString& s)  { _label = s; }
+      };
+
+enum {
+      JUMP_DC,
+      JUMP_DC_AL_FINE,
+      JUMP_DC_AL_CODA,
+      JUMP_DS_AL_CODA,
+      JUMP_DS_AL_FINE,
+      JUMP_USER
       };
 
 //---------------------------------------------------------
@@ -84,6 +105,9 @@ class Jump : public Text {
 
    public:
       Jump(Score*);
+
+      void setJumpType(int t);
+      int jumpType() const;
 
       virtual Jump* clone() const      { return new Jump(*this); }
       virtual ElementType type() const { return JUMP; }
