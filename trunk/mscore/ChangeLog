@@ -1,3 +1,6 @@
+9.12.7 (lv)
+      - MusicXML import/export of Jump and Marker, simple cases work OK,
+        complicated cases still need work
 7.12.7 (ws)
       - added portuguese translations from Luis Pato
 6.12.7 (ws)

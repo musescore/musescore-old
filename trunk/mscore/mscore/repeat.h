@@ -49,6 +49,7 @@ enum {
       MARKER_VARCODA,
       MARKER_CODETTA,
       MARKER_FINE,
+      MARKER_TOCODA,
       MARKER_USER
       };
 
@@ -87,6 +88,7 @@ enum {
       JUMP_DC_AL_CODA,
       JUMP_DS_AL_CODA,
       JUMP_DS_AL_FINE,
+      JUMP_DS,
       JUMP_USER
       };
 

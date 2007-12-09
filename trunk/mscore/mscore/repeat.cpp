@@ -167,7 +167,7 @@ void Marker::setMarkerType(int t)
 
             case MARKER_CODA:
                   setHtml(symToHtml(symbols[codaSym]));
-                  setLabel("coda");
+                  setLabel("codab");
                   setRXoff(0.0);                  // move to start of measure
                   break;
 
@@ -189,6 +189,12 @@ void Marker::setMarkerType(int t)
                   setRXoff(100.0);                  // move to end of measure
                   break;
 
+            case MARKER_TOCODA:
+                  setText("To Coda");
+                  setLabel("coda");
+                  setRXoff(100.0);                  // move to end of measure
+                  break;
+
             case MARKER_USER:
                   break;
 
@@ -206,7 +212,7 @@ int Marker::markerType() const
       {
       if (_label == "segno")
             return MARKER_SEGNO;
-      else if (_label == "coda")
+      else if (_label == "codab")
             return MARKER_CODA;
       else if (_label == "varcoda")
             return MARKER_VARCODA;
@@ -214,6 +220,8 @@ int Marker::markerType() const
             return MARKER_CODETTA;
       else if (_label == "fine")
             return MARKER_FINE;
+      else if (_label == "coda")
+            return MARKER_TOCODA;
       else
             return MARKER_USER;
       }
@@ -306,20 +314,26 @@ void Jump::setJumpType(int t)
                   setText("D.C. al Coda");
                   setJumpTo("start");
                   setPlayUntil("coda");
-                  setContinueAt("coda");
+                  setContinueAt("codab");
                   break;
 
             case JUMP_DS_AL_CODA:
                   setText("D.S. al Coda");
                   setJumpTo("segno");
                   setPlayUntil("coda");
-                  setContinueAt("coda");
+                  setContinueAt("codab");
                   break;
 
             case JUMP_DS_AL_FINE:
                   setText("D.S. al Fine");
                   setJumpTo("segno");
                   setPlayUntil("fine");
+                  break;
+
+            case JUMP_DS:
+                  setText("D.S.");
+                  setJumpTo("segno");
+                  setPlayUntil("end");
                   break;
 
             case JUMP_USER:
@@ -341,12 +355,14 @@ int Jump::jumpType() const
             return JUMP_DC;
       else if (_jumpTo == "start" && _playUntil == "fine" && _continueAt == "")
             return JUMP_DC_AL_FINE;
-      else if (_jumpTo == "start" && _playUntil == "coda" && _continueAt == "coda")
+      else if (_jumpTo == "start" && _playUntil == "coda" && _continueAt == "codab")
             return JUMP_DC_AL_CODA;
-      else if (_jumpTo == "segno" && _playUntil == "coda" && _continueAt == "coda")
+      else if (_jumpTo == "segno" && _playUntil == "coda" && _continueAt == "codab")
             return JUMP_DS_AL_CODA;
       else if (_jumpTo == "segno" && _playUntil == "fine" && _continueAt == "")
             return JUMP_DS_AL_FINE;
+      else if (_jumpTo == "segno" && _playUntil == "end" && _continueAt == "")
+            return JUMP_DS;
       return JUMP_USER;
       }
 

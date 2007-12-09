@@ -79,6 +79,9 @@ rwtestAllXml() {
       rwtestXml testAccidentals1.xml
       rwtestXml testAccidentals2.xml
       rwtestXml testBarStyles.xml
+      rwtestXml testDCalCoda.xml
+      rwtestXml testDCalFine.xml
+      rwtestXml testDalSegno.xml
       rwtestXml testDirections1.xml
       rwtestXml testDynamics1.xml
       rwtestXml testDynamics2.xml
@@ -89,7 +92,6 @@ rwtestAllXml() {
       rwtestXml testNoteAttributes1.xml
       rwtestXml testNoteAttributes2.xml
       rwtestXml testNotesRests1.xml
-      rwtestXml testRepeats1.xml
       rwtestXml testSystemBrackets1.xml
       rwtestXml testSystemBrackets2.xml
       rwtestXml testTimesig1.xml
