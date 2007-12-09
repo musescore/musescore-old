@@ -1784,57 +1784,67 @@ void ExportMusicXml::lyrics(const LyricsList* ll)
       }
 
 //---------------------------------------------------------
-//   directionRepeat
+//   directionJump -- write jump
 //---------------------------------------------------------
 
-// LVIFIX: TODO tocoda is missing
 // LVIFIX: TODO coda and segno should be numbered uniquely
-// LVIFIX: TODO RepeatAlSegno is missing
 
-#if 0 // WS-REPEAT
-static void directionRepeat(Xml& xml, int st)
+static void directionJump(Xml& xml, Jump* jp)
       {
+      int jtp = jp->jumpType();
       QString words = "";
       QString type  = "";
       QString sound = "";
-      if (st == RepeatCoda) {
-            type = "coda";
-            sound = "coda=\"1\"";
-            }
-      else if (st == RepeatSegno) {
-            type = "segno";
-            sound = "segno=\"1\"";
-            }
-      else if (st == RepeatDacapo) {
-            words = "D.C.";
+      if (jtp == JUMP_DC) {
+            if (jp->getText() == "")
+                  words = "D.C.";
+            else
+                  words = jp->getText();
             sound = "dacapo=\"yes\"";
             }
-      else if (st == RepeatDacapoAlFine) {
-            words = "D.C. al Fine";
+      else if (jtp == JUMP_DC_AL_FINE) {
+            if (jp->getText() == "")
+                  words = "D.C. al Fine";
+            else
+                  words = jp->getText();
             sound = "dacapo=\"yes\"";
             }
-      else if (st == RepeatDacapoAlCoda) {
-            words = "D.C. al Coda";
+      else if (jtp == JUMP_DC_AL_CODA) {
+            if (jp->getText() == "")
+                  words = "D.C. al Coda";
+            else
+                  words = jp->getText();
             sound = "dacapo=\"yes\"";
             }
-      else if (st == RepeatDalSegno) {
+      else if (jtp == JUMP_DS_AL_CODA) {
+            if (jp->getText() == "")
+                  words = "D.S. al Coda";
+            else
+                  words = jp->getText();
+            if (jp->jumpTo() == "")
+                  sound = "dalsegno=\"1\"";
+            else
+                  sound = "dalsegno=\"" + jp->jumpTo() + "\"";
+            }
+      else if (jtp == JUMP_DS_AL_FINE) {
+            if (jp->getText() == "")
+                  words = "D.S. al Fine";
+            else
+                  words = jp->getText();
+            if (jp->jumpTo() == "")
+                  sound = "dalsegno=\"1\"";
+            else
+                  sound = "dalsegno=\"" + jp->jumpTo() + "\"";
+            }
+      else if (jtp == JUMP_DS) {
             words = "D.S.";
-            sound = "dalsegno=\"1\"";
-            }
-      else if (st == RepeatDalSegnoAlFine) {
-            words = "D.S. al Fine";
-            sound = "dalsegno=\"1\"";
-            }
-      else if (st == RepeatDalSegnoAlCoda) {
-            words = "D.S. al Coda";
-            sound = "dalsegno=\"1\"";
-            }
-      else if (st == RepeatFine) {
-            words = "Fine";
-            sound = "fine=\"yes\"";
+            if (jp->jumpTo() == "")
+                  sound = "dalsegno=\"1\"";
+            else
+                  sound = "dalsegno=\"" + jp->jumpTo() + "\"";
             }
       else
-            printf("repeat subtype=%d not implemented\n", st);
+            printf("jump type=%d not implemented\n", jtp);
       if (sound != "") {
             xml.stag("direction placement=\"above\"");
             xml.stag("direction-type");
@@ -1845,61 +1855,132 @@ static void directionRepeat(Xml& xml, int st)
             xml.etag();
             }
       }
-#endif
 
 //---------------------------------------------------------
-//  repeatAtMeasureStart
+//   directionMarker -- write marker
+//---------------------------------------------------------
+
+static void directionMarker(Xml& xml, Marker* m)
+      {
+      int mtp = m->markerType();
+      QString words = "";
+      QString type  = "";
+      QString sound = "";
+      if (mtp == MARKER_CODA) {
+            type = "coda";
+            if (m->label() == "")
+                  sound = "coda=\"1\"";
+            else
+                  // LVIFIX hack: force label to "coda" to match to coda label
+                  // sound = "coda=\"" + m->label() + "\"";
+                  sound = "coda=\"coda\"";
+            }
+      else if (mtp == MARKER_SEGNO) {
+            type = "segno";
+            if (m->label() == "")
+                  sound = "segno=\"1\"";
+            else
+                  sound = "segno=\"" + m->label() + "\"";
+            }
+      else if (mtp == MARKER_FINE) {
+            words = "Fine";
+            sound = "fine=\"yes\"";
+            }
+      else if (mtp == MARKER_TOCODA) {
+            if (m->getText() == "")
+                  words = "To Coda";
+            else
+                  words = m->getText();
+            if (m->label() == "")
+                  sound = "tocoda=\"1\"";
+            else
+                  sound = "tocoda=\"" + m->label() + "\"";
+            }
+      else
+            printf("marker type=%d not implemented\n", mtp);
+      if (sound != "") {
+            xml.stag("direction placement=\"above\"");
+            xml.stag("direction-type");
+            if (type != "") xml.tagE(type);
+            if (words != "") xml.tag("words", words);
+            xml.etag();
+            if (sound != "") xml.tagE(QString("sound ") + sound);
+            xml.etag();
+            }
+      }
+
+//---------------------------------------------------------
+//  repeatAtMeasureStart -- write repeats at begin of measure
 //---------------------------------------------------------
 
 static void repeatAtMeasureStart(Xml& xml, Attributes& attr, Measure* m)
       {
-#if 0 // WS-REPEAT
-      // loop over all measure relative elements in this measure looking for REPEATS
+      // loop over all measure relative elements in this measure
+      // looking for JUMPS and MARKERS
       for (ciElement ci = m->el()->begin(); ci != m->el()->end(); ++ci) {
             Element* dir = *ci;
-            if (dir->type() == REPEAT) {
-                  // filter out the repeats at measure start
-                  int st = dir->subtype();
-                  if (   st == RepeatSegno
+            int tp = dir->type();
+            if (tp == JUMP) {
+                  // note: all jumps are handled at measure stop
+                  /*
+                  Jump* jp = (Jump*) dir;
+                  printf("repeatAtMeasureStart: jump st=%d jumpType=%d"
+                         " getText=%s jumpTo=%s playUntil=%s continueAt=%s\n",
+                         jp->subtype(), jp->jumpType(),
+                         jp->getText().toLatin1().data(),
+                         jp->jumpTo().toLatin1().data(),
+                         jp->playUntil().toLatin1().data(),
+                         jp->continueAt().toLatin1().data());
+                  */
+                  }
+            else if (tp == MARKER) {
+                  // filter out the markers at measure start
+                  Marker* m = (Marker*) dir;
+                  int mtp = m->markerType();
+                  /*
+                  printf("repeatAtMeasureStart: marker st=%d markerType=%d"
+                         " getText=%s label=%s\n",
+                         m->subtype(), mtp,
+                         m->getText().toLatin1().data(),
+                         m->label().toLatin1().data());
+                  */
+                  if (   mtp == MARKER_SEGNO
+                      || mtp == MARKER_CODA
                      ) {
                         attr.doAttr(xml, false);
-                        directionRepeat(xml, st);
+                        directionMarker(xml, m);
                         }
                   }
             }
-#endif
       }
 
 //---------------------------------------------------------
-//  repeatAtMeasureStop
+//  repeatAtMeasureStop -- write repeats at end of measure
 //---------------------------------------------------------
 
 static void repeatAtMeasureStop(Xml& xml, Measure* m)
       {
-#if 0 // WS-REPEAT
-      // loop over all measure relative elements in this measure looking for REPEATS
+      // loop over all measure relative elements in this measure
+      // looking for JUMPS and MARKERS
       for (ciElement ci = m->el()->begin(); ci != m->el()->end(); ++ci) {
             Element* dir = *ci;
-            if (dir->type() == REPEAT) {
-                  // filter out the repeats at measure stop
-                  int st = dir->subtype();
-                  if (   st == RepeatCoda
-                      || st == RepeatVarcoda
-                      || st == RepeatCodetta
-                      || st == RepeatDacapo
-                      || st == RepeatDacapoAlFine
-                      || st == RepeatDacapoAlCoda
-                      || st == RepeatDalSegno
-                      || st == RepeatDalSegnoAlFine
-                      || st == RepeatDalSegnoAlCoda
-                      || st == RepeatAlSegno
-                      || st == RepeatFine
-//                      || st == Repeat
-                     )
-                        directionRepeat(xml, st);
+            int tp = dir->type();
+            if (tp == JUMP) {
+                  // all jumps are handled at measure stop
+                  Jump* jp = (Jump*) dir;
+                  directionJump(xml, jp);
+                  }
+            else if (tp == MARKER) {
+                  // filter out the markers at measure stop
+                  Marker* m = (Marker*) dir;
+                  int mtp = m->markerType();
+                  if (   mtp == MARKER_FINE
+                      || mtp == MARKER_TOCODA
+                     ) {
+                        directionMarker(xml, m);
+                        }
                   }
             }
-#endif
       }
 
 //---------------------------------------------------------
@@ -2105,6 +2186,7 @@ foreach(Element* el, *(score->gel())) {
                   if (mb->type() != MEASURE)
                         continue;
                   Measure* m = (Measure*)mb;
+                  // printf("measureNo=%d\n", measureNo);
                   // pickup and other irregular measures need special care
                   if ((irregularMeasureNo + measureNo) == 2 && m->irregular()) {
                         xml.stag("measure number=\"0\" implicit=\"yes\"");

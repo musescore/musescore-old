@@ -458,7 +458,14 @@ void MuseScore::showPalette(bool visible)
             jp->setJumpType(JUMP_DS_AL_FINE);
             sp->addObject(10, jp, tr("D.S al Fine"));
 
-//                  "dalSegno",
+            jp = new Jump(gscore);
+            jp->setJumpType(JUMP_DS);
+            sp->addObject(11, jp, tr("D.S"));
+
+            mk = new Marker(gscore);
+            mk->setMarkerType(MARKER_TOCODA);
+            sp->addObject(12, mk, tr("To Coda"));
+
 //                  "alSegno"
 
             paletteBox->addPalette(tr("Repeats"), sp);

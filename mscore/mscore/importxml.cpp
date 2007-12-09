@@ -975,9 +975,7 @@ void MusicXml::direction(Measure* measure, int staff, QDomElement e)
                   }
             else if (e.tagName() == "sound") {
                   // attr: dynamics, tempo
-// LVIFIX: TODO tocoda is missing
 // LVIFIX: TODO coda and segno should be numbered uniquely
-// LVIFIX: TODO RepeatAlSegno is missing
                   sndCapo = e.attribute("capo");
                   sndCoda = e.attribute("coda");
                   sndDacapo = e.attribute("dacapo");
@@ -1032,13 +1030,15 @@ void MusicXml::direction(Measure* measure, int staff, QDomElement e)
       QRegExp dalSegnoAlFine("d\\.? *s\\.? *al *fine|d[ae]l *segno *al *fine");
       QRegExp dalSegnoAlCoda("d\\.? *s\\.? *al *coda|d[ae]l *segno *al *coda");
       QRegExp fine("fine");
+      QRegExp toCoda("to *coda");
       if (daCapo.exactMatch(lowerTxt)) repeat = "daCapo";
       if (daCapoAlFine.exactMatch(lowerTxt)) repeat = "daCapoAlFine";
-      if (daCapoAlCoda.exactMatch(lowerTxt)) repeat = "DaCapoAlCoda";
+      if (daCapoAlCoda.exactMatch(lowerTxt)) repeat = "daCapoAlCoda";
       if (dalSegno.exactMatch(lowerTxt)) repeat = "dalSegno";
       if (dalSegnoAlFine.exactMatch(lowerTxt)) repeat = "dalSegnoAlFine";
       if (dalSegnoAlCoda.exactMatch(lowerTxt)) repeat = "dalSegnoAlCoda";
       if (fine.exactMatch(lowerTxt)) repeat = "fine";
+      if (toCoda.exactMatch(lowerTxt)) repeat = "toCoda";
       // If that did not work, try to recognize a sound attribute
       if (repeat == "" && sndCoda != "") repeat = "coda";
       if (repeat == "" && sndDacapo != "") repeat = "daCapo";
@@ -1056,30 +1056,66 @@ void MusicXml::direction(Measure* measure, int staff, QDomElement e)
 */
 
       if (repeat != "") {
-            if (repeat == "fine") {
+            if (repeat == "segno") {
                   Marker* m = new Marker(score);
-                  m->setLabel("fine");
-                  m->setText("Fine");
+                  m->setMarkerType(MARKER_SEGNO);
                   m->setStaff(score->staff(staff + rstaff));
                   measure->add(m);
                   }
-            else if (repeat == "segno") {
+            else if (repeat == "coda") {
                   Marker* m = new Marker(score);
-                  m->setLabel("segno");
-                  m->setHtml(symToHtml(symbols[segnoSym]));
+                  m->setMarkerType(MARKER_CODA);
+                  m->setStaff(score->staff(staff + rstaff));
+                  measure->add(m);
+                  }
+            else if (repeat == "fine") {
+                  Marker* m = new Marker(score);
+                  m->setMarkerType(MARKER_FINE);
+                  m->setStaff(score->staff(staff + rstaff));
+                  measure->add(m);
+                  }
+            else if (repeat == "toCoda") {
+                  Marker* m = new Marker(score);
+                  m->setMarkerType(MARKER_TOCODA);
                   m->setStaff(score->staff(staff + rstaff));
                   measure->add(m);
                   }
             else if (repeat == "daCapo") {
                   Jump* jp = new Jump(score);
-                  jp->setJumpTo("start");
-                  jp->setPlayUntil("end");
+                  jp->setJumpType(JUMP_DC);
                   jp->setStaff(score->staff(staff + rstaff));
                   measure->add(jp);
                   }
-#if 0 // WS-REPEAT
-            implement more
-#endif
+            else if (repeat == "daCapoAlCoda") {
+                  Jump* jp = new Jump(score);
+                  jp->setJumpType(JUMP_DC_AL_CODA);
+                  jp->setStaff(score->staff(staff + rstaff));
+                  measure->add(jp);
+                  }
+            else if (repeat == "daCapoAlFine") {
+                  Jump* jp = new Jump(score);
+                  jp->setJumpType(JUMP_DC_AL_FINE);
+                  jp->setStaff(score->staff(staff + rstaff));
+                  measure->add(jp);
+                  }
+            else if (repeat == "dalSegno") {
+                  Jump* jp = new Jump(score);
+                  jp->setJumpType(JUMP_DS);
+                  jp->setStaff(score->staff(staff + rstaff));
+                  measure->add(jp);
+                  }
+            else if (repeat == "dalSegnoAlCoda") {
+                  Jump* jp = new Jump(score);
+                  jp->setJumpType(JUMP_DS_AL_CODA);
+                  jp->setStaff(score->staff(staff + rstaff));
+                  measure->add(jp);
+                  }
+            else if (repeat == "dalSegnoAlFine") {
+                  Jump* jp = new Jump(score);
+                  jp->setJumpType(JUMP_DS_AL_FINE);
+                  jp->setStaff(score->staff(staff + rstaff));
+                  measure->add(jp);
+                  }
             }
 
       if (dirType == "words" && (txt != "" || tempo != "")) {
