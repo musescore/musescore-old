@@ -1,5 +1,4 @@
 <?php
-  $lang="de";
   $file="volta.php";
   require("header.html");
   ?>

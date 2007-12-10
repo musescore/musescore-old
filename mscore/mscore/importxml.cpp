@@ -58,7 +58,7 @@
 #include "tremolo.h"
 #include "box.h"
 #include "repeat.h"
-#include "qregexp.h"
+// #include "qregexp.h"
 #include "ottava.h"
 
 //---------------------------------------------------------

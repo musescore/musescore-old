@@ -1,5 +1,4 @@
 <?php
-  $lang="de";
   $file="arpeggios.php";
   require("header.html");
   ?>

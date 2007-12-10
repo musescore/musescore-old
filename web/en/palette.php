@@ -1,5 +1,4 @@
 <?php
-  $lang="en";
   $file="palette.php";
   require("header.html");
   ?>

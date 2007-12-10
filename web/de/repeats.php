@@ -1,5 +1,4 @@
 <?php
-  $lang="de";
   $file="repeats.php";
   require("header.html");
   ?>

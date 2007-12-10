@@ -1,5 +1,4 @@
 <?php
-  $lang="de";
   $file="color.php";
   require("header.html");
   ?>

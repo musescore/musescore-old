@@ -42,7 +42,7 @@ bool useALSA = false, useJACK = false, usePortaudio = false;
 
 QString appStyleSheet(
       "Pad *             { background-color: rgb(220, 220, 220) }\n"
-      "PaletteBoxButton  { background-color: rgb(215, 215, 215) }\n"
+      "PaletteBoxButton  { background-color: rgb(215, 215, 215); font-size: 8pt; }\n"
       "PaletteBox        { background-color: rgb(230, 230, 230) }\n"
       "PlayPanel QLabel#posLabel { font-size: 28pt; font-family: \"Arial black\" }\n"
       "PlayPanel QLabel#tempoLabel { font-size: 10pt; font-family: \"Arial black\" }\n"

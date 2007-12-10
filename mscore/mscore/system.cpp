@@ -229,8 +229,9 @@ void System::layout(ScoreLayout* layout)
             delete barLine;
             barLine = 0;
             }
-      if (barLine)
-            barLine->setPos(_leftMargin, 0);
+      if (barLine) {
+            barLine->setPos(_leftMargin, score()->style()->barWidth.point() * .25);
+            }
 
       //---------------------------------------------------
       //  layout brackets
@@ -349,13 +350,18 @@ void System::layout2(ScoreLayout* layout)
             }
       qreal systemHeight = staff(staves-1)->bbox().bottom();
       setHeight(systemHeight);
+      foreach(MeasureBase* m, ml) {
+            if (m->type() == MEASURE || m->type() == HBOX)
+                  m->setHeight(systemHeight);
+            }
 
       double staffY[staves];
       for (int i = 0; i < staves; ++i)
             staffY[i] = staff(i)->bbox().y();
 
       if (barLine) {
-            barLine->setLen(Spatium(systemHeight / _spatium));
+            Spatium lw = score()->style()->barWidth;
+            barLine->setLen(Spatium(systemHeight / _spatium) - lw * .5);
             barLine->layout(layout);
             }
 

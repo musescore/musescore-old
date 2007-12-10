@@ -1,5 +1,4 @@
 <?php
-  $lang="de";
   $file="barlines.php";
   require("header.html");
   ?>

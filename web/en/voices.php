@@ -1,5 +1,4 @@
 <?php
-  $lang="en";
   $file="voices.php";
   require("header.html");
   ?>

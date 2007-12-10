@@ -1,5 +1,4 @@
 <?php
-  $lang="en";
   $file="beams.php";
   require("header.html");
   ?>

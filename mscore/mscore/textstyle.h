@@ -55,6 +55,7 @@ class TextStyleDialog : public QDialog, private Ui::TextStyleBase {
       void alignCenterV();
       void setUnitMM();
       void setUnitSpace();
+      void selectBorderColor();
 
    signals:
 

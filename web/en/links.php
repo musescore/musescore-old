@@ -1,5 +1,4 @@
 <?php
-  $lang="en";
   $file="links.php";
   require("header.html");
   ?>
@@ -29,6 +28,10 @@ the Sounding Edge: Music Notation Software, the Final Installment</a>
      Common Music Notation</a></li>
 <li><a href="http://rosegardenmusic.com/">Rosegarden</a>
       Midi/Audio sequencer and musical notation editor</li>
+<li><a href="http://www.pjb.com.au/muscript/index.html">Muscript</a> is
+      a language for typesetting music, and a Perl script which translates
+      this language either into PostScript, or into Encapsulated PostScript,
+      or into MIDI, or into MusicXML.</li>
 </ul>
 
 <br>

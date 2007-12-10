@@ -1,5 +1,4 @@
 <?php
-  $lang="de";
   $file="pictures.php";
   require("header.html");
   ?>

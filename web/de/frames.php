@@ -1,5 +1,4 @@
 <?php
-  $lang="de";
   $file="frames.php";
   require("header.html");
   ?>

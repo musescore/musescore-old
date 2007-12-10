@@ -1,5 +1,4 @@
 <?php
-  $lang="de";
   $file="clefs.php";
   require("header.html");
   ?>

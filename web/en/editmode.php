@@ -1,5 +1,4 @@
 <?php
-  $lang="en";
   $file="editmode.php";
   require("header.html");
   ?>

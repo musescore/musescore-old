@@ -709,13 +709,7 @@ PaletteBoxButton::PaletteBoxButton(QWidget* w, QWidget* parent)
 void PaletteBoxButton::paintEvent(QPaintEvent* e)
       {
       QPushButton::paintEvent(e);
-      QPixmap pm;
-      if (isChecked()) {
-            pm = QPixmap(":/data/minus.svg");
-            }
-      else {
-            pm = QPixmap(":/data/plus.svg");
-            }
+      QPixmap pm = QPixmap(isChecked() ? ":/data/minus.svg" : ":/data/plus.svg");
       int x = 5;
       int y = (height() - pm.height()) / 2;
       QPainter p(this);

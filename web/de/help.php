@@ -1,5 +1,4 @@
 <?php
-  $lang="de";
   $file="help.php";
   require("header.html");
   ?>

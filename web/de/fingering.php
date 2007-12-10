@@ -1,5 +1,4 @@
 <?php
-  $lang="de";
   $file="fingering.php";
   require("header.html");
   ?>

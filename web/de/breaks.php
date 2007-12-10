@@ -1,5 +1,4 @@
 <?php
-  $lang="de";
   $file="breaks.php";
   require("header.html");
   ?>

@@ -1,5 +1,4 @@
 <?php
-  $lang="en";
   $file="stretch.php";
   require("header.html");
   ?>

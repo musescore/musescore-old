@@ -12,8 +12,8 @@ set(CMAKE_FIND_ROOT_PATH_MODE_PROGRAM NEVER)
 set(CMAKE_FIND_ROOT_PATH_MODE_LIBRARY ONLY)
 set(CMAKE_FIND_ROOT_PATH_MODE_INCLUDE ONLY)
 
-set (QT_INCLUDE_DIR "/home/ws/.wine/drive_c/Qt/4.3.1/include")
-set (QT_LIBRARY_DIR "/home/ws/.wine/drive_c/Qt/4.3.1/lib")
+set (QT_INCLUDE_DIR "/home/ws/.wine/drive_c/Qt/4.3.3/include")
+set (QT_LIBRARY_DIR "/home/ws/.wine/drive_c/Qt/4.3.3/lib")
 set (QT_mingw_LIBRARIES QtCore4 QtGui4 QtXml4 QtSvg4)
 
 set (WIN32 ON)

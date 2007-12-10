@@ -1956,6 +1956,12 @@ Element* Canvas::elementAt(const QPointF& p)
             return 0;
       qSort(el.begin(), el.end(), elementLower);
 
+#if 0
+      printf("elementAt\n");
+      foreach(const Element* e, el)
+            printf("  %s %d\n", e->name(), e->selected());
+#endif
+
       // if p hit more than one element, give back
       // the element after the selected one;
 

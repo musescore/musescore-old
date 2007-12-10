@@ -1,5 +1,4 @@
 <?php
-  $lang="de";
   $file="keys.php";
   require("header.html");
   ?>

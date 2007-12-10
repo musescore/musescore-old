@@ -667,7 +667,7 @@ QList<System*> ScoreLayout::layoutSystemRow(qreal x, qreal y, qreal rowWidth, bo
 
             foreach(MeasureBase* mb, system->measures()) {
                   mb->setPos(pos);
-                  double ww;
+                  double ww = 0.0;
                   if (mb->type() == MEASURE) {
                         Measure* m    = (Measure*)mb;
                         double weight = m->tickLen() * m->userStretch();

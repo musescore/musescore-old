@@ -1,5 +1,4 @@
 <?php
-  $lang="de";
   $file="undo.php";
   require("header.html");
   ?>

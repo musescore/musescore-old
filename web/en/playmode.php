@@ -1,5 +1,4 @@
 <?php
-  $lang="en";
   $file="playmode.php";
   require("header.html");
   ?>

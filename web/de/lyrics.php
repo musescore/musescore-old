@@ -1,5 +1,4 @@
 <?php
-  $lang="de";
   $file="lyrics.php";
   require("header.html");
   ?>

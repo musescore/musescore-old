@@ -1,5 +1,4 @@
 <?php
-  $lang="de";
   $file="tuplets.php";
   require("header.html");
   ?>

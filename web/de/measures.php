@@ -1,5 +1,4 @@
 <?php
-  $lang="de";
   $file="measures.php";
   require("header.html");
   ?>
