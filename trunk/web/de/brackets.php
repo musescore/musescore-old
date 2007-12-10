@@ -1,5 +1,4 @@
 <?php
-  $lang="de";
   $file="brackets.php";
   require("header.html");
   ?>

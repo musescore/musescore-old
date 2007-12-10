@@ -1,5 +1,4 @@
 <?php
-  $lang="en";
   $file="breath.php";
   require("header.html");
   ?>

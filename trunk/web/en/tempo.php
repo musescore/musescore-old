@@ -1,5 +1,4 @@
 <?php
-  $lang="en";
   $file="tempo.php";
   require("header.html");
   ?>

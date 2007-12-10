@@ -1,5 +1,4 @@
 <?php
-  $lang="de";
   $file="excerpts.php";
   require("header.html");
   ?>

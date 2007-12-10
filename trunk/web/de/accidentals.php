@@ -1,5 +1,4 @@
 <?php
-  $lang="de";
   $file="accidentals.php";
   require("header.html");
   ?>

@@ -1,5 +1,4 @@
 <?php
-  $lang="de";
   $file="ties.php";
   require("header.html");
   ?>

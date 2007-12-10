@@ -1,5 +1,4 @@
 <?php
-  $lang="en";
   $file="invisible.php";
   require("header.html");
   ?>

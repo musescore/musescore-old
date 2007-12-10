@@ -97,7 +97,7 @@ add_executable ( mscore
       ${mocs}
       ${PROJECT_BINARY_DIR}/all.h
       ${PROJECT_BINARY_DIR}/all.h.pch
-      ${resource_file}
+#      ${resource_file}
 
       actions.cpp accidental.cpp barline.cpp beam.cpp
       bracket.cpp canvas.cpp chord.cpp chordrest.cpp clef.cpp
@@ -128,7 +128,7 @@ add_executable ( mscore
 if (MINGW)
    add_custom_command(
       OUTPUT ${PROJECT_BINARY_DIR}/resfile.o
-      COMMAND wine windres -o ${PROJECT_BINARY_DIR}/resfile.o mscore.rc
+      COMMAND wine windres -v mscore.rc ${PROJECT_BINARY_DIR}/resfile.o
       DEPENDS ${PROJECT_SOURCE_DIR}/mscore/data/mscore.rc
       WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/mscore/data
       )
@@ -140,7 +140,8 @@ if (MINGW)
    set_target_properties( mscore
       PROPERTIES
          COMPILE_FLAGS "-include ${PROJECT_BINARY_DIR}/all.h ${QT_DEFINITIONS} -DQT_SVG_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_CORE_LIB"
-         LINK_FLAGS "${PROJECT_BINARY_DIR}/resfile.o -mwindows -L /home/ws/.wine/drive_c/Qt/4.3.1/lib -L /home/ws/mscore/portaudio/lib"
+#         LINK_FLAGS "${PROJECT_BINARY_DIR}/resfile.o -mwindows -L /home/ws/.wine/drive_c/Qt/4.3.1/lib -L /home/ws/mscore/portaudio/lib"
+         LINK_FLAGS "-mwindows -L /home/ws/.wine/drive_c/Qt/4.3.3/lib -L /home/ws/mscore/portaudio/lib"
       )
    target_link_libraries(mscore
       fluid
@@ -150,21 +151,21 @@ if (MINGW)
       )
    install_targets ( /bin mscore )
    install_files ( /bin .dll
-      /home/ws/.wine/drive_c/Qt/4.3.1/bin/mingwm10.dll
-      /home/ws/.wine/drive_c/Qt/4.3.1/bin/QtCore4.dll
-      /home/ws/.wine/drive_c/Qt/4.3.1/bin/QtGui4.dll
-      /home/ws/.wine/drive_c/Qt/4.3.1/bin/QtXml4.dll
-      /home/ws/.wine/drive_c/Qt/4.3.1/bin/QtSvg4.dll
+      /home/ws/.wine/drive_c/Qt/4.3.3/bin/mingwm10.dll
+      /home/ws/.wine/drive_c/Qt/4.3.3/bin/QtCore4.dll
+      /home/ws/.wine/drive_c/Qt/4.3.3/bin/QtGui4.dll
+      /home/ws/.wine/drive_c/Qt/4.3.3/bin/QtXml4.dll
+      /home/ws/.wine/drive_c/Qt/4.3.3/bin/QtSvg4.dll
       /home/ws/mscore/portaudio/bin/portaudio.dll
       )
    install_files ( /bin/iconengines .dll
-      /home/ws/.wine/drive_c/Qt/4.3.1/plugins/iconengines/qsvg4.dll
+      /home/ws/.wine/drive_c/Qt/4.3.3/plugins/iconengines/qsvg4.dll
       )
    install_files ( /bin/imageformats .dll
-      /home/ws/.wine/drive_c/Qt/4.3.1/plugins/imageformats/qjpeg4.dll
-      /home/ws/.wine/drive_c/Qt/4.3.1/plugins/imageformats/qmng4.dll
-      /home/ws/.wine/drive_c/Qt/4.3.1/plugins/imageformats/qsvg4.dll
-      /home/ws/.wine/drive_c/Qt/4.3.1/plugins/imageformats/qtiff4.dll
+      /home/ws/.wine/drive_c/Qt/4.3.3/plugins/imageformats/qjpeg4.dll
+      /home/ws/.wine/drive_c/Qt/4.3.3/plugins/imageformats/qmng4.dll
+      /home/ws/.wine/drive_c/Qt/4.3.3/plugins/imageformats/qsvg4.dll
+      /home/ws/.wine/drive_c/Qt/4.3.3/plugins/imageformats/qtiff4.dll
       )
 
 else (MINGW)
@@ -190,7 +191,7 @@ else (MINGW)
             fluid
             awl
             )
-   else (USE_GLOBAL_FLUID)
+   endif (USE_GLOBAL_FLUID)
 
    install( TARGETS mscore RUNTIME DESTINATION bin )
    install( FILES   data/mscore.png DESTINATION /usr/share/pixmaps)

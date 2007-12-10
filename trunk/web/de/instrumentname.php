@@ -1,5 +1,4 @@
 <?php
-  $lang="de";
   $file="instrumentname.php";
   require("header.html");
   ?>

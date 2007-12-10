@@ -1,5 +1,4 @@
 <?php
-  $lang="de";
   $file="textedit.php";
   require("header.html");
   ?>

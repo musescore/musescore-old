@@ -1,5 +1,4 @@
 <?php
-  $lang="de";
   $file="slurs.php";
   require("header.html");
   ?>

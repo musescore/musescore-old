@@ -1,5 +1,4 @@
 <?php
-  $lang="en";
   $file="onews.php";
   require("header.html");
   ?>

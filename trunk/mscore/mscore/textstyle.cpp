@@ -66,6 +66,7 @@ TextStyleDialog::TextStyleDialog(QWidget* parent, Score* score)
       connect(centerV,       SIGNAL(clicked()), SLOT(alignCenterV()));
       connect(unitMM,        SIGNAL(clicked()), SLOT(setUnitMM()));
       connect(unitSpace,     SIGNAL(clicked()), SLOT(setUnitSpace()));
+      connect(borderColorSelect, SIGNAL(clicked()), SLOT(selectBorderColor()));
 
       current = -1;
       textNames->setCurrentItem(textNames->item(0));
@@ -204,6 +205,11 @@ void TextStyleDialog::nameSelected(int n)
       if (i == fonts) {
             printf("font not in list: <%s>\n", s->family.toLower().toLatin1().data());
             }
+      borderColor->setColor(s->frameColor);
+      borderWidth->setValue(s->frameWidth);
+      marginWidth->setValue(s->marginWidth);
+      paddingWidth->setValue(s->paddingWidth);
+      frameRound->setValue(s->frameRound);
       current = n;
       }
 
@@ -268,6 +274,11 @@ void TextStyleDialog::saveStyle(int n)
             s->yoff = val * ((s->offsetType == OFFSET_ABS) ? DPMM : 1.0);
       else
             printf("bad yoff float value\n");
+      s->frameColor   = borderColor->color();
+      s->frameWidth   = borderWidth->value();
+      s->marginWidth  = marginWidth->value();
+      s->paddingWidth = paddingWidth->value();
+      s->frameRound   = frameRound->value();
       }
 
 //---------------------------------------------------------
@@ -291,5 +302,17 @@ void TextStyleDialog::apply()
       cs->setTextStyles(styles);
       cs->setLayoutAll(true);
       cs->endCmd();
+      }
+
+//---------------------------------------------------------
+//   selectBorderColor
+//---------------------------------------------------------
+
+void TextStyleDialog::selectBorderColor()
+      {
+      QColor c = QColorDialog::getColor(borderColor->color(), this);
+      if (c.isValid()) {
+            borderColor->setColor(c);
+            }
       }
 

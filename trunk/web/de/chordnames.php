@@ -1,5 +1,4 @@
 <?php
-  $lang="de";
   $file="chordnames.php";
   require("header.html");
   ?>

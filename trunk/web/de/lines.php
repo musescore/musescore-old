@@ -1,5 +1,4 @@
 <?php
-  $lang="de";
   $file="lines.php";
   require("header.html");
   ?>

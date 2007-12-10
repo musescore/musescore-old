@@ -1,5 +1,4 @@
 <?php
-  $lang="de";
   $file="timesig.php";
   require("header.html");
   ?>

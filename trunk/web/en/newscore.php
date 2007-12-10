@@ -1,5 +1,4 @@
 <?php
-  $lang="en";
   $file="newscore.php";
   require("header.html");
   ?>

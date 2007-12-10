@@ -1,5 +1,4 @@
 <?php
-  $lang="en";
   $file="sounefont.php";
   require("header.html");
   ?>

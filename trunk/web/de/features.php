@@ -1,5 +1,4 @@
 <?php
-  $lang="de";
   $file="features.php";
   require("header.html");
   ?>

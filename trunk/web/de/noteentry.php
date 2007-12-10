@@ -1,5 +1,4 @@
 <?php
-  $lang="de";
   $file="noteentry.php";
   require("header.html");
   ?>

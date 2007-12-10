@@ -1,5 +1,4 @@
 <?php
-  $lang="de";
   $file="dynamics.php";
   require("header.html");
   ?>

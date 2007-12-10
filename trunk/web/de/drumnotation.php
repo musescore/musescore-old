@@ -1,5 +1,4 @@
 <?php
-  $lang="de";
   $file="drumnotation.php";
   require("header.html");
   ?>
