@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<museScore version="1.2">
+<museScore version="1.4">
   <Spatium>1.62</Spatium>
   <Division>480</Division>
   <Mag>1.5</Mag>
@@ -74,10 +74,12 @@
       <bottom-margin>123.457</bottom-margin>
       </page-margins>
     </page-layout>
-  <rights>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+  <rights>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Copyright 2004 W.Schweer&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</rights>
+</style></head><body style=" font-family:'Sans Serif'; font-size:9pt; font-weight:400; font-style:normal;">
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Copyright 2004 W.Schweer</p></body></html>
+    </rights>
   <siglist>
     <sig tick="0">
       <nom>4</nom>
@@ -96,6 +98,7 @@ p, li { white-space: pre-wrap; }
         <key tick="0" idx="0"/>
         </keylist>
       <bracket type="1" span="2"/>
+      <barLineSpan>2</barLineSpan>
       </Staff>
     <Staff>
       <cleflist>
@@ -119,6 +122,7 @@ p, li { white-space: pre-wrap; }
       <keylist>
         <key tick="0" idx="0"/>
         </keylist>
+      <barLineSpan>0</barLineSpan>
       </Staff>
     <name>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><style type="text/css">
