@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<museScore version="1.2">
+<museScore version="1.4">
   <Spatium>1.425</Spatium>
   <Division>480</Division>
   <Mag>0.843308</Mag>
@@ -129,6 +129,7 @@
         <key tick="0" idx="-2"/>
         </keylist>
       <bracket type="1" span="2"/>
+      <barLineSpan>2</barLineSpan>
       </Staff>
     <Staff>
       <cleflist>
@@ -137,6 +138,7 @@
       <keylist>
         <key tick="0" idx="-2"/>
         </keylist>
+      <barLineSpan>0</barLineSpan>
       </Staff>
     <trackName>Piano</trackName>
     <Instrument>

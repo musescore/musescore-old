@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<museScore version="1.2">
+<museScore version="1.4">
   <Spatium>1.76389</Spatium>
   <Division>480</Division>
   <Mag>1.41807</Mag>
@@ -119,6 +119,7 @@ p, li { white-space: pre-wrap; }
         <key tick="0" idx="0"/>
         </keylist>
       <bracket type="1" span="2"/>
+      <barLineSpan>2</barLineSpan>
       </Staff>
     <Staff>
       <cleflist>
@@ -127,6 +128,7 @@ p, li { white-space: pre-wrap; }
       <keylist>
         <key tick="0" idx="0"/>
         </keylist>
+      <barLineSpan>0</barLineSpan>
       </Staff>
     <trackName>Piano</trackName>
     <shortName>
@@ -232,9 +234,6 @@ p, li { white-space: pre-wrap; }
       <Note pitch="62" tpc="16" ticks="480"/>
       <Note pitch="64" tpc="18" ticks="480"/>
       <Note pitch="65" tpc="13" ticks="480"/>
-      <BarLine>
-        <subtype>3</subtype>
-        </BarLine>
       </Measure>
     <Measure number="5">
       <Note pitch="60" tpc="14" ticks="480"/>
@@ -301,10 +300,6 @@ p, li { white-space: pre-wrap; }
       <Rest>
         <ticklen>0</ticklen>
         </Rest>
-      <BarLine>
-        <subtype>3</subtype>
-        <tick>7680</tick>
-        </BarLine>
       </Measure>
     <Measure number="5">
       <Rest>
