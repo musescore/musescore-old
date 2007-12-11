@@ -768,7 +768,16 @@ bool Score::loadMsc(QString name)
                         else if (tag == "rights") {
                               if (rights == 0)
                                     rights = new QTextDocument(0);
-                              rights->setHtml(val);
+                              if (mscVersion() <= 103)
+                                    rights->setHtml(val);
+                              else {
+                                    for (QDomElement eee = ee.firstChildElement(); !eee.isNull(); eee = eee.nextSiblingElement()) {
+                                          if (eee.tagName() == "html")
+                                                rights->setHtml(Xml::htmlToString(eee));
+                                          else
+                                                domError(eee);
+                                          }
+                                    }
                               }
                         else if (tag == "movement-number")
                               movementNumber = val;

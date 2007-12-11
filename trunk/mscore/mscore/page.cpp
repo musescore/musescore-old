@@ -110,13 +110,14 @@ void Page::layout(ScoreLayout* layout)
       // add page number
       if (score()->style()->showPageNumber) {
             int n = no() + 1 + _score->_pageOffset;
-            int subtype = (n & 1) ? TEXT_PAGE_NUMBER_ODD : TEXT_PAGE_NUMBER_EVEN;
             if ((n > 1) || score()->style()->showPageNumberOne) {
+                  int subtype = (n & 1) ? TEXT_PAGE_NUMBER_ODD : TEXT_PAGE_NUMBER_EVEN;
                   if (_pageNo == 0) {
                         _pageNo = new Text(score());
-                        _pageNo->setSubtype(subtype);
                         _pageNo->setParent(this);
                         }
+                  // always set subtype so that style changes take immediate effect
+                  _pageNo->setSubtype(subtype);
                   QString pnt;
                   pnt.setNum(n);
                   if (pnt != _pageNo->getText()) {
@@ -143,12 +144,14 @@ void Page::layout(ScoreLayout* layout)
             if (_score->rights) {
                   if (_copyright == 0) {
                         _copyright = new Text(score());
-                        _copyright->setSubtype(TEXT_COPYRIGHT);
                         _copyright->setParent(this);
                         }
                   if (_copyright->getText() != _score->rights->toHtml()) {
                         _copyright->setHtml(_score->rights->toHtml());
                         }
+                  // always set subtype so that style changes
+                  // take immediate effect:
+                  _copyright->setSubtype(TEXT_COPYRIGHT);
                   _copyright->layout(layout);
                   }
             else if (_copyright) {
@@ -254,31 +257,8 @@ void Page::collectElements(QList<const Element*>& el) const
             el.append(_copyright);
       if (_pageNo)
             el.append(_pageNo);
-      int staves = score()->nstaves();
-      foreach(const System* s, _systems) {
-            if (s->isVbox())
-                  continue;
-            if (s->staves()->size() != staves) {
-                  printf("System %p SysStaff size != staves %d %d\n",
-                     s, s->staves()->size(), staves);
-                  abort();
-                  }
-            if (s->getBarLine())
-                  el.append(s->getBarLine());
-            for (int i = 0; i < staves; ++i) {
-                  if (!score()->staff(i)->show())
-                        continue;
-                  SysStaff* st = s->staff(i);
-                  if (st == 0)
-                        continue;
-                  foreach(Bracket* b, st->brackets) {
-                        if (b)
-                              el.append(b);
-                        }
-                  if (st->instrumentName)
-                        el.append(st->instrumentName);
-                  }
-            }
+      foreach(const System* s, _systems)
+            s->collectElements(el);
       }
 
 //---------------------------------------------------------

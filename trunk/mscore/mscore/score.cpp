@@ -300,8 +300,11 @@ void Score::write(Xml& xml)
             }
       xml.tag("showInvisible", _showInvisible);
       pageFormat()->write(xml);
-      if (rights)
-            xml.tag("rights", rights->toHtml());
+      if (rights) {
+            xml.stag("rights");
+            xml << rights->toHtml("UTF-8") << '\n';
+            xml.etag();
+            }
       if (!movementNumber.isEmpty())
             xml.tag("movement-number", movementNumber);
       if (!movementTitle.isEmpty())
@@ -452,20 +455,8 @@ void Score::fixTicks()
                   continue;
                   }
             Measure* m = (Measure*)mb;
-            if (m->no() != bar) {
+            if (m->no() != bar)
                   m->setNo(bar);
-                  if (_style->showMeasureNumber) {
-                        m->setNoText("");
-                        if (bar != 0 || _style->showMeasureNumberOne) {
-                              if (_style->measureNumberSystem
-                                 && (((bar+1) % _style->measureNumberInterval) == 0)) {
-                                    QString s("%1");
-                                    s.arg(bar+1);
-                                    m->setNoText(s);
-                                    }
-                              }
-                        }
-                  }
             if (!m->irregular())
                   ++bar;
             int mtick = m->tick();

@@ -32,17 +32,9 @@
       </widget>
       <widget class="QTabWidget" name="tabWidget" >
        <property name="currentIndex" >
-        <number>0</number>
+        <number>1</number>
        </property>
        <widget class="QWidget" name="tab1" >
-        <property name="geometry" >
-         <rect>
-          <x>0</x>
-          <y>0</y>
-          <width>407</width>
-          <height>457</height>
-         </rect>
-        </property>
         <attribute name="title" >
          <string>General</string>
         </attribute>
@@ -243,7 +235,7 @@
              <property name="orientation" >
               <enum>Qt::Horizontal</enum>
              </property>
-             <property name="sizeHint" stdset="0" >
+             <property name="sizeHint" >
               <size>
                <width>40</width>
                <height>20</height>
@@ -283,14 +275,6 @@
         </layout>
        </widget>
        <widget class="QWidget" name="tab2" >
-        <property name="geometry" >
-         <rect>
-          <x>0</x>
-          <y>0</y>
-          <width>407</width>
-          <height>457</height>
-         </rect>
-        </property>
         <attribute name="title" >
          <string>Position</string>
         </attribute>
@@ -360,7 +344,7 @@
               <property name="orientation" >
                <enum>Qt::Horizontal</enum>
               </property>
-              <property name="sizeHint" stdset="0" >
+              <property name="sizeHint" >
                <size>
                 <width>40</width>
                 <height>20</height>
@@ -497,9 +481,9 @@
            <property name="title" >
             <string>Offset</string>
            </property>
-           <layout class="QVBoxLayout" name="verticalLayout" >
+           <layout class="QVBoxLayout" >
             <item>
-             <layout class="QGridLayout" name="gridLayout_2" >
+             <layout class="QGridLayout" >
               <item row="0" column="0" >
                <widget class="QLabel" name="label_8" >
                 <property name="text" >
@@ -569,7 +553,7 @@
                </widget>
               </item>
               <item row="1" column="1" >
-               <widget class="QDoubleSpinBox" name="doubleSpinBox" >
+               <widget class="QDoubleSpinBox" name="rxOffset" >
                 <property name="sizePolicy" >
                  <sizepolicy vsizetype="Fixed" hsizetype="Preferred" >
                   <horstretch>0</horstretch>
@@ -592,7 +576,7 @@
                </widget>
               </item>
               <item row="1" column="3" >
-               <widget class="QDoubleSpinBox" name="doubleSpinBox_2" >
+               <widget class="QDoubleSpinBox" name="ryOffset" >
                 <property name="sizePolicy" >
                  <sizepolicy vsizetype="Fixed" hsizetype="Preferred" >
                   <horstretch>0</horstretch>
@@ -660,18 +644,10 @@
         </layout>
        </widget>
        <widget class="QWidget" name="tab3" >
-        <property name="geometry" >
-         <rect>
-          <x>0</x>
-          <y>0</y>
-          <width>407</width>
-          <height>457</height>
-         </rect>
-        </property>
         <attribute name="title" >
          <string>Frame</string>
         </attribute>
-        <layout class="QGridLayout" name="gridLayout" >
+        <layout class="QGridLayout" >
          <item row="0" column="0" >
           <widget class="QLabel" name="label" >
            <property name="text" >
@@ -792,7 +768,7 @@
        <property name="sizeType" >
         <enum>QSizePolicy::Preferred</enum>
        </property>
-       <property name="sizeHint" stdset="0" >
+       <property name="sizeHint" >
         <size>
          <width>131</width>
          <height>31</height>

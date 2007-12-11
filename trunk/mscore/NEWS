@@ -1,4 +1,12 @@
 Release 0.8
+      - audio output for windows version
+      - better drag&drop visualization
+      - extended repeats
+      - small staves
+      - small notes and rests
+      - horizontal and vertical frame objects to structure
+        score
+      - extended MusicXml import and export
 
 Release 0.7
       - better note head positioning in chords

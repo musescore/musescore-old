@@ -254,26 +254,17 @@ void TextStyleDialog::fontNameChanged(int)
 
 void TextStyleDialog::saveStyle(int n)
       {
-      TextStyle* s = styles[n];
-      s->bold      = fontBold->isChecked();
-      s->italic    = fontItalic->isChecked();
-      s->underline = fontUnderline->isChecked();
-      s->size      = fontSize->value();
-      s->anchor    = (Anchor)(referencePos->currentIndex());
-      s->family    = strdup(fontName->currentText().toLatin1().data());  // memory leak
-
-      bool ok;
-      double val = xOffset->text().toDouble(&ok);
-      if (ok)
-            s->xoff = val * ((s->offsetType == OFFSET_ABS) ? DPMM : 1.0);
-      else
-            printf("bad xoff float value\n");
-
-      val = yOffset->text().toDouble(&ok);
-      if (ok)
-            s->yoff = val * ((s->offsetType == OFFSET_ABS) ? DPMM : 1.0);
-      else
-            printf("bad yoff float value\n");
+      TextStyle* s    = styles[n];
+      s->bold         = fontBold->isChecked();
+      s->italic       = fontItalic->isChecked();
+      s->underline    = fontUnderline->isChecked();
+      s->size         = fontSize->value();
+      s->anchor       = (Anchor)(referencePos->currentIndex());
+      s->family       = strdup(fontName->currentText().toLatin1().data());  // memory leak
+      s->xoff         = xOffset->value() * ((s->offsetType == OFFSET_ABS) ? DPMM : 1.0);
+      s->yoff         = yOffset->value() * ((s->offsetType == OFFSET_ABS) ? DPMM : 1.0);
+      s->rxoff        = rxOffset->value();
+      s->ryoff        = ryOffset->value();
       s->frameColor   = borderColor->color();
       s->frameWidth   = borderWidth->value();
       s->marginWidth  = marginWidth->value();
