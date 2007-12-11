@@ -259,6 +259,19 @@ QPointF readPoint(QDomElement e)
       }
 
 //---------------------------------------------------------
+//   readColor
+//---------------------------------------------------------
+
+QColor readColor(QDomElement e)
+      {
+      QColor c;
+      c.setRed(e.attribute("r").toInt());
+      c.setGreen(e.attribute("g").toInt());
+      c.setBlue(e.attribute("b").toInt());
+      return c;
+      }
+
+//---------------------------------------------------------
 //   readSize
 //---------------------------------------------------------
 

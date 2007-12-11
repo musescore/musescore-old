@@ -103,6 +103,8 @@ class System : public Element {
       virtual void remove(Element*);
       virtual void change(Element* o, Element* n);
 
+      virtual void collectElements(QList<const Element*>& el) const;
+
       Page* page() const                 { return (Page*)parent(); }
 
       virtual void layout(ScoreLayout*);

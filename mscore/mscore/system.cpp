@@ -262,7 +262,7 @@ void System::layout(ScoreLayout* layout)
             }
 
       //---------------------------------------------------
-      //  layout instrument names
+      //  layout instrument names x position
       //---------------------------------------------------
 
       int idx = 0;
@@ -270,14 +270,8 @@ void System::layout(ScoreLayout* layout)
             SysStaff* s = staff(idx);
             int nstaves = p->nstaves();
             if (s->instrumentName && !s->instrumentName->isEmpty()) {
-                  //
-                  // override Text->layout()
-                  //
-                  double y1 = s->bbox().top();
-                  double y2 = staff(idx + nstaves - 1)->bbox().bottom();
-                  double y  = y1 + (y2 - y1) * .5 - s->instrumentName->bbox().height() * .5;
                   double d  = instrumentNameOffset.point() + s->instrumentName->bbox().width();
-                  s->instrumentName->setPos(xoff2 - d, y);
+                  s->instrumentName->setXpos(xoff2 - d);
                   }
             idx += nstaves;
             }
@@ -415,7 +409,7 @@ void System::layout2(ScoreLayout* layout)
                   double y1 = s->bbox().top();
                   double y2 = staff(idx + nstaves - 1)->bbox().bottom();
                   double y  = y1 + (y2 - y1) * .5 - s->instrumentName->bbox().height() * .5;
-                  s->instrumentName->setPos(s->instrumentName->ipos().x(), y);
+                  s->instrumentName->setYpos(y);
                   }
             idx += nstaves;
             }
@@ -689,4 +683,29 @@ void System::layoutLyrics(ScoreLayout* layout, Lyrics* l, Segment* s, int staffI
             break;
             }
       }
+
+//---------------------------------------------------------
+//   collectElements
+//    collect all visible elements
+//---------------------------------------------------------
+
+void System::collectElements(QList<const Element*>& el) const
+      {
+      if (isVbox())
+            return;
+      if (barLine)
+            el.append(barLine);
+      int staffIdx = 0;
+      foreach(SysStaff* st, _staves) {
+            if (!score()->staff(staffIdx++)->show())
+                  continue;
+            foreach(Bracket* b, st->brackets) {
+                  if (b)
+                        el.append(b);
+                  }
+            if (st->instrumentName)
+                  el.append(st->instrumentName);
+            }
+      }
+
 

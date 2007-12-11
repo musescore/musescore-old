@@ -311,31 +311,28 @@ void Text::layout(ScoreLayout* layout)
 
       doc->setTextWidth(1000000.0);       //!? qt bug?
 
-      double tw = doc->idealWidth();
+      // idealWidth() returns too small values resulting in
+      // unwanted line breaks
+      // Qt 4.4 does give better values but for now add 8% margin:
+
+      double tw = doc->idealWidth() * 1.08;
+
       doc->setTextWidth(tw);
       setbbox(QRectF(QPointF(), doc->size()));
 
       double th = height();
-      double x  = 0.0, y = 0.0;
-
+      QPointF p;
       if (_align & ALIGN_BOTTOM)
-            y = -th;
+            p.setY(-th);
       else if (_align & ALIGN_VCENTER)
-            y = -(th * .5);
+            p.setY(-(th * .5));
       else if (_align & ALIGN_BASELINE)
-            y = -basePosition();
-
+            p.setY(-basePosition());
       if (_align & ALIGN_RIGHT)
-            x = -tw;
+            p.setX(-tw);
       else if (_align & ALIGN_HCENTER)
-            x = -(tw * .5);
-      setPos(x + o.x(), y + o.y());
-
-// if (subtype() == TEXT_INSTRUMENT_LONG)
-//   printf("Text %p <%s> layout %f %f - %f %f\n",
-//    this,
-//    qPrintable(doc->toPlainText()), canvasPos().x(), canvasPos().y(),
-//    parent()->canvasPos().x(), parent()->canvasPos().y());
+            p.setX(-(tw * .5));
+      setPos(p + o);
       }
 
 //---------------------------------------------------------

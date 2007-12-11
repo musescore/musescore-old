@@ -85,7 +85,7 @@ const TextStyle defaultTextStyleArray[] = {
          ALIGN_LEFT,    ANCHOR_STAFF),
 
       TextStyle(QString("Copyright"), ff, 8, false, false, false,
-         ALIGN_HCENTER | ALIGN_BOTTOM,    ANCHOR_PARENT, 0, MM(1)),
+         ALIGN_HCENTER | ALIGN_TOP,    ANCHOR_PARENT, 0, MM(-15), OA, 50.0, 100.0),
 
       TextStyle(QString("Measure Number"), ff, 8, false, false, false,
          ALIGN_LEFT,    ANCHOR_PARENT, -1.0, -2.2, OS),
@@ -274,6 +274,7 @@ void TextStyle::write(Xml& xml) const
       xml.tag("align", align);
       xml.tag("anchor", anchor);
       xml.tag("offsetType", offsetType);
+      xml.tag("sizeIsSpatiumDependent", sizeIsSpatiumDependent);
       if (offsetType == OFFSET_ABS) {
             xml.tag("xoffset", xoff * INCH);
             xml.tag("yoffset", yoff * INCH);
@@ -284,6 +285,12 @@ void TextStyle::write(Xml& xml) const
             }
       xml.tag("rxoffset", rxoff);
       xml.tag("ryoffset", ryoff);
+      xml.tag("frameWidth", frameWidth);
+      xml.tag("marginWidth", marginWidth);
+      xml.tag("paddingWidth", paddingWidth);
+      xml.tag("frameRound", frameRound);
+      xml.tag("frameColor", frameColor);
+
       xml.etag();
       }
 
@@ -322,6 +329,18 @@ void TextStyle::read(QDomElement e)
                   ryoff = val.toDouble();
             else if (tag == "offsetType")
                   offsetType = (OffsetType)i;
+            else if (tag == "sizeIsSpatiumDependent")
+                  sizeIsSpatiumDependent = val.toDouble();
+            else if (tag == "frameWidth")
+                  frameWidth = val.toDouble();
+            else if (tag == "marginWidth")
+                  marginWidth = val.toDouble();
+            else if (tag == "paddingWidth")
+                  paddingWidth = val.toDouble();
+            else if (tag == "frameRound")
+                  frameRound = i;
+            else if (tag == "frameColor")
+                  frameColor = readColor(e);
             else
                   domError(e);
             }

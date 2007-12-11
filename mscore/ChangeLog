@@ -1,3 +1,9 @@
+11.12.7 (ws)
+      - save/load frame properties for text style
+      - fix for QTextDocument->idealWidth() returns too small values resulting in
+        unwanted line breaks
+      - fixes for text property editing
+      - fix Copyright; edit textstyle for measure numbers
 9.12.7 (lv)
       - MusicXML import/export of Jump and Marker, simple cases work OK,
         complicated cases still need work

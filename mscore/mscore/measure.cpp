@@ -149,9 +149,7 @@ Measure::Measure(Score* s)
       _repeatCount = 2;
       _repeatFlags = 0;
       _noOffset    = 0;
-      _noText      = new Text(score());
-      _noText->setSubtype(TEXT_MEASURE_NUMBER);
-      _noText->setParent(this);
+      _noText      = 0;
       _endBarLineType = NORMAL_BAR;
       _endBarLineGenerated = true;
       }
@@ -162,7 +160,8 @@ Measure::Measure(Score* s)
 
 Measure::~Measure()
       {
-      delete _noText;
+      if (_noText)
+            delete _noText;
       }
 
 //---------------------------------------------------------
@@ -538,8 +537,6 @@ void Measure::layout(ScoreLayout* layout, double width)
                         }
                   }
             }
-//      if (_noText)
-//            _noText->layout(layout);
       }
 
 //---------------------------------------------------------
@@ -640,9 +637,12 @@ void Measure::layout2(ScoreLayout* layout)
             else if ((pn % score()->style()->measureNumberInterval) == 0)
                   ns = s;
             }
-      _noText->setText(ns);
-      _noText->layout(layout);
-
+      setNoText(ns);
+      if (_noText) {
+            // style changes immediately affect all measure numbers
+            _noText->setSubtype(TEXT_MEASURE_NUMBER);
+            _noText->layout(layout);
+            }
       int tracks = _score->nstaves() * VOICES;
       for (Segment* s = first(); s; s = s->next()) {
             for (int track = 0; track < tracks; ++track) {
@@ -1451,7 +1451,18 @@ again:
 
 void Measure::setNoText(const QString& s)
       {
-      _noText->setText(s);
+      if (!s.isEmpty()) {
+            if (_noText == 0) {
+                  _noText = new Text(score());
+                  _noText->setSubtype(TEXT_MEASURE_NUMBER);
+                  _noText->setParent(this);
+                  }
+            _noText->setText(s);
+            }
+      else if (_noText) {
+            delete _noText;
+            _noText = 0;
+            }
       }
 
 //---------------------------------------------------------

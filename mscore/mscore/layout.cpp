@@ -325,9 +325,8 @@ System* ScoreLayout::getNextSystem(bool isFirstSystem, bool isVbox)
             int nstaves = _score->nstaves();
             for (int i = system->staves()->size(); i < nstaves; ++i)
                   system->insertStaff(i);
-            for (int i = nstaves; i < system->staves()->size(); ++i) {
+            for (int i = nstaves; i < system->staves()->size(); ++i)
                   system->removeStaff(nstaves);
-                  }
             }
       return system;
       }

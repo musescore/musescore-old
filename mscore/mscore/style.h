@@ -135,8 +135,8 @@ class TextStyle {
                 || s.underline != underline
                 || s.align != align
                 || s.anchor != anchor
-                || s.xoff != xoff
-                || s.yoff != yoff
+                || s.xoff   != xoff
+                || s.yoff   != yoff
                 || s.rxoff != rxoff
                 || s.ryoff != ryoff
                 || s.offsetType != offsetType
