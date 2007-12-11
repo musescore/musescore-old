@@ -49,6 +49,7 @@
 #include "keyfinder.h"
 #include "drumset.h"
 #include "preferences.h"
+#include "box.h"
 
 static unsigned const char gmOnMsg[] = { 0x7e, 0x7f, 0x09, 0x01 };
 static unsigned const char gsOnMsg[] = { 0x41, 0x10, 0x42, 0x12, 0x40, 0x00, 0x7f, 0x00, 0x41 };
@@ -1316,7 +1317,7 @@ printf("unmapped drum note 0x%02x %d\n", mn->pitch(), mn->pitch());
 
       bool keyFound = false;
 
-      Measure* measure = tick2measure(0);
+//      Measure* measure = tick2measure(0);
       for (ciEvent i = el.begin(); i != el.end(); ++i) {
             MidiEvent* e = *i;
             if (e->type() == ME_META) {
@@ -1367,44 +1368,41 @@ printf("unmapped drum note 0x%02x %d\n", mn->pitch(), mn->pitch());
                               keyFound = false;
                               }
                               break;
-                        case META_TITLE:  // mscore extension
-                              {
-                              Text* text = new Text(this);
-                              text->setSubtype(TEXT_TITLE);
-                              text->setText((char*)(mm->data()));
-                              measure->add(text);
-                              }
-                              break;
-
-                        case META_SUBTITLE:     // mscore extension
-                              {
-                              Text* text = new Text(this);
-                              text->setSubtype(TEXT_SUBTITLE);
-                              text->setText((char*)(mm->data()));
-                              measure->add(text);
-                              }
-                              break;
                         case META_COMPOSER:     // mscore extension
+                        case META_POET:
+                        case META_TRANSLATOR:
+                        case META_SUBTITLE:
+                        case META_TITLE:
                               {
                               Text* text = new Text(this);
-                              text->setSubtype(TEXT_COMPOSER);
+                              switch(mm->metaType()) {
+                                    case META_COMPOSER:
+                                          text->setSubtype(TEXT_COMPOSER);
+                                          break;
+                                    case META_TRANSLATOR:
+                                          text->setSubtype(TEXT_TRANSLATOR);
+                                          break;
+                                    case META_POET:
+                                          text->setSubtype(TEXT_POET);
+                                          break;
+                                    case META_SUBTITLE:
+                                          text->setSubtype(TEXT_SUBTITLE);
+                                          break;
+                                    case META_TITLE:
+                                          text->setSubtype(TEXT_TITLE);
+                                          break;
+                                    }
+
                               text->setText((char*)(mm->data()));
-                              measure->add(text);
-                              }
-                              break;
-                        case META_TRANSLATOR:   // mscore extension
-                              {
-                              Text* text = new Text(this);
-                              text->setSubtype(TEXT_TRANSLATOR);
-                              text->setText((char*)(mm->data()));
-                              measure->add(text);
-                              }
-                              break;
-                        case META_POET:         // mscore extension
-                              {
-                              Text* text = new Text(this);
-                              text->setSubtype(TEXT_POET);
-                              text->setText((char*)(mm->data()));
+
+                              ScoreLayout* layout = mainLayout();
+                              MeasureBase* measure = layout->first();
+                              if (measure->type() != VBOX) {
+                                    measure = new VBox(this);
+                                    measure->setTick(0);
+                                    measure->setNext(layout->first());
+                                    layout->add(measure);
+                                    }
                               measure->add(text);
                               }
                               break;
