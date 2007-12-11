@@ -36,6 +36,7 @@ class TextStyleDialog : public QDialog, private Ui::TextStyleBase {
       Score* cs;
 
       int current;
+      int curUnit;
       int fonts;        // number of font families in list
       void saveStyle(int);
 
@@ -53,8 +54,7 @@ class TextStyleDialog : public QDialog, private Ui::TextStyleBase {
       void alignTopV();
       void alignBottomV();
       void alignCenterV();
-      void setUnitMM();
-      void setUnitSpace();
+      void unitChanged(int);
       void selectBorderColor();
 
    signals:

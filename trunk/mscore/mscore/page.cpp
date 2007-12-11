@@ -108,27 +108,17 @@ void Page::layout(ScoreLayout* layout)
       setbbox(QRectF(0.0, 0.0, loWidth(), loHeight()));
 
       // add page number
-      if (score()->style()->showPageNumber) {
-            int n = no() + 1 + _score->_pageOffset;
-            if ((n > 1) || score()->style()->showPageNumberOne) {
-                  int subtype = (n & 1) ? TEXT_PAGE_NUMBER_ODD : TEXT_PAGE_NUMBER_EVEN;
-                  if (_pageNo == 0) {
-                        _pageNo = new Text(score());
-                        _pageNo->setParent(this);
-                        }
-                  // always set subtype so that style changes take immediate effect
-                  _pageNo->setSubtype(subtype);
-                  QString pnt;
-                  pnt.setNum(n);
-                  if (pnt != _pageNo->getText()) {
-                        _pageNo->setText(QString("%1").arg(n));
-                        _pageNo->layout(layout);
-                        }
+      int n = no() + 1 + _score->_pageOffset;
+      if (score()->style()->showPageNumber && ((n > 1) || score()->style()->showPageNumberOne)) {
+            int subtype = (n & 1) ? TEXT_PAGE_NUMBER_ODD : TEXT_PAGE_NUMBER_EVEN;
+            if (_pageNo == 0) {
+                  _pageNo = new Text(score());
+                  _pageNo->setParent(this);
                   }
-            else if (_pageNo) {
-                  delete _pageNo;
-                  _pageNo = 0;
-                  }
+            // always set subtype so that style changes take immediate effect
+            _pageNo->setSubtype(subtype);
+            _pageNo->setText(QString("%1").arg(n));
+            _pageNo->layout(layout);
             }
       else if (_pageNo) {
             delete _pageNo;
