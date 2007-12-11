@@ -5,8 +5,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>687</width>
-    <height>605</height>
+    <width>684</width>
+    <height>513</height>
    </rect>
   </property>
   <property name="windowTitle" >
@@ -32,7 +32,7 @@
       </widget>
       <widget class="QTabWidget" name="tabWidget" >
        <property name="currentIndex" >
-        <number>1</number>
+        <number>0</number>
        </property>
        <widget class="QWidget" name="tab1" >
         <attribute name="title" >
@@ -74,17 +74,20 @@
            <item>
             <widget class="QLabel" name="label_7" >
              <property name="text" >
-              <string>Font</string>
+              <string>:Font:</string>
              </property>
              <property name="textFormat" >
               <enum>Qt::PlainText</enum>
+             </property>
+             <property name="alignment" >
+              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
              </property>
             </widget>
            </item>
            <item>
             <widget class="QComboBox" name="fontName" >
              <property name="sizePolicy" >
-              <sizepolicy vsizetype="Fixed" hsizetype="Fixed" >
+              <sizepolicy vsizetype="Fixed" hsizetype="Expanding" >
                <horstretch>0</horstretch>
                <verstretch>0</verstretch>
               </sizepolicy>
@@ -94,10 +97,13 @@
            <item>
             <widget class="QLabel" name="label_3_2" >
              <property name="text" >
-              <string>Size</string>
+              <string>Size:</string>
              </property>
              <property name="textFormat" >
               <enum>Qt::PlainText</enum>
+             </property>
+             <property name="alignment" >
+              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
              </property>
             </widget>
            </item>
@@ -136,7 +142,7 @@
            <item>
             <widget class="QLabel" name="label_2_2" >
              <property name="text" >
-              <string>Style</string>
+              <string>Style:</string>
              </property>
              <property name="textFormat" >
               <enum>Qt::PlainText</enum>
@@ -250,6 +256,9 @@
            <property name="title" >
             <string>Text Sample</string>
            </property>
+           <property name="flat" >
+            <bool>true</bool>
+           </property>
            <layout class="QVBoxLayout" >
             <property name="spacing" >
              <number>6</number>
@@ -298,6 +307,9 @@
           <widget class="QGroupBox" name="groupBox_2_2" >
            <property name="title" >
             <string>Reference Position</string>
+           </property>
+           <property name="flat" >
+            <bool>true</bool>
            </property>
            <layout class="QHBoxLayout" >
             <property name="spacing" >
@@ -359,6 +371,9 @@
           <widget class="QGroupBox" name="groupBox_3_2" >
            <property name="title" >
             <string>Alignment</string>
+           </property>
+           <property name="flat" >
+            <bool>true</bool>
            </property>
            <layout class="QHBoxLayout" >
             <property name="spacing" >
@@ -481,6 +496,9 @@
            <property name="title" >
             <string>Offset</string>
            </property>
+           <property name="flat" >
+            <bool>true</bool>
+           </property>
            <layout class="QVBoxLayout" >
             <item>
              <layout class="QGridLayout" >
@@ -563,6 +581,12 @@
                 <property name="suffix" >
                  <string>%</string>
                 </property>
+                <property name="minimum" >
+                 <double>-100000.000000000000000</double>
+                </property>
+                <property name="maximum" >
+                 <double>100000.000000000000000</double>
+                </property>
                </widget>
               </item>
               <item row="1" column="2" >
@@ -585,6 +609,12 @@
                 </property>
                 <property name="suffix" >
                  <string>%</string>
+                </property>
+                <property name="minimum" >
+                 <double>-100000.000000000000000</double>
+                </property>
+                <property name="maximum" >
+                 <double>100000.000000000000000</double>
                 </property>
                </widget>
               </item>
@@ -779,7 +809,7 @@
      <item>
       <widget class="QPushButton" name="buttonApply" >
        <property name="sizePolicy" >
-        <sizepolicy vsizetype="Fixed" hsizetype="Preferred" >
+        <sizepolicy vsizetype="Fixed" hsizetype="Fixed" >
          <horstretch>0</horstretch>
          <verstretch>0</verstretch>
         </sizepolicy>
@@ -792,7 +822,7 @@
      <item>
       <widget class="QPushButton" name="buttonOk" >
        <property name="sizePolicy" >
-        <sizepolicy vsizetype="Fixed" hsizetype="Preferred" >
+        <sizepolicy vsizetype="Fixed" hsizetype="Fixed" >
          <horstretch>0</horstretch>
          <verstretch>0</verstretch>
         </sizepolicy>
@@ -805,7 +835,7 @@
      <item>
       <widget class="QPushButton" name="buttonCancel" >
        <property name="sizePolicy" >
-        <sizepolicy vsizetype="Fixed" hsizetype="Preferred" >
+        <sizepolicy vsizetype="Fixed" hsizetype="Fixed" >
          <horstretch>0</horstretch>
          <verstretch>0</verstretch>
         </sizepolicy>

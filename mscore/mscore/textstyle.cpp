@@ -64,9 +64,13 @@ TextStyleDialog::TextStyleDialog(QWidget* parent, Score* score)
       connect(topV,          SIGNAL(clicked()), SLOT(alignTopV()));
       connect(bottomV,       SIGNAL(clicked()), SLOT(alignBottomV()));
       connect(centerV,       SIGNAL(clicked()), SLOT(alignCenterV()));
-      connect(unitMM,        SIGNAL(clicked()), SLOT(setUnitMM()));
-      connect(unitSpace,     SIGNAL(clicked()), SLOT(setUnitSpace()));
       connect(borderColorSelect, SIGNAL(clicked()), SLOT(selectBorderColor()));
+
+      QButtonGroup* bg = new QButtonGroup(this);
+      bg->setExclusive(true);
+      bg->addButton(unitMM, 0);
+      bg->addButton(unitSpace, 1);
+      connect(bg, SIGNAL(buttonClicked(int)), SLOT(unitChanged(int)));
 
       current = -1;
       textNames->setCurrentItem(textNames->item(0));
@@ -126,23 +130,26 @@ void TextStyleDialog::alignCenterV()
       }
 
 //---------------------------------------------------------
-//   setUnitMM
+//   unitChanged
 //---------------------------------------------------------
 
-void TextStyleDialog::setUnitMM()
+void TextStyleDialog::unitChanged(int)
       {
-      TextStyle* s = styles[current];
-      s->offsetType = OFFSET_ABS;
-      }
+      int unit = 0;
+      if (unitSpace->isChecked())
+            unit = 1;
+      if (unit == curUnit)
+            return;
+      curUnit = unit;
 
-//---------------------------------------------------------
-//   setUnitSpace
-//---------------------------------------------------------
-
-void TextStyleDialog::setUnitSpace()
-      {
-      TextStyle* s = styles[current];
-      s->offsetType = OFFSET_SPATIUM;
+      if (curUnit) {
+            xOffset->setValue(xOffset->value() * DPMM / _spatium);
+            yOffset->setValue(yOffset->value() * DPMM / _spatium);
+            }
+      else {
+            xOffset->setValue(xOffset->value() * _spatium / DPMM);
+            yOffset->setValue(yOffset->value() * _spatium / DPMM);
+            }
       }
 
 //---------------------------------------------------------
@@ -176,14 +183,16 @@ void TextStyleDialog::nameSelected(int n)
 
       QString str;
       if (s->offsetType == OFFSET_ABS) {
-            xOffset->setValue(s->xoff/DPMM);
-            yOffset->setValue(s->yoff/DPMM);
+            xOffset->setValue(s->xoff * INCH);
+            yOffset->setValue(s->yoff * INCH);
             unitMM->setChecked(true);
+            curUnit = 0;
             }
       else if (s->offsetType == OFFSET_SPATIUM) {
             xOffset->setValue(s->xoff);
             yOffset->setValue(s->yoff);
             unitSpace->setChecked(true);
+            curUnit = 1;
             }
 
       QFont f(s->family);
@@ -255,14 +264,18 @@ void TextStyleDialog::fontNameChanged(int)
 void TextStyleDialog::saveStyle(int n)
       {
       TextStyle* s    = styles[n];
+      if (curUnit == 0)
+            s->offsetType = OFFSET_ABS;
+      else if (curUnit == 1)
+            s->offsetType = OFFSET_SPATIUM;
       s->bold         = fontBold->isChecked();
       s->italic       = fontItalic->isChecked();
       s->underline    = fontUnderline->isChecked();
       s->size         = fontSize->value();
       s->anchor       = (Anchor)(referencePos->currentIndex());
       s->family       = strdup(fontName->currentText().toLatin1().data());  // memory leak
-      s->xoff         = xOffset->value() * ((s->offsetType == OFFSET_ABS) ? DPMM : 1.0);
-      s->yoff         = yOffset->value() * ((s->offsetType == OFFSET_ABS) ? DPMM : 1.0);
+      s->xoff         = xOffset->value() / ((s->offsetType == OFFSET_ABS) ? INCH : 1.0);
+      s->yoff         = yOffset->value() / ((s->offsetType == OFFSET_ABS) ? INCH : 1.0);
       s->rxoff        = rxOffset->value();
       s->ryoff        = ryOffset->value();
       s->frameColor   = borderColor->color();
