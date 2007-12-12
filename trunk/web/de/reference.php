@@ -2,7 +2,7 @@
   $file="manual.php";
   require("header.html");
   ?>
-<h4><a href="idx.php">MuseScore</a> -- Index</h4>
+<h4><a href="idx.php">MuseScore</a> -- <a href="manual.php">Dokumentation</a> -- Index</h4>
 <table>
   <tr>
     <td><a href="playmode.php">Abspiel Mode</a></td>
@@ -118,4 +118,3 @@
   </tr>
 </table>
 <?php require("trailer.html");  ?>
-
