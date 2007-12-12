@@ -976,7 +976,7 @@ void Score::insertMeasures(int n, int type)
             }
 
 	int tick  = sel->tickStart;
-	int ticks = sigmap->ticksMeasure(tick-1);
+	int ticks = sigmap->ticksMeasure(tick);
 
 	for (int ino = 0; ino < n; ++ino) {
 		MeasureBase* m;
@@ -996,11 +996,21 @@ void Score::insertMeasures(int n, int type)
 		      	Segment* s = ((Measure*)m)->getSegment(rest);
 			      s->add(rest);
 		            }
+                  undoFixTicks();
 		      }
             addMeasure(m);
 	      undoOp(UndoOp::InsertMeasure, m);
-            if (type == MEASURE)
+            if (type == MEASURE) {
+                  if (tick == 0) {
+                        SigEvent e1 = sigmap->timesig(tick);
+                        undoChangeSig(0, e1, SigEvent());
+                        undoSigInsertTime(tick, ticks);
+                        undoChangeSig(tick, SigEvent(), e1);
+                        // TODO: move time signature
+                        }
                   undoInsertTime(tick, ticks);
+                  undoFixTicks();
+                  }
             }
       select(0,0,0);
 	layoutAll = true;

@@ -5,8 +5,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>404</width>
-    <height>307</height>
+    <width>607</width>
+    <height>433</height>
    </rect>
   </property>
   <property name="windowTitle" >
@@ -94,8 +94,8 @@
         </property>
         <property name="sizeHint" >
          <size>
-          <width>106</width>
-          <height>41</height>
+          <width>567</width>
+          <height>31</height>
          </size>
         </property>
        </spacer>
@@ -113,34 +113,54 @@
      </property>
      <layout class="QGridLayout" >
       <item row="0" column="0" >
+       <widget class="QLabel" name="label_3" >
+        <property name="text" >
+         <string>Long Instrument Name:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1" >
+       <widget class="QLabel" name="label_4" >
+        <property name="text" >
+         <string>Short Instrument Name:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="0" >
+       <widget class="QTextEdit" name="longName" />
+      </item>
+      <item row="1" column="1" >
+       <widget class="QTextEdit" name="shortName" />
+      </item>
+      <item row="2" column="0" >
        <widget class="QLabel" name="label_2" >
         <property name="text" >
          <string>Play Transposition (Semitones)</string>
         </property>
        </widget>
       </item>
-      <item row="0" column="1" >
+      <item row="2" column="1" >
        <widget class="QSpinBox" name="transposition" >
         <property name="minimum" >
          <number>-127</number>
         </property>
        </widget>
       </item>
-      <item row="1" column="0" >
+      <item row="3" column="0" >
        <widget class="QCheckBox" name="showStaff" >
         <property name="text" >
          <string>Show</string>
         </property>
        </widget>
       </item>
-      <item row="2" column="0" >
+      <item row="4" column="0" >
        <widget class="QCheckBox" name="useDrumset" >
         <property name="text" >
          <string>Use Drumset</string>
         </property>
        </widget>
       </item>
-      <item row="2" column="1" >
+      <item row="4" column="1" >
        <widget class="QPushButton" name="editDrumset" >
         <property name="sizePolicy" >
          <sizepolicy vsizetype="Preferred" hsizetype="Minimum" >

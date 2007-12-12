@@ -82,6 +82,8 @@ struct UndoOp {
             ChangeNoteHead,
             ChangeEndBarLineType,
             ChangeBarLineSpan,
+            SigInsertTime,
+            FixTicks,
             };
       UndoType type;
       Element* element1;

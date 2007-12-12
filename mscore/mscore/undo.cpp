@@ -83,7 +83,9 @@ static const char* undoName[] = {
       "ChangeChordRestSize",
       "ChangeNoteHead",
       "ChangeEndBarLineType",
-      "ChangeBarLineSpan"
+      "ChangeBarLineSpan",
+      "SigInsertTime",
+      "FixTicks"
       };
 
 static bool UNDO = false;
@@ -171,7 +173,6 @@ void Score::doRedo()
       sel->deselectAll(this);
       Undo* u = redoList.back();
       int n = u->size();
-//      for (int i = n-1; i >= 0; --i) {
       for (int i = 0; i < n; ++i) {
             UndoOp* op = &(*u)[i];
             processUndoOp(op, false);
@@ -452,8 +453,11 @@ void Score::processUndoOp(UndoOp* i, bool undo)
                         if (i->sig2.valid())
                               sigmap->add(i->val1, i->sig2);
                         }
-                  fixTicks();
+//                  fixTicks();
                   }
+                  break;
+            case UndoOp::FixTicks:
+                  fixTicks();
                   break;
             case UndoOp::ChangeTempo:
                   {
@@ -503,7 +507,16 @@ void Score::processUndoOp(UndoOp* i, bool undo)
                         insertTime(i->val1, -i->val2);
                   else
                         insertTime(i->val1, i->val2);
-                  fixTicks();
+                  break;
+
+            case UndoOp::SigInsertTime:
+                  {
+                  int len = undo ? -i->val2 : i->val2;
+                  if (len < 0)
+                        sigmap->removeTime(i->val1, -len);
+                  else
+                        sigmap->insertTime(i->val1, len);
+                  }
                   break;
 
             case UndoOp::ChangeRepeatFlags:
@@ -562,7 +575,6 @@ void Score::processUndoOp(UndoOp* i, bool undo)
             case UndoOp::ChangeBarLineSpan:
                   {
                   int span = i->staff->barLineSpan();
-printf("UndoOp::ChangeBarLineSpan %d  %d - %d\n", i->staff->idx(), span, i->val1);
                   i->staff->setBarLineSpan(i->val1);
                   i->val1 = span;
                   }
@@ -675,6 +687,19 @@ void Score::undoInsertTime(int tick, int len)
       i.type = UndoOp::InsertTime;
       i.val1  = tick;
       i.val2  = len;
+      undoList.back()->push_back(i);
+      processUndoOp(&undoList.back()->back(), false);
+      }
+
+//---------------------------------------------------------
+//   undoFixTicks
+//---------------------------------------------------------
+
+void Score::undoFixTicks()
+      {
+      checkUndoOp();
+      UndoOp i;
+      i.type = UndoOp::FixTicks;
       undoList.back()->push_back(i);
       processUndoOp(&undoList.back()->back(), false);
       }
@@ -902,6 +927,17 @@ void Score::undoChangeSig(int tick, const SigEvent& o, const SigEvent& n)
       i.val1 = tick;
       i.sig1 = o;
       i.sig2 = n;
+      undoList.back()->push_back(i);
+      processUndoOp(&undoList.back()->back(), false);
+      }
+
+void Score::undoSigInsertTime(int tick, int len)
+      {
+      checkUndoOp();
+      UndoOp i;
+      i.type = UndoOp::SigInsertTime;
+      i.val1 = tick;
+      i.val2 = len;
       undoList.back()->push_back(i);
       processUndoOp(&undoList.back()->back(), false);
       }

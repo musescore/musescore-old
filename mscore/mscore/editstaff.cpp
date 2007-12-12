@@ -22,6 +22,8 @@
 #include "staff.h"
 #include "part.h"
 #include "editdrumset.h"
+#include "score.h"
+#include "layout.h"
 
 //---------------------------------------------------------
 //   EditStaff
@@ -39,6 +41,8 @@ EditStaff::EditStaff(Staff* s, QWidget* parent)
       lines->setValue(staff->lines());
       small->setChecked(staff->small());
       transposition->setValue(staff->part()->pitchOffset());
+      shortName->setHtml(staff->part()->shortName().toHtml("UTF-8"));
+      longName->setHtml(staff->part()->longName().toHtml("UTF-8"));
 
       connect(buttonBox, SIGNAL(clicked(QAbstractButton*)), this, SLOT(bboxClicked(QAbstractButton*)));
       connect(editDrumset, SIGNAL(clicked()), SLOT(editDrumsetClicked()));
@@ -83,6 +87,9 @@ void EditStaff::apply()
       editDrumset->setEnabled(staff->part()->useDrumset());
       staff->setLines(lines->value());
       staff->setSmall(small->isChecked());
+      staff->part()->setShortName(*shortName->document());
+      staff->part()->setLongName(*longName->document());
+      staff->score()->mainLayout()->setInstrumentNames();
       }
 
 //---------------------------------------------------------
