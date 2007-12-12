@@ -8,12 +8,12 @@
 
 <table>
 <tr><td>
-      Taktstriche können durch Ziehen eines Taktstrichsysbols
+      Taktstriche können durch Ziehen eines Taktstrichsymbols
       von der Taktstrichpalette auf einen Taktstrich der Partitur
-      geändert werden.
+      oder auf eine leere Stelle eines Taktes geändert werden.
   </td>
   <td>
-     <img src="../pic/barlinepalette.png">
+     <img src="barlinepalette.png">
      </tr>
   </td>
   </table>

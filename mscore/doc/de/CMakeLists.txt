@@ -1,6 +1,6 @@
 #=============================================================================
-#  MusE
-#  Linux Music Editor
+#  Mscore
+#  Linux Music Score Editor
 #  $Id:$
 #
 #  Copyright (C) 2002-2006 by Werner Schweer and others

@@ -1,9 +1,8 @@
 %====================================================================
-%
 %     MuseScore Manual
-%     this is the MuseScore manual
+%     This is the MuseScore Manual.
 %
-% (C) 2005 Copyright: Werner Schweer
+% (C) 2005-2007 Copyright: Werner Schweer
 %====================================================================
 
 %----------------------------------------------------------
@@ -15,7 +14,7 @@
 \usemodule[chart]
 \setupcolors[state=start]
 \setupbodyfont[Palatino]
-\language[en]
+\language[de]
 \enableregime[utf]
 
 \startuseMPgraphic{FunnyFrame}
@@ -42,31 +41,10 @@
 \setMPtext{FunnyFrame}{}
 
 
-\define\M{MuseScore}
+\define\M{Muse\-Score}
 \define[1]\Index{{\it #1}\marginpar{#1}\index{#1}}
 
 \defineindenting[Cmdi][text=,separator=,width=fit,distance=1em]
-
-\define[1]\Cmd{
-  \Cmdi
-  \framed[
-     background=color,
-     width=fit,
-     align=right,
-     backgroundcolor=lightgray,
-     framecolor=blue]
-     {\tt\space #1}}
-
-\define[2]\CCmd{
-  \Cmdi
-  \framed[
-     background=color,
-     width=broad,
-     align=right,
-     backgroundcolor=lightgray,
-     framecolor=blue]
-     {\vbox{\hbox{\tt\space #1}\hbox{\tt\space #2}}}}
-
 
 %\define\startdescription{\startpacked}
 \define\startdescription{}
@@ -139,27 +117,40 @@
 
 \definedescription[Opt][location=hanging,headstyle=bold,width=broad]
 \setuptyping[before=\blank\startbackground, after=\stopbackground\blank] % source code with background
+
 \component figurepath.tex
+\setuplayout[backspace=25mm, width=160mm, height=250mm, topspace=15mm, header=10mm, footer=0cm]
+\setuppagenumbering[alternative=doublesided, location={header, inmargin}]
 
 %----------------------------------------------------------
-%     Body
+%     Titlepage
 %----------------------------------------------------------
 
 \starttext
-   \language[en]
-   \mainlanguage[en]
-   \startstandardmakeup[doublesided=no]
-      \definebodyfont[10pt,11pt,12pt][rm][tfe=Regular at 48pt]
-      \tfe\setupinterlinespace
-      \hfill \color[red]{\M}\par
-      \hfill \color[blue]{Manual}\par
-      \vfill
-      \hfill \color[blue]{EN}\par
-      \definebodyfont[10pt,11pt,12pt][rm][tfb=Regular at 24pt]
-      \tfb\setupinterlinespace
-      \hfill Version 0.4\par
-      \stopstandardmakeup
+   \language[de]
+   \mainlanguage[de]
+   \defineoverlay[titelbild][{\externalfigure[titel2]}]
 
+   \framed[frame=off, background=titelbild]{
+      \startstandardmakeup[doublesided=no]
+         \definebodyfont[10pt,11pt,12pt][rm][tfe=Regular at 48pt]
+         \tfe\setupinterlinespace
+         \hfill \color[red]{\M}\par
+         \hfill \color[blue]{Manual}\par
+         \vfill
+         \hfill \color[blue]{EN}\par
+         \definebodyfont[10pt,11pt,12pt][rm][tfb=Regular at 24pt]
+         \tfb\setupinterlinespace
+         \hfill Version 0.8\par
+         \stopstandardmakeup
+      }
+      \par
+
+%----------------------------------------------------------
+%     back of title page
+%----------------------------------------------------------
+
+   \framed[frame=off]{
    \startstandardmakeup[page=no]
       \vfill
       \M\ is hosted on SourceForge:\par
@@ -171,8 +162,10 @@
       \blank[line]
       \copyright 2005-2007 Werner Schweer and Others
       \stopstandardmakeup
+      }
 
    \completecontent
+
 
 %%====================================================================
 %%
@@ -205,7 +198,9 @@
 
       After entering
 
-      \Cmd{mscore}
+\starttyping
+mscore
+\stoptyping
 
       the last project will be displayed. Starting \M\ the first time an empty
       main window will be displayed.
@@ -287,7 +282,9 @@
       \M\ can be started from the commandline with
       \index{commandline}
 
-            \Cmd{mscore <options> <file name>}
+\starttyping
+mscore <options> <file name>
+\stoptyping
 
       \type{options} und \type{file name} are optional.
 
@@ -838,7 +835,9 @@
             \M\ is distributed as a compressed TAR file. After download it can
             be expanded with:\par
 
-            \Cmd{tar xvofj mscore-1.0.0.tar.bz2}
+\starttyping
+tar xvofj mscore-1.0.0.tar.bz2
+\stoptyping
 
             This command creates a subdirectory
             mscore-1.0.0, with the expanded \M\ source.
@@ -865,7 +864,10 @@
    \subsection{Configure}
       Hint: configure works only from a X11 console.
 
-      \CCmd{cd mscore-x.x.x}{./configure --prefix=/usr}
+\starttyping
+cd mscore-x.x.x
+./configure --prefix=/usr
+\stoptyping
 
       (if configure does not find the qt libraries you can enter something
       like:  configure --with-qt-prefix=/usr/lib/qt3
@@ -875,11 +877,15 @@
       speed up by using precompiled headers. For this you have to configure
       like:
 
-      \Cmd{./configure --enable-pch}
+\starttyping
+./configure --enable-pch
+\stoptyping
 
    \subsection{Make}
 
-      \Cmd{make}
+\starttyping
+make
+\stoptyping
 
       compiles the sources and produces the executable file
       \type{mscore}.
@@ -893,7 +899,9 @@
 
    \section{Installation}
 
-      \Cmd{su -c make install}
+\starttyping
+su -c make install
+\stoptyping
 
       this installs \M.
 
