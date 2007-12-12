@@ -355,8 +355,6 @@ void Score::addMeasure(MeasureBase* m)
       MeasureBase* im = tick2measureBase(tick);
       m->setNext(im);
       _layout->add(m);
-      if (m->type() == MEASURE)
-            fixTicks();
       }
 
 //---------------------------------------------------------
@@ -366,7 +364,6 @@ void Score::addMeasure(MeasureBase* m)
 void Score::removeMeasure(MeasureBase* im)
       {
       _layout->remove(im);
-      fixTicks();
       }
 
 //---------------------------------------------------------
@@ -380,7 +377,6 @@ void Score::insertTime(int tick, int len)
             // remove time
             //
             len = -len;
-            sigmap->removeTime(tick, len);
             tempomap->removeTime(tick, len);
             foreach(Staff* staff, _staves) {
                   staff->clef()->removeTime(tick, len);
@@ -389,10 +385,12 @@ void Score::insertTime(int tick, int len)
             foreach(Element* el, _layout->_gel) {
                   if (el->type() == SLUR) {
                         Slur* s = (Slur*) el;
-                        if (s->tick() >= tick + len)
+                        if (s->tick() >= tick + len) {
                               s->setTick(s->tick() - len);
-                        if (s->tick2() >= tick + len)
+                              }
+                        if (s->tick2() >= tick + len) {
                               s->setTick2(s->tick2() - len);
+                              }
                         }
                   else if (el->isSLine()) {
                         SLine* s = (SLine*) el;
@@ -407,7 +405,6 @@ void Score::insertTime(int tick, int len)
             //
             // insert time
             //
-            sigmap->insertTime(tick, len);
             tempomap->insertTime(tick, len);
             foreach(Staff* staff, _staves) {
                   staff->clef()->insertTime(tick, len);
@@ -416,16 +413,18 @@ void Score::insertTime(int tick, int len)
             foreach(Element* el, _layout->_gel) {
                   if (el->type() == SLUR) {
                         Slur* s = (Slur*) el;
-                        if (s->tick() >= tick + len)
+                        if (s->tick() >= tick) {
                               s->setTick(s->tick() + len);
-                        if (s->tick2() >= tick + len)
+                              }
+                        if (s->tick2() >= tick) {
                               s->setTick2(s->tick2() + len);
+                              }
                         }
                   else if (el->isSLine()) {
                         SLine* s = (SLine*) el;
-                        if (s->tick() >= tick + len)
+                        if (s->tick() >= tick)
                               s->setTick(s->tick() + len);
-                        if (s->tick2() >= tick + len)
+                        if (s->tick2() >= tick)
                               s->setTick2(s->tick2() + len);
                         }
                   }
@@ -461,7 +460,8 @@ void Score::fixTicks()
                   ++bar;
             int mtick = m->tick();
             int diff  = tick - mtick;
-            tick += sigmap->ticksMeasure(tick);
+// printf("move %d  -  soll %d  ist %d  len %d\n", bar, tick, mtick, sigmap->ticksMeasure(tick));
+            tick     += sigmap->ticksMeasure(tick);
             m->moveTicks(diff);
             }
       }
@@ -1197,22 +1197,6 @@ void Score::adjustTime(int tick, MeasureBase* m)
             m = m->next();
             }
       }
-#if 0
-//---------------------------------------------------------
-//   tick2Anchor
-//    return anchor position for tick in global
-//    coordinates
-//---------------------------------------------------------
-
-QPointF Score::tick2Anchor(int tick, int staffIdx) const
-      {
-      Segment* seg = tick2segment(tick);
-      qreal x = seg->abbox().x();
-      System* system = seg->measure()->system();
-      qreal y = system->staff(staffIdx)->bbox().y() + system->canvasPos().y();
-      return QPointF(x, y);
-      }
-#endif
 
 //---------------------------------------------------------
 //   pos2TickAnchor

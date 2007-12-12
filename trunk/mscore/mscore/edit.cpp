@@ -844,6 +844,7 @@ void Score::deleteItem(Element* el)
                   break;
 
             case MEASURE:
+                  undoFixTicks();
                   undoRemoveElement(el);
                   cmdRemoveTime(el->tick(), el->tickLen());
                   break;
@@ -877,10 +878,21 @@ void Score::cmdRemoveTime(int tick, int len)
                   }
             }
 
+      //-----------------
+      SigEvent e1 = sigmap->timesig(tick + len);
       for (ciSigEvent i = sigmap->begin(); i != sigmap->end(); ++i) {
-            if (i->first >= tick && (i->first < tick2) && i->first != 0)
+            if (i->first >= tick && (i->first < tick2))
                   undoChangeSig(i->first, i->second, SigEvent());
             }
+      undoSigInsertTime(tick, -len);
+      SigEvent e2 = sigmap->timesig(tick);
+      if (!(e1 == e2)) {
+            ciSigEvent i = sigmap->find(tick);
+            if (i == sigmap->end())
+                  undoChangeSig(tick, SigEvent(), e1);
+            }
+      //-----------------
+
       for (ciTEvent i = tempomap->begin(); i != tempomap->end(); ++i) {
             if (i->first >= tick && (i->first < tick2))
                   undoChangeTempo(i->first, i->second, TEvent());
@@ -898,6 +910,7 @@ void Score::cmdRemoveTime(int tick, int len)
                   }
             }
       undoInsertTime(tick, -len);
+      undoFixTicks();
       }
 
 //---------------------------------------------------------

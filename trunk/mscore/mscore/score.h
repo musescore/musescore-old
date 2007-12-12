@@ -172,6 +172,8 @@ class Score : public QObject {
       void addMetronome();
 
       MeasureBase* searchLabel(const QString& s, MeasureBase* start = 0);
+      void undoSigInsertTime(int, int);
+      void undoFixTicks();
 
    public slots:
       void doUndo();

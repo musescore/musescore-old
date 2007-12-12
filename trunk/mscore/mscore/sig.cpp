@@ -181,6 +181,7 @@ int SigList::ticksMeasure(int tick) const
       ciSigEvent i = upper_bound(tick);
       if (empty() || i == begin()) {
             printf("SigList::ticksMeasure(): timesig(%d): not found\n", tick);
+            abort();
             return 4 * division;
             }
       --i;
@@ -348,7 +349,8 @@ void SigList::removeTime(int tick, int len)
       {
       SigList tmp;
       for (ciSigEvent i = begin(); i != end(); ++i) {
-            if ((i->first >= tick) && (tick != 0)) {
+//            if ((i->first >= tick) && (tick != 0)) {
+            if (i->first >= tick) {
                   if (i->first >= tick + len)
                         tmp.add(i->first - len, i->second);
                   else
@@ -370,7 +372,8 @@ void SigList::insertTime(int tick, int len)
       {
       SigList tmp;
       for (ciSigEvent i = begin(); i != end(); ++i) {
-            if ((i->first >= tick) && (tick != 0))
+//            if ((i->first >= tick) && (tick != 0))
+            if (i->first >= tick)
                   tmp.add(i->first + len, i->second);
             else
                   tmp.add(i->first, i->second);

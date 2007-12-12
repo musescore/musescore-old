@@ -315,7 +315,8 @@ void Text::layout(ScoreLayout* layout)
       // unwanted line breaks
       // Qt 4.4 does give better values but for now add 10% margin:
 
-      double tw = doc->idealWidth() * 1.1;
+//      double tw = doc->idealWidth() * 1.1;
+      double tw = doc->idealWidth();
 
       doc->setTextWidth(tw);
       setbbox(QRectF(QPointF(), doc->size()));

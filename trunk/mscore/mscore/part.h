@@ -78,8 +78,8 @@ class Part {
       void setId(const QString& s)             { _id = s; }
       QString id() const                       { return _id; }
       const QTextDocument& shortName() const   { return _shortName; }
-      const QTextDocument& longName() const    { return _longName;  }
-      QString trackName() const                { return _trackName; }
+      const QTextDocument& longName()  const   { return _longName;  }
+      QString trackName() const                { return _trackName;  }
       void setLongName(const QString& s);
       void setShortName(const QString& s);
       void setLongName(const QTextDocument& s);
