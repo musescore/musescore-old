@@ -528,7 +528,7 @@ void Measure::layout(ScoreLayout* layout, double width)
                            y + staffY[staff]);
 
                         // increase staff distance if necessary
-                        y += _spatium * 4;
+                        y += _spatium * 5;
                         if ((staff+1) < nstaves) {
                               if (y > staves[staff]->distance) {
                                     staves[staff]->distance = y;
