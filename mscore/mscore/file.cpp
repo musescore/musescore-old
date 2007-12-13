@@ -58,91 +58,6 @@
 double printerMag = 1.0;
 
 //---------------------------------------------------------
-//   readInstrument
-//---------------------------------------------------------
-
-static void readInstrument(const QString& group, QDomElement e)
-      {
-      InstrumentTemplate t;
-
-      t.group       = group;
-      t.staves      = 1;
-      for (int i = 0; i < MAX_STAVES; ++i) {
-            t.clefIdx[i] = 0;
-            t.staffLines[i] = 5;
-            t.smallStaff[i] = false;
-            }
-      t.bracket     = -1;
-      t.midiProgram = 0;
-      t.minPitch    = 0;
-      t.maxPitch    = 127;
-      t.transpose   = 0;
-      t.useDrumset  = false;
-
-      for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
-            QString tag(e.tagName());
-            QString val(e.text());
-            int i = val.toInt();
-            if (tag == "name")
-                  t.name = val;
-            else if (tag == "short-name")
-                  t.shortName = val;
-            else if (tag == "staves")
-                  t.staves = i;
-            else if (tag == "clef") {
-                  int idx = e.attribute("staff", "1").toInt() - 1;
-                  if (idx >= MAX_STAVES)
-                        idx = MAX_STAVES-1;
-                  t.clefIdx[idx] = i;
-                  }
-            else if (tag == "stafflines") {
-                  int idx = e.attribute("staff", "1").toInt() - 1;
-                  if (idx >= MAX_STAVES)
-                        idx = MAX_STAVES-1;
-                  t.staffLines[idx] = i;
-                  }
-            else if (tag == "stafflines") {
-                  int idx = e.attribute("staff", "1").toInt() - 1;
-                  if (idx >= MAX_STAVES)
-                        idx = MAX_STAVES-1;
-                  t.smallStaff[idx] = i;
-                  }
-            else if (tag == "bracket")
-                  t.bracket = i;
-            else if (tag == "minPitch")
-                  t.minPitch = i;
-            else if (tag == "maxPitch")
-                  t.maxPitch = i;
-            else if (tag == "transpose")
-                  t.transpose = i;
-            else if (tag == "drumset")
-                  t.useDrumset = i;
-            else if (tag == "midiprogram")
-                  t.midiProgram = i;
-            else
-                  domError(e);
-            }
-      instrumentTemplates.push_back(new InstrumentTemplate(t));
-      }
-
-//---------------------------------------------------------
-//   readInstrumentGroup
-//---------------------------------------------------------
-
-static void readInstrumentGroup(QDomElement e)
-      {
-      QString group = e.attribute("name");
-
-      for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
-            QString tag(e.tagName());
-            if (tag == "instrument")
-                  readInstrument(group, e);
-            else
-                  domError(e);
-            }
-      }
-
-//---------------------------------------------------------
 //   getFile
 //    return true on error
 //---------------------------------------------------------
@@ -763,8 +678,8 @@ bool Score::loadMsc(QString name)
                               }
                         else if (tag == "page-layout")
                               pageFormat()->read(ee);
-                        else if (tag == "instrument-group")
-                              readInstrumentGroup(ee);
+//                        else if (tag == "instrument-group")
+//                              readInstrumentGroup(ee);
                         else if (tag == "rights") {
                               if (rights == 0)
                                     rights = new QTextDocument(0);
@@ -839,62 +754,6 @@ bool Score::loadMsc(QString name)
 
       f.close();
       return false;
-      }
-
-//---------------------------------------------------------
-//   loadInstrumentTemplates
-//---------------------------------------------------------
-
-void MuseScore::loadInstrumentTemplates()
-      {
-      QString lang(QLocale::system().name().left(2));
-      QString instrTemplates = mscoreGlobalShare + "/templates/instruments_" + lang + ".xml";
-      QFileInfo info(instrTemplates);
-      if (!info.isReadable()) {
-            instrTemplates = mscoreGlobalShare + "/templates/instruments.xml";
-            info.setFile(instrTemplates);
-            if (!info.isReadable()) {
-                  instrTemplates = ":/data/instruments.xml";
-                  info.setFile(instrTemplates);
-                  }
-            }
-      if (!info.isReadable()) {
-            fprintf(stderr, "cannot find instrument templates <%s>\n", instrTemplates.toLatin1().data());
-            return;
-            }
-
-      QFile qf(instrTemplates);
-      if (!qf.open(QIODevice::ReadOnly))
-            return;
-
-      QDomDocument doc;
-      int line, column;
-      QString err;
-      bool rv = doc.setContent(&qf, false, &err, &line, &column);
-      docName = qf.fileName();
-      qf.close();
-
-      if (!rv) {
-            QString s;
-            s.sprintf("error reading file %s at line %d column %d: %s\n",
-               instrTemplates.toLatin1().data(), line, column, err.toLatin1().data());
-
-            QMessageBox::critical(mscore, tr("MuseScore: Read File"), s);
-            return;
-            }
-
-      for (QDomElement e = doc.documentElement(); !e.isNull(); e = e.nextSiblingElement()) {
-            if (e.tagName() == "museScore") {
-                  for (QDomElement ee = e.firstChildElement(); !ee.isNull(); ee = ee.nextSiblingElement()) {
-                        QString tag(ee.tagName());
-                        QString val(ee.text());
-                        if (tag == "instrument-group")
-                              readInstrumentGroup(ee);
-                        else
-                              domError(ee);
-                        }
-                  }
-            }
       }
 
 //---------------------------------------------------------

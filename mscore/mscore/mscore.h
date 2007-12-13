@@ -204,7 +204,6 @@ class MuseScore : public QMainWindow {
       void addScore(const QString& name);
       void saveScoreList();
       void loadScoreList();
-      void loadInstrumentTemplates();
       void editInstrList();
       void symbolMenu();
       void clefMenu();

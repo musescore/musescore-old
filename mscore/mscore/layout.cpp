@@ -357,11 +357,11 @@ bool ScoreLayout::layoutPage()
       // usable width of page:
       qreal w  = page->loWidth() - page->lm() - page->rm();
       qreal x  = page->lm();
-      qreal ey = page->loHeight() - page->bm() - point(score()->style()->staffLowerBorder);
+      qreal ey = page->loHeight() - page->bm() - point(score()->style()->staffLowerBorder)
+                  - point(score()->style()->systemDistance);
 
       page->clear();
       qreal y = page->tm();
-      const double systemDistance = point(score()->style()->systemDistance);
 
       bool firstSystem = true;
       int rows = 0;
@@ -399,13 +399,13 @@ bool ScoreLayout::layoutPage()
                         }
                   int cs            = curSystem;
                   MeasureBase* cm   = curMeasure;
-                  QList<System*> sl = layoutSystemRow(x, y, w, isFirstSystem);
+                  double h;
+                  QList<System*> sl = layoutSystemRow(x, y, w, isFirstSystem, &h);
                   if (sl.isEmpty()) {
                         printf("layoutSystemRow returns zero systems\n");
                         abort();
                         }
 
-                  qreal h = sl.front()->bbox().height();
                   if (y + h > ey) {
                         // system does not fit on page: rollback
                         curMeasure = cm;
@@ -417,7 +417,7 @@ bool ScoreLayout::layoutPage()
                         page->appendSystem(system);
                         system->setYpos(y);
                         }
-                  y += (h + systemDistance);
+                  y += h;
                   if (sl.back()->pageBreak())
                         break;
                   firstSystem = false;
@@ -430,7 +430,7 @@ bool ScoreLayout::layoutPage()
       // then insert space between staffs to fill page
       //-----------------------------------------------------------------------
 
-      double restHeight = ey - y + systemDistance;
+      double restHeight = ey - y; //  + systemDistance;
       double ph = page->height()
             - point(score()->style()->staffLowerBorder + score()->style()->staffUpperBorder);
 
@@ -547,8 +547,10 @@ bool ScoreLayout::layoutSystem1(double& minWidth, double w, bool isFirstSystem)
 //    x, y  position of row on page
 //---------------------------------------------------------
 
-QList<System*> ScoreLayout::layoutSystemRow(qreal x, qreal y, qreal rowWidth, bool isFirstSystem)
+QList<System*> ScoreLayout::layoutSystemRow(qreal x, qreal y, qreal rowWidth,
+   bool isFirstSystem, double* h)
       {
+      *h = 0.0;
       QList<System*> sl;
 
       double ww = rowWidth;
@@ -684,11 +686,13 @@ QList<System*> ScoreLayout::layoutSystemRow(qreal x, qreal y, qreal rowWidth, bo
             system->setWidth(w);
             system->layout2(this);
             foreach(MeasureBase* mb, system->measures()) {
-                  if (mb->type() == HBOX) {
+                  if (mb->type() == HBOX)
                         mb->setHeight(system->height());
-                        }
                   }
             xx += w;
+            double hh = system->height() + system->staves()->back()->distance();
+            if (hh > *h)
+                  *h = hh;
             }
       return sl;
       }

@@ -18,8 +18,8 @@
 //  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //=============================================================================
 
-#ifndef __INSTRUMENTS__
-#define __INSTRUMENTS__
+#ifndef __INSTRDIALOG_H__
+#define __INSTRDIALOG_H__
 
 #include "ui_instrdialog.h"
 #include "globals.h"
@@ -32,26 +32,6 @@ class Score;
 class EditInstrument;
 
 //---------------------------------------------------------
-//   InstrumentTemplate
-//---------------------------------------------------------
-
-struct InstrumentTemplate {
-      QString group;
-      QString name;           // also used for track name
-      QString shortName;
-      int staves;             // 1 <= MAX_STAVES
-      int clefIdx[MAX_STAVES];
-      int staffLines[MAX_STAVES];
-      int smallStaff[MAX_STAVES];
-      int bracket;            // bracket type (NO_BRACKET)
-      int midiProgram;
-      int minPitch;
-      int maxPitch;
-      int transpose;          // for transposing instruments
-      bool useDrumset;
-      };
-
-//---------------------------------------------------------
 //   InstrumentsDialog
 //---------------------------------------------------------
 
@@ -59,6 +39,8 @@ class InstrumentsDialog : public QDialog, public Ui::InstrumentDialogBase {
       Q_OBJECT
       Score* cs;
       EditInstrument* editInstrument;
+
+      void buildTemplateList();
 
    private slots:
       void on_instrumentList_itemSelectionChanged();
@@ -71,6 +53,8 @@ class InstrumentsDialog : public QDialog, public Ui::InstrumentDialogBase {
       void on_editButton_clicked();
       void on_aboveButton_clicked();
       void on_belowButton_clicked();
+      void on_saveButton_clicked();
+      void on_loadButton_clicked();
       virtual void accept();
 
    public:
@@ -135,8 +119,6 @@ class StaffListItem : public QTreeWidgetItem {
       void setClef(int val);
       int clef() const { return _clef; }
       };
-
-extern QList<InstrumentTemplate*> instrumentTemplates;
 
 #endif
 

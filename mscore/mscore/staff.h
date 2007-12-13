@@ -79,7 +79,6 @@ class Staff {
       ~Staff();
       int key(int tick) const;
       bool isTop() const             { return _rstaff == 0; }
-      bool isTopSplit() const;
       QString trackName() const;
       const QTextDocument& longName() const;
       const QTextDocument& shortName() const;

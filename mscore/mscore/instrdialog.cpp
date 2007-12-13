@@ -18,8 +18,10 @@
 //  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //=============================================================================
 
+#include "config.h"
 #include "mscore.h"
 #include "instrdialog.h"
+#include "instrtemplate.h"
 #include "canvas.h"
 #include "score.h"
 #include "system.h"
@@ -32,8 +34,6 @@
 #include "style.h"
 #include "editinstrument.h"
 #include "drumset.h"
-
-QList<InstrumentTemplate*> instrumentTemplates;
 
 //---------------------------------------------------------
 //   StaffListItem
@@ -152,7 +152,6 @@ InstrumentsDialog::InstrumentsDialog(QWidget* parent)
       editInstrument = 0;
       setupUi(this);
       cs = 0;
-      QString curGroup;
 
       instrumentList->setSelectionMode(QAbstractItemView::SingleSelection);
       partiturList->setSelectionMode(QAbstractItemView::SingleSelection);
@@ -160,15 +159,8 @@ InstrumentsDialog::InstrumentsDialog(QWidget* parent)
       instrumentList->setHeaderLabels(QStringList("Instrument List"));
       QStringList header = (QStringList() << tr("Staves") << tr("Clef"));
       partiturList->setHeaderLabels(header);
-      InstrumentTemplateListItem* group = 0;
-      foreach(InstrumentTemplate* t, instrumentTemplates) {
-            if (curGroup != t->group) {
-                  curGroup = t->group;
-                  group    = new InstrumentTemplateListItem(curGroup, instrumentList);
-                  group->setFlags(Qt::ItemIsEnabled);
-                  }
-            new InstrumentTemplateListItem(t, group);
-            }
+
+      buildTemplateList();
 
       addButton->setEnabled(false);
       removeButton->setEnabled(false);
@@ -177,6 +169,25 @@ InstrumentsDialog::InstrumentsDialog(QWidget* parent)
       editButton->setEnabled(false);
       aboveButton->setEnabled(false);
       belowButton->setEnabled(false);
+      }
+
+//---------------------------------------------------------
+//   buildTemplateList
+//---------------------------------------------------------
+
+void InstrumentsDialog::buildTemplateList()
+      {
+      instrumentList->clear();
+      InstrumentTemplateListItem* group = 0;
+      QString curGroup;
+      foreach(InstrumentTemplate* t, instrumentTemplates) {
+            if (curGroup != t->group) {
+                  curGroup = t->group;
+                  group    = new InstrumentTemplateListItem(curGroup, instrumentList);
+                  group->setFlags(Qt::ItemIsEnabled);
+                  }
+            new InstrumentTemplateListItem(t, group);
+            }
       }
 
 //---------------------------------------------------------
@@ -800,5 +811,80 @@ void Segment::sortStaves(QList<int>& src, QList<int>& dst)
                   dl.push_back(_elist[k]);
             }
       _elist = dl;
+      }
+
+//---------------------------------------------------------
+//   on_saveButton_clicked
+//---------------------------------------------------------
+
+void InstrumentsDialog::on_saveButton_clicked()
+      {
+      QString name = QFileDialog::getSaveFileName(
+         this,
+         tr("MuseScore: Save Instrument List"),
+         ".",
+         tr("MuseScore Instruments (*.xml);;")
+         );
+      if (name.isEmpty())
+            return;
+      QString ext(".xml");
+      QFileInfo info(name);
+
+      if (info.completeSuffix().isEmpty())
+            info.setFile(info.filePath() + ext);
+      QFile f(info.filePath());
+      if (!f.open(QIODevice::WriteOnly)) {
+            QString s = tr("Open Instruments File\n") + f.fileName() + tr("\nfailed: ")
+               + QString(strerror(errno));
+            QMessageBox::critical(mscore, tr("MuseScore: Open Instruments file"), s);
+            return;
+            }
+
+      Xml xml(&f);
+      xml.header();
+      xml.stag("museScore version=\"" MSC_VERSION "\"");
+      QString curGroup;
+      foreach(InstrumentTemplate* t, instrumentTemplates) {
+            if (curGroup != t->group) {
+                  if (!curGroup.isEmpty())
+                        xml.etag();
+                  xml.stag(QString("instrument-group name=\"%1\"").arg(t->group));
+                  curGroup = t->group;
+                  }
+            t->write(xml);
+            }
+      if (!curGroup.isEmpty())
+            xml.etag();
+      xml.etag();
+      if (f.error() != QFile::NoError) {
+            QString s = QString("Write Style failed: ") + f.errorString();
+            QMessageBox::critical(this, tr("MuseScore: Write Style"), s);
+            }
+      }
+
+//---------------------------------------------------------
+//   on_loadButton_clicked
+//---------------------------------------------------------
+
+void InstrumentsDialog::on_loadButton_clicked()
+      {
+      QString fn = QFileDialog::getOpenFileName(
+         this, tr("MuseScore: Load Instrument List"),
+          mscoreGlobalShare + "/templates",
+         tr("MuseScore Instruments (*.xml);;"
+            "All files (*)"
+            )
+         );
+      if (fn.isEmpty())
+            return;
+      QFile f(fn);
+      if (!loadInstrumentTemplates(fn)) {
+            QMessageBox::warning(0,
+               QWidget::tr("MuseScore: load Style failed:"),
+               QString(strerror(errno)),
+               QString::null, QWidget::tr("Quit"), QString::null, 0, 1);
+            return;
+            }
+      buildTemplateList();
       }
 

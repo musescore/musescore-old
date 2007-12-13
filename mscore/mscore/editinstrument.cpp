@@ -19,7 +19,7 @@
 //=============================================================================
 
 #include "editinstrument.h"
-#include "instrdialog.h"
+#include "instrtemplate.h"
 
 //---------------------------------------------------------
 //   EditInstrument

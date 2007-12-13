@@ -59,6 +59,8 @@ void EditStyle::apply()
       style->staffDistance          = Spatium(staffDistance->value());
       style->accoladeDistance       = Spatium(akkoladeDistance->value());
       style->systemDistance         = Spatium(systemDistance->value());
+      style->lyricsDistance         = Spatium(lyricsDistance->value());
+      style->lyricsMinBottomDistance = Spatium(lyricsMinBottomDistance->value());
       style->measureSpacing         = measureSpacing->value();
       style->minNoteDistance        = Spatium(minNoteDistance->value());
       style->barNoteDistance        = Spatium(barNoteDistance->value());
@@ -102,6 +104,8 @@ void EditStyle::setValues(Score* s)
       staffDistance->setValue(style->staffDistance.val());
       akkoladeDistance->setValue(style->accoladeDistance.val());
       systemDistance->setValue(style->systemDistance.val());
+      lyricsDistance->setValue(style->lyricsDistance.val());
+      lyricsMinBottomDistance->setValue(style->lyricsMinBottomDistance.val());
       measureSpacing->setValue(style->measureSpacing);
       minNoteDistance->setValue(style->minNoteDistance.val());
       barNoteDistance->setValue(style->barNoteDistance.val());
