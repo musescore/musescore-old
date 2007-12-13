@@ -493,14 +493,9 @@ void Measure::layoutNoteHeads(int staff)
 
 void Measure::layout(ScoreLayout* layout, double width)
       {
-      double _spatium = layout->spatium();
-
-      int nstaves     = _score->nstaves();
-      double staffY[nstaves];
-      for (int staffIdx = 0; staffIdx < nstaves; ++staffIdx) {
-            staffY[staffIdx] = system()->staff(staffIdx)->bbox().y();
+      int nstaves = _score->nstaves();
+      for (int staffIdx = 0; staffIdx < nstaves; ++staffIdx)
             staves[staffIdx]->distance = 0.0;
-            }
 
       // height of boundingRect will be set in system->layout2()
 
@@ -512,9 +507,10 @@ void Measure::layout(ScoreLayout* layout, double width)
       //---------------------------------------------------
 
       for (Segment* segment = first(); segment; segment = segment->next()) {
-            for (int staff = 0; staff < nstaves; ++staff) {
-                  LyricsList* ll = segment->lyricsList(staff);
+            for (int staffIdx = 0; staffIdx < nstaves; ++staffIdx) {
+                  LyricsList* ll = segment->lyricsList(staffIdx);
                   int line = 0;
+                  double y = 0;
                   for (iLyrics i = ll->begin(); i != ll->end(); ++i, ++line) {
                         Lyrics* lyrics = *i;
                         if (lyrics == 0)
@@ -523,18 +519,15 @@ void Measure::layout(ScoreLayout* layout, double width)
                         // center to middle of notehead:
                         double noteHeadWidth = symbols[quartheadSym].width();
                         double lh = lyrics->lineSpacing();
-                        double y  = lh * line + point(score()->style()->lyricsDistance);
+                        y  = lh * line + point(score()->style()->lyricsDistance);
                         lyrics->setPos(noteHeadWidth/2 - lyrics->bbox().width() * .5,
-                           y + staffY[staff]);
-
-                        // increase staff distance if necessary
-                        y += _spatium * 5;
-                        if ((staff+1) < nstaves) {
-                              if (y > staves[staff]->distance) {
-                                    staves[staff]->distance = y;
-                                    }
-                              }
+                           y + system()->staff(staffIdx)->bbox().bottom());
+                        y += lyrics->bbox().height();
                         }
+                  // increase staff distance if necessary
+                  y += point(score()->style()->lyricsMinBottomDistance);
+                  if (y > staves[staffIdx]->distance)
+                        staves[staffIdx]->distance = y;
                   }
             }
       }
@@ -994,15 +987,6 @@ void Measure::moveY(int staff, double dy)
             foreach(Lyrics* ly, *ll)
                   ly->move(0, dy);
             }
-#if 0 // TODO
-      BarLine* bl = barLine(staff);
-      if (bl) {
-            if (_score->staff(staff)->isTopSplit()) {
-                  Spatium barLineLen = Spatium(8) + score()->style()->staffDistance;
-                  bl->setHeight(point(barLineLen));
-                  }
-            }
-#endif
       foreach(Tuplet* tuplet, _tuplets)
             tuplet->move(0, dy);
       if (_noText)

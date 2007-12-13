@@ -49,6 +49,7 @@
 #include "palette.h"
 #include "part.h"
 #include "drumset.h"
+#include "instrtemplate.h"
 
 QTextStream cout(stdout);
 QTextStream eout(stderr);
@@ -628,7 +629,7 @@ MuseScore::MuseScore()
 
       setCentralWidget(mainWindow);
 
-      loadInstrumentTemplates();
+      loadInstrumentTemplates(preferences.instrumentList);
       preferencesChanged();
       connect(seq, SIGNAL(started()), SLOT(seqStarted()));
       connect(seq, SIGNAL(stopped()), SLOT(seqStopped()));

@@ -85,6 +85,7 @@ struct Preferences {
       MidiRemote len3, len6, len12, len24;
       bool midiExpandRepeats;
       bool playRepeats;
+      QString instrumentList;  // file path of instrument templates
 
       bool dirty;
 
@@ -121,6 +122,7 @@ class PreferenceDialog : public QDialog, private Ui::PrefsDialogBase {
       void selectBgWallpaper();
       void selectSoundFont();
       void selectImagePath();
+      void selectInstrumentList();
       void playPanelCurClicked();
       void padCurClicked();
       void resetShortcutClicked();

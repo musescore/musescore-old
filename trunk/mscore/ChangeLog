@@ -1,3 +1,11 @@
+13.12.7 (ws)
+      - added new demo "schnee.msc"
+      - added preference for path of instrument templates file
+      - added load/save for instrument templates
+      - added preference "lyricsMinBottomDistance"
+      - preference "lyricsDistance" is now measured form bottom of staff
+        to top of lyrics
+      - enhanced vertical lyrics layout for one staff systems
 11.12.7 (ws)
       - save/load frame properties for text style
       - fix for QTextDocument->idealWidth() returns too small values resulting in

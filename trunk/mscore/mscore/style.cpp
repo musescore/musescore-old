@@ -142,6 +142,8 @@ Style defaultStyle = {
       Spatium(6.5),   // staffDistance
       Spatium(6.5),   // accoladeDistance
       Spatium(9.25),  // systemDistance
+      Spatium(2),     // lyricsDistance
+      Spatium(2),     // lyricsMinBottomDistance
 
       Spatium(4.0),   // minMeasureWidth  12.0
       Spatium(0.16),  // barWidth;
@@ -204,8 +206,6 @@ Style defaultStyle = {
       5,                // measureNumberInterval;
       true,             // measureNumberSystem
       false,            // showMeasureNumberAllStaffs
-
-      Spatium(6.5),     // lyricsDistance
       };
 
 //---------------------------------------------------------
@@ -370,6 +370,10 @@ void Style::loadStyle(QDomElement e)
                   staffDistance = Spatium(d);
             else if (tag == "systemDistance")
                   systemDistance = Spatium(d);
+            else if (tag == "lyricsDistance")
+                  lyricsDistance = Spatium(d);
+            else if (tag == "lyricsMinBottomDistance")
+                  lyricsMinBottomDistance = Spatium(d);
             else if (tag == "minMeasureWidth")
                   minMeasureWidth = Spatium(d);
             else if (tag == "barWidth")
@@ -474,8 +478,6 @@ void Style::loadStyle(QDomElement e)
                   measureNumberSystem = i;
             else if (tag == "measureNumberAllStaffs")
                   measureNumberAllStaffs = i;
-            else if (tag == "lyricsDistance")
-                  lyricsDistance = Spatium(d);
             else
                   domError(e);
             }
@@ -494,6 +496,8 @@ void Style::saveStyle(Xml& xml)
       xml.tag("staffDistance",          staffDistance.val());
       xml.tag("akkoladeDistance",       akkoladeDistance.val());
       xml.tag("systemDistance",         systemDistance.val());
+      xml.tag("lyricsDistance",         lyricsDistance.val());
+      xml.tag("lyricsMinBottomDistance", lyricsMinBottomDistance.val());
 
       xml.tag("minMeasureWidth",        minMeasureWidth.val());
       xml.tag("barWidth",               barWidth.val());
@@ -550,8 +554,5 @@ void Style::saveStyle(Xml& xml)
       xml.tag("measureNumberInterval",  measureNumberInterval);
       xml.tag("measureNumberAllStaffs", measureNumberAllStaffs);
       xml.tag("measureNumberSystem",    measureNumberSystem);
-
-      xml.tag("lyricsDistance",         lyricsDistance.val());
-
       xml.etag();
       }

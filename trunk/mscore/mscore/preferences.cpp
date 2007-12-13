@@ -146,6 +146,7 @@ Preferences::Preferences()
       antialiasedDrawing = true;
       sessionStart       = SCORE_SESSION;
       startScore         = ":/data/demo.msc";
+      instrumentList     = ":/data/instruments.xml";
       imagePath          = "~/mscore/images";
       showSplashScreen   = true;
       rewind.type        = -1;
@@ -163,7 +164,7 @@ Preferences::Preferences()
       len12.type         = -1;
       len24.type         = -1;
       midiExpandRepeats  = true;
-      playRepeats  = true;
+      playRepeats        = true;
       };
 
 //---------------------------------------------------------
@@ -220,6 +221,7 @@ void Preferences::write()
             case SCORE_SESSION:  s.setValue("sessionStart", "score"); break;
             }
       s.setValue("startScore", startScore);
+      s.setValue("instrumentList", instrumentList);
 
       s.beginGroup("PlayPanel");
       s.setValue("pos", playPanelPos);
@@ -293,8 +295,8 @@ void Preferences::read()
       else if (ss == "score")
             sessionStart = SCORE_SESSION;
 
-      startScore         = ":/data/demo.msc";
-      startScore = s.value("startScore", ":/data/demo.msc").toString();
+      startScore     = s.value("startScore", ":/data/demo.msc").toString();
+      instrumentList = s.value("instrumentList", ":/data/instruments.xml").toString();
 
       s.beginGroup("PlayPanel");
       playPanelPos = s.value("pos", QPoint(100, 300)).toPoint();
@@ -431,6 +433,7 @@ PreferenceDialog::PreferenceDialog(QWidget* parent)
       imagePath->setText(preferences.imagePath);
       showSplashScreen->setChecked(preferences.showSplashScreen);
       expandRepeats->setChecked(preferences.midiExpandRepeats);
+      instrumentList->setText(preferences.instrumentList);
 
       //
       // initialize local shortcut table
@@ -468,6 +471,7 @@ PreferenceDialog::PreferenceDialog(QWidget* parent)
       connect(bgWallpaperSelect,  SIGNAL(clicked()), SLOT(selectBgWallpaper()));
       connect(sfButton, SIGNAL(clicked()), SLOT(selectSoundFont()));
       connect(imagePathButton, SIGNAL(clicked()), SLOT(selectImagePath()));
+      connect(instrumentListButton, SIGNAL(clicked()), SLOT(selectInstrumentList()));
       sfChanged = false;
 
       connect(playPanelCur, SIGNAL(clicked()), SLOT(playPanelCurClicked()));
@@ -710,6 +714,21 @@ void PreferenceDialog::selectImagePath()
          );
       if (!s.isNull())
             imagePath->setText(s);
+      }
+
+//---------------------------------------------------------
+//   selectInstrumentList
+//---------------------------------------------------------
+
+void PreferenceDialog::selectInstrumentList()
+      {
+      QString s = QFileDialog::getExistingDirectory(
+         this,
+         tr("Choose default Instrument List"),
+         instrumentList->text()
+         );
+      if (!s.isNull())
+            instrumentList->setText(s);
       }
 
 //---------------------------------------------------------

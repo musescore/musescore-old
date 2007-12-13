@@ -294,7 +294,9 @@ void System::layout2(ScoreLayout* layout)
       for (int staffIdx = 0; staffIdx < staves; ++staffIdx) {
             Staff* staff    = score()->staff(staffIdx);
             double staffMag = staff->small() ? 0.7 : 1.0;
-            if (staff->isTopSplit())
+            if ((staffIdx + 1) == staves)
+                  setDistance(staffIdx, score()->style()->systemDistance);
+            else if ((staff->part()->staves()->size() + 1) < staff->rstaff())
                   setDistance(staffIdx, score()->style()->accoladeDistance);
             else
                   setDistance(staffIdx, score()->style()->staffDistance);
@@ -331,7 +333,7 @@ void System::layout2(ScoreLayout* layout)
                   s->setbbox(QRectF());
                   continue;
                   }
-            double sHeight = 4 * _spatium * staffMag;
+            double sHeight = (staff->lines() - 1) * _spatium * staffMag;
             s->setbbox(QRectF(_leftMargin, y, width() - _leftMargin, sHeight));
             // moveY measures
             if (y != 0.0) {

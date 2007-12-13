@@ -3,14 +3,16 @@
   <Spatium>1.764</Spatium>
   <Division>480</Division>
   <Mag>1</Mag>
-  <xoff>55.8831</xoff>
-  <yoff>17.2244</yoff>
+  <xoff>14.8831</xoff>
+  <yoff>18.2244</yoff>
   <Style>
     <staffUpperBorder>7</staffUpperBorder>
     <staffLowerBorder>7</staffLowerBorder>
-    <staffDistance>8.5</staffDistance>
+    <staffDistance>0</staffDistance>
     <akkoladeDistance>5.5</akkoladeDistance>
-    <systemDistance>13.25</systemDistance>
+    <systemDistance>0</systemDistance>
+    <lyricsDistance>2</lyricsDistance>
+    <lyricsMinBottomDistance>2</lyricsMinBottomDistance>
     <minMeasureWidth>4</minMeasureWidth>
     <barWidth>0.16</barWidth>
     <doubleBarWidth>0.16</doubleBarWidth>
@@ -29,7 +31,7 @@
     <spacing8>1.4</spacing8>
     <spacing4>1.8</spacing4>
     <spacing2>2.2</spacing2>
-    <measureSpacing>1.1</measureSpacing>
+    <measureSpacing>1</measureSpacing>
     <barNoteDistance>1.5</barNoteDistance>
     <noteBarDistance>1</noteBarDistance>
     <staffLineWidth>0.08</staffLineWidth>
@@ -62,7 +64,6 @@
     <measureNumberInterval>5</measureNumberInterval>
     <measureNumberAllStaffs>0</measureNumberAllStaffs>
     <measureNumberSystem>1</measureNumberSystem>
-    <lyricsDistance>6.5</lyricsDistance>
     </Style>
   <showInvisible>1</showInvisible>
   <page-layout>
@@ -112,18 +113,18 @@ p, li { white-space: pre-wrap; }
 <p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Leise rieselt der Schnee</p></body></html>
         </Text>
       <Text>
-        <subtype>Poet</subtype>
-<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><style type="text/css">
-p, li { white-space: pre-wrap; }
-</style></head><body style=" font-family:'Times New Roman'; font-size:12pt; font-weight:400; font-style:normal;">
-<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Text: Eduard Ebel</p></body></html>
-        </Text>
-      <Text>
         <subtype>Composer</subtype>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
 </style></head><body style=" font-family:'Times New Roman'; font-size:12pt; font-weight:400; font-style:normal;">
 <p align="right" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Trad.</p></body></html>
+        </Text>
+      <Text>
+        <subtype>Poet</subtype>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-size:12pt; font-weight:400; font-style:normal;">
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Text: Eduard Ebel (1839-1905)</p></body></html>
         </Text>
       </VBox>
     <Measure number="1">
@@ -360,8 +361,6 @@ p, li { white-space: pre-wrap; }
         <Note>
           <pitch>62</pitch>
           <tpc>16</tpc>
-          <Tie>
-            </Tie>
           </Note>
         </Chord>
       <Rest>

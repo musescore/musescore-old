@@ -121,7 +121,7 @@ add_executable ( mscore
       lilypond.cpp exportly.cpp repeatflag.cpp repeatflagdialog.cpp
       voltaproperties.cpp chordproperties.cpp restproperties.cpp
       repeatproperties.cpp box.cpp measurebase.cpp
-      repeat2.cpp
+      repeat2.cpp instrtemplate.cpp
       ${AUDIO}
       )
 
