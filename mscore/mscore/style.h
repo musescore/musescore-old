@@ -21,36 +21,8 @@
 #ifndef __STYLE_H__
 #define __STYLE_H__
 
+#include "globals.h"
 #include "spatium.h"
-
-enum Align { ALIGN_LEFT     = 0,
-             ALIGN_RIGHT    = 1,
-             ALIGN_HCENTER  = 2,
-             ALIGN_TOP      = 0,
-             ALIGN_BOTTOM   = 4,
-             ALIGN_VCENTER  = 8,
-             ALIGN_BASELINE = 16
-      };
-
-static const int ALIGN_CENTER = ALIGN_HCENTER | ALIGN_VCENTER;
-
-
-enum Anchor {
-      ANCHOR_PARENT,    ///< anchor is topleft of parent boundingRect
-      ANCHOR_MEASURE,   ///< anchor is topleft of measure boundingRect
-      ANCHOR_STAFF,     ///< top of staff, left of measure
-      ANCHOR_SEGMENT,   ///< top of staff, left of segment
-      };
-
-enum OffsetType {
-      OFFSET_ABS,       ///< offset in point units
-      OFFSET_SPATIUM    ///< offset in space units
-      };
-
-// to move Anchor to right of measure set
-//    OffsetType = OFFSET_REL
-//    offset     = 100
-
 
 class Xml;
 
@@ -98,7 +70,7 @@ class TextStyle {
       bool bold;
       bool italic;
       bool underline;
-      int align;
+      Align align;
       Anchor anchor;
       double xoff, yoff;                  // absolute offset: inch or spatium
       OffsetType offsetType;
@@ -113,7 +85,7 @@ class TextStyle {
 
       TextStyle(QString _name, QString _family, int _size,
          bool _bold, bool _italic, bool _underline,
-         int _align, Anchor _anchor,
+         Align _align, Anchor _anchor,
          double _xoff = 0, double _yoff = 0, OffsetType _ot = OFFSET_SPATIUM,
          double _rxoff = 0, double _ryoff = 0,
          bool sd = false,

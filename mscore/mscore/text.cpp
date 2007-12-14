@@ -41,13 +41,6 @@ TextPalette* palette;
 Text::Text(Score* s)
    : Element(s)
       {
-      _align                  = 0;
-      _xoff                   = 0;
-      _yoff                   = 0;
-      _rxoff                  = 0;
-      _ryoff                  = 0;
-      _anchor                 = ANCHOR_PARENT;
-      _offsetType             = OFFSET_SPATIUM;
       _sizeIsSpatiumDependent = true;
       editMode                = false;
       cursorPos               = 0;
@@ -64,6 +57,7 @@ Text::Text(Score* s)
       _paddingWidth           = 1.0;
       _frameColor             = QColor(Qt::black);
       _frameRound             = 5;
+      setSubtype(TEXT_STAFF);
       }
 
 Text::Text(const Text& e)
@@ -124,6 +118,15 @@ void Text::setSubtype(int val)
       }
 
 //---------------------------------------------------------
+//   setAbove
+//---------------------------------------------------------
+
+void Text::setAbove(bool val)
+      {
+      setYoff(val ? -2.0 : 7.0);
+      }
+
+//---------------------------------------------------------
 //   style
 //---------------------------------------------------------
 
@@ -154,7 +157,8 @@ TextStyle* Text::style() const
             case TEXT_VOLTA:            st = TEXT_STYLE_VOLTA; break;
             case TEXT_FRAME:            st = TEXT_STYLE_FRAME; break;
             default:
-                  printf("unknown text subtype %d\n", subtype());
+                  printf("unknown text subtype %d <%s>\n",
+                     subtype(), qPrintable(doc->toPlainText()));
                   break;
             }
       if (st != -1)
@@ -310,14 +314,7 @@ void Text::layout(ScoreLayout* layout)
       o += QPointF(_rxoff * parent()->width() * 0.01, _ryoff * parent()->height() * 0.01);
 
       doc->setTextWidth(1000000.0);       //!? qt bug?
-
-      // idealWidth() returns too small values resulting in
-      // unwanted line breaks
-      // Qt 4.4 does give better values but for now add 10% margin:
-
-//      double tw = doc->idealWidth() * 1.1;
       double tw = doc->idealWidth();
-
       doc->setTextWidth(tw);
       setbbox(QRectF(QPointF(), doc->size()));
 
@@ -504,7 +501,7 @@ bool Text::readProperties(QDomElement e)
             doc->setHtml(s);
             }
       else if (tag == "align")            // obsolete
-            _align = val.toInt();
+            _align = Align(val.toInt());
       else if (tag == "halign") {
             if (val == "center")
                   _align |= ALIGN_HCENTER;

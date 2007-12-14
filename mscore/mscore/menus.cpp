@@ -984,23 +984,21 @@ void MuseScore::dynamicsMenu()
             sp->setGrid(90, 40);
 
             for (int i = 0; i < 27; ++i) {
-                  Dynamic* dynamic = new Dynamic(gscore, i+1);
+                  Dynamic* dynamic = new Dynamic(gscore);
+                  dynamic->setSubtype(i + 1);
                   sp->addObject(i, dynamic, dynamic->subtypeName());
                   }
-            Dynamic* d = new Dynamic(gscore, "crescendo");
-            sp->addObject(27, d,  "crescendo");
 
-            sp->addObject(28, new Dynamic(gscore, "diminuendo"), "diminuendo");
-            sp->addObject(29, new Dynamic(gscore, "dolce"),      "dolce");
-            sp->addObject(30, new Dynamic(gscore, "espressivo"), "espessivo");
-            sp->addObject(31, new Dynamic(gscore, "legato"),   "legato");
-            sp->addObject(32, new Dynamic(gscore, "leggiero"), "leggiero");
-            sp->addObject(33, new Dynamic(gscore, "marcato"),  "marcato");
-            sp->addObject(34, new Dynamic(gscore, "mero"),     "mero");
-            sp->addObject(35, new Dynamic(gscore, "molto"),    "molto");
-//            sp->addObject(36, new Dynamic(gscore, "morendo"),  "morendo");
-//            sp->addObject(37, new Dynamic(gscore, "calando"),  "calando");
-
+            char* expr[] = {
+                  "crescendo", "diminuendo", "dolce", "espressivo",
+                  "legato", "leggiero", "marcato", "mero", "molto"
+                  };
+            for (unsigned int i = 0; i < sizeof(expr) / sizeof(*expr); ++i) {
+                  Dynamic* d = new Dynamic(gscore);
+                  d->setSubtype(0);
+                  d->setText(expr[i]);
+                  sp->addObject(27+i, d,  expr[i]);
+                  }
             }
       dynamicsPalette->show();
       dynamicsPalette->raise();

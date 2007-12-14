@@ -74,8 +74,11 @@ const TextStyle defaultTextStyleArray[] = {
       TextStyle(QString("InstrumentsShort"),   ff, 12, false, false, false,
          ALIGN_RIGHT | ALIGN_VCENTER, ANCHOR_PARENT),
 
-      TextStyle(QString("Dynamics"), ff, 12, false, true, false, ALIGN_LEFT, ANCHOR_STAFF),
-      TextStyle(QString("Technik"), ff, 12, false, true, false, ALIGN_LEFT, ANCHOR_STAFF),
+      TextStyle(QString("Dynamics"), ff, 12, false, true, false,
+         ALIGN_LEFT | ALIGN_BASELINE, ANCHOR_SEGMENT, 0.0, 8.0, OS),
+
+      TextStyle(QString("Technik"), ff, 12, false, true, false,
+         ALIGN_LEFT | ALIGN_BASELINE, ANCHOR_SEGMENT, 0.0, -2.0, OS),
 
 /*12*/
       TextStyle(QString("Tempo"), ff, 12, true, false, false,
@@ -100,7 +103,7 @@ const TextStyle defaultTextStyleArray[] = {
          ALIGN_HCENTER | ALIGN_TOP,    ANCHOR_STAFF, 0, 6),
 
       TextStyle(QString("Dynamics1"), QString("MScore1"), 20, false, false, false,
-         ALIGN_LEFT, ANCHOR_STAFF),
+         ALIGN_LEFT | ALIGN_BASELINE, ANCHOR_SEGMENT, 0.0, 8.0, OS),
 
       TextStyle(QString("Tuplets"), ff,  8, false, false, false,
          ALIGN_CENTER, ANCHOR_PARENT),
@@ -115,7 +118,7 @@ const TextStyle defaultTextStyleArray[] = {
          ALIGN_HCENTER, ANCHOR_STAFF, 0, -5.0, OS, 0, 0, true),
 
       TextStyle(QString("Rehearsal Mark"), ff,  14, true, false, false,
-         ALIGN_HCENTER, ANCHOR_MEASURE, 0, -7.0, OS, 0, 0, true,
+         ALIGN_HCENTER | ALIGN_BASELINE, ANCHOR_SEGMENT, 0, -3.0, OS, 0, 0, true,
          0.3, 1.0, 1.0, 20, Qt::black),
 
       TextStyle(QString("Repeat Text"), ff,  12, false, false, false,
@@ -215,7 +218,7 @@ Style defaultStyle = {
 TextStyle::TextStyle(
    QString _name, QString _family, int _size,
    bool _bold, bool _italic, bool _underline,
-   int _align, Anchor _anchor,
+   Align _align, Anchor _anchor,
    double _xoff, double _yoff, OffsetType _ot, double _rxoff, double _ryoff,
    bool sd,
    double fw, double mw, double pw, int fr, QColor co)
@@ -271,7 +274,7 @@ void TextStyle::write(Xml& xml) const
       xml.tag("bold", bold);
       xml.tag("italic", italic);
       xml.tag("underline", underline);
-      xml.tag("align", align);
+      xml.tag("align", int(align));
       xml.tag("anchor", anchor);
       xml.tag("offsetType", offsetType);
       xml.tag("sizeIsSpatiumDependent", sizeIsSpatiumDependent);
@@ -316,7 +319,7 @@ void TextStyle::read(QDomElement e)
             else if (tag == "underline")
                   underline = i;
             else if (tag == "align")
-                  align = i;
+                  align = Align(i);
             else if (tag == "anchor")
                   anchor = (Anchor)i;
             else if (tag == "xoffset")

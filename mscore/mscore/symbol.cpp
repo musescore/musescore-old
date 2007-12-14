@@ -21,6 +21,10 @@
 #include "symbol.h"
 #include "sym.h"
 #include "xml.h"
+#include "system.h"
+#include "staff.h"
+#include "measure.h"
+#include "layout.h"
 
 //---------------------------------------------------------
 //   Symbol
@@ -40,6 +44,46 @@ Symbol::Symbol(Score* s)
 void Symbol::setSym(int s)
       {
       _sym  = s;
+      }
+
+//---------------------------------------------------------
+//   setAbove
+//---------------------------------------------------------
+
+void Symbol::setAbove(bool val)
+      {
+      setYoff(val ? -2.0 : 7.0);
+      }
+
+//---------------------------------------------------------
+//   layout
+//    height() and width() should return sensible
+//    values when calling this method
+//---------------------------------------------------------
+
+void Symbol::layout(ScoreLayout* layout)
+      {
+      QPointF o(QPointF(_xoff, _yoff));
+      if (_offsetType == OFFSET_SPATIUM)
+            o *= layout->spatium();
+      else
+            o *= DPI;
+      if (parent())
+            o += QPointF(_rxoff * parent()->width() * 0.01, _ryoff * parent()->height() * 0.01);
+      double h = height();
+      double w = width();
+      QPointF p;
+      if (_align & ALIGN_BOTTOM)
+            p.setY(-h);
+      else if (_align & ALIGN_VCENTER)
+            p.setY(-(h * .5));
+      else if (_align & ALIGN_BASELINE)
+            p.setY(0.0);
+      if (_align & ALIGN_RIGHT)
+            p.setX(-w);
+      else if (_align & ALIGN_HCENTER)
+            p.setX(-(w * .5));
+      setPos(p + o);
       }
 
 //---------------------------------------------------------
@@ -108,5 +152,3 @@ void Symbol::read(QDomElement e)
       setPos(pos);
       setSym(s);
       }
-
-

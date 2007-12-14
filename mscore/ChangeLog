@@ -1,3 +1,11 @@
+14.12.7 (ws)
+      - userOffset is only used when the user drags an element, layout position
+        is determined by layout hints
+      - all elements now have the following layout hints:
+            - offset in spatium or inch
+            - relative offset in % of parent size
+            - anchor type
+            - alignment type
 13.12.7 (ws)
       - added new demo "schnee.msc"
       - added preference for path of instrument templates file

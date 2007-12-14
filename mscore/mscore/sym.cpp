@@ -298,10 +298,11 @@ printf("sym not found\n");
             _width  = QFontMetricsF(font, printer).width(_code);
             }
 #else
+      QFontMetricsF fm(font, printer);
 //      _bbox   = QFontMetricsF(font, printer).tightBoundingRect(QString(_code));
-      _bbox   = QFontMetricsF(font, printer).boundingRect(_code);
+      _bbox   = fm.boundingRect(_code);
       _bbox.adjust(-2, -2, 4, 4);   // HACK
-      _width  = QFontMetricsF(font, printer).width(_code);
+      _width  = fm.width(_code);
 #if 0
       printf("            { %5d, %d, %f, %f, %f, %f, %f },\n",
             c.unicode(), f, _bbox.x(), _bbox.y(), _bbox.width(), _bbox.height(),

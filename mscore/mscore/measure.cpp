@@ -583,33 +583,15 @@ void Measure::layout2(ScoreLayout* layout)
             lines->setWidth(width());
             }
       foreach(Element* element, _el) {
-            int staff = -1;
-            double y  = 0.0;
-            if (element->staff()) {
-                  staff = element->staff()->idx();
-                  y = system()->staff(staff)->bbox().y();
-                  }
-
             element->layout(layout);
-
-            switch(element->type()) {
-                  case IMAGE:
-                        element->setPos(QPointF(tick2pos(element->tick()), y));
-                        break;
-                  case DYNAMIC:
-                  case SYMBOL:
-                  case TEMPO_TEXT:
-                  case TEXT:
-                        element->setPos(element->ipos()
-                           + QPointF(tick2pos(element->tick()), y));
-                        break;
-                  case LAYOUT_BREAK:
-                        element->setPos(
-                           bbox().width() - element->bbox().width() - _spatium,
-                           - element->bbox().height() - _spatium);
-                        break;
-                  default:
-                        break;
+            if (element->anchor() == ANCHOR_SEGMENT) {
+                  double y = 0.0;
+                  if (element->staff()) {
+                        int staffIdx = element->staff()->idx();
+                        y = system()->staff(staffIdx)->bbox().y();
+                        }
+                  QPointF o(tick2pos(element->tick()), y);
+                  element->setPos(element->ipos() + o);
                   }
             }
 
@@ -821,6 +803,7 @@ void Measure::add(Element* el)
                   _tuplets.append((Tuplet*)el);
                   break;
             case LAYOUT_BREAK:
+                  el->setAnchor(ANCHOR_PARENT);
                   for (iElement i = _el.begin(); i != _el.end(); ++i) {
                         if ((*i)->type() == LAYOUT_BREAK && (*i)->subtype() == el->subtype()) {
                               if (debugMode)
@@ -842,12 +825,14 @@ void Measure::add(Element* el)
             case JUMP:
                   _repeatFlags |= RepeatJump;
 
-            case MARKER:
             case DYNAMIC:
             case SYMBOL:
             case TEXT:
             case TEMPO_TEXT:
             case IMAGE:
+                  el->setAnchor(ANCHOR_SEGMENT);
+
+            case MARKER:
                   _el.append(el);
                   break;
 

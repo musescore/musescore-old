@@ -89,6 +89,18 @@ QRectF HairpinSegment::bbox() const
       }
 
 //---------------------------------------------------------
+//   Hairpin
+//---------------------------------------------------------
+
+Hairpin::Hairpin(Score* s)
+   : SLine(s)
+      {
+      setAnchor(ANCHOR_SEGMENT);
+      setOffsetType(OFFSET_SPATIUM);
+      setYoff(7.0);
+      }
+
+//---------------------------------------------------------
 //   layout
 //    compute segments from tick() to _tick2
 //---------------------------------------------------------
@@ -96,7 +108,7 @@ QRectF HairpinSegment::bbox() const
 void Hairpin::layout(ScoreLayout* layout)
       {
       SLine::layout(layout);
-      setPos(0.0, 7 * layout->spatium());
+      Element::layout(layout);
       }
 
 //---------------------------------------------------------
