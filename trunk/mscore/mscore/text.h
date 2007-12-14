@@ -46,12 +46,7 @@ enum {
 //---------------------------------------------------------
 
 class Text : public Element {
-      int _align;
-      double _xoff, _yoff;
-      double _rxoff, _ryoff;
-      Anchor _anchor;
-      OffsetType _offsetType;
-      bool _sizeIsSpatiumDependent;       // size depends on _spatium unit
+      bool _sizeIsSpatiumDependent;       // font size depends on _spatium unit
       double _frameWidth;                 // unit: mm
       double _marginWidth;                // unit: mm
       double _paddingWidth;               // unit: mm
@@ -105,22 +100,6 @@ class Text : public Element {
       void setFrameColor(const QColor& val) { _frameColor   = val;  }
       void setFrameRound(int val)           { _frameRound   = val;  }
 
-      int align() const                     { return _align;        }
-      Anchor anchor() const                 { return _anchor;       }
-      OffsetType offsetType() const         { return _offsetType;   }
-      double xoff() const                   { return _xoff;         }
-      double yoff() const                   { return _yoff;         }
-      double rxoff() const                  { return _rxoff;        }
-      double ryoff() const                  { return _ryoff;        }
-
-      void setAlign(int val)                { _align = val;         }
-      void setXoff(double val)              { _xoff  = val;         }
-      void setYoff(double val)              { _yoff  = val;         }
-      void setRXoff(double val)             { _rxoff  = val;        }
-      void setRYoff(double val)             { _ryoff  = val;        }
-      void setAnchor(Anchor val)            { _anchor = val;        }
-      void setOffsetType(OffsetType val)    { _offsetType = val;    }
-
       virtual void draw(QPainter&) const;
 
       virtual bool startEdit(const QPointF&);
@@ -145,6 +124,8 @@ class Text : public Element {
 
       QFont defaultFont() const { return doc->defaultFont(); }
       void setDefaultFont(QFont f) { doc->setDefaultFont(f); }
+
+      void setAbove(bool val);
       };
 
 //---------------------------------------------------------

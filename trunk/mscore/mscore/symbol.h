@@ -29,6 +29,7 @@
 //---------------------------------------------------------
 
 class Symbol : public BSymbol {
+
    protected:
       int _sym;
 
@@ -45,6 +46,8 @@ class Symbol : public BSymbol {
       virtual void write(Xml& xml) const;
       virtual void read(QDomElement);
       virtual QRectF bbox() const;
+      virtual void layout(ScoreLayout*);
+      void setAbove(bool);
       };
 
 #endif

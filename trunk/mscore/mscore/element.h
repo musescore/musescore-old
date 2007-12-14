@@ -110,6 +110,12 @@ class Element {
       Score* _score;
       QPointF _pos;             ///< Reference position, relative to _parent.
                                 ///< Usually set from layout().
+      Align _align;
+      Anchor _anchor;
+      double _xoff, _yoff;
+      double _rxoff, _ryoff;
+      OffsetType _offsetType;
+
       QPointF _userOff;         ///< Offset from normal layout position:
                                 ///< user dragged object this amount.
                                 ///< In Spatium ("space") units!
@@ -222,7 +228,7 @@ class Element {
             add(n);
             }
 
-      virtual void layout(ScoreLayout*) {}
+      virtual void layout(ScoreLayout*);
       virtual void resetMode() {}
 
       // debug functions
@@ -299,6 +305,26 @@ class Element {
 
       double mag() const                        { return _mag;   }
       virtual void setMag(double val);
+
+/**
+ Layout hints
+ for some element types this hints are fixed and not saved to
+ the *.msc file
+ */
+      Align align() const                   { return _align;        }
+      Anchor anchor() const                 { return _anchor;       }
+      OffsetType offsetType() const         { return _offsetType;   }
+      double xoff() const                   { return _xoff;         }
+      double yoff() const                   { return _yoff;         }
+      double rxoff() const                  { return _rxoff;        }
+      double ryoff() const                  { return _ryoff;        }
+      void setAlign(Align val)              { _align  = val;        }
+      void setXoff(double val)              { _xoff   = val;        }
+      void setYoff(double val)              { _yoff   = val;        }
+      void setRXoff(double val)             { _rxoff  = val;        }
+      void setRYoff(double val)             { _ryoff  = val;        }
+      void setAnchor(Anchor val)            { _anchor = val;        }
+      void setOffsetType(OffsetType val)    { _offsetType = val;    }
       };
 
 //---------------------------------------------------------

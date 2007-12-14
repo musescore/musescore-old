@@ -80,19 +80,6 @@ Dynamic::Dynamic(Score* s)
       {
       }
 
-Dynamic::Dynamic(Score* s, int st)
-   : Text(s)
-      {
-      setSubtype(st);
-      }
-
-Dynamic::Dynamic(Score* s, const QString& t)
-   : Text(s)
-      {
-      setSubtype(0);
-      setText(t);
-      }
-
 Dynamic::Dynamic(const Dynamic& d)
    : Text(d)
       {

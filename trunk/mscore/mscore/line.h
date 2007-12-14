@@ -54,6 +54,7 @@ class LineSegment : public Element {
       virtual void updateGrips(int*, QRectF*) const;
       virtual QPointF gripAnchor(int) const;
       virtual QPointF pos2anchor(const QPointF& pos, int* tick) const;
+      virtual void layout(ScoreLayout*) {}
 
    public:
       LineSegment(Score* s);

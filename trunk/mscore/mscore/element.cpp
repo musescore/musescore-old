@@ -127,6 +127,13 @@ void Element::init()
       _userOff.setX(0.0);
       _userOff.setY(0.0);
       itemDiscovered = 0;
+      _align       = ALIGN_LEFT | ALIGN_TOP;
+      _xoff        = 0;
+      _yoff        = 0;
+      _rxoff       = 0;
+      _ryoff       = 0;
+      _anchor      = ANCHOR_PARENT;
+      _offsetType  = OFFSET_SPATIUM;
       }
 
 //---------------------------------------------------------
@@ -286,6 +293,37 @@ bool Element::intersects(const QRectF& rr) const
       QRectF r(rr);
       r.translate(pos());
       return bbox().intersects(r);
+      }
+
+//---------------------------------------------------------
+//   layout
+//    height() and width() should return sensible
+//    values when calling this method
+//---------------------------------------------------------
+
+void Element::layout(ScoreLayout* layout)
+      {
+      QPointF o(QPointF(_xoff, _yoff));
+      if (_offsetType == OFFSET_SPATIUM)
+            o *= layout->spatium();
+      else
+            o *= DPI;
+      if (parent())
+            o += QPointF(_rxoff * parent()->width() * 0.01, _ryoff * parent()->height() * 0.01);
+      double h = height();
+      double w = width();
+      QPointF p;
+      if (_align & ALIGN_BOTTOM)
+            p.setY(-h);
+      else if (_align & ALIGN_VCENTER)
+            p.setY(-(h * .5));
+      else if (_align & ALIGN_BASELINE)   // undefined
+            p.setY(-h);
+      if (_align & ALIGN_RIGHT)
+            p.setX(-w);
+      else if (_align & ALIGN_HCENTER)
+            p.setX(-(w * .5));
+      setPos(p + o);
       }
 
 //---------------------------------------------------------

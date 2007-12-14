@@ -41,8 +41,6 @@ class Dynamic : public Text {
 
    public:
       Dynamic(Score*);
-      Dynamic(Score*, int val);
-      Dynamic(Score*, const QString&);
       Dynamic(const Dynamic&);
       virtual Dynamic* clone() const   { return new Dynamic(*this); }
       virtual ElementType type() const { return DYNAMIC; }

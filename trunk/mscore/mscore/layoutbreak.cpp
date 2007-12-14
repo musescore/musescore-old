@@ -31,7 +31,12 @@
 LayoutBreak::LayoutBreak(Score* score)
    : Element(score)
       {
-//      layout();
+      setAnchor(ANCHOR_PARENT);
+      setRXoff(100.0);
+      setXoff(-1.0);
+      setYoff(-2.0);
+      setOffsetType(OFFSET_SPATIUM);
+      setAlign(ALIGN_RIGHT | ALIGN_BOTTOM);
       }
 
 //---------------------------------------------------------
@@ -100,6 +105,7 @@ void LayoutBreak::layout(ScoreLayout* layout)
       QRectF bb(0, 0, w, h);
       bb.adjust(-lw, -lw, lw, lw);
       setbbox(bb);
+      Element::layout(layout);      // alignment & offset
       }
 
 //---------------------------------------------------------

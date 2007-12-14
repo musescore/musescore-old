@@ -48,7 +48,7 @@ class HairpinSegment : public LineSegment {
 
 class Hairpin : public SLine {
    public:
-      Hairpin(Score* s) : SLine(s) {}
+      Hairpin(Score* s);
       virtual Hairpin* clone() const { return new Hairpin(*this); }
       virtual ElementType type() const { return HAIRPIN; }
       virtual void layout(ScoreLayout*);

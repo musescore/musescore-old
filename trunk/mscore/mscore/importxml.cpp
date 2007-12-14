@@ -995,10 +995,11 @@ void MusicXml::direction(Measure* measure, int staff, QDomElement e)
             else
                   domError(e);
             } // for (e = e.firstChildElement(); ...
-      if (placement == "above")
-            ry -= 2;
-      else
-            ry += 2;
+
+//WS      if (placement == "above")
+//            ry -= 2;
+//      else
+//            ry += 2;
 
 /*
       printf(" tempo=%s txt=%s coda=%d segno=%d sndCapo=%s sndCoda=%s"
@@ -1126,9 +1127,10 @@ void MusicXml::direction(Measure* measure, int staff, QDomElement e)
                   t = new TempoText(score);
                   ((TempoText*) t)->setTempo(tempo.toDouble());
                   }
-            else
+            else {
                   t = new Text(score);
                   t->setStyle(score->textStyle(TEXT_STYLE_TECHNIK));
+                  }
             t->setTick(tick);
             if (weight == "bold") {
                   QFont f = t->defaultFont();
@@ -1138,11 +1140,7 @@ void MusicXml::direction(Measure* measure, int staff, QDomElement e)
                   }
             else
                   t->setText(txt);
-            if (placement == "above")
-                  ry -= 3;
-            else
-                  ry += t->bbox().height()/_spatium - 2.3;
-
+            t->setAbove(placement == "above");
             t->setUserOff(QPointF(rx + xoffset, ry + yoffset));
             t->setMxmlOff(offset);
             t->setStaff(score->staff(staff + rstaff));
@@ -1153,11 +1151,7 @@ void MusicXml::direction(Measure* measure, int staff, QDomElement e)
             t->setSubtype(TEXT_REHEARSAL_MARK);
             t->setTick(tick);
             t->setText(rehearsal);
-            if (placement == "above")
-                  ry -= 3;
-            else
-                  ry += t->bbox().height()/_spatium - 2.3;
-
+            t->setAbove(placement == "above");
             t->setUserOff(QPointF(rx + xoffset, ry + yoffset));
             t->setMxmlOff(offset);
             t->setStaff(score->staff(staff + rstaff));
@@ -1165,6 +1159,9 @@ void MusicXml::direction(Measure* measure, int staff, QDomElement e)
             }
       else if (dirType == "pedal") {
             Symbol* s = new Symbol(score);
+            s->setAnchor(ANCHOR_SEGMENT);
+            s->setAlign(ALIGN_LEFT | ALIGN_BASELINE);
+            s->setOffsetType(OFFSET_SPATIUM);
             s->setTick(tick);
             if (type == "start")
                   s->setSym(pedalPedSym);
@@ -1172,10 +1169,7 @@ void MusicXml::direction(Measure* measure, int staff, QDomElement e)
                   s->setSym(pedalasteriskSym);
             else
                   printf("unknown pedal %s\n", type.toLatin1().data());
-            if (placement == "above")
-                  ry += 0.1;
-            else
-                  ry += 5.3;
+            s->setAbove(placement == "above");
             s->setUserOff(QPointF(rx + xoffset, ry + yoffset));
             s->setMxmlOff(offset);
             s->setStaff(score->staff(staff + rstaff));
@@ -1187,10 +1181,7 @@ void MusicXml::direction(Measure* measure, int staff, QDomElement e)
             for (QStringList::Iterator it = dynamics.begin(); it != dynamics.end(); ++it ) {
                   Dynamic* dyn = new Dynamic(score);
                   dyn->setSubtype(*it);
-                  if (placement == "above")
-                        ry -= 5;
-                  else
-                        ry += dyn->bbox().height() / _spatium - 7.5;
+                  dyn->setAbove(placement == "above");
                   dyn->setUserOff(QPointF(rx + xoffset, ry + yoffset));
                   dyn->setMxmlOff(offset);
 
@@ -1200,16 +1191,13 @@ void MusicXml::direction(Measure* measure, int staff, QDomElement e)
                   }
             }
       else if (dirType == "wedge") {
-            if (placement == "above")
-                  ry -= 7;
-            else
-                  ry -= 1.7;
+            bool above = placement == "above";
             if (type == "crescendo")
-                  addWedge(0, tick, rx, ry, 0);
+                  addWedge(0, tick, rx, ry, above, 0);
             else if (type == "stop")
                   genWedge(0, tick, measure, staff+rstaff);
             else if (type == "diminuendo")
-                  addWedge(0, tick, rx, ry, 1);
+                  addWedge(0, tick, rx, ry, above, 1);
             else
                   printf("unknown wedge type: %s\n", type.toLatin1().data());
             }
@@ -2125,13 +2113,14 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
  Called when the wedge start is read. Stores all wedge parameters known at this time.
  */
 
-void MusicXml::addWedge(int no, int startTick, qreal rx, qreal ry, int subType)
+void MusicXml::addWedge(int no, int startTick, qreal rx, qreal ry, bool above, int subType)
       {
       MusicXmlWedge wedge;
       wedge.number = no;
       wedge.startTick = startTick;
       wedge.rx = rx;
       wedge.ry = ry;
+      wedge.above = above;
       wedge.subType = subType;
 
       if (int(wedgeList.size()) > no)
@@ -2160,6 +2149,7 @@ void MusicXml::genWedge(int no, int endTick, Measure* /*measure*/, int staff)
       hp->setUserOff(QPointF(wedgeList[no].rx, wedgeList[no].ry));
       hp->setStaff(score->staff(staff));
       score->mainLayout()->add(hp);
-//      printf("gen wedge staff %d\n", staff);
+
+// printf("gen wedge %p staff %d, tick %d-%d\n", hp, staff, hp->tick(), hp->tick2());
       }
 

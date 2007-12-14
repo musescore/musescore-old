@@ -59,6 +59,38 @@ enum SegmentType {
       SEGMENT_SINGLE, SEGMENT_BEGIN, SEGMENT_MIDDLE, SEGMENT_END
       };
 
+enum AlignmentFlags {
+             ALIGN_LEFT     = 0,
+             ALIGN_RIGHT    = 1,
+             ALIGN_HCENTER  = 2,
+             ALIGN_TOP      = 0,
+             ALIGN_BOTTOM   = 4,
+             ALIGN_VCENTER  = 8,
+             ALIGN_BASELINE = 16
+      };
+
+Q_DECLARE_FLAGS(Align, AlignmentFlags);
+Q_DECLARE_OPERATORS_FOR_FLAGS(Align);
+
+static const Align ALIGN_CENTER = ALIGN_HCENTER | ALIGN_VCENTER;
+
+
+enum Anchor {
+      ANCHOR_PARENT,    ///< anchor is topleft of parent boundingRect
+      ANCHOR_MEASURE,   ///< anchor is topleft of measure boundingRect
+      ANCHOR_STAFF,     ///< top of staff, left of measure
+      ANCHOR_SEGMENT,   ///< top of staff, left of segment
+      };
+
+enum OffsetType {
+      OFFSET_ABS,       ///< offset in point units
+      OFFSET_SPATIUM    ///< offset in space units
+      };
+
+// to move Anchor to right of measure set
+//    OffsetType = OFFSET_REL
+//    offset     = 100
+
 const int VOICES = 4;
 const int MAX_STAVES = 4;
 
