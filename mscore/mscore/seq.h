@@ -75,6 +75,7 @@ class Seq : public QObject {
       float _volume;
 
       QTimer* heartBeatTimer;
+      QTimer* playTimer;
 
       QList<Event> eventList;
 
@@ -99,6 +100,7 @@ class Seq : public QObject {
       void setVolume(float);
       void setRelTempo(int);
       void seek(int);
+      void stopNotes();
 
    signals:
       void started();
@@ -134,7 +136,7 @@ class Seq : public QObject {
       bool isRealtime() const;
       void sendMessage(SeqMsg&) const;
       void startNote(int, int, int);
-      void stopNotes();
+      void startNote(int, int, int, int);
       void setController(int, int, int);
       void setScore(Score* s);
       Synth* synth() const  { return synti; }

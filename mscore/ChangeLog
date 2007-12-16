@@ -1,3 +1,7 @@
+16.12.7 (ws)
+      - play notes when changing pitch with up/down keys or when changing note
+        selection
+
 14.12.7 (ws)
       - userOffset is only used when the user drags an element, layout position
         is determined by layout hints

@@ -72,6 +72,10 @@ Seq::Seq()
       heartBeatTimer = new QTimer(this);
       connect(heartBeatTimer, SIGNAL(timeout()), this, SLOT(heartBeat()));
       heartBeatTimer->stop();
+      playTimer = new QTimer(this);
+      playTimer->setSingleShot(true);
+      connect(playTimer, SIGNAL(timeout()), this, SLOT(stopNotes()));
+
       connect(this, SIGNAL(toGui(int)), this, SLOT(seqMessage(int)), Qt::QueuedConnection);
       }
 
@@ -731,6 +735,12 @@ void Seq::startNote(int channel, int pitch, int velo)
       event.val1 = pitch;
       event.val2 = velo;
       eventList.append(event);
+      }
+
+void Seq::startNote(int channel, int pitch, int velo, int duration)
+      {
+      startNote(channel, pitch, velo);
+      playTimer->start(duration);
       }
 
 //---------------------------------------------------------
