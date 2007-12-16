@@ -50,6 +50,8 @@
 #include "part.h"
 #include "drumset.h"
 #include "instrtemplate.h"
+#include "note.h"
+#include "staff.h"
 
 QTextStream cout(stdout);
 QTextStream eout(stderr);
@@ -1873,4 +1875,18 @@ void MuseScore::readSettings()
       mscore->showPalette(settings.value("showPanel", "0").toBool());
       settings.endGroup();
       }
+
+//---------------------------------------------------------
+//   play
+//    play note for 300 msec
+//---------------------------------------------------------
+
+void MuseScore::play(Element* e) const
+      {
+      if (mscore->playEnabled() && e->type() == NOTE) {
+            Note* note = (Note*) e;
+            seq->startNote(note->staff()->part()->midiChannel(), note->pitch(), 80, 300);
+            }
+      }
+
 

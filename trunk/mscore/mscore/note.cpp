@@ -831,4 +831,3 @@ void Note::setMag(double val)
       if (_accidental)
             _accidental->setMag(val);
       }
-

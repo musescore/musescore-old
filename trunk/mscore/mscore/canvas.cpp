@@ -352,7 +352,7 @@ void Canvas::mousePressEvent(QMouseEvent* ev)
 
       _score->setDragObject(element);
 
-      if (seq && mscore->playEnabled() && element && element->type() == NOTE) {
+      if (mscore->playEnabled() && element && element->type() == NOTE) {
             Note* note = (Note*)element;
             seq->startNote(note->staff()->midiChannel(), note->pitch(), 60);
             }

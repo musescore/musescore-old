@@ -878,6 +878,9 @@ void Score::upDown(bool up, bool octave)
             undoList.back()->push_back(i);
 
             oNote->changePitch(newPitch);
+            // play new note with velocity 80 for 0.3 sec:
+            if (seq && mscore->playEnabled())
+                  seq->startNote(oNote->staff()->part()->midiChannel(), newPitch, 80, 300);
             }
       _padState.pitch = newPitch;
       sel->updateState();     // accidentals may have changed
@@ -1356,8 +1359,10 @@ void Score::cmd(const QString& cmd)
                   if (el && (el->type() == NOTE || el->type() == REST)) {
                         Element* e = upAlt(el);
                         if (e) {
-                              if (e->type() == NOTE)
+                              if (e->type() == NOTE) {
                                     _padState.pitch = ((Note*)e)->pitch();
+                                    mscore->play(e);
+                                    }
                               select(e, 0, 0);
                               }
                         }
@@ -1367,8 +1372,10 @@ void Score::cmd(const QString& cmd)
                   if (el && (el->type() == NOTE || el->type() == REST)) {
                         Element* e = downAlt(el);
                         if (e) {
-                              if (e->type() == NOTE)
+                              if (e->type() == NOTE) {
                                     _padState.pitch = ((Note*)e)->pitch();
+                                    mscore->play(e);
+                                    }
                               select(e, 0, 0);
                               }
                         }
@@ -1378,8 +1385,10 @@ void Score::cmd(const QString& cmd)
                   if (el && el->type() == NOTE) {
                         Element* e = upAltCtrl((Note*)el);
                         if (e) {
-                              if (e->type() == NOTE)
+                              if (e->type() == NOTE) {
                                     _padState.pitch = ((Note*)e)->pitch();
+                                    mscore->play(e);
+                                    }
                               select(e, 0, 0);
                               }
                         }
@@ -1389,8 +1398,10 @@ void Score::cmd(const QString& cmd)
                   if (el && el->type() == NOTE) {
                         Element* e = downAltCtrl((Note*)el);
                         if (e) {
-                              if (e->type() == NOTE)
+                              if (e->type() == NOTE) {
                                     _padState.pitch = ((Note*)e)->pitch();
+                                    mscore->play(e);
+                                    }
                               select(e, 0, 0);
                               }
                         }
@@ -1745,8 +1756,10 @@ void Score::move(const QString& cmd)
                   el = prevMeasure(cr);
             if (el) {
                   int tick = el->tick();
-                  if (el->type() == CHORD)
+                  if (el->type() == CHORD) {
                         el = ((Chord*)el)->upNote();
+                        mscore->play(el);
+                        }
                   select(el, 0, 0);
                   adjustCanvasPosition(el);
                   if (noteEntryMode()) {
