@@ -394,25 +394,21 @@ void Beam::layout(ScoreLayout* layout)
       //------------------------------------------------------------
 
       bool concave = false;
-      int l1 = a1->line(a1->isUp());
-      int l2 = a2->line(a2->isUp());
+      for (int i = 0; i < elements.size() - 2; ++i) {
+            int l1 = elements[i]->line(upFlag);
+            int l  = elements[i+1]->line(upFlag);
+            int l2 = elements[i+2]->line(upFlag);
 
-      QList<ChordRest*>::iterator i = elements.begin();
-      ++i;
-      for (;;) {
-            ChordRest* cr = *i;
-            ++i;
-            if (i == elements.end())
-                  break;
-            int l = cr->line(cr->isUp());
             concave = ((l1 < l2) && ((l < l1) || (l > l2)))
                     || ((l1 > l2) && ((l > l1) || (l < l2)));
             if (concave)
                   break;
             }
 
+      int l1 = elements.front()->line(upFlag);
+      int l2 = elements.back()->line(upFlag);
 
-      int cut = 0;
+      int cut     = 0;
       qreal slope = 0.0;
 
       if (!concave) {

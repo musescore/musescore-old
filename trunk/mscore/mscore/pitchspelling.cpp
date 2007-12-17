@@ -191,7 +191,7 @@ static const bool enharmonicSpelling[15][34] = {
          1, 1, 1, 1, 1, 1, // bb
       1, 1, 0, 0, 0, 0, 0, // b
       0, 0, 0, 0, 0, 0, 0,
-      0, 0, 0, 0, 0, 1, 1, // #
+      0, 1, 1, 1, 1, 1, 1, // #
       1, 1, 1, 1, 1, 1, 1  // ##
       },
       {
@@ -199,7 +199,7 @@ static const bool enharmonicSpelling[15][34] = {
          1, 1, 1, 1, 1, 1, // bb
       1, 1, 0, 0, 0, 0, 0, // b
       0, 0, 0, 0, 1, 1, 1,
-      0, 0, 0, 0, 0, 1, 1, // #
+      0, 0, 1, 1, 1, 1, 1, // #
       1, 1, 1, 1, 1, 1, 1  // ##
       },
       {
@@ -460,7 +460,7 @@ int computeWindow(const QList<Note*>& notes, int start, int end)
       for (int i = 0; i < 10; ++i)
             printf("%2d ", tpc(i, pitch[i], idx));
       printf("\n");
-      */
+*/
       return idx;
       }
 
