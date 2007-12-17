@@ -54,7 +54,7 @@ const TextStyle defaultTextStyleArray[] = {
          ALIGN_HCENTER | ALIGN_TOP, ANCHOR_PARENT, 0, 0, OA, 50, 0),
 
       TextStyle(QString("Subtitle"), ff, 14, false, false, false,
-         ALIGN_HCENTER | ALIGN_TOP, ANCHOR_PARENT, 0, MM(15), OA, 50, 0),
+         ALIGN_HCENTER | ALIGN_TOP, ANCHOR_PARENT, 0, MM(10), OA, 50, 0),
 
       TextStyle(QString("Composer"), ff, 12, false, false, false,
          ALIGN_RIGHT | ALIGN_BOTTOM, ANCHOR_PARENT, 0, 0, OA, 100, 100),
