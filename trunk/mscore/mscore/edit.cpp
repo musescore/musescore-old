@@ -1413,7 +1413,7 @@ void Score::changeVoice(int voice)
       {
       _padState.voice = voice;
       if (_is.track % VOICES != voice) {
-            _is.track = (_is.track / VOICES) + voice;
+            _is.track = (_is.track / VOICES) * VOICES + voice;
             layoutAll = true;
             }
       }

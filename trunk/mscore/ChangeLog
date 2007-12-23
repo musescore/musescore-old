@@ -2,6 +2,7 @@
       - MusicXML import/export of pedal and trill lines
       - fixed MusicXML import of END_REPEAT followed by START_REPEAT
       - fixed stem direction preferences (QGroupBoxes are necessary)
+      - fixed voice selection for note insertion in second and higher staves
 19.12.7 (ws)
       ======== Version 0.8.0 released =============
 17.12.7 (ws)
