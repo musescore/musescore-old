@@ -60,6 +60,8 @@
 #include "repeat.h"
 // #include "qregexp.h"
 #include "ottava.h"
+#include "trill.h"
+#include "pedal.h"
 
 //---------------------------------------------------------
 //   xmlSetPitch
@@ -197,6 +199,8 @@ void MusicXml::import(Score* s)
             slur[i] = 0;
       tuplet = 0;
       ottava = 0;
+      trill = 0;
+      pedal = 0;
 
       for (QDomElement e = doc->documentElement(); !e.isNull(); e = e.nextSiblingElement()) {
             if (e.tagName() == "score-partwise")
@@ -776,6 +780,9 @@ Measure* MusicXml::xmlMeasure(Part* part, QDomElement e, int number)
                         if (barLine->subtype() == START_REPEAT) {
                               measure->setRepeatFlags(RepeatStart);
                               }
+                        else if (barLine->subtype() == END_REPEAT) {
+                              measure->setRepeatFlags(RepeatEnd);
+                              }
                         else
 /*WS*/                        measure->setEndBarLineType(barLine->subtype(), false);
                         }
@@ -916,6 +923,7 @@ void MusicXml::direction(Measure* measure, int staff, QDomElement e)
       bool coda = false;
       bool segno = false;
       int ottavasize = 0;
+      bool pedalLine = false;
 
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             if (e.tagName() == "direction-type") {
@@ -941,6 +949,7 @@ void MusicXml::direction(Measure* measure, int staff, QDomElement e)
                               }
                         else if (dirType == "pedal") {
                               type = ee.attribute(QString("type"));
+                              pedalLine = ee.attribute(QString("line")) == "yes";
                               }
                         else if (dirType == "dynamics") {
                               QDomElement eee = ee.firstChildElement();
@@ -1158,22 +1167,50 @@ void MusicXml::direction(Measure* measure, int staff, QDomElement e)
             measure->add(t);
             }
       else if (dirType == "pedal") {
-            Symbol* s = new Symbol(score);
-            s->setAnchor(ANCHOR_SEGMENT);
-            s->setAlign(ALIGN_LEFT | ALIGN_BASELINE);
-            s->setOffsetType(OFFSET_SPATIUM);
-            s->setTick(tick);
-            if (type == "start")
-                  s->setSym(pedalPedSym);
-            else if (type == "stop")
-                  s->setSym(pedalasteriskSym);
-            else
-                  printf("unknown pedal %s\n", type.toLatin1().data());
-            s->setAbove(placement == "above");
-            s->setUserOff(QPointF(rx + xoffset, ry + yoffset));
-            s->setMxmlOff(offset);
-            s->setStaff(score->staff(staff + rstaff));
-            measure->add(s);
+            if (pedalLine) {
+                  if (type == "start") {
+                        if (pedal) {
+                              printf("overlapping pedal lines not supported\n");
+                              delete pedal;
+                              pedal = 0;
+                              }
+                        else {
+                              pedal = new Pedal(score);
+                              pedal->setStaff(score->staff(staff + rstaff));
+                              pedal->setTick(tick);
+                              }
+                        }
+                  else if (type == "stop") {
+                        if (!pedal) {
+                              printf("pedal line stop without start\n");
+                              }
+                        else {
+                              pedal->setTick2(tick);
+                              score->mainLayout()->add(pedal);
+                              pedal = 0;
+                              }
+                        }
+                  else
+                        printf("unknown pedal %s\n", type.toLatin1().data());
+                  }
+            else {
+                  Symbol* s = new Symbol(score);
+                  s->setAnchor(ANCHOR_SEGMENT);
+                  s->setAlign(ALIGN_LEFT | ALIGN_BASELINE);
+                  s->setOffsetType(OFFSET_SPATIUM);
+                  s->setTick(tick);
+                  if (type == "start")
+                        s->setSym(pedalPedSym);
+                  else if (type == "stop")
+                        s->setSym(pedalasteriskSym);
+                  else
+                        printf("unknown pedal %s\n", type.toLatin1().data());
+                  s->setAbove(placement == "above");
+                  s->setUserOff(QPointF(rx + xoffset, ry + yoffset));
+                  s->setMxmlOff(offset);
+                  s->setStaff(score->staff(staff + rstaff));
+                  measure->add(s);
+                  }
             }
       else if (dirType == "dynamics") {
             // more than one dynamic ???
@@ -1202,7 +1239,6 @@ void MusicXml::direction(Measure* measure, int staff, QDomElement e)
                   printf("unknown wedge type: %s\n", type.toLatin1().data());
             }
       else if (dirType == "octave-shift") {
-            printf("octave-shift type=%s size=%d\n", type.toLatin1().data(), ottavasize);
             if (type == "down") {
                   if (ottava) {
                         printf("overlapping octave-shift not supported\n");
@@ -1545,6 +1581,7 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
       QString step;
       QString fingering;
       QString graceSlash;
+      QString wavyLineType;
       int alter  = 0;
       int octave = 4;
       int accidental = 0;
@@ -1819,6 +1856,8 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
                               for (QDomElement eee = ee.firstChildElement(); !eee.isNull(); eee = eee.nextSiblingElement()) {
                                     if (eee.tagName() == "trill-mark")
                                           trillMark = true;
+                                    else if (eee.tagName() == "wavy-line")
+                                          wavyLineType = eee.attribute(QString("type"));
                                     else if (eee.tagName() == "inverted-turn")
                                           invertedTurn = true;
                                     else if (eee.tagName() == "turn")
@@ -2001,7 +2040,37 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
                   delete na;
                   }
             }
-      if (trillMark) {
+      bool wavyLineStart = false;
+      if (!wavyLineType.isEmpty()) {
+            if (wavyLineType == "start") {
+                  if (trill) {
+                        printf("overlapping wavy-line not supported\n");
+                        delete trill;
+                        trill = 0;
+                        }
+                  else {
+                        trill = new Trill(score);
+                        trill->setStaff(score->staff(staff + relStaff));
+                        trill->setTick(tick);
+                        wavyLineStart = true;
+                        }
+                  }
+            else if (wavyLineType == "stop") {
+                  if (!trill) {
+                        printf("wavy-line stop without start\n");
+                        }
+                  else {
+                        trill->setTick2(tick+ticks);
+                        score->mainLayout()->add(trill);
+                        trill = 0;
+                        }
+                  }
+            else
+                  printf("unknown wavy-line type %s\n", wavyLineType.toLatin1().data());
+            }
+      // note that mscore wavy line already implicitly includes a trillsym
+      // so don't add an additional one
+      if (trillMark && !wavyLineStart) {
             NoteAttribute* na = new NoteAttribute(score);
             na->setSubtype(TrillSym);
             cr->add(na);
