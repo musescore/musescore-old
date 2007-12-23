@@ -67,6 +67,7 @@
 #include "arpeggio.h"
 #include "repeat.h"
 #include "tremolo.h"
+#include "trill.h"
 
 //---------------------------------------------------------
 //   attributes -- prints <attributes> tag when necessary
@@ -1094,6 +1095,32 @@ static void tupletStartStop(ChordRest* cr, Notations& notations, Xml& xml)
       }
 
 //---------------------------------------------------------
+//   wavyLineStartStop
+//---------------------------------------------------------
+
+static void wavyLineStartStop(Chord* chord, Notations& notations, Ornaments& ornaments, Xml& xml)
+      {
+      // search for trill starting at this chord
+      foreach(Element* el, *(chord->score()->gel())) {
+            if (el->type() == TRILL) {
+                  Trill* t = (Trill*) el;
+                  if (t->tick() == chord->tick() && t->track() == chord->track()) {
+                        notations.tag(xml);
+                        ornaments.tag(xml);
+                        // mscore only supports wavy-line with trill-mark
+                        xml.tagE("trill-mark");
+                        xml.tagE("wavy-line type=\"start\"");
+                        }
+                  else if (t->tick2() == chord->tick()+chord->tickLen() && t->track() == chord->track()) {
+                        notations.tag(xml);
+                        ornaments.tag(xml);
+                        xml.tagE("wavy-line type=\"stop\"");
+                        }
+                  }
+            }
+      }
+
+//---------------------------------------------------------
 //   chordAttributes
 //---------------------------------------------------------
 
@@ -1264,6 +1291,7 @@ static void chordAttributes(Chord* chord, Notations& notations, Technical& techn
                               break;
                         }
                   }
+            wavyLineStartStop(chord, notations, ornaments, xml);
             ornaments.etag(xml);
       // and finally the attributes whose elements are children of <technical>
       for (ciAttribute ia = na->begin(); ia != na->end(); ++ia) {
@@ -1704,7 +1732,7 @@ void ExportMusicXml::pedal(Pedal* pd, int staff, int tick)
       if (pd->tick() == tick)
             xml.tagE("pedal type=\"start\" line=\"yes\"");
       else
-            xml.tagE("pedal type=\"stop\"");
+            xml.tagE("pedal type=\"stop\" line=\"yes\"");
       directionETag(xml, staff);
       }
 
