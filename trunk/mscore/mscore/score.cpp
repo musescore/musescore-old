@@ -230,6 +230,7 @@ void Score::clear()
       _layout->systems()->clear();
       _layout->pages().clear();
       sel->clear();
+      _showInvisible = true;
       }
 
 //---------------------------------------------------------

@@ -1,3 +1,5 @@
+26.12.7 (ws)
+      - fixed repeat bar handling
 23.12.7 (lv)
       - MusicXML import/export of pedal and trill lines
       - fixed MusicXML import of END_REPEAT followed by START_REPEAT

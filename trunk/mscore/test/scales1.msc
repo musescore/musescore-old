@@ -3,14 +3,16 @@
   <Spatium>1.76389</Spatium>
   <Division>480</Division>
   <Mag>1</Mag>
-  <xoff>61.048</xoff>
-  <yoff>46.324</yoff>
+  <xoff>58.048</xoff>
+  <yoff>21.324</yoff>
   <Style>
     <staffUpperBorder>8</staffUpperBorder>
     <staffLowerBorder>4</staffLowerBorder>
     <staffDistance>6.5</staffDistance>
     <akkoladeDistance>5.5</akkoladeDistance>
     <systemDistance>9.25</systemDistance>
+    <lyricsDistance>6.5</lyricsDistance>
+    <lyricsMinBottomDistance>2</lyricsMinBottomDistance>
     <minMeasureWidth>4</minMeasureWidth>
     <barWidth>0.16</barWidth>
     <doubleBarWidth>0.16</doubleBarWidth>
@@ -62,7 +64,6 @@
     <measureNumberInterval>5</measureNumberInterval>
     <measureNumberAllStaffs>0</measureNumberAllStaffs>
     <measureNumberSystem>1</measureNumberSystem>
-    <lyricsDistance>6.5</lyricsDistance>
     </Style>
   <showInvisible>0</showInvisible>
   <page-layout>
@@ -118,7 +119,25 @@
       </Instrument>
     </Part>
   <Staff id="1">
+    <VBox>
+      <height>10</height>
+      <Text>
+        <subtype>Title</subtype>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-size:24pt; font-weight:400; font-style:normal;">
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Scales</p></body></html>
+        </Text>
+      </VBox>
     <Measure number="1">
+      <Text>
+        <subtype>Chordname</subtype>
+        <anchor>segment</anchor>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-size:12pt; font-weight:400; font-style:normal;">
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">C</p></body></html>
+        </Text>
       <Note pitch="60" tpc="14" ticks="480"/>
       <Note pitch="62" tpc="16" ticks="480"/>
       <Note pitch="64" tpc="18" ticks="480"/>
@@ -131,6 +150,14 @@
       <Note pitch="72" tpc="14" ticks="480"/>
       </Measure>
     <Measure number="3">
+      <Text>
+        <subtype>Chordname</subtype>
+        <anchor>segment</anchor>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-size:12pt; font-weight:400; font-style:normal;">
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">G</p></body></html>
+        </Text>
       <KeySig>
         <subtype>1</subtype>
         </KeySig>
@@ -149,6 +176,14 @@
       <Note pitch="72" tpc="14" ticks="480"/>
       </Measure>
     <Measure number="5">
+      <Text>
+        <subtype>Chordname</subtype>
+        <anchor>segment</anchor>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-size:12pt; font-weight:400; font-style:normal;">
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">D</p></body></html>
+        </Text>
       <KeySig>
         <subtype>2</subtype>
         </KeySig>
@@ -164,6 +199,14 @@
       <Note pitch="73" tpc="21" ticks="480"/>
       </Measure>
     <Measure number="7">
+      <Text>
+        <subtype>Chordname</subtype>
+        <anchor>segment</anchor>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-size:12pt; font-weight:400; font-style:normal;">
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">A</p></body></html>
+        </Text>
       <KeySig>
         <subtype>515</subtype>
         </KeySig>
@@ -182,6 +225,14 @@
       <Note pitch="73" tpc="21" ticks="480"/>
       </Measure>
     <Measure number="9">
+      <Text>
+        <subtype>Chordname</subtype>
+        <anchor>segment</anchor>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-size:12pt; font-weight:400; font-style:normal;">
+<p align="center" style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">E</p></body></html>
+        </Text>
       <KeySig>
         <subtype>4</subtype>
         </KeySig>
@@ -401,5 +452,5 @@
       <Note pitch="63" tpc="23" ticks="480"/>
       </Measure>
     </Staff>
-  <cursorTrack>-4</cursorTrack>
+  <cursorTrack>0</cursorTrack>
   </museScore>

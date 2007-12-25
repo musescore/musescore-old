@@ -1754,6 +1754,10 @@ printf("drop staffList\n");
             case BAR_LINE:
                   {
                   BarLine* bl = (BarLine*)e;
+                  MeasureBase* nmb = next();
+                  while (nmb && nmb->type() != MEASURE)
+                        nmb = nmb->next();
+                  Measure* nm = (Measure*) nmb;
                   switch(bl->subtype()) {
                         case END_BAR:
                         case NORMAL_BAR:
@@ -1761,9 +1765,9 @@ printf("drop staffList\n");
                         case BROKEN_BAR:
                               {
                               score()->undoChangeRepeatFlags(this, _repeatFlags & ~RepeatEnd);
-                              if (next())
-                                    score()->undoChangeRepeatFlags((Measure*)next(), ((Measure*)next())->repeatFlags() & ~RepeatStart);  //TODO: MeasureBase
-                              score()->undoChangeEndBarLine(this, bl->subtype());
+                              if (nm)
+                                    score()->undoChangeRepeatFlags(nm, nm->repeatFlags() & ~RepeatStart);
+                              score()->undoChangeEndBarLineType(this, bl->subtype());
                               _endBarLineGenerated = false;
                               }
                               break;
@@ -1772,13 +1776,13 @@ printf("drop staffList\n");
                               break;
                         case END_REPEAT:
                               score()->undoChangeRepeatFlags(this, _repeatFlags | RepeatEnd);
-                              if (next())
-                                    score()->undoChangeRepeatFlags((Measure*)next(), ((Measure*)next())->repeatFlags() & ~RepeatStart); //TODO: MeasureBase
+                              if (nm)
+                                    score()->undoChangeRepeatFlags(nm, nm->repeatFlags() & ~RepeatStart);
                               break;
                         case END_START_REPEAT:
                               score()->undoChangeRepeatFlags(this, _repeatFlags | RepeatEnd);
-                              if (next())
-                                    score()->undoChangeRepeatFlags((Measure*)next(), ((Measure*)next())->repeatFlags() | RepeatStart); //TODO: MeasureBase
+                              if (nm)
+                                    score()->undoChangeRepeatFlags(nm, nm->repeatFlags() | RepeatStart);
                               break;
                         }
                   delete bl;
@@ -2601,5 +2605,14 @@ void Measure::setEndBarLineType(int val, bool g)
       {
       _endBarLineType = val;
       _endBarLineGenerated = g;
+      }
+
+//---------------------------------------------------------
+//   setRepeatFlags
+//---------------------------------------------------------
+
+void Measure::setRepeatFlags(int val)
+      {
+      _repeatFlags = val;
       }
 

@@ -233,29 +233,6 @@ void Segment::add(Element* el)
                   _elist[track] = el;
                   break;
 
-            case BAR_LINE:
-                  {
-                  int flags = measure()->repeatFlags();
-                  if (el->subtype() == START_REPEAT) {
-                        MeasureBase* mb = measure();
-                        while (mb->next() && mb->next()->type() != MEASURE)
-                              mb = mb->next();
-                        if (mb->next())
-                              ((Measure*)mb->next())->setRepeatFlags(flags | RepeatStart);
-                        }
-                  else if (el->subtype() == END_REPEAT)
-                        measure()->setRepeatFlags(flags | RepeatEnd);
-                  else if (el->subtype() == END_START_REPEAT) {
-                        measure()->setRepeatFlags(flags | RepeatEnd);
-                        MeasureBase* mb = measure();
-                        while (mb->next() && mb->next()->type() != MEASURE)
-                              mb = mb->next();
-                        if (mb->next())
-                              ((Measure*)mb->next())->setRepeatFlags(flags | RepeatStart);
-                        }
-                  }
-                  _elist[track] = el;
-                  break;
             default:
                   _elist[track] = el;
                   break;
@@ -311,29 +288,6 @@ void Segment::remove(Element* el)
             case REPEAT_MEASURE:
                   measure()->setRepeatFlags(measure()->repeatFlags() & ~RepeatMeasureFlag);
                   _elist[track] = 0;
-                  break;
-
-            case BAR_LINE:
-                  {
-                  int flags = measure()->repeatFlags();
-                  if (el->subtype() == START_REPEAT) {
-                        MeasureBase* mb = measure();
-                        while (mb->next() && mb->next()->type() != MEASURE)
-                              mb = mb->next();
-                        if (mb->next())
-                              ((Measure*)mb->next())->setRepeatFlags(flags & ~RepeatStart);
-                        }
-                  else if (el->subtype() == END_REPEAT)
-                        measure()->setRepeatFlags(flags & ~RepeatEnd);
-                  else if (el->subtype() == END_START_REPEAT) {
-                        MeasureBase* mb = measure();
-                        while (mb->next() && mb->next()->type() != MEASURE)
-                              mb = mb->next();
-                        if (mb->next())
-                              ((Measure*)mb->next())->setRepeatFlags(flags & ~RepeatStart);
-                        measure()->setRepeatFlags(flags & ~RepeatEnd);
-                        }
-                  }
                   break;
 
             default:

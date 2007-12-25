@@ -313,34 +313,16 @@ bool BarLine::acceptDrop(Viewer* v, const QPointF&, int type, int) const
 //   drop
 //---------------------------------------------------------
 
-Element* BarLine::drop(const QPointF&, const QPointF&, Element* e)
+Element* BarLine::drop(const QPointF& p1, const QPointF& p2, Element* e)
       {
       int type = e->type();
       int st   = e->subtype();
-      delete e;
-      if (type != BAR_LINE || st == subtype())
+      if (type != BAR_LINE || st == subtype()) {
+            delete e;
             return 0;
+            }
       Measure* m = segment()->measure();
-      score()->undoChangeEndBarLineType(m, st);
-      MeasureBase* mnb = m->next();
-      while (mnb && mnb->type() != MEASURE)
-            mnb = mnb->next();
-      Measure* mn = (Measure*)mnb;
-
-      if (st == START_REPEAT && mn)
-            mn->setRepeatFlags(mn->repeatFlags() | RepeatStart);
-      else if (st == END_REPEAT)
-            m->setRepeatFlags(m->repeatFlags() | RepeatEnd);
-      else if (st == END_START_REPEAT) {
-            if (mn)
-                  mn->setRepeatFlags(mn->repeatFlags() | RepeatStart);
-            m->setRepeatFlags(m->repeatFlags() | RepeatEnd);
-            }
-      else {
-            if (mn)
-                  mn->setRepeatFlags(mn->repeatFlags() & ~RepeatStart);
-            m->setRepeatFlags(m->repeatFlags() & ~RepeatEnd);
-            }
+      m->drop(p1, p2, e);
       return 0;
       }
 
