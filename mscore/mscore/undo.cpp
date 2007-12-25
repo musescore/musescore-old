@@ -78,7 +78,6 @@ static const char* undoName[] = {
       "ChangeKey",
       "InsertTime",
       "ChangeRepeatFlags",
-      "ChangeEndBarLine",
       "ChangeVoltaEnding", "ChangeVoltaText",
       "ChangeChordRestSize",
       "ChangeNoteHead",
@@ -523,12 +522,6 @@ void Score::processUndoOp(UndoOp* i, bool undo)
                   {
                   int tmp = ((Measure*)i->measure)->repeatFlags();
                   ((Measure*)i->measure)->setRepeatFlags(i->val1);
-                  i->val1 = tmp;
-                  }
-            case UndoOp::ChangeEndBarLine:
-                  {
-                  int tmp = ((Measure*)i->measure)->endBarLineType();
-                  ((Measure*)i->measure)->setEndBarLineType(i->val1, i->val1 != NORMAL_BAR);
                   i->val1 = tmp;
                   }
                   break;
@@ -985,17 +978,6 @@ void Score::undoChangeRepeatFlags(Measure* m, int flags)
       checkUndoOp();
       UndoOp i;
       i.type = UndoOp::ChangeRepeatFlags;
-      i.measure = m;
-      i.val1 = flags;
-      undoList.back()->push_back(i);
-      processUndoOp(&undoList.back()->back(), false);
-      }
-
-void Score::undoChangeEndBarLine(Measure* m, int flags)
-      {
-      checkUndoOp();
-      UndoOp i;
-      i.type = UndoOp::ChangeEndBarLine;
       i.measure = m;
       i.val1 = flags;
       undoList.back()->push_back(i);

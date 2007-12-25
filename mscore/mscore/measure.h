@@ -198,7 +198,7 @@ class Measure : public MeasureBase {
       void createVoice(int track);
       void adjustToLen(int, int);
       int repeatFlags() const      { return _repeatFlags; }
-      void setRepeatFlags(int val) { _repeatFlags = val; }
+      void setRepeatFlags(int val);
       };
 
 #endif

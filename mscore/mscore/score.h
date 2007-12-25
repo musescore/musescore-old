@@ -276,7 +276,6 @@ class Score : public QObject {
       void undoChangeElement(Element* oldElement, Element* newElement);
       void undoInsertTime(int tick, int len);
       void undoChangeRepeatFlags(Measure*, int);
-      void undoChangeEndBarLine(Measure*, int);
       void undoChangeVoltaEnding(Volta* volta, const QList<int>& l);
       void undoChangeVoltaText(Volta* volta, const QString& s);
       void undoChangeChordRestSize(ChordRest* cr, bool small);

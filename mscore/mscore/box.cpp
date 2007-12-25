@@ -34,9 +34,13 @@
 Box::Box(Score* score)
    : MeasureBase(score)
       {
-      editMode   = false;
-      _boxWidth  = Spatium(5.0);
-      _boxHeight = Spatium(10.0);
+      editMode      = false;
+      _boxWidth     = Spatium(5.0);
+      _boxHeight    = Spatium(10.0);
+      _leftMargin   = 0.0;
+      _rightMargin  = 0.0;
+      _topMargin    = 0.0;
+      _bottomMargin = 0.0;
       }
 
 //---------------------------------------------------------
@@ -137,6 +141,14 @@ void Box::write(Xml& xml) const
             xml.tag("height", _boxHeight.val());
       else if (type() == HBOX)
             xml.tag("width", _boxWidth.val());
+      if (_leftMargin != 0.0)
+            xml.tag("leftMargin", _leftMargin);
+      if (_rightMargin != 0.0)
+            xml.tag("rightMargin", _rightMargin);
+      if (_topMargin != 0.0)
+            xml.tag("topMargin", _topMargin);
+      if (_bottomMargin != 0.0)
+            xml.tag("bottomMargin", _bottomMargin);
       foreach (const Element* el, _el)
             el->write(xml);
       xml.etag();
@@ -173,6 +185,14 @@ void Box::read(QDomElement e)
                         v /= _spatium;
                   _boxWidth = Spatium(v);
                   }
+            else if (tag == "leftMargin")
+                  _leftMargin = val.toDouble();
+            else if (tag == "rightMargin")
+                  _rightMargin = val.toDouble();
+            else if (tag == "topMargin")
+                  _topMargin = val.toDouble();
+            else if (tag == "bottomMargin")
+                  _bottomMargin = val.toDouble();
             else if (tag == "Text") {
                   Text* t = new Text(score());
                   t->setTick(curTickPos);

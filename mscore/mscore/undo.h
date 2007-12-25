@@ -75,7 +75,6 @@ struct UndoOp {
             ChangeKey,
             InsertTime,
             ChangeRepeatFlags,
-            ChangeEndBarLine,
             ChangeVoltaEnding,
             ChangeVoltaText,
             ChangeChordRestSize,

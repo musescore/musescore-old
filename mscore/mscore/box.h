@@ -38,6 +38,7 @@ class Box : public MeasureBase {
 
       Spatium _boxWidth;       // only valid for HBox
       Spatium _boxHeight;      // only valid for VBox
+      double _leftMargin, _rightMargin, _topMargin, _bottomMargin;
       bool editMode;
 
    public:
@@ -55,10 +56,18 @@ class Box : public MeasureBase {
       virtual void write(Xml&) const;
       virtual void read(QDomElement);
 
-      Spatium boxWidth() const        { return _boxWidth;  }
-      void setBoxWidth(Spatium val)   { _boxWidth = val;   }
-      Spatium boxHeight() const       { return _boxHeight; }
-      void setBoxHeight(Spatium val)  { _boxHeight = val;  }
+      Spatium boxWidth() const         { return _boxWidth;     }
+      void setBoxWidth(Spatium val)    { _boxWidth = val;      }
+      Spatium boxHeight() const        { return _boxHeight;    }
+      void setBoxHeight(Spatium val)   { _boxHeight = val;     }
+      double leftMargin() const        { return _leftMargin;   }
+      double rightMargin() const       { return _rightMargin;  }
+      double topMargin() const         { return _topMargin;    }
+      double bottomMargin() const      { return _bottomMargin; }
+      void setLeftMargin(double val)   { _leftMargin = val;    }
+      void setRightMargin(double val)  { _rightMargin = val;   }
+      void setTopMargin(double val)    { _topMargin = val;     }
+      void setBottomMargin(double val) { _bottomMargin = val;  }
       };
 
 //---------------------------------------------------------
