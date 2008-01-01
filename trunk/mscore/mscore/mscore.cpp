@@ -234,6 +234,7 @@ MuseScore::MuseScore()
       _midiinEnabled        = true;
       _speakerEnabled       = true;
       newWizard             = 0;
+      lastOpenPath          = ".";
 
       _modeText = new QLabel;
       _modeText->setAutoFillBackground(true);

@@ -1,4 +1,5 @@
 1.1.8 (ws)
+      - remember last open path
       - fix instrument list file path configuration
 31.12.7 (ws)
       - updated italian translation from Angelo Contardi

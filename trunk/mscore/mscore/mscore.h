@@ -196,6 +196,7 @@ class MuseScore : public QMainWindow {
       QList<Score*> scoreList;
       bool _midiinEnabled;
       bool _speakerEnabled;
+      QString lastOpenPath;
 
       virtual void closeEvent(QCloseEvent*);
 
