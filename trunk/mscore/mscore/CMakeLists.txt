@@ -99,7 +99,7 @@ add_executable ( mscore
       ${mocs}
       ${PROJECT_BINARY_DIR}/all.h
       ${PROJECT_BINARY_DIR}/all.h.pch
-#      ${resource_file}
+      ${resource_file}
 
       actions.cpp accidental.cpp barline.cpp beam.cpp
       bracket.cpp canvas.cpp chord.cpp chordrest.cpp clef.cpp
@@ -132,7 +132,8 @@ add_executable ( mscore
 if (MINGW)
    add_custom_command(
       OUTPUT ${PROJECT_BINARY_DIR}/resfile.o
-      COMMAND wine windres -v mscore.rc ${PROJECT_BINARY_DIR}/resfile.o
+      COMMAND wine /home/ws/.wine/drive_c/MingW/bin/windres.exe mscore.rc -o ${PROJECT_BINARY_DIR}/resfile.o
+#      COMMAND wine /home/ws/.wine/drive_c/MingW/bin/windres.exe -o ${PROJECT_BINARY_DIR}/resfile.o < mscore.rc
       DEPENDS ${PROJECT_SOURCE_DIR}/mscore/data/mscore.rc
       WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/mscore/data
       )
@@ -144,8 +145,7 @@ if (MINGW)
    set_target_properties( mscore
       PROPERTIES
          COMPILE_FLAGS "-include ${PROJECT_BINARY_DIR}/all.h ${QT_DEFINITIONS} -DQT_SVG_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_CORE_LIB"
-         LINK_FLAGS "${PROJECT_BINARY_DIR}/resfile.o -mwindows -L /home/ws/.wine/drive_c/Qt/4.3.3/lib -L /home/ws/mscore/portaudio/lib"
-         LINK_FLAGS "-mwindows -L /home/ws/.wine/drive_c/Qt/4.3.3/lib -L /home/ws/mscore/portaudio/lib"
+         LINK_FLAGS "-Wl,-S ${PROJECT_BINARY_DIR}/resfile.o -mwindows -L /home/ws/.wine/drive_c/Qt/4.3.3/lib -L /home/ws/mscore/portaudio/lib"
       )
    target_link_libraries(mscore
       fluid
