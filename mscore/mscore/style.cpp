@@ -94,10 +94,10 @@ const TextStyle defaultTextStyleArray[] = {
          ALIGN_LEFT,    ANCHOR_PARENT, -1.0, -2.2, OS),
 
       TextStyle(QString("Page Number Odd"), ff, 12, false, false, false,
-         ALIGN_RIGHT | ALIGN_TOP, ANCHOR_PARENT, -10, 10, OA),
+         ALIGN_RIGHT | ALIGN_BASELINE, ANCHOR_PARENT, MM(-10), MM(-10), OA, 100.0, 100.0),
 
       TextStyle(QString("Page Number Even"), ff, 12, false, false, false,
-         ALIGN_LEFT | ALIGN_TOP, ANCHOR_PARENT, 10, 10, OA),
+         ALIGN_LEFT | ALIGN_BASELINE, ANCHOR_PARENT, MM(10), MM(-10), OA, 0.0, 100.0),
 
       TextStyle(QString("Translator"), ff, 11, false, false, false,
          ALIGN_HCENTER | ALIGN_TOP,    ANCHOR_STAFF, 0, 6),

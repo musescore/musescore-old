@@ -982,7 +982,7 @@ void Score::insertMeasures(int n, int type)
 	int ticks = sigmap->ticksMeasure(tick);
 
 	for (int ino = 0; ino < n; ++ino) {
-		MeasureBase* m;
+		MeasureBase* m = 0;
             if (type == MEASURE)
                   m = new Measure(this);
             else if (type == HBOX)
