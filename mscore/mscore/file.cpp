@@ -145,8 +145,9 @@ void MuseScore::clearScore()
 void MuseScore::loadFile()
       {
       QString fn = QFileDialog::getOpenFileName(
-         this, tr("MuseScore: Load Score"),
-         QString("."),
+         this,
+         tr("MuseScore: Load Score"),
+         lastOpenPath,
          tr("MuseScore Files (*.msc);;"
             "MusicXml Files (*.xml);;"
             "Standard Midi File Files (*.mid);;"
@@ -160,6 +161,7 @@ void MuseScore::loadFile()
       Score* score = new Score();
       score->read(fn);
       appendScore(score);
+      lastOpenPath = score->fileInfo()->path();
       tab->setCurrentIndex(scoreList.size() - 1);
       }
 
