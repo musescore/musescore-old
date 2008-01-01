@@ -470,8 +470,9 @@ PreferenceDialog::PreferenceDialog(QWidget* parent)
       connect(fgWallpaperSelect,  SIGNAL(clicked()), SLOT(selectFgWallpaper()));
       connect(bgWallpaperSelect,  SIGNAL(clicked()), SLOT(selectBgWallpaper()));
       connect(sfButton, SIGNAL(clicked()), SLOT(selectSoundFont()));
-      connect(imagePathButton, SIGNAL(clicked()), SLOT(selectImagePath()));
+      connect(imagePathButton,      SIGNAL(clicked()), SLOT(selectImagePath()));
       connect(instrumentListButton, SIGNAL(clicked()), SLOT(selectInstrumentList()));
+      connect(startWithButton,      SIGNAL(clicked()), SLOT(selectStartWith()));
       sfChanged = false;
 
       connect(playPanelCur, SIGNAL(clicked()), SLOT(playPanelCurClicked()));
@@ -722,13 +723,30 @@ void PreferenceDialog::selectImagePath()
 
 void PreferenceDialog::selectInstrumentList()
       {
-      QString s = QFileDialog::getExistingDirectory(
+      QString s = QFileDialog::getOpenFileName(
          this,
          tr("Choose default Instrument List"),
-         instrumentList->text()
+         instrumentList->text(),
+         tr("Instrument List (*.xml);;All (*)")
          );
       if (!s.isNull())
             instrumentList->setText(s);
+      }
+
+//---------------------------------------------------------
+//   selectStartWith
+//---------------------------------------------------------
+
+void PreferenceDialog::selectStartWith()
+      {
+      QString s = QFileDialog::getOpenFileName(
+         this,
+         tr("Choose score to start with"),
+         sessionScore->text(),
+         tr("MuseScore file (*.msc);;All (*)")
+         );
+      if (!s.isNull())
+            sessionScore->setText(s);
       }
 
 //---------------------------------------------------------
