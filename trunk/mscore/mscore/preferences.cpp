@@ -837,6 +837,7 @@ void PreferenceDialog::apply()
       preferences.imagePath          = imagePath->text();
       preferences.showSplashScreen   = showSplashScreen->isChecked();
       preferences.midiExpandRepeats  = expandRepeats->isChecked();
+      preferences.instrumentList     = instrumentList->text();
 
       if (shortcutsChanged) {
             shortcutsChanged = false;
