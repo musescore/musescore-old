@@ -233,6 +233,7 @@ MuseScore::MuseScore()
       paletteBox            = 0;
       _midiinEnabled        = true;
       _speakerEnabled       = true;
+      newWizard             = 0;
 
       _modeText = new QLabel;
       _modeText->setAutoFillBackground(true);

@@ -45,6 +45,7 @@
       <file>data/darkgreendot.svg</file>
       <file>data/recordOn.svg</file>
       <file>data/recordOff.svg</file>
+      <file>data/mscore.png</file>
    </qresource>
 
    <qresource lang="de">

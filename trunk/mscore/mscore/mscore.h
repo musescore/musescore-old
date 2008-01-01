@@ -44,6 +44,7 @@ class Pad;
 class PaletteBox;
 class Xml;
 class MagBox;
+class NewWizard;
 
 extern QString mscoreGlobalShare;
 static const int PROJECT_LIST_LEN = 6;
@@ -188,6 +189,7 @@ class MuseScore : public QMainWindow {
       QWidget* layoutBreakPalette;
       QStatusBar* _statusBar;
       QLabel* _modeText;
+      NewWizard* newWizard;
 
       Pad* pad;
       PaletteBox* paletteBox;
