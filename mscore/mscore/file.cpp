@@ -54,6 +54,7 @@
 #include "pedal.h"
 #include "trill.h"
 #include "volta.h"
+#include "newwizard.h"
 
 double printerMag = 1.0;
 
@@ -389,11 +390,16 @@ void MuseScore::newFileFromTemplate()
 
 void MuseScore::newFile()
       {
+      if (newWizard == 0)
+            newWizard = new NewWizard(this);
+      newWizard->show();
+#if 0
       Score* score = new Score;
       score->fileInfo()->setFile(createDefaultName());
       score->setCreated(true);
       appendScore(score);
       tab->setCurrentIndex(scoreList.size() - 1);
+#endif
       }
 
 //---------------------------------------------------------

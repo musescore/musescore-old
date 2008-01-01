@@ -578,6 +578,8 @@ double Measure::tick2pos(int tck) const
 
 void Measure::layout2(ScoreLayout* layout)
       {
+      if (parent() == 0)
+            return;
       foreach(const MStaff* ms, staves) {
             StaffLines* lines = ms->lines;
             lines->setWidth(width());
