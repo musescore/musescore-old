@@ -144,7 +144,7 @@ if (MINGW)
    set_target_properties( mscore
       PROPERTIES
          COMPILE_FLAGS "-include ${PROJECT_BINARY_DIR}/all.h ${QT_DEFINITIONS} -DQT_SVG_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_CORE_LIB"
-#         LINK_FLAGS "${PROJECT_BINARY_DIR}/resfile.o -mwindows -L /home/ws/.wine/drive_c/Qt/4.3.1/lib -L /home/ws/mscore/portaudio/lib"
+         LINK_FLAGS "${PROJECT_BINARY_DIR}/resfile.o -mwindows -L /home/ws/.wine/drive_c/Qt/4.3.3/lib -L /home/ws/mscore/portaudio/lib"
          LINK_FLAGS "-mwindows -L /home/ws/.wine/drive_c/Qt/4.3.3/lib -L /home/ws/mscore/portaudio/lib"
       )
    target_link_libraries(mscore

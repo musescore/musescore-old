@@ -1,4 +1,5 @@
 1.1.8 (ws)
+      - fix page number layout
       - fix file button in "preferences>instrumentPath" and "preferences>startWith"
       - remember last open path
       - fix instrument list file path configuration
