@@ -123,6 +123,7 @@ class PreferenceDialog : public QDialog, private Ui::PrefsDialogBase {
       void selectSoundFont();
       void selectImagePath();
       void selectInstrumentList();
+      void selectStartWith();
       void playPanelCurClicked();
       void padCurClicked();
       void resetShortcutClicked();
