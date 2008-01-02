@@ -1,5 +1,5 @@
 <?php
-  $file="manual.php";
+  $file="reference.php";
   require("header.html");
   ?>
 <h4><a href="idx.php">MuseScore</a> -- <a href="manual.php">Documentation</a> -- Index</h4>
