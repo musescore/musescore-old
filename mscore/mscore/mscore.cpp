@@ -274,7 +274,7 @@ MuseScore::MuseScore()
          << "lyrics" << "fingering" << "system-text" << "tempo"
          << "metronome" << "cut" << "copy" << "paste"
          << "beam-start" << "beam-mid" << "no-beam" << "beam32"
-         << "file-open" << "file-new" << "file-template" << "file-save" << "file-save-as" << "file-close"
+         << "file-open" << "file-new" << "file-save" << "file-save-as" << "file-close"
          << "quit"
          << "toggle-statusbar" << "note-input" << "pitch-spell"
          << "rewind" << "play" << "pause" <<"repeat"
@@ -443,7 +443,6 @@ MuseScore::MuseScore()
       QMenu* menuFile = mb->addMenu(tr("&Score"));
 
       menuFile->addAction(getAction("file-new"));
-      menuFile->addAction(getAction("file-template"));
       menuFile->addAction(getAction("file-open"));
       openRecent = menuFile->addMenu(fileOpenIcon, tr("Open &Recent"));
       connect(openRecent, SIGNAL(aboutToShow()), SLOT(openRecentMenu()));
@@ -1727,8 +1726,6 @@ void MuseScore::cmd(QAction* a)
             saveAs();
       else if (cmd == "file-new")
             newFile();
-      else if (cmd == "file-template")
-            newFileFromTemplate();
       else if (cmd == "quit")
             close();
       else if (cmd == "fingering")
