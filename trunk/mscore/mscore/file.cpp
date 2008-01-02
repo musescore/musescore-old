@@ -361,32 +361,6 @@ QString MuseScore::createDefaultName() const
       }
 
 //---------------------------------------------------------
-//   newFileFromTemplate
-//    create new score
-//---------------------------------------------------------
-
-void MuseScore::newFileFromTemplate()
-      {
-      QString path(mscoreGlobalShare);
-      path += "/templates";
-      QString fn = QFileDialog::getOpenFileName(
-         this, tr("MuseScore: Load Template"),
-         path,
-         "Score templates (*.msc);; Any files (*)"
-         );
-      if (fn.isEmpty()) {
-            newFile();
-            return;
-            }
-      Score* score = new Score;
-      score->read(fn);
-      score->fileInfo()->setFile(createDefaultName());
-      score->setCreated(true);
-      appendScore(score);
-      tab->setCurrentIndex(scoreList.size() - 1);
-      }
-
-//---------------------------------------------------------
 //   newFile
 //    create new score
 //---------------------------------------------------------

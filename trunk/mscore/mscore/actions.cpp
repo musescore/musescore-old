@@ -70,20 +70,10 @@ Shortcut MuseScore::sc[] = {
          STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT | STATE_PLAY,
          "file-new",
          QT_TR_NOOP("file new"),
-         0,
+         Qt::CTRL+Qt::Key_N,
          Qt::WindowShortcut,
          QT_TR_NOOP("New"),
          QT_TR_NOOP("Create new score"),
-         &fileNewIcon
-         ),
-      Shortcut(
-         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_EDIT | STATE_PLAY,
-         "file-template",
-         QT_TR_NOOP("file new from template"),
-         Qt::CTRL+Qt::Key_N,
-         Qt::WindowShortcut,
-         QT_TR_NOOP("New from template"),
-         QT_TR_NOOP("Create new score from template"),
          &fileNewIcon
          ),
       Shortcut(
@@ -787,7 +777,7 @@ Shortcut MuseScore::sc[] = {
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
          "insert-hbox",
-         QT_TR_NOOP("Insert vorizontal Frame"),
+         QT_TR_NOOP("Insert horizontal Frame"),
          0,
          Qt::WindowShortcut,
          QT_TR_NOOP("Insert horizontal Frame")

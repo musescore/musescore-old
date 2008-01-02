@@ -217,7 +217,6 @@ class MuseScore : public QMainWindow {
       bool saveFile();
       bool saveAs();
       void newFile();
-      void newFileFromTemplate();
       void fingeringMenu();
       QString createDefaultName() const;
 
