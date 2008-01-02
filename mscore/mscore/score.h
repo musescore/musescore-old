@@ -157,10 +157,8 @@ class Score : public QObject {
       void checkUndoOp();
       void pasteStaff(const QMimeData* ms);
       void move(const QString& cmd);
-      Measure* appendMeasure();
       void collectMeasureEvents(QMap<int, Event>*, Measure*, int staffIdx, int tickOffset);
       void padToggle(int n);
-      void appendMeasures(int);
       void insertMeasures(int, int);
 
       void cmdAddPitch(int, bool);
@@ -224,6 +222,7 @@ class Score : public QObject {
       void removeStaff(Staff*);
       void addMeasure(MeasureBase*);
       void removeMeasure(MeasureBase*);
+      void appendMeasures(int);
 
    public:
       Score();
@@ -465,6 +464,8 @@ class Score : public QObject {
       int mscVersion() const { return _mscVersion; }
 
       Selection* selection() const { return sel; }
+      SigList*   getSigmap()  { return sigmap; }
+      Measure* appendMeasure();
       };
 
 extern Score* gscore;

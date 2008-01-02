@@ -64,7 +64,7 @@ void TimeSig::setSubtype(int val)
 
 void TimeSig::setSig(int n, int z1, int z2, int z3, int z4)
       {
-      setSubtype((z4 << 24) + (z3 << 18) + (z2 << 12) + (z1 << 6) + n);
+      setSubtype(sigtype(n, z1, z2, z3, z4));
       }
 
 //---------------------------------------------------------
