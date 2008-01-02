@@ -1,7 +1,7 @@
 //=============================================================================
 //  MusE Score
 //  Linux Music Score Editor
-//  $Id: part.cpp,v 1.14 2006/03/28 14:58:58 wschweer Exp $
+//  $Id:$
 //
 //  Copyright (C) 2008 Werner Schweer and others
 //
@@ -21,6 +21,49 @@
 #ifndef __NEWWIZARD_H__
 #define __NEWWIZARD_H__
 
+#include "ui_instrwizard.h"
+#include "ui_timesigwizard.h"
+
+class Score;
+
+//---------------------------------------------------------
+//   InstrumentWizard
+//---------------------------------------------------------
+
+class InstrumentWizard : public QWidget, private Ui::InstrumentWizard {
+      Q_OBJECT
+
+   private slots:
+      void on_addButton_clicked();
+      void on_partiturList_itemSelectionChanged();
+      void on_instrumentList_itemSelectionChanged();
+      void on_instrumentList_itemActivated(QTreeWidgetItem* item, int);
+      void on_removeButton_clicked();
+      void on_upButton_clicked();
+      void on_downButton_clicked();
+      void on_aboveButton_clicked();
+      void on_belowButton_clicked();
+
+   signals:
+      void completeChanged(bool);
+
+   public:
+      InstrumentWizard(QWidget* parent = 0);
+      void createInstruments(Score*);
+      };
+
+//---------------------------------------------------------
+//   TimesigWizard
+//---------------------------------------------------------
+
+class TimesigWizard : public QWidget, private Ui::TimesigWizard {
+      Q_OBJECT
+
+   public:
+      TimesigWizard(QWidget* parent = 0);
+      int measures() const;
+      void timesig(int* z, int* n) const;
+      };
 
 //---------------------------------------------------------
 //   NewWizardPage1
@@ -32,11 +75,42 @@ class NewWizardPage1 : public QWizardPage {
       QRadioButton* rb1;
       QRadioButton* rb2;
 
-   private slots:
-      void rb1Toggled(bool);
-
    public:
       NewWizardPage1(QWidget* parent = 0);
+      };
+
+//---------------------------------------------------------
+//   NewWizardPage2
+//---------------------------------------------------------
+
+class NewWizardPage2 : public QWizardPage {
+      Q_OBJECT
+
+      bool complete;
+      InstrumentWizard* w;
+
+   public slots:
+      void setComplete(bool);
+
+   public:
+      NewWizardPage2(QWidget* parent = 0);
+      virtual bool isComplete() const;
+      void createInstruments(Score* s) { w->createInstruments(s); }
+      };
+
+//---------------------------------------------------------
+//   NewWizardPage3
+//---------------------------------------------------------
+
+class NewWizardPage3 : public QWizardPage {
+      Q_OBJECT
+
+      TimesigWizard* w;
+
+   public:
+      NewWizardPage3(QWidget* parent = 0);
+      int measures() const { return w->measures(); }
+      void timesig(int* z, int* n) const { return w->timesig(z, n); }
       };
 
 //---------------------------------------------------------
@@ -50,11 +124,13 @@ class NewWizardPage4 : public QWizardPage {
       QTreeView* tree;
 
    private slots:
+      void templateChanged(const QItemSelection&, const QItemSelection&);
 
    public:
       NewWizardPage4(QWidget* parent = 0);
+      virtual bool isComplete() const;
+      QString templatePath() const;
       };
-
 
 //---------------------------------------------------------
 //   NewWizard
@@ -63,10 +139,10 @@ class NewWizardPage4 : public QWizardPage {
 class NewWizard : public QWizard {
       Q_OBJECT
 
-      QWizardPage* p1;
-      QWizardPage* p2;
-      QWizardPage* p3;
-      QWizardPage* p4;
+      NewWizardPage1* p1;
+      NewWizardPage2* p2;
+      NewWizardPage3* p3;
+      NewWizardPage4* p4;
 
    public:
       NewWizard(QWidget* parent = 0);
@@ -74,6 +150,11 @@ class NewWizard : public QWizard {
       virtual int nextId() const;
 
       enum { Page_Type, Page_Instruments, Page_Timesig, Page_Template };
+      QString templatePath() const { return p4->templatePath(); }
+      bool useTemplate() const;
+      int measures() const               { return p3->measures();    }
+      void timesig(int* z, int* n) const { p3->timesig(z, n);        }
+      void createInstruments(Score* s)   { p2->createInstruments(s); }
       };
 
 #endif

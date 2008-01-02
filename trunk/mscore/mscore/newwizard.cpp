@@ -20,6 +20,459 @@
 
 #include "newwizard.h"
 #include "mscore.h"
+#include "instrtemplate.h"
+#include "score.h"
+#include "staff.h"
+#include "layout.h"
+#include "clef.h"
+#include "part.h"
+#include "drumset.h"
+
+//---------------------------------------------------------
+//   InstrumentWizard
+//---------------------------------------------------------
+
+InstrumentWizard::InstrumentWizard(QWidget* parent)
+   : QWidget(parent)
+      {
+      setupUi(this);
+      instrumentList->setSelectionMode(QAbstractItemView::SingleSelection);
+      partiturList->setSelectionMode(QAbstractItemView::SingleSelection);
+
+      instrumentList->setHeaderLabels(QStringList("Instrument List"));
+      QStringList header = (QStringList() << tr("Staves") << tr("Clef"));
+      partiturList->setHeaderLabels(header);
+
+      instrumentList->clear();
+      InstrumentTemplateListItem* group = 0;
+      QString curGroup;
+      foreach(InstrumentTemplate* t, instrumentTemplates) {
+            if (curGroup != t->group) {
+                  curGroup = t->group;
+                  group    = new InstrumentTemplateListItem(curGroup, instrumentList);
+                  group->setFlags(Qt::ItemIsEnabled);
+                  }
+            new InstrumentTemplateListItem(t, group);
+            }
+
+      addButton->setEnabled(false);
+      removeButton->setEnabled(false);
+      upButton->setEnabled(false);
+      downButton->setEnabled(false);
+      aboveButton->setEnabled(false);
+      belowButton->setEnabled(false);
+      }
+
+//---------------------------------------------------------
+//   on_instrumentList_itemSelectionChanged
+//---------------------------------------------------------
+
+void InstrumentWizard::on_instrumentList_itemSelectionChanged()
+      {
+      QList<QTreeWidgetItem*> wi = instrumentList->selectedItems();
+      bool flag = !wi.isEmpty();
+      addButton->setEnabled(flag);
+      }
+
+//---------------------------------------------------------
+//   on_partiturList_itemSelectionChanged
+//---------------------------------------------------------
+
+void InstrumentWizard::on_partiturList_itemSelectionChanged()
+      {
+      QList<QTreeWidgetItem*> wi = partiturList->selectedItems();
+      if (wi.isEmpty())
+            return;
+      QTreeWidgetItem* item = wi.front();
+      bool flag = item != 0;
+      removeButton->setEnabled(flag);
+      upButton->setEnabled(flag);
+      downButton->setEnabled(flag);
+      aboveButton->setEnabled(item && item->type() == STAFF_LIST_ITEM);
+      belowButton->setEnabled(item && item->type() == STAFF_LIST_ITEM);
+      }
+
+//---------------------------------------------------------
+//   on_instrumentList
+//---------------------------------------------------------
+
+void InstrumentWizard::on_instrumentList_itemActivated(QTreeWidgetItem*, int)
+      {
+      on_addButton_clicked();
+      }
+
+//---------------------------------------------------------
+//   on_addButton_clicked
+//    add instrument to partitur
+//---------------------------------------------------------
+
+void InstrumentWizard::on_addButton_clicked()
+      {
+      QList<QTreeWidgetItem*> wi = instrumentList->selectedItems();
+      if (wi.isEmpty())
+            return;
+      InstrumentTemplateListItem* item = (InstrumentTemplateListItem*)wi.front();
+      const InstrumentTemplate* it     = item->instrumentTemplate();
+      if (it == 0)
+            return;
+      PartListItem* pli = new PartListItem(it, partiturList);
+      pli->op = ITEM_ADD;
+
+      int n = it->staves;
+      for (int i = 0; i < n; ++i) {
+            StaffListItem* sli = new StaffListItem(pli);
+            sli->op       = ITEM_ADD;
+            sli->staff    = 0;
+            sli->setPartIdx(i);
+            sli->staffIdx = -1;
+            sli->setClef(it->clefIdx[i]);
+            }
+      partiturList->setItemExpanded(pli, true);
+      partiturList->clearSelection();     // should not be necessary
+      partiturList->setItemSelected(pli, true);
+      emit completeChanged(true);
+      }
+
+//---------------------------------------------------------
+//   on_removeButton_clicked
+//    remove instrument from partitur
+//---------------------------------------------------------
+
+void InstrumentWizard::on_removeButton_clicked()
+      {
+      QList<QTreeWidgetItem*> wi = partiturList->selectedItems();
+      if (wi.isEmpty())
+            return;
+      QTreeWidgetItem* item = wi.front();
+      QTreeWidgetItem* parent = item->parent();
+
+      if (parent) {
+            if (((StaffListItem*)item)->op == ITEM_ADD) {
+                  if (parent->childCount() == 1) {
+                        partiturList->takeTopLevelItem(partiturList->indexOfTopLevelItem(parent));
+                        delete parent;
+                        }
+                  else {
+                        parent->takeChild(parent->indexOfChild(item));
+                        delete item;
+                        }
+                  }
+            else {
+                  ((StaffListItem*)item)->op = ITEM_DELETE;
+                  partiturList->setItemHidden(item, true);
+                  }
+            }
+      else {
+            if (((PartListItem*)item)->op == ITEM_ADD)
+                  delete item;
+            else {
+                  ((PartListItem*)item)->op = ITEM_DELETE;
+                  partiturList->setItemHidden(item, true);
+                  }
+            }
+      partiturList->clearSelection();
+      emit completeChanged(partiturList->topLevelItemCount() > 0);
+      }
+
+//---------------------------------------------------------
+//   on_upButton_clicked
+//    move instrument up in partitur
+//---------------------------------------------------------
+
+void InstrumentWizard::on_upButton_clicked()
+      {
+      QList<QTreeWidgetItem*> wi = partiturList->selectedItems();
+      if (wi.isEmpty())
+            return;
+      QTreeWidgetItem* item = wi.front();
+
+      if (item->type() == PART_LIST_ITEM) {
+            bool isExpanded = partiturList->isItemExpanded(item);
+            int idx = partiturList->indexOfTopLevelItem(item);
+            if (idx) {
+                  QTreeWidgetItem* item = partiturList->takeTopLevelItem(idx);
+                  partiturList->insertTopLevelItem(idx-1, item);
+                  partiturList->setItemExpanded(item, isExpanded);
+                  partiturList->setItemSelected(item, true);
+                  }
+            }
+      else {
+            QTreeWidgetItem* parent = item->parent();
+            int idx = parent->indexOfChild(item);
+            if (idx) {
+                  QTreeWidgetItem* item = parent->takeChild(idx);
+                  parent->insertChild(idx-1, item);
+                  partiturList->setItemSelected(item, true);
+                  }
+            }
+      }
+
+//---------------------------------------------------------
+//   on_downButton_clicked
+//    move instrument down in partitur
+//---------------------------------------------------------
+
+void InstrumentWizard::on_downButton_clicked()
+      {
+      QList<QTreeWidgetItem*> wi = partiturList->selectedItems();
+      if (wi.isEmpty())
+            return;
+      QTreeWidgetItem* item = wi.front();
+      if (item->type() == PART_LIST_ITEM) {
+            bool isExpanded = partiturList->isItemExpanded(item);
+            int idx = partiturList->indexOfTopLevelItem(item);
+            int n = partiturList->topLevelItemCount();
+            if (idx < (n-1)) {
+                  QTreeWidgetItem* item = partiturList->takeTopLevelItem(idx);
+                  partiturList->insertTopLevelItem(idx+1, item);
+                  partiturList->setItemExpanded(item, isExpanded);
+                  partiturList->setItemSelected(item, true);
+                  }
+            }
+      else {
+            QTreeWidgetItem* parent = item->parent();
+            int idx = parent->indexOfChild(item);
+            int n = parent->childCount();
+            if (idx < (n-1)) {
+                  QTreeWidgetItem* item = parent->takeChild(idx);
+                  parent->insertChild(idx+1, item);
+                  partiturList->setItemSelected(item, true);
+                  }
+            }
+      }
+
+//---------------------------------------------------------
+//   on_aboveButton_clicked
+//---------------------------------------------------------
+
+void InstrumentWizard::on_aboveButton_clicked()
+      {
+      QList<QTreeWidgetItem*> wi = partiturList->selectedItems();
+      if (wi.isEmpty())
+            return;
+      QTreeWidgetItem* item = wi.front();
+      if (item->type() != STAFF_LIST_ITEM)
+            return;
+
+      StaffListItem* sli  = (StaffListItem*)item;
+      Staff* staff        = sli->staff;
+      PartListItem* pli   = (PartListItem*)sli->parent();
+      StaffListItem* nsli = new StaffListItem();
+      nsli->staff         = staff;
+      nsli->setClef(sli->clef());
+      if (staff)
+            nsli->op = ITEM_ADD;
+      pli->insertChild(pli->indexOfChild(sli), nsli);
+      partiturList->clearSelection();     // should not be necessary
+      partiturList->setItemSelected(nsli, true);
+      }
+
+//---------------------------------------------------------
+//   on_belowButton_clicked
+//---------------------------------------------------------
+
+void InstrumentWizard::on_belowButton_clicked()
+      {
+      QList<QTreeWidgetItem*> wi = partiturList->selectedItems();
+      if (wi.isEmpty())
+            return;
+      QTreeWidgetItem* item = wi.front();
+      if (item->type() != STAFF_LIST_ITEM)
+            return;
+
+      StaffListItem* sli  = (StaffListItem*)item;
+      Staff* staff        = sli->staff;
+      PartListItem* pli   = (PartListItem*)sli->parent();
+      StaffListItem* nsli = new StaffListItem();
+      nsli->staff         = staff;
+      nsli->setClef(sli->clef());
+      if (staff)
+            nsli->op = ITEM_ADD;
+      pli->insertChild(pli->indexOfChild(sli)+1, nsli);
+      partiturList->clearSelection();     // should not be necessary
+      partiturList->setItemSelected(nsli, true);
+      }
+
+//---------------------------------------------------------
+//   createInstruments
+//---------------------------------------------------------
+
+void InstrumentWizard::createInstruments(Score* cs)
+      {
+      //
+      // process modified partitur list
+      //
+      QTreeWidget* pl = partiturList;
+      Part* part   = 0;
+      int staffIdx = 0;
+      int rstaff   = 0;
+
+      QTreeWidgetItem* item = 0;
+      for (int idx = 0; (item = pl->topLevelItem(idx)); ++idx) {
+            rstaff = 0;
+            PartListItem* pli = (PartListItem*)item;
+            if (pli->op == ITEM_DELETE)
+                  cs->cmdRemovePart(pli->part);
+            else if (pli->op == ITEM_ADD) {
+                  const InstrumentTemplate* t = ((PartListItem*)item)->it;
+                  part = new Part(cs);
+                  part->setMidiProgram(t->midiProgram);
+                  part->setMinPitch(t->minPitch);
+                  part->setMaxPitch(t->maxPitch);
+                  part->setShortName(t->shortName);
+                  part->setTrackName(t->name);
+                  part->setLongName(t->name);
+                  part->setPitchOffset(t->transpose);
+                  if (t->useDrumset) {
+                        part->setUseDrumset(true);
+                        part->setDrumset(new Drumset(*smDrumset));
+                        }
+
+                  pli->part = part;
+                  QTreeWidgetItem* ci = 0;
+                  rstaff = 0;
+                  for (int cidx = 0; (ci = pli->child(cidx)); ++cidx) {
+                        StaffListItem* sli = (StaffListItem*)ci;
+                        Staff* staff = new Staff(cs, part, rstaff);
+                        sli->staff = staff;
+                        staff->setRstaff(rstaff);
+                        ++rstaff;
+                        staff->clef()->setClef(0, sli->clef());
+                        staff->setLines(t->staffLines[cidx]);
+                        staff->setSmall(t->smallStaff[cidx]);
+                        if (cidx == 0) {
+                              staff->setBracket(0, t->bracket);
+                              staff->setBracketSpan(0, t->staves);
+                              }
+                        part->staves()->push_back(staff);
+                        cs->staves().insert(staffIdx + rstaff, staff);
+                        cs->undoOp(UndoOp::InsertStaff, staff, staffIdx+rstaff);
+                        }
+                  cs->cmdInsertPart(part, staffIdx);
+                  staffIdx += rstaff;
+                  }
+            else {
+                  part = pli->part;
+                  QTreeWidgetItem* ci = 0;
+                  for (int cidx = 0; (ci = pli->child(cidx)); ++cidx) {
+                        StaffListItem* sli = (StaffListItem*)ci;
+                        if (sli->op == ITEM_DELETE) {
+                              cs->mainLayout()->systems()->clear();
+                              Staff* staff = sli->staff;
+                              int sidx = staff->idx();
+                              int eidx = sidx + 1;
+                              for (MeasureBase* mb = cs->mainLayout()->first(); mb; mb = mb->next()) {
+                                    if (mb->type() != MEASURE)
+                                          continue;
+                                    Measure* m = (Measure*)mb;
+                                    m->cmdRemoveStaves(sidx, eidx);
+                                    }
+                              cs->undoOp(UndoOp::RemoveStaff, staff, sidx);
+                              cs->removeStaff(staff);
+                              }
+                        else if (sli->op == ITEM_ADD) {
+                              Staff* staff = new Staff(cs, part, rstaff);
+                              sli->staff = staff;
+                              staff->setRstaff(rstaff);
+                              ++rstaff;
+                              staff->clef()->setClef(0, sli->clef());
+
+                              cs->insertStaff(staff, staffIdx);
+                              cs->undoOp(UndoOp::InsertStaff, staff, staffIdx);
+
+                              for (MeasureBase* mb = cs->mainLayout()->first(); mb; mb = mb->next()) {
+                                    if (mb->type() != MEASURE)
+                                          continue;
+                                    Measure* m = (Measure*)mb;
+                                    m->cmdAddStaves(staffIdx, staffIdx+1);
+                                    }
+
+                              ++staffIdx;
+                              }
+                        else {
+                              ++staffIdx;
+                              ++rstaff;
+                              }
+                        }
+                  }
+            }
+      //
+      //    sort staves
+      //
+      QList<Staff*> dst;
+      for (int idx = 0; (item = pl->topLevelItem(idx)); ++idx) {
+            PartListItem* pli = (PartListItem*)item;
+            if (pli->op == ITEM_DELETE)
+                  continue;
+            QTreeWidgetItem* ci = 0;
+            for (int cidx = 0; (ci = item->child(cidx)); ++cidx) {
+                  StaffListItem* sli = (StaffListItem*) ci;
+                  if (sli->op == ITEM_DELETE)
+                        continue;
+                  dst.push_back(sli->staff);
+                  }
+            }
+      QList<int> sl;
+      QList<int> dl;
+
+      for (int idx = 0; idx < cs->staves().size(); ++idx)
+            sl.push_back(idx);
+
+      for (QList<Staff*>::iterator i = dst.begin(); i != dst.end(); ++i) {
+            Staff* staff = *i;
+            int idx = cs->staves().indexOf(staff);
+            if (idx == -1)
+                  printf("staff in dialog(%p) not found in score\n", staff);
+            else
+                  dl.push_back(idx);
+            }
+
+      if (sl.size() != dl.size())
+            printf("cannot happen: sl(%zd) != dl(%zd)\n", sl.size(), dl.size());
+      bool sort = false;
+      QList<int>::iterator isl = sl.begin();
+      QList<int>::iterator dsl = dl.begin();
+      for (int i = 0; i < sl.size(); ++i, ++isl, ++dsl) {
+            if (*isl != *dsl) {
+                  sort = true;
+                  break;
+                  }
+            }
+      if (sort) {
+            cs->sortStaves(sl, dl);
+            cs->undoOp(sl, dl);
+            }
+      cs->setLayoutAll(true);
+      }
+
+//---------------------------------------------------------
+//   TimesigWizard
+//---------------------------------------------------------
+
+TimesigWizard::TimesigWizard(QWidget* parent)
+   : QWidget(parent)
+      {
+      setupUi(this);
+      }
+
+//---------------------------------------------------------
+//   measures
+//---------------------------------------------------------
+
+int TimesigWizard::measures() const
+      {
+      return measureCount->value();
+      }
+
+//---------------------------------------------------------
+//   timesig
+//---------------------------------------------------------
+
+void TimesigWizard::timesig(int* z, int* n) const
+      {
+      *z = timesigZ->value();
+      *n = timesigN->value();
+      }
 
 //---------------------------------------------------------
 //   NewWizardPage1
@@ -30,14 +483,67 @@ NewWizardPage1::NewWizardPage1(QWidget* parent)
       {
       setTitle(tr("Create New Score"));
       setSubTitle(tr("This wizard lets you create a new score"));
+
       rb1 = new QRadioButton(tr("Create new score from template"));
       rb2 = new QRadioButton(tr("Create new score from scratch"));
       rb2->setChecked(true);
       registerField("useTemplate", rb1, "checked");
-      connect(rb1, SIGNAL(toggled(bool)), SLOT(rb1Toggled(bool)));
       QGridLayout* grid = new QGridLayout;
       grid->addWidget(rb1, 0, 0);
       grid->addWidget(rb2, 1, 0);
+      setLayout(grid);
+      }
+
+//---------------------------------------------------------
+//   NewWizardPage2
+//---------------------------------------------------------
+
+NewWizardPage2::NewWizardPage2(QWidget* parent)
+   : QWizardPage(parent)
+      {
+      setTitle(tr("Create New Score"));
+      setSubTitle(tr("In this page you create a set of instruments. Each instrument"
+                     " is represented by one or more staves"));
+
+      complete = false;
+      w = new InstrumentWizard;
+      QGridLayout* grid = new QGridLayout;
+      grid->addWidget(w, 0, 0);
+      setLayout(grid);
+      connect(w, SIGNAL(completeChanged(bool)), this, SLOT(setComplete(bool)));
+      }
+
+//---------------------------------------------------------
+//   setComplete
+//---------------------------------------------------------
+
+void NewWizardPage2::setComplete(bool val)
+      {
+      complete = val;
+      emit completeChanged();
+      }
+
+//---------------------------------------------------------
+//   isComplete
+//---------------------------------------------------------
+
+bool NewWizardPage2::isComplete() const
+      {
+      return complete;
+      }
+
+//---------------------------------------------------------
+//   NewWizardPage3
+//---------------------------------------------------------
+
+NewWizardPage3::NewWizardPage3(QWidget* parent)
+   : QWizardPage(parent)
+      {
+      setTitle(tr("Create New Score"));
+      setSubTitle(tr("Create Time Signature"));
+      w = new TimesigWizard;
+      QGridLayout* grid = new QGridLayout;
+      grid->addWidget(w, 0, 0);
       setLayout(grid);
       }
 
@@ -58,6 +564,9 @@ NewWizardPage4::NewWizardPage4(QWidget* parent)
       model->setNameFilters(nameFilter);
 
       tree  = new QTreeView;
+      tree->setSelectionMode(QAbstractItemView::SingleSelection);
+      tree->setSelectionBehavior(QAbstractItemView::SelectRows);
+
       tree->setModel(model);
       tree->header()->hideSection(1);
       tree->header()->hideSection(2);
@@ -69,6 +578,45 @@ NewWizardPage4::NewWizardPage4(QWidget* parent)
       QGridLayout* grid = new QGridLayout;
       grid->addWidget(tree, 0, 0);
       setLayout(grid);
+
+      QItemSelectionModel* sm = tree->selectionModel();
+      connect(sm, SIGNAL(selectionChanged(const QItemSelection&, const QItemSelection&)),
+         this, SLOT(templateChanged(const QItemSelection&, const QItemSelection&)));
+      }
+
+//---------------------------------------------------------
+//   isComplete
+//---------------------------------------------------------
+
+bool NewWizardPage4::isComplete() const
+      {
+      return tree->selectionModel()->hasSelection();
+      }
+
+//---------------------------------------------------------
+//   templateChanged
+//---------------------------------------------------------
+
+void NewWizardPage4::templateChanged(const QItemSelection&, const QItemSelection&)
+      {
+      emit completeChanged();
+      }
+
+//---------------------------------------------------------
+//   templatePath
+//---------------------------------------------------------
+
+QString NewWizardPage4::templatePath() const
+      {
+      bool useTemplate = field("useTemplate").toBool();
+      if (useTemplate) {
+            QItemSelectionModel* sm = tree->selectionModel();
+            QModelIndexList l = sm->selectedRows();
+            QModelIndex idx = l.front();
+            if (idx.isValid())
+                  return model->filePath(idx);
+            }
+      return QString();
       }
 
 //---------------------------------------------------------
@@ -80,36 +628,18 @@ NewWizard::NewWizard(QWidget* parent)
       {
       setPixmap(QWizard::LogoPixmap, QPixmap(":/data/mscore.png"));
       setWindowTitle(tr("MuseScore: Create New Score"));
-      setOption(QWizard::HaveFinishButtonOnEarlyPages);
 
       p1 = new NewWizardPage1;
-
-      p2 = new QWizardPage;
-      p2->setTitle(tr("Create New Score"));
-      p2->setSubTitle(tr("In this page you create a set of instruments. Each instrument"
-                         " is represented by one or more staves"));
-
-      p3 = new QWizardPage;
-      p3->setTitle(tr("Create New Score"));
-      p3->setSubTitle(tr("Create Time Signature"));
-      p3->setFinalPage(true);
-
+      p2 = new NewWizardPage2;
+      p3 = new NewWizardPage3;
       p4 = new NewWizardPage4;
-      p4->setFinalPage(true);
 
       setPage(Page_Type, p1);
       setPage(Page_Instruments, p2);
-      setPage(Page_Timesig, p3);
       setPage(Page_Template, p4);
-      }
-
-//---------------------------------------------------------
-//   rb1Toggled
-//---------------------------------------------------------
-
-void NewWizardPage1::rb1Toggled(bool val)
-      {
-      printf("rb1 toggled %d\n", val);
+      setPage(Page_Timesig, p3);
+      p3->setFinalPage(true);
+      resize(700, 500);
       }
 
 //---------------------------------------------------------
@@ -118,19 +648,25 @@ void NewWizardPage1::rb1Toggled(bool val)
 
 int NewWizard::nextId() const
       {
-      bool useTemplate = field("useTemplate").toBool();
-      printf("nextIdx use template %d\n", useTemplate);
-
       switch(currentId()) {
             case Page_Type:
-                  if (useTemplate)
-                        return Page_Template;
-                  return Page_Instruments;
+                  return useTemplate() ? Page_Template : Page_Instruments;
             case Page_Instruments:
+                  return Page_Timesig;
+            case Page_Template:
                   return Page_Timesig;
             case Page_Timesig:
             default:
                   return -1;
             }
+      }
+
+//---------------------------------------------------------
+//   useTemplate
+//---------------------------------------------------------
+
+bool NewWizard::useTemplate() const
+      {
+      return field("useTemplate").toBool();
       }
 

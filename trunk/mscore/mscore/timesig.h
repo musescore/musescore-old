@@ -70,6 +70,9 @@ class TimeSig : public Element {
       virtual bool acceptDrop(Viewer*, const QPointF&, int, int) const;
       virtual Element* drop(const QPointF&, const QPointF&, Element*);
       virtual QRectF bbox() const;
+      static int sigtype(int n, int z1, int z2 = 0, int z3 = 0, int z4 = 0) {
+            return (z4 << 24) + (z3 << 18) + (z2 << 12) + (z1 << 6) + n;
+            }
       };
 
 #endif

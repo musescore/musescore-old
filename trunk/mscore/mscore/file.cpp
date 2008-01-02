@@ -55,6 +55,7 @@
 #include "trill.h"
 #include "volta.h"
 #include "newwizard.h"
+#include "timesig.h"
 
 double printerMag = 1.0;
 
@@ -394,14 +395,48 @@ void MuseScore::newFile()
       {
       if (newWizard == 0)
             newWizard = new NewWizard(this);
-      newWizard->show();
-#if 0
+      newWizard->restart();
+      if (newWizard->exec() != QDialog::Accepted)
+            return;
+      int measures = newWizard->measures();
+      int timesigZ, timesigN;
+      newWizard->timesig(&timesigZ, &timesigN);
+
       Score* score = new Score;
-      score->fileInfo()->setFile(createDefaultName());
       score->setCreated(true);
+      score->startCmd();
+
+      //
+      //  create score from template
+      //
+      if (newWizard->useTemplate()) {
+            score->read(newWizard->templatePath());
+            score->fileInfo()->setFile(createDefaultName());
+
+            int m = 0;
+            ScoreLayout* layout = score->mainLayout();
+            for (MeasureBase* mb = layout->first(); mb; mb = mb->next()) {
+                  if (mb->type() == MEASURE)
+                        ++m;
+                  }
+            if (m < measures)
+                  measures -= m;
+            else
+                  measures = 0;
+            }
+      //
+      //  create new score from scratch
+      //
+      else {
+            score->fileInfo()->setFile(createDefaultName());
+            newWizard->createInstruments(score);
+            }
+      if (measures)
+            score->appendMeasures(measures);
+      score->changeTimeSig(0, TimeSig::sigtype(timesigN, timesigZ));
+      score->endCmd();
       appendScore(score);
       tab->setCurrentIndex(scoreList.size() - 1);
-#endif
       }
 
 //---------------------------------------------------------
