@@ -179,9 +179,29 @@ void Navigator::mousePressEvent(QMouseEvent* ev)
 void Navigator::mouseMoveEvent(QMouseEvent* ev)
       {
       if (moving) {
-            QPointF p = matrix.inverted().map(QPointF(ev->pos()));
+            QPointF p     = matrix.inverted().map(QPointF(ev->pos()));
+            QRectF  vr    = matrix.inverted().mapRect(QRectF(rect()));
             QPointF delta = p - startMove;
             viewRect.translate(delta);
+            QRect  r      = matrix.mapRect(viewRect.toRect());
+            QPoint d      = matrix.map(delta).toPoint();
+
+            if (r.x() < 0) {
+                  viewRect.moveLeft(vr.left());
+                  double dx = -r.x() / matrix.m11();
+                  matrix.translate(dx, 0.0);
+                  redraw = true;
+                  }
+            if (r.right() > rect().right()) {
+                  double dx = rect().right() - r.right();
+                  viewRect.moveRight(vr.right());
+                  dx /= matrix.m11();
+                  matrix.translate(dx, 0.0);
+                  redraw = true;
+                  }
+            if (r.y() < 0)
+                  viewRect.moveTop(vr.top());
+
             startMove = p;
             emit viewRectMoved(viewRect);
             update();

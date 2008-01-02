@@ -1,3 +1,5 @@
+2.1.8 (ws)
+      - scroll navigator window on big scores
 1.1.8 (ws)
       - fix page number layout
       - fix file button in "preferences>instrumentPath" and "preferences>startWith"
