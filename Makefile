@@ -97,11 +97,11 @@ clean:
 
 dist:
 	mkdir mscore.dist
-	cd mscore.dist; svn co https://mscore.svn.sourceforge.net/svnroot/mscore/trunk mscore-0.8.0
+	cd mscore.dist; svn co https://mscore.svn.sourceforge.net/svnroot/mscore/trunk mscore-0.9.0
 	cd mscore.dist; find . -name .svn -print0 | xargs -0 /bin/rm -rf
-	cd mscore.dist; rm -rf mscore-0.8.0/web
-	cd mscore.dist; tar cvfj mscore-0.8.0.tar.bz2 mscore-0.8.0
-	mv mscore.dist/mscore-0.8.0.tar.bz2 .
+	cd mscore.dist; rm -rf mscore-0.9.0/web
+	cd mscore.dist; tar cvfj mscore-0.9.0.tar.bz2 mscore-0.9.0
+	mv mscore.dist/mscore-0.9.0.tar.bz2 .
 
 install:
 	cd build; make install
