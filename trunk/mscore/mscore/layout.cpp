@@ -358,7 +358,7 @@ bool ScoreLayout::layoutPage()
       qreal w  = page->loWidth() - page->lm() - page->rm();
       qreal x  = page->lm();
       qreal ey = page->loHeight() - page->bm() - point(score()->style()->staffLowerBorder)
-                  - point(score()->style()->systemDistance);
+                  /* - point(score()->style()->systemDistance)*/;
 
       page->clear();
       qreal y = page->tm();
@@ -406,7 +406,8 @@ bool ScoreLayout::layoutPage()
                         abort();
                         }
 
-                  if (y + h > ey) {
+                  // a page contains at least one system
+                  if (rows && (y + h > ey)) {
                         // system does not fit on page: rollback
                         curMeasure = cm;
                         curSystem  = cs;

@@ -1,4 +1,5 @@
 2.1.8 (ws)
+      - layout: make sure a page has at least one system to avoid crashes
       - scroll navigator window on big scores
 1.1.8 (ws)
       - fix page number layout
