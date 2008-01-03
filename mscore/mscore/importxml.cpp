@@ -784,7 +784,7 @@ Measure* MusicXml::xmlMeasure(Part* part, QDomElement e, int number)
                               measure->setRepeatFlags(RepeatEnd);
                               }
                         else
-/*WS*/                        measure->setEndBarLineType(barLine->subtype(), false);
+                              measure->setEndBarLineType(barLine->subtype(), false);
                         }
                   if (!(endingNumber.isEmpty() && endingType.isEmpty())) {
                         if (endingNumber.isEmpty())
@@ -828,7 +828,7 @@ Measure* MusicXml::xmlMeasure(Part* part, QDomElement e, int number)
             else if (e.tagName() == "sound")
                   domNotImplemented(e);
             else if (e.tagName() == "harmony")
-                  domNotImplemented(e);
+                  xmlHarmony(e, tick, measure);
             else
                   domError(e);
             }
@@ -2220,5 +2220,86 @@ void MusicXml::genWedge(int no, int endTick, Measure* /*measure*/, int staff)
       score->mainLayout()->add(hp);
 
 // printf("gen wedge %p staff %d, tick %d-%d\n", hp, staff, hp->tick(), hp->tick2());
+      }
+
+//---------------------------------------------------------
+//   xmlHarmony
+//---------------------------------------------------------
+
+void MusicXml::xmlHarmony(QDomElement e, int tick, Measure* measure)
+      {
+      // type:
+
+      // placement:
+      double rx = e.attribute("relative-x", "0").toDouble();
+      double dy = e.attribute("default-y", "0").toDouble();
+
+      QString printObject(e.attribute("print-object", "yes"));
+      QString printFrame(e.attribute("print-frame"));
+      QString printStyle(e.attribute("print-style"));
+
+      QString rootStep, kind, kindText;
+      int rootAlter;
+
+      for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
+            QString tag(e.tagName());
+            if (tag == "root") {
+                  for (QDomElement ee = e.firstChildElement(); !ee.isNull(); ee = ee.nextSiblingElement()) {
+                        QString tag(ee.tagName());
+                        if (tag == "root-step") {
+                              // attributes: print-style
+                              rootStep = ee.text();
+                              }
+                        else if (tag == "root-alter") {
+                              // attributes: print-object, print-style
+                              //             location (left-right)
+                              rootAlter = ee.text().toInt();
+                              }
+                        else
+                              domError(ee);
+                        }
+                  }
+            else if (tag == "function") {
+                  // attributes: print-style
+                  domNotImplemented(e);
+                  }
+            else if (tag == "kind") {
+                  kindText = e.attribute("text");
+                  kind = e.text();
+                  }
+            else
+                  domError(e);
+            }
+      if (printObject != "yes")
+            return;
+
+      Text* text = new Text(measure->score());
+      text->setTick(tick);
+      text->setSubtype(TEXT_CHORD);
+      QTextDocument* doc = text->getDoc();
+      QTextCursor cursor(doc);
+      QTextCharFormat tcf = cursor.blockCharFormat();
+      QFont font(tcf.font());
+      font.setFamily("MScore1");
+
+      cursor.insertText(rootStep, tcf);
+      if (rootAlter != 0) {
+            QTextCharFormat ntcf(tcf);
+            ntcf.setFont(font);
+            QString alter;
+            switch (rootAlter) {
+                  case -1:
+                        alter = symbols[flatSym].code();
+                        break;
+                  case 1:
+                        alter = symbols[sharpSym].code();
+                        break;
+                  }
+            cursor.insertText(alter, ntcf);
+            }
+      QTextCharFormat ntcf(tcf);
+//      ntcf.setVerticalAlignment(QTextCharFormat::AlignSuperScript);
+      cursor.insertText(kindText, ntcf);
+      measure->add(text);
       }
 
