@@ -2278,28 +2278,76 @@ void MusicXml::xmlHarmony(QDomElement e, int tick, Measure* measure)
       text->setSubtype(TEXT_CHORD);
       QTextDocument* doc = text->getDoc();
       QTextCursor cursor(doc);
-      QTextCharFormat tcf = cursor.blockCharFormat();
-      QFont font(tcf.font());
+
+      QTextCharFormat tcf = cursor.charFormat();
+      QFont font(doc->defaultFont());
+      tcf.setFont(font);
+      cursor.setBlockCharFormat(tcf);
+
       font.setFamily("MScore1");
 
+      QTextCharFormat superscript(tcf);
+      superscript.setVerticalAlignment(QTextCharFormat::AlignSuperScript);
+
+      QTextCharFormat ss2(superscript);
+      ss2.setFont(font);
+
+      QTextCharFormat ntcf(tcf);
+      ntcf.setFont(font);
+
+      QString flat = symbols[flatSym].code();
+      QString sharp = symbols[sharpSym].code();
+
       cursor.insertText(rootStep, tcf);
+      cursor.insertText("7/", tcf);
+      cursor.insertText(sharp, ntcf);
+
       if (rootAlter != 0) {
-            QTextCharFormat ntcf(tcf);
-            ntcf.setFont(font);
-            QString alter;
             switch (rootAlter) {
                   case -1:
-                        alter = symbols[flatSym].code();
+                        cursor.insertText(flat, ntcf);
                         break;
                   case 1:
-                        alter = symbols[sharpSym].code();
+                        cursor.insertText(sharp, ntcf);
                         break;
                   }
-            cursor.insertText(alter, ntcf);
             }
-      QTextCharFormat ntcf(tcf);
-//      ntcf.setVerticalAlignment(QTextCharFormat::AlignSuperScript);
-      cursor.insertText(kindText, ntcf);
+#if 0
+      if (kindText.isEmpty()) {
+#endif
+            if (kind == "minor-seventh") {
+                  cursor.insertText("m", tcf);
+                  cursor.insertText("7", superscript);
+                  }
+            else if (kind == "augmented-seventh") {
+                  cursor.insertText("7/",  superscript);
+                  cursor.insertText(sharp, ss2);
+                  cursor.insertText("5",   superscript);
+                  }
+            else if (kind == "dominant-ninth") {
+                  cursor.insertText("9", superscript);
+                  }
+            else if (kind == "major-sixth") {
+                  cursor.insertText("6", superscript);
+                  }
+            else if (kind == "major-seventh") {
+                  // triangle
+                  cursor.insertText("7", superscript);
+                  }
+            else if (kind == "minor-sixth") {
+                  cursor.insertText("m", tcf);
+                  cursor.insertText("6", superscript);
+                  }
+            else if (kind == "dominant")
+                  cursor.insertText("7", superscript);
+            else
+                  printf("unknown chord <%s>\n", qPrintable(kindText));
+#if 0
+            }
+      else {
+            cursor.insertText(kindText, tcf);
+            }
+#endif
       measure->add(text);
       }
 
