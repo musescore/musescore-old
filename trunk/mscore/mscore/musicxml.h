@@ -114,6 +114,7 @@ class MusicXml {
       void xmlAttributes(Measure*, int stave, QDomElement node);
       void xmlLyric(Measure* measure, int staff, QDomElement e);
       void xmlNote(Measure*, int stave, QDomElement node);
+      void xmlHarmony(QDomElement node, int tick, Measure* m);
 
    public:
       MusicXml(QDomDocument* d);

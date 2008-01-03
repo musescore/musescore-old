@@ -1,4 +1,5 @@
 3.1.8 (ws)
+      - implement subset of MusicXml harmony element for import
       - found workaround for mingw windres.exe problem
       - fixed crash when opening "object inspector" on adeste.msc
 2.1.8 (ws)
