@@ -324,7 +324,8 @@ void PageListEditor::updateList()
                                     }
                               for (int i = 0; i < staves; ++i) {
                                     foreach(Lyrics* l, *(segment->lyricsList(i))) {
-                                          new ElementItem(segItem, l);
+                                          if (l)
+                                                new ElementItem(segItem, l);
                                           }
                                     }
                               }
