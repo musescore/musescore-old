@@ -1,3 +1,6 @@
+3.1.8 (ws)
+      - found workaround for mingw windres.exe problem
+      - fixed crash when opening "object inspector" on adeste.msc
 2.1.8 (ws)
       - removed "new score from template" function
       - new score wizard

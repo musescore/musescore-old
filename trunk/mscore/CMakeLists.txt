@@ -192,7 +192,6 @@ include (InstallRequiredSystemLibraries)
 
   IF(MINGW)
       SET(CPACK_NSIS_INSTALLED_ICON_NAME "${PROJECT_SOURCE_DIR}/mscore/data/mscore.bmp")
-#      SET(CPACK_NSIS_INSTALLED_ICON_NAME "bin/mscore.exe")
       SET(CPACK_NSIS_DISPLAY_NAME "${CPACK_PACKAGE_INSTALL_DIRECTORY} MuseScore score typesetter")
       SET(CPACK_NSIS_HELP_LINK "http://mscore.sourceforge.net")
       SET(CPACK_NSIS_URL_INFO_ABOUT "http://mscore.sourceforge.net")
