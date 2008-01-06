@@ -53,6 +53,11 @@ typedef LyricsList::const_iterator ciLyrics;
 
  Segments are children of Measures and store Clefs, KeySigs, TimeSigs,
  BarLines and ChordRests.
+
+ special case SegGrace:
+      - tick()                 is play position of acciaccatura and appoggiatura notes
+      - tick() - tickOffset()  is logical position, relevant for layout
+                               (logicl position is the tick position of the next main note)
 */
 
 class Segment : public Element {
@@ -63,6 +68,7 @@ class Segment : public Element {
       enum SegmentType {
             SegClef, SegKeySig, SegTimeSig,
             SegStartRepeatBarLine,
+            SegGrace,
             SegChordRest,
             SegBreath,
             SegEndBarLine, SegTimeSigAnnounce

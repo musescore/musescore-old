@@ -1,3 +1,5 @@
+6.1.8 (ws)
+      - incomplete support for acciaccatura and appoggiatura notes (grace notes)
 3.1.8 (ws)
       - implement subset of MusicXml harmony element for import
       - found workaround for mingw windres.exe problem

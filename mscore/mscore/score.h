@@ -440,8 +440,8 @@ class Score : public QObject {
       int nextSeg(int tick, int track);
       int nextSeg1(int tick, int& track);
       int prevSeg1(int tick, int& track);
-      Style* style() const { return _style; }
-      bool noteEntryMode() const { return _noteEntryMode; }
+      Style* style() const          { return _style; }
+      bool noteEntryMode() const    { return _noteEntryMode; }
       void insertTime(int tick, int len);
       void cmdRemoveTime(int tick, int len);
       QList<Viewer*> getViewer()    { return viewer;    }

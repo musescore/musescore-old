@@ -36,6 +36,9 @@ enum {
       PAD_FLAT,
       PAD_FLAT2,
       //--------------------
+      PAD_ACCIACCATURA,
+      PAD_APPOGGIATURA,
+      //--------------------
       PAD_ESCAPE,
       PAD_EDIT,
       PAD_TIE,

@@ -87,6 +87,16 @@ enum OffsetType {
       OFFSET_SPATIUM    ///< offset in space units
       };
 
+//---------------------------------------------------------
+//   NoteType
+//---------------------------------------------------------
+
+enum NoteType {
+      NOTE_NORMAL,
+      NOTE_ACCIACCATURA,
+      NOTE_APPOGGIATURA       // grace notes
+      };
+
 // to move Anchor to right of measure set
 //    OffsetType = OFFSET_REL
 //    offset     = 100

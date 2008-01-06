@@ -209,6 +209,7 @@ Style defaultStyle = {
       5,                // measureNumberInterval;
       true,             // measureNumberSystem
       false,            // showMeasureNumberAllStaffs
+      0.7,              // graceNoteMag
       };
 
 //---------------------------------------------------------
@@ -481,6 +482,8 @@ void Style::loadStyle(QDomElement e)
                   measureNumberSystem = i;
             else if (tag == "measureNumberAllStaffs")
                   measureNumberAllStaffs = i;
+            else if (tag == "graceNoteMag")
+                  graceNoteMag = d;
             else
                   domError(e);
             }
@@ -557,5 +560,7 @@ void Style::saveStyle(Xml& xml)
       xml.tag("measureNumberInterval",  measureNumberInterval);
       xml.tag("measureNumberAllStaffs", measureNumberAllStaffs);
       xml.tag("measureNumberSystem",    measureNumberSystem);
+
+      xml.tag("graceNoteMag",           graceNoteMag);
       xml.etag();
       }

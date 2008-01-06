@@ -90,6 +90,16 @@ Pad::Pad(QWidget* parent)
       gl->addWidget(b, 2, 4);
       gl->setRowStretch(3, 100);
 
+      b = new QToolButton;
+      b->setDefaultAction(getAction("pad-acciaccatura"));
+      gl->addWidget(b, 3, 0);
+
+      b = new QToolButton;
+      b->setDefaultAction(getAction("pad-appoggiatura"));
+      gl->addWidget(b, 3, 1);
+
+      gl->setRowStretch(4, 100);
+
       //-----------
 
       w = new QWidget;

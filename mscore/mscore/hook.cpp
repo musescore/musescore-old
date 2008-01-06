@@ -34,41 +34,21 @@ Hook::Hook(Score* s)
 //   setIdx
 //---------------------------------------------------------
 
-void Hook::setIdx(int i, bool s)
+void Hook::setSubtype(int i)
       {
-      val = i;
-      _small = s;
-
-      if (_small) {
-            switch(i) {
-                  case 0:    break;
-                  case 1:    setSym(s_eighthflagSym); break;
-                  case 2:    setSym(s_sixteenthflagSym); break;
-                  case 3:    setSym(s_thirtysecondflagSym); break;
-                  case 4:    setSym(s_sixtyfourthflagSym); break;
-                  case 5:    break;
-                  case -1:   setSym(s_deighthflagSym); break;
-                  case -2:   setSym(s_dsixteenthflagSym); break;
-                  case -3:   setSym(s_dthirtysecondflagSym); break;
-                  case -4:   setSym(s_dsixtyfourthflagSym); break;
-                  case -5:   break;
-                  }
-            }
-      else {
-            switch(i) {
-                  case 0:    break;
-                  case 1:    setSym(eighthflagSym); break;
-                  case 2:    setSym(sixteenthflagSym); break;
-                  case 3:    setSym(thirtysecondflagSym); break;
-                  case 4:    setSym(sixtyfourthflagSym); break;
-                  case 5:    break;
-                  case -1:   setSym(deighthflagSym); break;
-                  case -2:   setSym(dsixteenthflagSym); break;
-                  case -3:   setSym(dthirtysecondflagSym); break;
-                  case -4:   setSym(dsixtyfourthflagSym); break;
-                  case -5:   break;
-                  }
+      Element::setSubtype(i);
+      switch(i) {
+            case 0:    break;
+            case 1:    setSym(eighthflagSym);        break;
+            case 2:    setSym(sixteenthflagSym);     break;
+            case 3:    setSym(thirtysecondflagSym);  break;
+            case 4:    setSym(sixtyfourthflagSym);   break;
+            case 5:    break;
+            case -1:   setSym(deighthflagSym);       break;
+            case -2:   setSym(dsixteenthflagSym);    break;
+            case -3:   setSym(dthirtysecondflagSym); break;
+            case -4:   setSym(dsixtyfourthflagSym);  break;
+            case -5:   break;
             }
       }
-
 

@@ -21,6 +21,8 @@
 #ifndef __PADSTATE_H__
 #define __PADSTATE_H__
 
+#include "globals.h"
+
 //---------------------------------------------------------
 //   PadState
 //    keyboard & pad note entry state
@@ -36,6 +38,7 @@ struct PadState {
       int pitch;
       int prefix;
       bool tie;
+      NoteType noteType;
 
 //    0 - no prefix
 //    1 - sharp
@@ -50,15 +53,16 @@ struct PadState {
 //    10 - (natural)       15 - [natural]
 
       PadState() {
-            dot     = false;
-            len     = 480;
-            tickLen = 480;
-            rest    = false;
-            pad     = 0;
-            voice   = 0;
-            pitch   = 60;
-            prefix  = 0;
-            tie     = false;
+            dot      = false;
+            len      = 480;
+            tickLen  = 480;
+            rest     = false;
+            pad      = 0;
+            voice    = 0;
+            pitch    = 60;
+            prefix   = 0;
+            tie      = false;
+            noteType = NOTE_NORMAL;
             }
       };
 

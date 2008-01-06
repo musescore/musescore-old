@@ -34,8 +34,9 @@
 #include "staff.h"
 
 const char* Segment::segmentTypeNames[] = {
-   "Clef", "Key Signature", "Time Signature", "Begin Repeat", "ChordRest",
-   "Breath", "Bar Line", "Time Sig Precaution"
+   "Clef", "Key Signature", "Time Signature", "Begin Repeat", "Grace", "ChordRest",
+   "Breath", "Bar Line", "Time Sig Precaution",
+   0
    };
 
 //---------------------------------------------------------

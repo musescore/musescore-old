@@ -517,7 +517,7 @@ void Measure::layout(ScoreLayout* layout, double width)
                               continue;
                         lyrics->layout(layout);
                         // center to middle of notehead:
-                        double noteHeadWidth = symbols[quartheadSym].width();
+                        double noteHeadWidth = symbols[quartheadSym].width(mag());
                         double lh = lyrics->lineSpacing();
                         y  = lh * line + point(score()->style()->lyricsDistance);
                         lyrics->setPos(noteHeadWidth/2 - lyrics->bbox().width() * .5,
@@ -737,7 +737,11 @@ Segment* Measure::createSegment(Segment::SegmentType st, int t)
 
 Segment* Measure::getSegment(Element* e)
       {
-      Segment::SegmentType st = Segment::segmentType(e->type());
+      Segment::SegmentType st;
+      if ((e->type() == CHORD) && (((Chord*)e)->noteType() != NOTE_NORMAL))
+            st = Segment::SegGrace;
+      else
+            st = Segment::segmentType(e->type());
       return getSegment(st, e->tick());
       }
 
@@ -1160,6 +1164,8 @@ again:
                         el->layout(layout);
                         double min1, extra1;
                         el->space(min1, extra1);
+//                        if (s->subtype() == Segment::SegGrace)
+//                              printf("seg %d ======%f %f\n", seg, min1, extra1);
                         if (min1 > min)
                               min = min1;
                         if (extra1 > extra)
@@ -1208,6 +1214,12 @@ again:
       //    move extra space to previous cells
       //---------------------------------------------------
 
+#if 0
+printf("move space1:");
+for (int i = 0; i < segs; ++i)
+     printf(" %f-%f", spaces[i][0].min(), spaces[i][0].extra());
+printf("\n");
+#endif
       for (int staffIdx = 0; staffIdx < nstaves; ++staffIdx) {
             for (int seg = segs; seg > 0; --seg) {    // seg 0 cannot move any space
                   double extra = spaces[seg][staffIdx].extra();
@@ -1227,7 +1239,12 @@ again:
                         spaces[tseg][staffIdx].addMin(extra);
                   }
             }
-
+#if 0
+printf("move space2:");
+for (int i = 0; i < segs; ++i)
+     printf(" %f-%f", spaces[i][0].min(), spaces[i][0].extra());
+printf("\n");
+#endif
       //---------------------------------------------------
       //    populate width[] array
       //---------------------------------------------------
@@ -1264,30 +1281,30 @@ again:
       int ntick     = tick() + tickLen();   // position of next measure
       int i         = 1;
       for (Segment* seg = first(); seg; seg = seg->next(), ++i) {
-            if (seg->subtype() == Segment::SegChordRest) {
-                  Segment* nseg = seg;
-                  for (;;) {
-                        nseg = nseg->next();
-                        if (nseg == 0 || nseg->subtype() == Segment::SegChordRest)
-                              break;
-                        }
-                  int nticks;
-                  if (nseg)
-                        nticks = nseg->tick() - seg->tick();
-                  else
-                        nticks = ntick - seg->tick();
-                  if (nticks == 0) {
-                        printf("layoutX: nticks==0 tickLen %d <%s> size %d, idx %d, %d %d  %p %p nseg <%s>\n",
-                           tickLen(), seg->name(),
-                           size(), i-1, seg->tick(), nseg ? nseg->tick() : 0, seg, nseg,
-                           nseg ? nseg->name() : "nil");
-                        }
-                  else {
-                        if (nticks < minTick)
-                              minTick = nticks;
-                        }
-                  ticks[i] = nticks;
+            if (seg->subtype() != Segment::SegChordRest)
+                  continue;
+            Segment* nseg = seg;
+            for (;;) {
+                  nseg = nseg->next();
+                  if (nseg == 0 || nseg->subtype() == Segment::SegChordRest)
+                        break;
                   }
+            int nticks;
+            if (nseg)
+                  nticks = nseg->tick() - seg->tick();
+            else
+                  nticks = ntick - seg->tick();
+            if (nticks == 0) {
+                  printf("layoutX: nticks==0 tickLen %d <%s> size %d, idx %d, %d %d  %p %p nseg <%s>\n",
+                     tickLen(), seg->name(),
+                     size(), i-1, seg->tick(), nseg ? nseg->tick() : 0, seg, nseg,
+                     nseg ? nseg->name() : "nil");
+                  }
+            else {
+                  if (nticks < minTick)
+                        minTick = nticks;
+                  }
+            ticks[i] = nticks;
             }
 
       // compute stretches:
@@ -1386,17 +1403,16 @@ again:
                         e->setPos((stretch - s->x() - e->width()) * .5,
                            ypos[staff/VOICES] + _spatium);
                         }
-                  else if (t == CHORD) {
+//                  else if (t == CHORD) {
+                  else if ((t == CHORD) && (((Chord*)e)->noteType() == NOTE_NORMAL)) {
                         int move = 0; // TODO ((ChordRest*)e)->translate();
                         double y = ypos[staff/VOICES + move];
-                        if (((Chord*)e)->grace()) {
-                              double min, extra;
-                              ((Chord*)e)->space(min, extra);
-                              e->setPos(- min, y);
-                              }
-                        else {
-                              e->setPos(0.0, y);
-                              }
+                        e->setPos(0.0, y);
+                        }
+                  else if ((t == CHORD) && (((Chord*)e)->noteType() != NOTE_NORMAL)) {
+                        double x = spaces[seg][staff/VOICES].extra();
+                        // e->setPos(0.0, y);
+                        e->setPos(-e->bbox().x() - x, y);
                         }
                   else {
                         double xo = spaces[seg][staff/VOICES].extra();
@@ -2150,7 +2166,7 @@ void Measure::read(QDomElement e, int idx)
                   chord->read(e, idx);
                   Segment* s = getSegment(chord);
                   s->add(chord);
-                  score()->curTick = chord->tick() + chord->tickLen();
+                  score()->curTick = chord->ltick() + chord->tickLen();
                   }
             else if (tag == "Breath") {
                   Breath* breath = new Breath(score());
@@ -2428,34 +2444,7 @@ void Measure::collectElements(QList<const Element*>& el) const
                         continue;
                   if (e->isChordRest()) {
                         if (e->type() == CHORD) {
-                              Chord* chord = (Chord*)e;
-                              if (chord->hook())
-                                    el.append(chord->hook());
-                              if (chord->stem())
-                                    el.append(chord->stem());
-                              if (chord->arpeggio())
-                                    el.append(chord->arpeggio());
-                              if (chord->tremolo())
-                                    el.append(chord->tremolo());
-
-                              foreach(LedgerLine* h, *chord->ledgerLines())
-                                    el.append(h);
-
-                              const NoteList* nl = chord->noteList();
-                              for (ciNote in = nl->begin(); in != nl->end(); ++in) {
-                                    Note* note = in->second;
-                                    el.append(note);
-                                    if (note->tieFor()) {
-                                          Tie* tie = note->tieFor();
-                                          el.append(tie);
-                                          foreach(SlurSegment* seg, *tie->elements())
-                                                el.append(seg);
-                                          }
-                                    foreach(Text* f, note->fingering())
-                                          el.append(f);
-                                    if (note->accidental())
-                                          el.append(note->accidental());
-                                    }
+                              e->collectElements(el);
                               }
                         else
                               el.append(e);

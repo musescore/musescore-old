@@ -23,6 +23,7 @@
 
 #include "ui_instrwizard.h"
 #include "ui_timesigwizard.h"
+#include "ui_newwizard.h"
 
 class Score;
 
@@ -69,7 +70,7 @@ class TimesigWizard : public QWidget, private Ui::TimesigWizard {
 //   NewWizardPage1
 //---------------------------------------------------------
 
-class NewWizardPage1 : public QWizardPage {
+class NewWizardPage1 : public QWizardPage, private Ui::NewWizard {
       Q_OBJECT
 
       QRadioButton* rb1;
