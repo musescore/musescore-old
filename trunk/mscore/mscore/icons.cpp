@@ -61,6 +61,8 @@ QIcon fileOpenIcon, fileNewIcon, fileSaveIcon, fileSaveAsIcon;
 QIcon exitIcon, viewmagIcon;
 QIcon windowIcon;
 
+QIcon acciaccaturaIcon, appoggiaturaIcon;
+
 //---------------------------------------------------------
 //   symPixmap
 //---------------------------------------------------------
@@ -139,6 +141,9 @@ void genIcons()
       tenutoIcon         = symIcon(symbols[tenutoSym]);
       plusIcon           = symIcon(symbols[plusSym], 30);
       clefIcon           = symIcon(symbols[trebleclefSym], 17);
+
+      acciaccaturaIcon   = QIcon(":/data/acciaccatura.svg");
+      appoggiaturaIcon   = QIcon(":/data/appoggiatura.svg");
 
       static const char* vtext[VOICES] = { "1","2","3","4" };
       for (int i = 0; i < VOICES; ++i) {

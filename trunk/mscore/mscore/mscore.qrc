@@ -46,6 +46,8 @@
       <file>data/recordOn.svg</file>
       <file>data/recordOff.svg</file>
       <file>data/mscore.png</file>
+      <file>data/acciaccatura.svg</file>
+      <file>data/appoggiatura.svg</file>
    </qresource>
 
    <qresource lang="de">

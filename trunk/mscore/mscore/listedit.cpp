@@ -573,6 +573,12 @@ SegmentView::SegmentView()
       sb.setupUi(seg);
       layout->addWidget(seg);
       layout->addStretch(10);
+      sb.segmentType->clear();
+      for (int i = 0; true; i++) {
+            if (Segment::segmentTypeNames[i] == 0)
+                  break;
+            sb.segmentType->addItem(Segment::segmentTypeNames[i]);
+            }
       }
 
 //---------------------------------------------------------
@@ -658,7 +664,7 @@ void ShowChordWidget::setElement(Element* e)
 
       cb.hookButton->setEnabled(chord->hook());
       cb.stemButton->setEnabled(chord->stem());
-      cb.graceNote->setChecked(chord->grace());
+      cb.graceNote->setChecked(chord->noteType() != NOTE_NORMAL);
       cb.stemDirection->setCurrentIndex(int(chord->stemDirection()));
 
       crb.attributes->clear();

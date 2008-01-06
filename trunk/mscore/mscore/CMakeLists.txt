@@ -66,7 +66,7 @@ QT4_WRAP_UI (ui_headers
       slur.ui editdrumset.ui editstaff.ui line.ui linesegment.ui
       voltaproperties.ui chordproperties.ui restproperties.ui repeatproperties.ui
       jumpproperties.ui markerproperties.ui boxproperties.ui
-      instrwizard.ui timesigwizard.ui
+      instrwizard.ui timesigwizard.ui newwizard.ui
 #      repeatflagdialog.ui
       )
 

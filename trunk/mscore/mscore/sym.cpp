@@ -275,7 +275,7 @@ Sym::Sym(const char* name, const QChar& c, int f)
             font = QFont("MScore");
             font.setPointSizeF(14.0 * FMAG);
             }
-      else {
+      else if (fontId == 2) {
             font = QFont("Times New Roman");
             font.setPointSizeF(8.0 * FMAG);
             }
@@ -303,12 +303,6 @@ printf("sym not found\n");
       _bbox   = fm.boundingRect(_code);
       _bbox.adjust(-2, -2, 4, 4);   // HACK
       _width  = fm.width(_code);
-#if 0
-      printf("            { %5d, %d, %f, %f, %f, %f, %f },\n",
-            c.unicode(), f, _bbox.x(), _bbox.y(), _bbox.width(), _bbox.height(),
-            _width);
-#endif
-
 #endif
       }
 
@@ -424,10 +418,14 @@ QFont Sym::font(double extraMag) const
             f.setPointSizeF(14.0 * mag);
             return f;
             }
-      else {
+      else if (fontId == 2) {
             QFont f("Times New Roman");
             f.setPointSizeF(8.0 * mag);
             return f;
+            }
+      else {
+            printf("illegal font id %d\n", fontId);
+            return QFont();
             }
       }
 

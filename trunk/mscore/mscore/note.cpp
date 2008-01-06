@@ -450,7 +450,7 @@ void Note::draw(QPainter& p) const
                         y = _spatium * .5 * mag();
                   }
             for (int i = 1; i <= _dots; ++i)
-                  symbols[dotSym].draw(p, mag(), symbols[_head].width() + point(score()->style()->dotNoteDistance) * i, y);
+                  symbols[dotSym].draw(p, mag(), symbols[_head].width(mag()) + point(score()->style()->dotNoteDistance) * i, y);
             }
       }
 
@@ -460,7 +460,7 @@ void Note::draw(QPainter& p) const
 
 QRectF Note::bbox() const
       {
-      return symbols[_head].bbox();
+      return symbols[_head].bbox(mag());
       }
 
 //---------------------------------------------------------
@@ -831,3 +831,13 @@ void Note::setMag(double val)
       if (_accidental)
             _accidental->setMag(val);
       }
+
+//---------------------------------------------------------
+//   noteType
+//---------------------------------------------------------
+
+NoteType Note::noteType() const
+      {
+      return chord()->noteType();
+      }
+

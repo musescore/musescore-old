@@ -20,7 +20,7 @@
 
 /**
  \file
- Implementation of classes Chord, LedgerLine, NoteList and Stem.
+ Implementation of classes Chord, LedgerLine, NoteList Stem ans StemSlash.
 */
 
 #include "chord.h"
@@ -85,6 +85,39 @@ QRectF Stem::bbox() const
       }
 
 //---------------------------------------------------------
+//   StemSlash
+//---------------------------------------------------------
+
+StemSlash::StemSlash(Score* s)
+   : Element(s)
+      {
+      }
+
+//---------------------------------------------------------
+//   draw
+//---------------------------------------------------------
+
+void StemSlash::draw(QPainter& p) const
+      {
+      qreal lw = point(score()->style()->stemWidth) * mag();
+      QPen pen(p.pen());
+      pen.setWidthF(lw);
+      p.setPen(pen);
+      p.drawLine(line);
+      }
+
+//---------------------------------------------------------
+//   bbox
+//---------------------------------------------------------
+
+QRectF StemSlash::bbox() const
+      {
+      double w = point(score()->style()->stemWidth);
+      QRectF r(line.p1(), line.p2());
+      return r.adjusted(-w, -w, 2.0 * w, 2.0 * w);
+      }
+
+//---------------------------------------------------------
 //   upLine
 //---------------------------------------------------------
 
@@ -113,9 +146,11 @@ Chord::Chord(Score* s)
       _stem          = 0;
       _hook          = 0;
       _stemDirection = AUTO;
-      _grace         = false;
       _arpeggio      = 0;
       _tremolo       = 0;
+      _noteType      = NOTE_NORMAL;
+      _tickOffset    = 0;
+      _stemSlash     = 0;
       }
 
 //---------------------------------------------------------
@@ -128,6 +163,16 @@ Chord::~Chord()
             delete _arpeggio;
       if (_tremolo)
             delete _tremolo;
+      }
+
+//---------------------------------------------------------
+//   setGrace
+//    obsolete
+//---------------------------------------------------------
+
+void Chord::setGrace(bool g)
+      {
+      _noteType = g ? NOTE_APPOGGIATURA : NOTE_NORMAL;
       }
 
 //---------------------------------------------------------
@@ -152,8 +197,10 @@ void Chord::setStem(Stem* s)
       if (_stem)
             delete _stem;
       _stem = s;
-      if (_stem)
+      if (_stem) {
             _stem->setParent(this);
+            _stem->setMag(mag());
+            }
       }
 
 //---------------------------------------------------------
@@ -233,19 +280,6 @@ void Chord::remove(Element* e)
       }
 
 //---------------------------------------------------------
-//   drawPosMark
-//---------------------------------------------------------
-
-void drawPosMark(QPainter& painter, const QPointF& p)
-      {
-      qreal x = p.x();
-      qreal y = p.y();
-      painter.setPen(Qt::blue);
-      painter.drawLine(QLineF(x-10, y-10, x+10, y+10));
-      painter.drawLine(QLineF(x+10, y-10, x-10, y+10));
-      }
-
-//---------------------------------------------------------
 //   bbox
 //---------------------------------------------------------
 
@@ -264,6 +298,8 @@ QRectF Chord::bbox() const
             _bbox |= _stem->bbox().translated(_stem->pos());
       if (_arpeggio)
             _bbox |= _arpeggio->bbox().translated(_arpeggio->pos());
+      if (_stemSlash)
+            _bbox |= _stemSlash->bbox().translated(_stemSlash->pos());
       return _bbox;
       }
 
@@ -304,7 +340,7 @@ void Chord::layoutStem1(ScoreLayout* layout)
       int hookIdx;
 
       bool hasStem = true;
-      if (_grace)
+      if (_noteType != NOTE_NORMAL)
             hookIdx = 1;
       else {
             if (ticks < division/16)
@@ -328,14 +364,21 @@ void Chord::layoutStem1(ScoreLayout* layout)
             }
 
       if (hasStem) {
-            if (!_stem) {
-                  _stem = new Stem(score());
-                  _stem->setMag(mag());
-                  _stem->setParent(this);
-                  }
+            if (!_stem)
+                  setStem(new Stem(score()));
             }
       else
             setStem(0);
+
+      if (hasStem && _noteType == NOTE_ACCIACCATURA) {
+            _stemSlash = new StemSlash(score());
+            _stemSlash->setMag(mag());
+            _stemSlash->setParent(this);
+            }
+      else if (_stemSlash) {
+            delete _stemSlash;
+            _stemSlash = 0;
+            }
 
       //-----------------------------------------
       //  process hook
@@ -349,7 +392,7 @@ void Chord::layoutStem1(ScoreLayout* layout)
                   _hook->setParent(this);
                   _hook->setMag(mag());
                   }
-            _hook->setIdx(hookIdx, _grace);
+            _hook->setSubtype(hookIdx);
             }
       else
             setHook(0);
@@ -366,7 +409,7 @@ void Chord::layoutStem1(ScoreLayout* layout)
 void Chord::layoutStem(ScoreLayout* layout)
       {
       double _spatium = layout->spatium();
-      System* s      = segment()->measure()->system();
+      System* s       = segment()->measure()->system();
       if (s == 0)       //DEBUG
             return;
       double sy      = s->staff(staffIdx())->bbox().y();
@@ -391,9 +434,12 @@ void Chord::layoutStem(ScoreLayout* layout)
       int hookIdx;
       Spatium stemLen;
 
+      Spatium normalLen(3.5 * staffMag);
+
       bool hasStem = true;
-      if (_grace) {
-            stemLen = Spatium(2.5 * mag());
+      if (_noteType != NOTE_NORMAL) {
+            // stemLen = Spatium(2.5 * mag());
+            stemLen = normalLen * score()->style()->graceNoteMag;
             hookIdx = 1;
             }
       else {
@@ -448,6 +494,16 @@ void Chord::layoutStem(ScoreLayout* layout)
       else
             setStem(0);
 
+      if (_stemSlash) {
+            double x = _stem->pos().x();
+            double y = _stem->pos().y();
+            double l = stemLen.point() * .5;
+            y += l;
+            double h2 = l * .5;
+            double w  = upnote->headWidth() * .7;
+            _stemSlash->setLine(QLineF(QPointF(x - w, y + h2), QPointF(x + w, y - h2)));
+            }
+
       //-----------------------------------------
       //    process tremolo
       //-----------------------------------------
@@ -472,7 +528,7 @@ void Chord::layoutStem(ScoreLayout* layout)
       if (hookIdx) {
             if (!up)
                   hookIdx = -hookIdx;
-            _hook->setIdx(hookIdx, _grace);
+            _hook->setSubtype(hookIdx);
             qreal lw = point(score()->style()->stemWidth) * .5;
             QPointF p = npos + QPointF(lw, up ? -lw : pstemLen);
             _hook->setPos(p);
@@ -556,20 +612,10 @@ void Chord::layout(ScoreLayout* layout)
             if (note->mirror())
                   x += up ? headWidth : - headWidth;
             note->setPos(x, y);
-//TODO: !?
+
             Accidental* accidental = note->accidental();
             if (accidental) {
-#if 0
-                  double x = - point(score()->style()->prefixNoteDistance);
-                  if (_grace)
-                        x /= 2;
-                  x -= accidental->width();
-                  if (note->mirror())
-                        x -= headWidth;
-                  accidental->setPos(x, 0);
-#else
                   x = accidental->x() * mag();
-#endif
                   if (x < lx)
                         lx = x;
                   }
@@ -738,7 +784,7 @@ void Chord::computeUp()
             _up = _stemDirection == UP;
             return;
             }
-      if (_grace) {
+      if (_noteType != NOTE_NORMAL) {
             _up = true;
             return;
             }
@@ -818,9 +864,10 @@ void Chord::write(Xml& xml) const
          && (notes.size() == 1)
          && note->isSimple(xml)
          && (_stemDirection == AUTO)
-         && !_grace
          && !_arpeggio
          && !_tremolo
+         && (_noteType == NOTE_NORMAL)
+         && (_tickOffset == 0)
          ) {
             if (tick() != xml.curTick)
                   xml.tagE(QString("Note tick=\"%1\" pitch=\"%2\" tpc=\"%3\" ticks=\"%4\"")
@@ -832,8 +879,20 @@ void Chord::write(Xml& xml) const
       else {
             xml.stag("Chord");
             ChordRest::writeProperties(xml);
-            if (_grace)
-                  xml.tag("GraceNote", _grace);
+            if (_noteType != NOTE_NORMAL) {
+                  switch(_noteType) {
+                        case NOTE_NORMAL:
+                              break;
+                        case NOTE_ACCIACCATURA:
+                              xml.tagE("acciaccatura");
+                              break;
+                        case NOTE_APPOGGIATURA:
+                              xml.tagE("appoggiatura");
+                              break;
+                        }
+                  }
+            if (_tickOffset)
+                  xml.tag("tickOffset", _tickOffset);
             switch(_stemDirection) {
                   case UP:   xml.tag("StemDirection", QVariant("up")); break;
                   case DOWN: xml.tag("StemDirection", QVariant("down")); break;
@@ -934,7 +993,13 @@ void Chord::read(QDomElement e, int /*staffIdx*/)
                   notes.add(note);
                   }
             else if (tag == "GraceNote")
-                  _grace = i;
+                  _noteType = NOTE_APPOGGIATURA;
+            else if (tag == "appoggiatura")
+                  _noteType = NOTE_APPOGGIATURA;
+            else if (tag == "tickOffset")
+                  _tickOffset = i;
+            else if (tag == "acciaccatura")
+                  _noteType = NOTE_ACCIACCATURA;
             else if (tag == "StemDirection") {
                   if (val == "up")
                         _stemDirection = UP;
@@ -991,7 +1056,7 @@ void Chord::space(double& min, double& extra) const
             if (note->accidental()) {
 //                  prefixWidth = note->accidental()->width();
                   prefixWidth = -note->accidental()->x() - 1.3;   // HACK
-                  if (_grace)
+                  if (_noteType != NOTE_NORMAL)
                        prefixWidth += point(score()->style()->prefixNoteDistance)/2.0;
                   else
                        prefixWidth += point(score()->style()->prefixNoteDistance);
@@ -1013,6 +1078,10 @@ void Chord::space(double& min, double& extra) const
       min = mirror + hw;
       if (isUp() && _hook)
             min += _hook->width();
+      if (_noteType != NOTE_NORMAL) {
+            extra += min;
+            min = 0.0;
+            }
       }
 
 //---------------------------------------------------------
@@ -1091,6 +1160,8 @@ LedgerLine::LedgerLine(Score* s)
 
 void Chord::setMag(double val)
       {
+      if (_noteType != NOTE_NORMAL)
+            val *= score()->style()->graceNoteMag;
       Element::setMag(val);
       for (iNote i = notes.begin(); i != notes.end(); ++i)
             i->second->setMag(val);
@@ -1105,5 +1176,41 @@ void Chord::setMag(double val)
             _arpeggio->setMag(mag());
       if (_tremolo)
             _tremolo->setMag(mag());
+      }
+
+//---------------------------------------------------------
+//   collectElements
+//---------------------------------------------------------
+
+void Chord::collectElements(QList<const Element*>& el) const
+      {
+      if (_hook)
+            el.append(_hook);
+      if (_stem)
+            el.append(_stem);
+      if (_stemSlash)
+            el.append(_stemSlash);
+      if (_arpeggio)
+            el.append(_arpeggio);
+      if (_tremolo)
+            el.append(_tremolo);
+
+      foreach(LedgerLine* h, _ledgerLines)
+            el.append(h);
+
+      for (ciNote in = notes.begin(); in != notes.end(); ++in) {
+            Note* note = in->second;
+            el.append(note);
+            if (note->tieFor()) {
+                  Tie* tie = note->tieFor();
+                  el.append(tie);
+                  foreach(SlurSegment* seg, *tie->elements())
+                        el.append(seg);
+                  }
+            foreach(Text* f, note->fingering())
+                  el.append(f);
+            if (note->accidental())
+                  el.append(note->accidental());
+            }
       }
 

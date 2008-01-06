@@ -28,15 +28,12 @@
 //---------------------------------------------------------
 
 class Hook : public Symbol {
-      int val;
-      bool _small;
 
    public:
       Hook(Score*);
-      virtual Hook* clone() const { return new Hook(*this); }
+      virtual Hook* clone() const      { return new Hook(*this); }
       virtual ElementType type() const { return HOOK; }
-      int idx() const             { return val; }
-      void setIdx(int v, bool);
+      virtual void setSubtype(int v);
       };
 
 #endif

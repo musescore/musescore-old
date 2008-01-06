@@ -53,6 +53,8 @@ extern QIcon fileOpenIcon, fileNewIcon, fileSaveIcon, fileSaveAsIcon;
 extern QIcon exitIcon, viewmagIcon;
 extern QIcon windowIcon;
 
+extern QIcon acciaccaturaIcon, appoggiaturaIcon;
+
 class Sym;
 
 static const int ICON_HEIGHT = 24;

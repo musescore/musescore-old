@@ -101,8 +101,7 @@ void Symbol::draw(QPainter& p) const
 
 QRectF Symbol::bbox() const
       {
-      QRectF r = symbols[_sym].bbox();
-      return QRectF(r.x() * mag(), r.y() * mag(), r.width() * mag(), r.height() * mag());
+      return symbols[_sym].bbox(mag());
       }
 
 //---------------------------------------------------------
@@ -152,3 +151,4 @@ void Symbol::read(QDomElement e)
       setPos(pos);
       setSym(s);
       }
+

@@ -393,6 +393,7 @@ MuseScore::MuseScore()
          << "pad-note-16" << "pad-note-32" << "pad-note-64" << "pad-dot"
          << "pad-tie" << "pad-rest" << "pad-sharp2" << "pad-sharp"
          << "pad-nat" << "pad-flat" << "pad-flat2";
+
       foreach(const QString s, sl1) {
             QAction* a = getAction(s.toLatin1().data());
             a->setCheckable(true);
@@ -400,6 +401,15 @@ MuseScore::MuseScore()
             entryTools->addAction(a);
             if (s == "pad-tie" || s == "pad-rest")
                   entryTools->addSeparator();
+            }
+
+      sl1.clear();
+      sl1 << "pad-appoggiatura" << "pad-acciaccatura";
+
+      foreach(const QString s, sl1) {
+            QAction* a = getAction(s.toLatin1().data());
+            a->setCheckable(true);
+            ag->addAction(a);
             }
 
       a = getAction("flip");

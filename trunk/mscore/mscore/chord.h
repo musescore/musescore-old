@@ -58,6 +58,26 @@ class Stem : public Element {
       };
 
 //---------------------------------------------------------
+//   StemSlash
+//    used for grace notes of type acciaccatura
+//---------------------------------------------------------
+
+class StemSlash : public Element {
+      QLineF line;
+
+   public:
+      StemSlash(Score*);
+      StemSlash &operator=(const Stem&);
+
+      void setLine(const QLineF& l)    { line = l; }
+
+      virtual StemSlash* clone() const { return new StemSlash(*this); }
+      virtual ElementType type() const { return STEM_SLASH; }
+      virtual void draw(QPainter& p) const;
+      virtual QRectF bbox() const;
+      };
+
+//---------------------------------------------------------
 //   NoteList
 //---------------------------------------------------------
 
@@ -114,10 +134,12 @@ class Chord : public ChordRest {
       QList<LedgerLine*> _ledgerLines;
       Stem* _stem;
       Hook* _hook;
+      StemSlash* _stemSlash;
       Direction _stemDirection;
-      bool _grace;
       Arpeggio* _arpeggio;
       Tremolo* _tremolo;
+      NoteType _noteType;     ///< mark grace notes: acciaccatura and appoggiatura
+      int _tickOffset;        ///< used to sort acciaccatura and appoggiatura
 
       void computeUp();
       virtual qreal upPos()   const;
@@ -138,11 +160,12 @@ class Chord : public ChordRest {
       virtual void setSelected(bool f);
       virtual void dump() const;
 
+      int ltick() const { return tick() - _tickOffset; }    ///< "logical" tick position
+
       virtual QRectF bbox() const;
       void setStemDirection(Direction d)     { _stemDirection = d; }
       Direction stemDirection() const        { return _stemDirection; }
-      bool grace() const                     { return _grace; }
-      void setGrace(bool g)                  { _grace = g; }
+      void setGrace(bool g);
 
       QList<LedgerLine*>* ledgerLines()      { return &_ledgerLines; }
 
@@ -177,6 +200,11 @@ class Chord : public ChordRest {
       virtual void space(double& min, double& extra) const;
       void readNote(QDomElement node, int staffIdx);
       virtual void setMag(double val);
+
+      NoteType noteType() const    { return _noteType; }
+      void setNoteType(NoteType t) { _noteType = t; }
+
+      virtual void collectElements(QList<const Element*>& el) const;
       };
 
 #endif

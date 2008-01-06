@@ -61,7 +61,7 @@ extern bool showInvisible;
 // for debugging:
 const char* elementNames[] = {
       "Symbol", "Text", "SlurSegment", "BarLine",
-      "Stem", "Line", "SystemBracket",
+      "Stem", "StemSlash", "Line", "SystemBracket",
       "Arpeggio",
       "Accidental", "Note",
       "Clef", "KeySig", "TimeSig", "Rest",

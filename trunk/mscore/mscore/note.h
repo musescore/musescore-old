@@ -173,6 +173,8 @@ class Note : public Element {
 
       bool hidden() const           { return _hidden; }
       void setHidden(bool val)      { _hidden = val;  }
+
+      NoteType noteType() const;
       };
 
 //---------------------------------------------------------

@@ -949,7 +949,9 @@ void Canvas::resetStaffOffsets()
 
 bool Canvas::startEdit(Element* element)
       {
+printf("startEdit %s\n", element->name());
       if (element->startEdit(startMove)) {
+printf("   startEdit\n");
             setFocus();
             _score->startEdit(element);
             setState(EDIT);

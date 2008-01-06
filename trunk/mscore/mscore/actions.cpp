@@ -966,6 +966,26 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
+         "pad-acciaccatura",
+         QT_TR_NOOP("acciaccatura"),
+         Qt::Key_NumberSign,
+         Qt::WindowShortcut,
+         QT_TR_NOOP("acciaccatura"),
+         QT_TR_NOOP("acciaccatura"),
+         &acciaccaturaIcon
+         ),
+      Shortcut(
+         STATE_NORMAL | STATE_NOTE_ENTRY,
+         "pad-appoggiatura",
+         QT_TR_NOOP("appoggiatura"),
+         0,
+         Qt::WindowShortcut,
+         QT_TR_NOOP("appoggiatura"),
+         QT_TR_NOOP("appoggiatura"),
+         &appoggiaturaIcon
+         ),
+      Shortcut(
+         STATE_NORMAL | STATE_NOTE_ENTRY,
          "voice-1",
          QT_TR_NOOP("voice 1"),
          QKeySequence(Qt::CTRL+Qt::Key_I, Qt::CTRL+Qt::Key_1),
