@@ -428,7 +428,7 @@ void InstrumentWizard::createInstruments(Score* cs)
             }
 
       if (sl.size() != dl.size())
-            printf("cannot happen: sl(%zd) != dl(%zd)\n", sl.size(), dl.size());
+            printf("cannot happen: sl(%d) != dl(%d)\n", sl.size(), dl.size());
       bool sort = false;
       QList<int>::iterator isl = sl.begin();
       QList<int>::iterator dsl = dl.begin();

@@ -1403,9 +1403,9 @@ printf("\n");
                         e->setPos((stretch - s->x() - e->width()) * .5,
                            ypos[staff/VOICES] + _spatium);
                         }
-//                  else if (t == CHORD) {
                   else if ((t == CHORD) && (((Chord*)e)->noteType() == NOTE_NORMAL)) {
-                        int move = 0; // TODO ((ChordRest*)e)->translate();
+                        // TODO: int move = ((ChordRest*)e)->translate();
+                        int move = 0;
                         double y = ypos[staff/VOICES + move];
                         e->setPos(0.0, y);
                         }
