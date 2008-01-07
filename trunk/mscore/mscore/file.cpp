@@ -56,6 +56,7 @@
 #include "volta.h"
 #include "newwizard.h"
 #include "timesig.h"
+#include "box.h"
 
 double printerMag = 1.0;
 
@@ -408,6 +409,51 @@ void MuseScore::newFile()
       if (measures)
             score->appendMeasures(measures);
       score->changeTimeSig(0, TimeSig::sigtype(timesigN, timesigZ));
+      QString title     = newWizard->title();
+      QString subtitle  = newWizard->subtitle();
+      QString composer  = newWizard->composer();
+      QString poet      = newWizard->poet();
+      QString copyright = newWizard->copyright();
+      if (!title.isEmpty() || !subtitle.isEmpty() || !composer.isEmpty() || !poet.isEmpty()) {
+            MeasureBase* measure = score->mainLayout()->first();
+            if (measure->type() != VBOX) {
+                  measure = new VBox(score);
+                  measure->setTick(0);
+                  score->addMeasure(measure);
+	            score->undoOp(UndoOp::InsertMeasure, measure);
+                  }
+            if (!title.isEmpty()) {
+                  Text* s = new Text(score);
+                  s->setSubtype(TEXT_TITLE);
+                  s->setText(title);
+                  s->setParent(measure);
+                  score->undoAddElement(s);
+                  }
+            if (!subtitle.isEmpty()) {
+                  Text* s = new Text(score);
+                  s->setSubtype(TEXT_SUBTITLE);
+                  s->setText(subtitle);
+                  s->setParent(measure);
+                  score->undoAddElement(s);
+                  }
+            if (!composer.isEmpty()) {
+                  Text* s = new Text(score);
+                  s->setSubtype(TEXT_COMPOSER);
+                  s->setText(composer);
+                  s->setParent(measure);
+                  score->undoAddElement(s);
+                  }
+            if (!poet.isEmpty()) {
+                  Text* s = new Text(score);
+                  s->setSubtype(TEXT_POET);
+                  s->setText(poet);
+                  s->setParent(measure);
+                  score->undoAddElement(s);
+                  }
+            }
+      if (!copyright.isEmpty())
+            score->setCopyright(copyright);
+
       score->endCmd();
       appendScore(score);
       tab->setCurrentIndex(scoreList.size() - 1);
@@ -468,12 +514,12 @@ void StaffLines::read(QDomElement e)
 //   loadStyle
 //---------------------------------------------------------
 
-void MuseScore::loadStyle()
+void Score::loadStyle()
       {
       QString fn = QFileDialog::getOpenFileName(
-         this, tr("MuseScore: Load Style"),
+         0, QWidget::tr("MuseScore: Load Style"),
          QString("."),
-         tr("MuseScore Styles (*.mss);;"
+            QWidget::tr("MuseScore Styles (*.mss);;"
             "All files (*)"
             )
          );
@@ -494,7 +540,7 @@ void MuseScore::loadStyle()
 //    return true on error
 //---------------------------------------------------------
 
-bool MuseScore::loadStyle(QFile* qf)
+bool Score::loadStyle(QFile* qf)
       {
       QDomDocument doc;
       int line, column;
@@ -521,11 +567,11 @@ bool MuseScore::loadStyle(QFile* qf)
                         QString tag(ee.tagName());
                         QString val(ee.text());
                         if (tag == "Style")
-                              cs->style()->loadStyle(ee);
+                              _style->load(ee);
                         else if (tag == "TextStyle") {
                               QString name = ee.attribute("name");
                               TextStyle* s = 0;
-                              foreach(TextStyle* ts, cs->textStyles()) {
+                              foreach(TextStyle* ts, textStyles()) {
                                     if (ts->name == name) {
                                           s = ts;
                                           break;
@@ -549,10 +595,10 @@ bool MuseScore::loadStyle(QFile* qf)
 //   saveStyle
 //---------------------------------------------------------
 
-void MuseScore::saveStyle()
+void Score::saveStyle()
       {
       QString name = QFileDialog::getSaveFileName(
-         this, tr("MuseScore: Save Style"),
+         0, tr("MuseScore: Save Style"),
          ".",
          tr("MuseScore style file (*.mss)")
          );
@@ -574,14 +620,14 @@ void MuseScore::saveStyle()
       Xml xml(&f);
       xml.header();
       xml.stag("museScore version=\"" MSC_VERSION "\"");
-      cs->style()->saveStyle(xml);
-      foreach(TextStyle* ts, cs->textStyles())
+      _style->save(xml);
+      foreach(TextStyle* ts, textStyles())
             ts->write(xml);
 
       xml.etag();
       if (f.error() != QFile::NoError) {
             QString s = QString("Write Style failed: ") + f.errorString();
-            QMessageBox::critical(this, tr("MuseScore: Write Style"), s);
+            QMessageBox::critical(0, tr("MuseScore: Write Style"), s);
             }
       }
 
@@ -679,7 +725,7 @@ bool Score::loadMsc(QString name)
                         else if (tag == "showInvisible")
                               _showInvisible = i;
                         else if (tag == "Style")
-                              _style->loadStyle(ee);
+                              _style->load(ee);
                         else if (tag == "TextStyle") {
                               QString name = ee.attribute("name");
                               TextStyle* s = 0;

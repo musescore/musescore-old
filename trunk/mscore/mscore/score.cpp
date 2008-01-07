@@ -294,7 +294,7 @@ void Score::write(Xml& xml)
             endCmd();
             canvas()->setState(Canvas::NORMAL);  //calls endEdit()
             }
-      _style->saveStyle(xml);
+      _style->save(xml);
       for (int i = 0; i < TEXT_STYLES; ++i) {
             if (*_textStyles[i] != defaultTextStyleArray[i])
                   _textStyles[i]->write(xml);
@@ -1377,6 +1377,13 @@ void Score::setCopyright(QTextDocument* doc)
             }
       if (doc)
             rights = doc->clone();
+      }
+
+void Score::setCopyright(const QString& s)
+      {
+      if (rights == 0)
+            rights = new QTextDocument(0);
+      rights->setPlainText(s);
       }
 
 //---------------------------------------------------------

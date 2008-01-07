@@ -253,11 +253,8 @@ void MusicXml::scorePartwise(QDomElement e)
                               else
                                     printf("unknown creator <%s>\n", type.toLatin1().data());
                               }
-                        else if (ee.tagName() == "rights") {
-                              QTextDocument* doc = new QTextDocument(0);
-                              doc->setPlainText(ee.text());
-                              score->setCopyright(doc);
-                              }
+                        else if (ee.tagName() == "rights")
+                              score->setCopyright(ee.text());
                         else if (ee.tagName() == "encoding")
                               domNotImplemented(ee);
                         else if (e.tagName() == "source")
@@ -1954,7 +1951,7 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
 //            cr->setBeamMode(BEAM_AUTO);
             cr->setVoice(voice);
             cr->setStaff(score->staff(staff + relStaff));
-            ((Rest*)cr)->setMove(move);
+            ((Rest*)cr)->setStaffMove(move);
             Segment* s = measure->getSegment(cr);
             s->add(cr);
             }
@@ -1967,7 +1964,7 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
             note->setType(durationType);
             note->setDots(dots);
             note->setVoice(voice);
-            note->setMove(move);
+            note->setStaffMove(move);
 
             if (!fingering.isEmpty()) {
                   Text* f = new Text(score);
@@ -2231,8 +2228,8 @@ void MusicXml::xmlHarmony(QDomElement e, int tick, Measure* measure)
       // type:
 
       // placement:
-      double rx = e.attribute("relative-x", "0").toDouble();
-      double dy = e.attribute("default-y", "0").toDouble();
+//      double rx = e.attribute("relative-x", "0").toDouble();
+//      double dy = e.attribute("default-y", "0").toDouble();
 
       QString printObject(e.attribute("print-object", "yes"));
       QString printFrame(e.attribute("print-frame"));

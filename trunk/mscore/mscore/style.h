@@ -196,8 +196,8 @@ struct Style {
 
       double graceNoteMag;
 
-      void loadStyle(QDomElement e);
-      void saveStyle(Xml& xml);
+      void load(QDomElement e);
+      void save(Xml& xml);
       };
 
 extern QVector<TextStyle> defaultTextStyles;

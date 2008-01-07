@@ -324,10 +324,10 @@ void Chord::layoutStem1(ScoreLayout* layout)
       Note* upnote   = upNote();
       Note* downnote = downNote();
 
-      double uppos   = s->staff(staffIdx() + upnote->move())->bbox().y();
+      double uppos   = s->staff(staffIdx() + upnote->staffMove())->bbox().y();
             uppos    = (uppos - sy)/_spatium * 2.0 + upnote->line();
 
-      double downpos = s->staff(staffIdx() + downnote->move())->bbox().y();
+      double downpos = s->staff(staffIdx() + downnote->staffMove())->bbox().y();
             downpos  = (downpos - sy)/_spatium * 2.0 + downnote->line();
 
       //-----------------------------------------
@@ -418,10 +418,10 @@ void Chord::layoutStem(ScoreLayout* layout)
 
       double staffMag = staff()->small() ? 0.7 : 1.0;
 
-      double uppos   = s->staff(staffIdx() + upnote->move())->bbox().y();
+      double uppos   = s->staff(staffIdx() + upnote->staffMove())->bbox().y();
             uppos    = (uppos - sy)/_spatium * 2.0 * staffMag + upnote->line() * staffMag;
 
-      double downpos = s->staff(staffIdx() + downnote->move())->bbox().y();
+      double downpos = s->staff(staffIdx() + downnote->staffMove())->bbox().y();
             downpos  = (downpos - sy)/_spatium * 2.0 * staffMag + downnote->line() * staffMag;
 
       //-----------------------------------------
@@ -600,7 +600,7 @@ void Chord::layout(ScoreLayout* layout)
 
             double x = 0.0;
 
-            int move = note->move();
+            int move = note->staffMove();
             if (move < minMove)
                   minMove = move;
             if (move > maxMove)
@@ -640,7 +640,7 @@ void Chord::layout(ScoreLayout* layout)
             uppos   = 1000;
             downpos = -1000;
             for (iNote in = notes.begin(); in != notes.end(); ++in) {
-                  if (in->second->move() == -1) {
+                  if (in->second->staffMove() == -1) {
                         if (in->second->line() < uppos)
                               uppos = in->second->line();
                         if (in->second->line() > downpos)
@@ -664,7 +664,7 @@ void Chord::layout(ScoreLayout* layout)
       uppos   = 1000;
       downpos = -1000;
       for (iNote in = notes.begin(); in != notes.end(); ++in) {
-            if (in->second->move() == 0) {
+            if (in->second->staffMove() == 0) {
                   if (in->second->line() < uppos)
                         uppos = in->second->line();
                   if (in->second->line() > downpos)
@@ -692,7 +692,7 @@ void Chord::layout(ScoreLayout* layout)
             uppos   = 1000;
             downpos = -1000;
             for (iNote in = notes.begin(); in != notes.end(); ++in) {
-                  if (in->second->move() == 1) {
+                  if (in->second->staffMove() == 1) {
                         if (in->second->line() < uppos)
                               uppos = in->second->line();
                         if (in->second->line() > downpos)
@@ -795,9 +795,9 @@ void Chord::computeUp()
 
       Note* upnote = upNote();
       if (notes.size() == 1) {
-            if (upnote->move() > 0)
+            if (upnote->staffMove() > 0)
                   _up = true;
-            else if (upnote->move() < 0)
+            else if (upnote->staffMove() < 0)
                   _up = false;
             else
                   _up = upnote->line() > 4;
@@ -821,14 +821,14 @@ void Chord::computeUp()
       }
 
 //---------------------------------------------------------
-//   move
+//   staffMove
 //---------------------------------------------------------
 
-int Chord::move() const
+int Chord::staffMove() const
       {
-      int move = notes.front()->move();
+      int move = notes.front()->staffMove();
       for (ciNote in = notes.begin(); in != notes.end(); ++in) {
-            if (in->second->move() != move)
+            if (in->second->staffMove() != move)
                   return 0;
             }
       return move;
@@ -959,7 +959,7 @@ void Chord::readNote(QDomElement e, int /*staffIdx*/)
                   note->add(f);
                   }
             else if (tag == "move")
-                  note->setMove(i);
+                  note->setStaffMove(i);
             else if (!ChordRest::readProperties(e))
                   domError(e);
             }

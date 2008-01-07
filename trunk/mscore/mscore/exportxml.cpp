@@ -1469,7 +1469,7 @@ void ExportMusicXml::chord(Chord* chord, int staff, const LyricsList* ll)
                   xml.tag("stem", QString(note->chord()->isUp() ? "up" : "down"));
             // LVIFIX: check move() handling
             if (staff)
-                  xml.tag("staff", staff + note->move());
+                  xml.tag("staff", staff + note->staffMove());
 
             //  beaming
             //    <beam number="1">start</beam>

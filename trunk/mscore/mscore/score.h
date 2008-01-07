@@ -284,6 +284,7 @@ class Score : public QObject {
       void undoChangeBarLineSpan(Staff*, int);
 
       void setNote(int tick, int track, int pitch, int len);
+      void setGraceNote(int tick, int track,  int pitch, NoteType type);
       int clefOffset(int tick, Staff*) const;
       Rest* setRest(int tick, int len, int track, Measure*);
       void setRest(int tick, int track, int len);
@@ -454,7 +455,12 @@ class Score : public QObject {
       TextStyle* textStyle(int idx) { return _textStyles[idx]; }
       const QVector<TextStyle*>& textStyles() const { return _textStyles; }
       void setTextStyles(QVector<TextStyle*>&s);
+      bool loadStyle(QFile* qf);
+      void loadStyle();
+      void saveStyle();
+
       void setCopyright(QTextDocument*);
+      void setCopyright(const QString& s);
       void pasteStaff(QDomElement e, Measure* measure, int staffIdx);
       QList<Element*>* gel();
       const QList<Element*>* gel() const;

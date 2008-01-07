@@ -341,9 +341,8 @@ void Measure::layoutChord(Chord* chord, char* tversatz)
       NoteList* nl     = chord->noteList();
       int tick         = chord->tick();
       int ll           = 1000;      // line distance to previous note head
-
-      int move1      = nl->front()->move();
-      Tuplet* tuplet = chord->tuplet();
+      int move1        = nl->front()->staffMove();
+      Tuplet* tuplet   = chord->tuplet();
 
       QList<Note*> notes;
       for (iNote in = nl->begin(); in != nl->end(); ++in)
@@ -367,8 +366,9 @@ void Measure::layoutChord(Chord* chord, char* tversatz)
                   }
 
             note->setHead(tuplet ? tuplet->baseLen() : chord->tickLen());
-            int move = note->move();
-            int clef = note->staff()->clef()->clef(tick);
+            int move     = note->staffMove();
+            int staffIdx = note->staffIdx() + move;
+            int clef     = score()->staff(staffIdx)->clef()->clef(tick);
 
             //
             // compute accidental
@@ -1113,7 +1113,6 @@ again:
       //-----------------------------------------------------------------------
 
       Space spaces[segs+1][nstaves];
-      double ypos[tracks];
       double width[segs+1];
 
       int seg = 1;
@@ -1361,13 +1360,6 @@ printf("\n");
             }
 
       //---------------------------------------------------
-      //    populate ypos[] array
-      //---------------------------------------------------
-
-      for (int staff = 0; staff < nstaves; ++staff)
-            ypos[staff] = system()->staff(staff)->bbox().y();
-
-      //---------------------------------------------------
       //    layout individual elements
       //---------------------------------------------------
 
@@ -1378,11 +1370,11 @@ printf("\n");
                   Element* e = s->element(staff);
                   if (e == 0)
                         continue;
-                  double y = ypos[staff/VOICES];
+                  double y = 0.0;
                   QPointF pos(0.0, y);
                   ElementType t = e->type();
                   if (t == REST) {
-                        double y = ypos[staff/VOICES + ((Rest*)e)->move()];
+                        double y = 0.0;
                         //
                         // center symbol if its a whole measure rest
                         //
@@ -1400,19 +1392,14 @@ printf("\n");
                         e->setPos(pos.x(), y + yoffset);
                         }
                   else if (t == REPEAT_MEASURE) {
-                        e->setPos((stretch - s->x() - e->width()) * .5,
-                           ypos[staff/VOICES] + _spatium);
+                        e->setPos((stretch - s->x() - e->width()) * .5, _spatium);
                         }
                   else if ((t == CHORD) && (((Chord*)e)->noteType() == NOTE_NORMAL)) {
-                        // TODO: int move = ((ChordRest*)e)->translate();
-                        int move = 0;
-                        double y = ypos[staff/VOICES + move];
-                        e->setPos(0.0, y);
+                        e->setPos(0.0, 0.0);
                         }
                   else if ((t == CHORD) && (((Chord*)e)->noteType() != NOTE_NORMAL)) {
                         double x = spaces[seg][staff/VOICES].extra();
-                        // e->setPos(0.0, y);
-                        e->setPos(-e->bbox().x() - x, y);
+                        e->setPos(-e->bbox().x() - x, 0.0);
                         }
                   else {
                         double xo = spaces[seg][staff/VOICES].extra();

@@ -667,6 +667,38 @@ void Score::setNote(int tick, int track, int pitch, int len)
       }
 
 //---------------------------------------------------------
+//   setGraceNote
+//---------------------------------------------------------
+
+void Score::setGraceNote(int tick, int track,  int pitch, NoteType type)
+      {
+      tick -= 240;
+      Note* note = new Note(this);
+      note->setPitch(pitch);
+      note->setStaff(staff(track / VOICES));
+
+      Measure* measure = tick2measure(tick);
+      Chord* chord = new Chord(this);
+      chord->setTick(tick);
+      chord->setVoice(track % VOICES);
+      chord->setStaff(staff(track / VOICES));
+      chord->add(note);
+      chord->setTickLen(0);
+      chord->setTickOffset(-240);
+      chord->setStemDirection(UP);
+      chord->setNoteType(type);
+      Segment::SegmentType st = Segment::SegGrace;
+      Segment* seg = measure->findSegment(st, tick);
+      if (seg == 0) {
+            seg = measure->createSegment(st, tick);
+            undoAddElement(seg);
+            }
+      chord->setParent(seg);
+      undoAddElement(chord);
+      select(note, 0, 0);
+      }
+
+//---------------------------------------------------------
 //   setRest
 //---------------------------------------------------------
 
@@ -1154,14 +1186,14 @@ void Score::moveUp(Note* note)
       {
       int rstaff = note->staff()->rstaff();
 
-      if (note->move() == -1) {
+      if (note->staffMove() == -1) {
             return;
             }
-      if (rstaff + note->move() <= 0) {
+      if (rstaff + note->staffMove() <= 0) {
             return;
             }
 
-      note->setMove(note->move() - 1);
+      note->setStaffMove(note->staffMove() - 1);
       layoutAll = true;
       }
 
@@ -1177,13 +1209,13 @@ void Score::moveDown(Note* note)
       int rstaff   = staff->rstaff();
       int rstaves  = part->nstaves();
 
-      if (note->move() == 1) {
+      if (note->staffMove() == 1) {
             return;
             }
-      if (rstaff + note->move() >= rstaves-1) {
+      if (rstaff + note->staffMove() >= rstaves-1) {
             return;
             }
-      note->setMove(note->move() + 1);
+      note->setStaffMove(note->staffMove() + 1);
       layoutAll = true;
       }
 
@@ -1265,6 +1297,10 @@ void Score::cmd(const QString& cmd)
             seq->rewindStart();
       else if (cmd == "seek-end")
             seq->seekEnd();
+      else if (cmd == "load-style")
+            loadStyle();
+      else if (cmd == "save-style")
+            saveStyle();
       else {
             if (cmdActive) {
                   printf("Score::cmd(): cmd already active\n");

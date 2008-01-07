@@ -49,20 +49,6 @@
       <number>0</number>
      </property>
      <item>
-      <widget class="QPushButton" name="buttonLoad" >
-       <property name="text" >
-        <string>Load</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QPushButton" name="buttonSave" >
-       <property name="text" >
-        <string>Save</string>
-       </property>
-      </widget>
-     </item>
-     <item>
       <spacer>
        <property name="orientation" >
         <enum>Qt::Horizontal</enum>

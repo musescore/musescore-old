@@ -153,7 +153,6 @@ class ChordRest : public Element {
       void setTuplet(Tuplet* t)     { _tuplet = t; }
       Tuplet* tuplet() const        { return _tuplet; }
       int beams() const;
-      virtual int move()      const = 0;
       virtual qreal upPos()   const = 0;
       virtual qreal downPos() const = 0;
       virtual qreal centerX() const = 0;
@@ -170,6 +169,7 @@ class ChordRest : public Element {
       NoteAttribute* hasAttribute(const NoteAttribute*);
       bool small() const                        { return _small; }
       void setSmall(bool val);
+      virtual int staffMove() const = 0;
       };
 
 #endif

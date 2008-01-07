@@ -1379,6 +1379,26 @@ Shortcut MuseScore::sc[] = {
          QT_TR_NOOP("play repeats on/off"),
          &repeatIcon
          ),
+      Shortcut(
+         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_PLAY,
+         "load-style",
+         QT_TR_NOOP("load style"),
+         0,
+         Qt::WindowShortcut,
+         QT_TR_NOOP("Load Style"),
+         QT_TR_NOOP("Load Style"),
+         &fileOpenIcon
+         ),
+      Shortcut(
+         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_PLAY,
+         "save-style",
+         QT_TR_NOOP("save style"),
+         0,
+         Qt::WindowShortcut,
+         QT_TR_NOOP("Save Style"),
+         QT_TR_NOOP("Save Style"),
+         &fileSaveIcon
+         ),
       Shortcut(0, 0, 0),
       };
 

@@ -67,17 +67,32 @@ class TimesigWizard : public QWidget, private Ui::TimesigWizard {
       };
 
 //---------------------------------------------------------
+//   TitleWizard
+//---------------------------------------------------------
+
+class TitleWizard : public QWidget, public Ui::NewWizard {
+      Q_OBJECT
+
+   public:
+      TitleWizard(QWidget* parent = 0);
+      };
+
+//---------------------------------------------------------
 //   NewWizardPage1
 //---------------------------------------------------------
 
-class NewWizardPage1 : public QWizardPage, private Ui::NewWizard {
+class NewWizardPage1 : public QWizardPage {
       Q_OBJECT
 
-      QRadioButton* rb1;
-      QRadioButton* rb2;
+      TitleWizard* w;
 
    public:
       NewWizardPage1(QWidget* parent = 0);
+      QString title() const              { return w->title->text();      }
+      QString subtitle() const           { return w->subtitle->text();   }
+      QString composer() const           { return w->composer->text();   }
+      QString poet() const               { return w->poet->text();       }
+      QString copyright() const          { return w->copyright->text();  }
       };
 
 //---------------------------------------------------------
@@ -156,6 +171,11 @@ class NewWizard : public QWizard {
       int measures() const               { return p3->measures();    }
       void timesig(int* z, int* n) const { p3->timesig(z, n);        }
       void createInstruments(Score* s)   { p2->createInstruments(s); }
+      QString title() const              { return p1->title();       }
+      QString subtitle() const           { return p1->subtitle();    }
+      QString composer() const           { return p1->composer();    }
+      QString poet() const               { return p1->poet();        }
+      QString copyright() const          { return p1->copyright();   }
       };
 
 #endif

@@ -78,7 +78,8 @@ class Note : public Element {
       int _tpc;               ///< tonal pitch class
 
       int _line;              ///< y-Position; 0 - top line.
-      int _move;              ///< -1, 0, +1.
+      int _staffMove;         ///< -1, 0, +1, used for crossbeaming
+
       int _userAccidental;    ///< editorial accidental type (0-15)
       Accidental* _accidental;
 
@@ -129,9 +130,6 @@ class Note : public Element {
       void setTpc(int v);
       void changePitch(int val);
 
-      int move() const                { return _move; }
-      void setMove(int val)           { _move = val; }
-
       int userAccidental() const      { return _userAccidental; }
 
       int accidentalSubtype() const   { return _accidental ? _accidental->subtype() : ACC_NONE; }
@@ -175,6 +173,8 @@ class Note : public Element {
       void setHidden(bool val)      { _hidden = val;  }
 
       NoteType noteType() const;
+      int staffMove() const      { return _staffMove; }
+      void setStaffMove(int val) { _staffMove = val; }
       };
 
 //---------------------------------------------------------
