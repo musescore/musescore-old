@@ -90,7 +90,7 @@ Note::Note(Score* s)
       _accidental     = 0;
       _mirror         = false;
       _line           = 0;
-      _move           = 0;
+      _staffMove      = 0;
       _userAccidental = 0;
       _lineOffset     = 0;
       _dots           = 0;
@@ -472,7 +472,7 @@ bool Note::isSimple(Xml& xml) const
       QList<Prop> pl = Element::properties(xml);
       if (_accidental && !_accidental->userOff().isNull())
             return false;
-      return (pl.empty() && _fingering.empty() && _tieFor == 0 && _move == 0
+      return (pl.empty() && _fingering.empty() && _tieFor == 0 && _staffMove == 0
          && _headGroup == 0
          && _small == false
          && _userAccidental == 0);
@@ -503,8 +503,8 @@ void Note::write(Xml& xml) const
                   f->write(xml);
             if (_tieFor)
                   _tieFor->write(xml);
-            if (_move)
-                  xml.tag("move", _move);
+            if (_staffMove)
+                  xml.tag("move", _staffMove);
             if (_headGroup != 0)
                   xml.tag("head", _headGroup);
             if (_small)
@@ -557,7 +557,7 @@ void Note::read(QDomElement e)
                   add(_accidental);
                   }
             else if (tag == "move")
-                  _move = i;
+                  _staffMove = i;
             else if (tag == "small")
                   _small = i;
             else if (Element::readProperties(e))

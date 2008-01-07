@@ -30,8 +30,8 @@
 class Rest : public ChordRest {
       Q_DECLARE_TR_FUNCTIONS(Rest)
 
+      int _staffMove;         // -1, 0, +1, used for crossbeaming
       int _sym;
-      int _move;              // -1, 0, +1
 
       virtual bool isMovable() const { return true; }
       virtual QRectF drag(const QPointF& s);
@@ -54,9 +54,6 @@ class Rest : public ChordRest {
       virtual void add(Element*);
       virtual void remove(Element*);
 
-      virtual int move() const      { return _move; }
-      void setMove(int val)         { _move = val; }
-
       void setSym(int);
       virtual void space(double& min, double& extra) const;
       virtual bool acceptDrop(Viewer*, const QPointF&, int, int) const;
@@ -65,6 +62,9 @@ class Rest : public ChordRest {
       virtual QRectF bbox() const;
       virtual bool genPropertyMenu(QMenu*) const;
       virtual void propertyAction(const QString&);
+
+      virtual int staffMove() const { return _staffMove; }
+      void setStaffMove(int val)    { _staffMove = val; }
       };
 
 #endif

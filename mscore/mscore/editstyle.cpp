@@ -53,82 +53,100 @@ void EditStyle::ok()
 
 void EditStyle::apply()
       {
-      Style* style = cs->style();
-      style->staffUpperBorder       = Spatium(staffUpperBorder->value());
-      style->staffLowerBorder       = Spatium(staffLowerBorder->value());
-      style->staffDistance          = Spatium(staffDistance->value());
-      style->accoladeDistance       = Spatium(akkoladeDistance->value());
-      style->systemDistance         = Spatium(systemDistance->value());
-      style->lyricsDistance         = Spatium(lyricsDistance->value());
-      style->lyricsMinBottomDistance = Spatium(lyricsMinBottomDistance->value());
-      style->measureSpacing         = measureSpacing->value();
-      style->minNoteDistance        = Spatium(minNoteDistance->value());
-      style->barNoteDistance        = Spatium(barNoteDistance->value());
-      style->noteBarDistance        = Spatium(noteBarDistance->value());
-
-      style->showPageNumber         = showPageNumber->isChecked();
-      style->showPageNumberOne      = showFirstPageNumber->isChecked();
-      style->pageNumberOddEven      = showOddEvenPageNumber->isChecked();
-      style->showMeasureNumber      = showMeasureNumber->isChecked();
-      style->showMeasureNumberOne   = showFirstMeasureNumber->isChecked();
-      style->measureNumberInterval  = intervalMeasureNumber->value();
-      style->measureNumberSystem    = showEverySystemMeasureNumber->isChecked();
-      style->measureNumberAllStaffs = showAllStaffsMeasureNumber->isChecked();
-
-      style->clefLeftMargin         = Spatium(clefLeftMargin->value());
-      style->keysigLeftMargin       = Spatium(keysigLeftMargin->value());
-      style->timesigLeftMargin      = Spatium(timesigLeftMargin->value());
-      style->clefKeyRightMargin     = Spatium(clefKeyRightMargin->value());
-
-      style->beamWidth              = Spatium(beamWidth->value());
-      style->beamDistance           = beamDistance->value();
-      style->beamMinLen             = Spatium(beamMinLen->value());
-      style->beamMinSlope           = beamMinSlope->value();
-      style->beamMaxSlope           = beamMaxSlope->value();
-
+      getValues();
+      *(cs->style()) = *lstyle;
       cs->startCmd();
       cs->setLayoutAll(true);
       cs->endCmd();
       }
 
 //---------------------------------------------------------
+//   getValues
+//---------------------------------------------------------
+
+void EditStyle::getValues()
+      {
+      lstyle->staffUpperBorder       = Spatium(staffUpperBorder->value());
+      lstyle->staffLowerBorder       = Spatium(staffLowerBorder->value());
+      lstyle->staffDistance          = Spatium(staffDistance->value());
+      lstyle->accoladeDistance       = Spatium(akkoladeDistance->value());
+      lstyle->systemDistance         = Spatium(systemDistance->value());
+      lstyle->lyricsDistance         = Spatium(lyricsDistance->value());
+      lstyle->lyricsMinBottomDistance = Spatium(lyricsMinBottomDistance->value());
+      lstyle->measureSpacing         = measureSpacing->value();
+      lstyle->minNoteDistance        = Spatium(minNoteDistance->value());
+      lstyle->barNoteDistance        = Spatium(barNoteDistance->value());
+      lstyle->noteBarDistance        = Spatium(noteBarDistance->value());
+
+      lstyle->showPageNumber         = showPageNumber->isChecked();
+      lstyle->showPageNumberOne      = showFirstPageNumber->isChecked();
+      lstyle->pageNumberOddEven      = showOddEvenPageNumber->isChecked();
+      lstyle->showMeasureNumber      = showMeasureNumber->isChecked();
+      lstyle->showMeasureNumberOne   = showFirstMeasureNumber->isChecked();
+      lstyle->measureNumberInterval  = intervalMeasureNumber->value();
+      lstyle->measureNumberSystem    = showEverySystemMeasureNumber->isChecked();
+      lstyle->measureNumberAllStaffs = showAllStaffsMeasureNumber->isChecked();
+
+      lstyle->clefLeftMargin         = Spatium(clefLeftMargin->value());
+      lstyle->keysigLeftMargin       = Spatium(keysigLeftMargin->value());
+      lstyle->timesigLeftMargin      = Spatium(timesigLeftMargin->value());
+      lstyle->clefKeyRightMargin     = Spatium(clefKeyRightMargin->value());
+
+      lstyle->beamWidth              = Spatium(beamWidth->value());
+      lstyle->beamDistance           = beamDistance->value();
+      lstyle->beamMinLen             = Spatium(beamMinLen->value());
+      lstyle->beamMinSlope           = beamMinSlope->value();
+      lstyle->beamMaxSlope           = beamMaxSlope->value();
+      }
+
+//---------------------------------------------------------
+//   setScore
+//---------------------------------------------------------
+
+void EditStyle::setScore(Score* s)
+      {
+      cs = s;
+      *lstyle = *(cs->style());
+      setValues();
+      }
+
+//---------------------------------------------------------
 //   setValues
 //---------------------------------------------------------
 
-void EditStyle::setValues(Score* s)
+void EditStyle::setValues()
       {
-      cs = s;
-      Style* style = cs->style();
-      staffUpperBorder->setValue(style->staffUpperBorder.val());
-      staffLowerBorder->setValue(style->staffLowerBorder.val());
-      staffDistance->setValue(style->staffDistance.val());
-      akkoladeDistance->setValue(style->accoladeDistance.val());
-      systemDistance->setValue(style->systemDistance.val());
-      lyricsDistance->setValue(style->lyricsDistance.val());
-      lyricsMinBottomDistance->setValue(style->lyricsMinBottomDistance.val());
-      measureSpacing->setValue(style->measureSpacing);
-      minNoteDistance->setValue(style->minNoteDistance.val());
-      barNoteDistance->setValue(style->barNoteDistance.val());
-      noteBarDistance->setValue(style->noteBarDistance.val());
+      staffUpperBorder->setValue(lstyle->staffUpperBorder.val());
+      staffLowerBorder->setValue(lstyle->staffLowerBorder.val());
+      staffDistance->setValue(lstyle->staffDistance.val());
+      akkoladeDistance->setValue(lstyle->accoladeDistance.val());
+      systemDistance->setValue(lstyle->systemDistance.val());
+      lyricsDistance->setValue(lstyle->lyricsDistance.val());
+      lyricsMinBottomDistance->setValue(lstyle->lyricsMinBottomDistance.val());
+      measureSpacing->setValue(lstyle->measureSpacing);
+      minNoteDistance->setValue(lstyle->minNoteDistance.val());
+      barNoteDistance->setValue(lstyle->barNoteDistance.val());
+      noteBarDistance->setValue(lstyle->noteBarDistance.val());
 
-      showPageNumber->setChecked(style->showPageNumber);
-      showFirstPageNumber->setChecked(style->showPageNumberOne);
-      showOddEvenPageNumber->setChecked(style->pageNumberOddEven);
-      showMeasureNumber->setChecked(style->showMeasureNumber);
-      showFirstMeasureNumber->setChecked(style->showMeasureNumberOne);
-      intervalMeasureNumber->setValue(style->measureNumberInterval);
-      showIntervalMeasureNumber->setChecked(!style->measureNumberSystem);
-      showAllStaffsMeasureNumber->setChecked(style->measureNumberAllStaffs);
-      showEverySystemMeasureNumber->setChecked(style->measureNumberSystem);
+      showPageNumber->setChecked(lstyle->showPageNumber);
+      showFirstPageNumber->setChecked(lstyle->showPageNumberOne);
+      showOddEvenPageNumber->setChecked(lstyle->pageNumberOddEven);
+      showMeasureNumber->setChecked(lstyle->showMeasureNumber);
+      showFirstMeasureNumber->setChecked(lstyle->showMeasureNumberOne);
+      intervalMeasureNumber->setValue(lstyle->measureNumberInterval);
+      showIntervalMeasureNumber->setChecked(!lstyle->measureNumberSystem);
+      showAllStaffsMeasureNumber->setChecked(lstyle->measureNumberAllStaffs);
+      showEverySystemMeasureNumber->setChecked(lstyle->measureNumberSystem);
 
-      clefLeftMargin->setValue(style->clefLeftMargin.val());
-      keysigLeftMargin->setValue(style->keysigLeftMargin.val());
-      timesigLeftMargin->setValue(style->timesigLeftMargin.val());
-      clefKeyRightMargin->setValue(style->clefKeyRightMargin.val());
+      clefLeftMargin->setValue(lstyle->clefLeftMargin.val());
+      keysigLeftMargin->setValue(lstyle->keysigLeftMargin.val());
+      timesigLeftMargin->setValue(lstyle->timesigLeftMargin.val());
+      clefKeyRightMargin->setValue(lstyle->clefKeyRightMargin.val());
 
-      beamWidth->setValue(style->beamWidth.val());
-      beamDistance->setValue(style->beamDistance);
-      beamMinLen->setValue(style->beamMinLen.val());
-      beamMinSlope->setValue(style->beamMinSlope);
-      beamMaxSlope->setValue(style->beamMaxSlope);
+      beamWidth->setValue(lstyle->beamWidth.val());
+      beamDistance->setValue(lstyle->beamDistance);
+      beamMinLen->setValue(lstyle->beamMinLen.val());
+      beamMinSlope->setValue(lstyle->beamMinSlope);
+      beamMaxSlope->setValue(lstyle->beamMaxSlope);
       }
+

@@ -251,10 +251,23 @@ newBeam:
 
 void Measure::layoutBeams(ScoreLayout* layout)
       {
+      int nstaves = _score->nstaves();
+      int tracks = nstaves * VOICES;
+
+      // fix for staffOffset
+      for (int track = 0; track < tracks; ++track) {
+            for (Segment* segment = first(); segment; segment = segment->next()) {
+                  Element* e = segment->element(track);
+                  if (e && e->isChordRest()) {
+                        ChordRest* cr = (ChordRest*) e;
+                        cr->layout(layout);
+                        }
+                  }
+            }
+
       foreach(Beam* beam, _beamList)
             beam->layout(layout);
 
-      int tracks = _score->nstaves() * VOICES;
       for (int track = 0; track < tracks; ++track) {
             for (Segment* segment = first(); segment; segment = segment->next()) {
                   Element* e = segment->element(track);
@@ -334,7 +347,7 @@ void Beam::layout(ScoreLayout* layout)
       Chord* c1      = 0;
       Chord* c2      = 0;
       int move       = 0;
-      int firstMove  = elements.front()->move();
+      int firstMove  = elements.front()->staffMove();
 
       foreach(ChordRest* cr, elements) {
             if (cr->type() == CHORD) {
@@ -350,11 +363,11 @@ void Beam::layout(ScoreLayout* layout)
                         upCount += chord->stemDirection() == UP ? 1000 : -1000;
                   else
                         upCount += chord->isUp() ? 1 : -1;
-                  if (chord->move()) {
+                  if (chord->staffMove()) {
                         if (firstMove == 0)
-                              move = chord->move() * -1;
+                              move = chord->staffMove() * -1;
                         else
-                              move = chord->move() * -1;
+                              move = chord->staffMove() * -1;
                         }
                   }
             int tl = cr->tickLen();
@@ -376,9 +389,9 @@ void Beam::layout(ScoreLayout* layout)
 
       foreach(ChordRest* cr, elements) {
             if (move == 1)
-                  cr->setUp(cr->move() == 0);
+                  cr->setUp(cr->staffMove() == 0);
             else if (move == -1)
-                  cr->setUp(cr->move() != 0);
+                  cr->setUp(cr->staffMove() != 0);
             else
                   cr->setUp(upFlag);
             }
@@ -470,12 +483,12 @@ void Beam::layout(ScoreLayout* layout)
                         + score()->style()->beamWidth) * (upFlag ? 1.0 : -1.0);
       double min = 1000;
       double max = -1000;
-      int lmove = elements.front()->move();
+      int lmove = elements.front()->staffMove();
       foreach(ChordRest* cr, elements) {
             if (cr->type() != CHORD)
                   continue;
             Chord* chord  = (Chord*)(cr);
-            if (chord->move() != lmove)
+            if (chord->staffMove() != lmove)
                   break;
             QPointF npos(chord->stemPos(chord->isUp(), true) + chord->pos() + chord->segment()->pos());
             double bd = (chord->beams() - 1) * beamDist * (chord->isUp() ? 1.0 : -1.0);

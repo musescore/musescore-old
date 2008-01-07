@@ -48,6 +48,8 @@
       <file>data/mscore.png</file>
       <file>data/acciaccatura.svg</file>
       <file>data/appoggiatura.svg</file>
+      <file>data/bg1.jpg</file>
+      <file>data/bg2.jpg</file>
    </qresource>
 
    <qresource lang="de">

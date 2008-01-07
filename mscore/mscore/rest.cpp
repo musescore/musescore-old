@@ -33,8 +33,8 @@
 Rest::Rest(Score* s)
   : ChordRest(s)
       {
-      _beamMode = BEAM_NO;
-      _move     = 0;
+      _beamMode  = BEAM_NO;
+      _staffMove = 0;
       }
 
 Rest::Rest(Score* s, int tick, int len)
@@ -42,8 +42,8 @@ Rest::Rest(Score* s, int tick, int len)
       {
       setTick(tick);
       setTickLen(len);
-      _beamMode = BEAM_NO;
-      _move     = 0;
+      _beamMode  = BEAM_NO;
+      _staffMove = 0;
       }
 
 //---------------------------------------------------------
@@ -173,8 +173,8 @@ void Rest::write(Xml& xml) const
       {
       xml.stag("Rest");
       ChordRest::writeProperties(xml);
-      if (_move)
-            xml.tag("move", _move);
+      if (_staffMove)
+            xml.tag("move", _staffMove);
       xml.etag();
       }
 
@@ -191,7 +191,7 @@ void Rest::read(QDomElement e)
             if (tag == "len")       // obsolete ?!
                   setTickLen(i);
             else if (tag == "move")
-                  _move = i;
+                  _staffMove = i;
             else if (!ChordRest::readProperties(e))
                   domError(e);
             }

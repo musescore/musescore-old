@@ -24,6 +24,7 @@
 #include "ui_editstyle.h"
 
 class Score;
+class Style;
 
 //---------------------------------------------------------
 //   EditStyle
@@ -33,6 +34,10 @@ class EditStyle : public QDialog, private Ui::EditStyleBase {
       Q_OBJECT
 
       Score* cs;
+      Style* lstyle;    // local copy of style
+
+      void getValues();
+      void setValues();
 
    private slots:
       void ok();
@@ -40,7 +45,7 @@ class EditStyle : public QDialog, private Ui::EditStyleBase {
 
    public:
       EditStyle(QWidget*);
-      void setValues(Score*);
+      void setScore(Score*);
       };
 
 

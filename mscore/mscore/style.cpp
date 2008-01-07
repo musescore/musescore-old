@@ -355,10 +355,10 @@ void TextStyle::read(QDomElement e)
       }
 
 //---------------------------------------------------------
-//   loadStyle
+//   load
 //---------------------------------------------------------
 
-void Style::loadStyle(QDomElement e)
+void Style::load(QDomElement e)
       {
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             QString tag(e.tagName());
@@ -490,10 +490,10 @@ void Style::loadStyle(QDomElement e)
       }
 
 //---------------------------------------------------------
-//   saveStyle
+//   save
 //---------------------------------------------------------
 
-void Style::saveStyle(Xml& xml)
+void Style::save(Xml& xml)
       {
       xml.stag("Style");
 

@@ -233,9 +233,6 @@ class MuseScore : public QMainWindow {
       void startPageListEditor();
       void preferencesChanged();
       void editStyle();
-      void saveStyle();
-      void loadStyle();
-      bool loadStyle(QFile* qf);
       void editTextStyle();
       void seqStarted();
       void seqStopped();

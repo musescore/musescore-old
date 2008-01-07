@@ -280,6 +280,7 @@ MuseScore::MuseScore()
          << "rewind" << "play" << "pause" <<"repeat"
          << "play-next-measure" << "play-next-chord" << "play-prev-measure" << "play-prev-chord"
          << "seek-begin" << "seek-end"
+         << "load-style" << "save-style"
          ;
 
       foreach(const QString s, sl) {
@@ -570,8 +571,8 @@ MuseScore::MuseScore()
       menuStyle->addAction(tr("Edit Style..."), this, SLOT(editStyle()));
       menuStyle->addAction(tr("Edit Text Style..."), this, SLOT(editTextStyle()));
       menuStyle->addSeparator();
-      menuStyle->addAction(fileOpenIcon, tr("Load Style"), this, SLOT(loadStyle()));
-      menuStyle->addAction(fileSaveIcon, tr("Save Style"), this, SLOT(saveStyle()));
+      menuStyle->addAction(getAction("load-style"));
+      menuStyle->addAction(getAction("save-style"));
 
       //---------------------
       //    Menu Display
@@ -1266,7 +1267,7 @@ void MuseScore::editStyle()
       if (editStyleWin == 0) {
             editStyleWin = new EditStyle(0);
             }
-      editStyleWin->setValues(cs);
+      editStyleWin->setScore(cs);
       editStyleWin->show();
       }
 

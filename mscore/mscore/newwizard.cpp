@@ -475,6 +475,16 @@ void TimesigWizard::timesig(int* z, int* n) const
       }
 
 //---------------------------------------------------------
+//   TitleWizard
+//---------------------------------------------------------
+
+TitleWizard::TitleWizard(QWidget* parent)
+   : QWidget(parent)
+      {
+      setupUi(this);
+      }
+
+//---------------------------------------------------------
 //   NewWizardPage1
 //---------------------------------------------------------
 
@@ -482,15 +492,13 @@ NewWizardPage1::NewWizardPage1(QWidget* parent)
    : QWizardPage(parent)
       {
       setTitle(tr("Create New Score"));
-      setSubTitle(tr("This wizard lets you create a new score"));
+      setSubTitle(tr("This wizard creates a new score"));
 
-      rb1 = new QRadioButton(tr("Create new score from template"));
-      rb2 = new QRadioButton(tr("Create new score from scratch"));
-      rb2->setChecked(true);
-      registerField("useTemplate", rb1, "checked");
+      w = new TitleWizard;
+
+      registerField("useTemplate", w->rb1, "checked");
       QGridLayout* grid = new QGridLayout;
-      grid->addWidget(rb1, 0, 0);
-      grid->addWidget(rb2, 1, 0);
+      grid->addWidget(w, 0, 0);
       setLayout(grid);
       }
 
@@ -502,12 +510,13 @@ NewWizardPage2::NewWizardPage2(QWidget* parent)
    : QWizardPage(parent)
       {
       setTitle(tr("Create New Score"));
-      setSubTitle(tr("In this page you create a set of instruments. Each instrument"
+      setSubTitle(tr("Define a set of instruments. Each instrument"
                      " is represented by one or more staves"));
-
       complete = false;
       w = new InstrumentWizard;
       QGridLayout* grid = new QGridLayout;
+      grid->setSpacing(0);
+      grid->setContentsMargins(0, 0, 0, 0);
       grid->addWidget(w, 0, 0);
       setLayout(grid);
       connect(w, SIGNAL(completeChanged(bool)), this, SLOT(setComplete(bool)));
@@ -627,6 +636,7 @@ NewWizard::NewWizard(QWidget* parent)
    : QWizard(parent)
       {
       setPixmap(QWizard::LogoPixmap, QPixmap(":/data/mscore.png"));
+      setPixmap(QWizard::WatermarkPixmap, QPixmap(":/data/bg1.jpg"));
       setWindowTitle(tr("MuseScore: Create New Score"));
 
       p1 = new NewWizardPage1;

@@ -230,7 +230,7 @@ void Score::padToggle(int n)
                               }
                         else {
                               // insert acciaccatura or appoggiatura
-                              // TODO
+                              setGraceNote(tick, _is.track, _padState.pitch, _padState.noteType);
                               }
                         }
                   }

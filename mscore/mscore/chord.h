@@ -177,7 +177,6 @@ class Chord : public ChordRest {
       const Note* downNote() const           { return notes.front(); }
       Note* upNote()                         { return notes.back(); }
       Note* downNote()                       { return notes.front(); }
-      virtual int move() const;
 
       Stem* stem() const                     { return _stem; }
       void setStem(Stem* s);
@@ -205,6 +204,9 @@ class Chord : public ChordRest {
       void setNoteType(NoteType t) { _noteType = t; }
 
       virtual void collectElements(QList<const Element*>& el) const;
+      void setTickOffset(int val) { _tickOffset = val; }
+
+      virtual int staffMove() const;
       };
 
 #endif
