@@ -241,7 +241,7 @@ void Note::add(Element* el)
                   {
                   Tie* tie = (Tie*)el;
 	      	tie->setStartNote(this);
-                  tie->setStaff(staff());
+                  tie->setStaffIdx(staffIdx());
       		setTieFor(tie);
                   }
                   break;
@@ -535,14 +535,14 @@ void Note::read(QDomElement e)
                   tpcVal = i;
             else if (tag == "Tie") {
                   _tieFor = new Tie(score());
-                  _tieFor->setStaff(staff());
+                  _tieFor->setStaffIdx(staffIdx());
                   _tieFor->read(e);
                   _tieFor->setStartNote(this);
                   }
             else if (tag == "Text") {
                   Text* f = new Text(score());
                   f->setSubtype(TEXT_FINGERING);
-                  f->setStaff(staff());
+                  f->setStaffIdx(staffIdx());
                   f->read(e);
                   f->setParent(this);
                   _fingering.append(f);
@@ -701,7 +701,7 @@ Element* Note::drop(const QPointF&, const QPointF&, Element* e)
                         }
                   else {
                         atr->setParent(cr);
-                        atr->setStaff(staff());
+                        atr->setStaffIdx(staffIdx());
                         score()->select(atr, 0, 0);
                         score()->cmdAdd(atr);
                         }
@@ -734,7 +734,7 @@ Element* Note::drop(const QPointF&, const QPointF&, Element* e)
                   {
                   Breath* b = (Breath*)e;
                   int tick   = chord()->tick();
-                  b->setStaff(staff());
+                  b->setStaffIdx(staffIdx());
                   Measure* m = chord()->segment()->measure();
 
                   // TODO: insert automatically in all staves?

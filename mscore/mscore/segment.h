@@ -118,6 +118,7 @@ class Segment : public Element {
       void setTime(int tick);
       void removeGeneratedElements();
       bool isEmpty() const;
+      void fixStaffIdx();
       };
 
 #endif

@@ -109,7 +109,6 @@ class Note : public Element {
       ~Note();
       virtual Note* clone() const { return new Note(*this); }
       virtual ElementType type() const { return NOTE; }
-
       virtual QRectF bbox() const;
 
       void setHead(int);

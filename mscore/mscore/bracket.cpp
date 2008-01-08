@@ -286,11 +286,11 @@ void Bracket::endEditDrag()
       else {
             qreal ay  = parent()->canvasPos().y();
             System* s = system();
-            qreal y   = s->staff(staffIdx1)->bbox().y() + ay;
-            qreal h1  = s->staff(staffIdx1)->bbox().height();
+            qreal y   = s->staff(staffIdx1)->y() + ay;
+            qreal h1  = staff()->height();
 
             for (staffIdx2 = staffIdx1 + 1; staffIdx2 < n; ++staffIdx2) {
-                  qreal h = s->staff(staffIdx2)->bbox().y() + ay - y;
+                  qreal h = s->staff(staffIdx2)->y() + ay - y;
                   if (ay2 < (y + (h + h1) * .5))
                         break;
                   y += h;
@@ -298,8 +298,8 @@ void Bracket::endEditDrag()
             staffIdx2 -= 1;
             }
 
-      qreal sy = system()->staff(staffIdx1)->bbox().top();
-      qreal ey = system()->staff(staffIdx2)->bbox().bottom();
+      qreal sy = system()->staff(staffIdx1)->y();
+      qreal ey = system()->staff(staffIdx2)->y() + score()->staff(staffIdx2)->height();
       h2 = (ey - sy) * .5;
 
       int span = staffIdx2 - staffIdx1 + 1;
@@ -328,7 +328,7 @@ Element* Bracket::drop(const QPointF&, const QPointF&, Element* e)
       if (e->type() == BRACKET) {
             Bracket* b = (Bracket*)e;
             b->setParent(parent());
-            b->setStaff(staff());
+            b->setStaffIdx(staffIdx());
             b->setSpan(span());
             b->setLevel(level());
             score()->cmdRemove(this);

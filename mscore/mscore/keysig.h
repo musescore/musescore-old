@@ -24,6 +24,7 @@
 #include "element.h"
 
 class Sym;
+class Segment;
 
 //---------------------------------------------------------
 //   KeySig
@@ -41,12 +42,14 @@ class KeySig : public Element {
    public:
       KeySig(Score*);
       virtual KeySig* clone() const { return new KeySig(*this); }
+      virtual QPointF canvasPos() const;      ///< position in canvas coordinates
       virtual void draw(QPainter&) const;
       virtual ElementType type() const { return KEYSIG; }
       virtual bool acceptDrop(Viewer*, const QPointF&, int, int) const;
       virtual Element* drop(const QPointF&, const QPointF&, Element*);
       virtual void layout(ScoreLayout*);
       void setSig(int oldSig, int newSig);
+      Segment* segment() const { return (Segment*)parent(); }
       };
 
 #endif

@@ -245,9 +245,9 @@ class Score : public QObject {
 
       Part* part(int staff);
 
-      MeasureBase* pos2measure(const QPointF&, int* tick, Staff** staff, int* pitch,
+      MeasureBase* pos2measure(const QPointF&, int* tick, int* staffIdx, int* pitch,
          Segment**, QPointF* offset) const;
-      Measure* pos2measure2(const QPointF&, int* tick, Staff** staff, int* pitch, Segment**) const;
+      Measure* pos2measure2(const QPointF&, int* tick, int* staffIdx, int* pitch, Segment**) const;
       Measure* pos2measure3(const QPointF& p, int* tick) const;
 
       void addViewer(Viewer* v);
@@ -435,7 +435,7 @@ class Score : public QObject {
       void setSaved(bool v)     { _saved = v; }
       bool printing() const     { return _printing; }
 
-      bool pos2TickAnchor(const QPointF&, Staff*, int* tick, QPointF* anchor) const;
+      bool pos2TickAnchor(const QPointF&, int staffIdx, int* tick, QPointF* anchor) const;
       void spell();
       void spell(Note*);
       int nextSeg(int tick, int track);
@@ -472,6 +472,7 @@ class Score : public QObject {
       Selection* selection() const { return sel; }
       SigList*   getSigmap()  { return sigmap; }
       Measure* appendMeasure();
+      void fixStaffIdx();
       };
 
 extern Score* gscore;

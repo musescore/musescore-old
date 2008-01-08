@@ -46,6 +46,21 @@ Beam::~Beam()
             }
       }
 
+
+//---------------------------------------------------------
+//   canvasPos
+//---------------------------------------------------------
+
+QPointF Beam::canvasPos() const
+      {
+      double xp = x();
+      for (Element* e = parent(); e; e = e->parent())
+            xp += e->x();
+      System* system = measure()->system();
+      double yp = y() + system->staff(staffIdx())->y() + system->y();
+      return QPointF(xp, yp);
+      }
+
 //---------------------------------------------------------
 //   remove
 //---------------------------------------------------------
@@ -217,7 +232,7 @@ newBeam:
                                           }
                                     else {
                                           beam = new Beam(score());
-                                          beam->setStaff(a1->staff());
+                                          beam->setStaffIdx(a1->staffIdx());
                                           beam->setParent(this);
                                           _beamList.push_back(beam);
                                           a1->setBeam(beam);
@@ -254,6 +269,7 @@ void Measure::layoutBeams(ScoreLayout* layout)
       int nstaves = _score->nstaves();
       int tracks = nstaves * VOICES;
 
+#if 0
       // fix for staffOffset
       for (int track = 0; track < tracks; ++track) {
             for (Segment* segment = first(); segment; segment = segment->next()) {
@@ -264,6 +280,7 @@ void Measure::layoutBeams(ScoreLayout* layout)
                         }
                   }
             }
+#endif
 
       foreach(Beam* beam, _beamList)
             beam->layout(layout);

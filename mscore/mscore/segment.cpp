@@ -171,7 +171,7 @@ void Segment::insertStaff(int staff)
       {
       int track = staff * VOICES;
       for (int voice = 0; voice < VOICES; ++voice)
-            _elist.insert(track+voice, 0);
+            _elist.insert(track, 0);
       _lyrics.insert(staff, LyricsList());
       }
 
@@ -201,7 +201,7 @@ void Segment::add(Element* el)
             printf("staff not found\n");
             abort();
             }
-      int track    = staffIdx * VOICES + el->voice();
+      int track = staffIdx * VOICES + el->voice();
 
       switch(el->type()) {
             case LYRICS:
@@ -367,5 +367,26 @@ bool Segment::isEmpty() const
             }
       // TODO: check for lyrics?
       return true;
+      }
+
+//---------------------------------------------------------
+//   fixStaffIdx
+//---------------------------------------------------------
+
+void Segment::fixStaffIdx()
+      {
+      int track = 0;
+      foreach(Element* e, _elist) {
+            if (e)
+                  e->setStaffIdx(track / VOICES);
+            ++track;
+            }
+      for (int staffIdx = 0; staffIdx < _lyrics.size(); staffIdx++) {
+            foreach(Lyrics* l, _lyrics[staffIdx]) {
+                  if (l) {
+                        l->setStaffIdx(staffIdx);
+                        }
+                  }
+            }
       }
 

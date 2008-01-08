@@ -27,6 +27,7 @@
 #include "symbol.h"
 #include "layout.h"
 #include "viewer.h"
+#include "system.h"
 
 //---------------------------------------------------------
 //   TimeSig
@@ -47,6 +48,22 @@ TimeSig::TimeSig(Score* s, int n, int z1, int z2, int z3, int z4)
   : Element(s)
       {
       setSig(n, z1, z2, z3, z4);
+      }
+
+//---------------------------------------------------------
+//   canvasPos
+//---------------------------------------------------------
+
+QPointF TimeSig::canvasPos() const
+      {
+      if (parent() == 0)
+            return pos();
+      double xp = x();
+      for (Element* e = parent(); e; e = e->parent())
+            xp += e->x();
+      System* system = segment()->measure()->system();
+      double yp = y() + system->staff(staffIdx())->y() + system->y();
+      return QPointF(xp, yp);
       }
 
 //---------------------------------------------------------

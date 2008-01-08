@@ -23,6 +23,9 @@
 #include "clef.h"
 #include "keysig.h"
 #include "viewer.h"
+#include "system.h"
+#include "segment.h"
+#include "measure.h"
 
 //---------------------------------------------------------
 //   KeySig
@@ -31,6 +34,22 @@
 KeySig::KeySig(Score* s)
   : Element(s)
       {
+      }
+
+//---------------------------------------------------------
+//   canvasPos
+//---------------------------------------------------------
+
+QPointF KeySig::canvasPos() const
+      {
+      if (parent() == 0)
+            return pos();
+      double xp = x();
+      for (Element* e = parent(); e; e = e->parent())
+            xp += e->x();
+      System* system = segment()->measure()->system();
+      double yp = y() + system->staff(staffIdx())->y() + system->y();
+      return QPointF(xp, yp);
       }
 
 //---------------------------------------------------------
@@ -48,7 +67,7 @@ void KeySig::addLayout(Sym* s, double x, double y)
 
 double KeySig::yoffset() const
       {
-      if (staff()) {
+      if (staffIdx() != -1) {
             int clef       = staff()->clef()->clef(tick());
             int clefOffset = clefTable[clef].yOffset;
             while (clefOffset >= 7)

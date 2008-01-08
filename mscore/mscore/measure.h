@@ -40,6 +40,7 @@ class Text;
 class ChordRest;
 class Score;
 class Viewer;
+class System;
 
 //---------------------------------------------------------
 //   MStaff
@@ -117,6 +118,7 @@ class Measure : public MeasureBase {
       virtual bool genPropertyMenu(QMenu*) const;
       virtual void propertyAction(const QString&);
 
+      System* system() const           { return (System*)parent(); }
       QList<MStaff*>* staffList()      { return &staves;      }
       QList<Beam*>* beamList()         { return &_beamList;   }
       QList<Tuplet*>* tuplets()        { return &_tuplets;    }
@@ -145,7 +147,6 @@ class Measure : public MeasureBase {
 
       void layoutX(ScoreLayout*, double stretch);
       void layout(ScoreLayout*, double width);
-      void moveY(int, double);
       void layout2(ScoreLayout*);
 
       Chord* findChord(int tick, int staff, int voice, bool grace);
@@ -200,6 +201,7 @@ class Measure : public MeasureBase {
       void adjustToLen(int, int);
       int repeatFlags() const      { return _repeatFlags; }
       void setRepeatFlags(int val);
+      void fixStaffIdx();
       };
 
 #endif

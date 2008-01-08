@@ -230,17 +230,19 @@ void Canvas::objectPopup(const QPoint& pos, Element* obj)
 
 void Canvas::measurePopup(const QPoint& gpos, Measure* obj)
       {
-      Staff* staff = 0;
+      int staffIdx = -1;
       int pitch;
       Segment* seg;
       QPointF offset;
       int tick = 0;
 
-      _score->pos2measure(startMove, &tick, &staff, &pitch, &seg, &offset);
-      if (staff == 0) {
-            printf("Canvas::measurePopup: staff == 0 !\n");
+      _score->pos2measure(startMove, &tick, &staffIdx, &pitch, &seg, &offset);
+      if (staffIdx == -1) {
+            printf("Canvas::measurePopup: staffIdx == -1!\n");
             return;
             }
+
+      Staff* staff = _score->staff(staffIdx);
 
       QMenu* popup = new QMenu(this);
       popup->setSeparatorsCollapsible(false);
@@ -992,17 +994,17 @@ void Canvas::moveCursor()
       if (track == -1) {
             track = 0;
             }
-      int staff = track / VOICES;
+      int staffIdx = track / VOICES;
       cursor->setVoice(track % VOICES);
       cursor->setTick(_score->inputPos());
-      cursor->setStaff(_score->staff(staff));
+      cursor->setStaffIdx(staffIdx);
 
       Segment* segment = _score->tick2segment(cursor->tick());
       if (segment) {
 //            _score->adjustCanvasPosition(segment);
             System* system = segment->measure()->system();
             double x = segment->canvasPos().x();
-            double y = system->bboxStaff(staff).y() + system->canvasPos().y();
+            double y = system->bboxStaff(staffIdx).y() + system->canvasPos().y();
             _score->addRefresh(cursor->abbox());
             cursor->setPos(x - _spatium, y - _spatium);
             _score->addRefresh(cursor->abbox());
@@ -1046,17 +1048,17 @@ void Canvas::setCursorOn(bool val)
 void Canvas::setShadowNote(const QPointF& p)
       {
       int tick, line;
-      Staff* staff;
+      int staffIdx;
       Segment* seg;
 
-      Measure* m = _score->pos2measure2(p, &tick, &staff, &line, &seg);
+      Measure* m = _score->pos2measure2(p, &tick, &staffIdx, &line, &seg);
       if (m == 0)
             return;
 
       System* s = m->system();
       shadowNote->setLine(line);
 
-      double y = seg->canvasPos().y() + s->staff(staff->idx())->bbox().y();
+      double y = seg->canvasPos().y() + s->staff(staffIdx)->y();
       y += line * _spatium * .5;
 
       shadowNote->setPos(seg->canvasPos().x(), y);
@@ -1222,9 +1224,9 @@ void Canvas::paint(const QRect& rr, QPainter& p)
                         double x1     = bb.x();
                         double x2     = x1 + bb.width();
                         SysStaff* ss1 = m->system()->staff(_score->sel->staffStart);
-                        double y1     = ss1->bbox().y() - _spatium + bb.y();
+                        double y1     = ss1->y() - _spatium + bb.y();
                         SysStaff* ss2 = m->system()->staff(_score->sel->staffEnd-1);
-                        double y2     = ss2->bbox().y() + ss2->bbox().height() + _spatium + bb.y();
+                        double y2     = ss2->y() + ss2->bbox().height() + _spatium + bb.y();
 
                         // is this measure start of selection?
                         if (m == sm) {
@@ -1287,15 +1289,14 @@ void Canvas::setViewRect(const QRectF& r)
 
 bool Canvas::dragTimeAnchorElement(const QPointF& pos)
       {
-      Staff* staff = 0;
+      int staffIdx = -1;
       Segment* seg;
       QPointF offset;
       int tick;
-      MeasureBase* mb = _score->pos2measure(pos, &tick, &staff, 0, &seg, &offset);
+      MeasureBase* mb = _score->pos2measure(pos, &tick, &staffIdx, 0, &seg, &offset);
       if (mb && mb->type() == MEASURE) {
             Measure* m = (Measure*)mb;
             System* s = m->system();
-            int staffIdx = staff->idx();
             QRectF sb(s->staff(staffIdx)->bbox());
             sb.translate(s->pos() + s->page()->pos());
             QPointF anchor(seg->abbox().x(), sb.topLeft().y());
@@ -1333,15 +1334,14 @@ bool Canvas::dragMeasureAnchorElement(const QPointF& pos)
 
 bool Canvas::dragAboveMeasure(const QPointF& pos)
       {
-      Staff* staff = 0;
+      int staffIdx = -1;
       Segment* seg;
       QPointF offset;
       int tick;
-      MeasureBase* mb = _score->pos2measure(pos, &tick, &staff, 0, &seg, &offset);
+      MeasureBase* mb = _score->pos2measure(pos, &tick, &staffIdx, 0, &seg, &offset);
       if (mb && mb->type() == MEASURE) {
             Measure* m = (Measure*)mb;
             System* s = m->system();
-            int staffIdx = staff->idx();
 
             // compute rectangle of staff in measure
             QRectF rrr(s->staff(staffIdx)->bbox().translated(s->canvasPos()));
@@ -1361,14 +1361,13 @@ bool Canvas::dragAboveMeasure(const QPointF& pos)
 
 bool Canvas::dragAboveSystem(const QPointF& pos)
       {
-      Staff* staff = 0;
+      int staffIdx = -1;
       Segment* seg;
       QPointF offset;
       int tick;
-      MeasureBase* m = _score->pos2measure(pos, &tick, &staff, 0, &seg, &offset);
+      MeasureBase* m = _score->pos2measure(pos, &tick, &staffIdx, 0, &seg, &offset);
       if (m && m->type() == MEASURE) {
             System* s = m->system();
-            int staffIdx = staff->idx();
             if (staffIdx) {
                   setDropTarget(0);
                   return false;
@@ -1754,7 +1753,7 @@ void Canvas::dropEvent(QDropEvent* event)
                   Element* el = elementAt(pos);
                   if (el && (el->type() == NOTE || el->type() == REST)) {
                         s->setAnchor(ANCHOR_STAFF);
-                        s->setStaff(el->staff());
+                        s->setStaffIdx(el->staffIdx());
                         if (el->type() == NOTE) {
                               Note* note = (Note*)el;
                               s->setTick(note->chord()->tick());

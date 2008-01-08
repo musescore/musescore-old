@@ -159,7 +159,7 @@ bool LineSegment::edit(int curGrip, QKeyEvent* ev)
 QPointF LineSegment::pos2anchor(const QPointF& pos, int* tick) const
       {
       QPointF anchor;
-      score()->pos2TickAnchor(pos, staff(), tick, &anchor);
+      score()->pos2TickAnchor(pos, staffIdx(), tick, &anchor);
       return anchor;
       }
 
@@ -500,7 +500,7 @@ void SLine::write(Xml& xml) const
 
 void SLine::read(QDomElement e)
       {
-      setStaff(score()->staff(0));  // set default staff
+      setStaffIdx(0);  // set default staff
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             if (!SLine::readProperties(e))
                   domError(e);

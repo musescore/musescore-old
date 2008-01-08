@@ -233,7 +233,7 @@ void Chord::add(Element* e)
       {
       e->setVoice(voice());
       e->setParent(this);
-      e->setStaff(staff());
+      e->setStaffIdx(staffIdx());
       if (e->type() == NOTE)
             notes.add((Note*)e);
       else if (e->type() == ATTRIBUTE)
@@ -945,7 +945,7 @@ void Chord::readNote(QDomElement e, int /*staffIdx*/)
                   note->setLine(i);
             else if (tag == "Tie") {
                   Tie* _tieFor = new Tie(score());
-                  _tieFor->setStaff(staff());
+                  _tieFor->setStaffIdx(staffIdx());
                   _tieFor->read(e);
                   _tieFor->setStartNote(note);
                   note->setTieFor(_tieFor);
@@ -953,7 +953,7 @@ void Chord::readNote(QDomElement e, int /*staffIdx*/)
             else if (tag == "Text") {
                   Text* f = new Text(score());
                   f->setSubtype(TEXT_FINGERING);
-                  f->setStaff(staff());
+                  f->setStaffIdx(staffIdx());
                   f->read(e);
                   f->setParent(this);
                   note->add(f);
@@ -964,7 +964,7 @@ void Chord::readNote(QDomElement e, int /*staffIdx*/)
                   domError(e);
             }
       note->setParent(this);
-      note->setStaff(staff());
+      note->setStaffIdx(staffIdx());
       note->setVoice(voice());
       if (ptch != -1)
             note->setPitch(ptch);
@@ -987,7 +987,7 @@ void Chord::read(QDomElement e, int /*staffIdx*/)
             if (tag == "Note") {
                   Note* note = new Note(score());
                   note->setParent(this);
-                  note->setStaff(staff());
+                  note->setStaffIdx(staffIdx());
                   note->setVoice(voice());
                   note->read(e);
                   notes.add(note);
@@ -1010,13 +1010,13 @@ void Chord::read(QDomElement e, int /*staffIdx*/)
                   }
             else if (tag == "Arpeggio") {
                   _arpeggio = new Arpeggio(score());
-                  _arpeggio->setStaff(staff());
+                  _arpeggio->setStaffIdx(staffIdx());
                   _arpeggio->read(e);
                   _arpeggio->setParent(this);
                   }
             else if (tag == "Tremolo") {
                   _tremolo = new Tremolo(score());
-                  _tremolo->setStaff(staff());
+                  _tremolo->setStaffIdx(staffIdx());
                   _tremolo->read(e);
                   _tremolo->setParent(this);
                   }
@@ -1211,6 +1211,43 @@ void Chord::collectElements(QList<const Element*>& el) const
                   el.append(f);
             if (note->accidental())
                   el.append(note->accidental());
+            }
+      }
+
+//---------------------------------------------------------
+//   setStaffIdx
+//---------------------------------------------------------
+
+void Chord::setStaffIdx(int val)
+      {
+      Element::setStaffIdx(val);
+      if (_hook)
+            _hook->setStaffIdx(val);
+      if (_stem)
+            _stem->setStaffIdx(val);
+      if (_stemSlash)
+            _stemSlash->setStaffIdx(val);
+      if (_arpeggio)
+            _arpeggio->setStaffIdx(val);
+      if (_tremolo)
+            _tremolo->setStaffIdx(val);
+
+      foreach(LedgerLine* h, _ledgerLines)
+            h->setStaffIdx(val);
+
+      for (ciNote in = notes.begin(); in != notes.end(); ++in) {
+            Note* note = in->second;
+            note->setStaffIdx(val);
+            if (note->tieFor()) {
+                  Tie* tie = note->tieFor();
+                  tie->setStaffIdx(val);
+                  foreach(SlurSegment* seg, *tie->elements())
+                        seg->setStaffIdx(val);
+                  }
+            foreach(Text* f, note->fingering())
+                  f->setStaffIdx(val);
+            if (note->accidental())
+                  note->accidental()->setStaffIdx(val);
             }
       }
 

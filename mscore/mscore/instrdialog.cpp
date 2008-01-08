@@ -34,6 +34,7 @@
 #include "style.h"
 #include "editinstrument.h"
 #include "drumset.h"
+#include "slur.h"
 
 //---------------------------------------------------------
 //   StaffListItem
@@ -504,6 +505,7 @@ void MuseScore::editInstrList()
             if (pli->op == ITEM_DELETE)
                   cs->cmdRemovePart(pli->part);
             else if (pli->op == ITEM_ADD) {
+printf("ITEM_ADD\n");
                   const InstrumentTemplate* t = ((PartListItem*)item)->it;
                   part = new Part(cs);
                   part->setMidiProgram(t->midiProgram);
@@ -526,7 +528,7 @@ void MuseScore::editInstrList()
                         Staff* staff = new Staff(cs, part, rstaff);
                         sli->staff = staff;
                         staff->setRstaff(rstaff);
-                        ++rstaff;
+                        // ++rstaff;
                         staff->clef()->setClef(0, sli->clef());
                         staff->setLines(t->staffLines[cidx]);
                         staff->setSmall(t->smallStaff[cidx]);
@@ -534,10 +536,11 @@ void MuseScore::editInstrList()
                               staff->setBracket(0, t->bracket);
                               staff->setBracketSpan(0, t->staves);
                               }
-                        part->staves()->push_back(staff);
-                        cs->staves().insert(staffIdx + rstaff, staff);
-                        cs->undoOp(UndoOp::InsertStaff, staff, staffIdx+rstaff);
+                        cs->insertStaff(staff, staffIdx + rstaff);
+                        cs->undoOp(UndoOp::InsertStaff, staff, staffIdx + rstaff);
+                        ++rstaff;
                         }
+printf("insert part at %d\n", staffIdx);
                   cs->cmdInsertPart(part, staffIdx);
                   staffIdx += rstaff;
                   }
@@ -590,12 +593,12 @@ void MuseScore::editInstrList()
       //    sort staves
       //
       QList<Staff*> dst;
-      for (int idx = 0; (item = pl->topLevelItem(idx)); ++idx) {
-            PartListItem* pli = (PartListItem*)item;
+      for (int idx = 0; idx < pl->topLevelItemCount(); ++idx) {
+            PartListItem* pli = (PartListItem*)pl->topLevelItem(idx);
             if (pli->op == ITEM_DELETE)
                   continue;
             QTreeWidgetItem* ci = 0;
-            for (int cidx = 0; (ci = item->child(cidx)); ++cidx) {
+            for (int cidx = 0; (ci = pli->child(cidx)); ++cidx) {
                   StaffListItem* sli = (StaffListItem*) ci;
                   if (sli->op == ITEM_DELETE)
                         continue;
@@ -608,8 +611,7 @@ void MuseScore::editInstrList()
       for (int idx = 0; idx < cs->staves().size(); ++idx)
             sl.push_back(idx);
 
-      for (QList<Staff*>::iterator i = dst.begin(); i != dst.end(); ++i) {
-            Staff* staff = *i;
+      foreach(Staff* staff, dst) {
             int idx = cs->staves().indexOf(staff);
             if (idx == -1)
                   printf("staff in dialog(%p) not found in score\n", staff);
@@ -620,10 +622,8 @@ void MuseScore::editInstrList()
       if (sl.size() != dl.size())
             printf("cannot happen: sl(%d) != dl(%d)\n", sl.size(), dl.size());
       bool sort = false;
-      QList<int>::iterator isl = sl.begin();
-      QList<int>::iterator dsl = dl.begin();
-      for (int i = 0; i < sl.size(); ++i, ++isl, ++dsl) {
-            if (*isl != *dsl) {
+      for (int i = 0; i < sl.size(); ++i) {
+            if (sl[i] != dl[i]) {
                   sort = true;
                   break;
                   }
@@ -634,6 +634,7 @@ void MuseScore::editInstrList()
             }
       cs->setLayoutAll(true);
       cs->endCmd();
+      cs->fixStaffIdx();
       }
 
 //---------------------------------------------------------
@@ -691,7 +692,7 @@ void Score::cmdRemovePart(Part* part)
 
 void Score::insertPart(Part* part, int idx)
       {
-      _layout->systems()->clear();  //??
+      _layout->systems()->clear();
       int staff = 0;
       for (QList<Part*>::iterator i = _parts.begin(); i != _parts.end(); ++i) {
             if (staff >= idx) {
@@ -722,6 +723,19 @@ void Score::insertStaff(Staff* staff, int idx)
       _layout->systems()->clear();  //??
       _staves.insert(idx, staff);
       staff->part()->insertStaff(staff);
+
+      int track = idx * VOICES;
+      foreach(Element* e, *_layout->gel()) {
+            if (e->type() == SLUR) {
+                  Slur* slur = (Slur*)e;
+                  if (slur->track() >= track) {
+                        slur->setTrack(slur->track() + VOICES);
+                        }
+                  if (slur->track2() >= track)
+                        slur->setTrack2(slur->track2() + VOICES);
+                  }
+            }
+      fixStaffIdx();
       }
 
 //---------------------------------------------------------
@@ -730,9 +744,22 @@ void Score::insertStaff(Staff* staff, int idx)
 
 void Score::removeStaff(Staff* staff)
       {
+      int idx = staff->idx();
       _layout->systems()->clear();  //??
       _staves.removeAll(staff);
       staff->part()->removeStaff(staff);
+      int track = idx * VOICES;
+      foreach(Element* e, *_layout->gel()) {
+            if (e->type() == SLUR) {
+                  Slur* slur = (Slur*)e;
+                  if (slur->track() > track) {
+                        slur->setTrack(slur->track() - VOICES);
+                        }
+                  if (slur->track2() > track)
+                        slur->setTrack2(slur->track2() - VOICES);
+                  }
+            }
+      fixStaffIdx();
       }
 
 //---------------------------------------------------------
@@ -741,6 +768,17 @@ void Score::removeStaff(Staff* staff)
 
 void Score::sortStaves(QList<int> src, QList<int> dst)
       {
+printf("Score::sortStaves\n");
+      foreach(int i, src)
+            printf(" %3d", i);
+      printf("\n");
+      foreach(int i, dst)
+            printf(" %3d", i);
+      printf("\n");
+
+
+
+
       _layout->systems()->clear();  //??
       _parts.clear();
       Part* curPart = 0;
@@ -769,6 +807,21 @@ void Score::sortStaves(QList<int> src, QList<int> dst)
                   continue;
             Measure* m = (Measure*)mb;
             m->sortStaves(src, dst);
+            }
+      fixStaffIdx();
+      }
+
+//---------------------------------------------------------
+//   fixStaffIdx
+//    called after sort, insert, delete staff
+//---------------------------------------------------------
+
+void Score::fixStaffIdx()
+      {
+      for (MeasureBase* mb = _layout->first(); mb; mb = mb->next()) {
+            if (mb->type() != MEASURE)
+                  continue;
+            ((Measure*)mb)->fixStaffIdx();
             }
       }
 

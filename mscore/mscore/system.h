@@ -58,6 +58,7 @@ class SysStaff {
       Text* instrumentName;
 
       const QRectF& bbox() const      { return _bbox; }
+      double y()                      { return _bbox.y(); }
       void setbbox(const QRectF& r)   { _bbox = r; }
       void move(double x, double y);
 

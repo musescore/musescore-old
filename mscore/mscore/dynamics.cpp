@@ -107,16 +107,16 @@ void Dynamic::endDrag()
       {
 #if 1
       int ntick;
-      Staff* stf = staff();
+      int stfi = staffIdx();
       QPointF offset;
       Segment* seg;
-      MeasureBase* mb = _score->pos2measure(canvasPos(), &ntick, &stf, 0, &seg, &offset);
+      MeasureBase* mb = _score->pos2measure(canvasPos(), &ntick, &stfi, 0, &seg, &offset);
       if (mb && mb->type() == MEASURE) {
             Measure* measure = (Measure*)mb;
             offset /= _spatium;
             setTick(ntick);
             setUserOff(offset);
-            setStaff(stf);
+            setStaffIdx(stfi);
             if (measure != parent()) {
                   ((Measure*)parent())->remove(this);
                   measure->add(this);

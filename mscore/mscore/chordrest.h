@@ -137,6 +137,7 @@ class ChordRest : public Element {
       ChordRest(Score*);
       ChordRest &operator=(const ChordRest&);
       virtual ElementType type() const = 0;
+      virtual QPointF canvasPos() const;      ///< position in canvas coordinates
 
       void writeProperties(Xml& xml) const;
       bool readProperties(QDomElement);

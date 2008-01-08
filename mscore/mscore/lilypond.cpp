@@ -283,7 +283,7 @@ void Lilypond::addNote(const LNote& lnote)
       measure->add(segment);
 
       Chord* chord = new Chord(score);
-      chord->setStaff(staff);
+      chord->setStaffIdx(staff->idx());
       chord->setParent(segment);
       chord->setTickLen(lnote.len);
       chord->setTick(tick);
@@ -293,7 +293,7 @@ void Lilypond::addNote(const LNote& lnote)
       Note* note = new Note(score);
       note->setPitch(lnote.pitch);
       note->setParent(chord);
-      note->setStaff(staff);
+      note->setStaffIdx(staff->idx());
       note->setTickLen(lnote.len);
       chord->add(note);
       tick += lnote.len;
@@ -314,7 +314,7 @@ void Lilypond::addRest()
       measure->add(segment);
 
       Rest* rest = new Rest(score);
-      rest->setStaff(staff);
+      rest->setStaffIdx(staff->idx());
       rest->setParent(segment);
       rest->setTickLen(curLen);
       rest->setTick(tick);

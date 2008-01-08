@@ -167,6 +167,20 @@ ChordRest::ChordRest(Score* s)
       }
 
 //---------------------------------------------------------
+//   canvasPos
+//---------------------------------------------------------
+
+QPointF ChordRest::canvasPos() const
+      {
+      double xp = x();
+      for (Element* e = parent(); e; e = e->parent())
+            xp += e->x();
+      System* system = measure()->system();
+      double yp = y() + system->staff(staffIdx())->y() + system->y();
+      return QPointF(xp, yp);
+      }
+
+//---------------------------------------------------------
 //   setBeamMode
 //---------------------------------------------------------
 

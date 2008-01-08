@@ -58,6 +58,9 @@ class Beam : public Element {
       ~Beam();
       virtual Beam* clone() const      { return new Beam(*this); }
       virtual ElementType type() const { return BEAM; }
+      virtual QPointF canvasPos() const;      ///< position in canvas coordinates
+
+      Measure* measure() const { return (Measure*)parent(); }
 
       void layout1(ScoreLayout*);
       void layout(ScoreLayout*);
