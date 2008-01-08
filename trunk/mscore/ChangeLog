@@ -1,3 +1,12 @@
+8.1.8 (ws)
+      - Elements now have a staffIdx instead of Staff* to speed up access
+        to MStaff* and SStaff*.
+      - Element->canvasPos() is now virtual. Elements which are found in
+        Segments (Notes, Rests etc.) now have their drawing origin at
+        Segment->x() and SStaff->y(). This allows moving of staffs without
+        the need of adjusting their position. Removed Measure->moveY().
+      - "crossbeams" (somewhat) work again
+      - lots of regressions expected
 7.1.8 (ws)
       - extended "new wizard" with title, composer, copyright etc. text
 6.1.8 (ws)

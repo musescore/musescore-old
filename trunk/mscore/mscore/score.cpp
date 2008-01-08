@@ -474,15 +474,13 @@ void Score::fixTicks()
 /**
  Return measure for canvas relative position \a p.
 
- If *rst != 0, then staff is fixed.
+ If *rst != -1, then staff is fixed.
 */
 
-MeasureBase* Score::pos2measure(const QPointF& p, int* tick, Staff** rst, int* pitch,
+MeasureBase* Score::pos2measure(const QPointF& p, int* tick, int* rst, int* pitch,
    Segment** seg, QPointF* offset) const
       {
-//      int voice = _padState.voice;            ?!?
-      int voice = 0; // _padState.voice;
-
+      int voice = 0;
       foreach (const Page* page, _layout->pages()) {
             // if (!page->contains(p))
             if (!page->abbox().contains(p))
@@ -513,7 +511,7 @@ MeasureBase* Score::pos2measure(const QPointF& p, int* tick, Staff** rst, int* p
                               return mb;
                         Measure* m = (Measure*)mb;
                         double sy1 = 0;
-                        if (rst && *rst == 0) {
+                        if (rst && *rst == -1) {
                               for (int i = 0; i < nstaves();) {
                                     double sy2;
 
@@ -544,7 +542,7 @@ MeasureBase* Score::pos2measure(const QPointF& p, int* tick, Staff** rst, int* p
                                                 }
                                           if (!ns || (pppp.x() < (segment->x() + (ns->x() - segment->x())/2.0))) {
                                                 i -= 1;
-                                                *rst = _staves[i];
+                                                *rst = i;
                                                 if (tick)
                                                       *tick = segment->tick();
                                                 if (pitch) {
@@ -584,13 +582,11 @@ MeasureBase* Score::pos2measure(const QPointF& p, int* tick, Staff** rst, int* p
                                     if (tick)
                                           *tick = segment->tick();
                                     if (pitch) {
-                                          int clef = (*rst)->clef()->clef(*tick);
+                                          int clef = staff(*rst)->clef()->clef(*tick);
                                           *pitch = y2pitch(pppp.y(), clef);
                                           }
                                     if (offset) {
-                                          //??
-                                          int staffIdx = _staves.indexOf(*rst);
-                                          SysStaff* staff = s->staff(staffIdx);
+                                          SysStaff* staff = s->staff(*rst);
                                           *offset = pppp - QPointF(segment->x(), staff->bbox().y());
                                           }
                                     if (seg)
@@ -617,7 +613,7 @@ MeasureBase* Score::pos2measure(const QPointF& p, int* tick, Staff** rst, int* p
  \a *line to the nearest staff line.
 */
 
-Measure* Score::pos2measure2(const QPointF& p, int* tick, Staff** rst, int* line,
+Measure* Score::pos2measure2(const QPointF& p, int* tick, int* rst, int* line,
    Segment** seg) const
       {
       int voice = _padState.voice;
@@ -682,7 +678,7 @@ Measure* Score::pos2measure2(const QPointF& p, int* tick, Staff** rst, int* line
                                           }
                                     if (!ns || (pppp.x() < (segment->x() + (ns->x() - segment->x())/2.0))) {
                                           i     -= 1;
-                                          *rst   = _staves[i];
+                                          *rst   = i;
                                           *tick  = segment->tick();
                                           *line  = lrint((pppp.y()-staff->bbox().y())/_spatium * 2);
                                           *seg   = segment;
@@ -1207,16 +1203,16 @@ void Score::adjustTime(int tick, MeasureBase* m)
 //    return false if no anchor found
 //---------------------------------------------------------
 
-bool Score::pos2TickAnchor(const QPointF& pos, Staff* staff, int* tick, QPointF* anchor) const
+bool Score::pos2TickAnchor(const QPointF& pos, int staffIdx, int* tick, QPointF* anchor) const
       {
       Segment* seg;
-      MeasureBase* m = pos2measure(pos, tick, &staff, 0, &seg, 0);
+      MeasureBase* m = pos2measure(pos, tick, &staffIdx, 0, &seg, 0);
       if (!m || m->type() != MEASURE) {
             printf("pos2TickAnchor: no measure found\n");
             return false;
             }
       System* system = m->system();
-      qreal y = system->staff(staff->idx())->bbox().y();
+      qreal y = system->staff(staffIdx)->bbox().y();
       *anchor = QPointF(seg->abbox().x(), y + system->canvasPos().y());
       return true;
       }

@@ -107,7 +107,7 @@ void Trill::read(QDomElement e)
 LineSegment* Trill::createLineSegment()
       {
       TrillSegment* seg = new TrillSegment(score());
-      seg->setStaff(staff());
+      seg->setStaffIdx(staffIdx());
       return seg;
       }
 

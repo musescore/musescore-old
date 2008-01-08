@@ -24,6 +24,7 @@
 #include "element.h"
 
 class Viewer;
+class Segment;
 
 enum {
       TSIG_FOUR_FOUR  = 0x40000104,
@@ -53,6 +54,7 @@ class TimeSig : public Element {
 
       virtual TimeSig* clone() const { return new TimeSig(*this); }
       virtual ElementType type() const { return TIMESIG; }
+      virtual QPointF canvasPos() const;      ///< position in canvas coordinates
       virtual void setSubtype(int val);
       virtual void draw(QPainter&) const;
       virtual void write(Xml& xml) const;
@@ -73,6 +75,7 @@ class TimeSig : public Element {
       static int sigtype(int n, int z1, int z2 = 0, int z3 = 0, int z4 = 0) {
             return (z4 << 24) + (z3 << 18) + (z2 << 12) + (z1 << 6) + n;
             }
+      Segment* segment() const { return (Segment*)parent(); }
       };
 
 #endif

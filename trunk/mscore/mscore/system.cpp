@@ -182,7 +182,7 @@ void System::layout(ScoreLayout* layout)
                         if (b == 0) {
                               ss->brackets[i] = b = new Bracket(score());
                               b->setParent(this);
-                              b->setStaff(s);
+                              b->setStaffIdx(staffIdx);
                               }
                         b->setSubtype(s->bracket(i));
                         int span = s->bracketSpan(i);
@@ -335,13 +335,6 @@ void System::layout2(ScoreLayout* layout)
                   }
             double sHeight = (staff->lines() - 1) * _spatium * staffMag;
             s->setbbox(QRectF(_leftMargin, y, width() - _leftMargin, sHeight));
-            // moveY measures
-            if (y != 0.0) {
-                  foreach(MeasureBase* m, ml) {
-                        if (m->type() == MEASURE)
-                              ((Measure*)m)->moveY(staffIdx, y);
-                        }
-                  }
             y += sHeight + s->distance();
             }
       qreal systemHeight = staff(staves-1)->bbox().bottom();
@@ -481,7 +474,7 @@ void System::setInstrumentName(int idx)
             staff->instrumentName->setDoc(s->shortName());
             }
       staff->instrumentName->setParent(this);
-      staff->instrumentName->setStaff(s);
+      staff->instrumentName->setStaffIdx(idx);
       }
 
 //---------------------------------------------------------

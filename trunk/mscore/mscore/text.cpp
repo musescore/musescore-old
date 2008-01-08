@@ -997,3 +997,4 @@ QLineF Text::dragAnchor() const
             x = (tw * .5);
       return QLineF(p1, QPointF(x, y) + canvasPos());
       }
+

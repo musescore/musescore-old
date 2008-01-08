@@ -351,7 +351,7 @@ void Staff::changeKeySig(int tick, int st)
 
       if (!removeFlag) {
             KeySig* keysig = new KeySig(_score);
-            keysig->setStaff(this);
+            keysig->setStaffIdx(idx());
             keysig->setTick(tick);
             int oldKey = _keymap->key(tick-1);
             keysig->setSig(oldKey, st);
@@ -450,7 +450,7 @@ void Staff::changeClef(int tick, int st)
 
       if (!removeFlag) {
             Clef* clef = new Clef(_score);
-            clef->setStaff(this);
+            clef->setStaffIdx(idx());
             clef->setTick(tick);
             clef->setSubtype(st);
 
@@ -473,5 +473,14 @@ void Staff::changeClef(int tick, int st)
 void Staff::setBarLineSpan(int val)
       {
       _barLineSpan = val;
+      }
+
+//---------------------------------------------------------
+//   height
+//---------------------------------------------------------
+
+double Staff::height() const
+      {
+      return _lines * _spatium * mag();
       }
 

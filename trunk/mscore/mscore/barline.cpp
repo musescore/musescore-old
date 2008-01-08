@@ -41,6 +41,22 @@ BarLine::BarLine(Score* s)
       }
 
 //---------------------------------------------------------
+//   canvasPos
+//---------------------------------------------------------
+
+QPointF BarLine::canvasPos() const
+      {
+      if (parent() == 0)
+            return pos();
+      double xp = x();
+      for (Element* e = parent(); e; e = e->parent())
+            xp += e->x();
+      System* system = measure()->system();
+      double yp = y() + system->staff(staffIdx())->y() + system->y();
+      return QPointF(xp, yp);
+      }
+
+//---------------------------------------------------------
 //   getY2
 //---------------------------------------------------------
 
@@ -54,7 +70,7 @@ double BarLine::getY2() const
             Segment* segment = (Segment*)parent();
             Measure* measure = segment->measure();
             System* system = measure->system();
-            y2 = system->staff(staffIdx2)->bbox().y() - system->staff(staffIdx1)->bbox().y();
+            y2 = system->staff(staffIdx2)->y() - system->staff(staffIdx1)->y();
             double staffMag = staff()->small() ? 0.7 : 1.0;
             Spatium barLineLen(4.0 * staffMag);
             y2 += barLineLen.point();
@@ -405,11 +421,11 @@ void BarLine::endEditDrag()
             staffIdx2 = staffIdx1;
       else {
             qreal ay = s->canvasPos().y();
-            qreal y  = s->staff(staffIdx1)->bbox().y() + ay;
-            qreal h1 = s->staff(staffIdx1)->bbox().height();
+            qreal y  = s->staff(staffIdx1)->y() + ay;
+            qreal h1 = staff()->lines() * _spatium * staff()->mag();
 
             for (staffIdx2 = staffIdx1 + 1; staffIdx2 < n; ++staffIdx2) {
-                  qreal h = s->staff(staffIdx2)->bbox().y() + ay - y;
+                  qreal h = s->staff(staffIdx2)->y() + ay - y;
                   if (ay2 < (y + (h + h1) * .5))
                         break;
                   y += h;

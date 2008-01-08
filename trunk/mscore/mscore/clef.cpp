@@ -74,6 +74,22 @@ Clef::Clef(Score* s, int i)
       }
 
 //---------------------------------------------------------
+//   canvasPos
+//---------------------------------------------------------
+
+QPointF Clef::canvasPos() const
+      {
+      if (parent() == 0)
+            return pos();
+      double xp = x();
+      for (Element* e = parent(); e; e = e->parent())
+            xp += e->x();
+      System* system = segment()->measure()->system();
+      double yp = y() + system->staff(staffIdx())->y() + system->y();
+      return QPointF(xp, yp);
+      }
+
+//---------------------------------------------------------
 //   layout
 //---------------------------------------------------------
 

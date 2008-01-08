@@ -52,12 +52,14 @@ class BarLine : public Element {
       virtual void draw(QPainter&) const;
       virtual QRectF bbox() const;
       virtual void space(double& min, double& extra) const;
+      virtual QPointF canvasPos() const;      ///< position in canvas coordinates
 
       virtual bool acceptDrop(Viewer*, const QPointF&, int, int) const;
       virtual Element* drop(const QPointF&, const QPointF&, Element*);
       void setSpan(int val)    { _span = val;  }
       int span() const         { return _span; }
       Segment* segment() const { return (Segment*)parent(); }
+      Measure* measure() const { return (Measure*)parent()->parent(); }
 
       virtual bool startEdit(const QPointF&);
       virtual void endEdit();

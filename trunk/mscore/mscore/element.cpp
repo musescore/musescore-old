@@ -54,6 +54,7 @@
 #include "tremolo.h"
 #include "layoutbreak.h"
 #include "repeat.h"
+#include "page.h"
 
 extern bool debugMode;
 extern bool showInvisible;
@@ -119,7 +120,7 @@ void Element::init()
       _visible    = true;
       _generated  = false;
       _voice      = 0;
-      _staff      = 0;
+      _staffIdx   = -1;
       _color      = Qt::black;
       _mxmlOff    = 0;
       _pos.setX(0.0);
@@ -152,9 +153,9 @@ Element::Element(Score* s)
 //   staffIdx
 //---------------------------------------------------------
 
-int Element::staffIdx() const
+Staff* Element::staff() const
       {
-      return _score->staves().indexOf(_staff);
+      return score()->staff(_staffIdx);
       }
 
 //---------------------------------------------------------
@@ -166,7 +167,7 @@ void Element::setTrack(int track)
       if (track < 0)
             return;
       setVoice(track % VOICES);
-      setStaff(score()->staff(track / VOICES));
+      setStaffIdx(track / VOICES);
       }
 
 //---------------------------------------------------------
@@ -209,36 +210,8 @@ QRectF Element::drag(const QPointF& s)
 QPointF Element::canvasPos() const
       {
       QPointF p(pos());
-      for (Element* e = _parent; e; e = e->parent())
-            p += e->pos();
-      return p;
-      }
-
-//---------------------------------------------------------
-//   mapToCanvas
-//    maps point to canvas coordinates
-//---------------------------------------------------------
-
-QPointF Element::mapToCanvas(const QPointF& pp) const
-      {
-      QPointF p(pp);
-      for (Element* e = _parent; e; e = e->parent())
-            p += e->pos();
-      return p;
-      }
-
-//---------------------------------------------------------
-//   mapToElement
-//    maps point to canvas coordinates
-//---------------------------------------------------------
-
-QPointF Element::mapToElement(const Element* e, const QPointF& pp) const
-      {
-      QPointF p(pp);
-      for (Element* ee = e->parent(); ee; ee = ee->parent())
-            p += ee->pos();
-      for (Element* e = _parent; e; e = e->parent())
-            p -= e->pos();
+      if (parent())
+            p += parent()->canvasPos();
       return p;
       }
 
@@ -538,6 +511,17 @@ StaffLines::StaffLines(Score* s)
       {
       setLines(5);
       _width = 1.0;      // dummy
+      }
+
+//---------------------------------------------------------
+//   canvasPos
+//---------------------------------------------------------
+
+QPointF StaffLines::canvasPos() const
+      {
+      System* system = measure()->system();
+      return QPointF(measure()->x() + system->x() + system->page()->x(),
+         system->staff(staffIdx())->y() + system->y());
       }
 
 //---------------------------------------------------------

@@ -281,7 +281,7 @@ void ScoreLayout::processSystemHeader(Measure* m)
                   int idx = staff->keymap()->key(tick);
                   if (idx) {
                         KeySig* ks = new KeySig(_score);
-                        ks->setStaff(staff);
+                        ks->setStaffIdx(i);
                         ks->setTick(tick);
                         ks->setGenerated(true);
                         ks->setSubtype(idx & 0xff);
@@ -295,7 +295,7 @@ void ScoreLayout::processSystemHeader(Measure* m)
                   //
                   int idx = staff->clef()->clef(tick);
                   Clef* cs = new Clef(_score, idx);
-                  cs->setStaff(staff);
+                  cs->setStaffIdx(i);
                   cs->setTick(tick);
                   cs->setGenerated(true);
                   Segment* s = m->getSegment(cs);
@@ -591,10 +591,10 @@ QList<System*> ScoreLayout::layoutSystemRow(qreal x, qreal y, qreal rowWidth,
                         Measure* m = (Measure*)lm;
                         Segment* s  = m->getSegment(Segment::SegTimeSigAnnounce, tick);
                         int nstaves = score()->nstaves();
-                        for (int staff = 0; staff < nstaves; ++staff) {
-                              if (s->element(staff * VOICES) == 0) {
+                        for (int staffIdx = 0; staffIdx < nstaves; ++staffIdx) {
+                              if (s->element(staffIdx * VOICES) == 0) {
                                     TimeSig* ts = new TimeSig(score(), sig2.denominator, sig2.nominator);
-                                    ts->setStaff(score()->staff(staff));
+                                    ts->setStaffIdx(staffIdx);
                                     ts->setGenerated(true);
                                     s->add(ts);
                                     needRelayout = true;

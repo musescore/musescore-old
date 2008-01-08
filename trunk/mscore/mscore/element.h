@@ -99,7 +99,7 @@ class Element {
       int _subtype;
 
       int _voice;               ///< 0 < VOICES
-      Staff* _staff;
+      int _staffIdx;
       MTime _time;
       QColor _color;
       double _mag;              ///< standard magnification (derived value)
@@ -158,10 +158,7 @@ class Element {
       virtual void move(double xd, double yd) { _pos += QPointF(xd, yd); }
       virtual void move(const QPointF& s)     { _pos += s;               }
 
-      QPointF canvasPos() const;          ///< position in canvas coordinates
-
-      QPointF mapToCanvas(const QPointF&) const;
-      QPointF mapToElement(const Element*, const QPointF&) const;
+      virtual QPointF canvasPos() const;      ///< position in canvas coordinates
 
       const QPointF& userOff() const          { return _userOff;  }
       void setUserOff(const QPointF& o)       { _userOff = o;     }
@@ -213,10 +210,10 @@ class Element {
       virtual void updateGrips(int* grips, QRectF*) const      { *grips = 0;       }
       virtual QPointF gripAnchor(int) const   { return QPointF(); }
 
-      Staff* staff() const                    { return _staff; }
-      int staffIdx() const;
-      void setStaff(Staff* v)                 { _staff = v;    }
-      int voice() const                       { return _voice; }
+      Staff* staff() const;
+      int staffIdx() const                    { return _staffIdx; }
+      virtual void setStaffIdx(int val)       { _staffIdx = val;  }
+      int voice() const                       { return _voice;    }
       int track() const                       { return staffIdx() * VOICES + voice(); }
       void setTrack(int val);
       void setVoice(int v)                    { _voice = v;    }
@@ -364,11 +361,13 @@ class StaffLines : public Element {
       StaffLines(Score*);
       virtual StaffLines* clone() const    { return new StaffLines(*this); }
       virtual ElementType type() const     { return STAFF_LINES; }
+      Measure* measure() const             { return (Measure*)parent(); }
       void setWidth(qreal v)               { _width = v;         }
       virtual QRectF bbox() const;
       virtual void draw(QPainter&) const;
       virtual void write(Xml& xml) const;
       virtual void read(QDomElement);
+      virtual QPointF canvasPos() const;   ///< position in canvas coordinates
       int lines() const                    { return subtype(); }
       void setLines(int val)               { setSubtype(val);  }
       };

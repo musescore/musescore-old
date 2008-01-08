@@ -211,7 +211,7 @@ void Volta::layout(ScoreLayout* layout)
 LineSegment* Volta::createLineSegment()
       {
       VoltaSegment* seg = new VoltaSegment(score());
-      seg->setStaff(staff());
+      seg->setStaffIdx(staffIdx());
       return seg;
       }
 
@@ -267,7 +267,7 @@ void Volta::write(Xml& xml) const
 
 void Volta::read(QDomElement e)
       {
-      setStaff(score()->staff(0));  // set default staff
+      setStaffIdx(0);  // set default staff
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             QString tag(e.tagName());
             if (tag == "text")

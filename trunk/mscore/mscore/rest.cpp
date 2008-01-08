@@ -207,7 +207,7 @@ void Rest::add(Element* e)
             return;
       e->setVoice(voice());
       e->setParent(this);
-      e->setStaff(staff());
+      e->setStaffIdx(staffIdx());
       attributes.push_back((NoteAttribute*)e);
       }
 

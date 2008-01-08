@@ -186,18 +186,18 @@ void Score::cmdAdd(Element* e)
 void Score::cmdAdd1(Element* e, const QPointF& pos, const QPointF& dragOffset)
       {
       e->setSelected(false);
-      Staff* staff = 0;
+      int staffIdx = -1;
       int pitch, tick;
       QPointF offset;
       Segment* segment;
-      MeasureBase* mb = pos2measure(pos, &tick, &staff, &pitch, &segment, &offset);
+      MeasureBase* mb = pos2measure(pos, &tick, &staffIdx, &pitch, &segment, &offset);
       if (mb == 0 || mb->type() != MEASURE) {
             printf("cmdAdd: cannot put object here\n");
             delete e;
             return;
             }
       Measure* measure = (Measure*)mb;
-      e->setStaff(staff);
+      e->setStaffIdx(staffIdx);
       e->setParent(_layout);
 
       // calculate suitable endposition
@@ -247,7 +247,6 @@ void Score::cmdAdd1(Element* e, const QPointF& pos, const QPointF& dragOffset)
                   dyn->setParent(measure);
 
                   System* s    = measure->system();
-                  int staffIdx = staff->idx();
                   QRectF sb(s->staff(staffIdx)->bbox());
                   sb.translate(s->pos() + s->page()->pos());
                   QPointF anchor(segment->abbox().x(), sb.topLeft().y());
@@ -611,7 +610,7 @@ void Score::setNote(int tick, int track, int pitch, int len)
 
             note = new Note(this);
             note->setPitch(pitch);
-            note->setStaff(staff(track / VOICES));
+            note->setStaffIdx(track / VOICES);
 
             if (seq && mscore->playEnabled()) {
                   seq->startNote(note->staff()->midiChannel(), note->pitch(), 64);
@@ -624,7 +623,7 @@ void Score::setNote(int tick, int track, int pitch, int len)
             Chord* chord = new Chord(this);
             chord->setTick(tick);
             chord->setVoice(track % VOICES);
-            chord->setStaff(staff(track / VOICES));
+            chord->setStaffIdx(track / VOICES);
             chord->add(note);
             chord->setTickLen(noteLen);
             chord->setStemDirection(preferences.stemDir[track % VOICES]);
@@ -654,13 +653,13 @@ void Score::setNote(int tick, int track, int pitch, int len)
             //  next part of note
             tie = new Tie(this);
             tie->setStartNote(note);
-            tie->setStaff(note->staff());
+            tie->setStaffIdx(note->staffIdx());
             note->setTieFor(tie);
             }
       if (note && addTie) {
             tie = new Tie(this);
             tie->setStartNote(note);
-            tie->setStaff(note->staff());
+            tie->setStaffIdx(note->staffIdx());
             note->setTieFor(tie);
             }
       _layout->connectTies();
@@ -675,13 +674,13 @@ void Score::setGraceNote(int tick, int track,  int pitch, NoteType type)
       tick -= 240;
       Note* note = new Note(this);
       note->setPitch(pitch);
-      note->setStaff(staff(track / VOICES));
+      note->setStaffIdx(track / VOICES);
 
       Measure* measure = tick2measure(tick);
       Chord* chord = new Chord(this);
       chord->setTick(tick);
       chord->setVoice(track % VOICES);
-      chord->setStaff(staff(track / VOICES));
+      chord->setStaffIdx(track / VOICES);
       chord->add(note);
       chord->setTickLen(0);
       chord->setTickOffset(-240);
@@ -842,7 +841,7 @@ void Score::cmdAddText(int subtype)
                   if (el->type() == NOTE)
                         el = el->parent();
                   s = new Text(this);
-                  s->setStaff(el->staff());
+                  s->setStaffIdx(el->staffIdx());
                   s->setSubtype(subtype);
                   s->setParent(((ChordRest*)el)->measure());
                   s->setTick(el->tick());
@@ -949,10 +948,9 @@ Measure* Score::appendMeasure()
       Measure* measure  = new Measure(this);
       measure->setTick(tick);
 
-      for (int idx = 0; idx < nstaves(); ++idx) {
+      for (int staffIdx = 0; staffIdx < nstaves(); ++staffIdx) {
             Rest* rest = new Rest(this, tick, 0);
-            Staff* staffp = staff(idx);
-            rest->setStaff(staffp);
+            rest->setStaffIdx(staffIdx);
             Segment* s = measure->getSegment(rest);
             s->add(rest);
             }
@@ -1024,10 +1022,9 @@ void Score::insertMeasures(int n, int type)
 		m->setTick(tick);
             if (type == MEASURE) {
       		m->setTickLen(ticks);
-	      	for (int idx = 0; idx < nstaves(); ++idx) {
+	      	for (int staffIdx = 0; staffIdx < nstaves(); ++staffIdx) {
 		      	Rest* rest    = new Rest(this, tick, 0);  // whole measure rest
-      			Staff* staffp = staff(idx);
-	      		rest->setStaff(staffp);
+	      		rest->setStaffIdx(staffIdx);
 		      	Segment* s = ((Measure*)m)->getSegment(rest);
 			      s->add(rest);
 		            }

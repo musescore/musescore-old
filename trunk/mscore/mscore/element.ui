@@ -264,6 +264,12 @@
             <verstretch>0</verstretch>
            </sizepolicy>
           </property>
+          <property name="specialValueText" >
+           <string>invalid</string>
+          </property>
+          <property name="minimum" >
+           <number>0</number>
+          </property>
          </widget>
         </item>
         <item>

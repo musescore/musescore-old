@@ -135,6 +135,7 @@ Measure::Measure(Score* s)
             MStaff* s    = new MStaff;
             Staff* staff = score()->staff(staffIdx);
             s->lines     = new StaffLines(score());
+            s->lines->setStaffIdx(staffIdx);
             s->lines->setLines(staff->lines());
             s->lines->setMag(staff->small() ? 0.7 : 1.0);
             s->lines->setParent(this);
@@ -963,32 +964,6 @@ void Measure::moveTicks(int diff)
       }
 
 //---------------------------------------------------------
-//   moveY
-//---------------------------------------------------------
-
-void Measure::moveY(int staff, double dy)
-      {
-      for (Segment* segment = first(); segment; segment = segment->next()) {
-            for (int track = staff*VOICES; track < staff*VOICES+VOICES; ++track) {
-                  Element* e = segment->element(track);
-                  if (e)
-                        e->move(0, dy);
-                  }
-            LyricsList* ll = segment->lyricsList(staff);
-            foreach(Lyrics* ly, *ll)
-                  ly->move(0, dy);
-            }
-      foreach(Tuplet* tuplet, _tuplets)
-            tuplet->move(0, dy);
-      if (_noText)
-            _noText->move(0, dy);
-
-      MStaff* ms = staves[staff];
-      if (ms->lines)
-            ms->lines->move(0, dy);
-      }
-
-//---------------------------------------------------------
 //   Space
 //---------------------------------------------------------
 
@@ -1509,6 +1484,7 @@ void Measure::cmdAddStaves(int sStaff, int eStaff)
             Staff* staff = _score->staff(i);
             MStaff* ms   = new MStaff;
             ms->lines    = new StaffLines(score());
+            ms->lines->setStaffIdx(i);
             ms->lines->setLines(staff->lines());
             ms->lines->setMag(staff->small() ? 0.7 : 1.0);
             ms->lines->setParent(this);
@@ -1517,16 +1493,25 @@ void Measure::cmdAddStaves(int sStaff, int eStaff)
             score()->undoOp(UndoOp::InsertMStaff, this, ms, i);
 
             Rest* rest = new Rest(score(), tick(), 0);
-            rest->setStaff(staff);
+            rest->setStaffIdx(i);
             Segment* s = findSegment(Segment::SegChordRest, tick());
             rest->setParent(s);
             score()->undoAddElement(rest);
 
             // replicate time signature
             if (ts) {
-                  TimeSig* timesig = new TimeSig(*(TimeSig*)ts->element(0));
-                  timesig->setStaff(staff);
-                  score()->undoAddElement(timesig);
+                  TimeSig* ots = 0;
+                  for (int staffIdx = 0; staffIdx < staves.size(); ++staffIdx) {
+                        if (ts->element(staffIdx)) {
+                              ots = (TimeSig*)ts->element(staffIdx);
+                              break;
+                              }
+                        }
+                  if (ots) {
+                        TimeSig* timesig = new TimeSig(*ots);
+                        timesig->setStaffIdx(i);
+                        score()->undoAddElement(timesig);
+                        }
                   }
             }
       }
@@ -1557,7 +1542,7 @@ void Measure::insertStaff(Staff* staff, int staffIdx)
       {
       insertStaff1(staff, staffIdx);
       Rest* rest = new Rest(score(), tick(), _score->sigmap->ticksMeasure(tick()));
-      rest->setStaff(staff);
+      rest->setStaffIdx(staffIdx);
       }
 
 //---------------------------------------------------------
@@ -1684,10 +1669,10 @@ Element* Measure::drop(const QPointF& p, const QPointF& /*offset*/, Element* e)
       {
       // determine staff
       System* s = system();
-      int idx = s->y2staff(p.y());
-      if (idx == -1)
+      int staffIdx = s->y2staff(p.y());
+      if (staffIdx == -1)
             return 0;
-      Staff* staff = score()->staff(idx);
+      Staff* staff = score()->staff(staffIdx);
 
       // convert p from canvas to measure relative position and take x coordinate
       QPointF mrp = p - pos() - system()->pos() - system()->page()->pos();
@@ -1700,14 +1685,14 @@ Element* Measure::drop(const QPointF& p, const QPointF& /*offset*/, Element* e)
 
             case STAFF_LIST:
 printf("drop staffList\n");
-//TODO                  score()->pasteStaff(e, this, idx);
+//TODO                  score()->pasteStaff(e, this, staffIdx);
                   delete e;
                   break;
 
             case MARKER:
             case JUMP:
                   e->setParent(this);
-                  e->setStaff(score()->staff(0));
+                  e->setStaffIdx(0);
                   score()->cmdAdd(e);
                   break;
 
@@ -1750,7 +1735,7 @@ printf("drop staffList\n");
                         delete lb;
                         break;
                         }
-                  lb->setStaff(staff);
+                  lb->setStaffIdx(staffIdx);
                   lb->setParent(this);
                   score()->cmdAdd(lb);
                   return lb;
@@ -1810,7 +1795,7 @@ printf("drop staffList\n");
                         if (s->subtype() == Segment::SegChordRest)
                               rmFlag = true;
                         if (rmFlag) {
-                              int strack = idx * VOICES;
+                              int strack = staffIdx * VOICES;
                               int etrack = strack + VOICES;
                               for (int track = strack; track < etrack; ++track) {
                                     Element* el = s->element(track);
@@ -1833,11 +1818,11 @@ printf("drop staffList\n");
                         }
                   RepeatMeasure* rm = new RepeatMeasure(_score);
                   rm->setTick(tick());
-                  rm->setStaff(staff);
+                  rm->setStaffIdx(staffIdx);
                   rm->setParent(seg);
                   _score->undoAddElement(rm);
                   foreach(Element* el, _el) {
-                        if (el->type() == SLUR && el->staffIdx() == idx)
+                        if (el->type() == SLUR && el->staffIdx() == staffIdx)
                               _score->undoRemoveElement(el);
                         }
                   _score->select(rm, 0, 0);
@@ -1930,7 +1915,6 @@ void Measure::adjustToLen(int ol, int nl)
       int diff   = nl - ol;
 
       for (int staffIdx = 0; staffIdx < staves; ++staffIdx) {
-            Staff* staffp = score()->staff(staffIdx);
             int rests  = 0;
             int chords = 0;
             Rest* rest = 0;
@@ -1984,7 +1968,7 @@ void Measure::adjustToLen(int ol, int nl)
                                     score()->undoAddElement(seg);
                                     }
                               rest = new Rest(score(), rtick, n);
-                              rest->setStaff(staffp);
+                              rest->setStaffIdx(staffIdx);
                               rest->setVoice(voice);
                               seg->add(rest);
                               }
@@ -2149,7 +2133,7 @@ void Measure::read(QDomElement e, int idx)
                   Chord* chord = new Chord(score());
                   chord->setTick(score()->curTick);   // set default tick position
                   chord->setParent(this);             // only for reading tuplets
-                  chord->setStaff(staff);
+                  chord->setStaffIdx(idx);
                   chord->read(e, idx);
                   Segment* s = getSegment(chord);
                   s->add(chord);
@@ -2158,7 +2142,7 @@ void Measure::read(QDomElement e, int idx)
             else if (tag == "Breath") {
                   Breath* breath = new Breath(score());
                   breath->setTick(score()->curTick);
-                  breath->setStaff(staff);
+                  breath->setStaffIdx(idx);
                   breath->read(e);
                   Segment* s = getSegment(Segment::SegBreath, breath->tick());
                   s->add(breath);
@@ -2168,7 +2152,7 @@ void Measure::read(QDomElement e, int idx)
                   Chord* chord = new Chord(score());
                   chord->setTick(score()->curTick);   // set default tick position
                   chord->setParent(this);       // only for reading tuplets
-                  chord->setStaff(staff);
+                  chord->setStaffIdx(idx);
                   chord->readNote(e, idx);
                   Segment* s = getSegment(chord);
                   s->add(chord);
@@ -2178,7 +2162,7 @@ void Measure::read(QDomElement e, int idx)
                   Rest* rest = new Rest(score());
                   rest->setTick(score()->curTick);    // set default tick position
                   rest->setParent(this);              // only for reading tuplets
-                  rest->setStaff(staff);
+                  rest->setStaffIdx(idx);
                   rest->read(e);
                   Segment* s = getSegment(rest);
                   s->add(rest);
@@ -2188,7 +2172,7 @@ void Measure::read(QDomElement e, int idx)
                   RepeatMeasure* rm = new RepeatMeasure(score());
                   rm->setTick(score()->curTick);    // set default tick position
                   rm->setParent(this);
-                  rm->setStaff(staff);
+                  rm->setStaffIdx(idx);
                   rm->read(e);
                   Segment* s = getSegment(Segment::SegChordRest, rm->tick());
                   s->add(rm);
@@ -2197,7 +2181,7 @@ void Measure::read(QDomElement e, int idx)
             else if (tag == "Clef") {
                   Clef* clef = new Clef(score());
                   clef->setTick(score()->curTick);
-                  clef->setStaff(staff);
+                  clef->setStaffIdx(idx);
                   clef->read(e);
                   Segment* s = getSegment(clef);
                   s->add(clef);
@@ -2206,7 +2190,7 @@ void Measure::read(QDomElement e, int idx)
             else if (tag == "TimeSig") {
                   TimeSig* ts = new TimeSig(score());
                   ts->setTick(score()->curTick);
-                  ts->setStaff(staff);
+                  ts->setStaffIdx(idx);
                   ts->read(e);
                   Segment* s = getSegment(ts);
                   s->add(ts);
@@ -2215,7 +2199,7 @@ void Measure::read(QDomElement e, int idx)
             else if (tag == "KeySig") {
                   KeySig* ks = new KeySig(score());
                   ks->setTick(score()->curTick);
-                  ks->setStaff(staff);
+                  ks->setStaffIdx(idx);
                   ks->read(e);
                   int oldSig = staff->keymap()->key(score()->curTick - 1);
                   ks->setSig(oldSig, ks->subtype() & 0xff);
@@ -2226,7 +2210,7 @@ void Measure::read(QDomElement e, int idx)
             else if (tag == "Dynamic") {
                   Dynamic* dyn = new Dynamic(score());
                   dyn->setTick(score()->curTick);
-                  dyn->setStaff(staff);
+                  dyn->setStaffIdx(idx);
                   dyn->read(e);
                   add(dyn);
                   score()->curTick = dyn->tick();
@@ -2234,7 +2218,7 @@ void Measure::read(QDomElement e, int idx)
             else if (tag == "Lyrics") {
                   Lyrics* lyrics = new Lyrics(score());
                   lyrics->setTick(score()->curTick);
-                  lyrics->setStaff(staff);
+                  lyrics->setStaffIdx(idx);
                   lyrics->read(e);
                   Segment* segment = tick2segment(lyrics->tick());
                   if (segment == 0) {
@@ -2251,7 +2235,7 @@ void Measure::read(QDomElement e, int idx)
                   t->read(e);
                   if (t->anchor() != ANCHOR_PARENT)
                         score()->curTick = t->tick();
-                  t->setStaff(staff);
+                  t->setStaffIdx(idx);
                   switch(t->subtype()) {
                         case TEXT_TITLE:
                         case TEXT_SUBTITLE:
@@ -2278,7 +2262,7 @@ void Measure::read(QDomElement e, int idx)
             else if (tag == "Tempo") {
                   TempoText* t = new TempoText(score());
                   t->setTick(score()->curTick);
-                  t->setStaff(staff);
+                  t->setStaffIdx(idx);
                   t->read(e);
                   add(t);
                   score()->curTick = t->tick();
@@ -2286,7 +2270,7 @@ void Measure::read(QDomElement e, int idx)
             else if (tag == "Symbol") {
                   Symbol* sym = new Symbol(score());
                   sym->setTick(score()->curTick);
-                  sym->setStaff(staff);
+                  sym->setStaffIdx(idx);
                   sym->read(e);
                   add(sym);
                   score()->curTick = sym->tick();
@@ -2295,7 +2279,7 @@ void Measure::read(QDomElement e, int idx)
                   _userStretch = val.toDouble();
             else if (tag == "LayoutBreak") {
                   LayoutBreak* lb = new LayoutBreak(score());
-                  lb->setStaff(staff);
+                  lb->setStaffIdx(idx);
                   lb->read(e);
                   add(lb);
                   }
@@ -2304,18 +2288,18 @@ void Measure::read(QDomElement e, int idx)
             else if (tag == "Tuplet") {
                   Tuplet* tuplet = new Tuplet(score());
                   tuplet->read(e);
-                  tuplet->setStaff(staff);
+                  tuplet->setStaffIdx(idx);
                   add(tuplet);
                   }
             else if (tag == "Marker") {
                   Marker* marker = new Marker(score());
-                  marker->setStaff(staff);
+                  marker->setStaffIdx(idx);
                   marker->read(e);
                   add(marker);
                   }
             else if (tag == "Jump") {
                   Jump* jump = new Jump(score());
-                  jump->setStaff(staff);
+                  jump->setStaffIdx(idx);
                   jump->read(e);
                   add(jump);
                   }
@@ -2388,7 +2372,7 @@ void Measure::read(QDomElement e)
                   Text* t = new Text(score());
                   t->read(e);
                   t->setTick(curTickPos);
-                  t->setStaff(0);
+                  t->setStaffIdx(0);
                   add(t);
                   }
             else
@@ -2478,7 +2462,7 @@ void Measure::createVoice(int track)
                   continue;
             if (s->element(track) == 0) {
                   Rest* rest = new Rest(score(), tick(), 0);
-                  rest->setStaff(score()->staff(track / VOICES));
+                  rest->setStaffIdx(track / VOICES);
                   rest->setParent(s);
                   rest->setVoice(track % VOICES);
                   score()->undoAddElement(rest);
@@ -2515,7 +2499,7 @@ bool Measure::setStartRepeatBarLine(bool val)
                   }
             if (!found && val) {
                   BarLine* bl = new BarLine(score());
-                  bl->setStaff(staff);
+                  bl->setStaffIdx(track / VOICES);
                   bl->setSubtype(START_REPEAT);
                   bl->setGenerated(true);
                   Segment* seg = getSegment(Segment::SegStartRepeatBarLine, tick());
@@ -2555,7 +2539,7 @@ bool Measure::createEndBarLines()
             else {
                   if (bl == 0) {
                         bl = new BarLine(score());
-                        bl->setStaff(staff);
+                        bl->setStaffIdx(staff->idx());
                         Segment* seg = getSegment(Segment::SegEndBarLine, tick() + tickLen());
                         seg->add(bl);
                         changed = true;
@@ -2592,5 +2576,19 @@ void Measure::setEndBarLineType(int val, bool g)
 void Measure::setRepeatFlags(int val)
       {
       _repeatFlags = val;
+      }
+
+//---------------------------------------------------------
+//   fixStaffIdx
+//---------------------------------------------------------
+
+void Measure::fixStaffIdx()
+      {
+      for (Segment* seg = first(); seg; seg = seg->next())
+            seg->fixStaffIdx();
+      for (int staffIdx = 0; staffIdx < staves.size(); ++staffIdx) {
+            if (staves[staffIdx]->lines)
+                  staves[staffIdx]->lines->setStaffIdx(staffIdx);
+            }
       }
 

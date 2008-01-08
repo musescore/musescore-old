@@ -201,7 +201,7 @@ Rest* Score::setRest(int tick, int len, int track, Measure* measure)
             }
       if (rest) {
             rest->setVoice(track % VOICES);
-            rest->setStaff(staff(track / VOICES));
+            rest->setStaffIdx(track / VOICES);
             Segment::SegmentType st = Segment::segmentType(rest->type());
             Segment* seg = measure->findSegment(st, tick);
             if (seg == 0) {
@@ -360,9 +360,9 @@ void Score::changeTimeSig(int tick, int timeSigSubtype)
 void Score::addTimeSig(int tick, int timeSigSubtype)
       {
       Measure* measure = tick2measure(tick);
-      foreach(Staff* staff, _staves) {
+      for (int staffIdx = 0; staffIdx < _staves.size(); ++staffIdx) {
             TimeSig* nsig = new TimeSig(this, timeSigSubtype);
-            nsig->setStaff(staff);
+            nsig->setStaffIdx(staffIdx);
             nsig->setTick(tick);
             Segment::SegmentType st = Segment::segmentType(TIMESIG);
             Segment* seg = measure->findSegment(st, tick);
@@ -384,8 +384,8 @@ void Score::addTimeSig(int tick, int timeSigSubtype)
 void Score::putNote(const QPointF& pos, bool addToChord)
       {
       int tick, pitch;
-      Staff* staff = 0;
-      MeasureBase* mb = pos2measure(pos, &tick, &staff, &pitch, 0, 0);
+      int staffIdx = -1;
+      MeasureBase* mb = pos2measure(pos, &tick, &staffIdx, &pitch, 0, 0);
 
       if (mb == 0 || mb->type() != MEASURE || pitch < 0 || pitch > 127) {
             printf("cannot put note/rest at this position, bad pitch %d!\n", pitch);
@@ -395,7 +395,7 @@ void Score::putNote(const QPointF& pos, bool addToChord)
 
       int len   = _padState.tickLen;
       int voice = _padState.voice;
-      int track = staff->idx() * VOICES + voice;
+      int track = staffIdx * VOICES + voice;
 
       if (addToChord) {
             ChordRest* el = 0;
@@ -438,7 +438,7 @@ void Score::putNote(const QPointF& pos, bool addToChord)
             else
                   setNote(tick, track, pitch, len);
             }
-      _is.track       = _staves.indexOf(staff) + voice;
+      _is.track       = staffIdx * VOICES + voice;
       _padState.pitch = pitch;
       _is.pos         = tick + len;
       }
@@ -498,10 +498,10 @@ Slur* Score::cmdAddSlur()
             }
       Note* note   = (Note*)(e);
       Chord* chord = note->chord();
-      Staff* staff = chord->staff();
+      int staffIdx = chord->staffIdx();
       int voice    = chord->voice();
 
-      int track = chord->staffIdx() * VOICES + voice;
+      int track = staffIdx * VOICES + voice;
       int tick2 = nextSeg(chord->tick(), track);
 
       if (tick2 == 0) {
@@ -509,7 +509,7 @@ Slur* Score::cmdAddSlur()
             return 0;
             }
       Slur* slur = new Slur(this);
-      slur->setStaff(staff);
+      slur->setStaffIdx(staffIdx);
       slur->setStart(chord->tick(), track);
       slur->setEnd(tick2, track);
       slur->setParent(_layout);
@@ -532,7 +532,7 @@ void Score::cmdAddTie()
 
       Note* note    = (Note*)(e);
       Chord* chord  = note->chord();
-      Staff* staff  = chord->staff();
+      int staffIdx  = chord->staffIdx();
       ChordRest* el = nextChordRest(chord);
       if (el == 0 || el->type() != CHORD) {
             printf("at end\n");
@@ -554,7 +554,7 @@ void Score::cmdAddTie()
       Tie* tie = new Tie(this);
       tie->setStartNote(note);
       tie->setEndNote(note);
-      tie->setStaff(staff);
+      tie->setStaffIdx(staffIdx);
       note->setTieFor(tie);
       _layout->connectTies();
       layoutAll = true;
@@ -669,12 +669,12 @@ void Score::cmdAddBSymbol(BSymbol* s, const QPointF& pos, const QPointF& off)
       s->setSelected(false);
 
       if (s->anchor() == ANCHOR_STAFF) {
-            Staff* staff = 0;
+            int staffIdx = -1;
             int pitch, tick;
             QPointF offset;
             Segment* segment;
 
-            MeasureBase* measure = pos2measure(pos, &tick, &staff, &pitch, &segment, &offset);
+            MeasureBase* measure = pos2measure(pos, &tick, &staffIdx, &pitch, &segment, &offset);
             if (measure == 0 || measure->type() != MEASURE) {
                   printf("addSymbol: cannot put symbol here: no measure\n");
                   delete s;
@@ -684,7 +684,7 @@ void Score::cmdAddBSymbol(BSymbol* s, const QPointF& pos, const QPointF& off)
             s->setPos(segment->x(), 0.0);
             s->setUserOff(offset / _spatium);
             s->setTick(segment->tick());
-            s->setStaff(staff);
+            s->setStaffIdx(staffIdx);
             s->setParent(measure);
             }
       else if (s->anchor() == ANCHOR_PARENT) {
@@ -706,7 +706,7 @@ void Score::cmdAddBSymbol(BSymbol* s, const QPointF& pos, const QPointF& off)
                               }
                         s->setPos(0.0, 0.0);
                         s->setUserOff((pos - page->pos() - off) / _spatium);
-                        s->setStaff(0);
+                        s->setStaffIdx(0);
                         s->setParent(m);
                         foundPage = true;
                         break;
@@ -735,17 +735,17 @@ void Score::cmdAddBSymbol(BSymbol* s, const QPointF& pos, const QPointF& off)
 
 Element* Score::cmdAddHairpin(Hairpin* pin, const QPointF& pos)
       {
-      Staff* staff = 0;
+      int staffIdx = -1;
       int pitch, tick1;
       QPointF offset;
       Segment* segment;
-      MeasureBase* measure = pos2measure(pos, &tick1, &staff, &pitch, &segment, &offset);
+      MeasureBase* measure = pos2measure(pos, &tick1, &staffIdx, &pitch, &segment, &offset);
       if (measure == 0 || measure->type() != MEASURE) {
             printf("addHairpin: cannot put object here\n");
             delete pin;
             return 0;
             }
-      pin->setStaff(staff);
+      pin->setStaffIdx(staffIdx);
       pin->setParent(measure);
       cmdAdd(pin);
       return pin;
@@ -826,7 +826,7 @@ void Score::deleteItem(Element* el)
                         // voice 0 chords are always replaced by rests
                         //
                         Rest* rest   = new Rest(this, chord->tick(), chord->tickLen());
-                        rest->setStaff(el->staff());
+                        rest->setStaffIdx(el->staffIdx());
                         rest->setParent(chord->parent());
                         rest->setVoice(el->voice());
                         undoAddElement(rest);
@@ -981,8 +981,7 @@ void Score::cmdDeleteSelection()
                               undoAddElement(seg);
                               }
                         Rest* rest    = new Rest(this, m->tick(), 0);
-                        Staff* staffp = staff(staffIdx);
-                        rest->setStaff(staffp);
+                        rest->setStaffIdx(staffIdx);
                         rest->setParent(seg);
                         undoAddElement(rest);
                         foreach(Element* el, *m->el()) {
@@ -1068,7 +1067,7 @@ void Score::chordTab(bool back)
             cn = new Text(this);
             cn->setSubtype(TEXT_CHORD);
             cn->setTick(segment->tick());
-            cn->setStaff(ocn->staff());
+            cn->setStaffIdx(ocn->staffIdx());
             cn->setParent(measure);
             undoAddElement(cn);
             }
@@ -1144,7 +1143,7 @@ void Score::lyricsTab(bool back)
             }
 
       lyrics->setTick(segment->tick());
-      lyrics->setStaff(oldLyrics->staff());
+      lyrics->setStaffIdx(oldLyrics->staffIdx());
       lyrics->setParent(segment);
       lyrics->setNo(oldLyrics->no());
       undoAddElement(lyrics);
@@ -1203,7 +1202,7 @@ void Score::lyricsMinus()
       lyrics->setSyllabic(Lyrics::END);
 
       lyrics->setTick(segment->tick());
-      lyrics->setStaff(oldLyrics->staff());
+      lyrics->setStaffIdx(oldLyrics->staffIdx());
       lyrics->setParent(segment);
       lyrics->setNo(oldLyrics->no());
       undoAddElement(lyrics);
@@ -1233,7 +1232,7 @@ void Score::lyricsReturn()
 
       lyrics = new Lyrics(this);
       lyrics->setTick(segment->tick());
-      lyrics->setStaff(oldLyrics->staff());
+      lyrics->setStaffIdx(oldLyrics->staffIdx());
       lyrics->setParent(segment);
       lyrics->setNo(oldLyrics->no() + 1);
       undoAddElement(lyrics);
@@ -1291,7 +1290,7 @@ void Score::addLyrics()
             no = ll->size();
       lyrics = new Lyrics(this);
       lyrics->setTick(tick);
-      lyrics->setStaff(chord->staff());
+      lyrics->setStaffIdx(chord->staffIdx());
       lyrics->setParent(segment);
       lyrics->setNo(no);
       undoAddElement(lyrics);
@@ -1340,9 +1339,7 @@ void Score::cmdTuplet(int n)
       //---------------------------------------------------
 
       int voice    = chord->voice();
-      Staff* staff = chord->staff();
-//      int staffIdx = chord->staffIdx();
-//      int track    = staffIdx * VOICES + voice;
+      int staffIdx = chord->staffIdx();
       int tick     = chord->tick();
       int pitch    = note->pitch();
 
@@ -1356,7 +1353,7 @@ void Score::cmdTuplet(int n)
       tuplet->setNormalNotes(normalNotes);
       tuplet->setActualNotes(actualNotes);
       tuplet->setBaseLen(baseLen);
-      tuplet->setStaff(staff);
+      tuplet->setStaffIdx(staffIdx);
       Measure* measure = chord->measure();
       tuplet->setParent(measure);
       undoAddElement(tuplet);
@@ -1365,13 +1362,13 @@ void Score::cmdTuplet(int n)
 
       note = new Note(this);
       note->setPitch(pitch);
-      note->setStaff(staff);
+      note->setStaffIdx(staffIdx);
 
       chord = new Chord(this);
       chord->setTick(tick);
       chord->setTuplet(tuplet);
       chord->setVoice(voice);
-      chord->setStaff(staff);
+      chord->setStaffIdx(staffIdx);
       chord->add(note);
 
       chord->setTickLen(ticks);
@@ -1389,9 +1386,8 @@ void Score::cmdTuplet(int n)
             Rest* rest = new Rest(this);
             rest->setTick(tick);
             rest->setTuplet(tuplet);
-//            tuplet->add(rest);
             rest->setVoice(voice);
-            rest->setStaff(staff);
+            rest->setStaffIdx(staffIdx);
             rest->setTickLen(ticks);
             Segment::SegmentType st = Segment::segmentType(rest->type());
             Segment* seg = measure->findSegment(st, tick);
