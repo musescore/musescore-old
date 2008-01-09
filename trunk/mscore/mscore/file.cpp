@@ -883,9 +883,16 @@ printerMag = DPI / oldDPI;
       doLayout();
 
       QList<const Element*> el;
-      foreach (const Page* page, _layout->pages()) {
+      const QList<Page*> pl = _layout->pages();
+      int pages = pl.size();
+      for (int n = 0; n < pages; ++n) {
+            if (n)
+                  printer->newPage();
+            const Page* page = pl.at(n);
             el.clear();
             page->collectElements(el);
+            foreach (const Element* element, *mainLayout()->gel())
+                  element->collectElements(el);
             foreach(System* system, *page->systems()) {
                   foreach(MeasureBase* m, system->measures()) {
                         m->collectElements(el);
@@ -901,7 +908,6 @@ printerMag = DPI / oldDPI;
                   e->draw(p);
                   p.translate(-ap);
                   }
-            printer->newPage();
             }
       p.end();
       _printing = false;
