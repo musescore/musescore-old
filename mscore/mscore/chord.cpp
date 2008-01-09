@@ -303,12 +303,6 @@ QRectF Chord::bbox() const
             _bbox |= _arpeggio->bbox().translated(_arpeggio->pos());
       if (_stemSlash)
             _bbox |= _stemSlash->bbox().translated(_stemSlash->pos());
-      if (noteType() != NOTE_NORMAL) {
-            printf("grace width %f = %f %f %f\n",
-               _bbox.width(),
-               upNote()->pos().x(), _hook->pos().x(), _stem->pos().x());
-//            abort();
-            }
       return _bbox;
       }
 
