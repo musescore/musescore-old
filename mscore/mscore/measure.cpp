@@ -137,7 +137,7 @@ Measure::Measure(Score* s)
             s->lines     = new StaffLines(score());
             s->lines->setStaffIdx(staffIdx);
             s->lines->setLines(staff->lines());
-            s->lines->setMag(staff->small() ? 0.7 : 1.0);
+            s->lines->setMag(staff->mag());
             s->lines->setParent(this);
             staves.push_back(s);
             }
@@ -332,6 +332,7 @@ static void initLineList(char* ll, int key)
 
 //---------------------------------------------------------
 //   layoutChord
+//    only called from layoutNoteHeads
 //---------------------------------------------------------
 
 void Measure::layoutChord(Chord* chord, char* tversatz)
@@ -442,8 +443,8 @@ void Measure::layoutChord(Chord* chord, char* tversatz)
                   }
             if (accCol > 5)
                   accCol = 0;
-            double x = - point(score()->style()->prefixNoteDistance) * ac->mag();
-            x  -= ac->width();
+            double x = -point(score()->style()->prefixNoteDistance) * ac->mag();
+            x  -= ac->width() + ac->bbox().x();
             x  *= (accCol + 1);
             if (mirror)
                   x -= note->headWidth();
@@ -470,14 +471,15 @@ void Measure::layoutNoteHeads(int staff)
       initLineList(tversatz, key);
 
       for (Segment* segment = first(); segment; segment = segment->next()) {
+            if ((segment->subtype() != Segment::SegChordRest) && (segment->subtype() != Segment::SegGrace))
+                  continue;
             int startTrack = staff * VOICES;
             int endTrack   = startTrack + VOICES;
             for (int track = startTrack; track < endTrack; ++track) {
                   Element* e = segment->element(track);
                   if (e == 0 || e->type() != CHORD)
                         continue;
-                  Chord* chord   = (Chord*)e;
-                  layoutChord(chord, tversatz);
+                  layoutChord((Chord*)e, tversatz);
                   }
             }
       }
@@ -575,16 +577,20 @@ double Measure::tick2pos(int tck) const
 
 //---------------------------------------------------------
 //   layout2
+//    called after page layout
 //---------------------------------------------------------
 
 void Measure::layout2(ScoreLayout* layout)
       {
       if (parent() == 0)
             return;
+      layoutBeams(layout);
+
       foreach(const MStaff* ms, staves) {
             StaffLines* lines = ms->lines;
             lines->setWidth(width());
             }
+
       foreach(Element* element, _el) {
             element->layout(layout);
             if (element->anchor() == ANCHOR_SEGMENT) {
@@ -985,6 +991,7 @@ class Space {
       void setExtra(double e)       { _extra = e; }
       void setMin(double m)         { _min = m; }
       void addMin(double m)         { _min += m; }
+      void addExtra(double m)       { _extra += m; }
       void max(const Space& s) {
             if (s._min > _min) {
                   _min = s._min;
@@ -1209,8 +1216,13 @@ printf("\n");
                         if (spaces[tseg][staffIdx].min() < extra)
                               spaces[tseg][staffIdx].setMin(extra);
                         }
-                  else
-                        spaces[tseg][staffIdx].addMin(extra);
+                  else {
+                        // grace notes have min = 0.0, add to extra
+                        if (spaces[tseg][staffIdx].min() > 0.00001)
+                              spaces[tseg][staffIdx].addMin(extra);
+                        else
+                              spaces[tseg][staffIdx].addExtra(extra);
+                        }
                   }
             }
 #if 0
@@ -1373,8 +1385,9 @@ printf("\n");
                         e->setPos(0.0, 0.0);
                         }
                   else if ((t == CHORD) && (((Chord*)e)->noteType() != NOTE_NORMAL)) {
-                        double x = spaces[seg][staff/VOICES].extra();
-                        e->setPos(-e->bbox().x() - x, 0.0);
+                        Chord* chord = (Chord*)e;
+                        double x     = -chord->bbox().width();
+                        e->setPos(x, 0.0);
                         }
                   else {
                         double xo = spaces[seg][staff/VOICES].extra();
@@ -1486,10 +1499,10 @@ void Measure::cmdAddStaves(int sStaff, int eStaff)
             ms->lines    = new StaffLines(score());
             ms->lines->setStaffIdx(i);
             ms->lines->setLines(staff->lines());
-            ms->lines->setMag(staff->small() ? 0.7 : 1.0);
+            ms->lines->setMag(staff->mag());
             ms->lines->setParent(this);
 
-            staves.insert(i, ms);
+            insertMStaff(ms, i);
             score()->undoOp(UndoOp::InsertMStaff, this, ms, i);
 
             Rest* rest = new Rest(score(), tick(), 0);
@@ -1501,9 +1514,9 @@ void Measure::cmdAddStaves(int sStaff, int eStaff)
             // replicate time signature
             if (ts) {
                   TimeSig* ots = 0;
-                  for (int staffIdx = 0; staffIdx < staves.size(); ++staffIdx) {
-                        if (ts->element(staffIdx)) {
-                              ots = (TimeSig*)ts->element(staffIdx);
+                  for (int track = 0; track < staves.size() * VOICES; ++track) {
+                        if (ts->element(track)) {
+                              ots = (TimeSig*)ts->element(track);
                               break;
                               }
                         }
@@ -1523,6 +1536,10 @@ void Measure::cmdAddStaves(int sStaff, int eStaff)
 void Measure::insertMStaff(MStaff* staff, int idx)
       {
       staves.insert(idx, staff);
+      for (int staffIdx = 0; staffIdx < staves.size(); ++staffIdx) {
+            if (staves[staffIdx]->lines)
+                  staves[staffIdx]->lines->setStaffIdx(staffIdx);
+            }
       }
 
 //---------------------------------------------------------
@@ -1532,6 +1549,10 @@ void Measure::insertMStaff(MStaff* staff, int idx)
 void Measure::removeMStaff(MStaff* /*staff*/, int idx)
       {
       staves.removeAt(idx);
+      for (int staffIdx = 0; staffIdx < staves.size(); ++staffIdx) {
+            if (staves[staffIdx]->lines)
+                  staves[staffIdx]->lines->setStaffIdx(staffIdx);
+            }
       }
 
 //---------------------------------------------------------
@@ -1557,10 +1578,10 @@ void Measure::insertStaff1(Staff* staff, int staffIdx)
       MStaff* ms = new MStaff;
       ms->lines   = new StaffLines(score());
       ms->lines->setLines(staff->lines());
-      ms->lines->setMag(staff->small() ? 0.7 : 1.0);
+      ms->lines->setMag(staff->mag());
       ms->lines->setParent(this);
       ms->distance = point(staffIdx == 0 ? score()->style()->systemDistance : score()->style()->staffDistance);
-      staves.insert(staves.begin()+staffIdx, ms);
+      insertMStaff(ms, staffIdx);
       }
 
 //---------------------------------------------------------
@@ -2102,7 +2123,7 @@ void Measure::read(QDomElement e, int idx)
             Staff* staff = score()->staff(idx);
             s->lines     = new StaffLines(score());
             s->lines->setLines(staff->lines());
-            s->lines->setMag(staff->small() ? 0.7 : 1.0);
+            s->lines->setMag(staff->mag());
             s->lines->setParent(this);
             s->distance = point(n == 0 ? score()->style()->systemDistance : score()->style()->staffDistance);
             s->userDistance = 0.0;
@@ -2579,16 +2600,29 @@ void Measure::setRepeatFlags(int val)
       }
 
 //---------------------------------------------------------
-//   fixStaffIdx
+//   sortStaves
 //---------------------------------------------------------
 
-void Measure::fixStaffIdx()
+void Measure::sortStaves(QList<int>& src, QList<int>& dst)
       {
-      for (Segment* seg = first(); seg; seg = seg->next())
-            seg->fixStaffIdx();
+      QList<MStaff*> ms;
+      for (QList<int>::iterator i = dst.begin(); i != dst.end(); ++i) {
+            int didx = *i;
+            int sidx = 0;
+            for (QList<int>::iterator ii = src.begin(); ii != src.end(); ++ii, ++sidx) {
+                  if (didx == *ii) {
+                        ms.push_back(staves[sidx]);
+                        break;
+                        }
+                  }
+            }
+      staves = ms;
+
       for (int staffIdx = 0; staffIdx < staves.size(); ++staffIdx) {
             if (staves[staffIdx]->lines)
                   staves[staffIdx]->lines->setStaffIdx(staffIdx);
             }
-      }
 
+      for (Segment* s = first(); s; s = s->next())
+            s->sortStaves(src, dst);
+      }

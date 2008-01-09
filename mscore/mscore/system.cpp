@@ -216,7 +216,7 @@ void System::layout(ScoreLayout* layout)
                   s->setbbox(QRectF());
                   continue;
                   }
-            double staffMag = staff->small() ? 0.7 : 1.0;
+            double staffMag = staff->mag();
             s->setbbox(QRectF(_leftMargin, 0.0, 0.0, 4 * _spatium * staffMag));
             }
 
@@ -293,7 +293,7 @@ void System::layout2(ScoreLayout* layout)
       qreal y = 0.0;
       for (int staffIdx = 0; staffIdx < staves; ++staffIdx) {
             Staff* staff    = score()->staff(staffIdx);
-            double staffMag = staff->small() ? 0.7 : 1.0;
+            double staffMag = staff->mag();
             if ((staffIdx + 1) == staves)
                   setDistance(staffIdx, score()->style()->systemDistance);
             else if ((staff->part()->staves()->size() + 1) < staff->rstaff())

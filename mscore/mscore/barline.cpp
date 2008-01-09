@@ -71,8 +71,7 @@ double BarLine::getY2() const
             Measure* measure = segment->measure();
             System* system = measure->system();
             y2 = system->staff(staffIdx2)->y() - system->staff(staffIdx1)->y();
-            double staffMag = staff()->small() ? 0.7 : 1.0;
-            Spatium barLineLen(4.0 * staffMag);
+            Spatium barLineLen(4.0 * staff()->mag());
             y2 += barLineLen.point();
             }
       else

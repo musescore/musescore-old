@@ -223,6 +223,16 @@ class Score : public QObject {
       void addMeasure(MeasureBase*);
       void removeMeasure(MeasureBase*);
       void appendMeasures(int);
+      void readStaff(QDomElement);
+
+      void cmdTuplet(int);
+      void cmdInsertPart(Part*, int);
+      void cmdRemovePart(Part*);
+      void cmdReplaceElements(Measure* sm, Measure* dm, int staffIdx);
+      Slur* cmdAddSlur();
+      void cmdAddTie();
+      void cmdAddHairpin(bool);
+      void cmdAddStretch(double);
 
    public:
       Score();
@@ -230,20 +240,14 @@ class Score : public QObject {
 
       void clear();
       void write(Xml&);
-      void readStaff(QDomElement);
 
-      QList<Staff*>& staves()       { return _staves; }
-      int nstaves() const           { return _staves.size(); }
+      QList<Staff*>& staves()                { return _staves; }
+      int nstaves() const                    { return _staves.size(); }
+      int staffIdx(const Part*) const;
+      int staffIdx(const Staff* staff) const { return _staves.indexOf((Staff*)staff, 0); }
+      Staff* staff(int n) const              { return _staves[n]; }
 
-      int staff(const Part*) const;
-      Staff* staff(int n) const     { return _staves[n]; }
-
-      void cmdTuplet(int);
-      void cmdInsertPart(Part*, int);
-      void cmdRemovePart(Part*);
-      void cmdReplaceElements(Measure* sm, Measure* dm, int staffIdx);
-
-      Part* part(int staff);
+      Part* part(int staffIdx);
 
       MeasureBase* pos2measure(const QPointF&, int* tick, int* staffIdx, int* pitch,
          Segment**, QPointF* offset) const;
@@ -265,6 +269,7 @@ class Score : public QObject {
       void undoOp(UndoOp::UndoType type, Element*, const QColor&);
       void undoOp(UndoOp::UndoType type, Element*, int idx);
       void undoOp(UndoOp::UndoType type, int a, int b);
+
       void undoChangeSig(int tick, const SigEvent& o, const SigEvent& n);
       void undoChangeTempo(int tick, const TEvent& o, const TEvent& n);
       void undoChangeKey(Staff* staff, int tick, int o, int n);
@@ -319,11 +324,6 @@ class Score : public QObject {
 
       Element* cmdAddHairpin(Hairpin* atr, const QPointF& pos);
       Note* addNote(Chord*, int pitch);
-
-      Slur* cmdAddSlur();
-      void cmdAddTie();
-      void cmdAddHairpin(bool);
-      void cmdAddStretch(double);
 
       void deleteItem(Element*);
       void cmdDeleteSelection();
@@ -472,7 +472,6 @@ class Score : public QObject {
       Selection* selection() const { return sel; }
       SigList*   getSigmap()  { return sigmap; }
       Measure* appendMeasure();
-      void fixStaffIdx();
       };
 
 extern Score* gscore;

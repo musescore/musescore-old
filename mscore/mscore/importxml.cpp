@@ -654,7 +654,7 @@ Measure* MusicXml::xmlMeasure(Part* part, QDomElement e, int number)
       if (implicit == "yes")
             measure->setIrregular(true);
 
-      int staff = score->staff(part);
+      int staff = score->staffIdx(part);
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             if (e.tagName() == "attributes")
                   xmlAttributes(measure, staff, e.firstChildElement());

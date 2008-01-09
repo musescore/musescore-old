@@ -20,6 +20,8 @@
 
 #include "lyrics.h"
 #include "xml.h"
+#include "system.h"
+#include "measure.h"
 
 //---------------------------------------------------------
 //   Lyrics
@@ -115,5 +117,19 @@ void Lyrics::draw(QPainter& p) const
             _separator->draw(p);
             p.translate(-pt);
             }
+      }
+
+//---------------------------------------------------------
+//   canvasPos
+//---------------------------------------------------------
+
+QPointF Lyrics::canvasPos() const
+      {
+      double xp = x();
+      for (Element* e = parent(); e; e = e->parent())
+            xp += e->x();
+      System* system = measure()->system();
+      double yp = y() + system->staff(staffIdx())->y() + system->y();
+      return QPointF(xp, yp);
       }
 

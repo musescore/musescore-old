@@ -130,6 +130,7 @@ void ScoreLayout::doLayout()
       _needLayout = false;
 
       if (first() == 0) {
+            // score is empty
             foreach(Page* page, _pages)
                   delete page;
             _pages.clear();
@@ -182,7 +183,6 @@ void ScoreLayout::doLayout()
             if (mb->type() != MEASURE)
                   continue;
             Measure* m = (Measure*)mb;
-            m->layoutBeams(this);
             m->layout2(this);
             }
 

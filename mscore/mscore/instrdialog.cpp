@@ -505,7 +505,6 @@ void MuseScore::editInstrList()
             if (pli->op == ITEM_DELETE)
                   cs->cmdRemovePart(pli->part);
             else if (pli->op == ITEM_ADD) {
-printf("ITEM_ADD\n");
                   const InstrumentTemplate* t = ((PartListItem*)item)->it;
                   part = new Part(cs);
                   part->setMidiProgram(t->midiProgram);
@@ -540,7 +539,6 @@ printf("ITEM_ADD\n");
                         cs->undoOp(UndoOp::InsertStaff, staff, staffIdx + rstaff);
                         ++rstaff;
                         }
-printf("insert part at %d\n", staffIdx);
                   cs->cmdInsertPart(part, staffIdx);
                   staffIdx += rstaff;
                   }
@@ -634,7 +632,6 @@ printf("insert part at %d\n", staffIdx);
             }
       cs->setLayoutAll(true);
       cs->endCmd();
-      cs->fixStaffIdx();
       }
 
 //---------------------------------------------------------
@@ -647,7 +644,7 @@ void Score::cmdInsertPart(Part* part, int staffIdx)
       undoOp(UndoOp::InsertPart, part, staffIdx);
       insertPart(part, staffIdx);
 
-      int sidx = staff(part);
+      int sidx = this->staffIdx(part);
       int eidx = sidx + part->nstaves();
       for (MeasureBase* mb = _layout->first(); mb; mb = mb->next()) {
             if (mb->type() != MEASURE)
@@ -663,9 +660,7 @@ void Score::cmdInsertPart(Part* part, int staffIdx)
 
 void Score::cmdRemovePart(Part* part)
       {
-      _layout->systems()->clear();  //??
-
-      int sidx = staff(part);
+      int sidx = staffIdx(part);
       int n    = part->nstaves();
       int eidx = sidx + n;
 
@@ -692,7 +687,6 @@ void Score::cmdRemovePart(Part* part)
 
 void Score::insertPart(Part* part, int idx)
       {
-      _layout->systems()->clear();
       int staff = 0;
       for (QList<Part*>::iterator i = _parts.begin(); i != _parts.end(); ++i) {
             if (staff >= idx) {
@@ -710,7 +704,6 @@ void Score::insertPart(Part* part, int idx)
 
 void Score::removePart(Part* part)
       {
-      _layout->systems()->clear();  //??
       _parts.removeAt(_parts.indexOf(part));
       }
 
@@ -720,7 +713,6 @@ void Score::removePart(Part* part)
 
 void Score::insertStaff(Staff* staff, int idx)
       {
-      _layout->systems()->clear();  //??
       _staves.insert(idx, staff);
       staff->part()->insertStaff(staff);
 
@@ -735,7 +727,6 @@ void Score::insertStaff(Staff* staff, int idx)
                         slur->setTrack2(slur->track2() + VOICES);
                   }
             }
-      fixStaffIdx();
       }
 
 //---------------------------------------------------------
@@ -745,7 +736,6 @@ void Score::insertStaff(Staff* staff, int idx)
 void Score::removeStaff(Staff* staff)
       {
       int idx = staff->idx();
-      _layout->systems()->clear();  //??
       _staves.removeAll(staff);
       staff->part()->removeStaff(staff);
       int track = idx * VOICES;
@@ -759,7 +749,6 @@ void Score::removeStaff(Staff* staff)
                         slur->setTrack2(slur->track2() - VOICES);
                   }
             }
-      fixStaffIdx();
       }
 
 //---------------------------------------------------------
@@ -768,17 +757,6 @@ void Score::removeStaff(Staff* staff)
 
 void Score::sortStaves(QList<int> src, QList<int> dst)
       {
-printf("Score::sortStaves\n");
-      foreach(int i, src)
-            printf(" %3d", i);
-      printf("\n");
-      foreach(int i, dst)
-            printf(" %3d", i);
-      printf("\n");
-
-
-
-
       _layout->systems()->clear();  //??
       _parts.clear();
       Part* curPart = 0;
@@ -808,62 +786,6 @@ printf("Score::sortStaves\n");
             Measure* m = (Measure*)mb;
             m->sortStaves(src, dst);
             }
-      fixStaffIdx();
-      }
-
-//---------------------------------------------------------
-//   fixStaffIdx
-//    called after sort, insert, delete staff
-//---------------------------------------------------------
-
-void Score::fixStaffIdx()
-      {
-      for (MeasureBase* mb = _layout->first(); mb; mb = mb->next()) {
-            if (mb->type() != MEASURE)
-                  continue;
-            ((Measure*)mb)->fixStaffIdx();
-            }
-      }
-
-//---------------------------------------------------------
-//   sortStaves
-//---------------------------------------------------------
-
-void Measure::sortStaves(QList<int>& src, QList<int>& dst)
-      {
-      QList<MStaff*> ms;
-      for (QList<int>::iterator i = dst.begin(); i != dst.end(); ++i) {
-            int didx = *i;
-            int sidx = 0;
-            for (QList<int>::iterator ii = src.begin(); ii != src.end(); ++ii, ++sidx) {
-                  if (didx == *ii) {
-                        ms.push_back(staves[sidx]);
-                        break;
-                        }
-                  }
-            }
-      staves = ms;
-      for (Segment* s = first(); s; s = s->next()) {
-            s->sortStaves(src, dst);
-            }
-      }
-
-//---------------------------------------------------------
-//   sortStaves
-//---------------------------------------------------------
-
-void Segment::sortStaves(QList<int>& src, QList<int>& dst)
-      {
-      QList<Element*> dl;
-
-      foreach (int didx, dst) {
-            int sidx = src.indexOf(didx);
-            int startTrack = sidx * VOICES;
-            int endTrack   = startTrack + VOICES;
-            for (int k = startTrack; k < endTrack; ++k)
-                  dl.push_back(_elist[k]);
-            }
-      _elist = dl;
       }
 
 //---------------------------------------------------------

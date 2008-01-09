@@ -33,6 +33,7 @@ class Note;
 class Hook;
 class Arpeggio;
 class Tremolo;
+class Chord;
 
 //---------------------------------------------------------
 //   Stem
@@ -78,6 +79,27 @@ class StemSlash : public Element {
       };
 
 //---------------------------------------------------------
+///   Graphic representation of a ledger line.
+///
+///    parent:     Chord
+///    x-origin:   Chord
+///    y-origin:   SStaff
+//---------------------------------------------------------
+
+class LedgerLine : public Line {
+   public:
+      LedgerLine(Score*);
+      LedgerLine &operator=(const LedgerLine&);
+      virtual LedgerLine* clone() const { return new LedgerLine(*this); }
+      virtual ElementType type() const { return LEDGER_LINE; }
+      virtual QPointF canvasPos() const;      ///< position in canvas coordinates
+      Chord* chord() const { return (Chord*)parent(); }
+      };
+
+// typedef QList<LedgerLine*>::iterator iLedgerLine;
+// typedef QList<LedgerLine*>::const_iterator ciLedgerLine;
+
+//---------------------------------------------------------
 //   NoteList
 //---------------------------------------------------------
 
@@ -99,25 +121,6 @@ typedef NoteList::iterator iNote;
 typedef NoteList::reverse_iterator riNote;
 typedef NoteList::const_iterator ciNote;
 typedef NoteList::const_reverse_iterator criNote;
-
-//---------------------------------------------------------
-//   LedgerLine
-//---------------------------------------------------------
-
-/**
- Graphic representation of a ledger line.
-*/
-
-class LedgerLine : public Line {
-   public:
-      LedgerLine(Score*);
-      LedgerLine &operator=(const LedgerLine&);
-      virtual LedgerLine* clone() const { return new LedgerLine(*this); }
-      virtual ElementType type() const { return LEDGER_LINE; }
-      };
-
-typedef QList<LedgerLine*>::iterator iLedgerLine;
-typedef QList<LedgerLine*>::const_iterator ciLedgerLine;
 
 //---------------------------------------------------------
 //   Chord
@@ -145,7 +148,7 @@ class Chord : public ChordRest {
       virtual qreal upPos()   const;
       virtual qreal downPos() const;
       virtual qreal centerX() const;
-      void addLedgerLine(double x, double y, int i);
+      void addLedgerLine(double x, int staffIdx, int line);
 
    public:
       Chord(Score*);

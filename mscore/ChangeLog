@@ -1,3 +1,5 @@
+9.1.8 (ws)
+      - regression fixes for instrument list handling and more
 8.1.8 (ws)
       - Elements now have a staffIdx instead of Staff* to speed up access
         to MStaff* and SStaff*.

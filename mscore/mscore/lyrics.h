@@ -38,8 +38,10 @@ class Lyrics : public Text {
 
    public:
       Lyrics(Score*);
-      virtual Lyrics* clone() const { return new Lyrics(*this); }
+      virtual Lyrics* clone() const    { return new Lyrics(*this); }
       virtual ElementType type() const { return LYRICS; }
+      virtual QPointF canvasPos() const;
+      Measure* measure() const { return (Measure*)parent()->parent(); }
 
       virtual void write(Xml& xml) const;
       virtual void read(QDomElement);
