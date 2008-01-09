@@ -2,9 +2,9 @@
 <museScore version="1.4">
   <Spatium>1.76389</Spatium>
   <Division>480</Division>
-  <Mag>1.31548</Mag>
-  <xoff>14</xoff>
-  <yoff>18</yoff>
+  <Mag>9.73486</Mag>
+  <xoff>-2157</xoff>
+  <yoff>-576</yoff>
   <Style>
     <staffUpperBorder>7</staffUpperBorder>
     <staffLowerBorder>7</staffLowerBorder>
@@ -142,13 +142,17 @@ p, li { white-space: pre-wrap; }
         </TimeSig>
       <Note pitch="60" tpc="14" ticks="480"/>
       <Note pitch="62" tpc="16" ticks="480"/>
-      <Note pitch="72" tpc="14" ticks="480"/>
+      <Note pitch="74" tpc="16" ticks="480"/>
       <Chord>
         <tick>1200</tick>
         <ticklen>0</ticklen>
         <acciaccatura/>
         <tickOffset>-240</tickOffset>
-        <Note pitch="76" tpc="18"/>
+        <Note>
+          <selected>1</selected>
+          <pitch>75</pitch>
+          <tpc>11</tpc>
+          </Note>
         </Chord>
       <Chord>
         <tick>1440</tick>
@@ -222,5 +226,5 @@ p, li { white-space: pre-wrap; }
         </Rest>
       </Measure>
     </Staff>
-  <cursorTrack>-4</cursorTrack>
+  <cursorTrack>0</cursorTrack>
   </museScore>

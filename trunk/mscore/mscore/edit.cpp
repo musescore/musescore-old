@@ -821,7 +821,7 @@ void Score::deleteItem(Element* el)
                   {
                   Chord* chord = (Chord*) el;
                   undoRemoveElement(chord);
-                  if (el->voice() == 0) {
+                  if ((el->voice() == 0) && (chord->noteType() == NOTE_NORMAL)) {
                         //
                         // voice 0 chords are always replaced by rests
                         //
@@ -830,6 +830,11 @@ void Score::deleteItem(Element* el)
                         rest->setParent(chord->parent());
                         rest->setVoice(el->voice());
                         undoAddElement(rest);
+                        }
+                  else {
+                        Segment* seg = chord->segment();
+                        if (seg->isEmpty())
+                              undoRemoveElement(seg);
                         }
                   }
                   break;

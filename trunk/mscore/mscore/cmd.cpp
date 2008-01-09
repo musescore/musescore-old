@@ -1493,11 +1493,13 @@ void Score::cmd(const QString& cmd)
                   padToggle(PAD_DOT);
             else if (cmd == "pad-acciaccatura") {
                   padToggle(PAD_ACCIACCATURA);
-                  layoutAll = false;
+                  // if (!noteEntryMode())
+                  //      layoutAll = false;
                   }
             else if (cmd == "pad-appoggiatura") {
                   padToggle(PAD_APPOGGIATURA);
-                  layoutAll = false;
+                  //if (!noteEntryMode())
+                  //      layoutAll = false;
                   }
             else if (cmd == "beam-start")
                   padToggle(PAD_BEAM_START);
