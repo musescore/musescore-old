@@ -269,20 +269,7 @@ void Measure::layoutBeams(ScoreLayout* layout)
       int nstaves = _score->nstaves();
       int tracks = nstaves * VOICES;
 
-#if 0
-      // fix for staffOffset
-      for (int track = 0; track < tracks; ++track) {
-            for (Segment* segment = first(); segment; segment = segment->next()) {
-                  Element* e = segment->element(track);
-                  if (e && e->isChordRest()) {
-                        ChordRest* cr = (ChordRest*) e;
-                        cr->layout(layout);
-                        }
-                  }
-            }
-#endif
-
-      foreach(Beam* beam, _beamList)
+       foreach(Beam* beam, _beamList)
             beam->layout(layout);
 
       for (int track = 0; track < tracks; ++track) {
@@ -421,6 +408,7 @@ void Beam::layout(ScoreLayout* layout)
       //------------------------------------------------------------
       //   calculate slope of beam
       //    - the slope is set to zero on "concave" chord sequences
+      //    TODO: staffMove
       //------------------------------------------------------------
 
       bool concave = false;
@@ -482,12 +470,12 @@ void Beam::layout(ScoreLayout* layout)
       QPointF p1, p2;
       double ys = (x2 - x1) * slope;
       if (cut >= 0) {
-            // linker Punkt ist Referenz
+            // left dot is reference
             p1 = QPointF(x1, p1s.y());
             p2 = QPointF(x2, p1.y() + ys);
             }
       else {
-            // rechter Punkt ist Referenz
+            // right dot is reference
             p2 = QPointF(x2, p2s.y());
             p1 = QPointF(x1, p2.y() - ys);
             }

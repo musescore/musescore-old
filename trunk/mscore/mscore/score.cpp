@@ -755,22 +755,20 @@ Measure* Score::pos2measure3(const QPointF& p, int* tick) const
       }
 
 //---------------------------------------------------------
-//   staff
+//   staffIdx
+//
+///  Return index for the first staff of \a part.
 //---------------------------------------------------------
 
-/**
- Return index for the first staff of \a part.
-*/
-
-int Score::staff(const Part* part) const
+int Score::staffIdx(const Part* part) const
       {
-      int staff = 0;
+      int idx = 0;
       foreach(Part* p, _parts) {
             if (p == part)
                   break;
-            staff += p->nstaves();
+            idx += p->nstaves();
             }
-      return staff;
+      return idx;
       }
 
 //---------------------------------------------------------

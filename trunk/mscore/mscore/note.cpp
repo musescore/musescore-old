@@ -49,13 +49,6 @@ int Note::noteHeads[HEAD_GROUPS][4] = {
       { wholetriangleheadSym, halftriangleheadSym, triangleheadSym, wholetriangleheadSym},
       };
 
-int Note::smallNoteHeads[HEAD_GROUPS][4] = {
-      { s_wholeheadSym,         s_halfheadSym,         s_quartheadSym,    s_brevisheadSym },
-      { s_wholecrossedheadSym,  s_halfcrossedheadSym,  s_crossedheadSym,  s_wholecrossedheadSym},
-      { s_wholediamondheadSym,  s_halfdiamondheadSym,  s_diamondheadSym,  s_wholediamondheadSym},
-      { s_wholetriangleheadSym, s_halftriangleheadSym, s_triangleheadSym, s_wholetriangleheadSym},
-      };
-
 //---------------------------------------------------------
 //   NoteHead
 //---------------------------------------------------------
@@ -99,7 +92,6 @@ Note::Note(Score* s)
       _head           = 0;
       _tpc            = -1;
       _headGroup      = 0;
-      _small          = false;
       _hidden         = false;
       }
 
@@ -219,7 +211,6 @@ void Note::changeAccidental(int accType)
       int line  = tpc2line(_tpc);
       _tpc      = line2tpc(line, acc1);
       _pitch    = tpc2pitch(_tpc) + (_pitch / 12) * 12;
-//?      chord()->measure()->layoutNoteHeads(staffIdx());    // compute actual accidental
       int acc2  = accidentalSubtype();
       if (accType != acc2)
             _userAccidental = accType;    // bracketed editorial accidental
@@ -344,8 +335,8 @@ void Note::setAccidentalSubtype(int pre)
                   _accidental = new Accidental(score());
                   add(_accidental);
                   }
-            pre &= pre & (~ACC_SMALL);
-            _accidental->setSubtype(_small ? ACC_SMALL + pre : pre);
+            _accidental->setSubtype(pre);
+            _accidental->setMag(mag());
             }
       else if (_accidental) {
             delete _accidental;
@@ -391,10 +382,7 @@ void Note::setHead(int ticks)
             if (ticks % (2 * division))
                   _dots = 1;
             }
-      if (_small)
-            _head = smallNoteHeads[_headGroup][headType];
-      else
-            _head = noteHeads[_headGroup][headType];
+      _head = noteHeads[_headGroup][headType];
       }
 
 //---------------------------------------------------------
@@ -425,10 +413,7 @@ void Note::setType(DurationType t)
                   headType = 3;
                   break;
             }
-      if (_small)
-            _head = smallNoteHeads[_headGroup][headType];
-      else
-            _head = noteHeads[_headGroup][headType];
+      _head = noteHeads[_headGroup][headType];
       }
 
 //---------------------------------------------------------
@@ -474,7 +459,6 @@ bool Note::isSimple(Xml& xml) const
             return false;
       return (pl.empty() && _fingering.empty() && _tieFor == 0 && _staffMove == 0
          && _headGroup == 0
-         && _small == false
          && _userAccidental == 0);
       }
 
@@ -507,8 +491,6 @@ void Note::write(Xml& xml) const
                   xml.tag("move", _staffMove);
             if (_headGroup != 0)
                   xml.tag("head", _headGroup);
-            if (_small)
-                  xml.tag("small", _small);
             xml.etag();
             }
       }
@@ -558,8 +540,6 @@ void Note::read(QDomElement e)
                   }
             else if (tag == "move")
                   _staffMove = i;
-            else if (tag == "small")
-                  _small = i;
             else if (Element::readProperties(e))
                   ;
             else
@@ -840,4 +820,19 @@ NoteType Note::noteType() const
       {
       return chord()->noteType();
       }
+
+//---------------------------------------------------------
+//   canvasPos
+//---------------------------------------------------------
+
+QPointF Note::canvasPos() const
+      {
+      double xp = x();
+      for (Element* e = parent(); e; e = e->parent())
+            xp += e->x();
+      System* system = chord()->measure()->system();
+      double yp = y() + system->staff(staffIdx() + staffMove())->y() + system->y();
+      return QPointF(xp, yp);
+      }
+
 

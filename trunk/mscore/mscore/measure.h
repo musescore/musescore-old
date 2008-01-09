@@ -97,6 +97,7 @@ class Measure : public MeasureBase {
 
       void push_back(Segment* e);
       void push_front(Segment* e);
+      void layoutBeams(ScoreLayout*);
 
    public:
       Measure(Score*);
@@ -159,7 +160,6 @@ class Measure : public MeasureBase {
       void insertMStaff(MStaff* staff, int idx);
       void removeMStaff(MStaff* staff, int idx);
 
-      void layoutBeams(ScoreLayout*);
       void layoutBeams1(ScoreLayout*);
       void layoutChord(Chord* chord, char*);
       void layoutNoteHeads(int staff);
@@ -201,7 +201,6 @@ class Measure : public MeasureBase {
       void adjustToLen(int, int);
       int repeatFlags() const      { return _repeatFlags; }
       void setRepeatFlags(int val);
-      void fixStaffIdx();
       };
 
 #endif

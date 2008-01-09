@@ -30,8 +30,9 @@
 
 // Accidental Subtype Values
 
-enum { ACC_NONE, ACC_SHARP, ACC_FLAT, ACC_SHARP2, ACC_FLAT2, ACC_NATURAL,
-       ACC_SMALL = 0x100};
+enum {
+      ACC_NONE, ACC_SHARP, ACC_FLAT, ACC_SHARP2, ACC_FLAT2, ACC_NATURAL
+      };
 
 //---------------------------------------------------------
 //   Accidental

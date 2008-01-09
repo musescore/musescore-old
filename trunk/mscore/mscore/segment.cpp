@@ -173,6 +173,7 @@ void Segment::insertStaff(int staff)
       for (int voice = 0; voice < VOICES; ++voice)
             _elist.insert(track, 0);
       _lyrics.insert(staff, LyricsList());
+      fixStaffIdx();
       }
 
 //---------------------------------------------------------
@@ -184,6 +185,7 @@ void Segment::removeStaff(int staff)
       int track = staff * VOICES;
       _elist.erase(_elist.begin() + track, _elist.begin() + track + VOICES);
       _lyrics.removeAt(staff);
+      fixStaffIdx();
       }
 
 //---------------------------------------------------------
@@ -193,7 +195,7 @@ void Segment::removeStaff(int staff)
 void Segment::add(Element* el)
       {
       el->setParent(this);
-      el->setMag(el->staff()->small() ? 0.7 : 1.0);
+      el->setMag(el->staff()->mag());
 
       el->setTick(tick());    //DEBUG
       int staffIdx = el->staffIdx();
@@ -370,6 +372,28 @@ bool Segment::isEmpty() const
       }
 
 //---------------------------------------------------------
+//   sortStaves
+//---------------------------------------------------------
+
+void Segment::sortStaves(QList<int>& src, QList<int>& dst)
+      {
+      QList<Element*> dl;
+      QList<LyricsList> ll;
+
+      foreach (int didx, dst) {
+            int sidx       = src.indexOf(didx);
+            int startTrack = sidx * VOICES;
+            int endTrack   = startTrack + VOICES;
+            for (int k = startTrack; k < endTrack; ++k)
+                  dl.append(_elist[k]);
+            ll.append(_lyrics[sidx]);
+            }
+      _elist = dl;
+      _lyrics = ll;
+      fixStaffIdx();
+      }
+
+//---------------------------------------------------------
 //   fixStaffIdx
 //---------------------------------------------------------
 
@@ -383,9 +407,8 @@ void Segment::fixStaffIdx()
             }
       for (int staffIdx = 0; staffIdx < _lyrics.size(); staffIdx++) {
             foreach(Lyrics* l, _lyrics[staffIdx]) {
-                  if (l) {
+                  if (l)
                         l->setStaffIdx(staffIdx);
-                        }
                   }
             }
       }

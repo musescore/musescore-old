@@ -23,7 +23,7 @@
 
 /**
  \file
- Definition of classes Staff.
+ Definition of class Staff.
 */
 
 class Instrument;

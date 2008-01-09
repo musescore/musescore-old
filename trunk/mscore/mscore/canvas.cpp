@@ -2004,8 +2004,10 @@ void Canvas::drawElements(QPainter& p,const QList<const Element*>& el)
                   p.setBrush(Qt::NoBrush);
                   p.setPen(QPen(Qt::blue, 0, Qt::SolidLine));
                   p.drawPath(e->shape());
-                p.setPen(QPen(Qt::red, 0, Qt::SolidLine));
-                p.drawRect(e->bbox());
+
+                  p.setPen(QPen(Qt::red, 0, Qt::SolidLine));
+                  p.drawRect(e->bbox());
+
                   p.setPen(QPen(Qt::red, 0, Qt::SolidLine));
                   qreal w = 5.0 / p.matrix().m11();
                   qreal h = w;
@@ -2013,6 +2015,12 @@ void Canvas::drawElements(QPainter& p,const QList<const Element*>& el)
                   qreal y = 0; // e->bbox().y();
                   p.drawLine(QLineF(x-w, y-h, x+w, y+h));
                   p.drawLine(QLineF(x+w, y-h, x-w, y+h));
+                  if (e->parent()) {
+                        p.restore();
+                        p.setPen(QPen(Qt::green, 0, Qt::SolidLine));
+                        p.drawRect(e->parent()->abbox());
+                        continue;
+                        }
                   }
             p.restore();
             }

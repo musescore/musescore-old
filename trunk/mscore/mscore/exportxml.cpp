@@ -2201,7 +2201,7 @@ foreach(Element* el, *(score->gel())) {
             xml.stag(QString("part id=\"P%1\"").arg(idx+1));
 
             int staves = part->nstaves();
-            int strack = score->staff(part) * VOICES;
+            int strack = score->staffIdx(part) * VOICES;
             int etrack = strack + staves * VOICES;
 
             DirectionsHandler dh(score);

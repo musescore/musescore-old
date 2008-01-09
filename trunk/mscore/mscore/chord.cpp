@@ -79,7 +79,7 @@ void Stem::setLen(const Spatium& l)
 
 QRectF Stem::bbox() const
       {
-      double w = point(score()->style()->stemWidth);
+      double w = point(score()->style()->stemWidth) * mag();
       double l = point(_len);
       return QRectF(-w * .5, 0, w, l);
       }
@@ -112,8 +112,11 @@ void StemSlash::draw(QPainter& p) const
 
 QRectF StemSlash::bbox() const
       {
-      double w = point(score()->style()->stemWidth);
-      QRectF r(line.p1(), line.p2());
+      double w = point(score()->style()->stemWidth) * mag() * .5;
+      QRectF r(line.p1().x(), line.p2().y(),
+         line.p2().x()-line.p1().x(),
+         line.p1().y()-line.p2().y()
+         );
       return r.adjusted(-w, -w, 2.0 * w, 2.0 * w);
       }
 
@@ -300,6 +303,12 @@ QRectF Chord::bbox() const
             _bbox |= _arpeggio->bbox().translated(_arpeggio->pos());
       if (_stemSlash)
             _bbox |= _stemSlash->bbox().translated(_stemSlash->pos());
+      if (noteType() != NOTE_NORMAL) {
+            printf("grace width %f = %f %f %f\n",
+               _bbox.width(),
+               upNote()->pos().x(), _hook->pos().x(), _stem->pos().x());
+//            abort();
+            }
       return _bbox;
       }
 
@@ -393,6 +402,11 @@ void Chord::layoutStem1(ScoreLayout* layout)
                   _hook->setMag(mag());
                   }
             _hook->setSubtype(hookIdx);
+            qreal lw = point(score()->style()->stemWidth) * .5;
+            QPointF npos  = stemPos(up, false);
+            QPointF p(npos + QPointF(lw, 0.0));
+            // set x-pos to get correct boundingRect width for layout
+            _hook->setPos(npos + QPointF(lw, 0.0));
             }
       else
             setHook(0);
@@ -416,7 +430,7 @@ void Chord::layoutStem(ScoreLayout* layout)
       Note* upnote   = upNote();
       Note* downnote = downNote();
 
-      double staffMag = staff()->small() ? 0.7 : 1.0;
+      double staffMag = staff()->mag();
 
       double uppos   = s->staff(staffIdx() + upnote->staffMove())->bbox().y();
             uppos    = (uppos - sy)/_spatium * 2.0 * staffMag + upnote->line() * staffMag;
@@ -539,31 +553,34 @@ void Chord::layoutStem(ScoreLayout* layout)
 
 //---------------------------------------------------------
 //   addLedgerLine
+///   Add a ledger line to a chord.
+///   \arg x          horizontal position of line start
+///   \arg staffIdx   determines the y origin
+///   \arg line       vertical position of line
 //---------------------------------------------------------
 
-void Chord::addLedgerLine(double x, double y, int i)
+void Chord::addLedgerLine(double x, int staffIdx, int line)
       {
-      LedgerLine* h = new LedgerLine(score());
-      double staffMag = 1.0;
-      Spatium len = h->len();
-      if (staff()->small()) {
-            staffMag = 0.7;
-            len *= 0.7;
-            }
+      double staffMag = score()->staff(staffIdx)->mag();
+      LedgerLine* h   = new LedgerLine(score());
+      Spatium len     = h->len() * staffMag;
       h->setParent(this);
+      h->setStaffIdx(staffIdx);
+
       double ho = 0.0;
       //
       // Experimental:
+      //  shorten ledger line to avoid collisions with accidentals
       //
       for (iNote in = notes.begin(); in != notes.end(); ++in) {
             Note* n = in->second;
-            if (n->line() >= (i-1) && n->line() <= (i+1) && n->accidental()) {
-                  ho = _spatium * .25;
+            if (n->line() >= (line-1) && n->line() <= (line+1) && n->accidental()) {
+                  ho   = _spatium * .25 * staffMag;
                   len -= Spatium(.25) * staffMag;
                   }
             }
       h->setLen(len);
-      h->setPos(x + ho, y + _spatium * .5 * i * staffMag);
+      h->setPos(x + ho, _spatium * .5 * line * staffMag);
       _ledgerLines.push_back(h);
       }
 
@@ -593,7 +610,7 @@ void Chord::layout(ScoreLayout* layout)
 
       double lx = 0.0;
       System* s = segment()->measure()->system();
-      double staffMag = staff()->small() ? 0.7 : 1.0;
+      double staffMag = staff()->mag();
       for (iNote in = notes.begin(); in != notes.end(); ++in) {
             Note* note = in->second;
             note->setMag(mag());
@@ -622,7 +639,7 @@ void Chord::layout(ScoreLayout* layout)
             }
 
       //-----------------------------------------
-      //  process help lines
+      //  process ledger lines
       //-----------------------------------------
 
       foreach(LedgerLine* l, _ledgerLines)
@@ -630,7 +647,6 @@ void Chord::layout(ScoreLayout* layout)
       _ledgerLines.clear();
 
       //---------------------------------------------------
-      //    process help lines for notes
       //    moved to upper staff
       //---------------------------------------------------
 
@@ -651,13 +667,10 @@ void Chord::layout(ScoreLayout* layout)
                   double x = upnote->pos().x();
                   x += headWidth/2 - _spatium * staffMag;
 
-                  double y = s->staff(staffIdx() - 1)->bbox().y();
-                  y        -= s->staff(staffIdx())->bbox().y();
-
                   for (int i = -2; i >= uppos; i -= 2)
-                        addLedgerLine(x, y, i);
+                        addLedgerLine(x, staffIdx() - 1, i);
                   for (int i = 10; i <= downpos; i += 2)
-                        addLedgerLine(x, y, i);
+                        addLedgerLine(x, staffIdx() - 1, i);
                   }
             }
 
@@ -676,10 +689,10 @@ void Chord::layout(ScoreLayout* layout)
             x += headWidth/2 - _spatium * staffMag;
 
             for (int i = -2; i >= uppos; i -= 2) {
-                  addLedgerLine(x, 0.0, i);
+                  addLedgerLine(x, staffIdx(), i);
                   }
             for (int i = 10; i <= downpos; i += 2) {
-                  addLedgerLine(x, 0.0, i);
+                  addLedgerLine(x, staffIdx(), i);
                   }
             }
 
@@ -703,18 +716,16 @@ void Chord::layout(ScoreLayout* layout)
                   double x = upnote->pos().x();
                   x += headWidth/2 - _spatium * staffMag;
 
-                  double y = s->staff(staffIdx() + 1)->bbox().y();
-                  y        -= s->staff(staffIdx())->bbox().y();
-
                   for (int i = -2; i >= uppos; i -= 2)
-                        addLedgerLine(x, y, i);
+                        addLedgerLine(x, staffIdx() + 1, i);
                   for (int i = 10; i <= downpos; i += 2)
-                        addLedgerLine(x, 0.0, i);
+                        addLedgerLine(x, staffIdx() * 1, i);
                   }
             }
 
-      foreach(LedgerLine* l, _ledgerLines)
-            l->layout(layout);
+      // LedgerLine does not use layout() method
+      // foreach(LedgerLine* l, _ledgerLines)
+      //      l->layout(layout);
 
       //-----------------------------------------
       //  Note Attributes
@@ -1054,12 +1065,12 @@ void Chord::space(double& min, double& extra) const
                   hw = lhw;
             double prefixWidth  = 0.0;
             if (note->accidental()) {
-//                  prefixWidth = note->accidental()->width();
-                  prefixWidth = -note->accidental()->x() - 1.3;   // HACK
+                  prefixWidth = note->accidental()->width();
+//                  prefixWidth = -note->accidental()->x() - 1.3;   // HACK
                   if (_noteType != NOTE_NORMAL)
-                       prefixWidth += point(score()->style()->prefixNoteDistance)/2.0;
+                       prefixWidth += point(score()->style()->prefixNoteDistance) * mag();
                   else
-                       prefixWidth += point(score()->style()->prefixNoteDistance);
+                       prefixWidth += point(score()->style()->prefixNoteDistance) * mag();
                   if (prefixWidth > extra)
                         extra += prefixWidth;
                   }
@@ -1141,17 +1152,6 @@ qreal Chord::centerX() const
             x += downnote->headWidth() * .5;
             }
       return x;
-      }
-
-//---------------------------------------------------------
-//   LedgerLine
-//---------------------------------------------------------
-
-LedgerLine::LedgerLine(Score* s)
-   : Line(s, false)
-      {
-      setLineWidth(score()->style()->ledgerLineWidth);
-      setLen(Spatium(2));
       }
 
 //---------------------------------------------------------
@@ -1249,5 +1249,30 @@ void Chord::setStaffIdx(int val)
             if (note->accidental())
                   note->accidental()->setStaffIdx(val);
             }
+      }
+
+//---------------------------------------------------------
+//   LedgerLine
+//---------------------------------------------------------
+
+LedgerLine::LedgerLine(Score* s)
+   : Line(s, false)
+      {
+      setLineWidth(score()->style()->ledgerLineWidth);
+      setLen(Spatium(2));
+      }
+
+//---------------------------------------------------------
+//   canvasPos
+//---------------------------------------------------------
+
+QPointF LedgerLine::canvasPos() const
+      {
+      double xp = x();
+      for (Element* e = parent(); e; e = e->parent())
+            xp += e->x();
+      System* system = chord()->measure()->system();
+      double yp = y() + system->staff(staffIdx())->y() + system->y();
+      return QPointF(xp, yp);
       }
 

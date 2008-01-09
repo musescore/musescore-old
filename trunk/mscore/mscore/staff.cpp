@@ -37,7 +37,7 @@
 
 int Staff::idx() const
       {
-      return _score->staves().indexOf((Staff*)this);  // ???
+      return _score->staffIdx(this);
       }
 
 //---------------------------------------------------------

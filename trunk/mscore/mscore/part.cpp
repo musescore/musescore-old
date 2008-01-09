@@ -190,7 +190,7 @@ void Part::setStaves(int n)
             printf("Part::setStaves(): remove staves not implemented!\n");
             return;
             }
-      int staffIdx = _score->staff(this) + ns;
+      int staffIdx = _score->staffIdx(this) + ns;
       for (int i = ns; i < n; ++i) {
             Staff* staff = new Staff(_score, this, i);
             _staves.push_back(staff);

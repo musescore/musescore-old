@@ -94,7 +94,6 @@ class Note : public Element {
       Tie* _tieBack;
 
       int _lineOffset;        ///< Used during mouse dragging.
-      bool _small;
       bool _hidden;           ///< markes this note as the hidden one if there are
                               ///< overlapping notes; hidden notes are not played
                               ///< and heads are not shown
@@ -110,6 +109,7 @@ class Note : public Element {
       virtual Note* clone() const { return new Note(*this); }
       virtual ElementType type() const { return NOTE; }
       virtual QRectF bbox() const;
+      virtual QPointF canvasPos() const;      ///< position in canvas coordinates
 
       void setHead(int);
       int totalTicks() const;
