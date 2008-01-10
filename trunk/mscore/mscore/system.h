@@ -92,7 +92,6 @@ class System : public Element {
 
       void setInstrumentName(int staff);
       void setDistance(int n, Spatium v)   { _staves[n]->setDistance(v); }
-      void layoutLyrics(ScoreLayout*, Lyrics*, Segment*, int staffIdx);
 
    public:
       System(Score*);
@@ -140,6 +139,7 @@ class System : public Element {
       void setFirstSystem(bool v) { _firstSystem = v;   }
       bool isVbox() const         { return _vbox;       }
       void setVbox(bool v)        { _vbox = v;          }
+      void layoutLyrics(ScoreLayout*, Lyrics*, Segment*, int staffIdx);
       };
 
 typedef QList<System*>::iterator iSystem;

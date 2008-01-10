@@ -683,7 +683,7 @@ void Slur::read(QDomElement e)
 
 void Slur::layout(ScoreLayout* layout)
       {
-      if (staff() == 0) {
+      if (staffIdx() == -1) {
             printf("Slur::layout: no staff\n");
 //            return;
             }

@@ -66,6 +66,8 @@ class Palette : public QWidget {
       Q_OBJECT
 
       Element** symbols;
+      QIcon** icons;
+      int* subtypes;
       QString* names;
       int rows, columns;
       int hgrid, vgrid;

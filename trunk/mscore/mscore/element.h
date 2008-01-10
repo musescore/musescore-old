@@ -72,7 +72,8 @@ enum ElementType {
       SEGMENT, SYSTEM, COMPOUND, CHORD, SLUR,
       // special types for drag& drop:
       ELEMENT, ELEMENT_LIST, STAFF_LIST, MEASURE_LIST, LAYOUT,
-      HBOX, VBOX
+      HBOX, VBOX,
+      ICON
       };
 
 extern const char* elementNames[];  // for debugging
@@ -487,6 +488,22 @@ class RubberBand : public Element {
       void set(const QPointF& p1, const QPointF& p2) { _p1 = p1; _p2 = p2; }
       QPointF p1() const { return _p1; }
       QPointF p2() const { return _p2; }
+      };
+
+//---------------------------------------------------------
+//   Icon
+//    dummy element, used for drag&drop
+//---------------------------------------------------------
+
+class Icon : public Element {
+      QIcon _icon;
+
+   public:
+      Icon(Score* s) : Element(s) {}
+      virtual Icon* clone() const        { return new Icon(*this); }
+      virtual ElementType type() const   { return ICON; }
+      void setIcon(const QIcon& i)       { _icon = i;    }
+      QIcon icon() const                 { return _icon; }
       };
 
 #endif

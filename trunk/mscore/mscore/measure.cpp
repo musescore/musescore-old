@@ -280,31 +280,6 @@ void Measure::push_front(Segment* e)
       }
 
 //---------------------------------------------------------
-//   moveAll
-//---------------------------------------------------------
-
-void Measure::moveAll(double x, double y)
-      {
-      move(x, y);
-      for (iElement i = _el.begin(); i != _el.end(); ++i)
-            (*i)->move(x, y);
-
-      int staves = _score->nstaves();
-      for (Segment* segment = first(); segment; segment = segment->next()) {
-            for (int track = 0; track < staves * VOICES; ++track) {
-                  segment->element(track)->move(x, y);
-                  LyricsList* ll = segment->lyricsList(track);
-                  for (iLyrics il = ll->begin(); il != ll->end(); ++il)
-                        (*il)->move(x, y);
-                  }
-            }
-      foreach(Beam* beam, _beamList)
-            beam->move(x, y);
-      foreach(Tuplet* t, _tuplets)
-            t->move(x, y);
-      }
-
-//---------------------------------------------------------
 //   initLineList
 //    preset lines list with accidentals for given key
 //---------------------------------------------------------
@@ -521,7 +496,7 @@ void Measure::layout(ScoreLayout* layout, double width)
                         lyrics->layout(layout);
                         // center to middle of notehead:
                         double noteHeadWidth = symbols[quartheadSym].width(mag());
-                        double lh = lyrics->lineSpacing();
+                        double lh            = lyrics->lineSpacing();
                         y  = lh * line + point(score()->style()->lyricsDistance);
                         lyrics->setPos(noteHeadWidth/2 - lyrics->bbox().width() * .5,
                            y + system()->staff(staffIdx)->bbox().bottom());
@@ -577,13 +552,27 @@ double Measure::tick2pos(int tck) const
 
 //---------------------------------------------------------
 //   layout2
-//    called after page layout
+//    called after layout of all pages
 //---------------------------------------------------------
 
 void Measure::layout2(ScoreLayout* layout)
       {
       if (parent() == 0)
             return;
+
+      for (int staffIdx = 0; staffIdx < staves.size(); ++staffIdx) {
+            for (Segment* s = first(); s; s = s->next()) {
+                  LyricsList* ll = s->lyricsList(staffIdx);
+                  if (!ll)
+                        continue;
+                  foreach(Lyrics* l, *ll) {
+                        if (!l)
+                              continue;
+                        system()->layoutLyrics(layout, l, s, staffIdx);
+                        }
+                  }
+            }
+
       layoutBeams(layout);
 
       foreach(const MStaff* ms, staves) {
@@ -595,10 +584,9 @@ void Measure::layout2(ScoreLayout* layout)
             element->layout(layout);
             if (element->anchor() == ANCHOR_SEGMENT) {
                   double y = 0.0;
-                  if (element->staff()) {
-                        int staffIdx = element->staff()->idx();
+                  int staffIdx = element->staffIdx();
+                  if (staffIdx != -1)
                         y = system()->staff(staffIdx)->bbox().y();
-                        }
                   QPointF o(tick2pos(element->tick()), y);
                   element->setPos(element->ipos() + o);
                   }
@@ -642,6 +630,7 @@ void Measure::layout2(ScoreLayout* layout)
                         }
                   }
             }
+
       foreach(Tuplet* tuplet, _tuplets)
             tuplet->layout(layout);
       }
@@ -2452,7 +2441,7 @@ void Measure::collectElements(QList<const Element*>& el) const
                   }
             }
       foreach(Element* e, _el) {
-            if (!e->staff() || e->staff()->show())
+            if ((e->staffIdx() == -1) || e->staff()->show())
                   el.append(e);
             }
       foreach(Beam* b, _beamList) {

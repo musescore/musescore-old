@@ -169,16 +169,6 @@ Chord::~Chord()
       }
 
 //---------------------------------------------------------
-//   setGrace
-//    obsolete
-//---------------------------------------------------------
-
-void Chord::setGrace(bool g)
-      {
-      _noteType = g ? NOTE_APPOGGIATURA : NOTE_NORMAL;
-      }
-
-//---------------------------------------------------------
 //   setHook
 //---------------------------------------------------------
 
@@ -343,27 +333,23 @@ void Chord::layoutStem1(ScoreLayout* layout)
       int hookIdx;
 
       bool hasStem = true;
-      if (_noteType != NOTE_NORMAL)
+      if (ticks < division/16)
+            hookIdx = 5;
+      else if (ticks < division/8)
+            hookIdx = 4;
+      else if (ticks < division/4)
+            hookIdx = 3;
+      else if (ticks < division/2)
+            hookIdx = 2;
+      else if (ticks < division)
             hookIdx = 1;
+      else if (ticks < division*2)
+            hookIdx = 0;
+      else if (ticks < division*4)  // < 1/1
+            hookIdx = 0;
       else {
-            if (ticks < division/16)
-                  hookIdx = 5;
-            else if (ticks < division/8)
-                  hookIdx = 4;
-            else if (ticks < division/4)
-                  hookIdx = 3;
-            else if (ticks < division/2)
-                  hookIdx = 2;
-            else if (ticks < division)
-                  hookIdx = 1;
-            else if (ticks < division*2)
-                  hookIdx = 0;
-            else if (ticks < division*4)  // < 1/1
-                  hookIdx = 0;
-            else {
-                  hookIdx = 0;
-                  hasStem = false;
-                  }
+            hookIdx = 0;
+            hasStem = false;
             }
 
       if (hasStem) {
@@ -448,31 +434,30 @@ void Chord::layoutStem(ScoreLayout* layout)
       if (_noteType != NOTE_NORMAL) {
             // stemLen = Spatium(2.5 * mag());
             stemLen = normalLen * score()->style()->graceNoteMag;
-            hookIdx = 1;
             }
       else {
             stemLen = Spatium((up ? uppos - 3.0 * staffMag : 3.0 * staffMag - downpos) * .5);
             Spatium normalLen(3.5 * staffMag);
             if (stemLen < normalLen)
                   stemLen = normalLen;
-            if (ticks < division/16)
-                  hookIdx = 5;
-            else if (ticks < division/8)
-                  hookIdx = 4;
-            else if (ticks < division/4)
-                  hookIdx = 3;
-            else if (ticks < division/2)
-                  hookIdx = 2;
-            else if (ticks < division)
-                  hookIdx = 1;
-            else if (ticks < division*2)
-                  hookIdx = 0;
-            else if (ticks < division*4)  // < 1/1
-                  hookIdx = 0;
-            else {
-                  hookIdx = 0;
-                  hasStem = false;
-                  }
+            }
+      if (ticks < division/16)
+            hookIdx = 5;
+      else if (ticks < division/8)
+            hookIdx = 4;
+      else if (ticks < division/4)
+            hookIdx = 3;
+      else if (ticks < division/2)
+            hookIdx = 2;
+      else if (ticks < division)
+            hookIdx = 1;
+      else if (ticks < division*2)
+            hookIdx = 0;
+      else if (ticks < division*4)  // < 1/1
+            hookIdx = 0;
+      else {
+            hookIdx = 0;
+            hasStem = false;
             }
 
       int extraStemLen = hookIdx - 2;

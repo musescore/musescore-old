@@ -30,6 +30,7 @@
 #include "score.h"
 #include "image.h"
 #include "xml.h"
+#include "canvas.h"
 
 //---------------------------------------------------------
 //   Palette
@@ -44,16 +45,15 @@ Palette::Palette(QWidget* parent)
       {
       extraMag      = 1.0;
       staff         = false;
-      rows          = 1;
-      columns       = 1;
+      symbols       = 0;
+      names         = 0;
       currentIdx    = 0;
       selectedIdx   = -1;
-      symbols       = new Element*[rows*columns];
-      names         = new QString[rows*columns];
-
-      for (int i = 0; i < rows*columns; ++i)
-            symbols[i] = 0;
+      rows          = 0;
+      columns       = 0;
       setGrid(50, 60);
+      setRowsColumns(1, 1);
+
       _drawGrid      = false;
       _showSelection = false;
       setMouseTracking(true);
@@ -63,16 +63,15 @@ Palette::Palette(int r, int c, qreal mag)
       {
       extraMag      = mag;
       staff         = false;
-      rows          = r;
-      columns       = c;
       currentIdx    = -1;
       selectedIdx   = -1;
-      symbols       = new Element*[rows*columns];
-      names         = new QString[rows*columns];
-
-      for (int i = 0; i < rows*columns; ++i)
-            symbols[i] = 0;
+      symbols       = 0;
+      names         = 0;
+      rows          = 0;
+      columns       = 0;
       setGrid(50, 60);
+      setRowsColumns(r, c);
+
       _drawGrid      = false;
       _showSelection = false;
       setMouseTracking(true);
@@ -80,8 +79,10 @@ Palette::Palette(int r, int c, qreal mag)
 
 Palette::~Palette()
       {
-      delete[] symbols;
-      delete[] names;
+      if (symbols)
+            delete[] symbols;
+      if (names)
+            delete[] names;
       }
 
 //---------------------------------------------------------
@@ -96,6 +97,8 @@ void Palette::setGrid(int hh, int vv)
       {
       hgrid = hh;
       vgrid = vv;
+      if (columns == 0 || rows == 0)
+            return;
       setFixedSize(columns * hgrid, rows * vgrid);
       }
 
@@ -121,12 +124,13 @@ void Palette::setRowsColumns(int r, int c)
 
       Element** nsymbols = new Element*[rows*columns];
       QString* nnames    = new QString[rows*columns];
-      for (int i = 0; i < r*c; ++i)
-            nsymbols[i] = 0;
 
+      for (int i = 0; i < r*c; ++i) {
+            nsymbols[i]  = 0;
+            }
       for (int i = 0; i < n; ++i) {
-            nsymbols[i] = symbols[i];
-            nnames[i]   = names[i];
+            nsymbols[i]  = symbols[i];
+            nnames[i]    = names[i];
             }
       // TODO: delete symbols
 
@@ -134,8 +138,8 @@ void Palette::setRowsColumns(int r, int c)
             delete[] symbols;
       if (names)
             delete[] names;
-      symbols = nsymbols;
-      names = nnames;
+      symbols  = nsymbols;
+      names    = nnames;
       }
 
 //---------------------------------------------------------
@@ -187,6 +191,7 @@ void Palette::mouseDoubleClickEvent(QMouseEvent* ev)
             if (e->acceptDrop(viewer, pt, element->type(), element->subtype())) {
                   Element* ne = element->clone();
                   e->drop(pt, pt, ne);
+                  score->canvas()->setDropTarget(0);     // acceptDrop sets dropTarget
                   }
             }
       score->endCmd();
@@ -232,23 +237,22 @@ void Palette::mouseMoveEvent(QMouseEvent* ev)
          && (ev->pos() - dragStartPosition).manhattanLength() > QApplication::startDragDistance()) {
             QDrag* drag = new QDrag(this);
             QMimeData* mimeData = new QMimeData;
-            Element* el = symbols[currentIdx];
+            if (symbols[currentIdx]) {
+                  Element* el = symbols[currentIdx];
+                  qreal mag = PALETTE_SPATIUM * extraMag / _spatium;
+                  QPointF spos(dragStartPosition / mag);
+                  QPointF rpos(spos - el->pos());
+                  rpos /= mag;
 
-            qreal mag = PALETTE_SPATIUM * extraMag / _spatium;
+                  mimeData->setData(mimeSymbolFormat, el->mimeData(rpos));
+                  drag->setMimeData(mimeData);
 
-            QPointF spos(dragStartPosition / mag);
-            QPointF rpos(spos - el->pos());
-
-            rpos /= mag;
-
-            mimeData->setData(mimeSymbolFormat, el->mimeData(rpos));
-            drag->setMimeData(mimeData);
-
-            int srcIdx = currentIdx;
-            Qt::DropAction action = drag->start(Qt::CopyAction | Qt::MoveAction);
-            if (action == Qt::MoveAction) {
-                  symbols[srcIdx] = 0;
-                  names[srcIdx] = QString();
+                  int srcIdx = currentIdx;
+                  Qt::DropAction action = drag->start(Qt::CopyAction | Qt::MoveAction);
+                  if (action == Qt::MoveAction) {
+                        symbols[srcIdx] = 0;
+                        names[srcIdx] = QString();
+                        }
                   }
             }
       else {
@@ -355,41 +359,53 @@ void Palette::paintEvent(QPaintEvent*)
                   else if (idx == currentIdx)
                         p.fillRect(r, p.background().color().light(118));
                   Element* el = symbols[idx];
-                  if (el == 0)
+                  if (!el)
                         continue;
-                  el->layout(&layout);
-                  if (staff) {
-                        qreal y = r.y() + vgrid / 2 - dy;
-                        qreal x = r.x() + 7;
-                        qreal w = hgrid - 14;
-                        for (int i = 0; i < 5; ++i) {
-                              qreal yy = y + PALETTE_SPATIUM * i;
-                              p.drawLine(QLineF(x, yy, x + w, yy));
+                  if (el->type() != ICON) {
+                        el->layout(&layout);
+                        if (staff) {
+                              qreal y = r.y() + vgrid / 2 - dy;
+                              qreal x = r.x() + 7;
+                              qreal w = hgrid - 14;
+                              for (int i = 0; i < 5; ++i) {
+                                    qreal yy = y + PALETTE_SPATIUM * i;
+                                    p.drawLine(QLineF(x, yy, x + w, yy));
+                                    }
                               }
+                        p.save();
+                        p.scale(mag, mag);
+
+                        double gw = hgrid / mag;
+                        double gh = vgrid / mag;
+                        double gx = column * gw;
+                        double gy = row    * gh;
+
+                        double sw = el->width();
+                        double sh = el->height();
+                        double sy;
+
+                        if (staff)
+                              sy = gy + gh * .5 - 2.0 * _spatium;
+                        else
+                              sy  = gy + (gh - sh) * .5 - el->bbox().y();
+                        double sx  = gx + (gw - sw) * .5 - el->bbox().x();
+
+                        el->setPos(sx, sy);
+                        QPointF pt(el->pos());
+                        p.translate(pt);
+                        el->draw(p);
+                        p.restore();
                         }
-                  p.save();
-                  p.scale(mag, mag);
-
-                  double gw = hgrid / mag;
-                  double gh = vgrid / mag;
-                  double gx = column * gw;
-                  double gy = row    * gh;
-
-                  double sw = el->width();
-                  double sh = el->height();
-                  double sy;
-
-                  if (staff)
-                        sy = gy + gh * .5 - 2.0 * _spatium;
-                  else
-                        sy  = gy + (gh - sh) * .5 - el->bbox().y();
-                  double sx  = gx + (gw - sw) * .5 - el->bbox().x();
-
-                  el->setPos(sx, sy);
-                  QPointF pt(el->pos());
-                  p.translate(pt);
-                  el->draw(p);
-                  p.restore();
+                  else {
+                        int x = column * hgrid;
+                        int y = row    * vgrid;
+                        QIcon icon = ((Icon*)el)->icon();
+                        int border = 2;
+                        p.drawPixmap(x + border, y + border,
+                           icon.pixmap(QSize(hgrid - 2 * border, vgrid - 2 * border),
+                           QIcon::Normal, QIcon::On)
+                           );
+                        }
                   }
             }
       }

@@ -21,6 +21,8 @@
 #ifndef __ICONS_H__
 #define __ICONS_H__
 
+enum {ICON_ACCIACCATURA, ICON_APPOGGIATURA };
+
 extern void genIcons();
 extern QIcon noteIcon;
 extern QIcon note2Icon;

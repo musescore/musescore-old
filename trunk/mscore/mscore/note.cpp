@@ -41,6 +41,7 @@
 #include "arpeggio.h"
 #include "tremolo.h"
 #include "chordproperties.h"
+#include "icons.h"
 
 int Note::noteHeads[HEAD_GROUPS][4] = {
       { wholeheadSym,         halfheadSym,         quartheadSym,    brevisheadSym},
@@ -649,11 +650,14 @@ QRectF ShadowNote::bbox() const
 //   acceptDrop
 //---------------------------------------------------------
 
-bool Note::acceptDrop(Viewer* viewer, const QPointF&, int type, int) const
+bool Note::acceptDrop(Viewer* viewer, const QPointF&, int type, int subtype) const
       {
       if (type == ATTRIBUTE || type == TEXT || type == ACCIDENTAL
          || type == BREATH || type == ARPEGGIO || type == NOTEHEAD
-         || type == TREMOLO || type == IMAGE) {
+         || type == TREMOLO || type == IMAGE
+         || (noteType() == NOTE_NORMAL && type == ICON && subtype == ICON_ACCIACCATURA)
+         || (noteType() == NOTE_NORMAL && type == ICON && subtype == ICON_APPOGGIATURA)
+         ) {
             viewer->setDropTarget(this);
             return true;
             }
@@ -760,7 +764,19 @@ Element* Note::drop(const QPointF&, const QPointF&, Element* e)
                   }
                   break;
 
+            case ICON:
+                  {
+                  NoteType t = NOTE_ACCIACCATURA;
+                  if (e->subtype() == ICON_APPOGGIATURA)
+                        t = NOTE_APPOGGIATURA;
+printf("note: set grace note\n");
+                  score()->setGraceNote(chord()->tick(), track(), pitch(), t, division/2);
+                  }
+                  delete e;
+                  break;
+
             default:
+                  printf("note: cannot accept drop %s\n", e->name());
                   delete e;
                   break;
             }

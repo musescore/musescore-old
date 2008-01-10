@@ -951,9 +951,7 @@ void Canvas::resetStaffOffsets()
 
 bool Canvas::startEdit(Element* element)
       {
-printf("startEdit %s\n", element->name());
       if (element->startEdit(startMove)) {
-printf("   startEdit\n");
             setFocus();
             _score->startEdit(element);
             setState(EDIT);
@@ -1474,6 +1472,7 @@ void Canvas::dragEnterEvent(QDragEnterEvent* event)
                   case MARKER:
                   case JUMP:
                   case REPEAT_MEASURE:
+                  case ICON:
                         el = Element::create(type, score());
                         break;
                   case BAR_LINE:
@@ -1574,6 +1573,7 @@ void Canvas::dragMoveEvent(QDragMoveEvent* event)
                   case MARKER:
                   case JUMP:
                   case REPEAT_MEASURE:
+                  case ICON:
                         {
                         Element* el = elementAt(pos);
                         if (el) {
@@ -1582,7 +1582,7 @@ void Canvas::dragMoveEvent(QDragMoveEvent* event)
                                     break;
                                     }
                               if (debugMode)
-                                    printf("ignore drop of %s\n", dragElement->name());
+                                    printf("ignore drag of %s\n", dragElement->name());
                               }
                         setDropTarget(0);
                         }
@@ -1702,6 +1702,7 @@ void Canvas::dropEvent(QDropEvent* event)
                   case MARKER:
                   case JUMP:
                   case REPEAT_MEASURE:
+                  case ICON:
                         {
                         Element* el = elementAt(pos);
                         if (el) {
@@ -1966,10 +1967,18 @@ Element* Canvas::elementAt(const QPointF& p)
       // if p hit more than one element, give back
       // the element after the selected one;
 
+      if (_score->selection()->state() == SEL_NONE)
+            return const_cast<Element*>(el.at(0));
+
+      Element* sel = _score->getSelectedElement();
+
       int n = el.size();
       for (int i = 0; i < n; ++i) {
-            if (el[i]->selected() && (i < (n-1))) {
-                  return const_cast<Element*>(el.at(i + 1));
+            if ((el[i] == sel)  || ((sel == 0) && el[i]->type() == MEASURE)) {
+                  if (i < (n-1))
+                        return const_cast<Element*>(el.at(i + 1));
+                  else
+                        return const_cast<Element*>(el.at(0));
                   }
             }
       return const_cast<Element*>(el.at(0));

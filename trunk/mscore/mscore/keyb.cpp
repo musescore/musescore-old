@@ -230,7 +230,15 @@ void Score::padToggle(int n)
                               }
                         else {
                               // insert acciaccatura or appoggiatura
-                              setGraceNote(tick, _is.track, _padState.pitch, _padState.noteType);
+                              if (el->type() == CHORD && ((Chord*)el)->noteType() == NOTE_NORMAL) {
+                                    if (len > division/2)
+                                          len = division/2;
+                                    else if (len < division/4)
+                                          len = division/4;
+                                    setGraceNote(tick, _is.track, _padState.pitch, _padState.noteType, len);
+                                    }
+                              else
+                                    printf("cannot create grace note for grace note\n");
                               }
                         }
                   }
