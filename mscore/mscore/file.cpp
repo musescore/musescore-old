@@ -3,7 +3,7 @@
 //  Linux Music Score Editor
 //  $Id: file.cpp,v 1.70 2006/04/12 14:58:10 wschweer Exp $
 //
-//  Copyright (C) 2002-2007 Werner Schweer and others
+//  Copyright (C) 2002-2008 Werner Schweer and others
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.
@@ -152,6 +152,7 @@ void MuseScore::loadFile()
          lastOpenPath,
          tr("MuseScore Files (*.msc);;"
             "MusicXml Files (*.xml);;"
+            "Compressed MusicXml Files (*.mxl);;"
             "Standard Midi File Files (*.mid);;"
             "Muse Data Files (*.md);;"
             "Lilypond Files (*.ly);;"
@@ -264,6 +265,7 @@ bool MuseScore::saveAs()
 
       fl.append(tr("MuseScore Format (*.msc)"));
       fl.append(tr("MusicXml Format (*.xml)"));
+      fl.append(tr("Compressed MusicXml Format (*.mxl)"));
       fl.append(tr("Standard Midi File (*.mid)"));
       fl.append(tr("PDF File (*.pdf)"));
       fl.append(tr("Postscript File (*.ps)"));
@@ -294,36 +296,42 @@ bool MuseScore::saveAs()
             return cs->saveXml(fn);
             }
       if (selectedFilter == fl[2]) {
+            // save as compressed MusicXML *.mxl file
+            if (!fn.endsWith(".mxl"))
+                  fn.append(".mxl");
+            return cs->saveMxl(fn);
+            }
+      if (selectedFilter == fl[3]) {
             // save as midi file *.mid
             if (!fn.endsWith(".mid"))
                   fn.append(".mid");
             return cs->saveMidi(fn);
             }
-      if (selectedFilter == fl[3]) {
+      if (selectedFilter == fl[4]) {
             // save as pdf file *.pdf
             if (!fn.endsWith(".pdf"))
                   fn.append(".pdf");
             return cs->savePdf(fn);
             }
-      if (selectedFilter == fl[4]) {
+      if (selectedFilter == fl[5]) {
             // save as postscript file *.ps
             if (!fn.endsWith(".ps"))
                   fn.append(".ps");
             return cs->savePs(fn);
             }
-      if (selectedFilter == fl[5]) {
+      if (selectedFilter == fl[6]) {
             // save as png file *.png
             if (!fn.endsWith(".png"))
                   fn.append(".png");
             return cs->savePng(fn);
             }
-      if (selectedFilter == fl[6]) {
+      if (selectedFilter == fl[7]) {
             // save as svg file *.svg
             if (!fn.endsWith(".svg"))
                   fn.append(".svg");
             return cs->saveSvg(fn);
             }
-      if (selectedFilter == fl[7]) {
+      if (selectedFilter == fl[8]) {
             // save as lilypond file *.ly
             if (!fn.endsWith(".ly"))
                   fn.append(".ly");
