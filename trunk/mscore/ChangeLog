@@ -1,4 +1,6 @@
-10.1.8 (ws)
+10.1.8 (lv)
+      - preparations for reading/writing compressed MusicXML (*.mxl)
+       (ws)
       - Double click on palette symbol to emulate drag&drop to selected elements
         did not reset dropTarget flag on elements.
       - Fix undo: forgot to explicitly remove segment in setNote(). This results

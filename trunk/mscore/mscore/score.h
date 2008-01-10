@@ -3,7 +3,7 @@
 //  Linux Music Score Editor
 //  $Id: score.h,v 1.21 2006/04/12 14:58:10 wschweer Exp $
 //
-//  Copyright (C) 2002-2007 Werner Schweer and others
+//  Copyright (C) 2002-2008 Werner Schweer and others
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.
@@ -387,6 +387,7 @@ class Score : public QObject {
 
       bool loadMsc(QString name);
       void importMusicXml(const QString&);
+      void importCompressedMusicXml(const QString&);
       void convertMidi(MidiFile*);
       bool importMidi(const QString& name);
       bool importMuseData(const QString& name);
@@ -394,6 +395,7 @@ class Score : public QObject {
 
       void print(QPrinter* printer);
       bool saveXml(const QString& name);
+      bool saveMxl(const QString& name);
       bool saveMidi(const QString& name);
       bool savePdf(const QString& name);
       bool savePs(const QString& name);

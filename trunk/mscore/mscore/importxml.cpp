@@ -3,7 +3,7 @@
 //  Linux Music Score Editor
 //  $Id: importxml.cpp,v 1.81 2006/04/13 07:36:48 wschweer Exp $
 //
-//  Copyright (C) 2002-2007 Werner Schweer and others
+//  Copyright (C) 2002-2008 Werner Schweer and others
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.
@@ -176,6 +176,29 @@ void Score::importMusicXml(const QString& name)
       _layout->connectTies();
       layoutAll = true;
       _created = true;
+      }
+
+//---------------------------------------------------------
+//   importCompressedMusicXml
+//---------------------------------------------------------
+
+/**
+ Import compressed MusicXML file \a name into the Score.
+ */
+
+void Score::importCompressedMusicXml(const QString& name)
+      {
+      printf("Score::importCompressedMusicXml(%s): not implemented\n", name.toLatin1().data());
+/*
+      LoadMusicXml lx;
+      lx.load(name);
+      setSaved(false);
+      MusicXml musicxml(lx.doc());
+      musicxml.import(this);
+      _layout->connectTies();
+      layoutAll = true;
+      _created = true;
+*/
       }
 
 //---------------------------------------------------------

@@ -3,7 +3,7 @@
 //  Linux Music Score Editor
 //  $Id: score.cpp,v 1.24 2006/04/12 14:58:10 wschweer Exp $
 //
-//  Copyright (C) 2002-2007 Werner Schweer and others
+//  Copyright (C) 2002-2008 Werner Schweer and others
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.
@@ -244,6 +244,8 @@ void Score::read(QString name)
 
       if (info.completeSuffix() == "xml")
             importMusicXml(name);
+      else if (info.completeSuffix() == "mxl")
+            importCompressedMusicXml(name);
       else if (info.completeSuffix().toLower() == "mid") {
             if (!importMidi(name))
                   return;
