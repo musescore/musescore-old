@@ -45,6 +45,7 @@ class EditStyle : public QDialog, private Ui::EditStyleBase {
 
    public:
       EditStyle(QWidget*);
+      ~EditStyle();
       void setScore(Score*);
       };
 
