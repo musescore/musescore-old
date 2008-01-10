@@ -30,11 +30,17 @@
 EditStyle::EditStyle(QWidget* parent)
    : QDialog(parent)
       {
+      lstyle = new Style;
       setModal(true);
       setupUi(this);
       pageList->setCurrentRow(0);
       connect(buttonOk, SIGNAL(clicked()), this, SLOT(ok()));
       connect(buttonApply, SIGNAL(clicked()), this, SLOT(apply()));
+      }
+
+EditStyle::~EditStyle()
+      {
+      delete lstyle;
       }
 
 //---------------------------------------------------------
