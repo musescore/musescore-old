@@ -168,7 +168,6 @@ class Chord : public ChordRest {
       virtual QRectF bbox() const;
       void setStemDirection(Direction d)     { _stemDirection = d; }
       Direction stemDirection() const        { return _stemDirection; }
-      void setGrace(bool g);
 
       QList<LedgerLine*>* ledgerLines()      { return &_ledgerLines; }
 

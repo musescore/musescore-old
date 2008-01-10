@@ -1,6 +1,7 @@
 Release 0.9
       - new score wizard
       - grace notes: acciaccatura, appoggiatura
+      - new note panel
 
 Release 0.8
       - audio output for windows version

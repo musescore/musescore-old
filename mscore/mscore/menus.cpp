@@ -75,10 +75,27 @@ void MuseScore::showPalette(bool visible)
             addDockWidget(Qt::LeftDockWidgetArea, paletteBox);
 
             //-----------------------------------
+            //    notes
+            //-----------------------------------
+
+            Palette* sp = new Palette(2, 6, 1.0);
+            sp->setGrid(40, 30);
+            sp->showStaff(false);
+            Icon* ik = new Icon(gscore);
+            ik->setSubtype(ICON_ACCIACCATURA);
+            ik->setIcon(acciaccaturaIcon);
+            sp->addObject(0,  ik, tr("acciaccatura"));
+            ik = new Icon(gscore);
+            ik->setSubtype(ICON_APPOGGIATURA);
+            ik->setIcon(appoggiaturaIcon);
+            sp->addObject(1,  ik, tr("appoggiatura"));
+            paletteBox->addPalette(tr("Notes"), sp);
+
+            //-----------------------------------
             //    clefs
             //-----------------------------------
 
-            Palette* sp = new Palette(4, 4, .8);
+            sp = new Palette(4, 4, .8);
             sp->setGrid(42, 60);
             sp->showStaff(true);
             for (int i = 0; i < 15; ++i) {

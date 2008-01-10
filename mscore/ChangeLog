@@ -1,3 +1,13 @@
+10.1.8 (ws)
+      - Double click on palette symbol to emulate drag&drop to selected elements
+        did not reset dropTarget flag on elements.
+      - Fix undo: forgot to explicitly remove segment in setNote(). This results
+        in loosing a note on undo.
+      - Added new palette for notes currently used for grace notes. This allows
+        for drag&drop of grace notes.
+      - Fixed crash on import of MusicXml test file BeetAnGeSample.xml.
+        Syllable lines in lyrics crossing systems are still not handled right.
+      - adapt MusicXml import of grace notes
 9.1.8 (ws)
       - implement "delete grace note"
       - fixed printing of line objects (volta etc.)

@@ -32,6 +32,9 @@ the Sounding Edge: Music Notation Software, the Final Installment</a>
       a language for typesetting music, and a Perl script which translates
       this language either into PostScript, or into Encapsulated PostScript,
       or into MIDI, or into MusicXML.</li>
+<li><a href="http://sed.free.fr/gcomposer/">gcomposer</a> a "little tool to
+      write music for Linux".
+      </li>
 </ul>
 
 <br>

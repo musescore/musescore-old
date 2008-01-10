@@ -129,6 +129,10 @@ QPointF Lyrics::canvasPos() const
       for (Element* e = parent(); e; e = e->parent())
             xp += e->x();
       System* system = measure()->system();
+      if (debugMode && system == 0) {
+            printf("Lyrics::canvasPos(): no system (%s)\n", qPrintable(getText()));
+            return pos();
+            }
       double yp = y() + system->staff(staffIdx())->y() + system->y();
       return QPointF(xp, yp);
       }

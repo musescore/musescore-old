@@ -84,7 +84,7 @@ const char* elementNames[] = {
       "HairPin", "Ottava", "Pedal", "Trill",
       "Segment", "System", "Compound", "Chord", "Slur",
       "Element", "ElementList", "StaffList", "MeasureList",
-      "Layout", "HBox", "VBox"
+      "Layout", "HBox", "VBox", "Icon"
       };
 
 //---------------------------------------------------------
@@ -1001,6 +1001,8 @@ int Element::readType(QDomElement& e, QPointF* dragOffset)
                   type = JUMP;
             else if (e.tagName() == "Marker")
                   type = MARKER;
+            else if (e.tagName() == "Icon")
+                  type = ICON;
             else {
                   domError(e);
                   type = 0;
@@ -1086,6 +1088,9 @@ Element* Element::create(int type, Score* score)
                   break;
             case REPEAT_MEASURE:
                   el = new RepeatMeasure(score);
+                  break;
+            case ICON:
+                  el = new Icon(score);
                   break;
             default:
                   break;

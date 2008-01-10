@@ -591,6 +591,8 @@ void Score::setNote(int tick, int track, int pitch, int len)
                               tuplet->remove(cr);
                         segment->setElement(track, 0);
                         undoOp(UndoOp::RemoveElement, element);
+                        if (segment->isEmpty())
+                              undoRemoveElement(segment);
                         }
                   segment = segment->next();
                   if (l == 0) {
@@ -667,34 +669,44 @@ void Score::setNote(int tick, int track, int pitch, int len)
 
 //---------------------------------------------------------
 //   setGraceNote
+///   Create a grace note in front of a normal note.
+///   \arg tick is the tick of the normal note
+///   \arg track is the track of the normal note (staff&voice)
+///   \arg pitch is the pitch of the grace note
+///   \arg is the grace note type
+///   \len is the visual duration of the grace note (1/16 or 1/32)
 //---------------------------------------------------------
 
-void Score::setGraceNote(int tick, int track,  int pitch, NoteType type)
+void Score::setGraceNote(int tick, int track,  int pitch, NoteType type, int len)
       {
-      tick -= 240;
-      Note* note = new Note(this);
-      note->setPitch(pitch);
-      note->setStaffIdx(track / VOICES);
-
       Measure* measure = tick2measure(tick);
-      Chord* chord = new Chord(this);
-      chord->setTick(tick);
-      chord->setVoice(track % VOICES);
-      chord->setStaffIdx(track / VOICES);
-      chord->add(note);
-      chord->setTickLen(0);
-      chord->setTickOffset(-240);
-      chord->setStemDirection(UP);
-      chord->setNoteType(type);
+      tick -= len;
       Segment::SegmentType st = Segment::SegGrace;
       Segment* seg = measure->findSegment(st, tick);
       if (seg == 0) {
             seg = measure->createSegment(st, tick);
             undoAddElement(seg);
+
+            Note* note = new Note(this);
+            note->setPitch(pitch);
+            note->setStaffIdx(track / VOICES);
+            note->setTickLen(len);
+
+            Chord* chord = new Chord(this);
+            chord->setTick(tick);
+            chord->setVoice(track % VOICES);
+            chord->setStaffIdx(track / VOICES);
+            chord->add(note);
+
+            chord->setTickLen(len);
+            chord->setTickOffset(-240);
+            chord->setStemDirection(UP);
+            chord->setNoteType(type);
+            chord->setParent(seg);
+
+            undoAddElement(chord);
+            select(note, 0, 0);
             }
-      chord->setParent(seg);
-      undoAddElement(chord);
-      select(note, 0, 0);
       }
 
 //---------------------------------------------------------

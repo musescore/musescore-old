@@ -2,9 +2,9 @@
 <museScore version="1.4">
   <Spatium>1.76389</Spatium>
   <Division>480</Division>
-  <Mag>9.73486</Mag>
-  <xoff>-2157</xoff>
-  <yoff>-576</yoff>
+  <Mag>3.30956</Mag>
+  <xoff>-358</xoff>
+  <yoff>-48</yoff>
   <Style>
     <staffUpperBorder>7</staffUpperBorder>
     <staffLowerBorder>7</staffLowerBorder>
@@ -125,12 +125,12 @@ p, li { white-space: pre-wrap; }
     </Part>
   <Slur>
     <tick2>1440</tick2>
-    <tick>1200</tick>
+    <tick>1320</tick>
     <SlurSegment no="0">
-      <o1 x="-0.692508" y="-0.291582"/>
-      <o2 x="-0.0546717" y="-0.820075"/>
-      <o3 x="-0.0728955" y="-1.16633"/>
-      <o4 x="-0.0911194" y="-3.05638"/>
+      <o1 x="-0.358987" y="-0.280947"/>
+      <o2 x="-0.0156081" y="-1.12379"/>
+      <o3 x="-0.17169" y="-1.56081"/>
+      <o4 x="-0.17169" y="-2.91872"/>
       </SlurSegment>
     </Slur>
   <Staff id="1">
@@ -142,17 +142,24 @@ p, li { white-space: pre-wrap; }
         </TimeSig>
       <Note pitch="60" tpc="14" ticks="480"/>
       <Note pitch="62" tpc="16" ticks="480"/>
-      <Note pitch="74" tpc="16" ticks="480"/>
       <Chord>
-        <tick>1200</tick>
-        <ticklen>0</ticklen>
+        <tick>720</tick>
+        <ticklen>240</ticklen>
         <acciaccatura/>
-        <tickOffset>-240</tickOffset>
-        <Note>
-          <selected>1</selected>
-          <pitch>75</pitch>
-          <tpc>11</tpc>
-          </Note>
+        <tickOffset>-120</tickOffset>
+        <Note pitch="77" tpc="11"/>
+        </Chord>
+      <Chord>
+        <tick>960</tick>
+        <ticklen>480</ticklen>
+        <Note pitch="74" tpc="16"/>
+        </Chord>
+      <Chord>
+        <tick>1320</tick>
+        <ticklen>240</ticklen>
+        <appoggiatura/>
+        <tickOffset>-120</tickOffset>
+        <Note pitch="77" tpc="11"/>
         </Chord>
       <Chord>
         <tick>1440</tick>
@@ -226,5 +233,5 @@ p, li { white-space: pre-wrap; }
         </Rest>
       </Measure>
     </Staff>
-  <cursorTrack>0</cursorTrack>
+  <cursorTrack>-4</cursorTrack>
   </museScore>

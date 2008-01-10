@@ -137,7 +137,6 @@ class Measure : public MeasureBase {
 
       int size() const                 { return _size;       }
       virtual int tickLen() const;
-      void moveAll(double, double);
       Segment* first() const           { return _first;      }
       Segment* last() const            { return _last;       }
       void remove(Segment*);

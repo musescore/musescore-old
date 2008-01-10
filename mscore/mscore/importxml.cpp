@@ -257,7 +257,7 @@ void MusicXml::scorePartwise(QDomElement e)
                               score->setCopyright(ee.text());
                         else if (ee.tagName() == "encoding")
                               domNotImplemented(ee);
-                        else if (e.tagName() == "source")
+                        else if (ee.tagName() == "source")
                               domNotImplemented(ee);
                         else
                               domError(ee);
@@ -1985,16 +1985,23 @@ void MusicXml::xmlNote(Measure* measure, int staff, QDomElement e)
                   cr = new Chord(score);
                   cr->setTick(tick);
                   cr->setVoice(voice);
-                  cr->setTickLen(ticks);
-                  ((Chord*)cr)->setGrace(grace);
                   cr->setBeamMode(bm);
                   cr->setStaffIdx(staff + relStaff);
+                  if (grace) {
+                        NoteType nt = NOTE_APPOGGIATURA;
+                        if (graceSlash == "yes")
+                              nt = NOTE_ACCIACCATURA;
+                        ((Chord*)cr)->setNoteType(nt);
+                        ((Chord*)cr)->setTickOffset(-division / 2);
+                        cr->setTick(tick - (division / 2));
+                        cr->setTickLen(division / 2); // to get a hook
+                        }
+                  else
+                        cr->setTickLen(ticks);
                   Segment* s = measure->getSegment(cr);
                   s->add(cr);
                   }
             cr->add(note);
-            if (grace)
-                  cr->setSmall(grace);
 //            printf("staff for new note: %p (staff=%d, relStaff=%d)\n",
 //                   score->staff(staff + relStaff), staff, relStaff);
             xmlSetPitch(note, tick, c, alter, octave, accidental);

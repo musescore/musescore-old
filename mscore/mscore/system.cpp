@@ -305,6 +305,7 @@ void System::layout2(ScoreLayout* layout)
                   dist = std::max(dist, m->distance(staffIdx));
             if (dist > distance(staffIdx))
                   setDistance(staffIdx, dist);
+#if 0
             //
             //  layout lyrics separators
             //
@@ -327,7 +328,7 @@ void System::layout2(ScoreLayout* layout)
                               }
                         }
                   }
-
+#endif
             SysStaff* s = _staves[staffIdx];
             if (!staff->show()) {
                   s->setbbox(QRectF());

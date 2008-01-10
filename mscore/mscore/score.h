@@ -289,7 +289,7 @@ class Score : public QObject {
       void undoChangeBarLineSpan(Staff*, int);
 
       void setNote(int tick, int track, int pitch, int len);
-      void setGraceNote(int tick, int track,  int pitch, NoteType type);
+      void setGraceNote(int tick, int track,  int pitch, NoteType type, int len);
       int clefOffset(int tick, Staff*) const;
       Rest* setRest(int tick, int len, int track, Measure*);
       void setRest(int tick, int track, int len);
@@ -403,6 +403,7 @@ class Score : public QObject {
 
       ChordRest* getSelectedChordRest() const;
       Element* getSelectedElement() const { return sel->element(); }
+      Selection* selection() const        { return sel; }
       int pos();
       Measure* tick2measure(int tick) const;
       MeasureBase* tick2measureBase(int tick) const;
@@ -469,7 +470,6 @@ class Score : public QObject {
       void toEList(QMap<int, Event>* events, bool expandRepeats, int tickOffset, int staffIdx);
       int mscVersion() const { return _mscVersion; }
 
-      Selection* selection() const { return sel; }
       SigList*   getSigmap()  { return sigmap; }
       Measure* appendMeasure();
       };
