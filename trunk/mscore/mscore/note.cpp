@@ -769,7 +769,6 @@ Element* Note::drop(const QPointF&, const QPointF&, Element* e)
                   NoteType t = NOTE_ACCIACCATURA;
                   if (e->subtype() == ICON_APPOGGIATURA)
                         t = NOTE_APPOGGIATURA;
-printf("note: set grace note\n");
                   score()->setGraceNote(chord()->tick(), track(), pitch(), t, division/2);
                   }
                   delete e;

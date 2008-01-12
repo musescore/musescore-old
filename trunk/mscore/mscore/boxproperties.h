@@ -3,7 +3,7 @@
 //  Linux Music Score Editor
 //  $Id:$
 //
-//  Copyright (C) 2008 Werner Schweer and others
+//  Copyright (C) 2009 Werner Schweer and others
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.
@@ -32,6 +32,9 @@ class Box;
 class BoxProperties : public QDialog, private Ui::BoxPropertiesBase {
       Q_OBJECT
       Box* _box;
+
+   private slots:
+      void ok();
 
    public:
       BoxProperties(Box*, QWidget* parent = 0);

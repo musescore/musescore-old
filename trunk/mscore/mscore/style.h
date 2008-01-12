@@ -134,6 +134,8 @@ struct Style {
       Spatium systemDistance;
       Spatium lyricsDistance;             // bottom staff to top of lyrics line
       Spatium lyricsMinBottomDistance;    // min. dist. between bottom of lyrics and next staff
+      Spatium systemBoxDistance;          // dist. between staff and vertical box
+      Spatium boxSystemDistance;          // dist. between vertical box and next system
 
       Spatium minMeasureWidth;
       Spatium barWidth;
@@ -195,6 +197,7 @@ struct Style {
       bool measureNumberAllStaffs;
 
       double graceNoteMag;
+      double smallStaffMag;
 
       void load(QDomElement e);
       void save(Xml& xml);

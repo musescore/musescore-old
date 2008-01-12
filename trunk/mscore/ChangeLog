@@ -1,3 +1,7 @@
+12.1.8 (ws)
+      - add distances system-frame-system to style
+      - allow nesting of horizontal frames inside vertical frames
+      - introduce margins for boxes (frames)
 10.1.8 (lv)
       - preparations for reading/writing compressed MusicXML (*.mxl)
        (ws)

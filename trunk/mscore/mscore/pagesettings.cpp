@@ -297,7 +297,7 @@ void PageSettings::twosidedToggled(bool flag)
 
 void PageSettings::apply()
       {
-      double f = mmButton->isChecked() ? 1.0/INCH : 1.0;
+      double f  = mmButton->isChecked() ? 1.0/INCH : 1.0;
       double f1 = mmButton->isChecked() ? DPMM : DPI;
 
       cs->pageFormat()->size             = pageGroup->currentIndex();

@@ -79,6 +79,9 @@ void EditStyle::getValues()
       lstyle->systemDistance         = Spatium(systemDistance->value());
       lstyle->lyricsDistance         = Spatium(lyricsDistance->value());
       lstyle->lyricsMinBottomDistance = Spatium(lyricsMinBottomDistance->value());
+      lstyle->systemBoxDistance       = Spatium(systemFrameDistance->value());
+      lstyle->boxSystemDistance       = Spatium(frameSystemDistance->value());
+
       lstyle->measureSpacing         = measureSpacing->value();
       lstyle->minNoteDistance        = Spatium(minNoteDistance->value());
       lstyle->barNoteDistance        = Spatium(barNoteDistance->value());
@@ -103,6 +106,8 @@ void EditStyle::getValues()
       lstyle->beamMinLen             = Spatium(beamMinLen->value());
       lstyle->beamMinSlope           = beamMinSlope->value();
       lstyle->beamMaxSlope           = beamMaxSlope->value();
+      lstyle->graceNoteMag           = graceNoteSize->value() * 0.01;
+      lstyle->smallStaffMag          = smallStaffSize->value() * 0.01;
       }
 
 //---------------------------------------------------------
@@ -129,6 +134,9 @@ void EditStyle::setValues()
       systemDistance->setValue(lstyle->systemDistance.val());
       lyricsDistance->setValue(lstyle->lyricsDistance.val());
       lyricsMinBottomDistance->setValue(lstyle->lyricsMinBottomDistance.val());
+      systemFrameDistance->setValue(lstyle->systemBoxDistance.val());
+      frameSystemDistance->setValue(lstyle->boxSystemDistance.val());
+
       measureSpacing->setValue(lstyle->measureSpacing);
       minNoteDistance->setValue(lstyle->minNoteDistance.val());
       barNoteDistance->setValue(lstyle->barNoteDistance.val());
@@ -154,5 +162,8 @@ void EditStyle::setValues()
       beamMinLen->setValue(lstyle->beamMinLen.val());
       beamMinSlope->setValue(lstyle->beamMinSlope);
       beamMaxSlope->setValue(lstyle->beamMaxSlope);
+
+      graceNoteSize->setValue(lstyle->graceNoteMag * 100.0);
+      smallStaffSize->setValue(lstyle->smallStaffMag * 100.0);
       }
 

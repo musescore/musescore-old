@@ -147,6 +147,8 @@ Style defaultStyle = {
       Spatium(9.25),  // systemDistance
       Spatium(2),     // lyricsDistance
       Spatium(2),     // lyricsMinBottomDistance
+      Spatium(7.0),   // dist. between system and vertical box
+      Spatium(7.0),   // dist. between vertical box and next system
 
       Spatium(4.0),   // minMeasureWidth  12.0
       Spatium(0.16),  // barWidth;
@@ -210,6 +212,7 @@ Style defaultStyle = {
       true,             // measureNumberSystem
       false,            // showMeasureNumberAllStaffs
       0.7,              // graceNoteMag
+      0.7               // smallStaffMag
       };
 
 //---------------------------------------------------------
@@ -378,6 +381,10 @@ void Style::load(QDomElement e)
                   lyricsDistance = Spatium(d);
             else if (tag == "lyricsMinBottomDistance")
                   lyricsMinBottomDistance = Spatium(d);
+            else if (tag == "systemFrameDistance")
+                  systemBoxDistance = Spatium(d);
+            else if (tag == "frameSystemDistance")
+                  boxSystemDistance = Spatium(d);
             else if (tag == "minMeasureWidth")
                   minMeasureWidth = Spatium(d);
             else if (tag == "barWidth")
@@ -484,6 +491,8 @@ void Style::load(QDomElement e)
                   measureNumberAllStaffs = i;
             else if (tag == "graceNoteMag")
                   graceNoteMag = d;
+            else if (tag == "smallStaffMag")
+                  smallStaffMag = d;
             else
                   domError(e);
             }
@@ -504,6 +513,8 @@ void Style::save(Xml& xml)
       xml.tag("systemDistance",         systemDistance.val());
       xml.tag("lyricsDistance",         lyricsDistance.val());
       xml.tag("lyricsMinBottomDistance", lyricsMinBottomDistance.val());
+      xml.tag("systemFrameDistance",    systemBoxDistance.val());
+      xml.tag("frameSystemDistance",    boxSystemDistance.val());
 
       xml.tag("minMeasureWidth",        minMeasureWidth.val());
       xml.tag("barWidth",               barWidth.val());
@@ -562,5 +573,6 @@ void Style::save(Xml& xml)
       xml.tag("measureNumberSystem",    measureNumberSystem);
 
       xml.tag("graceNoteMag",           graceNoteMag);
+      xml.tag("smallStaffMag",          smallStaffMag);
       xml.etag();
       }

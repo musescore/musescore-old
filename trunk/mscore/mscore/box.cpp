@@ -3,7 +3,7 @@
 //  Linux Music Score Editor
 //  $Id: measure.h,v 1.40 2006/04/12 14:58:10 wschweer Exp $
 //
-//  Copyright (C) 2002-2007 Werner Schweer and others
+//  Copyright (C) 2002-2008 Werner Schweer and others
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.
@@ -26,6 +26,7 @@
 #include "repeat.h"
 #include "viewer.h"
 #include "canvas.h"
+#include "boxproperties.h"
 
 //---------------------------------------------------------
 //   Box
@@ -266,6 +267,8 @@ bool HBox::genPropertyMenu(QMenu* popup) const
       QMenu* textMenu = popup->addMenu(tr("Add Text"));
       QAction* a = getAction("frame-text");
       textMenu->addAction(a);
+      a = popup->addAction(tr("Properties..."));
+      a->setData("props");
       return true;
       }
 
@@ -275,7 +278,11 @@ bool HBox::genPropertyMenu(QMenu* popup) const
 
 void HBox::propertyAction(const QString& cmd)
       {
-      if (cmd == "frame-text") {
+      if (cmd == "props") {
+            BoxProperties vp(this, 0);
+            vp.exec();
+            }
+      else if (cmd == "frame-text") {
             Text* s = new Text(score());
             s->setSubtype(TEXT_FRAME);
             s->setParent(this);
@@ -292,7 +299,7 @@ void HBox::propertyAction(const QString& cmd)
 
 bool VBox::genPropertyMenu(QMenu* popup) const
       {
-      QMenu* textMenu = popup->addMenu(tr("Add Text"));
+      QMenu* textMenu = popup->addMenu(tr("Add"));
 
       QAction* a = getAction("title-text");
       a->blockSignals(true);
@@ -310,6 +317,12 @@ bool VBox::genPropertyMenu(QMenu* popup) const
       a->blockSignals(true);
       textMenu->addAction(a);
 
+      a = getAction("insert-hbox");
+      a->blockSignals(true);
+      textMenu->addAction(a);
+
+      a = popup->addAction(tr("Properties..."));
+      a->setData("props");
       return true;
       }
 
@@ -319,7 +332,12 @@ bool VBox::genPropertyMenu(QMenu* popup) const
 
 void VBox::propertyAction(const QString& cmd)
       {
-      Text* s = 0;
+      if (cmd == "props") {
+            BoxProperties vp(this, 0);
+            vp.exec();
+            return;
+            }
+      Element* s = 0;
       if (cmd == "title-text") {
             s = new Text(score());
             s->setSubtype(TEXT_TITLE);
@@ -336,17 +354,26 @@ void VBox::propertyAction(const QString& cmd)
             s = new Text(score());
             s->setSubtype(TEXT_POET);
             }
+      else if (cmd == "insert-hbox") {
+            s = new HBox(score());
+            }
+      else {
+            printf("VBox::propertyAction: %s unknown\n", qPrintable(cmd));
+            return;
+            }
       if (s) {
             s->setParent(this);
             score()->undoAddElement(s);
             score()->select(s, 0, 0);
-            score()->canvas()->startEdit(s);
+            if (s->type() == TEXT)
+                  score()->canvas()->startEdit(s);
             score()->setLayoutAll(true);
             }
       getAction("title-text")->blockSignals(false);
       getAction("subtitle-text")->blockSignals(false);
       getAction("composer-text")->blockSignals(false);
       getAction("poet-text")->blockSignals(false);
+      getAction("insert-hbox")->blockSignals(false);
       }
 
 //---------------------------------------------------------
@@ -358,6 +385,55 @@ void VBox::layout(ScoreLayout* layout)
       setPos(QPointF());      // !?
       setbbox(QRectF(0.0, 0.0, system()->width(), boxHeight().point()));
       Box::layout(layout);
+      int n    = _hboxList.size();
+      double w = (system()->width() - 2.0 * leftMargin() * DPMM) / n;
+      for (int i = 0; i < _hboxList.size(); ++i) {
+            HBox* hb = _hboxList[i];
+            hb->setPos(leftMargin() * DPMM + (i * w), topMargin() * DPMM);
+            hb->setbbox(QRectF(0.0, 0.0, w,
+               boxHeight().point() - (topMargin() + bottomMargin()) * DPMM));
+            }
+      }
+
+//---------------------------------------------------------
+//   add
+//---------------------------------------------------------
+
+void VBox::add(Element* e)
+      {
+      if (e->type() == HBOX) {
+            e->setParent(this);
+            _hboxList.append((HBox*)e);
+            }
+      else
+            MeasureBase::add(e);
+      }
+
+//---------------------------------------------------------
+//   remove
+//---------------------------------------------------------
+
+void VBox::remove(Element* e)
+      {
+      if (e->type() == HBOX) {
+            int idx = _hboxList.indexOf((HBox*)e);
+            if (idx == -1)
+                  printf("VBox(%p)::remove(%s,%p) not found\n", this, e->name(), e);
+            _hboxList.removeAt(idx);
+            }
+      else
+            MeasureBase::remove(e);
+      }
+
+//---------------------------------------------------------
+//   collectElements
+//---------------------------------------------------------
+
+void VBox::collectElements(QList<const Element*>& el) const
+      {
+      foreach(Element* e, _hboxList)
+            e->collectElements(el);
+      MeasureBase::collectElements(el);
       }
 
 
