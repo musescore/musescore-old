@@ -113,7 +113,7 @@ class Staff {
       int barLineSpan() const        { return _barLineSpan; }
       void setBarLineSpan(int val);
       Score* score() const           { return _score; }
-      double mag() const             { return _small ? 0.7 : 1.0; }
+      double mag() const;
       double height() const;
       };
 #endif

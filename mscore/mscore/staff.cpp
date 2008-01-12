@@ -30,6 +30,7 @@
 #include "key.h"
 #include "keysig.h"
 #include "segment.h"
+#include "style.h"
 
 //---------------------------------------------------------
 //   idx
@@ -482,5 +483,14 @@ void Staff::setBarLineSpan(int val)
 double Staff::height() const
       {
       return _lines * _spatium * mag();
+      }
+
+//---------------------------------------------------------
+//   mag
+//---------------------------------------------------------
+
+double Staff::mag() const
+      {
+      return _small ? score()->style()->smallStaffMag : 1.0;
       }
 

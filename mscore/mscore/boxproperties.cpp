@@ -3,7 +3,7 @@
 //  Linux Music Score Editor
 //  $Id:$
 //
-//  Copyright (C) 2008 Werner Schweer and others
+//  Copyright (C) 2009 Werner Schweer and others
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.
@@ -35,4 +35,18 @@ BoxProperties::BoxProperties(Box* b, QWidget* parent)
       rightMargin->setValue(b->rightMargin());
       topMargin->setValue(b->topMargin());
       bottomMargin->setValue(b->bottomMargin());
+      connect(dialogButtonBox, SIGNAL(accepted()), SLOT(ok()));
       }
+
+//---------------------------------------------------------
+//   ok
+//---------------------------------------------------------
+
+void BoxProperties::ok()
+      {
+      _box->setLeftMargin(leftMargin->value());
+      _box->setRightMargin(rightMargin->value());
+      _box->setTopMargin(topMargin->value());
+      _box->setBottomMargin(bottomMargin->value());
+      }
+

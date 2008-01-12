@@ -137,7 +137,6 @@ Measure::Measure(Score* s)
             s->lines     = new StaffLines(score());
             s->lines->setStaffIdx(staffIdx);
             s->lines->setLines(staff->lines());
-            s->lines->setMag(staff->mag());
             s->lines->setParent(this);
             staves.push_back(s);
             }
@@ -472,8 +471,11 @@ void Measure::layoutNoteHeads(int staff)
 void Measure::layout(ScoreLayout* layout, double width)
       {
       int nstaves = _score->nstaves();
-      for (int staffIdx = 0; staffIdx < nstaves; ++staffIdx)
+      for (int staffIdx = 0; staffIdx < nstaves; ++staffIdx) {
             staves[staffIdx]->distance = 0.0;
+            if (staves[staffIdx]->lines)
+                  staves[staffIdx]->lines->setMag(score()->staff(staffIdx)->mag());
+            }
 
       // height of boundingRect will be set in system->layout2()
 
@@ -1488,7 +1490,6 @@ void Measure::cmdAddStaves(int sStaff, int eStaff)
             ms->lines    = new StaffLines(score());
             ms->lines->setStaffIdx(i);
             ms->lines->setLines(staff->lines());
-            ms->lines->setMag(staff->mag());
             ms->lines->setParent(this);
 
             insertMStaff(ms, i);
@@ -1567,7 +1568,6 @@ void Measure::insertStaff1(Staff* staff, int staffIdx)
       MStaff* ms = new MStaff;
       ms->lines   = new StaffLines(score());
       ms->lines->setLines(staff->lines());
-      ms->lines->setMag(staff->mag());
       ms->lines->setParent(this);
       ms->distance = point(staffIdx == 0 ? score()->style()->systemDistance : score()->style()->staffDistance);
       insertMStaff(ms, staffIdx);
@@ -2112,7 +2112,6 @@ void Measure::read(QDomElement e, int idx)
             Staff* staff = score()->staff(idx);
             s->lines     = new StaffLines(score());
             s->lines->setLines(staff->lines());
-            s->lines->setMag(staff->mag());
             s->lines->setParent(this);
             s->distance = point(n == 0 ? score()->style()->systemDistance : score()->style()->staffDistance);
             s->userDistance = 0.0;

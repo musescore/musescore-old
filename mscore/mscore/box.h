@@ -3,7 +3,7 @@
 //  Linux Music Score Editor
 //  $Id:$
 //
-//  Copyright (C) 2002-2007 Werner Schweer and others
+//  Copyright (C) 2002-2008 Werner Schweer and others
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.
@@ -38,7 +38,8 @@ class Box : public MeasureBase {
 
       Spatium _boxWidth;       // only valid for HBox
       Spatium _boxHeight;      // only valid for VBox
-      double _leftMargin, _rightMargin, _topMargin, _bottomMargin;
+      double _leftMargin, _rightMargin;   // values in metric mm
+      double _topMargin, _bottomMargin;
       bool editMode;
 
    public:
@@ -81,6 +82,7 @@ class HBox : public Box {
       ~HBox();
       virtual HBox* clone() const      { return new HBox(*this); }
       virtual ElementType type() const { return HBOX;       }
+      virtual QString userName() const { return QWidget::tr("Horizontal Frame"); }
 
       virtual void layout(ScoreLayout*);
       virtual void collectElements(QList<const Element*>& el) const;
@@ -97,16 +99,22 @@ class HBox : public Box {
 //---------------------------------------------------------
 
 class VBox : public Box {
+      QList<HBox*> _hboxList;
 
    public:
       VBox(Score* score) : Box(score) {}
       virtual VBox* clone() const      { return new VBox(*this); }
       virtual ElementType type() const { return VBOX;       }
+      virtual QString userName() const { return QWidget::tr("Vertical Frame"); }
 
       virtual void layout(ScoreLayout*);
 
       virtual bool genPropertyMenu(QMenu*) const;
       virtual void propertyAction(const QString&);
+
+      virtual void add(Element*);
+      virtual void remove(Element*);
+      virtual void collectElements(QList<const Element*>& el) const;
       };
 
 #endif

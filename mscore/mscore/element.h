@@ -232,6 +232,7 @@ class Element {
       // debug functions
       virtual void dump() const;
       const char* name() const         { return elementNames[type()]; }
+      virtual QString userName() const { return elementNames[type()]; }
       static const char* name(int val) { return elementNames[val];    }
       void dumpQPointF(const char*) const;
 

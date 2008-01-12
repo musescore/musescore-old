@@ -1046,7 +1046,10 @@ void Score::addElement(Element* element)
             printf("   Score::addElement %p %s parent %s\n",
                element, element->name(), element->parent()->name());
 
-      if (element->type() == MEASURE || element->type() == HBOX || element->type() == VBOX) {
+      if (element->type() == MEASURE
+         || (element->type() == HBOX && element->parent()->type() != VBOX)
+         || element->type() == VBOX
+         ) {
             _layout->add(element);
             return;
             }
