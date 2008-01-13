@@ -50,6 +50,7 @@ set_source_files_properties(
 include_directories(
       ${CMAKE_CURRENT_BINARY_DIR}
       ${PROJECT_SOURCE_DIR}/awl
+      ${PROJECT_SOURCE_DIR}/osdabzip
       ${PROJECT_SOURCE_DIR}
       )
 if (NOT USE_GLOBAL_FLUID)
@@ -151,6 +152,7 @@ if (MINGW)
    target_link_libraries(mscore
       fluid
       awl
+      osdabzip
       ${QT_mingw_LIBRARIES}
       portaudio
       )
@@ -186,6 +188,7 @@ else (MINGW)
             ${PORTAUDIO_LIB}
             ${FLUID_LIB}
             awl
+            osdabzip
             )
    else (USE_GLOBAL_FLUID)
          target_link_libraries(mscore
@@ -195,6 +198,7 @@ else (MINGW)
             ${PORTAUDIO_LIB}
             fluid
             awl
+            osdabzip
             )
    endif (USE_GLOBAL_FLUID)
 
