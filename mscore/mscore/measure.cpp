@@ -468,8 +468,6 @@ void Measure::layout0(int staffIdx)
                         chord->setMag(m);
                         layoutChord(chord, tversatz);
                         }
-                  else if (e->type() == CLEF)
-                        e->setMag(staffMag * score()->style()->smallClefMag);
                   else
                         e->setMag(staffMag);
                   }

@@ -2,15 +2,19 @@
 <museScore version="1.4">
   <Spatium>1.425</Spatium>
   <Division>480</Division>
-  <Mag>1.64337</Mag>
-  <xoff>30</xoff>
-  <yoff>41</yoff>
+  <Mag>1</Mag>
+  <xoff>18.2552</xoff>
+  <yoff>24.9487</yoff>
   <Style>
     <staffUpperBorder>7</staffUpperBorder>
     <staffLowerBorder>7</staffLowerBorder>
     <staffDistance>6.5</staffDistance>
     <akkoladeDistance>5.5</akkoladeDistance>
     <systemDistance>9.25</systemDistance>
+    <lyricsDistance>6.5</lyricsDistance>
+    <lyricsMinBottomDistance>2</lyricsMinBottomDistance>
+    <systemFrameDistance>7</systemFrameDistance>
+    <frameSystemDistance>7</frameSystemDistance>
     <minMeasureWidth>4</minMeasureWidth>
     <barWidth>0.16</barWidth>
     <doubleBarWidth>0.16</doubleBarWidth>
@@ -62,7 +66,10 @@
     <measureNumberInterval>5</measureNumberInterval>
     <measureNumberAllStaffs>0</measureNumberAllStaffs>
     <measureNumberSystem>1</measureNumberSystem>
-    <lyricsDistance>6.5</lyricsDistance>
+    <graceNoteMag>0.7</graceNoteMag>
+    <smallStaffMag>0.7</smallStaffMag>
+    <smallNoteMag>0.7</smallNoteMag>
+    <smallClefMag>0.7</smallClefMag>
     </Style>
   <showInvisible>1</showInvisible>
   <page-layout>
@@ -258,15 +265,15 @@ p, li { white-space: pre-wrap; }
     <Measure number="1">
       <Dynamic>
         <subtype>f</subtype>
-        <offset x="-0.526386" y="2.72978"/>
         </Dynamic>
       <Text>
         <subtype>System</subtype>
         <offset x="-5.60395" y="-2.6212"/>
+        <anchor>segment</anchor>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
-</style></head><body style=" font-family:'Times New Roman'; font-size:8.07874pt; font-weight:400; font-style:normal;">
-<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;"><span style=" font-family:'Century Schoolbook L'; font-size:9pt;">Allegro giusto, nel modo russico; senza allegrezza, ma poco sostenuto.</span></p></body></html>
+</style></head><body style=" font-family:'Times New Roman'; font-size:10pt; font-weight:400; font-style:normal;">
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:8pt;"><span style=" font-family:'Century Schoolbook L'; font-size:9pt;">Allegro giusto, nel modo russico; senza allegrezza, ma poco sostenuto.</span></p></body></html>
         </Text>
       <TimeSig>
         <subtype>324</subtype>
@@ -2416,5 +2423,5 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     </Staff>
-  <cursorTrack>0</cursorTrack>
+  <cursorTrack>-4</cursorTrack>
   </museScore>

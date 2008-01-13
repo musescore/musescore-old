@@ -2,9 +2,9 @@
 <museScore version="1.4">
   <Spatium>1.62</Spatium>
   <Division>480</Division>
-  <Mag>1.5</Mag>
-  <xoff>36.78</xoff>
-  <yoff>26.31</yoff>
+  <Mag>1</Mag>
+  <xoff>10</xoff>
+  <yoff>-164</yoff>
   <Style>
     <staffUpperBorder>7</staffUpperBorder>
     <staffLowerBorder>7</staffLowerBorder>
@@ -13,6 +13,8 @@
     <systemDistance>9.25</systemDistance>
     <lyricsDistance>2</lyricsDistance>
     <lyricsMinBottomDistance>2</lyricsMinBottomDistance>
+    <systemFrameDistance>7</systemFrameDistance>
+    <frameSystemDistance>7</frameSystemDistance>
     <minMeasureWidth>4</minMeasureWidth>
     <barWidth>0.16</barWidth>
     <doubleBarWidth>0.16</doubleBarWidth>
@@ -64,6 +66,10 @@
     <measureNumberInterval>5</measureNumberInterval>
     <measureNumberAllStaffs>0</measureNumberAllStaffs>
     <measureNumberSystem>1</measureNumberSystem>
+    <graceNoteMag>0.7</graceNoteMag>
+    <smallStaffMag>0.7</smallStaffMag>
+    <smallNoteMag>0.7</smallNoteMag>
+    <smallClefMag>0.8</smallClefMag>
     </Style>
   <showInvisible>0</showInvisible>
   <page-layout>
@@ -246,10 +252,6 @@ p, li { white-space: pre-wrap; }
         </Text>
       </VBox>
     <Measure number="1">
-      <Dynamic>
-        <subtype>sfz</subtype>
-        <offset x="-0.851995" y="7.25919"/>
-        </Dynamic>
       <Tempo>
         <tempo>1.33333</tempo>
         <subtype>Tempo</subtype>
@@ -259,6 +261,9 @@ p, li { white-space: pre-wrap; }
 </style></head><body style=" font-family:'Times New Roman'; font-size:12pt; font-weight:600; font-style:normal;">
 <p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:11pt;">Allegro</p></body></html>
         </Tempo>
+      <Dynamic>
+        <subtype>mf</subtype>
+        </Dynamic>
       <TimeSig>
         <subtype>1073742084</subtype>
         <den>4</den>
@@ -1395,10 +1400,6 @@ p, li { white-space: pre-wrap; }
     </Staff>
   <Staff id="2">
     <Measure number="1">
-      <Dynamic>
-        <subtype>sfz</subtype>
-        <offset x="-0.0990949" y="7.19393"/>
-        </Dynamic>
       <TimeSig>
         <subtype>1073742084</subtype>
         <den>4</den>
@@ -1484,8 +1485,7 @@ p, li { white-space: pre-wrap; }
         <ticklen>480</ticklen>
         </Rest>
       <Clef>
-        <subtype>4100</subtype>
-        <offset x="0" y="1"/>
+        <subtype>4</subtype>
         </Clef>
       <Chord>
         <ticklen>480</ticklen>
@@ -1680,8 +1680,7 @@ p, li { white-space: pre-wrap; }
       <Note pitch="57" tpc="17" ticks="120"/>
       <Note pitch="62" tpc="16" ticks="120"/>
       <Clef>
-        <subtype>4096</subtype>
-        <offset x="0" y="3"/>
+        <subtype>0</subtype>
         </Clef>
       </Measure>
     <Measure number="18">
@@ -1938,8 +1937,7 @@ p, li { white-space: pre-wrap; }
         <ticklen>480</ticklen>
         </Rest>
       <Clef>
-        <subtype>4100</subtype>
-        <offset x="0" y="1"/>
+        <subtype>4</subtype>
         </Clef>
       <Chord>
         <ticklen>480</ticklen>
@@ -1981,8 +1979,7 @@ p, li { white-space: pre-wrap; }
         <ticklen>480</ticklen>
         </Rest>
       <Clef>
-        <subtype>4096</subtype>
-        <offset x="0" y="3"/>
+        <subtype>0</subtype>
         </Clef>
       <Chord>
         <ticklen>480</ticklen>
@@ -2004,8 +2001,7 @@ p, li { white-space: pre-wrap; }
         <ticklen>480</ticklen>
         </Rest>
       <Clef>
-        <subtype>4100</subtype>
-        <offset x="0" y="1"/>
+        <subtype>4</subtype>
         </Clef>
       <Chord>
         <ticklen>480</ticklen>
@@ -2067,8 +2063,7 @@ p, li { white-space: pre-wrap; }
         <ticklen>480</ticklen>
         </Rest>
       <Clef>
-        <subtype>4096</subtype>
-        <offset x="0" y="3"/>
+        <subtype>0</subtype>
         </Clef>
       <Chord>
         <ticklen>480</ticklen>
@@ -2090,8 +2085,7 @@ p, li { white-space: pre-wrap; }
         <ticklen>480</ticklen>
         </Rest>
       <Clef>
-        <subtype>4100</subtype>
-        <offset x="0" y="1"/>
+        <subtype>4</subtype>
         </Clef>
       <Chord>
         <ticklen>480</ticklen>
@@ -2153,8 +2147,7 @@ p, li { white-space: pre-wrap; }
         <ticklen>120</ticklen>
         </Rest>
       <Clef>
-        <subtype>4096</subtype>
-        <offset x="0" y="3"/>
+        <subtype>0</subtype>
         </Clef>
       <Chord>
         <ticklen>120</ticklen>
@@ -2197,8 +2190,7 @@ p, li { white-space: pre-wrap; }
         <ticklen>120</ticklen>
         </Rest>
       <Clef>
-        <subtype>4100</subtype>
-        <offset x="0" y="1"/>
+        <subtype>4</subtype>
         </Clef>
       <Chord>
         <ticklen>120</ticklen>
@@ -2243,8 +2235,7 @@ p, li { white-space: pre-wrap; }
       </Measure>
     <Measure number="42">
       <Clef>
-        <subtype>4096</subtype>
-        <offset x="0" y="3"/>
+        <subtype>0</subtype>
         </Clef>
       <Note pitch="65" tpc="13" ticks="240"/>
       <Chord>
@@ -2335,8 +2326,7 @@ p, li { white-space: pre-wrap; }
         <ticklen>480</ticklen>
         </Rest>
       <Clef>
-        <subtype>4100</subtype>
-        <offset x="0" y="1"/>
+        <subtype>4</subtype>
         </Clef>
       <Chord>
         <ticklen>480</ticklen>
@@ -2503,8 +2493,7 @@ p, li { white-space: pre-wrap; }
         <ticklen>480</ticklen>
         </Rest>
       <Clef>
-        <subtype>4096</subtype>
-        <offset x="0" y="3"/>
+        <subtype>0</subtype>
         </Clef>
       </Measure>
     <Measure number="58">
@@ -2599,8 +2588,7 @@ p, li { white-space: pre-wrap; }
       </Measure>
     <Measure number="63">
       <Clef>
-        <subtype>4104</subtype>
-        <offset x="0" y="1"/>
+        <subtype>4</subtype>
         </Clef>
       <Rest>
         <ticklen>120</ticklen>
@@ -2651,8 +2639,7 @@ p, li { white-space: pre-wrap; }
       </Measure>
     <Measure number="65">
       <Clef>
-        <subtype>4096</subtype>
-        <offset x="0" y="3"/>
+        <subtype>0</subtype>
         </Clef>
       <Rest>
         <ticklen>120</ticklen>
@@ -2743,8 +2730,7 @@ p, li { white-space: pre-wrap; }
       </Measure>
     <Measure number="68">
       <Clef>
-        <subtype>4100</subtype>
-        <offset x="0" y="1"/>
+        <subtype>4</subtype>
         </Clef>
       <Rest>
         <ticklen>240</ticklen>
@@ -2883,5 +2869,5 @@ p, li { white-space: pre-wrap; }
         </Rest>
       </Measure>
     </Staff>
-  <cursorTrack>-4</cursorTrack>
+  <cursorTrack>0</cursorTrack>
   </museScore>
