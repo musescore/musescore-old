@@ -237,6 +237,10 @@ void Score::clear()
 //   read
 //---------------------------------------------------------
 
+/**
+ Import file \a name.
+ */
+
 void Score::read(QString name)
       {
       _saved = false;

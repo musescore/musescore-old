@@ -62,6 +62,7 @@
 #include "ottava.h"
 #include "trill.h"
 #include "pedal.h"
+#include "unzip.h"
 
 //---------------------------------------------------------
 //   xmlSetPitch
@@ -117,7 +118,7 @@ MusicXml::MusicXml(QDomDocument* d)
 //---------------------------------------------------------
 
 /**
- LoadMusicXml constructor.
+ Loader for MusicXml files.
  */
 
 class LoadMusicXml : public LoadFile {
@@ -159,6 +160,115 @@ bool LoadMusicXml::loader(QFile* qf)
       }
 
 //---------------------------------------------------------
+//   LoadCompressedMusicXml
+//---------------------------------------------------------
+
+/**
+ Loader for compressed MusicXml files.
+ */
+
+class LoadCompressedMusicXml : public LoadFile {
+      QDomDocument* _doc;
+
+   public:
+      LoadCompressedMusicXml() {
+            _doc = new QDomDocument();
+            }
+      ~LoadCompressedMusicXml() {
+            delete _doc;
+            }
+      virtual bool loader(QFile* f);
+      QDomDocument* doc() const { return _doc; }
+      };
+
+//---------------------------------------------------------
+//   loader
+//---------------------------------------------------------
+
+/**
+ Load compressed MusicXML file \a qf, return false if OK and true on error.
+ */
+
+bool LoadCompressedMusicXml::loader(QFile* qf)
+      {
+      printf("LoadCompressedMusicXml::loader(%s)\n", qf->fileName().toLatin1().data());
+      UnZip uz;
+      UnZip::ErrorCode ec;
+      ec = uz.openArchive(qf->fileName());
+      if (ec != UnZip::Ok)
+      {
+            printf("Unable to open archive: %s", uz.formatError(ec).toAscii().data());
+            return true;
+      }
+      printf("ec=%d\n", ec);
+
+      QBuffer cbuf;
+      cbuf.open(QIODevice::WriteOnly);
+      ec = uz.extractFile("META-INF/container.xml", &cbuf);
+      printf("ec=%d, bufsize=%d\n", ec, cbuf.data().size());
+      // printf("data=%s\n", cbuf.data().data());
+
+      QDomDocument container;
+      int line, column;
+      QString err;
+      if (!container.setContent(cbuf.data(), false, &err, &line, &column)) {
+            QString col, ln;
+            col.setNum(column);
+            ln.setNum(line);
+            error = err + "\n at line " + ln + " column " + col;
+            printf("error: %s\n", error.toLatin1().data());
+            return true;
+            }
+      // printf("container=%s\n", container.toString().toAscii().data());
+
+      // extract first rootfile
+      QString rootfile = "";
+      for (QDomElement e = container.documentElement(); !e.isNull(); e = e.nextSiblingElement()) {
+            if (e.tagName() == "container") {
+                  for (QDomElement ee = e.firstChildElement(); !ee.isNull(); ee = ee.nextSiblingElement()) {
+                        if (ee.tagName() == "rootfiles") {
+                              for (QDomElement eee = ee.firstChildElement(); !eee.isNull(); eee = eee.nextSiblingElement()) {
+                                    if (eee.tagName() == "rootfile") {
+                                          if (rootfile == "")
+                                                rootfile = eee.attribute(QString("full-path"));
+                                          }
+                                    else
+                                          domError(eee);
+                                    }
+                              }
+                        else
+                              domError(ee);
+                        }
+                  }
+            else
+                  domError(e);
+            }
+      if (rootfile == "") {
+            printf("can't find rootfile in: %s\n", qf->fileName().toLatin1().data());
+            return true;
+            }
+      else
+            printf("rootfile=%s\n", rootfile.toLatin1().data());
+
+      QBuffer dbuf;
+      dbuf.open(QIODevice::WriteOnly);
+      ec = uz.extractFile(rootfile, &dbuf);
+      printf("ec=%d, bufsize=%d\n", ec, dbuf.data().size());
+      // printf("data=%s\n", dbuf.data().data());
+
+      if (!_doc->setContent(dbuf.data(), false, &err, &line, &column)) {
+            QString col, ln;
+            col.setNum(column);
+            ln.setNum(line);
+            error = err + "\n at line " + ln + " column " + col;
+            printf("error: %s\n", error.toLatin1().data());
+            return true;
+            }
+      docName = qf->fileName();
+      return false;
+      }
+
+//---------------------------------------------------------
 //   importMusicXml
 //---------------------------------------------------------
 
@@ -188,9 +298,7 @@ void Score::importMusicXml(const QString& name)
 
 void Score::importCompressedMusicXml(const QString& name)
       {
-      printf("Score::importCompressedMusicXml(%s): not implemented\n", name.toLatin1().data());
-/*
-      LoadMusicXml lx;
+      LoadCompressedMusicXml lx;
       lx.load(name);
       setSaved(false);
       MusicXml musicxml(lx.doc());
@@ -198,7 +306,6 @@ void Score::importCompressedMusicXml(const QString& name)
       _layout->connectTies();
       layoutAll = true;
       _created = true;
-*/
       }
 
 //---------------------------------------------------------

@@ -18,6 +18,10 @@
 //  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //=============================================================================
 
+/**
+ File handling: loading and saving.
+ */
+
 #include "config.h"
 #include "mscore.h"
 #include "canvas.h"
@@ -61,9 +65,17 @@
 double printerMag = 1.0;
 
 //---------------------------------------------------------
-//   getFile
+//   load
 //    return true on error
 //---------------------------------------------------------
+
+/**
+ Create a modal file open dialog with caption \a caption,
+ working directory \a base
+ and filter \a ext.
+ If a file is selected, load it.
+ Return false if OK and true on error.
+ */
 
 bool LoadFile::load(QWidget* parent, const QString& base, const QString& ext,
    const QString& caption)
@@ -81,6 +93,12 @@ bool LoadFile::load(QWidget* parent, const QString& base, const QString& ext,
             }
       return load(_name);
       }
+
+/**
+ Load file \a name.
+ Display message box with error if loading fails.
+ Return false if OK and true on error.
+ */
 
 bool LoadFile::load(const QString& name)
       {
@@ -143,6 +161,11 @@ void MuseScore::clearScore()
 //---------------------------------------------------------
 //   loadFile
 //---------------------------------------------------------
+
+/**
+ Create a modal file open dialog.
+ If a file is selected, load it.
+ */
 
 void MuseScore::loadFile()
       {
