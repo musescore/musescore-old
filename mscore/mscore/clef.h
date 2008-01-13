@@ -32,7 +32,6 @@ class Xml;
 class Viewer;
 class Segment;
 
-static const int clefSmallBit = 0x1000;
 static const int NO_CLEF = -1000;
 
 //---------------------------------------------------------
@@ -48,12 +47,11 @@ class Clef : public Compound {
    public:
       Clef(Score*);
       Clef(Score*, int i);
-      virtual Clef* clone() const { return new Clef(*this); }
+      virtual Clef* clone() const      { return new Clef(*this); }
       virtual ElementType type() const { return CLEF; }
       virtual QPointF canvasPos() const;      ///< position in canvas coordinates
-      Segment* segment() const { return (Segment*)parent(); }
+      Segment* segment() const         { return (Segment*)parent(); }
 
-      void setSmall(bool val);
       virtual void space(double& min, double& extra) const;
       virtual bool acceptDrop(Viewer*, const QPointF&, int, int) const;
       virtual Element* drop(const QPointF&, const QPointF&, Element*);

@@ -817,14 +817,16 @@ void Note::propertyAction(const QString& s)
       }
 
 //---------------------------------------------------------
-//   setMag
+//   layout
 //---------------------------------------------------------
 
-void Note::setMag(double val)
+void Note::layout(ScoreLayout*)
       {
-      Element::setMag(val);
+      setMag(chord()->mag());
       if (_accidental)
-            _accidental->setMag(val);
+            _accidental->setMag(mag());
+      foreach(Text* t, _fingering)
+            t->setMag(mag());
       }
 
 //---------------------------------------------------------
@@ -849,5 +851,4 @@ QPointF Note::canvasPos() const
       double yp = y() + system->staff(staffIdx() + staffMove())->y() + system->y();
       return QPointF(xp, yp);
       }
-
 

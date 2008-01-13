@@ -211,8 +211,10 @@ Style defaultStyle = {
       5,                // measureNumberInterval;
       true,             // measureNumberSystem
       false,            // showMeasureNumberAllStaffs
+      0.7,              // smallNoteMag
       0.7,              // graceNoteMag
-      0.7               // smallStaffMag
+      0.7,              // smallStaffMag
+      0.7               // smallClefMag
       };
 
 //---------------------------------------------------------
@@ -493,6 +495,10 @@ void Style::load(QDomElement e)
                   graceNoteMag = d;
             else if (tag == "smallStaffMag")
                   smallStaffMag = d;
+            else if (tag == "smallNoteMag")
+                  smallNoteMag = d;
+            else if (tag == "smallClefMag")
+                  smallClefMag = d;
             else
                   domError(e);
             }
@@ -574,5 +580,7 @@ void Style::save(Xml& xml)
 
       xml.tag("graceNoteMag",           graceNoteMag);
       xml.tag("smallStaffMag",          smallStaffMag);
+      xml.tag("smallNoteMag",           smallNoteMag);
+      xml.tag("smallClefMag",           smallClefMag);
       xml.etag();
       }

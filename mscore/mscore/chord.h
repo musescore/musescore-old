@@ -200,7 +200,6 @@ class Chord : public ChordRest {
       virtual int downLine() const;
       virtual void space(double& min, double& extra) const;
       void readNote(QDomElement node, int staffIdx);
-      virtual void setMag(double val);
 
       NoteType noteType() const    { return _noteType; }
       void setNoteType(NoteType t) { _noteType = t; }

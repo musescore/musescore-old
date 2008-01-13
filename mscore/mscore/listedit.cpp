@@ -920,7 +920,7 @@ void ShowClefWidget::setElement(Element* e)
       {
       Clef* clef = (Clef*)e;
       ShowElementBase::setElement(e);
-      idx->setValue(clef->subtype() & clefSmallBit);
+      idx->setValue(clef->subtype());
       }
 
 //---------------------------------------------------------

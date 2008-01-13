@@ -246,7 +246,8 @@ class Element {
       virtual int tickLen() const     { return _duration.tick(); }
       virtual void setTickLen(int t)  { _duration.setTick(t); }
       virtual void space(double& min, double& extra) const;
-      QColor color() const;
+      QColor color() const            { return _color; }
+      QColor curColor() const;
       void setColor(const QColor& c)  { _color = c;    }
       static int readType(QDomElement& node, QPointF*);
 
@@ -303,7 +304,7 @@ class Element {
       static Element* create(int type, Score*);
 
       double mag() const                        { return _mag;   }
-      virtual void setMag(double val);
+      virtual void setMag(double val)           { _mag = val;    }
 
 /**
  Layout hints

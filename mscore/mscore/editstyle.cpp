@@ -108,6 +108,8 @@ void EditStyle::getValues()
       lstyle->beamMaxSlope           = beamMaxSlope->value();
       lstyle->graceNoteMag           = graceNoteSize->value() * 0.01;
       lstyle->smallStaffMag          = smallStaffSize->value() * 0.01;
+      lstyle->smallNoteMag           = smallNoteSize->value() * 0.01;
+      lstyle->smallClefMag           = smallClefSize->value() * 0.01;
       }
 
 //---------------------------------------------------------
@@ -165,5 +167,7 @@ void EditStyle::setValues()
 
       graceNoteSize->setValue(lstyle->graceNoteMag * 100.0);
       smallStaffSize->setValue(lstyle->smallStaffMag * 100.0);
+      smallNoteSize->setValue(lstyle->smallNoteMag * 100.0);
+      smallClefSize->setValue(lstyle->smallClefMag * 100.0);
       }
 

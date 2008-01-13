@@ -2000,7 +2000,7 @@ void Canvas::drawElements(QPainter& p,const QList<const Element*>& el)
                   }
             p.save();
             p.translate(e->canvasPos());
-            p.setPen(QPen(e->color()));
+            p.setPen(QPen(e->curColor()));
             e->draw(p);
 // if (e->type() == TEXT && e->subtype() == TEXT_INSTRUMENT_LONG)
 //   printf("text %p <%s> %f %f\n",

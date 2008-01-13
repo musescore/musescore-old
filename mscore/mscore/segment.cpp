@@ -195,7 +195,6 @@ void Segment::removeStaff(int staff)
 void Segment::add(Element* el)
       {
       el->setParent(this);
-      el->setMag(el->staff()->mag());
 
       el->setTick(tick());    //DEBUG
       int staffIdx = el->staffIdx();
@@ -228,8 +227,6 @@ void Segment::add(Element* el)
             case REST:
                   {
                   ChordRest* cr = (ChordRest*)el;
-                  if (cr->small())
-                        cr->setMag(cr->mag() * .7);
                   if (cr->tuplet())
                         cr->tuplet()->add(cr);
                   }

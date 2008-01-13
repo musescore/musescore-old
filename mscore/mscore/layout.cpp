@@ -154,7 +154,7 @@ void ScoreLayout::doLayout()
                   if (mb->type() != MEASURE)
                         continue;
                   Measure* m = (Measure*)mb;
-                  m->layoutNoteHeads(staffIdx);
+                  m->layout0(staffIdx);
                   }
             }
 
@@ -264,11 +264,12 @@ void ScoreLayout::processSystemHeader(Measure* m)
                               KeySig* ks = (KeySig*)el;
                               // no natural accidentals
                               ks->setSubtype(ks->subtype() & 0xff);
+                              ks->setMag(staff->mag());
                               }
                               break;
                         case CLEF:
                               hasClef = true;
-                              ((Clef*)el)->setSmall(false);
+                              el->setMag(staff->mag());
                               break;
                         default:
                               break;
@@ -285,6 +286,7 @@ void ScoreLayout::processSystemHeader(Measure* m)
                         ks->setTick(tick);
                         ks->setGenerated(true);
                         ks->setSubtype(idx & 0xff);
+                        ks->setMag(staff->mag());
                         Segment* seg = m->getSegment(ks);
                         seg->add(ks);
                         }
@@ -298,6 +300,7 @@ void ScoreLayout::processSystemHeader(Measure* m)
                   cs->setStaffIdx(i);
                   cs->setTick(tick);
                   cs->setGenerated(true);
+                  cs->setMag(staff->mag());
                   Segment* s = m->getSegment(cs);
                   s->add(cs);
                   }
@@ -388,7 +391,7 @@ bool ScoreLayout::layoutPage()
 
                   curMeasure = curMeasure->next();
                   ++curSystem;
-                  y += bh;
+                  y += bh + score()->style()->boxSystemDistance.point();
                   }
             else {
                   bool isFirstSystem = false;
@@ -507,9 +510,8 @@ bool ScoreLayout::layoutSystem1(double& minWidth, double w, bool isFirstSystem)
                               for (int i = 0; i < nstaves; ++i) {
                                     int strack = i * VOICES;
                                     Element* el = seg->element(strack);
-                                    if (el && el->type() == CLEF) {
-                                          ((Clef*)el)->setSmall(true);
-                                          }
+                                    if (el && el->type() == CLEF)
+                                          el->setMag(el->staff()->mag() * .7);
                                     }
                               }
                         }

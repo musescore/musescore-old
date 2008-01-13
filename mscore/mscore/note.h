@@ -110,6 +110,7 @@ class Note : public Element {
       virtual ElementType type() const { return NOTE; }
       virtual QRectF bbox() const;
       virtual QPointF canvasPos() const;      ///< position in canvas coordinates
+      virtual void layout(ScoreLayout*);
 
       void setHead(int);
       int totalTicks() const;
@@ -166,7 +167,6 @@ class Note : public Element {
       virtual void propertyAction(const QString&);
 
       bool isSimple(Xml&) const;
-      virtual void setMag(double val);
 
       bool hidden() const           { return _hidden; }
       void setHidden(bool val)      { _hidden = val;  }
