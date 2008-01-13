@@ -1455,7 +1455,7 @@ void MusicXml::xmlAttributes(Measure* measure, int staff, QDomElement e)
                   (*ct)[tick] = clef;
                   if (tick) {
                         // dont generate symbol for tick 0
-                        Clef* clefs = new Clef(score, clef | clefSmallBit);
+                        Clef* clefs = new Clef(score, clef);
                         clefs->setTick(tick);
                         clefs->setStaffIdx(staff + clefno);
                         Segment* s = measure->getSegment(clefs);

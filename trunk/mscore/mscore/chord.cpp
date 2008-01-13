@@ -572,7 +572,7 @@ void Chord::layout(ScoreLayout* layout)
       if (notes.empty())
             return;
 
-      double _spatium = layout->spatium();
+      double _spatium  = layout->spatium();
       Note* upnote     = notes.back();
       double headWidth = upnote->headWidth();
 
@@ -592,7 +592,7 @@ void Chord::layout(ScoreLayout* layout)
       double staffMag = staff()->mag();
       for (iNote in = notes.begin(); in != notes.end(); ++in) {
             Note* note = in->second;
-            note->setMag(mag());
+            note->layout(layout);
 
             double x = 0.0;
 
@@ -1131,30 +1131,6 @@ qreal Chord::centerX() const
             x += downnote->headWidth() * .5;
             }
       return x;
-      }
-
-//---------------------------------------------------------
-//   setMag
-//---------------------------------------------------------
-
-void Chord::setMag(double val)
-      {
-      if (_noteType != NOTE_NORMAL)
-            val *= score()->style()->graceNoteMag;
-      Element::setMag(val);
-      for (iNote i = notes.begin(); i != notes.end(); ++i)
-            i->second->setMag(val);
-
-      foreach(LedgerLine* ll, _ledgerLines)
-            ll->setMag(mag());
-      if (_stem)
-            _stem->setMag(mag());
-      if (_hook)
-            _hook->setMag(mag());
-      if (_arpeggio)
-            _arpeggio->setMag(mag());
-      if (_tremolo)
-            _tremolo->setMag(mag());
       }
 
 //---------------------------------------------------------

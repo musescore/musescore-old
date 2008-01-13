@@ -171,10 +171,10 @@ void Element::setTrack(int track)
       }
 
 //---------------------------------------------------------
-//   color
+//   curColor
 //---------------------------------------------------------
 
-QColor Element::color() const
+QColor Element::curColor() const
       {
       if (score() && score()->printing())
             return _color;
@@ -398,15 +398,6 @@ void Element::read(QDomElement e)
             }
       if (_subtype == 0)      // make sure setSubtype() is called at least once
             setSubtype(0);
-      }
-
-//---------------------------------------------------------
-//   setMag
-//---------------------------------------------------------
-
-void Element::setMag(double val)
-      {
-      _mag = val;
       }
 
 //---------------------------------------------------------
@@ -709,6 +700,7 @@ void Compound::addElement(Element* e, double x, double y)
       {
       e->setPos(x, y);
       e->setParent(this);
+      e->setMag(mag());
       elemente.push_back(e);
       }
 

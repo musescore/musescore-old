@@ -196,8 +196,10 @@ struct Style {
       bool measureNumberSystem;
       bool measureNumberAllStaffs;
 
+      double smallNoteMag;
       double graceNoteMag;
       double smallStaffMag;
+      double smallClefMag;
 
       void load(QDomElement e);
       void save(Xml& xml);

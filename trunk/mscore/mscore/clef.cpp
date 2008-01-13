@@ -95,9 +95,7 @@ QPointF Clef::canvasPos() const
 
 void Clef::layout(ScoreLayout*)
       {
-      int st      = subtype();
-      int val     = st & (~clefSmallBit);
-      bool _small = st & clefSmallBit;
+      int val     = subtype();
       double yoff = 0.0;
       double xoff = 0.0;
       clear();
@@ -105,12 +103,12 @@ void Clef::layout(ScoreLayout*)
 
       switch (val) {
             case CLEF_G:
-                  symbol->setSym(_small ? ctrebleclefSym : trebleclefSym);
+                  symbol->setSym(trebleclefSym);
                   yoff = 3.0;
                   break;
             case CLEF_G1:
                   {
-                  symbol->setSym(_small ? ctrebleclefSym : trebleclefSym);
+                  symbol->setSym(trebleclefSym);
                   yoff = 3.0;
                   Symbol* number = new Symbol(score());
                   number->setSym(clefEightSym);
@@ -119,7 +117,7 @@ void Clef::layout(ScoreLayout*)
                   break;
             case CLEF_G2:
                   {
-                  symbol->setSym(_small ? ctrebleclefSym : trebleclefSym);
+                  symbol->setSym(trebleclefSym);
                   yoff = 3.0;
                   Symbol* number = new Symbol(score());
                   number->setSym(clefOneSym);
@@ -131,7 +129,7 @@ void Clef::layout(ScoreLayout*)
                   break;
             case CLEF_G3:
                   {
-                  symbol->setSym(_small ? ctrebleclefSym : trebleclefSym);
+                  symbol->setSym(trebleclefSym);
                   yoff = 3.0;
                   Symbol* number = new Symbol(score());
                   number->setSym(clefEightSym);
@@ -139,12 +137,12 @@ void Clef::layout(ScoreLayout*)
                   }
                   break;
             case CLEF_F:
-                  symbol->setSym(_small ? cbassclefSym : bassclefSym);
+                  symbol->setSym(bassclefSym);
                   yoff = 1.0;
                   break;
             case CLEF_F8:
                   {
-                  symbol->setSym(_small ? cbassclefSym : bassclefSym);
+                  symbol->setSym(bassclefSym);
                   yoff = 1.0;
                   Symbol* number = new Symbol(score());
                   number->setSym(clefEightSym);
@@ -153,7 +151,7 @@ void Clef::layout(ScoreLayout*)
                   break;
             case CLEF_F15:
                   {
-                  symbol->setSym(_small ? cbassclefSym : bassclefSym);
+                  symbol->setSym(bassclefSym);
                   yoff = 1.0;
                   Symbol* number = new Symbol(score());
                   number->setSym(clefOneSym);
@@ -165,50 +163,37 @@ void Clef::layout(ScoreLayout*)
                   break;
             case CLEF_F_B:
             case CLEF_F_C:
-                  symbol->setSym(_small ? cbassclefSym : bassclefSym);
+                  symbol->setSym(bassclefSym);
                   yoff = 1.0;
                   break;
             case CLEF_C1:
-                  symbol->setSym(_small ? caltoclefSym : altoclefSym);
+                  symbol->setSym(altoclefSym);
                   yoff = 4.0;
                   break;
             case CLEF_C2:
-                  symbol->setSym(_small ? caltoclefSym : altoclefSym);
+                  symbol->setSym(altoclefSym);
                   yoff = 3.0;
                   break;
             case CLEF_C3:
-                  symbol->setSym(_small ? caltoclefSym : altoclefSym);
+                  symbol->setSym(altoclefSym);
                   yoff = 2.0;
                   break;
             case CLEF_C4:
-                  symbol->setSym(_small ? caltoclefSym : altoclefSym);
+                  symbol->setSym(altoclefSym);
                   yoff = 1.0;
                   break;
             case CLEF_TAB:
-                  symbol->setSym(_small ? ctabclefSym : tabclefSym);
+                  symbol->setSym(tabclefSym);
                   yoff = 2.0; //(staff()->lines() - 1) * 0.5;
                   break;
             case CLEF_PERC:
-                  symbol->setSym(_small ? cpercussionclefSym : percussionclefSym);
+                  symbol->setSym(percussionclefSym);
                   yoff = 2.0;   //(staff()->lines() - 1) * 0.5;
                   break;
             }
       yoff *= mag();
       addElement(symbol, .0, .0);
       setUserOff(QPointF(xoff, yoff));
-      setMag(mag());
-      }
-
-//---------------------------------------------------------
-//   setSmall
-//---------------------------------------------------------
-
-void Clef::setSmall(bool val)
-      {
-      if (val)
-            setSubtype(subtype() | clefSmallBit);
-      else
-            setSubtype(subtype() & ~clefSmallBit);
       }
 
 //---------------------------------------------------------

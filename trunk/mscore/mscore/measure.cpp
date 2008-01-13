@@ -429,7 +429,8 @@ void Measure::layoutChord(Chord* chord, char* tversatz)
       }
 
 //---------------------------------------------------------
-//   layoutNoteHeads
+//   layout0
+//    first pass in layout
 //---------------------------------------------------------
 
 /**
@@ -437,23 +438,40 @@ void Measure::layoutChord(Chord* chord, char* tversatz)
  on context.
 */
 
-void Measure::layoutNoteHeads(int staff)
+void Measure::layout0(int staffIdx)
       {
       char tversatz[74];      // list of already set accidentals for this measure
 
-      int key  = _score->staff(staff)->keymap()->key(tick());
+      Style* style    = score()->style();
+      Staff* staff    = _score->staff(staffIdx);
+      double staffMag = staff->mag();
+      int key         = staff->keymap()->key(tick());
+
       initLineList(tversatz, key);
 
       for (Segment* segment = first(); segment; segment = segment->next()) {
             if ((segment->subtype() != Segment::SegChordRest) && (segment->subtype() != Segment::SegGrace))
                   continue;
-            int startTrack = staff * VOICES;
+            int startTrack = staffIdx * VOICES;
             int endTrack   = startTrack + VOICES;
             for (int track = startTrack; track < endTrack; ++track) {
                   Element* e = segment->element(track);
-                  if (e == 0 || e->type() != CHORD)
+                  if (!e)
                         continue;
-                  layoutChord((Chord*)e, tversatz);
+                  if (e->type() == CHORD) {
+                        Chord* chord = (Chord*)e;
+                        double m = staffMag;
+                        if (chord->small())
+                              m *= style->smallNoteMag;
+                        if (chord->noteType() != NOTE_NORMAL)
+                              m *= score()->style()->graceNoteMag;
+                        chord->setMag(m);
+                        layoutChord(chord, tversatz);
+                        }
+                  else if (e->type() == CLEF)
+                        e->setMag(staffMag * score()->style()->smallClefMag);
+                  else
+                        e->setMag(staffMag);
                   }
             }
       }
@@ -2528,13 +2546,13 @@ bool Measure::createEndBarLines()
       {
       bool changed = false;
 
-      int track = 0;
-      foreach (Staff* staff, score()->staves()) {
+      for (int staffIdx = 0; staffIdx < score()->nstaves(); ++staffIdx) {
             Segment* s;
-            BarLine* bl = 0;
+            BarLine* bl  = 0;
+            Staff* staff = score()->staff(staffIdx);
             for (s = first(); s; s = s->next()) {
                   if (s->subtype() == Segment::SegEndBarLine) {
-                        bl = (BarLine*)(s->element(track));
+                        bl = (BarLine*)(s->element(staffIdx * VOICES));
                         break;
                         }
                   }
@@ -2542,19 +2560,20 @@ bool Measure::createEndBarLines()
                   if (bl) {
                         delete bl;
                         bl = 0;
-                        s->setElement(track, 0);
+                        s->setElement(staffIdx * VOICES, 0);
                         }
                   }
             else {
                   if (bl == 0) {
                         bl = new BarLine(score());
-                        bl->setStaffIdx(staff->idx());
+                        bl->setStaffIdx(staffIdx);
                         Segment* seg = getSegment(Segment::SegEndBarLine, tick() + tickLen());
                         seg->add(bl);
                         changed = true;
                         }
                   }
             if (bl) {
+                  bl->setMag(staff->mag());
                   if (bl->subtype() != _endBarLineType) {
                         bl->setSubtype(_endBarLineType);
                         changed = true;
@@ -2562,7 +2581,6 @@ bool Measure::createEndBarLines()
                   bl->setGenerated(_endBarLineGenerated);
                   bl->setSpan(staff->barLineSpan());
                   }
-            track += VOICES;
             }
 
       return changed;
