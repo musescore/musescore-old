@@ -392,6 +392,7 @@ bool ScoreLayout::layoutPage()
                   curMeasure = curMeasure->next();
                   ++curSystem;
                   y += bh + score()->style()->boxSystemDistance.point();
+                  firstSystem = false;
                   }
             else {
                   bool isFirstSystem = false;
@@ -501,17 +502,13 @@ bool ScoreLayout::layoutSystem1(double& minWidth, double w, bool isFirstSystem)
                         for (int staffIdx = 0;  staffIdx < nstaves; ++staffIdx) {
                               int track = staffIdx * VOICES;
                               Element* el = seg->element(track);
-                              if (el && el->generated()) {
-                                    if (!isFirstMeasure || (seg->subtype() == Segment::SegTimeSigAnnounce))
-                                          seg->setElement(track, 0);
-                                    }
-                              }
-                        if (seg->subtype() == Segment::SegClef && !isFirstMeasure) {
-                              for (int i = 0; i < nstaves; ++i) {
-                                    int strack = i * VOICES;
-                                    Element* el = seg->element(strack);
-                                    if (el && el->type() == CLEF)
-                                          el->setMag(el->staff()->mag() * .7);
+                              if (el) {
+                                    if (el->generated()) {
+                                          if (!isFirstMeasure || (seg->subtype() == Segment::SegTimeSigAnnounce))
+                                                seg->setElement(track, 0);
+                                          }
+                                    if (!isFirstMeasure && el->type() == CLEF)
+                                          el->setMag(el->staff()->mag() * score()->style()->smallClefMag);
                                     }
                               }
                         }

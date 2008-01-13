@@ -214,7 +214,7 @@ Style defaultStyle = {
       0.7,              // smallNoteMag
       0.7,              // graceNoteMag
       0.7,              // smallStaffMag
-      0.7               // smallClefMag
+      0.8               // smallClefMag
       };
 
 //---------------------------------------------------------
