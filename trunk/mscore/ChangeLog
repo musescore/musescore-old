@@ -1,5 +1,7 @@
 13.1.8 (lv)
       - implemented reading compressed MusicXML (works, but still needs updates)
+      - changed ExportMusicXml to write to a QIODevice
+      - allow conversion to compressed MusicXML format
        (ws)
       - make size of "small clefs" & "small notes" stylable
 12.1.8 (ws)
