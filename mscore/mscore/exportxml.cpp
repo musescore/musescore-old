@@ -192,7 +192,6 @@ class SlurHandler {
 //---------------------------------------------------------
 
 class ExportMusicXml {
-      QFile f;
       Score* score;
       Xml xml;
       SlurHandler sh;
@@ -210,7 +209,7 @@ class ExportMusicXml {
 
    public:
       ExportMusicXml(Score* s) { score = s; tick = 0; }
-      bool write(const QString& name);
+      void write(QIODevice* dev);
       void moveToTick(int t);
       void words(Text* text, int staff);
       void hairpin(Hairpin* hp, int staff, int tick);
@@ -2041,16 +2040,11 @@ static void work(Xml& xml, const MeasureBase* measure)
 //---------------------------------------------------------
 
 /**
- Export MusicXML file.
-
- Return false on error.
+ Write the score to \a dev in MusicXML format.
  */
 
-bool ExportMusicXml::write(const QString& name)
+void ExportMusicXml::write(QIODevice* dev)
       {
-      f.setFileName(name);
-      if (!f.open(QIODevice::WriteOnly))
-            return false;
 
 /*
 printf("gel contains:\n");
@@ -2074,7 +2068,7 @@ foreach(Element* el, *(score->gel())) {
       }
 */
 
-      xml.setDevice(&f);
+      xml.setDevice(dev);
       xml << "<?xml version=\"1.0\" encoding=\"ISO-8859-1\"?>\n";
       xml << "<!DOCTYPE score-partwise PUBLIC \"-//Recordare//DTD MusicXML 1.0 Partwise//EN\" \"http://www.musicxml.org/dtds/partwise.dtd\">\n";
       xml.stag("score-partwise");
@@ -2443,8 +2437,6 @@ foreach(Element* el, *(score->gel())) {
             }
 
       xml.etag();
-
-      return f.error() == QFile::NoError;
       }
 
 //---------------------------------------------------------
@@ -2460,8 +2452,12 @@ foreach(Element* el, *(score->gel())) {
 
 bool Score::saveXml(const QString& name)
       {
+      QFile f(name);
+      if (!f.open(QIODevice::WriteOnly))
+            return false;
       ExportMusicXml em(this);
-      return em.write(name);
+      em.write(&f);
+      return f.error() == QFile::NoError;
       }
 
 
@@ -2478,10 +2474,12 @@ bool Score::saveXml(const QString& name)
 
 bool Score::saveMxl(const QString& name)
       {
-      printf("Score::saveMxl(%s): not implemented\n", name.toLatin1().data());
-/*
+      printf("Score::saveMxl(%s)\n", name.toLatin1().data());
+      QBuffer buf;
+      buf.open(QIODevice::WriteOnly);
       ExportMusicXml em(this);
-      return em.write(name);
-*/
-      return false;
+      em.write(&buf);
+      printf("bufsize=%d\n", buf.data().size());
+      printf("data=%s\n", buf.data().data());
+      return true;
       }
