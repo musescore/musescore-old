@@ -1,3 +1,11 @@
+14.1.8 (ws)
+      - removed "Pad"
+      - "beam mode" changes are now undoable
+      - new palette "beam mode" to change chord beam mode via drag&drop.
+        This replaces the equivalent key pad functions.
+      - accidentals for acciaccatura and appoggiatura are not valid for
+        the rest of the measure
+      - fix: line edit mode: shift+left function
 13.1.8 (lv)
       - implemented reading compressed MusicXML (works, but still needs updates)
       - changed ExportMusicXml to write to a QIODevice

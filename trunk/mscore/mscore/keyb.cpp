@@ -20,7 +20,6 @@
 
 #include "canvas.h"
 #include "note.h"
-#include "pad.h"
 #include "padids.h"
 #include "sym.h"
 #include "padstate.h"
@@ -164,30 +163,6 @@ void Score::padToggle(int n)
             case PAD_DOT:
                   _padState.dot = !_padState.dot;
                   break;
-            case PAD_ACCIACCATURA:
-                  if (_padState.noteType == NOTE_ACCIACCATURA)
-                        _padState.noteType = NOTE_NORMAL;
-                  else
-                        _padState.noteType = NOTE_ACCIACCATURA;
-                  break;
-            case PAD_APPOGGIATURA:
-                  if (_padState.noteType == NOTE_APPOGGIATURA)
-                        _padState.noteType = NOTE_NORMAL;
-                  else
-                        _padState.noteType = NOTE_APPOGGIATURA;
-                  break;
-            case PAD_ESCAPE:
-                  canvas()->setState(Canvas::NORMAL);
-                  break;
-            case PAD_TENUTO:
-                  addAttribute(TenutoSym);
-                  break;
-            case PAD_AKZENT:
-                  addAttribute(SforzatoaccentSym);
-                  break;
-            case PAD_STACCATO:
-                  addAttribute(StaccatoSym);
-                  break;
             case PAD_BEAM_START:
                   cmdSetBeamMode(BEAM_BEGIN);
                   break;
@@ -202,7 +177,7 @@ void Score::padToggle(int n)
                   break;
             }
       setPadState();
-      if (n >= PAD_NOTE1 && n <= PAD_APPOGGIATURA) {
+      if (n >= PAD_NOTE1 && n <= PAD_DOT) {
             if (n >= PAD_NOTE1 && n <= PAD_NOTE64) {
                   _padState.dot = false;
                   //
@@ -220,26 +195,12 @@ void Score::padToggle(int n)
                         ChordRest* cr = (ChordRest*)el;
                         int tick      = cr->tick();
                         int len       = _padState.tickLen;
-                        if (_padState.noteType == NOTE_NORMAL) {
-                              if (cr->tuplet())
-                                    len = cr->tuplet()->noteLen();
-                              if (_padState.rest)
-                                    setRest(tick, _is.track, len);
-                              else
-                                    setNote(tick, _is.track, _padState.pitch, len);
-                              }
-                        else {
-                              // insert acciaccatura or appoggiatura
-                              if (el->type() == CHORD && ((Chord*)el)->noteType() == NOTE_NORMAL) {
-                                    if (len > division/2)
-                                          len = division/2;
-                                    else if (len < division/4)
-                                          len = division/4;
-                                    setGraceNote(tick, _is.track, _padState.pitch, _padState.noteType, len);
-                                    }
-                              else
-                                    printf("cannot create grace note for grace note\n");
-                              }
+                        if (cr->tuplet())
+                              len = cr->tuplet()->noteLen();
+                        if (_padState.rest)
+                              setRest(tick, _is.track, len);
+                        else
+                              setNote(tick, _is.track, _padState.pitch, len);
                         }
                   }
             }

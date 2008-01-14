@@ -16,10 +16,6 @@
       <file>data/start.svg</file>
       <file>data/pause.svg</file>
       <file>data/play.svg</file>
-      <file>data/mbeam.xpm</file>
-      <file>data/sbeam.xpm</file>
-      <file>data/nbeam.xpm</file>
-      <file>data/beam32.xpm</file>
       <file>data/plus.svg</file>
       <file>data/minus.svg</file>
       <file>data/tab_remove.png</file>
@@ -48,6 +44,11 @@
       <file>data/mscore.png</file>
       <file>data/acciaccatura.svg</file>
       <file>data/appoggiatura.svg</file>
+      <file>data/sbeam.svg</file>
+      <file>data/nbeam.svg</file>
+      <file>data/mbeam.svg</file>
+      <file>data/beam32.svg</file>
+      <file>data/abeam.svg</file>
       <file>data/bg1.jpg</file>
    </qresource>
 

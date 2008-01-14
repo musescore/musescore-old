@@ -364,7 +364,12 @@ void Measure::layoutChord(Chord* chord, char* tversatz)
                   int accVal = ((tpc + 1) / 7) - 2;
                   accidental = ACC_NONE;
                   if (accVal != tversatz[line]) {
-                        tversatz[line] = accVal;
+                        //
+                        // accidentals in appoggiatura and acciaccatura
+                        // are not valid for the whole measure
+                        //
+                        if (chord->noteType() == NOTE_NORMAL)
+                              tversatz[line] = accVal;
                         switch(accVal) {
                               case -2: accidental = ACC_FLAT2;  break;
                               case -1: accidental = ACC_FLAT;   break;

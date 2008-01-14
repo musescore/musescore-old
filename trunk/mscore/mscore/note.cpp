@@ -652,11 +652,21 @@ QRectF ShadowNote::bbox() const
 
 bool Note::acceptDrop(Viewer* viewer, const QPointF&, int type, int subtype) const
       {
-      if (type == ATTRIBUTE || type == TEXT || type == ACCIDENTAL
-         || type == BREATH || type == ARPEGGIO || type == NOTEHEAD
-         || type == TREMOLO || type == IMAGE
+      if (type == ATTRIBUTE
+         || type == TEXT
+         || type == ACCIDENTAL
+         || type == BREATH
+         || type == ARPEGGIO
+         || type == NOTEHEAD
+         || type == TREMOLO
+         || type == IMAGE
          || (noteType() == NOTE_NORMAL && type == ICON && subtype == ICON_ACCIACCATURA)
          || (noteType() == NOTE_NORMAL && type == ICON && subtype == ICON_APPOGGIATURA)
+         || (type == ICON && subtype == ICON_SBEAM)
+         || (type == ICON && subtype == ICON_MBEAM)
+         || (type == ICON && subtype == ICON_NBEAM)
+         || (type == ICON && subtype == ICON_BEAM32)
+         || (type == ICON && subtype == ICON_AUTOBEAM)
          ) {
             viewer->setDropTarget(this);
             return true;
@@ -670,11 +680,11 @@ bool Note::acceptDrop(Viewer* viewer, const QPointF&, int type, int subtype) con
 
 Element* Note::drop(const QPointF&, const QPointF&, Element* e)
       {
+      Chord* cr = chord();
       switch(e->type()) {
             case ATTRIBUTE:
                   {
                   NoteAttribute* atr = (NoteAttribute*)e;
-                  Chord* cr = chord();
                   NoteAttribute* oa = cr->hasAttribute(atr);
                   if (oa) {
                         delete atr;
@@ -717,9 +727,9 @@ Element* Note::drop(const QPointF&, const QPointF&, Element* e)
             case BREATH:
                   {
                   Breath* b = (Breath*)e;
-                  int tick   = chord()->tick();
+                  int tick   = cr->tick();
                   b->setStaffIdx(staffIdx());
-                  Measure* m = chord()->segment()->measure();
+                  Measure* m = cr->segment()->measure();
 
                   // TODO: insert automatically in all staves?
 
@@ -735,7 +745,7 @@ Element* Note::drop(const QPointF&, const QPointF&, Element* e)
             case ARPEGGIO:
                   {
                   Arpeggio* a = (Arpeggio*)e;
-                  a->setParent(chord());
+                  a->setParent(cr);
                   a->setHeight(_spatium * 5);   //DEBUG
                   score()->undoAddElement(a);
                   }
@@ -759,17 +769,43 @@ Element* Note::drop(const QPointF&, const QPointF&, Element* e)
             case TREMOLO:
                   {
                   Tremolo* tremolo = (Tremolo*)e;
-                  tremolo->setParent(chord());
+                  tremolo->setParent(cr);
                   score()->undoAddElement(tremolo);
                   }
                   break;
 
             case ICON:
                   {
-                  NoteType t = NOTE_ACCIACCATURA;
-                  if (e->subtype() == ICON_APPOGGIATURA)
-                        t = NOTE_APPOGGIATURA;
-                  score()->setGraceNote(chord()->tick(), track(), pitch(), t, division/2);
+                  switch(e->subtype()) {
+                        case ICON_ACCIACCATURA:
+                              score()->setGraceNote(cr->tick(), track(), pitch(),
+                                 NOTE_ACCIACCATURA, division/2);
+                              break;
+                        case ICON_APPOGGIATURA:
+                              score()->setGraceNote(cr->tick(), track(), pitch(),
+                                 NOTE_APPOGGIATURA, division/2);
+                              break;
+                        case ICON_SBEAM:
+                              if (!cr->tuplet())
+                                    score()->undoChangeBeamMode(cr, BEAM_BEGIN);
+                              break;
+                        case ICON_MBEAM:
+                              if (!cr->tuplet())
+                                    score()->undoChangeBeamMode(cr, BEAM_MID);
+                              break;
+                        case ICON_NBEAM:
+                              if (!cr->tuplet())
+                                    score()->undoChangeBeamMode(cr, BEAM_NO);
+                              break;
+                        case ICON_BEAM32:
+                              if (!cr->tuplet())
+                                    score()->undoChangeBeamMode(cr, BEAM_BEGIN32);
+                              break;
+                        case ICON_AUTOBEAM:
+                              if (!cr->tuplet())
+                                    score()->undoChangeBeamMode(cr, BEAM_AUTO);
+                              break;
+                        }
                   }
                   delete e;
                   break;

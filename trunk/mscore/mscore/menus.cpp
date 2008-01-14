@@ -78,24 +78,25 @@ void MuseScore::showPalette(bool visible)
             //    notes
             //-----------------------------------
 
-            Palette* sp = new Palette(2, 6, 1.0);
-            sp->setGrid(40, 30);
-            sp->showStaff(false);
+            notePalette = new Palette(1, 6, 1.0);
+            notePalette->setGrid(27, 40);
+            notePalette->showStaff(false);
+            notePalette->setDrawGrid(true);
             Icon* ik = new Icon(gscore);
             ik->setSubtype(ICON_ACCIACCATURA);
             ik->setIcon(acciaccaturaIcon);
-            sp->addObject(0,  ik, tr("acciaccatura"));
+            notePalette->addObject(0,  ik, tr("acciaccatura"));
             ik = new Icon(gscore);
             ik->setSubtype(ICON_APPOGGIATURA);
             ik->setIcon(appoggiaturaIcon);
-            sp->addObject(1,  ik, tr("appoggiatura"));
-            paletteBox->addPalette(tr("Notes"), sp);
+            notePalette->addObject(1,  ik, tr("appoggiatura"));
+            paletteBox->addPalette(tr("Notes"), notePalette);
 
             //-----------------------------------
             //    clefs
             //-----------------------------------
 
-            sp = new Palette(4, 4, .8);
+            Palette* sp = new Palette(4, 4, .8);
             sp->setGrid(42, 60);
             sp->showStaff(true);
             for (int i = 0; i < 15; ++i) {
@@ -504,6 +505,44 @@ void MuseScore::showPalette(bool visible)
             sp->addObject(1, lb, tr("break page"));
 
             paletteBox->addPalette(tr("Breaks"), sp);
+
+            //-----------------------------------
+            //    beam properties
+            //-----------------------------------
+
+            sp = new Palette(1, 6, 1.0);
+            sp->setGrid(27, 40);
+            sp->setDrawGrid(true);
+            sp->showStaff(false);
+
+            ik = new Icon(gscore);
+            ik->setSubtype(ICON_SBEAM);
+            ik->setIcon(sbeamIcon);
+            sp->addObject(0,  ik, tr("start beam"));
+
+            ik = new Icon(gscore);
+            ik->setSubtype(ICON_MBEAM);
+            ik->setIcon(mbeamIcon);
+            sp->addObject(1,  ik, tr("middle of beam"));
+
+            ik = new Icon(gscore);
+            ik->setSubtype(ICON_NBEAM);
+            ik->setIcon(nbeamIcon);
+            sp->addObject(2,  ik, tr("no beam"));
+
+            ik = new Icon(gscore);
+            ik->setSubtype(ICON_BEAM32);
+            ik->setIcon(beam32Icon);
+            sp->addObject(3,  ik, tr("start subbeam"));
+
+            ik = new Icon(gscore);
+            ik->setSubtype(ICON_AUTOBEAM);
+            ik->setIcon(abeamIcon);
+            sp->addObject(3,  ik, tr("auto beam"));
+
+            paletteBox->addPalette(tr("Beam properties"), sp);
+
+
             //-----------------------------------
             //    Symbols
             //-----------------------------------

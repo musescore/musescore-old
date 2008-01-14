@@ -36,15 +36,8 @@ enum {
       PAD_FLAT,
       PAD_FLAT2,
       //--------------------
-      PAD_ACCIACCATURA,
-      PAD_APPOGGIATURA,
-      //--------------------
-      PAD_ESCAPE,
       PAD_EDIT,
       PAD_TIE,
-      PAD_TENUTO,
-      PAD_STACCATO,
-/*19*/ PAD_AKZENT,
       PAD_FLIP,
       PAD_BEAM_START,
       PAD_BEAM_MID,

@@ -225,7 +225,7 @@ SymbolDialog::SymbolDialog(QWidget* parent)
       sp = symbolPalette;
       sp->setAcceptDrops(true);
       sp->setDrawGrid(true);
-      sp->setShowSelection(true);
+      sp->setSelectable(true);
 
       connect(sp, SIGNAL(droppedElement(Element*)), SLOT(elementDropped(Element*)));
       connect(deleteButton, SIGNAL(clicked()), SLOT(deleteElement()));

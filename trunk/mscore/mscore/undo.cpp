@@ -84,7 +84,8 @@ static const char* undoName[] = {
       "ChangeEndBarLineType",
       "ChangeBarLineSpan",
       "SigInsertTime",
-      "FixTicks"
+      "FixTicks",
+      "ChangeBeamMode"
       };
 
 static bool UNDO = false;
@@ -557,6 +558,14 @@ void Score::processUndoOp(UndoOp* i, bool undo)
                   i->val1 = headGroup;
                   }
                   break;
+            case UndoOp::ChangeBeamMode:
+                  {
+                  ChordRest* cr = (ChordRest*)i->element1;
+                  int mode = int(cr->beamMode());
+                  cr->setBeamMode(BeamMode(i->val1));
+                  i->val1 = int(mode);
+                  }
+                  break;
             case UndoOp::ChangeEndBarLineType:
                   {
                   Measure* m = (Measure*)i->measure;
@@ -767,6 +776,21 @@ void Score::undoChangeNoteHead(Note* note, int group)
       i.type     = UndoOp::ChangeNoteHead;
       i.element1 = note;
       i.val1     = group;
+      undoList.back()->push_back(i);
+      processUndoOp(&undoList.back()->back(), false);
+      }
+
+//---------------------------------------------------------
+//   undoChangeBeamMode
+//---------------------------------------------------------
+
+void Score::undoChangeBeamMode(ChordRest* cr, int mode)
+      {
+      checkUndoOp();
+      UndoOp i;
+      i.type     = UndoOp::ChangeBeamMode;
+      i.element1 = cr;
+      i.val1     = int(mode);
       undoList.back()->push_back(i);
       processUndoOp(&undoList.back()->back(), false);
       }

@@ -73,13 +73,12 @@ QT4_WRAP_UI (ui_headers
 
 QT4_WRAP_CPP (mocs
       canvas.h editinstrument.h editstyle.h edittempo.h instrdialog.h listedit.h
-      mscore.h navigator.h pad.h pagesettings.h palette.h partedit.h playpanel.h
+      mscore.h navigator.h pagesettings.h palette.h partedit.h playpanel.h
       preferences.h measureproperties.h preview.h score.h seq.h textpalette.h textstyle.h
       timedialog.h symboldialog.h shortcutcapturedialog.h simplebutton.h
       greendotbutton.h recordbutton.h editdrumset.h editstaff.h
       voltaproperties.h chordproperties.h restproperties.h repeatproperties.h
       jumpproperties.h markerproperties.h boxproperties.h newwizard.h
-#      repeatflagdialog.h
       )
 
 QT4_ADD_RESOURCES (qrc_files mscore.qrc)
@@ -111,7 +110,7 @@ add_executable ( mscore
       key.cpp keyb.cpp layout.cpp layoutbreak.cpp line.cpp listedit.cpp
       measure.cpp menus.cpp midifile.cpp midi.cpp mscore.cpp
       mtime.cpp navigate.cpp navigator.cpp note.cpp ottava.cpp
-      pad.cpp page.cpp pagesettings.cpp palette.cpp part.cpp
+      page.cpp pagesettings.cpp palette.cpp part.cpp
       partedit.cpp pedal.cpp playpanel.cpp preferences.cpp measureproperties.cpp
       preview.cpp rest.cpp score.cpp segment.cpp select.cpp
       seq.cpp sig.cpp slur.cpp staff.cpp style.cpp

@@ -1086,15 +1086,6 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
-         "toggle-pad",
-         QT_TR_NOOP("Pad"),
-         Qt::Key_F10,
-         Qt::ApplicationShortcut,
-         QT_TR_NOOP("Pad"),
-         QT_TR_NOOP("Pad")
-         ),
-      Shortcut(
-         STATE_NORMAL | STATE_NOTE_ENTRY,
          "toggle-palette",
          QT_TR_NOOP("Palette"),
          Qt::Key_F9,

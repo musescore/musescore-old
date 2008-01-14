@@ -83,6 +83,7 @@ struct UndoOp {
             ChangeBarLineSpan,
             SigInsertTime,
             FixTicks,
+            ChangeBeamMode,
             };
       UndoType type;
       Element* element1;
