@@ -21,7 +21,10 @@
 #ifndef __ICONS_H__
 #define __ICONS_H__
 
-enum {ICON_ACCIACCATURA, ICON_APPOGGIATURA };
+enum {
+      ICON_ACCIACCATURA, ICON_APPOGGIATURA ,
+      ICON_SBEAM, ICON_MBEAM, ICON_NBEAM, ICON_BEAM32, ICON_AUTOBEAM
+      };
 
 extern void genIcons();
 extern QIcon noteIcon;
@@ -50,7 +53,7 @@ extern QIcon voiceIcons[];
 extern QIcon undoIcon, redoIcon, cutIcon, copyIcon, pasteIcon;
 extern QIcon printIcon, clefIcon;
 extern QIcon midiinIcon, speakerIcon, startIcon, playIcon, pauseIcon, repeatIcon;
-extern QIcon sbeamIcon, mbeamIcon, nbeamIcon, beam32Icon;
+extern QIcon sbeamIcon, mbeamIcon, nbeamIcon, beam32Icon, abeamIcon;
 extern QIcon fileOpenIcon, fileNewIcon, fileSaveIcon, fileSaveAsIcon;
 extern QIcon exitIcon, viewmagIcon;
 extern QIcon windowIcon;

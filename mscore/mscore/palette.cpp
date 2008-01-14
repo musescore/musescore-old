@@ -3,7 +3,7 @@
 //  Linux Music Score Editor
 //  $Id: palette.cpp,v 1.23 2006/03/06 21:08:55 wschweer Exp $
 //
-//  Copyright (C) 2002-2007 Werner Schweer and others
+//  Copyright (C) 2002-2008 Werner Schweer and others
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.
@@ -47,15 +47,15 @@ Palette::Palette(QWidget* parent)
       staff         = false;
       symbols       = 0;
       names         = 0;
-      currentIdx    = 0;
+      currentIdx    = -1;
       selectedIdx   = -1;
       rows          = 0;
       columns       = 0;
       setGrid(50, 60);
       setRowsColumns(1, 1);
 
-      _drawGrid      = false;
-      _showSelection = false;
+      _drawGrid   = false;
+      _selectable = false;
       setMouseTracking(true);
       }
 
@@ -63,17 +63,17 @@ Palette::Palette(int r, int c, qreal mag)
       {
       extraMag      = mag;
       staff         = false;
-      currentIdx    = -1;
-      selectedIdx   = -1;
       symbols       = 0;
       names         = 0;
+      currentIdx    = -1;
+      selectedIdx   = -1;
       rows          = 0;
       columns       = 0;
       setGrid(50, 60);
       setRowsColumns(r, c);
 
-      _drawGrid      = false;
-      _showSelection = false;
+      _drawGrid   = false;
+      _selectable = false;
       setMouseTracking(true);
       }
 
@@ -158,7 +158,7 @@ void Palette::showStaff(bool flag)
 void Palette::mousePressEvent(QMouseEvent* ev)
       {
       dragStartPosition = ev->pos();
-      if (_showSelection) {
+      if (_selectable) {
             int i = idx(ev->pos());
             if (i != selectedIdx) {
                   update(idxRect(i) | idxRect(selectedIdx));
@@ -397,13 +397,13 @@ void Palette::paintEvent(QPaintEvent*)
                         p.restore();
                         }
                   else {
-                        int x = column * hgrid;
-                        int y = row    * vgrid;
+                        int x      = column * hgrid;
+                        int y      = row    * vgrid;
                         QIcon icon = ((Icon*)el)->icon();
                         int border = 2;
-                        p.drawPixmap(x + border, y + border,
-                           icon.pixmap(QSize(hgrid - 2 * border, vgrid - 2 * border),
-                           QIcon::Normal, QIcon::On)
+                        int size   = (hgrid < vgrid ? hgrid : vgrid) - 2 * border;
+                        p.drawPixmap(x + (hgrid - size) / 2, y + (vgrid - size) / 2,
+                           icon.pixmap(size, QIcon::Normal, QIcon::On)
                            );
                         }
                   }

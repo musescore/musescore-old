@@ -47,7 +47,6 @@
 #include "staff.h"
 #include "part.h"
 #include "utils.h"
-#include "pad.h"
 #include "layout.h"
 #include "barline.h"
 #include "palette.h"

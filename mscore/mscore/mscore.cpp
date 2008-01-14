@@ -38,7 +38,6 @@
 #include "padstate.h"
 #include "sym.h"
 #include "padids.h"
-#include "pad.h"
 #include "pagesettings.h"
 #include "listedit.h"
 #include "editstyle.h"
@@ -229,7 +228,6 @@ MuseScore::MuseScore()
       noteAttributesPalette = 0;
       accidentalsPalette    = 0;
       layoutBreakPalette    = 0;
-      pad                   = 0;
       paletteBox            = 0;
       _midiinEnabled        = true;
       _speakerEnabled       = true;
@@ -580,11 +578,6 @@ MuseScore::MuseScore()
 
       menuDisplay = mb->addMenu(tr("&Display"));
 
-      a = getAction("toggle-pad");
-      a->setCheckable(true);
-      connect(a, SIGNAL(toggled(bool)), SLOT(showPad(bool)));
-      menuDisplay->addAction(a);
-
       a = getAction("toggle-palette");
       a->setCheckable(true);
       connect(a, SIGNAL(toggled(bool)), SLOT(showPalette(bool)));
@@ -872,15 +865,6 @@ void MuseScore::decMag()
       if (nmag < 0.05)
             nmag = 0.05;
       setMag(nmag);
-      }
-
-//---------------------------------------------------------
-//   padVisible
-//---------------------------------------------------------
-
-void MuseScore::padVisible(bool flag)
-      {
-      getAction("toggle-pad")->setChecked(flag);
       }
 
 //---------------------------------------------------------
@@ -1307,23 +1291,6 @@ void MuseScore::closePlayPanel()
       }
 
 //---------------------------------------------------------
-//   showPad
-//---------------------------------------------------------
-
-void MuseScore::showPad(bool visible)
-      {
-      QAction* a = getAction("toggle-pad");
-      if (pad == 0) {
-            pad = new Pad(this);
-            connect(pad, SIGNAL(padVisible(bool)), a, SLOT(setChecked(bool)));
-            cs->setPadState();
-            addDockWidget(Qt::RightDockWidgetArea, pad);
-            }
-      pad->setShown(visible);
-      a->setChecked(visible);
-      }
-
-//---------------------------------------------------------
 //   cmdAppendMeasures
 //---------------------------------------------------------
 
@@ -1648,10 +1615,7 @@ int main(int argc, char* argv[])
 
       mscore->setCurrentScore(currentScore);
       mscore->showNavigator(preferences.showNavigator);
-      mscore->showPad(preferences.showPad);
 
-      if (mscore->getKeyPad())
-            mscore->getKeyPad()->move(preferences.padPos);
       mscore->showPlayPanel(preferences.showPlayPanel);
       if (mscore->getPlayPanel())
             mscore->getPlayPanel()->move(preferences.playPanelPos);

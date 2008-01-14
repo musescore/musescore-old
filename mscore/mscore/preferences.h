@@ -61,10 +61,8 @@ struct Preferences {
       QString rPort;          // audio port right
       Direction stemDir[VOICES];
       bool showNavigator;
-      bool showPad;
       bool showPlayPanel;
       bool showStatusBar;
-      QPoint padPos;
       QPoint playPanelPos;
       bool useAlsaAudio;
       bool useJackAudio;
@@ -125,7 +123,6 @@ class PreferenceDialog : public QDialog, private Ui::PrefsDialogBase {
       void selectInstrumentList();
       void selectStartWith();
       void playPanelCurClicked();
-      void padCurClicked();
       void resetShortcutClicked();
       void clearShortcutClicked();
       void defineShortcutClicked();

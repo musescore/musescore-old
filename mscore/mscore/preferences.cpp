@@ -27,7 +27,6 @@
 #include "seq.h"
 #include "note.h"
 #include "playpanel.h"
-#include "pad.h"
 #include "icons.h"
 #include "shortcutcapturedialog.h"
 #include "canvas.h"
@@ -41,7 +40,6 @@ extern void readShortcuts();
 bool useALSA = false, useJACK = false, usePortaudio = false;
 
 QString appStyleSheet(
-      "Pad *             { background-color: rgb(220, 220, 220) }\n"
       "PaletteBoxButton  { background-color: rgb(215, 215, 215); font-size: 8pt; }\n"
       "PaletteBox        { background-color: rgb(230, 230, 230) }\n"
       "PlayPanel QLabel#posLabel { font-size: 28pt; font-family: \"Arial black\" }\n"
@@ -118,8 +116,6 @@ Preferences::Preferences()
       showNavigator      = true;
       showPlayPanel      = false;
       showStatusBar      = true;
-      showPad            = false;
-      padPos             = QPoint(100, 100);
       playPanelPos       = QPoint(100, 300);
 #ifdef __MINGW32__
       useAlsaAudio       = false;
@@ -200,7 +196,6 @@ void Preferences::write()
       s.setValue("showStatusBar",   showStatusBar);
       s.setValue("showPlayPanel",   showPlayPanel);
 
-      s.setValue("showPad",            showPad);
       s.setValue("useAlsaAudio",       useAlsaAudio);
       s.setValue("useJackAudio",       useJackAudio);
       s.setValue("usePortaudioAudio",  usePortaudioAudio);
@@ -227,8 +222,6 @@ void Preferences::write()
       s.setValue("pos", playPanelPos);
       s.endGroup();
 
-      s.beginGroup("KeyPad");
-      s.setValue("pos", padPos);
       s.endGroup();
 
       writeShortcuts();
@@ -271,7 +264,6 @@ void Preferences::read()
       showStatusBar   = s.value("showStatusBar", true).toBool();
       showPlayPanel   = s.value("showPlayPanel", false).toBool();
 
-      showPad            = s.value("showPad", false).toBool();
       useAlsaAudio       = s.value("useAlsaAudio", true).toBool();
       useJackAudio       = s.value("useJackAudio", false).toBool();
       usePortaudioAudio  = s.value("usePortaudioAudio", false).toBool();
@@ -300,10 +292,6 @@ void Preferences::read()
 
       s.beginGroup("PlayPanel");
       playPanelPos = s.value("pos", QPoint(100, 300)).toPoint();
-      s.endGroup();
-
-      s.beginGroup("KeyPad");
-      padPos = s.value("pos", QPoint(100, 300)).toPoint();
       s.endGroup();
 
       readShortcuts();
@@ -405,10 +393,7 @@ PreferenceDialog::PreferenceDialog(QWidget* parent)
       stemDir2button(preferences.stemDir[3], upRadioButton4, downRadioButton4, autoRadioButton4);
 
       navigatorShow->setChecked(preferences.showNavigator);
-      keyPadShow->setChecked(preferences.showPad);
       playPanelShow->setChecked(preferences.showPlayPanel);
-      keyPadX->setValue(preferences.padPos.x());
-      keyPadY->setValue(preferences.padPos.y());
       playPanelX->setValue(preferences.playPanelPos.x());
       playPanelY->setValue(preferences.playPanelPos.y());
 
@@ -476,7 +461,6 @@ PreferenceDialog::PreferenceDialog(QWidget* parent)
       sfChanged = false;
 
       connect(playPanelCur, SIGNAL(clicked()), SLOT(playPanelCurClicked()));
-      connect(keyPadCur, SIGNAL(clicked()), SLOT(padCurClicked()));
 
       connect(shortcutList, SIGNAL(itemActivated(QTreeWidgetItem*, int)), SLOT(defineShortcutClicked()));
       connect(resetShortcut, SIGNAL(clicked()), SLOT(resetShortcutClicked()));
@@ -827,9 +811,7 @@ void PreferenceDialog::apply()
       preferences.stemDir[3] = buttons2stemDir(upRadioButton4, downRadioButton4);
 
       preferences.showNavigator  = navigatorShow->isChecked();
-      preferences.showPad        = keyPadShow->isChecked();
       preferences.showPlayPanel  = playPanelShow->isChecked();
-      preferences.padPos         = QPoint(keyPadX->value(), keyPadY->value());
       preferences.playPanelPos   = QPoint(playPanelX->value(), playPanelY->value());
 
       preferences.useAlsaAudio       = alsaDriver->isChecked();
@@ -894,20 +876,6 @@ void PreferenceDialog::playPanelCurClicked()
       QPoint s(w->pos());
       playPanelX->setValue(s.x());
       playPanelY->setValue(s.y());
-      }
-
-//---------------------------------------------------------
-//   padCurClicked
-//---------------------------------------------------------
-
-void PreferenceDialog::padCurClicked()
-      {
-      Pad* w = mscore->getKeyPad();
-      if (w == 0)
-            return;
-      QPoint s(w->pos());
-      keyPadX->setValue(s.x());
-      keyPadY->setValue(s.y());
       }
 
 //---------------------------------------------------------

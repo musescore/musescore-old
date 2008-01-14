@@ -680,33 +680,42 @@ void Score::setNote(int tick, int track, int pitch, int len)
 void Score::setGraceNote(int tick, int track,  int pitch, NoteType type, int len)
       {
       Measure* measure = tick2measure(tick);
-      tick -= len;
-      Segment::SegmentType st = Segment::SegGrace;
-      Segment* seg = measure->findSegment(st, tick);
+      Segment* seg = measure->findSegment(Segment::SegChordRest, tick);
       if (seg == 0) {
-            seg = measure->createSegment(st, tick);
-            undoAddElement(seg);
-
-            Note* note = new Note(this);
-            note->setPitch(pitch);
-            note->setStaffIdx(track / VOICES);
-            note->setTickLen(len);
-
-            Chord* chord = new Chord(this);
-            chord->setTick(tick);
-            chord->setVoice(track % VOICES);
-            chord->setStaffIdx(track / VOICES);
-            chord->add(note);
-
-            chord->setTickLen(len);
-            chord->setTickOffset(-240);
-            chord->setStemDirection(UP);
-            chord->setNoteType(type);
-            chord->setParent(seg);
-
-            undoAddElement(chord);
-            select(note, 0, 0);
+            printf("main note for grace note not found\n");
+            return;
             }
+      int n = 1;
+      while ((seg = seg->prev())) {
+            if (seg->subtype() != Segment::SegGrace)
+                  break;
+            ++n;
+            }
+printf("grace offset %d\n", n);
+
+      Segment::SegmentType st = Segment::SegGrace;
+      seg = measure->createSegment(st, tick-n);
+      undoAddElement(seg);
+
+      Note* note = new Note(this);
+      note->setPitch(pitch);
+      note->setStaffIdx(track / VOICES);
+      note->setTickLen(len);
+
+      Chord* chord = new Chord(this);
+      chord->setTick(tick);
+      chord->setVoice(track % VOICES);
+      chord->setStaffIdx(track / VOICES);
+      chord->add(note);
+
+      chord->setTickLen(len);
+      chord->setTickOffset(-n);
+      chord->setStemDirection(UP);
+      chord->setNoteType(type);
+      chord->setParent(seg);
+
+      undoAddElement(chord);
+      select(note, 0, 0);
       }
 
 //---------------------------------------------------------
@@ -1503,16 +1512,6 @@ void Score::cmd(const QString& cmd)
                   padToggle(PAD_REST);
             else if (cmd == "pad-dot")
                   padToggle(PAD_DOT);
-            else if (cmd == "pad-acciaccatura") {
-                  padToggle(PAD_ACCIACCATURA);
-                  // if (!noteEntryMode())
-                  //      layoutAll = false;
-                  }
-            else if (cmd == "pad-appoggiatura") {
-                  padToggle(PAD_APPOGGIATURA);
-                  //if (!noteEntryMode())
-                  //      layoutAll = false;
-                  }
             else if (cmd == "beam-start")
                   padToggle(PAD_BEAM_START);
             else if (cmd == "beam-mid")

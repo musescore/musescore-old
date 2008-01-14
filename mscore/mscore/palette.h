@@ -76,7 +76,7 @@ class Palette : public QWidget {
       QPoint dragStartPosition;
       qreal extraMag;
       bool _drawGrid;
-      bool _showSelection;
+      bool _selectable;
 
       bool staff;
 
@@ -115,8 +115,10 @@ class Palette : public QWidget {
       void write(Xml&, const char*) const;
       void read(QDomElement);
       void clear();
-      void setShowSelection(bool val) { _showSelection = val; }
-      int getSelectedIdx() const { return selectedIdx; }
+      void setSelectable(bool val) { _selectable = val;  }
+      bool selectable() const      { return _selectable; }
+      int getSelectedIdx() const   { return selectedIdx; }
+      void setSelected(int idx)    { selectedIdx = idx;  }
       };
 
 #endif

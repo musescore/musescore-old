@@ -40,11 +40,11 @@ class PageListEditor;
 class MeasureListEditor;
 class Score;
 class PageSettings;
-class Pad;
 class PaletteBox;
 class Xml;
 class MagBox;
 class NewWizard;
+class Palette;
 
 extern QString mscoreGlobalShare;
 static const int PROJECT_LIST_LEN = 6;
@@ -151,6 +151,8 @@ class MuseScore : public QMainWindow {
       QMenu* menuEdit;
       QMenu* openRecent;
 
+      Palette* notePalette;
+
       MagBox* mag;
 
       QAction* playId;
@@ -191,7 +193,6 @@ class MuseScore : public QMainWindow {
       QLabel* _modeText;
       NewWizard* newWizard;
 
-      Pad* pad;
       PaletteBox* paletteBox;
       QList<Score*> scoreList;
       bool _midiinEnabled;
@@ -224,7 +225,6 @@ class MuseScore : public QMainWindow {
       void helpBrowser();
       void about();
       void aboutQt();
-      void padVisible(bool);
       void openRecentMenu();
       void selectScore(QAction*);
       void selectionChanged(int);
@@ -263,7 +263,6 @@ class MuseScore : public QMainWindow {
    public slots:
       void setCurrentScore(int);
       void showPlayPanel(bool);
-      void showPad(bool);
       void showPalette(bool);
       void showNavigator(bool);
 
@@ -275,7 +274,6 @@ class MuseScore : public QMainWindow {
       bool saveFile(QFileInfo&);
       bool saveFile(QFile*);
       PlayPanel* getPlayPanel() const { return playPanel; }
-      Pad* getKeyPad() const          { return pad; }
       QMenu* genCreateMenu();
       void appendScore(Score*);
       void midiNoteReceived(int pitch, bool chord);
