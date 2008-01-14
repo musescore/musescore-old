@@ -21,6 +21,7 @@
 #ifndef __CHORDREST_H__
 #define __CHORDREST_H__
 
+#include "globals.h"
 #include "sym.h"
 #include "symbol.h"
 
@@ -31,8 +32,6 @@ class Tuplet;
 class Segment;
 class Sym;
 
-enum BeamMode { BEAM_AUTO, BEAM_BEGIN, BEAM_MID, BEAM_END,
-      BEAM_NO, BEAM_BEGIN32 };
 
 enum NoteAttributeIdx {
       UfermataSym,

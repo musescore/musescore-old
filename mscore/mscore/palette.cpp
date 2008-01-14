@@ -296,6 +296,10 @@ void Palette::addObject(int idx, Element* s, const QString& name)
       symbols[idx] = s;
       names[idx]   = name;
       update();
+      if (s->type() == ICON) {
+            Icon* icon = (Icon*)s;
+            connect(icon->action(), SIGNAL(toggled(bool)), SLOT(actionToggled(bool)));
+            }
       }
 
 //---------------------------------------------------------
@@ -788,3 +792,25 @@ void PaletteBox::closeEvent(QCloseEvent* ev)
       emit paletteVisible(false);
       QWidget::closeEvent(ev);
       }
+
+//---------------------------------------------------------
+//   actionToggled
+//---------------------------------------------------------
+
+void Palette::actionToggled(bool val)
+      {
+      selectedIdx = -1;
+      if (val) {
+            for (int n = 0; n < (rows * columns); ++n) {
+                  Element* e = symbols[n];
+                  if (e && e->type() == ICON) {
+                        if (((Icon*)e)->action()->isChecked()) {
+                              selectedIdx = n;
+                              break;
+                              }
+                        }
+                  }
+            }
+      update();
+      }
+

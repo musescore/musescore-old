@@ -39,6 +39,7 @@ struct PadState {
       int prefix;
       bool tie;
       NoteType noteType;
+      BeamMode beamMode;
 
 //    0 - no prefix
 //    1 - sharp

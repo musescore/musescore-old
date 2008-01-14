@@ -96,6 +96,9 @@ class Palette : public QWidget {
       int idx(const QPoint&) const;
       QRect idxRect(int);
 
+   private slots:
+      void actionToggled(bool val);
+
    signals:
       void droppedElement(Element*);
 

@@ -228,6 +228,7 @@ void Score::setPadState(Element* obj)
             _padState.pitch  = ((Note*)obj)->pitch();
             _padState.tie    = ((Note*)obj)->tieFor();
             _padState.noteType = ((Note*)obj)->noteType();
+            _padState.beamMode = chord->beamMode();
             }
       else if (type == REST) {
             Rest* rest = (Rest*)obj;
@@ -237,14 +238,18 @@ void Score::setPadState(Element* obj)
             if (len == 0)           // whole measure rest?
                   len = rest->segment()->measure()->tickLen();
 
-            _padState.prefix = 0;
-            _padState.rest   = true;
-            _padState.voice  = obj->voice();
+            _padState.prefix   = 0;
+            _padState.rest     = true;
+            _padState.voice    = obj->voice();
+            _padState.beamMode = rest->beamMode();
             }
       else {
             _padState.rest   = false;
             _padState.len    = 0;
             _padState.prefix = 0;
+            _padState.noteType = NOTE_INVALID;
+            _padState.beamMode = BEAM_INVALID;
+printf("invalid\n");
             }
       if (len == -1) {
             _padState.dot = false;
@@ -308,6 +313,12 @@ void Score::setPadState()
 
       getAction("pad-acciaccatura")->setChecked(_padState.noteType == NOTE_ACCIACCATURA);
       getAction("pad-appoggiatura")->setChecked(_padState.noteType == NOTE_APPOGGIATURA);
+
+      getAction("beam-start")->setChecked(_padState.beamMode == BEAM_BEGIN);
+      getAction("beam-mid")->setChecked(_padState.beamMode == BEAM_MID);
+      getAction("no-beam")->setChecked(_padState.beamMode == BEAM_NO);
+      getAction("beam32")->setChecked(_padState.beamMode == BEAM_BEGIN32);
+      getAction("auto-beam")->setChecked(_padState.beamMode == BEAM_AUTO);
 
       _padState.tickLen = _padState.len + (_padState.dot ? _padState.len/2 : 0);
       }

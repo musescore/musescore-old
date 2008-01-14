@@ -82,14 +82,17 @@ void MuseScore::showPalette(bool visible)
             notePalette->setGrid(27, 40);
             notePalette->showStaff(false);
             notePalette->setDrawGrid(true);
+
             Icon* ik = new Icon(gscore);
             ik->setSubtype(ICON_ACCIACCATURA);
-            ik->setIcon(acciaccaturaIcon);
+            ik->setAction(getAction("pad-acciaccatura"));
             notePalette->addObject(0,  ik, tr("acciaccatura"));
+
             ik = new Icon(gscore);
             ik->setSubtype(ICON_APPOGGIATURA);
-            ik->setIcon(appoggiaturaIcon);
+            ik->setAction(getAction("pad-appoggiatura"));
             notePalette->addObject(1,  ik, tr("appoggiatura"));
+
             paletteBox->addPalette(tr("Notes"), notePalette);
 
             //-----------------------------------
@@ -517,27 +520,27 @@ void MuseScore::showPalette(bool visible)
 
             ik = new Icon(gscore);
             ik->setSubtype(ICON_SBEAM);
-            ik->setIcon(sbeamIcon);
+            ik->setAction(getAction("beam-start"));
             sp->addObject(0,  ik, tr("start beam"));
 
             ik = new Icon(gscore);
             ik->setSubtype(ICON_MBEAM);
-            ik->setIcon(mbeamIcon);
+            ik->setAction(getAction("beam-mid"));
             sp->addObject(1,  ik, tr("middle of beam"));
 
             ik = new Icon(gscore);
             ik->setSubtype(ICON_NBEAM);
-            ik->setIcon(nbeamIcon);
+            ik->setAction(getAction("no-beam"));
             sp->addObject(2,  ik, tr("no beam"));
 
             ik = new Icon(gscore);
             ik->setSubtype(ICON_BEAM32);
-            ik->setIcon(beam32Icon);
+            ik->setAction(getAction("beam32"));
             sp->addObject(3,  ik, tr("start subbeam"));
 
             ik = new Icon(gscore);
             ik->setSubtype(ICON_AUTOBEAM);
-            ik->setIcon(abeamIcon);
+            ik->setAction(getAction("auto-beam"));
             sp->addObject(3,  ik, tr("auto beam"));
 
             paletteBox->addPalette(tr("Beam properties"), sp);

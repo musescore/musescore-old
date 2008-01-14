@@ -271,7 +271,6 @@ MuseScore::MuseScore()
          << "rehearsalmark-text" << "copyright-text"
          << "lyrics" << "fingering" << "system-text" << "tempo"
          << "metronome" << "cut" << "copy" << "paste"
-         << "beam-start" << "beam-mid" << "no-beam" << "beam32"
          << "file-open" << "file-new" << "file-save" << "file-save-as" << "file-close"
          << "quit"
          << "toggle-statusbar" << "note-input" << "pitch-spell"
@@ -404,6 +403,7 @@ MuseScore::MuseScore()
 
       sl1.clear();
       sl1 << "pad-appoggiatura" << "pad-acciaccatura";
+      sl1 << "beam-start" << "beam-mid" << "no-beam" << "beam32" << "auto-beam";
 
       foreach(const QString s, sl1) {
             QAction* a = getAction(s.toLatin1().data());
