@@ -498,14 +498,15 @@ class RubberBand : public Element {
 //---------------------------------------------------------
 
 class Icon : public Element {
-      QIcon _icon;
+      QAction* _action;
 
    public:
       Icon(Score* s) : Element(s) {}
       virtual Icon* clone() const        { return new Icon(*this); }
-      virtual ElementType type() const   { return ICON; }
-      void setIcon(const QIcon& i)       { _icon = i;    }
-      QIcon icon() const                 { return _icon; }
+      virtual ElementType type() const   { return ICON;    }
+      void setAction(QAction* a)         { _action = a;    }
+      QIcon icon() const                 { return _action->icon();   }
+      QAction* action() const            { return _action; }
       };
 
 #endif

@@ -1086,6 +1086,16 @@ Shortcut MuseScore::sc[] = {
          ),
       Shortcut(
          STATE_NORMAL | STATE_NOTE_ENTRY,
+         "auto-beam",
+         QT_TR_NOOP("auto beam"),
+         0,
+         Qt::WindowShortcut,
+         QT_TR_NOOP("auto beam"),
+         QT_TR_NOOP("auto beam"),
+         &abeamIcon
+         ),
+      Shortcut(
+         STATE_NORMAL | STATE_NOTE_ENTRY,
          "toggle-palette",
          QT_TR_NOOP("Palette"),
          Qt::Key_F9,

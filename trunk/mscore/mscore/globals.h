@@ -87,6 +87,10 @@ enum OffsetType {
       OFFSET_SPATIUM    ///< offset in space units
       };
 
+enum BeamMode { BEAM_AUTO, BEAM_BEGIN, BEAM_MID, BEAM_END,
+      BEAM_NO, BEAM_BEGIN32, BEAM_INVALID
+      };
+
 //---------------------------------------------------------
 //   NoteType
 //---------------------------------------------------------
@@ -94,7 +98,8 @@ enum OffsetType {
 enum NoteType {
       NOTE_NORMAL,
       NOTE_ACCIACCATURA,
-      NOTE_APPOGGIATURA       // grace notes
+      NOTE_APPOGGIATURA,       // grace notes
+      NOTE_INVALID
       };
 
 // to move Anchor to right of measure set
