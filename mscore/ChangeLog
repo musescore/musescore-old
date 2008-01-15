@@ -1,4 +1,5 @@
 15.1.8 (ws)
+      - default portaudio driver for windows version
       - fixed windows build
       - implemented "alternate note entry method" selectable in "preferences"
 14.1.8 (ws)
