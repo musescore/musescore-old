@@ -39,11 +39,15 @@ struct Dyn {
 
 class Dynamic : public Text {
 
+      QPointF layoutPos();
+
    public:
       Dynamic(Score*);
       Dynamic(const Dynamic&);
       virtual Dynamic* clone() const   { return new Dynamic(*this); }
       virtual ElementType type() const { return DYNAMIC; }
+      virtual QPointF canvasPos() const;      ///< position in canvas coordinates
+      Measure* measure() const         { return (Measure*)parent(); }
 
       virtual void setSubtype(int val);
       virtual void setSubtype(const QString&);

@@ -32,6 +32,11 @@
 #include <QtXml/QtXml>
 #include <QtCore/QPointF>
 #include <QtCore/QVariant>
+#include <QtCore/QMap>
+#include <QtCore/QDateTime>
+#include <QtCore/QtGlobal>
+#include <QtCore/QtDebug>
+
 #include <QtGui/QPainterPath>
 #include <QtGui/QScrollArea>
 #include <QtGui/QToolBar>

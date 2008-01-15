@@ -249,7 +249,6 @@ void Score::setPadState(Element* obj)
             _padState.prefix = 0;
             _padState.noteType = NOTE_INVALID;
             _padState.beamMode = BEAM_INVALID;
-printf("invalid\n");
             }
       if (len == -1) {
             _padState.dot = false;

@@ -800,14 +800,12 @@ void PaletteBox::closeEvent(QCloseEvent* ev)
 void Palette::actionToggled(bool val)
       {
       selectedIdx = -1;
-      if (val) {
-            for (int n = 0; n < (rows * columns); ++n) {
-                  Element* e = symbols[n];
-                  if (e && e->type() == ICON) {
-                        if (((Icon*)e)->action()->isChecked()) {
-                              selectedIdx = n;
-                              break;
-                              }
+      for (int n = 0; n < (rows * columns); ++n) {
+            Element* e = symbols[n];
+            if (e && e->type() == ICON) {
+                  if (((Icon*)e)->action()->isChecked()) {
+                        selectedIdx = n;
+                        break;
                         }
                   }
             }

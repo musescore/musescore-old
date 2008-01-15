@@ -5,7 +5,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>645</width>
+    <width>673</width>
     <height>515</height>
    </rect>
   </property>
@@ -206,26 +206,25 @@
           <bool>true</bool>
          </property>
          <layout class="QGridLayout" >
-          <property name="leftMargin" >
-           <number>9</number>
-          </property>
-          <property name="topMargin" >
-           <number>9</number>
-          </property>
-          <property name="rightMargin" >
-           <number>9</number>
-          </property>
-          <property name="bottomMargin" >
-           <number>9</number>
-          </property>
-          <property name="horizontalSpacing" >
-           <number>6</number>
-          </property>
-          <property name="verticalSpacing" >
-           <number>6</number>
-          </property>
-          <item row="1" column="3" >
-           <widget class="QSpinBox" name="keyPadY" >
+          <item row="0" column="0" >
+           <widget class="QLabel" name="label_17" >
+            <property name="text" >
+             <string>Play Panel:</string>
+            </property>
+            <property name="textFormat" >
+             <enum>Qt::PlainText</enum>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="1" >
+           <widget class="QCheckBox" name="playPanelShow" >
+            <property name="text" >
+             <string>show</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="2" >
+           <widget class="QSpinBox" name="playPanelX" >
             <property name="maximum" >
              <number>9999</number>
             </property>
@@ -238,82 +237,27 @@
             </property>
            </widget>
           </item>
-          <item row="1" column="6" >
-           <widget class="QToolButton" name="keyPadCur" >
-            <property name="text" >
-             <string>Cur</string>
-            </property>
-           </widget>
-          </item>
-          <item row="0" column="6" >
+          <item row="0" column="4" >
            <widget class="QToolButton" name="playPanelCur" >
             <property name="text" >
              <string>Cur</string>
             </property>
            </widget>
           </item>
-          <item row="1" column="2" >
-           <widget class="QSpinBox" name="keyPadX" >
-            <property name="maximum" >
-             <number>9999</number>
-            </property>
-           </widget>
-          </item>
-          <item row="0" column="2" >
-           <widget class="QSpinBox" name="playPanelX" >
-            <property name="maximum" >
-             <number>9999</number>
-            </property>
-           </widget>
-          </item>
-          <item row="0" column="1" >
-           <widget class="QCheckBox" name="playPanelShow" >
-            <property name="text" >
-             <string>show</string>
-            </property>
-           </widget>
-          </item>
-          <item row="1" column="1" >
-           <widget class="QCheckBox" name="keyPadShow" >
-            <property name="text" >
-             <string>show</string>
-            </property>
-           </widget>
-          </item>
-          <item row="2" column="1" >
-           <widget class="QCheckBox" name="navigatorShow" >
-            <property name="text" >
-             <string>show</string>
-            </property>
-           </widget>
-          </item>
-          <item row="0" column="0" >
-           <widget class="QLabel" name="label_17" >
-            <property name="text" >
-             <string>Play Panel:</string>
-            </property>
-            <property name="textFormat" >
-             <enum>Qt::PlainText</enum>
-            </property>
-           </widget>
-          </item>
           <item row="1" column="0" >
-           <widget class="QLabel" name="label_18" >
-            <property name="text" >
-             <string>Key Pad:</string>
-            </property>
-            <property name="textFormat" >
-             <enum>Qt::PlainText</enum>
-            </property>
-           </widget>
-          </item>
-          <item row="2" column="0" >
            <widget class="QLabel" name="label_19" >
             <property name="text" >
              <string>Navigator</string>
             </property>
             <property name="textFormat" >
              <enum>Qt::PlainText</enum>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="1" >
+           <widget class="QCheckBox" name="navigatorShow" >
+            <property name="text" >
+             <string>show</string>
             </property>
            </widget>
           </item>
@@ -791,20 +735,51 @@
      </widget>
      <widget class="QWidget" name="tab4" >
       <attribute name="title" >
-       <string>Midi</string>
+       <string>Note Entry</string>
       </attribute>
       <layout class="QVBoxLayout" >
        <item>
         <widget class="QCheckBox" name="enableMidiInput" >
          <property name="text" >
-          <string>enable midi input</string>
+          <string>Enable midi input</string>
          </property>
         </widget>
        </item>
        <item>
         <widget class="QCheckBox" name="playNotes" >
          <property name="text" >
-          <string>Play Notes when editing</string>
+          <string>Play notes when editing</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QCheckBox" name="alternateInput" >
+         <property name="text" >
+          <string>Alternate input method</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="label_18" >
+         <property name="sizePolicy" >
+          <sizepolicy vsizetype="Expanding" hsizetype="Expanding" >
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="font" >
+          <font>
+           <italic>true</italic>
+          </font>
+         </property>
+         <property name="text" >
+          <string>When pressing F in note entry mode the created note pitch depends on the current clef. In G-major a fis is created. If the alternate input method is enabled, the current clef is irrelevant. Pressing F always creates a f note.</string>
+         </property>
+         <property name="wordWrap" >
+          <bool>true</bool>
+         </property>
+         <property name="indent" >
+          <number>20</number>
          </property>
         </widget>
        </item>

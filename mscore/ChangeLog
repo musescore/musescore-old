@@ -1,3 +1,6 @@
+15.1.8 (ws)
+      - fixed windows build
+      - implemented "alternate note entry method" selectable in "preferences"
 14.1.8 (ws)
       - removed "Pad"
       - "beam mode" changes are now undoable

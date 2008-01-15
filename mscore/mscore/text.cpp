@@ -995,6 +995,13 @@ QLineF Text::dragAnchor() const
             x = tw;
       else if (_align & ALIGN_HCENTER)
             x = (tw * .5);
+      if (anchor() == ANCHOR_SEGMENT) {
+            Measure* m   = (Measure*) parent();
+            if (m->type() != MEASURE)
+                  abort();
+            Segment* seg = m->tick2segment(tick());
+            p1.rx() += seg->x();
+            }
       return QLineF(p1, QPointF(x, y) + canvasPos());
       }
 
