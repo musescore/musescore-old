@@ -265,9 +265,16 @@ void Preferences::read()
       showStatusBar   = s.value("showStatusBar", true).toBool();
       showPlayPanel   = s.value("showPlayPanel", false).toBool();
 
+#ifdef __MINGW32__
+      useAlsaAudio       = s.value("useAlsaAudio", false).toBool();
+      useJackAudio       = s.value("useJackAudio", false).toBool();
+      usePortaudioAudio  = s.value("usePortaudioAudio", true).toBool();
+#else
       useAlsaAudio       = s.value("useAlsaAudio", true).toBool();
       useJackAudio       = s.value("useJackAudio", false).toBool();
       usePortaudioAudio  = s.value("usePortaudioAudio", false).toBool();
+#endif
+
       alsaDevice         = s.value("alsaDevice", "default").toString();
       alsaSampleRate     = s.value("alsaSampleRate", 48000).toInt();
       alsaPeriodSize     = s.value("alsaPeriodSize", 1024).toInt();
