@@ -28,9 +28,9 @@
 #ifndef OSDAB_UNZIP__H
 #define OSDAB_UNZIP__H
 
-#include <QtGlobal>
-#include <QMap>
-#include <QDateTime>
+// #include <QtGlobal>
+// #include <QMap>
+// #include <QDateTime>
 
 #include <zlib.h>
 

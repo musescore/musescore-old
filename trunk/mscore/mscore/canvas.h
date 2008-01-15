@@ -190,6 +190,7 @@ class Canvas : public QFrame, public Viewer {
       void redraw(const QRectF& r);
       void updateNavigator(bool layoutChanged) const;
       Element* elementAt(const QPointF& pp);
+      Element* selectedElementAt(const QPointF& pp);
       QRectF lassoRect() const { return _lassoRect; }
       void paintLasso(QPainter& p);
       };

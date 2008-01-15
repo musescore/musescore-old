@@ -39,8 +39,8 @@
 #ifndef OSDAB_ZIPENTRY_P__H
 #define OSDAB_ZIPENTRY_P__H
 
-#include <QtGlobal>
-#include <QString>
+// #include <QtGlobal>
+// #include <QString>
 
 class ZipEntryP
 {

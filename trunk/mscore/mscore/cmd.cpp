@@ -466,7 +466,9 @@ void Score::cmdAddPitch(int note, bool addFlag)
             return;
             }
 
-      int key   = cr->staff()->keymap()->key(_is.pos) + 7;
+      int key = 7;
+      if (!preferences.alternateNoteEntryMethod)
+            key += cr->staff()->keymap()->key(_is.pos);
       int pitch = ptab[key][note];
 
       int delta = _padState.pitch - (octave*12 + pitch);

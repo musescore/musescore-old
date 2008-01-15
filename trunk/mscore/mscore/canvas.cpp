@@ -551,6 +551,12 @@ void Canvas::mouseMoveEvent1(QMouseEvent* ev)
                         return;
                   {
                   Element* de = _score->dragObject();
+                  Element* se = selectedElementAt(startMove);
+                  if (de != se) {
+                        _score->setDragObject(se);
+                        de = se;
+                        }
+
                   if (de && keyState == Qt::ShiftModifier) {
                         if (de->type() == MEASURE) {
                               QString mimeType = _score->sel->mimeType();
@@ -1967,21 +1973,36 @@ Element* Canvas::elementAt(const QPointF& p)
       // if p hit more than one element, give back
       // the element after the selected one;
 
-      if (_score->selection()->state() == SEL_NONE)
-            return const_cast<Element*>(el.at(0));
+      int idx = 0;
 
-      Element* sel = _score->getSelectedElement();
-
-      int n = el.size();
-      for (int i = 0; i < n; ++i) {
-            if ((el[i] == sel)  || ((sel == 0) && el[i]->type() == MEASURE)) {
-                  if (i < (n-1))
-                        return const_cast<Element*>(el.at(i + 1));
-                  else
-                        return const_cast<Element*>(el.at(0));
+      if (_score->selection()->state() != SEL_NONE) {
+            Element* sel = _score->getSelectedElement();
+            int n = el.size();
+            for (int i = 0; i < n; ++i) {
+                  if ((el[i] == sel)  || ((sel == 0) && el[i]->type() == MEASURE)) {
+                        if (i < (n-1))
+                              idx = i + 1;
+                        break;
+                        }
                   }
             }
-      return const_cast<Element*>(el.at(0));
+      return const_cast<Element*>(el.at(idx));
+      }
+
+//---------------------------------------------------------
+//   selectedElementAt
+//---------------------------------------------------------
+
+Element* Canvas::selectedElementAt(const QPointF& p)
+      {
+      QList<const Element*> el = _layout->items(p);
+      if (el.empty())
+            return 0;
+      foreach(const Element* e, el) {
+            if (e->selected())
+                  return const_cast<Element*>(e);
+            }
+      return 0;
       }
 
 //---------------------------------------------------------

@@ -29,14 +29,14 @@
 #include "unzip_p.h"
 #include "zipentry_p.h"
 
-#include <QString>
-#include <QStringList>
-#include <QDir>
-#include <QFile>
-#include <QCoreApplication>
+// #include <QString>
+// #include <QStringList>
+// #include <QDir>
+// #include <QFile>
+// #include <QCoreApplication>
 
 // You can remove this #include if you replace the qDebug() statements.
-#include <QtDebug>
+// #include <QtDebug>
 
 /*!
 	\class UnZip unzip.h

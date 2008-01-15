@@ -161,6 +161,7 @@ Preferences::Preferences()
       len24.type         = -1;
       midiExpandRepeats  = true;
       playRepeats        = true;
+      alternateNoteEntryMethod = false;
       };
 
 //---------------------------------------------------------
@@ -210,6 +211,8 @@ void Preferences::write()
       s.setValue("showSplashScreen",   showSplashScreen);
       s.setValue("midiExpandRepeats",  midiExpandRepeats);
       s.setValue("playRepeats",        playRepeats);
+      s.setValue("alternateNoteEntry", alternateNoteEntryMethod);
+
       switch(sessionStart) {
             case LAST_SESSION:   s.setValue("sessionStart", "last"); break;
             case NEW_SESSION:    s.setValue("sessionStart", "new"); break;
@@ -220,8 +223,6 @@ void Preferences::write()
 
       s.beginGroup("PlayPanel");
       s.setValue("pos", playPanelPos);
-      s.endGroup();
-
       s.endGroup();
 
       writeShortcuts();
@@ -278,6 +279,7 @@ void Preferences::read()
       showSplashScreen   = s.value("showSplashScreen", true).toBool();
       midiExpandRepeats  = s.value("midiExpandRepeats", true).toBool();
       playRepeats        = s.value("playRepeats", true).toBool();
+      alternateNoteEntryMethod = s.value("alternateNoteEntry", false).toBool();
 
       QString ss(s.value("sessionStart", "score").toString());
       if (ss == "last")
@@ -419,6 +421,7 @@ PreferenceDialog::PreferenceDialog(QWidget* parent)
       showSplashScreen->setChecked(preferences.showSplashScreen);
       expandRepeats->setChecked(preferences.midiExpandRepeats);
       instrumentList->setText(preferences.instrumentList);
+      alternateInput->setChecked(preferences.alternateNoteEntryMethod);
 
       //
       // initialize local shortcut table
@@ -838,6 +841,7 @@ void PreferenceDialog::apply()
       preferences.showSplashScreen   = showSplashScreen->isChecked();
       preferences.midiExpandRepeats  = expandRepeats->isChecked();
       preferences.instrumentList     = instrumentList->text();
+      preferences.alternateNoteEntryMethod = alternateInput->isChecked();
 
       if (shortcutsChanged) {
             shortcutsChanged = false;

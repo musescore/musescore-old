@@ -84,6 +84,7 @@ struct Preferences {
       bool midiExpandRepeats;
       bool playRepeats;
       QString instrumentList;  // file path of instrument templates
+      bool alternateNoteEntryMethod;
 
       bool dirty;
 

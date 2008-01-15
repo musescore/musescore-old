@@ -22,3 +22,8 @@ add_library (
   osdabzip STATIC
   unzip.cpp
   )
+
+set_target_properties( osdabzip
+   PROPERTIES COMPILE_FLAGS "-include ${PROJECT_BINARY_DIR}/all.h"
+   )
+
