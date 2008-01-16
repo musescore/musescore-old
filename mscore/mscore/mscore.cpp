@@ -128,8 +128,10 @@ static QString getSharePath()
 
 static void printVersion(const char* prog)
       {
-      // fprintf(stderr, "%s: Linux Music Score Editor; Version %s\n", prog, VERSION);
-      cout << prog << ": Linux Music Score Editor; Version " << VERSION << endl;
+      extern int revision;
+
+      cout << prog << ": Linux Music Score Editor; Version " << VERSION
+           << "  Build " << revision << endl;
       }
 
 //---------------------------------------------------------
@@ -895,27 +897,6 @@ void MuseScore::helpBrowser()
             }
       QString url("file://" + mscoreHelp.filePath());
       QDesktopServices::openUrl(url);
-      }
-
-//---------------------------------------------------------
-//   about
-//---------------------------------------------------------
-
-void MuseScore::about()
-      {
-      QPixmap pm(":/data/splash.jpg");
-      QSplashScreen* sc = new QSplashScreen(pm);
-      sc->setWindowFlags(Qt::FramelessWindowHint | Qt::WindowStaysOnTopHint);
-      QSize s(pm.size());
-      QBitmap bm(s);
-      bm.clear();
-      QPainter p;
-      p.begin(&bm);
-      p.setBrush(Qt::SolidPattern);
-      p.drawRoundRect(QRect(QPoint(0, 0), s), s.height()/6, s.width()/6);
-      p.end();
-      sc->setMask(bm);
-      sc->show();
       }
 
 //---------------------------------------------------------
@@ -1865,4 +1846,25 @@ void MuseScore::play(Element* e) const
             }
       }
 
+//---------------------------------------------------------
+//   about
+//---------------------------------------------------------
 
+void MuseScore::about()
+      {
+      AboutBoxDialog ab;
+      ab.show();
+      ab.exec();
+      }
+
+//---------------------------------------------------------
+//   AboutBoxDialog
+//---------------------------------------------------------
+
+AboutBoxDialog::AboutBoxDialog()
+      {
+      extern int revision;
+      setupUi(this);
+      versionLabel->setText("Version: " VERSION);
+      revisionLabel->setText(QString("Revision: %1").arg(revision));
+      }

@@ -41,9 +41,16 @@ add_custom_command(
    WORKING_DIRECTORY ${PROJECT_BINARY_DIR}
    )
 
+add_custom_command(
+   OUTPUT ${CMAKE_BINARY_DIR}/revision.h
+   COMMAND svn info ${PROJECT_SOURCE_DIR} | grep Revision | cut -f 2 -d \" \" > ${CMAKE_BINARY_DIR}/revision.h
+   WORKING_DIRECTORY ${PROJECT_BINARY_DIR}
+   )
+
 set_source_files_properties(
       ${PROJECT_BINARY_DIR}/all.h
       ${PROJECT_BINARY_DIR}/all.h.pch
+      ${PROJECT_BINARY_DIR}/revision.h
       PROPERTIES generated true
       )
 
@@ -67,7 +74,7 @@ QT4_WRAP_UI (ui_headers
       slur.ui editdrumset.ui editstaff.ui line.ui linesegment.ui
       voltaproperties.ui chordproperties.ui restproperties.ui repeatproperties.ui
       jumpproperties.ui markerproperties.ui boxproperties.ui
-      instrwizard.ui timesigwizard.ui newwizard.ui
+      instrwizard.ui timesigwizard.ui newwizard.ui aboutbox.ui
 #      repeatflagdialog.ui
       )
 
@@ -127,6 +134,8 @@ add_executable ( mscore
       repeat2.cpp instrtemplate.cpp boxproperties.cpp
 #      repeatflagdialog.cpp
       newwizard.cpp
+      revision.cpp
+      ${CMAKE_BINARY_DIR}/revision.h
       ${AUDIO}
       )
 
