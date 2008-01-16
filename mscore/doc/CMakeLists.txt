@@ -18,7 +18,33 @@
 #  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 #=============================================================================
 
+add_custom_command(
+   OUTPUT promenade.pdf
+   COMMAND mscore ${PROJECT_SOURCE_DIR}/demos/promenade.msc -o promenade.pdf
+   DEPENDS ${PROJECT_SOURCE_DIR}/demos/promenade.msc
+   WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
+   )
+
+add_custom_command(
+   OUTPUT inv1-1.pdf inv1-2.pdf
+   COMMAND mscore ${PROJECT_SOURCE_DIR}/demos/inv1.msc -o inv1.pdf
+   COMMAND pdftk inv1.pdf burst output inv1-%d.pdf
+   DEPENDS ${PROJECT_SOURCE_DIR}/demos/inv1.msc
+   WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
+   )
+
+add_custom_command(
+   OUTPUT inv6-1.pdf inv6-2.pdf
+   COMMAND mscore ${PROJECT_SOURCE_DIR}/demos/inv6.msc -o inv6.pdf
+   COMMAND pdftk inv6.pdf burst output inv6-%d.pdf
+   DEPENDS ${PROJECT_SOURCE_DIR}/demos/inv6.msc
+   WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
+   )
+
+add_custom_target ( man
+      DEPENDS promenade.pdf inv1-1.pdf inv1-2.pdf inv6-1.pdf inv6-2.pdf
+      )
+
 if (TEXEXEC_PATH)
       subdirs( de en )
 endif (TEXEXEC_PATH)
-
