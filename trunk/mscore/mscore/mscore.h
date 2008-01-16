@@ -24,6 +24,7 @@
 #include "globals.h"
 #include "ui_measuresdialog.h"
 #include "ui_insertmeasuresdialog.h"
+#include "ui_aboutbox.h"
 
 class Canvas;
 class Element;
@@ -59,6 +60,17 @@ enum {
       STATE_NOTE_ENTRY = 2,
       STATE_EDIT       = 4,
       STATE_PLAY       = 8
+      };
+
+//---------------------------------------------------------
+//   AboutBoxDialog
+//---------------------------------------------------------
+
+class AboutBoxDialog : public QDialog, Ui::AboutBox {
+      Q_OBJECT
+
+   public:
+      AboutBoxDialog();
       };
 
 //---------------------------------------------------------
