@@ -1,12 +1,11 @@
 [Desktop Entry]
+Version=1.0
 Comment=WYSIWYG Music score typesetter
-Comment[en_US]=
-Encoding=UTF-8
-Exec='${CMAKE_INSTALL_PREFIX}/bin/mscore'
-GenericName=Music score typesetter
+Exec=mscore
+GenericName=mscore
 Icon=mscore
 Name=MuseScore
 StartupNotify=true
 Terminal=false
 Type=Application
-Categories=Application;AudioVideo;
+Categories=Qt;Audio;Sequencer;Midi;AudioVideoEditing;Music;AudioVideo;
