@@ -211,7 +211,8 @@ else (MINGW)
    endif (USE_GLOBAL_FLUID)
 
    install( TARGETS mscore RUNTIME DESTINATION bin )
-   install( FILES   data/mscore.png DESTINATION /usr/share/pixmaps)
+   install( FILES   data/mscore.png DESTINATION share/pixmaps)
+   install( FILES   data/mscore.xpm DESTINATION share/pixmaps)
 
 endif (MINGW)
 

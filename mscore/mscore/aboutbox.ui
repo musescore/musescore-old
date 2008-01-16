@@ -591,5 +591,22 @@ p, li { white-space: pre-wrap; }
  <resources>
   <include location="mscore.qrc" />
  </resources>
- <connections/>
+ <connections>
+  <connection>
+   <sender>buttonBox</sender>
+   <signal>accepted()</signal>
+   <receiver>AboutBox</receiver>
+   <slot>accept()</slot>
+   <hints>
+    <hint type="sourcelabel" >
+     <x>531</x>
+     <y>326</y>
+    </hint>
+    <hint type="destinationlabel" >
+     <x>582</x>
+     <y>29</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
 </ui>
