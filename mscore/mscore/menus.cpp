@@ -36,6 +36,7 @@
 #include "icons.h"
 #include "bracket.h"
 #include "ottava.h"
+#include "textline.h"
 #include "trill.h"
 #include "pedal.h"
 #include "clef.h"
@@ -184,7 +185,7 @@ void MuseScore::showPalette(bool visible)
             //    Lines
             //-----------------------------------
 
-            sp = new Palette(6, 2);
+            sp = new Palette(7, 2);
             sp->setGrid(84, 30);
 
             double l = _spatium * 7;
@@ -262,6 +263,11 @@ void MuseScore::showPalette(bool visible)
             Trill* trill = new Trill(gscore);
             trill->setLen(l);
             sp->addObject(11, trill, tr("trill line"));
+
+            TextLine* textLine = new TextLine(gscore);
+            textLine->setText("VII");
+            textLine->setLen(l);
+            sp->addObject(12, textLine, tr("text line"));
 
             paletteBox->addPalette(tr("Lines"), sp);
 

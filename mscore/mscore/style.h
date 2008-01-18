@@ -55,6 +55,7 @@ enum TEXT_STYLE {
       TEXT_STYLE_REPEAT,
       TEXT_STYLE_VOLTA,
       TEXT_STYLE_FRAME,
+      TEXT_STYLE_TEXTLINE,
       TEXT_STYLES
       };
 

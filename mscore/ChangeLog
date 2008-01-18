@@ -1,3 +1,5 @@
+18.1.8 (ws)
+      - applied TextLine patch from Seth Yastrov
 15.1.8 (ws)
       - default portaudio driver for windows version
       - fixed windows build

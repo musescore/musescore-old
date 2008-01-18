@@ -129,6 +129,9 @@ const TextStyle defaultTextStyleArray[] = {
 
       TextStyle(QString("Frame"), ff, 11, true, false, false,
          ALIGN_LEFT,    ANCHOR_PARENT, 0, 0, OS, 0, 0, true),
+
+      TextStyle(QString("TextLine"), ff,  12, false, false, false,
+         ALIGN_HCENTER, ANCHOR_STAFF, 0, -5.0, OS, 0, 0, true),
       };
 
 #undef MM

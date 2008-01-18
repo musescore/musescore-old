@@ -145,15 +145,8 @@ configure_file (
       ${PROJECT_SOURCE_DIR}/config.h.in
       ${PROJECT_BINARY_DIR}/config.h
       )
-#
-# produce mscore.desktop file
-#
-configure_file (
-      ${PROJECT_SOURCE_DIR}/packaging/mscore.desktop.in
-      ${PROJECT_BINARY_DIR}/mscore.desktop
-      )
 if (NOT MINGW)
-      install( FILES ${PROJECT_BINARY_DIR}/mscore.desktop DESTINATION /usr/share/applications)
+      install( FILES ${PROJECT_BINARY_DIR}/mscore.desktop DESTINATION share/applications)
 endif (NOT MINGW)
 
 if (USE_GLOBAL_FLUID)
