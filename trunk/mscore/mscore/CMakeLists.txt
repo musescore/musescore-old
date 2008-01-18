@@ -122,7 +122,7 @@ add_executable ( mscore
       preview.cpp rest.cpp score.cpp segment.cpp select.cpp
       seq.cpp sig.cpp slur.cpp staff.cpp style.cpp
       sym.cpp sym.h symbol.cpp symbol.h hook.cpp hook.h
-      system.cpp tempo.cpp text.cpp textpalette.cpp textstyle.cpp
+      system.cpp tempo.cpp text.cpp textline.cpp textpalette.cpp textstyle.cpp
       timedialog.cpp symboldialog.cpp trill.cpp tuplet.cpp shortcutcapturedialog.cpp
       undo.cpp utils.cpp xml.cpp timesig.cpp lyrics.cpp bsp.cpp
       viewer.cpp volta.cpp simplebutton.cpp image.cpp keyfinder.cpp

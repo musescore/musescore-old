@@ -53,6 +53,7 @@
 #include "trill.h"
 #include "pedal.h"
 #include "hairpin.h"
+#include "textline.h"
 #include "keysig.h"
 #include "volta.h"
 #include "dynamics.h"
@@ -230,6 +231,7 @@ void Score::cmdAdd1(Element* e, const QPointF& pos, const QPointF& dragOffset)
             case OTTAVA:
             case TRILL:
             case HAIRPIN:
+            case TEXTLINE:
                   {
                   SLine* line = (SLine*)e;
                   line->setTick(tick);

@@ -43,6 +43,7 @@
 #include "pedal.h"
 #include "volta.h"
 #include "ottava.h"
+#include "textline.h"
 #include "trill.h"
 #include "hairpin.h"
 #include "image.h"
@@ -1433,6 +1434,7 @@ void Canvas::dragEnterEvent(QDragEnterEvent* event)
                   case TRILL:
                   case PEDAL:
                   case HAIRPIN:
+                  case TEXTLINE:
                         el = Element::create(type, score());
                         ((SLine*)el)->setLen(_spatium * 7);
                         break;
@@ -1553,6 +1555,7 @@ void Canvas::dragMoveEvent(QDragMoveEvent* event)
                   case OTTAVA:
                   case TRILL:
                   case HAIRPIN:
+                  case TEXTLINE:
                         dragTimeAnchorElement(pos);
                         break;
                   case SYMBOL:
@@ -1678,6 +1681,7 @@ void Canvas::dropEvent(QDropEvent* event)
                   case PEDAL:
                   case DYNAMIC:
                   case HAIRPIN:
+                  case TEXTLINE:
                         score()->cmdAdd1(dragElement, pos, dragOffset);
                         event->acceptProposedAction();
                         break;

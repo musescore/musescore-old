@@ -54,6 +54,7 @@
 #include "slur.h"
 #include "hairpin.h"
 #include "ottava.h"
+#include "textline.h"
 #include "pedal.h"
 #include "trill.h"
 #include "volta.h"
@@ -821,6 +822,11 @@ bool Score::loadMsc(QString name)
                               Ottava* ottava = new Ottava(this);
                               ottava->read(ee);
                               _layout->add(ottava);
+                              }
+                        else if (tag == "TextLine") {
+                              TextLine* textLine = new TextLine(this);
+                              textLine->read(ee);
+                              _layout->add(textLine);
                               }
                         else if (tag == "Volta") {
                               Volta* volta = new Volta(this);

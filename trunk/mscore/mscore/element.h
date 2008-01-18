@@ -60,7 +60,7 @@ enum ElementType {
       TUPLET, VSPACER,
       TEMPO_TEXT,
       VOLTA,
-      HAIRPIN_SEGMENT, OTTAVA_SEGMENT, PEDAL_SEGMENT, TRILL_SEGMENT,
+      HAIRPIN_SEGMENT, OTTAVA_SEGMENT, PEDAL_SEGMENT, TRILL_SEGMENT, TEXTLINE_SEGMENT,
       VOLTA_SEGMENT,
       LAYOUT_BREAK,
       LEDGER_LINE,
@@ -68,7 +68,7 @@ enum ElementType {
       CURSOR, SELECTION, LASSO, SHADOW_NOTE, RUBBERBAND,
       NOTEHEAD, TREMOLO,
       // not drawable elements:
-      HAIRPIN, OTTAVA, PEDAL, TRILL,
+      HAIRPIN, OTTAVA, PEDAL, TRILL, TEXTLINE,
       SEGMENT, SYSTEM, COMPOUND, CHORD, SLUR,
       // special types for drag& drop:
       ELEMENT, ELEMENT_LIST, STAFF_LIST, MEASURE_LIST, LAYOUT,
@@ -187,7 +187,7 @@ class Element {
             }
       bool isSLine() const {
             return type() == HAIRPIN || type() == OTTAVA || type() == PEDAL
-               || type() == TRILL || type() == VOLTA;
+               || type() == TRILL || type() == VOLTA || type() == TEXTLINE;
             }
 
       virtual void draw(QPainter&) const {}

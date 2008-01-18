@@ -2,9 +2,6 @@
       MuseScore Score Typesetter
 =================================================================
 
-This is a developer version of the Linux MusE Score Typesetter
-"MuseScore".
-
 MuseScore is distributed under the GNU General Public License (GPL).
 Please check out the file COPYING in this directory for more
 details.
@@ -31,7 +28,7 @@ Requirements:
 
       - ALSA Version 1.0 or newer (audio/midi input/output)
 
-      - CMake 2.4.6
+      - CMake >= 2.4.6
 
       - recommended: JACK audio server (audio output)
 

@@ -37,6 +37,7 @@
 #include "viewer.h"
 #include "volta.h"
 #include "ottava.h"
+#include "textline.h"
 #include "trill.h"
 #include "pedal.h"
 #include "hairpin.h"
@@ -74,14 +75,14 @@ const char* elementNames[] = {
       "Tuplet", "VSpacer",
       "TempoText",
       "Volta",
-      "HairpinSegment", "OttavaSegment", "PedalSegment", "TrillSegment",
+      "HairpinSegment", "OttavaSegment", "PedalSegment", "TrillSegment", "TextLineSegment",
       "VoltaSegment",
       "LayoutBreak",
       "LedgerLine",
       "Measure", "StaffLines",
       "Cursor", "Selection", "Lasso", "ShadowNote", "RubberBand",
       "NoteHead", "Tremolo",
-      "HairPin", "Ottava", "Pedal", "Trill",
+      "HairPin", "Ottava", "Pedal", "Trill", "TextLine",
       "Segment", "System", "Compound", "Chord", "Slur",
       "Element", "ElementList", "StaffList", "MeasureList",
       "Layout", "HBox", "VBox", "Icon"
@@ -969,6 +970,8 @@ int Element::readType(QDomElement& e, QPointF* dragOffset)
                   type = VOLTA;
             else if (e.tagName() == "Ottava")
                   type = OTTAVA;
+            else if (e.tagName() == "TextLine")
+                  type = TEXTLINE;
             else if (e.tagName() == "Pedal")
                   type = PEDAL;
             else if (e.tagName() == "Trill")
@@ -1020,6 +1023,9 @@ Element* Element::create(int type, Score* score)
                   break;
             case OTTAVA:
                   el = new Ottava(score);
+                  break;
+            case TEXTLINE:
+                  el = new TextLine(score);
                   break;
             case TRILL:
                   el = new Trill(score);
