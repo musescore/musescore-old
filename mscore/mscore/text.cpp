@@ -487,6 +487,16 @@ void Text::writeProperties(Xml& xml) const
       if (!_sizeIsSpatiumDependent && _sizeIsSpatiumDependent != st->sizeIsSpatiumDependent)
             xml.tag("spatiumSizeDependent", _sizeIsSpatiumDependent);
 
+      if (_frameWidth != 0.0)
+            xml.tag("frameWidth", _frameWidth);
+      if (_marginWidth != 0.0)
+            xml.tag("marginWidth", _marginWidth);
+      if (_paddingWidth != 1.0)
+            xml.tag("paddingWidth", _paddingWidth);
+      if (_frameColor != QColor(Qt::black))
+            xml.tag("frameColor", _frameColor);
+      if (_frameRound != 5)
+            xml.tag("frameRound", _frameRound);
       xml << doc->toHtml("UTF-8") << '\n';
       }
 
@@ -555,6 +565,16 @@ bool Text::readProperties(QDomElement e)
             }
       else if (tag == "spatiumSizeDependent")
             _sizeIsSpatiumDependent = val.toInt();
+      else if (tag == "frameWidth")
+            _frameWidth = val.toDouble();
+      else if (tag == "marginWidth")
+            _marginWidth = val.toDouble();
+      else if (tag == "paddingWidth")
+            _paddingWidth = val.toDouble();
+      else if (tag == "frameColor")
+            _frameColor = readColor(e);
+      else if (tag == "frameRound")
+            _frameRound = val.toInt();
       else if (!Element::readProperties(e))
             return false;
       return true;
