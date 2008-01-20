@@ -2070,7 +2070,7 @@ foreach(Element* el, *(score->gel())) {
 
       xml.setDevice(dev);
       xml << "<?xml version=\"1.0\" encoding=\"ISO-8859-1\"?>\n";
-      xml << "<!DOCTYPE score-partwise PUBLIC \"-//Recordare//DTD MusicXML 1.0 Partwise//EN\" \"http://www.musicxml.org/dtds/partwise.dtd\">\n";
+      xml << "<!DOCTYPE score-partwise PUBLIC \"-//Recordare//DTD MusicXML 2.0 Partwise//EN\" \"http://www.musicxml.org/dtds/partwise.dtd\">\n";
       xml.stag("score-partwise");
 
       const MeasureBase* measure = score->mainLayout()->first();
