@@ -2,7 +2,7 @@
 //  MusE Score
 //  Linux Music Score Editor
 //
-//  Copyright (C) 2002-2007 Werner Schweer and others
+//  Copyright (C) 2002-2008 Werner Schweer and others
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.
@@ -30,19 +30,23 @@ class TextLine;
 //---------------------------------------------------------
 
 class TextLineSegment : public LineSegment {
+      Text* _text;
+
    protected:
 
    public:
-      TextLineSegment(Score* s) : LineSegment(s) {}
+      TextLineSegment(Score* s);
+      TextLineSegment(const TextLineSegment&);
       virtual ElementType type() const       { return TEXTLINE_SEGMENT; }
       virtual TextLineSegment* clone() const { return new TextLineSegment(*this); }
       TextLine* textLine() const             { return (TextLine*)parent(); }
       virtual void draw(QPainter&) const;
       virtual QRectF bbox() const;
-      virtual bool startEdit(const QPointF&);
-      virtual bool edit(int, QKeyEvent*);
-      virtual void endEdit();
-      virtual bool mousePress(const QPointF&, QMouseEvent* ev);
+      void collectElements(QList<const Element*>& el) const;
+      virtual void add(Element*);
+      virtual void remove(Element*);
+      virtual void layout(ScoreLayout*);
+      Text* text() const { return _text; }
       };
 
 //---------------------------------------------------------
@@ -53,26 +57,22 @@ class TextLineSegment : public LineSegment {
 class TextLine : public SLine {
 
    protected:
-      Text* _text;
-      mutable qreal textHeight;     ///< cached value
-
+      QString _text;
       friend class TextLineSegment;
 
    public:
       TextLine(Score* s);
       TextLine(const TextLine&);
-      virtual ~TextLine();
       virtual TextLine* clone() const     { return new TextLine(*this); }
-      virtual ElementType type() const { return TEXTLINE; }
+      virtual ElementType type() const    { return TEXTLINE; }
       virtual void layout(ScoreLayout*);
-      virtual void setSubtype(int val);
       virtual LineSegment* createLineSegment();
       virtual void write(Xml& xml) const;
       virtual void read(QDomElement);
-      void setText(const QString& s) { _text->setText(s);    }
-      QString text() const           { return _text->getText(); }
+
+      void setText(const QString& s) { _text = s;    }
+      QString text() const           { return _text; }
       };
 
 #endif
-
 

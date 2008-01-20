@@ -263,8 +263,11 @@ void SLine::layout(ScoreLayout* layout)
             // tick and tick2 has no meaning so no layout is
             // possible and needed
             //
-            if (!segments.isEmpty())
-                  setbbox(segments.front()->bbox());
+            if (!segments.isEmpty()) {
+                  LineSegment* s = segments.front();
+                  s->layout(layout);
+                  setbbox(s->bbox());
+                  }
             return;
             }
 
@@ -417,10 +420,12 @@ void SLine::setLen(double l)
 
 void SLine::draw(QPainter& p) const
       {
-      foreach(LineSegment* seg, segments) {
+      QList<const Element*> el;
+      collectElements(el);
+      foreach(const Element* e, el) {
             p.save();
-            p.translate(seg->pos());
-            seg->draw(p);
+            p.translate(e->pos());
+            e->draw(p);
             p.restore();
             }
       }

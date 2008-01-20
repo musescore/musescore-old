@@ -38,7 +38,7 @@ enum {
       TEXT_INSTRUMENT_SHORT,
       TEXT_TEMPO, TEXT_LYRIC, TEXT_TUPLET, TEXT_SYSTEM,
       TEXT_STAFF, TEXT_CHORD, TEXT_REHEARSAL_MARK,
-      TEXT_REPEAT, TEXT_VOLTA, TEXT_FRAME
+      TEXT_REPEAT, TEXT_VOLTA, TEXT_FRAME, TEXT_TEXTLINE
       };
 
 //---------------------------------------------------------

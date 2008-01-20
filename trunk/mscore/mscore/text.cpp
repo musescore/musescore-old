@@ -31,6 +31,7 @@
 #include "sym.h"
 #include "symbol.h"
 #include "layout.h"
+#include "textline.h"
 
 TextPalette* palette;
 
@@ -156,6 +157,7 @@ TextStyle* Text::style() const
             case TEXT_REPEAT:           st = TEXT_STYLE_REPEAT; break;
             case TEXT_VOLTA:            st = TEXT_STYLE_VOLTA; break;
             case TEXT_FRAME:            st = TEXT_STYLE_FRAME; break;
+            case TEXT_TEXTLINE:         st = TEXT_STYLE_TEXTLINE; break;
             default:
                   printf("unknown text subtype %d <%s>\n",
                      subtype(), qPrintable(doc->toPlainText()));
@@ -195,6 +197,7 @@ const QString Text::subtypeName() const
             case TEXT_REPEAT:           return "Repeat";
             case TEXT_VOLTA:            return "Volta";
             case TEXT_FRAME:            return "Frame";
+            case TEXT_TEXTLINE:         return "TextLine";
             default:
                   printf("unknown text subtype %d\n", subtype());
                   break;
@@ -253,6 +256,8 @@ void Text::setSubtype(const QString& s)
             st = TEXT_VOLTA;
       else if (s == "Frame")
             st = TEXT_FRAME;
+      else if (s == "TextLine")
+            st = TEXT_TEXTLINE;
       else
             printf("setSubtype: unknown type <%s>\n", qPrintable(s));
       setSubtype(st);
@@ -748,8 +753,16 @@ void Text::endEdit()
       delete cursor;
       cursor = 0;
       editMode = false;
+
+      // HACK
+      //
       if (subtype() == TEXT_COPYRIGHT) {
             score()->setCopyright(doc);
+            }
+      if (subtype() == TEXT_TEXTLINE) {
+            TextLineSegment* tls = (TextLineSegment*)parent();
+            TextLine* tl = (TextLine*)(tls->line());
+            tl->setText(getText());
             }
       }
 
