@@ -76,17 +76,6 @@ void Pedal::layout(ScoreLayout* layout)
             return;
 
       SLine::layout(layout);
-#if 0
-      if (!parent())
-            return;
-      qreal pedalDistance = layout->spatium() * 6;
-
-      Measure* measure = (Measure*)parent();
-      System* system   = measure->system();
-      SysStaff* sstaff = system->staff(staffIdx());
-      qreal y = sstaff->bbox().top() + pedalDistance;
-      setPos(ipos().x(), y);
-#endif
       }
 
 //---------------------------------------------------------
@@ -132,3 +121,4 @@ LineSegment* Pedal::createLineSegment()
       seg->setStaffIdx(staffIdx());
       return seg;
       }
+

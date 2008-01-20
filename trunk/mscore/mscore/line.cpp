@@ -432,7 +432,7 @@ void SLine::draw(QPainter& p) const
 void SLine::collectElements(QList<const Element*>& el) const
       {
       foreach(const LineSegment* seg, segments)
-            el.append(seg);
+            seg->collectElements(el);
       }
 
 //---------------------------------------------------------
