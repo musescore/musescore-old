@@ -74,7 +74,6 @@ void Pedal::layout(ScoreLayout* layout)
       {
       if (!parent())
             return;
-
       SLine::layout(layout);
       }
 

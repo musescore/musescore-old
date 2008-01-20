@@ -43,6 +43,7 @@
 #include "lyrics.h"
 #include "volta.h"
 #include "line.h"
+#include "textline.h"
 
 //---------------------------------------------------------
 //   ElementItem
@@ -253,8 +254,11 @@ void PageListEditor::updateList()
             else if (el->isSLine()) {
                   ElementItem* se = new ElementItem(li, el);
                   SLine* line = (SLine*)el;
-                  foreach(LineSegment* ls, line->lineSegments())
-                        new ElementItem(se, ls);
+                  foreach(LineSegment* ls, line->lineSegments()) {
+                        ElementItem* sse = new ElementItem(se, ls);
+                        if (ls->type() == TEXTLINE_SEGMENT)
+                              new ElementItem(sse, ((TextLineSegment*)ls)->text());
+                        }
                   }
             else
                   new ElementItem(li, el);
