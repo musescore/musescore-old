@@ -68,6 +68,7 @@
 #include "repeat.h"
 #include "tremolo.h"
 #include "trill.h"
+#include "zip.h"
 
 //---------------------------------------------------------
 //   attributes -- prints <attributes> tag when necessary
@@ -2472,14 +2473,74 @@ bool Score::saveXml(const QString& name)
  Return false on error.
  */
 
+// META-INF/container.xml:
+// <?xml version="1.0" encoding="UTF-8"?>
+// <container>
+//     <rootfiles>
+//         <rootfile full-path="testHello.xml"/>
+//     </rootfiles>
+// </container>
+
 bool Score::saveMxl(const QString& name)
       {
-      printf("Score::saveMxl(%s)\n", name.toLatin1().data());
-      QBuffer buf;
-      buf.open(QIODevice::WriteOnly);
+//      printf("Score::saveMxl(%s)\n", name.toLatin1().data());
+
+      Zip::ErrorCode ec;
+      Zip uz;
+
+      ec = uz.createArchive(name);
+      if (ec != Zip::Ok) {
+            printf("Cannot create zipfile '%s'\n", name.toLatin1().data());
+            return false;
+            }
+
+      QFileInfo fi(name);
+      QDateTime dt;
+      if (debugMode)
+            dt = QDateTime(QDate(2007, 9, 10), QTime(12, 0));
+      else
+            dt = QDateTime::currentDateTime();
+      QString fn = fi.baseName() + ".xml";
+//      printf("fn=%s\n", fn.toLatin1().data());
+
+      QBuffer cbuf;
+      cbuf.open(QIODevice::ReadWrite);
+      Xml xml;
+      xml.setDevice(&cbuf);
+      xml << "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n";
+      xml.stag("container");
+      xml.stag("rootfiles");
+      xml.stag(QString("rootfile full-path=\"%1\"").arg(fn));
+      xml.etag();
+      xml.etag();
+      xml.etag();
+//      printf("bufsize=%d\n", cbuf.data().size());
+//      printf("data=%s\n", cbuf.data().data());
+      cbuf.seek(0);
+      ec = uz.createEntry("META-INF/container.xml", cbuf, dt);
+      if (ec != Zip::Ok) {
+            printf("Cannot add container.xml to zipfile '%s'\n", name.toLatin1().data());
+            return false;
+            }
+
+      QBuffer dbuf;
+      dbuf.open(QIODevice::ReadWrite);
       ExportMusicXml em(this);
-      em.write(&buf);
-      printf("bufsize=%d\n", buf.data().size());
-      printf("data=%s\n", buf.data().data());
+      em.write(&dbuf);
+//      printf("bufsize=%d\n", dbuf.data().size());
+//      printf("data=%s\n", dbuf.data().data());
+      dbuf.seek(0);
+      ec = uz.createEntry(fn, dbuf, dt);
+      if (ec != Zip::Ok) {
+            printf("Cannot add %s to zipfile '%s'\n", fn.toLatin1().data(), name.toLatin1().data());
+            return false;
+            }
+
+      ec = uz.closeArchive();
+      if (ec != Zip::Ok) {
+            printf("Cannot close zipfile '%s'\n", name.toLatin1().data());
+            return false;
+            }
+
       return true;
       }

@@ -20,6 +20,7 @@
 
 add_library (
   osdabzip STATIC
+  zip.cpp
   unzip.cpp
   )
 
