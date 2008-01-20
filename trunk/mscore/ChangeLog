@@ -1,3 +1,5 @@
+20.1.8 (lv)
+      - set MusicXML DTD version to 2.0 to allow compressed MusicXML output
 18.1.8 (ws)
       - applied TextLine patch from Seth Yastrov
 15.1.8 (ws)
