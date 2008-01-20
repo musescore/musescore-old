@@ -191,7 +191,7 @@ class LoadCompressedMusicXml : public LoadFile {
 
 bool LoadCompressedMusicXml::loader(QFile* qf)
       {
-      printf("LoadCompressedMusicXml::loader(%s)\n", qf->fileName().toLatin1().data());
+//      printf("LoadCompressedMusicXml::loader(%s)\n", qf->fileName().toLatin1().data());
       UnZip uz;
       UnZip::ErrorCode ec;
       ec = uz.openArchive(qf->fileName());
@@ -200,13 +200,13 @@ bool LoadCompressedMusicXml::loader(QFile* qf)
             printf("Unable to open archive: %s", uz.formatError(ec).toAscii().data());
             return true;
       }
-      printf("ec=%d\n", ec);
+//      printf("ec=%d\n", ec);
 
       QBuffer cbuf;
       cbuf.open(QIODevice::WriteOnly);
       ec = uz.extractFile("META-INF/container.xml", &cbuf);
-      printf("ec=%d, bufsize=%d\n", ec, cbuf.data().size());
-      // printf("data=%s\n", cbuf.data().data());
+//      printf("ec=%d, bufsize=%d\n", ec, cbuf.data().size());
+//      printf("data=%s\n", cbuf.data().data());
 
       QDomDocument container;
       int line, column;
@@ -247,14 +247,14 @@ bool LoadCompressedMusicXml::loader(QFile* qf)
             printf("can't find rootfile in: %s\n", qf->fileName().toLatin1().data());
             return true;
             }
-      else
-            printf("rootfile=%s\n", rootfile.toLatin1().data());
+//      else
+//            printf("rootfile=%s\n", rootfile.toLatin1().data());
 
       QBuffer dbuf;
       dbuf.open(QIODevice::WriteOnly);
       ec = uz.extractFile(rootfile, &dbuf);
-      printf("ec=%d, bufsize=%d\n", ec, dbuf.data().size());
-      // printf("data=%s\n", dbuf.data().data());
+//      printf("ec=%d, bufsize=%d\n", ec, dbuf.data().size());
+//      printf("data=%s\n", dbuf.data().data());
 
       if (!_doc->setContent(dbuf.data(), false, &err, &line, &column)) {
             QString col, ln;
