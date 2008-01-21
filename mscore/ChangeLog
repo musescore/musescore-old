@@ -1,4 +1,6 @@
-20.1.8
+21.1.8 (ws)
+      - implement circled text as variant to boxed text
+20.1.8 (ws)
       - save/restore text frame properties
       (lv)
       - implemented writing compressed MusicXML

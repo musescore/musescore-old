@@ -49,10 +49,11 @@ class TextPalette : public QWidget, public Ui::TextPaletteBase {
       void subscriptClicked(bool);
       void superscriptClicked(bool);
       void borderChanged(double);
-      void marginChanged(double);
+//      void marginChanged(double);
       void paddingChanged(double);
       void frameRoundChanged(int val);
       void frameColorPressed();
+      void circleToggled(bool val);
 
    public:
       TextPalette(QWidget* parent);

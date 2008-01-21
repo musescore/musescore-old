@@ -24,6 +24,7 @@
 #include "sym.h"
 #include "style.h"
 #include "mscore.h"
+#include "score.h"
 
 static SymCode pSymbols[] = {
       SymCode(0xe10e, TEXT_STYLE_DYNAMICS1),    // sharp
@@ -160,9 +161,10 @@ TextPalette::TextPalette(QWidget* parent)
       connect(rightAlign, SIGNAL(clicked()), SLOT(setRightAlign()));
       connect(centerAlign, SIGNAL(clicked()), SLOT(setHCenterAlign()));
       connect(frameWidth, SIGNAL(valueChanged(double)),  SLOT(borderChanged(double)));
-      connect(marginWidth, SIGNAL(valueChanged(double)),  SLOT(marginChanged(double)));
+//      connect(marginWidth, SIGNAL(valueChanged(double)),  SLOT(marginChanged(double)));
       connect(paddingWidth, SIGNAL(valueChanged(double)), SLOT(paddingChanged(double)));
       connect(borderRounding, SIGNAL(valueChanged(int)), SLOT(frameRoundChanged(int)));
+      connect(circle, SIGNAL(toggled(bool)), SLOT(circleToggled(bool)));
       connect(frameColor, SIGNAL(pressed()), SLOT(frameColorPressed()));
       setFocusPolicy(Qt::NoFocus);
       }
@@ -333,9 +335,11 @@ void TextPalette::setText(Text* te)
 
 //      borderStyle->setValue(int(fformat.borderStyle()));
       frameWidth->setValue(_textElement->frameWidth());
-      marginWidth->setValue(_textElement->marginWidth());
+//      marginWidth->setValue(_textElement->marginWidth());
       paddingWidth->setValue(_textElement->paddingWidth());
       borderRounding->setValue(_textElement->frameRound());
+      circle->setChecked(_textElement->circle());
+      borderRounding->setEnabled(!_textElement->circle());
       }
 
 //---------------------------------------------------------
@@ -345,9 +349,12 @@ void TextPalette::setText(Text* te)
 void TextPalette::borderChanged(double val)
       {
       _textElement->setFrameWidth(val);
-      mscore->activateWindow();
+//      mscore->activateWindow();
+      _textElement->score()->addRefresh(_textElement->abbox().adjusted(-6, -6, 12, 12));
+      _textElement->score()->end();
       }
 
+#if 0
 //---------------------------------------------------------
 //   marginChanged
 //---------------------------------------------------------
@@ -356,7 +363,10 @@ void TextPalette::marginChanged(double val)
       {
       _textElement->setMarginWidth(val);
       mscore->activateWindow();
+      _textElement->score()->addRefresh(_textElement->abbox().adjusted(-6, -6, 12, 12));
+      _textElement->score()->end();
       }
+#endif
 
 //---------------------------------------------------------
 //   paddingChanged
@@ -365,7 +375,9 @@ void TextPalette::marginChanged(double val)
 void TextPalette::paddingChanged(double val)
       {
       _textElement->setPaddingWidth(val);
-      mscore->activateWindow();
+//      mscore->activateWindow();
+      _textElement->score()->addRefresh(_textElement->abbox().adjusted(-6, -6, 12, 12));
+      _textElement->score()->end();
       }
 
 //---------------------------------------------------------
@@ -375,7 +387,9 @@ void TextPalette::paddingChanged(double val)
 void TextPalette::frameRoundChanged(int val)
       {
       _textElement->setFrameRound(val);
-      mscore->activateWindow();
+//      mscore->activateWindow();
+      _textElement->score()->addRefresh(_textElement->abbox().adjusted(-6, -6, 12, 12));
+      _textElement->score()->end();
       }
 
 //---------------------------------------------------------
@@ -388,6 +402,21 @@ void TextPalette::frameColorPressed()
       if (color.isValid()) {
             _textElement->setFrameColor(color);
             mscore->activateWindow();
+            _textElement->score()->addRefresh(_textElement->abbox().adjusted(-6, -6, 12, 12));
+            _textElement->score()->end();
             }
+      }
+
+//---------------------------------------------------------
+//   circleToggled
+//---------------------------------------------------------
+
+void TextPalette::circleToggled(bool val)
+      {
+      _textElement->setCircle(val);
+      mscore->activateWindow();
+      borderRounding->setEnabled(!val);
+      _textElement->score()->addRefresh(_textElement->abbox().adjusted(-6, -6, 12, 12));
+      _textElement->score()->end();
       }
 

@@ -54,10 +54,11 @@ Text::Text(Score* s)
 
       cursor                  = 0;
       _frameWidth             = 0.0;
-      _marginWidth            = 0.0;
+//      _marginWidth            = 0.0;
       _paddingWidth           = 1.0;
       _frameColor             = QColor(Qt::black);
       _frameRound             = 5;
+      _circle                 = false;
       setSubtype(TEXT_STAFF);
       }
 
@@ -73,10 +74,11 @@ Text::Text(const Text& e)
       _offsetType             = e._offsetType;
       _sizeIsSpatiumDependent = e._sizeIsSpatiumDependent;
       _frameWidth             = e._frameWidth;
-      _marginWidth            = e._marginWidth;
+//      _marginWidth            = e._marginWidth;
       _paddingWidth           = e._paddingWidth;
       _frameColor             = e._frameColor;
       _frameRound             = e._frameRound;
+      _circle                 = e._circle;
       editMode                = e.editMode;
       cursorPos               = e.cursorPos;
       doc                     = e.doc->clone(0);
@@ -305,6 +307,8 @@ QString Text::getHtml() const
 
 void Text::layout(ScoreLayout* layout)
       {
+      double dpmm = double(layout->paintDevice()->logicalDpiX()) / INCH;
+
       doc->documentLayout()->setPaintDevice(layout->paintDevice());
       setbbox(QRectF(QPointF(), doc->size()));
 
@@ -336,6 +340,32 @@ void Text::layout(ScoreLayout* layout)
       else if (_align & ALIGN_HCENTER)
             p.setX(-(tw * .5));
       setPos(p + o);
+
+      if (_frameWidth > 0.0) {
+            frame = QRectF();
+            for (QTextBlock tb = doc->begin(); tb.isValid(); tb = tb.next()) {
+                  QTextLayout* tl = tb.layout();
+                  int n = tl->lineCount();
+                  for (int i = 0; i < n; ++i)
+                        frame |= tl->lineAt(0).naturalTextRect().translated(tl->position());
+                  }
+            if (_circle) {
+                  if (frame.width() > frame.height()) {
+                        frame.setY(frame.y() + (frame.width() - frame.height()) * -.5);
+                        frame.setHeight(frame.width());
+                        }
+                  else {
+                        frame.setX(frame.x() + (frame.height() - frame.width()) * -.5);
+                        frame.setWidth(frame.height());
+                        }
+                  }
+            double w = _paddingWidth * dpmm;
+            frame.adjust(-w, -w, w, w);
+
+            QRectF b(frame);
+            double lw = _frameWidth * dpmm * .5;
+            setbbox(frame.adjusted(-lw, -lw, lw, lw));
+            }
       }
 
 //---------------------------------------------------------
@@ -385,7 +415,7 @@ void Text::setStyle(const TextStyle* s)
       _offsetType    = s->offsetType;
       _sizeIsSpatiumDependent = s->sizeIsSpatiumDependent;
       _frameWidth    = s->frameWidth;
-      _marginWidth   = s->marginWidth;
+//      _marginWidth   = s->marginWidth;
       _paddingWidth  = s->paddingWidth;
       _frameColor    = s->frameColor;
       _frameRound    = s->frameRound;
@@ -489,14 +519,16 @@ void Text::writeProperties(Xml& xml) const
 
       if (_frameWidth != 0.0)
             xml.tag("frameWidth", _frameWidth);
-      if (_marginWidth != 0.0)
-            xml.tag("marginWidth", _marginWidth);
+//      if (_marginWidth != 0.0)
+//            xml.tag("marginWidth", _marginWidth);
       if (_paddingWidth != 1.0)
             xml.tag("paddingWidth", _paddingWidth);
       if (_frameColor != QColor(Qt::black))
             xml.tag("frameColor", _frameColor);
       if (_frameRound != 5)
             xml.tag("frameRound", _frameRound);
+      if (_circle)
+            xml.tag("circle", _circle);
       xml << doc->toHtml("UTF-8") << '\n';
       }
 
@@ -567,14 +599,16 @@ bool Text::readProperties(QDomElement e)
             _sizeIsSpatiumDependent = val.toInt();
       else if (tag == "frameWidth")
             _frameWidth = val.toDouble();
-      else if (tag == "marginWidth")
-            _marginWidth = val.toDouble();
+//      else if (tag == "marginWidth")
+//            _marginWidth = val.toDouble();
       else if (tag == "paddingWidth")
             _paddingWidth = val.toDouble();
       else if (tag == "frameColor")
             _frameColor = readColor(e);
       else if (tag == "frameRound")
             _frameRound = val.toInt();
+      else if (tag == "circle")
+            _circle = val.toInt();
       else if (!Element::readProperties(e))
             return false;
       return true;
@@ -792,7 +826,6 @@ void Text::endEdit()
 
 void Text::draw(QPainter& p) const
       {
-      double dpmm = double(p.device()->logicalDpiX()) / INCH;
       p.save();
       p.setRenderHint(QPainter::Antialiasing, true);
 
@@ -810,21 +843,17 @@ void Text::draw(QPainter& p) const
 
       // draw border
       if (_frameWidth > 0.0) {
-            QRectF f;
-            for (QTextBlock tb = doc->begin(); tb.isValid(); tb = tb.next()) {
-                  QTextLayout* tl = tb.layout();
-                  int n = tl->lineCount();
-                  for (int i = 0; i < n; ++i)
-                        f |= tl->lineAt(0).naturalTextRect().translated(tl->position());
-                  }
-            double w = _paddingWidth * dpmm;
-            f.adjust(-w, -w, w, w);
+            double dpmm = double(p.device()->logicalDpiX()) / INCH;
             p.setPen(QPen(QBrush(_frameColor), _frameWidth * dpmm));
             p.setBrush(QBrush(Qt::NoBrush));
-            int r2 = _frameRound * lrint((f.width() / f.height()));
-            if (r2 > 99)
-                  r2 = 99;
-            p.drawRoundRect(f, _frameRound, r2);
+            if (_circle)
+                  p.drawArc(frame, 0, 5760);
+            else {
+                  int r2 = _frameRound * lrint((frame.width() / frame.height()));
+                  if (r2 > 99)
+                        r2 = 99;
+                  p.drawRoundRect(frame, _frameRound, r2);
+                  }
             }
 
       if (editMode) {

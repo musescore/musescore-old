@@ -48,10 +48,13 @@ enum {
 class Text : public Element {
       bool _sizeIsSpatiumDependent;       // font size depends on _spatium unit
       double _frameWidth;                 // unit: mm
-      double _marginWidth;                // unit: mm
+//      double _marginWidth;              // unit: mm
       double _paddingWidth;               // unit: mm
       QColor _frameColor;
       int _frameRound;
+      bool _circle;
+
+      QRectF frame;
 
       bool editMode;
       QTextCursor* cursor;
@@ -89,16 +92,18 @@ class Text : public Element {
       void setStyle(const TextStyle*);
 
       double frameWidth() const             { return _frameWidth;   }
-      double marginWidth() const            { return _marginWidth;  }
+//      double marginWidth() const            { return _marginWidth;  }
       double paddingWidth() const           { return _paddingWidth; }
       QColor frameColor() const             { return _frameColor;   }
       int frameRound() const                { return _frameRound;   }
+      bool circle() const                   { return _circle;       }
 
       void setFrameWidth(double val)        { _frameWidth   = val;  }
-      void setMarginWidth(double val)       { _marginWidth  = val;  }
+//      void setMarginWidth(double val)       { _marginWidth  = val;  }
       void setPaddingWidth(double val)      { _paddingWidth = val;  }
       void setFrameColor(const QColor& val) { _frameColor   = val;  }
       void setFrameRound(int val)           { _frameRound   = val;  }
+      void setCircle(bool val)              { _circle       = val;  }
 
       virtual void draw(QPainter&) const;
 

@@ -856,13 +856,15 @@ void Note::propertyAction(const QString& s)
 //   layout
 //---------------------------------------------------------
 
-void Note::layout(ScoreLayout*)
+void Note::layout(ScoreLayout* layout)
       {
       setMag(chord()->mag());
       if (_accidental)
             _accidental->setMag(mag());
-      foreach(Text* t, _fingering)
+      foreach(Text* t, _fingering) {
             t->setMag(mag());
+            t->layout(layout);
+            }
       }
 
 //---------------------------------------------------------

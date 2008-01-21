@@ -77,6 +77,8 @@ Canvas::Canvas(QWidget* parent)
       _fgColor         = Qt::white;
       fgPixmap         = 0;
       bgPixmap         = 0;
+      lastSelected     = 0;
+
       lasso            = new Lasso(_score);
 
       setXoffset(30);
@@ -472,14 +474,15 @@ void Canvas::mouseDoubleClickEvent(QMouseEvent* ev)
       if (state == EDIT)
             return;
 
-      Element* element = _score->dragObject();
+
+      Element* element = lastSelected ? lastSelected : _score->dragObject();
 
       if (element) {
             _score->startCmd();
 
-            if (!startEdit(element))
+            if (!startEdit(element)) {
                   _score->endCmd();
-
+                  }
             }
       else
             mousePressEvent(ev);
@@ -1981,6 +1984,7 @@ Element* Canvas::elementAt(const QPointF& p)
 
       if (_score->selection()->state() != SEL_NONE) {
             Element* sel = _score->getSelectedElement();
+            lastSelected = sel;
             int n = el.size();
             for (int i = 0; i < n; ++i) {
                   if ((el[i] == sel)  || ((sel == 0) && el[i]->type() == MEASURE)) {
@@ -1990,6 +1994,8 @@ Element* Canvas::elementAt(const QPointF& p)
                         }
                   }
             }
+      else
+            lastSelected = 0;
       return const_cast<Element*>(el.at(idx));
       }
 

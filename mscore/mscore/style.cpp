@@ -119,7 +119,7 @@ const TextStyle defaultTextStyleArray[] = {
 
       TextStyle(QString("Rehearsal Mark"), ff,  14, true, false, false,
          ALIGN_HCENTER | ALIGN_BASELINE, ANCHOR_SEGMENT, 0, -3.0, OS, 0, 0, true,
-         0.3, 1.0, 1.0, 20, Qt::black),
+         0.3, 1.0, 20, Qt::black, false),
 
       TextStyle(QString("Repeat Text"), ff,  12, false, false, false,
          ALIGN_HCENTER | ALIGN_BASELINE, ANCHOR_MEASURE, 0, -2.0, OS, 100, 0, true),
@@ -230,14 +230,14 @@ TextStyle::TextStyle(
    Align _align, Anchor _anchor,
    double _xoff, double _yoff, OffsetType _ot, double _rxoff, double _ryoff,
    bool sd,
-   double fw, double mw, double pw, int fr, QColor co)
+   double fw, double pw, int fr, QColor co, bool _circle)
 
    : name(_name), family(_family), size(_size), bold(_bold),
    italic(_italic), underline(_underline),
    align(_align), anchor(_anchor),
    xoff(_xoff), yoff(_yoff), offsetType(_ot), rxoff(_rxoff), ryoff(_ryoff),
-   sizeIsSpatiumDependent(sd), frameWidth(fw), marginWidth(mw), paddingWidth(pw),
-   frameRound(fr), frameColor(co)
+   sizeIsSpatiumDependent(sd), frameWidth(fw), paddingWidth(pw),
+   frameRound(fr), frameColor(co), circle(_circle)
       {
       }
 
@@ -298,10 +298,11 @@ void TextStyle::write(Xml& xml) const
       xml.tag("rxoffset", rxoff);
       xml.tag("ryoffset", ryoff);
       xml.tag("frameWidth", frameWidth);
-      xml.tag("marginWidth", marginWidth);
+//      xml.tag("marginWidth", marginWidth);
       xml.tag("paddingWidth", paddingWidth);
       xml.tag("frameRound", frameRound);
       xml.tag("frameColor", frameColor);
+      xml.tag("circle", circle);
 
       xml.etag();
       }
@@ -345,14 +346,16 @@ void TextStyle::read(QDomElement e)
                   sizeIsSpatiumDependent = val.toDouble();
             else if (tag == "frameWidth")
                   frameWidth = val.toDouble();
-            else if (tag == "marginWidth")
-                  marginWidth = val.toDouble();
+//            else if (tag == "marginWidth")
+//                  marginWidth = val.toDouble();
             else if (tag == "paddingWidth")
                   paddingWidth = val.toDouble();
             else if (tag == "frameRound")
                   frameRound = i;
             else if (tag == "frameColor")
                   frameColor = readColor(e);
+            else if (tag == "circle")
+                  circle = val.toInt();
             else
                   domError(e);
             }

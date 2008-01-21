@@ -79,10 +79,11 @@ class TextStyle {
       bool sizeIsSpatiumDependent;        // text point size depends on _spatium unit
 
       double frameWidth;
-      double marginWidth;
+//      double marginWidth;
       double paddingWidth;
       int frameRound;
       QColor frameColor;
+      bool circle;
 
       TextStyle(QString _name, QString _family, int _size,
          bool _bold, bool _italic, bool _underline,
@@ -90,8 +91,9 @@ class TextStyle {
          double _xoff = 0, double _yoff = 0, OffsetType _ot = OFFSET_SPATIUM,
          double _rxoff = 0, double _ryoff = 0,
          bool sd = false,
-         double fw = 0.0, double mw = 0.0, double pw = 0.0, int fr = 25,
-         QColor co = QColor(Qt::black));
+//         double fw = 0.0, double mw = 0.0, double pw = 0.0, int fr = 25,
+         double fw = 0.0, double pw = 0.0, int fr = 25,
+         QColor co = QColor(Qt::black), bool circle = false);
 
       TextStyle() {}
       void write(Xml&) const;
@@ -115,10 +117,11 @@ class TextStyle {
                 || s.offsetType != offsetType
                 || s.sizeIsSpatiumDependent != sizeIsSpatiumDependent
                 || s.frameWidth != frameWidth
-                || s.marginWidth != marginWidth
+//                || s.marginWidth != marginWidth
                 || s.paddingWidth != paddingWidth
                 || s.frameRound != frameRound
-                || s.frameColor != frameColor;
+                || s.frameColor != frameColor
+                || s.circle != circle;
             }
       };
 
