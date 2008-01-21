@@ -7,7 +7,9 @@ Release 0.9
       Creation of new chords is guided by a "New Score Wizard".
 
       New implemented score elements are acciaccatura and appoggiatura
-      grace notes.
+      grace notes. There is also a new line object which combines a text
+      with a line. Texts can now be framed with a circle.
+
 
 Release 0.8
       - audio output for windows version

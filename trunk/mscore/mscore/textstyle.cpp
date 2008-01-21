@@ -216,7 +216,7 @@ void TextStyleDialog::nameSelected(int n)
             }
       borderColor->setColor(s->frameColor);
       borderWidth->setValue(s->frameWidth);
-      marginWidth->setValue(s->marginWidth);
+//      marginWidth->setValue(s->marginWidth);
       paddingWidth->setValue(s->paddingWidth);
       frameRound->setValue(s->frameRound);
       current = n;
@@ -280,7 +280,7 @@ void TextStyleDialog::saveStyle(int n)
       s->ryoff        = ryOffset->value();
       s->frameColor   = borderColor->color();
       s->frameWidth   = borderWidth->value();
-      s->marginWidth  = marginWidth->value();
+//      s->marginWidth  = marginWidth->value();
       s->paddingWidth = paddingWidth->value();
       s->frameRound   = frameRound->value();
       }

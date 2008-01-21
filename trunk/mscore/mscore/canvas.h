@@ -81,6 +81,8 @@ class Canvas : public QFrame, public Viewer {
       QPixmap* bgPixmap;
       QPixmap* fgPixmap;
 
+      Element* lastSelected;
+
       //============================================
 
       virtual void paintEvent(QPaintEvent*);
