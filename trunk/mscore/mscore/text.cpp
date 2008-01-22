@@ -162,10 +162,8 @@ bool TextBase::readProperties(QDomElement e)
             QString s = Xml::htmlToString(e);
             _doc->setHtml(s);
             }
-      else if (tag == "frameWidth") {
+      else if (tag == "frameWidth")
             _frameWidth = val.toDouble();
-            printf("frameWidth %f\n", _frameWidth);
-            }
       else if (tag == "paddingWidth")
             _paddingWidth = val.toDouble();
       else if (tag == "frameColor")
@@ -279,8 +277,8 @@ TextB::TextB(const TextB& e)
       _movable  = e._movable;
       _sizeIsSpatiumDependent = e._sizeIsSpatiumDependent;
 
-      editMode     = e.editMode;
-      cursorPos    = e.cursorPos;
+      editMode  = e.editMode;
+      cursorPos = e.cursorPos;
       }
 
 //---------------------------------------------------------
@@ -300,20 +298,32 @@ TextC::TextC(const TextC& e)
       {
       _tbb  = e._tbb;
       _otb  = 0;
-      if (editMode) {
-            cursor = new QTextCursor(textBase()->doc());
-            cursor->setPosition(cursorPos);
-            cursor->setBlockFormat(e.cursor->blockFormat());
-            cursor->setCharFormat(e.cursor->charFormat());
-            }
-      else
-            cursor = 0;
+      cursor = 0;
+      baseChanged();
       }
 
 TextC::~TextC()
       {
       if (_otb)
             delete _otb;
+      }
+
+//---------------------------------------------------------
+//   baseChanged
+//---------------------------------------------------------
+
+void TextC::baseChanged()
+      {
+      if (editMode) {
+            if (cursor)
+                  delete cursor;
+            cursor = new QTextCursor(textBase()->doc());
+            cursor->setPosition(cursorPos);
+            // cursor->setBlockFormat(e.cursor->blockFormat());
+            // cursor->setCharFormat(e.cursor->charFormat());
+            }
+      else
+            cursor = 0;
       }
 
 //---------------------------------------------------------

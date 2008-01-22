@@ -288,6 +288,10 @@ enum {
       s_halfcrossedheadSym,
       s_crossedheadSym,
 
+      wholediamond2headSym,
+      halfdiamond2headSym,
+      diamond2headSym,
+
       lastSym
       };
 
