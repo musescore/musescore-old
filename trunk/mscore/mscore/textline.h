@@ -30,7 +30,7 @@ class TextLine;
 //---------------------------------------------------------
 
 class TextLineSegment : public LineSegment {
-      Text* _text;
+      TextC* _text;
 
    protected:
 
@@ -46,7 +46,7 @@ class TextLineSegment : public LineSegment {
       virtual void add(Element*);
       virtual void remove(Element*);
       virtual void layout(ScoreLayout*);
-      Text* text() const { return _text; }
+      TextC* text() const { return _text; }
       };
 
 //---------------------------------------------------------
@@ -57,12 +57,13 @@ class TextLineSegment : public LineSegment {
 class TextLine : public SLine {
 
    protected:
-      QString _text;
+      TextBase* _text;
       friend class TextLineSegment;
 
    public:
       TextLine(Score* s);
       TextLine(const TextLine&);
+      ~TextLine();
       virtual TextLine* clone() const     { return new TextLine(*this); }
       virtual ElementType type() const    { return TEXTLINE; }
       virtual void layout(ScoreLayout*);
@@ -70,8 +71,11 @@ class TextLine : public SLine {
       virtual void write(Xml& xml) const;
       virtual void read(QDomElement);
 
-      void setText(const QString& s) { _text = s;    }
-      QString text() const           { return _text; }
+      void setText(const QString& s) { _text->setText(s, 0);    }
+      QString text() const           { return _text->getText(); }
+      TextBase** textBasePtr()       { return &_text;           }
+      TextBase*  textBase()          { return _text;            }
+      void setTextBase(TextBase* b)  { _text = b;               }
       };
 
 #endif

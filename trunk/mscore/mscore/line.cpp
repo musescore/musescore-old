@@ -196,19 +196,6 @@ void LineSegment::endEdit()
       }
 
 //---------------------------------------------------------
-//   drag
-//---------------------------------------------------------
-
-QRectF LineSegment::drag(const QPointF& s)
-      {
-      QRectF r(abbox());
-      QPointF newOffset(s / _spatium);
-      QPointF diff(userOff() - newOffset);
-      setUserOff(newOffset);
-      return abbox() | r;
-      }
-
-//---------------------------------------------------------
 //   resetUserOffsets
 //---------------------------------------------------------
 

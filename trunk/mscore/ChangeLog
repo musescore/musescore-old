@@ -1,3 +1,6 @@
+22.1.8 (ws)
+      - new class TextC()
+      - splitted Text() into TextBase() and Text()
 21.1.8 (ws)
       - implement circled text as variant to boxed text
 20.1.8 (ws)

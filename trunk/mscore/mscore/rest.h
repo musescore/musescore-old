@@ -35,7 +35,6 @@ class Rest : public ChordRest {
 
       virtual bool isMovable() const { return true; }
       virtual QRectF drag(const QPointF& s);
-      virtual void endDrag();
       virtual qreal upPos()   const;
       virtual qreal downPos() const;
       virtual qreal centerX() const;

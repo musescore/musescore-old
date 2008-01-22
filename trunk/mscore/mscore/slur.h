@@ -62,7 +62,6 @@ class SlurSegment : public Element {
       virtual QPainterPath shape() const;
       virtual void draw(QPainter&) const;
 
-      virtual QRectF drag(const QPointF& s);
       virtual bool startEdit(const QPointF&);
       virtual void editDrag(int, const QPointF&, const QPointF&);
       virtual bool edit(int, QKeyEvent*);

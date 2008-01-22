@@ -236,19 +236,6 @@ void SlurSegment::editDrag(int curGrip, const QPointF&, const QPointF& delta)
       }
 
 //---------------------------------------------------------
-//   drag
-//---------------------------------------------------------
-
-QRectF SlurSegment::drag(const QPointF& s)
-      {
-      QRectF r(abbox());
-      QPointF newOffset(s / _spatium);
-      QPointF diff(userOff() - newOffset);
-      setUserOff(newOffset);
-      return abbox() | r;
-      }
-
-//---------------------------------------------------------
 //    bbox
 //---------------------------------------------------------
 

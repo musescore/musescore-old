@@ -1009,7 +1009,7 @@ void TextView::setElement(Element* e)
       {
       Text* te = (Text*)e;
       ShowElementBase::setElement(e);
-      tb.text->setDocument(te->getDoc());
+      tb.text->setDocument(te->doc());
       tb.xoffset->setValue(te->xoff());
       tb.yoffset->setValue(te->yoff());
       tb.rxoffset->setValue(te->rxoff());

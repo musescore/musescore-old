@@ -23,7 +23,7 @@
 
 #include "ui_textpalette.h"
 
-class Text;
+class TextB;
 
 //---------------------------------------------------------
 //   TextPalette
@@ -32,7 +32,7 @@ class Text;
 class TextPalette : public QWidget, public Ui::TextPaletteBase {
       Q_OBJECT
 
-      Text* _textElement;
+      TextB* _textElement;
       QTextCharFormat format;
       QTextBlockFormat bformat;
 
@@ -49,7 +49,6 @@ class TextPalette : public QWidget, public Ui::TextPaletteBase {
       void subscriptClicked(bool);
       void superscriptClicked(bool);
       void borderChanged(double);
-//      void marginChanged(double);
       void paddingChanged(double);
       void frameRoundChanged(int val);
       void frameColorPressed();
@@ -57,7 +56,7 @@ class TextPalette : public QWidget, public Ui::TextPaletteBase {
 
    public:
       TextPalette(QWidget* parent);
-      void setText(Text* te);
+      void setText(TextB* te);
       void setCharFormat(const QTextCharFormat&);
       void setBlockFormat(const QTextBlockFormat&);
       };
