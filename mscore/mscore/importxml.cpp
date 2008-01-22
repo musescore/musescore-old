@@ -2410,7 +2410,7 @@ void MusicXml::xmlHarmony(QDomElement e, int tick, Measure* measure)
       Text* text = new Text(measure->score());
       text->setTick(tick);
       text->setSubtype(TEXT_CHORD);
-      QTextDocument* doc = text->getDoc();
+      QTextDocument* doc = text->doc();
       QTextCursor cursor(doc);
 
       QTextCharFormat tcf = cursor.charFormat();

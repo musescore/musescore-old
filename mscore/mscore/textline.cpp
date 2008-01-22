@@ -40,18 +40,6 @@ TextLineSegment::TextLineSegment(const TextLineSegment& seg)
    : LineSegment(seg)
       {
       _text = 0;
-#if 0
-#if 0
-      _text = seg._text;
-#else
-      if (seg._text) {
-            _text = seg._text->clone();
-            printf("clone text %p -> %p\n", seg._text, _text);
-            }
-      else
-            _text = 0;
-#endif
-#endif
       }
 
 //---------------------------------------------------------
@@ -64,8 +52,18 @@ void TextLineSegment::add(Element* e)
             printf("TextLineSegment: add illegal element\n");
             return;
             }
-      _text = (Text*)e;
+      _text = (TextC*)e;
       _text->setParent(this);
+      TextLine* tl = (TextLine*)line();
+
+      TextBase* tb = 0;
+      if (_text->otb()) {
+            tb = _text->otb();
+            _text->setOtb(0);
+            }
+      else
+            tb = new TextBase(*tl->textBase());
+      tl->setTextBase(tb);
       }
 
 //---------------------------------------------------------
@@ -78,6 +76,7 @@ void TextLineSegment::remove(Element* e)
             printf("TextLineSegment: cannot remove %s %p %p\n", e->name(), e, _text);
             return;
             }
+      _text->setOtb(_text->textBase());
       _text = 0;
       }
 
@@ -144,9 +143,10 @@ void TextLineSegment::layout(ScoreLayout* l)
       {
       if (_segmentType == SEGMENT_SINGLE || _segmentType == SEGMENT_BEGIN) {
             if (_text == 0) {
-                  _text = new Text(score());
+                  TextLine* tl = (TextLine*)line();
+                  _text = new TextC(tl->textBasePtr(), score());
                   _text->setSubtype(TEXT_TEXTLINE);
-                  _text->setText(((TextLine*)line())->text());
+                  _text->setMovable(false);
                   _text->setParent(this);
                   }
             _text->layout(l);
@@ -168,12 +168,22 @@ void TextLineSegment::layout(ScoreLayout* l)
 TextLine::TextLine(Score* s)
    : SLine(s)
       {
-      setSubtype(0);
+      _text = new TextBase;
       }
 
 TextLine::TextLine(const TextLine& e)
    : SLine(e)
       {
+      _text = e._text;
+      }
+
+//---------------------------------------------------------
+//   TextLine
+//---------------------------------------------------------
+
+TextLine::~TextLine()
+      {
+      // TextLine has no ownership of _text
       }
 
 //---------------------------------------------------------
@@ -182,12 +192,7 @@ TextLine::TextLine(const TextLine& e)
 
 void TextLine::layout(ScoreLayout* layout)
       {
-//      qreal textlineLineWidth = _spatium * .15;
-
       SLine::layout(layout);
-//      QRectF bb(te->bbox());
-//      qreal h = bb.height() * .5 - textlineLineWidth * .5;
-//      te->setPos(0.0, -h);
       }
 
 //---------------------------------------------------------
@@ -198,7 +203,7 @@ void TextLine::write(Xml& xml) const
       {
       xml.stag("TextLine");
       SLine::writeProperties(xml);
-      xml.tag("text", _text);
+      _text->writeProperties(xml);
       xml.etag();
       }
 
@@ -209,10 +214,8 @@ void TextLine::write(Xml& xml) const
 void TextLine::read(QDomElement e)
       {
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
-            QString tag(e.tagName());
-            if (tag == "text") {
-                  _text = e.text();
-                  }
+            if (_text->readProperties(e))
+                  ;
             else if (!SLine::readProperties(e))
                   domError(e);
             }

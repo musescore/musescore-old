@@ -887,11 +887,11 @@ void Score::endEdit()
             Text* in = (Text*)editObject;
             Part* p  = part(in->staffIdx());
             if (editObject->subtype() == TEXT_INSTRUMENT_SHORT) {
-                  p->setShortName(*(in->getDoc()));
+                  p->setShortName(*(in->doc()));
                   _layout->setInstrumentNames();
                   }
             else if (editObject->subtype() == TEXT_INSTRUMENT_LONG) {
-                  p->setLongName(*(in->getDoc()));
+                  p->setLongName(*(in->doc()));
                   _layout->setInstrumentNames();
                   }
             }

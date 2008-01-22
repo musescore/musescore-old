@@ -329,13 +329,11 @@ void TextPalette::superscriptClicked(bool val)
 //   setText
 //---------------------------------------------------------
 
-void TextPalette::setText(Text* te)
+void TextPalette::setText(TextB* te)
       {
       _textElement = te;
 
-//      borderStyle->setValue(int(fformat.borderStyle()));
       frameWidth->setValue(_textElement->frameWidth());
-//      marginWidth->setValue(_textElement->marginWidth());
       paddingWidth->setValue(_textElement->paddingWidth());
       borderRounding->setValue(_textElement->frameRound());
       circle->setChecked(_textElement->circle());
@@ -349,7 +347,6 @@ void TextPalette::setText(Text* te)
 void TextPalette::borderChanged(double val)
       {
       _textElement->setFrameWidth(val);
-//      mscore->activateWindow();
       _textElement->score()->addRefresh(_textElement->abbox().adjusted(-6, -6, 12, 12));
       _textElement->score()->end();
       }

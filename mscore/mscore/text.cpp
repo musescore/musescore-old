@@ -36,55 +36,322 @@
 TextPalette* palette;
 
 //---------------------------------------------------------
+//   TextBase
+//---------------------------------------------------------
+
+TextBase::TextBase()
+      {
+      _doc          = new QTextDocument(0);
+      _frameWidth   = 0.0;
+      _paddingWidth = 0.0;
+      _frameColor   = QColor(Qt::black);
+      _frameRound   = 25;
+      _circle       = false;
+
+      QTextOption to = _doc->defaultTextOption();
+      to.setUseDesignMetrics(true);
+      to.setWrapMode(QTextOption::NoWrap);
+      _doc->setDefaultTextOption(to);
+      }
+
+//---------------------------------------------------------
+//   TextBase
+//---------------------------------------------------------
+
+TextBase::TextBase(const TextBase& t)
+      {
+      _doc          = t._doc->clone(0);
+      _frameWidth   = t._frameWidth;
+      _paddingWidth = t._paddingWidth;
+      _frameColor   = t._frameColor;
+      _frameRound   = t._frameRound;
+      _circle       = t._circle;
+      }
+
+//---------------------------------------------------------
+//   setDoc
+//---------------------------------------------------------
+
+void TextBase::setDoc(const QTextDocument& d)
+      {
+      if (_doc)
+            delete _doc;
+      _doc = d.clone(0);
+      }
+
+//---------------------------------------------------------
+//   setText
+//---------------------------------------------------------
+
+void TextBase::setText(const QString& s, Align align)
+      {
+      _doc->clear();
+      QTextCursor cursor(_doc);
+      cursor.movePosition(QTextCursor::Start);
+      if (align & ALIGN_HCENTER) {
+            QTextBlockFormat bf = cursor.blockFormat();
+            bf.setAlignment(Qt::AlignHCenter);
+            cursor.setBlockFormat(bf);
+            }
+      QTextCharFormat tf = cursor.charFormat();
+      tf.setFont(_doc->defaultFont());
+      cursor.setBlockCharFormat(tf);
+      cursor.insertText(s);
+      }
+
+//---------------------------------------------------------
+//   setHtml
+//---------------------------------------------------------
+
+void TextBase::setHtml(const QString& s)
+      {
+      _doc->setHtml(s);
+      }
+
+//---------------------------------------------------------
+//   getText
+//---------------------------------------------------------
+
+QString TextBase::getText() const
+      {
+      return _doc->toPlainText();
+      }
+
+//---------------------------------------------------------
+//   getHtml
+//---------------------------------------------------------
+
+QString TextBase::getHtml() const
+      {
+      return _doc->toHtml();
+      }
+
+//---------------------------------------------------------
+//   writeProperties
+//---------------------------------------------------------
+
+void TextBase::writeProperties(Xml& xml) const
+      {
+      // write all properties which are different from style
+
+      if (_frameWidth != 0.0)
+            xml.tag("frameWidth", _frameWidth);
+      if (_paddingWidth != 0.0)
+            xml.tag("paddingWidth", _paddingWidth);
+      if (_frameColor != QColor(Qt::black))
+            xml.tag("frameColor", _frameColor);
+      if (_frameRound != 25)
+            xml.tag("frameRound", _frameRound);
+      if (_circle)
+            xml.tag("circle", _circle);
+      xml << _doc->toHtml("UTF-8") << '\n';
+      }
+
+//---------------------------------------------------------
+//   readProperties
+//---------------------------------------------------------
+
+bool TextBase::readProperties(QDomElement e)
+      {
+      QString tag(e.tagName());
+      QString val(e.text());
+
+      if (tag == "data")                  // obsolete
+            _doc->setHtml(val);
+      else if (tag == "html") {
+            QString s = Xml::htmlToString(e);
+            _doc->setHtml(s);
+            }
+      else if (tag == "frameWidth") {
+            _frameWidth = val.toDouble();
+            printf("frameWidth %f\n", _frameWidth);
+            }
+      else if (tag == "paddingWidth")
+            _paddingWidth = val.toDouble();
+      else if (tag == "frameColor")
+            _frameColor = readColor(e);
+      else if (tag == "frameRound")
+            _frameRound = val.toInt();
+      else if (tag == "circle")
+            _circle = val.toInt();
+      else
+            return false;
+      return true;
+      }
+
+//---------------------------------------------------------
+//   layout
+//---------------------------------------------------------
+
+void TextBase::layout(ScoreLayout* layout)
+      {
+      QPaintDevice* device = layout->paintDevice();
+      double dpmm          = double(device->logicalDpiX()) / INCH;
+
+      _doc->documentLayout()->setPaintDevice(device);
+
+      if (_frameWidth > 0.0) {
+            frame = QRectF();
+            for (QTextBlock tb = _doc->begin(); tb.isValid(); tb = tb.next()) {
+                  QTextLayout* tl = tb.layout();
+                  int n = tl->lineCount();
+                  for (int i = 0; i < n; ++i)
+                        frame |= tl->lineAt(0).naturalTextRect().translated(tl->position());
+                  }
+            if (_circle) {
+                  if (frame.width() > frame.height()) {
+                        frame.setY(frame.y() + (frame.width() - frame.height()) * -.5);
+                        frame.setHeight(frame.width());
+                        }
+                  else {
+                        frame.setX(frame.x() + (frame.height() - frame.width()) * -.5);
+                        frame.setWidth(frame.height());
+                        }
+                  }
+            double w = _paddingWidth * dpmm;
+            frame.adjust(-w, -w, w, w);
+
+            _bbox = frame;
+            double lw = _frameWidth * dpmm * .5;
+            _bbox = frame.adjusted(-lw, -lw, lw, lw);
+            }
+      else {
+            _doc->setTextWidth(1000000.0);       //!? qt bug?
+            double tw = _doc->idealWidth();
+            _doc->setTextWidth(tw);
+            _bbox = QRectF(QPointF(), _doc->size());
+            }
+      }
+
+//---------------------------------------------------------
+//   TextBase::draw
+//---------------------------------------------------------
+
+void TextBase::draw(QPainter& p, QTextCursor* cursor) const
+      {
+      p.setRenderHint(QPainter::Antialiasing, true);
+
+      QAbstractTextDocumentLayout::PaintContext c;
+      c.cursorPosition = -1;
+      if (cursor) {
+            c.cursorPosition = cursor->position();
+            QAbstractTextDocumentLayout::Selection sel;
+            sel.cursor = *cursor;
+            sel.format.setFontUnderline(true);
+            c.selections.append(sel);
+            }
+      QColor color = p.pen().color();
+      c.palette.setColor(QPalette::Text, color);
+      _doc->documentLayout()->draw(&p, c);
+
+      // draw border
+      if (_frameWidth > 0.0) {
+            double dpmm = double(p.device()->logicalDpiX()) / INCH;
+            p.setPen(QPen(QBrush(_frameColor), _frameWidth * dpmm));
+            p.setBrush(QBrush(Qt::NoBrush));
+            if (_circle)
+                  p.drawArc(frame, 0, 5760);
+            else {
+                  int r2 = _frameRound * lrint((frame.width() / frame.height()));
+                  if (r2 > 99)
+                        r2 = 99;
+                  p.drawRoundRect(frame, _frameRound, r2);
+                  }
+            }
+      }
+
+//---------------------------------------------------------
+//   Text
+//---------------------------------------------------------
+
+TextB::TextB(Score* s)
+   : Element(s)
+      {
+      editMode   = false;
+      cursorPos  = 0;
+      cursor     = 0;
+      _movable   = true;
+      }
+
+TextB::TextB(const TextB& e)
+   : Element(e)
+      {
+      _movable  = e._movable;
+      _sizeIsSpatiumDependent = e._sizeIsSpatiumDependent;
+
+      editMode     = e.editMode;
+      cursorPos    = e.cursorPos;
+      }
+
+//---------------------------------------------------------
+//   TextC
+//---------------------------------------------------------
+
+TextC::TextC(TextBase** txtb, Score* s)
+   : TextB(s)
+      {
+      _tbb = txtb;
+      _otb = 0;
+      setSubtype(TEXT_STAFF);
+      }
+
+TextC::TextC(const TextC& e)
+   : TextB(e)
+      {
+      _tbb  = e._tbb;
+      _otb  = 0;
+      if (editMode) {
+            cursor = new QTextCursor(textBase()->doc());
+            cursor->setPosition(cursorPos);
+            cursor->setBlockFormat(e.cursor->blockFormat());
+            cursor->setCharFormat(e.cursor->charFormat());
+            }
+      else
+            cursor = 0;
+      }
+
+TextC::~TextC()
+      {
+      if (_otb)
+            delete _otb;
+      }
+
+//---------------------------------------------------------
+//   setStyle
+//---------------------------------------------------------
+
+void TextC::setStyle(const TextStyle* s)
+      {
+      if (s == 0)
+            return;
+      doc()->setDefaultFont(s->font());
+      _align         = s->align;
+      _xoff          = s->xoff;
+      _yoff          = s->yoff;
+      _rxoff         = s->rxoff;
+      _ryoff         = s->ryoff;
+      _anchor        = s->anchor;
+      _offsetType    = s->offsetType;
+      _sizeIsSpatiumDependent = s->sizeIsSpatiumDependent;
+      }
+
+//---------------------------------------------------------
 //   Text
 //---------------------------------------------------------
 
 Text::Text(Score* s)
-   : Element(s)
+   : TextB(s)
       {
-      _sizeIsSpatiumDependent = true;
-      editMode                = false;
-      cursorPos               = 0;
-      doc                     = new QTextDocument(0);
-
-      QTextOption to = doc->defaultTextOption();
-      to.setUseDesignMetrics(true);
-      to.setWrapMode(QTextOption::NoWrap);
-      doc->setDefaultTextOption(to);
-
-      cursor                  = 0;
-      _frameWidth             = 0.0;
-//      _marginWidth            = 0.0;
-      _paddingWidth           = 1.0;
-      _frameColor             = QColor(Qt::black);
-      _frameRound             = 5;
-      _circle                 = false;
+      _tb = new TextBase;
       setSubtype(TEXT_STAFF);
       }
 
 Text::Text(const Text& e)
-   : Element(e)
+   : TextB(e)
       {
-      _align                  = e._align;
-      _xoff                   = e._xoff;
-      _yoff                   = e._yoff;
-      _rxoff                  = e._rxoff;
-      _ryoff                  = e._ryoff;
-      _anchor                 = e._anchor;
-      _offsetType             = e._offsetType;
-      _sizeIsSpatiumDependent = e._sizeIsSpatiumDependent;
-      _frameWidth             = e._frameWidth;
-//      _marginWidth            = e._marginWidth;
-      _paddingWidth           = e._paddingWidth;
-      _frameColor             = e._frameColor;
-      _frameRound             = e._frameRound;
-      _circle                 = e._circle;
-      editMode                = e.editMode;
-      cursorPos               = e.cursorPos;
-      doc                     = e.doc->clone(0);
-
+      _tb = new TextBase(*(e._tb));
       if (editMode) {
-            cursor = new QTextCursor(doc);
+            cursor = new QTextCursor(textBase()->doc());
             cursor->setPosition(cursorPos);
             cursor->setBlockFormat(e.cursor->blockFormat());
             cursor->setCharFormat(e.cursor->charFormat());
@@ -95,18 +362,16 @@ Text::Text(const Text& e)
 
 Text::~Text()
       {
-      delete doc;
+      delete _tb;
       }
 
 //---------------------------------------------------------
 //   setDoc
 //---------------------------------------------------------
 
-void Text::setDoc(const QTextDocument& d)
+void TextB::setDoc(const QTextDocument& d)
       {
-      if (doc)
-            delete doc;
-      doc = d.clone(0);
+      textBase()->setDoc(d);
       cursorPos = 0;
       }
 
@@ -114,7 +379,7 @@ void Text::setDoc(const QTextDocument& d)
 //   setSubtype
 //---------------------------------------------------------
 
-void Text::setSubtype(int val)
+void TextB::setSubtype(int val)
       {
       Element::setSubtype(val);
       setStyle(style());
@@ -124,7 +389,7 @@ void Text::setSubtype(int val)
 //   setAbove
 //---------------------------------------------------------
 
-void Text::setAbove(bool val)
+void TextB::setAbove(bool val)
       {
       setYoff(val ? -2.0 : 7.0);
       }
@@ -133,7 +398,7 @@ void Text::setAbove(bool val)
 //   style
 //---------------------------------------------------------
 
-TextStyle* Text::style() const
+TextStyle* TextB::style() const
       {
       int st = -1;
       switch (subtype()) {
@@ -162,7 +427,7 @@ TextStyle* Text::style() const
             case TEXT_TEXTLINE:         st = TEXT_STYLE_TEXTLINE; break;
             default:
                   printf("unknown text subtype %d <%s>\n",
-                     subtype(), qPrintable(doc->toPlainText()));
+                     subtype(), qPrintable(doc()->toPlainText()));
                   break;
             }
       if (st != -1)
@@ -174,7 +439,7 @@ TextStyle* Text::style() const
 //   subtypeName
 //---------------------------------------------------------
 
-const QString Text::subtypeName() const
+const QString TextB::subtypeName() const
       {
       switch (subtype()) {
             case TEXT_TITLE:            return "Title";
@@ -211,7 +476,7 @@ const QString Text::subtypeName() const
 //   setSubtype
 //---------------------------------------------------------
 
-void Text::setSubtype(const QString& s)
+void TextB::setSubtype(const QString& s)
       {
       int st = 0;
       if (s == "Title")
@@ -269,7 +534,7 @@ void Text::setSubtype(const QString& s)
 //   resetMode
 //---------------------------------------------------------
 
-void Text::resetMode()
+void TextB::resetMode()
       {
       editMode = 0;
       }
@@ -278,39 +543,19 @@ void Text::resetMode()
 //   isEmpty
 //---------------------------------------------------------
 
-bool Text::isEmpty() const
+bool TextB::isEmpty() const
       {
-      return doc->isEmpty();
-      }
-
-//---------------------------------------------------------
-//   getText
-//---------------------------------------------------------
-
-QString Text::getText() const
-      {
-      return doc->toPlainText();
-      }
-
-//---------------------------------------------------------
-//   getHtml
-//---------------------------------------------------------
-
-QString Text::getHtml() const
-      {
-      return doc->toHtml();
+      return doc()->isEmpty();
       }
 
 //---------------------------------------------------------
 //   layout
 //---------------------------------------------------------
 
-void Text::layout(ScoreLayout* layout)
+void TextB::layout(ScoreLayout* layout)
       {
-      double dpmm = double(layout->paintDevice()->logicalDpiX()) / INCH;
-
-      doc->documentLayout()->setPaintDevice(layout->paintDevice());
-      setbbox(QRectF(QPointF(), doc->size()));
+      textBase()->layout(layout);
+      setbbox(textBase()->bbox());
 
       if (parent() == 0)
             return;
@@ -322,12 +567,8 @@ void Text::layout(ScoreLayout* layout)
             o *= DPI;
       o += QPointF(_rxoff * parent()->width() * 0.01, _ryoff * parent()->height() * 0.01);
 
-      doc->setTextWidth(1000000.0);       //!? qt bug?
-      double tw = doc->idealWidth();
-      doc->setTextWidth(tw);
-      setbbox(QRectF(QPointF(), doc->size()));
-
       double th = height();
+      double tw = doc()->idealWidth();
       QPointF p;
       if (_align & ALIGN_BOTTOM)
             p.setY(-th);
@@ -340,72 +581,42 @@ void Text::layout(ScoreLayout* layout)
       else if (_align & ALIGN_HCENTER)
             p.setX(-(tw * .5));
       setPos(p + o);
+      }
 
-      if (_frameWidth > 0.0) {
-            frame = QRectF();
-            for (QTextBlock tb = doc->begin(); tb.isValid(); tb = tb.next()) {
+//---------------------------------------------------------
+//   draw
+//---------------------------------------------------------
+
+void TextB::draw(QPainter& p) const
+      {
+      p.save();
+      textBase()->draw(p, cursor);
+      if (editMode) {
+            QRectF f;
+            for (QTextBlock tb = doc()->begin(); tb.isValid(); tb = tb.next()) {
                   QTextLayout* tl = tb.layout();
                   int n = tl->lineCount();
                   for (int i = 0; i < n; ++i)
-                        frame |= tl->lineAt(0).naturalTextRect().translated(tl->position());
+                        f |= tl->lineAt(0).naturalTextRect().translated(tl->position());
                   }
-            if (_circle) {
-                  if (frame.width() > frame.height()) {
-                        frame.setY(frame.y() + (frame.width() - frame.height()) * -.5);
-                        frame.setHeight(frame.width());
-                        }
-                  else {
-                        frame.setX(frame.x() + (frame.height() - frame.width()) * -.5);
-                        frame.setWidth(frame.height());
-                        }
-                  }
-            double w = _paddingWidth * dpmm;
-            frame.adjust(-w, -w, w, w);
-
-            QRectF b(frame);
-            double lw = _frameWidth * dpmm * .5;
-            setbbox(frame.adjusted(-lw, -lw, lw, lw));
+            qreal w = 6.0 / p.matrix().m11();   // 6 pixel border
+            f.adjust(-w, -w, w, w);
+            p.setPen(QPen(QBrush(Qt::blue), w / 3.0));
+            p.setBrush(QBrush(Qt::NoBrush));
+            p.drawRect(f);
             }
-      }
-
-//---------------------------------------------------------
-//   setText
-//---------------------------------------------------------
-
-void Text::setText(const QString& s)
-      {
-      doc->clear();
-      QTextCursor cursor(doc);
-      cursor.movePosition(QTextCursor::Start);
-      if (_align & ALIGN_HCENTER) {
-            QTextBlockFormat bf = cursor.blockFormat();
-            bf.setAlignment(Qt::AlignHCenter);
-            cursor.setBlockFormat(bf);
-            }
-      QTextCharFormat tf = cursor.charFormat();
-      tf.setFont(doc->defaultFont());
-      cursor.setBlockCharFormat(tf);
-      cursor.insertText(s);
-      }
-
-//---------------------------------------------------------
-//   setHtml
-//---------------------------------------------------------
-
-void Text::setHtml(const QString& s)
-      {
-      doc->setHtml(s);
+      p.restore();
       }
 
 //---------------------------------------------------------
 //   setStyle
 //---------------------------------------------------------
 
-void Text::setStyle(const TextStyle* s)
+void TextB::setStyle(const TextStyle* s)
       {
       if (s == 0)
             return;
-      doc->setDefaultFont(s->font());
+      doc()->setDefaultFont(s->font());
       _align         = s->align;
       _xoff          = s->xoff;
       _yoff          = s->yoff;
@@ -414,29 +625,29 @@ void Text::setStyle(const TextStyle* s)
       _anchor        = s->anchor;
       _offsetType    = s->offsetType;
       _sizeIsSpatiumDependent = s->sizeIsSpatiumDependent;
-      _frameWidth    = s->frameWidth;
-//      _marginWidth   = s->marginWidth;
-      _paddingWidth  = s->paddingWidth;
-      _frameColor    = s->frameColor;
-      _frameRound    = s->frameRound;
+
+      textBase()->setFrameWidth(s->frameWidth);
+      textBase()->setPaddingWidth(s->paddingWidth);
+      textBase()->setFrameColor(s->frameColor);
+      textBase()->setFrameRound(s->frameRound);
       }
 
 //---------------------------------------------------------
-//   Text::write
+//   write
 //---------------------------------------------------------
 
-void Text::write(Xml& xml) const
+void TextB::write(Xml& xml) const
       {
       write(xml, "Text");
       }
 
 //---------------------------------------------------------
-//   Text::write
+//   write
 //---------------------------------------------------------
 
-void Text::write(Xml& xml, const char* name) const
+void TextB::write(Xml& xml, const char* name) const
       {
-      if (doc->isEmpty())
+      if (doc()->isEmpty())
             return;
       xml.stag(name);
       writeProperties(xml);
@@ -444,10 +655,10 @@ void Text::write(Xml& xml, const char* name) const
       }
 
 //---------------------------------------------------------
-//   Text::read
+//   read
 //---------------------------------------------------------
 
-void Text::read(QDomElement e)
+void TextB::read(QDomElement e)
       {
       _align  = 0;
       _anchor = ANCHOR_PARENT;
@@ -462,7 +673,7 @@ void Text::read(QDomElement e)
 //   writeProperties
 //---------------------------------------------------------
 
-void Text::writeProperties(Xml& xml) const
+void TextB::writeProperties(Xml& xml) const
       {
       Element::writeProperties(xml);
 
@@ -516,38 +727,19 @@ void Text::writeProperties(Xml& xml) const
 
       if (!_sizeIsSpatiumDependent && _sizeIsSpatiumDependent != st->sizeIsSpatiumDependent)
             xml.tag("spatiumSizeDependent", _sizeIsSpatiumDependent);
-
-      if (_frameWidth != 0.0)
-            xml.tag("frameWidth", _frameWidth);
-//      if (_marginWidth != 0.0)
-//            xml.tag("marginWidth", _marginWidth);
-      if (_paddingWidth != 1.0)
-            xml.tag("paddingWidth", _paddingWidth);
-      if (_frameColor != QColor(Qt::black))
-            xml.tag("frameColor", _frameColor);
-      if (_frameRound != 5)
-            xml.tag("frameRound", _frameRound);
-      if (_circle)
-            xml.tag("circle", _circle);
-      xml << doc->toHtml("UTF-8") << '\n';
+      textBase()->writeProperties(xml);
       }
 
 //---------------------------------------------------------
 //   readProperties
 //---------------------------------------------------------
 
-bool Text::readProperties(QDomElement e)
+bool TextB::readProperties(QDomElement e)
       {
       QString tag(e.tagName());
       QString val(e.text());
 
-      if (tag == "data")                  // obsolete
-            doc->setHtml(val);
-      else if (tag == "html") {
-            QString s = Xml::htmlToString(e);
-            doc->setHtml(s);
-            }
-      else if (tag == "align")            // obsolete
+      if (tag == "align")            // obsolete
             _align = Align(val.toInt());
       else if (tag == "halign") {
             if (val == "center")
@@ -597,18 +789,8 @@ bool Text::readProperties(QDomElement e)
             }
       else if (tag == "spatiumSizeDependent")
             _sizeIsSpatiumDependent = val.toInt();
-      else if (tag == "frameWidth")
-            _frameWidth = val.toDouble();
-//      else if (tag == "marginWidth")
-//            _marginWidth = val.toDouble();
-      else if (tag == "paddingWidth")
-            _paddingWidth = val.toDouble();
-      else if (tag == "frameColor")
-            _frameColor = readColor(e);
-      else if (tag == "frameRound")
-            _frameRound = val.toInt();
-      else if (tag == "circle")
-            _circle = val.toInt();
+      else if (textBase()->readProperties(e))
+            ;
       else if (!Element::readProperties(e))
             return false;
       return true;
@@ -618,9 +800,9 @@ bool Text::readProperties(QDomElement e)
 //   startEdit
 //---------------------------------------------------------
 
-bool Text::startEdit(const QPointF& p)
+bool TextB::startEdit(const QPointF& p)
       {
-      cursor = new QTextCursor(doc);
+      cursor = new QTextCursor(doc());
       cursor->setPosition(cursorPos);
       editMode = true;
       setCursor(p);
@@ -652,7 +834,7 @@ bool Text::startEdit(const QPointF& p)
 //    return true if event is accepted
 //---------------------------------------------------------
 
-bool Text::edit(int, QKeyEvent* ev)
+bool TextB::edit(int, QKeyEvent* ev)
       {
 //      score()->setLayoutAll(false);
 score()->setLayoutAll(true);
@@ -780,7 +962,6 @@ score()->setLayoutAll(true);
             palette->setCharFormat(cursor->charFormat());
             palette->setBlockFormat(cursor->blockFormat());
             }
-//      layout(score()->mainLayout());
       score()->addRefresh(abbox().adjusted(-6, -6, 12, 12));      // HACK
       return true;
       }
@@ -789,7 +970,7 @@ score()->setLayoutAll(true);
 //   moveCursorToEnd
 //---------------------------------------------------------
 
-void Text::moveCursorToEnd()
+void TextB::moveCursorToEnd()
       {
       if (cursor)
             cursor->movePosition(QTextCursor::End);
@@ -799,7 +980,7 @@ void Text::moveCursorToEnd()
 //   endEdit
 //---------------------------------------------------------
 
-void Text::endEdit()
+void TextB::endEdit()
       {
       cursorPos = cursor->position();
       if (palette)
@@ -811,7 +992,7 @@ void Text::endEdit()
       // HACK
       //
       if (subtype() == TEXT_COPYRIGHT) {
-            score()->setCopyright(doc);
+            score()->setCopyright(doc());
             }
       if (subtype() == TEXT_TEXTLINE) {
             TextLineSegment* tls = (TextLineSegment*)parent();
@@ -821,67 +1002,14 @@ void Text::endEdit()
       }
 
 //---------------------------------------------------------
-//   Text::draw
-//---------------------------------------------------------
-
-void Text::draw(QPainter& p) const
-      {
-      p.save();
-      p.setRenderHint(QPainter::Antialiasing, true);
-
-      QAbstractTextDocumentLayout::PaintContext c;
-      c.cursorPosition = editMode ? cursor->position() : -1;
-      if (cursor) {
-            QAbstractTextDocumentLayout::Selection sel;
-            sel.cursor = *cursor;
-            sel.format.setFontUnderline(true);
-            c.selections.append(sel);
-            }
-      QColor color = p.pen().color();
-      c.palette.setColor(QPalette::Text, color);
-      doc->documentLayout()->draw(&p, c);
-
-      // draw border
-      if (_frameWidth > 0.0) {
-            double dpmm = double(p.device()->logicalDpiX()) / INCH;
-            p.setPen(QPen(QBrush(_frameColor), _frameWidth * dpmm));
-            p.setBrush(QBrush(Qt::NoBrush));
-            if (_circle)
-                  p.drawArc(frame, 0, 5760);
-            else {
-                  int r2 = _frameRound * lrint((frame.width() / frame.height()));
-                  if (r2 > 99)
-                        r2 = 99;
-                  p.drawRoundRect(frame, _frameRound, r2);
-                  }
-            }
-
-      if (editMode) {
-            QRectF f;
-            for (QTextBlock tb = doc->begin(); tb.isValid(); tb = tb.next()) {
-                  QTextLayout* tl = tb.layout();
-                  int n = tl->lineCount();
-                  for (int i = 0; i < n; ++i)
-                        f |= tl->lineAt(0).naturalTextRect().translated(tl->position());
-                  }
-            qreal w = 6.0 / p.matrix().m11();   // 6 pixel border
-            f.adjust(-w, -w, w, w);
-            p.setPen(QPen(QBrush(Qt::blue), w / 3.0));
-            p.setBrush(QBrush(Qt::NoBrush));
-            p.drawRect(f);
-            }
-      p.restore();
-      }
-
-//---------------------------------------------------------
 //   shape
 //---------------------------------------------------------
 
-QPainterPath Text::shape() const
+QPainterPath TextB::shape() const
       {
       QPainterPath pp;
 
-      for (QTextBlock tb = doc->begin(); tb.isValid(); tb = tb.next()) {
+      for (QTextBlock tb = doc()->begin(); tb.isValid(); tb = tb.next()) {
             QTextLayout* tl = tb.layout();
             int n = tl->lineCount();
             for (int i = 0; i < n; ++i)
@@ -895,9 +1023,9 @@ QPainterPath Text::shape() const
 //    returns ascent of first text line in first block
 //---------------------------------------------------------
 
-qreal Text::basePosition() const
+qreal TextB::basePosition() const
       {
-      for (QTextBlock tb = doc->begin(); tb.isValid(); tb = tb.next()) {
+      for (QTextBlock tb = doc()->begin(); tb.isValid(); tb = tb.next()) {
             const QTextLayout* tl = tb.layout();
             if (tl->lineCount())
                   return tl->lineAt(0).ascent() + tl->position().y();
@@ -909,11 +1037,11 @@ qreal Text::basePosition() const
 //   lineSpacing
 //---------------------------------------------------------
 
-double Text::lineSpacing() const
+double TextB::lineSpacing() const
       {
       extern double printerMag;
 
-      QTextBlock tb   = doc->begin();
+      QTextBlock tb   = doc()->begin();
       QTextLayout* tl = tb.layout();
       QFontMetricsF fm(tl->font());
       return fm.lineSpacing() * printerMag;     // HACK
@@ -923,7 +1051,7 @@ double Text::lineSpacing() const
 //   addSymbol
 //---------------------------------------------------------
 
-void Text::addSymbol(const SymCode& s)
+void TextB::addSymbol(const SymCode& s)
       {
 // printf("Text: addSymbol(%x)\n", s.code);
       QTextCharFormat oFormat = cursor->charFormat();
@@ -945,7 +1073,7 @@ void Text::addSymbol(const SymCode& s)
 //   setCharFormat
 //---------------------------------------------------------
 
-void Text::setCharFormat(const QTextCharFormat& f)
+void TextB::setCharFormat(const QTextCharFormat& f)
       {
       if (!cursor)
             return;
@@ -956,7 +1084,7 @@ void Text::setCharFormat(const QTextCharFormat& f)
 //   setBlockFormat
 //---------------------------------------------------------
 
-void Text::setBlockFormat(const QTextBlockFormat& bf)
+void TextB::setBlockFormat(const QTextBlockFormat& bf)
       {
       if (!cursor)
             return;
@@ -968,12 +1096,12 @@ void Text::setBlockFormat(const QTextBlockFormat& bf)
 //   setCursor
 //---------------------------------------------------------
 
-bool Text::setCursor(const QPointF& p)
+bool TextB::setCursor(const QPointF& p)
       {
       QPointF pt  = p - canvasPos();
       if (!bbox().contains(pt))
             return false;
-      int idx = doc->documentLayout()->hitTest(pt, Qt::FuzzyHit);
+      int idx = doc()->documentLayout()->hitTest(pt, Qt::FuzzyHit);
       if (idx == -1)
             return true;
       cursor->setPosition(idx);
@@ -985,7 +1113,7 @@ bool Text::setCursor(const QPointF& p)
 //    set text cursor
 //---------------------------------------------------------
 
-bool Text::mousePress(const QPointF& p, QMouseEvent* ev)
+bool TextB::mousePress(const QPointF& p, QMouseEvent* ev)
       {
       if (!setCursor(p))
             return false;
@@ -1040,7 +1168,7 @@ void TempoText::read(QDomElement e)
 //   dragAnchor
 //---------------------------------------------------------
 
-QLineF Text::dragAnchor() const
+QLineF TextB::dragAnchor() const
       {
       QPointF p1(parent()->abbox().topLeft());
       double tw = width();
@@ -1063,6 +1191,10 @@ QLineF Text::dragAnchor() const
                   abort();
             Segment* seg = m->tick2segment(tick());
             p1.rx() += seg->x();
+            return QLineF(p1, QPointF(x, y) + canvasPos());
+            }
+      else if (anchor() == ANCHOR_PARENT) {
+            return QLineF(p1, abbox().topLeft());
             }
       return QLineF(p1, QPointF(x, y) + canvasPos());
       }
