@@ -61,9 +61,11 @@ void TextLineSegment::add(Element* e)
             tb = _text->otb();
             _text->setOtb(0);
             }
-      else
+      else {
             tb = new TextBase(*tl->textBase());
+            }
       tl->setTextBase(tb);
+      _text->baseChanged();
       }
 
 //---------------------------------------------------------

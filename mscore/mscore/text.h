@@ -203,6 +203,7 @@ class TextC : public TextB {
       TextBase* otb()                       { return _otb; }
       void setOtb(TextBase* b)              { _otb = b; }
       virtual void setStyle(const TextStyle*);
+      void baseChanged();
       };
 
 //---------------------------------------------------------

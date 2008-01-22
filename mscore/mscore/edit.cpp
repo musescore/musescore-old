@@ -399,19 +399,30 @@ void Score::putNote(const QPointF& pos, bool addToChord)
 
       if (addToChord) {
             ChordRest* el = 0;
-            for (Segment* segment = m->first(); segment; segment = segment->next()) {
+            Segment* segment;
+            for (segment = m->first(); segment; segment = segment->next()) {
                   if (segment->subtype() != Segment::SegChordRest)
                         continue;
-                  Element* ie  = segment->element(track);
-                  if (!ie)
-                        continue;
-                  el = (ChordRest*)ie;
-                  if (el->tick() >= tick)
+                  if (segment->tick() >= tick)
                         break;
                   }
-            if (!el) {
+            if (segment->tick() != tick || segment->subtype() != Segment::SegChordRest) {
                   printf("putNote: chord/rest not found\n");
                   return;
+                  }
+
+            el  = (ChordRest*)segment->element(track);
+            if (voice == 0 && el == 0) {
+                  printf("putNote: chord/rest not found\n");
+                  return;
+                  }
+            if (el == 0) {
+                  el = new Chord(this);
+                  el->setTick(tick);
+                  el->setTickLen(len);
+                  el->setTrack(track);
+                  el->setParent(segment);
+                  undoAddElement(el);
                   }
             if (el->tuplet())
                   len = el->tuplet()->noteLen();

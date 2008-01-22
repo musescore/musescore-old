@@ -42,7 +42,8 @@ class Viewer;
 //    note head groups
 //
 enum {
-      HEAD_NORMAL, HEAD_CROSS, HEAD_DIAMOND, HEAD_TRIANGLE,
+      HEAD_NORMAL, HEAD_CROSS, HEAD_DIAMOND, HEAD_TRIANGLE, HEAD_DIAMOND2,
+      HEAD_SLASH,
       HEAD_GROUPS
       };
 

@@ -1,4 +1,5 @@
 22.1.8 (ws)
+      - added two new note head symbol sets
       - new class TextC()
       - splitted Text() into TextBase() and Text()
 21.1.8 (ws)
