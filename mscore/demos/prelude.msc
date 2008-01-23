@@ -2,15 +2,19 @@
 <museScore version="1.4">
   <Spatium>1.5</Spatium>
   <Division>480</Division>
-  <Mag>1.12721</Mag>
-  <xoff>23</xoff>
-  <yoff>24</yoff>
+  <Mag>0.894871</Mag>
+  <xoff>24</xoff>
+  <yoff>14</yoff>
   <Style>
     <staffUpperBorder>7</staffUpperBorder>
     <staffLowerBorder>7</staffLowerBorder>
     <staffDistance>8.5</staffDistance>
     <akkoladeDistance>5.5</akkoladeDistance>
     <systemDistance>16.25</systemDistance>
+    <lyricsDistance>6.5</lyricsDistance>
+    <lyricsMinBottomDistance>2</lyricsMinBottomDistance>
+    <systemFrameDistance>7</systemFrameDistance>
+    <frameSystemDistance>7</frameSystemDistance>
     <minMeasureWidth>4</minMeasureWidth>
     <barWidth>0.16</barWidth>
     <doubleBarWidth>0.16</doubleBarWidth>
@@ -62,7 +66,10 @@
     <measureNumberInterval>5</measureNumberInterval>
     <measureNumberAllStaffs>0</measureNumberAllStaffs>
     <measureNumberSystem>1</measureNumberSystem>
-    <lyricsDistance>6.5</lyricsDistance>
+    <graceNoteMag>0.7</graceNoteMag>
+    <smallStaffMag>0.7</smallStaffMag>
+    <smallNoteMag>0.7</smallNoteMag>
+    <smallClefMag>0.8</smallClefMag>
     </Style>
   <showInvisible>0</showInvisible>
   <page-layout>
@@ -225,7 +232,7 @@
       </sig>
     </siglist>
   <tempolist fix="1.5">
-    <tempo tick="0">1.5</tempo>
+    <tempo tick="0">1.33333</tempo>
     </tempolist>
   <Part>
     <Staff>
@@ -803,13 +810,16 @@ p, li { white-space: pre-wrap; }
         <subtype>f</subtype>
         <offset x="-0.790478" y="2.79612"/>
         </Dynamic>
-      <Dynamic>
-        <data>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+      <Tempo>
+        <tempo>1.33333</tempo>
+        <subtype>Tempo</subtype>
+        <offset x="-6.88524" y="-4.13114"/>
+        <anchor>segment</anchor>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-size:12pt; font-weight:400; font-style:italic;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Allegro sostenuto&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
-        <offset x="-6.73515" y="-10.6225"/>
-        </Dynamic>
+</style></head><body style=" font-family:'Times New Roman'; font-size:10.2047pt; font-weight:600; font-style:normal;">
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">Allegro sostenuto</p></body></html>
+        </Tempo>
       <TimeSig>
         <subtype>328</subtype>
         <den>8</den>
@@ -896,6 +906,7 @@ p, li { white-space: pre-wrap; }
       <Text>
         <subtype>System</subtype>
         <offset x="-0.38306" y="11.2719"/>
+        <anchor>segment</anchor>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
 </style></head><body style=" font-family:'Times New Roman'; font-size:10pt; font-weight:400; font-style:normal;">
@@ -998,13 +1009,15 @@ p, li { white-space: pre-wrap; }
         </Chord>
       </Measure>
     <Measure number="3">
-      <Dynamic>
-        <data>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+      <Text>
+        <subtype>System</subtype>
+        <offset x="-0.250372" y="10.2653"/>
+        <anchor>segment</anchor>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-size:12pt; font-weight:400; font-style:italic;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;simile&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
-        <offset x="-1.71635" y="5.4279"/>
-        </Dynamic>
+</style></head><body style=" font-family:'Times New Roman'; font-size:8.50394pt; font-weight:400; font-style:normal;">
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">simile</p></body></html>
+        </Text>
       <TimeSig>
         <subtype>328</subtype>
         <den>8</den>
@@ -1122,6 +1135,7 @@ p, li { white-space: pre-wrap; }
       <Text>
         <subtype>System</subtype>
         <offset x="-0.0125511" y="-5.59931"/>
+        <anchor>segment</anchor>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
 </style></head><body style=" font-family:'Times New Roman'; font-size:10pt; font-weight:400; font-style:normal;">
@@ -1203,6 +1217,7 @@ p, li { white-space: pre-wrap; }
       <Text>
         <subtype>System</subtype>
         <offset x="-0.791224" y="-6.08077"/>
+        <anchor>segment</anchor>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
 </style></head><body style=" font-family:'Times New Roman'; font-size:10pt; font-weight:400; font-style:normal;">
@@ -1273,13 +1288,6 @@ p, li { white-space: pre-wrap; }
       <Note pitch="79" tpc="15" ticks="240"/>
       </Measure>
     <Measure number="11">
-      <Dynamic>
-        <data>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
-p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-size:12pt; font-weight:400; font-style:italic;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;come prima&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
-        <offset x="-1.94192" y="12.1487"/>
-        </Dynamic>
       <TimeSig>
         <subtype>328</subtype>
         <den>8</den>
@@ -1513,6 +1521,15 @@ p, li { white-space: pre-wrap; }
       <Note pitch="76" tpc="18" ticks="240"/>
       </Measure>
     <Measure number="16">
+      <Text>
+        <subtype>System</subtype>
+        <offset x="0" y="-5.51911"/>
+        <anchor>segment</anchor>
+<html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><style type="text/css">
+p, li { white-space: pre-wrap; }
+</style></head><body style=" font-family:'Times New Roman'; font-size:8.50394pt; font-weight:400; font-style:normal;">
+<p style=" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;">come prima</p></body></html>
+        </Text>
       <TimeSig>
         <subtype>392</subtype>
         <den>8</den>
@@ -1691,6 +1708,7 @@ p, li { white-space: pre-wrap; }
       <Text>
         <subtype>System</subtype>
         <offset x="-0.408163" y="-4.91904"/>
+        <anchor>segment</anchor>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
 </style></head><body style=" font-family:'Times New Roman'; font-size:10pt; font-weight:400; font-style:normal;">
@@ -1898,6 +1916,7 @@ p, li { white-space: pre-wrap; }
       <Text>
         <subtype>System</subtype>
         <offset x="-0.57" y="-4.56"/>
+        <anchor>segment</anchor>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
 </style></head><body style=" font-family:'Times New Roman'; font-size:10pt; font-weight:400; font-style:normal;">
@@ -2069,6 +2088,7 @@ p, li { white-space: pre-wrap; }
       <Text>
         <subtype>System</subtype>
         <offset x="-0.587812" y="-5.78589"/>
+        <anchor>segment</anchor>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
 </style></head><body style=" font-family:'Times New Roman'; font-size:10pt; font-weight:400; font-style:normal;">
@@ -2497,6 +2517,7 @@ p, li { white-space: pre-wrap; }
       <Text>
         <subtype>System</subtype>
         <offset x="-0.655169" y="-3.49775"/>
+        <anchor>segment</anchor>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
 </style></head><body style=" font-family:'Times New Roman'; font-size:10pt; font-weight:400; font-style:normal;">
@@ -2506,6 +2527,7 @@ p, li { white-space: pre-wrap; }
         <subtype>System</subtype>
         <offset x="-0.357958" y="-3.74476"/>
         <tick>48480</tick>
+        <anchor>segment</anchor>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
 </style></head><body style=" font-family:'Times New Roman'; font-size:10pt; font-weight:400; font-style:normal;">
@@ -3050,6 +3072,7 @@ p, li { white-space: pre-wrap; }
         <subtype>System</subtype>
         <offset x="-0.740233" y="-2.82902"/>
         <tick>70320</tick>
+        <anchor>segment</anchor>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
 </style></head><body style=" font-family:'Times New Roman'; font-size:10pt; font-weight:400; font-style:normal;">
@@ -3150,6 +3173,7 @@ p, li { white-space: pre-wrap; }
         <subtype>System</subtype>
         <offset x="0" y="-1.08844"/>
         <tick>71280</tick>
+        <anchor>segment</anchor>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
 </style></head><body style=" font-family:'Times New Roman'; font-size:10pt; font-weight:400; font-style:normal;">
@@ -3159,6 +3183,7 @@ p, li { white-space: pre-wrap; }
         <subtype>System</subtype>
         <offset x="0" y="-1.08844"/>
         <tick>71760</tick>
+        <anchor>segment</anchor>
 <html><head><meta name="qrichtext" content="1" /><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><style type="text/css">
 p, li { white-space: pre-wrap; }
 </style></head><body style=" font-family:'Times New Roman'; font-size:10pt; font-weight:400; font-style:normal;">
@@ -3247,10 +3272,7 @@ p, li { white-space: pre-wrap; }
       </Measure>
     <Measure number="57">
       <Dynamic>
-        <data>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
-p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Times New Roman&apos;; font-size:12pt; font-weight:400; font-style:italic;&quot;&gt;
-&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;simile&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</data>
+        <subtype>sfz</subtype>
         <offset x="-0.795032" y="-8.21847"/>
         </Dynamic>
       <Chord>

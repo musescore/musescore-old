@@ -27,7 +27,6 @@ Requirements:
         and developer package and that you need to install both.
 
       - ALSA Version 1.0 or newer (audio/midi input/output)
-
       - CMake >= 2.4.6
 
       - recommended: JACK audio server (audio output)
@@ -97,7 +96,7 @@ Test:
       Status
 =================================================================
 
-      MuseScore is in early beta state. That means you should not use
+      MuseScore is in beta state. That means you should not use
       it for any mission critical work. It is incomplete and surely has
       a lot of bugs. Also the save format (*.msc files) will most likely
       change in future versions.

@@ -999,20 +999,20 @@ void Canvas::clearScore()
 void Canvas::moveCursor()
       {
       int track = _score->inputTrack();
-      if (track == -1) {
+      if (track == -1)
             track = 0;
-            }
-      int staffIdx = track / VOICES;
-      cursor->setVoice(track % VOICES);
+
+      if (track == cursor->track() && cursor->tick() == _score->inputPos())
+            return;
+
+      cursor->setTrack(track);
       cursor->setTick(_score->inputPos());
-      cursor->setStaffIdx(staffIdx);
 
       Segment* segment = _score->tick2segment(cursor->tick());
       if (segment) {
-//            _score->adjustCanvasPosition(segment);
             System* system = segment->measure()->system();
             double x = segment->canvasPos().x();
-            double y = system->bboxStaff(staffIdx).y() + system->canvasPos().y();
+            double y = system->bboxStaff(cursor->staffIdx()).y() + system->canvasPos().y();
             _score->addRefresh(cursor->abbox());
             cursor->setPos(x - _spatium, y - _spatium);
             _score->addRefresh(cursor->abbox());
@@ -1114,8 +1114,6 @@ void Canvas::paintEvent(QPaintEvent* ev)
             _score->doLayout();
             if (navigator)
                   navigator->layoutChanged();
-            if (_score->noteEntryMode())
-                  moveCursor();
             if (state == EDIT || state == DRAG_EDIT)
                   updateGrips();
             region = QRegion(0, 0, width(), height());

@@ -42,8 +42,8 @@
 #include "zip.h"
 #include "zipentry_p.h"
 
-#include <QtGlobal>
-#include <QFileInfo>
+//#include <QtGlobal>
+//#include <QFileInfo>
 
 /*!
 	zLib authors suggest using larger buffers (128K or 256K) for (de)compression (especially for inflate())

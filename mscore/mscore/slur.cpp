@@ -327,7 +327,7 @@ void SlurSegment::layout(ScoreLayout*, const QPointF& p1, const QPointF& p2, qre
 
       qreal xdelta = x3 - x0;
       if (xdelta == 0.0) {
-            printf("bad slur slope\n");
+            printf("warning: slur has zero width\n");
             return;
             }
 
@@ -335,6 +335,13 @@ void SlurSegment::layout(ScoreLayout*, const QPointF& p1, const QPointF& p2, qre
       qreal x1 = x0 + d;
       qreal x2 = x3 - d;
 
+      double maxBow = xdelta * .4;
+      if (fabs(bow) > maxBow) {          // limit bow for small slurs
+            if (bow > 0.0)
+                  bow = maxBow;
+            else
+                  bow = -maxBow;
+            }
       qreal slope = (y3 - y0) / xdelta;
 
       qreal y1 = y0 + (x1-x0) * slope + bow;
@@ -757,7 +764,7 @@ void Slur::layout(ScoreLayout* layout)
                   }
             }
 
-      qreal bow = up ? 2*-_spatium : 2*_spatium;
+      qreal bow = up ? 2.0 * -_spatium : 2.0 * _spatium;
       for (int i = 0; is != sl->end(); ++i, ++is) {
             System* system  = *is;
             SlurSegment* segment = segments[i];

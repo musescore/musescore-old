@@ -198,7 +198,7 @@ void Score::padToggle(int n)
                         if (cr->tuplet())
                               len = cr->tuplet()->noteLen();
                         if (_padState.rest)
-                              setRest(tick, _is.track, len);
+                              setRest(tick, _is.track, len, _padState.dot);
                         else
                               setNote(tick, _is.track, _padState.pitch, len);
                         }

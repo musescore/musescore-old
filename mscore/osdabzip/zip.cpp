@@ -32,17 +32,17 @@
 // we only use this to seed the random number generator
 #include <time.h>
 
-#include <QBuffer>
-#include <QMap>
-#include <QString>
-#include <QStringList>
-#include <QDir>
-#include <QFile>
-#include <QDateTime>
-#include <QCoreApplication>
+//#include <QBuffer>
+//#include <QMap>
+//#include <QString>
+//#include <QStringList>
+//#include <QDir>
+//#include <QFile>
+//#include <QDateTime>
+//#include <QCoreApplication>
 
 // You can remove this #include if you replace the qDebug() statements.
-#include <QtDebug>
+//#include <QtDebug>
 
 //! Local header size (including signature, excluding variable length fields)
 #define ZIP_LOCAL_HEADER_SIZE 30

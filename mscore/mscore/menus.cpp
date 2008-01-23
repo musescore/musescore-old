@@ -100,7 +100,7 @@ void MuseScore::showPalette(bool visible)
             //    clefs
             //-----------------------------------
 
-            Palette* sp = new Palette(4, 4, .8);
+            Palette* sp = new Palette(4, 4, 0.8);
             sp->setGrid(42, 60);
             sp->showStaff(true);
             for (int i = 0; i < 15; ++i) {
@@ -424,6 +424,10 @@ void MuseScore::showPalette(bool visible)
             nh = new NoteHead(gscore);
             nh->setSym(halfslashheadSym);
             sp->addObject(5, nh, QString("slash"));
+
+            nh = new NoteHead(gscore);
+            nh->setSym(xcircledheadSym);
+            sp->addObject(6, nh, QString("xcircle"));
 
             paletteBox->addPalette(tr("NoteHeads"), sp);
 

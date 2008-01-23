@@ -18,6 +18,10 @@
 #  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 #=============================================================================
 
+set(CMAKE_CXX_FLAGS         "-g -Wall -Wextra -Winvalid-pch -fno-exceptions")
+set(CMAKE_CXX_FLAGS_RELEASE "-O2 -DQT_NO_DEBUG")
+set(CMAKE_CXX_FLAGS_DEBUG   "-DQT_DEBUG")
+
 QT4_WRAP_CPP (mocs
       aslider.h
       knob.h
@@ -39,8 +43,6 @@ add_custom_command(
    COMMAND ${CMAKE_CXX_COMPILER}
      -g -Wextra -fno-exceptions -Wall
      -I${QT_INCLUDE_DIR}
-     -I${QT_QTCORE_INCLUDE_DIR}
-     -I${QT_QTGUI_INCLUDE_DIR}
      -o all.h.pch all.h
    DEPENDS ${PROJECT_BINARY_DIR}/all.h
    WORKING_DIRECTORY ${PROJECT_BINARY_DIR}
@@ -95,9 +97,12 @@ add_library (
       colorlabel.cpp
       )
 
+##  "-D_GNU_SOURCE -D_REENTRANT -DHAVE_CONFIG_H -DQT_PLUGIN -DQT_SHARED -DQT_NO_DEBUG -include ${PROJECT_SOURCE_DIR}/all.h"
+
 set_target_properties( awlplugin
-      PROPERTIES COMPILE_FLAGS
-      "-D_GNU_SOURCE -D_REENTRANT -DHAVE_CONFIG_H -DQT_PLUGIN -DQT_SHARED -DQT_NO_DEBUG -include ${PROJECT_SOURCE_DIR}/all.h"
+      PROPERTIES
+         COMPILE_FLAGS
+            "-D_GNU_SOURCE -D_REENTRANT -DHAVE_CONFIG_H -DQT_PLUGIN -DQT_SHARED -DQT_NO_DEBUG -include ${PROJECT_SOURCE_DIR}/all.h"
       )
 
 target_link_libraries( awlplugin

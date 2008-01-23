@@ -4,7 +4,7 @@ Release 0.9
       Palettes operate via drag&drop but by first selecting an object and
       then double click on a palette entry they work like the old Pad.
 
-      Creation of new chords is guided by a "New Score Wizard".
+      Creation of new chords is now guided by a "New Score Wizard".
 
       New implemented score elements are acciaccatura and appoggiatura
       grace notes. There is also a new line object which combines a text

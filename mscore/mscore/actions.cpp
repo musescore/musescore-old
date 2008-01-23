@@ -1297,7 +1297,7 @@ Shortcut MuseScore::sc[] = {
          &playIcon
          ),
       Shortcut(
-         STATE_NORMAL | STATE_PLAY,
+         STATE_PLAY,
          "pause",
          QT_TR_NOOP("toggle pause"),
          Qt::Key_Space,

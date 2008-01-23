@@ -25,6 +25,7 @@
 #include "staff.h"
 #include "viewer.h"
 #include "restproperties.h"
+#include "utils.h"
 
 //---------------------------------------------------------
 //   Rest
@@ -35,6 +36,8 @@ Rest::Rest(Score* s)
       {
       _beamMode  = BEAM_NO;
       _staffMove = 0;
+      _dots      = 0;
+      dotline    = -1;
       }
 
 Rest::Rest(Score* s, int tick, int len)
@@ -44,6 +47,8 @@ Rest::Rest(Score* s, int tick, int len)
       setTickLen(len);
       _beamMode  = BEAM_NO;
       _staffMove = 0;
+      _dots      = 0;
+      dotline    = -1;
       }
 
 //---------------------------------------------------------
@@ -53,6 +58,14 @@ Rest::Rest(Score* s, int tick, int len)
 void Rest::draw(QPainter& p) const
       {
       symbols[_sym].draw(p, mag());
+      if (_dots) {
+            double y = dotline * _spatium * .5;
+            for (int i = 1; i <= _dots; ++i) {
+                  double x = symbols[_sym].width(mag())
+                             + point(score()->style()->dotNoteDistance) * i;
+                  symbols[dotSym].draw(p, mag(), x, y);
+                  }
+            }
       }
 
 //---------------------------------------------------------
@@ -71,29 +84,49 @@ void Rest::setSym(int s)
 void Rest::setTickLen(int i)
       {
       Element::setTickLen(i);
+
       if (i == 0) {
             setSym(wholerestSym);
             return;
             }
-      if (i <= division/32)
-            setSym(hundredtwentyeighthrestSym);
-      else if (i <= division/16)
-            setSym(sixtyfourthrestSym);
-      else if (i <= division/8)
-            setSym(thirtysecondrestSym);
-      else if (i <= division/4)
-            setSym(sixteenthrestSym);
-      else if (i <= division/2)
-            setSym(eighthrestSym);
-      else if (i <= division)
-            setSym(quartrestSym);
-      else if (i <= division*2)
-            setSym(halfrestSym);
-      else if (i <= division*4)
-            setSym(wholerestSym);
-      else
-            setSym(wholerestSym);
-            // printf("Rest::setTickLen: unknown %d %d\n", i, division*4);
+      else {
+            DurationType type;
+            headType(i, &type, &_dots);
+            switch(type) {
+                  case D_LONG:
+                        setSym(longarestSym);
+                        break;
+                  case D_BREVE:
+                        setSym(breverestSym);
+                        break;
+                  case D_WHOLE:
+                        setSym(wholerestSym);
+                        break;
+                  case D_HALF:
+                        setSym(halfrestSym);
+                        break;
+                  case D_QUARTER:
+                        setSym(quartrestSym);
+                        break;
+                  case D_EIGHT:
+                        setSym(eighthrestSym);
+                        break;
+                  case D_16TH:
+                        setSym(sixteenthrestSym);
+                        break;
+                  case D_32ND:
+                        setSym(thirtysecondrestSym);
+                        break;
+                  case D_64TH:
+                        setSym(sixtyfourthrestSym);
+                        break;
+                  case D_128TH:
+                        setSym(hundredtwentyeighthrestSym);
+                        break;
+                  case D_256TH:
+                        break;
+                  }
+            }
       }
 
 void Rest::dump() const

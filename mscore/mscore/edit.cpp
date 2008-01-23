@@ -381,54 +381,36 @@ void Score::addTimeSig(int tick, int timeSigSubtype)
 //    mouse click in state NOTE_ENTRY
 //---------------------------------------------------------
 
-void Score::putNote(const QPointF& pos, bool addToChord)
+void Score::putNote(const QPointF& pos, bool replace)
       {
-      int tick, pitch;
+      int tick, line = -1;
       int staffIdx = -1;
-      MeasureBase* mb = pos2measure(pos, &tick, &staffIdx, &pitch, 0, 0);
-
-      if (mb == 0 || mb->type() != MEASURE || pitch < 0 || pitch > 127) {
-            printf("cannot put note/rest at this position, bad pitch %d!\n", pitch);
+      Segment* segment;
+      Measure* m = pos2measure2(pos, &tick, &staffIdx, &line, &segment);
+      if (m == 0)
             return;
-            }
-      Measure* m = (Measure*)mb;
 
+      int clef  = staff(staffIdx)->clef()->clef(tick);
+      int pitch = line2pitch(line, clef);
       int len   = _padState.tickLen;
       int voice = _padState.voice;
       int track = staffIdx * VOICES + voice;
 
+      ChordRest* cr = (ChordRest*)segment->element(track);
+      bool addToChord = false;
+      if (!replace && cr && (cr->tickLen() == len) && (cr->type() == CHORD) && !_padState.rest) {
+            const NoteList* nl = ((Chord*)cr)->noteList();
+            Note* note = nl->find(pitch);
+            if (note)
+                  return;
+            addToChord = true;
+            }
       if (addToChord) {
-            ChordRest* el = 0;
-            Segment* segment;
-            for (segment = m->first(); segment; segment = segment->next()) {
-                  if (segment->subtype() != Segment::SegChordRest)
-                        continue;
-                  if (segment->tick() >= tick)
-                        break;
-                  }
-            if (segment->tick() != tick || segment->subtype() != Segment::SegChordRest) {
-                  printf("putNote: chord/rest not found\n");
-                  return;
-                  }
+            if (cr->tuplet())
+                  len = cr->tuplet()->noteLen();
 
-            el  = (ChordRest*)segment->element(track);
-            if (voice == 0 && el == 0) {
-                  printf("putNote: chord/rest not found\n");
-                  return;
-                  }
-            if (el == 0) {
-                  el = new Chord(this);
-                  el->setTick(tick);
-                  el->setTickLen(len);
-                  el->setTrack(track);
-                  el->setParent(segment);
-                  undoAddElement(el);
-                  }
-            if (el->tuplet())
-                  len = el->tuplet()->noteLen();
-
-            if (el->type() == CHORD) {
-                  Note* note = addNote((Chord*)el, pitch);
+            if (cr->type() == CHORD) {
+                  Note* note = addNote((Chord*)cr, pitch);
                   select(note, 0, 0);
                   if (seq && mscore->playEnabled()) {
                         Staff* staff = note->staff();
@@ -441,11 +423,10 @@ void Score::putNote(const QPointF& pos, bool addToChord)
             }
       else {
             // replace chord
-            ChordRest* cr = (ChordRest*)searchNote(tick, track);
             if (cr && cr->tuplet())
                   len = cr->tuplet()->noteLen();
             if (_padState.rest)
-                  setRest(tick, track, len);
+                  setRest(tick, track, len, _padState.dot);
             else
                   setNote(tick, track, pitch, len);
             }
