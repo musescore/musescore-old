@@ -2,20 +2,16 @@
   $file="timesig.php";
   require("header.html");
   ?>
-<h4><a href="idx.php">MuseScore</a>
-   -- <a href="manual.php">Referenz</a>
-   -- Taktart</h4>
-
+<h4><a href="idx.php">MuseScore</a> -- <a href="manual.php">Dokumentation</a> -- <a href="reference.php">Index</a> -- Taktart</h4>
 <table>
-<tr><td>
-      todo
-  </td>
-  <td>
-     <img src="../pic/timepalette.png">
-     </tr>
-  </td>
+  <tr>
+    <td>
+
+          todo
+            </td>
+    <td>
+      <img src="../pic/timepalette.png"/>
+      </td>
+    </tr>
   </table>
-
-<br>
-<?php require("trailer.html");  ?>
-
+<?php require("trailer.html"); ?>

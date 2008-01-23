@@ -2,20 +2,16 @@
   $file="lines.php";
   require("header.html");
   ?>
-<h4><a href="index.php">MuseScore</a>
-   -- <a href="manual.php">Reference</a>
-   -- Lines</h4>
-
+<h4><a href="idx.php">MuseScore</a> -- <a href="manual.php">Documentation</a> -- <a href="reference.pjhp">Index</a> -- Lines</h4>
 <table>
-<tr><td>
-      todo
-  </td>
-  <td>
-     <img src="../pic/linepalette.png">
-     </tr>
-  </td>
+  <tr>
+    <td>
+
+          todo
+            </td>
+    <td>
+      <img src="../pic/linepalette.png"/>
+      </td>
+    </tr>
   </table>
-
-<br>
-<?php require("trailer.html");  ?>
-
+<?php require("trailer.html"); ?>

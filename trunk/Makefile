@@ -18,7 +18,10 @@
 #  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 #=============================================================================
 
-PREFIX="/usr/local"
+REVISION = `cat build/revision.h`
+PREFIX  = "/usr/local"
+# VERSION = "0.9.0b${REVISION}"
+VERSION = "0.9.0"
 
 default:
 	if test ! -d build;                           \
@@ -72,7 +75,7 @@ win32:
             fi;                                     \
             cd win32build;                          \
             cmake -DCMAKE_TOOLCHAIN_FILE=../mscore/cmake/mingw32.cmake -DCMAKE_INSTALL_PREFIX=../win32install -DCMAKE_BUILD_TYPE=RELEASE  ../mscore; \
-            make -f Makefile;                       \
+            make -j2 -f Makefile;                   \
             make install;                           \
             make package;                           \
          else                                       \
@@ -93,26 +96,39 @@ clean:
 #     - get current version from sourceforge
 #     - remove .svn directories
 #     - tar
+#     - untar & test build
 #
 
 dist:
+	-rm -rf mscore.dist
 	mkdir mscore.dist
 	cd mscore.dist; svn co https://mscore.svn.sourceforge.net/svnroot/mscore/trunk mscore-0.9.0
 	cd mscore.dist; find . -name .svn -print0 | xargs -0 /bin/rm -rf
-	cd mscore.dist; rm -rf mscore-0.9.0/web
-	cd mscore.dist; tar cvfj mscore-0.9.0.tar.bz2 mscore-0.9.0
-	mv mscore.dist/mscore-0.9.0.tar.bz2 .
+	cd mscore.dist; rm -rf mscore-${VERSION}/web
+	cd mscore.dist; tar cvfj mscore-${VERSION}.tar.bz2 mscore-${VERSION}
+	mv mscore.dist/mscore-${VERSION}.tar.bz2 .
+	tar xvofj mscore-${VERSION}.tar.bz2
+	cd mscore-${VERSION}
+	make -j2 release
 
 install:
 	cd build; make install
 
 #
-# this creates a shell archive / installer for
-#     Mscore binary
+#  linux
+#     linux binary package build
 #
-
-package:
-	cd build; make package
+unix:
+	if test ! -d linux;                          \
+         then                                      \
+            mkdir linux;                           \
+            cd unixBuild;                          \
+            cmake -DCMAKE_BUILD_TYPE=RELEASE  ../mscore; \
+            make -j2 -f Makefile;                  \
+            make package;                          \
+         else                                      \
+            echo "build directory unixBuild does alread exist, please remove first";  \
+         fi
 
 man:
 	cd build; make man

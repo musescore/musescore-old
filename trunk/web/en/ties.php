@@ -2,26 +2,31 @@
   $file="ties.php";
   require("header.html");
   ?>
-<h4><a href="index.php">MuseScore</a>
-   -- <a href="manual.php">Reference</a>
-   -- Ties</h4>
-
+<h4><a href="idx.php">MuseScore</a> -- <a href="manual.php">Documentation</a> -- <a href="reference.pjhp">Index</a> -- Ties</h4>
 <table>
-<tr>
-  <td>select first note:</td>
-  <td><img src="../pic/tie1.png" align="center"></td>
-</tr>
-<tr>
-  <td>&lt;<b>Shift+S</b>&gt; creates a tie:</td>
-  <td><img src="../pic/tie2.png" align="center"></td>
-  </tr>
-</table>
+  <tr>
+    <td>
+select first note:      </td>
+    <td>
+      <img src="../pic/tie1.png" align="center"/>
+      </td>
+    </tr>
+  <tr>
+    <td>
+&lt;<b>Shift+S</b>&gt; creates a tie:      </td>
+    <td>
+      <img src="../pic/tie2.png" align="center"/>
+      </td>
+    </tr>
+  </table>
+<br/>
 
-<br>
-When in note entry mode you can press &lt;<b>+</b>&gt; before
-entering the first note to create a tie to the next note.<br>
-<br>
-See also <a href="slurs.php">Slurs</a>.
+    When in note entry mode you can press &lt;<b>+</b>&gt; before
+    entering the first note to create a tie to the next note.<br/>
+<br/>
 
-<?php require("trailer.html");  ?>
+    See also <a href="slurs.php">
+Slurs  </a>
+.
 
+    <?php require("trailer.html"); ?>

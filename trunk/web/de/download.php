@@ -4,22 +4,30 @@
   ?>
 <div id="intro">
   <h2> Downloads</h2>
+
   <h3> Sources</h3>
     Die <i>MuseScore</i> Quellen gibt es bei
    <a href="http://sourceforge.net/project/showfiles.php?group_id=109430">SourceForge</a>.
-  <br><br>
+  <br>
 
   <h3> Binaries</h3>
-  <b>Windows: </b><a href="http://sourceforge.net/project/showfiles.php?group_id=109430">SourceForge</a>.
+  <a href="http://sourceforge.net/project/showfiles.php?group_id=109430">Windows</a>.
   <br>
-  (Die Windowsversion enthält z.Z. noch keinen Sequencer und keinen
-  Synthesizer.)
 
   <h3> Subversion Sourcecode Repository</h3>
   Der aktuellste <i>MuseScore</i> Code ist immer im SourceForge SVN
-  Repository verfügbar.<br>
+  Repository verfügbar.
   Für Hilfe zum Download bitte auf der SourceForge Projektseite
   nachschlagen.
+  <br>
+
+  <h3> Windows Testreleases </h3>
+  <table>
+    <tr>
+      <td><a href="http://prereleases.musescore.org/mscore-r634.exe">mscore-r634.exe</a></td>
+      <td>vom 16.01.2008</td>
+      </tr>
+  </table>
 
 </div>
 
