@@ -153,8 +153,8 @@ void Score::end()
             reLayout(layoutStart);
 
       foreach(Viewer* v, viewer) {
-//            if (noteEntryMode())
-//                  v->moveCursor();
+            if (noteEntryMode())
+                  v->moveCursor();
             if (updateAll)
                   v->updateAll(this);
             else {
@@ -548,6 +548,56 @@ void Score::cmdAddInterval(int val)
       }
 
 //---------------------------------------------------------
+//   setGraceNote
+///   Create a grace note in front of a normal note.
+///   \arg tick is the tick of the normal note
+///   \arg track is the track of the normal note (staff&voice)
+///   \arg pitch is the pitch of the grace note
+///   \arg is the grace note type
+///   \len is the visual duration of the grace note (1/16 or 1/32)
+//---------------------------------------------------------
+
+void Score::setGraceNote(int tick, int track,  int pitch, NoteType type, int len)
+      {
+      Measure* measure = tick2measure(tick);
+      Segment* seg = measure->findSegment(Segment::SegChordRest, tick);
+      if (seg == 0) {
+            printf("main note for grace note not found\n");
+            return;
+            }
+      int n = 1;
+      while ((seg = seg->prev())) {
+            if (seg->subtype() != Segment::SegGrace)
+                  break;
+            ++n;
+            }
+
+      Segment::SegmentType st = Segment::SegGrace;
+      seg = measure->createSegment(st, tick-n);
+      undoAddElement(seg);
+
+      Note* note = new Note(this);
+      note->setPitch(pitch);
+      note->setStaffIdx(track / VOICES);
+      note->setTickLen(len);
+
+      Chord* chord = new Chord(this);
+      chord->setTick(tick);
+      chord->setVoice(track % VOICES);
+      chord->setStaffIdx(track / VOICES);
+      chord->add(note);
+
+      chord->setTickLen(len);
+      chord->setTickOffset(-n);
+      chord->setStemDirection(UP);
+      chord->setNoteType(type);
+      chord->setParent(seg);
+
+      undoAddElement(chord);
+      select(note, 0, 0);
+      }
+
+//---------------------------------------------------------
 //   setNote
 //---------------------------------------------------------
 
@@ -618,9 +668,8 @@ void Score::setNote(int tick, int track, int pitch, int len)
             note->setPitch(pitch);
             note->setStaffIdx(track / VOICES);
 
-            if (seq && mscore->playEnabled()) {
+            if (seq && mscore->playEnabled())
                   seq->startNote(note->staff()->midiChannel(), note->pitch(), 64);
-                  }
 
             if (tie) {
                   tie->setEndNote(note);
@@ -633,11 +682,9 @@ void Score::setNote(int tick, int track, int pitch, int len)
             chord->add(note);
             chord->setTickLen(noteLen);
             chord->setStemDirection(preferences.stemDir[track % VOICES]);
-            if (tuplet) {
+            if (tuplet)
                   chord->setTuplet(tuplet);
-//                  tuplet->add(chord);
-                  }
-            Segment::SegmentType st = Segment::segmentType(chord->type());
+            Segment::SegmentType st = Segment::SegChordRest;
             Segment* seg = measure->findSegment(st, tick);
             if (seg == 0) {
                   seg = measure->createSegment(st, tick);
@@ -672,65 +719,14 @@ void Score::setNote(int tick, int track, int pitch, int len)
       }
 
 //---------------------------------------------------------
-//   setGraceNote
-///   Create a grace note in front of a normal note.
-///   \arg tick is the tick of the normal note
-///   \arg track is the track of the normal note (staff&voice)
-///   \arg pitch is the pitch of the grace note
-///   \arg is the grace note type
-///   \len is the visual duration of the grace note (1/16 or 1/32)
-//---------------------------------------------------------
-
-void Score::setGraceNote(int tick, int track,  int pitch, NoteType type, int len)
-      {
-      Measure* measure = tick2measure(tick);
-      Segment* seg = measure->findSegment(Segment::SegChordRest, tick);
-      if (seg == 0) {
-            printf("main note for grace note not found\n");
-            return;
-            }
-      int n = 1;
-      while ((seg = seg->prev())) {
-            if (seg->subtype() != Segment::SegGrace)
-                  break;
-            ++n;
-            }
-printf("grace offset %d\n", n);
-
-      Segment::SegmentType st = Segment::SegGrace;
-      seg = measure->createSegment(st, tick-n);
-      undoAddElement(seg);
-
-      Note* note = new Note(this);
-      note->setPitch(pitch);
-      note->setStaffIdx(track / VOICES);
-      note->setTickLen(len);
-
-      Chord* chord = new Chord(this);
-      chord->setTick(tick);
-      chord->setVoice(track % VOICES);
-      chord->setStaffIdx(track / VOICES);
-      chord->add(note);
-
-      chord->setTickLen(len);
-      chord->setTickOffset(-n);
-      chord->setStemDirection(UP);
-      chord->setNoteType(type);
-      chord->setParent(seg);
-
-      undoAddElement(chord);
-      select(note, 0, 0);
-      }
-
-//---------------------------------------------------------
 //   setRest
 //---------------------------------------------------------
 
 /**
- Set rest(\a len) at position \a tick / \a staff / \a voice.
+ Set rest(\a len) at position \a tick / \a track
 */
 
-void Score::setRest(int tick, int track, int len)
+void Score::setRest(int tick, int track, int len, bool useDots)
       {
       int stick = tick;
       Measure* measure = tick2measure(stick);
@@ -760,8 +756,9 @@ void Score::setRest(int tick, int track, int len)
                   l = cr->tickLen();
                   if (l == 0)
                         l = measure->tickLen();
-                  segment->setElement(track, 0);
-                  undoOp(UndoOp::RemoveElement, element);
+                  undoRemoveElement(element);
+                  if (segment->isEmpty())
+                        undoRemoveElement(segment);
                   }
             segment = segment->next();
             if (l == 0) {
@@ -778,15 +775,29 @@ void Score::setRest(int tick, int track, int len)
       if (noteLen < len)
             printf("setRest: cannot find segment! rest: %d\n", len - noteLen);
 
-      Rest* rest = setRest(tick, len, track, measure);
-      if (tuplet) {
+      Rest* rest;
+      if (useDots) {
+            rest = new Rest(this);
+            rest->setTick(tick);
+            rest->setTickLen(len);
+            rest->setTrack(track);
+            Segment::SegmentType st = Segment::SegChordRest;
+            Segment* seg = measure->findSegment(st, tick);
+            if (seg == 0) {
+                  seg = measure->createSegment(st, tick);
+                  undoAddElement(seg);
+                  }
+            rest->setParent(seg);
+            undoAddElement(rest);
+            }
+      else {
+            rest = setRest(tick, len, track, measure);
+            }
+      if (tuplet)
             rest->setTuplet(tuplet);
-//            tuplet->add(rest);
-            }
       select(rest, 0, 0);
-      if (noteLen - len > 0) {
+      if (noteLen - len > 0)
             setRest(tick + len, noteLen - len, track, measure);
-            }
       layoutAll = true;
       }
 
@@ -1387,9 +1398,8 @@ void Score::cmd(const QString& cmd)
                               }
                         }
                   if (noteEntryMode()) {
-                        int len = _padState.tickLen;
-                        setRest(_is.pos, _is.track, len);
-                        _is.pos += len;
+                        setRest(_is.pos, _is.track, _padState.tickLen, _padState.dot);
+                        _is.pos += _padState.tickLen;
                         }
                   _padState.rest = false;  // continue with normal note entry
                   }

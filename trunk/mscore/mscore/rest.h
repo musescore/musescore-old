@@ -32,6 +32,9 @@ class Rest : public ChordRest {
 
       int _staffMove;         // -1, 0, +1, used for crossbeaming
       int _sym;
+      int _dots;
+
+      int dotline;            // depends on rest symbol
 
       virtual bool isMovable() const { return true; }
       virtual QRectF drag(const QPointF& s);
@@ -64,6 +67,9 @@ class Rest : public ChordRest {
 
       virtual int staffMove() const { return _staffMove; }
       void setStaffMove(int val)    { _staffMove = val; }
+
+//      void setDots(int n)             { _dots = n; }
+//      int dots() const                { return _dots; }
       };
 
 #endif

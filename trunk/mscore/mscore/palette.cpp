@@ -339,14 +339,14 @@ void Palette::paintEvent(QPaintEvent*)
                   p.drawLine(hgrid*column, 0, hgrid*column, rows*vgrid);
             }
 
-      qreal dy = lrint(2 * PALETTE_SPATIUM);
+      qreal dy = lrint(2 * PALETTE_SPATIUM * extraMag);
 
       //
       // draw symbols
       //
 
       QPen pen(QColor(Qt::black));
-      pen.setWidthF(defaultStyle.staffLineWidth.val() * PALETTE_SPATIUM);
+      pen.setWidthF(defaultStyle.staffLineWidth.val() * PALETTE_SPATIUM * extraMag);
 
       for (int row = 0; row < rows; ++row) {
             for (int column = 0; column < columns; ++column) {
@@ -372,7 +372,7 @@ void Palette::paintEvent(QPaintEvent*)
                               qreal x = r.x() + 7;
                               qreal w = hgrid - 14;
                               for (int i = 0; i < 5; ++i) {
-                                    qreal yy = y + PALETTE_SPATIUM * i;
+                                    qreal yy = y + PALETTE_SPATIUM * i * extraMag;
                                     p.drawLine(QLineF(x, yy, x + w, yy));
                                     }
                               }

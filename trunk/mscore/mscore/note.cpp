@@ -50,6 +50,7 @@ int Note::noteHeads[HEAD_GROUPS][4] = {
       { wholetriangleheadSym, halftriangleheadSym, triangleheadSym, wholetriangleheadSym},
       { wholediamond2headSym, halfdiamond2headSym, diamond2headSym, wholediamond2headSym },
       { wholeslashheadSym,    halfslashheadSym,   quartslashheadSym, wholeslashheadSym },
+      { xcircledheadSym,      xcircledheadSym,    xcircledheadSym,   xcircledheadSym },
       };
 
 //---------------------------------------------------------
@@ -763,6 +764,7 @@ Element* Note::drop(const QPointF&, const QPointF&, Element* e)
                         case halftriangleheadSym: group = 3; break;
                         case halfdiamond2headSym: group = 4; break;
                         case halfslashheadSym:    group = 5; break;
+                        case xcircledheadSym:     group = 6; break;
                         default: printf("unknown note head\n"); break;
                         }
                   delete s;

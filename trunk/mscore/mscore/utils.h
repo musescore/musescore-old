@@ -21,6 +21,8 @@
 #ifndef __UTILS_H__
 #define __UTILS_H__
 
+#include "globals.h"
+
 class Measure;
 class Segment;
 class System;
@@ -30,6 +32,7 @@ extern QRectF drawHandle(QPainter& p, const QPointF& pos, bool active);
 extern QRectF handleRect(const QPointF& pos);
 
 extern int getStaff(System* system, const QPointF& p);
+int headType(int tickLen, DurationType* type, int* dots);
 
 #endif
 

@@ -34,8 +34,6 @@ add_custom_command(
    COMMAND ${CMAKE_CXX_COMPILER}
      -g -Wextra -fno-exceptions -Wall
      -I${QT_INCLUDE_DIR}
-     -I${QT_QTCORE_INCLUDE_DIR}
-     -I${QT_QTGUI_INCLUDE_DIR}
      -o all.h.pch all.h
    DEPENDS ${PROJECT_BINARY_DIR}/all.h
    WORKING_DIRECTORY ${PROJECT_BINARY_DIR}

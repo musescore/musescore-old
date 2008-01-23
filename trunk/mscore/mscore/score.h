@@ -293,7 +293,7 @@ class Score : public QObject {
       void setGraceNote(int tick, int track,  int pitch, NoteType type, int len);
       int clefOffset(int tick, Staff*) const;
       Rest* setRest(int tick, int len, int track, Measure*);
-      void setRest(int tick, int track, int len);
+      void setRest(int tick, int track, int len, bool useDots);
       Canvas* canvas() const;
 
       void select(Element* obj, int state, int staff);
@@ -332,7 +332,7 @@ class Score : public QObject {
 
       void changeRest(Rest* rest, int tick, int len);
 
-      void putNote(const QPointF& pos, bool addToChord);
+      void putNote(const QPointF& pos, bool replace);
       void setPadState();
       void setPadState(Element* obj);
 

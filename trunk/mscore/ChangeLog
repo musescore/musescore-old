@@ -1,3 +1,9 @@
+23.1.8 (ws)
+      - fixed palette drawing if "extraMag" was != 1.0
+      - inverted logic of note entry with mouse: click into a chord adds a note,
+        shift+click replaces the chord
+      - added more note heads
+      - add dotted rests
 22.1.8 (ws)
       - added two new note head symbol sets
       - new class TextC()
