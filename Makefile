@@ -23,39 +23,47 @@ PREFIX  = "/usr/local"
 # VERSION = "0.9.0b${REVISION}"
 VERSION = "0.9.0"
 
+ROOT=`pwd`
+
 default:
-	if test ! -d build;                           \
-         then                                       \
-            mkdir build;                            \
-            cd build;                               \
-            cmake -DCMAKE_INSTALL_PREFIX="${PREFIX}"  \
-            	../mscore;                          \
-            make;                                   \
-         else                                       \
-            cd build; make -f Makefile;             \
+	if test ! -d build;                              \
+         then                                          \
+            mkdir build;                               \
+            cd build;                                  \
+            cmake -DCMAKE_INSTALL_PREFIX="${PREFIX}"   \
+            	../mscore;                           \
+            make lupdate;                              \
+            make lrelease;                             \
+            make;                                      \
+         else                                          \
+            cd build; make -f Makefile;                \
          fi;
 
 release:
-	if test ! -d build;                         \
-         then                                       \
-            mkdir build;                            \
-            cd build;                               \
-            cmake -DCMAKE_BUILD_TYPE=RELEASE	    \
+	if test ! -d build;                              \
+         then                                          \
+            mkdir build;                               \
+            cd build;                                  \
+            cmake -DCMAKE_BUILD_TYPE=RELEASE	       \
             	  -DCMAKE_INSTALL_PREFIX="${PREFIX}" \
-            	   ../mscore; 			    \
-            make -f Makefile;                       \
-         else                                       \
-            echo "build directory does already exist, please remove first with 'make clean'";       \
+            	   ../mscore; 			       \
+            make lupdate;                              \
+            make lrelease;                             \
+            make;                                      \
+         else                                          \
+            echo "build directory does already exist, please remove first with 'make clean'"; \
          fi;
 
 debug:
-	if test ! -d build;                           \
-         then                                       \
-            mkdir build;                            \
-            cd build;                               \
-            cmake -DCMAKE_BUILD_TYPE=DEBUG ../mscore;         \
-            make -f Makefile;                       \
-         else                                       \
+	if test ! -d build;                              \
+         then                                          \
+            mkdir build;                               \
+            cd build;                                  \
+            cmake -DCMAKE_BUILD_TYPE=DEBUG ../mscore;  \
+            make lupdate;                              \
+            make lrelease;                             \
+            make;                                      \
+         else                                          \
             echo "build directory does already exist, please remove first with 'make clean'";       \
          fi
 
@@ -66,20 +74,22 @@ debug:
 #           will probably only work on my setup (ws)
 #
 win32:
-	if test ! -d win32build;                      \
-         then                                       \
-            mkdir win32build;                       \
-      	if test ! -d win32install;              \
-               then                                 \
-                  mkdir win32install;               \
-            fi;                                     \
-            cd win32build;                          \
+	if test ! -d win32build;                         \
+         then                                          \
+            mkdir win32build;                          \
+      	if test ! -d win32install;                 \
+               then                                    \
+                  mkdir win32install;                  \
+            fi;                                        \
+            cd win32build;                             \
             cmake -DCMAKE_TOOLCHAIN_FILE=../mscore/cmake/mingw32.cmake -DCMAKE_INSTALL_PREFIX=../win32install -DCMAKE_BUILD_TYPE=RELEASE  ../mscore; \
-            make -j2 -f Makefile;                   \
-            make install;                           \
-            make package;                           \
-         else                                       \
-            echo "build directory win32build does alread exist, please remove first";       \
+            make lupdate ;                             \
+            make lrelease;                             \
+            make -j2 -f Makefile;                      \
+            make install;                              \
+            make package;                              \
+         else                                          \
+            echo "build directory win32build does alread exist, please remove first"; \
          fi
 
 #
