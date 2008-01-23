@@ -8,8 +8,9 @@ Release 0.9
 
       New implemented score elements are acciaccatura and appoggiatura
       grace notes. There is also a new line object which combines a text
-      with a line. Texts can now be framed with a circle.
+      with a line. Texts can now be circled.
 
+      Import and Export of compressed MusicXml files (*.mxl) is now supported.
 
 Release 0.8
       - audio output for windows version
