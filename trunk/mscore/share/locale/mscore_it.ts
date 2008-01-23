@@ -1,5 +1,35 @@
 <!DOCTYPE TS><TS>
 <context>
+    <name>AboutBox</name>
+    <message>
+        <source>AboutBox</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>MuseScore</source>
+        <translation type="unfinished">MuseScore</translation>
+    </message>
+    <message>
+        <source>Version: 0.9.0</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Revision: 628</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Arial&apos;; font-size:14pt; font-weight:600;&quot;&gt;&lt;span style=&quot; font-size:10pt; font-weight:400;&quot;&gt;(C) Copyright 1999-2008 Werner Schweer and Others. &lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;See http://mscore.sourceforge.net for new versions and&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;more information.&lt;/p&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:&apos;Arial&apos;; font-size:10pt;&quot;&gt;Published under the GNU Public License&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>BarLineBase</name>
     <message>
         <source>Form</source>
@@ -12,6 +42,37 @@
     <message>
         <source>SubType:</source>
         <translation>Sottotipo:</translation>
+    </message>
+</context>
+<context>
+    <name>BoxPropertiesBase</name>
+    <message>
+        <source>MuseScore: Frame Properties</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Margins</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>left:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>mm</source>
+        <translation type="unfinished">mm</translation>
+    </message>
+    <message>
+        <source>right:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>top:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>bottom:</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -329,6 +390,14 @@ fallito: </translation>
         <source>Edit Drumset...</source>
         <translation>Modifica Percussioni...</translation>
     </message>
+    <message>
+        <source>Long Instrument Name:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Short Instrument Name:</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>EditStyleBase</name>
@@ -471,6 +540,46 @@ fallito: </translation>
     <message>
         <source>beam width units</source>
         <translation>Unità Ampiezza Gruppo</translation>
+    </message>
+    <message>
+        <source>Sizes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>lyrics top distance</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>lyrics bottom dist.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>staff h-frame dist.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>h-frame staff dist.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Small Staff Size</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Grace Note Size</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Small Note Size</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Small Clef Size</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -615,6 +724,10 @@ fallito: </translation>
         <source>Add Text</source>
         <translation>Agguingi Testo</translation>
     </message>
+    <message>
+        <source>Properties...</source>
+        <translation type="unfinished">Proprietà...</translation>
+    </message>
 </context>
 <context>
     <name>HairpinBase</name>
@@ -708,12 +821,67 @@ fallito: </translation>
         <source>Cancel</source>
         <translation>Annulla</translation>
     </message>
+    <message>
+        <source>Load</source>
+        <translation type="unfinished">Carica</translation>
+    </message>
+    <message>
+        <source>Save</source>
+        <translation type="unfinished">Salva</translation>
+    </message>
 </context>
 <context>
     <name>InstrumentListEditor</name>
     <message>
         <source>MuseScore: Part List</source>
         <translation>MuseScore: Elenco Parti</translation>
+    </message>
+</context>
+<context>
+    <name>InstrumentWizard</name>
+    <message>
+        <source>Form</source>
+        <translation type="unfinished">Formato</translation>
+    </message>
+    <message>
+        <source>0</source>
+        <translation type="unfinished">0</translation>
+    </message>
+    <message>
+        <source>Add</source>
+        <translation type="unfinished">Aggiungi</translation>
+    </message>
+    <message>
+        <source>Remove</source>
+        <translation type="unfinished">Elimina</translation>
+    </message>
+    <message>
+        <source>Up</source>
+        <translation type="unfinished">Su</translation>
+    </message>
+    <message>
+        <source>Down</source>
+        <translation type="unfinished">Giu</translation>
+    </message>
+    <message>
+        <source>Add Above</source>
+        <translation type="unfinished">Aggiungi Sopra</translation>
+    </message>
+    <message>
+        <source>Add Below</source>
+        <translation type="unfinished">Aggiungi Sotto</translation>
+    </message>
+    <message>
+        <source>1</source>
+        <translation type="unfinished">1</translation>
+    </message>
+    <message>
+        <source>Staves</source>
+        <translation type="unfinished">Pentagrammi</translation>
+    </message>
+    <message>
+        <source>Clef</source>
+        <translation type="unfinished">Chiave</translation>
     </message>
 </context>
 <context>
@@ -725,6 +893,41 @@ fallito: </translation>
     <message>
         <source>Clef</source>
         <translation>Chiave</translation>
+    </message>
+    <message>
+        <source>MuseScore: Save Instrument List</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>MuseScore Instruments (*.xml);;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Open Instruments File
+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>
+failed: </source>
+        <translation type="unfinished">
+fallito: </translation>
+    </message>
+    <message>
+        <source>MuseScore: Open Instruments file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>MuseScore: Write Style</source>
+        <translation type="unfinished">MuseScore: Scrivi Stile</translation>
+    </message>
+    <message>
+        <source>MuseScore: Load Instrument List</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>MuseScore Instruments (*.xml);;All files (*)</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -1016,26 +1219,14 @@ fallito: </translation>
         <translation>MuseScore: Salva Come</translation>
     </message>
     <message>
-        <source>MuseScore: Load Template</source>
-        <translation>MuseScore: Carica Modello</translation>
-    </message>
-    <message>
         <source>Open File
 </source>
         <translation>Apri File
 </translation>
     </message>
     <message>
-        <source>MuseScore: Save Style</source>
-        <translation>MuseScore: Salva Stile</translation>
-    </message>
-    <message>
         <source>MuseScore: Write File</source>
         <translation>MuseScore: Scrivi File</translation>
-    </message>
-    <message>
-        <source>MuseScore: Read File</source>
-        <translation>MuseScore: Leggi File</translation>
     </message>
     <message>
         <source>&amp;Create</source>
@@ -1304,10 +1495,6 @@ fallito: </translation>
     <message>
         <source>&amp;Display</source>
         <translation>&amp;Mostra</translation>
-    </message>
-    <message>
-        <source>Pad</source>
-        <translation>Tastierino</translation>
     </message>
     <message>
         <source>Navigator</source>
@@ -2122,18 +2309,6 @@ fallito: </translation>
         <translation>Crea un Nuovo Spartito</translation>
     </message>
     <message>
-        <source>file new from template</source>
-        <translation>Nuovo da Modello</translation>
-    </message>
-    <message>
-        <source>New from template</source>
-        <translation>Nuovo da Modello</translation>
-    </message>
-    <message>
-        <source>Create new score from template</source>
-        <translation>Crea un Nuovo Spartito da un Modello</translation>
-    </message>
-    <message>
         <source>enter unison above</source>
         <translation>Inserisci Prima Superiore</translation>
     </message>
@@ -2518,10 +2693,6 @@ fallito: </translation>
         <translation>Attiva/Disattiva Ripetizioni</translation>
     </message>
     <message>
-        <source>MuseScore Files (*.msc);;MusicXml Files (*.xml);;Standard Midi File Files (*.mid);;Muse Data Files (*.md);;Lilypond Files (*.ly);;All files (*)</source>
-        <translation>MuseScore Files (*.msc);;MusicXml Files (*.xml);;Standard Midi File Files (*.mid);;Muse Data Files (*.md);;Lilypond Files (*.ly);;Tutti i Files (*)</translation>
-    </message>
-    <message>
         <source>MuseScore Format (*.msc)</source>
         <translation>Formato MuseScore (*.msc)</translation>
     </message>
@@ -2552,10 +2723,6 @@ fallito: </translation>
     <message>
         <source>Lilypond Format (*.ly)</source>
         <translation>Formato Lilypond (*.ly)</translation>
-    </message>
-    <message>
-        <source>MuseScore style file (*.mss)</source>
-        <translation>MuseScore style file (*.mss)</translation>
     </message>
     <message>
         <source>arpeggio</source>
@@ -2614,38 +2781,12 @@ fallito: </translation>
         <translation>Pausa</translation>
     </message>
     <message>
-        <source>MuseScore: Load Style</source>
-        <translation>MuseScore: Carica Stile</translation>
-    </message>
-    <message>
-        <source>MuseScore Styles (*.mss);;All files (*)</source>
-        <translation>Stili di MuseScore (*.mss);;Tutti i Files (*)</translation>
-    </message>
-    <message>
-        <source>Open Style File
-</source>
-        <translation>Apri Stile
-</translation>
-    </message>
-    <message>
-        <source>MuseScore: Open Style file</source>
-        <translation>MuseScore: Apri Stile</translation>
-    </message>
-    <message>
-        <source>MuseScore: Write Style</source>
-        <translation>MuseScore: Scrivi Stile</translation>
-    </message>
-    <message>
         <source>seconda volta 2</source>
         <translation></translation>
     </message>
     <message>
         <source>Repeats</source>
         <translation>Ripetizioni</translation>
-    </message>
-    <message>
-        <source>Insert vorizontal Frame</source>
-        <translation>Inserisci Cornice Verticale</translation>
     </message>
     <message>
         <source>Insert horizontal Frame</source>
@@ -2702,6 +2843,149 @@ fallito: </translation>
     <message>
         <source>D.S al Fine</source>
         <translation></translation>
+    </message>
+    <message>
+        <source>acciaccatura</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>appoggiatura</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>text line</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>D.S</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>To Coda</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>start beam</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>middle of beam</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>start subbeam</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>auto beam</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Beam properties</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source></source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>load style</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>save style</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>MuseScore Files (*.msc);;MusicXml Files (*.xml);;Compressed MusicXml Files (*.mxl);;Standard Midi File Files (*.mid);;Muse Data Files (*.md);;Lilypond Files (*.ly);;All files (*)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Compressed MusicXml Format (*.mxl)</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>NewWizard</name>
+    <message>
+        <source>Form</source>
+        <translation type="unfinished">Formato</translation>
+    </message>
+    <message>
+        <source>Title:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Subtitle:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Composer:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Poet:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Copyright:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Create new score from template</source>
+        <translation type="unfinished">Crea un Nuovo Spartito da un Modello</translation>
+    </message>
+    <message>
+        <source>Create new score from scratch</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>MuseScore: Create New Score</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>NewWizardPage1</name>
+    <message>
+        <source>Create New Score</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>This wizard creates a new score</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>NewWizardPage2</name>
+    <message>
+        <source>Create New Score</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Define a set of instruments. Each instrument is represented by one or more staves</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>NewWizardPage3</name>
+    <message>
+        <source>Create New Score</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Create Time Signature</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>NewWizardPage4</name>
+    <message>
+        <source>Create New Score</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select Template File:</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -2780,21 +3064,6 @@ fallito: </translation>
     <message>
         <source>note head group</source>
         <translation>Gruppo Testa Note</translation>
-    </message>
-</context>
-<context>
-    <name>Pad</name>
-    <message>
-        <source>Notes</source>
-        <translation>Note</translation>
-    </message>
-    <message>
-        <source>Beams</source>
-        <translation>Gruppi</translation>
-    </message>
-    <message>
-        <source>Pad</source>
-        <translation>Tastierino</translation>
     </message>
 </context>
 <context>
@@ -3021,6 +3290,22 @@ fallito: </translation>
         <source>Play State</source>
         <translation>Stato Riproduzione</translation>
     </message>
+    <message>
+        <source>Choose default Instrument List</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Instrument List (*.xml);;All (*)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Choose score to start with</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>MuseScore file (*.msc);;All (*)</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>PrefsDialogBase</name>
@@ -3047,10 +3332,6 @@ fallito: </translation>
     <message>
         <source>Play Panel:</source>
         <translation>Controlli Riproduzione:</translation>
-    </message>
-    <message>
-        <source>Key Pad:</source>
-        <translation>Tastierino:</translation>
     </message>
     <message>
         <source>Navigator</source>
@@ -3107,10 +3388,6 @@ fallito: </translation>
     <message>
         <source>Selection Color Voice 1</source>
         <translation>Selezione Colore Voce 1</translation>
-    </message>
-    <message>
-        <source>enable midi input</source>
-        <translation>abilita inserzione note Midi</translation>
     </message>
     <message>
         <source>JACK: R-Port</source>
@@ -3179,14 +3456,6 @@ fallito: </translation>
     <message>
         <source>Draw Antialiased</source>
         <translation>Usa funzione Anti-Aliasing</translation>
-    </message>
-    <message>
-        <source>Midi</source>
-        <translation>Midi</translation>
-    </message>
-    <message>
-        <source>Play Notes when editing</source>
-        <translation>Suona le Note durante la Modifica</translation>
     </message>
     <message>
         <source>Audio</source>
@@ -3365,16 +3634,40 @@ fallito: </translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Voice2</source>
-        <translation>Voce 2</translation>
+        <source>Instrument List:</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Voice3</source>
-        <translation>Voce 3</translation>
+        <source>Note Entry</source>
+        <translation type="unfinished">Inserimento Note</translation>
     </message>
     <message>
-        <source>Voice4</source>
-        <translation>Voce 4</translation>
+        <source>Enable midi input</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Play notes when editing</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Alternate input method</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>When pressing F in note entry mode the created note pitch depends on the current clef. In G-major a fis is created. If the alternate input method is enabled, the current clef is irrelevant. Pressing F always creates a f note.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Voice 2</source>
+        <translation type="unfinished">Voce 2</translation>
+    </message>
+    <message>
+        <source>Voice 3</source>
+        <translation type="unfinished">Voce 3</translation>
+    </message>
+    <message>
+        <source>Voice 4</source>
+        <translation type="unfinished">Voce 4</translation>
     </message>
 </context>
 <context>
@@ -3415,6 +3708,14 @@ fallito: </translation>
     <message>
         <source>MuseScore: load Style failed:</source>
         <translation>MuseScore: Caricamento Stile Fallito:</translation>
+    </message>
+    <message>
+        <source>MuseScore: Load Style</source>
+        <translation type="unfinished">MuseScore: Carica Stile</translation>
+    </message>
+    <message>
+        <source>MuseScore Styles (*.mss);;All files (*)</source>
+        <translation type="unfinished">Stili di MuseScore (*.mss);;Tutti i Files (*)</translation>
     </message>
 </context>
 <context>
@@ -3617,6 +3918,28 @@ set tempo.</source>
         <translation>Nessuna Nota o Pausa selezionata:
 seleziona la Nota o resto dove vuoi
 impostare il Tempo.</translation>
+    </message>
+    <message>
+        <source>MuseScore: Save Style</source>
+        <translation type="unfinished">MuseScore: Salva Stile</translation>
+    </message>
+    <message>
+        <source>MuseScore style file (*.mss)</source>
+        <translation type="unfinished">MuseScore style file (*.mss)</translation>
+    </message>
+    <message>
+        <source>Open Style File
+</source>
+        <translation type="unfinished">Apri Stile
+</translation>
+    </message>
+    <message>
+        <source>MuseScore: Open Style file</source>
+        <translation type="unfinished">MuseScore: Apri Stile</translation>
+    </message>
+    <message>
+        <source>MuseScore: Write Style</source>
+        <translation type="unfinished">MuseScore: Scrivi Stile</translation>
     </message>
 </context>
 <context>
@@ -3994,16 +4317,8 @@ impostare il Tempo.</translation>
         <translation>Cornice</translation>
     </message>
     <message>
-        <source>margin width</source>
-        <translation>Spessore Margine</translation>
-    </message>
-    <message>
         <source>mm</source>
         <translation>mm</translation>
-    </message>
-    <message>
-        <source>border style</source>
-        <translation>Stile Bordo</translation>
     </message>
     <message>
         <source>frame width</source>
@@ -4021,6 +4336,14 @@ impostare il Tempo.</translation>
         <source>frame rounding</source>
         <translation>Arrotondamento Spigoli</translation>
     </message>
+    <message>
+        <source>Circle</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Rectangle</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>TextStyleBase</name>
@@ -4031,18 +4354,6 @@ impostare il Tempo.</translation>
     <message>
         <source>General</source>
         <translation>Generale</translation>
-    </message>
-    <message>
-        <source>Font</source>
-        <translation>Carattere</translation>
-    </message>
-    <message>
-        <source>Size</source>
-        <translation>Dimensione</translation>
-    </message>
-    <message>
-        <source>Style</source>
-        <translation>Stile</translation>
     </message>
     <message>
         <source>B</source>
@@ -4067,22 +4378,6 @@ impostare il Tempo.</translation>
     <message>
         <source>Reference Position</source>
         <translation>Ancoraggio</translation>
-    </message>
-    <message>
-        <source>Page</source>
-        <translation>Pagina</translation>
-    </message>
-    <message>
-        <source>Time Tick</source>
-        <translation>MarcaTempo</translation>
-    </message>
-    <message>
-        <source>Note Head</source>
-        <translation>Testa Nota</translation>
-    </message>
-    <message>
-        <source>System</source>
-        <translation>Sistema</translation>
     </message>
     <message>
         <source>Alignment</source>
@@ -4137,10 +4432,6 @@ impostare il Tempo.</translation>
         <translation>mm</translation>
     </message>
     <message>
-        <source>Percent</source>
-        <translation>percentuale</translation>
-    </message>
-    <message>
         <source>Space</source>
         <translation>Spazio</translation>
     </message>
@@ -4184,6 +4475,58 @@ impostare il Tempo.</translation>
         <source>Preview</source>
         <translation>Anteprima</translation>
     </message>
+    <message>
+        <source>:Font:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Size:</source>
+        <translation type="unfinished">Dimensione:</translation>
+    </message>
+    <message>
+        <source>Style:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Parent</source>
+        <translation type="unfinished">Padre</translation>
+    </message>
+    <message>
+        <source>Measure</source>
+        <translation type="unfinished">Battuta</translation>
+    </message>
+    <message>
+        <source>Staff</source>
+        <translation type="unfinished">Pentagramma</translation>
+    </message>
+    <message>
+        <source>Segment</source>
+        <translation type="unfinished">Segmento</translation>
+    </message>
+    <message>
+        <source>Baseline</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>relX:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>%</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>relY:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>CS</source>
+        <translation type="unfinished">Scegli</translation>
+    </message>
+    <message>
+        <source>frame round</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>TextStyleDialog</name>
@@ -4220,6 +4563,40 @@ impostare il Tempo.</translation>
     <message>
         <source>Add</source>
         <translation>Aggiungi</translation>
+    </message>
+</context>
+<context>
+    <name>TimesigWizard</name>
+    <message>
+        <source>Form</source>
+        <translation type="unfinished">Formato</translation>
+    </message>
+    <message>
+        <source>Enter Time Signature:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Time Signature: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>/</source>
+        <translation type="unfinished">/</translation>
+    </message>
+    <message>
+        <source>Enter Number of Measures:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Measures:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Hint: you can also add or remove measures after creation of the score.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -4283,8 +4660,12 @@ impostare il Tempo.</translation>
 <context>
     <name>VBox</name>
     <message>
-        <source>Add Text</source>
-        <translation>Agguingi Testo</translation>
+        <source>Add</source>
+        <translation type="unfinished">Aggiungi</translation>
+    </message>
+    <message>
+        <source>Properties...</source>
+        <translation type="unfinished">Proprietà...</translation>
     </message>
 </context>
 <context>
