@@ -2,22 +2,18 @@
   $file="barlines.php";
   require("header.html");
   ?>
-<h4><a href="idx.php">MuseScore</a>
-   -- <a href="manual.php">Referenz</a>
-   -- Taktstriche</h4>
-
+<h4><a href="idx.php">MuseScore</a> -- <a href="manual.php">Dokumentation</a> -- <a href="reference.php">Index</a> -- Taktstriche</h4>
 <table>
-<tr><td>
-      Taktstriche können durch Ziehen eines Taktstrichsymbols
-      von der Taktstrichpalette auf einen Taktstrich der Partitur
-      oder auf eine leere Stelle eines Taktes geändert werden.
-  </td>
-  <td>
-     <img src="barlinepalette.png">
-     </tr>
-  </td>
+  <tr>
+    <td>
+
+          Taktstriche können durch Ziehen eines Taktstrichsymbols
+          von der Taktstrichpalette auf einen Taktstrich der Partitur
+          oder auf eine leere Stelle eines Taktes geändert werden.
+                </td>
+    <td>
+      <img src="barlinepalette.png"/>
+      </td>
+    </tr>
   </table>
-
-<br>
-<?php require("trailer.html");  ?>
-
+<?php require("trailer.html"); ?>

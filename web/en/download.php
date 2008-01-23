@@ -2,23 +2,30 @@
   $file="download.php";
   require("header.html");
   ?>
-<div id="intro">
   <h2> Downloads</h2>
+
   <h3> Sources</h3>
     <i>MuseScore</i> sources are available at
-  <a href="http://sourceforge.net/project/showfiles.php?group_id=109430">SourceForge</a>.
-  <br><br>
+    <a href="http://sourceforge.net/project/showfiles.php?group_id=109430">SourceForge</a>.
+    <br>
+
   <h3> Binaries</h3>
-  <b>Windows: </b>
-     <a href="http://sourceforge.net/project/showfiles.php?group_id=109430">SourceForge</a>.
-     <br>(The window version has no sequencer and no synthesizer.)
+    <a href="http://sourceforge.net/project/showfiles.php?group_id=109430">Windows</a>.
 
   <h3> Subversion Sourcecode Repository</h3>
-  The latest <i>MuseScore</i> code is always available in the
-  SourceForge SVN repository.<br>
-  For help please look at the SourceForge project page.
+    The latest <i>MuseScore</i> code is always available in the
+    SourceForge SVN repository.
+    For help please look at the SourceForge project page.
 
-</div>
+  <h3> Windows Testreleases </h3>
+  <table>
+    <tr>
+      <td><a href="http://prereleases.musescore.org/mscore-r634.exe">mscore-r634.exe</a></td>
+      <td>&nbsp;&nbsp</td>
+      <td>16. jan 2008</td>
+      </tr>
+  </table>
+
 
   <h2> Requirements</h2>
 <ul>
