@@ -44,10 +44,10 @@ Rest::Rest(Score* s, int tick, int len)
   : ChordRest(s)
       {
       setTick(tick);
+      _dots      = 0;
       setTickLen(len);
       _beamMode  = BEAM_NO;
       _staffMove = 0;
-      _dots      = 0;
       dotline    = -1;
       }
 
