@@ -1,4 +1,6 @@
 24.1.8
+      - fixed Rest() initialization so that dottet rests work for
+        musicxml import
       - fix crash when trying to enter notes beyond score end
       - fix cursor position in note entry mode
       - another try to fix the build problem
