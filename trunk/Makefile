@@ -21,7 +21,7 @@
 REVISION = `cat build/revision.h`
 PREFIX  = "/usr/local"
 # VERSION = "0.9.0b${REVISION}"
-VERSION = "0.9.0"
+VERSION = "0.9.1"
 
 ROOT=`pwd`
 
@@ -123,7 +123,7 @@ dist:
 	make -j2 release
 
 revision:
-	svn info mscore | grep Revision | cut -f 2 -d \" \" > mscore/revision.h
+	svn info mscore | grep Revision | cut -f 2 -d ' ' > mscore/mscore/revision.h
 
 install:
 	cd build; make install
