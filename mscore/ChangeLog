@@ -1,3 +1,7 @@
+24.1.8
+      - fix a bug in the build system: the file revision.h was generated
+        with svn command which only works for svn checkouts.
+      ======== Version 0.9.0 released =============
 23.1.8 (ws)
       - fixed palette drawing if "extraMag" was != 1.0
       - inverted logic of note entry with mouse: click into a chord adds a note,
