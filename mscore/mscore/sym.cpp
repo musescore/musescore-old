@@ -272,8 +272,8 @@ Sym::Sym(const char* name, const QChar& c, int f)
             font.setPointSizeF(20.0 * FMAG);
             }
       else if (fontId == 1) {
-            font = QFont("MScore");
-            font.setPointSizeF(14.0 * FMAG);
+            font = QFont("MScore1");
+            font.setPointSizeF(20.0 * FMAG);
             }
       else if (fontId == 2) {
             font = QFont("Times New Roman");
@@ -414,8 +414,8 @@ QFont Sym::font(double extraMag) const
             return f;
             }
       else if (fontId == 1) {
-            QFont f("MScore");
-            f.setPointSizeF(14.0 * mag);
+            QFont f("MScore1");
+            f.setPointSizeF(20.0 * mag);
             return f;
             }
       else if (fontId == 2) {
@@ -437,8 +437,9 @@ QFont Sym::font(double extraMag) const
 
 QString symToHtml(const Sym& s)
       {
-      QFont f = s.font();
-      double size = f.pointSizeF();
+      QFont f        = s.font();
+      double size    = f.pointSizeF();
+      QString family = f.family();
 
       return QString(
       "<data>"
@@ -450,19 +451,20 @@ QString symToHtml(const Sym& s)
               "p, li { white-space: pre-wrap; }"
               "</style>"
             "</head>"
-          "<body style=\" font-family:'MScore'; font-size:%1pt;\">"
+          "<body style=\" font-family:'%1'; font-size:%2pt;\">"
             "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">"
-                "&#%2;"
+                "&#%3;"
               "</p>"
             "</body>"
           "</html>"
-      "</data>").arg(size).arg(s.code().unicode());
+      "</data>").arg(family).arg(size).arg(s.code().unicode());
       }
 
 QString symToHtml(const Sym& s1, const Sym& s2)
       {
-      QFont f = s1.font();
-      double size = f.pointSizeF();
+      QFont f        = s1.font();
+      double size    = f.pointSizeF();
+      QString family = f.family();
 
       return QString(
       "<data>"
@@ -474,13 +476,13 @@ QString symToHtml(const Sym& s1, const Sym& s2)
               "p, li { white-space: pre-wrap; }"
               "</style>"
             "</head>"
-          "<body style=\" font-family:'MScore'; font-size:%1pt;\">"
+          "<body style=\" font-family:'%1'; font-size:%2pt;\">"
             "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">"
-                "&#%2;&#%3;"
+                "&#%3;&#%4;"
               "</p>"
             "</body>"
           "</html>"
-      "</data>").arg(size).arg(s1.code().unicode()).arg(s2.code().unicode());
+      "</data>").arg(family).arg(size).arg(s1.code().unicode()).arg(s2.code().unicode());
       }
 
 //---------------------------------------------------------
@@ -599,9 +601,9 @@ void initSymbols()
       symbols[dpedaltoeSym]               = Sym("dpedal toe",               0xe165, 0);
 
       symbols[flageoletSym]               = Sym("flageolet",                0xe166, 0);
-      symbols[segnoSym]                   = Sym("segno",                    0xe167, 0);
-      symbols[codaSym]                    = Sym("coda",                     0xe168, 0);
-      symbols[varcodaSym]                 = Sym("varcoda",                  0xe169, 0);
+      symbols[segnoSym]                   = Sym("segno",                    0xe167, 1);
+      symbols[codaSym]                    = Sym("coda",                     0xe168, 1);
+      symbols[varcodaSym]                 = Sym("varcoda",                  0xe169, 1);
 
       symbols[rcommaSym]                  = Sym("rcomma",                   0xe16a, 0);
       symbols[lcommaSym]                  = Sym("lcomma",                   0xe16b, 0);
@@ -689,43 +691,7 @@ void initSymbols()
       symbols[halfteheadSym]              = Sym("half te head",              0xf0bf, 0);
       symbols[teheadSym]                  = Sym("te head",                   0xf0c0, 0);
 
-      symbols[s_quartheadSym]             = Sym("small quart head",          0xe11d, 1);
-      symbols[s_halfheadSym]              = Sym("small half head",           0xe11c, 1);
-      symbols[s_wholeheadSym]             = Sym("small whole head",          0xe11b, 1);
-      symbols[s_brevisheadSym]            = Sym("small brevis head",         0xe11a, 1);
-      symbols[s_dotSym]                   = Sym("small dot",                 0xe119, 1);
-
-      symbols[s_eighthflagSym]            = Sym("small eight flag",          0xe17f, 1);
-      symbols[s_sixteenthflagSym]         = Sym("small sixteenth flag",      0xe180, 1);
-      symbols[s_thirtysecondflagSym]      = Sym("small thirtysecond flag",   0xe181, 1);
-      symbols[s_sixtyfourthflagSym]       = Sym("small sixtyfourth flag",    0xe182, 1);
-      symbols[s_deighthflagSym]           = Sym("small deight flag",         0xe183, 1);
-      symbols[s_dsixteenthflagSym]        = Sym("small d sixteenth flag",    0xe186, 1);
-      symbols[s_dthirtysecondflagSym]     = Sym("small d thirtysecond flag", 0xe187, 1);
-      symbols[s_dsixtyfourthflagSym]      = Sym("small d sixtyfourth flag",  0xe188, 1);
-
-      symbols[s_sharpSym]                 = Sym("small sharp",               0xe10e, 1);
-      symbols[s_naturalSym]               = Sym("small natural",             0xe111, 1);
-      symbols[s_flatSym]                  = Sym("small flat",                0xe112, 1);
-      symbols[s_flatflatSym]              = Sym("small flat flat",           0xe114, 1);
-      symbols[s_sharpsharpSym]            = Sym("small sharp sharp",         0xe116, 1);
       symbols[flipSym]                    = Sym("flip stem",  0xe0fd, 0);
-
-      symbols[s_wholediamondheadSym]        = Sym("whole diamond head",       0xe11e, 1);
-      symbols[s_halfdiamondheadSym]         = Sym("half diamond head",        0xe11f, 1);
-      symbols[s_diamondheadSym]             = Sym("diamond head",             0xe120, 1);
-
-      symbols[s_wholetriangleheadSym]       = Sym("whole triangle head",      0xe121, 1);
-      symbols[s_halftriangleheadSym]        = Sym("half triangle head",       0xe122, 1);
-      symbols[s_triangleheadSym]            = Sym("triangle head",            0xe124, 1);
-
-      symbols[s_wholeslashheadSym]          = Sym("whole slash head",         0xe126, 1);
-      symbols[s_halfslashheadSym]           = Sym("half slash head",          0xe127, 1);
-      symbols[s_quartslashheadSym]          = Sym("quart slash head",         0xe128, 1);
-
-      symbols[s_wholecrossedheadSym]        = Sym("whole cross head",         0xe129, 1);
-      symbols[s_halfcrossedheadSym]         = Sym("half cross head",          0xe12a, 1);
-      symbols[s_crossedheadSym]             = Sym("cross head",               0xe12b, 1);
 
       symbols[wholediamond2headSym]        = Sym("whole diamond2 head",       0xe137, 0);
       symbols[halfdiamond2headSym]         = Sym("half diamond2 head",        0xe138, 0);

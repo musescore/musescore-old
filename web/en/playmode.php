@@ -2,7 +2,7 @@
   $file="playmode.php";
   require("header.html");
   ?>
-<h4><a href="idx.php">MuseScore</a> -- <a href="manual.php">Documentation</a> -- <a href="reference.pjhp">Index</a> -- Play Mode</h4>
+<h4><a href="idx.php">MuseScore</a> -- <a href="manual.php">Documentation</a> -- <a href="reference.php">Index</a> -- Play Mode</h4>
 <i>MuseScore</i> has an integrated sequencer and synthesizer to play
     your score.<br/>
 

@@ -50,6 +50,7 @@
       <file>data/beam32.svg</file>
       <file>data/abeam.svg</file>
       <file>data/bg1.jpg</file>
+      <file>data/flip.svg</file>
    </qresource>
 
    <qresource lang="de">

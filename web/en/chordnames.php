@@ -2,7 +2,7 @@
   $file="chordnames.php";
   require("header.html");
   ?>
-<h4><a href="idx.php">MuseScore</a> -- <a href="manual.php">Documentation</a> -- <a href="reference.pjhp">Index</a> -- Chord Names</h4>
+<h4><a href="idx.php">MuseScore</a> -- <a href="manual.php">Documentation</a> -- <a href="reference.php">Index</a> -- Chord Names</h4>
 
       Chord names can be entered by first selecting a note and then
       pressing <code>

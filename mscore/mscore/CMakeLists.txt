@@ -42,7 +42,6 @@ add_custom_command(
 set_source_files_properties(
       ${PROJECT_BINARY_DIR}/all.h
       ${PROJECT_BINARY_DIR}/all.h.pch
-      ${PROJECT_BINARY_DIR}/revision.h
       PROPERTIES generated true
       )
 
@@ -124,10 +123,8 @@ add_executable ( mscore
       voltaproperties.cpp chordproperties.cpp restproperties.cpp
       repeatproperties.cpp box.cpp measurebase.cpp
       repeat2.cpp instrtemplate.cpp boxproperties.cpp
-#      repeatflagdialog.cpp
       newwizard.cpp
       revision.cpp
-      ${CMAKE_BINARY_DIR}/revision.h
       ${AUDIO}
       )
 

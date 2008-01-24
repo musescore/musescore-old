@@ -2,7 +2,7 @@
   $file="palette.php";
   require("header.html");
   ?>
-<h4><a href="idx.php">MuseScore</a> -- <a href="manual.php">Documentation</a> -- <a href="reference.pjhp">Index</a> -- Palettes</h4>
+<h4><a href="idx.php">MuseScore</a> -- <a href="manual.php">Documentation</a> -- <a href="reference.php">Index</a> -- Palettes</h4>
 
     Your can drag&amp;drop palette symbols onto score elements.
     <br/>

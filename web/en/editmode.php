@@ -2,7 +2,7 @@
   $file="editmode.php";
   require("header.html");
   ?>
-<h4><a href="idx.php">MuseScore</a> -- <a href="manual.php">Documentation</a> -- <a href="reference.pjhp">Index</a> -- Edit Mode</h4>
+<h4><a href="idx.php">MuseScore</a> -- <a href="manual.php">Documentation</a> -- <a href="reference.php">Index</a> -- Edit Mode</h4>
 
     Many elements in the score can be edited in &lt;<i><b>Edit Mode</b></i>&gt;:<br/>
 <br/>

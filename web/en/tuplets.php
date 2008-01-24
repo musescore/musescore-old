@@ -2,7 +2,7 @@
   $file="tuplets.php";
   require("header.html");
   ?>
-<h4><a href="idx.php">MuseScore</a> -- <a href="manual.php">Documentation</a> -- <a href="reference.pjhp">Index</a> -- Tuplets</h4>
+<h4><a href="idx.php">MuseScore</a> -- <a href="manual.php">Documentation</a> -- <a href="reference.php">Index</a> -- Tuplets</h4>
 
 
     To create a triplet first create a note with a duration of the whole

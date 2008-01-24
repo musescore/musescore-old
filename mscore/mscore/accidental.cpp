@@ -74,7 +74,7 @@ void Accidental::setSubtype(int i)
 
                   s = new Symbol(score());
                   switch(i) {
-                        case  6: s->setSym(s_sharpSym);    break;
+                        case  6: s->setSym(sharpSym);      break;
                         case  7: s->setSym(flatSym);       break;
                         case  8: s->setSym(sharpsharpSym); break;
                         case  9: s->setSym(flatflatSym);   break;

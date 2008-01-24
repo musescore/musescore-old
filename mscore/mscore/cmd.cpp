@@ -153,8 +153,6 @@ void Score::end()
             reLayout(layoutStart);
 
       foreach(Viewer* v, viewer) {
-            if (noteEntryMode())
-                  v->moveCursor();
             if (updateAll)
                   v->updateAll(this);
             else {
@@ -461,12 +459,10 @@ void Score::cmdAddPitch(int note, bool addFlag)
             m->createVoice(_is.track);
             cr = (ChordRest*)searchNote(_is.pos, _is.track);
             if (!cr || !cr->isChordRest())
-                  setNoteEntry(false, false);
+                  return;
             }
-      if (!noteEntryMode()) {
-            printf("cmdAddPitch: pos not set, or no chord rest found\n");
+      if (!noteEntryMode())
             return;
-            }
 
       int key = 7;
       if (!preferences.alternateNoteEntryMethod)
@@ -724,15 +720,16 @@ void Score::setNote(int tick, int track, int pitch, int len)
 
 /**
  Set rest(\a len) at position \a tick / \a track
+ return false if rest could not be set
 */
 
-void Score::setRest(int tick, int track, int len, bool useDots)
+bool Score::setRest(int tick, int track, int len, bool useDots)
       {
       int stick = tick;
       Measure* measure = tick2measure(stick);
-      if (measure == 0) {
+      if (measure == 0 || (measure->tick() + measure->tickLen()) == tick) {
             printf("setRest:  ...measure not found\n");
-            return;
+            return false;
             }
       Segment* segment = measure->first();
       int noteLen      = 0;
@@ -744,7 +741,7 @@ void Score::setRest(int tick, int track, int len, bool useDots)
                   }
             if (segment == 0 || segment->tick() != stick) {
                   printf("setRest: ..no segment at tick %d found\n", stick);
-                  return;
+                  return false;
                   }
             Element* element = segment->element(track);
             int l = 0;
@@ -799,6 +796,7 @@ void Score::setRest(int tick, int track, int len, bool useDots)
       if (noteLen - len > 0)
             setRest(tick + len, noteLen - len, track, measure);
       layoutAll = true;
+      return true;
       }
 
 //---------------------------------------------------------
@@ -1398,8 +1396,8 @@ void Score::cmd(const QString& cmd)
                               }
                         }
                   if (noteEntryMode()) {
-                        setRest(_is.pos, _is.track, _padState.tickLen, _padState.dot);
-                        _is.pos += _padState.tickLen;
+                        if (setRest(_is.pos, _is.track, _padState.tickLen, _padState.dot))
+                              _is.pos += _padState.tickLen;
                         }
                   _padState.rest = false;  // continue with normal note entry
                   }

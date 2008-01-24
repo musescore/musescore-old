@@ -293,7 +293,7 @@ class Score : public QObject {
       void setGraceNote(int tick, int track,  int pitch, NoteType type, int len);
       int clefOffset(int tick, Staff*) const;
       Rest* setRest(int tick, int len, int track, Measure*);
-      void setRest(int tick, int track, int len, bool useDots);
+      bool setRest(int tick, int track, int len, bool useDots);
       Canvas* canvas() const;
 
       void select(Element* obj, int state, int staff);

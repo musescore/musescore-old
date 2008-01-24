@@ -25,20 +25,6 @@ VERSION = "0.9.1"
 
 ROOT=`pwd`
 
-default:
-	if test ! -d build;                              \
-         then                                          \
-            mkdir build;                               \
-            cd build;                                  \
-            cmake -DCMAKE_INSTALL_PREFIX="${PREFIX}"   \
-            	../mscore;                           \
-            make lupdate;                              \
-            make lrelease;                             \
-            make;                                      \
-         else                                          \
-            cd build; make -f Makefile;                \
-         fi;
-
 release:
 	if test ! -d build;                              \
          then                                          \
@@ -59,7 +45,9 @@ debug:
          then                                          \
             mkdir build;                               \
             cd build;                                  \
-            cmake -DCMAKE_BUILD_TYPE=DEBUG ../mscore;  \
+            cmake -DCMAKE_BUILD_TYPE=DEBUG	       \
+            	  -DCMAKE_INSTALL_PREFIX="${PREFIX}" \
+            	   ../mscore; 			       \
             make lupdate;                              \
             make lrelease;                             \
             make;                                      \

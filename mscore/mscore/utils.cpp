@@ -105,7 +105,6 @@ Measure* Score::tick2measure(int tick) const
             printf("(%d)   %d - %d\n", idx, st, st+l);
             ++idx;
             }
-      abort();
       return 0;
       }
 

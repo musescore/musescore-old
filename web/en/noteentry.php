@@ -2,7 +2,7 @@
   $file="noteentry.php";
   require("header.html");
   ?>
-<h4><a href="idx.php">MuseScore</a> -- <a href="manual.php">Documentation</a> -- <a href="reference.pjhp">Index</a> -- Enter Notes</h4>
+<h4><a href="idx.php">MuseScore</a> -- <a href="manual.php">Documentation</a> -- <a href="reference.php">Index</a> -- Enter Notes</h4>
 
 
     Notes are entered in &lt;<i>Note Edit</i>&gt; mode. First select a note
