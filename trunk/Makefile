@@ -112,8 +112,8 @@ clean:
 dist:
 	-rm -rf mscore.dist
 	mkdir mscore.dist
-	cd mscore.dist; svn co https://mscore.svn.sourceforge.net/svnroot/mscore/trunk mscore-0.9.0
-	svn info mscore | grep Revision | cut -f 2 -d \" \" > mscore.dist/revision.h
+	cd mscore.dist; svn co https://mscore.svn.sourceforge.net/svnroot/mscore/trunk mscore-${VERSION}
+	svn info mscore | grep Revision | cut -f 2 -d ' ' > mscore/mscore/revision.h
 	cd mscore.dist; find . -name .svn -print0 | xargs -0 /bin/rm -rf
 	cd mscore.dist; rm -rf mscore-${VERSION}/web
 	cd mscore.dist; tar cvfj mscore-${VERSION}.tar.bz2 mscore-${VERSION}
