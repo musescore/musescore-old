@@ -606,8 +606,30 @@ void TextB::draw(QPainter& p) const
             for (QTextBlock tb = doc()->begin(); tb.isValid(); tb = tb.next()) {
                   QTextLayout* tl = tb.layout();
                   int n = tl->lineCount();
-                  for (int i = 0; i < n; ++i)
-                        f |= tl->lineAt(0).naturalTextRect().translated(tl->position());
+                  for (int i = 0; i < n; ++i) {
+                        const QTextLine l = tl->lineAt(i);
+                        f |= l.naturalTextRect().translated(tl->position());
+                        }
+                  }
+            qreal w = 6.0 / p.matrix().m11();   // 6 pixel border
+            f.adjust(-w, -w, w, w);
+            p.setPen(QPen(QBrush(Qt::blue), w / 3.0));
+            p.setBrush(QBrush(Qt::NoBrush));
+            p.drawRect(f);
+            }
+      if (debugMode && selected()) {
+            QRectF f;
+            for (QTextBlock tb = doc()->begin(); tb.isValid(); tb = tb.next()) {
+                  QTextLayout* tl = tb.layout();
+                  int n = tl->lineCount();
+                  for (int i = 0; i < n; ++i) {
+                        const QTextLine l = tl->lineAt(i);
+                        //f |= l.naturalTextRect().translated(tl->position());
+                        f |= l.rect().translated(tl->position());
+                        printf("Line %f %f %f, %f %f\n",
+                              l.rect().height(), l.naturalTextRect().height(), l.height(),
+                                 l.ascent(), l.descent());
+                        }
                   }
             qreal w = 6.0 / p.matrix().m11();   // 6 pixel border
             f.adjust(-w, -w, w, w);

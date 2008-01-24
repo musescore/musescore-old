@@ -2,7 +2,7 @@
   $file="gracenotes.php";
   require("header.html");
   ?>
-<h4><a href="idx.php">MuseScore</a> -- <a href="manual.php">Documentation</a> -- <a href="reference.pjhp">Index</a> -- Grace notes</h4>
+<h4><a href="idx.php">MuseScore</a> -- <a href="manual.php">Documentation</a> -- <a href="reference.php">Index</a> -- Grace notes</h4>
 
 
     A short grace note (Acciaccatura) is painted as a small note with a stroke

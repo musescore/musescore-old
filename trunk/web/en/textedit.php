@@ -2,7 +2,7 @@
   $file="textedit.php";
   require("header.html");
   ?>
-<h4><a href="idx.php">MuseScore</a> -- <a href="manual.php">Documentation</a> -- <a href="reference.pjhp">Index</a> -- Text Editing</h4>
+<h4><a href="idx.php">MuseScore</a> -- <a href="manual.php">Documentation</a> -- <a href="reference.php">Index</a> -- Text Editing</h4>
 
       Double click on text to enter <i>edit mode</i>:
       <img src="../pic/textedit.png" align="center"/>

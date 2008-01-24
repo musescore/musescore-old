@@ -2,7 +2,7 @@
   $file="newscore.php";
   require("header.html");
   ?>
-<h4><a href="idx.php">MuseScore</a> -- <a href="manual.php">Documentation</a> -- <a href="reference.pjhp">Index</a> -- Create new Score from Scratch</h4>
+<h4><a href="idx.php">MuseScore</a> -- <a href="manual.php">Documentation</a> -- <a href="reference.php">Index</a> -- Create new Score from Scratch</h4>
 <h5>
 Create new Score from Scratch  </h5>
 

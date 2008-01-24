@@ -450,7 +450,7 @@ void MuseScore::showPalette(bool visible)
             //    Repeats
             //-----------------------------------
 
-            sp = new Palette(7, 2, 0.8);
+            sp = new Palette(7, 2, 0.65);
             sp->setGrid(84, 28);
             sp->setDrawGrid(true);
 

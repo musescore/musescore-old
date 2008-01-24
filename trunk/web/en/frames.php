@@ -2,7 +2,7 @@
   $file="frames.php";
   require("header.html");
   ?>
-<h4><a href="idx.php">MuseScore</a> -- <a href="manual.php">Documentation</a> -- <a href="reference.pjhp">Index</a> -- Frames</h4>
+<h4><a href="idx.php">MuseScore</a> -- <a href="manual.php">Documentation</a> -- <a href="reference.php">Index</a> -- Frames</h4>
 
     Frames provide empty space outside of normal measures. They can also contain
     text or pictures. <i>MuseScore</i> has two kind of frames:

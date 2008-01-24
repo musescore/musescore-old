@@ -2,7 +2,7 @@
   $file="measures.php";
   require("header.html");
   ?>
-<h4><a href="idx.php">MuseScore</a> -- <a href="manual.php">Documentation</a> -- <a href="reference.pjhp">Index</a> -- Measure Operations</h4>
+<h4><a href="idx.php">MuseScore</a> -- <a href="manual.php">Documentation</a> -- <a href="reference.php">Index</a> -- Measure Operations</h4>
 <h5>
 Properties  </h5>
 <table cellspacing="0" cellpadding="0">

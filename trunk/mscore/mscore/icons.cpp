@@ -64,7 +64,7 @@ QIcon windowIcon;
 QIcon acciaccaturaIcon, appoggiaturaIcon;
 
 //---------------------------------------------------------
-//   symPixmap
+//   symIcon
 //---------------------------------------------------------
 
 QIcon symIcon(const Sym& sc, int size, int width, int height)
@@ -91,28 +91,6 @@ QIcon symIcon(const Sym& sc, int size, int width, int height)
       _spatium = ospatium;
       return QIcon(image);
       }
-
-SymCode wholehead_Sym      (0xe103, TEXT_STYLE_DYNAMICS1);
-SymCode note2_Sym          (0xe102, TEXT_STYLE_DYNAMICS1);
-SymCode note4_Sym          (0xe0fc, TEXT_STYLE_DYNAMICS1);
-SymCode note8_Sym          (0xe0f8, TEXT_STYLE_DYNAMICS1);
-SymCode note16_Sym         (0xe0f9, TEXT_STYLE_DYNAMICS1);
-SymCode note32_Sym         (0xe0fa, TEXT_STYLE_DYNAMICS1);
-SymCode note64_Sym         (0xe0fb, TEXT_STYLE_DYNAMICS1);
-SymCode natural_Sym        (0xe111, TEXT_STYLE_DYNAMICS1);
-SymCode sharp_Sym          (0xe10e, TEXT_STYLE_DYNAMICS1);
-SymCode sharpsharp_Sym     (0xe116, TEXT_STYLE_DYNAMICS1);
-SymCode flat_Sym           (0xe112, TEXT_STYLE_DYNAMICS1);
-SymCode flatflat_Sym       (0xe114, TEXT_STYLE_DYNAMICS1);
-SymCode quartrest_Sym      (0xe107, TEXT_STYLE_DYNAMICS1);
-SymCode dot_Sym            (0xe0ff, TEXT_STYLE_DYNAMICS1);
-SymCode dotdot_Sym         (0xe0fd, TEXT_STYLE_DYNAMICS1);
-SymCode sforzatoaccent_Sym (0xe151, TEXT_STYLE_SYMBOL1);
-SymCode staccato_Sym       (0xe153, TEXT_STYLE_SYMBOL1);
-SymCode tenuto_Sym         (0xe156, TEXT_STYLE_SYMBOL1);
-SymCode plus_Sym           (0x2b,   TEXT_STYLE_SYMBOL1);
-SymCode trebleclef_Sym     (0xe18d, TEXT_STYLE_DYNAMICS1);
-SymCode flip_Sym           (0xe0fd, TEXT_STYLE_DYNAMICS1);
 
 //---------------------------------------------------------
 //   genIcons
@@ -165,7 +143,7 @@ void genIcons()
             painter.end();
             voiceIcons[i].addPixmap(image, QIcon::Normal, QIcon::On);
             }
-      flipIcon = symIcon(symbols[flipSym]);
+      flipIcon = QIcon(":/data/flip.svg");
 
       cutIcon.addPixmap(QPixmap(editcut_xpm));
       copyIcon.addPixmap(QPixmap(editcopy_xpm));

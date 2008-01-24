@@ -1020,7 +1020,7 @@ void Canvas::moveCursor()
             return;
             }
       // _score->appendMeasures(1);
-      printf("cursor position not found for tick %d, append new measure\n", cursor->tick());
+      // printf("cursor position not found for tick %d, append new measure\n", cursor->tick());
       }
 
 void Canvas::moveCursor(Segment* segment)
@@ -1116,6 +1116,12 @@ void Canvas::paintEvent(QPaintEvent* ev)
                   navigator->layoutChanged();
             if (state == EDIT || state == DRAG_EDIT)
                   updateGrips();
+            //
+            // position of all segments is now known and we can position
+            // the cursor in note entry mode
+
+            if (score()->noteEntryMode())
+                  moveCursor();
             region = QRegion(0, 0, width(), height());
             }
       else
@@ -2034,7 +2040,9 @@ void Canvas::drawElements(QPainter& p,const QList<const Element*>& el)
 // if (e->type() == TEXT && e->subtype() == TEXT_INSTRUMENT_LONG)
 //   printf("text %p <%s> %f %f\n",
 //      e, qPrintable(((Text*)e)->getText()), e->canvasPos().x(), e->canvasPos().y());
-            if (debugMode && e->selected()) {
+
+//            if (debugMode && e->selected()) {
+            if (false) {
                   //
                   //  draw bounding box rectangle for all
                   //  selected Elements
