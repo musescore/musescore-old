@@ -39,10 +39,6 @@ add_custom_command(
    WORKING_DIRECTORY ${PROJECT_BINARY_DIR}
    )
 
-   COMMAND svn info ${PROJECT_SOURCE_DIR} | grep Revision | cut -f 2 -d \" \" > ${CMAKE_BINARY_DIR}/revision.h
-   WORKING_DIRECTORY ${PROJECT_BINARY_DIR}
-   )
-
 set_source_files_properties(
       ${PROJECT_BINARY_DIR}/all.h
       ${PROJECT_BINARY_DIR}/all.h.pch
