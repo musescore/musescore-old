@@ -101,6 +101,9 @@ static BeamHint endBeamList[] = {
       BeamHint(1, 32,  4,  4, 3, 4 ),
       BeamHint(1, 32,  4,  4, 7, 8 ),
 
+      BeamHint(1,  8,  6,  4, 1, 4 ),     // for promenade demo (ws)
+      BeamHint(1,  8,  6,  4, 3, 4 ),
+
       BeamHint(0,  0,  2,  4, 0, 0 ),  // switch-off at-any-beat feature
       BeamHint(0,  0,  2,  4, 1, 4 ),
       BeamHint(1, 32,  2,  4, 1, 8 ),
@@ -114,7 +117,6 @@ static BeamHint endBeamList[] = {
       BeamHint(0,  0,  4, 16, 0, 0 ), // switch-off at-any-beat feature
       BeamHint(0,  0,  4, 16, 1, 8 ),
 
-/*46*/
       BeamHint(0,  0,  6, 8,  0, 0 ), // switch-off at-any-beat feature
       BeamHint(0,  0,  6, 8,  3, 8 ),
       BeamHint(1, 32,  6, 8,  1, 8 ),
@@ -152,12 +154,12 @@ static bool endBeam(int tsZ, int tsN, int l, int p)
             if (h.timeSigZ && (h.timeSigZ != tsZ || h.timeSigN != tsN))
                   continue;
             if (h.noteLenZ) {
-                  int len = h.noteLenZ * division / h.noteLenN;
+                  int len = (4 * h.noteLenZ * division)/ h.noteLenN;
                   if (len != l)
                         continue;
                   }
             if (h.posZ) {
-                  int pos = h.posZ * division / h.posN;
+                  int pos = (4 * h.posZ * division) / h.posN;
                   if (pos != p)
                         continue;
                   }
