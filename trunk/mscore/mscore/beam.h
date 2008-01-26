@@ -24,6 +24,35 @@
 #include "chordlist.h"
 #include "element.h"
 
+
+//---------------------------------------------------------
+//   BeamHint
+//    beam hint for autobeamer
+//
+//    used for "start beam hints" list and "end beam hints"
+//    list
+//---------------------------------------------------------
+
+struct BeamHint {
+      int noteLenZ;
+      int noteLenN;
+
+      int timeSigZ;     // valid for this timesig; zero = valid for all
+      int timeSigN;
+
+      int posZ;
+      int posN;
+
+      BeamHint(int a, int b, int c, int d, int e, int f) {
+            noteLenZ = a;
+            noteLenN = b;
+            timeSigZ = c;
+            timeSigN = d;
+            posZ     = e;
+            posN     = f;
+            }
+      };
+
 //---------------------------------------------------------
 //   BeamSegment
 //---------------------------------------------------------

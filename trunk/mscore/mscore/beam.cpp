@@ -29,6 +29,144 @@
 #include "tuplet.h"
 #include "layout.h"
 
+// beam tables from GNU LilyPond music typesetter
+// (c) 2000--2007 Jan Nieuwenhuizen <janneke@gnu.org>
+
+//---------------------------------------------------------
+//   startBeam
+//---------------------------------------------------------
+
+static BeamHint startBeamList[] = {
+      BeamHint(0, 0, 0, 0, 0, 0),
+      };
+
+//---------------------------------------------------------
+//   endBeam
+//---------------------------------------------------------
+
+static BeamHint endBeamList[] = {
+      // in 3 2 time:
+      //   end beams each 1 2 note
+      //   end beams with 16th notes each 1 4 note
+      //   end beams with 32th notes each 1 8 note
+
+      BeamHint(0,  0, 3, 2,  1, 2 ),
+      BeamHint(0,  0, 3, 1,  2, 2 ),
+
+      BeamHint(1, 16, 3, 2,  1, 4 ),
+      BeamHint(1, 16, 3, 2,  1, 2 ),
+      BeamHint(1, 16, 3, 2,  3, 4 ),
+      BeamHint(1, 16, 3, 2,  5, 4 ),
+
+      BeamHint(1, 32, 3, 2,  1, 8 ),
+      BeamHint(1, 32, 3, 2,  1, 4 ),
+      BeamHint(1, 32, 3, 2,  3, 8 ),
+      BeamHint(1, 32, 3, 2,  1, 2 ),
+      BeamHint(1, 32, 3, 2,  5, 8 ),
+      BeamHint(1, 32, 3, 2,  3, 4 ),
+      BeamHint(1, 32, 3, 2,  7, 8 ),
+      BeamHint(1, 32, 3, 2,  9, 8 ),
+      BeamHint(1, 32, 3, 2,  5, 4 ),
+      BeamHint(1, 32, 3, 2, 11, 8 ),
+
+      BeamHint(0,  0, 3, 4,  3, 4 ),
+
+      BeamHint(1, 16, 3, 4,  1, 4 ),
+      BeamHint(1, 16, 3, 4,  1, 2 ),
+
+      BeamHint(1, 32, 3, 4,  1, 8 ),
+      BeamHint(1, 32, 3, 4,  1, 4 ),
+      BeamHint(1, 32, 3, 4,  3, 8 ),
+      BeamHint(1, 32, 3, 4,  1, 2 ),
+      BeamHint(1, 32, 3, 4,  5, 8 ),
+
+      BeamHint(0,  0, 3, 8,  3, 8 ),
+
+      // in common time:
+      //   end beams each 1 2 note
+      //   end beams with 32th notes each 1 8 note
+      //   end beams with 1 8 triplets each 1 4 note
+
+      BeamHint(0,  0,  4,  4, 1, 2 ),
+      BeamHint(1, 12,  4,  4, 1, 4 ),
+      BeamHint(1, 12,  4,  4, 3, 4 ),
+
+      BeamHint(1, 16,  4,  4, 1, 4 ),
+      BeamHint(1, 16,  4,  4, 3, 4 ),
+
+      BeamHint(1, 32,  4,  4, 1, 8 ),
+      BeamHint(1, 32,  4,  4, 1, 4 ),
+      BeamHint(1, 32,  4,  4, 3, 8 ),
+      BeamHint(1, 32,  4,  4, 5, 8 ),
+      BeamHint(1, 32,  4,  4, 3, 4 ),
+      BeamHint(1, 32,  4,  4, 7, 8 ),
+
+      BeamHint(0,  0,  2,  4, 0, 0 ),  // switch-off at-any-beat feature
+      BeamHint(0,  0,  2,  4, 1, 4 ),
+      BeamHint(1, 32,  2,  4, 1, 8 ),
+      BeamHint(1, 32,  2,  4, 3, 8 ),
+
+      BeamHint(0,  0,  4,  8, 0, 0 ), // switch-off at-any-beat feature
+      BeamHint(0,  0,  4,  8, 1, 4 ),
+      BeamHint(1, 32,  4,  8, 1, 8 ),
+      BeamHint(1, 32,  4,  8, 3, 8 ),
+
+      BeamHint(0,  0,  4, 16, 0, 0 ), // switch-off at-any-beat feature
+      BeamHint(0,  0,  4, 16, 1, 8 ),
+
+/*46*/
+      BeamHint(0,  0,  6, 8,  0, 0 ), // switch-off at-any-beat feature
+      BeamHint(0,  0,  6, 8,  3, 8 ),
+      BeamHint(1, 32,  6, 8,  1, 8 ),
+      BeamHint(1, 32,  6, 8,  1, 4 ),
+      BeamHint(1, 32,  6, 8,  1, 2 ),
+      BeamHint(1, 32,  6, 8,  5, 8 ),
+
+      BeamHint(0,  0,  9, 8,  0, 0 ),  // switch-off at-any-beat feature
+      BeamHint(0,  0,  9, 8,  3, 8 ),
+      BeamHint(0,  0,  9, 8,  3, 4 ),
+      BeamHint(1, 32,  9, 8,  1, 8 ),
+      BeamHint(1, 32,  9, 8,  1, 4 ),
+      BeamHint(1, 32,  9, 8,  1, 2 ),
+      BeamHint(1, 32,  9, 8,  5, 8 ),
+      BeamHint(1, 32,  9, 8,  7, 8 ),
+      BeamHint(1, 32,  9, 8,  1, 1 ),
+      BeamHint(1, 32,  9, 8,  9, 8 ),
+
+      BeamHint(0,  0, 12, 8,  0, 0 ),  // switch-off at-every-beat
+      BeamHint(0,  0, 12, 8,  3, 8 ),
+      BeamHint(0,  0, 12, 8,  3, 4 ),
+      BeamHint(0,  0, 12, 8,  9, 8 ),
+      BeamHint(0,  0, 12, 8,  2, 1 ),
+      BeamHint(1, 32, 12, 8,  1, 8 ),
+      };
+
+//---------------------------------------------------------
+//   endBeam
+//---------------------------------------------------------
+
+static bool endBeam(int tsZ, int tsN, int l, int p)
+      {
+      for (unsigned i = 0; i < sizeof(endBeamList)/sizeof(*endBeamList); ++i) {
+            const BeamHint& h = endBeamList[i];
+            if (h.timeSigZ && (h.timeSigZ != tsZ || h.timeSigN != tsN))
+                  continue;
+            if (h.noteLenZ) {
+                  int len = h.noteLenZ * division / h.noteLenN;
+                  if (len != l)
+                        continue;
+                  }
+            if (h.posZ) {
+                  int pos = h.posZ * division / h.posN;
+                  if (pos != p)
+                        continue;
+                  }
+            printf("==endBeam rule %d match; %d/%d %d %d\n", i, tsZ, tsN, l, p);
+            return true;
+            }
+      return false;
+      }
+
 //---------------------------------------------------------
 //   Beam
 //---------------------------------------------------------
@@ -45,7 +183,6 @@ Beam::~Beam()
             delete *i;
             }
       }
-
 
 //---------------------------------------------------------
 //   canvasPos
@@ -124,6 +261,7 @@ void Measure::layoutBeams1(ScoreLayout* layout)
             delete beam;
       _beamList.clear();
 
+printf("layout beams\n");
       int tracks = _score->nstaves() * VOICES;
       for (int track = 0; track < tracks; ++track) {
             ChordRest* a1 = 0;      // start of (potential) beam
@@ -148,45 +286,28 @@ void Measure::layoutBeams1(ScoreLayout* layout)
                   ChordRest* cr = (ChordRest*) e;
                   BeamMode bm   = cr->beamMode();
 
-                  //---------------------------------------
-                  //   check for beam end
-                  //---------------------------------------
-
-                  bool tooLong;
-                  if (cr->tuplet())
-                        tooLong = cr->tuplet()->baseLen() >= division;
-                  else
-                        tooLong = cr->tickLen() >= division;
+                  int len      = cr->tuplet() ? cr->tuplet()->baseLen() : cr->tickLen();
+                  bool tooLong = len >= division;
+printf("  chordrest %4d len %3d\n", cr->tick() - tick(), len);
                   if (beam) {
+                        //---------------------------------------
+                        //   check for beam end
+                        //---------------------------------------
+
                         // end beam if there are chords/rests missing
                         // in voice:
                         ChordRest* le = beam->getElements().back();
                         if (le->tick() + le->tickLen() != cr->tick()) {
                               tooLong = true;
                               }
-                        int group = division;
                         int z, n;
                         _score->sigmap->timesig(cr->tick(), z, n);
-                        if (z == 3 && n == 8)   // hack!
-                              group = division * 3 / 2;
-                        else if (z == 9 && n == 8)
-                              group = division * 3 / 2;
-                        else if (z == 5 && n == 8)
-                              group = division * 5 / 2;
-                        else if (z == 6 && n == 8)
-                              group = division * 6 / 2;
-
-                        bool styleBreak = ((cr->tick() - tick()) % group) == 0;
-                        if (styleBreak) {
-                              // some experimental optimization
-                              const QList<ChordRest*> l = beam->getElements();
-                              if (l.size() == 2 && cr->tickLen() == l.back()->tickLen())
-                                    styleBreak = false;
-                              }
+                        bool styleBreak = endBeam(z, n, cr->tickLen(), cr->tick() - tick());
                         if (styleBreak || tooLong || bm == BEAM_BEGIN || bm == BEAM_NO) {
                               beam->layout1(layout);
                               beam = 0;
                               a1   = 0;
+printf("      endBeam %d %d %d\n", styleBreak, tooLong, bm == BEAM_BEGIN || bm == BEAM_NO);
                               goto newBeam;
                               }
                         else {
@@ -203,32 +324,15 @@ void Measure::layoutBeams1(ScoreLayout* layout)
                         }
                   else {
 newBeam:
-                        bool hint = !tooLong;	  // start new beam
-                        if (bm == BEAM_NO)
+                        bool hint = true;
+                        if (tooLong || (bm == BEAM_NO))
                               hint = false;
-                        else if (bm == BEAM_BEGIN)
-                              hint = true;
-                        else if (bm == BEAM_AUTO) {
-                              if (a1 == 0) {
-                                    //
-                                    // start a new beam?
-                                    //
-                        		int group = division;
-                        		int z, n;
-                        		_score->sigmap->timesig(cr->tick(), z, n);
-
-                                    // handle special time signatures:
-                        		if (z == 9 && n == 8) {
-                              		group = division * 3 / 2;
-                                          }
-                                    if ((cr->tick() - tick()) % group)
-                                          hint = false;
-                                    }
-                              }
+//                        if (hint && a1 && endBeam(z, n, cr->tickLen(), cr->tick() - tick()))
+//                              hint = false;
                         if (hint) {
-                              if (a1 == 0) {
+printf("      startBeam\n");
+                              if (a1 == 0)
                                     a1 = cr;
-                                    }
                               else {
                                     if (bm == BEAM_BEGIN) {
                                           a1->layoutStem1(layout);
@@ -249,9 +353,10 @@ newBeam:
                               }
                         else {
                               cr->layoutStem1(layout);
-                              if (a1)
+                              if (a1) {
                                     a1->layoutStem1(layout);
-                              a1 = 0;
+                                    a1 = 0;
+                                    }
                               }
                         }
                   }
