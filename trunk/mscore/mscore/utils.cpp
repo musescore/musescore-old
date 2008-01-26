@@ -25,6 +25,7 @@
 #include "layout.h"
 #include "recordbutton.h"
 #include "greendotbutton.h"
+#include "clef.h"
 
 //---------------------------------------------------------
 //   RecordButton
@@ -303,6 +304,65 @@ int headType(int tickLen, DurationType* type, int* dots)
       *type = D_QUARTER;
       *dots = 0;
       return 0;
+      }
+
+//---------------------------------------------------------
+//   pitchKeyAdjust
+//    change entered note to sounding pitch dependend
+//    on key.
+//    Example: if F is entered in G-major, a Fis is played
+//---------------------------------------------------------
+
+int pitchKeyAdjust(int note, int key)
+      {
+      static int ptab[15][7] = {
+//             c  d  e  f  g   a  b
+            { -1, 1, 3, 4, 6,  8, 10 },     // Bes
+            { -1, 1, 3, 5, 6,  8, 10 },     // Ges
+            {  0, 1, 3, 5, 6,  8, 10 },     // Des
+            {  0, 1, 3, 5, 7,  8, 10 },     // As
+            {  0, 2, 3, 5, 7,  8, 10 },     // Es
+            {  0, 2, 3, 5, 7,  9, 10 },     // B
+            {  0, 2, 4, 5, 7,  9, 10 },     // F
+            {  0, 2, 4, 5, 7,  9, 11 },     // C
+            {  0, 2, 4, 6, 7,  9, 11 },     // G
+            {  1, 2, 4, 6, 7,  9, 11 },     // D
+            {  1, 2, 4, 6, 8,  9, 11 },     // A
+            {  1, 3, 4, 6, 8,  9, 11 },     // E
+            {  1, 3, 4, 6, 8, 10, 11 },     // H
+            {  1, 3, 5, 6, 8, 10, 11 },     // Fis
+            {  1, 3, 5, 6, 8, 10, 12 },     // Cis
+            };
+      return ptab[key][note];
+      }
+
+//---------------------------------------------------------
+//   y2pitch
+//---------------------------------------------------------
+
+int y2pitch(double y, int clef)
+      {
+      int l = lrint(y / _spatium * 2.0);
+      return line2pitch(l, clef, 0);
+      }
+
+//---------------------------------------------------------
+//   line2pitch
+//---------------------------------------------------------
+
+int line2pitch(int line, int clef, int key)
+      {
+      int l = clefTable[clef].pitchOffset - line;
+      int octave = 0;
+      while (l < 0) {
+            l += 7;
+            octave++;
+            }
+      if (l > 74)
+            l = 74;
+      octave += l / 7;
+      l       = l % 7;
+      return pitchKeyAdjust(l, key) + octave * 12;
       }
 
 

@@ -1,0 +1,459 @@
+<ui version="4.0" >
+ <class>ChordEditor</class>
+ <widget class="QDialog" name="ChordEditor" >
+  <property name="geometry" >
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>462</width>
+    <height>411</height>
+   </rect>
+  </property>
+  <property name="windowTitle" >
+   <string>Dialog</string>
+  </property>
+  <layout class="QGridLayout" >
+   <item row="0" column="0" colspan="2" >
+    <widget class="QLabel" name="chordLabel" >
+     <property name="font" >
+      <font>
+       <pointsize>24</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="text" >
+      <string>TextLabel</string>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="0" >
+    <widget class="QGroupBox" name="root" >
+     <property name="title" >
+      <string>Root</string>
+     </property>
+     <layout class="QGridLayout" >
+      <item row="0" column="0" >
+       <widget class="QRadioButton" name="rootC" >
+        <property name="text" >
+         <string>C</string>
+        </property>
+        <property name="checked" >
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1" >
+       <widget class="QRadioButton" name="rootFis" >
+        <property name="text" >
+         <string>F#</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="0" >
+       <widget class="QRadioButton" name="rootDb" >
+        <property name="text" >
+         <string>Db</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1" >
+       <widget class="QRadioButton" name="rootG" >
+        <property name="text" >
+         <string>G</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="0" >
+       <widget class="QRadioButton" name="rootD" >
+        <property name="text" >
+         <string>D</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="1" >
+       <widget class="QRadioButton" name="rootAb" >
+        <property name="text" >
+         <string>Ab</string>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="0" >
+       <widget class="QRadioButton" name="rootEb" >
+        <property name="text" >
+         <string>Eb</string>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="1" >
+       <widget class="QRadioButton" name="rootA" >
+        <property name="text" >
+         <string>A</string>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="0" >
+       <widget class="QRadioButton" name="rootE" >
+        <property name="text" >
+         <string>E</string>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="1" >
+       <widget class="QRadioButton" name="rootBb" >
+        <property name="text" >
+         <string>Bb</string>
+        </property>
+       </widget>
+      </item>
+      <item row="5" column="0" >
+       <widget class="QRadioButton" name="rootF" >
+        <property name="text" >
+         <string>F</string>
+        </property>
+       </widget>
+      </item>
+      <item row="5" column="1" >
+       <widget class="QRadioButton" name="rootB" >
+        <property name="text" >
+         <string>B</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item rowspan="2" row="1" column="1" >
+    <widget class="QGroupBox" name="extension" >
+     <property name="title" >
+      <string>Extension</string>
+     </property>
+     <layout class="QGridLayout" >
+      <item row="0" column="0" >
+       <widget class="QRadioButton" name="extMaj" >
+        <property name="text" >
+         <string>Maj</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1" >
+       <widget class="QRadioButton" name="ext2" >
+        <property name="text" >
+         <string>2</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="0" >
+       <widget class="QRadioButton" name="extMaj7" >
+        <property name="text" >
+         <string>Maj7</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1" >
+       <widget class="QRadioButton" name="extMaj9" >
+        <property name="text" >
+         <string>Maj9</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="2" >
+       <widget class="QRadioButton" name="ext6" >
+        <property name="text" >
+         <string>6</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="3" >
+       <widget class="QRadioButton" name="ext69" >
+        <property name="text" >
+         <string>69</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="0" >
+       <widget class="QRadioButton" name="extm" >
+        <property name="text" >
+         <string>m</string>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="0" >
+       <widget class="QRadioButton" name="extm7" >
+        <property name="text" >
+         <string>m7</string>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="0" >
+       <widget class="QRadioButton" name="extm7b5" >
+        <property name="text" >
+         <string>m7b5</string>
+        </property>
+       </widget>
+      </item>
+      <item row="5" column="0" >
+       <widget class="QRadioButton" name="ext7" >
+        <property name="text" >
+         <string>7</string>
+        </property>
+       </widget>
+      </item>
+      <item row="6" column="0" >
+       <widget class="QRadioButton" name="extsus" >
+        <property name="text" >
+         <string>sus</string>
+        </property>
+       </widget>
+      </item>
+      <item row="7" column="0" >
+       <widget class="QRadioButton" name="ext7Sus" >
+        <property name="text" >
+         <string>7Sus</string>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="1" >
+       <widget class="QRadioButton" name="extm6" >
+        <property name="text" >
+         <string>m6</string>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="2" >
+       <widget class="QRadioButton" name="extm9" >
+        <property name="text" >
+         <string>m9</string>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="3" >
+       <widget class="QRadioButton" name="extMaj7_2" >
+        <property name="text" >
+         <string>mMaj7</string>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="1" >
+       <widget class="QRadioButton" name="extdim" >
+        <property name="text" >
+         <string>dim</string>
+        </property>
+       </widget>
+      </item>
+      <item row="5" column="1" >
+       <widget class="QRadioButton" name="ext9" >
+        <property name="text" >
+         <string>9</string>
+        </property>
+       </widget>
+      </item>
+      <item row="5" column="2" >
+       <widget class="QRadioButton" name="ext13" >
+        <property name="text" >
+         <string>13</string>
+        </property>
+       </widget>
+      </item>
+      <item row="5" column="3" >
+       <widget class="QRadioButton" name="ext7b9" >
+        <property name="text" >
+         <string>7b9</string>
+        </property>
+       </widget>
+      </item>
+      <item row="7" column="1" >
+       <widget class="QRadioButton" name="extother" >
+        <property name="text" >
+         <string>Other:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="7" column="2" colspan="2" >
+       <widget class="QComboBox" name="extOtherCombo" >
+        <item>
+         <property name="text" >
+          <string>Maj</string>
+         </property>
+        </item>
+        <item>
+         <property name="text" >
+          <string>5b</string>
+         </property>
+        </item>
+        <item>
+         <property name="text" >
+          <string>aug</string>
+         </property>
+        </item>
+        <item>
+         <property name="text" >
+          <string>6</string>
+         </property>
+        </item>
+        <item>
+         <property name="text" >
+          <string>Maj7</string>
+         </property>
+        </item>
+        <item>
+         <property name="text" >
+          <string>Maj9</string>
+         </property>
+        </item>
+        <item>
+         <property name="text" >
+          <string>Maj9#11</string>
+         </property>
+        </item>
+        <item>
+         <property name="text" >
+          <string>Maj13#11</string>
+         </property>
+        </item>
+        <item>
+         <property name="text" >
+          <string>Maj13</string>
+         </property>
+        </item>
+        <item>
+         <property name="text" >
+          <string>+</string>
+         </property>
+        </item>
+        <item>
+         <property name="text" >
+          <string>Maj7#5</string>
+         </property>
+        </item>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item row="2" column="0" >
+    <widget class="QGroupBox" name="groupBox_3" >
+     <property name="title" >
+      <string>Bass Note</string>
+     </property>
+     <layout class="QVBoxLayout" >
+      <item>
+       <widget class="QComboBox" name="bassNote" >
+        <item>
+         <property name="text" >
+          <string>none</string>
+         </property>
+        </item>
+        <item>
+         <property name="text" >
+          <string>/C</string>
+         </property>
+        </item>
+        <item>
+         <property name="text" >
+          <string>/Db</string>
+         </property>
+        </item>
+        <item>
+         <property name="text" >
+          <string>/D</string>
+         </property>
+        </item>
+        <item>
+         <property name="text" >
+          <string>/Eb</string>
+         </property>
+        </item>
+        <item>
+         <property name="text" >
+          <string>/E</string>
+         </property>
+        </item>
+        <item>
+         <property name="text" >
+          <string>/F</string>
+         </property>
+        </item>
+        <item>
+         <property name="text" >
+          <string>/F#</string>
+         </property>
+        </item>
+        <item>
+         <property name="text" >
+          <string>/G</string>
+         </property>
+        </item>
+        <item>
+         <property name="text" >
+          <string>/Ab</string>
+         </property>
+        </item>
+        <item>
+         <property name="text" >
+          <string>/A</string>
+         </property>
+        </item>
+        <item>
+         <property name="text" >
+          <string>/Bb</string>
+         </property>
+        </item>
+        <item>
+         <property name="text" >
+          <string>/B</string>
+         </property>
+        </item>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item row="3" column="0" colspan="2" >
+    <widget class="QDialogButtonBox" name="buttonBox" >
+     <property name="orientation" >
+      <enum>Qt::Horizontal</enum>
+     </property>
+     <property name="standardButtons" >
+      <set>QDialogButtonBox::Cancel|QDialogButtonBox::NoButton|QDialogButtonBox::Ok</set>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>buttonBox</sender>
+   <signal>accepted()</signal>
+   <receiver>ChordEditor</receiver>
+   <slot>accept()</slot>
+   <hints>
+    <hint type="sourcelabel" >
+     <x>248</x>
+     <y>254</y>
+    </hint>
+    <hint type="destinationlabel" >
+     <x>157</x>
+     <y>274</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>buttonBox</sender>
+   <signal>rejected()</signal>
+   <receiver>ChordEditor</receiver>
+   <slot>reject()</slot>
+   <hints>
+    <hint type="sourcelabel" >
+     <x>316</x>
+     <y>260</y>
+    </hint>
+    <hint type="destinationlabel" >
+     <x>286</x>
+     <y>274</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+</ui>

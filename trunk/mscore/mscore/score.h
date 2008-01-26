@@ -479,8 +479,6 @@ class Score : public QObject {
 
 extern Score* gscore;
 extern void fixTicks();
-extern int y2pitch(double y, int clef);
-extern int line2pitch(int line, int clef);
 
 #endif
 

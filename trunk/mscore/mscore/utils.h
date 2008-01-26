@@ -32,7 +32,10 @@ extern QRectF drawHandle(QPainter& p, const QPointF& pos, bool active);
 extern QRectF handleRect(const QPointF& pos);
 
 extern int getStaff(System* system, const QPointF& p);
-int headType(int tickLen, DurationType* type, int* dots);
+extern int headType(int tickLen, DurationType* type, int* dots);
+extern int pitchKeyAdjust(int note, int key);
+extern int line2pitch(int line, int clef, int key);
+extern int y2pitch(double y, int clef);
 
 #endif
 

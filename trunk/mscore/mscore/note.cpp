@@ -42,6 +42,7 @@
 #include "tremolo.h"
 #include "chordproperties.h"
 #include "icons.h"
+#include "utils.h"
 
 int Note::noteHeads[HEAD_GROUPS][4] = {
       { wholeheadSym,         halfheadSym,         quartheadSym,    brevisheadSym},
@@ -579,7 +580,8 @@ void Note::endDrag()
       _line      += _lineOffset;
       _lineOffset = 0;
       int clef    = chord()->staff()->clef()->clef(chord()->tick());
-      setPitch(line2pitch(_line, clef));
+      int key     = staff()->keymap()->key(chord()->tick());
+      setPitch(line2pitch(_line, clef, key));
       }
 
 //---------------------------------------------------------

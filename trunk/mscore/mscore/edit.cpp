@@ -43,6 +43,7 @@
 #include "image.h"
 #include "keysig.h"
 #include "beam.h"
+#include "utils.h"
 
 //---------------------------------------------------------
 //   selectNoteMessage
@@ -390,9 +391,14 @@ void Score::putNote(const QPointF& pos, bool replace)
       if (m == 0)
             return;
 
+      int key   = staff(staffIdx)->keymap()->key(tick);
       int clef  = staff(staffIdx)->clef()->clef(tick);
-      int pitch = line2pitch(line, clef);
+      int pitch = line2pitch(line, clef, key);
       int len   = _padState.tickLen;
+
+      int octave = pitch / 12;
+      int note   = pitch % 12;
+
       int voice = _padState.voice;
       int track = staffIdx * VOICES + voice;
 

@@ -161,7 +161,6 @@ static bool endBeam(int tsZ, int tsN, int l, int p)
                   if (pos != p)
                         continue;
                   }
-            printf("==endBeam rule %d match; %d/%d %d %d\n", i, tsZ, tsN, l, p);
             return true;
             }
       return false;
@@ -261,7 +260,6 @@ void Measure::layoutBeams1(ScoreLayout* layout)
             delete beam;
       _beamList.clear();
 
-printf("layout beams\n");
       int tracks = _score->nstaves() * VOICES;
       for (int track = 0; track < tracks; ++track) {
             ChordRest* a1 = 0;      // start of (potential) beam
@@ -288,7 +286,6 @@ printf("layout beams\n");
 
                   int len      = cr->tuplet() ? cr->tuplet()->baseLen() : cr->tickLen();
                   bool tooLong = len >= division;
-printf("  chordrest %4d len %3d\n", cr->tick() - tick(), len);
                   if (beam) {
                         //---------------------------------------
                         //   check for beam end
@@ -307,7 +304,6 @@ printf("  chordrest %4d len %3d\n", cr->tick() - tick(), len);
                               beam->layout1(layout);
                               beam = 0;
                               a1   = 0;
-printf("      endBeam %d %d %d\n", styleBreak, tooLong, bm == BEAM_BEGIN || bm == BEAM_NO);
                               goto newBeam;
                               }
                         else {
@@ -330,7 +326,6 @@ newBeam:
 //                        if (hint && a1 && endBeam(z, n, cr->tickLen(), cr->tick() - tick()))
 //                              hint = false;
                         if (hint) {
-printf("      startBeam\n");
                               if (a1 == 0)
                                     a1 = cr;
                               else {

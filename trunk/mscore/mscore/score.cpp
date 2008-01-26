@@ -60,6 +60,7 @@
 #include "ottava.h"
 #include "barline.h"
 #include "box.h"
+#include "utils.h"
 
 Score* gscore;                 ///< system score, used for palettes etc.
 
