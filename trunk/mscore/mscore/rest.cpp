@@ -26,6 +26,7 @@
 #include "viewer.h"
 #include "restproperties.h"
 #include "utils.h"
+#include "tuplet.h"
 
 //---------------------------------------------------------
 //   Rest
@@ -89,43 +90,44 @@ void Rest::setTickLen(int i)
             setSym(wholerestSym);
             return;
             }
-      else {
-            DurationType type;
-            headType(i, &type, &_dots);
-            switch(type) {
-                  case D_LONG:
-                        setSym(longarestSym);
-                        break;
-                  case D_BREVE:
-                        setSym(breverestSym);
-                        break;
-                  case D_WHOLE:
-                        setSym(wholerestSym);
-                        break;
-                  case D_HALF:
-                        setSym(halfrestSym);
-                        break;
-                  case D_QUARTER:
-                        setSym(quartrestSym);
-                        break;
-                  case D_EIGHT:
-                        setSym(eighthrestSym);
-                        break;
-                  case D_16TH:
-                        setSym(sixteenthrestSym);
-                        break;
-                  case D_32ND:
-                        setSym(thirtysecondrestSym);
-                        break;
-                  case D_64TH:
-                        setSym(sixtyfourthrestSym);
-                        break;
-                  case D_128TH:
-                        setSym(hundredtwentyeighthrestSym);
-                        break;
-                  case D_256TH:
-                        break;
-                  }
+      if (tuplet())
+            i = tuplet()->baseLen();
+
+      DurationType type;
+      headType(i, &type, &_dots);
+      switch(type) {
+            case D_LONG:
+                  setSym(longarestSym);
+                  break;
+            case D_BREVE:
+                  setSym(breverestSym);
+                  break;
+            case D_WHOLE:
+                  setSym(wholerestSym);
+                  break;
+            case D_HALF:
+                  setSym(halfrestSym);
+                  break;
+            case D_QUARTER:
+                  setSym(quartrestSym);
+                  break;
+            case D_EIGHT:
+                  setSym(eighthrestSym);
+                  break;
+            case D_16TH:
+                  setSym(sixteenthrestSym);
+                  break;
+            case D_32ND:
+                  setSym(thirtysecondrestSym);
+                  break;
+            case D_64TH:
+                  setSym(sixtyfourthrestSym);
+                  break;
+            case D_128TH:
+                  setSym(hundredtwentyeighthrestSym);
+                  break;
+            case D_256TH:
+                  break;
             }
       }
 

@@ -315,6 +315,7 @@ bool ChordRest::readProperties(QDomElement e)
                   printf("ChordRest::readProperties(): tuplet not found\n");
             else
                   _tuplet->add(this);
+            setTickLen(tickLen());  // set right symbol + dots
             }
       else if (tag == "small")
             _small = i;

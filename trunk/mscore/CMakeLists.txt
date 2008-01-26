@@ -147,7 +147,7 @@ configure_file (
       ${PROJECT_BINARY_DIR}/config.h
       )
 if (NOT MINGW)
-      install( FILES ${PROJECT_BINARY_DIR}/mscore.desktop DESTINATION share/applications)
+      install( FILES packaging/mscore.desktop DESTINATION share/applications)
 endif (NOT MINGW)
 
 if (USE_GLOBAL_FLUID)

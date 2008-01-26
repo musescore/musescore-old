@@ -76,6 +76,7 @@ class Tuplet : public Element {
       int baseLen() const          { return _baseLen;     }
       int normalNotes() const      { return _normalNotes; }
       int actualNotes() const      { return _actualNotes; }
+      int normalLen() const        { return _baseLen / _normalNotes; }
       int noteLen() const { return _baseLen * _normalNotes / _actualNotes; }
       ChordRestList* elements()    { return &_elements; }
 

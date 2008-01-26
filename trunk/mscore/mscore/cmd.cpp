@@ -493,8 +493,9 @@ void Score::cmdAddPitch(int note, bool addFlag)
       else {
             // insert note
             int len = _padState.tickLen;
-            if (cr->tuplet())
+            if (cr->tuplet()) {
                   len = cr->tuplet()->noteLen();
+                  }
             setNote(_is.pos, _is.track, _padState.pitch, len);
             _is.pos += len;
             }

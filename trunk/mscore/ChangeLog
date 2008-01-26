@@ -1,3 +1,7 @@
+25.1.8
+      - fix tuplet handling for tuplets with baseLen of 1/4
+      - another build fix: newest cmake does not understand empty "target_link_libraries()"
+      - fix build system: mscore.desktop was not found
 24.1.8
       - fixed Rest() initialization so that dottet rests work for
         musicxml import
