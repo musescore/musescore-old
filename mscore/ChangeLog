@@ -1,4 +1,6 @@
 26.1.8
+      - fixed note entry with mouse: clicking on on F space in a treble stave
+        gets a Fis in D major instead of wrong F natural
       - enhanced autobeamer based on lilypond beam tables
 25.1.8
       - fix tuplet handling for tuplets with baseLen of 1/4

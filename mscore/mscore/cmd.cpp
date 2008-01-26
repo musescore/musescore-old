@@ -418,25 +418,6 @@ void Score::cmdRemove(Element* e)
 
 void Score::cmdAddPitch(int note, bool addFlag)
       {
-      static int ptab[15][7] = {
-//             c  d  e  f  g   a  b
-            { -1, 1, 3, 4, 6,  8, 10 },     // Bes
-            { -1, 1, 3, 5, 6,  8, 10 },     // Ges
-            {  0, 1, 3, 5, 6,  8, 10 },     // Des
-            {  0, 1, 3, 5, 7,  8, 10 },     // As
-            {  0, 2, 3, 5, 7,  8, 10 },     // Es
-            {  0, 2, 3, 5, 7,  9, 10 },     // B
-            {  0, 2, 4, 5, 7,  9, 10 },     // F
-            {  0, 2, 4, 5, 7,  9, 11 },     // C
-            {  0, 2, 4, 6, 7,  9, 11 },     // G
-            {  1, 2, 4, 6, 7,  9, 11 },     // D
-            {  1, 2, 4, 6, 8,  9, 11 },     // A
-            {  1, 3, 4, 6, 8,  9, 11 },     // E
-            {  1, 3, 4, 6, 8, 10, 11 },     // H
-            {  1, 3, 5, 6, 8, 10, 11 },     // Fis
-            {  1, 3, 5, 6, 8, 10, 12 },     // Cis
-            };
-
       int octave    = _padState.pitch / 12;
       ChordRest* cr = 0;
       if (!noteEntryMode()) {
@@ -467,7 +448,7 @@ void Score::cmdAddPitch(int note, bool addFlag)
       int key = 7;
       if (!preferences.alternateNoteEntryMethod)
             key += cr->staff()->keymap()->key(_is.pos);
-      int pitch = ptab[key][note];
+      int pitch = pitchKeyAdjust(key, note);
 
       int delta = _padState.pitch - (octave*12 + pitch);
       if (delta > 6)

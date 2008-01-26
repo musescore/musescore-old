@@ -72,37 +72,6 @@
 #include "box.h"
 
 //---------------------------------------------------------
-//   y2pitch
-//---------------------------------------------------------
-
-int y2pitch(double y, int clef)
-      {
-      int l = lrint(y / _spatium * 2.0);
-      return line2pitch(l, clef);
-      }
-
-//---------------------------------------------------------
-//   line2pitch
-//    TODO: needs cleanup
-//---------------------------------------------------------
-
-int line2pitch(int line, int clef)
-      {
-      static const int pt[] = { 0, 2, 4, 5, 7, 9, 11, 12 };
-
-      int l = clefTable[clef].pitchOffset - line;
-      int octave = 0;
-      while (l < 0) {
-            l += 7;
-            octave++;
-            }
-      if (l > 74)
-            l = 74;
-      int pitch = pt[l % 7] + (l / 7 + octave) * 12;
-      return pitch;
-      }
-
-//---------------------------------------------------------
 //   MStaff
 //---------------------------------------------------------
 
