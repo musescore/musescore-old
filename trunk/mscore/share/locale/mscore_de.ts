@@ -138,6 +138,237 @@ p, li { white-space: pre-wrap; }
     </message>
 </context>
 <context>
+    <name>ChordEditor</name>
+    <message>
+        <source>Dialog</source>
+        <translation type="unfinished">Dialog</translation>
+    </message>
+    <message>
+        <source>TextLabel</source>
+        <translation type="unfinished">Textlabel</translation>
+    </message>
+    <message>
+        <source>Root</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>C</source>
+        <translation type="unfinished">C</translation>
+    </message>
+    <message>
+        <source>F#</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Db</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>G</source>
+        <translation type="unfinished">G</translation>
+    </message>
+    <message>
+        <source>D</source>
+        <translation type="unfinished">D</translation>
+    </message>
+    <message>
+        <source>Ab</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Eb</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>A</source>
+        <translation type="unfinished">A</translation>
+    </message>
+    <message>
+        <source>E</source>
+        <translation type="unfinished">E</translation>
+    </message>
+    <message>
+        <source>Bb</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>F</source>
+        <translation type="unfinished">F</translation>
+    </message>
+    <message>
+        <source>B</source>
+        <translation type="unfinished">B</translation>
+    </message>
+    <message>
+        <source>Extension</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Maj</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>2</source>
+        <translation type="unfinished">2</translation>
+    </message>
+    <message>
+        <source>Maj7</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Maj9</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>6</source>
+        <translation type="unfinished">6</translation>
+    </message>
+    <message>
+        <source>69</source>
+        <translation type="unfinished">69</translation>
+    </message>
+    <message>
+        <source>m</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>m7</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>m7b5</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>7</source>
+        <translation type="unfinished">7</translation>
+    </message>
+    <message>
+        <source>sus</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>7Sus</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>m6</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>m9</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>mMaj7</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>dim</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>9</source>
+        <translation type="unfinished">9</translation>
+    </message>
+    <message>
+        <source>13</source>
+        <translation type="unfinished">13</translation>
+    </message>
+    <message>
+        <source>7b9</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Other:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>5b</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>aug</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Maj9#11</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Maj13#11</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Maj13</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>+</source>
+        <translation type="unfinished">+</translation>
+    </message>
+    <message>
+        <source>Maj7#5</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Bass Note</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>none</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>/C</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>/Db</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>/D</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>/Eb</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>/E</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>/F</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>/F#</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>/G</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>/Ab</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>/A</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>/Bb</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>/B</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>ChordPropertyBase</name>
     <message>
         <source>Chord Properties</source>
