@@ -152,7 +152,11 @@ void Measure::layoutBeams1(ScoreLayout* layout)
                   //   check for beam end
                   //---------------------------------------
 
-                  bool tooLong = cr->tickLen() >= division;
+                  bool tooLong;
+                  if (cr->tuplet())
+                        tooLong = cr->tuplet()->baseLen() >= division;
+                  else
+                        tooLong = cr->tickLen() >= division;
                   if (beam) {
                         // end beam if there are chords/rests missing
                         // in voice:

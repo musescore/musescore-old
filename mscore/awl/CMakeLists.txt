@@ -105,7 +105,7 @@ set_target_properties( awlplugin
             "-D_GNU_SOURCE -D_REENTRANT -DHAVE_CONFIG_H -DQT_PLUGIN -DQT_SHARED -DQT_NO_DEBUG -include ${PROJECT_SOURCE_DIR}/all.h"
       )
 
-target_link_libraries( awlplugin
-      ""
-      )
+#target_link_libraries( awlplugin
+#      ""
+#      )
 endif (NOT MINGW)
