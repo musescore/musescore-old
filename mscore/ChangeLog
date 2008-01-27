@@ -1,4 +1,7 @@
+27.1.8 (ws)
+      - new "Transpose" function and dialog
 26.1.8 (ws)
+      - implement "Edit/Select All"
       - fixed note entry with mouse: clicking on on F space in a treble stave
         gets a Fis in D major instead of wrong F natural
       - enhanced autobeamer based on lilypond beam tables
