@@ -127,6 +127,7 @@ void Score::transpose()
                         }
                   }
             }
+      undoSetPitchSpellNeeded();
       spell();
       }
 
