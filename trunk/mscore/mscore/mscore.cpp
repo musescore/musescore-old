@@ -279,7 +279,7 @@ MuseScore::MuseScore()
          << "rewind" << "play" << "pause" <<"repeat"
          << "play-next-measure" << "play-next-chord" << "play-prev-measure" << "play-prev-chord"
          << "seek-begin" << "seek-end"
-         << "load-style" << "save-style"
+         << "load-style" << "save-style" << "select-all" << "transpose"
          ;
 
       foreach(const QString s, sl) {
@@ -485,6 +485,8 @@ MuseScore::MuseScore()
       menuEdit->addAction(a);
       selectionChanged(0);
       menuEdit->addSeparator();
+      menuEdit->addAction(getAction("select-all"));
+      menuEdit->addSeparator();
       menuEdit->addAction(tr("Part List..."), this, SLOT(startInstrumentListEditor()));
       menuEdit->addSeparator();
       menuEdit->addAction(tr("Page List..."), this, SLOT(startPageListEditor()));
@@ -547,6 +549,9 @@ MuseScore::MuseScore()
       menuNtole->addAction(getAction("triplet"));
       menuNtole->addAction(getAction("quintuplet"));
       menuNotes->addMenu(menuNtole);
+
+      menuNotes->addSeparator();
+      menuNotes->addAction(getAction("transpose"));
 
       //---------------------
       //    Menu Layout

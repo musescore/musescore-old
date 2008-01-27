@@ -233,6 +233,7 @@ class Score : public QObject {
       void cmdAddTie();
       void cmdAddHairpin(bool);
       void cmdAddStretch(double);
+      void transpose();
 
    public:
       Score();
@@ -285,6 +286,7 @@ class Score : public QObject {
       void undoChangeChordRestSize(ChordRest* cr, bool small);
       void undoChangeSubtype(Element* element, int st);
       void undoChangeNoteHead(Note*, int group);
+      void undoChangePitch(Note* note, int pitch);
       void undoChangeBeamMode(ChordRest* cr, int mode);
       void undoChangeEndBarLineType(Measure*, int);
       void undoChangeBarLineSpan(Staff*, int);

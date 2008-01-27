@@ -419,7 +419,7 @@ void Score::processUndoOp(UndoOp* i, bool undo)
                         if (i->val3 != NO_KEY) {
                               iClefEvent ik = kl->find(i->val1);
                               if (ik == kl->end())
-                                    printf("UndoOp::ChangeKey1: not found\n");
+                                    printf("UndoOp::ChangeKey1 %d: not found\n", i->val1);
                               else
                                     kl->erase(ik);
                               }
@@ -430,7 +430,7 @@ void Score::processUndoOp(UndoOp* i, bool undo)
                         if (i->val2 != NO_KEY) {
                               iKeyEvent ik = kl->find(i->val1);
                               if (ik == kl->end())
-                                    printf("UndoOp::ChangeKey2: not found\n");
+                                    printf("UndoOp::ChangeKey2 %d: not found\n", i->val1);
                               else
                                     kl->erase(ik);
                               }
@@ -781,6 +781,21 @@ void Score::undoChangeNoteHead(Note* note, int group)
       }
 
 //---------------------------------------------------------
+//   undoChangePitch
+//---------------------------------------------------------
+
+void Score::undoChangePitch(Note* note, int pitch)
+      {
+      checkUndoOp();
+      UndoOp i;
+      i.type     = UndoOp::ChangePitch;
+      i.element1 = note;
+      i.val1     = pitch;
+      undoList.back()->push_back(i);
+      processUndoOp(&undoList.back()->back(), false);
+      }
+
+//---------------------------------------------------------
 //   undoChangeBeamMode
 //---------------------------------------------------------
 
@@ -965,8 +980,8 @@ void Score::undoChangeTempo(int tick, const TEvent& o, const TEvent& n)
       UndoOp i;
       i.type = UndoOp::ChangeTempo;
       i.val1 = tick;
-      i.t1 = o;
-      i.t2 = n;
+      i.t1   = o;
+      i.t2   = n;
       undoList.back()->push_back(i);
       processUndoOp(&undoList.back()->back(), false);
       }
@@ -977,7 +992,7 @@ void Score::undoChangeKey(Staff* staff, int tick, int o, int n)
       UndoOp i;
       i.type = UndoOp::ChangeKey;
       i.val1 = tick;
-      i.val1 = o;
+      i.val2 = o;
       i.val3 = n;
       i.staff = staff;
       undoList.back()->push_back(i);
@@ -990,7 +1005,7 @@ void Score::undoChangeClef(Staff* staff, int tick, int o, int n)
       UndoOp i;
       i.type = UndoOp::ChangeClef;
       i.val1 = tick;
-      i.val1 = o;
+      i.val2 = o;
       i.val3 = n;
       i.staff = staff;
       undoList.back()->push_back(i);

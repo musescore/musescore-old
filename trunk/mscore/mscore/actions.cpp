@@ -1400,6 +1400,24 @@ Shortcut MuseScore::sc[] = {
          QT_TR_NOOP("Save Style"),
          &fileSaveIcon
          ),
+      Shortcut (
+         STATE_NORMAL | STATE_NOTE_ENTRY | STATE_PLAY,
+         "select-all",
+         QT_TR_NOOP("select all"),
+         Qt::CTRL+Qt::Key_A,
+         Qt::WindowShortcut,
+         QT_TR_NOOP("Select All"),
+         QT_TR_NOOP("Select All")
+         ),
+      Shortcut (
+         STATE_NORMAL,
+         "transpose",
+         QT_TR_NOOP("transpose"),
+         0,
+         Qt::WindowShortcut,
+         QT_TR_NOOP("Transpose..."),
+         QT_TR_NOOP("Transpose")
+         ),
       Shortcut(0, 0, 0),
       };
 

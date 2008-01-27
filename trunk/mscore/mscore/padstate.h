@@ -64,6 +64,7 @@ struct PadState {
             prefix   = 0;
             tie      = false;
             noteType = NOTE_NORMAL;
+            beamMode = BEAM_AUTO;
             }
       };
 

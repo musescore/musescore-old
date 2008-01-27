@@ -250,6 +250,8 @@ void ScoreLayout::processSystemHeader(Measure* m)
             // we assume that keysigs and clefs are only in the first
             // track of a segment
 
+            int keyIdx = staff->keymap()->key(tick) & 0xff;
+
             for (Segment* seg = m->first(); seg; seg = seg->next()) {
                   // search only up to the first ChordRest
                   if (seg->subtype() == Segment::SegChordRest)
@@ -262,8 +264,7 @@ void ScoreLayout::processSystemHeader(Measure* m)
                               {
                               hasKeysig = true;
                               KeySig* ks = (KeySig*)el;
-                              // no natural accidentals
-                              ks->setSubtype(ks->subtype() & 0xff);
+                              ks->setSubtype(keyIdx);
                               ks->setMag(staff->mag());
                               }
                               break;
@@ -279,13 +280,12 @@ void ScoreLayout::processSystemHeader(Measure* m)
                   //
                   // create missing key signature
                   //
-                  int idx = staff->keymap()->key(tick);
-                  if (idx) {
+                  if (keyIdx) {
                         KeySig* ks = new KeySig(_score);
                         ks->setStaffIdx(i);
                         ks->setTick(tick);
                         ks->setGenerated(true);
-                        ks->setSubtype(idx & 0xff);
+                        ks->setSubtype(keyIdx);
                         ks->setMag(staff->mag());
                         Segment* seg = m->getSegment(ks);
                         seg->add(ks);

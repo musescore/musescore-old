@@ -918,13 +918,8 @@ void Score::upDown(bool up, bool octave)
             if (newPitch > 127)
                   newPitch = 127;
 
-            UndoOp i;
-            i.type     = UndoOp::ChangePitch;
-            i.element1 = oNote;
-            i.val1     = oNote->pitch();
-            undoList.back()->push_back(i);
+            undoChangePitch(oNote, newPitch);
 
-            oNote->changePitch(newPitch);
             // play new note with velocity 80 for 0.3 sec:
             if (seq && mscore->playEnabled())
                   seq->startNote(oNote->staff()->part()->midiChannel(), newPitch, 80, 300);
@@ -1647,6 +1642,16 @@ void Score::cmd(const QString& cmd)
                   return cmdAddText(TEXT_CHORD);
             else if (cmd == "rehearsalmark-text")
                   return cmdAddText(TEXT_REHEARSAL_MARK);
+            else if (cmd == "select-all") {
+                  sel->setState(SEL_SYSTEM);
+                  sel->tickStart  = 0;
+                  sel->tickEnd    = _layout->last()->tick() + _layout->last()->tickLen();
+                  sel->staffStart = 0;
+                  sel->staffEnd   = nstaves();
+                  }
+            else if (cmd == "transpose") {
+                  transpose();
+                  }
             else
                   printf("unknown cmd <%s>\n", qPrintable(cmd));
             endCmd();
