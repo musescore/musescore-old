@@ -67,7 +67,6 @@ QT4_WRAP_UI (ui_headers
       jumpproperties.ui markerproperties.ui boxproperties.ui
       instrwizard.ui timesigwizard.ui newwizard.ui aboutbox.ui
       chordedit.ui transposedialog.ui
-#      repeatflagdialog.ui
       )
 
 QT4_WRAP_CPP (mocs
@@ -78,7 +77,7 @@ QT4_WRAP_CPP (mocs
       greendotbutton.h recordbutton.h editdrumset.h editstaff.h
       voltaproperties.h chordproperties.h restproperties.h repeatproperties.h
       jumpproperties.h markerproperties.h boxproperties.h newwizard.h
-      transposedialog.h
+      transposedialog.h chordedit.h
       )
 
 QT4_ADD_RESOURCES (qrc_files mscore.qrc)
@@ -126,6 +125,7 @@ add_executable ( mscore
       repeatproperties.cpp box.cpp measurebase.cpp
       repeat2.cpp instrtemplate.cpp boxproperties.cpp
       newwizard.cpp revision.cpp chordinfo.cpp transposedialog.cpp bb.cpp
+      harmony.cpp chordedit.cpp
       ${AUDIO}
       )
 

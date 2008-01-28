@@ -58,6 +58,7 @@
 #include "volta.h"
 #include "dynamics.h"
 #include "box.h"
+#include "harmony.h"
 
 //---------------------------------------------------------
 //   start
@@ -814,10 +815,9 @@ void Score::cmdAddChordName()
             }
       if (el->type() == NOTE)
             el = el->parent();
-      Text* s = new Text(this);
+      Harmony* s = new Harmony(this);
       s->setStaffIdx(el->staffIdx());
-      s->setSubtype(TEXT_CHORD);
-      s->setParent(((ChordRest*)el)->measure());
+      s->setParent(((Chord*)el)->measure());
       s->setTick(el->tick());
       undoAddElement(s);
       layoutAll = true;

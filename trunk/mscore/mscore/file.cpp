@@ -132,8 +132,10 @@ bool MuseScore::checkDirty(Score* s)
                "Save Current Score?"),
                tr("&Save"), tr("&Nosave"), tr("&Abort"), 0, 2);
             if (n == 0) {
-                  if (s->isSavable())
-                        s->saveFile();
+                  if (s->isSavable()) {
+                        if (!s->saveFile())
+                              return true;
+                        }
                   else {
                         if (!saveAs())
                               return true;
@@ -179,7 +181,7 @@ void MuseScore::loadFile()
             "Standard Midi File Files (*.mid);;"
             "Muse Data Files (*.md);;"
             "Lilypond Files (*.ly);;"
-            "BB Files (*.mgu);;"
+            "BB Files (*.mgu *.MGU *.sgu *.SGU);;"
             "All files (*)"
             )
          );
