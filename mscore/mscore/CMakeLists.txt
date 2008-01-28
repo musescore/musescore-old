@@ -125,7 +125,7 @@ add_executable ( mscore
       voltaproperties.cpp chordproperties.cpp restproperties.cpp
       repeatproperties.cpp box.cpp measurebase.cpp
       repeat2.cpp instrtemplate.cpp boxproperties.cpp
-      newwizard.cpp revision.cpp chordinfo.cpp transposedialog.cpp
+      newwizard.cpp revision.cpp chordinfo.cpp transposedialog.cpp bb.cpp
       ${AUDIO}
       )
 

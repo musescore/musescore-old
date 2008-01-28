@@ -1,3 +1,6 @@
+28.1.8 (ws)
+      - first code for "band in a box" file import
+      - fixed typo in call to pitchKeyAdjust();
 27.1.8 (ws)
       - new "Transpose" function and dialog
 26.1.8 (ws)

@@ -23,6 +23,7 @@
 #include "part.h"
 #include "note.h"
 #include "drumset.h"
+#include "utils.h"
 
 extern QTextStream cout;
 extern QTextStream eout;
@@ -1040,20 +1041,6 @@ void MidiFile::process1()
       }
 
 //---------------------------------------------------------
-//   quantizeLen
-//---------------------------------------------------------
-
-static int quantizeLen(int, int len, int raster)
-      {
-      int rl = ((len + raster - 1) / raster) * raster;
-      rl /= 2;
-      if (rl == 0)
-            rl = 1;
-      rl = ((len + rl - 1) / rl) * rl;
-      return rl;
-      }
-
-//---------------------------------------------------------
 //   quantize
 //    process one segment (measure)
 //---------------------------------------------------------
@@ -1234,8 +1221,7 @@ void MidiFile::sortTracks()
 
 void MidiFile::separateChannel()
       {
-      int n = _tracks.size();
-printf("separate channel for %d tracks\n", n);
+      //int n = _tracks.size();
       for (int i = 0; i < _tracks.size(); ++i) {
             QList<int> channel;
             MidiTrack* mt = _tracks.at(i);

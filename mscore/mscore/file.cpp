@@ -179,6 +179,7 @@ void MuseScore::loadFile()
             "Standard Midi File Files (*.mid);;"
             "Muse Data Files (*.md);;"
             "Lilypond Files (*.ly);;"
+            "BB Files (*.mgu);;"
             "All files (*)"
             )
          );

@@ -149,3 +149,18 @@ int main(int argc, char* argv[])
       return 0;
       }
 
+//---------------------------------------------------------
+//   quantizeLen
+//---------------------------------------------------------
+
+int quantizeLen(int, int len, int raster)
+      {
+      int rl = ((len + raster - 1) / raster) * raster;
+      rl /= 2;
+      if (rl == 0)
+            rl = 1;
+      rl = ((len + rl - 1) / rl) * rl;
+      return rl;
+      }
+
+

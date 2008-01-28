@@ -373,8 +373,6 @@ class MidiTrack {
       friend class MidiFile;
       };
 
-typedef QList<MidiTrack*> MidiTrackList;
-
 //---------------------------------------------------------
 //   MidiFile
 //---------------------------------------------------------
@@ -382,7 +380,7 @@ typedef QList<MidiTrack*> MidiTrackList;
 class MidiFile {
       SigList _siglist;
       QIODevice* fp;
-      MidiTrackList _tracks;
+      QList<MidiTrack*> _tracks;
       int _division;
       int _format;               ///< midi file format (0-2)
       bool _noRunningStatus;     ///< do not use running status on output
@@ -421,7 +419,7 @@ class MidiFile {
       bool write(QIODevice*);
       void readXml(QDomElement);
 
-      MidiTrackList* tracks()       { return &_tracks;  }
+      QList<MidiTrack*>* tracks()   { return &_tracks;  }
       MidiType midiType() const     { return _midiType; }
       void setMidiType(MidiType mt) { _midiType = mt;   }
       int format() const            { return _format;   }
