@@ -448,7 +448,8 @@ void Score::cmdAddPitch(int note, bool addFlag)
       int key = 7;
       if (!preferences.alternateNoteEntryMethod)
             key += cr->staff()->keymap()->key(_is.pos);
-      int pitch = pitchKeyAdjust(key, note);
+      int pitch = pitchKeyAdjust(note, key);
+      printf("pitch %d  key %d note %d\n", pitch, key, note);
 
       int delta = _padState.pitch - (octave*12 + pitch);
       if (delta > 6)
@@ -779,6 +780,49 @@ bool Score::setRest(int tick, int track, int len, bool useDots)
             setRest(tick + len, noteLen - len, track, measure);
       layoutAll = true;
       return true;
+      }
+
+//---------------------------------------------------------
+//   cmdAddChordName
+//---------------------------------------------------------
+
+void Score::cmdAddChordName()
+      {
+      if (editObject) {
+            endEdit();
+            endCmd();
+            }
+      Page* page = _layout->pages().front();
+      const QList<System*>* sl = page->systems();
+      if (sl == 0 || sl->empty()) {
+            printf("first create measure, then repeat operation\n");
+            return;
+            }
+      const QList<MeasureBase*>& ml = sl->front()->measures();
+      if (ml.empty()) {
+            printf("first create measure, then repeat operation\n");
+            return;
+            }
+      Element* el = sel->element();
+      if (!el || (el->type() != NOTE && el->type() != REST)) {
+            QMessageBox::information(0, "MuseScore: Text Entry",
+               tr("No note or rest selected:\n"
+               "please select a note or rest were you want to\n"
+               "start text entry"));
+            endCmd();
+            return;
+            }
+      if (el->type() == NOTE)
+            el = el->parent();
+      Text* s = new Text(this);
+      s->setStaffIdx(el->staffIdx());
+      s->setSubtype(TEXT_CHORD);
+      s->setParent(((ChordRest*)el)->measure());
+      s->setTick(el->tick());
+      undoAddElement(s);
+      layoutAll = true;
+      select(s, 0, 0);
+      canvas()->startEdit(s);
       }
 
 //---------------------------------------------------------
@@ -1639,7 +1683,7 @@ void Score::cmd(const QString& cmd)
             else if (cmd == "system-text")
                   return cmdAddText(TEXT_SYSTEM);
             else if (cmd == "chord-text")
-                  return cmdAddText(TEXT_CHORD);
+                  return cmdAddChordName();
             else if (cmd == "rehearsalmark-text")
                   return cmdAddText(TEXT_REHEARSAL_MARK);
             else if (cmd == "select-all") {

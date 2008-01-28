@@ -752,7 +752,7 @@ void ExportMidi::writeHeader()
       //    assume every staff corresponds to a midi track
       //---------------------------------------------------
 
-      MidiTrackList* tl = mf.tracks();
+      QList<MidiTrack*>* tl = mf.tracks();
       for (int i = 0; i < tl->size(); ++i) {
             MidiTrack* track  = tl->at(i);
 
@@ -809,7 +809,7 @@ bool ExportMidi::write(const QString& name)
 
       mf.setDivision(::division);
       mf.setFormat(1);
-      MidiTrackList* tracks = mf.tracks();
+      QList<MidiTrack*>* tracks = mf.tracks();
       int nstaves = cs->nstaves();
 
       for (int i = 0; i < nstaves; ++i)
@@ -900,7 +900,7 @@ void Score::convertMidi(MidiFile* mf)
 
       *sigmap = mf->siglist();
 
-      MidiTrackList* tracks = mf->tracks();
+      QList<MidiTrack*>* tracks = mf->tracks();
 
       //---------------------------------------------------
       //  remove empty tracks

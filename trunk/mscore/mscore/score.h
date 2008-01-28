@@ -59,6 +59,7 @@ class MidiTrack;
 class BSymbol;
 class KeySig;
 class Volta;
+class BBTrack;
 
 struct Style;
 struct SigEvent;
@@ -154,6 +155,7 @@ class Score : public QObject {
       void moveUp(Note*);
       void moveDown(Note*);
       void convertTrack(MidiTrack*, int);
+      void convertTrack(BBTrack*, int);
       void checkUndoOp();
       void pasteStaff(const QMimeData* ms);
       void move(const QString& cmd);
@@ -172,6 +174,9 @@ class Score : public QObject {
       MeasureBase* searchLabel(const QString& s, MeasureBase* start = 0);
       void undoSigInsertTime(int, int);
       void undoFixTicks();
+
+      void cmdAddText(int style);
+      void cmdAddChordName();
 
    public slots:
       void doUndo();
@@ -308,7 +313,6 @@ class Score : public QObject {
       void doLayout();
       void reLayout(Measure*);
 
-      void cmdAddText(int style);
       void upDown(bool up, bool octave);
       Element* searchNote(int tick, int track) const;
 
@@ -396,6 +400,7 @@ class Score : public QObject {
       bool importMidi(const QString& name);
       bool importMuseData(const QString& name);
       bool importLilypond(const QString& name);
+      bool importBB(const QString& name);
 
       void print(QPrinter* printer);
       bool saveXml(const QString& name);

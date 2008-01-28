@@ -263,6 +263,10 @@ void Score::read(QString name)
             if (!importLilypond(name))
                   return;
             }
+      else if (info.completeSuffix() == "mgu" || info.completeSuffix() == "MGU") {
+            if (!importBB(name))
+                  return;
+            }
       else {
             loadMsc(name);
             }

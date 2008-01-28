@@ -173,8 +173,6 @@ class MidiTrack {
       int key() const                   { return _key;        }
       };
 
-typedef QList<MidiTrack*> MidiTrackList;
-
 //---------------------------------------------------------
 //   MidiType
 //---------------------------------------------------------
@@ -189,7 +187,7 @@ enum MidiType {
 
 class MidiFile {
       Score* cs;
-      MidiTrackList _tracks;
+      QList<MidiTrack*> _tracks;
       int timesig_z, timesig_n;
       int status, click;
       int sstatus;
@@ -224,8 +222,8 @@ class MidiFile {
       bool read();
       bool write();
       const char* error;
-      MidiTrackList* tracks()   { return &_tracks; }
-      MidiType midiType() const { return _midiType; }
+      QList<MidiTrack*>* tracks() { return &_tracks; }
+      MidiType midiType() const   { return _midiType; }
 
       QString title, subTitle, composer, translator, poet;
       };

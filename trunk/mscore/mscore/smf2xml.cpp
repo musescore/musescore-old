@@ -163,7 +163,7 @@ int main(int argc, char* argv[])
             xml.tag("format", mf.format());
             xml.tag("division", mf.division());
 
-            MidiTrackList* tl = mf.tracks();
+            QList<MidiTrack*>* tl = mf.tracks();
             foreach(MidiTrack* t, *tl) {
                   if (cleanup)
                         t->cleanup();
@@ -178,5 +178,19 @@ int main(int argc, char* argv[])
       delete out;
       delete in;
       return 0;
+      }
+
+//---------------------------------------------------------
+//   quantizeLen
+//---------------------------------------------------------
+
+int quantizeLen(int, int len, int raster)
+      {
+      int rl = ((len + raster - 1) / raster) * raster;
+      rl /= 2;
+      if (rl == 0)
+            rl = 1;
+      rl = ((len + rl - 1) / rl) * rl;
+      return rl;
       }
 

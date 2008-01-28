@@ -18,7 +18,6 @@
 //  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //=============================================================================
 
-#include "utils.h"
 #include "score.h"
 #include "page.h"
 #include "segment.h"
@@ -26,6 +25,7 @@
 #include "recordbutton.h"
 #include "greendotbutton.h"
 #include "clef.h"
+#include "utils.h"
 
 //---------------------------------------------------------
 //   RecordButton
@@ -365,4 +365,17 @@ int line2pitch(int line, int clef, int key)
       return pitchKeyAdjust(l, key) + octave * 12;
       }
 
+//---------------------------------------------------------
+//   quantizeLen
+//---------------------------------------------------------
+
+int quantizeLen(int, int len, int raster)
+      {
+      int rl = ((len + raster - 1) / raster) * raster;
+      rl /= 2;
+      if (rl == 0)
+            rl = 1;
+      rl = ((len + rl - 1) / rl) * rl;
+      return rl;
+      }
 
