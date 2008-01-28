@@ -1,4 +1,7 @@
 28.1.8 (ws)
+      - fixed bad behaviour when exiting with unsaved score; abort in file dialog
+        skips save but does also end mscore
+      - first code for chord name editor
       - first code for "band in a box" file import
       - fixed typo in call to pitchKeyAdjust();
 27.1.8 (ws)

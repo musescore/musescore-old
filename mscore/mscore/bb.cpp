@@ -183,9 +183,14 @@ bool BBFile::read(const QString& name)
       _version = a[0];
 
       f.close();
-      if (_version != 0x47 && _version != 0x49) {
-            printf("BB: unknown file version %02x\n", _version);
-            return false;
+      switch(_version) {
+            case 0x47:
+            case 0x49:
+            case 0x44:        // melody not found
+                  break;
+            default:
+                  printf("BB: unknown file version %02x\n", _version);
+                  return false;
             }
       int idx = 1;
       int len = a[idx++];
@@ -198,27 +203,21 @@ bool BBFile::read(const QString& name)
       ++idx;
       _style = a[idx++];
       _key   = a[idx++];
-      _bpm   = a[idx++];
+      _bpm   = a[idx] + a[idx+1] << 8;
+      idx += 2;
 
       printf("Title <%s>\n", _title);
       printf("style %d\n",   _style);
       printf("key   %d  %s\n", _key, keys[_key]);
       printf("bpm   %d\n", _bpm);
 
-      for (int i = 0; i < 256;) {
+      int bar = a[idx++];
+      while (bar < 255) {
             int val = a[idx++];
-            if (val == 0) {
-                  int val2 = a[idx++];
-                  if (val2 == 0) {
-                        printf("bad format 1\n");
-                        return false;
-                        }
-                  i += val2;
-                  }
-            else {
-                  printf("style map entry at %d: %d\n", i, val);
-                  ++i;
-                  }
+            if (val == 0)
+                  bar += a[idx++];
+            else
+                  bar++;
             }
 
       printf("read ChordExt table at %x\n", idx);
@@ -294,17 +293,21 @@ bool BBFile::read(const QString& name)
             }
 
       //
-      // look for A0 B0 C1
+      // look for A0 B0 C1    0x90 events
+      // look for A0 B0 C0    0x93 events + 0x90 events
 
       for (i = idx; i < size; ++i) {
-            if (a[i] == 0xa0 && a[i+1] == 0xb0 && a[i+2] == 0xc1)
+//            if (a[i] == 0xa0 && a[i+1] == 0xb0 && ((a[i+2] == 0xc1) || (a[i+2] == 0xc0)))
+            if ((a[i] == 0xa0) && (a[i+1] == 0xb0) && (a[i+2] == 0xc1))
                   break;
             }
       if (i == size) {
             printf("melody not found\n");
+            return false;
             }
       else {
             idx = i + 3;
+            printf("melody found at 0x%x\n", idx);
             int maxNotes = (size - idx) / 12;
             int n = qMin(maxNotes, eventCount-1);  // -1?
             for (int i = 0; i < n; ++i) {
