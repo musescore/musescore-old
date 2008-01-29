@@ -42,9 +42,10 @@ bool useALSA = false, useJACK = false, usePortaudio = false;
 QString appStyleSheet(
       "PaletteBoxButton  { background-color: rgb(215, 215, 215); font-size: 8pt; }\n"
       "PaletteBox        { background-color: rgb(230, 230, 230) }\n"
-      "PlayPanel QLabel#posLabel { font-size: 28pt; font-family: \"Arial black\" }\n"
-      "PlayPanel QLabel#tempoLabel { font-size: 10pt; font-family: \"Arial black\" }\n"
-      "PlayPanel QLabel#relTempo { font-size: 10pt; font-family: \"Arial black\" }\n"
+      "PlayPanel QLabel#posLabel   { font-size: 28pt; font-family: \"San Serif\" }\n"
+      "ChordEdit QLabel#chordLabel { font-size: 24pt; font-family: \"San Serif\" }\n"
+      "PlayPanel QLabel#tempoLabel { font-size: 10pt; font-family: \"San Serif\" }\n"
+      "PlayPanel QLabel#relTempo   { font-size: 10pt; font-family: \"San Serif\" }\n"
       );
 
 //---------------------------------------------------------

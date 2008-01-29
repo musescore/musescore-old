@@ -41,86 +41,6 @@ const char* keys[] = {
       };
 
 //---------------------------------------------------------
-//   getExtName
-//---------------------------------------------------------
-
-const char* getExtName(int i)
-      {
-      switch(i) {
-            case   0:
-            case   1:
-                  return "";
-            case   2: return "maj";
-            case   3: return  "5b";
-            case   4: return  "aug";
-            case   5: return "6";
-            case   6: return "maj7";
-            case   7: return "maj9";
-            case   8: return "maj9#11";
-            case   9: return "maj13#11";
-            case  10: return "maj13";
-            case  12: return "+";
-            case  13: return "maj7#5";
-            case  14: return "69";
-            case  15: return "2";
-            case  16: return "m";
-            case  17: return "maug";
-            case  18: return "mM7";
-            case  19: return "m7";
-            case  20: return "m9";
-            case  21: return "m11";
-            case  22: return "m13";
-            case  23: return "m6";
-            case  24: return "m#5";
-            case  25: return "m7#5";
-            case  26: return "m69";
-            case  32: return "m7b5";
-            case  33: return "dim";
-            case  34: return "m9b5";
-            case  40: return "5";
-            case  56: return "7+";
-            case  57: return "+";
-            case  58: return "13+";
-            case  64: return "7";
-            case  65: return "13";
-            case  66: return "7b13";
-            case  67: return "7#11";
-            case  70: return "9";         //??
-            case  71: return "9b13";      //??
-            case  73: return "9#11";
-            case  74: return "13#11";
-            case  76: return "7b9";
-            case  77: return "13b9";
-            case  79: return "7b9#11";
-            case  82: return "7#9";
-            case  83: return "13#9";
-            case  84: return "7#9b13";
-            case  85: return "9#11";
-            case  88: return "7b5";
-            case  89: return "13b5";
-            case  91: return "9b5";
-            case  93: return "7b5b9";
-            case  96: return "7b5#9";
-            case  99: return "7#5";
-            case 103: return "9#5";
-            case 105: return "7#5b9";
-            case 109: return "7#5#9";
-            case 113: return "7alt";
-            case 128: return "7sus";
-            case 129: return "13sus";
-            case 134: return "11";
-            case 140: return "7susb9";
-            case 146: return "7sus#9";
-            case 163: return "7sus#5";
-            case 177: return "4";
-            case 184: return "sus";
-            default:
-                  break;
-            }
-      return "??";
-      }
-
-//---------------------------------------------------------
 //   BBTrack
 //---------------------------------------------------------
 
@@ -199,7 +119,7 @@ bool BBFile::read(const QString& name)
             _title[i] = a[idx++];
       _title[len] = 0;
 
-      ++idx;            // 00, (0x78 | 0x73)
+      ++idx;
       ++idx;
       _style = a[idx++];
       _key   = a[idx++];
@@ -211,7 +131,7 @@ bool BBFile::read(const QString& name)
       printf("key   %d  %s\n", _key, keys[_key]);
       printf("bpm   %d\n", _bpm);
 
-      int bar = a[idx++];
+      int bar = a[idx++];           // starting bar number
       while (bar < 255) {
             int val = a[idx++];
             if (val == 0)
@@ -222,31 +142,35 @@ bool BBFile::read(const QString& name)
 
       printf("read ChordExt table at %x\n", idx);
 
-      int maxChord = 0;
-      for (int i = 1; i < 1021;) {
+      int chords = 0;
+      for (int i = 0; i < 1020;) {
             int val = a[idx++];
             if (val == 0)
                   i += a[idx++];
             else {
-                  _chordExt[i-1] = val;
-                  maxChord = i - 1;
+                  _chordExt[i] = val;
+                  chords = i;
                   ++i;
                   }
             }
 
       printf("read ChordBase table at %x\n", idx);
 
-      for (int i = 1; i < 1022;) {
+      for (int i = 0; i < 1020;) {
             int val = a[idx++];
             if (val == 0)
                   i += a[idx++];
-            else {
-                  _chordBase[i-1] = val;
-                  ++i;
-                  }
+            else
+                  _chordBase[i++] = val;
             }
+//      printf("================chords=======================\n");
+//      for (int i = 0; i < 1022; ++i) {
+//            if (_chordBase[i])
+//                  printf("base %d  ext %d\n", _chordBase[i], _chordExt[i]);
+//            }
+//      printf("================chords=======================\n");
 
-      _measures = (maxChord+3) / 4;
+      _measures = (chords+3) / 4;
       printf("Measures %d\n", _measures);
 
       _startChorus = a[idx++];

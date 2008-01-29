@@ -247,23 +247,25 @@ void Score::read(QString name)
       _saved = false;
       info.setFile(name);
 
-      if (info.completeSuffix() == "xml")
+      QString cs = info.completeSuffix();
+
+      if (cs == "xml")
             importMusicXml(name);
-      else if (info.completeSuffix() == "mxl")
+      else if (cs == "mxl")
             importCompressedMusicXml(name);
-      else if (info.completeSuffix().toLower() == "mid") {
+      else if (cs.toLower() == "mid") {
             if (!importMidi(name))
                   return;
             }
-      else if (info.completeSuffix() == "md") {
+      else if (cs == "md") {
             if (!importMuseData(name))
                   return;
             }
-      else if (info.completeSuffix() == "ly") {
+      else if (cs == "ly") {
             if (!importLilypond(name))
                   return;
             }
-      else if (info.completeSuffix() == "mgu" || info.completeSuffix() == "MGU") {
+      else if (cs.toLower() == "mgu" || cs.toLower() == "sgu") {
             if (!importBB(name))
                   return;
             }

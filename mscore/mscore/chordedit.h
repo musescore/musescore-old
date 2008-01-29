@@ -30,8 +30,21 @@
 class ChordEdit : public QDialog, Ui::ChordEdit {
       Q_OBJECT
 
+      QButtonGroup* rootGroup;
+      QButtonGroup* extensionGroup;
+
+   private slots:
+      void otherToggled(bool);
+      void chordChanged();
+
    public:
       ChordEdit(QWidget* parent = 0);
+      void setExtension(int val);
+      void setRoot(int val);
+      void setBase(int val);
+      int extension();
+      int root();
+      int base();
       };
 
 #endif

@@ -446,11 +446,10 @@ void Score::cmdAddPitch(int note, bool addFlag)
       if (!noteEntryMode())
             return;
 
-      int key = 7;
+      int key = 0;
       if (!preferences.alternateNoteEntryMethod)
-            key += cr->staff()->keymap()->key(_is.pos);
+            key = cr->staff()->keymap()->key(_is.pos);
       int pitch = pitchKeyAdjust(note, key);
-      printf("pitch %d  key %d note %d\n", pitch, key, note);
 
       int delta = _padState.pitch - (octave*12 + pitch);
       if (delta > 6)

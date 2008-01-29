@@ -311,6 +311,7 @@ int headType(int tickLen, DurationType* type, int* dots)
 //    change entered note to sounding pitch dependend
 //    on key.
 //    Example: if F is entered in G-major, a Fis is played
+//    key -7 ... +7
 //---------------------------------------------------------
 
 int pitchKeyAdjust(int note, int key)
@@ -333,7 +334,7 @@ int pitchKeyAdjust(int note, int key)
             {  1, 3, 5, 6, 8, 10, 11 },     // Fis
             {  1, 3, 5, 6, 8, 10, 12 },     // Cis
             };
-      return ptab[key][note];
+      return ptab[key+7][note];
       }
 
 //---------------------------------------------------------
@@ -348,6 +349,7 @@ int y2pitch(double y, int clef)
 
 //---------------------------------------------------------
 //   line2pitch
+//    key  -7 ... +7
 //---------------------------------------------------------
 
 int line2pitch(int line, int clef, int key)
