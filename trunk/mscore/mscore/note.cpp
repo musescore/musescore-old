@@ -94,10 +94,10 @@ Note::Note(Score* s)
       _dots           = 0;
       _tieFor         = 0;
       _tieBack        = 0;
-      _head           = 0;
       _tpc            = -1;
       _headGroup      = 0;
       _hidden         = false;
+      _head = noteHeads[0][2];
       }
 
 //---------------------------------------------------------
@@ -239,6 +239,8 @@ void Note::add(Element* el)
 	      	tie->setStartNote(this);
                   tie->setStaffIdx(staffIdx());
       		setTieFor(tie);
+                  if (tie->endNote())
+                        tie->endNote()->setTieBack(tie);
                   }
                   break;
             case ACCIDENTAL:
@@ -280,21 +282,22 @@ void Note::remove(Element* el)
                         printf("Note::remove: fingering not found\n");
                   }
                   break;
-#if 0 // TODO
 	      case TIE:
                   {
                   Tie* tie = (Tie*) el;
                   setTieFor(0);
                   if (tie->endNote())
                         tie->endNote()->setTieBack(0);
+#if 0
             	QList<SlurSegment*>* el = tie->elements();
                   for (iElement i = el->begin(); i != el->end(); ++i) {
       	            score()->removeElement(*i);
                         }
                   el->clear();
+#endif
                   }
                   break;
-#endif
+
             case ACCIDENTAL:
                   _accidental = 0;
                   break;
@@ -581,7 +584,8 @@ void Note::endDrag()
       _lineOffset = 0;
       int clef    = chord()->staff()->clef()->clef(chord()->tick());
       int key     = staff()->keymap()->key(chord()->tick());
-      setPitch(line2pitch(_line, clef, key));
+      int npitch = line2pitch(_line, clef, key);
+      setPitch(npitch);
       }
 
 //---------------------------------------------------------
@@ -663,6 +667,7 @@ bool Note::acceptDrop(Viewer* viewer, const QPointF&, int type, int subtype) con
          || type == BREATH
          || type == ARPEGGIO
          || type == NOTEHEAD
+         || type == NOTE
          || type == TREMOLO
          || type == IMAGE
          || (noteType() == NOTE_NORMAL && type == ICON && subtype == ICON_ACCIACCATURA)
@@ -818,6 +823,15 @@ Element* Note::drop(const QPointF&, const QPointF&, Element* e)
                   delete e;
                   break;
 
+            case NOTE:
+                  {
+                  Chord* ch = chord();
+                  e->setParent(ch);
+                  score()->undoRemoveElement(this);
+                  score()->undoAddElement(e);
+                  }
+                  break;
+
             default:
                   printf("note: cannot accept drop %s\n", e->name());
                   delete e;
@@ -866,6 +880,8 @@ void Note::propertyAction(const QString& s)
 
 void Note::layout(ScoreLayout* layout)
       {
+      if (parent() == 0)
+            return;
       setMag(chord()->mag());
       if (_accidental)
             _accidental->setMag(mag());
@@ -890,6 +906,8 @@ NoteType Note::noteType() const
 
 QPointF Note::canvasPos() const
       {
+      if (parent() == 0)
+            return pos();
       double xp = x();
       for (Element* e = parent(); e; e = e->parent())
             xp += e->x();

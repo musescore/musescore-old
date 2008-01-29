@@ -858,7 +858,7 @@ void Score::deleteItem(Element* el)
                   break;
 
             default:
-                  printf("delete %s: not implemented\n", el->name());
+                  printf("deleteItem: %s: not implemented\n", el->name());
             }
       }
 

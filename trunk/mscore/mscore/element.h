@@ -59,6 +59,7 @@ enum ElementType {
 /*18*/ATTRIBUTE, DYNAMIC, PAGE, BEAM, HOOK, LYRICS, MARKER, JUMP,
       TUPLET, VSPACER,
       TEMPO_TEXT,
+      HARMONY,
       VOLTA,
       HAIRPIN_SEGMENT, OTTAVA_SEGMENT, PEDAL_SEGMENT, TRILL_SEGMENT, TEXTLINE_SEGMENT,
       VOLTA_SEGMENT,
@@ -93,6 +94,7 @@ class Element {
       Element* _parent;
 
       bool _selected;           ///< set if element is selected
+      bool _selectable;         ///< true if element is selectable
       mutable bool _dropTarget; ///< true, if element accepts drops
       bool _generated;          ///< automatically generated Element
       bool _visible;            ///< visibility attribute
@@ -141,6 +143,9 @@ class Element {
 
       bool selected() const                   { return _selected;   }
       virtual void setSelected(bool f)        { _selected = f;      }
+      bool selectable() const                 { return _selectable; }
+      void setSelectable(bool val)            { _selectable = val;  }
+
       bool visible() const                    { return _visible;    }
       virtual void setVisible(bool f)         { _visible = f;       }
       bool generated() const                  { return _generated;  }

@@ -1,3 +1,8 @@
+29.1.8 (ws)
+      - more code for Harmony() and ChordEdit()
+      - fixed weired selection behaviour; this enables again copy+drag&drop of measures
+        Still unresolved is the problem of selecting elements which are covered
+        by other elements (e.g. changing the "stacking order" of elements).
 28.1.8 (ws)
       - fixed bad behaviour when exiting with unsaved score; abort in file dialog
         skips save but does also end mscore

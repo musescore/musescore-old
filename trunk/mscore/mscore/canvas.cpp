@@ -77,8 +77,6 @@ Canvas::Canvas(QWidget* parent)
       _fgColor         = Qt::white;
       fgPixmap         = 0;
       bgPixmap         = 0;
-      lastSelected     = 0;
-
       lasso            = new Lasso(_score);
 
       setXoffset(30);
@@ -474,8 +472,7 @@ void Canvas::mouseDoubleClickEvent(QMouseEvent* ev)
       if (state == EDIT)
             return;
 
-
-      Element* element = lastSelected ? lastSelected : _score->dragObject();
+      Element* element = _score->dragObject();
 
       if (element) {
             _score->startCmd();
@@ -555,35 +552,18 @@ void Canvas::mouseMoveEvent1(QMouseEvent* ev)
                         return;
                   {
                   Element* de = _score->dragObject();
-                  Element* se = selectedElementAt(startMove);
-                  if (de != se) {
-                        _score->setDragObject(se);
-                        de = se;
-                        }
-
                   if (de && keyState == Qt::ShiftModifier) {
-                        if (de->type() == MEASURE) {
-                              QString mimeType = _score->sel->mimeType();
-                              if (!mimeType.isEmpty()) {
-                                    QDrag* drag = new QDrag(this);
-                                    QMimeData* mimeData = new QMimeData;
-                                    mimeData->setData(mimeType, score()->sel->mimeData());
-                                    drag->setMimeData(mimeData);
-                                    _score->endCmd();
-                                    drag->start(Qt::CopyAction);
-                                    break;
-                                    }
-                              }
-                        else {
+                        // drag selection
+                        QString mimeType = _score->sel->mimeType();
+                        if (!mimeType.isEmpty()) {
                               QDrag* drag = new QDrag(this);
                               QMimeData* mimeData = new QMimeData;
-                              QPointF rpos(startMove - de->abbox().topLeft());
-                              mimeData->setData(mimeSymbolFormat, de->mimeData(rpos));
+                              mimeData->setData(mimeType, score()->sel->mimeData());
                               drag->setMimeData(mimeData);
                               _score->endCmd();
                               drag->start(Qt::CopyAction);
-                              break;
                               }
+                        break;
                         }
                   if (de && de->isMovable()) {
                         QPointF o;
@@ -1488,6 +1468,7 @@ void Canvas::dragEnterEvent(QDragEnterEvent* event)
                   case JUMP:
                   case REPEAT_MEASURE:
                   case ICON:
+                  case NOTE:
                         el = Element::create(type, score());
                         break;
                   case BAR_LINE:
@@ -1720,6 +1701,7 @@ void Canvas::dropEvent(QDropEvent* event)
                   case JUMP:
                   case REPEAT_MEASURE:
                   case ICON:
+                  case NOTE:
                         {
                         Element* el = elementAt(pos);
                         if (el) {
@@ -1961,6 +1943,8 @@ void Canvas::wheelEvent(QWheelEvent* event)
 
 static bool elementLower(const Element* e1, const Element* e2)
       {
+      if (!e1->selectable())
+            return false;
       return e1->type() < e2->type();
       }
 
@@ -1980,27 +1964,7 @@ Element* Canvas::elementAt(const QPointF& p)
       foreach(const Element* e, el)
             printf("  %s %d\n", e->name(), e->selected());
 #endif
-
-      // if p hit more than one element, give back
-      // the element after the selected one;
-
-      int idx = 0;
-
-      if (_score->selection()->state() != SEL_NONE) {
-            Element* sel = _score->getSelectedElement();
-            lastSelected = sel;
-            int n = el.size();
-            for (int i = 0; i < n; ++i) {
-                  if ((el[i] == sel)  || ((sel == 0) && el[i]->type() == MEASURE)) {
-                        if (i < (n-1))
-                              idx = i + 1;
-                        break;
-                        }
-                  }
-            }
-      else
-            lastSelected = 0;
-      return const_cast<Element*>(el.at(idx));
+      return const_cast<Element*>(el.at(0));
       }
 
 //---------------------------------------------------------

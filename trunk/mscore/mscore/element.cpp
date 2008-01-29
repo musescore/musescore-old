@@ -74,6 +74,7 @@ const char* elementNames[] = {
       "Attribute", "Dynamic", "Page", "Beam", "Hook", "Lyrics", "Marker", "Jump",
       "Tuplet", "VSpacer",
       "TempoText",
+      "Harmony",
       "Volta",
       "HairpinSegment", "OttavaSegment", "PedalSegment", "TrillSegment", "TextLineSegment",
       "VoltaSegment",
@@ -117,6 +118,7 @@ void Element::init()
       {
       _parent     = 0;
       _selected   = false;
+      _selectable = true;
       _dropTarget = false;
       _visible    = true;
       _generated  = false;
@@ -503,6 +505,7 @@ StaffLines::StaffLines(Score* s)
       {
       setLines(5);
       _width = 1.0;      // dummy
+      setSelectable(false);
       }
 
 //---------------------------------------------------------
@@ -1090,7 +1093,11 @@ Element* Element::create(int type, Score* score)
             case ICON:
                   el = new Icon(score);
                   break;
+            case NOTE:
+                  el = new Note(score);
+                  break;
             default:
+                  printf("Element::create(): cannot create element type %d\n", type);
                   break;
             }
       return el;

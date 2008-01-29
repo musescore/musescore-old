@@ -70,6 +70,7 @@
 #include "repeat.h"
 #include "repeatflag.h"
 #include "box.h"
+#include "harmony.h"
 
 //---------------------------------------------------------
 //   MStaff
@@ -824,6 +825,7 @@ void Measure::add(Element* el)
             case TEXT:
             case TEMPO_TEXT:
             case IMAGE:
+            case HARMONY:
                   el->setAnchor(ANCHOR_SEGMENT);
 
             case MARKER:
@@ -884,6 +886,7 @@ void Measure::remove(Element* el)
             case TEXT:
             case SYMBOL:
             case IMAGE:
+            case HARMONY:
                   if (!_el.remove(el)) {
                         printf("Measure(%p)::remove(%s,%p) not found\n",
                            this, el->name(), el);
@@ -2257,6 +2260,14 @@ void Measure::read(QDomElement e, int idx)
                               add(t);
                               break;
                         }
+                  }
+            else if (tag == "Harmony") {
+                  Harmony* h = new Harmony(score());
+                  h->setTick(score()->curTick);
+                  h->read(e);
+                  h->setStaffIdx(idx);
+                  add(h);
+                  score()->curTick = h->tick();
                   }
             else if (tag == "Tempo") {
                   TempoText* t = new TempoText(score());

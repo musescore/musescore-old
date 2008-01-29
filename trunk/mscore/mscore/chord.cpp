@@ -227,8 +227,14 @@ void Chord::add(Element* e)
       e->setVoice(voice());
       e->setParent(this);
       e->setStaffIdx(staffIdx());
-      if (e->type() == NOTE)
-            notes.add((Note*)e);
+      if (e->type() == NOTE) {
+            Note* note = (Note*)e;
+            notes.add(note);
+            if (note->tieFor()) {
+                  if (note->tieFor()->endNote())
+                        note->tieFor()->endNote()->setTieBack(note->tieFor());
+                  }
+            }
       else if (e->type() == ATTRIBUTE)
             attributes.push_back((NoteAttribute*)e);
       else if (e->type() == ARPEGGIO)
@@ -249,6 +255,11 @@ void Chord::remove(Element* e)
             iNote i = notes.begin();
             for (; i != notes.end(); ++i) {
                   if (i->second == e) {
+                        Note* note = (Note*)e;
+                        if (note->tieFor()) {
+                              if (note->tieFor()->endNote())
+                                    note->tieFor()->endNote()->setTieBack(0);
+                              }
                         notes.erase(i);
                         break;
                         }

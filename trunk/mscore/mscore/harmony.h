@@ -28,14 +28,31 @@
 //---------------------------------------------------------
 
 class Harmony : public Text {
+      unsigned char _base;
+      unsigned char _extension;
+      unsigned char _root;
 
    public:
       Harmony(Score*);
       ~Harmony();
-      virtual Harmony* clone() const  { return new Harmony(*this); }
+      virtual Harmony* clone() const   { return new Harmony(*this); }
+      virtual ElementType type() const { return HARMONY; }
 
       virtual bool genPropertyMenu(QMenu*) const;
       virtual void propertyAction(const QString&);
+
+      unsigned char base() const           { return _base;      }
+      void setBase(unsigned char val)      { _base = val;       }
+      unsigned char extension() const      { return _extension; }
+      void setExtension(unsigned char val) { _extension = val;  }
+      unsigned char root() const           { return _root;      }
+      void setRoot(unsigned char val)      { _root = val;       }
+
+      virtual void write(Xml& xml) const;
+      virtual void read(QDomElement);
+      QString harmonyName() const { return harmonyName(root(), extension(), base()); }
+      static const char* getExtensionName(int i);
+      static QString harmonyName(int root, int extension, int base);
       };
 
 #endif
