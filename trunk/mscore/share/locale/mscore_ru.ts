@@ -138,7 +138,7 @@ p, li { white-space: pre-wrap; }
     </message>
 </context>
 <context>
-    <name>ChordEditor</name>
+    <name>ChordEdit</name>
     <message>
         <source>Dialog</source>
         <translation type="unfinished">Диалог</translation>
@@ -310,6 +310,418 @@ p, li { white-space: pre-wrap; }
     <message>
         <source>Maj7#5</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>maug</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>m11</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>m13</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>m#5</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>m7#5</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>m69</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Maj7Lyd</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Maj7b5</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>m9b5</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>5</source>
+        <translation type="unfinished">5</translation>
+    </message>
+    <message>
+        <source>7+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>9+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>13+</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>(blues)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>7(Blues)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>7b13</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>7#11</source>
+        <translation type="unfinished">7#11</translation>
+    </message>
+    <message>
+        <source>13#11</source>
+        <translation type="unfinished">13#11</translation>
+    </message>
+    <message>
+        <source>7#11b13</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>9b13</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>9#11</source>
+        <translation type="unfinished">9#11</translation>
+    </message>
+    <message>
+        <source>9#11b13</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>13b9</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>7b9b13</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>7b9#11</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>13b9#11</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>7b9#11b13</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>7#9</source>
+        <translation type="unfinished">7#9</translation>
+    </message>
+    <message>
+        <source>13#9</source>
+        <translation type="unfinished">13#9</translation>
+    </message>
+    <message>
+        <source>7#9b13</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>13#9#11</source>
+        <translation type="unfinished">13#9#11</translation>
+    </message>
+    <message>
+        <source>7#9#11b13</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>7b5</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>13b5</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>7b5b13</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>9b5</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>9b5b13</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>7b5b9</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>13b5b9</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>7b5b9b13</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>7b5#9</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>13b5#9</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>7b5#9b13</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>7#5</source>
+        <translation type="unfinished">7#5</translation>
+    </message>
+    <message>
+        <source>13#5</source>
+        <translation type="unfinished">13#5</translation>
+    </message>
+    <message>
+        <source>7#5#11</source>
+        <translation type="unfinished">7#5#11</translation>
+    </message>
+    <message>
+        <source>13#5#11</source>
+        <translation type="unfinished">13#5#11</translation>
+    </message>
+    <message>
+        <source>9#5</source>
+        <translation type="unfinished">9#5</translation>
+    </message>
+    <message>
+        <source>9#5#11</source>
+        <translation type="unfinished">9#5#11</translation>
+    </message>
+    <message>
+        <source>7#5b9</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>13#5b9</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>7#5b9#11</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>13#5b9#11</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>7#5#9</source>
+        <translation type="unfinished">7#5#9</translation>
+    </message>
+    <message>
+        <source>13#5#9#11</source>
+        <translation type="unfinished">13#5#9#11</translation>
+    </message>
+    <message>
+        <source>7#5#9#11</source>
+        <translation type="unfinished">7#5#9#11</translation>
+    </message>
+    <message>
+        <source>7alt</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>7sus</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>13sus</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>7susb13</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>7sus#11</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>13sus#11</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>7sus#11b13</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>9sus</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>9susb13</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>9sus#11</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>9sus#11b13</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>7susb9</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>13susb9</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>7susb9b13</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>7susb9#11</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>13susb9#11</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>7susb9#11b13</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>7sus#9</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>13sus#9</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>7sus#9b13</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>13sus#9#11</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>7sus#9#11b13</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>7susb5</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>13susb5</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>7susb5b13</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>9susb5</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>9susb5b13</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>7susb5b9</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>13susb5b9</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>7susb5b9b13</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>7susb5#9</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>13susb5#9</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>7susb5#9b13</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>7sus#5</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>13sus#5</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>7sus#5#11</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>13sus#5#11</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>9sus#5</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>9sus#5#11</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>7sus#5b9</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>13sus#5b9</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>7sus#5b9#11</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>13sus#5b9#11</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>7sus#5#9</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>13sus#5#9#11</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>7sus#5#9#11</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>4</source>
+        <translation type="unfinished">4</translation>
     </message>
     <message>
         <source>Bass Note</source>
@@ -975,6 +1387,13 @@ failed: </source>
     </message>
     <message>
         <source>Tick2:</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>Harmony</name>
+    <message>
+        <source>Properties...</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -3127,11 +3546,31 @@ failed: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>MuseScore Files (*.msc);;MusicXml Files (*.xml);;Compressed MusicXml Files (*.mxl);;Standard Midi File Files (*.mid);;Muse Data Files (*.md);;Lilypond Files (*.ly);;All files (*)</source>
+        <source>Compressed MusicXml Format (*.mxl)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Compressed MusicXml Format (*.mxl)</source>
+        <source>select all</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Select All</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>transpose</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Transpose...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Transpose</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>MuseScore Files (*.msc);;MusicXml Files (*.xml);;Compressed MusicXml Files (*.mxl);;Standard Midi File Files (*.mid);;Muse Data Files (*.md);;Lilypond Files (*.ly);;BB Files (*.mgu *.MGU *.sgu *.SGU);;All files (*)</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -4167,6 +4606,14 @@ set tempo.</source>
         <source>MuseScore: Write Style</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>MuseScore: transpose</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>There is nothing selected. Transpose whole score?</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>SegmentBase</name>
@@ -4822,6 +5269,21 @@ set tempo.</source>
 p, li { white-space: pre-wrap; }
 &lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:&apos;Sans Serif&apos;; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Hint: you can also add or remove measures after creation of the score.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>TransposeDialogBase</name>
+    <message>
+        <source>Dialog</source>
+        <translation type="unfinished">Диалог</translation>
+    </message>
+    <message>
+        <source>Semitones:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Transpose key signatures</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

@@ -78,6 +78,7 @@ double DPI, DPMM;
 QMap<QString, Shortcut*> shortcuts;
 static bool converterMode = false;
 static const char* outFileName;
+static QString localeName;
 
 //---------------------------------------------------------
 // cmdInsertMeasure
@@ -119,7 +120,11 @@ void InsertMeasuresDialog::accept()
 
 static QString getSharePath()
       {
+#ifdef __MINGW32__
+      return QCoreApplication::applicationDirPath() + QString("/../" INSTALL_NAME);
+#else
       return QString( INSTPREFIX "/share/" INSTALL_NAME);
+#endif
       }
 
 //---------------------------------------------------------
@@ -889,7 +894,7 @@ void MuseScore::navigatorVisible(bool flag)
 
 void MuseScore::helpBrowser()
       {
-      QString lang(QLocale::system().name().left(2));
+      QString lang(localeName.left(2));
       QFileInfo mscoreHelp(mscoreGlobalShare + QString("/doc/man-") + lang + QString(".pdf"));
       if (!mscoreHelp.isReadable()) {
             mscoreHelp.setFile(mscoreGlobalShare + QString("/doc/man-en.pdf"));
@@ -1459,30 +1464,12 @@ int main(int argc, char* argv[])
       // set translator before preferences are read to get
       //    translations for all shortcuts
       //
-      QString locale = QLocale::system().name();
+      localeName = QLocale::system().name();
       QTranslator translator;
-      QString lp = mscoreGlobalShare + "/locale/" + QString("mscore_") + locale;
-printf("locale <%s>\n", qPrintable(lp));
+      QString lp = mscoreGlobalShare + "/locale/" + QString("mscore_") + localeName;
       translator.load(lp);
       app.installTranslator(&translator);
-#if 0
-      QFile ft(":mscore.qm");
-      if (ft.exists()) {
-            if (debugMode)
-                  printf("locale file <:mscore.qm> found\n");
-            if (translator.load(":/mscore.qm")) {
-                  if (debugMode)
-                        printf("locale file <:/mscore.qm> loaded\n");
-                  }
-            qApp->installTranslator(&translator);
-            }
-      else {
-            if (debugMode) {
-                  printf("locale file not found for locale <%s>\n",
-                     QLocale::system().name().toLatin1().data());
-                  }
-            }
-#endif
+
       //
       // initialize shortcut hash table
       //
