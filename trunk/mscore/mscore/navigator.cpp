@@ -81,16 +81,6 @@ void Navigator::setScore(Score* s)
       }
 
 //---------------------------------------------------------
-//   setViewRect
-//---------------------------------------------------------
-
-void Navigator::setViewRect(const QRectF& r)
-      {
-      viewRect = r;
-      update();
-      }
-
-//---------------------------------------------------------
 //   paintEvent
 //---------------------------------------------------------
 
@@ -149,12 +139,9 @@ void Navigator::paintEvent(QPaintEvent* ev)
 
       p.begin(this);
       p.drawPixmap(r.topLeft(), pm, r);
-
-      QPen pen(Qt::blue, 2.0 / matrix.m11());
+      QPen pen(Qt::blue, 2.0);
       p.setPen(pen);
       p.setBrush(Qt::NoBrush);
-
-      p.setMatrix(matrix);
       p.drawRect(viewRect);
       p.end();
       QFrame::paintEvent(ev);
@@ -166,10 +153,9 @@ void Navigator::paintEvent(QPaintEvent* ev)
 
 void Navigator::mousePressEvent(QMouseEvent* ev)
       {
-      startMove = matrix.inverted().map(QPointF(ev->pos()));
-      if (viewRect.contains(startMove)) {
+      startMove = ev->pos();
+      if (viewRect.contains(startMove))
             moving = true;
-            }
       }
 
 //---------------------------------------------------------
@@ -179,33 +165,57 @@ void Navigator::mousePressEvent(QMouseEvent* ev)
 void Navigator::mouseMoveEvent(QMouseEvent* ev)
       {
       if (moving) {
-            QPointF p     = matrix.inverted().map(QPointF(ev->pos()));
-            QRectF  vr    = matrix.inverted().mapRect(QRectF(rect()));
-            QPointF delta = p - startMove;
+            QPoint delta = ev->pos() - startMove;
             viewRect.translate(delta);
-            QRect  r      = matrix.mapRect(viewRect.toRect());
-            QPoint d      = matrix.map(delta).toPoint();
 
-            if (r.x() < 0) {
-                  viewRect.moveLeft(vr.left());
-                  double dx = -r.x() / matrix.m11();
+            if (viewRect.x() < 0) {
+                  double dx = -viewRect.x() / matrix.m11();
+                  viewRect.moveLeft(0);
+                  if (matrix.dx() < 5.0)
+                        matrix.translate(dx, 0.0);
+                  redraw = true;
+                  }
+            if (viewRect.right() > width()) {
+                  double dx = (rect().right() - viewRect.right()) / matrix.m11();
+                  viewRect.moveRight(width());
                   matrix.translate(dx, 0.0);
                   redraw = true;
                   }
-            if (r.right() > rect().right()) {
-                  double dx = rect().right() - r.right();
-                  viewRect.moveRight(vr.right());
-                  dx /= matrix.m11();
-                  matrix.translate(dx, 0.0);
-                  redraw = true;
-                  }
-            if (r.y() < 0)
-                  viewRect.moveTop(vr.top());
-
-            startMove = p;
-            emit viewRectMoved(viewRect);
+            if (viewRect.y() < 0)
+                  viewRect.moveTop(0);
+            else if (viewRect.bottom() > height())
+                  viewRect.moveBottom(height());
+            startMove = ev->pos();
+            emit viewRectMoved(matrix.inverted().mapRect(viewRect));
             update();
             }
+      }
+
+//---------------------------------------------------------
+//   setViewRect
+//---------------------------------------------------------
+
+void Navigator::setViewRect(const QRectF& _viewRect)
+      {
+      viewRect  = matrix.mapRect(_viewRect).toRect();
+      if (viewRect.x() < 0) {
+            double dx = -viewRect.x() / matrix.m11();
+            viewRect.moveLeft(0);
+            if (matrix.dx() < 5.0)
+                  matrix.translate(dx, 0.0);
+            redraw = true;
+            }
+      if (viewRect.right() > width()) {
+            double dx = (rect().right() - viewRect.right()) / matrix.m11();
+            viewRect.moveRight(width());
+            matrix.translate(dx, 0.0);
+            redraw = true;
+            }
+      if (viewRect.y() < 0)
+            viewRect.moveTop(0);
+      else if (viewRect.bottom() > height())
+            viewRect.moveBottom(height());
+      update();
       }
 
 //---------------------------------------------------------

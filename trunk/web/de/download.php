@@ -24,8 +24,9 @@
   <h3> Windows Testreleases </h3>
   <table>
     <tr>
-      <td><a href="http://prereleases.musescore.org/mscore-r634.exe">mscore-r634.exe</a></td>
-      <td>vom 16.01.2008</td>
+      <td><a href="http://prereleases.musescore.org/mscore-r646.exe">mscore-r646.exe</a></td>
+      <td>&nbsp;&nbsp</td>
+      <td>26. jan 2008</td>
       </tr>
   </table>
 

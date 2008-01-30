@@ -3,7 +3,7 @@
 //  Linux Music Score Editor
 //  $Id: globals.h,v 1.17 2006/03/02 17:08:34 wschweer Exp $
 //
-//  Copyright (C) 2002-2007 Werner Schweer and others
+//  Copyright (C) 2002-2008 Werner Schweer and others
 //
 //  This program is free software; you can redistribute it and/or modify
 //  it under the terms of the GNU General Public License version 2.
@@ -21,10 +21,11 @@
 #ifndef __GLOBALS_H__
 #define __GLOBALS_H__
 
-#define MSC_VERSION     "1.4"
+#define MSC_VERSION     "1.5"
 
 // History:
 //    1.3   added staff->_barLineSpan
+//    1.5   save xoff/yoff in mm instead of pixel
 
 extern bool debugMode;
 extern bool layoutDebug;

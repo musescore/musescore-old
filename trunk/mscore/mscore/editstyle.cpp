@@ -64,6 +64,7 @@ void EditStyle::apply()
       cs->startCmd();
       cs->setLayoutAll(true);
       cs->endCmd();
+      cs->setDirty(true);
       }
 
 //---------------------------------------------------------

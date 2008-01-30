@@ -20,8 +20,8 @@
 
 REVISION = `cat build/revision.h`
 PREFIX  = "/usr/local"
-# VERSION = "0.9.0b${REVISION}"
-VERSION = "0.9.1"
+VERSION = "0.9.2b${REVISION}"
+# VERSION = "0.9.2"
 
 ROOT=`pwd`
 

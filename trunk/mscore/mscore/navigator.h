@@ -31,8 +31,8 @@ class Navigator : public QFrame {
       Q_OBJECT
 
       Score* _score;
-      QRectF viewRect;
-      QPointF startMove;
+      QRect viewRect;
+      QPoint startMove;
       bool moving;
       QPixmap pm;
       bool redraw;

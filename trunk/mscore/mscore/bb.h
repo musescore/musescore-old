@@ -23,6 +23,8 @@
 
 #include "midifile.h"
 
+const int MAX_BARS = 255;
+
 class BBFile;
 
 //---------------------------------------------------------
@@ -56,6 +58,56 @@ class BBTrack {
       };
 
 //---------------------------------------------------------
+//   BBChord
+//---------------------------------------------------------
+
+struct BBChord {
+      int beat;
+      unsigned char bass;
+      unsigned char root;
+      unsigned char extension;
+      };
+
+//---------------------------------------------------------
+//   BBStyle
+//---------------------------------------------------------
+
+struct BBStyle {
+      int timesigZ, timesigN;
+      };
+
+//---------------------------------------------------------
+//   BBStyle
+//---------------------------------------------------------
+
+static const BBStyle styles[] = {
+      {  4, 4 },   // Jazz Swing
+      { 12, 8 },   // Country 12/8
+      {  4, 4 },   // Country 4/4
+      {  4, 4 },   // Bossa Nova
+      {  4, 4 },   // Ethnic
+      {  4, 4 },   // Blues Shuffle
+      {  4, 4 },   // Blues Straight
+      {  3, 4 },   // Waltz
+      {  4, 4 },   // Pop Ballad
+      {  4, 4 },   // should be Rock Shuffle
+      {  4, 4 },   // lite Rock
+      {  4, 4 },   // medium Rock
+      {  4, 4 },   // Heavy Rock
+      {  4, 4 },   // Miami Rock
+      {  4, 4 },   // Milly Pop
+      {  4, 4 },   // Funk
+      {  3, 4 },   // Jazz Waltz
+      {  4, 4 },   // Rhumba
+      {  4, 4 },   // Cha Cha
+      {  4, 4 },   // Bouncy
+      {  4, 4 },   // Irish
+      { 12, 8 },   // Pop Ballad 12/8
+      { 12, 8 },   // Country12/8 old
+      {  4, 4 },   // Reggae
+      };
+
+//---------------------------------------------------------
 //   BBFile
 //---------------------------------------------------------
 
@@ -64,8 +116,11 @@ class BBFile {
       unsigned char _version;
       char* _title;
       int _style, _key, _bpm;
-      unsigned char _chordExt[1024];
-      unsigned char _chordBase[1024];
+
+      unsigned char _barType[MAX_BARS];
+      int _numberOfChords;
+      QList<BBChord> _chords;
+
       int _startChorus;
       int _endChorus;
       int _repeats;
@@ -79,6 +134,9 @@ class BBFile {
       const unsigned char* a;
       int size;
 
+      int timesigZ() { return styles[_style].timesigZ; }
+      int timesigN() { return styles[_style].timesigN; }
+
    public:
       BBFile();
       ~BBFile();
@@ -86,7 +144,8 @@ class BBFile {
       QList<BBTrack*>* tracks()   { return &_tracks;  }
       int measures() const        { return _measures; }
       const char* title() const   { return _title;    }
-      SigList siglist() const         { return _siglist;         }
+      SigList siglist() const     { return _siglist;  }
+      QList<BBChord> chords()     { return _chords;   }
       };
 
 #endif

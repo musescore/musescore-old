@@ -52,22 +52,5 @@
       <file>data/bg1.jpg</file>
       <file>data/flip.svg</file>
    </qresource>
-
-   <qresource lang="de">
-      <file alias="mscore.qm">../share/locale/mscore_de.qm</file>
-   </qresource>
-
-   <qresource lang="ru">
-      <file alias="mscore.qm">../share/locale/mscore_ru.qm</file>
-   </qresource>
-
-   <qresource lang="it">
-      <file alias="mscore.qm">../share/locale/mscore_it.qm</file>
-   </qresource>
-
-   <qresource lang="pt">
-      <file alias="mscore.qm">../share/locale/mscore_pt.qm</file>
-   </qresource>
-
 </RCC>
 
