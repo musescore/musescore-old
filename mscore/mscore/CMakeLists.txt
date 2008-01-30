@@ -154,7 +154,9 @@ if (MINGW)
       ${QT_mingw_LIBRARIES}
       portaudio
       )
-   install_targets ( /bin mscore )
+   install(TARGETS mscore RUNTIME DESTINATION bin)
+#   install(FILES ../man RUNTIME DESTINATION doc)
+
    install_files ( /bin .dll
       /home/ws/.wine/drive_c/Qt/4.3.3/bin/mingwm10.dll
       /home/ws/.wine/drive_c/Qt/4.3.3/bin/QtCore4.dll

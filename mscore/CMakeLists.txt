@@ -42,7 +42,14 @@ SET(Mscore_VERSION_PATCH  "2")
 
 SET(Mscore_VERSION       "${Mscore_VERSION_MAJOR}.${Mscore_VERSION_MINOR}")
 SET(Mscore_VERSION_FULL  "${Mscore_VERSION}.${Mscore_VERSION_PATCH}")
-SET(Mscore_INSTALL_NAME  "mscore-${Mscore_VERSION}")
+
+if (MINGW)
+      SET(Mscore_INSTALL_NAME  "")
+      SET(Mscore_SHARE_NAME    "")
+else (MINGW)
+      SET(Mscore_INSTALL_NAME  "mscore-${Mscore_VERSION}/")
+      SET(Mscore_SHARE_NAME    "share/")
+endif (MINGW)
 
 include ( ${PROJECT_SOURCE_DIR}/cmake/UsePkgConfig1.cmake )
 include ( ${PROJECT_SOURCE_DIR}/cmake/TargetDoc.cmake)

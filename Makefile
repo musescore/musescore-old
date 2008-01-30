@@ -74,6 +74,7 @@ win32:
             make lupdate ;                             \
             make lrelease;                             \
             make -j2 -f Makefile;                      \
+            make man;                                  \
             make install;                              \
             make package;                              \
          else                                          \
