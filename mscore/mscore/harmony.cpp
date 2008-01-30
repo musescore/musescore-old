@@ -101,7 +101,7 @@ QString Harmony::harmonyName(int root, int extension, int base)
             "C",   "Db", "D",   "Eb",  "E",   "F",   "Gb", "G",
             "Ab", "A",   "Bb", "B"
             };
-      QString s(rootTable[root]);
+      QString s(rootTable[root-1]);
       if (extension)
             s += getExtensionName(extension);
       if (base) {
@@ -119,9 +119,9 @@ Harmony::Harmony(Score* score)
    : Text(score)
       {
       Text::setSubtype(TEXT_CHORD);
-      _root = 0;
+      _root      = 0;
       _extension = 0;
-      _base = 0;
+      _base      = 0;
       }
 
 //---------------------------------------------------------

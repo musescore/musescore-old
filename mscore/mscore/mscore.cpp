@@ -1398,11 +1398,11 @@ int main(int argc, char* argv[])
       QCoreApplication::setApplicationName("MuseScore");
       qApp->setWindowIcon(windowIcon);
 
-#ifdef __MINGW32__
-      QFont font = qApp->font();
-      font.setFamily("Arial");
-      qApp->setFont(font);
-#endif
+// #ifdef __MINGW32__
+//       QFont font = qApp->font();
+//      font.setFamily("Arial");
+//      qApp->setFont(font);
+// #endif
 
       int c;
       while ((c = getopt(argc, argv, "vdLsmio:")) != EOF) {
@@ -1450,11 +1450,22 @@ int main(int argc, char* argv[])
 
       initSymbols();
 
+      mscoreGlobalShare = getSharePath();
+      if (debugMode) {
+            printf("global share: <%s>\n", mscoreGlobalShare.toLocal8Bit().data());
+            }
+
       //
       // set translator before preferences are read to get
       //    translations for all shortcuts
       //
-      static QTranslator translator;
+      QString locale = QLocale::system().name();
+      QTranslator translator;
+      QString lp = mscoreGlobalShare + "/locale/" + QString("mscore_") + locale;
+printf("locale <%s>\n", qPrintable(lp));
+      translator.load(lp);
+      app.installTranslator(&translator);
+#if 0
       QFile ft(":mscore.qm");
       if (ft.exists()) {
             if (debugMode)
@@ -1471,6 +1482,7 @@ int main(int argc, char* argv[])
                      QLocale::system().name().toLatin1().data());
                   }
             }
+#endif
       //
       // initialize shortcut hash table
       //
@@ -1501,10 +1513,6 @@ int main(int argc, char* argv[])
       if (debugMode) {
             if (haveMidi)
                   printf("midi devices found\n");
-            }
-      mscoreGlobalShare = getSharePath();
-      if (debugMode) {
-            printf("global share: <%s>\n", mscoreGlobalShare.toLocal8Bit().data());
             }
 
       //

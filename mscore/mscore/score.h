@@ -440,11 +440,11 @@ class Score : public QObject {
       QString projectName() const { return info.baseName(); }
       bool isSavable() const;
       void setDirty(bool val = true);
-      bool dirty() const        { return _dirty; }
-      void setCreated(bool val) { _created = val; }
-      bool created() const      { return _created; }
-      bool saved() const        { return _saved; }
-      void setSaved(bool v)     { _saved = v; }
+      bool dirty() const        { return _dirty;    }
+      void setCreated(bool val) { _created = val;   }
+      bool created() const      { return _created;  }
+      bool saved() const        { return _saved;    }
+      void setSaved(bool v)     { _saved = v;       }
       bool printing() const     { return _printing; }
 
       bool pos2TickAnchor(const QPointF&, int staffIdx, int* tick, QPointF* anchor) const;

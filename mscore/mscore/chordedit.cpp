@@ -30,18 +30,18 @@ ChordEdit::ChordEdit(QWidget* parent)
       {
       setupUi(this);
       rootGroup = new QButtonGroup(this);
-      rootGroup->addButton(rootC,   0);
-      rootGroup->addButton(rootDb,  1);
-      rootGroup->addButton(rootD,   2);
-      rootGroup->addButton(rootEb,  3);
-      rootGroup->addButton(rootE,   4);
-      rootGroup->addButton(rootF,   5);
-      rootGroup->addButton(rootFis, 6);
-      rootGroup->addButton(rootG,   7);
-      rootGroup->addButton(rootAb,  8);
-      rootGroup->addButton(rootA,   9);
-      rootGroup->addButton(rootBb, 10);
-      rootGroup->addButton(rootB,  11);
+      rootGroup->addButton(rootC,   1);
+      rootGroup->addButton(rootDb,  2);
+      rootGroup->addButton(rootD,   3);
+      rootGroup->addButton(rootEb,  4);
+      rootGroup->addButton(rootE,   5);
+      rootGroup->addButton(rootF,   6);
+      rootGroup->addButton(rootFis, 7);
+      rootGroup->addButton(rootG,   8);
+      rootGroup->addButton(rootAb,  9);
+      rootGroup->addButton(rootA,  10);
+      rootGroup->addButton(rootBb, 11);
+      rootGroup->addButton(rootB,  12);
 
       extensionGroup = new QButtonGroup(this);
       extensionGroup->addButton(extMaj,    2);

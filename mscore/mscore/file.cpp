@@ -679,8 +679,8 @@ bool MuseScore::saveFile(QFile* f)
       xml.tag("Spatium", _spatium / DPMM);
       xml.tag("Division", division);
       xml.tag("Mag",  canvas->mag());
-      xml.tag("xoff", canvas->xoffset());
-      xml.tag("yoff", canvas->yoffset());
+      xml.tag("xoff", canvas->xoffset() / DPMM);
+      xml.tag("yoff", canvas->yoffset() / DPMM);
 
       if (::symbolPalette)
             ::symbolPalette->write(xml, "Symbols");
@@ -748,10 +748,18 @@ bool Score::loadMsc(QString name)
                               tempomap->read(ee, this);
                         else if (tag == "Mag")
                               setMag(val.toDouble());
-                        else if (tag == "xoff")
-                              setXoffset(val.toDouble());
-                        else if (tag == "yoff")
-                              setYoffset(val.toDouble());
+                        else if (tag == "xoff") {
+                              if (_mscVersion < 106)
+                                    setXoffset(val.toDouble());
+                              else
+                                    setXoffset(val.toDouble() * DPMM);
+                              }
+                        else if (tag == "yoff") {
+                              if (_mscVersion < 106)
+                                    setYoffset(val.toDouble());
+                              else
+                                    setYoffset(val.toDouble() * DPMM);
+                              }
                         else if (tag == "Spatium")
                               setSpatium (val.toDouble() * DPMM);
                         else if (tag == "Division")

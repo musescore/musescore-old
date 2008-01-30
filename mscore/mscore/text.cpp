@@ -1222,7 +1222,8 @@ QLineF TextB::dragAnchor() const
             if (m->type() != MEASURE)
                   abort();
             Segment* seg = m->tick2segment(tick());
-            p1.rx() += seg->x();
+            if (seg)                            // DEBUG
+                  p1.rx() += seg->x();
             return QLineF(p1, QPointF(x, y) + canvasPos());
             }
       else if (anchor() == ANCHOR_PARENT) {

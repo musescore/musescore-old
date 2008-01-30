@@ -1,4 +1,10 @@
+30.1.8 (ws)
+      - fixes for navigator window
+      - updates to bb import: show chord names
+      - save xoff/yoff in mm instead of pixel; increasing *.msc file version to 1.5
 29.1.8 (ws)
+      - set score dirty bit after editing style or text style so changes
+        get not lost by accident on exit
       - more code for Harmony() and ChordEdit()
       - fixed weired selection behaviour; this enables again copy+drag&drop of measures
         Still unresolved is the problem of selecting elements which are covered
