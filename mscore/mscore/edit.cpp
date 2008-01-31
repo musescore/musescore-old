@@ -396,8 +396,8 @@ void Score::putNote(const QPointF& pos, bool replace)
       int pitch = line2pitch(line, clef, key);
       int len   = _padState.tickLen;
 
-      int octave = pitch / 12;
-      int note   = pitch % 12;
+//      int octave = pitch / 12;
+//      int note   = pitch % 12;
 
       int voice = _padState.voice;
       int track = staffIdx * VOICES + voice;
@@ -571,19 +571,29 @@ void Score::cmdAddHairpin(bool decrescendo)
             printf("selState != single\n");
             return;
             }
-      if (el->type() == NOTE)
-            el = el->parent();
+
+      if (el->type() != NOTE) {
+            printf("please select note and try again\n");
+            return;
+            }
+      el = el->parent();
+
       int tick1 = el->tick();
       int tick2 = tick1 + 4 * division;
-      Hairpin* gabel = new Hairpin(this);
-      gabel->setTick(tick1);
-      gabel->setTick2(tick2);
-      gabel->setSubtype(decrescendo ? 1 : 0);
-
-      if (!cmdAddHairpin(gabel, el->pos()))
-            delete gabel;
-      else
-            select(gabel, 0, 0);
+      Hairpin* pin = new Hairpin(this);
+      pin->setTick(tick1);
+      pin->setTick2(tick2);
+      pin->setSubtype(decrescendo ? 1 : 0);
+      pin->setStaffIdx(el->staffIdx());
+      pin->setParent(_layout);
+      pin->layout(mainLayout());
+#if 0
+      LineSegment* ls = line->lineSegments().front();
+      QPointF uo(pos - ls->canvasPos() - dragOffset);
+      ls->setUserOff(uo / _spatium);
+#endif
+      cmdAdd(pin);
+      select(pin, 0, 0);
       }
 
 //---------------------------------------------------------
@@ -725,28 +735,6 @@ void Score::cmdAddBSymbol(BSymbol* s, const QPointF& pos, const QPointF& off)
       undoAddElement(s);
       addRefresh(s->abbox());
       select(s, 0, 0);
-      }
-
-//---------------------------------------------------------
-//   cmdAddHairpin
-//---------------------------------------------------------
-
-Element* Score::cmdAddHairpin(Hairpin* pin, const QPointF& pos)
-      {
-      int staffIdx = -1;
-      int pitch, tick1;
-      QPointF offset;
-      Segment* segment;
-      MeasureBase* measure = pos2measure(pos, &tick1, &staffIdx, &pitch, &segment, &offset);
-      if (measure == 0 || measure->type() != MEASURE) {
-            printf("addHairpin: cannot put object here\n");
-            delete pin;
-            return 0;
-            }
-      pin->setStaffIdx(staffIdx);
-      pin->setParent(measure);
-      cmdAdd(pin);
-      return pin;
       }
 
 //---------------------------------------------------------

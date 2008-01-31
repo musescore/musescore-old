@@ -330,7 +330,7 @@ class Score : public QObject {
       void cmdAdd1(Element* e, const QPointF& pos, const QPointF& dragOffset);
       void cmdAddBSymbol(BSymbol*, const QPointF&, const QPointF&);
 
-      Element* cmdAddHairpin(Hairpin* atr, const QPointF& pos);
+//      Element* cmdAddHairpin(Hairpin* atr, const QPointF& pos);
       Note* addNote(Chord*, int pitch);
 
       void deleteItem(Element*);

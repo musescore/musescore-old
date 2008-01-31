@@ -1,4 +1,5 @@
 31.1.8 (ws)
+      - fix crash for "H" (hairpin) command
       - build fixes for doc/man
       - added "C clef on third space" to clef table
 30.1.8 (ws)
