@@ -1601,6 +1601,7 @@ void Score::toEList(QMap<int, Event>* events, bool expandRepeats, int offset, in
             }
       QStack<RepeatLoop> rstack;
       int tickOffset = 0;
+      int overallRepeatCount = 0;
 
       MeasureBase* fm = mainLayout()->first();
       for (MeasureBase* mb = fm; mb;) {
@@ -1642,6 +1643,18 @@ void Score::toEList(QMap<int, Event>* events, bool expandRepeats, int offset, in
                               }
                         else
                               printf("Jump not found\n");
+                        }
+                  else if (m->repeatFlags() & RepeatEnd) {
+                        // this is a end repeat without start repeat:
+                        //    repeat from beginning
+                        ++overallRepeatCount;
+                        if (overallRepeatCount < m->repeatCount()) {
+                              mb = mainLayout()->first();
+                              tickOffset += m->tick() + m->tickLen() - mb->tick();
+                              continue;
+                              }
+                        else
+                              overallRepeatCount = 0;
                         }
                   }
             else if (rstack.top().type == RepeatLoop::LOOP_REPEAT) {

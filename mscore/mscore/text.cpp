@@ -626,9 +626,9 @@ void TextB::draw(QPainter& p) const
                         const QTextLine l = tl->lineAt(i);
                         //f |= l.naturalTextRect().translated(tl->position());
                         f |= l.rect().translated(tl->position());
-                        printf("Line %f %f %f, %f %f\n",
-                              l.rect().height(), l.naturalTextRect().height(), l.height(),
-                                 l.ascent(), l.descent());
+//                        printf("Line %f %f %f, %f %f\n",
+//                              l.rect().height(), l.naturalTextRect().height(), l.height(),
+//                                 l.ascent(), l.descent());
                         }
                   }
             qreal w = 6.0 / p.matrix().m11();   // 6 pixel border

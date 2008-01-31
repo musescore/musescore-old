@@ -19,7 +19,7 @@
 #=============================================================================
 
 add_custom_command(
-   OUTPUT promenade.pdf
+   OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/promenade.pdf
    COMMAND mscore ${PROJECT_SOURCE_DIR}/demos/promenade.msc -o promenade.pdf
    DEPENDS ${PROJECT_SOURCE_DIR}/demos/promenade.msc
    WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
@@ -42,7 +42,12 @@ add_custom_command(
    )
 
 add_custom_target ( man
-      DEPENDS promenade.pdf inv1-1.pdf inv1-2.pdf inv6-1.pdf inv6-2.pdf
+      DEPENDS
+      ${CMAKE_CURRENT_BINARY_DIR}/promenade.pdf
+      ${CMAKE_CURRENT_BINARY_DIR}/inv1-1.pdf
+      ${CMAKE_CURRENT_BINARY_DIR}/inv1-2.pdf
+      ${CMAKE_CURRENT_BINARY_DIR}/inv6-1.pdf
+      ${CMAKE_CURRENT_BINARY_DIR}/inv6-2.pdf
       )
 
 if (TEXEXEC_PATH)

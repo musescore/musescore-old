@@ -1,4 +1,8 @@
+31.1.8 (ws)
+      - build fixes for doc/man
+      - added "C clef on third space" to clef table
 30.1.8 (ws)
+      - if end reapeat found without start repeat, play from beginning
       - install again all language files locale/* instead of all build in. This
         enables translators to test translations with binary version.
       - fixes for navigator window
