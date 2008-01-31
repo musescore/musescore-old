@@ -31,22 +31,14 @@ add_custom_command (
       )
 
 add_custom_target ( man
-      DEPENDS man-en.pdf
+      DEPENDS ${CMAKE_CURRENT_BINARY_DIR}/man-en.pdf
       )
 
-if (MINGW)
-      install (
-         FILES ${CMAKE_CURRENT_BINARY_DIR}/man-en.pdf
-         DESTINATION share/${Mscore_INSTALL_NAME}/doc/
-         OPTIONAL
-         )
-else (MINGW)
-      install (
-         FILES ${CMAKE_CURRENT_BINARY_DIR}/man-en.pdf
-         DESTINATION doc
-         OPTIONAL
-         )
-endif (MINGW)
+install (
+      FILES ${CMAKE_CURRENT_BINARY_DIR}/man-en.pdf
+      DESTINATION ${Mscore_SHARE_NAME}${Mscore_INSTALL_NAME}doc/
+      OPTIONAL
+      )
 
 set (extraClean man-en.log man-en.tmp man-en.tuo man-en.tui
    man-en-mpgraph.mp mpgraph.mp )

@@ -32,14 +32,7 @@
 #include "drumset.h"
 #include "utils.h"
 #include "harmony.h"
-
-const char* keys[] = {
-      "/",
-      "C",   "Db", "D",   "Eb",  "E",   "F",   "Gb", "G",
-      "Ab", "A",   "Bb", "B",   "C#",  "D#",  "F#",  "G#", "A#",
-      "Cm", "Dbm", "Dm", "Ebm", "Em",  "Fm",  "Gbm", "Gm",
-      "Abm", "Am", "Bbm", "Bm", "C#m", "D#m", "F#m", "G#m", "A#m"
-      };
+#include "layoutbreak.h"
 
 //---------------------------------------------------------
 //   BBTrack
@@ -78,7 +71,7 @@ struct MNote {
 BBFile::BBFile()
       {
       for (int i = 0; i < MAX_BARS; ++i)
-            _barType[i]  = -1;
+            _barType[i]  = 0;
       }
 
 //---------------------------------------------------------
@@ -151,7 +144,7 @@ bool BBFile::read(const QString& name)
 
       printf("Title <%s>\n", _title);
       printf("style %d\n",   _style);
-      printf("key   %d  %s\n", _key, keys[_key]);
+      printf("key   %d\n", _key);
       printf("sig   %d/%d\n", timesigZ(), timesigN());
       printf("bpm   %d\n", _bpm);
 
@@ -164,8 +157,10 @@ bool BBFile::read(const QString& name)
             int val = a[idx++];
             if (val == 0)
                   bar += a[idx++];
-            else
+            else {
+                  printf("bar type: bar %d val %d\n", bar, val);
                   _barType[bar++] = val;
+                  }
             }
 
       //---------------------------------------------------
@@ -221,9 +216,10 @@ bool BBFile::read(const QString& name)
             }
       printf("================chords=======================\n");
 
-      _measures = (_chords.back().beat + timesigZ() - 1) / timesigN();
+      _measures = ((_chords.back().beat + timesigZ() - 1) / timesigN()) + 1;
       printf("Measures %d\n", _measures);
 
+      ++idx;
       _startChorus = a[idx++];
       _endChorus   = a[idx++];
       _repeats     = a[idx++];
@@ -324,7 +320,7 @@ bool BBFile::read(const QString& name)
                               }
                         MidiNote* note = new MidiNote();
                         int tick = a[idx] + (a[idx+1]<<8) + (a[idx+2]<<16) + (a[idx+3]<<24);
-                        tick -= 4 * 120;
+                        tick -= 8 * 120;
                         note->setOntime((tick * division) / 120);
                         note->setPitch(a[idx + 5]);
                         note->setVelo(a[idx + 6]);
@@ -358,8 +354,7 @@ bool Score::importBB(const QString& name)
             }
 
       QList<BBTrack*>* tracks = bb.tracks();
-      int n = tracks->size();
-      for (int i = 0; i < n; ++i) {
+      for (int i = 0; i < tracks->size(); ++i) {
             Part* part = new Part(this);
             Staff* s   = new Staff(this, part, 0);
             part->insertStaff(s);
@@ -429,6 +424,33 @@ bool Score::importBB(const QString& name)
             QString s(Harmony::harmonyName(c.root, c.extension, c.bass));
             h->setText(s);
             m->add(h);
+            }
+
+      //---------------------------------------------------
+      //    insert layout breaks
+      //    add chorus repeat
+      //---------------------------------------------------
+
+      int startChorus = bb.startChorus() - 1;
+      int endChorus   = bb.endChorus() - 1;
+
+      int n = 0;
+      for (MeasureBase* mb = layout->first(); mb; mb = mb->next()) {
+            if (mb->type() != MEASURE)
+                  continue;
+            Measure* measure = (Measure*)mb;
+            if (n && (n % 4) == 0) {
+                  LayoutBreak* lb = new LayoutBreak(this);
+                  lb->setSubtype(LAYOUT_BREAK_LINE);
+                  measure->add(lb);
+                  }
+            if (startChorus == n)
+                  measure->setRepeatFlags(RepeatStart);
+            else if (endChorus == n) {
+                  measure->setRepeatFlags(RepeatEnd);
+                  measure->setRepeatCount(bb.repeats());
+                  }
+            ++n;
             }
 
       _saved   = false;
@@ -577,7 +599,7 @@ void Score::convertTrack(BBTrack* track, int staffIdx)
             //
       	// process pending notes
             //
-            if (!notes.isEmpty()) {
+            while (!notes.isEmpty()) {
                   int tick = notes[0]->mc->ontime();
             	Measure* measure = tick2measure(tick);
                   Chord* chord = new Chord(this);
@@ -590,9 +612,16 @@ void Score::convertTrack(BBTrack* track, int staffIdx)
                   	if (n->mc->duration() < len)
                               len = n->mc->duration();
                         }
+                  // split notes on measure boundary
+                  if ((tick + len) > measure->tick() + measure->tickLen()) {
+                        len = measure->tick() + measure->tickLen() - tick;
+                        }
                   chord->setTickLen(len);
+
             	foreach (MNote* n, notes) {
-                        foreach(MidiNote* mn, n->mc->notes()) {
+                        QList<MidiNote*>& nl = n->mc->notes();
+                        for (int i = 0; i < nl.size(); ++i) {
+                              MidiNote* mn = nl[i];
                   		Note* note = new Note(this);
                               note->setPitch(mn->pitch());
             	      	note->setStaffIdx(staffIdx);
@@ -600,14 +629,25 @@ void Score::convertTrack(BBTrack* track, int staffIdx)
                               note->setTpc(mn->tpc());
                               note->setVoice(voice);
             	      	chord->add(note);
+                              if (n->ties[i]) {
+                                    n->ties[i]->setEndNote(note);
+                                    n->ties[i]->setStaffIdx(note->staffIdx());
+                                    note->setTieBack(n->ties[i]);
+                                    }
+                              }
+                        if (n->mc->duration() <= len) {
+                              notes.removeAt(notes.indexOf(n));
+                              continue;
+                              }
+                        for (int i = 0; i < nl.size(); ++i) {
+                              MidiNote* mn = nl[i];
+                              Note* note = chord->noteList()->find(mn->pitch());
+            			n->ties[i] = new Tie(this);
+                              n->ties[i]->setStartNote(note);
+      		      	note->setTieFor(n->ties[i]);
                               }
                         n->mc->setDuration(n->mc->duration() - len);
-                        if (n->mc->duration() <= 0) {
-                              notes.removeAt(notes.indexOf(n));
-                              delete n;
-                              }
-                        else
-                              n->mc->setOntime(n->mc->ontime() + len);
+                        n->mc->setOntime(n->mc->ontime() + len);
                         }
                   ctick += len;
 
@@ -615,7 +655,7 @@ void Score::convertTrack(BBTrack* track, int staffIdx)
                   // check for gap and fill with rest
                   //
                   int restLen = measure->tick() + measure->tickLen() - ctick;
-                  if (restLen > 0 && voice > 0) {
+                  if (restLen > 0 && voice == 0) {
                         Rest* rest = new Rest(this, ctick, restLen);
             		Measure* measure = tick2measure(ctick);
                         rest->setStaffIdx(staffIdx);
@@ -624,106 +664,6 @@ void Score::convertTrack(BBTrack* track, int staffIdx)
                         }
                   }
             }
-#if 0
-      bool keyFound = false;
-
-//      Measure* measure = tick2measure(0);
-      for (ciEvent i = el.begin(); i != el.end(); ++i) {
-            MidiEvent* e = *i;
-            if (e->type() == ME_META) {
-                  MidiMeta* mm = (MidiMeta*)e;
-                  switch(mm->metaType()) {
-                        case META_LYRIC:
-                              {
-      		            Measure* measure = tick2measure(mm->ontime());
-                              Segment* seg = measure->findSegment(Segment::SegChordRest, e->ontime());
-                              if (seg == 0) {
-                                    for (seg = measure->first(); seg;) {
-                                          if (seg->subtype() != Segment::SegChordRest) {
-                                                seg = seg->next();
-                                                continue;
-                                                }
-                                          Segment* ns;
-                                          for (ns = seg->next(); ns && ns->subtype() != Segment::SegChordRest; ns = ns->next())
-                                                ;
-                                          if (ns == 0 || ns->tick() > e->ontime())
-                                                break;
-                                          seg = ns;
-                                          }
-                                    }
-                              if (seg == 0) {
-                                    printf("no segment found for lyrics<%s> at tick %d\n",
-                                       mm->data(), e->ontime());
-                                    break;
-                                    }
-                              Lyrics* l = new Lyrics(this);
-                              QString txt((char*)(mm->data()));
-                              l->setText(txt);
-                              l->setTick(seg->tick());
-                              seg->setLyrics(staffIdx, l);
-                              }
-                              break;
-                        case META_TEMPO:
-                              break;
-
-                        case META_KEY_SIGNATURE:
-                              {
-                              unsigned char* data = mm->data();
-                              int key = (char)data[0];
-                              if (key < -7 || key > 7) {
-                                    printf("ImportMidi: illegal key %d\n", key);
-                                    break;
-                                    }
-                              (*cstaff->keymap())[e->ontime()] = key;
-                              keyFound = false;
-                              }
-                              break;
-                        case META_COMPOSER:     // mscore extension
-                        case META_POET:
-                        case META_TRANSLATOR:
-                        case META_SUBTITLE:
-                        case META_TITLE:
-                              {
-                              Text* text = new Text(this);
-                              switch(mm->metaType()) {
-                                    case META_COMPOSER:
-                                          text->setSubtype(TEXT_COMPOSER);
-                                          break;
-                                    case META_TRANSLATOR:
-                                          text->setSubtype(TEXT_TRANSLATOR);
-                                          break;
-                                    case META_POET:
-                                          text->setSubtype(TEXT_POET);
-                                          break;
-                                    case META_SUBTITLE:
-                                          text->setSubtype(TEXT_SUBTITLE);
-                                          break;
-                                    case META_TITLE:
-                                          text->setSubtype(TEXT_TITLE);
-                                          break;
-                                    }
-
-                              text->setText((char*)(mm->data()));
-
-                              ScoreLayout* layout = mainLayout();
-                              MeasureBase* measure = layout->first();
-                              if (measure->type() != VBOX) {
-                                    measure = new VBox(this);
-                                    measure->setTick(0);
-                                    measure->setNext(layout->first());
-                                    layout->add(measure);
-                                    }
-                              measure->add(text);
-                              }
-                              break;
-                        }
-                  }
-            }
-
-      if (!keyFound && !midiTrack->isDrumTrack()) {
-            (*cstaff->keymap())[0] = key;
-            }
-#endif
       }
 
 //---------------------------------------------------------
@@ -769,18 +709,64 @@ void BBTrack::quantize(int startTick, int endTick, EventList* dst)
       else
             raster = mintick;
 
+      //
+      //  quantize onset
+      //
       for (iEvent i = si; i != _events.end(); ++i) {
             MidiEvent* e = *i;
             if (e->ontime() >= endTick)
                   break;
             if (e->type() == ME_NOTE) {
                   MidiNote* note = (MidiNote*)e;
-	            int len  = quantizeLen(division, note->duration(), raster);
-      	      int tick = (note->ontime() / raster) * raster;
+                  // prefer moving note to the right
+      	      int tick = ((note->ontime() + raster/2) / raster) * raster;
+                  int diff = tick - note->ontime();
+	            int len  = note->duration() - diff;
 	            note->setOntime(tick);
       	      note->setDuration(len);
                   }
             dst->insert(e);
+            }
+      //
+      //  quantize duration
+      //
+      for (iEvent i = dst->begin(); i != dst->end(); ++i) {
+            MidiEvent* e = *i;
+            if (e->type() != ME_NOTE)
+                  continue;
+            MidiNote* note = (MidiNote*)e;
+            int tick   = note->ontime();
+            int len    = note->duration();
+            int ntick  = tick + len;
+            int nntick = -1;
+            for (iEvent ii = (i+1); ii != dst->end(); ++ii) {
+                  if ((*ii)->type() == ME_NOTE) {
+                        MidiEvent* ee = *ii;
+                        if (ee->ontime() == tick)
+                              continue;
+                        nntick = ee->ontime();
+                        break;
+                        }
+                  }
+            if (nntick == -1)
+                  len = quantizeLen(division, len, raster);
+            else {
+                  int diff = nntick - ntick;
+                  if (diff > 0) {
+                        // insert rest?
+                        if (diff <= raster)
+                              len = nntick - tick;
+                        else
+                              len = quantizeLen(division, len, raster);
+                        }
+                  else {
+                        if (diff > -raster)
+                              len = nntick - tick;
+                        else
+                              len = quantizeLen(division, len, raster);
+                        }
+                  }
+            note->setDuration(len);
             }
       }
 

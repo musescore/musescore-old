@@ -58,11 +58,11 @@
 #include "tremolo.h"
 #include "box.h"
 #include "repeat.h"
-// #include "qregexp.h"
 #include "ottava.h"
 #include "trill.h"
 #include "pedal.h"
 #include "unzip.h"
+#include "harmony.h"
 
 //---------------------------------------------------------
 //   xmlSetPitch
@@ -936,14 +936,24 @@ Measure* MusicXml::xmlMeasure(Part* part, QDomElement e, int number)
                                           lastVolta = volta;
                                           }
                                     else if (endingType == "stop") {
-                                          lastVolta->setTick2(tick);
-                                          lastVolta->setSubtype(Volta::VOLTA_CLOSED);
-                                          lastVolta = 0;
+                                          if (lastVolta) {
+                                                lastVolta->setTick2(tick);
+                                                lastVolta->setSubtype(Volta::VOLTA_CLOSED);
+                                                lastVolta = 0;
+                                                }
+                                          else {
+                                                printf("lastVolta == 0 on stop\n");
+                                                }
                                           }
                                     else if (endingType == "discontinue") {
-                                          lastVolta->setTick2(tick);
-                                          lastVolta->setSubtype(Volta::VOLTA_OPEN);
-                                          lastVolta = 0;
+                                          if (lastVolta) {
+                                                lastVolta->setTick2(tick);
+                                                lastVolta->setSubtype(Volta::VOLTA_OPEN);
+                                                lastVolta = 0;
+                                                }
+                                          else {
+                                                printf("lastVolta == 0 on discontinue\n");
+                                                }
                                           }
                                     else
                                           printf("ImportXml: warning: unsupported ending type <%s>\n",
@@ -979,7 +989,7 @@ Measure* MusicXml::xmlMeasure(Part* part, QDomElement e, int number)
                               set it only if explicitly requested, not when the measure length
                               is not what is expected. See MozartTrio.xml measures 12..13.
                             */
-                            //  measure->setIrregular(true);
+                            // measure->setIrregular(true);
                             /*
                               printf("irregular Measure %d Len %d at %d   lastLen: %d -> should be: %d (tm=%d)\n",
                                  number, measure->tick(), maxtick,
@@ -2357,6 +2367,36 @@ void MusicXml::genWedge(int no, int endTick, Measure* /*measure*/, int staff)
       }
 
 //---------------------------------------------------------
+//   getStep
+//---------------------------------------------------------
+
+static int getStep(const QString& step, int alter)
+      {
+      if (step.isEmpty())
+            return 0;
+      int val;
+      if (step == "C")
+            val = 0;
+      else if (step == "D")
+            val = 2;
+      else if (step == "E")
+            val = 4;
+      else if (step == "F")
+            val = 5;
+      else if (step == "G")
+            val = 7;
+      else if (step == "A")
+            val = 9;
+      else if (step == "B")
+            val = 11;
+      else {
+            printf("unknown step <%s>\n", qPrintable(step));
+            val = 0;
+            }
+      return ((alter + val) % 12) + 1;
+      }
+
+//---------------------------------------------------------
 //   xmlHarmony
 //---------------------------------------------------------
 
@@ -2373,7 +2413,9 @@ void MusicXml::xmlHarmony(QDomElement e, int tick, Measure* measure)
       QString printStyle(e.attribute("print-style"));
 
       QString rootStep, kind, kindText;
-      int rootAlter;
+      int rootAlter = 0;
+      QString bassStep;
+      int bassAlter = 0;
 
       for (e = e.firstChildElement(); !e.isNull(); e = e.nextSiblingElement()) {
             QString tag(e.tagName());
@@ -2398,90 +2440,85 @@ void MusicXml::xmlHarmony(QDomElement e, int tick, Measure* measure)
                   domNotImplemented(e);
                   }
             else if (tag == "kind") {
+                  // attributes: use-symbols  yes-no
+                  //             text, stack-degrees, parentheses-degree, bracket-degrees,
+                  //             print-style, halign, valign
+
                   kindText = e.attribute("text");
                   kind = e.text();
+                  }
+            else if (tag == "inversion") {
+                  // attributes: print-style
+                  }
+            else if (tag == "bass") {
+                  for (QDomElement ee = e.firstChildElement(); !ee.isNull(); ee = ee.nextSiblingElement()) {
+                        QString tag(ee.tagName());
+                        if (tag == "bass-step") {
+                              // attributes: print-style
+                              bassStep = ee.text();
+                              }
+                        else if (tag == "bass-alter") {
+                              // attributes: print-object, print-style
+                              //             location (left-right)
+                              bassAlter = ee.text().toInt();
+                              }
+                        else
+                              domError(ee);
+                        }
+                  }
+            else if (tag == "degree") {
+                  domNotImplemented(e);
+                  }
+            else if (tag == "level") {
+                  domNotImplemented(e);
+                  }
+            else if (tag == "offset") {
+                  domNotImplemented(e);
                   }
             else
                   domError(e);
             }
-      if (printObject != "yes")
-            return;
 
-      Text* text = new Text(measure->score());
-      text->setTick(tick);
-      text->setSubtype(TEXT_CHORD);
-      QTextDocument* doc = text->doc();
-      QTextCursor cursor(doc);
+      Harmony* ha = new Harmony(measure->score());
+      ha->setTick(tick);
+      ha->setRoot(getStep(rootStep, rootAlter));
+      ha->setBase(getStep(bassStep, bassAlter));
 
-      QTextCharFormat tcf = cursor.charFormat();
-      QFont font(doc->defaultFont());
-      tcf.setFont(font);
-      cursor.setBlockCharFormat(tcf);
+      struct HExt {
+            int idx;
+            const char* xmlName;
+            };
 
-      font.setFamily("MScore1");
+      static const HExt hext[] = {
+            {   1, "major"              },
+            {  16, "minor"              },
+            {  19, "minor-seventh"      },
+            {  99, "augmented-seventh"  },
+            {  70, "dominant-ninth"     },
+            {   5, "major-sixth"        },
+            {   7, "major-seventh"      },
+            {  23, "minor-sixth"        },
+            {  64, "dominant"           },
+            { 128, "suspended-fourth"   },
+            {  33, "diminished-seventh" },
+            };
 
-      QTextCharFormat superscript(tcf);
-      superscript.setVerticalAlignment(QTextCharFormat::AlignSuperScript);
-
-      QTextCharFormat ss2(superscript);
-      ss2.setFont(font);
-
-      QTextCharFormat ntcf(tcf);
-      ntcf.setFont(font);
-
-      QString flat = symbols[flatSym].code();
-      QString sharp = symbols[sharpSym].code();
-
-      cursor.insertText(rootStep, tcf);
-      cursor.insertText("7/", tcf);
-      cursor.insertText(sharp, ntcf);
-
-      if (rootAlter != 0) {
-            switch (rootAlter) {
-                  case -1:
-                        cursor.insertText(flat, ntcf);
-                        break;
-                  case 1:
-                        cursor.insertText(sharp, ntcf);
-                        break;
+      int extension = 0;
+      for (unsigned int i = 0; i < sizeof(hext)/sizeof(*hext); ++i) {
+            if (kind == hext[i].xmlName) {
+                  extension = hext[i].idx;
+                  break;
                   }
             }
-#if 0
-      if (kindText.isEmpty()) {
-#endif
-            if (kind == "minor-seventh") {
-                  cursor.insertText("m", tcf);
-                  cursor.insertText("7", superscript);
-                  }
-            else if (kind == "augmented-seventh") {
-                  cursor.insertText("7/",  superscript);
-                  cursor.insertText(sharp, ss2);
-                  cursor.insertText("5",   superscript);
-                  }
-            else if (kind == "dominant-ninth") {
-                  cursor.insertText("9", superscript);
-                  }
-            else if (kind == "major-sixth") {
-                  cursor.insertText("6", superscript);
-                  }
-            else if (kind == "major-seventh") {
-                  // triangle
-                  cursor.insertText("7", superscript);
-                  }
-            else if (kind == "minor-sixth") {
-                  cursor.insertText("m", tcf);
-                  cursor.insertText("6", superscript);
-                  }
-            else if (kind == "dominant")
-                  cursor.insertText("7", superscript);
-            else
-                  printf("unknown chord <%s>\n", qPrintable(kindText));
-#if 0
+      if (extension == 0) {
+            printf("unknown chord extension <%s> - <%s>\n", qPrintable(kindText), qPrintable(kind));
+            ha->setText(kindText);
             }
       else {
-            cursor.insertText(kindText, tcf);
+            ha->setExtension(extension);
+            ha->setText(ha->harmonyName());
             }
-#endif
-      measure->add(text);
+      ha->setVisible(printObject == "yes");
+      measure->add(ha);
       }
 

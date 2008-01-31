@@ -103,7 +103,7 @@ void MuseScore::showPalette(bool visible)
             Palette* sp = new Palette(4, 4, 0.8);
             sp->setGrid(42, 60);
             sp->showStaff(true);
-            for (int i = 0; i < 15; ++i) {
+            for (int i = 0; i < 16; ++i) {
                   Clef* k = new ::Clef(gscore, i);
                   sp->addObject(i,  k, tr(clefTable[i].name));
                   }
@@ -809,7 +809,7 @@ void MuseScore::clefMenu()
             sa->setWidget(sp);
             sp->setGrid(60, 80);
             sp->showStaff(true);
-            for (int i = 0; i < 15; ++i) {
+            for (int i = 0; i < 16; ++i) {
                   Clef* k = new ::Clef(gscore, i);
                   sp->addObject(i,  k, tr(clefTable[i].name));
                   }

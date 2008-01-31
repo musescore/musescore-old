@@ -51,11 +51,13 @@ const ClefInfo clefTable[] = {
 
 /*NC*/      ClefInfo("C",   1,  0, -10,  35, "Soprano Clef"),        // CLEF_C1
 /*NC*/      ClefInfo("C",   2,  0,  -8,  37, "Mezzo-soprano Clef"),  // CLEF_C2
-      ClefInfo("C",   3,  0,  -6,  39, "Alto Clef"),           // CLEF_C3
+            ClefInfo("C",   3,  0,  -6,  39, "Alto Clef"),           // CLEF_C3
 /*NC*/      ClefInfo("C",   4,  0,  -4,  41, "Tenor Clef"),          // CLEF_C4
 
 /*NC*/      ClefInfo("TAB", 5,  0,   0,   0, "Tablature"),
-      ClefInfo("PERC", 2,   0,  0,  45, "Percussion")
+      ClefInfo("PERC", 2,   0,  0,  45, "Percussion"),
+
+      ClefInfo("C",   3,  0,  -7,   38, "C Clef on third space"),           // CLEF_C5
       };
 
 //---------------------------------------------------------
@@ -182,6 +184,10 @@ void Clef::layout(ScoreLayout*)
                   symbol->setSym(altoclefSym);
                   yoff = 1.0;
                   break;
+            case CLEF_C5:
+                  symbol->setSym(altoclefSym);
+                  yoff = 2.5;
+                  break;
             case CLEF_TAB:
                   symbol->setSym(tabclefSym);
                   yoff = 2.0; //(staff()->lines() - 1) * 0.5;
@@ -191,7 +197,6 @@ void Clef::layout(ScoreLayout*)
                   yoff = 2.0;   //(staff()->lines() - 1) * 0.5;
                   break;
             }
-//      yoff *= mag();
       addElement(symbol, .0, .0);
       setUserOff(QPointF(xoff, yoff));
       }
