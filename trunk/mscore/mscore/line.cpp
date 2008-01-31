@@ -282,8 +282,14 @@ void SLine::layout(ScoreLayout* layout)
             else {
                   int n = segCount - segmentsNeeded;
                   for (int i = 0; i < n; ++i) {
-                        /* LineSegment* seg = */ segments.takeLast();
-                        // delete seg;   // DEBUG: will be used later
+                        if (segments.isEmpty()) {
+                              printf("SLine::layout(): no segment %d, %d expected\n", i, n);
+                              break;
+                              }
+                        else {
+                              /* LineSegment* seg = */ segments.takeLast();
+                              // delete seg;   // DEBUG: will be used later
+                              }
                         }
                   }
             segCount = segmentsNeeded;

@@ -484,12 +484,15 @@ mscore <Optionen> <Dateiname>
 
             \startnarrower[left]
             \starttabulate
-            \NC -v \NC gibt die aktuelle Versionsnummer von \M\ aus\NC\NR
             \NC -d \NC startet \M\ im Debug-Modus\NC\NR
-            \NC -s \NC startet \M\ ohne integrierten Software Synthesizer\NC\NR
-            \NC -m \NC startete \M\ ohne MIDI Input Support\NC\NR
-            \NC -L \NC startete \M\ im Layout-Debug Mode\NC\NR
             \NC -i \NC alle Midi Input Events werden auf der Konsole protokolliert\NC\NR
+            \NC -L \NC startete \M\ im Layout-Debug Mode\NC\NR
+            \NC -m \NC startete \M\ ohne MIDI Input Support\NC\NR
+            \NC -o name \NC \M\ diese startet den ''Konverter''-Mode. \M\ liest
+                eine Datei und gibt sie unter ''name'' wieder aus. Das
+                Ausgabeformat bestimmt sich dabei aus der Namensendung.\NC\NR
+            \NC -s \NC startet \M\ ohne integrierten Software Synthesizer\NC\NR
+            \NC -v \NC gibt die aktuelle Versionsnummer von \M\ aus\NC\NR
             \stoptabulate
             \stopnarrower
 
