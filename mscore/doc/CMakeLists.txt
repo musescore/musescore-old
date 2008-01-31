@@ -26,7 +26,9 @@ add_custom_command(
    )
 
 add_custom_command(
-   OUTPUT inv1-1.pdf inv1-2.pdf
+   OUTPUT
+      ${CMAKE_CURRENT_BINARY_DIR}/inv1-1.pdf
+      ${CMAKE_CURRENT_BINARY_DIR}/inv1-2.pdf
    COMMAND mscore ${PROJECT_SOURCE_DIR}/demos/inv1.msc -o inv1.pdf
    COMMAND pdftk inv1.pdf burst output inv1-%d.pdf
    DEPENDS ${PROJECT_SOURCE_DIR}/demos/inv1.msc
@@ -34,7 +36,9 @@ add_custom_command(
    )
 
 add_custom_command(
-   OUTPUT inv6-1.pdf inv6-2.pdf
+   OUTPUT
+      ${CMAKE_CURRENT_BINARY_DIR}/inv6-1.pdf
+      ${CMAKE_CURRENT_BINARY_DIR}/inv6-2.pdf
    COMMAND mscore ${PROJECT_SOURCE_DIR}/demos/inv6.msc -o inv6.pdf
    COMMAND pdftk inv6.pdf burst output inv6-%d.pdf
    DEPENDS ${PROJECT_SOURCE_DIR}/demos/inv6.msc

@@ -19,7 +19,8 @@
 #=============================================================================
 
 add_custom_command (
-      OUTPUT man-de.pdf
+      OUTPUT
+            ${CMAKE_CURRENT_BINARY_DIR}/man-de.pdf
       DEPENDS
             ${CMAKE_CURRENT_SOURCE_DIR}/man-de.tex
       COMMAND ${TEXEXEC_PATH}/texexec
@@ -31,7 +32,8 @@ add_custom_command (
       )
 
 add_custom_target ( man
-      DEPENDS ${CMAKE_CURRENT_BINARY_DIR}/man-de.pdf
+      DEPENDS
+            ${CMAKE_CURRENT_BINARY_DIR}/man-de.pdf
       )
 
 install (
