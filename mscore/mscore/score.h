@@ -60,6 +60,8 @@ class BSymbol;
 class KeySig;
 class Volta;
 class BBTrack;
+class MidiEvent;
+struct MNote;
 
 struct Style;
 struct SigEvent;
@@ -177,6 +179,7 @@ class Score : public QObject {
 
       void cmdAddText(int style);
       void cmdAddChordName();
+      int processPendingNotes(QList<MNote*>* notes, int, int);
 
    public slots:
       void doUndo();

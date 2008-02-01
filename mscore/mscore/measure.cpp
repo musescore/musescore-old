@@ -1491,6 +1491,10 @@ void Measure::cmdAddStaves(int sStaff, int eStaff)
             Rest* rest = new Rest(score(), tick(), 0);
             rest->setStaffIdx(i);
             Segment* s = findSegment(Segment::SegChordRest, tick());
+            if (s == 0) {
+                  s = createSegment(Segment::SegChordRest, tick());
+                  score()->undoAddElement(s);
+                  }
             rest->setParent(s);
             score()->undoAddElement(rest);
 

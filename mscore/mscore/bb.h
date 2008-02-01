@@ -118,7 +118,6 @@ class BBFile {
       int _style, _key, _bpm;
 
       unsigned char _barType[MAX_BARS];
-      int _numberOfChords;
       QList<BBChord> _chords;
 
       int _startChorus;
@@ -133,6 +132,7 @@ class BBFile {
       QByteArray ba;
       const unsigned char* a;
       int size;
+      int bbDivision;
 
       int timesigZ() { return styles[_style].timesigZ; }
       int timesigN() { return styles[_style].timesigN; }
