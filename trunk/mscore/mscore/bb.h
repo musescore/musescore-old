@@ -141,14 +141,15 @@ class BBFile {
       BBFile();
       ~BBFile();
       bool read(const QString&);
-      QList<BBTrack*>* tracks()   { return &_tracks;  }
-      int measures() const        { return _measures; }
-      const char* title() const   { return _title;    }
-      SigList siglist() const     { return _siglist;  }
-      QList<BBChord> chords()     { return _chords;   }
+      QList<BBTrack*>* tracks()   { return &_tracks;     }
+      int measures() const        { return _measures;    }
+      const char* title() const   { return _title;       }
+      SigList siglist() const     { return _siglist;     }
+      QList<BBChord> chords()     { return _chords;      }
       int startChorus() const     { return _startChorus; }
-      int endChorus() const       { return _endChorus; }
-      int repeats() const         { return _repeats; }
+      int endChorus() const       { return _endChorus;   }
+      int repeats() const         { return _repeats;     }
+      int key() const             { return _key;         }
       };
 
 #endif
