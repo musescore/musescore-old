@@ -92,19 +92,19 @@ bool AlsaDriver::init()
             fprintf (stderr, "Alsa_driver: can't get requested sample rate for playback.\n");
             return false;
             }
-
+#if 0
       unsigned frsize = _frsize;
       if (snd_pcm_hw_params_get_period_size (_play_hwpar, &_frsize, &dir) || (frsize != _frsize) || dir) {
             fprintf (stderr, "Alsa_driver: can't get requested period size for playback %d != %ld.\n",
                frsize, _frsize);
             return false;
             }
-
       unsigned nfrags = _nfrags;
       if (snd_pcm_hw_params_get_periods (_play_hwpar, &_nfrags, &dir) || (nfrags != _nfrags) || dir) {
             fprintf (stderr, "Alsa_driver: can't get requested number of periods for playback.\n");
             return false;
             }
+#endif
 
       snd_pcm_hw_params_get_format (_play_hwpar, &_play_format);
       snd_pcm_hw_params_get_access (_play_hwpar, &_play_access);
@@ -303,9 +303,9 @@ int AlsaDriver::setHwpar(snd_pcm_t* handle, snd_pcm_hw_params_t* hwpar)
             return -1;
             }
 
-      if (((err = snd_pcm_hw_params_set_format (handle, hwpar, SND_PCM_FORMAT_S32)) < 0)
+      if (((err = snd_pcm_hw_params_set_format (handle, hwpar, SND_PCM_FORMAT_S16)) < 0)
          && ((err = snd_pcm_hw_params_set_format (handle, hwpar, SND_PCM_FORMAT_S24_3LE)) < 0)
-         && ((err = snd_pcm_hw_params_set_format (handle, hwpar, SND_PCM_FORMAT_S16)) < 0)) {
+         && ((err = snd_pcm_hw_params_set_format (handle, hwpar, SND_PCM_FORMAT_S32)) < 0)) {
             fprintf (stderr, "Alsa_driver: the interface doesn't support 32, 24 or 16 bit access.\n.");
             return -1;
             }
@@ -321,21 +321,27 @@ int AlsaDriver::setHwpar(snd_pcm_t* handle, snd_pcm_hw_params_t* hwpar)
             return -1;
             }
 
-      if ((err = snd_pcm_hw_params_set_period_size(handle, hwpar, _frsize, 0)) < 0) {
+      int dir = 0;
+      // if ((err = snd_pcm_hw_params_set_periods_near (handle, hwpar, &_nfrags, &dir)) < 0) {
+      if ((err = snd_pcm_hw_params_set_periods(handle, hwpar, _nfrags, 0)) < 0) {
+            fprintf (stderr, "Alsa_driver: can't set periods to %u.\n", _nfrags);
+            return -1;
+            }
+
+      dir = 0;
+      if ((err = snd_pcm_hw_params_set_period_size_near(handle, hwpar, &_frsize, &dir)) < 0) {
             fprintf (stderr, "Alsa_driver: can't set period size to %lu: %s\n",
                _frsize, snd_strerror(err));
             return -1;
             }
 
-      if ((err = snd_pcm_hw_params_set_periods (handle, hwpar, _nfrags, 0)) < 0) {
-            fprintf (stderr, "Alsa_driver: can't set periods to %u.\n", _nfrags);
-            return -1;
-            }
-
-      if ((err = snd_pcm_hw_params_set_buffer_size (handle, hwpar, _frsize * _nfrags)) < 0) {
+      snd_pcm_uframes_t  n = _frsize * _nfrags;
+      if ((err = snd_pcm_hw_params_set_buffer_size_near (handle, hwpar, &n)) < 0) {
             fprintf (stderr, "Alsa_driver: can't set buffer length to %lu.\n", _frsize * _nfrags);
             return -1;
             }
+      if (n != _frsize * _nfrags)
+            fprintf (stderr, "Alsa_driver: buffer size requested %lu got %lu\n", _frsize * _nfrags, n);
 
       if ((err = snd_pcm_hw_params (handle, hwpar)) < 0) {
             fprintf (stderr, "Alsa_driver: can't set hardware parameters.\n");
