@@ -178,7 +178,7 @@ void MuseScore::loadFile()
          tr("MuseScore Files (*.msc);;"
             "MusicXml Files (*.xml);;"
             "Compressed MusicXml Files (*.mxl);;"
-            "Standard Midi File Files (*.mid);;"
+            "Midi Files (*.mid *.kar);;"
             "Muse Data Files (*.md);;"
             "Lilypond Files (*.ly);;"
             "BB Files (*.mgu *.MGU *.sgu *.SGU);;"

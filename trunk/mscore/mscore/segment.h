@@ -100,7 +100,6 @@ class Segment : public Element {
       void setElement(int track, Element* el);
       LyricsList* lyricsList(int staffIdx)             { return &_lyrics[staffIdx];  }
       const LyricsList* lyricsList(int staffIdx) const { return &_lyrics[staffIdx];  }
-      void setLyrics(int staff, Lyrics* l);
 
       Measure* measure() const            { return (Measure*)parent(); }
       double x() const                    { return _pos.x();           }
