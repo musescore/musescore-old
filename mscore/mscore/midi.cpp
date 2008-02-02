@@ -930,8 +930,10 @@ void Score::convertMidi(MidiFile* mf)
                         track->program = ((MidiController*)e)->value();
                         }
                   }
-            if (events == 0)
-		      tracks->removeAt(tracks->indexOf(track));
+            if (events == 0) {
+                  printf("remove empty track\n");
+//		      tracks->removeAt(tracks->indexOf(track));
+                  }
             else
 	            track->medPitch /= events;
             }
@@ -1074,15 +1076,6 @@ if (tick)
             int tick = sigmap->bar2tick(i, 0, 0);
             measure->setTick(tick);
 
-#if 0
-            foreach(Staff* s, _staves) {
-	            if (s->isTop()) {
-      	            BarLine* barLine = new BarLine(this);
-            	      barLine->setStaff(s);
-	                  measure->setEndBarLine(barLine);
-      	            }
-                  }
-#endif
       	_layout->add(measure);
             }
 
@@ -1317,96 +1310,113 @@ printf("unmapped drum note 0x%02x %d\n", mn->pitch(), mn->pitch());
 
       bool keyFound = false;
 
-//      Measure* measure = tick2measure(0);
+      //
+      // process meta events
+      //
       for (ciEvent i = el.begin(); i != el.end(); ++i) {
             MidiEvent* e = *i;
-            if (e->type() == ME_META) {
-                  MidiMeta* mm = (MidiMeta*)e;
-                  switch(mm->metaType()) {
-                        case META_LYRIC:
-                              {
-      		            Measure* measure = tick2measure(mm->ontime());
-                              Segment* seg = measure->findSegment(Segment::SegChordRest, e->ontime());
-                              if (seg == 0) {
-                                    for (seg = measure->first(); seg;) {
-                                          if (seg->subtype() != Segment::SegChordRest) {
-                                                seg = seg->next();
-                                                continue;
-                                                }
-                                          Segment* ns;
-                                          for (ns = seg->next(); ns && ns->subtype() != Segment::SegChordRest; ns = ns->next())
-                                                ;
-                                          if (ns == 0 || ns->tick() > e->ontime())
-                                                break;
-                                          seg = ns;
+            if (e->type() != ME_META)
+                  continue;
+
+            MidiMeta* mm = (MidiMeta*)e;
+            if (debugMode)
+                  printf("meta type 0x%02x\n", mm->metaType());
+
+            switch(mm->metaType()) {
+                  case META_TEXT:
+                  case META_LYRIC:
+                        {
+      	            Measure* measure = tick2measure(mm->ontime());
+                        Segment* seg = measure->findSegment(Segment::SegChordRest, e->ontime());
+                        if (seg == 0) {
+                              for (seg = measure->first(); seg;) {
+                                    if (seg->subtype() != Segment::SegChordRest) {
+                                          seg = seg->next();
+                                          continue;
                                           }
+                                    Segment* ns;
+                                    for (ns = seg->next(); ns && ns->subtype() != Segment::SegChordRest; ns = ns->next())
+                                          ;
+                                    if (ns == 0 || ns->tick() > e->ontime())
+                                          break;
+                                    seg = ns;
                                     }
-                              if (seg == 0) {
-                                    printf("no segment found for lyrics<%s> at tick %d\n",
-                                       mm->data(), e->ontime());
-                                    break;
-                                    }
-                              Lyrics* l = new Lyrics(this);
-                              QString txt((char*)(mm->data()));
-                              l->setText(txt);
-                              l->setTick(seg->tick());
-                              seg->setLyrics(staffIdx, l);
                               }
+                        if (seg == 0) {
+                              printf("no segment found for lyrics<%s> at tick %d\n",
+                                 mm->data(), e->ontime());
                               break;
-                        case META_TEMPO:
-                              break;
-
-                        case META_KEY_SIGNATURE:
-                              {
-                              unsigned char* data = mm->data();
-                              int key = (char)data[0];
-                              if (key < -7 || key > 7) {
-                                    printf("ImportMidi: illegal key %d\n", key);
-                                    break;
-                                    }
-                              (*cstaff->keymap())[e->ontime()] = key;
-                              keyFound = false;
                               }
-                              break;
-                        case META_COMPOSER:     // mscore extension
-                        case META_POET:
-                        case META_TRANSLATOR:
-                        case META_SUBTITLE:
-                        case META_TITLE:
-                              {
-                              Text* text = new Text(this);
-                              switch(mm->metaType()) {
-                                    case META_COMPOSER:
-                                          text->setSubtype(TEXT_COMPOSER);
-                                          break;
-                                    case META_TRANSLATOR:
-                                          text->setSubtype(TEXT_TRANSLATOR);
-                                          break;
-                                    case META_POET:
-                                          text->setSubtype(TEXT_POET);
-                                          break;
-                                    case META_SUBTITLE:
-                                          text->setSubtype(TEXT_SUBTITLE);
-                                          break;
-                                    case META_TITLE:
-                                          text->setSubtype(TEXT_TITLE);
-                                          break;
-                                    }
-
-                              text->setText((char*)(mm->data()));
-
-                              ScoreLayout* layout = mainLayout();
-                              MeasureBase* measure = layout->first();
-                              if (measure->type() != VBOX) {
-                                    measure = new VBox(this);
-                                    measure->setTick(0);
-                                    measure->setNext(layout->first());
-                                    layout->add(measure);
-                                    }
-                              measure->add(text);
-                              }
-                              break;
+                        Lyrics* l = new Lyrics(this);
+                        QString txt((char*)(mm->data()));
+                        l->setText(txt);
+                        l->setTick(seg->tick());
+                        l->setStaffIdx(staffIdx);
+                        if (debugMode)
+                              printf("Meta Lyric <%s>\n", qPrintable(txt));
+                        seg->add(l);
                         }
+                        break;
+
+                  case META_TRACK_NAME:
+                  case META_TEMPO:
+                        break;
+
+                  case META_KEY_SIGNATURE:
+                        {
+                        unsigned char* data = mm->data();
+                        int key = (char)data[0];
+                        if (key < -7 || key > 7) {
+                              printf("ImportMidi: illegal key %d\n", key);
+                              break;
+                              }
+                        (*cstaff->keymap())[e->ontime()] = key;
+                        keyFound = false;
+                        }
+                        break;
+                  case META_COMPOSER:     // mscore extension
+                  case META_POET:
+                  case META_TRANSLATOR:
+                  case META_SUBTITLE:
+                  case META_TITLE:
+                        {
+                        Text* text = new Text(this);
+                        switch(mm->metaType()) {
+                              case META_COMPOSER:
+                                    text->setSubtype(TEXT_COMPOSER);
+                                    break;
+                              case META_TRANSLATOR:
+                                    text->setSubtype(TEXT_TRANSLATOR);
+                                    break;
+                              case META_POET:
+                                    text->setSubtype(TEXT_POET);
+                                    break;
+                              case META_SUBTITLE:
+                                    text->setSubtype(TEXT_SUBTITLE);
+                                    break;
+                              case META_TITLE:
+                                    text->setSubtype(TEXT_TITLE);
+                                    break;
+                              }
+
+                        text->setText((char*)(mm->data()));
+
+                        ScoreLayout* layout = mainLayout();
+                        MeasureBase* measure = layout->first();
+                        if (measure->type() != VBOX) {
+                              measure = new VBox(this);
+                              measure->setTick(0);
+                              measure->setNext(layout->first());
+                              layout->add(measure);
+                              }
+                        measure->add(text);
+                        }
+                        break;
+                  default:
+                        if (debugMode) {
+                              printf("unknown meta type 0x%02x\n", mm->metaType());
+                              }
+                        break;
                   }
             }
 

@@ -385,6 +385,7 @@ bool Score::importBB(const QString& name)
             Staff* s   = new Staff(this, part, 0);
             part->insertStaff(s);
             _staves.push_back(s);
+            _parts.push_back(part);
             }
 
       //---------------------------------------------------

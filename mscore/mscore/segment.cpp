@@ -51,20 +51,6 @@ void Segment::setElement(int track, Element* el)
       }
 
 //---------------------------------------------------------
-//   setLyrics
-//---------------------------------------------------------
-
-void Segment::setLyrics(int staff, Lyrics* l)
-      {
-      l->setParent(this);
-      int idx = l->no();
-      int n = _lyrics[staff].size();
-      for (int i = n; i <= idx; ++i)
-            _lyrics[staff].push_back(0);
-      _lyrics[staff][idx] = l;
-      }
-
-//---------------------------------------------------------
 //   remove
 //---------------------------------------------------------
 
