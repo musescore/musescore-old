@@ -1,4 +1,5 @@
 2.2.8  (ws)
+      - make alsa driver more robust; dont insist on configured buffer sizes
       - enhanced bb-import
 1.2.8  (ws)
       - fixed: sometimes crashes on inserting a new instrument
