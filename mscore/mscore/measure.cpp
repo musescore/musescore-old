@@ -2024,7 +2024,7 @@ void Measure::write(Xml& xml, int staff) const
             }
 
       foreach (const Element* el, _el) {
-            if ((el->staff() == _score->staff(staff)) || (el->staff() == 0 && staff == 0))
+            if ((el->staffIdx() == staff) || (el->staffIdx() == -1 && staff == 0))
                   el->write(xml);
             }
 

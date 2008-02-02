@@ -33,6 +33,7 @@
 #include "utils.h"
 #include "harmony.h"
 #include "layoutbreak.h"
+#include "key.h"
 
 //---------------------------------------------------------
 //   BBTrack
@@ -118,6 +119,8 @@ bool BBFile::read(const QString& name)
                   return false;
             }
 
+      printf("read <%s> version 0x%02x\n", qPrintable(name), _version);
+
       //---------------------------------------------------
       //    read title
       //---------------------------------------------------
@@ -139,13 +142,27 @@ bool BBFile::read(const QString& name)
             printf("Import bb: unknown style %d\n", _style + 1);
             return false;
             }
-      _key      = a[idx++];
-      _bpm      = a[idx] + (a[idx+1] << 8);
+      _key = a[idx++];
+
+      // map D# G# A#   to Eb Ab Db
+      // major   C, Db,  D, Eb,  E,  F, Gb,  G, Ab,  A, Bb,  B, C#, D#, F#, G#, A#
+      // minor   C, Db,  D, Eb,  E,  F, Gb,  G, Ab,  A, Bb,  B, C#, D#, F#, G#, A#
+      static int kt[] = {
+           0,    0, -5,  2, -3,  4, -1, -6,  1, -4,  3, -2,  5,  7, -3,  6, -4, -2,
+                -3, 4,  -1, -6,  1, -4,  3, -2,  5,  0, -5,  2,  4,  6,  3,  5, 7
+           };
+      if (_key >= int (sizeof(kt)/sizeof(*kt))) {
+            printf("bad key %d\n", _key);
+            return false;
+            }
+      _key = kt[_key];
+
+      _bpm = a[idx] + (a[idx+1] << 8);
       idx += 2;
 
       printf("Title <%s>\n", _title);
       printf("style %d\n",   _style);
-      printf("key   %d\n", _key);
+      printf("key   %d\n",   _key);
       printf("sig   %d/%d\n", timesigZ(), timesigN());
       printf("bpm   %d\n", _bpm);
 
@@ -171,7 +188,8 @@ bool BBFile::read(const QString& name)
       //    read chord extensions
       //---------------------------------------------------
 
-      for (int beat = 0; beat < MAX_BARS * 4;) {
+      int beat;
+      for (beat = 0; beat < MAX_BARS * 4;) {
             int val = a[idx++];
             if (val == 0)
                   beat += a[idx++];
@@ -189,7 +207,7 @@ bool BBFile::read(const QString& name)
       //---------------------------------------------------
 
       int roots = 0;
-      for (int beat = 0; beat < MAX_BARS * 4;) {
+      for (beat = 0; beat < MAX_BARS * 4;) {
             int val = a[idx++];
             if (val == 0)
                   beat += a[idx++];
@@ -209,22 +227,29 @@ bool BBFile::read(const QString& name)
                   ++beat;
                   }
             }
+
       if (roots != _chords.size()) {
             printf("import bb: roots %d != extensions %d\n", roots, _chords.size());
             return false;
             }
 
+#if 0
       printf("================chords=======================\n");
       foreach(BBChord c, _chords) {
             printf("chord beat %3d bass %d root %d extension %d\n",
                c.beat, c.bass, c.root, c.extension);
             }
       printf("================chords=======================\n");
+#endif
 
       printf("Measures %d\n", _measures);
       ++_measures;
 
-      ++idx;
+      if (a[idx] == 1) {            //??
+            printf("Skip 0x%02x at 0x%04x\n", a[idx], idx);
+            ++idx;
+            }
+
       _startChorus = a[idx++];
       _endChorus   = a[idx++];
       _repeats     = a[idx++];
@@ -284,7 +309,7 @@ bool BBFile::read(const QString& name)
             int i = 0;
             int lastLen = 0;
             for (i = 0; i < eventCount; ++i, idx+=12) {
-                  int type = a[idx + 4];
+                  int type = a[idx + 4] & 0xf0;
                   if (type == 0x90) {
                         int channel = a[idx + 7];
                         BBTrack* track = 0;
@@ -323,6 +348,9 @@ bool BBFile::read(const QString& name)
                         note->setDuration((len * division) / bbDivision);
                         track->append(note);
                         }
+                  else if (type == 0xb0) {
+                        // ignore controller
+                        }
                   else if (type == 0)
                         break;
                   else {
@@ -349,7 +377,10 @@ bool Score::importBB(const QString& name)
             }
 
       QList<BBTrack*>* tracks = bb.tracks();
-      for (int i = 0; i < tracks->size(); ++i) {
+      int ntracks = tracks->size();
+      if (ntracks == 0)             // no events?
+            ntracks = 1;
+      for (int i = 0; i < ntracks; ++i) {
             Part* part = new Part(this);
             Staff* s   = new Staff(this, part, 0);
             part->insertStaff(s);
@@ -374,9 +405,22 @@ bool Score::importBB(const QString& name)
 	foreach (BBTrack* track, *tracks)
             track->cleanup();
 
-	int staffIdx = 0;
-	foreach (BBTrack* track, *tracks)
-            convertTrack(track, staffIdx++);
+      if (tracks->isEmpty()) {
+            for (MeasureBase* mb = _layout->first(); mb; mb = mb->next()) {
+                  if (mb->type() != MEASURE)
+                        continue;
+                  Measure* measure = (Measure*)mb;
+                  Rest* rest = new Rest(this, measure->tick(), 0);
+                  rest->setStaffIdx(0);
+                  Segment* s = measure->getSegment(rest);
+                  s->add(rest);
+                  }
+            }
+      else {
+      	int staffIdx = 0;
+	      foreach (BBTrack* track, *tracks)
+                  convertTrack(track, staffIdx++);
+            }
 
       spell();
 
@@ -446,6 +490,11 @@ bool Score::importBB(const QString& name)
                   measure->setRepeatCount(bb.repeats());
                   }
             ++n;
+            }
+
+      foreach(Staff* staff, _staves) {
+            KeyList* kl = staff->keymap();
+            (*kl)[0] = bb.key();
             }
 
       _saved   = false;
