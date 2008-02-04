@@ -754,6 +754,7 @@ void Slur::layout(ScoreLayout* layout)
       if (nsegs > onsegs) {
             for (unsigned i = onsegs; i < nsegs; ++i) {
                   SlurSegment* s = new SlurSegment(score());
+                  s->setTrack(track());
                   add(s);
                   }
             }

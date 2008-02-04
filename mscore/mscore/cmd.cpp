@@ -557,13 +557,12 @@ void Score::setGraceNote(int tick, int track,  int pitch, NoteType type, int len
 
       Note* note = new Note(this);
       note->setPitch(pitch);
-      note->setStaffIdx(track / VOICES);
+      note->setTrack(track);
       note->setTickLen(len);
 
       Chord* chord = new Chord(this);
       chord->setTick(tick);
-      chord->setVoice(track % VOICES);
-      chord->setStaffIdx(track / VOICES);
+      chord->setTrack(track);
       chord->add(note);
 
       chord->setTickLen(len);
@@ -1554,15 +1553,8 @@ void Score::cmd(const QString& cmd)
                   padToggle(PAD_BEAM32);
             else if (cmd == "pad-tie") {
                   _padState.tie = !_padState.tie;
-                  if (!noteEntryMode() && sel->state() == SEL_SINGLE) {
-                        Element* el = sel->element();
-                        if (el->type() == NOTE) {
-                  		Tie* tie = new Tie(this);
-                              tie->setParent(el);
-            	      	cmdAdd(tie);
-                              _layout->connectTies();
-                              }
-                        }
+                  if (!noteEntryMode() && sel->state() == SEL_SINGLE)
+                        cmdAddTie();
                   }
             else if (cmd == "pad-sharp2") {
                   _padState.prefix = _padState.prefix != 3 ? 3 : 0;

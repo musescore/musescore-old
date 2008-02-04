@@ -1018,21 +1018,15 @@ ChordRest* Score::setNoteEntry(bool val, bool step)
                         _is.pos += cr->tickLen();
                   }
             _noteEntryMode = true;
-            foreach(Viewer* v, viewer)
-                  v->setCursorOn(true);
-            canvas()->setState(Canvas::NOTE_ENTRY);
-            mscore->setState(STATE_NOTE_ENTRY);
             }
       else {
             _padState.len   = 0;
             _is.pos        = -1;
             _noteEntryMode = false;
             setPadState();
-            foreach(Viewer* v, viewer)
-                  v->setCursorOn(false);
-            canvas()->setState(Canvas::NORMAL);
-            mscore->setState(STATE_NORMAL);
             }
+      canvas()->setState(_noteEntryMode ? Canvas::NOTE_ENTRY : Canvas::NORMAL);
+      mscore->setState(_noteEntryMode ? STATE_NOTE_ENTRY : STATE_NORMAL);
       return cr;
       }
 
@@ -1695,5 +1689,14 @@ void Score::toEList(QMap<int, Event>* events, bool expandRepeats, int offset, in
             else
                   printf("repeat stack not empty!\n");
             }
+      }
+
+//---------------------------------------------------------
+//   setInputTrack
+//---------------------------------------------------------
+
+void Score::setInputTrack(int v)
+      {
+      _is.track = v;
       }
 

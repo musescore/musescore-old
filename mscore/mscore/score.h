@@ -465,7 +465,7 @@ class Score : public QObject {
       void setPlayPos(int val)      { _playPos = val;   }
       int inputPos() const          { return _is.pos;   }
       int inputTrack() const        { return _is.track; }
-      void setInputTrack(int v)     { _is.track = v;    }
+      void setInputTrack(int);
       PadState* padState()          { return &_padState; }
       TextStyle* textStyle(int idx) { return _textStyles[idx]; }
       const QVector<TextStyle*>& textStyles() const { return _textStyles; }

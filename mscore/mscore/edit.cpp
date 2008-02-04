@@ -437,6 +437,7 @@ void Score::putNote(const QPointF& pos, bool replace)
                   setNote(tick, track, pitch, len);
             }
       _is.track       = staffIdx * VOICES + voice;
+
       _padState.pitch = pitch;
       _is.pos         = tick + len;
       }
@@ -507,7 +508,7 @@ Slur* Score::cmdAddSlur()
             return 0;
             }
       Slur* slur = new Slur(this);
-      slur->setStaffIdx(staffIdx);
+      slur->setTrack(track);
       slur->setStart(chord->tick(), track);
       slur->setEnd(tick2, track);
       slur->setParent(_layout);
@@ -533,7 +534,8 @@ void Score::cmdAddTie()
       int staffIdx  = chord->staffIdx();
       ChordRest* el = nextChordRest(chord);
       if (el == 0 || el->type() != CHORD) {
-            printf("at end\n");
+            if (debugMode)
+                  printf("addTie: no next chord found\n");
             return;
             }
       NoteList* nl = ((Chord*)el)->noteList();
@@ -545,7 +547,8 @@ void Score::cmdAddTie()
                   }
             }
       if (note2 == 0) {
-            printf("1: next note for tie not found\n");
+            if (debugMode)
+                  printf("addTie: next note for tie not found\n");
             return;
             }
 
