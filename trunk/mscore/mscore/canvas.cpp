@@ -86,8 +86,6 @@ Canvas::Canvas(QWidget* parent)
       cursor           = 0;
       shadowNote       = 0;
       cursorTimer      = new QTimer(this);
-      buttonState      = 0;
-      keyState         = 0;
       mousePressed     = false;
 
       connect(cursorTimer, SIGNAL(timeout()), SLOT(cursorBlink()));
@@ -347,8 +345,8 @@ void Canvas::mousePressEvent(QMouseEvent* ev)
             return;
             }
 
-      keyState    = ev->modifiers();
-      buttonState = ev->button();
+      Qt::KeyboardModifiers keyState = ev->modifiers();
+      Qt::MouseButtons buttonState = ev->button();
       startMove   = imatrix.map(QPointF(ev->pos()));
 
       Element* element = elementAt(startMove);
@@ -393,7 +391,7 @@ void Canvas::mousePressEvent(QMouseEvent* ev)
             return;
             }
 
-      if (state != EDIT)
+      if (state != EDIT && state != NOTE_ENTRY_EDIT)
             _score->startCmd();
       switch (state) {
             case NORMAL:
@@ -437,6 +435,7 @@ void Canvas::mousePressEvent(QMouseEvent* ev)
                         _score->putNote(startMove, keyState & Qt::ShiftModifier);
                   break;
 
+            case NOTE_ENTRY_EDIT:
             case EDIT:
                   if (ev->button() == Qt::MidButton) {
                         // clipboard paste
@@ -469,7 +468,7 @@ void Canvas::mousePressEvent(QMouseEvent* ev)
 
 void Canvas::mouseDoubleClickEvent(QMouseEvent* ev)
       {
-      if (state == EDIT)
+      if (state == EDIT || state == NOTE_ENTRY_EDIT)
             return;
 
       Element* element = _score->dragObject();
@@ -491,7 +490,7 @@ void Canvas::mouseDoubleClickEvent(QMouseEvent* ev)
 
 void Canvas::mouseMoveEvent(QMouseEvent* ev)
       {
-      if (buttonState == Qt::MidButton) {
+      if (QApplication::mouseButtons() == Qt::MidButton) {
             QString mimeType = _score->sel->mimeType();
             if (!mimeType.isEmpty()) {
                   QDrag* drag = new QDrag(this);
@@ -546,13 +545,13 @@ void Canvas::mouseMoveEvent1(QMouseEvent* ev)
 
       switch (state) {
             case NORMAL:
-                  if (buttonState == 0)    // debug
+                  if (QApplication::mouseButtons() == 0)    // debug
                         return;
                   if (sqrt(pow(delta.x(),2)+pow(delta.y(),2)) * _matrix.m11() <= 2.0)
                         return;
                   {
                   Element* de = _score->dragObject();
-                  if (de && keyState == Qt::ShiftModifier) {
+                  if (de && (QApplication::keyboardModifiers() == Qt::ShiftModifier)) {
                         // drag selection
                         QString mimeType = _score->sel->mimeType();
                         if (!mimeType.isEmpty()) {
@@ -567,12 +566,7 @@ void Canvas::mouseMoveEvent1(QMouseEvent* ev)
                         }
                   if (de && de->isMovable()) {
                         QPointF o;
-                        if (_score->sel->state() == SEL_STAFF || _score->sel->state() == SEL_SYSTEM) {
-                              double s(_score->dragSystem->distance(_score->dragStaff));
-                              o = QPointF(0.0, mag() * s);
-                              setState(DRAG_STAFF);
-                              }
-                        else {
+                        if (_score->sel->state() != SEL_STAFF && _score->sel->state() != SEL_SYSTEM) {
                               _score->startDrag();
                               o = QPointF(de->userOff() * _spatium);
                               setState(DRAG_OBJ);
@@ -580,7 +574,7 @@ void Canvas::mouseMoveEvent1(QMouseEvent* ev)
                         startMove -= o;
                         break;
                         }
-                  if (keyState & Qt::ShiftModifier)
+                  if (QApplication::keyboardModifiers() & Qt::ShiftModifier)
                         setState(LASSO);
                   else {
                         dragCanvasState = true;
@@ -607,6 +601,8 @@ void Canvas::mouseMoveEvent1(QMouseEvent* ev)
                   break;
 
             case EDIT:
+            case NOTE_ENTRY_EDIT:
+            case STATES:      // dummy
                   break;
 
 
@@ -619,11 +615,6 @@ void Canvas::mouseMoveEvent1(QMouseEvent* ev)
                   updateGrips();
                   startMove += delta;
                   }
-                  break;
-
-            case DRAG_STAFF:
-//                  _score->dragSystem->setDistance(_score->dragStaff, delta.y());
-//                  _score->layout1();   // DEBUG: does not work
                   break;
 
             case DRAG_OBJ:
@@ -685,7 +676,7 @@ void Canvas::mouseReleaseEvent(QMouseEvent* ev)
       {
       if (dragCanvasState) {
             dragCanvasState = false;
-            setState(state);        // reset cursor pixmap
+            setCursor(QCursor(Qt::ArrowCursor));
             mousePressed = false;
             _score->endCmd();
             return;
@@ -702,10 +693,10 @@ void Canvas::mouseReleaseEvent(QMouseEvent* ev)
       mousePressed = false;
 
       seq->stopNotes();
-      if (state == EDIT)
+      if (state == EDIT || state == NOTE_ENTRY_EDIT)
             return;
       if (state == MAG) {
-            if (keyState & Qt::ShiftModifier)
+            if (QApplication::keyboardModifiers() & Qt::ShiftModifier)
                   return;
             setState(NORMAL);
             return;
@@ -722,7 +713,6 @@ void Canvas::mouseReleaseEvent(QMouseEvent* ev)
 
 void Canvas::mouseReleaseEvent1(QMouseEvent* /*ev*/)
       {
-      buttonState = 0;
       switch (state) {
             case DRAG_EDIT:
                   _score->addRefresh(_score->editObject->abbox());
@@ -746,20 +736,16 @@ void Canvas::mouseReleaseEvent1(QMouseEvent* /*ev*/)
                   setDropTarget(0); // this also resets dropAnchor
                   break;
 
-            case DRAG_STAFF:
-                  _score->setLayoutAll(true);
-                  setState(NORMAL);
-                  break;
-
-            default:
-                  setState(NORMAL);
-
             case NOTE_ENTRY:
                   break;
 
             case NORMAL:
                   if (!_score->dragObject())
                         _score->select(0, 0, 0);      // deselect all
+                  break;
+
+            default:
+                  setState(NORMAL);
                   break;
             }
       }
@@ -834,39 +820,103 @@ void Canvas::setForeground(const QColor& color)
 //   setState
 //---------------------------------------------------------
 
-void Canvas::setState(State s)
+void Canvas::setState(State action)
       {
-      switch(s) {
-            case NOTE_ENTRY:
-                  setCursor(QCursor(Qt::UpArrowCursor));
-                  break;
-            case MAG:
-                  setCursor(QCursor(Qt::SizeAllCursor));
-                  break;
-            case EDIT:
-                  mscore->setState(STATE_EDIT);
+      static const char* stateNames[] = {
+         "NORMAL", "DRAG_OBJ", "EDIT", "DRAG_EDIT", "LASSO",
+         "NOTE_ENTRY", "MAG", "NOTE_ENTRY_EDIT"
+         };
+      int stateTable[STATES][STATES-1] = {
+//action          NORMAL, DRAG_OBJ, EDIT, DRAG_EDIT, LASSO, NOTE_ENTRY, MAG
+/*NORMAL         */ {  1,       99,    8,         0,     6,          2,   4 },
+/*DRAG_OBJ       */ { 99,        1,    0,         0,     0,          0,   0 },
+/*EDIT           */ {  9,        0,    1,        99,     0,          0,   0 },
+/*DRAG_EDIT      */ { 99,        0,   99,         1,     0,          0,   0 },
+/*LASSO          */ {  7,        0,    0,         0,     1,          0,   0 },
+/*NOTE_ENTRY     */ {  3,        0,   10,         0,     0,          1,   0 },
+/*MAG            */ {  5,        0,    0,         0,     0,          0,   1 },
+/*NOTE_ENTRY_EDIT*/ { 11,        0,    0,         0,     0,          0,   0 }
+      };
 
-            case NORMAL:
-            case DRAG_OBJ:
-            case DRAG_STAFF:
-            case DRAG_EDIT:
-            case LASSO:
+      if (debugMode)
+            printf("switch from %s to %s\n", stateNames[state], stateNames[action]);
+
+      switch(stateTable[state][action]) {
+            default:
+            case 0:
+                  printf("illegal state switch from %s to %s\n",
+                     stateNames[state], stateNames[action]);
+                  break;
+            case 1:
+                  break;
+            case 2:     // NORMAL     - NOTE_ENTRY
+                  setCursor(QCursor(Qt::UpArrowCursor));
+                  setMouseTracking(true);
+                  shadowNote->setVisible(true);
+                  setCursorOn(true);
+                  state = action;
+                  break;
+            case 5:     // MAG        - NORMAL
                   setCursor(QCursor(Qt::ArrowCursor));
+                  state = action;
+                  break;
+            case 3:     // NOTE_ENTRY - NORMAL
+                  setCursor(QCursor(Qt::ArrowCursor));
+                  setMouseTracking(false);
+                  shadowNote->setVisible(false);
+                  setCursorOn(false);
+                  state = action;
+                  break;
+            case 4:     // NORMAL - MAG
+                  setCursor(QCursor(Qt::SizeAllCursor));
+                  state = action;
+                  break;
+            case 6:     // NORMAL - LASSO
+                  lasso->setVisible(true);
+                  state = action;
+                  break;
+            case 7:     // LASSO - NORMAL
+                  lasso->setVisible(false);
+                  state = action;
+                  break;
+            case 8:     // NORMAL - EDIT
+                  state = action;
+                  mscore->setState(STATE_EDIT);
+                  break;
+            case 9:     // EDIT - NORMAL
+                  state = action;
+                  setDropTarget(0);
+                  _score->endEdit();
+                  break;
+            case 10:    // NOTE_ENTRY - EDIT
+                  setCursor(QCursor(Qt::ArrowCursor));
+                  setMouseTracking(false);
+                  shadowNote->setVisible(false);
+                  setCursorOn(false);
+                  state = NOTE_ENTRY_EDIT;
+                  mscore->setState(STATE_EDIT);
+                  break;
+            case 11:    // EDIT_NOTE_ENTRY - NORMAL
+                  setDropTarget(0);
+                  _score->endEdit();
+                  setCursor(QCursor(Qt::UpArrowCursor));
+                  setMouseTracking(true);
+                  shadowNote->setVisible(true);
+                  setCursorOn(true);
+                  _score->setNoteEntry(true, false);
+                  if (_score->noteEntryMode())
+                        state = NOTE_ENTRY;
+                  else {
+                        printf("leave note entry\n");
+                        state = NORMAL;
+                        }
+                  break;
+            case 99:
+                  state = action;
                   break;
             }
-      if (shadowNote->visible() != (s == NOTE_ENTRY)) {
-            shadowNote->setVisible(s == NOTE_ENTRY);
-            _score->addRefresh(shadowNote->abbox());
-            _score->addRefresh(cursor->abbox());
-            }
-      setMouseTracking(s == NOTE_ENTRY);
-      if (state == LASSO || s == LASSO)
-            lasso->setVisible(s == LASSO);
-      if ((state == EDIT) && (s != EDIT) && (s != DRAG_EDIT)) {
-            setDropTarget(0);
-            _score->endEdit();
-            }
-      state = s;
+      _score->addRefresh(shadowNote->abbox());
+      _score->addRefresh(cursor->abbox());
       }
 
 //---------------------------------------------------------
@@ -1094,18 +1144,15 @@ void Canvas::paintEvent(QPaintEvent* ev)
             _score->doLayout();
             if (navigator)
                   navigator->layoutChanged();
-            if (state == EDIT || state == DRAG_EDIT)
+            if (state == EDIT || state == DRAG_EDIT || state == NOTE_ENTRY_EDIT)
                   updateGrips();
-            //
-            // position of all segments is now known and we can position
-            // the cursor in note entry mode
-
-            if (score()->noteEntryMode())
-                  moveCursor();
             region = QRegion(0, 0, width(), height());
             }
       else
             region = ev->region();
+
+      if (score()->noteEntryMode())
+            moveCursor();
 
       QVector<QRect> vector = region.rects();
       foreach(QRect r, vector)
@@ -1156,7 +1203,7 @@ void Canvas::paint(const QRect& rr, QPainter& p)
       if (dropRectangle.isValid())
             p.fillRect(dropRectangle, QColor(80, 0, 0, 80));
 
-      if (state == EDIT || state == DRAG_EDIT) {
+      if (state == EDIT || state == DRAG_EDIT || state == NOTE_ENTRY_EDIT) {
             qreal lw = 2.0/p.matrix().m11();
             QPen pen(Qt::blue);
             pen.setWidthF(lw);
@@ -2067,7 +2114,7 @@ void Canvas::paintLasso(QPainter& p)
             p.setPen(pen);
             p.drawLine(dropAnchor);
             }
-      if (state == EDIT || state == DRAG_EDIT) {
+      if (state == EDIT || state == DRAG_EDIT || state == NOTE_ENTRY_EDIT) {
             qreal lw = 2.0/p.matrix().m11();
             QPen pen(Qt::blue);
             pen.setWidthF(lw);

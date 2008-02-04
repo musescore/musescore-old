@@ -1,3 +1,5 @@
+4.2.8  (ws)
+      - fixed crash in note entry mode
 2.2.8  (ws)
       - make alsa driver more robust; dont insist on configured buffer sizes
       - enhanced bb-import

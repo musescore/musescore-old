@@ -47,7 +47,7 @@ void Canvas::keyPressEvent(QKeyEvent* ev)
 //printf("key key:%x state:%x text:<%s>\n", key,
 //    int(ev->modifiers()), ev->text().toLatin1().data());
 
-      if (state != EDIT && state != DRAG_EDIT) {
+      if (state != EDIT && state != DRAG_EDIT && state != NOTE_ENTRY_EDIT) {
             ev->ignore();
             return;
             }
