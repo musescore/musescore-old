@@ -457,6 +457,7 @@ MuseScore::MuseScore()
       //---------------------
 
       QMenu* menuFile = mb->addMenu(tr("&Score"));
+      menuFile->setObjectName("Score");
 
       menuFile->addAction(getAction("file-new"));
       menuFile->addAction(getAction("file-open"));
@@ -478,6 +479,7 @@ MuseScore::MuseScore()
       //---------------------
 
       QMenu* menuEdit = mb->addMenu(tr("&Edit"));
+      menuEdit->setObjectName("Edit");
       menuEdit->addAction(getAction("undo"));
       menuEdit->addAction(getAction("redo"));
 
@@ -503,6 +505,7 @@ MuseScore::MuseScore()
       //---------------------
 
       QMenu* menuCreate = genCreateMenu(mb);
+      mb->setObjectName("Create");
       mb->addMenu(menuCreate);
 
       //---------------------
@@ -510,6 +513,7 @@ MuseScore::MuseScore()
       //---------------------
 
       QMenu* menuNotes = mb->addMenu(tr("Notes"));
+      menuNotes->setObjectName("Notes");
 
       menuNotes->addAction(getAction("note-input"));
       menuNotes->addAction(getAction("pitch-spell"));
@@ -563,6 +567,7 @@ MuseScore::MuseScore()
       //---------------------
 
       QMenu* menuLayout = mb->addMenu(tr("&Layout"));
+      menuLayout->setObjectName("Layout");
 
       menuLayout->addAction(tr("Page Settings..."), this, SLOT(showPageSettings()));
       menuLayout->addAction(tr("Reset Positions"),  this, SLOT(resetUserOffsets()));
@@ -578,6 +583,7 @@ MuseScore::MuseScore()
       //---------------------
 
       QMenu* menuStyle = mb->addMenu(tr("&Style"));
+      menuStyle->setObjectName("Style");
       menuStyle->addAction(tr("Edit Style..."), this, SLOT(editStyle()));
       menuStyle->addAction(tr("Edit Text Style..."), this, SLOT(editTextStyle()));
       menuStyle->addSeparator();
@@ -589,6 +595,7 @@ MuseScore::MuseScore()
       //---------------------
 
       menuDisplay = mb->addMenu(tr("&Display"));
+      menuDisplay->setObjectName("Display");
 
       a = getAction("toggle-palette");
       a->setCheckable(true);
@@ -951,7 +958,7 @@ void MuseScore::selectionChanged(int state)
 void MuseScore::appendScore(Score* score)
       {
       scoreList.push_back(score);
-      tab->addTab(score->projectName());
+      tab->addTab(score->name());
 
       bool showTabBar = scoreList.size() > 1;
       tab->setVisible(showTabBar);
@@ -1107,7 +1114,7 @@ void MuseScore::setCurrentScore(int idx)
       canvas->setXoffset(cs->xoffset());
       canvas->setYoffset(cs->yoffset());
 
-      setWindowTitle("MuseScore: " + cs->projectName());
+      setWindowTitle("MuseScore: " + cs->name());
       canvas->setScore(cs, cs->mainLayout());
       seq->setScore(cs);
       if (playPanel)
@@ -1867,111 +1874,5 @@ AboutBoxDialog::AboutBoxDialog()
       setupUi(this);
       versionLabel->setText("Version: " VERSION);
       revisionLabel->setText(QString("Revision: %1").arg(revision));
-      }
-
-//---------------------------------------------------------
-//   loadPlugins
-//---------------------------------------------------------
-
-void MuseScore::loadPlugins()
-      {
-      QDir pluginDir(mscoreGlobalShare + "plugins");
-      QStringList nameFilters;
-      nameFilters << "*.js";
-      QStringList pluginList = pluginDir.entryList(nameFilters, QDir::Files, QDir::Name);
-      QScriptEngine se(0);
-      QSignalMapper* mapper = new QSignalMapper(this);
-      connect(mapper, SIGNAL(mapped(int)), SLOT(pluginTriggered(int)));
-
-      foreach(QString plugin, pluginList) {
-            QString pluginPath(pluginDir.path() + "/" + plugin);
-            QFile f(pluginPath);
-            if (!f.open(QIODevice::ReadOnly)) {
-                  if (debugMode)
-                        printf("Loading Plugin <%s> failed\n", qPrintable(pluginPath));
-                  continue;
-                  }
-            if (debugMode)
-                  printf("Load Plugin <%s>\n", qPrintable(pluginPath));
-            QScriptValue val  = se.evaluate(f.readAll(), plugin);
-            f.close();
-            QScriptValue init = val.property("init");
-            if (!init.isFunction()) {
-                  printf("Load plugin: no init function found\n");
-                  continue;
-                  }
-            QScriptValue run = val.property("run");
-            if (!run.isFunction()) {
-                  printf("Load plugin: no run function found\n");
-                  continue;
-                  }
-            int pluginIdx = plugins.size();
-            plugins.append(pluginPath);
-
-            init.call();
-            QString menu = val.property("menu").toString();
-            if (menu.isEmpty()) {
-                  printf("Load plugin: no menu property\n");
-                  continue;
-                  }
-            QStringList ml   = menu.split(".", QString::SkipEmptyParts);
-            int n            = ml.size();
-            QWidget* curMenu = menuBar();
-
-            for(int i = 0; i < n; ++i) {
-                  QString m  = ml[i];
-                  bool found = false;
-                  QList<QObject*> ol = curMenu->children();
-                  foreach(QObject* o, ol) {
-                        QMenu* menu = qobject_cast<QMenu*>(o);
-                        if (!menu)
-                              continue;
-                        if (menu->title() == m) {
-                              curMenu = menu;
-                              found = true;
-                              break;
-                              }
-                        }
-                  if (!found) {
-                        if (i == 0) {
-                              curMenu = new QMenu(m, menuBar());
-                              menuBar()->insertMenu(menuBar()->actions().back(), (QMenu*)curMenu);
-                              }
-                        else if (i + 1 == n) {
-                              QAction* a = ((QMenu*)curMenu)->addAction(m);
-                              connect(a, SIGNAL(triggered()), mapper, SLOT(map()));
-                              mapper->setMapping(a, pluginIdx);
-                              }
-                        else
-                              curMenu = ((QMenu*)curMenu)->addMenu(m);
-                        }
-                  }
-            }
-      }
-
-//---------------------------------------------------------
-//   pluginTriggered
-//---------------------------------------------------------
-
-void MuseScore::pluginTriggered(int idx)
-      {
-      QString pluginPath = plugins[idx];
-      QFile f(pluginPath);
-      if (!f.open(QIODevice::ReadOnly)) {
-            if (debugMode)
-                  printf("Loading Plugin <%s> failed\n", qPrintable(pluginPath));
-            return;
-            }
-      if (debugMode)
-            printf("Run Plugin <%s>\n", qPrintable(pluginPath));
-      QScriptEngine se(0);
-      QScriptValue val = se.evaluate(f.readAll(), pluginPath);
-      f.close();
-      QScriptValue run = val.property("run");
-      if (!run.isFunction()) {
-            printf("Run plugin: no run function found\n");
-            return;
-            }
-      run.call();
       }
 
