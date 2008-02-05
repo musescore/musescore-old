@@ -739,9 +739,9 @@ void MuseScore::showPalette(bool visible)
 //   genCreateMenu
 //---------------------------------------------------------
 
-QMenu* MuseScore::genCreateMenu()
+QMenu* MuseScore::genCreateMenu(QWidget* parent)
       {
-      QMenu* popup = new QMenu(tr("&Create"));
+      QMenu* popup = new QMenu(tr("&Create"), parent);
 
       popup->addAction(getAction("instruments"));
 

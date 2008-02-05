@@ -90,5 +90,8 @@
 #include <QtGui/QHeaderView>
 #include <QtSvg/QSvgRenderer>
 #include <QtSvg/QSvgGenerator>
+
+#include <QtScript/QScriptEngine>
+#include <QtScript/QScriptValueIterator>
 #endif
 

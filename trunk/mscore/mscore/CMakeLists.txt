@@ -163,6 +163,7 @@ if (MINGW)
       /home/ws/.wine/drive_c/Qt/4.3.3/bin/QtGui4.dll
       /home/ws/.wine/drive_c/Qt/4.3.3/bin/QtXml4.dll
       /home/ws/.wine/drive_c/Qt/4.3.3/bin/QtSvg4.dll
+      /home/ws/.wine/drive_c/Qt/4.3.3/bin/QtScript4.dll
       /home/ws/mscore/portaudio/bin/portaudio.dll
       )
    install_files ( /bin/iconengines .dll
@@ -183,6 +184,7 @@ else (MINGW)
    if (USE_GLOBAL_FLUID)
          target_link_libraries(mscore
             ${QT_LIBRARIES}
+            QtScript
             ${ALSA_LIB}
             ${JACK_LIB}
             ${PORTAUDIO_LIB}
@@ -193,6 +195,7 @@ else (MINGW)
    else (USE_GLOBAL_FLUID)
          target_link_libraries(mscore
             ${QT_LIBRARIES}
+            QtScript
             ${ALSA_LIB}
             ${JACK_LIB}
             ${PORTAUDIO_LIB}

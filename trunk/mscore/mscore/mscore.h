@@ -160,7 +160,6 @@ class MuseScore : public QMainWindow {
       QToolButton* removeTabButton;
 
       QMenu* menuDisplay;
-      QMenu* menuEdit;
       QMenu* openRecent;
 
       Palette* notePalette;
@@ -210,6 +209,7 @@ class MuseScore : public QMainWindow {
       bool _midiinEnabled;
       bool _speakerEnabled;
       QString lastOpenPath;
+      QList<QString> plugins;
 
       virtual void closeEvent(QCloseEvent*);
 
@@ -271,6 +271,7 @@ class MuseScore : public QMainWindow {
       void removeTab();
       void cmd(QAction*);
       void clipboardChanged();
+      void pluginTriggered(int);
 
    public slots:
       void setCurrentScore(int);
@@ -286,7 +287,7 @@ class MuseScore : public QMainWindow {
       bool saveFile(QFileInfo&);
       bool saveFile(QFile*);
       PlayPanel* getPlayPanel() const { return playPanel; }
-      QMenu* genCreateMenu();
+      QMenu* genCreateMenu(QWidget* parent = 0);
       void appendScore(Score*);
       void midiNoteReceived(int pitch, bool chord);
       void showElementContext(Element* el);
@@ -304,6 +305,7 @@ class MuseScore : public QMainWindow {
       void readSettings();
       void writeSettings();
       void play(Element* e) const;
+      void loadPlugins();
       };
 
 //---------------------------------------------------------

@@ -64,6 +64,7 @@ include ( ${PROJECT_SOURCE_DIR}/cmake/TargetDoc.cmake)
 set(QT_MIN_VERSION "4.3.0")
 set(QT_USE_QTXML TRUE)
 set(QT_USE_QTSVG TRUE)
+set(QT_USE_SCRIPT TRUE)
 
 find_package(Qt4 4.3)
 if (NOT QT4_FOUND)
