@@ -44,7 +44,7 @@ function run()
 
 
 var mscorePlugin = {
-      menu: 'Plugins.test-2',
+      menu: 'Create.test',
       init: init,
       run:  run
       };

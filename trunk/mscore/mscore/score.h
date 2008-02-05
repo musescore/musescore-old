@@ -88,6 +88,8 @@ class ScoreView {
 
 class Score : public QObject {
       Q_OBJECT
+      Q_PROPERTY (int nstaves READ nstaves)
+      Q_PROPERTY (QString name READ name)
 
       PadState _padState;
       InputState _is;
@@ -251,7 +253,8 @@ class Score : public QObject {
       void write(Xml&);
 
       QList<Staff*>& staves()                { return _staves; }
-      int nstaves() const                    { return _staves.size(); }
+      Q_INVOKABLE int nstaves() const        { return _staves.size(); }
+
       int staffIdx(const Part*) const;
       int staffIdx(const Staff* staff) const { return _staves.indexOf((Staff*)staff, 0); }
       Staff* staff(int n) const              { return _staves[n]; }
@@ -440,7 +443,9 @@ class Score : public QObject {
 
       QString filePath() const    { return info.filePath(); }
       QFileInfo* fileInfo()       { return &info; }
-      QString projectName() const { return info.baseName(); }
+
+      Q_INVOKABLE QString name() const { return info.baseName(); }
+
       bool isSavable() const;
       void setDirty(bool val = true);
       bool dirty() const        { return _dirty;    }

@@ -125,7 +125,7 @@ add_executable ( mscore
       repeatproperties.cpp box.cpp measurebase.cpp
       repeat2.cpp instrtemplate.cpp boxproperties.cpp
       newwizard.cpp revision.cpp chordinfo.cpp transposedialog.cpp bb.cpp
-      harmony.cpp chordedit.cpp
+      harmony.cpp chordedit.cpp plugins.cpp
       ${AUDIO}
       )
 

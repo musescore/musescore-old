@@ -20,16 +20,32 @@
 //  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 //=============================================================================
 
+//---------------------------------------------------------
+//    init
+//    this function will be called on startup of
+//    mscore
+//---------------------------------------------------------
+
 function init()
       {
       print("test script init");
       }
 
+//---------------------------------------------------------
+//    run
+//    this function will be called when activating the
+//    plugin menu entry
+//---------------------------------------------------------
+
 function run()
       {
-      print("test script run");
+      print("score", score.name, "has ", score.nstaves, " staves\n");
       }
 
+//---------------------------------------------------------
+//    menu:  defines were the function will be placed
+//           in the menu structure
+//---------------------------------------------------------
 
 var mscorePlugin = {
       menu: 'Plugins.test',

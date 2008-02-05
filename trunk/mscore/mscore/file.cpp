@@ -202,8 +202,8 @@ void MuseScore::loadFile()
 bool MuseScore::saveFile()
       {
       bool val = cs->saveFile();
-      setWindowTitle("MuseScore: " + cs->projectName());
-      tab->setTabText(tab->currentIndex(), cs->projectName());
+      setWindowTitle("MuseScore: " + cs->name());
+      tab->setTabText(tab->currentIndex(), cs->name());
       return val;
       }
 
@@ -212,7 +212,7 @@ bool Score::saveFile()
       if (created()) {
             QString fn = QFileDialog::getSaveFileName(
                mscore, tr("MuseScore: Save Score"),
-               QString("./%1.msc").arg(projectName()),
+               QString("./%1.msc").arg(name()),
                QString("*.msc")
                );
             if (fn.isEmpty())
@@ -382,7 +382,7 @@ QString MuseScore::createDefaultName() const
             else
                   tmpName = QString("%1-%2").arg(name).arg(n);
             foreach(Score* s, scoreList) {
-                  if (s->projectName() == tmpName) {
+                  if (s->name() == tmpName) {
                         nameExists = true;
                         break;
                         }
@@ -896,7 +896,7 @@ void Score::printFile()
       printer.setCreator("MuseScore Version: " VERSION);
       printer.setFullPage(true);
       printer.setColorMode(QPrinter::Color);
-      printer.setDocName(projectName());
+      printer.setDocName(name());
       printer.setDoubleSidedPrinting(pageFormat()->twosided);
 
       QPrintDialog pd(&printer, 0);
@@ -970,7 +970,7 @@ printerMag = 1.0;
 //   savePdf
 //---------------------------------------------------------
 
-bool Score::savePdf(const QString& name)
+bool Score::savePdf(const QString& saveName)
       {
       //
       // HighResolution gives higher output quality
@@ -983,10 +983,10 @@ bool Score::savePdf(const QString& name)
       printer.setCreator("MuseScore Version: " VERSION);
       printer.setFullPage(true);
       printer.setColorMode(QPrinter::Color);
-      printer.setDocName(projectName());
+      printer.setDocName(name());
       printer.setDoubleSidedPrinting(pageFormat()->twosided);
       printer.setOutputFormat(QPrinter::PdfFormat);
-      printer.setOutputFileName(name);
+      printer.setOutputFileName(saveName);
 
       print(&printer);
       return true;
@@ -996,7 +996,7 @@ bool Score::savePdf(const QString& name)
 //   savePs
 //---------------------------------------------------------
 
-bool Score::savePs(const QString& name)
+bool Score::savePs(const QString& saveName)
       {
       //
       // HighResolution gives higher output quality
@@ -1009,10 +1009,10 @@ bool Score::savePs(const QString& name)
       printer.setCreator("MuseScore Version: " VERSION);
       printer.setFullPage(true);
       printer.setColorMode(QPrinter::Color);
-      printer.setDocName(projectName());
+      printer.setDocName(name());
       printer.setDoubleSidedPrinting(pageFormat()->twosided);
       printer.setOutputFormat(QPrinter::PostScriptFormat);
-      printer.setOutputFileName(name);
+      printer.setOutputFileName(saveName);
 
       print(&printer);
       return true;
@@ -1022,7 +1022,7 @@ bool Score::savePs(const QString& name)
 //   saveSvg
 //---------------------------------------------------------
 
-bool Score::saveSvg(const QString& name)
+bool Score::saveSvg(const QString& saveName)
       {
       QRectF r = canvas()->lassoRect();
       double x = r.x();
@@ -1031,7 +1031,7 @@ bool Score::saveSvg(const QString& name)
       double h = r.height();
 
       QSvgGenerator printer;
-      printer.setFileName(name);
+      printer.setFileName(saveName);
       printer.setSize(QSize(lrint(w), lrint(h)));
 
       _printing = true;
