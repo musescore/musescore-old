@@ -3,7 +3,7 @@
 #  Linux Music Score Editor
 #  $Id:$
 #
-#  Copyright (C) 2002-2006 by Werner Schweer and others
+#  Copyright (C) 2008 by Werner Schweer and others
 #
 #  This program is free software; you can redistribute it and/or modify
 #  it under the terms of the GNU General Public License version 2.
@@ -18,5 +18,8 @@
 #  Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 #=============================================================================
 
-subdirs( templates wallpaper locale plugins)
-
+install(FILES
+      test.js
+      test2.js
+      DESTINATION ${Mscore_SHARE_NAME}${Mscore_INSTALL_NAME}plugins
+      )
