@@ -56,6 +56,7 @@ Palette::Palette(QWidget* parent)
 
       _drawGrid   = false;
       _selectable = false;
+      _readOnly   = true;
       setMouseTracking(true);
       }
 
@@ -248,10 +249,15 @@ void Palette::mouseMoveEvent(QMouseEvent* ev)
                   drag->setMimeData(mimeData);
 
                   int srcIdx = currentIdx;
-                  Qt::DropAction action = drag->start(Qt::CopyAction | Qt::MoveAction);
-                  if (action == Qt::MoveAction) {
-                        symbols[srcIdx] = 0;
-                        names[srcIdx] = QString();
+                  if (_readOnly) {
+                        drag->start(Qt::CopyAction);
+                        }
+                  else {
+                        Qt::DropAction action = drag->start(Qt::CopyAction | Qt::MoveAction);
+                        if (action == Qt::MoveAction) {
+                              symbols[srcIdx] = 0;
+                              names[srcIdx] = QString();
+                              }
                         }
                   }
             }

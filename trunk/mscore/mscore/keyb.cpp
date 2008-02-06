@@ -80,7 +80,7 @@ void Canvas::keyPressEvent(QKeyEvent* ev)
                   return;
                   }
             }
-      if (e->type() == TEXT && e->subtype() == TEXT_CHORD) {
+      if (e->type() == HARMONY) {
             if (ev->key() == Qt::Key_Space && !(ev->modifiers() & Qt::ControlModifier)) {
                   _score->chordTab(ev->modifiers() & Qt::ShiftModifier);
                   ev->accept();

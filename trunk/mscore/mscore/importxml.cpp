@@ -64,6 +64,21 @@
 #include "unzip.h"
 #include "harmony.h"
 
+extern const XmlChordExtension chordExtensions[] = {
+      {   1, "major"              },
+      {  16, "minor"              },
+      {  19, "minor-seventh"      },
+      {  99, "augmented-seventh"  },
+      {  70, "dominant-ninth"     },
+      {   5, "major-sixth"        },
+      {   7, "major-seventh"      },
+      {  23, "minor-sixth"        },
+      {  64, "dominant"           },
+      { 128, "suspended-fourth"   },
+      {  33, "diminished-seventh" },
+      {  -1, ""                   }
+      };
+
 //---------------------------------------------------------
 //   xmlSetPitch
 //---------------------------------------------------------
@@ -2484,29 +2499,12 @@ void MusicXml::xmlHarmony(QDomElement e, int tick, Measure* measure)
       ha->setRoot(getStep(rootStep, rootAlter));
       ha->setBase(getStep(bassStep, bassAlter));
 
-      struct HExt {
-            int idx;
-            const char* xmlName;
-            };
-
-      static const HExt hext[] = {
-            {   1, "major"              },
-            {  16, "minor"              },
-            {  19, "minor-seventh"      },
-            {  99, "augmented-seventh"  },
-            {  70, "dominant-ninth"     },
-            {   5, "major-sixth"        },
-            {   7, "major-seventh"      },
-            {  23, "minor-sixth"        },
-            {  64, "dominant"           },
-            { 128, "suspended-fourth"   },
-            {  33, "diminished-seventh" },
-            };
-
       int extension = 0;
-      for (unsigned int i = 0; i < sizeof(hext)/sizeof(*hext); ++i) {
-            if (kind == hext[i].xmlName) {
-                  extension = hext[i].idx;
+      for (unsigned int i = 0; ; ++i) {
+            if (chordExtensions[i].idx == -1)
+                  break;
+            if (kind == chordExtensions[i].xmlName) {
+                  extension = chordExtensions[i].idx;
                   break;
                   }
             }

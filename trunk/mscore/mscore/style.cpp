@@ -115,7 +115,7 @@ const TextStyle defaultTextStyleArray[] = {
          ALIGN_LEFT, ANCHOR_STAFF, 0, -4.0, OS, 0, 0, true),
 
       TextStyle(QString("Chordname"), ff,  12, false, false, false,
-         ALIGN_HCENTER, ANCHOR_STAFF, 0, -5.0, OS, 0, 0, true),
+         ALIGN_LEFT, ANCHOR_STAFF, 0, -5.0, OS, 0, 0, true),
 
       TextStyle(QString("Rehearsal Mark"), ff,  14, true, false, false,
          ALIGN_HCENTER | ALIGN_BASELINE, ANCHOR_SEGMENT, 0, -3.0, OS, 0, 0, true,

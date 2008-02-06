@@ -40,6 +40,10 @@ class Ottava;
 class Trill;
 class Pedal;
 
+//---------------------------------------------------------
+//   MusicXmlWedge
+//---------------------------------------------------------
+
 struct MusicXmlWedge {
       int number;
       int startTick;
@@ -47,6 +51,10 @@ struct MusicXmlWedge {
       qreal rx, ry;
       bool above;
       };
+
+//---------------------------------------------------------
+//   MusicXmlPartGroup
+//---------------------------------------------------------
 
 struct MusicXmlPartGroup {
       int span;
@@ -120,5 +128,16 @@ class MusicXml {
       MusicXml(QDomDocument* d);
       void import(Score*);
       };
+
+//---------------------------------------------------------
+//   XmlChorExtension
+//---------------------------------------------------------
+
+struct XmlChordExtension {
+      int idx;
+      const char* xmlName;
+      };
+
+extern const XmlChordExtension chordExtensions[];
 
 #endif
