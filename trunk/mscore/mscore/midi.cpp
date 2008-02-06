@@ -1359,6 +1359,12 @@ printf("unmapped drum note 0x%02x %d\n", mn->pitch(), mn->pitch());
                         break;
 
                   case META_TRACK_NAME:
+                        {
+                        QString txt((char*)(mm->data()));
+                        cstaff->part()->setTrackName(txt);
+                        cstaff->part()->setLongName(txt);
+                        }
+                        break;
                   case META_TEMPO:
                         break;
 
