@@ -64,9 +64,11 @@ include ( ${PROJECT_SOURCE_DIR}/cmake/TargetDoc.cmake)
 set(QT_MIN_VERSION "4.3.0")
 set(QT_USE_QTXML    TRUE)
 set(QT_USE_QTSVG    TRUE)
+# only available in cmake 2.5:
 set(QT_USE_QTSCRIPT TRUE)
 
 find_package(Qt4 4.3)
+
 if (NOT QT4_FOUND)
       message(FATAL_ERROR "Fatal error: QT (version >= 4.3.0) required.\n"
          "Cmake tries to detect QT4 by searching for 'qmake' in your PATH\n"
@@ -76,8 +78,24 @@ if (NOT QT4_FOUND)
          )
       endif (NOT QT4_FOUND)
 
-message(${QT_USE_FILE})
+# Set QT_QTSCRIPT_INCLUDE_DIR
+FIND_PATH(QT_QTSCRIPT_INCLUDE_DIR QtScript
+   PATHS
+   ${QT_INCLUDE_DIR}/QtScript
+   ${QT_LIBRARY_DIR}/QtScript.framework/Headers
+   NO_DEFAULT_PATH
+   )
+
+# Set QT_QTSCRIPT_LIBRARY (for cmake 2.4)
+FIND_LIBRARY(QT_QTSCRIPT_LIBRARY_RELEASE NAMES QtScript QtScript4 PATHS ${QT_LIBRARY_DIR}        NO_DEFAULT_PATH)
+FIND_LIBRARY(QT_QTSCRIPT_LIBRARY_DEBUG   NAMES QtScript_debug QtScriptd4 PATHS ${QT_LIBRARY_DIR} NO_DEFAULT_PATH)
+
+_QT4_ADJUST_LIB_VARS(QTSCRIPT)
+
 include(${QT_USE_FILE})
+
+#for cmake 2.4
+QT_MODULE_SETUP(SCRIPT)
 
 ##
 ## look for fluidsynth

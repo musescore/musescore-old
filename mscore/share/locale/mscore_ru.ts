@@ -4430,11 +4430,6 @@ failed: </source>
         <source>MuseScore Files (*.msc);;MusicXml Files (*.xml);;Compressed MusicXml Files (*.mxl);;Midi Files (*.mid *.kar);;Muse Data Files (*.md);;Lilypond Files (*.ly);;BB Files (*.mgu *.MGU *.sgu *.SGU);;All files (*)</source>
         <translation type="unfinished"></translation>
     </message>
-    <message>
-        <location filename="../../mscore/actions.cpp" line="1372"/>
-        <source></source>
-        <translation type="unfinished"></translation>
-    </message>
 </context>
 <context>
     <name>NewWizard</name>
